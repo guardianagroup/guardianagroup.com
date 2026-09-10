@@ -1,0 +1,3 @@
+# guardianagroup.com
+
+Web pública de GUARDIANA. Página estática, sin cookies ni terceros. El código del programa vive en otro repositorio.

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://guardianagroup.com/sitemap.xml
