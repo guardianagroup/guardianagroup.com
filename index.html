@@ -25,12 +25,14 @@
   <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://guardianagroup.com/#org","name":"GUARDIANA","url":"https://guardianagroup.com/","logo":"https://guardianagroup.com/icon-512.png","email":"hola@guardianagroup.com","areaServed":["CO","ES","MX","AR","CL","PE","US"]},{"@type":"SoftwareApplication","@id":"https://guardianagroup.com/#app","name":"GUARDIANA","applicationCategory":"SecurityApplication","operatingSystem":"Windows, Linux","url":"https://guardianagroup.com/","description":"Convierte tu PC en el guardián DNS de la Wi-Fi de tu casa: ve a qué servicios intenta hablar cada dispositivo, teléfonos incluidos, y corta lo que tú decidas. Todo ocurre en tu casa. Código abierto.","isAccessibleForFree":true,"offers":[{"@type":"Offer","name":"Gratis (el guardián completo)","price":"0","priceCurrency":"USD"}],"publisher":{"@id":"https://guardianagroup.com/#org"},"inLanguage":"es"}]}</script>
+  <style id="gboot">#dc-root{opacity:0}</style>
+  <script>(function(){function done(){var s=document.getElementById('gboot');if(s)s.parentNode.removeChild(s);}var n=0,t=setInterval(function(){n++;var r=document.getElementById('dc-root');if(r&&r.textContent&&r.textContent.length>400&&r.textContent.indexOf('{{')<0){clearInterval(t);done();}else if(n>200){clearInterval(t);done();}},30);})();</script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #04050a; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
     #__bundler_loading { position: fixed; bottom: 20px; right: 20px; font: 13px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; color: #666; background: #fff; padding: 8px 14px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.12); z-index: 10000; }
     #__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #04050a; z-index: 9999; }
-    #__bundler_thumbnail svg { width: 100%; height: 100%; object-fit: contain; }
+    #__bundler_thumbnail svg { width: 72px; height: 72px; animation: gpulse 1.6s ease-in-out infinite; } @keyframes gpulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } } #__bundler_loading { display: none !important; }
     #__bundler_placeholder { color: #999; font-size: 14px; }
   </style>
   <noscript>
@@ -41,7 +43,7 @@
   </noscript>
 </head>
 <body>
-  <div id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" sc-camel-view-box="0 0 100 100"><rect width="100" height="100" fill="#04050a"></rect><circle cx="50" cy="50" r="22" fill="none" stroke="#62e8ff" stroke-width="3"></circle><circle cx="50" cy="50" r="7" fill="#62e8ff"></circle></svg></div>
+  <div id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#04050a"></rect><circle cx="50" cy="50" r="22" fill="none" stroke="#62e8ff" stroke-width="3"></circle><circle cx="50" cy="50" r="7" fill="#62e8ff"></circle></svg></div>
   <div id="__bundler_loading">Unpacking...</div>
 
   <script>
