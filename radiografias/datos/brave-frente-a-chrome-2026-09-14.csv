@@ -69,7 +69,7 @@ cds.taboola.com,publicidad,0,0,0,0,2,1,0
 ce.lijit.com,publicidad,0,3,1,0,2,1,0
 ced.sascdn.com,desconocido,0,3,1,0,2,1,0
 clients2.google.com,telemetria,1,0,0,0,5,0,0
-clientservices.googleapis.com,telemetria,1,2,0,0,4,0,0
+clientservices.googleapis.com,telemetria,1,0,0,0,4,0,0
 cloudfront-us-east-1.images.arcpublishing.com,desconocido,0,3,1,0,2,1,0
 cm-mx.advolve.io,desconocido,0,0,0,0,4,1,0
 cm.adform.net,publicidad,0,3,1,0,2,1,0
@@ -80,7 +80,7 @@ cm.mgid.com,publicidad,0,0,0,0,3,1,0
 cms-xch-chicago.33across.com,publicidad,0,3,1,0,2,1,0
 cms.quantserve.com,publicidad,0,3,1,0,2,1,0
 code.jquery.com,desconocido,0,3,1,0,2,1,0
-collector.bsg.brave.com,desconocido,1,6,0,0,4,0,0
+collector.bsg.brave.com,desconocido,1,4,0,0,4,0,0
 comcluster.cxense.com,rastreador,0,3,1,0,3,1,0
 componentupdater.brave.com,desconocido,1,4,0,0,0,0,0
 config.aps.amazon-adsystem.com,publicidad,0,3,1,0,2,1,0
@@ -300,7 +300,7 @@ ssp.disqus.com,desconocido,0,3,1,0,2,1,0
 ssp.wp.pl,desconocido,0,3,1,0,2,1,0
 ssum-sec.casalemedia.com,publicidad,0,3,1,0,2,1,0
 ssum.casalemedia.com,publicidad,0,0,0,0,2,1,0
-star-randsrv.bsg.brave.com,desconocido,1,8,0,0,2,0,0
+star-randsrv.bsg.brave.com,desconocido,1,6,0,0,2,0,0
 static.ads-twitter.com,publicidad,0,3,1,0,2,1,0
 static.cdn.admatic.de,desconocido,0,0,0,0,2,1,0
 static.cloudflareinsights.com,publicidad,0,0,0,0,2,1,0
