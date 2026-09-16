@@ -1,0 +1,20 @@
+# GUARDIANA · guardianagroup.com
+# Cómo avisar de un fallo de seguridad. Responde una persona, no un formulario.
+# How to report a security flaw. A person answers, not a form.
+
+Contact: mailto:hola@guardianagroup.com
+Expires: 2027-09-16T00:00:00.000Z
+Preferred-Languages: es, en
+Canonical: https://guardianagroup.com/.well-known/security.txt
+Policy: https://guardianagroup.com/.well-known/security.txt
+
+# Qué prometo / What I promise
+#   · Acuso recibo en 72 horas. / I acknowledge within 72 hours.
+#   · Te digo en 7 días si lo confirmo y cuándo pienso corregirlo.
+#     Within 7 days I tell you whether it is confirmed and when I plan to fix it.
+#   · Publico el arreglo y, si quieres, tu nombre en las notas de esa versión.
+#     I publish the fix and, if you want it, your name in that release's notes.
+#   · No hay recompensa en dinero. No hay acuerdo de silencio.
+#     There is no money bounty. There is no gag clause.
+#   · No denuncio a quien investigue de buena fe y no toque datos de terceros.
+#     No legal action against good-faith research that does not touch other people's data.
