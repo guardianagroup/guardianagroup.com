@@ -90,6 +90,26 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .ticket .tot b{font-weight:500}
 .ticket .pie{margin-top:12px;font-size:11px;color:var(--gris);letter-spacing:.04em;font-family:'IBM Plex Sans',sans-serif}
 .ticket .mas{display:inline-block;margin-top:10px;font-size:12px}
+.pases{display:grid;gap:14px}
+.pestanas{display:flex;align-items:center;gap:6px;position:relative;padding:4px;border:1px solid var(--linea);border-radius:999px;background:var(--hoja);width:max-content;max-width:100%}
+.pestanas button{appearance:none;border:0;background:transparent;color:var(--gris);font:inherit;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border-radius:999px;cursor:pointer;position:relative;overflow:hidden}
+.pestanas button[aria-selected="true"]{background:var(--tinta);color:#fff}
+.pestanas button i{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--azul)}
+.pases.auto .pestanas button[aria-selected="true"] i{animation:pase var(--pase-ms,9000ms) linear forwards}
+@keyframes pase{from{width:0}to{width:100%}}
+.pases .escena{display:grid}
+.pases .pase{grid-area:1/1;transition:opacity .35s ease}
+.pases .pase[aria-hidden="true"]{opacity:0;visibility:hidden;pointer-events:none}
+.ticket.recibo .fila{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n v" "t t";row-gap:1px;column-gap:10px}
+.ticket.recibo .fila .n{grid-area:n;font-size:13px;overflow-wrap:anywhere}
+.ticket.recibo .fila .n::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;vertical-align:1px;background:var(--gris)}
+.ticket.recibo .fila.ok .n::before{background:var(--sello)}
+.ticket.recibo .fila.duda .n::before{background:#C98A1B}
+.ticket.recibo .fila .t{grid-area:t;letter-spacing:0;font-size:12px;font-family:'IBM Plex Sans',sans-serif;padding-left:15px}
+.ticket.recibo .fila .v{grid-area:v;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--gris);white-space:nowrap}
+.ticket.recibo .fila.ok .v{color:var(--sello)}
+.ticket.recibo .fila.duda .v{color:var(--ambar)}
+.ticket .tot span{text-align:right}
 section{padding:88px 0;border-top:1px solid var(--linea)}
 .cab-sec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:48px;align-items:start;margin-bottom:44px}
 .cab-sec h2{font-weight:700;font-size:clamp(24px,2.6vw,34px);line-height:1.18}
@@ -203,7 +223,7 @@ footer .links a:hover{color:var(--tinta)}
   .wrap{padding:0 18px}
   .ticket{padding:22px 16px 26px}
 }
-@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}.pases .pase{transition:none}.pases.auto .pestanas button[aria-selected="true"] i{animation:none}}
 </style></head>
 <body>
 <div class="wrap">
@@ -222,7 +242,13 @@ footer .links a:hover{color:var(--tinta)}
     <div class="cta"><a class="btn p" href="https://guardiana.beehiiv.com/subscribe">AVÍSAME EL 5 DE OCTUBRE</a><a class="btn s" href="/radiografias/recibo-de-agente.html">Ver el recibo del agente →</a></div>
     <p class="nota">SIN CUENTA · SIN TARJETA PARA PROBAR PLUS · CÓDIGO ABIERTO</p>
   </div>
-  <div>
+  <div class="pases" id="pases">
+    <div class="pestanas" role="tablist" aria-label="Dos recibos">
+      <button type="button" role="tab" id="tab-nav" aria-selected="true" aria-controls="pase-nav">Tu navegador<i></i></button>
+      <button type="button" role="tab" id="tab-ia" aria-selected="false" aria-controls="pase-ia" tabindex="-1">Tu IA<i></i></button>
+    </div>
+    <div class="escena">
+    <div class="pase" id="pase-nav" role="tabpanel" aria-labelledby="tab-nav" aria-hidden="false">
     <div class="ticket" aria-live="polite">
       <div class="cab"><b>LO QUE TU NAVEGADOR CUENTA</b><span class="der"><span class="sello">EN VIVO</span><span id="tk-cuenta">15 datos leídos · 0 permisos pedidos</span></span></div>
       <div class="tit">Esto es lo que tu navegador le cuenta a cualquier web. También a la de tu IA. Sin pedirte permiso.</div>
@@ -230,6 +256,11 @@ footer .links a:hover{color:var(--tinta)}
       <div id="tk-filas"><div class="fila"><span class="t">NAVEGADOR</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">GPU</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">HUELLA CANVAS</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">IDIOMAS</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">ZONA HORARIA</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">HORA LOCAL</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">PANTALLA</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">VENTANA</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">CPU</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">RAM</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">BATERÍA</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">CONEXIÓN</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">PERMISOS</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">REFERENTE</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">VISITAS</span><span class="v">&nbsp;</span></div></div>
       <div class="tot"><b>Contenido leído</b><span>ninguno</span></div>
       <div class="pie">Todo medido en tu navegador con funciones estándar. Cualquier web puede hacerlo. Nada de esto se envía; solo un contador de visitas se queda en tu navegador.</div>
+    </div>
+    </div>
+    <div class="pase" id="pase-ia" role="tabpanel" aria-labelledby="tab-ia" aria-hidden="true">
+    <div class="ticket recibo" aria-label="RECIBO DE AGENTE"><div class="cab"><b>RECIBO DE AGENTE</b><span class="der"><span class="sello">COMPROBADO</span><span>EJEMPLO · TAREA: ORDENAR 5 FACTURAS</span></span></div><div class="tit">Le pediste ordenar las facturas. Esto es con quién habló mientras lo hacía.</div><div class="sub">Cada nombre, con la hora y el aparato. Nunca el contenido.</div><div class="fila ok"><span class="n">api.anthropic.com</span><span class="t">el propio producto</span><span class="v">correcto</span></div><div class="fila ok"><span class="n">claude.ai</span><span class="t">inicio de sesión</span><span class="v">correcto</span></div><div class="fila duda"><span class="n">statsig.anthropic.com</span><span class="t">medición de uso</span><span class="v">a revisar</span></div><div class="fila duda"><span class="n">sentry.io</span><span class="t">informes de error</span><span class="v">a revisar</span></div><div class="fila fuera"><span class="n">events.data.microsoft.com</span><span class="t">telemetría del sistema</span><span class="v">fondo del equipo</span></div><div class="tot"><b>Servicios</b><span>5 · 2 correctos · 2 a revisar · 1 de fondo</span></div><div class="pie">Ejemplo de cómo se lee un recibo, con nombres de servicios reales. El primer recibo medido de verdad se publica antes del 30 de septiembre de 2026.</div><a class="mas" href="/radiografias/recibo-de-agente.html">Leer el protocolo →</a></div>
+    </div>
     </div>
   </div>
 </section>
@@ -304,7 +335,7 @@ footer .links a:hover{color:var(--tinta)}
 
 <section id="radiografias">
   <div class="cab-sec"><span class="k">RADIOGRAFÍAS</span><h2>Qué sale de tu PC, medido.</h2><p>Cada radiografía es una prueba con fecha y método: un navegador o una web, dos minutos, y la lista completa de nombres que salieron del equipo según GUARDIANA. Nombres, no contenido. Datos para descargar y método para repetirlo.</p></div>
-  <div class="rx"><a href="/radiografias/seis-periodicos-colombianos-2026-09-14.html"><span class="k">2026-09-14</span><b>Seis periódicos colombianos: cuánto rastreo carga cada portada</b><span>El Tiempo, Portafolio, El Colombiano, El Espectador, El Heraldo y Semana, abiertos uno a uno en Chrome recién instalado, 20 segundos cada uno, con GUA…</span></a><a href="/radiografias/brave-frente-a-chrome-2026-09-14.html"><span class="k">2026-09-14</span><b>Brave frente a Chrome: lo que salió del PC en cuatro webs</b><span>En dos minutos por El Tiempo, El Heraldo, YouTube y Mercado Libre salieron 151 nombres de publicidad y rastreo con Brave y 211 con Chrome; 145 saliero…</span></a><a href="/radiografias/cinco-navegadores-2026-09-14.html"><span class="k">2026-09-14</span><b>Cinco navegadores, cuatro webs: cuánto rastreo dejó salir cada uno</b><span>Chrome, Brave, Firefox, Safari y DuckDuckGo en un Mac con su DNS pasando por GUARDIANA: las mismas cuatro webs, dos minutos, perfiles recién creados y…</span></a><a href="/radiografias/recibo-de-agente.html"><span class="k">RECIBO DE AGENTE</span><b>Ver el recibo del agente</b><span>El primer recibo de un agente de IA de verdad se publica antes del 30 de septiembre de 2026, con el protocolo ya fijado: equipo limpio, reposo, una so…</span></a></div>
+  <div class="rx"><a href="/radiografias/cuatro-ia-en-un-pc-limpio-2026-09-17.html"><span class="k">2026-09-17</span><b>Cuatro IA en un PC limpio: con quién habla cada una nada más abrirla</b><span>Gemini, ChatGPT, Claude y Grok, abiertos uno a uno en un Chrome recién instalado en un PC con Windows 11, sin cuenta, 20 segundos cada uno, con GUARDI…</span></a><a href="/radiografias/seis-webs-de-eeuu-2026-09-17.html"><span class="k">2026-09-17</span><b>Amazon, Walmart, eBay, ESPN, Weather.com y Yahoo: cuánto rastreo carga cada portada</b><span>Seis webs de EE. UU. que usa todo el mundo, abiertas una a una en Chrome recién instalado, 20 segundos cada una, con GUARDIANA anotando cada nombre qu…</span></a><a href="/radiografias/seis-diarios-de-eeuu-2026-09-17.html"><span class="k">2026-09-17</span><b>Seis diarios de EE. UU.: cuánto rastreo carga cada portada</b><span>CNN, The New York Times, Fox News, The Washington Post, USA Today y The Wall Street Journal, abiertos uno a uno en Chrome recién instalado, 20 segundo…</span></a><a href="/radiografias/seis-periodicos-colombianos-2026-09-14.html"><span class="k">2026-09-14</span><b>Seis periódicos colombianos: cuánto rastreo carga cada portada</b><span>El Tiempo, Portafolio, El Colombiano, El Espectador, El Heraldo y Semana, abiertos uno a uno en Chrome recién instalado, 20 segundos cada uno, con GUA…</span></a><a href="/radiografias/recibo-de-agente.html"><span class="k">RECIBO DE AGENTE</span><b>Ver el recibo del agente</b><span>El primer recibo de un agente de IA de verdad se publica antes del 30 de septiembre de 2026, con el protocolo ya fijado: equipo limpio, reposo, una so…</span></a></div>
   <p style="margin-top:18px"><a href="/radiografias/">Todas las radiografías →</a></p>
 </section>
 
@@ -345,6 +376,27 @@ footer .links a:hover{color:var(--tinta)}
   pinta();
   try{if(n.getBattery)n.getBattery().then(function(b){rows[10][1]=Math.round(b.level*100)+' %'+(b.charging?' · '+CA:'');pinta();});}catch(e){}
   try{if(n.permissions){var ps=['camera','microphone','geolocation','notifications'],out=[],k=0;ps.forEach(function(p){n.permissions.query({name:p}).then(function(r){out.push(p+':'+r.state);}).catch(function(){}).finally(function(){if(++k===ps.length){rows[12][1]=out.length?out.join(' · '):NA;pinta();}});});}else{rows[12][1]=NA;pinta();}}catch(e){rows[12][1]=NA;pinta();}
+})();
+
+
+(function(){
+  // Dos recibos en el mismo hueco: alternan solos cada 9 s hasta que la persona elige uno. Sin movimiento si el sistema lo pide.
+  var c=document.getElementById('pases'); if(!c)return;
+  var tabs=[].slice.call(c.querySelectorAll('[role=tab]')), panes=[].slice.call(c.querySelectorAll('[role=tabpanel]'));
+  var quieto=matchMedia('(prefers-reduced-motion: reduce)').matches, t=null, i=0, MS=9000;
+  function ver(k,manual){i=k;tabs.forEach(function(b,j){var on=j===k;b.setAttribute('aria-selected',on?'true':'false');b.tabIndex=on?0:-1;});
+    panes.forEach(function(p,j){p.setAttribute('aria-hidden',j===k?'false':'true');});
+    if(manual){parar();}else{var b=tabs[k].querySelector('i');if(b){b.style.animation='none';void b.offsetWidth;b.style.animation='';}}}
+  function siguiente(){ver((i+1)%tabs.length,false);}
+  function parar(){c.classList.remove('auto');if(t){clearInterval(t);t=null;}}
+  function arrancar(){if(quieto||t)return;c.classList.add('auto');t=setInterval(siguiente,MS);}
+  tabs.forEach(function(b,j){b.addEventListener('click',function(){ver(j,true);b.focus();});
+    b.addEventListener('keydown',function(ev){if(ev.key==='ArrowRight'||ev.key==='ArrowLeft'){ev.preventDefault();var k=(j+(ev.key==='ArrowRight'?1:tabs.length-1))%tabs.length;ver(k,true);tabs[k].focus();}});});
+  c.addEventListener('mouseenter',function(){if(t){clearInterval(t);t=null;c.classList.remove('auto');}});
+  c.addEventListener('mouseleave',function(){arrancar();});
+  document.addEventListener('visibilitychange',function(){if(document.hidden){if(t){clearInterval(t);t=null;}}else if(c.classList.contains('auto')){t=setInterval(siguiente,MS);}});
+  c.style.setProperty('--pase-ms',MS+'ms');
+  arrancar();
 })();
 
 (function(){try{var P=window.GUARDIANA_PRICES;if(!P)return;var a=document.getElementById('plus-precio'),b=document.getElementById('plus-nota');if(a)a.textContent=P.plus;if(b)b.textContent=P.plusNote;}catch(e){}})();
