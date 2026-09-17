@@ -1,406 +1,352 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <title>GUARDIANA · El vigilante de tu IA</title>
-  <meta name="description" content="Le das permiso a un agente de IA para una tarea y GUARDIANA comprueba con qué servicios habla y te enseña todo lo que se sale de ahí. Y de paso vigila el resto de tu casa. Todo ocurre en tu equipo. Sin cuenta, sin servidor, código abierto. Windows y Linux. Lanzamiento: 5 de octubre de 2026.">
-  <meta name="robots" content="index,follow">
-  <meta property="og:title" content="GUARDIANA · El vigilante de tu IA">
-  <meta property="og:description" content="Comprueba a qué servicios habla tu agente de IA y todo lo que se sale de lo que le permitiste. Y el resto de tu casa. Código abierto. Windows y Linux.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://guardianagroup.com/">
-  <link rel="canonical" href="https://guardianagroup.com/">
-  <meta property="og:image" content="https://guardianagroup.com/og.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="GUARDIANA: el vigilante de tu IA">
-  <meta property="og:locale" content="es_CO">
-  <meta property="og:site_name" content="GUARDIANA">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="GUARDIANA · El vigilante de tu IA">
-  <meta name="twitter:description" content="Comprueba a qué servicios habla tu agente de IA y todo lo que se sale de lo que le permitiste. Y el resto de tu casa. Código abierto. Windows y Linux.">
-  <meta name="twitter:image" content="https://guardianagroup.com/og.png">
-  <meta name="theme-color" content="#04050a">
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
-  <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://guardianagroup.com/#org","name":"GUARDIANA","url":"https://guardianagroup.com/","logo":"https://guardianagroup.com/icon-512.png","email":"hola@guardianagroup.com","sameAs":["https://github.com/guardianagroup"],"areaServed":["CO","ES","MX","AR","CL","PE","US"]},{"@type":"WebSite","@id":"https://guardianagroup.com/#web","url":"https://guardianagroup.com/","name":"GUARDIANA","inLanguage":["es","en"],"publisher":{"@id":"https://guardianagroup.com/#org"}},{"@type":"SoftwareApplication","@id":"https://guardianagroup.com/#app","name":"GUARDIANA","applicationCategory":"SecurityApplication","applicationSubCategory":"Outbound DNS visibility and scope checking for AI agents and home devices","operatingSystem":"Windows 10, Windows 11, Linux","softwareVersion":"0.2.0","url":"https://guardianagroup.com/","image":"https://guardianagroup.com/og.png","datePublished":"2026-10-05","license":"https://www.gnu.org/licenses/gpl-3.0.html","description":"Le pediste que ordenara las facturas. ¿Sabes con cuántos servicios habló por el camino? GUARDIANA anota el nombre de cada uno, la hora y el aparato. Nunca el contenido: mira a dónde habla, no lo que lee.","featureList":["Comprobación del alcance de un agente de IA: a qué servicios habla y qué se sale de lo permitido","Radiografía de 60 segundos de lo que sale de tu casa","Extracto encadenado de cada consulta, exportable a CSV, JSON y PDF","Modo Hogar: teléfonos y tele sin instalarles nada","Cortes con deshacer, nunca antes de 24 horas observando","Sin cuenta, sin servidor, sin telemetría; código abierto"],"isAccessibleForFree":true,"offers":[{"@type":"Offer","name":"Gratis: el guardián completo","price":"0","priceCurrency":"USD","availability":"https://schema.org/PreOrder","availabilityStarts":"2026-10-05"},{"@type":"Offer","name":"Plus mensual (7 días gratis)","price":"4.99","priceCurrency":"USD","availability":"https://schema.org/PreOrder","availabilityStarts":"2026-10-05","priceSpecification":{"@type":"UnitPriceSpecification","price":"4.99","priceCurrency":"USD","billingDuration":1,"unitCode":"MON"}},{"@type":"Offer","name":"Plus anual (20 % menos)","price":"47.90","priceCurrency":"USD","availability":"https://schema.org/PreOrder","availabilityStarts":"2026-10-05","priceSpecification":{"@type":"UnitPriceSpecification","price":"47.90","priceCurrency":"USD","billingDuration":1,"unitCode":"ANN"}}],"publisher":{"@id":"https://guardianagroup.com/#org"},"inLanguage":"es"},{"@type":"FAQPage","@id":"https://guardianagroup.com/#faq","mainEntity":[{"@type":"Question","name":"¿Sustituye a mi antivirus?","acceptedAnswer":{"@type":"Answer","text":"No. Tu antivirus vigila los archivos de un PC; GUARDIANA vigila a quién habla cada aparato de tu Wi-Fi. Se complementan. Windows Defender viene gratis y es bueno: déjalo puesto."}},{"@type":"Question","name":"¿Necesito saber de redes?","acceptedAnswer":{"@type":"Answer","text":"No. Instalas GUARDIANA en tu PC y, si quieres cuidar los teléfonos y la tele, sigues una guía de dos minutos para tu router (Claro, Movistar, Tigo, ETB…) o para cada aparato. El panel lo explica todo en una frase."}},{"@type":"Question","name":"¿Qué pasa si apago el PC?","acceptedAnswer":{"@type":"Answer","text":"Tu PC sigue navegando con normalidad, porque conserva su DNS de siempre como respaldo. Los aparatos que apuntaste al PC usan el DNS de respaldo que dejaste en el router: nada se rompe, solo dejan de vigilarse mientras el PC está apagado, y al encenderlo GUARDIANA te dice cuánto tiempo estuvo sin mirar."}},{"@type":"Question","name":"¿Por qué es gratis?","acceptedAnswer":{"@type":"Answer","text":"Porque el guardián completo es lo que nos hace crecer y no se toca: código abierto, sin cuenta y sin servidor nuestro. Lo que cobramos es la capa humana: listas al día explicadas en lenguaje claro, informe semanal, varias casas y soporte prioritario (Plus, con 7 días gratis). Sin publicidad y sin vender datos."}}]}]}</script>
-  <script>(function(){var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}var na=/^America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Juneau|Boise|Detroit|Toronto|Vancouver|Edmonton|Calgary|Winnipeg|Halifax|St_Johns|Regina|Montreal|Indiana|Kentucky|North_Dakota|Sitka|Nome|Adak|Yakutat|Metlakatla|Menominee|Puerto_Rico)/.test(tz)||tz==='Pacific/Honolulu';var latam=/^America\//.test(tz)&&!na;var uk=/^Europe\/(London|Belfast|Guernsey|Jersey|Isle_of_Man)$/.test(tz);var eastEu=/^Europe\/(Istanbul|Moscow|Minsk|Kyiv|Kiev|Simferopol|Kaliningrad|Samara|Volgograd|Kirov|Astrakhan|Saratov|Ulyanovsk)$/.test(tz);var eu=(/^Europe\//.test(tz)&&!uk&&!eastEu)||/^Atlantic\/(Canary|Madeira|Azores|Reykjavik|Faroe|Faeroe)$/.test(tz)||tz==='Asia/Nicosia'||tz==='Asia/Famagusta';var P;if(latam){P={zone:'latam',plus:'2,49 US$/mes',plusEn:'2.49 US$/month',plusYear:'23,90 US$/año',plusNote:'al mes · 7 días gratis · o 23,90 US$ al año (un 20 % menos, sale a 1,99 US$ al mes) · precio para Latinoamérica · desde el 5 de octubre',plusNoteEn:'per month · 7 days free · or 23.90 US$ a year (20% less, works out at 1.99 US$ a month) · price for Latin America · from October 5'};}else if(uk){P={zone:'uk',plus:'3,99 £/mes',plusEn:'£3.99/month',plusYear:'38,30 £/año',plusNote:'al mes · 7 días gratis · o 38,30 £ al año (un 20 % menos, sale a 3,19 £ al mes) · precio en el Reino Unido · desde el 5 de octubre',plusNoteEn:'per month · 7 days free · or £38.30 a year (20% less, works out at £3.19 a month) · UK price · from October 5'};}else if(eu){P={zone:'eu',plus:'4,49 €/mes',plusEn:'€4.49/month',plusYear:'43,10 €/año',plusNote:'al mes · 7 días gratis · o 43,10 € al año (un 20 % menos, sale a 3,59 € al mes) · precio en Europa · desde el 5 de octubre',plusNoteEn:'per month · 7 days free · or €43.10 a year (20% less, works out at €3.59 a month) · price in Europe · from October 5'};}else{P={zone:'intl',plus:'4,99 US$/mes',plusEn:'4.99 US$/month',plusYear:'47,90 US$/año',plusNote:'al mes · 7 días gratis · o 47,90 US$ al año (un 20 % menos, sale a 3,99 US$ al mes) · desde el 5 de octubre',plusNoteEn:'per month · 7 days free · or 47.90 US$ a year (20% less, works out at 3.99 US$ a month) · from October 5'};}window.GUARDIANA_PRICES=P;})();</script>
-  <script>window.__idioma=function(k){try{var en=(k==='en');document.title=en?"GUARDIANA \u00b7 The watchdog for your AI":"GUARDIANA \u00b7 El vigilante de tu IA";var d=document.querySelector('meta[name="description"]');if(d)d.setAttribute('content',en?"You give an AI agent permission for one task and GUARDIANA checks which services it talks to and shows you everything that goes beyond that. And the rest of your home as well. Everything happens on your own computer. No account, no server, open source. Windows and Linux. Launch: 5 October 2026.":"Le das permiso a un agente de IA para una tarea y GUARDIANA comprueba con qu\u00e9 servicios habla y te ense\u00f1a todo lo que se sale de ah\u00ed. Y de paso vigila el resto de tu casa. Todo ocurre en tu equipo. Sin cuenta, sin servidor, c\u00f3digo abierto. Windows y Linux. Lanzamiento: 5 de octubre de 2026.");}catch(e){}};</script>
-  <script>window.__GEN={"router": "router", "PC": "PC", "teléfono A": "phone A", "teléfono B": "phone B", "televisor": "TV", "publicidad": "advertising", "rastreador": "tracker", "telemetría": "telemetry", "esperado": "expected", "IP sin nombre": "unnamed IP", "Los teléfonos también. Sin instalar nada en ellos.": "Phones too. Nothing installed on them.", "Cada app de tu teléfono habla con servidores que no ves.": "Every app on your phone talks to servers you never see.", "Enciende Modo Hogar en el PC de tu casa.": "Turn on Home Mode on the PC at home.", "Un ajuste en el router. O en cada teléfono. Sin app. Sin cuenta. Sin tienda.": "One setting on the router. Or on each phone. No app. No account. No store.", "GUARDIANA ve a qué servicios intenta hablar cada teléfono. Cortas tú: nada se bloquea sin que lo decidas.": "GUARDIANA sees which services each phone tries to talk to. You do the cutting: nothing is blocked unless you decide.", "Cada teléfono ve su propio detalle. El panel de la casa solo ve totales. No es control parental.": "Each phone sees its own detail. The household panel only sees totals. It is not parental control.", "Lo que no hace, dicho aquí mismo.": "What it does not do, said right here.", "Una licencia. Toda tu casa.": "One licence. Your whole home.", "Solo en la Wi‑Fi de casa": "Only on the home Wi‑Fi", "Por nombre de dominio, sin saber qué app": "By domain name, without knowing which app", "El PC debe estar encendido": "The PC must be on", "VPN, DNS cifrado propio y Private Relay lo esquivan: lo que no pasa por el PC no se ve": "A VPN, a device's own encrypted DNS and Private Relay bypass it: what does not go through the PC is not seen", "Ajustes": "Settings", "Configurar DNS": "Configure DNS", "deshacer": "undo", "cortar": "cut", "automático": "automatic", "TU CASA · WI‑FI": "YOUR HOME · WI‑FI", "FUERA · INTERNET": "OUTSIDE · INTERNET", "sin nombre": "unnamed", "Modo Hogar": "Home Mode", "DNS de tu casa": "your home's DNS", "Router · panel genérico · una vez, toda la casa": "Router · generic panel · once, the whole home", "Red": "Network", "casa‑wifi": "home‑wifi", "Puerta de enlace": "Gateway", "Cubre teléfonos, televisor y consolas sin tocarlos.": "Covers phones, TV and consoles without touching them.", "En cada teléfono · pantalla genérica": "On each phone · generic screen", "Sin app. Sin cuenta. Sin tienda.": "No app. No account. No store.", "hoy · ": "today · ", "41 esperados": "41 expected", "14 rastreadores": "14 trackers", "9 cortados": "9 cut", "Radiografía de este teléfono": "X-ray of this phone", "Abierta desde el QR del PC. Detalle solo aquí.": "Opened from the PC's QR code. Detail only here.", "Mapas": "Maps", "Red publicitaria": "Ad network", "Baliza cada 5 min": "Beacon every 5 min", "Dirección fija": "Fixed address", "Panel de la casa · solo totales": "Household panel · totals only", "Teléfono A": "Phone A", "Teléfono B": "Phone B", "Televisor": "TV", "23 servicios": "23 services", "17 servicios": "17 services", "9 servicios": "9 services", "El detalle de otra persona solo si ella lo comparte.": "Someone else's detail only if they share it.", "Lo que no hace": "What it does not do", "Ejemplo": "Example", "ejemplo": "example", "EJEMPLO": "EXAMPLE", "Ver mi radiografía gratis": "See my X-ray for free", "Envíamelo al PC": "Send it to my PC"};window.__g=function(s){try{if(document.documentElement.lang==='en'&&window.__GEN[s])return window.__GEN[s];}catch(e){}return s;};</script>
-  <style id="gboot">html,body{background:#04050a !important}#dc-root{opacity:0 !important}</style>
-  <script>(function(){try{if('scrollRestoration' in history)history.scrollRestoration='manual';}catch(e){}function top(){if(!location.hash){try{window.scrollTo(0,0);}catch(e){}}}top();window.addEventListener('pageshow',top);window.addEventListener('load',top);function done(){var s=document.getElementById('gboot');if(s)s.parentNode.removeChild(s);top();}var n=0,t=setInterval(function(){n++;var r=document.getElementById('dc-root');if(r&&r.textContent&&r.textContent.length>400&&r.textContent.indexOf('{{')<0){clearInterval(t);done();}else if(n>200){clearInterval(t);done();}},30);})();</script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #04050a; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-    #__bundler_loading { position: fixed; bottom: 20px; right: 20px; font: 13px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; color: #666; background: #fff; padding: 8px 14px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.12); z-index: 10000; }
-    #__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #04050a; z-index: 9999; }
-    #__bundler_thumbnail svg { width: 72px; height: 72px; animation: gpulse 1.6s ease-in-out infinite; } @keyframes gpulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } } #__bundler_loading { display: none !important; } #__bundler_thumbnail { position: static; width: auto; height: auto; padding: 24px 0 0; }
-    #__bundler_placeholder { color: #999; font-size: 14px; }
-  </style>
-  <noscript><style>#__bundler_loading, #__bundler_thumbnail { display: none; }</style></noscript>
-</head>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GUARDIANA · El vigilante de tu IA</title>
+<meta name="description" content="Le das permiso a un agente de IA para una tarea y GUARDIANA comprueba con qué servicios habla y te enseña todo lo que se sale de ahí. Y de paso vigila el resto de tu casa. Todo ocurre en tu equipo. Sin cuenta, sin servidor, código abierto. Windows y Linux. Lanzamiento: 5 de octubre de 2026.">
+<link rel="canonical" href="https://guardianagroup.com/">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="GUARDIANA · El vigilante de tu IA">
+<meta property="og:description" content="Le das permiso a un agente de IA para una tarea y GUARDIANA comprueba con qué servicios habla y te enseña todo lo que se sale de ahí. Y de paso vigila el resto de tu casa. Todo ocurre en tu equipo. Sin cuenta, sin servidor, código abierto. Windows y Linux. Lanzamiento: 5 de octubre de 2026.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guardianagroup.com/">
+<meta property="og:image" content="https://guardianagroup.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="GUARDIANA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GUARDIANA · El vigilante de tu IA">
+<meta name="twitter:description" content="Le das permiso a un agente de IA para una tarea y GUARDIANA comprueba con qué servicios habla y te enseña todo lo que se sale de ahí. Y de paso vigila el resto de tu casa. Todo ocurre en tu equipo. Sin cuenta, sin servidor, código abierto. Windows y Linux. Lanzamiento: 5 de octubre de 2026.">
+<meta name="twitter:image" content="https://guardianagroup.com/og.png">
+<meta name="theme-color" content="#04050a">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="referrer" content="no-referrer">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://guardianagroup.com/#org","name":"GUARDIANA","url":"https://guardianagroup.com/","logo":"https://guardianagroup.com/icon-512.png"},{"@type":"WebPage","@id":"https://guardianagroup.com/#page","name":"GUARDIANA · El vigilante de tu IA","description":"Le das permiso a un agente de IA para una tarea y GUARDIANA comprueba con qué servicios habla y te enseña todo lo que se sale de ahí. Y de paso vigila el resto de tu casa. Todo ocurre en tu equipo. Sin cuenta, sin servidor, código abierto. Windows y Linux. Lanzamiento: 5 de octubre de 2026.","url":"https://guardianagroup.com/","inLanguage":"es","isPartOf":{"@id":"https://guardianagroup.com/#web"},"publisher":{"@id":"https://guardianagroup.com/#org"}}]}</script>
+<link rel="alternate" hreflang="es" href="https://guardianagroup.com/"><link rel="alternate" hreflang="en" href="https://guardianagroup.com/en/"><link rel="alternate" hreflang="x-default" href="https://guardianagroup.com/">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/Unbounded-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/IBMPlexSans-400-latin.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/IBMPlexMono-400-latin.woff2">
+<script>(function(){var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}var na=/^America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Juneau|Boise|Detroit|Toronto|Vancouver|Edmonton|Calgary|Winnipeg|Halifax|St_Johns|Regina|Montreal|Indiana|Kentucky|North_Dakota|Sitka|Nome|Adak|Yakutat|Metlakatla|Menominee|Puerto_Rico)/.test(tz)||tz==='Pacific/Honolulu';var latam=/^America\//.test(tz)&&!na;var uk=/^Europe\/(London|Belfast|Guernsey|Jersey|Isle_of_Man)$/.test(tz);var eastEu=/^Europe\/(Istanbul|Moscow|Minsk|Kyiv|Kiev|Simferopol|Kaliningrad|Samara|Volgograd|Kirov|Astrakhan|Saratov|Ulyanovsk)$/.test(tz);var eu=(/^Europe\//.test(tz)&&!uk&&!eastEu)||/^Atlantic\/(Canary|Madeira|Azores|Reykjavik|Faroe|Faeroe)$/.test(tz)||tz==='Asia/Nicosia'||tz==='Asia/Famagusta';var P;if(latam){P={zone:'latam',plus:'2,49 US$/mes',plusEn:'2.49 US$/month',plusYear:'23,90 US$/año',plusNote:'al mes · 7 días gratis · o 23,90 US$ al año (un 20 % menos, sale a 1,99 US$ al mes) · precio para Latinoamérica · desde el 5 de octubre',plusNoteEn:'per month · 7 days free · or 23.90 US$ a year (20% less, works out at 1.99 US$ a month) · price for Latin America · from October 5'};}else if(uk){P={zone:'uk',plus:'3,99 £/mes',plusEn:'£3.99/month',plusYear:'38,30 £/año',plusNote:'al mes · 7 días gratis · o 38,30 £ al año (un 20 % menos, sale a 3,19 £ al mes) · precio en el Reino Unido · desde el 5 de octubre',plusNoteEn:'per month · 7 days free · or £38.30 a year (20% less, works out at £3.19 a month) · UK price · from October 5'};}else if(eu){P={zone:'eu',plus:'4,49 €/mes',plusEn:'€4.49/month',plusYear:'43,10 €/año',plusNote:'al mes · 7 días gratis · o 43,10 € al año (un 20 % menos, sale a 3,59 € al mes) · precio en Europa · desde el 5 de octubre',plusNoteEn:'per month · 7 days free · or €43.10 a year (20% less, works out at €3.59 a month) · price in Europe · from October 5'};}else{P={zone:'intl',plus:'4,99 US$/mes',plusEn:'4.99 US$/month',plusYear:'47,90 US$/año',plusNote:'al mes · 7 días gratis · o 47,90 US$ al año (un 20 % menos, sale a 3,99 US$ al mes) · desde el 5 de octubre',plusNoteEn:'per month · 7 days free · or 47.90 US$ a year (20% less, works out at 3.99 US$ a month) · from October 5'};}window.GUARDIANA_PRICES=P;})();</script>
+<style>
+@font-face{font-family:'Unbounded';font-weight:500 800;font-display:swap;src:url(/fonts/Unbounded-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-weight:500 800;font-display:swap;src:url(/fonts/Unbounded-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Sans';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Sans';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Sans';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexSans-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Sans';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexSans-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Sans';font-weight:600;font-display:swap;src:url(/fonts/IBMPlexSans-600-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Sans';font-weight:600;font-display:swap;src:url(/fonts/IBMPlexSans-600-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{--papel:#F4F6FA;--hoja:#FFFFFF;--tinta:#0B1020;--gris:#5B6275;--linea:#D9DEE8;--azul:#1F4BFF;--azul-oscuro:#0F2FB8;--corte:#E2452B;--sello:#0E8F6E;--ambar:#B7791F;--ancho:1180px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--azul);text-decoration:none}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--azul);outline-offset:3px}
+.wrap{max-width:var(--ancho);margin:0 auto;padding:0 28px}
+.k{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris)}
+h1,h2,h3{text-wrap:balance;margin:0;font-family:'Unbounded',system-ui,sans-serif;letter-spacing:-.02em}
+p{margin:0}
+img{max-width:100%;height:auto}
+code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:.92em;overflow-wrap:anywhere}
+.top{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 0;border-bottom:1px solid var(--linea)}
+.marca{display:flex;align-items:center;gap:12px;font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.18em;font-size:14px;color:var(--tinta)}
+.marca i{width:10px;height:10px;border-radius:50%;background:var(--azul);box-shadow:0 0 0 4px rgba(31,75,255,.12)}
+.top nav{display:flex;gap:26px;font-size:14px;font-weight:500}
+.top nav a{color:var(--tinta)}
+.top nav a:hover{color:var(--azul)}
+.top .idioma{font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid var(--linea);border-radius:999px;padding:6px 12px;color:var(--gris);letter-spacing:.08em}
+.top .idioma:hover{border-color:var(--tinta);color:var(--tinta)}
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);gap:64px;align-items:start;padding:72px 0 80px}
+.hero .fecha{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.hero h1{font-weight:700;font-size:clamp(30px,3.6vw,50px);line-height:1.12;letter-spacing:-.025em}
+.hero .lead{font-size:20px;line-height:1.5;max-width:34em;margin-top:22px}
+.hero .lead strong{font-weight:600}
+.hero .peq{color:var(--gris);font-size:15px;max-width:34em;margin-top:14px}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:15px 24px;font-weight:600;font-size:15px;border:1.5px solid transparent;transition:transform .15s ease,background .15s ease,border-color .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.p{background:var(--azul);color:#fff}
+.btn.p:hover{background:var(--azul-oscuro)}
+.btn.s{border-color:var(--linea);color:var(--tinta);background:var(--hoja)}
+.btn.s:hover{border-color:var(--tinta)}
+.nota{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);margin-top:20px}
+.ticket{position:relative;background:var(--hoja);color:var(--tinta);border:1px solid var(--linea);border-radius:6px;padding:26px 26px 30px;box-shadow:0 30px 60px -30px rgba(11,16,32,.25),0 2px 0 var(--linea);font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.55}
+.ticket::before,.ticket::after{content:"";position:absolute;left:14px;right:14px;height:10px;background:radial-gradient(circle,transparent 5px,var(--hoja) 5.5px) -8px 0/16px 10px}
+.ticket::before{top:-8px;transform:scaleY(-1)}
+.ticket::after{bottom:-8px}
+.ticket .cab{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:1px dashed var(--linea);padding-bottom:12px;margin-bottom:8px}
+.ticket .cab b{font-family:'Unbounded',sans-serif;font-weight:700;font-size:12px;letter-spacing:.18em;line-height:1.5}
+.ticket .cab .der{display:grid;justify-items:end;gap:6px;font-size:12px;color:var(--gris);text-align:right}
+.ticket .sello{display:inline-block;border:2px solid var(--sello);color:var(--sello);background:var(--hoja);border-radius:6px;padding:5px 10px;font-family:'Unbounded',sans-serif;font-size:11px;letter-spacing:.14em;white-space:nowrap}
+.ticket .tit{font-family:'Unbounded',sans-serif;font-weight:600;font-size:14px;line-height:1.35;letter-spacing:-.01em;margin:6px 0 4px}
+.ticket .sub{font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:var(--gris);margin-bottom:8px}
+.ticket .fila{display:grid;grid-template-columns:minmax(96px,.7fr) minmax(0,1.3fr);gap:12px;align-items:baseline;padding:5px 0;border-bottom:1px solid #EEF1F6}
+.ticket .fila .t{color:var(--gris);font-size:11px;letter-spacing:.12em}
+.ticket .fila .v{text-align:right;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.ticket .fila .v.a{color:var(--ambar)}
+.ticket .tot{border-top:1px dashed var(--linea);margin-top:12px;padding-top:12px;display:grid;grid-template-columns:1fr auto;gap:8px}
+.ticket .tot b{font-weight:500}
+.ticket .pie{margin-top:12px;font-size:11px;color:var(--gris);letter-spacing:.04em;font-family:'IBM Plex Sans',sans-serif}
+.ticket .mas{display:inline-block;margin-top:10px;font-size:12px}
+section{padding:88px 0;border-top:1px solid var(--linea)}
+.cab-sec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:48px;align-items:start;margin-bottom:44px}
+.cab-sec h2{font-weight:700;font-size:clamp(24px,2.6vw,34px);line-height:1.18}
+.cab-sec .k{grid-column:1/-1;margin-bottom:-24px}
+.cab-sec p{font-size:18px;color:var(--gris);max-width:36em}
+.cab-sec p+p{margin-top:12px}
+.tarjeta{background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:26px}
+.ia{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:start}
+.ia .tarjeta .k{color:var(--azul)}
+.ia .tarjeta p{color:var(--gris);font-size:15px;margin-top:10px}
+.pasos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--linea);border-radius:10px;background:var(--hoja);overflow:hidden}
+.paso{padding:26px 24px 30px;border-right:1px solid var(--linea);display:grid;gap:12px;align-content:start}
+.paso:last-child{border-right:0}
+.paso .num{font-family:'IBM Plex Mono',monospace;color:var(--azul);font-size:13px;letter-spacing:.14em}
+.paso h3{font-weight:600;font-size:15px;line-height:1.3}
+.paso p{color:var(--gris);font-size:15px}
+.dos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.dos h2{font-weight:700;font-size:clamp(24px,2.6vw,34px);line-height:1.18;margin-top:14px}
+.dos p{font-size:18px;color:var(--gris);margin-top:16px;max-width:34em}
+.casa{background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:26px;font-family:'IBM Plex Mono',monospace;font-size:13px}
+.casa .dev{display:grid;grid-template-columns:1fr auto;gap:14px;padding:11px 0;border-bottom:1px solid var(--linea);align-items:center}
+.casa .dev:last-of-type{border-bottom:0}
+.casa .dev .l{font-family:'IBM Plex Sans',sans-serif;font-size:15px;font-weight:500}
+.casa .dev .l small{display:block;color:var(--gris);font-weight:400;font-size:13px}
+.casa .dev .c{font-variant-numeric:tabular-nums;color:var(--gris);text-align:right}
+.casa .nota-casa{margin-top:12px;font-size:11px;color:var(--ambar);letter-spacing:.08em;text-transform:uppercase}
+.casos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.caso{background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:26px;display:grid;gap:12px;align-content:start}
+.caso .k{color:var(--corte)}
+.caso h3{font-weight:600;font-size:16px;line-height:1.35}
+.caso p{color:var(--gris);font-size:15px}
+.caso .f{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gris)}
+.caso .imp{font-family:'Unbounded',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.02em}
+.casos-nota{color:var(--gris);font-size:14px;margin-top:22px;max-width:60em}
+.instalar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+.instalar figure{margin:0;background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:14px}
+.instalar figcaption{font-size:13px;color:var(--gris);margin-top:10px}
+.instalar .texto p{color:var(--gris);font-size:16px}
+.instalar .texto p+p{margin-top:12px}
+.pasos3{display:grid;gap:14px;margin-top:36px}
+.pasos3 .paso3{background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:20px 22px;display:grid;gap:8px}
+.pasos3 h3{font-weight:600;font-size:15px}
+.pasos3 p{color:var(--gris);font-size:15px}
+.pasos3 code{display:block;background:var(--papel);border-radius:6px;padding:8px 10px;font-size:12.5px}
+.aviso{border-left:3px solid var(--ambar);padding:6px 0 6px 16px;color:var(--gris);font-size:15px;margin-top:18px}
+.quienes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.quienes .tarjeta{display:grid;gap:10px;align-content:start}
+.quienes h3{font-weight:600;font-size:16px}
+.quienes p{color:var(--gris);font-size:15px}
+.compromisos{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:22px}
+.compromisos div{border-top:2px solid var(--tinta);padding-top:12px;display:grid;gap:6px}
+.compromisos .k{font-size:11px;color:var(--azul)}
+.compromisos b{font-family:'Unbounded',sans-serif;font-weight:600;font-size:13px;line-height:1.3}
+.compromisos p{color:var(--gris);font-size:13.5px}
+.planes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.plan{border:1px solid var(--linea);border-radius:12px;padding:32px;background:var(--hoja);display:grid;gap:16px;align-content:start}
+.plan.plus{border-color:var(--azul);box-shadow:0 0 0 4px rgba(31,75,255,.08)}
+.plan h3{font-size:22px;font-weight:700}
+.plan .precio{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--gris);line-height:1.6}
+.plan .precio b{color:var(--tinta);font-weight:500;font-size:15px}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:9px;font-size:15px}
+.plan li{display:grid;grid-template-columns:auto 1fr;gap:10px}
+.plan li::before{content:"—";color:var(--azul)}
+.plan .btn{justify-self:start}
+.activar{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:48px;align-items:center;background:var(--hoja);color:var(--tinta);border:1.5px solid var(--azul);border-radius:16px;padding:56px;box-shadow:0 30px 60px -40px rgba(31,75,255,.35)}
+.activar h2{font-size:clamp(26px,3vw,40px);font-weight:700;line-height:1.15;margin-top:12px}
+.activar p{color:var(--gris);font-size:17px;margin-top:14px;max-width:32em}
+.activar .der{display:grid;gap:14px;justify-items:start}
+.activar .der .k{text-transform:none;letter-spacing:.02em;font-size:13px;line-height:1.6}
+.rx{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.rx a{display:grid;gap:6px;background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:20px 22px;color:var(--tinta)}
+.rx a:hover{border-color:var(--azul)}
+.rx b{font-family:'Unbounded',sans-serif;font-weight:600;font-size:14px;line-height:1.35}
+.rx span{color:var(--gris);font-size:14px}
+.rx .k{font-size:11px}
+.faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 48px}
+.faq div{display:grid;gap:8px;padding-top:18px;border-top:1px solid var(--linea)}
+.faq b{font-family:'Unbounded',sans-serif;font-weight:600;font-size:15px}
+.faq p{color:var(--gris);font-size:15px}
+details{border:1px solid var(--linea);border-radius:10px;background:var(--hoja);padding:0 22px}
+summary{cursor:pointer;padding:16px 0;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--azul);font-family:'IBM Plex Mono',monospace}
+details[open] summary::after{content:"−"}
+details ol{margin:0 0 18px;padding-left:22px;font-size:14px;color:var(--gris);columns:2;column-gap:36px}
+details li{margin:0 0 6px;break-inside:avoid}
+details li a{color:var(--tinta)}
+details li a:hover{color:var(--azul)}
+footer{padding:40px 0 64px;border-top:1px solid var(--linea);color:var(--gris);font-size:13px;display:grid;gap:14px}
+footer .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+footer .links a{color:var(--gris)}
+footer .links a:hover{color:var(--tinta)}
+@media (max-width:1000px){.compromisos{grid-template-columns:repeat(2,minmax(0,1fr))}.quienes{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:40px;padding:48px 0 60px}
+  .cab-sec,.dos,.planes,.faq,.activar,.ia,.instalar,.rx{grid-template-columns:1fr}
+  .cab-sec .k{margin-bottom:-10px}
+  .pasos{grid-template-columns:1fr 1fr}
+  .paso:nth-child(2){border-right:0}
+  .paso:nth-child(-n+2){border-bottom:1px solid var(--linea)}
+  .casos{grid-template-columns:1fr}
+  .top nav{display:none}
+  section{padding:64px 0}
+  .activar{padding:36px 28px}
+  details ol{columns:1}
+}
+@media (max-width:520px){
+  .pasos,.compromisos{grid-template-columns:1fr}
+  .paso{border-right:0;border-bottom:1px solid var(--linea)}
+  .paso:last-child{border-bottom:0}
+  .wrap{padding:0 18px}
+  .ticket{padding:22px 16px 26px}
+}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+</style></head>
 <body>
-  <div id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#04050a"></rect><circle cx="50" cy="50" r="22" fill="none" stroke="#62e8ff" stroke-width="3"></circle><circle cx="50" cy="50" r="7" fill="#62e8ff"></circle></svg></div>
-  <div id="__bundler_loading">Unpacking...</div>
-  <div id="gprerender"><style>#gprerender{box-sizing:border-box;width:100%;min-width:0;max-width:860px;margin:0 auto;padding:24px 20px 64px;font:17px/1.6 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#c9d0dc}#gprerender h1{font-size:34px;line-height:1.1;color:#eef1f7;margin:8px 0 12px}#gprerender h2{font-size:22px;color:#eef1f7;margin:36px 0 8px}#gprerender h3{font-size:17px;color:#eef1f7;margin:18px 0 4px}#gprerender a{color:#62e8ff;text-decoration:none}#gprerender .k{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.14em;color:#62e8ff}#gprerender nav a{display:inline-block;white-space:nowrap;margin:0 16px 6px 0;font-size:12px;letter-spacing:.06em;text-transform:uppercase}@media (max-width:600px){#gprerender{padding:20px 16px 56px}#gprerender h1{font-size:27px}}</style><nav><a href="/">GUARDIANA</a><a href="/guias/">Guías</a><a href="/radiografias/">Radiografías</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="mailto:hola@guardianagroup.com">Contacto</a></nav><p class="k">WINDOWS Y LINUX · 5 DE OCTUBRE DE 2026 · PLUS: 7 DÍAS GRATIS</p><h1>Le diste permiso a tu IA para una tarea. GUARDIANA comprueba con quién habló de verdad. Cortar, lo decides tú.</h1><p>Le pediste que ordenara las facturas. ¿Sabes con cuántos servicios habló por el camino? GUARDIANA anota el nombre de cada uno, la hora y el aparato. Nunca el contenido: mira a dónde habla, no lo que lee.</p><p>Las primeras 24 horas solo mira; después decides tú. Windows y Linux, y con Modo Hogar también los teléfonos, sin instalarles nada. Sin cuenta, sin servidor nuestro, sin telemetría. Código abierto: el guardián que tú mismo puedes vigilar.</p><h2>Le pediste ordenar las facturas. ¿Sabes con cuántos servicios habló?</h2><p>Un agente de inteligencia artificial trabaja con tus llaves: tus carpetas, tus cuentas, tu red. Le das permiso para una tarea y hace esa tarea; lo que no sabes es con cuántos sitios habla por el camino, porque nadie te lo enseña. GUARDIANA se pone entre tu equipo e internet y te lo enseña, para que puedas soltarle el trabajo al agente sin quedarte mirando.</p><p>El límite, dicho aquí y en el programa: GUARDIANA comprueba a dónde habla tu agente, no qué archivos abre ni qué va dentro de cada conexión. Un agente que solo toca archivos de tu disco no pregunta por ningún nombre y no aparece. Tampoco lo que sale por una VPN o por un DNS cifrado propio, que se anota cuando se detecta.</p><h2>Los teléfonos también. Sin instalar nada en ellos.</h2><p>Enciende Modo Hogar en tu PC y cambia un ajuste en el router o en cada teléfono. Desde ese momento, GUARDIANA ve a qué servicios intenta hablar cada dispositivo de tu Wi‑Fi. Solo en tu casa. Sin app. Sin cuenta. Sin tienda.</p><h2>Quien prometía protegerte, vendía tus datos. Quien te vendía el dispositivo, te escuchaba.</h2><p>Resoluciones de reguladores, acuerdos judiciales y decisiones de gobiernos de varios países, con fecha y fuente. Por eso no te pedimos que confíes en nosotros: publicamos el código, la huella y la firma de cada versión. Cuando una empresa negó los hechos, lo decimos.</p><h2>Casi todos los aparatos, antes de hablar con un servicio, preguntan por su nombre. GUARDIANA se pone en ese punto.</h2><p>Dentro de tu PC, GUARDIANA responde esas preguntas y anota lo que ve: el nombre del servicio, la hora y qué dispositivo lo pidió. Nunca el contenido. Con Modo Hogar, también los teléfonos y la tele, sin instalarles nada. Pulsa un paso o deja que la animación te lo cuente.</p><h2>Windows avisa de lo que todavía no conoce, esté firmado o no. Por eso te enseñamos a comprobar el archivo.</h2><h3>Tres pasos para comprobar el archivo antes de abrirlo</h3><p><a href="/instalar.html">La página de instalación, con todo el detalle</a></p><h2>No te pedimos que confíes en nosotros. Te damos las herramientas para comprobarlo.</h2><p>GUARDIANA nace en 2026 en Cartagena de Indias con una pregunta incómoda: ¿por qué confiaría alguien en un programa nuevo para ponerlo en medio de su casa? Nuestra respuesta es no pedir confianza. Estos son los compromisos que asumimos por diseño y que cualquiera puede comprobar.</p><h3>Francisco Salvatierra Sánchez</h3><p>Fundador y único desarrollador. Cartagena de Indias, Colombia. El mismo nombre que figura en la privacidad y en los términos: si algo falla, no hay departamento detrás del que esconderse.</p><h2>Gratis y abierto, el guardián completo. Plus: 7 días gratis, luego al mes o al año.</h2><p>Sin publicidad, sin venta de datos, sin inversores que pidan lo contrario. El guardián completo es gratis y de código abierto: tu PC y toda la casa. Es lo que nos hace crecer y no se toca. Lo que se paga es la capa humana: listas al día de a quién habla cada aparato, explicadas en lenguaje claro; el informe semanal de la casa; varias casas; soporte prioritario. Plus se prueba 7 días gratis y después se paga al mes o al año (el año, un 20 % menos); se cancela cuando quieras y se abre el 5 de octubre. Cada país ve el precio de su zona; la versión gratis es igual para todos. Sin cuenta: la licencia se activa con una sola conexión, o con un archivo firmado si no quieres ni esa.</p><h2>Tu casa, vigilada desde tu PC.</h2><p>Windows y Linux. El guardián completo, gratis: tu PC y toda la casa. Plus, la capa humana, con 7 días gratis y suscripción mensual o anual. Sin tarjeta. Sin cuenta. Sin pedirte que confíes: puedes comprobarlo todo.</p><p><a href="https://guardiana.beehiiv.com/subscribe">AVÍSAME EL 5 DE OCTUBRE</a></p><h2>Lo que nos preguntan por correo.</h2><h3>¿Sustituye a mi antivirus?</h3><p>No. Tu antivirus vigila los archivos de un PC; GUARDIANA vigila a quién habla cada aparato de tu Wi-Fi. Se complementan. Windows Defender viene gratis y es bueno: déjalo puesto.</p><h3>¿Necesito saber de redes?</h3><p>No. Instalas GUARDIANA en tu PC y, si quieres cuidar los teléfonos y la tele, sigues una guía de dos minutos para tu router (Claro, Movistar, Tigo, ETB…) o para cada aparato. El panel lo explica todo en una frase.</p><h3>¿Qué pasa si apago el PC?</h3><p>Tu PC sigue navegando con normalidad, porque conserva su DNS de siempre como respaldo. Los aparatos que apuntaste al PC usan el DNS de respaldo que dejaste en el router: nada se rompe, solo dejan de vigilarse mientras el PC está apagado, y al encenderlo GUARDIANA te dice cuánto tiempo estuvo sin mirar.</p><h3>¿Por qué es gratis?</h3><p>Porque el guardián completo es lo que nos hace crecer y no se toca: código abierto, sin cuenta y sin servidor nuestro. Lo que cobramos es la capa humana: listas al día explicadas en lenguaje claro, informe semanal, varias casas y soporte prioritario (Plus, con 7 días gratis). Sin publicidad y sin vender datos.</p><h3>¿Cómo lo hace? ¿Es DNS, un proxy o un driver?</h3><p>DNS. Casi todo lo que sale a internet empieza preguntando «¿dónde está este servicio?», y GUARDIANA es quien responde esa pregunta en tu PC (y en tu casa, con Modo Hogar). No es un proxy ni un driver: no se pone en medio del tráfico y nunca abre lo que mandas ni lo que recibes; solo ve el nombre que se pidió, la hora y qué aparato lo pidió.</p><h3>¿Y lo que sale por VPN, por DNS cifrado o a una IP fija?</h3><p>No lo ve, y lo dice. Una VPN, una app con su propio DNS cifrado (DoH/DoT), iCloud Private Relay o un programa que use una IP fija se saltan la pregunta del nombre. Cuando GUARDIANA detecta que un aparato intenta ese camino, lo anota como señal («evasión de DNS») para que sepas que hay tráfico que no está mirando. La lista completa de lo que no hace está publicada junto al código.</p><h2>Qué sale de tu PC, medido.</h2><p>Cada radiografía es una prueba con fecha y método: un navegador o una web, dos minutos, y la lista completa de nombres que salieron del equipo según GUARDIANA. Nombres, no contenido. Datos para descargar y método para repetirlo.</p><p><a href="/radiografias/seis-periodicos-colombianos-2026-09-14.html">Seis periódicos colombianos: cuánto rastreo carga cada portada</a></p><p>Todo dato de esta web que no sea una lectura de tu propio navegador o una maqueta marcada como tal procede de una de estas fuentes. Consultadas en septiembre de 2026.</p><p><a href="/guias/">Guías: router, iPhone, Android y qué es el DNS</a></p><p><a href="https://github.com/guardianagroup/guardiana">Código fuente</a> · <a href="/privacidad.html">Privacidad</a> · <a href="/terminos.html">Términos y reembolsos</a> · Hecho en Cartagena de Indias</p></div>
+<div class="wrap">
+<header class="top">
+  <a class="marca" href="/" aria-label="GUARDIANA"><i></i>GUARDIANA</a>
+  <nav aria-label="Secciones"><a href="#ia">Tu IA</a><a href="#como">Cómo funciona</a><a href="#planes">Planes</a><a href="https://github.com/guardianagroup/guardiana">Código</a><a href="/radiografias/">Radiografías</a></nav>
+  <a class="idioma" href="/en/" lang="en" hreflang="en">EN</a>
+</header>
 
-  <script>
-    
-document.addEventListener('DOMContentLoaded', async function() {
-  const loading = document.getElementById('__bundler_loading');
-  function setStatus(msg) { if (loading) loading.textContent = msg; }
+<section class="hero" style="border-top:0">
+  <div>
+    <div class="fecha"><span class="k">WINDOWS Y LINUX · 5 DE OCTUBRE DE 2026 · PLUS: 7 DÍAS GRATIS</span></div>
+    <h1>Le diste permiso a tu IA para una tarea. GUARDIANA comprueba con quién habló de verdad. Cortar, lo decides tú.</h1>
+    <p class="lead">Le pediste que ordenara las facturas. ¿Sabes con cuántos servicios habló por el camino? GUARDIANA anota el nombre de cada uno, la hora y el aparato. Nunca el contenido: mira a dónde habla, no lo que lee.</p>
+    <p class="peq">Las primeras 24 horas solo mira; después decides tú. Windows y Linux, y con Modo Hogar también los teléfonos, sin instalarles nada. Sin cuenta, sin servidor nuestro, sin telemetría. Código abierto: el guardián que tú mismo puedes vigilar.</p>
+    <div class="cta"><a class="btn p" href="https://guardiana.beehiiv.com/subscribe">AVÍSAME EL 5 DE OCTUBRE</a><a class="btn s" href="/radiografias/recibo-de-agente.html">Ver el recibo del agente →</a></div>
+    <p class="nota">SIN CUENTA · SIN TARJETA PARA PROBAR PLUS · CÓDIGO ABIERTO</p>
+  </div>
+  <div>
+    <div class="ticket" aria-live="polite">
+      <div class="cab"><b>LO QUE TU NAVEGADOR CUENTA</b><span class="der"><span class="sello">EN VIVO</span><span id="tk-cuenta">15 datos leídos · 0 permisos pedidos</span></span></div>
+      <div class="tit">Esto es lo que tu navegador le cuenta a cualquier web. También a la de tu IA. Sin pedirte permiso.</div>
+      <div class="sub">Leído de tu dispositivo hace un instante, con funciones estándar del navegador. Nada ha salido de tu equipo.</div>
+      <div id="tk-filas"><div class="fila"><span class="t">NAVEGADOR</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">GPU</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">HUELLA CANVAS</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">IDIOMAS</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">ZONA HORARIA</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">HORA LOCAL</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">PANTALLA</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">VENTANA</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">CPU</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">RAM</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">BATERÍA</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">CONEXIÓN</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">PERMISOS</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">REFERENTE</span><span class="v">&nbsp;</span></div><div class="fila"><span class="t">VISITAS</span><span class="v">&nbsp;</span></div></div>
+      <div class="tot"><b>Contenido leído</b><span>ninguno</span></div>
+      <div class="pie">Todo medido en tu navegador con funciones estándar. Cualquier web puede hacerlo. Nada de esto se envía; solo un contador de visitas se queda en tu navegador.</div>
+    </div>
+  </div>
+</section>
 
-  const FONT_MIME = /^(font[/]|application[/](x-)?font-|application[/]vnd\.ms-fontobject)/i;
-  const MIME_TOKEN = /^[\w.+-]+[/][\w.+-]+$/;
-  function toBase64(bytes) {
-    let bin = '';
-    for (let i = 0; i < bytes.length; i += 0x8000) {
-      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
-    }
-    return btoa(bin);
-  }
+<section id="ia">
+  <div class="cab-sec"><span class="k">TU IA</span><h2>Le pediste ordenar las facturas. ¿Sabes con cuántos servicios habló?</h2><div><p>Un agente de inteligencia artificial trabaja con tus llaves: tus carpetas, tus cuentas, tu red. Le das permiso para una tarea y hace esa tarea; lo que no sabes es con cuántos sitios habla por el camino, porque nadie te lo enseña. GUARDIANA se pone entre tu equipo e internet y te lo enseña, para que puedas soltarle el trabajo al agente sin quedarte mirando.</p><p>El límite, dicho aquí y en el programa: GUARDIANA comprueba a dónde habla tu agente, no qué archivos abre ni qué va dentro de cada conexión. Un agente que solo toca archivos de tu disco no pregunta por ningún nombre y no aparece. Tampoco lo que sale por una VPN o por un DNS cifrado propio, que se anota cuando se detecta.</p></div></div>
+  <div class="ia">
+    <div class="tarjeta"><span class="k">RECIBO DE AGENTE</span><p>El primer recibo de un agente de IA de verdad se publica antes del 30 de septiembre de 2026, con el protocolo ya fijado: equipo limpio, reposo, una sola tarea, archivos inventados, todo lo que se pidió, y el JSON en bruto para que cualquiera lo repita.</p><p style="margin-top:14px"><a href="/radiografias/recibo-de-agente.html">Leer el protocolo →</a></p></div>
+    <div class="tarjeta"><span class="k">LO QUE VE Y LO QUE NO</span><p>DNS. Casi todo lo que sale a internet empieza preguntando «¿dónde está este servicio?», y GUARDIANA es quien responde esa pregunta en tu PC (y en tu casa, con Modo Hogar). No es un proxy ni un driver: no se pone en medio del tráfico y nunca abre lo que mandas ni lo que recibes; solo ve el nombre que se pidió, la hora y qué aparato lo pidió.</p></div>
+  </div>
+</section>
 
-  // Error sink persists across replaceWith since it's on window, not the DOM.
-  window.addEventListener('error', function(e) {
-    // Failed resource loads (CSP-blocked links, scripts, images) fire plain
-    // events at the element — warn only; real JS errors carry message/error.
-    if (!e.message && !e.error && e.target && e.target !== window) {
-      console.warn('[bundle] resource failed to load:',
-        e.target.tagName, String(e.target.src || e.target.href || ''));
-      return;
-    }
-    var p = document.body || document.documentElement;
-    var d = document.getElementById('__bundler_err') || p.appendChild(document.createElement('div'));
-    d.id = '__bundler_err';
-    d.style.cssText = 'position:fixed;bottom:12px;left:12px;right:12px;font:12px/1.4 ui-monospace,monospace;background:#2a1215;color:#ff8a80;padding:10px 14px;border-radius:8px;border:1px solid #5c2b2e;z-index:99999;white-space:pre-wrap;max-height:40vh;overflow:auto';
-    d.textContent = (d.textContent ? d.textContent + String.fromCharCode(10) : '') +
-      '[bundle] ' + (e.message || e.type) +
-      (e.filename ? ' (' + e.filename.slice(0, 60) + ':' + e.lineno + ')' : '');
-  }, true);
+<section id="como">
+  <div class="cab-sec"><span class="k">CÓMO FUNCIONA</span><h2>Casi todos los aparatos, antes de hablar con un servicio, preguntan por su nombre. GUARDIANA se pone en ese punto.</h2><p>Dentro de tu PC, GUARDIANA responde esas preguntas y anota lo que ve: el nombre del servicio, la hora y qué dispositivo lo pidió. Nunca el contenido. Con Modo Hogar, también los teléfonos y la tele, sin instalarles nada.</p></div>
+  <div class="pasos"><div class="paso"><span class="num">1</span><h3>TUS DISPOSITIVOS</h3><p>PC, teléfonos, televisor, todo lo que use la Wi-Fi</p></div><div class="paso"><span class="num">2</span><h3>NOMBRE DEL SERVICIO</h3><p>Cada conexión empieza preguntando «¿dónde está este servicio?»</p></div><div class="paso"><span class="num">3</span><h3>CATEGORÍA Y SEÑAL</h3><p>Rastreador, publicidad, telemetría, esperado o desconocido, con una frase</p></div><div class="paso"><span class="num">4</span><h3>TU DECISIÓN</h3><p>Cortar o dejar pasar; nunca antes de 24 h; siempre con deshacer</p></div></div>
+</section>
 
-  try {
-    const manifestEl = document.querySelector('script[type="__bundler/manifest"]');
-    const templateEl = document.querySelector('script[type="__bundler/template"]');
-    if (!manifestEl || !templateEl) {
-      setStatus('Error: missing bundle data');
-      console.error('[bundler] Missing script tags — manifestEl:', !!manifestEl, 'templateEl:', !!templateEl);
-      return;
-    }
+<section id="hogar">
+  <div class="dos">
+    <div><span class="k">MODO HOGAR · EN 30 SEGUNDOS</span><h2>Los teléfonos también. Sin instalar nada en ellos.</h2><p>Enciende Modo Hogar en tu PC y cambia un ajuste en el router o en cada teléfono. Desde ese momento, GUARDIANA ve a qué servicios intenta hablar cada dispositivo de tu Wi‑Fi. Solo en tu casa. Sin app. Sin cuenta. Sin tienda.</p></div>
+    <div class="casa" aria-label="Así se ve en el panel · datos de ejemplo"><div class="dev"><span class="l">Este PC<small>guardián · responde por todos</small></span><span class="c">1.204 nombres hoy</span></div><div class="dev"><span class="l">iPhone de Ana<small>vía el router</small></span><span class="c">318 · 12 rastreo</span></div><div class="dev"><span class="l">Televisor del salón<small>vía el router</small></span><span class="c">92 · 41 publicidad</span></div><div class="dev"><span class="l">Altavoz de la cocina<small>vía el router</small></span><span class="c">27 · todo esperado</span></div><div class="nota-casa">Así se ve en el panel · datos de ejemplo</div></div>
+  </div>
+</section>
 
-    const __texto = async (el) => { const t = el.textContent.trim(); if (t) return t; const r = await fetch(el.dataset.src, { cache: 'force-cache' }); if (!r.ok) throw new Error('no se pudo cargar ' + el.dataset.src); return await r.text(); };
-    const [__m, __t] = await Promise.all([__texto(manifestEl), __texto(templateEl)]);
-    const manifest = JSON.parse(__m);
-    let template = JSON.parse(__t);
+<section id="casos">
+  <div class="cab-sec"><span class="k">CASOS REALES · EXPEDIENTES PÚBLICOS</span><h2>Quien prometía protegerte, vendía tus datos. Quien te vendía el dispositivo, te escuchaba.</h2><p>Resoluciones de reguladores, acuerdos judiciales y decisiones de gobiernos de varios países, con fecha y fuente. Por eso no te pedimos que confíes en nosotros: publicamos el código, la huella y la firma de cada versión. Cuando una empresa negó los hechos, lo decimos.</p></div>
+  <div class="casos"><div class="caso"><span class="k">Antivirus · 2024</span><span class="imp">16,5 M$</span><h3>Avast · vendía la navegación de quienes protegía</h3><p>La FTC concluyó que Avast, mientras prometía bloquear el rastreo, vendió a través de su filial Jumpshot datos de navegación detallados y reidentificables a más de 100 terceros entre 2014 y 2020. Tiene prohibido vender datos de navegación con fines publicitarios. Avast discrepa de la caracterización de los hechos.</p><span class="f">FTC · 22 FEB 2024</span><a href="https://www.ftc.gov/news-events/news/press-releases/2024/02/ftc-order-will-ban-avast-selling-browsing-data-advertising-purposes-require-it-pay-165-million-over" rel="noopener">Ver el expediente →</a></div><div class="caso"><span class="k">Apple · 2025</span><span class="imp">95 M$</span><h3>Siri · grabaciones sin «Oye Siri»</h3><p>Acuerdo aprobado judicialmente en Lopez v. Apple: los demandantes alegaban que Siri grababa conversaciones sin activación intencionada y que contratistas humanos las revisaban. Apple pagó sin reconocer irregularidades.</p><span class="f">TRIBUNAL FEDERAL N.D. CAL. · 2025</span><a href="https://www.courthousenews.com/judge-approves-95-million-apple-settlement-over-siri-privacy-case/" rel="noopener">Ver el expediente →</a></div><div class="caso"><span class="k">Seguridad · 2024</span><span class="imp">8,5 M</span><h3>CrowdStrike · una actualización defectuosa tumbó millones de PCs</h3><p>El 19 de julio de 2024 una actualización del software de seguridad CrowdStrike Falcon provocó pantallazos azules en unos 8,5 millones de dispositivos Windows, según Microsoft. Aeropuertos, hospitales y bancos quedaron parados. No fue un ataque: fue el propio guardián.</p><span class="f">MICROSOFT · 20 JUL 2024</span><a href="https://blogs.microsoft.com/blog/2024/07/20/helping-our-customers-through-the-crowdstrike-outage/" rel="noopener">Ver el expediente →</a></div></div>
+  <p class="casos-nota">Importes en la moneda de la resolución original. Un acuerdo o «settlement» no implica reconocimiento de culpa: Apple y Avast negaron las acusaciones. Los incluimos porque el patrón —promesa de privacidad, realidad distinta— es lo que GUARDIANA evita por diseño: nada sale de tu casa hacia nosotros. Los expedientes se muestran en español; cada enlace lleva al documento original.</p>
+</section>
 
-    // Nested page bundles (iframe targets). Each ships ONCE, in the ROOT
-    // document's manifest; frame srcs carry an about:blank#<uuid> marker
-    // instead of a substitutable uuid. Every document mints the blobs for
-    // its OWN frames — from local text at the root, or text obtained from
-    // its DIRECT parent over the relay protocol below — so each frame
-    // navigation stays same-origin with its initiator and a deduped page
-    // loads at any depth on any host, including a file:// download's
-    // opaque origins (where a blob minted by one document cannot be
-    // navigated to by another).
-    const pageOrderEl = document.querySelector('script[type="__bundler/page_order"]');
-    const pageOrder = pageOrderEl ? JSON.parse(pageOrderEl.textContent) : [];
-    const pageSet = new Set(pageOrder);
-    const pageTexts = {};
+<section id="instalar">
+  <div class="cab-sec"><span class="k">POR QUÉ PUEDES VER UN AVISO AL INSTALAR</span><h2>Windows avisa de lo que todavía no conoce, esté firmado o no. Por eso te enseñamos a comprobar el archivo.</h2><p>A cambio de esperar la firma tienes algo mejor que un sello: el código completo, la compilación reproducible y la huella pública de cada versión. La verificación la haces tú, o cualquiera en quien confíes.</p></div>
+  <div class="instalar">
+    <figure><img src="/aviso-instalacion.png" width="1200" height="720" alt="Captura real: Windows 11, 15 de septiembre de 2026, con este mismo archivo. Solo se ha tapado el nombre de usuario del equipo." loading="lazy"><figcaption>Captura real: Windows 11, 15 de septiembre de 2026, con este mismo archivo. Solo se ha tapado el nombre de usuario del equipo.</figcaption></figure>
+    <div class="texto"><p>Windows muestra un aviso azul a los instaladores que su sistema de reputación todavía no conoce. Sin certificado de editor sale seguro; con certificado también puede salir, porque desde 2024 esa reputación se gana con las descargas y no la regala ningún certificado, ni siquiera los caros. Hoy no lo firmamos, y te decimos por qué: un sello cuesta dinero y no quita el aviso, así que preferimos gastar ese esfuerzo en que el programa sea gratis y comprobable. No enseñamos a saltar avisos: enseñamos a comprobar. Cuando compruebas la huella y la firma del archivo, el aviso deja de importar, porque ya no dependes de que Windows te diga si puedes fiarte.</p><p>Sabemos que el aviso asusta y nos costará usuarios las primeras semanas. Lo asumimos antes que enseñar a nadie a saltarse avisos.</p><p>Y es también una decisión técnica: no interceptamos tu tráfico, no leemos contenido, no tenemos cuenta de usuario ni servidor que guarde tus datos. Menos superficie, menos que atacar.</p></div>
+  </div>
+  <h3 style="margin-top:44px;font-weight:600;font-size:18px">Tres pasos para comprobar el archivo antes de abrirlo</h3>
+  <div class="pasos3">
+    <div class="paso3"><h3>1 · Saca la huella del archivo que acabas de descargar</h3><p>En Windows, en PowerShell. En Linux, en la terminal. No hace falta instalar nada ni abrir el archivo.</p><code>Get-FileHash guardiana-1.0.0-windows-x86_64.exe -Algorithm SHA256</code><code>sha256sum guardiana-1.0.0-linux-x86_64</code></div>
+    <div class="paso3"><h3>2 · Compárala con la del registro público</h3><p>Cada versión se anota en un registro público (ledger.jsonl) antes de que exista la descarga, con su huella, el commit del que salió y la entrada en Rekor que prueba la fecha. Si las dos huellas no son idénticas, el archivo no es el nuestro: bórralo.</p></div>
+    <div class="paso3"><h3>3 · Comprueba la firma</h3><p>Cada archivo lleva su firma minisign al lado. La clave pública se publica en esta página y va dentro del propio programa; una vez instalado, «guardiana verify» repite los tres pasos solo.</p><code>minisign -Vm guardiana-1.0.0-linux-x86_64 -P &lt;clave pública&gt;</code></div>
+  </div>
+  <p class="aviso">Las huellas y la clave no están aquí todavía: se publican el 5 de octubre de 2026, con la versión 1.0.0 y antes que la descarga. Publicarlas antes sería enseñar un número que nadie puede comprobar.</p>
+  <p style="margin-top:18px"><a href="/instalar.html">La página de instalación, con todo el detalle →</a></p>
+</section>
 
-    // ── Nested-page text protocol (parent-chain relay) ──
-    // Page bundles ship once, in the ROOT document's manifest. Every
-    // document mints the blobs for its OWN frames, obtaining page text
-    // through a strict parent-chain relay: a document only ever SENDS to
-    // its direct parent (which, for every document the publisher's own
-    // runtime minted, is another publisher document) and only ACCEPTS
-    // text from that direct parent; requests from below are honored only
-    // for the document's own child frames, and the ROOT never sends
-    // upward at all. That last rule is load-bearing: the artifact host's
-    // frame-ancestors allows claude.ai (and friends) to frame an
-    // artifact, so window.top can be a FOREIGN document — a top-addressed
-    // protocol would hand page uuids to that ancestor and accept forged
-    // "page text" from it, minting attacker HTML as an artifact-origin
-    // blob document. The chain never touches the ancestor: requests stop
-    // at the root, replies are origin-addressed per hop (never '*' when
-    // an origin exists), and both directions are origin-gated (on https
-    // a foreign sender's origin can never equal this document's; in
-    // opaque contexts — file:// — everything serializes as 'null', where
-    // an embedded EXTERNAL frame still fails the gate by carrying its
-    // own real origin, and a sandboxed child of such a frame is excluded
-    // by the own-child-frames check plus uuid unguessability). Shape is
-    // deny-by-default: one request form, one reply form, no error
-    // replies.
-    // window.origin is the SERIALIZED SECURITY origin ('null' in opaque
-    // contexts such as a sandboxed preview iframe) — location.origin is
-    // computed from the URL and stays 'https://…' even when the document
-    // is sandboxed, which would misgate every opaque chain.
-    const OWN_TARGET = /^https?:[/][/]/.test(window.origin || '')
-      ? window.origin
-      : '*';
-    function trustedOrigin(e) {
-      if (e.origin === window.origin) return true; // https chains; opaque==opaque
-      // file:// trees: Chrome serializes the file document's origin as
-      // 'file://' while the blob: documents it mints serialize as 'null',
-      // so the two legitimate shapes can never string-match — accept the
-      // pair in both directions. https origins never serialize as either,
-      // and sender identity (own child frame / direct parent) is checked
-      // separately.
-      return (
-        (e.origin === 'null' &&
-          (window.origin === 'file://' ||
-            window.location.protocol === 'file:')) ||
-        (/^file:/.test(e.origin) && window.origin === 'null')
-      );
-    }
-    // Non-empty only in the root document (nested bundles ship an empty
-    // island), so it doubles as the root marker: the root answers from
-    // local text and treats a miss as authoritative — never relaying to
-    // its (possibly foreign) parent.
-    const isPageRoot = pageOrder.length > 0;
-    const blobUrls = {};
-    const resourceBlobs = {};
-    const UUID_SHAPE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
-    const pendingFrames = {}; // uuid -> [{el, frag}] awaiting text for own frames
-    const pendingRelays = {}; // uuid -> [childWindow] awaiting text to pass down
-    function mountPage(el, frag, text) {
-      const pageBlob = new Blob([text], { type: 'text/html' });
-      const u = URL.createObjectURL(pageBlob);
-      resourceBlobs[u] = pageBlob;
-      el.src = u + frag;
-    }
-    function deliverPage(uuid, text) {
-      const frames = pendingFrames[uuid];
-      delete pendingFrames[uuid];
-      if (frames) for (const f of frames) mountPage(f.el, f.frag, text);
-      const relays = pendingRelays[uuid];
-      delete pendingRelays[uuid];
-      if (relays) {
-        for (const cw of relays) {
-          try { cw.postMessage({ __bundler_page: uuid, __bundler_text: text }, OWN_TARGET); } catch (err) { /* gone */ }
-        }
-      }
-    }
-    function ownFrameWindows() {
-      const out = [];
-      for (const f of Array.from(document.querySelectorAll('iframe'))) {
-        try { if (f.contentWindow) out.push(f.contentWindow); } catch (err) { /* detached */ }
-      }
-      return out;
-    }
-    window.addEventListener('message', function (e) {
-      const d = e.data;
-      if (!d || typeof d !== 'object' || !e.source) return;
-      // Origin gate first; the structural checks below (own-child-frames
-      // for requests, direct-parent + solicited-uuid for replies, the
-      // root's never-relay rule) are what hold in fully opaque chains
-      // where origin strings can't discriminate — a sandboxed root's
-      // FOREIGN wrapper still fails all three even though both serialize
-      // as real-vs-'null' rather than matching.
-      if (!trustedOrigin(e)) return;
-      if (typeof d.__bundler_need === 'string' && UUID_SHAPE.test(d.__bundler_need)) {
-        // Requests are honored only for this document's own child frames.
-        if (ownFrameWindows().indexOf(e.source) < 0) return;
-        const uuid = d.__bundler_need;
-        const text = pageTexts[uuid];
-        if (typeof text === 'string') {
-          try { e.source.postMessage({ __bundler_page: uuid, __bundler_text: text }, OWN_TARGET); } catch (err) { /* gone */ }
-          return;
-        }
-        if (isPageRoot || window.parent === window) return; // authoritative miss
-        const waiting = pendingRelays[uuid];
-        if (waiting) {
-          if (waiting.indexOf(e.source) < 0) waiting.push(e.source);
-          return;
-        }
-        // Never-answered uuids would otherwise accumulate forever under a
-        // request spray; past the cap (far above any real page count) new
-        // relays are dropped rather than remembered.
-        if (Object.keys(pendingRelays).length >= 128) return;
-        pendingRelays[uuid] = [e.source];
-        window.parent.postMessage({ __bundler_need: uuid }, OWN_TARGET);
-      } else if (
-        typeof d.__bundler_page === 'string' &&
-        UUID_SHAPE.test(d.__bundler_page) &&
-        typeof d.__bundler_text === 'string'
-      ) {
-        // The shape test is load-bearing beyond tidiness: the solicited
-        // check below uses the in operator, which matches prototype keys
-        // ('__proto__', 'constructor') — an unshaped key would reach
-        // deliverPage and throw, painting the error banner.
-        // Text is accepted only from the direct parent — the document
-        // that minted this one.
-        if (e.source !== window.parent || window.parent === window) return;
-        if (!(d.__bundler_page in pendingFrames) && !(d.__bundler_page in pendingRelays)) return;
-        deliverPage(d.__bundler_page, d.__bundler_text);
-      }
-    });
+<section id="quienes">
+  <div class="cab-sec"><span class="k">QUIÉNES SOMOS</span><h2>No te pedimos que confíes en nosotros. Te damos las herramientas para comprobarlo.</h2><p>GUARDIANA nace en 2026 en Cartagena de Indias con una pregunta incómoda: ¿por qué confiaría alguien en un programa nuevo para ponerlo en medio de su casa? Nuestra respuesta es no pedir confianza. Estos son los compromisos que asumimos por diseño y que cualquiera puede comprobar.</p></div>
+  <div class="quienes">
+    <div class="tarjeta"><span class="k">QUIÉN RESPONDE</span><h3>Francisco Salvatierra Sánchez</h3><p>Fundador y único desarrollador. Cartagena de Indias, Colombia. El mismo nombre que figura en la privacidad y en los términos: si algo falla, no hay departamento detrás del que esconderse.</p></div>
+    <div class="tarjeta"><span class="k">Dónde está el código</span><p>El programa entero está en github.com/guardianagroup/guardiana, con licencia GPL-3.0: se puede leer, compilar y comprobar que lo que instalas es lo que está publicado. Esta misma web está al lado, en el mismo sitio. Una cuenta personal, sin empresa detrás, para que no haya dudas de quién publica qué.</p><p><a href="https://github.com/guardianagroup/guardiana">github.com/guardianagroup/guardiana</a></p></div>
+    <div class="tarjeta"><span class="k">Si encuentras un fallo de seguridad</span><p>Escribe a hola@guardianagroup.com y contesto yo. Qué prometo y en cuánto tiempo, en /.well-known/security.txt. No hay recompensa en dinero; sí crédito público en el registro de la versión que lo corrija, si quieres.</p><p><a href="/.well-known/security.txt">/.well-known/security.txt</a></p></div>
+  </div>
+  <h3 style="margin-top:44px;font-weight:600;font-size:18px">Compromisos que asumimos por diseño</h3>
+  <div class="compromisos"><div><span class="k">01 / CÓDIGO ABIERTO</span><b>Todo el cliente se puede leer</b><p>No hay caja negra. Cada línea que corre en tu máquina será pública desde el primer día.</p></div><div><span class="k">02 / BUILDS REPRODUCIBLES</span><b>El binario es el código</b><p>Cualquiera podrá compilar y obtener el mismo hash que el instalador que descargas. Así verificas sin sello de nadie.</p></div><div><span class="k">03 / REGISTRO PÚBLICO</span><b>Publicado antes que la descarga</b><p>La huella y la firma de cada versión van al registro público (y a Rekor) antes de que el archivo se pueda bajar. Nada se borra, ni por nosotros.</p></div><div><span class="k">04 / SIN CONTENIDO</span><b>Nunca leemos tu tráfico</b><p>Vemos nombres de servicios, hora y dispositivo. Ni contenido, ni cuántos datos, ni qué app lo pidió en un teléfono. Lo decimos en cada pantalla.</p></div><div><span class="k">05 / SIN SERVIDOR</span><b>Superficie mínima</b><p>Sin cuenta de usuario, sin telemetría, sin servidor con tus datos. Lo que no existe no se puede filtrar.</p></div></div>
+</section>
 
-    const uuids = Object.keys(manifest);
-    setStatus('Unpacking ' + uuids.length + ' assets...');
+<section id="planes">
+  <div class="cab-sec"><span class="k">PLANES</span><h2>Gratis y abierto, el guardián completo. Plus: 7 días gratis, luego al mes o al año.</h2><p>Sin publicidad, sin venta de datos, sin inversores que pidan lo contrario. El guardián completo es gratis y de código abierto: tu PC y toda la casa. Es lo que nos hace crecer y no se toca. Lo que se paga es la capa humana: listas al día de a quién habla cada aparato, explicadas en lenguaje claro; el informe semanal de la casa; varias casas; soporte prioritario. Plus se prueba 7 días gratis y después se paga al mes o al año (el año, un 20 % menos); se cancela cuando quieras y se abre el 5 de octubre. Cada país ve el precio de su zona; la versión gratis es igual para todos. Sin cuenta: la licencia se activa con una sola conexión, o con un archivo firmado si no quieres ni esa.</p></div>
+  <div class="planes">
+    <div class="plan"><h3>Gratis</h3><span class="precio"><b>Gratis</b><br>PARA SIEMPRE · CÓDIGO ABIERTO</span><ul><li><span>El guardián completo: tu PC y toda la casa</span></li><li><span>Modo Hogar: teléfonos, tele y todo lo que use la Wi-Fi, sin instalarles nada</span></li><li><span>Radiografía y extracto encadenado</span></li><li><span>Cortar con deshacer, tras 24 h observando</span></li><li><span>Comprobación de la instalación (guardiana verify)</span></li></ul><a class="btn s" href="https://guardiana.beehiiv.com/subscribe">Avísame el 5 de octubre</a></div>
+    <div class="plan plus"><h3>Plus</h3><span class="precio"><b id="plus-precio">Suscripción</b><br><span id="plus-nota">7 DÍAS GRATIS · LUEGO AL MES O AL AÑO (−20 %) · CADA PAÍS VE SU PRECIO</span></span><ul><li><span>La capa humana sobre el guardián gratis</span></li><li><span>Listas al día de a quién habla cada aparato, explicadas en lenguaje claro</span></li><li><span>Informe semanal de la casa</span></li><li><span>Varias casas</span></li><li><span>Soporte prioritario</span></li><li><span>Activación con una sola conexión, o con archivo firmado</span></li><li><span>La 2.0 («qué app») incluida</span></li><li><span>Cancela cuando quieras</span></li></ul><a class="btn p" href="https://guardiana.beehiiv.com/subscribe">Probar Plus sin tarjeta</a></div>
+  </div>
+</section>
 
-    await Promise.all(uuids.map(async (uuid) => {
-      const entry = manifest[uuid];
-      try {
-        const binaryStr = atob(entry.data);
-        const bytes = new Uint8Array(binaryStr.length);
-        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+<section id="activar" style="border-top:0;padding-top:0">
+  <div class="activar">
+    <div><span class="k">LANZAMIENTO · 5 DE OCTUBRE DE 2026</span><h2>Tu casa, vigilada desde tu PC.</h2><p>Windows y Linux. El guardián completo, gratis: tu PC y toda la casa. Plus, la capa humana, con 7 días gratis y suscripción mensual o anual. Sin tarjeta. Sin cuenta. Sin pedirte que confíes: puedes comprobarlo todo.</p></div>
+    <div class="der"><a class="btn p" href="https://guardiana.beehiiv.com/subscribe">AVÍSAME EL 5 DE OCTUBRE</a><span class="k">Se abre la página de la lista: escribes el correo y pulsas Regístrate. La página no dice nada más, pero en un minuto te llega un correo para confirmarlo; sin confirmar no te escribimos. El 5 de octubre te llega el aviso, y la baja está en cada correo.</span></div>
+  </div>
+</section>
 
-        let finalBytes = bytes;
-        if (entry.compressed) {
-          if (typeof DecompressionStream !== 'undefined') {
-            const ds = new DecompressionStream('gzip');
-            const writer = ds.writable.getWriter();
-            const reader = ds.readable.getReader();
-            writer.write(bytes);
-            writer.close();
-            const chunks = [];
-            let totalLen = 0;
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) break;
-              chunks.push(value);
-              totalLen += value.length;
-            }
-            finalBytes = new Uint8Array(totalLen);
-            let offset = 0;
-            for (const chunk of chunks) { finalBytes.set(chunk, offset); offset += chunk.length; }
-          } else {
-            console.warn('DecompressionStream not available, asset ' + uuid + ' may not render');
-          }
-        }
+<section id="radiografias">
+  <div class="cab-sec"><span class="k">RADIOGRAFÍAS</span><h2>Qué sale de tu PC, medido.</h2><p>Cada radiografía es una prueba con fecha y método: un navegador o una web, dos minutos, y la lista completa de nombres que salieron del equipo según GUARDIANA. Nombres, no contenido. Datos para descargar y método para repetirlo.</p></div>
+  <div class="rx"><a href="/radiografias/seis-periodicos-colombianos-2026-09-14.html"><span class="k">2026-09-14</span><b>Seis periódicos colombianos: cuánto rastreo carga cada portada</b><span>El Tiempo, Portafolio, El Colombiano, El Espectador, El Heraldo y Semana, abiertos uno a uno en Chrome recién instalado, 20 segundos cada uno, con GUA…</span></a><a href="/radiografias/brave-frente-a-chrome-2026-09-14.html"><span class="k">2026-09-14</span><b>Brave frente a Chrome: lo que salió del PC en cuatro webs</b><span>En dos minutos por El Tiempo, El Heraldo, YouTube y Mercado Libre salieron 151 nombres de publicidad y rastreo con Brave y 211 con Chrome; 145 saliero…</span></a><a href="/radiografias/cinco-navegadores-2026-09-14.html"><span class="k">2026-09-14</span><b>Cinco navegadores, cuatro webs: cuánto rastreo dejó salir cada uno</b><span>Chrome, Brave, Firefox, Safari y DuckDuckGo en un Mac con su DNS pasando por GUARDIANA: las mismas cuatro webs, dos minutos, perfiles recién creados y…</span></a><a href="/radiografias/recibo-de-agente.html"><span class="k">RECIBO DE AGENTE</span><b>Ver el recibo del agente</b><span>El primer recibo de un agente de IA de verdad se publica antes del 30 de septiembre de 2026, con el protocolo ya fijado: equipo limpio, reposo, una so…</span></a></div>
+  <p style="margin-top:18px"><a href="/radiografias/">Todas las radiografías →</a></p>
+</section>
 
-        if (pageSet.has(uuid)) {
-          pageTexts[uuid] = new TextDecoder().decode(finalBytes);
-          return;
-        }
-        if (FONT_MIME.test(entry.mime) && MIME_TOKEN.test(entry.mime)) {
-          // Strict artifact hosts allow font-src data: but not blob:.
-          blobUrls[uuid] = 'data:' + entry.mime + ';base64,' +
-            (entry.compressed ? toBase64(finalBytes) : entry.data);
-        } else {
-          const blob = new Blob([finalBytes], { type: entry.mime });
-          blobUrls[uuid] = URL.createObjectURL(blob);
-          resourceBlobs[blobUrls[uuid]] = blob;
-        }
-      } catch (err) {
-        console.error('Failed to decode asset ' + uuid + ':', err);
-        const blob = new Blob([], { type: entry.mime });
-        blobUrls[uuid] = URL.createObjectURL(blob);
-        resourceBlobs[blobUrls[uuid]] = blob;
-      }
-    }));
+<section id="faq">
+  <div class="cab-sec"><span class="k">PREGUNTAS FRECUENTES</span><h2>Lo que nos preguntan por correo.</h2><p></p></div>
+  <div class="faq"><div><b>¿Sustituye a mi antivirus?</b><p>No. Tu antivirus vigila los archivos de un PC; GUARDIANA vigila a quién habla cada aparato de tu Wi-Fi. Se complementan. Windows Defender viene gratis y es bueno: déjalo puesto.</p></div><div><b>¿Necesito saber de redes?</b><p>No. Instalas GUARDIANA en tu PC y, si quieres cuidar los teléfonos y la tele, sigues una guía de dos minutos para tu router (Claro, Movistar, Tigo, ETB…) o para cada aparato. El panel lo explica todo en una frase.</p></div><div><b>¿Qué pasa si apago el PC?</b><p>Tu PC sigue navegando con normalidad, porque conserva su DNS de siempre como respaldo. Los aparatos que apuntaste al PC usan el DNS de respaldo que dejaste en el router: nada se rompe, solo dejan de vigilarse mientras el PC está apagado, y al encenderlo GUARDIANA te dice cuánto tiempo estuvo sin mirar.</p></div><div><b>¿Por qué es gratis?</b><p>Porque el guardián completo es lo que nos hace crecer y no se toca: código abierto, sin cuenta y sin servidor nuestro. Lo que cobramos es la capa humana: listas al día explicadas en lenguaje claro, informe semanal, varias casas y soporte prioritario (Plus, con 7 días gratis). Sin publicidad y sin vender datos.</p></div><div><b>¿Cómo lo hace? ¿Es DNS, un proxy o un driver?</b><p>DNS. Casi todo lo que sale a internet empieza preguntando «¿dónde está este servicio?», y GUARDIANA es quien responde esa pregunta en tu PC (y en tu casa, con Modo Hogar). No es un proxy ni un driver: no se pone en medio del tráfico y nunca abre lo que mandas ni lo que recibes; solo ve el nombre que se pidió, la hora y qué aparato lo pidió.</p></div><div><b>¿Y lo que sale por VPN, por DNS cifrado o a una IP fija?</b><p>No lo ve, y lo dice. Una VPN, una app con su propio DNS cifrado (DoH/DoT), iCloud Private Relay o un programa que use una IP fija se saltan la pregunta del nombre. Cuando GUARDIANA detecta que un aparato intenta ese camino, lo anota como señal («evasión de DNS») para que sepas que hay tráfico que no está mirando. La lista completa de lo que no hace está publicada junto al código.</p></div></div>
+</section>
 
-    const extResEl = document.querySelector('script[type="__bundler/ext_resources"]');
-    const extResources = extResEl ? JSON.parse(extResEl.textContent) : [];
-    const resourceMap = {};
-    for (const entry of extResources) {
-      if (blobUrls[entry.uuid]) resourceMap[entry.id] = blobUrls[entry.uuid];
-    }
+<section id="fuentes">
+  <div class="cab-sec"><span class="k">FUENTES</span><h2 style="font-size:22px">Fuentes</h2><p>Todo dato de esta web que no sea una lectura de tu propio navegador o una maqueta marcada como tal procede de una de estas fuentes. Consultadas en septiembre de 2026.</p></div>
+  <details><summary>Ver las 44 fuentes</summary><ol><li><a href="https://www.theverge.com/2024/8/16/24222112/data-breach-national-public-data-2-9-billion-ssn" rel="noopener">The Verge — National Public Data reconoce la brecha de 2.900 M de registros (16 ago 2024)</a></li><li><a href="https://citizenlab.ca/2022/04/catalangate-extensive-mercenary-spyware-operation-against-catalans-using-pegasus-candiru/" rel="noopener">Citizen Lab — CatalanGate: Pegasus y Candiru contra 65 personas en España (18 abr 2022)</a></li><li><a href="https://www.cisa.gov/news-events/news/joint-statement-fbi-and-cisa-prc-activity-targeting-telecommunications" rel="noopener">FBI + CISA — Declaración conjunta sobre la intrusión china en operadoras de EE. UU. (13 nov 2024)</a></li><li><a href="https://www.reuters.com/technology/google-destroy-browsing-data-settle-consumer-privacy-lawsuit-2024-04-01/" rel="noopener">Reuters — Google destruirá datos de navegación en incógnito para cerrar la demanda (1 abr 2024)</a></li><li><a href="https://www.geekwire.com/2022/t-mobile-reaches-350m-settlement-in-2021-cyberattack-and-data-breach-impacting-more-than-76m-people/" rel="noopener">GeekWire — T-Mobile: acuerdo de 350 M$ por la brecha de 76 M de personas (22 jul 2022)</a></li><li><a href="https://journals.sagepub.com/doi/10.1177/20438869241258235" rel="noopener">Journal of IT Teaching Cases — El caso Vastaamo (2024)</a></li><li><a href="https://www.oaic.gov.au/news/media-centre/oaic-takes-civil-penalty-action-against-medibank" rel="noopener">OAIC — Acción sancionadora contra Medibank por 9,7 M de australianos (5 jun 2024)</a></li><li><a href="https://www.eldiario.es/tecnologia/agencia-proteccion-datos-liga-microfono_1_1510607.html" rel="noopener">elDiario.es — La AEPD multa a LaLiga con 250.000 € por el micrófono de su app (11 jun 2019)</a></li><li><a href="https://www.incibe.es/en/incibe-cert/publications/cybersecurity-highlights/aepd-fines-vodafone" rel="noopener">INCIBE — La AEPD multa a Vodafone con 8,15 M€ (mar 2021)</a></li><li><a href="https://www.nytimes.com/2019/12/22/us/politics/totok-app-uae.html" rel="noopener">The New York Times — ToTok, la app de mensajería usada como herramienta de espionaje (22 dic 2019)</a></li><li><a href="https://security.googleblog.com/2015/03/maintaining-digital-certificate-security.html" rel="noopener">Google Security Blog — Certificados no autorizados de CNNIC/MCS Holdings (23 mar 2015)</a></li><li><a href="https://www.apple.com/newsroom/2021/11/apple-sues-nso-group-to-curb-the-abuse-of-state-sponsored-spyware/" rel="noopener">Apple Newsroom — Apple demanda a NSO Group (23 nov 2021)</a></li><li><a href="https://www.ftc.gov/news-events/news/press-releases/2019/09/google-youtube-will-pay-record-170-million-alleged-violations-childrens-privacy-law" rel="noopener">FTC — Google y YouTube pagarán 170 M$ por la privacidad de menores (4 sep 2019)</a></li><li><a href="https://www.dataprotection.ie/en/news-media/press-releases/data-protection-commission-announces-decision-whatsapp-inquiry" rel="noopener">DPC Irlanda — Decisión sobre WhatsApp: 225 M€ (2 sep 2021)</a></li><li><a href="https://www.autoriteitpersoonsgegevens.nl/en/current/dutch-dpa-imposes-a-fine-of-290-million-euro-on-uber-because-of-transfers-of-drivers-data-to-the-us" rel="noopener">Autoriteit Persoonsgegevens — 290 M€ a Uber por transferencias de datos de conductores (26 ago 2024)</a></li><li><a href="https://www.occ.gov/news-issuances/news-releases/2020/nr-occ-2020-101.html" rel="noopener">OCC — 80 M$ a Capital One por la brecha de 2019 (6 ago 2020)</a></li><li><a href="https://www.ftc.gov/news-events/news/press-releases/2024/02/ftc-order-will-ban-avast-selling-browsing-data-advertising-purposes-require-it-pay-165-million-over" rel="noopener">FTC — Avast: prohibición de vender datos de navegación y 16,5 M$ (22 feb 2024)</a></li><li><a href="https://www.techradar.com/pro/security/ftc-bans-avast-from-selling-user-data-to-ad-agencies-antivirus-giant-hit-with-major-fine" rel="noopener">TechRadar — 8 PB de datos acumulados por Jumpshot (2024)</a></li><li><a href="https://natlawreview.com/article/commerce-issues-first-final-determination-under-icts-supply-chain-rules-banning" rel="noopener">Dpto. de Comercio de EE. UU. — Determinación final contra Kaspersky (20 jun 2024), vía National Law Review</a></li><li><a href="https://blogs.microsoft.com/blog/2024/07/20/helping-our-customers-through-the-crowdstrike-outage/" rel="noopener">Microsoft — Incidente CrowdStrike: 8,5 M de dispositivos (20 jul 2024)</a></li><li><a href="https://www.commerce.gov/news/press-releases/2021/11/commerce-adds-nso-group-and-other-foreign-companies-entity-list" rel="noopener">Dpto. de Comercio de EE. UU. — NSO Group añadido a la Entity List (3 nov 2021)</a></li><li><a href="https://www.theguardian.com/world/2013/jun/06/us-tech-giants-nsa-data" rel="noopener">The Guardian — PRISM (6 jun 2013)</a></li><li><a href="https://www.hunton.com/privacy-and-cybersecurity-law-blog/irish-regulator-fines-meta-1-2-billion-euros-and-orders-it-to-cease-data-transfers-to-the-u-s" rel="noopener">DPC Irlanda — 1.200 M€ a Meta (22 may 2023), vía Hunton</a></li><li><a href="https://www.dataprotection.ie/en/news-media/data-protection-commission-announces-conclusion-two-inquiries-meta-ireland" rel="noopener">DPC Irlanda — 390 M€ a Meta por publicidad personalizada (4 ene 2023)</a></li><li><a href="https://www.ftc.gov/news-events/news/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions-facebook" rel="noopener">FTC — 5.000 M$ a Facebook (24 jul 2019)</a></li><li><a href="https://www.njoag.gov/forty-attorneys-general-announce-historic-settlement-with-google-over-location-tracking-practices/" rel="noopener">Fiscalía General de Nueva Jersey — 391,5 M$ de Google por rastreo de ubicación (14 nov 2022)</a></li><li><a href="https://www.cnil.fr/en/cnils-restricted-committee-imposes-financial-penalty-50-million-euros-against-google-llc" rel="noopener">CNIL — 50 M€ a Google (21 ene 2019)</a></li><li><a href="https://ec.europa.eu/commission/presscorner/detail/en/IP_18_4581" rel="noopener">Comisión Europea — 4.340 M€ a Google por Android (18 jul 2018)</a></li><li><a href="https://www.courthousenews.com/judge-approves-95-million-apple-settlement-over-siri-privacy-case/" rel="noopener">Courthouse News — Aprobación del acuerdo de 95 M$ en Lopez v. Apple (2025)</a></li><li><a href="https://ec.europa.eu/commission/presscorner/detail/en/ip_24_1161" rel="noopener">Comisión Europea — 1.800 M€ a Apple por música en streaming (4 mar 2024)</a></li><li><a href="https://www.ftc.gov/news-events/news/press-releases/2023/05/ftc-says-ring-employees-illegally-surveilled-customers-failed-stop-hackers-taking-control-users" rel="noopener">FTC — Ring 5,8 M$ y Alexa 25 M$ (31 may 2023)</a></li><li><a href="https://www.bdo.co.uk/en-gb/insights/advisory/risk-and-advisory-services/irish-data-protection-commissioner-imposes-a-1-2-billion-fine-on-meta-ireland" rel="noopener">BDO — Contexto: 746 M€ a Amazon (2021)</a></li><li><a href="https://www.dataprotection.ie/en/news-media/press-releases/irish-data-protection-commission-fines-linkedin-ireland-eu310-million" rel="noopener">DPC Irlanda — 310 M€ a LinkedIn (24 oct 2024)</a></li><li><a href="https://www.dataprotection.ie/en/news-media/press-releases/DPC-announces-345-million-euro-fine-of-TikTok" rel="noopener">DPC Irlanda — 345 M€ a TikTok (15 sep 2023)</a></li><li><a href="https://www.ftc.gov/news-events/news/press-releases/2022/05/ftc-charges-twitter-deceptively-using-account-security-data-sell-targeted-ads" rel="noopener">FTC — 150 M$ a Twitter (25 may 2022)</a></li><li><a href="https://www.ftc.gov/news-events/news/press-releases/2022/12/fortnite-video-game-maker-epic-games-pay-more-half-billion-dollars-over-ftc-allegations" rel="noopener">FTC — 520 M$ a Epic Games (19 dic 2022)</a></li><li><a href="https://www.autoriteitpersoonsgegevens.nl/en/current/dutch-dpa-imposes-a-fine-on-clearview-because-of-illegal-data-collection-for-facial-recognition" rel="noopener">Autoriteit Persoonsgegevens — 30,5 M€ a Clearview AI (3 sep 2024)</a></li><li><a href="https://www.ftc.gov/enforcement/refunds/equifax-data-breach-settlement" rel="noopener">FTC — Acuerdo Equifax (22 jul 2019)</a></li><li><a href="https://www.ftc.gov/news-events/news/press-releases/2018/04/uber-agrees-expanded-settlement-ftc-related-privacy-security-claims" rel="noopener">FTC — Acuerdo ampliado con Uber (12 abr 2018)</a></li><li><a href="https://www.sec.gov/news/press-release/2018-71" rel="noopener">SEC — 35 M$ a Altaba/Yahoo (24 abr 2018)</a></li><li><a href="https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/2020/10/ico-fines-marriott-international-inc-184million-for-failing-to-keep-customers-personal-data-secure/" rel="noopener">ICO — 18,4 M£ a Marriott (30 oct 2020)</a></li><li><a href="https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/2020/10/ico-fines-british-airways-20m-for-data-breach-affecting-more-than-400-000-customers/" rel="noopener">ICO — 20 M£ a British Airways (16 oct 2020)</a></li><li><a href="https://www.ibm.com/reports/data-breach" rel="noopener">IBM — Cost of a Data Breach Report 2025</a></li><li><a href="https://www.helpnetsecurity.com/2025/08/04/ibm-cost-data-breach-report-2025/" rel="noopener">Help Net Security — Resumen del informe IBM 2025</a></li></ol></details>
+</section>
 
-    // Artifact-host CSP (connect-src 'self') refuses fetch() of blob: URLs —
-    // consumers read these Blobs directly. Survives the swap like the error sink.
-    window.__resourceBlobs = resourceBlobs;
+<footer>
+  <div class="links"><a href="/">Inicio</a><a href="/guias/">Guías</a><a href="/radiografias/">Radiografías</a><a href="/instalar.html">Instalar</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="https://github.com/guardianagroup/guardiana">Código fuente</a><a href="/.well-known/security.txt">security.txt</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div>
+  <div>GUARDIANA · guardianagroup.com · Cartagena de Indias, Colombia · Esta página no usa cookies ni analíticas.</div>
+</footer>
+</div>
+<script>
+(function(){
+  // Lo que cualquier web puede leer de este navegador sin pedir permiso. Se lee aquí y no sale de aquí.
+  var L=["NAVEGADOR", "GPU", "HUELLA CANVAS", "IDIOMAS", "ZONA HORARIA", "HORA LOCAL", "PANTALLA", "VENTANA", "CPU", "RAM", "BATERÍA", "CONEXIÓN", "PERMISOS", "REFERENTE", "VISITAS"], NA="no expuesto", FP="identifica tu equipo", NU="núcleos", DI="ninguno (acceso directo)", PR="primera vez aquí", CA="cargando", LE="datos leídos", PE="permisos pedidos";
+  var n=navigator, s=screen, ua=n.userAgent||'';
+  var nav=/Edg/.test(ua)?'Edge':/CriOS|Chrome/.test(ua)?'Chrome':/Firefox/.test(ua)?'Firefox':/Safari/.test(ua)?'Safari':'—';
+  var so=/iPhone|iPad/.test(ua)?'iOS / iPadOS':/Mac/.test(ua)?'macOS':/Windows/.test(ua)?'Windows':/Android/.test(ua)?'Android':/Linux/.test(ua)?'Linux':'—';
+  var gpu=NA; try{var c=document.createElement('canvas');var gl=c.getContext('webgl');var d=gl&&gl.getExtension('WEBGL_debug_renderer_info');if(d)gpu=gl.getParameter(d.UNMASKED_RENDERER_WEBGL);}catch(e){}
+  gpu=String(gpu).replace(/^ANGLE \((.*)\)$/,'$1'); var gp=gpu.split(','); gpu=(gp[1]||gp[0]||'').replace(/Metal Renderer:|Direct3D11.*$|OpenGL Engine|\(.*$/g,'').trim().slice(0,40)||NA;
+  var hu='—'; try{var c2=document.createElement('canvas');c2.width=200;c2.height=40;var x=c2.getContext('2d');x.textBaseline='top';x.font='14px Arial';x.fillStyle='#f60';x.fillRect(10,5,60,20);x.fillStyle='#069';x.fillText('GUARDIANA 2050',2,15);var str=c2.toDataURL();var h=0;for(var i=0;i<str.length;i++)h=(h*31+str.charCodeAt(i))|0;hu=(h>>>0).toString(16);while(hu.length<8)hu='0'+hu;}catch(e){}
+  var vis=1; try{vis=(parseInt(localStorage.getItem('guardiana_visits')||'0',10)||0)+1;localStorage.setItem('guardiana_visits',String(vis));}catch(e){}
+  var tz='—'; try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'—';}catch(e){}
+  var con=(n.connection&&n.connection.effectiveType)?n.connection.effectiveType+(n.connection.rtt?' · '+n.connection.rtt+' ms':''):NA;
+  var rows=[[L[0],nav+' · '+so],[L[1],gpu,1],[L[2],hu+' · '+FP,1],[L[3],(n.languages||[n.language]).join(', ')],[L[4],tz],[L[5],new Date().toLocaleString()],
+    [L[6],s.width+'×'+s.height+' · ×'+(Math.round((devicePixelRatio||1)*100)/100)],[L[7],innerWidth+'×'+innerHeight],[L[8],n.hardwareConcurrency?n.hardwareConcurrency+' '+NU:NA],[L[9],n.deviceMemory?'≈ '+n.deviceMemory+' GB':NA],
+    [L[10],NA],[L[11],con],[L[12],'…'],[L[13],document.referrer?new URL(document.referrer).host:DI,1],[L[14],vis===1?PR:String(vis),1]];
+  var el=document.getElementById('tk-filas'); if(!el)return;
+  function pinta(){el.innerHTML=rows.map(function(r){return '<div class="fila"><span class="t">'+r[0]+'</span><span class="v'+(r[2]?' a':'')+'">'+String(r[1]).replace(/</g,'&lt;')+'</span></div>';}).join('');
+    var c3=document.getElementById('tk-cuenta'); if(c3)c3.textContent=rows.length+' '+LE+' · 0 '+PE;}
+  pinta();
+  try{if(n.getBattery)n.getBattery().then(function(b){rows[10][1]=Math.round(b.level*100)+' %'+(b.charging?' · '+CA:'');pinta();});}catch(e){}
+  try{if(n.permissions){var ps=['camera','microphone','geolocation','notifications'],out=[],k=0;ps.forEach(function(p){n.permissions.query({name:p}).then(function(r){out.push(p+':'+r.state);}).catch(function(){}).finally(function(){if(++k===ps.length){rows[12][1]=out.length?out.join(' · '):NA;pinta();}});});}else{rows[12][1]=NA;pinta();}}catch(e){rows[12][1]=NA;pinta();}
+})();
 
-    setStatus('Rendering...');
-    // Page uuids have no blob here — they ride inside about:blank#<uuid>
-    // frame markers the pass below resolves after the swap.
-    for (const uuid of uuids) {
-      if (pageSet.has(uuid)) continue;
-      template = template.split(uuid).join(blobUrls[uuid]);
-    }
-
-    // Strip integrity + crossorigin — blob URLs from a file:// document inherit
-    // a null origin, so crossorigin forces a CORS fetch that SRI then rejects.
-    // The manifest bytes are ours; SRI protects against CDN compromise, not this.
-    template = template.replace(/\s+integrity="[^"]*"/gi, '').replace(/\s+crossorigin="[^"]*"/gi, '');
-
-    const resourceScript = '<script>window.__resources = ' +
-      JSON.stringify(resourceMap).replace(/<\//g, '<\\/') +
-      ';</' + 'script>';
-    // Inject after <head> so the DOCTYPE stays first; prepending the script
-    // would push the parser into quirks mode. DOMParser always emits a <head>
-    // (synthesizing one if the source HTML omitted it) but may carry
-    // attributes through, so match the full opening tag. slice() rather than
-    // replace() keeps us clear of $-pattern substitution in resourceScript.
-    const headOpen = template.match(/<head[^>]*>/i);
-    if (headOpen) {
-      const i = headOpen.index + headOpen[0].length;
-      template = template.slice(0, i) + resourceScript + template.slice(i);
-    }
-
-    // Parse the template and swap the root element. Scripts inserted via
-    // DOMParser/replaceWith are inert per spec — re-create each with
-    // createElement so they execute, awaiting onload for src scripts to
-    // preserve ordering (React before ReactDOM before Babel before text/babel).
-    const doc = new DOMParser().parseFromString(template, 'text/html');
-    document.documentElement.replaceWith(doc.documentElement);
-
-    // Resolve page-frame markers: mint this document's own blob for each
-    // framed page — from local text when this is the root, otherwise by
-    // asking the direct parent over the relay protocol above. An
-    // unanswered request leaves the frame on about:blank, the same
-    // degraded state as a refused embed.
-    {
-      const MARKER = /^about:blank#([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(#.*)?$/;
-      const needed = [];
-      for (const el of Array.from(document.querySelectorAll('iframe'))) {
-        const m = MARKER.exec(el.getAttribute('src') || '');
-        if (!m) continue;
-        const text = pageTexts[m[1]];
-        if (typeof text === 'string') {
-          mountPage(el, m[2] || '', text);
-        } else if (window.parent !== window && !isPageRoot) {
-          const had = pendingFrames[m[1]];
-          (pendingFrames[m[1]] = had || []).push({ el: el, frag: m[2] || '' });
-          if (!had) needed.push(m[1]);
-        }
-      }
-      for (const uuid of needed) {
-        window.parent.postMessage({ __bundler_need: uuid }, OWN_TARGET);
-      }
-    }
-
-    const dead = Array.from(document.scripts);
-    for (const old of dead) {
-      const s = document.createElement('script');
-      for (const a of old.attributes) s.setAttribute(a.name, a.value);
-      s.textContent = old.textContent;
-      // text/babel scripts with a src: read and inline. transformScriptTags
-      // does XHR against the src, but blob:null/ from a file:// origin is
-      // silently dropped. Inlining makes it a plain inline babel script,
-      // which transformScriptTags handles unconditionally.
-      if ((s.type === 'text/babel' || s.type === 'text/jsx') && s.src) {
-        const pre = resourceBlobs[s.src.split('#')[0]];
-        s.textContent = pre ? await pre.text() : await (await fetch(s.src)).text();
-        s.removeAttribute('src');
-      }
-      const p = s.src ? new Promise(function(r) { s.onload = s.onerror = r; }) : null;
-      old.replaceWith(s);
-      if (p) await p;
-    }
-    // Babel standalone auto-transforms type=text/babel on DOMContentLoaded,
-    // which fired before we swapped the document. Trigger manually if present.
-    if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
-      window.Babel.transformScriptTags();
-    }
-  } catch (err) {
-    setStatus('Error unpacking: ' + err.message);
-    console.error('Bundle unpack error:', err);
-  }
-});
-
-  </script>
-
-  <script type="__bundler/manifest" data-src="/b/manifest.json?v=aa12ba3958"></script>
-
-  <script type="__bundler/ext_resources">
-[{"id":"worldAtlas","uuid":"03ff5c59-336d-477e-b7b9-489c694ae1c5"},{"id":"https://unpkg.com/react@18.3.1/umd/react.production.min.js","uuid":"a4500a01-70fd-47fa-8ab5-3a07f5627ee8"},{"id":"https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js","uuid":"18620644-ca9c-40a8-bc19-99976740a1c5"}]
-  </script>
-
-  <script type="__bundler/page_order">
-[]
-  </script>
-
-  <script type="__bundler/template" data-src="/b/template.json?v=a8c1360041"></script>
-</body>
-</html>
+(function(){try{var P=window.GUARDIANA_PRICES;if(!P)return;var a=document.getElementById('plus-precio'),b=document.getElementById('plus-nota');if(a)a.textContent=P.plus;if(b)b.textContent=P.plusNote;}catch(e){}})();
+</script>
+</body></html>
