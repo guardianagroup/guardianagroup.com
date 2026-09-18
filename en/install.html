@@ -170,7 +170,7 @@ real reason to open it. On a Mac the check is the same as above, with the comman
     <tr><th>Installs</th><td>The program in <code>/usr/local/guardiana</code> and a start-up service (a LaunchDaemon) that listens only on your own machine, on <code>127.0.0.1</code>. macOS will ask for your administrator password: the system asks for it, we never see it.</td></tr>
     <tr><th>Does not change your DNS on install</th><td>Same as on Windows. Before touching anything it writes down which DNS each of your networks uses today, so it can put it back exactly as it was. The change happens later, from the panel, with a button.</td></tr>
     <tr><th>Opens no ports to the network</th><td>On a Mac, GUARDIANA listens only on the machine itself.</td></tr>
-    <tr><th>Home Mode: not yet</th><td><strong>Home Mode is not in version 1.0 on macOS</strong>, so phones and the TV cannot go through a Mac. That needs to touch the macOS firewall, and we do not publish it until we can test it properly. On Windows and Linux it is there.</td></tr>
+    <tr><th>Home Mode: not on Mac yet</th><td><strong>Home Mode is not in version 1.0 on macOS.</strong> Not because it cannot work: GUARDIANA does not manage the macOS firewall and we have not been able to test it there the way we did on Windows and Linux, so we neither vouch for it nor support it on a Mac. On Windows and Linux it is there, tested.</td></tr>
   </tbody>
 </table>
 <p>To remove it, open the same GUARDIANA icon and choose to remove: the service stops, it is deleted, and
