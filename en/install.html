@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Installing GUARDIANA: the Windows warning · GUARDIANA</title>
+<title>Installing GUARDIANA: the Windows and Mac warnings · GUARDIANA</title>
 <meta name="description" content="What you will see when you install, why Windows warns you, how to check the file before you open it and what the installer actually does.">
 <link rel="canonical" href="https://guardianagroup.com/en/install.html">
 <meta name="robots" content="index,follow">
-<meta property="og:title" content="Installing GUARDIANA: the Windows warning · GUARDIANA">
+<meta property="og:title" content="Installing GUARDIANA: the Windows and Mac warnings · GUARDIANA">
 <meta property="og:description" content="What you will see when you install, why Windows warns you, how to check the file before you open it and what the installer actually does.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://guardianagroup.com/en/install.html">
@@ -14,14 +14,14 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="GUARDIANA">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Installing GUARDIANA: the Windows warning · GUARDIANA">
+<meta name="twitter:title" content="Installing GUARDIANA: the Windows and Mac warnings · GUARDIANA">
 <meta name="twitter:description" content="What you will see when you install, why Windows warns you, how to check the file before you open it and what the installer actually does.">
 <meta name="twitter:image" content="https://guardianagroup.com/og-en.png">
 <meta name="theme-color" content="#F4F6FA">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="referrer" content="no-referrer">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://guardianagroup.com/#org","name":"GUARDIANA","url":"https://guardianagroup.com/","logo":"https://guardianagroup.com/icon-512.png","email":"hola@guardianagroup.com","sameAs":["https://github.com/guardianagroup"],"address":{"@type":"PostalAddress","streetAddress":"Torre Empresarial PRODEGI, piso 18, Bocagrande","addressLocality":"Cartagena de Indias","addressCountry":"CO"}},{"@type":"Article","@id":"https://guardianagroup.com/en/install.html#article","headline":"Installing GUARDIANA: the Windows warning · GUARDIANA","description":"What you will see when you install, why Windows warns you, how to check the file before you open it and what the installer actually does.","url":"https://guardianagroup.com/en/install.html","mainEntityOfPage":"https://guardianagroup.com/en/install.html","image":"https://guardianagroup.com/og-en.png","inLanguage":"en","author":{"@id":"https://guardianagroup.com/#org"},"publisher":{"@id":"https://guardianagroup.com/#org"},"datePublished":"2026-09-18","dateModified":"2026-09-18"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://guardianagroup.com/"},{"@type":"ListItem","position":2,"name":"Installing GUARDIANA: the Windows warning","item":"https://guardianagroup.com/en/install.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://guardianagroup.com/#org","name":"GUARDIANA","url":"https://guardianagroup.com/","logo":"https://guardianagroup.com/icon-512.png","email":"hola@guardianagroup.com","sameAs":["https://github.com/guardianagroup"],"address":{"@type":"PostalAddress","streetAddress":"Torre Empresarial PRODEGI, piso 18, Bocagrande","addressLocality":"Cartagena de Indias","addressCountry":"CO"}},{"@type":"Article","@id":"https://guardianagroup.com/en/install.html#article","headline":"Installing GUARDIANA: the Windows and Mac warnings · GUARDIANA","description":"What you will see when you install, why Windows warns you, how to check the file before you open it and what the installer actually does.","url":"https://guardianagroup.com/en/install.html","mainEntityOfPage":"https://guardianagroup.com/en/install.html","image":"https://guardianagroup.com/og-en.png","inLanguage":"en","author":{"@id":"https://guardianagroup.com/#org"},"publisher":{"@id":"https://guardianagroup.com/#org"},"datePublished":"2026-09-18","dateModified":"2026-09-18"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://guardianagroup.com/"},{"@type":"ListItem","position":2,"name":"Installing GUARDIANA: the Windows and Mac warnings","item":"https://guardianagroup.com/en/install.html"}]}]}</script>
 <meta property="article:published_time" content="2026-09-18">
 <style>
 @font-face{font-family:'Unbounded';font-weight:500 800;font-display:swap;src:url(/fonts/Unbounded-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -141,12 +141,47 @@ transparency: it is decoration.</p>
 <p>On Linux there are no unknown-publisher warnings: there is a hash and a signature, which is more
 checkable than a warning.</p>
 
-<h2>5 · Uninstalling</h2>
+
+<h2>5 · macOS</h2>
+<p>On a Mac, GUARDIANA downloads as an ordinary application, <code>GUARDIANA.app</code>. The first time you
+open it, macOS will say something like this: <strong>"GUARDIANA cannot be opened because Apple cannot check
+it for malicious software"</strong>.</p>
+<p>That warning is more awkward than the Windows one, and we say so plainly: there is no "open anyway"
+button the first time. What you do is this, once:</p>
+<ul>
+<li><strong>Right-click</strong> GUARDIANA.app and choose <strong>Open</strong>. Now the warning does offer
+an "Open" button.</li>
+<li>If it does not, go to <strong>System Settings › Privacy &amp; Security</strong>, scroll to the notice
+about GUARDIANA and press <strong>"Open Anyway"</strong>.</li>
+</ul>
+
+<h3>Why that warning appears, and why we work this way</h3>
+<p>For macOS not to warn, Apple requires the application to be <em>notarised</em>, and notarising requires a
+paid developer account. We do not have one today. We could have waited until we did and shipped for Mac
+later; we would rather ship now and tell you exactly what you will see and how to check it yourself.</p>
+<p><strong>Same as on Windows: we will not teach you to click past warnings blindly.</strong> We give you the
+file's fingerprint and its signature so you can check that what you are opening is ours, which is the only
+real reason to open it. On a Mac the check is the same as above, with the command macOS ships:</p>
+<p><code>shasum -a 256 GUARDIANA.app.zip</code></p>
+
+<h3>What the installer does on a Mac</h3>
+<table>
+  <tbody>
+    <tr><th>Installs</th><td>The program in <code>/usr/local/guardiana</code> and a start-up service (a LaunchDaemon) that listens only on your own machine, on <code>127.0.0.1</code>. macOS will ask for your administrator password: the system asks for it, we never see it.</td></tr>
+    <tr><th>Does not change your DNS on install</th><td>Same as on Windows. Before touching anything it writes down which DNS each of your networks uses today, so it can put it back exactly as it was. The change happens later, from the panel, with a button.</td></tr>
+    <tr><th>Opens no ports to the network</th><td>On a Mac, GUARDIANA listens only on the machine itself.</td></tr>
+    <tr><th>Home Mode: not yet</th><td><strong>Home Mode is not in version 1.0 on macOS</strong>, so phones and the TV cannot go through a Mac. That needs to touch the macOS firewall, and we do not publish it until we can test it properly. On Windows and Linux it is there.</td></tr>
+  </tbody>
+</table>
+<p>To remove it, open the same GUARDIANA icon and choose to remove: the service stops, it is deleted, and
+your networks' DNS goes back to what you had before.</p>
+
+<h2>6 · Uninstalling</h2>
 <p>It uninstalls like any other program, and when it does GUARDIANA <strong>turns Home Mode off, removes the
 firewall rule and puts your DNS back exactly as it was</strong>, with whatever it pointed to before. What
 stays is your ledger, which is yours: it is on your disk and you delete it whenever you want.</p>
 
-<h2>6 · If something goes wrong</h2>
+<h2>7 · If something goes wrong</h2>
 <p>Write to <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a> or open an issue at
 <a href="https://github.com/guardianagroup/guardiana">github.com/guardianagroup/guardiana</a>. If what you
 find is a security bug, <a href="/.well-known/security.txt">/.well-known/security.txt</a> says what I
