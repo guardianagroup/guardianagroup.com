@@ -216,7 +216,7 @@
    ],
    "total_extracto": 9,
    "malos_extracto": 1,
-   "nota": "No comparable: la sesión del responsable no estaba iniciada y la página rebotó a «Iniciar sesión», así que lo medido es su pantalla de acceso, no una conversación. Lo que pidió en ese minuto fue Intercom (el chat de soporte, tres nombres), Sentry y Cloudflare Insights."
+   "nota": "No comparable: mi sesión no estaba iniciada y la página rebotó a «Iniciar sesión», así que lo medido es su pantalla de acceso, no una conversación. Lo que pidió en ese minuto fue Intercom (el chat de soporte, tres nombres), Sentry y Cloudflare Insights."
   }
  ]
 }

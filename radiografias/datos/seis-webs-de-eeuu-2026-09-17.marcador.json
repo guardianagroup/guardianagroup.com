@@ -1,6 +1,7 @@
 {
  "slug": "seis-webs-de-eeuu-2026-09-17",
  "fecha": "2026-09-17",
+ "modo": "limpio",
  "entidades": [
   {
    "nombre": "Amazon",
@@ -8,7 +9,7 @@
    "total": 49,
    "propios": 8,
    "ajenos": 41,
-   "malos": 29,
+   "malos": 28,
    "comparable": true,
    "terceros": [
     {
@@ -68,7 +69,7 @@
    "total": 35,
    "propios": 10,
    "ajenos": 25,
-   "malos": 17,
+   "malos": 16,
    "comparable": true,
    "terceros": [
     {
@@ -98,7 +99,7 @@
    "total": 131,
    "propios": 19,
    "ajenos": 112,
-   "malos": 84,
+   "malos": 82,
    "comparable": true,
    "terceros": [
     {
@@ -158,7 +159,7 @@
    "total": 235,
    "propios": 16,
    "ajenos": 219,
-   "malos": 144,
+   "malos": 140,
    "comparable": true,
    "terceros": [
     {

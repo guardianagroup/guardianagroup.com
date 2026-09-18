@@ -1,6 +1,7 @@
 {
  "slug": "seis-diarios-de-eeuu-2026-09-17",
  "fecha": "2026-09-17",
+ "modo": "limpio",
  "entidades": [
   {
    "nombre": "CNN",
@@ -38,7 +39,7 @@
    "total": 108,
    "propios": 13,
    "ajenos": 95,
-   "malos": 74,
+   "malos": 71,
    "comparable": true,
    "terceros": [
     {
@@ -68,7 +69,7 @@
    "total": 184,
    "propios": 9,
    "ajenos": 175,
-   "malos": 121,
+   "malos": 120,
    "comparable": true,
    "terceros": [
     {
@@ -128,7 +129,7 @@
    "total": 365,
    "propios": 4,
    "ajenos": 361,
-   "malos": 211,
+   "malos": 209,
    "comparable": true,
    "terceros": [
     {
@@ -158,7 +159,7 @@
    "total": 179,
    "propios": 13,
    "ajenos": 166,
-   "malos": 122,
+   "malos": 121,
    "comparable": true,
    "terceros": [
     {
