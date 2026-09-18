@@ -1,0 +1,186 @@
+{
+ "slug": "seis-diarios-de-eeuu-2026-09-17",
+ "fecha": "2026-09-17",
+ "entidades": [
+  {
+   "nombre": "CNN",
+   "clave": "cnn",
+   "total": 24,
+   "propios": 9,
+   "ajenos": 15,
+   "malos": 3,
+   "comparable": false,
+   "terceros": [
+    {
+     "dominio": "max.com",
+     "malo": false
+    },
+    {
+     "dominio": "brightline.tv",
+     "malo": true
+    },
+    {
+     "dominio": "stripe.com",
+     "malo": false
+    },
+    {
+     "dominio": "mediamelon.com",
+     "malo": false
+    }
+   ],
+   "total_extracto": 33,
+   "malos_extracto": 9,
+   "nota": "No comparable: desde Colombia, cnn.com redirige a la edición internacional (edition.cnn.com), que en estos 20 segundos pidió 33 nombres, 9 de publicidad. La portada de EE. UU. no se midió; su cifra no se compara con las otras cinco."
+  },
+  {
+   "nombre": "The New York Times",
+   "clave": "nytimes",
+   "total": 108,
+   "propios": 13,
+   "ajenos": 95,
+   "malos": 74,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "amazon-adsystem.com",
+     "malo": true
+    },
+    {
+     "dominio": "yahoo.com",
+     "malo": true
+    },
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    },
+    {
+     "dominio": "googlesyndication.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 111,
+   "malos_extracto": 74,
+   "nota": ""
+  },
+  {
+   "nombre": "Fox News",
+   "clave": "foxnews",
+   "total": 184,
+   "propios": 9,
+   "ajenos": 175,
+   "malos": 121,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "pubmatic.com",
+     "malo": true
+    },
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    },
+    {
+     "dominio": "adnxs.com",
+     "malo": true
+    },
+    {
+     "dominio": "yahoo.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 188,
+   "malos_extracto": 123,
+   "nota": ""
+  },
+  {
+   "nombre": "The Washington Post",
+   "clave": "washingtonpost",
+   "total": 304,
+   "propios": 6,
+   "ajenos": 298,
+   "malos": 176,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "onetag-sys.com",
+     "malo": false
+    },
+    {
+     "dominio": "primis.tech",
+     "malo": false
+    },
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    },
+    {
+     "dominio": "bidswitch.net",
+     "malo": true
+    }
+   ],
+   "total_extracto": 316,
+   "malos_extracto": 182,
+   "nota": ""
+  },
+  {
+   "nombre": "USA Today",
+   "clave": "usatoday",
+   "total": 365,
+   "propios": 4,
+   "ajenos": 361,
+   "malos": 211,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "cootlogix.com",
+     "malo": true
+    },
+    {
+     "dominio": "onetag-sys.com",
+     "malo": false
+    },
+    {
+     "dominio": "bidswitch.net",
+     "malo": true
+    },
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    }
+   ],
+   "total_extracto": 372,
+   "malos_extracto": 214,
+   "nota": "La portada no terminó de avisar «cargada» en 45 segundos (seguía pidiendo cosas); se midió igual con los mismos tiempos que las demás."
+  },
+  {
+   "nombre": "The Wall Street Journal",
+   "clave": "wsj",
+   "total": 179,
+   "propios": 13,
+   "ajenos": 166,
+   "malos": 122,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "dianomi.com",
+     "malo": true
+    },
+    {
+     "dominio": "tiqcdn.com",
+     "malo": true
+    },
+    {
+     "dominio": "cloudflare.com",
+     "malo": false
+    },
+    {
+     "dominio": "3lift.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 182,
+   "malos_extracto": 123,
+   "nota": ""
+  }
+ ]
+}

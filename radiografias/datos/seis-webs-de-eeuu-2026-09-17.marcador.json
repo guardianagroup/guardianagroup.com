@@ -1,0 +1,186 @@
+{
+ "slug": "seis-webs-de-eeuu-2026-09-17",
+ "fecha": "2026-09-17",
+ "entidades": [
+  {
+   "nombre": "Amazon",
+   "clave": "amazon",
+   "total": 49,
+   "propios": 8,
+   "ajenos": 41,
+   "malos": 29,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "amazon-adsystem.com",
+     "malo": true
+    },
+    {
+     "dominio": "adnxs.com",
+     "malo": true
+    },
+    {
+     "dominio": "mediarithmics.com",
+     "malo": false
+    },
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    }
+   ],
+   "total_extracto": 51,
+   "malos_extracto": 29,
+   "nota": "amazon-adsystem.com es la red de anuncios de Amazon; aquí cuenta como publicidad, no como dominio propio, porque las listas abiertas la clasifican así y aparece también en webs ajenas."
+  },
+  {
+   "nombre": "Walmart",
+   "clave": "walmart",
+   "total": 15,
+   "propios": 4,
+   "ajenos": 11,
+   "malos": 3,
+   "comparable": false,
+   "terceros": [
+    {
+     "dominio": "px-cloud.net",
+     "malo": false
+    },
+    {
+     "dominio": "crcldu.com",
+     "malo": false
+    },
+    {
+     "dominio": "perimeterx.net",
+     "malo": true
+    },
+    {
+     "dominio": "googlesyndication.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 20,
+   "malos_extracto": 4,
+   "nota": "No comparable: a un navegador manejado desde fuera, Walmart le muestra una comprobación «¿robot o humano?» (PerimeterX, px-cloud.net) en vez de la portada. Su cifra mide esa pantalla, no la tienda."
+  },
+  {
+   "nombre": "eBay",
+   "clave": "ebay",
+   "total": 35,
+   "propios": 10,
+   "ajenos": 25,
+   "malos": 17,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "google.com",
+     "malo": false
+    },
+    {
+     "dominio": "pinterest.com",
+     "malo": true
+    },
+    {
+     "dominio": "snapchat.com",
+     "malo": true
+    },
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    }
+   ],
+   "total_extracto": 41,
+   "malos_extracto": 17,
+   "nota": ""
+  },
+  {
+   "nombre": "ESPN",
+   "clave": "espn",
+   "total": 131,
+   "propios": 19,
+   "ajenos": 112,
+   "malos": 84,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "pubmatic.com",
+     "malo": false
+    },
+    {
+     "dominio": "rubiconproject.com",
+     "malo": true
+    },
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    },
+    {
+     "dominio": "googlesyndication.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 136,
+   "malos_extracto": 84,
+   "nota": ""
+  },
+  {
+   "nombre": "Weather.com",
+   "clave": "weather",
+   "total": 27,
+   "propios": 4,
+   "ajenos": 23,
+   "malos": 15,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "privacy-mgmt.com",
+     "malo": false
+    },
+    {
+     "dominio": "nr-data.net",
+     "malo": true
+    },
+    {
+     "dominio": "stay22.com",
+     "malo": false
+    },
+    {
+     "dominio": "taboola.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 31,
+   "malos_extracto": 15,
+   "nota": ""
+  },
+  {
+   "nombre": "Yahoo",
+   "clave": "yahoo",
+   "total": 235,
+   "propios": 16,
+   "ajenos": 219,
+   "malos": 144,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "cootlogix.com",
+     "malo": true
+    },
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    },
+    {
+     "dominio": "bidswitch.net",
+     "malo": true
+    },
+    {
+     "dominio": "googlesyndication.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 243,
+   "malos_extracto": 146,
+   "nota": "Desde Colombia, yahoo.com abre espanol.yahoo.com. Muchos de los nombres de rastreo que cargan las demás webs son de Yahoo (analytics.yahoo.com, pbs.yahoo.com): aquí cuentan como suyos, y en las otras como rastreo."
+  }
+ ]
+}
