@@ -1,0 +1,230 @@
+{
+ "slug": "nueve-ia-en-un-pc-limpio-2026-09-17",
+ "fecha": "2026-09-17",
+ "entidades": [
+  {
+   "nombre": "Copilot",
+   "clave": "copilot",
+   "total": 8,
+   "propios": 4,
+   "ajenos": 4,
+   "malos": 1,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "microsoft.com",
+     "malo": true
+    },
+    {
+     "dominio": "sprig.com",
+     "malo": false
+    },
+    {
+     "dominio": "sentry.io",
+     "malo": false
+    }
+   ],
+   "total_extracto": 8,
+   "malos_extracto": 1,
+   "nota": "De Microsoft. Aparte de sus propios nombres habla con Sprig (encuestas dentro del producto), Sentry (informes de error) y browser.events.data.microsoft.com, el punto de telemetría de Microsoft, que las listas abiertas marcan como telemetría."
+  },
+  {
+   "nombre": "Perplexity",
+   "clave": "perplexity",
+   "total": 10,
+   "propios": 6,
+   "ajenos": 4,
+   "malos": 2,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "browser-intake-datadoghq.com",
+     "malo": true
+    },
+    {
+     "dominio": "cloudflareinsights.com",
+     "malo": true
+    },
+    {
+     "dominio": "google.com",
+     "malo": false
+    },
+    {
+     "dominio": "eppo.cloud",
+     "malo": false
+    }
+   ],
+   "total_extracto": 10,
+   "malos_extracto": 2,
+   "nota": "Habla con Datadog (registro del navegador), Eppo (pruebas A/B), Cloudflare Insights (medición) y la cuenta de Google, para iniciar sesión."
+  },
+  {
+   "nombre": "Gemini",
+   "clave": "gemini",
+   "total": 13,
+   "propios": 9,
+   "ajenos": 4,
+   "malos": 5,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "googletagmanager.com",
+     "malo": true
+    },
+    {
+     "dominio": "google-analytics.com",
+     "malo": true
+    },
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    }
+   ],
+   "total_extracto": 13,
+   "malos_extracto": 5,
+   "nota": "Es de Google: casi todos los nombres que pide son de Google, y aquí cuentan como propios. Los que no: Google Tag Manager, Google Analytics y DoubleClick, que son sus herramientas de medición y anuncios y cuentan como rastreo igual que en cualquier otra web. Es la única de las nueve que carga publicidad y medición de audiencia en su propia pantalla de entrada."
+  },
+  {
+   "nombre": "Mistral",
+   "clave": "mistral",
+   "total": 6,
+   "propios": 1,
+   "ajenos": 5,
+   "malos": 1,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "sentry.io",
+     "malo": false
+    },
+    {
+     "dominio": "intercomcdn.com",
+     "malo": false
+    },
+    {
+     "dominio": "intercom.io",
+     "malo": false
+    },
+    {
+     "dominio": "cloudflareinsights.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 6,
+   "malos_extracto": 1,
+   "nota": "Habla con Intercom (el chat de soporte, tres nombres), Sentry (informes de error) y Cloudflare Insights (medición)."
+  },
+  {
+   "nombre": "Grok",
+   "clave": "grok",
+   "total": 9,
+   "propios": 2,
+   "ajenos": 7,
+   "malos": 2,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "cookielaw.org",
+     "malo": false
+    },
+    {
+     "dominio": "stripe.com",
+     "malo": false
+    },
+    {
+     "dominio": "stripe.network",
+     "malo": false
+    },
+    {
+     "dominio": "cloudflareinsights.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 9,
+   "malos_extracto": 2,
+   "nota": "De xAI. Habla con OneTrust (el aviso de cookies y la localización que lo decide), Stripe (pagos, tres nombres), Google Tag Manager y Cloudflare Insights."
+  },
+  {
+   "nombre": "Claude",
+   "clave": "claude",
+   "total": 11,
+   "propios": 3,
+   "ajenos": 8,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "hcaptcha.com",
+     "malo": false
+    },
+    {
+     "dominio": "browser-intake-us5-datadoghq.com",
+     "malo": false
+    },
+    {
+     "dominio": "google.com",
+     "malo": false
+    }
+   ],
+   "total_extracto": 11,
+   "malos_extracto": 0,
+   "nota": "De Anthropic. Ninguno de sus nombres está en las listas de publicidad o rastreo, y aun así habla con cinco nombres de hCaptcha (la comprobación de «no soy un robot»), con Datadog (registro de errores del navegador) y con la cuenta de Google para iniciar sesión."
+  },
+  {
+   "nombre": "DeepSeek",
+   "clave": "deepseek",
+   "total": 11,
+   "propios": 2,
+   "ajenos": 9,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "volces.com",
+     "malo": false
+    },
+    {
+     "dominio": "awswaf.com",
+     "malo": false
+    },
+    {
+     "dominio": "cloudflare.com",
+     "malo": false
+    },
+    {
+     "dominio": "portal101.cn",
+     "malo": false
+    }
+   ],
+   "total_extracto": 11,
+   "malos_extracto": 0,
+   "nota": "Es la que más servicios ajenos carga: Volcano Engine de ByteDance (apmplus.volces.com, gator.volces.com y dos CDN, medición de rendimiento y de uso), portal101.cn (dos nombres, de un servicio de identificación de dispositivos y riesgo), el cortafuegos de AWS, la comprobación de Cloudflare y el acceso con Apple. Ninguno de esos nombres está todavía en las listas abiertas de publicidad y rastreo, y eso es justo lo que una lista no puede hacer por ti."
+  },
+  {
+   "nombre": "ChatGPT",
+   "clave": "chatgpt",
+   "total": 1,
+   "propios": 1,
+   "ajenos": 0,
+   "malos": 0,
+   "comparable": false,
+   "terceros": [],
+   "total_extracto": 1,
+   "malos_extracto": 0,
+   "nota": "No comparable: en tres intentos de 45 segundos, la página no llegó a cargar en un Chrome manejado desde fuera; solo pidió su propio nombre. En el navegador del responsable, con su cuenta, sí abre (segunda parte)."
+  },
+  {
+   "nombre": "Meta AI",
+   "clave": "metaai",
+   "total": 1,
+   "propios": 1,
+   "ajenos": 0,
+   "malos": 0,
+   "comparable": false,
+   "terceros": [],
+   "total_extracto": 1,
+   "malos_extracto": 0,
+   "nota": "No comparable: al navegador manejado desde fuera solo le respondió su propio nombre y nada más. Abierta a mano sí carga y lo primero que enseña es «Inicia sesión para empezar», así que sin cuenta no hay pantalla que medir."
+  }
+ ]
+}
