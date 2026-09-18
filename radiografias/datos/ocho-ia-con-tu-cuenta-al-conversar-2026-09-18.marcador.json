@@ -1,0 +1,209 @@
+{
+ "slug": "ocho-ia-con-tu-cuenta-al-conversar-2026-09-18",
+ "fecha": "2026-09-18",
+ "modo": "cuenta",
+ "entidades": [
+  {
+   "nombre": "ChatGPT",
+   "clave": "chatgpt",
+   "total": 4,
+   "propios": 4,
+   "ajenos": 0,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [],
+   "total_extracto": 4,
+   "malos_extracto": 0,
+   "nota": "Con la sesión iniciada y respondiendo, **ni un solo nombre ajeno**: solo los suyos. chatgpt.com y ws.chatgpt.com (por donde va la conversación), cdn.openai.com y api.oaistatsig.com, su medición de funciones. En la pantalla de entrada sin cuenta ni siquiera llegaba a cargar en un navegador manejado desde fuera."
+  },
+  {
+   "nombre": "Gemini",
+   "clave": "gemini",
+   "total": 13,
+   "propios": 7,
+   "ajenos": 6,
+   "malos": 6,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    },
+    {
+     "dominio": "google-analytics.com",
+     "malo": true
+    },
+    {
+     "dominio": "googleadservices.com",
+     "malo": true
+    },
+    {
+     "dominio": "googletagmanager.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 13,
+   "malos_extracto": 7,
+   "nota": "Con la sesión iniciada y respondiendo, seis servicios ajenos y **los seis están en las listas abiertas** de publicidad y rastreo: DoubleClick por triplicado (ad, googleads y stats), Google Analytics, Google Ads y Google Tag Manager. Es la única de las cuatro confirmadas que carga anuncios y medición de audiencia mientras le hablas. Los demás nombres que pide son de Google y aquí cuentan como suyos."
+  },
+  {
+   "nombre": "Perplexity",
+   "clave": "perplexity",
+   "total": 15,
+   "propios": 8,
+   "ajenos": 7,
+   "malos": 1,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "browser-intake-datadoghq.com",
+     "malo": true
+    },
+    {
+     "dominio": "cloudfront.net",
+     "malo": false
+    },
+    {
+     "dominio": "eppo.cloud",
+     "malo": false
+    },
+    {
+     "dominio": "singular.net",
+     "malo": false
+    }
+   ],
+   "total_extracto": 15,
+   "malos_extracto": 1,
+   "nota": "Con la sesión iniciada y respondiendo, siete ajenos, uno en listas: Datadog (registro del navegador). Los otros seis son medición de producto y pruebas A/B (Eppo, Singular), un reparto de contenidos y tres nombres de imágenes de Google. Hubo que repetirla: en la primera pasada la dirección se tecleó mal y no llegó a cargar."
+  },
+  {
+   "nombre": "Meta AI",
+   "clave": "metaai",
+   "total": 2,
+   "propios": 2,
+   "ajenos": 0,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [],
+   "total_extracto": 2,
+   "malos_extracto": 0,
+   "nota": "Cargó con la cuenta y no pidió ningún nombre ajeno en su minuto: solo www.meta.ai y gateway.meta.ai. No se pudo confirmar desde fuera que respondiera, porque su ventana no cambia de título."
+  },
+  {
+   "nombre": "Copilot",
+   "clave": "copilot",
+   "total": 8,
+   "propios": 4,
+   "ajenos": 4,
+   "malos": 1,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "sprig.com",
+     "malo": false
+    },
+    {
+     "dominio": "microsoft.com",
+     "malo": true
+    },
+    {
+     "dominio": "sentry.io",
+     "malo": false
+    }
+   ],
+   "total_extracto": 8,
+   "malos_extracto": 1,
+   "nota": "Cargó con la cuenta: cuatro ajenos, uno en listas. Sprig (encuestas dentro del producto, dos nombres), Sentry (informes de error) y browser.events.data.microsoft.com, el punto de telemetría de Microsoft, que las listas marcan como telemetría. No se pudo confirmar desde fuera que respondiera."
+  },
+  {
+   "nombre": "DeepSeek",
+   "clave": "deepseek",
+   "total": 8,
+   "propios": 2,
+   "ajenos": 6,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "awswaf.com",
+     "malo": false
+    },
+    {
+     "dominio": "volccdn.com",
+     "malo": false
+    },
+    {
+     "dominio": "volces.com",
+     "malo": false
+    },
+    {
+     "dominio": "cloudflare.com",
+     "malo": false
+    }
+   ],
+   "total_extracto": 8,
+   "malos_extracto": 0,
+   "nota": "Cargó con la cuenta: seis ajenos y ninguno en las listas. Volcano Engine de ByteDance (apmplus.volces.com, gator.volces.com y su CDN, medición de rendimiento y uso), portal101.cn (identificación de dispositivos y riesgo), el cortafuegos de AWS y la comprobación de Cloudflare. Que no estén en las listas es justo lo que una lista no puede hacer por ti. No se pudo confirmar desde fuera que respondiera."
+  },
+  {
+   "nombre": "Grok",
+   "clave": "grok",
+   "total": 17,
+   "propios": 2,
+   "ajenos": 15,
+   "malos": 7,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "stripe.com",
+     "malo": false
+    },
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    },
+    {
+     "dominio": "twitter.com",
+     "malo": false
+    },
+    {
+     "dominio": "cookielaw.org",
+     "malo": false
+    }
+   ],
+   "total_extracto": 17,
+   "malos_extracto": 7,
+   "nota": "La que más habla con diferencia: quince ajenos, siete en listas. Los anuncios de Twitter (static.ads-twitter.com, t.co) y su medición, DoubleClick (dos nombres), Google Analytics y Tag Manager, Cloudflare Insights, OneTrust (el aviso de cookies), Stripe (pagos, tres nombres), un gestor de etiquetas propio y un servidor STUN de Google. No se pudo confirmar desde fuera que respondiera."
+  },
+  {
+   "nombre": "Mistral",
+   "clave": "mistral",
+   "total": 9,
+   "propios": 3,
+   "ajenos": 6,
+   "malos": 1,
+   "comparable": false,
+   "terceros": [
+    {
+     "dominio": "intercom.io",
+     "malo": false
+    },
+    {
+     "dominio": "sentry.io",
+     "malo": false
+    },
+    {
+     "dominio": "cloudflareinsights.com",
+     "malo": true
+    },
+    {
+     "dominio": "live.com",
+     "malo": false
+    }
+   ],
+   "total_extracto": 9,
+   "malos_extracto": 1,
+   "nota": "No comparable: mi sesión no estaba iniciada y la página rebotó a «Iniciar sesión», así que lo medido es su pantalla de acceso, no una conversación. Lo que pidió en ese minuto fue Intercom (el chat de soporte, tres nombres), Sentry y Cloudflare Insights."
+  }
+ ]
+}
