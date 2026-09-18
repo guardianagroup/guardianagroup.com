@@ -1,6 +1,7 @@
 {
  "slug": "nueve-ia-en-un-pc-limpio-2026-09-17",
  "fecha": "2026-09-17",
+ "modo": "limpio",
  "entidades": [
   {
    "nombre": "Copilot",
@@ -64,7 +65,7 @@
    "total": 13,
    "propios": 9,
    "ajenos": 4,
-   "malos": 5,
+   "malos": 4,
    "comparable": true,
    "terceros": [
     {
