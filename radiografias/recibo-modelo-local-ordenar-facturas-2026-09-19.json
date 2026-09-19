@@ -31,5 +31,9 @@
  ],
  "nombres_en_la_tarea": [],
  "corpus": [],
- "respuesta_del_agente": "Mala. Empezó diciendo que «no soy capaz de ordenar estos nombres de archivo en tiempo real» y después los listó igualmente, desordenados: puso enero de 2026 el primero y diciembre de 2025 el último, y llamó «la última factura» a cada una de las cinco. Es un modelo de 0,5B, el mayor que cabía en la memoria libre de ese portátil. Lo contamos porque es la otra cara del cero: no preguntó por nadie, y tampoco hizo el trabajo."
+ "respuesta_del_agente": "Mala. Empezó diciendo que «no soy capaz de ordenar estos nombres de archivo en tiempo real» y después los listó igualmente, desordenados: puso enero de 2026 el primero y diciembre de 2025 el último, y llamó «la última factura» a cada una de las cinco. Es un modelo de 0,5B, el mayor que cabía en la memoria libre de ese portátil. Lo contamos porque es la otra cara del cero: no preguntó por nadie, y tampoco hizo el trabajo.",
+ "tarea_pt": "Organize estes cinco nomes de arquivo de nota fiscal do mais antigo ao mais recente.",
+ "tarea_en": "Sort these five invoice file names from oldest to newest.",
+ "producto_pt": "qwen2.5 0.5B rodando dentro do PC com o Ollama",
+ "producto_en": "qwen2.5 0.5B running inside the PC with Ollama"
 }

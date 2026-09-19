@@ -39,7 +39,8 @@
    "lado": "esperado",
    "en_reposo": false,
    "motivo": "Es el servicio de Anthropic al que Claude Code manda la conversación. Sin él no hay respuesta: esto es el producto haciendo su trabajo.",
-   "motivo_en": "Anthropic's own service, the one Claude Code sends the conversation to. No answer without it: this is the product doing its job."
+   "motivo_en": "Anthropic's own service, the one Claude Code sends the conversation to. No answer without it: this is the product doing its job.",
+   "motivo_pt": "É o serviço da Anthropic para o qual o Claude Code manda a conversa. Sem ele não há resposta: isto é o produto fazendo o seu trabalho."
   },
   {
    "nombre": "mcp-proxy.anthropic.com",
@@ -49,7 +50,8 @@
    "lado": "esperado",
    "en_reposo": false,
    "motivo": "Pasarela de Anthropic para los conectores (MCP). Es del propio producto, aunque esta tarea no usaba ningún conector: se preguntó igual, 1,2 segundos después de empezar.",
-   "motivo_en": "Anthropic's gateway for connectors (MCP). It belongs to the product, though this task used no connector at all: it was asked for anyway, 1.2 seconds in."
+   "motivo_en": "Anthropic's gateway for connectors (MCP). It belongs to the product, though this task used no connector at all: it was asked for anyway, 1.2 seconds in.",
+   "motivo_pt": "Gateway da Anthropic para os conectores (MCP). É do próprio produto, embora esta tarefa não usasse nenhum conector: foi perguntado mesmo assim, 1,2 segundo depois de começar."
   },
   {
    "nombre": "http-intake.logs.us5.datadoghq.com",
@@ -59,7 +61,8 @@
    "lado": "otro",
    "en_reposo": false,
    "motivo": "Datadog, empresa de vigilancia de aplicaciones y recogida de registros; el nombre es su punto de entrada de registros. No es de Anthropic y no hace falta para ordenar cinco nombres de archivo. Se preguntó a los 10,1 segundos, justo al terminar. Qué se enviara, si es que se envió algo, no se ve desde aquí: GUARDIANA anota nombres, no contenido.",
-   "motivo_en": "Datadog, an application-monitoring and log-collection company; this name is its log intake. It is not Anthropic's and it is not needed to sort five file names. Asked for at second 10.1, right as the run finished. What was sent, if anything, is not visible from here: GUARDIANA records names, not content."
+   "motivo_en": "Datadog, an application-monitoring and log-collection company; this name is its log intake. It is not Anthropic's and it is not needed to sort five file names. Asked for at second 10.1, right as the run finished. What was sent, if anything, is not visible from here: GUARDIANA records names, not content.",
+   "motivo_pt": "Datadog, empresa de monitoramento de aplicativos e coleta de registros. Não é da Anthropic: é uma terceira empresa para a qual o computador falou enquanto o agente trabalhava. A GUARDIANA vê o nome, não o que foi enviado."
   }
  ],
  "corpus": [
@@ -84,5 +87,7 @@
    "contenido": "FACTURA N.º TR-9021 · Fecha: 30 de mayo de 2026 · Proveedor: Transportes Río Magdalena (ficticia) · Cliente: Taller de pruebas GUARDIANA (ficticio)"
   }
  ],
- "respuesta_del_agente": "Los cinco archivos, ordenados de más antiguo a más reciente por la fecha del nombre: papelería La Hoja (21 nov 2025), Café del Puerto (9 dic 2025), Electricidad La Chispa (15 ene 2026), Ferretería El Tornillo (3 feb 2026) y Transportes Río Magdalena (30 may 2026). Añadió por su cuenta que había ordenado por la fecha del nombre y no por la de dentro del archivo, y ofreció mirar el contenido si hacía falta. La respuesta es correcta."
+ "respuesta_del_agente": "Los cinco archivos, ordenados de más antiguo a más reciente por la fecha del nombre: papelería La Hoja (21 nov 2025), Café del Puerto (9 dic 2025), Electricidad La Chispa (15 ene 2026), Ferretería El Tornillo (3 feb 2026) y Transportes Río Magdalena (30 may 2026). Añadió por su cuenta que había ordenado por la fecha del nombre y no por la de dentro del archivo, y ofreció mirar el contenido si hacía falta. La respuesta es correcta.",
+ "tarea_pt": "Organize estes cinco nomes de arquivo de nota fiscal do mais antigo ao mais recente.",
+ "producto_pt": "Claude Code (terminal, modo -p)"
 }
