@@ -1,0 +1,83 @@
+{
+ "protocolo": "https://guardianagroup.com/radiografias/recibo-de-agente.html",
+ "tarea": "Ordena estos cinco nombres de archivo de factura de más antiguo a más reciente.",
+ "producto": "Claude Code (terminal, modo -p)",
+ "version_producto": "2.1.274 (Claude Code)",
+ "so": "Microsoft Windows 11 Home 10.0.26200",
+ "guardiana": "guardiana 0.2.3",
+ "guardiana_sha256": "3bbdb3559efac98ec081ad5236b3ac0d5985731b81c1af62311d953c5ae86e9a",
+ "reposo": {
+  "inicio": "2026-09-19T15:18:44.9714097Z",
+  "fin": "2026-09-19T15:23:45.0071055Z",
+  "fin_ms": 1789831425007,
+  "inicio_ms": 1789831124976
+ },
+ "ventana": {
+  "inicio": "2026-09-19T15:23:45.0194741Z",
+  "fin": "2026-09-19T15:23:55.7422914Z",
+  "fin_ms": 1789831435743,
+  "inicio_ms": 1789831425019
+ },
+ "relleno_ms": {
+  "antes": 2000,
+  "despues": 5000
+ },
+ "fondo_en_reposo": [
+  "201627-ipv4fdsmte.gr.global.aa-rt.sharepoint.com",
+  "mobile.events.data.microsoft.com",
+  "officeclient.microsoft.com",
+  "settings-win.data.microsoft.com"
+ ],
+ "nombres_en_la_tarea": [
+  {
+   "nombre": "api.anthropic.com",
+   "veces": 1,
+   "primero_s": 2.3,
+   "categoria_guardiana": "desconocido",
+   "lado": "esperado",
+   "en_reposo": false,
+   "motivo": "Es el servicio de Anthropic al que Claude Code manda la conversación. Sin él no hay respuesta: esto es el producto haciendo su trabajo."
+  },
+  {
+   "nombre": "mcp-proxy.anthropic.com",
+   "veces": 1,
+   "primero_s": 3.2,
+   "categoria_guardiana": "desconocido",
+   "lado": "esperado",
+   "en_reposo": false,
+   "motivo": "Pasarela de Anthropic para los conectores (MCP). Es del propio producto, aunque esta tarea no usaba ningún conector: se preguntó igual, 1,2 segundos después de empezar."
+  },
+  {
+   "nombre": "http-intake.logs.us5.datadoghq.com",
+   "veces": 1,
+   "primero_s": 12.1,
+   "categoria_guardiana": "desconocido",
+   "lado": "otro",
+   "en_reposo": false,
+   "motivo": "Datadog, empresa de vigilancia de aplicaciones y recogida de registros; el nombre es su punto de entrada de registros. No es de Anthropic y no hace falta para ordenar cinco nombres de archivo. Se preguntó a los 10,1 segundos, justo al terminar. Qué se enviara, si es que se envió algo, no se ve desde aquí: GUARDIANA anota nombres, no contenido."
+  }
+ ],
+ "corpus": [
+  {
+   "archivo": "factura_2025-11-21_papeleria-la-hoja.txt",
+   "contenido": "FACTURA N.º 2025-448 · Fecha: 21 de noviembre de 2025 · Proveedor: Papelería La Hoja (ficticia) · Cliente: Taller de pruebas GUARDIANA (ficticio) · Concepto: 3 resmas de papel, 1 caja de bolígrafos · Total: 71.500 COP"
+  },
+  {
+   "archivo": "factura_2025-12-09_cafe-del-puerto.txt",
+   "contenido": "FACTURA N.º C-77 · Fecha: 9 de diciembre de 2025 · Proveedor: Café del Puerto (ficticia) · Cliente: Taller de pruebas GUARDIANA (ficticio) · Concepto: 2 kg de café en grano · Total: 64.000 COP"
+  },
+  {
+   "archivo": "factura_2026-01-15_electricidad-la-chispa.txt",
+   "contenido": "FACTURA N.º E-3310 · Fecha: 15 de enero de 2026 · Proveedor: Electricidad La Chispa (ficticia) · Cliente: Taller de pruebas GUARDIANA (ficticio) · Concepto: Revisión de cableado, 2 horas · Total: 120.000 COP"
+  },
+  {
+   "archivo": "factura_2026-02-03_ferreteria-el-tornillo.txt",
+   "contenido": "FACTURA N.º A-0117 · Fecha: 3 de febrero de 2026 · Proveedor: Ferretería El Tornillo (ficticia) · Cliente: Taller de pruebas GUARDIANA (ficticio) · Concepto: 12 tornillos de 6 mm, 2 brocas · Total: 48.900 COP"
+  },
+  {
+   "archivo": "factura_2026-05-30_transportes-rio-magdalena.txt",
+   "contenido": "FACTURA N.º TR-9021 · Fecha: 30 de mayo de 2026 · Proveedor: Transportes Río Magdalena (ficticia) · Cliente: Taller de pruebas GUARDIANA (ficticio)"
+  }
+ ],
+ "respuesta_del_agente": "Los cinco archivos, ordenados de más antiguo a más reciente por la fecha del nombre: papelería La Hoja (21 nov 2025), Café del Puerto (9 dic 2025), Electricidad La Chispa (15 ene 2026), Ferretería El Tornillo (3 feb 2026) y Transportes Río Magdalena (30 may 2026). Añadió por su cuenta que había ordenado por la fecha del nombre y no por la de dentro del archivo, y ofreció mirar el contenido si hacía falta. La respuesta es correcta."
+}
