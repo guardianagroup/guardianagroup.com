@@ -145,16 +145,28 @@ checkable than a warning.</p>
 
 <h2>5 · macOS</h2>
 <p>On a Mac, GUARDIANA downloads as an ordinary application, <code>GUARDIANA.app</code>. The first time you
-open it, macOS will say something like this: <strong>"GUARDIANA cannot be opened because Apple cannot check
-it for malicious software"</strong>.</p>
-<p>That warning is more awkward than the Windows one, and we say so plainly: there is no "open anyway"
-button the first time. What you do is this, once:</p>
+open it, macOS stops it. This is what appears, measured on 19 September 2026 on a Mac running macOS 26.5.2
+with this very file, downloaded the way you would download it:</p>
+<p><img src="/aviso-mac.png" alt="macOS warning when opening GUARDIANA: the app was not opened because Apple could not verify it is free of malware, with the buttons Move to Trash and OK." width="294" height="272" loading="lazy" style="max-width:100%;height:auto;border:1px solid #D9DEE8;border-radius:10px"></p>
+<p><strong>Read that dialog before you touch anything: the button selected by default is "Move to
+Trash".</strong> Press Return without looking and the file goes to the bin. The one that closes the dialog
+without deleting anything is "OK".</p>
+<p>And there is no shortcut. The old trick —<strong>right-click › Open</strong>— no longer works on current
+versions of macOS: we tried it the same day on the same Mac and the same dialog appears, with the same two
+buttons and no "Open". If someone tells you right-clicking fixes it, they are repeating something Apple
+removed.</p>
+<p>What does work, once:</p>
 <ul>
-<li><strong>Right-click</strong> GUARDIANA.app and choose <strong>Open</strong>. Now the warning does offer
-an "Open" button.</li>
-<li>If it does not, go to <strong>System Settings › Privacy &amp; Security</strong>, scroll to the notice
-about GUARDIANA and press <strong>"Open Anyway"</strong>.</li>
+<li>Try to open it and press <strong>"OK"</strong> in the dialog.</li>
+<li>Go to <strong>System Settings › Privacy &amp; Security</strong> and scroll to the bottom, to the
+<strong>Security</strong> section. This is what is there:</li>
 </ul>
+<p><img src="/aviso-mac-ajustes.png" alt="System Settings, Privacy and Security: GUARDIANA was blocked to protect your Mac, with an Open Anyway button." width="566" height="193" loading="lazy" style="max-width:100%;height:auto;border:1px solid #D9DEE8;border-radius:10px"></p>
+<p>Press <strong>"Open Anyway"</strong> and from then on GUARDIANA opens like any other application. Both
+screenshots are real, from that same test.</p>
+<p>Our test Mac is set to Spanish, so what we read on screen was Apple's Spanish wording; the English above
+is the same dialog. What we checked, and what matters, is the shape of it: the default button deletes the
+file, and there is no "Open" button anywhere in that first dialog.</p>
 
 <h3>Why that warning appears, and why we work this way</h3>
 <p>For macOS not to warn, Apple requires the application to be <em>notarised</em>, and notarising requires a

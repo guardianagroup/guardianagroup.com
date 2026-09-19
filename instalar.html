@@ -145,16 +145,25 @@ un aviso.</p>
 
 <h2>5 · macOS</h2>
 <p>En Mac, GUARDIANA se descarga como una aplicación normal, <code>GUARDIANA.app</code>. Al abrirla la
-primera vez, macOS te va a decir algo parecido a esto: <strong>«No se puede abrir GUARDIANA porque Apple
-no puede comprobar si contiene software malicioso»</strong>.</p>
-<p>Ese aviso es más incómodo que el de Windows, y lo decimos sin rodeos: no hay un botón que diga «abrir
-igual» a la primera. Lo que hay que hacer es esto, una sola vez:</p>
+primera vez, macOS la para. Esto es exactamente lo que sale, medido el 19 de septiembre de 2026 en un Mac
+con macOS 26.5.2 y con este mismo archivo, descargado como lo descargarías tú:</p>
+<p><img src="/aviso-mac.png" alt="Aviso de macOS al abrir GUARDIANA: «No se ha abierto GUARDIANA. Apple no ha podido verificar que GUARDIANA no contenga software malicioso», con los botones «Trasladar a la Papelera» y «Aceptar»." width="294" height="272" loading="lazy" style="max-width:100%;height:auto;border:1px solid #D9DEE8;border-radius:10px"></p>
+<p><strong>Lee bien ese aviso antes de tocar nada: el botón marcado por defecto es «Trasladar a la
+Papelera».</strong> Si pulsas Intro sin mirar, el archivo se va a la papelera. El que cierra el aviso sin
+borrar nada es «Aceptar».</p>
+<p>Y no hay atajo. El truco de siempre —<strong>clic derecho › Abrir</strong>— ya no vale en las versiones
+actuales de macOS: lo probamos ese mismo día en ese mismo Mac y sale el mismo aviso, con los mismos dos
+botones y sin ningún «Abrir». Si alguien te dice que con el clic derecho se arregla, está repitiendo algo
+que Apple quitó.</p>
+<p>Lo que sí funciona, una sola vez:</p>
 <ul>
-<li>Haz <strong>clic derecho</strong> sobre GUARDIANA.app y elige <strong>Abrir</strong>. Ahora sí aparece
-un botón «Abrir» en el aviso.</li>
-<li>Si no sale, ve a <strong>Ajustes del sistema › Privacidad y seguridad</strong>, baja hasta el aviso
-sobre GUARDIANA y pulsa <strong>«Abrir de todos modos»</strong>.</li>
+<li>Intenta abrirla y pulsa <strong>«Aceptar»</strong> en el aviso.</li>
+<li>Ve a <strong>Ajustes del Sistema › Privacidad y seguridad</strong> y baja hasta abajo, a la sección
+<strong>Seguridad</strong>. Ahí aparece esto:</li>
 </ul>
+<p><img src="/aviso-mac-ajustes.png" alt="Ajustes del Sistema, Privacidad y seguridad: «Se ha bloqueado GUARDIANA para proteger tu Mac», con el botón «Abrir igualmente»." width="566" height="193" loading="lazy" style="max-width:100%;height:auto;border:1px solid #D9DEE8;border-radius:10px"></p>
+<p>Pulsas <strong>«Abrir igualmente»</strong> y, a partir de ahí, GUARDIANA se abre como cualquier otra
+aplicación. Las dos capturas son reales, de esa misma prueba.</p>
 
 <h3>Por qué sale ese aviso, y por qué trabajamos así</h3>
 <p>Para que macOS no avise, Apple exige <em>notarizar</em> la aplicación, y para notarizar hace falta una
