@@ -63,7 +63,8 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .top nav a{color:var(--tinta)}
 .top nav a:hover{color:var(--azul)}
 .top nav .nav-pronto{color:var(--gris);cursor:default}
-.top .idiomas{display:inline-flex;gap:8px}
+.top .idiomas{display:inline-flex;gap:6px}
+.top .idioma.actual{border-color:var(--azul);color:var(--azul);background:rgba(31,75,255,.06)}
 .top .idioma{font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid var(--linea);border-radius:999px;padding:6px 12px;color:var(--gris);letter-spacing:.08em}
 .top .idioma:hover{border-color:var(--tinta);color:var(--tinta)}
 .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);gap:64px;align-items:start;padding:72px 0 80px}
@@ -260,7 +261,7 @@ footer .links a:hover{color:var(--tinta)}
 <header class="top">
   <a class="marca" href="/es/" aria-label="GUARDIANA"><i></i>GUARDIANA</a>
   <nav aria-label="Secciones"><a href="#ia">Tu IA</a><span class="nav-pronto">Bóveda (próximamente)</span><a href="#como">Cómo funciona</a><a href="#planes">Planes</a><a href="https://github.com/guardianagroup/guardiana">Código</a><a href="/radiografias/">Radiografías</a></nav>
-  <span class="idiomas"><a class="idioma" href="/" lang="en" hreflang="en" data-idioma="en">EN</a><a class="idioma" href="/pt/" lang="pt" hreflang="pt" data-idioma="pt">PT</a></span>
+  <span class="idiomas"><span class="idioma actual" lang="es" aria-current="true">ES</span><a class="idioma" href="/" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><a class="idioma" href="/pt/" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span>
 </header>
 <main>
 <section class="hero" style="border-top:0">

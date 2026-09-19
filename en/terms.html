@@ -50,7 +50,9 @@ header.top .brand{display:inline-flex;align-items:center;gap:12px;font-family:'U
 header.top .brand i{width:10px;height:10px;border-radius:50%;background:var(--azul);box-shadow:0 0 0 4px rgba(31,75,255,.12);display:inline-block}
 header.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;font-weight:500}
 header.top nav a{color:var(--tinta)}header.top nav a:hover{color:var(--azul)}header.top nav a[aria-current=page]{color:var(--azul)}
-header.top .idioma{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid var(--linea);border-radius:999px;padding:5px 11px;color:var(--gris);letter-spacing:.08em}header.top .idioma:hover{border-color:var(--tinta);color:var(--tinta)}
+header.top .idiomas{margin-left:auto;display:inline-flex;gap:6px}
+header.top .idioma{font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid var(--linea);border-radius:999px;padding:5px 11px;color:var(--gris);letter-spacing:.08em}header.top .idioma:hover{border-color:var(--tinta);color:var(--tinta)}
+header.top .idioma.actual{border-color:var(--azul);color:var(--azul);background:rgba(31,75,255,.06)}
 h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:34px;line-height:1.12;letter-spacing:-.025em;margin:0 0 12px;text-wrap:balance}
 h2{font-family:'Unbounded',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.02em;margin:40px 0 8px;color:var(--tinta);text-wrap:balance}
 h3{font-family:'Unbounded',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;margin:24px 0 6px;color:var(--tinta)}
@@ -70,7 +72,7 @@ footer.pie .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mon
 footer.pie .arriba{justify-self:start;color:var(--azul)}
 @media (max-width:600px){main{padding:20px 16px 72px}h1{font-size:27px}header.top nav{gap:12px 16px}}
 </style></head>
-<body><header class="top"><a class="brand" href="/" aria-label="GUARDIANA, home"><i></i>GUARDIANA</a><nav aria-label="Sections"><a href="/">Home</a><a href="/en/guides/">Guides</a><a href="/en/x-rays/">X-rays</a><a href="/en/privacy.html">Privacy</a><a href="/en/terms.html" aria-current="page">Terms and refunds</a><a href="/en/contact.html">Contact</a></nav></header><main id="arriba">
+<body><header class="top"><a class="brand" href="/" aria-label="GUARDIANA, home"><i></i>GUARDIANA</a><nav aria-label="Sections"><a href="/">Home</a><a href="/en/guides/">Guides</a><a href="/en/x-rays/">X-rays</a><a href="/en/privacy.html">Privacy</a><a href="/en/terms.html" aria-current="page">Terms and refunds</a><a href="/en/contact.html">Contact</a></nav><span class="idiomas"><a class="idioma" href="/terminos.html" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><span class="idioma actual" lang="en" aria-current="true">EN</span><a class="idioma" href="/pt/termos.html" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span></header><main id="arriba">
 <p class="k">TERMS OF USE AND REFUNDS · 19 SEPTEMBER 2026</p>
 <h1>Plain terms, refund with no questions.</h1>
 
