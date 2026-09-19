@@ -1,7 +1,9 @@
 {
  "protocolo": "https://guardianagroup.com/radiografias/recibo-de-agente.html",
  "tarea": "Ordena estos cinco nombres de archivo de factura de más antiguo a más reciente.",
+ "tarea_en": "Sort these five invoice file names from oldest to newest.",
  "producto": "Claude Code (terminal, modo -p)",
+ "producto_en": "Claude Code (terminal, -p mode)",
  "version_producto": "2.1.274 (Claude Code)",
  "so": "Microsoft Windows 11 Home 10.0.26200",
  "guardiana": "guardiana 0.2.3",
@@ -36,7 +38,8 @@
    "categoria_guardiana": "desconocido",
    "lado": "esperado",
    "en_reposo": false,
-   "motivo": "Es el servicio de Anthropic al que Claude Code manda la conversación. Sin él no hay respuesta: esto es el producto haciendo su trabajo."
+   "motivo": "Es el servicio de Anthropic al que Claude Code manda la conversación. Sin él no hay respuesta: esto es el producto haciendo su trabajo.",
+   "motivo_en": "Anthropic's own service, the one Claude Code sends the conversation to. No answer without it: this is the product doing its job."
   },
   {
    "nombre": "mcp-proxy.anthropic.com",
@@ -45,7 +48,8 @@
    "categoria_guardiana": "desconocido",
    "lado": "esperado",
    "en_reposo": false,
-   "motivo": "Pasarela de Anthropic para los conectores (MCP). Es del propio producto, aunque esta tarea no usaba ningún conector: se preguntó igual, 1,2 segundos después de empezar."
+   "motivo": "Pasarela de Anthropic para los conectores (MCP). Es del propio producto, aunque esta tarea no usaba ningún conector: se preguntó igual, 1,2 segundos después de empezar.",
+   "motivo_en": "Anthropic's gateway for connectors (MCP). It belongs to the product, though this task used no connector at all: it was asked for anyway, 1.2 seconds in."
   },
   {
    "nombre": "http-intake.logs.us5.datadoghq.com",
@@ -54,7 +58,8 @@
    "categoria_guardiana": "desconocido",
    "lado": "otro",
    "en_reposo": false,
-   "motivo": "Datadog, empresa de vigilancia de aplicaciones y recogida de registros; el nombre es su punto de entrada de registros. No es de Anthropic y no hace falta para ordenar cinco nombres de archivo. Se preguntó a los 10,1 segundos, justo al terminar. Qué se enviara, si es que se envió algo, no se ve desde aquí: GUARDIANA anota nombres, no contenido."
+   "motivo": "Datadog, empresa de vigilancia de aplicaciones y recogida de registros; el nombre es su punto de entrada de registros. No es de Anthropic y no hace falta para ordenar cinco nombres de archivo. Se preguntó a los 10,1 segundos, justo al terminar. Qué se enviara, si es que se envió algo, no se ve desde aquí: GUARDIANA anota nombres, no contenido.",
+   "motivo_en": "Datadog, an application-monitoring and log-collection company; this name is its log intake. It is not Anthropic's and it is not needed to sort five file names. Asked for at second 10.1, right as the run finished. What was sent, if anything, is not visible from here: GUARDIANA records names, not content."
   }
  ],
  "corpus": [

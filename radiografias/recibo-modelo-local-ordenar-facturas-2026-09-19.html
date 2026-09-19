@@ -74,7 +74,7 @@ footer.pie .arriba{justify-self:start;color:var(--azul)}
 <h1>La misma tarea, con una IA que corre dentro del PC: cero servicios</h1>
 <p class="lead">Las mismas cinco facturas, la misma frase, el mismo PC y el mismo protocolo que con Claude Code, pero con un modelo que no sale a internet: qwen2.5 de 0,5B corriendo en el propio equipo. Tardó 8,9 segundos y el equipo no preguntó por ningún servicio. Ni uno. También hay que decir la otra mitad: se equivocó de respuesta.</p>
 <div class="box"><p><strong>La tarea, literal:</strong> «Ordena estos cinco nombres de archivo de factura de más antiguo a más reciente.»</p>
-<p><strong>Ventana:</strong> 16:33:35 UTC → 16:33:44 UTC (11:33:35 → 11:33:44 en Cartagena), 8,9 segundos. <strong>Reposo antes:</strong> 300 segundos con el agente cerrado.</p>
+<p><strong>Ventana:</strong> 16:33:35 UTC → 16:33:44 UTC (11:33:35 → 11:33:44 en Cartagena), 8,9 segundos. <strong>Reposo antes:</strong> 300 segundos con el servidor del modelo local en marcha y sin ninguna pregunta: es un programa que se queda arrancado, como se queda en cualquier equipo donde se instale.</p>
 <p><strong>Producto:</strong> qwen2.5 0.5B corriendo dentro del PC con Ollama, versión qwen2.5:0.5b sobre ollama version is 0.34.2. <strong>Equipo:</strong> Microsoft Windows 11 Home 10.0.26200.</p>
 <p><strong>Midió:</strong> guardiana 0.2.3, huella SHA-256 <code>3bbdb3559efac98ec081ad5236b3ac0d5985731b81c1af62311d953c5ae86e9a</code>.</p></div>
 
@@ -93,7 +93,7 @@ footer.pie .arriba{justify-self:start;color:var(--azul)}
 <ul>
 <li>Los archivos de la prueba son inventados y se publican enteros dentro del <a href="/radiografias/recibo-modelo-local-ordenar-facturas-2026-09-19.json">JSON en bruto</a>.</li>
 <li>Se cuenta cada nombre que el equipo de prueba pidió a GUARDIANA entre 2 segundos antes de escribir la tarea y 5 segundos después de la respuesta. El contenido de la conversación no se ve ni se guarda: GUARDIANA solo anota nombres.</li>
-<li>Los nombres que ya salieron en los 300 segundos de reposo, con el agente cerrado, son del equipo y no se cuentan contra la IA.</li>
+<li>Los nombres que ya salieron en los 300 segundos de reposo, con el servidor del modelo local en marcha y sin ninguna pregunta: es un programa que se queda arrancado, como se queda en cualquier equipo donde se instale, son del equipo y no se cuentan contra la IA.</li>
 <li>Para repetirlo: <code>guardiana export</code> y las dos ventanas de este recibo. Si tus números no coinciden, escribe a <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a> y se corrige con fecha.</li>
 </ul>
 <p><a href="/radiografias/recibo-de-agente.html">El protocolo, completo</a> · <a href="/radiografias/">Todas las radiografías</a></p>
