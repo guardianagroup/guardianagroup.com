@@ -47,7 +47,10 @@ a{color:var(--azul);text-decoration:none}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--azul);outline-offset:3px}
 .wrap{max-width:var(--ancho);margin:0 auto;padding:0 28px}
 .k{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris)}
-.marca{text-transform:none}
+/* Apple writes it macOS, and the band's uppercase must not rewrite a brand name. Its own
+   class: `.marca` is the logo's, and reusing it gave those six letters the logo's face,
+   weight and colour in the middle of the band. */
+.tal-cual{text-transform:none;font:inherit;color:inherit;letter-spacing:inherit}
 h1,h2,h3{text-wrap:balance;margin:0;font-family:'Unbounded',system-ui,sans-serif;letter-spacing:-.02em}
 p{margin:0}
 img{max-width:100%;height:auto}
@@ -55,14 +58,15 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .top{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 0;border-bottom:1px solid var(--linea)}
 .marca{display:flex;align-items:center;gap:12px;font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.18em;font-size:14px;color:var(--tinta)}
 .marca i{width:10px;height:10px;border-radius:50%;background:var(--azul);box-shadow:0 0 0 4px rgba(31,75,255,.12)}
-.top nav{display:flex;gap:26px;font-size:14px;font-weight:500}
+.top nav{display:flex;gap:38px;font-size:14px;font-weight:500}
 .top nav a{color:var(--tinta)}
 .top nav a:hover{color:var(--azul)}
 .top nav .nav-pronto{color:var(--gris);cursor:default}
 .top .idioma{font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid var(--linea);border-radius:999px;padding:6px 12px;color:var(--gris);letter-spacing:.08em}
 .top .idioma:hover{border-color:var(--tinta);color:var(--tinta)}
 .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);gap:64px;align-items:start;padding:72px 0 80px}
-.hero .fecha{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.hero .fecha .k{white-space:nowrap}
+.fecha{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
 .hero h1{font-weight:700;font-size:clamp(30px,3.6vw,50px);line-height:1.12;letter-spacing:-.025em}
 .hero .lead{font-size:20px;line-height:1.5;max-width:34em;margin-top:22px}
 .hero .lead strong{font-weight:600}
@@ -250,13 +254,13 @@ footer .links a:hover{color:var(--tinta)}
 <div class="wrap">
 <header class="top">
   <a class="marca" href="/" aria-label="GUARDIANA"><i></i>GUARDIANA</a>
-  <nav aria-label="Sections"><a href="#ia">Your AI</a><span class="nav-pronto">Vault · coming soon</span><a href="#como">How it works</a><a href="#planes">Plans</a><a href="https://github.com/guardianagroup/guardiana">Code</a><a href="/en/x-rays/">X-rays</a></nav>
+  <nav aria-label="Sections"><a href="#ia">Your AI</a><span class="nav-pronto">Vault (coming soon)</span><a href="#como">How it works</a><a href="#planes">Plans</a><a href="https://github.com/guardianagroup/guardiana">Code</a><a href="/en/x-rays/">X-rays</a></nav>
   <a class="idioma" href="/es/" lang="es" hreflang="es">ES</a>
 </header>
 <main>
 <section class="hero" style="border-top:0">
   <div>
-    <div class="fecha"><span class="k">WINDOWS, LINUX AND <span class="marca">macOS</span></span></div>
+    <div class="fecha"><span class="k">WINDOWS, LINUX AND <span class="tal-cual">macOS</span></span></div>
     <h1>You gave your AI permission for one task. GUARDIANA checks who your machine really looked up. Cutting it off is your call.</h1>
     <p class="lead">You asked it to sort the invoices. Do you know how many services your machine looked up on the way? GUARDIANA writes down the name of each one, the time and the device. Never the content: it looks at where it tries to talk, not what it reads.</p>
     <p class="peq">For the first 24 hours it only watches; then you decide. Windows, Linux and macOS. On Windows and Linux, with Home Mode, the phones and the TV too, with nothing installed on them. No account, no server of ours, and nothing about you sent to us. Open source: the guardian you can watch yourself.</p>
