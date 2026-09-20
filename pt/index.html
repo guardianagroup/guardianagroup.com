@@ -126,6 +126,17 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .bov-estado{margin-top:22px;font-size:15px;color:var(--gris);max-width:60em}
 .bov-estado a,.ticket .mas,.ticket .pie a{text-decoration:underline;text-underline-offset:2px}
 .pases .pase[aria-hidden="true"]{opacity:0;visibility:hidden;pointer-events:none}
+/* La guía rápida de instalación, la misma que la página de instalar (comun.guia_instalacion). */
+.pasos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:22px 0 10px}
+.pasos3>div{border:1px solid var(--linea);border-radius:12px;padding:16px 18px;background:var(--hoja)}
+.pasos3 h3{margin:0 0 6px;font-size:15px}
+.pasos3 .sis{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris)}
+.pasos3 ol{margin:8px 0 0;padding-left:20px}
+.pasos3 li{margin:7px 0;font-size:14px;line-height:1.5}
+.pasos3 code{font-size:12.5px;overflow-wrap:anywhere}
+.pasos3 img{width:100%;height:auto;border:1px solid var(--linea);border-radius:8px;margin-top:10px;display:block}
+.pasos3 .ojo{color:var(--corte);font-weight:600}
+@media (max-width:820px){.pasos3{grid-template-columns:1fr}}
 /* Dos columnas en proporción fija, y las dos pueden encoger. Con `minmax(0,1fr) auto` el valor
    no cabía y se pintaba fuera del papel; con `auto minmax(0,1fr)` era el nombre largo el que se
    comía la fila. Así, además, las columnas de todas las filas caen a la misma altura. */
@@ -283,7 +294,7 @@ footer .links a:hover{color:var(--tinta)}
 <div class="wrap">
 <header class="top">
   <a class="marca" href="/pt/" aria-label="GUARDIANA"><i></i>GUARDIANA</a>
-  <nav aria-label="Seções"><a href="#ia">Sua IA</a><a href="#como">Como funciona</a><a href="/pt/radiografias/">Radiografias</a><a href="#planes">Planos</a><a href="/pt/casos.html" class="multas">Multas</a><a href="https://github.com/guardianagroup/guardiana">Código</a><span class="nav-pronto">Cofre (em breve)</span></nav>
+  <nav aria-label="Seções"><a href="#ia">Sua IA</a><a href="#como">Como funciona</a><a href="#instalar">Instalar</a><a href="/pt/radiografias/">Radiografias</a><a href="#planes">Planos</a><a href="/pt/casos.html" class="multas">Multas</a><a href="https://github.com/guardianagroup/guardiana">Código</a><span class="nav-pronto">Cofre (em breve)</span></nav>
   <span class="idiomas"><a class="idioma" href="/es/" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><a class="idioma" href="/" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><span class="idioma actual" lang="pt" aria-current="true">PT</span></span>
 </header>
 <main>
@@ -343,6 +354,45 @@ footer .links a:hover{color:var(--tinta)}
 </section>
 
 <section id="instalar">
+  <h2 id="paso-a-paso">Passo a passo, no seu sistema</h2>
+<p>O resumo. Abaixo, cada ponto explicado com calma, com o que você vai ver na tela e por quê.</p>
+<div class="pasos3">
+ <div>
+  <span class="sis">Windows 10 e 11</span>
+  <h3>Quatro passos</h3>
+  <ol>
+   <li><strong>Baixe</strong> <code>guardiana-1.0.0-windows-x86_64.msi</code>. Em 5 de outubro ele aparece nesta mesma página.</li>
+   <li><strong>Confira a impressão digital antes de abrir</strong>, no PowerShell:<br><code>Get-FileHash guardiana-1.0.0-windows-x86_64.msi -Algorithm SHA256</code><br>e compare com a do registro público. Se não forem idênticas, apague o arquivo.</li>
+   <li><strong>Abra.</strong> O Windows mostra este aviso. Ele não diz que o programa é perigoso: diz que o Windows ainda não o conhece.
+    <img src="/aviso-instalacion.png" alt="Aviso de segurança do Windows: editor desconhecido." width="600" height="366" loading="lazy"></li>
+   <li><strong>Já instalado</strong>, digite <code>guardiana verify</code>: ele repete a conferência sozinho, no seu computador.</li>
+  </ol>
+ </div>
+ <div>
+  <span class="sis">Linux com systemd</span>
+  <h3>Quatro passos</h3>
+  <ol>
+   <li><strong>Baixe</strong> <code>guardiana_1.0.0_amd64.deb</code> (ou o <code>.tar.gz</code>, se não usa Debian nem Ubuntu).</li>
+   <li><strong>Confira a impressão digital e a assinatura:</strong><br><code>sha256sum guardiana_1.0.0_amd64.deb</code><br><code>minisign -Vm guardiana_1.0.0_amd64.deb -P &lt;chave&gt;</code></li>
+   <li><strong>Instale:</strong><br><code>sudo apt install ./guardiana_1.0.0_amd64.deb</code><br>No Linux não há aviso de editor desconhecido: há impressão digital e assinatura, que dá para conferir — um aviso, não.</li>
+   <li><strong>Confira a instalação</strong> com <code>guardiana verify</code>.</li>
+  </ol>
+ </div>
+ <div>
+  <span class="sis">macOS 13 ou posterior</span>
+  <h3>Quatro passos</h3>
+  <ol>
+   <li><strong>Baixe</strong> <code>GUARDIANA.app.zip</code> e confira a impressão digital:<br><code>shasum -a 256 GUARDIANA.app.zip</code></li>
+   <li><strong>Abra.</strong> O macOS barra com este aviso. <span class="ojo">Atenção: o botão marcado por padrão é «Mover para o Lixo».</span> O que fecha o aviso sem apagar nada é <strong>«OK»</strong>.
+    <img src="/aviso-mac.png" alt="Aviso do macOS ao abrir a GUARDIANA pela primeira vez, com «Mover para o Lixo» marcado por padrão." width="600" height="366" loading="lazy"></li>
+   <li><strong>Ajustes do Sistema › Privacidade e Segurança</strong> e, lá embaixo, em «Segurança», clique em <strong>«Abrir Assim Mesmo»</strong>. Só é preciso uma vez.
+    <img src="/aviso-mac-ajustes.png" alt="Ajustes do Sistema do macOS, seção Segurança, com o botão «Abrir Assim Mesmo»." width="600" height="366" loading="lazy"></li>
+   <li><strong>Confira a instalação</strong> com <code>guardiana verify</code>.</li>
+  </ol>
+ </div>
+</div>
+<p class="muted">O clique com o botão direito › Abrir já não vale nas versões atuais do macOS: testamos em 19 de setembro de 2026 e aparece o mesmo aviso, com os mesmos dois botões. Se alguém disser que o botão direito resolve, está repetindo algo que a Apple tirou.</p>
+
   <div class="cab-sec"><span class="k">POR QUE VOCÊ PODE VER UM AVISO AO INSTALAR</span><h2>O Windows avisa sobre o que ainda não conhece, assinado ou não. Por isso ensinamos você a conferir o arquivo.</h2><p>Em troca de esperar a assinatura você tem algo melhor que um selo: o código completo, a compilação reproduzível e a impressão digital pública de cada versão. A verificação é feita por você, ou por qualquer pessoa em quem você confie.</p></div>
   <div class="instalar">
     <figure><img src="/aviso-instalacion.png" width="1200" height="720" alt="Captura real: Windows 11, 15 de setembro de 2026, com este mesmo arquivo. Só foi tapado o nome de usuário do computador." loading="lazy"><figcaption>Captura real: Windows 11, 15 de setembro de 2026, com este mesmo arquivo. Só foi tapado o nome de usuário do computador.</figcaption></figure>
