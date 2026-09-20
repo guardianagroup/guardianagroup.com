@@ -1,0 +1,197 @@
+{
+ "slug": "ocho-ia-con-tu-cuenta-al-conversar-2026-09-20",
+ "fecha": "2026-09-20",
+ "modo": "cuenta",
+ "entidades": [
+  {
+   "nombre": "ChatGPT",
+   "clave": "chatgpt",
+   "total": 5,
+   "propios": 4,
+   "ajenos": 1,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "cloudflare.com",
+     "malo": false
+    }
+   ],
+   "total_extracto": 5,
+   "malos_extracto": 0,
+   "nota": "Cuatro nombres suyos —`chatgpt.com` y `ws.chatgpt.com`, por donde va la conversación, `cdn.openai.com` y `api.oaistatsig.com`— y **uno ajeno**: `a.nel.cloudflare.com`, el aviso de errores de red de Cloudflare. No está en ninguna lista de publicidad ni de rastreo, pero no es de OpenAI, así que se cuenta. El 18 de septiembre, en la misma prueba, no apareció: entonces fueron cero. Dos mediciones, dos números; se publican los dos."
+  },
+  {
+   "nombre": "Claude",
+   "clave": "claude",
+   "total": 4,
+   "propios": 4,
+   "ajenos": 0,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [],
+   "total_extracto": 4,
+   "malos_extracto": 0,
+   "nota": "**Cero servicios ajenos.** Cuatro nombres, los cuatro suyos: `claude.ai`, `a.claude.ai`, `assets-proxy.anthropic.com` y `s-cdn.anthropic.com`. GUARDIANA se construye con Claude Code, de Anthropic. Por eso Claude se dejó fuera de la radiografía del 18 de septiembre. Se incluye aquí, con esta línea bien visible, porque esconder al socio es peor que enseñarlo: el número se puede comprobar como los demás, con el método de esta misma página, y quien no se fíe tiene el aviso delante."
+  },
+  {
+   "nombre": "Meta AI",
+   "clave": "metaai",
+   "total": 3,
+   "propios": 3,
+   "ajenos": 0,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [],
+   "total_extracto": 3,
+   "malos_extracto": 0,
+   "nota": "**Cero ajenos.** Tres nombres: `www.meta.ai`, `gateway.meta.ai` y `static.xx.fbcdn.net`. El tercero es la red de archivos de Meta, así que cuenta como suyo y no como de un tercero; decirlo importa, porque `fbcdn.net` lleva el apellido de Facebook y es fácil confundirlo con rastreo."
+  },
+  {
+   "nombre": "Copilot",
+   "clave": "copilot",
+   "total": 8,
+   "propios": 4,
+   "ajenos": 4,
+   "malos": 1,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "sprig.com",
+     "malo": false
+    },
+    {
+     "dominio": "microsoft.com",
+     "malo": true
+    },
+    {
+     "dominio": "sentry.io",
+     "malo": false
+    }
+   ],
+   "total_extracto": 8,
+   "malos_extracto": 1,
+   "nota": "Cuatro suyos y **cuatro ajenos**: `browser.events.data.microsoft.com`, que las listas abiertas conocen como telemetría; `o4508134825000960.ingest.us.sentry.io`, recogida de errores; y `cdn.sprig.com` y `api.sprig.com`, una herramienta de encuestas dentro del producto. Ninguno de los tres últimos está en listas de publicidad."
+  },
+  {
+   "nombre": "Perplexity",
+   "clave": "perplexity",
+   "total": 12,
+   "propios": 7,
+   "ajenos": 5,
+   "malos": 2,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "browser-intake-datadoghq.com",
+     "malo": true
+    },
+    {
+     "dominio": "eppo.cloud",
+     "malo": false
+    },
+    {
+     "dominio": "singular.net",
+     "malo": false
+    },
+    {
+     "dominio": "cloudflareinsights.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 12,
+   "malos_extracto": 2,
+   "nota": "Siete nombres suyos y **cinco ajenos**, dos de ellos en listas: `browser-intake-datadoghq.com` (rastreador, vigilancia de la aplicación) y `static.cloudflareinsights.com` (publicidad). Los otros tres: `fscdn.eppo.cloud` y `sdk-api-v1.singular.net`, medición de producto y de campañas, y `www.dubcdn.com`."
+  },
+  {
+   "nombre": "Gemini",
+   "clave": "gemini",
+   "total": 18,
+   "propios": 12,
+   "ajenos": 6,
+   "malos": 6,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    },
+    {
+     "dominio": "google-analytics.com",
+     "malo": true
+    },
+    {
+     "dominio": "googleadservices.com",
+     "malo": true
+    },
+    {
+     "dominio": "googletagmanager.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 18,
+   "malos_extracto": 7,
+   "nota": "**Seis ajenos, y los seis en listas de publicidad o rastreo**: `www.googletagmanager.com`, `www.google-analytics.com`, `www.googleadservices.com`, `ad.doubleclick.net`, `stats.g.doubleclick.net` y `googleads.g.doubleclick.net`. Son de Google, igual que Gemini, pero no son Gemini: son la maquinaria de publicidad de la casa, y por eso se cuentan aparte. Su lista de nombres propios es la más generosa de las ocho —doce— justamente porque Google es dueño de casi todo lo que aparece."
+  },
+  {
+   "nombre": "DeepSeek",
+   "clave": "deepseek",
+   "total": 9,
+   "propios": 2,
+   "ajenos": 7,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "awswaf.com",
+     "malo": false
+    },
+    {
+     "dominio": "volccdn.com",
+     "malo": false
+    },
+    {
+     "dominio": "volces.com",
+     "malo": false
+    },
+    {
+     "dominio": "cdn-apple.com",
+     "malo": false
+    }
+   ],
+   "total_extracto": 9,
+   "malos_extracto": 0,
+   "nota": "Dos nombres suyos y **siete ajenos, ninguno en listas de publicidad**: `apm.volccdn.com`, `apmplus.volces.com` y `gator.volces.com`, de Volcano Engine (ByteDance), que le hacen la vigilancia de la aplicación; `awswaf.com` y `challenges.cloudflare.com`, dos cortafuegos de bots; `appleid.cdn-apple.com`, el botón de entrar con Apple; y `fp-it-acc.portal101.cn`. En su ventana apareció además `chatgpt.com`, a los dos segundos de empezar y antes de que la página cargara: es el autocompletado del navegador adivinando al teclear «chat…», no una conexión de DeepSeek, y **no se le cuenta**."
+  },
+  {
+   "nombre": "Grok",
+   "clave": "grok",
+   "total": 17,
+   "propios": 2,
+   "ajenos": 15,
+   "malos": 7,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "stripe.com",
+     "malo": false
+    },
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    },
+    {
+     "dominio": "twitter.com",
+     "malo": false
+    },
+    {
+     "dominio": "cookielaw.org",
+     "malo": false
+    }
+   ],
+   "total_extracto": 17,
+   "malos_extracto": 7,
+   "nota": "Dos nombres suyos y **quince ajenos, siete de ellos en listas**: `ad.doubleclick.net`, `googleads.g.doubleclick.net`, `www.google-analytics.com`, `www.googletagmanager.com`, `static.ads-twitter.com`, `t.co` y `static.cloudflareinsights.com`. Los otros ocho son cobros y medición: tres de Stripe (`js.stripe.com`, `m.stripe.com`, `m.stripe.network`), `analytics.twitter.com`, `cdn.cookielaw.org` (el aviso de cookies), `stun.l.google.com`, `stapecdn.com` y un contenedor de etiquetas propio en Google Cloud."
+  }
+ ]
+}
