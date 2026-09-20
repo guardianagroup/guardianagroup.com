@@ -1,0 +1,92 @@
+{
+ "protocolo": "https://guardianagroup.com/radiografias/recibo-de-agente.html",
+ "tarea": "Ordena estos cinco nombres de archivo de factura de más antiguo a más reciente.",
+ "tarea_en": "Sort these five invoice file names from oldest to newest.",
+ "tarea_pt": "Organize estes cinco nomes de arquivo de nota fiscal do mais antigo ao mais recente.",
+ "producto": "Claude Code (terminal, modo -p)",
+ "producto_en": "Claude Code (terminal, -p mode)",
+ "producto_pt": "Claude Code (terminal, modo -p)",
+ "version_producto": "2.1.274 (Claude Code)",
+ "so": "Microsoft Windows 11 Home 10.0.26200",
+ "guardiana": "guardiana 0.2.3",
+ "guardiana_sha256": "188c7761de0a27a22d3618c91eede3b1875e4c9a31cccbd44ed988c3d6980444",
+ "reposo": {
+  "inicio": "2026-09-20T15:53:58.7912947Z",
+  "fin": "2026-09-20T15:58:58.8195655Z",
+  "fin_ms": 1789919938819,
+  "inicio_ms": 1789919638797
+ },
+ "ventana": {
+  "inicio": "2026-09-20T15:58:58.8319232Z",
+  "fin": "2026-09-20T15:59:09.7227359Z",
+  "fin_ms": 1789919949722,
+  "inicio_ms": 1789919938831
+ },
+ "relleno_ms": {
+  "antes": 2000,
+  "despues": 5000
+ },
+ "fondo_en_reposo": [
+  "ecs.office.com",
+  "mobile.events.data.microsoft.com",
+  "v10.events.data.microsoft.com"
+ ],
+ "nombres_en_la_tarea": [
+  {
+   "nombre": "api.anthropic.com",
+   "veces": 1,
+   "primero_s": 2.3,
+   "categoria_guardiana": "desconocido",
+   "lado": "esperado",
+   "en_reposo": false,
+   "motivo": "Es el servicio de Anthropic al que Claude Code manda la conversación. Sin él no hay respuesta: esto es el producto haciendo su trabajo.",
+   "motivo_en": "Anthropic's own service, the one Claude Code sends the conversation to. No answer without it: this is the product doing its job.",
+   "motivo_pt": "É o serviço da Anthropic para o qual o Claude Code manda a conversa. Sem ele não há resposta: isto é o produto fazendo o seu trabalho."
+  },
+  {
+   "nombre": "mcp-proxy.anthropic.com",
+   "veces": 1,
+   "primero_s": 3.1,
+   "categoria_guardiana": "desconocido",
+   "lado": "esperado",
+   "en_reposo": false,
+   "motivo": "Pasarela de Anthropic para los conectores (MCP). Es del propio producto, aunque esta tarea no usaba ningún conector: se preguntó igual, 1,1 segundos después de empezar.",
+   "motivo_en": "Anthropic's gateway for connectors (MCP). It belongs to the product, though this task used no connector at all: it was asked for anyway, 1.1 seconds in.",
+   "motivo_pt": "Gateway da Anthropic para os conectores (MCP). É do próprio produto, embora esta tarefa não usasse nenhum conector: foi perguntado mesmo assim, 1,1 segundo depois de começar."
+  },
+  {
+   "nombre": "http-intake.logs.us5.datadoghq.com",
+   "veces": 1,
+   "primero_s": 12.3,
+   "categoria_guardiana": "desconocido",
+   "lado": "otro",
+   "en_reposo": false,
+   "motivo": "Datadog, empresa de vigilancia de aplicaciones y recogida de registros; el nombre es su punto de entrada de registros. No es de Anthropic y no hace falta para ordenar cinco nombres de archivo. Se preguntó a los 10,3 segundoss, justo al terminar. Qué se enviara, si es que se envió algo, no se ve desde aquí: GUARDIANA anota nombres, no contenido.",
+   "motivo_en": "Datadog, an application-monitoring and log-collection company; this name is its log intake. It is not Anthropic's and it is not needed to sort five file names. Asked for at second 10.1, right as the run finished. What was sent, if anything, is not visible from here: GUARDIANA records names, not content.",
+   "motivo_pt": "Datadog, empresa de monitoramento de aplicativos e coleta de registros. Não é da Anthropic: é uma terceira empresa para a qual o computador falou enquanto o agente trabalhava. A GUARDIANA vê o nome, não o que foi enviado."
+  }
+ ],
+ "corpus": [
+  {
+   "archivo": "factura_2025-11-21_papeleria-la-hoja.txt",
+   "contenido": "FACTURA N.º 2025-448 · Fecha: 21 de noviembre de 2025 · Proveedor: Papelería La Hoja (ficticia) · Cliente: Taller de pruebas GUARDIANA (ficticio) · Concepto: 3 resmas de papel, 1 caja de bolígrafos · Total: 71.500 COP"
+  },
+  {
+   "archivo": "factura_2025-12-09_cafe-del-puerto.txt",
+   "contenido": "FACTURA N.º C-77 · Fecha: 9 de diciembre de 2025 · Proveedor: Café del Puerto (ficticia) · Cliente: Taller de pruebas GUARDIANA (ficticio) · Concepto: 2 kg de café en grano · Total: 64.000 COP"
+  },
+  {
+   "archivo": "factura_2026-01-15_electricidad-la-chispa.txt",
+   "contenido": "FACTURA N.º E-3310 · Fecha: 15 de enero de 2026 · Proveedor: Electricidad La Chispa (ficticia) · Cliente: Taller de pruebas GUARDIANA (ficticio) · Concepto: Revisión de cableado, 2 horas · Total: 120.000 COP"
+  },
+  {
+   "archivo": "factura_2026-02-03_ferreteria-el-tornillo.txt",
+   "contenido": "FACTURA N.º A-0117 · Fecha: 3 de febrero de 2026 · Proveedor: Ferretería El Tornillo (ficticia) · Cliente: Taller de pruebas GUARDIANA (ficticio) · Concepto: 12 tornillos de 6 mm, 2 brocas · Total: 48.900 COP"
+  },
+  {
+   "archivo": "factura_2026-05-30_transportes-rio-magdalena.txt",
+   "contenido": "FACTURA N.º TR-9021 · Fecha: 30 de mayo de 2026 · Proveedor: Transportes Río Magdalena (ficticia) · Cliente: Taller de pruebas GUARDIANA (ficticio)"
+  }
+ ],
+ "respuesta_del_agente": "Los cinco archivos, ordenados de más antiguo a más reciente por la fecha del nombre: papelería La Hoja (21 nov 2025), Café del Puerto (9 dic 2025), Electricidad La Chispa (15 ene 2026), Ferretería El Tornillo (3 feb 2026) y Transportes Río Magdalena (30 may 2026). Añadió por su cuenta que había tomado los cinco archivos de la carpeta porque no venían en el mensaje, y que ordenaba por la fecha del nombre y no por la de modificación del archivo. La respuesta es correcta."
+}
