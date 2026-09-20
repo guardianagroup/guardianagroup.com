@@ -1,0 +1,197 @@
+{
+ "slug": "ocho-ia-buscando-en-internet-2026-09-20",
+ "fecha": "2026-09-20",
+ "modo": "cuenta",
+ "entidades": [
+  {
+   "nombre": "Claude",
+   "clave": "claude",
+   "total": 4,
+   "propios": 4,
+   "ajenos": 0,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [],
+   "total_extracto": 4,
+   "malos_extracto": 0,
+   "nota": "**Cero servicios ajenos**, igual que con la pregunta fácil. Cuatro nombres, los cuatro suyos. Contestó: el título de la ventana pasó a «Clima actual en Barranquilla». GUARDIANA se construye con Claude Code, de Anthropic. Se dice aquí, en su propia fila, porque esconder al socio es peor que enseñarlo: el número se comprueba como los demás."
+  },
+  {
+   "nombre": "Meta AI",
+   "clave": "metaai",
+   "total": 2,
+   "propios": 2,
+   "ajenos": 0,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [],
+   "total_extracto": 2,
+   "malos_extracto": 0,
+   "nota": "**Cero ajenos.** Dos nombres, los dos suyos. Su ventana no cambia de título nunca, así que desde fuera no se puede decir que contestara; lo que sí se puede decir es a quién hizo hablar al equipo mientras estuvo abierta, que es cero."
+  },
+  {
+   "nombre": "ChatGPT",
+   "clave": "chatgpt",
+   "total": 6,
+   "propios": 3,
+   "ajenos": 3,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "cloudflare.com",
+     "malo": false
+    },
+    {
+     "dominio": "gstatic.com",
+     "malo": false
+    }
+   ],
+   "total_extracto": 6,
+   "malos_extracto": 0,
+   "nota": "Pasa de uno a **tres ajenos**, y los dos nuevos son **de Google**: `t1.gstatic.com` y `t3.gstatic.com`, las miniaturas de los resultados de búsqueda. Es decir: le preguntas a ChatGPT y tu equipo acaba hablando con Google. El tercero es `a.nel.cloudflare.com`, el aviso de errores de red. Ninguno de los tres está en listas de publicidad ni de rastreo. En su ventana cayó además un nombre de SharePoint que **no se le cuenta**: aparece cinco veces sueltas a lo largo del día, es OneDrive de fondo y no tiene nada que ver con la página."
+  },
+  {
+   "nombre": "Perplexity",
+   "clave": "perplexity",
+   "total": 10,
+   "propios": 7,
+   "ajenos": 3,
+   "malos": 1,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "browser-intake-datadoghq.com",
+     "malo": true
+    },
+    {
+     "dominio": "eppo.cloud",
+     "malo": false
+    },
+    {
+     "dominio": "singular.net",
+     "malo": false
+    }
+   ],
+   "total_extracto": 10,
+   "malos_extracto": 1,
+   "nota": "Siete nombres suyos y **tres ajenos**, uno en listas: `browser-intake-datadoghq.com` (rastreador, vigilancia de la aplicación). Los otros dos son medición de producto y de campañas: `fscdn.eppo.cloud` y `sdk-api-v1.singular.net`. Con la pregunta fácil fueron cinco; con esta, tres."
+  },
+  {
+   "nombre": "Copilot",
+   "clave": "copilot",
+   "total": 8,
+   "propios": 4,
+   "ajenos": 4,
+   "malos": 1,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "sprig.com",
+     "malo": false
+    },
+    {
+     "dominio": "microsoft.com",
+     "malo": true
+    },
+    {
+     "dominio": "sentry.io",
+     "malo": false
+    }
+   ],
+   "total_extracto": 8,
+   "malos_extracto": 1,
+   "nota": "**Cuatro ajenos, uno en listas**, exactamente los mismos cuatro que con la pregunta fácil: la telemetría de Microsoft (`browser.events.data.microsoft.com`), Sentry para los errores y Sprig, dos nombres, para las encuestas dentro del producto. Dos preguntas distintas, el mismo resultado."
+  },
+  {
+   "nombre": "DeepSeek",
+   "clave": "deepseek",
+   "total": 7,
+   "propios": 2,
+   "ajenos": 5,
+   "malos": 0,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "volccdn.com",
+     "malo": false
+    },
+    {
+     "dominio": "volces.com",
+     "malo": false
+    },
+    {
+     "dominio": "cloudflare.com",
+     "malo": false
+    },
+    {
+     "dominio": "portal101.cn",
+     "malo": false
+    }
+   ],
+   "total_extracto": 7,
+   "malos_extracto": 0,
+   "nota": "Dos nombres suyos y **cinco ajenos, ninguno en listas de publicidad**: Volcano Engine de ByteDance (`apm.volccdn.com`, `apmplus.volces.com`, `gator.volces.com`), el cortafuegos de bots de Cloudflare y `fp-it-acc.portal101.cn`. En su ventana volvió a caer `chatgpt.com` en los primeros segundos: es el navegador adivinando la dirección anterior mientras se teclea, y **no se le cuenta**."
+  },
+  {
+   "nombre": "Gemini",
+   "clave": "gemini",
+   "total": 16,
+   "propios": 10,
+   "ajenos": 6,
+   "malos": 6,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    },
+    {
+     "dominio": "google-analytics.com",
+     "malo": true
+    },
+    {
+     "dominio": "googleadservices.com",
+     "malo": true
+    },
+    {
+     "dominio": "googletagmanager.com",
+     "malo": true
+    }
+   ],
+   "total_extracto": 16,
+   "malos_extracto": 7,
+   "nota": "**Seis ajenos y los seis en listas**, los mismos seis de la pregunta fácil, uno por uno: `googletagmanager`, `google-analytics`, `googleadservices` y DoubleClick por tres caminos. Son de Google, igual que Gemini, pero no son Gemini. Dos preguntas, dos veces lo mismo."
+  },
+  {
+   "nombre": "Grok",
+   "clave": "grok",
+   "total": 16,
+   "propios": 2,
+   "ajenos": 14,
+   "malos": 6,
+   "comparable": true,
+   "terceros": [
+    {
+     "dominio": "stripe.com",
+     "malo": false
+    },
+    {
+     "dominio": "doubleclick.net",
+     "malo": true
+    },
+    {
+     "dominio": "twitter.com",
+     "malo": false
+    },
+    {
+     "dominio": "stripe.network",
+     "malo": false
+    }
+   ],
+   "total_extracto": 16,
+   "malos_extracto": 6,
+   "nota": "**Catorce ajenos, seis en listas**: DoubleClick por dos caminos, Google Analytics, Tag Manager, la publicidad de Twitter (`static.ads-twitter.com`) y `t.co`. Los otros ocho son cobros y medición: Stripe con tres nombres, `analytics.twitter.com`, el aviso de cookies de OneTrust, un servidor STUN de Google, `stapecdn.com` y un contenedor de etiquetas propio. Sigue siendo, con diferencia, la que más habla. En su ventana se descuenta `gemini.google.com`, que es el navegador adivinando la dirección anterior."
+  }
+ ]
+}
