@@ -234,7 +234,13 @@ footer .links a{color:var(--gris)}
 footer .links a:hover{color:var(--tinta)}
 @media (max-width:1000px){.compromisos{grid-template-columns:repeat(2,minmax(0,1fr))}.quienes{grid-template-columns:1fr}}
 @media (max-width:900px){
-  .hero{grid-template-columns:1fr;gap:40px;padding:48px 0 60px}
+  .hero{grid-template-columns:minmax(0,1fr);gap:40px;padding:48px 0 60px}
+  /* A grid child never shrinks below its own content unless it is told to. Without these, the
+     receipt stretched the single mobile column to 407px inside a 375px screen and the home page
+     ran off the right edge in all three languages. The owner saw it on his phone, 19 Sep. */
+  .hero>*,.pases,.pases .escena,.pases .pase,.pases .pase>.ticket,.pestanas{min-width:0}
+  .ticket.recibo .fila{grid-template-columns:minmax(0,1fr) minmax(0,auto)}
+  .ticket .fila .t{overflow-wrap:anywhere}
   .cab-sec,.dos,.planes,.faq,.activar,.ia,.instalar,.rx,.tres-bov{grid-template-columns:1fr}
   .cab-sec .k{margin-bottom:-10px}
   .pasos{grid-template-columns:1fr 1fr}
@@ -251,8 +257,13 @@ footer .links a:hover{color:var(--tinta)}
   .pasos,.compromisos{grid-template-columns:1fr}
   .paso{border-right:0;border-bottom:1px solid var(--linea)}
   .paso:last-child{border-bottom:0}
-  .wrap{padding:0 18px}
+  .wrap{padding:0 20px}
   .ticket{padding:22px 16px 26px}
+  /* Las tres pestañas en portugués («Seu navegador · Sua IA · Seu agente») medían 357 px y, con
+     width:max-content, estiraban la columna entera por encima de los 335 que caben en un móvil de
+     375. Se aprietan un poco y, por si algún idioma futuro no cabe igual, la barra se desliza. */
+  .pestanas{max-width:100%;overflow-x:auto}
+  .pestanas button{padding:8px 10px;letter-spacing:.06em}
 }
 @media (prefers-reduced-motion:reduce){.btn{transition:none}.pases .pase{transition:none}.pases.auto .pestanas button[aria-selected="true"] i{animation:none}}
 </style></head>
