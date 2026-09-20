@@ -191,7 +191,7 @@
    ],
    "total_extracto": 16,
    "malos_extracto": 6,
-   "nota": "**Catorce ajenos, seis en listas**: DoubleClick por dos caminos, Google Analytics, Tag Manager, la publicidad de Twitter (`static.ads-twitter.com`) y `t.co`. Los otros ocho son cobros y medición: Stripe con tres nombres, `analytics.twitter.com`, el aviso de cookies de OneTrust, un servidor STUN de Google, `stapecdn.com` y un contenedor de etiquetas propio. Sigue siendo, con diferencia, la que más habla. En su ventana se descuenta `gemini.google.com`, que es el navegador adivinando la dirección anterior."
+   "nota": "**Catorce ajenos, seis en listas**: DoubleClick por dos caminos, Google Analytics, Tag Manager, la publicidad de X (`static.ads-twitter.com`) y `t.co`. Los otros ocho son cobros y medición: Stripe con tres nombres, `analytics.twitter.com`, el aviso de cookies de OneTrust, un servidor STUN de Google, `stapecdn.com` y un contenedor de etiquetas propio. Sigue siendo, con diferencia, la que más habla. En su ventana se descuenta `gemini.google.com`, que es el navegador adivinando la dirección anterior."
   }
  ]
 }
