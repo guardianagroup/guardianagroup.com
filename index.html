@@ -61,6 +61,8 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .marca i{width:10px;height:10px;border-radius:50%;background:var(--azul);box-shadow:0 0 0 4px rgba(31,75,255,.12)}
 .top nav{display:flex;gap:38px;font-size:14px;font-weight:500}
 .top nav a{color:var(--tinta)}
+.top nav a.multas{color:var(--corte)}
+.top nav a.multas:hover{color:var(--corte);text-decoration:underline;text-underline-offset:3px}
 .top nav a:hover{color:var(--azul)}
 .top nav .nav-pronto{color:var(--gris);cursor:default}
 .top .idiomas{display:inline-flex;gap:6px}
@@ -278,7 +280,7 @@ footer .links a:hover{color:var(--tinta)}
 <div class="wrap">
 <header class="top">
   <a class="marca" href="/" aria-label="GUARDIANA"><i></i>GUARDIANA</a>
-  <nav aria-label="Sections"><a href="#ia">Your AI</a><a href="#como">How it works</a><a href="/en/x-rays/">X-rays</a><a href="#planes">Plans</a><a href="/en/cases.html">Fines</a><a href="https://github.com/guardianagroup/guardiana">Code</a><span class="nav-pronto">Vault (coming soon)</span></nav>
+  <nav aria-label="Sections"><a href="#ia">Your AI</a><a href="#como">How it works</a><a href="/en/x-rays/">X-rays</a><a href="#planes">Plans</a><a href="/en/cases.html" class="multas">Fines</a><a href="https://github.com/guardianagroup/guardiana">Code</a><span class="nav-pronto">Vault (coming soon)</span></nav>
   <span class="idiomas"><a class="idioma" href="/es/" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><span class="idioma actual" lang="en" aria-current="true">EN</span><a class="idioma" href="/pt/" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span>
 </header>
 <main>
