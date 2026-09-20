@@ -124,6 +124,11 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .ticket.recibo .extra-ag p.comp a{color:var(--azul);text-decoration:none;white-space:nowrap}
 .ticket.recibo .cap-fondo{margin-top:11px;padding-top:9px;border-top:1px dashed var(--linea);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gris);font-family:'IBM Plex Mono',monospace;line-height:1.4}
 .ticket.recibo .filas.fondo-ag{opacity:.85}
+.box-trampa{border:1.5px solid var(--corte);border-radius:14px;padding:20px 24px;margin:26px 0 4px;background:var(--hoja)}
+.box-trampa .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--corte)}
+.box-trampa h3{font-family:'Unbounded',sans-serif;font-size:19px;margin:8px 0 10px;line-height:1.3}
+.box-trampa p{margin:0 0 10px}
+.box-trampa p.ojo{font-size:15px;color:var(--gris);margin-bottom:0}
 .ticket.recibo .fila{padding:4px 0}
 .ticket.recibo .filas .fila{border-bottom:1px solid #EEF1F6}
 .ticket.recibo .fila .v.a{color:var(--ambar)}
@@ -351,6 +356,12 @@ footer .links a:hover{color:var(--tinta)}
 <section id="como">
   <div class="cab-sec"><span class="k">HOW IT WORKS</span><h2>Before your device can connect to any service, it has to ask where that service is. That question goes through GUARDIANA.</h2><p>GUARDIANA answers those questions from inside your computer and writes down what it sees: the service name, the time and which device asked. Never the content. With Home Mode, phones and the TV too, without installing anything on them.</p></div>
   <div class="pasos"><div class="paso"><span class="num">1</span><h3>YOUR DEVICES</h3><p>Computer, phones, TV, everything on the Wi-Fi</p></div><div class="paso"><span class="num">2</span><h3>SERVICE NAME</h3><p>Every connection starts by asking “where is this service?”</p></div><div class="paso"><span class="num">3</span><h3>CATEGORY AND SIGNAL</h3><p>Tracker, advertising, telemetry, expected or unknown, with one sentence</p></div><div class="paso"><span class="num">4</span><h3>YOUR DECISION</h3><p>Cut or let through; never before 24 h; always with undo</p></div></div>
+  <div class="box-trampa">
+    <span class="k">TRAP FILES</span>
+    <h3>Bait that tells you who bit, without looking at a single file</h3>
+    <p>GUARDIANA can leave a file on your desktop that looks like a copy of your keys. There is no key inside: there is one unique internet address that exists nowhere else in the world. If any program —an AI, a browser extension, a web page— opens that file and goes looking for that address, the question passes through GUARDIANA and is written down with the time and, on Windows, with the name of the program that asked. GUARDIANA never opened the file and does not know what is inside: it keeps looking only at names, as it does with everything else.</p>
+    <p class="ojo">What this trap does not catch, said before you ask: a program that reads the file and sends it to its own server without looking up that address will not show. It is a trap for whoever follows the link, not a theft detector.</p>
+  </div>
   <figure class="pantalla"><img src="/panel-dispositivos-en.png" width="1400" height="443" alt="«Devices», the same record: every query from this Mac, sorted by what it is. Cut: none, because cutting is your decision." loading="lazy"><figcaption>«Devices», the same record: every query from this Mac, sorted by what it is. Cut: none, because cutting is your decision.</figcaption></figure>
 </section>
 

@@ -124,6 +124,11 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .ticket.recibo .extra-ag p.comp a{color:var(--azul);text-decoration:none;white-space:nowrap}
 .ticket.recibo .cap-fondo{margin-top:11px;padding-top:9px;border-top:1px dashed var(--linea);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gris);font-family:'IBM Plex Mono',monospace;line-height:1.4}
 .ticket.recibo .filas.fondo-ag{opacity:.85}
+.box-trampa{border:1.5px solid var(--corte);border-radius:14px;padding:20px 24px;margin:26px 0 4px;background:var(--hoja)}
+.box-trampa .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--corte)}
+.box-trampa h3{font-family:'Unbounded',sans-serif;font-size:19px;margin:8px 0 10px;line-height:1.3}
+.box-trampa p{margin:0 0 10px}
+.box-trampa p.ojo{font-size:15px;color:var(--gris);margin-bottom:0}
 .ticket.recibo .fila{padding:4px 0}
 .ticket.recibo .filas .fila{border-bottom:1px solid #EEF1F6}
 .ticket.recibo .fila .v.a{color:var(--ambar)}
@@ -351,6 +356,12 @@ footer .links a:hover{color:var(--tinta)}
 <section id="como">
   <div class="cab-sec"><span class="k">COMO FUNCIONA</span><h2>Antes de se conectar com qualquer serviço, o seu aparelho precisa perguntar onde ele está. Essa pergunta passa pela GUARDIANA.</h2><p>A GUARDIANA responde a essas perguntas de dentro do seu computador e anota o que vê: o nome do serviço, a hora e qual aparelho pediu. Nunca o conteúdo. Com o Modo Casa, também os celulares e a TV, sem instalar nada neles.</p></div>
   <div class="pasos"><div class="paso"><span class="num">1</span><h3>SEUS APARELHOS</h3><p>Computador, celulares, TV, tudo o que usa o Wi-Fi</p></div><div class="paso"><span class="num">2</span><h3>NOME DO SERVIÇO</h3><p>Cada conexão começa perguntando «onde está este serviço?»</p></div><div class="paso"><span class="num">3</span><h3>CATEGORIA E SINAL</h3><p>Rastreador, publicidade, telemetria, esperado ou desconhecido, com uma frase</p></div><div class="paso"><span class="num">4</span><h3>SUA DECISÃO</h3><p>Cortar ou deixar passar; nunca antes de 24 h; sempre com desfazer</p></div></div>
+  <div class="box-trampa">
+    <span class="k">ARQUIVOS ARMADILHA</span>
+    <h3>Uma isca que diz quem mordeu, sem olhar nenhum arquivo</h3>
+    <p>A GUARDIANA pode deixar na sua área de trabalho um arquivo que parece uma cópia das suas chaves. Dentro não há chave nenhuma: há um endereço de internet único, que não existe em nenhum outro lugar do mundo. Se algum programa —uma IA, uma extensão do navegador, uma página web— abrir esse arquivo e for procurar esse endereço, a pergunta passa pela GUARDIANA e fica anotada com a hora e, no Windows, com o nome do programa que a fez. A GUARDIANA não abriu o arquivo nem sabe o que há dentro: continua olhando só nomes, como em tudo o mais.</p>
+    <p class="ojo">O que esta armadilha não pega, dito antes de você perguntar: um programa que leia o arquivo e o mande para o seu servidor sem procurar esse endereço não aparece. É uma armadilha para quem segue o link, não um detector de roubos.</p>
+  </div>
   <figure class="pantalla"><img src="/panel-dispositivos-pt.png" width="1400" height="507" alt="«Aparelhos», o mesmo registro: cada consulta deste Mac, classificada pelo que é. Cortadas: nenhuma, porque cortar quem decide é você." loading="lazy"><figcaption>«Aparelhos», o mesmo registro: cada consulta deste Mac, classificada pelo que é. Cortadas: nenhuma, porque cortar quem decide é você.</figcaption></figure>
 </section>
 
