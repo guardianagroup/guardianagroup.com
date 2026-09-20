@@ -4,6 +4,10 @@
 <meta name="description" content="What you will see when you install, why Windows warns you, how to check the file before you open it and what the installer actually does.">
 <link rel="canonical" href="https://guardianagroup.com/en/install.html">
 <meta name="robots" content="index,follow">
+<link rel="alternate" hreflang="es" href="https://guardianagroup.com/instalar.html">
+<link rel="alternate" hreflang="en" href="https://guardianagroup.com/en/install.html">
+<link rel="alternate" hreflang="pt" href="https://guardianagroup.com/pt/instalar.html">
+<link rel="alternate" hreflang="x-default" href="https://guardianagroup.com/instalar.html">
 <meta property="og:title" content="Installing GUARDIANA: the Windows and Mac warnings · GUARDIANA">
 <meta property="og:description" content="What you will see when you install, why Windows warns you, how to check the file before you open it and what the installer actually does.">
 <meta property="og:type" content="article">
@@ -116,7 +120,7 @@ the order that makes them worth anything.</p>
   <h3>Four steps</h3>
   <ol>
    <li><strong>Download</strong> <code>guardiana_1.0.0_amd64.deb</code> (or the <code>.tar.gz</code> if you are not on Debian or Ubuntu).</li>
-   <li><strong>Check the hash and the signature:</strong><br><code>sha256sum guardiana_1.0.0_amd64.deb</code><br><code>minisign -Vm guardiana_1.0.0_amd64.deb -P &lt;key&gt;</code></li>
+   <li><strong>Check the hash and the signature:</strong><br><code>sha256sum guardiana_1.0.0_amd64.deb</code><br><code>minisign -Vm guardiana_1.0.0_amd64.deb -P &lt;key&gt;</code><br>The <a href="/en/install.html#firma">public key</a> is already published.</li>
    <li><strong>Install:</strong><br><code>sudo apt install ./guardiana_1.0.0_amd64.deb</code><br>On Linux there is no unknown-publisher warning: there is a hash and a signature, which can be checked, unlike a warning.</li>
    <li><strong>Check the install</strong> with <code>guardiana verify</code>.</li>
   </ol>
@@ -159,21 +163,27 @@ a way to check the file without trusting us.</p>
 <p><code>sha256sum guardiana_1.0.0_amd64.deb</code></p>
 
 <h3>Step 2 · Compare it with the public ledger</h3>
-<p>Every release is written into a public ledger, <code>ledger.jsonl</code>, with its hash, the commit it
-came from and the Rekor entry that proves the date. That ledger is published <strong>before</strong> the
+<p>Every release is written into a public ledger, <code>ledger.jsonl</code>, with its fingerprint, the exact
+point in the code it came from (the «commit») and the Rekor entry -- a public timestamp archive --
+that proves the date. That ledger is published <strong>before</strong> the
 download exists. If the two fingerprints are not identical, character by character, the file is not ours:
 delete it and write to us.</p>
 
-<h3>Step 3 · Check the signature</h3>
-<p>Every file carries its <code>minisign</code> signature next to it. The public key is published on this
-page and ships inside the program itself:</p>
-<p><code>minisign -Vm guardiana-1.0.0-linux-x86_64 -P &lt;public key&gt;</code></p>
+<h3 id="firma">Step 3 · Check the signature</h3>
+<p>Every file carries its <code>minisign</code> signature next to it. This is the public key every
+release is signed with. It ships inside the program and has been in the repository, at
+<code>build/pubkey/minisign.pub</code>, since before any download existed:</p>
+<p><code>RWTuF2VmZTwRqTcQpWj3T+6NSP6RQZaKjfcCpl/VNQH/IeMFbnSnFrQ6</code></p>
+<p>Its short id is <code>A9113C65666517EE</code>. To check a file:</p>
+<p><code>minisign -Vm guardiana-1.0.0-linux-x86_64 -P RWTuF2VmZTwRqTcQpWj3T+6NSP6RQZaKjfcCpl/VNQH/IeMFbnSnFrQ6</code></p>
 <p>Once installed, <code>guardiana verify</code> repeats all three steps on your own machine, and also tells
 you whether the service is running, which DNS the system points to and which ports are open.</p>
 
 <div class="box">
-<p><strong>The hashes and the key are not here yet, and we are not going to invent them.</strong> They appear
-on 5 October, on this page and in the public ledger. Publishing a number nobody can check is not
+<p><strong>The hashes are not here yet, and we are not going to invent them.</strong> They appear on
+5 October, on this page and in the public ledger, before the download. The signing key is already
+here, above: it is the same one that will sign that release, and publishing it in advance is
+exactly what makes it checkable. Publishing a hash nobody can compare against anything is not
 transparency: it is decoration.</p>
 </div>
 

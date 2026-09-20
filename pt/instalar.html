@@ -4,6 +4,10 @@
 <meta name="description" content="O que você vai ver ao instalar, por que o Windows avisa, como conferir o arquivo antes de abrir e o que o instalador faz de verdade.">
 <link rel="canonical" href="https://guardianagroup.com/pt/instalar.html">
 <meta name="robots" content="index,follow">
+<link rel="alternate" hreflang="es" href="https://guardianagroup.com/instalar.html">
+<link rel="alternate" hreflang="en" href="https://guardianagroup.com/en/install.html">
+<link rel="alternate" hreflang="pt" href="https://guardianagroup.com/pt/instalar.html">
+<link rel="alternate" hreflang="x-default" href="https://guardianagroup.com/instalar.html">
 <meta property="og:title" content="Instalar a GUARDIANA: os avisos do Windows e do Mac · GUARDIANA">
 <meta property="og:description" content="O que você vai ver ao instalar, por que o Windows avisa, como conferir o arquivo antes de abrir e o que o instalador faz de verdade.">
 <meta property="og:type" content="article">
@@ -116,7 +120,7 @@ existir, que é a ordem que faz elas valerem alguma coisa.</p>
   <h3>Quatro passos</h3>
   <ol>
    <li><strong>Baixe</strong> <code>guardiana_1.0.0_amd64.deb</code> (ou o <code>.tar.gz</code>, se não usa Debian nem Ubuntu).</li>
-   <li><strong>Confira a impressão digital e a assinatura:</strong><br><code>sha256sum guardiana_1.0.0_amd64.deb</code><br><code>minisign -Vm guardiana_1.0.0_amd64.deb -P &lt;chave&gt;</code></li>
+   <li><strong>Confira a impressão digital e a assinatura:</strong><br><code>sha256sum guardiana_1.0.0_amd64.deb</code><br><code>minisign -Vm guardiana_1.0.0_amd64.deb -P &lt;chave&gt;</code><br>A <a href="/pt/instalar.html#firma">chave pública</a> já está publicada.</li>
    <li><strong>Instale:</strong><br><code>sudo apt install ./guardiana_1.0.0_amd64.deb</code><br>No Linux não há aviso de editor desconhecido: há impressão digital e assinatura, que dá para conferir — um aviso, não.</li>
    <li><strong>Confira a instalação</strong> com <code>guardiana verify</code>.</li>
   </ol>
@@ -160,20 +164,26 @@ te dar um jeito de conferir o arquivo sem precisar confiar na gente.</p>
 
 <h3>Passo 2 · Compare com o registro público</h3>
 <p>Cada versão é escrita num registro público, <code>ledger.jsonl</code>, com a sua impressão digital, o
-commit de onde saiu e a entrada no Rekor que prova a data. Esse registro é publicado <strong>antes</strong>
+ponto exato do código de onde ela saiu (o «commit») e a entrada no Rekor, um arquivo público de
+carimbos de tempo, que prova a data. Esse registro é publicado <strong>antes</strong>
 de o download existir. Se as duas impressões não forem idênticas, caractere por caractere, o arquivo não
 é nosso: apague e escreva para a gente.</p>
 
-<h3>Passo 3 · Confira a assinatura</h3>
-<p>Cada arquivo leva a sua assinatura <code>minisign</code> ao lado. A chave pública é publicada nesta
-página e vai dentro do próprio programa:</p>
-<p><code>minisign -Vm guardiana-1.0.0-linux-x86_64 -P &lt;chave pública&gt;</code></p>
+<h3 id="firma">Passo 3 · Confira a assinatura</h3>
+<p>Cada arquivo leva a sua assinatura <code>minisign</code> ao lado. Esta é a chave pública com que
+todas as versões são assinadas. Ela vai dentro do próprio programa e está no repositório, em
+<code>build/pubkey/minisign.pub</code>, desde antes de existir qualquer download:</p>
+<p><code>RWTuF2VmZTwRqTcQpWj3T+6NSP6RQZaKjfcCpl/VNQH/IeMFbnSnFrQ6</code></p>
+<p>O identificador curto dela é <code>A9113C65666517EE</code>. Para conferir um arquivo:</p>
+<p><code>minisign -Vm guardiana-1.0.0-linux-x86_64 -P RWTuF2VmZTwRqTcQpWj3T+6NSP6RQZaKjfcCpl/VNQH/IeMFbnSnFrQ6</code></p>
 <p>Depois de instalado, o <code>guardiana verify</code> repete os três passos no seu próprio computador, e
 também diz se o serviço está rodando, para qual DNS o sistema aponta e quais portas estão abertas.</p>
 
 <div class="box">
-<p><strong>As impressões e a chave ainda não estão aqui, e não vamos inventá-las.</strong> Elas aparecem em
-5 de outubro, nesta página e no registro público. Publicar um número que ninguém pode conferir não é
+<p><strong>As impressões ainda não estão aqui, e não vamos inventá-las.</strong> Elas aparecem em 5
+de outubro, nesta página e no registro público, antes do download. A chave de assinatura já está
+aqui, acima: é a mesma que vai assinar essa versão, e publicá-la com antecedência é justamente o
+que permite conferi-la. Publicar uma impressão que ninguém pode comparar com nada não é
 transparência: é enfeite.</p>
 </div>
 

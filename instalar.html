@@ -4,6 +4,10 @@
 <meta name="description" content="Qué vas a ver al instalar, por qué Windows avisa, cómo comprobar el archivo antes de abrirlo y qué hace exactamente el instalador. Windows, Linux y macOS.">
 <link rel="canonical" href="https://guardianagroup.com/instalar.html">
 <meta name="robots" content="index,follow">
+<link rel="alternate" hreflang="es" href="https://guardianagroup.com/instalar.html">
+<link rel="alternate" hreflang="en" href="https://guardianagroup.com/en/install.html">
+<link rel="alternate" hreflang="pt" href="https://guardianagroup.com/pt/instalar.html">
+<link rel="alternate" hreflang="x-default" href="https://guardianagroup.com/instalar.html">
 <meta property="og:title" content="Instalar GUARDIANA: los avisos de Windows y Mac · GUARDIANA">
 <meta property="og:description" content="Qué vas a ver al instalar, por qué Windows avisa, cómo comprobar el archivo antes de abrirlo y qué hace exactamente el instalador. Windows, Linux y macOS.">
 <meta property="og:type" content="article">
@@ -116,7 +120,7 @@ la descarga, que es el orden que hace que sirvan para algo.</p>
   <h3>Cuatro pasos</h3>
   <ol>
    <li><strong>Descarga</strong> <code>guardiana_1.0.0_amd64.deb</code> (o el <code>.tar.gz</code> si no usas Debian ni Ubuntu).</li>
-   <li><strong>Comprueba la huella y la firma:</strong><br><code>sha256sum guardiana_1.0.0_amd64.deb</code><br><code>minisign -Vm guardiana_1.0.0_amd64.deb -P &lt;clave&gt;</code></li>
+   <li><strong>Comprueba la huella y la firma:</strong><br><code>sha256sum guardiana_1.0.0_amd64.deb</code><br><code>minisign -Vm guardiana_1.0.0_amd64.deb -P &lt;clave&gt;</code><br>La <a href="/instalar.html#firma">clave pública</a> ya está publicada.</li>
    <li><strong>Instala:</strong><br><code>sudo apt install ./guardiana_1.0.0_amd64.deb</code><br>En Linux no hay avisos de publicador desconocido: hay huella y firma, que es más comprobable que un aviso.</li>
    <li><strong>Comprueba la instalación</strong> con <code>guardiana verify</code>.</li>
   </ol>
@@ -159,22 +163,28 @@ hacemos es darte la forma de comprobar el archivo sin fiarte de nosotros.</p>
 <p><code>sha256sum guardiana_1.0.0_amd64.deb</code></p>
 
 <h3>Paso 2 · Compárala con la del registro público</h3>
-<p>Cada versión se anota en un registro público, <code>ledger.jsonl</code>, con su huella, el commit
-del que salió y la entrada en Rekor que prueba la fecha. Ese registro se publica <strong>antes</strong>
+<p>Cada versión se anota en un registro público, <code>ledger.jsonl</code>, con su huella, el punto exacto
+del código del que salió (el «commit») y la entrada en Rekor, un archivo público de sellos de
+tiempo, que prueba la fecha. Ese registro se publica <strong>antes</strong>
 de que exista la descarga. Si las dos huellas no son idénticas, carácter por carácter, el archivo no
 es el nuestro: bórralo y escríbenos.</p>
 
-<h3>Paso 3 · Comprueba la firma</h3>
-<p>Cada archivo lleva su firma <code>minisign</code> al lado. La clave pública se publica en esta
-página y va dentro del propio programa:</p>
-<p><code>minisign -Vm guardiana-1.0.0-linux-x86_64 -P &lt;clave pública&gt;</code></p>
+<h3 id="firma">Paso 3 · Comprueba la firma</h3>
+<p>Cada archivo lleva su firma <code>minisign</code> al lado. Esta es la clave pública con la que
+se firman todas las versiones. Va dentro del propio programa y está en el repositorio, en
+<code>build/pubkey/minisign.pub</code>, desde antes de que exista ninguna descarga:</p>
+<p><code>RWTuF2VmZTwRqTcQpWj3T+6NSP6RQZaKjfcCpl/VNQH/IeMFbnSnFrQ6</code></p>
+<p>Su identificador corto es <code>A9113C65666517EE</code>. Para comprobar un archivo:</p>
+<p><code>minisign -Vm guardiana-1.0.0-linux-x86_64 -P RWTuF2VmZTwRqTcQpWj3T+6NSP6RQZaKjfcCpl/VNQH/IeMFbnSnFrQ6</code></p>
 <p>Una vez instalado, <code>guardiana verify</code> repite los tres pasos solo, en tu equipo, y además
 dice si el servicio está en marcha, a qué DNS apunta el sistema y qué puertos hay abiertos.</p>
 
 <div class="box">
-<p><strong>Las huellas y la clave no están aquí todavía, y no las vamos a inventar.</strong> Aparecen
-el 5 de octubre, en esta misma página y en el registro público. Publicar antes un número que nadie
-puede comprobar no es transparencia: es decoración.</p>
+<p><strong>Las huellas todavía no están, y no las vamos a inventar.</strong> Aparecen el 5 de
+octubre, en esta misma página y en el registro público, antes que la descarga. La clave de firma sí
+está ya, arriba: es la misma que firmará esa versión, y publicarla con antelación es justo lo que
+permite comprobarla. Publicar una huella que nadie puede comparar con nada no es transparencia:
+es decoración.</p>
 </div>
 
 <h2>3 · Qué hace el instalador, y qué no</h2>
