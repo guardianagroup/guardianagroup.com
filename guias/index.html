@@ -60,7 +60,7 @@ h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:34px;line-height
 h2{font-family:'Unbounded',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.02em;margin:40px 0 8px;color:var(--tinta);text-wrap:balance}
 h3{font-family:'Unbounded',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;margin:24px 0 6px;color:var(--tinta)}
 p,li{color:#2A3142}
-.k{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin-bottom:20px}
+.k{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin:0 0 20px}
 /* Guía rápida de instalación: los tres sistemas en paralelo, arriba de la página, con las
    capturas reales. En el móvil se apilan. */
 .pasos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:20px 0 28px}
@@ -80,15 +80,25 @@ li,td,p{overflow-wrap:anywhere}.muted{color:var(--gris)}
 .box{border:1.5px solid var(--azul);border-radius:12px;padding:14px 18px;margin:18px 0;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35)}
 .lead{font-size:20px;line-height:1.5;color:var(--tinta)}
 ul{padding-left:22px}li{margin:3px 0}
-ul.rx{padding-left:0;list-style:none}ul.rx li{margin:0 0 22px;background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:18px 20px}ul.rx li a{font-family:'Unbounded',sans-serif;font-weight:600;font-size:17px;text-decoration:none;line-height:1.35}ul.rx li a:hover{color:var(--azul)}
+/* Una sola tarjeta para todas las listas del sitio —guías y radiografías, en los tres idiomas—:
+   fecha arriba, título, resumen. Antes había dos componentes: ul.rx, con estilo, en español, y
+   .lista, SIN estilo ninguno, en inglés y portugués, donde la lista salía como un muro de texto
+   azul sin separación (visto el 21 sep 2026 al revisar la simetría de la web). */
+.lista{display:grid;gap:14px;margin:22px 0 8px}
+.lista a.rx{display:block;background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:18px 20px;text-decoration:none;color:var(--tinta);transition:border-color .12s ease,box-shadow .12s ease}
+.lista a.rx:hover{border-color:var(--azul);box-shadow:0 18px 34px -28px rgba(31,75,255,.45)}
+.lista a.rx .k{display:block;margin:0 0 7px}
+.lista a.rx b{display:block;font-family:'Unbounded',sans-serif;font-weight:600;font-size:17px;line-height:1.35;letter-spacing:-.01em;color:var(--azul)}
+.lista a.rx:hover b{color:var(--azul-oscuro)}
+.lista a.rx .resumen{display:block;margin-top:7px;color:var(--gris);font-size:15px;line-height:1.55}
 img{max-width:100%;height:auto;border-radius:8px}
 footer.pie{border-top:1px solid var(--linea);margin-top:64px;padding-top:24px;font-size:13px;color:var(--gris);display:grid;gap:14px}
 footer.pie .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}footer.pie .links a{color:var(--gris)}footer.pie .links a:hover{color:var(--tinta)}
 footer.pie .arriba{justify-self:start;color:var(--azul)}
 @media (max-width:600px){main{padding:20px 20px 72px}h1{font-size:27px}header.top nav{gap:12px 16px}}
 </style></head><body><main id="arriba"><header class="top"><a class="brand" href="/es/" aria-label="GUARDIANA, portada"><i></i>GUARDIANA</a><nav aria-label="Secciones"><a href="/es/">Inicio</a><a href="/guias/" aria-current="page">Guías</a><a href="/radiografias/">Radiografías</a><a href="/negocio-de-tus-datos.html">El negocio de tus datos</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="/contacto.html">Contacto</a></nav><span class="idiomas"><span class="idioma actual" lang="es" aria-current="true">ES</span><a class="idioma" href="/en/guides/" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><a class="idioma" href="/pt/guias/" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span></header>
-<div class="k">GUÍAS</div>
+<p class="k">GUÍAS</p>
 <h1>Tu PC, guardián de toda la casa: cómo se conecta cada aparato.</h1>
-<p>GUARDIANA se instala en un PC. Para que los teléfonos, la tele y lo demás pasen por él, se les dice que usen ese PC como DNS: en el router una sola vez, o aparato por aparato. Guías cortas, sin jerga, con deshacer al final de cada una.</p>
-<ul class="rx"><li><a href="/guias/dns.html">¿Qué es el DNS y por qué mi casa necesita un guardián?</a><br><span class="muted">Qué es el DNS, por qué cada aparato de tu casa lo usa cientos de veces al día, quién ve hoy esa lista y qué cambia con un guardián DNS en tu PC.</span></li><li><a href="/guias/router.html">Poner GUARDIANA como DNS de toda la casa (router)</a><br><span class="muted">Un solo cambio en el router y todos los aparatos de la Wi‑Fi pasan por GUARDIANA. Camino general, reserva DHCP y los nombres que usan los routers de Claro, Movistar, Tigo y ETB.</span></li><li><a href="/guias/iphone.html">iPhone y iPad: apuntar el DNS a GUARDIANA</a><br><span class="muted">Cómo poner el PC como DNS en un iPhone o iPad en dos minutos, qué pasa con iCloud Private Relay y cómo deshacerlo.</span></li><li><a href="/guias/android.html">Android: apuntar el DNS a GUARDIANA</a><br><span class="muted">Cómo poner el PC como DNS en Android, por qué hay que apagar «DNS privado» y el DNS seguro de Chrome, y cómo deshacerlo.</span></li></ul>
+<p class="lead">GUARDIANA se instala en un PC. Para que los teléfonos, la tele y lo demás pasen por él, se les dice que usen ese PC como DNS: en el router una sola vez, o aparato por aparato. Guías cortas, sin jerga, con deshacer al final de cada una.</p>
+<div class="lista"><a class="rx" href="/guias/dns.html"><b>¿Qué es el DNS y por qué mi casa necesita un guardián?</b><span class="resumen">Qué es el DNS, por qué cada aparato de tu casa lo usa cientos de veces al día, quién ve hoy esa lista y qué cambia con un guardián DNS en tu PC.</span></a><a class="rx" href="/guias/router.html"><b>Poner GUARDIANA como DNS de toda la casa (router)</b><span class="resumen">Un solo cambio en el router y todos los aparatos de la Wi‑Fi pasan por GUARDIANA. Camino general, reserva DHCP y los nombres que usan los routers de Claro, Movistar, Tigo y ETB.</span></a><a class="rx" href="/guias/iphone.html"><b>iPhone y iPad: apuntar el DNS a GUARDIANA</b><span class="resumen">Cómo poner el PC como DNS en un iPhone o iPad en dos minutos, qué pasa con iCloud Private Relay y cómo deshacerlo.</span></a><a class="rx" href="/guias/android.html"><b>Android: apuntar el DNS a GUARDIANA</b><span class="resumen">Cómo poner el PC como DNS en Android, por qué hay que apagar «DNS privado» y el DNS seguro de Chrome, y cómo deshacerlo.</span></a></div>
 <footer class="pie"><div class="links"><a href="/es/">Inicio</a><a href="/guias/">Guías</a><a href="/radiografias/">Radiografías</a><a href="/negocio-de-tus-datos.html">El negocio de tus datos</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="/contacto.html">Contacto</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div><div>GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, piso 18, Bocagrande, Cartagena de Indias, Colombia · Esta página no usa cookies ni analíticas.</div><a class="arriba" href="#arriba">Volver arriba ↑</a></footer></main></body></html>

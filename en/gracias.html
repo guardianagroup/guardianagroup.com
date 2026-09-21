@@ -60,7 +60,7 @@ h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:34px;line-height
 h2{font-family:'Unbounded',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.02em;margin:40px 0 8px;color:var(--tinta);text-wrap:balance}
 h3{font-family:'Unbounded',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;margin:24px 0 6px;color:var(--tinta)}
 p,li{color:#2A3142}
-.k{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin-bottom:20px}
+.k{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin:0 0 20px}
 /* Guía rápida de instalación: los tres sistemas en paralelo, arriba de la página, con las
    capturas reales. En el móvil se apilan. */
 .pasos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:20px 0 28px}
@@ -80,14 +80,24 @@ li,td,p{overflow-wrap:anywhere}.muted{color:var(--gris)}
 .box{border:1.5px solid var(--azul);border-radius:12px;padding:14px 18px;margin:18px 0;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35)}
 .lead{font-size:20px;line-height:1.5;color:var(--tinta)}
 ul{padding-left:22px}li{margin:3px 0}
-ul.rx{padding-left:0;list-style:none}ul.rx li{margin:0 0 22px;background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:18px 20px}ul.rx li a{font-family:'Unbounded',sans-serif;font-weight:600;font-size:17px;text-decoration:none;line-height:1.35}ul.rx li a:hover{color:var(--azul)}
+/* Una sola tarjeta para todas las listas del sitio —guías y radiografías, en los tres idiomas—:
+   fecha arriba, título, resumen. Antes había dos componentes: ul.rx, con estilo, en español, y
+   .lista, SIN estilo ninguno, en inglés y portugués, donde la lista salía como un muro de texto
+   azul sin separación (visto el 21 sep 2026 al revisar la simetría de la web). */
+.lista{display:grid;gap:14px;margin:22px 0 8px}
+.lista a.rx{display:block;background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:18px 20px;text-decoration:none;color:var(--tinta);transition:border-color .12s ease,box-shadow .12s ease}
+.lista a.rx:hover{border-color:var(--azul);box-shadow:0 18px 34px -28px rgba(31,75,255,.45)}
+.lista a.rx .k{display:block;margin:0 0 7px}
+.lista a.rx b{display:block;font-family:'Unbounded',sans-serif;font-weight:600;font-size:17px;line-height:1.35;letter-spacing:-.01em;color:var(--azul)}
+.lista a.rx:hover b{color:var(--azul-oscuro)}
+.lista a.rx .resumen{display:block;margin-top:7px;color:var(--gris);font-size:15px;line-height:1.55}
 img{max-width:100%;height:auto;border-radius:8px}
 footer.pie{border-top:1px solid var(--linea);margin-top:64px;padding-top:24px;font-size:13px;color:var(--gris);display:grid;gap:14px}
 footer.pie .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}footer.pie .links a{color:var(--gris)}footer.pie .links a:hover{color:var(--tinta)}
 footer.pie .arriba{justify-self:start;color:var(--azul)}
 @media (max-width:600px){main{padding:20px 20px 72px}h1{font-size:27px}header.top nav{gap:12px 16px}}
 </style></head>
-<body><header class="top"><a class="brand" href="/" aria-label="GUARDIANA, home"><i></i>GUARDIANA</a><nav aria-label="Sections"><a href="/" aria-current="page">Home</a><a href="/en/guides/">Guides</a><a href="/en/x-rays/">X-rays</a><a href="/en/privacy.html">Privacy</a><a href="/en/terms.html">Terms and refunds</a><a href="/en/contact.html">Contact</a></nav><span class="idiomas"><a class="idioma" href="/es/" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><span class="idioma actual" lang="en" aria-current="true">EN</span><a class="idioma" href="/pt/" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span></header><main id="arriba">
+<body><header class="top"><a class="brand" href="/" aria-label="GUARDIANA, home"><i></i>GUARDIANA</a><nav aria-label="Sections"><a href="/">Home</a><a href="/en/guides/">Guides</a><a href="/en/x-rays/">X-rays</a><a href="/en/the-business-of-your-data.html">The business of your data</a><a href="/en/privacy.html">Privacy</a><a href="/en/terms.html">Terms and refunds</a><a href="/en/contact.html">Contact</a></nav><span class="idiomas"><a class="idioma" href="/gracias.html" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><span class="idioma actual" lang="en" aria-current="true">EN</span><a class="idioma" href="/pt/obrigado.html" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span></header><main id="arriba">
 <p class="k">LAUNCH LIST</p>
 <h1>Confirmed. You are on the list.</h1>
 <p class="lead">On Sunday <strong>5 October 2026</strong>, at 15:00 UTC (10:00 in Colombia), you get one email
@@ -107,7 +117,7 @@ point 2 of the <a href="/en/privacy.html">privacy notice</a>.</li>
 <h2>While you wait</h2>
 <ul>
 <li><a href="/en/install.html">What you will see when installing</a>: the Windows and macOS warnings, why they
-appear, and the three steps to check the file before opening it, on Windows, on Linux and on the Mac (in Spanish).</li>
+appear, and the three steps to check the file before opening it, on Windows, on Linux and on the Mac.</li>
 <li><a href="https://github.com/guardianagroup/guardiana">The code, whole and public</a>, before the
 launch: read it, build it and compare what you download.</li>
 <li><a href="/en/x-rays/">X-rays</a>: who the things you use every day really talk to, measured
@@ -116,4 +126,4 @@ with the program.</li>
 
 <p class="muted">If you signed up by mistake or want your address deleted today, write to
 <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a> and it is done the same day.</p>
-<footer class="pie"><div class="links"><a href="/">Home</a><a href="/en/guides/">Guides</a><a href="/en/x-rays/">X-rays</a><a href="/en/privacy.html">Privacy</a><a href="/en/terms.html">Terms and refunds</a><a href="/en/contact.html">Contact</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div><div>GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, 18th floor, Bocagrande, Cartagena de Indias, Colombia · This page uses no cookies and no analytics.</div><a class="arriba" href="#arriba">Back to top ↑</a></footer></main></body></html>
+<footer class="pie"><div class="links"><a href="/">Home</a><a href="/en/guides/">Guides</a><a href="/en/x-rays/">X-rays</a><a href="/en/the-business-of-your-data.html">The business of your data</a><a href="/en/privacy.html">Privacy</a><a href="/en/terms.html">Terms and refunds</a><a href="/en/contact.html">Contact</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div><div>GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, 18th floor, Bocagrande, Cartagena de Indias, Colombia · This page uses no cookies and no analytics.</div><a class="arriba" href="#arriba">Back to top ↑</a></footer></main></body></html>

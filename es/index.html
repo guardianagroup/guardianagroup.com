@@ -62,7 +62,9 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .top{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 0;border-bottom:1px solid var(--linea)}
 .marca{display:flex;align-items:center;gap:12px;font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.18em;font-size:14px;color:var(--tinta)}
 .marca i{width:10px;height:10px;border-radius:50%;background:var(--azul);box-shadow:0 0 0 4px rgba(31,75,255,.12)}
-.top nav{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:14px;font-weight:500}
+.top nav{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:14px;font-weight:500}
+/* 18 y no 26: con «El negocio de tus datos» dentro, el menú no cabía en una línea ni en una
+   pantalla de 1280 y «Bóveda» se quedaba sola debajo (21 sep 2026). */
 .top nav a,.top nav .nav-pronto{white-space:nowrap}
 .top nav a{color:var(--tinta)}
 .top nav a.multas{color:var(--corte)}
@@ -166,7 +168,7 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .ticket.recibo .fila.duda .v{color:var(--ambar)}
 .ticket.recibo .fila.mal .v{color:var(--rojo)}
 .ticket .tot span{text-align:right}
-.ticket.recibo .sello-grande{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-14deg);display:flex;flex-direction:column;align-items:center;gap:3px;font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(19px,2.5vw,31px);letter-spacing:.14em;line-height:1;text-transform:uppercase;color:var(--sello);border:3px solid var(--sello);border-radius:10px;padding:9px 18px 8px;opacity:.36;mix-blend-mode:multiply;pointer-events:none;white-space:nowrap;user-select:none;filter:url(#tinta);-webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.62' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 9 -3.1'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.62' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 9 -3.1'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");-webkit-mask-size:220px 220px;mask-size:220px 220px}
+.ticket.recibo .sello-grande{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-14deg);display:flex;flex-direction:column;align-items:center;gap:3px;font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(19px,2.5vw,31px);letter-spacing:.14em;line-height:1;text-transform:uppercase;color:var(--sello);border:3px solid var(--sello);border-radius:10px;padding:9px 18px 8px;opacity:.24;mix-blend-mode:multiply;pointer-events:none;white-space:nowrap;user-select:none;filter:url(#tinta);-webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.62' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 9 -3.1'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.62' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 9 -3.1'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");-webkit-mask-size:220px 220px;mask-size:220px 220px}
 .ticket.recibo .sello-grande::after{content:"";position:absolute;inset:3px;border:1px solid var(--sello);border-radius:7px}
 .ticket.recibo .sello-grande small{font-size:.3em;letter-spacing:.36em;font-weight:500;padding-left:.36em}
 .defs{position:absolute;width:0;height:0;overflow:hidden}
@@ -304,7 +306,7 @@ footer .links a:hover{color:var(--tinta)}
 <div class="wrap">
 <header class="top">
   <a class="marca" href="/es/" aria-label="GUARDIANA"><i></i>GUARDIANA</a>
-  <nav aria-label="Secciones"><a href="#ia">Tu IA</a><a href="#como">Cómo funciona</a><a href="#instalar">Cómo instalar</a><a href="/radiografias/">Radiografías</a><a href="#planes">Planes</a><a href="/casos.html" class="multas">Multas</a><a href="/negocio-de-tus-datos.html" class="multas">El negocio de tus datos</a><a href="https://github.com/guardianagroup/guardiana">Código</a><span class="nav-pronto">Bóveda (próximamente)</span></nav>
+  <nav aria-label="Secciones"><a href="#ia">Tu IA</a><a href="#como">Cómo funciona</a><a href="#instalar">Cómo instalar</a><a href="/radiografias/">Radiografías</a><a href="#planes">Planes</a><a href="/casos.html" class="multas">Multas</a><a href="/negocio-de-tus-datos.html" class="multas">El negocio de tus datos</a><a href="https://github.com/guardianagroup/guardiana">Código</a><a href="#boveda">Bóveda</a></nav>
   <span class="idiomas"><span class="idioma actual" lang="es" aria-current="true">ES</span><a class="idioma" href="/" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><a class="idioma" href="/pt/" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span>
 </header>
 <main>
@@ -361,7 +363,7 @@ footer .links a:hover{color:var(--tinta)}
   <div class="box-trampa">
     <span class="k">ARCHIVOS TRAMPA</span>
     <h3>Una trampa que dice quién la abrió, sin leer ni un archivo</h3>
-    <p>GUARDIANA puede dejar en tu escritorio un archivo que parece una copia de tus claves. Dentro no hay ninguna clave: hay una dirección de internet única, que no existe en ningún otro sitio del mundo. Si algo (una IA, una extensión del navegador, una página web) lee ese archivo y va a buscar esa dirección, la pregunta pasa por GUARDIANA y queda anotada con su hora y, en Windows, con el nombre del programa que la hizo. GUARDIANA no ha abierto el archivo ni sabe qué hay dentro: sigue mirando solo nombres, como en todo lo demás.</p>
+    <p>GUARDIANA puede dejar en tu escritorio un archivo que parece una copia de tus claves. Dentro no hay ninguna clave: hay una dirección de internet única, que no existe en ningún otro sitio del mundo. Si algo lee ese archivo —una IA, una extensión del navegador, una página web— y va a buscar esa dirección, la pregunta pasa por GUARDIANA. Queda anotada con la hora y, en Windows, con el nombre del programa que preguntó. GUARDIANA no ha abierto el archivo ni sabe qué hay dentro: sigue mirando solo nombres, como en todo lo demás.</p>
     <p class="ojo">Lo que esta trampa no atrapa, dicho antes de que lo preguntes: un programa que lea el archivo y se lo mande a su servidor sin preguntar por esa dirección no aparece. Es una trampa para quien sigue el enlace, no un detector de robos.</p>
   </div>
   <figure class="pantalla"><img src="/panel-dispositivos.png" width="1400" height="485" alt="«Dispositivos», el mismo registro: cada consulta de este Mac, clasificada por lo que es. Cortadas: ninguna, porque cortar lo decides tú." loading="lazy"><figcaption>«Dispositivos», el mismo registro: cada consulta de este Mac, clasificada por lo que es. Cortadas: ninguna, porque cortar lo decides tú.</figcaption></figure>

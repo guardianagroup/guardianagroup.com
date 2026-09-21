@@ -50,11 +50,26 @@ header.top .brand{display:inline-flex;align-items:center;gap:12px;font-family:'U
 header.top .brand i{width:10px;height:10px;border-radius:50%;background:var(--azul);box-shadow:0 0 0 4px rgba(31,75,255,.12);display:inline-block}
 header.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;font-weight:500}
 header.top nav a{color:var(--tinta)}header.top nav a:hover{color:var(--azul)}header.top nav a[aria-current=page]{color:var(--azul)}
+header.top .idiomas{margin-left:auto;display:inline-flex;gap:6px}
+header.top .idioma{font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid var(--linea);border-radius:999px;padding:5px 11px;color:var(--gris);letter-spacing:.08em}header.top .idioma:hover{border-color:var(--tinta);color:var(--tinta)}
+header.top .idioma.actual{border-color:var(--azul);color:var(--azul);background:rgba(31,75,255,.06)}
 h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:34px;line-height:1.12;letter-spacing:-.025em;margin:0 0 12px;text-wrap:balance}
 h2{font-family:'Unbounded',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.02em;margin:40px 0 8px;color:var(--tinta);text-wrap:balance}
 h3{font-family:'Unbounded',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;margin:24px 0 6px;color:var(--tinta)}
 p,li{color:#2A3142}
-.k{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin-bottom:20px}
+.k{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin:0 0 20px}
+/* Guía rápida de instalación: los tres sistemas en paralelo, arriba de la página, con las
+   capturas reales. En el móvil se apilan. */
+.pasos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:20px 0 28px}
+.pasos3>div{border:1px solid var(--linea);border-radius:12px;padding:16px 18px;background:var(--hoja)}
+.pasos3 h3{margin:0 0 6px;font-size:15px}
+.pasos3 .sis{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris)}
+.pasos3 ol{margin:8px 0 0;padding-left:20px}
+.pasos3 li{margin:7px 0;font-size:14px;line-height:1.5}
+.pasos3 code{font-size:12.5px;overflow-wrap:anywhere}
+.pasos3 img{width:100%;height:auto;border:1px solid var(--linea);border-radius:8px;margin-top:10px;display:block}
+.pasos3 .ojo{color:var(--corte);font-weight:600}
+@media (max-width:820px){.pasos3{grid-template-columns:1fr}}
 .wrap{overflow-x:auto}table{border-collapse:collapse;margin:12px 0;width:100%;font-size:15px;background:var(--hoja)}th,td{border:1px solid var(--linea);padding:8px 10px;text-align:left;vertical-align:top}th{color:var(--gris);font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--tinta);background:var(--hoja);border:1px solid var(--linea);border-radius:5px;padding:1px 6px;overflow-wrap:anywhere}
 pre{background:var(--hoja);border:1px solid var(--linea);border-radius:8px;padding:12px 14px;overflow-x:auto}pre code{border:0;padding:0;background:none}
@@ -62,14 +77,24 @@ li,td,p{overflow-wrap:anywhere}.muted{color:var(--gris)}
 .box{border:1.5px solid var(--azul);border-radius:12px;padding:14px 18px;margin:18px 0;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35)}
 .lead{font-size:20px;line-height:1.5;color:var(--tinta)}
 ul{padding-left:22px}li{margin:3px 0}
-ul.rx{padding-left:0;list-style:none}ul.rx li{margin:0 0 22px;background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:18px 20px}ul.rx li a{font-family:'Unbounded',sans-serif;font-weight:600;font-size:17px;text-decoration:none;line-height:1.35}ul.rx li a:hover{color:var(--azul)}
+/* Una sola tarjeta para todas las listas del sitio —guías y radiografías, en los tres idiomas—:
+   fecha arriba, título, resumen. Antes había dos componentes: ul.rx, con estilo, en español, y
+   .lista, SIN estilo ninguno, en inglés y portugués, donde la lista salía como un muro de texto
+   azul sin separación (visto el 21 sep 2026 al revisar la simetría de la web). */
+.lista{display:grid;gap:14px;margin:22px 0 8px}
+.lista a.rx{display:block;background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:18px 20px;text-decoration:none;color:var(--tinta);transition:border-color .12s ease,box-shadow .12s ease}
+.lista a.rx:hover{border-color:var(--azul);box-shadow:0 18px 34px -28px rgba(31,75,255,.45)}
+.lista a.rx .k{display:block;margin:0 0 7px}
+.lista a.rx b{display:block;font-family:'Unbounded',sans-serif;font-weight:600;font-size:17px;line-height:1.35;letter-spacing:-.01em;color:var(--azul)}
+.lista a.rx:hover b{color:var(--azul-oscuro)}
+.lista a.rx .resumen{display:block;margin-top:7px;color:var(--gris);font-size:15px;line-height:1.55}
 img{max-width:100%;height:auto;border-radius:8px}
 footer.pie{border-top:1px solid var(--linea);margin-top:64px;padding-top:24px;font-size:13px;color:var(--gris);display:grid;gap:14px}
 footer.pie .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}footer.pie .links a{color:var(--gris)}footer.pie .links a:hover{color:var(--tinta)}
 footer.pie .arriba{justify-self:start;color:var(--azul)}
 @media (max-width:600px){main{padding:20px 20px 72px}h1{font-size:27px}header.top nav{gap:12px 16px}}
-</style></head><body><main id="arriba"><header class="top"><a class="brand" href="/es/" aria-label="GUARDIANA, portada"><i></i>GUARDIANA</a><nav aria-label="Secciones"><a href="/es/">Inicio</a><a href="/guias/">Guías</a><a href="/radiografias/" aria-current="page">Radiografías</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="/contacto.html">Contacto</a></nav><span class="idiomas"><span class="idioma actual" lang="es" aria-current="true">ES</span><a class="idioma" href="/en/x-rays/" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><a class="idioma" href="/pt/radiografias/" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span></header>
-<div class="k">RADIOGRAFÍA · 18 DE SEPTIEMBRE DE 2026</div>
+</style></head><body><main id="arriba"><header class="top"><a class="brand" href="/es/" aria-label="GUARDIANA, portada"><i></i>GUARDIANA</a><nav aria-label="Secciones"><a href="/es/">Inicio</a><a href="/guias/">Guías</a><a href="/radiografias/" aria-current="page">Radiografías</a><a href="/negocio-de-tus-datos.html">El negocio de tus datos</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="/contacto.html">Contacto</a></nav><span class="idiomas"><span class="idioma actual" lang="es" aria-current="true">ES</span><a class="idioma" href="/en/x-rays/ocho-ia-con-tu-cuenta-al-conversar-2026-09-18.html" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><a class="idioma" href="/pt/radiografias/ocho-ia-con-tu-cuenta-al-conversar-2026-09-18.html" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span></header>
+<p class="k">RADIOGRAFÍA · 18 DE SEPTIEMBRE DE 2026</p>
 <h1>Ocho IA con tu cuenta, al conversar: qué servicios busca cada una cuando le preguntas</h1>
 <p class="lead">Las mismas ocho IA de la radiografía del PC limpio, esta vez en mi propio navegador, con mi cuenta ya iniciada, una a una y con una pregunta corta escrita en cada una. Con la sesión abierta y conversando, ChatGPT no hace que el equipo hable con ningún servicio ajeno; Gemini carga seis y los seis están en listas de publicidad y rastreo.</p>
 <div class="box"><b>Cómo leer esto.</b> GUARDIANA anota cada nombre que el equipo pide resolver (el DNS). Ve nombres, no contenido: ni la pregunta ni la respuesta. Aquí cada IA se abrió sola en una pestaña nueva de mi propio navegador, con mi cuenta ya iniciada, y se le escribió una pregunta corta. No hay vista por dentro del navegador, porque Chrome no la permite sobre el perfil de una persona: se cuentan los nombres que el PC pidió en el minuto de cada IA, vaciando la memoria de nombres antes de cada una y descontando los que pide Windows y los que pide el propio Chrome por tener la cuenta abierta. La pantalla de entrada sin cuenta, medida por dentro, está en la radiografía del PC limpio.</div>
@@ -86,4 +111,4 @@ footer.pie .arriba{justify-self:start;color:var(--azul)}
 <h2>Datos y método</h2>
 <p>Datos completos: <a href="/radiografias/datos/ocho-ia-con-tu-cuenta-al-conversar-2026-09-18.csv">ocho-ia-con-tu-cuenta-al-conversar-2026-09-18.csv</a> (nombre, categoría, propio de fabricante y, por navegador, consultas, pedido por las páginas y bloqueado). Método: cada IA abierta en su propia pestaña dmi propio Chrome (perfil real, sesiones ya iniciadas) con site/src/radiografia/ia-teclas.ps1: memoria de nombres vaciada antes de cada una, dirección tecleada, 16 s de carga, una pregunta corta tecleada, 40 s de espera, pestaña cerrada; sin vista por dentro (Chrome no admite DevTools sobre el perfil por defecto desde la versión 136), con el título de la ventana antes y después como prueba de carga y respuesta. Nombres tomados del extracto de GUARDIANA del PC en la ventana de cada IA, solo las consultas del propio equipo, descontando los nombres de Windows, los del propio Chrome y los buscadores del equipo (listas WIN_BG, CHROME_OWN y CHROME_CUENTA en generar.py). Mi lista de pestañas abiertas se guardó antes y se devolvió al acabar. Las herramientas están en el repositorio del programa (<code>site/src/radiografia/</code>); cualquiera puede repetir la prueba con Guardiana instalado.</p>
 <p>Marcas citadas como nombres de sus dueños. Si eres el fabricante y algo aquí es inexacto, escribe a <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a>: se corrige con fecha.</p>
-<footer class="pie"><div class="links"><a href="/es/">Inicio</a><a href="/guias/">Guías</a><a href="/radiografias/">Radiografías</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="/contacto.html">Contacto</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div><div>GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, piso 18, Bocagrande, Cartagena de Indias, Colombia · Esta página no usa cookies ni analíticas.</div><a class="arriba" href="#arriba">Volver arriba ↑</a></footer></main></body></html>
+<footer class="pie"><div class="links"><a href="/es/">Inicio</a><a href="/guias/">Guías</a><a href="/radiografias/">Radiografías</a><a href="/negocio-de-tus-datos.html">El negocio de tus datos</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="/contacto.html">Contacto</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div><div>GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, piso 18, Bocagrande, Cartagena de Indias, Colombia · Esta página no usa cookies ni analíticas.</div><a class="arriba" href="#arriba">Volver arriba ↑</a></footer></main></body></html>
