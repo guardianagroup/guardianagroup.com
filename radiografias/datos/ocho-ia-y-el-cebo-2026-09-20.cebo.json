@@ -61,6 +61,23 @@
    "mordio": false
   },
   {
+   "slug": "copilot",
+   "nombre": "Copilot",
+   "empresa": "Microsoft",
+   "pais": "Estados Unidos",
+   "cebo": "copilot-c8c2",
+   "medido": true,
+   "enviado": "2026-09-20T23:10:00-05:00",
+   "como": "web copilot.microsoft.com, sesion iniciada, en el navegador de la aplicacion",
+   "motivo": "",
+   "visitas": 0,
+   "redes": 0,
+   "agentes": [],
+   "primera": null,
+   "ultima": null,
+   "mordio": false
+  },
+  {
    "slug": "gemini",
    "nombre": "Gemini",
    "empresa": "Google",
@@ -87,23 +104,6 @@
    "enviado": "2026-09-20T18:59:00-05:00",
    "como": "web perplexity.ai, sesion iniciada",
    "motivo": "",
-   "visitas": 0,
-   "redes": 0,
-   "agentes": [],
-   "primera": null,
-   "ultima": null,
-   "mordio": false
-  },
-  {
-   "slug": "copilot",
-   "nombre": "Copilot",
-   "empresa": "Microsoft",
-   "pais": "Estados Unidos",
-   "cebo": "copilot-c8c2",
-   "medido": false,
-   "enviado": null,
-   "como": "pide iniciar sesion",
-   "motivo": "sesion",
    "visitas": 0,
    "redes": 0,
    "agentes": [],
@@ -146,7 +146,7 @@
    "mordio": false
   }
  ],
- "medidos": 5,
+ "medidos": 6,
  "total": 8,
  "mordieron": 1
 }
