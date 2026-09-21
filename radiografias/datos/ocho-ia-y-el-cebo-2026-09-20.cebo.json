@@ -44,6 +44,23 @@
    "mordio": false
   },
   {
+   "slug": "claude",
+   "nombre": "Claude",
+   "empresa": "Anthropic",
+   "pais": "Estados Unidos",
+   "cebo": "claude-aa8a",
+   "medido": true,
+   "enviado": "2026-09-20T20:42:00-05:00",
+   "como": "web claude.ai, sesion iniciada, plan gratis, Sonnet 5",
+   "motivo": "",
+   "visitas": 0,
+   "redes": 0,
+   "agentes": [],
+   "primera": null,
+   "ultima": null,
+   "mordio": false
+  },
+  {
    "slug": "gemini",
    "nombre": "Gemini",
    "empresa": "Google",
@@ -70,23 +87,6 @@
    "enviado": "2026-09-20T18:59:00-05:00",
    "como": "web perplexity.ai, sesion iniciada",
    "motivo": "",
-   "visitas": 0,
-   "redes": 0,
-   "agentes": [],
-   "primera": null,
-   "ultima": null,
-   "mordio": false
-  },
-  {
-   "slug": "claude",
-   "nombre": "Claude",
-   "empresa": "Anthropic",
-   "pais": "Estados Unidos",
-   "cebo": "claude-aa8a",
-   "medido": false,
-   "enviado": null,
-   "como": "pendiente",
-   "motivo": "pendiente",
    "visitas": 0,
    "redes": 0,
    "agentes": [],
@@ -146,7 +146,7 @@
    "mordio": false
   }
  ],
- "medidos": 4,
+ "medidos": 5,
  "total": 8,
  "mordieron": 1
 }
