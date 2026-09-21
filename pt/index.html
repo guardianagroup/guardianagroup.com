@@ -109,10 +109,7 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .pases{display:grid;gap:14px}
 .pestanas{display:flex;align-items:center;gap:6px;position:relative;padding:4px;border:1px solid var(--linea);border-radius:999px;background:var(--hoja);width:max-content;max-width:100%}
 .pestanas button{appearance:none;border:0;background:transparent;color:var(--gris);font:inherit;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border-radius:999px;cursor:pointer;position:relative;overflow:hidden}
-.pestanas button[aria-selected="true"]{background:var(--tinta);color:#fff}
-.pestanas button i{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--azul)}
-.pases.auto .pestanas button[aria-selected="true"] i{animation:pase var(--pase-ms,9000ms) linear forwards}
-@keyframes pase{from{width:0}to{width:100%}}
+.pestanas button[aria-selected="true"]{background:var(--azul);color:#fff}
 .pases .escena{display:grid}
 .pases .pase{grid-area:1/1;transition:opacity .35s ease;display:flex}
 .pases .pase>.ticket{flex:1 1 auto;width:100%;display:flex;flex-direction:column}
@@ -301,7 +298,7 @@ footer .links a:hover{color:var(--tinta)}
   .pestanas{max-width:100%;overflow-x:auto}
   .pestanas button{padding:8px 10px;letter-spacing:.06em}
 }
-@media (prefers-reduced-motion:reduce){.btn{transition:none}.pases .pase{transition:none}.pases.auto .pestanas button[aria-selected="true"] i{animation:none}}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}.pases .pase{transition:none}}
 </style></head>
 <body>
 <div class="wrap">
@@ -323,8 +320,8 @@ footer .links a:hover{color:var(--tinta)}
   <svg class="defs" aria-hidden="true" focusable="false"><filter id="tinta" x="-4%" y="-8%" width="108%" height="116%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="7" result="r"/><feDisplacementMap in="SourceGraphic" in2="r" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
   <div class="pases" id="pases">
     <div class="pestanas" role="tablist" aria-label="Recibos">
-      <button type="button" role="tab" id="tab-ia" aria-selected="true" aria-controls="pase-ia">Sua IA<i></i></button><button type="button" role="tab" id="tab-ag" aria-selected="false" aria-controls="pase-ag" tabindex="-1">Seu agente<i></i></button><button type="button" role="tab" id="tab-cb" aria-selected="false" aria-controls="pase-cb" tabindex="-1">A armadilha<i></i></button>
-      <button type="button" role="tab" id="tab-nav" aria-selected="false" aria-controls="pase-nav" tabindex="-1">Seu navegador<i></i></button>
+      <button type="button" role="tab" id="tab-ia" aria-selected="true" aria-controls="pase-ia">Sua IA</button><button type="button" role="tab" id="tab-ag" aria-selected="false" aria-controls="pase-ag" tabindex="-1">Seu agente</button><button type="button" role="tab" id="tab-cb" aria-selected="false" aria-controls="pase-cb" tabindex="-1">A armadilha</button>
+      <button type="button" role="tab" id="tab-nav" aria-selected="false" aria-controls="pase-nav" tabindex="-1">Seu navegador</button>
     </div>
     <div class="escena">
     <div class="pase" id="pase-ia" role="tabpanel" aria-labelledby="tab-ia" aria-hidden="false">
@@ -496,23 +493,15 @@ footer .links a:hover{color:var(--tinta)}
 
 
 (function(){
-  // Dos recibos en el mismo hueco: alternan solos cada 9 s hasta que la persona elige uno. Sin movimiento si el sistema lo pide.
+  // Cuatro recibos en el mismo hueco. NO giran solos: cambia quien lee, cuando pulsa (pedido del
+  // responsable, 21 sep 2026). Antes se turnaban cada 9 s y la página se movía sola mientras
+  // alguien estaba leyendo una fila, que es justo lo que hace cerrar una pestaña.
   var c=document.getElementById('pases'); if(!c)return;
   var tabs=[].slice.call(c.querySelectorAll('[role=tab]')), panes=[].slice.call(c.querySelectorAll('[role=tabpanel]'));
-  var quieto=matchMedia('(prefers-reduced-motion: reduce)').matches, t=null, i=0, MS=9000;
-  function ver(k,manual){i=k;tabs.forEach(function(b,j){var on=j===k;b.setAttribute('aria-selected',on?'true':'false');b.tabIndex=on?0:-1;});
-    panes.forEach(function(p,j){p.setAttribute('aria-hidden',j===k?'false':'true');});
-    if(manual){parar();}else{var b=tabs[k].querySelector('i');if(b){b.style.animation='none';void b.offsetWidth;b.style.animation='';}}}
-  function siguiente(){ver((i+1)%tabs.length,false);}
-  function parar(){c.classList.remove('auto');if(t){clearInterval(t);t=null;}}
-  function arrancar(){if(quieto||t)return;c.classList.add('auto');t=setInterval(siguiente,MS);}
-  tabs.forEach(function(b,j){b.addEventListener('click',function(){ver(j,true);b.focus();});
-    b.addEventListener('keydown',function(ev){if(ev.key==='ArrowRight'||ev.key==='ArrowLeft'){ev.preventDefault();var k=(j+(ev.key==='ArrowRight'?1:tabs.length-1))%tabs.length;ver(k,true);tabs[k].focus();}});});
-  c.addEventListener('mouseenter',function(){if(t){clearInterval(t);t=null;c.classList.remove('auto');}});
-  c.addEventListener('mouseleave',function(){arrancar();});
-  document.addEventListener('visibilitychange',function(){if(document.hidden){if(t){clearInterval(t);t=null;}}else if(c.classList.contains('auto')){t=setInterval(siguiente,MS);}});
-  c.style.setProperty('--pase-ms',MS+'ms');
-  arrancar();
+  function ver(k){tabs.forEach(function(b,j){var on=j===k;b.setAttribute('aria-selected',on?'true':'false');b.tabIndex=on?0:-1;});
+    panes.forEach(function(p,j){p.setAttribute('aria-hidden',j===k?'false':'true');});}
+  tabs.forEach(function(b,j){b.addEventListener('click',function(){ver(j);b.focus();});
+    b.addEventListener('keydown',function(ev){if(ev.key==='ArrowRight'||ev.key==='ArrowLeft'){ev.preventDefault();var k=(j+(ev.key==='ArrowRight'?1:tabs.length-1))%tabs.length;ver(k);tabs[k].focus();}});});
 })();
 
 (function(){try{var P=window.GUARDIANA_PRICES;if(!P)return;var a=document.getElementById('plus-precio'),b=document.getElementById('plus-nota');if(a)a.textContent=P.plusPt;if(b)b.textContent=P.plusNotePt;}catch(e){}})();
