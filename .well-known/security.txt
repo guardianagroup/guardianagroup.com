@@ -6,7 +6,7 @@ Contact: mailto:hola@guardianagroup.com
 Expires: 2027-09-16T00:00:00.000Z
 Preferred-Languages: es, en
 Canonical: https://guardianagroup.com/.well-known/security.txt
-Policy: https://guardianagroup.com/.well-known/security.txt
+Policy: https://github.com/guardianagroup/guardiana/blob/main/docs/SEGURIDAD.md#divulgaci%C3%B3n-responsable-c%C3%B3mo-avisar-de-un-fallo
 
 # Qué prometo / What I promise
 #   · Acuso recibo en 72 horas. / I acknowledge within 72 hours.
