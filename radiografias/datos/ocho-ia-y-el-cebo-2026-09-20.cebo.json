@@ -95,6 +95,23 @@
    "mordio": false
   },
   {
+   "slug": "mistral",
+   "nombre": "Le Chat",
+   "empresa": "Mistral",
+   "pais": "Francia",
+   "cebo": "mistral-02d7",
+   "medido": true,
+   "enviado": "2026-09-20T23:45:00-05:00",
+   "como": "web chat.mistral.ai, sesion iniciada, en el navegador de la aplicacion",
+   "motivo": "",
+   "visitas": 0,
+   "redes": 0,
+   "agentes": [],
+   "primera": null,
+   "ultima": null,
+   "mordio": false
+  },
+  {
    "slug": "perplexity",
    "nombre": "Perplexity",
    "empresa": "Perplexity",
@@ -110,43 +127,9 @@
    "primera": null,
    "ultima": null,
    "mordio": false
-  },
-  {
-   "slug": "deepseek",
-   "nombre": "DeepSeek",
-   "empresa": "DeepSeek",
-   "pais": "China",
-   "cebo": "deepseek-21e8",
-   "medido": false,
-   "enviado": null,
-   "como": "pide iniciar sesion",
-   "motivo": "sesion",
-   "visitas": 0,
-   "redes": 0,
-   "agentes": [],
-   "primera": null,
-   "ultima": null,
-   "mordio": false
-  },
-  {
-   "slug": "mistral",
-   "nombre": "Le Chat",
-   "empresa": "Mistral",
-   "pais": "Francia",
-   "cebo": "mistral-02d7",
-   "medido": false,
-   "enviado": null,
-   "como": "pide iniciar sesion",
-   "motivo": "sesion",
-   "visitas": 0,
-   "redes": 0,
-   "agentes": [],
-   "primera": null,
-   "ultima": null,
-   "mordio": false
   }
  ],
- "medidos": 6,
- "total": 8,
+ "medidos": 7,
+ "total": 7,
  "mordieron": 1
 }
