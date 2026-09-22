@@ -77,12 +77,18 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .top .idioma:hover{border-color:var(--tinta);color:var(--tinta)}
 .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);gap:64px;align-items:start;padding:72px 0 80px}
 .hero .fecha .k{white-space:nowrap}
+@media (max-width:720px){.hero .fecha .k{white-space:normal}}
 .fecha{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
 .hero h1{font-weight:700;font-size:clamp(30px,3.6vw,50px);line-height:1.12;letter-spacing:-.025em}
 .hero .lead{font-size:20px;line-height:1.5;max-width:34em;margin-top:22px}
 .hero .lead strong{font-weight:600}
 .hero .peq{color:var(--gris);font-size:15px;max-width:34em;margin-top:14px}
 .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px;align-items:center}
+/* Un botón u otro, nunca los dos: en el teléfono no se puede instalar, así que ahí el principal
+   pide el correo para mandar el enlace al computador. Va con `.cta` delante porque si no gana la
+   regla de `.btn`, que se define después y también dice `display`. */
+.cta .solo-movil{display:none}
+@media (max-width:720px){.cta .solo-ancho{display:none}.cta .solo-movil{display:inline-flex}}
 .btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:15px 24px;font-weight:600;font-size:15px;border:1.5px solid transparent;transition:transform .15s ease,background .15s ease,border-color .15s ease}
 .btn:hover{transform:translateY(-1px)}
 .btn.p{background:var(--azul);color:#fff}
@@ -328,7 +334,7 @@ footer .links a:hover{color:var(--tinta)}
          sigue contado en la página, cada cosa en su sección, y la nota de debajo de los botones
          mantiene lo esencial. El texto no se borra del contenido: lo usa la ficha que lee
          Google y el generador antiguo. -->
-    <div class="cta"><a class="btn p" href="https://guardiana-pt.beehiiv.com/">Me avise no dia 25</a><a class="btn s" href="/pt/recibo-de-agente.html">Ver o recibo do agente →</a></div>
+    <div class="cta"><a class="btn p solo-ancho" href="https://guardiana-pt.beehiiv.com/">Me avise no dia 25</a><a class="btn p solo-movil" href="https://guardiana-pt.beehiiv.com/">Me envie o link para o meu computador</a><a class="btn s" href="/pt/recibo-de-agente.html">Ver o recibo do agente →</a></div>
     <p class="nota">SEM CONTA · 7 DIAS DE TESTE SEM CARTÃO · CÓDIGO ABERTO</p>
   </div>
   <svg class="defs" aria-hidden="true" focusable="false"><filter id="tinta" x="-4%" y="-8%" width="108%" height="116%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="7" result="r"/><feDisplacementMap in="SourceGraphic" in2="r" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
