@@ -262,6 +262,12 @@ your networks' DNS goes back to what you had before.</p>
 <p>It uninstalls like any other program, and when it does GUARDIANA <strong>turns Home Mode off, removes the
 firewall rule and puts your DNS back exactly as it was</strong>, with whatever it pointed to before. What
 stays is your ledger, which is yours: it is on your disk and you delete it whenever you want.</p>
+<p>One small thing also stays, and we say so because we hide nothing: <strong>the date your 7-day
+trial started</strong>. It is a single number with nothing of yours in it, kept in
+<code>HKLM\SOFTWARE\Guardiana\prueba</code> on Windows and in
+<code>/etc/guardiana/prueba-empezada</code> on Linux and the Mac. It stays so that seven days are
+seven days: if it went away on uninstall, reinstalling would quietly start the count again. An
+administrator can remove it whenever they want.</p>
 
 <h2>7 · If something goes wrong</h2>
 <p>Write to <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a> or open an issue at
