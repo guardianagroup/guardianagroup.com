@@ -104,12 +104,7 @@ footer.pie .arriba{justify-self:start;color:var(--azul)}
 <p class="lead">Windows y el Mac te van a avisar. Está previsto, y esta página es para que sepas exactamente qué
 vas a ver, por qué, y cómo comprobar tú mismo que el archivo es el nuestro antes de abrirlo.</p>
 
-<div class="box">
-<p><strong>Todavía no hay descarga.</strong> La versión 1.0 sale el <strong>viernes 25 de septiembre de
-2026 a las 15:00 UTC</strong> (10:00 en Colombia, 17:00 en España). Ese día aparecen aquí los
-archivos, sus huellas y sus firmas. Las huellas se publican en el registro público <em>antes</em> que
-la descarga, que es el orden que hace que sirvan para algo.</p>
-</div>
+<div class="box"><p><strong>Todavía no hay descarga.</strong> La versión 1.0 sale el <strong>viernes 25 de septiembre de 2026 a las 15:00 UTC</strong> (10:00 en Colombia, 17:00 en España). Ese día aparecen aquí los enlaces, y las huellas y las firmas de cada archivo. Las huellas se publican en el registro público <em>antes</em> que la descarga, que es el orden que hace que sirvan para algo.</p></div>
 
 <h2 id="paso-a-paso">Paso a paso, en tu sistema</h2>
 <p>El resumen. Debajo está cada punto explicado despacio, con lo que verás en pantalla y por qué.</p>
@@ -172,7 +167,7 @@ hacemos es darte la forma de comprobar el archivo sin fiarte de nosotros.</p>
 <p>En Linux, en la terminal:</p>
 <p><code>sha256sum guardiana_1.0.0_amd64.deb</code></p>
 
-<h3>Paso 2 · Compárala con la del registro público</h3>
+<h3 id="registro">Paso 2 · Compárala con la del registro público</h3>
 <p>Cada versión se anota en un registro público, <code>ledger.jsonl</code>: su huella y el punto exacto
 del código del que salió (el «commit»). Ese apunte se sella además en Rekor, un archivo público de sellos
 de tiempo que prueba la fecha. El registro se publica <strong>antes</strong>
