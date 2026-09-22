@@ -118,8 +118,8 @@ la descarga, que es el orden que hace que sirvan para algo.</p>
   <span class="sis">Windows 10 y 11</span>
   <h3>Cuatro pasos</h3>
   <ol>
-   <li><strong>Descarga</strong> <code>guardiana-1.0.0-windows-x86_64.msi</code>. El 25 de septiembre aparece en esta misma página.</li>
-   <li><strong>Comprueba la huella antes de abrirlo</strong>, en PowerShell:<br><code>Get-FileHash guardiana-1.0.0-windows-x86_64.msi -Algorithm SHA256</code><br>y compárala con la del <a href="#registro">registro público</a>. Si no son idénticas, bórralo.</li>
+   <li><strong>Descarga</strong> <code>guardiana-1.0.0-windows-x64.msi</code>. El 25 de septiembre aparece en esta misma página.</li>
+   <li><strong>Comprueba la huella antes de abrirlo</strong>, en PowerShell:<br><code>Get-FileHash guardiana-1.0.0-windows-x64.msi -Algorithm SHA256</code><br>y compárala con la del <a href="#registro">registro público</a>. Si no son idénticas, bórralo.</li>
    <li><strong>Ábrelo.</strong> Windows enseña este aviso. No dice que el programa sea peligroso: dice que todavía no lo conoce.
     <img src="/aviso-instalacion.png" alt="Aviso de seguridad de Windows: «Publicador desconocido»." width="600" height="366" loading="lazy"></li>
    <li><strong>Ya instalado</strong>, escribe <code>guardiana verify</code>: repite la comprobación solo, en tu equipo.</li>
@@ -168,7 +168,7 @@ hacemos es darte la forma de comprobar el archivo sin fiarte de nosotros.</p>
 
 <h3>Paso 1 · Saca la huella del archivo que descargaste</h3>
 <p>En Windows, en PowerShell:</p>
-<p><code>Get-FileHash guardiana-1.0.0-windows-x86_64.msi -Algorithm SHA256</code></p>
+<p><code>Get-FileHash guardiana-1.0.0-windows-x64.msi -Algorithm SHA256</code></p>
 <p>En Linux, en la terminal:</p>
 <p><code>sha256sum guardiana_1.0.0_amd64.deb</code></p>
 
