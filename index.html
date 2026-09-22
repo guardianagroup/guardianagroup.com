@@ -108,12 +108,15 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .ticket .tot b{font-weight:500}
 .ticket .pie{margin-top:12px;font-size:11px;color:var(--gris);letter-spacing:.04em;font-family:'IBM Plex Sans',sans-serif}
 .ticket .mas{display:inline-block;margin-top:10px;font-size:12px}
-.pases{display:grid;gap:14px}
+.pases{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+/* El carril del recibo es una sola columna, y se dice con minmax(0,1fr): sin eso la columna la
+   medía el contenido más ancho —las cuatro pestañas— y en un móvil de 375 px la portada entera
+   se iba 31 px a la derecha, con barra horizontal incluida (repaso del 21 sep 2026). */
 .pestanas{display:flex;align-items:center;gap:6px;position:relative;padding:4px;border:1px solid var(--linea);border-radius:999px;background:var(--hoja);width:max-content;max-width:100%}
-.pestanas button{appearance:none;border:0;background:transparent;color:var(--gris);font:inherit;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border-radius:999px;cursor:pointer;position:relative;overflow:hidden}
+.pestanas button{appearance:none;border:0;background:transparent;color:var(--gris);font:inherit;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border-radius:999px;cursor:pointer;position:relative;overflow:hidden;white-space:nowrap}
 .pestanas button[aria-selected="true"]{background:var(--azul);color:#fff}
-.pases .escena{display:grid}
-.pases .pase{grid-area:1/1;transition:opacity .35s ease;display:flex}
+.pases .escena{display:grid;min-width:0}
+.pases .pase{grid-area:1/1;transition:opacity .35s ease;display:flex;min-width:0}
 .pases .pase>.ticket{flex:1 1 auto;width:100%;display:flex;flex-direction:column}
 .ticket.recibo .filas{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:2px}
 .ticket.recibo .extra-ag{border-top:1px dashed var(--linea);margin-top:10px;padding-top:10px}
@@ -448,14 +451,14 @@ footer .links a:hover{color:var(--tinta)}
 <section id="planes">
   <div class="cab-sec"><span class="k">THE PLAN</span><h2>One program. 7 days free with everything, then the subscription.</h2><p>There is no cut-down version: you install it, it works whole for seven days, and you decide. No card to try it and no account. If you do not subscribe when it ends, GUARDIANA stops watching and puts your machine’s DNS back exactly as it was — your internet keeps working the same — and what it had already written down stays on your disk, yours, to take whenever you want. Each country sees its own price; yearly is 20% less. No ads, no data sales, and no investors asking otherwise.</p></div>
   <div class="planes">
-    <div class="plan plus"><h3>GUARDIANA</h3><span class="precio"><b id="plus-precio">Subscription</b><br><span id="plus-nota">7 DAYS FREE · NO CARD · THEN MONTHLY OR YEARLY (−20%) · EACH COUNTRY SEES ITS PRICE</span></span><ul><li><span>The agent layer: where your AI really talks, and Watch Mode to cut what you did not declare</span></li><li><span>Which program on your PC asked for each name (on Windows)</span></li><li><span>Trap files: they tell you who opened them</span></li><li><span>Your PC and the whole home: Home Mode for phones, TV and everything on the Wi-Fi, nothing installed on them</span></li><li><span>Cut with undo: one name now, the wide ones after 24 h</span></li><li><span>A chained record, impossible to edit without it showing, and open lists kept up to date</span></li><li><span>Everything is kept: nothing is deleted while you have the subscription</span></li><li><span>What changed this week, and which destinations are new, with the company behind each</span></li><li><span>The weekly home report and the statement for any day, in CSV, JSON or PDF</span></li><li><span>Several homes on one licence, and I answer you myself by email</span></li></ul><a class="btn p" href="https://guardiana-en.beehiiv.com/">Try it 7 days, no card</a></div>
+    <div class="plan plus"><h3>GUARDIANA</h3><span class="precio"><b id="plus-precio">Subscription</b><br><span id="plus-nota">7 DAYS FREE · NO CARD · THEN MONTHLY OR YEARLY (−20%) · EACH COUNTRY SEES ITS PRICE</span></span><ul><li><span>The agent layer: where your AI really talks, and Watch Mode to cut what you did not declare</span></li><li><span>Which program on your PC asked for each name (on Windows)</span></li><li><span>Trap files: they tell you who opened them</span></li><li><span>Your PC and the whole home: Home Mode for phones, TV and everything on the Wi-Fi, nothing installed on them</span></li><li><span>Cut with undo: one name now, the wide ones after 24 h</span></li><li><span>A chained record, impossible to edit without it showing, and open lists kept up to date</span></li><li><span>Everything is kept: nothing is ever deleted, not even if you stop paying</span></li><li><span>What changed this week, and which destinations are new, with the company behind each</span></li><li><span>The weekly home report and the statement for any day, in CSV, JSON or PDF</span></li><li><span>Several homes on one licence, and I answer you myself by email</span></li></ul><a class="btn p" href="https://guardiana-en.beehiiv.com/">Try it 7 days, no card</a></div>
     <div class="plan abierto"><h3>The code, open</h3><p>GUARDIANA is open source (GPL-3.0) and published whole. If you can compile it, it is yours, free, and it will stay that way: we are not going to hide it or booby-trap it. What you pay for is the work already done.</p><a class="btn s" href="https://github.com/guardianagroup/guardiana/blob/main/README.en.md" rel="noopener">See the code →</a></div>
   </div>
 </section>
 
 <section id="activar" style="border-top:0;padding-top:0">
   <div class="activar">
-    <div><span class="k">LAUNCH · 5 OCTOBER 2026</span><h2>Your home, watched from your computer.</h2><p>Windows, Linux and macOS. The complete guardian, free: your computer and the whole home. Plus adds memory: nothing is deleted, and you know what changed. 7 days free, monthly or yearly. No card. No account. No need to trust us: you can verify everything.</p></div>
+    <div><span class="k">LAUNCH · FRIDAY 25 SEPTEMBER 2026 · 15:00 UTC</span><h2>Your home, watched from your computer.</h2><p>Windows, Linux and macOS. One program: your computer and the whole home, with seven days of everything and no card. After that, a subscription; what was written down stays on your disk whether you pay or not. No account. No need to trust us: you can check it all.</p></div>
     <div class="der"><a class="btn p" href="https://guardiana-en.beehiiv.com/">EMAIL ME WHEN IT IS OUT</a><span class="k">The list page opens: you put in your email and press Sign up. The page says nothing else, but within a minute an email arrives to confirm it; without confirming we do not write. On 25 September you get the notice, and every email carries the unsubscribe link.</span></div>
   </div>
 </section>

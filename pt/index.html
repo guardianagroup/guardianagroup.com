@@ -108,12 +108,15 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .ticket .tot b{font-weight:500}
 .ticket .pie{margin-top:12px;font-size:11px;color:var(--gris);letter-spacing:.04em;font-family:'IBM Plex Sans',sans-serif}
 .ticket .mas{display:inline-block;margin-top:10px;font-size:12px}
-.pases{display:grid;gap:14px}
+.pases{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+/* El carril del recibo es una sola columna, y se dice con minmax(0,1fr): sin eso la columna la
+   medía el contenido más ancho —las cuatro pestañas— y en un móvil de 375 px la portada entera
+   se iba 31 px a la derecha, con barra horizontal incluida (repaso del 21 sep 2026). */
 .pestanas{display:flex;align-items:center;gap:6px;position:relative;padding:4px;border:1px solid var(--linea);border-radius:999px;background:var(--hoja);width:max-content;max-width:100%}
-.pestanas button{appearance:none;border:0;background:transparent;color:var(--gris);font:inherit;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border-radius:999px;cursor:pointer;position:relative;overflow:hidden}
+.pestanas button{appearance:none;border:0;background:transparent;color:var(--gris);font:inherit;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border-radius:999px;cursor:pointer;position:relative;overflow:hidden;white-space:nowrap}
 .pestanas button[aria-selected="true"]{background:var(--azul);color:#fff}
-.pases .escena{display:grid}
-.pases .pase{grid-area:1/1;transition:opacity .35s ease;display:flex}
+.pases .escena{display:grid;min-width:0}
+.pases .pase{grid-area:1/1;transition:opacity .35s ease;display:flex;min-width:0}
 .pases .pase>.ticket{flex:1 1 auto;width:100%;display:flex;flex-direction:column}
 .ticket.recibo .filas{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:2px}
 .ticket.recibo .extra-ag{border-top:1px dashed var(--linea);margin-top:10px;padding-top:10px}
@@ -448,14 +451,14 @@ footer .links a:hover{color:var(--tinta)}
 <section id="planes">
   <div class="cab-sec"><span class="k">O PLANO</span><h2>Um só programa. 7 dias de teste com tudo, e depois a assinatura.</h2><p>Não há versão cortada: você instala, funciona inteiro durante sete dias e decide. Sem cartão para testar e sem conta. Se ao terminar você não assinar, a GUARDIANA para de olhar e devolve o DNS do seu computador exatamente ao que era — a sua internet continua funcionando igual — e o que ela já tinha anotado fica no seu disco, seu, para você levar quando quiser. Cada país vê o preço da sua região; por ano, 20 % mais barato. Sem publicidade, sem venda de dados e sem investidores pedindo o contrário.</p></div>
   <div class="planes">
-    <div class="plan plus"><h3>GUARDIANA</h3><span class="precio"><b id="plus-precio">Assinatura</b><br><span id="plus-nota">7 DIAS DE TESTE · SEM CARTÃO · DEPOIS POR MÊS OU POR ANO (−20 %) · CADA PAÍS VÊ O SEU PREÇO</span></span><ul><li><span>A camada de agentes: com quem a sua IA fala de verdade, e o Modo Vigia para cortar o que ela não declarou</span></li><li><span>Qual programa do seu computador pediu cada nome (no Windows)</span></li><li><span>Arquivos armadilha: dizem quem os abriu</span></li><li><span>O seu computador e a casa inteira: Modo Casa para celulares, TV e tudo o que use o Wi-Fi, sem instalar nada neles</span></li><li><span>Cortar com desfazer: um nome já, os cortes largos depois de 24 h</span></li><li><span>Registro encadeado, impossível de retocar sem que apareça, e listas abertas em dia</span></li><li><span>Guarda-se tudo: nada é apagado enquanto você tiver a assinatura</span></li><li><span>O que mudou esta semana, e quais destinos são novos, com a empresa por trás</span></li><li><span>Relatório semanal da casa e extrato de qualquer dia, em CSV, JSON ou PDF</span></li><li><span>Várias casas com a mesma licença, e eu mesmo respondo por e-mail</span></li></ul><a class="btn p" href="https://guardiana-pt.beehiiv.com/">Testar 7 dias sem cartão</a></div>
+    <div class="plan plus"><h3>GUARDIANA</h3><span class="precio"><b id="plus-precio">Assinatura</b><br><span id="plus-nota">7 DIAS DE TESTE · SEM CARTÃO · DEPOIS POR MÊS OU POR ANO (−20 %) · CADA PAÍS VÊ O SEU PREÇO</span></span><ul><li><span>A camada de agentes: com quem a sua IA fala de verdade, e o Modo Vigia para cortar o que ela não declarou</span></li><li><span>Qual programa do seu computador pediu cada nome (no Windows)</span></li><li><span>Arquivos armadilha: dizem quem os abriu</span></li><li><span>O seu computador e a casa inteira: Modo Casa para celulares, TV e tudo o que use o Wi-Fi, sem instalar nada neles</span></li><li><span>Cortar com desfazer: um nome já, os cortes largos depois de 24 h</span></li><li><span>Registro encadeado, impossível de retocar sem que apareça, e listas abertas em dia</span></li><li><span>Guarda-se tudo: nada é apagado, nem se você parar de pagar</span></li><li><span>O que mudou esta semana, e quais destinos são novos, com a empresa por trás</span></li><li><span>Relatório semanal da casa e extrato de qualquer dia, em CSV, JSON ou PDF</span></li><li><span>Várias casas com a mesma licença, e eu mesmo respondo por e-mail</span></li></ul><a class="btn p" href="https://guardiana-pt.beehiiv.com/">Testar 7 dias sem cartão</a></div>
     <div class="plan abierto"><h3>O código, aberto</h3><p>A GUARDIANA é código aberto (GPL-3.0) e está publicada inteira. Se você souber compilá-la, é sua, grátis, e assim vai seguir: não vamos escondê-la nem colocar armadilhas. O que se paga é o trabalho já feito.</p><a class="btn s" href="https://github.com/guardianagroup/guardiana/blob/main/README.pt.md" rel="noopener">Ver o código →</a></div>
   </div>
 </section>
 
 <section id="activar" style="border-top:0;padding-top:0">
   <div class="activar">
-    <div><span class="k">LANÇAMENTO · 5 DE OUTUBRO DE 2026</span><h2>A sua casa, vigiada a partir do seu computador.</h2><p>Windows, Linux e macOS. O guardião completo, grátis: o seu computador e a casa inteira. O Plus acrescenta memória: nada é apagado, e você sabe o que mudou. 7 dias grátis, por mês ou por ano. Sem cartão. Sem conta. Sem pedir que você confie: dá para conferir tudo.</p></div>
+    <div><span class="k">LANÇAMENTO · SEXTA-FEIRA, 25 DE SETEMBRO DE 2026 · 15:00 UTC</span><h2>A sua casa, vigiada a partir do seu computador.</h2><p>Windows, Linux e macOS. Um só programa: o seu computador e a casa inteira, com sete dias de tudo e sem cartão. Depois, uma assinatura; o que ficou anotado continua no seu disco, pague ou não. Sem conta. Sem pedir que você confie: dá para conferir tudo.</p></div>
     <div class="der"><a class="btn p" href="https://guardiana-pt.beehiiv.com/">ME AVISE QUANDO SAIR</a><span class="k">Abre a página da lista: você escreve o e-mail e clica em Registre-se. A página não diz mais nada, mas em um minuto chega um e-mail para confirmar; sem confirmar não escrevemos. Em 25 de setembro chega o aviso, e o cancelamento está em cada e-mail.</span></div>
   </div>
 </section>
