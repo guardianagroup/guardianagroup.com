@@ -113,7 +113,7 @@ o que vai ver, por quê, e como conferir sozinho que o arquivo é nosso antes de
   <span class="sis">Windows 10 e 11</span>
   <h3>Quatro passos</h3>
   <ol>
-   <li><strong>Baixe</strong> <code>guardiana-1.0.0-windows-x64-pt.msi</code>. No dia do lançamento ele aparece nesta mesma página.</li>
+   <li><strong>Baixe</strong> <code>guardiana-1.0.0-windows-x64-pt.msi</code>, da <a href="#baixar">tabela acima</a>.</li>
    <li><strong>Confira a impressão digital antes de abrir</strong>, no PowerShell:<br><code>Get-FileHash guardiana-1.0.0-windows-x64-pt.msi -Algorithm SHA256</code><br>e compare com a do registro público. Se não forem idênticas, apague o arquivo.</li>
    <li><strong>Abra.</strong> O Windows mostra este aviso. Ele não diz que o programa é perigoso: diz que o Windows ainda não o conhece.
     <img src="/aviso-instalacion.png" alt="Aviso de segurança do Windows: editor desconhecido." width="600" height="366" loading="lazy"></li>
@@ -196,7 +196,7 @@ transparência: é enfeite.</p>
 <table>
   <tbody>
     <tr><th>Instala</th><td>O programa em <code>C:\Program Files\Guardiana</code> (Windows) ou <code>/usr/bin/guardiana</code> (Linux), e registra o serviço para que ele comece junto com a máquina.</td></tr>
-    <tr><th>Não muda o seu DNS</th><td>Instalar <strong>não</strong> mexe no DNS do sistema. Essa mudança acontece depois, pelo painel, com um botão que diz o que vai fazer, e se desfaz no mesmo lugar.</td></tr>
+    <tr><th>Coloca a GUARDIANA como DNS</th><td>Na primeira instalação a GUARDIANA passa a ser o DNS deste computador, por IPv4 e por IPv6, para começar a olhar desde o primeiro minuto. Antes guarda uma cópia exata do seu ajuste: se o serviço parar, o computador recupera o DNS de antes, e ao desinstalar fica exatamente como estava. Também se desfaz pelo painel, em "Estado".</td></tr>
     <tr><th>Não abre portas para a rede</th><td>Com o Modo Casa desligado, a GUARDIANA escuta só na sua própria máquina. As portas na direção do Wi-Fi só abrem se você ligar o Modo Casa, e o <code>guardiana verify</code> lista todas para você.</td></tr>
     <tr><th>Não pede conta</th><td>Sem cadastro, sem usuário, sem servidor nosso. O teste do Plus e a ativação por chave são as únicas conexões que saem, e ficam anotadas no seu extrato.</td></tr>
     <tr><th>Não envia nada</th><td>Zero telemetria. Nem ao instalar, nem depois.</td></tr>

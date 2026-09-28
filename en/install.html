@@ -113,7 +113,7 @@ what you will see, why, and how to check for yourself that the file is ours befo
   <span class="sis">Windows 10 and 11</span>
   <h3>Four steps</h3>
   <ol>
-   <li><strong>Download</strong> <code>guardiana-1.0.0-windows-x64-en.msi</code>. It appears on this page on launch day.</li>
+   <li><strong>Download</strong> <code>guardiana-1.0.0-windows-x64-en.msi</code> from the <a href="#download">table above</a>.</li>
    <li><strong>Check the hash before opening it</strong>, in PowerShell:<br><code>Get-FileHash guardiana-1.0.0-windows-x64-en.msi -Algorithm SHA256</code><br>and compare it with the one in the public ledger. If they are not identical, delete the file.</li>
    <li><strong>Open it.</strong> Windows shows this warning. It does not say the program is dangerous: it says Windows does not know it yet.
     <img src="/aviso-instalacion.png" alt="Windows security warning: unknown publisher." width="600" height="366" loading="lazy"></li>
@@ -196,7 +196,7 @@ transparency: it is decoration.</p>
 <table>
   <tbody>
     <tr><th>Installs</th><td>The program in <code>C:\Program Files\Guardiana</code> (Windows) or <code>/usr/bin/guardiana</code> (Linux), and registers the service so it starts with the machine.</td></tr>
-    <tr><th>Does not change your DNS</th><td>Installing does <strong>not</strong> touch the system DNS. That change happens later, from the panel, with a button that says what it will do, and it is undone in the same place.</td></tr>
+    <tr><th>Makes GUARDIANA your DNS</th><td>On a first install GUARDIANA becomes this PC's DNS, over IPv4 and IPv6, so it starts watching from the first minute. It first keeps an exact copy of your setting: if the service stops, the PC gets its previous DNS back, and uninstalling leaves it exactly as it was. It can also be undone from the panel, in "Status".</td></tr>
     <tr><th>Opens no ports to the network</th><td>With Home Mode off, GUARDIANA listens only on your own machine. Ports towards the Wi-Fi open only if you turn Home Mode on, and <code>guardiana verify</code> lists them for you.</td></tr>
     <tr><th>Asks for no account</th><td>No sign-up, no user, no server of ours. The Plus trial and key activation are the only connections that go out, and they are written into your ledger.</td></tr>
     <tr><th>Sends nothing</th><td>Zero telemetry. Not while installing, not afterwards.</td></tr>

@@ -113,7 +113,7 @@ vas a ver, por qué, y cómo comprobar tú mismo que el archivo es el nuestro an
   <span class="sis">Windows 10 y 11</span>
   <h3>Cuatro pasos</h3>
   <ol>
-   <li><strong>Descarga</strong> <code>guardiana-1.0.0-windows-x64.msi</code>. El día que salga aparece en esta misma página.</li>
+   <li><strong>Descarga</strong> <code>guardiana-1.0.0-windows-x64.msi</code>, de la <a href="#descargar">tabla de arriba</a>.</li>
    <li><strong>Comprueba la huella antes de abrirlo</strong>, en PowerShell:<br><code>Get-FileHash guardiana-1.0.0-windows-x64.msi -Algorithm SHA256</code><br>y compárala con la del <a href="#registro">registro público</a>. Si no son idénticas, bórralo.</li>
    <li><strong>Ábrelo.</strong> Windows enseña este aviso. No dice que el programa sea peligroso: dice que todavía no lo conoce.
     <img src="/aviso-instalacion.png" alt="Aviso de seguridad de Windows: «Publicador desconocido»." width="600" height="366" loading="lazy"></li>
@@ -196,7 +196,7 @@ es decoración.</p>
 <table>
   <tbody>
     <tr><th>Instala</th><td>El programa en <code>C:\Program Files\Guardiana</code> (Windows) o <code>/usr/bin/guardiana</code> (Linux), y registra el servicio para que arranque con el equipo.</td></tr>
-    <tr><th>No cambia el DNS</th><td>Instalar <strong>no</strong> toca el DNS del sistema. Ese cambio se hace después, desde el panel, con un botón que dice lo que va a pasar, y se deshace en el mismo sitio.</td></tr>
+    <tr><th>Pone a GUARDIANA como DNS</th><td>Al instalar por primera vez, GUARDIANA pasa a ser el DNS de este PC, por IPv4 y por IPv6, para que empiece a mirar desde el primer minuto. Antes guarda una copia exacta de tu ajuste: si el servicio se para, el PC recupera su DNS de antes, y al desinstalar queda tal como estaba. También se deshace desde el panel, en «Estado».</td></tr>
     <tr><th>No abre puertos a la red</th><td>Con Modo Hogar apagado, GUARDIANA solo escucha en tu propio equipo. Los puertos hacia la Wi-Fi se abren únicamente si enciendes Modo Hogar, y <code>guardiana verify</code> te los lista.</td></tr>
     <tr><th>No pide cuenta</th><td>No hay registro, no hay usuario, no hay servidor nuestro. La prueba de Plus y la activación con clave son las únicas conexiones que salen, y quedan anotadas en tu extracto.</td></tr>
     <tr><th>No manda nada</th><td>Cero telemetría. Ni al instalar, ni después.</td></tr>
