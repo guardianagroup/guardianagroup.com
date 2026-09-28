@@ -128,7 +128,7 @@ vas a ver, por qué, y cómo comprobar tú mismo que el archivo es el nuestro an
    <li><strong>Comprueba la huella antes de abrirlo</strong>, en PowerShell:<br><code>Get-FileHash guardiana-1.0.0-windows-x64.msi -Algorithm SHA256</code><br>y compárala con la del <a href="#registro">registro público</a>. Si no son idénticas, bórralo.</li>
    <li><strong>Ábrelo.</strong> Windows enseña este aviso. No dice que el programa sea peligroso: dice que todavía no lo conoce.
     <img src="/aviso-instalacion.png" alt="Aviso de seguridad de Windows: «Publicador desconocido»." width="600" height="366" loading="lazy"></li>
-   <li><strong>Ya instalado</strong>, escribe <code>guardiana verify</code>: repite la comprobación solo, en tu equipo.</li>
+   <li><strong>Ya instalado</strong>, escribe en PowerShell <code>&amp; "C:\Program Files\Guardiana\guardiana.exe" verify</code>: repite la comprobación solo, en tu equipo.</li>
   </ol>
  </div>
  <div>
@@ -145,12 +145,12 @@ vas a ver, por qué, y cómo comprobar tú mismo que el archivo es el nuestro an
   <span class="sis">macOS 13 o posterior</span>
   <h3>Cuatro pasos</h3>
   <ol>
-   <li><strong>Descarga</strong> <code>GUARDIANA.app.zip</code> y comprueba la huella:<br><code>shasum -a 256 GUARDIANA.app.zip</code></li>
+   <li><strong>Descarga</strong> <code>guardiana-1.0.0-macos.app.zip</code> y comprueba la huella:<br><code>shasum -a 256 guardiana-1.0.0-macos.app.zip</code></li>
    <li><strong>Ábrela.</strong> macOS la para con este aviso. <span class="ojo">Cuidado: el botón marcado por defecto es «Trasladar a la Papelera».</span> El que cierra el aviso sin borrar nada es <strong>«Aceptar»</strong>.
     <img src="/aviso-mac.png" alt="Aviso de macOS al abrir GUARDIANA por primera vez, con «Trasladar a la Papelera» marcado por defecto." width="600" height="366" loading="lazy"></li>
    <li><strong>Ajustes del Sistema › Privacidad y seguridad</strong>, y abajo del todo, en «Seguridad», pulsa <strong>«Abrir igualmente»</strong>. Solo hace falta una vez.
     <img src="/aviso-mac-ajustes.png" alt="Ajustes del Sistema de macOS, sección Seguridad, con el botón «Abrir igualmente»." width="600" height="366" loading="lazy"></li>
-   <li><strong>Comprueba la instalación</strong> con <code>guardiana verify</code>.</li>
+   <li><strong>Comprueba la instalación</strong> con <code>/usr/local/guardiana/guardiana verify</code>.</li>
   </ol>
  </div>
 </div>
@@ -217,7 +217,7 @@ eso es lo que permite comprobarla. Si una huella no coincide en los tres sitios,
 <p>En Debian, Ubuntu y derivados:</p>
 <p><code>sudo apt install ./guardiana_1.0.0_amd64.deb</code></p>
 <p>En cualquier otro Linux con systemd, el tarball trae su propio instalador:</p>
-<p><code>tar -xzf guardiana-1.0.0-linux-x86_64.tar.gz &amp;&amp; sudo ./instalar.sh</code></p>
+<p><code>tar -xzf guardiana-1.0.0-linux-x86_64.tar.gz &amp;&amp; cd guardiana-1.0.0-linux-x86_64 &amp;&amp; sudo ./instalar.sh</code></p>
 <p>En Linux no hay avisos de publicador desconocido: hay huella y firma, que es más comprobable que
 un aviso.</p>
 
@@ -251,13 +251,13 @@ tarde; preferimos sacarlo ahora y explicarte exactamente qué vas a ver y cómo 
 <p><strong>Lo mismo que en Windows: no te vamos a enseñar a saltarte los avisos a ciegas.</strong> Te damos
 la huella del archivo y su firma para que compruebes que lo que abres es lo nuestro, que es la única razón
 de verdad para abrirlo. En Mac la comprobación es la misma de arriba, con la orden de macOS:</p>
-<p><code>shasum -a 256 GUARDIANA.app.zip</code></p>
+<p><code>shasum -a 256 guardiana-1.0.0-macos.app.zip</code></p>
 
 <h3>Qué hace el instalador en un Mac</h3>
 <table>
   <tbody>
     <tr><th>Instala</th><td>El programa en <code>/usr/local/guardiana</code> y un servicio de arranque (LaunchDaemon) que escucha solo en tu propio equipo, en <code>127.0.0.1</code>. macOS te pedirá tu contraseña de administrador: la pide el sistema, nosotros no la vemos nunca.</td></tr>
-    <tr><th>No cambia el DNS al instalar</th><td>Igual que en Windows. Antes de tocar nada, apunta qué DNS usa hoy cada una de tus redes, para poder devolverlo exactamente como estaba. El cambio se hace después, desde el panel, con un botón.</td></tr>
+    <tr><th>No cambia el DNS al instalar</th><td>En Windows el instalador ya lo cambia solo; en Mac, todavía no. Antes de tocar nada, apunta qué DNS usa hoy cada una de tus redes, para poder devolverlo exactamente como estaba. El cambio se hace después, desde el panel, con un botón.</td></tr>
     <tr><th>No abre puertos a la red</th><td>En Mac, GUARDIANA solo escucha en el propio equipo.</td></tr>
     <tr><th>Modo Hogar: no en Mac todavía</th><td><strong>El Modo Hogar no entra en la versión 1.0 para Mac.</strong> No es que no pueda funcionar: es que GUARDIANA no gestiona el cortafuegos de macOS y no hemos podido probarlo allí como en Windows y en Linux, así que no lo damos por bueno ni lo atendemos en Mac. En Windows y en Linux sí está, probado.</td></tr>
   </tbody>
