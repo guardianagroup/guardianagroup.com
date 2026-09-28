@@ -104,7 +104,7 @@ footer.pie .arriba{justify-self:start;color:var(--azul)}
 <p class="lead">Windows and the Mac are going to warn you. That is expected, and this page exists so you know exactly
 what you will see, why, and how to check for yourself that the file is ours before you open it.</p>
 
-<div class="box"><p><strong>There is no download yet.</strong> Version 1.0 ships on <strong>Friday 25 September 2026 at 15:00 UTC</strong>. That day the links appear here, with the hash and the signature of each file. The hashes are published in the public ledger <em>before</em> the download exists, which is the order that makes them worth anything.</p></div>
+<div class="box"><p><strong>There is no download yet.</strong> Version 1.0 does not have a launch date yet. On launch day the links appear here, with the hash and the signature of each file. The hashes are published in the public ledger <em>before</em> the download exists, which is the order that makes them worth anything.</p></div>
 
 <h2 id="paso-a-paso">Step by step, on your system</h2>
 <p>The summary. Below, each point is explained slowly, with what you will see on screen and why.</p>
@@ -113,7 +113,7 @@ what you will see, why, and how to check for yourself that the file is ours befo
   <span class="sis">Windows 10 and 11</span>
   <h3>Four steps</h3>
   <ol>
-   <li><strong>Download</strong> <code>guardiana-1.0.0-windows-x64-en.msi</code>. It appears on this page on 25 September.</li>
+   <li><strong>Download</strong> <code>guardiana-1.0.0-windows-x64-en.msi</code>. It appears on this page on launch day.</li>
    <li><strong>Check the hash before opening it</strong>, in PowerShell:<br><code>Get-FileHash guardiana-1.0.0-windows-x64-en.msi -Algorithm SHA256</code><br>and compare it with the one in the public ledger. If they are not identical, delete the file.</li>
    <li><strong>Open it.</strong> Windows shows this warning. It does not say the program is dangerous: it says Windows does not know it yet.
     <img src="/aviso-instalacion.png" alt="Windows security warning: unknown publisher." width="600" height="366" loading="lazy"></li>
@@ -186,7 +186,7 @@ you whether the service is running, which DNS the system points to and which por
 
 <div class="box">
 <p><strong>The hashes are not here yet, and we are not going to invent them.</strong> They appear on
-25 September, on this page and in the public ledger, before the download. The signing key is already
+launch day, on this page and in the public ledger, before the download. The signing key is already
 here, above: it is the same one that will sign that release, and publishing it in advance is
 exactly what makes it checkable. Publishing a hash nobody can compare against anything is not
 transparency: it is decoration.</p>

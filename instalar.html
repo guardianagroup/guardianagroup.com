@@ -104,7 +104,7 @@ footer.pie .arriba{justify-self:start;color:var(--azul)}
 <p class="lead">Windows y el Mac te van a avisar. Está previsto, y esta página es para que sepas exactamente qué
 vas a ver, por qué, y cómo comprobar tú mismo que el archivo es el nuestro antes de abrirlo.</p>
 
-<div class="box"><p><strong>Todavía no hay descarga.</strong> La versión 1.0 sale el <strong>viernes 25 de septiembre de 2026 a las 15:00 UTC</strong> (10:00 en Colombia, 17:00 en España). Ese día aparecen aquí los enlaces, y las huellas y las firmas de cada archivo. Las huellas se publican en el registro público <em>antes</em> que la descarga, que es el orden que hace que sirvan para algo.</p></div>
+<div class="box"><p><strong>Todavía no hay descarga.</strong> La versión 1.0 todavía no tiene fecha de salida. El día que salga aparecen aquí los enlaces, y las huellas y las firmas de cada archivo. Las huellas se publican en el registro público <em>antes</em> que la descarga, que es el orden que hace que sirvan para algo.</p></div>
 
 <h2 id="paso-a-paso">Paso a paso, en tu sistema</h2>
 <p>El resumen. Debajo está cada punto explicado despacio, con lo que verás en pantalla y por qué.</p>
@@ -113,7 +113,7 @@ vas a ver, por qué, y cómo comprobar tú mismo que el archivo es el nuestro an
   <span class="sis">Windows 10 y 11</span>
   <h3>Cuatro pasos</h3>
   <ol>
-   <li><strong>Descarga</strong> <code>guardiana-1.0.0-windows-x64.msi</code>. El 25 de septiembre aparece en esta misma página.</li>
+   <li><strong>Descarga</strong> <code>guardiana-1.0.0-windows-x64.msi</code>. El día que salga aparece en esta misma página.</li>
    <li><strong>Comprueba la huella antes de abrirlo</strong>, en PowerShell:<br><code>Get-FileHash guardiana-1.0.0-windows-x64.msi -Algorithm SHA256</code><br>y compárala con la del <a href="#registro">registro público</a>. Si no son idénticas, bórralo.</li>
    <li><strong>Ábrelo.</strong> Windows enseña este aviso. No dice que el programa sea peligroso: dice que todavía no lo conoce.
     <img src="/aviso-instalacion.png" alt="Aviso de seguridad de Windows: «Publicador desconocido»." width="600" height="366" loading="lazy"></li>
@@ -185,8 +185,8 @@ se firman todas las versiones. Va dentro del propio programa y está en el repos
 dice si el servicio está en marcha, a qué DNS apunta el sistema y qué puertos hay abiertos.</p>
 
 <div class="box">
-<p><strong>Las huellas todavía no están, y no las vamos a inventar.</strong> Aparecen el 25 de
-septiembre, en esta misma página y en el registro público, antes que la descarga. La clave de firma sí
+<p><strong>Las huellas todavía no están, y no las vamos a inventar.</strong> Aparecen el día que salga,
+en esta misma página y en el registro público, antes que la descarga. La clave de firma sí
 está ya, arriba: es la misma que firmará esa versión, y publicarla con antelación es justo lo que
 permite comprobarla. Publicar una huella que nadie puede comparar con nada no es transparencia:
 es decoración.</p>
