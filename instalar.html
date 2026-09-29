@@ -41,7 +41,7 @@
 @font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-:root{--papel:#F4F6FA;--hoja:#FFFFFF;--tinta:#0B1020;--gris:#5B6275;--linea:#D9DEE8;--azul:#1F4BFF;--azul-oscuro:#0F2FB8;--corte:#C0301A;--sello:#0E8F6E;--ambar:#8A5A0F}
+:root{--papel:#F4F6FA;--hoja:#FFFFFF;--tinta:#0B1020;--gris:#5B6275;--linea:#D9DEE8;--azul:#1F4BFF;--azul-oscuro:#0F2FB8;--corte:#C0301A;--sello:#0B7F62;--ambar:#8A5A0F}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--papel);color:var(--tinta);font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 main{max-width:900px;margin:0 auto;padding:28px 24px 96px;line-height:1.65;font-size:17px}
@@ -77,7 +77,7 @@ p,li{color:#2A3142}
 .wrap{overflow-x:auto}table{border-collapse:collapse;margin:12px 0;width:100%;font-size:15px;background:var(--hoja)}th,td{border:1px solid var(--linea);padding:8px 10px;text-align:left;vertical-align:top}th{color:var(--gris);font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--tinta);background:var(--hoja);border:1px solid var(--linea);border-radius:5px;padding:1px 6px;overflow-wrap:anywhere}
 pre{background:var(--hoja);border:1px solid var(--linea);border-radius:8px;padding:12px 14px;overflow-x:auto}pre code{border:0;padding:0;background:none}
-li,td,p{overflow-wrap:anywhere}.muted{color:var(--gris)}
+li,p{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.muted{color:var(--gris)}
 .box{border:1.5px solid var(--azul);border-radius:12px;padding:14px 18px;margin:18px 0;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35)}
 .lead{font-size:20px;line-height:1.5;color:var(--tinta)}
 ul{padding-left:22px}li{margin:3px 0}
@@ -109,12 +109,12 @@ vas a ver, por qué, y cómo comprobar tú mismo que el archivo es el nuestro an
 <div class="tabla-descargas"><table>
 <thead><tr><th>Sistema</th><th>Archivo</th><th>Huella SHA-256</th><th>Firma</th></tr></thead>
 <tbody>
-<tr><td>Windows 10 y 11 · español</td><td><a href="/descargas/1.0.1/guardiana-1.0.1-windows-x64.msi" download>guardiana-1.0.1-windows-x64.msi</a><br><span class="muted">4.9 MB</span></td><td><code class="huella">434308e683a1f44ce54229f62e1f824ddfa0feca5ac6ed95a2813a2bc322a827</code></td><td><a href="/descargas/1.0.1/guardiana-1.0.1-windows-x64.msi.minisig">firma</a></td></tr>
-<tr><td>Windows 10 y 11 · inglés</td><td><a href="/descargas/1.0.1/guardiana-1.0.1-windows-x64-en.msi" download>guardiana-1.0.1-windows-x64-en.msi</a><br><span class="muted">4.9 MB</span></td><td><code class="huella">d413692633f6c85210b31a31476a16f2914c168e1b135100ce0392c09bab6dfc</code></td><td><a href="/descargas/1.0.1/guardiana-1.0.1-windows-x64-en.msi.minisig">firma</a></td></tr>
-<tr><td>Windows 10 y 11 · portugués</td><td><a href="/descargas/1.0.1/guardiana-1.0.1-windows-x64-pt.msi" download>guardiana-1.0.1-windows-x64-pt.msi</a><br><span class="muted">4.9 MB</span></td><td><code class="huella">c90a4b777e25ac5a86da14651c6b230fff553ea617fa1dad555162a1e66a832f</code></td><td><a href="/descargas/1.0.1/guardiana-1.0.1-windows-x64-pt.msi.minisig">firma</a></td></tr>
-<tr><td>Debian, Ubuntu y derivados</td><td><a href="/descargas/1.0.1/guardiana_1.0.1_amd64.deb" download>guardiana_1.0.1_amd64.deb</a><br><span class="muted">3.4 MB</span></td><td><code class="huella">116353142223b59ace44a452e9c3f6bf30109c7869783aaa2bfa3620561cfaa5</code></td><td><a href="/descargas/1.0.1/guardiana_1.0.1_amd64.deb.minisig">firma</a></td></tr>
-<tr><td>Otro Linux con systemd</td><td><a href="/descargas/1.0.1/guardiana-1.0.1-linux-x86_64.tar.gz" download>guardiana-1.0.1-linux-x86_64.tar.gz</a><br><span class="muted">4.5 MB</span></td><td><code class="huella">c699dbb7f89162163f30a32dfde2d5059ccd3d1bc5875aeca8a254857fda491b</code></td><td><a href="/descargas/1.0.1/guardiana-1.0.1-linux-x86_64.tar.gz.minisig">firma</a></td></tr>
-<tr><td>macOS 13 o posterior · chip Apple (M1 o posterior)</td><td><a href="/descargas/1.0.1/guardiana-1.0.1-macos.app.zip" download>guardiana-1.0.1-macos.app.zip</a><br><span class="muted">4.2 MB</span></td><td><code class="huella">e23942f8d2af72b9f05dd510f15af79d3adfab95e1cd5b49712abecea7d4d587</code></td><td><a href="/descargas/1.0.1/guardiana-1.0.1-macos.app.zip.minisig">firma</a></td></tr>
+<tr><td>Windows 10 y 11 · español</td><td><a href="/descargas/1.0.1/guardiana-1.0.1-windows-x64.msi" download>guardiana-1.0.1-windows-x64.msi</a><br><span class="muted">4,9 MB</span></td><td><code class="huella">434308e683a1f44ce54229f62e1f824ddfa0feca5ac6ed95a2813a2bc322a827</code></td><td><a href="/descargas/1.0.1/guardiana-1.0.1-windows-x64.msi.minisig">firma</a></td></tr>
+<tr><td>Windows 10 y 11 · inglés</td><td><a href="/descargas/1.0.1/guardiana-1.0.1-windows-x64-en.msi" download>guardiana-1.0.1-windows-x64-en.msi</a><br><span class="muted">4,9 MB</span></td><td><code class="huella">d413692633f6c85210b31a31476a16f2914c168e1b135100ce0392c09bab6dfc</code></td><td><a href="/descargas/1.0.1/guardiana-1.0.1-windows-x64-en.msi.minisig">firma</a></td></tr>
+<tr><td>Windows 10 y 11 · portugués</td><td><a href="/descargas/1.0.1/guardiana-1.0.1-windows-x64-pt.msi" download>guardiana-1.0.1-windows-x64-pt.msi</a><br><span class="muted">4,9 MB</span></td><td><code class="huella">c90a4b777e25ac5a86da14651c6b230fff553ea617fa1dad555162a1e66a832f</code></td><td><a href="/descargas/1.0.1/guardiana-1.0.1-windows-x64-pt.msi.minisig">firma</a></td></tr>
+<tr><td>Debian, Ubuntu y derivados</td><td><a href="/descargas/1.0.1/guardiana_1.0.1_amd64.deb" download>guardiana_1.0.1_amd64.deb</a><br><span class="muted">3,4 MB</span></td><td><code class="huella">116353142223b59ace44a452e9c3f6bf30109c7869783aaa2bfa3620561cfaa5</code></td><td><a href="/descargas/1.0.1/guardiana_1.0.1_amd64.deb.minisig">firma</a></td></tr>
+<tr><td>Otro Linux con systemd</td><td><a href="/descargas/1.0.1/guardiana-1.0.1-linux-x86_64.tar.gz" download>guardiana-1.0.1-linux-x86_64.tar.gz</a><br><span class="muted">4,5 MB</span></td><td><code class="huella">c699dbb7f89162163f30a32dfde2d5059ccd3d1bc5875aeca8a254857fda491b</code></td><td><a href="/descargas/1.0.1/guardiana-1.0.1-linux-x86_64.tar.gz.minisig">firma</a></td></tr>
+<tr><td>macOS 13 o posterior · chip Apple (M1 o posterior)</td><td><a href="/descargas/1.0.1/guardiana-1.0.1-macos.app.zip" download>guardiana-1.0.1-macos.app.zip</a><br><span class="muted">4,2 MB</span></td><td><code class="huella">e23942f8d2af72b9f05dd510f15af79d3adfab95e1cd5b49712abecea7d4d587</code></td><td><a href="/descargas/1.0.1/guardiana-1.0.1-macos.app.zip.minisig">firma</a></td></tr>
 </tbody></table></div></div>
 
 <h2 id="paso-a-paso">Paso a paso, en tu sistema</h2>
@@ -208,7 +208,7 @@ eso es lo que permite comprobarla. Si una huella no coincide en los tres sitios,
     <tr><th>Instala</th><td>El programa en <code>C:\Program Files\Guardiana</code> (Windows) o <code>/usr/bin/guardiana</code> (Linux), y registra el servicio para que arranque con el equipo.</td></tr>
     <tr><th>Pone a GUARDIANA como DNS</th><td>Al instalar por primera vez, GUARDIANA pasa a ser el DNS de este PC, por IPv4 y por IPv6, para que empiece a mirar desde el primer minuto. Antes guarda una copia exacta de tu ajuste: si el servicio se para, el PC recupera su DNS de antes, y al desinstalar queda tal como estaba. También se deshace desde el panel, en «Estado».</td></tr>
     <tr><th>No abre puertos a la red</th><td>Con Modo Hogar apagado, GUARDIANA solo escucha en tu propio equipo. Los puertos hacia la Wi-Fi se abren únicamente si enciendes Modo Hogar, y <code>guardiana verify</code> te los lista.</td></tr>
-    <tr><th>No pide cuenta</th><td>No hay registro, no hay usuario, no hay servidor nuestro. La prueba de Plus y la activación con clave son las únicas conexiones que salen, y quedan anotadas en tu extracto.</td></tr>
+    <tr><th>No pide cuenta</th><td>No hay registro, no hay usuario, no hay servidor nuestro. Las únicas conexiones que salen son las de la licencia (activar tu clave y, con una suscripción, comprobarla con la pasarela de pago), y quedan anotadas en tu extracto.</td></tr>
     <tr><th>No manda nada</th><td>Cero telemetría. Ni al instalar, ni después.</td></tr>
   </tbody>
 </table>
@@ -225,7 +225,7 @@ un aviso.</p>
 <h2>5 · macOS</h2>
 <p>En Mac, GUARDIANA se descarga como una aplicación normal, <code>GUARDIANA.app</code>. Al abrirla la
 primera vez, macOS la para. Esto es exactamente lo que sale, medido el 19 de septiembre de 2026 en un Mac
-con macOS 26.5.2 y con este mismo archivo, descargado como lo descargarías tú:</p>
+con macOS 26.5.2 y con una versión anterior de este archivo, descargada como la descargarías tú:</p>
 <p><img src="/aviso-mac.png" alt="Aviso de macOS al abrir GUARDIANA: «No se ha abierto GUARDIANA. Apple no ha podido verificar que GUARDIANA no contenga software malicioso», con los botones «Trasladar a la Papelera» y «Aceptar»." width="294" height="272" loading="lazy" style="max-width:100%;height:auto;border:1px solid #D9DEE8;border-radius:10px"></p>
 <p><strong>Lee bien ese aviso antes de tocar nada: el botón marcado por defecto es «Trasladar a la
 Papelera».</strong> Si pulsas Intro sin mirar, el archivo se va a la papelera. El que cierra el aviso sin

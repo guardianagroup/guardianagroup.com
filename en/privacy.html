@@ -41,7 +41,7 @@
 @font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-:root{--papel:#F4F6FA;--hoja:#FFFFFF;--tinta:#0B1020;--gris:#5B6275;--linea:#D9DEE8;--azul:#1F4BFF;--azul-oscuro:#0F2FB8;--corte:#C0301A;--sello:#0E8F6E;--ambar:#8A5A0F}
+:root{--papel:#F4F6FA;--hoja:#FFFFFF;--tinta:#0B1020;--gris:#5B6275;--linea:#D9DEE8;--azul:#1F4BFF;--azul-oscuro:#0F2FB8;--corte:#C0301A;--sello:#0B7F62;--ambar:#8A5A0F}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--papel);color:var(--tinta);font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 main{max-width:900px;margin:0 auto;padding:28px 24px 96px;line-height:1.65;font-size:17px}
@@ -77,7 +77,7 @@ p,li{color:#2A3142}
 .wrap{overflow-x:auto}table{border-collapse:collapse;margin:12px 0;width:100%;font-size:15px;background:var(--hoja)}th,td{border:1px solid var(--linea);padding:8px 10px;text-align:left;vertical-align:top}th{color:var(--gris);font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--tinta);background:var(--hoja);border:1px solid var(--linea);border-radius:5px;padding:1px 6px;overflow-wrap:anywhere}
 pre{background:var(--hoja);border:1px solid var(--linea);border-radius:8px;padding:12px 14px;overflow-x:auto}pre code{border:0;padding:0;background:none}
-li,td,p{overflow-wrap:anywhere}.muted{color:var(--gris)}
+li,p{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.muted{color:var(--gris)}
 .box{border:1.5px solid var(--azul);border-radius:12px;padding:14px 18px;margin:18px 0;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35)}
 .lead{font-size:20px;line-height:1.5;color:var(--tinta)}
 ul{padding-left:22px}li{margin:3px 0}
@@ -146,8 +146,7 @@ That ledger lives on your PC (Windows: <code>C:\ProgramData\Guardiana</code>; Li
 macOS: <code>/Library/Application Support/guardiana</code>), it is yours, and you can export it and delete it completely from the panel
 (“What Guardiana knows about you”). Whoever administers that PC can read it: GUARDIANA does not encrypt it
 or hide it from the person who administers the machine, and its threat model says so plainly.</p>
-<p>The program contacts no server of ours. The only outgoing connections are the ones you cause: activating
-a licence, checking for a new version, or updating the name lists. Each one is written into the panel with
+<p>The program contacts no server of ours. The only outgoing connections are the licence ones: activating it when you type your key and, with a subscription, checking it with the payment gateway when the 7 free days end and then once per billing period. Each one is written into the panel with
 its date, destination and size.</p>
 
 <h2>4 · Home Mode</h2>
@@ -161,8 +160,7 @@ gateway acting as merchant of record: it receives your payment
 and billing details, issues the invoice and handles taxes under
 <a href="https://dodopayments.com/privacy-policy" rel="noopener noreferrer">its own privacy policy</a>. We
 name it because you have a right to know who invoices you. We never see your
-card. When you activate a licence with a key, the program makes a single connection to the gateway to check
-it, and that connection is written into your ledger.</p>
+card. When you activate a licence with a key, the program connects to the gateway to check it and, with a subscription, checks it again when the 7 free days end and once per billing period; every connection is written into your ledger.</p>
 
 <h2>6 · Your rights</h2>
 <p>We hold nothing from your machine: it is all there and you control it, so there is nothing to ask us for
@@ -173,6 +171,6 @@ Sánchez, Torre Empresarial PRODEGI, Carrera 3 # 9-30, 18th floor, Bocagrande, C
 Colombia.</p>
 
 <h2>7 · Changes</h2>
-<p>If this policy changes, it changes here, with the date. 28 September 2026: the launch list closes with the launch (points 1 and 2). The program's code is public and anyone can check
+<p>If this policy changes, it changes here, with the date. 28 September 2026: the launch list closes with the launch (points 1 and 2), and the licence connections are described as version 1.0.1 makes them (points 3 and 5). The program's code is public and anyone can check
 that it does what we say.</p>
 <footer class="pie"><div class="links"><a href="/">Home</a><a href="/en/guides/">Guides</a><a href="/en/x-rays/">X-rays</a><a href="/en/the-business-of-your-data.html">The business of your data</a><a href="/en/privacy.html">Privacy</a><a href="/en/terms.html">Terms and refunds</a><a href="/en/contact.html">Contact</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div><div>GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, 18th floor, Bocagrande, Cartagena de Indias, Colombia · This page uses no cookies and no analytics.</div><a class="arriba" href="#arriba">Back to top ↑</a></footer></main></body></html>

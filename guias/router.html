@@ -41,7 +41,7 @@
 @font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-:root{--papel:#F4F6FA;--hoja:#FFFFFF;--tinta:#0B1020;--gris:#5B6275;--linea:#D9DEE8;--azul:#1F4BFF;--azul-oscuro:#0F2FB8;--corte:#C0301A;--sello:#0E8F6E;--ambar:#8A5A0F}
+:root{--papel:#F4F6FA;--hoja:#FFFFFF;--tinta:#0B1020;--gris:#5B6275;--linea:#D9DEE8;--azul:#1F4BFF;--azul-oscuro:#0F2FB8;--corte:#C0301A;--sello:#0B7F62;--ambar:#8A5A0F}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--papel);color:var(--tinta);font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 main{max-width:900px;margin:0 auto;padding:28px 24px 96px;line-height:1.65;font-size:17px}
@@ -77,7 +77,7 @@ p,li{color:#2A3142}
 .wrap{overflow-x:auto}table{border-collapse:collapse;margin:12px 0;width:100%;font-size:15px;background:var(--hoja)}th,td{border:1px solid var(--linea);padding:8px 10px;text-align:left;vertical-align:top}th{color:var(--gris);font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--tinta);background:var(--hoja);border:1px solid var(--linea);border-radius:5px;padding:1px 6px;overflow-wrap:anywhere}
 pre{background:var(--hoja);border:1px solid var(--linea);border-radius:8px;padding:12px 14px;overflow-x:auto}pre code{border:0;padding:0;background:none}
-li,td,p{overflow-wrap:anywhere}.muted{color:var(--gris)}
+li,p{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.muted{color:var(--gris)}
 .box{border:1.5px solid var(--azul);border-radius:12px;padding:14px 18px;margin:18px 0;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35)}
 .lead{font-size:20px;line-height:1.5;color:var(--tinta)}
 ul{padding-left:22px}li{margin:3px 0}
@@ -102,7 +102,7 @@ pre{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);borde
 </style></head><body><main id="arriba"><header class="top"><a class="brand" href="/es/" aria-label="GUARDIANA, portada"><i></i>GUARDIANA</a><nav aria-label="Secciones"><a href="/es/">Inicio</a><a href="/guias/" aria-current="page">Guías</a><a href="/radiografias/">Radiografías</a><a href="/negocio-de-tus-datos.html">El negocio de tus datos</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="/contacto.html">Contacto</a></nav><span class="idiomas"><span class="idioma actual" lang="es" aria-current="true">ES</span><a class="idioma" href="/en/guides/router.html" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><a class="idioma" href="/pt/guias/router.html" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span></header>
 <p class="k">GUÍA · MODO HOGAR</p>
 <h1>Guía: poner Guardiana como DNS de toda la casa (router)</h1>
-<p class="lead">Un solo cambio en el router y todos los dispositivos de la Wi‑Fi pasan por Guardiana. La pantalla exacta cambia con cada modelo; aquí van el camino general y los nombres que usan los routers más comunes en Colombia y en España. Si tu router no aparece, busca "DNS" dentro de los ajustes de "LAN" o "DHCP".</p>
+<p class="lead">Un solo cambio en el router y todos los dispositivos de la Wi‑Fi pasan por Guardiana. La pantalla exacta cambia con cada modelo; aquí van el camino general y los nombres que usan los routers más comunes en Colombia. Si tu router no aparece, busca "DNS" dentro de los ajustes de "LAN" o "DHCP".</p>
 <h2>Antes de empezar</h2>
 <ol><li>En el panel de Guardiana, página "Modo Hogar", enciéndelo y apunta la <b>IP del PC</b> (por ejemplo <code>192.168.1.39</code>).</li><li>Esa IP tiene que ser fija. Si Guardiana avisa de que la asigna el router, haz primero la <b>reserva DHCP</b> (abajo).</li><li>Decide el DNS secundario. Si el PC se apaga o se duerme, los teléfonos que solo apunten a él se quedan sin DNS. Dos opciones, y las dos son honestas:<br><b>Solo Guardiana:</b> todo pasa por Guardiana; si el PC no está, no hay internet en los teléfonos hasta que vuelva.<br><b>Guardiana + el router como secundario:</b> los teléfonos nunca se quedan sin internet; a cambio, cuando Guardiana no esté, esas consultas no se verán. Algunos teléfonos usan el secundario a ratos aunque el primario funcione: esas consultas tampoco se ven.</li></ol>
 <h2>El camino general</h2>
@@ -122,7 +122,7 @@ netsh interface ipv4 set dnsservers name=&quot;Ethernet&quot; static 192.168.1.1
 <p>En otros países los nombres son parecidos: busca siempre "DHCP" dentro de "LAN" o "Red local".</p>
 <h2>Si el router no deja cambiar el DNS</h2>
 <p>Pasa en algunos routers de operador. Dos caminos:</p>
-<ul><li>Poner el DNS en cada teléfono (<code><a href="/guias/iphone.html">guía de iphone</a></code>, <code><a href="/guias/android.html">guía de android</a></code>).</li><li>Apagar el DHCP del router y usar el del PC: <b>no</b> lo hace Guardiana en la 1.0; se documenta como límite.</li></ul>
+<ul><li>Poner el DNS en cada teléfono (<a href="/guias/iphone.html">guía de iPhone</a>, <a href="/guias/android.html">guía de Android</a>).</li><li>Apagar el DHCP del router y usar el del PC: <b>no</b> lo hace Guardiana en la 1.0; se documenta como límite.</li></ul>
 <h2>Deshacer</h2>
 <p>Vuelve al mismo apartado y deja el DNS en "automático" o en el valor que tenía. Guardiana no toca el router nunca: lo que cambiaste tú, lo deshaces tú.</p>
 <h2>Otras guías</h2><ul><li><a href="/guias/dns.html">¿Qué es el DNS y por qué mi casa necesita un guardián?</a></li><li><a href="/guias/iphone.html">iPhone y iPad: apuntar el DNS a GUARDIANA</a></li><li><a href="/guias/android.html">Android: apuntar el DNS a GUARDIANA</a></li></ul>

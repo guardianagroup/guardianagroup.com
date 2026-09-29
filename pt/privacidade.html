@@ -41,7 +41,7 @@
 @font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-:root{--papel:#F4F6FA;--hoja:#FFFFFF;--tinta:#0B1020;--gris:#5B6275;--linea:#D9DEE8;--azul:#1F4BFF;--azul-oscuro:#0F2FB8;--corte:#C0301A;--sello:#0E8F6E;--ambar:#8A5A0F}
+:root{--papel:#F4F6FA;--hoja:#FFFFFF;--tinta:#0B1020;--gris:#5B6275;--linea:#D9DEE8;--azul:#1F4BFF;--azul-oscuro:#0F2FB8;--corte:#C0301A;--sello:#0B7F62;--ambar:#8A5A0F}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--papel);color:var(--tinta);font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 main{max-width:900px;margin:0 auto;padding:28px 24px 96px;line-height:1.65;font-size:17px}
@@ -77,7 +77,7 @@ p,li{color:#2A3142}
 .wrap{overflow-x:auto}table{border-collapse:collapse;margin:12px 0;width:100%;font-size:15px;background:var(--hoja)}th,td{border:1px solid var(--linea);padding:8px 10px;text-align:left;vertical-align:top}th{color:var(--gris);font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--tinta);background:var(--hoja);border:1px solid var(--linea);border-radius:5px;padding:1px 6px;overflow-wrap:anywhere}
 pre{background:var(--hoja);border:1px solid var(--linea);border-radius:8px;padding:12px 14px;overflow-x:auto}pre code{border:0;padding:0;background:none}
-li,td,p{overflow-wrap:anywhere}.muted{color:var(--gris)}
+li,p{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.muted{color:var(--gris)}
 .box{border:1.5px solid var(--azul);border-radius:12px;padding:14px 18px;margin:18px 0;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35)}
 .lead{font-size:20px;line-height:1.5;color:var(--tinta)}
 ul{padding-left:22px}li{margin:3px 0}
@@ -149,8 +149,7 @@ Esse extrato vive no seu computador (Windows: <code>C:\ProgramData\Guardiana</co
 macOS: <code>/Library/Application Support/guardiana</code>), é seu, você pode exportar e apagar por completo pelo painel («O que a
 Guardiana sabe de você»). Quem administra esse computador pode ler: a GUARDIANA não criptografa nem
 esconde isso de quem administra a máquina, e diz assim no seu modelo de ameaças.</p>
-<p>O programa não contata nenhum servidor nosso. As únicas conexões de saída são as que você provoca:
-ativar uma licença, conferir se há versão nova ou atualizar as listas de nomes. Cada uma fica anotada no
+<p>O programa não contata nenhum servidor nosso. As únicas conexões de saída são as da licença: ativá-la quando você digita a sua chave e, com uma assinatura, conferi-la com o gateway de pagamento ao terminar os 7 dias grátis e depois uma vez por período de pagamento. Cada uma fica anotada no
 painel com data, destino e tamanho.</p>
 
 <h2>4 · Modo Casa</h2>
@@ -163,8 +162,7 @@ não ser que o dono compartilhe. A GUARDIANA não é controle parental e não vi
 o gateway que atua como vendedor oficial (merchant of
 record): é ele que recebe os seus dados de pagamento e de cobrança, emite a nota e cuida dos impostos,
 segundo <a href="https://dodopayments.com/privacy-policy" rel="noopener noreferrer">a política de
-privacidade dele</a>. Dizemos o nome porque você tem direito de saber quem lhe fatura. Nós não vemos o seu cartão. Ao ativar a licença com uma chave, o
-programa faz uma única conexão com o gateway para conferir; ela fica anotada no seu extrato.</p>
+privacidade dele</a>. Dizemos o nome porque você tem direito de saber quem lhe fatura. Nós não vemos o seu cartão. Ao ativar a licença com uma chave, o programa se conecta ao gateway para conferir e, com uma assinatura, confere de novo ao terminar os 7 dias grátis e uma vez por período de pagamento; cada conexão fica anotada no seu extrato.</p>
 
 <h2>6 · Os seus direitos</h2>
 <p>Não guardamos nada da sua máquina: está tudo aí e é você quem controla, então não há o que nos pedir
@@ -175,6 +173,6 @@ Francisco Salvatierra Sánchez, Torre Empresarial PRODEGI, Carrera 3 # 9-30, 18�
 Cartagena das Índias, Colômbia.</p>
 
 <h2>7 · Mudanças</h2>
-<p>Se esta política mudar, muda aqui, com a data. 28 de setembro de 2026: a lista de avisos fecha com o lançamento (pontos 1 e 2). O código do programa é público e qualquer pessoa pode
+<p>Se esta política mudar, muda aqui, com a data. 28 de setembro de 2026: a lista de avisos fecha com o lançamento (pontos 1 e 2), e as conexões da licença são descritas como a versão 1.0.1 as faz (pontos 3 e 5). O código do programa é público e qualquer pessoa pode
 conferir que ele faz o que dizemos.</p>
 <footer class="pie"><div class="links"><a href="/pt/">Início</a><a href="/pt/guias/">Guias</a><a href="/pt/radiografias/">Radiografias</a><a href="/pt/o-negocio-dos-seus-dados.html">O negócio dos seus dados</a><a href="/pt/privacidade.html">Privacidade</a><a href="/pt/termos.html">Termos e reembolsos</a><a href="/pt/contato.html">Contato</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div><div>GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, 18º andar, Bocagrande, Cartagena das Índias, Colômbia · Esta página não usa cookies nem analytics.</div><a class="arriba" href="#arriba">Voltar ao topo ↑</a></footer></main><script>(function(){try{var K='guardiana-idioma',a=document.querySelectorAll('a[data-idioma]');for(var i=0;i<a.length;i++)a[i].addEventListener('click',function(){try{localStorage.setItem(K,this.getAttribute('data-idioma'))}catch(e){}});}catch(e){}})();</script></body></html>
