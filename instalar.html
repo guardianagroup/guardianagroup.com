@@ -73,6 +73,7 @@ p,li{color:#2A3142}
 .pasos3 code{font-size:12.5px;overflow-wrap:anywhere}
 .pasos3 img{width:100%;height:auto;border:1px solid var(--linea);border-radius:8px;margin-top:10px;display:block}
 .pasos3 .ojo{color:var(--corte);font-weight:600}
+.conocidos{border:1px solid var(--corte);border-left-width:4px;border-radius:12px;padding:14px 18px;background:var(--hoja);margin:22px 0}.conocidos h3{margin:0 0 6px;font-size:16px}.conocidos ul{margin:8px 0 0;padding-left:20px}.conocidos li{margin:8px 0;font-size:14px;line-height:1.5}.conocidos pre{margin:8px 0 0;font-size:12.5px}
 @media (max-width:820px){.pasos3{grid-template-columns:1fr}}
 .wrap{overflow-x:auto}table{border-collapse:collapse;margin:12px 0;width:100%;font-size:15px;background:var(--hoja)}th,td{border:1px solid var(--linea);padding:8px 10px;text-align:left;vertical-align:top}th{color:var(--gris);font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--tinta);background:var(--hoja);border:1px solid var(--linea);border-radius:5px;padding:1px 6px;overflow-wrap:anywhere}
@@ -116,6 +117,17 @@ vas a ver, por qué, y cómo comprobar tú mismo que el archivo es el nuestro an
 <tr><td>Otro Linux con systemd</td><td><a href="/descargas/1.0.1/guardiana-1.0.1-linux-x86_64.tar.gz" download>guardiana-1.0.1-linux-x86_64.tar.gz</a><br><span class="muted">4,5 MB</span></td><td><code class="huella">c699dbb7f89162163f30a32dfde2d5059ccd3d1bc5875aeca8a254857fda491b</code></td><td><a href="/descargas/1.0.1/guardiana-1.0.1-linux-x86_64.tar.gz.minisig">firma</a></td></tr>
 <tr><td>macOS 13 o posterior · chip Apple (M1 o posterior)</td><td><a href="/descargas/1.0.1/guardiana-1.0.1-macos.app.zip" download>guardiana-1.0.1-macos.app.zip</a><br><span class="muted">4,2 MB</span></td><td><code class="huella">e23942f8d2af72b9f05dd510f15af79d3adfab95e1cd5b49712abecea7d4d587</code></td><td><a href="/descargas/1.0.1/guardiana-1.0.1-macos.app.zip.minisig">firma</a></td></tr>
 </tbody></table></div></div>
+
+<div class="conocidos" id="fallos-conocidos">
+ <h3>Fallos conocidos de la 1.0.1, y cómo evitarlos</h3>
+ <p>Los encontró nuestra prueba en máquinas limpias. La 1.0.2 los arregla y sale en cuanto pase esa misma prueba. Mientras tanto:</p>
+ <ul>
+  <li><strong>Linux sin systemd-resolved</strong> (Debian, Arch, openSUSE…): el servicio no arranca. Ubuntu, Fedora y Mint no tienen este problema. Se arregla con esta orden, que también hace funcionar, con el <code>.tar.gz</code>, el botón del DNS y la fecha de la prueba:
+   <pre><code>sudo mkdir -p /etc/systemd/system/guardiana.service.d &amp;&amp; printf '[Service]\nProtectSystem=yes\nReadWritePaths=\nReadWritePaths=-/var/lib/guardiana -/run/systemd/resolve\n' | sudo tee /etc/systemd/system/guardiana.service.d/arreglo.conf &gt;/dev/null &amp;&amp; sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart guardiana</code></pre></li>
+  <li><strong>Linux y Mac, si paras GUARDIANA o tras reiniciar:</strong> el equipo puede quedarse sin internet o ir lento. Antes de pararlo, o si ya te pasó: <code>sudo guardiana dns --restore</code> (en el Mac, <code>sudo /usr/local/guardiana/guardiana dns --restore</code>). Para volver a usarlo, pulsa «Apuntar el DNS a Guardiana» en la página «Estado» del panel.</li>
+  <li><strong>Modo Hogar, en los tres sistemas:</strong> si el router reparte la IP de este equipo como DNS, al terminar los 7 días de prueba los teléfonos y la tele se quedan sin internet. Antes de que acaben, vuelve a poner en el router el DNS que tenía.</li>
+ </ul>
+</div>
 
 <h2 id="paso-a-paso">Paso a paso, en tu sistema</h2>
 <p>El resumen. Debajo está cada punto explicado despacio, con lo que verás en pantalla y por qué.</p>
