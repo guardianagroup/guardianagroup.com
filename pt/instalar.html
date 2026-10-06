@@ -217,8 +217,8 @@ que permite conferi-la. Se uma impressão não coincidir nos três lugares, não
 <h2>3 · O que o instalador faz, e o que não faz</h2>
 <table>
   <tbody>
-    <tr><th>Instala</th><td>O programa em <code>C:\Program Files\Guardiana</code> (Windows) ou <code>/usr/bin/guardiana</code> (Linux), e registra o serviço para que ele comece junto com a máquina.</td></tr>
-    <tr><th>Coloca a GUARDIANA como DNS</th><td>Na primeira instalação a GUARDIANA passa a ser o DNS deste computador, por IPv4 e por IPv6, para começar a olhar desde o primeiro minuto. Antes guarda uma cópia exata do seu ajuste: se o serviço parar, o computador recupera o DNS de antes, e ao desinstalar fica exatamente como estava. Também se desfaz pelo painel, em "Estado".</td></tr>
+    <tr><th>Instala</th><td>O programa em <code>C:\Program Files\Guardiana</code> (Windows), <code>/usr/bin/guardiana</code> (Linux, com o .deb) ou <code>/usr/local/bin/guardiana</code> (Linux, com o .tar.gz), e registra o serviço para que ele comece junto com a máquina.</td></tr>
+    <tr><th>Coloca a GUARDIANA como DNS</th><td>No Windows, na primeira instalação a GUARDIANA passa a ser o DNS deste computador, por IPv4 e por IPv6, para começar a olhar desde o primeiro minuto. Antes guarda uma cópia exata do seu ajuste: se o serviço parar, o computador recupera o DNS de antes, e ao desinstalar fica exatamente como estava. Também se desfaz pelo painel, em "Estado". No Linux o instalador não o altera: você mesmo o faz, com o botão «Apontar o DNS para a Guardiana» do painel.</td></tr>
     <tr><th>Não abre portas para a rede</th><td>Com o Modo Casa desligado, a GUARDIANA escuta só na sua própria máquina. As portas na direção do Wi-Fi só abrem se você ligar o Modo Casa, e o <code>guardiana verify</code> lista todas para você.</td></tr>
     <tr><th>Não pede conta</th><td>Sem cadastro, sem usuário, sem servidor nosso. As únicas conexões que saem são as da licença (ativar a sua chave e, com uma assinatura, conferi-la com o gateway de pagamento), e ficam anotadas no seu extrato.</td></tr>
     <tr><th>Não envia nada</th><td>Zero telemetria. Nem ao instalar, nem depois.</td></tr>
