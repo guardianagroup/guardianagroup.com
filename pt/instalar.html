@@ -105,7 +105,7 @@ footer.pie .arriba{justify-self:start;color:var(--azul)}
 <p class="lead">O Windows e o Mac vão te avisar. Isso é esperado, e esta página existe para você saber exatamente
 o que vai ver, por quê, e como conferir sozinho que o arquivo é nosso antes de abrir.</p>
 
-<div class="box" id="baixar"><p><strong>Versão 1.0.5, publicada em 8 de outubro de 2026.</strong> Antes de abrir um arquivo, compare a impressão digital com a desta tabela e com a do <a href="https://github.com/guardianagroup/guardiana/blob/main/ledger.jsonl">registro público</a>, onde foi anotada antes do download (e no Rekor, entrada <code>108e9186e8c5677a</code>).</p>
+<div class="box" id="baixar"><p><strong>Versão 1.0.5, publicada em 8 de outubro de 2026.</strong> Antes de abrir um arquivo, compare a impressão digital com a desta tabela e com a do <a href="https://github.com/guardianagroup/guardiana/blob/main/ledger.jsonl">registro público</a>, onde foi anotada antes do download (e no Rekor, entrada <a href="https://search.sigstore.dev/?uuid=108e9186e8c5677aa44b409ebde5bd47090a5b980191c019e81e3cab3a110a860794174e1060096c"><code>108e9186e8c5677a…1060096c</code></a>).</p>
 <div class="tabla-descargas"><table>
 <thead><tr><th>Sistema</th><th>Arquivo</th><th>Impressão SHA-256</th><th>Assinatura</th></tr></thead>
 <tbody>
@@ -192,7 +192,7 @@ todas as versões são assinadas. Ela vai dentro do próprio programa e está no
 <p><code>RWS+xz+N6DvnuDlJCAIOUEku8PLZ9pP1cUaoQnusfduLWpVIVmPXM16r</code></p>
 <p>O identificador curto dela é <code>B8E73BE88D3FC7BE</code>. Para conferir um arquivo:</p>
 <p><code>minisign -Vm guardiana-1.0.5-linux-x86_64 -P RWS+xz+N6DvnuDlJCAIOUEku8PLZ9pP1cUaoQnusfduLWpVIVmPXM16r</code></p>
-<p>Depois de instalado, o <code>guardiana verify</code> repete os três passos no seu próprio computador, e
+<p>Depois de instalado, o <code>guardiana verify</code> repete a impressão digital e a assinatura no seu próprio computador (o registro ele compara com um <code>ledger.jsonl</code> que você baixar junto do binário), e
 também diz se o serviço está rodando, para qual DNS o sistema aponta e quais portas estão abertas.</p>
 
 <div class="box">

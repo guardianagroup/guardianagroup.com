@@ -105,7 +105,7 @@ footer.pie .arriba{justify-self:start;color:var(--azul)}
 <p class="lead">Windows y el Mac te van a avisar. Está previsto, y esta página es para que sepas exactamente qué
 vas a ver, por qué, y cómo comprobar tú mismo que el archivo es el nuestro antes de abrirlo.</p>
 
-<div class="box" id="descargar"><p><strong>Versión 1.0.5, publicada el 8 de octubre de 2026.</strong> Antes de abrir un archivo, compara su huella con la de esta tabla y con la del <a href="https://github.com/guardianagroup/guardiana/blob/main/ledger.jsonl">registro público</a>, donde se anotó antes que la descarga (y en Rekor, entrada <code>108e9186e8c5677a</code>).</p>
+<div class="box" id="descargar"><p><strong>Versión 1.0.5, publicada el 8 de octubre de 2026.</strong> Antes de abrir un archivo, compara su huella con la de esta tabla y con la del <a href="https://github.com/guardianagroup/guardiana/blob/main/ledger.jsonl">registro público</a>, donde se anotó antes que la descarga (y en Rekor, entrada <a href="https://search.sigstore.dev/?uuid=108e9186e8c5677aa44b409ebde5bd47090a5b980191c019e81e3cab3a110a860794174e1060096c"><code>108e9186e8c5677a…1060096c</code></a>).</p>
 <div class="tabla-descargas"><table>
 <thead><tr><th>Sistema</th><th>Archivo</th><th>Huella SHA-256</th><th>Firma</th></tr></thead>
 <tbody>
@@ -192,7 +192,7 @@ se firman todas las versiones. Va dentro del propio programa y está en el repos
 <p><code>RWS+xz+N6DvnuDlJCAIOUEku8PLZ9pP1cUaoQnusfduLWpVIVmPXM16r</code></p>
 <p>Su identificador corto es <code>B8E73BE88D3FC7BE</code>. Para comprobar un archivo:</p>
 <p><code>minisign -Vm guardiana-1.0.5-linux-x86_64 -P RWS+xz+N6DvnuDlJCAIOUEku8PLZ9pP1cUaoQnusfduLWpVIVmPXM16r</code></p>
-<p>Una vez instalado, <code>guardiana verify</code> repite los tres pasos solo, en tu equipo, y además
+<p>Una vez instalado, <code>guardiana verify</code> repite la huella y la firma solo, en tu equipo (el registro lo compara con el <code>ledger.jsonl</code> que descargues junto al binario), y además
 dice si el servicio está en marcha, a qué DNS apunta el sistema y qué puertos hay abiertos.</p>
 
 <div class="box">

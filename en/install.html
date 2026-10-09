@@ -105,7 +105,7 @@ footer.pie .arriba{justify-self:start;color:var(--azul)}
 <p class="lead">Windows and the Mac are going to warn you. That is expected, and this page exists so you know exactly
 what you will see, why, and how to check for yourself that the file is ours before you open it.</p>
 
-<div class="box" id="download"><p><strong>Version 1.0.5, published on 8 October 2026.</strong> Before you open a file, compare its hash with this table and with the <a href="https://github.com/guardianagroup/guardiana/blob/main/ledger.jsonl">public ledger</a>, where it was written before the download existed (and in Rekor, entry <code>108e9186e8c5677a</code>).</p>
+<div class="box" id="download"><p><strong>Version 1.0.5, published on 8 October 2026.</strong> Before you open a file, compare its hash with this table and with the <a href="https://github.com/guardianagroup/guardiana/blob/main/ledger.jsonl">public ledger</a>, where it was written before the download existed (and in Rekor, entry <a href="https://search.sigstore.dev/?uuid=108e9186e8c5677aa44b409ebde5bd47090a5b980191c019e81e3cab3a110a860794174e1060096c"><code>108e9186e8c5677a…1060096c</code></a>).</p>
 <div class="tabla-descargas"><table>
 <thead><tr><th>System</th><th>File</th><th>SHA-256 hash</th><th>Signature</th></tr></thead>
 <tbody>
@@ -192,7 +192,7 @@ release is signed with. It ships inside the program and has been in the reposito
 <p><code>RWS+xz+N6DvnuDlJCAIOUEku8PLZ9pP1cUaoQnusfduLWpVIVmPXM16r</code></p>
 <p>Its short id is <code>B8E73BE88D3FC7BE</code>. To check a file:</p>
 <p><code>minisign -Vm guardiana-1.0.5-linux-x86_64 -P RWS+xz+N6DvnuDlJCAIOUEku8PLZ9pP1cUaoQnusfduLWpVIVmPXM16r</code></p>
-<p>Once installed, <code>guardiana verify</code> repeats all three steps on your own machine, and also tells
+<p>Once installed, <code>guardiana verify</code> repeats the hash and the signature on your own machine (it compares the ledger with a <code>ledger.jsonl</code> you download next to the binary), and also tells
 you whether the service is running, which DNS the system points to and which ports are open.</p>
 
 <div class="box">
