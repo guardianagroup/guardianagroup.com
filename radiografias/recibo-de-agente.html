@@ -117,7 +117,7 @@ propio PC</a>: 8,9 segundos y <strong>ninguno</strong> — y la respuesta, mal.<
 <li><a href="/radiografias/recibo-claude-code-ordenar-facturas-2026-09-20.html">Claude Code otra vez, al día
 siguiente</a>: 10,9 segundos y los <strong>mismos tres</strong> servicios.</li>
 </ul>
-<p>Los dos llevan dentro la misma tabla comparada, con las IA que no se pudieron medir y por qué.
+<p>Los tres llevan dentro la misma tabla comparada, con las IA que no se pudieron medir y por qué.
 Esta página siguió estando primero a propósito: el método se fijó antes de ver los números, no
 después de elegir un titular.</p>
 </div>
@@ -133,7 +133,7 @@ archivos, ni lo que la IA respondió. Esa es la línea del programa y también l
   necesita para funcionar) y lo demás (medición, publicidad, terceros).</li>
   <li><strong>No:</strong> el contenido de la conversación, los archivos del usuario, direcciones IP de
   personas ni identificadores de nadie que no sea el equipo de prueba.</li>
-  <li><strong>No:</strong> la palabra «espía», «malicioso» ni «roba datos». Un nombre pedido es un
+  <li><strong>No:</strong> las palabras «espía», «malicioso» ni «roba datos». Un nombre pedido es un
   nombre pedido; el lector saca su conclusión con la lista delante.</li>
 </ul>
 
@@ -167,7 +167,8 @@ archivos, ni lo que la IA respondió. Esa es la línea del programa y también l
 <h2>Cómo repetirlo</h2>
 <p>La gracia del recibo es que no hay que creérselo. Con GUARDIANA instalada y el equipo apuntando a
 ella, lo que hace falta es medir el reposo primero, hacer la tarea después y restar:</p>
-<p><code>guardiana export --since &lt;inicio_ms&gt; --until &lt;fin_ms&gt; --json</code></p>
+<p><code>guardiana export --out extracto.csv</code></p>
+<p>Es lo que hacen los guiones de medición (<code>site/src/radiografia/medir.ps1</code> guarda la salida de <code>guardiana export</code> en <code>extracto.csv</code>): el extracto entero en CSV, del que <code>recibo.py</code> toma solo las dos ventanas, la de reposo y la de la tarea.</p>
 <p>Los nombres que ya aparecían en reposo (actualizaciones del sistema, la hora, el propio navegador)
 se marcan como fondo y no se cuentan contra la IA. Si tus números no coinciden con los nuestros, es un
 error nuestro o una diferencia de método: escribe a

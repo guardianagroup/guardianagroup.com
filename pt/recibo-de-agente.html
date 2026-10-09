@@ -161,7 +161,8 @@ arquivos, nem o que a IA respondeu. Essa é a linha do programa e é também a l
 <h2>Como repetir</h2>
 <p>A graça do recibo é você não ter que acreditar nele. Com a GUARDIANA instalada e a máquina apontando
 para ela, o que você precisa é medir o repouso primeiro, fazer a tarefa depois e subtrair:</p>
-<p><code>guardiana export --since &lt;início_ms&gt; --until &lt;fim_ms&gt; --json</code></p>
+<p><code>guardiana export --out extracto.csv</code></p>
+<p>É o que fazem os scripts de medição (<code>site/src/radiografia/medir.ps1</code> salva a saída de <code>guardiana export</code> em <code>extracto.csv</code>): o extrato inteiro em CSV, do qual o <code>recibo.py</code> pega só as duas janelas, a de repouso e a da tarefa.</p>
 <p>Os nomes que já apareceram em repouso (atualizações do sistema, o relógio, o próprio navegador) são
 marcados como fundo e não contam contra a IA. Se os seus números não baterem com os nossos, ou é erro
 nosso ou é diferença de método: escreva para
@@ -171,5 +172,11 @@ qualquer outra radiografia.</p>
 <h2>Por que isto é publicado</h2>
 <p>Porque é a pergunta que ninguém responde com dados: um aplicativo de IA faz coisas em seu nome e
 ninguém te diz para quem ele liga enquanto faz. Não para acusar ninguém — para mostrar a lista.</p>
+
+<div class="box">
+<p><strong>A GUARDIANA já está disponível</strong> para Windows, Linux e Mac, com o código aberto e a
+impressão digital de cada versão no registro público. Um só programa, com sete dias de teste com tudo e
+sem cartão: <a href="/pt/instalar.html#baixar">baixe aqui</a>.</p>
+</div>
 <p><a href="/pt/radiografias/">Todas as radiografias</a></p>
 <footer class="pie"><div class="links"><a href="/pt/">Início</a><a href="/pt/guias/">Guias</a><a href="/pt/radiografias/">Radiografias</a><a href="/pt/o-negocio-dos-seus-dados.html">O negócio dos seus dados</a><a href="/pt/privacidade.html">Privacidade</a><a href="/pt/termos.html">Termos e reembolsos</a><a href="/pt/contato.html">Contato</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div><div>GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, 18º andar, Bocagrande, Cartagena das Índias, Colômbia · Esta página não usa cookies nem analytics.</div><a class="arriba" href="#arriba">Voltar ao topo ↑</a></footer></main><script>(function(){try{var K='guardiana-idioma',a=document.querySelectorAll('a[data-idioma]');for(var i=0;i<a.length;i++)a[i].addEventListener('click',function(){try{localStorage.setItem(K,this.getAttribute('data-idioma'))}catch(e){}});}catch(e){}})();</script></body></html>

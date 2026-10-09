@@ -144,37 +144,37 @@ and restart the PC's Wi-Fi.</p>
 <h2>If you cannot or will not go into the router: a fixed address on the PC itself</h2>
 <p>The DHCP reservation can be replaced by fixing the address on the guardian computer. The router does not
 need to be touched. Just use the same address it already has, so it collides with nobody.</p>
-<p><strong>Windows</strong>, in a PowerShell window as administrator (change <code>Ethernet</code> for the
-name of your connection and the addresses for yours; <code>192.168.1.1</code> is usually the router):</p>
+<p><strong>Windows</strong>, in a PowerShell window as administrator (replace <code>Ethernet</code> with the
+name of your connection and the addresses with yours; <code>192.168.1.1</code> is usually the router):</p>
 <p><code>netsh interface ipv4 set address name="Ethernet" static 192.168.1.78 255.255.255.0 192.168.1.1</code></p>
 <p><code>netsh interface ipv4 set dnsservers name="Ethernet" static 192.168.1.1 primary</code></p>
 <p>To undo: <code>netsh interface ipv4 set address name="Ethernet" dhcp</code> and
-<code>netsh interface ipv4 set dnsservers name="Ethernet" dhcp</code>. The router becomes the DNS that GUARDIANA asks: if it was already watching this PC, within a minute it puts itself back as the PC’s DNS, also after undoing.</p>
+<code>netsh interface ipv4 set dnsservers name="Ethernet" dhcp</code>. The router becomes the DNS that GUARDIANA asks: if it was already watching this PC, within a minute it puts itself back as the PC’s DNS, even after you undo it.</p>
 <p><strong>Linux with NetworkManager</strong> (desktop Ubuntu, Mint, Fedora): Settings › Network › the gear
 of your connection › IPv4 › “Manual” › address, mask <code>255.255.255.0</code>, gateway the router.</p>
 <p>With a fixed address, what is left is pointing the phones at it (the iPhone and Android guides). DNS in
-the router is still the most comfortable thing for the whole house, but it is not compulsory.</p>
+the router is still the most convenient option for the whole house, but it is not compulsory.</p>
 
-<h2>Router names by operator (indicative, changes with the model)</h2>
+<h2>Router names by internet provider (indicative, changes with the model)</h2>
 <div class="wrap"><table>
-<tr><th>Operator and usual router</th><th>Where it tends to be</th></tr>
-<tr><td>Claro fibre (Skyworth, Huawei HG8145, ZTE F680)</td><td><code>192.168.1.1</code> › Network › LAN › DHCP › “Primary / secondary DNS server”</td></tr>
+<tr><th>Internet provider and usual router</th><th>Where it tends to be</th></tr>
+<tr><td>Claro fibre (Skyworth, Huawei HG8145, ZTE F680)</td><td><code>192.168.1.1</code> (sometimes <code>https://</code>) › Network › LAN › DHCP › “Primary / secondary DNS server”. The user name and password are on the label underneath. On some Huawei the field is under “LAN settings › DHCP”.</td></tr>
 <tr><td>Claro cable (Arris, Ubee, Technicolor)</td><td><code>192.168.0.1</code> › LAN › DHCP</td></tr>
 <tr><td>Movistar Colombia (Huawei, ZTE, Askey)</td><td><code>192.168.1.1</code> › Local network › DHCP › “DNS”</td></tr>
 <tr><td>Tigo (Sagemcom, Arris, Hitron)</td><td><code>192.168.0.1</code> or <code>192.168.1.1</code> › LAN › DHCP. On some Hitron the field is called “DNS Override”.</td></tr>
 <tr><td>ETB (Huawei, ZTE)</td><td><code>192.168.1.1</code> › LAN › DHCP</td></tr>
 <tr><td>Others (TP-Link, ASUS, Netgear, Mercusys)</td><td>LAN › DHCP Server › “Primary DNS”</td></tr>
 </table></div>
-<p>These were tested in Colombia, which is where this is built. Elsewhere the names are similar: always look
+<p>These are the names used in Colombia, where this is built (indicative; they change with the model). Elsewhere the names are similar: always look
 for “DHCP” inside “LAN” or “Local network”.</p>
 
 <h2>If the router will not let you change the DNS</h2>
-<p>This happens with some operator routers. Two ways out:</p>
+<p>This happens with some internet providers' routers. Two ways out:</p>
 <ul>
 <li>Set the DNS on each phone (<a href="/en/guides/iphone.html">iPhone guide</a>,
 <a href="/en/guides/android.html">Android guide</a>).</li>
 <li>Turn off the router's DHCP and use the PC's: GUARDIANA does <strong>not</strong> do this in 1.0, and it
-is written down as a limit.</li>
+is documented as a limitation.</li>
 </ul>
 
 <h2>Undoing it</h2>
