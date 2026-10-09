@@ -97,8 +97,9 @@ footer.pie{border-top:1px solid var(--linea);margin-top:64px;padding-top:24px;fo
 footer.pie .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}footer.pie .links a{color:var(--gris)}footer.pie .links a:hover{color:var(--tinta)}
 footer.pie .arriba{justify-self:start;color:var(--azul)}
 @media (max-width:600px){main{padding:20px 20px 72px}h1{font-size:27px}header.top nav{gap:12px 16px}}
+.lema-marca{display:flex;flex-direction:column;gap:3px;line-height:1}.lema-marca small{font-family:'IBM Plex Sans',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--gris)}
 </style></head>
-<body><header class="top"><a class="brand" href="/" aria-label="GUARDIANA, home"><i></i>GUARDIANA</a><nav aria-label="Sections"><a href="/">Home</a><a href="/en/guides/">Guides</a><a href="/en/x-rays/">X-rays</a><a href="/en/the-business-of-your-data.html">The business of your data</a><a href="/en/privacy.html">Privacy</a><a href="/en/terms.html">Terms and refunds</a><a href="/en/contact.html">Contact</a></nav><span class="idiomas"><a class="idioma" href="/radiografias/recibo-de-agente.html" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><span class="idioma actual" lang="en" aria-current="true">EN</span><a class="idioma" href="/pt/recibo-de-agente.html" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span></header><main id="arriba">
+<body><header class="top"><a class="brand" href="/" aria-label="GUARDIANA, home"><i></i><span class="lema-marca">GUARDIANA<small>Your data, under your control</small></span></a><nav aria-label="Sections"><a href="/">Home</a><a href="/en/guides/">Guides</a><a href="/en/x-rays/">X-rays</a><a href="/en/the-business-of-your-data.html">The business of your data</a><a href="/en/privacy.html">Privacy</a><a href="/en/terms.html">Terms and refunds</a><a href="/en/contact.html">Contact</a></nav><span class="idiomas"><a class="idioma" href="/radiografias/recibo-de-agente.html" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><span class="idioma actual" lang="en" aria-current="true">EN</span><a class="idioma" href="/pt/recibo-de-agente.html" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span></header><main id="arriba">
 <p class="k">X-RAYS · PROTOCOL</p>
 <h1>Agent receipt</h1>
 <p class="lead">You ask an AI for something and it does it. While it works, your machine asks for the names
@@ -106,13 +107,15 @@ of services on the internet. An agent receipt is the list of those names, with t
 raw data, so that anyone can repeat the test.</p>
 
 <div class="box">
-<p><strong>Two are published, both from 19 September 2026.</strong> The same task — sort five invoices —
-put through two different AIs on the same machine:</p>
+<p><strong>Three are published: two from 19 September 2026 and the repeat on the 20th.</strong> The same task — sort five invoices —
+put through two different AIs on the same machine, and repeated the next day:</p>
 <ul>
-<li><a href="/radiografias/recibo-claude-code-ordenar-facturas-2026-09-19.html" hreflang="es">Claude Code, in the
+<li><a href="/en/x-rays/recibo-claude-code-ordenar-facturas-2026-09-19.html">Claude Code, in the
 cloud</a>: 10.7 seconds and <strong>three</strong> services.</li>
-<li><a href="/radiografias/recibo-modelo-local-ordenar-facturas-2026-09-19.html" hreflang="es">A model running inside
+<li><a href="/en/x-rays/recibo-modelo-local-ordenar-facturas-2026-09-19.html">A model running inside
 the PC itself</a>: 8.9 seconds and <strong>none</strong> — and it got the answer wrong.</li>
+<li><a href="/en/x-rays/recibo-claude-code-ordenar-facturas-2026-09-20.html">Claude Code again, the next
+day</a>: 10.9 seconds and the <strong>same three</strong> services.</li>
 </ul>
 <p>Both carry the same comparison table, including the AIs that could not be measured and why. This page
 still came first on purpose: the method was fixed before the numbers were seen, not after a headline had
@@ -157,7 +160,7 @@ files, not what the AI answered. That is the program's line and it is the receip
 <h2>How to repeat it</h2>
 <p>The point of the receipt is that you do not have to believe it. With GUARDIANA installed and the machine
 pointing at it, what you need is to measure the rest first, do the task afterwards and subtract:</p>
-<p><code>guardiana export --desde &lt;start&gt; --hasta &lt;end&gt; --json</code></p>
+<p><code>guardiana export --since &lt;start_ms&gt; --until &lt;end_ms&gt; --json</code></p>
 <p>Names that already appeared at rest (system updates, the clock, the browser itself) are marked as
 background and are not counted against the AI. If your numbers do not match ours, it is either our mistake
 or a difference of method: write to <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a> and

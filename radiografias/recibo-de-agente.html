@@ -97,8 +97,9 @@ footer.pie{border-top:1px solid var(--linea);margin-top:64px;padding-top:24px;fo
 footer.pie .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}footer.pie .links a{color:var(--gris)}footer.pie .links a:hover{color:var(--tinta)}
 footer.pie .arriba{justify-self:start;color:var(--azul)}
 @media (max-width:600px){main{padding:20px 20px 72px}h1{font-size:27px}header.top nav{gap:12px 16px}}
+.lema-marca{display:flex;flex-direction:column;gap:3px;line-height:1}.lema-marca small{font-family:'IBM Plex Sans',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--gris)}
 </style></head>
-<body><header class="top"><a class="brand" href="/es/" aria-label="GUARDIANA, portada"><i></i>GUARDIANA</a><nav aria-label="Secciones"><a href="/es/">Inicio</a><a href="/guias/">Guías</a><a href="/radiografias/" aria-current="page">Radiografías</a><a href="/negocio-de-tus-datos.html">El negocio de tus datos</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="/contacto.html">Contacto</a></nav><span class="idiomas"><span class="idioma actual" lang="es" aria-current="true">ES</span><a class="idioma" href="/en/agent-receipt.html" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><a class="idioma" href="/pt/recibo-de-agente.html" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span></header><main id="arriba">
+<body><header class="top"><a class="brand" href="/es/" aria-label="GUARDIANA, portada"><i></i><span class="lema-marca">GUARDIANA<small>Tus datos, bajo tu control</small></span></a><nav aria-label="Secciones"><a href="/es/">Inicio</a><a href="/guias/">Guías</a><a href="/radiografias/" aria-current="page">Radiografías</a><a href="/negocio-de-tus-datos.html">El negocio de tus datos</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="/contacto.html">Contacto</a></nav><span class="idiomas"><span class="idioma actual" lang="es" aria-current="true">ES</span><a class="idioma" href="/en/agent-receipt.html" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><a class="idioma" href="/pt/recibo-de-agente.html" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span></header><main id="arriba">
 <p class="k">RADIOGRAFÍAS · PROTOCOLO</p>
 <h1>Recibo de agente</h1>
 <p class="lead">Le pides algo a una IA y lo hace. Mientras lo hace, tu equipo pregunta por nombres de
@@ -106,13 +107,15 @@ servicios en internet. Un recibo de agente es la lista de esos nombres, con la h
 datos en bruto para que cualquiera repita la prueba.</p>
 
 <div class="box">
-<p><strong>Ya hay dos publicados, del 19 de septiembre de 2026.</strong> La misma tarea —ordenar cinco
-facturas— pasada por dos inteligencias artificiales distintas en el mismo equipo:</p>
+<p><strong>Ya hay tres publicados: dos del 19 de septiembre de 2026 y la repetición del 20.</strong> La misma tarea —ordenar cinco
+facturas— pasada por dos inteligencias artificiales distintas en el mismo equipo, y repetida al día siguiente:</p>
 <ul>
 <li><a href="/radiografias/recibo-claude-code-ordenar-facturas-2026-09-19.html">Claude Code, en la
 nube</a>: 10,7 segundos y <strong>tres</strong> servicios.</li>
 <li><a href="/radiografias/recibo-modelo-local-ordenar-facturas-2026-09-19.html">Un modelo dentro del
 propio PC</a>: 8,9 segundos y <strong>ninguno</strong> — y la respuesta, mal.</li>
+<li><a href="/radiografias/recibo-claude-code-ordenar-facturas-2026-09-20.html">Claude Code otra vez, al día
+siguiente</a>: 10,9 segundos y los <strong>mismos tres</strong> servicios.</li>
 </ul>
 <p>Los dos llevan dentro la misma tabla comparada, con las IA que no se pudieron medir y por qué.
 Esta página siguió estando primero a propósito: el método se fijó antes de ver los números, no
@@ -164,7 +167,7 @@ archivos, ni lo que la IA respondió. Esa es la línea del programa y también l
 <h2>Cómo repetirlo</h2>
 <p>La gracia del recibo es que no hay que creérselo. Con GUARDIANA instalada y el equipo apuntando a
 ella, lo que hace falta es medir el reposo primero, hacer la tarea después y restar:</p>
-<p><code>guardiana export --desde &lt;inicio&gt; --hasta &lt;fin&gt; --json</code></p>
+<p><code>guardiana export --since &lt;inicio_ms&gt; --until &lt;fin_ms&gt; --json</code></p>
 <p>Los nombres que ya aparecían en reposo (actualizaciones del sistema, la hora, el propio navegador)
 se marcan como fondo y no se cuentan contra la IA. Si tus números no coinciden con los nuestros, es un
 error nuestro o una diferencia de método: escribe a

@@ -97,8 +97,9 @@ footer.pie{border-top:1px solid var(--linea);margin-top:64px;padding-top:24px;fo
 footer.pie .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}footer.pie .links a{color:var(--gris)}footer.pie .links a:hover{color:var(--tinta)}
 footer.pie .arriba{justify-self:start;color:var(--azul)}
 @media (max-width:600px){main{padding:20px 20px 72px}h1{font-size:27px}header.top nav{gap:12px 16px}}
+.lema-marca{display:flex;flex-direction:column;gap:3px;line-height:1}.lema-marca small{font-family:'IBM Plex Sans',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--gris)}
 </style></head>
-<body><header class="top"><a class="brand" href="/pt/" aria-label="GUARDIANA, início"><i></i>GUARDIANA</a><nav aria-label="Seções"><a href="/pt/">Início</a><a href="/pt/guias/">Guias</a><a href="/pt/radiografias/">Radiografias</a><a href="/pt/o-negocio-dos-seus-dados.html">O negócio dos seus dados</a><a href="/pt/privacidade.html">Privacidade</a><a href="/pt/termos.html">Termos e reembolsos</a><a href="/pt/contato.html">Contato</a></nav><span class="idiomas"><a class="idioma" href="/radiografias/recibo-de-agente.html" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><a class="idioma" href="/en/agent-receipt.html" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><span class="idioma actual" lang="pt" aria-current="true">PT</span></span></header><main id="arriba">
+<body><header class="top"><a class="brand" href="/pt/" aria-label="GUARDIANA, início"><i></i><span class="lema-marca">GUARDIANA<small>Seus dados, sob o seu controle</small></span></a><nav aria-label="Seções"><a href="/pt/">Início</a><a href="/pt/guias/">Guias</a><a href="/pt/radiografias/">Radiografias</a><a href="/pt/o-negocio-dos-seus-dados.html">O negócio dos seus dados</a><a href="/pt/privacidade.html">Privacidade</a><a href="/pt/termos.html">Termos e reembolsos</a><a href="/pt/contato.html">Contato</a></nav><span class="idiomas"><a class="idioma" href="/radiografias/recibo-de-agente.html" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><a class="idioma" href="/en/agent-receipt.html" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><span class="idioma actual" lang="pt" aria-current="true">PT</span></span></header><main id="arriba">
 <p class="k">RADIOGRAFIAS · PROTOCOLO</p>
 <h1>Recibo de agente</h1>
 <p class="lead">Você pede algo a uma IA e ela faz. Enquanto trabalha, a sua máquina pede os nomes de
@@ -106,14 +107,16 @@ serviços na internet. Um recibo de agente é a lista desses nomes, com a hora, 
 para que qualquer pessoa possa repetir o teste.</p>
 
 <div class="box">
-<p><strong>Dois estão publicados, os dois de 19 de setembro de 2026.</strong> A mesma tarefa — organizar
-cinco notas fiscais — passada por duas IA diferentes na mesma máquina (os recibos estão em espanhol por
+<p><strong>Três estão publicados: dois de 19 de setembro de 2026 e a repetição do dia 20.</strong> A mesma tarefa — organizar
+cinco notas fiscais — passada por duas IA diferentes na mesma máquina, e repetida no dia seguinte (os recibos estão em espanhol por
 enquanto):</p>
 <ul>
 <li><a href="/radiografias/recibo-claude-code-ordenar-facturas-2026-09-19.html" hreflang="es">Claude Code, na
 nuvem</a>: 10,7 segundos e <strong>três</strong> serviços.</li>
 <li><a href="/radiografias/recibo-modelo-local-ordenar-facturas-2026-09-19.html" hreflang="es">Um modelo rodando
 dentro do próprio PC</a>: 8,9 segundos e <strong>nenhum</strong> — e errou a resposta.</li>
+<li><a href="/radiografias/recibo-claude-code-ordenar-facturas-2026-09-20.html" hreflang="es">Claude Code de novo, no dia
+seguinte</a>: 10,9 segundos e os <strong>mesmos três</strong> serviços.</li>
 </ul>
 <p>Os dois levam a mesma tabela de comparação, incluindo as IA que não puderam ser medidas e por quê.
 Esta página veio antes de propósito: o método foi fixado antes de ver os números, não depois de escolher
@@ -158,7 +161,7 @@ arquivos, nem o que a IA respondeu. Essa é a linha do programa e é também a l
 <h2>Como repetir</h2>
 <p>A graça do recibo é você não ter que acreditar nele. Com a GUARDIANA instalada e a máquina apontando
 para ela, o que você precisa é medir o repouso primeiro, fazer a tarefa depois e subtrair:</p>
-<p><code>guardiana export --desde &lt;início&gt; --hasta &lt;fim&gt; --json</code></p>
+<p><code>guardiana export --since &lt;início_ms&gt; --until &lt;fim_ms&gt; --json</code></p>
 <p>Os nomes que já apareceram em repouso (atualizações do sistema, o relógio, o próprio navegador) são
 marcados como fundo e não contam contra a IA. Se os seus números não baterem com os nossos, ou é erro
 nosso ou é diferença de método: escreva para
