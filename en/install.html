@@ -126,7 +126,7 @@ what you will see, why, and how to check for yourself that the file is ours befo
   <h3>Four steps</h3>
   <ol>
    <li><strong>Download</strong> <code>guardiana-1.0.9-windows-x64-en.msi</code> from the <a href="#download">table above</a>.</li>
-   <li><strong>Check the hash before opening it</strong>, in PowerShell:<br><code>Get-FileHash guardiana-1.0.9-windows-x64-en.msi -Algorithm SHA256</code><br>and compare it with the one in the public ledger. If they are not identical, delete the file.</li>
+   <li><strong>Check the hash before opening it</strong>, in PowerShell:<br><code>(Get-FileHash guardiana-1.0.9-windows-x64-en.msi -Algorithm SHA256).Hash.ToLower()</code><br>and compare it with the one in the public ledger. If they are not identical, delete the file.</li>
    <li><strong>Open it.</strong> Windows shows this warning. It does not say the program is dangerous: it says Windows does not know it yet.
     <img src="/aviso-instalacion.png" alt="Windows security warning: unknown publisher." width="600" height="366" loading="lazy"></li>
    <li><strong>Once installed</strong>, type in PowerShell <code>&amp; "C:\Program Files\Guardiana\guardiana.exe" verify</code>: it repeats the check by itself, on your machine.</li>
@@ -175,7 +175,7 @@ a way to check the file without trusting us.</p>
 
 <h3>Step 1 · Take the fingerprint of the file you downloaded</h3>
 <p>On Windows, in PowerShell:</p>
-<p><code>Get-FileHash guardiana-1.0.9-windows-x64-en.msi -Algorithm SHA256</code></p>
+<p><code>(Get-FileHash guardiana-1.0.9-windows-x64-en.msi -Algorithm SHA256).Hash.ToLower()</code></p>
 <p>On Linux, in the terminal:</p>
 <p><code>sha256sum guardiana_1.0.9_amd64.deb</code></p>
 
