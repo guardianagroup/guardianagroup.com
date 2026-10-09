@@ -317,19 +317,19 @@ footer .links a:hover{color:var(--tinta)}
 @media (prefers-reduced-motion:reduce){.btn{transition:none}.pases .pase{transition:none}}
 .lema-marca{display:flex;flex-direction:column;gap:3px;line-height:1}.lema-marca small{font-family:'IBM Plex Sans',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--gris)}
 .zero-pronto{margin:8px 0 34px;border:1.5px solid var(--azul);border-radius:16px;padding:22px 26px;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35);display:grid;gap:8px}.zero-pronto .k{margin:0;color:var(--azul)}.zero-pronto h2{font-family:'Unbounded',sans-serif;font-weight:700;font-size:26px;line-height:1.2;letter-spacing:-.02em;margin:0;text-wrap:balance}.zero-pronto p{margin:0;max-width:62ch}.zero-pronto .pie{font-size:14px;color:var(--gris);max-width:none}.zero-pronto .pie a{font-weight:600}@media (max-width:600px){.zero-pronto h2{font-size:21px}}
-</style></head>
+.h1-zero{color:var(--azul)}.btn-zero{display:inline-flex;align-items:center;gap:10px}.btn-zero i{width:9px;height:9px;border-radius:50%;background:var(--azul);box-shadow:0 0 0 3px var(--azul-suave,rgba(31,75,255,.15))}header nav a.nav-zero{color:var(--azul);font-weight:600}.top nav{column-gap:12px;font-size:13.5px}</style></head>
 <body>
 <div class="wrap">
 <header class="top">
   <a class="marca" href="/es/" aria-label="GUARDIANA"><i></i><span class="lema-marca">GUARDIANA<small>Tus datos, bajo tu control</small></span></a>
-  <nav aria-label="Secciones"><a href="#ia">Tu IA</a><a href="#como">Cómo funciona</a><a href="#instalar">Cómo instalar</a><a href="/radiografias/">Radiografías</a><a href="#planes">Planes</a><a href="/casos.html" class="multas">Multas</a><a href="/negocio-de-tus-datos.html" class="multas">El negocio de tus datos</a><a href="https://github.com/guardianagroup/guardiana">Código</a></nav>
+  <nav aria-label="Secciones"><a href="/zero.html" class="nav-zero">Navegador</a><a href="#ia">Tu IA</a><a href="#como">Cómo funciona</a><a href="#instalar">Cómo instalar</a><a href="/radiografias/">Radiografías</a><a href="#planes">Planes</a><a href="/casos.html" class="multas">Multas</a><a href="/negocio-de-tus-datos.html" class="multas">El negocio de tus datos</a><a href="https://github.com/guardianagroup/guardiana">Código</a></nav>
   <span class="idiomas"><span class="idioma actual" lang="es" aria-current="true">ES</span><a class="idioma" href="/" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><a class="idioma" href="/pt/" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span>
 </header>
 <main>
 <section class="hero" style="border-top:0">
   <div>
     <div class="fecha"><span class="k">WINDOWS, LINUX Y <span class="tal-cual">macOS</span></span></div>
-    <h1>El guardián de tus datos.<br>El vigilante de tu IA.</h1>
+    <h1>El guardián de tus datos.<br>El vigilante de tu IA.<br><span class="h1-zero">Y tu propio navegador.</span></h1>
     <p class="lead">Tus datos valen dinero: hay empresas que los compran y los venden. GUARDIANA ve cada nombre que tu PC busca antes de conectarse (desde tu IA, tus webs, tus programas) y bloquea el que tú digas. Encárgale una tarea a tu IA y comprueba que solo habla con los servicios que necesita para hacerla.</p>
     <!-- El párrafo pequeño de debajo (`hero3`) se quitó el 21 sep 2026 por orden del responsable:
          eran seis frases seguidas —sistemas, Modo Hogar, sin cuenta, sin servidor, código
@@ -337,7 +337,7 @@ footer .links a:hover{color:var(--tinta)}
          sigue contado en la página, cada cosa en su sección, y la nota de debajo de los botones
          mantiene lo esencial. El texto no se borra del contenido: lo usa la ficha que lee
          Google y el generador antiguo. -->
-    <div class="cta"><a class="btn p" href="/instalar.html#descargar">Descarga GUARDIANA</a><a class="btn s" href="/radiografias/recibo-de-agente.html">Ver el recibo del agente →</a></div>
+    <div class="cta"><a class="btn p" href="/instalar.html#descargar">Descarga GUARDIANA</a><a class="btn s btn-zero" href="/zero.html"><i></i>Descarga el navegador</a></div>
     <p class="nota">SIN CUENTA · 7 DÍAS DE PRUEBA SIN TARJETA · CÓDIGO ABIERTO</p>
   </div>
   <svg class="defs" aria-hidden="true" focusable="false"><filter id="tinta" x="-4%" y="-8%" width="108%" height="116%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="7" result="r"/><feDisplacementMap in="SourceGraphic" in2="r" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter></svg>

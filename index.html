@@ -317,19 +317,19 @@ footer .links a:hover{color:var(--tinta)}
 @media (prefers-reduced-motion:reduce){.btn{transition:none}.pases .pase{transition:none}}
 .lema-marca{display:flex;flex-direction:column;gap:3px;line-height:1}.lema-marca small{font-family:'IBM Plex Sans',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--gris)}
 .zero-pronto{margin:8px 0 34px;border:1.5px solid var(--azul);border-radius:16px;padding:22px 26px;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35);display:grid;gap:8px}.zero-pronto .k{margin:0;color:var(--azul)}.zero-pronto h2{font-family:'Unbounded',sans-serif;font-weight:700;font-size:26px;line-height:1.2;letter-spacing:-.02em;margin:0;text-wrap:balance}.zero-pronto p{margin:0;max-width:62ch}.zero-pronto .pie{font-size:14px;color:var(--gris);max-width:none}.zero-pronto .pie a{font-weight:600}@media (max-width:600px){.zero-pronto h2{font-size:21px}}
-</style></head>
+.h1-zero{color:var(--azul)}.btn-zero{display:inline-flex;align-items:center;gap:10px}.btn-zero i{width:9px;height:9px;border-radius:50%;background:var(--azul);box-shadow:0 0 0 3px var(--azul-suave,rgba(31,75,255,.15))}header nav a.nav-zero{color:var(--azul);font-weight:600}.top nav{column-gap:12px;font-size:13.5px}</style></head>
 <body>
 <div class="wrap">
 <header class="top">
   <a class="marca" href="/" aria-label="GUARDIANA"><i></i><span class="lema-marca">GUARDIANA<small>Your data, under your control</small></span></a>
-  <nav aria-label="Sections"><a href="#ia">Your AI</a><a href="#como">How it works</a><a href="#instalar">How to install</a><a href="/en/x-rays/">X-rays</a><a href="#planes">Plans</a><a href="/en/cases.html" class="multas">Fines</a><a href="/en/the-business-of-your-data.html" class="multas">The business of your data</a><a href="https://github.com/guardianagroup/guardiana/blob/main/README.en.md">Code</a></nav>
+  <nav aria-label="Sections"><a href="/en/zero.html" class="nav-zero">Browser</a><a href="#ia">Your AI</a><a href="#como">How it works</a><a href="#instalar">How to install</a><a href="/en/x-rays/">X-rays</a><a href="#planes">Plans</a><a href="/en/cases.html" class="multas">Fines</a><a href="/en/the-business-of-your-data.html" class="multas">The business of your data</a><a href="https://github.com/guardianagroup/guardiana/blob/main/README.en.md">Code</a></nav>
   <span class="idiomas"><a class="idioma" href="/es/" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><span class="idioma actual" lang="en" aria-current="true">EN</span><a class="idioma" href="/pt/" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span>
 </header>
 <main>
 <section class="hero" style="border-top:0">
   <div>
     <div class="fecha"><span class="k">WINDOWS, LINUX AND <span class="tal-cual">macOS</span></span></div>
-    <h1>The guardian of your data.<br>The watchdog of your AI.</h1>
+    <h1>The guardian of your data.<br>The watchdog of your AI.<br><span class="h1-zero">And your own browser.</span></h1>
     <p class="lead">Your data is worth money: there are companies that buy it and sell it. GUARDIANA sees every name your PC looks up before it connects (from your AI, your websites, your programs) and blocks the ones you choose. Give your AI a task and check that it only talks to the services it needs to do it.</p>
     <!-- El párrafo pequeño de debajo (`hero3`) se quitó el 21 sep 2026 por orden del responsable:
          eran seis frases seguidas —sistemas, Modo Hogar, sin cuenta, sin servidor, código
@@ -337,7 +337,7 @@ footer .links a:hover{color:var(--tinta)}
          sigue contado en la página, cada cosa en su sección, y la nota de debajo de los botones
          mantiene lo esencial. El texto no se borra del contenido: lo usa la ficha que lee
          Google y el generador antiguo. -->
-    <div class="cta"><a class="btn p" href="/en/install.html#download">Download GUARDIANA</a><a class="btn s" href="/en/agent-receipt.html">See the agent receipt →</a></div>
+    <div class="cta"><a class="btn p" href="/en/install.html#download">Download GUARDIANA</a><a class="btn s btn-zero" href="/en/zero.html"><i></i>Download the browser</a></div>
     <p class="nota">NO ACCOUNT · 7 DAYS FREE, NO CARD · OPEN SOURCE</p>
   </div>
   <svg class="defs" aria-hidden="true" focusable="false"><filter id="tinta" x="-4%" y="-8%" width="108%" height="116%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="7" result="r"/><feDisplacementMap in="SourceGraphic" in2="r" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
