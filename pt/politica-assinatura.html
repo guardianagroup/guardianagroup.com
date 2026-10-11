@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de assinatura de código · GUARDIANA</title>
+<meta name="description" content="Quais arquivos da GUARDIANA e do GUARDIANA ZERO são assinados e com o quê, onde são compilados, quem aprova cada assinatura, a que os programas se conectam e como conferir.">
+<link rel="canonical" href="https://guardianagroup.com/pt/politica-assinatura.html">
+<meta name="robots" content="index,follow">
+<link rel="alternate" hreflang="es" href="https://guardianagroup.com/politica-firma.html">
+<link rel="alternate" hreflang="en" href="https://guardianagroup.com/en/code-signing-policy.html">
+<link rel="alternate" hreflang="pt" href="https://guardianagroup.com/pt/politica-assinatura.html">
+<link rel="alternate" hreflang="x-default" href="https://guardianagroup.com/en/code-signing-policy.html">
+<meta property="og:title" content="Política de assinatura de código · GUARDIANA">
+<meta property="og:description" content="Quais arquivos da GUARDIANA e do GUARDIANA ZERO são assinados e com o quê, onde são compilados, quem aprova cada assinatura, a que os programas se conectam e como conferir.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guardianagroup.com/pt/politica-assinatura.html">
+<meta property="og:image" content="https://guardianagroup.com/og-1.1-pt.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="GUARDIANA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Política de assinatura de código · GUARDIANA">
+<meta name="twitter:description" content="Quais arquivos da GUARDIANA e do GUARDIANA ZERO são assinados e com o quê, onde são compilados, quem aprova cada assinatura, a que os programas se conectam e como conferir.">
+<meta name="twitter:image" content="https://guardianagroup.com/og-1.1-pt.png">
+<style>.firma-pol code{overflow-wrap:anywhere}.firma-pol .atribucion{font-size:17px}.firma-pol table.roles th{white-space:normal;vertical-align:top}.firma-pol table.roles th span{display:block;font-weight:400;color:var(--gris);font-size:13px}.firma-pol table.roles td strong{display:block;margin-top:4px}</style>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#F4F6FA">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="referrer" content="no-referrer">
+
+<style>
+@font-face{font-family:'Unbounded';font-weight:500 800;font-display:swap;src:url(/fonts/Unbounded-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-weight:500 800;font-display:swap;src:url(/fonts/Unbounded-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Sans';font-weight:400 600;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Sans';font-weight:400 600;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{--papel:#F4F6FA;--hoja:#FFFFFF;--tinta:#0B1020;--gris:#5B6275;--linea:#D9DEE8;--azul:#1F4BFF;--azul-oscuro:#0F2FB8;--corte:#C0301A;--sello:#0B7F62;--ambar:#8A5A0F}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--papel);color:var(--tinta);font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:900px;margin:0 auto;padding:28px 24px 96px;line-height:1.65;font-size:17px}
+a{color:var(--azul);text-decoration:none}a:hover{color:var(--azul-oscuro)}
+a:focus-visible{outline:3px solid var(--azul);outline-offset:3px}
+p a,li a,td a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(31,75,255,.4)}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:18px 28px;flex-wrap:wrap;max-width:900px;margin:0 auto 36px;padding:22px 24px 18px;border-bottom:1px solid var(--linea)}
+main header.top{max-width:none;margin:0 0 36px;padding:6px 0 18px}
+header.top .brand{display:inline-flex;align-items:center;gap:12px;font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.18em;font-size:14px;color:var(--tinta);white-space:nowrap}
+header.top .brand i{width:20px;height:20px;display:inline-block;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M160.59 69.13 A68 68 0 1 1 130.87 39.41' fill='none' stroke='%230B1020' stroke-width='30'/%3E%3Ccircle cx='100' cy='100' r='31' fill='%231F4BFF'/%3E%3C/svg%3E") center/contain no-repeat}
+header.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;font-weight:500}
+header.top nav a{color:var(--tinta)}header.top nav a:hover{color:var(--azul)}header.top nav a[aria-current=page]{color:var(--azul)}
+header.top .idiomas{margin-left:auto;display:inline-flex;gap:6px}
+header.top .idioma{font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid var(--linea);border-radius:999px;padding:5px 11px;color:var(--gris);letter-spacing:.08em}header.top .idioma:hover{border-color:var(--tinta);color:var(--tinta)}
+header.top .idioma.actual{border-color:var(--azul);color:var(--azul);background:rgba(31,75,255,.06)}
+h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:34px;line-height:1.12;letter-spacing:-.025em;margin:0 0 12px;text-wrap:balance}
+h2{font-family:'Unbounded',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.02em;margin:40px 0 8px;color:var(--tinta);text-wrap:balance}
+h3{font-family:'Unbounded',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;margin:24px 0 6px;color:var(--tinta)}
+p,li{color:#2A3142}
+.k{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin:0 0 20px}
+/* Guía rápida de instalación: los tres sistemas en paralelo, arriba de la página, con las
+   capturas reales. En el móvil se apilan. */
+.pasos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:20px 0 28px}
+.pasos3>div{border:1px solid var(--linea);border-radius:12px;padding:16px 18px;background:var(--hoja)}
+.pasos3 h3{margin:0 0 6px;font-size:15px}
+.pasos3 .sis{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris)}
+.pasos3 ol{margin:8px 0 0;padding-left:20px}
+.pasos3 li{margin:7px 0;font-size:14px;line-height:1.5}
+.pasos3 code{font-size:12.5px;overflow-wrap:anywhere}
+.pasos3 img{width:100%;height:auto;border:1px solid var(--linea);border-radius:8px;margin-top:10px;display:block}
+.pasos3 .ojo{color:var(--corte);font-weight:600}
+@media (max-width:820px){.pasos3{grid-template-columns:1fr}}
+.wrap{overflow-x:auto}table{border-collapse:collapse;margin:12px 0;width:100%;font-size:15px;background:var(--hoja)}th,td{border:1px solid var(--linea);padding:8px 10px;text-align:left;vertical-align:top}th{color:var(--gris);font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--tinta);background:var(--hoja);border:1px solid var(--linea);border-radius:5px;padding:1px 6px;overflow-wrap:anywhere}
+pre{background:var(--hoja);border:1px solid var(--linea);border-radius:8px;padding:12px 14px;overflow-x:auto}pre code{border:0;padding:0;background:none}
+li,p{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.muted{color:var(--gris)}
+.box{border:1.5px solid var(--azul);border-radius:12px;padding:14px 18px;margin:18px 0;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35)}
+.lead{font-size:20px;line-height:1.5;color:var(--tinta)}
+ul{padding-left:22px}li{margin:3px 0}
+/* Una sola tarjeta para todas las listas del sitio —guías y radiografías, en los tres idiomas—:
+   fecha arriba, título, resumen. Antes había dos componentes: ul.rx, con estilo, en español, y
+   .lista, SIN estilo ninguno, en inglés y portugués, donde la lista salía como un muro de texto
+   azul sin separación (visto el 21 sep 2026 al revisar la simetría de la web). */
+.lista{display:grid;gap:14px;margin:22px 0 8px}
+.lista a.rx{display:block;background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:18px 20px;text-decoration:none;color:var(--tinta);transition:border-color .12s ease,box-shadow .12s ease}
+.lista a.rx:hover{border-color:var(--azul);box-shadow:0 18px 34px -28px rgba(31,75,255,.45)}
+.lista a.rx .k{display:block;margin:0 0 7px}
+.lista a.rx b{display:block;font-family:'Unbounded',sans-serif;font-weight:600;font-size:17px;line-height:1.35;letter-spacing:-.01em;color:var(--azul)}
+.lista a.rx:hover b{color:var(--azul-oscuro)}
+.lista a.rx .resumen{display:block;margin-top:7px;color:var(--gris);font-size:15px;line-height:1.55}
+img{max-width:100%;height:auto;border-radius:8px}
+footer.pie{border-top:1px solid var(--linea);margin-top:64px;padding-top:24px;font-size:13px;color:var(--gris);display:grid;gap:14px}
+footer.pie .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}footer.pie .links a{color:var(--gris)}footer.pie .links a:hover{color:var(--tinta)}
+footer.pie .arriba{justify-self:start;color:var(--azul)}
+@media (max-width:600px){main{padding:20px 20px 72px}h1{font-size:27px}header.top nav{gap:12px 16px}}
+.tabla-descargas{overflow-x:auto}.tabla-descargas table{width:100%;border-collapse:collapse;font-size:.9rem}.tabla-descargas td,.tabla-descargas th{padding:.45rem .5rem;border-top:1px solid var(--linea,#ddd);text-align:left;vertical-align:top}code.huella{display:block;word-break:break-all;font-size:.75rem}@media (max-width:640px){.tabla-descargas thead{display:none}.tabla-descargas tr{display:block;border-top:1px solid var(--linea,#ddd);padding:.6rem 0}.tabla-descargas td{display:block;border:0;padding:.15rem 0}.tabla-descargas td:first-child{font-weight:600}.tabla-descargas td[data-l]::before{content:attr(data-l);display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gris,#5B6275)}}
+.lema-marca{display:flex;flex-direction:column;gap:3px;line-height:1}.lema-marca small{font-family:'IBM Plex Sans',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--gris)}
+header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;border-radius:999px;padding:6px 15px;background:var(--azul);color:#fff;font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap}header.top .idiomas+.descargar{margin-left:0}header.top .descargar:hover{background:var(--azul-oscuro);color:#fff}.box.cierre{margin-top:40px}.box.cierre p{margin:0}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://guardianagroup.com/pt/politica-assinatura.html#page","name":"Política de assinatura de código","description":"Quais arquivos da GUARDIANA e do GUARDIANA ZERO são assinados e com o quê, onde são compilados, quem aprova cada assinatura, a que os programas se conectam e como conferir.","url":"https://guardianagroup.com/pt/politica-assinatura.html","inLanguage":"pt","dateModified":"2026-10-10","publisher":{"@id":"https://guardianagroup.com/#org"}}]}</script>
+</head>
+<body><header class="top"><a class="brand" href="/pt/" aria-label="GUARDIANA, início"><i></i><span class="lema-marca">GUARDIANA<small>Seus dados, sob o seu controle</small></span></a><nav aria-label="Seções"><a href="/pt/">Início</a><a href="/pt/#planes">Planos</a><a href="/pt/guias/">Guias</a><a href="/pt/radiografias/">Radiografias</a><a href="/pt/o-negocio-dos-seus-dados.html">O negócio dos seus dados</a><a href="/pt/privacidade.html">Privacidade</a><a href="/pt/termos.html">Termos e reembolsos</a><a href="/pt/contato.html">Contato</a></nav><span class="idiomas"><a class="idioma" href="/politica-firma.html" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><a class="idioma" href="/en/code-signing-policy.html" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><span class="idioma actual" lang="pt" aria-current="true">PT</span></span><a class="descargar" href="/pt/instalar.html#baixar">Baixar</a></header><main id="arriba">
+<div class="firma-pol">
+<p class="k">POLÍTICA DE ASSINATURA DE CÓDIGO · 10 DE OUTUBRO DE 2026</p>
+<h1>Política de assinatura de código</h1>
+<p class="lead">O que assinamos e com o quê, onde é compilado, quem aprova cada assinatura, a que os programas se conectam e como você pode conferir tudo isso sem precisar confiar na gente.</p>
+<h2 id="como">Como se assina hoje</h2>
+<p>Cada arquivo que publicamos leva três provas de que é nosso e de que ninguém o alterou no caminho:</p>
+<ul>
+<li><strong>Uma assinatura minisign</strong> ao lado de cada arquivo (<code>.minisig</code>), feita com a nossa chave. A chave pública está no repositório, em <code>build/pubkey/minisign.pub</code>, desde antes do primeiro download, e vai também dentro do programa: <code>RWS+xz+N6DvnuDlJCAIOUEku8PLZ9pP1cUaoQnusfduLWpVIVmPXM16r</code> (identificador <code>B8E73BE88D3FC7BE</code>).</li>
+<li><strong>A sua impressão digital SHA-256 no registro público</strong>, <a href="https://github.com/guardianagroup/guardiana/blob/main/ledger.jsonl"><code>ledger.jsonl</code></a>, no repositório do GitHub, junto do commit do código de onde saiu. É anotada antes de o download existir.</li>
+<li><strong>Essa anotação, assinada e carimbada no Rekor</strong>, o registro público de transparência do Sigstore: prova a data, e ninguém pode reescrevê-la depois.</li>
+</ul>
+<p>O que os programas para Windows <strong>não</strong> levam hoje é assinatura de editor (Authenticode), a que o Windows lê: por isso, ao abri-los, o Windows diz «Editor desconhecido» ou «O Windows protegeu o computador». A <a href="/pt/instalar.html">página de instalação</a> explica por que isso acontece, o que fazer e como conferir o arquivo antes de abrir. O aplicativo para macOS também não é notarizado pela Apple, e a mesma página explica o aviso do macOS.</p>
+<h2 id="que">O que é assinado</h2>
+<p>Só o que nós fazemos, a partir do código do nosso repositório: os arquivos publicados em guardianagroup.com/descargas.</p>
+<ul>
+<li><strong>GUARDIANA</strong>: os instaladores para Windows (<code>.msi</code>, em espanhol, inglês e português), o pacote para Debian e Ubuntu (<code>.deb</code>), o arquivo para outros Linux (<code>.tar.gz</code>) e o aplicativo para macOS (<code>.app.zip</code>). Estão na <a href="/pt/instalar.html#baixar">página de instalação</a>.</li>
+<li><strong>GUARDIANA ZERO</strong>, o navegador: o programa para Windows (<code>.exe</code>) e os seus instaladores (<code>.msi</code>, em espanhol, inglês e português). Estão na <a href="/pt/zero.html#descargar">página dele</a>.</li>
+</ul>
+<p>Não assinamos programas de outras pessoas nem arquivos que não saiam deste repositório.</p>
+<h2 id="donde">Onde é compilado</h2>
+<ul>
+<li>Tudo é compilado no <strong>GitHub Actions</strong>, em máquinas que o GitHub empresta e que não são nossas, a partir do código público de <a href="https://github.com/guardianagroup/guardiana">github.com/guardianagroup/guardiana</a>, com licença GPL-3.0 ou posterior. A GUARDIANA, no fluxo <code>candidato.yml</code> (Windows, Linux e um Mac); o GUARDIANA ZERO, no <code>zero.yml</code> (Windows). As mesmas execuções instalam e testam os arquivos numa máquina limpa antes de eles serem assinados.</li>
+<li>A chave privada do minisign nunca fica no GitHub nem na integração contínua. A assinatura é feita depois, no computador do responsável, sobre os arquivos exatos que saíram do GitHub Actions: antes de assinar, as impressões digitais são conferidas com a lista (<code>SHA256SUMS</code>) que o GitHub imprimiu.</li>
+<li><strong>Compilação reprodutível, onde existe.</strong> Os binários da GUARDIANA para Windows e Linux saem do <code>build/repro.sh</code>, com um contêiner fixado pela sua impressão digital: qualquer pessoa pode repetir a compilação e obter a mesma impressão digital, e o <code>repro.yml</code> faz isso no GitHub. Os pacotes (<code>.msi</code>, <code>.deb</code>, <code>.tar.gz</code>, o aplicativo para macOS) e o GUARDIANA ZERO ainda não são reprodutíveis; o registro público diz isso arquivo por arquivo (<code>"reproducible": true</code> ou <code>false</code>).</li>
+</ul>
+<h2 id="roles">Quem faz o quê</h2>
+<p>Hoje a GUARDIANA é obra de uma única pessoa. Os três papéis que uma política de assinatura pede ficam com o mesmo responsável:</p>
+<table class="roles">
+<tbody>
+<tr><th>Autores<span lang="en">Authors</span></th><td>Alteram o código sem revisão de outra pessoa.<strong>Francisco Salvatierra Sánchez</strong></td></tr>
+<tr><th>Revisores<span lang="en">Reviewers</span></th><td>Revisam as alterações que alguém de fora propõe antes de elas entrarem.<strong>Francisco Salvatierra Sánchez</strong></td></tr>
+<tr><th>Aprovadores<span lang="en">Approvers</span></th><td>Aprovam cada assinatura, uma a uma, à mão.<strong>Francisco Salvatierra Sánchez</strong></td></tr>
+</tbody>
+</table>
+<p>Francisco Salvatierra Sánchez é o responsável pela GUARDIANA GROUP, em nome próprio: GUARDIANA GROUP é a marca e o domínio, e ainda não há empresa registrada (<a href="/pt/contato.html">contato</a>). Repositório: <a href="https://github.com/guardianagroup/guardiana">github.com/guardianagroup/guardiana</a>; conta no GitHub: <a href="https://github.com/guardianagroup">github.com/guardianagroup</a>.</p>
+<p class="muted">Boa parte do código é escrita pelo Claude, um assistente de programação com inteligência artificial da Anthropic, em sessões que o responsável abre e dirige; no histórico do repositório essas alterações aparecem com o autor «Claude». Ele não tem papel próprio nesta política: não aprova assinaturas, e cada assinatura é feita pelo responsável, com a senha dele.</p>
+<h2 id="privacidad">Privacidade</h2>
+<p>A <a href="/pt/privacidade.html">política de privacidade</a> conta isso em detalhe. Em resumo: os programas não enviam informação a nenhum sistema em rede, a não ser o que pede a pessoa que os instala ou usa. Não há telemetria, nem conta, nem servidor nosso. Estas são todas as conexões deles, com o nome de cada uma:</p>
+<ul>
+<li><strong>Ativar a licença</strong> (GUARDIANA e GUARDIANA ZERO): uma conexão com a Dodo Payments, o gateway de pagamento (<code>live.dodopayments.com</code>), quando você digita a sua chave.</li>
+<li><strong>Verificar a licença</strong>: com o mesmo gateway, 8 dias depois de ativá-la e então uma vez por período de pagamento (a cada 30 dias com a licença Fundador); se não der, tenta de novo a cada hora. Você aceita isso ao assinar: não precisa apertar nada a cada vez.</li>
+<li><strong>Procurar atualização</strong> (só o GUARDIANA ZERO, e só se você apertar o botão): lê uma vez o registro público, <code>ledger.jsonl</code>, no GitHub (<code>raw.githubusercontent.com</code>). A GUARDIANA não procura atualizações: não tem essa função.</li>
+<li><strong>O que o programa faz por você</strong>: a GUARDIANA, como guardiã de DNS, repassa as consultas de nomes do seu computador (e, com o Modo Casa, as do seu Wi‑Fi) ao servidor DNS que você já usava; o GUARDIANA ZERO abre as páginas que você abre. É para isso que eles são instalados.</li>
+</ul>
+<p>Cada conexão da licença e de «Procurar atualização» fica anotada no programa, com a data e o destino. As listas de bloqueio vão dentro do programa e são renovadas a cada versão: nenhum dos dois as baixa por conta própria. O motor web do GUARDIANA ZERO, o WebView2 da Microsoft, é atualizado pelo Windows, não pelo ZERO; se ele faltar no Windows, o ZERO avisa e abre no seu navegador a página da Microsoft para baixá-lo.</p>
+<p class="muted">As empresas envolvidas têm a sua própria política de privacidade: <a href="https://dodopayments.com/privacy-policy">Dodo Payments</a> (a licença), <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub</a> (só se você procurar atualização) e <a href="https://www.microsoft.com/privacy/privacystatement">Microsoft</a> (o motor WebView2 do GUARDIANA ZERO).</p>
+<h2 id="comprobar">Como conferir você mesmo</h2>
+<p>Não é preciso confiar na gente. A <a href="/pt/instalar.html#firma">página de instalação</a> explica, com os comandos exatos, como tirar a impressão digital de um arquivo, compará-la com o registro público e conferir a assinatura minisign; o GUARDIANA ZERO é conferido do mesmo jeito, com a <a href="/pt/zero.html#descargar">tabela de downloads dele</a>. Depois de instalado, o <code>guardiana verify</code> repete a verificação no seu próprio computador.</p>
+<p class="muted" style="margin-top:28px">Se algo nesta página deixar de ser verdade, é corrigido aqui, com data. Para avisar de uma falha de segurança: <a href="/.well-known/security.txt">security.txt</a>; para todo o resto, <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a>.</p>
+</div>
+<footer class="pie"><div class="links"><a href="/pt/">Início</a><a href="/pt/instalar.html">Instalar</a><a href="/pt/#planes">Planos</a><a href="/pt/guias/">Guias</a><a href="/pt/radiografias/">Radiografias</a><a href="/pt/o-negocio-dos-seus-dados.html">O negócio dos seus dados</a><a href="/pt/privacidade.html">Privacidade</a><a href="/pt/termos.html">Termos e reembolsos</a><a href="/pt/politica-assinatura.html">Política de assinatura de código</a><a href="/pt/contato.html">Contato</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div><div>GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, 18º andar, Bocagrande, Cartagena das Índias, Colômbia · Esta página não usa cookies nem analytics.</div><a class="arriba" href="#arriba">Voltar ao topo ↑</a></footer></main><script>(function(){try{var K='guardiana-idioma',a=document.querySelectorAll('a[data-idioma]');for(var i=0;i<a.length;i++)a[i].addEventListener('click',function(){try{localStorage.setItem(K,this.getAttribute('data-idioma'))}catch(e){}});}catch(e){}})();</script></body></html>
