@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comprobar un recibo · GUARDIANA</title>
+<meta name="description" content="Comprueba en tu propio navegador que un recibo de GUARDIANA ZERO no se cambió después de firmarse. El archivo no sale de tu equipo.">
+<link rel="canonical" href="https://guardianagroup.com/verificar.html">
+<meta name="robots" content="index,follow">
+<link rel="alternate" hreflang="es" href="https://guardianagroup.com/verificar.html">
+<link rel="alternate" hreflang="en" href="https://guardianagroup.com/en/verify.html">
+<link rel="alternate" hreflang="pt" href="https://guardianagroup.com/pt/verificar.html">
+<link rel="alternate" hreflang="x-default" href="https://guardianagroup.com/en/verify.html">
+<meta property="og:title" content="Comprobar un recibo · GUARDIANA">
+<meta property="og:description" content="Comprueba en tu propio navegador que un recibo de GUARDIANA ZERO no se cambió después de firmarse. El archivo no sale de tu equipo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guardianagroup.com/verificar.html">
+<meta property="og:image" content="https://guardianagroup.com/og-1.1-es.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="GUARDIANA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacidad · GUARDIANA">
+<meta name="twitter:description" content="Qué datos trata GUARDIANA: ninguno en nuestros servidores, porque no los hay. Qué queda en tu equipo, qué sale y cuándo, y cómo comprobarlo.">
+<meta name="twitter:image" content="https://guardianagroup.com/og-1.1-es.png">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#F4F6FA">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="referrer" content="no-referrer">
+
+<style>
+@font-face{font-family:'Unbounded';font-weight:500 800;font-display:swap;src:url(/fonts/Unbounded-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-weight:500 800;font-display:swap;src:url(/fonts/Unbounded-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Sans';font-weight:400 600;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Sans';font-weight:400 600;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{--papel:#F4F6FA;--hoja:#FFFFFF;--tinta:#0B1020;--gris:#5B6275;--linea:#D9DEE8;--azul:#1F4BFF;--azul-oscuro:#0F2FB8;--corte:#C0301A;--sello:#0B7F62;--ambar:#8A5A0F}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--papel);color:var(--tinta);font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:900px;margin:0 auto;padding:28px 24px 96px;line-height:1.65;font-size:17px}
+a{color:var(--azul);text-decoration:none}a:hover{color:var(--azul-oscuro)}
+a:focus-visible{outline:3px solid var(--azul);outline-offset:3px}
+p a,li a,td a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(31,75,255,.4)}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:18px 28px;flex-wrap:wrap;max-width:900px;margin:0 auto 36px;padding:22px 24px 18px;border-bottom:1px solid var(--linea)}
+main header.top{max-width:none;margin:0 0 36px;padding:6px 0 18px}
+header.top .brand{display:inline-flex;align-items:center;gap:12px;font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.18em;font-size:14px;color:var(--tinta);white-space:nowrap}
+header.top .brand i{width:20px;height:20px;display:inline-block;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M160.59 69.13 A68 68 0 1 1 130.87 39.41' fill='none' stroke='%230B1020' stroke-width='30'/%3E%3Ccircle cx='100' cy='100' r='31' fill='%231F4BFF'/%3E%3C/svg%3E") center/contain no-repeat}
+header.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;font-weight:500}
+header.top nav a{color:var(--tinta)}header.top nav a:hover{color:var(--azul)}header.top nav a[aria-current=page]{color:var(--azul)}
+header.top .idiomas{margin-left:auto;display:inline-flex;gap:6px}
+header.top .idioma{font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid var(--linea);border-radius:999px;padding:5px 11px;color:var(--gris);letter-spacing:.08em}header.top .idioma:hover{border-color:var(--tinta);color:var(--tinta)}
+header.top .idioma.actual{border-color:var(--azul);color:var(--azul);background:rgba(31,75,255,.06)}
+h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:34px;line-height:1.12;letter-spacing:-.025em;margin:0 0 12px;text-wrap:balance}
+h2{font-family:'Unbounded',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.02em;margin:40px 0 8px;color:var(--tinta);text-wrap:balance}
+h3{font-family:'Unbounded',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;margin:24px 0 6px;color:var(--tinta)}
+p,li{color:#2A3142}
+.k{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin:0 0 20px}
+/* Guía rápida de instalación: los tres sistemas en paralelo, arriba de la página, con las
+   capturas reales. En el móvil se apilan. */
+.pasos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:20px 0 28px}
+.pasos3>div{border:1px solid var(--linea);border-radius:12px;padding:16px 18px;background:var(--hoja)}
+.pasos3 h3{margin:0 0 6px;font-size:15px}
+.pasos3 .sis{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris)}
+.pasos3 ol{margin:8px 0 0;padding-left:20px}
+.pasos3 li{margin:7px 0;font-size:14px;line-height:1.5}
+.pasos3 code{font-size:12.5px;overflow-wrap:anywhere}
+.pasos3 img{width:100%;height:auto;border:1px solid var(--linea);border-radius:8px;margin-top:10px;display:block}
+.pasos3 .ojo{color:var(--corte);font-weight:600}
+@media (max-width:820px){.pasos3{grid-template-columns:1fr}}
+.wrap{overflow-x:auto}table{border-collapse:collapse;margin:12px 0;width:100%;font-size:15px;background:var(--hoja)}th,td{border:1px solid var(--linea);padding:8px 10px;text-align:left;vertical-align:top}th{color:var(--gris);font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--tinta);background:var(--hoja);border:1px solid var(--linea);border-radius:5px;padding:1px 6px;overflow-wrap:anywhere}
+pre{background:var(--hoja);border:1px solid var(--linea);border-radius:8px;padding:12px 14px;overflow-x:auto}pre code{border:0;padding:0;background:none}
+li,p{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.muted{color:var(--gris)}
+.box{border:1.5px solid var(--azul);border-radius:12px;padding:14px 18px;margin:18px 0;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35)}
+.lead{font-size:20px;line-height:1.5;color:var(--tinta)}
+ul{padding-left:22px}li{margin:3px 0}
+/* Una sola tarjeta para todas las listas del sitio —guías y radiografías, en los tres idiomas—:
+   fecha arriba, título, resumen. Antes había dos componentes: ul.rx, con estilo, en español, y
+   .lista, SIN estilo ninguno, en inglés y portugués, donde la lista salía como un muro de texto
+   azul sin separación (visto el 21 sep 2026 al revisar la simetría de la web). */
+.lista{display:grid;gap:14px;margin:22px 0 8px}
+.lista a.rx{display:block;background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:18px 20px;text-decoration:none;color:var(--tinta);transition:border-color .12s ease,box-shadow .12s ease}
+.lista a.rx:hover{border-color:var(--azul);box-shadow:0 18px 34px -28px rgba(31,75,255,.45)}
+.lista a.rx .k{display:block;margin:0 0 7px}
+.lista a.rx b{display:block;font-family:'Unbounded',sans-serif;font-weight:600;font-size:17px;line-height:1.35;letter-spacing:-.01em;color:var(--azul)}
+.lista a.rx:hover b{color:var(--azul-oscuro)}
+.lista a.rx .resumen{display:block;margin-top:7px;color:var(--gris);font-size:15px;line-height:1.55}
+img{max-width:100%;height:auto;border-radius:8px}
+footer.pie{border-top:1px solid var(--linea);margin-top:64px;padding-top:24px;font-size:13px;color:var(--gris);display:grid;gap:14px}
+footer.pie .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}footer.pie .links a{color:var(--gris)}footer.pie .links a:hover{color:var(--tinta)}
+footer.pie .arriba{justify-self:start;color:var(--azul)}
+@media (max-width:600px){main{padding:20px 20px 72px}h1{font-size:27px}header.top nav{gap:12px 16px}}
+.lema-marca{display:flex;flex-direction:column;gap:3px;line-height:1}.lema-marca small{font-family:'IBM Plex Sans',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--gris)}
+header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;border-radius:999px;padding:6px 15px;background:var(--azul);color:#fff;font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap}header.top .idiomas+.descargar{margin-left:0}header.top .descargar:hover{background:var(--azul-oscuro);color:#fff}.box.cierre{margin-top:40px}.box.cierre p{margin:0}.verif{display:grid;gap:14px;margin:26px 0}
+.verif input[type=file]{font:inherit;max-width:100%}.verif label.elegir{font-weight:600}
+.verif textarea{width:100%;min-height:120px;font:13px/1.45 'IBM Plex Mono',monospace;border:1px solid var(--linea);border-radius:10px;padding:10px 12px;background:#fff;color:var(--tinta)}
+.verif button{justify-self:start;border:0;border-radius:999px;padding:10px 20px;background:var(--azul);color:#fff;font:600 15px 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer}
+.verif button:hover{background:var(--azul-oscuro)}
+.resultado{border-radius:12px;padding:16px 18px;margin-top:8px;font-weight:600}
+.resultado.ok{background:#E2F4EE;color:#0B6B4F}.resultado.mal{background:#FBE7E3;color:#B3261E}
+.huella{font:600 15px 'IBM Plex Mono',monospace;letter-spacing:.04em}
+pre.firmado{white-space:pre-wrap;word-break:break-word;font:12px/1.5 'IBM Plex Mono',monospace;background:#F4F6FA;border-radius:10px;padding:12px 14px;max-height:420px;overflow:auto}
+dl.resumen{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;margin:10px 0}dl.resumen dt{color:var(--gris)}dl.resumen dd{margin:0}
+.oculto{display:none}</style></head><body><main id="arriba"><header class="top"><a class="brand" href="/es/" aria-label="GUARDIANA, portada"><i></i><span class="lema-marca">GUARDIANA<small>Tus datos, bajo tu control</small></span></a><nav aria-label="Secciones"><a href="/es/">Inicio</a><a href="/es/#planes">Planes</a><a href="/guias/">Guías</a><a href="/radiografias/">Radiografías</a><a href="/negocio-de-tus-datos.html">El negocio de tus datos</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="/contacto.html">Contacto</a></nav><span class="idiomas"><span class="idioma actual" lang="es" aria-current="true">ES</span><a class="idioma" href="/en/verify.html" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><a class="idioma" href="/pt/verificar.html" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span><a class="descargar" href="/instalar.html#descargar">Descargar</a></header><h1>Comprobar un recibo</h1>
+<p class="lead">GUARDIANA ZERO firma sus recibos con una clave que crea tu propio navegador: el recibo de una tarea para una IA y el recibo de privacidad de lo que se cortó. Elige el archivo y esta página comprueba la firma aquí mismo, con el sistema criptográfico de tu navegador. El archivo no se envía a ningún sitio: la comprobación no hace ninguna conexión.</p>
+<div class="verif"><label class="elegir" for="archivo">Elegir el recibo (.json)</label><input type="file" id="archivo" accept=".json,application/json">
+<textarea id="pegado" spellcheck="false" placeholder="o pega aquí su contenido"></textarea>
+<button type="button" id="boton">Comprobar</button></div>
+<div id="salida" class="oculto" role="status" aria-live="polite"></div>
+<p class="muted">Qué prueba una firma, y nada más: que este archivo no se cambió después de que ese navegador lo escribiera. No prueba que lo que cuenta sea completo: el propio recibo dice lo que no puede ver.</p><footer class="pie"><div class="links"><a href="/es/">Inicio</a><a href="/instalar.html">Instalar</a><a href="/es/#planes">Planes</a><a href="/guias/">Guías</a><a href="/radiografias/">Radiografías</a><a href="/negocio-de-tus-datos.html">El negocio de tus datos</a><a href="/privacidad.html">Privacidad</a><a href="/terminos.html">Términos y reembolsos</a><a href="/politica-firma.html">Política de firma de código</a><a href="/contacto.html">Contacto</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div>  <div class="links redes"><span style="color:var(--tinta,inherit)">Síguenos</span><a href="https://www.instagram.com/guardianagroup/" rel="me noopener" target="_blank">Instagram</a><a href="https://www.tiktok.com/@guardianagroup" rel="me noopener" target="_blank">TikTok</a><a href="https://www.youtube.com/channel/UCsaw2KAcd6-_a58l2CNAxmg" rel="me noopener" target="_blank">YouTube</a><a href="https://www.facebook.com/profile.php?id=61594367606199" rel="me noopener" target="_blank">Facebook</a><a href="https://x.com/guardianagroup" rel="me noopener" target="_blank">X</a><a href="https://www.threads.com/@guardianagroup" rel="me noopener" target="_blank">Threads</a></div>
+<div>GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, piso 18, Bocagrande, Cartagena de Indias, Colombia · Esta página no usa cookies ni analíticas.</div><a class="arriba" href="#arriba">Volver arriba ↑</a></footer></main><script>(function(){
+var T={"titulo": "Comprobar un recibo · GUARDIANA", "desc": "Comprueba en tu propio navegador que un recibo de GUARDIANA ZERO no se cambió después de firmarse. El archivo no sale de tu equipo.", "h1": "Comprobar un recibo", "intro": "GUARDIANA ZERO firma sus recibos con una clave que crea tu propio navegador: el recibo de una tarea para una IA y el recibo de privacidad de lo que se cortó. Elige el archivo y esta página comprueba la firma aquí mismo, con el sistema criptográfico de tu navegador. El archivo no se envía a ningún sitio: la comprobación no hace ninguna conexión.", "elegir": "Elegir el recibo (.json)", "o_pegar": "o pega aquí su contenido", "comprobar": "Comprobar", "ok": "La firma es correcta: el recibo no se cambió después de que GUARDIANA ZERO lo escribiera.", "mal": "La firma NO coincide: el recibo se cambió después de firmarse, o no es un recibo de GUARDIANA ZERO.", "noleo": "No es un recibo que esta página sepa leer (falta «contenido», «clave» o «firma»).", "sinwc": "Este navegador no puede comprobar firmas ECDSA P-256 (WebCrypto). Prueba con uno actual.", "huella": "Huella de la clave que lo firmó", "huella_nota": "Compárala con la que GUARDIANA ZERO enseña en Ajustes de ese equipo: si coinciden, el recibo lo firmó ese navegador.", "que": "Qué dice el recibo", "tipo_priv": "Recibo de privacidad", "tipo_mand": "Recibo de una tarea para una IA", "tipo_otro": "Recibo", "version": "Versión de GUARDIANA ZERO", "periodo": "Periodo", "cortes": "Peticiones cortadas antes de salir", "empresas": "Empresas", "no_obs": "Lo que no observa", "contenido": "Contenido firmado, tal cual", "prueba": "Qué prueba una firma, y nada más: que este archivo no se cambió después de que ese navegador lo escribiera. No prueba que lo que cuenta sea completo: el propio recibo dice lo que no puede ver."};
+function $(i){return document.getElementById(i)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function b64(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
+async function huella(clave){var h=new Uint8Array(await crypto.subtle.digest('SHA-256',clave));var x='';for(var i=0;i<16;i++)x+=('0'+h[i].toString(16)).slice(-2).toUpperCase();return x.match(/.{4}/g).join(' ')}
+function resumen(c){
+  var tipo=c.tipo==='recibo_de_privacidad'?T.tipo_priv:(c.mandato?T.tipo_mand:T.tipo_otro);
+  var h='<h3>'+esc(tipo)+'</h3><dl class="resumen">';
+  if(c.version)h+='<dt>'+esc(T.version)+'</dt><dd>'+esc(c.version)+'</dd>';
+  if(c.desde)h+='<dt>'+esc(T.periodo)+'</dt><dd>'+esc(c.desde)+(c.hasta&&c.hasta!==c.desde?' → '+esc(c.hasta):'')+'</dd>';
+  if(Array.isArray(c.cortes)){
+    var em={};c.cortes.forEach(function(x){if(x&&x.empresa)em[x.empresa]=(em[x.empresa]||0)+1});
+    var l=Object.keys(em).sort(function(a,b){return em[b]-em[a]});
+    h+='<dt>'+esc(T.cortes)+'</dt><dd>'+c.cortes.length+'</dd>';
+    if(l.length)h+='<dt>'+esc(T.empresas)+'</dt><dd>'+l.slice(0,30).map(function(k){return esc(k)+' ('+em[k]+')'}).join(', ')+(l.length>30?' …':'')+'</dd>';
+  }
+  if(c.cobertura&&Array.isArray(c.cobertura.no_observado))h+='<dt>'+esc(T.no_obs)+'</dt><dd>'+c.cobertura.no_observado.map(function(s){return esc(String(s).replace(/_/g,' '))}).join(' · ')+'</dd>';
+  h+='</dl>';
+  if(c.cobertura&&c.cobertura.nota)h+='<p class="muted">'+esc(c.cobertura.nota)+'</p>';
+  return h}
+async function comprueba(texto){
+  var out=$('salida');out.classList.remove('oculto');
+  var r;try{r=JSON.parse(texto)}catch(e){r=null}
+  if(!r||typeof r.contenido!=='string'||typeof r.clave!=='string'||typeof r.firma!=='string'){out.innerHTML='<div class="resultado mal">'+esc(T.noleo)+'</div>';return}
+  if(!(window.crypto&&crypto.subtle)){out.innerHTML='<div class="resultado mal">'+esc(T.sinwc)+'</div>';return}
+  var bien=false,hu='';
+  try{
+    var clave=b64(r.clave),firma=b64(r.firma);
+    var k=await crypto.subtle.importKey('raw',clave,{name:'ECDSA',namedCurve:'P-256'},false,['verify']);
+    bien=r.algoritmo==='ECDSA-P256-SHA256'&&await crypto.subtle.verify({name:'ECDSA',hash:'SHA-256'},k,firma,new TextEncoder().encode(r.contenido));
+    hu=await huella(clave);
+  }catch(e){bien=false}
+  var c=null;try{c=JSON.parse(r.contenido)}catch(e){}
+  out.innerHTML='<div class="resultado '+(bien?'ok':'mal')+'">'+esc(bien?T.ok:T.mal)+'</div>'
+    +(hu?'<p>'+esc(T.huella)+': <span class="huella">'+esc(hu)+'</span><br><span class="muted">'+esc(T.huella_nota)+'</span></p>':'')
+    +(bien&&c?'<h2>'+esc(T.que)+'</h2>'+resumen(c):'')
+    +'<details><summary>'+esc(T.contenido)+'</summary><pre class="firmado">'+esc(c?JSON.stringify(c,null,2):r.contenido)+'</pre></details>';
+}
+$('archivo').addEventListener('change',function(){var f=this.files&&this.files[0];if(!f)return;var fr=new FileReader();fr.onload=function(){$('pegado').value=String(fr.result||'');comprueba($('pegado').value)};fr.readAsText(f)});
+$('boton').addEventListener('click',function(){comprueba($('pegado').value)});
+})();</script><script>(function(){try{var K='guardiana-idioma',a=document.querySelectorAll('a[data-idioma]');for(var i=0;i<a.length;i++)a[i].addEventListener('click',function(){try{localStorage.setItem(K,this.getAttribute('data-idioma'))}catch(e){}});}catch(e){}})();</script></body></html>
