@@ -1,323 +1,100 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="referrer" content="no-referrer">
-<title>GUARDIANA inside: your data, live, on the globe</title>
-<meta name="description" content="Interactive demo: what your antivirus, your browser and your programs send to each country and each company, and what GUARDIANA cuts, on the Earth lit by the sun of this very moment.">
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GUARDIANA inside: your real connections, on the map</title>
+<meta name="description" content="On your computer, GUARDIANA draws who each program connects to, how much it sends and to which country, with a real measurement every 10 seconds. No invented data.">
 <link rel="canonical" href="https://guardianagroup.com/en/inside.html">
+<meta name="robots" content="index,follow">
 <link rel="alternate" hreflang="es" href="https://guardianagroup.com/es/por-dentro.html">
 <link rel="alternate" hreflang="en" href="https://guardianagroup.com/en/inside.html">
 <link rel="alternate" hreflang="pt" href="https://guardianagroup.com/pt/por-dentro.html">
 <link rel="alternate" hreflang="x-default" href="https://guardianagroup.com/en/inside.html">
+<meta property="og:title" content="GUARDIANA inside: your real connections, on the map">
+<meta property="og:description" content="On your computer, GUARDIANA draws who each program connects to, how much it sends and to which country, with a real measurement every 10 seconds. No invented data.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guardianagroup.com/en/inside.html">
+<meta property="og:image" content="https://guardianagroup.com/og-1.1-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="GUARDIANA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GUARDIANA inside: your real connections, on the map">
+<meta name="twitter:description" content="On your computer, GUARDIANA draws who each program connects to, how much it sends and to which country, with a real measurement every 10 seconds. No invented data.">
+<meta name="twitter:image" content="https://guardianagroup.com/og-1.1-en.png">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
-<link rel="icon" href="/favicon.ico">
+<meta name="theme-color" content="#F4F6FA">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="referrer" content="no-referrer">
+
 <style>
-@font-face{font-family:'Unbounded';font-weight:500 800;font-display:swap;src:url(/fonts/Unbounded-latin.woff2) format('woff2')}
-@font-face{font-family:'IBM Plex Sans';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin.woff2) format('woff2')}
-@font-face{font-family:'IBM Plex Sans';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexSans-500-latin.woff2) format('woff2')}
-@font-face{font-family:'IBM Plex Sans';font-weight:600;font-display:swap;src:url(/fonts/IBMPlexSans-600-latin.woff2) format('woff2')}
-@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin.woff2) format('woff2')}
-@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin.woff2) format('woff2')}
+@font-face{font-family:'Unbounded';font-weight:500 800;font-display:swap;src:url(/fonts/Unbounded-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-weight:500 800;font-display:swap;src:url(/fonts/Unbounded-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Sans';font-weight:400 600;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Sans';font-weight:400 600;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{--papel:#F4F6FA;--hoja:#FFFFFF;--tinta:#0B1020;--gris:#5B6275;--linea:#D9DEE8;--azul:#1F4BFF;--azul-oscuro:#0F2FB8;--corte:#C0301A;--sello:#0B7F62;--ambar:#8A5A0F}
 *{box-sizing:border-box}
-.universo .btn-web{border-color:var(--shield);color:var(--shield);text-decoration:none;display:inline-block}
-.universo .aviso-web{position:absolute;left:50%;bottom:52px;transform:translateX(-50%);z-index:3;font:12px/1.5 'IBM Plex Sans',system-ui,sans-serif;color:var(--hud-muted);background:rgba(6,12,22,.85);border:1px solid var(--hud-line);border-radius:8px;padding:6px 12px;max-width:min(640px,92%);text-align:center;pointer-events:none;animation:aviso-fuera .8s ease 20s forwards}
-@keyframes aviso-fuera{to{opacity:0;visibility:hidden}}
-@media (max-width:900px){.universo .aviso-web{display:none}}
-/* «GUARDIANA por dentro» (1.0.22): everything under body.universo, so no other page changes. */
-/* «GUARDIANA por dentro»: the universe takes the whole window and is dark on purpose, in the day
-   theme too. The panel's own pages keep their light and night themes. */
-body.universo { margin: 0; background: #04070d; color: #d3e6f3; overflow: hidden; }
-
-.universo { --hud: #08101b; --hud-line: #172638; --hud-fg: #d3e6f3; --hud-muted: #7690a8; --shield: #3fe0c5; --out: #ffb547; --in: #6fb6ff; --cut: #ff6b7a; --undoc: #ffd166; }
-
-.universo #no-session { position: fixed; top: 60px; left: 50%; transform: translateX(-50%); z-index: 60; max-width: 560px; }
-
-.universo .stage { position: fixed; inset: 0; display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: minmax(0, 1fr); background: #04070d; color: var(--hud-fg); font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
-
-.universo .barra { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 10px 14px; border-bottom: 1px solid var(--hud-line); background: rgba(8,16,27,.9); position: relative; z-index: 3; }
-
-.universo .marca { font-family: 'Unbounded', 'Segoe UI', system-ui, sans-serif; font-size: 13px; letter-spacing: .04em; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
-
-.universo .marca a { color: var(--hud-muted); text-decoration: none; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; border: 1px solid var(--hud-line); border-radius: 6px; padding: 4px 8px; }
-
-.universo .marca a:hover { color: var(--hud-fg); }
-
-.universo .chip-modo { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; border: 1px solid var(--undoc); color: var(--undoc); border-radius: 4px; padding: 1px 6px; }
-
-.universo .chip-modo.off { border-color: var(--cut); color: var(--cut); }
-
-.universo .pestanas { display: flex; gap: 4px; flex-wrap: wrap; }
-
-.universo .pestanas button, .universo .btn-hud { appearance: none; background: transparent; color: var(--hud-muted); border: 1px solid var(--hud-line); border-radius: 6px; padding: 5px 10px; font: 500 12.5px 'IBM Plex Mono', ui-monospace, monospace; cursor: pointer; }
-
-.universo .btn-hud { color: var(--hud-fg); font-size: 12px; }
-
-.universo .pestanas button[aria-pressed="true"] { color: #04070d; background: var(--shield); border-color: var(--shield); }
-
-/* The tab's key on a keyboard, before its name. */
-.universo .pestanas .tecla { opacity: .6; margin-right: 7px; }
-
-/* Without the Fullscreen API (an iPhone), «Pantalla completa» leaves the picture alone with the bar. */
-.universo .stage.full .hud { display: none; }
-
-.universo .btn-hud.peligro { border-color: var(--cut); color: var(--cut); }
-
-.universo .btn-hud.peligro[aria-pressed="true"] { background: var(--cut); color: #04070d; }
-
-.universo .btn-hud[aria-pressed="true"]:not(.peligro) { border-color: var(--shield); color: var(--shield); }
-
-.universo .stage button:focus-visible, .universo .stage select:focus-visible, .universo .marca a:focus-visible { outline: 2px solid var(--shield); outline-offset: 2px; }
-
-.universo .controles { margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-
-.universo .lienzo { position: relative; min-height: 0; }
-
-.universo .lienzo canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; touch-action: none; }
-
-.universo .lienzo #gl { pointer-events: none; visibility: hidden; }
-
-.universo .leyenda { position: absolute; left: 14px; bottom: 10px; display: flex; flex-wrap: wrap; gap: 2px 14px; font: 11px/1.6 'IBM Plex Mono', ui-monospace, monospace; color: var(--hud-muted); pointer-events: none; z-index: 2; }
-
-.universo .leyenda i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
-
-.universo .ayuda-vista { position: absolute; left: 14px; bottom: 30px; max-width: 460px; font: 12px/1.5 'IBM Plex Sans', system-ui, sans-serif; color: var(--hud-muted); pointer-events: none; z-index: 2; }
-
-.universo .telemetria { position: absolute; left: 14px; top: 12px; z-index: 2; pointer-events: none; font: 11px/1.65 'IBM Plex Mono', ui-monospace, monospace; color: var(--hud-fg); background: rgba(4,10,20,.58); border: 1px solid var(--hud-line); border-radius: 8px; padding: 8px 11px; max-width: min(360px, 70%); }
-
-.universo .telemetria b, .universo .datos b.s, .universo .datos .s { color: var(--shield); font-weight: 500; }
-
-/* The data's telemetry and the antivirus's, one under the other and apart. */
-.universo .tele { margin-top: 8px; padding-top: 7px; border-top: 1px solid var(--hud-line); }
-
-.universo .tele > b.s { letter-spacing: .06em; font-size: 10.5px; }
-
-.universo .telemetria .o, .universo .datos .o { color: var(--out); }
-
-.universo .telemetria .i, .universo .datos .i { color: var(--in); }
-
-.universo .telemetria .c, .universo .datos .c { color: var(--cut); }
-
-.universo .telemetria .t, .universo .datos .t { color: var(--hud-muted); }
-
-.universo .datos { position: absolute; right: 10px; top: 10px; bottom: 46px; width: 330px; z-index: 2; overflow-y: auto; overscroll-behavior: contain; background: rgba(4,10,20,.7); border: 1px solid var(--hud-line); border-radius: 10px; padding: 10px 12px 14px; font: 11.5px/1.5 'IBM Plex Mono', ui-monospace, monospace; color: var(--hud-fg); scrollbar-width: thin; scrollbar-color: var(--hud-line) transparent; }
-
-.universo .datos[hidden], .universo .telemetria[hidden] { display: none; }
-
-.universo .datos h4 { margin: 12px 0 6px; font: 500 10.5px 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--hud-muted); display: flex; justify-content: space-between; gap: 6px; }
-
-.universo .datos h4:first-child { margin-top: 0; }
-
-.universo .datos p { margin: 6px 0; }
-
-.universo .datos .prod { border-left: 3px solid var(--c); padding: 4px 0 6px 8px; margin-bottom: 8px; }
-
-.universo .datos .prod b { font-weight: 600; }
-
-.universo .datos .fila { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: baseline; }
-
-.universo .datos .fila > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-.universo .datos .barrita { height: 4px; border-radius: 2px; background: rgba(118,144,168,.2); margin: 2px 0 5px; overflow: hidden; display: flex; }
-
-.universo .datos .barrita i { display: block; height: 100%; }
-
-.universo .datos .chip { display: inline-block; border: 1px solid var(--shield); color: var(--shield); border-radius: 3px; padding: 0 4px; font-size: 9.5px; letter-spacing: .06em; margin-left: 4px; }
-
-.universo .datos .chip.c { border-color: var(--cut); color: var(--cut); }
-
-.universo .datos .leyenda-j { display: flex; flex-wrap: wrap; gap: 2px 10px; }
-
-.universo .datos .leyenda-j i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 4px; }
-
-.universo .tip { position: absolute; z-index: 4; pointer-events: none; background: rgba(6,12,22,.95); border: 1px solid var(--hud-line); border-radius: 8px; padding: 10px 12px; font: 12.5px/1.5 'IBM Plex Sans', system-ui, sans-serif; color: var(--hud-fg); max-width: 320px; box-shadow: 0 8px 30px rgba(0,0,0,.5); }
-
-.universo .tip .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; word-break: break-all; }
-
-.universo .tip .estado { display: inline-block; margin-top: 4px; font: 500 11px 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .05em; text-transform: uppercase; }
-
-.universo .tip .pasa { color: var(--shield); }
-
-.universo .tip .corta { color: var(--cut); }
-
-.universo .tip .nodoc { color: var(--undoc); }
-
-.universo .tip .t { color: var(--hud-muted); }
-
-.universo .aviso { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 5; background: rgba(6,12,22,.96); border: 1px solid var(--hud-line); color: var(--hud-fg); border-radius: 8px; padding: 9px 14px; font: 12.5px/1.5 'IBM Plex Sans', system-ui, sans-serif; max-width: min(620px, 92%); text-align: center; }
-
-.universo .aviso.pide { border-color: var(--cut); }
-
-.universo .aviso-botones { display: flex; justify-content: center; gap: 8px; margin-top: 8px; }
-
-.universo .vacio { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 4; max-width: min(520px, 90%); background: rgba(6,12,22,.92); border: 1px solid var(--hud-line); border-radius: 12px; padding: 18px 20px; text-align: center; }
-
-.universo .vacio h2 { font: 500 17px 'Unbounded', system-ui, sans-serif; margin: 0 0 8px; color: var(--hud-fg); }
-
-.universo .vacio p { margin: 0 0 12px; color: var(--hud-muted); font-size: 14px; }
-
-.universo .vacio .btn-hud { border-color: var(--shield); color: var(--shield); padding: 8px 14px; }
-
-.universo .vigilancia-off { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); z-index: 3; font: 500 11px 'IBM Plex Mono', ui-monospace, monospace; color: var(--cut); border: 1px solid var(--cut); border-radius: 6px; padding: 3px 8px; background: rgba(6,12,22,.85); max-width: 90%; text-align: center; }
-
-.universo .hud { display: grid; grid-template-columns: 2fr 1fr 1fr 0.8fr 0.8fr; border-top: 1px solid var(--hud-line); background: var(--hud); }
-
-.universo .hud > div { padding: 10px 12px; border-right: 1px solid var(--hud-line); min-width: 0; display: grid; align-content: start; gap: 6px; }
-
-.universo .hud > div:last-child { border-right: 0; }
-
-.universo .hud h3 { margin: 0; font: 500 10.5px 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--hud-muted); display: flex; justify-content: space-between; gap: 8px; }
-
-.universo .hud h3 span { color: var(--shield); }
-
-.universo .registro { list-style: none; margin: 0; padding: 0; font: 11px/1.55 'IBM Plex Mono', ui-monospace, monospace; color: var(--hud-fg); height: 86px; overflow: hidden; }
-
-.universo .registro li { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-.universo .registro .t { color: var(--hud-muted); }
-
-.universo .registro .c { color: var(--cut); }
-
-.universo .registro .o { color: var(--out); }
-
-.universo .registro .n { color: var(--shield); }
-
-.universo .hud canvas { width: 100%; height: 70px; display: block; }
-
-.universo .barras { display: grid; gap: 5px; font: 11px 'IBM Plex Mono', ui-monospace, monospace; }
-
-.universo .barras div { display: grid; grid-template-columns: 82px 1fr auto; gap: 6px; align-items: center; font-variant-numeric: tabular-nums; }
-
-.universo .barras div span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-.universo .barras s { display: block; height: 6px; border-radius: 3px; background: var(--out); text-decoration: none; }
-
-.universo .grande { font: 600 24px 'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
-
-.universo .pequeno { font: 11px/1.4 'IBM Plex Mono', ui-monospace, monospace; color: var(--hud-muted); }
-
-/* Where the computer is: detected from the system, said and not chosen. */
-.universo .lugar-yo { font: 12px 'IBM Plex Mono', ui-monospace, monospace; color: var(--hud-muted); white-space: nowrap; }
-
-.universo .lugar-yo b { color: var(--hud-fg); font-weight: 500; }
-
-.universo .hud #hud-doc { font-size: 10.5px; line-height: 1.35; }
-@media (max-width: 900px) {
-
-.universo .hud { grid-template-columns: 1fr 1fr; }
-
-.universo .hud > div { border-bottom: 1px solid var(--hud-line); }
-
-.universo .hud > div:first-child { grid-column: 1 / -1; }
-
-.universo .ayuda-vista { display: none; }
-
-}
-@media (max-width: 700px) {
-
-.universo .datos { left: 8px; right: 8px; width: auto; }
-
-.universo .controles { margin-left: 0; }
-
-/* A phone: the title may wrap; the five tabs keep one line (without their keys, and sliding
-   sideways on a narrower screen still); the deck below keeps what reads at a glance, so the
-   picture gets the room. The side panel «Datos en vivo» still has everything. */
-.universo .barra { padding: 8px 10px; gap: 6px 10px; }
-
-.universo .marca { white-space: normal; flex-wrap: wrap; gap: 6px 10px; font-size: 12px; }
-
-.universo .pestanas { flex: 1 1 100%; min-width: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
-
-.universo .pestanas::-webkit-scrollbar { display: none; }
-
-.universo .pestanas button { flex: 0 0 auto; }
-
-.universo .pestanas .tecla { display: none; }
-
-.universo .pestanas button, .universo .controles .btn-hud { padding: 5px 8px; font-size: 12px; }
-
-.universo .hud > div:nth-child(3), .universo .hud > div:nth-child(5) { display: none; }
-
-.universo .hud > div { padding: 8px 10px; }
-
-.universo .registro { height: 36px; }
-
-.universo .hud canvas { height: 40px; }
-
-.universo .leyenda { left: 10px; bottom: 6px; gap: 0 10px; font-size: 10px; }
-
-.universo .ayuda-vista { left: 10px; right: 10px; bottom: 60px; font-size: 11.5px; }
- }
-
-.universo .leyenda i.ley-o { background: var(--out); } .universo .leyenda i.ley-i { background: var(--in); } .universo .leyenda i.ley-c { background: var(--cut); } .universo .leyenda i.ley-n { background: var(--undoc); }
-.universo .hud h3 .h3-titulo { color: inherit; }
-.universo .datos .barrita.gruesa { height: 8px; }
-.universo .tip .arriba4 { margin-top: 4px; }
-.universo .barra button, .universo .vacio button, .universo .aviso button { text-transform: none; letter-spacing: 0; box-shadow: none; }
-.universo .ayuda-vista { transition: opacity .8s ease; }
-.universo .ayuda-vista.oculta { opacity: 0; }
-</style>
-<link rel="preload" href="/fonts/IBMPlexMono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/tierra/dia.jpg" as="image">
-</head>
-<body data-page="por-dentro" class="universo">
-<section class="stage" id="stage" aria-label="GUARDIANA por dentro">
-  <div class="barra">
-    <div class="marca"><a href="/">← GUARDIANA</a> <span data-t="pd_titulo">GUARDIANA por dentro</span> <span class="chip-modo" id="chip-modo" hidden></span></div>
-    <div class="pestanas" role="group">
-      <button type="button" data-vista="globo" aria-pressed="true"><span class="tecla" aria-hidden="true">1</span><span data-t="pd_vista_globo">Globo</span></button>
-      <button type="button" data-vista="mapa" aria-pressed="false"><span class="tecla" aria-hidden="true">2</span><span data-t="pd_vista_mapa">Mapa</span></button>
-      <button type="button" data-vista="nebulosa" aria-pressed="false"><span class="tecla" aria-hidden="true">3</span><span data-t="pd_vista_nebulosa">Nebulosa</span></button>
-      <button type="button" data-vista="dentro" aria-pressed="false"><span class="tecla" aria-hidden="true">4</span><span data-t="pd_vista_dentro">El ordenador</span></button>
-      <button type="button" data-vista="radar" aria-pressed="false"><span class="tecla" aria-hidden="true">5</span><span data-t="pd_vista_radar">Radar</span></button>
-    </div>
-    <div class="controles">
-      <span class="lugar-yo" title=""><span data-t="pd_tu_pais">Tu ordenador está en</span> <b id="yo"></b></span>
-      <button type="button" class="btn-hud" id="btn-datos" aria-pressed="true" aria-controls="datos" data-t="pd_btn_datos">Datos en vivo</button>
-      <button type="button" class="btn-hud peligro" id="maxima" aria-pressed="false" data-t="pd_btn_maxima">Protección máxima</button>
-      <button type="button" class="btn-hud" id="pantalla" data-t="pd_pantalla_completa">Pantalla completa</button>
-      <a class="btn-hud btn-web" href="/en/install.html#download">Download GUARDIANA</a>
-    </div>
-  </div>
-  <div class="lienzo" id="lienzo">
-    <canvas id="gl"></canvas>
-    <canvas id="cv"></canvas>
-    <div class="telemetria" id="telemetria" hidden></div>
-    <aside class="datos" id="datos"></aside>
-    <div class="vigilancia-off" id="vigilancia-off" hidden></div>
-    <div class="aviso-web">Demonstration with example data. On your computer, GUARDIANA 1.0.22 draws it from your own measurements, sending nothing out.</div>
-    <div class="leyenda" aria-hidden="true">
-      <span><i class="ley-o"></i><span data-t="pd_ley_sale"></span></span>
-      <span><i class="ley-i"></i><span data-t="pd_ley_entra"></span></span>
-      <span><i class="ley-c"></i><span data-t="pd_ley_cortado"></span></span>
-      <span><i class="ley-n"></i><span data-t="pd_ley_nodoc"></span></span>
-    </div>
-    <div class="ayuda-vista" id="ayuda-vista"></div>
-    <div class="vacio" id="vacio" hidden><h2 data-t="pd_vacio_titulo"></h2><p id="vacio-texto"></p><button type="button" class="btn-hud" id="demo" data-t="pd_demo_boton"></button></div>
-    <div class="tip" id="tip" hidden></div>
-    <div class="aviso" id="aviso" hidden role="status" aria-live="polite"></div>
-  </div>
-  <div class="hud">
-    <div><h3><span data-t="pd_hud_registro" class="h3-titulo"></span> <span data-t="pd_hud_vivo"></span></h3><ul class="registro" id="registro"></ul></div>
-    <div><h3><span data-t="pd_hud_enviado" class="h3-titulo"></span> <span id="hud-min"></span></h3><canvas id="spark"></canvas></div>
-    <div><h3 data-t="pd_hud_paises"></h3><div class="barras" id="barras"></div></div>
-    <div><h3 data-t="pd_hud_puertas"></h3><div class="grande" id="hud-cortes">0</div><div class="pequeno" id="hud-bloqueos"></div></div>
-    <div><h3 data-t="pd_hud_documenta"></h3><canvas id="indicador"></canvas><div class="pequeno" id="hud-doc"></div></div>
-  </div>
-</section>
-<script src="/por-dentro.js?v=310dbecf885e"></script>
-<script>
-// The website's copy of «GUARDIANA por dentro»: the panel's own script, with example data only.
-(function () {
-  var T = {"av_uso_actualizaciones": "Updates", "av_uso_nube": "Cloud analysis", "av_uso_muestras": "Upload of suspicious files for analysis", "av_uso_licencia": "Licence, account and purchases", "av_uso_telemetria": "Telemetry and diagnostics", "av_uso_publicidad": "In-app advertising", "av_uso_otros": "General product operation, no further detail", "av_uso_mensajes": "In-app messages (may include offers)", "av_cortar_no_disponible": "Cutting what the antivirus sends is only possible on Windows, with the GUARDIANA service running.", "av_max_confirmar": "Yes, cut everything", "av_max_aviso": "Before you go on: with the cut on, your antivirus gets no updates or cloud analysis and protects less. Use it when you want nothing to leave, and take it off afterwards. If GUARDIANA stops, Windows lifts it by itself.", "pd_titulo": "GUARDIANA inside", "pd_volver": "← Panel", "pd_vista_globo": "Globe", "pd_vista_mapa": "Map", "pd_vista_nebulosa": "Nebula", "pd_vista_dentro": "The computer", "pd_vista_radar": "Radar", "pd_tu_pais": "Your computer is in", "pd_btn_datos": "Live data", "pd_btn_maxima": "Maximum protection", "pd_pantalla_completa": "Full screen", "pd_cerrar": "Close", "pd_ley_sale": "leaves your computer", "pd_ley_entra": "comes in", "pd_ley_cortado": "cut by GUARDIANA", "pd_ley_nodoc": "its maker does not explain it", "pd_hud_registro": "Live log", "pd_hud_vivo": "live", "pd_hud_enviado": "Sent · last 5 minutes", "pd_hud_paises": "By server country", "pd_hud_puertas": "Doors closed", "pd_hud_documenta": "Your antivirus: does its maker explain where it sends?", "pd_vacio_titulo": "Nothing to draw yet", "pd_vacio": "GUARDIANA has not measured what your programs send yet. As soon as they connect, they will appear here. Meanwhile, you can watch a demonstration.", "pd_vacio_sin_sesion": "Without a session your measurements cannot be read: open the panel from the GUARDIANA icon. Meanwhile, you can watch a demonstration.", "pd_demo_boton": "Watch a demonstration", "pd_chip_demo": "demonstration · example data", "pd_demo_simulacion": "(Demonstration: nothing on your computer was touched.)", "pd_demo_av_a": "Antivirus A", "pd_demo_av_b": "Antivirus B", "pd_demo_nav": "Your browser", "pd_vigilancia_off": "Watching the antivirus is off: what it sends is not being measured (turn it on in «Your antivirus»).", "pd_ayuda_globo": "The sunlight is this moment's. Drag to turn, scroll to zoom. The columns are the servers: taller, more data.", "pd_ayuda_mapa": "The same world, unrolled. The shadow is tonight, right now. Scroll: zoom.", "pd_ayuda_nebulosa": "One galaxy per country: bigger the more data goes back and forth, and pulsing with what your computer is sending it at each moment. In the centre, your computer inside GUARDIANA’s ring. Drag to look from the side, scroll to zoom.", "pd_ayuda_dentro": "Each band is as wide as the data going out through it: from each program, through GUARDIANA’s gate, to the server’s country and its network’s company. What is stopped ends at the gate; its width counts the stopped attempts, since nothing left.", "pd_ayuda_radar": "A real radar: the bearing is the longitude of the server’s country (000 = Greenwich) and the rings a true scale of bytes sent; the closer to the centre, the more data. Echoes light up as the sweep passes.", "pd_sin_webgl": "(This browser does not allow WebGL2: the nebula is shown instead.)", "pd_tu_ordenador": "Your computer", "pd_internet": "Internet", "pd_pais_red": "Country · server network", "pd_tarjeta_red": "Network card", "pd_america": "Americas", "pd_europa": "Europe", "pd_asia": "Asia", "pd_radar_centro": "closer to the centre = more data", "pd_en_directo": "Live", "pd_es_de_dia": "In {pais} it is daytime now", "pd_es_de_noche": "In {pais} it is night now", "pd_sol_sobre": "the sun is over {lugar}", "pd_oceano": "the ocean", "pd_ahora": "Now", "pd_conexiones": "{n} active connections", "pd_conexiones_uno": "1 active connection", "pd_paises": "{n} countries", "pd_paises_uno": "1 country", "pd_empresas": "{n} companies", "pd_empresas_uno": "1 company", "pd_salio": "{n} % of what was sent left {pais}", "pd_puertas": "{n} doors closed", "pd_puertas_uno": "1 door closed", "pd_intentos": "{n} attempts stopped", "pd_intentos_uno": "1 attempt stopped", "pd_programas": "Programs watched", "pd_tipo_antivirus": "antivirus", "pd_tipo_navegador": "browser", "pd_tipo_programa": "program", "pd_chip_pasa": "PASSES", "pd_chip_cortado": "CUT", "pd_chip_nuevo": "NEW", "pd_firmado": "signed by {firma}", "pd_sin_firma": "Windows did not say who signs it", "pd_documentado": "{n} % of what it sends goes to services its maker explains on its website", "pd_sin_documentar": "{n} places not explained", "pd_sin_documentar_uno": "1 place not explained", "pd_destinos": "Destinations", "pd_parados": "{n} stopped", "pd_parados_uno": "1 stopped", "pd_omitidos": "And {n} more destinations, with less data.", "pd_omitidos_uno": "And 1 more destination, with less data.", "pd_empresas_redes": "Companies that own the networks", "pd_nombres": "{n} names", "pd_nombres_uno": "1 name", "pd_donde": "Where the servers are", "pd_eeuu": "US", "pd_ue": "European Union", "pd_otros": "others", "pd_sin_pais": "no country (local or worldwide network)", "pd_como_viaja": "How it travels", "pd_puerto_443": "Port 443 (normally encrypted)", "pd_puerto_80": "port 80 (unencrypted web)", "pd_paquetes": "{s} packets/s now · {n} in all", "pd_cifrado": "The content is encrypted: GUARDIANA sees how much and where to, never what.", "pd_mundo": "The world right now", "pd_tu": "you", "pd_de_dia": "daytime", "pd_de_noche": "night", "pd_centro_pais": "Worked out from the real position of the sun, at the centre of each country.", "pd_ventana": "Last {h} hours", "pd_sesion_demo": "This demonstration", "pd_madrugada": "{x} in the small hours (00:00–06:00)", "pd_abierto": "This screen has been open for {t}", "pd_programas_omitidos": "And {n} more programs, which move less.", "pd_programas_omitidos_uno": "And 1 more program, which moves less.", "pd_hace_s": "{n} s", "pd_hace_min": "{n} min", "pd_hace_h": "{n} h {m} min", "pd_registro_vacio": "Waiting for the first measurement…", "pd_ev_nuevo": "NEW destination · {pais} · {red}", "pd_ev_parado": "stopped by GUARDIANA", "pd_aviso_nuevo": "New destination: {prog} talks to {nombre} ({pais}) for the first time.", "pd_sin_nombre": "no name (address only)", "pd_sin_nombre_red": "no name · {red} network", "pd_para_que": "What for, according to the maker:", "pd_no_documenta": "The maker does not document this name", "pd_servidor": "Server in {pais} · {red} network", "pd_sede": "It never left: there is no server. The company of the name ({empresa}) is based in {pais}.", "pd_cifrado_corto": "(normally encrypted)", "pd_sin_cifrar_corto": "(unencrypted web)", "pd_paquetes_n": "{n} packets", "pd_paquetes_n_uno": "1 packet", "pd_enviado": "Sent", "pd_recibido": "received", "pd_consultas": "{n} lookups", "pd_consultas_uno": "1 lookup", "pd_primera": "First seen {t} ago", "pd_alli_dia": "it is daytime there now", "pd_alli_noche": "it is night there now", "pd_pasa": "Passes", "pd_cortado_nombre": "Cut: GUARDIANA does not give out this name's address", "pd_cortado_programa": "Cut: everything {prog} sends", "pd_clic_cortar": "Click: cut this name on this computer", "pd_clic_dejar": "Click: let it through again", "pd_sin_nombre_no_corta": "Without a name it cannot be cut by name; an antivirus can be cut as a whole.", "pd_destinos_en": "{n} destinations in {p} countries", "pd_destinos_en_uno": "1 destination in {p} countries", "pd_prog_cortado": "Cut as a whole in the Windows firewall", "pd_prog_pasa": "Can connect", "pd_clic_cortar_prog": "Click: cut everything it sends", "pd_clic_dejar_prog": "Click: let it through again", "pd_no_cortable": "Only an antivirus can be cut as a whole (a browser or a program would stop working); their destinations can be cut one by one.", "pd_vigila_n": "GUARDIANA watches {n} programs in here.", "pd_vigila_n_uno": "GUARDIANA watches 1 program in here.", "pd_aqui_tu": "Your computer is here.", "pd_pais_nada": "Your watched programs have not talked to servers in this country.", "pd_redes_aqui": "Networks with servers here:", "pd_hecho_cortar": "{nombre} cut on this computer. Another click undoes it.", "pd_hecho_dejar": "{nombre} passes again.", "pd_dns_tarda": "If the program already had the address, it may take a few minutes to stop connecting.", "pd_hecho_cortar_prog": "{prog}: everything it sends, cut in the Windows firewall.", "pd_hecho_dejar_prog": "{prog} can connect again.", "pd_aviso_cortar_prog": "You are about to cut everything {prog} sends. Without updates or cloud analysis it will protect less. Another click undoes it, and if GUARDIANA stops, Windows lifts it by itself.", "pd_cortar_igual": "Yes, cut", "pd_cancelar": "Cancel", "pd_confirmar": "This name looks necessary for the system. Cut it anyway?", "pd_maxima_on": "Maximum protection: everything the antivirus send, cut.", "pd_maxima_off": "Maximum protection off: the antivirus connect again.", "pd_boton_portada": "See how GUARDIANA works inside your computer", "pd_portada_texto": "Live, on the globe: what your antivirus, your browser and your programs send to each country and each company, and what GUARDIANA cuts.", "pd_cortado_ancho": "Stopped: a general GUARDIANA rule (by category) does not let this name out", "pd_ancho_dejar": "A general rule stops it; to let it through, use «Unblock» on its row in the Radiography.", "pd_africa": "Africa", "pd_oceania": "Oceania", "pd_radar_lectura": "Radar · logarithmic scale of bytes · {n} contacts · {p} stopped · sweep every {s} s", "pd_col_programas": "Programs", "pd_col_pais": "Server country", "pd_col_red": "Network company", "pd_puerta_pasa": "{x} passes", "pd_otros_paises": "Other countries", "pd_otras_redes": "Other networks", "pd_red_desconocida": "Unidentified network", "pd_red_paises": "Servers in:", "pd_tele_datos": "Data telemetry", "pd_tele_datos_sub": "browser and other programs", "pd_tele_av": "Antivirus telemetry", "pd_tele_av_sub": "the antivirus only", "pd_sin_antivirus": "No traffic from any known antivirus in this window.", "pd_vigilancia_off_corto": "Watching is off: what the antivirus sends is not measured (turn it on in «Your antivirus»).", "pd_noche_av": "At night (00:00–06:00): ↑ {x}", "pd_av_cortado": "Cut off entirely: {n}", "pd_doc_explica": "{n} of every 100 bytes it sends go to services its maker explains on its website; {m}, to places it does not explain.", "pd_doc_nada": "Your antivirus has not sent anything to a known name in this window yet.", "pd_doc_matiz": "Explained does not mean harmless (telemetry is explained too); unexplained does not mean bad.", "pd_lugar_zona": "Placed in {ciudad} by the system’s time zone. It is detected automatically and cannot be changed by hand.", "pd_lugar_pais": "In the centre of the country: the system’s time zone names no city. It is detected automatically and cannot be changed by hand."};
-  var t = function (k) { return T[k] || k; };
-  var tn = function (k, n) { return t(n === 1 && T[k + '_uno'] ? k + '_uno' : k).replace('{n}', n); };
-  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
-  document.querySelectorAll('[data-t]').forEach(function (e) { var k = e.getAttribute('data-t'); if (T[k]) e.textContent = T[k]; });
-  var cadaTanto = function (fn, ms) { setInterval(function () { fn().catch(function () {}); }, ms); };
-  window.GuardianaUniverso.iniciar({ api: function () { return Promise.reject(new Error('demo')); }, t: t, tn: tn, esc: esc, LOC: 'en-GB', LANG: 'en', cadaTanto: cadaTanto, demo: true, tierra: '/tierra/' });
-})();
-</script>
-</body>
+html,body{margin:0;background:var(--papel);color:var(--tinta);font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:900px;margin:0 auto;padding:28px 24px 96px;line-height:1.65;font-size:17px}
+a{color:var(--azul);text-decoration:none}a:hover{color:var(--azul-oscuro)}
+a:focus-visible{outline:3px solid var(--azul);outline-offset:3px}
+p a,li a,td a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(31,75,255,.4)}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:18px 28px;flex-wrap:wrap;max-width:900px;margin:0 auto 36px;padding:22px 24px 18px;border-bottom:1px solid var(--linea)}
+main header.top{max-width:none;margin:0 0 36px;padding:6px 0 18px}
+header.top .brand{display:inline-flex;align-items:center;gap:12px;font-family:'Unbounded',sans-serif;font-weight:700;letter-spacing:.18em;font-size:14px;color:var(--tinta);white-space:nowrap}
+header.top .brand i{width:20px;height:20px;display:inline-block;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M160.59 69.13 A68 68 0 1 1 130.87 39.41' fill='none' stroke='%230B1020' stroke-width='30'/%3E%3Ccircle cx='100' cy='100' r='31' fill='%231F4BFF'/%3E%3C/svg%3E") center/contain no-repeat}
+header.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;font-weight:500}
+header.top nav a{color:var(--tinta)}header.top nav a:hover{color:var(--azul)}header.top nav a[aria-current=page]{color:var(--azul)}
+header.top .idiomas{margin-left:auto;display:inline-flex;gap:6px}
+header.top .idioma{font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid var(--linea);border-radius:999px;padding:5px 11px;color:var(--gris);letter-spacing:.08em}header.top .idioma:hover{border-color:var(--tinta);color:var(--tinta)}
+header.top .idioma.actual{border-color:var(--azul);color:var(--azul);background:rgba(31,75,255,.06)}
+h1{font-family:'Unbounded',sans-serif;font-weight:700;font-size:34px;line-height:1.12;letter-spacing:-.025em;margin:0 0 12px;text-wrap:balance}
+h2{font-family:'Unbounded',sans-serif;font-weight:600;font-size:22px;letter-spacing:-.02em;margin:40px 0 8px;color:var(--tinta);text-wrap:balance}
+h3{font-family:'Unbounded',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;margin:24px 0 6px;color:var(--tinta)}
+p,li{color:#2A3142}
+.k{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul);margin:0 0 20px}
+/* Guía rápida de instalación: los tres sistemas en paralelo, arriba de la página, con las
+   capturas reales. En el móvil se apilan. */
+.pasos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:20px 0 28px}
+.pasos3>div{border:1px solid var(--linea);border-radius:12px;padding:16px 18px;background:var(--hoja)}
+.pasos3 h3{margin:0 0 6px;font-size:15px}
+.pasos3 .sis{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris)}
+.pasos3 ol{margin:8px 0 0;padding-left:20px}
+.pasos3 li{margin:7px 0;font-size:14px;line-height:1.5}
+.pasos3 code{font-size:12.5px;overflow-wrap:anywhere}
+.pasos3 img{width:100%;height:auto;border:1px solid var(--linea);border-radius:8px;margin-top:10px;display:block}
+.pasos3 .ojo{color:var(--corte);font-weight:600}
+@media (max-width:820px){.pasos3{grid-template-columns:1fr}}
+.wrap{overflow-x:auto}table{border-collapse:collapse;margin:12px 0;width:100%;font-size:15px;background:var(--hoja)}th,td{border:1px solid var(--linea);padding:8px 10px;text-align:left;vertical-align:top}th{color:var(--gris);font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--tinta);background:var(--hoja);border:1px solid var(--linea);border-radius:5px;padding:1px 6px;overflow-wrap:anywhere}
+pre{background:var(--hoja);border:1px solid var(--linea);border-radius:8px;padding:12px 14px;overflow-x:auto}pre code{border:0;padding:0;background:none}
+li,p{overflow-wrap:anywhere}td,th{overflow-wrap:break-word}.muted{color:var(--gris)}
+.box{border:1.5px solid var(--azul);border-radius:12px;padding:14px 18px;margin:18px 0;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35)}
+.lead{font-size:20px;line-height:1.5;color:var(--tinta)}
+ul{padding-left:22px}li{margin:3px 0}
+/* Una sola tarjeta para todas las listas del sitio —guías y radiografías, en los tres idiomas—:
+   fecha arriba, título, resumen. Antes había dos componentes: ul.rx, con estilo, en español, y
+   .lista, SIN estilo ninguno, en inglés y portugués, donde la lista salía como un muro de texto
+   azul sin separación (visto el 21 sep 2026 al revisar la simetría de la web). */
+.lista{display:grid;gap:14px;margin:22px 0 8px}
+.lista a.rx{display:block;background:var(--hoja);border:1px solid var(--linea);border-radius:10px;padding:18px 20px;text-decoration:none;color:var(--tinta);transition:border-color .12s ease,box-shadow .12s ease}
+.lista a.rx:hover{border-color:var(--azul);box-shadow:0 18px 34px -28px rgba(31,75,255,.45)}
+.lista a.rx .k{display:block;margin:0 0 7px}
+.lista a.rx b{display:block;font-family:'Unbounded',sans-serif;font-weight:600;font-size:17px;line-height:1.35;letter-spacing:-.01em;color:var(--azul)}
+.lista a.rx:hover b{color:var(--azul-oscuro)}
+.lista a.rx .resumen{display:block;margin-top:7px;color:var(--gris);font-size:15px;line-height:1.55}
+img{max-width:100%;height:auto;border-radius:8px}
+footer.pie{border-top:1px solid var(--linea);margin-top:64px;padding-top:24px;font-size:13px;color:var(--gris);display:grid;gap:14px}
+footer.pie .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}footer.pie .links a{color:var(--gris)}footer.pie .links a:hover{color:var(--tinta)}
+footer.pie .arriba{justify-self:start;color:var(--azul)}
+@media (max-width:600px){main{padding:20px 20px 72px}h1{font-size:27px}header.top nav{gap:12px 16px}}
+.lema-marca{display:flex;flex-direction:column;gap:3px;line-height:1}.lema-marca small{font-family:'IBM Plex Sans',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--gris)}
+.sabias{border:1.5px solid var(--azul);border-radius:14px;padding:18px 22px;margin:0 0 26px;background:var(--hoja);box-shadow:0 20px 40px -30px rgba(31,75,255,.35)}.sabias .k{margin:0 0 8px}.sabias p.cifra{font-family:'Unbounded',sans-serif;font-weight:700;font-size:24px;line-height:1.25;letter-spacing:-.02em;margin:0 0 10px;color:var(--tinta);text-wrap:balance}.sabias p{margin:0 0 6px}.sabias .fuente{font-size:13px;color:var(--gris)}@media (max-width:600px){.sabias p.cifra{font-size:20px}}
+header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;border-radius:999px;padding:6px 15px;background:var(--azul);color:#fff;font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap}header.top .idiomas+.descargar{margin-left:0}header.top .descargar:hover{background:var(--azul-oscuro);color:#fff}.box.cierre{margin-top:40px}.box.cierre p{margin:0}.viaje{list-style:none;margin:20px 0 10px;padding:0;counter-reset:v}.viaje li{position:relative;border:1px solid var(--linea);border-radius:14px;padding:14px 18px 14px 62px;margin:0 0 26px;background:var(--hoja)}.viaje li::before{counter-increment:v;content:counter(v);position:absolute;left:16px;top:14px;width:32px;height:32px;border-radius:50%;background:var(--azul);color:#fff;font:700 15px/32px "Unbounded",sans-serif;text-align:center}.viaje li:not(:last-child)::after{content:"";position:absolute;left:31px;bottom:-27px;width:2px;height:26px;background:var(--azul);opacity:.5}.viaje h3{margin:2px 0 6px;font-size:16px}.viaje p{margin:0 0 6px}.viaje .quien{font-size:13px;color:var(--gris)}.ejemplo{border-left:4px solid var(--azul);background:var(--hoja);border-radius:10px;padding:14px 18px;margin:18px 0}</style></head>
+<body><header class="top"><a class="brand" href="/" aria-label="GUARDIANA, home"><i></i><span class="lema-marca">GUARDIANA<small>Your data, under your control</small></span></a><nav aria-label="Sections"><a href="/">Home</a><a href="/#planes">Plans</a><a href="/en/guides/">Guides</a><a href="/en/x-rays/">X-rays</a><a href="/en/the-business-of-your-data.html">The business of your data</a><a href="/en/privacy.html">Privacy</a><a href="/en/terms.html">Terms and refunds</a><a href="/en/contact.html">Contact</a></nav><span class="idiomas"><a class="idioma" href="/es/por-dentro.html" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><span class="idioma actual" lang="en" aria-current="true">EN</span><a class="idioma" href="/pt/por-dentro.html" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span><a class="descargar" href="/en/install.html#download">Download</a></header><main id="arriba"><p class="k">GUARDIANA INSIDE</p><h1>Your real connections, on the map and the globe</h1><p class="lead">On your computer, GUARDIANA draws who each program connects to, how much it sends and to which country, with a real measurement every 10 seconds. This page does not show you invented data: what you see in the program is what your computer did.</p><div class="box"><p><b>Real recording, in preparation</b></p><p>We are recording five minutes of a test PC left untouched. When it is ready it will be published here with its record sheet (date, computer, versions, what was open, what was hidden and why) and the file with the measurements, so anyone can check it.</p></div><h2>What you will see on your computer</h2><ul><li><b>Programs</b>: each program that connects, how much it sends and receives, and where to.</li><li><b>Destinations</b>: the country and the company of each server, on a map or on the globe.</li><li><b>Data and antivirus, separately</b>: what your browser and your programs send, and what your antivirus sends.</li><li><b>What to cut</b>: you can block a destination by its name, or everything your antivirus sends, and undo it with one click.</li></ul><h2>What it does not do</h2><p>GUARDIANA counts how much goes out and where to; it never reads what is sent, and the measurements stay only on your computer. Data per program is measured on Windows; on Mac and Linux, GUARDIANA sees which names are requested, from which device and when.</p><p><a class="descargar" href="/en/install.html#download">Download GUARDIANA</a></p><p><a href="/en/x-rays/">See the published x-rays →</a></p><footer class="pie"><div class="links"><a href="/">Home</a><a href="/en/install.html">Install</a><a href="/#planes">Plans</a><a href="/en/guides/">Guides</a><a href="/en/x-rays/">X-rays</a><a href="/en/the-business-of-your-data.html">The business of your data</a><a href="/en/privacy.html">Privacy</a><a href="/en/terms.html">Terms and refunds</a><a href="/en/code-signing-policy.html">Code signing policy</a><a href="/en/contact.html">Contact</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div>  <div class="links redes"><span style="color:var(--tinta,inherit)">Follow us</span><a href="https://www.instagram.com/guardianagroup/" rel="me noopener" target="_blank">Instagram</a><a href="https://www.tiktok.com/@guardianagroup" rel="me noopener" target="_blank">TikTok</a><a href="https://www.youtube.com/channel/UCsaw2KAcd6-_a58l2CNAxmg" rel="me noopener" target="_blank">YouTube</a><a href="https://www.facebook.com/profile.php?id=61594367606199" rel="me noopener" target="_blank">Facebook</a><a href="https://x.com/guardianagroup" rel="me noopener" target="_blank">X</a><a href="https://www.threads.com/@guardianagroup" rel="me noopener" target="_blank">Threads</a></div>
+<div>GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, 18th floor, Bocagrande, Cartagena de Indias, Colombia · This page uses no cookies and no analytics.</div><a class="arriba" href="#arriba">Back to top ↑</a></footer></main><script>(function(){try{var K='guardiana-idioma',a=document.querySelectorAll('a[data-idioma]');for(var i=0;i<a.length;i++)a[i].addEventListener('click',function(){try{localStorage.setItem(K,this.getAttribute('data-idioma'))}catch(e){}});}catch(e){}})();</script></body>
 </html>
