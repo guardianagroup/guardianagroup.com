@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0B1020">
+<title>GUARDIANA · Comunicaciones en tu móvil</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+/* This page is only the page: it never talks to guardianagroup.com after loading, and what
+   it needs to reach the computer travels after «#», which the browser never sends to anyone.
+   Everything said goes directly phone ↔ computer over TLS 1.3 pinned to the computer's own
+   certificate (WebTransport). No analytics, no cookies, no storage. */
+@font-face{font-family:'Unbounded';font-weight:500 800;font-display:swap;src:url(/fonts/Unbounded-latin.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-weight:400 600;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexSans-500-latin.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-weight:600;font-display:swap;src:url(/fonts/IBMPlexSans-600-latin.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin.woff2) format('woff2')}
+:root{--bg:#F4F6FA;--fg:#0B1020;--muted:#5B6275;--card:#fff;--line:#D9DEE8;--campo:#F0F3F9;--accent:#1F4BFF;--accent-fg:#fff;--accent-suave:#E6ECFF;--ok:#0E8F6E;--aviso:#9A5B00;--alerta:#C0301A;--display:'Unbounded','IBM Plex Sans',system-ui,sans-serif;--texto:'IBM Plex Sans',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--bg:#0B1020;--fg:#F4F6FA;--muted:#A5ACBF;--card:#141A2E;--line:#2A3250;--campo:#1A2140;--accent:#5C7CFF;--accent-fg:#0B1020;--accent-suave:#1C2652;--ok:#3CC79A;--aviso:#E3A54A;--alerta:#FF7A66}}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{font:15px/1.5 var(--texto);background:var(--bg);color:var(--fg);display:flex;flex-direction:column;min-height:100dvh;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+header{display:flex;align-items:center;gap:10px;padding:14px 16px 10px;border-bottom:1px solid var(--line);background:var(--card)}
+header .marca{font:700 13px var(--display);letter-spacing:.02em}header .marca span{color:var(--muted);font-weight:500}
+header .con{margin-left:auto;font-size:13px;color:var(--muted);max-width:45%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.estado{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--line)}
+.estado .punto{width:11px;height:11px;border-radius:50%;background:var(--line);flex:none}
+.estado.protegida .punto{background:var(--ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 20%,transparent)}
+.estado.revisar .punto{background:var(--aviso)}.estado.pausada .punto{background:var(--alerta)}
+.estado b{font-weight:600;font-size:14px}.estado.protegida b{color:var(--ok)}.estado.revisar b{color:var(--aviso)}.estado.pausada b{color:var(--alerta)}
+.estado small{color:var(--muted);font-size:12px;margin-left:auto;font-family:var(--mono)}
+main{flex:1;display:flex;flex-direction:column;min-height:0}
+.pantalla{display:none;flex:1;flex-direction:column;padding:16px;gap:12px}.pantalla.activa{display:flex}
+.centro{justify-content:center;align-items:center;text-align:center;gap:14px}
+.centro h1{margin:0;font:600 22px/1.25 var(--display);letter-spacing:-.01em}
+.centro p{margin:0;color:var(--muted);max-width:30ch}
+.giro{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:giro 1s linear infinite}@keyframes giro{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.giro{animation:none}}
+.btn{appearance:none;border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);font:500 12.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:12px 18px;border-radius:999px;cursor:pointer;touch-action:manipulation}
+.btn.sec{background:transparent;color:var(--accent)}.btn.peligro{background:var(--alerta);border-color:var(--alerta);color:#fff}
+.btn:disabled{opacity:.45}
+.mensajes{list-style:none;margin:0;padding:4px 0;flex:1;overflow:auto;display:flex;flex-direction:column;gap:6px;-webkit-overflow-scrolling:touch}
+.mensajes li{max-width:82%;padding:9px 13px;border-radius:16px;background:var(--card);border:1px solid var(--line);overflow-wrap:anywhere}
+.mensajes li.mio{align-self:flex-end;background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.mensajes li time{display:block;font:10.5px var(--mono);opacity:.7;margin-top:2px}
+.mensajes li.nota{align-self:center;background:transparent;border:0;color:var(--muted);font-size:12.5px;max-width:95%;text-align:center}
+.escribir{display:flex;gap:8px}
+.escribir input{flex:1;min-width:0;font:15px var(--texto);padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--campo);color:var(--fg)}
+.fila{display:flex;gap:8px;flex-wrap:wrap}
+.llamada{display:none;flex-direction:column;gap:10px}.llamada.activa{display:flex}
+.pantallas{position:relative;background:#0B1020;border-radius:12px;overflow:hidden;aspect-ratio:3/4;max-height:52dvh}
+.pantallas video{display:block}#remoto{width:100%;height:100%;object-fit:cover}
+#local{position:absolute;right:10px;bottom:10px;width:30%;border-radius:8px;border:1px solid rgba(255,255,255,.3);background:#000}
+.solo-voz #remoto,.solo-voz #local{visibility:hidden}.solo-voz .pantallas{aspect-ratio:auto;height:90px;display:grid;place-items:center}
+.solo-voz .pantallas::after{content:"♪";color:var(--ok);font-size:34px}
+.l-estado{font:500 12px var(--mono);color:var(--muted)}
+.nota-p{font-size:12.5px;color:var(--muted);margin:0;text-align:center}
+footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--mono);color:var(--muted);text-align:center;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header><div class="marca">GUARDIANA <span>SECURE</span></div><div class="con" id="con"></div></header>
+<div class="estado" id="estado" hidden><i class="punto"></i><b id="estado-palabra"></b><small id="estado-nota"></small></div>
+<main>
+  <section class="pantalla centro activa" id="p-conectando"><div class="giro"></div><h1 id="t-conectando"></h1><p id="t-conectando-p"></p></section>
+  <section class="pantalla centro" id="p-pendiente"><h1 id="t-pendiente"></h1><p id="t-pendiente-p"></p></section>
+  <section class="pantalla centro" id="p-error"><h1 id="t-error"></h1><p id="t-error-p"></p><button class="btn" id="reintentar"></button></section>
+  <section class="pantalla" id="p-chat">
+    <section class="llamada" id="llamada">
+      <div class="pantallas"><video id="remoto" autoplay playsinline></video><video id="local" autoplay playsinline muted></video></div>
+      <div class="fila"><span class="l-estado" id="l-estado"></span><button class="btn sec" id="silencio" aria-pressed="false"></button><button class="btn peligro" id="colgar"></button></div>
+    </section>
+    <ul class="mensajes" id="mensajes"></ul>
+    <p class="nota-p" id="nota-iphone" hidden></p>
+    <div class="fila" id="botones-llamar"><button class="btn sec" id="voz"></button><button class="btn sec" id="video"></button></div>
+    <form class="escribir" id="form"><input id="texto" autocomplete="off" enterkeyhint="send"><button class="btn" id="enviar" type="submit"></button></form>
+  </section>
+</main>
+<footer id="pie"></footer>
+<script>
+'use strict';
+(() => {
+  const TX = {
+    es: { conectando: 'Conectando con tu ordenador', conectando_p: 'Cifrado de extremo a extremo con el certificado que leíste en el código. Nada pasa por ningún servidor.', pendiente: 'Confirma en el ordenador', pendiente_p: 'En la pantalla del ordenador ha salido «¿Es tu móvil?». Pulsa «Sí» allí.', error: 'No se pudo conectar', error_p: 'El móvil y el ordenador tienen que estar en la misma Wi-Fi, o la puerta del router abierta para entrar con datos. Vuelve a escanear el código si el ordenador lo ha cambiado.', reintentar: 'Reintentar', enviar: 'Enviar', voz: 'Llamar (voz)', video: 'Videollamada', colgar: 'Colgar', silenciar: 'Silenciar', sonar: 'Sonar', en_voz: 'En llamada · {t}', en_video: 'En videollamada · {t}', con: 'Con {n}', protegida: 'Protegida', revisar: 'Revisar', pausada: 'Pausada', sin: 'Sin conversación', nota_cifrado: 'cifrado · verificado', iphone: 'En iPhone, de momento, el chat; las llamadas desde el móvil llegan en la siguiente versión.', perdido: 'Conexión perdida. Reconectando…', vuelto: 'Conectado otra vez.', sin_permiso: 'Sin permiso de micrófono o cámara.', pie: 'Esta página no guarda nada y no habla con ningún servidor: solo con tu ordenador.', fin: 'La conversación ha vuelto al ordenador o se ha cerrado.' },
+    en: { conectando: 'Connecting to your computer', conectando_p: 'End-to-end encrypted with the certificate you read in the code. Nothing goes through any server.', pendiente: 'Confirm on the computer', pendiente_p: 'The computer’s screen now asks «Is it your phone?». Press «Yes» there.', error: 'Could not connect', error_p: 'Phone and computer must be on the same Wi-Fi, or the router door open to come in on mobile data. Scan the code again if the computer changed it.', reintentar: 'Try again', enviar: 'Send', voz: 'Call (voice)', video: 'Video call', colgar: 'Hang up', silenciar: 'Mute', sonar: 'Unmute', en_voz: 'On a call · {t}', en_video: 'On a video call · {t}', con: 'With {n}', protegida: 'Protected', revisar: 'Review', pausada: 'Paused', sin: 'No conversation', nota_cifrado: 'encrypted · verified', iphone: 'On iPhone, chat for now; calls from the phone come in the next version.', perdido: 'Connection lost. Reconnecting…', vuelto: 'Connected again.', sin_permiso: 'No microphone or camera permission.', pie: 'This page stores nothing and talks to no server: only to your computer.', fin: 'The conversation went back to the computer or was closed.' },
+    pt: { conectando: 'Conectando com o seu computador', conectando_p: 'Cifrado de ponta a ponta com o certificado que você leu no código. Nada passa por servidor nenhum.', pendiente: 'Confirme no computador', pendiente_p: 'Na tela do computador apareceu «É o seu celular?». Toque em «Sim» lá.', error: 'Não foi possível conectar', error_p: 'Celular e computador precisam estar no mesmo Wi-Fi, ou a porta do roteador aberta para entrar com dados. Escaneie o código de novo se o computador o mudou.', reintentar: 'Tentar de novo', enviar: 'Enviar', voz: 'Ligar (voz)', video: 'Videochamada', colgar: 'Desligar', silenciar: 'Silenciar', sonar: 'Ativar som', en_voz: 'Em chamada · {t}', en_video: 'Em videochamada · {t}', con: 'Com {n}', protegida: 'Protegida', revisar: 'Revisar', pausada: 'Pausada', sin: 'Sem conversa', nota_cifrado: 'cifrado · verificado', iphone: 'No iPhone, por enquanto, o chat; as chamadas do celular chegam na próxima versão.', perdido: 'Conexão perdida. Reconectando…', vuelto: 'Conectado de novo.', sin_permiso: 'Sem permissão de microfone ou câmera.', pie: 'Esta página não guarda nada e não fala com servidor nenhum: só com o seu computador.', fin: 'A conversa voltou ao computador ou foi encerrada.' },
+  };
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  let D = null;
+  try {
+    const h = location.hash.slice(1);
+    D = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(h.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0))));
+  } catch (_) { D = null; }
+  const L = (D && TX[D.l]) ? D.l : (TX[(navigator.language || 'es').slice(0, 2)] ? (navigator.language || 'es').slice(0, 2) : 'es');
+  document.documentElement.lang = L;
+  const t = (k, v) => { let s = TX[L][k] || k; if (v) for (const [a, b] of Object.entries(v)) s = s.split('{' + a + '}').join(String(b)); return s; };
+  const hora = (s) => (s ? new Date(s * 1000).toLocaleTimeString(L, { hour: '2-digit', minute: '2-digit' }) : '');
+  const tiempo = (s) => { const m = Math.floor(s / 60), x = s % 60; return (m < 10 ? '0' : '') + m + ':' + (x < 10 ? '0' : '') + x; };
+  for (const k of ['conectando', 'pendiente', 'error']) { $('t-' + k).textContent = t(k); $('t-' + k + '-p').textContent = t(k + '_p'); }
+  $('reintentar').textContent = t('reintentar'); $('enviar').textContent = t('enviar'); $('voz').textContent = t('voz'); $('video').textContent = t('video'); $('colgar').textContent = t('colgar'); $('silencio').textContent = t('silenciar'); $('pie').textContent = t('pie');
+  if (D && D.n) $('con').textContent = t('con', { n: D.n });
+  const muestra = (id) => { document.querySelectorAll('.pantalla').forEach((p) => p.classList.toggle('activa', p.id === id)); };
+  if (!D || !D.h || !D.s || !Array.isArray(D.a) || !('WebTransport' in window)) { muestra('p-error'); $('t-error-p').textContent = ('WebTransport' in window) ? t('error_p') : 'WebTransport'; }
+
+  // ---------- The link to the computer ----------
+  const hexBytes = (h) => Uint8Array.from(h.match(/../g), (x) => parseInt(x, 16));
+  let wt = null, escritor = null, cerrado = false, reintento = null, generacion = 0;
+  const conecta = async () => {
+    const g = ++generacion;
+    muestra('p-conectando');
+    const hash = { algorithm: 'sha-256', value: hexBytes(D.h) };
+    for (const a of D.a) {
+      if (g !== generacion) return;
+      let w = null;
+      try {
+        w = new WebTransport('https://' + a + '/' + D.s, { serverCertificateHashes: [hash] });
+        await Promise.race([w.ready, new Promise((_, r) => setTimeout(() => r(new Error('tiempo')), 6000))]);
+      } catch (_) { try { w && w.close(); } catch (_2) {} continue; }
+      if (g !== generacion) { try { w.close(); } catch (_) {} return; }
+      wt = w;
+      const bidi = await w.createBidirectionalStream();
+      escritor = bidi.writable.getWriter();
+      lee(bidi.readable, g);
+      w.closed.then(() => perdido(g), () => perdido(g));
+      manda({ t: 'visto' });
+      return;
+    }
+    muestra('p-error');
+  };
+  const perdido = (g) => {
+    if (g !== generacion || cerrado) return;
+    wt = null; escritor = null;
+    nota(t('perdido'));
+    clearTimeout(reintento);
+    reintento = setTimeout(conecta, 1500);
+  };
+  const manda = async (m) => { if (escritor) { try { await escribe(0, new TextEncoder().encode(JSON.stringify(m))); } catch (_) {} } };
+  const escribe = async (tipo, bytes) => {
+    const cab = new Uint8Array(5); cab[0] = tipo; new DataView(cab.buffer).setUint32(1, bytes.length);
+    await escritor.write(cab); await escritor.write(bytes);
+  };
+  const lee = async (readable, g) => {
+    const r = readable.getReader();
+    let buf = new Uint8Array(0);
+    try {
+      for (;;) {
+        const { value, done } = await r.read();
+        if (done || g !== generacion) break;
+        const nb = new Uint8Array(buf.length + value.length); nb.set(buf); nb.set(value, buf.length); buf = nb;
+        for (;;) {
+          if (buf.length < 5) break;
+          const n = new DataView(buf.buffer, buf.byteOffset).getUint32(1);
+          if (buf.length < 5 + n) break;
+          const tipo = buf[0], cuerpo = buf.slice(5, 5 + n);
+          buf = buf.slice(5 + n);
+          if (tipo === 0) recibe(JSON.parse(new TextDecoder().decode(cuerpo)));
+          else if (tipo === 1) trozoRemoto(cuerpo);
+        }
+      }
+    } catch (_) {}
+    perdido(g);
+  };
+
+  // ---------- What the computer says ----------
+  let E = null, mimeRemoto = null, huboEstado = false;
+  const estadoGlobal = (m) => {
+    const id = m.identidad, tr = m.transporte || {}, vistos = m.vigilancia || [];
+    if (!id) return 'sin';
+    if ((m.sesion || {}).estado === 'pausada' || id.estado === 'clave_cambiada') return 'pausada';
+    const perdida = typeof tr.perdida_pct === 'number' ? tr.perdida_pct : 0;
+    if (perdida > 8 || vistos.some((s) => s.nivel === 'inusual')) return 'pausada';
+    if (vistos.length > 0 || tr.directo === false || perdida >= 3) return 'revisar';
+    return 'protegida';
+  };
+  const recibe = (m) => {
+    if (!m || m.tipo !== 'secure_estado') return;
+    if (m.movil && m.movil.pendiente && !m.fase) { muestra('p-pendiente'); return; }
+    E = m;
+    if (!huboEstado) { huboEstado = true; nota(t('vuelto')); }
+    if (m.fase !== 'lista') { muestra('p-error'); $('t-error').textContent = t('fin'); $('t-error-p').textContent = ''; $('reintentar').hidden = true; paraMedios(); return; }
+    muestra('p-chat');
+    const g = estadoGlobal(m.monitor || {});
+    const e = $('estado'); e.hidden = false; e.className = 'estado ' + g;
+    $('estado-palabra').textContent = t(g); $('estado-nota').textContent = g === 'protegida' ? t('nota_cifrado') : '';
+    if (m.contacto) $('con').textContent = t('con', { n: m.contacto });
+    const ol = $('mensajes'); const abajo = ol.scrollTop + ol.clientHeight >= ol.scrollHeight - 40;
+    ol.innerHTML = (m.mensajes || []).map((x) => `<li class="${x.mio ? 'mio' : ''}">${esc(x.texto)}<time>${esc(hora(x.t))}</time></li>`).join('') + notas.map((x) => `<li class="nota">${esc(x)}</li>`).join('');
+    if (abajo) ol.scrollTop = ol.scrollHeight;
+    pintaLlamada(m.llamada);
+  };
+  const notas = [];
+  const nota = (x) => { notas.push(x); if (notas.length > 3) notas.shift(); const ol = $('mensajes'); const li = document.createElement('li'); li.className = 'nota'; li.textContent = x; ol.appendChild(li); ol.scrollTop = ol.scrollHeight; };
+  $('form').addEventListener('submit', (e) => { e.preventDefault(); const x = $('texto').value.trim(); if (!x) return; manda({ t: 'texto', texto: x }); $('texto').value = ''; });
+  $('reintentar').addEventListener('click', conecta);
+
+  // ---------- Voice and video: the same pieces the computer uses, over the same link ----------
+  const puedeGrabar = window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported('audio/webm;codecs=opus');
+  if (!puedeGrabar) { $('nota-iphone').hidden = false; $('nota-iphone').textContent = t('iphone'); $('voz').disabled = true; $('video').disabled = true; }
+  const mime = (video) => { const c = video ? ['video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm'] : ['audio/webm;codecs=opus', 'audio/webm']; return c.find((x) => MediaRecorder.isTypeSupported(x)) || c[c.length - 1]; };
+  let grabador = null, local = null, fuente = null, buffer = null, pendientes = [], arrancando = false, silenciado = false, wake = null;
+  const pintaLlamada = (l) => {
+    const caja = $('llamada');
+    if (!l) { caja.classList.remove('activa'); $('botones-llamar').hidden = false; paraMedios(); mimeRemoto = null; return; }
+    caja.classList.add('activa'); $('botones-llamar').hidden = true;
+    caja.classList.toggle('solo-voz', !l.video);
+    $('l-estado').textContent = t(l.video ? 'en_video' : 'en_voz', { t: tiempo(Math.max(0, Math.floor(Date.now() / 1000) - (l.desde || 0))) });
+    if (puedeGrabar && !grabador && !arrancando) empiezaMedios(!!l.video);
+    if (l.mime_remoto && l.mime_remoto !== mimeRemoto) { mimeRemoto = l.mime_remoto; if (fuente) preparaReproductor(mimeRemoto); }
+  };
+  setInterval(() => { if (E && E.llamada) $('l-estado').textContent = t(E.llamada.video ? 'en_video' : 'en_voz', { t: tiempo(Math.max(0, Math.floor(Date.now() / 1000) - (E.llamada.desde || 0))) }); }, 1000);
+  const empiezaMedios = async (video) => {
+    arrancando = true;
+    preparaReproductor(mimeRemoto || mime(video));
+    try {
+      local = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: video ? { facingMode: 'user', width: { ideal: 960 }, height: { ideal: 720 } } : false });
+    } catch (_) { arrancando = false; nota(t('sin_permiso')); manda({ t: 'colgar' }); return; }
+    $('local').srcObject = local;
+    const tipo = mime(video);
+    grabador = new MediaRecorder(local, { mimeType: tipo, audioBitsPerSecond: 64000, videoBitsPerSecond: video ? 1000000 : undefined });
+    grabador.ondataavailable = async (e) => { if (e.data && e.data.size && escritor) { try { await escribe(1, new Uint8Array(await e.data.arrayBuffer())); } catch (_) {} } };
+    grabador.start(120);
+    arrancando = false;
+    manda({ t: 'llamar', video, mime: tipo });
+    try { wake = await navigator.wakeLock.request('screen'); } catch (_) {}
+  };
+  const preparaReproductor = (tipo) => {
+    const v = $('remoto');
+    const MS = window.ManagedMediaSource || window.MediaSource;
+    if (!MS) return;
+    fuente = new MS();
+    v.disableRemotePlayback = true;
+    v.src = URL.createObjectURL(fuente);
+    buffer = null; pendientes = [];
+    fuente.addEventListener('sourceopen', () => { try { buffer = fuente.addSourceBuffer(tipo); buffer.mode = 'sequence'; buffer.addEventListener('updateend', vacia); vacia(); } catch (_) {} });
+    v.play().catch(() => {});
+  };
+  const vacia = () => {
+    if (!buffer || buffer.updating || !pendientes.length) return;
+    try { buffer.appendBuffer(pendientes.shift()); } catch (_) { pendientes = []; }
+    const v = $('remoto');
+    try { if (v.buffered.length && v.buffered.end(v.buffered.length - 1) - v.currentTime > 0.9) v.currentTime = v.buffered.end(v.buffered.length - 1) - 0.25; } catch (_) {}
+  };
+  const trozoRemoto = (u8) => { if (!fuente && E && E.llamada) preparaReproductor(mimeRemoto || mime(!!E.llamada.video)); pendientes.push(u8.buffer.slice(u8.byteOffset, u8.byteOffset + u8.byteLength)); vacia(); };
+  const paraMedios = () => {
+    try { if (grabador && grabador.state !== 'inactive') grabador.stop(); } catch (_) {}
+    grabador = null;
+    if (local) { local.getTracks().forEach((x) => x.stop()); local = null; }
+    $('local').srcObject = null;
+    try { if (fuente && fuente.readyState === 'open') fuente.endOfStream(); } catch (_) {}
+    fuente = null; buffer = null; pendientes = []; arrancando = false;
+    $('remoto').removeAttribute('src');
+    if (wake) { try { wake.release(); } catch (_) {} wake = null; }
+  };
+  $('voz').addEventListener('click', () => { manda({ t: 'llamar', video: false, mime: mime(false) }); });
+  $('video').addEventListener('click', () => { manda({ t: 'llamar', video: true, mime: mime(true) }); });
+  $('colgar').addEventListener('click', () => manda({ t: 'colgar' }));
+  $('silencio').addEventListener('click', () => { silenciado = !silenciado; if (local) local.getAudioTracks().forEach((x) => { x.enabled = !silenciado; }); $('silencio').setAttribute('aria-pressed', String(silenciado)); $('silencio').textContent = t(silenciado ? 'sonar' : 'silenciar'); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) manda({ t: 'visto' }); });
+  window.addEventListener('pagehide', () => { cerrado = true; try { wt && wt.close(); } catch (_) {} });
+
+  if (D && D.h && 'WebTransport' in window) conecta();
+})();
+</script>
+</body>
+</html>
