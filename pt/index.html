@@ -78,6 +78,9 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .hero h1{font-weight:700;font-size:clamp(30px,3.6vw,50px);line-height:1.12;letter-spacing:-.025em}
 .hero .lead{font-size:20px;line-height:1.5;max-width:34em;margin-top:22px}
 .hero .lead strong{font-weight:600}
+.hero .tres-serv{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:10px;max-width:38em}
+.hero .tres-serv li{border:1px solid var(--linea);border-radius:12px;padding:12px 14px;background:var(--hoja);font-size:14.5px;line-height:1.5;color:var(--gris)}
+.hero .tres-serv b{display:block;color:var(--tinta);font-weight:600;margin-bottom:2px}
 .hero .peq{color:var(--gris);font-size:15px;max-width:34em;margin-top:14px}
 .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px;align-items:center}
 /* Un botón u otro, nunca los dos: en el teléfono no se puede instalar, así que ahí el principal
@@ -379,9 +382,9 @@ header.top .descargar:hover{background:var(--azul-oscuro);color:#fff}
 <section class="hero" style="border-top:0">
   <div>
     <div class="fecha"><span class="k">WINDOWS, MAC E LINUX · CÓDIGO ABERTO</span></div>
-    <h1>Veja com quem o seu computador fala. <span class="h1-zero">Corte o que não deve.</span></h1>
-    <p class="lead">Cada empresa e cada país com que o seu computador se conecta, também a sua IA e o seu antivírus. Você decide o que é cortado. Tudo fica no seu computador.</p>
-    <p class="peq"><strong>Também revisa o próprio computador.</strong> No Windows, verifica o antivírus e as ameaças recentes, as atualizações, os programas, a inicialização, os serviços, os controladores, as portas, a rede, a criptografia, o TPM e outras defesas. A revisão é somente de leitura.</p>
+    <h1>O seu computador, sob o seu controle. <span class="h1-zero">Veja com quem ele fala. Navegue sem ser seguido. Fale sem ser ouvido.</span></h1>
+    <p class="lead">Um só programa, três coisas. Tudo fica no seu computador: sem contas e sem servidores. Código aberto.</p>
+    <ul class="tres-serv"><li><b>Radiografias</b>Veja a que empresas e países o seu computador se conecta, também a sua IA e o seu antivírus, e corte o que não deve. E revisa o próprio computador de cima a baixo, sem mudar nada.</li><li><b>Navegador ZERO</b>Navegue sem rastreadores nem publicidade que o siga. Cada página mostra quem tentou vê-lo e o que foi cortado.</li><li><b>Comunicações</b>Mensagens, arquivos e chamadas cifrados de ponta a ponta entre dois computadores, com identidade verificada e um monitor na tela enquanto você fala.</li></ul>
     <div class="cta"><a class="btn p" href="/pt/instalar.html#baixar">Baixe a GUARDIANA</a></div>
     <a class="cta-zero" href="/pt/zero.html">No Windows, o navegador ZERO vem incluído →</a>
     <p class="nota">7 DIAS GRÁTIS · SEM CARTÃO · SEM CONTA · SEM RASTREAMENTO · <span id="hero-precio">DEPOIS, ASSINATURA OU PAGAMENTO ÚNICO</span></p>
