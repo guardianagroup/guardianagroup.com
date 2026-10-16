@@ -13,7 +13,10 @@
 /* This page is only the page: it never talks to guardianagroup.com after loading, and what
    it needs to reach the computer travels after «#», which the browser never sends to anyone.
    Everything said goes directly phone ↔ computer over TLS 1.3 pinned to the computer's own
-   certificate (WebTransport). No analytics, no cookies, no storage. */
+   certificate (WebTransport) or, where the browser cannot do that (iPhone, iPad) or there is
+   no way in, through GUARDIANA's relay (wss://rele.guardianagroup.com), sealed with AES-256-GCM
+   under keys derived from the key in the QR code: the relay passes bytes it cannot read.
+   No analytics, no cookies, no storage. */
 @font-face{font-family:'Unbounded';font-weight:500 800;font-display:swap;src:url(/fonts/Unbounded-latin.woff2) format('woff2')}
 @font-face{font-family:'IBM Plex Sans';font-weight:400 600;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin.woff2) format('woff2')}
 @font-face{font-family:'IBM Plex Sans';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexSans-500-latin.woff2) format('woff2')}
@@ -23,7 +26,7 @@
 :root{--bg:#F4F6FA;--fg:#0B1020;--muted:#5B6275;--card:#fff;--line:#D9DEE8;--campo:#F0F3F9;--accent:#1F4BFF;--accent-fg:#fff;--accent-suave:#E6ECFF;--ok:#0E8F6E;--aviso:#9A5B00;--alerta:#C0301A;--display:'Unbounded','IBM Plex Sans',system-ui,sans-serif;--texto:'IBM Plex Sans',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;color-scheme:light dark}
 @media (prefers-color-scheme:dark){:root{--bg:#0B1020;--fg:#F4F6FA;--muted:#A5ACBF;--card:#141A2E;--line:#2A3250;--campo:#1A2140;--accent:#5C7CFF;--accent-fg:#0B1020;--accent-suave:#1C2652;--ok:#3CC79A;--aviso:#E3A54A;--alerta:#FF7A66}}
 *{box-sizing:border-box}html,body{margin:0;height:100%}
-body{font:15px/1.5 var(--texto);background:var(--bg);color:var(--fg);display:flex;flex-direction:column;min-height:100dvh;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+body{font:15px/1.5 var(--texto);background:var(--bg);color:var(--fg);display:flex;flex-direction:column;height:100dvh;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 header{display:flex;align-items:center;gap:10px;padding:14px 16px 10px;border-bottom:1px solid var(--line);background:var(--card)}
 header .marca{font:700 13px var(--display);letter-spacing:.02em}header .marca span{color:var(--muted);font-weight:500}
 header .con{margin-left:auto;font-size:13px;color:var(--muted);max-width:45%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -33,7 +36,7 @@ header .con{margin-left:auto;font-size:13px;color:var(--muted);max-width:45%;ove
 .estado.revisar .punto{background:var(--aviso)}.estado.pausada .punto{background:var(--alerta)}
 .estado b{font-weight:600;font-size:14px}.estado.protegida b{color:var(--ok)}.estado.revisar b{color:var(--aviso)}.estado.pausada b{color:var(--alerta)}
 .estado small{color:var(--muted);font-size:12px;margin-left:auto;font-family:var(--mono)}
-main{flex:1;display:flex;flex-direction:column;min-height:0}
+main{flex:1;display:flex;flex-direction:column;min-height:0;overflow-y:auto}
 .pantalla{display:none;flex:1;flex-direction:column;padding:16px;gap:12px}.pantalla.activa{display:flex}
 .centro{justify-content:center;align-items:center;text-align:center;gap:14px}
 .centro h1{margin:0;font:600 22px/1.25 var(--display);letter-spacing:-.01em}
@@ -85,9 +88,9 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
 'use strict';
 (() => {
   const TX = {
-    es: { conectando: 'Conectando con tu ordenador', conectando_p: 'Cifrado de extremo a extremo con el certificado que leíste en el código. Nada pasa por ningún servidor.', pendiente: 'Confirma en el ordenador', pendiente_p: 'En la pantalla del ordenador ha salido «¿Es tu móvil?». Pulsa «Sí» allí.', error: 'No se pudo conectar', error_p: 'El móvil y el ordenador tienen que estar en la misma Wi-Fi, o la puerta del router abierta para entrar con datos. Vuelve a escanear el código si el ordenador lo ha cambiado.', reintentar: 'Reintentar', enviar: 'Enviar', voz: 'Llamar (voz)', video: 'Videollamada', colgar: 'Colgar', silenciar: 'Silenciar', sonar: 'Sonar', en_voz: 'En llamada · {t}', en_video: 'En videollamada · {t}', con: 'Con {n}', protegida: 'Protegida', revisar: 'Revisar', pausada: 'Pausada', sin: 'Sin conversación', nota_cifrado: 'cifrado · verificado', iphone: 'En iPhone, las llamadas desde el móvil todavía no: Safari no graba en el formato que usa el equipo. Con un Android y Chrome funciona todo.', iphone_no: 'En iPhone, Safari todavía no acepta esta conexión directa con el equipo. Con un Android y Chrome funciona todo: chat, voz y videollamada. Mientras tanto, sigue la conversación en el equipo.', perdido: 'Conexión perdida. Reconectando…', vuelto: 'Conectado otra vez.', sin_permiso: 'Sin permiso de micrófono o cámara.', pie: 'Esta página no guarda nada y no habla con ningún servidor: solo con tu ordenador.', fin: 'La conversación ha vuelto al ordenador o se ha cerrado.' },
-    en: { conectando: 'Connecting to your computer', conectando_p: 'End-to-end encrypted with the certificate you read in the code. Nothing goes through any server.', pendiente: 'Confirm on the computer', pendiente_p: 'The computer’s screen now asks «Is it your phone?». Press «Yes» there.', error: 'Could not connect', error_p: 'Phone and computer must be on the same Wi-Fi, or the router door open to come in on mobile data. Scan the code again if the computer changed it.', reintentar: 'Try again', enviar: 'Send', voz: 'Call (voice)', video: 'Video call', colgar: 'Hang up', silenciar: 'Mute', sonar: 'Unmute', en_voz: 'On a call · {t}', en_video: 'On a video call · {t}', con: 'With {n}', protegida: 'Protected', revisar: 'Review', pausada: 'Paused', sin: 'No conversation', nota_cifrado: 'encrypted · verified', iphone: 'On iPhone, calls from the phone are not possible yet: Safari does not record in the format the computer uses. On Android with Chrome everything works.', iphone_no: 'On iPhone, Safari does not accept this direct connection to the computer yet. On Android with Chrome everything works: chat, voice and video. Meanwhile, carry on the conversation on the computer.', perdido: 'Connection lost. Reconnecting…', vuelto: 'Connected again.', sin_permiso: 'No microphone or camera permission.', pie: 'This page stores nothing and talks to no server: only to your computer.', fin: 'The conversation went back to the computer or was closed.' },
-    pt: { conectando: 'Conectando com o seu computador', conectando_p: 'Cifrado de ponta a ponta com o certificado que você leu no código. Nada passa por servidor nenhum.', pendiente: 'Confirme no computador', pendiente_p: 'Na tela do computador apareceu «É o seu celular?». Toque em «Sim» lá.', error: 'Não foi possível conectar', error_p: 'Celular e computador precisam estar no mesmo Wi-Fi, ou a porta do roteador aberta para entrar com dados. Escaneie o código de novo se o computador o mudou.', reintentar: 'Tentar de novo', enviar: 'Enviar', voz: 'Ligar (voz)', video: 'Videochamada', colgar: 'Desligar', silenciar: 'Silenciar', sonar: 'Ativar som', en_voz: 'Em chamada · {t}', en_video: 'Em videochamada · {t}', con: 'Com {n}', protegida: 'Protegida', revisar: 'Revisar', pausada: 'Pausada', sin: 'Sem conversa', nota_cifrado: 'cifrado · verificado', iphone: 'No iPhone, as chamadas pelo celular ainda não funcionam: o Safari não grava no formato que o computador usa. Num Android com o Chrome funciona tudo.', iphone_no: 'No iPhone, o Safari ainda não aceita esta conexão direta com o computador. Num Android com o Chrome funciona tudo: chat, voz e videochamada. Enquanto isso, continue a conversa no computador.', perdido: 'Conexão perdida. Reconectando…', vuelto: 'Conectado de novo.', sin_permiso: 'Sem permissão de microfone ou câmera.', pie: 'Esta página não guarda nada e não fala com servidor nenhum: só com o seu computador.', fin: 'A conversa voltou ao computador ou foi encerrada.' },
+    es: { conectando: 'Conectando con tu equipo', conectando_p: 'Cifrado de extremo a extremo con la clave que leíste en el código: nadie en medio puede leerlo, tampoco GUARDIANA.', pendiente: 'Confirma en el equipo', pendiente_p: 'En la pantalla del equipo ha salido «¿Es tu móvil?». Pulsa «Sí» allí.', error: 'No se pudo conectar', error_p: 'No se pudo llegar a tu equipo. Comprueba que GUARDIANA ZERO sigue abierto con el código en pantalla y vuelve a escanearlo.', reintentar: 'Reintentar', enviar: 'Enviar', voz: 'Llamar (voz)', video: 'Videollamada', colgar: 'Colgar', silenciar: 'Silenciar', sonar: 'Sonar', en_voz: 'En llamada · {t}', en_video: 'En videollamada · {t}', con: 'Con {n}', protegida: 'Protegida', revisar: 'Revisar', pausada: 'Pausada', sin: 'Sin conversación', nota_cifrado: 'cifrado · verificado', iphone: 'Este navegador no puede grabar la llamada; aquí solo funciona el chat. Actualiza el sistema del móvil o usa Safari o Chrome recientes.', perdido: 'Conexión perdida. Reconectando…', vuelto: 'Conectado otra vez.', sin_permiso: 'Sin permiso de micrófono o cámara.', pie: 'Esta página no guarda nada. Habla con tu equipo directamente o, si no puede, a través del servidor intermedio de GUARDIANA, que no puede leer nada.', fin: 'La conversación ha vuelto al equipo o se ha cerrado.' },
+    en: { conectando: 'Connecting to your computer', conectando_p: 'End-to-end encrypted with the key you read in the code: nobody in between can read it, GUARDIANA included.', pendiente: 'Confirm on the computer', pendiente_p: 'The computer’s screen now asks «Is it your phone?». Press «Yes» there.', error: 'Could not connect', error_p: 'Could not reach your computer. Check that GUARDIANA ZERO is still open with the code on screen, and scan it again.', reintentar: 'Try again', enviar: 'Send', voz: 'Call (voice)', video: 'Video call', colgar: 'Hang up', silenciar: 'Mute', sonar: 'Unmute', en_voz: 'On a call · {t}', en_video: 'On a video call · {t}', con: 'With {n}', protegida: 'Protected', revisar: 'Review', pausada: 'Paused', sin: 'No conversation', nota_cifrado: 'encrypted · verified', iphone: 'This browser cannot record the call; only the chat works here. Update the phone’s system or use a recent Safari or Chrome.', perdido: 'Connection lost. Reconnecting…', vuelto: 'Connected again.', sin_permiso: 'No microphone or camera permission.', pie: 'This page stores nothing. It talks to your computer directly or, when it cannot, through GUARDIANA’s relay server, which cannot read anything.', fin: 'The conversation went back to the computer or was closed.' },
+    pt: { conectando: 'Conectando com o seu computador', conectando_p: 'Criptografia de ponta a ponta com a chave que você leu no código: ninguém no meio pode ler, nem a GUARDIANA.', pendiente: 'Confirme no computador', pendiente_p: 'Na tela do computador apareceu «É o seu celular?». Toque em «Sim» lá.', error: 'Não foi possível conectar', error_p: 'Não foi possível chegar ao seu computador. Verifique se o GUARDIANA ZERO continua aberto com o código na tela e escaneie de novo.', reintentar: 'Tentar de novo', enviar: 'Enviar', voz: 'Ligar (voz)', video: 'Videochamada', colgar: 'Desligar', silenciar: 'Silenciar', sonar: 'Ativar som', en_voz: 'Em chamada · {t}', en_video: 'Em videochamada · {t}', con: 'Com {n}', protegida: 'Protegida', revisar: 'Revisar', pausada: 'Pausada', sin: 'Sem conversa', nota_cifrado: 'cifrado · verificado', iphone: 'Este navegador não consegue gravar a chamada; aqui só funciona o chat. Atualize o sistema do celular ou use um Safari ou Chrome recentes.', perdido: 'Conexão perdida. Reconectando…', vuelto: 'Conectado de novo.', sin_permiso: 'Sem permissão de microfone ou câmera.', pie: 'Esta página não guarda nada. Fala com o seu computador diretamente ou, quando não dá, pelo servidor intermediário da GUARDIANA, que não consegue ler nada.', fin: 'A conversa voltou ao computador ou foi encerrada.' },
   };
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -106,46 +109,111 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
   if (D && D.n) $('con').textContent = t('con', { n: D.n });
   const muestra = (id) => { document.querySelectorAll('.pantalla').forEach((p) => p.classList.toggle('activa', p.id === id)); };
   const esIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
-  if (!D || !D.h || !D.s || !Array.isArray(D.a) || !('WebTransport' in window)) { muestra('p-error'); $('t-error-p').textContent = (esIOS || !('WebTransport' in window)) ? t('iphone_no') : t('error_p'); }
+  const directoPosible = !!(D && D.h && D.s && Array.isArray(D.a) && 'WebTransport' in window && !esIOS);
+  const relePosible = !!(D && D.k && D.r && 'WebSocket' in window && window.crypto && crypto.subtle);
+  if (!directoPosible && !relePosible) { muestra('p-error'); $('t-error-p').textContent = t('error_p'); }
 
   // ---------- The link to the computer ----------
+  // Straight to the computer over WebTransport when the browser accepts the pinned certificate
+  // (Chrome on Android, same Wi-Fi or the router's door); otherwise, and always on iPhone and
+  // iPad, through GUARDIANA's relay, sealed end to end with the key in the QR code.
   const hexBytes = (h) => Uint8Array.from(h.match(/../g), (x) => parseInt(x, 16));
-  let wt = null, escritor = null, cerrado = false, reintento = null, generacion = 0;
+  const hex = (b) => [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, '0')).join('');
+  const enc = (s) => new TextEncoder().encode(s);
+  const une = (...ps) => { const n = ps.reduce((a, p) => a + p.length, 0); const r = new Uint8Array(n); let i = 0; for (const p of ps) { r.set(p, i); i += p.length; } return r; };
+  const b64url = (s) => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0));
+  const VACIO = new Uint8Array(0);
+  const iv = (n) => { const b = new Uint8Array(12); new DataView(b.buffer).setBigUint64(4, BigInt(n)); return b; };
+  const sella = async (k, n, aad, d) => new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv(n), additionalData: aad, tagLength: 128 }, k, d));
+  const abre = async (k, n, aad, d) => new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv(n), additionalData: aad, tagLength: 128 }, k, d));
+  const claves = async (K, delEquipo, delMovil) => {
+    const base = await crypto.subtle.importKey('raw', K, 'HKDF', false, ['deriveKey']);
+    const una = (info) => crypto.subtle.deriveKey({ name: 'HKDF', hash: 'SHA-256', salt: une(delEquipo, delMovil), info: enc(info) }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+    return [await una('guardiana-movil-1 m>e'), await una('guardiana-movil-1 e>m')];
+  };
+  let canal = null, cerrado = false, reintento = null, generacion = 0;
   const conecta = async () => {
     const g = ++generacion;
     muestra('p-conectando');
+    if (directoPosible && await directo(g)) return;
+    if (g !== generacion) return;
+    if (relePosible && await porRele(g)) return;
+    if (g !== generacion) return;
+    muestra('p-error'); $('t-error-p').textContent = t('error_p');
+  };
+  const directo = async (g) => {
     const hash = { algorithm: 'sha-256', value: hexBytes(D.h) };
     for (const a of D.a) {
-      if (g !== generacion) return;
+      if (g !== generacion) return true;
       let w = null;
       try {
         w = new WebTransport('https://' + a + '/' + D.s, { serverCertificateHashes: [hash] });
         await Promise.race([w.ready, new Promise((_, r) => setTimeout(() => r(new Error('tiempo')), 6000))]);
       } catch (_) { try { w && w.close(); } catch (_2) {} continue; }
-      if (g !== generacion) { try { w.close(); } catch (_) {} return; }
-      wt = w;
+      if (g !== generacion) { try { w.close(); } catch (_) {} return true; }
       const bidi = await w.createBidirectionalStream();
-      escritor = bidi.writable.getWriter();
+      const escritor = bidi.writable.getWriter();
+      let cola = Promise.resolve();
+      canal = {
+        envia: (tipo, bytes) => { cola = cola.then(async () => { const cab = new Uint8Array(5); cab[0] = tipo; new DataView(cab.buffer).setUint32(1, bytes.length); await escritor.write(cab); await escritor.write(bytes); }).catch(() => {}); return cola; },
+        cierra: () => { try { w.close(); } catch (_) {} },
+      };
       lee(bidi.readable, g);
       w.closed.then(() => perdido(g), () => perdido(g));
       manda({ t: 'visto' });
-      return;
+      return true;
     }
-    muestra('p-error');
-    if (esIOS) $('t-error-p').textContent = t('iphone_no');
+    return false;
+  };
+  const porRele = async (g) => {
+    const K = b64url(D.k);
+    const sala = hex(await crypto.subtle.digest('SHA-256', une(enc('guardiana-movil-sala'), K))).slice(0, 32);
+    const esquema = /^(127\.|localhost)/.test(D.r) ? 'ws://' : 'wss://';
+    return new Promise((resuelve) => {
+      let ws;
+      try { ws = new WebSocket(esquema + D.r + '/m/' + sala); } catch (_) { resuelve(false); return; }
+      ws.binaryType = 'arraybuffer';
+      let listo = false, kme = null, kem = null, nSale = 1, nEntra = 0, colaEntra = Promise.resolve(), colaSale = Promise.resolve();
+      const espera = setTimeout(() => { if (!listo) { try { ws.close(); } catch (_) {} resuelve(false); } }, 20000);
+      ws.onmessage = (ev) => {
+        colaEntra = colaEntra.then(async () => {
+          if (g !== generacion) { ws.close(); return; }
+          const d = new Uint8Array(ev.data);
+          if (!listo) {
+            // The computer's greeting: «GM1» and its fresh random number; we answer with ours
+            // and prove we hold the key.
+            if (d.length !== 19 || d[0] !== 71 || d[1] !== 77 || d[2] !== 49) { ws.close(); return; }
+            const delMovil = crypto.getRandomValues(new Uint8Array(16));
+            [kme, kem] = await claves(K, d.slice(3), delMovil);
+            ws.send(une(delMovil, await sella(kme, 0, enc('GM1'), enc('hola'))));
+            listo = true; clearTimeout(espera);
+            canal = {
+              envia: (tipo, bytes) => { colaSale = colaSale.then(async () => { const n = nSale++; const s = await sella(kme, n, VACIO, une(Uint8Array.of(tipo), bytes)); if (ws.readyState === 1) ws.send(s); }).catch(() => {}); return colaSale; },
+              cierra: () => { try { ws.close(); } catch (_) {} },
+            };
+            manda({ t: 'visto' });
+            resuelve(true);
+            return;
+          }
+          const plano = await abre(kem, nEntra, VACIO, d);
+          nEntra++;
+          const tipo = plano[0], cuerpo = plano.slice(1);
+          if (tipo === 0) recibe(JSON.parse(new TextDecoder().decode(cuerpo)));
+          else if (tipo === 1) trozoRemoto(cuerpo);
+        }).catch(() => { try { ws.close(); } catch (_) {} });
+      };
+      ws.onclose = () => { clearTimeout(espera); if (!listo) resuelve(false); else perdido(g); };
+      ws.onerror = () => {};
+    });
   };
   const perdido = (g) => {
     if (g !== generacion || cerrado) return;
-    wt = null; escritor = null;
+    canal = null; volvio = true;
     nota(t('perdido'));
     clearTimeout(reintento);
     reintento = setTimeout(conecta, 1500);
   };
-  const manda = async (m) => { if (escritor) { try { await escribe(0, new TextEncoder().encode(JSON.stringify(m))); } catch (_) {} } };
-  const escribe = async (tipo, bytes) => {
-    const cab = new Uint8Array(5); cab[0] = tipo; new DataView(cab.buffer).setUint32(1, bytes.length);
-    await escritor.write(cab); await escritor.write(bytes);
-  };
+  const manda = (m) => { if (canal) canal.envia(0, enc(JSON.stringify(m))); };
   const lee = async (readable, g) => {
     const r = readable.getReader();
     let buf = new Uint8Array(0);
@@ -169,7 +237,7 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
   };
 
   // ---------- What the computer says ----------
-  let E = null, mimeRemoto = null, huboEstado = false;
+  let E = null, mimeRemoto = null, volvio = false;
   const estadoGlobal = (m) => {
     const id = m.identidad, tr = m.transporte || {}, vistos = m.vigilancia || [];
     if (!id) return 'sin';
@@ -183,7 +251,7 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
     if (!m || m.tipo !== 'secure_estado') return;
     if (m.movil && m.movil.pendiente && !m.fase) { muestra('p-pendiente'); return; }
     E = m;
-    if (!huboEstado) { huboEstado = true; nota(t('vuelto')); }
+    if (volvio) { volvio = false; nota(t('vuelto')); }
     if (m.fase !== 'lista') { muestra('p-error'); $('t-error').textContent = t('fin'); $('t-error-p').textContent = ''; $('reintentar').hidden = true; paraMedios(); return; }
     muestra('p-chat');
     const g = estadoGlobal(m.monitor || {});
@@ -201,9 +269,10 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
   $('reintentar').addEventListener('click', conecta);
 
   // ---------- Voice and video: the same pieces the computer uses, over the same link ----------
-  const puedeGrabar = window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported('audio/webm;codecs=opus');
+  const FORMATOS = { voz: ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4;codecs=mp4a.40.2', 'audio/mp4'], video: ['video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm', 'video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/mp4'] };
+  const puedeGrabar = !!(window.MediaRecorder && MediaRecorder.isTypeSupported && FORMATOS.voz.some((x) => MediaRecorder.isTypeSupported(x)));
   if (!puedeGrabar) { $('nota-iphone').hidden = false; $('nota-iphone').textContent = t('iphone'); $('voz').disabled = true; $('video').disabled = true; }
-  const mime = (video) => { const c = video ? ['video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm'] : ['audio/webm;codecs=opus', 'audio/webm']; return c.find((x) => MediaRecorder.isTypeSupported(x)) || c[c.length - 1]; };
+  const mime = (video) => { const c = video ? FORMATOS.video : FORMATOS.voz; return (window.MediaRecorder && c.find((x) => MediaRecorder.isTypeSupported(x))) || c[0]; };
   let grabador = null, local = null, fuente = null, buffer = null, pendientes = [], arrancando = false, silenciado = false, wake = null;
   const pintaLlamada = (l) => {
     const caja = $('llamada');
@@ -222,12 +291,12 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
       local = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: video ? { facingMode: 'user', width: { ideal: 960 }, height: { ideal: 720 } } : false });
     } catch (_) { arrancando = false; nota(t('sin_permiso')); manda({ t: 'colgar' }); return; }
     $('local').srcObject = local;
-    const tipo = mime(video);
-    grabador = new MediaRecorder(local, { mimeType: tipo, audioBitsPerSecond: 64000, videoBitsPerSecond: video ? 1000000 : undefined });
-    grabador.ondataavailable = async (e) => { if (e.data && e.data.size && escritor) { try { await escribe(1, new Uint8Array(await e.data.arrayBuffer())); } catch (_) {} } };
+    $('remoto').play().catch(() => {});
+    grabador = new MediaRecorder(local, { mimeType: mime(video), audioBitsPerSecond: 64000, videoBitsPerSecond: video ? 1000000 : undefined });
+    grabador.ondataavailable = async (e) => { if (e.data && e.data.size && canal) { try { canal.envia(1, new Uint8Array(await e.data.arrayBuffer())); } catch (_) {} } };
     grabador.start(120);
     arrancando = false;
-    manda({ t: 'llamar', video, mime: tipo });
+    manda({ t: 'llamar', video, mime: grabador.mimeType || mime(video) });
     try { wake = await navigator.wakeLock.request('screen'); } catch (_) {}
   };
   const preparaReproductor = (tipo) => {
@@ -263,9 +332,9 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
   $('colgar').addEventListener('click', () => manda({ t: 'colgar' }));
   $('silencio').addEventListener('click', () => { silenciado = !silenciado; if (local) local.getAudioTracks().forEach((x) => { x.enabled = !silenciado; }); $('silencio').setAttribute('aria-pressed', String(silenciado)); $('silencio').textContent = t(silenciado ? 'sonar' : 'silenciar'); });
   document.addEventListener('visibilitychange', () => { if (!document.hidden) manda({ t: 'visto' }); });
-  window.addEventListener('pagehide', () => { cerrado = true; try { wt && wt.close(); } catch (_) {} });
+  window.addEventListener('pagehide', () => { cerrado = true; if (canal) canal.cierra(); });
 
-  if (D && D.h && 'WebTransport' in window) conecta();
+  if (directoPosible || relePosible) conecta();
 })();
 </script>
 </body>
