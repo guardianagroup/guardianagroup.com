@@ -123,6 +123,10 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
   const une = (...ps) => { const n = ps.reduce((a, p) => a + p.length, 0); const r = new Uint8Array(n); let i = 0; for (const p of ps) { r.set(p, i); i += p.length; } return r; };
   const b64url = (s) => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0));
   const VACIO = new Uint8Array(0);
+  // What this phone's player can open, from the list the computer records in (an iPhone may
+  // not open WebM): the other side then records in one of these.
+  const CANDIDATOS = ['video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/webm', 'audio/webm;codecs=opus', 'audio/mp4;codecs=mp4a.40.2', 'audio/webm'];
+  const reproduceAqui = () => { const MS = window.ManagedMediaSource || window.MediaSource; return MS ? CANDIDATOS.filter((x) => { try { return MS.isTypeSupported(x); } catch (_) { return false; } }) : []; };
   const iv = (n) => { const b = new Uint8Array(12); new DataView(b.buffer).setBigUint64(4, BigInt(n)); return b; };
   const sella = async (k, n, aad, d) => new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv(n), additionalData: aad, tagLength: 128 }, k, d));
   const abre = async (k, n, aad, d) => new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv(n), additionalData: aad, tagLength: 128 }, k, d));
@@ -160,7 +164,7 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
       };
       lee(bidi.readable, g);
       w.closed.then(() => perdido(g), () => perdido(g));
-      manda({ t: 'visto' });
+      manda({ t: 'visto' }); manda({ t: 'reproduce', mimes: reproduceAqui() });
       return true;
     }
     return false;
@@ -191,7 +195,7 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
               envia: (tipo, bytes) => { colaSale = colaSale.then(async () => { const n = nSale++; const s = await sella(kme, n, VACIO, une(Uint8Array.of(tipo), bytes)); if (ws.readyState === 1) ws.send(s); }).catch(() => {}); return colaSale; },
               cierra: () => { try { ws.close(); } catch (_) {} },
             };
-            manda({ t: 'visto' });
+            manda({ t: 'visto' }); manda({ t: 'reproduce', mimes: reproduceAqui() });
             resuelve(true);
             return;
           }
