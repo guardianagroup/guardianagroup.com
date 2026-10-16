@@ -111,7 +111,7 @@ what you will see, why, and how to check for yourself that the file is ours befo
 <p class="nota precio-descarga"><strong>Price:</strong> 7 days free, no card, no account. Then Plus at <span id="dl-plus">US$4.99/month</span> (20% less if you pay for the year), or the Founder licence at <span id="dl-fund">US$49</span> in one payment, limited to 1,000 worldwide. Up to 5 computers per licence and 30 days for a refund. <a href="/en/buy.html">See plans</a></p><script>(function(){try{var P=window.GUARDIANA_PRICES;if(!P)return;document.getElementById('dl-plus').textContent=P.plusEn;document.getElementById('dl-fund').textContent=P.fundEn;}catch(e){}})();</script>
 <div class="gran-descarga" id="gran-descarga"><a class="btn p" id="gd-boton" href="#tabla-descargas">Download GUARDIANA<small id="gd-detalle"></small></a><p>One download. On Windows it carries the ZERO browser inside. Another system or language: the table below.</p><a class="otro" href="#tabla-descargas">Another system or language ↓</a></div>
 <div class="box" id="download"><p><strong>Version 1.0.33, published on 16 October 2026.</strong> Before you open a file, compare its hash with this table and with the <a href="https://github.com/guardianagroup/guardiana/blob/main/ledger.jsonl">public ledger</a>, where it was written before the download existed (and in Rekor, entry <a href="https://search.sigstore.dev/?uuid=108e9186e8c5677a0c7a4a6214d988e973ad89e64c64a60dcf178b3343f2b403cd5ecb0e141c6823"><code>108e9186e8c5677a…141c6823</code></a>).</p>
-<div class="tabla-descargas"><table>
+<div class="tabla-descargas" id="tabla-descargas"><table>
 <thead><tr><th>System</th><th>File</th><th>SHA-256 hash</th><th>Signature</th></tr></thead>
 <tbody>
 <tr><td>Windows 10 and 11 · English</td><td><a href="/descargas/1.0.33/guardiana-1.0.33-windows-x64-en.msi" download>guardiana-1.0.33-windows-x64-en.msi</a><br><span class="muted">40.0 MB</span></td><td data-l="SHA-256 hash"><code class="huella">6ebdf80415bde1c376367b9fe5bdd126f4f1384d0b932310b46b44a962232923</code></td><td data-l="Signature"><a href="/descargas/1.0.33/guardiana-1.0.33-windows-x64-en.msi.minisig" aria-label="minisign signature of guardiana-1.0.33-windows-x64-en.msi">signature</a></td></tr>
@@ -180,7 +180,7 @@ check the file without trusting us: hash and signature first, “Run anyway” a
 <h2>2 · Three steps to check the file</h2>
 <p>All three happen <em>before</em> you open anything; the first two need no extra tools, and the third uses minisign.</p>
 
-<h3>Step 1 · Take the fingerprint of the file you downloaded</h3>
+<h3>Step 1 · Get the fingerprint of the file you downloaded</h3>
 <p>On Windows, in PowerShell:</p>
 <p><code>(Get-FileHash guardiana-1.0.33-windows-x64-en.msi -Algorithm SHA256).Hash.ToLower()</code></p>
 <p>On Linux, in the terminal:</p>
@@ -236,7 +236,7 @@ open it, macOS stops it. This is what appears, measured on 19 September 2026 on 
 with an earlier version of this file, downloaded the way you would download it:</p>
 <p><img src="/aviso-mac.png" alt="macOS warning when opening GUARDIANA: the app was not opened because Apple could not verify it is free of malware, with the buttons Move to Trash and OK." width="294" height="272" loading="lazy" style="max-width:100%;height:auto;border:1px solid #D9DEE8;border-radius:10px"></p>
 <p><strong>Read that dialog before you touch anything: the button selected by default is “Move to
-Trash”.</strong> Press Return without looking and the file goes to the bin. The one that closes the dialog
+Trash”.</strong> Press Return without looking and the file goes to the Trash. The one that closes the dialog
 without deleting anything is “OK”.</p>
 <p>And there is no shortcut. The old trick —<strong>right-click › Open</strong>— no longer works on current
 versions of macOS: we tried it the same day on the same Mac and the same dialog appears, with the same two
@@ -280,7 +280,7 @@ your networks' DNS goes back to what you had before.</p>
 <p>It uninstalls like any other program, and when it does GUARDIANA <strong>turns Home Mode off, removes the
 firewall rule and puts your DNS back exactly as it was</strong>, with whatever it pointed to before. What
 stays is your ledger, which is yours: it is on your disk and you delete it whenever you want.</p>
-<p>One small thing also stays, and we say so because we hide nothing: <strong>the mark of your 7-day trial</strong>: the date it started, the latest clock time the program saw (so moving the date back does not stretch the trial) and, if you activated a licence, a copy of the key; never your name or email. It is kept in
+<p>One small thing also stays, and we say so because we hide nothing: <strong>the record of your 7-day trial</strong> (the date it started, the latest clock time the program saw, so that moving the date back does not stretch the trial, and, if you activated a licence, a copy of the key; never your name or email). It is kept in
 <code>HKLM\SOFTWARE\Guardiana</code> (values <code>prueba</code>, <code>visto</code> and <code>licencia</code>) on Windows and in
 <code>/etc/guardiana/</code> (<code>prueba-empezada</code>, <code>visto-hasta</code> and <code>licencia</code>) on Linux and the Mac. It stays so that seven days are
 seven days: if it went away on uninstall, reinstalling would quietly start the count again. An

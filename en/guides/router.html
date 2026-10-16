@@ -139,7 +139,7 @@ and restart the PC's Wi-Fi.</p>
 
 <h2>If you cannot or will not go into the router: a fixed address on the PC itself</h2>
 <p>The DHCP reservation can be replaced by fixing the address on the guardian computer. The router does not
-need to be touched. Just use the same address it already has, so it collides with nobody.</p>
+need to be touched. Use the same address it already has and check in the router that it lies outside the range the router hands out (DHCP); otherwise the router could give it to another device. That is why, if you can, the reservation in the router is the safest option.</p>
 <p><strong>Windows</strong>, in a PowerShell window as administrator (replace <code>Ethernet</code> with the
 name of your connection and the addresses with yours; <code>192.168.1.1</code> is usually the router):</p>
 <p><code>netsh interface ipv4 set address name="Ethernet" static 192.168.1.78 255.255.255.0 192.168.1.1</code></p>

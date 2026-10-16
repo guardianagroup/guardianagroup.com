@@ -107,7 +107,7 @@ header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;bo
 <h2>Reserva DHCP (IP fija para el PC)</h2>
 <p>En el mismo apartado de LAN/DHCP suele haber «Reserva de direcciones», «DHCP estático» o «Asignación fija». Se añade la <b>MAC del PC</b> (GUARDIANA la muestra en «Mi dispositivo»; en Windows: <code>ipconfig /all</code>, «Dirección física») con la IP que quieras mantener. Guarda y reinicia la Wi‑Fi del PC.</p>
 <h2>Si no puedes o no quieres entrar en el router: dirección fija en el propio PC</h2>
-<p>La reserva DHCP se puede sustituir fijando la dirección en el PC guardián. No hace falta tocar el router. Solo hay que usar la misma dirección que ya tiene (así no choca con nadie).</p>
+<p>La reserva DHCP se puede sustituir fijando la dirección en el PC guardián. No hace falta tocar el router. Usa la misma dirección que ya tiene y comprueba en el router que quede fuera del rango que reparte (DHCP); si no, el router podría dársela a otro aparato. Por eso, si puedes, la reserva en el router es lo más seguro.</p>
 <ul><li><b>Windows</b>, en una ventana de PowerShell como administrador (cambia <code>Ethernet</code> por el nombre de tu conexión y las direcciones por las tuyas; <code>192.168.1.1</code> suele ser el router):</li></ul>
 <pre><code>netsh interface ipv4 set address name=&quot;Ethernet&quot; static 192.168.1.78 255.255.255.0 192.168.1.1
 netsh interface ipv4 set dnsservers name=&quot;Ethernet&quot; static 192.168.1.1 primary</code></pre>

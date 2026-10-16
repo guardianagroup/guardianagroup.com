@@ -139,7 +139,7 @@ reinicie o Wi-Fi do computador.</p>
 
 <h2>Se você não pode ou não quer entrar no roteador: endereço fixo no próprio computador</h2>
 <p>A reserva de DHCP pode ser substituída por um endereço fixo no computador guardião. Não é preciso tocar no
-roteador. Use o mesmo endereço que ele já tem, para não colidir com ninguém.</p>
+roteador. Use o mesmo endereço que ele já tem e confira no roteador que ele fique fora da faixa que o roteador distribui (DHCP); senão, o roteador poderia dá-lo a outro aparelho. Por isso, se puder, a reserva no roteador é o mais seguro.</p>
 <p><strong>Windows</strong>, numa janela do PowerShell como administrador (troque <code>Ethernet</code>
 pelo nome da sua conexão e os endereços pelos seus; <code>192.168.1.1</code> costuma ser o roteador):</p>
 <p><code>netsh interface ipv4 set address name="Ethernet" static 192.168.1.78 255.255.255.0 192.168.1.1</code></p>

@@ -111,7 +111,7 @@ o que vai ver, por quê, e como conferir sozinho que o arquivo é nosso antes de
 <p class="nota precio-descarga"><strong>Preço:</strong> 7 dias grátis, sem cartão nem conta. Depois, Plus por <span id="dl-plus">4,99 US$/mês</span> (20 % menos pagando o ano), ou a licença Fundador por <span id="dl-fund">49 US$</span> em um único pagamento, limitada a 1.000 no mundo inteiro. Até 5 computadores por licença e 30 dias de reembolso. <a href="/pt/comprar.html">Ver planos</a></p><script>(function(){try{var P=window.GUARDIANA_PRICES;if(!P)return;document.getElementById('dl-plus').textContent=P.plusPt;document.getElementById('dl-fund').textContent=P.fundPt;}catch(e){}})();</script>
 <div class="gran-descarga" id="gran-descarga"><a class="btn p" id="gd-boton" href="#tabla-descargas">Baixar a GUARDIANA<small id="gd-detalle"></small></a><p>Um só download. No Windows traz dentro o navegador ZERO. Outro sistema ou idioma: a tabela abaixo.</p><a class="otro" href="#tabla-descargas">Outro sistema ou idioma ↓</a></div>
 <div class="box" id="baixar"><p><strong>Versão 1.0.33, publicada em 16 de outubro de 2026.</strong> Antes de abrir um arquivo, compare a impressão digital com a desta tabela e com a do <a href="https://github.com/guardianagroup/guardiana/blob/main/ledger.jsonl">registro público</a>, onde foi anotada antes do download (e no Rekor, entrada <a href="https://search.sigstore.dev/?uuid=108e9186e8c5677a0c7a4a6214d988e973ad89e64c64a60dcf178b3343f2b403cd5ecb0e141c6823"><code>108e9186e8c5677a…141c6823</code></a>).</p>
-<div class="tabla-descargas"><table>
+<div class="tabla-descargas" id="tabla-descargas"><table>
 <thead><tr><th>Sistema</th><th>Arquivo</th><th>Impressão SHA-256</th><th>Assinatura</th></tr></thead>
 <tbody>
 <tr><td>Windows 10 e 11 · português</td><td><a href="/descargas/1.0.33/guardiana-1.0.33-windows-x64-pt.msi" download>guardiana-1.0.33-windows-x64-pt.msi</a><br><span class="muted">40,0 MB</span></td><td data-l="Impressão SHA-256"><code class="huella">46064916db7fe5e057ca52c1d18fa4108038c441a384f7999a61c405ed37b3c0</code></td><td data-l="Assinatura"><a href="/descargas/1.0.33/guardiana-1.0.33-windows-x64-pt.msi.minisig" aria-label="Assinatura minisign de guardiana-1.0.33-windows-x64-pt.msi">assinatura</a></td></tr>
@@ -201,7 +201,7 @@ todas as versões são assinadas. Ela vai dentro do próprio programa e está no
 <p><code>RWS+xz+N6DvnuDlJCAIOUEku8PLZ9pP1cUaoQnusfduLWpVIVmPXM16r</code></p>
 <p>O identificador curto dela é <code>B8E73BE88D3FC7BE</code>. Para conferir um arquivo:</p>
 <p><code>minisign -Vm guardiana-1.0.33-linux-x86_64.tar.gz -P RWS+xz+N6DvnuDlJCAIOUEku8PLZ9pP1cUaoQnusfduLWpVIVmPXM16r</code></p>
-<p>Depois de instalado, o <code>guardiana verify</code> repete a impressão digital e a assinatura no seu próprio computador (o registro ele compara com um <code>ledger.jsonl</code> que você baixar junto do binário), e
+<p>Depois de instalado, o <code>guardiana verify</code> repete a impressão digital e a assinatura no seu próprio computador (o registro, ele compara com o <code>ledger.jsonl</code> que você baixar junto com o binário), e
 também diz se o serviço está rodando, para qual DNS o sistema aponta e quais portas estão abertas.</p>
 
 <div class="box">
@@ -236,7 +236,7 @@ abre, o macOS impede. Isto é o que aparece, medido em 19 de setembro de 2026 nu
 com uma versão anterior deste arquivo, baixada do jeito que você baixaria:</p>
 <p><img src="/aviso-mac.png" alt="Aviso do macOS ao abrir a GUARDIANA: o app não foi aberto porque a Apple não pôde verificar se está livre de malware, com os botões Mover para o Lixo e OK." width="294" height="272" loading="lazy" style="max-width:100%;height:auto;border:1px solid #D9DEE8;border-radius:10px"></p>
 <p><strong>Leia essa caixa antes de tocar em nada: o botão marcado por padrão é «Mover para o
-Lixo».</strong> Aperte Enter sem olhar e o arquivo vai para a lixeira. O que fecha a caixa sem apagar nada
+Lixo».</strong> Aperte Enter sem olhar e o arquivo vai para o Lixo. O que fecha a caixa sem apagar nada
 é «OK».</p>
 <p>E não há atalho. O truque antigo —<strong>clique com o botão direito › Abrir</strong>— já não funciona
 nas versões atuais do macOS: testamos no mesmo dia, no mesmo Mac, e aparece a mesma caixa, com os mesmos
@@ -281,7 +281,7 @@ das suas redes volta ao que você tinha antes.</p>
 <p>Desinstala como qualquer outro programa, e ao fazer isso a GUARDIANA <strong>desliga o Modo Casa, tira a
 regra do firewall e devolve o seu DNS exatamente como estava</strong>, com o que ele apontava antes. O que
 fica é o seu extrato, que é seu: está no seu disco e você apaga quando quiser.</p>
-<p>E fica mais uma coisa, pequena, que a gente conta porque não esconde nada: <strong>a marca do seu teste de 7 dias</strong>: a data em que começou, a última hora do relógio que o programa viu (para que atrasar a data não alongue o teste) e, se você ativou uma licença, uma cópia da chave; nem o seu nome nem o seu e-mail. Fica guardada em
+<p>E fica mais uma coisa, pequena, que a gente conta porque não esconde nada: <strong>a marca do seu teste de 7 dias</strong> (a data em que começou, a última hora do relógio que o programa viu, para que atrasar a data não alongue o teste, e, se você ativou uma licença, uma cópia da chave; nem o seu nome nem o seu e-mail). Fica guardada em
 <code>HKLM\SOFTWARE\Guardiana</code> (valores <code>prueba</code>, <code>visto</code> e <code>licencia</code>) no Windows e em
 <code>/etc/guardiana/</code> (<code>prueba-empezada</code>, <code>visto-hasta</code> e <code>licencia</code>) no Linux e no Mac. Fica aí para que sete dias sejam sete
 dias: se sumisse ao desinstalar, reinstalar começaria a conta de novo sem ninguém avisar. Um
