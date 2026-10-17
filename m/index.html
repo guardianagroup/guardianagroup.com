@@ -449,6 +449,9 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
               // the chat are never stuck behind it (17 Oct 2026 review).
               envia: (tipo, bytes) => { colaSale = colaSale.then(async () => { const n = nSale++; const s = await sella(kme, n, VACIO, une(Uint8Array.of(tipo), bytes)); if (ws.readyState === 1) ws.send(s); if (tipo === 2) while (ws.readyState === 1 && ws.bufferedAmount > 262144) await new Promise((r) => setTimeout(r, 20)); }).catch(() => {}); return colaSale; },
               cierra: () => { try { ws.close(); } catch (_) {} },
+              // Bytes still waiting in the socket: a call piece is dropped above a limit, so
+              // «colgar» and the chat never queue behind seconds of old sound (17 Oct 2026).
+              cola: () => (ws.readyState === 1 ? ws.bufferedAmount : 0),
             };
             // The computer sends something at least every 25 s: a minute of silence means a
             // link that only looks open.
@@ -750,12 +753,22 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     if (l.mime_remoto && l.mime_remoto !== mimeRemoto) { mimeRemoto = l.mime_remoto; if (fuente) { preparaReproductor(mimeRemoto); manda({ t: 'pide_inicio' }); } }
   };
   setInterval(() => { if (E && E.llamada) $('l-estado').textContent = E.llamada.conectada === false ? t('llamando', { s: Math.max(0, 45 - (Math.floor(Date.now() / 1000) - (E.llamada.desde || 0))) }) : t(E.llamada.video ? 'en_video' : 'en_voz', { t: tiempo(Math.max(0, Math.floor(Date.now() / 1000) - (E.llamada.desde || 0))) }); }, 1000);
-  let reinicioVisto = null;
+  let reinicioVisto = null, saltado = false;
   const nuevoGrabador = (video) => {
     // Lighter video for a phone on a relayed path, with a full picture every 2 s so a lost
     // moment heals quickly (17 Oct 2026 review).
     grabador = new MediaRecorder(fuenteGrabacion(), { mimeType: mime(video), audioBitsPerSecond: 48000, videoBitsPerSecond: video ? 600000 : undefined, videoKeyFrameIntervalDuration: video ? 2000 : undefined });
-    grabador.ondataavailable = async (e) => { if (e.data && e.data.size && canal) { try { canal.envia(1, new Uint8Array(await e.data.arrayBuffer())); } catch (_) {} } };
+    // A slow line (mobile data, a busy relay): above 160 KB waiting, the piece is dropped and,
+    // once the line has emptied, the recorder starts again so the next piece carries its
+    // header. The call stays live instead of falling further and further behind, and a hang-up
+    // is never stuck behind old sound (owner's test, 17 Oct 2026).
+    grabador.ondataavailable = async (e) => {
+      if (!(e.data && e.data.size && canal)) return;
+      const cola = canal.cola ? canal.cola() : 0;
+      if (cola > 163840) { saltado = true; return; }
+      if (saltado) { if (cola < 32768) { saltado = false; reiniciaGrabador(!!(E && E.llamada && E.llamada.video)); } return; }
+      try { canal.envia(1, new Uint8Array(await e.data.arrayBuffer())); } catch (_) {}
+    };
     grabador.start(120);
   };
   const reiniciaGrabador = (video) => {
