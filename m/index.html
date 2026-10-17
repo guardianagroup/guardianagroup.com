@@ -204,7 +204,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 .resumen-ll h2{margin:0;font:600 17px/1.25 var(--display)}.resumen-ll .r-sub{font-size:12.5px;color:var(--muted)}
 .resumen-ll ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}.resumen-ll li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.4}.resumen-ll li i{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none;background:var(--ok)}.resumen-ll li.aviso i{background:var(--aviso)}.resumen-ll li.alerta i{background:var(--alerta)}
 .resumen-ll .r-botones{display:flex;gap:8px}.resumen-ll .r-botones .btn{flex:1;border-radius:999px}
-.mensajes li img{cursor:zoom-in}
+.mensajes li img{cursor:zoom-in}.mensajes li video{display:block;max-width:100%;border-radius:10px;margin-bottom:4px}
 .visor{position:fixed;inset:0;z-index:70;display:none;background:rgba(5,8,18,.96);touch-action:none;overflow:hidden}.visor.si{display:block}
 .visor img{position:absolute;left:50%;top:50%;max-width:100vw;max-height:100vh;transform-origin:center center;will-change:transform;user-select:none;-webkit-user-drag:none}
 .visor .v-barra{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:linear-gradient(rgba(5,8,18,.7),transparent)}
@@ -585,8 +585,9 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     if (x.archivo && !x.borrado) {
       const a = x.archivo, url = archivos.get(a.id) || enviados.get(a.nombre);
       const esVoz = /^audio\//.test(a.mime || '') || /^nota-de-voz/.test(a.nombre || '');
+      const esVideo = !esVoz && /^video\//.test(a.mime || '');
       if (esVoz) { cuerpo = (url ? `<audio controls preload="metadata" src="${url}"></audio>` : `<span class="nv-etiqueta">${esc(t('nv_nota'))} · …</span>`) + (/cambiada/.test(a.nombre || '') ? `<span class="nv-etiqueta">${esc(t('nv_cambiada_corta'))}</span>` : ''); }
-      else cuerpo = (url && /^image\//.test(a.mime || '') ? `<img src="${url}" alt="">` : '') + `<span class="adjunto"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>${esc(a.nombre || '')}</span>` + (texto ? cuerpo : '');
+      else cuerpo = (url && esVideo ? `<video controls playsinline preload="metadata" src="${url}"></video>` : '') + (url && /^image\//.test(a.mime || '') ? `<img src="${url}" alt="">` : '') + `<span class="adjunto"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>${esc(a.nombre || '')}</span>` + (texto ? cuerpo : '');
     }
     const reac = (x.reacciones || []).length ? `<span class="reac">${x.reacciones.map((r) => `<span title="${esc(r.de || t('tu'))}">${esc(r.emoji)}</span>`).join('')}</span>` : '';
     const meta = `<time>${x.editado ? esc(t('editado')) + ' · ' : ''}${esc(hora(x.t))}${x.mio && x.estado ? ' ' + (TICK[x.estado] || '') : ''}</time>`;
@@ -839,7 +840,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     const caja = $('llamada');
     caja.classList.toggle('llamando', !!l && l.conectada === false);
     if (l && l.conectada === false) { if (!caja.classList.contains('activa')) plena(true); if (!E || !E.entrante) empiezaTono(tonoLlamando, 4000); llamadaViva = 'llamando'; caja.classList.add('activa'); caja.classList.toggle('solo-voz', !l.video); $('camara').hidden = !l.video; if (l.video && !(E && E.entrante)) previaCamara(true); $('l-letra').textContent = (((E && E.contacto) || (D && D.n) || '').trim().charAt(0) || '·').toUpperCase(); $('l-titulo').textContent = nombreLlamada(l); $('l-estado').textContent = t('llamando', { s: Math.max(0, 45 - (Math.floor(Date.now() / 1000) - (l.desde || 0))) }); return; }
-    if (!l) { if (llamadaViva) { paraTono(); if (llamadaViva === 'conectada') tonoFin(); llamadaViva = null; } caja.classList.remove('activa'); plena(false); quitaMini(); previaCamara(false); paraMedios(); mimeRemoto = null; return; }
+    if (!l) { delete $('altavoz').dataset.listo; if (sesionAudio) { try { sesionAudio.type = 'auto'; } catch (_) {} } if (llamadaViva) { paraTono(); if (llamadaViva === 'conectada') tonoFin(); llamadaViva = null; } caja.classList.remove('activa'); plena(false); quitaMini(); previaCamara(false); paraMedios(); mimeRemoto = null; return; }
     if (!caja.classList.contains('activa')) plena(true);
     if (llamadaViva !== 'conectada') { paraTono(); tonoConectada(); llamadaViva = 'conectada'; previaCamara(false); }
     caja.classList.add('activa');
@@ -891,6 +892,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     preparaReproductor(mimeRemoto || mime(video));
     let s = null;
     try {
+      if (!(video) && navigator.audioSession && 'type' in navigator.audioSession) { try { navigator.audioSession.type = 'play-and-record'; } catch (_) {} }
       s = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: video ? { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } } : false });
     } catch (_) { arrancando = false; negado = true; nota(t('sin_permiso')); return; }
     // The call may have ended while the permission was being asked: then nothing starts (it
@@ -1007,6 +1009,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     const mi = turno;
     let s = null;
     try {
+      if (!(l.video) && navigator.audioSession && 'type' in navigator.audioSession) { try { navigator.audioSession.type = 'play-and-record'; } catch (_) {} }
       s = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: l.video ? { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } } : false });
     } catch (_) { arrancando = false; negado = true; nota(t('sin_permiso')); return; }
     if (mi !== turno || !(E && E.llamada)) { s.getTracks().forEach((x) => x.stop()); arrancando = false; return; }
@@ -1106,8 +1109,12 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     if (a.hecho >= a.bytes) {
       entrando.delete(id);
       // Pictures only (never an SVG from someone else), and the last 50 at most.
-      if (!/^(image\/(jpeg|png|gif|webp)|audio\/(webm|mp4|ogg|mpeg|wav|aac))$/.test(a.mime || '')) return;
-      try { archivos.set(id, URL.createObjectURL(new Blob(a.trozos, { type: a.mime }))); if (archivos.size > 50) { const [k, u] = archivos.entries().next().value; URL.revokeObjectURL(u); archivos.delete(k); } if (E) recibe(E); } catch (_) {}
+      // The type without its parameters (17 Oct 2026: an iPhone sends «audio/mp4;codecs=…», and the
+      // note arrived but never played on the other iPhone).
+      const tipo = (a.mime || '').split(';')[0].trim().toLowerCase();
+      if (!/^(image\/(jpeg|png|gif|webp|heic|heif)|audio\/(webm|mp4|ogg|mpeg|wav|aac|x-m4a|m4a)|video\/(mp4|quicktime|webm))$/.test(tipo)) return;
+      a.mime = tipo;
+      try { archivos.set(id, URL.createObjectURL(new Blob(a.trozos, { type: tipo }))); if (archivos.size > 50) { const [k, u] = archivos.entries().next().value; URL.revokeObjectURL(u); archivos.delete(k); } if (E) recibe(E); } catch (_) {}
     }
   };
   // Long press on a message: reply (quoted) or copy.
@@ -1143,10 +1150,14 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     v.addEventListener('pointerup', () => { p = null; }); v.addEventListener('pointercancel', () => { p = null; }); })();
   // Speaker / earpiece: only where the browser lets a page choose the output (Android Chrome);
   // on the iPhone the system decides (the call plays through the speaker) and the button stays hidden.
-  const puedeSalida = !!(HTMLMediaElement.prototype.setSinkId && navigator.mediaDevices && navigator.mediaDevices.enumerateDevices);
+  // iPhone and iPad (17 Oct 2026, the owner: «al abrirla, sale en altavoz; debe salir normal»):
+  // Safari cannot pick an output, but its audio session can: «play-and-record» is the earpiece
+  // of a phone call, «auto» lets it go to the loudspeaker.
+  const sesionAudio = navigator.audioSession && 'type' in navigator.audioSession ? navigator.audioSession : null;
+  const puedeSalida = !!(sesionAudio || (HTMLMediaElement.prototype.setSinkId && navigator.mediaDevices && navigator.mediaDevices.enumerateDevices));
   let altavoz = true, salidas = [];
   const pintaAltavoz = () => { $('altavoz').setAttribute('aria-pressed', String(altavoz)); $('altavoz').setAttribute('aria-label', t(altavoz ? 'altavoz' : 'auricular')); $('altavoz').classList.toggle('tachado', !altavoz); };
-  const aplicaSalida = async () => { if (!puedeSalida) return; try { if (!salidas.length) salidas = (await navigator.mediaDevices.enumerateDevices()).filter((d) => d.kind === 'audiooutput'); const quiero = salidas.find((d) => altavoz ? /speaker|altavoz/i.test(d.label) : /earpiece|auricular|receiver/i.test(d.label)) || (altavoz ? salidas[0] : salidas[1]); if (quiero) await $('remoto').setSinkId(quiero.deviceId); } catch (_) {} };
+  const aplicaSalida = async () => { if (!puedeSalida) return; if (sesionAudio) { try { sesionAudio.type = altavoz ? 'auto' : 'play-and-record'; } catch (_) {} return; } try { if (!salidas.length) salidas = (await navigator.mediaDevices.enumerateDevices()).filter((d) => d.kind === 'audiooutput'); const quiero = salidas.find((d) => altavoz ? /speaker|altavoz/i.test(d.label) : /earpiece|auricular|receiver/i.test(d.label)) || (altavoz ? salidas[0] : salidas[1]); if (quiero) await $('remoto').setSinkId(quiero.deviceId); } catch (_) {} };
   $('altavoz').addEventListener('click', () => { altavoz = !altavoz; pintaAltavoz(); aplicaSalida(); });
   // While we call with video, the camera is shown here (not sent yet): the same picture that
   // goes out once the other side answers.
