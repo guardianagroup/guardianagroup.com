@@ -95,7 +95,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 .mensajes li time{display:block;font:10.5px var(--mono);opacity:.7;margin-top:3px;text-align:right}
 .mensajes li.nota{align-self:center;background:transparent;border:0;color:var(--muted);font-size:12.5px;max-width:95%;text-align:center}
 .escribir{display:flex;gap:8px;align-items:center;padding:8px 16px calc(10px + env(safe-area-inset-bottom));margin:0 -16px;border-top:1px solid var(--line);background:var(--card);flex:none}
-.escribir input{flex:1;min-width:0;font:15px var(--texto);padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--campo);color:var(--fg)}
+.escribir textarea{flex:1;min-width:0;font:15px/1.4 var(--texto);padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:var(--campo);color:var(--fg);resize:none;max-height:120px;overflow-y:auto;-webkit-user-select:text;user-select:text}
 .fila{display:flex;gap:8px;flex-wrap:wrap}
 .llamada{display:none;flex-direction:column;gap:10px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--card)}.llamada.activa{display:flex}
 .l-cab{display:flex;align-items:center;gap:12px}.l-cuadro{width:44px;height:44px;border-radius:12px;background:var(--accent);color:#fff;display:grid;place-items:center;flex:none}
@@ -183,7 +183,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     <p class="nota-p" id="nota-iphone" hidden></p>
     <p class="subiendo" id="subiendo" hidden></p>
     <div class="respondiendo" id="respondiendo"><span id="respondiendo-t"></span><button type="button" id="respondiendo-no" aria-label="Cancelar">×</button></div>
-    <form class="escribir" id="form"><button class="btn sec redondo" id="mas" type="button" aria-label="+">+</button><input id="texto" autocomplete="off" enterkeyhint="send"><button class="btn redondo" id="enviar" type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg></button></form>
+    <form class="escribir" id="form"><button class="btn sec redondo" id="mas" type="button" aria-label="+">+</button><textarea id="texto" rows="1" autocomplete="off" autocorrect="on" autocapitalize="sentences" spellcheck="true" enterkeyhint="send" data-lpignore="true" data-form-type="other" name="mensaje-guardiana"></textarea><button class="btn redondo" id="enviar" type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg></button></form>
   </section>
 </main>
 <div class="hoja" id="hoja"><div class="caja">
@@ -409,7 +409,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   };
   // Fixed size: no pinch to zoom (the chat scrolls, nothing else moves).
   for (const ev of ['gesturestart', 'gesturechange', 'gestureend']) document.addEventListener(ev, (e) => e.preventDefault(), { passive: false });
-  let ultimoToque = 0; document.addEventListener('touchend', (e) => { const ahora = Date.now(); if (ahora - ultimoToque < 320 && !e.target.closest('input, textarea, button, a')) e.preventDefault(); ultimoToque = ahora; }, { passive: false });
+  let ultimoToque = 0; document.addEventListener('touchend', (e) => { const ahora = Date.now(); if (ahora - ultimoToque < 320 && !e.target.closest('input, textarea, button, a, video')) e.preventDefault(); ultimoToque = ahora; }, { passive: false });
   const llega = (m) => { if (m && m.tipo === 'archivo_movil') archivoAnunciado(m); else recibe(m); };
   const manda = (m) => { if (canal) canal.envia(0, enc(JSON.stringify(m))); };
   const lee = async (readable, g) => {
@@ -523,7 +523,11 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   $('sas-no').addEventListener('click', () => manda({ t: 'sas', ok: false, nombre: '' }));
   const notas = [];
   const nota = (x) => { notas.push(x); if (notas.length > 3) notas.shift(); const ol = $('mensajes'); const li = document.createElement('li'); li.className = 'nota'; li.textContent = x; ol.appendChild(li); ol.scrollTop = ol.scrollHeight; };
-  $('form').addEventListener('submit', (e) => { e.preventDefault(); const x = $('texto').value.trim(); if (!x) return; manda({ t: 'texto', texto: (respondiendoA ? '> ' + respondiendoA + '\n' : '') + x }); $('texto').value = ''; respondiendoA = ''; $('respondiendo').classList.remove('si'); });
+  // Enter sends, Shift+Enter breaks the line; the field grows up to five lines.
+  const crece = () => { const t = $('texto'); t.style.height = 'auto'; t.style.height = Math.min(120, t.scrollHeight) + 'px'; };
+  $('texto').addEventListener('input', crece);
+  $('texto').addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('form').requestSubmit(); } });
+  $('form').addEventListener('submit', (e) => { e.preventDefault(); const x = $('texto').value.trim(); if (!x) return; manda({ t: 'texto', texto: (respondiendoA ? '> ' + respondiendoA + '\n' : '') + x }); $('texto').value = ''; crece(); respondiendoA = ''; $('respondiendo').classList.remove('si'); });
   $('reintentar').addEventListener('click', conecta);
 
   // ---------- Voice and video: the same pieces the computer uses, over the same link ----------
