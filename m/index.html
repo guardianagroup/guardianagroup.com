@@ -656,7 +656,9 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     try { s = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } }); } catch (_) { nota_aviso(); return; }
     let vp = null, fuente = s;
     if (cambiada && window.vozProtegida) { try { vp = window.vozProtegida(s, -4); fuente = vp.stream; } catch (_) { vp = null; } }
-    const tipo = ['audio/webm;codecs=opus', 'audio/mp4', 'audio/webm'].find((x) => MediaRecorder.isTypeSupported(x)) || '';
+    // MP4 (AAC) first: every phone and tablet opens it, while an iPad may not open a WebM note
+    // recorded on Android (17 Oct 2026, owner's test).
+    const tipo = (() => { const c = ['audio/mp4;codecs=mp4a.40.2', 'audio/mp4', 'audio/webm;codecs=opus', 'audio/webm']; const ok = (x) => { try { return MediaRecorder.isTypeSupported(x); } catch (_) { return false; } }; const suyo = (E && E.reproduce_otro) || []; return c.find((x) => ok(x) && suyo.includes(x)) || c.find(ok) || ''; })();
     let r;
     try { r = new MediaRecorder(fuente, tipo ? { mimeType: tipo, audioBitsPerSecond: 32000 } : undefined); } catch (_) { s.getTracks().forEach((x) => x.stop()); if (vp) vp.parar(); nota_aviso(); return; }
     grab = { s, vp, r, trozos: [], cambiada, desde: Date.now(), tipo: r.mimeType || tipo, enviar: false, reloj: null };
@@ -695,7 +697,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   const puedeGrabar = !!(window.MediaRecorder && MediaRecorder.isTypeSupported && FORMATOS.voz.some((x) => MediaRecorder.isTypeSupported(x)));
   if (!puedeGrabar && !window.RTCPeerConnection) { $('nota-iphone').hidden = false; $('nota-iphone').textContent = t('iphone'); $('voz').disabled = true; $('video').disabled = true; }
   // A format the other side can open first (an iPhone may not open WebM), then any we record.
-  const mime = (video) => { const c = video ? FORMATOS.video : FORMATOS.voz; const ok = (x) => window.MediaRecorder && MediaRecorder.isTypeSupported(x); const suyo = (E && E.reproduce_otro) || []; return c.find((x) => ok(x) && suyo.includes(x)) || c.find(ok) || c[0]; };
+  const mime = (video) => { const c = video ? FORMATOS.video : FORMATOS.voz; const ok = (x) => window.MediaRecorder && MediaRecorder.isTypeSupported(x); const suyo = (E && E.reproduce_otro) || []; const mp4 = c.filter((x) => x.includes('mp4')); return c.find((x) => ok(x) && suyo.includes(x)) || (suyo.length ? null : mp4.find(ok)) || c.find(ok) || c[0]; };
   let grabador = null, local = null, fuente = null, buffer = null, pendientes = [], arrancando = false, silenciado = false, wake = null;
   let sonando = null;
   // Call sounds (16 Oct 2026), like a phone: ringing tone while we call, a ringtone when we are
