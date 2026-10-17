@@ -132,6 +132,13 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 .l-menos svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .llamada.plena .l-menos{display:grid}
 .llamada.plena.llamando .l-voz{display:grid}
+/* Minimized (16 Oct 2026): the same call, as a floating thumbnail over the chat; tap it to come back. */
+.llamada.mini{position:fixed;right:12px;top:calc(72px + env(safe-area-inset-top));z-index:40;width:118px;aspect-ratio:3/4;border:0;border-radius:14px;padding:0;gap:0;background:#000;color:#fff;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.45);cursor:pointer}
+.llamada.mini .l-cab,.llamada.mini .l-botones,.llamada.mini #local,.llamada.mini .l-menos,.llamada.mini #pantalla{display:none}
+.llamada.mini .pantallas{aspect-ratio:auto;max-height:none;border-radius:0;height:100%}
+.llamada.mini.solo-voz{width:auto;aspect-ratio:auto;height:auto;padding:8px 14px;border-radius:999px;background:var(--ok);color:#fff;font:600 13px var(--texto)}
+.llamada.mini.solo-voz .l-cab{display:flex;padding:0;background:transparent;position:static}.llamada.mini.solo-voz .l-cuadro{display:none}.llamada.mini.solo-voz .l-titulo b{display:none}.llamada.mini.solo-voz .l-estado{color:#fff;font-size:13px}
+.llamada.mini .l-voz{display:none}
 .l-estado{font:500 12.5px var(--texto);color:var(--muted)}
 .nota-p{font-size:12.5px;color:var(--muted);margin:0;text-align:center}
 .timbre{position:fixed;inset:0;z-index:45;display:grid;place-content:center;justify-items:center;gap:16px;padding:24px;background:radial-gradient(circle at 50% 35%,#1b2a4a,#0B1020 70%);color:#fff;text-align:center}.timbre[hidden]{display:none}.timbre b{font:600 22px/1.3 var(--display)}.timbre .l-letra{margin-bottom:8px}
@@ -552,7 +559,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     const caja = $('llamada');
     caja.classList.toggle('llamando', !!l && l.conectada === false);
     if (l && l.conectada === false) { if (!caja.classList.contains('activa')) plena(true); if (!E || !E.entrante) empiezaTono(tonoLlamando, 4000); llamadaViva = 'llamando'; caja.classList.add('activa'); $('l-letra').textContent = ((E && E.contacto) || (D && D.n) || '·').trim()[0].toUpperCase(); $('l-titulo').textContent = nombreLlamada(l); $('l-estado').textContent = t('llamando', { s: Math.max(0, 45 - (Math.floor(Date.now() / 1000) - (l.desde || 0))) }); return; }
-    if (!l) { if (llamadaViva) { paraTono(); if (llamadaViva === 'conectada') tonoFin(); llamadaViva = null; } caja.classList.remove('activa'); plena(false); paraMedios(); mimeRemoto = null; return; }
+    if (!l) { if (llamadaViva) { paraTono(); if (llamadaViva === 'conectada') tonoFin(); llamadaViva = null; } caja.classList.remove('activa'); plena(false); quitaMini(); paraMedios(); mimeRemoto = null; return; }
     if (!caja.classList.contains('activa')) plena(true);
     if (llamadaViva !== 'conectada') { paraTono(); tonoConectada(); llamadaViva = 'conectada'; }
     caja.classList.add('activa');
@@ -682,9 +689,10 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   // Big call (16 Oct 2026): the call fills the phone by itself when it connects; «⌄» leaves it
   // as a small card over the chat and the card brings it back. No system full screen: on the
   // iPhone that only showed the other person, never your own picture.
-  const plena = (si) => { $('llamada').classList.toggle('plena', si); document.body.classList.toggle('en-llamada', si); };
+  const plena = (si) => { const c = $('llamada'); c.classList.toggle('plena', si); c.classList.toggle('mini', !si && c.classList.contains('activa')); document.body.classList.toggle('en-llamada', si); };
   $('l-menos').addEventListener('click', () => plena(false));
   $('llamada').addEventListener('click', (e) => { if (!$('llamada').classList.contains('plena') && !e.target.closest('button')) plena(true); });
+  const quitaMini = () => $('llamada').classList.remove('mini');
   $('pantalla').addEventListener('click', () => plena(true));
   // Your own picture can be dragged to any corner.
   (() => { const v = $('local'); let p = null, dx = 0, dy = 0;
