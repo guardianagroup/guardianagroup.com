@@ -1027,7 +1027,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     pc.onicecandidate = (e) => { if (e.candidate && rtc && rtc.pc === pc) rtcManda({ t: 'ice', s: rtc.s, c: e.candidate.toJSON() }); };
     pc.ontrack = (e) => { if (!rtc || rtc.pc !== pc) return; const v = $('remoto'); v.removeAttribute('src'); v.srcObject = e.streams[0] || new MediaStream([e.track]); v.play().catch(() => {}); if (puedeSalida) aplicaSalida(); };
     pc.onconnectionstatechange = () => { if (!rtc || rtc.pc !== pc) return; if (pc.connectionState === 'connected') { rtc.conectada = true; clearTimeout(rtc.reloj); } else if (pc.connectionState === 'failed') rtcFalla(true); };
-    pc.getSenders().forEach((x) => { if (x.track && x.track.kind === 'video') { try { const p = x.getParameters(); p.encodings = p.encodings && p.encodings.length ? p.encodings : [{}]; p.encodings[0].maxBitrate = 800000; x.setParameters(p).catch(() => {}); } catch (_) {} } });
+    pc.getSenders().forEach((x) => { if (x.track && x.track.kind === 'video') { try { const p = x.getParameters(); p.encodings = p.encodings && p.encodings.length ? p.encodings : [{}]; p.encodings[0].maxBitrate = rtc.local ? 2500000 : 1200000; p.encodings[0].maxFramerate = 30; p.degradationPreference = 'maintain-framerate'; x.setParameters(p).catch(() => {}); } catch (_) {} } });
     return pc;
   };
   const rtcOfrece = async () => {
@@ -1046,7 +1046,8 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     let s = null;
     try {
       if (!(l.video) && navigator.audioSession && 'type' in navigator.audioSession) { try { navigator.audioSession.type = 'play-and-record'; } catch (_) {} }
-      s = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: l.video ? { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } } : false });
+      // WebRTC carries HD well (hardware H.264, its own congestion control): 720p at 30 fps.
+      s = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: l.video ? { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 30 } } : false });
     } catch (_) { arrancando = false; negado = true; nota(t('sin_permiso')); return; }
     if (mi !== turno || !(E && E.llamada)) { s.getTracks().forEach((x) => x.stop()); arrancando = false; return; }
     previaCamara(false);
