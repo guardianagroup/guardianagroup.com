@@ -126,8 +126,7 @@ header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;bo
 #cert[hidden]{display:none}
 #cert .c1{flex:1;display:flex;border:1px solid var(--oro);padding:.7cqw}
 #cert .c2{flex:1;display:flex;flex-direction:column;justify-content:space-between;align-items:center;border:.5px solid var(--oro);padding:5cqw 7cqw 4.4cqw}
-#cert .c-marca{display:inline-flex;align-items:center;gap:1.1cqw;font-family:'Unbounded',sans-serif;font-weight:700;font-size:1.45cqw;letter-spacing:.24em;padding-left:.24em}
-#cert .c-marca i{width:2.3cqw;height:2.3cqw;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M160.59 69.13 A68 68 0 1 1 130.87 39.41' fill='none' stroke='%230B1020' stroke-width='30'/%3E%3Ccircle cx='100' cy='100' r='31' fill='%231F4BFF'/%3E%3C/svg%3E") center/contain no-repeat}
+#cert .c-marca{display:inline-flex;align-items:baseline;gap:.55em;font-family:'Unbounded',sans-serif;font-weight:700;font-size:1.7cqw;letter-spacing:.22em;padding-left:.22em;color:var(--tinta)}#cert .c-marca span{font-weight:400;letter-spacing:.22em;color:#5B6377}#cert .c2{position:relative;background:url(/marca/guilloche-centro.svg) center 47%/43cqw no-repeat,url(/marca/guilloche-esquina.svg) left -3.2cqw top -3.2cqw/10cqw no-repeat,url(/marca/guilloche-esquina.svg) right -3.2cqw top -3.2cqw/10cqw no-repeat,url(/marca/guilloche-esquina.svg) left -3.2cqw bottom -3.2cqw/10cqw no-repeat,url(/marca/guilloche-esquina.svg) right -3.2cqw bottom -3.2cqw/10cqw no-repeat;overflow:hidden}#cert .c-lugar{color:var(--tinta)}#cert .c-rec{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:1.05cqw;letter-spacing:.3em;text-transform:uppercase;color:#6B6A66;margin:0 0 1.2cqw;padding-left:.3em}#cert .c-hechos{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:1.1cqw;letter-spacing:.08em;color:#6B6A66;margin:1.6cqw 0 0}#cert .c-lema{position:absolute;left:0;right:0;bottom:1.7cqw;text-align:center;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:1.05cqw;letter-spacing:.28em;text-transform:uppercase;color:rgba(160,122,44,.75);padding-left:.28em;margin:0}
 #cert .c-centro{display:flex;flex-direction:column;align-items:center;width:100%}
 #cert .c-tit{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:500;font-size:1.5cqw;letter-spacing:.32em;text-transform:uppercase;color:var(--oro);margin:0;padding-left:.32em}
 #cert .c-regla{display:block;width:7cqw;height:1px;background:var(--oro);margin:2.4cqw 0 2.6cqw}
@@ -136,14 +135,14 @@ header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;bo
 #cert .c-pie{display:flex;justify-content:space-between;align-items:flex-end;width:100%;gap:4cqw;text-align:left}
 #cert .c-datos{display:flex;flex-direction:column;gap:.5cqw;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:1.15cqw;letter-spacing:.06em;color:var(--gris)}
 #cert .c-datos [hidden]{display:none}
-#cert .c-firma{display:flex;flex-direction:column;gap:.3cqw;min-width:28cqw;padding-top:1.2cqw;border-top:1px solid var(--tinta);font-size:1.45cqw;line-height:1.35}
+#cert .c-firma{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.85cqw;min-width:30cqw;padding-top:1.5cqw;border-top:1px solid var(--tinta);font-size:1.45cqw;line-height:1.35}
 #cert .c-firma b{font-weight:600;color:var(--tinta)}
 #cert .c-firma span{color:var(--gris);font-size:1.25cqw}
 @media (max-width:600px){
 #cert{aspect-ratio:auto;padding:10px}
 #cert .c1{padding:4px}
 #cert .c2{padding:30px 18px 24px;gap:30px}
-#cert .c-marca{font-size:11px;gap:9px}#cert .c-marca i{width:17px;height:17px}
+#cert .c-marca{font-size:12px}
 #cert .c-tit{font-size:10.5px;letter-spacing:.24em;padding-left:.24em}
 #cert .c-regla{width:40px;margin:16px 0}
 #cert .c-nombre{font-size:25px}
@@ -191,10 +190,10 @@ main>*:not(#certificado-sec){display:none!important}
 <div class="cert-campo"><label for="cert-nombre">Your name, as you want it to appear</label><input id="cert-nombre" type="text" autocomplete="name" maxlength="80" spellcheck="false" enterkeyhint="done"><p class="muted">It stays in your browser: it is sent nowhere. In the print dialog, choose “Save as PDF”.</p></div>
 <p><button type="button" id="cert-ver">View and print the certificate</button></p>
 <div class="cert-marco"><div id="cert" role="group" aria-label="Founder Certificate" hidden><div class="c1"><div class="c2">
-<span class="c-marca"><i></i>GUARDIANA</span>
-<div class="c-centro"><p class="c-tit">Founder Certificate</p><span class="c-regla"></span><p class="c-nombre" id="cert-nombre-ver" data-def="GUARDIANA Founder">GUARDIANA Founder</p><p class="c-frase">Holds one of the thousand GUARDIANA Founder places in the world. Lifetime licence.</p></div>
-<div class="c-pie"><div class="c-datos"><span id="cert-fecha"></span><span id="cert-registro" hidden>Record: <span id="cert-registro-n"></span></span></div><div class="c-firma"><b>Francisco Salvatierra Sánchez</b><span>Founder, GUARDIANA Group</span></div></div>
-</div></div></div></div>
+<span class="c-marca">GUARDIANA<span>Group</span></span>
+<div class="c-centro"><p class="c-tit">Founder Certificate</p><span class="c-regla"></span><p class="c-rec">Presented to</p><p class="c-nombre" id="cert-nombre-ver" data-def="GUARDIANA Founder">GUARDIANA Founder</p><p class="c-frase">Holder of one of the thousand GUARDIANA Founder places in the world. A personal licence, for life, with no fees.</p><p class="c-hechos">Up to five computers · No expiry · Non-transferable</p></div>
+<div class="c-pie"><div class="c-datos"><span class="c-lugar">Cartagena de Indias, Colombia</span><span id="cert-fecha"></span><span id="cert-registro" hidden>Record: <span id="cert-registro-n"></span></span></div><div class="c-firma"><b>Francisco Salvatierra Sánchez</b><span>Founder, GUARDIANA Group</span></div></div>
+<p class="c-lema">Your data, under your control</p></div></div></div></div>
 </section>
 
 <h2>How to activate it</h2>
