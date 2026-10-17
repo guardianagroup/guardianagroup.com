@@ -981,10 +981,12 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     }
     return new MediaStream([...derecho.stream.getVideoTracks(), ...fuente.getAudioTracks()]);
   };
-  const fuenteGrabacion = () => {
+  // `grabando`: for the recorder (the picture is drawn upright); WebRTC turns it by itself.
+  const fuenteGrabacion = (grabando = true) => {
+    const recta = (x) => (grabando ? imagenDerecha(x) : x);
     if (vozProt) { vozProt.parar(); vozProt = null; }
-    if (!vozActiva || !local || !window.vozProtegida || !local.getAudioTracks().length) return local ? imagenDerecha(local) : local;
-    try { vozProt = window.vozProtegida(local, -4); return imagenDerecha(new MediaStream([...local.getVideoTracks(), ...vozProt.stream.getAudioTracks()])); } catch (_) { return imagenDerecha(local); }
+    if (!vozActiva || !local || !window.vozProtegida || !local.getAudioTracks().length) return local ? recta(local) : local;
+    try { vozProt = window.vozProtegida(local, -4); return recta(new MediaStream([...local.getVideoTracks(), ...vozProt.stream.getAudioTracks()])); } catch (_) { return recta(local); }
   };
   const pintaVozProt = () => { const b = $('voz-prot'); b.setAttribute('aria-pressed', String(vozActiva)); b.setAttribute('aria-label', t(vozActiva ? 'voz_prot_si' : 'voz_prot')); b.title = t(vozActiva ? 'voz_prot_si' : 'voz_prot'); };
   $('voz-prot').addEventListener('click', () => {
@@ -1019,8 +1021,8 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   let rtc = null, rtcFallo = false, rtcEspera = 0;
   const rtcManda = (d) => manda({ t: 'rtc', d });
   const rtcNuevaPc = () => {
-    const pc = new RTCPeerConnection({ iceServers: rtc.ice, iceTransportPolicy: 'relay', bundlePolicy: 'max-bundle' });
-    const envio = fuenteGrabacion();
+    const pc = new RTCPeerConnection({ iceServers: rtc.ice, iceTransportPolicy: rtc.local ? 'all' : 'relay', bundlePolicy: 'max-bundle' });
+    const envio = fuenteGrabacion(false);
     envio.getTracks().forEach((x) => pc.addTrack(x, envio));
     pc.onicecandidate = (e) => { if (e.candidate && rtc && rtc.pc === pc) rtcManda({ t: 'ice', s: rtc.s, c: e.candidate.toJSON() }); };
     pc.ontrack = (e) => { if (!rtc || rtc.pc !== pc) return; const v = $('remoto'); v.removeAttribute('src'); v.srcObject = e.streams[0] || new MediaStream([e.track]); v.play().catch(() => {}); if (puedeSalida) aplicaSalida(); };
@@ -1051,8 +1053,11 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     local = s;
     local.getAudioTracks().forEach((x) => { x.enabled = !silenciado; });
     $('local').srcObject = local;
-    rtc = { ice: l.rtc.ice, ofrece: !!l.rtc.ofrece, pc: null, s: null, pendientes: [], conectada: false, reloj: null };
-    rtc.reloj = setTimeout(() => { if (rtc && !rtc.conectada) rtcFalla(true); }, 15000);
+    rtc = { ice: l.rtc.ice, local: !!l.rtc.local, ofrece: !!l.rtc.ofrece, pc: null, s: null, pendientes: [], conectada: false, reloj: null };
+    // Without the relay's call service the two phones try each other directly on the same wifi
+    // (only local, hidden addresses: nothing public is shown); if that does not connect within
+    // 7 s, the call goes the old way through the computer.
+    rtc.reloj = setTimeout(() => { if (rtc && !rtc.conectada) rtcFalla(true); }, rtc.local ? 7000 : 15000);
     arrancando = false;
     if (vozActiva) manda({ t: 'voz_protegida', activa: true });
     rtcManda({ t: 'hola' });
@@ -1094,7 +1099,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   };
   const rtcVoz = () => {
     if (!rtc || !rtc.pc || !local) return;
-    const pista = fuenteGrabacion().getAudioTracks()[0];
+    const pista = fuenteGrabacion(false).getAudioTracks()[0];
     rtc.pc.getSenders().forEach((x) => { if (x.track && x.track.kind === 'audio' && pista) x.replaceTrack(pista).catch(() => {}); });
   };
   $('voz').addEventListener('click', () => { manda({ t: 'llamar', video: false, mime: mime(false) }); });
