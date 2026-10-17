@@ -220,6 +220,8 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   // As an app on the home screen (16 Oct 2026): the icon keeps the address it was made with,
   // so the last code read is remembered here and, when it no longer works, the page reads a
   // new one with the camera itself.
+  // A new code read while this page is open (the browser reused the tab): start again with it.
+  window.addEventListener('hashchange', () => { try { localStorage.setItem('guardiana-ultimo', location.hash.slice(1)); } catch (_) {} location.reload(); });
   let D = null, h0 = location.hash.slice(1);
   if (!h0) { try { const u = localStorage.getItem('guardiana-ultimo'); if (u) { h0 = u; location.replace(location.pathname + '#' + u); } } catch (_) {} }
   try { if (h0) localStorage.setItem('guardiana-ultimo', h0); } catch (_) {}
