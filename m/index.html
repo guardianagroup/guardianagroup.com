@@ -154,8 +154,12 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
   const iv = (n) => { const b = new Uint8Array(12); new DataView(b.buffer).setBigUint64(4, BigInt(n)); return b; };
   const sella = async (k, n, aad, d) => new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv(n), additionalData: aad, tagLength: 128 }, k, d));
   const abre = async (k, n, aad, d) => new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv(n), additionalData: aad, tagLength: 128 }, k, d));
-  const claves = async (K, delEquipo, delMovil) => {
-    const base = await crypto.subtle.importKey('raw', K, 'HKDF', false, ['deriveKey']);
+  // Since 16 Oct 2026 («GM2») the link also agrees a fresh secret (ECDH P-256) mixed in with
+  // the QR key: a photographed code can ask to come in, but cannot read any link. A program
+  // from before greets with «GM1» and the QR key alone.
+  const claves = async (K, delEquipo, delMovil, secreto) => {
+    const ikm = secreto ? une(K, secreto) : K;
+    const base = await crypto.subtle.importKey('raw', ikm, 'HKDF', false, ['deriveKey']);
     const una = (info) => crypto.subtle.deriveKey({ name: 'HKDF', hash: 'SHA-256', salt: une(delEquipo, delMovil), info: enc(info) }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
     return [await una('guardiana-movil-1 m>e'), await una('guardiana-movil-1 e>m')];
   };
@@ -226,10 +230,20 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
           if (!listo) {
             // The computer's greeting: «GM1» and its fresh random number; we answer with ours
             // and prove we hold the key.
-            if (d.length !== 19 || d[0] !== 71 || d[1] !== 77 || d[2] !== 49) { ws.close(); return; }
+            const v2 = d.length === 3 + 16 + 65 && d[0] === 71 && d[1] === 77 && d[2] === 50;
+            if (!v2 && (d.length !== 19 || d[0] !== 71 || d[1] !== 77 || d[2] !== 49)) { ws.close(); return; }
             const delMovil = crypto.getRandomValues(new Uint8Array(16));
-            [kme, kem] = await claves(K, d.slice(3), delMovil);
-            ws.send(une(delMovil, await sella(kme, 0, enc('GM1'), enc('hola'))));
+            if (v2) {
+              const par = await crypto.subtle.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, false, ['deriveBits']);
+              const suya = await crypto.subtle.importKey('raw', d.slice(19), { name: 'ECDH', namedCurve: 'P-256' }, false, []);
+              const secreto = new Uint8Array(await crypto.subtle.deriveBits({ name: 'ECDH', public: suya }, par.privateKey, 256));
+              const mia = new Uint8Array(await crypto.subtle.exportKey('raw', par.publicKey));
+              [kme, kem] = await claves(K, d.slice(3, 19), delMovil, secreto);
+              ws.send(une(delMovil, mia, await sella(kme, 0, enc('GM2'), enc('hola'))));
+            } else {
+              [kme, kem] = await claves(K, d.slice(3), delMovil);
+              ws.send(une(delMovil, await sella(kme, 0, enc('GM1'), enc('hola'))));
+            }
             listo = true; clearTimeout(espera);
             canal = {
               envia: (tipo, bytes) => { colaSale = colaSale.then(async () => { const n = nSale++; const s = await sella(kme, n, VACIO, une(Uint8Array.of(tipo), bytes)); if (ws.readyState === 1) ws.send(s); }).catch(() => {}); return colaSale; },
