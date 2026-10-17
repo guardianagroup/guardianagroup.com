@@ -86,7 +86,7 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
     <div class="timbre" id="timbre" hidden aria-live="assertive"><b id="timbre-t"></b><div class="fila"><button class="btn contestar" id="contestar"></button><button class="btn peligro" id="rechazar"></button></div></div>
     <section class="llamada" id="llamada">
       <div class="pantallas"><video id="remoto" autoplay playsinline></video><video id="local" autoplay playsinline muted></video></div>
-      <div class="fila"><span class="l-estado" id="l-estado"></span><button class="btn sec" id="silencio" aria-pressed="false"></button><button class="btn peligro" id="colgar"></button></div>
+      <div class="fila"><span class="l-estado" id="l-estado"></span><button class="btn sec" id="silencio" aria-pressed="false"></button><button class="btn sec" id="pantalla" hidden>⤢</button><button class="btn peligro" id="colgar"></button></div>
     </section>
     <ul class="mensajes" id="mensajes"></ul>
     <p class="nota-p" id="nota-iphone" hidden></p>
@@ -385,6 +385,7 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
     if (!l) { caja.classList.remove('activa'); $('botones-llamar').hidden = false; paraMedios(); mimeRemoto = null; return; }
     caja.classList.add('activa'); $('botones-llamar').hidden = true;
     caja.classList.toggle('solo-voz', !l.video);
+    $('pantalla').hidden = !l.video;
     $('l-estado').textContent = t(l.video ? 'en_video' : 'en_voz', { t: tiempo(Math.max(0, Math.floor(Date.now() / 1000) - (l.desde || 0))) });
     // The other side's player started again: our recorder starts again, so its first piece
     // carries the header (a stream joined halfway does not open).
@@ -451,6 +452,9 @@ footer{padding:8px 16px calc(8px + env(safe-area-inset-bottom));font:11px var(--
   $('voz').addEventListener('click', () => { manda({ t: 'llamar', video: false, mime: mime(false) }); });
   $('video').addEventListener('click', () => { manda({ t: 'llamar', video: true, mime: mime(true) }); });
   $('colgar').addEventListener('click', () => manda({ t: 'colgar' }));
+  // Full screen for the video (16 Oct 2026): the pictures fill the phone; the same button or
+  // the system's back gesture brings them back.
+  $('pantalla').addEventListener('click', () => { const p = document.querySelector('.pantallas'); if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); else if (p && p.requestFullscreen) p.requestFullscreen().catch(() => {}); else { const v = $('remoto'); if (v && v.webkitEnterFullscreen) v.webkitEnterFullscreen(); } });
   $('silencio').addEventListener('click', () => { silenciado = !silenciado; if (local) local.getAudioTracks().forEach((x) => { x.enabled = !silenciado; }); $('silencio').setAttribute('aria-pressed', String(silenciado)); $('silencio').textContent = t(silenciado ? 'sonar' : 'silenciar'); });
   document.addEventListener('visibilitychange', () => { if (!document.hidden) manda({ t: 'visto' }); });
   window.addEventListener('pagehide', () => { cerrado = true; if (canal) canal.cierra(); });
