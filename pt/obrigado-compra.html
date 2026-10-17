@@ -92,7 +92,20 @@ footer.pie .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mon
 footer.pie .arriba{justify-self:start;color:var(--azul)}
 @media (max-width:600px){main{padding:20px 20px 72px}h1{font-size:27px}header.top nav{gap:12px 16px}}
 #clave{display:block;word-break:break-all;font-size:1.05rem;padding:.7rem .9rem;margin:.4rem 0 .8rem}#copiar{font:inherit;font-weight:600;padding:.55rem 1rem;border-radius:10px;border:1px solid var(--azul,#2456d6);background:var(--azul,#2456d6);color:#fff;cursor:pointer}#copiar:focus-visible{outline:3px solid var(--ambar,#e0a400);outline-offset:2px}.lema-marca{display:flex;flex-direction:column;gap:3px;line-height:1}.lema-marca small{font-family:'IBM Plex Sans',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--gris)}
-header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;border-radius:999px;padding:6px 15px;background:var(--azul);color:#fff;font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap}header.top .idiomas+.descargar{margin-left:0}header.top .descargar:hover{background:var(--azul-oscuro);color:#fff}.box.cierre{margin-top:40px}.box.cierre p{margin:0}</style></head>
+header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;border-radius:999px;padding:6px 15px;background:var(--azul);color:#fff;font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap}header.top .idiomas+.descargar{margin-left:0}header.top .descargar:hover{background:var(--azul-oscuro);color:#fff}.box.cierre{margin-top:40px}.box.cierre p{margin:0}/* Carta de bienvenida: una hoja sobria con un filete fino de marca arriba, ancho de lectura. */
+.carta{position:relative;max-width:calc(62ch + 84px);margin:38px 0 6px;padding:36px 42px 32px;background:var(--hoja);border:1px solid var(--linea);border-radius:14px;font-size:17px;line-height:1.75;box-shadow:0 24px 48px -40px rgba(11,16,32,.35)}
+.carta::before{content:"";position:absolute;top:-1px;left:42px;width:64px;height:3px;background:var(--azul);border-radius:0 0 3px 3px}
+.carta p{margin:0 0 1em;color:#2A3142;overflow-wrap:break-word}
+.carta .saludo{font-family:'Unbounded',sans-serif;font-weight:600;font-size:19px;line-height:1.35;letter-spacing:-.01em;color:var(--tinta);margin:0 0 18px}
+.carta ol{list-style:none;counter-reset:paso;margin:0 0 1.15em;padding:0}
+.carta ol li{counter-increment:paso;position:relative;padding-left:36px;margin:0 0 .65em;color:#2A3142;overflow-wrap:break-word}
+.carta ol li::before{content:counter(paso);position:absolute;left:0;top:.28em;width:22px;height:22px;border:1px solid var(--azul);border-radius:50%;color:var(--azul);font:500 12px/20px 'IBM Plex Mono',ui-monospace,monospace;text-align:center}
+.carta .lema{color:var(--tinta);margin-top:1.4em}
+.carta .firma{display:flex;flex-direction:column;gap:2px;margin:26px 0 0;line-height:1.45}
+.carta .firma b{color:var(--tinta);font-weight:600}
+.carta .firma span{color:var(--gris);font-size:15px}
+@media (max-width:600px){.carta{padding:28px 22px 24px;font-size:16.5px;line-height:1.72;border-radius:12px}.carta::before{left:22px}.carta .saludo{font-size:18px}}
+</style></head>
 <body><header class="top"><a class="brand" href="/pt/" aria-label="GUARDIANA, início"><i></i><span class="lema-marca">GUARDIANA<small>Seus dados, sob o seu controle</small></span></a><nav aria-label="Seções"><a href="/pt/#producto">Produto</a><a href="/pt/radiografias/">Radiografias</a><a href="/pt/como-funciona.html">Como funciona</a><a href="/pt/#planes">Planos</a></nav><span class="idiomas"><a class="idioma" href="/gracias-compra.html" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><a class="idioma" href="/en/thanks-purchase.html" lang="en" hreflang="en" data-idioma="en" aria-label="English">EN</a><span class="idioma actual" lang="pt" aria-current="true">PT</span></span><a class="descargar" href="/pt/instalar.html#baixar">Baixar</a></header><main id="arriba">
 <p class="k">COMPRA FEITA</p>
 <h1>Obrigado pela sua compra.</h1>
@@ -102,6 +115,17 @@ header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;bo
 <p class="muted">Ela também chega por e-mail, da Dodo Payments. Guarde-a: é pessoal e vale para até 5 computadores seus. A mesma chave também ativa o <a href="/pt/zero.html">GUARDIANA ZERO</a>, o navegador.</p></div>
 <p class="lead" id="sin-clave">A sua chave de licença chega por e-mail, da Dodo Payments, no endereço que você informou ao pagar. Se não a vir em alguns minutos, confira a pasta de spam.</p>
 <p class="lead" id="no-pago" hidden>O gateway diz que o pagamento não foi concluído (estado: «<span id="estado"></span>»). Se houve cobrança, escreva para nós com o número do pagamento abaixo.</p>
+
+<article class="carta" id="carta" aria-label="Carta de boas-vindas">
+<p class="saludo">Bem-vindo à GUARDIANA.</p>
+<p>Obrigado pela sua confiança. Sabemos que ela não se entrega à toa, e por isso não a pedimos às cegas: a partir de hoje, o seu computador mostra a você com quem fala, de que empresa é cada nome e em que país ele está. O que você decidir fazer com isso é só seu.</p>
+<p>Para começar:</p>
+<ol><li>Abra a GUARDIANA e entre em «Licença». Cole a sua chave e clique em «Ativar».</li><li>Veja a sua primeira Radiografia. Você vai ver o que até hoje não se via.</li><li>Se um nome não convencer você, corte-o com um clique. Se você se enganar, outro clique desfaz.</li></ol>
+<p>A sua assinatura inclui o navegador GUARDIANA ZERO e vale para até cinco computadores seus.</p>
+<p>Não vamos pedir uma conta a você. Os seus dados não saem do seu computador. Não vendemos nada sobre você. E o código é aberto: qualquer pessoa pode conferir.</p>
+<p class="lema">A privacidade começa por saber. E continua com a liberdade de decidir.</p>
+<p class="firma"><b>Francisco Salvatierra Sánchez</b><span>Fundador do GUARDIANA Group</span></p>
+</article>
 
 <h2>Como ativá-la</h2>
 <ol><li>Abra o painel da GUARDIANA: no Windows, o atalho «Guardiana» da área de trabalho ou do menu Iniciar; no Linux, <code>sudo guardiana panel</code>; no Mac, o app GUARDIANA.</li><li>Vá à página «Licença».</li><li>Cole a chave em «chave de licença» e clique em «Ativar». O Plus liga na hora, e a conexão fica anotada nessa mesma página.</li></ol>
@@ -121,7 +145,7 @@ header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;bo
   function el(id) { return document.getElementById(id); }
   if (pago) { el('pago').textContent = pago; el('con-pago').hidden = false; }
   if (estado && estado !== 'succeeded' && estado !== 'active') {
-    el('estado').textContent = estado; el('no-pago').hidden = false; el('sin-clave').hidden = true;
+    el('estado').textContent = estado; el('no-pago').hidden = false; el('sin-clave').hidden = true; el('carta').hidden = true;
   } else if (clave.length) {
     el('clave').textContent = clave.join('\n'); el('con-clave').hidden = false; el('sin-clave').hidden = true;
   }
