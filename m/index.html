@@ -103,7 +103,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 .mensajes li.mio.sigue{border-top-right-radius:6px}.mensajes li:not(.mio).sigue{border-top-left-radius:6px}
 .mensajes>li.fecha{align-self:center;max-width:none;margin:20px 0 4px;padding:4px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);box-shadow:none;color:var(--muted);font-size:12px;font-weight:500}
 .mensajes>li.fecha:first-child{margin-top:0}
-.mensajes li{max-width:min(85%,440px);padding:8px 12px;border-radius:16px;border-bottom-left-radius:6px;background:var(--card);border:1px solid var(--line);overflow-wrap:anywhere;box-shadow:0 1px 2px rgba(11,16,32,.05)}
+.mensajes li{align-self:flex-start;max-width:min(85%,440px);padding:8px 12px;border-radius:16px;border-bottom-left-radius:6px;background:var(--card);border:1px solid var(--line);overflow-wrap:anywhere;box-shadow:0 1px 2px rgba(11,16,32,.05)}
 .mensajes li.mio{align-self:flex-end;background:var(--accent-suave);color:var(--fg);border-color:color-mix(in srgb,var(--accent) 22%,var(--line));border-radius:16px;border-bottom-right-radius:6px}
 .mensajes li time{display:block;font:10.5px var(--mono);opacity:.7;margin-top:3px;text-align:right}
 .mensajes li.nota{align-self:center;background:transparent;border:0;color:var(--muted);font-size:12.5px;max-width:95%;text-align:center}
@@ -260,7 +260,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   for (const k of ['conectando', 'pendiente', 'error']) { $('t-' + k).textContent = t(k); $('t-' + k + '-p').textContent = t(k + '_p'); }
   $('reintentar').textContent = t('reintentar'); $('leer').textContent = t('leer'); $('t-leer').textContent = t('leer_t'); $('t-leer-p').textContent = t('leer_p'); $('t-leer-nota').textContent = t('leer_sin'); $('enviar').setAttribute('aria-label', t('enviar')); $('texto').placeholder = t('escribe'); $('voz').setAttribute('aria-label', t('voz')); $('video').setAttribute('aria-label', t('video')); for (const k of ['foto', 'camara', 'doc', 'sitio']) $('h-' + k + '-t').textContent = t(k); $('m-responder').textContent = t('responder'); $('m-copiar').textContent = t('copiar_msg'); $('m-editar').textContent = t('editar_msg'); $('m-borrar').textContent = t('borrar_msg'); $('b-todos').textContent = t('borrar_todos'); $('b-mi').textContent = t('borrar_mi'); $('b-no').textContent = t('cancelar'); $('colgar').setAttribute('aria-label', t('colgar')); $('contestar').setAttribute('aria-label', t('contestar')); $('rechazar').setAttribute('aria-label', t('rechazar')); $('silencio').setAttribute('aria-label', t('silenciar'));
   $('codigo-whatsapp').textContent = t('whatsapp'); $('codigo-copiar').textContent = t('copiar'); $('t-numeros').textContent = t('numeros'); $('t-numeros-p').textContent = t('numeros_p'); $('nombre-otro').placeholder = t('nombre_ph'); $('sas-si').textContent = t('sas_si'); $('sas-no').textContent = t('sas_no'); $('t-numeros-nota').textContent = t('nota_movil');
-  if (D && D.n) $('con').textContent = t('con', { n: D.n });
+  if (D && D.n) $('con').textContent = D.n;
   // «Sala de casa» (16 Oct 2026): one code for the phones of the house. Four seats, one key
   // each derived from the code's key; this phone remembers its seat and its name.
   const SALA = !!(D && D.sala);
@@ -575,7 +575,8 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     const g = estadoGlobal(m.monitor || {});
     const e = $('estado'); e.hidden = false; e.className = 'estado ' + g; $('chip').hidden = false; $('chip').className = 'chip si ' + g;
     $('estado-palabra').textContent = t(g); $('estado-nota').textContent = m.escribiendo ? t('escribiendo') : (g === 'protegida' ? t('nota_cifrado') : ''); $('estado-nota').classList.toggle('escribiendo-nota', !!m.escribiendo);
-    if (m.contacto) $('con').textContent = t('con', { n: m.contacto });
+    // The name alone in the header, like the apps people know (it was cut as «Con Nat…»).
+    if (m.contacto) $('con').textContent = m.contacto;
     pintaAvatar(m.contacto, true);
     const ol = $('mensajes'); const abajo = ol.scrollTop + ol.clientHeight >= ol.scrollHeight - 40;
     ol.innerHTML = (m.mensajes || []).map(pintaMensaje).join('') + notas.map((x) => `<li class="nota">${esc(x)}</li>`).join('');
