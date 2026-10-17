@@ -38,10 +38,10 @@ header{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:
 .avatar{width:42px;height:42px;border-radius:12px;background:var(--accent-suave);color:var(--accent);display:grid;place-items:center;font:600 17px/1 var(--display);position:relative;flex:none}
 .avatar i{position:absolute;right:-2px;bottom:-2px;width:11px;height:11px;border-radius:50%;background:var(--line);border:2px solid var(--card)}
 .avatar i.si{background:var(--ok)}
-header .quien{display:grid;gap:3px;min-width:0;flex:1}
+header .quien{display:grid;gap:3px;min-width:0;flex:1}header .chip{margin-left:auto}
 header .con{font:600 17px/1.2 var(--display);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 header .marca{margin-left:auto;color:var(--muted);flex:none}header .marca svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-header .acciones{margin-left:auto;display:none;gap:4px;flex:none}header .acciones.si{display:flex}header .acciones.si~.marca{display:none}
+header .acciones{margin-left:0;display:none;gap:2px;flex:none}header .acciones.si{display:flex}header .acciones.si~.marca{display:none}
 header .acciones button{appearance:none;border:0;background:transparent;color:var(--accent);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;cursor:pointer;touch-action:manipulation}header .acciones button:disabled{opacity:.35}
 header .acciones svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 html,body{touch-action:pan-x pan-y}
@@ -66,6 +66,8 @@ body.en-llamada header{visibility:hidden}
 .respondiendo button{appearance:none;border:0;background:transparent;color:var(--muted);font-size:20px;line-height:1;cursor:pointer}
 .subiendo{font-size:12.5px;color:var(--muted);text-align:center}
 .estado{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);min-width:0}
+header .chip{margin-left:auto;display:none;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);font-size:12px;font-weight:600;flex:none}header .chip.si{display:flex}header .chip .punto{width:7px;height:7px;border-radius:50%;background:var(--line)}header .chip.protegida{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}header .chip.protegida .punto{background:var(--ok)}header .chip.revisar{color:var(--aviso)}header .chip.revisar .punto{background:var(--aviso)}header .chip.pausada{color:var(--alerta)}header .chip.pausada .punto{background:var(--alerta)}
+header .acciones{margin-left:0}header .chip.si+.acciones{margin-left:0}
 .estado .punto{width:7px;height:7px;border-radius:50%;background:var(--line);flex:none}
 .estado.protegida .punto{background:var(--ok)}.estado.revisar .punto{background:var(--aviso)}.estado.pausada .punto{background:var(--alerta)}
 .estado b{font-weight:600;font-size:12px}.estado.protegida b{color:var(--ok)}.estado.revisar b{color:var(--aviso)}.estado.pausada b{color:var(--alerta)}
@@ -150,7 +152,8 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 <body>
 <header>
   <span class="avatar" id="avatar"><span id="avatar-letra">·</span><i id="avatar-punto"></i></span>
-  <div class="quien"><div class="con" id="con"></div><div class="estado" id="estado" hidden><i class="punto"></i><b id="estado-palabra"></b><small id="estado-nota"></small></div></div>
+  <div class="quien"><div class="con" id="con"></div><div class="estado" id="estado" hidden><small id="estado-nota"></small></div></div>
+  <span class="chip" id="chip" hidden><i class="punto"></i><b id="estado-palabra"></b></span>
   <span class="acciones" id="acciones"><button type="button" id="video" aria-label="Videollamada"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="m16 10 5-3v10l-5-3z"/></svg></button><button type="button" id="voz" aria-label="Llamar"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></button></span>
 </header>
 <main>
@@ -469,7 +472,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
       // The room: the chat with everyone at home, drawn like any conversation.
       huboConversacion = true;
       muestra('p-chat');
-      const e = $('estado'); e.hidden = false; e.className = 'estado protegida';
+      const e = $('estado'); e.hidden = false; e.className = 'estado protegida'; $('chip').hidden = false; $('chip').className = 'chip si protegida';
       $('estado-palabra').textContent = t('protegida'); $('estado-nota').textContent = m.sala.caduca ? t('sala_hasta', { f: new Date(m.sala.caduca * 1000).toLocaleString(L, { weekday: 'short', hour: '2-digit', minute: '2-digit' }) }) : '';
       $('con').textContent = m.contacto ? t('sala_con', { n: m.contacto }) : t('sala_sola');
       pintaAvatar(m.contacto || m.sala.nombre, true);
@@ -503,7 +506,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     huboConversacion = true;
     muestra('p-chat');
     const g = estadoGlobal(m.monitor || {});
-    const e = $('estado'); e.hidden = false; e.className = 'estado ' + g;
+    const e = $('estado'); e.hidden = false; e.className = 'estado ' + g; $('chip').hidden = false; $('chip').className = 'chip si ' + g;
     $('estado-palabra').textContent = t(g); $('estado-nota').textContent = g === 'protegida' ? t('nota_cifrado') : '';
     if (m.contacto) $('con').textContent = t('con', { n: m.contacto });
     pintaAvatar(m.contacto, true);
