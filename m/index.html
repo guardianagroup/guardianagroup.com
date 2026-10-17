@@ -31,7 +31,7 @@
 :root{--bg:#F4F6FA;--fg:#0B1020;--muted:#5B6275;--card:#fff;--line:#D9DEE8;--campo:#F0F3F9;--accent:#1F4BFF;--accent-fg:#fff;--accent-suave:#E6ECFF;--ok:#0E8F6E;--aviso:#9A5B00;--alerta:#C0301A;--display:'Unbounded','IBM Plex Sans',system-ui,sans-serif;--texto:'IBM Plex Sans',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;color-scheme:light dark}
 @media (prefers-color-scheme:dark){:root{--bg:#0B1020;--fg:#F4F6FA;--muted:#A5ACBF;--card:#141A2E;--line:#2A3250;--campo:#1A2140;--accent:#5C7CFF;--accent-fg:#0B1020;--accent-suave:#1C2652;--ok:#3CC79A;--aviso:#E3A54A;--alerta:#FF7A66}}
 *{box-sizing:border-box}html,body{margin:0;height:100%}[hidden]{display:none!important}
-body{font:15px/1.5 var(--texto);background:var(--bg);color:var(--fg);display:flex;flex-direction:column;height:100dvh;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+body{font:15px/1.5 var(--texto);background:var(--bg);color:var(--fg);display:flex;flex-direction:column;height:100dvh;padding:env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);overflow:hidden}
 /* The design the owner chose (16 Oct 2026): the header with the avatar, the name and a quiet
    trust line; the call as a card over the chat; bubbles; the writing bar at the bottom. */
 header{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--card)}
@@ -45,7 +45,7 @@ header .acciones{margin-left:auto;display:none;gap:4px;flex:none}header .accione
 header .acciones button{appearance:none;border:0;background:transparent;color:var(--accent);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;cursor:pointer;touch-action:manipulation}header .acciones button:disabled{opacity:.35}
 header .acciones svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 html,body{touch-action:pan-x pan-y}
-body.en-llamada header,body.en-llamada footer{visibility:hidden}
+body.en-llamada header{visibility:hidden}
 /* The «+» sheet: the things you can send, like the apps people know. */
 .hoja{position:fixed;inset:0;z-index:30;display:none;align-items:flex-end;background:rgba(11,16,32,.45)}.hoja.si{display:flex}
 .hoja .caja{width:100%;background:var(--card);border-radius:18px 18px 0 0;padding:14px 16px calc(18px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px}
@@ -69,7 +69,8 @@ body.en-llamada header,body.en-llamada footer{visibility:hidden}
 .estado.protegida .punto{background:var(--ok)}.estado.revisar .punto{background:var(--aviso)}.estado.pausada .punto{background:var(--alerta)}
 .estado b{font-weight:600;font-size:12px}.estado.protegida b{color:var(--ok)}.estado.revisar b{color:var(--aviso)}.estado.pausada b{color:var(--alerta)}
 .estado small{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-main{flex:1;display:flex;flex-direction:column;min-height:0;overflow-y:auto}
+main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+#p-chat.activa{min-height:0;padding-bottom:0}#p-chat .mensajes{padding-bottom:8px}
 .pantalla{display:none;flex:1;flex-direction:column;padding:16px;gap:12px}.pantalla.activa{display:flex}
 .codigo{display:grid;gap:10px;justify-items:center}.codigo b{font:700 26px/1.2 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.06em}.btn.sec{background:transparent;border:1px solid var(--linea,#3a4a6a)}
 .numeros{display:flex;gap:10px;justify-content:center}.numeros b{font:700 28px/1 ui-monospace,Menlo,Consolas,monospace;background:rgba(255,255,255,.06);padding:12px 10px;border-radius:10px}
@@ -89,7 +90,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow-y:auto}
 .mensajes li.mio{align-self:flex-end;background:var(--accent-suave);color:var(--fg);border-color:color-mix(in srgb,var(--accent) 22%,var(--line));border-radius:16px;border-bottom-right-radius:6px}
 .mensajes li time{display:block;font:10.5px var(--mono);opacity:.7;margin-top:3px;text-align:right}
 .mensajes li.nota{align-self:center;background:transparent;border:0;color:var(--muted);font-size:12.5px;max-width:95%;text-align:center}
-.escribir{display:flex;gap:8px;align-items:center;padding-top:6px;border-top:1px solid var(--line)}
+.escribir{display:flex;gap:8px;align-items:center;padding:8px 16px calc(10px + env(safe-area-inset-bottom));margin:0 -16px;border-top:1px solid var(--line);background:var(--card);flex:none}
 .escribir input{flex:1;min-width:0;font:15px var(--texto);padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--campo);color:var(--fg)}
 .fila{display:flex;gap:8px;flex-wrap:wrap}
 .llamada{display:none;flex-direction:column;gap:10px;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--card)}.llamada.activa{display:flex}
@@ -135,7 +136,6 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow-y:auto}
 .timbre .fila{gap:48px;margin-top:40px}.timbre .btn{width:68px;height:68px;padding:0;border-radius:50%;display:grid;place-items:center}.timbre .btn svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.timbre small{font-size:13px;color:rgba(255,255,255,.75)}
 .btn.contestar{background:var(--ok);border-color:var(--ok);color:#fff}
 .llamando .pantallas{display:none}
-footer{padding:6px 16px calc(6px + env(safe-area-inset-bottom));font:10.5px/1.4 var(--texto);color:var(--muted);text-align:center;border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
@@ -182,7 +182,6 @@ footer{padding:6px 16px calc(6px + env(safe-area-inset-bottom));font:10.5px/1.4 
   <input type="file" id="f-foto" accept="image/*,video/*" multiple hidden><input type="file" id="f-camara" accept="image/*" capture="environment" hidden><input type="file" id="f-doc" multiple hidden>
 </div></div>
 <div class="menu-msg" id="menu-msg"><button type="button" id="m-responder"></button><button type="button" id="m-copiar"></button></div>
-<footer id="pie"></footer>
 <script>
 'use strict';
 (() => {
@@ -204,7 +203,7 @@ footer{padding:6px 16px calc(6px + env(safe-area-inset-bottom));font:10.5px/1.4 
   const hora = (s) => (s ? new Date(s * 1000).toLocaleTimeString(L, { hour: '2-digit', minute: '2-digit' }) : '');
   const tiempo = (s) => { const m = Math.floor(s / 60), x = s % 60; return (m < 10 ? '0' : '') + m + ':' + (x < 10 ? '0' : '') + x; };
   for (const k of ['conectando', 'pendiente', 'error']) { $('t-' + k).textContent = t(k); $('t-' + k + '-p').textContent = t(k + '_p'); }
-  $('reintentar').textContent = t('reintentar'); $('enviar').setAttribute('aria-label', t('enviar')); $('texto').placeholder = t('escribe'); $('voz').setAttribute('aria-label', t('voz')); $('video').setAttribute('aria-label', t('video')); for (const k of ['foto', 'camara', 'doc', 'sitio']) $('h-' + k + '-t').textContent = t(k); $('m-responder').textContent = t('responder'); $('m-copiar').textContent = t('copiar_msg'); $('colgar').setAttribute('aria-label', t('colgar')); $('contestar').setAttribute('aria-label', t('contestar')); $('rechazar').setAttribute('aria-label', t('rechazar')); $('silencio').setAttribute('aria-label', t('silenciar')); $('pie').textContent = t('pie') + ' ' + t('nota_movil');
+  $('reintentar').textContent = t('reintentar'); $('enviar').setAttribute('aria-label', t('enviar')); $('texto').placeholder = t('escribe'); $('voz').setAttribute('aria-label', t('voz')); $('video').setAttribute('aria-label', t('video')); for (const k of ['foto', 'camara', 'doc', 'sitio']) $('h-' + k + '-t').textContent = t(k); $('m-responder').textContent = t('responder'); $('m-copiar').textContent = t('copiar_msg'); $('colgar').setAttribute('aria-label', t('colgar')); $('contestar').setAttribute('aria-label', t('contestar')); $('rechazar').setAttribute('aria-label', t('rechazar')); $('silencio').setAttribute('aria-label', t('silenciar'));
   $('codigo-whatsapp').textContent = t('whatsapp'); $('codigo-copiar').textContent = t('copiar'); $('t-numeros').textContent = t('numeros'); $('t-numeros-p').textContent = t('numeros_p'); $('nombre-otro').placeholder = t('nombre_ph'); $('sas-si').textContent = t('sas_si'); $('sas-no').textContent = t('sas_no'); $('t-numeros-nota').textContent = t('nota_movil');
   if (D && D.n) $('con').textContent = t('con', { n: D.n });
   // «Sala de casa» (16 Oct 2026): one code for the phones of the house. Four seats, one key
