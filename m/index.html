@@ -114,7 +114,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 #local{position:absolute;right:10px;bottom:10px;width:30%;transform:scaleX(-1);border-radius:8px;border:1px solid rgba(255,255,255,.3);background:#000;object-fit:cover;touch-action:none}
 .solo-voz .pantallas{display:none}
 .l-voz{display:none}
-.llamando .pantallas{display:none}
+.llamando.solo-voz .pantallas{display:none}
 /* Big call (16 Oct 2026): the call fills the phone, like the apps people know. The other
    person fills the screen, you are the small picture (drag it where you like), name and
    time at the top, round buttons at the bottom. «⌄» leaves it as a small card over the chat. */
@@ -134,7 +134,11 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 .l-menos svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .llamada.plena .l-menos{display:grid}
 .llamada.plena.llamando .l-voz{display:grid;flex:1;place-content:center;justify-items:center;gap:14px;background:radial-gradient(circle at 50% 35%,#1b2a4a,#0B1020 70%)}
-.llamada.plena.llamando .pantallas{display:none}
+.llamada.plena.llamando.solo-voz .pantallas{display:none}
+.llamada.plena.llamando:not(.solo-voz) .l-voz{display:none}
+/* Calling with video: your own camera fills the screen until the other side answers (as the apps people know). */
+.llamada.plena.llamando:not(.solo-voz) #local{top:0;right:0;bottom:0;left:0;width:100%;height:100%;max-width:none;aspect-ratio:auto;border-radius:0;box-shadow:none;transform:scaleX(-1)}
+.llamada.plena.llamando:not(.solo-voz) #remoto{display:none}
 /* Minimized (16 Oct 2026): the same call, as a floating thumbnail over the chat; tap it to come back. */
 .llamada.mini{position:fixed;right:12px;top:calc(72px + env(safe-area-inset-top));z-index:40;width:118px;aspect-ratio:3/4;border:0;border-radius:14px;padding:0;gap:0;background:#000;color:#fff;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.45);cursor:pointer}
 .llamada.mini .l-cab,.llamada.mini .l-botones,.llamada.mini #local,.llamada.mini .l-menos,.llamada.mini #pantalla{display:none}
@@ -147,7 +151,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 .timbre{position:fixed;inset:0;z-index:45;display:grid;place-content:center;justify-items:center;gap:16px;padding:24px;background:radial-gradient(circle at 50% 35%,#1b2a4a,#0B1020 70%);color:#fff;text-align:center}.timbre[hidden]{display:none}.timbre b{font:600 22px/1.3 var(--display)}.timbre .l-letra{margin-bottom:8px}
 .timbre .fila{gap:48px;margin-top:40px}.timbre .btn{width:68px;height:68px;padding:0;border-radius:50%;display:grid;place-items:center}.timbre .btn svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.timbre small{font-size:13px;color:rgba(255,255,255,.75)}
 .btn.contestar{background:var(--ok);border-color:var(--ok);color:#fff}
-.llamando .pantallas{display:none}
+.llamando.solo-voz .pantallas{display:none}
 </style>
 </head>
 <body>
@@ -565,10 +569,10 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     pintaTimbre(E && E.entrante);
     const caja = $('llamada');
     caja.classList.toggle('llamando', !!l && l.conectada === false);
-    if (l && l.conectada === false) { if (!caja.classList.contains('activa')) plena(true); if (!E || !E.entrante) empiezaTono(tonoLlamando, 4000); llamadaViva = 'llamando'; caja.classList.add('activa'); caja.classList.toggle('solo-voz', !l.video); $('camara').hidden = !l.video; $('l-letra').textContent = ((E && E.contacto) || (D && D.n) || '·').trim()[0].toUpperCase(); $('l-titulo').textContent = nombreLlamada(l); $('l-estado').textContent = t('llamando', { s: Math.max(0, 45 - (Math.floor(Date.now() / 1000) - (l.desde || 0))) }); return; }
-    if (!l) { if (llamadaViva) { paraTono(); if (llamadaViva === 'conectada') tonoFin(); llamadaViva = null; } caja.classList.remove('activa'); plena(false); quitaMini(); paraMedios(); mimeRemoto = null; return; }
+    if (l && l.conectada === false) { if (!caja.classList.contains('activa')) plena(true); if (!E || !E.entrante) empiezaTono(tonoLlamando, 4000); llamadaViva = 'llamando'; caja.classList.add('activa'); caja.classList.toggle('solo-voz', !l.video); $('camara').hidden = !l.video; if (l.video && !(E && E.entrante)) previaCamara(true); $('l-letra').textContent = ((E && E.contacto) || (D && D.n) || '·').trim()[0].toUpperCase(); $('l-titulo').textContent = nombreLlamada(l); $('l-estado').textContent = t('llamando', { s: Math.max(0, 45 - (Math.floor(Date.now() / 1000) - (l.desde || 0))) }); return; }
+    if (!l) { if (llamadaViva) { paraTono(); if (llamadaViva === 'conectada') tonoFin(); llamadaViva = null; } caja.classList.remove('activa'); plena(false); quitaMini(); previaCamara(false); paraMedios(); mimeRemoto = null; return; }
     if (!caja.classList.contains('activa')) plena(true);
-    if (llamadaViva !== 'conectada') { paraTono(); tonoConectada(); llamadaViva = 'conectada'; }
+    if (llamadaViva !== 'conectada') { paraTono(); tonoConectada(); llamadaViva = 'conectada'; previaCamara(false); }
     caja.classList.add('activa');
     caja.classList.toggle('solo-voz', !l.video);
     $('camara').hidden = !l.video;
@@ -713,6 +717,14 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   const pintaAltavoz = () => { $('altavoz').setAttribute('aria-pressed', String(altavoz)); $('altavoz').setAttribute('aria-label', t(altavoz ? 'altavoz' : 'auricular')); $('altavoz').classList.toggle('tachado', !altavoz); };
   const aplicaSalida = async () => { if (!puedeSalida) return; try { if (!salidas.length) salidas = (await navigator.mediaDevices.enumerateDevices()).filter((d) => d.kind === 'audiooutput'); const quiero = salidas.find((d) => altavoz ? /speaker|altavoz/i.test(d.label) : /earpiece|auricular|receiver/i.test(d.label)) || (altavoz ? salidas[0] : salidas[1]); if (quiero) await $('remoto').setSinkId(quiero.deviceId); } catch (_) {} };
   $('altavoz').addEventListener('click', () => { altavoz = !altavoz; pintaAltavoz(); aplicaSalida(); });
+  // While we call with video, the camera is shown here (not sent yet): the same picture that
+  // goes out once the other side answers.
+  let previa = null;
+  const previaCamara = async (si) => {
+    if (!si) { if (previa) { previa.getTracks().forEach((x) => x.stop()); previa = null; if (!local) $('local').srcObject = null; } return; }
+    if (previa || local) return;
+    try { previa = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 960 }, height: { ideal: 720 } } }); $('local').srcObject = previa; } catch (_) {}
+  };
   let camara = 'user';
   $('camara').addEventListener('click', async () => {
     if (!local || !E || !E.llamada || !E.llamada.video) return;
