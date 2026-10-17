@@ -466,7 +466,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   // One frame that fails to draw must not drop the link (it came back, failed again, and the
   // page reconnected every second and a half).
   const reparte = (tipo, cuerpo) => { try { if (tipo === 0) llega(JSON.parse(new TextDecoder().decode(cuerpo))); else if (tipo === 1) trozoRemoto(cuerpo); else if (tipo === 2) trozoArchivo(cuerpo); } catch (e) { console.error(e); } };
-  const llega = (m) => { if (m && m.tipo === 'archivo_movil') archivoAnunciado(m); else recibe(m); };
+  const llega = (m) => { if (m && m.tipo === 'archivo_movil') archivoAnunciado(m); else if (m && m.tipo === 'secure_rtc') rtcRecibe(m.d || {}); else recibe(m); };
   const manda = (m) => { if (canal) canal.envia(0, enc(JSON.stringify(m))); };
   const lee = async (readable, g) => {
     const r = readable.getReader();
@@ -620,7 +620,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   // ---------- Voice and video: the same pieces the computer uses, over the same link ----------
   const FORMATOS = { voz: ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4;codecs=mp4a.40.2', 'audio/mp4'], video: ['video/webm;codecs=vp8,opus', 'video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/webm;codecs=vp9,opus', 'video/webm', 'video/mp4'] };
   const puedeGrabar = !!(window.MediaRecorder && MediaRecorder.isTypeSupported && FORMATOS.voz.some((x) => MediaRecorder.isTypeSupported(x)));
-  if (!puedeGrabar) { $('nota-iphone').hidden = false; $('nota-iphone').textContent = t('iphone'); $('voz').disabled = true; $('video').disabled = true; }
+  if (!puedeGrabar && !window.RTCPeerConnection) { $('nota-iphone').hidden = false; $('nota-iphone').textContent = t('iphone'); $('voz').disabled = true; $('video').disabled = true; }
   // A format the other side can open first (an iPhone may not open WebM), then any we record.
   const mime = (video) => { const c = video ? FORMATOS.video : FORMATOS.voz; const ok = (x) => window.MediaRecorder && MediaRecorder.isTypeSupported(x); const suyo = (E && E.reproduce_otro) || []; return c.find((x) => ok(x) && suyo.includes(x)) || c.find(ok) || c[0]; };
   let grabador = null, local = null, fuente = null, buffer = null, pendientes = [], arrancando = false, silenciado = false, wake = null;
@@ -667,6 +667,10 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     // carries the header (a stream joined halfway does not open).
     if (grabador && typeof l.reinicio === 'number' && reinicioVisto !== null && l.reinicio !== reinicioVisto) reiniciaGrabador(!!l.video);
     if (typeof l.reinicio === 'number') reinicioVisto = l.reinicio;
+    // WebRTC when the computer offers it (17 Oct 2026), the recorded pieces otherwise.
+    const conRtc = l.rtc && l.rtc.ice && !rtcFallo && window.RTCPeerConnection;
+    if (rtc || (conRtc && !grabador)) { if (!rtc && !arrancando) empiezaRtc(l); return; }
+    if (l.rtc && l.rtc.pendiente && !rtcFallo && !grabador && !arrancando) { rtcEspera = rtcEspera || Date.now(); if (Date.now() - rtcEspera < 5000) { setTimeout(() => { if (E && E.llamada) pintaLlamada(E.llamada); }, 1000); return; } manda({ t: 'rtc', d: { t: 'fallo' } }); rtcFallo = true; }
     if (puedeGrabar && !grabador && !arrancando) empiezaMedios(!!l.video);
     if (l.mime_remoto && l.mime_remoto !== mimeRemoto) { mimeRemoto = l.mime_remoto; if (fuente) { preparaReproductor(mimeRemoto); manda({ t: 'pide_inicio' }); } }
   };
@@ -755,12 +759,14 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   $('voz-prot').addEventListener('click', () => {
     vozActiva = !vozActiva; try { localStorage.setItem('guardiana-voz', vozActiva ? '1' : '0'); } catch (_) {}
     pintaVozProt(); manda({ t: 'voz_protegida', activa: vozActiva });
-    if (local && grabador) reiniciaGrabador(!!(E && E.llamada && E.llamada.video));
+    if (rtc) rtcVoz(); else if (local && grabador) reiniciaGrabador(!!(E && E.llamada && E.llamada.video));
   });
   pintaVozProt();
   let turno = 0, negado = false;
   const paraMedios = () => {
     turno++;
+    paraRtc(); rtcFallo = false; rtcEspera = 0;
+    try { $('remoto').srcObject = null; } catch (_) {}
     if (vozProt) { vozProt.parar(); vozProt = null; }
     if (!(E && E.llamada)) negado = false;
     if (silenciado) { silenciado = false; $('silencio').setAttribute('aria-pressed', 'false'); $('silencio').classList.remove('tachado'); $('silencio').setAttribute('aria-label', t('silenciar')); }
@@ -773,6 +779,90 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     fuente = null; buffer = null; pendientes = []; arrancando = false;
     $('remoto').removeAttribute('src');
     if (wake) { try { wake.release(); } catch (_) {} wake = null; }
+  };
+  // ---------- WebRTC (17 Oct 2026, «la tecnología de WhatsApp y Google Meet») ----------
+  // The same as on the computer: voice and video over UDP through GUARDIANA's relay only
+  // (nobody sees the other's address), encrypted from this phone to the other end; the offer
+  // and answer travel sealed through this phone's computer and, inside Olm, to the other side.
+  let rtc = null, rtcFallo = false, rtcEspera = 0;
+  const rtcManda = (d) => manda({ t: 'rtc', d });
+  const rtcNuevaPc = () => {
+    const pc = new RTCPeerConnection({ iceServers: rtc.ice, iceTransportPolicy: 'relay', bundlePolicy: 'max-bundle' });
+    const envio = fuenteGrabacion();
+    envio.getTracks().forEach((x) => pc.addTrack(x, envio));
+    pc.onicecandidate = (e) => { if (e.candidate && rtc && rtc.pc === pc) rtcManda({ t: 'ice', s: rtc.s, c: e.candidate.toJSON() }); };
+    pc.ontrack = (e) => { if (!rtc || rtc.pc !== pc) return; const v = $('remoto'); v.removeAttribute('src'); v.srcObject = e.streams[0] || new MediaStream([e.track]); v.play().catch(() => {}); if (puedeSalida) aplicaSalida(); };
+    pc.onconnectionstatechange = () => { if (!rtc || rtc.pc !== pc) return; if (pc.connectionState === 'connected') { rtc.conectada = true; clearTimeout(rtc.reloj); } else if (pc.connectionState === 'failed') rtcFalla(true); };
+    pc.getSenders().forEach((x) => { if (x.track && x.track.kind === 'video') { try { const p = x.getParameters(); p.encodings = p.encodings && p.encodings.length ? p.encodings : [{}]; p.encodings[0].maxBitrate = 800000; x.setParameters(p).catch(() => {}); } catch (_) {} } });
+    return pc;
+  };
+  const rtcOfrece = async () => {
+    if (!rtc) return;
+    try { if (rtc.pc) rtc.pc.close(); } catch (_) {}
+    rtc.s = Math.random().toString(36).slice(2, 10);
+    rtc.pc = rtcNuevaPc(); rtc.pendientes = [];
+    const o = await rtc.pc.createOffer();
+    await rtc.pc.setLocalDescription(o);
+    rtcManda({ t: 'offer', s: rtc.s, sdp: rtc.pc.localDescription.sdp });
+  };
+  const empiezaRtc = async (l) => {
+    if (negado) return;
+    arrancando = true;
+    const mi = turno;
+    let s = null;
+    try {
+      s = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: l.video ? { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } } : false });
+    } catch (_) { arrancando = false; negado = true; nota(t('sin_permiso')); return; }
+    if (mi !== turno || !(E && E.llamada)) { s.getTracks().forEach((x) => x.stop()); arrancando = false; return; }
+    previaCamara(false);
+    local = s;
+    local.getAudioTracks().forEach((x) => { x.enabled = !silenciado; });
+    $('local').srcObject = local;
+    rtc = { ice: l.rtc.ice, ofrece: !!l.rtc.ofrece, pc: null, s: null, pendientes: [], conectada: false, reloj: null };
+    rtc.reloj = setTimeout(() => { if (rtc && !rtc.conectada) rtcFalla(true); }, 15000);
+    arrancando = false;
+    if (vozActiva) manda({ t: 'voz_protegida', activa: true });
+    rtcManda({ t: 'hola' });
+    if (rtc.ofrece) rtcOfrece().catch(() => rtcFalla(true));
+    try { wake = await navigator.wakeLock.request('screen'); } catch (_) {}
+  };
+  const rtcAplicaPendientes = () => { if (!rtc || !rtc.pc || !rtc.pc.remoteDescription) return; const p = rtc.pendientes.filter((x) => x.s === rtc.s); rtc.pendientes = []; p.forEach((x) => rtc.pc.addIceCandidate(x.c).catch(() => {})); };
+  const rtcRecibe = async (d) => {
+    if (d.t === 'fallo') { if (rtc) rtcFalla(false); else rtcFallo = true; return; }
+    if (!rtc) return;
+    try {
+      if (d.t === 'hola') { if (rtc.ofrece) await rtcOfrece(); }
+      else if (d.t === 'offer' && !rtc.ofrece) {
+        try { if (rtc.pc) rtc.pc.close(); } catch (_) {}
+        rtc.s = d.s; rtc.pc = rtcNuevaPc();
+        await rtc.pc.setRemoteDescription({ type: 'offer', sdp: d.sdp });
+        const a = await rtc.pc.createAnswer();
+        await rtc.pc.setLocalDescription(a);
+        rtcManda({ t: 'answer', s: rtc.s, sdp: rtc.pc.localDescription.sdp });
+        rtcAplicaPendientes();
+      } else if (d.t === 'answer' && rtc.ofrece && d.s === rtc.s && rtc.pc && rtc.pc.signalingState === 'have-local-offer') {
+        await rtc.pc.setRemoteDescription({ type: 'answer', sdp: d.sdp });
+        rtcAplicaPendientes();
+      } else if (d.t === 'ice' && d.c) {
+        if (rtc.pc && d.s === rtc.s && rtc.pc.remoteDescription) await rtc.pc.addIceCandidate(d.c).catch(() => {});
+        else if (rtc.pendientes.length < 200) rtc.pendientes.push({ s: d.s, c: d.c });
+      }
+    } catch (_) { rtcFalla(true); }
+  };
+  const paraRtc = () => { if (!rtc) return; clearTimeout(rtc.reloj); try { if (rtc.pc) rtc.pc.close(); } catch (_) {} rtc = null; };
+  // WebRTC did not connect: both ends go back to the recorded pieces for this call.
+  const rtcFalla = (decirlo) => {
+    if (decirlo) rtcManda({ t: 'fallo' });
+    rtcFallo = true;
+    paraRtc();
+    if (local) { local.getTracks().forEach((x) => x.stop()); local = null; }
+    try { $('remoto').srcObject = null; } catch (_) {}
+    if (E && E.llamada && puedeGrabar) empiezaMedios(!!E.llamada.video);
+  };
+  const rtcVoz = () => {
+    if (!rtc || !rtc.pc || !local) return;
+    const pista = fuenteGrabacion().getAudioTracks()[0];
+    rtc.pc.getSenders().forEach((x) => { if (x.track && x.track.kind === 'audio' && pista) x.replaceTrack(pista).catch(() => {}); });
   };
   $('voz').addEventListener('click', () => { manda({ t: 'llamar', video: false, mime: mime(false) }); });
   $('video').addEventListener('click', () => { manda({ t: 'llamar', video: true, mime: mime(true) }); });
@@ -887,7 +977,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
       const nueva = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: camara }, width: { ideal: 640 }, height: { ideal: 480 } } });
       nueva.getVideoTracks().forEach((x) => local.addTrack(x));
       $('local').srcObject = local; $('local').classList.toggle('trasera', camara === 'environment');
-      reiniciaGrabador(true);
+      if (rtc && rtc.pc) { const v = local.getVideoTracks()[0]; rtc.pc.getSenders().forEach((x) => { if (v && x.track && x.track.kind === 'video') x.replaceTrack(v).catch(() => {}); }); } else reiniciaGrabador(true);
     } catch (_) { nota(t('sin_permiso')); }
   });
   $('silencio').addEventListener('click', () => { silenciado = !silenciado; if (local) local.getAudioTracks().forEach((x) => { x.enabled = !silenciado; }); $('silencio').setAttribute('aria-pressed', String(silenciado)); $('silencio').classList.toggle('tachado', silenciado); $('silencio').setAttribute('aria-label', t(silenciado ? 'sonar' : 'silenciar')); });
