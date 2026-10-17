@@ -1221,7 +1221,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     try {
       // The old camera closes first: many Android phones cannot open two at once.
       local.getVideoTracks().forEach((x) => { x.stop(); local.removeTrack(x); });
-      const nueva = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: camara }, width: { ideal: 640 }, height: { ideal: 480 } } });
+      const nueva = await navigator.mediaDevices.getUserMedia({ video: rtc ? { facingMode: { ideal: camara }, width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 30 } } : { facingMode: { ideal: camara }, width: { ideal: 640 }, height: { ideal: 480 } } });
       nueva.getVideoTracks().forEach((x) => local.addTrack(x));
       $('local').srcObject = local; $('local').classList.toggle('trasera', camara === 'environment');
       if (rtc && rtc.pc) { const v = local.getVideoTracks()[0]; rtc.pc.getSenders().forEach((x) => { if (v && x.track && x.track.kind === 'video') x.replaceTrack(v).catch(() => {}); }); } else reiniciaGrabador(true);
