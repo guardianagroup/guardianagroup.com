@@ -56,6 +56,7 @@ body.en-llamada header{visibility:hidden}
 /* Long press on a message: copy, reply. */
 .mensajes li{position:relative;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .mensajes li.elegido{outline:2px solid var(--accent);outline-offset:2px}
+.mensajes li .de{display:block;font-size:12px;font-weight:600;color:var(--accent);margin-bottom:2px}
 .mensajes li .cita{display:block;border-left:3px solid var(--accent);padding:4px 8px;margin-bottom:6px;border-radius:6px;background:rgba(127,127,127,.12);font-size:13px;color:var(--muted);white-space:pre-wrap;max-height:4.5em;overflow:hidden}
 .mensajes li img{display:block;max-width:100%;border-radius:10px;margin-bottom:4px}
 .mensajes li .adjunto{display:flex;align-items:center;gap:8px;font-size:13.5px}.mensajes li .adjunto svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;flex:none}
@@ -439,10 +440,13 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   const pintaAvatar = (nombre, dentro) => { $('avatar-letra').textContent = ((nombre || '').trim()[0] || '·').toUpperCase(); $('avatar-punto').className = dentro ? 'si' : ''; };
   // A message on the screen: a quoted reply on top, pictures as pictures, links as links.
   const enlaza = (x) => esc(x).replace(/https?:\/\/[^\s<]+/g, (u) => `<a href="${u}" target="_blank" rel="noopener noreferrer">${u}</a>`);
+  // In the home room the computer writes «Name: text»; the name becomes a small label.
+  const separa = (x) => { let texto = x.texto || '', de = x.de || ''; if (!x.mio && !de) { const q = /^([^:\n]{1,40}): ([\s\S]*)$/.exec(texto); if (q) { de = q[1]; texto = q[2]; } } return { texto, de }; };
   const pintaMensaje = (x, i) => {
-    let texto = x.texto || '', cita = '';
+    let { texto, de } = separa(x); let cita = '';
     const m = /^> ([^\n]*)\n([\s\S]*)$/.exec(texto);
     if (m) { cita = `<span class="cita">${esc(m[1])}</span>`; texto = m[2]; }
+    if (de && !x.mio) cita = `<b class="de">${esc(de)}</b>` + cita;
     let cuerpo = enlaza(texto);
     if (x.archivo) {
       const a = x.archivo, url = archivos.get(a.id);
@@ -667,12 +671,12 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   let respondiendoA = '', pulsando = null, elegido = null;
   const abreMenu = (li, x, y) => { elegido = li; li.classList.add('elegido'); const mm = $('menu-msg'); mm.classList.add('si'); const w = mm.offsetWidth || 180, h = mm.offsetHeight || 44; mm.style.left = Math.max(8, Math.min(window.innerWidth - w - 8, x - w / 2)) + 'px'; mm.style.top = (y - h - 12 > 8 ? y - h - 12 : y + 24) + 'px'; try { navigator.vibrate && navigator.vibrate(20); } catch (_) {} };
   const cierraMenu = () => { $('menu-msg').classList.remove('si'); if (elegido) elegido.classList.remove('elegido'); elegido = null; };
-  const textoDe = (li) => { const i = Number(li.dataset.i); const x = (E && E.mensajes || [])[i]; let tx = (x && x.texto) || li.textContent; const m = /^> [^\n]*\n([\s\S]*)$/.exec(tx); return (m ? m[1] : tx).trim(); };
+  const textoDe = (li) => { const i = Number(li.dataset.i); const x = (E && E.mensajes || [])[i]; let tx = x ? separa(x).texto : li.textContent; const m = /^> [^\n]*\n([\s\S]*)$/.exec(tx); return (m ? m[1] : tx).trim(); };
   $('mensajes').addEventListener('pointerdown', (e) => { const li = e.target.closest('li'); if (!li || li.classList.contains('nota') || e.target.closest('a')) return; clearTimeout(pulsando); pulsando = setTimeout(() => abreMenu(li, e.clientX, e.clientY), 450); });
   for (const ev of ['pointerup', 'pointercancel', 'pointermove']) $('mensajes').addEventListener(ev, (e) => { if (ev === 'pointermove' && e.movementX === 0 && e.movementY === 0) return; clearTimeout(pulsando); });
   $('mensajes').addEventListener('contextmenu', (e) => { const li = e.target.closest('li'); if (li && !li.classList.contains('nota')) { e.preventDefault(); abreMenu(li, e.clientX, e.clientY); } });
   document.addEventListener('pointerdown', (e) => { if (!e.target.closest('#menu-msg')) cierraMenu(); }, true);
-  $('m-copiar').addEventListener('click', async () => { if (!elegido) return; const tx = textoDe(elegido); cierraMenu(); try { await navigator.clipboard.writeText(tx); nota(t('copiado_msg')); } catch (_) {} });
+  $('m-copiar').addEventListener('click', async () => { if (!elegido) return; const tx = textoDe(elegido); cierraMenu(); try { if (window.ClipboardItem) await navigator.clipboard.write([new ClipboardItem({ 'text/plain': new Blob([tx], { type: 'text/plain' }) })]); else await navigator.clipboard.writeText(tx); nota(t('copiado_msg')); } catch (_) { try { await navigator.clipboard.writeText(tx); nota(t('copiado_msg')); } catch (__) {} } });
   $('m-responder').addEventListener('click', () => { if (!elegido) return; respondiendoA = textoDe(elegido).replace(/\s+/g, ' ').slice(0, 120); cierraMenu(); $('respondiendo').classList.add('si'); $('respondiendo-t').textContent = t('respondes_a', { t: respondiendoA }); $('texto').focus(); });
   $('respondiendo-no').addEventListener('click', () => { respondiendoA = ''; $('respondiendo').classList.remove('si'); });
   // Big call (16 Oct 2026): the call fills the phone by itself when it connects; «⌄» leaves it
