@@ -204,7 +204,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 .resumen-ll h2{margin:0;font:600 17px/1.25 var(--display)}.resumen-ll .r-sub{font-size:12.5px;color:var(--muted)}
 .resumen-ll ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}.resumen-ll li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.4}.resumen-ll li i{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none;background:var(--ok)}.resumen-ll li.aviso i{background:var(--aviso)}.resumen-ll li.alerta i{background:var(--alerta)}
 .resumen-ll .r-botones{display:flex;gap:8px}.resumen-ll .r-botones .btn{flex:1;border-radius:999px}
-.mensajes li img{cursor:zoom-in}.pantallas{position:relative}.oir{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;min-height:48px;padding:0 22px;border-radius:999px;border:0;background:#fff;color:#0B1020;font:600 15px var(--texto);box-shadow:0 6px 24px rgba(0,0,0,.35)}.mensajes li video{display:block;max-width:100%;border-radius:10px;margin-bottom:4px}
+.mensajes li img{cursor:zoom-in}.oir{position:fixed;left:50%;bottom:calc(120px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:80;min-height:48px;padding:0 22px;border-radius:999px;border:0;background:#fff;color:#0B1020;font:600 15px var(--texto);box-shadow:0 6px 24px rgba(0,0,0,.35)}.mensajes li video{display:block;max-width:100%;border-radius:10px;margin-bottom:4px}
 .visor{position:fixed;inset:0;z-index:70;display:none;background:rgba(5,8,18,.96);touch-action:none;overflow:hidden}.visor.si{display:block}
 .visor img{position:absolute;left:50%;top:50%;max-width:100vw;max-height:100vh;transform-origin:center center;will-change:transform;user-select:none;-webkit-user-drag:none}
 .visor .v-barra{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:linear-gradient(rgba(5,8,18,.7),transparent)}
@@ -234,7 +234,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
       <button type="button" class="l-menos" id="l-menos" aria-label="Volver al chat"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
       <div class="l-cab"><span class="l-cuadro"><span class="onda"><b></b><b></b><b></b><b></b><b></b></span></span><div class="l-titulo"><b id="l-titulo"></b><span class="l-estado" id="l-estado"></span></div></div>
       <div class="l-voz"><span class="l-letra" id="l-letra">·</span></div>
-      <div class="pantallas"><video id="remoto" autoplay playsinline></video><button type="button" class="oir" id="oir" hidden></button><video id="local" autoplay playsinline muted></video></div>
+      <div class="pantallas"><video id="remoto" autoplay playsinline></video><video id="local" autoplay playsinline muted></video></div>
       <div class="l-botones">
         <button class="btn sec" id="silencio" aria-pressed="false" aria-label="Silenciar"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
         <button class="btn sec" id="altavoz" hidden aria-pressed="false" aria-label="Altavoz"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg></button>
@@ -925,8 +925,10 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   };
   // Sound needs a touch on an iPhone when the browser refuses to play it by itself (17 Oct 2026,
   // the owner: «nos vemos… y no se escucha»): the picture plays muted and a button asks for it.
-  const suena = () => { const v = $('remoto'); if (!v.src && !v.srcObject) return; v.muted = false; v.play().then(() => { $('oir').hidden = true; }).catch(() => { $('oir').textContent = t('oir'); $('oir').hidden = false; v.muted = true; v.play().catch(() => {}); }); };
-  $('oir').addEventListener('click', () => { const v = $('remoto'); v.muted = false; v.play().then(() => { $('oir').hidden = true; }).catch(() => {}); });
+  // Only a real refusal (NotAllowedError) asks for the touch; the player is never muted here
+  // (17 Oct 2026: muting it after an early refusal left calls handed to the phone silent).
+  const suena = () => { const v = $('remoto'); if (!v.src && !v.srcObject) return; v.muted = false; v.play().then(() => { $('oir').hidden = true; }).catch((e) => { if (e && e.name === 'NotAllowedError') { $('oir').textContent = t('oir'); $('oir').hidden = false; } }); };
+  document.addEventListener('click', (e) => { if (!e.target || e.target.id !== 'oir') return; const v = $('remoto'); v.muted = false; v.play().then(() => { $('oir').hidden = true; }).catch(() => {}); });
   // A player that broke (a piece it could not open) starts again and asks for a fresh start,
   // at most every 3 s.
   let rehecho = 0;
@@ -1241,5 +1243,6 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 <div class="r-botones"><button type="button" class="btn sec" id="rl-guardar"></button><button type="button" class="btn" id="rl-cerrar"></button></div>
 </div></div>
 <div class="visor" id="visor" role="dialog" aria-modal="true"><img id="visor-img" alt=""><div class="v-barra"><button type="button" id="visor-guardar"></button><button type="button" id="visor-cerrar"></button></div><div class="v-pista" id="visor-pista"></div></div>
+<button type="button" class="oir" id="oir" hidden></button>
 </body>
 </html>
