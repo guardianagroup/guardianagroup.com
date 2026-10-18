@@ -163,3 +163,7 @@ h2{font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacin
 .onda{display:flex;align-items:center;gap:2px;height:22px}.onda i{display:block;width:2px;border-radius:1px;background:#9CC3E4;opacity:.8}
 .tarjeta .dato{margin-top:auto;padding-top:14px;border-top:1px solid #141B24;font-size:14.5px;color:#A9B3BE}
 .tarjeta .dato b{color:#E8ECF1;font-weight:600}
+.garantias{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-wrap:wrap;gap:8px 22px;color:#C3CBD4;font-size:15px}
+.garantias li{display:flex;align-items:center;gap:7px}
+.hero .nota a,.nota a{color:#A9B3BE;text-underline-offset:3px}
+.nota a:hover{color:#E8ECF1}

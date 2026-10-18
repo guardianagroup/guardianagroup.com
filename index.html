@@ -32,7 +32,7 @@
 <script>(function(){try{var K='guardiana-idioma',q=null;try{q=localStorage.getItem(K)}catch(e){}if(!q){var L=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];for(var i=0;i<L.length;i++){var c=(''+L[i]).toLowerCase();if(c.indexOf('pt')===0){q='pt';break}if(c.indexOf('es')===0){q='es';break}if(c.indexOf('en')===0){q='en';break}}}var p=location.pathname;if((q==='es'||q==='pt')&&(p==='/'||p==='/index.html'))location.replace('/'+q+'/'+location.hash);}catch(e){}})();</script>
 <link rel="preload" as="font" type="font/woff" crossorigin href="/fonts/SchibstedGrotesk-var.woff">
 <link rel="preload" as="font" type="font/woff" crossorigin href="/fonts/HankenGrotesk-var.woff">
-<link rel="stylesheet" href="/portada.css?v=1792294892">
+<link rel="stylesheet" href="/portada.css?v=1792295066">
 </head>
 <body>
 <a class="saltar" href="#contenido">Skip to content</a>
@@ -63,7 +63,8 @@
       <a class="btn btn-acento btn-gr" href="/en/install.html#download">Download GUARDIANA</a>
       <a class="btn btn-borde btn-gr" href="#preguntas">See why</a>
     </div>
-    <p class="nota">7 days with everything, no card, no account and no automatic charge when they end. <span id="hero-precio">Then a subscription or a one-time payment.</span></p>
+    <ul class="garantias"><li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7.3l2.6 2.6L11 4.5" fill="none" stroke="#6CCBA5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>7 days free, everything included</li><li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7.3l2.6 2.6L11 4.5" fill="none" stroke="#6CCBA5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>No card</li><li><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 7.3l2.6 2.6L11 4.5" fill="none" stroke="#6CCBA5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>No account</li></ul>
+    <p class="nota"><a href="#planes">See the price in your country</a></p>
   </div>
   <figure class="hero-globo">
     <div class="globo-marco">
@@ -198,7 +199,7 @@
     <p class="pie-dir">GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, piso 18, Bocagrande, Cartagena de Indias, Colombia · <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a> · This page uses no cookies or analytics.</p>
   </div>
 </footer>
-<script src="/globo.js?v=1792294892" defer></script>
+<script src="/globo.js?v=1792295066" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
   try{var P=window.GUARDIANA_PRICES;if(P){var a=document.getElementById('plus-precio'),b=document.getElementById('plus-nota'),f=document.getElementById('fund-precio'),h=document.getElementById('hero-precio');if(a)a.textContent=P.plusEn;if(b)b.textContent=P.plusNoteEn;if(f)f.textContent=P.fundEn;if(h)h.textContent='Then '+P.plusEn+' or '+P.fundEn+' once.';}}catch(e){}

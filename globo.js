@@ -72,7 +72,8 @@
       ' col+=vec3(1.0,0.86,0.66)*(pow(nh,900.0)*0.32+pow(nh,90.0)*0.05+pow(nh,12.0)*0.012)*agua*lado;\n' +
       ' col+=vec3(0.02,0.06,0.13)*agua*lado*0.6;\n' +
       ' float fres=pow(1.0-max(dot(nw,V),0.0),2.6); vec3 atm=vec3(0.28,0.55,1.0)*fres*(0.08+0.92*smoothstep(-0.3,0.45,mu));\n' +
-      ' col=col*(1.0-fres*0.35)+atm*0.85; col=aces(col*1.3); o=vec4(pow(col,vec3(1.0/2.2)),1.0); }';
+      ' col=col*(1.0-fres*0.35)+atm*0.85; col=aces(col*1.36); float lu=dot(col,vec3(0.2126,0.7152,0.0722)); col=clamp(mix(vec3(lu),col,1.12),0.0,1.0);\n' +
+      ' col=pow(col,vec3(1.0/2.2)); col=clamp((col-0.5)*1.06+0.5,0.0,1.0); o=vec4(col,1.0); }';
 
     function compila(tipo, src) { var s = gl.createShader(tipo); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
     var P = gl.createProgram();
@@ -102,13 +103,15 @@
       return t;
     }
     var tex = { dia: textura(null), luces: textura(null), agua: textura(null) }, listas = 0;
-    var tam = movil ? '-1k' : '-2k';
+    // Sharp on every screen (the owner, 17 Oct 2026: «un pelín borroso… máxima calidad»): 4K
+    // textures on computers, 2K on phones, both from NASA's 16K tiles; 2K if the GPU can't take 4K.
+    var tam = movil || gl.getParameter(gl.MAX_TEXTURE_SIZE) < 4096 ? '-2k' : '-4k';
     function carga(clave, url) {
       var im = new Image(); im.decoding = 'async';
       im.onload = function () { gl.deleteTexture(tex[clave]); tex[clave] = textura(im); cambio = true; listas++; if (listas === 3 && op.lista) op.lista(); pide(); };
       im.src = url;
     }
-    carga('dia', ruta + 'dia' + tam + '.jpg'); carga('luces', ruta + 'luces' + tam + '.jpg'); carga('agua', ruta + (movil ? 'agua-1k.png' : 'agua.png'));
+    carga('dia', ruta + 'dia' + tam + '.jpg'); carga('luces', ruta + 'luces' + tam + '.jpg'); carga('agua', ruta + 'agua.png');
 
 
     // --- routes: drawn on a 2D layer over the globe, projected with the same matrices ---
@@ -179,11 +182,13 @@
       function libre(x, y, w) { for (var i = 0; i < puestos.length; i++) { var q = puestos[i]; if (x < q[0] + q[2] && x + w > q[0] && Math.abs(y - q[1]) < 13 * dpr) return false; } puestos.push([x, y, w]); return true; }
       var o = proy(v3(R.origen.ll[0], R.origen.ll[1]));
       if (!o.oculto) puestos.push([o.x - 8 * dpr, o.y, 90 * dpr]);
-      rutas.forEach(function (r) {
-        var p = proy(r.b); if (p.oculto || p.cara < 0.15) return;
+      var puntos = rutas.map(function (r) { return proy(r.b); });
+      rutas.forEach(function (r, ir) {
+        var p = puntos[ir]; if (p.oculto || p.cara < 0.15) return;
         var al = Math.min(1, (p.cara - 0.15) / 0.3);
         ctx.strokeStyle = 'rgba(201,223,242,' + (0.75 * al).toFixed(3) + ')'; ctx.lineWidth = 1 * dpr; ctx.beginPath(); ctx.arc(p.x, p.y, 2.6 * dpr, 0, 2 * Math.PI); ctx.stroke();
-        if (libre(p.x + 7 * dpr, p.y, ctx.measureText(r.n).width)) { ctx.fillStyle = 'rgba(190,200,210,' + (0.9 * al).toFixed(3) + ')'; ctx.fillText(r.n, p.x + 7 * dpr, p.y); }
+        var anc = ctx.measureText(r.n).width, choca = puntos.some(function (q, iq) { return iq !== ir && !q.oculto && q.x > p.x && q.x < p.x + 9 * dpr + anc && Math.abs(q.y - p.y) < 9 * dpr; });
+        if (!choca && libre(p.x + 7 * dpr, p.y, anc)) { ctx.fillStyle = 'rgba(190,200,210,' + (0.9 * al).toFixed(3) + ')'; ctx.fillText(r.n, p.x + 7 * dpr, p.y); }
       });
       if (!o.oculto && o.cara > 0.1) {
         ctx.fillStyle = 'rgba(232,236,241,0.95)'; ctx.beginPath(); ctx.arc(o.x, o.y, 3 * dpr, 0, 2 * Math.PI); ctx.fill();
@@ -197,7 +202,7 @@
     var rot = -lon0 * RAD + (R ? 0 : 0.35), tilt = op.tilt != null ? op.tilt : 0.32, vr = 0, vt = 0, tocado = false;
 
     function dibuja() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2), W = Math.round(cv.clientWidth * dpr), H = Math.round(cv.clientHeight * dpr);
+      var dpr = Math.min(window.devicePixelRatio || 1, 2.5), W = Math.round(cv.clientWidth * dpr), H = Math.round(cv.clientHeight * dpr);
       if (!W || !H) return;
       if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
       gl.viewport(0, 0, W, H); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
