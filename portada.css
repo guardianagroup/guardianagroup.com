@@ -161,3 +161,5 @@ h2{font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacin
 .voz{align-self:flex-start;display:flex;align-items:center;gap:8px;background:#17212C;border-radius:14px;border-bottom-left-radius:4px;padding:6px 10px}
 .voz b{font-size:9px;color:#E8ECF1}.voz small{font-size:11px;color:#A9B3BE}
 .onda{display:flex;align-items:center;gap:2px;height:22px}.onda i{display:block;width:2px;border-radius:1px;background:#9CC3E4;opacity:.8}
+.tarjeta .dato{margin-top:auto;padding-top:14px;border-top:1px solid #141B24;font-size:14.5px;color:#A9B3BE}
+.tarjeta .dato b{color:#E8ECF1;font-weight:600}
