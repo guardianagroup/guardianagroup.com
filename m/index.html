@@ -547,7 +547,22 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   // One frame that fails to draw must not drop the link (it came back, failed again, and the
   // page reconnected every second and a half).
   const reparte = (tipo, cuerpo) => { try { if (tipo === 0) llega(JSON.parse(new TextDecoder().decode(cuerpo))); else if (tipo === 1) trozoRemoto(cuerpo); else if (tipo === 2) trozoArchivo(cuerpo); } catch (e) { console.error(e); } };
-  const llega = (m) => { if (m && m.tipo === 'archivo_movil') archivoAnunciado(m); else if (m && m.tipo === 'secure_rtc') rtcRecibe(m.d || {}); else recibe(m); };
+  const llega = (m) => { if (m && m.tipo === 'archivo_movil') archivoAnunciado(m); else if (m && m.tipo === 'secure_rtc') rtcRecibe(m.d || {}); else if (m && m.tipo === 'secure_destruida') destruida(m); else recibe(m); };
+  // The computer destroyed the conversation for an anomaly (18 Oct 2026): nothing of it stays on
+  // this screen either, the call stops, and a calm line says why. What was saved or photographed
+  // on this phone before cannot be erased from here, and the line says that too.
+  const DESTRUIDA = {
+    es: ['Conversación destruida por seguridad.', 'Se ha borrado de esta pantalla. Lo que se guardó o fotografió antes en un dispositivo no se puede borrar desde aquí.'],
+    en: ['Conversation destroyed for safety.', 'It was erased from this screen. What was saved or photographed earlier on a device cannot be erased from here.'],
+    pt: ['Conversa destruída por segurança.', 'Foi apagada deste ecrã. O que foi guardado ou fotografado antes num dispositivo não pode ser apagado daqui.'],
+  };
+  const destruida = () => {
+    const x = DESTRUIDA[document.documentElement.lang] || DESTRUIDA.es;
+    try { paraMedios(); } catch (_) {}
+    cerrado = true;
+    $('mensajes').innerHTML = '';
+    nota(x[0]); nota(x[1]);
+  };
   const manda = (m) => { if (canal) canal.envia(0, enc(JSON.stringify(m))); };
   const lee = async (readable, g) => {
     const r = readable.getReader();
