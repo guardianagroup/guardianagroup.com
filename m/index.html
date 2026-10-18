@@ -933,7 +933,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   // their getStats (opus.js), or «sin medir» when there is no measure.
   let calidadMovil = null;
   window.addEventListener('guardiana-calidad', (e) => { calidadMovil = e.detail ? { nivel: e.detail.nivel, t: Date.now() } : null; if (E && E.llamada) pintaConexion(E.llamada); });
-  const ciudadDeIce = (ice) => { const x = JSON.stringify(ice || ''); return /rele-am\./.test(x) ? 'Miami' : /rele\.guardianagroup/.test(x) ? 'Núremberg' : ''; };
+  const ciudadDeIce = (ice) => { const x = JSON.stringify(ice || ''); return /rele-am\.|207\.246\.115\.38/.test(x) ? 'Miami' : /rele\.guardianagroup|5\.75\.173\.240/.test(x) ? 'Núremberg' : ''; };
   const rutaTexto = (r) => {
     if (!r) return '';
     if (r.camino === 'misma_red') return t('con_misma');
