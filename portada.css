@@ -125,7 +125,7 @@ h2{font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacin
 .pie-links{display:flex;flex-wrap:wrap;gap:8px 20px}
 .pie-links a{color:var(--txt-4);text-decoration:none}
 .pie-links a:hover{color:var(--txt)}
-.pie-dir a{color:var(--txt-4)}
+.pie-dir a{color:var(--txt-4)}.pie-dir a:hover{color:var(--txt)}
 
 @media (max-width:860px){
   .secciones{order:3;flex-basis:100%;flex-wrap:wrap;justify-content:center;gap:2px 18px;font-size:14px}
