@@ -64,9 +64,9 @@
       'void main(){ vec3 n=normalize(vN); float mu=dot(n,uSol);\n' +
       ' vec3 dia=pow(texture(uDia,vUv).rgb, vec3(2.2)); float luz=texture(uLuces,vUv).r; float agua=texture(uAgua,vUv).r;\n' +
       ' float lado=smoothstep(-0.08,0.22,mu); float diaF=smoothstep(-0.14,0.24,mu);\n' +
-      ' vec3 col=mix(dia*vec3(0.74,0.80,0.96)+vec3(0.012,0.022,0.045), dia*(0.70+0.62*max(mu,0.0)), diaF);\n' +
+      ' vec3 col=mix(dia*vec3(0.19,0.24,0.38)+vec3(0.005,0.011,0.026), dia*(0.70+0.62*max(mu,0.0)), diaF);\n' +
       ' col+=dia*vec3(1.0,0.45,0.2)*0.22*exp(-pow((mu-0.03)*10.0,2.0));\n' +
-      ' float noche=1.0-smoothstep(-0.20,0.05,mu); col+=vec3(1.0,0.70,0.38)*pow(luz,1.25)*1.5*noche;\n' +
+      ' float noche=1.0-smoothstep(-0.20,0.05,mu); col+=vec3(1.0,0.70,0.38)*pow(luz,1.2)*1.9*noche;\n' +
       ' vec3 nw=normalize(uM3*n); vec3 V=normalize(uCam-vW); vec3 Lw=normalize(uM3*uSol);\n' +
       ' vec3 H=normalize(Lw+V); float nh=max(dot(nw,H),0.0);\n' +
       ' col+=vec3(1.0,0.86,0.66)*(pow(nh,900.0)*0.32+pow(nh,90.0)*0.05+pow(nh,12.0)*0.012)*agua*lado;\n' +
