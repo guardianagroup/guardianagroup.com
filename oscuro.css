@@ -38,3 +38,24 @@ header.top .descargar{background:#E8ECF1!important;color:#06080C!important;font-
 header.top nav a.nav-multas,.secciones a.nav-multas{color:#E07A6C!important}header.top nav a.nav-multas:hover,.secciones a.nav-multas:hover{color:#F09A8E!important}
 @media (max-width:520px){.secciones{gap:2px 13px!important;font-size:14px!important}header.top nav{gap:2px 11px!important;font-size:13.5px!important}header.top nav a{padding:6px 0!important;letter-spacing:0!important}}
 @media (max-width:380px){header.top nav{gap:2px 6px!important;font-size:12px!important}header.top nav a{font-size:12px!important;margin:0!important;padding:6px 0!important}header.top nav{margin:0!important;max-width:none!important;width:100%!important;padding:0!important}header.top .licencia-btn,header.top .descargar{padding:6px 9px!important;font-size:12px!important}header.top{column-gap:6px!important;padding:10px 12px!important}}
+
+/* Idiomas: un menú en la cabecera (17 oct 2026). */
+details.idm{position:relative;margin-left:auto}
+details.idm>summary{list-style:none;display:flex;align-items:center;gap:6px;cursor:pointer;color:#A9B3BE;font:600 13px/1 'Hanken Grotesk',system-ui,sans-serif;letter-spacing:.04em;padding:8px 10px;border-radius:999px;border:1px solid transparent;user-select:none}
+details.idm>summary::-webkit-details-marker{display:none}
+details.idm>summary:hover,details.idm[open]>summary{color:#E8ECF1;border-color:#2A323D}
+details.idm>summary:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
+details.idm[open]>summary svg:last-child{transform:rotate(180deg)}
+.idm-l{position:absolute;right:0;top:calc(100% + 8px);z-index:80;min-width:230px;background:#0C1118;border:1px solid #1E2631;border-radius:14px;padding:8px;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.idm-t,.idm-sub{margin:6px 10px 6px;font:600 11.5px/1.2 'Hanken Grotesk',system-ui,sans-serif;color:#6F7B88;letter-spacing:.06em;text-transform:uppercase}
+.idm-sub{margin-top:12px;padding-top:12px;border-top:1px solid #1E2631}
+.idm-i{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:9px 10px;border-radius:9px;color:#E8ECF1!important;text-decoration:none!important;font:500 14.5px/1.2 'Hanken Grotesk',system-ui,sans-serif}
+.idm-i b{font-weight:600;font-size:11.5px;color:#6F7B88;letter-spacing:.05em}
+a.idm-i:hover{background:#141A22}
+.idm-i.actual{background:#141A22}.idm-i.actual b{color:#9CC3E4}
+@media (max-width:520px){details.idm>summary{padding:7px 6px}details.idm>summary span{display:none}}
+@media (max-width:520px){details.idm{margin-left:0;position:static}details.idm>summary{padding:7px 5px;gap:3px}.idm-l{position:fixed;left:12px;right:12px;top:58px;min-width:0;max-height:calc(100vh - 80px);overflow:auto}}
+@media (max-width:520px){header.top{column-gap:6px!important}header.top .licencia-btn,header.top .descargar{padding:7px 10px!important;font-size:12.5px!important}details.idm>summary{padding:6px 3px!important}details.idm>summary svg:last-child{display:none}header.top>a:first-child{letter-spacing:.06em!important;font-size:12px!important}}
+details.idm>summary::after{content:none!important;display:none!important}details.idm>summary{padding:8px 10px;float:none}details.idm .idm-l{font-weight:400}
+@media (max-width:520px){details.idm>summary{padding:6px 3px!important}}
+details.idm{border:0!important;background:none!important;padding:0!important;border-radius:0!important}
