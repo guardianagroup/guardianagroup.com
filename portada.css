@@ -167,3 +167,18 @@ h2{font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacin
 .garantias li{display:flex;align-items:center;gap:7px}
 .hero .nota a,.nota a{color:#A9B3BE;text-underline-offset:3px}
 .nota a:hover{color:#E8ECF1}
+/* Multas, después de Planes (17 Oct 2026, el dueño: «en color rojo… multas»). */
+.multas-k{color:#E07A6C!important;font:600 14px/1 'Hanken Grotesk',system-ui,sans-serif!important;letter-spacing:.06em;text-transform:uppercase;margin:0 0 12px}
+.multas-fila{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:8px}
+.multa{display:flex;flex-direction:column;gap:6px;background:#0C1118;border:1px solid #2A1C1A;border-top:3px solid #E07A6C;border-radius:18px;padding:22px 22px 20px;text-decoration:none;color:#E8ECF1;transition:border-color .2s}
+.multa:hover{border-color:#4A2A26;border-top-color:#E07A6C}
+.multa b{font:700 34px/1.05 'Schibsted Grotesk',system-ui,sans-serif;letter-spacing:-.02em;color:#E07A6C}
+.multa span{font-weight:600;font-size:15.5px}
+.multa small{color:#8E99A6;font-size:13px}
+.multas-mas{text-align:center;margin-top:26px}
+.multas-mas a{display:inline-block;color:#E07A6C;border:1px solid #E07A6C;border-radius:999px;padding:11px 22px;font-weight:600;text-decoration:none}
+.multas-mas a:hover{background:#E07A6C;color:#06080C}
+@media (max-width:900px){.multas-fila{grid-template-columns:repeat(2,minmax(0,1fr))}}
+header.top nav a.nav-multas,.secciones a.nav-multas{color:#E07A6C!important}header.top nav a.nav-multas:hover,.secciones a.nav-multas:hover{color:#F09A8E!important}
+@media (max-width:520px){.secciones{gap:2px 13px!important;font-size:14px!important}header.top nav{gap:2px 13px!important;font-size:14px!important}}
+@media (max-width:380px){.secciones{gap:2px 9px!important;font-size:12.5px!important}}
