@@ -47,6 +47,8 @@ p{margin:0}
 .globo-marco{position:relative;width:100%;max-width:560px;aspect-ratio:1}
 .globo-marco::before{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(closest-side,rgba(120,170,230,0) 89%,rgba(120,170,230,.12) 91%,rgba(120,170,230,0) 97%);pointer-events:none}
 .globo-foto,#globo{position:absolute;inset:0;width:100%;height:100%;border-radius:50%}
+.globo-rutas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity 1.2s .3s}
+.hero-globo.vivo .globo-rutas{opacity:1}
 .globo-foto{object-fit:contain;transition:opacity .8s}
 #globo{opacity:0;transition:opacity .8s;cursor:grab;outline-offset:6px}
 #globo.listo{opacity:1}

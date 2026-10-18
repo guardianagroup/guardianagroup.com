@@ -68,9 +68,9 @@
   <figure class="hero-globo">
     <div class="globo-marco">
       <img class="globo-foto" src="/tierra/globo-portada.jpg" width="720" height="720" alt="" aria-hidden="true">
-      <canvas id="globo" tabindex="0" role="img" aria-label="The Earth at this moment, with day and night where they are now. Drag it or use the arrow keys to turn it."></canvas>
+      <canvas id="globo" tabindex="0" role="img" aria-label="The Earth with an illustrative example of the connections a computer in Barranquilla makes to data centres abroad. Drag it or use the arrow keys to turn it."></canvas>
     </div>
-    <figcaption class="globo-pie">The Earth right now: day and night are where they really are. Imagery: NASA Blue Marble and Black Marble.</figcaption>
+    <figcaption class="globo-pie">Illustrative simulation: typical connections from a computer in Barranquilla. Not real data.</figcaption>
 
   </figure>
 </section>
@@ -199,7 +199,7 @@
 <script>
 document.addEventListener('DOMContentLoaded',function(){
   try{var P=window.GUARDIANA_PRICES;if(P){var a=document.getElementById('plus-precio'),b=document.getElementById('plus-nota'),f=document.getElementById('fund-precio'),h=document.getElementById('hero-precio');if(a)a.textContent=P.plusEn;if(b)b.textContent=P.plusNoteEn;if(f)f.textContent=P.fundEn;if(h)h.textContent='Then '+P.plusEn+' or '+P.fundEn+' once.';}}catch(e){}
-  try{var cv=document.getElementById('globo'),fig=cv&&cv.closest('.hero-globo');if(!(cv&&window.GuardianaGlobo&&GuardianaGlobo.iniciar(cv,{ruta:'/tierra/',lista:function(){cv.classList.add('listo');if(fig)fig.classList.add('vivo');}}))&&cv)cv.hidden=true;}catch(e){}
+  try{var cv=document.getElementById('globo'),fig=cv&&cv.closest('.hero-globo');if(!(cv&&window.GuardianaGlobo&&GuardianaGlobo.iniciar(cv,{ruta:'/tierra/',lon:-44,tilt:0.42,rutas:{origen:{n:'Barranquilla',ll:[-74.78,10.96]},destinos:[{n:'Ashburn',ll:[-77.49,39.04]},{n:'Miami',ll:[-80.19,25.76]},{n:'Dallas',ll:[-96.80,32.78]},{n:'Oregon',ll:[-121.18,45.60]},{n:'Dublin',ll:[-6.26,53.35]},{n:'Frankfurt',ll:[8.68,50.11]},{n:'São Paulo',ll:[-46.63,-23.55]}]},lista:function(){cv.classList.add('listo');if(fig)fig.classList.add('vivo');}}))&&cv)cv.hidden=true;}catch(e){}
   try{var K='guardiana-idioma',l=document.querySelectorAll('a[data-idioma]');for(var i=0;i<l.length;i++)l[i].addEventListener('click',function(){try{localStorage.setItem(K,this.getAttribute('data-idioma'))}catch(e){}});}catch(e){}
 });
 </script>
