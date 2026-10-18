@@ -415,6 +415,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
         if (await porRele(g, k, 6000)) { memoria.asiento = i; recuerda(); fallos = 0; return; }
       }
       if (g !== generacion) return;
+      if (huboConversacion) borraTodo();
       falla(huboConversacion ? t('sala_fin') : t('sala_llena'));
       return;
     }
@@ -602,6 +603,17 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   // Pictures sent from this phone, kept to show them in our own bubble.
   const enviados = new Map();
   const archivos = new Map();
+  // When the conversation is over nothing of it stays on this phone (17 Oct 2026, the owner:
+  // «tiene que quedar todo borrado, absolutamente todo»): the messages, the pictures and notes
+  // received or sent, and the code itself.
+  const borraTodo = () => {
+    try { $('mensajes').innerHTML = ''; } catch (_) {}
+    for (const u of archivos.values()) { try { URL.revokeObjectURL(u); } catch (_) {} }
+    for (const u of enviados.values()) { try { URL.revokeObjectURL(u); } catch (_) {} }
+    archivos.clear(); enviados.clear();
+    try { if (claveSala) localStorage.removeItem('guardiana-sala-' + claveSala); } catch (_) {}
+    olvidaCodigo();
+  };
   // 1.0.42: when a call ends, what GUARDIANA checked (the owner: «cuando se acabe la llamada… un
   // resumen de lo que ha chequeado»). Shown once per call; it can be saved as a text file.
   let resumenVisto = 0, resumenTxt = '';
@@ -707,7 +719,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
       if (m.contacto && !$('nombre-otro').value) $('nombre-otro').value = m.contacto;
       return;
     }
-    if (f !== 'lista') { muestra('p-error'); $('t-error').textContent = t('fin'); $('t-error-p').textContent = ''; $('reintentar').hidden = true; pintaTimbre(null); paraTono(); previaCamara(false); paraMedios(); cerrado = true; clearTimeout(reintento); if (canal) canal.cierra(); return; }
+    if (f !== 'lista') { borraTodo(); muestra('p-error'); $('t-error').textContent = t('fin'); $('t-error-p').textContent = ''; $('reintentar').hidden = true; pintaTimbre(null); paraTono(); previaCamara(false); paraMedios(); cerrado = true; clearTimeout(reintento); if (canal) canal.cierra(); return; }
     huboConversacion = true;
     muestra('p-chat');
     const g = estadoGlobal(m.monitor || {});
