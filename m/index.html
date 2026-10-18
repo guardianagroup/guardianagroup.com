@@ -276,13 +276,18 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   // so the last code read is remembered here and, when it no longer works, the page reads a
   // new one with the camera itself.
   // A new code read while this page is open (the browser reused the tab): start again with it.
-  window.addEventListener('hashchange', () => { try { localStorage.setItem('guardiana-ultimo', location.hash.slice(1)); } catch (_) {} location.reload(); });
-  let D = null, h0 = location.hash.slice(1);
-  // As an app the icon may still carry the first code it was installed with: the last code
-  // read wins (17 Oct 2026 review: every launch opened a dead code).
+  // No history of codes (17 Oct 2026, the owner: «no puede haber historial de llamada»): the code
+  // is taken out of the address at once, so it is not kept in the browser's history, and it lives
+  // only in this tab (sessionStorage) for a reload. Only the app on the home screen, which has no
+  // address bar, remembers the last one, and forgets it when the conversation ends.
   const comoApp = (() => { try { return matchMedia('(display-mode: standalone)').matches || !!navigator.standalone; } catch (_) { return false; } })();
-  { let u = null; try { u = localStorage.getItem('guardiana-ultimo'); } catch (_) {} if (u && (!h0 || (comoApp && u !== h0))) { h0 = u; try { history.replaceState(null, '', location.pathname + '#' + u); } catch (_) {} } }
-  try { if (h0) localStorage.setItem('guardiana-ultimo', h0); } catch (_) {}
+  const guardaCodigo = (h) => { try { sessionStorage.setItem('guardiana-codigo', h); } catch (_) {} try { if (comoApp) localStorage.setItem('guardiana-ultimo', h); else localStorage.removeItem('guardiana-ultimo'); } catch (_) {} };
+  const olvidaCodigo = () => { try { sessionStorage.removeItem('guardiana-codigo'); } catch (_) {} try { localStorage.removeItem('guardiana-ultimo'); } catch (_) {} };
+  window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (!h) return; guardaCodigo(h); location.reload(); });
+  let D = null, h0 = location.hash.slice(1);
+  if (!h0) { try { h0 = sessionStorage.getItem('guardiana-codigo') || ''; } catch (_) {} }
+  if (!h0 && comoApp) { try { h0 = localStorage.getItem('guardiana-ultimo') || ''; } catch (_) {} }
+  if (h0) { guardaCodigo(h0); try { history.replaceState(null, '', location.pathname); } catch (_) {} }
   try {
     const h = h0;
     D = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(h.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0))));
@@ -324,7 +329,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   const muestraPC = async () => {
     muestra('p-pc');
     if (!window.qrSvg) await new Promise((ok) => { const sc = document.createElement('script'); sc.src = '/m/qrhaz.js'; sc.onload = ok; sc.onerror = ok; document.head.appendChild(sc); });
-    try { if (window.qrSvg && !$('pc-qr').firstChild) $('pc-qr').innerHTML = window.qrSvg(location.href); } catch (_) {}
+    try { if (window.qrSvg && !$('pc-qr').firstChild) $('pc-qr').innerHTML = window.qrSvg(location.origin + location.pathname + '#' + h0); } catch (_) {}
   };
   const esIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
   const directoPosible = !SALA && !!(D && D.h && D.s && Array.isArray(D.a) && 'WebTransport' in window && !esIOS);
