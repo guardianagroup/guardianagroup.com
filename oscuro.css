@@ -1,0 +1,34 @@
+/* GUARDIANA · capa común del diseño oscuro (17 Oct 2026). Las letras y los ajustes que todas
+   las páginas comparten con la portada «Observatorio». Los colores de cada página van en su CSS. */
+@font-face{font-family:'Schibsted Grotesk';font-weight:400 900;font-display:swap;src:url(/fonts/SchibstedGrotesk-var.woff) format('woff')}
+@font-face{font-family:'Hanken Grotesk';font-weight:100 900;font-display:swap;src:url(/fonts/HankenGrotesk-var.woff) format('woff')}
+:root{color-scheme:dark}
+html,body{background:#06080C}
+::selection{background:rgba(156,195,228,.32);color:#fff}
+img{max-width:100%}
+/* Las capturas reales del programa y de Windows se ven sobre el fondo oscuro con un borde suave. */
+main img:not([src$=".svg"]){border-radius:10px}
+/* Titulares: la letra nueva es más estrecha que la anterior; menos apretada. */
+h1,h2,h3{letter-spacing:-.012em!important}
+h1{font-weight:700!important}
+/* Cabecera igual que la portada: fija, translúcida, botones en píldora. */
+header.top{position:sticky!important;top:0;z-index:50;background:rgba(6,8,12,.86)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid #141920!important;max-width:none!important;margin:0 0 36px!important;padding:12px max(24px,calc((100% - 1192px)/2))!important;display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:10px 24px!important}
+main header.top{margin:0 calc(50% - 50vw) 36px!important;width:100vw}
+header.top nav{flex:1 1 auto;gap:4px 22px!important;font-size:15px!important}
+header.top nav a{white-space:nowrap;padding:6px 0}
+header.top .idiomas{margin-left:auto!important}
+header.top .licencia-btn{margin:0!important}
+header.top .descargar{margin:0!important}
+@media (max-width:860px){header.top nav{order:3;flex-basis:100%;overflow-x:auto;flex-wrap:nowrap!important;scrollbar-width:none}header.top nav::-webkit-scrollbar{display:none}header.top{gap:8px 10px!important}}
+@media (max-width:520px){header.top .idiomas{display:none!important}header.top{padding:10px 16px!important}.licencia-btn,header.top .descargar{padding:7px 11px!important;font-size:13px!important}header.top>a:first-child{margin-right:auto}}
+.lema-marca small{display:none}
+header.top nav a{color:#A9B3BE!important;font-weight:500}header.top nav a:hover,header.top nav a[aria-current=page]{color:#E8ECF1!important}
+header.top .idioma{font-family:'Hanken Grotesk',system-ui,sans-serif!important;letter-spacing:0!important;border-color:transparent!important;background:none!important;color:#8E99A6!important}
+header.top .idioma.actual{color:#E8ECF1!important}
+.licencia-btn{border:1px solid #2A323D!important;color:#E8ECF1!important;font-size:14px!important;font-weight:500!important;padding:8px 16px!important}
+header.top .descargar{background:#E8ECF1!important;color:#06080C!important;font-size:14px!important;padding:8px 18px!important}
+.k{color:#8E99A6!important}
+.solo-movil{display:none}
+@media (max-width:520px){.solo-pc{display:none}.solo-movil{display:inline}header.top>a:first-child{letter-spacing:.08em!important;font-size:12.5px!important;gap:8px!important}header.top{column-gap:8px!important}}
+.licencia-btn:hover{color:#06080C!important;background:#E8ECF1!important;border-color:#E8ECF1!important}
+@media (max-width:400px){header.top>a:first-child{letter-spacing:.04em!important;font-size:12px!important}}
