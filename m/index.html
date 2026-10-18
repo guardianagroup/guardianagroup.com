@@ -392,7 +392,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     const base = await crypto.subtle.importKey('raw', ikm, 'HKDF', false, ['deriveKey']);
     const una = (info) => crypto.subtle.deriveKey({ name: 'HKDF', hash: 'SHA-256', salt: une(delEquipo, delMovil), info: enc(info) }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
     // The four digits of this link (1.0.42): the computer shows the same ones next to «Aceptar».
-    if (secreto) { try { const b = new DataView(await crypto.subtle.deriveBits({ name: 'HKDF', hash: 'SHA-256', salt: une(delEquipo, delMovil), info: enc('guardiana-movil-1 numero') }, await crypto.subtle.importKey('raw', ikm, 'HKDF', false, ['deriveBits']), 32)); miNumero = String(b.getUint32(0) % 10000).padStart(4, '0'); $('mi-numero').textContent = miNumero.split('').join(' '); $('mi-numero').hidden = !(D && D.g); } catch (_) {} }
+    if (secreto) { try { const b = new DataView(await crypto.subtle.deriveBits({ name: 'HKDF', hash: 'SHA-256', salt: une(delEquipo, delMovil), info: enc('guardiana-movil-1 numero') }, await crypto.subtle.importKey('raw', ikm, 'HKDF', false, ['deriveBits']), 32)); miNumero = String(b.getUint32(0) % 10000).padStart(4, '0'); $('mi-numero').textContent = miNumero.split('').join(' '); $('mi-numero').hidden = false; } catch (_) {} }
     return [await una('guardiana-movil-1 m>e'), await una('guardiana-movil-1 e>m')];
   };
   let miNumero = '';
