@@ -137,3 +137,27 @@ h2{font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacin
 }
 .solo-movil{display:none}
 @media (max-width:520px){.cab-in{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));gap:10px 12px}.marca{gap:8px}.cab-acc{gap:6px}.cab-acc .btn{padding:8px 11px;font-size:13.5px;min-height:40px}.idiomas{display:none}.solo-pc{display:none}.solo-movil{display:inline}.marca span{font-size:14px;letter-spacing:.12em}}
+
+/* Las tres tarjetas de «Una descarga. Tres pestañas.» (17 Oct 2026). */
+.tarjeta-img{height:190px;overflow:hidden;border:1px solid #141B24}
+.tarjeta-img.foto{padding:0;background:#06080C}
+.tarjeta-img.foto img{width:100%;height:100%;object-fit:cover;display:block}
+.tarjeta-img.nav{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;padding:0;background:#06080C}
+.nav-barra{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid #141B24;background:#0A0F16}
+.nav-barra .pts{display:flex;gap:5px}.nav-barra .pts i{width:7px;height:7px;border-radius:50%;background:#2A323D}
+.nav-url{flex:1;min-width:0;display:flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:999px;background:#141A22;color:#A9B3BE;font-size:12px;white-space:nowrap;overflow:hidden}
+.nav-url svg{color:#6CCBA5;flex:none}
+.nav-esc{font:600 11px/22px 'Hanken Grotesk',sans-serif;color:#06080C;background:#9CC3E4;border-radius:999px;padding:0 8px}
+.nav-filas{display:flex;flex-direction:column;gap:2px;padding:12px 14px}
+.nav-filas span{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#C8D1DA;padding:7px 0;border-bottom:1px solid #10161E;min-width:0}
+.nav-filas span:last-child{border-bottom:0}
+.nav-filas em{margin-left:auto;font-style:normal;color:#E07A6C;font-size:11.5px;white-space:nowrap}
+.tarjeta-img.chat2{flex-direction:column;align-items:stretch;justify-content:flex-start;gap:8px;padding:12px 16px;background:#06080C}
+.ch-cab{display:flex;align-items:center;justify-content:center;gap:6px;color:#6CCBA5;font-size:11.5px;padding-bottom:6px;border-bottom:1px solid #10161E}
+.chat2 .b1,.chat2 .b2{border-radius:14px;padding:7px 11px;font-size:12.5px;max-width:82%}
+.chat2 .b1{border-bottom-left-radius:4px}.chat2 .b2{border-bottom-right-radius:4px}
+.chat2 .adj{display:block;margin-top:5px;font-weight:500;font-size:11.5px;color:#9CC3E4}
+.chat2 .adj::before{content:'';display:inline-block;width:8px;height:10px;border:1.3px solid currentColor;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.voz{align-self:flex-start;display:flex;align-items:center;gap:8px;background:#17212C;border-radius:14px;border-bottom-left-radius:4px;padding:6px 10px}
+.voz b{font-size:9px;color:#E8ECF1}.voz small{font-size:11px;color:#A9B3BE}
+.onda{display:flex;align-items:center;gap:2px;height:22px}.onda i{display:block;width:2px;border-radius:1px;background:#9CC3E4;opacity:.8}
