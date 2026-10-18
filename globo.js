@@ -64,7 +64,7 @@
       'void main(){ vec3 n=normalize(vN); float mu=dot(n,uSol);\n' +
       ' vec3 dia=pow(texture(uDia,vUv).rgb, vec3(2.2)); float luz=texture(uLuces,vUv).r; float agua=texture(uAgua,vUv).r;\n' +
       ' float lado=smoothstep(-0.08,0.22,mu); float diaF=smoothstep(-0.14,0.24,mu);\n' +
-      ' vec3 col=mix(dia*vec3(0.19,0.24,0.38)+vec3(0.005,0.011,0.026), dia*(0.70+0.62*max(mu,0.0)), diaF);\n' +
+      ' vec3 col=mix(dia*vec3(0.24,0.29,0.44)+vec3(0.005,0.011,0.026), dia*(0.70+0.62*max(mu,0.0)), diaF);\n' +
       ' col+=dia*vec3(1.0,0.45,0.2)*0.22*exp(-pow((mu-0.03)*10.0,2.0));\n' +
       ' float noche=1.0-smoothstep(-0.20,0.05,mu); col+=vec3(1.0,0.70,0.38)*pow(luz,1.2)*1.9*noche;\n' +
       ' vec3 nw=normalize(uM3*n); vec3 V=normalize(uCam-vW); vec3 Lw=normalize(uM3*uSol);\n' +
@@ -104,8 +104,8 @@
     }
     var tex = { dia: textura(null), luces: textura(null), agua: textura(null) }, listas = 0;
     // Sharp on every screen (the owner, 17 Oct 2026: «un pelín borroso… máxima calidad»): 4K
-    // textures on computers, 2K on phones, both from NASA's 16K tiles; 2K if the GPU can't take 4K.
-    var tam = movil || gl.getParameter(gl.MAX_TEXTURE_SIZE) < 4096 ? '-2k' : '-4k';
+    // textures from NASA's 16K tiles on every screen, phones included; 2K only if the GPU can't take 4K.
+    var tam = gl.getParameter(gl.MAX_TEXTURE_SIZE) < 4096 ? '-2k' : '-4k';
     function carga(clave, url) {
       var im = new Image(); im.decoding = 'async';
       im.onload = function () { gl.deleteTexture(tex[clave]); tex[clave] = textura(im); cambio = true; listas++; if (listas === 3 && op.lista) op.lista(); pide(); };
@@ -206,7 +206,7 @@
     var rot = -lon0 * RAD + (R ? 0 : 0.35), tilt = op.tilt != null ? op.tilt : 0.32, vr = 0, vt = 0, tocado = false;
 
     function dibuja() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2.5), W = Math.round(cv.clientWidth * dpr), H = Math.round(cv.clientHeight * dpr);
+      var dpr = Math.min(window.devicePixelRatio || 1, 3), W = Math.round(cv.clientWidth * dpr), H = Math.round(cv.clientHeight * dpr);
       if (!W || !H) return;
       if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
       gl.viewport(0, 0, W, H); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
