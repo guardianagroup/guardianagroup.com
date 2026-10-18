@@ -182,3 +182,6 @@ h2{font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacin
 header.top nav a.nav-multas,.secciones a.nav-multas{color:#E07A6C!important}header.top nav a.nav-multas:hover,.secciones a.nav-multas:hover{color:#F09A8E!important}
 @media (max-width:520px){.secciones{gap:2px 13px!important;font-size:14px!important}header.top nav{gap:2px 13px!important;font-size:14px!important}}
 @media (max-width:380px){.secciones{gap:2px 9px!important;font-size:12.5px!important}}
+.marca span{display:flex;flex-direction:column;gap:4px;line-height:1}
+.marca span small{font:500 10.5px/1 'Hanken Grotesk',system-ui,sans-serif;letter-spacing:.03em;color:#8E99A6;text-transform:none}
+@media (max-width:520px){.marca span small{display:none}}

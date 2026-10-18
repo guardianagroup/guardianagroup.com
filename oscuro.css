@@ -21,7 +21,9 @@ header.top .licencia-btn{margin:0!important}
 header.top .descargar{margin:0!important}
 @media (max-width:860px){header.top nav{order:3;flex-basis:100%;overflow-x:auto;flex-wrap:nowrap!important;scrollbar-width:none}header.top nav::-webkit-scrollbar{display:none}header.top{gap:8px 10px!important}}
 @media (max-width:520px){header.top .idiomas{display:none!important}header.top{padding:10px 16px!important}.licencia-btn,header.top .descargar{padding:7px 11px!important;font-size:13px!important}header.top>a:first-child{margin-right:auto}}
-.lema-marca small{display:none}
+.lema-marca{display:inline-flex!important;flex-direction:column;gap:4px;line-height:1}
+.lema-marca small{display:block!important;font:500 10.5px/1 'Hanken Grotesk',system-ui,sans-serif!important;letter-spacing:.03em!important;color:#8E99A6!important;text-transform:none!important;margin:0!important}
+@media (max-width:520px){.lema-marca small{display:none!important}}
 header.top nav a{color:#A9B3BE!important;font-weight:500}header.top nav a:hover,header.top nav a[aria-current=page]{color:#E8ECF1!important}
 header.top .idioma{font-family:'Hanken Grotesk',system-ui,sans-serif!important;letter-spacing:0!important;border-color:transparent!important;background:none!important;color:#8E99A6!important}
 header.top .idioma.actual{color:#E8ECF1!important}
