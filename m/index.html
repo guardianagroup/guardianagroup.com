@@ -204,7 +204,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 .resumen-ll h2{margin:0;font:600 17px/1.25 var(--display)}.resumen-ll .r-sub{font-size:12.5px;color:var(--muted)}
 .resumen-ll ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}.resumen-ll li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.4}.resumen-ll li i{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none;background:var(--ok)}.resumen-ll li.aviso i{background:var(--aviso)}.resumen-ll li.alerta i{background:var(--alerta)}
 .resumen-ll .r-botones{display:flex;gap:8px}.resumen-ll .r-botones .btn{flex:1;border-radius:999px}
-.mensajes li img{cursor:zoom-in}.oir{position:fixed;left:50%;bottom:calc(120px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:80;min-height:48px;padding:0 22px;border-radius:999px;border:0;background:#fff;color:#0B1020;font:600 15px var(--texto);box-shadow:0 6px 24px rgba(0,0,0,.35)}.mensajes li video{display:block;max-width:100%;border-radius:10px;margin-bottom:4px}
+#video{display:none!important}.mensajes li img{cursor:zoom-in}.oir{position:fixed;left:50%;bottom:calc(120px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:80;min-height:48px;padding:0 22px;border-radius:999px;border:0;background:#fff;color:#0B1020;font:600 15px var(--texto);box-shadow:0 6px 24px rgba(0,0,0,.35)}.mensajes li video{display:block;max-width:100%;border-radius:10px;margin-bottom:4px}
 .visor{position:fixed;inset:0;z-index:70;display:none;background:rgba(5,8,18,.96);touch-action:none;overflow:hidden}.visor.si{display:block}
 .visor img{position:absolute;left:50%;top:50%;max-width:100vw;max-height:100vh;transform-origin:center center;will-change:transform;user-select:none;-webkit-user-drag:none}
 .visor .v-barra{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:linear-gradient(rgba(5,8,18,.7),transparent)}
@@ -884,7 +884,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   const nuevoGrabador = (video) => {
     // Lighter video for a phone on a relayed path, with a full picture every 2 s so a lost
     // moment heals quickly (17 Oct 2026 review).
-    grabador = new MediaRecorder(fuenteGrabacion(), { mimeType: mime(video), audioBitsPerSecond: 48000, videoBitsPerSecond: video ? 600000 : undefined, videoKeyFrameIntervalDuration: video ? 2000 : undefined });
+    grabador = new MediaRecorder(fuenteGrabacion(), { mimeType: mime(video), audioBitsPerSecond: video ? 48000 : 96000, videoBitsPerSecond: video ? 600000 : undefined, videoKeyFrameIntervalDuration: video ? 2000 : undefined });
     // A slow line (mobile data, a busy relay): above 160 KB waiting, the piece is dropped and,
     // once the line has emptied, the recorder starts again so the next piece carries its
     // header. The call stays live instead of falling further and further behind, and a hang-up
@@ -1040,6 +1040,18 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   // and answer travel sealed through this phone's computer and, inside Olm, to the other side.
   let rtc = null, rtcFallo = false, rtcEspera = 0;
   const rtcManda = (d) => manda({ t: 'rtc', d });
+  // The voice at its best (committee 17 Oct 2026, video calls dropped by the owner): Opus mono
+  // at up to 64 kbps, with in-band error correction and no silence suppression, so the sound
+  // stays full and steady.
+  const opusHD = (sdp) => {
+    try {
+      const m = /a=rtpmap:(\d+) opus\/48000/i.exec(sdp); if (!m) return sdp;
+      const pt = m[1], extra = { useinbandfec: '1', usedtx: '0', maxaveragebitrate: '64000', maxplaybackrate: '48000', stereo: '0' };
+      const re = new RegExp('a=fmtp:' + pt + ' ([^\\r\\n]*)');
+      if (re.test(sdp)) return sdp.replace(re, (_, p) => { const v = Object.fromEntries(p.split(';').filter(Boolean).map((x) => x.split('='))); Object.assign(v, extra); return 'a=fmtp:' + pt + ' ' + Object.entries(v).map(([a, b]) => a + '=' + b).join(';'); });
+      return sdp.replace(m[0], m[0] + '\r\na=fmtp:' + pt + ' ' + Object.entries(extra).map(([a, b]) => a + '=' + b).join(';'));
+    } catch (_) { return sdp; }
+  };
   const rtcNuevaPc = () => {
     const pc = new RTCPeerConnection({ iceServers: rtc.ice, iceTransportPolicy: rtc.local ? 'all' : 'relay', bundlePolicy: 'max-bundle' });
     const envio = fuenteGrabacion(false);
@@ -1067,7 +1079,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     rtc.s = Math.random().toString(36).slice(2, 10);
     rtc.pc = rtcNuevaPc(); rtc.pendientes = [];
     const o = await rtc.pc.createOffer();
-    await rtc.pc.setLocalDescription(o);
+    await rtc.pc.setLocalDescription({ type: o.type, sdp: opusHD(o.sdp) });
     rtcManda({ t: 'offer', s: rtc.s, sdp: rtc.pc.localDescription.sdp });
   };
   const empiezaRtc = async (l) => {
@@ -1107,7 +1119,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
         rtc.s = d.s; rtc.pc = rtcNuevaPc();
         await rtc.pc.setRemoteDescription({ type: 'offer', sdp: d.sdp });
         const a = await rtc.pc.createAnswer();
-        await rtc.pc.setLocalDescription(a);
+        await rtc.pc.setLocalDescription({ type: a.type, sdp: opusHD(a.sdp) });
         rtcManda({ t: 'answer', s: rtc.s, sdp: rtc.pc.localDescription.sdp });
         rtcAplicaPendientes();
       } else if (d.t === 'answer' && rtc.ofrece && d.s === rtc.s && rtc.pc && rtc.pc.signalingState === 'have-local-offer') {
