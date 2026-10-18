@@ -1026,6 +1026,17 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     const pc = new RTCPeerConnection({ iceServers: rtc.ice, iceTransportPolicy: rtc.local ? 'all' : 'relay', bundlePolicy: 'max-bundle' });
     const envio = fuenteGrabacion(false);
     envio.getTracks().forEach((x) => pc.addTrack(x, envio));
+    // H.264 first: the iPhone's hardware encoder and decoder (committee 17 Oct 2026); the others
+    // stay as alternatives, and a browser without the call keeps its own order.
+    try {
+      const caps = RTCRtpSender.getCapabilities && RTCRtpSender.getCapabilities('video');
+      if (caps && caps.codecs) {
+        const h264 = caps.codecs.filter((c) => /h264/i.test(c.mimeType)).sort((a, b) => (/profile-level-id=64/.test(b.sdpFmtpLine || '') ? 1 : 0) - (/profile-level-id=64/.test(a.sdpFmtpLine || '') ? 1 : 0));
+        const resto = caps.codecs.filter((c) => !/h264/i.test(c.mimeType));
+        pc.getTransceivers().forEach((tr) => { if (tr.sender && tr.sender.track && tr.sender.track.kind === 'video' && tr.setCodecPreferences && h264.length) tr.setCodecPreferences([...h264, ...resto]); });
+      }
+    } catch (_) {}
+    envio.getVideoTracks().forEach((x) => { try { x.contentHint = 'motion'; } catch (_) {} });
     pc.onicecandidate = (e) => { if (e.candidate && rtc && rtc.pc === pc) rtcManda({ t: 'ice', s: rtc.s, c: e.candidate.toJSON() }); };
     pc.ontrack = (e) => { if (!rtc || rtc.pc !== pc) return; const v = $('remoto'); v.removeAttribute('src'); v.srcObject = e.streams[0] || new MediaStream([e.track]); v.play().catch(() => {}); if (puedeSalida) aplicaSalida(); };
     pc.onconnectionstatechange = () => { if (!rtc || rtc.pc !== pc) return; if (pc.connectionState === 'connected') { rtc.conectada = true; clearTimeout(rtc.reloj); } else if (pc.connectionState === 'failed') rtcFalla(true); };
