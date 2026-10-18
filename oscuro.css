@@ -59,3 +59,14 @@ a.idm-i:hover{background:#141A22}
 details.idm>summary::after{content:none!important;display:none!important}details.idm>summary{padding:8px 10px;float:none}details.idm .idm-l{font-weight:400}
 @media (max-width:520px){details.idm>summary{padding:6px 3px!important}}
 details.idm{border:0!important;background:none!important;padding:0!important;border-radius:0!important}
+
+/* Clicking where there is nothing to click shows nothing (Francisco, 18 Oct 2026: «si no hay
+   enlace, que no se pueda clicar y no aparezca nada en pantalla»): no text caret, no selection,
+   no tap flash, no focus ring after a mouse click. Fields, code and hashes stay selectable, and
+   keyboard focus (focus-visible) keeps its ring. */
+html{-webkit-tap-highlight-color:transparent}
+body{caret-color:transparent;-webkit-user-select:none;user-select:none;cursor:default}
+input,textarea,select,[contenteditable="true"]{caret-color:auto;-webkit-user-select:text;user-select:text;cursor:text}
+code,pre,kbd,samp,.huella,.copiable,[data-copiable]{-webkit-user-select:text;user-select:text;cursor:text}
+a,button,summary,label,[role="button"],[tabindex]:not([tabindex="-1"]){cursor:pointer}
+:focus:not(:focus-visible){outline:none}
