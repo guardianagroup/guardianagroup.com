@@ -315,8 +315,9 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     // One invitation (1.0.42, the owner with ChatGPT and Grok): on a phone or a tablet, only the
     // name and «Entrar». On a computer, two choices: read the QR code with the phone, or
     // «Seguir aquí en el PC» (this browser); a PC with GUARDIANA can also type the code.
-    if (D.g) {
-      // A computer with 1.0.42 or later: no name, four digits instead.
+    // No name on any phone or tablet (the owner: «sin nombres, solo números»), also when the
+    // link came without the PC code (17 Oct 2026: an iPad was asked its name).
+    {
       $('t-nombre').textContent = t('invita_t'); $('t-nombre-p').textContent = t('invita_p'); $('mi-nombre').hidden = true;
       $('t-pendiente').textContent = t('sala_pendiente_n'); $('t-pendiente-p').textContent = t('sala_pendiente_np');
     }
@@ -433,7 +434,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   $('pc-aqui').addEventListener('click', () => { enPC = true; conecta(); });
   $('pc-copiar').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('pc-codigo').textContent); $('pc-copiar').textContent = t('copiado'); setTimeout(() => { $('pc-copiar').textContent = t('copiar'); }, 1500); } catch (_) {} });
   // 1.0.42: no name; the four digits say who it is.
-  $('nombre-ok').addEventListener('click', () => { const x = $('mi-nombre').value.trim().slice(0, 40); if (!x && !(D && D.g)) return; if (x) memoria.nombre = x; memoria.entro = true; recuerda(); conecta(); });
+  $('nombre-ok').addEventListener('click', () => { const x = $('mi-nombre').value.trim().slice(0, 40); if (x) memoria.nombre = x; memoria.entro = true; recuerda(); conecta(); });
   $('mi-nombre').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('nombre-ok').click(); });
   const directo = async (g) => {
     const hash = { algorithm: 'sha-256', value: hexBytes(D.h) };
