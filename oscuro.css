@@ -32,3 +32,4 @@ header.top .descargar{background:#E8ECF1!important;color:#06080C!important;font-
 @media (max-width:520px){.solo-pc{display:none}.solo-movil{display:inline}header.top>a:first-child{letter-spacing:.08em!important;font-size:12.5px!important;gap:8px!important}header.top{column-gap:8px!important}}
 .licencia-btn:hover{color:#06080C!important;background:#E8ECF1!important;border-color:#E8ECF1!important}
 @media (max-width:400px){header.top>a:first-child{letter-spacing:.04em!important;font-size:12px!important}}
+@media (max-width:860px){header.top nav{overflow:visible!important;flex-wrap:wrap!important;justify-content:center!important;gap:2px 18px!important}}

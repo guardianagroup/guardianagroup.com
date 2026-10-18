@@ -42,7 +42,9 @@
       var cl = Math.cos(dec * RAD);
       sol = [cl * Math.sin(lon * RAD), Math.sin(dec * RAD), cl * Math.cos(lon * RAD)];
     }
-    solAhora(); setInterval(solAhora, 30000);
+    // A fixed sun for still pictures (posters, share images): op.sol = [lon, lat] of the subsolar point.
+    if (op.sol) { var cl0 = Math.cos(op.sol[1] * RAD); sol = [cl0 * Math.sin(op.sol[0] * RAD), Math.sin(op.sol[1] * RAD), cl0 * Math.cos(op.sol[0] * RAD)]; }
+    else { solAhora(); setInterval(solAhora, 30000); }
 
     var VS = '#version 300 es\n' +
       'in vec2 aLL; uniform mat4 uPV, uM; out vec2 vUv; out vec3 vN; out vec3 vW;\n' +
@@ -56,7 +58,7 @@
       'void main(){ vec3 n=normalize(vN); float mu=dot(n,uSol);\n' +
       ' vec3 dia=pow(texture(uDia,vUv).rgb, vec3(2.2)); float luz=texture(uLuces,vUv).r; float agua=texture(uAgua,vUv).r;\n' +
       ' float lado=smoothstep(-0.08,0.22,mu); float diaF=smoothstep(-0.14,0.24,mu);\n' +
-      ' vec3 col=mix(dia*vec3(0.30,0.36,0.50), dia*(0.62+0.68*max(mu,0.0)), diaF);\n' +
+      ' vec3 col=mix(dia*vec3(0.58,0.64,0.78), dia*(0.70+0.62*max(mu,0.0)), diaF);\n' +
       ' col+=dia*vec3(1.0,0.45,0.2)*0.22*exp(-pow((mu-0.03)*10.0,2.0));\n' +
       ' float noche=1.0-smoothstep(-0.20,0.05,mu); col+=vec3(1.0,0.70,0.38)*pow(luz,1.25)*1.5*noche;\n' +
       ' vec3 nw=normalize(uM3*n); vec3 V=normalize(uCam-vW); vec3 Lw=normalize(uM3*uSol);\n' +
@@ -103,7 +105,7 @@
     carga('dia', ruta + 'dia' + tam + '.jpg'); carga('luces', ruta + 'luces' + tam + '.jpg'); carga('agua', ruta + (movil ? 'agua-1k.png' : 'agua.png'));
 
     // Facing the visitor's side of the world: the time zone's offset gives a longitude.
-    var lon0 = -new Date().getTimezoneOffset() / 60 * 15;
+    var lon0 = op.lon != null ? op.lon : -new Date().getTimezoneOffset() / 60 * 15;
     var rot = -lon0 * RAD + 0.35, tilt = 0.32, vr = 0, vt = 0, tocado = false;
 
     function dibuja() {
