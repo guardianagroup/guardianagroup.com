@@ -1181,8 +1181,31 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     if (!modo) return;
     try { localStorage.setItem('guardiana_voz', modo); } catch (_) {}
     if ((modo === 'protegida') !== vozActiva) $('voz-prot').click();
+    avisosDeLlamada();
     manda({ t: 'llamar', video: false, mime: mime(false) });
   });
+  // Two honest notes before a call (18 Oct 2026, the committee): on an iPhone the call lives only
+  // while this page is open (no CallKit for a web page), said once; and a Bluetooth headset
+  // turns the microphone into a narrow-band one (HFP), so wired earphones or the speaker sound
+  // better. The device names are read only when the browser already allows it; nothing is kept.
+  const NOTAS = {
+    es: ['En iPhone la llamada sigue solo mientras esta página está abierta.', 'Para máxima calidad usa auriculares con cable o el altavoz.'],
+    en: ['On an iPhone the call goes on only while this page is open.', 'For the best quality use wired earphones or the speaker.'],
+    pt: ['No iPhone a chamada continua só enquanto esta página estiver aberta.', 'Para a máxima qualidade use auriculares com fio ou o altifalante.'],
+  };
+  const avisosDeLlamada = async () => {
+    const x = NOTAS[document.documentElement.lang] || NOTAS.es;
+    const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    let dicho = false; try { dicho = localStorage.getItem('guardiana_aviso_ios') === '1'; } catch (_) {}
+    if (ios && !dicho) { nota(x[0]); try { localStorage.setItem('guardiana_aviso_ios', '1'); } catch (_) {} return; }
+    try {
+      const ds = await navigator.mediaDevices.enumerateDevices();
+      if (ds.some((d) => /bluetooth|airpods|hands-?free|headset|\bbt\b/i.test(d.label || ''))) nota(x[1]);
+    } catch (_) {}
+  };
+  if (navigator.mediaDevices && navigator.mediaDevices.addEventListener) {
+    navigator.mediaDevices.addEventListener('devicechange', () => { if (document.body.classList.contains('en-llamada')) avisosDeLlamada(); });
+  }
   // Video calls are off (18 Oct 2026, the committee and the owner: «si no llegamos a eso, nos
   // quedaríamos solamente con voz»): the button is hidden and the code stays behind VIDEO.
   const VIDEO = false;
