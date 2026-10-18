@@ -88,7 +88,7 @@ footer.pie{border-top:1px solid var(--linea);margin-top:64px;padding-top:24px;fo
 footer.pie .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}footer.pie .links a{color:var(--gris)}footer.pie .links a:hover{color:var(--tinta)}
 footer.pie .arriba{justify-self:start;color:var(--azul)}
 @media (max-width:600px){main{padding:20px 20px 72px}h1{font-size:27px}header.top nav{gap:12px 16px}}
-#clave{display:block;word-break:break-all;font-size:1.05rem;padding:.7rem .9rem;margin:.4rem 0 .8rem}#copiar{font:inherit;font-weight:600;padding:.55rem 1rem;border-radius:10px;border:1px solid var(--azul,#9CC3E4);background:var(--azul,#9CC3E4);color:#E8ECF1;cursor:pointer}#copiar:focus-visible{outline:3px solid var(--ambar,#e0a400);outline-offset:2px}.lema-marca{display:flex;flex-direction:column;gap:3px;line-height:1}.lema-marca small{font-family:'Hanken Grotesk',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--gris)}
+#clave{display:block;word-break:break-all;font-size:1.05rem;padding:.7rem .9rem;margin:.4rem 0 .8rem}#copiar{font:inherit;font-weight:600;padding:.55rem 1rem;border-radius:10px;border:1px solid var(--azul,#9CC3E4);background:var(--azul,#9CC3E4);color:#06080C;cursor:pointer;min-width:11em}#copiar:hover{background:#C9DFF2;border-color:#C9DFF2}#copiar.hecho{background:#6CCBA5;border-color:#6CCBA5;color:#06080C}#copiar:focus-visible{outline:2px solid #9CC3E4;outline-offset:3px}.lema-marca{display:flex;flex-direction:column;gap:3px;line-height:1}.lema-marca small{font-family:'Hanken Grotesk',system-ui,sans-serif;font-weight:500;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--gris)}
 header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;border-radius:999px;padding:6px 15px;background:var(--azul);color:#06080C;font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap}header.top .idiomas+.descargar{margin-left:0}header.top .descargar:hover{background:var(--azul-oscuro);color:#E8ECF1}header.top .licencia-btn{display:inline-flex;align-items:center;margin-left:auto;margin-right:8px;border-radius:999px;padding:5px 14px;border:1.5px solid var(--azul);color:var(--azul);background:transparent;font-size:13px;font-weight:600;letter-spacing:.01em;white-space:nowrap;text-decoration:none}header.top .licencia-btn:hover{background:var(--azul);color:#06080C}header.top .licencia-btn+.descargar{margin-left:0}@media (max-width:640px){header.top .licencia-btn{padding:5px 10px;font-size:12px}}.box.cierre{margin-top:40px}.box.cierre p{margin:0}/* Carta de bienvenida: una hoja sobria con un filete fino de marca arriba, ancho de lectura. */
 .carta{position:relative;max-width:calc(62ch + 84px);margin:38px 0 6px;padding:36px 42px 32px;background:var(--hoja);border:1px solid var(--linea);border-radius:14px;font-size:17px;line-height:1.75;box-shadow:0 24px 48px -40px rgba(11,16,32,.35)}
 .carta::before{content:"";position:absolute;top:-1px;left:42px;width:64px;height:3px;background:var(--azul);border-radius:0 0 3px 3px}
@@ -166,7 +166,7 @@ main>*:not(#certificado-sec){display:none!important}
 <h1>Bienvenido, Fundador.</h1>
 <div id="con-clave" hidden><p class="lead">Esta es tu clave de licencia:</p>
 <code id="clave"></code>
-<p><button type="button" id="copiar" data-ok="Copiada">Copiar la clave</button></p>
+<p><button type="button" id="copiar" data-ok="Copiada" data-sel="Seleccionada: cópiala">Copiar la clave</button></p>
 <p class="muted">También te llega por correo, de Dodo Payments. Guárdala: es personal y vale para hasta 5 equipos tuyos. La misma clave activa también <a href="/zero.html">GUARDIANA ZERO</a>, el navegador.</p></div>
 <p class="lead" id="sin-clave">Tu clave de licencia te llega por correo, de Dodo Payments, a la dirección que pusiste al pagar. Si no la ves en unos minutos, mira en el correo no deseado.</p>
 <p class="lead" id="no-pago" hidden>La pasarela dice que el pago no se completó (estado: «<span id="estado"></span>»). Si te han cobrado, escríbenos con el número de pago de abajo.</p>
@@ -231,11 +231,14 @@ main>*:not(#certificado-sec){display:none!important}
   campo.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); ver(); } });
   el('cert-ver').addEventListener('click', ver);
   window.addEventListener('beforeprint', poner);
+  // Copiar: el botón dice «Copiada ✓» 1,5 s; si el navegador no deja copiar, la clave queda seleccionada.
   el('copiar').addEventListener('click', function () {
-    var t = el('clave').textContent, b = el('copiar');
-    var ok = function () { b.textContent = b.getAttribute('data-ok'); };
-    if (navigator.clipboard) { navigator.clipboard.writeText(t).then(ok); }
-    else { var r = document.createRange(); r.selectNodeContents(el('clave')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    var t = el('clave').textContent, b = el('copiar'), txt = b.getAttribute('data-txt') || b.textContent;
+    b.setAttribute('data-txt', txt);
+    var marca = function (m, ms) { b.textContent = m; b.classList.add('hecho'); clearTimeout(b._t); b._t = setTimeout(function () { b.textContent = txt; b.classList.remove('hecho'); }, ms); };
+    var selecciona = function () { var r = document.createRange(); r.selectNodeContents(el('clave')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); marca(b.getAttribute('data-sel'), 4000); };
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(t).then(function () { marca(b.getAttribute('data-ok') + ' \u2713', 1500); }, selecciona); }
+    else { selecciona(); }
   });
 })();
 </script>

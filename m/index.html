@@ -444,7 +444,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   window.addEventListener('online', () => { if (!canal && !cerrado && D) { clearTimeout(reintento); conecta(); } });
   let enPC = false;
   $('pc-aqui').addEventListener('click', () => { enPC = true; conecta(); });
-  $('pc-copiar').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('pc-codigo').textContent); $('pc-copiar').textContent = t('copiado'); setTimeout(() => { $('pc-copiar').textContent = t('copiar'); }, 1500); } catch (_) {} });
+  $('pc-copiar').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('pc-codigo').textContent); $('pc-copiar').textContent = t('copiado') + ' \u2713'; setTimeout(() => { $('pc-copiar').textContent = t('copiar'); }, 1500); } catch (_) { const r = document.createRange(); r.selectNodeContents($('pc-codigo')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } });
   // 1.0.42: no name; the four digits say who it is.
   $('nombre-ok').addEventListener('click', () => { const x = $('mi-nombre').value.trim().slice(0, 40); if (x) memoria.nombre = x; memoria.entro = true; recuerda(); conecta(); });
   $('mi-nombre').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('nombre-ok').click(); });
@@ -765,7 +765,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   };
   const pintaAcciones = (m) => { $('acciones').classList.toggle('si', !m.llamada && !m.entrante); const a = !!m.archivos; $('h-foto').hidden = !a; $('h-camara').hidden = !a; $('h-doc').hidden = !a; puedeNota = a && !!window.MediaRecorder; pintaMic(); };
   let huboConversacion = false;
-  $('codigo-copiar').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('codigo').textContent); $('codigo-copiar').textContent = t('copiado'); setTimeout(() => { $('codigo-copiar').textContent = t('copiar'); }, 1500); } catch (_) {} });
+  $('codigo-copiar').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('codigo').textContent); $('codigo-copiar').textContent = t('copiado') + ' \u2713'; setTimeout(() => { $('codigo-copiar').textContent = t('copiar'); }, 1500); } catch (_) { const r = document.createRange(); r.selectNodeContents($('codigo')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } });
   $('sas-si').addEventListener('click', () => manda({ t: 'sas', ok: true, nombre: $('nombre-otro').value.trim().slice(0, 60) }));
   $('sas-no').addEventListener('click', () => manda({ t: 'sas', ok: false, nombre: '' }));
   const notas = [];
