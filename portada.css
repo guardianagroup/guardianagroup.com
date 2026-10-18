@@ -220,7 +220,21 @@ a,button,summary,label,[role="button"],[tabindex]:not([tabindex="-1"]){cursor:po
    poco mientras se mantiene apretado; lo desactivado no parece pulsable. */
 :focus-visible{outline:2px solid #9CC3E4;outline-offset:3px}
 a,button,summary,[role=button],[role=tab],label[for]{transition-property:color,background-color,border-color,opacity,transform,box-shadow,text-decoration-color;transition-duration:.15s}
-a:active,summary:active,label[for]:active,[role=button]:active{opacity:.68;transition-duration:0s}
-button:not(:disabled):active,[role=tab]:active{transform:translateY(1px) scale(.97);opacity:.85;transition-duration:0s}
+a:active,summary:active,label[for]:active,[role=button]:active{opacity:.68!important;transition-duration:0s!important}
+button:not(:disabled):active,[role=tab]:active{transform:translateY(1px) scale(.97)!important;opacity:.85!important;transition-duration:0s!important}
 button:disabled,[aria-disabled=true]{cursor:not-allowed;opacity:.6}
-summary:hover{color:#E8ECF1}
+/* Al pasar el ratón, todo lo pulsable cambia (los que no cambiaban: el logo, «Descargar»,
+   «Volver arriba», los enlaces dentro del texto, las pestañas y los filtros sin elegir, las
+   filas que se despliegan). Siempre hacia el acero claro. */
+header.top .descargar:hover{background:#C9DFF2!important;border-color:#C9DFF2!important}
+header.top>a:first-child:hover,a.brand:hover,a.marca:hover{opacity:.75}
+footer.pie .arriba:hover,.arriba:hover{color:#C9DFF2;text-decoration:underline;text-underline-offset:4px}
+p a:hover,li a:hover,td a:hover,dd a:hover,small a:hover{text-decoration-line:underline;text-decoration-color:currentColor;text-underline-offset:3px}
+.mu-fil button:not([aria-pressed=true]):hover,.rx2-fil button:not([aria-pressed=true]):hover{color:#E8ECF1;border-color:#9CC3E4}
+.g-tabs button:not([aria-selected=true]):hover{color:#E8ECF1;background:#141A22}
+html details>summary:hover{color:#C9DFF2}
+details>summary:hover::after{color:#9CC3E4}
+.fila summary:hover{background:rgba(156,195,228,.06);border-radius:6px}.fila summary:hover b{color:#C9DFF2}
+.rx2-lista a.tuya:hover{border-color:#9CC3E4}
+.asia .ctas a.s:hover{background:#101A26;color:#C9DFF2;border-color:#C9DFF2}
+.gran-descarga a.otro:hover{color:#C9DFF2!important;text-decoration:underline!important;text-underline-offset:4px}
