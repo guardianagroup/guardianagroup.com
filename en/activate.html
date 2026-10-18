@@ -101,20 +101,46 @@ header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;bo
 .carta .firma b{color:var(--tinta);font-weight:600}
 .carta .firma span{color:var(--gris);font-size:15px}
 @media (max-width:600px){.carta{padding:28px 22px 24px;font-size:16.5px;line-height:1.72;border-radius:12px}.carta::before{left:22px}.carta .saludo{font-size:18px}}
-</style></head>
-<body><header class="top"><a class="brand" href="/" aria-label="GUARDIANA, home"><i></i><span class="lema-marca">GUARDIANA<small>Your data, under your control</small></span></a><nav aria-label="Sections"><a href="/#producto">Product</a><a href="/en/x-rays/">X-rays</a><a href="/en/how-it-works.html">How it works</a><a href="/#planes">Plans</a></nav><span class="idiomas"><span class="idioma actual" lang="en" aria-current="true">EN</span><a class="idioma" href="/activar.html" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><a class="idioma" href="/pt/ativar.html" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span><a class="licencia-btn" href="/en/activate.html"><span class="solo-pc">Activate licence</span><span class="solo-movil">Licence</span></a><a class="descargar" href="/en/install.html#download">Download</a></header><main id="arriba">
-<p class="k">LICENCE</p>
+</style><style>
+.act{max-width:1040px;margin:0 auto}
+.act .k{color:#9CC3E4;font:600 13px/1 'Hanken Grotesk',system-ui,sans-serif;letter-spacing:.08em;margin:0 0 14px}
+.act h1{font:700 clamp(36px,5vw,56px)/1.05 'Schibsted Grotesk',system-ui,sans-serif;margin:0 0 16px;text-wrap:balance}
+.act .lead{font-size:19px;line-height:1.55;color:#A9B3BE;max-width:58ch;margin:0 0 40px}
+.act-pasos{list-style:none;padding:0;margin:0 0 22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:p}
+.act-pasos li{background:#0C1118;border:1px solid #1E2631;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.act-pasos .n{width:28px;height:28px;border-radius:50%;border:1px solid #2A323D;display:grid;place-items:center;font:600 13px/1 'Hanken Grotesk',sans-serif;color:#E8ECF1}
+.act-pasos h2{font:600 19px/1.25 'Schibsted Grotesk',system-ui,sans-serif;margin:0}
+.act-pasos p{margin:0;color:#A9B3BE;font-size:15px;line-height:1.55}
+.act-pasos code{font-size:13px;background:#141A22;border:1px solid #1E2631;border-radius:6px;padding:1px 6px;color:#E8ECF1}
+.esq{height:92px;border-radius:12px;background:#06080C;border:1px solid #1E2631;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 14px}
+.esq .nom{font:600 12px/1.2 'Hanken Grotesk',sans-serif;color:#E8ECF1;letter-spacing:.06em}
+.esq .ch{font:500 12.5px/1 'Hanken Grotesk',sans-serif;color:#A9B3BE;padding:7px 11px;border-radius:999px;border:1px solid #2A323D;white-space:nowrap}
+.esq .ch.on{color:#06080C;background:#E8ECF1;border-color:#E8ECF1}
+.esq .fl{color:#56616E;font-size:14px}
+.esq .in{flex:1;min-width:0;height:34px;border-radius:9px;border:1px solid #2A323D;background:#0C1118;display:flex;align-items:center;padding:0 10px;font:500 12px/1 ui-monospace,monospace;color:#56616E;overflow:hidden;white-space:nowrap}
+.esq .bt{height:34px;padding:0 14px;border-radius:9px;background:#9CC3E4;color:#06080C;font:600 13px/34px 'Hanken Grotesk',sans-serif;white-space:nowrap}
+.act .nota{color:#A9B3BE;font-size:15px;margin:0 0 44px}
+.act-sig{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:0 0 40px}
+.act-sig a{display:block;background:#0C1118;border:1px solid #1E2631;border-radius:18px;padding:22px 24px;color:#E8ECF1;text-decoration:none;transition:border-color .2s}
+.act-sig a:hover{border-color:#9CC3E4}
+.act-sig b{display:block;font:600 18px/1.3 'Schibsted Grotesk',system-ui,sans-serif;margin-bottom:6px}
+.act-sig span{color:#A9B3BE;font-size:15px}
+.act .ayuda{color:#A9B3BE;font-size:15px;border-top:1px solid #1E2631;padding-top:22px;margin:0 0 20px}
+@media (max-width:860px){.act-pasos,.act-sig{grid-template-columns:1fr}}
+</style>
+</head>
+<body><header class="top"><a class="brand" href="/" aria-label="GUARDIANA, home"><i></i><span class="lema-marca">GUARDIANA<small>Your data, under your control</small></span></a><nav aria-label="Sections"><a href="/#producto">Product</a><a href="/en/x-rays/">X-rays</a><a href="/en/how-it-works.html">How it works</a><a href="/#planes">Plans</a></nav><span class="idiomas"><span class="idioma actual" lang="en" aria-current="true">EN</span><a class="idioma" href="/activar.html" lang="es" hreflang="es" data-idioma="es" aria-label="Español">ES</a><a class="idioma" href="/pt/ativar.html" lang="pt" hreflang="pt" data-idioma="pt" aria-label="Português">PT</a></span><a class="licencia-btn" href="/en/activate.html"><span class="solo-pc">Activate licence</span><span class="solo-movil">Licence</span></a><a class="descargar" href="/en/install.html#download">Download</a></header><main id="arriba"><div class="act">
+<p class="k">Licence</p>
 <h1>Activate your licence.</h1>
-<p class="lead">Your key arrives by email when you buy. It is activated inside the GUARDIANA program on your computer, not on this website.</p>
-<h2>Three steps</h2>
-<ol><li><b>Open GUARDIANA on your computer.</b> On Windows, the “Guardiana” icon on the desktop or in the Start menu: GUARDIANA ZERO opens. On the Mac, the GUARDIANA app; on Linux, <code>sudo guardiana panel</code>.</li>
-<li><b>Go to “Licence”.</b> Press the “X-rays” tab (1) and, in the menu at the top, “Licence” (2), on the second row next to “Home Mode”.</li>
-<li><b>Paste your key and press “Activate”.</b> Plus switches on at once, and the connection is recorded on that same page.</li></ol>
-<p><img src="/activar-licencia.png" width="1536" height="280" alt="GUARDIANA ZERO: the X-rays tab marked 1 and the Licence menu item marked 2 (screen in Spanish)." style="width:100%;height:auto;border-radius:12px;border:1px solid var(--linea,#1E2631)"></p>
-<p class="muted">One key works on up to five of your computers and also activates the GUARDIANA ZERO browser. The picture shows the program in Spanish; in English the same places read “X-rays” and “Licence”.</p>
-<h2>Don't have GUARDIANA yet?</h2>
-<p><a href="/en/install.html#download">Download it here</a>, with the steps to check the file before opening it. If you don't have a key yet, get one under <a href="/en/buy.html">Buy</a>.</p>
-<h2>If something doesn't add up</h2>
-<p>Write to <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a>. Don't send us the full key: the last four characters are enough.</p>
+<p class="lead">Your key arrives by email when you buy. It is activated in the GUARDIANA program on your computer, not on this website.</p>
+<ol class="act-pasos">
+<li><span class="n">1</span><div class="esq" aria-hidden="true"><svg viewBox="0 0 100 100" width="44" height="44" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#06080C" stroke="#2A323D" stroke-width="2"/><g transform="translate(9 7) scale(.82)"><defs><mask id="am"><rect width="100" height="100" fill="#fff"/><path d="M63 58.29 V55.07 Q63 54 58.71 54 H44.15 Q37 54 37 61.15 V72.85 Q37 80 44.15 80 H58.71 Q63 80 63 75.71 V67 H51" fill="none" stroke="#000" stroke-width="7.5"/></mask></defs><path d="M31 44 V31 A19 19 0 0 1 69 31 V44" fill="none" stroke="#E8ECF1" stroke-width="9"/><rect x="17" y="42" width="66" height="50" rx="13" fill="#9CC3E4" mask="url(#am)"/></g></svg><span class="nom">GUARDIANA</span></div><h2>Open GUARDIANA</h2><p>On Windows, the “Guardiana” icon on the desktop or in the Start menu. On the Mac, the GUARDIANA app; on Linux, <code>sudo guardiana panel</code>.</p></li>
+<li><span class="n">2</span><div class="esq" aria-hidden="true"><span class="ch">X-rays</span><span class="fl">›</span><span class="ch on">Licence</span></div><h2>Go to “Licence”</h2><p>In the “X-rays” tab, open “Licence” in the menu at the top.</p></li>
+<li><span class="n">3</span><div class="esq" aria-hidden="true"><span class="in">••••-••••-••••</span><span class="bt">Activate</span></div><h2>Paste your key and press “Activate”</h2><p>Plus switches on at once.</p></li>
+</ol>
+<p class="nota">One key works on up to five of your computers and includes the GUARDIANA ZERO browser.</p>
+<div class="act-sig"><a href="/en/install.html#download"><b>Don’t have GUARDIANA yet?</b><span>Download it and check it before opening it.</span></a><a href="/#planes"><b>No key yet?</b><span>See the plans: 7 days with everything, no card.</span></a></div>
+<p class="ayuda">Something doesn’t add up? Write to <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a>. Don’t send the full key: the last four characters are enough.</p>
+</div>
 <footer class="pie"><div class="links"><a href="/">Home</a><a href="/en/install.html">Install</a><a href="/#planes">Plans</a><a href="/en/guides/">Guides</a><a href="/en/x-rays/">X-rays</a><a href="/en/the-business-of-your-data.html">The business of your data</a><a href="/en/privacy.html">Privacy</a><a href="/en/terms.html">Terms and refunds</a><a href="/en/code-signing-policy.html">Code signing policy</a><a href="/en/contact.html">Contact</a><a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a></div>  <div class="links redes"><span style="color:var(--tinta,inherit)">Follow us</span><a href="https://www.instagram.com/guardianagroup/" rel="me noopener" target="_blank">Instagram</a><a href="https://www.tiktok.com/@guardianagroup" rel="me noopener" target="_blank">TikTok</a><a href="https://www.youtube.com/channel/UCsaw2KAcd6-_a58l2CNAxmg" rel="me noopener" target="_blank">YouTube</a><a href="https://www.facebook.com/profile.php?id=61594367606199" rel="me noopener" target="_blank">Facebook</a><a href="https://x.com/guardianagroup" rel="me noopener" target="_blank">X</a><a href="https://www.threads.com/@guardianagroup" rel="me noopener" target="_blank">Threads</a></div>
 <div>GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, 18th floor, Bocagrande, Cartagena de Indias, Colombia · This page uses no cookies and no analytics.</div><a class="arriba" href="#arriba">Back to top ↑</a></footer></main><script>(function(){try{var K='guardiana-idioma',a=document.querySelectorAll('a[data-idioma]');for(var i=0;i<a.length;i++)a[i].addEventListener('click',function(){try{localStorage.setItem(K,this.getAttribute('data-idioma'))}catch(e){}});}catch(e){}})();</script></body></html>
