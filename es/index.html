@@ -32,7 +32,7 @@
 
 <link rel="preload" as="font" type="font/woff" crossorigin href="/fonts/SchibstedGrotesk-var.woff">
 <link rel="preload" as="font" type="font/woff" crossorigin href="/fonts/HankenGrotesk-var.woff">
-<link rel="stylesheet" href="/portada.css?v=1792295583">
+<link rel="stylesheet" href="/portada.css?v=1792295738">
 </head>
 <body>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
@@ -69,9 +69,9 @@
   <figure class="hero-globo">
     <div class="globo-marco">
       <img class="globo-foto" src="/tierra/globo-portada.jpg" width="720" height="720" alt="" aria-hidden="true">
-      <canvas id="globo" tabindex="0" role="img" aria-label="La Tierra con un ejemplo ilustrativo de las conexiones de un ordenador en Barranquilla con centros de datos de otros países. Arrástrala o usa las flechas para girarla."></canvas>
+      <canvas id="globo" tabindex="0" role="img" aria-label="La Tierra con una medición real del pasado: adónde fueron las consultas del PC de pruebas en Cartagena, por países, el 21 de septiembre de 2026. Arrástrala o usa las flechas para girarla."></canvas>
     </div>
-    <figcaption class="globo-pie">Esto es un ejemplo. Con GUARDIANA en tu ordenador, verás tus conexiones reales.</figcaption>
+    <figcaption class="globo-pie">Medición real, no en directo: adónde fueron las 11.052 consultas del PC de pruebas en Cartagena en día y medio, por países, el 21 de septiembre de 2026.</figcaption>
 
   </figure>
 </section>
@@ -206,11 +206,11 @@
     <p class="pie-dir">GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, piso 18, Bocagrande, Cartagena de Indias, Colombia · <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a> · Esta página no usa cookies ni analíticas.</p>
   </div>
 </footer>
-<script src="/globo.js?v=1792295583" defer></script>
+<script src="/globo.js?v=1792295738" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
   try{var P=window.GUARDIANA_PRICES;if(P){var a=document.getElementById('plus-precio'),b=document.getElementById('plus-nota'),f=document.getElementById('fund-precio'),h=document.getElementById('hero-precio');if(a)a.textContent=P.plus;if(b)b.textContent=P.plusNote;if(f)f.textContent=P.fund;if(h)h.textContent='Después, '+P.plus+' o '+P.fund+' una sola vez.';}}catch(e){}
-  try{var cv=document.getElementById('globo'),fig=cv&&cv.closest('.hero-globo');if(!(cv&&window.GuardianaGlobo&&GuardianaGlobo.iniciar(cv,{ruta:'/tierra/',lon:-44,tilt:0.42,rutas:{origen:{n:'Barranquilla',ll:[-74.78,10.96]},destinos:[{n:'Ashburn',ll:[-77.49,39.04]},{n:'Miami',ll:[-80.19,25.76]},{n:'Dallas',ll:[-96.80,32.78]},{n:'Oregón',ll:[-121.18,45.60]},{n:'Dublín',ll:[-6.26,53.35]},{n:'Fráncfort',ll:[8.68,50.11]},{n:'São Paulo',ll:[-46.63,-23.55]}]},lista:function(){cv.classList.add('listo');if(fig)fig.classList.add('vivo');}}))&&cv)cv.hidden=true;}catch(e){}
+  try{var cv=document.getElementById('globo'),fig=cv&&cv.closest('.hero-globo');if(!(cv&&window.GuardianaGlobo&&GuardianaGlobo.iniciar(cv,{ruta:'/tierra/',lon:-36,tilt:0.5,rutas:{origen:{n:'PC de pruebas, Cartagena',ll:[-75.51,10.39]},destinos:[{n:'Estados Unidos · 2.520',ll:[-88,38.5],peso:2520},{n:'España · 365',ll:[-3.7,40.3],peso:365},{n:'Francia · 219',ll:[2.4,46.6],peso:219},{n:'Canadá · 86',ll:[-79.4,45.0],peso:86},{n:'Reino Unido · 81',ll:[-1.8,53.0],peso:81},{n:'Israel · 71',ll:[35.0,31.4],peso:71}]},lista:function(){cv.classList.add('listo');if(fig)fig.classList.add('vivo');}}))&&cv)cv.hidden=true;}catch(e){}
   try{var K='guardiana-idioma',l=document.querySelectorAll('a[data-idioma]');for(var i=0;i<l.length;i++)l[i].addEventListener('click',function(){try{localStorage.setItem(K,this.getAttribute('data-idioma'))}catch(e){}});}catch(e){}
 });
 </script>

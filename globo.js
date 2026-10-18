@@ -5,9 +5,9 @@
  * the planet), the ocean glint and the edge of the atmosphere. Nothing about the visitor leaves
  * the browser.
  *
- * Routes (op.rutas, 17 Oct 2026, the owner: «una simulación… desde Barranquilla… que se muevan
- * los datos de ida y venida… sutil… que no parezca un juego»): an ILLUSTRATIVE example, said so
- * under the globe. A computer in one city and the cities of a few well-known data-centre regions;
+ * Routes (op.rutas, 17 Oct 2026, the owner: «que se muevan los datos de ida y venida… sutil… que
+ * no parezca un juego»; then «pon que es una medición real tomada en el pasado»): the page passes
+ * a real, dated measurement, and says so under the globe. A computer in one city and the cities of a few well-known data-centre regions;
  * hair-thin steel arcs and small points of light that go out and come back, at a calm pace. The
  * committee (Claude, ChatGPT, Grok): city names only, never «AI» or «antivirus» on a made-up
  * route; no pulses, no counters, no alert colours.
@@ -121,6 +121,7 @@
       capa = document.createElement('canvas'); capa.className = 'globo-rutas'; capa.setAttribute('aria-hidden', 'true');
       cv.parentNode.insertBefore(capa, cv.nextSibling); ctx = capa.getContext('2d');
       var a = v3(R.origen.ll[0], R.origen.ll[1]);
+      R.pesoMax = Math.max.apply(null, R.destinos.map(function (d) { return d.peso || 1; }));
       R.destinos.forEach(function (d, n) {
         var b = v3(d.ll[0], d.ll[1]), w = Math.acos(Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]))), pts = [], N = 64;
         var alto = 0.03 + 0.17 * (w / Math.PI);
@@ -130,7 +131,10 @@
         }
         // Each route keeps its own unhurried rhythm: a packet out every few seconds, an answer back.
         var dur = 3.2 + 3.4 * (w / Math.PI);
-        rutas.push({ n: d.n, b: b, pts: pts, dur: dur, cada: 2.6 + (n * 1.37) % 3.1, prox: 0.4 + (n * 0.83) % 2.6, pq: [] });
+        // With a measured weight (op.rutas.destinos[i].peso, e.g. how many queries went there),
+        // busier routes carry packets more often; without one, each keeps its own calm rhythm.
+        var cada = d.peso ? Math.max(0.7, Math.min(9, 5.5 / Math.pow(d.peso / R.pesoMax, 0.55))) : 2.6 + (n * 1.37) % 3.1;
+        rutas.push({ n: d.n, b: b, pts: pts, dur: dur, cada: cada, prox: 0.3 + (n * 0.83) % 2.2, pq: [] });
       });
     }
     function proy(p) {

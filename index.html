@@ -32,7 +32,7 @@
 <script>(function(){try{var K='guardiana-idioma',q=null;try{q=localStorage.getItem(K)}catch(e){}if(!q){var L=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];for(var i=0;i<L.length;i++){var c=(''+L[i]).toLowerCase();if(c.indexOf('pt')===0){q='pt';break}if(c.indexOf('es')===0){q='es';break}if(c.indexOf('en')===0){q='en';break}}}var p=location.pathname;if((q==='es'||q==='pt')&&(p==='/'||p==='/index.html'))location.replace('/'+q+'/'+location.hash);}catch(e){}})();</script>
 <link rel="preload" as="font" type="font/woff" crossorigin href="/fonts/SchibstedGrotesk-var.woff">
 <link rel="preload" as="font" type="font/woff" crossorigin href="/fonts/HankenGrotesk-var.woff">
-<link rel="stylesheet" href="/portada.css?v=1792295583">
+<link rel="stylesheet" href="/portada.css?v=1792295738">
 </head>
 <body>
 <a class="saltar" href="#contenido">Skip to content</a>
@@ -69,9 +69,9 @@
   <figure class="hero-globo">
     <div class="globo-marco">
       <img class="globo-foto" src="/tierra/globo-portada.jpg" width="720" height="720" alt="" aria-hidden="true">
-      <canvas id="globo" tabindex="0" role="img" aria-label="The Earth with an illustrative example of the connections a computer in Barranquilla makes to data centres abroad. Drag it or use the arrow keys to turn it."></canvas>
+      <canvas id="globo" tabindex="0" role="img" aria-label="The Earth with a real past measurement: where the test PC in Cartagena sent its queries, by country, on 21 September 2026. Drag it or use the arrow keys to turn it."></canvas>
     </div>
-    <figcaption class="globo-pie">This is an example. With GUARDIANA on your computer, you see your real connections.</figcaption>
+    <figcaption class="globo-pie">A real measurement, not live: where the test PC in Cartagena sent 11,052 queries over a day and a half, by country, 21 September 2026.</figcaption>
 
   </figure>
 </section>
@@ -206,11 +206,11 @@
     <p class="pie-dir">GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, piso 18, Bocagrande, Cartagena de Indias, Colombia · <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a> · This page uses no cookies or analytics.</p>
   </div>
 </footer>
-<script src="/globo.js?v=1792295583" defer></script>
+<script src="/globo.js?v=1792295738" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
   try{var P=window.GUARDIANA_PRICES;if(P){var a=document.getElementById('plus-precio'),b=document.getElementById('plus-nota'),f=document.getElementById('fund-precio'),h=document.getElementById('hero-precio');if(a)a.textContent=P.plusEn;if(b)b.textContent=P.plusNoteEn;if(f)f.textContent=P.fundEn;if(h)h.textContent='Then '+P.plusEn+' or '+P.fundEn+' once.';}}catch(e){}
-  try{var cv=document.getElementById('globo'),fig=cv&&cv.closest('.hero-globo');if(!(cv&&window.GuardianaGlobo&&GuardianaGlobo.iniciar(cv,{ruta:'/tierra/',lon:-44,tilt:0.42,rutas:{origen:{n:'Barranquilla',ll:[-74.78,10.96]},destinos:[{n:'Ashburn',ll:[-77.49,39.04]},{n:'Miami',ll:[-80.19,25.76]},{n:'Dallas',ll:[-96.80,32.78]},{n:'Oregon',ll:[-121.18,45.60]},{n:'Dublin',ll:[-6.26,53.35]},{n:'Frankfurt',ll:[8.68,50.11]},{n:'São Paulo',ll:[-46.63,-23.55]}]},lista:function(){cv.classList.add('listo');if(fig)fig.classList.add('vivo');}}))&&cv)cv.hidden=true;}catch(e){}
+  try{var cv=document.getElementById('globo'),fig=cv&&cv.closest('.hero-globo');if(!(cv&&window.GuardianaGlobo&&GuardianaGlobo.iniciar(cv,{ruta:'/tierra/',lon:-36,tilt:0.5,rutas:{origen:{n:'Test PC, Cartagena',ll:[-75.51,10.39]},destinos:[{n:'United States · 2,520',ll:[-88,38.5],peso:2520},{n:'Spain · 365',ll:[-3.7,40.3],peso:365},{n:'France · 219',ll:[2.4,46.6],peso:219},{n:'Canada · 86',ll:[-79.4,45.0],peso:86},{n:'United Kingdom · 81',ll:[-1.8,53.0],peso:81},{n:'Israel · 71',ll:[35.0,31.4],peso:71}]},lista:function(){cv.classList.add('listo');if(fig)fig.classList.add('vivo');}}))&&cv)cv.hidden=true;}catch(e){}
   try{var K='guardiana-idioma',l=document.querySelectorAll('a[data-idioma]');for(var i=0;i<l.length;i++)l[i].addEventListener('click',function(){try{localStorage.setItem(K,this.getAttribute('data-idioma'))}catch(e){}});}catch(e){}
 });
 </script>
