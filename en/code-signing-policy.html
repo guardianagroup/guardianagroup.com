@@ -112,15 +112,15 @@ header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;bo
 <h2 id="que">What is signed</h2>
 <p>Only what we make, from the code in our repository: the files published at guardianagroup.com/descargas.</p>
 <ul>
-<li><strong>GUARDIANA</strong>: the Windows installers (<code>.msi</code>, in Spanish, English and Portuguese), the Debian and Ubuntu package (<code>.deb</code>), the archive for other Linux systems (<code>.tar.gz</code>) and the macOS app (<code>.app.zip</code>). They are on the <a href="/en/install.html#download">install page</a>.</li>
+<li><strong>GUARDIANA</strong>: the Windows installers (<code>.msi</code>, in Spanish, English and Portuguese) and the macOS app (<code>.app.zip</code>). They are on the <a href="/en/install.html#download">install page</a>.</li>
 <li><strong>GUARDIANA ZERO</strong>, the browser: it ships inside the GUARDIANA installers for Windows (<code>.msi</code>, in Spanish, English and Portuguese), signed like the rest. They are on <a href="/en/install.html#download">Install</a>.</li>
 </ul>
 <p>We do not sign other people’s programs, nor any file that does not come out of this repository.</p>
 <h2 id="donde">Where it is built</h2>
 <ul>
-<li>Everything is built on <strong>GitHub Actions</strong>, on machines GitHub lends and that are not ours, from the public code at <a href="https://github.com/guardianagroup/guardiana">github.com/guardianagroup/guardiana</a>, licensed under GPL-3.0 or later. GUARDIANA in the <code>candidato.yml</code> workflow (Windows, Linux and a Mac); GUARDIANA ZERO in <code>zero.yml</code> (Windows). The same runs install and test the files on a clean machine before they are signed.</li>
+<li>Everything is built on <strong>GitHub Actions</strong>, on machines GitHub lends and that are not ours, from the public code at <a href="https://github.com/guardianagroup/guardiana">github.com/guardianagroup/guardiana</a>, licensed under GPL-3.0 or later. GUARDIANA in the <code>candidato.yml</code> workflow (Windows and a Mac); GUARDIANA ZERO in <code>zero.yml</code> (Windows). The same runs install and test the files on a clean machine before they are signed.</li>
 <li>The minisign private key is never on GitHub or in continuous integration. Signing happens afterwards, on the owner’s computer, on the exact files that came out of GitHub Actions: before signing, their hashes are checked against the list (<code>SHA256SUMS</code>) GitHub printed.</li>
-<li><strong>Reproducible builds, where they exist.</strong> The GUARDIANA binaries for Windows and Linux come from <code>build/repro.sh</code>, with a container pinned by its digest: anyone can repeat the build and get the same hash, and <code>repro.yml</code> does it on GitHub. The packages (<code>.msi</code>, <code>.deb</code>, <code>.tar.gz</code>, the macOS app) and GUARDIANA ZERO are not reproducible yet; the public ledger says so file by file (<code>"reproducible": true</code> or <code>false</code>).</li>
+<li><strong>Reproducible builds, where they exist.</strong> The GUARDIANA binaries for Windows come from <code>build/repro.sh</code>, with a container pinned by its digest: anyone can repeat the build and get the same hash, and <code>repro.yml</code> does it on GitHub. The packages (<code>.msi</code> and the macOS app) and GUARDIANA ZERO are not reproducible yet; the public ledger says so file by file (<code>"reproducible": true</code> or <code>false</code>).</li>
 </ul>
 <h2 id="roles">Who does what</h2>
 <p>GUARDIANA is the work of one person today. The three roles a signing policy asks for are all held by the same owner:</p>

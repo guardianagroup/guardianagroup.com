@@ -143,8 +143,6 @@ name of your connection and the addresses with yours; <code>192.168.1.1</code> i
 <p><code>netsh interface ipv4 set dnsservers name="Ethernet" static 192.168.1.1 primary</code></p>
 <p>To undo: <code>netsh interface ipv4 set address name="Ethernet" dhcp</code> and
 <code>netsh interface ipv4 set dnsservers name="Ethernet" dhcp</code>. The router becomes the DNS that GUARDIANA asks: if it was already watching this PC, within a minute it puts itself back as the PC’s DNS, even after you undo it.</p>
-<p><strong>Linux with NetworkManager</strong> (desktop Ubuntu, Mint, Fedora): Settings › Network › the gear
-of your connection › IPv4 › “Manual” › address, mask <code>255.255.255.0</code>, gateway the router.</p>
 <p>With a fixed address, what is left is pointing the phones at it (the iPhone and Android guides). DNS in
 the router is still the most convenient option for the whole house, but it is not compulsory.</p>
 
