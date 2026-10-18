@@ -123,8 +123,8 @@ code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;font-size
 .ticket.recibo .extra-ag p.comp a{color:var(--azul);text-decoration:none;white-space:nowrap}
 .ticket.recibo .cap-fondo{margin-top:11px;padding-top:9px;border-top:1px dashed var(--linea);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gris);font-family:'IBM Plex Mono',monospace;line-height:1.4}
 .ticket.recibo .filas.fondo-ag{opacity:.85}
-.box-trampa{border:1.5px solid var(--corte);border-radius:14px;padding:20px 24px;margin:26px 0 4px;background:var(--hoja)}
-.box-trampa .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--corte)}
+.box-trampa{border:1px solid #3A2522;border-radius:18px;padding:20px 24px;margin:26px 0 4px;background:var(--hoja)}
+.box-trampa .k{font:600 13px/1 'Hanken Grotesk',system-ui,sans-serif;letter-spacing:.04em;color:var(--corte)}
 .box-trampa h3{font-family:'Schibsted Grotesk',sans-serif;font-size:19px;margin:8px 0 10px;line-height:1.3}
 .box-trampa p{margin:0 0 10px}
 .box-trampa p.ojo{font-size:15px;color:var(--gris);margin-bottom:0}
@@ -362,6 +362,39 @@ header.top .descargar:hover{background:var(--azul-oscuro);color:#E8ECF1}header.t
 /* The menu on a phone: one row that slides sideways, never off the page. */
 @media (max-width:720px){header.top nav{flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none;gap:14px}header.top nav::-webkit-scrollbar{display:none}header.top nav a{white-space:nowrap}}
 </style>
+<style>
+.panel2{background:#0C1118;border:1px solid #1E2631;border-radius:18px;padding:24px 26px;font-family:'Hanken Grotesk',system-ui,sans-serif;color:#E8ECF1}
+.panel2 .cab{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.panel2 .cab b{font:600 20px/1.2 'Schibsted Grotesk',system-ui,sans-serif}
+.panel2 .cab span{color:#8E99A6;font-size:13.5px}
+.panel2 .gran{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.panel2 .gran strong{font:700 44px/1 'Schibsted Grotesk',system-ui,sans-serif;letter-spacing:-.02em}
+.panel2 .gran span{color:#A9B3BE;font-size:15px}
+.panel2 .cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:24px}
+.panel2 .cats div{background:#06080C;border:1px solid #1E2631;border-radius:12px;padding:12px 14px;min-width:0}
+.panel2 .cats b{display:block;font:600 22px/1.1 'Schibsted Grotesk',system-ui,sans-serif}
+.panel2 .cats span{color:#8E99A6;font-size:12.5px}
+.panel2 .cats .cut b{color:#E07A6C}
+.panel2 h4{font:600 14px/1 'Hanken Grotesk',sans-serif;color:#A9B3BE;margin:0 0 12px}
+.panel2 .barras{display:grid;gap:8px;margin-bottom:18px}
+.panel2 .barra{display:grid;grid-template-columns:130px 1fr 60px;align-items:center;gap:12px;font-size:14px}
+.panel2 .barra i{display:block;height:6px;border-radius:3px;background:#9CC3E4;opacity:.85}
+.panel2 .barra em{font-style:normal;text-align:right;color:#E8ECF1;font-variant-numeric:tabular-nums}
+.panel2 .emp{color:#A9B3BE;font-size:14px;margin:0}
+.panel2 .emp b{color:#E8ECF1}
+.panel2 table{width:100%;border-collapse:collapse;font-size:14.5px}
+.panel2 th{color:#8E99A6;font-weight:500;font-size:12.5px;text-align:left;padding:0 10px 10px 0;border-bottom:1px solid #1E2631}
+.panel2 td{padding:12px 10px 12px 0;border-bottom:1px solid #141A22;font-variant-numeric:tabular-nums}
+.panel2 tr:last-child td{border-bottom:0}
+.panel2 td.n,.panel2 th.n{text-align:right}
+.panel2 .srv{display:inline-block;padding:4px 10px;border:1px solid #2A323D;border-radius:999px;font-size:13px}
+.panel2 td.cq{white-space:nowrap}.panel2 .cn{display:inline-block;min-width:3.2em;text-align:right}
+.panel2 .mini{display:inline-block;height:5px;border-radius:3px;background:#9CC3E4;opacity:.85;vertical-align:middle;margin-left:12px}
+.panel2 th.cq{padding-left:0}
+.panel2 .h{color:#8E99A6}
+.pantalla.redib{background:none;border:0;padding:0}
+@media (max-width:700px){.panel2{padding:18px}.panel2 .cats{grid-template-columns:repeat(2,minmax(0,1fr))}.panel2 .barra{grid-template-columns:100px 1fr 50px}.panel2 .mini{display:none}}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -376,12 +409,16 @@ header.top .descargar:hover{background:var(--azul-oscuro);color:#E8ECF1}header.t
   <div class="cab-sec"><span class="k">HOW IT WORKS</span><h2>Before your device can connect to any service, it has to ask where that service is. That question goes through GUARDIANA.</h2><p>GUARDIANA answers those questions from inside your computer and writes down what it sees: the service name, the time and which device asked. Never the content. With Home Mode, phones and the TV too, without installing anything on them.</p></div>
   <div class="pasos"><div class="paso"><span class="num">1</span><h3>YOUR DEVICES</h3><p>Computer, phones, TV, everything on the Wi-Fi</p></div><div class="paso"><span class="num">2</span><h3>SERVICE NAME</h3><p>Every connection starts by asking “where is this service?”</p></div><div class="paso"><span class="num">3</span><h3>CATEGORY AND SIGNAL</h3><p>Tracker, advertising, telemetry, normal or unclassified, with one sentence saying what each one is</p></div><div class="paso"><span class="num">4</span><h3>YOUR DECISION</h3><p>Block or let through; one name now, the broad ones after 24 h; always with undo</p></div></div>
   <div class="box-trampa">
-    <span class="k">TRAP FILES</span>
-    <h3>A trap that tells you who visited its address, without reading a single file</h3>
-    <p>GUARDIANA can leave a file on your desktop that looks like a copy of your keys. There is no key inside: there is one unique internet address that exists nowhere else in the world. If anything reads that file — an AI, a browser extension, a web page — and goes looking for that address, the question passes through GUARDIANA. It is written down with the time and, on Windows, with the name of the program that asked. GUARDIANA never opened the file and does not know what is inside: it keeps looking only at names, as it does with everything else.</p>
-    <p class="ojo">What this trap does not catch, said before you ask: a program that reads the file and sends it to its own server without looking up that address will not show. It is a trap for whoever follows the link, not a theft detector.</p>
+    <span class="k">Bait file</span>
+    <h3>A fake file that tells you if someone uses it</h3>
+    <p>GUARDIANA can leave a file on your desktop that looks like it holds your passwords. It is fake: inside there is only a unique link. If a program, an AI or a web page reads the file and opens that link, GUARDIANA records it with the time and, on Windows, the name of the program. GUARDIANA does not open the file or read what is in it.</p>
+    <p class="ojo">What it does not see: if a program copies the file and never opens the link, nothing is recorded. It warns you about whoever opens the link; it does not detect every theft.</p>
   </div>
-  <figure class="pantalla"><img src="/panel-dispositivos-en.png" width="1400" height="460" alt="“Devices” on the test PC, 21 September 2026: 11,052 real queries over a day and a half, sorted by what they are, and 13 blocked by its owner. The countries are where they went. Not one figure was typed in by hand." loading="lazy"><figcaption>“Devices” on the test PC, 21 September 2026: 11,052 real queries over a day and a half, sorted by what they are, and 13 blocked by its owner. The countries are where they went. Not one figure was typed in by hand.</figcaption></figure>
+  <figure class="pantalla redib"><div class="panel2" role="img" aria-label="“Devices” on the test PC, 21 September 2026, redrawn in this site’s design: the figures are the real ones from the panel screenshot, untouched. 13 queries blocked by its owner; the countries are where they went."><div class="cab"><b>Devices</b><span>this PC · 21/9/2026, 17:21</span></div>
+<div class="gran"><strong>11,052</strong><span>queries in a day and a half</span></div>
+<div class="cats"><div class=""><b>4,001</b><span>Advertising</span></div><div class=""><b>423</b><span>Tracking</span></div><div class=""><b>331</b><span>Telemetry</span></div><div class=""><b>148</b><span>Normal</span></div><div class="cut"><b>13</b><span>Cut by its owner</span></div></div>
+<h4>Where they went, by country</h4><div class="barras"><div class="barra"><span>United States</span><i style="width:100.0%"></i><em>2,520</em></div><div class="barra"><span>Spain</span><i style="width:14.5%"></i><em>365</em></div><div class="barra"><span>France</span><i style="width:8.7%"></i><em>219</em></div><div class="barra"><span>Canada</span><i style="width:3.4%"></i><em>86</em></div><div class="barra"><span>United Kingdom</span><i style="width:3.2%"></i><em>81</em></div><div class="barra"><span>Israel</span><i style="width:2.8%"></i><em>71</em></div></div>
+<p class="emp"><b>56</b> different companies in 24 hours, among them Google, Microsoft, PRISA.</p></div><figcaption>“Devices” on the test PC, 21 September 2026, redrawn in this site’s design: the figures are the real ones from the panel screenshot, untouched. 13 queries blocked by its owner; the countries are where they went.</figcaption></figure>
 </section>
 <section id="hogar">
   <div class="dos">
@@ -395,7 +432,8 @@ header.top .descargar:hover{background:var(--azul-oscuro);color:#E8ECF1}header.t
     <div class="tarjeta"><span class="k">AGENT RECEIPT</span><p>It has already been measured, with the protocol fixed before the numbers were seen. We gave two AIs the same task on the same PC — sort five invoices, without leaving one folder: Claude Code made the machine look up three services, one of them a log-collection company; a model running inside the PC itself looked up none, and got the answer wrong. Both receipts, with the raw JSON to repeat it.</p><p style="margin-top:14px"><a href="/en/agent-receipt.html">Both receipts and the method →</a></p></div>
     <div class="tarjeta"><span class="k">WHAT IT SEES AND WHAT IT DOES NOT</span><p>DNS. Almost everything that goes out to the internet starts by asking “where is this service?”, and GUARDIANA is what answers that question on your PC (and in your home, with Home Mode). It is not a proxy and not a driver: it does not sit in the middle of the traffic and never opens what you send or receive; it only sees the name that was asked for, the time and which device asked.</p></div>
   </div>
-  <figure class="pantalla"><img src="/panel-ia-en.png" width="1400" height="681" alt="The panel&#x27;s “Your AI” screen, on 20 September 2026. The names and the figures are the real ones from the test computer of that time: which AI services it talked to, and how many times; the times shown are those of the screenshot. GUARDIANA never sees what was said, and sends nothing anywhere." loading="lazy"><figcaption>The panel&#x27;s “Your AI” screen, on 20 September 2026. The names and the figures are the real ones from the test computer of that time: which AI services it talked to, and how many times; the times shown are those of the screenshot. GUARDIANA never sees what was said, and sends nothing anywhere.</figcaption></figure>
+  <figure class="pantalla redib"><div class="panel2" role="img" aria-label="The panel’s “Your AI” screen on 20 September 2026, redrawn in this site’s design: the services, figures and times are the real ones from the test computer. GUARDIANA never sees what was said, and sends nothing anywhere."><div class="cab"><b>Your AI</b><span>AI services seen in 7 days · this PC</span></div>
+<table><thead><tr><th>Service</th><th class="n">Names</th><th class="cq">Queries</th><th>Last</th></tr></thead><tbody><tr><td><span class="srv">xAI</span></td><td class="n">1</td><td class="cq"><span class="cn">18</span><span class="mini" style="width:4px"></span></td><td class="h">20/9 · 12:13:50</td></tr><tr><td><span class="srv">Anthropic</span></td><td class="n">3</td><td class="cq"><span class="cn">426</span><span class="mini" style="width:90px"></span></td><td class="h">20/9 · 12:13:47</td></tr><tr><td><span class="srv">Google Gemini</span></td><td class="n">1</td><td class="cq"><span class="cn">113</span><span class="mini" style="width:24px"></span></td><td class="h">20/9 · 12:13:42</td></tr><tr><td><span class="srv">OpenAI</span></td><td class="n">1</td><td class="cq"><span class="cn">314</span><span class="mini" style="width:66px"></span></td><td class="h">20/9 · 12:13:41</td></tr></tbody></table></div><figcaption>The panel’s “Your AI” screen on 20 September 2026, redrawn in this site’s design: the services, figures and times are the real ones from the test computer. GUARDIANA never sees what was said, and sends nothing anywhere.</figcaption></figure>
 </section>
 <section id="instalar">
   <p class="inst-resumen">Four steps to install, and we show you how to check the file before you open it. <a href="/en/install.html">How to install on Windows, Linux or macOS →</a></p>
