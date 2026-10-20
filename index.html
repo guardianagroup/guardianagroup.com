@@ -67,7 +67,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--steel);outline-offs
 h1,h2,.bal{text-wrap:balance}
 
 /* ---------- stage layers ---------- */
-#stars,#planet,#routes{position:fixed;inset:0;width:100vw;height:100vh;display:block;pointer-events:none}
+#stars,#planet,#routes{position:fixed;left:0;top:0;width:100vw;height:100vh;height:100lvh;display:block;pointer-events:none;transform:translateZ(0)}
+#lvh{position:fixed;left:0;top:0;width:1px;height:100vh;height:100lvh;visibility:hidden;pointer-events:none}
 #stars{z-index:0}
 #planet{z-index:0}
 #routes{z-index:1}
@@ -593,6 +594,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:640px) and (max-height:720px){.hero .chips{display:none}.hero h1{font-size:40px}}
 @media (max-width:640px){.wip-note{flex-direction:column;gap:6px;margin-top:20px;margin-bottom:12px;text-align:center;line-height:1.5}.wip-note .wsep{display:none}.hero .wip-note{margin-bottom:22px}}
 #final .wip-note{font-size:11px;color:var(--amber);margin-top:18px}
+/* Touch screens (19 Oct 2026, iPad: «va a tirones»): a blur over a planet redrawn every frame is
+   recomputed every frame; there the panels are simply darker glass. */
+@media (pointer: coarse) {
+  .nav{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(4,6,9,.94)}
+  .panel{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(10,12,16,.94)}
+  .ch-card{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(0,0,0,.9)}
+  #tag-cut{backdrop-filter:none;-webkit-backdrop-filter:none}
+  .langhint{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(10,12,16,.96)}
+}
 
 /* observatory */
 #observatorio{position:relative;height:170vh;touch-action:pan-y;cursor:grab}
@@ -1129,7 +1139,14 @@ const lerp = (a, b, t) => a + (b - a) * t;
 const smooth = (a, b, v) => { const t = clamp((v - a) / (b - a)); return t * t * (3 - 2 * t); };
 const easeOut = t => 1 - Math.pow(1 - t, 3);
 const D2R = Math.PI / 180;
-let vw = innerWidth, vh = innerHeight, dpr = Math.min(devicePixelRatio || 1, 3);
+// Touch screens draw at 1.5× at most, and any screen steps its resolution down if frames run long.
+const COARSE = matchMedia('(pointer: coarse)').matches;
+let calidad = 1;
+const renderDpr = () => Math.max(1, Math.min(devicePixelRatio || 1, COARSE ? 1.5 : 2) * calidad);
+// The height of the large viewport: iOS shows and hides its toolbar while scrolling, and that must
+// not resize (and redraw from nothing) the planet.
+const altoVista = () => { if (!COARSE) return innerHeight; let p = document.getElementById('lvh'); if (!p) { p = document.createElement('div'); p.id = 'lvh'; p.setAttribute('aria-hidden', 'true'); document.body.appendChild(p); } return Math.max(innerHeight, p.offsetHeight || 0); };
+let vw = innerWidth, vh = altoVista(), dpr = renderDpr();
 const mobile = () => vw < 980;
 
 /* ============ geography ============ */
@@ -1357,7 +1374,7 @@ function setupFx() {
     if (fx && fx.s) [fx.s, fx.a, fx.b].forEach(o => { gl.deleteTexture(o.t); gl.deleteFramebuffer(o.f); if (o.rb) gl.deleteRenderbuffer(o.rb); });
     if (!fx) { fx = { q: gl.createBuffer(), pB: program(QVS, FBR), pK: program(QVS, FBL), pC: program(QVS, FCO) }; gl.bindBuffer(gl.ARRAY_BUFFER, fx.q); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW); }
     const mx = Math.min(gl.getParameter(gl.MAX_TEXTURE_SIZE), gl.getParameter(gl.MAX_RENDERBUFFER_SIZE));
-    const ss = (devicePixelRatio || 1) < 1.5 ? 2 : 1;
+    const ss = !COARSE && dpr < 1.5 ? 2 : 1;
     const W = Math.min(mx, cv.width * ss), H = Math.min(mx, cv.height * ss), w = Math.max(1, cv.width >> 1), h = Math.max(1, cv.height >> 1);
     fx.s = mkFbo(W, H, true); fx.a = mkFbo(w, h, false); fx.b = mkFbo(w, h, false);
     fx.ok = fx.s.ok && fx.a.ok && fx.b.ok;
@@ -1404,7 +1421,25 @@ const CAPS = [[0, 'Abres una página. Nada parece ocurrir.'], [10, 'La web enví
 const CH1 = document.querySelector('[data-ch="1"]');
 let FXMODE = 1; try { const q = new URLSearchParams(location.search).get('fx'); if (q) FXMODE = { a: 1, b: 2, c: 3, d: 4, '0': 0 }[q] ?? 1; } catch (e) {}
 window.__setFx = (m) => { FXMODE = m; };
-function pinProgress(el) { const r = el.getBoundingClientRect(); return clamp(-r.top / Math.max(1, r.height - vh)); }
+// Layout read once, not every frame (19 Oct 2026, the owner on an iPad: «va a tirones… tiembla
+// todo»). Reading positions between style writes forced a layout per element per frame, and each
+// reveal measured itself after moving, so its own translateY fed the next frame: a tremor. Positions
+// now come from a cache of the untransformed layout, renewed when the page changes size. Inside a
+// pinned (sticky) block the position depends on the scroll, so it is still read live.
+const MED = new Map(), SW = new Map();
+function medidas() { MED.clear(); SW.clear(); }
+function rectDe(el) {
+  if (el.closest('.pin-in')) return el.getBoundingClientRect();
+  let m = MED.get(el);
+  if (!m) { let t = 0, l = 0, e = el; while (e) { t += e.offsetTop; l += e.offsetLeft; e = e.offsetParent; } m = { t, l, w: el.offsetWidth, h: el.offsetHeight }; MED.set(el, m); }
+  const top = m.t - scrollY;
+  return { top, bottom: top + m.h, height: m.h, left: m.l, right: m.l + m.w, width: m.w };
+}
+const anchoScroll = (el) => { let v = SW.get(el); if (v == null) { v = el.scrollWidth; SW.set(el, v); } return v; };
+if ('ResizeObserver' in window) new ResizeObserver(() => medidas()).observe(document.body);
+addEventListener('load', medidas);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(medidas);
+function pinProgress(el) { const r = rectDe(el); return clamp(-r.top / Math.max(1, r.height - vh)); }
 let S = { intro: 0, story: 0, ch: [0,0,0,0,0,0], auction: 0, ms: 0, mode: 'intro' };
 
 function update() {
@@ -1419,14 +1454,14 @@ function update() {
   hero.style.pointerEvents = hO > 0.5 ? 'auto' : 'none';
 
   // chapters
-  chapters.forEach((c, i) => { const r = c.getBoundingClientRect(); S.ch[i] = clamp((vh * 0.78 - r.top) / (vh * 0.5)); });
-  { const a2 = chapters[1].getBoundingClientRect(), a6 = chapters[5].getBoundingClientRect(); S.travel = clamp((vh * 0.75 - a2.top) / Math.max(1, a6.top - a2.top + vh * 0.25)); }
-  const st = secs.story.getBoundingClientRect();
+  chapters.forEach((c, i) => { const r = rectDe(c); S.ch[i] = clamp((vh * 0.78 - r.top) / (vh * 0.5)); });
+  { const a2 = rectDe(chapters[1]), a6 = rectDe(chapters[5]); S.travel = clamp((vh * 0.75 - a2.top) / Math.max(1, a6.top - a2.top + vh * 0.25)); }
+  const st = rectDe(secs.story);
   const inStory = st.top < vh * 0.55 && st.bottom > vh * 0.45;
 
   // auction
   const pa = pinProgress(secs.auction); S.auction = pa;
-  const au = secs.auction.getBoundingClientRect();
+  const au = rectDe(secs.auction);
   const inAuction = au.top < vh * 0.5 && au.bottom > vh * 0.5;
   const ms = Math.round(100 * clamp((pa - 0.08) / 0.74)); S.ms = ms;
   $('#ms').firstChild.nodeValue = String(ms).padStart(3, '0');
@@ -1447,17 +1482,17 @@ function update() {
 
   // services gallery
   const ps = pinProgress(secs.services), tr = $('#track');
-  const travel = Math.max(0, tr.scrollWidth - vw + (mobile() ? 24 : Math.max(24, (vw - 1200) / 2 + 24)));
+  const travel = Math.max(0, anchoScroll(tr) - vw + (mobile() ? 24 : Math.max(24, (vw - 1200) / 2 + 24)));
   tr.style.transform = `translateX(${-travel * smooth(0.08, 0.92, ps)}px)`;
 
   // fines ticker
-  const tk = $('#tk'), tkr = tk.parentElement.getBoundingClientRect();
+  const tk = $('#tk'), tkr = rectDe(tk.parentElement);
   const tp = clamp((vh - tkr.top) / (vh + tkr.height));
-  tk.style.transform = `translateX(${(0.05 - 0.45 * tp) * tk.scrollWidth * 0.6}px)`;
+  tk.style.transform = `translateX(${(0.05 - 0.45 * tp) * anchoScroll(tk) * 0.6}px)`;
 
   // reveals: enter and leave
   for (const el of reveals) {
-    const r = el.getBoundingClientRect();
+    const r = rectDe(el);
     if (r.bottom < -200 || r.top > vh + 200) { el.style.opacity = 0; continue; }
     const enter = easeOut(clamp((vh * 0.96 - r.top) / (vh * 0.26)));
     const exit = easeOut(clamp((r.bottom - vh * 0.04) / (vh * 0.24)));
@@ -1467,16 +1502,16 @@ function update() {
   }
 
   // mode + planet targets
-  const fin = $('#final').getBoundingClientRect();
-  const qe = $('#que-es').getBoundingClientRect();
-  const ob = $('#observatorio').getBoundingClientRect();
+  const fin = rectDe($('#final'));
+  const qe = rectDe($('#que-es'));
+  const ob = rectDe($('#observatorio'));
   const m = mobile();
   if (pi < 1 && st.top > vh * 0.55) {
     S.mode = 'intro';
     const g = easeOut(smooth(0.2, 0.52, pi)), h = smooth(0.5, 0.78, pi);
     const R = Math.min(vw, vh) * (m ? 0.4 : 0.3);
     const rh = m ? vw * 0.62 : Math.min(vw * 0.42, vh * 0.5); let yh = vh * (m ? 0.93 : 0.64) + rh;
-    if (m) { const hb = hero.getBoundingClientRect().bottom - parseFloat(hero.style.transform.replace(/[^0-9.\-]/g, '') || 0); yh = Math.max(yh, hb + 28 + rh); }
+    if (m) { const hb = rectDe(hero).bottom - parseFloat(hero.style.transform.replace(/[^0-9.\-]/g, '') || 0); yh = Math.max(yh, hb + 28 + rh); }
     T = { x: vw / 2, y: lerp(vh * 0.52, yh, h), r: lerp(R * (0.06 + 0.94 * g), rh, h), a: g };
   } else if (inStory) {
     S.mode = 'story';
@@ -1494,9 +1529,9 @@ function update() {
     S.mode = 'bg';
     T = { x: vw / 2, y: vh * 1.5, r: Math.max(vw * 0.62, vh * 0.85), a: 0.12 };
   }
-  const c1 = CH1.getBoundingClientRect(); const dusk = clamp((vh * 0.75 - c1.top) / (c1.height + vh * 0.35));
+  const c1 = rectDe(CH1); const dusk = clamp((vh * 0.75 - c1.top) / (c1.height + vh * 0.35));
   T.day = 1;
-  T.fx = S.mode === 'story' ? smooth(0, 1, (vh * 0.95 - chapters[1].getBoundingClientRect().top) / (vh * 1.7)) : (S.mode === 'auction' ? 1 : 0);
+  T.fx = S.mode === 'story' ? smooth(0, 1, (vh * 0.95 - rectDe(chapters[1]).top) / (vh * 1.7)) : (S.mode === 'auction' ? 1 : 0);
   T.sun = { intro: 1, story: 0.3, auction: 0.15, final: 1, bg: 0.25, obs: 0 }[S.mode] ?? 0.3;
   T.obs = S.mode === 'obs' ? 1 : 0;
   if (RM) Object.assign(G, T);
@@ -1687,17 +1722,35 @@ function drawStars() {
 
 /* ============ loop ============ */
 function resize() {
-  vw = innerWidth; vh = innerHeight; dpr = Math.min(devicePixelRatio || 1, 3);
+  vw = innerWidth; vh = altoVista(); dpr = renderDpr();
   for (const c of [cv, ov]) { c.width = Math.round(vw * dpr); c.height = Math.round(vh * dpr); }
   makeStars();
   if (gl) setupFx();
 }
-addEventListener('resize', () => { resize(); update(); });
+let anchoAntes = innerWidth, altoAntes = vh;
+addEventListener('resize', () => {
+  // only the toolbar of a touch browser: nothing to redraw
+  const a = altoVista();
+  if (COARSE && innerWidth === anchoAntes && Math.abs(a - altoAntes) < 220) return;
+  anchoAntes = innerWidth; altoAntes = a;
+  medidas(); resize(); update();
+});
+// The frame governor: if frames take longer than ~22 ms for a while, draw at a lower resolution
+// (twice at most), so scrolling stays smooth on any tablet.
+let gobT = 0, gobN = 0, gobVeces = 0;
+function gobierna(dtms) {
+  if (gobVeces >= 2 || document.hidden) return;
+  gobT += dtms; gobN++;
+  if (gobN < 90) return;
+  const media = gobT / gobN; gobT = 0; gobN = 0;
+  if (media > 22) { calidad *= 0.8; gobVeces++; resize(); }
+}
 resize(); update(); Object.assign(G, T);
 const OBS = { drag: false, v: -3, lat: 14, sil: 0, hold: false }; window.__obs = OBS;
 window.__obsNudge = (d) => { if (S.mode === 'obs') G.lon += d; };
 const LON_STORY = -42, LAT_STORY = 16, LON_AUCTION = -58, LAT_AUCTION = 14;
 function frame(now) {
+  const dtms = now - lastT; if (dtms > 0 && dtms < 200) gobierna(dtms);
   const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now; clock += dt;
   const dy = scrollY - lastY; lastY = scrollY; scrollV = lerp(scrollV, dy, 0.2);
   update();
