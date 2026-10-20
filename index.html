@@ -574,12 +574,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .tf-note b{color:var(--ink);font-weight:500}
 .tf-act{margin-top:30px;justify-content:center}
 .tf-done{min-height:22px;margin-top:14px;font-size:13px;color:var(--steel)}
-.langhint{position:fixed;z-index:60;right:16px;top:72px;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 14px;border-radius:999px;background:rgba(10,12,16,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:inset 0 0 0 1px var(--hair-2),0 20px 50px -20px rgba(0,0,0,.8);font-size:13px;color:var(--ink-2);opacity:0;transform:translateY(-6px);transition:opacity .5s,transform .5s}
-.langhint.on{opacity:1;transform:none}
-.langhint button{font:600 12px var(--body);border:0;border-radius:999px;padding:7px 12px;cursor:pointer}
-.langhint .y{background:var(--grad-btn);color:#05080C}.langhint .n{background:transparent;color:var(--ink-3)}
 @media (max-width:980px){.tf{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.tf{grid-template-columns:minmax(0,1fr)}.tfc{padding:22px 20px}.langhint{left:16px;right:16px;justify-content:space-between}}
+@media (max-width:560px){.tf{grid-template-columns:minmax(0,1fr)}.tfc{padding:22px 20px}}
 .ch-note{margin-top:14px;font-size:12.5px;color:var(--ink-3);line-height:1.5}
 .credits{display:block;margin-top:0;color:var(--ink-3);opacity:.55!important}
 #final .final-kick{margin:0 0 26px;letter-spacing:.32em;color:var(--amber)}
@@ -617,7 +613,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .panel{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(10,12,16,.94)}
   .ch-card{backdrop-filter:none;-webkit-backdrop-filter:none}
   #tag-cut{backdrop-filter:none;-webkit-backdrop-filter:none}
-  .langhint{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(10,12,16,.96)}
 }
 /* Text that lights up as it comes into view (20 Oct 2026, the owner: «toda la web así»; agreed with
    ChatGPT and Grok: it starts dimmed, never invisible; titles word by word, long paragraphs softer). */
@@ -1852,9 +1847,9 @@ requestAnimationFrame(frame);
 <script>
 (function(){
 const L={
- es:{share:'Una web puede saber todo esto de mí sin preguntarme: {d}. ¿Y de ti? Míralo aquí:',copied:'Copiado. Pégalo donde quieras.',shared:'Gracias por compartirlo.',hint:'¿Ver esta página en español?',yes:'Sí',no:'No, gracias'},
- en:{share:'Any website can learn all this about me without asking: {d}. What does it know about you? See for yourself:',copied:'Copied. Paste it anywhere.',shared:'Thanks for sharing.',hint:'View this page in English?',yes:'Yes',no:'No, thanks'},
- pt:{share:'Qualquer site pode saber tudo isso sobre mim sem perguntar: {d}. E sobre você? Veja aqui:',copied:'Copiado. Cole onde quiser.',shared:'Obrigado por compartilhar.',hint:'Ver esta página em português?',yes:'Sim',no:'Não, obrigado'}};
+ es:{share:'Una web puede saber todo esto de mí sin preguntarme: {d}. ¿Y de ti? Míralo aquí:',copied:'Copiado. Pégalo donde quieras.',shared:'Gracias por compartirlo.'},
+ en:{share:'Any website can learn all this about me without asking: {d}. What does it know about you? See for yourself:',copied:'Copied. Paste it anywhere.',shared:'Thanks for sharing.'},
+ pt:{share:'Qualquer site pode saber tudo isso sobre mim sem perguntar: {d}. E sobre você? Veja aqui:',copied:'Copiado. Cole onde quiser.',shared:'Obrigado por compartilhar.'}};
 const cur=()=>{const l=document.documentElement.lang; return L[l]?l:'en';};
 const ua=navigator.userAgent||'';
 const os=/Windows/.test(ua)?'Windows':/iPhone|iPad|iPod/.test(ua)?'iOS':/Mac OS X|Macintosh/.test(ua)?'macOS':/Android/.test(ua)?'Android':/CrOS/.test(ua)?'ChromeOS':/Linux/.test(ua)?'Linux':'—';
@@ -1891,19 +1886,6 @@ if(btn) btn.addEventListener('click',async()=>{
   try{ if(navigator.share){ await navigator.share({title:'GUARDIANA',text,url}); done.textContent=t.shared; return; } }catch(e){ if(e&&e.name==='AbortError') return; }
   try{ await navigator.clipboard.writeText(text+' '+url); done.textContent=t.copied; }catch(e){ done.textContent=text+' '+url; }
 });
-// A quiet suggestion, once, when the browser asks for a language other than the one shown
-setTimeout(()=>{ try{
-  const pref=(navigator.language||'').slice(0,2), chosen=localStorage.getItem('guardiana-lang-chosen');
-  if(!chosen && L[pref] && pref!==cur()){
-    const t=L[pref]; const box=document.createElement('div'); box.className='langhint'; box.setAttribute('role','dialog'); box.setAttribute('aria-label',t.hint); box.setAttribute('data-live','');
-    box.innerHTML='<span></span><button class="y" type="button"></button><button class="n" type="button"></button>';
-    box.children[0].textContent=t.hint; box.children[1].textContent=t.yes; box.children[2].textContent=t.no;
-    document.body.appendChild(box); setTimeout(()=>box.classList.add('on'),2600);
-    const close=()=>{ box.classList.remove('on'); setTimeout(()=>box.remove(),500); try{localStorage.setItem('guardiana-lang-chosen','1');}catch(e){} };
-    box.children[1].addEventListener('click',()=>{ const b=document.querySelector('.lang button[data-l="'+pref+'"]'); if(b) b.click(); close(); });
-    box.children[2].addEventListener('click',close);
-  }
-}catch(e){} },400);
 })();
 </script>
 <script>
@@ -2015,8 +1997,16 @@ function setLang(l, first){
   try{ localStorage.setItem('guardiana-lang',l); }catch(e){}
   document.dispatchEvent(new CustomEvent('guardiana:lang',{detail:l}));
 }
+// Language (20 Oct 2026, owner's request): no "view this page in…?" suggestion any more. The page
+// opens in the browser's own language when it is one we have (es, en, pt), otherwise in English.
+// A language picked by hand (EN/ES/PT buttons or ?lang=) still wins and is remembered.
 let l0='en';
-try{ const q=new URLSearchParams(location.search).get('lang'); const st=localStorage.getItem('guardiana-lang'); if(q&&I.loc[q]) l0=q; else if(st&&I.loc[st]) l0=st; }catch(e){}
+try{
+  const q=new URLSearchParams(location.search).get('lang');
+  const st=localStorage.getItem('guardiana-lang'), chosen=localStorage.getItem('guardiana-lang-chosen');
+  const nav=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'']).map(x=>String(x).slice(0,2).toLowerCase()).find(x=>I.loc[x]);
+  if(q&&I.loc[q]) l0=q; else if(chosen&&st&&I.loc[st]) l0=st; else if(nav) l0=nav;
+}catch(e){}
 setLang(l0,true);
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{ try{localStorage.setItem('guardiana-lang-chosen','1');}catch(e){} setLang(b.dataset.l); }));
 })();
