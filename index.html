@@ -1146,7 +1146,7 @@ const D2R = Math.PI / 180;
 // Touch screens draw at 1.5× at most, and any screen steps its resolution down if frames run long.
 const COARSE = matchMedia('(pointer: coarse)').matches;
 let calidad = 1;
-const renderDpr = () => Math.max(1, Math.min(devicePixelRatio || 1, COARSE ? 1.5 : 2) * calidad);
+const renderDpr = () => Math.max(1, Math.min(devicePixelRatio || 1, COARSE ? 1.25 : 2) * calidad);
 // The height of the large viewport: iOS shows and hides its toolbar while scrolling, and that must
 // not resize (and redraw from nothing) the planet.
 const altoVista = () => { if (!COARSE) return innerHeight; let p = document.getElementById('lvh'); if (!p) { p = document.createElement('div'); p.id = 'lvh'; p.setAttribute('aria-hidden', 'true'); document.body.appendChild(p); } return Math.max(innerHeight, p.offsetHeight || 0); };
@@ -1327,7 +1327,9 @@ function project(p) { // model point -> [x,y,visible]
 }
 function draw() {
   if (!gl || !ready) return;
-  const useFx = fx && fx.ok;
+  // touch screens skip the glow pass: six full-screen passes a frame are what made phones and
+  // tablets stutter while scrolling (19 Oct 2026)
+  const useFx = !COARSE && fx && fx.ok;
   gl.bindFramebuffer(gl.FRAMEBUFFER, useFx ? fx.s.f : null);
   gl.viewport(0, 0, useFx ? fx.s.w : cv.width, useFx ? fx.s.h : cv.height); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   if (G.a < 0.003 || G.r < 2) { if (useFx) { gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, cv.width, cv.height); gl.clear(gl.COLOR_BUFFER_BIT); } return; }
@@ -1696,7 +1698,9 @@ function drawRoutes(dt) {
 
 /* ============ starfield ============ */
 const sc = $('#stars'), sx = sc.getContext('2d'); let STARS = [];
+let estrellasHechas = false;
 function makeStars() {
+  estrellasHechas = false;
   sc.width = Math.round(vw * dpr); sc.height = Math.round(vh * dpr);
   let seed = 11; const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
   const n = Math.round(vw * vh / 1350); STARS = [];
@@ -1745,7 +1749,7 @@ function resize() {
   vw = innerWidth; vh = altoVista(); dpr = renderDpr();
   for (const c of [cv, ov]) { c.width = Math.round(vw * dpr); c.height = Math.round(vh * dpr); }
   makeStars();
-  if (gl) setupFx();
+  if (gl && !COARSE) setupFx();
 }
 let anchoAntes = innerWidth, altoAntes = vh;
 addEventListener('resize', () => {
@@ -1795,7 +1799,8 @@ function frame(now) {
     }
   } else { G.lon = LON_STORY; G.lat = LAT_STORY; }
   R3 = rot(G.lon, G.lat); buildProj();
-  drawStars();
+  // touch screens: the stars are painted once (no twinkle or parallax), one canvas less per frame
+  if (!COARSE || !estrellasHechas) { drawStars(); estrellasHechas = true; }
   draw(); drawRoutes(dt);
   if (!gl) { const f = $('#fallback'); f.style.opacity = G.a; f.style.width = (G.r * 2.16) + 'px'; f.style.left = G.x + 'px'; f.style.top = G.y + 'px'; }
   requestAnimationFrame(frame);
