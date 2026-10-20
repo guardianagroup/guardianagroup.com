@@ -1623,14 +1623,19 @@ function drawRoutes(dt) {
   }
   // html tags
   const tc = $('#tag-ctg');
-  const showCtg = S.mode === 'story' && c[2] ? A.ctg : 0;
+  const showCtg0 = S.mode === 'story' && c[2] ? A.ctg : 0;
+  // On phones the labels are painted into the canvas, so the cards scrolling over the globe always cover them
+  const showCtg = mobile() ? 0 : showCtg0;
+  if (mobile() && showCtg0 > 0.01) { ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = showCtg0; ctx.textAlign = 'left';
+    ctx.font = '500 10px "JetBrains Mono",monospace'; ctx.fillStyle = '#E8ECF1'; ctx.fillText('CARTAGENA', c[0] + 12, c[1] - 2);
+    ctx.fillStyle = 'rgba(156,195,228,.85)'; ctx.fillText(document.getElementById('tag-ctg').lastChild.textContent, c[0] + 12, c[1] + 11); ctx.globalAlpha = 1; }
   tc.style.opacity = showCtg.toFixed(3); tc.style.transform = mobile() ? `translate(${c[0] + 14}px, ${c[1]}px) translate(0,-50%)` : `translate(${c[0] - 14}px, ${c[1]}px) translate(-100%,-50%)`;
   const end = project(ROUTES[ROUTES.length - 1][ROUTES[0].length - 1]);
-  const tcu = $('#tag-cut'); tcu.style.opacity = (S.mode === 'story' && end[2] ? A.dim : 0).toFixed(3);
+  const tcu = $('#tag-cut'); tcu.style.opacity = (S.mode === 'story' && end[2] && !mobile() ? A.dim : 0).toFixed(3);
   tcu.style.transform = `translate(${end[0]}px, ${end[1]}px) translate(-50%,-160%) scale(${0.85 + 0.15 * A.dim})`;
   if (S.mode === 'story' && end[2] && A.dim > 0.05) { ctx.strokeStyle = '#E8806F'; ctx.lineWidth = 2; ctx.globalAlpha = A.dim; const s = lw * 4; ctx.beginPath(); ctx.moveTo(end[0] - s, end[1] - s); ctx.lineTo(end[0] + s, end[1] + s); ctx.moveTo(end[0] + s, end[1] - s); ctx.lineTo(end[0] - s, end[1] + s); ctx.stroke(); ctx.globalAlpha = 1; }
   const wEnd = project(BIDS[WIN][BIDS[WIN].length - 1]), ts = $('#tag-sold');
-  ts.style.opacity = (S.mode === 'auction' && S.ms >= 98 && wEnd[2] ? 1 : 0);
+  ts.style.opacity = (S.mode === 'auction' && S.ms >= 98 && wEnd[2] && !mobile() ? 1 : 0);
   ts.style.transform = `translate(${wEnd[0]}px, ${wEnd[1]}px) translate(-50%,-180%)`;
 }
 
