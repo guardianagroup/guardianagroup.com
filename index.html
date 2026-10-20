@@ -602,6 +602,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    recomputed every frame; there the panels are simply darker glass. */
 @media (pointer: coarse) {
   .nav{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(4,6,9,.94)}
+  /* The owner's iPhone recording (19 Oct 2026) showed the sticky bar jumping 1–3 points from frame
+     to frame while scrolling. A fixed bar is moved by the system's own scrolling, never by the page:
+     it cannot tremble. The page keeps the same room for it. */
+  .nav{position:fixed;left:0;right:0;top:0;padding-top:env(safe-area-inset-top,0px)}
+  .content{padding-top:calc(60px + env(safe-area-inset-top,0px))}
   .panel{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(10,12,16,.94)}
   .ch-card{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(0,0,0,.9)}
   #tag-cut{backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -1773,7 +1778,12 @@ resize(); update(); Object.assign(G, T);
 const OBS = { drag: false, v: -3, lat: 14, sil: 0, hold: false }; window.__obs = OBS;
 window.__obsNudge = (d) => { if (S.mode === 'obs') G.lon += d; };
 const LON_STORY = -42, LAT_STORY = 16, LON_AUCTION = -58, LAT_AUCTION = 14;
+// Touch screens, while a finger is scrolling: half the frames are drawn, so the system's own
+// scrolling always has the processor first.
+let ultimoScroll = -1e9, saltaCuadro = false;
+if (COARSE) addEventListener('scroll', () => { ultimoScroll = performance.now(); }, { passive: true });
 function frame(now) {
+  if (COARSE && now - ultimoScroll < 180 && (saltaCuadro = !saltaCuadro)) { requestAnimationFrame(frame); return; }
   const dtms = now - lastT; if (dtms > 0 && dtms < 200) gobierna(dtms);
   const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now; clock += dt;
   const dy = scrollY - lastY; lastY = scrollY; scrollV = lerp(scrollV, dy, 0.2);
