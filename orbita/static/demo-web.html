@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web de ejemplo</title>
+<style>
+  :root { --tinta: #1c1b19; --gris: #6b675f; --linea: #e3dfd8; --fondo: #faf8f4; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--tinta); font: 400 16px/1.6 Georgia, 'Times New Roman', serif; }
+  .aviso { background: #1c1b19; color: #f3efe7; font: 500 11px/1 ui-monospace, Menlo, monospace; letter-spacing: .12em; text-align: center; padding: 8px; }
+  header { border-bottom: 1px solid var(--linea); }
+  .cab { max-width: 1080px; margin: 0 auto; padding: 22px 32px 14px; display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
+  .cab h1 { margin: 0; font: 700 34px/1 Georgia, serif; letter-spacing: -.02em; }
+  .cab nav { display: flex; gap: 18px; font: 500 13px/1 system-ui, sans-serif; color: var(--gris); }
+  main { max-width: 1080px; margin: 0 auto; padding: 28px 32px 60px; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 40px; }
+  .k { font: 600 11px/1 system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #a3402f; }
+  h2 { font: 700 38px/1.12 Georgia, serif; margin: 10px 0 14px; letter-spacing: -.01em; }
+  .entrada { color: var(--gris); font-size: 19px; margin: 0 0 22px; }
+  .foto { aspect-ratio: 16 / 9; border-radius: 4px; background: linear-gradient(135deg, #cfc8bb, #a69f92); margin-bottom: 18px; }
+  p { margin: 0 0 16px; }
+  .hueco { border: 1px dashed #d3cdc3; border-radius: 6px; min-height: 120px; display: grid; place-items: center; text-align: center; padding: 18px; margin-bottom: 22px; font: 500 11px/1.5 ui-monospace, Menlo, monospace; letter-spacing: .1em; color: #a59f95; }
+  .hueco b { display: block; color: #b4503e; letter-spacing: .14em; }
+  .lista h3 { font: 700 18px/1.3 Georgia, serif; margin: 0 0 4px; }
+  .lista article { padding: 14px 0; border-top: 1px solid var(--linea); }
+  .lista small { color: var(--gris); font: 400 12px/1 system-ui, sans-serif; }
+</style>
+</head>
+<body>
+<div class="aviso">WEB DE EJEMPLO PARA LA DEMOSTRACIÓN · EN ZERO SE ABRE LA WEB REAL</div>
+<header><div class="cab"><h1 id="nombre">noticias.ejemplo</h1><nav><span>Actualidad</span><span>Economía</span><span>Tecnología</span><span>Deportes</span></nav></div></header>
+<main>
+  <div>
+    <div class="k" id="seccion">Tecnología</div>
+    <h2 id="titular">Lo que tu navegador cuenta de ti mientras lees una noticia</h2>
+    <p class="entrada">Al abrir una página, decenas de empresas que no ves piden saber quién eres. Esta es una web de ejemplo: lo que ves a la derecha, en GUARDIANA, es lo que se corta.</p>
+    <div class="foto"></div>
+    <p>Cada vez que se carga una página con publicidad, el navegador hace muchas más peticiones de las que la persona imagina: anuncios, medición de audiencia, botones de redes sociales y corredores de datos que construyen perfiles.</p>
+    <div class="hueco"><span><b>ANUNCIO CORTADO</b>Aquí iba un anuncio que pedía tu perfil</span></div>
+    <p>Algunas son necesarias para que la web funcione: el servidor de la propia página, sus imágenes y sus estilos. Esas pasan. Las que solo sirven para seguirte se cortan antes de salir.</p>
+    <p>Lo que no se corta queda anotado igualmente, para que siempre puedas ver a quién habló tu equipo, desde qué país y por qué.</p>
+  </div>
+  <aside>
+    <div class="hueco" style="min-height: 250px;"><span><b>ANUNCIO CORTADO</b>Subasta de anuncios</span></div>
+    <div class="lista">
+      <article><h3>Cómo leer la letra pequeña de una app</h3><small>Hace 2 horas</small></article>
+      <article><h3>Qué es un corredor de datos</h3><small>Hace 5 horas</small></article>
+      <article><h3>La casa conectada, aparato por aparato</h3><small>Ayer</small></article>
+    </div>
+  </aside>
+</main>
+<script>
+  const q = new URLSearchParams(location.search);
+  const d = q.get('d'), b = q.get('q');
+  if (d) document.getElementById('nombre').textContent = d;
+  if (b) { document.getElementById('seccion').textContent = 'Resultados'; document.getElementById('titular').textContent = 'Resultados de ejemplo para «' + b + '»'; }
+</script>
+</body>
+</html>
