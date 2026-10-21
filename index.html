@@ -1645,7 +1645,9 @@ async function cargaCabPortada() {
   if (CAP.cargaC || CAP.cab) return; CAP.cargaC = true;
   try {
     const d = await (await fetch('/orbita/datos/cables.json')).json();
-    const lineas = d.cables.map((c) => {
+    // land fibre: only what OpenStreetMap has recorded (mostly Europe and Asia); said so on screen
+    let dt0 = null; try { dt0 = await (await fetch('/orbita/datos/tierra-borrador.json')).json(); } catch (e) {}
+    const aLineas = (lista) => lista.map((c) => {
       const w = [];
       c.l.forEach(([lon, lat], k) => {
         const v = v3(lon, lat);
@@ -1656,19 +1658,20 @@ async function cargaCabPortada() {
       });
       return w;
     }).filter((w) => w.length > 1);
+    const lineas = aLineas(d.cables), tierra = dt0 && dt0.cables ? aLineas(dt0.cables) : [];
     // length in radians of each cable, so the light runs at one speed everywhere
     const largos = lineas.map((w) => { let L = 0; for (let i = 1; i < w.length; i++) L += Math.acos(clamp((w[i][0] * w[i - 1][0] + w[i][1] * w[i - 1][1] + w[i][2] * w[i - 1][2]) / (1.004 * 1.004), -1, 1)); return L; });
     const nombres = new Set(d.cables.map((c) => c.n).filter(Boolean)).size;
-    CAP.cab = { lineas, largos, nombres };
+    CAP.cab = { lineas, largos, nombres, tierra, kmTierra: dt0 && dt0.medida ? dt0.medida.km : 0 };
     notaCab();
   } catch (e) { CAP.cab = { lineas: [], largos: [], error: true }; }
 }
 function notaCab() {
   const el = document.getElementById('cab-nota'), l = idiomaPortada(), C = CAP.cab; if (!el || !C || !C.nombres) return;
-  const nombres = C.nombres;
-  { el.textContent = l === 'en' ? `${numPortada(nombres)} real submarine cables from OpenStreetMap (ODbL); some are missing. The pulses show the direction of traffic, not real traffic.`
-      : l === 'pt' ? `${numPortada(nombres)} cabos submarinos reais do OpenStreetMap (ODbL); faltam alguns. Os pulsos mostram o sentido do tráfego, não o tráfego real.`
-      : `${numPortada(nombres)} cables submarinos reales de OpenStreetMap (ODbL); faltan algunos. Los pulsos de luz muestran el sentido del tráfico, no el tráfico real.`; }
+  const nombres = C.nombres, km = C.kmTierra ? numPortada(C.kmTierra) : '';
+  { el.textContent = l === 'en' ? `${numPortada(nombres)} real submarine cables from OpenStreetMap (ODbL); some are missing.` + (km ? ` In fainter lines, ${km} km of land fibre: only what OpenStreetMap has recorded, mostly in Europe and Asia.` : '') + ' The pulses show the direction of traffic, not real traffic.'
+      : l === 'pt' ? `${numPortada(nombres)} cabos submarinos reais do OpenStreetMap (ODbL); faltam alguns.` + (km ? ` Em traço mais fraco, ${km} km de fibra terrestre: só o que o OpenStreetMap registrou, sobretudo na Europa e na Ásia.` : '') + ' Os pulsos mostram o sentido do tráfego, não o tráfego real.'
+      : `${numPortada(nombres)} cables submarinos reales de OpenStreetMap (ODbL); faltan algunos.` + (km ? ` En trazo más tenue, ${km} km de fibra en tierra: solo lo que OpenStreetMap tiene registrado, sobre todo en Europa y Asia.` : '') + ' Los pulsos de luz muestran el sentido del tráfico, no el tráfico real.'; }
 }
 function capasPortada(dt) {
   const iS = CHX('sat'), iC = CHX('cab'), iN = CHX(3);
@@ -1726,6 +1729,9 @@ function pintaCapas(dt) {
   const C = CAP.cab;
   if (CAPA.cab > 0.01 && C && C.lineas.length) {
     ctx.globalCompositeOperation = 'lighter';
+    if (C.tierra && C.tierra.length) { ctx.lineWidth = Math.max(0.6, lw * 0.4); ctx.strokeStyle = 'rgb(244,246,248)'; ctx.globalAlpha = 0.22 * CAPA.cab * a; ctx.beginPath();
+      for (const w of C.tierra) { let pen = false; for (const q of w) { const p = project(q); if (!p[2]) { pen = false; continue; } if (!pen) { ctx.moveTo(p[0], p[1]); pen = true; } else ctx.lineTo(p[0], p[1]); } }
+      ctx.stroke(); }
     ctx.lineWidth = Math.max(0.7, lw * 0.5); ctx.strokeStyle = 'rgb(156,195,228)'; ctx.globalAlpha = 0.3 * CAPA.cab * a;
     ctx.beginPath();
     for (const w of C.lineas) { let pen = false; for (const q of w) { const p = project(q); if (!p[2]) { pen = false; continue; } if (!pen) { ctx.moveTo(p[0], p[1]); pen = true; } else ctx.lineTo(p[0], p[1]); } }
