@@ -258,7 +258,8 @@
   const num = (n) => n.toLocaleString((window.GuardianaIdioma && window.GuardianaIdioma.locale) || 'es-ES');
   function pintaNota() {
     const el = $('capa-nota'); if (!el) return;
-    const partes = [];
+    const partes = [], porCapa = {};
+    const meter = (k, txt) => { partes.push(txt); porCapa[k] = txt; };
     if (estado.sat) {
       if (S && S.N) {
         const vistaTxt = estado.vista === 'todos' && estado.orb.baja && estado.orb.media && estado.orb.geo ? num(S.N) + ' ' + T('satélites de datos')
@@ -266,24 +267,26 @@
         let s = vistaTxt + ' · CelesTrak, ' + haceTxt(hace(S.d.descargado)) + ' · ' + T('posición calculada ahora');
         const L = P() && P().lugar;
         if (L && S.tArriba) s += ' · ' + T('sobre') + ' ' + L.nombre + ': ' + num(S.nArriba);
-        partes.push(s);
-      } else if (S && S.error) partes.push(T('No se pudieron cargar los satélites.'));
-      else partes.push(T('Cargando satélites…'));
+        meter('sat', s);
+      } else if (S && S.error) meter('sat', T('No se pudieron cargar los satélites.'));
+      else meter('sat', T('Cargando satélites…'));
     }
     if (estado.sub) {
       const c = capas.sub;
-      partes.push(c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + ' · © OpenStreetMap (ODbL) · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
+      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + ' · © OpenStreetMap (ODbL) · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
     }
     if (estado.tierra) {
       const c = capas.tierra;
-      partes.push(c && c.d ? num(c.nombres) + ' ' + T('cables de tierra con nombre') + ' · © OpenStreetMap (ODbL) · ' + T('solo una parte de la fibra') : c && c.error ? T('No se pudieron cargar los cables de tierra.') : T('Cargando cables de tierra…'));
+      meter('tierra', c && c.d ? num(c.nombres) + ' ' + T('cables de tierra con nombre') + ' · © OpenStreetMap (ODbL) · ' + T('solo una parte de la fibra') : c && c.error ? T('No se pudieron cargar los cables de tierra.') : T('Cargando cables de tierra…'));
     }
     if (estado.puntos) {
       const m = PT && PT.d && PT.d.medida;
-      partes.push(m ? num(m.datos) + ' ' + T('centros de datos') + ' · © OpenStreetMap (ODbL) · ' + T('cobertura parcial') : PT && PT.error ? T('No se pudieron cargar los puntos.') : T('Cargando puntos…'));
+      meter('puntos', m ? num(m.datos) + ' ' + T('centros de datos') + ' · © OpenStreetMap (ODbL) · ' + T('cobertura parcial') : PT && PT.error ? T('No se pudieron cargar los puntos.') : T('Cargando puntos…'));
     }
     el.textContent = partes.join('   ·   ');
-    el.hidden = !partes.length;
+    // 21 Oct 2026 (owner): no text under the planet; the same facts live in each button's tooltip
+    for (const [k, txt] of Object.entries(porCapa)) { const b = document.querySelector(`#capas [data-capa="${k}"]`); if (b) b.title = txt; }
+    el.hidden = true;
     document.body.classList.toggle('ver-sat', estado.sat);
     if (estado.sat) el.title = T('Satélites bajos a su altura real; los de órbita media y geoestacionaria, en los anillos exteriores (distancia no a escala). Más tenues, los que están ahora en la sombra de la Tierra.');
     else el.removeAttribute('title');
