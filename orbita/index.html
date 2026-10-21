@@ -11,7 +11,7 @@
 <link rel="preload" href="static/tierra/dia.jpg" as="image">
 <link rel="stylesheet" href="static/orbita.css">
 </head>
-<body>
+<body class="dock">
 <div id="escena" aria-hidden="true">
   <canvas id="estrellas"></canvas>
   <canvas id="tierra"></canvas>
@@ -34,6 +34,11 @@
     <span class="sep">·</span><span id="cuenta">Cortes en 24 h <b id="n">—</b></span>
     <span id="demo" class="demo" hidden>DEMOSTRACIÓN</span>
   </div>
+  <div id="capas" class="capas" role="group" aria-label="Capas del planeta">
+    <button type="button" data-capa="sub" aria-pressed="false" title="Ver los cables submarinos por donde viajan los datos"><i aria-hidden="true"></i>Cables submarinos</button>
+    <button type="button" data-capa="tierra" aria-pressed="false" title="Ver los cables de fibra en tierra"><i aria-hidden="true"></i>Cables de tierra</button>
+    <button type="button" data-capa="sat" aria-pressed="false" title="Ver los satélites que llevan datos, en tiempo real"><i aria-hidden="true"></i>Satélites de datos</button>
+  </div>
   <div class="derecha">
     <button type="button" id="lugar-btn" class="lugar-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14.5s4.5-4.2 4.5-7.8a4.5 4.5 0 0 0-9 0c0 3.6 4.5 7.8 4.5 7.8z"/><circle cx="8" cy="6.7" r="1.6"/></svg><span id="lugar-nombre">Precisar ubicación</span></button>
     <div class="idiomas" role="group" aria-label="Idioma" translate="no"><button type="button" data-l="es" aria-pressed="true">ES</button><button type="button" data-l="en" aria-pressed="false">EN</button><button type="button" data-l="pt" aria-pressed="false">PT</button></div>
@@ -52,6 +57,8 @@
   <a class="abrir" id="ficha-a" href="#"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg></a>
 </section>
 
+<p id="capa-nota" class="capa-nota" translate="no" aria-live="polite" hidden></p>
+<div id="sat-ficha" class="sat-ficha" translate="no" hidden><b></b><span></span></div>
 <aside id="directo" aria-label="En directo">
   <h2>EN DIRECTO</h2>
   <ul id="lista"></ul>
@@ -124,5 +131,6 @@
 <script src="static/idioma.js"></script>
 <script src="static/orbita-secciones.js"></script>
 <script src="static/orbita.js"></script>
+<script src="static/capas.js"></script>
 </body>
 </html>

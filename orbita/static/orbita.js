@@ -257,6 +257,13 @@
     const v = aVista(w);
     return { x: CX + R * v[0], y: CY - R * v[1], ve: v[2] > 0 || v[0] * v[0] + v[1] * v[1] > 1.0, z: v[2] };
   };
+  // 20 Oct 2026: the planet's layers (cables, satellites) live in static/capas.js and draw through this.
+  window.OrbitaPlaneta = {
+    aVista, pantalla, vec, ctx: cx2,
+    get geo() { return { W, H, CX, CY, R, U }; },
+    get dentro() { return dentro; },
+    get lugar() { try { if (LUGAR) return { lat: LUGAR.lat, lon: LUGAR.lon, nombre: LUGAR.ciudad, aprox: false }; const p = centros[CASA]; return p ? { lat: p.lat, lon: p.lon, nombre: nombrePais(CASA), aprox: true } : null; } catch (_) { return null; } },
+  };
   cvT.addEventListener('pointerdown', (e) => {
     const dx = e.clientX - CX, dy = e.clientY - CY;
     if (dx * dx + dy * dy > R * R * 1.15) return;
@@ -437,6 +444,7 @@ void main(){
   function pintaRutas(t, dt) {
     cx2.clearRect(0, 0, W, H);
     cx2.lineCap = 'round';
+    if (window.OrbitaCapas) { cx2.save(); window.OrbitaCapas.pinta(t); cx2.restore(); }
     cx2.globalCompositeOperation = 'lighter';
     // the traces of the last half minute: the day's web, fading
     for (let i = huellas.length - 1; i >= 0; i--) {
