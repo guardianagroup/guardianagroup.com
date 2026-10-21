@@ -1266,9 +1266,9 @@ if(uDayOn>0.5){
  if(uFxK>0.001){
   float g=dot(day,vec3(.2126,.7152,.0722));vec3 lights=c*smoothstep(.17,.55,lum)*vec3(1.35,1.05,.7)*uCity;
   if(uFx<1.5){ // A · x-ray: a scan line sweeps the globe and leaves a steel-blue radiograph behind
-   float sx=acos(clamp(dot(n,normalize(uCtg)),-1.0,1.0))/1.5708;float edge=uFxK*2.2-0.08;float m=smoothstep(edge+0.03,edge-0.03,sx);
+   float sx=acos(clamp(dot(n,normalize(uCtg)),-1.0,1.0))/1.5708;float edge=0.12+uFxK*2.0;float nace=smoothstep(0.0,0.06,uFxK);float m=smoothstep(edge+0.03,edge-0.03,sx)*nace;
    vec3 xr=vec3(.42,.6,.8)*pow(g,0.85)*0.62*(0.35+0.65*sdif)+vec3(.5,.7,.95)*fr*.35+lights*1.25;
-   col=mix(col,xr,m)+vec3(.62,.86,1.0)*exp(-pow((sx-edge)/0.012,2.0))*0.75*step(0.02,uFxK)*step(uFxK,0.98);
+   col=mix(col,xr,m)+vec3(.62,.86,1.0)*exp(-pow((sx-edge)/0.012,2.0))*0.75*nace*step(uFxK,0.98);
   } else if(uFx<2.5){ // B · dim: the same planet, lights lowered
    float gl=dot(col,vec3(.2126,.7152,.0722));col=mix(col,mix(vec3(gl),col,0.4)*0.3+lights*0.6,uFxK);
   } else if(uFx<3.5){ // C · brand duotone
@@ -1595,7 +1595,7 @@ function update() {
   }
   const c1 = rectDe(CH1); const dusk = clamp((vh * 0.75 - c1.top) / (c1.height + vh * 0.35));
   T.day = 1;
-  T.fx = S.mode === 'story' ? smooth(0, 1, llegaAlPlaneta(chapters[0])) : (S.mode === 'auction' ? 1 : 0);
+  T.fx = S.mode === 'story' ? smooth(0, 1, llegaAlPlaneta(chapters[0], 0, 0.8)) : (S.mode === 'auction' ? 1 : 0);
   T.sun = { intro: 1, story: 0.3, auction: 0.15, final: 1, bg: 0.25, obs: 0 }[S.mode] ?? 0.3;
   T.obs = S.mode === 'obs' ? 1 : 0;
   if (RM) Object.assign(G, T);
@@ -1699,11 +1699,11 @@ function notaCab() {
 // and the picture move together: the ring starts as the chapter's text appears and closes when it is read.
 // how far the reader is into a chapter, measured on its title: 0 when the title reaches 72 % of the
 // screen height, 1 half a screen later. Scrolling back runs it backwards.
-const lectura = (el) => { if (!el) return 0; const h = el.querySelector('h2') || el; return clamp((vh * 0.72 - rectDe(h).top) / (vh * 0.5)); };
+const lectura = (el, largo = 0.5) => { if (!el) return 0; const h = el.querySelector('h2') || el; return clamp((vh * 0.72 - rectDe(h).top) / (vh * largo)); };
 // The first ring waits for the title to reach the planet's height (on a computer): it opens when the
 // middle of «En 30 milisegundos…» lines up with the middle of the planet, and closes half a screen later.
 // `antes` starts it a little earlier (a fraction of the screen height before the title is level with the planet)
-const llegaAlPlaneta = (el, antes = 0) => { if (!el || mobile()) return lectura(el); const h = el.querySelector('h2') || el, r = rectDe(h); return clamp((G.y + vh * antes - (r.top + r.height / 2)) / (vh * 0.42)); };
+const llegaAlPlaneta = (el, antes = 0, largo = 0.42) => { if (!el || mobile()) return lectura(el, Math.max(0.5, largo)); const h = el.querySelector('h2') || el, r = rectDe(h); return clamp((G.y + vh * antes - (r.top + r.height / 2)) / (vh * largo)); };
 let SPR_DC = null;
 function spriteCentro() {
   if (SPR_DC) return SPR_DC;
@@ -1727,7 +1727,7 @@ function capasPortada(dt) {
   const f = 1 - Math.pow(0.002, dt);
   CAPA.cab = lerp(CAPA.cab, wC, f); CAPA.sat = lerp(CAPA.sat, wS, f); CAPA.tie = lerp(CAPA.tie || 0, wT, f);
 
-  if (enS && (G.fx || 0) > 0.001) { const q = v3(CTG[0], CTG[1]); ANI.cab.c = q; ANI.cab.e = clamp(((G.fx || 0) * 2.2 - 0.08) * Math.PI / 2, 0, Math.PI); }
+  if (enS && (G.fx || 0) > 0.001) { const q = v3(CTG[0], CTG[1]); ANI.cab.c = q; ANI.cab.e = (G.fx || 0) < 0.02 ? 0 : clamp((0.12 + (G.fx || 0) * 2.0) * Math.PI / 2, 0, Math.PI); } // same edge as the shader's ring
   else { ANI.cab.c = null; ANI.cab.e = 0; }
   for (const [k, i] of [['sat', iS], ['tie', iT]]) {
     const v = enS ? ch(i) : 0, an = ANI[k];
@@ -1901,7 +1901,7 @@ function drawRoutes(dt) {
   ctx.globalCompositeOperation = 'lighter';
   const fxk = typeof FXMODE !== 'undefined' && FXMODE ? (G.fx || 0) : 0;
   if (fxk > 0.01 && (S.mode === 'story' || S.mode === 'auction') && CAPA.k < 0.98) {
-    const edge = FXMODE === 1 ? fxk * 2.2 - 0.08 : 9; ctx.lineWidth = Math.max(0.6, lw * 0.45); ctx.strokeStyle = 'rgb(120,170,215)';
+    const edge = FXMODE === 1 ? (fxk < 0.02 ? -1 : 0.12 + fxk * 2.0) : 9; ctx.lineWidth = Math.max(0.6, lw * 0.45); ctx.strokeStyle = 'rgb(120,170,215)';
     for (let li = 0; li < NET.length; li++) { const l = NET[li], dd = NETD[li]; let prev = null;
       for (let k = 0; k < l.length; k++) { if (dd[k] > edge) { prev = null; continue; } const p = project(l[k]); if (!p[2]) { prev = null; continue; }
         if (prev) { ctx.globalAlpha = 0.32 * a * (1 - CAPA.k) * Math.min(1, fxk * 1.5) * clamp((edge - dd[k]) / 0.08); ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(p[0], p[1]); ctx.stroke(); } prev = p; } }
@@ -1951,7 +1951,8 @@ function drawRoutes(dt) {
       if (pr >= 0.999 && ms < 96) { const q = clamp((ms - start - 18) / 10); ripple(pts[pts.length - 1], q, '156,195,228', 0.8 * A.bids, lw * 4); }
     });
   }
-  if (FXMODE === 1 && (G.fx || 0) > 0.01 && S.mode === 'story') { const edge = (G.fx || 0) * 2.2 - 0.08, c0 = v3(CTG[0], CTG[1]); ctx.globalCompositeOperation = 'lighter';
+  // 21 Oct 2026: no small ripples on the destinations while the first ring opens (they read as a stray blue circle)
+  if (false && FXMODE === 1 && (G.fx || 0) > 0.01 && S.mode === 'story') { const edge = (G.fx || 0) * 2.2 - 0.08, c0 = v3(CTG[0], CTG[1]); ctx.globalCompositeOperation = 'lighter';
     DEST.forEach((d, i) => { const p = v3(d[0], d[1]); const dd = Math.acos(clamp(c0[0]*p[0]+c0[1]*p[1]+c0[2]*p[2], -1, 1)) / 1.5708; const q = (edge - dd) / 0.18; if (q > 0 && q < 1) ripple(p, q, i === DEST.length - 1 ? '232,128,111' : '156,195,228', a, lw * 10); }); }
   pintaCapas(dt);
   ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
