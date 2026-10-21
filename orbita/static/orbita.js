@@ -384,6 +384,7 @@ void main(){
   float lam=dot(n,uL);float dl=smoothstep(-.22,.42,lam);
   vec3 sup=mix(dia*vec3(.96,1.,1.06),vec3(.97,.98,1.),nub*.88);
   vec3 c=sup*(.05+1.08*max(lam,0.))*mix(.3,1.,dl);
+  c+=sup*vec3(.62,.74,.92)*.17*(1.-dl);
   c+=luz*vec3(1.,.78,.48)*1.5*(1.-dl)*(1.-nub*.8);
   vec3 h=normalize(uL+vec3(0.,0.,1.));c+=vec3(.8,.9,1.)*pow(max(dot(n,h),0.),160.)*agua*(1.-nub)*.32;
   float fr=pow(1.-n.z,2.4);c=mix(c,atm*(.18+.8*max(lam+.35,0.)),fr*.6);
