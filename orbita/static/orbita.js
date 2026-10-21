@@ -200,7 +200,9 @@
   { const i = PUERTAS.findIndex((p) => '#' + p.id === location.hash); if (i >= 0) { history.replaceState({ puerta: PUERTAS[i].id }, '', location.hash); setTimeout(() => abre(i, false), 400); } }
 
   // ---------- Geometry shared with the CSS (--u) ----------
-  let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1;
+  let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
+  // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
+  const ZOOM = { z: 1, zt: 1, MAX: 2 };
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
   function mide() {
@@ -215,7 +217,7 @@
     else U = Math.max(3, Math.min(H / 100, W * 0.0062, (W / 2 - 40 - 290 - 24 - 130) / 26.4, (H / 2 - 150) / 41));
     RAIZ.style.setProperty('--u', U.toFixed(3) + 'px');
     // 20 Oct 2026 (owner): a bigger planet; the doors' ring stays at 41 units, so ZERO keeps its air above.
-    CX = W / 2; CY = H / 2; R = U * 34;
+    CX = W / 2; CY = H / 2; R0 = U * 34; R = R0 * ZOOM.z;
     for (const c of [cvE, cvT, cvR]) { c.width = Math.round(W * DPR); c.height = Math.round(H * DPR); }
     cx2.setTransform(DPR, 0, 0, DPR, 0, 0);
     pintaEstrellas();
@@ -281,6 +283,65 @@
   });
   const suelta = () => { if (!arrastre) return; arrastre = null; cvT.classList.remove('arrastra'); quietoHasta = performance.now() + 2500; };
   cvT.addEventListener('pointerup', suelta); cvT.addEventListener('pointercancel', suelta);
+
+  // ---------- Zoom: wheel, pinch, double click, the +/− rail on the right; Esc returns ----------
+  const zControl = $('zoom'), zNivel = $('zoom-nivel');
+  function acerca(zt, x, y) {
+    zt = Math.max(1, Math.min(ZOOM.MAX, zt));
+    if (zt > ZOOM.zt + 1e-3 && x != null) {
+      // towards the point under the cursor: turn the planet a share of the way to it
+      const vx = (x - CX) / R, vy = -(y - CY) / R;
+      if (vx * vx + vy * vy < 1) {
+        const f = 1 - ZOOM.zt / zt;
+        vista.lon += Math.asin(vx) / RAD * f;
+        vista.lat = Math.max(-60, Math.min(60, vista.lat + Math.asin(vy) / RAD * f));
+        vista.vlon = vista.vlat = 0; meta = null;
+      }
+    }
+    ZOOM.zt = zt;
+    quietoHasta = performance.now() + 4000;
+    pintaZoom();
+  }
+  function pintaZoom() {
+    const z = Math.round(ZOOM.zt * 10) / 10;
+    if (zNivel) zNivel.textContent = '×' + (z % 1 ? z.toFixed(1).replace('.', ',') : z.toFixed(0));
+    if (zControl) {
+      zControl.querySelector('[data-z="mas"]').disabled = ZOOM.zt >= ZOOM.MAX - 1e-3;
+      zControl.querySelector('[data-z="menos"]').disabled = ZOOM.zt <= 1 + 1e-3;
+      zControl.querySelector('[data-z="base"]').hidden = ZOOM.zt <= 1 + 1e-3;
+    }
+    document.body.classList.toggle('cerca', ZOOM.zt > 1.02);
+  }
+  const libreZoom = () => !dentro && caja.hidden;
+  addEventListener('wheel', (e) => {
+    if (!libreZoom() || e.target.closest('#directo, #lugar, #seccion, header, #puertas')) return;
+    e.preventDefault();
+    acerca(ZOOM.zt * Math.exp(-e.deltaY * (e.deltaMode ? 0.05 : 0.0016)), e.clientX, e.clientY);
+  }, { passive: false });
+  cvT.addEventListener('dblclick', (e) => {
+    if (!libreZoom()) return;
+    if (ZOOM.zt >= ZOOM.MAX - 1e-3) acerca(1); else acerca(ZOOM.zt < 1.5 - 1e-3 ? 1.5 : ZOOM.MAX, e.clientX, e.clientY);
+  });
+  const dedos = new Map(); let pellizco = null;
+  cvT.addEventListener('pointerdown', (e) => { if (e.pointerType === 'touch') dedos.set(e.pointerId, e); if (dedos.size === 2) { const [a, b] = [...dedos.values()]; pellizco = { d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), z: ZOOM.zt }; arrastre = null; } });
+  cvT.addEventListener('pointermove', (e) => {
+    if (!dedos.has(e.pointerId)) return; dedos.set(e.pointerId, e);
+    if (pellizco && dedos.size === 2) { const [a, b] = [...dedos.values()]; const d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); acerca(pellizco.z * d / Math.max(1, pellizco.d), (a.clientX + b.clientX) / 2, (a.clientY + b.clientY) / 2); }
+  });
+  const sueltaDedo = (e) => { dedos.delete(e.pointerId); if (dedos.size < 2) pellizco = null; };
+  cvT.addEventListener('pointerup', sueltaDedo); cvT.addEventListener('pointercancel', sueltaDedo);
+  if (zControl) zControl.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    const k = b.dataset.z;
+    acerca(k === 'mas' ? ZOOM.zt + 0.25 : k === 'menos' ? ZOOM.zt - 0.25 : 1, k === 'mas' ? CX : null, CY);
+  });
+  addEventListener('keydown', (e) => {
+    if (!libreZoom() || (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName))) return;
+    if (e.key === 'Escape' && ZOOM.zt > 1) { e.preventDefault(); acerca(1); }
+    else if (e.key === '+' || e.key === '=') acerca(ZOOM.zt + 0.25, CX, CY);
+    else if (e.key === '-') acerca(ZOOM.zt - 0.25);
+  });
+  pintaZoom();
   function mira(pais, punto) {
     const c = punto || centros[pais]; if (!c) return;
     meta = { lon: c.lon, lat: Math.max(-45, Math.min(45, c.lat)) };
@@ -296,7 +357,7 @@
     }
     vista.lon += vista.vlon * dt; vista.lat = Math.max(-60, Math.min(60, vista.lat + vista.vlat * dt));
     vista.vlon *= Math.pow(0.04, dt); vista.vlat *= Math.pow(0.04, dt);
-    if (now > quietoHasta) { vista.lon += VEL * dt; vista.lat += (14 - vista.lat) * dt * 0.25; }
+    if (now > quietoHasta && ZOOM.zt <= 1.02) { vista.lon += VEL * dt; vista.lat += (14 - vista.lat) * dt * 0.25; }
   }
 
   // ---------- The planet (WebGL 1) ----------
@@ -869,6 +930,7 @@ void main(){
     if (dentro && impar) return; // behind glass, half the frames are enough
     while (cola.length && cola[0].at <= now / 1000) lanza(cola.shift(), t);
     while (ondas.length && t - ondas[0].t0 > 3) ondas.shift();
+    if (Math.abs(ZOOM.zt - ZOOM.z) > 1e-4) { ZOOM.z += (ZOOM.zt - ZOOM.z) * Math.min(1, dt * 9); if (Math.abs(ZOOM.zt - ZOOM.z) < 1e-3) ZOOM.z = ZOOM.zt; R = R0 * ZOOM.z; }
     avanzaVista(dentro ? dt * 2 : dt, now);
     pintaTierra(t, dentro ? 0.9 : 1);
     pintaRutas(t, dt);

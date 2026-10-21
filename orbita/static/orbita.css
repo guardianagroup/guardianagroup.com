@@ -285,3 +285,36 @@ body.dock .puerta button, body.dock .puerta:nth-child(1) button { width: 100%; b
   body.dock .puerta button, body.dock .puerta:nth-child(1) button { width: auto; padding: 9px 12px; }
   .capa-nota { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* Doors, second design (owner, 20 Oct 2026: "too big"): a thin rail on the left, no boxes.
+   One steel line, a dot per door, the name beside it and the state in small mono. */
+body.dock #puertas { inset: 0 auto 0 calc(40px + env(safe-area-inset-left, 0px)); width: 200px; gap: 0; }
+body.dock #puertas::before { content: ""; position: absolute; left: 4px; top: 50%; height: 104px; transform: translateY(-50%); width: 1px; background: linear-gradient(transparent, rgba(156,195,228,.32) 18%, rgba(156,195,228,.32) 82%, transparent); }
+body.dock .puerta button, body.dock .puerta:nth-child(1) button { width: 100%; justify-content: flex-start; padding: 9px 0; gap: 14px; border: 0; border-radius: 0; background: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+body.dock .puerta button:hover, body.dock .puerta.on button { background: none; }
+body.dock .puerta .p { flex: none; width: 9px; height: 9px; }
+body.dock .puerta .et, body.dock .puerta:nth-child(1) .et { font-size: 13px; color: #AEB8C3; }
+body.dock .puerta .et small { font-size: 9.5px; margin-top: 2px; letter-spacing: .08em; }
+body.dock .puerta button:hover .et, body.dock .puerta.on .et { color: var(--fg); }
+@media (max-width: 760px) {
+  body.dock #puertas { inset: auto 0 calc(22px + env(safe-area-inset-bottom, 0px)) 0; width: auto; gap: 22px; }
+  body.dock #puertas::before { display: none; }
+  body.dock .puerta button, body.dock .puerta:nth-child(1) button { width: auto; padding: 6px 0; gap: 8px; }
+  body.dock .puerta .et small { display: none; }
+}
+
+/* Zoom (20 Oct 2026): a thin rail on the right, mirroring the doors on the left. */
+.zoom { position: fixed; right: calc(40px + env(safe-area-inset-right, 0px)); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; z-index: 4; opacity: 0; transition: opacity .8s 1.6s; }
+.listo .zoom { opacity: 1; }
+.zoom button { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 50%; background: rgba(12,17,24,.6); color: #C4CCD5; cursor: pointer; padding: 0; transition: border-color .2s, color .2s, opacity .2s; }
+.zoom button:hover:not(:disabled) { border-color: rgba(156,195,228,.5); color: var(--fg); }
+.zoom button:disabled { opacity: .3; cursor: default; }
+.zoom button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.zoom .nivel { font: 500 11px/1 var(--mono); color: #8A95A2; letter-spacing: .04em; padding: 6px 0; min-width: 34px; text-align: center; }
+.zoom .base { margin-top: 8px; }
+.zoom .base[hidden] { display: none; }
+body.dentro .zoom { opacity: 0; pointer-events: none; transition: opacity .45s; }
+/* closer in: the ring and the cross step back so the planet reads on its own */
+body.cerca #anillo, body.cerca #anillo2, body.cerca .cruz, body.cerca #pulso { opacity: 0 !important; transition: opacity .4s; }
+@media (max-width: 760px) { .zoom { right: calc(14px + env(safe-area-inset-right, 0px)); } .zoom button { width: 32px; height: 32px; } }
+body.cerca .capa-nota { background: rgba(6,8,12,.78); padding: 6px 14px; border-radius: 10px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }

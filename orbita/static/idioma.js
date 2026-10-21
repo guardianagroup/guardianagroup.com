@@ -70,6 +70,10 @@
     // the planet's layers
     'Capas del planeta': ['Planet layers', 'Camadas do planeta'],
     'Cables submarinos': ['Submarine cables', 'Cabos submarinos'],
+    'Acercar el planeta': ['Zoom the planet', 'Aproximar o planeta'],
+    'Acercar': ['Zoom in', 'Aproximar'],
+    'Alejar': ['Zoom out', 'Afastar'],
+    'Volver al tamaño base': ['Back to base size', 'Voltar ao tamanho base'],
     'Cables de tierra': ['Land cables', 'Cabos terrestres'],
     'Satélites de datos': ['Data satellites', 'Satélites de dados'],
     'Ver los cables submarinos por donde viajan los datos': ['See the submarine cables data travels through', 'Ver os cabos submarinos por onde viajam os dados'],
