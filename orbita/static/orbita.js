@@ -200,7 +200,9 @@
   { const i = PUERTAS.findIndex((p) => '#' + p.id === location.hash); if (i >= 0) { history.replaceState({ puerta: PUERTAS[i].id }, '', location.hash); setTimeout(() => abre(i, false), 400); } }
 
   // ---------- Geometry shared with the CSS (--u) ----------
-  let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1;
+  let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
+  // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
+  const ZOOM = { z: 1, zt: 1, MAX: 2 };
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
   function mide() {
@@ -215,7 +217,7 @@
     else U = Math.max(3, Math.min(H / 100, W * 0.0062, (W / 2 - 40 - 290 - 24 - 130) / 26.4, (H / 2 - 150) / 41));
     RAIZ.style.setProperty('--u', U.toFixed(3) + 'px');
     // 20 Oct 2026 (owner): a bigger planet; the doors' ring stays at 41 units, so ZERO keeps its air above.
-    CX = W / 2; CY = H / 2; R = U * 34;
+    CX = W / 2; CY = H / 2; R0 = U * 34; R = R0 * ZOOM.z;
     for (const c of [cvE, cvT, cvR]) { c.width = Math.round(W * DPR); c.height = Math.round(H * DPR); }
     cx2.setTransform(DPR, 0, 0, DPR, 0, 0);
     pintaEstrellas();
@@ -257,6 +259,13 @@
     const v = aVista(w);
     return { x: CX + R * v[0], y: CY - R * v[1], ve: v[2] > 0 || v[0] * v[0] + v[1] * v[1] > 1.0, z: v[2] };
   };
+  // 20 Oct 2026: the planet's layers (cables, satellites) live in static/capas.js and draw through this.
+  window.OrbitaPlaneta = {
+    aVista, pantalla, vec, ctx: cx2,
+    get geo() { return { W, H, CX, CY, R, R0, U }; },
+    get dentro() { return dentro; },
+    get lugar() { try { if (LUGAR) return { lat: LUGAR.lat, lon: LUGAR.lon, nombre: LUGAR.ciudad, aprox: false }; const p = centros[CASA]; return p ? { lat: p.lat, lon: p.lon, nombre: nombrePais(CASA), aprox: true } : null; } catch (_) { return null; } },
+  };
   cvT.addEventListener('pointerdown', (e) => {
     const dx = e.clientX - CX, dy = e.clientY - CY;
     if (dx * dx + dy * dy > R * R * 1.15) return;
@@ -274,6 +283,56 @@
   });
   const suelta = () => { if (!arrastre) return; arrastre = null; cvT.classList.remove('arrastra'); quietoHasta = performance.now() + 2500; };
   cvT.addEventListener('pointerup', suelta); cvT.addEventListener('pointercancel', suelta);
+
+  // ---------- Zoom: wheel, pinch, double click, the +/− rail on the right; Esc returns ----------
+  const zControl = $('zoom'), zNivel = $('zoom-nivel');
+  function acerca(zt, x, y) {
+    zt = Math.max(1, Math.min(ZOOM.MAX, zt));
+    // 20 Oct 2026 (owner): the zoom stays on the same point; the planet does not turn when you zoom.
+    ZOOM.zt = zt;
+    quietoHasta = performance.now() + 4000;
+    pintaZoom();
+  }
+  function pintaZoom() {
+    const z = Math.round(ZOOM.zt * 10) / 10;
+    if (zNivel) zNivel.textContent = '×' + (z % 1 ? z.toFixed(1).replace('.', ',') : z.toFixed(0));
+    if (zControl) {
+      zControl.querySelector('[data-z="mas"]').disabled = ZOOM.zt >= ZOOM.MAX - 1e-3;
+      zControl.querySelector('[data-z="menos"]').disabled = ZOOM.zt <= 1 + 1e-3;
+      zControl.querySelector('[data-z="base"]').hidden = ZOOM.zt <= 1 + 1e-3;
+    }
+    document.body.classList.toggle('cerca', ZOOM.zt > 1.02);
+  }
+  const libreZoom = () => !dentro && caja.hidden;
+  addEventListener('wheel', (e) => {
+    if (!libreZoom() || e.target.closest('#directo, #lugar, #seccion, header, #puertas')) return;
+    e.preventDefault();
+    acerca(ZOOM.zt * Math.exp(-e.deltaY * (e.deltaMode ? 0.05 : 0.0016)), e.clientX, e.clientY);
+  }, { passive: false });
+  cvT.addEventListener('dblclick', (e) => {
+    if (!libreZoom()) return;
+    if (ZOOM.zt >= ZOOM.MAX - 1e-3) acerca(1); else acerca(ZOOM.zt < 1.5 - 1e-3 ? 1.5 : ZOOM.MAX, e.clientX, e.clientY);
+  });
+  const dedos = new Map(); let pellizco = null;
+  cvT.addEventListener('pointerdown', (e) => { if (e.pointerType === 'touch') dedos.set(e.pointerId, e); if (dedos.size === 2) { const [a, b] = [...dedos.values()]; pellizco = { d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), z: ZOOM.zt }; arrastre = null; } });
+  cvT.addEventListener('pointermove', (e) => {
+    if (!dedos.has(e.pointerId)) return; dedos.set(e.pointerId, e);
+    if (pellizco && dedos.size === 2) { const [a, b] = [...dedos.values()]; const d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY); acerca(pellizco.z * d / Math.max(1, pellizco.d), (a.clientX + b.clientX) / 2, (a.clientY + b.clientY) / 2); }
+  });
+  const sueltaDedo = (e) => { dedos.delete(e.pointerId); if (dedos.size < 2) pellizco = null; };
+  cvT.addEventListener('pointerup', sueltaDedo); cvT.addEventListener('pointercancel', sueltaDedo);
+  if (zControl) zControl.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    const k = b.dataset.z;
+    acerca(k === 'mas' ? ZOOM.zt + 0.25 : k === 'menos' ? ZOOM.zt - 0.25 : 1, k === 'mas' ? CX : null, CY);
+  });
+  addEventListener('keydown', (e) => {
+    if (!libreZoom() || (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName))) return;
+    if (e.key === 'Escape' && ZOOM.zt > 1) { e.preventDefault(); acerca(1); }
+    else if (e.key === '+' || e.key === '=') acerca(ZOOM.zt + 0.25, CX, CY);
+    else if (e.key === '-') acerca(ZOOM.zt - 0.25);
+  });
+  pintaZoom();
   function mira(pais, punto) {
     const c = punto || centros[pais]; if (!c) return;
     meta = { lon: c.lon, lat: Math.max(-45, Math.min(45, c.lat)) };
@@ -289,7 +348,7 @@
     }
     vista.lon += vista.vlon * dt; vista.lat = Math.max(-60, Math.min(60, vista.lat + vista.vlat * dt));
     vista.vlon *= Math.pow(0.04, dt); vista.vlat *= Math.pow(0.04, dt);
-    if (now > quietoHasta) { vista.lon += VEL * dt; vista.lat += (14 - vista.lat) * dt * 0.25; }
+    if (now > quietoHasta && ZOOM.zt <= 1.02) { vista.lon += VEL * dt; vista.lat += (14 - vista.lat) * dt * 0.25; }
   }
 
   // ---------- The planet (WebGL 1) ----------
@@ -316,6 +375,7 @@ void main(){
   float lam=dot(n,uL);float dl=smoothstep(-.22,.42,lam);
   vec3 sup=mix(dia*vec3(.96,1.,1.06),vec3(.97,.98,1.),nub*.88);
   vec3 c=sup*(.05+1.08*max(lam,0.))*mix(.3,1.,dl);
+  c+=sup*vec3(.62,.74,.92)*.17*(1.-dl);
   c+=luz*vec3(1.,.78,.48)*1.5*(1.-dl)*(1.-nub*.8);
   vec3 h=normalize(uL+vec3(0.,0.,1.));c+=vec3(.8,.9,1.)*pow(max(dot(n,h),0.),160.)*agua*(1.-nub)*.32;
   float fr=pow(1.-n.z,2.4);c=mix(c,atm*(.18+.8*max(lam+.35,0.)),fr*.6);
@@ -358,7 +418,21 @@ void main(){
       tex(3, 'uAgua', TIERRA + 'agua.png');
     } catch (e) { G = null; }
   }
-  const L = (() => { const v = [-0.5, 0.36, 0.79], m = Math.hypot(...v); return v.map((x) => x / m); })();
+  // The real Sun (owner, 20 Oct 2026: «true to reality»): the point where it is overhead right now, from the
+  // standard low-precision solar formulas (good to about a hundredth of a degree), so day, night and the city lights
+  // fall where they really are this minute. The camera turns; the day/night line moves with the real Earth.
+  function solAhora(ms) {
+    const d = ms / 86400000 + 2440587.5 - 2451545.0;
+    const g = (357.529 + 0.98560028 * d) * RAD, q = 280.459 + 0.98564736 * d;
+    const lam = (q + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * RAD, eps = (23.439 - 0.00000036 * d) * RAD;
+    const dec = Math.asin(Math.sin(eps) * Math.sin(lam)) / RAD;
+    const ra = Math.atan2(Math.cos(eps) * Math.sin(lam), Math.cos(lam)) / RAD;
+    const gmst = 280.46061837 + 360.98564736629 * d;
+    const lon = ((ra - gmst) % 360 + 540) % 360 - 180;
+    return { lat: dec, lon };
+  }
+  let L = [0, 0, 1], solT = 0, SOL = solAhora(Date.now());
+  window.OrbitaSol = () => SOL;
   function pintaTierra(t, aten) {
     if (!G) return;
     gl.viewport(0, 0, cvT.width, cvT.height);
@@ -368,6 +442,7 @@ void main(){
     gl.uniform1f(u.uR, R * DPR);
     const c0 = aMundo([1, 0, 0]), c1 = aMundo([0, 1, 0]), c2 = aMundo([0, 0, 1]);
     gl.uniformMatrix3fv(u.uM, false, [...c0, ...c1, ...c2]);
+    { const ms = Date.now(); if (ms - solT > 10000) { SOL = solAhora(ms); solT = ms; } L = aVista(vec(SOL.lon, SOL.lat)); }
     gl.uniform3f(u.uL, L[0], L[1], L[2]);
     gl.uniform1f(u.uT, t); gl.uniform1f(u.uNubOn, G.nubOn); gl.uniform1f(u.uAten, aten);
     const o = new Float32Array(ONDAS * 4), k = new Float32Array(ONDAS);
@@ -437,6 +512,7 @@ void main(){
   function pintaRutas(t, dt) {
     cx2.clearRect(0, 0, W, H);
     cx2.lineCap = 'round';
+    if (window.OrbitaCapas) { cx2.save(); window.OrbitaCapas.pinta(t); cx2.restore(); }
     cx2.globalCompositeOperation = 'lighter';
     // the traces of the last half minute: the day's web, fading
     for (let i = huellas.length - 1; i >= 0; i--) {
@@ -861,6 +937,7 @@ void main(){
     if (dentro && impar) return; // behind glass, half the frames are enough
     while (cola.length && cola[0].at <= now / 1000) lanza(cola.shift(), t);
     while (ondas.length && t - ondas[0].t0 > 3) ondas.shift();
+    if (Math.abs(ZOOM.zt - ZOOM.z) > 1e-4) { ZOOM.z += (ZOOM.zt - ZOOM.z) * Math.min(1, dt * 9); if (Math.abs(ZOOM.zt - ZOOM.z) < 1e-3) ZOOM.z = ZOOM.zt; R = R0 * ZOOM.z; RAIZ.style.setProperty('--cerca', ((ZOOM.z - 1) / (ZOOM.MAX - 1)).toFixed(3)); }
     avanzaVista(dentro ? dt * 2 : dt, now);
     pintaTierra(t, dentro ? 0.9 : 1);
     pintaRutas(t, dt);

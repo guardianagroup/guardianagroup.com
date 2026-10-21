@@ -11,7 +11,7 @@
 <link rel="preload" href="static/tierra/dia.jpg" as="image">
 <link rel="stylesheet" href="static/orbita.css">
 </head>
-<body>
+<body class="dock">
 <div id="escena" aria-hidden="true">
   <canvas id="estrellas"></canvas>
   <canvas id="tierra"></canvas>
@@ -34,6 +34,24 @@
     <span class="sep">·</span><span id="cuenta">Cortes en 24 h <b id="n">—</b></span>
     <span id="demo" class="demo" hidden>DEMOSTRACIÓN</span>
   </div>
+  <div id="capas" class="capas" role="group" aria-label="Capas del planeta">
+    <button type="button" data-capa="sub" aria-pressed="false" title="Ver los cables submarinos por donde viajan los datos"><i aria-hidden="true"></i>Cables submarinos</button>
+    <button type="button" data-capa="tierra" aria-pressed="false" title="Ver los cables de fibra en tierra"><i aria-hidden="true"></i>Cables de tierra</button>
+    <button type="button" data-capa="sat" aria-pressed="false" title="Ver los satélites que llevan datos, en tiempo real"><i aria-hidden="true"></i>Satélites de datos</button>
+  </div>
+  <div id="sat-vista" class="sat-vista" role="group" aria-label="Qué satélites ver" hidden>
+    <div class="seg" role="radiogroup" aria-label="Vista">
+      <button type="button" data-vista="equilibrada" role="radio" aria-checked="true" title="Todos menos Starlink, y una muestra fija de Starlink que crece al acercar">Equilibrada</button>
+      <button type="button" data-vista="todos" role="radio" aria-checked="false">Todos</button>
+      <button type="button" data-vista="cielo" role="radio" aria-checked="false" title="Solo los que están ahora a más de 25° sobre tu horizonte"><span class="cielo-t">Sobre ti</span></button>
+    </div>
+    <span class="sep" aria-hidden="true"></span>
+    <div class="orb" role="group" aria-label="Órbita">
+      <button type="button" data-orb="baja" aria-pressed="true" title="Órbita baja, por debajo de 2.000 km">Órbita baja <b></b></button>
+      <button type="button" data-orb="media" aria-pressed="true" title="Órbita media">Órbita media <b></b></button>
+      <button type="button" data-orb="geo" aria-pressed="true" title="Órbita geoestacionaria, a unos 35.786 km: parecen quietos sobre el mismo punto">Geoestacionaria <b></b></button>
+    </div>
+  </div>
   <div class="derecha">
     <button type="button" id="lugar-btn" class="lugar-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14.5s4.5-4.2 4.5-7.8a4.5 4.5 0 0 0-9 0c0 3.6 4.5 7.8 4.5 7.8z"/><circle cx="8" cy="6.7" r="1.6"/></svg><span id="lugar-nombre">Precisar ubicación</span></button>
     <div class="idiomas" role="group" aria-label="Idioma" translate="no"><button type="button" data-l="es" aria-pressed="true">ES</button><button type="button" data-l="en" aria-pressed="false">EN</button><button type="button" data-l="pt" aria-pressed="false">PT</button></div>
@@ -42,6 +60,12 @@
 </header>
 
 <nav id="puertas" aria-label="Secciones"></nav>
+<div id="zoom" class="zoom" role="group" aria-label="Acercar el planeta">
+  <button type="button" data-z="mas" aria-label="Acercar"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 3.5v9M3.5 8h9"/></svg></button>
+  <span id="zoom-nivel" class="nivel">×1</span>
+  <button type="button" data-z="menos" aria-label="Alejar"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3.5 8h9"/></svg></button>
+  <button type="button" data-z="base" class="base" aria-label="Volver al tamaño base" hidden><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a5 5 0 1 0 1.5-3.6M3 2.5v2.4h2.4"/></svg></button>
+</div>
 
 <section id="ficha" aria-live="polite">
   <div class="cuerpo">
@@ -52,6 +76,8 @@
   <a class="abrir" id="ficha-a" href="#"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg></a>
 </section>
 
+<p id="capa-nota" class="capa-nota" translate="no" aria-live="polite" hidden></p>
+<div id="sat-ficha" class="sat-ficha" translate="no" hidden><b></b><span></span></div>
 <aside id="directo" aria-label="En directo">
   <h2>EN DIRECTO</h2>
   <ul id="lista"></ul>
@@ -124,5 +150,6 @@
 <script src="static/idioma.js"></script>
 <script src="static/orbita-secciones.js"></script>
 <script src="static/orbita.js"></script>
+<script src="static/capas.js"></script>
 </body>
 </html>
