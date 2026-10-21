@@ -227,3 +227,16 @@ body.dentro #seccion .plantilla:not([hidden]) .escenario { animation: escenario 
 body.pantalla #seccion { left: 0; right: 0; top: 0; bottom: 0; border: 0; border-radius: 0; background: #06080C; backdrop-filter: none; box-shadow: none; }
 body.pantalla header, body.pantalla #escena { opacity: 0; pointer-events: none; transition: opacity .5s; }
 body.pantalla #marco { background: #06080C; }
+
+/* 20 Oct 2026 (owner): no door reading at the bottom left; the planet and the doors say enough. */
+#ficha { display: none; }
+
+/* 20 Oct 2026 (owner): nothing has been cut yet, so no live list and no cut counter. */
+body.sin-cortes #directo, body.sin-cortes #estado { display: none; }
+
+/* 20 Oct 2026 (owner): the languages, next to «Precisar ubicación», like the website's switcher. */
+.idiomas { display: inline-flex; padding: 3px; border-radius: 999px; border: 1px solid var(--line); }
+.idiomas button { all: unset; cursor: pointer; font: 500 11px/1 var(--mono); letter-spacing: .08em; color: var(--muted); padding: 7px 9px; border-radius: 999px; transition: color .2s, background .2s; }
+.idiomas button:hover { color: var(--fg); }
+.idiomas button[aria-pressed="true"] { color: #06080C; background: #9CC3E4; }
+.idiomas button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

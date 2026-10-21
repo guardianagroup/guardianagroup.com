@@ -23,6 +23,8 @@
   const RAD = Math.PI / 180;
   const RAIZ = document.documentElement;
   const DEMO = RAIZ.dataset.demo === '1';
+  // what is drawn on the canvas speaks the language on screen (static/idioma.js)
+  const T = (s) => (window.GuardianaIdioma ? window.GuardianaIdioma.t(s) : s);
   const TIERRA = RAIZ.dataset.tierra || '/static/tierra/';
   const QUIETO = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const NUBES = new URLSearchParams(location.search).get('nubes') === '1';
@@ -208,8 +210,9 @@
     // Narrow: both move off the corners and the ring keeps clear of the top and bottom lines.
     const estrecho = W < 1180;
     document.body.classList.toggle('estrecho', estrecho);
-    if (estrecho) U = Math.max(3, Math.min((H / 2 - 160) / 41, (H / 2 - 150) / 41, (W / 2 - 150) / 40.4));
-    else U = Math.max(3, Math.min(H / 100, W * 0.0062, (W / 2 - 40 - 290 - 24 - 130) / 26.4, (H / 2 - 120) / 41));
+    if (estrecho) U = Math.max(3, Math.min((H / 2 - 200) / 41, (H / 2 - 150) / 41, (W / 2 - 150) / 40.4));
+    // 20 Oct 2026 (owner): air between the header and ZERO's label at the top of the ring.
+    else U = Math.max(3, Math.min(H / 100, W * 0.0062, (W / 2 - 40 - 290 - 24 - 130) / 26.4, (H / 2 - 165) / 41));
     RAIZ.style.setProperty('--u', U.toFixed(3) + 'px');
     CX = W / 2; CY = H / 2; R = U * 31;
     for (const c of [cvE, cvT, cvR]) { c.width = Math.round(W * DPR); c.height = Math.round(H * DPR); }
@@ -419,7 +422,7 @@ void main(){
       chispas.push({ w, vx: Math.cos(a) * s, vy: Math.sin(a) * s, t0: t, vida: 0.6 + Math.random() * 0.7 });
     }
     rotulos.push({ w, t0: t, ev: v.ev });
-    if (rotulos.length > 3) rotulos.shift();
+    if (rotulos.length > 1) rotulos.shift();
     huellas.push({ ruta: v.ruta, s1: v.tc, t0: t, corte: true });
     anota(v.ev);
     late();
@@ -510,28 +513,42 @@ void main(){
       cx2.font = '500 10px "IBM Plex Mono", monospace'; cx2.fillStyle = 'rgba(232,236,241,.82)';
       cx2.textAlign = 'left'; cx2.fillText(etiquetaCasa(), qc.x + 12, qc.y + 4);
     }
-    // what was cut, said in words next to where it happened
-    const usados = [];
+    // what was cut, said in words next to where it happened. 20 Oct 2026 (owner): one at a time, it opens
+    // outwards from the planet's centre (left half to the left, right half to the right) and never covers a door,
+    // the header or the live list.
     for (let i = rotulos.length - 1; i >= 0; i--) {
       const r = rotulos[i], e = t - r.t0;
       if (e > 4.2) { rotulos.splice(i, 1); continue; }
       const q = pantalla(r.w); if (!q.ve) continue;
       const a = Math.min(1, e / 0.25) * Math.min(1, (4.2 - e) / 0.7);
-      let x = q.x + 26, y = q.y - 44;
-      for (const u of usados) if (Math.abs(u.x - x) < 220 && Math.abs(u.y - y) < 60) y = u.y - 64;
-      usados.push({ x, y });
-      rotulo(q, x, y, r.ev, a);
+      rotulo(q, r.ev, a, t);
     }
   }
-  function rotulo(q, x, y, ev, a) {
-    const l1 = 'CORTADO · ' + hora(ev.cuando), l2 = ev.quien, l3 = (ev.programa ? ev.programa + ' → ' : '') + nombrePais(ev.pais) + (ev.categoria ? ' · ' + ev.categoria : '');
+  let zonasT = -9, zonas = [];
+  function zonasOcupadas(t) {
+    if (t - zonasT < 0.8) return zonas;
+    zonasT = t; zonas = [];
+    document.querySelectorAll('#puertas .puerta button, #puertas .puerta .et, header .izq, #estado, header .derecha, #directo').forEach((el) => {
+      const b = el.getBoundingClientRect();
+      if (b.width && b.height) zonas.push({ x: b.left - 16, y: b.top - 16, w: b.width + 32, h: b.height + 32 });
+    });
+    return zonas;
+  }
+  const choca = (x, y, w, h, z) => x < z.x + z.w && x + w > z.x && y < z.y + z.h && y + h > z.y;
+  function rotulo(q, ev, a, t) {
+    const l1 = T('CORTADO') + ' · ' + hora(ev.cuando), l2 = T(ev.quien), l3 = T((ev.programa ? ev.programa + ' → ' : '') + nombrePais(ev.pais) + (ev.categoria ? ' · ' + ev.categoria : ''));
     cx2.font = '600 13px "Hanken Grotesk", sans-serif'; const w2 = cx2.measureText(l2).width;
     cx2.font = '400 11px "Hanken Grotesk", sans-serif'; const w3 = cx2.measureText(l3).width;
-    const w = Math.max(w2, w3, 110) + 22, h = 56;
-    if (x + w > W - 12) x = q.x - 26 - w;
+    const w = Math.max(w2, w3, 110) + 22, h = 56, zs = zonasOcupadas(t);
+    const fuera = q.x >= CX ? 1 : -1, dx = (s) => (s > 0 ? q.x + 26 : q.x - 26 - w);
+    const sitios = [];
+    for (const s of [fuera, -fuera]) for (const y of [q.y - h / 2, q.y + 18, q.y - h - 18]) sitios.push([dx(s), y]);
+    const libre = sitios.find(([x, y]) => x >= 12 && y >= 12 && x + w <= W - 12 && y + h <= H - 12 && !zs.some((z) => choca(x, y, w, h, z)));
+    if (!libre) return;
+    const [x, y] = libre;
     cx2.globalAlpha = a;
     cx2.strokeStyle = `rgba(${ROJO},.6)`; cx2.lineWidth = 1;
-    cx2.beginPath(); cx2.moveTo(q.x, q.y); cx2.lineTo(x < q.x ? x + w : x, y + h / 2); cx2.stroke();
+    cx2.beginPath(); cx2.moveTo(q.x, q.y); cx2.lineTo(x < q.x ? x + w : x, Math.max(y + 10, Math.min(y + h - 10, q.y))); cx2.stroke();
     cx2.fillStyle = 'rgba(8,11,16,.84)'; cx2.strokeStyle = 'rgba(224,122,108,.45)';
     cx2.beginPath(); if (cx2.roundRect) cx2.roundRect(x, y, w, h, 10); else cx2.rect(x, y, w, h); cx2.fill(); cx2.stroke();
     cx2.textAlign = 'left';
@@ -571,7 +588,11 @@ void main(){
   const cola = []; // events waiting their moment, so a take of five seconds is spread over them
   const encola = (evs, ventana) => { evs.forEach((e) => { e.at = performance.now() / 1000 + Math.random() * ventana; cola.push(e); }); cola.sort((a, b) => a.at - b.at); };
   let cortesDemo = 0;
-  if (DEMO) {
+  // 20 Oct 2026 (owner): Órbita shows no cuts while none of its sections is working yet; nothing has been cut,
+  // so nothing is drawn or counted. <html data-cortes="0"> keeps the planet clean; the demo cuts stay for later.
+  const SIN_CORTES = RAIZ.dataset.cortes === '0';
+  if (SIN_CORTES) document.body.classList.add('sin-cortes');
+  if (DEMO && !SIN_CORTES) {
     $('demo').hidden = false;
     $('n').textContent = '0';
     $('cuenta').firstChild.textContent = 'Cortes de la demostración ';
@@ -590,7 +611,7 @@ void main(){
       setTimeout(genera, 650 + Math.random() * 900);
     };
     setTimeout(genera, 2600);
-  } else {
+  } else if (!DEMO) {
     let previo = null, fallos = 0;
     const valido = (p) => /^[A-Z]{2}$/.test(p || '') && centros[p];
     const evento = (d, corte) => ({ corte, pais: d.pais, quien: d.empresa || d.red || d.destino || d.programa, programa: d.programa, categoria: CATEGORIA[d.categoria] || '', cuando: d.ultima || Date.now() });
@@ -638,7 +659,7 @@ void main(){
   const PRECISION_CIUDAD = 5000;
   let LUGAR = null;
   const origen = () => (LUGAR ? vec(LUGAR.lon, LUGAR.lat) : punto(CASA));
-  const etiquetaCasa = () => (LUGAR ? 'TU EQUIPO · ' + LUGAR.ciudad.toUpperCase() : 'TU EQUIPO · ' + (nombrePais(CASA) || CASA).toUpperCase() + ' (APROX.)');
+  const etiquetaCasa = () => (LUGAR ? T('TU EQUIPO') + ' · ' + LUGAR.ciudad.toUpperCase() : T('TU EQUIPO') + ' · ' + T((nombrePais(CASA) || CASA).toUpperCase()) + ' (' + T('APROX.') + ')');
   const apiLugar = async (metodo, cuerpo) => {
     if (DEMO) {
       if (metodo === 'PUT') { try { localStorage.setItem('guardiana_orbita_demo_lugar', JSON.stringify(cuerpo)); } catch (_) {} return cuerpo; }
