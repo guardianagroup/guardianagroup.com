@@ -699,11 +699,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 <section id="story" aria-label="La evidencia">
   <div class="wrap story-grid">
     <div>
-      <article class="chapter" data-ch="1">
+      <article class="chapter" data-ch="cab">
         <div class="ch-card r">
-          <h2>Tu computador nunca <em class="tono">guarda silencio.</em></h2>
-          <p class="ch-num g-ink">11.052</p>
-          <p>consultas a internet hizo <b>un solo computador</b> en 36 horas. Medición real en Cartagena de Indias, septiembre de 2026.</p>
+          <h2>En 30 milisegundos, tus datos ya cruzaron el océano. <em class="tono">GUARDIANA te dice adónde.</em></h2>
+          <p>La inmensa mayoría de lo que envías a otro continente viaja por cables de fibra en el fondo del mar. Antes de que termine de cargar la página, ya está en otro país. <b>GUARDIANA te muestra en cuál y en qué empresa, y lo corta si no lo autorizas.</b></p>
+          <p class="ch-note" data-live id="cab-nota">Cables submarinos reales de OpenStreetMap. Los pulsos de luz muestran el sentido del tráfico, no el tráfico real.</p>
         </div>
       </article>
       <article class="chapter" data-ch="2">
@@ -711,13 +711,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
           <h2>¿Sabías que tus datos <em>se compran y se venden cada día en subastas?</em></h2>
           <p>Cada vez que abres una web con anuncios, lo que se sabe de ti sale a subasta y gana la empresa que más paga. <b>En EE. UU. ocurre 747 veces al día por persona.</b> Tus datos viajan a empresas de países que nunca has pisado. GUARDIANA te enseña cada viaje y lo corta con un clic.</p>
           <p class="ch-note">Las rutas siguen cables submarinos reales y tramos por tierra hasta centros de datos. El camino exacto de cada conexión puede variar.</p>
-        </div>
-      </article>
-      <article class="chapter" data-ch="cab">
-        <div class="ch-card r">
-          <h2>En 30 milisegundos, tus datos ya cruzaron el océano. <em class="tono">GUARDIANA te dice adónde.</em></h2>
-          <p>La inmensa mayoría de lo que envías a otro continente viaja por cables de fibra en el fondo del mar. Antes de que termine de cargar la página, ya está en otro país. <b>GUARDIANA te muestra en cuál y en qué empresa, y lo corta si no lo autorizas.</b></p>
-          <p class="ch-note" data-live id="cab-nota">Cables submarinos reales de OpenStreetMap. Los pulsos de luz muestran el sentido del tráfico, no el tráfico real.</p>
         </div>
       </article>
       <article class="chapter" data-ch="sat">
@@ -1476,7 +1469,7 @@ let lws = $$('#lightp .lw');
 window.__setLight = (text, n) => { splitLight(text, n); lws = $$('#lightp .lw'); };
 const CAPS = [[0, 'Abres una página. Nada parece ocurrir.'], [10, 'La web envía tu ficha a una casa de subastas.'], [30, 'Llega a cientos de empresas a la vez.'], [70, 'Mientras la página carga, las empresas pujan por ti.'], [100, '']];
 
-const CH1 = document.querySelector('[data-ch="1"]');
+const CH1 = document.querySelector('.chapter'); // the story's first chapter (the cables since 21 Oct 2026)
 let FXMODE = 1; try { const q = new URLSearchParams(location.search).get('fx'); if (q) FXMODE = { a: 1, b: 2, c: 3, d: 4, '0': 0 }[q] ?? 1; } catch (e) {}
 window.__setFx = (m) => { FXMODE = m; };
 // Layout read once, not every frame (19 Oct 2026, the owner on an iPad: «va a tirones… tiembla
@@ -1601,7 +1594,7 @@ function update() {
   }
   const c1 = rectDe(CH1); const dusk = clamp((vh * 0.75 - c1.top) / (c1.height + vh * 0.35));
   T.day = 1;
-  T.fx = S.mode === 'story' ? smooth(0, 1, (vh * 0.95 - rectDe(chapters[CHX(2)]).top) / (vh * 1.7)) : (S.mode === 'auction' ? 1 : 0);
+  T.fx = S.mode === 'story' ? smooth(0, 1, (vh * 0.95 - rectDe(chapters[0]).top) / (vh * 1.25)) : (S.mode === 'auction' ? 1 : 0);
   T.sun = { intro: 1, story: 0.3, auction: 0.15, final: 1, bg: 0.25, obs: 0 }[S.mode] ?? 0.3;
   T.obs = S.mode === 'obs' ? 1 : 0;
   if (RM) Object.assign(G, T);
@@ -1695,19 +1688,25 @@ function frente() { const R = R3; return [R[6], R[7], R[8]]; } // the model poin
 function capasPortada(dt) {
   const iC = CHX('cab'), iS = CHX('sat'), iT = CHX('tie'), iN = CHX(3);
   const enS = S.mode === 'story', ch = (i) => (i >= 0 ? S.ch[i] : 0);
-  const wC = enS ? ch(iC) * (1 - ch(iS)) : 0, wS = enS ? ch(iS) * (1 - ch(iT)) : 0, wT = enS ? ch(iT) * (1 - ch(iN)) : 0;
-  if (enS && ch(CHX(2)) > 0.6) { cargaSatPortada(); cargaCabPortada(); }
+  // each layer lives from its chapter to the next one, whatever their order on the page
+  const sig = (i) => (i >= 0 && i + 1 < chapters.length ? ch(i + 1) : 0);
+  const wC = enS ? ch(iC) * (1 - sig(iC)) : 0, wS = enS ? ch(iS) * (1 - sig(iS)) : 0, wT = enS ? ch(iT) * (1 - sig(iT)) : 0;
+  if (S.story > 0 || S.mode === 'story' || pinProgress(secs.intro) > 0.5) { cargaSatPortada(); cargaCabPortada(); }
   const f = 1 - Math.pow(0.002, dt);
   CAPA.cab = lerp(CAPA.cab, wC, f); CAPA.sat = lerp(CAPA.sat, wS, f); CAPA.tie = lerp(CAPA.tie || 0, wT, f);
   CAPA.k = Math.max(CAPA.cab, CAPA.sat, CAPA.tie);
-  for (const [k, i] of [['cab', iC], ['sat', iS], ['tie', iT]]) {
+  if (enS && (G.fx || 0) > 0.001) { const q = v3(CTG[0], CTG[1]); ANI.cab.c = q; ANI.cab.e = clamp(((G.fx || 0) * 2.2 - 0.08) * Math.PI / 2, 0, Math.PI); }
+  else { ANI.cab.c = null; ANI.cab.e = 0; }
+  for (const [k, i] of [['sat', iS], ['tie', iT]]) {
     const v = enS ? ch(i) : 0, an = ANI[k];
     if (v < 0.02) { an.c = null; an.e = 0; continue; }
     if (!an.c) an.c = frente();
     an.e = Math.PI * smooth(0.12, 0.8, v); // angular radius of the ring: 0 → the whole planet
   }
-  const e = (t) => t * t * (3 - 2 * t);
-  CAPA.giro = enS ? 60 * e(ch(iC)) + 150 * e(ch(iS)) + 245 * e(ch(iT)) : CAPA.giro * 0.9;
+  const pr = (i) => clamp(ch(i)) ;
+  const objetivos = [[wC, -55 + 30 * pr(iC)], [wS, 5 + 35 * pr(iS)], [wT, 40 + 45 * pr(iT)]];
+  let w = 0, lo = 0; for (const [p, l] of objetivos) if (p > w) { w = p; lo = l; }
+  CAPA.wLon = enS ? smooth(0, 0.35, w) : 0; CAPA.lon = lo; CAPA.giro = 0;
 }
 const dentroDe = (an, p) => { if (!an.c) return false; const m = Math.hypot(p[0], p[1], p[2]) || 1; return (p[0] * an.c[0] + p[1] * an.c[1] + p[2] * an.c[2]) / m >= Math.cos(an.e); };
 function pintaAnillo(an, rgb, alpha) {
@@ -1717,7 +1716,7 @@ function pintaAnillo(an, rgb, alpha) {
   const v = [c[1] * u[2] - c[2] * u[1], c[2] * u[0] - c[0] * u[2], c[0] * u[1] - c[1] * u[0]];
   const ce = Math.cos(an.e), se = Math.sin(an.e), r = 1.006;
   ctx.globalCompositeOperation = 'lighter';
-  for (const [ancho, al, blur] of [[G.r / 40, 0.16, 0], [G.r / 110, 0.35, 0], [Math.max(1.8, G.r / 170), 1, 18]]) {
+  for (const [ancho, al, blur] of [[G.r / 26, 0.10, 0], [G.r / 70, 0.28, 0], [Math.max(1.6, G.r / 200), 0.95, 16]]) {
     ctx.lineWidth = ancho; ctx.strokeStyle = `rgba(${rgb},${al * alpha})`; ctx.shadowColor = `rgb(${rgb})`; ctx.shadowBlur = blur; ctx.globalAlpha = 1;
     ctx.beginPath(); let pen = false;
     for (let i = 0; i <= 160; i++) { const t = i / 160 * Math.PI * 2, ct = Math.cos(t), st = Math.sin(t);
@@ -1759,7 +1758,6 @@ function pintaCapas(dt) {
         cometaCapa(w, t, Math.min(10, w.length - 1), sentido > 0 ? '190,220,250' : '244,246,248', lw * 0.8, 0.7 * CAPA.cab * a);
       }
     });
-    pintaAnillo(ANI.cab, '156,195,228', CAPA.cab * a);
   }
   // 2 · data satellites, in their real position now
   if (CAPA.sat > 0.01 && S2 && S2.N) {
@@ -1779,7 +1777,7 @@ function pintaCapas(dt) {
       ctx.globalAlpha = CAPA.sat * a * (geoEs ? 0.95 : 0.78); ctx.fillStyle = geoEs ? '#F4F6F8' : '#9CC3E4';
       const s2 = geoEs ? tam * 1.4 : tam; ctx.fillRect(p[0] - s2 / 2, p[1] - s2 / 2, s2, s2);
     }
-    pintaAnillo(ANI.sat, '244,246,248', CAPA.sat * a);
+    pintaAnillo(ANI.sat, '158,219,255', CAPA.sat * a);
   }
   // 3 · land fibre, amber, next to the submarine cables in steel so the two read apart
   if (CAPA.tie > 0.01 && C && C.lineas.length) {
@@ -1793,7 +1791,7 @@ function pintaCapas(dt) {
       for (const q of C.centros) { if (!dentroDe(ANI.tie, q)) continue; const p = project(q); if (!p[2]) continue; ctx.rect(p[0] - tm / 2, p[1] - tm / 2, tm, tm); }
       ctx.stroke();
     }
-    pintaAnillo(ANI.tie, '244,246,248', CAPA.tie * a);
+    pintaAnillo(ANI.tie, '158,219,255', CAPA.tie * a);
   }
 }
 document.addEventListener('guardiana:lang', () => { notaSat(); notaCab(); });
@@ -1804,7 +1802,7 @@ let A = { routes: 0, cut: 0, ctg: 0, dim: 0, bids: 0, ai: 0 };
 function drawRoutes(dt) {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, vw, vh);
   const tgt = {
-    ctg: S.mode === 'story' ? smooth(0.1, 0.8, S.ch[CHX(1)]) * (1 - CAPA.k) : (S.mode === 'auction' ? 1 : 0),
+    ctg: S.mode === 'story' ? smooth(0.1, 0.8, S.ch[CHX(2)]) * (1 - CAPA.k) : (S.mode === 'auction' ? 1 : 0),
     routes: S.mode === 'story' ? S.ch[CHX(2)] * (1 - CAPA.k) : 0,
     cut: S.mode === 'story' ? S.ch[CHX(5)] : 0,
     dim: S.mode === 'story' ? S.ch[CHX(6)] : 0,
@@ -2037,7 +2035,8 @@ function frame(now) {
       // once the data is on screen the planet turns east: the Americas, the Atlantic cables, Europe and beyond
       const tv = S.mode === 'story' ? (S.travel || 0) : 0, te = tv * tv * (3 - 2 * tv);
       const tl = (S.mode === 'story' ? LON_STORY - 10 + 118 * te + CAPA.giro : LON_AUCTION) + Math.sin(clock * 0.22) * 5 * (1 - te);
-      let d = ((tl - G.lon + 540) % 360) - 180; G.lon += d * (1 - Math.pow(0.08, dt));
+      let tl2 = tl; if (S.mode === 'story' && CAPA.wLon > 0.001) { const dd = ((CAPA.lon - tl + 540) % 360) - 180; tl2 = tl + dd * CAPA.wLon; }
+      let d = ((tl2 - G.lon + 540) % 360) - 180; G.lon += d * (1 - Math.pow(0.08, dt));
       G.lat = lerp(G.lat, S.mode === 'story' ? LAT_STORY + 14 * te : LAT_AUCTION, 1 - Math.pow(0.08, dt));
     } else {
       G.lon -= dt * 7 + scrollV * 0.05; G.lat = lerp(G.lat, 18, 1 - Math.pow(0.2, dt));
