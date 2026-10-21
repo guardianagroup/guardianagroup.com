@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-idiomas="es,en,pt,fr,de,it,nl,sv,da,nb,fi,is,pl,uk,ru,tr,zh,ja,ko,hi,bn,id,vi,th,ar,fa,he,ur,zh-tw,cs,ro,hu,el,sk,bg,hr,ms,fil,sw,ta,pt-pt">
+<html lang="en" data-idiomas="es,en,pt,fr,de,it,nl,sv,da,nb,fi,is,pl,uk,ru,tr,zh,ja,ko,hi,bn,id,vi,th,ar,fa,he,ur,zh-tw,cs,ro,hu,el,sk,bg,hr,ms,fil,sw,ta,te,pt-pt">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -541,6 +541,11 @@ html.i18n-espera .content,html.i18n-espera #phrase{opacity:0}
 [dir=rtl] :is(.step .t,.ncell .v,.tv){unicode-bidi:plaintext;text-align:right}
 [dir=rtl] .tb{direction:ltr;unicode-bidi:isolate}
 [dir=rtl] .term{direction:ltr}
+/* Tamil and Telugu words are long and their letters wide: on a phone the big titles are a size smaller, and a word that still does not fit may break */
+:is(:lang(ta),:lang(te)) :is(h1,h2,.h2,#lightp){overflow-wrap:break-word}
+@media (max-width:600px){:is(:lang(ta),:lang(te)) :is(.h2,.ch-card h2){font-size:34px}}
+/* the cut control: on a narrow screen the address goes under the label instead of leaving the screen */
+.cutctl{max-width:100%}.cutctl .st{flex-wrap:wrap;row-gap:2px;min-width:0}
 /* Arabic script joins its letters: any letter-spacing would break the words apart */
 :is(:lang(ar),:lang(fa),:lang(ur)) *{letter-spacing:0!important}
 :lang(he) *{letter-spacing:0!important}
