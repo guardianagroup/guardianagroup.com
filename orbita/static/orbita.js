@@ -426,7 +426,21 @@ void main(){
       tex(3, 'uAgua', TIERRA + 'agua.png');
     } catch (e) { G = null; }
   }
-  const L = (() => { const v = [-0.5, 0.36, 0.79], m = Math.hypot(...v); return v.map((x) => x / m); })();
+  // The real Sun (owner, 20 Oct 2026: «true to reality»): the point where it is overhead right now, from the
+  // standard low-precision solar formulas (good to about a hundredth of a degree), so day, night and the city lights
+  // fall where they really are this minute. The camera turns; the day/night line moves with the real Earth.
+  function solAhora(ms) {
+    const d = ms / 86400000 + 2440587.5 - 2451545.0;
+    const g = (357.529 + 0.98560028 * d) * RAD, q = 280.459 + 0.98564736 * d;
+    const lam = (q + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * RAD, eps = (23.439 - 0.00000036 * d) * RAD;
+    const dec = Math.asin(Math.sin(eps) * Math.sin(lam)) / RAD;
+    const ra = Math.atan2(Math.cos(eps) * Math.sin(lam), Math.cos(lam)) / RAD;
+    const gmst = 280.46061837 + 360.98564736629 * d;
+    const lon = ((ra - gmst) % 360 + 540) % 360 - 180;
+    return { lat: dec, lon };
+  }
+  let L = [0, 0, 1], solT = 0, SOL = solAhora(Date.now());
+  window.OrbitaSol = () => SOL;
   function pintaTierra(t, aten) {
     if (!G) return;
     gl.viewport(0, 0, cvT.width, cvT.height);
@@ -436,6 +450,7 @@ void main(){
     gl.uniform1f(u.uR, R * DPR);
     const c0 = aMundo([1, 0, 0]), c1 = aMundo([0, 1, 0]), c2 = aMundo([0, 0, 1]);
     gl.uniformMatrix3fv(u.uM, false, [...c0, ...c1, ...c2]);
+    { const ms = Date.now(); if (ms - solT > 10000) { SOL = solAhora(ms); solT = ms; } L = aVista(vec(SOL.lon, SOL.lat)); }
     gl.uniform3f(u.uL, L[0], L[1], L[2]);
     gl.uniform1f(u.uT, t); gl.uniform1f(u.uNubOn, G.nubOn); gl.uniform1f(u.uAten, aten);
     const o = new Float32Array(ONDAS * 4), k = new Float32Array(ONDAS);

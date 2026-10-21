@@ -72,6 +72,9 @@
     'Cables submarinos': ['Submarine cables', 'Cabos submarinos'],
     'Acercar el planeta': ['Zoom the planet', 'Aproximar o planeta'],
     'Acercar': ['Zoom in', 'Aproximar'],
+    'en la sombra de la Tierra': ["in the Earth's shadow", 'na sombra da Terra'],
+    'al sol': ['in sunlight', 'ao sol'],
+    'la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms': ['light travels both ways at once, in slow motion: it crosses the Atlantic in about 30 ms', 'a luz viaja nos dois sentidos ao mesmo tempo, em câmera lenta: cruza o Atlântico em cerca de 30 ms'],
     'Alejar': ['Zoom out', 'Afastar'],
     'Volver al tamaño base': ['Back to base size', 'Voltar ao tamanho base'],
     'Cables de tierra': ['Land cables', 'Cabos terrestres'],
@@ -96,7 +99,7 @@
     'No se pudieron cargar los satélites.': ['The satellites could not be loaded.', 'Não foi possível carregar os satélites.'],
     'No se pudieron cargar los cables.': ['The cables could not be loaded.', 'Não foi possível carregar os cabos.'],
     'No se pudieron cargar los cables de tierra.': ['The land cables could not be loaded.', 'Não foi possível carregar os cabos terrestres.'],
-    'Satélites bajos a su altura real; los de órbita media y geoestacionaria, en los anillos exteriores (distancia no a escala).': ['Low satellites at their real height; medium and geostationary ones on the outer rings (distance not to scale).', 'Satélites baixos na altura real; os de órbita média e geoestacionária, nos anéis externos (distância fora de escala).'],
+    'Satélites bajos a su altura real; los de órbita media y geoestacionaria, en los anillos exteriores (distancia no a escala). Más tenues, los que están ahora en la sombra de la Tierra.': ['Low satellites at their real height; medium and geostationary ones on the outer rings (distance not to scale). Dimmer: those now in the Earth\'s shadow.', 'Satélites baixos na altura real; os de órbita média e geoestacionária, nos anéis externos (distância fora de escala). Mais tênues: os que estão agora na sombra da Terra.'],
     // what is cut, Órbita and ZERO
     'Este PC': ['This PC', 'Este PC'],
     'Teléfono': ['Phone', 'Telefone'],

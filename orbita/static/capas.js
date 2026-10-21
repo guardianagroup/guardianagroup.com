@@ -35,7 +35,10 @@
           }
           w.push([v[0] * 1.003, v[1] * 1.003, v[2] * 1.003]);
         });
-        return { n: c.n, w };
+        // arc length along the cable (radians of the sphere), for the light travelling inside it
+        const acc = [0];
+        for (let j = 1; j < w.length; j++) { const a = w[j - 1], b = w[j]; acc.push(acc[j - 1] + Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]) / 1.003); }
+        return { n: c.n, w, acc, L: acc[acc.length - 1], fase: Math.random() };
       });
       capas[clave] = { d, lineas, nombres: new Set(d.cables.map((c) => c.n).filter(Boolean)).size };
     } catch (e) { capas[clave] = { error: true }; }
@@ -59,7 +62,7 @@
       }
       const N = rec.length;
       S = { d, rec, g: Uint8Array.from(g), nom, N, pos: new Float64Array(N * 3), vel: new Float64Array(N * 3), t: new Float64Array(N), ok: new Uint8Array(N),
-            sx: new Float32Array(N), sy: new Float32Array(N), vis: new Uint8Array(N), arriba: new Uint8Array(N), cursor: 0, nArriba: 0, tArriba: 0 };
+            sx: new Float32Array(N), sy: new Float32Array(N), sombra: new Uint8Array(N), vis: new Uint8Array(N), arriba: new Uint8Array(N), cursor: 0, nArriba: 0, tArriba: 0 };
       for (let i = 0; i < N; i++) propaga(i, Date.now());
     } catch (e) { S = { error: true }; }
     cargando.sat = false; pintaNota();
@@ -83,8 +86,41 @@
     const cx = p.ctx, G = p.geo;
     cx.globalCompositeOperation = 'lighter';
     if (estado.tierra && capas.tierra && capas.tierra.lineas) pintaLineas(cx, p, G, capas.tierra.lineas, `rgba(${ACERO},.30)`, 0.7);
-    if (estado.sub && capas.sub && capas.sub.lineas) pintaLineas(cx, p, G, capas.sub.lineas, `rgba(${ACERO},.62)`, 1);
+    if (estado.sub && capas.sub && capas.sub.lineas) { pintaLineas(cx, p, G, capas.sub.lineas, `rgba(${ACERO},.62)`, 1); pintaLuz(cx, p, G, capas.sub.lineas, t); }
     if (estado.sat && S && S.N) pintaSat(cx, p, G, t);
+  }
+  // The light inside the fibre (owner, 20 Oct 2026: «how the data travels, in the right direction»).
+  // True to the physics: every submarine fibre carries data both ways at once, at the same speed (light in glass,
+  // about 200,000 km/s). Shown in slow motion, the same speed on every cable; nothing here claims real traffic.
+  const VLUZ = 0.11;        // radians of the planet per second on screen (slow motion)
+  const PASO = 0.42;        // one pulse every this many radians of cable, in each direction
+  function puntoEn(l, s) {
+    let a = 0, b = l.acc.length - 1;
+    while (b - a > 1) { const m = (a + b) >> 1; if (l.acc[m] <= s) a = m; else b = m; }
+    const d = l.acc[b] - l.acc[a] || 1, f = (s - l.acc[a]) / d, A = l.w[a], B = l.w[b];
+    return [A[0] + (B[0] - A[0]) * f, A[1] + (B[1] - A[1]) * f, A[2] + (B[2] - A[2]) * f];
+  }
+  function pintaLuz(cx, p, G, lineas, t) {
+    const cola = [0, 0.012, 0.024], alfa = [0.95, 0.42, 0.16], tam = [1.7, 1.4, 1.1];
+    for (let c = 0; c < 3; c++) {
+      cx.fillStyle = c ? `rgba(${ACERO},${alfa[c]})` : `rgba(${BLANCO},${alfa[c]})`;
+      const h = tam[c] / 2;
+      for (const l of lineas) {
+        if (l.L < 0.01) continue;
+        const n = Math.max(1, Math.round(l.L / PASO)), sep = l.L / n;
+        for (let dir = 0; dir < 2; dir++) {
+          const base = ((t * VLUZ + l.fase * sep + dir * sep / 2) % sep);
+          for (let k = 0; k < n; k++) {
+            let s = base + k * sep - cola[c];
+            if (s < 0) continue;
+            if (dir) s = l.L - s;
+            const v = p.aVista(puntoEn(l, s));
+            if (v[2] <= 0.02) continue;
+            cx.fillRect(G.CX + G.R * v[0] - h, G.CY - G.R * v[1] - h, tam[c], tam[c]);
+          }
+        }
+      }
+    }
   }
   function pintaLineas(cx, p, G, lineas, color, ancho) {
     cx.strokeStyle = color; cx.lineWidth = ancho; cx.beginPath();
@@ -98,6 +134,23 @@
     }
     cx.stroke();
   }
+  // Starlink-like low fleet, other low/medium orbits, geostationary: steel, steel, cold white
+  let SPR = null;
+  function sprites() {
+    if (SPR) return SPR;
+    const defs = [[1.7, ACERO, 0.7], [2.2, ACERO, 0.92], [2.8, BLANCO, 0.92]];
+    SPR = defs.map(([diam, rgb, a]) => {
+      const k = 4, d = Math.ceil(diam + 3), c = document.createElement('canvas');
+      c.width = c.height = d * k;
+      const g = c.getContext('2d'), m = d * k / 2, gr = g.createRadialGradient(m, m, 0, m, m, m);
+      const nuc = diam / 2 / (d / 2);
+      gr.addColorStop(0, `rgba(${rgb},${a})`); gr.addColorStop(nuc * 0.75, `rgba(${rgb},${a})`);
+      gr.addColorStop(nuc, `rgba(${rgb},${a * 0.45})`); gr.addColorStop(1, `rgba(${rgb},0)`);
+      g.fillStyle = gr; g.fillRect(0, 0, d * k, d * k);
+      return { img: c, d };
+    });
+    return SPR;
+  }
   function pintaSat(cx, p, G, t) {
     const ahora = Date.now(), N = S.N;
     // refresh about 1/120 of the fleet per frame: every satellite is recomputed every two seconds or so
@@ -108,6 +161,10 @@
     let ox = 0, oy = 0, oz = 0, ux = 0, uy = 0, uz = 0, n = 0;
     if (cuentaArriba) { const a = L.lat * RAD, b = L.lon * RAD; ux = Math.cos(a) * Math.cos(b); uy = Math.cos(a) * Math.sin(b); uz = Math.sin(a); ox = ux * RE; oy = uy * RE; oz = uz * RE; }
     const R = G.R, CX = G.CX, CY = G.CY;
+    // the real Sun (computed in orbita.js): a satellite inside the Earth's shadow is not lit, so it is drawn dim
+    const sol = window.OrbitaSol ? window.OrbitaSol() : null;
+    let sx0 = 0, sy0 = 0, sz0 = 0;
+    if (sol) { const a = sol.lat * RAD, b = sol.lon * RAD; sx0 = Math.cos(a) * Math.cos(b); sy0 = Math.cos(a) * Math.sin(b); sz0 = Math.sin(a); }
     const capasPinta = [[], [], []]; // starlink-like low fleet, other low/medium, geostationary
     for (let i = 0; i < N; i++) {
       if (!S.ok[i]) { S.vis[i] = 0; continue; }
@@ -128,18 +185,26 @@
       const x = CX + R * v[0], y = CY - R * v[1];
       S.sx[i] = x; S.sy[i] = y;
       const alto = r - RE;
-      capasPinta[alto > 30000 ? 2 : S.g[i] === 0 ? 0 : 1].push(i);
+      let sombra = 0;
+      if (sol) { const d = ex * sx0 + ey * sy0 + ez * sz0; if (d < 0 && r * r - d * d < RE * RE) sombra = 1; }
+      S.sombra[i] = sombra;
+      capasPinta[alto > 30000 ? 2 : S.g[i] === 0 ? 0 : 1].push(sombra ? -1 - i : i);
     }
     if (cuentaArriba) { S.nArriba = n; S.tArriba = ahora; pintaNota(); }
-    const tam = [1.3, 1.9, 2.4], col = [`rgba(${ACERO},.55)`, `rgba(${ACERO},.85)`, `rgba(${BLANCO},.85)`];
+    // small soft discs, one pre-drawn sprite per kind (agency, 20 Oct 2026); in sunlight full, in the shadow dim
     for (let c = 0; c < 3; c++) {
-      cx.fillStyle = col[c]; const s = tam[c], h = s / 2;
-      for (const i of capasPinta[c]) cx.fillRect(S.sx[i] - h, S.sy[i] - h, s, s);
+      const sp = sprites()[c], s = sp.d, h = s / 2;
+      for (const j of capasPinta[c]) {
+        const sombra = j < 0, i = sombra ? -1 - j : j;
+        cx.globalAlpha = sombra ? 0.28 : 1;
+        cx.drawImage(sp.img, S.sx[i] - h, S.sy[i] - h, s, s);
+      }
     }
+    cx.globalAlpha = 1;
     // the ones over your sky right now: a quiet ring each
     if (L) {
       cx.fillStyle = `rgba(${BLANCO},.95)`;
-      for (let i = 0; i < N; i++) if (S.arriba[i] && S.vis[i]) cx.fillRect(S.sx[i] - 1.2, S.sy[i] - 1.2, 2.4, 2.4);
+      const sp = sprites()[2], h = sp.d / 2; for (let i = 0; i < N; i++) if (S.arriba[i] && S.vis[i]) cx.drawImage(sp.img, S.sx[i] - h, S.sy[i] - h, sp.d, sp.d);
     }
     if (marcado >= 0 && S.vis[marcado]) {
       cx.strokeStyle = `rgba(${BLANCO},.95)`; cx.lineWidth = 1.4;
@@ -165,7 +230,7 @@
     }
     if (estado.sub) {
       const c = capas.sub;
-      partes.push(c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + ' · © OpenStreetMap (ODbL) · ' + T('puede faltar alguno') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
+      partes.push(c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + ' · © OpenStreetMap (ODbL) · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
     }
     if (estado.tierra) {
       const c = capas.tierra;
@@ -174,7 +239,7 @@
     el.textContent = partes.join('   ·   ');
     el.hidden = !partes.length;
     document.body.classList.toggle('ver-sat', estado.sat);
-    if (estado.sat) el.title = T('Satélites bajos a su altura real; los de órbita media y geoestacionaria, en los anillos exteriores (distancia no a escala).');
+    if (estado.sat) el.title = T('Satélites bajos a su altura real; los de órbita media y geoestacionaria, en los anillos exteriores (distancia no a escala). Más tenues, los que están ahora en la sombra de la Tierra.');
     else el.removeAttribute('title');
   }
 
@@ -194,7 +259,7 @@
     const k = i * 3, r = Math.hypot(S.pos[k], S.pos[k + 1], S.pos[k + 2]);
     const grupo = S.d.grupos[S.g[i]];
     f.querySelector('b').textContent = S.nom[i];
-    f.querySelector('span').textContent = (grupo ? grupo.nombre : '') + ' · ' + num(Math.round(r - RE)) + ' km ' + T('de altura') + (S.arriba[i] ? ' · ' + T('sobre tu cielo ahora') : '');
+    f.querySelector('span').textContent = (grupo ? grupo.nombre : '') + ' · ' + num(Math.round(r - RE)) + ' km ' + T('de altura') + ' · ' + T(S.sombra[i] ? 'en la sombra de la Tierra' : 'al sol') + (S.arriba[i] ? ' · ' + T('sobre tu cielo ahora') : '');
     f.hidden = false;
     const G = P().geo;
     f.style.left = Math.min(G.W - 240, x + 14) + 'px'; f.style.top = Math.max(70, y - 46) + 'px';
