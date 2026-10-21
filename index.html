@@ -1666,7 +1666,17 @@ async function cargaCabPortada() {
     const largos = lineas.map((w) => { let L = 0; for (let i = 1; i < w.length; i++) L += Math.acos(clamp((w[i][0] * w[i - 1][0] + w[i][1] * w[i - 1][1] + w[i][2] * w[i - 1][2]) / (1.004 * 1.004), -1, 1)); return L; });
     const nombres = new Set(d.cables.map((c) => c.n).filter(Boolean)).size;
     const centros = pu && pu.puntos ? pu.puntos.filter((x) => x[2] === 'datos').map((x) => { const v = v3(x[0], x[1]); return [v[0] * 1.004, v[1] * 1.004, v[2] * 1.004]; }) : [];
-    CAP.cab = { lineas, largos, nombres, tierra, centros, kmTierra: dt0 && dt0.medida ? dt0.medida.km : 0 };
+    // illustrative links: each data centre to its nearest neighbour between 300 and 2,500 km (said so on screen)
+    const enlaces = [], vistos = new Set(), cmin = Math.cos(2500 / 6371), cmax = Math.cos(300 / 6371);
+    for (let j = 0; j < centros.length; j++) {
+      const a2 = centros[j]; let mejor = -1, mc = -2;
+      for (let k = 0; k < centros.length; k++) { if (k === j) continue; const b2 = centros[k]; const c2 = (a2[0] * b2[0] + a2[1] * b2[1] + a2[2] * b2[2]) / (1.004 * 1.004); if (c2 < cmax && c2 > cmin && c2 > mc) { mc = c2; mejor = k; } }
+      if (mejor < 0) continue; const clave = j < mejor ? j + ':' + mejor : mejor + ':' + j; if (vistos.has(clave)) continue; vistos.add(clave);
+      const b2 = centros[mejor], m = [(a2[0] + b2[0]) / 2, (a2[1] + b2[1]) / 2, (a2[2] + b2[2]) / 2], ml = Math.hypot(m[0], m[1], m[2]), alto = 1.004 + 0.5 * Math.acos(clamp(mc, -1, 1)) * 0.25;
+      const pts = []; for (let t = 0; t <= 8; t++) { const u = t / 8, q = [a2[0] * (1 - u) + b2[0] * u, a2[1] * (1 - u) + b2[1] * u, a2[2] * (1 - u) + b2[2] * u], ql = Math.hypot(q[0], q[1], q[2]), h = 1.004 + (alto - 1.004) * Math.sin(Math.PI * u); pts.push([q[0] / ql * h, q[1] / ql * h, q[2] / ql * h]); }
+      enlaces.push({ j, pts });
+    }
+    CAP.cab = { lineas, largos, nombres, tierra, centros, enlaces, kmTierra: dt0 && dt0.medida ? dt0.medida.km : 0 };
     notaCab();
   } catch (e) { CAP.cab = { lineas: [], largos: [], error: true }; }
 }
@@ -1677,9 +1687,9 @@ function notaCab() {
       : l === 'pt' ? `${numPortada(nombres)} cabos submarinos reais do OpenStreetMap (ODbL); faltam alguns.` + ' Os pulsos mostram o sentido do tráfego, não o tráfego real.'
       : `${numPortada(nombres)} cables submarinos reales de OpenStreetMap (ODbL); faltan algunos.` + ' Los pulsos de luz muestran el sentido del tráfico, no el tráfico real.'; }
   const et = document.getElementById('tie-nota'), ndc = C.centros ? numPortada(C.centros.length) : '0';
-  if (et) et.textContent = l === 'en' ? `${ndc} data centres and ${km} km of land fibre recorded in OpenStreetMap (ODbL). It is only a small part of the real network: most land fibre is not in open maps. Land fibre in white, data centres as white points.`
-    : l === 'pt' ? `${ndc} centros de dados e ${km} km de fibra terrestre registrados no OpenStreetMap (ODbL). É só uma pequena parte da rede real: a maior parte da fibra terrestre não está em mapas abertos. Fibra terrestre em branco, centros de dados em pontos brancos.`
-    : `${ndc} centros de datos y ${km} km de fibra en tierra registrados en OpenStreetMap (ODbL). Es solo una pequeña parte de la red real: la mayor parte de la fibra en tierra no está en mapas abiertos. Fibra en tierra en blanco, centros de datos en puntos blancos.`;
+  if (et) et.textContent = l === 'en' ? `${ndc} data centres and ${km} km of land fibre recorded in OpenStreetMap (ODbL). It is only a small part of the real network: most land fibre is not in open maps. Land fibre in white, data centres as white points. The lines between data centres are illustrative: each joins its nearest neighbour, not a real route.`
+    : l === 'pt' ? `${ndc} centros de dados e ${km} km de fibra terrestre registrados no OpenStreetMap (ODbL). É só uma pequena parte da rede real: a maior parte da fibra terrestre não está em mapas abertos. Fibra terrestre em branco, centros de dados em pontos brancos. As linhas entre centros são ilustrativas: unem cada um ao vizinho mais próximo, não são rotas reais.`
+    : `${ndc} centros de datos y ${km} km de fibra en tierra registrados en OpenStreetMap (ODbL). Es solo una pequeña parte de la red real: la mayor parte de la fibra en tierra no está en mapas abiertos. Fibra en tierra en blanco, centros de datos en puntos blancos. Las líneas entre centros son ilustrativas: unen cada uno con su vecino más cercano, no son rutas reales.`;
 }
 // Each layer arrives with its own ring: a circle that opens from the point facing you, sweeps over the
 // whole planet and leaves its layer behind. The ring is tied to the chapter's own scroll, so the words
@@ -1791,6 +1801,7 @@ function pintaCapas(dt) {
     const tam = Math.max(1.4, G.r / 230);
     for (let i = 0; i < S2.N; i++) {
       if (!S2.ok[i]) continue;
+      if (ahora - S2.t[i] > 4000) propagaPortada(i, ahora); // after a while hidden, recompute: never extrapolate stale positions
       const k = i * 3, ds = (ahora - S2.t[i]) / 1000;
       const X = S2.pos[k] + S2.vel[k] * ds, Y = S2.pos[k + 1] + S2.vel[k + 1] * ds, Z = S2.pos[k + 2] + S2.vel[k + 2] * ds;
       const ex = X * cg + Y * sg, ey = -X * sg + Y * cg, ez = Z, r = Math.hypot(ex, ey, ez), alt = r - RE_KM;
@@ -1809,9 +1820,21 @@ function pintaCapas(dt) {
       C.tierra.forEach((w, j) => { if (w.length < 3) return; const t = ((clock * 0.12 + j * 0.29) % 1); if ((j * 0.6180339887) % 1 > ANI.tie.p) return; cometaCapa(w, t, Math.min(6, w.length - 1), '244,246,248', lw * 0.7, 0.8 * CAPA.tieVis * a); });
     }
     if (C.centros && C.centros.length) { // data centres recorded in OpenStreetMap: small amber squares
-      const spr = spriteCentro(), lat = 0.5 + 0.5 * Math.sin(clock * 2.2), tam = Math.max(10, G.r / 34) * (0.95 + 0.08 * lat);
-      ctx.globalCompositeOperation = 'source-over'; ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high'; ctx.globalAlpha = CAPA.tieVis * a;
-      for (let j = 0; j < C.centros.length; j++) { const q = C.centros[j]; if ((j * 0.6180339887) % 1 > ANI.tie.p) continue; const p = project(q); if (!p[2]) continue; ctx.drawImage(spr, p[0] - tam / 2, p[1] - tam / 2, tam, tam); }
+      if (C.enlaces && C.enlaces.length) {
+        ctx.lineWidth = Math.max(0.6, lw * 0.35); ctx.strokeStyle = 'rgb(156,195,228)'; ctx.globalAlpha = 0.28 * CAPA.tieVis * a; ctx.beginPath();
+        for (const e of C.enlaces) { if ((e.j * 0.6180339887) % 1 > ANI.tie.p) continue; let pen = false; for (const q of e.pts) { const p = project(q); if (!p[2]) { pen = false; continue; } if (!pen) { ctx.moveTo(p[0], p[1]); pen = true; } else ctx.lineTo(p[0], p[1]); } }
+        ctx.stroke();
+        C.enlaces.forEach((e, n) => { if (n % 3 || (e.j * 0.6180339887) % 1 > ANI.tie.p) return; const t = (clock * 0.35 + n * 0.173) % 1; cometaCapa(e.pts, n % 2 ? t : 1 - t, 3, '190,220,250', lw * 0.6, 0.6 * CAPA.tieVis * a); });
+      }
+      const spr = spriteCentro(), tam = Math.max(11, G.r / 30);
+      ctx.globalCompositeOperation = 'lighter'; ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+      for (let j = 0; j < C.centros.length; j++) {
+        const q = C.centros[j]; if ((j * 0.6180339887) % 1 > ANI.tie.p) continue; const p = project(q); if (!p[2]) continue;
+        // a lighthouse: each one comes and goes on its own phase
+        const fase = (j * 2.39996) % 6.2832, luz = Math.pow(0.5 + 0.5 * Math.sin(clock * 1.7 + fase), 2.2);
+        ctx.globalAlpha = CAPA.tieVis * a * (0.22 + 0.78 * luz); const t2 = tam * (0.8 + 0.35 * luz);
+        ctx.drawImage(spr, p[0] - t2 / 2, p[1] - t2 / 2, t2, t2);
+      }
       ctx.globalCompositeOperation = 'lighter';
     }
   }
