@@ -66,17 +66,17 @@
     { id: 'zero', n: 'ZERO', s: 'Navegador', d: 'El navegador que muestra cada corte, en directo.', url: null, aparte: 'ZERO es un programa aparte: se abre en su propia ventana.' },
     { id: 'ia', n: 'Tu IA', s: 'Qué sabe de ti', d: 'Qué sabe tu IA de ti, con recibo firmado.', url: '/ia' },
   ];
-  // 20 Oct 2026 (owner): ZERO is the only door that works; every other one says «En construcción»
-  // and promises nothing. ZERO opens the browser itself (zero/), full screen, no planet behind.
-  for (const p of PUERTAS) {
-    if (p.id === 'zero') { p.pagina = 'zero/?orbita=1&entrada=0'; continue; }
-    p.s = 'En construcción'; p.desarrollo = true; p.url = null; p.aparte = null;
-    p.d = p.d.replace(/^Llegará cuando esté probada\. Hasta entonces, no se promete\.$/, 'Una segunda opinión sobre tus archivos, con reglas abiertas.') + ' Llegará cuando esté terminada y probada.';
-  }
+  // 20 Oct 2026 (owner): «nueve es demasiado: simplifícalo al máximo». Three doors, the website's three
+  // guardians («Una descarga. Tres guardianes»): ZERO on top, the only one that works, opens the browser
+  // itself full screen; Radiografías and Comunicaciones say «En construcción» and promise nothing.
+  PUERTAS.splice(0, PUERTAS.length,
+    { id: 'zero', n: 'ZERO', s: 'Navegador', d: 'El navegador que muestra cada corte, en directo.', pagina: 'zero/?orbita=1&entrada=0' },
+    { id: 'radiografias', n: 'Radiografías', s: 'En construcción', d: 'A qué empresas y países habla tu computador, tu IA y tu antivirus. Llegará cuando esté terminada y probada.', url: null, desarrollo: true },
+    { id: 'comunicaciones', n: 'Comunicaciones', s: 'En construcción', d: 'Chat, llamadas y archivos cifrados de extremo a extremo. Llegará cuando esté terminada y probada.', url: null, desarrollo: true });
   const nav = $('puertas');
   const NP = PUERTAS.length;
   PUERTAS.forEach((p, i) => {
-    const a = (i + 0.5) * 2 * Math.PI / NP, s = Math.sin(a), c = Math.cos(a);
+    const a = (NP === 3 ? i : i + 0.5) * 2 * Math.PI / NP, s = Math.sin(a), c = Math.cos(a); // three: ZERO at the top
     const el = document.createElement('div');
     el.className = 'puerta';
     el.style.left = `calc(50% + var(--anillo) * ${s.toFixed(4)})`;
@@ -669,9 +669,9 @@ void main(){
   const metros = (m) => (m < 1000 ? Math.max(1, Math.round(m)) + ' m' : (m / 1000).toFixed(m < 10000 ? 1 : 0).replace('.', ',') + ' km');
   function pintaLugar() {
     const b = $('lugar-btn');
-    $('lugar-nombre').textContent = LUGAR ? LUGAR.ciudad : 'Situar este equipo';
+    $('lugar-nombre').textContent = LUGAR ? LUGAR.ciudad : 'Precisar ubicación';
     b.classList.toggle('falta', !LUGAR);
-    b.setAttribute('aria-label', LUGAR ? 'Este equipo está en ' + LUGAR.ciudad + '. Cambiar' : 'Situar este equipo en su ciudad');
+    b.setAttribute('aria-label', LUGAR ? 'Este equipo está en ' + LUGAR.ciudad + '. Cambiar' : 'Precisar la ubicación de este equipo');
   }
   // The card: one calm question over the planet, in a few states.
   const caja = $('lugar');
