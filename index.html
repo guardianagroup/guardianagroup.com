@@ -1671,7 +1671,10 @@ async function cargaCabPortada() {
     for (let j = 0; j < centros.length; j++) {
       const a2 = centros[j]; let mejor = -1, mc = -2;
       for (let k = 0; k < centros.length; k++) { if (k === j) continue; const b2 = centros[k]; const c2 = (a2[0] * b2[0] + a2[1] * b2[1] + a2[2] * b2[2]) / (1.004 * 1.004); if (c2 < cmax && c2 > cmin && c2 > mc) { mc = c2; mejor = k; } }
-      if (mejor < 0) continue; const clave = j < mejor ? j + ':' + mejor : mejor + ':' + j; if (vistos.has(clave)) continue; vistos.add(clave);
+      if (mejor < 0) continue;
+      // one link per pair of places (about 1° cells): many centres in one city must not stack the same arc
+      const celda = (v) => Math.round(Math.atan2(v[0], v[2]) * 57.3) + ',' + Math.round(Math.asin(clamp(v[1] / 1.004, -1, 1)) * 57.3);
+      const ca = celda(a2), cb = celda(centros[mejor]); const clave = ca < cb ? ca + '|' + cb : cb + '|' + ca; if (vistos.has(clave)) continue; vistos.add(clave);
       const b2 = centros[mejor], m = [(a2[0] + b2[0]) / 2, (a2[1] + b2[1]) / 2, (a2[2] + b2[2]) / 2], ml = Math.hypot(m[0], m[1], m[2]), alto = 1.004 + 0.5 * Math.acos(clamp(mc, -1, 1)) * 0.25;
       const pts = []; for (let t = 0; t <= 8; t++) { const u = t / 8, q = [a2[0] * (1 - u) + b2[0] * u, a2[1] * (1 - u) + b2[1] * u, a2[2] * (1 - u) + b2[2] * u], ql = Math.hypot(q[0], q[1], q[2]), h = 1.004 + (alto - 1.004) * Math.sin(Math.PI * u); pts.push([q[0] / ql * h, q[1] / ql * h, q[2] / ql * h]); }
       enlaces.push({ j, pts });
@@ -1705,11 +1708,11 @@ let SPR_DC = null;
 function spriteCentro() {
   if (SPR_DC) return SPR_DC;
   const n = 96, c = document.createElement('canvas'); c.width = c.height = n; const g = c.getContext('2d'), m = n / 2;
-  const h = g.createRadialGradient(m, m, 0, m, m, m); h.addColorStop(0, 'rgba(156,195,228,0.55)'); h.addColorStop(0.35, 'rgba(156,195,228,0.18)'); h.addColorStop(1, 'rgba(156,195,228,0)');
+  const h = g.createRadialGradient(m, m, 0, m, m, m); h.addColorStop(0, 'rgba(156,195,228,0.38)'); h.addColorStop(0.3, 'rgba(156,195,228,0.1)'); h.addColorStop(1, 'rgba(156,195,228,0)');
   g.fillStyle = h; g.fillRect(0, 0, n, n);
-  g.strokeStyle = 'rgba(156,195,228,0.9)'; g.lineWidth = 2.4; g.beginPath(); g.arc(m, m, n * 0.3, 0, 6.2832); g.stroke();
-  const k = g.createRadialGradient(m, m, 0, m, m, n * 0.13); k.addColorStop(0, '#FFFFFF'); k.addColorStop(0.7, '#F4F6F8'); k.addColorStop(1, 'rgba(244,246,248,0)');
-  g.fillStyle = k; g.beginPath(); g.arc(m, m, n * 0.13, 0, 6.2832); g.fill();
+  g.strokeStyle = 'rgba(156,195,228,0.7)'; g.lineWidth = 1.6; g.beginPath(); g.arc(m, m, n * 0.27, 0, 6.2832); g.stroke();
+  const k = g.createRadialGradient(m, m, 0, m, m, n * 0.09); k.addColorStop(0, '#FFFFFF'); k.addColorStop(0.7, '#F4F6F8'); k.addColorStop(1, 'rgba(244,246,248,0)');
+  g.fillStyle = k; g.beginPath(); g.arc(m, m, n * 0.09, 0, 6.2832); g.fill();
   return (SPR_DC = c);
 }
 const ANI = { cab: { c: null, e: 0 }, sat: { c: null, e: 0, p: 0 }, tie: { c: null, e: 0, p: 0 } };
@@ -1732,7 +1735,8 @@ function capasPortada(dt) {
     // little, from few to many, as the chapter is read (and go back if you scroll up).
     an.c = null; an.e = 0; an.p = v < 0.02 ? 0 : smooth(0, 1, llegaAlPlaneta(chapters[i], 0.2)); // satellites and land: they start a little before the title is level
   }
-  const fin = enS ? ch(iN) : 1;
+  // the land layer leaves (and the earlier routes come back) only when the next chapter's title reaches the planet
+  const fin = enS ? (ch(iN) < 0.02 ? 0 : smooth(0, 1, llegaAlPlaneta(chapters[iN], 0.2))) : 1;
   CAPA.satVis = enS ? ANI.sat.p * (1 - ANI.tie.p) : 0;
   CAPA.tieVis = enS ? ANI.tie.p * (1 - fin) : 0;
   CAPA.k = enS ? Math.max(ANI.sat.p, ANI.tie.p) * (1 - fin) : 0;
@@ -1782,13 +1786,13 @@ function pintaCapas(dt) {
   ctx.globalCompositeOperation = 'lighter';
   // 1 · submarine cables, light both ways at one speed
   if (CAPA.cab > 0.01 && C && C.lineas.length) {
-    ctx.lineWidth = Math.max(0.7, lw * 0.5); ctx.strokeStyle = 'rgb(156,195,228)'; ctx.globalAlpha = 0.34 * CAPA.cab * a; trazaRevelado(C.lineas, ANI.cab.c ? ANI.cab : { c: frente(), e: Math.PI });
+    ctx.lineWidth = Math.max(0.7, lw * 0.5); ctx.strokeStyle = 'rgb(156,195,228)'; ctx.globalAlpha = 0.34 * CAPA.cab * a; if (ANI.cab.c) trazaRevelado(C.lineas, ANI.cab);
     const vel = 0.09;
     C.lineas.forEach((w, j) => {
       const L = C.largos[j]; if (L < 0.05) return;
       for (const sentido of [1, -1]) {
         const t0 = ((clock * vel + j * 0.37 + (sentido < 0 ? 0.5 : 0)) % L) / L, t = sentido > 0 ? t0 : 1 - t0;
-        const pt = w[Math.floor(t * (w.length - 1))]; if (ANI.cab.c && !dentroDe(ANI.cab, pt)) continue;
+        const pt = w[Math.floor(t * (w.length - 1))]; if (!ANI.cab.c || !dentroDe(ANI.cab, pt)) continue;
         cometaCapa(w, t, Math.min(10, w.length - 1), sentido > 0 ? '190,220,250' : '244,246,248', lw * 0.8, 0.7 * CAPA.cab * a);
       }
     });
@@ -1816,23 +1820,21 @@ function pintaCapas(dt) {
   // 3 · land fibre, amber, next to the submarine cables in steel so the two read apart
   if (CAPA.tieVis > 0.01 && C && C.lineas.length) {
     if (C.tierra && C.tierra.length) {
-      ctx.lineWidth = Math.max(1.6, lw * 1.15); ctx.strokeStyle = 'rgb(244,246,248)'; ctx.globalAlpha = 0.95 * CAPA.tieVis * a; ctx.shadowColor = 'rgb(244,246,248)'; ctx.shadowBlur = 8; trazaRevelado(C.tierra.filter((w, j) => (j * 0.6180339887) % 1 <= ANI.tie.p), { c: frente(), e: Math.PI }); ctx.shadowBlur = 0;
-      C.tierra.forEach((w, j) => { if (w.length < 3) return; const t = ((clock * 0.12 + j * 0.29) % 1); if ((j * 0.6180339887) % 1 > ANI.tie.p) return; cometaCapa(w, t, Math.min(6, w.length - 1), '244,246,248', lw * 0.7, 0.8 * CAPA.tieVis * a); });
+      ctx.lineWidth = 0.8; ctx.strokeStyle = 'rgb(214,230,244)'; ctx.globalAlpha = 0.4 * CAPA.tieVis * a; ctx.shadowBlur = 0; trazaRevelado(C.tierra.filter((w, j) => (j * 0.6180339887) % 1 <= ANI.tie.p), { c: frente(), e: Math.PI }); ctx.shadowBlur = 0;
     }
     if (C.centros && C.centros.length) { // data centres recorded in OpenStreetMap: small amber squares
       if (C.enlaces && C.enlaces.length) {
-        ctx.lineWidth = Math.max(0.6, lw * 0.35); ctx.strokeStyle = 'rgb(156,195,228)'; ctx.globalAlpha = 0.28 * CAPA.tieVis * a; ctx.beginPath();
+        ctx.globalCompositeOperation = 'source-over'; ctx.lineWidth = 0.6; ctx.strokeStyle = 'rgb(156,195,228)'; ctx.globalAlpha = 0.3 * CAPA.tieVis * a; ctx.beginPath();
         for (const e of C.enlaces) { if ((e.j * 0.6180339887) % 1 > ANI.tie.p) continue; let pen = false; for (const q of e.pts) { const p = project(q); if (!p[2]) { pen = false; continue; } if (!pen) { ctx.moveTo(p[0], p[1]); pen = true; } else ctx.lineTo(p[0], p[1]); } }
         ctx.stroke();
-        C.enlaces.forEach((e, n) => { if (n % 3 || (e.j * 0.6180339887) % 1 > ANI.tie.p) return; const t = (clock * 0.35 + n * 0.173) % 1; cometaCapa(e.pts, n % 2 ? t : 1 - t, 3, '190,220,250', lw * 0.6, 0.6 * CAPA.tieVis * a); });
       }
-      const spr = spriteCentro(), tam = Math.max(11, G.r / 30);
-      ctx.globalCompositeOperation = 'lighter'; ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+      const spr = spriteCentro(), tam = Math.max(10, G.r / 34);
+      ctx.globalCompositeOperation = 'source-over'; ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
       for (let j = 0; j < C.centros.length; j++) {
         const q = C.centros[j]; if ((j * 0.6180339887) % 1 > ANI.tie.p) continue; const p = project(q); if (!p[2]) continue;
         // a lighthouse: each one comes and goes on its own phase
         const fase = (j * 2.39996) % 6.2832, luz = Math.pow(0.5 + 0.5 * Math.sin(clock * 1.7 + fase), 2.2);
-        ctx.globalAlpha = CAPA.tieVis * a * (0.22 + 0.78 * luz); const t2 = tam * (0.8 + 0.35 * luz);
+        ctx.globalAlpha = CAPA.tieVis * a * (0.25 + 0.6 * luz); const t2 = tam * (0.85 + 0.2 * luz);
         ctx.drawImage(spr, p[0] - t2 / 2, p[1] - t2 / 2, t2, t2);
       }
       ctx.globalCompositeOperation = 'lighter';
@@ -2069,7 +2071,7 @@ function frame(now) {
   const k = S.mode === 'intro' ? 0.22 : 1 - Math.pow(0.02, dt);
   G.sun = lerp(G.sun || 0, T.sun || 0, 1 - Math.pow(0.08, dt));
   G.day = lerp(G.day == null ? 1 : G.day, T.day || 0, 1 - Math.pow(0.035, dt));
-  G.fx = lerp(G.fx || 0, T.fx || 0, 1 - Math.pow(0.12, dt));
+  G.fx = S.mode === 'intro' ? 0 : lerp(G.fx || 0, T.fx || 0, 1 - Math.pow(0.12, dt));
   G.x = lerp(G.x, T.x, k); G.y = lerp(G.y, T.y, k); G.r = lerp(G.r, T.r, k); G.a = lerp(G.a, T.a, Math.min(1, k * 1.4));
   if (!RM) {
     G.obs = lerp(G.obs || 0, T.obs || 0, 1 - Math.pow(0.05, dt));
