@@ -539,7 +539,8 @@ html.i18n-espera .content,html.i18n-espera #phrase{opacity:0}
 :is(:lang(ja),:lang(zh-Hans),:lang(zh-Hant),:lang(ko)) .h2{max-width:12em}
 :is(:lang(ja),:lang(zh-Hans),:lang(zh-Hant),:lang(ko)) .light p{max-width:16em}
 /* titles break at punctuation and spaces where they can, and only mid-phrase when a run does not fit */
-:is(:lang(ko),:lang(zh-Hans),:lang(zh-Hant),:lang(ja)) :is(h1,h2,h3,#lightp,#phrase p){word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance}:lang(ko) p{word-break:keep-all;overflow-wrap:anywhere}
+:lang(ko) :is(h1,h2,h3,#lightp,#phrase p){word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance}
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja)) :is(h1,h2,h3,#lightp,#phrase p){word-break:normal;overflow-wrap:normal;line-break:strict;text-wrap:balance}:lang(ko) p{word-break:keep-all;overflow-wrap:anywhere}
 @supports (word-break:auto-phrase){:lang(ja) :is(h1,h2,h3,#lightp,#phrase p){word-break:auto-phrase}}
 :lang(hi) h1,:lang(hi) h2,:lang(bn) h1,:lang(bn) h2,:lang(th) h1,:lang(th) h2{line-height:1.3;letter-spacing:0}
 .lang{display:inline-flex;padding:3px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--hair-2);background:rgba(232,238,245,.03);flex:none}
@@ -1233,7 +1234,10 @@ const D2R = Math.PI / 180;
 // Touch screens draw at 1.5× at most, and any screen steps its resolution down if frames run long.
 const COARSE = matchMedia('(pointer: coarse)').matches;
 let calidad = 1;
-const renderDpr = () => Math.max(1, Math.min(devicePixelRatio || 1, COARSE ? 1.25 : 2) * calidad);
+// 21 Oct 2026 (owner: «la llegada del planeta viene a tirones»): a budget of pixels per frame, so a large or
+// very sharp screen never asks the planet for more than it can draw sixty times a second.
+const PRESU = COARSE ? 2.2e6 : 4.5e6;
+const renderDpr = () => Math.max(1, Math.min(devicePixelRatio || 1, COARSE ? 1.25 : 2, Math.sqrt(PRESU / Math.max(1, innerWidth * innerHeight))) * calidad);
 // The height of the large viewport: iOS shows and hides its toolbar while scrolling, and that must
 // not resize (and redraw from nothing) the planet.
 const altoVista = () => { if (!COARSE) return innerHeight; let p = document.getElementById('lvh'); if (!p) { p = document.createElement('div'); p.id = 'lvh'; p.setAttribute('aria-hidden', 'true'); document.body.appendChild(p); } return Math.max(innerHeight, p.offsetHeight || 0); };
@@ -1468,8 +1472,8 @@ function setupFx() {
     if (fx && fx.s) [fx.s, fx.a, fx.b].forEach(o => { gl.deleteTexture(o.t); gl.deleteFramebuffer(o.f); if (o.rb) gl.deleteRenderbuffer(o.rb); });
     if (!fx) { fx = { q: gl.createBuffer(), pB: program(QVS, FBR), pK: program(QVS, FBL), pC: program(QVS, FCO) }; gl.bindBuffer(gl.ARRAY_BUFFER, fx.q); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW); }
     const mx = Math.min(gl.getParameter(gl.MAX_TEXTURE_SIZE), gl.getParameter(gl.MAX_RENDERBUFFER_SIZE));
-    const ss = !COARSE && dpr < 1.5 ? 2 : 1;
-    const W = Math.min(mx, cv.width * ss), H = Math.min(mx, cv.height * ss), w = Math.max(1, cv.width >> 1), h = Math.max(1, cv.height >> 1);
+    const ss = COARSE ? 1 : clamp(Math.sqrt(PRESU * calidad * calidad / Math.max(1, cv.width * cv.height)), 1, 2);
+    const W = Math.min(mx, Math.round(cv.width * ss)), H = Math.min(mx, Math.round(cv.height * ss)), w = Math.max(1, cv.width >> 1), h = Math.max(1, cv.height >> 1);
     fx.s = mkFbo(W, H, true); fx.a = mkFbo(w, h, false); fx.b = mkFbo(w, h, false);
     fx.ok = fx.s.ok && fx.a.ok && fx.b.ok;
   } catch (e) { fx = null; }
@@ -1558,7 +1562,7 @@ const anchoScroll = (el) => { let v = SW.get(el); if (v == null) { v = el.scroll
 if ('ResizeObserver' in window) new ResizeObserver(() => medidas()).observe(document.body);
 addEventListener('load', medidas);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(medidas);
-let trX = null;
+let trX = null, dtG = 1 / 60;
 // Where the top bar ends (it is fixed on touch screens): the planet is placed below it.
 let barraB = null;
 function barraAbajo() { if (barraB == null) { const n = document.querySelector('.nav'); barraB = n ? n.getBoundingClientRect().bottom : 60; } return barraB; }
@@ -1566,6 +1570,9 @@ addEventListener('resize', () => { barraB = null; });
 function pinProgress(el) { const r = rectDe(el); return clamp(-r.top / Math.max(1, r.height - vh)); }
 let S = { intro: 0, story: 0, ch: chapters.map(() => 0), auction: 0, ms: 0, mode: 'intro' };
 
+// writes a value only when it changes: an unchanged text rewritten every frame still makes the browser lay out the page again
+const ULT = new WeakMap();
+function pon1(o, k, v) { if (!o) return; let m = ULT.get(o); if (!m) { m = {}; ULT.set(o, m); } if (m[k] !== v || o[k] !== v) { m[k] = v; o[k] = v; } }
 function update() {
   // intro
   const pi = pinProgress(secs.intro); S.intro = pi;
@@ -1589,13 +1596,13 @@ function update() {
   const au = rectDe(secs.auction);
   const inAuction = au.top < vh * 0.5 && au.bottom > vh * 0.5;
   const ms = Math.round(100 * clamp((pa - 0.08) / 0.74)); S.ms = ms;
-  $('#ms').firstChild.nodeValue = String(ms).padStart(3, '0');
-  $('#ms-bar').style.width = ms + '%';
-  let cap = CAPS[0][1]; CAPS.forEach(([t, c]) => { if (ms >= t) cap = c; }); $('#ms-cap').textContent = window.__tr ? window.__tr(cap) : cap;
+  pon1($('#ms').firstChild, 'nodeValue', String(ms).padStart(3, '0'));
+  pon1($('#ms-bar').style, 'width', ms + '%');
+  let cap = CAPS[0][1]; CAPS.forEach(([t, c]) => { if (ms >= t) cap = c; }); pon1($('#ms-cap'), 'textContent', window.__tr ? window.__tr(cap) : cap);
   steps.forEach(s => s.classList.toggle('on', ms >= +s.dataset.at));
   fields.forEach(f => f.classList.toggle('on', ms >= +f.dataset.at));
   const recN = Math.round(1058 * easeOut(clamp((ms - 30) / 40)));
-  $('#rec-n').textContent = recN.toLocaleString(window.__loc || 'es-CO');
+  pon1($('#rec-n'), 'textContent', recN.toLocaleString(window.__loc || 'es-CO'));
   const lit = Math.round(NDOTS * clamp((ms - 30) / 40));
   dots.forEach((d, i) => { d.classList.toggle('on', i < lit); d.classList.toggle('win', ms >= 100 && i === 37); });
   const sold = $('#sold'), so = smooth(0.84, 0.9, pa) * (1 - smooth(0.97, 1, pa) * 0.0);
@@ -1610,7 +1617,7 @@ function update() {
   const travel = Math.max(0, anchoScroll(tr) - vw + (mobile() ? 24 : Math.max(24, (vw - 1200) / 2 + 24)));
   // on touch screens the gallery glides toward its place instead of stepping with each scroll event
   const trMeta = -travel * smooth(0.08, 0.92, ps);
-  trX = COARSE && trX != null ? trX + (trMeta - trX) * 0.22 : trMeta;
+  trX = COARSE && trX != null ? trX + (trMeta - trX) * (1 - Math.pow(0.78, dtG * 60)) : trMeta;
   if (Math.abs(trMeta - trX) < 0.3) trX = trMeta;
   tr.style.transform = `translate3d(${trX.toFixed(1)}px,0,0)`;
 
@@ -1680,6 +1687,9 @@ function idiomaPortada() { return window.__lang || 'es'; }
 // texts written by script (notes with live numbers), in the reader's language; {a} etc. are filled in
 const txt = (k, v) => { const t = window.__x ? window.__x(k) : null; if (t == null) return ''; return typeof t === 'string' && v ? t.replace(/\{(\w+)\}/g, (_, n) => v[n] ?? '') : t; };
 const numPortada = (n) => n.toLocaleString(window.__loc || 'es-CO');
+// 21 Oct 2026 (owner: «la llegada del planeta viene a tirones»): the heavy preparation of satellites and cables
+// is done in small slices between frames, never in one block that would freeze the scroll for a moment.
+const trocea = async (n, fn) => { let i = 0; while (i < n) { const t0 = performance.now(); while (i < n && performance.now() - t0 < 6) fn(i++); if (i < n) await new Promise((r) => setTimeout(r, 0)); } };
 async function cargaSatPortada() {
   if (CAP.cargaS || CAP.S) return; CAP.cargaS = true;
   try {
@@ -1688,14 +1698,15 @@ async function cargaSatPortada() {
     const c = d.campos, ix = (k) => c.indexOf(k), rec = [], geo = [];
     // a fixed, honest sample: every satellite except Starlink, and one Starlink in ten (1 in 20 on phones)
     const paso = COARSE ? 20 : 10;
-    for (const f of d.sat) {
-      if (f[0] === 0 && f[ix('norad')] % paso !== 0) continue;
-      const omm = { NORAD_CAT_ID: f[ix('norad')] }; for (const k of c.slice(3)) omm[k] = f[ix(k)];
-      try { const r = window.satellite.json2satrec(omm); if (r && !r.error) rec.push(r); } catch (e) {}
-    }
+    const campos = c.slice(3).map((k) => [k, ix(k)]), iN = ix('norad');
+    await trocea(d.sat.length, (j) => { const f = d.sat[j];
+      if (f[0] === 0 && f[iN] % paso !== 0) return;
+      const omm = { NORAD_CAT_ID: f[iN] }; for (const [k, q] of campos) omm[k] = f[q];
+      try { const r = window.satellite.json2satrec(omm); if (r && !r.error) rec.push(r); } catch (e) {} });
     const N = rec.length;
-    CAP.S = { d, rec, N, total: d.sat.length, paso, pos: new Float64Array(N * 3), vel: new Float64Array(N * 3), t: new Float64Array(N), ok: new Uint8Array(N), cur: 0 };
-    for (let i = 0; i < N; i++) propagaPortada(i, Date.now());
+    const S0 = { d, rec, N, total: d.sat.length, paso, pos: new Float64Array(N * 3), vel: new Float64Array(N * 3), t: new Float64Array(N), ok: new Uint8Array(N), cur: 0 };
+    CAP.S = S0; S0.N = 0; // not drawn until every position is ready
+    const ahora = Date.now(); await trocea(N, (i) => propagaPortada(i, ahora)); S0.N = N;
     notaSat();
   } catch (e) { CAP.S = { N: 0, error: true }; }
 }
@@ -1734,17 +1745,17 @@ async function cargaCabPortada() {
     const centros = pu && pu.puntos ? pu.puntos.filter((x) => x[2] === 'datos').map((x) => { const v = v3(x[0], x[1]); return [v[0] * 1.004, v[1] * 1.004, v[2] * 1.004]; }) : [];
     // illustrative links: each data centre to its nearest neighbour between 300 and 2,500 km (said so on screen)
     const enlaces = [], vistos = new Set(), cmin = Math.cos(2500 / 6371), cmax = Math.cos(300 / 6371);
-    for (let j = 0; j < centros.length; j++) {
+    await trocea(centros.length, (j) => {
       const a2 = centros[j]; let mejor = -1, mc = -2;
       for (let k = 0; k < centros.length; k++) { if (k === j) continue; const b2 = centros[k]; const c2 = (a2[0] * b2[0] + a2[1] * b2[1] + a2[2] * b2[2]) / (1.004 * 1.004); if (c2 < cmax && c2 > cmin && c2 > mc) { mc = c2; mejor = k; } }
-      if (mejor < 0) continue;
+      if (mejor < 0) return;
       // one link per pair of places (about 1° cells): many centres in one city must not stack the same arc
       const celda = (v) => Math.round(Math.atan2(v[0], v[2]) * 57.3) + ',' + Math.round(Math.asin(clamp(v[1] / 1.004, -1, 1)) * 57.3);
-      const ca = celda(a2), cb = celda(centros[mejor]); const clave = ca < cb ? ca + '|' + cb : cb + '|' + ca; if (vistos.has(clave)) continue; vistos.add(clave);
+      const ca = celda(a2), cb = celda(centros[mejor]); const clave = ca < cb ? ca + '|' + cb : cb + '|' + ca; if (vistos.has(clave)) return; vistos.add(clave);
       const b2 = centros[mejor], m = [(a2[0] + b2[0]) / 2, (a2[1] + b2[1]) / 2, (a2[2] + b2[2]) / 2], ml = Math.hypot(m[0], m[1], m[2]), alto = 1.004 + 0.5 * Math.acos(clamp(mc, -1, 1)) * 0.25;
       const pts = []; for (let t = 0; t <= 8; t++) { const u = t / 8, q = [a2[0] * (1 - u) + b2[0] * u, a2[1] * (1 - u) + b2[1] * u, a2[2] * (1 - u) + b2[2] * u], ql = Math.hypot(q[0], q[1], q[2]), h = 1.004 + (alto - 1.004) * Math.sin(Math.PI * u); pts.push([q[0] / ql * h, q[1] / ql * h, q[2] / ql * h]); }
       enlaces.push({ j, pts });
-    }
+    });
     CAP.cab = { lineas, largos, nombres, tierra, centros, enlaces, kmTierra: dt0 && dt0.medida ? dt0.medida.km : 0 };
     notaCab();
   } catch (e) { CAP.cab = { lineas: [], largos: [], error: true }; }
@@ -1780,6 +1791,10 @@ function spriteCentro() {
 }
 const ANI = { cab: { c: null, e: 0 }, sat: { c: null, e: 0, p: 0 }, tie: { c: null, e: 0, p: 0 } };
 function frente() { const R = R3; return [R[6], R[7], R[8]]; } // the model point facing the camera
+// the layers are prepared quietly once the page has settled, long before their chapter, never during the planet's arrival
+(() => { const ya = () => { cargaSatPortada(); cargaCabPortada(); };
+  const pronto = () => setTimeout(() => (window.requestIdleCallback ? requestIdleCallback(ya, { timeout: 4000 }) : ya()), 1500);
+  if (document.readyState === 'complete') pronto(); else addEventListener('load', pronto, { once: true }); })();
 function capasPortada(dt) {
   const iC = CHX('cab'), iS = CHX('sat'), iT = CHX('tie'), iN = CHX(3);
   const enS = S.mode === 'story', ch = (i) => (i >= 0 ? S.ch[i] : 0);
@@ -2111,28 +2126,33 @@ addEventListener('resize', () => {
 // The frame governor: if frames take longer than ~22 ms for a while, draw at a lower resolution
 // (twice at most), so scrolling stays smooth on any tablet.
 let gobT = 0, gobN = 0, gobVeces = 0;
+const gobDesde = performance.now() + 3500; // the first seconds are not judged: the page is still preparing itself
 function gobierna(dtms) {
-  if (gobVeces >= 2 || document.hidden) return;
+  if (gobVeces >= 2 || document.hidden || performance.now() < gobDesde) return;
   gobT += dtms; gobN++;
-  if (gobN < 90) return;
+  if (gobN < 120) return;
   const media = gobT / gobN; gobT = 0; gobN = 0;
-  if (media > 22) { calidad *= 0.8; gobVeces++; resize(); }
+  if (media > 24) { calidad *= 0.8; gobVeces++; resize(); }
 }
 resize(); update(); Object.assign(G, T);
 const OBS = { drag: false, v: -3, lat: 14, sil: 0, hold: false }; window.__obs = OBS;
 window.__obsNudge = (d) => { if (S.mode === 'obs') G.lon += d; };
 const LON_STORY = -42, LAT_STORY = 16, LON_AUCTION = -58, LAT_AUCTION = 14;
-// Touch screens, while a finger is scrolling: half the frames are drawn, so the system's own
-// scrolling always has the processor first.
+// Touch screens that cannot keep up, while a finger is scrolling: half the frames are drawn, so the
+// system's own scrolling always has the processor first.
 let ultimoScroll = -1e9, saltaCuadro = false;
 if (COARSE) addEventListener('scroll', () => { ultimoScroll = performance.now(); }, { passive: true });
+// 21 Oct 2026: only when the device is really struggling (frames slower than ~50 a second); a phone that
+// keeps up draws every frame, so the planet moves exactly with the finger.
+let ritmo = 16.7, tCb = 0, lento = false; const ritmoDesde = performance.now() + 3500;
 function frame(now) {
-  if (COARSE && now - ultimoScroll < 180 && (saltaCuadro = !saltaCuadro)) { requestAnimationFrame(frame); return; }
+  if (tCb && !lento) { const d = now - tCb; if (d > 0 && d < 100) ritmo += (d - ritmo) * 0.05; if (now > ritmoDesde && ritmo > 21) lento = true; } tCb = now;
+  if (COARSE && lento && now - ultimoScroll < 180 && (saltaCuadro = !saltaCuadro)) { requestAnimationFrame(frame); return; }
   const dtms = now - lastT; if (dtms > 0 && dtms < 200) gobierna(dtms);
-  const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now; clock += dt;
-  const dy = scrollY - lastY; lastY = scrollY; scrollV = lerp(scrollV, dy, 0.2);
+  const dt = Math.min(0.05, Math.max(0, now - lastT) / 1000); lastT = now; clock += dt;
+  const dy = scrollY - lastY; lastY = scrollY; scrollV = lerp(scrollV, dy, 1 - Math.pow(0.8, dt * 60));
   update();
-  const k = S.mode === 'intro' ? 0.22 : 1 - Math.pow(0.02, dt);
+  dtG = dt; const k = S.mode === 'intro' ? 1 - Math.pow(0.78, dt * 60) : 1 - Math.pow(0.02, dt);
   G.sun = lerp(G.sun || 0, T.sun || 0, 1 - Math.pow(0.08, dt));
   G.day = lerp(G.day == null ? 1 : G.day, T.day || 0, 1 - Math.pow(0.035, dt));
   G.fx = S.mode === 'intro' ? 0 : lerp(G.fx || 0, T.fx || 0, 1 - Math.pow(0.12, dt));
@@ -2272,13 +2292,14 @@ if(btn) btn.addEventListener('click',async()=>{
     pendiente = false;
     const vh = innerHeight, sy = scrollY;
     for (const b of bloques) {
-      // 21 Oct 2026 (owner): the light must pass in front of the reader, never while the title is still
-      // coming in at the bottom edge. It starts once the whole title is on screen (its bottom above 86 %
-      // of the height) and finishes when its middle reaches 34 % (slower, owner 21 Oct), on any screen.
-      const r = b.el.getBoundingClientRect(), ini = vh * 0.86, largo = Math.max(vh * 0.24, vh * 0.52 - r.height / 2);
-      const p = Math.max(0, Math.min(1, (ini - r.bottom) / largo));
-      const n = b.words.length, k = p >= 1 ? n + 2 : Math.round(p * (n + 2));
-      if (b.k == null) { for (let i = 0; i < n; i++) pon(b, i, estado(i, k)); b.k = k; b.kt = k; continue; }
+      // 21 Oct 2026 (owner, second pass): the light follows the reader's eye line. Each word lights when it
+      // rises past 70 % of the screen height, so a word is never dim while it is being read, never lit while it
+      // is still below the screen, and a tall title (Chinese, Japanese…) lights line by line as it comes up.
+      const r = b.el.getBoundingClientRect(), n = b.words.length, linea = vh * 0.78; let k;
+      if (r.bottom < 0) k = n + 2;            // already above the screen: all lit
+      else if (r.top > vh) k = 0;             // still below: all waiting
+      else { let c = 0; for (let i = 0; i < n; i++) { const w = b.words[i].getBoundingClientRect(); if (w.top + w.height / 2 < linea) c = i + 1; } k = c >= n ? n + 2 : c; }
+      if (b.k == null || r.bottom < 0 || r.top > vh) { if (b.k !== k) { for (let i = 0; i < n; i++) pon(b, i, estado(i, k)); } b.k = k; b.kt = k; continue; }
       b.kt = k;
     }
     anda();
@@ -2290,10 +2311,10 @@ if(btn) btn.addEventListener('click',async()=>{
   const paso1 = (b, k) => { const n = b.words.length, lo = Math.max(0, Math.min(k, b.k) - 3), hi = Math.min(n, Math.max(k, b.k) + 3); for (let i = lo; i < hi; i++) { const e = estado(i, k); if (e !== estado(i, b.k)) pon(b, i, e); } b.k = k; };
   function anda() { if (!andando) { andando = true; tAnt = performance.now(); requestAnimationFrame(cuadro); } }
   function cuadro(t) {
-    const dt = Math.min(100, t - tAnt); tAnt = t; let falta = false;
+    const dt = Math.min(400, t - tAnt); tAnt = t; let falta = false; // real time, so a slow device does not slow the light
     for (const b of bloques) {
       if (b.k == null || b.kt == null || b.k === b.kt) continue;
-      const d = b.kt - b.k, cada = Math.max(60, 150 - Math.abs(d) * 5); // ms per word
+      const d = b.kt - b.k, cada = Math.max(26, 120 - Math.abs(d) * 14); // ms per word: calm when close, quick to catch up when behind
       b.acc = (b.acc || 0) + dt;
       while (b.acc >= cada && b.k !== b.kt) { b.acc -= cada; paso1(b, b.k + Math.sign(b.kt - b.k)); }
       if (b.k !== b.kt) falta = true; else b.acc = 0;
@@ -2301,6 +2322,8 @@ if(btn) btn.addEventListener('click',async()=>{
     if (falta) requestAnimationFrame(cuadro); else andando = false;
   }
   const pide = () => { if (!pendiente) { pendiente = true; requestAnimationFrame(pinta); } };
+  // titles that move by themselves (blocks fading in, pinned sections) are re-measured a few times a second
+  setInterval(() => { if (!document.hidden) pide(); }, 250);
   addEventListener('scroll', pide, { passive: true });
   addEventListener('resize', () => { mide(); pide(); });
   if ('ResizeObserver' in window) new ResizeObserver(() => { mide(); pide(); }).observe(document.body);
