@@ -1689,7 +1689,8 @@ function notaCab() {
 const lectura = (el) => { if (!el) return 0; const h = el.querySelector('h2') || el; return clamp((vh * 0.72 - rectDe(h).top) / (vh * 0.5)); };
 // The first ring waits for the title to reach the planet's height (on a computer): it opens when the
 // middle of «En 30 milisegundos…» lines up with the middle of the planet, and closes half a screen later.
-const llegaAlPlaneta = (el) => { if (!el || mobile()) return lectura(el); const h = el.querySelector('h2') || el, r = rectDe(h); return clamp((G.y - (r.top + r.height / 2)) / (vh * 0.42)); };
+// `antes` starts it a little earlier (a fraction of the screen height before the title is level with the planet)
+const llegaAlPlaneta = (el, antes = 0) => { if (!el || mobile()) return lectura(el); const h = el.querySelector('h2') || el, r = rectDe(h); return clamp((G.y + vh * antes - (r.top + r.height / 2)) / (vh * 0.42)); };
 const ANI = { cab: { c: null, e: 0 }, sat: { c: null, e: 0, p: 0 }, tie: { c: null, e: 0, p: 0 } };
 function frente() { const R = R3; return [R[6], R[7], R[8]]; } // the model point facing the camera
 function capasPortada(dt) {
@@ -1708,7 +1709,7 @@ function capasPortada(dt) {
     const v = enS ? ch(i) : 0, an = ANI[k];
     // 21 Oct 2026 (owner): only the first chapter has the blue ring. Satellites and land appear little by
     // little, from few to many, as the chapter is read (and go back if you scroll up).
-    an.c = null; an.e = 0; an.p = v < 0.02 ? 0 : smooth(0, 1, llegaAlPlaneta(chapters[i]));
+    an.c = null; an.e = 0; an.p = v < 0.02 ? 0 : smooth(0, 1, llegaAlPlaneta(chapters[i], 0.2)); // satellites and land: they start a little before the title is level
   }
   const fin = enS ? ch(iN) : 1;
   CAPA.satVis = enS ? ANI.sat.p * (1 - ANI.tie.p) : 0;
