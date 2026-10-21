@@ -191,7 +191,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .au-src a{text-decoration:underline;text-underline-offset:3px}
 
 /* word light statement */
-#light{height:260vh}
+#light{height:320vh}
 .light p{font-family:var(--display);font-size:min(clamp(36px,4.6vw,76px),6.6vh);line-height:1.06;letter-spacing:-.01em;max-width:24ch;text-align:center;padding:0 24px}
 .light .lw{opacity:.12;transition:opacity .25s}
 .light .lw.amber{color:var(--amber)}
@@ -2205,8 +2205,8 @@ if(btn) btn.addEventListener('click',async()=>{
     for (const b of bloques) {
       // 21 Oct 2026 (owner): the light must pass in front of the reader, never while the title is still
       // coming in at the bottom edge. It starts once the whole title is on screen (its bottom above 86 %
-      // of the height) and finishes when its middle reaches 44 %, on a computer, a tablet or a phone.
-      const r = b.el.getBoundingClientRect(), ini = vh * 0.86, largo = Math.max(vh * 0.16, vh * 0.42 - r.height / 2);
+      // of the height) and finishes when its middle reaches 34 % (slower, owner 21 Oct), on any screen.
+      const r = b.el.getBoundingClientRect(), ini = vh * 0.86, largo = Math.max(vh * 0.24, vh * 0.52 - r.height / 2);
       const p = Math.max(0, Math.min(1, (ini - r.bottom) / largo));
       const n = b.words.length, k = p >= 1 ? n + 2 : Math.round(p * (n + 2));
       if (k === b.k) continue;
