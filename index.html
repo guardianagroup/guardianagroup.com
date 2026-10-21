@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-idiomas="es,en,pt,fr,de,it,nl,sv,da,nb,fi,is,pl,uk,ru,tr,zh,ja,ko,hi,bn,id,vi,th,ar,fa,he,ur,pt-pt">
+<html lang="en" data-idiomas="es,en,pt,fr,de,it,nl,sv,da,nb,fi,is,pl,uk,ru,tr,zh,ja,ko,hi,bn,id,vi,th,ar,fa,he,ur,zh-tw,cs,ro,hu,el,sk,bg,hr,ms,fil,sw,ta,pt-pt">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -521,7 +521,7 @@ input,textarea,[contenteditable]{-webkit-user-select:text;user-select:text;caret
 html.i18n-espera .content,html.i18n-espera #phrase{opacity:0}
 /* type for each script: the visitor's own system fonts, nothing extra to download */
 /* languages that glue words together: long words in big titles break with a proper hyphen instead of leaving the screen */
-:is(:lang(de),:lang(nl),:lang(sv),:lang(da),:lang(nb),:lang(fi),:lang(is),:lang(ru),:lang(uk),:lang(pl)) :is(h1,h2,h3,.big,#lightp){-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+:is(:lang(de),:lang(nl),:lang(sv),:lang(da),:lang(nb),:lang(fi),:lang(is),:lang(ru),:lang(uk),:lang(pl),:lang(cs),:lang(sk),:lang(hu),:lang(hr),:lang(ro),:lang(bg),:lang(el)) :is(h1,h2,h3,.big,#lightp){-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
 :lang(ru),:lang(uk),:lang(bg),:lang(el),:lang(vi){--display:'Times New Roman',Times,'Liberation Serif',serif}
 :lang(zh-Hans){--display:'Songti SC','STSong','Noto Serif SC','Noto Serif CJK SC','Source Han Serif SC','SimSun',serif;--body:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC','Noto Sans CJK SC',system-ui,sans-serif}
 :lang(zh-Hant){--display:'Songti TC','Noto Serif TC','Noto Serif CJK TC','Source Han Serif TC','PMingLiU',serif;--body:'PingFang TC','Microsoft JhengHei','Noto Sans TC','Noto Sans CJK TC',system-ui,sans-serif}
@@ -531,6 +531,8 @@ html.i18n-espera .content,html.i18n-espera #phrase{opacity:0}
 :lang(bn){--display:'Kohinoor Bangla','Noto Serif Bengali','Nirmala UI','Vrinda',serif;--body:'Kohinoor Bangla','Nirmala UI','Noto Sans Bengali',system-ui,sans-serif}
 :lang(ar),:lang(fa){--display:'Noto Naskh Arabic','Al Nile','Geeza Pro','Sakkal Majalla','Times New Roman',serif;--body:'SF Arabic','Geeza Pro','Segoe UI','Noto Sans Arabic','Tahoma',system-ui,sans-serif;--mono:'SF Arabic','Geeza Pro','Segoe UI','Noto Sans Arabic',ui-monospace,monospace}
 :lang(ur){--display:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq','Urdu Typesetting','Noto Naskh Arabic','Geeza Pro',serif;--body:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq','Urdu Typesetting','Noto Naskh Arabic','Geeza Pro','Segoe UI',system-ui,sans-serif;--mono:'Noto Nastaliq Urdu','Urdu Typesetting','Noto Naskh Arabic','Segoe UI',ui-monospace,monospace}
+:lang(ta){--display:'Tamil Sangam MN','Noto Serif Tamil','Nirmala UI','Latha',serif;--body:'Tamil Sangam MN','Nirmala UI','Noto Sans Tamil',system-ui,sans-serif}
+:lang(te){--display:'Telugu Sangam MN','Noto Serif Telugu','Nirmala UI','Gautami',serif;--body:'Telugu Sangam MN','Nirmala UI','Noto Sans Telugu',system-ui,sans-serif}
 :lang(he){--display:'New Peninim MT','Noto Serif Hebrew','David','Times New Roman',serif;--body:'SF Hebrew','Arial Hebrew','Segoe UI','Noto Sans Hebrew',system-ui,sans-serif}
 /* the notes with live numbers are written in the reader's language once the data has arrived; never a Spanish placeholder before */
 .leyenda-tie:not(.ok){visibility:hidden}
@@ -542,12 +544,13 @@ html.i18n-espera .content,html.i18n-espera #phrase{opacity:0}
 /* Arabic script joins its letters: any letter-spacing would break the words apart */
 :is(:lang(ar),:lang(fa),:lang(ur)) *{letter-spacing:0!important}
 :lang(he) *{letter-spacing:0!important}
+:is(:lang(ar),:lang(fa),:lang(ur),:lang(he)) :is(h1,h2,#phrase p,#lightp){text-wrap:balance}
 :is(:lang(ar),:lang(fa)) :is(h1,h2,h3){line-height:1.35}
 /* Nastaliq hangs low and climbs high: it needs more room between lines */
 :lang(ur) :is(h1,h2,#lightp,#phrase p,.big){line-height:1.8!important}:lang(ur) :is(p,li,h3,h4,dd,dt,div,a,button,label,small){line-height:2.1}
 :lang(th){--display:'Thonburi','Noto Serif Thai','Leelawadee UI','Tahoma',serif;--body:'Thonburi','Leelawadee UI','Noto Sans Thai',system-ui,sans-serif}
 /* scripts without italics: the coloured end of a title stays upright; tighter titles get a little air */
-:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko),:lang(hi),:lang(bn),:lang(th),:lang(ar),:lang(fa),:lang(ur),:lang(he)) :is(em,i,.hero-em,em.tono){font-style:normal!important}
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko),:lang(hi),:lang(bn),:lang(th),:lang(ar),:lang(fa),:lang(ur),:lang(he),:lang(ta),:lang(te)) :is(em,i,.hero-em,em.tono){font-style:normal!important}
 :lang(zh-Hans) h1,:lang(zh-Hans) h2,:lang(zh-Hant) h1,:lang(zh-Hant) h2,:lang(ja) h1,:lang(ja) h2,:lang(ko) h1,:lang(ko) h2{line-height:1.22;letter-spacing:0;line-break:strict}
 /* Korean keeps its words whole (it has spaces); Japanese breaks at phrase boundaries where the browser can */
 /* full-width scripts: a «ch» is half a character there, so measures set in ch are given in em instead */
@@ -558,7 +561,7 @@ html.i18n-espera .content,html.i18n-espera #phrase{opacity:0}
 :lang(ko) :is(h1,h2,h3,#lightp,#phrase p){word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance}
 :is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja)) :is(h1,h2,h3,#lightp,#phrase p){word-break:normal;overflow-wrap:normal;line-break:strict;text-wrap:balance}:lang(ko) p{word-break:keep-all;overflow-wrap:anywhere}
 @supports (word-break:auto-phrase){:lang(ja) :is(h1,h2,h3,#lightp,#phrase p){word-break:auto-phrase}}
-:lang(hi) h1,:lang(hi) h2,:lang(bn) h1,:lang(bn) h2,:lang(th) h1,:lang(th) h2{line-height:1.3;letter-spacing:0}
+:lang(hi) h1,:lang(hi) h2,:lang(bn) h1,:lang(bn) h2,:lang(th) h1,:lang(th) h2,:lang(ta) h1,:lang(ta) h2,:lang(te) h1,:lang(te) h2{line-height:1.3;letter-spacing:0}
 .lang{display:inline-flex;padding:3px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--hair-2);background:rgba(232,238,245,.03);flex:none}
 .lang button{font:500 11px/1 var(--mono);letter-spacing:.08em;color:var(--ink-3);background:transparent;border:0;border-radius:999px;padding:8px 10px;min-height:30px;cursor:pointer;transition:color .2s,background .2s}
 .lang button:hover{color:var(--ink)}
@@ -2382,7 +2385,10 @@ const IDI=[['es','Español','es','es-CO'],['en','English','en','en-US'],['pt','P
  ['uk','Українська','uk','uk-UA'],['ru','Русский','ru','ru-RU'],['tr','Türkçe','tr','tr-TR'],
  ['zh','简体中文','zh-Hans','zh-CN'],['ja','日本語','ja','ja-JP'],['ko','한국어','ko','ko-KR'],
  ['hi','हिन्दी','hi','hi-IN'],['bn','বাংলা','bn','bn-BD'],['id','Bahasa Indonesia','id','id-ID'],['vi','Tiếng Việt','vi','vi-VN'],['th','ไทย','th','th-TH'],
- ['ar','العربية','ar','ar-u-nu-latn'],['fa','فارسی','fa','fa-IR'],['he','עברית','he','he-IL'],['ur','اردو','ur','ur-PK']];
+ ['ar','العربية','ar','ar-u-nu-latn'],['fa','فارسی','fa','fa-IR'],['he','עברית','he','he-IL'],['ur','اردو','ur','ur-PK'],
+ ['zh-tw','繁體中文','zh-Hant','zh-TW'],['cs','Čeština','cs','cs-CZ'],['ro','Română','ro','ro-RO'],['hu','Magyar','hu','hu-HU'],['el','Ελληνικά','el','el-GR'],
+ ['sk','Slovenčina','sk','sk-SK'],['bg','Български','bg','bg-BG'],['hr','Hrvatski','hr','hr-HR'],['ms','Bahasa Melayu','ms','ms-MY'],['fil','Filipino','fil','fil-PH'],
+ ['sw','Kiswahili','sw','sw-KE'],['ta','தமிழ்','ta','ta-IN'],['te','తెలుగు','te','te-IN'],['pt-pt','Português (Portugal)','pt-PT','pt-PT']];
 const ACT=new Set((document.documentElement.dataset.idiomas||'es,en,pt').split(','));
 const DATO={}; IDI.forEach(x=>{ DATO[x[0]]={nombre:x[1],tag:x[2],loc:x[3]}; });
 const ok=l=>!!DATO[l]&&ACT.has(l);
