@@ -1221,7 +1221,7 @@ try { gl = cv.getContext('webgl', { antialias: true, alpha: true, premultipliedA
 
 const VS = `attribute vec3 aPos;attribute vec2 aUv;uniform mat3 uR;uniform mat4 uP;uniform float uD;uniform float uS;varying vec2 vUv;varying vec3 vN;varying vec3 vW;
 void main(){vec3 w=uR*(aPos*uS);vW=w;vN=normalize(uR*aPos);vUv=aUv;gl_Position=uP*vec4(w.x,w.y,w.z-uD,1.0);}`;
-const FS = `precision highp float;uniform sampler2D uT;uniform sampler2D uDay;uniform float uDayOn;uniform float uTw;uniform float uD;uniform float uA;uniform float uSun;uniform vec3 uL;uniform vec3 uLs;uniform sampler2D uCl;uniform float uClOn;uniform float uClT;uniform float uFx;uniform float uFxK;uniform vec3 uFoc;uniform vec3 uCtg;varying vec2 vUv;varying vec3 vN;varying vec3 vW;
+const FS = `precision highp float;uniform sampler2D uT;uniform sampler2D uDay;uniform float uDayOn;uniform float uTw;uniform float uD;uniform float uA;uniform float uSun;uniform vec3 uL;uniform vec3 uLs;uniform sampler2D uCl;uniform float uClOn;uniform float uClT;uniform float uFx;uniform float uFxK;uniform vec3 uFoc;uniform vec3 uCtg;uniform vec3 uRc;uniform float uRe;varying vec2 vUv;varying vec3 vN;varying vec3 vW;
 float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 void main(){vec3 n=normalize(vN);vec3 v=normalize(vec3(0.0,0.0,uD)-vW);vec3 L=normalize(uL);
 vec3 c=texture2D(uT,vUv).rgb;float lum=dot(c,vec3(.299,.587,.114));float dif=max(dot(n,L),0.0);
@@ -1279,6 +1279,7 @@ if(uDayOn>0.5){
   }
  }
 }
+if(uRe>0.0&&uRe<1.98){float sr=acos(clamp(dot(n,normalize(uRc)),-1.0,1.0))/1.5708;col+=vec3(.62,.86,1.0)*exp(-pow((sr-uRe)/0.012,2.0))*0.75;}
 vec3 sd=normalize(vec3(-.6,.62,-.5));float limb=pow(1.0-max(dot(n,v),0.0),5.0);float ss=smoothstep(.25,.9,dot(n,sd));
 col+=(vec3(1.0,.9,.74)*pow(limb,1.5)*2.2+vec3(.5,.72,1.0)*limb*.7)*ss*uSun*mix(1.0,uTw,uDayOn);
 gl_FragColor=vec4(col*uA,uA);}`;
@@ -1379,7 +1380,7 @@ function draw() {
   gl.useProgram(prog); bind(prog); gl.uniform1f(gl.getUniformLocation(prog, 'uS'), 1);
   gl.uniform3f(gl.getUniformLocation(prog, 'uL'), -0.55, 0.45, 0.7);
   gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(gl.getUniformLocation(prog, 'uT'), 0);
-  gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, dayOn ? dayTex : tex); gl.uniform1i(gl.getUniformLocation(prog, 'uDay'), 1); gl.uniform1f(gl.getUniformLocation(prog, 'uDayOn'), dayOn); gl.uniform1f(gl.getUniformLocation(prog, 'uTw'), 1 - (G.day || 0)); gl.uniform3fv(gl.getUniformLocation(prog, 'uLs'), sunDir()); gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, clOn ? clTex : tex); gl.uniform1i(gl.getUniformLocation(prog, 'uCl'), 2); gl.uniform1f(gl.getUniformLocation(prog, 'uClOn'), clOn); gl.uniform1f(gl.getUniformLocation(prog, 'uClT'), (clock * 0.0012) % 1); gl.uniform1f(gl.getUniformLocation(prog, 'uFx'), FXMODE); gl.uniform1f(gl.getUniformLocation(prog, 'uFxK'), FXMODE ? (G.fx || 0) : 0); { const R = R3, p = v3(CTG[0] + 22, CTG[1] + 12); gl.uniform3f(gl.getUniformLocation(prog, 'uFoc'), R[0]*p[0]+R[1]*p[1]+R[2]*p[2], R[3]*p[0]+R[4]*p[1]+R[5]*p[2], R[6]*p[0]+R[7]*p[1]+R[8]*p[2]); const q = v3(CTG[0], CTG[1]); gl.uniform3f(gl.getUniformLocation(prog, 'uCtg'), R[0]*q[0]+R[1]*q[1]+R[2]*q[2], R[3]*q[0]+R[4]*q[1]+R[5]*q[2], R[6]*q[0]+R[7]*q[1]+R[8]*q[2]); } gl.activeTexture(gl.TEXTURE0); gl.activeTexture(gl.TEXTURE0);
+  gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, dayOn ? dayTex : tex); gl.uniform1i(gl.getUniformLocation(prog, 'uDay'), 1); gl.uniform1f(gl.getUniformLocation(prog, 'uDayOn'), dayOn); gl.uniform1f(gl.getUniformLocation(prog, 'uTw'), 1 - (G.day || 0)); gl.uniform3fv(gl.getUniformLocation(prog, 'uLs'), sunDir()); gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, clOn ? clTex : tex); gl.uniform1i(gl.getUniformLocation(prog, 'uCl'), 2); gl.uniform1f(gl.getUniformLocation(prog, 'uClOn'), clOn); gl.uniform1f(gl.getUniformLocation(prog, 'uClT'), (clock * 0.0012) % 1); gl.uniform1f(gl.getUniformLocation(prog, 'uFx'), FXMODE); gl.uniform1f(gl.getUniformLocation(prog, 'uFxK'), FXMODE ? (G.fx || 0) : 0); { const R = R3, p = v3(CTG[0] + 22, CTG[1] + 12); gl.uniform3f(gl.getUniformLocation(prog, 'uFoc'), R[0]*p[0]+R[1]*p[1]+R[2]*p[2], R[3]*p[0]+R[4]*p[1]+R[5]*p[2], R[6]*p[0]+R[7]*p[1]+R[8]*p[2]); { const an = ANI.sat.c && ANI.sat.e > 0.005 && ANI.sat.e < Math.PI - 0.005 ? ANI.sat : (ANI.tie.c && ANI.tie.e > 0.005 && ANI.tie.e < Math.PI - 0.005 ? ANI.tie : null); const rc = an ? an.c : [0, 0, 1]; gl.uniform3f(gl.getUniformLocation(prog, 'uRc'), R[0]*rc[0]+R[1]*rc[1]+R[2]*rc[2], R[3]*rc[0]+R[4]*rc[1]+R[5]*rc[2], R[6]*rc[0]+R[7]*rc[1]+R[8]*rc[2]); gl.uniform1f(gl.getUniformLocation(prog, 'uRe'), an ? an.e / (Math.PI / 2) : -1); } const q = v3(CTG[0], CTG[1]); gl.uniform3f(gl.getUniformLocation(prog, 'uCtg'), R[0]*q[0]+R[1]*q[1]+R[2]*q[2], R[3]*q[0]+R[4]*q[1]+R[5]*q[2], R[6]*q[0]+R[7]*q[1]+R[8]*q[2]); } gl.activeTexture(gl.TEXTURE0); gl.activeTexture(gl.TEXTURE0);
   gl.disable(gl.BLEND); gl.depthMask(true); gl.cullFace(gl.BACK);
   gl.drawElements(gl.TRIANGLES, nIdx, gl.UNSIGNED_SHORT, 0);
   gl.useProgram(progA); bind(progA); gl.uniform1f(gl.getUniformLocation(progA, 'uS'), 1.14); gl.uniform1f(gl.getUniformLocation(progA, 'uDayOn'), dayOn); gl.uniform1f(gl.getUniformLocation(progA, 'uTw'), 1 - (G.day || 0)); gl.uniform3fv(gl.getUniformLocation(progA, 'uLs'), sunDir());
@@ -1594,7 +1595,7 @@ function update() {
   }
   const c1 = rectDe(CH1); const dusk = clamp((vh * 0.75 - c1.top) / (c1.height + vh * 0.35));
   T.day = 1;
-  T.fx = S.mode === 'story' ? smooth(0, 1, (vh * 0.95 - rectDe(chapters[0]).top) / (vh * 1.25)) : (S.mode === 'auction' ? 1 : 0);
+  T.fx = S.mode === 'story' ? smooth(0, 1, lectura(chapters[0])) : (S.mode === 'auction' ? 1 : 0);
   T.sun = { intro: 1, story: 0.3, auction: 0.15, final: 1, bg: 0.25, obs: 0 }[S.mode] ?? 0.3;
   T.obs = S.mode === 'obs' ? 1 : 0;
   if (RM) Object.assign(G, T);
@@ -1683,6 +1684,9 @@ function notaCab() {
 // Each layer arrives with its own ring: a circle that opens from the point facing you, sweeps over the
 // whole planet and leaves its layer behind. The ring is tied to the chapter's own scroll, so the words
 // and the picture move together: the ring starts as the chapter's text appears and closes when it is read.
+// how far the reader is into a chapter, measured on its title: 0 when the title reaches 72 % of the
+// screen height, 1 half a screen later. Scrolling back runs it backwards.
+const lectura = (el) => { if (!el) return 0; const h = el.querySelector('h2') || el; return clamp((vh * 0.72 - rectDe(h).top) / (vh * 0.5)); };
 const ANI = { cab: { c: null, e: 0 }, sat: { c: null, e: 0 }, tie: { c: null, e: 0 } };
 function frente() { const R = R3; return [R[6], R[7], R[8]]; } // the model point facing the camera
 function capasPortada(dt) {
@@ -1700,8 +1704,9 @@ function capasPortada(dt) {
   for (const [k, i] of [['sat', iS], ['tie', iT]]) {
     const v = enS ? ch(i) : 0, an = ANI[k];
     if (v < 0.02) { an.c = null; an.e = 0; continue; }
-    if (!an.c) an.c = frente();
-    an.e = Math.PI * smooth(0.12, 0.8, v); // angular radius of the ring: 0 → the whole planet
+    // each ring opens from the middle of the land the planet turns to (Africa for the satellites, the Middle East for land)
+    if (!an.c) an.c = k === 'sat' ? v3(10, 12) : v3(45, 24);
+    an.e = Math.PI * smooth(0, 1, lectura(chapters[i])); // angular radius of the ring: 0 → the whole planet
   }
   const pr = (i) => clamp(ch(i)) ;
   const objetivos = [[wC, -55 + 30 * pr(iC)], [wS, 5 + 35 * pr(iS)], [wT, 40 + 45 * pr(iT)]];
@@ -1777,7 +1782,6 @@ function pintaCapas(dt) {
       ctx.globalAlpha = CAPA.sat * a * (geoEs ? 0.95 : 0.78); ctx.fillStyle = geoEs ? '#F4F6F8' : '#9CC3E4';
       const s2 = geoEs ? tam * 1.4 : tam; ctx.fillRect(p[0] - s2 / 2, p[1] - s2 / 2, s2, s2);
     }
-    pintaAnillo(ANI.sat, '158,219,255', CAPA.sat * a);
   }
   // 3 · land fibre, amber, next to the submarine cables in steel so the two read apart
   if (CAPA.tie > 0.01 && C && C.lineas.length) {
@@ -1791,7 +1795,6 @@ function pintaCapas(dt) {
       for (const q of C.centros) { if (!dentroDe(ANI.tie, q)) continue; const p = project(q); if (!p[2]) continue; ctx.rect(p[0] - tm / 2, p[1] - tm / 2, tm, tm); }
       ctx.stroke();
     }
-    pintaAnillo(ANI.tie, '158,219,255', CAPA.tie * a);
   }
 }
 document.addEventListener('guardiana:lang', () => { notaSat(); notaCab(); });
