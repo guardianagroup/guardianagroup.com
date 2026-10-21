@@ -10,7 +10,7 @@
   const P = () => window.OrbitaPlaneta;
   const RE = 6378.137, RAD = Math.PI / 180;
   const ACERO = '156,195,228', BLANCO = '244,246,248';
-  const estado = { sub: false, tierra: false, sat: false, vista: 'equilibrada', orb: { baja: true, media: true, geo: true } };
+  const estado = { sub: false, tierra: false, puntos: false, sat: false, vista: 'equilibrada', orb: { baja: true, media: true, geo: true } };
   try { const g = JSON.parse(localStorage.getItem('guardiana-orbita-capas') || '{}'); Object.assign(estado, g); estado.orb = Object.assign({ baja: true, media: true, geo: true }, g.orb || {}); if (!['equilibrada', 'todos', 'cielo'].includes(estado.vista)) estado.vista = 'equilibrada'; } catch (_) {}
   const guarda = () => { try { localStorage.setItem('guardiana-orbita-capas', JSON.stringify(estado)); } catch (_) {} };
 
@@ -43,6 +43,35 @@
       capas[clave] = { d, lineas, nombres: new Set(d.cables.map((c) => c.n).filter(Boolean)).size };
     } catch (e) { capas[clave] = { error: true }; }
     cargando[clave] = false; pintaNota();
+  }
+
+  // where the internet touches the ground (OpenStreetMap): landing stations, data centres, exchange points
+  let PT = null;
+  async function cargaPuntos() {
+    if (PT || cargando.puntos) return;
+    cargando.puntos = true;
+    try {
+      const d = await cargaJSON('datos/puntos.json');
+      const c = d.campos, il = c.indexOf('lon'), ia = c.indexOf('lat'), it = c.indexOf('tipo');
+      PT = { d, p: d.puntos.map((f) => ({ w: P().vec(f[il], f[ia]).map((x) => x * 1.002), t: f[it] })) };
+    } catch (e) { PT = { error: true }; }
+    cargando.puntos = false; pintaNota();
+  }
+  function pintaPuntos(cx, p, G) {
+    const forma = { aterrizaje: 0, datos: 1, intercambio: 2 };
+    for (let k = 0; k < 3; k++) {
+      cx.beginPath();
+      for (const q of PT.p) {
+        if (forma[q.t] !== k) continue;
+        const v = p.aVista(q.w); if (v[2] <= 0.02) continue;
+        const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
+        if (k === 0) { cx.moveTo(x, y - 2.6); cx.lineTo(x + 2.6, y); cx.lineTo(x, y + 2.6); cx.lineTo(x - 2.6, y); cx.closePath(); }
+        else if (k === 1) cx.rect(x - 1.5, y - 1.5, 3, 3);
+        else { cx.moveTo(x + 2.8, y); cx.arc(x, y, 2.8, 0, 7); }
+      }
+      if (k === 2) { cx.strokeStyle = `rgba(${BLANCO},.85)`; cx.lineWidth = 1; cx.stroke(); }
+      else { cx.fillStyle = k === 0 ? `rgba(${BLANCO},.9)` : `rgba(${ACERO},.75)`; cx.fill(); }
+    }
   }
 
   // satellites: one SGP4 record each; positions computed in turns and extrapolated every frame
@@ -87,6 +116,7 @@
     cx.globalCompositeOperation = 'lighter';
     if (estado.tierra && capas.tierra && capas.tierra.lineas) pintaLineas(cx, p, G, capas.tierra.lineas, `rgba(${ACERO},.30)`, 0.7);
     if (estado.sub && capas.sub && capas.sub.lineas) { pintaLineas(cx, p, G, capas.sub.lineas, `rgba(${ACERO},.62)`, 1); pintaLuz(cx, p, G, capas.sub.lineas, t); }
+    if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); cx.globalCompositeOperation = 'lighter'; }
     if (estado.sat && S && S.N) pintaSat(cx, p, G, t);
   }
   // The light inside the fibre (owner, 20 Oct 2026: «how the data travels, in the right direction»).
@@ -248,6 +278,10 @@
       const c = capas.tierra;
       partes.push(c && c.d ? num(c.nombres) + ' ' + T('cables de tierra con nombre') + ' · © OpenStreetMap (ODbL) · ' + T('solo una parte de la fibra') : c && c.error ? T('No se pudieron cargar los cables de tierra.') : T('Cargando cables de tierra…'));
     }
+    if (estado.puntos) {
+      const m = PT && PT.d && PT.d.medida;
+      partes.push(m ? '◆ ' + num(m.aterrizaje) + ' ' + T('llegadas de cables') + ' · ■ ' + num(m.datos) + ' ' + T('centros de datos') + ' · ○ ' + num(m.intercambio) + ' ' + T('puntos de intercambio') + ' · © OpenStreetMap (ODbL) · ' + T('cobertura parcial') : PT && PT.error ? T('No se pudieron cargar los puntos.') : T('Cargando puntos…'));
+    }
     el.textContent = partes.join('   ·   ');
     el.hidden = !partes.length;
     document.body.classList.toggle('ver-sat', estado.sat);
@@ -301,17 +335,18 @@
   function pon(clave, on) {
     estado[clave] = on; guarda();
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
-    if (on) { if (clave === 'sat') cargaSat(); else cargaCables(clave); }
+    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') cargaPuntos(); else cargaCables(clave); }
     if (!on && clave === 'sat') muestra(-1);
     pintaNota(); pintaVista();
   }
   async function arranca() {
     // the land layer only appears when there is land data to show
     // (asked to the small index, so the page never requests a file that is not there)
-    try { const r = await fetch('datos/indice.json', { cache: 'no-cache' }); if (!r.ok) throw 0; const i = await r.json(); if (!i.capas || !i.capas.tierra) throw 0; } catch (_) { const b = document.querySelector('#capas [data-capa="tierra"]'); if (b) b.remove(); estado.tierra = false; }
+    let ind = null; try { const r = await fetch('datos/indice.json', { cache: 'no-cache' }); if (r.ok) ind = await r.json(); } catch (_) {}
+    for (const k of ['tierra', 'puntos']) if (!ind || !ind.capas || !ind.capas[k]) { const b = document.querySelector(`#capas [data-capa="${k}"]`); if (b) b.remove(); estado[k] = false; }
     enganchaVista();
     document.querySelectorAll('#capas [data-capa]').forEach((b) => b.addEventListener('click', () => pon(b.dataset.capa, b.getAttribute('aria-pressed') !== 'true')));
-    for (const k of ['sub', 'tierra', 'sat']) if (estado[k]) pon(k, true);
+    for (const k of ['sub', 'tierra', 'puntos', 'sat']) if (estado[k]) pon(k, true);
     pintaNota();
     addEventListener('guardiana-idioma', pintaNota);
   }
