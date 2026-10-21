@@ -272,3 +272,16 @@ body.dentro .capas, body.dentro .capa-nota, body.dentro .sat-ficha { opacity: 0;
   body.dock .puerta button { padding: 9px 14px 9px 12px; }
 }
 .sat-ficha[hidden], .capa-nota[hidden] { display: none; }
+
+/* The doors, on the left, top to bottom (owner, 20 Oct 2026): ZERO first, then Comunicaciones and
+   Radiografías; all the same width, the column centred in height, nothing under the planet. */
+body.dock #puertas { inset: 0 auto 0 calc(32px + env(safe-area-inset-left, 0px)); flex-direction: column; justify-content: center; align-items: stretch; gap: 12px; width: 232px; }
+body.dock .puerta:nth-child(1) { order: 1; } body.dock .puerta:nth-child(2) { order: 2; } body.dock .puerta:nth-child(3) { order: 3; }
+body.dock .puerta button, body.dock .puerta:nth-child(1) button { width: 100%; box-sizing: border-box; padding: 14px 18px; }
+.capa-nota { bottom: calc(30px + env(safe-area-inset-bottom, 0px)); }
+/* phones: no room beside the planet, so the doors go back to a row along the bottom */
+@media (max-width: 760px) {
+  body.dock #puertas { inset: auto 0 calc(20px + env(safe-area-inset-bottom, 0px)) 0; flex-direction: row; justify-content: center; width: auto; gap: 8px; }
+  body.dock .puerta button, body.dock .puerta:nth-child(1) button { width: auto; padding: 9px 12px; }
+  .capa-nota { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
+}
