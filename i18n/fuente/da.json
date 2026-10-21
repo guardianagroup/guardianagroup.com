@@ -1,17 +1,31 @@
 {
-"phrase": ["Ved", "du,", "hvor", "dine", "data", "ender?"],
+"phrase": [
+"Ved",
+"du,",
+"hvor",
+"dine",
+"data",
+"ender?"
+],
 "hi": 4,
-"light": ["De virksomheder, der tabte budrunden, har allerede fået dine data. Ingen spørger dig. Ingen siger det til dig. I USA kommer en persons data på auktion i gennemsnit syv hundrede og syvogfyrre gange om dagen.", "syv hundrede og syvogfyrre gange om dagen."],
+"light": [
+"De virksomheder, der tabte budrunden, har allerede fået dine data. Ingen spørger dig. Ingen siger det til dig. I USA kommer en persons data på auktion i gennemsnit syv hundrede og syvogfyrre gange om dagen.",
+"syv hundrede og syvogfyrre gange om dagen."
+],
 "title": "GUARDIANA · Din computer taler. Nu kan du se det.",
 "x": {
- "sat": "Rigtige satellitter fra CelesTrak, med positionen beregnet lige nu på din skærm. Viser {a} af {b} datasatellitter (alle undtagen Starlink, plus hver {p}. Starlink-satellit).",
- "cab": "{n} rigtige søkabler fra OpenStreetMap (ODbL); nogle mangler. Lysimpulserne viser trafikkens retning, ikke den faktiske trafik.",
- "tieL": ["km landfiber", "datacentre", "Forbindelser mellem centre (illustrative)"],
- "tie": "Kilde: OpenStreetMap (ODbL). Det er kun en lille del af det rigtige net: det meste landfiber findes ikke på åbne kort. De stiplede linjer er ikke rigtige ruter: de forbinder hvert datacenter med dets nærmeste nabo.",
- "share": "Enhver hjemmeside kan vide alt det her om mig uden at spørge: {d}. Og om dig? Se selv her:",
- "copied": "Kopieret. Indsæt det, hvor du vil.",
- "shared": "Tak, fordi du deler.",
- "meta": "Din computer, din AI og dit antivirusprogram taler med verden uden at spørge om lov. GUARDIANA viser dig hvem, og blokerer det, du ikke har godkendt. Open source, alt sammen på din computer."
+"sat": "Rigtige satellitter fra CelesTrak, med positionen beregnet lige nu på din skærm. Viser {a} af {b} datasatellitter (alle undtagen Starlink, plus hver {p}. Starlink-satellit).",
+"cab": "{n} rigtige søkabler fra OpenStreetMap (ODbL); nogle mangler. Lysimpulserne viser trafikkens retning, ikke den faktiske trafik.",
+"tieL": [
+"km landfiber",
+"datacentre",
+"Forbindelser mellem centre (illustrative)"
+],
+"tie": "Kilde: OpenStreetMap (ODbL). Det er kun en lille del af det rigtige net: det meste landfiber findes ikke på åbne kort. De stiplede linjer er ikke rigtige ruter: de forbinder hvert datacenter med dets nærmeste nabo.",
+"share": "Enhver hjemmeside kan vide alt det her om mig uden at spørge: {d}. Og om dig? Se selv her:",
+"copied": "Kopieret. Indsæt det, hvor du vil.",
+"shared": "Tak, fordi du deler.",
+"meta": "Din computer, din AI og dit antivirusprogram taler med verden uden at spørge om lov. GUARDIANA viser dig hvem, og blokerer det, du ikke har godkendt. Open source, alt sammen på din computer."
 },
 "t": {
 "1": "På land fører fiberen dem frem til datacentrene.",
@@ -302,7 +316,7 @@
 "316": "Privatliv",
 "317": "Vilkår",
 "318": "Kode",
-"319": "© 2026 GUARDIANA Group · Torre Empresarial PRODEGI, 18. etage · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Denne side bruger hverken cookies eller analyseværktøjer.",
+"319": "© 2026 GUARDIANA GROUP S.A.S. · Torre Empresarial PRODEGI, 18. etage · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Denne side bruger hverken cookies eller analyseværktøjer.",
 "320": "Din computer, din AI og dit antivirusprogram taler med verden uden at spørge om lov. GUARDIANA viser dig hvem, og blokerer det, du ikke har godkendt. Open source, alt sammen på din computer.",
 "321": "GUARDIANA, forside",
 "322": "Hovedmenu",

@@ -1,17 +1,30 @@
 {
-"phrase": ["Veistu", "hvert", "gögnin", "þín", "fara?"],
+"phrase": [
+"Veistu",
+"hvert",
+"gögnin",
+"þín",
+"fara?"
+],
 "hi": 2,
-"light": ["Fyrirtækin sem töpuðu uppboðinu hafa þegar fengið gögnin þín. Enginn spyr þig. Enginn lætur þig vita. Í Bandaríkjunum fara gögn hvers einstaklings á uppboð að meðaltali sjö hundruð fjörutíu og sjö sinnum á dag.", "sjö hundruð fjörutíu og sjö sinnum á dag."],
+"light": [
+"Fyrirtækin sem töpuðu uppboðinu hafa þegar fengið gögnin þín. Enginn spyr þig. Enginn lætur þig vita. Í Bandaríkjunum fara gögn hvers einstaklings á uppboð að meðaltali sjö hundruð fjörutíu og sjö sinnum á dag.",
+"sjö hundruð fjörutíu og sjö sinnum á dag."
+],
 "title": "GUARDIANA · Tölvan þín talar. Nú geturðu séð það.",
 "x": {
- "sat": "Raunverulegir gervihnettir frá CelesTrak, staðsetningin reiknuð núna á skjánum þínum. Sýndir eru {a} af {b} gagnagervihnöttum (allir nema Starlink, auk eins af hverjum {p} Starlink-hnöttum).",
- "cab": "{n} raunverulegir sæstrengir úr OpenStreetMap (ODbL); einhverja vantar. Ljóspúlsarnir sýna stefnu umferðarinnar, ekki raunverulega umferð.",
- "tieL": ["km af ljósleiðara á landi", "gagnaver", "Tengingar milli gagnavera (til skýringar)"],
- "tie": "Heimild: OpenStreetMap (ODbL). Þetta er aðeins lítill hluti raunverulega netsins: mestallur ljósleiðari á landi er ekki á opnum kortum. Brotnu línurnar eru ekki raunverulegar leiðir: þær tengja hvert gagnaver við næsta nágranna sinn.",
- "share": "Hvaða vefsíða sem er getur vitað allt þetta um mig án þess að spyrja: {d}. En um þig? Sjáðu sjálf(ur) hér:",
- "copied": "Afritað. Límdu það hvar sem þú vilt.",
- "shared": "Takk fyrir að deila.",
- "meta": "Tölvan þín, gervigreindin þín og vírusvörnin þín tala við umheiminn án þess að spyrja þig. GUARDIANA sýnir þér við hverja og lokar á það sem þú hefur ekki leyft. Opinn hugbúnaður, allt í þinni eigin tölvu."
+"sat": "Raunverulegir gervihnettir frá CelesTrak, staðsetningin reiknuð núna á skjánum þínum. Sýndir eru {a} af {b} gagnagervihnöttum (allir nema Starlink, auk eins af hverjum {p} Starlink-hnöttum).",
+"cab": "{n} raunverulegir sæstrengir úr OpenStreetMap (ODbL); einhverja vantar. Ljóspúlsarnir sýna stefnu umferðarinnar, ekki raunverulega umferð.",
+"tieL": [
+"km af ljósleiðara á landi",
+"gagnaver",
+"Tengingar milli gagnavera (til skýringar)"
+],
+"tie": "Heimild: OpenStreetMap (ODbL). Þetta er aðeins lítill hluti raunverulega netsins: mestallur ljósleiðari á landi er ekki á opnum kortum. Brotnu línurnar eru ekki raunverulegar leiðir: þær tengja hvert gagnaver við næsta nágranna sinn.",
+"share": "Hvaða vefsíða sem er getur vitað allt þetta um mig án þess að spyrja: {d}. En um þig? Sjáðu sjálf(ur) hér:",
+"copied": "Afritað. Límdu það hvar sem þú vilt.",
+"shared": "Takk fyrir að deila.",
+"meta": "Tölvan þín, gervigreindin þín og vírusvörnin þín tala við umheiminn án þess að spyrja þig. GUARDIANA sýnir þér við hverja og lokar á það sem þú hefur ekki leyft. Opinn hugbúnaður, allt í þinni eigin tölvu."
 },
 "t": {
 "1": "Á landi flytur ljósleiðarinn þau alla leið í gagnaverin.",
@@ -302,7 +315,7 @@
 "316": "Persónuvernd",
 "317": "Skilmálar",
 "318": "Kóði",
-"319": "© 2026 GUARDIANA Group · Torre Empresarial PRODEGI, 18. hæð · Bocagrande, Cartagena, Kólumbíu · hola@guardianagroup.com · Þessi síða notar hvorki vafrakökur né greiningartól.",
+"319": "© 2026 GUARDIANA GROUP S.A.S. · Torre Empresarial PRODEGI, 18. hæð · Bocagrande, Cartagena, Kólumbíu · hola@guardianagroup.com · Þessi síða notar hvorki vafrakökur né greiningartól.",
 "320": "Tölvan þín, gervigreindin þín og vírusvörnin þín tala við umheiminn án þess að spyrja þig. GUARDIANA sýnir þér við hverja og lokar á það sem þú hefur ekki leyft. Opinn hugbúnaður, allt í þinni eigin tölvu.",
 "321": "GUARDIANA, forsíða",
 "322": "Aðalvalmynd",

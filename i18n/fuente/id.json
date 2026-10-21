@@ -1,17 +1,32 @@
 {
-"phrase": ["Tahukah", "Anda", "ke", "mana", "data", "Anda", "pergi?"],
+"phrase": [
+"Tahukah",
+"Anda",
+"ke",
+"mana",
+"data",
+"Anda",
+"pergi?"
+],
 "hi": 4,
-"light": ["Perusahaan yang kalah dalam lelang pun sudah menerima data Anda. Tak ada yang bertanya kepada Anda. Tak ada yang memberi tahu. Di Amerika Serikat, data satu orang dilelang rata-rata tujuh ratus empat puluh tujuh kali sehari.", "rata-rata tujuh ratus empat puluh tujuh kali sehari."],
+"light": [
+"Perusahaan yang kalah dalam lelang pun sudah menerima data Anda. Tak ada yang bertanya kepada Anda. Tak ada yang memberi tahu. Di Amerika Serikat, data satu orang dilelang rata-rata tujuh ratus empat puluh tujuh kali sehari.",
+"rata-rata tujuh ratus empat puluh tujuh kali sehari."
+],
 "title": "GUARDIANA · Komputer Anda berbicara. Kini Anda bisa melihatnya.",
 "x": {
- "sat": "Satelit sungguhan dari data CelesTrak, posisinya dihitung saat ini juga di layar Anda. Menampilkan {a} dari {b} satelit data (semua kecuali Starlink, ditambah satu dari setiap {p} satelit Starlink).",
- "cab": "{n} kabel bawah laut sungguhan dari OpenStreetMap (ODbL); beberapa belum tercantum. Denyut cahaya menunjukkan arah lalu lintas, bukan lalu lintas sebenarnya.",
- "tieL": ["km serat optik darat", "pusat data", "Tautan antarpusat (ilustrasi)"],
- "tie": "Sumber: OpenStreetMap (ODbL). Ini hanya sebagian kecil dari jaringan sebenarnya: sebagian besar serat optik darat tidak tercantum di peta terbuka. Garis putus-putus bukan rute sungguhan: garis itu menghubungkan tiap pusat data dengan tetangga terdekatnya.",
- "share": "Situs mana pun bisa tahu semua ini tentang saya tanpa bertanya: {d}. Bagaimana dengan Anda? Lihat sendiri di sini:",
- "copied": "Tersalin. Tempel di mana saja.",
- "shared": "Terima kasih sudah membagikan.",
- "meta": "Komputer, AI, dan antivirus Anda berbicara dengan dunia tanpa meminta izin Anda. GUARDIANA menunjukkan dengan siapa mereka berbicara dan memblokir yang tidak Anda izinkan. Sumber terbuka, semuanya di komputer Anda sendiri."
+"sat": "Satelit sungguhan dari data CelesTrak, posisinya dihitung saat ini juga di layar Anda. Menampilkan {a} dari {b} satelit data (semua kecuali Starlink, ditambah satu dari setiap {p} satelit Starlink).",
+"cab": "{n} kabel bawah laut sungguhan dari OpenStreetMap (ODbL); beberapa belum tercantum. Denyut cahaya menunjukkan arah lalu lintas, bukan lalu lintas sebenarnya.",
+"tieL": [
+"km serat optik darat",
+"pusat data",
+"Tautan antarpusat (ilustrasi)"
+],
+"tie": "Sumber: OpenStreetMap (ODbL). Ini hanya sebagian kecil dari jaringan sebenarnya: sebagian besar serat optik darat tidak tercantum di peta terbuka. Garis putus-putus bukan rute sungguhan: garis itu menghubungkan tiap pusat data dengan tetangga terdekatnya.",
+"share": "Situs mana pun bisa tahu semua ini tentang saya tanpa bertanya: {d}. Bagaimana dengan Anda? Lihat sendiri di sini:",
+"copied": "Tersalin. Tempel di mana saja.",
+"shared": "Terima kasih sudah membagikan.",
+"meta": "Komputer, AI, dan antivirus Anda berbicara dengan dunia tanpa meminta izin Anda. GUARDIANA menunjukkan dengan siapa mereka berbicara dan memblokir yang tidak Anda izinkan. Sumber terbuka, semuanya di komputer Anda sendiri."
 },
 "t": {
 "1": "Di darat, serat optik membawanya sampai ke pusat data.",
@@ -302,7 +317,7 @@
 "316": "Privasi",
 "317": "Ketentuan",
 "318": "Kode",
-"319": "© 2026 GUARDIANA Group · Torre Empresarial PRODEGI, lantai 18 · Bocagrande, Cartagena, Kolombia · hola@guardianagroup.com · Halaman ini tidak memakai cookie maupun analitik.",
+"319": "© 2026 GUARDIANA GROUP S.A.S. · Torre Empresarial PRODEGI, lantai 18 · Bocagrande, Cartagena, Kolombia · hola@guardianagroup.com · Halaman ini tidak memakai cookie maupun analitik.",
 "320": "Komputer, AI, dan antivirus Anda berbicara dengan dunia tanpa meminta izin Anda. GUARDIANA menunjukkan dengan siapa mereka berbicara dan memblokir yang tidak Anda izinkan. Sumber terbuka, semuanya di komputer Anda sendiri.",
 "321": "GUARDIANA, beranda",
 "322": "Menu utama",

@@ -1,17 +1,30 @@
 {
-"phrase": ["Wiesz,", "dokąd", "trafiają", "twoje", "dane?"],
+"phrase": [
+"Wiesz,",
+"dokąd",
+"trafiają",
+"twoje",
+"dane?"
+],
 "hi": 4,
-"light": ["Firmy, które przegrały aukcję, już dostały twoje dane. Nikt cię nie pyta. Nikt cię nie uprzedza. W USA dane jednej osoby trafiają na aukcję średnio siedemset czterdzieści siedem razy dziennie.", "siedemset czterdzieści siedem razy dziennie."],
+"light": [
+"Firmy, które przegrały aukcję, już dostały twoje dane. Nikt cię nie pyta. Nikt cię nie uprzedza. W USA dane jednej osoby trafiają na aukcję średnio siedemset czterdzieści siedem razy dziennie.",
+"siedemset czterdzieści siedem razy dziennie."
+],
 "title": "GUARDIANA · Twój komputer mówi. Teraz możesz to zobaczyć.",
 "x": {
- "sat": "Prawdziwe satelity z danych CelesTrak, z pozycją obliczaną teraz na twoim ekranie. Widzisz {a} z {b} satelitów przesyłających dane (wszystkie poza Starlinkiem i co {p}. satelita Starlink).",
- "cab": "{n} prawdziwych kabli podmorskich z OpenStreetMap (ODbL); niektórych brakuje. Impulsy światła pokazują kierunek ruchu, a nie rzeczywisty ruch.",
- "tieL": ["km światłowodu lądowego", "centrów danych", "Połączenia między centrami (poglądowe)"],
- "tie": "Źródło: OpenStreetMap (ODbL). To tylko niewielka część prawdziwej sieci: większości światłowodów lądowych nie ma na otwartych mapach. Linie przerywane nie są prawdziwymi trasami: łączą każde centrum danych z najbliższym sąsiadem.",
- "share": "Każda strona może wiedzieć o mnie to wszystko, nie pytając: {d}. A o tobie? Sprawdź sam:",
- "copied": "Skopiowano. Wklej, gdzie chcesz.",
- "shared": "Dzięki za udostępnienie.",
- "meta": "Twój komputer, twoja SI i twój antywirus rozmawiają ze światem bez pytania cię o zgodę. GUARDIANA pokazuje, z kim, i blokuje to, na co nie pozwoliłeś. Otwarty kod, wszystko na twoim komputerze."
+"sat": "Prawdziwe satelity z danych CelesTrak, z pozycją obliczaną teraz na twoim ekranie. Widzisz {a} z {b} satelitów przesyłających dane (wszystkie poza Starlinkiem i co {p}. satelita Starlink).",
+"cab": "{n} prawdziwych kabli podmorskich z OpenStreetMap (ODbL); niektórych brakuje. Impulsy światła pokazują kierunek ruchu, a nie rzeczywisty ruch.",
+"tieL": [
+"km światłowodu lądowego",
+"centrów danych",
+"Połączenia między centrami (poglądowe)"
+],
+"tie": "Źródło: OpenStreetMap (ODbL). To tylko niewielka część prawdziwej sieci: większości światłowodów lądowych nie ma na otwartych mapach. Linie przerywane nie są prawdziwymi trasami: łączą każde centrum danych z najbliższym sąsiadem.",
+"share": "Każda strona może wiedzieć o mnie to wszystko, nie pytając: {d}. A o tobie? Sprawdź sam:",
+"copied": "Skopiowano. Wklej, gdzie chcesz.",
+"shared": "Dzięki za udostępnienie.",
+"meta": "Twój komputer, twoja SI i twój antywirus rozmawiają ze światem bez pytania cię o zgodę. GUARDIANA pokazuje, z kim, i blokuje to, na co nie pozwoliłeś. Otwarty kod, wszystko na twoim komputerze."
 },
 "t": {
 "1": "Na lądzie światłowód doprowadza je do centrów danych.",
@@ -302,7 +315,7 @@
 "316": "Prywatność",
 "317": "Regulamin",
 "318": "Kod",
-"319": "© 2026 GUARDIANA Group · Torre Empresarial PRODEGI, 18. piętro · Bocagrande, Cartagena, Kolumbia · hola@guardianagroup.com · Ta strona nie używa plików cookie ani narzędzi analitycznych.",
+"319": "© 2026 GUARDIANA GROUP S.A.S. · Torre Empresarial PRODEGI, 18. piętro · Bocagrande, Cartagena, Kolumbia · hola@guardianagroup.com · Ta strona nie używa plików cookie ani narzędzi analitycznych.",
 "320": "Twój komputer, twoja SI i twój antywirus rozmawiają ze światem bez pytania cię o zgodę. GUARDIANA pokazuje, z kim, i blokuje to, na co nie pozwoliłeś. Otwarty kod, wszystko na twoim komputerze.",
 "321": "GUARDIANA, strona główna",
 "322": "Menu główne",

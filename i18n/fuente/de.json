@@ -1,17 +1,31 @@
 {
-"phrase": ["Wissen", "Sie,", "wohin", "Ihre", "Daten", "gehen?"],
+"phrase": [
+"Wissen",
+"Sie,",
+"wohin",
+"Ihre",
+"Daten",
+"gehen?"
+],
 "hi": 4,
-"light": ["Die Unternehmen, die die Auktion verloren haben, haben Ihre Daten trotzdem schon bekommen. Niemand fragt Sie. Niemand sagt es Ihnen. In den USA kommen die Daten eines Menschen im Schnitt siebenhundertsiebenundvierzig Mal am Tag unter den Hammer.", "siebenhundertsiebenundvierzig Mal am Tag unter den Hammer."],
+"light": [
+"Die Unternehmen, die die Auktion verloren haben, haben Ihre Daten trotzdem schon bekommen. Niemand fragt Sie. Niemand sagt es Ihnen. In den USA kommen die Daten eines Menschen im Schnitt siebenhundertsiebenundvierzig Mal am Tag unter den Hammer.",
+"siebenhundertsiebenundvierzig Mal am Tag unter den Hammer."
+],
 "title": "GUARDIANA · Ihr Computer spricht. Jetzt können Sie es sehen.",
 "x": {
- "sat": "Echte Satelliten aus den Daten von CelesTrak, ihre Position wird gerade auf Ihrem Bildschirm berechnet. Angezeigt: {a} von {b} Datensatelliten (alle außer Starlink, dazu jeder {p}. Starlink-Satellit).",
- "cab": "{n} echte Unterseekabel aus OpenStreetMap (ODbL); einige fehlen. Die Lichtimpulse zeigen die Richtung des Datenverkehrs, nicht den tatsächlichen Verkehr.",
- "tieL": ["km Glasfaser an Land", "Rechenzentren", "Verbindungen zwischen Zentren (veranschaulichend)"],
- "tie": "Quelle: OpenStreetMap (ODbL). Das ist nur ein kleiner Teil des echten Netzes: Der Großteil der Glasfaser an Land ist in keiner offenen Karte verzeichnet. Die gestrichelten Linien sind keine echten Routen: Sie verbinden jedes Rechenzentrum mit seinem nächsten Nachbarn.",
- "share": "Jede Website kann all das über mich wissen, ohne zu fragen: {d}. Und über Sie? Sehen Sie selbst:",
- "copied": "Kopiert. Fügen Sie es ein, wo Sie möchten.",
- "shared": "Danke fürs Teilen.",
- "meta": "Ihr Computer, Ihre KI und Ihr Virenschutz sprechen mit der Welt, ohne Sie um Erlaubnis zu fragen. GUARDIANA zeigt Ihnen, mit wem, und blockiert, was Sie nicht erlaubt haben. Open Source, alles auf Ihrem eigenen Rechner."
+"sat": "Echte Satelliten aus den Daten von CelesTrak, ihre Position wird gerade auf Ihrem Bildschirm berechnet. Angezeigt: {a} von {b} Datensatelliten (alle außer Starlink, dazu jeder {p}. Starlink-Satellit).",
+"cab": "{n} echte Unterseekabel aus OpenStreetMap (ODbL); einige fehlen. Die Lichtimpulse zeigen die Richtung des Datenverkehrs, nicht den tatsächlichen Verkehr.",
+"tieL": [
+"km Glasfaser an Land",
+"Rechenzentren",
+"Verbindungen zwischen Zentren (veranschaulichend)"
+],
+"tie": "Quelle: OpenStreetMap (ODbL). Das ist nur ein kleiner Teil des echten Netzes: Der Großteil der Glasfaser an Land ist in keiner offenen Karte verzeichnet. Die gestrichelten Linien sind keine echten Routen: Sie verbinden jedes Rechenzentrum mit seinem nächsten Nachbarn.",
+"share": "Jede Website kann all das über mich wissen, ohne zu fragen: {d}. Und über Sie? Sehen Sie selbst:",
+"copied": "Kopiert. Fügen Sie es ein, wo Sie möchten.",
+"shared": "Danke fürs Teilen.",
+"meta": "Ihr Computer, Ihre KI und Ihr Virenschutz sprechen mit der Welt, ohne Sie um Erlaubnis zu fragen. GUARDIANA zeigt Ihnen, mit wem, und blockiert, was Sie nicht erlaubt haben. Open Source, alles auf Ihrem eigenen Rechner."
 },
 "t": {
 "1": "An Land bringt die Glasfaser sie bis zu den Rechenzentren.",
@@ -302,7 +316,7 @@
 "316": "Datenschutz",
 "317": "AGB",
 "318": "Code",
-"319": "© 2026 GUARDIANA Group · Torre Empresarial PRODEGI, 18. Stock · Bocagrande, Cartagena, Kolumbien · hola@guardianagroup.com · Diese Seite verwendet weder Cookies noch Analysetools.",
+"319": "© 2026 GUARDIANA GROUP S.A.S. · Torre Empresarial PRODEGI, 18. Stock · Bocagrande, Cartagena, Kolumbien · hola@guardianagroup.com · Diese Seite verwendet weder Cookies noch Analysetools.",
 "320": "Ihr Computer, Ihre KI und Ihr Virenschutz sprechen mit der Welt, ohne Sie um Erlaubnis zu fragen. GUARDIANA zeigt Ihnen, mit wem, und blockiert, was Sie nicht erlaubt haben. Open Source, alles auf Ihrem eigenen Rechner.",
 "321": "GUARDIANA, Startseite",
 "322": "Hauptmenü",

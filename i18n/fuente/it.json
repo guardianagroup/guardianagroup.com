@@ -1,17 +1,31 @@
 {
-"phrase": ["Sai", "dove", "finiscono", "i", "tuoi", "dati?"],
+"phrase": [
+"Sai",
+"dove",
+"finiscono",
+"i",
+"tuoi",
+"dati?"
+],
 "hi": 5,
-"light": ["Le aziende che hanno perso l’asta hanno già ricevuto i tuoi dati. Nessuno te lo chiede. Nessuno te lo dice. Negli Stati Uniti i dati di una persona finiscono all’asta in media settecentoquarantasette volte al giorno.", "settecentoquarantasette volte al giorno."],
+"light": [
+"Le aziende che hanno perso l’asta hanno già ricevuto i tuoi dati. Nessuno te lo chiede. Nessuno te lo dice. Negli Stati Uniti i dati di una persona finiscono all’asta in media settecentoquarantasette volte al giorno.",
+"settecentoquarantasette volte al giorno."
+],
 "title": "GUARDIANA · Il tuo computer parla. Ora puoi vederlo.",
 "x": {
- "sat": "Satelliti reali dal catalogo CelesTrak, con la posizione calcolata ora sul tuo schermo. Ne vedi {a} su {b} satelliti per dati (tutti tranne Starlink, più uno Starlink ogni {p}).",
- "cab": "{n} cavi sottomarini reali da OpenStreetMap (ODbL); alcuni mancano. Gli impulsi di luce mostrano la direzione del traffico, non il traffico reale.",
- "tieL": ["km di fibra terrestre", "data center", "Collegamenti tra centri (illustrativi)"],
- "tie": "Fonte: OpenStreetMap (ODbL). È solo una piccola parte della rete reale: la maggior parte della fibra terrestre non compare nelle mappe aperte. Le linee tratteggiate non sono percorsi reali: collegano ogni data center al più vicino.",
- "share": "Qualsiasi sito può sapere tutto questo di me senza chiedermelo: {d}. E di te? Guarda qui:",
- "copied": "Copiato. Incollalo dove vuoi.",
- "shared": "Grazie per averlo condiviso.",
- "meta": "Il tuo computer, la tua IA e il tuo antivirus parlano con il mondo senza chiederti il permesso. GUARDIANA ti mostra con chi e blocca ciò che non hai autorizzato. Open source, tutto sul tuo computer."
+"sat": "Satelliti reali dal catalogo CelesTrak, con la posizione calcolata ora sul tuo schermo. Ne vedi {a} su {b} satelliti per dati (tutti tranne Starlink, più uno Starlink ogni {p}).",
+"cab": "{n} cavi sottomarini reali da OpenStreetMap (ODbL); alcuni mancano. Gli impulsi di luce mostrano la direzione del traffico, non il traffico reale.",
+"tieL": [
+"km di fibra terrestre",
+"data center",
+"Collegamenti tra centri (illustrativi)"
+],
+"tie": "Fonte: OpenStreetMap (ODbL). È solo una piccola parte della rete reale: la maggior parte della fibra terrestre non compare nelle mappe aperte. Le linee tratteggiate non sono percorsi reali: collegano ogni data center al più vicino.",
+"share": "Qualsiasi sito può sapere tutto questo di me senza chiedermelo: {d}. E di te? Guarda qui:",
+"copied": "Copiato. Incollalo dove vuoi.",
+"shared": "Grazie per averlo condiviso.",
+"meta": "Il tuo computer, la tua IA e il tuo antivirus parlano con il mondo senza chiederti il permesso. GUARDIANA ti mostra con chi e blocca ciò che non hai autorizzato. Open source, tutto sul tuo computer."
 },
 "t": {
 "1": "Sulla terraferma, la fibra li porta fino ai data center.",
@@ -302,7 +316,7 @@
 "316": "Privacy",
 "317": "Termini",
 "318": "Codice",
-"319": "© 2026 GUARDIANA Group · Torre Empresarial PRODEGI, piano 18 · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Questa pagina non usa cookie né strumenti di analisi.",
+"319": "© 2026 GUARDIANA GROUP S.A.S. · Torre Empresarial PRODEGI, piano 18 · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Questa pagina non usa cookie né strumenti di analisi.",
 "320": "Il tuo computer, la tua IA e il tuo antivirus parlano con il mondo senza chiederti il permesso. GUARDIANA ti mostra con chi e blocca ciò che non hai autorizzato. Open source, tutto sul tuo computer.",
 "321": "GUARDIANA, home",
 "322": "Menu principale",

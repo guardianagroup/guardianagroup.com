@@ -1,17 +1,31 @@
 {
-"phrase": ["Vet", "du", "hvor", "dataene", "dine", "havner?"],
+"phrase": [
+"Vet",
+"du",
+"hvor",
+"dataene",
+"dine",
+"havner?"
+],
 "hi": 3,
-"light": ["Selskapene som tapte budrunden, har allerede fått dataene dine. Ingen spør deg. Ingen sier fra. I USA går dataene til én person på auksjon i snitt sju hundre og førtisju ganger om dagen.", "sju hundre og førtisju ganger om dagen."],
+"light": [
+"Selskapene som tapte budrunden, har allerede fått dataene dine. Ingen spør deg. Ingen sier fra. I USA går dataene til én person på auksjon i snitt sju hundre og førtisju ganger om dagen.",
+"sju hundre og førtisju ganger om dagen."
+],
 "title": "GUARDIANA · Datamaskinen din snakker. Nå kan du se det.",
 "x": {
- "sat": "Ekte satellitter fra CelesTrak, med posisjonen beregnet akkurat nå på skjermen din. Viser {a} av {b} datasatellitter (alle unntatt Starlink, pluss hver {p}. Starlink-satellitt).",
- "cab": "{n} ekte sjøkabler fra OpenStreetMap (ODbL); noen mangler. Lyspulsene viser retningen på trafikken, ikke den faktiske trafikken.",
- "tieL": ["km landfiber", "datasentre", "Forbindelser mellom sentre (illustrative)"],
- "tie": "Kilde: OpenStreetMap (ODbL). Dette er bare en liten del av det virkelige nettet: det meste av landfiberen finnes ikke i åpne kart. De stiplede linjene er ikke virkelige ruter: de kobler hvert datasenter til nærmeste nabo.",
- "share": "Hvilken som helst nettside kan vite alt dette om meg uten å spørre: {d}. Og om deg? Se selv her:",
- "copied": "Kopiert. Lim det inn hvor du vil.",
- "shared": "Takk for at du deler.",
- "meta": "Datamaskinen din, KI-en din og antivirusprogrammet ditt snakker med verden uten å spørre deg. GUARDIANA viser deg hvem de snakker med, og blokkerer det du ikke har godkjent. Åpen kildekode, alt på din egen maskin."
+"sat": "Ekte satellitter fra CelesTrak, med posisjonen beregnet akkurat nå på skjermen din. Viser {a} av {b} datasatellitter (alle unntatt Starlink, pluss hver {p}. Starlink-satellitt).",
+"cab": "{n} ekte sjøkabler fra OpenStreetMap (ODbL); noen mangler. Lyspulsene viser retningen på trafikken, ikke den faktiske trafikken.",
+"tieL": [
+"km landfiber",
+"datasentre",
+"Forbindelser mellom sentre (illustrative)"
+],
+"tie": "Kilde: OpenStreetMap (ODbL). Dette er bare en liten del av det virkelige nettet: det meste av landfiberen finnes ikke i åpne kart. De stiplede linjene er ikke virkelige ruter: de kobler hvert datasenter til nærmeste nabo.",
+"share": "Hvilken som helst nettside kan vite alt dette om meg uten å spørre: {d}. Og om deg? Se selv her:",
+"copied": "Kopiert. Lim det inn hvor du vil.",
+"shared": "Takk for at du deler.",
+"meta": "Datamaskinen din, KI-en din og antivirusprogrammet ditt snakker med verden uten å spørre deg. GUARDIANA viser deg hvem de snakker med, og blokkerer det du ikke har godkjent. Åpen kildekode, alt på din egen maskin."
 },
 "t": {
 "1": "På land fører fiberen dem fram til datasentrene.",
@@ -302,7 +316,7 @@
 "316": "Personvern",
 "317": "Vilkår",
 "318": "Kode",
-"319": "© 2026 GUARDIANA Group · Torre Empresarial PRODEGI, 18. etasje · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Denne siden bruker verken informasjonskapsler eller analyseverktøy.",
+"319": "© 2026 GUARDIANA GROUP S.A.S. · Torre Empresarial PRODEGI, 18. etasje · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Denne siden bruker verken informasjonskapsler eller analyseverktøy.",
 "320": "Datamaskinen din, KI-en din og antivirusprogrammet ditt snakker med verden uten å spørre deg. GUARDIANA viser deg hvem de snakker med, og blokkerer det du ikke har godkjent. Åpen kildekode, alt på din egen maskin.",
 "321": "GUARDIANA, forside",
 "322": "Hovedmeny",

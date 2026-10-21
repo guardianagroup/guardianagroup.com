@@ -1,17 +1,30 @@
 {
-"phrase": ["Verilerinizin", "nereye", "gittiğini", "biliyor", "musunuz?"],
+"phrase": [
+"Verilerinizin",
+"nereye",
+"gittiğini",
+"biliyor",
+"musunuz?"
+],
 "hi": 0,
-"light": ["İhaleyi kaybeden şirketler bile verilerinizi çoktan aldı. Kimse size sormuyor. Kimse haber vermiyor. ABD’de bir kişinin verileri günde ortalama yedi yüz kırk yedi kez açık artırmaya çıkıyor.", "yedi yüz kırk yedi kez açık artırmaya çıkıyor."],
+"light": [
+"İhaleyi kaybeden şirketler bile verilerinizi çoktan aldı. Kimse size sormuyor. Kimse haber vermiyor. ABD’de bir kişinin verileri günde ortalama yedi yüz kırk yedi kez açık artırmaya çıkıyor.",
+"yedi yüz kırk yedi kez açık artırmaya çıkıyor."
+],
 "title": "GUARDIANA · Bilgisayarınız konuşuyor. Artık bunu görebilirsiniz.",
 "x": {
- "sat": "CelesTrak verilerinden gerçek uydular; konumları şu anda ekranınızda hesaplanıyor. {b} veri uydusundan {a} tanesi gösteriliyor (Starlink dışındakilerin tümü, artı her {p} Starlink uydusundan biri).",
- "cab": "OpenStreetMap’ten (ODbL) {n} gerçek denizaltı kablosu; bazıları eksik. Işık darbeleri gerçek trafiği değil, trafiğin yönünü gösterir.",
- "tieL": ["km kara fiberi", "veri merkezi", "Merkezler arası bağlantılar (temsilî)"],
- "tie": "Kaynak: OpenStreetMap (ODbL). Bu, gerçek ağın yalnızca küçük bir kısmı: kara fiberinin büyük bölümü açık haritalarda yer almıyor. Kesikli çizgiler gerçek güzergâhlar değil: her veri merkezini en yakın komşusuna bağlıyor.",
- "share": "Herhangi bir site benim hakkımda tüm bunları sormadan bilebilir: {d}. Peki ya sizin hakkınızda? Kendiniz görün:",
- "copied": "Kopyalandı. İstediğiniz yere yapıştırın.",
- "shared": "Paylaştığınız için teşekkürler.",
- "meta": "Bilgisayarınız, yapay zekânız ve antivirüsünüz sizden izin almadan dünyayla konuşuyor. GUARDIANA kiminle konuştuklarını gösterir ve izin vermediğiniz şeyleri engeller. Açık kaynak, her şey kendi bilgisayarınızda."
+"sat": "CelesTrak verilerinden gerçek uydular; konumları şu anda ekranınızda hesaplanıyor. {b} veri uydusundan {a} tanesi gösteriliyor (Starlink dışındakilerin tümü, artı her {p} Starlink uydusundan biri).",
+"cab": "OpenStreetMap’ten (ODbL) {n} gerçek denizaltı kablosu; bazıları eksik. Işık darbeleri gerçek trafiği değil, trafiğin yönünü gösterir.",
+"tieL": [
+"km kara fiberi",
+"veri merkezi",
+"Merkezler arası bağlantılar (temsilî)"
+],
+"tie": "Kaynak: OpenStreetMap (ODbL). Bu, gerçek ağın yalnızca küçük bir kısmı: kara fiberinin büyük bölümü açık haritalarda yer almıyor. Kesikli çizgiler gerçek güzergâhlar değil: her veri merkezini en yakın komşusuna bağlıyor.",
+"share": "Herhangi bir site benim hakkımda tüm bunları sormadan bilebilir: {d}. Peki ya sizin hakkınızda? Kendiniz görün:",
+"copied": "Kopyalandı. İstediğiniz yere yapıştırın.",
+"shared": "Paylaştığınız için teşekkürler.",
+"meta": "Bilgisayarınız, yapay zekânız ve antivirüsünüz sizden izin almadan dünyayla konuşuyor. GUARDIANA kiminle konuştuklarını gösterir ve izin vermediğiniz şeyleri engeller. Açık kaynak, her şey kendi bilgisayarınızda."
 },
 "t": {
 "1": "Karada da fiber onları veri merkezlerine kadar götürür.",
@@ -302,7 +315,7 @@
 "316": "Gizlilik",
 "317": "Koşullar",
 "318": "Kod",
-"319": "© 2026 GUARDIANA Group · Torre Empresarial PRODEGI, 18. kat · Bocagrande, Cartagena, Kolombiya · hola@guardianagroup.com · Bu sayfa çerez ya da analiz aracı kullanmaz.",
+"319": "© 2026 GUARDIANA GROUP S.A.S. · Torre Empresarial PRODEGI, 18. kat · Bocagrande, Cartagena, Kolombiya · hola@guardianagroup.com · Bu sayfa çerez ya da analiz aracı kullanmaz.",
 "320": "Bilgisayarınız, yapay zekânız ve antivirüsünüz sizden izin almadan dünyayla konuşuyor. GUARDIANA kiminle konuştuklarını gösterir ve izin vermediğiniz şeyleri engeller. Açık kaynak, her şey kendi bilgisayarınızda.",
 "321": "GUARDIANA, ana sayfa",
 "322": "Ana menü",

@@ -60,7 +60,7 @@ details.idm>summary::after{content:none!important;display:none!important}details
 @media (max-width:520px){details.idm>summary{padding:6px 3px!important}}
 details.idm{border:0!important;background:none!important;padding:0!important;border-radius:0!important}
 
-/* Clicking where there is nothing to click shows nothing (Francisco, 18 Oct 2026: «si no hay
+/* Clicking where there is nothing to click shows nothing (the owner, 18 Oct 2026: «si no hay
    enlace, que no se pueda clicar y no aparezca nada en pantalla»): no text caret, no selection,
    no tap flash, no focus ring after a mouse click. Fields, code and hashes stay selectable, and
    keyboard focus (focus-visible) keeps its ring. */
@@ -71,7 +71,7 @@ code,pre,kbd,samp,.huella,.copiable,[data-copiable]{-webkit-user-select:text;use
 a,button,summary,label,[role="button"],[tabindex]:not([tabindex="-1"]){cursor:pointer}
 :focus:not(:focus-visible){outline:none}
 
-/* Respuesta al pulsar (Francisco, 18 oct 2026: «que la persona sienta y sepa que le ha dado»).
+/* Respuesta al pulsar (el dueño, 18 oct 2026: «que la persona sienta y sepa que le ha dado»).
    Lo mismo en toda la web y siempre en acero: con el teclado, un anillo acero alrededor de lo
    enfocado; al apretar, lo pulsado se atenúa y los botones, píldoras y pestañas se hunden un
    poco mientras se mantiene apretado; lo desactivado no parece pulsable. */

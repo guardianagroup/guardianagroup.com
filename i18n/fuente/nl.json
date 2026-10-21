@@ -1,17 +1,32 @@
 {
-"phrase": ["Weet", "je", "waar", "je", "gegevens", "heen", "gaan?"],
+"phrase": [
+"Weet",
+"je",
+"waar",
+"je",
+"gegevens",
+"heen",
+"gaan?"
+],
 "hi": 4,
-"light": ["De bedrijven die het bod verloren, hebben je gegevens al binnen. Niemand vraagt het je. Niemand vertelt het je. In de VS gaan de gegevens van één persoon gemiddeld zevenhonderdzevenenveertig keer per dag onder de hamer.", "zevenhonderdzevenenveertig keer per dag onder de hamer."],
+"light": [
+"De bedrijven die het bod verloren, hebben je gegevens al binnen. Niemand vraagt het je. Niemand vertelt het je. In de VS gaan de gegevens van één persoon gemiddeld zevenhonderdzevenenveertig keer per dag onder de hamer.",
+"zevenhonderdzevenenveertig keer per dag onder de hamer."
+],
 "title": "GUARDIANA · Je computer praat. Nu kun je het zien.",
 "x": {
- "sat": "Echte satellieten uit de gegevens van CelesTrak, met de positie nu op je scherm berekend. Je ziet er {a} van de {b} datasatellieten (alle behalve Starlink, plus één op de {p} Starlink-satellieten).",
- "cab": "{n} echte onderzeekabels uit OpenStreetMap (ODbL); er ontbreken er een paar. De lichtpulsen tonen de richting van het verkeer, niet het werkelijke verkeer.",
- "tieL": ["km glasvezel over land", "datacenters", "Verbindingen tussen centers (illustratief)"],
- "tie": "Bron: OpenStreetMap (ODbL). Dit is maar een klein deel van het echte netwerk: het meeste glasvezel over land staat niet op open kaarten. De stippellijnen zijn geen echte routes: ze verbinden elk datacenter met zijn dichtstbijzijnde buur.",
- "share": "Elke website kan dit allemaal over mij weten zonder het te vragen: {d}. En over jou? Kijk zelf:",
- "copied": "Gekopieerd. Plak het waar je wilt.",
- "shared": "Bedankt voor het delen.",
- "meta": "Je computer, je AI en je antivirus praten met de wereld zonder je toestemming te vragen. GUARDIANA laat zien met wie, en blokkeert wat je niet hebt toegestaan. Open source, alles op je eigen computer."
+"sat": "Echte satellieten uit de gegevens van CelesTrak, met de positie nu op je scherm berekend. Je ziet er {a} van de {b} datasatellieten (alle behalve Starlink, plus één op de {p} Starlink-satellieten).",
+"cab": "{n} echte onderzeekabels uit OpenStreetMap (ODbL); er ontbreken er een paar. De lichtpulsen tonen de richting van het verkeer, niet het werkelijke verkeer.",
+"tieL": [
+"km glasvezel over land",
+"datacenters",
+"Verbindingen tussen centers (illustratief)"
+],
+"tie": "Bron: OpenStreetMap (ODbL). Dit is maar een klein deel van het echte netwerk: het meeste glasvezel over land staat niet op open kaarten. De stippellijnen zijn geen echte routes: ze verbinden elk datacenter met zijn dichtstbijzijnde buur.",
+"share": "Elke website kan dit allemaal over mij weten zonder het te vragen: {d}. En over jou? Kijk zelf:",
+"copied": "Gekopieerd. Plak het waar je wilt.",
+"shared": "Bedankt voor het delen.",
+"meta": "Je computer, je AI en je antivirus praten met de wereld zonder je toestemming te vragen. GUARDIANA laat zien met wie, en blokkeert wat je niet hebt toegestaan. Open source, alles op je eigen computer."
 },
 "t": {
 "1": "Op het land brengt glasvezel ze naar de datacenters.",
@@ -302,7 +317,7 @@
 "316": "Privacy",
 "317": "Voorwaarden",
 "318": "Code",
-"319": "© 2026 GUARDIANA Group · Torre Empresarial PRODEGI, 18e verdieping · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Deze pagina gebruikt geen cookies en geen analytics.",
+"319": "© 2026 GUARDIANA GROUP S.A.S. · Torre Empresarial PRODEGI, 18e verdieping · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Deze pagina gebruikt geen cookies en geen analytics.",
 "320": "Je computer, je AI en je antivirus praten met de wereld zonder je toestemming te vragen. GUARDIANA laat zien met wie, en blokkeert wat je niet hebt toegestaan. Open source, alles op je eigen computer.",
 "321": "GUARDIANA, home",
 "322": "Hoofdmenu",
