@@ -288,16 +288,7 @@
   const zControl = $('zoom'), zNivel = $('zoom-nivel');
   function acerca(zt, x, y) {
     zt = Math.max(1, Math.min(ZOOM.MAX, zt));
-    if (zt > ZOOM.zt + 1e-3 && x != null) {
-      // towards the point under the cursor: turn the planet a share of the way to it
-      const vx = (x - CX) / R, vy = -(y - CY) / R;
-      if (vx * vx + vy * vy < 1) {
-        const f = 1 - ZOOM.zt / zt;
-        vista.lon += Math.asin(vx) / RAD * f;
-        vista.lat = Math.max(-60, Math.min(60, vista.lat + Math.asin(vy) / RAD * f));
-        vista.vlon = vista.vlat = 0; meta = null;
-      }
-    }
+    // 20 Oct 2026 (owner): the zoom stays on the same point; the planet does not turn when you zoom.
     ZOOM.zt = zt;
     quietoHasta = performance.now() + 4000;
     pintaZoom();
