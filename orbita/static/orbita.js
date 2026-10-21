@@ -212,9 +212,10 @@
     document.body.classList.toggle('estrecho', estrecho);
     if (estrecho) U = Math.max(3, Math.min((H / 2 - 200) / 41, (H / 2 - 150) / 41, (W / 2 - 150) / 40.4));
     // 20 Oct 2026 (owner): air between the header and ZERO's label at the top of the ring.
-    else U = Math.max(3, Math.min(H / 100, W * 0.0062, (W / 2 - 40 - 290 - 24 - 130) / 26.4, (H / 2 - 165) / 41));
+    else U = Math.max(3, Math.min(H / 100, W * 0.0062, (W / 2 - 40 - 290 - 24 - 130) / 26.4, (H / 2 - 150) / 41));
     RAIZ.style.setProperty('--u', U.toFixed(3) + 'px');
-    CX = W / 2; CY = H / 2; R = U * 31;
+    // 20 Oct 2026 (owner): a bigger planet; the doors' ring stays at 41 units, so ZERO keeps its air above.
+    CX = W / 2; CY = H / 2; R = U * 34;
     for (const c of [cvE, cvT, cvR]) { c.width = Math.round(W * DPR); c.height = Math.round(H * DPR); }
     cx2.setTransform(DPR, 0, 0, DPR, 0, 0);
     pintaEstrellas();
