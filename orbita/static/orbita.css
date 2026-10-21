@@ -318,3 +318,7 @@ body.dentro .zoom { opacity: 0; pointer-events: none; transition: opacity .45s; 
 body.cerca #anillo, body.cerca #anillo2, body.cerca .cruz, body.cerca #pulso { opacity: 0 !important; transition: opacity .4s; }
 @media (max-width: 760px) { .zoom { right: calc(14px + env(safe-area-inset-right, 0px)); } .zoom button { width: 32px; height: 32px; } }
 body.cerca .capa-nota { background: rgba(6,8,12,.78); padding: 6px 14px; border-radius: 10px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+/* Closer in, the doors step back with the zoom (owner, 20 Oct 2026) and come back as it returns;
+   they wake up again under the pointer. */
+body:not(.dentro) #puertas { opacity: calc(1 - var(--cerca, 0) * .88); transition: opacity .25s; }
+body:not(.dentro) #puertas:hover, body:not(.dentro) #puertas:focus-within { opacity: 1; }
