@@ -646,7 +646,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:980px){.obs-in{align-items:flex-start;padding-top:84px}.obs-tx{margin:0 auto;width:calc(100vw - 32px)}.obs-tx .h2{font-size:clamp(32px,8vw,44px)}.obs-p{font-size:14px}}
 /* 20 Oct 2026 (owner): half the headlines end in colour, half in grey, alternating. */
 .h2 em.tono,.ch-card h2 em.tono,h2 em.tono{font-style:italic;background:var(--grad-light);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.08em}
-.leyenda-cab{display:flex;gap:22px;flex-wrap:wrap;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink-2)}.leyenda-cab span{display:inline-flex;align-items:center;gap:9px}.leyenda-cab i{width:26px;height:2px;border-radius:2px}.lc-sub{background:#9CC3E4;box-shadow:0 0 8px rgba(156,195,228,.8)}.lc-tie{background:#F4F6F8;box-shadow:0 0 8px rgba(244,246,248,.7)}.leyenda-cab i.lc-dc{width:8px;height:8px;border-radius:1px;background:transparent;border:1px solid #9CC3E4}
+.leyenda-cab{display:flex;gap:22px;flex-wrap:wrap;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink-2)}.leyenda-cab span{display:inline-flex;align-items:center;gap:9px}.leyenda-cab i{width:26px;height:2px;border-radius:2px}.lc-sub{background:#9CC3E4;box-shadow:0 0 8px rgba(156,195,228,.8)}.lc-tie{background:#F4F6F8;box-shadow:0 0 8px rgba(244,246,248,.7)}.leyenda-cab i.lc-dc{width:5px;height:5px;border-radius:50%;background:#F4F6F8;box-shadow:0 0 0 3px #06080C,0 0 0 4px #9CC3E4}
 </style>
 </head>
 <body>
@@ -724,7 +724,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
         <div class="ch-card r">
           <h2>En tierra, la fibra los lleva hasta los centros de datos. <em class="tono">Allí empieza el negocio.</em></h2>
           <p>Desde la costa, cables de fibra enterrados llevan tus datos hasta los edificios donde las empresas los guardan, los cruzan y los usan. <b>GUARDIANA te dice a qué empresa llega cada conexión y en qué país está.</b></p>
-          <p class="leyenda-cab"><span><i class="lc-sub"></i>Cable submarino</span><span><i class="lc-tie"></i>Fibra en tierra</span><span><i class="lc-dc"></i>Centro de datos</span></p>
+          <p class="leyenda-cab"><span><i class="lc-tie"></i>Fibra en tierra</span><span><i class="lc-dc"></i>Centro de datos</span></p>
           <p class="ch-note" data-live id="tie-nota">Fibra en tierra registrada en OpenStreetMap: solo una parte de la real.</p>
         </div>
       </article>
@@ -1595,7 +1595,7 @@ function update() {
   }
   const c1 = rectDe(CH1); const dusk = clamp((vh * 0.75 - c1.top) / (c1.height + vh * 0.35));
   T.day = 1;
-  T.fx = S.mode === 'story' ? smooth(0, 1, lectura(chapters[0])) : (S.mode === 'auction' ? 1 : 0);
+  T.fx = S.mode === 'story' ? smooth(0, 1, llegaAlPlaneta(chapters[0])) : (S.mode === 'auction' ? 1 : 0);
   T.sun = { intro: 1, story: 0.3, auction: 0.15, final: 1, bg: 0.25, obs: 0 }[S.mode] ?? 0.3;
   T.obs = S.mode === 'obs' ? 1 : 0;
   if (RM) Object.assign(G, T);
@@ -1677,9 +1677,9 @@ function notaCab() {
       : l === 'pt' ? `${numPortada(nombres)} cabos submarinos reais do OpenStreetMap (ODbL); faltam alguns.` + ' Os pulsos mostram o sentido do tráfego, não o tráfego real.'
       : `${numPortada(nombres)} cables submarinos reales de OpenStreetMap (ODbL); faltan algunos.` + ' Los pulsos de luz muestran el sentido del tráfico, no el tráfico real.'; }
   const et = document.getElementById('tie-nota'), ndc = C.centros ? numPortada(C.centros.length) : '0';
-  if (et) et.textContent = l === 'en' ? `${ndc} data centres and ${km} km of land fibre recorded in OpenStreetMap (ODbL). It is only a small part of the real network: most land fibre is not in open maps. Submarine cables in steel, land fibre in white, data centres as squares.`
-    : l === 'pt' ? `${ndc} centros de dados e ${km} km de fibra terrestre registrados no OpenStreetMap (ODbL). É só uma pequena parte da rede real: a maior parte da fibra terrestre não está em mapas abertos. Cabos submarinos em aço, fibra terrestre em branco, centros de dados em quadrados.`
-    : `${ndc} centros de datos y ${km} km de fibra en tierra registrados en OpenStreetMap (ODbL). Es solo una pequeña parte de la red real: la mayor parte de la fibra en tierra no está en mapas abiertos. Cables submarinos en acero, fibra en tierra en blanco, centros de datos en cuadrados.`;
+  if (et) et.textContent = l === 'en' ? `${ndc} data centres and ${km} km of land fibre recorded in OpenStreetMap (ODbL). It is only a small part of the real network: most land fibre is not in open maps. Land fibre in white, data centres as white points.`
+    : l === 'pt' ? `${ndc} centros de dados e ${km} km de fibra terrestre registrados no OpenStreetMap (ODbL). É só uma pequena parte da rede real: a maior parte da fibra terrestre não está em mapas abertos. Fibra terrestre em branco, centros de dados em pontos brancos.`
+    : `${ndc} centros de datos y ${km} km de fibra en tierra registrados en OpenStreetMap (ODbL). Es solo una pequeña parte de la red real: la mayor parte de la fibra en tierra no está en mapas abiertos. Fibra en tierra en blanco, centros de datos en puntos blancos.`;
 }
 // Each layer arrives with its own ring: a circle that opens from the point facing you, sweeps over the
 // whole planet and leaves its layer behind. The ring is tied to the chapter's own scroll, so the words
@@ -1687,7 +1687,10 @@ function notaCab() {
 // how far the reader is into a chapter, measured on its title: 0 when the title reaches 72 % of the
 // screen height, 1 half a screen later. Scrolling back runs it backwards.
 const lectura = (el) => { if (!el) return 0; const h = el.querySelector('h2') || el; return clamp((vh * 0.72 - rectDe(h).top) / (vh * 0.5)); };
-const ANI = { cab: { c: null, e: 0 }, sat: { c: null, e: 0 }, tie: { c: null, e: 0 } };
+// The first ring waits for the title to reach the planet's height (on a computer): it opens when the
+// middle of «En 30 milisegundos…» lines up with the middle of the planet, and closes half a screen later.
+const llegaAlPlaneta = (el) => { if (!el || mobile()) return lectura(el); const h = el.querySelector('h2') || el, r = rectDe(h); return clamp((G.y - (r.top + r.height / 2)) / (vh * 0.42)); };
+const ANI = { cab: { c: null, e: 0 }, sat: { c: null, e: 0, p: 0 }, tie: { c: null, e: 0, p: 0 } };
 function frente() { const R = R3; return [R[6], R[7], R[8]]; } // the model point facing the camera
 function capasPortada(dt) {
   const iC = CHX('cab'), iS = CHX('sat'), iT = CHX('tie'), iN = CHX(3);
@@ -1698,16 +1701,19 @@ function capasPortada(dt) {
   if (S.story > 0 || S.mode === 'story' || pinProgress(secs.intro) > 0.5) { cargaSatPortada(); cargaCabPortada(); }
   const f = 1 - Math.pow(0.002, dt);
   CAPA.cab = lerp(CAPA.cab, wC, f); CAPA.sat = lerp(CAPA.sat, wS, f); CAPA.tie = lerp(CAPA.tie || 0, wT, f);
-  CAPA.k = Math.max(CAPA.cab, CAPA.sat, CAPA.tie);
+
   if (enS && (G.fx || 0) > 0.001) { const q = v3(CTG[0], CTG[1]); ANI.cab.c = q; ANI.cab.e = clamp(((G.fx || 0) * 2.2 - 0.08) * Math.PI / 2, 0, Math.PI); }
   else { ANI.cab.c = null; ANI.cab.e = 0; }
   for (const [k, i] of [['sat', iS], ['tie', iT]]) {
     const v = enS ? ch(i) : 0, an = ANI[k];
-    if (v < 0.02) { an.c = null; an.e = 0; continue; }
-    // each ring opens from the middle of the land the planet turns to (Africa for the satellites, the Middle East for land)
-    if (!an.c) an.c = k === 'sat' ? v3(10, 12) : v3(45, 24);
-    an.e = Math.PI * smooth(0, 1, lectura(chapters[i])); // angular radius of the ring: 0 → the whole planet
+    // 21 Oct 2026 (owner): only the first chapter has the blue ring. Satellites and land appear little by
+    // little, from few to many, as the chapter is read (and go back if you scroll up).
+    an.c = null; an.e = 0; an.p = v < 0.02 ? 0 : smooth(0, 1, llegaAlPlaneta(chapters[i]));
   }
+  const fin = enS ? ch(iN) : 1;
+  CAPA.satVis = enS ? ANI.sat.p * (1 - ANI.tie.p) : 0;
+  CAPA.tieVis = enS ? ANI.tie.p * (1 - fin) : 0;
+  CAPA.k = enS ? Math.max(ANI.sat.p, ANI.tie.p) * (1 - fin) : 0;
   const pr = (i) => clamp(ch(i)) ;
   const objetivos = [[wC, -55 + 30 * pr(iC)], [wS, 5 + 35 * pr(iS)], [wT, 40 + 45 * pr(iT)]];
   let w = 0, lo = 0; for (const [p, l] of objetivos) if (p > w) { w = p; lo = l; }
@@ -1765,7 +1771,7 @@ function pintaCapas(dt) {
     });
   }
   // 2 · data satellites, in their real position now
-  if (CAPA.sat > 0.01 && S2 && S2.N) {
+  if (CAPA.satVis > 0.01 && S2 && S2.N) {
     const ahora = Date.now(), lote = Math.max(40, Math.ceil(S2.N / 90));
     for (let k = 0; k < lote; k++) { propagaPortada(S2.cur, ahora); S2.cur = (S2.cur + 1) % S2.N; }
     const gm = window.satellite.gstime(new Date(ahora)), cg = Math.cos(gm), sg = Math.sin(gm);
@@ -1776,23 +1782,28 @@ function pintaCapas(dt) {
       const X = S2.pos[k] + S2.vel[k] * ds, Y = S2.pos[k + 1] + S2.vel[k + 1] * ds, Z = S2.pos[k + 2] + S2.vel[k + 2] * ds;
       const ex = X * cg + Y * sg, ey = -X * sg + Y * cg, ez = Z, r = Math.hypot(ex, ey, ez), alt = r - RE_KM;
       const esc = (alt < 2000 ? 1 + alt / 6371 : alt < 30000 ? 1.17 : 1.22) / r; // medium and geostationary orbits drawn closer: not to scale
-      const q = [ey * esc, ez * esc, ex * esc]; if (!dentroDe(ANI.sat, q)) continue;
+      if ((i * 0.6180339887) % 1 > ANI.sat.p) continue; const q = [ey * esc, ez * esc, ex * esc];
       const p = project(q); if (!p[2]) continue;
       const geoEs = alt > 30000;
-      ctx.globalAlpha = CAPA.sat * a * (geoEs ? 0.95 : 0.78); ctx.fillStyle = geoEs ? '#F4F6F8' : '#9CC3E4';
+      ctx.globalAlpha = CAPA.satVis * a * (geoEs ? 0.95 : 0.78); ctx.fillStyle = geoEs ? '#F4F6F8' : '#9CC3E4';
       const s2 = geoEs ? tam * 1.4 : tam; ctx.fillRect(p[0] - s2 / 2, p[1] - s2 / 2, s2, s2);
     }
   }
   // 3 · land fibre, amber, next to the submarine cables in steel so the two read apart
-  if (CAPA.tie > 0.01 && C && C.lineas.length) {
-    ctx.lineWidth = Math.max(0.6, lw * 0.4); ctx.strokeStyle = 'rgb(156,195,228)'; ctx.globalAlpha = 0.22 * CAPA.tie * a; trazaRevelado(C.lineas, { c: frente(), e: Math.PI });
+  if (CAPA.tieVis > 0.01 && C && C.lineas.length) {
     if (C.tierra && C.tierra.length) {
-      ctx.lineWidth = Math.max(1.6, lw * 1.15); ctx.strokeStyle = 'rgb(244,246,248)'; ctx.globalAlpha = 0.95 * CAPA.tie * a; ctx.shadowColor = 'rgb(244,246,248)'; ctx.shadowBlur = 8; trazaRevelado(C.tierra, ANI.tie); ctx.shadowBlur = 0;
-      C.tierra.forEach((w, j) => { if (w.length < 3) return; const t = ((clock * 0.12 + j * 0.29) % 1); if (!dentroDe(ANI.tie, w[Math.floor(t * (w.length - 1))])) return; cometaCapa(w, t, Math.min(6, w.length - 1), '244,246,248', lw * 0.7, 0.8 * CAPA.tie * a); });
+      ctx.lineWidth = Math.max(1.6, lw * 1.15); ctx.strokeStyle = 'rgb(244,246,248)'; ctx.globalAlpha = 0.95 * CAPA.tieVis * a; ctx.shadowColor = 'rgb(244,246,248)'; ctx.shadowBlur = 8; trazaRevelado(C.tierra.filter((w, j) => (j * 0.6180339887) % 1 <= ANI.tie.p), { c: frente(), e: Math.PI }); ctx.shadowBlur = 0;
+      C.tierra.forEach((w, j) => { if (w.length < 3) return; const t = ((clock * 0.12 + j * 0.29) % 1); if ((j * 0.6180339887) % 1 > ANI.tie.p) return; cometaCapa(w, t, Math.min(6, w.length - 1), '244,246,248', lw * 0.7, 0.8 * CAPA.tieVis * a); });
     }
     if (C.centros && C.centros.length) { // data centres recorded in OpenStreetMap: small amber squares
-      const tm = Math.max(3, G.r / 110); ctx.strokeStyle = '#9CC3E4'; ctx.lineWidth = 1; ctx.globalAlpha = 0.9 * CAPA.tie * a; ctx.beginPath();
-      for (const q of C.centros) { if (!dentroDe(ANI.tie, q)) continue; const p = project(q); if (!p[2]) continue; ctx.rect(p[0] - tm / 2, p[1] - tm / 2, tm, tm); }
+      const rd = Math.max(1.6, G.r / 190), lat = 0.5 + 0.5 * Math.sin(clock * 2.2);
+      ctx.globalCompositeOperation = 'source-over'; ctx.fillStyle = '#F4F6F8'; ctx.shadowColor = 'rgba(156,195,228,1)'; ctx.shadowBlur = 10 + 6 * lat; ctx.globalAlpha = CAPA.tieVis * a; ctx.beginPath();
+      for (let j = 0; j < C.centros.length; j++) { const q = C.centros[j]; if ((j * 0.6180339887) % 1 > ANI.tie.p) continue; const p = project(q); if (!p[2]) continue; ctx.moveTo(p[0] + rd, p[1]); ctx.arc(p[0], p[1], rd, 0, 6.2832); }
+      ctx.fill(); ctx.shadowBlur = 0; ctx.globalCompositeOperation = 'lighter';
+      // a fine steel ring around each one: they read as places, not as city lights
+      ctx.strokeStyle = 'rgba(156,195,228,0.75)'; ctx.lineWidth = 1; ctx.globalAlpha = CAPA.tieVis * a; ctx.beginPath();
+      const ra = rd * (2.6 + 0.5 * lat);
+      for (let j = 0; j < C.centros.length; j++) { const q = C.centros[j]; if ((j * 0.6180339887) % 1 > ANI.tie.p) continue; const p = project(q); if (!p[2]) continue; ctx.moveTo(p[0] + ra, p[1]); ctx.arc(p[0], p[1], ra, 0, 6.2832); }
       ctx.stroke();
     }
   }
