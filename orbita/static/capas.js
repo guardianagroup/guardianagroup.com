@@ -284,7 +284,8 @@
     caja.hidden = !estado.sat;
     caja.querySelectorAll('[data-vista]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.vista === estado.vista)));
     caja.querySelectorAll('[data-orb]').forEach((b) => { b.setAttribute('aria-pressed', String(!!estado.orb[b.dataset.orb])); const c = S && S.cuentaOrb ? S.cuentaOrb[b.dataset.orb] : 0; b.querySelector('b').textContent = c ? num(c) : ''; });
-    const cielo = caja.querySelector('[data-vista="cielo"]'); if (cielo) cielo.disabled = !(P() && P().lugar);
+    const cielo = caja.querySelector('[data-vista="cielo"]'); const L = P() && P().lugar;
+    if (cielo) { cielo.disabled = !L; const t = cielo.querySelector('.cielo-t'); const v = L && L.nombre ? T('Sobre') + ' ' + L.nombre : T('Sobre ti'); if (t.textContent !== v) t.textContent = v; }
   }
   function enganchaVista() {
     const caja = $('sat-vista'); if (!caja) return;
