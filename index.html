@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-idiomas="es,en,pt,fr,de,it,nl,sv,da,nb,fi,is,pl,uk,ru,tr,zh,ja,ko,hi,bn,id,vi,th,ar">
+<html lang="en" data-idiomas="es,en,pt,fr,de,it,nl,sv,da,nb,fi,is,pl,uk,ru,tr,zh,ja,ko,hi,bn,id,vi,th,ar,fa,he,ur,pt-pt">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -541,10 +541,10 @@ html.i18n-espera .content,html.i18n-espera #phrase{opacity:0}
 [dir=rtl] .term{direction:ltr}
 /* Arabic script joins its letters: any letter-spacing would break the words apart */
 :is(:lang(ar),:lang(fa),:lang(ur)) *{letter-spacing:0!important}
-:is(:lang(ar),:lang(fa),:lang(ur),:lang(he)) h1,:is(:lang(ar),:lang(fa),:lang(ur),:lang(he)) h2{letter-spacing:0}
+:lang(he) *{letter-spacing:0!important}
 :is(:lang(ar),:lang(fa)) :is(h1,h2,h3){line-height:1.35}
 /* Nastaliq hangs low and climbs high: it needs more room between lines */
-:lang(ur) :is(h1,h2,h3,#lightp,#phrase p){line-height:1.75}:lang(ur) body{line-height:2}
+:lang(ur) :is(h1,h2,#lightp,#phrase p,.big){line-height:1.8!important}:lang(ur) :is(p,li,h3,h4,dd,dt,div,a,button,label,small){line-height:2.1}
 :lang(th){--display:'Thonburi','Noto Serif Thai','Leelawadee UI','Tahoma',serif;--body:'Thonburi','Leelawadee UI','Noto Sans Thai',system-ui,sans-serif}
 /* scripts without italics: the coloured end of a title stays upright; tighter titles get a little air */
 :is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko),:lang(hi),:lang(bn),:lang(th),:lang(ar),:lang(fa),:lang(ur),:lang(he)) :is(em,i,.hero-em,em.tono){font-style:normal!important}
