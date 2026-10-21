@@ -158,6 +158,94 @@ out tags geom;'''
     return True
 
 
+def overpass(q):
+    for servidor in ('https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'):
+        cuerpo = baja(servidor, urllib.parse.urlencode({'data': q}).encode(), 2)
+        if cuerpo:
+            try:
+                return json.loads(cuerpo)
+            except ValueError:
+                print('  Overpass: respuesta no es JSON', file=sys.stderr)
+    return None
+
+
+def puntos():
+    """Where the internet touches the ground (owner, 20 Oct 2026): cable landing stations, data centres and
+    internet exchange points mapped in OpenStreetMap. Partial coverage, said on screen."""
+    d = overpass('''[out:json][timeout:900];
+(
+  nwr["telecom"="cable_landing_station"];
+  nwr["telecom"="data_center"];
+  nwr["building"="data_center"];
+  nwr["telecom"="internet_exchange"];
+);
+out tags center;''')
+    if not d:
+        print('Sin puntos: no se escribe nada.', file=sys.stderr)
+        return False
+    out, vistos, cuenta = [], set(), {'aterrizaje': 0, 'datos': 0, 'intercambio': 0}
+    for e in d.get('elements', []):
+        t = e.get('tags', {})
+        c = e.get('center') or ({'lat': e['lat'], 'lon': e['lon']} if 'lat' in e else None)
+        if not c or any(k in t for k in ('disused', 'abandoned', 'removed', 'razed', 'end_date')):
+            continue
+        tipo = 'aterrizaje' if t.get('telecom') == 'cable_landing_station' else 'intercambio' if t.get('telecom') == 'internet_exchange' else 'datos'
+        clave = (tipo, round(c['lon'], 3), round(c['lat'], 3))
+        if clave in vistos:
+            continue
+        vistos.add(clave); cuenta[tipo] += 1
+        out.append([round(c['lon'], 3), round(c['lat'], 3), tipo, t.get('name') or t.get('name:en') or '', t.get('operator', '')])
+    salida = {
+        'fuente': 'OpenStreetMap',
+        'licencia': 'ODbL 1.0 · © colaboradores de OpenStreetMap',
+        'descargado': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+        'medida': cuenta,
+        'campos': ['lon', 'lat', 'tipo', 'nombre', 'operador'],
+        'puntos': out,
+    }
+    with open(os.path.join(RAIZ, 'puntos.json'), 'w', encoding='utf-8') as f:
+        json.dump(salida, f, ensure_ascii=False, separators=(',', ':'))
+    print('puntos:', cuenta)
+    return True
+
+
+def tierra_borrador():
+    """Land fibre that OpenStreetMap knows, with a name or an operator, written as a DRAFT (tierra-borrador.json)
+    so it can be reviewed before it is shown: coverage is known to be partial."""
+    d = overpass('''[out:json][timeout:900];
+(
+  way["telecom"="line"]["submarine"!="yes"]["location"!~"underwater|submarine"]["name"];
+  way["telecom"="line"]["submarine"!="yes"]["location"!~"underwater|submarine"]["operator"];
+  way["communication"="line"]["submarine"!="yes"]["location"!~"underwater|submarine"]["name"];
+);
+out tags geom;''')
+    if not d:
+        print('Sin fibra de tierra: no se escribe nada.', file=sys.stderr)
+        return False
+    out, total = [], 0.0
+    for e in d.get('elements', []):
+        g = e.get('geometry') or []
+        if len(g) < 2:
+            continue
+        p = [[round(x['lon'], 3), round(x['lat'], 3)] for x in g]
+        largo = sum(km(p[i], p[i + 1]) for i in range(len(p) - 1))
+        if largo < 5:
+            continue
+        total += largo
+        t = e.get('tags', {})
+        s = simplifica(p, 0.03)
+        out.append({'n': t.get('name', ''), 'o': t.get('operator', ''), 'km': round(largo), 'l': s})
+    salida = {
+        'fuente': 'OpenStreetMap', 'licencia': 'ODbL 1.0 · © colaboradores de OpenStreetMap', 'borrador': True,
+        'descargado': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+        'medida': {'tramos': len(out), 'km': round(total)}, 'cables': out,
+    }
+    with open(os.path.join(RAIZ, 'tierra-borrador.json'), 'w', encoding='utf-8') as f:
+        json.dump(salida, f, ensure_ascii=False, separators=(',', ':'))
+    print('fibra de tierra (borrador):', salida['medida'])
+    return True
+
+
 def medir_tierra():
     """How much of the land fibre OpenStreetMap knows: counts only, saved in indice.json so anyone can read it."""
     medida = {}
@@ -182,7 +270,7 @@ def indice(medida=None):
     except Exception:  # noqa: BLE001
         previo = {}
     salida = {
-        'capas': {c: os.path.exists(os.path.join(RAIZ, a)) for c, a in (('sub', 'cables.json'), ('tierra', 'tierra.json'), ('sat', 'satelites.json'))},
+        'capas': {c: os.path.exists(os.path.join(RAIZ, a)) for c, a in (('sub', 'cables.json'), ('tierra', 'tierra.json'), ('sat', 'satelites.json'), ('puntos', 'puntos.json'))},
         'medida_tierra_osm': medida if medida else previo.get('medida_tierra_osm'),
     }
     if medida:
@@ -211,5 +299,8 @@ if __name__ == '__main__':
         viejo = viejo or 'forzar' in que
         if viejo:
             ok = cables() and ok
+            puntos()
+    if 'medir' in que:
+        tierra_borrador()
     indice(medir_tierra() if 'medir' in que else None)
     sys.exit(0 if ok else 1)
