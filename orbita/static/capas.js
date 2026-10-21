@@ -10,7 +10,7 @@
   const P = () => window.OrbitaPlaneta;
   const RE = 6378.137, RAD = Math.PI / 180;
   const ACERO = '156,195,228', BLANCO = '244,246,248';
-  const estado = { sub: false, tierra: false, puntos: false, sat: false, vista: 'equilibrada', orb: { baja: true, media: true, geo: true } };
+  const estado = { sub: true, tierra: false, puntos: false, sat: true, vista: 'equilibrada', orb: { baja: true, media: true, geo: true } };
   try { const g = JSON.parse(localStorage.getItem('guardiana-orbita-capas') || '{}'); Object.assign(estado, g); estado.orb = Object.assign({ baja: true, media: true, geo: true }, g.orb || {}); if (!['equilibrada', 'todos', 'cielo'].includes(estado.vista)) estado.vista = 'equilibrada'; } catch (_) {}
   const guarda = () => { try { localStorage.setItem('guardiana-orbita-capas', JSON.stringify(estado)); } catch (_) {} };
 
@@ -53,7 +53,7 @@
     try {
       const d = await cargaJSON('datos/puntos.json');
       const c = d.campos, il = c.indexOf('lon'), ia = c.indexOf('lat'), it = c.indexOf('tipo');
-      PT = { d, p: d.puntos.map((f) => ({ w: P().vec(f[il], f[ia]).map((x) => x * 1.002), t: f[it] })) };
+      PT = { d, p: d.puntos.filter((f) => f[it] === 'datos').map((f) => ({ w: P().vec(f[il], f[ia]).map((x) => x * 1.002), t: f[it] })) };
     } catch (e) { PT = { error: true }; }
     cargando.puntos = false; pintaNota();
   }
@@ -280,7 +280,7 @@
     }
     if (estado.puntos) {
       const m = PT && PT.d && PT.d.medida;
-      partes.push(m ? '◆ ' + num(m.aterrizaje) + ' ' + T('llegadas de cables') + ' · ■ ' + num(m.datos) + ' ' + T('centros de datos') + ' · ○ ' + num(m.intercambio) + ' ' + T('puntos de intercambio') + ' · © OpenStreetMap (ODbL) · ' + T('cobertura parcial') : PT && PT.error ? T('No se pudieron cargar los puntos.') : T('Cargando puntos…'));
+      partes.push(m ? num(m.datos) + ' ' + T('centros de datos') + ' · © OpenStreetMap (ODbL) · ' + T('cobertura parcial') : PT && PT.error ? T('No se pudieron cargar los puntos.') : T('Cargando puntos…'));
     }
     el.textContent = partes.join('   ·   ');
     el.hidden = !partes.length;
@@ -343,7 +343,8 @@
     // the land layer only appears when there is land data to show
     // (asked to the small index, so the page never requests a file that is not there)
     let ind = null; try { const r = await fetch('datos/indice.json', { cache: 'no-cache' }); if (r.ok) ind = await r.json(); } catch (_) {}
-    for (const k of ['tierra', 'puntos']) if (!ind || !ind.capas || !ind.capas[k]) { const b = document.querySelector(`#capas [data-capa="${k}"]`); if (b) b.remove(); estado[k] = false; }
+    for (const k of ['puntos']) if (!ind || !ind.capas || !ind.capas[k]) { const b = document.querySelector(`#capas [data-capa="${k}"]`); if (b) b.remove(); estado[k] = false; }
+    estado.tierra = false; // land fibre left out (owner, 21 Oct 2026): OpenStreetMap knows too little of it
     enganchaVista();
     document.querySelectorAll('#capas [data-capa]').forEach((b) => b.addEventListener('click', () => pon(b.dataset.capa, b.getAttribute('aria-pressed') !== 'true')));
     for (const k of ['sub', 'tierra', 'puntos', 'sat']) if (estado[k]) pon(k, true);
