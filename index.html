@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-idiomas="es,en,pt,fr,de,it,nl,sv,da,nb,fi,is,pl,uk,ru,tr">
+<html lang="en" data-idiomas="es,en,pt,fr,de,it,nl,sv,da,nb,fi,is,pl,uk,ru,tr,zh,ja,ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -523,16 +523,24 @@ html.i18n-espera .content,html.i18n-espera #phrase{opacity:0}
 /* languages that glue words together: long words in big titles break with a proper hyphen instead of leaving the screen */
 :is(:lang(de),:lang(nl),:lang(sv),:lang(da),:lang(nb),:lang(fi),:lang(is),:lang(ru),:lang(uk),:lang(pl)) :is(h1,h2,h3,.big,#lightp){-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
 :lang(ru),:lang(uk),:lang(bg),:lang(el),:lang(vi){--display:'Times New Roman',Times,'Liberation Serif',serif}
-:lang(zh-Hans){--display:'Songti SC','STSong','Noto Serif SC','Source Han Serif SC','SimSun',serif;--body:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC',system-ui,sans-serif}
-:lang(zh-Hant){--display:'Songti TC','Noto Serif TC','Source Han Serif TC','PMingLiU',serif;--body:'PingFang TC','Microsoft JhengHei','Noto Sans TC',system-ui,sans-serif}
-:lang(ja){--display:'Hiragino Mincho ProN','Yu Mincho','YuMincho','Noto Serif JP','Source Han Serif JP',serif;--body:'Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic UI','Meiryo','Noto Sans JP',system-ui,sans-serif}
-:lang(ko){--display:'AppleMyungjo','Nanum Myeongjo','Noto Serif KR','Batang',serif;--body:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',system-ui,sans-serif}
+:lang(zh-Hans){--display:'Songti SC','STSong','Noto Serif SC','Noto Serif CJK SC','Source Han Serif SC','SimSun',serif;--body:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC','Noto Sans CJK SC',system-ui,sans-serif}
+:lang(zh-Hant){--display:'Songti TC','Noto Serif TC','Noto Serif CJK TC','Source Han Serif TC','PMingLiU',serif;--body:'PingFang TC','Microsoft JhengHei','Noto Sans TC','Noto Sans CJK TC',system-ui,sans-serif}
+:lang(ja){--display:'Hiragino Mincho ProN','Yu Mincho','YuMincho','Noto Serif JP','Noto Serif CJK JP','Source Han Serif JP',serif;--body:'Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic UI','Meiryo','Noto Sans JP','Noto Sans CJK JP',system-ui,sans-serif}
+:lang(ko){--display:'AppleMyungjo','Nanum Myeongjo','Noto Serif KR','Noto Serif CJK KR','Batang',serif;--body:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans CJK KR',system-ui,sans-serif}
 :lang(hi){--display:'Kohinoor Devanagari','Noto Serif Devanagari','Nirmala UI','Mangal',serif;--body:'Kohinoor Devanagari','Nirmala UI','Noto Sans Devanagari',system-ui,sans-serif}
 :lang(bn){--display:'Kohinoor Bangla','Noto Serif Bengali','Nirmala UI','Vrinda',serif;--body:'Kohinoor Bangla','Nirmala UI','Noto Sans Bengali',system-ui,sans-serif}
 :lang(th){--display:'Thonburi','Noto Serif Thai','Leelawadee UI','Tahoma',serif;--body:'Thonburi','Leelawadee UI','Noto Sans Thai',system-ui,sans-serif}
 /* scripts without italics: the coloured end of a title stays upright; tighter titles get a little air */
-:lang(zh-Hans) em,:lang(zh-Hant) em,:lang(ja) em,:lang(ko) em,:lang(hi) em,:lang(bn) em,:lang(th) em,:lang(zh-Hans) i,:lang(ja) i{font-style:normal}
-:lang(zh-Hans) h1,:lang(zh-Hans) h2,:lang(zh-Hant) h1,:lang(zh-Hant) h2,:lang(ja) h1,:lang(ja) h2,:lang(ko) h1,:lang(ko) h2{line-height:1.22;letter-spacing:0;word-break:keep-all;line-break:strict}
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko),:lang(hi),:lang(bn),:lang(th)) :is(em,i,.hero-em,em.tono){font-style:normal!important}
+:lang(zh-Hans) h1,:lang(zh-Hans) h2,:lang(zh-Hant) h1,:lang(zh-Hant) h2,:lang(ja) h1,:lang(ja) h2,:lang(ko) h1,:lang(ko) h2{line-height:1.22;letter-spacing:0;line-break:strict}
+/* Korean keeps its words whole (it has spaces); Japanese breaks at phrase boundaries where the browser can */
+/* full-width scripts: a «ch» is half a character there, so measures set in ch are given in em instead */
+:is(:lang(ja),:lang(zh-Hans),:lang(zh-Hant),:lang(ko)) .phrase p{max-width:9em;font-size:clamp(38px,6.4vw,100px)}
+:is(:lang(ja),:lang(zh-Hans),:lang(zh-Hant),:lang(ko)) .h2{max-width:12em}
+:is(:lang(ja),:lang(zh-Hans),:lang(zh-Hant),:lang(ko)) .light p{max-width:16em}
+/* titles break at punctuation and spaces where they can, and only mid-phrase when a run does not fit */
+:is(:lang(ko),:lang(zh-Hans),:lang(zh-Hant),:lang(ja)) :is(h1,h2,h3,#lightp,#phrase p){word-break:keep-all;overflow-wrap:anywhere;text-wrap:balance}:lang(ko) p{word-break:keep-all;overflow-wrap:anywhere}
+@supports (word-break:auto-phrase){:lang(ja) :is(h1,h2,h3,#lightp,#phrase p){word-break:auto-phrase}}
 :lang(hi) h1,:lang(hi) h2,:lang(bn) h1,:lang(bn) h2,:lang(th) h1,:lang(th) h2{line-height:1.3;letter-spacing:0}
 .lang{display:inline-flex;padding:3px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--hair-2);background:rgba(232,238,245,.03);flex:none}
 .lang button{font:500 11px/1 var(--mono);letter-spacing:.08em;color:var(--ink-3);background:transparent;border:0;border-radius:999px;padding:8px 10px;min-height:30px;cursor:pointer;transition:color .2s,background .2s}
