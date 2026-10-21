@@ -23,7 +23,7 @@ concurrency:
 jobs:
   datos:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 55
     steps:
       - uses: actions/checkout@v4
 
@@ -48,9 +48,23 @@ jobs:
           fi
 
       - name: Satélites (CelesTrak) y cables (OpenStreetMap)
-        run: python3 herramientas/datos_orbita.py satelites cables ${{ github.event_name == 'push' && 'forzar medir' || '' }}
+        timeout-minutes: 15
+        run: python3 herramientas/datos_orbita.py satelites cables ${{ github.event_name == 'push' && 'forzar' || '' }}
+
+      # Each OpenStreetMap job on its own, with its own limit: if one is slow, the others are still saved.
+      - name: Puntos de internet (OpenStreetMap, una vez por semana)
+        timeout-minutes: 8
+        continue-on-error: true
+        run: python3 herramientas/datos_orbita.py puntos ${{ github.event_name == 'push' && 'forzar' || '' }}
+
+      - name: Fibra de tierra, borrador y medida (OpenStreetMap, solo a mano o al cambiar la herramienta)
+        if: github.event_name != 'schedule'
+        timeout-minutes: 25
+        continue-on-error: true
+        run: python3 herramientas/datos_orbita.py tierra medir
 
       - name: Guardar si ha cambiado
+        if: always()
         run: |
           git config user.name "GUARDIANA datos"
           git config user.email "datos@guardianagroup.com"

@@ -24,11 +24,11 @@ CAMPOS = ['EPOCH', 'MEAN_MOTION', 'ECCENTRICITY', 'INCLINATION', 'RA_OF_ASC_NODE
           'MEAN_ANOMALY', 'BSTAR', 'MEAN_MOTION_DOT', 'MEAN_MOTION_DDOT']
 
 
-def baja(url, datos=None, intentos=3):
+def baja(url, datos=None, intentos=3, espera=300):
     for i in range(intentos):
         try:
             req = urllib.request.Request(url, data=datos, headers={'User-Agent': UA})
-            with urllib.request.urlopen(req, timeout=300) as r:
+            with urllib.request.urlopen(req, timeout=espera) as r:
                 return r.read()
         except Exception as e:  # noqa: BLE001
             print(f'  fallo {i + 1}/{intentos} en {url[:90]}: {e}', file=sys.stderr)
@@ -160,7 +160,7 @@ out tags geom;'''
 
 def overpass(q):
     for servidor in ('https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'):
-        cuerpo = baja(servidor, urllib.parse.urlencode({'data': q}).encode(), 2)
+        cuerpo = baja(servidor, urllib.parse.urlencode({'data': q}).encode(), 1, 240)
         if cuerpo:
             try:
                 return json.loads(cuerpo)
@@ -172,11 +172,10 @@ def overpass(q):
 def puntos():
     """Where the internet touches the ground (owner, 20 Oct 2026): cable landing stations, data centres and
     internet exchange points mapped in OpenStreetMap. Partial coverage, said on screen."""
-    d = overpass('''[out:json][timeout:900];
+    d = overpass('''[out:json][timeout:220];
 (
   nwr["telecom"="cable_landing_station"];
   nwr["telecom"="data_center"];
-  nwr["building"="data_center"];
   nwr["telecom"="internet_exchange"];
 );
 out tags center;''')
@@ -209,36 +208,52 @@ out tags center;''')
     return True
 
 
+CAJAS = {  # south, west, north, east: one light query per region instead of one for the whole planet
+    'america_norte': (5, -170, 75, -50), 'america_sur': (-57, -95, 15, -30), 'europa': (34, -25, 72, 45),
+    'africa': (-36, -20, 38, 55), 'asia_oeste': (0, 45, 60, 100), 'asia_este': (-12, 100, 60, 180), 'oceania': (-50, 110, 0, 180),
+}
+
+
 def tierra_borrador():
     """Land fibre that OpenStreetMap knows, with a name or an operator, written as a DRAFT (tierra-borrador.json)
-    so it can be reviewed before it is shown: coverage is known to be partial."""
-    d = overpass('''[out:json][timeout:900];
+    so it can be reviewed before it is shown: coverage is known to be partial. One query per region."""
+    out, total, regiones, vistos = [], 0.0, {}, set()
+    for reg, (s_, w, n, e) in CAJAS.items():
+        b = f'({s_},{w},{n},{e})'
+        d = overpass(f'''[out:json][timeout:200];
 (
-  way["telecom"="line"]["submarine"!="yes"]["location"!~"underwater|submarine"]["name"];
-  way["telecom"="line"]["submarine"!="yes"]["location"!~"underwater|submarine"]["operator"];
-  way["communication"="line"]["submarine"!="yes"]["location"!~"underwater|submarine"]["name"];
+  way["telecom"="line"]["name"]{b};
+  way["telecom"="line"]["operator"]{b};
+  way["communication"="line"]["name"]{b};
 );
 out tags geom;''')
-    if not d:
+        if not d:
+            regiones[reg] = 'sin respuesta'
+            continue
+        k = 0
+        for el in d.get('elements', []):
+            t = el.get('tags', {})
+            if el.get('id') in vistos or t.get('submarine') == 'yes' or t.get('location') in ('underwater', 'submarine'):
+                continue
+            g = el.get('geometry') or []
+            if len(g) < 2:
+                continue
+            p = [[round(x['lon'], 3), round(x['lat'], 3)] for x in g]
+            largo = sum(km(p[i], p[i + 1]) for i in range(len(p) - 1))
+            if largo < 5:
+                continue
+            vistos.add(el.get('id')); total += largo; k += 1
+            out.append({'n': t.get('name', ''), 'o': t.get('operator', ''), 'km': round(largo), 'l': simplifica(p, 0.03)})
+        regiones[reg] = k
+        print('fibra de tierra', reg, k)
+        time.sleep(5)
+    if not out:
         print('Sin fibra de tierra: no se escribe nada.', file=sys.stderr)
         return False
-    out, total = [], 0.0
-    for e in d.get('elements', []):
-        g = e.get('geometry') or []
-        if len(g) < 2:
-            continue
-        p = [[round(x['lon'], 3), round(x['lat'], 3)] for x in g]
-        largo = sum(km(p[i], p[i + 1]) for i in range(len(p) - 1))
-        if largo < 5:
-            continue
-        total += largo
-        t = e.get('tags', {})
-        s = simplifica(p, 0.03)
-        out.append({'n': t.get('name', ''), 'o': t.get('operator', ''), 'km': round(largo), 'l': s})
     salida = {
         'fuente': 'OpenStreetMap', 'licencia': 'ODbL 1.0 · © colaboradores de OpenStreetMap', 'borrador': True,
         'descargado': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
-        'medida': {'tramos': len(out), 'km': round(total)}, 'cables': out,
+        'medida': {'tramos': len(out), 'km': round(total), 'regiones': regiones}, 'cables': out,
     }
     with open(os.path.join(RAIZ, 'tierra-borrador.json'), 'w', encoding='utf-8') as f:
         json.dump(salida, f, ensure_ascii=False, separators=(',', ':'))
@@ -251,7 +266,7 @@ def medir_tierra():
     medida = {}
     for q in ('way["telecom"="line"]["name"];', 'way["communication"="line"]["name"];', 'way["telecom"="line"]["operator"];',
               'way["telecom"="line"];', 'relation["route"="fiber"];', 'relation["type"="route"]["route"="fibre"];'):
-        cuerpo = baja('https://overpass-api.de/api/interpreter', urllib.parse.urlencode({'data': '[out:json][timeout:900];' + q + 'out count;'}).encode(), 2)
+        cuerpo = baja('https://overpass-api.de/api/interpreter', urllib.parse.urlencode({'data': '[out:json][timeout:200];' + q + 'out count;'}).encode(), 1, 240)
         try:
             medida[q] = json.loads(cuerpo)['elements'][0]['tags']
         except Exception as e:  # noqa: BLE001
@@ -299,8 +314,16 @@ if __name__ == '__main__':
         viejo = viejo or 'forzar' in que
         if viejo:
             ok = cables() and ok
+    if 'puntos' in que:
+        try:
+            with open(os.path.join(RAIZ, 'puntos.json'), encoding='utf-8') as f:
+                antes = datetime.strptime(json.load(f)['descargado'], '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=timezone.utc)
+            viejo = (datetime.now(timezone.utc) - antes).total_seconds() > 6.5 * 86400
+        except Exception:  # noqa: BLE001
+            viejo = True
+        if viejo or 'forzar' in que:
             puntos()
-    if 'medir' in que:
+    if 'tierra' in que:
         tierra_borrador()
     indice(medir_tierra() if 'medir' in que else None)
     sys.exit(0 if ok else 1)
