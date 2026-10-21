@@ -12,8 +12,8 @@ by the page (data-idiomas on <html>).
 import json, os, re, sys
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ORDEN = ['es', 'en', 'pt', 'fr', 'de', 'it', 'nl', 'pl', 'uk', 'ru', 'tr', 'zh', 'ja', 'ko', 'hi', 'bn', 'id', 'vi', 'th',
-         'ar', 'fa', 'he', 'ur', 'zh-tw', 'cs', 'ro', 'hu', 'el', 'sv', 'da', 'fi', 'nb', 'sk', 'bg', 'hr', 'ms', 'fil', 'sw', 'ta', 'te', 'pt-pt']
+ORDEN = ['es', 'en', 'pt', 'fr', 'de', 'it', 'nl', 'sv', 'da', 'nb', 'fi', 'is', 'pl', 'uk', 'ru', 'tr', 'zh', 'ja', 'ko', 'hi', 'bn', 'id', 'vi', 'th',
+         'ar', 'fa', 'he', 'ur', 'zh-tw', 'cs', 'ro', 'hu', 'el', 'sk', 'bg', 'hr', 'ms', 'fil', 'sw', 'ta', 'te', 'pt-pt']
 X_CLAVES = {'sat': ['{a}', '{b}', '{p}'], 'cab': ['{n}'], 'tieL': [], 'tie': [], 'share': ['{d}'], 'copied': [], 'shared': [], 'meta': []}
 
 
