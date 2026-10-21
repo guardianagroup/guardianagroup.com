@@ -71,4 +71,5 @@ jobs:
           git add orbita/datos orbita/static/vendor
           if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
           git commit -m "Órbita: datos reales actualizados ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
           git push
