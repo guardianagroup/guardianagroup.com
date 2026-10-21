@@ -2,7 +2,46 @@
  "capas": {
   "sub": true,
   "tierra": false,
-  "sat": true
+  "sat": true,
+  "puntos": true
  },
- "medida_tierra_osm": null
+ "medida_tierra_osm": {
+  "way[\"telecom\"=\"line\"][\"name\"];": {
+   "nodes": "0",
+   "ways": "11",
+   "relations": "0",
+   "total": "11"
+  },
+  "way[\"communication\"=\"line\"][\"name\"];": {
+   "nodes": "0",
+   "ways": "839",
+   "relations": "0",
+   "total": "839"
+  },
+  "way[\"telecom\"=\"line\"][\"operator\"];": {
+   "nodes": "0",
+   "ways": "2357",
+   "relations": "0",
+   "total": "2357"
+  },
+  "way[\"telecom\"=\"line\"];": {
+   "nodes": "0",
+   "ways": "4019",
+   "relations": "0",
+   "total": "4019"
+  },
+  "relation[\"route\"=\"fiber\"];": {
+   "nodes": "0",
+   "ways": "0",
+   "relations": "0",
+   "total": "0"
+  },
+  "relation[\"type\"=\"route\"][\"route\"=\"fibre\"];": {
+   "nodes": "0",
+   "ways": "0",
+   "relations": "0",
+   "total": "0"
+  }
+ },
+ "medida_tierra_fecha": "2026-10-21T05:34:11Z"
 }
