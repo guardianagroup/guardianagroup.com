@@ -211,7 +211,8 @@
   }
   async function arranca() {
     // the land layer only appears when there is land data to show
-    try { const r = await fetch('datos/tierra.json', { method: 'HEAD' }); if (!r.ok) throw 0; } catch (_) { const b = document.querySelector('#capas [data-capa="tierra"]'); if (b) b.remove(); estado.tierra = false; }
+    // (asked to the small index, so the page never requests a file that is not there)
+    try { const r = await fetch('datos/indice.json', { cache: 'no-cache' }); if (!r.ok) throw 0; const i = await r.json(); if (!i.capas || !i.capas.tierra) throw 0; } catch (_) { const b = document.querySelector('#capas [data-capa="tierra"]'); if (b) b.remove(); estado.tierra = false; }
     document.querySelectorAll('#capas [data-capa]').forEach((b) => b.addEventListener('click', () => pon(b.dataset.capa, b.getAttribute('aria-pressed') !== 'true')));
     for (const k of ['sub', 'tierra', 'sat']) if (estado[k]) pon(k, true);
     pintaNota();

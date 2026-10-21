@@ -159,14 +159,38 @@ out tags geom;'''
 
 
 def medir_tierra():
-    """How much of the land fibre OpenStreetMap knows: counts only (no data saved)."""
+    """How much of the land fibre OpenStreetMap knows: counts only, saved in indice.json so anyone can read it."""
+    medida = {}
     for q in ('way["telecom"="line"]["name"];', 'way["communication"="line"]["name"];', 'way["telecom"="line"]["operator"];',
-              'relation["route"="fiber"];', 'relation["type"="route"]["route"="fibre"];'):
+              'way["telecom"="line"];', 'relation["route"="fiber"];', 'relation["type"="route"]["route"="fibre"];'):
         cuerpo = baja('https://overpass-api.de/api/interpreter', urllib.parse.urlencode({'data': '[out:json][timeout:900];' + q + 'out count;'}).encode(), 2)
         try:
-            print('medida tierra', q, json.loads(cuerpo)['elements'][0]['tags'])
+            medida[q] = json.loads(cuerpo)['elements'][0]['tags']
         except Exception as e:  # noqa: BLE001
-            print('medida tierra', q, 'sin respuesta', e)
+            medida[q] = 'sin respuesta: ' + str(e)[:120]
+        print('medida tierra', q, medida[q])
+    return medida
+
+
+def indice(medida=None):
+    """orbita/datos/indice.json: which layers exist (so the page asks only for files that are there) and, when
+    measured, how much land fibre OpenStreetMap knows."""
+    ruta = os.path.join(RAIZ, 'indice.json')
+    try:
+        with open(ruta, encoding='utf-8') as f:
+            previo = json.load(f)
+    except Exception:  # noqa: BLE001
+        previo = {}
+    salida = {
+        'capas': {c: os.path.exists(os.path.join(RAIZ, a)) for c, a in (('sub', 'cables.json'), ('tierra', 'tierra.json'), ('sat', 'satelites.json'))},
+        'medida_tierra_osm': medida if medida else previo.get('medida_tierra_osm'),
+    }
+    if medida:
+        salida['medida_tierra_fecha'] = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+    elif previo.get('medida_tierra_fecha'):
+        salida['medida_tierra_fecha'] = previo['medida_tierra_fecha']
+    with open(ruta, 'w', encoding='utf-8') as f:
+        json.dump(salida, f, ensure_ascii=False, indent=1)
 
 
 if __name__ == '__main__':
@@ -187,6 +211,5 @@ if __name__ == '__main__':
         viejo = viejo or 'forzar' in que
         if viejo:
             ok = cables() and ok
-    if 'medir' in que:
-        medir_tierra()
+    indice(medir_tierra() if 'medir' in que else None)
     sys.exit(0 if ok else 1)

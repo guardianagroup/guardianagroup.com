@@ -1,0 +1,8 @@
+{
+ "capas": {
+  "sub": true,
+  "tierra": false,
+  "sat": true
+ },
+ "medida_tierra_osm": null
+}
