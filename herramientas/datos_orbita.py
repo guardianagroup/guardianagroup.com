@@ -123,7 +123,13 @@ out tags geom;'''
         largo = sum(km(p[i], p[i + 1]) for i in range(len(p) - 1))
         total += largo
         t = e.get('tags', {})
+        # only cables in service: nothing disused, abandoned, removed, historic or with an end date
+        if any(k in t for k in ('disused', 'abandoned', 'historic', 'removed', 'razed', 'end_date', 'disused:communication', 'abandoned:communication')) \
+                or t.get('operational_status') in ('closed', 'abandoned', 'disused') or t.get('lifecycle') in ('disused', 'abandoned'):
+            continue
         n = t.get('name') or t.get('name:en') or ''
+        if any(x in n.lower() for x in ('telegraph', 'telégrafo', 'telegrafo', '1865', '1866', '1858')):
+            continue
         if n:
             nombres.add(n.strip())
         # split where a way crosses the antimeridian, so no line runs across the whole planet
@@ -152,6 +158,17 @@ out tags geom;'''
     return True
 
 
+def medir_tierra():
+    """How much of the land fibre OpenStreetMap knows: counts only (no data saved)."""
+    for q in ('way["telecom"="line"]["name"];', 'way["communication"="line"]["name"];', 'way["telecom"="line"]["operator"];',
+              'relation["route"="fiber"];', 'relation["type"="route"]["route"="fibre"];'):
+        cuerpo = baja('https://overpass-api.de/api/interpreter', urllib.parse.urlencode({'data': '[out:json][timeout:900];' + q + 'out count;'}).encode(), 2)
+        try:
+            print('medida tierra', q, json.loads(cuerpo)['elements'][0]['tags'])
+        except Exception as e:  # noqa: BLE001
+            print('medida tierra', q, 'sin respuesta', e)
+
+
 if __name__ == '__main__':
     os.makedirs(RAIZ, exist_ok=True)
     que = sys.argv[1:] or ['satelites', 'cables']
@@ -170,4 +187,6 @@ if __name__ == '__main__':
         viejo = viejo or 'forzar' in que
         if viejo:
             ok = cables() and ok
+    if 'medir' in que:
+        medir_tierra()
     sys.exit(0 if ok else 1)

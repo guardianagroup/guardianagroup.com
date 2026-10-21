@@ -48,7 +48,7 @@ jobs:
           fi
 
       - name: Satélites (CelesTrak) y cables (OpenStreetMap)
-        run: python3 herramientas/datos_orbita.py satelites cables
+        run: python3 herramientas/datos_orbita.py satelites cables ${{ github.event_name == 'push' && 'forzar medir' || '' }}
 
       - name: Guardar si ha cambiado
         run: |
