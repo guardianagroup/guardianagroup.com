@@ -262,7 +262,7 @@
   // 20 Oct 2026: the planet's layers (cables, satellites) live in static/capas.js and draw through this.
   window.OrbitaPlaneta = {
     aVista, pantalla, vec, ctx: cx2,
-    get geo() { return { W, H, CX, CY, R, U }; },
+    get geo() { return { W, H, CX, CY, R, R0, U }; },
     get dentro() { return dentro; },
     get lugar() { try { if (LUGAR) return { lat: LUGAR.lat, lon: LUGAR.lon, nombre: LUGAR.ciudad, aprox: false }; const p = centros[CASA]; return p ? { lat: p.lat, lon: p.lon, nombre: nombrePais(CASA), aprox: true } : null; } catch (_) { return null; } },
   };

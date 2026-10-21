@@ -322,3 +322,20 @@ body.cerca .capa-nota { background: rgba(6,8,12,.78); padding: 6px 14px; border-
    they wake up again under the pointer. */
 body:not(.dentro) #puertas { opacity: calc(1 - var(--cerca, 0) * .88); transition: opacity .25s; }
 body:not(.dentro) #puertas:hover, body:not(.dentro) #puertas:focus-within { opacity: 1; }
+
+/* Which satellites (owner + agency, 20 Oct 2026): a quiet second row under the layers, only with satellites on. */
+.sat-vista { position: absolute; left: 50%; top: 74px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 3px; border-radius: 999px; border: 1px solid var(--line); background: rgba(12,17,24,.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.sat-vista[hidden] { display: none; }
+.sat-vista .seg, .sat-vista .orb { display: flex; gap: 2px; }
+.sat-vista .sep { width: 1px; height: 16px; background: var(--line); }
+.sat-vista button { all: unset; cursor: pointer; padding: 6px 11px; border-radius: 999px; font: 500 11px/1 var(--texto); color: var(--muted); white-space: nowrap; transition: color .2s, background .2s; }
+.sat-vista button b { font: 400 10px/1 var(--mono); color: #8A95A2; margin-left: 4px; letter-spacing: .02em; }
+.sat-vista button:hover:not(:disabled) { color: var(--fg); }
+.sat-vista [aria-checked="true"] { color: var(--fg); background: rgba(156,195,228,.16); }
+.sat-vista .orb [aria-pressed="false"] { color: #5F6873; text-decoration: line-through; text-decoration-color: rgba(156,195,228,.35); }
+.sat-vista .orb [aria-pressed="false"] b { color: #5F6873; }
+.sat-vista button:disabled { opacity: .35; cursor: default; }
+.sat-vista button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+body.dentro .sat-vista { opacity: 0; pointer-events: none; }
+@media (max-width: 760px) { .sat-vista { position: static; transform: none; order: 4; width: 100%; justify-content: center; flex-wrap: wrap; border-radius: 16px; } }
+@media (max-width: 760px) { .sat-vista .sep { display: none; } .zoom { display: none; } }

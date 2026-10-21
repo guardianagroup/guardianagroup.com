@@ -39,6 +39,19 @@
     <button type="button" data-capa="tierra" aria-pressed="false" title="Ver los cables de fibra en tierra"><i aria-hidden="true"></i>Cables de tierra</button>
     <button type="button" data-capa="sat" aria-pressed="false" title="Ver los satélites que llevan datos, en tiempo real"><i aria-hidden="true"></i>Satélites de datos</button>
   </div>
+  <div id="sat-vista" class="sat-vista" role="group" aria-label="Qué satélites ver" hidden>
+    <div class="seg" role="radiogroup" aria-label="Vista">
+      <button type="button" data-vista="equilibrada" role="radio" aria-checked="true" title="Todos menos Starlink, y una muestra fija de Starlink que crece al acercar">Equilibrada</button>
+      <button type="button" data-vista="todos" role="radio" aria-checked="false">Todos</button>
+      <button type="button" data-vista="cielo" role="radio" aria-checked="false" title="Solo los que están ahora a más de 25° sobre tu horizonte">Sobre tu cielo</button>
+    </div>
+    <span class="sep" aria-hidden="true"></span>
+    <div class="orb" role="group" aria-label="Órbita">
+      <button type="button" data-orb="baja" aria-pressed="true" title="Órbita baja, por debajo de 2.000 km">Baja <b></b></button>
+      <button type="button" data-orb="media" aria-pressed="true" title="Órbita media">Media <b></b></button>
+      <button type="button" data-orb="geo" aria-pressed="true" title="Órbita geoestacionaria, a unos 35.786 km">Geo <b></b></button>
+    </div>
+  </div>
   <div class="derecha">
     <button type="button" id="lugar-btn" class="lugar-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14.5s4.5-4.2 4.5-7.8a4.5 4.5 0 0 0-9 0c0 3.6 4.5 7.8 4.5 7.8z"/><circle cx="8" cy="6.7" r="1.6"/></svg><span id="lugar-nombre">Precisar ubicación</span></button>
     <div class="idiomas" role="group" aria-label="Idioma" translate="no"><button type="button" data-l="es" aria-pressed="true">ES</button><button type="button" data-l="en" aria-pressed="false">EN</button><button type="button" data-l="pt" aria-pressed="false">PT</button></div>

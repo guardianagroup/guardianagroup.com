@@ -10,8 +10,8 @@
   const P = () => window.OrbitaPlaneta;
   const RE = 6378.137, RAD = Math.PI / 180;
   const ACERO = '156,195,228', BLANCO = '244,246,248';
-  const estado = { sub: false, tierra: false, sat: false };
-  try { Object.assign(estado, JSON.parse(localStorage.getItem('guardiana-orbita-capas') || '{}')); } catch (_) {}
+  const estado = { sub: false, tierra: false, sat: false, vista: 'equilibrada', orb: { baja: true, media: true, geo: true } };
+  try { const g = JSON.parse(localStorage.getItem('guardiana-orbita-capas') || '{}'); Object.assign(estado, g); estado.orb = Object.assign({ baja: true, media: true, geo: true }, g.orb || {}); if (!['equilibrada', 'todos', 'cielo'].includes(estado.vista)) estado.vista = 'equilibrada'; } catch (_) {}
   const guarda = () => { try { localStorage.setItem('guardiana-orbita-capas', JSON.stringify(estado)); } catch (_) {} };
 
   // ---------- data ----------
@@ -54,15 +54,15 @@
       if (!window.satellite) await cargaScript('static/vendor/satellite.min.js');
       const d = await cargaJSON('datos/satelites.json');
       const c = d.campos, ix = (k) => c.indexOf(k);
-      const rec = [], g = [], nom = [];
+      const rec = [], g = [], nom = [], nor = [];
       for (const f of d.sat) {
         const omm = { NORAD_CAT_ID: f[ix('norad')] };
         for (const k of c.slice(3)) omm[k] = f[ix(k)];
-        try { const r = window.satellite.json2satrec(omm); if (r && !r.error) { rec.push(r); g.push(f[0]); nom.push(f[1]); } } catch (_) {}
+        try { const r = window.satellite.json2satrec(omm); if (r && !r.error) { rec.push(r); g.push(f[0]); nom.push(f[1]); nor.push(+f[ix('norad')] || 0); } } catch (_) {}
       }
       const N = rec.length;
       S = { d, rec, g: Uint8Array.from(g), nom, N, pos: new Float64Array(N * 3), vel: new Float64Array(N * 3), t: new Float64Array(N), ok: new Uint8Array(N),
-            sx: new Float32Array(N), sy: new Float32Array(N), sombra: new Uint8Array(N), vis: new Uint8Array(N), arriba: new Uint8Array(N), cursor: 0, nArriba: 0, tArriba: 0 };
+            sx: new Float32Array(N), sy: new Float32Array(N), sombra: new Uint8Array(N), dib: new Uint8Array(N), norad: Int32Array.from(nor), nSel: 0, cuentaOrb: { baja: 0, media: 0, geo: 0 }, vis: new Uint8Array(N), arriba: new Uint8Array(N), cursor: 0, nArriba: 0, tArriba: 0 };
       for (let i = 0; i < N; i++) propaga(i, Date.now());
     } catch (e) { S = { error: true }; }
     cargando.sat = false; pintaNota();
@@ -165,7 +165,9 @@
     const sol = window.OrbitaSol ? window.OrbitaSol() : null;
     let sx0 = 0, sy0 = 0, sz0 = 0;
     if (sol) { const a = sol.lat * RAD, b = sol.lon * RAD; sx0 = Math.cos(a) * Math.cos(b); sy0 = Math.cos(a) * Math.sin(b); sz0 = Math.sin(a); }
-    const capasPinta = [[], [], []]; // starlink-like low fleet, other low/medium, geostationary
+    const capasPinta = [[], [], []];
+    const cuentaOrb = { baja: 0, media: 0, geo: 0 }; let nSel = 0;
+    const z = G.R / (G.R0 || G.R), paso = z < 1.35 ? 10 : z < 1.75 ? 5 : 3; S.paso = paso; // starlink-like low fleet, other low/medium, geostationary
     for (let i = 0; i < N; i++) {
       if (!S.ok[i]) { S.vis[i] = 0; continue; }
       const k = i * 3, dt = (ahora - S.t[i]) / 1000;
@@ -181,16 +183,24 @@
         const el = Math.asin((dx * ux + dy * uy + dz * uz) / d);
         S.arriba[i] = el > 25 * RAD ? 1 : 0; if (S.arriba[i]) n++;
       }
-      if (!ve) continue;
+      // what this view shows (owner + agency, 20 Oct 2026): never hidden without saying so; the count is on screen
+      const alto = r - RE, banda = alto < 2000 ? 'baja' : alto < 30000 ? 'media' : 'geo';
+      cuentaOrb[banda]++;
+      let sel = estado.orb[banda];
+      if (sel && estado.vista === 'equilibrada' && S.g[i] === 0) sel = S.norad[i] % paso === 0;
+      if (sel && estado.vista === 'cielo') sel = !!S.arriba[i];
+      S.dib[i] = sel ? 1 : 0; if (sel) nSel++;
+      if (!ve || !sel) continue;
       const x = CX + R * v[0], y = CY - R * v[1];
       S.sx[i] = x; S.sy[i] = y;
-      const alto = r - RE;
       let sombra = 0;
       if (sol) { const d = ex * sx0 + ey * sy0 + ez * sz0; if (d < 0 && r * r - d * d < RE * RE) sombra = 1; }
       S.sombra[i] = sombra;
       capasPinta[alto > 30000 ? 2 : S.g[i] === 0 ? 0 : 1].push(sombra ? -1 - i : i);
     }
-    if (cuentaArriba) { S.nArriba = n; S.tArriba = ahora; pintaNota(); }
+    if (cuentaArriba) { S.nArriba = n; S.tArriba = ahora; }
+    const cambia = nSel !== S.nSel || cuentaArriba; S.nSel = nSel; S.cuentaOrb = cuentaOrb;
+    if (cambia) { pintaNota(); pintaVista(); }
     // small soft discs, one pre-drawn sprite per kind (agency, 20 Oct 2026); in sunlight full, in the shadow dim
     for (let c = 0; c < 3; c++) {
       const sp = sprites()[c], s = sp.d, h = s / 2;
@@ -204,7 +214,7 @@
     // the ones over your sky right now: a quiet ring each
     if (L) {
       cx.fillStyle = `rgba(${BLANCO},.95)`;
-      const sp = sprites()[2], h = sp.d / 2; for (let i = 0; i < N; i++) if (S.arriba[i] && S.vis[i]) cx.drawImage(sp.img, S.sx[i] - h, S.sy[i] - h, sp.d, sp.d);
+      const sp = sprites()[2], h = sp.d / 2; for (let i = 0; i < N; i++) if (S.arriba[i] && S.vis[i] && S.dib[i]) cx.drawImage(sp.img, S.sx[i] - h, S.sy[i] - h, sp.d, sp.d);
     }
     if (marcado >= 0 && S.vis[marcado]) {
       cx.strokeStyle = `rgba(${BLANCO},.95)`; cx.lineWidth = 1.4;
@@ -221,7 +231,9 @@
     const partes = [];
     if (estado.sat) {
       if (S && S.N) {
-        let s = num(S.N) + ' ' + T('satélites de datos') + ' · CelesTrak, ' + haceTxt(hace(S.d.descargado)) + ' · ' + T('posición calculada ahora');
+        const vistaTxt = estado.vista === 'todos' && estado.orb.baja && estado.orb.media && estado.orb.geo ? num(S.N) + ' ' + T('satélites de datos')
+          : T('Mostrando') + ' ' + num(S.nSel || 0) + ' ' + T('de') + ' ' + num(S.N) + ' ' + T('satélites de datos') + (estado.vista === 'equilibrada' && estado.orb.baja ? ' (' + T('Starlink: 1 de cada') + ' ' + (S.paso || 10) + ')' : estado.vista === 'cielo' ? ' (' + T('a más de 25° sobre tu horizonte') + ')' : '');
+        let s = vistaTxt + ' · CelesTrak, ' + haceTxt(hace(S.d.descargado)) + ' · ' + T('posición calculada ahora');
         const L = P() && P().lugar;
         if (L && S.tArriba) s += ' · ' + T('sobre') + ' ' + L.nombre + ': ' + num(S.nArriba);
         partes.push(s);
@@ -249,7 +261,7 @@
   function busca(x, y) {
     if (!S || !S.N || !estado.sat) return -1;
     let mejor = -1, d2 = 81;
-    for (let i = 0; i < S.N; i++) { if (!S.vis[i]) continue; const dx = S.sx[i] - x, dy = S.sy[i] - y, q = dx * dx + dy * dy; if (q < d2) { d2 = q; mejor = i; } }
+    for (let i = 0; i < S.N; i++) { if (!S.vis[i] || !S.dib[i]) continue; const dx = S.sx[i] - x, dy = S.sy[i] - y, q = dx * dx + dy * dy; if (q < d2) { d2 = q; mejor = i; } }
     return mejor;
   }
   function muestra(i, x, y) {
@@ -266,18 +278,37 @@
   }
   addEventListener('pointermove', (e) => { if (!estado.sat || (P() && P().dentro)) { if (marcado >= 0) muestra(-1); return; } const i = busca(e.clientX, e.clientY); if (i !== marcado) muestra(i, e.clientX, e.clientY); else if (i >= 0) { const f = ficha(); f.style.left = Math.min(P().geo.W - 240, e.clientX + 14) + 'px'; f.style.top = Math.max(70, e.clientY - 46) + 'px'; } }, { passive: true });
 
+  // ---------- which satellites: view and orbit (with the real count beside each orbit) ----------
+  function pintaVista() {
+    const caja = $('sat-vista'); if (!caja) return;
+    caja.hidden = !estado.sat;
+    caja.querySelectorAll('[data-vista]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.vista === estado.vista)));
+    caja.querySelectorAll('[data-orb]').forEach((b) => { b.setAttribute('aria-pressed', String(!!estado.orb[b.dataset.orb])); const c = S && S.cuentaOrb ? S.cuentaOrb[b.dataset.orb] : 0; b.querySelector('b').textContent = c ? num(c) : ''; });
+    const cielo = caja.querySelector('[data-vista="cielo"]'); if (cielo) cielo.disabled = !(P() && P().lugar);
+  }
+  function enganchaVista() {
+    const caja = $('sat-vista'); if (!caja) return;
+    caja.querySelectorAll('[data-vista]').forEach((b) => b.addEventListener('click', () => { estado.vista = b.dataset.vista; guarda(); pintaVista(); pintaNota(); }));
+    caja.querySelectorAll('[data-orb]').forEach((b) => b.addEventListener('click', () => {
+      const k = b.dataset.orb, on = !estado.orb[k];
+      if (!on && Object.values(estado.orb).filter(Boolean).length === 1) return; // at least one orbit stays on
+      estado.orb[k] = on; guarda(); pintaVista(); pintaNota();
+    }));
+  }
+
   // ---------- the three buttons ----------
   function pon(clave, on) {
     estado[clave] = on; guarda();
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
     if (on) { if (clave === 'sat') cargaSat(); else cargaCables(clave); }
     if (!on && clave === 'sat') muestra(-1);
-    pintaNota();
+    pintaNota(); pintaVista();
   }
   async function arranca() {
     // the land layer only appears when there is land data to show
     // (asked to the small index, so the page never requests a file that is not there)
     try { const r = await fetch('datos/indice.json', { cache: 'no-cache' }); if (!r.ok) throw 0; const i = await r.json(); if (!i.capas || !i.capas.tierra) throw 0; } catch (_) { const b = document.querySelector('#capas [data-capa="tierra"]'); if (b) b.remove(); estado.tierra = false; }
+    enganchaVista();
     document.querySelectorAll('#capas [data-capa]').forEach((b) => b.addEventListener('click', () => pon(b.dataset.capa, b.getAttribute('aria-pressed') !== 'true')));
     for (const k of ['sub', 'tierra', 'sat']) if (estado[k]) pon(k, true);
     pintaNota();
