@@ -1716,9 +1716,10 @@ function capasPortada(dt) {
   CAPA.tieVis = enS ? ANI.tie.p * (1 - fin) : 0;
   CAPA.k = enS ? Math.max(ANI.sat.p, ANI.tie.p) * (1 - fin) : 0;
   const pr = (i) => clamp(ch(i)) ;
-  const objetivos = [[wC, -55 + 30 * pr(iC)], [wS, 5 + 35 * pr(iS)], [wT, 40 + 45 * pr(iT)]];
-  let w = 0, lo = 0; for (const [p, l] of objetivos) if (p > w) { w = p; lo = l; }
-  CAPA.wLon = enS ? smooth(0, 0.35, w) : 0; CAPA.lon = lo; CAPA.giro = 0;
+  // land: the United States in the middle (owner, 21 Oct 2026), where most recorded data centres are
+  const objetivos = [[wC, -55 + 30 * pr(iC), null], [wS, 5 + 35 * pr(iS), null], [wT, -80 + 6 * pr(iT), 32]];
+  let w = 0, lo = 0, la = null; for (const [p, l, lt] of objetivos) if (p > w) { w = p; lo = l; la = lt; }
+  CAPA.wLon = enS ? smooth(0, 0.35, w) : 0; CAPA.lon = lo; CAPA.lat = la; CAPA.giro = 0;
 }
 const dentroDe = (an, p) => { if (!an.c) return false; const m = Math.hypot(p[0], p[1], p[2]) || 1; return (p[0] * an.c[0] + p[1] * an.c[1] + p[2] * an.c[2]) / m >= Math.cos(an.e); };
 function pintaAnillo(an, rgb, alpha) {
@@ -2052,7 +2053,8 @@ function frame(now) {
       const tl = (S.mode === 'story' ? LON_STORY - 10 + 118 * te + CAPA.giro : LON_AUCTION) + Math.sin(clock * 0.22) * 5 * (1 - te);
       let tl2 = tl; if (S.mode === 'story' && CAPA.wLon > 0.001) { const dd = ((CAPA.lon - tl + 540) % 360) - 180; tl2 = tl + dd * CAPA.wLon; }
       let d = ((tl2 - G.lon + 540) % 360) - 180; G.lon += d * (1 - Math.pow(0.08, dt));
-      G.lat = lerp(G.lat, S.mode === 'story' ? LAT_STORY + 14 * te : LAT_AUCTION, 1 - Math.pow(0.08, dt));
+      let latObj = S.mode === 'story' ? LAT_STORY + 14 * te : LAT_AUCTION; if (S.mode === 'story' && CAPA.lat != null) latObj += (CAPA.lat - latObj) * CAPA.wLon;
+      G.lat = lerp(G.lat, latObj, 1 - Math.pow(0.08, dt));
     } else {
       G.lon -= dt * 7 + scrollV * 0.05; G.lat = lerp(G.lat, 18, 1 - Math.pow(0.2, dt));
     }
