@@ -1183,7 +1183,7 @@
     L.push('', 'GUARDIANA · Órbita · ' + new Date().toLocaleDateString(document.documentElement.lang === 'en' ? 'en-GB' : 'es-ES'));
     return L.join('\n');
   }
-  function abrePanel(m) {
+  function abrePanel(m, x, y) {
     const p = panel(); panelModelo = m; historial.push(m); if (historial.length > 12) historial.shift();
     p.querySelector('.tipo').textContent = m.tipo || ''; p.querySelector('.tit').textContent = m.titulo || ''; p.querySelector('.sub').textContent = m.sub || ''; p.querySelector('.sub').hidden = !m.sub;
     const dl = p.querySelector('.resumen'); dl.textContent = '';
@@ -1198,6 +1198,15 @@
     });
     p.querySelector('.pie').textContent = m.pie || ''; p.querySelector('.atras').hidden = historial.length < 2;
     p.hidden = false; p.scrollTop = 0; p.classList.remove('alta');
+    // On a computer the full card opens where the pointer is, whole, never cut by the edges; if there is no room
+    // beside the point it goes to the middle (owner, 22 Oct 2026, 18:07). On a phone it stays a bottom sheet.
+    if (Number.isFinite(x) && Number.isFinite(y) && !esTactil() && innerWidth >= 760) {
+      p.classList.add('suelto'); p.style.left = '0px'; p.style.top = '0px';
+      const w = p.offsetWidth, h = p.offsetHeight, M = 16, arriba = 74;
+      let left = x + 18; if (left + w > innerWidth - M) left = x - w - 18; if (left < M) left = Math.max(M, Math.round((innerWidth - w) / 2));
+      let top = y - 24; if (top + h > innerHeight - M) top = innerHeight - M - h; if (top < arriba) top = arriba;
+      p.style.left = left + 'px'; p.style.top = top + 'px';
+    } else { p.classList.remove('suelto'); p.style.left = ''; p.style.top = ''; }
     const f = ficha(); if (f) f.hidden = true;
     document.body.classList.add('con-ficha');
   }
@@ -1218,7 +1227,7 @@
   }
   // hover → summary card; click → the whole panel
   function abreModelo(m, x, y) {
-    if (clicActual) { abrePanel(m); return; }
+    if (clicActual) { abrePanel(m, x, y); return; }
     const pista = esTactil() ? T('Toca para la ficha completa') : T('Clic: ficha completa');
     fichaRica(m.titulo + (m.sub ? ' · ' + m.sub : ''), m.resumen, (m.pie ? m.pie + ' · ' : '') + pista, x, y);
   }
