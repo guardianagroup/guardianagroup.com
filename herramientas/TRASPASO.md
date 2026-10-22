@@ -30,19 +30,19 @@ que me preguntes más si te doy permiso». Avísale cuando algo quede listo, en 
   git checkout web-idiomas -- orbita herramientas        # (y index.html/terminos.html solo si cambiaron)
   git add -A && git commit -m "Publicar …" && git push origin main && git checkout web-idiomas
   ```
-- **Caché**: todos los `static/*.js|css` de `orbita/index.html` llevan `?v=20261022u`. Sube la letra en cada publicación (siguiente: `v`).
+- **Caché**: todos los `static/*.js|css` de `orbita/index.html` llevan `?v=20261022w`. Sube la letra en cada publicación (siguiente: `x`).
 - Comprobar el despliegue: `gh run list --repo guardianagroup/guardianagroup.com --limit 1` hasta `completed success` (1–3 min).
   Desde el contenedor **no se puede** hacer curl a guardianagroup.com ni a overpass-api.de (proxy); se comprueba con el navegador integrado
   (pestaña de guardianagroup.com/orbita/?r=X) y `OrbitaPlaneta.ir(lon, lat, zoom)` desde la consola JS.
 - Commits: terminar con `Co-Authored-By: Claude … <noreply@anthropic.com>` y la línea `Claude-Session:` que dé el sistema.
 
-## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión u)
+## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión w)
 - Planeta WebGL con mapa 16K en teselas; modo «limpio» desde ×4 (agua negra, tierra gris, datos en blanco, sin luces).
 - **Zoom hasta ×80.000 (500 m de altura nominal)**, suavizado en escala logarítmica, doble clic por pasos (1,5 · 4 · 8 · 20 · 80 · 400 · 2.000 · 10.000 · máx).
   Indicador de altura a la derecha, encima de los botones (`#altura`, 40.000 km → 500 m, en metros por debajo de 10 km).
   Desde ×8 (`body.hondo`) desaparecen los botones de capas y el filtro de satélites. Límite de latitud ±75° a ×1 y hasta ±89,5° al acercarse (polos alcanzables).
   **Límite real**: el fondo (costas) es de 1–2 km de resolución; los puntos son precisos. Próximo paso posible: costas finas por teselas (OSM land polygons).
-- Capas: Cables submarinos (OSM filtrado 1.190 + agencia **199 confirmados**, trazado aproximado punteado), Fibra por tierra (6.695 tramos, 90 países,
+- Capas: Cables submarinos (OSM filtrado 1.190 + agencia **211 confirmados**, trazado aproximado punteado), Fibra por tierra (6.695 tramos, 90 países,
   por niveles; se desvanece por debajo de ~100 km de altura porque va de ciudad a ciudad), Centros de datos (1.903 lugares, 4.493 edificios, cuadrado blanco
   con anillo sutil al acercarse; clic en zona densa abre lista `lista-cerca`), Satélites (tiempo real).
 - Fronteras Natural Earth (`datos/fronteras.json`), nombres de regiones muy cerca, **nombres de país** desde ×2,2 con **ficha de país** al pasar el ratón
@@ -67,9 +67,9 @@ que me preguntes más si te doy permiso». Avísale cuando algo quede listo, en 
   `lugares-capas.json`. Imprime «aceptados» y la lista «solo lo nombra X» (una sola voz: pendientes de confirmar).
 - Estado: 199 cables confirmados; **145 todavía con una sola voz** (lista en `/tmp/.../scratchpad/solos_nombres.txt`, se regenera con el script).
 - **En curso ahora mismo**:
-  - Grok: verificando los 84 cables de una sola voz; tandas 1 y 2 guardadas (`grok-verifica-1.json`, `-2.json`); le pedí «continúa con el resto»
+  - Grok: verificando los 84 cables de una sola voz; tandas 1, 2 y 3 guardadas (`grok-verifica-1..3.json`); le pedí la tanda 4 (resto de Mediterráneo, Caribe, Pacífico, norte)
     (Mediterráneo, Atlántico/Caribe, Pacífico). Cuando responda: guardar como `grok-verifica-3.json` (y 4…), cruzar, publicar.
-  - ChatGPT: tanda «Rusia, mar Negro, Golfo Pérsico, sur de Asia (hasta 40 cables)». Cuando responda: guardar como `chatgpt-rusia-golfo-1.json`, cruzar, publicar.
+  - ChatGPT: tanda «Rusia, mar Negro, Golfo Pérsico, sur de Asia»: respondió 39 cables SIN coordenadas; le pedí repetirlos con lat/lon. Cuando responda: guardar como `chatgpt-rusia-golfo-1.json`, cruzar, publicar.
 - Licencias comprobadas hoy: **PeeringDB no se puede usar** (su AUP prohíbe reproducir y uso comercial); IXPDB (Euro-IX) sin licencia clara → no usar.
   Los puntos de intercambio se hacen con la agencia (hechos públicos) y OSM (`telecom=internet_exchange`).
 
