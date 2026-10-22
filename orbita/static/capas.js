@@ -140,8 +140,29 @@
   }
 
   // Where cables reach land: a small white point, larger under the pointer.
+  // Close up (from ×4), no line starts or ends bare: each end gets a dot with a fine ring, like the data centres.
+  // Owner, 22 Oct 2026, 18:00: «la línea no puede empezar sola, tiene que empezar con el circulito».
+  let EXTREMOS_VISTOS = null;
+  function pintaExtremos(cx, p, G, lineas, z, color) {
+    const k = Math.min(1, (z - 4) / 4); if (k <= 0 || !lineas) return;
+    if (!EXTREMOS_VISTOS) EXTREMOS_VISTOS = new Set();
+    const r = 4.5 + Math.min(2.5, (z - 4) / 40);
+    cx.save(); cx.globalCompositeOperation = 'source-over'; cx.lineWidth = 0.9;
+    for (const l of lineas) {
+      const w = l.w; if (!w || w.length < 2) continue;
+      for (const q of [w[0], w[w.length - 1]]) {
+        const v = p.aVista(q); if (v[2] <= 0.05) continue;
+        const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1]; if (x < -10 || y < -10 || x > G.W + 10 || y > G.H + 10) continue;
+        const key = Math.round(x / 2) + ':' + Math.round(y / 2); if (EXTREMOS_VISTOS.has(key)) continue; EXTREMOS_VISTOS.add(key);
+        cx.fillStyle = `rgba(${color},${(0.9 * k).toFixed(2)})`; cx.beginPath(); cx.arc(x, y, 1.7, 0, 7); cx.fill();
+        cx.strokeStyle = `rgba(${color},${(0.5 * k).toFixed(2)})`; cx.beginPath(); cx.arc(x, y, r, 0, 7); cx.stroke();
+      }
+    }
+    cx.restore();
+  }
   function pintaLlegadas(cx, p, G) {
     if (!LUG || !LUG.llegadas) return;
+    const zl = G.R / (G.R0 || G.R), ka = Math.min(1, (zl - 4) / 4);
     cx.globalCompositeOperation = 'source-over';
     for (let i = 0; i < LUG.llegadas.length; i++) {
       const v = p.aVista(LUG.llegadas[i].w); if (v[2] <= 0.05) continue;
@@ -149,6 +170,8 @@
       cx.fillStyle = on ? `rgba(${BLANCO},1)` : `rgba(${BLANCO},.8)`;
       cx.beginPath(); cx.arc(x, y, on ? 3.2 : 1.8, 0, 7); cx.fill();
       if (on) { cx.strokeStyle = `rgba(${BLANCO},.9)`; cx.lineWidth = 1; cx.beginPath(); cx.arc(x, y, 7, 0, 7); cx.stroke(); }
+      else if (ka > 0) { cx.strokeStyle = `rgba(${BLANCO},${(0.5 * ka).toFixed(2)})`; cx.lineWidth = 0.9; cx.beginPath(); cx.arc(x, y, 4.5 + Math.min(2.5, (zl - 4) / 40), 0, 7); cx.stroke(); }
+      if (EXTREMOS_VISTOS) EXTREMOS_VISTOS.add(Math.round(x / 2) + ':' + Math.round(y / 2));
     }
     cx.globalCompositeOperation = 'lighter';
   }
@@ -238,6 +261,7 @@
       cx.stroke();
     }
     cx.setLineDash([]);
+    if (z >= 4) { pintaExtremos(cx, p, G, lineas, z, ACERO); cx.globalCompositeOperation = 'lighter'; }
     if (fibraMarcada >= 0) {
       const l = FT.lineas[fibraMarcada]; cx.strokeStyle = `rgba(${BLANCO},.95)`; cx.lineWidth = 2; cx.beginPath();
       let prev = false;
@@ -424,7 +448,7 @@
   // ---------- drawing ----------
   function pinta(t) {
     const p = P(); if (!p) return;
-    const cx = p.ctx, G = p.geo;
+    const cx = p.ctx, G = p.geo; EXTREMOS_VISTOS = null;
     pintaFronteras(cx, p, G); if (soloTu && document.body.classList.contains('viaje')) PAIS_CAJAS = []; else pintaPaises(cx, p, G); // the journey wants a clean planet
     // «Mi conexión» (owner, 22 Oct 2026): while the visitor looks at their own data the planet shows only that —
     // no cables, no satellites, nothing that is not theirs — so there is no doubt about what is whose.
@@ -466,6 +490,7 @@
       if (previstoMarcado >= 0 && PREV && PREV[previstoMarcado]) { cx.save(); cx.setLineDash([3, 5]); pintaLineas(cx, p, G, [PREV[previstoMarcado]], `rgba(${BLANCO},.95)`, 2.2); cx.restore(); } // the planned cable under the pointer lights up like the real ones (owner, 22 Oct 2026, 17:57)
       if (llegadaMarcada >= 0 && LUG && LUG.llegadas) { const ls = LUG.llegadas[llegadaMarcada].seg.map((i) => capas.sub.lineas[i]).filter(Boolean); pintaLineas(cx, p, G, ls, `rgba(${BLANCO},.95)`, 2); }
       pintaLlegadas(cx, p, G);
+      { const ze = G.R / (G.R0 || G.R); if (ze >= 4) { pintaExtremos(cx, p, G, capas.sub.lineas, ze, BLANCO); if (PREV && PREV.length) pintaExtremos(cx, p, G, PREV, ze, BLANCO); } }
     }
     if (estado.sat && S && S.N) pintaSat(cx, p, G, t);
   }
