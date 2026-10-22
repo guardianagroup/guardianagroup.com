@@ -441,7 +441,7 @@
           + (medio.length ? '\n' + T('Paradas') + ': ' + medio.slice(0, 4).join(' · ') + (medio.length > 4 ? ' · +' + (medio.length - 4) : '') : '')
           + '\n' + T('Los datos viajan por él en los dos sentidos.')
         : lados.length === 1 ? T('Llega a tierra en') + ' ' + lados[0] : T('Sus extremos no están cerca de ninguna ciudad');
-      f.querySelector('span').textContent = donde + (d.o ? '\n' + T('Operador') + ': ' + d.o : '') + '\n' + T('Según OpenStreetMap; puede faltar algún tramo.');
+      f.querySelector('span').textContent = donde + (d.o ? '\n' + T('Operador') + ': ' + d.o : '');
     }
     f.hidden = false; colocaFicha(x, y);
   }
