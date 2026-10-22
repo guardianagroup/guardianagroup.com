@@ -2267,6 +2267,33 @@ if(btn) btn.addEventListener('click',async()=>{
 })();
 </script>
 <script>
+// 21 Oct 2026, the 42 languages: a big title never breaks a word in the middle. If its longest word does not fit
+// the width (long German, Hungarian or Finnish compounds on a phone), that title alone is set a little smaller
+// until the word fits; every other title keeps its size.
+(function () {
+  const sel = 'h1,h2';
+  function ajusta() {
+    for (const h of document.querySelectorAll(sel)) {
+      if (h.closest('[aria-hidden="true"],.idi-p')) continue;
+      h.style.fontSize = ''; h.style.maxWidth = '';
+      const W = h.clientWidth; if (!W || !h.offsetParent) continue;
+      const cs = getComputedStyle(h); const base = parseFloat(cs.fontSize);
+      const mw = cs.maxWidth; // a measure set in ch would shrink with the letters: it is held at its width
+      const ow = h.style.overflowWrap, hy = h.style.hyphens, wh = h.style.webkitHyphens;
+      h.style.overflowWrap = 'normal'; h.style.hyphens = 'manual'; h.style.webkitHyphens = 'manual';
+      let f = base, n = 0;
+      while (h.scrollWidth > W + 1 && n < 8) { if (!n && mw !== 'none') h.style.maxWidth = mw; f *= 0.94; h.style.fontSize = f.toFixed(1) + 'px'; n++; }
+      h.style.overflowWrap = ow; h.style.hyphens = hy; h.style.webkitHyphens = wh;
+    }
+  }
+  let t = 0; const pide = () => { clearTimeout(t); t = setTimeout(ajusta, 60); };
+  document.addEventListener('guardiana:lang', ajusta);
+  addEventListener('resize', pide);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ajusta);
+  if (document.readyState === 'loading') addEventListener('DOMContentLoaded', ajusta); else ajusta();
+})();
+</script>
+<script>
 // Text that lights up word by word as you scroll (20 Oct 2026). The owner asked for the whole site
 // to behave like the phrase that lights up; ChatGPT and Grok agreed it should start dimmed and never
 // invisible, titles only (paragraphs stay as they are), word by word, numbers and buttons untouched, and nothing
