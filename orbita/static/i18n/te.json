@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "తెలిసిన ఫైబర్ నెట్‌వర్క్ ద్వారా",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "భూమిపై ఖచ్చితమైన మార్గం బహిరంగం కాదు; మ్యాప్‌లో సరళ రేఖగా గీశాం.",
   "en la sombra de la Tierra": "భూమి నీడలో",
-  "Yahoo Japón": "Yahoo జపాన్"
+  "Yahoo Japón": "Yahoo జపాన్",
+  "De punto a punto, en línea recta": "పాయింట్ నుండి పాయింట్, సరళ రేఖలో",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "ప్రతి కట్‌ను లైవ్‌గా చూపే బ్రౌజర్. పూర్తయి పరీక్షించాక వస్తుంది."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

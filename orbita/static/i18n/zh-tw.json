@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "經由已知的光纖網路",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "陸地上的確切路線並未公開；地圖上以直線表示。",
   "en la sombra de la Tierra": "處於地球陰影中",
-  "Yahoo Japón": "Yahoo 日本"
+  "Yahoo Japón": "Yahoo 日本",
+  "De punto a punto, en línea recta": "點對點直線距離",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "即時顯示每一次切斷的瀏覽器。完成並測試後推出。"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

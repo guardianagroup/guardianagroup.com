@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "kupitia mtandao wa fiber unaojulikana",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Njia halisi ya nchi kavu haiko wazi kwa umma; kwenye ramani inachorwa kama mstari ulionyooka.",
   "en la sombra de la Tierra": "katika kivuli cha Dunia",
-  "Yahoo Japón": "Yahoo Japani"
+  "Yahoo Japón": "Yahoo Japani",
+  "De punto a punto, en línea recta": "Nukta hadi nukta, kwa mstari ulionyooka",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Kivinjari kinachoonyesha kila ukataji, moja kwa moja. Kitafika kikikamilika na kujaribiwa."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

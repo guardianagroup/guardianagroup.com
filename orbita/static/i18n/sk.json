@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "po známej optickej sieti",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Presná trasa po súši nie je verejná; na mape sa kreslí rovnou čiarou.",
   "en la sombra de la Tierra": "v tieni Zeme",
-  "Yahoo Japón": "Yahoo Japonsko"
+  "Yahoo Japón": "Yahoo Japonsko",
+  "De punto a punto, en línea recta": "Z bodu do bodu, vzdušnou čiarou",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Prehliadač, ktorý ukazuje každé prerušenie naživo. Príde, keď bude hotový a otestovaný."
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

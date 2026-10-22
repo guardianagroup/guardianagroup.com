@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "μέσω γνωστού δικτύου οπτικών ινών",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Η ακριβής χερσαία διαδρομή δεν είναι δημόσια· στον χάρτη σχεδιάζεται σε ευθεία γραμμή.",
   "en la sombra de la Tierra": "στη σκιά της Γης",
-  "Yahoo Japón": "Yahoo Ιαπωνίας"
+  "Yahoo Japón": "Yahoo Ιαπωνίας",
+  "De punto a punto, en línea recta": "Από σημείο σε σημείο, σε ευθεία γραμμή",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Ο περιηγητής που δείχνει κάθε αποκοπή, ζωντανά. Θα έρθει όταν ολοκληρωθεί και δοκιμαστεί."
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "по известна оптична мрежа",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Точният маршрут по суша не е публичен; на картата се чертае с права линия.",
   "en la sombra de la Tierra": "в сянката на Земята",
-  "Yahoo Japón": "Yahoo Япония"
+  "Yahoo Japón": "Yahoo Япония",
+  "De punto a punto, en línea recta": "От точка до точка, по права линия",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Браузърът, който показва всяко прекъсване на живо. Ще дойде, когато е завършен и тестван."
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

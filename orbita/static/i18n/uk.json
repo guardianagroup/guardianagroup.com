@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "відомою оптоволоконною мережею",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Точний маршрут по суші не є публічним; на карті він проведений прямою лінією.",
   "en la sombra de la Tierra": "у тіні Землі",
-  "Yahoo Japón": "Yahoo Японія"
+  "Yahoo Japón": "Yahoo Японія",
+  "De punto a punto, en línea recta": "Від точки до точки, по прямій",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Браузер, що показує кожне відключення наживо. З’явиться, коли буде готовий і перевірений."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

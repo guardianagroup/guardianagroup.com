@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "melalui jaringan serat optik yang dikenal",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Rute pasti di darat tidak dipublikasikan; di peta digambar sebagai garis lurus.",
   "en la sombra de la Tierra": "dalam bayangan Bumi",
-  "Yahoo Japón": "Yahoo Jepang"
+  "Yahoo Japón": "Yahoo Jepang",
+  "De punto a punto, en línea recta": "Titik ke titik, garis lurus",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Browser yang menampilkan setiap pemutusan secara langsung. Hadir setelah selesai dan diuji."
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

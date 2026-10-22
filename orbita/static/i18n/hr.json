@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "poznatom optičkom mrežom",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Točna ruta kopnom nije javna; na karti se crta ravnom linijom.",
   "en la sombra de la Tierra": "u Zemljinoj sjeni",
-  "Yahoo Japón": "Yahoo Japan"
+  "Yahoo Japón": "Yahoo Japan",
+  "De punto a punto, en línea recta": "Od točke do točke, zračnom linijom",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Preglednik koji prikazuje svaki prekid uživo. Stiže kad bude dovršen i testiran."
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

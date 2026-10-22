@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "ผ่านโครงข่ายไฟเบอร์ที่ทราบแล้ว",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "เส้นทางบนบกที่แน่นอนไม่ได้เปิดเผยต่อสาธารณะ บนแผนที่จึงวาดเป็นเส้นตรง",
   "en la sombra de la Tierra": "อยู่ในเงาของโลก",
-  "Yahoo Japón": "Yahoo ญี่ปุ่น"
+  "Yahoo Japón": "Yahoo ญี่ปุ่น",
+  "De punto a punto, en línea recta": "จากจุดถึงจุด เป็นเส้นตรง",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "เบราว์เซอร์ที่แสดงทุกการตัดการเชื่อมต่อแบบสด จะมาเมื่อเสร็จและผ่านการทดสอบ"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

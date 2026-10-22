@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "알려진 광섬유망을 통해",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "육상의 정확한 경로는 공개되지 않았습니다. 지도에서는 직선으로 표시합니다.",
   "en la sombra de la Tierra": "지구 그림자 속",
-  "Yahoo Japón": "야후 재팬"
+  "Yahoo Japón": "야후 재팬",
+  "De punto a punto, en línea recta": "지점 간 직선거리",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "모든 차단을 실시간으로 보여주는 브라우저. 완성되고 검증되면 제공됩니다."
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

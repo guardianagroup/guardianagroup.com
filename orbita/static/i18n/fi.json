@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "tunnettua kuituverkkoa pitkin",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Tarkka reitti maitse ei ole julkinen; kartalla se piirretään suorana viivana.",
   "en la sombra de la Tierra": "Maan varjossa",
-  "Yahoo Japón": "Yahoo Japani"
+  "Yahoo Japón": "Yahoo Japani",
+  "De punto a punto, en línea recta": "Pisteestä pisteeseen, linnuntietä",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Selain, joka näyttää jokaisen katkaisun suorana. Tulee, kun se on valmis ja testattu."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "um þekkt ljósleiðaranet",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Nákvæm leið á landi er ekki opinber; á kortinu er hún teiknuð sem bein lína.",
   "en la sombra de la Tierra": "í skugga jarðar",
-  "Yahoo Japón": "Yahoo Japan"
+  "Yahoo Japón": "Yahoo Japan",
+  "De punto a punto, en línea recta": "Punkt til punkts, í beinni línu",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Vafrinn sem sýnir hverja rofna tengingu í beinni. Kemur þegar hann er tilbúinn og prófaður."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

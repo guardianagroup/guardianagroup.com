@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "printr-o rețea de fibră cunoscută",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Traseul exact pe uscat nu este public; pe hartă se desenează în linie dreaptă.",
   "en la sombra de la Tierra": "în umbra Pământului",
-  "Yahoo Japón": "Yahoo Japonia"
+  "Yahoo Japón": "Yahoo Japonia",
+  "De punto a punto, en línea recta": "Din punct în punct, în linie dreaptă",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Browserul care arată fiecare întrerupere, în direct. Va veni când este terminat și testat."
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

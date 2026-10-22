@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "ایک معلوم فائبر نیٹ ورک کے ذریعے",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "زمین پر اصل راستہ عوامی نہیں؛ نقشے پر اسے سیدھی لکیر سے دکھایا گیا ہے۔",
   "en la sombra de la Tierra": "زمین کے سائے میں",
-  "Yahoo Japón": "Yahoo جاپان"
+  "Yahoo Japón": "Yahoo جاپان",
+  "De punto a punto, en línea recta": "نقطہ تا نقطہ، سیدھی لکیر میں",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "وہ براؤزر جو ہر کٹ براہِ راست دکھاتا ہے۔ مکمل اور آزمائش کے بعد آئے گا۔"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",
