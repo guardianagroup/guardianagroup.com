@@ -13,14 +13,24 @@
    "relations": "0",
    "total": "839"
   },
-  "way[\"telecom\"=\"line\"][\"operator\"];": "sin respuesta: the JSON object must be str, bytes or bytearray, not NoneType",
+  "way[\"telecom\"=\"line\"][\"operator\"];": {
+   "nodes": "0",
+   "ways": "2361",
+   "relations": "0",
+   "total": "2361"
+  },
   "way[\"telecom\"=\"line\"];": {
    "nodes": "0",
-   "ways": "4022",
+   "ways": "4023",
    "relations": "0",
-   "total": "4022"
+   "total": "4023"
   },
-  "relation[\"route\"=\"fiber\"];": "sin respuesta: the JSON object must be str, bytes or bytearray, not NoneType",
+  "relation[\"route\"=\"fiber\"];": {
+   "nodes": "0",
+   "ways": "0",
+   "relations": "0",
+   "total": "0"
+  },
   "relation[\"type\"=\"route\"][\"route\"=\"fibre\"];": {
    "nodes": "0",
    "ways": "0",
@@ -28,5 +38,5 @@
    "total": "0"
   }
  },
- "medida_tierra_fecha": "2026-10-22T16:19:04Z"
+ "medida_tierra_fecha": "2026-10-22T21:59:12Z"
 }
