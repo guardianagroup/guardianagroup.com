@@ -13,6 +13,10 @@ every open source we found, keeps what each one says about itself, and writes or
      https://github.com/Open-Telecoms-Data/OFDS-public-data
   3. OpenStreetMap (ODbL): named or operated land telecom lines of 50 km or more, from tierra-borrador.json
      (written by datos_orbita.py).
+  4. The Internet Topology Zoo (University of Adelaide, CC BY 4.0): city-to-city links of real backbones world
+     wide (GÉANT, Cogent, Tata…), as straight lines, from herramientas/fuentes/topology-zoo.json written by
+     fibra_zoo.py (committed, because the Zoo's site is not reachable from every runner).
+     http://www.topology-zoo.org
 
 Every line keeps its source; nothing is drawn where no source has data. Planned and metro lines are left out:
 only long-distance fibre that the source gives as built (or does not qualify).
@@ -198,6 +202,32 @@ def osm():
     return out, (d.get('descargado') or '')[:10]
 
 
+def zoo():
+    """The Internet Topology Zoo, already reduced by fibra_zoo.py to herramientas/fuentes/topology-zoo.json:
+    {'fuente': {…}, 'lineas': [{n, o, cc, anio, obra, l}, …]}. Nothing if the file is not there."""
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fuentes', 'topology-zoo.json')
+    if not os.path.exists(p):
+        return [], None
+    try:
+        d = json.load(open(p, encoding='utf-8'))
+    except Exception as e:
+        print('Topology Zoo: no se pudo leer', p, '·', e); return [], None
+    out = []
+    for c in d.get('lineas', []):
+        l = c.get('l') or []
+        if len(l) < 2 or not all(isinstance(q, list) and len(q) >= 2 for q in l):
+            continue
+        x = {'n': c.get('n', ''), 'o': c.get('o', ''), 'cc': c.get('cc', '') or '', 'e': 'obra' if c.get('obra') else 'ok', 'l': [q[:2] for q in l]}
+        if c.get('anio'):
+            x['anio'] = c['anio']
+        out.append(x)
+    f = d.get('fuente') or {}
+    fuente = {'n': f.get('n') or 'The Internet Topology Zoo (Universidad de Adelaida)', 'lic': f.get('lic') or 'CC BY 4.0',
+              'url': f.get('url') or 'http://www.topology-zoo.org', 'fecha': f.get('fecha') or '',
+              'nota': f.get('nota') or 'Enlaces entre ciudades de redes troncales reales, en línea recta: la ruta exacta no es pública.'}
+    return out, fuente
+
+
 def mismo(a, b):
     s = lambda x: re.sub(r'[^a-z0-9]', '', (x or '').lower())
     a, b = s(a), s(b)
@@ -241,6 +271,13 @@ def main():
                 x['f'] = len(fuentes) - 1
                 lineas.append(x)
 
+    zl, fz = zoo()
+    if zl:
+        fuentes.append(fz)
+        for x in zl:
+            x['f'] = len(fuentes) - 1
+            lineas.append(x)
+
     salida, tot, paises, por_f = [], 0.0, set(), {}
     for x in lineas:
         if x['e'] in ('plan', 'metro'):
@@ -258,6 +295,8 @@ def main():
         r = {'n': x['n'], 'o': x['o'], 'cc': x['cc'], 'f': x['f'], 'km': round(k), 'l': l}
         if x['e'] == 'obra':
             r['obra'] = 1
+        if x.get('anio'):
+            r['anio'] = x['anio']
         salida.append(r)
 
     for i, f in enumerate(fuentes):
