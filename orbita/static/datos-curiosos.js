@@ -246,7 +246,7 @@
   async function sabia() {
     const S = await sabias(); if (!S || !S.sabias || !S.sabias.length) return null;
     const l = lang(), vivas = S.sabias.filter((n) => n[l] || n.es); const n = vivas[Math.floor(Math.random() * vivas.length)]; if (!n) return null;
-    return { k: 'mundo', v: n.cifra || '', t: n[l] || n.es, f: tx().sabiaF, s: true, fijo: true };
+    return { k: 'mundo', v: n.cifra || '', t: (n[l] || n.es).replace(/\s*\?\s*$/, '.'), f: tx().sabiaF, s: true, fijo: true };
   }
   // This computer: in the program, from the panel's measurements; outside it, three labelled examples.
   function equipo() {
