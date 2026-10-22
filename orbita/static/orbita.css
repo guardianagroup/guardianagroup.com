@@ -385,6 +385,10 @@ body.dentro .sat-vista { opacity: 0; pointer-events: none; }
 .dato .dt { margin: 6px 0 0; font: 400 13px/1.45 var(--texto); color: #C4CCD5; }
 .dato .dpie { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 10px; }
 .dato .dpie small { font: 400 10px/1.4 var(--mono); color: #6F7B88; letter-spacing: .02em; }
+.dato .dpuntos { display: inline-flex; align-items: center; gap: 5px; padding: 6px 4px; margin: -6px -4px; cursor: pointer; }
+.dato .dpuntos b { font: 500 13px/1 var(--mono); color: var(--accent); padding: 0 3px; }
+.dato .dpuntos .dfijo { font-size: 10px; color: #8A95A2; }
+.dato.fijo { border-color: rgba(156,195,228,.55); }
 .dato .dpuntos { display: flex; gap: 4px; flex: none; }
 .dato .dpuntos i { width: 4px; height: 4px; border-radius: 50%; background: rgba(156,195,228,.25); }
 .dato .dpuntos i.on { background: var(--accent); }
