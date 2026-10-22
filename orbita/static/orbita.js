@@ -259,7 +259,7 @@
   // ---------- The view: where the planet looks ----------
   const vista = { lon: (centros[CASA] ? centros[CASA].lon : -40) + 18, lat: 14, vlon: 0, vlat: 0 };
   let meta = null;           // a country the person asked to see (a row of «En directo»)
-  let arrastre = null, quietoHasta = 0;
+  let arrastre = null, quietoHasta = 0, manual = false; // manual: once the visitor has moved the planet, it never turns by itself again (owner, 22 Oct 2026, 17:55)
   const VEL = QUIETO ? 1.2 : 2.6; // degrees per second
   // view → world: Ry(lon) · Rx(−lat)
   const aMundo = (v) => {
@@ -287,7 +287,7 @@
     get centros() { return centros; }, // country centroids for the country labels and cards (22 Oct 2026)
     get pais() { return (LUGAR && LUGAR.pais) || CASA || null; },
     // 22 Oct 2026: used by the automated checks (Playwright) to look at a place at a given zoom.
-    ir(lon, lat, z) { vista.lon = lon; vista.lat = Math.max(-89.5, Math.min(89.5, lat)); vista.vlon = vista.vlat = 0; meta = null; ZOOM.zt = Math.max(1, Math.min(ZOOM.MAX, z || 1)); quietoHasta = performance.now() + 60000; pintaZoom(); },
+    ir(lon, lat, z) { vista.lon = lon; vista.lat = Math.max(-89.5, Math.min(89.5, lat)); vista.vlon = vista.vlat = 0; meta = null; ZOOM.zt = Math.max(1, Math.min(ZOOM.MAX, z || 1)); quietoHasta = performance.now() + 60000; manual = true; pintaZoom(); },
     get lugar() { try { if (LUGAR) return { lat: LUGAR.lat, lon: LUGAR.lon, nombre: LUGAR.ciudad, aprox: false }; const p = centros[CASA]; return p ? { lat: p.lat, lon: p.lon, nombre: nombrePais(CASA), aprox: true } : null; } catch (_) { return null; } },
   };
   cvT.addEventListener('pointerdown', (e) => {
@@ -305,7 +305,7 @@
     vista.vlon = -dx * k / dt * 1000; vista.vlat = dy * k / dt * 1000;
     arrastre = { x: e.clientX, y: e.clientY, t: now };
   });
-  const suelta = () => { if (!arrastre) return; arrastre = null; cvT.classList.remove('arrastra'); quietoHasta = performance.now() + 2500; };
+  const suelta = () => { if (!arrastre) return; arrastre = null; cvT.classList.remove('arrastra'); quietoHasta = performance.now() + 2500; manual = true; };
   cvT.addEventListener('pointerup', suelta); cvT.addEventListener('pointercancel', suelta);
 
   // ---------- Zoom: wheel, pinch, double click, the +/− rail on the right; Esc returns ----------
@@ -317,7 +317,7 @@
     zt = Math.max(1, Math.min(ZOOM.MAX, zt));
     // 20 Oct 2026 (owner): the zoom stays on the same point; the planet does not turn when you zoom.
     ZOOM.zt = zt;
-    quietoHasta = performance.now() + 4000;
+    quietoHasta = performance.now() + 4000; manual = true;
     pintaZoom();
   }
   function pintaZoom() {
@@ -377,7 +377,7 @@
   function mira(pais, punto) {
     const c = punto || centros[pais]; if (!c) return;
     meta = { lon: c.lon, lat: Math.max(-45, Math.min(45, c.lat)) };
-    quietoHasta = performance.now() + 6000;
+    quietoHasta = performance.now() + 6000; manual = true;
   }
   function avanzaVista(dt, now) {
     if (arrastre) return;
@@ -389,7 +389,7 @@
     }
     vista.lon += vista.vlon * dt; vista.lat = Math.max(-latMax(), Math.min(latMax(), vista.lat + vista.vlat * dt));
     vista.vlon *= Math.pow(0.04, dt); vista.vlat *= Math.pow(0.04, dt);
-    if (now > quietoHasta && ZOOM.zt <= 1.02) { vista.lon += VEL * dt; vista.lat += (14 - vista.lat) * dt * 0.25; }
+    if (!manual && now > quietoHasta && ZOOM.zt <= 1.02) { vista.lon += VEL * dt; vista.lat += (14 - vista.lat) * dt * 0.25; }
   }
 
   // ---------- The planet (WebGL 1) ----------
