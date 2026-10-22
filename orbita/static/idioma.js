@@ -328,6 +328,9 @@
     'ZERO se queda en blanco y negro; las webs se ven en color.': ['ZERO stays in black and white; sites show in colour.', 'O ZERO fica em preto e branco; os sites aparecem em cores.'],
     // ZERO, the auction (22 Oct 2026)
     'Subasta': ['Auction', 'Leilão'],
+    'Tu privacidad hoy': ['Your privacy today', 'Sua privacidade hoje'],
+    'empresas evitadas': ['companies kept out', 'empresas evitadas'], 'subastas vistas': ['auctions seen', 'leilões vistos'], 'países': ['countries', 'países'], 'cortes': ['cuts', 'cortes'],
+    'Abre una web y ZERO te contará aquí lo que ha cortado.': ['Open a site and ZERO will tell you here what it cut.', 'Abra um site e o ZERO vai contar aqui o que cortou.'],
     'Ficha de la empresa': ['Company card', 'Ficha da empresa'],
     'Resumen de la subasta': ['Auction summary', 'Resumo do leilão'],
     'el anuncio de arriba': ['the top ad', 'o anúncio do topo'], 'el anuncio de al lado': ['the side ad', 'o anúncio lateral'],
@@ -395,6 +398,7 @@
     return null;
   }
   const PATRONES = [
+    [/^La que más lo intentó hoy: (.+), (\d+) (vez|veces)\.$/, (m) => (cur === 'en' ? 'Tried hardest today: ' + t(m[1]) + ', ' + m[2] + (m[2] === '1' ? ' time.' : ' times.') : 'A que mais tentou hoje: ' + t(m[1]) + ', ' + m[2] + (m[2] === '1' ? ' vez.' : ' vezes.'))],
     [/^Se subastó (.+)$/, (m) => (cur === 'en' ? 'Auctioned: ' : 'Leiloado: ') + t(m[1])],
     [/^(\d+) empresas pujaron por mostrarte (.+)$/, (m) => m[1] + (cur === 'en' ? ' companies bid to show you ' : ' empresas deram lances para mostrar a você ') + t(m[2])],
     [/^(\d+) empresas pujaron$/, (m) => m[1] + (cur === 'en' ? ' companies bid' : ' empresas deram lances')],
