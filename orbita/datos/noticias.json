@@ -1,0 +1,27 @@
+{
+ "nota": "Noticias sobre cables, centros de datos, datos personales y GUARDIANA, cada una confirmada por al menos dos fuentes públicas (las URL quedan aquí; en pantalla solo se dice «Noticia verificada»). Las añade la agencia; la tarea programada «Noticias Órbita» las renueva.",
+ "noticias": [
+  {
+   "fecha": "2026-10-19",
+   "tema": "cables",
+   "es": "la noruega Bulk busca un socio canadiense para construir Leif Erikson, un cable de unos 4.600 km entre el sur de Noruega y Terranova que uniría Europa y Canadá sin pasar por Estados Unidos; costaría más de 620 millones de dólares y aún no tiene financiación ni permisos.",
+   "en": "Norway's Bulk is looking for a Canadian partner to build Leif Erikson, a cable of about 4,600 km between southern Norway and Newfoundland that would link Europe and Canada without passing through the United States; it would cost over 620 million dollars and has no financing or permits yet.",
+   "pt": "a norueguesa Bulk procura um sócio canadiano para construir o Leif Erikson, um cabo de cerca de 4.600 km entre o sul da Noruega e a Terra Nova que ligaria a Europa ao Canadá sem passar pelos Estados Unidos; custaria mais de 620 milhões de dólares e ainda não tem financiamento nem licenças.",
+   "fuentes": [
+    "https://www.biobiochile.cl/noticias/ciencia-y-tecnologia/adelantos/2026/10/19/europa-y-canada-buscan-tender-nuevo-cable-submarino-para-conectarse-sin-pasar-por-eeuu.shtml",
+    "https://thenextweb.com/news/bulk-leif-erikson-cable-canadian-partner"
+   ]
+  },
+  {
+   "fecha": "2026-10-15",
+   "tema": "cables",
+   "es": "cada año se dañan entre 150 y 200 cables submarinos en el mundo, y entre la mitad y el 80 % de los daños los causan anclas y artes de pesca; en el Báltico, un solo barco arrastró su ancla 90 km en diciembre de 2024 y rompió cuatro cables de datos y uno eléctrico.",
+   "en": "between 150 and 200 submarine cables are damaged every year worldwide, and between half and 80% of the damage is caused by anchors and fishing gear; in the Baltic, a single ship dragged its anchor for 90 km in December 2024 and broke four data cables and one power cable.",
+   "pt": "todos os anos se danificam entre 150 e 200 cabos submarinos no mundo, e entre metade e 80 % dos danos são causados por âncoras e artes de pesca; no Báltico, um único navio arrastou a âncora 90 km em dezembro de 2024 e partiu quatro cabos de dados e um elétrico.",
+   "fuentes": [
+    "https://www.infobae.com/tecno/2026/10/15/crecen-los-danos-de-barcos-a-los-cables-submarinos-de-internet-los-casos-que-encendieron-las-alarmas/",
+    "https://www.iscpc.org/"
+   ]
+  }
+ ]
+}

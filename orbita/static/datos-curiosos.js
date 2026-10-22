@@ -18,7 +18,7 @@
 
   const X = {
     es: {
-      k: { mundo: 'EL MUNDO, AHORA', equipo: 'TU EQUIPO', ejemplo: 'EJEMPLO' },
+      k: { mundo: 'EL MUNDO, AHORA', equipo: 'TU EQUIPO', ejemplo: 'EJEMPLO', sabias: '¿SABÍAS QUE…?', noticia: 'NOTICIA' }, noticiaF: 'Noticia verificada · dos fuentes', sabiaF: 'Datos verificados · dos fuentes',
       sat: (d) => `satélites de datos están ahora mismo sobre el horizonte de ${d}.`, satF: 'Datos verificados · posiciones calculadas ahora',
       noche: (p) => `ciudades de más de 15.000 habitantes están ahora de noche: el ${p} % del total.`, nocheF: 'GeoNames · el Sol, calculado ahora',
       cerca: (n, o, c) => `te separan del centro de datos más cercano del mapa: ${n}${o && o !== n ? ' (' + o + ')' : ''}${c ? ', en ' + c : ''}.`, cercaF: 'Datos verificados · cobertura parcial',
@@ -30,9 +30,21 @@
       top: (pr, k) => `conexiones ha hecho hoy ${pr}, el programa que más habla con internet, a ${k} ${k === 1 ? 'país' : 'países'}.`, topF: 'Medido en este equipo por GUARDIANA',
       tel: (k) => `conexiones de telemetría ha enviado hoy tu equipo, a ${k} ${k === 1 ? 'país' : 'países'}.`, telF: 'Medido en este equipo por GUARDIANA',
       ej: 'Ejemplo: en el programa, medido en tu equipo', tu: 'tu ciudad',
+      rankCab: (n, resto) => `es el país con más cables submarinos del mapa: ${n}. Le siguen ${resto}.`, rankF: 'Datos verificados · ranking calculado ahora',
+      rankCen: (n, resto) => `tiene más centros de datos que ningún otro país del mapa: ${n}. Después, ${resto}.`,
+      menosCab: (paises) => `es todo lo que une por mar a ${paises} con el resto del mundo: un solo cable submarino cada uno.`, menosF: 'Datos verificados · cobertura parcial',
+      potente: (c, ab) => `puede llevar ${c}, el cable más potente del mapa${ab ? ', entre ' + ab : ''}: tanto como millones de conexiones de fibra doméstica a la vez.`, potenteF: 'Datos verificados · capacidad de diseño',
+      hondo: (c) => `de profundidad alcanza el fondo bajo ${c}, el tramo de cable más hondo del mapa: más que la altura del Everest… hacia abajo.`, hondoF: 'Datos verificados · relieve del fondo marino',
+      largo: (c, ab) => `mide ${c}, el cable submarino más largo del mapa${ab ? ', de ' + ab : ''}.`,
+      diez: (paises) => `países del mapa ofrecen ya fibra de 10 Gbit/s al hogar: ${paises}.`, diezF: 'Datos verificados · fichas de país',
+      antiguo: (c, ab) => `es el año en que entró en servicio ${c}${ab ? ' (' + ab + ')' : ''}, el cable más veterano del mapa que sigue en uso.`,
+      reciben: (p, n, resto) => `es el país que más datos recibe de tu equipo: ${n} conexiones. Después, ${resto}.`, recibenF: 'Medido en este equipo por GUARDIANA',
+      y: ' y ',
+      dueno: (e, n, resto) => `es la empresa que opera más cables submarinos del mapa: ${n}. Le siguen ${resto}.`, duenoF: 'Datos verificados · operadores declarados',
+      nuevo: (c, ab) => `es el año de ${c}${ab ? ' (' + ab + ')' : ''}, el cable más moderno del mapa ya en servicio.`,
     },
     en: {
-      k: { mundo: 'THE WORLD, NOW', equipo: 'YOUR COMPUTER', ejemplo: 'EXAMPLE' },
+      k: { mundo: 'THE WORLD, NOW', equipo: 'YOUR COMPUTER', ejemplo: 'EXAMPLE', sabias: 'DID YOU KNOW…?', noticia: 'NEWS' }, noticiaF: 'Verified news · two sources', sabiaF: 'Verified data · two sources',
       sat: (d) => `data satellites are above the horizon of ${d} right now.`, satF: 'Verified data · positions computed now',
       noche: (p) => `cities of more than 15,000 people are in night right now: ${p}% of them.`, nocheF: 'GeoNames · the Sun, computed now',
       cerca: (n, o, c) => `to the nearest data centre on the map: ${n}${o && o !== n ? ' (' + o + ')' : ''}${c ? ', in ' + c : ''}.`, cercaF: 'Verified data · partial coverage',
@@ -44,9 +56,21 @@
       top: (pr, k) => `connections today by ${pr}, the program that talks to the internet most, to ${k} ${k === 1 ? 'country' : 'countries'}.`, topF: 'Measured on this computer by GUARDIANA',
       tel: (k) => `telemetry connections sent by your computer today, to ${k} ${k === 1 ? 'country' : 'countries'}.`, telF: 'Measured on this computer by GUARDIANA',
       ej: 'Example: in the program, measured on your computer', tu: 'your city',
+      rankCab: (n, resto) => `is the country with the most submarine cables on the map: ${n}. Then ${resto}.`, rankF: 'Verified data · ranking computed now',
+      rankCen: (n, resto) => `has more data centres than any other country on the map: ${n}. Then ${resto}.`,
+      menosCab: (paises) => `is all that links ${paises} to the rest of the world by sea: a single submarine cable each.`, menosF: 'Verified data · partial coverage',
+      potente: (c, ab) => `can be carried by ${c}, the most powerful cable on the map${ab ? ', between ' + ab : ''}: as much as millions of home fibre connections at once.`, potenteF: 'Verified data · design capacity',
+      hondo: (c) => `is the depth of the seabed under ${c}, the deepest cable stretch on the map: more than the height of Everest… downwards.`, hondoF: 'Verified data · seabed relief',
+      largo: (c, ab) => `is the length of ${c}, the longest submarine cable on the map${ab ? ', from ' + ab : ''}.`,
+      diez: (paises) => `countries on the map already offer 10 Gbit/s home fibre: ${paises}.`, diezF: 'Verified data · country cards',
+      antiguo: (c, ab) => `is the year ${c}${ab ? ' (' + ab + ')' : ''} came into service, the oldest cable on the map still in use.`,
+      reciben: (p, n, resto) => `is the country that receives the most data from your computer: ${n} connections. Then ${resto}.`, recibenF: 'Measured on this computer by GUARDIANA',
+      y: ' and ',
+      dueno: (e, n, resto) => `is the company operating the most submarine cables on the map: ${n}. Then ${resto}.`, duenoF: 'Verified data · declared operators',
+      nuevo: (c, ab) => `is the year of ${c}${ab ? ' (' + ab + ')' : ''}, the newest cable on the map already in service.`,
     },
     pt: {
-      k: { mundo: 'O MUNDO, AGORA', equipo: 'SEU COMPUTADOR', ejemplo: 'EXEMPLO' },
+      k: { mundo: 'O MUNDO, AGORA', equipo: 'SEU COMPUTADOR', ejemplo: 'EXEMPLO', sabias: 'SABIA QUE…?', noticia: 'NOTÍCIA' }, noticiaF: 'Notícia verificada · duas fontes', sabiaF: 'Dados verificados · duas fontes',
       sat: (d) => `satélites de dados estão agora acima do horizonte de ${d}.`, satF: 'Dados verificados · posições calculadas agora',
       noche: (p) => `cidades com mais de 15 mil habitantes estão agora à noite: ${p} % do total.`, nocheF: 'GeoNames · o Sol, calculado agora',
       cerca: (n, o, c) => `até o centro de dados mais próximo do mapa: ${n}${o && o !== n ? ' (' + o + ')' : ''}${c ? ', em ' + c : ''}.`, cercaF: 'Dados verificados · cobertura parcial',
@@ -58,6 +82,18 @@
       top: (pr, k) => `conexões hoje do ${pr}, o programa que mais fala com a internet, para ${k} ${k === 1 ? 'país' : 'países'}.`, topF: 'Medido neste computador pela GUARDIANA',
       tel: (k) => `conexões de telemetria enviadas hoje pelo seu computador, para ${k} ${k === 1 ? 'país' : 'países'}.`, telF: 'Medido neste computador pela GUARDIANA',
       ej: 'Exemplo: no programa, medido no seu computador', tu: 'sua cidade',
+      rankCab: (n, resto) => `é o país com mais cabos submarinos do mapa: ${n}. Depois, ${resto}.`, rankF: 'Dados verificados · ranking calculado agora',
+      rankCen: (n, resto) => `tem mais centros de dados do que qualquer outro país do mapa: ${n}. Depois, ${resto}.`,
+      menosCab: (paises) => `é tudo o que liga ${paises} ao resto do mundo pelo mar: um único cabo submarino cada um.`, menosF: 'Dados verificados · cobertura parcial',
+      potente: (c, ab) => `pode levar o ${c}, o cabo mais potente do mapa${ab ? ', entre ' + ab : ''}: tanto quanto milhões de ligações de fibra doméstica ao mesmo tempo.`, potenteF: 'Dados verificados · capacidade de projeto',
+      hondo: (c) => `de profundidade alcança o fundo sob o ${c}, o troço de cabo mais fundo do mapa: mais do que a altura do Evereste… para baixo.`, hondoF: 'Dados verificados · relevo do fundo do mar',
+      largo: (c, ab) => `mede o ${c}, o cabo submarino mais longo do mapa${ab ? ', de ' + ab : ''}.`,
+      diez: (paises) => `países do mapa já oferecem fibra de 10 Gbit/s em casa: ${paises}.`, diezF: 'Dados verificados · fichas de país',
+      antiguo: (c, ab) => `é o ano em que o ${c}${ab ? ' (' + ab + ')' : ''} entrou em serviço, o cabo mais veterano do mapa ainda em uso.`,
+      reciben: (p, n, resto) => `é o país que mais dados recebe do seu computador: ${n} ligações. Depois, ${resto}.`, recibenF: 'Medido neste computador pela GUARDIANA',
+      y: ' e ',
+      dueno: (e, n, resto) => `é a empresa que opera mais cabos submarinos do mapa: ${n}. Depois, ${resto}.`, duenoF: 'Dados verificados · operadores declarados',
+      nuevo: (c, ab) => `é o ano do ${c}${ab ? ' (' + ab + ')' : ''}, o cabo mais moderno do mapa já em serviço.`,
     },
   };
   const tx = () => X[lang()];
@@ -83,6 +119,14 @@
   const puntos = () => una('pt', () => json('datos/puntos.json'));
   const lugaresCapas = () => una('lug', () => json('datos/lugares-capas.json'));
   const cables = () => una('cab', () => json('datos/cables.json'));
+  const capacidad = () => una('cap', () => json('datos/cables-capacidad.json'));
+  const relieve = () => una('rel', () => json('datos/cables-relieve.json'));
+  const paises = () => una('pai', () => json('datos/paises.json'));
+  const noticias = () => una('not', () => json('datos/noticias.json'));
+  const sabias = () => una('sab', () => json('datos/sabias.json'));
+  const lista = (arr) => { const t = tx(); return arr.length <= 1 ? arr.join('') : arr.slice(0, -1).join(', ') + t.y + arr[arr.length - 1]; };
+  const extremos = (g) => { const ll = g && g[1]; if (!ll || ll.length < 2) return ''; const a = ll[0], b = ll[ll.length - 1]; return (a[0] || pais(a[1])) + ' (' + pais(a[1]) + ') – ' + (b[0] || pais(b[1])) + ' (' + pais(b[1]) + ')'; };
+  const grupoDe = (G, nombre) => G && G.grupos ? G.grupos.find((g) => g[0] === nombre) : null;
 
   // ---------- the facts ----------
   const MUNDO = [
@@ -134,11 +178,81 @@
       if (!st || !tot) return null;
       return { k: 'mundo', v: num(st.n), t: tx().star(num(100 * st.n / tot)), f: tx().starF + ', ' + new Date(S.d.descargado).toLocaleDateString(loc()) };
     },
+    // rankings from the map itself (owner, 22 Oct 2026: «un ranking de los que más y los que menos… que se vayan renovando»)
+    async function rankingCables() {
+      const G = await lugaresCapas(); if (!G || !G.grupos) return null;
+      const por = new Map();
+      for (const g of G.grupos) for (const cc of new Set(g[1].map((q) => q[1]))) por.set(cc, (por.get(cc) || 0) + 1);
+      const top = [...por.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5); if (top.length < 5) return null;
+      return { k: 'mundo', v: pais(top[0][0]), t: tx().rankCab(num(top[0][1]), lista(top.slice(1).map(([cc, n]) => pais(cc) + ' (' + num(n) + ')'))), f: tx().rankF };
+    },
+    async function rankingCentros() {
+      const G = await lugaresCapas(); if (!G || !G.centros) return null;
+      const por = new Map();
+      for (const c of G.centros) por.set(c[3], (por.get(c[3]) || 0) + (c[4] || 1));
+      const top = [...por.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5); if (top.length < 5) return null;
+      return { k: 'mundo', v: pais(top[0][0]), t: tx().rankCen(num(top[0][1]), lista(top.slice(1).map(([cc, n]) => pais(cc) + ' (' + num(n) + ')'))), f: tx().rankF };
+    },
+    async function menosCables() {
+      const G = await lugaresCapas(); if (!G || !G.grupos) return null;
+      const por = new Map();
+      for (const g of G.grupos) for (const cc of new Set(g[1].map((q) => q[1]))) por.set(cc, (por.get(cc) || 0) + 1);
+      const unos = [...por.entries()].filter(([, n]) => n === 1).map(([cc]) => cc); if (unos.length < 3) return null;
+      for (let j = unos.length - 1; j > 0; j--) { const r = Math.floor(Math.random() * (j + 1)); [unos[j], unos[r]] = [unos[r], unos[j]]; }
+      return { k: 'mundo', v: '1', t: tx().menosCab(lista(unos.slice(0, 3).map(pais))), f: tx().menosF };
+    },
+    async function masPotente() {
+      const [C, G] = await Promise.all([capacidad(), lugaresCapas()]); if (!C || !C.cables) return null;
+      const top = Object.entries(C.cables).sort((a, b) => b[1].tbps - a[1].tbps)[0]; if (!top) return null;
+      return { k: 'mundo', v: num(top[1].tbps) + ' Tbit/s', t: tx().potente(top[0], extremos(grupoDe(G, top[0]))), f: tx().potenteF };
+    },
+    async function masHondo() {
+      const [R, C] = await Promise.all([relieve(), cables()]); if (!R || !R.tramos || !C) return null;
+      let mejor = null;
+      for (const s of C.cables) { if (!s.n || !s.l || s.l.length < 2) continue; let suma = 0; for (const [lo, la] of s.l) suma += Math.round(lo * 1000) + Math.round(la * 1000); const r = R.tramos[s.l.length + ':' + suma]; if (r && (!mejor || r.max > mejor.max)) mejor = { max: r.max, n: s.n }; }
+      if (!mejor || mejor.max < 8849) return null;
+      return { k: 'mundo', v: num(mejor.max) + ' m', t: tx().hondo(mejor.n), f: tx().hondoF };
+    },
+    async function masLargo() {
+      const G = await lugaresCapas(); if (!G || !G.grupos) return null;
+      const top = G.grupos.filter((g) => g[2] && g[2].kmMapa).sort((a, b) => b[2].kmMapa - a[2].kmMapa)[0]; if (!top) return null;
+      return { k: 'mundo', v: num(top[2].kmMapa) + ' km', t: tx().largo(top[0], extremos(top)), f: tx().cabF };
+    },
+    async function diezGiga() {
+      const P = await paises(); if (!P || !P.paises) return null;
+      const cc = Object.entries(P.paises).filter(([, v]) => v.diez && v.confirmado).map(([k]) => k); if (cc.length < 3) return null;
+      for (let j = cc.length - 1; j > 0; j--) { const r = Math.floor(Math.random() * (j + 1)); [cc[j], cc[r]] = [cc[r], cc[j]]; }
+      return { k: 'mundo', v: num(cc.length), t: tx().diez(lista(cc.slice(0, 6).map(pais)) + (cc.length > 6 ? '…' : '')), f: tx().diezF };
+    },
+    async function masAntiguo() {
+      const G = await lugaresCapas(); if (!G || !G.grupos) return null;
+      const top = G.grupos.filter((g) => g[2] && g[2].anio > 1980).sort((a, b) => a[2].anio - b[2].anio)[0]; if (!top) return null;
+      return { k: 'mundo', v: String(top[2].anio), t: tx().antiguo(top[0], extremos(top)), f: tx().cabF };
+    },
+    async function masNuevo() {
+      const G = await lugaresCapas(); if (!G || !G.grupos) return null;
+      const top = G.grupos.filter((g) => g[2] && g[2].anio && g[2].anio <= new Date().getFullYear()).sort((a, b) => b[2].anio - a[2].anio)[0]; if (!top) return null;
+      return { k: 'mundo', v: String(top[2].anio), t: tx().nuevo(top[0], extremos(top)), f: tx().cabF };
+    },
+    async function masDueno() {
+      const G = await lugaresCapas(); if (!G || !G.grupos) return null;
+      const por = new Map();
+      for (const g of G.grupos) for (const o of new Set((g[2] && g[2].operan) || [])) por.set(o, (por.get(o) || 0) + 1);
+      const top = [...por.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4); if (top.length < 4 || top[0][1] < 3) return null;
+      return { k: 'mundo', v: top[0][0], t: tx().dueno(top[0][0], num(top[0][1]), lista(top.slice(1).map(([o, n]) => o + ' (' + num(n) + ')'))), f: tx().duenoF };
+    },
   ];
+  // the agency's verified «did you know» facts (datos/sabias.json): owners, leases, costs, projects…
+  async function sabia() {
+    const S = await sabias(); if (!S || !S.sabias || !S.sabias.length) return null;
+    const l = lang(), vivas = S.sabias.filter((n) => n[l] || n.es); const n = vivas[Math.floor(Math.random() * vivas.length)]; if (!n) return null;
+    return { k: 'mundo', v: n.cifra || '', t: n[l] || n.es, f: tx().sabiaF, s: true, fijo: true };
+  }
   // This computer: in the program, from the panel's measurements; outside it, three labelled examples.
   function equipo() {
     const t = tx();
     if (DEMO) return [
+      { k: 'equipo', e: true, v: pais('US'), t: t.reciben('US', num(2310), lista([pais('IE') + ' (' + num(412) + ')', pais('DE') + ' (' + num(180) + ')'])), f: t.ej },
       { k: 'equipo', e: true, v: num(37), t: t.emp(6), f: t.ej },
       { k: 'equipo', e: true, v: num(1204), t: t.tel(3), f: t.ej },
       { k: 'equipo', e: true, v: num(842), t: t.top('Navegador', 9), f: t.ej },
@@ -153,30 +267,47 @@
     if (top && top[1].n) out.push({ k: 'equipo', v: num(top[1].n), t: t.top(top[0], top[1].p.size), f: t.topF });
     const tel = u.destinos.filter((d) => d.categoria === 'telemetria'), nt = tel.reduce((a, d) => a + (d.enviados || 0) + (d.paradas || 0), 0);
     if (nt) out.push({ k: 'equipo', v: num(nt), t: t.tel(new Set(tel.map((d) => d.pais).filter(Boolean)).size), f: t.telF });
+    const porPais = new Map();
+    for (const d of u.destinos) { if (!d.pais) continue; porPais.set(d.pais, (porPais.get(d.pais) || 0) + (d.enviados || 0) + (d.paradas || 0)); }
+    const pp = [...porPais.entries()].filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1]);
+    if (pp.length >= 2) out.push({ k: 'equipo', v: pais(pp[0][0]), t: t.reciben(pp[0][0], num(pp[0][1]), lista(pp.slice(1, 3).map(([cc, n]) => pais(cc) + ' (' + num(n) + ')'))), f: t.recibenF });
     return out;
   }
 
   // ---------- the card ----------
   const caja = $('dato'); if (!caja) return;
-  let i = 0, lista = [], parado = false, temp = 0;
+  let parado = false, temp = 0, cola = [], ultimo = null, vuelta = 0, pos = 0;
+  // each pass is a fresh shuffle of the world's facts with this computer's facts woven in, so the card never repeats
+  // the same sequence (owner, 22 Oct 2026: «se tienen que ir renovando, que no sean siempre los mismos»)
+  async function noticia() {
+    const N = await noticias(); if (!N || !N.noticias || !N.noticias.length) return null;
+    const l = lang(), vivas = N.noticias.filter((n) => n[l] || n.es).sort((a, b) => (b.fecha || '').localeCompare(a.fecha || ''));
+    const n = vivas[Math.min(vivas.length - 1, Math.floor(Math.pow(Math.random(), 2) * vivas.length))]; if (!n) return null;
+    const f = n.fecha ? new Date(n.fecha + 'T12:00:00').toLocaleDateString(loc(), { day: 'numeric', month: 'short' }) : '';
+    return { k: 'noticia', v: f, t: n[l] || n.es, f: tx().noticiaF, s: true };
+  }
+  function rellena() {
+    const m = MUNDO.slice(); m.push(noticia, sabia, sabia); for (let j = m.length - 1; j > 0; j--) { const r = Math.floor(Math.random() * (j + 1)); [m[j], m[r]] = [m[r], m[j]]; }
+    if (ultimo && m[0] === ultimo && m.length > 1) [m[0], m[1]] = [m[1], m[0]];
+    const eq = equipo(), orden = [], paso = eq.length ? Math.max(1, Math.round(m.length / eq.length)) : 0;
+    let e = 0; for (let k = 0; k < m.length; k++) { orden.push(m[k]); if (paso && (k + 1) % paso === 0 && e < eq.length) orden.push(eq[e++]); }
+    while (e < eq.length) orden.push(eq[e++]);
+    cola = orden; vuelta = orden.length; pos = 0;
+  }
   async function siguiente() {
     clearTimeout(temp);
-    const eq = equipo();
-    // the order alternates: the world, this computer, the world…
-    const orden = [];
-    for (let k = 0; k < Math.max(MUNDO.length, eq.length); k++) { if (MUNDO[k]) orden.push(MUNDO[k]); if (eq[k]) orden.push(eq[k]); }
-    lista = orden;
-    for (let intento = 0; intento < orden.length; intento++) {
-      const f = orden[i % orden.length]; i++;
+    for (let intento = 0; intento < 12; intento++) {
+      if (!cola.length) rellena();
+      const f = cola.shift(); pos++;
       const d = typeof f === 'function' ? await f() : f;
-      if (d) { pinta(d, (i - 1) % orden.length, orden.length); break; }
+      if (d) { ultimo = f; pinta(d, (pos - 1) % Math.max(1, vuelta), vuelta); break; }
     }
     temp = setTimeout(() => { if (!parado && !document.hidden) siguiente(); else temp = setTimeout(siguiente, 3000); }, 9000);
   }
   function pinta(d, k, n) {
     const t = tx();
     caja.classList.remove('entra'); void caja.offsetWidth; caja.classList.add('entra');
-    $('dato-k').textContent = t.k[d.k];
+    $('dato-k').textContent = d.k === 'noticia' ? t.k.noticia + ' · ' + t.k.sabias : (d.fijo || (d.k === 'mundo' && Math.random() < 0.5) ? t.k.sabias : t.k[d.k]);
     const e = $('dato-e'); e.hidden = !d.e; e.textContent = t.k.ejemplo;
     $('dato-v').textContent = d.v; $('dato-t').textContent = d.t; $('dato-f').textContent = d.f;
     const p = $('dato-p'); p.textContent = '';
@@ -186,6 +317,6 @@
   caja.addEventListener('mouseenter', () => { parado = true; });
   caja.addEventListener('mouseleave', () => { parado = false; });
   caja.addEventListener('click', () => siguiente());
-  addEventListener('guardiana-idioma', () => { i = Math.max(0, i - 1); siguiente(); });
+  addEventListener('guardiana-idioma', () => { cola = []; siguiente(); });
   setTimeout(siguiente, 3500);
 })();
