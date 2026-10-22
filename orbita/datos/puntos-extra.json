@@ -38,8 +38,8 @@
    "operador": "US",
    "clase": "estación terrena",
    "enlace": "Descarga de satélites polares (NASA)",
-   "nota": "Estación comercial/NASA del Near Space Network en Ross Island; detalles no verificados en esta búsqueda.",
-   "fuente": "https://www.nasa.gov/technology/space-comms/near-space-network-complexes/"
+   "nota": "Estación terrena de la NASA en la isla de Ross (antena de 10 m) dentro del Near Space Network: baja datos de satélites polares cuando pasan sobre la Antártida.",
+   "fuente": "https://www.nasa.gov/near-space-network/"
   },
   {
    "lon": 0.0,
@@ -82,8 +82,8 @@
    "operador": "GB",
    "clase": "base",
    "enlace": "",
-   "nota": "Enlace actual no verificado en esta búsqueda.",
-   "fuente": ""
+   "nota": "Base del British Antarctic Survey sobre la plataforma de hielo Brunt, módulos sobre esquís que se trasladan; abierta en 2013. Comunicaciones por satélite.",
+   "fuente": "https://www.bas.ac.uk/polar-operations/sites-and-facilities/facility/halley/"
   },
   {
    "lon": 2.535,
@@ -115,8 +115,8 @@
    "operador": "DE",
    "clase": "base",
    "enlace": "",
-   "nota": "No verificado.",
-   "fuente": ""
+   "nota": "Base alemana del Instituto Alfred Wegener sobre la plataforma de hielo Ekström, abierta en 2009; habitada todo el año. Comunicaciones por satélite.",
+   "fuente": "https://www.awi.de/en/expedition/stations/neumayer-station-iii.html"
   },
   {
    "lon": 123.333,
@@ -126,8 +126,8 @@
    "operador": "FR/IT",
    "clase": "base",
    "enlace": "",
-   "nota": "No hay estación terrena documentada en las fuentes consultadas.",
-   "fuente": ""
+   "nota": "Base franco-italiana (IPEV y PNRA) en el Domo C, a 3.233 m, abierta en 2005; una de las más aisladas del continente. Comunicaciones por satélite.",
+   "fuente": "https://www.institut-polaire.fr/"
   },
   {
    "lon": 140.001,
@@ -137,8 +137,8 @@
    "operador": "FR",
    "clase": "base",
    "enlace": "",
-   "nota": "No verificado.",
-   "fuente": ""
+   "nota": "Base francesa (IPEV) en Tierra Adelia, desde 1956; punto de partida de la ruta terrestre a Concordia. Comunicaciones por satélite.",
+   "fuente": "https://www.institut-polaire.fr/"
   },
   {
    "lon": 110.527,
@@ -148,8 +148,8 @@
    "operador": "AU",
    "clase": "base",
    "enlace": "Speedcast, 9 Mbps simétricos (según Wikipedia)",
-   "nota": "Uso de Starlink no verificado.",
-   "fuente": "https://en.wikipedia.org/wiki/Telecommunications_in_Antarctica"
+   "nota": "Base australiana (Australian Antarctic Division) en la costa de Wilkes, habitada todo el año. Comunicaciones por satélite.",
+   "fuente": "https://www.antarctica.gov.au/antarctic-operations/stations/casey/"
   },
   {
    "lon": 77.969,
@@ -159,8 +159,8 @@
    "operador": "AU",
    "clase": "base",
    "enlace": "Speedcast, 9 Mbps simétricos (según Wikipedia)",
-   "nota": "",
-   "fuente": "https://en.wikipedia.org/wiki/Telecommunications_in_Antarctica"
+   "nota": "Base australiana (Australian Antarctic Division) en las colinas Vestfold, desde 1957; la más al sur de Australia. Comunicaciones por satélite.",
+   "fuente": "https://www.antarctica.gov.au/antarctic-operations/stations/davis/"
   },
   {
    "lon": 62.873,
@@ -170,8 +170,8 @@
    "operador": "AU",
    "clase": "base",
    "enlace": "Speedcast, 9 Mbps simétricos (según Wikipedia)",
-   "nota": "",
-   "fuente": "https://en.wikipedia.org/wiki/Telecommunications_in_Antarctica"
+   "nota": "Base australiana más antigua en el continente (1954), en Mac.Robertson Land. Comunicaciones por satélite.",
+   "fuente": "https://www.antarctica.gov.au/antarctic-operations/stations/mawson/"
   },
   {
    "lon": -56.627,
@@ -181,8 +181,8 @@
    "operador": "AR",
    "clase": "base",
    "enlace": "Internet inalámbrico + Orbcomm (mensajes cortos)",
-   "nota": "",
-   "fuente": "https://en.wikipedia.org/wiki/Telecommunications_in_Antarctica"
+   "nota": "Base argentina permanente en la isla Marambio (Seymour), desde 1969, con pista aérea todo el año. Comunicaciones por satélite.",
+   "fuente": "https://www.cancilleria.gob.ar/es/dna"
   },
   {
    "lon": -56.998,
@@ -192,8 +192,8 @@
    "operador": "AR",
    "clase": "base",
    "enlace": "",
-   "nota": "Candidata a amarre en Opción 2 del cable chileno.",
-   "fuente": "https://www.emol.com/noticias/Nacional/2026/08/18/1208799/cable-fibra-optica-magallanes-antartica.html"
+   "nota": "Base argentina permanente en la bahía Esperanza (1952), con escuela y familias. Candidata a amarre en la opción ampliada del cable chileno.",
+   "fuente": "https://www.cancilleria.gob.ar/es/dna"
   },
   {
    "lon": -58.963,
@@ -214,8 +214,8 @@
    "operador": "KR",
    "clase": "base",
    "enlace": "",
-   "nota": "No verificado.",
-   "fuente": ""
+   "nota": "Base surcoreana (KOPRI) en la isla Rey Jorge, desde 1988; habitada todo el año. Comunicaciones por satélite.",
+   "fuente": "https://www.kopri.re.kr/"
   },
   {
    "lon": -58.963,
@@ -225,8 +225,8 @@
    "operador": "CN",
    "clase": "base",
    "enlace": "",
-   "nota": "No verificado.",
-   "fuente": ""
+   "nota": "Primera base china en la Antártida (1985), en la isla Rey Jorge; habitada todo el año. Comunicaciones por satélite.",
+   "fuente": "https://www.chinare.org.cn/"
   },
   {
    "lon": 76.377,
@@ -236,8 +236,8 @@
    "operador": "CN",
    "clase": "base",
    "enlace": "",
-   "nota": "No verificado.",
-   "fuente": ""
+   "nota": "Base china en las colinas Larsemann (1989), base de apoyo de la ruta interior a Kunlun. Comunicaciones por satélite.",
+   "fuente": "https://www.chinare.org.cn/"
   },
   {
    "lon": 106.837,
@@ -247,8 +247,8 @@
    "operador": "RU",
    "clase": "base",
    "enlace": "",
-   "nota": "No verificado.",
-   "fuente": ""
+   "nota": "Base rusa interior (1957) sobre el lago subglacial Vostok, a 3.488 m; registro de la temperatura más baja medida en la Tierra. Comunicaciones por satélite.",
+   "fuente": "https://www.aari.ru/"
   },
   {
    "lon": 76.389,
@@ -258,8 +258,8 @@
    "operador": "RU",
    "clase": "base",
    "enlace": "",
-   "nota": "No verificado.",
-   "fuente": ""
+   "nota": "Base rusa principal (desde 1988) en las colinas Larsemann, junto a Zhongshan y Bharati. Comunicaciones por satélite.",
+   "fuente": "https://www.aari.ru/"
   },
   {
    "lon": 39.581,
@@ -269,8 +269,8 @@
    "operador": "JP",
    "clase": "base",
    "enlace": "",
-   "nota": "No verificado.",
-   "fuente": ""
+   "nota": "Base japonesa (JARE) en la isla Ongul Oriental, desde 1957; habitada todo el año. Comunicaciones por satélite (Intelsat).",
+   "fuente": "https://www.nipr.ac.jp/english/"
   },
   {
    "lon": 11.733,
@@ -280,8 +280,8 @@
    "operador": "IN",
    "clase": "base",
    "enlace": "",
-   "nota": "No verificado.",
-   "fuente": ""
+   "nota": "Segunda base india (1989) en el oasis de Schirmacher, habitada todo el año. Comunicaciones por satélite.",
+   "fuente": "https://ncpor.res.in/"
   },
   {
    "lon": 76.188,
@@ -291,8 +291,8 @@
    "operador": "IN",
    "clase": "base",
    "enlace": "",
-   "nota": "No verificado.",
-   "fuente": ""
+   "nota": "Base india (2012) en las colinas Larsemann, construida con contenedores reutilizables. Comunicaciones por satélite.",
+   "fuente": "https://ncpor.res.in/"
   },
   {
    "lon": 166.768,
@@ -302,8 +302,8 @@
    "operador": "NZ",
    "clase": "base",
    "enlace": "Banda C (Spark NZ / Horizons 3E); Starlink en prueba desde abr-2023",
-   "nota": "",
-   "fuente": "https://en.wikipedia.org/wiki/Telecommunications_in_Antarctica"
+   "nota": "Base neozelandesa (1957) en la isla de Ross, a 3 km de McMurdo, con la que comparte apoyo logístico. Comunicaciones por satélite; posible extensión del cable McMurdo–Nueva Zelanda.",
+   "fuente": "https://www.antarcticanz.govt.nz/scott-base/"
   },
   {
    "lon": -2.842,
@@ -313,8 +313,8 @@
    "operador": "ZA",
    "clase": "base",
    "enlace": "",
-   "nota": "No verificado.",
-   "fuente": ""
+   "nota": "Base sudafricana (1997) sobre el nunatak Vesleskarvet, habitada todo el año. Comunicaciones por satélite.",
+   "fuente": "https://www.sanap.ac.za/"
   },
   {
    "lon": -58.393,
@@ -357,8 +357,8 @@
    "operador": "CA",
    "clase": "estación terrena",
    "enlace": "Fibra (Mackenzie Valley Fibre Link)",
-   "nota": "No verificado en esta búsqueda; dato de conocimiento general.",
-   "fuente": ""
+   "nota": "Estación terrena del Gobierno de Canadá (Natural Resources Canada) en Inuvik, Territorios del Noroeste, con antenas de varias agencias espaciales; baja datos de satélites de observación de la Tierra.",
+   "fuente": "https://natural-resources.canada.ca/"
   },
   {
    "lon": 21.06,
@@ -368,8 +368,8 @@
    "operador": "SE",
    "clase": "estación terrena",
    "enlace": "Fibra terrestre",
-   "nota": "No verificado en esta búsqueda.",
-   "fuente": ""
+   "nota": "Centro espacial de la Swedish Space Corporation cerca de Kiruna, desde 1966: base de lanzamiento de cohetes sonda y una de las mayores estaciones terrenas de satélite del mundo.",
+   "fuente": "https://sscspace.com/esrange/"
   },
   {
    "lon": -147.85,
@@ -379,8 +379,8 @@
    "operador": "US",
    "clase": "estación terrena",
    "enlace": "Fibra terrestre (NASA NSN)",
-   "nota": "No verificado en esta búsqueda.",
-   "fuente": "https://www.nasa.gov/technology/space-comms/near-space-network-complexes/"
+   "nota": "Estación terrena de la Universidad de Alaska Fairbanks (Instituto de Geofísica), parte de la red de estaciones de la NASA; recibe datos de satélites polares de observación de la Tierra.",
+   "fuente": "https://asf.alaska.edu/"
   },
   {
    "lon": 26.63,
@@ -390,8 +390,8 @@
    "operador": "FI",
    "clase": "estación terrena",
    "enlace": "Fibra terrestre",
-   "nota": "No verificado en esta búsqueda.",
-   "fuente": ""
+   "nota": "Centro del Instituto Meteorológico Finlandés en Laponia, con la estación terrena de satélites Sodankylä (desde 2008) y centro de procesado de datos de la ESA.",
+   "fuente": "https://en.ilmatieteenlaitos.fi/"
   }
  ]
 }
