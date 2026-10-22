@@ -64,7 +64,7 @@ jobs:
       - name: Puntos de internet (OpenStreetMap, una vez por semana)
         timeout-minutes: 8
         continue-on-error: true
-        run: pip install --quiet pillow && python3 herramientas/datos_orbita.py puntos ${{ (github.event_name == 'push' || inputs.forzar) && 'forzar' || '' }}
+        run: pip install --quiet pillow && (python3 herramientas/datos_orbita.py puntos ${{ (github.event_name == 'push' || inputs.forzar) && 'forzar' || '' }} 2>&1 | tee orbita/datos/puntos.log)
 
       - name: Fibra de tierra, borrador y medida (OpenStreetMap, solo a mano o al cambiar la herramienta)
         if: github.event_name != 'schedule'
