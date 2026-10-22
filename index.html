@@ -554,6 +554,9 @@ html.i18n-espera .content,html.i18n-espera #phrase{opacity:0}
 :is(:lang(ar),:lang(fa),:lang(ur),:lang(he)) :is(h1,h2,#phrase p,#lightp){text-wrap:balance}
 :is(:lang(ar),:lang(fa)) :is(h1,h2,h3){line-height:1.35}
 /* Nastaliq hangs low and climbs high: it needs more room between lines */
+/* …and it is tall: the big titles are set a size smaller so they keep the same height on the page as in other languages */
+:lang(ur) .hero h1{font-size:clamp(40px,5.2vw,82px)}:lang(ur) .h2{font-size:clamp(38px,4.8vw,76px)}:lang(ur) .ch-card h2{font-size:clamp(34px,3.7vw,58px)}
+:lang(ur) .hero p{line-height:1.9;margin-top:14px}
 :lang(ur) :is(h1,h2,#lightp,#phrase p,.big){line-height:1.8!important}:lang(ur) :is(p,li,h3,h4,dd,dt,div,a,button,label,small){line-height:2.1}
 :lang(th){--display:'Thonburi','Noto Serif Thai','Leelawadee UI','Tahoma',serif;--body:'Thonburi','Leelawadee UI','Noto Sans Thai',system-ui,sans-serif}
 /* scripts without italics: the coloured end of a title stays upright; tighter titles get a little air */
