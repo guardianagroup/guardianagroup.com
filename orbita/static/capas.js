@@ -268,11 +268,11 @@
   function sprite(kind, z, ang) {
     const dpr = (P().geo.DPR) || 1;
     if (!SPR || sprDPR !== dpr) { SPR = new Map(); sprDPR = dpr; }
-    const zb = z < 1.35 ? 0 : z < 1.75 ? 1 : z < 2.4 ? 2 : 3;
+    const zb = z < 1.35 ? 0 : z < 1.75 ? 1 : z < 2.4 ? 2 : z < 3.4 ? 3 : 4;
     const key = kind * 1000 + zb * 100 + ang;
     let sp = SPR.get(key);
     if (sp) return sp;
-    const css = FORMA[kind].largo * [1, 1.3, 1.65, 2.05][zb];          // wing span in CSS pixels at this zoom
+    const css = FORMA[kind].largo * [1, 1.3, 1.65, 2.05, 2.5][zb];          // wing span in CSS pixels at this zoom
     const halo = css * 0.5 + 3, d = Math.ceil(2 * halo), px = Math.ceil(d * dpr);
     const c = document.createElement('canvas'); c.width = c.height = px;
     const g = c.getContext('2d'), m = px / 2;
@@ -426,7 +426,7 @@
     if (estado.sat) {
       if (S && S.N) {
         const vistaTxt = estado.vista === 'todos' && estado.orb.baja && estado.orb.media && estado.orb.geo ? num(S.N) + ' ' + T('satélites de datos')
-          : T('Mostrando') + ' ' + num(S.nSel || 0) + ' ' + T('de') + ' ' + num(S.N) + ' ' + T('satélites de datos') + (estado.vista === 'equilibrada' && estado.orb.baja ? ' (' + T('Starlink: 1 de cada') + ' ' + (S.paso || 10) + ')' : estado.vista === 'cielo' ? ' (' + T('a más de 25° sobre tu horizonte') + ')' : '');
+          : T('Mostrando') + ' ' + num(S.nSel || 0) + ' ' + T('de') + ' ' + num(S.N) + ' ' + T('satélites de datos') + (estado.vista === 'equilibrada' && estado.orb.baja && (S.paso || 10) > 1 ? ' (' + T('Starlink: 1 de cada') + ' ' + (S.paso || 10) + ')' : estado.vista === 'cielo' ? ' (' + T('a más de 25° sobre tu horizonte') + ')' : '');
         let s = vistaTxt + ' · CelesTrak, ' + haceTxt(hace(S.d.descargado)) + ' · ' + T('posición calculada ahora');
         const L = P() && P().lugar;
         if (L && S.tArriba) s += ' · ' + T('sobre') + ' ' + L.nombre + ': ' + num(S.nArriba);

@@ -202,7 +202,7 @@
   // ---------- Geometry shared with the CSS (--u) ----------
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
   // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
-  const ZOOM = { z: 1, zt: 1, MAX: 3 }; // owner, 21–22 Oct 2026: «un toque más de zoom», from ×2 to ×3
+  const ZOOM = { z: 1, zt: 1, MAX: 5 }; // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 («un zoom más para ver bien las cosas»)
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
   function mide() {
@@ -406,6 +406,7 @@ void main(){
       G = { pr, u, tex: {}, nubOn: 0 };
       const tex = (unidad, nombre, url, si) => {
         const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unidad); gl.bindTexture(gl.TEXTURE_2D, t);
+        if (unidad === 0) G.tex.dia = t;
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([10, 14, 20, 255]));
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -421,6 +422,24 @@ void main(){
       if (NUBES) tex(2, 'uNub', TIERRA + 'nubes.jpg', () => { G.nubOn = 1; });
       else { gl.uniform1i(u.uNub, 0); }
       tex(3, 'uAgua', TIERRA + 'agua.png');
+      // 22 Oct 2026 (owner: «un zoom más para ver bien las cosas»): a sharper day map (8192 × 4096, the same
+      // colours with NASA Blue Marble's finer relief on land), loaded only on a computer, only the first time
+      // someone zooms in past ×1.6, and only if the graphics card holds it. Back near ×1 the 4K map returns,
+      // so the whole planet never shimmers.
+      G.tex8 = null; G.pide8 = () => {
+        if (G.tex8 !== null || matchMedia('(pointer: coarse)').matches || gl.getParameter(gl.MAX_TEXTURE_SIZE) < 8192) return;
+        G.tex8 = false;
+        const im = new Image();
+        im.onload = () => {
+          const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, t);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im);
+          G.tex8 = gl.getError() === gl.NO_ERROR ? t : false;
+          gl.bindTexture(gl.TEXTURE_2D, G.tex.dia);
+        };
+        im.src = TIERRA + 'dia-8k.jpg';
+      };
     } catch (e) { G = null; }
   }
   // The real Sun (owner, 20 Oct 2026: «true to reality»): the point where it is overhead right now, from the
@@ -442,6 +461,8 @@ void main(){
     if (!G) return;
     gl.viewport(0, 0, cvT.width, cvT.height);
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    if (ZOOM.z > 1.6 && G.pide8) G.pide8();
+    if (G.tex8) { gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, ZOOM.z > 1.45 ? G.tex8 : G.tex.dia); }
     const u = G.u;
     gl.uniform2f(u.uC, CX * DPR, (H - CY) * DPR);
     gl.uniform1f(u.uR, R * DPR);
