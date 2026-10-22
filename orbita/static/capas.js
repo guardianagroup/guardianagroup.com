@@ -443,16 +443,18 @@
         capas.sub.lineas.forEach((l, i) => { (l.aprox ? P3.ap : P3.ex)[potencia(i)].push(l); });
         capas.sub.porPotencia = P3;
       }
-      const P3 = capas.sub.porPotencia, L3 = esLimpio();
+      // the difference grows with the zoom: on the whole planet the giants are only a little brighter (2Africa alone
+      // rings a continent); close up they get their halo and their width
+      const P3 = capas.sub.porPotencia, L3 = esLimpio(), zq = G.R / (G.R0 || G.R), kq = Math.min(1, Math.max(0, (zq - 1.4) / 2.6));
       pintaLineas(cx, p, G, P3.ex[0], `rgba(${ACERO},.55)`, 0.9);
-      if (P3.ex[1].length) pintaLineas(cx, p, G, P3.ex[1], `rgba(${ACERO},.8)`, 1.3);
-      if (P3.ex[2].length) { pintaLineas(cx, p, G, P3.ex[2], `rgba(${BLANCO},${L3 ? 0.22 : 0.16})`, 4); pintaLineas(cx, p, G, P3.ex[2], `rgba(${BLANCO},.92)`, 1.7); }
+      if (P3.ex[1].length) pintaLineas(cx, p, G, P3.ex[1], `rgba(${ACERO},${(0.62 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
+      if (P3.ex[2].length) { if (kq > 0) pintaLineas(cx, p, G, P3.ex[2], `rgba(${BLANCO},${((L3 ? 0.2 : 0.14) * kq).toFixed(3)})`, 2 + 2 * kq); pintaLineas(cx, p, G, P3.ex[2], `rgba(${BLANCO},${(0.7 + 0.22 * kq).toFixed(2)})`, 1.1 + 0.6 * kq); }
       if (PREV && PREV.length) { cx.save(); cx.setLineDash([2, 6]); pintaLineas(cx, p, G, PREV, `rgba(${BLANCO},.4)`, 1); cx.restore(); }
       if (capas.sub.aprox.length) {
         cx.setLineDash([6, 4]);
         pintaLineas(cx, p, G, P3.ap[0], `rgba(${ACERO},.45)`, 0.9);
-        if (P3.ap[1].length) pintaLineas(cx, p, G, P3.ap[1], `rgba(${ACERO},.7)`, 1.3);
-        if (P3.ap[2].length) { pintaLineas(cx, p, G, P3.ap[2], `rgba(${BLANCO},${L3 ? 0.2 : 0.14})`, 4); pintaLineas(cx, p, G, P3.ap[2], `rgba(${BLANCO},.85)`, 1.7); }
+        if (P3.ap[1].length) pintaLineas(cx, p, G, P3.ap[1], `rgba(${ACERO},${(0.55 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
+        if (P3.ap[2].length) { if (kq > 0) pintaLineas(cx, p, G, P3.ap[2], `rgba(${BLANCO},${((L3 ? 0.18 : 0.12) * kq).toFixed(3)})`, 2 + 2 * kq); pintaLineas(cx, p, G, P3.ap[2], `rgba(${BLANCO},${(0.62 + 0.23 * kq).toFixed(2)})`, 1.1 + 0.6 * kq); }
         cx.setLineDash([]);
       }
       pintaLuz(cx, p, G, capas.sub.lineas, t);
