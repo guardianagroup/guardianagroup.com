@@ -13,8 +13,11 @@
   // Owner, 22 Oct 2026: «cuando la persona abra Órbita, que no salgan los satélites de golpe, se ve demasiado ruido:
   // que abra solo con los cables submarinos, y luego la persona va abriendo y cerrando». So every opening starts with
   // the submarine cables alone; only the view and the orbit filter are remembered between visits.
-  const estado = { sub: true, tierra: false, fibra: false, puntos: false, sat: false, vista: 'equilibrada', orb: { baja: true, media: true, geo: true } };
-  try { const g = JSON.parse(localStorage.getItem('guardiana-orbita-capas') || '{}'); if (g.vista) estado.vista = g.vista; estado.orb = Object.assign({ baja: true, media: true, geo: true }, g.orb || {}); if (!['equilibrada', 'todos', 'cielo'].includes(estado.vista)) estado.vista = 'equilibrada'; } catch (_) {}
+  // Owner, 22 Oct 2026, 10:41: «cuando la persona abre satélites aparecen todos de golpe; tienen que ser por capas,
+  // si no se inunda el globo». So the satellites open with the geostationary ring alone (a few hundred, still), and
+  // the person adds the medium and the low orbit one by one; each orbit button is a layer of its own.
+  const estado = { sub: true, tierra: false, fibra: false, puntos: false, sat: false, vista: 'equilibrada', orb: { baja: false, media: false, geo: true } };
+  try { const g = JSON.parse(localStorage.getItem('guardiana-orbita-capas') || '{}'); if (g.vista) estado.vista = g.vista; if (!['equilibrada', 'todos', 'cielo'].includes(estado.vista)) estado.vista = 'equilibrada'; } catch (_) {}
   const guarda = () => { try { localStorage.setItem('guardiana-orbita-capas', JSON.stringify(estado)); } catch (_) {} };
 
   // ---------- data ----------
@@ -1011,11 +1014,13 @@
   function enganchaVista() {
     const caja = $('sat-vista'); if (!caja) return;
     caja.querySelectorAll('[data-vista]').forEach((b) => b.addEventListener('click', () => { estado.vista = b.dataset.vista; guarda(); pintaVista(); pintaNota(); }));
-    // 22 Oct 2026 (owner: «que se divida en tres… por fases, para que no se vea aglomerado»): one orbit at a time.
-    // A click shows only that orbit; the same click again brings back all three.
+    // 22 Oct 2026 (owner: «por capas… la persona tiene que ver»): every orbit is a layer the person switches on or
+    // off on its own; the satellites open with the geostationary ring only. The last layer on cannot be switched off
+    // (the button would show nothing); the person turns the satellites off instead.
     caja.querySelectorAll('[data-orb]').forEach((b) => b.addEventListener('click', () => {
-      const k = b.dataset.orb, solo = Object.keys(estado.orb).filter((x) => estado.orb[x]);
-      estado.orb = solo.length === 1 && solo[0] === k ? { baja: true, media: true, geo: true } : { baja: k === 'baja', media: k === 'media', geo: k === 'geo' };
+      const k = b.dataset.orb, encendidas = Object.keys(estado.orb).filter((x) => estado.orb[x]);
+      if (estado.orb[k] && encendidas.length === 1) return;
+      estado.orb[k] = !estado.orb[k];
       guarda(); pintaVista(); pintaNota();
     }));
   }
