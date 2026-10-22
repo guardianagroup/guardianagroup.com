@@ -378,7 +378,7 @@ def cables():
 );
 out tags geom;'''
     cuerpo = None
-    for servidor in ('https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'):
+    for servidor in ('https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter', 'https://overpass.private.coffee/api/interpreter'):
         cuerpo = baja(servidor, urllib.parse.urlencode({'data': q}).encode())
         if cuerpo:
             break
@@ -448,7 +448,7 @@ out tags geom;'''
 
 
 def overpass(q):
-    for servidor in ('https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'):
+    for servidor in ('https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter', 'https://overpass.private.coffee/api/interpreter'):
         cuerpo = baja(servidor, urllib.parse.urlencode({'data': q}).encode(), 1, 240)
         if cuerpo:
             try:
