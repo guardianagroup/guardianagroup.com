@@ -141,7 +141,9 @@ def main():
         # Wikidata first (what the cable's own record states), then OpenStreetMap's tags, then the length drawn on the map
         i = {}
         w = [wiki[q] for q in g['wiki'] if q in wiki]
-        kms = [x['km'] for x in w if x.get('km')]
+        # A cable is never shorter than the line drawn for it on the map (OSM draws it straighter than it lies):
+        # a Wikidata length under 60 % of the drawn one is a wrong record (CANTAT 3 says 270 km), so it is not shown.
+        kms = [x['km'] for x in w if x.get('km') and x['km'] >= 0.6 * g['km']]
         if kms: i['km'] = max(kms)
         else: i['kmMapa'] = round(g['km'])
         anios = [x['anio'] for x in w if x.get('anio')] or g['anios']
