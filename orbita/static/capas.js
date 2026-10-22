@@ -67,7 +67,14 @@
     try {
       const d = await cargaJSON('datos/puntos.json');
       const c = d.campos, il = c.indexOf('lon'), ia = c.indexOf('lat'), it = c.indexOf('tipo'), inm = c.indexOf('nombre'), iop = c.indexOf('operador');
-      PT = { d, p: d.puntos.filter((f) => f[it] === 'datos').map((f) => ({ w: P().vec(f[il], f[ia]).map((x) => x * 1.002), t: f[it], n: f[inm] || '', o: f[iop] || '' })) };
+      const ex = d.extra || [];
+      PT = { d, p: [], ix: [] };
+      d.puntos.forEach((f, k) => {
+        const q = { w: P().vec(f[il], f[ia]).map((x) => x * 1.002), t: f[it], n: f[inm] || '', o: f[iop] || '', x: ex[k] || null, lon: f[il], lat: f[ia] };
+        if (f[it] === 'datos') PT.p.push(q); else if (f[it] === 'intercambio') PT.ix.push(q);
+      });
+      // how many data centres each operator has on the map
+      PT.porOp = new Map(); for (const q of PT.p) if (q.o) PT.porOp.set(q.o, (PT.porOp.get(q.o) || 0) + 1);
       lugares();
     } catch (e) { PT = { error: true }; }
     cargando.puntos = false; pintaNota();
@@ -648,7 +655,11 @@
     const dl = document.createElement('dl'); dl.className = 'sat-dl';
     for (const [k, v] of lin) { const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k; dd.textContent = v; dl.append(dt, dd); }
     sp.append(dl);
-    const pie = document.createElement('small'); pie.textContent = T('Posición calculada ahora con su órbita publicada') + ' · CelesTrak · ' + haceTxt(hace(S.d.descargado)); sp.append(pie);
+    // 22 Oct 2026 (owner: «no es en tiempo real»): it is. The position is computed for this very moment from the
+    // satellite's published orbit; the orbit itself is a few hours old, which moves the dot by about a kilometre.
+    const pie = document.createElement('small');
+    pie.textContent = T('Posición de este instante, calculada con su órbita') + ' (' + (dato('origen') === 'op' ? T('datos del propio operador') + ', ' : '') + 'CelesTrak, ' + T('órbita medida') + ' ' + haceTxt(hace(dato('EPOCH') ? dato('EPOCH') + (/Z$/.test(dato('EPOCH')) ? '' : 'Z') : S.d.descargado)) + ')';
+    sp.append(pie);
     f.classList.add('sat'); f.hidden = false;
     const G = P().geo, w = f.offsetWidth || 320, h = f.offsetHeight || 260;
     f.style.left = (x + 16 + w > G.W - 8 ? x - 16 - w : x + 16) + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, y - 40)) + 'px';
@@ -693,18 +704,67 @@
     });
     return mejor;
   }
-  const colocaFicha = (x, y) => { const f = ficha(); const G = P().geo; f.style.left = Math.min(G.W - 280, x + 14) + 'px'; f.style.top = Math.max(70, y - 46) + 'px'; };
+  const colocaFicha = (x, y) => { const f = ficha(); const G = P().geo, w = f.offsetWidth || 280, h = f.offsetHeight || 80; f.style.left = (x + 16 + w > G.W - 8 ? Math.max(8, x - 16 - w) : x + 16) + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, y - 46)) + 'px'; };
+  // a card with labels and values in two columns (satellites, data centres)
+  function fichaRica(titulo, filas, pie, x, y) {
+    const f = ficha(); if (!f) return;
+    f.querySelector('b').textContent = titulo;
+    const sp = f.querySelector('span'); sp.textContent = '';
+    const dl = document.createElement('dl'); dl.className = 'sat-dl';
+    for (const [k, v] of filas) { if (!v) continue; const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k; dd.textContent = v; dl.append(dt, dd); }
+    sp.append(dl);
+    if (pie) { const s2 = document.createElement('small'); s2.textContent = pie; sp.append(s2); }
+    f.classList.add('sat'); f.hidden = false;
+    const G = P().geo, w = f.offsetWidth || 320, h = f.offsetHeight || 260;
+    f.style.left = (x + 16 + w > G.W - 8 ? x - 16 - w : x + 16) + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, y - 40)) + 'px';
+  }
+  const kmEntre = (a, b) => { const d = Math.hypot(a[0] / 1.002 - b[0], a[1] / 1.002 - b[1], a[2] / 1.002 - b[2]); return 2 * 6371 * Math.asin(Math.min(1, d / 2)); };
+  const dominio = (u) => { try { return new URL(/^https?:/.test(u) ? u : 'https://' + u).hostname.replace(/^www\./, ''); } catch (_) { return ''; } };
+  // 22 Oct 2026 (owner: «de los centros de datos quiero saberlo todo: dueño, tecnologías, año… cualquier cosa
+  // interesante»): everything OpenStreetMap and Wikidata state about the building and its operator, and what we can
+  // measure from the map itself (the nearest cable landing and exchange point, the light's time to you)
+  function fichaCentro(i, x, y) {
+    const q = PT.p[i], X = q.x || {}, wd = (PT.d.wikidata || {}), W = (X.w && wd.edificios && wd.edificios[X.w]) || {}, E = (X.ow && wd.empresas && wd.empresas[X.ow]) || null;
+    const c = LUG && LUG.centros && LUG.de ? LUG.centros[LUG.de[i]] : null;
+    const filas = [];
+    if (q.o) {
+      let op = q.o;
+      if (E) { const m = []; if (E.pais) m.push(/^[A-Z]{2}$/.test(E.pais) ? paisNombre(E.pais) : E.pais); if (E.fundada) m.push(T('fundada en') + ' ' + E.fundada); if (E.matriz) m.push(T('del grupo') + ' ' + E.matriz); if (m.length) op += ' (' + m.join(', ') + ')'; }
+      filas.push([T('Operador'), op]);
+      const n = PT.porOp.get(q.o) || 0; if (n > 1) filas.push([T('Del mismo operador'), num(n) + ' ' + T('centros de datos en el mapa')]);
+    }
+    const duenos = X.dueno || (W.duenos && W.duenos.join(', '));
+    if (duenos && duenos !== q.o) filas.push([T('Dueño'), duenos]);
+    const desde = X.desde || W.desde; if (desde) filas.push([T('En servicio desde'), String(desde).slice(0, 4)]);
+    if (W.m2) filas.push([T('Superficie'), num(W.m2) + ' m²']);
+    if (W.mw) filas.push([T('Potencia'), num(W.mw) + ' MW']);
+    if (X.plantas) filas.push([T('Plantas'), X.plantas]);
+    if (X.alto) filas.push([T('Altura del edificio'), X.alto + ' m']);
+    if (X.tier) filas.push(['Tier', X.tier]);
+    if (X.pue) filas.push(['PUE', X.pue]);
+    if (X.medio) filas.push([T('Conexión'), X.medio]);
+    if (c && c.ciudad) filas.push([T('Dónde'), c.ciudad + ', ' + paisNombre(c.cc) + (c.n > 1 ? ' · ' + num(c.n) + ' ' + T('centros de datos en esta ciudad') : '')]);
+    // measured on the map: the nearest submarine-cable landing and the nearest internet exchange point
+    if (LUG && LUG.llegadas && LUG.llegadas.length) {
+      let m = null, dm = 1e9; for (const l of LUG.llegadas) { const d = kmEntre(q.w, l.w.map((v) => v / 1.003)); if (d < dm) { dm = d; m = l; } }
+      if (m) filas.push([T('Cables submarinos'), dm < 2 ? T('llegan aquí mismo') : T('llegan a') + ' ' + num(Math.round(dm)) + ' km (' + m.ciudad + ')']);
+    }
+    if (PT.ix && PT.ix.length) {
+      let m = null, dm = 1e9; for (const ix of PT.ix) { const d = kmEntre(q.w, ix.w.map((v) => v / 1.002)); if (d < dm) { dm = d; m = ix; } }
+      if (m && dm < 300) filas.push([T('Intercambio de internet'), (m.n || T('sin nombre')) + ' · ' + (dm < 1 ? T('en el mismo sitio') : num(Math.round(dm)) + ' km')]);
+    }
+    const L = P() && P().lugar;
+    if (L) { const yo = P().vec(L.lon, L.lat), d = kmEntre(q.w, yo); filas.push([T('Desde') + ' ' + L.nombre, num(Math.round(d)) + ' km · ' + T('la luz por fibra tarda al menos') + ' ' + num(Math.max(1, Math.round(2 * d / 200))) + ' ms ' + T('ida y vuelta')]); }
+    if (X.web) filas.push([T('Web'), dominio(X.web)]);
+    if (X.nota) filas.push([T('Nota'), X.nota]);
+    const titulo = q.n && q.n !== q.o ? q.n : (q.o ? q.o + ' · ' + T('centro de datos') : T('Centro de datos sin nombre'));
+    const fuentes = '© OpenStreetMap (ODbL)' + (W.desde || W.m2 || W.mw || E ? ' · Wikidata (CC0)' : '');
+    fichaRica(titulo, filas.length ? filas : [[T('Datos'), T('Sin más datos públicos sobre este edificio')]], fuentes, x, y);
+  }
   function fichaLugar(tipo, i, x, y) {
     const f = ficha(); if (!f) return;
     f.classList.remove('sat');
-    if (tipo === 'punto') {
-      const q = PT.p[i], c = LUG && LUG.centros && LUG.de ? LUG.centros[LUG.de[i]] : null;
-      f.querySelector('b').textContent = q.n && q.n !== q.o ? q.n : (q.o ? q.o + ' · ' + T('centro de datos') : T('Centro de datos sin nombre'));
-      const lin = [];
-      if (q.o) lin.push(T('Operador') + ': ' + q.o);
-      if (c && c.ciudad) lin.push(c.ciudad + ', ' + paisNombre(c.cc) + (c.n > 1 ? ' · ' + num(c.n) + ' ' + T('centros de datos en esta ciudad') : ''));
-      f.querySelector('span').textContent = lin.join('\n') || T('Sin más datos en OpenStreetMap');
-    } else if (tipo === 'llegada') {
+    if (tipo === 'punto') { fichaCentro(i, x, y); return; } else if (tipo === 'llegada') {
       const l = LUG.llegadas[i], nombres = [], sin = { n: 0 };
       for (const k of l.seg) { const gi = LUG.g ? LUG.g[k] : -1, nm = gi >= 0 ? LUG.grupos[gi][0] : ''; if (nm) { if (!nombres.includes(nm)) nombres.push(nm); } else sin.n++; }
       f.querySelector('b').textContent = T('Aquí llegan cables submarinos') + ' · ' + l.ciudad;

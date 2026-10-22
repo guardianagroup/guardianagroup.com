@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Real data for Órbita's planet, downloaded to our own site so visitors never contact a third party.
 
-- Communication satellites: orbital elements (GP/OMM) from CelesTrak, every 6 hours.
-  CelesTrak updates them a few times a day; we never ask for the same data more than once per update.
+- Communication satellites: orbital elements (GP/OMM) from CelesTrak every 6 hours, replaced by the operators' own
+  ephemerides (SupGP) where CelesTrak publishes them; launch date and site from the satellite catalogue (SATCAT).
+  CelesTrak updates GP every 2 hours; we never ask for the same data more than once per update.
 - Submarine cables: OpenStreetMap (ODbL, © OpenStreetMap contributors), once a week.
 
 Only the standard library. Writes orbita/datos/satelites.json and orbita/datos/cables.json.
@@ -36,8 +37,34 @@ def baja(url, datos=None, intentos=3, espera=300):
     return None
 
 
+# Operator ephemerides republished by CelesTrak as «supplemental GP» (SupGP): more precise than the radar-derived GP
+# (CelesTrak measured about 0.9 km of error against 7.5 km for GPS), and they follow each manoeuvre sooner.
+SUPGP = {'starlink': 'starlink', 'oneweb': 'oneweb', 'kuiper': 'kuiper', 'iridium-NEXT': 'iridium', 'ses': 'ses',
+         'intelsat': 'intelsat', 'telesat': 'telesat', 'orbcomm': 'orbcomm'}
+
+
 def satelites():
-    vistos, filas, grupos = set(), [], []
+    """Satellites, their orbit and their launch. CelesTrak asks for each data set at most once per update (GP every
+    2 hours, the satellite catalogue once or twice a day): the catalogue is asked again only after 12 hours."""
+    previo = {}
+    try:
+        with open(os.path.join(RAIZ, 'satelites.json'), encoding='utf-8') as f:
+            previo = json.load(f)
+    except (OSError, ValueError):
+        pass
+    pc = previo.get('campos', [])
+    lanz_prev = {}
+    if 'lanzado' in pc:
+        il, isit, inor = pc.index('lanzado'), pc.index('sitio'), pc.index('norad')
+        lanz_prev = {r[inor]: (r[il], r[isit]) for r in previo.get('sat', []) if r[il]}
+    pide_cat = True
+    try:
+        t0 = datetime.strptime(previo.get('catalogo_descargado', ''), '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=timezone.utc)
+        pide_cat = (datetime.now(timezone.utc) - t0).total_seconds() > 12 * 3600
+    except ValueError:
+        pass
+
+    vistos, filas, grupos, sup_n = set(), [], [], {}
     for gid, nombre in GRUPOS:
         cuerpo = baja('https://celestrak.org/NORAD/elements/gp.php?' + urllib.parse.urlencode({'GROUP': gid, 'FORMAT': 'json'}))
         try:
@@ -45,41 +72,65 @@ def satelites():
         except ValueError:
             print(f'  {gid}: respuesta no es JSON: {cuerpo[:120]!r}', file=sys.stderr)
             lista = []
-        n = 0
+        g = len(grupos)
+        mias = {}
         for o in lista:
             cat = o.get('NORAD_CAT_ID')
             if cat in vistos or not all(k in o for k in CAMPOS):
                 continue
-            vistos.add(cat); n += 1
-            filas.append([len(grupos), o.get('OBJECT_NAME', ''), cat] + [o[k] for k in CAMPOS] + [o.get('OBJECT_ID', ''), '', ''])
-        # 22 Oct 2026 (owner: «más información de cada uno, siempre real»): the launch date and launch site of each
-        # satellite, from CelesTrak's satellite catalogue (SATCAT) for the same group
-        cat_sat = baja('https://celestrak.org/satcat/records.php?' + urllib.parse.urlencode({'GROUP': gid, 'FORMAT': 'json'}))
-        try:
-            reg = {r.get('NORAD_CAT_ID'): r for r in (json.loads(cat_sat) if cat_sat else [])}
-        except ValueError:
-            reg = {}
-        for f in filas:
-            if f[0] == len(grupos) and f[2] in reg:
-                r = reg[f[2]]
-                f[-2] = r.get('LAUNCH_DATE') or ''
-                f[-1] = r.get('LAUNCH_SITE') or ''
-        print(f'{gid}: {n} (catálogo: {len(reg)})')
-        grupos.append({'id': gid, 'nombre': nombre, 'n': n})
+            vistos.add(cat)
+            fila = [g, o.get('OBJECT_NAME', ''), cat] + [o[k] for k in CAMPOS] + [o.get('OBJECT_ID', ''), '', '', '']
+            filas.append(fila); mias[cat] = fila
+        # the operator's own orbit, when CelesTrak publishes it and it is newer
+        if gid in SUPGP and mias:
+            cs = baja('https://celestrak.org/NORAD/elements/supplemental/sup-gp.php?' + urllib.parse.urlencode({'FILE': SUPGP[gid], 'FORMAT': 'json'}), intentos=2)
+            try:
+                sup = json.loads(cs) if cs else []
+            except ValueError:
+                sup = []
+            n = 0
+            for o in sup if isinstance(sup, list) else []:
+                f = mias.get(o.get('NORAD_CAT_ID'))
+                if not f or not all(k in o for k in CAMPOS):
+                    continue
+                if str(o['EPOCH']) >= str(f[3]):
+                    f[3:3 + len(CAMPOS)] = [o[k] for k in CAMPOS]
+                    f[-1] = 'op'; n += 1
+            sup_n[gid] = n
+            time.sleep(2)
+        # launch date and site (SATCAT): asked again only every 12 hours, otherwise kept from the last download
+        reg = {}
+        if pide_cat:
+            cat_sat = baja('https://celestrak.org/satcat/records.php?' + urllib.parse.urlencode({'GROUP': gid, 'FORMAT': 'json'}), intentos=2)
+            try:
+                reg = {r.get('NORAD_CAT_ID'): r for r in (json.loads(cat_sat) if cat_sat else [])}
+            except ValueError:
+                reg = {}
+            time.sleep(2)
+        for cat, f in mias.items():
+            r = reg.get(cat)
+            if r:
+                f[-3], f[-2] = r.get('LAUNCH_DATE') or '', r.get('LAUNCH_SITE') or ''
+            elif cat in lanz_prev:
+                f[-3], f[-2] = lanz_prev[cat]
+        print(f'{gid}: {len(mias)} · órbita del operador: {sup_n.get(gid, 0)} · catálogo: {len(reg) if pide_cat else "guardado"}')
+        grupos.append({'id': gid, 'nombre': nombre, 'n': len(mias)})
         time.sleep(2)
     if not filas:
         print('Sin satélites: no se escribe nada.', file=sys.stderr)
         return False
+    ahora = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     salida = {
-        'fuente': 'CelesTrak (celestrak.org), elementos orbitales GP',
-        'descargado': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+        'fuente': 'CelesTrak (celestrak.org), elementos orbitales GP y SupGP (efemérides de los operadores)',
+        'descargado': ahora,
+        'catalogo_descargado': ahora if pide_cat else previo.get('catalogo_descargado', ''),
         'grupos': grupos,
-        'campos': ['grupo', 'nombre', 'norad'] + CAMPOS + ['cospar', 'lanzado', 'sitio'],
+        'campos': ['grupo', 'nombre', 'norad'] + CAMPOS + ['cospar', 'lanzado', 'sitio', 'origen'],
         'sat': filas,
     }
     with open(os.path.join(RAIZ, 'satelites.json'), 'w', encoding='utf-8') as f:
         json.dump(salida, f, ensure_ascii=False, separators=(',', ':'))
-    print('satélites en total:', len(filas))
+    print('satélites en total:', len(filas), '· con órbita del operador:', sum(sup_n.values()))
     return True
 
 
@@ -177,6 +228,115 @@ def wikidata_cables(ids):
                 d[k] = [nombres[q] for q in d[k] if q in nombres]
     print('wikidata:', len(out), 'cables con datos')
     return out
+
+
+def wikidata_centros(edificios, empresas):
+    """Data centres and the companies that run them, as Wikidata states them (CC0): for a building, when it opened
+    (P571/P729), owner (P127), operator (P137), floor area (P2046) and power (P2109); for a company, its country (P17),
+    founding year (P571), parent company (P749) and headquarters (P159). Only stated values; nothing guessed."""
+    def lote(qs, props):
+        u = 'https://www.wikidata.org/w/api.php?' + urllib.parse.urlencode(
+            {'action': 'wbgetentities', 'ids': '|'.join(qs), 'props': props, 'languages': 'es|en|pt', 'format': 'json'})
+        b = baja(u, espera=60)
+        try:
+            return json.loads(b).get('entities', {}) if b else {}
+        except ValueError:
+            return {}
+
+    def valor(c):
+        try:
+            return c['mainsnak']['datavalue']['value']
+        except (KeyError, TypeError):
+            return None
+
+    def todos(qs, props='claims|labels'):
+        ent = {}
+        for i in range(0, len(qs), 50):
+            ent.update(lote(qs[i:i + 50], props))
+            time.sleep(1)
+        return ent
+
+    def anio(cl, ps):
+        for p in ps:
+            for c in cl.get(p, []):
+                v = valor(c)
+                if isinstance(v, dict) and v.get('time', '')[1:5].isdigit():
+                    return int(v['time'][1:5])
+        return None
+
+    def ids(cl, p):
+        return [valor(c).get('id') for c in cl.get(p, []) if isinstance(valor(c), dict) and valor(c).get('id')]
+
+    def cantidad(cl, p, unidades):
+        for c in cl.get(p, []):
+            v = valor(c)
+            if isinstance(v, dict) and 'amount' in v:
+                u = v.get('unit', '').rsplit('/', 1)[-1]
+                if u in unidades:
+                    return float(v['amount']) * unidades[u]
+        return None
+
+    def etiqueta(e):
+        lab = e.get('labels', {}) if isinstance(e, dict) else {}
+        for l in ('es', 'en', 'pt'):
+            if l in lab:
+                return lab[l]['value']
+        return ''
+
+    otros, ed, em = set(), {}, {}
+    for q, e in todos(edificios).items():
+        if not isinstance(e, dict):
+            continue
+        cl, d = e.get('claims', {}), {}
+        a = anio(cl, ('P729', 'P571', 'P1619'))
+        if a:
+            d['desde'] = a
+        for p, k in (('P127', 'duenos'), ('P137', 'operan')):
+            v = ids(cl, p)
+            if v:
+                d[k] = v; otros.update(v)
+        m2 = cantidad(cl, 'P2046', {'Q25343': 1, 'Q35852': 10000, 'Q712226': 1e6})   # m², hectare, km²
+        if m2:
+            d['m2'] = round(m2)
+        mw = cantidad(cl, 'P2109', {'Q25236': 1e-6, 'Q6982035': 1})  # watt, megawatt (other units are skipped, not guessed)
+        if mw:
+            d['mw'] = round(mw, 1)
+        if d:
+            ed[q] = d
+    for q, e in todos(empresas).items():
+        if not isinstance(e, dict):
+            continue
+        cl, d = e.get('claims', {}), {'n': etiqueta(e)}
+        a = anio(cl, ('P571',))
+        if a:
+            d['fundada'] = a
+        for p, k in (('P17', 'pais'), ('P749', 'matriz'), ('P159', 'sede')):
+            v = ids(cl, p)
+            if v:
+                d[k] = v[0]; otros.add(v[0])
+        em[q] = d
+    # names of everything referred to, and the ISO code of each country
+    nombres, iso = {}, {}
+    for q, e in todos(sorted(otros)).items():
+        if not isinstance(e, dict):
+            continue
+        nombres[q] = etiqueta(e)
+        for c in e.get('claims', {}).get('P297', []):
+            v = valor(c)
+            if isinstance(v, str):
+                iso[q] = v
+    for d in ed.values():
+        for k in ('duenos', 'operan'):
+            if k in d:
+                d[k] = [nombres[q] for q in d[k] if nombres.get(q)]
+    for d in em.values():
+        if 'pais' in d:
+            d['pais'] = iso.get(d['pais']) or nombres.get(d['pais'], '')
+        for k in ('matriz', 'sede'):
+            if k in d:
+                d[k] = nombres.get(d[k], '')
+    print('wikidata centros:', len(ed), 'edificios,', len(em), 'empresas')
+    return {'edificios': ed, 'empresas': em}
 
 
 def cables():
@@ -281,7 +441,7 @@ out tags center;''')
     if not d:
         print('Sin puntos: no se escribe nada.', file=sys.stderr)
         return False
-    out, vistos, cuenta = [], set(), {'aterrizaje': 0, 'datos': 0, 'intercambio': 0}
+    out, extra, vistos, cuenta = [], [], set(), {'aterrizaje': 0, 'datos': 0, 'intercambio': 0}
     for e in d.get('elements', []):
         t = e.get('tags', {})
         c = e.get('center') or ({'lat': e['lat'], 'lon': e['lon']} if 'lat' in e else None)
@@ -293,6 +453,17 @@ out tags center;''')
             continue
         vistos.add(clave); cuenta[tipo] += 1
         out.append([round(c['lon'], 3), round(c['lat'], 3), tipo, t.get('name') or t.get('name:en') or '', t.get('operator', '')])
+        # 22 Oct 2026 (owner: «de los centros de datos, quiero saberlo todo: dueño, año, tecnologías…»): every tag
+        # OpenStreetMap has that says something real about the building, kept as written there
+        x = {}
+        for k, n in (('owner', 'dueno'), ('start_date', 'desde'), ('website', 'web'), ('contact:website', 'web'), ('building:levels', 'plantas'),
+                     ('height', 'alto'), ('addr:city', 'ciudad'), ('wikidata', 'w'), ('operator:wikidata', 'ow'), ('brand', 'marca'),
+                     ('operator:type', 'tipoop'), ('telecom:medium', 'medio'), ('data_center:tier', 'tier'), ('tier', 'tier'), ('pue', 'pue'),
+                     ('power', 'potencia'), ('capacity', 'capacidad'), ('description', 'nota'), ('name:es', 'nes'), ('name:en', 'nen')):
+            v = t.get(k)
+            if v and n not in x and len(v) < 160:
+                x[n] = v
+        extra.append(x or 0)
     salida = {
         'fuente': 'OpenStreetMap',
         'licencia': 'ODbL 1.0 · © colaboradores de OpenStreetMap',
@@ -300,7 +471,14 @@ out tags center;''')
         'medida': cuenta,
         'campos': ['lon', 'lat', 'tipo', 'nombre', 'operador'],
         'puntos': out,
+        'extra': extra,
     }
+    # what Wikidata (CC0) states about the buildings and about the companies that run them
+    try:
+        wd = wikidata_centros(sorted({x['w'] for x in extra if x and x.get('w')}), sorted({x['ow'] for x in extra if x and x.get('ow')}))
+        salida['wikidata'] = wd
+    except Exception as e:  # noqa: BLE001
+        print('wikidata centros: fallo', e, file=sys.stderr)
     with open(os.path.join(RAIZ, 'puntos.json'), 'w', encoding='utf-8') as f:
         json.dump(salida, f, ensure_ascii=False, separators=(',', ':'))
     print('puntos:', cuenta)

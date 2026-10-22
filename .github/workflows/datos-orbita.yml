@@ -12,6 +12,8 @@ on:
     paths:
       - '.github/workflows/datos-orbita.yml'
       - 'herramientas/datos_orbita.py'
+      - 'herramientas/fibra_tierra.py'
+      - 'herramientas/lugares_capas.py'
 
 permissions:
   contents: write
@@ -62,6 +64,19 @@ jobs:
         timeout-minutes: 25
         continue-on-error: true
         run: python3 herramientas/datos_orbita.py tierra medir
+
+      # 22 Oct 2026 (owner: «las redes troncales de tierra, las principales… búscalo por todo internet»):
+      # AfTerFibre (CC BY 4.0), the OFDS public data and OpenStreetMap, joined in one file
+      - name: Fibra troncal por tierra (una vez al día, o a mano)
+        if: github.event_name != 'schedule' || github.run_number % 4 == 0
+        timeout-minutes: 10
+        continue-on-error: true
+        run: python3 herramientas/fibra_tierra.py
+
+      - name: Ciudades de cables y centros de datos
+        timeout-minutes: 10
+        continue-on-error: true
+        run: python3 herramientas/lugares_capas.py
 
       - name: Guardar si ha cambiado
         if: always()
