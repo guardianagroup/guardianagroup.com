@@ -441,7 +441,15 @@
           + (medio.length ? '\n' + T('Paradas') + ': ' + medio.slice(0, 4).join(' · ') + (medio.length > 4 ? ' · +' + (medio.length - 4) : '') : '')
           + '\n' + T('Los datos viajan por él en los dos sentidos.')
         : lados.length === 1 ? T('Llega a tierra en') + ' ' + lados[0] : T('Sus extremos no están cerca de ninguna ciudad');
-      f.querySelector('span').textContent = donde + (d.o ? '\n' + T('Operador') + ': ' + d.o : '');
+      // everything we know about the whole cable (owner, 22 Oct 2026: «el año, los kilómetros… todos los datos que sepamos»)
+      const inf = (gr && gr[2]) || {}, mas = [];
+      if (inf.anio) mas.push(T('En servicio desde') + ' ' + inf.anio);
+      if (inf.km) mas.push(T('Longitud') + ': ' + num(inf.km) + ' km');
+      else if (inf.kmMapa) mas.push(T('Longitud en el mapa') + ': ' + num(inf.kmMapa) + ' km');
+      if (inf.duenos && inf.duenos.length) mas.push(T('Dueños') + ': ' + inf.duenos.join(', '));
+      const ops = inf.operan && inf.operan.length ? inf.operan.join(', ') : d.o;
+      if (ops) mas.push(T('Operador') + ': ' + ops);
+      f.querySelector('span').textContent = donde + (mas.length ? '\n' + mas.join('\n') : '');
     }
     f.hidden = false; colocaFicha(x, y);
   }

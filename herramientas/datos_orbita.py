@@ -94,6 +94,79 @@ def simplifica(p, tol):
     return simplifica(p[:i + 1], tol)[:-1] + simplifica(p[i:], tol)
 
 
+def wikidata_cables(ids):
+    """For the cables OpenStreetMap links to Wikidata: length (P2043), date in service (P729) or inception (P571),
+    owners (P127) and operators (P137), with their names. Only what Wikidata states; nothing guessed."""
+    if not ids:
+        return {}
+
+    def lote(qs, props):
+        u = 'https://www.wikidata.org/w/api.php?' + urllib.parse.urlencode(
+            {'action': 'wbgetentities', 'ids': '|'.join(qs), 'props': props, 'languages': 'es|en|pt', 'format': 'json'})
+        b = baja(u, espera=60)
+        try:
+            return json.loads(b).get('entities', {}) if b else {}
+        except ValueError:
+            return {}
+
+    def valor(c):
+        try:
+            return c['mainsnak']['datavalue']['value']
+        except (KeyError, TypeError):
+            return None
+
+    ent = {}
+    for i in range(0, len(ids), 50):
+        ent.update(lote(ids[i:i + 50], 'claims|labels'))
+        time.sleep(1)
+    out, otros = {}, set()
+    for q, e in ent.items():
+        if not isinstance(e, dict):
+            continue
+        cl, d = e.get('claims', {}), {}
+        for c in cl.get('P2043', []):
+            v = valor(c)
+            if isinstance(v, dict) and 'amount' in v:
+                n, u = float(v['amount']), v.get('unit', '')
+                if u.endswith('/Q11573'):
+                    n /= 1000.0
+                elif not u.endswith('/Q828224'):
+                    continue
+                d['km'] = round(n)
+                break
+        for p in ('P729', 'P571'):
+            for c in cl.get(p, []):
+                v = valor(c)
+                if isinstance(v, dict) and v.get('time', '')[1:5].isdigit():
+                    d['anio'] = int(v['time'][1:5])
+                    break
+            if 'anio' in d:
+                break
+        for p, k in (('P127', 'duenos'), ('P137', 'operan')):
+            qs = [valor(c).get('id') for c in cl.get(p, []) if isinstance(valor(c), dict) and valor(c).get('id')]
+            if qs:
+                d[k] = qs
+                otros.update(qs)
+        if d:
+            out[q] = d
+    nombres = {}
+    otros = sorted(otros)
+    for i in range(0, len(otros), 50):
+        for q, e in lote(otros[i:i + 50], 'labels').items():
+            lab = e.get('labels', {}) if isinstance(e, dict) else {}
+            for l in ('es', 'en', 'pt'):
+                if l in lab:
+                    nombres[q] = lab[l]['value']
+                    break
+        time.sleep(1)
+    for d in out.values():
+        for k in ('duenos', 'operan'):
+            if k in d:
+                d[k] = [nombres[q] for q in d[k] if q in nombres]
+    print('wikidata:', len(out), 'cables con datos')
+    return out
+
+
 def cables():
     q = '''[out:json][timeout:900];
 (
@@ -103,6 +176,9 @@ def cables():
   way["telecom"="line"]["location"="underwater"];
   way["communication"="line"]["location"="submarine"];
   way["telecom"="line"]["location"="submarine"];
+  way["seamark:type"="cable_submarine"]["seamark:cable_submarine:category"~"telephone|telegraph|telecom|fibre|fiber|communication|data",i];
+  way["seamark:type"="cable_submarine"]["communication"];
+  way["seamark:type"="cable_submarine"]["telecom"];
 );
 out tags geom;'''
     cuerpo = None
@@ -127,7 +203,9 @@ out tags geom;'''
         if any(k in t for k in ('disused', 'abandoned', 'historic', 'removed', 'razed', 'end_date', 'disused:communication', 'abandoned:communication')) \
                 or t.get('operational_status') in ('closed', 'abandoned', 'disused') or t.get('lifecycle') in ('disused', 'abandoned'):
             continue
-        n = t.get('name') or t.get('name:en') or ''
+        if t.get('power') or 'power' in (t.get('seamark:cable_submarine:category') or '').lower():
+            continue
+        n = t.get('name') or t.get('name:en') or t.get('seamark:name') or ''
         if any(x in n.lower() for x in ('telegraph', 'telégrafo', 'telegrafo', '1865', '1866', '1858')):
             continue
         if n:
@@ -144,12 +222,21 @@ out tags geom;'''
         for tr in trozos:
             s = simplifica(tr, 0.05)
             if len(s) >= 2:
-                out.append({'n': n, 'o': t.get('operator', ''), 'l': s})
+                fila = {'n': n, 'o': t.get('operator', ''), 'l': s}
+                # owner, 22 Oct 2026: «el año de la construcción, los kilómetros… todos los datos que sepamos»
+                anio = (t.get('start_date') or '')[:4]
+                if anio.isdigit(): fila['y'] = int(anio)
+                if t.get('owner'): fila['d'] = t['owner']
+                if t.get('website'): fila['web'] = t['website']
+                if t.get('wikidata', '').startswith('Q'): fila['w'] = t['wikidata']
+                out.append(fila)
+    wiki = wikidata_cables(sorted({c['w'] for c in out if c.get('w')}))
     salida = {
         'fuente': 'OpenStreetMap',
         'licencia': 'ODbL 1.0 · © colaboradores de OpenStreetMap',
         'descargado': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
         'medida': {'tramos': len(out), 'cables_con_nombre': len(nombres), 'km': round(total)},
+        'wikidata': wiki,
         'cables': out,
     }
     with open(os.path.join(RAIZ, 'cables.json'), 'w', encoding='utf-8') as f:

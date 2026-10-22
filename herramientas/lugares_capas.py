@@ -121,14 +121,38 @@ def main():
         if not k:
             g_de.append(-1); continue
         if k not in claves_g:
-            claves_g[k] = len(grupos_c); grupos_c.append({'nombres': collections.Counter(), 'lugares': {}})
+            claves_g[k] = len(grupos_c); grupos_c.append({'nombres': collections.Counter(), 'lugares': {}, 'km': 0.0, 'anios': [], 'duenos': [], 'operan': [], 'web': '', 'wiki': []})
         gi = claves_g[k]; g_de.append(gi)
         grupos_c[gi]['nombres'][b] += 1
+        G = grupos_c[gi]
+        G['km'] += sum(km(p[1], p[0], q[1], q[0]) for p, q in zip(s['l'], s['l'][1:]))
+        if s.get('y'): G['anios'].append(s['y'])
+        for campo, k in (('d', 'duenos'), ('o', 'operan')):
+            v = s.get(campo)
+            if v and v not in G[k]: G[k].append(v)
+        if s.get('web') and not G['web']: G['web'] = s['web']
+        if s.get('w') and s['w'] not in G['wiki']: G['wiki'].append(s['w'])
         e = extremos[idx]
         for (lo, la), (c, cc) in zip((s['l'][0], s['l'][-1]), ((e[0], e[1]), (e[2], e[3]))):
             if c and (c, cc) not in grupos_c[gi]['lugares']:
                 grupos_c[gi]['lugares'][(c, cc)] = lo
-    grupos_out = [[g['nombres'].most_common(1)[0][0], [[c, cc, round(lo, 2)] for (c, cc), lo in sorted(g['lugares'].items(), key=lambda x: x[1])]] for g in grupos_c]
+    wiki = cab.get('wikidata', {})
+    def info(g):
+        # Wikidata first (what the cable's own record states), then OpenStreetMap's tags, then the length drawn on the map
+        i = {}
+        w = [wiki[q] for q in g['wiki'] if q in wiki]
+        kms = [x['km'] for x in w if x.get('km')]
+        if kms: i['km'] = max(kms)
+        else: i['kmMapa'] = round(g['km'])
+        anios = [x['anio'] for x in w if x.get('anio')] or g['anios']
+        if anios: i['anio'] = min(anios)
+        duenos = [n for x in w for n in x.get('duenos', [])] or g['duenos']
+        if duenos: i['duenos'] = list(dict.fromkeys(duenos))[:6]
+        operan = [n for x in w for n in x.get('operan', [])] or g['operan']
+        if operan: i['operan'] = list(dict.fromkeys(operan))[:4]
+        if g['web']: i['web'] = g['web']
+        return i
+    grupos_out = [[g['nombres'].most_common(1)[0][0], [[c, cc, round(lo, 2)] for (c, cc), lo in sorted(g['lugares'].items(), key=lambda x: x[1])], info(g)] for g in grupos_c]
     out = {
         'fuente': 'Centros de datos y cables: OpenStreetMap (ODbL). Ciudades: GeoNames cities15000 (CC BY 4.0).',
         'generado_desde': {'puntos': pts.get('descargado'), 'cables': cab.get('descargado')},
