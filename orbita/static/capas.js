@@ -363,16 +363,17 @@
     const z = G.R / (G.R0 || G.R); if (z < 2.2 || z > 400 || !p.centros) return;
     const L = esLimpio(), ocupado = [];
     cx.save(); cx.globalCompositeOperation = 'source-over';
-    cx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace'; cx.textAlign = 'center'; cx.textBaseline = 'middle';
+    cx.font = '600 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textAlign = 'center'; cx.textBaseline = 'middle';
     const al = Math.min(0.62, 0.22 + 0.08 * z);
     for (const cc of Object.keys(p.centros)) {
       const c = p.centros[cc], v = p.aVista(p.vec(c.lon, c.lat)); if (v[2] <= 0.3) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1]; if (x < -60 || x > G.W + 60 || y < -20 || y > G.H + 20) continue;
-      const txt = paisNombre(cc).toUpperCase(), w = 7 * txt.length + 8;
-      if (ocupado.some((o) => Math.abs(x - o[0]) < (w + o[2]) / 2 + 8 && Math.abs(y - o[1]) < 16)) continue;
-      ocupado.push([x, y, w]);
-      cx.fillStyle = `rgba(${L ? BLANCO : ACERO},${al * (cc === paisMarcado ? 1.5 : 1)})`; cx.fillText(txt, x, y);
-      PAIS_CAJAS.push([x - w / 2, y - 9, w, 18, cc]);
+      const txt = paisNombre(cc).toUpperCase(), w = 6.6 * txt.length + 6;
+      const choca = (yy) => ocupado.some((o) => Math.abs(x - o[0]) < (w + o[2]) / 2 + 3 && Math.abs(yy - o[1]) < 14);
+      let yy = y; if (choca(yy)) { yy = y + 14; if (choca(yy)) { yy = y - 14; if (choca(yy)) continue; } } // a small nudge before giving up (Chequia next to Alemania)
+      ocupado.push([x, yy, w]);
+      cx.fillStyle = `rgba(${L ? BLANCO : ACERO},${al * (cc === paisMarcado ? 1.5 : 1)})`; cx.fillText(txt, x, yy);
+      PAIS_CAJAS.push([x - w / 2, yy - 8, w, 16, cc]);
     }
     cx.restore();
   }
@@ -388,7 +389,7 @@
       if (cabs.length) filas.push([T('Cables submarinos'), num(cabs.length) + ' · ' + ciudades.slice(0, 6).join(', ') + (ciudades.length > 6 ? ' · +' + (ciudades.length - 6) : '')]);
       else filas.push([T('Cables submarinos'), T('Ninguno con nombre en el mapa')]);
     }
-    if (LUG && LUG.centros) { const cs = LUG.centros.filter((c) => c[3] === cc); const n = cs.reduce((a, c) => a + (c[4] || 1), 0); if (n) { const top = cs.slice().sort((a, b) => (b[4] || 1) - (a[4] || 1)).slice(0, 4).map((c) => c[2]); filas.push([T('Centros de datos'), num(n) + ' · ' + top.join(', ')]); } }
+    if (LUG && LUG.centros) { const cs = LUG.centros.filter((c) => c.cc === cc); const n = cs.reduce((a, c) => a + (c.n || 1), 0); if (n) { const top = cs.slice().sort((a, b) => (b.n || 1) - (a.n || 1)).slice(0, 4).map((c) => c.ciudad); filas.push([T('Centros de datos'), num(n) + ' · ' + top.join(', ')]); } }
     if (D) {
       if (D.movil) filas.push([T('Red móvil'), D.movil]);
       if (D.operadores) filas.push([T('Operadores'), D.operadores]);
