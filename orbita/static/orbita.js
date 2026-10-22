@@ -401,7 +401,7 @@
     const vs = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
     const fs = `precision highp float;
 uniform vec2 uC;uniform float uR;uniform mat3 uM;uniform vec3 uL;uniform float uT,uNubOn,uAten,uLimpio;
-uniform sampler2D uDia,uLuz,uNub,uAgua,uZona;uniform vec4 uZonaBox;uniform float uZonaOn;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
+uniform sampler2D uDia,uLuz,uNub,uAgua,uZona;uniform vec4 uZonaBox;uniform float uZonaOn;uniform float uSiempreDia;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
 const float PI=3.14159265;
 void main(){
  vec2 p=(gl_FragCoord.xy-uC)/uR;float r=length(p);vec3 atm=vec3(.47,.67,.92);
@@ -415,6 +415,7 @@ void main(){
   float nub=texture2D(uNub,vec2(fract(uv.x-uT*.0016),uv.y)).r*uNubOn;nub=smoothstep(.12,.9,nub);
   vec3 luz=texture2D(uLuz,uv).rgb;
   float lam=dot(n,uL);float dl=smoothstep(-.22,.42,lam);
+  if(uSiempreDia>.5){lam=.45+.55*max(lam,0.);dl=1.;} // 22 Oct 2026 (owner): always day, like Google Earth; the Sun only shades the limb
   vec3 sup=mix(dia*vec3(.96,1.,1.06),vec3(.97,.98,1.),nub*.88);
   vec3 c=sup*(.05+1.08*max(lam,0.))*mix(.3,1.,dl);
   c+=sup*vec3(.62,.74,.92)*.31*(1.-dl); // 21 Oct 2026 (owner): the night side a little clearer, still plainly night
@@ -443,7 +444,7 @@ void main(){
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const la = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la, 2, gl.FLOAT, false, 0, 0);
-      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uLimpio', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaBox', 'uZonaOn', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
+      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uLimpio', 'uSiempreDia', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaBox', 'uZonaOn', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
       G = { pr, u, tex: {}, nubOn: 0 };
       const tex = (unidad, nombre, url, si) => {
         const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unidad); gl.bindTexture(gl.TEXTURE_2D, t);
@@ -575,6 +576,7 @@ void main(){
     const lon = ((ra - gmst) % 360 + 540) % 360 - 180;
     return { lat: dec, lon };
   }
+  const SIEMPRE_DIA = true; // 22 Oct 2026, 18:01 (owner): «dejar siempre el mapa de día… que se pueda ver todo bien»
   let L = [0, 0, 1], solT = 0, SOL = solAhora(Date.now());
   window.OrbitaSol = () => SOL;
   function pintaTierra(t, aten) {
@@ -589,8 +591,8 @@ void main(){
     gl.uniform1f(u.uR, R * DPR);
     const c0 = aMundo([1, 0, 0]), c1 = aMundo([0, 1, 0]), c2 = aMundo([0, 0, 1]);
     gl.uniformMatrix3fv(u.uM, false, [...c0, ...c1, ...c2]);
-    { const ms = Date.now(); if (ms - solT > 10000) { SOL = solAhora(ms); solT = ms; } L = aVista(vec(SOL.lon, SOL.lat)); }
-    gl.uniform3f(u.uL, L[0], L[1], L[2]);
+    { const ms = Date.now(); if (ms - solT > 10000) { SOL = solAhora(ms); solT = ms; } L = SIEMPRE_DIA ? [0, 0, 1] : aVista(vec(SOL.lon, SOL.lat)); } // the real Sun is still computed for the facts card
+    gl.uniform3f(u.uL, L[0], L[1], L[2]); gl.uniform1f(u.uSiempreDia, SIEMPRE_DIA ? 1 : 0);
     gl.uniform1f(u.uT, t); gl.uniform1f(u.uNubOn, G.nubOn); gl.uniform1f(u.uAten, aten);
     // «mapa limpio» from ×4 (owner, 22 Oct 2026): eased in over a third of a second, body.limpio tells the layers
     { const quiere = ZOOM.z >= LIMPIO_DESDE ? 1 : 0, ahora = performance.now(), dtl = Math.min(0.05, (ahora - (G.limpioT || ahora)) / 1000); G.limpioT = ahora; if (G.limpio == null) G.limpio = quiere; G.limpio += (quiere - G.limpio) * Math.min(1, dtl * 7); if (Math.abs(G.limpio - quiere) < 0.01) G.limpio = quiere; gl.uniform1f(u.uLimpio, G.limpio); if ((G.limpio > 0.5) !== document.body.classList.contains('limpio')) document.body.classList.toggle('limpio', G.limpio > 0.5); }
