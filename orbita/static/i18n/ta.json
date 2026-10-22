@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "அறியப்பட்ட ஃபைபர் நெட்வொர்க் வழியாக",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "நிலப்பாதையின் சரியான வழி பொதுவில் இல்லை; வரைபடத்தில் நேர்கோடாக வரையப்பட்டுள்ளது.",
   "en la sombra de la Tierra": "பூமியின் நிழலில்",
-  "Yahoo Japón": "Yahoo ஜப்பான்"
+  "Yahoo Japón": "Yahoo ஜப்பான்",
+  "De punto a punto, en línea recta": "புள்ளியிலிருந்து புள்ளி, நேர்கோட்டில்",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "ஒவ்வொரு துண்டிப்பையும் நேரலையில் காட்டும் உலாவி. முடிந்து சோதிக்கப்பட்டதும் வரும்."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

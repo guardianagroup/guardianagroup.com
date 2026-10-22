@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "sa pamamagitan ng kilalang fiber network",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Hindi pampubliko ang eksaktong ruta sa lupa; sa mapa ay iginuguhit ito bilang tuwid na linya.",
   "en la sombra de la Tierra": "nasa anino ng Mundo",
-  "Yahoo Japón": "Yahoo Japan"
+  "Yahoo Japón": "Yahoo Japan",
+  "De punto a punto, en línea recta": "Punto sa punto, tuwid na linya",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Ang browser na nagpapakita ng bawat pagputol, live. Darating kapag tapos na at nasubok."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

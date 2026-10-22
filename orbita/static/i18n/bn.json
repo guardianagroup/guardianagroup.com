@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "একটি পরিচিত ফাইবার নেটওয়ার্ক দিয়ে",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "স্থলপথের সঠিক পথ প্রকাশ্য নয়; মানচিত্রে সরলরেখায় আঁকা হয়েছে।",
   "en la sombra de la Tierra": "পৃথিবীর ছায়ায়",
-  "Yahoo Japón": "Yahoo জাপান"
+  "Yahoo Japón": "Yahoo জাপান",
+  "De punto a punto, en línea recta": "বিন্দু থেকে বিন্দু, সরলরেখায়",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "যে ব্রাউজার প্রতিটি কাট সরাসরি দেখায়। শেষ ও পরীক্ষিত হলে আসবে।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

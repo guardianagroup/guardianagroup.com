@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "qua một mạng cáp quang đã biết",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Tuyến đường chính xác trên đất liền không được công bố; trên bản đồ được vẽ bằng đường thẳng.",
   "en la sombra de la Tierra": "trong bóng của Trái Đất",
-  "Yahoo Japón": "Yahoo Nhật Bản"
+  "Yahoo Japón": "Yahoo Nhật Bản",
+  "De punto a punto, en línea recta": "Điểm tới điểm, đường thẳng",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Trình duyệt hiển thị mọi lần cắt, trực tiếp. Sẽ có khi hoàn thiện và được kiểm thử."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

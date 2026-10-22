@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "דרך רשת סיבים מוכרת",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "הנתיב היבשתי המדויק אינו פומבי; במפה הוא מצויר בקו ישר.",
   "en la sombra de la Tierra": "בצל כדור הארץ",
-  "Yahoo Japón": "Yahoo יפן"
+  "Yahoo Japón": "Yahoo יפן",
+  "De punto a punto, en línea recta": "מנקודה לנקודה, בקו ישר",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "הדפדפן שמציג כל ניתוק, בשידור חי. יגיע כשיהיה מוכן ונבדק."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

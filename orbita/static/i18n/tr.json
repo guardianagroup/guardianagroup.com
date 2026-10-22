@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "bilinen bir fiber ağ üzerinden",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Kara üzerindeki kesin rota kamuya açık değil; haritada düz bir çizgiyle çizilir.",
   "en la sombra de la Tierra": "Dünya'nın gölgesinde",
-  "Yahoo Japón": "Yahoo Japonya"
+  "Yahoo Japón": "Yahoo Japonya",
+  "De punto a punto, en línea recta": "Noktadan noktaya, kuş uçuşu",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Her kesintiyi canlı gösteren tarayıcı. Bitip test edildiğinde gelecek."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

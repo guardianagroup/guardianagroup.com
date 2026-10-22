@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "over een bekend glasvezelnetwerk",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "De precieze route over land is niet openbaar; op de kaart wordt die als rechte lijn getekend.",
   "en la sombra de la Tierra": "in de schaduw van de aarde",
-  "Yahoo Japón": "Yahoo Japan"
+  "Yahoo Japón": "Yahoo Japan",
+  "De punto a punto, en línea recta": "Van punt tot punt, hemelsbreed",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "De browser die elke onderbreking live laat zien. Komt zodra hij af en getest is."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

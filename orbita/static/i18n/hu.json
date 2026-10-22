@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "egy ismert optikai hálózaton át",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "A pontos szárazföldi útvonal nem nyilvános; a térkép egyenes vonalként rajzolja.",
   "en la sombra de la Tierra": "a Föld árnyékában",
-  "Yahoo Japón": "Yahoo Japán"
+  "Yahoo Japón": "Yahoo Japán",
+  "De punto a punto, en línea recta": "Ponttól pontig, légvonalban",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "A böngésző, amely minden megszakítást élőben mutat. Akkor érkezik, ha kész és tesztelt."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "via et kjent fibernett",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "Den nøyaktige ruten over land er ikke offentlig; på kartet tegnes den som en rett linje.",
   "en la sombra de la Tierra": "i jordens skygge",
-  "Yahoo Japón": "Yahoo Japan"
+  "Yahoo Japón": "Yahoo Japan",
+  "De punto a punto, en línea recta": "Punkt til punkt, i luftlinje",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Nettleseren som viser hvert brudd, direkte. Kommer når den er ferdig og testet."
  },
  "p": {
   "intento": "Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

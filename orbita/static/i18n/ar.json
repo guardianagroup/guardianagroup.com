@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "عبر شبكة ألياف معروفة",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "المسار البري الدقيق غير معلن؛ تُرسم على الخريطة كخط مستقيم.",
   "en la sombra de la Tierra": "في ظل الأرض",
-  "Yahoo Japón": "Yahoo اليابان"
+  "Yahoo Japón": "Yahoo اليابان",
+  "De punto a punto, en línea recta": "نقطة إلى نقطة، في خط مستقيم",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "المتصفح الذي يعرض كل قطع، مباشرة. سيصل عندما يكتمل ويُختبر."
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

@@ -557,7 +557,9 @@
   "por una red de fibra conocida": "por uma rede de fibra conhecida",
   "La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.": "O percurso exato por terra não é público; no mapa é desenhado em linha reta.",
   "en la sombra de la Tierra": "na sombra da Terra",
-  "Yahoo Japón": "Yahoo Japão"
+  "Yahoo Japón": "Yahoo Japão",
+  "De punto a punto, en línea recta": "De ponto a ponto, em linha reta",
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "O navegador que mostra cada corte, em direto. Chegará quando estiver terminado e testado."
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",
