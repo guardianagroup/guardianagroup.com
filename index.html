@@ -544,7 +544,7 @@ html.i18n-espera .content,html.i18n-espera #phrase{opacity:0}
 /* addresses and file names are written left to right: when cut short, they are cut at their end */
 [dir=rtl] :is(.fab .fr span:first-child,.drop .fn2,.df-fn b){direction:ltr;text-align:right}
 /* Tamil and Telugu words are long and their letters wide: on a phone the big titles are a size smaller, and a word that still does not fit may break */
-:is(:lang(ta),:lang(te)) :is(h1,h2,.h2,#lightp){overflow-wrap:break-word}
+:is(:lang(ta),:lang(te)) :is(h1,h2,.h2,#lightp){overflow-wrap:anywhere}
 @media (max-width:600px){:is(:lang(ta),:lang(te)) :is(.h2,.ch-card h2){font-size:34px}}
 /* the cut control: on a narrow screen the address goes under the label instead of leaving the screen */
 .cutctl{max-width:100%}.cutctl .st{flex-wrap:wrap;row-gap:2px;min-width:0}
@@ -2276,15 +2276,16 @@ if(btn) btn.addEventListener('click',async()=>{
     for (const h of document.querySelectorAll(sel)) {
       if (h.closest('[aria-hidden="true"],.idi-p')) continue;
       h.style.fontSize = ''; h.style.maxWidth = '';
-      const W = h.clientWidth; if (!W || !h.offsetParent) continue;
-      const cs = getComputedStyle(h); const base = parseFloat(cs.fontSize);
-      const mw = cs.maxWidth; // a measure set in ch would shrink with the letters: it is held at its width
+      if (!h.offsetParent) continue;
       const ow = h.style.overflowWrap, hy = h.style.hyphens, wh = h.style.webkitHyphens;
-      h.style.overflowWrap = 'normal'; h.style.hyphens = 'manual'; h.style.webkitHyphens = 'manual';
+      // the width the title really has (a long word must not widen its box first)
+      h.style.overflowWrap = 'anywhere'; const W = h.clientWidth; if (!W) { h.style.overflowWrap = ow; continue; }
+      const base = parseFloat(getComputedStyle(h).fontSize);
+      h.style.maxWidth = W + 'px'; h.style.overflowWrap = 'normal'; h.style.hyphens = 'manual'; h.style.webkitHyphens = 'manual';
       let f = base, n = 0;
-      while (h.scrollWidth > W + 1 && f * 0.94 >= base * 0.7) { // never below 70 %: past that a long word may break (Tamil, Telugu)
-        if (!n && mw !== 'none') h.style.maxWidth = mw; f *= 0.94; h.style.fontSize = f.toFixed(1) + 'px'; n++; }
+      while (h.scrollWidth > W + 1 && f * 0.94 >= base * 0.7) { f *= 0.94; h.style.fontSize = f.toFixed(1) + 'px'; n++; } // never below 70 %: past that a long word may break (Tamil, Telugu)
       h.style.overflowWrap = ow; h.style.hyphens = hy; h.style.webkitHyphens = wh;
+      if (!n) h.style.maxWidth = '';
     }
   }
   let t = 0; const pide = () => { clearTimeout(t); t = setTimeout(ajusta, 60); };
