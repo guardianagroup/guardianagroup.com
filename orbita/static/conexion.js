@@ -282,9 +282,12 @@
     if (fuerte) { cx.strokeStyle = 'rgba(156,195,228,' + (0.25 + 0.35 * pulso) + ')'; cx.lineWidth = 1.2; cx.beginPath(); cx.arc(x, y, 9 + 6 * pulso, 0, 7); cx.stroke(); }
     cx.fillStyle = fuerte ? '#9CC3E4' : 'rgba(244,246,248,.85)'; cx.beginPath(); cx.arc(x, y, fuerte ? 3.2 : 2.2, 0, 7); cx.fill();
     if (texto) {
-      const px = fuerte ? 10.5 : 10, w = px * 0.62 * texto.length, lx = x + (fuerte ? 12 : 7), ly = y + (abajo ? 14 : 0), caja = [lx, ly - 7, w, 14];
-      const choca = cajas.some((c) => lx < c[0] + c[2] + 4 && lx + w > c[0] - 4 && ly - 7 < c[1] + c[3] && ly + 7 > c[1]);
-      if (!choca || fuerte) { cajas.push(caja); cx.font = (fuerte ? '500 ' : '400 ') + px + 'px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle'; cx.fillStyle = fuerte ? 'rgba(232,236,241,.92)' : 'rgba(232,236,241,.78)'; cx.fillText(texto, lx, ly); }
+      const px = fuerte ? 10.5 : 10, w = px * 0.62 * texto.length, lx = x + (fuerte ? 12 : 7), ly = y + (abajo ? 14 : 0);
+      const choca = (yy) => cajas.some((c) => lx < c[0] + c[2] + 4 && lx + w > c[0] - 4 && yy - 7 < c[1] + c[3] && yy + 7 > c[1]);
+      // a bright label always appears, but it looks for a free line above or below first (22 Oct 2026: Ohio over Virginia)
+      let yy = ly, libre = !choca(ly);
+      if (!libre && fuerte) for (const dy of [-14, 14, -28, 28]) if (!choca(ly + dy)) { yy = ly + dy; libre = true; break; }
+      if (libre || fuerte) { cajas.push([lx, yy - 7, w, 14]); cx.font = (fuerte ? '500 ' : '400 ') + px + 'px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle'; cx.fillStyle = fuerte ? 'rgba(232,236,241,.92)' : 'rgba(232,236,241,.78)'; cx.fillText(texto, lx, yy); }
     }
     return [x, y];
   }
@@ -292,8 +295,9 @@
     cx.save(); cx.globalCompositeOperation = 'source-over'; cajas = [];
     const P = window.OrbitaPlaneta, L = (rutas && rutas.origen) || (P && P.lugar);
     // you first, so your label is never pushed out: measured from outside if you asked for it, otherwise the place you chose
-    if (fuera && !fuera.error && Number.isFinite(fuera.lat)) marca(cx, p, G, fuera.lon, fuera.lat, (T('Cómo te ve internet') + ' · ' + (fuera.ciudad || '')).toUpperCase(), t, true);
-    else if (L && (rutas || rutaReal)) marca(cx, p, G, L.lon, L.lat, (T('Tú') + ' · ' + L.nombre + (L.aprox ? ' (' + T('aproximada') + ')' : '')).toUpperCase(), t, true);
+    // the planet already names your equipment at the home marker (orbita.js), so here only the pulse, no second label
+    if (fuera && !fuera.error && Number.isFinite(fuera.lat)) marca(cx, p, G, fuera.lon, fuera.lat, (T('Cómo te ve internet') + ' · ' + (fuera.ciudad || '')).toUpperCase(), t, true, true);
+    else if (L && (rutas || rutaReal)) { const xy = marca(cx, p, G, L.lon, L.lat, '', t, true); if (xy) cajas.push([xy[0] + 12, xy[1] - 7, 180, 14]); }
     // the measured arcs to the clouds: fastest three bright, the rest fainter; a pulse rides each one at 1/20 of real speed
     if (rutas && rutas.nubes && rutas.nubes.length && L) {
       const mejor = rutas.nubes[0].ms || 1;
