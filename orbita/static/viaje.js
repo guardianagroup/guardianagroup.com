@@ -92,8 +92,9 @@
     if (!V) return;
     const r = V.rutas, L = r.origen;
     cx.save(); cx.globalCompositeOperation = 'source-over';
-    // every path, faint, so the whole web is always there
-    for (const n of r.nubes) { cx.strokeStyle = 'rgba(' + BLANCO + ',' + (V.fase === 'final' ? 0.28 : 0.1) + ')'; cx.lineWidth = 0.8; trazo(cx, arcoPantalla(p, G, L, n, 64), 0, 64); }
+    // every path, faint, so the whole web is always there; in the constellation scene they appear nearest first
+    const orden = V.porKm, visibles = V.fase === 'constelacion' ? Math.min(orden.length, Math.floor(V.progreso * orden.length)) : (V.fase === 'intro' ? 0 : orden.length);
+    for (let i = 0; i < visibles; i++) { const n = orden[i], ultimo = V.fase === 'constelacion' && i === visibles - 1; cx.strokeStyle = 'rgba(' + BLANCO + ',' + (V.fase === 'final' ? 0.28 : ultimo ? 0.6 : V.fase === 'constelacion' ? 0.22 : 0.1) + ')'; cx.lineWidth = ultimo ? 1.4 : 0.8; trazo(cx, arcoPantalla(p, G, L, n, 64), 0, 64); if (V.fase === 'constelacion') etiqueta(cx, punto(cx, p, G, n.lon, n.lat, ultimo ? 3 : 1.8, ultimo ? '#F4F6F8' : 'rgba(' + BLANCO + ',.7)'), n.nombre.replace(/ \(.*\)/, '') + ' · ' + n.ms + ' ms', ultimo); }
     // the stops already travelled, with their label
     for (const s of V.hechas) { const pts = arcoPantalla(p, G, L, s, 64); cx.strokeStyle = 'rgba(' + ACENTO + ',.55)'; cx.lineWidth = 1.2; trazo(cx, pts, 0, 64); etiqueta(cx, punto(cx, p, G, s.lon, s.lat, 2.6, '#9CC3E4'), s.nombre + ' · ' + s.ms + ' ms', false); }
     // the pulse on its way: a trail that fades behind a bright head
@@ -101,6 +102,9 @@
       const s = V.actual, N = 96, pts = arcoPantalla(p, G, L, s, N), f = Math.max(0, Math.min(1, V.progreso)), cab = Math.round(f * N);
       for (let i = 1; i <= cab; i++) { const q0 = pts[i - 1], q1 = pts[i]; if (!q0 || !q1) continue; const k = 1 - (cab - i) / Math.max(12, N * 0.35); if (k <= 0) continue; cx.strokeStyle = 'rgba(' + ACENTO + ',' + (0.15 + 0.85 * k).toFixed(3) + ')'; cx.lineWidth = 1 + 2.2 * k; cx.beginPath(); cx.moveTo(q0[0], q0[1]); cx.lineTo(q1[0], q1[1]); cx.stroke(); }
       const q = pts[cab]; if (q) { const g = cx.createRadialGradient(q[0], q[1], 0, q[0], q[1], 14); g.addColorStop(0, 'rgba(255,255,255,.95)'); g.addColorStop(0.35, 'rgba(' + ACENTO + ',.7)'); g.addColorStop(1, 'rgba(' + ACENTO + ',0)'); cx.fillStyle = g; cx.beginPath(); cx.arc(q[0], q[1], 14, 0, 7); cx.fill(); }
+      // the race against light: the fainter head is where light in a straight line would be by now
+      const fl = Math.min(1, f * s.ms / Math.max(1, s.minimo)), ql = pts[Math.round(fl * N)];
+      if (ql) { cx.fillStyle = 'rgba(' + BLANCO + ',' + (fl >= 1 ? 0.95 : 0.8) + ')'; cx.beginPath(); cx.arc(ql[0], ql[1], fl >= 1 ? 3.5 : 2.4, 0, 7); cx.fill(); if (fl >= 1 && f < 1) { cx.strokeStyle = 'rgba(' + BLANCO + ',.5)'; cx.lineWidth = 1; cx.beginPath(); cx.arc(ql[0], ql[1], 8, 0, 7); cx.stroke(); etiqueta(cx, ql, T('la luz ya habría llegado'), false, true); } }
       if (f >= 1) etiqueta(cx, punto(cx, p, G, s.lon, s.lat, 3.2, '#F4F6F8'), s.nombre + ' · ' + s.ms + ' ms', true);
       else punto(cx, p, G, s.lon, s.lat, 2.4, 'rgba(' + BLANCO + ',.6)');
     }
@@ -131,10 +135,10 @@
     const r = rutas || (C() && C().datos.rutas); if (!r || !r.nubes || !r.nubes.length || !r.origen || !P()) return;
     const h = hud(); h.hidden = false; h.querySelector('.fin').hidden = true; h.querySelector('.centro').style.opacity = '0';
     document.body.classList.add('viaje');
-    V = { rutas: r, paradas: paradas(r), hechas: [], actual: null, fase: 'intro', progreso: 0, t0: performance.now(), salta: false, cam: null };
+    V = { rutas: r, paradas: paradas(r), porKm: r.nubes.slice().sort((a, b) => a.km - b.km), hechas: [], actual: null, fase: 'intro', progreso: 0, t0: performance.now(), salta: false, cam: null };
     if (window.OrbitaCapas) window.OrbitaCapas.soloTu(true, pintaViaje);
     const hora = new Date(r.fin || r.cuando || Date.now()).toLocaleTimeString(loc(), { hour: '2-digit', minute: '2-digit' });
-    h.querySelector('.sub').textContent = T('Medido ahora desde') + ' ' + r.origen.nombre + ' · ' + hora + (r.borde ? ' · ' + T('borde') + ': ' + r.borde.nombre : '');
+    h.querySelector('.sub').textContent = T('Medido ahora desde') + ' ' + r.origen.nombre + ' · ' + hora + (r.borde ? ' · ' + T('borde') + ': ' + r.borde.nombre : '') + ' · ' + T('conexiones medidas, trayectorias ilustrativas');
     camara(r.origen.lon, r.origen.lat, 1.7, 1600);
     h.querySelector('.video').hidden = true;
     if (!esTactil()) empiezaGrabacion();
@@ -162,12 +166,15 @@
     const h = hud(), r = V.rutas, L = r.origen; mueveCamara(now);
     const desde = now - V.t0;
     if (V.fase === 'intro') {
-      if (desde > 2600 || V.salta) { V.salta = false; siguiente(now); }
+      if (desde > 2600 || V.salta) { V.salta = false; V.fase = 'constelacion'; V.tCons = now; V.progreso = 0; camara(L.lon + 40, L.lat * 0.6, 1.25, 9000); h.querySelector('.destino').textContent = T('Hemos medido tu conexión con') + ' ' + r.nubes.length + ' ' + T('regiones del mundo'); h.querySelector('.cifras').style.visibility = 'hidden'; h.querySelector('.luz').style.opacity = '0'; h.querySelector('.centro').style.opacity = '1'; }
+    } else if (V.fase === 'constelacion') {
+      V.progreso = Math.min(1, (now - V.tCons) / 7500);
+      if (V.progreso >= 1 && now - V.tCons > 8800 || V.salta) { V.salta = false; h.querySelector('.cifras').style.visibility = ''; siguiente(now); }
     } else if (V.fase === 'vuelo') {
       const s = V.actual, dur = Math.max(2200, Math.min(4200, s.ms * 18)); // slow motion: the far ones take longer, never past four seconds
       const f = Math.min(1, (now - V.tVuelo) / dur); V.progreso = f;
       h.querySelector('.km').textContent = num(Math.round(s.km * f)); h.querySelector('.ms').textContent = num(Math.round(s.ms * f));
-      if (f >= 1 && !V.llego) { V.llego = now; h.querySelector('.luz').textContent = T('La luz en línea recta tardaría') + ' ' + num(Math.round(s.minimo)) + ' ms · ' + T('tus datos dan un rodeo de') + ' ×' + num(s.ms / s.minimo, 1); h.querySelector('.luz').style.opacity = '1'; }
+      if (f >= 1 && !V.llego) { V.llego = now; h.querySelector('.luz').textContent = T('La luz en línea recta tardaría') + ' ' + num(Math.round(s.minimo)) + ' ms · ' + T('tus datos han tardado') + ' +' + num(Math.round(s.ms - s.minimo)) + ' ms ' + T('sobre ese mínimo') + ' (×' + num(s.ms / s.minimo, 1) + ')'; h.querySelector('.luz').style.opacity = '1'; }
       if ((V.llego && now - V.llego > 1500) || V.salta) { V.salta = false; V.hechas.push(s); V.actual = null; siguiente(now); }
     } else if (V.fase === 'final') {
       if (REC.on && !V.tFin) V.tFin = now; if (REC.on && V.tFin && now - V.tFin > 3500) paraGrabacion(); // three more seconds of the whole planet, then the file closes
@@ -183,7 +190,8 @@
       h.querySelector('.centro').style.opacity = '0';
       const ms = r.nubes.map((n) => n.ms), lejos = r.nubes[r.nubes.length - 1];
       h.querySelector('.fin .t').textContent = T('Así viajan tus datos');
-      h.querySelector('.fin .d').textContent = num(r.nubes.length) + ' ' + T('destinos medidos') + ' · ' + T('de') + ' ' + num(Math.min(...ms)) + ' ' + T('a') + ' ' + num(Math.max(...ms)) + ' ms · ' + T('el más lejano') + ': ' + lejos.nombre + ', ' + num(Math.round(lejos.km)) + ' km';
+      const parpadeo = r.nubes.filter((n) => n.ms <= 150).length;
+      h.querySelector('.fin .d').textContent = num(r.nubes.length) + ' ' + T('destinos medidos') + ' · ' + T('de') + ' ' + num(Math.min(...ms)) + ' ' + T('a') + ' ' + num(Math.max(...ms)) + ' ms · ' + T('el más lejano') + ': ' + lejos.nombre + ', ' + num(Math.round(lejos.km)) + ' km' + (parpadeo ? ' · ' + T('en lo que dura un parpadeo (unos 150 ms) tus datos van y vuelven de') + ' ' + num(parpadeo) + ' ' + T('de ellos') : '');
       h.querySelector('.fin').hidden = false;
       return;
     }
@@ -269,6 +277,22 @@
     });
     return c;
   }
+  // 4. distance against time: every destination as a point; the line is the physical minimum for that distance
+  function figuraDispersion(r) {
+    const W = 1100, H = 420, [c, cx] = lienzo(W, H), x0 = 70, y0 = H - 50, ancho = W - x0 - 40, alto = y0 - 30;
+    const maxKm = Math.max(...r.nubes.map((n) => n.km)) * 1.05, maxMs = Math.max(...r.nubes.map((n) => n.ms)) * 1.1;
+    const X = (km) => x0 + ancho * km / maxKm, Y = (ms) => y0 - alto * ms / maxMs;
+    cx.fillStyle = '#06080C'; cx.fillRect(0, 0, W, H);
+    cx.strokeStyle = 'rgba(' + ACENTO + ',.18)'; cx.lineWidth = 0.8; cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.fillStyle = 'rgba(' + BLANCO + ',.55)'; cx.textBaseline = 'middle';
+    for (let ms = 50; ms < maxMs; ms += 50) { cx.beginPath(); cx.moveTo(x0, Y(ms)); cx.lineTo(x0 + ancho, Y(ms)); cx.stroke(); cx.textAlign = 'right'; cx.fillText(ms + ' ms', x0 - 8, Y(ms)); }
+    for (let km = 2000; km < maxKm; km += 2000) { cx.textAlign = 'center'; cx.fillText(num(km) + ' km', X(km), y0 + 16); }
+    cx.strokeStyle = 'rgba(' + ACENTO + ',.85)'; cx.lineWidth = 1.4; cx.setLineDash([5, 4]); cx.beginPath(); cx.moveTo(X(0), Y(0)); cx.lineTo(X(maxKm), Y(minimoMs(maxKm))); cx.stroke(); cx.setLineDash([]);
+    cx.textAlign = 'left'; cx.fillStyle = '#9CC3E4'; cx.fillText(T('mínimo de la luz por la fibra'), X(maxKm * 0.55) + 8, Y(minimoMs(maxKm * 0.55)) - 12);
+    for (const n of r.nubes) { cx.fillStyle = 'rgba(' + BLANCO + ',.85)'; cx.beginPath(); cx.arc(X(n.km), Y(n.ms), 3.2, 0, 7); cx.fill(); }
+    const top = r.nubes.slice().sort((a, b) => a.ms - b.ms); [top[0], top[Math.floor(top.length / 2)], top[top.length - 1]].forEach((n) => { if (!n) return; cx.fillStyle = '#F4F6F8'; cx.fillText(n.nombre.replace(/ \(.*\)/, '') + ' · ' + n.ms + ' ms', X(n.km) + 7, Y(n.ms) - 8); });
+    return c;
+  }
+  const minimoMs = (km) => 2 * km / 200;
   async function informe(rutas) {
     const r = rutas || (C() && C().datos.rutas); if (!r || !r.nubes || !r.nubes.length || !r.origen) return;
     const lineas = await fronteras(), paradasV = paradas(r), fuera = C() && C().datos.fuera;
@@ -281,10 +305,10 @@
     const cab = el('header', 'cab'); cab.append(el('p', 'k', 'GUARDIANA · ÓRBITA'), el('h1', 't', T('El viaje de tus datos')), el('p', 's', r.origen.nombre + (r.origen.aprox ? ' (' + T('aproximada') + ')' : '') + (fuera && !fuera.error && fuera.operador ? ' · ' + fuera.operador : '') + ' · ' + cuando.toLocaleDateString(loc(), { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + cuando.toLocaleTimeString(loc(), { hour: '2-digit', minute: '2-digit' }) + (r.borde ? ' · ' + T('borde de internet más cercano') + ': ' + r.borde.nombre + (r.borde.ms != null ? ' (' + r.borde.ms + ' ms)' : '') : '')));
     const acc = el('div', 'acciones'); const bPdf = el('button', '', T('Guardar PDF')); bPdf.type = 'button'; const bX = el('button', '', T('Cerrar')); bX.type = 'button'; acc.append(bPdf, bX); cab.append(acc);
     a.append(cab);
-    const f1 = el('figure'); f1.append(figuraGlobo(r, lineas, paradasV)); f1.append(el('figcaption', '', T('Tu planeta: cada arco es un camino medido desde tu equipo; los brillantes, el más rápido de cada continente.'))); a.append(f1);
+    const f1 = el('figure'); f1.append(figuraGlobo(r, lineas, paradasV)); f1.append(el('figcaption', '', T('Tu planeta: cada arco es un camino medido desde tu equipo; los brillantes, el más rápido de cada continente.') + ' ' + T('Conexiones medidas, trayectorias ilustrativas: el arco une origen y destino, no muestra por dónde fueron los paquetes.'))); a.append(f1);
     const cifras = el('section', 'cifras');
     const dato = (v, k) => { const d = el('div'); d.append(el('b', '', v), el('span', '', k)); return d; };
-    cifras.append(dato(num(orden.length), T('destinos medidos')), dato(mejor.ms + ' ms', T('el más rápido') + ': ' + mejor.nombre.replace(/ \(.*\)/, '')), dato(num(Math.round(peor.km)) + ' km', T('el más lejano') + ': ' + peor.nombre.replace(/ \(.*\)/, '')), dato('×' + num(orden.reduce((s, n) => s + n.ms / n.minimo, 0) / orden.length, 1), T('rodeo medio sobre la luz')));
+    cifras.append(dato(num(orden.length), T('destinos medidos')), dato(mejor.ms + ' ms', T('el más rápido') + ': ' + mejor.nombre.replace(/ \(.*\)/, '')), dato(num(Math.round(peor.km)) + ' km', T('el más lejano') + ': ' + peor.nombre.replace(/ \(.*\)/, '')), dato('×' + num(orden.reduce((s, n) => s + n.ms / n.minimo, 0) / orden.length, 1), T('tiempo medio sobre el mínimo físico')));
     a.append(cifras);
     const dos = el('div', 'dos');
     const f2 = el('figure'); f2.append(figuraBrujula(r)); f2.append(el('figcaption', '', T('Brújula de tiempos: cada destino en su dirección real desde ti; cuanto más lejos del centro, más tardan tus datos.'))); dos.append(f2);
@@ -296,6 +320,7 @@
     sec.append(el('p', '', T('Desde tu navegador, una petición mínima a la puerta pública de cada región (Amazon Web Services) y al borde de red más cercano (Cloudflare), tres veces, quedándonos con la mejor. La ubicación de cada centro es la zona metropolitana publicada por su operador. No se sabe por qué cable exacto ha ido cada dato: ningún mapa puede saberlo sin medir dentro de la red, y por eso no se dibuja.')));
     dos.append(sec); a.append(dos);
     const f3 = el('figure'); f3.append(figuraLuz(r)); f3.append(el('figcaption', '', T('La luz contra la realidad: en azul, lo que tardaría la luz en línea recta; en gris, lo que han tardado tus datos.'))); a.append(f3);
+    const f4 = el('figure'); f4.append(figuraDispersion(r)); f4.append(el('figcaption', '', T('Distancia frente a tiempo: cada punto es un destino; la línea de puntos es el mínimo físico para esa distancia. Lo que queda por encima son equipos, colas y caminos que no van rectos: no se traduce en kilómetros.'))); a.append(f4);
     const tabla = el('table'); const th = el('tr'); [T('Destino'), T('Continente'), 'ms', 'km', T('mínimo'), T('rodeo')].forEach((k) => th.append(el('th', '', k))); tabla.append(th);
     for (const n of orden) { const tr = el('tr'); [n.nombre, continente(n.region), n.ms + ' ms', num(Math.round(n.km)), num(Math.round(n.minimo)) + ' ms', '×' + num(n.ms / n.minimo, 1)].forEach((v) => tr.append(el('td', '', v))); tabla.append(tr); }
     a.append(tabla);
