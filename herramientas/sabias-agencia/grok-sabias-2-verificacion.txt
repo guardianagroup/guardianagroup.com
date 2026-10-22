@@ -1,0 +1,4 @@
+Grok (Expert), 22 Oct 2026, 19:20 — lote 2 (42 datos de chatgpt-sabias-2.json)
+1-41: ok
+42: no — las fuentes públicas describen la sustitución de decenas de kilómetros (aprox. 50-55 km), no un total verificable de 90 km según la operadora.
+Claude (tercera voz): 41 es casi igual que 5 (Humboldt Connect); se deja fuera para no repetir.
