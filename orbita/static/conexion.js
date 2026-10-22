@@ -44,7 +44,7 @@
   let rutas = null, midiendo = false, rutaReal = null;
   async function sonda(url, veces, limite) {
     // warm-up opens the connection (DNS, TCP, TLS); the timed probes then ride the same connection: ≈ one round trip
-    const pide = async () => { const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), limite || 5000); try { await fetch(url + (url.includes('?') ? '&' : '?') + 'g=' + Math.random().toString(36).slice(2), { mode: 'no-cors', cache: 'no-store', credentials: 'omit', redirect: 'manual', signal: ctl.signal }); } finally { clearTimeout(tm); } };
+    const pide = async () => { const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), limite || 5000); try { await fetch(url + (url.includes('?') ? '&' : '?') + 'g=' + Math.random().toString(36).slice(2), { mode: 'no-cors', cache: 'no-store', credentials: 'omit', signal: ctl.signal }); } finally { clearTimeout(tm); } };
     try { await pide(); } catch (_) { return null; }
     const ts = [];
     for (let i = 0; i < (veces || 3); i++) { const t0 = performance.now(); try { await pide(); ts.push(performance.now() - t0); } catch (_) {} }
