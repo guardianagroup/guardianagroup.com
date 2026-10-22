@@ -85,6 +85,8 @@
     'Cable submarino sin nombre': ['Unnamed submarine cable', 'Cabo submarino sem nome'],
     'Llega a tierra en': ['Lands at', 'Chega à terra em'], 'y en': ['and at', 'e em'],
     'Une': ['Connects', 'Liga'], 'con': ['with', 'com'], 'lugares': ['places', 'lugares'],
+    'Origen': ['From', 'Origem'], 'Destino': ['To', 'Destino'], 'Paradas': ['Stops', 'Paradas'],
+    'Los datos viajan por él en los dos sentidos.': ['Data travels through it both ways.', 'Os dados viajam por ele nos dois sentidos.'],
     'Según OpenStreetMap; puede faltar algún tramo.': ['According to OpenStreetMap; some sections may be missing.', 'Segundo o OpenStreetMap; pode faltar algum trecho.'],
     'Sus extremos no están cerca de ninguna ciudad': ['Its ends are not near any city', 'Suas pontas não estão perto de nenhuma cidade'],
     'Satélites': ['Satellites', 'Satélites'],

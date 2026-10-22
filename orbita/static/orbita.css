@@ -343,3 +343,24 @@ body.listo:not(.dentro) header:hover, body.listo:not(.dentro) header:focus-withi
 body.dentro .sat-vista { opacity: 0; pointer-events: none; }
 @media (max-width: 760px) { .sat-vista { position: static; transform: none; order: 4; width: 100%; justify-content: center; flex-wrap: wrap; border-radius: 16px; } }
 @media (max-width: 760px) { .sat-vista .sep { display: none; } .zoom { display: none; } }
+
+/* «Ahora mismo» (owner, 22 Oct 2026): one true fact at a time, bottom right (static/datos-curiosos.js). */
+.dato { box-sizing: border-box; width: 100%; margin-bottom: 14px; padding: 14px 16px 12px; border: 1px solid var(--line); border-radius: 14px; background: rgba(10,14,20,.74); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); cursor: pointer; transition: border-color .2s; }
+.dato:hover { border-color: rgba(156,195,228,.45); }
+.dato[hidden] { display: none; }
+.dato.entra { animation: datoEntra .5s cubic-bezier(.2,.7,.2,1); }
+@keyframes datoEntra { from { opacity: 0; transform: translateY(6px); } }
+.dato .dk { display: flex; justify-content: space-between; align-items: center; font: 500 10px/1 var(--mono); letter-spacing: .16em; color: #8A95A2; }
+.dato .de { color: var(--aviso); border: 1px solid #4A3C22; border-radius: 999px; padding: 3px 7px; font-size: 9px; letter-spacing: .12em; }
+.dato .de[hidden] { display: none; }
+.dato .dv { margin-top: 10px; font: 300 30px/1.05 var(--display); color: var(--fg); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.dato .dt { margin: 6px 0 0; font: 400 13px/1.45 var(--texto); color: #C4CCD5; }
+.dato .dpie { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 10px; }
+.dato .dpie small { font: 400 10px/1.4 var(--mono); color: #6F7B88; letter-spacing: .02em; }
+.dato .dpuntos { display: flex; gap: 4px; flex: none; }
+.dato .dpuntos i { width: 4px; height: 4px; border-radius: 50%; background: rgba(156,195,228,.25); }
+.dato .dpuntos i.on { background: var(--accent); }
+body.sin-cortes #directo { display: block; }
+body.sin-cortes #directo h2, body.sin-cortes #lista, body.sin-cortes #espera { display: none; }
+body.estrecho .dato { display: none; }
+@media (prefers-reduced-motion: reduce) { .dato.entra { animation: none; } }

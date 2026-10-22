@@ -435,8 +435,11 @@
       if (gr) lados = gr[1].map(([c, cc]) => c + ' (' + paisNombre(cc) + ')');
       else { lados = []; if (e[0]) lados.push(e[0] + ' (' + paisNombre(e[1]) + ')'); if (e[2] && (e[2] !== e[0] || e[3] !== e[1])) lados.push(e[2] + ' (' + paisNombre(e[3]) + ')'); }
       f.querySelector('b').textContent = gr ? gr[0] : (d.n || T('Cable submarino sin nombre'));
-      const donde = lados.length === 2 ? T('Une') + ' ' + lados[0] + ' ' + T('con') + ' ' + lados[1]
-        : lados.length > 2 ? T('Llega a tierra en') + ' ' + num(lados.length) + ' ' + T('lugares') + ':\n' + lados.slice(0, 6).join(' · ') + (lados.length > 6 ? ' · +' + (lados.length - 6) : '')
+      // owner, 22 Oct 2026: «origen Francia, destino Brasil… sería más entendible». West to east; data goes both ways.
+      const medio = lados.slice(1, -1);
+      const donde = lados.length >= 2 ? T('Origen') + ': ' + lados[0] + '\n' + T('Destino') + ': ' + lados[lados.length - 1]
+          + (medio.length ? '\n' + T('Paradas') + ': ' + medio.slice(0, 4).join(' · ') + (medio.length > 4 ? ' · +' + (medio.length - 4) : '') : '')
+          + '\n' + T('Los datos viajan por él en los dos sentidos.')
         : lados.length === 1 ? T('Llega a tierra en') + ' ' + lados[0] : T('Sus extremos no están cerca de ninguna ciudad');
       f.querySelector('span').textContent = donde + (d.o ? '\n' + T('Operador') + ': ' + d.o : '') + '\n' + T('Según OpenStreetMap; puede faltar algún tramo.');
     }

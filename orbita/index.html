@@ -79,6 +79,12 @@
 <p id="capa-nota" class="capa-nota" translate="no" aria-live="polite" hidden></p>
 <div id="sat-ficha" class="sat-ficha" translate="no" hidden><b></b><span></span></div>
 <aside id="directo" aria-label="En directo">
+  <section id="dato" class="dato" aria-live="polite" translate="no" title="Toca para ver otro dato" hidden>
+    <div class="dk"><span id="dato-k"></span><span id="dato-e" class="de" hidden></span></div>
+    <div class="dv" id="dato-v"></div>
+    <p class="dt" id="dato-t"></p>
+    <div class="dpie"><small id="dato-f"></small><span class="dpuntos" id="dato-p" aria-hidden="true"></span></div>
+  </section>
   <h2>EN DIRECTO</h2>
   <ul id="lista"></ul>
   <div id="espera">Esperando el primer corte. Cada uno aparecerá aquí y sobre el planeta.</div>
@@ -151,5 +157,6 @@
 <script src="static/orbita-secciones.js"></script>
 <script src="static/orbita.js"></script>
 <script src="static/capas.js"></script>
+<script src="static/datos-curiosos.js"></script>
 </body>
 </html>

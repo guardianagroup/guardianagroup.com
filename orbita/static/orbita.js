@@ -264,6 +264,7 @@
     aVista, pantalla, vec, ctx: cx2,
     get geo() { return { W, H, CX, CY, R, R0, U }; },
     get dentro() { return dentro; },
+    get pais() { return (LUGAR && LUGAR.pais) || CASA || null; },
     get lugar() { try { if (LUGAR) return { lat: LUGAR.lat, lon: LUGAR.lon, nombre: LUGAR.ciudad, aprox: false }; const p = centros[CASA]; return p ? { lat: p.lat, lon: p.lon, nombre: nombrePais(CASA), aprox: true } : null; } catch (_) { return null; } },
   };
   cvT.addEventListener('pointerdown', (e) => {
@@ -697,6 +698,7 @@ void main(){
         const r = await fetch('/api/por-dentro', { headers: { 'X-Guardiana-Token': TOKEN, 'X-Guardiana-Lang': 'es', 'X-Guardiana-Tz': String(-new Date().getTimezoneOffset()) } });
         if (!r.ok) throw new Error(String(r.status));
         const u = await r.json();
+        window.__orbitaPD = u; // «Ahora mismo» (datos-curiosos.js) reads this computer's facts from the same measurements
         fallos = 0;
         const mapa = new Map(); let total = 0;
         for (const d of u.destinos || []) { mapa.set(d.programa + '|' + d.destino + '|' + d.pais, d); total += d.paradas || 0; }
