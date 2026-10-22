@@ -155,13 +155,24 @@
     } catch (e) { FT = { error: true }; }
     cargando.ft = false; pintaNota();
   }
+  // Land fibre by levels (owner, 22 Oct 2026: «mucha carga en el planeta… para que no haya tanto ruido»): from afar
+  // only the long corridors, one per corridor (operators sharing a route are drawn once), and the rest as you zoom in.
+  function fibraVisible(z) {
+    if (!FT.niveles) {
+      const clave = (l) => { const a = l.x.l[0], b = l.x.l[l.x.l.length - 1]; const k = (q) => Math.round(q[0] * 2) + ',' + Math.round(q[1] * 2); const ka = k(a), kb = k(b); return ka < kb ? ka + '|' + kb : kb + '|' + ka; };
+      const lejos = [], medio = [], vistos = new Set();
+      for (const l of FT.lineas) { const km = l.x.km || 0, c = clave(l); if (km >= 250 && !vistos.has(c)) { vistos.add(c); lejos.push(l); } if (km >= 90) medio.push(l); }
+      FT.niveles = { lejos, medio };
+    }
+    return z < 2.2 ? FT.niveles.lejos : z < 4 ? FT.niveles.medio : FT.lineas;
+  }
   function pintaFibra(cx, p, G) {
-    const z = G.R / (G.R0 || G.R);
+    const z = G.R / (G.R0 || G.R), lineas = fibraVisible(z);
     for (const obra of [false, true]) {
       cx.strokeStyle = `rgba(${ACERO},${obra ? 0.5 : 0.72})`; cx.lineWidth = Math.min(1.8, 0.9 + 0.2 * (z - 1));
       cx.setLineDash(obra ? [3, 3] : []);
       cx.beginPath();
-      for (const l of FT.lineas) {
+      for (const l of lineas) {
         if (!!l.x.obra !== obra) continue;
         let prev = false;
         for (const w of l.w) {
@@ -312,7 +323,7 @@
     if (soloTu) { cx.globalCompositeOperation = 'lighter'; if (typeof soloTuPinta === 'function') soloTuPinta(cx, p, G, t); return; }
     cx.globalCompositeOperation = 'lighter';
     if (estado.tierra && capas.tierra && capas.tierra.lineas) pintaLineas(cx, p, G, capas.tierra.lineas, `rgba(${ACERO},.30)`, 0.7);
-    if (estado.fibra && FT && FT.lineas) { pintaFibra(cx, p, G); pintaLuz(cx, p, G, FT.lineas, t); }
+    if (estado.fibra && FT && FT.lineas) { pintaFibra(cx, p, G); pintaLuz(cx, p, G, fibraVisible(G.R / (G.R0 || G.R)), t); }
     if (estado.sub && capas.sub && capas.sub.lineas) {
       // OpenStreetMap's cables as drawn; the ones the agency rebuilt from public sources (cables_agencia.py) are
       // an approximate sea trace, so they go dashed and a touch lighter (owner: «rotulado trazado aproximado»)
