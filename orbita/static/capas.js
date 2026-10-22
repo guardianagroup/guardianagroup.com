@@ -266,17 +266,23 @@
     }
     return z < 2.2 ? FT.niveles.lejos : z < 4 ? FT.niveles.medio : FT.lineas;
   }
+  const rangoFibra = (l) => { const km = (l.x && l.x.km) || 0; return km >= 600 ? 2 : km >= 250 ? 1 : 0; };
+  const nombreRango = (r) => r === 2 ? T('Troncal de largo recorrido') : r === 1 ? T('Troncal nacional') : T('Enlace regional');
   function pintaFibra(cx, p, G) {
     const z = G.R / (G.R0 || G.R), lineas = fibraVisible(z);
     // 22 Oct 2026: the land fibre is drawn from city to city (its nodes are cities, not street addresses), so below
     // about 100 km of height the lines would all meet at one false point; they fade out between ×200 and ×600.
     const fz = z <= 200 ? 1 : Math.max(0, 1 - (z - 200) / 400); if (fz <= 0) return;
-    for (const obra of [false, true]) {
-      cx.strokeStyle = `rgba(${ACERO},${(obra ? 0.5 : 0.72) * fz})`; cx.lineWidth = Math.min(1.8, 0.9 + 0.2 * (z - 1));
+    // 22 Oct 2026, 18:10 (owner): the land fibre told apart by range, since nobody publishes its capacity — long-distance
+    // trunks (600 km and more) brighter and wider, national trunks (250 km) in between, regional links thin
+    const kq = Math.min(1, Math.max(0, (z - 1.4) / 2.6)), base = Math.min(1.8, 0.9 + 0.2 * (z - 1));
+    for (const obra of [false, true]) for (const rango of [0, 1, 2]) {
+      const alfa = (obra ? 0.5 : rango === 2 ? 0.8 + 0.15 * kq : rango === 1 ? 0.72 : 0.5) * fz;
+      cx.strokeStyle = rango === 2 && !obra ? `rgba(${BLANCO},${(alfa * 0.95).toFixed(2)})` : `rgba(${ACERO},${alfa.toFixed(2)})`; cx.lineWidth = rango === 2 ? base + 0.5 + 0.5 * kq : rango === 1 ? base : Math.max(0.7, base - 0.25);
       cx.setLineDash(obra ? [3, 3] : []);
       cx.beginPath();
       for (const l of lineas) {
-        if (!!l.x.obra !== obra) continue;
+        if (!!l.x.obra !== obra || rangoFibra(l) !== rango) continue;
         let prev = false;
         for (const w of l.w) {
           const v = p.aVista(w), x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], ve = v[2] > 0.02;
@@ -333,6 +339,7 @@
     lin.push(T('Fibra troncal por tierra') + (l.cc ? ' · ' + paisNombre(l.cc) : ''));
     if (l.o) lin.push(T('Operador') + ': ' + l.o);
     if (l.km) lin.push(T('Longitud en el mapa') + ': ' + num(l.km) + ' km');
+    lin.push(T('Rango') + ': ' + nombreRango(rangoFibra(FT.lineas[i])) + (l.km ? '' : ''));
     if (l.obra) lin.push(T('En construcción según la fuente'));
     if (l.anio) lin.push(T('Según el mapa de la red de') + ' ' + l.anio); // Topology Zoo lines carry the year of the map they come from
     { const rl = relieveFibra(i); if (rl) lin.push(T('Altitud del terreno') + ': ' + T('hasta') + ' ' + num(rl.max) + ' m · ' + T('media') + ' ' + num(rl.med) + ' m'); }
@@ -798,7 +805,7 @@
       meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + (CAP && Object.keys(CAP.cables).length ? ' · ' + T('trazo blanco y grueso: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s') : '') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
     }
     if (estado.fibra) {
-      meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + T('Datos verificados') : FT && FT.error ? T('No se pudo cargar la fibra por tierra.') : T('Cargando fibra por tierra…'));
+      meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + T('más gruesas y claras las troncales de largo recorrido (600 km o más), finas las regionales') + ' · ' + T('Datos verificados') : FT && FT.error ? T('No se pudo cargar la fibra por tierra.') : T('Cargando fibra por tierra…'));
     }
     if (estado.tierra) {
       const c = capas.tierra;
