@@ -113,16 +113,42 @@
     } catch (e) { PT = { error: true }; }
     cargando.puntos = false; pintaNota();
   }
+  // Several data centres can share one position (same building, same address in the data). From ×12 the ones that
+  // would sit on top of each other open like a flower around the shared spot, each with its own thin spoke, so every
+  // one can be pointed at and chosen (owner, 22 Oct 2026, 18:05: «siguen saliendo apiñados y no puedo elegir»).
+  let ABANICO = null, abanicoFrame = -1;
+  function posiciones(p, G) {
+    const z = G.R / (G.R0 || G.R), pos = new Map();
+    if (!PT || !PT.p) return pos;
+    const grupos = new Map();
+    for (let i = 0; i < PT.p.length; i++) {
+      const q = PT.p[i]; if (q.t === 'aterrizaje') continue;
+      const v = p.aVista(q.w); if (v[2] <= 0.02) continue;
+      const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1]; if (x < -60 || y < -60 || x > G.W + 60 || y > G.H + 60) continue;
+      pos.set(i, [x, y, 0, 0]);
+      if (z >= 12) { const k = Math.round(x / 9) + ':' + Math.round(y / 9); const g = grupos.get(k); if (g) g.push(i); else grupos.set(k, [i]); }
+    }
+    for (const g of grupos.values()) {
+      if (g.length < 2) continue;
+      let cx0 = 0, cy0 = 0; for (const i of g) { cx0 += pos.get(i)[0]; cy0 += pos.get(i)[1]; } cx0 /= g.length; cy0 /= g.length;
+      const r = Math.min(34, 9 + 2.2 * g.length);
+      g.forEach((i, j) => { const a = -Math.PI / 2 + j * 2 * Math.PI / g.length; pos.set(i, [cx0 + r * Math.cos(a), cy0 + r * Math.sin(a), cx0, cy0]); });
+    }
+    return pos;
+  }
   function pintaPuntos(cx, p, G) {
     const forma = { aterrizaje: 0, datos: 1, intercambio: 2 }, z = G.R / (G.R0 || G.R), L = esLimpio();
+    ABANICO = posiciones(p, G); abanicoFrame = performance.now();
+    // the spokes of the fans, under the marks
+    if (z >= 12) { cx.save(); cx.globalCompositeOperation = 'source-over'; cx.strokeStyle = `rgba(${L ? BLANCO : ACERO},.35)`; cx.lineWidth = 0.8; cx.beginPath(); for (const [, q] of ABANICO) { if (q[2] || q[3]) { cx.moveTo(q[2], q[3]); cx.lineTo(q[0], q[1]); } } cx.stroke(); cx.restore(); }
     const sd = Math.max(1.5, Math.min(4, 1 + z * 0.22)); // data-centre squares grow a little with the zoom (owner: «que se separen bien»)
     const anillo = Math.max(0, Math.min(1, (z - 1.5) / 1.5)), anillos = [];
     for (let k = 0; k < 3; k++) {
       cx.beginPath();
-      for (const q of PT.p) {
-        if (forma[q.t] !== k) continue;
-        const v = p.aVista(q.w); if (v[2] <= 0.02) continue;
-        const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
+      for (let qi = 0; qi < PT.p.length; qi++) {
+        const q = PT.p[qi]; if (forma[q.t] !== k) continue;
+        let x, y; const ab = k ? ABANICO.get(qi) : null;
+        if (ab) { x = ab[0]; y = ab[1]; } else { const v = p.aVista(q.w); if (v[2] <= 0.02) continue; x = G.CX + G.R * v[0]; y = G.CY - G.R * v[1]; }
         if (k === 0) { cx.moveTo(x, y - 2.6); cx.lineTo(x + 2.6, y); cx.lineTo(x, y + 2.6); cx.lineTo(x - 2.6, y); cx.closePath(); }
         else if (k === 1) { cx.rect(x - sd, y - sd, 2 * sd, 2 * sd); if (anillo) anillos.push(x, y); }
         else { cx.moveTo(x + 2.8, y); cx.arc(x, y, 2.8, 0, 7); }
@@ -932,7 +958,8 @@
   function buscaPunto(x, y) {
     if (!estado.puntos || !PT || !PT.p) return -1;
     const p = P(), G = p.geo; let mejor = -1, dm = 5.5 * 5.5;
-    for (let i = 0; i < PT.p.length; i++) { const v = p.aVista(PT.p[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
+    const ab = ABANICO && performance.now() - abanicoFrame < 400 ? ABANICO : null; // where the marks really are on screen (fans included)
+    for (let i = 0; i < PT.p.length; i++) { let px, py; const a = ab && ab.get(i); if (a) { px = a[0]; py = a[1]; } else { const v = p.aVista(PT.p[i].w); if (v[2] <= 0.05) continue; px = G.CX + G.R * v[0]; py = G.CY - G.R * v[1]; } const dx = px - x, dy = py - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
     return mejor;
   }
   function buscaLlegada(x, y) {
