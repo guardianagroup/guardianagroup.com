@@ -48,7 +48,7 @@ que me preguntes más si te doy permiso». Avísale cuando algo quede listo, en 
   por niveles; se desvanece por debajo de ~100 km de altura porque va de ciudad a ciudad), Centros de datos (1.903 lugares, 4.493 edificios, cuadrado blanco
   con anillo sutil al acercarse; clic en zona densa abre lista `lista-cerca`), Satélites (tiempo real).
 - Fronteras Natural Earth (`datos/fronteras.json`), nombres de regiones muy cerca, **nombres de país** desde ×2,2 con **ficha de país** al pasar el ratón
-  (`fichaPais` en capas.js; datos en `datos/paises.json`: CZ, ES, CO, US, CN, DE, FR, GB, JP, KR, todos `confirmado:false` → pie «Datos en verificación»).
+  (`fichaPais` en capas.js; datos en `datos/paises.json`: CZ, ES, CO, US, CN, DE, FR, GB, JP, KR, verificados por ChatGPT el 22 Oct → `confirmado:true`, pie «Datos verificados»). Siguientes países por tandas: resto de Europa, América Latina, Asia.
 - **Polos**: 34 estaciones (bases antárticas y estaciones terrenas de satélite) en `datos/puntos-extra.json` (tipo `estacion`), cargadas aparte
   (`cargaEstaciones`, variable `EST`) y visibles con la capa de cables; ficha al pasar el ratón con tipo, programa, desde, personal, cómo se conecta,
   por dónde salen los datos, antenas, enlaces locales, novedades. 5 cables previstos punteados en `datos/cables-previstos.json`
@@ -57,6 +57,17 @@ que me preguntes más si te doy permiso». Avísale cuando algo quede listo, en 
   Svalbard 2022, Tonga 2022/2024, C-Lion 1 y BCS East-West 2024, mar Rojo 2024 y 2025, Costa de Marfil 2024, EASSy 2024, SHEFA-2 2022, Balticconnector 2023).
 - «Mi conexión» (conexion.js): datos del propio visitante, Ver/No ver, planeta en modo solo-tú. Puerta ZERO abre la demo `zero/?orbita=1&entrada=0`.
 - Descargas: retiradas de la web el 22 Oct 2026 a las 15:07 (los instaladores 1.0.46 siguen en la rama `web-idiomas`, carpeta `descargas/`).
+
+## 3b. Cables por potencia (en marcha, 22 Oct 2026, 15:03)
+- El dueño pidió «los que llevan tantos terabytes… en otro color, un ramal diferente por potencia». Hecho en código (rama `web-idiomas`,
+  commit «cables por potencia»): `herramientas/capacidad_cables.py` lee `herramientas/cables-capacidad/<voz>-*.json`
+  (`[{nombre, tbps, pares, fuente}]`, nombre exacto del grupo de `lugares-capas.json`), consenso de dos voces (±30 %) o
+  `cables-capacidad/confirmados.txt`, y escribe `orbita/datos/cables-capacidad.json`. capas.js dibuja tres clases:
+  gigante (≥ 100 Tbit/s: blanco, grueso, con halo), grande (≥ 20: acero más brillante), regional (el resto); la ficha añade
+  «Capacidad: X Tbit/s · N pares de fibra · troncal gigante/grande/regional». Hay voz de Claude (`claude-capacidad-1.json`, 49 cables).
+- Pendiente: ChatGPT estaba respondiendo la tanda de capacidades (409 nombres); guardar como `chatgpt-capacidad-1.json`,
+  pedir lo mismo a Grok (`grok-capacidad-1.json`), ejecutar `python3 herramientas/capacidad_cables.py`, publicar y avisar al dueño.
+  Además: una leyenda pequeña (tres trazos) junto al botón «Cables submarinos» cuando la capa está activa.
 
 ## 4. La agencia (cómo se trabaja con ChatGPT, Grok, Gemini)
 - Pestañas del navegador integrado: ChatGPT (`seed`, conversación «Lista cables submarinos África», cuadro `#prompt-textarea` o `[contenteditable=true]`),
@@ -81,8 +92,7 @@ Conjunto ~50–55 %. Orden de prioridad acordado: (1) centros de datos, (2) punt
 
 ## 6. Pendiente inmediato (por orden)
 1. Recoger las respuestas de Grok y ChatGPT (ver §4), guardar, cruzar, publicar (subir `?v=`).
-2. **Ficha de país**: verificar con la agencia los 10 países de `datos/paises.json` (pedir a ChatGPT y Grok que confirmen o corrijan cada campo;
-   cuando dos voces coincidan, poner `confirmado:true`) y añadir países nuevos por tandas (toda Europa, América Latina, Asia). Campos: `movil`,
+2. **Ficha de país**: los 10 primeros ya están verificados; añadir países nuevos por tandas (Claude escribe, ChatGPT verifica → `confirmado:true`). Campos: `movil`,
    `operadores`, `fija`, `diez` (10G), `troncales`, `intercambio`, `novedades`. Lo que el mapa ya sabe (cables y centros de datos por país) se calcula solo.
 3. Centros de datos: ampliar la consulta Overpass de `herramientas/datos_orbita.py` (`puntos()`) con `building=data_center`, `office=data_center`,
    `industrial=data_center`, `man_made=data_center` (probar en el workflow de GitHub; desde el contenedor no hay acceso a Overpass).
