@@ -14,12 +14,17 @@ orbita/datos/lugares-capas.json:
   de       for every data centre of puntos.json (in order, only type «datos»), the index of its entry in «centros»
   cables   one entry per cable segment, in the order of cables.json: [city A, country A, city B, country B]
            (the nearest city within 80 km of each end; empty when there is none)
+  grupos   whole cables (owner, 22 Oct 2026: «decir de dónde va a dónde va, si lo sabemos con certeza»): the segments of
+           OpenStreetMap that carry the same cable name once its segment label is removed («SEA-ME-WE3 SEG 10.4»,
+           «SEA ME WE3-S10.3», «CANTAT 3 F4», «AC1 Seg. C»…): [name, [[city, country, lon], …]] with every city where
+           one of its segments reaches land, west to east
+  g        for every segment, the index of its whole cable in «grupos» (-1 when it has no name)
   llegadas where cables reach land: [lon, lat, city, country, [indices of the segments that end there]]
            (ends closer than about 5 km are one landing)
 
 Nothing is invented: a name only appears when a real city is near enough. Run it again whenever the data is refreshed.
 """
-import json, math, os, collections
+import json, math, os, re, collections
 
 RAIZ = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'orbita')
 
@@ -57,6 +62,14 @@ class Rejilla:
                     if d < dm:
                         mejor, dm = k, d
         return mejor
+
+def base_cable(n):
+    b = (n or '').strip()
+    b = re.sub(r'[\s\-\u2013]*(?:seg(?:ment(?:o)?)?\.?)\s*[\w.]+$', '', b, flags=re.I)
+    b = re.sub(r'[\s\-]+S\d+(?:\.\d+)?[A-Z]?$', '', b)
+    b = re.sub(r'\s+FC?\d+(?:,\s*F\d+)*$', '', b)
+    b = re.sub(r'\s+-\s+Phase\s*\d+$', '', b, flags=re.I)
+    return b.strip(' -\u2013')
 
 def main():
     ciudades = lee_ciudades()
@@ -100,19 +113,37 @@ def main():
         for k in (ka, kb):
             fila += [ciudades[k][0], ciudades[k][1]] if k is not None else ['', '']
         extremos.append(fila)
+    # whole cables
+    claves_g, grupos_c, g_de = {}, [], []
+    for idx, s in enumerate(cab['cables']):
+        b = base_cable(s.get('n'))
+        k = re.sub(r'[^a-z0-9]', '', b.lower())
+        if not k:
+            g_de.append(-1); continue
+        if k not in claves_g:
+            claves_g[k] = len(grupos_c); grupos_c.append({'nombres': collections.Counter(), 'lugares': {}})
+        gi = claves_g[k]; g_de.append(gi)
+        grupos_c[gi]['nombres'][b] += 1
+        e = extremos[idx]
+        for (lo, la), (c, cc) in zip((s['l'][0], s['l'][-1]), ((e[0], e[1]), (e[2], e[3]))):
+            if c and (c, cc) not in grupos_c[gi]['lugares']:
+                grupos_c[gi]['lugares'][(c, cc)] = lo
+    grupos_out = [[g['nombres'].most_common(1)[0][0], [[c, cc, round(lo, 2)] for (c, cc), lo in sorted(g['lugares'].items(), key=lambda x: x[1])]] for g in grupos_c]
     out = {
         'fuente': 'Centros de datos y cables: OpenStreetMap (ODbL). Ciudades: GeoNames cities15000 (CC BY 4.0).',
         'generado_desde': {'puntos': pts.get('descargado'), 'cables': cab.get('descargado')},
         'centros': centros,
         'de': de,
         'cables': extremos,
+        'grupos': grupos_out,
+        'g': g_de,
         'llegadas': [[round(g['lo'], 3), round(g['la'], 3)] + list((lambda k: [ciudades[k][0], ciudades[k][1]] if k is not None else ['', ''])(rj.cercana(g['la'], g['lo'], 80))) + [g['seg']] for g in llegadas.values()],
     }
     with open(os.path.join(RAIZ, 'datos', 'lugares-capas.json'), 'w', encoding='utf-8') as f:
         json.dump(out, f, ensure_ascii=False, separators=(',', ':'))
     con = sum(1 for x in centros if x[2])
     print(f'{len(centros)} lugares con centros de datos ({con} con ciudad); mayores:', sorted([(x[4], x[2], x[3]) for x in centros], reverse=True)[:8])
-    print('llegadas de cables:', len(out['llegadas']))
+    print('llegadas de cables:', len(out['llegadas']), '· cables enteros:', len(grupos_out), '· ejemplos:', [(g[0], [x[0] for x in g[1]]) for g in grupos_out if len(g[1]) >= 2][:6])
     print('cables con ciudad en algún extremo:', sum(1 for e in extremos if e[0] or e[2]), 'de', len(extremos))
 
 if __name__ == '__main__':

@@ -51,7 +51,7 @@
   // the nearest city to both ends of every cable (OpenStreetMap + GeoNames). A name only when a real city is close.
   let LUG = null, cargaLug = null;
   const lugares = () => cargaLug || (cargaLug = cargaJSON('datos/lugares-capas.json').then((d) => {
-    LUG = { d, centros: d.centros.map((c) => ({ w: P().vec(c[0], c[1]).map((x) => x * 1.002), ciudad: c[2], cc: c[3], n: c[4], ops: c[5] })), de: d.de || [], cables: d.cables,
+    LUG = { d, centros: d.centros.map((c) => ({ w: P().vec(c[0], c[1]).map((x) => x * 1.002), ciudad: c[2], cc: c[3], n: c[4], ops: c[5] })), de: d.de || [], cables: d.cables, grupos: d.grupos || [], g: d.g || [],
       // only the ends that reach a real place: an end in the open sea is a joint between segments, not a landing
       llegadas: (d.llegadas || []).filter((l) => l[2]).map((l) => ({ w: P().vec(l[0], l[1]).map((x) => x * 1.003), ciudad: l[2], cc: l[3], seg: l[4] })) };
     LUG.orden = LUG.centros.map((_, i) => i).sort((a, b) => LUG.centros[b].n - LUG.centros[a].n); // the biggest cities get their label first
@@ -418,7 +418,7 @@
       f.querySelector('span').textContent = lin.join('\n') || T('Sin más datos en OpenStreetMap');
     } else if (tipo === 'llegada') {
       const l = LUG.llegadas[i], nombres = [], sin = { n: 0 };
-      for (const k of l.seg) { const d = capas.sub.d.cables[k]; if (d && d.n) { if (!nombres.includes(d.n)) nombres.push(d.n); } else sin.n++; }
+      for (const k of l.seg) { const gi = LUG.g ? LUG.g[k] : -1, nm = gi >= 0 ? LUG.grupos[gi][0] : ''; if (nm) { if (!nombres.includes(nm)) nombres.push(nm); } else sin.n++; }
       f.querySelector('b').textContent = T('Aquí llegan cables submarinos') + ' · ' + l.ciudad;
       const lista = nombres.slice(0, 5).join(' · ') + (nombres.length > 5 ? ' · +' + (nombres.length - 5) : '');
       f.querySelector('span').textContent = paisNombre(l.cc) + '\n' + (lista ? lista + (sin.n ? ' · ' + num(sin.n) + ' ' + T(sin.n === 1 ? 'sin nombre' : 'sin nombre') : '') : num(sin.n) + ' ' + T(sin.n === 1 ? 'cable sin nombre' : 'cables sin nombre'));
@@ -429,12 +429,16 @@
       f.querySelector('span').textContent = num(c.n) + ' ' + T(c.n === 1 ? 'centro de datos' : 'centros de datos') + (ops ? '\n' + ops : '');
     } else {
       const d = capas.sub.d.cables[i], e = (LUG && LUG.cables && LUG.cables[i]) || ['', '', '', ''];
-      f.querySelector('b').textContent = d.n || T('Cable submarino sin nombre');
-      const lados = [];
-      if (e[0]) lados.push(e[0] + ', ' + paisNombre(e[1]));
-      if (e[2] && (e[2] !== e[0] || e[3] !== e[1])) lados.push(e[2] + ', ' + paisNombre(e[3]));
-      const donde = lados.length === 2 ? T('Llega a tierra en') + ' ' + lados[0] + ' ' + T('y en') + ' ' + lados[1] : lados.length === 1 ? T('Llega a tierra en') + ' ' + lados[0] : T('Sus extremos no están cerca de ninguna ciudad');
-      f.querySelector('span').textContent = donde + (d.o ? '\n' + T('Operador') + ': ' + d.o : '');
+      // the whole cable when its name is known: every place where one of its pieces reaches land, west to east
+      const gi = LUG && LUG.g ? LUG.g[i] : -1, gr = gi >= 0 ? LUG.grupos[gi] : null;
+      let lados;
+      if (gr) lados = gr[1].map(([c, cc]) => c + ' (' + paisNombre(cc) + ')');
+      else { lados = []; if (e[0]) lados.push(e[0] + ' (' + paisNombre(e[1]) + ')'); if (e[2] && (e[2] !== e[0] || e[3] !== e[1])) lados.push(e[2] + ' (' + paisNombre(e[3]) + ')'); }
+      f.querySelector('b').textContent = gr ? gr[0] : (d.n || T('Cable submarino sin nombre'));
+      const donde = lados.length === 2 ? T('Une') + ' ' + lados[0] + ' ' + T('con') + ' ' + lados[1]
+        : lados.length > 2 ? T('Llega a tierra en') + ' ' + num(lados.length) + ' ' + T('lugares') + ':\n' + lados.slice(0, 6).join(' · ') + (lados.length > 6 ? ' · +' + (lados.length - 6) : '')
+        : lados.length === 1 ? T('Llega a tierra en') + ' ' + lados[0] : T('Sus extremos no están cerca de ninguna ciudad');
+      f.querySelector('span').textContent = donde + (d.o ? '\n' + T('Operador') + ': ' + d.o : '') + '\n' + T('Según OpenStreetMap; puede faltar algún tramo.');
     }
     f.hidden = false; colocaFicha(x, y);
   }

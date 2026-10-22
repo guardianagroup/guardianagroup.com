@@ -84,6 +84,8 @@
     'sin nombre': ['unnamed', 'sem nome'], 'cable sin nombre': ['unnamed cable', 'cabo sem nome'], 'cables sin nombre': ['unnamed cables', 'cabos sem nome'],
     'Cable submarino sin nombre': ['Unnamed submarine cable', 'Cabo submarino sem nome'],
     'Llega a tierra en': ['Lands at', 'Chega à terra em'], 'y en': ['and at', 'e em'],
+    'Une': ['Connects', 'Liga'], 'con': ['with', 'com'], 'lugares': ['places', 'lugares'],
+    'Según OpenStreetMap; puede faltar algún tramo.': ['According to OpenStreetMap; some sections may be missing.', 'Segundo o OpenStreetMap; pode faltar algum trecho.'],
     'Sus extremos no están cerca de ninguna ciudad': ['Its ends are not near any city', 'Suas pontas não estão perto de nenhuma cidade'],
     'Satélites': ['Satellites', 'Satélites'],
     'Los cables submarinos por donde viajan los datos entre continentes': ['The submarine cables that carry data between continents', 'Os cabos submarinos por onde os dados viajam entre continentes'],
