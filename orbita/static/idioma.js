@@ -4,7 +4,20 @@
    (guardiana-lang), so a visitor who picked a language there finds it here. Nothing leaves this computer. */
 (() => {
   'use strict';
-  const IDIOMAS = ['es', 'en', 'pt'];
+  // 22 Oct 2026 (owner: «dentro de Órbita tienen que aparecer todos los idiomas»): the 42 of the website.
+  // code · own name · html lang · locale for numbers and dates · right-to-left
+  const IDI = [['es', 'Español', 'es', 'es-CO'], ['en', 'English', 'en', 'en-US'], ['pt', 'Português (Brasil)', 'pt-BR', 'pt-BR'],
+    ['fr', 'Français', 'fr', 'fr-FR'], ['de', 'Deutsch', 'de', 'de-DE'], ['it', 'Italiano', 'it', 'it-IT'], ['nl', 'Nederlands', 'nl', 'nl-NL'],
+    ['sv', 'Svenska', 'sv', 'sv-SE'], ['da', 'Dansk', 'da', 'da-DK'], ['nb', 'Norsk', 'nb', 'nb-NO'], ['fi', 'Suomi', 'fi', 'fi-FI'], ['is', 'Íslenska', 'is', 'is-IS'], ['pl', 'Polski', 'pl', 'pl-PL'],
+    ['uk', 'Українська', 'uk', 'uk-UA'], ['ru', 'Русский', 'ru', 'ru-RU'], ['tr', 'Türkçe', 'tr', 'tr-TR'],
+    ['zh', '简体中文', 'zh-Hans', 'zh-CN'], ['ja', '日本語', 'ja', 'ja-JP'], ['ko', '한국어', 'ko', 'ko-KR'],
+    ['hi', 'हिन्दी', 'hi', 'hi-IN'], ['bn', 'বাংলা', 'bn', 'bn-BD'], ['id', 'Bahasa Indonesia', 'id', 'id-ID'], ['vi', 'Tiếng Việt', 'vi', 'vi-VN'], ['th', 'ไทย', 'th', 'th-TH'],
+    ['ar', 'العربية', 'ar', 'ar-u-nu-latn', 1], ['fa', 'فارسی', 'fa', 'fa-IR', 1], ['he', 'עברית', 'he', 'he-IL', 1], ['ur', 'اردو', 'ur', 'ur-PK', 1],
+    ['zh-tw', '繁體中文', 'zh-Hant', 'zh-TW'], ['cs', 'Čeština', 'cs', 'cs-CZ'], ['ro', 'Română', 'ro', 'ro-RO'], ['hu', 'Magyar', 'hu', 'hu-HU'], ['el', 'Ελληνικά', 'el', 'el-GR'],
+    ['sk', 'Slovenčina', 'sk', 'sk-SK'], ['bg', 'Български', 'bg', 'bg-BG'], ['hr', 'Hrvatski', 'hr', 'hr-HR'], ['ms', 'Bahasa Melayu', 'ms', 'ms-MY'], ['fil', 'Filipino', 'fil', 'fil-PH'],
+    ['sw', 'Kiswahili', 'sw', 'sw-KE'], ['ta', 'தமிழ்', 'ta', 'ta-IN'], ['te', 'తెలుగు', 'te', 'te-IN'], ['pt-pt', 'Português (Portugal)', 'pt-PT', 'pt-PT']];
+  const IDIOMAS = IDI.map((x) => x[0]);
+  const INFO = Object.fromEntries(IDI.map((x) => [x[0], { nombre: x[1], lang: x[2], locale: x[3], rtl: !!x[4] }]));
   // Spanish → [English, Portuguese]. Upper-case versions are found automatically.
   const D = {
     // Órbita
@@ -486,41 +499,87 @@
   }
   function una(s) {
     const k = norm(s); if (!k) return s;
+    if (cur !== 'en' && cur !== 'pt') {
+      const x = Xn[cur] && (Xn[cur].get(k) || Xup[cur].get(k)); if (x) return x;
+      const p0 = pais(k); if (p0) return p0;
+      const e0 = N.get(k) || UP.get(k); if (e0) return e0[0]; // not yet in that language: English, never Spanish
+      return null;
+    }
     const e = N.get(k) || UP.get(k); if (e) return e[ix()];
     const p = pais(k); if (p) return p;
     return null;
   }
-  const PATRONES = [
-    [/^La que más lo intentó hoy: (.+), (\d+) (vez|veces)\.$/, (m) => (cur === 'en' ? 'Tried hardest today: ' + t(m[1]) + ', ' + m[2] + (m[2] === '1' ? ' time.' : ' times.') : 'A que mais tentou hoje: ' + t(m[1]) + ', ' + m[2] + (m[2] === '1' ? ' vez.' : ' vezes.'))],
-    [/^Se subastó (.+)$/, (m) => (cur === 'en' ? 'Auctioned: ' : 'Leiloado: ') + t(m[1])],
-    [/^(\d+) empresas pujaron por mostrarte (.+)$/, (m) => m[1] + (cur === 'en' ? ' companies bid to show you ' : ' empresas deram lances para mostrar a você ') + t(m[2])],
-    [/^(\d+) empresas pujaron$/, (m) => m[1] + (cur === 'en' ? ' companies bid' : ' empresas deram lances')],
-    [/^Ganó (.+): ofreció (.+) por mostrar el anuncio mil veces\.$/, (m) => (cur === 'en' ? 'Won by ' + t(m[1]) + ': offered ' + m[2] + ' to show the ad a thousand times.' : 'Venceu ' + t(m[1]) + ': ofereceu ' + m[2] + ' para mostrar o anúncio mil vezes.')],
-    [/^(\d+) empresas$/, (m) => m[1] + (cur === 'en' ? ' companies' : ' empresas')],
-    [/^(\d+) empresas querían tu visita$/, (m) => m[1] + (cur === 'en' ? ' companies wanted your visit' : ' empresas queriam sua visita')],
-    [/^(\d+) ofertas?$/, (m) => m[1] + (cur === 'en' ? (m[1] === '1' ? ' offer' : ' offers') : (m[1] === '1' ? ' oferta' : ' ofertas'))],
-    [/^(\d+) cortadas? por ZERO$/, (m) => m[1] + (cur === 'en' ? ' cut by ZERO' : (m[1] === '1' ? ' cortada pelo ZERO' : ' cortadas pelo ZERO'))],
-    [/^se decidió en (.+) s$/, (m) => (cur === 'en' ? 'decided in ' : 'decidido em ') + m[1] + ' s'],
-    [/^ganó (.+)$/, (m) => (cur === 'en' ? 'won by ' : 'venceu ') + t(m[1])],
-    [/^Ganó (.+)$/, (m) => (cur === 'en' ? 'Won by ' : 'Venceu ') + t(m[1])],
-    [/^(\d+) en esta web$/, (m) => m[1] + (cur === 'en' ? ' on this site' : ' neste site')],
-    [/^(\d+) en total$/, (m) => m[1] + (cur === 'en' ? ' in total' : ' no total')],
-    [/^Primera (.+)$/, (m) => (cur === 'en' ? 'First ' : 'Primeira ') + m[1]],
-    [/^Última (.+)$/, (m) => (cur === 'en' ? 'Last ' : 'Última ') + m[1]],
-    [/^Abrir (.+)$/, (m) => ({ en: 'Open ', pt: 'Abrir ' })[cur] + t(m[1])],
-    [/^(\d+) cortes?$/, (m) => m[1] + ' ' + (cur === 'en' ? (m[1] === '1' ? 'cut' : 'cuts') : (m[1] === '1' ? 'corte' : 'cortes'))],
-    [/^Cortado: (.+), (.+)\. Ver en el planeta$/, (m) => t('Cortado') + ': ' + t(m[1]) + ', ' + t(m[2]) + '. ' + t('Ver en el planeta')],
-    [/^Dirección de ejemplo: «(.*)» · ZERO abriría (.+)$/, (m) => (cur === 'en' ? 'Example address: «' + m[1] + '» · ZERO would open ' : 'Endereço de exemplo: «' + m[1] + '» · O ZERO abriria ') + m[2]],
-    [/^Tu consulta de ejemplo: «(.*)» · Se buscaría en ([^:]+): (.+)$/, (m) => (cur === 'en' ? 'Your example query: «' + m[1] + '» · It would be searched on ' + m[2] + ': ' : 'Sua consulta de exemplo: «' + m[1] + '» · Seria buscada no ' + m[2] + ': ') + m[3]],
-    [/^del (.+) al (.+)$/, (m) => (cur === 'en' ? 'from ' + m[1] + ' to ' + m[2] : 'de ' + m[1] + ' a ' + m[2])],
-    [/^Generado el (.+) en este equipo\. ZERO no envía este informe a nadie\.$/, (m) => (cur === 'en' ? 'Generated on ' + m[1] + ' on this computer. ZERO sends this report to no one.' : 'Gerado em ' + m[1] + ' neste computador. O ZERO não envia este relatório a ninguém.')],
-    [/^NIVEL (.+)$/, (m) => t('NIVEL') + ' ' + t(m[1])],
-    [/^Este equipo está en (.+?)(\. Cambiar)?$/, (m) => (cur === 'en' ? 'This computer is in ' + m[1] + (m[2] ? '. Change' : '') : 'Este computador está em ' + m[1] + (m[2] ? '. Mudar' : ''))],
-    [/^Parece que este equipo está ahora en (.+)$/, (m) => (cur === 'en' ? 'This computer seems to be in ' + m[1] + ' now' : 'Parece que este computador está agora em ' + m[1])],
-    [/^Tu punto está a (\d+) km de (.+), la población más cercana que conoce el programa\. Si tu municipio es otro, elígelo\.$/, (m) => (cur === 'en' ? 'Your point is ' + m[1] + ' km from ' + m[2] + ', the nearest town the program knows. If your town is another, choose it.' : 'Seu ponto está a ' + m[1] + ' km de ' + m[2] + ', a localidade mais próxima que o programa conhece. Se o seu município for outro, escolha-o.')],
-    [/^precisión (.+)$/, (m) => (cur === 'en' ? 'accuracy ' : 'precisão ') + m[1]],
-    [/^(Medido con la ubicación de tu sistema(?: \(precisión ([^)]+)\))?|Elegido por ti) y confirmado por ti\. Se guarda solo en este equipo\.$/, (m) => (m[1].startsWith('Elegido') ? t('Elegido por ti') : (cur === 'en' ? 'Measured with your system\'s location' : 'Medido com a localização do seu sistema') + (m[2] ? (cur === 'en' ? ' (accuracy ' : ' (precisão ') + m[2] + ')' : '')) + (cur === 'en' ? ' and confirmed by you. It is stored only on this computer.' : ' e confirmado por você. Fica guardado só neste computador.')],
+  // Sentences with a number or a name inside. Each one is a Spanish pattern and a template per language:
+  // {1} {2} are the captured pieces (those listed in «tr» are translated first), {2?vez|veces} picks by the number,
+  // [ … {2} … ] is kept only when that piece exists, {t:Cortado} inserts a translated key. The other 39 languages
+  // bring their templates in their own file, under the same ids.
+  const PAT = [
+    { id: 'intento', re: /^La que más lo intentó hoy: (.+), (\d+) (vez|veces)\.$/, tr: [1], es: 'La que más lo intentó hoy: {1}, {2} {2?vez|veces}.', en: 'Tried hardest today: {1}, {2} {2?time|times}.', pt: 'A que mais tentou hoje: {1}, {2} {2?vez|vezes}.' },
+    { id: 'subasto', re: /^Se subastó (.+)$/, tr: [1], es: 'Se subastó {1}', en: 'Auctioned: {1}', pt: 'Leiloado: {1}' },
+    { id: 'pujaronPor', re: /^(\d+) empresas pujaron por mostrarte (.+)$/, tr: [2], es: '{1} empresas pujaron por mostrarte {2}', en: '{1} companies bid to show you {2}', pt: '{1} empresas deram lances para mostrar a você {2}' },
+    { id: 'pujaron', re: /^(\d+) empresas pujaron$/, es: '{1} empresas pujaron', en: '{1} companies bid', pt: '{1} empresas deram lances' },
+    { id: 'ganoOfrecio', re: /^Ganó (.+): ofreció (.+) por mostrar el anuncio mil veces\.$/, tr: [1], es: 'Ganó {1}: ofreció {2} por mostrar el anuncio mil veces.', en: 'Won by {1}: offered {2} to show the ad a thousand times.', pt: 'Venceu {1}: ofereceu {2} para mostrar o anúncio mil vezes.' },
+    { id: 'empresas', re: /^(\d+) empresas$/, es: '{1} empresas', en: '{1} companies', pt: '{1} empresas' },
+    { id: 'querian', re: /^(\d+) empresas querían tu visita$/, es: '{1} empresas querían tu visita', en: '{1} companies wanted your visit', pt: '{1} empresas queriam sua visita' },
+    { id: 'ofertas', re: /^(\d+) ofertas?$/, es: '{1} {1?oferta|ofertas}', en: '{1} {1?offer|offers}', pt: '{1} {1?oferta|ofertas}' },
+    { id: 'cortadasZero', re: /^(\d+) cortadas? por ZERO$/, es: '{1} {1?cortada|cortadas} por ZERO', en: '{1} cut by ZERO', pt: '{1} {1?cortada|cortadas} pelo ZERO' },
+    { id: 'decidio', re: /^se decidió en (.+) s$/, es: 'se decidió en {1} s', en: 'decided in {1} s', pt: 'decidido em {1} s' },
+    { id: 'gano', re: /^ganó (.+)$/, tr: [1], es: 'ganó {1}', en: 'won by {1}', pt: 'venceu {1}' },
+    { id: 'Gano', re: /^Ganó (.+)$/, tr: [1], es: 'Ganó {1}', en: 'Won by {1}', pt: 'Venceu {1}' },
+    { id: 'enEstaWeb', re: /^(\d+) en esta web$/, es: '{1} en esta web', en: '{1} on this site', pt: '{1} neste site' },
+    { id: 'enTotal', re: /^(\d+) en total$/, es: '{1} en total', en: '{1} in total', pt: '{1} no total' },
+    { id: 'primera', re: /^Primera (.+)$/, es: 'Primera {1}', en: 'First {1}', pt: 'Primeira {1}' },
+    { id: 'ultima', re: /^Última (.+)$/, es: 'Última {1}', en: 'Last {1}', pt: 'Última {1}' },
+    { id: 'abrir', re: /^Abrir (.+)$/, tr: [1], es: 'Abrir {1}', en: 'Open {1}', pt: 'Abrir {1}' },
+    { id: 'cortes', re: /^(\d+) cortes?$/, es: '{1} {1?corte|cortes}', en: '{1} {1?cut|cuts}', pt: '{1} {1?corte|cortes}' },
+    { id: 'cortadoVer', re: /^Cortado: (.+), (.+)\. Ver en el planeta$/, tr: [1, 2], es: '{t:Cortado}: {1}, {2}. {t:Ver en el planeta}', en: '{t:Cortado}: {1}, {2}. {t:Ver en el planeta}', pt: '{t:Cortado}: {1}, {2}. {t:Ver en el planeta}' },
+    { id: 'direccionEjemplo', re: /^Dirección de ejemplo: «(.*)» · ZERO abriría (.+)$/, es: 'Dirección de ejemplo: «{1}» · ZERO abriría {2}', en: 'Example address: «{1}» · ZERO would open {2}', pt: 'Endereço de exemplo: «{1}» · O ZERO abriria {2}' },
+    { id: 'consultaEjemplo', re: /^Tu consulta de ejemplo: «(.*)» · Se buscaría en ([^:]+): (.+)$/, es: 'Tu consulta de ejemplo: «{1}» · Se buscaría en {2}: {3}', en: 'Your example query: «{1}» · It would be searched on {2}: {3}', pt: 'Sua consulta de exemplo: «{1}» · Seria buscada no {2}: {3}' },
+    { id: 'delAl', re: /^del (.+) al (.+)$/, es: 'del {1} al {2}', en: 'from {1} to {2}', pt: 'de {1} a {2}' },
+    { id: 'generado', re: /^Generado el (.+) en este equipo\. ZERO no envía este informe a nadie\.$/, es: 'Generado el {1} en este equipo. ZERO no envía este informe a nadie.', en: 'Generated on {1} on this computer. ZERO sends this report to no one.', pt: 'Gerado em {1} neste computador. O ZERO não envia este relatório a ninguém.' },
+    { id: 'nivel', re: /^NIVEL (.+)$/, tr: [1], es: '{t:NIVEL} {1}', en: '{t:NIVEL} {1}', pt: '{t:NIVEL} {1}' },
+    { id: 'equipoEn', re: /^Este equipo está en (.+?)(\. Cambiar)?$/, es: 'Este equipo está en {1}[. Cambiar{2}]', en: 'This computer is in {1}[. Change{2}]', pt: 'Este computador está em {1}[. Mudar{2}]' },
+    { id: 'pareceEn', re: /^Parece que este equipo está ahora en (.+)$/, es: 'Parece que este equipo está ahora en {1}', en: 'This computer seems to be in {1} now', pt: 'Parece que este computador está agora em {1}' },
+    { id: 'puntoKm', re: /^Tu punto está a (\d+) km de (.+), la población más cercana que conoce el programa\. Si tu municipio es otro, elígelo\.$/, es: 'Tu punto está a {1} km de {2}, la población más cercana que conoce el programa. Si tu municipio es otro, elígelo.', en: 'Your point is {1} km from {2}, the nearest town the program knows. If your town is another, choose it.', pt: 'Seu ponto está a {1} km de {2}, a localidade mais próxima que o programa conhece. Se o seu município for outro, escolha-o.' },
+    { id: 'precision', re: /^precisión (.+)$/, es: 'precisión {1}', en: 'accuracy {1}', pt: 'precisão {1}' },
+    { id: 'medidoConfirmado', re: /^Medido con la ubicación de tu sistema(?: \(precisión ([^)]+)\))? y confirmado por ti\. Se guarda solo en este equipo\.$/, es: 'Medido con la ubicación de tu sistema[ (precisión {1})] y confirmado por ti. Se guarda solo en este equipo.', en: "Measured with your system's location[ (accuracy {1})] and confirmed by you. It is stored only on this computer.", pt: 'Medido com a localização do seu sistema[ (precisão {1})] e confirmado por você. Fica guardado só neste computador.' },
+    { id: 'elegidoConfirmado', re: /^Elegido por ti y confirmado por ti\. Se guarda solo en este equipo\.$/, es: '{t:Elegido por ti} y confirmado por ti. Se guarda solo en este equipo.', en: '{t:Elegido por ti} and confirmed by you. It is stored only on this computer.', pt: '{t:Elegido por ti} e confirmado por você. Fica guardado só neste computador.' },
   ];
+  // Fill a template with the captured pieces.
+  function plantilla(tpl, m, tr) {
+    const piezas = {}; for (let i = 1; i < m.length; i++) piezas[i] = m[i];
+    if (tr) for (const i of tr) if (piezas[i] != null) piezas[i] = t(piezas[i]);
+    let out = tpl.replace(/\[([^\[\]]*)\]/g, (_, seg) => { const ids = [...seg.matchAll(/\{(\d+)\}/g)].map((x) => +x[1]); return ids.length && ids.every((i) => piezas[i] != null && piezas[i] !== '') ? seg : ''; });
+    out = out.replace(/\{(\d+)\?([^|}]*)\|([^}]*)\}/g, (_, i, uno, varios) => (m[i] === '1' ? uno : varios));
+    out = out.replace(/\{t:([^}]+)\}/g, (_, k) => t(k));
+    out = out.replace(/\{(\d+)\}/g, (_, i) => (piezas[i] != null ? piezas[i] : ''));
+    return out;
+  }
+  function porPatron(k) {
+    for (const p of PAT) {
+      const m = k.match(p.re); if (!m) continue;
+      const tpl = cur === 'en' || cur === 'pt' ? p[cur] : (X[cur] && X[cur].p && X[cur].p[p.id]) || p.en;
+      // {2} in «equipoEn» stands for the optional tail: present when captured, empty otherwise
+      if (p.id === 'equipoEn') m[2] = m[2] ? '' : undefined;
+      return plantilla(tpl, m, p.tr);
+    }
+    return null;
+  }
+  // The other languages: one small file each (static/i18n/<code>.json), with «t» (Spanish → that language),
+  // «p» (the templates above, by id), «rtl» and «locale». Downloaded only by its readers.
+  const X = {}, Xn = {}, Xup = {};
+  const BASE = (() => { try { const u = document.currentScript && document.currentScript.src; return u ? u.replace(/[^\/]*$/, '') : 'static/'; } catch (_) { return 'static/'; } })();
+  async function cargaIdioma(l) {
+    if (X[l] || l === 'es' || l === 'en' || l === 'pt') return X[l];
+    try {
+      const r = await fetch(BASE + 'i18n/' + l + '.json', { cache: 'force-cache' });
+      if (!r.ok) throw new Error(r.status);
+      const d = await r.json();
+      X[l] = d; Xn[l] = new Map(); Xup[l] = new Map();
+      for (const k in d.t || {}) { const nk = norm(k); Xn[l].set(nk, d.t[k]); try { Xup[l].set(nk.toLocaleUpperCase('es'), String(d.t[k]).toLocaleUpperCase(l)); } catch (_) { Xup[l].set(nk.toLocaleUpperCase('es'), String(d.t[k]).toUpperCase()); } }
+      return d;
+    } catch (e) { X[l] = { error: true, t: {}, p: {} }; return X[l]; }
+  }
   // Translate one string: whole, by pattern, or piece by piece around « · » and « → ».
   function t(s) {
     if (cur === 'es' || s == null) return s;
@@ -528,10 +587,10 @@
     const lead = s.match(/^\s*/)[0], tail = s.match(/\s*$/)[0], k = norm(s);
     if (!k) return s;
     let r = una(k);
-    if (r == null) for (const [re, f] of PATRONES) { const m = k.match(re); if (m) { r = f(m); break; } }
+    if (r == null) r = porPatron(k);
     if (r == null && /( · | → |\s\/\s)/.test(k)) {
       let algo = false;
-      r = k.split(/( · | → | \/ )/).map((p, i) => { if (i % 2) return p; const x = una(p); if (x != null) { algo = true; return x; } const y = PATRONES.find(([re]) => re.test(p)); if (y) { algo = true; return y[1](p.match(y[0])); } return p; }).join('');
+      r = k.split(/( · | → | \/ )/).map((p, i) => { if (i % 2) return p; const x = una(p); if (x != null) { algo = true; return x; } const y = porPatron(p); if (y != null) { algo = true; return y; } return p; }).join('');
       if (!algo) r = null;
     }
     if (r == null) { const m = k.match(/^([●◎↙⛶✳↻♪]\s*)(.+)$/); if (m) { const x = t(m[2]); if (x !== m[2]) r = m[1] + x; } }
@@ -569,8 +628,10 @@
     if (titulo0 == null || (document.title !== titulo0.v)) titulo0 = { es: document.title };
     titulo0.v = t(titulo0.es); if (document.title !== titulo0.v) document.title = titulo0.v;
     if (document.body) recorre(document.body);
-    document.documentElement.lang = cur;
-    document.querySelectorAll('.idiomas button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.l === cur)));
+    document.documentElement.lang = (INFO[cur] && INFO[cur].lang) || cur;
+    document.documentElement.dir = INFO[cur] && INFO[cur].rtl ? 'rtl' : 'ltr';
+    document.querySelectorAll('.idiomas button[data-l]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.l === cur)));
+    document.querySelectorAll('.idiomas .idioma-actual').forEach((b) => { b.textContent = cur.toUpperCase().replace('-', '·'); b.setAttribute('aria-label', (INFO[cur] && INFO[cur].nombre) || cur); });
   }
   const obs = new MutationObserver((ms) => {
     if (cur === 'es') return;
@@ -583,6 +644,7 @@
 
   function pon(l, recuerda) {
     if (!IDIOMAS.includes(l)) l = 'es';
+    if (l !== 'es' && l !== 'en' && l !== 'pt' && !X[l]) { cargaIdioma(l).then(() => pon(l, recuerda)); return; }
     const antes = cur; cur = l;
     if (recuerda) { try { localStorage.setItem('guardiana-lang', l); localStorage.setItem('guardiana-lang-chosen', '1'); } catch (_) {} }
     if (antes !== l || recuerda !== undefined) todo();
@@ -596,17 +658,36 @@
       try { if (window.parent !== window && window.parent.GuardianaIdioma) return window.parent.GuardianaIdioma.lang; } catch (_) {} // a parent from another site cannot be read
       const st = localStorage.getItem('guardiana-lang'), ch = localStorage.getItem('guardiana-lang-chosen');
       if (ch && IDIOMAS.includes(st)) return st;
-      const nav = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']).map((x) => String(x).slice(0, 2).toLowerCase()).find((x) => IDIOMAS.includes(x));
+      const navs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']).map((x) => String(x).toLowerCase());
+      const nav = navs.map((x) => (x.startsWith('zh') && /tw|hk|hant/.test(x) ? 'zh-tw' : x === 'pt-pt' ? 'pt-pt' : x.slice(0, 2))).find((x) => IDIOMAS.includes(x));
       return nav || 'en';
     } catch (_) { return 'es'; }
   }
-  window.GuardianaIdioma = { t, pon: (l) => pon(l), get lang() { return cur; }, get locale() { return cur === 'en' ? 'en-GB' : cur === 'pt' ? 'pt-BR' : 'es-ES'; } };
+  window.GuardianaIdioma = { t, pon: (l) => pon(l), get lang() { return cur; }, get locale() { return cur === 'en' ? 'en-GB' : cur === 'pt' ? 'pt-BR' : cur === 'es' ? 'es-ES' : (INFO[cur] && INFO[cur].locale) || cur; }, get idiomas() { return IDI; } };
   addEventListener('storage', (e) => { if (e.key === 'guardiana-lang' && IDIOMAS.includes(e.newValue) && e.newValue !== cur) pon(e.newValue); });
+  // The selector: one small button with the current code; it unfolds a list of the 42 languages, each in its own
+  // name, three columns on a computer and one on a phone. Esc or a click outside folds it.
+  function selector() {
+    document.querySelectorAll('.idiomas').forEach((caja) => {
+      if (caja.dataset.listo) return; caja.dataset.listo = '1'; caja.setAttribute('translate', 'no');
+      caja.innerHTML = '';
+      const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'idioma-actual'; btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false');
+      const menu = document.createElement('div'); menu.className = 'idioma-menu'; menu.setAttribute('role', 'listbox'); menu.hidden = true;
+      for (const [c, n] of IDI) { const b = document.createElement('button'); b.type = 'button'; b.dataset.l = c; b.setAttribute('role', 'option'); b.lang = INFO[c].lang; b.innerHTML = '<span class="cod">' + c.toUpperCase().replace('-', '·') + '</span><span class="nom">' + n + '</span>'; b.addEventListener('click', () => { pon(c, true); cierra(); }); menu.appendChild(b); }
+      const cierra = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+      btn.addEventListener('click', (e) => { e.stopPropagation(); const abre = menu.hidden; menu.hidden = !abre; btn.setAttribute('aria-expanded', String(abre)); if (abre) { const act = menu.querySelector('[aria-pressed="true"]'); if (act) act.focus(); } });
+      document.addEventListener('click', (e) => { if (!caja.contains(e.target)) cierra(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { cierra(); btn.focus(); } });
+      caja.appendChild(btn); caja.appendChild(menu);
+    });
+  }
   const arranca = () => {
-    cur = inicial(); todo();
+    selector();
+    cur = inicial();
+    if (cur !== 'es' && cur !== 'en' && cur !== 'pt') { const l = cur; cur = 'es'; cargaIdioma(l).then(() => { cur = l; todo(); }); }
+    todo();
     obs.observe(document.documentElement, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ATR });
     new MutationObserver(() => { if (cur !== 'es' && document.title !== (titulo0 && titulo0.v)) todo(); }).observe(document.querySelector('title') || document.head, { childList: true, characterData: true, subtree: true });
-    document.querySelectorAll('.idiomas button').forEach((b) => b.addEventListener('click', () => pon(b.dataset.l, true)));
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arranca); else arranca();
 })();
