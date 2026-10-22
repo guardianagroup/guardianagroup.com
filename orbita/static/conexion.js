@@ -136,9 +136,22 @@
     const p4 = document.createElement('p'); p4.className = 'nota'; p4.textContent = T('Qué programas hablan con internet, con quién y cuánto, y la ruta real de tus datos: eso se mide dentro del equipo, con ZERO. Aquí no se inventa.'); s4.append(p4);
     cuerpo.append(s4);
   }
+  // what is drawn on the empty planet while the card is open: only the visitor's own marks
+  function pintaMio(cx, p, G, t) {
+    if (!fuera || fuera.error || !Number.isFinite(fuera.lat)) return;
+    const w = p.vec(fuera.lon, fuera.lat).map((c) => c * 1.003), v = p.aVista(w); if (v[2] <= 0.02) return;
+    const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], pulso = 0.5 + 0.5 * Math.sin((t || 0) / 450);
+    cx.save(); cx.globalCompositeOperation = 'source-over';
+    cx.strokeStyle = 'rgba(156,195,228,' + (0.25 + 0.35 * pulso) + ')'; cx.lineWidth = 1.2; cx.beginPath(); cx.arc(x, y, 9 + 6 * pulso, 0, 7); cx.stroke();
+    cx.fillStyle = '#9CC3E4'; cx.beginPath(); cx.arc(x, y, 3.2, 0, 7); cx.fill();
+    cx.font = '500 10.5px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle'; cx.fillStyle = 'rgba(232,236,241,.92)';
+    cx.fillText((T('Cómo te ve internet') + ' · ' + (fuera.ciudad || '')).toUpperCase(), x + 12, y);
+    cx.restore();
+  }
   function abre(si) {
     abierto = si; panel.hidden = !si; boton.setAttribute('aria-pressed', si ? 'true' : 'false');
     guarda(si ? 'ver' : 'no');
+    if (window.OrbitaCapas && window.OrbitaCapas.soloTu) window.OrbitaCapas.soloTu(si, pintaMio);
     if (si) { pinta(); if (ping == null) latencia().then((ms) => { ping = ms; if (abierto) pinta(); }); }
   }
   function monta() {

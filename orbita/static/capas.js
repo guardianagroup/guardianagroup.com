@@ -302,6 +302,9 @@
     const p = P(); if (!p) return;
     const cx = p.ctx, G = p.geo;
     pintaFronteras(cx, p, G);
+    // «Mi conexión» (owner, 22 Oct 2026): while the visitor looks at their own data the planet shows only that —
+    // no cables, no satellites, nothing that is not theirs — so there is no doubt about what is whose.
+    if (soloTu) { cx.globalCompositeOperation = 'lighter'; if (typeof soloTuPinta === 'function') soloTuPinta(cx, p, G, t); return; }
     cx.globalCompositeOperation = 'lighter';
     if (estado.tierra && capas.tierra && capas.tierra.lineas) pintaLineas(cx, p, G, capas.tierra.lineas, `rgba(${ACERO},.30)`, 0.7);
     if (estado.fibra && FT && FT.lineas) { pintaFibra(cx, p, G); pintaLuz(cx, p, G, FT.lineas, t); }
@@ -1024,7 +1027,7 @@
     fibraMarcada = -1;
     const f = ficha(); if (f && !f.hidden) f.hidden = true;
   }
-  addEventListener('click', (e) => { if (!e.target.closest('header, #puertas, #directo, #lugar, #seccion, .zoom')) mira(e.clientX, e.clientY); });
+  addEventListener('click', (e) => { if (!soloTu && !e.target.closest('header, #puertas, #directo, #lugar, #seccion, .zoom, .conexion')) mira(e.clientX, e.clientY); });
   addEventListener('pointermove', (e) => {
     if (pendiente) { pendiente.x = e.clientX; pendiente.y = e.clientY; return; }
     pendiente = { x: e.clientX, y: e.clientY };
@@ -1099,6 +1102,8 @@
     pintaNota();
     addEventListener('guardiana-idioma', pintaNota);
   }
-  window.OrbitaCapas = { pinta, pon, get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; } };
+  let soloTu = false, soloTuPinta = null;
+  function ponSoloTu(on, dibuja) { soloTu = !!on; soloTuPinta = on ? dibuja || null : null; document.body.classList.toggle('solo-tu', soloTu); if (soloTu) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; } pintaNota(); pintaVista(); }
+  window.OrbitaCapas = { pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arranca); else arranca();
 })();
