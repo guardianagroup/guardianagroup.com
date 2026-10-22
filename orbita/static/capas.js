@@ -131,14 +131,14 @@
       if (!window.satellite) await cargaScript('static/vendor/satellite.min.js');
       const d = await cargaJSON('datos/satelites.json');
       const c = d.campos, ix = (k) => c.indexOf(k);
-      const rec = [], g = [], nom = [], nor = [];
+      const rec = [], g = [], nom = [], nor = [], fila = [];
       for (const f of d.sat) {
         const omm = { NORAD_CAT_ID: f[ix('norad')] };
-        for (const k of c.slice(3)) omm[k] = f[ix(k)];
-        try { const r = window.satellite.json2satrec(omm); if (r && !r.error) { rec.push(r); g.push(f[0]); nom.push(f[1]); nor.push(+f[ix('norad')] || 0); } } catch (_) {}
+        for (const k of c.slice(3)) if (/^[A-Z_]+$/.test(k)) omm[k] = f[ix(k)];
+        try { const r = window.satellite.json2satrec(omm); if (r && !r.error) { rec.push(r); g.push(f[0]); nom.push(f[1]); nor.push(+f[ix('norad')] || 0); fila.push(f); } } catch (_) {}
       }
       const N = rec.length;
-      S = { d, rec, g: Uint8Array.from(g), nom, N, pos: new Float64Array(N * 3), vel: new Float64Array(N * 3), t: new Float64Array(N), ok: new Uint8Array(N),
+      S = { d, rec, g: Uint8Array.from(g), nom, fila, ix, N, pos: new Float64Array(N * 3), vel: new Float64Array(N * 3), t: new Float64Array(N), ok: new Uint8Array(N),
             sx: new Float32Array(N), sy: new Float32Array(N), sombra: new Uint8Array(N), dib: new Uint8Array(N), norad: Int32Array.from(nor), nSel: 0, cuentaOrb: { baja: 0, media: 0, geo: 0 }, vis: new Uint8Array(N), arriba: new Uint8Array(N), cursor: 0, nArriba: 0, tArriba: 0 };
       for (let i = 0; i < N; i++) propaga(i, Date.now());
     } catch (e) { S = { error: true }; }
@@ -225,7 +225,7 @@
   // The wings lie across the direction of travel; geostationary wings point north–south, as they do in orbit.
   // Brightness follows the real Sun: dim in the Earth's shadow, brightest when the Sun lights the face we see.
   const ANG = 24;                                   // one pre-drawn sprite every 15°
-  const FORMA = [{ largo: 5.6, kind: 0 }, { largo: 7.2, kind: 1 }, { largo: 10, kind: 2 }];
+  const FORMA = [{ largo: 7, kind: 0 }, { largo: 8.6, kind: 1 }, { largo: 12, kind: 2 }]; // owner, 22 Oct 2026: «mayor resolución y contraste»
   let SPR = null, sprDPR = 0;
   function dibujaForma(g, kind, L, s) {
     // L: wing span in device pixels; drawn around (0,0) with the wings along the x axis
@@ -268,20 +268,23 @@
   function sprite(kind, z, ang) {
     const dpr = (P().geo.DPR) || 1;
     if (!SPR || sprDPR !== dpr) { SPR = new Map(); sprDPR = dpr; }
-    const zb = z < 1.35 ? 0 : z < 1.75 ? 1 : z < 2.4 ? 2 : z < 3.4 ? 3 : 4;
+    const zb = z < 1.35 ? 0 : z < 1.75 ? 1 : z < 2.4 ? 2 : z < 3.4 ? 3 : z < 4.4 ? 4 : 5;
     const key = kind * 1000 + zb * 100 + ang;
     let sp = SPR.get(key);
     if (sp) return sp;
-    const css = FORMA[kind].largo * [1, 1.3, 1.65, 2.05, 2.5][zb];          // wing span in CSS pixels at this zoom
-    const halo = css * 0.5 + 3, d = Math.ceil(2 * halo), px = Math.ceil(d * dpr);
+    const css = FORMA[kind].largo * [1, 1.3, 1.65, 2.05, 2.6, 3.1][zb];          // wing span in CSS pixels at this zoom
+    // drawn at twice the screen's own resolution and scaled down when painted: clean edges at any zoom
+    const halo = css * 0.5 + 3, d = Math.ceil(2 * halo), px = Math.ceil(d * dpr * 2);
     const c = document.createElement('canvas'); c.width = c.height = px;
     const g = c.getContext('2d'), m = px / 2;
     // a soft glow first, so a satellite still reads as light against the night side of the planet
     const gr = g.createRadialGradient(m, m, 0, m, m, m);
-    gr.addColorStop(0, `rgba(${kind === 2 ? BLANCO : ACERO},.42)`); gr.addColorStop(0.35, `rgba(${ACERO},.12)`); gr.addColorStop(1, `rgba(${ACERO},0)`);
+    gr.addColorStop(0, `rgba(${kind === 2 ? BLANCO : ACERO},.55)`); gr.addColorStop(0.35, `rgba(${ACERO},.16)`); gr.addColorStop(1, `rgba(${ACERO},0)`);
     g.fillStyle = gr; g.fillRect(0, 0, px, px);
     g.translate(m, m); g.rotate(ang * 2 * Math.PI / ANG);
-    dibujaForma(g, kind, css * dpr, dpr);
+    // a dark rim under the shape: it stands out on the bright day side as well as on the night
+    g.save(); g.shadowColor = 'rgba(6,8,12,.95)'; g.shadowBlur = 2.2 * dpr * 2; dibujaForma(g, kind, css * dpr * 2, dpr * 2); g.restore();
+    dibujaForma(g, kind, css * dpr * 2, dpr * 2);
     sp = { img: c, d };
     SPR.set(key, sp);
     return sp;
@@ -392,12 +395,12 @@
     if (cambia) { pintaNota(); pintaVista(); }
     if (marcado >= 0 && S.vis[marcado] && S.dib[marcado]) pintaEstela(cx, p, G, marcado, ahora);
     // in sunlight, brighter the more of its lit face we see; in the Earth's shadow, only a faint shape
-    const luz = 0.62 + 0.38 * fase;
+    const luz = 0.8 + 0.2 * fase;
     for (let c = 0; c < 3; c++) {
       for (const j of capasPinta[c]) {
         const sombra = j < 0, i = sombra ? -1 - j : j;
         const sp = sprite(c, z, S.ang[i]), h = sp.d / 2;
-        cx.globalAlpha = sombra ? 0.22 : luz;
+        cx.globalAlpha = sombra ? 0.4 : luz;
         cx.drawImage(sp.img, S.sx[i] - h, S.sy[i] - h, sp.d, sp.d);
       }
     }
@@ -464,17 +467,103 @@
     for (let i = 0; i < S.N; i++) { if (!S.vis[i] || !S.dib[i]) continue; const dx = S.sx[i] - x, dy = S.sy[i] - y, q = dx * dx + dy * dy; if (q < d2) { d2 = q; mejor = i; } }
     return mejor;
   }
+  // ---------- everything real we know about one satellite (owner, 22 Oct 2026: «más información de cada uno,
+  // siempre real») ----------
+  // Who runs each fleet and what it is for: the operators' own descriptions of their service.
+  const FLOTA = {
+    starlink: ['SpaceX', 'US', 'Internet por satélite para hogares, barcos y aviones'],
+    oneweb: ['Eutelsat OneWeb', 'GB', 'Internet por satélite para empresas, gobiernos y aviones'],
+    kuiper: ['Amazon (Proyecto Kuiper)', 'US', 'Internet por satélite, en despliegue'],
+    qianfan: ['Shanghai Spacecom Satellite Technology', 'CN', 'Internet por satélite, en despliegue'],
+    hulianwang: ['China Satellite Network Group', 'CN', 'Red estatal china de internet por satélite, en despliegue'],
+    'iridium-NEXT': ['Iridium Communications', 'US', 'Teléfonos y datos por satélite en todo el planeta, también en los polos'],
+    globalstar: ['Globalstar', 'US', 'Teléfonos satelitales y mensajes de emergencia por satélite'],
+    orbcomm: ['ORBCOMM', 'US', 'Datos de máquinas: seguimiento de barcos, camiones y contenedores'],
+    ses: ['SES', 'LU', 'Televisión, internet y comunicaciones'],
+    intelsat: ['Intelsat (grupo SES)', 'LU', 'Televisión, internet y comunicaciones'],
+    eutelsat: ['Eutelsat', 'FR', 'Televisión e internet'],
+    telesat: ['Telesat', 'CA', 'Televisión y comunicaciones'],
+  };
+  // CelesTrak's launch-site codes (SATCAT) for the sites these fleets fly from
+  const BASES = {
+    AFETR: ['Cabo Cañaveral', 'US'], AFWTR: ['Vandenberg', 'US'], TYMSC: ['Baikonur', 'KZ'], PKMTR: ['Plesetsk', 'RU'],
+    VOSTO: ['Vostochny', 'RU'], JSC: ['Jiuquan', 'CN'], TSC: ['Taiyuan', 'CN'], XSC: ['Xichang', 'CN'], WSC: ['Wenchang', 'CN'],
+    FRGUI: ['Kourou', 'GF'], SRILR: ['Sriharikota', 'IN'], RLLB: ['Mahia', 'NZ'], YSLA: ['mar Amarillo', 'CN'],
+  };
+  const locale = () => (window.GuardianaIdioma && window.GuardianaIdioma.locale) || 'es-ES';
+  const fechaTxt = (ms, conHora) => new Date(ms).toLocaleString(locale(), conHora ? { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' } : { day: 'numeric', month: 'long', year: 'numeric' });
+  // the cities (GeoNames, already on the site) to say what a satellite flies over right now
+  let CIU = null, cargaCiu = null;
+  const ciudades = () => cargaCiu || (cargaCiu = fetch((document.documentElement.dataset.tierra || '/static/tierra/') + 'ciudades.tsv').then((r) => r.text()).then((t) => {
+    const v = [];
+    for (const l of t.split('\n')) { if (!l || l[0] === '#') continue; const c = l.split('\t'); const la = +c[3], lo = +c[4]; if (isFinite(la)) v.push([c[0], c[1], la * RAD, lo * RAD]); }
+    CIU = v; return v;
+  }).catch(() => { CIU = []; return CIU; }));
+  function bajo(lat, lon) { // nearest city with 15,000 people or more, if one is within 400 km
+    if (!CIU || !CIU.length) return null;
+    let mejor = null, dm = 1e9; const cl = Math.cos(lat);
+    for (const c of CIU) { const dla = c[2] - lat, dlo = (c[3] - lon) * cl; const d = dla * dla + dlo * dlo; if (d < dm) { dm = d; mejor = c; } }
+    const km = Math.sqrt(dm) * 6371;
+    return km < 400 ? { n: mejor[0], cc: mejor[1], km } : null;
+  }
+  // where a satellite is in the Earth-fixed frame at a given moment (SGP4)
+  function fijo(i, ms) {
+    const r = S.rec[i]; let pv = null;
+    try { pv = window.satellite.sgp4(r, (ms / 86400000 + 2440587.5 - r.jdsatepoch) * 1440); } catch (_) {}
+    if (!pv || !pv.position || typeof pv.position === 'boolean' || !isFinite(pv.position.x)) return null;
+    const gm = window.satellite.gstime(new Date(ms)), cg = Math.cos(gm), sg = Math.sin(gm), X = pv.position.x, Y = pv.position.y;
+    return { x: X * cg + Y * sg, y: -X * sg + Y * cg, z: pv.position.z, v: Math.hypot(pv.velocity.x, pv.velocity.y, pv.velocity.z) };
+  }
+  function desde(L, p) { // elevation over the horizon and distance, seen from the visitor's place
+    const a = L.lat * RAD, b = L.lon * RAD, ux = Math.cos(a) * Math.cos(b), uy = Math.cos(a) * Math.sin(b), uz = Math.sin(a);
+    const dx = p.x - ux * RE, dy = p.y - uy * RE, dz = p.z - uz * RE, d = Math.hypot(dx, dy, dz);
+    return { el: Math.asin((dx * ux + dy * uy + dz * uz) / d) / RAD, d };
+  }
+  const PASOS = new Map(); // next time each satellite climbs over 25° in the visitor's sky (24 h ahead, every 20 s)
+  function proximoPaso(i, L) {
+    const clave = i + '@' + L.lat.toFixed(2) + ',' + L.lon.toFixed(2), ya = PASOS.get(clave);
+    if (ya && (ya.t === 0 || ya.t > Date.now())) return ya.t;
+    let t = 0; const t0 = Date.now();
+    for (let s = 20; s <= 86400; s += 20) { const p = fijo(i, t0 + s * 1000); if (p && desde(L, p).el > 25) { t = t0 + s * 1000; break; } }
+    PASOS.set(clave, { t }); return t;
+  }
   function muestra(i, x, y) {
     const f = ficha(); if (!f) return;
     marcado = i;
     if (i < 0) { f.hidden = true; return; }
-    const k = i * 3, r = Math.hypot(S.pos[k], S.pos[k + 1], S.pos[k + 2]);
-    const grupo = S.d.grupos[S.g[i]];
+    if (!CIU) ciudades().then(() => { if (marcado === i) muestra(i, x, y); });
+    const ahora = Date.now(), p = fijo(i, ahora), grupo = S.d.grupos[S.g[i]], fl = grupo ? FLOTA[grupo.id] : null;
+    const r = p ? Math.hypot(p.x, p.y, p.z) : RE, alto = r - RE, geo = alto > 30000;
+    const rec = S.rec[i], periodo = 2 * Math.PI / rec.no, fila = S.fila[i], dato = (k) => (S.ix(k) >= 0 ? fila[S.ix(k)] : '');
+    const lin = [];
+    if (fl) lin.push([T('Operador'), fl[0] + ' · ' + paisNombre(fl[1])], [T('Para qué'), T(fl[2])]);
+    else if (grupo) lin.push([T('Flota'), grupo.nombre]);
+    lin.push([T('Altura'), num(Math.round(alto)) + ' km']);
+    if (p) lin.push([T('Velocidad'), num(Math.round(p.v * 3600)) + ' km/h']);
+    if (geo) lin.push([T('Órbita'), T('geoestacionaria: gira con la Tierra y parece quieto en el cielo')]);
+    else lin.push([T('Vuelta a la Tierra'), T('cada') + ' ' + num(Math.round(periodo)) + ' min · ' + num(Math.round(1440 / periodo * 10) / 10) + ' ' + T('al día')], [T('Inclinación'), num(Math.round(rec.inclo / RAD * 10) / 10) + '°']);
+    if (p) {
+      const la = Math.asin(p.z / r), lo = Math.atan2(p.y, p.x), c = bajo(la, lo);
+      lin.push([T('Ahora sobre'), c ? c.n + ' (' + paisNombre(c.cc) + ')' : CIU ? T('una zona sin ciudades grandes cerca') : '…']);
+    }
+    const L = P() && P().lugar;
+    if (L && p) {
+      const v = desde(L, p);
+      lin.push([T('Desde') + ' ' + L.nombre, num(Math.round(v.d)) + ' km · ' + (v.el > 0 ? T('sobre tu horizonte') + ' (' + Math.round(v.el) + '°)' : T('bajo tu horizonte'))]);
+      if (!geo) { const t = proximoPaso(i, L); lin.push([T('Próximo paso alto'), t ? fechaTxt(t, true) : T('no en las próximas 24 h')]); }
+    }
+    const lz = dato('lanzado'), base = BASES[dato('sitio')];
+    if (lz) lin.push([T('Lanzado'), fechaTxt(Date.parse(lz + 'T12:00:00Z'), false) + (base ? ' · ' + base[0] + ' (' + paisNombre(base[1]) + ')' : '')]);
+    lin.push([T('Catálogo'), 'NORAD ' + S.norad[i] + (dato('cospar') ? ' · COSPAR ' + dato('cospar') : '')]);
     f.querySelector('b').textContent = S.nom[i];
-    f.querySelector('span').textContent = (grupo ? grupo.nombre : '') + ' · ' + num(Math.round(r - RE)) + ' km ' + T('de altura') + ' · ' + T(S.sombra[i] ? 'en la sombra de la Tierra' : 'al sol') + (S.arriba[i] ? ' · ' + T('sobre tu cielo ahora') : '');
-    f.hidden = false;
-    const G = P().geo;
-    f.style.left = Math.min(G.W - 240, x + 14) + 'px'; f.style.top = Math.max(70, y - 46) + 'px';
+    const sp = f.querySelector('span'); sp.textContent = '';
+    const dl = document.createElement('dl'); dl.className = 'sat-dl';
+    for (const [k, v] of lin) { const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k; dd.textContent = v; dl.append(dt, dd); }
+    sp.append(dl);
+    const pie = document.createElement('small'); pie.textContent = T('Posición calculada ahora con su órbita publicada') + ' · CelesTrak · ' + haceTxt(hace(S.d.descargado)); sp.append(pie);
+    f.classList.add('sat'); f.hidden = false;
+    const G = P().geo, w = f.offsetWidth || 320, h = f.offsetHeight || 260;
+    f.style.left = (x + 16 + w > G.W - 8 ? x - 16 - w : x + 16) + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, y - 40)) + 'px';
   }
   let centroMarcado = -1, cableMarcado = -1, llegadaMarcada = -1, puntoMarcado = -1, pendiente = null;
   function buscaPunto(x, y) {
@@ -519,6 +608,7 @@
   const colocaFicha = (x, y) => { const f = ficha(); const G = P().geo; f.style.left = Math.min(G.W - 280, x + 14) + 'px'; f.style.top = Math.max(70, y - 46) + 'px'; };
   function fichaLugar(tipo, i, x, y) {
     const f = ficha(); if (!f) return;
+    f.classList.remove('sat');
     if (tipo === 'punto') {
       const q = PT.p[i], c = LUG && LUG.centros && LUG.de ? LUG.centros[LUG.de[i]] : null;
       f.querySelector('b').textContent = q.n && q.n !== q.o ? q.n : (q.o ? q.o + ' · ' + T('centro de datos') : T('Centro de datos sin nombre'));
@@ -566,7 +656,7 @@
   function mira(x, y) {
     if (P() && P().dentro) { if (marcado >= 0 || centroMarcado >= 0 || cableMarcado >= 0 || llegadaMarcada >= 0 || puntoMarcado >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = -1; muestra(-1); } return; }
     const i = estado.sat ? busca(x, y) : -1;
-    if (i >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = -1; if (i !== marcado) muestra(i, x, y); else colocaFicha(x, y); return; }
+    if (i >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = -1; muestra(i, x, y); return; }
     if (marcado >= 0) muestra(-1);
     const q = buscaPunto(x, y);
     if (q >= 0) { cableMarcado = llegadaMarcada = centroMarcado = -1; if (q !== puntoMarcado) { puntoMarcado = q; fichaLugar('punto', q, x, y); } else colocaFicha(x, y); return; }

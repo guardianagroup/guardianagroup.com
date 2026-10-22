@@ -51,8 +51,20 @@ def satelites():
             if cat in vistos or not all(k in o for k in CAMPOS):
                 continue
             vistos.add(cat); n += 1
-            filas.append([len(grupos), o.get('OBJECT_NAME', ''), cat] + [o[k] for k in CAMPOS])
-        print(f'{gid}: {n}')
+            filas.append([len(grupos), o.get('OBJECT_NAME', ''), cat] + [o[k] for k in CAMPOS] + [o.get('OBJECT_ID', ''), '', ''])
+        # 22 Oct 2026 (owner: «más información de cada uno, siempre real»): the launch date and launch site of each
+        # satellite, from CelesTrak's satellite catalogue (SATCAT) for the same group
+        cat_sat = baja('https://celestrak.org/satcat/records.php?' + urllib.parse.urlencode({'GROUP': gid, 'FORMAT': 'json'}))
+        try:
+            reg = {r.get('NORAD_CAT_ID'): r for r in (json.loads(cat_sat) if cat_sat else [])}
+        except ValueError:
+            reg = {}
+        for f in filas:
+            if f[0] == len(grupos) and f[2] in reg:
+                r = reg[f[2]]
+                f[-2] = r.get('LAUNCH_DATE') or ''
+                f[-1] = r.get('LAUNCH_SITE') or ''
+        print(f'{gid}: {n} (catálogo: {len(reg)})')
         grupos.append({'id': gid, 'nombre': nombre, 'n': n})
         time.sleep(2)
     if not filas:
@@ -62,7 +74,7 @@ def satelites():
         'fuente': 'CelesTrak (celestrak.org), elementos orbitales GP',
         'descargado': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
         'grupos': grupos,
-        'campos': ['grupo', 'nombre', 'norad'] + CAMPOS,
+        'campos': ['grupo', 'nombre', 'norad'] + CAMPOS + ['cospar', 'lanzado', 'sitio'],
         'sat': filas,
     }
     with open(os.path.join(RAIZ, 'satelites.json'), 'w', encoding='utf-8') as f:

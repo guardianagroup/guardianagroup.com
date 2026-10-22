@@ -324,7 +324,11 @@ body.cerca .capa-nota { background: rgba(6,8,12,.78); padding: 6px 14px; border-
 body:not(.dentro) #puertas { opacity: calc(1 - var(--cerca, 0) * .88); transition: opacity .25s; }
 body:not(.dentro) #puertas:hover, body:not(.dentro) #puertas:focus-within { opacity: 1; }
 /* 21 Oct 2026 (owner): the top bar steps back with the zoom too, so the planet is seen whole; it wakes under the pointer. */
-body.listo:not(.dentro) header, body.listo:not(.dentro) .sat-vista { opacity: calc(1 - var(--cerca, 0) * .85); transition: opacity .25s; }
+body.listo:not(.dentro) header > :not(#sat-vista) { opacity: calc(1 - var(--cerca, 0) * .85); transition: opacity .25s; }
+body.listo:not(.dentro) header:hover > *, body.listo:not(.dentro) header:focus-within > * { opacity: 1; }
+/* 22 Oct 2026 (owner: «ya no se pueden clasificar los satélites»): the orbit filter stays readable at any zoom,
+   on a darker glass so it reads over the bright day side too */
+body.listo:not(.dentro).cerca .sat-vista { background: rgba(8,11,16,.84); border-color: rgba(156,195,228,.28); }
 body.listo:not(.dentro) header:hover, body.listo:not(.dentro) header:focus-within, body.listo:not(.dentro) .sat-vista:hover, body.listo:not(.dentro) .sat-vista:focus-within { opacity: 1; }
 
 /* Which satellites (owner + agency, 20 Oct 2026): a quiet second row under the layers, only with satellites on. */
@@ -364,3 +368,11 @@ body.sin-cortes #directo { display: block; }
 body.sin-cortes #directo h2, body.sin-cortes #lista, body.sin-cortes #espera { display: none; }
 body.estrecho .dato { display: none; }
 @media (prefers-reduced-motion: reduce) { .dato.entra { animation: none; } }
+/* 22 Oct 2026 (owner: «más información de cada satélite, siempre real»): the satellite card, label and value in two columns */
+.sat-ficha.sat { width: min(360px, calc(100vw - 32px)); padding: 12px 14px; gap: 6px; }
+.sat-ficha.sat b { font-size: 14px; letter-spacing: .01em; }
+.sat-ficha.sat span { max-width: none; white-space: normal; }
+.sat-dl { display: grid; grid-template-columns: max-content 1fr; gap: 5px 14px; margin: 4px 0 0; }
+.sat-dl dt { color: var(--muted); font: 400 10.5px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+.sat-dl dd { margin: 0; color: var(--fg); font: 400 12px/1.4 var(--texto); font-variant-numeric: tabular-nums; }
+.sat-ficha.sat small { display: block; margin-top: 8px; padding-top: 7px; border-top: 1px solid rgba(156,195,228,.18); color: var(--muted); font: 400 10px/1.4 var(--mono); }

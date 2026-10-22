@@ -683,6 +683,8 @@ function paraDemo(){gen++;clearTimeout(demoT);clearTimeout(subT)}
 const META={Bm:1,Bk:0,cy:450};
 const ENTRADAS=[{id:'mpunto',n:'Metamorfosis · punto',d:7.5,rest:META},{id:'mabajo',n:'Metamorfosis · desde abajo',d:7.5,rest:META},{id:'mred',n:'Metamorfosis · conexión',d:7.5,rest:META}];
 const REST={Hd:0,As:1,Sp:0,Ap:1,Ir:0,S0:155,cx:720,cy:250,Hz:0,Ry:.35,Ga:1,Hb:0,fl:1,Mm:1,Mr:1,Cl:-2000,Df:1,Bm:0,Bk:0,Av:0,Sw:0,Sa:0,Sq:1,Cw:-1,Il:.4,An:0,Af:0,ex:720,ey:450,Re:200,Er:0,Eo:0,Ds:0,Du:0,Pv:0,Fa:-1};
+// 22 Oct 2026 (owner): «un poquito más arriba, más separación» from the bar: 240 → 208 (design units, bar top at 412)
+const ORG_Y=208;
 let conRed=true; // final: the network also stays above the bar (owner, 22 Oct 2026: the living presence over the bar)
 const cine=Object.assign({},REST);
 let cineMode=0,cineStart=-1,cineFixed=null;
@@ -710,7 +712,7 @@ function direct(T){
     v.lo=ss(4.3,4.9,T);v.lbz=16*(1-ez(4.3,5.2,T));v.rx=1-ez(5.0,5.6,T);v.ro=.45+.55*ss(5,5.2,T)*(1-ss(5.6,6.2,T));c.Il=T<5.6?1:T<5.85?.15:.15+.85*ss(5.85,6.0,T)*(1-ss(6.4,6.9,T))+.4*ss(6.4,6.9,T);c.Cw=T>5.85&&T<6.5?ez(5.85,6.45,T):-1;if(T>5.55)c.Ir=0;v.mk=ss(5.95,6.3,T)*(1-ss(6.6,6.95,T));v.lc=ss(6.85,7.2,T);v.sg=1.6*ss(4.4,5,T)*(1-.45*ss(5.4,6,T));
     v.fl=0;v.ui=ss(6.9,7.4,T);v.lb=110*(1-ez(6.2,7.4,T));
     if(m==='marena'){c.An=0;c.Af=0;c.Sa=0;v.lb*=.55;}
-    if(conRed){const k=ss(4.7,6.4,T);c.cy=T>4.7?c.cy+(240-c.cy)*k:c.cy;c.S0+=(100-c.S0)*k;c.Bk=ez(5.2,6.3,T);}
+    if(conRed){const k=ss(4.7,6.4,T);c.cy=T>4.7?c.cy+(ORG_Y-c.cy)*k:c.cy;c.S0+=(100-c.S0)*k;c.Bk=ez(5.2,6.3,T);}
   }else if(m==='eclosion'){ // a point of light beats twice, the organism spirals out of it, rises, and the bar is born from a seam of light
     c.Ga=ss(0,.5,T);c.As=ss(.7,3,T);c.cy=450-200*ez(2.9,3.9,T);c.Ir=1.6*ss(2.3,2.9,T)*(1-ss(3.9,4.8,T));c.Ry=.35+1.2*ss(1.6,2.6,T)*(1-ss(3.4,4.8,T));c.Hb=T<1.2?beat(T,.3)+.7*beat(T,.62):0;
     v.bo=ss(3.6,3.8,T)*(1-ss(4.6,5,T));v.bx=ez(3.6,4.2,T);v.sy=.03+.97*ez(4.1,4.7,T);v.lo=ss(4.05,4.2,T);v.lc=ss(4.5,5,T);v.fl=ss(4.5,5.2,T);v.ui=ss(5,5.8,T);v.lb=110*(1-ez(4.7,5.8,T));v.fo=.45*Math.exp(-((T-3.7)**2)*60);
@@ -733,7 +735,7 @@ function direct(T){
   for(const k of ['bo','bx','sy','lo','lc','ui','fl','fo','rf'])set(k,v[k].toFixed(4));
   set('by',v.by.toFixed(1)+'px');set('lbz',v.lbz.toFixed(1)+'px');set('sg',v.sg.toFixed(3));set('mk',v.mk.toFixed(3));set('rx',v.rx.toFixed(3));set('ro',v.ro.toFixed(3));set('lb',v.lb.toFixed(1)+'px');set('fy',v.fy+'%');
 }
-function restOf(){const r=ENTRADAS[cineMode].rest;return r?Object.assign({},r,conRed?{Bk:1,cy:240,S0:100}:{}):{}}
+function restOf(){const r=ENTRADAS[cineMode].rest;return r?Object.assign({},r,conRed?{Bk:1,cy:ORG_Y,S0:100}:{}):{}}
 function endCine(){cineStart=-1;cineFixed=null;Object.assign(cine,REST,restOf());stage.classList.remove('intro');for(const k of ['bo','bx','by','sy','lo','lc','ui','fl','lb','fo','fy','rf','lbz','sg','mk','rx','ro'])stage.style.removeProperty('--'+k);if(!opened)input.focus({preventScroll:true})}
 function cineFrame(ms){
   if(cineStart<0){cine.Hb=reduced?0:.55*heart(elapsed);if(cine.Bm>.5)stage.style.setProperty('--sg',(.8+.55*cine.Hb).toFixed(3));
@@ -767,7 +769,10 @@ ENTRADAS.forEach((e,i)=>{const b=document.createElement('button');b.type='button
 const skip=e=>{if(cineStart<0||cineFixed!=null)return;if(e.target&&e.target.closest&&e.target.closest('#director'))return;if(e.type!=='wheel'){e.preventDefault();e.stopPropagation()}endCine()};
 addEventListener('keydown',skip,true);addEventListener('pointerdown',skip,true);addEventListener('wheel',skip,{capture:true,passive:true});
 window.zeroCine={play,red(x){conRed=!!x},at(i,t){cineMode=i;paintDirector();stage.classList.toggle('vivo',!!ENTRADAS[i].rest);stage.classList.add('intro');cineStart=0;cineFixed=t;direct(t)},end:endCine};
-{let i=0;const q=/entrada=(\d)/.exec(location.search);try{const s=parseInt(localStorage.getItem('zeroEntrada2'),10);if(s>=0&&s<ENTRADAS.length)i=s}catch(e){}if(q&&+q[1]<ENTRADAS.length)i=+q[1];play(i)}
+{let i=0;const q=/entrada=(\d)/.exec(location.search);try{const s=parseInt(localStorage.getItem('zeroEntrada2'),10);if(s>=0&&s<ENTRADAS.length)i=s}catch(e){}if(q&&+q[1]<ENTRADAS.length)i=+q[1];
+// 22 Oct 2026 (owner): opened from Órbita, ZERO appears already formed; the entrance (the organism folding into the
+// bar) read as a wrong screen turned on its side for a moment. Opened on its own, the entrance still plays.
+if(/[?&]orbita=1/.test(location.search)){cineMode=i;paintDirector();stage.classList.toggle('vivo',!!ENTRADAS[i].rest);endCine()}else play(i)}
 
 // NÁCAR: Pure WebGL 1, all geometry generated locally. No resources, libraries, or shader imports.
 const gl=canvas.getContext('webgl',{alpha:false,antialias:false,depth:false,powerPreference:'high-performance'});
