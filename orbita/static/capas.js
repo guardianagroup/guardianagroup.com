@@ -122,6 +122,89 @@
     if (centroMarcado >= 0) { const c = LUG.centros[centroMarcado]; if (c && c.n < 5) { const v = p.aVista(c.w); if (v[2] > 0.05) { cx.strokeStyle = `rgba(${BLANCO},.95)`; cx.beginPath(); cx.arc(G.CX + G.R * v[0], G.CY - G.R * v[1], 6, 0, 7); cx.stroke(); } } }
   }
 
+  // ---------- the main land backbones (owner, 22 Oct 2026: «las redes troncales de tierra, las principales… que se
+  // vea cómo se ramifica por tierra desde donde llega el cable») ----------
+  // Shown with the «Cables» button: where a submarine cable lands, the long-distance fibre it feeds on land. Only
+  // what an open source publishes (fibra-tierra.json says which, line by line); nothing is drawn where none has data.
+  let FT = null;
+  async function cargaFibra() {
+    if (FT || cargando.ft) return;
+    cargando.ft = true;
+    try {
+      const d = await cargaJSON('datos/fibra-tierra.json');
+      FT = { d, lineas: d.lineas.map((x) => ({ x, w: x.l.map(([lon, lat]) => P().vec(lon, lat).map((c) => c * 1.002)) })) };
+    } catch (e) { FT = { error: true }; }
+    cargando.ft = false; pintaNota();
+  }
+  function pintaFibra(cx, p, G) {
+    const z = G.R / (G.R0 || G.R);
+    for (const obra of [false, true]) {
+      cx.strokeStyle = `rgba(${ACERO},${obra ? 0.42 : 0.55})`; cx.lineWidth = Math.min(1.6, 0.75 + 0.18 * (z - 1));
+      cx.setLineDash(obra ? [3, 3] : []);
+      cx.beginPath();
+      for (const l of FT.lineas) {
+        if (!!l.x.obra !== obra) continue;
+        let prev = false;
+        for (const w of l.w) {
+          const v = p.aVista(w), x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], ve = v[2] > 0.02;
+          if (ve && prev) cx.lineTo(x, y); else if (ve) cx.moveTo(x, y);
+          prev = ve;
+        }
+      }
+      cx.stroke();
+    }
+    cx.setLineDash([]);
+    if (fibraMarcada >= 0) {
+      const l = FT.lineas[fibraMarcada]; cx.strokeStyle = `rgba(${BLANCO},.95)`; cx.lineWidth = 2; cx.beginPath();
+      let prev = false;
+      for (const w of l.w) { const v = p.aVista(w), x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], ve = v[2] > 0.02; if (ve && prev) cx.lineTo(x, y); else if (ve) cx.moveTo(x, y); prev = ve; }
+      cx.stroke();
+    }
+  }
+  let fibraMarcada = -1;
+  function buscaFibra(x, y) {
+    if (!estado.sub || !FT || !FT.lineas) return -1;
+    const p = P(), G = p.geo; let mejor = -1, dm = 6 * 6;
+    FT.lineas.forEach((l, i) => {
+      let ax = 0, ay = 0, prev = false;
+      for (const w of l.w) {
+        const v = p.aVista(w), bx = G.CX + G.R * v[0], by = G.CY - G.R * v[1], ve = v[2] > 0.02;
+        if (ve && prev) {
+          const vx = bx - ax, vy = by - ay, L2 = vx * vx + vy * vy || 1, t = Math.max(0, Math.min(1, ((x - ax) * vx + (y - ay) * vy) / L2));
+          const qx = ax + vx * t - x, qy = ay + vy * t - y, d2 = qx * qx + qy * qy;
+          if (d2 < dm) { dm = d2; mejor = i; }
+        }
+        ax = bx; ay = by; prev = ve;
+      }
+    });
+    return mejor;
+  }
+  // the land networks that start within 60 km of a landing (computed once per landing)
+  function porTierra(l) {
+    if (!FT || !FT.lineas) return null;
+    if (l.tierra) return l.tierra;
+    const ops = new Map(), lim = 60 / 6371;
+    for (const f of FT.lineas) {
+      for (const w of f.w) { const d = Math.hypot(w[0] / 1.002 - l.w[0] / 1.003, w[1] / 1.002 - l.w[1] / 1.003, w[2] / 1.002 - l.w[2] / 1.003); if (d < lim) { const o = f.x.o || f.x.n; if (o) ops.set(o, (ops.get(o) || 0) + 1); break; } }
+    }
+    l.tierra = [...ops.keys()];
+    return l.tierra;
+  }
+  function fichaFibra(i, x, y) {
+    const f = ficha(); if (!f) return;
+    f.classList.remove('sat');
+    const l = FT.lineas[i].x, fu = FT.d.fuentes[l.f] || {};
+    f.querySelector('b').textContent = (l.n && l.n !== l.o ? l.n : T('Fibra troncal por tierra')) ;
+    const lin = [];
+    lin.push(T('Fibra troncal por tierra') + (l.cc ? ' · ' + paisNombre(l.cc) : ''));
+    if (l.o) lin.push(T('Operador') + ': ' + l.o);
+    if (l.km) lin.push(T('Longitud en el mapa') + ': ' + num(l.km) + ' km');
+    if (l.obra) lin.push(T('En construcción según la fuente'));
+    lin.push(T('Trazado aproximado') + ' · ' + T('Fuente') + ': ' + (fu.n || '') + (fu.lic ? ' (' + T(fu.lic) + ')' : ''));
+    f.querySelector('span').textContent = lin.join('\n');
+    f.hidden = false; colocaFicha(x, y);
+  }
+
   // satellites: one SGP4 record each; positions computed in turns and extrapolated every frame
   let S = null;
   async function cargaSat() {
@@ -163,6 +246,7 @@
     const cx = p.ctx, G = p.geo;
     cx.globalCompositeOperation = 'lighter';
     if (estado.tierra && capas.tierra && capas.tierra.lineas) pintaLineas(cx, p, G, capas.tierra.lineas, `rgba(${ACERO},.30)`, 0.7);
+    if (estado.sub && FT && FT.lineas) pintaFibra(cx, p, G);
     if (estado.sub && capas.sub && capas.sub.lineas) { pintaLineas(cx, p, G, capas.sub.lineas, `rgba(${ACERO},.62)`, 1); pintaLuz(cx, p, G, capas.sub.lineas, t); }
     if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; }
     if (estado.sub && capas.sub && capas.sub.lineas) {
@@ -272,7 +356,7 @@
     const key = kind * 1000 + zb * 100 + ang;
     let sp = SPR.get(key);
     if (sp) return sp;
-    const css = FORMA[kind].largo * [1, 1.3, 1.65, 2.05, 2.6, 3.1][zb];          // wing span in CSS pixels at this zoom
+    const css = FORMA[kind].largo * [0.8, 1.15, 1.6, 2.05, 2.6, 3.1][zb]; // small on the whole planet (no crowd), bigger as you come closer          // wing span in CSS pixels at this zoom
     // drawn at twice the screen's own resolution and scaled down when painted: clean edges at any zoom
     const halo = css * 0.5 + 3, d = Math.ceil(2 * halo), px = Math.ceil(d * dpr * 2);
     const c = document.createElement('canvas'); c.width = c.height = px;
@@ -348,6 +432,7 @@
     const fase = sol ? (1 + sy0 * c0 + sz0 * c1 + sx0 * c2) / 2 : 1;   // 0 back-lit … 1 front-lit (same Sun for all)
     const capasPinta = [[], [], []];
     const cuentaOrb = { baja: 0, media: 0, geo: 0 }; let nSel = 0;
+    const suma = { baja: { n: 0, alto: 0, periodo: 0 }, media: { n: 0, alto: 0, periodo: 0 }, geo: { n: 0, alto: 0, periodo: 0 } };
     const z = G.R / (G.R0 || G.R), paso = z < 1.35 ? 10 : z < 1.75 ? 5 : 3; S.paso = paso; // starlink-like low fleet, other low/medium, geostationary
     if (!S.ang) S.ang = new Uint8Array(N);
     for (let i = 0; i < N; i++) {
@@ -368,6 +453,7 @@
       // what this view shows (owner + agency, 20 Oct 2026): never hidden without saying so; the count is on screen
       const alto = r - RE, banda = alto < 2000 ? 'baja' : alto < 30000 ? 'media' : 'geo';
       cuentaOrb[banda]++;
+      if (cuentaArriba || !S.medias) { const q = suma[banda]; q.n++; q.alto += alto; q.periodo += 2 * Math.PI / S.rec[i].no; }
       let sel = estado.orb[banda];
       if (sel && estado.vista === 'equilibrada' && S.g[i] === 0) sel = S.norad[i] % paso === 0;
       if (sel && estado.vista === 'cielo') sel = !!S.arriba[i];
@@ -391,6 +477,7 @@
       capasPinta[kind].push(sombra ? -1 - i : i);
     }
     if (cuentaArriba) { S.nArriba = n; S.tArriba = ahora; }
+    if (cuentaArriba || !S.medias) { S.medias = {}; for (const b of ['baja', 'media', 'geo']) { const q = suma[b]; S.medias[b] = q.n ? { n: q.n, alto: q.alto / q.n, periodo: q.periodo / q.n } : null; } }
     const cambia = nSel !== S.nSel || cuentaArriba; S.nSel = nSel; S.cuentaOrb = cuentaOrb;
     if (cambia) { pintaNota(); pintaVista(); }
     if (marcado >= 0 && S.vis[marcado] && S.dib[marcado]) pintaEstela(cx, p, G, marcado, ahora);
@@ -439,7 +526,8 @@
     }
     if (estado.sub) {
       const c = capas.sub;
-      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + ' · © OpenStreetMap (ODbL) · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
+      const ft = FT && FT.d ? ' · ' + num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' (' + FT.d.fuentes.map((x) => x.n.split(' (')[0].split(' · ')[0]).join(', ') + ')' : '';
+      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + ' · © OpenStreetMap (ODbL) · ' + T('puede faltar alguno') + ft + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
     }
     if (estado.tierra) {
       const c = capas.tierra;
@@ -621,7 +709,9 @@
       for (const k of l.seg) { const gi = LUG.g ? LUG.g[k] : -1, nm = gi >= 0 ? LUG.grupos[gi][0] : ''; if (nm) { if (!nombres.includes(nm)) nombres.push(nm); } else sin.n++; }
       f.querySelector('b').textContent = T('Aquí llegan cables submarinos') + ' · ' + l.ciudad;
       const lista = nombres.slice(0, 5).join(' · ') + (nombres.length > 5 ? ' · +' + (nombres.length - 5) : '');
-      f.querySelector('span').textContent = paisNombre(l.cc) + '\n' + (lista ? lista + (sin.n ? ' · ' + num(sin.n) + ' ' + T(sin.n === 1 ? 'sin nombre' : 'sin nombre') : '') : num(sin.n) + ' ' + T(sin.n === 1 ? 'cable sin nombre' : 'cables sin nombre'));
+      const ti = porTierra(l);
+      const sigue = !ti ? '' : ti.length ? '\n' + T('Sigue por tierra') + ': ' + ti.slice(0, 4).join(' · ') + (ti.length > 4 ? ' · +' + (ti.length - 4) : '') : '\n' + T('Su ruta por tierra no es pública');
+      f.querySelector('span').textContent = paisNombre(l.cc) + '\n' + (lista ? lista + (sin.n ? ' · ' + num(sin.n) + ' ' + T(sin.n === 1 ? 'sin nombre' : 'sin nombre') : '') : num(sin.n) + ' ' + T(sin.n === 1 ? 'cable sin nombre' : 'cables sin nombre')) + sigue;
     } else if (tipo === 'centro') {
       const c = LUG.centros[i];
       f.querySelector('b').textContent = c.ciudad ? c.ciudad + ' · ' + paisNombre(c.cc) : T('Lejos de cualquier ciudad');
@@ -668,8 +758,11 @@
     if (c >= 0) { cableMarcado = -1; if (c !== centroMarcado) { centroMarcado = c; fichaLugar('centro', c, x, y); } else colocaFicha(x, y); return; }
     centroMarcado = -1;
     const k = buscaCable(x, y);
-    if (k >= 0) { if (k !== cableMarcado) { cableMarcado = k; fichaLugar('cable', k, x, y); } else colocaFicha(x, y); return; }
+    if (k >= 0) { fibraMarcada = -1; if (k !== cableMarcado) { cableMarcado = k; fichaLugar('cable', k, x, y); } else colocaFicha(x, y); return; }
     if (cableMarcado >= 0) cableMarcado = -1;
+    const ft = buscaFibra(x, y);
+    if (ft >= 0) { if (ft !== fibraMarcada) { fibraMarcada = ft; fichaFibra(ft, x, y); } else colocaFicha(x, y); return; }
+    fibraMarcada = -1;
     const f = ficha(); if (f && !f.hidden) f.hidden = true;
   }
   addEventListener('pointermove', (e) => {
@@ -678,22 +771,40 @@
     requestAnimationFrame(() => { const q = pendiente; pendiente = null; mira(q.x, q.y); });
   }, { passive: true });
 
+  // ---------- one orbit at a time: what that orbit is, measured on the satellites themselves ----------
+  function pintaFase() {
+    const el = $('sat-fase'); if (!el) return;
+    const solo = Object.keys(estado.orb).filter((x) => estado.orb[x]);
+    const m = S && S.medias ? S.medias[solo[0]] : null;
+    if (!estado.sat || solo.length !== 1 || !m || !m.n) { el.hidden = true; return; }
+    const k = solo[0], ms = Math.round(2 * m.alto / 299.792458 * 10) / 10; // up and down at the speed of light, at the least
+    const partes = [num(m.n) + ' ' + T('satélites'), k === 'geo' ? T('a') + ' ' + num(Math.round(m.alto / 10) * 10) + ' km' : T('a una media de') + ' ' + num(Math.round(m.alto / 10) * 10) + ' km'];
+    partes.push(k === 'geo' ? T('giran con la Tierra y parecen quietos sobre el mismo punto') : T('dan la vuelta a la Tierra en unos') + ' ' + num(Math.round(m.periodo)) + ' min');
+    partes.push(T('la señal tarda al menos') + ' ' + num(ms < 10 ? ms : Math.round(ms)) + ' ms ' + T('en subir y bajar'));
+    const txt = partes.join(' · ');
+    if (el.textContent !== txt) el.textContent = txt;
+    el.hidden = false;
+  }
+
   // ---------- which satellites: view and orbit (with the real count beside each orbit) ----------
   function pintaVista() {
     const caja = $('sat-vista'); if (!caja) return;
     caja.hidden = !estado.sat;
     caja.querySelectorAll('[data-vista]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.vista === estado.vista)));
     caja.querySelectorAll('[data-orb]').forEach((b) => { b.setAttribute('aria-pressed', String(!!estado.orb[b.dataset.orb])); const c = S && S.cuentaOrb ? S.cuentaOrb[b.dataset.orb] : 0; b.querySelector('b').textContent = c ? num(c) : ''; });
+    pintaFase();
     const cielo = caja.querySelector('[data-vista="cielo"]'); const L = P() && P().lugar;
     if (cielo) { cielo.disabled = !L; const t = cielo.querySelector('.cielo-t'); const v = L && L.nombre ? T('Sobre') + ' ' + L.nombre : T('Sobre ti'); if (t.textContent !== v) t.textContent = v; }
   }
   function enganchaVista() {
     const caja = $('sat-vista'); if (!caja) return;
     caja.querySelectorAll('[data-vista]').forEach((b) => b.addEventListener('click', () => { estado.vista = b.dataset.vista; guarda(); pintaVista(); pintaNota(); }));
+    // 22 Oct 2026 (owner: «que se divida en tres… por fases, para que no se vea aglomerado»): one orbit at a time.
+    // A click shows only that orbit; the same click again brings back all three.
     caja.querySelectorAll('[data-orb]').forEach((b) => b.addEventListener('click', () => {
-      const k = b.dataset.orb, on = !estado.orb[k];
-      if (!on && Object.values(estado.orb).filter(Boolean).length === 1) return; // at least one orbit stays on
-      estado.orb[k] = on; guarda(); pintaVista(); pintaNota();
+      const k = b.dataset.orb, solo = Object.keys(estado.orb).filter((x) => estado.orb[x]);
+      estado.orb = solo.length === 1 && solo[0] === k ? { baja: true, media: true, geo: true } : { baja: k === 'baja', media: k === 'media', geo: k === 'geo' };
+      guarda(); pintaVista(); pintaNota();
     }));
   }
 
@@ -701,8 +812,8 @@
   function pon(clave, on) {
     estado[clave] = on; guarda();
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
-    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') cargaPuntos(); else cargaCables(clave); }
-    if (!on) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = -1; }
+    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') cargaPuntos(); else { cargaCables(clave); if (clave === 'sub') cargaFibra(); } }
+    if (!on) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; }
     pintaNota(); pintaVista();
   }
   async function arranca() {
@@ -717,6 +828,6 @@
     pintaNota();
     addEventListener('guardiana-idioma', pintaNota);
   }
-  window.OrbitaCapas = { pinta, pon, get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; } };
+  window.OrbitaCapas = { pinta, pon, get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arranca); else arranca();
 })();

@@ -324,7 +324,7 @@ body.cerca .capa-nota { background: rgba(6,8,12,.78); padding: 6px 14px; border-
 body:not(.dentro) #puertas { opacity: calc(1 - var(--cerca, 0) * .88); transition: opacity .25s; }
 body:not(.dentro) #puertas:hover, body:not(.dentro) #puertas:focus-within { opacity: 1; }
 /* 21 Oct 2026 (owner): the top bar steps back with the zoom too, so the planet is seen whole; it wakes under the pointer. */
-body.listo:not(.dentro) header > :not(#sat-vista) { opacity: calc(1 - var(--cerca, 0) * .85); transition: opacity .25s; }
+body.listo:not(.dentro) header > :not(#sat-vista):not(#sat-fase) { opacity: calc(1 - var(--cerca, 0) * .85); transition: opacity .25s; }
 body.listo:not(.dentro) header:hover > *, body.listo:not(.dentro) header:focus-within > * { opacity: 1; }
 /* 22 Oct 2026 (owner: «ya no se pueden clasificar los satélites»): the orbit filter stays readable at any zoom,
    on a darker glass so it reads over the bright day side too */
@@ -376,3 +376,8 @@ body.estrecho .dato { display: none; }
 .sat-dl dt { color: var(--muted); font: 400 10.5px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
 .sat-dl dd { margin: 0; color: var(--fg); font: 400 12px/1.4 var(--texto); font-variant-numeric: tabular-nums; }
 .sat-ficha.sat small { display: block; margin-top: 8px; padding-top: 7px; border-top: 1px solid rgba(156,195,228,.18); color: var(--muted); font: 400 10px/1.4 var(--mono); }
+/* 22 Oct 2026: one orbit at a time, and a line on what that orbit is (measured on the satellites shown) */
+.sat-fase { position: absolute; left: 50%; top: 116px; transform: translateX(-50%); width: max-content; max-width: min(640px, calc(100vw - 32px)); padding: 7px 16px; border-radius: 14px; border: 1px solid rgba(156,195,228,.22); background: rgba(8,11,16,.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); font: 400 11px/1.4 var(--mono); color: var(--muted); letter-spacing: .02em; text-align: center; text-wrap: balance; }
+.sat-fase[hidden] { display: none; }
+body.dentro .sat-fase { opacity: 0; pointer-events: none; }
+@media (max-width: 760px) { .sat-fase { position: static; transform: none; order: 5; width: 100%; white-space: normal; border-radius: 14px; } }

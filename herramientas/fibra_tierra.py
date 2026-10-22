@@ -98,7 +98,9 @@ def trae(nombre, dirfuentes):
 
 
 def campo(desc, clave):
-    m = re.search(clave + r':\s*([^\n]*?)\s*(?=(Name|Phase Name|Cable type|ISO2|ISO3|Source URL|Notes):|\n|$)', desc or '')
+    # «Name:» is also the end of «Phase Name:», so the operator's Name must not follow «Phase »
+    pre = r'(?<!Phase )' if clave == 'Name' else ''
+    m = re.search(pre + clave + r':\s*([^\n]*?)\s*(?=(?<!Phase )Name:|Phase Name:|Cable type:|ISO2:|ISO3:|Source URL:|Notes:|\n|$)', desc or '')
     return m.group(1).strip() if m else ''
 
 

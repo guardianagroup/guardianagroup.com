@@ -47,11 +47,12 @@
     </div>
     <span class="sep" aria-hidden="true"></span>
     <div class="orb" role="group" aria-label="Órbita">
-      <button type="button" data-orb="baja" aria-pressed="true" title="Órbita baja, por debajo de 2.000 km">Órbita baja <b></b></button>
-      <button type="button" data-orb="media" aria-pressed="true" title="Órbita media">Órbita media <b></b></button>
-      <button type="button" data-orb="geo" aria-pressed="true" title="Órbita geoestacionaria, a unos 35.786 km: parecen quietos sobre el mismo punto">Geoestacionaria <b></b></button>
+      <button type="button" data-orb="baja" aria-pressed="true" title="Ver solo la órbita baja, por debajo de 2.000 km (otra vez: todas)">Órbita baja <b></b></button>
+      <button type="button" data-orb="media" aria-pressed="true" title="Ver solo la órbita media, entre 2.000 y 30.000 km (otra vez: todas)">Órbita media <b></b></button>
+      <button type="button" data-orb="geo" aria-pressed="true" title="Ver solo la órbita geoestacionaria, a unos 35.786 km: parecen quietos sobre el mismo punto (otra vez: todas)">Geoestacionaria <b></b></button>
     </div>
   </div>
+  <div id="sat-fase" class="sat-fase" role="status" hidden></div>
   <div class="derecha">
     <button type="button" id="lugar-btn" class="lugar-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14.5s4.5-4.2 4.5-7.8a4.5 4.5 0 0 0-9 0c0 3.6 4.5 7.8 4.5 7.8z"/><circle cx="8" cy="6.7" r="1.6"/></svg><span id="lugar-nombre">Precisar ubicación</span></button>
     <div class="idiomas" role="group" aria-label="Idioma" translate="no"><button type="button" data-l="es" aria-pressed="true">ES</button><button type="button" data-l="en" aria-pressed="false">EN</button><button type="button" data-l="pt" aria-pressed="false">PT</button></div>
