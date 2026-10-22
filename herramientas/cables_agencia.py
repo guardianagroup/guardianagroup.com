@@ -74,6 +74,22 @@ ALIAS = {  # the same cable under different names (lower case, letters and digit
     'coralseacablesystem': 'coralsea', 'coralseacable': 'coralsea', 'australiasingaporecable': 'asc',
     'jgasouth': 'jgas', 'japanguamaustraliasouth': 'jgas', 'jganorth': 'jgan', 'japanguamaustralianorth': 'jgan',
     'interchangecablenetwork1': 'icn1', 'hantru1': 'hantru1', 'kumuldomesticsubmarinecable': 'kumul', 'kumulsubmarinecablenetwork': 'kumul',
+    'wacswestafricacablesystem': 'wacs', 'aceafricacoasttoeurope': 'ace', 'glo1': 'glo1', 'safesouthafricafareast': 'safe', 'eassyeasternafricasubmarinecablesystem': 'eassy', 'teamstheeastafricanmarinesystem': 'teams', 'theeastafricanmarinesystem': 'teams', 'peacepakistaneastafricaconnectingeurope': 'peace', 'sacssouthatlanticcablesystem': 'sacs', 'sailsouthatlanticinterlink': 'sail', 'lionlowerindianoceannetwork': 'lion', 'lion2lowerindianoceannetwork2': 'lion2',
+    'hawaikicable': 'hawaiki', 'pipepacificcable1': 'ppc1', 'pipepacificcable1ppc1': 'ppc1', 'coralseacablesystemcs2': 'coralsea', 'australiasingaporecableasc': 'asc',
+    'tongacablesystem': 'tongacable', 'manatuaonepolynesiacable': 'manatua', 'southerncrosscablenetworksccn': 'southerncross',
+    # Americas
+    'atlanticcrossing1': 'ac1', 'atlanticcrossing1ac1': 'ac1', 'yellowatlanticcrossing2': 'yellow', 'atlanticcrossing2': 'yellow', 'ac2': 'yellow',
+    'flagatlantic1': 'fa1', 'flagatlantic1fa1': 'fa1', 'tatatgnatlantic': 'tgnatlantic', 'gttexpress': 'hiberniaexpress', 'gttexpresshiberniaexpress': 'hiberniaexpress',
+    'gttatlantic': 'hiberniaatlantic', 'gttatlantichiberniaatlantic': 'hiberniaatlantic', 'hibernianorth': 'hiberniaatlantic', 'hiberniasouth': 'hiberniaatlantic',
+    'havfrueaec2': 'havfrue', 'aec2': 'havfrue', 'havfrueamericaeuropeconnect2': 'havfrue', 'americaeuropeconnect1': 'aec1', 'americaeuropeconnect1aec1': 'aec1', 'americaeuropeconnect': 'aec1', 'aeconnect': 'aec1',
+    'arcos': 'arcos1', 'americasii': 'americas2', 'americas2': 'americas2', 'pacificcaribbeancablesystem': 'pccs', 'pacificcaribbeancablesystempccs': 'pccs',
+    'sam1southamerica1': 'sam1', 'southamerica1': 'sam1', 'southamericancrossingsaclan': 'sac', 'southamericancrossing': 'sac', 'saclan': 'sac', 'sac': 'sac',
+    'panamericancrossing': 'pac', 'panamericancrossingpac': 'pac', 'panamericanpanam': 'panam', 'panamerican': 'panam', 'panam': 'panam',
+    'easterncaribbeanfibersystem': 'ecfs', 'easterncaribbeanfibersystemecfs': 'ecfs', 'southerncaribbeanfiber': 'scf', 'southerncaribbeanfiberscf': 'scf',
+    'colombiafloridasubseafiber': 'cfx1', 'colombiafloridasubseafibercfx1': 'cfx1', 'colombiafloridaxpress': 'cfx1',
+    'globalcaribbeannetwork': 'gcn', 'globalcaribbeannetworkgcn': 'gcn', 'surinameguyanasubmarinecablesystem': 'sgscs', 'surinameguyanasubmarinecablesystemsgscs': 'sgscs',
+    'challengerbermuda1': 'cb1', 'challengerbermuda1cb1': 'cb1', 'cbuscaribbeanbermudaus': 'cbus', 'caribbeanbermudaus': 'cbus',
+    'akornalaskaoregonnetwork': 'akorn', 'alaskaoregonnetwork': 'akorn', 'quintillionsubseacable': 'quintillion', 'alaskaunitedaueastyauwest': 'alaskaunited',
 }
 
 def clave(n):
