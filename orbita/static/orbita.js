@@ -202,7 +202,7 @@
   // ---------- Geometry shared with the CSS (--u) ----------
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
   // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
-  const ZOOM = { z: 1, zt: 1, MAX: 2.5 }; // 21 Oct 2026 (owner): «un toque más de zoom», from ×2 to ×2,5
+  const ZOOM = { z: 1, zt: 1, MAX: 3 }; // owner, 21–22 Oct 2026: «un toque más de zoom», from ×2 to ×3
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
   function mide() {

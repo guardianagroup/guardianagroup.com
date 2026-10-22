@@ -511,7 +511,7 @@ function record(detail){total++;const emp=String(detail.empresa||'No identificad
   $('#total').textContent=total;$('#businesses').textContent=firms.size;$('#paises').textContent=countries.size;$('#pillnum').textContent=total;$('#qty').textContent=String(firms.size).padStart(2,'0');
   if(total===1)$('#rows').textContent='';
   let g=grupos.get(emp);if(!g){g={n:0,a:ahora,z:ahora,pais,mot,info:DET.get(emp)||detail,el:document.createElement('article')};filaViva(g,emp);g.el.className='emp';g.el.innerHTML='<div class="l1"><strong></strong><span class="x"></span></div><div class="l2"><span></span><time></time></div>';g.el.querySelector('strong').textContent=emp;g.el.querySelector('.l2 span').textContent=pais+' · '+mot+' · SIMULADO';grupos.set(emp,g)}
-  g.n++;g.z=ahora;g.el.querySelector('.x').textContent='×'+g.n;g.el.querySelector('time').textContent=hhmmss();if(!pausaLista)$('#rows').prepend(g.el);else{pendiente=true;if(!g.el.isConnected)$('#rows').append(g.el)}if(vista===emp)pintaFicha(emp,true);else if(!vista)pintaMotivos();g.el.classList.remove('destello');void g.el.offsetWidth;g.el.classList.add('destello');
+  g.n++;g.z=ahora;g.el.querySelector('.x').textContent='×'+g.n;g.el.querySelector('time').textContent=hhmmss();if(!g.el.isConnected){if(pausaLista)$('#rows').append(g.el);else $('#rows').prepend(g.el)}if(vista===emp)pintaFicha(emp,true);else if(!vista)pintaMotivos();g.el.classList.remove('destello');void g.el.offsetWidth;g.el.classList.add('destello');
   const a=$('#avisocorte');$('#acEmp').textContent=emp;$('#acDet').textContent=pais+' · '+mot+' · simulado';a.classList.add('on');clearTimeout(avisoT);avisoT=setTimeout(()=>a.classList.remove('on'),2600);
   const f=$('#filo');f.classList.remove('late');void f.offsetWidth;f.classList.add('late');
   redPulse=1.9;pulse=.9}
@@ -555,7 +555,7 @@ pintaMax();
 let fijada=null,vista=null,pausaLista=false,pendiente=false;
 const DET=new Map(sample.concat(extraMax).map(x=>[x.empresa,x]));
 function filaViva(g,emp){const el=g.el;el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label',emp);
-  el.addEventListener('mouseenter',()=>pintaFicha(emp));el.addEventListener('focus',()=>pintaFicha(emp));
+  el.addEventListener('mouseenter',()=>intencion(emp));el.addEventListener('mouseleave',()=>clearTimeout(tIntencion));el.addEventListener('focus',()=>pintaFicha(emp));
   el.addEventListener('click',()=>{fijada=fijada===emp?null:emp;pintaFicha(fijada||emp)});
   el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}})}
 function pintaMotivos(){const ul=$('#motivos');const m=new Map();grupos.forEach(g=>m.set(g.mot,(m.get(g.mot)||0)+g.n));ul.textContent='';
@@ -577,8 +577,12 @@ function pintaFicha(emp,viva){if(emp&&String(emp).startsWith('sub:'))return pint
   if(cambia&&!viva){const f=$('#fdet');f.classList.remove('entra');void f.offsetWidth;f.classList.add('entra')}}
 {const L=$('#rows');
  L.addEventListener('mouseenter',()=>{pausaLista=true});
- L.addEventListener('mouseleave',()=>{pausaLista=false;if(pendiente){pendiente=false;[...grupos.values()].sort((a,b)=>b.z-a.z).forEach(g=>L.append(g.el))}pintaFicha(fijada)});
+ L.addEventListener('mouseleave',()=>{pausaLista=false;vuelve()});
  L.addEventListener('focusout',e=>{if(!L.contains(e.relatedTarget)&&!L.matches(':hover'))pintaFicha(fijada)})}
+let tIntencion=0,tVuelve=0;
+function intencion(k){clearTimeout(tIntencion);clearTimeout(tVuelve);tIntencion=setTimeout(()=>pintaFicha(k),380)}
+function vuelve(){clearTimeout(tIntencion);clearTimeout(tVuelve);tVuelve=setTimeout(()=>{if(!$('#ficha').matches(':hover'))pintaFicha(fijada)},650)}
+$('#ficha').addEventListener('mouseenter',()=>clearTimeout(tVuelve));$('#ficha').addEventListener('mouseleave',vuelve);
 $('#fcerrar').onclick=()=>{fijada=null;pintaFicha(null)};
 $('#fpdf').onclick=()=>{const e=vista;if(e)informe('emp',e,REG.filter(r=>r.e===e))};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&fijada&&opened&&!full&&!$('#pdfmenu').classList.contains('show')){e.stopImmediatePropagation();fijada=null;pintaFicha(null)}},true);
@@ -603,7 +607,7 @@ function filaSub(sb){const L=$('#subs');if(SUBS.length===1)L.textContent='';cons
   el.querySelector('.l2 span').textContent=sb.pujas.length+' empresas pujaron · '+(sb.gana?'ganó '+sb.gana.n:'nadie ganó');
   el.querySelector('time').textContent=new Date(sb.t).toLocaleTimeString((window.GuardianaIdioma&&GuardianaIdioma.locale)||'es',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   el.setAttribute('aria-label',sb.hueco);sb.el=el;
-  el.addEventListener('mouseenter',()=>pintaFicha(sb.id));el.addEventListener('focus',()=>pintaFicha(sb.id));
+  el.addEventListener('mouseenter',()=>intencion(sb.id));el.addEventListener('mouseleave',()=>clearTimeout(tIntencion));el.addEventListener('focus',()=>pintaFicha(sb.id));
   el.addEventListener('click',()=>{fijada=fijada===sb.id?null:sb.id;pintaFicha(fijada||sb.id)});
   el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}});
   if(pausaSubs)L.append(el);else L.prepend(el)}
@@ -631,7 +635,7 @@ function mapaHueco(pos){const L='<rect x=".5" y=".5" width="47" height="63" rx="
   return L+'<g fill="#9CC3E4">'+H+'</g>'}
 function pestana(t){const sub=t==='subasta';$('#tabcortes').setAttribute('aria-selected',String(!sub));$('#tabsub').setAttribute('aria-selected',String(sub));$('#rows').hidden=sub;$('#subs').hidden=!sub}
 $('#tabcortes').onclick=()=>pestana('cortes');$('#tabsub').onclick=()=>pestana('subasta');
-{const L=$('#subs');L.addEventListener('mouseenter',()=>{pausaSubs=true});L.addEventListener('mouseleave',()=>{pausaSubs=false;SUBS.forEach(x=>x.el&&L.append(x.el));pintaFicha(fijada)});
+{const L=$('#subs');L.addEventListener('mouseenter',()=>{pausaSubs=true});L.addEventListener('mouseleave',()=>{pausaSubs=false;SUBS.forEach(x=>x.el&&L.append(x.el));vuelve()});
  L.addEventListener('focusout',e=>{if(!L.contains(e.relatedTarget)&&!L.matches(':hover'))pintaFicha(fijada)})}
 $('#scerrar').onclick=()=>{fijada=null;pintaFicha(null)};
 function arrancaSubastas(){clearTimeout(subT);SUBS=[];$('#qsub').textContent='0';$('#subs').innerHTML='<p class="empty">Cuando la web subaste un espacio de anuncios, aquí verás quién pujó por tu visita y cuánto ofreció.</p>';
