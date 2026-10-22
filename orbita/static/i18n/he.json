@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "בצל כדור הארץ",
   "Yahoo Japón": "Yahoo יפן",
   "De punto a punto, en línea recta": "מנקודה לנקודה, בקו ישר",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "הדפדפן שמציג כל ניתוק, בשידור חי. יגיע כשיהיה מוכן ונבדק."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "הדפדפן שמציג כל ניתוק, בשידור חי. יגיע כשיהיה מוכן ונבדק.",
+  "aquí": "כאן",
+  "Elige uno para ver su ficha.": "בחרו אחד כדי לראות את הכרטיס שלו.",
+  "acerca más para verlos todos": "התקרבו כדי לראות את כולם",
+  "Navegador · demostración": "דפדפן · הדגמה",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "הדפדפן שמציג כל ניתוק, בשידור חי. מה שאתם רואים כאן הוא הדגמה.",
+  "Según el mapa de la red de": "לפי מפת הרשת משנת",
+  "Altura aproximada desde la que se ve el planeta": "גובה משוער שממנו נראה כדור הארץ",
+  "Enlace": "קישור",
+  "Estación": "תחנה",
+  "Previsto": "מתוכנן",
+  "Propuesto": "מוצע",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "עדיין לא קיים: משורטט בקו ישר, לידיעה בלבד.",
+  "Tipo": "סוג",
+  "Base antártica": "תחנה אנטארקטית",
+  "Estación terrena de satélites": "תחנת קרקע לוויינית"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

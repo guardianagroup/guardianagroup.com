@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "భూమి నీడలో",
   "Yahoo Japón": "Yahoo జపాన్",
   "De punto a punto, en línea recta": "పాయింట్ నుండి పాయింట్, సరళ రేఖలో",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "ప్రతి కట్‌ను లైవ్‌గా చూపే బ్రౌజర్. పూర్తయి పరీక్షించాక వస్తుంది."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "ప్రతి కట్‌ను లైవ్‌గా చూపే బ్రౌజర్. పూర్తయి పరీక్షించాక వస్తుంది.",
+  "aquí": "ఇక్కడ",
+  "Elige uno para ver su ficha.": "దాని కార్డ్ చూడటానికి ఒకదాన్ని ఎంచుకోండి.",
+  "acerca más para verlos todos": "అన్నీ చూడటానికి జూమ్ ఇన్ చేయండి",
+  "Navegador · demostración": "బ్రౌజర్ · డెమో",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "ప్రతి అంతరాయాన్ని ప్రత్యక్షంగా చూపించే బ్రౌజర్. మీరు ఇక్కడ చూస్తున్నది ఒక డెమో.",
+  "Según el mapa de la red de": "నెట్‌వర్క్ మ్యాప్ ప్రకారం, సంవత్సరం",
+  "Altura aproximada desde la que se ve el planeta": "గ్రహం కనిపించే సుమారు ఎత్తు",
+  "Enlace": "లింక్",
+  "Estación": "స్టేషన్",
+  "Previsto": "ప్రణాళిక చేయబడింది",
+  "Propuesto": "ప్రతిపాదించబడింది",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "ఇంకా లేదు: సూచనగా సరళ రేఖతో గీయబడింది.",
+  "Tipo": "రకం",
+  "Base antártica": "అంటార్కిటిక్ స్టేషన్",
+  "Estación terrena de satélites": "ఉపగ్రహ భూ స్టేషన్"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

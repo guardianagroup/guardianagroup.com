@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "地球の影の中",
   "Yahoo Japón": "Yahoo! JAPAN",
   "De punto a punto, en línea recta": "地点間の直線距離",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "すべての遮断をリアルタイムで表示するブラウザ。完成してテストが済み次第登場します。"
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "すべての遮断をリアルタイムで表示するブラウザ。完成してテストが済み次第登場します。",
+  "aquí": "ここに",
+  "Elige uno para ver su ficha.": "1つ選ぶと詳細カードが表示されます。",
+  "acerca más para verlos todos": "すべて見るにはズームインしてください",
+  "Navegador · demostración": "ブラウザー · デモ",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "すべての切断をライブで表示するブラウザーです。ここに表示されているのはデモです。",
+  "Según el mapa de la red de": "ネットワーク地図に基づく、基準年",
+  "Altura aproximada desde la que se ve el planeta": "地球を見ているおおよその高度",
+  "Enlace": "リンク",
+  "Estación": "局",
+  "Previsto": "計画中",
+  "Propuesto": "提案中",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "まだ存在しません。注意喚起として直線で描画しています。",
+  "Tipo": "種類",
+  "Base antártica": "南極基地",
+  "Estación terrena de satélites": "衛星地上局"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

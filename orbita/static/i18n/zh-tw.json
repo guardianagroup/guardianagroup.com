@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "處於地球陰影中",
   "Yahoo Japón": "Yahoo 日本",
   "De punto a punto, en línea recta": "點對點直線距離",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "即時顯示每一次切斷的瀏覽器。完成並測試後推出。"
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "即時顯示每一次切斷的瀏覽器。完成並測試後推出。",
+  "aquí": "在此",
+  "Elige uno para ver su ficha.": "選擇一個以查看其資訊卡。",
+  "acerca más para verlos todos": "放大以查看全部",
+  "Navegador · demostración": "瀏覽器 · 示範",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "即時顯示每一次中斷的瀏覽器。您在此看到的是示範。",
+  "Según el mapa de la red de": "依據的網路地圖年份：",
+  "Altura aproximada desde la que se ve el planeta": "觀看地球的大致高度",
+  "Enlace": "鏈路",
+  "Estación": "站點",
+  "Previsto": "規劃中",
+  "Propuesto": "提議中",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "尚不存在：以直線繪製，僅作提示。",
+  "Tipo": "類型",
+  "Base antártica": "南極站",
+  "Estación terrena de satélites": "衛星地面站"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

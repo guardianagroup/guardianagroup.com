@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "อยู่ในเงาของโลก",
   "Yahoo Japón": "Yahoo ญี่ปุ่น",
   "De punto a punto, en línea recta": "จากจุดถึงจุด เป็นเส้นตรง",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "เบราว์เซอร์ที่แสดงทุกการตัดการเชื่อมต่อแบบสด จะมาเมื่อเสร็จและผ่านการทดสอบ"
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "เบราว์เซอร์ที่แสดงทุกการตัดการเชื่อมต่อแบบสด จะมาเมื่อเสร็จและผ่านการทดสอบ",
+  "aquí": "ที่นี่",
+  "Elige uno para ver su ficha.": "เลือกหนึ่งรายการเพื่อดูการ์ดข้อมูล",
+  "acerca más para verlos todos": "ซูมเข้าเพื่อดูทั้งหมด",
+  "Navegador · demostración": "เบราว์เซอร์ · สาธิต",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "เบราว์เซอร์ที่แสดงการตัดขาดทุกครั้งแบบสด สิ่งที่คุณเห็นที่นี่คือการสาธิต",
+  "Según el mapa de la red de": "ตามแผนที่เครือข่ายปี",
+  "Altura aproximada desde la que se ve el planeta": "ความสูงโดยประมาณที่มองเห็นดาวเคราะห์",
+  "Enlace": "ลิงก์",
+  "Estación": "สถานี",
+  "Previsto": "วางแผนไว้",
+  "Propuesto": "เสนอไว้",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "ยังไม่มีอยู่จริง: วาดเป็นเส้นตรงเพื่อแจ้งให้ทราบ",
+  "Tipo": "ประเภท",
+  "Base antártica": "สถานีแอนตาร์กติก",
+  "Estación terrena de satélites": "สถานีภาคพื้นดินดาวเทียม"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

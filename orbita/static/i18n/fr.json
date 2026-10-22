@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "dans l'ombre de la Terre",
   "Yahoo Japón": "Yahoo Japon",
   "De punto a punto, en línea recta": "De point à point, à vol d’oiseau",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Le navigateur qui montre chaque coupure, en direct. Il arrivera une fois terminé et testé."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Le navigateur qui montre chaque coupure, en direct. Il arrivera une fois terminé et testé.",
+  "aquí": "ici",
+  "Elige uno para ver su ficha.": "Choisissez-en un pour voir sa fiche.",
+  "acerca más para verlos todos": "rapprochez-vous pour tous les voir",
+  "Navegador · demostración": "Navigateur · démonstration",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Le navigateur qui montre chaque coupure, en direct. Ce que vous voyez ici est une démonstration.",
+  "Según el mapa de la red de": "Selon la carte du réseau de",
+  "Altura aproximada desde la que se ve el planeta": "Altitude approximative depuis laquelle on voit la planète",
+  "Enlace": "Liaison",
+  "Estación": "Station",
+  "Previsto": "Prévu",
+  "Propuesto": "Proposé",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "N'existe pas encore : tracé en ligne droite, à titre indicatif.",
+  "Tipo": "Type",
+  "Base antártica": "Base antarctique",
+  "Estación terrena de satélites": "Station terrienne de satellites"
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

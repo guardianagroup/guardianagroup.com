@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "v tieni Zeme",
   "Yahoo Japón": "Yahoo Japonsko",
   "De punto a punto, en línea recta": "Z bodu do bodu, vzdušnou čiarou",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Prehliadač, ktorý ukazuje každé prerušenie naživo. Príde, keď bude hotový a otestovaný."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Prehliadač, ktorý ukazuje každé prerušenie naživo. Príde, keď bude hotový a otestovaný.",
+  "aquí": "tu",
+  "Elige uno para ver su ficha.": "Vyberte jeden a zobrazte jeho kartu.",
+  "acerca más para verlos todos": "priblížte, aby ste videli všetky",
+  "Navegador · demostración": "Prehliadač · ukážka",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Prehliadač, ktorý ukazuje každý výpadok naživo. To, čo tu vidíte, je ukážka.",
+  "Según el mapa de la red de": "Podľa mapy siete z roku",
+  "Altura aproximada desde la que se ve el planeta": "Približná výška, z ktorej vidno planétu",
+  "Enlace": "Spoj",
+  "Estación": "Stanica",
+  "Previsto": "Plánované",
+  "Propuesto": "Navrhnuté",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Zatiaľ neexistuje: zakreslené priamkou, ako upozornenie.",
+  "Tipo": "Typ",
+  "Base antártica": "Antarktická stanica",
+  "Estación terrena de satélites": "Pozemná satelitná stanica"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

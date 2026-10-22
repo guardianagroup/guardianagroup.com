@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "i jordens skygge",
   "Yahoo Japón": "Yahoo Japan",
   "De punto a punto, en línea recta": "Punkt til punkt, i luftlinje",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Nettleseren som viser hvert brudd, direkte. Kommer når den er ferdig og testet."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Nettleseren som viser hvert brudd, direkte. Kommer når den er ferdig og testet.",
+  "aquí": "her",
+  "Elige uno para ver su ficha.": "Velg ett for å se kortet.",
+  "acerca más para verlos todos": "zoom inn for å se alle",
+  "Navegador · demostración": "Nettleser · demo",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Nettleseren som viser hvert brudd, direkte. Det du ser her, er en demo.",
+  "Según el mapa de la red de": "Ifølge nettverkskartet fra",
+  "Altura aproximada desde la que se ve el planeta": "Omtrentlig høyde planeten ses fra",
+  "Enlace": "Forbindelse",
+  "Estación": "Stasjon",
+  "Previsto": "Planlagt",
+  "Propuesto": "Foreslått",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Finnes ikke ennå: tegnet som en rett linje, som et varsel.",
+  "Tipo": "Type",
+  "Base antártica": "Antarktisk stasjon",
+  "Estación terrena de satélites": "Satellittbakkestasjon"
  },
  "p": {
   "intento": "Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

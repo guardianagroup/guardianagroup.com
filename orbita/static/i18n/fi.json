@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "Maan varjossa",
   "Yahoo Japón": "Yahoo Japani",
   "De punto a punto, en línea recta": "Pisteestä pisteeseen, linnuntietä",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Selain, joka näyttää jokaisen katkaisun suorana. Tulee, kun se on valmis ja testattu."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Selain, joka näyttää jokaisen katkaisun suorana. Tulee, kun se on valmis ja testattu.",
+  "aquí": "täällä",
+  "Elige uno para ver su ficha.": "Valitse yksi nähdäksesi sen kortin.",
+  "acerca más para verlos todos": "lähennä nähdäksesi kaikki",
+  "Navegador · demostración": "Selain · demo",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Selain, joka näyttää jokaisen katkon suorana. Tämä on demo.",
+  "Según el mapa de la red de": "Verkkokartan mukaan, vuosi",
+  "Altura aproximada desde la que se ve el planeta": "Likimääräinen korkeus, josta planeetta nähdään",
+  "Enlace": "Yhteys",
+  "Estación": "Asema",
+  "Previsto": "Suunniteltu",
+  "Propuesto": "Ehdotettu",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Ei ole vielä olemassa: piirretty suorana viivana, huomautukseksi.",
+  "Tipo": "Tyyppi",
+  "Base antártica": "Etelämanneren asema",
+  "Estación terrena de satélites": "Satelliittimaa-asema"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

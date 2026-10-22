@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "در سایهٔ زمین",
   "Yahoo Japón": "Yahoo ژاپن",
   "De punto a punto, en línea recta": "نقطه به نقطه، در خط مستقیم",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "مرورگری که هر قطع را زنده نشان می‌دهد. وقتی کامل و آزمایش شد می‌آید."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "مرورگری که هر قطع را زنده نشان می‌دهد. وقتی کامل و آزمایش شد می‌آید.",
+  "aquí": "در اینجا",
+  "Elige uno para ver su ficha.": "یکی را انتخاب کنید تا کارت آن را ببینید.",
+  "acerca más para verlos todos": "برای دیدن همه بزرگ‌نمایی کنید",
+  "Navegador · demostración": "مرورگر · نمایش آزمایشی",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "مرورگری که هر قطعی را به‌صورت زنده نشان می‌دهد. آنچه اینجا می‌بینید یک نمایش آزمایشی است.",
+  "Según el mapa de la red de": "بر اساس نقشه شبکه سال",
+  "Altura aproximada desde la que se ve el planeta": "ارتفاع تقریبی که سیاره از آن دیده می‌شود",
+  "Enlace": "پیوند",
+  "Estación": "ایستگاه",
+  "Previsto": "برنامه‌ریزی‌شده",
+  "Propuesto": "پیشنهادی",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "هنوز وجود ندارد: به‌عنوان هشدار با خط مستقیم رسم شده است.",
+  "Tipo": "نوع",
+  "Base antártica": "ایستگاه قطب جنوب",
+  "Estación terrena de satélites": "ایستگاه زمینی ماهواره"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",
