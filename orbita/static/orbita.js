@@ -1080,7 +1080,7 @@ void main(){
     if (dentro && impar) return; // behind glass, half the frames are enough
     while (cola.length && cola[0].at <= now / 1000) lanza(cola.shift(), t);
     while (ondas.length && t - ondas[0].t0 > 3) ondas.shift();
-    if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) > 1e-5) { ZOOM.z *= Math.exp(Math.log(ZOOM.zt / ZOOM.z) * Math.min(1, dt * 4.5)); /* eased in log space: the same glide at ×2 and at ×50 000 (22 Oct 2026) */ if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) < 1e-4) ZOOM.z = ZOOM.zt; R = R0 * ZOOM.z; RAIZ.style.setProperty('--cerca', Math.min(1, (ZOOM.z - 1) / 19).toFixed(3)); pintaAltura(); }
+    if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) > 1e-5) { ZOOM.z *= Math.exp(Math.log(ZOOM.zt / ZOOM.z) * Math.min(1, dt * 4.5)); /* eased in log space: the same glide at ×2 and at ×50 000 (22 Oct 2026) */ if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) < 1e-4) ZOOM.z = ZOOM.zt; R = R0 * ZOOM.z; RAIZ.style.setProperty('--cerca', Math.min(1, (ZOOM.z - 1) / 19).toFixed(3)); document.body.classList.toggle('hondo', ZOOM.z >= 8); /* 22 Oct 2026, 13:54 (owner): deep in, the top layer buttons go away */ pintaAltura(); }
     avanzaVista(dentro ? dt * 2 : dt, now);
     pintaTierra(t, dentro ? 0.9 : 1);
     pintaRutas(t, dt);

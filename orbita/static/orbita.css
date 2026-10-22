@@ -454,3 +454,7 @@ body.listo .altura { opacity: 1; }
 .altura .v { font: 500 11px/1 var(--mono); color: var(--fg); white-space: nowrap; font-variant-numeric: tabular-nums; }
 body.dentro .altura { opacity: 0; }
 @media (max-width: 760px) { .altura { display: none; } }
+
+/* 22 Oct 2026, 13:54 (owner): «cuando entramos dentro del planeta, los botoneros de arriba que no se vean» — from ×8 the
+   layer buttons and the satellite filter disappear; they come back as you zoom out. */
+body.hondo:not(.dentro) #capas, body.hondo:not(.dentro) #sat-vista, body.hondo:not(.dentro) #sat-fase { opacity: 0 !important; pointer-events: none; transition: opacity .4s; }
