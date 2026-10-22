@@ -1,30 +1,165 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-tierra="static/tierra/" data-demo="1" data-cortes="0">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
-<title>Órbita · GUARDIANA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Órbita, la pantalla principal de GUARDIANA. Demostración de diseño: ZERO funciona; el resto, en construcción.">
 <link rel="icon" href="/favicon.ico">
+<title>GUARDIANA · Órbita</title>
 <link rel="stylesheet" href="static/diseno.css">
-<style>
-  html, body { height: 100%; margin: 0; background: #06080C; color: #E8ECF1; }
-  main { min-height: 100%; display: grid; place-items: center; padding: 32px max(16px, env(safe-area-inset-left, 0px)) 32px max(16px, env(safe-area-inset-right, 0px)); box-sizing: border-box; text-align: center; }
-  .k { font: 500 11px/1 var(--mono, ui-monospace, monospace); letter-spacing: .14em; text-transform: uppercase; color: #9CC3E4; margin: 0 0 18px; }
-  h1 { font: 600 clamp(28px, 4vw, 44px)/1.1 var(--texto, system-ui, sans-serif); margin: 0 0 14px; letter-spacing: -.01em; }
-  p { font: 400 16px/1.5 var(--texto, system-ui, sans-serif); color: #A9B3BE; max-width: 36em; margin: 0 auto 26px; }
-  a.boton { display: inline-block; padding: 12px 20px; border-radius: 999px; border: 1px solid #2A3442; color: #E8ECF1; text-decoration: none; font: 600 14px/1 var(--texto, system-ui, sans-serif); }
-  a.boton:hover { border-color: #3A4656; }
-</style>
+<link rel="preload" href="static/tierra/dia.jpg" as="image">
+<link rel="stylesheet" href="static/orbita.css">
 </head>
-<body>
-<main>
-  <div>
-    <p class="k">GUARDIANA · Órbita</p>
-    <h1>Órbita funciona dentro del programa.</h1>
-    <p>El planeta con los cables submarinos, la fibra, los centros de datos y los satélites se abre desde GUARDIANA, en tu equipo. Aquí no hay nada que ver.</p>
-    <a class="boton" href="/">Volver a la portada</a>
+<body class="dock">
+<div id="escena" aria-hidden="true">
+  <canvas id="estrellas"></canvas>
+  <canvas id="tierra"></canvas>
+  <canvas id="rutas"></canvas>
+</div>
+<div class="cruz v" aria-hidden="true"></div>
+<div class="cruz h" aria-hidden="true"></div>
+<svg id="anillo" class="geo" viewBox="-1 -1 2 2" aria-hidden="true"><circle r=".999" pathLength="1"></circle></svg>
+<div id="anillo2" class="geo" aria-hidden="true"></div>
+<div id="pulso" class="geo" aria-hidden="true"></div>
+
+<header>
+  <div class="izq">
+    <button type="button" id="volver" class="boton chico" hidden><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>Órbita</button>
+    <div class="marca">GUARDIANA</div>
+    <div id="donde" class="donde" hidden></div>
   </div>
-</main>
+  <div id="estado" role="status">
+    <span class="punto"></span><span>Vigilando este equipo y la casa</span>
+    <span class="sep">·</span><span id="cuenta">Cortes en 24 h <b id="n">—</b></span>
+    <span id="demo" class="demo" hidden>DEMOSTRACIÓN</span>
+  </div>
+  <div id="capas" class="capas" role="group" aria-label="Capas del planeta">
+    <button type="button" data-capa="sub" aria-pressed="false" title="Los cables submarinos por donde viajan los datos entre continentes"><i aria-hidden="true"></i>Cables submarinos</button>
+    <button type="button" data-capa="fibra" aria-pressed="false" title="Las grandes redes de fibra que llevan internet por tierra, de las llegadas de cables al interior"><i aria-hidden="true"></i>Fibra por tierra</button>
+    <button type="button" data-capa="puntos" aria-pressed="false" title="Los centros de datos donde se guarda y se sirve internet"><i aria-hidden="true"></i>Centros de datos</button>
+    <button type="button" data-capa="sat" aria-pressed="false" title="Los satélites que llevan datos, en tiempo real"><i aria-hidden="true"></i>Satélites</button>
+  </div>
+  <div id="sat-vista" class="sat-vista" role="group" aria-label="Qué satélites ver" hidden>
+    <div class="orb" role="group" aria-label="Órbita">
+      <div class="titulo">Capas de satélites</div>
+      <button type="button" data-orb="geo" aria-pressed="true"><i aria-hidden="true"></i><span class="n">Geoestacionaria <b></b></span><span class="d">A 35.786 km; parecen quietos sobre el mismo punto (televisión, internet por satélite).</span></button>
+      <button type="button" data-orb="media" aria-pressed="false"><i aria-hidden="true"></i><span class="n">Órbita media <b></b></span><span class="d">Entre 2.000 y 30.000 km: GPS, Galileo, O3b.</span></button>
+      <button type="button" data-orb="baja" aria-pressed="false"><i aria-hidden="true"></i><span class="n">Órbita baja <b></b></span><span class="d">Por debajo de 2.000 km: Starlink, OneWeb, Iridium. Es la más poblada.</span></button>
+    </div>
+    <div class="seg" role="radiogroup" aria-label="Vista">
+      <button type="button" data-vista="equilibrada" role="radio" aria-checked="true" title="Todos menos Starlink, y una muestra fija de Starlink que crece al acercar">Equilibrada</button>
+      <button type="button" data-vista="todos" role="radio" aria-checked="false">Todos</button>
+      <button type="button" data-vista="cielo" role="radio" aria-checked="false" title="Solo los que están ahora a más de 25° sobre tu horizonte"><span class="cielo-t">Sobre ti</span></button>
+    </div>
+  </div>
+  <div id="sat-fase" class="sat-fase" role="status" hidden></div>
+  <div class="derecha">
+    <button type="button" id="lugar-btn" class="lugar-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14.5s4.5-4.2 4.5-7.8a4.5 4.5 0 0 0-9 0c0 3.6 4.5 7.8 4.5 7.8z"/><circle cx="8" cy="6.7" r="1.6"/></svg><span id="lugar-nombre">Precisar ubicación</span></button>
+    <div class="idiomas" role="group" aria-label="Idioma" translate="no"><button type="button" data-l="es" aria-pressed="true">ES</button><button type="button" data-l="en" aria-pressed="false">EN</button><button type="button" data-l="pt" aria-pressed="false">PT</button></div>
+    <a class="boton-icono" href="/estado" aria-label="Ajustes" hidden><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M3.4 12.6l1.4-1.4M11.2 4.8l1.4-1.4"/></svg></a>
+  </div>
+</header>
+
+<nav id="puertas" aria-label="Secciones"></nav>
+<div id="zoom" class="zoom" role="group" aria-label="Acercar el planeta">
+  <button type="button" data-z="mas" aria-label="Acercar"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 3.5v9M3.5 8h9"/></svg></button>
+  <span id="zoom-nivel" class="nivel">×1</span>
+  <button type="button" data-z="menos" aria-label="Alejar"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3.5 8h9"/></svg></button>
+  <button type="button" data-z="base" class="base" aria-label="Volver al tamaño base" hidden><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a5 5 0 1 0 1.5-3.6M3 2.5v2.4h2.4"/></svg></button>
+</div>
+
+<section id="ficha" aria-live="polite">
+  <div class="cuerpo">
+    <div class="k"><span id="ficha-n"></span><span class="de">/03</span><span class="sep">·</span><span id="ficha-k"></span></div>
+    <div class="t" id="ficha-t"></div>
+    <div class="d" id="ficha-d"></div>
+  </div>
+  <a class="abrir" id="ficha-a" href="#"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg></a>
+</section>
+
+<p id="capa-nota" class="capa-nota" translate="no" aria-live="polite" hidden></p>
+<div id="sat-ficha" class="sat-ficha" translate="no" hidden><b></b><span></span></div>
+<aside id="directo" aria-label="En directo">
+  <section id="dato" class="dato" aria-live="polite" translate="no" title="Toca para ver otro dato" hidden>
+    <div class="dk"><span id="dato-k"></span><span id="dato-e" class="de" hidden></span></div>
+    <div class="dv" id="dato-v"></div>
+    <p class="dt" id="dato-t"></p>
+    <div class="dpie"><small id="dato-f"></small><span class="dpuntos" id="dato-p" aria-hidden="true"></span></div>
+  </section>
+  <h2>EN DIRECTO</h2>
+  <ul id="lista"></ul>
+  <div id="espera">Esperando el primer corte. Cada uno aparecerá aquí y sobre el planeta.</div>
+</aside>
+
+<div id="lugar" class="lugar" role="dialog" aria-modal="true" aria-labelledby="lugar-t" hidden>
+  <div class="lugar-caja">
+    <div class="k">UBICACIÓN DE ESTE EQUIPO</div>
+    <h2 id="lugar-t">¿En qué ciudad está este equipo?</h2>
+    <p id="lugar-d">Para dibujarlo en su sitio. Se mide con la ubicación de tu sistema o lo eliges tú, y siempre lo confirmas. Se guarda solo en este equipo; GUARDIANA no lo envía a nadie.</p>
+    <div id="lugar-hallado" class="hallado" hidden>
+      <div class="ciudad" id="lugar-ciudad"></div>
+      <div class="dato" id="lugar-dato"></div>
+    </div>
+    <div id="lugar-buscar" class="buscar" hidden>
+      <label for="lugar-q">Busca tu ciudad o municipio</label>
+      <input id="lugar-q" type="search" autocomplete="off" spellcheck="false" placeholder="Cartagena, Medellín, Madrid…">
+      <div id="lugar-res" class="res" role="listbox" aria-label="Ciudades"></div>
+    </div>
+    <div class="acciones" id="lugar-acciones"></div>
+  </div>
+</div>
+
+<section id="seccion" aria-label="Sección">
+  <iframe id="marco" title="Sección"></iframe>
+  <!-- The common section (19 Oct 2026, agreed by the three): three symmetric zones, the show in
+       the middle, the figures on the left, what just happened on the right, and one line below
+       for the moment, the choice and the main action. -->
+  <div id="plantilla" class="plantilla" hidden>
+    <aside class="zona zona-izq" aria-label="Cifras">
+      <div class="k" id="pl-k1">HOY</div>
+      <dl id="pl-cifras"></dl>
+    </aside>
+    <div class="escenario">
+      <canvas id="espectaculo" aria-hidden="true"></canvas>
+      <div class="vacio" id="pl-vacio" hidden></div>
+      <!-- ZERO: the browser on screen (owner, 20 Oct 2026): search, Enter, the web in the middle
+           and on the right what GUARDIANA cuts. -->
+      <form class="busca-web" id="pl-busca" role="search" hidden>
+        <button type="button" class="nav-web" id="pl-atras" aria-label="Atrás" hidden><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg></button>
+        <span class="ico" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="7" cy="7" r="4.6"/><path d="m10.4 10.4 3.4 3.4"/></svg></span>
+        <label class="sr" for="pl-q">Busca o escribe una dirección</label>
+        <input id="pl-q" type="text" autocomplete="off" spellcheck="false" placeholder="Busca o escribe una dirección">
+        <span class="escudo-web" id="pl-escudo" hidden><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 1.8 13.2 4v3.8c0 3-2.2 5.4-5.2 6.4-3-1-5.2-3.4-5.2-6.4V4z"/></svg><b id="pl-escudo-n">0</b></span>
+      </form>
+      <div class="visor" id="pl-visor" hidden>
+        <div class="carga" id="pl-carga"></div>
+        <iframe id="pl-web" title="Web"></iframe>
+        <div class="filo" id="pl-filo" aria-hidden="true"></div>
+      </div>
+    </div>
+    <aside class="zona zona-der" aria-label="En directo">
+      <div class="k" id="pl-k2">EN DIRECTO</div>
+      <ul id="pl-lista"></ul>
+    </aside>
+    <footer class="pie">
+      <div class="pie-izq"><span class="k" id="pl-nota"></span></div>
+      <div class="modos" role="tablist" aria-label="Forma de verlo" id="pl-modos"></div>
+      <div class="pie-der"><a class="btn" id="pl-accion" href="#"></a></div>
+    </footer>
+  </div>
+  <div id="sin-pagina" class="sin-pagina" hidden>
+    <div class="k" id="sp-k"></div>
+    <h1 id="sp-t"></h1>
+    <p id="sp-d"></p>
+  </div>
+</section>
+
+<script src="static/idioma.js"></script>
+<script src="static/orbita-secciones.js"></script>
+<script src="static/orbita.js"></script>
+<script src="static/capas.js"></script>
+<script src="static/datos-curiosos.js"></script>
+<script src="static/conexion.js"></script>
 </body>
 </html>
