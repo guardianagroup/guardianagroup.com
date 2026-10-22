@@ -211,7 +211,7 @@
   // ---------- Geometry shared with the CSS (--u) ----------
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
   // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
-  const ZOOM = { z: 1, zt: 1, MAX: 20 }; // 22 Oct 2026, 13:11 (owner): «hasta 20×, y que entre despacito, suave»
+  const ZOOM = { z: 1, zt: 1, MAX: 80000 }; // 22 Oct 2026, 13:50 (owner): «hasta 500 metros del suelo» — 40 000 km / 80 000 = 0,5 km nominal; before: ×20 («despacito, suave»)
   const LIMPIO_DESDE = 4; // from here the planet is drawn flat: black water, grey land, data in white // 22 Oct 2026 (owner): «sube más el zoom aún» // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
@@ -280,7 +280,7 @@
     get dentro() { return dentro; },
     get pais() { return (LUGAR && LUGAR.pais) || CASA || null; },
     // 22 Oct 2026: used by the automated checks (Playwright) to look at a place at a given zoom.
-    ir(lon, lat, z) { vista.lon = lon; vista.lat = Math.max(-60, Math.min(60, lat)); vista.vlon = vista.vlat = 0; meta = null; ZOOM.zt = Math.max(1, Math.min(ZOOM.MAX, z || 1)); quietoHasta = performance.now() + 60000; pintaZoom(); },
+    ir(lon, lat, z) { vista.lon = lon; vista.lat = Math.max(-89.5, Math.min(89.5, lat)); vista.vlon = vista.vlat = 0; meta = null; ZOOM.zt = Math.max(1, Math.min(ZOOM.MAX, z || 1)); quietoHasta = performance.now() + 60000; pintaZoom(); },
     get lugar() { try { if (LUGAR) return { lat: LUGAR.lat, lon: LUGAR.lon, nombre: LUGAR.ciudad, aprox: false }; const p = centros[CASA]; return p ? { lat: p.lat, lon: p.lon, nombre: nombrePais(CASA), aprox: true } : null; } catch (_) { return null; } },
   };
   cvT.addEventListener('pointerdown', (e) => {
@@ -294,7 +294,7 @@
     const now = performance.now(), dt = Math.max(8, now - arrastre.t);
     const dx = e.clientX - arrastre.x, dy = e.clientY - arrastre.y;
     const k = 57 / R;
-    vista.lon -= dx * k; vista.lat = Math.max(-60, Math.min(60, vista.lat + dy * k));
+    vista.lon -= dx * k; vista.lat = Math.max(-latMax(), Math.min(latMax(), vista.lat + dy * k));
     vista.vlon = -dx * k / dt * 1000; vista.vlat = dy * k / dt * 1000;
     arrastre = { x: e.clientX, y: e.clientY, t: now };
   });
@@ -303,6 +303,9 @@
 
   // ---------- Zoom: wheel, pinch, double click, the +/− rail on the right; Esc returns ----------
   const zControl = $('zoom'), zNivel = $('zoom-nivel');
+  // how far towards the poles the camera may turn: ±60° with the whole planet in view (the poles are then at the limb),
+  // up to ±89.5° once zoomed in, so the polar stations can be reached (22 Oct 2026: Antarctica and the Arctic are data too)
+  const latMax = () => ZOOM.z <= 1.5 ? 60 : Math.min(89.5, 60 + 29.5 * Math.min(1, Math.log(ZOOM.z / 1.5) / Math.log(4)));
   function acerca(zt, x, y) {
     zt = Math.max(1, Math.min(ZOOM.MAX, zt));
     // 20 Oct 2026 (owner): the zoom stays on the same point; the planet does not turn when you zoom.
@@ -312,7 +315,7 @@
   }
   function pintaZoom() {
     const z = Math.round(ZOOM.zt * 10) / 10;
-    if (zNivel) zNivel.textContent = '×' + (z % 1 ? z.toFixed(1).replace('.', ',') : z.toFixed(0));
+    if (zNivel) zNivel.textContent = '×' + (z < 100 && z % 1 ? z.toFixed(1).replace('.', ',') : Math.round(z).toLocaleString(document.documentElement.lang === 'en' ? 'en-GB' : 'es-ES'));
     if (zControl) {
       zControl.querySelector('[data-z="mas"]').disabled = ZOOM.zt >= ZOOM.MAX - 1e-3;
       zControl.querySelector('[data-z="menos"]').disabled = ZOOM.zt <= 1 + 1e-3;
@@ -326,9 +329,12 @@
   const alturaEl = $('altura');
   function pintaAltura() {
     if (!alturaEl) return;
-    const z = Math.max(1, ZOOM.z), km = Math.round(40000 / z / (z >= 10 ? 10 : 100)) * (z >= 10 ? 10 : 100);
+    const z = Math.max(1, ZOOM.z), km = 40000 / z, loc = document.documentElement.lang === 'en' ? 'en-GB' : 'es-ES';
     const v = alturaEl.querySelector('.v'), i = alturaEl.querySelector('i');
-    if (v) v.textContent = '≈ ' + km.toLocaleString(document.documentElement.lang === 'en' ? 'en-GB' : 'es-ES') + ' km';
+    // 22 Oct 2026, 13:50 (owner): down to 500 m — kilometres while it reads as such, metres below 10 km
+    const texto = km >= 1000 ? Math.round(km / 100) * 100 + ' km' : km >= 100 ? Math.round(km / 10) * 10 + ' km' : km >= 10 ? Math.round(km) + ' km'
+      : km >= 1 ? (Math.round(km * 10) / 10).toLocaleString(loc, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' km' : Math.round(km * 1000 / 10) * 10 + ' m';
+    if (v) v.textContent = '≈ ' + (km >= 10 ? Number(texto.split(' ')[0]).toLocaleString(loc) + ' ' + texto.split(' ')[1] : texto);
     if (i) i.style.top = (100 * Math.log(z) / Math.log(ZOOM.MAX)).toFixed(1) + '%';
   }
   const libreZoom = () => !dentro && caja.hidden;
@@ -339,7 +345,7 @@
   }, { passive: false });
   cvT.addEventListener('dblclick', (e) => {
     if (!libreZoom()) return;
-    if (ZOOM.zt >= ZOOM.MAX - 1e-3) acerca(1); else acerca(ZOOM.zt < 1.5 - 1e-3 ? 1.5 : ZOOM.zt < 4 - 1e-3 ? 4 : ZOOM.zt < 8 - 1e-3 ? 8 : ZOOM.MAX, e.clientX, e.clientY);
+    if (ZOOM.zt >= ZOOM.MAX - 1e-3) acerca(1); else { const pasos = [1.5, 4, 8, 20, 80, 400, 2000, 10000, ZOOM.MAX]; acerca(pasos.find((p) => ZOOM.zt < p - 1e-3) || ZOOM.MAX, e.clientX, e.clientY); }
   });
   const dedos = new Map(); let pellizco = null;
   cvT.addEventListener('pointerdown', (e) => { if (e.pointerType === 'touch') dedos.set(e.pointerId, e); if (dedos.size === 2) { const [a, b] = [...dedos.values()]; pellizco = { d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), z: ZOOM.zt }; arrastre = null; } });
@@ -374,7 +380,7 @@
       if (Math.abs(d) < 0.05 && Math.abs(meta.lat - vista.lat) < 0.05) meta = null;
       return;
     }
-    vista.lon += vista.vlon * dt; vista.lat = Math.max(-60, Math.min(60, vista.lat + vista.vlat * dt));
+    vista.lon += vista.vlon * dt; vista.lat = Math.max(-latMax(), Math.min(latMax(), vista.lat + vista.vlat * dt));
     vista.vlon *= Math.pow(0.04, dt); vista.vlat *= Math.pow(0.04, dt);
     if (now > quietoHasta && ZOOM.zt <= 1.02) { vista.lon += VEL * dt; vista.lat += (14 - vista.lat) * dt * 0.25; }
   }
@@ -416,7 +422,7 @@ void main(){
    float d=acos(clamp(dot(w,o.xyz),-1.,1.));float rd=.02+o.w*.32;float f=1.-o.w;
    float ring=exp(-pow((d-rd)/(.008+.01*o.w),2.))*f*f;float core=exp(-d*d/.0008)*f*f*f;
    vec3 oc=uOk[i]>.5?vec3(.95,.5,.42):vec3(.66,.82,.96);c+=oc*(ring*1.25+core*2.);}}
-  float e=smoothstep(1.,1.-1.6/uR,r);col=c*uAten*e;al=e;
+  float e=smoothstep(1.,1.-max(1.6/uR,4e-7),r);col=c*uAten*e;al=e;
  }
  float h1=r>1.?exp(-(r-1.)/.05)*.5:0.;float h2=r>1.?exp(-(r-1.)/.011)*.55:0.;
  vec3 hc=atm*(h1+h2)*uAten;
@@ -1074,7 +1080,7 @@ void main(){
     if (dentro && impar) return; // behind glass, half the frames are enough
     while (cola.length && cola[0].at <= now / 1000) lanza(cola.shift(), t);
     while (ondas.length && t - ondas[0].t0 > 3) ondas.shift();
-    if (Math.abs(ZOOM.zt - ZOOM.z) > 1e-4) { ZOOM.z += (ZOOM.zt - ZOOM.z) * Math.min(1, dt * 4.5); /* half the old speed: the zoom glides in */ if (Math.abs(ZOOM.zt - ZOOM.z) < 1e-3) ZOOM.z = ZOOM.zt; R = R0 * ZOOM.z; RAIZ.style.setProperty('--cerca', ((ZOOM.z - 1) / (ZOOM.MAX - 1)).toFixed(3)); pintaAltura(); }
+    if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) > 1e-5) { ZOOM.z *= Math.exp(Math.log(ZOOM.zt / ZOOM.z) * Math.min(1, dt * 4.5)); /* eased in log space: the same glide at ×2 and at ×50 000 (22 Oct 2026) */ if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) < 1e-4) ZOOM.z = ZOOM.zt; R = R0 * ZOOM.z; RAIZ.style.setProperty('--cerca', Math.min(1, (ZOOM.z - 1) / 19).toFixed(3)); pintaAltura(); }
     avanzaVista(dentro ? dt * 2 : dt, now);
     pintaTierra(t, dentro ? 0.9 : 1);
     pintaRutas(t, dt);
