@@ -317,6 +317,17 @@
     'ZERO se queda en blanco y negro; las webs se ven en color.': ['ZERO stays in black and white; sites show in colour.', 'O ZERO fica em preto e branco; os sites aparecem em cores.'],
     // ZERO, the auction (22 Oct 2026)
     'Subasta': ['Auction', 'Leilão'],
+    'Ficha de la empresa': ['Company card', 'Ficha da empresa'],
+    'Resumen de la subasta': ['Auction summary', 'Resumo do leilão'],
+    'el anuncio de arriba': ['the top ad', 'o anúncio do topo'], 'el anuncio de al lado': ['the side ad', 'o anúncio lateral'],
+    'el anuncio entre párrafos': ['the ad between paragraphs', 'o anúncio entre parágrafos'], 'el anuncio de abajo': ['the bottom ad', 'o anúncio de baixo'],
+    'el anuncio de vídeo': ['the video ad', 'o anúncio em vídeo'],
+    'Es la franja ancha de arriba del todo (728 × 90 píxeles).': ['It is the wide strip at the very top (728 × 90 pixels).', 'É a faixa larga bem no alto (728 × 90 pixels).'],
+    'Es el recuadro de la columna de al lado del texto (300 × 250 píxeles).': ['It is the box in the column beside the text (300 × 250 pixels).', 'É o quadro na coluna ao lado do texto (300 × 250 pixels).'],
+    'Es el recuadro entre dos párrafos del artículo (300 × 250 píxeles), el anuncio más común de internet.': ['It is the box between two paragraphs of the article (300 × 250 pixels), the most common ad on the internet.', 'É o quadro entre dois parágrafos do artigo (300 × 250 pixels), o anúncio mais comum da internet.'],
+    'Es la franja fija al pie de la pantalla (320 × 50 píxeles).': ['It is the strip fixed to the bottom of the screen (320 × 50 pixels).', 'É a faixa fixa no pé da tela (320 × 50 pixels).'],
+    'Es el vídeo publicitario que sale antes del vídeo que quieres ver (640 × 360 píxeles).': ['It is the advertising video that plays before the video you want to watch (640 × 360 pixels).', 'É o vídeo publicitário que aparece antes do vídeo que você quer ver (640 × 360 pixels).'],
+    'Nadie ganó: ninguna oferta llegó a tiempo.': ['Nobody won: no offer arrived in time.', 'Ninguém venceu: nenhuma oferta chegou a tempo.'],
     'Qué ver': ['What to show', 'O que ver'],
     'Empresa': ['Company', 'Empresa'],
     'Ofreció': ['Offered', 'Ofereceu'],
@@ -373,6 +384,10 @@
     return null;
   }
   const PATRONES = [
+    [/^Se subastó (.+)$/, (m) => (cur === 'en' ? 'Auctioned: ' : 'Leiloado: ') + t(m[1])],
+    [/^(\d+) empresas pujaron por mostrarte (.+)$/, (m) => m[1] + (cur === 'en' ? ' companies bid to show you ' : ' empresas deram lances para mostrar a você ') + t(m[2])],
+    [/^(\d+) empresas pujaron$/, (m) => m[1] + (cur === 'en' ? ' companies bid' : ' empresas deram lances')],
+    [/^Ganó (.+): ofreció (.+) por mostrar el anuncio mil veces\.$/, (m) => (cur === 'en' ? 'Won by ' + t(m[1]) + ': offered ' + m[2] + ' to show the ad a thousand times.' : 'Venceu ' + t(m[1]) + ': ofereceu ' + m[2] + ' para mostrar o anúncio mil vezes.')],
     [/^(\d+) empresas$/, (m) => m[1] + (cur === 'en' ? ' companies' : ' empresas')],
     [/^(\d+) empresas querían tu visita$/, (m) => m[1] + (cur === 'en' ? ' companies wanted your visit' : ' empresas queriam sua visita')],
     [/^(\d+) ofertas?$/, (m) => m[1] + (cur === 'en' ? (m[1] === '1' ? ' offer' : ' offers') : (m[1] === '1' ? ' oferta' : ' ofertas'))],
