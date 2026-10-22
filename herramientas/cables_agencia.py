@@ -79,8 +79,9 @@ ALIAS = {  # the same cable under different names (lower case, letters and digit
     'tongacablesystem': 'tongacable', 'manatuaonepolynesiacable': 'manatua', 'southerncrosscablenetworksccn': 'southerncross',
     # Americas
     'atlanticcrossing1': 'ac1', 'atlanticcrossing1ac1': 'ac1', 'yellowatlanticcrossing2': 'yellow', 'atlanticcrossing2': 'yellow', 'ac2': 'yellow',
-    'flagatlantic1': 'fa1', 'flagatlantic1fa1': 'fa1', 'tatatgnatlantic': 'tgnatlantic', 'gttexpress': 'hiberniaexpress', 'gttexpresshiberniaexpress': 'hiberniaexpress',
-    'gttatlantic': 'hiberniaatlantic', 'gttatlantichiberniaatlantic': 'hiberniaatlantic', 'hibernianorth': 'hiberniaatlantic', 'hiberniasouth': 'hiberniaatlantic',
+    'flagatlantic1': 'fa1', 'flagatlantic1fa1': 'fa1', 'tatatgnatlantic': 'tgnatlantic', 'gttexpress': 'exaexpress', 'gttexpresshiberniaexpress': 'exaexpress', 'hiberniaexpress': 'exaexpress',
+    'gttatlantic': 'exanorth', 'gttatlantichiberniaatlantic': 'exanorth', 'hiberniaatlantic': 'exanorth', 'hibernianorth': 'exanorth', 'hiberniasouth': 'exasouth', 'exaatlanticnorth': 'exanorth', 'exaatlanticsouth': 'exasouth',
+    'darwinjakartasingaporeenlacenuevoentrenwcsyasc': 'darwinjakartasingapore', 'djsc': 'darwinjakartasingapore',
     'havfrueaec2': 'havfrue', 'aec2': 'havfrue', 'havfrueamericaeuropeconnect2': 'havfrue', 'americaeuropeconnect1': 'aec1', 'americaeuropeconnect1aec1': 'aec1', 'americaeuropeconnect': 'aec1', 'aeconnect': 'aec1',
     'arcos': 'arcos1', 'americasii': 'americas2', 'americas2': 'americas2', 'pacificcaribbeancablesystem': 'pccs', 'pacificcaribbeancablesystempccs': 'pccs',
     'sam1southamerica1': 'sam1', 'southamerica1': 'sam1', 'southamericancrossingsaclan': 'sac', 'southamericancrossing': 'sac', 'saclan': 'sac', 'sac': 'sac',
@@ -89,7 +90,7 @@ ALIAS = {  # the same cable under different names (lower case, letters and digit
     'colombiafloridasubseafiber': 'cfx1', 'colombiafloridasubseafibercfx1': 'cfx1', 'colombiafloridaxpress': 'cfx1',
     'globalcaribbeannetwork': 'gcn', 'globalcaribbeannetworkgcn': 'gcn', 'surinameguyanasubmarinecablesystem': 'sgscs', 'surinameguyanasubmarinecablesystemsgscs': 'sgscs',
     'challengerbermuda1': 'cb1', 'challengerbermuda1cb1': 'cb1', 'cbuscaribbeanbermudaus': 'cbus', 'caribbeanbermudaus': 'cbus',
-    'europeindiagateway': 'eig', 'gulfbridgeinternational': 'gbi', 'gulfbridgeinternationalcablesystem': 'gbi', 'omanaustraliacable': 'oac',
+    'brus': 'brusa', 'europeindiagateway': 'eig', 'gulfbridgeinternational': 'gbi', 'gulfbridgeinternationalcablesystem': 'gbi', 'omanaustraliacable': 'oac',
     'akornalaskaoregonnetwork': 'akorn', 'alaskaoregonnetwork': 'akorn', 'quintillionsubseacable': 'quintillion', 'alaskaunitedaueastyauwest': 'alaskaunited',
 }
 
@@ -104,11 +105,12 @@ def generica(k):
 
 def clave(n):
     b = re.sub(r'\s*\(.*?\)\s*', ' ', n or '')  # «GLO-1 (Globacom-1)» → the part outside the brackets and the part inside
+    if ' / ' in b: b = b.split(' / ')[0]  # «Amitié / America Europe Connect-3» → the first of the names it goes by
     k = compacta(base_cable(b))
     k2 = compacta(n)
     for c in (k2, k):
         if c in ALIAS: return generica(ALIAS[c]) or ALIAS[c]
-    k3 = compacta(GENERICAS.sub(' ', base_cable(b)))
+    k3 = generica(compacta(GENERICAS.sub(' ', base_cable(b))))  # «Skagenfiber West» and «Skagen Fiber West» are one
     if len(k3) >= 3:
         if k3 in ALIAS: return generica(ALIAS[k3]) or ALIAS[k3]
         return k3
