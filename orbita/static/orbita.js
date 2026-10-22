@@ -278,6 +278,7 @@
     aVista, pantalla, vec, ctx: cx2,
     get geo() { return { W, H, CX, CY, R, R0, U, DPR }; },
     get dentro() { return dentro; },
+    get centros() { return centros; }, // country centroids for the country labels and cards (22 Oct 2026)
     get pais() { return (LUGAR && LUGAR.pais) || CASA || null; },
     // 22 Oct 2026: used by the automated checks (Playwright) to look at a place at a given zoom.
     ir(lon, lat, z) { vista.lon = lon; vista.lat = Math.max(-89.5, Math.min(89.5, lat)); vista.vlon = vista.vlat = 0; meta = null; ZOOM.zt = Math.max(1, Math.min(ZOOM.MAX, z || 1)); quietoHasta = performance.now() + 60000; pintaZoom(); },

@@ -1,0 +1,91 @@
+{
+ "nota": "Ficha de país (owner, 22 Oct 2026): red móvil, operadores, fibra, 10G, troncales, intercambio. Escrita a mano por la agencia; «confirmado» solo cuando lo han dado por bueno al menos dos voces. Lo que no está confirmado sale como «Datos en verificación».",
+ "paises": {
+  "CZ": {
+   "movil": "4G desde 2013 (ya cubre casi todo el país); 5G desde finales de 2020, tras la subasta de frecuencias de noviembre de 2020; en 2025 el 5G llega a la mayoría de la población.",
+   "operadores": "O2 (red de CETIN), T-Mobile, Vodafone; Nordic Telecom en 5G fijo.",
+   "fija": "Fibra al hogar en expansión (CETIN, T-Mobile y operadores locales), todavía por debajo de la media de la UE; mucho cable coaxial e inalámbrico fijo.",
+   "troncales": "País sin mar: todo el tráfico internacional sale por fibra terrestre hacia Fráncfort, Viena, Múnich y Varsovia; red académica CESNET.",
+   "intercambio": "NIX.CZ (Praga, con nodo en Brno): el punto neutro del país, desde 1996.",
+   "confirmado": false
+  },
+  "ES": {
+   "movil": "4G desde 2013; 5G desde junio de 2019 (Vodafone, primera en España) y despliegue masivo tras las subastas de 2021 (700 MHz) y 2022 (26 GHz); 5G SA (independiente) desde 2023.",
+   "operadores": "Movistar (Telefónica), MasOrange (fusión Orange–MásMóvil, 2024), Vodafone España (Zegona desde 2024), Digi.",
+   "fija": "Una de las coberturas de fibra al hogar más altas de Europa: más del 90 % de los hogares con FTTH; el cobre se apaga en 2024–2025.",
+   "diez": "Ofertas de 10 Gbit/s simétricos al hogar desde 2023 (Digi, Movistar en pruebas) sobre XGS-PON.",
+   "troncales": "Amarres de cables submarinos en Bilbao (Marea, Grace Hopper), Barcelona (2Africa, Medusa), Conil/Chipiona (Canarias y Atlántico), Valencia (ORVAL) y Málaga/Estepona; troncales terrestres de Telefónica, Lyntia y Adamo.",
+   "intercambio": "ESpanix y DE-CIX Madrid (Madrid), CATNIX (Barcelona).",
+   "confirmado": false
+  },
+  "CO": {
+   "movil": "4G desde 2014 (subasta de 2013); 5G desde 2024, tras la subasta de diciembre de 2023: Claro lanzó en febrero de 2024, seguido de Movistar, Tigo y WOM.",
+   "operadores": "Claro, Movistar, Tigo-UNE, WOM.",
+   "fija": "Fibra al hogar en crecimiento rápido (Claro, ETB, Tigo, Movistar), concentrada en Bogotá, Medellín, Cali y Barranquilla; cable coaxial todavía muy presente.",
+   "troncales": "Cables submarinos en Barranquilla y Cartagena (Caribe: AMX-1, PCCS, SAC, GlobeNet, Arcos) y en Buenaventura/Tolú hacia el Pacífico; troncales terrestres de InterNexa, Claro y ETB por la cordillera.",
+   "intercambio": "NAP Colombia (Bogotá), de la CCIT.",
+   "confirmado": false
+  },
+  "US": {
+   "movil": "4G LTE desde diciembre de 2010 (Verizon); 5G desde 2018–2019 (Verizon, AT&T, T-Mobile), con T-Mobile como la red 5G más extensa; 5G-Advanced en pruebas desde 2024.",
+   "operadores": "Verizon, AT&T, T-Mobile (que absorbió Sprint en 2020); operadores por cable (Spectrum, Xfinity) como virtuales.",
+   "fija": "Fibra al hogar en expansión (AT&T, Verizon Fios, Frontier) pero mucho cable coaxial (DOCSIS); programas federales BEAD para zonas rurales.",
+   "diez": "Ofertas de 5–10 Gbit/s al hogar (AT&T, Google Fiber, Ziply) en ciudades concretas desde 2022–2023.",
+   "troncales": "Los grandes amarres: Virginia Beach, Myrtle Beach y Nueva Jersey/Long Island al Atlántico; Los Ángeles, Grover Beach, Hillsboro (Oregón) y Pacific City al Pacífico; Florida al Caribe.",
+   "intercambio": "Equinix y DE-CIX en Ashburn, Nueva York, Chicago, Dallas, Los Ángeles; Ashburn (Virginia) es la mayor concentración de centros de datos del mundo.",
+   "confirmado": false
+  },
+  "CN": {
+   "movil": "4G desde 2013–2014; 5G desde el 1 de noviembre de 2019: la mayor red 5G del mundo (más de 4 millones de estaciones base en 2025); 5G-Advanced (5.5G) comercial desde 2024 (China Mobile en centenares de ciudades).",
+   "operadores": "China Mobile, China Telecom, China Unicom, China Broadnet.",
+   "fija": "Fibra al hogar casi universal en ciudades («ciudades gigabit»); el mayor parque de FTTH del mundo.",
+   "diez": "Abril de 2025: China Unicom y Huawei estrenan en Xiong'an (Hebei) la primera red comercial 10G al hogar del mundo (10G-PON, casi 10 Gbit/s por abonado); en 2025–2026 se extiende a otras ciudades.",
+   "troncales": "Amarres en Shanghái (Chongming, Nanhui), Qingdao, Shantou, Hong Kong; troncales nacionales de China Telecom, China Mobile y China Unicom; cables terrestres hacia Rusia, Kazajistán, Mongolia y el sudeste asiático.",
+   "intercambio": "Puntos de intercambio nacionales en Pekín, Shanghái y Cantón, bajo control estatal; Hong Kong (HKIX) como puerta internacional.",
+   "confirmado": false
+  },
+  "DE": {
+   "movil": "4G desde 2010–2011; 5G desde julio de 2019 (Vodafone y Telekom); 5G SA desde 2021–2023.",
+   "operadores": "Deutsche Telekom, Vodafone, O2 (Telefónica Deutschland), 1&1 (cuarta red propia desde 2023).",
+   "fija": "Fibra al hogar retrasada frente a Europa (alrededor del 40 % de los hogares con FTTH disponible en 2025), con mucho VDSL de cobre y cable coaxial; despliegue acelerado de Telekom y de cooperativas.",
+   "troncales": "Amarres en Norden y Sylt (Mar del Norte, hacia el Atlántico y Noruega) y en el Báltico (Rostock); troncales terrestres de Telekom, GasLINE y 1&1 Versatel.",
+   "intercambio": "DE-CIX Fráncfort, el mayor punto de intercambio del mundo por tráfico; también Hamburgo, Múnich y Düsseldorf.",
+   "confirmado": false
+  },
+  "FR": {
+   "movil": "4G desde 2012; 5G desde noviembre–diciembre de 2020 (Orange, SFR, Bouygues, Free).",
+   "operadores": "Orange, SFR, Bouygues Telecom, Free Mobile.",
+   "fija": "Fibra al hogar muy extendida (más del 85 % de los locales conectables), con el apagado progresivo del cobre entre 2025 y 2030.",
+   "diez": "Ofertas de hasta 8–10 Gbit/s (Free, Orange, SFR) desde 2021–2023.",
+   "troncales": "Marsella es el gran puerto de datos entre Europa, Asia y África (AAE-1, SEA-ME-WE, 2Africa, PEACE, Medusa); amarres atlánticos en Saint-Hilaire-de-Riez, Lannion y Penmarch (Amitié, Dunant).",
+   "intercambio": "France-IX (París y Marsella), Equinix París.",
+   "confirmado": false
+  },
+  "GB": {
+   "movil": "4G desde octubre de 2012 (EE); 5G desde mayo de 2019 (EE), después Vodafone, O2 y Three.",
+   "operadores": "EE (BT), VodafoneThree (fusión de Vodafone y Three en 2025), O2 (Virgin Media O2).",
+   "fija": "Fibra al hogar en despliegue acelerado (Openreach, CityFibre, Virgin Media): más de dos tercios de los locales en 2025; apagado del cobre previsto hacia 2030.",
+   "troncales": "Amarres en Bude y Widemouth Bay (Cornualles), Highbridge, Lowestoft, Pevensey Bay, Brean; Londres es el nudo de los cables transatlánticos.",
+   "intercambio": "LINX (Londres), uno de los mayores del mundo; LONAP; IXManchester.",
+   "confirmado": false
+  },
+  "JP": {
+   "movil": "4G desde 2010; 5G desde marzo de 2020 (NTT Docomo, KDDI, SoftBank; Rakuten en junio de 2020).",
+   "operadores": "NTT Docomo, KDDI (au), SoftBank, Rakuten Mobile.",
+   "fija": "Fibra al hogar casi universal (NTT Flet's Hikari y KDDI); uno de los primeros países en FTTH masivo.",
+   "diez": "10 Gbit/s al hogar desde 2015 (So-net NURO 10G) y desde 2020 en NTT (Flet's Hikari Cross).",
+   "troncales": "Amarres en Chikura y Minamiboso (Chiba), Shima (Mie), Maruyama, Kitaibaraki, Ajigaura y Toyohashi; es el nudo de los cables transpacíficos (JUPITER, FASTER, PLCN, Unity, TPE).",
+   "intercambio": "JPNAP y JPIX (Tokio y Osaka), BBIX.",
+   "confirmado": false
+  },
+  "KR": {
+   "movil": "4G LTE desde julio de 2011; 5G desde el 3 de abril de 2019 (SK Telecom, KT, LG U+), el primer país con 5G comercial a escala nacional.",
+   "operadores": "SK Telecom, KT, LG U+.",
+   "fija": "Fibra al hogar prácticamente universal; velocidades medias entre las más altas del mundo.",
+   "diez": "10 Gbit/s al hogar (KT «10 Giga Internet») desde noviembre de 2018; ofertas de 2,5 y 5 Gbit/s generalizadas.",
+   "troncales": "Amarres en Busan (Songjeong), Geoje y Taean; cables APG, NCP, SJC2, FEA, TPE.",
+   "intercambio": "KINX y KT-IX (Seúl).",
+   "confirmado": false
+  }
+ }
+}
