@@ -52,7 +52,7 @@ def main():
         for c in datos:
             if not isinstance(c, dict) or not c.get('nombre') or not c.get('pais'): continue
             if num(c.get('lat')) is None or num(c.get('lon')) is None: continue
-            if str(c.get('estado') or '').lower().startswith(('no existe', 'cerrado', 'fuera')): continue
+            if str(c.get('estado') or '').lower().startswith(('no existe', 'cerrado', 'fuera', 'no verificado', 'es otra cosa')): continue
             por.setdefault(clave(c['nombre'], c['pais']), []).append((quien(f), c))
     conf = set()
     p = os.path.join(CARPETA, 'confirmados.txt')
