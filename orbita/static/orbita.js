@@ -202,7 +202,7 @@
   // ---------- Geometry shared with the CSS (--u) ----------
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
   // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
-  const ZOOM = { z: 1, zt: 1, MAX: 2 };
+  const ZOOM = { z: 1, zt: 1, MAX: 2.5 }; // 21 Oct 2026 (owner): «un toque más de zoom», from ×2 to ×2,5
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
   function mide() {
@@ -375,7 +375,7 @@ void main(){
   float lam=dot(n,uL);float dl=smoothstep(-.22,.42,lam);
   vec3 sup=mix(dia*vec3(.96,1.,1.06),vec3(.97,.98,1.),nub*.88);
   vec3 c=sup*(.05+1.08*max(lam,0.))*mix(.3,1.,dl);
-  c+=sup*vec3(.62,.74,.92)*.17*(1.-dl);
+  c+=sup*vec3(.62,.74,.92)*.31*(1.-dl); // 21 Oct 2026 (owner): the night side a little clearer, still plainly night
   c+=luz*vec3(1.,.78,.48)*1.5*(1.-dl)*(1.-nub*.8);
   vec3 h=normalize(uL+vec3(0.,0.,1.));c+=vec3(.8,.9,1.)*pow(max(dot(n,h),0.),160.)*agua*(1.-nub)*.32;
   float fr=pow(1.-n.z,2.4);c=mix(c,atm*(.18+.8*max(lam+.35,0.)),fr*.6);

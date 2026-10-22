@@ -73,7 +73,7 @@
     'Acercar el planeta': ['Zoom the planet', 'Aproximar o planeta'],
     'Acercar': ['Zoom in', 'Aproximar'],
     'Cables': ['Cables', 'Cabos'],
-    'Infraestructura': ['Infrastructure', 'Infraestrutura'],
+    'Centros de datos': ['Data centres', 'Centros de dados'],
     'Satélites': ['Satellites', 'Satélites'],
     'Los cables submarinos por donde viajan los datos entre continentes': ['The submarine cables that carry data between continents', 'Os cabos submarinos por onde os dados viajam entre continentes'],
     'Los centros de datos donde se guarda y se sirve internet': ['The data centres where the internet is stored and served', 'Os centros de dados onde a internet é guardada e servida'],
@@ -199,8 +199,8 @@
     'Por empresa': ['By company', 'Por empresa'],
     'Al cargar la web, aquí aparece cada empresa que intenta conectarse y se corta.': ['When the page loads, every company that tries to connect and is cut appears here.', 'Ao carregar a página, aqui aparece cada empresa que tenta se conectar e é cortada.'],
     'Simular corte': ['Simulate a cut', 'Simular corte'],
-    'Corte máximo': ['Maximum cut', 'Corte máximo'],
-    'Corte máximo: corta todo lo que no es de la propia web': ['Maximum cut: cuts everything that is not the site\'s own', 'Corte máximo: corta tudo o que não é do próprio site'],
+    'Modo estricto': ['Strict mode', 'Modo estrito'],
+    'Modo estricto: corta todo lo que no es de la propia web': ['Strict mode: cuts everything that is not the site\'s own', 'Modo estrito: corta tudo o que não é do próprio site'],
     'Corta los rastreadores conocidos.': ['Cuts known trackers.', 'Corta os rastreadores conhecidos.'],
     'Corta todo lo que no es de esta web. Alguna web puede fallar.': ['Cuts everything that is not this site\'s own. Some sites may break.', 'Corta tudo o que não é deste site. Algum site pode falhar.'],
     'Tercero': ['Third party', 'Terceiro'],
@@ -264,6 +264,57 @@
     'Tu proveedor de internet puede ver que usas Tor, aunque no qué visitas.': ['Your internet provider can see that you use Tor, though not what you visit.', 'Seu provedor de internet pode ver que você usa Tor, mas não o que visita.'],
     'Ninguna herramienta garantiza el anonimato total.': ['No tool guarantees total anonymity.', 'Nenhuma ferramenta garante o anonimato total.'],
     'Diseño en prueba: aquí no hay conexión Tor real. ULTRA llegará a ZERO cuando supere pruebas independientes de fugas.': ['Design under test: there is no real Tor connection here. ULTRA will reach ZERO when it passes independent leak tests.', 'Design em teste: aqui não há conexão Tor real. O ULTRA chegará ao ZERO quando passar em testes independentes de vazamento.'],
+    // ZERO, the card at the top of the panel (21 Oct 2026)
+    'Ficha': ['Card', 'Ficha'],
+    'Para qué': ['What for', 'Para quê'],
+    'Pasa el ratón por una empresa para ver su ficha. Haz clic para fijarla.': ['Point at a company to see its card. Click to pin it.', 'Passe o mouse sobre uma empresa para ver a ficha. Clique para fixá-la.'],
+    'Cortada': ['Cut', 'Cortada'],
+    'FIJADA': ['PINNED', 'FIXADA'],
+    'Volver al resumen': ['Back to the summary', 'Voltar ao resumo'],
+    'Volver al resumen (Esc)': ['Back to the summary (Esc)', 'Voltar ao resumo (Esc)'],
+    'Qué intentaba llevarse': ['What it tried to take', 'O que tentava levar'],
+    'Desde dónde': ['From where', 'De onde'],
+    'Intentos': ['Attempts', 'Tentativas'],
+    'Cuándo': ['When', 'Quando'],
+    'También en': ['Also seen on', 'Também em'],
+    'Datos de ejemplo de la demostración.': ['Example data from the demo.', 'Dados de exemplo da demonstração.'],
+    'Datos de ejemplo.': ['Example data.', 'Dados de exemplo.'],
+    'Búsquedas con DuckDuckGo dentro de Tor (.onion).': ['Searches with DuckDuckGo inside Tor (.onion).', 'Buscas com o DuckDuckGo dentro do Tor (.onion).'],
+    'Exportar ficha': ['Export card', 'Exportar ficha'],
+    'Solo en esta web, por ahora.': ['Only on this site, so far.', 'Só neste site, por enquanto.'],
+    'Aún no hay cortes en esta web.': ['No cuts on this site yet.', 'Ainda não há cortes neste site.'],
+    'Sin descripción.': ['No description.', 'Sem descrição.'],
+    'No identificado': ['Not identified', 'Não identificado'],
+    'Ciudad no identificada': ['City not identified', 'Cidade não identificada'],
+    'Nueva York': ['New York', 'Nova York'], 'Dublín': ['Dublin', 'Dublin'], 'Berlín': ['Berlin', 'Berlim'], 'París': ['Paris', 'Paris'],
+    'Ámsterdam': ['Amsterdam', 'Amsterdã'], 'Londres': ['London', 'Londres'], 'Múnich': ['Munich', 'Munique'], 'San Francisco': ['San Francisco', 'São Francisco'],
+    'Vende tu visita a anunciantes en una subasta que dura milisegundos.': ['Sells your visit to advertisers in an auction that lasts milliseconds.', 'Vende sua visita a anunciantes num leilão que dura milissegundos.'],
+    'Mide audiencias y une tus visitas a distintas webs en un mismo perfil.': ['Measures audiences and joins your visits to different sites into one profile.', 'Mede audiências e junta suas visitas a vários sites num mesmo perfil.'],
+    'Compra y vende perfiles de personas a otras empresas.': ['Buys and sells profiles of people to other companies.', 'Compra e vende perfis de pessoas para outras empresas.'],
+    'Registra lo que haces en la página: clics, desplazamiento y de dónde vienes.': ['Records what you do on the page: clicks, scrolling and where you came from.', 'Registra o que você faz na página: cliques, rolagem e de onde você vem.'],
+    'Muestra anuncios y comprueba si los has visto.': ['Shows ads and checks whether you saw them.', 'Mostra anúncios e verifica se você os viu.'],
+    'Te reconoce sin cookies por cómo es tu equipo.': ['Recognises you without cookies by what your computer is like.', 'Reconhece você sem cookies pelo jeito do seu computador.'],
+    'Avisa a una red social de que estás aquí, aunque no pulses nada.': ['Tells a social network you are here, even if you press nothing.', 'Avisa uma rede social de que você está aqui, mesmo sem clicar em nada.'],
+    'Ofrece tu visita a varios compradores a la vez y se queda una comisión.': ['Offers your visit to several buyers at once and keeps a commission.', 'Oferece sua visita a vários compradores ao mesmo tempo e fica com uma comissão.'],
+    'Código de otra empresa que la web carga sin que lo veas.': ['Another company\'s code that the site loads without you seeing it.', 'Código de outra empresa que o site carrega sem você ver.'],
+    'Sirve tipos de letra y, al hacerlo, ve tu dirección y la web que visitas.': ['Serves fonts and, in doing so, sees your address and the site you visit.', 'Fornece fontes e, ao fazer isso, vê seu endereço e o site que você visita.'],
+    'Un reproductor de vídeo de otra empresa, con sus propias cookies.': ['A video player from another company, with its own cookies.', 'Um player de vídeo de outra empresa, com seus próprios cookies.'],
+    'Una ventana de chat de otra empresa que se carga aunque no la uses.': ['Another company\'s chat window that loads even if you never use it.', 'Uma janela de chat de outra empresa que carrega mesmo que você não a use.'],
+    'Identificador de cookie': ['Cookie identifier', 'Identificador de cookie'], 'Web que visitas': ['Site you visit', 'Site que você visita'],
+    'Ubicación aproximada': ['Approximate location', 'Localização aproximada'], 'Identificador del dispositivo': ['Device identifier', 'Identificador do dispositivo'],
+    'Tiempo en la página': ['Time on the page', 'Tempo na página'], 'Pantalla y navegador': ['Screen and browser', 'Tela e navegador'],
+    'Perfil de intereses': ['Interest profile', 'Perfil de interesses'], 'Correo cifrado': ['Hashed email', 'E-mail cifrado'],
+    'Clics y desplazamiento': ['Clicks and scrolling', 'Cliques e rolagem'], 'Web de procedencia': ['Referring site', 'Site de origem'],
+    'Identificador publicitario': ['Advertising identifier', 'Identificador publicitário'], 'Anuncios que has visto': ['Ads you have seen', 'Anúncios que você viu'],
+    'Tipos de letra instalados': ['Installed fonts', 'Fontes instaladas'], 'Tarjeta gráfica': ['Graphics card', 'Placa de vídeo'],
+    'Zona horaria e idioma': ['Time zone and language', 'Fuso horário e idioma'], 'Sesión de la red social': ['Social network session', 'Sessão da rede social'],
+    'Tipo de dispositivo': ['Device type', 'Tipo de dispositivo'], 'Dirección IP': ['IP address', 'Endereço IP'],
+    'Vídeos que ves': ['Videos you watch', 'Vídeos que você assiste'], 'Identificador de visitante': ['Visitor identifier', 'Identificador de visitante'],
+    'Páginas que ves': ['Pages you view', 'Páginas que você vê'],
+    // ZERO, Tor and black and white (21 Oct 2026)
+    'Tor': ['Tor', 'Tor'],
+    'Webs en color': ['Sites in colour', 'Sites em cores'],
+    'ZERO se queda en blanco y negro; las webs se ven en color.': ['ZERO stays in black and white; sites show in colour.', 'O ZERO fica em preto e branco; os sites aparecem em cores.'],
     // ZERO, design-review controls (outside Órbita)
     'Entradas de cine': ['Cinematic entrances', 'Entradas de cinema'],
     'Entrada': ['Entrance', 'Entrada'],
@@ -301,6 +352,10 @@
     return null;
   }
   const PATRONES = [
+    [/^(\d+) en esta web$/, (m) => m[1] + (cur === 'en' ? ' on this site' : ' neste site')],
+    [/^(\d+) en total$/, (m) => m[1] + (cur === 'en' ? ' in total' : ' no total')],
+    [/^Primera (.+)$/, (m) => (cur === 'en' ? 'First ' : 'Primeira ') + m[1]],
+    [/^Última (.+)$/, (m) => (cur === 'en' ? 'Last ' : 'Última ') + m[1]],
     [/^Abrir (.+)$/, (m) => ({ en: 'Open ', pt: 'Abrir ' })[cur] + t(m[1])],
     [/^(\d+) cortes?$/, (m) => m[1] + ' ' + (cur === 'en' ? (m[1] === '1' ? 'cut' : 'cuts') : (m[1] === '1' ? 'corte' : 'cortes'))],
     [/^Cortado: (.+), (.+)\. Ver en el planeta$/, (m) => t('Cortado') + ': ' + t(m[1]) + ', ' + t(m[2]) + '. ' + t('Ver en el planeta')],
@@ -387,7 +442,7 @@
     try {
       const q = new URLSearchParams(location.search).get('lang');
       if (IDIOMAS.includes(q)) return q;
-      if (window.parent !== window && window.parent.GuardianaIdioma) return window.parent.GuardianaIdioma.lang;
+      try { if (window.parent !== window && window.parent.GuardianaIdioma) return window.parent.GuardianaIdioma.lang; } catch (_) {} // a parent from another site cannot be read
       const st = localStorage.getItem('guardiana-lang'), ch = localStorage.getItem('guardiana-lang-chosen');
       if (ch && IDIOMAS.includes(st)) return st;
       const nav = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']).map((x) => String(x).slice(0, 2).toLowerCase()).find((x) => IDIOMAS.includes(x));

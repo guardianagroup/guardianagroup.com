@@ -322,6 +322,9 @@ body.cerca .capa-nota { background: rgba(6,8,12,.78); padding: 6px 14px; border-
    they wake up again under the pointer. */
 body:not(.dentro) #puertas { opacity: calc(1 - var(--cerca, 0) * .88); transition: opacity .25s; }
 body:not(.dentro) #puertas:hover, body:not(.dentro) #puertas:focus-within { opacity: 1; }
+/* 21 Oct 2026 (owner): the top bar steps back with the zoom too, so the planet is seen whole; it wakes under the pointer. */
+body.listo:not(.dentro) header, body.listo:not(.dentro) .sat-vista { opacity: calc(1 - var(--cerca, 0) * .85); transition: opacity .25s; }
+body.listo:not(.dentro) header:hover, body.listo:not(.dentro) header:focus-within, body.listo:not(.dentro) .sat-vista:hover, body.listo:not(.dentro) .sat-vista:focus-within { opacity: 1; }
 
 /* Which satellites (owner + agency, 20 Oct 2026): a quiet second row under the layers, only with satellites on. */
 .sat-vista { position: absolute; left: 50%; top: 74px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 3px; border-radius: 999px; border: 1px solid var(--line); background: rgba(12,17,24,.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }

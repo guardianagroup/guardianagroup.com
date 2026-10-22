@@ -266,7 +266,7 @@
   #informe .n{text-align:right}#informe tr{break-inside:avoid}#informe thead{display:table-header-group}
   #informe footer{margin-top:16px;padding-top:8px;border-top:1px solid #ccc;color:#555;font-size:8.5pt}
 }
-/* Corte máximo: one switch in the panel, steel when on (red stays for the cuts themselves). */
+/* Modo estricto (was «Corte máximo»; renamed by the owner, 21 Oct 2026): one switch in the panel, steel when on (red stays for the cuts themselves). */
 .maxcorte{display:flex;align-items:center;gap:12px;margin:0;padding:12px 18px;border-bottom:1px solid rgba(156,195,228,.14);transition:background .3s}
 .maxcorte .mt{flex:1;min-width:0}
 .maxcorte b{display:block;font:600 12.5px "Segoe UI",Inter,Arial,sans-serif;letter-spacing:.02em;color:#F4F6F8}
@@ -278,6 +278,106 @@
 .interruptor[aria-checked=true]{background:rgba(156,195,228,.28);border-color:#9CC3E4;box-shadow:0 0 14px rgba(156,195,228,.35)}
 .interruptor[aria-checked=true] i{transform:translateX(20px);background:#F4F6F8}
 .ojo{flex:0 0 150px}
+/* 21 Oct 2026 (owner): «a la derecha, en el panel, borra la red neuronal y que aparezcan los datos». With a web open the
+   organism fades away instead of settling in the panel; the panel is solid and starts with the data. */
+.panel{background:linear-gradient(180deg,rgba(11,17,25,.97),rgba(7,11,17,.99))}
+.dom{padding-top:18px}
+/* 21 Oct 2026 (owner): «en esa ventanita de arriba del panel… toda la información posible que sepamos». The window at the
+   top of the panel shows the summary of this web, or the card of the company under the pointer; a click pins it. Its
+   height never changes, so the list below never moves under the pointer. */
+/* ULTRA in black and white (owner, 21 Oct 2026: «que la pantalla siguiera siendo la misma, pero se pusiera en blanco y
+   negro, para que la gente note el cambio»). The whole screen turns in under a second; «Webs en color» keeps the pages in colour. */
+#stage,#stage :is(#world,.grain,.mast,.lens,.menu,.upanel,.ultraline,.hint,.volverz,.panel,#pill,.marca){transition:filter .9s ease}
+#stage.ultra{filter:grayscale(1)}
+#stage.ultra.webcolor{filter:none}
+#stage.ultra.webcolor :is(#world,.grain,.mast,.lens,.menu,.upanel,.ultraline,.hint,.volverz,.panel,#pill,.marca){filter:grayscale(1)}
+.mono.tor,#searcher .mono.tor{font-size:0}
+.mono.tor::before{content:"";width:12px;height:12px;border-radius:50%;border:1px solid currentColor;box-shadow:inset 0 0 0 2.5px #0b121b,inset 0 0 0 3.5px currentColor}
+.ucolor{display:flex;align-items:center;gap:14px;margin-top:10px;padding:9px 12px;border:1px solid rgba(156,195,228,.16);border-radius:12px}
+.ucolor .uct{flex:1;min-width:0}
+.ucolor b{display:block;font:600 12px "Segoe UI",Inter,Arial,sans-serif;color:#F4F6F8}
+.ucolor small{display:block;margin-top:2px;font-size:10.5px;color:#8da4b6}
+.ficha{position:relative;flex:0 0 384px;margin:12px 12px 0;border:1px solid rgba(156,195,228,.16);border-radius:14px;background:linear-gradient(180deg,rgba(156,195,228,.055),rgba(156,195,228,.018));overflow:hidden}
+.ficha>.fres,.ficha>.fdet{position:absolute;inset:0;padding:14px 16px;overflow:auto;scrollbar-width:thin;scrollbar-color:#2c3e4f transparent;display:flex;flex-direction:column}
+.ficha>[hidden]{display:none}
+.ficha .dom{padding:0 0 12px;border-bottom:1px solid rgba(156,195,228,.12)}
+.ficha .cifras{padding:12px 0;gap:6px;border-bottom:1px solid rgba(156,195,228,.12)}
+.fk{display:block;font:9.5px Consolas,monospace;letter-spacing:.16em;color:#7f97aa}
+.motivos{padding-top:12px}
+#motivos{list-style:none;margin:9px 0 0;padding:0;display:grid;gap:8px}
+#motivos li{display:grid;grid-template-columns:118px 1fr 24px;align-items:center;gap:10px;font:11.5px/1.2 "Segoe UI",Inter,Arial,sans-serif;color:#cfe0ec}
+#motivos .mn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#motivos .mb{height:4px;border-radius:2px;background:rgba(156,195,228,.12);overflow:hidden}
+#motivos .mb i{display:block;height:100%;border-radius:2px;background:#9CC3E4;transition:width .4s cubic-bezier(.2,.7,.2,1)}
+#motivos b{font:500 11px Consolas,monospace;text-align:right;color:#F4F6F8;font-variant-numeric:tabular-nums}
+#motivos .mvacio2{display:block;color:#7891a5}
+.fpista{margin:auto 0 0;padding-top:12px;font-size:11px;line-height:1.45;color:#7891a5}
+.fdet.entra{animation:fentra .18s ease-out}
+@keyframes fentra{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.fcab{display:flex;align-items:center;gap:8px;min-height:26px}
+.festado{display:inline-flex;align-items:center;gap:7px;font:600 11.5px "Segoe UI",Inter,Arial,sans-serif;letter-spacing:.02em;color:var(--red)}
+.festado i{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 8px rgba(224,122,108,.7)}
+.festado b{font:500 11px Consolas,monospace;font-variant-numeric:tabular-nums}
+.ffija{font:9px Consolas,monospace;letter-spacing:.16em;color:#9CC3E4;border:1px solid rgba(156,195,228,.35);border-radius:999px;padding:3px 8px}
+.fx{margin-left:auto;width:26px;height:26px;padding:0;border-radius:50%;border:1px solid rgba(156,195,228,.22);background:transparent;color:#a9bccb;display:grid;place-items:center;transition:border-color .15s,color .15s}
+.fx:hover{border-color:rgba(156,195,228,.55);color:#F4F6F8}
+.fdet h3{margin:8px 0 3px;font:600 18px/1.25 "Segoe UI",Inter,Arial,sans-serif;color:#F4F6F8}
+.fsub{font:11.5px/1.4 "Segoe UI",Inter,Arial,sans-serif;color:#8da4b6}
+.fquien{margin:8px 0 10px;font:12.5px/1.45 "Segoe UI",Inter,Arial,sans-serif;color:#d7e5ef}
+.fdl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:9px 14px}
+.fdl>div{min-width:0}
+.fdl .ancho{grid-column:1/-1}
+.fdl dt{margin-bottom:4px;font:9.5px Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;color:#7f97aa}
+.fdl dd{margin:0;font:12px/1.4 "Segoe UI",Inter,Arial,sans-serif;color:#E8EEF4;overflow-wrap:anywhere}
+.fdl dd small{display:block;margin-top:1px;font-size:11px;color:#8da4b6}
+.fchips{display:flex;flex-wrap:wrap;gap:5px}
+.fchip{padding:2px 9px;border-radius:999px;border:1px solid rgba(156,195,228,.28);font-size:11px;line-height:1.5;color:#d7e5ef}
+.fdl dd.fmono{font:11px/1.55 Consolas,"IBM Plex Mono",monospace;color:#b9cddb}
+.fpie{margin-top:auto;padding-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;font:9.5px Consolas,monospace;letter-spacing:.04em;color:#6c8597}
+.fpie .enl{all:unset;cursor:pointer;font:600 11.5px "Segoe UI",Inter,Arial,sans-serif;color:#9CC3E4;white-space:nowrap}
+.fpie .enl:hover{text-decoration:underline;text-underline-offset:3px}
+.fpie .enl:focus-visible{outline:2px solid #9CC3E4;outline-offset:3px;border-radius:4px}
+.emp{cursor:pointer;outline:none;transition:background .15s,box-shadow .15s}
+.emp:hover,.emp:focus-visible{background:rgba(156,195,228,.06)}
+.emp.fijada{background:rgba(156,195,228,.09);box-shadow:inset 0 0 0 1px rgba(156,195,228,.42)}
+@media(prefers-reduced-motion:reduce){.fdet.entra{animation:none}}
+/* 22 Oct 2026 (owner): «no veo el precio de la subasta». The auctions a web runs for your visit, beside the cuts. */
+.ficha>.fsubv{position:absolute;inset:0;padding:14px 16px;overflow:auto;scrollbar-width:thin;scrollbar-color:#2c3e4f transparent;display:flex;flex-direction:column}
+.fsubv.entra{animation:fentra .18s ease-out}
+.sestado{display:inline-flex;align-items:center;gap:7px;font:600 11.5px "Segoe UI",Inter,Arial,sans-serif;color:#E8EEF4}
+.sestado i{width:7px;height:7px;border-radius:50%;background:#9CC3E4;box-shadow:0 0 8px rgba(156,195,228,.7)}
+.sestado b{font:500 11.5px Consolas,monospace;color:#F4F6F8}
+.pujas{width:100%;border-collapse:collapse;margin-top:10px;font:11.5px/1.3 "Segoe UI",Inter,Arial,sans-serif}
+.pujas th{padding:0 0 6px;text-align:left;font:9.5px Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#7f97aa;font-weight:400;border-bottom:1px solid rgba(156,195,228,.14)}
+.pujas td{padding:6px 0;border-bottom:1px solid rgba(38,55,70,.7);color:#d7e5ef;vertical-align:top}
+.pujas td small{display:block;font-size:10.5px;color:#7f97aa}
+.pujas .n{text-align:right;padding-right:12px;font:500 11.5px Consolas,monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pujas th.n{font:9.5px Consolas,monospace}
+.pujas tr.gana td{color:#F4F6F8}
+.pujas tr.gana .res{color:#F4F6F8;font-weight:600}
+.pujas tr.cortada td{color:#8da4b6}
+.pujas tr.cortada .res{color:var(--red)}
+.pujas .res{white-space:nowrap}
+.sanun{margin:10px 0 0;font:11.5px/1.4 "Segoe UI",Inter,Arial,sans-serif;color:#8da4b6}
+.sanun b{font:500 11px Consolas,monospace;color:#d7e5ef}
+.sregla{margin:8px 0 0;font:10.5px/1.45 "Segoe UI",Inter,Arial,sans-serif;color:#7891a5}
+.pest{padding:0 10px!important;gap:4px;align-items:stretch}
+.pest button{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;padding:12px 8px 10px;font:10px Consolas,monospace;letter-spacing:.08em;color:#7f97aa;border-bottom:1px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s}
+.pest button b{font:500 10px Consolas,monospace;color:#a9bccb}
+.pest button:hover{color:#d8e8f2}
+.pest button[aria-selected=true]{color:#E8F0F6;border-bottom-color:#9CC3E4}
+.pest button:focus-visible{outline:2px solid #9CC3E4;outline-offset:-2px;border-radius:6px}
+.panel #subs{flex:1;min-height:0;overflow:auto;padding:0 10px}
+.panel #subs[hidden],.panel #rows[hidden]{display:none}
+.sub{padding:11px 8px;border-bottom:1px solid rgba(38,55,70,.8);border-radius:8px;cursor:pointer;outline:none;animation:rowin .38s both;transition:background .15s,box-shadow .15s}
+.sub:hover,.sub:focus-visible{background:rgba(156,195,228,.06)}
+.sub.fijada{background:rgba(156,195,228,.09);box-shadow:inset 0 0 0 1px rgba(156,195,228,.42)}
+.sub .l1{display:flex;align-items:baseline;gap:8px}
+.sub .l1 strong{flex:1;min-width:0;font:600 12.5px "Segoe UI",Inter,Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sub .l1 .p{font:500 12px Consolas,monospace;color:#F4F6F8;font-variant-numeric:tabular-nums}
+.sub .l2{display:flex;justify-content:space-between;gap:8px;margin-top:5px;font-size:10.5px;color:#8da4b6}
+.sub .l2 span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sub .l2 time{flex:none;font:10px Consolas,monospace;color:#6f889c}
 </style>
 </head>
 <body><div id="viewport"><main id="stage" aria-label="GUARDIANA ZERO">
@@ -292,10 +392,10 @@
 <button class="icon" type="button" id="mic" aria-label="Activar micrófono" aria-pressed="false" title="Entrada de voz local">♩</button>
 <button type="button" id="ultra" aria-pressed="false" title="ULTRA: navegación reforzada mediante Tor"><i class="anillos" aria-hidden="true"></i>ULTRA</button><button type="button" id="searcher" aria-expanded="false" aria-haspopup="listbox" title="Elegir buscador"><i class="mono" id="engmono">G</i><span id="engname">Google</span><svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.6 6 7.6 9 4.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="icon" id="max" type="button" title="Ampliar la web (pantalla entera)" aria-label="Ampliar la web"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9"/></svg></button>
 </div></form>
-<div class="ultraline" aria-live="polite"><b>◎ ULTRA</b> · Ruta Tor · Sesión separada · Nivel: <span id="ulvl">Más seguro</span><button type="button" id="uqueEs">¿Qué te protege?</button></div><div class="upanel" id="upanel" role="dialog" aria-label="Qué es ULTRA"><div class="uhead"><h3>ULTRA<span>Navegación reforzada mediante Tor</span></h3><div class="univ" role="group" aria-label="Nivel de seguridad"><button type="button" data-l="Estándar" data-t="Tor y sesión aparte; JavaScript activo.">Estándar</button><button type="button" data-l="Más seguro" data-t="Sin JavaScript en webs sin cifrar y menos multimedia." aria-pressed="true">Más seguro</button><button type="button" data-l="Máxima seguridad" data-t="Sin JavaScript: lo mínimo para identificarte.">Máxima seguridad</button></div></div><p class="lead">Tus páginas viajan por la red Tor saltando por tres repetidores: la web ve el último, no a ti. Tu sesión va aparte y se borra al cerrar.</p><div class="ucols"><div><h4>LO QUE HACE</h4><ul><li>Ruta Tor: tu dirección IP queda oculta para la web.</li><li>DNS por Tor: tu proveedor no ve qué direcciones consultas.</li><li>Sesión separada: sin historial, cookies ni caché compartidos; todo se borra al cerrar.</li><li>Sin fugas: WebRTC y conexiones directas bloqueadas; si Tor falla, no se navega.</li><li>Huella uniforme: ventana por bloques, hora UTC, idioma y agente comunes.</li><li>Rastreadores, cookies de terceros y parámetros de seguimiento, fuera.</li><li>Buscador centrado en privacidad por defecto.</li></ul></div><div class="no"><h4>LO QUE NO PUEDE HACER</h4><ul><li>Si inicias sesión en una cuenta, ese servicio sabe quién eres.</li><li>Lo que descargues y abras fuera de ZERO puede conectarse sin protección.</li><li>Tu proveedor de internet puede ver que usas Tor, aunque no qué visitas.</li><li>Ninguna herramienta garantiza el anonimato total.</li></ul></div></div><p class="univtxt" id="univtxt">NIVEL MÁS SEGURO · Sin JavaScript en webs sin cifrar y menos multimedia.</p><div class="ufoot">Diseño en prueba: aquí no hay conexión Tor real. ULTRA llegará a ZERO cuando supere pruebas independientes de fugas.</div></div><div class="hint"><span><b>↵</b> INTRO PARA EXPLORAR</span><span><b>◉</b> MUEVE EL CURSOR</span><span><b>♩</b> RESPONDE A TU VOZ</span></div>
+<div class="ultraline" aria-live="polite"><b>◎ ULTRA</b> · Ruta Tor · Sesión separada · Nivel: <span id="ulvl">Más seguro</span><button type="button" id="uqueEs">¿Qué te protege?</button></div><div class="upanel" id="upanel" role="dialog" aria-label="Qué es ULTRA"><div class="uhead"><h3>ULTRA<span>Navegación reforzada mediante Tor</span></h3><div class="univ" role="group" aria-label="Nivel de seguridad"><button type="button" data-l="Estándar" data-t="Tor y sesión aparte; JavaScript activo.">Estándar</button><button type="button" data-l="Más seguro" data-t="Sin JavaScript en webs sin cifrar y menos multimedia." aria-pressed="true">Más seguro</button><button type="button" data-l="Máxima seguridad" data-t="Sin JavaScript: lo mínimo para identificarte.">Máxima seguridad</button></div></div><p class="lead">Tus páginas viajan por la red Tor saltando por tres repetidores: la web ve el último, no a ti. Tu sesión va aparte y se borra al cerrar.</p><div class="ucols"><div><h4>LO QUE HACE</h4><ul><li>Ruta Tor: tu dirección IP queda oculta para la web.</li><li>DNS por Tor: tu proveedor no ve qué direcciones consultas.</li><li>Sesión separada: sin historial, cookies ni caché compartidos; todo se borra al cerrar.</li><li>Sin fugas: WebRTC y conexiones directas bloqueadas; si Tor falla, no se navega.</li><li>Huella uniforme: ventana por bloques, hora UTC, idioma y agente comunes.</li><li>Rastreadores, cookies de terceros y parámetros de seguimiento, fuera.</li><li>Búsquedas con DuckDuckGo dentro de Tor (.onion).</li></ul></div><div class="no"><h4>LO QUE NO PUEDE HACER</h4><ul><li>Si inicias sesión en una cuenta, ese servicio sabe quién eres.</li><li>Lo que descargues y abras fuera de ZERO puede conectarse sin protección.</li><li>Tu proveedor de internet puede ver que usas Tor, aunque no qué visitas.</li><li>Ninguna herramienta garantiza el anonimato total.</li></ul></div></div><div class="ucolor"><div class="uct"><b>Webs en color</b><small>ZERO se queda en blanco y negro; las webs se ven en color.</small></div><button type="button" id="webcolor" class="interruptor" role="switch" aria-checked="false" aria-label="Webs en color"><i></i></button></div><p class="univtxt" id="univtxt">NIVEL MÁS SEGURO · Sin JavaScript en webs sin cifrar y menos multimedia.</p><div class="ufoot">Diseño en prueba: aquí no hay conexión Tor real. ULTRA llegará a ZERO cuando supere pruebas independientes de fugas.</div></div><div class="hint"><span><b>↵</b> INTRO PARA EXPLORAR</span><span><b>◉</b> MUEVE EL CURSOR</span><span><b>♩</b> RESPONDE A TU VOZ</span></div>
 <div class="menu" id="menu" aria-label="Seleccionar buscador"></div>
 <section class="web" id="web" aria-label="Web de ejemplo"><div class="webnav"><span>CUADERNO / PÁGINA DE DEMOSTRACIÓN</span><button type="button" id="webmax">⛶ &nbsp; Pantalla máxima</button></div><div class="paper"><small>EXPLORAR &nbsp; / &nbsp; NÚMERO 001</small><h1>El mundo empieza<br>con una pregunta.</h1><p>La mejor interfaz deja sitio para tus ideas. Esta página es una demostración de diseño, no un sitio real cargado desde internet.</p><p id="echo"></p><div class="rings"></div></div><div class="avisocorte" id="avisocorte" aria-hidden="true"><i>● CORTADO</i><b id="acEmp"></b><span id="acDet"></span></div><div class="filo" id="filo" aria-hidden="true"></div></section>
-<aside class="panel" id="panel" aria-label="Lo que ZERO corta en esta web"><div class="ph"><span>LO QUE ZERO CORTA</span><span class="tagdemo">DEMOSTRACIÓN</span></div><div class="ojo" aria-hidden="true"></div><div class="dom"><small>EN ESTA WEB</small><b id="dominio">—</b></div><div class="cifras"><div><b id="total">0</b><small>Cortes</small></div><div><b id="businesses">0</b><small>Empresas</small></div><div><b id="paises">0</b><small>Países</small></div></div><div class="maxcorte" id="maxcorte"><div class="mt"><b>Corte máximo</b><small id="maxtxt">Corta los rastreadores conocidos.</small></div><button type="button" id="cortemax" class="interruptor" role="switch" aria-checked="false" aria-label="Corte máximo" title="Corte máximo: corta todo lo que no es de la propia web"><i></i></button></div><div class="acthead"><span>POR EMPRESA</span><span id="qty">00</span></div><div id="rows" aria-live="polite"><p class="empty">Al cargar la web, aquí aparece cada empresa que intenta conectarse y se corta.</p></div><div class="panelactions"><button class="action" type="button" id="cut">✳ &nbsp; Simular corte</button><button class="action pdf" type="button" id="pdf" aria-haspopup="dialog" aria-expanded="false" title="Guardar en PDF lo que ZERO ha cortado"><svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.8h5.2L12.5 5v9.2H4z"/><path d="M9 1.8V5.2h3.4M8.2 7.6v4.2M6.4 10.1l1.8 1.8 1.8-1.8"/></svg>PDF</button></div><div class="pdfmenu" id="pdfmenu" role="dialog" aria-label="Informe de cortes en PDF"><div class="pk">INFORME DE CORTES · PDF</div><div class="pops" id="pdfops"></div><p class="pnote">Se guarda en este equipo. ZERO no lo envía a nadie.</p></div></aside>
+<aside class="panel" id="panel" aria-label="Lo que ZERO corta en esta web"><div class="ph"><span>LO QUE ZERO CORTA</span><span class="tagdemo">DEMOSTRACIÓN</span></div><section class="ficha" id="ficha" aria-label="Ficha" aria-live="polite"><div class="fres" id="fres"><div class="dom"><small>EN ESTA WEB</small><b id="dominio">—</b></div><div class="cifras"><div><b id="total">0</b><small>Cortes</small></div><div><b id="businesses">0</b><small>Empresas</small></div><div><b id="paises">0</b><small>Países</small></div></div><div class="motivos"><small class="fk">PARA QUÉ</small><ul id="motivos"></ul></div><p class="fpista">Pasa el ratón por una empresa para ver su ficha. Haz clic para fijarla.</p></div><div class="fdet" id="fdet" hidden><div class="fcab"><span class="festado"><i></i><span>Cortada</span><b id="fveces">×1</b></span><span class="ffija" id="ffija" hidden>FIJADA</span><button type="button" class="fx" id="fcerrar" aria-label="Volver al resumen" title="Volver al resumen (Esc)"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div><h3 id="fnom"></h3><div class="fsub"><span id="fciudad"></span>, <span id="fpais"></span> · <span id="fmot"></span></div><p class="fquien" id="fquien"></p><dl class="fdl"><div class="ancho"><dt>Qué intentaba llevarse</dt><dd class="fchips" id="fdatos"></dd></div><div class="ancho"><dt>Desde dónde</dt><dd class="fmono" id="fdirs"></dd></div><div><dt>Intentos</dt><dd><span id="fint1"></span><small id="fint2"></small></dd></div><div><dt>Cuándo</dt><dd><span id="fcu1"></span><small id="fcu2"></small></dd></div><div class="ancho"><dt>También en</dt><dd id="fotras"></dd></div></dl><div class="fpie"><span>Datos de ejemplo.</span><button type="button" class="enl" id="fpdf">Exportar ficha</button></div></div><div class="fsubv" id="fsubv" hidden><div class="fcab"><span class="sestado" id="sestado"></span><span class="ffija" id="sfija" hidden>FIJADA</span><button type="button" class="fx" id="scerrar" aria-label="Volver al resumen" title="Volver al resumen (Esc)"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div><h3 id="shueco"></h3><div class="fsub" id="sresumen"></div><table class="pujas"><thead><tr><th>Quién pujó</th><th class="n">Puja (CPM)</th><th>Resultado</th></tr></thead><tbody id="spujas"></tbody></table><p class="sanun"><span>Anunciante declarado:</span> <b id="sanun" translate="no"></b></p><p class="sregla">CPM: lo que se ofrece por mil anuncios mostrados. Una puja por mil anuncios no es el precio de tus datos.</p><div class="fpie"><span>Datos de ejemplo.</span></div></div></section><div class="maxcorte" id="maxcorte"><div class="mt"><b>Modo estricto</b><small id="maxtxt">Corta los rastreadores conocidos.</small></div><button type="button" id="cortemax" class="interruptor" role="switch" aria-checked="false" aria-label="Modo estricto" title="Modo estricto: corta todo lo que no es de la propia web"><i></i></button></div><div class="acthead pest" role="tablist" aria-label="Qué ver"><button type="button" role="tab" id="tabcortes" aria-selected="true" aria-controls="rows">POR EMPRESA <b id="qty">00</b></button><button type="button" role="tab" id="tabsub" aria-selected="false" aria-controls="subs">SUBASTA <b id="qsub">0</b></button></div><div id="rows" role="tabpanel" aria-labelledby="tabcortes" aria-live="polite"><p class="empty">Al cargar la web, aquí aparece cada empresa que intenta conectarse y se corta.</p></div><div id="subs" role="tabpanel" aria-labelledby="tabsub" hidden><p class="empty">Cuando la web subaste un espacio de anuncios, aquí verás quién pujó por tu visita y cuánto ofreció.</p></div><div class="panelactions"><button class="action" type="button" id="cut">✳ &nbsp; Simular corte</button><button class="action pdf" type="button" id="pdf" aria-haspopup="dialog" aria-expanded="false" title="Guardar en PDF lo que ZERO ha cortado"><svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 1.8h5.2L12.5 5v9.2H4z"/><path d="M9 1.8V5.2h3.4M8.2 7.6v4.2M6.4 10.1l1.8 1.8 1.8-1.8"/></svg>PDF</button></div><div class="pdfmenu" id="pdfmenu" role="dialog" aria-label="Informe de cortes en PDF"><div class="pk">INFORME DE CORTES · PDF</div><div class="pops" id="pdfops"></div><p class="pnote">Se guarda en este equipo. ZERO no lo envía a nadie.</p></div></aside>
 <div id="pill" role="group" aria-label="Web en grande"><button type="button" class="pc" id="vercortes" title="Ver los cortes en el panel"><span class="pn"><span id="pillnum">0</span>&nbsp;cortes en esta web</span><span class="pv">Ver panel<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg></span></button><button type="button" class="pb" id="reducir" title="Reducir y ver el panel (Esc)"><svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 6.5h-4v-4M2.5 9.5h4v4M9.5 6.5 14 2M6.5 9.5 2 14"/></svg>Reducir</button></div><div class="topReveal" id="topbar"><button type="button" id="restore">↙ RESTAURAR</button><span>PÁGINA DE DEMOSTRACIÓN · ZERO</span><button type="button" id="topcut">Cortes</button></div>
 <div class="marca" aria-hidden="true">ZERO</div><button type="button" id="volverZ" class="volverz" title="Volver" aria-label="Volver"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg><span>Órbita</span></button><div class="lb t"></div><div class="lb b"></div><div class="skip">CLIC O CUALQUIER TECLA PARA SALTAR</div>
 </main></div><article id="informe" aria-hidden="true"></article>
@@ -314,6 +414,7 @@ OX=Math.max(0,(innerWidth/s-W)/2);OY=Math.max(0,(innerHeight/s-H)/2);stage.style
 addEventListener('resize',layout,{passive:true});$('#viewport').addEventListener('pointermove',e=>{const r=stage.getBoundingClientRect();pointer=[Math.max(-1,Math.min(1,2*(e.clientX-r.left)/r.width-1)),Math.max(-1,Math.min(1,2*(e.clientY-r.top)/r.height-1))];if(full)stage.classList.toggle('reveal',(e.clientY-r.top)/r.height<.015)},{passive:true});
 // Engines: name, monogram, honest note (focus · source of results), country of headquarters, search address. No logos, no scores.
 const ENG=[
+['TOR','Tor','T','Red Tor · Busca en DuckDuckGo (.onion)','ULTRA','https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/?q='],
 ['PRIVACIDAD','DuckDuckGo','D','Privacidad · Sin historial de búsquedas','EE. UU.','https://duckduckgo.com/?q='],
 ['PRIVACIDAD','Brave Search','Br','Privacidad · Índice propio','EE. UU.','https://search.brave.com/search?q='],
 ['PRIVACIDAD','Startpage','S','Privacidad · Resultados de Google','Países Bajos','https://www.startpage.com/do/search?q='],
@@ -338,17 +439,18 @@ const ENG=[
 ['INTELIGENCIA ARTIFICIAL','ChatGPT','C','Respuestas con IA · Servicio externo','EE. UU.','https://chatgpt.com/?q=']];
 const engOf=n=>ENG.find(e=>e[1]===n)||ENG.find(e=>e[1]==='Google');
 // 20 Oct 2026 (owner): one clean list to scroll, the most used first. No search box, no favourites, no group titles.
-const ORDEN=['Google','Bing','DuckDuckGo','Brave Search','Startpage','Ecosia','Qwant','Yahoo','Mojeek','Swisscows','MetaGer','Kagi','Perplexity','You.com','ChatGPT','Yandex','Baidu','Naver','Daum','Seznam','Yahoo Japón','Sogou'].map(engOf);
+const ORDEN=['Google','Bing','DuckDuckGo','Brave Search','Tor','Startpage','Ecosia','Qwant','Yahoo','Mojeek','Swisscows','MetaGer','Kagi','Perplexity','You.com','ChatGPT','Yandex','Baidu','Naver','Daum','Seznam','Yahoo Japón','Sogou'].map(engOf);
 const guarda=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},lee=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
-let selected=lee('zeroBuscador','Google');if(!ENG.some(e=>e[1]===selected))selected='Google';
+let selected=lee('zeroBuscador','Google');if(!ENG.some(e=>e[1]===selected)||selected==='Tor')selected='Google';
 let act=-1;
 const menu=$('#menu');menu.setAttribute('role','dialog');
 menu.innerHTML='<div class="mlist" id="mlist" role="listbox" tabindex="-1" aria-label="Buscadores"></div>';
-function pintaBoton(){const e=engOf(selected);$('#engmono').textContent=e[2];$('#engname').textContent=e[1]}
-function pintaLista(){const L=$('#mlist');L.textContent='';ORDEN.forEach((e,i)=>{const r=document.createElement('div');r.className='eng';r.setAttribute('role','option');r.dataset.n=e[1];const on=e[1]===selected;r.setAttribute('aria-selected',String(on));r.innerHTML='<i class="mono"></i><b></b><span class="pais"></span><svg class="ok" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.4 6.6 11.4 12.5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';r.querySelector('.mono').textContent=e[2];r.querySelector('b').textContent=e[1];r.querySelector('.pais').textContent=e[4];r.onclick=()=>elige(e[1]);r.onmousemove=()=>marca(i,true);L.append(r)});act=-1}
+function pintaBoton(){const e=engOf(selected),m=$('#engmono');m.textContent=e[2];m.classList.toggle('tor',e[1]==='Tor');$('#engname').textContent=e[1]}
+function pintaLista(){const L=$('#mlist');L.textContent='';ORDEN.forEach((e,i)=>{const r=document.createElement('div');r.className='eng';r.setAttribute('role','option');r.dataset.n=e[1];const on=e[1]===selected;r.setAttribute('aria-selected',String(on));r.innerHTML='<i class="mono"></i><b></b><span class="pais"></span><svg class="ok" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.4 6.6 11.4 12.5 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';r.querySelector('.mono').textContent=e[2];r.querySelector('.mono').classList.toggle('tor',e[1]==='Tor');r.querySelector('b').textContent=e[1];r.querySelector('.pais').textContent=e[4];r.onclick=()=>elige(e[1]);r.onmousemove=()=>marca(i,true);L.append(r)});act=-1}
 function marca(i,raton){const rs=[...$('#mlist').querySelectorAll('.eng')];if(!rs.length)return;act=(i+rs.length)%rs.length;rs.forEach((r,k)=>r.classList.toggle('act',k===act));if(!raton)rs[act].scrollIntoView({block:'nearest'})}
 function abre(on){showMenu=on;menu.classList.toggle('show',on);$('#searcher').setAttribute('aria-expanded',String(on));if(on){pintaLista();const L=$('#mlist'),i=ORDEN.findIndex(e=>e[1]===selected);L.scrollTop=0;if(i>=0){marca(i);L.querySelectorAll('.eng')[i].scrollIntoView({block:'center'})}setTimeout(()=>L.focus({preventScroll:true}),30)}}
-function elige(n){selected=n;guarda('zeroBuscador',n);pintaBoton();abre(false);const L=$('#lens');L.classList.remove('elegido');void L.offsetWidth;L.classList.add('elegido');pulse=Math.max(pulse,.8);input.focus()}
+function elige(n){if(n==='Tor'){abre(false);if(!ultra)ponUltra(true);input.focus();return}
+  selected=n;guarda('zeroBuscador',n);if(ultra){antesUltra=null;ponUltra(false)}pintaBoton();abre(false);const L=$('#lens');L.classList.remove('elegido');void L.offsetWidth;L.classList.add('elegido');pulse=Math.max(pulse,.8);input.focus()}
 $('#mlist').addEventListener('keydown',e=>{const rs=[...$('#mlist').querySelectorAll('.eng')];if(e.key==='ArrowDown'){e.preventDefault();marca(act+1)}else if(e.key==='ArrowUp'){e.preventDefault();marca(act-1)}else if(e.key==='Home'){e.preventDefault();marca(0)}else if(e.key==='End'){e.preventDefault();marca(rs.length-1)}else if(e.key==='Enter'||e.key===' '){e.preventDefault();const r=rs[act<0?0:act];if(r)elige(r.dataset.n)}else if(e.key.length===1&&/\S/.test(e.key)){const k=e.key.toLowerCase();const i=rs.findIndex((r,j)=>j>act&&r.dataset.n.toLowerCase().startsWith(k));const j=i>=0?i:rs.findIndex(r=>r.dataset.n.toLowerCase().startsWith(k));if(j>=0)marca(j)}});
 document.addEventListener('pointerdown',e=>{if(showMenu&&!menu.contains(e.target)&&!$('#searcher').contains(e.target))abre(false)});
 pintaBoton();
@@ -357,10 +459,12 @@ $('#searcher').onclick=()=>abre(!menu.classList.contains('show'));
 let ultra=false,antesUltra=null;const upanel=$('#upanel');
 function panelUltra(on){upanel.classList.toggle('show',on)}
 function ponUltra(on){ultra=on;stage.classList.toggle('ultra',on);$('#ultra').setAttribute('aria-pressed',String(on));
-  if(on){if(engOf(selected)[0]!=='PRIVACIDAD'||selected==='Ecosia'||selected==='Kagi'){antesUltra=selected;selected='DuckDuckGo';pintaBoton()}panelUltra(true);clearTimeout(ponUltra.t);ponUltra.t=setTimeout(()=>panelUltra(false),9000)}
-  else{panelUltra(false);if(antesUltra){selected=antesUltra;antesUltra=null;pintaBoton()}}
+  if(on){if(selected!=='Tor'){antesUltra=selected;selected='Tor';pintaBoton()}panelUltra(true);clearTimeout(ponUltra.t);ponUltra.t=setTimeout(()=>panelUltra(false),9000)}
+  else{panelUltra(false);if(selected==='Tor'){selected=antesUltra||lee('zeroBuscador','Google');if(selected==='Tor'||!ENG.some(e=>e[1]===selected))selected='Google';pintaBoton()}antesUltra=null}
   const L=$('#lens');L.classList.remove('elegido');void L.offsetWidth;L.classList.add('elegido');pulse=Math.max(pulse,1.1)}
 $('#ultra').onclick=()=>ponUltra(!ultra);
+let webColor=!!lee('zeroWebColor',false);function pintaColor(){$('#webcolor').setAttribute('aria-checked',String(webColor));stage.classList.toggle('webcolor',webColor)}
+$('#webcolor').onclick=()=>{webColor=!webColor;guarda('zeroWebColor',webColor);pintaColor()};pintaColor();
 $('#uqueEs').onclick=()=>{clearTimeout(ponUltra.t);panelUltra(!upanel.classList.contains('show'))};
 upanel.querySelectorAll('.univ button').forEach(b=>b.onclick=()=>{upanel.querySelectorAll('.univ button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));$('#ulvl').textContent=b.dataset.l;$('#univtxt').textContent='NIVEL '+b.dataset.l.toUpperCase()+' · '+b.dataset.t;clearTimeout(ponUltra.t)});
 document.addEventListener('pointerdown',e=>{if(upanel.classList.contains('show')&&!upanel.contains(e.target)&&e.target.id!=='uqueEs'&&!$('#ultra').contains(e.target))panelUltra(false)});
@@ -383,16 +487,24 @@ async function setMic(){if(stream){for(const t of stream.getTracks())t.stop();st
 $('#mic').onclick=setMic;addEventListener('pagehide',()=>{if(stream)for(const t of stream.getTracks())t.stop()});
 // Ronda 8: what ZERO cuts on the open web, grouped by company (Gemini's forensic record). In this design
 // review the cuts are invented and say so («SIMULADO», «DEMOSTRACIÓN»); in the program they come from ZERO's own record.
-const sample=[{empresa:'Red publicitaria · ejemplo',pais:'Estados Unidos',motivo:'Publicidad'},{empresa:'Medición digital · ejemplo',pais:'Irlanda',motivo:'Seguimiento'},{empresa:'Agregador · ejemplo',pais:'Alemania',motivo:'Corredor de datos'},{empresa:'Analítica · ejemplo',pais:'Francia',motivo:'Rastreador'},{empresa:'Anuncios · ejemplo',pais:'Países Bajos',motivo:'Publicidad'},{empresa:'Huella del dispositivo · ejemplo',pais:'Reino Unido',motivo:'Huella digital'},{empresa:'Botón social · ejemplo',pais:'Irlanda',motivo:'Rastreador'},{empresa:'Subasta de anuncios · ejemplo',pais:'Singapur',motivo:'Publicidad'}];
+const sample=[
+ {empresa:'Red publicitaria · ejemplo',pais:'Estados Unidos',sede:'Nueva York',motivo:'Publicidad',quien:'Vende tu visita a anunciantes en una subasta que dura milisegundos.',datos:['Identificador de cookie','Web que visitas','Ubicación aproximada'],dirs:['ads.red-ejemplo.example','sync.red-ejemplo.example']},
+ {empresa:'Medición digital · ejemplo',pais:'Irlanda',sede:'Dublín',motivo:'Seguimiento',quien:'Mide audiencias y une tus visitas a distintas webs en un mismo perfil.',datos:['Identificador del dispositivo','Tiempo en la página','Pantalla y navegador'],dirs:['pixel.medicion-ejemplo.example']},
+ {empresa:'Agregador · ejemplo',pais:'Alemania',sede:'Berlín',motivo:'Corredor de datos',quien:'Compra y vende perfiles de personas a otras empresas.',datos:['Perfil de intereses','Ubicación aproximada','Correo cifrado'],dirs:['match.agregador-ejemplo.example']},
+ {empresa:'Analítica · ejemplo',pais:'Francia',sede:'París',motivo:'Rastreador',quien:'Registra lo que haces en la página: clics, desplazamiento y de dónde vienes.',datos:['Clics y desplazamiento','Web de procedencia'],dirs:['collect.analitica-ejemplo.example']},
+ {empresa:'Anuncios · ejemplo',pais:'Países Bajos',sede:'Ámsterdam',motivo:'Publicidad',quien:'Muestra anuncios y comprueba si los has visto.',datos:['Identificador publicitario','Anuncios que has visto'],dirs:['cdn.anuncios-ejemplo.example']},
+ {empresa:'Huella del dispositivo · ejemplo',pais:'Reino Unido',sede:'Londres',motivo:'Huella digital',quien:'Te reconoce sin cookies por cómo es tu equipo.',datos:['Tipos de letra instalados','Tarjeta gráfica','Zona horaria e idioma'],dirs:['fp.huella-ejemplo.example']},
+ {empresa:'Botón social · ejemplo',pais:'Irlanda',sede:'Dublín',motivo:'Rastreador',quien:'Avisa a una red social de que estás aquí, aunque no pulses nada.',datos:['Sesión de la red social','Web que visitas'],dirs:['connect.social-ejemplo.example']},
+ {empresa:'Subasta de anuncios · ejemplo',pais:'Singapur',sede:'Singapur',motivo:'Publicidad',quien:'Ofrece tu visita a varios compradores a la vez y se queda una comisión.',datos:['Identificador de cookie','Tipo de dispositivo','Ubicación aproximada'],dirs:['bid.subasta-ejemplo.example','pbs.subasta-ejemplo.example']}];
 let idx=0,total=0,demoT=0,avisoT=0,gen=0;const firms=new Set(),countries=new Set(),grupos=new Map();
 const hhmmss=()=>new Date().toLocaleTimeString((window.GuardianaIdioma&&GuardianaIdioma.locale)||'es',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
 let webActual='—';
-function resetCortes(dom){webActual=dom||'—';total=0;firms.clear();countries.clear();grupos.clear();for(const k of ['#total','#businesses','#paises','#pillnum'])$(k).textContent='0';$('#qty').textContent='00';$('#dominio').textContent=dom||'—';$('#rows').innerHTML='<p class="empty">Al cargar la web, aquí aparece cada empresa que intenta conectarse y se corta.</p>'}
-function record(detail){total++;const emp=String(detail.empresa||'No identificada').slice(0,80),pais=String(detail.pais||'País no identificado'),mot=String(detail.motivo||'Sin categoría');firms.add(emp);countries.add(pais);apunta(emp,pais,mot);
+function resetCortes(dom){webActual=dom||'—';total=0;firms.clear();countries.clear();grupos.clear();fijada=null;vista=null;pendiente=false;for(const k of ['#total','#businesses','#paises','#pillnum'])$(k).textContent='0';$('#qty').textContent='00';$('#dominio').textContent=dom||'—';$('#rows').innerHTML='<p class="empty">Al cargar la web, aquí aparece cada empresa que intenta conectarse y se corta.</p>';pintaFicha(null)}
+function record(detail){total++;const emp=String(detail.empresa||'No identificada').slice(0,80),pais=String(detail.pais||'País no identificado'),mot=String(detail.motivo||'Sin categoría');firms.add(emp);countries.add(pais);apunta(emp,pais,mot);const ahora=Date.now();
   $('#total').textContent=total;$('#businesses').textContent=firms.size;$('#paises').textContent=countries.size;$('#pillnum').textContent=total;$('#qty').textContent=String(firms.size).padStart(2,'0');
   if(total===1)$('#rows').textContent='';
-  let g=grupos.get(emp);if(!g){g={n:0,el:document.createElement('article')};g.el.className='emp';g.el.innerHTML='<div class="l1"><strong></strong><span class="x"></span></div><div class="l2"><span></span><time></time></div>';g.el.querySelector('strong').textContent=emp;g.el.querySelector('.l2 span').textContent=pais+' · '+mot+' · SIMULADO';grupos.set(emp,g)}
-  g.n++;g.el.querySelector('.x').textContent='×'+g.n;g.el.querySelector('time').textContent=hhmmss();$('#rows').prepend(g.el);g.el.classList.remove('destello');void g.el.offsetWidth;g.el.classList.add('destello');
+  let g=grupos.get(emp);if(!g){g={n:0,a:ahora,z:ahora,pais,mot,info:DET.get(emp)||detail,el:document.createElement('article')};filaViva(g,emp);g.el.className='emp';g.el.innerHTML='<div class="l1"><strong></strong><span class="x"></span></div><div class="l2"><span></span><time></time></div>';g.el.querySelector('strong').textContent=emp;g.el.querySelector('.l2 span').textContent=pais+' · '+mot+' · SIMULADO';grupos.set(emp,g)}
+  g.n++;g.z=ahora;g.el.querySelector('.x').textContent='×'+g.n;g.el.querySelector('time').textContent=hhmmss();if(!pausaLista)$('#rows').prepend(g.el);else{pendiente=true;if(!g.el.isConnected)$('#rows').append(g.el)}if(vista===emp)pintaFicha(emp,true);else if(!vista)pintaMotivos();g.el.classList.remove('destello');void g.el.offsetWidth;g.el.classList.add('destello');
   const a=$('#avisocorte');$('#acEmp').textContent=emp;$('#acDet').textContent=pais+' · '+mot+' · simulado';a.classList.add('on');clearTimeout(avisoT);avisoT=setTimeout(()=>a.classList.remove('on'),2600);
   const f=$('#filo');f.classList.remove('late');void f.offsetWidth;f.classList.add('late');
   redPulse=1.9;pulse=.9}
@@ -410,12 +522,12 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#pdfmenu').class
 function informe(clave,nombre,filas){const R=$('#informe'),esc=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const LOC=(window.GuardianaIdioma&&GuardianaIdioma.locale)||'es';const f=d=>new Date(d).toLocaleString(LOC,{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),h=d=>new Date(d).toLocaleTimeString(LOC,{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   const por=new Map();for(const r of filas){let g=por.get(r.e);if(!g){g={e:r.e,p:r.p,m:r.m,n:0,a:r.t,z:r.t};por.set(r.e,g)}g.n++;g.a=Math.min(g.a,r.t);g.z=Math.max(g.z,r.t)}
-  const grupos=[...por.values()].sort((x,y)=>y.n-x.n),webs=new Set(filas.map(r=>r.w)),paises=new Set(filas.map(r=>r.p));
+  const grupos=[...por.values()].sort((x,y)=>y.n-x.n),DX=e=>(typeof DET!=='undefined'&&DET.get(e))||{},webs=new Set(filas.map(r=>r.w)),paises=new Set(filas.map(r=>r.p));
   const desde=filas.length?f(filas[0].t):'—',hasta=filas.length?f(filas[filas.length-1].t):'—';
   R.innerHTML='<header><div class="im">GUARDIANA <span>/ ZERO</span></div><div class="it">Informe de cortes</div><div class="ip">'+esc(nombre)+(clave==='web'?' · '+esc(webActual):'')+' · del '+desde+' al '+hasta+'</div></header>'
    +'<div class="idemo">DEMOSTRACIÓN · Datos de ejemplo generados por el prototipo de diseño. No son cortes reales.</div>'
    +'<section class="ires"><div><b class="r">'+filas.length+'</b><small>Cortes</small></div><div><b>'+por.size+'</b><small>Empresas</small></div><div><b>'+paises.size+'</b><small>Países</small></div><div><b>'+webs.size+'</b><small>Webs</small></div></section>'
-   +'<h2>Por empresa</h2><table><thead><tr><th>Empresa</th><th>País</th><th>Para qué</th><th class="n">Veces</th><th>Primera</th><th>Última</th></tr></thead><tbody>'+grupos.map(g=>'<tr><td>'+esc(g.e)+'</td><td>'+esc(g.p)+'</td><td>'+esc(g.m)+'</td><td class="n r">'+g.n+'</td><td>'+h(g.a)+'</td><td>'+h(g.z)+'</td></tr>').join('')+'</tbody></table>'
+   +'<h2>Por empresa</h2><table><thead><tr><th>Empresa</th><th>País</th><th>Para qué</th><th>Qué intentaba llevarse</th><th class="n">Veces</th><th>Primera</th><th>Última</th></tr></thead><tbody>'+grupos.map(g=>'<tr><td>'+esc(g.e)+'</td><td>'+esc(g.p)+(DX(g.e).sede?' · '+esc(DX(g.e).sede):'')+'</td><td>'+esc(g.m)+'</td><td>'+esc((DX(g.e).datos||[]).join(', '))+'</td><td class="n r">'+g.n+'</td><td>'+h(g.a)+'</td><td>'+h(g.z)+'</td></tr>').join('')+'</tbody></table>'
    +'<h2>Uno a uno</h2><table class="det"><thead><tr><th>Hora</th><th>Web</th><th>Empresa</th><th>País</th><th>Para qué</th></tr></thead><tbody>'+filas.map(r=>'<tr><td>'+new Date(r.t).toLocaleDateString(LOC,{day:'2-digit',month:'2-digit'})+' '+h(r.t)+'</td><td>'+esc(r.w)+'</td><td>'+esc(r.e)+'</td><td>'+esc(r.p)+'</td><td>'+esc(r.m)+'</td></tr>').join('')+'</tbody></table>'
    +'<footer>Generado el '+f(Date.now())+' en este equipo. ZERO no envía este informe a nadie.</footer>';
   const t=document.title;document.title='ZERO · Informe de cortes · '+nombre;setTimeout(()=>{window.print();document.title=t},60)}
@@ -424,14 +536,98 @@ window.zeroInforme=k=>{const r=RANGOS.find(x=>x[0]===k)||RANGOS[3];informe(r[0],
 // that does not belong to the site itself (third-party scripts, fonts, frames and cookies). Some sites may break,
 // and it says so. Remembered on this computer. In this design review it only changes the demo, which is labelled.
 const MAXK='zeroCorteMax';let corteMax=!!lee(MAXK,false);
-const extraMax=[{empresa:'Contenido de terceros · ejemplo',pais:'Estados Unidos',motivo:'Tercero'},{empresa:'Fuentes externas · ejemplo',pais:'Irlanda',motivo:'Tercero'},{empresa:'Vídeo incrustado · ejemplo',pais:'Estados Unidos',motivo:'Tercero'},{empresa:'Chat de soporte · ejemplo',pais:'Alemania',motivo:'Tercero'}];
+const extraMax=[
+ {empresa:'Contenido de terceros · ejemplo',pais:'Estados Unidos',sede:'San Francisco',motivo:'Tercero',quien:'Código de otra empresa que la web carga sin que lo veas.',datos:['Dirección IP','Web que visitas'],dirs:['static.terceros-ejemplo.example']},
+ {empresa:'Fuentes externas · ejemplo',pais:'Irlanda',sede:'Dublín',motivo:'Tercero',quien:'Sirve tipos de letra y, al hacerlo, ve tu dirección y la web que visitas.',datos:['Dirección IP','Web que visitas'],dirs:['fonts.fuentes-ejemplo.example']},
+ {empresa:'Vídeo incrustado · ejemplo',pais:'Estados Unidos',sede:'San Francisco',motivo:'Tercero',quien:'Un reproductor de vídeo de otra empresa, con sus propias cookies.',datos:['Identificador de cookie','Vídeos que ves'],dirs:['player.video-ejemplo.example']},
+ {empresa:'Chat de soporte · ejemplo',pais:'Alemania',sede:'Múnich',motivo:'Tercero',quien:'Una ventana de chat de otra empresa que se carga aunque no la uses.',datos:['Identificador de visitante','Páginas que ves'],dirs:['widget.chat-ejemplo.example']}];
 function pintaMax(){const b=$('#cortemax');b.setAttribute('aria-checked',String(corteMax));$('#maxcorte').classList.toggle('on',corteMax);$('#maxtxt').textContent=corteMax?'Corta todo lo que no es de esta web. Alguna web puede fallar.':'Corta los rastreadores conocidos.';stage.classList.toggle('max',corteMax)}
 $('#cortemax').onclick=()=>{corteMax=!corteMax;guarda(MAXK,corteMax);pintaMax();pulse=Math.max(pulse,1.2);if(corteMax&&opened){const g0=gen;[0,1].forEach(i=>setTimeout(()=>{if(opened&&gen===g0)record(extraMax[Math.random()*extraMax.length|0])},400+i*500))}};
 pintaMax();
+// ---------- The card (21 Oct 2026, owner): everything we know about one company, in the window at the top of the panel.
+let fijada=null,vista=null,pausaLista=false,pendiente=false;
+const DET=new Map(sample.concat(extraMax).map(x=>[x.empresa,x]));
+function filaViva(g,emp){const el=g.el;el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label',emp);
+  el.addEventListener('mouseenter',()=>pintaFicha(emp));el.addEventListener('focus',()=>pintaFicha(emp));
+  el.addEventListener('click',()=>{fijada=fijada===emp?null:emp;pintaFicha(fijada||emp)});
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}})}
+function pintaMotivos(){const ul=$('#motivos');const m=new Map();grupos.forEach(g=>m.set(g.mot,(m.get(g.mot)||0)+g.n));ul.textContent='';
+  if(!m.size){const li=document.createElement('li');li.className='mvacio2';li.textContent='Aún no hay cortes en esta web.';ul.append(li);return}
+  const max=Math.max(...m.values());[...m.entries()].sort((a,b)=>b[1]-a[1]).slice(0,5).forEach(([k,v])=>{const li=document.createElement('li');li.innerHTML='<span class="mn"></span><span class="mb"><i></i></span><b></b>';li.querySelector('.mn').textContent=k;li.querySelector('i').style.width=(100*v/max).toFixed(1)+'%';li.querySelector('b').textContent=v;ul.append(li)})}
+function pintaFicha(emp,viva){if(emp&&String(emp).startsWith('sub:'))return pintaSub(emp,viva);$('#fsubv').hidden=true;SUBS.forEach(x=>x.el&&x.el.classList.remove('fijada'));const g=emp?grupos.get(emp):null;const cambia=(g?emp:null)!==vista;vista=g?emp:null;
+  $('#fres').hidden=!!g;$('#fdet').hidden=!g;$('#ffija').hidden=!(g&&fijada===emp);
+  grupos.forEach((x,k)=>x.el.classList.toggle('fijada',k===fijada));
+  if(!g){pintaMotivos();return}
+  const d=g.info||{},hm=t=>new Date(t).toLocaleTimeString((window.GuardianaIdioma&&GuardianaIdioma.locale)||'es',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  $('#fveces').textContent='×'+g.n;$('#fnom').textContent=emp;$('#fciudad').textContent=d.sede||'Ciudad no identificada';$('#fpais').textContent=g.pais;$('#fmot').textContent=g.mot;
+  $('#fquien').textContent=d.quien||'Sin descripción.';
+  const cd=$('#fdatos');cd.textContent='';(d.datos||['No identificado']).forEach(x=>{const c=document.createElement('span');c.className='fchip';c.textContent=x;cd.append(c)});
+  const dd=$('#fdirs');dd.textContent='';(d.dirs||['—']).forEach(x=>{const r=document.createElement('div');r.textContent=x;r.setAttribute('translate','no');dd.append(r)});
+  const suyas=REG.filter(r=>r.e===emp);$('#fint1').textContent=g.n+' en esta web';$('#fint2').textContent=suyas.length+' en total';
+  $('#fcu1').textContent='Primera '+hm(g.a);$('#fcu2').textContent='Última '+hm(g.z);
+  const otras=[...new Set(suyas.filter(r=>r.w!==webActual).map(r=>r.w))];
+  $('#fotras').textContent=otras.length?otras.slice(0,4).join(' · ')+(otras.length>4?' · +'+(otras.length-4):''):'Solo en esta web, por ahora.';
+  if(cambia&&!viva){const f=$('#fdet');f.classList.remove('entra');void f.offsetWidth;f.classList.add('entra')}}
+{const L=$('#rows');
+ L.addEventListener('mouseenter',()=>{pausaLista=true});
+ L.addEventListener('mouseleave',()=>{pausaLista=false;if(pendiente){pendiente=false;[...grupos.values()].sort((a,b)=>b.z-a.z).forEach(g=>L.append(g.el))}pintaFicha(fijada)});
+ L.addEventListener('focusout',e=>{if(!L.contains(e.relatedTarget)&&!L.matches(':hover'))pintaFicha(fijada)})}
+$('#fcerrar').onclick=()=>{fijada=null;pintaFicha(null)};
+$('#fpdf').onclick=()=>{const e=vista;if(e)informe('emp',e,REG.filter(r=>r.e===e))};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&fijada&&opened&&!full&&!$('#pdfmenu').classList.contains('show')){e.stopImmediatePropagation();fijada=null;pintaFicha(null)}},true);
+pintaMotivos();
+// ---------- The auction (22 Oct 2026, owner: «para mí es muy importante saber el precio de las subastas»). In the program
+// ZERO reads the header-bidding auctions the page itself runs (Prebid events: who bid, how much, currency, who won); here the
+// auctions are invented and say so. Bidders are invented names. A bid is a price for a thousand ads, never the price of your data.
+const PUJADORES=[{n:'Subastia · ejemplo',p:'Estados Unidos'},{n:'Retargo · ejemplo',p:'Francia'},{n:'Recomix · ejemplo',p:'Israel'},{n:'Pujamax · ejemplo',p:'Alemania'},{n:'Ofertia · ejemplo',p:'Reino Unido'},{n:'Mediabid · ejemplo',p:'Singapur'},{n:'Clicmar · ejemplo',p:'España'},{n:'Andina Ads · ejemplo',p:'Colombia'}];
+const HUECOS=['Banner superior · 728×90','Lateral · 300×250','Entre párrafos · 300×250','Pie de página · 320×50','Vídeo previo · 640×360'];
+const ANUNCIANTES=['zapatillas-ejemplo.example','viajes-ejemplo.example','banco-ejemplo.example','moviles-ejemplo.example','seguros-ejemplo.example'];
+let SUBS=[],subT=0,subN=0;
+const dinero=v=>{try{return v.toLocaleString((window.GuardianaIdioma&&GuardianaIdioma.locale)||'es',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2})}catch(e){return v.toFixed(2)+' US$'}};
+function nuevaSubasta(){if(!opened)return;const n=4+(Math.random()*4|0),pool=[...PUJADORES].sort(()=>Math.random()-.5).slice(0,n);
+  const pujas=pool.map(b=>{const r=Math.random();const e=r<(corteMax?.5:.28)?'cortada':r<.4?'sin puja':r<.48?'tarde':'pujó';return {n:b.n,p:b.p,e,cpm:e==='pujó'||e==='tarde'?Math.round((15+Math.random()*320))/100:null,ms:e==='cortada'?null:60+(Math.random()*640|0)}});
+  const val=pujas.filter(b=>b.e==='pujó').sort((a,b)=>b.cpm-a.cpm);if(val.length)val[0].e='ganó';
+  const orden={'ganó':0,'pujó':1,'tarde':2,'sin puja':3,'cortada':4};pujas.sort((a,b)=>orden[a.e]-orden[b.e]||(b.cpm||0)-(a.cpm||0));
+  const sb={id:'sub:'+(++subN),hueco:HUECOS[Math.random()*HUECOS.length|0],t:Date.now(),dur:Math.max(...pujas.map(b=>b.ms||0)),pujas,gana:val[0]||null,anun:val.length?ANUNCIANTES[Math.random()*ANUNCIANTES.length|0]:null,el:null};
+  SUBS.unshift(sb);if(SUBS.length>40)SUBS.length=40;filaSub(sb);$('#qsub').textContent=SUBS.length;if(vista===sb.id)pintaFicha(sb.id,true)}
+function filaSub(sb){const L=$('#subs');if(SUBS.length===1)L.textContent='';const el=document.createElement('article');el.className='sub';el.tabIndex=0;el.setAttribute('role','button');
+  el.innerHTML='<div class="l1"><strong></strong><span class="p"></span></div><div class="l2"><span></span><time></time></div>';
+  el.querySelector('strong').textContent=sb.hueco;el.querySelector('.p').textContent=sb.gana?dinero(sb.gana.cpm):'—';
+  el.querySelector('.l2 span').textContent=sb.gana?sb.pujas.length+' pujadores · ganó '+sb.gana.n:sb.pujas.length+' pujadores · sin ganador';
+  el.querySelector('time').textContent=new Date(sb.t).toLocaleTimeString((window.GuardianaIdioma&&GuardianaIdioma.locale)||'es',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  el.setAttribute('aria-label',sb.hueco);sb.el=el;
+  el.addEventListener('mouseenter',()=>pintaFicha(sb.id));el.addEventListener('focus',()=>pintaFicha(sb.id));
+  el.addEventListener('click',()=>{fijada=fijada===sb.id?null:sb.id;pintaFicha(fijada||sb.id)});
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}});
+  if(pausaSubs)L.append(el);else L.prepend(el)}
+let pausaSubs=false;
+function pintaSub(id,viva){const sb=SUBS.find(x=>x.id===id);if(!sb)return pintaFicha(null);const cambia=vista!==id;vista=id;
+  $('#fres').hidden=true;$('#fdet').hidden=true;$('#fsubv').hidden=false;$('#sfija').hidden=fijada!==id;
+  SUBS.forEach(x=>x.el&&x.el.classList.toggle('fijada',x.id===fijada));grupos.forEach(x=>x.el.classList.remove('fijada'));
+  const est=$('#sestado');est.innerHTML='<i></i><span></span> <b></b>';
+  if(sb.gana){est.querySelector('span').textContent='Ganó '+sb.gana.n;est.querySelector('b').textContent=dinero(sb.gana.cpm)}else{est.querySelector('span').textContent='Nadie ganó';est.querySelector('b').textContent=''}
+  $('#shueco').textContent=sb.hueco;
+  const c=sb.pujas.filter(b=>b.e==='cortada').length,pu=sb.pujas.filter(b=>b.cpm!=null).length;
+  $('#sresumen').textContent=sb.pujas.length+' pujadores · '+pu+(pu===1?' puja':' pujas')+' · '+c+(c===1?' cortada por ZERO':' cortadas por ZERO')+' · decidida en '+sb.dur+' ms';
+  const tb=$('#spujas');tb.textContent='';
+  for(const b of sb.pujas){const tr=document.createElement('tr');tr.className=b.e==='ganó'?'gana':b.e==='cortada'?'cortada':'';
+    tr.innerHTML='<td><span></span><small></small></td><td class="n"></td><td class="res"></td>';
+    tr.querySelector('span').textContent=b.n;tr.querySelector('small').textContent=b.p;tr.querySelector('.n').textContent=b.cpm!=null?dinero(b.cpm):'—';
+    tr.querySelector('.res').textContent={'ganó':'Ganó','pujó':'Perdió','tarde':'Llegó tarde','sin puja':'No pujó','cortada':'Cortada'}[b.e];tb.append(tr)}
+  $('#sanun').textContent=sb.anun||'—';
+  if(cambia&&!viva){const f=$('#fsubv');f.classList.remove('entra');void f.offsetWidth;f.classList.add('entra')}}
+function pestana(t){const sub=t==='subasta';$('#tabcortes').setAttribute('aria-selected',String(!sub));$('#tabsub').setAttribute('aria-selected',String(sub));$('#rows').hidden=sub;$('#subs').hidden=!sub}
+$('#tabcortes').onclick=()=>pestana('cortes');$('#tabsub').onclick=()=>pestana('subasta');
+{const L=$('#subs');L.addEventListener('mouseenter',()=>{pausaSubs=true});L.addEventListener('mouseleave',()=>{pausaSubs=false;SUBS.forEach(x=>x.el&&L.append(x.el));pintaFicha(fijada)});
+ L.addEventListener('focusout',e=>{if(!L.contains(e.relatedTarget)&&!L.matches(':hover'))pintaFicha(fijada)})}
+$('#scerrar').onclick=()=>{fijada=null;pintaFicha(null)};
+function arrancaSubastas(){clearTimeout(subT);SUBS=[];$('#qsub').textContent='0';$('#subs').innerHTML='<p class="empty">Cuando la web subaste un espacio de anuncios, aquí verás quién pujó por tu visita y cuánto ofreció.</p>';
+  const g0=gen;[1400,2600].forEach(d=>setTimeout(()=>{if(opened&&gen===g0)nuevaSubasta()},d));
+  const sigue=()=>{if(!opened||gen!==g0)return;nuevaSubasta();subT=setTimeout(sigue,9000+Math.random()*9000)};subT=setTimeout(sigue,11000)}
 function simulateCut(detail){if(!opened)openWeb();record(detail||sample[idx++%sample.length])}window.simulateCut=simulateCut;$('#cut').onclick=()=>simulateCut();
 // A page asks for many things while it loads, then a trickle while it is open (demo only, labelled).
-function arrancaDemo(){paraDemo();const g0=++gen,uno=()=>{if(!opened||gen!==g0)return;const pool=corteMax?sample.concat(extraMax):sample;record(pool[Math.random()*pool.length|0])};const n=5+(Math.random()*4|0);for(let i=0;i<n;i++)setTimeout(uno,500+i*(2400/n)+Math.random()*150);const sigue=()=>{if(!opened||gen!==g0)return;uno();demoT=setTimeout(sigue,3500+Math.random()*4000)};demoT=setTimeout(sigue,4200)}
-function paraDemo(){gen++;clearTimeout(demoT)}
+function arrancaDemo(){paraDemo();setTimeout(arrancaSubastas,0);const g0=++gen,uno=()=>{if(!opened||gen!==g0)return;const pool=corteMax?sample.concat(extraMax):sample;record(pool[Math.random()*pool.length|0])};const n=5+(Math.random()*4|0);for(let i=0;i<n;i++)setTimeout(uno,500+i*(2400/n)+Math.random()*150);const sigue=()=>{if(!opened||gen!==g0)return;uno();demoT=setTimeout(sigue,3500+Math.random()*4000)};demoT=setTimeout(sigue,4200)}
+function paraDemo(){gen++;clearTimeout(demoT);clearTimeout(subT)}
 
 // ---------- Cinematic entrance: sequences on the same organism ----------
 // In the product it plays only the first time per session and never with reduced motion; here it plays on every load.
@@ -546,7 +742,7 @@ float an=(1.-Ln)*step(fract(aE.x*7.13),.014);vec3 dir=normalize(vec3(-.94,.22,.3
 float breath=1.+.027*sin(T*.981)*(1.-Still)+.006*sin(T*1.77);q.xy*=breath;float wave0=sin(q.y*8.+q.x*9.+t*1.45+aE.x*8.)*.017*(1.-Still);q.x+=wave0*q.z;q.z+=.026*sin(q.y*14.+t*1.1+aE.y*9.)*(1.-Still);float ry=t*.055+Eye.x*.16;float rx=Eye.y*.10;float c=cos(ry),s=sin(ry),cx=cos(rx),sx=sin(rx);q=vec3(q.x*c+q.z*s,q.y,-q.x*s+q.z*c);q=vec3(q.x,q.y*cx-q.z*sx,q.y*sx+q.z*cx);float blur=abs(q.z-.62)*Df*(1.-M*.6);float wobble=1.+.05*V+.025*P+.035*Hb;q*=wobble;
 vec2 center=mix(C0,Pn,M);float scale=mix(S0,44.,M);float pers=2.4/(2.4+q.z*.3);vec2 pos=center+vec2(q.x,-q.y)*scale*pers;pos.x+=sign(q.x)*Sp;float tl=-.2;float lo=aL.x-Er,la=aL.y;vec3 m3=vec3(cos(la)*sin(lo),sin(la),cos(la)*cos(lo));vec3 n3=vec3(m3.x,m3.y*cos(tl)+m3.z*sin(tl),-m3.y*sin(tl)+m3.z*cos(tl));float rq=fract(aE.y*13.7);float front=step(0.,n3.z);vec3 nd=n3*(1.+Du*(.35+1.9*rq*rq));float sa=Du*(1.2+rq)*.9;nd=vec3(nd.x*cos(sa)+nd.z*sin(sa),nd.y+Du*sin(T*.5+rq*20.)*.12,-nd.x*sin(sa)+nd.z*cos(sa));float ppe=3./(3.-nd.z*.9);vec2 epos=Ce+vec2(nd.x,-nd.y)*Re*ppe;float st=0.;float dl=(n3.y+1.)*.5*2.5+rq*.12;float rel=1.;if(Av>2.5){float tf=max(0.,Fa-dl);rel=smoothstep(dl-.06,dl+.1,Fa);vec2 e0=Ce+vec2(n3.x,-n3.y)*Re;epos=vec2(e0.x+sin(rq*40.)*tf*9.,e0.y+.5*560.*tf*tf);}if(Av<2.5&&Fa>0.){float tf2=max(0.,Fa-rq*.6);epos.y+=min(.5*520.*tf2*tf2,330.);epos.x+=sin(rq*31.)*tf2*10.;}float isE=step(1.5,Av);float vis=mix(front,1.,clamp(Du*3.+step(.001,Fa),0.,1.));if(isE>.5&&Av<2.5)pos=mix(epos,pos,k);float grp=step(aE.y,.55);float kb=clamp((Bm-fract(aE.x*3.7)*.35)/.65,0.,1.);kb=kb*kb*(3.-2.*kb);float bb=kb*(1.-Bk*(1.-grp))*(1.-M);float sr=fract(aE.x*7.31+aE.y*3.17+T*.008*(1.-Still));if(fract(aE.x*13.7)<.3)sr=fract((fract(aE.x*29.3)<.5?.75:.25)+(fract(aE.y*41.)-.5)*.14+T*.002);vec4 rr=rrect(sr,Rb);vec2 rim=rr.xy+rr.zw*(3.+8.*fract(aE.y*17.3)+2.*sin(T*1.3+aE.x*20.));float inr=max(step(fract(aE.x*5.3),.22),step(.95,aE.z)*step(aE.y,.5));vec2 ins=vec2(Rb.x+(fract(aE.x*17.1+T*.006*(1.-Still))-.5)*2.*Rb.z*.93,Rb.y+(fract(aE.y*23.7)-.5)*Rb.w*1.5+sin(T*.9+aE.x*40.)*2.5);rim=mix(rim,ins,inr);float capB=smoothstep(.7,1.,abs(rim.x-Rb.x)/Rb.z)*(1.-inr);float cur=exp(-pow((rim.x-(Rb.x-Rb.z+Cw*2.*Rb.z))/46.,2.))*step(-.5,Cw);float rw=mix(pow(max(0.,sin(sr*18.85-T*2.4)),9.),(pow(max(0.,sin((rim.x-Rb.x)*.02-T*3.1+aE.y*2.)),14.)*1.2+P*1.4)*Il+cur*3.,inr);if(Av>2.5){float y0=Ce.y-Re;float fall=step(.001,Fa);float land=fall*smoothstep(rim.y-55.,rim.y+4.,epos.y);epos.x=mix(epos.x,rim.x,fall*smoothstep(0.,1.,(epos.y-y0)/(rim.y-y0+1.)));pos=epos;bb=land*(1.-M);st=land;}pos=mix(pos,rim,bb);if(Mirror>.5)pos.y=1130.-pos.y;vY=pos.y;vMir=Mirror;gl_Position=vec4((pos.x+Off.x)/(Sz.x*.5)-1.,1.-(pos.y+Off.y)/(Sz.y*.5),0.,1.);vBand=aE.z;
 float row=floor((atan(aP.z/.77,aP.x)+3.1416)/.5236);float comb=(step(.85,aE.z)*step(aE.z,.95)+step(.79,aE.z)*step(aE.z,.81))*(1.-iris);float cil=pow(max(0.,sin(aP.y*5.5+t*3.4+row*1.7)),7.)*comb*(1.-Still);vW=cil*(1.+Ir);vH=fract(aP.y*.35+row*.083+t*.12);vW=mix(vW,rw*(1.+Ir)+capB*.5,bb);vH=mix(vH,fract(sr*3.+t*.05),bb);
-float current=pow(max(.0,sin(t*2.2+aE.x*35.+q.y*10.+q.x*8.)),16.);vG=current+P*.9*pow(max(.0,sin(aE.x*20.+t*12.)),10.)+V*.85+cil*(.8+Ir)+Hb*1.1*iris*(1.-bb)+(1.-k)*.55+bb*(capB*.9+Hb*.8);vG*=1.-an*smoothstep(0.,.2,An)*.9;vRed=max(R*step(.964,fract(sin(aE.x*61.1+aE.y*93.7)*43758.5)),an*smoothstep(0.,.3,An));vA=(.24+aE.y*.55)*(1.-M*.18)*(1.+an*An*1.6)*(1.-an*Af)*Ga*(Mirror>.5?Mr:Mm)*1.2/(1.+blur*2.2*(1.-bb))*mix(1.,.42*(1.+2.2*capB)*mix(1.,Il,inr),bb);vA*=mix(1.,Pv*vis*rel,isE*(1.-max(k,st)))*mix(1.,k,isE*Ln*step(Av,2.5))*mix(1.,0.,step(2.5,Av)*Ln*(1.-st));vEc=aK;vEw=isE*(1.-max(k,st));vA*=1.+isE*(1.-k)*Du*2.2;if(Mirror>.5)vA*=.45*Fl*exp(-max(0.,pos.y-565.)/170.)*(1.-M);gl_PointSize=clamp(aS*Pixel*(1.+vG*.18)*(1.-M*.40)*(1.+step(400.,S0)*1.4)*(1.+blur*1.6*(1.-bb))*(1.-.3*bb)*(1.+isE*(1.-k)*Du*.9),1.,14.);}`;
+float current=pow(max(.0,sin(t*2.2+aE.x*35.+q.y*10.+q.x*8.)),16.);vG=current+P*.9*pow(max(.0,sin(aE.x*20.+t*12.)),10.)+V*.85+cil*(.8+Ir)+Hb*1.1*iris*(1.-bb)+(1.-k)*.55+bb*(capB*.9+Hb*.8);vG*=1.-an*smoothstep(0.,.2,An)*.9;vRed=max(R*step(.964,fract(sin(aE.x*61.1+aE.y*93.7)*43758.5)),an*smoothstep(0.,.3,An));vA=(.24+aE.y*.55)*(1.-M)*(1.+an*An*1.6)*(1.-an*Af)*Ga*(Mirror>.5?Mr:Mm)*1.2/(1.+blur*2.2*(1.-bb))*mix(1.,.42*(1.+2.2*capB)*mix(1.,Il,inr),bb);vA*=mix(1.,Pv*vis*rel,isE*(1.-max(k,st)))*mix(1.,k,isE*Ln*step(Av,2.5))*mix(1.,0.,step(2.5,Av)*Ln*(1.-st));vEc=aK;vEw=isE*(1.-max(k,st));vA*=1.+isE*(1.-k)*Du*2.2;if(Mirror>.5)vA*=.45*Fl*exp(-max(0.,pos.y-565.)/170.)*(1.-M);gl_PointSize=clamp(aS*Pixel*(1.+vG*.18)*(1.-M*.40)*(1.+step(400.,S0)*1.4)*(1.+blur*1.6*(1.-bb))*(1.-.3*bb)*(1.+isE*(1.-k)*Du*.9),1.,14.);}`;
 const dots=`precision mediump float;uniform float Hz,Cl;varying float vG,vRed,vA,vBand,vY,vW,vH,vMir;varying vec3 vEc;varying float vEw;vec3 nacre(float h){vec3 a=vec3(.38,.86,1.),b=vec3(.64,.56,1.),d=vec3(.46,1.,.86);return h<.333?mix(a,b,h*3.):h<.666?mix(b,d,(h-.333)*3.):mix(d,a,(h-.666)*3.);}void main(){if(Hz>.5){if(vMir<.5&&vY>565.)discard;if(vMir>.5&&vY<565.)discard;}if(vMir<.5&&vY<Cl)discard;float ed=vMir<.5?exp(-max(0.,vY-Cl)/9.):0.;vec2 p=gl_PointCoord*2.-1.;float r=dot(p,p);if(r>1.)discard;float luminous=exp(-r*5.)*.73+exp(-r*22.)*.67;vec3 steel=vec3(.612,.765,.894),white=vec3(.956,.965,.973),red=vec3(.878,.478,.424);vec3 c=mix(steel,white,clamp(vG*.4+vBand*.32,0.,1.));c=mix(c,nacre(vH),clamp(vW,0.,1.)*.95);c=mix(c,pow(vEc,vec3(.8))*1.35+.04,vEw);c=mix(c,red,vRed);c=mix(c,white,ed);gl_FragColor=vec4(c,luminous*vA*(1.+vG*.4+vW*1.3+ed*4.)*(1.-r));}`;
 const lines=`precision mediump float;uniform float Hz,Cl;varying float vG,vRed,vA,vBand,vY,vW,vH,vMir;varying vec3 vEc;varying float vEw;vec3 nacre(float h){vec3 a=vec3(.38,.86,1.),b=vec3(.64,.56,1.),d=vec3(.46,1.,.86);return h<.333?mix(a,b,h*3.):h<.666?mix(b,d,(h-.333)*3.):mix(d,a,(h-.666)*3.);}void main(){if(Hz>.5){if(vMir<.5&&vY>565.)discard;if(vMir>.5&&vY<565.)discard;}if(vMir<.5&&vY<Cl)discard;float ed=vMir<.5?exp(-max(0.,vY-Cl)/9.):0.;vec3 c=mix(vec3(.25,.43,.59),vec3(.8,.9,.99),clamp(vG*.46+vBand*.3,0.,1.));c=mix(c,nacre(vH),clamp(vW,0.,1.)*.9);c=mix(c,vec3(.878,.478,.424),vRed);c=mix(c,vec3(.956,.965,.973),ed);gl_FragColor=vec4(c,vA*(.26+.22*vG+.9*vW+ed*2.));}`;
 const quadV=`attribute vec2 Q;varying vec2 uv;void main(){uv=Q*.5+.5;gl_Position=vec4(Q,0.,1.);}`;
@@ -602,13 +798,13 @@ function screenpass(p,fb,w,h,texture,stepx=0,stepy=0){gl.bindFramebuffer(gl.FRAM
 let gpuSkip=0;
 function tick(ms){requestAnimationFrame(tick);if(!last){last=ms;return}const dt=Math.min(.05,(ms-last)/1000);last=ms;if(document.hidden)return;elapsed+=dt;cineFrame(ms);const q=1-Math.exp(-dt*4.2);morph=smooth(morph,opened?1:0,q);look=[smooth(look[0],pointer[0],q*.65),smooth(look[1],pointer[1],q*.65)];pulse*=Math.exp(-dt*3.8);redPulse*=Math.exp(-dt*2.2);
 if(analyser&&stream){analyser.getByteFrequencyData(audioData);let sum=0;for(let k=1;k<110;k++)sum+=audioData[k];voiceLevel=Math.min(1.5,sum/110/85);voice=smooth(voice,voiceLevel,1-Math.exp(-dt*9))}else voice=smooth(voice,0,1-Math.exp(-dt*5));
-if(full){gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.viewport(0,0,sw,sh);gl.clearColor(.0235,.0314,.0471,1);gl.clear(gl.COLOR_BUFFER_BIT);return}
+if(full||(opened&&morph>.995)){gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.viewport(0,0,sw,sh);gl.clearColor(.0235,.0314,.0471,1);gl.clear(gl.COLOR_BUFFER_BIT);return}
 frames++;accum+=dt;if(accum>=3&&!reduced){const fps=frames/accum;if(fps<45&&pointDraw>14000)pointDraw=Math.max(14000,Math.floor(pointDraw*.8));else if(fps>58&&pointDraw<maxPts)pointDraw=Math.min(maxPts,pointDraw+3000);frames=0;accum=0}
 gl.bindFramebuffer(gl.FRAMEBUFFER,fs);gl.viewport(0,0,sw,sh);gl.disable(gl.DEPTH_TEST);gl.clearColor(0,0,0,1);gl.clear(gl.COLOR_BUFFER_BIT);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);
 
 drawEarth();paint(PL,bl,gl.LINES,segs.length/7,0);paint(PD,bp,gl.POINTS,pointDraw,0);
 screenpass(PB,fa,bw,bh,scene);screenpass(PH,fb,bw,bh,ta,1/bw,0);screenpass(PH,fa,bw,bh,tb,0,1/bh);
-gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.viewport(0,0,sw,sh);gl.disable(gl.BLEND);gl.useProgram(PF);bindQ(PF);tex(scene,0);tex(ta,1);gl.uniform1i(u(PF,'scene'),0);gl.uniform1i(u(PF,'bloom'),1);gl.uniform1f(u(PF,'T'),elapsed);gl.uniform1f(u(PF,'M'),morph);gl.uniform1f(u(PF,'Ry'),cine.Ry);gl.uniform1f(u(PF,'Hb'),cine.Hb);gl.uniform1f(u(PF,'Sw'),cine.Sw);gl.uniform1f(u(PF,'Sa'),cine.Sa);gl.uniform1f(u(PF,'Sq'),cine.Sq);gl.uniform1f(u(PF,'Co'),cine.Mm*(1-cine.Bm*(1-cine.Bk)));gl.uniform1f(u(PF,'Cr'),Math.max(.5,cine.Ga*cine.As*cine.Ap)*(cine.S0+(44-cine.S0)*morph)*.17);gl.uniform1f(u(PF,'Fl'),cine.fl);gl.uniform2f(u(PF,'Off'),OX,OY);gl.uniform2f(u(PF,'Sz'),W+2*OX,H+2*OY);gl.uniform2f(u(PF,'Lc'),cine.cx+(1260+OX-cine.cx)*morph,cine.cy+(PNY-cine.cy)*morph);gl.drawArrays(gl.TRIANGLE_STRIP,0,4)}
+gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.viewport(0,0,sw,sh);gl.disable(gl.BLEND);gl.useProgram(PF);bindQ(PF);tex(scene,0);tex(ta,1);gl.uniform1i(u(PF,'scene'),0);gl.uniform1i(u(PF,'bloom'),1);gl.uniform1f(u(PF,'T'),elapsed);gl.uniform1f(u(PF,'M'),morph);gl.uniform1f(u(PF,'Ry'),cine.Ry);gl.uniform1f(u(PF,'Hb'),cine.Hb);gl.uniform1f(u(PF,'Sw'),cine.Sw);gl.uniform1f(u(PF,'Sa'),cine.Sa);gl.uniform1f(u(PF,'Sq'),cine.Sq);gl.uniform1f(u(PF,'Co'),cine.Mm*(1-cine.Bm*(1-cine.Bk))*(1-morph));gl.uniform1f(u(PF,'Cr'),Math.max(.5,cine.Ga*cine.As*cine.Ap)*(cine.S0+(44-cine.S0)*morph)*.17);gl.uniform1f(u(PF,'Fl'),cine.fl);gl.uniform2f(u(PF,'Off'),OX,OY);gl.uniform2f(u(PF,'Sz'),W+2*OX,H+2*OY);gl.uniform2f(u(PF,'Lc'),cine.cx+(1260+OX-cine.cx)*morph,cine.cy+(PNY-cine.cy)*morph);gl.drawArrays(gl.TRIANGLE_STRIP,0,4)}
 requestAnimationFrame(tick);
 })();
 </script></body></html>
