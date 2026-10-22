@@ -39,7 +39,7 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   git checkout web-idiomas -- orbita herramientas terminos.html .github/workflows/datos-orbita.yml
   git add -A && git commit -m "Publicar …" && git push origin main && git checkout web-idiomas
   ```
-- **Caché**: todos los `static/*.js|css` de `orbita/index.html` llevan `?v=20261022zq`. Sube la letra en cada publicación (siguiente: `zr`, luego `zs`…).
+- **Caché**: todos los `static/*.js|css` de `orbita/index.html` llevan `?v=20261022zr`. Sube la letra en cada publicación (siguiente: `zs`, luego `zt`…).
 - Comprobar el despliegue: `gh run list --repo guardianagroup/guardianagroup.com --limit 1` hasta `completed success` (1–3 min).
   Desde el contenedor **no se puede** hacer curl a guardianagroup.com, overpass-api.de ni NOAA (proxy); se comprueba con el navegador integrado
   (pestaña `tab-4` = guardianagroup.com/orbita/?r=X) y desde `javascript_tool`: `OrbitaPlaneta.ir(lon, lat, zoom)`, `OrbitaConexion.abre(true)`,
@@ -47,12 +47,12 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   esperar unos segundos. Pulsar «Ahora no» del aviso al cargar.
 - Commits: terminar con `Co-Authored-By: Claude … <noreply@anthropic.com>` y la línea `Claude-Session:` que dé el sistema.
 
-## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión zq)
+## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión zr)
 - Planeta WebGL con mapa 16K en teselas; modo «limpio» desde ×4 (agua negra, tierra gris, datos en blanco, sin luces).
 - **Zoom hasta ×80.000 (500 m de altura nominal)**, suavizado logarítmico, doble clic por pasos. Indicador de altura a la derecha, encima de los botones
   (`#altura`, 40.000 km → 500 m). Desde ×8 (`body.hondo`) desaparecen los botones de capas y el filtro de satélites. Latitud hasta ±89,5° al acercarse.
   **Límite real**: el fondo (costas) es de 1–2 km de resolución; los puntos son precisos.
-- Capas: Cables submarinos (OSM filtrado + agencia **250 confirmados** (más los que OSM ya tenía), trazado aproximado punteado), Fibra por tierra (6.695 tramos, 90 países; se desvanece
+- Capas: Cables submarinos (OSM filtrado + agencia **278 confirmados** (más los que OSM ya tenía), trazado aproximado punteado), Fibra por tierra (6.695 tramos, 90 países; se desvanece
   por debajo de ~100 km de altura), Centros de datos (1.903 lugares, cuadrado blanco con anillo sutil al acercarse), Satélites (tiempo real).
 - **Cables por potencia** (`orbita/datos/cables-capacidad.json`, 62 cables: 24 gigantes ≥ 100 Tbit/s, 28 grandes ≥ 20): gigantes en blanco, más gruesos y
   con halo (énfasis que crece con el zoom, `kq`), grandes en acero brillante, el resto regional; fila «Capacidad: X Tbit/s · N pares · troncal gigante/grande/regional».
@@ -97,7 +97,7 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   `orbita/datos/cables-agencia.json`, `cables.json`, `lugares-capas.json`, `cables-capacidad.json`. Imprime «aceptados» y «solo lo nombra X» (pendientes).
 - Capacidades: `herramientas/cables-capacidad/<voz>-*.json` (`[{nombre, tbps, pares, fuente}]`, nombre exacto del grupo de `lugares-capas.json`); mayoría de voces
   dentro del 30 % (dos de tres bastan) o `cables-capacidad/confirmados.txt`. Hay claude (49), chatgpt (75), grok (17+40+36+36). Las discrepancias (p. ej. SEA-ME-WE 4: chatgpt 4,6 / grok 122) se quedan fuera hasta una tercera voz.
-- Estado: **250 cables confirmados**; **68 de una sola voz** (lista en la salida de `cables_agencia.py`). Tandas de Grok `grok-verifica-1..7` cruzadas; la 8 (Basslink… Circe South) pedida a Grok el 22 Oct a las 17:05: guardar como `grok-verifica-8.json` (Grok responde un objeto JSON por línea: leer las líneas que empiezan por `{"nombre"`), cruzar, publicar; después las tandas 9 y 10 con el resto de la lista de una sola voz.
+- Estado: **278 cables confirmados**; **34 de una sola voz** (lista en la salida de `cables_agencia.py`). Tandas de Grok `grok-verifica-1..9` cruzadas (Grok a veces responde un objeto por línea o varios seguidos sin corchetes: quitar saltos de línea, insertar comas entre `}{` y envolver en `[]`; descartar las llegadas con coordenadas «de país»). Quedan 34 de una sola voz (muchos son alias o ramales).
   Desde hoy `clave()` ignora las palabras genéricas (submarine, subsea, cable, system, fiber, network, project, domestic…): «KetchCan1» y
   «KetchCan1 Submarine Fiber Cable System» son el mismo cable. Añadidos alias EIG, GBI, OAC.
 - Ideas de la agencia para el viaje ya aplicadas: aparición progresiva de arcos con giro de cámara (Grok), carrera de dos pulsos luz/medido y escala humana del
@@ -105,6 +105,28 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   También la gráfica de ms de más por continente (ChatGPT), ya en el informe.
 - Licencias comprobadas: **PeeringDB no se puede usar** (AUP), IXPDB sin licencia clara, OONI solo no comercial, Ookla/Cloudflare Radar/OpenCellID no comerciales.
   Sí: ETOPO/GEBCO/USGS/Banco Mundial/RIPE Atlas/M-Lab.
+
+## 4b. Tarjeta «Ahora mismo» (datos-curiosos.js), noticias y «¿Sabías que…?» (22 Oct 2026, 17:15–17:30)
+- El dueño pidió: rankings (los que más y los que menos), que los datos se renueven siempre, noticias relacionadas con GUARDIANA/datos/comunicaciones
+  «siempre, siempre al día», arrancar con «¿Sabías que…?», y una investigación profunda de cables (dueños, alquiler, costes, antiguos/modernos, proyectos,
+  públicos/privados, torres) como datos curiosos: «eso es oro puro».
+- Hecho: la tarjeta baraja los datos en cada vuelta (`rellena()`), entrelaza los del equipo, y la mitad de los del mundo llevan la etiqueta «¿SABÍAS QUE…?».
+  Rankings calculados del mapa: país con más cables / centros de datos, empresa que opera más cables, países con un solo cable, cable más potente, tramo más
+  hondo, más largo, más antiguo, más moderno, países con 10G. Del equipo: «países que más datos reciben de tu equipo» (medido; en la web, EJEMPLO).
+  **No existe ranking verificable de «países que compran/venden datos»: no se inventa**; lo honesto es a dónde van los datos del propio equipo.
+- `orbita/datos/noticias.json`: noticias con dos fuentes (campos fecha, tema, es/en/pt, fuentes); en pantalla «NOTICIA · ¿SABÍAS QUE…?» y «Noticia verificada · dos fuentes».
+  **Tarea programada «Noticias Órbita (GUARDIANA)»** (id `trig_016bgAVZovsMq3wBuUESmpqN`, cada día a las 7:41 de Bogotá, aprobación automática): una sesión
+  nueva clona el repo, busca noticias de la semana, exige dos fuentes, añade a noticias.json y publica en web-idiomas y main. El dueño no tiene que hacer nada.
+- `orbita/datos/sabias.json`: «¿Sabías que…?» de la agencia (campos cifra, es/en/pt, tema, fuentes[2]); de momento vacío: ChatGPT está redactando 40 datos
+  (chat «Investigación cables submarinos» https://chatgpt.com/c/6ada8c7f-dc38-83ea-8c78-aad52a0fed71) → guardar en `herramientas/sabias-agencia/chatgpt-sabias-1.json`,
+  pedir a Grok que verifique cada dato (ok/corrección) y meter en sabias.json solo los que pasen (`voces: [chatgpt, grok]`).
+- Lo de la subasta (quién paga por los datos) NO va en el viaje 3D: será un capítulo aparte del informe cuando se genere desde el programa (dueño de acuerdo, 17:10).
+
+## 4c. Puntos de intercambio (IXP) por la agencia
+- `herramientas/ixp-agencia/chatgpt-ixp-1.json` (212 IXP de ChatGPT) y `grok-ixp-1.json` (tanda 1 de 4 verificada por Grok; las tandas 2–4 están en
+  `scratchpad/ixp-grok-2..4.txt` del contenedor, hay que pedirlas). `python3 herramientas/ixp_agencia.py` cruza por país+nombre (≥2 voces, <60 km), descarta los que
+  Grok marca «es otra cosa» (p. ej. Equinix Ashburn/Paris no son IXP neutrales), evita duplicar los de OSM y los escritos a mano, y escribe en `datos/puntos-extra.json`
+  tipo `intercambio` con `agencia: true`. capas.js ya los pinta con la capa de centros de datos.
 
 ## 5. Porcentaje de «mapa completo» (estimación dada al dueño)
 Cables submarinos ~70 % · llegadas ~80 % · centros de datos ~25–35 % · puntos de intercambio <1 % · fibra terrestre ~45 % · satélites ~95 % · polos ~90 %.
@@ -117,12 +139,10 @@ Conjunto ~55 %. Orden acordado: (1) centros de datos, (2) puntos de intercambio,
    https://chatgpt.com/c/6ada832b-0b94-83e8-ab23-e58008ece741; guardar la respuesta en `herramientas/paises-agencia/chatgpt-paises-N.json` y fusionar).
    Campos: `movil`, `operadores`, `fija`, `diez` (10G), `troncales`, `intercambio`, `novedades`.
 3. Capacidades: pedir a Grok el resto de la lista; cables de una sola voz (95): seguir con Grok/ChatGPT por tandas de 15–20 nombres.
-4. Centros de datos: la consulta Overpass de `datos_orbita.py` (`puntos()`) ya incluye `building/office/industrial/man_made=data_center` con
-   deduplicado nodo/edificio (22 Oct, 16:45); **comprobar el resultado del workflow** (`gh workflow run datos-orbita.yml --ref main`, luego traer `orbita/datos` a `web-idiomas`)
-   y actualizar el recuento en la ficha de país / porcentaje.
-5. Puntos de intercambio por la agencia: ChatGPT está generando una lista de ≥120 IXP (chat «Lista mundial de IXP» https://chatgpt.com/c/6ada8692-2460-83e8-88d1-53dd76e4009c,
-   esquema [{nombre, ciudad, pais, lat, lon, operador, desde, nota}]); guardar en `herramientas/ixp-agencia/chatgpt-ixp-1.json`, pedir a Grok que verifique
-   (misma lista → `grok-ixp-1.json`), cruzar por nombre+ciudad (≥2 voces) y escribir `datos/puntos-extra.json` tipo `intercambio` (capas.js ya pinta ese tipo desde puntos.json de OSM; añadir la carga de los de la agencia como con las estaciones).
+4. Centros de datos: `datos_orbita.py` hace ahora dos consultas Overpass (telecom=* y building/office/industrial/man_made=data_center, ~1.300 edificios más).
+   El workflow tiene entrada `forzar` (`gh workflow run datos-orbita.yml --ref main -f forzar=true`) que vuelve a descargar los puntos; el push a main NO dispara el workflow
+   (solo la rama orbita-datos). Lanzado a las 17:25 del 22 Oct: comprobar que `puntos.json` tiene más de 4.493 «datos» y traer `orbita/datos` a web-idiomas.
+5. Puntos de intercambio: terminar las tandas 2–4 de Grok (ver §4c), ejecutar `ixp_agencia.py`, publicar.
 6. Traducir a los 39 idiomas restantes las claves nuevas (solo en es/en/pt dentro de `idioma.js`): polos, incidencias, país, capacidad, profundidad, rutas,
    ficha completa, viaje e informe.
 7. Capas futuras propuestas por la agencia: terremotos (USGS), regiones de nube, latencia RIPE Atlas, DNSSEC por país, caídas conocidas.
