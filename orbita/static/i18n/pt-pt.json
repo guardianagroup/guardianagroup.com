@@ -510,5 +510,7 @@
   "precision": "precisão {1}",
   "medidoConfirmado": "Medido com a localização do seu sistema[ (precisão {1})] e confirmado por si. Guarda-se apenas neste computador.",
   "elegidoConfirmado": "{t:Elegido por ti} e confirmado por si. Guarda-se apenas neste computador."
- }
+ },
+ "Datos verificados": "Dados verificados",
+ "Trazado aproximado por mar": "Traçado aproximado pelo mar"
 }

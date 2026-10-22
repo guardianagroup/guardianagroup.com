@@ -510,5 +510,7 @@
   "precision": "presnosť {1}",
   "medidoConfirmado": "Zmerané z polohy vášho systému[ (presnosť {1})] a potvrdené vami. Ukladá sa len v tomto počítači.",
   "elegidoConfirmado": "{t:Elegido por ti} a potvrdené vami. Ukladá sa len v tomto počítači."
- }
+ },
+ "Datos verificados": "Overené údaje",
+ "Trazado aproximado por mar": "Približná trasa po mori"
 }

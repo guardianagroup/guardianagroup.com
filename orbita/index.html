@@ -41,16 +41,16 @@
     <button type="button" data-capa="sat" aria-pressed="false" title="Los satélites que llevan datos, en tiempo real"><i aria-hidden="true"></i>Satélites</button>
   </div>
   <div id="sat-vista" class="sat-vista" role="group" aria-label="Qué satélites ver" hidden>
+    <div class="orb" role="group" aria-label="Órbita">
+      <div class="titulo">Capas de satélites</div>
+      <button type="button" data-orb="geo" aria-pressed="true"><i aria-hidden="true"></i><span class="n">Geoestacionaria <b></b></span><span class="d">A 35.786 km; parecen quietos sobre el mismo punto (televisión, internet por satélite).</span></button>
+      <button type="button" data-orb="media" aria-pressed="false"><i aria-hidden="true"></i><span class="n">Órbita media <b></b></span><span class="d">Entre 2.000 y 30.000 km: GPS, Galileo, O3b.</span></button>
+      <button type="button" data-orb="baja" aria-pressed="false"><i aria-hidden="true"></i><span class="n">Órbita baja <b></b></span><span class="d">Por debajo de 2.000 km: Starlink, OneWeb, Iridium. Es la más poblada.</span></button>
+    </div>
     <div class="seg" role="radiogroup" aria-label="Vista">
       <button type="button" data-vista="equilibrada" role="radio" aria-checked="true" title="Todos menos Starlink, y una muestra fija de Starlink que crece al acercar">Equilibrada</button>
       <button type="button" data-vista="todos" role="radio" aria-checked="false">Todos</button>
       <button type="button" data-vista="cielo" role="radio" aria-checked="false" title="Solo los que están ahora a más de 25° sobre tu horizonte"><span class="cielo-t">Sobre ti</span></button>
-    </div>
-    <span class="sep" aria-hidden="true"></span>
-    <div class="orb" role="group" aria-label="Órbita">
-      <button type="button" data-orb="baja" aria-pressed="false" title="Capa: la órbita baja, por debajo de 2.000 km (Starlink, OneWeb, Iridium…); es la más poblada">Órbita baja <b></b></button>
-      <button type="button" data-orb="media" aria-pressed="false" title="Capa: la órbita media, entre 2.000 y 30.000 km (GPS, Galileo, O3b…)">Órbita media <b></b></button>
-      <button type="button" data-orb="geo" aria-pressed="true" title="Capa: la órbita geoestacionaria, a unos 35.786 km; parecen quietos sobre el mismo punto">Geoestacionaria <b></b></button>
     </div>
   </div>
   <div id="sat-fase" class="sat-fase" role="status" hidden></div>

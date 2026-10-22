@@ -202,7 +202,7 @@
   // ---------- Geometry shared with the CSS (--u) ----------
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
   // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
-  const ZOOM = { z: 1, zt: 1, MAX: 7 }; // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
+  const ZOOM = { z: 1, zt: 1, MAX: 10 }; // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
   function mide() {
@@ -269,6 +269,8 @@
     get geo() { return { W, H, CX, CY, R, R0, U, DPR }; },
     get dentro() { return dentro; },
     get pais() { return (LUGAR && LUGAR.pais) || CASA || null; },
+    // 22 Oct 2026: used by the automated checks (Playwright) to look at a place at a given zoom.
+    ir(lon, lat, z) { vista.lon = lon; vista.lat = Math.max(-60, Math.min(60, lat)); vista.vlon = vista.vlat = 0; meta = null; ZOOM.zt = Math.max(1, Math.min(ZOOM.MAX, z || 1)); quietoHasta = performance.now() + 60000; pintaZoom(); },
     get lugar() { try { if (LUGAR) return { lat: LUGAR.lat, lon: LUGAR.lon, nombre: LUGAR.ciudad, aprox: false }; const p = centros[CASA]; return p ? { lat: p.lat, lon: p.lon, nombre: nombrePais(CASA), aprox: true } : null; } catch (_) { return null; } },
   };
   cvT.addEventListener('pointerdown', (e) => {

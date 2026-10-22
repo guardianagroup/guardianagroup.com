@@ -510,5 +510,7 @@
   "precision": "hassasiyet {1}",
   "medidoConfirmado": "Sisteminizin konumuyla ölçüldü[ (hassasiyet {1})] ve sizin tarafınızdan onaylandı. Yalnızca bu bilgisayarda saklanır.",
   "elegidoConfirmado": "{t:Elegido por ti} ve sizin tarafınızdan onaylandı. Yalnızca bu bilgisayarda saklanır."
- }
+ },
+ "Datos verificados": "Doğrulanmış veriler",
+ "Trazado aproximado por mar": "Yaklaşık deniz güzergâhı"
 }

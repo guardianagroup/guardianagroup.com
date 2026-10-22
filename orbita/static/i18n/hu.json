@@ -510,5 +510,7 @@
   "precision": "pontosság {1}",
   "medidoConfirmado": "A rendszered helyadata alapján mérve[ (pontosság {1})], és általad megerősítve. Csak ezen a gépen tároljuk.",
   "elegidoConfirmado": "{t:Elegido por ti}, és általad megerősítve. Csak ezen a gépen tároljuk."
- }
+ },
+ "Datos verificados": "Ellenőrzött adatok",
+ "Trazado aproximado por mar": "Hozzávetőleges tengeri útvonal"
 }

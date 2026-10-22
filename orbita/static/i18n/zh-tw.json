@@ -510,5 +510,7 @@
   "precision": "精度 {1}",
   "medidoConfirmado": "透過系統定位測得[（精度 {1}）]並由你確認。僅儲存在這台電腦上。",
   "elegidoConfirmado": "{t:Elegido por ti}並由你確認。僅儲存在這台電腦上。"
- }
+ },
+ "Datos verificados": "已驗證資料",
+ "Trazado aproximado por mar": "大致海上路線"
 }

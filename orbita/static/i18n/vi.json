@@ -510,5 +510,7 @@
   "precision": "độ chính xác {1}",
   "medidoConfirmado": "Đo bằng vị trí hệ thống của bạn[ (độ chính xác {1})] và do bạn xác nhận. Chỉ lưu trên máy này.",
   "elegidoConfirmado": "{t:Elegido por ti} và do bạn xác nhận. Chỉ lưu trên máy này."
- }
+ },
+ "Datos verificados": "Dữ liệu đã xác minh",
+ "Trazado aproximado por mar": "Tuyến đường biển ước tính"
 }

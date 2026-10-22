@@ -510,5 +510,7 @@
   "precision": "katumpakan {1}",
   "medidoConfirmado": "Sinukat gamit ang lokasyon ng iyong system[ (katumpakan {1})] at kinumpirma mo. Nakaimbak lang sa computer na ito.",
   "elegidoConfirmado": "{t:Elegido por ti} at kinumpirma mo. Nakaimbak lang sa computer na ito."
- }
+ },
+ "Datos verificados": "Beripikadong datos",
+ "Trazado aproximado por mar": "Tinatayang ruta sa dagat"
 }

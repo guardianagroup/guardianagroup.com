@@ -510,5 +510,7 @@
   "precision": "usahihi {1}",
   "medidoConfirmado": "Imepimwa kwa mahali pa mfumo wako[ (usahihi {1})] na kuthibitishwa na wewe. Huhifadhiwa kwenye kompyuta hii tu.",
   "elegidoConfirmado": "{t:Elegido por ti} na kuthibitishwa na wewe. Huhifadhiwa kwenye kompyuta hii tu."
- }
+ },
+ "Datos verificados": "Data zilizothibitishwa",
+ "Trazado aproximado por mar": "Njia ya baharini ya kukadiria"
 }

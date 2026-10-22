@@ -510,5 +510,7 @@
   "precision": "dokładność {1}",
   "medidoConfirmado": "Zmierzono z lokalizacji Twojego systemu[ (dokładność {1})] i potwierdzono przez Ciebie. Zapisane tylko na tym komputerze.",
   "elegidoConfirmado": "{t:Elegido por ti} i potwierdzone przez Ciebie. Zapisane tylko na tym komputerze."
- }
+ },
+ "Datos verificados": "Zweryfikowane dane",
+ "Trazado aproximado por mar": "Przybliżona trasa morska"
 }

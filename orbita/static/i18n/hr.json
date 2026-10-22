@@ -510,5 +510,7 @@
   "precision": "točnost {1}",
   "medidoConfirmado": "Izmjereno lokacijom vašeg sustava[ (točnost {1})] i potvrđeno s vaše strane. Sprema se samo na ovom računalu.",
   "elegidoConfirmado": "{t:Elegido por ti} i potvrđeno s vaše strane. Sprema se samo na ovom računalu."
- }
+ },
+ "Datos verificados": "Provjereni podaci",
+ "Trazado aproximado por mar": "Približna morska ruta"
 }

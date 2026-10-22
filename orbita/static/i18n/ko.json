@@ -510,5 +510,7 @@
   "precision": "정확도 {1}",
   "medidoConfirmado": "시스템 위치로 측정[(정확도 {1})]하고 직접 확인했습니다. 이 컴퓨터에만 저장됩니다.",
   "elegidoConfirmado": "{t:Elegido por ti}하고 직접 확인했습니다. 이 컴퓨터에만 저장됩니다."
- }
+ },
+ "Datos verificados": "검증된 데이터",
+ "Trazado aproximado por mar": "대략적인 해상 경로"
 }

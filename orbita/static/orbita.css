@@ -243,6 +243,7 @@ body.sin-cortes #directo, body.sin-cortes #estado { display: none; }
 .idiomas .idioma-actual[aria-expanded="true"]::after { transform: translateY(1px) rotate(-135deg); }
 .idiomas .idioma-actual:focus-visible, .idioma-menu button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .idioma-menu { position: absolute; top: calc(100% + 8px); inset-inline-end: 0; z-index: 40; width: min(560px, calc(100vw - 32px)); max-height: min(62vh, 520px); overflow: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 8px; border-radius: 16px; border: 1px solid var(--line); background: rgba(10,14,20,.86); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 18px 50px rgba(0,0,0,.45); scrollbar-width: thin; }
+.idioma-menu[hidden] { display: none; }
 .idioma-menu button { all: unset; cursor: pointer; display: flex; align-items: baseline; gap: 10px; padding: 8px 10px; border-radius: 9px; color: var(--muted); font: 400 12.5px/1.2 var(--texto); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .15s, background .15s; }
 .idioma-menu button .cod { font: 500 10px/1 var(--mono); letter-spacing: .08em; color: #8A95A2; min-width: 28px; }
 .idioma-menu button .nom { overflow: hidden; text-overflow: ellipsis; }
@@ -344,15 +345,26 @@ body.listo:not(.dentro).cerca .sat-vista { background: rgba(8,11,16,.84); border
 body.listo:not(.dentro) header:hover, body.listo:not(.dentro) header:focus-within, body.listo:not(.dentro) .sat-vista:hover, body.listo:not(.dentro) .sat-vista:focus-within { opacity: 1; }
 
 /* Which satellites (owner + agency, 20 Oct 2026): a quiet second row under the layers, only with satellites on. */
-.sat-vista { position: absolute; left: 50%; top: 74px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 3px; border-radius: 999px; border: 1px solid var(--line); background: rgba(12,17,24,.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+/* 22 Oct 2026 (owner: «un desplegable con las tres fases para clicar cada una»): a folded card under the «Satélites»
+   button, one row per orbit (a lit dot when it is on), and the view below. */
+.sat-vista { position: absolute; top: 74px; left: 50%; transform: translateX(-50%); width: 340px; max-width: calc(100vw - 32px); display: flex; flex-direction: column; gap: 10px; padding: 10px; border-radius: 16px; border: 1px solid var(--line); background: rgba(10,14,20,.86); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 18px 50px rgba(0,0,0,.45); z-index: 30; }
 .sat-vista[hidden] { display: none; }
-.sat-vista .seg, .sat-vista .orb { display: flex; gap: 2px; }
-.sat-vista .sep { width: 1px; height: 16px; background: var(--line); }
-.sat-vista button { all: unset; cursor: pointer; padding: 6px 11px; border-radius: 999px; font: 500 11px/1 var(--texto); color: var(--muted); white-space: nowrap; transition: color .2s, background .2s; }
-.sat-vista button b { font: 400 10px/1 var(--mono); color: #8A95A2; margin-left: 4px; letter-spacing: .02em; }
-.sat-vista button:hover:not(:disabled) { color: var(--fg); }
-.sat-vista [aria-checked="true"] { color: var(--fg); background: rgba(156,195,228,.16); }
-.sat-vista .orb [aria-pressed="false"] { color: #5F6873; text-decoration: line-through; text-decoration-color: rgba(156,195,228,.35); }
+.sat-vista .titulo { display: flex; justify-content: space-between; align-items: center; font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8A95A2; padding: 4px 10px 8px; }
+.sat-vista .plegar { all: unset; cursor: pointer; color: #8A95A2; padding: 0 4px; font: 500 12px/1 var(--mono); } .sat-vista .plegar:hover { color: var(--fg); }
+.sat-vista .orb { display: flex; flex-direction: column; gap: 2px; }
+.sat-vista .orb button { all: unset; cursor: pointer; display: grid; grid-template-columns: 14px 1fr; column-gap: 10px; align-items: start; padding: 8px 10px; border-radius: 10px; transition: background .15s; }
+.sat-vista .orb button i { width: 8px; height: 8px; margin-top: 4px; border-radius: 50%; border: 1.3px solid #5F6873; transition: background .2s, box-shadow .2s, border-color .2s; }
+.sat-vista .orb button .n { font: 500 13px/1.3 var(--texto); color: var(--fg); }
+.sat-vista .orb button .n b { font: 400 10.5px/1 var(--mono); color: #8A95A2; margin-left: 6px; letter-spacing: .02em; }
+.sat-vista .orb button .d { grid-column: 2; font: 400 11.5px/1.35 var(--texto); color: var(--muted); margin-top: 2px; }
+.sat-vista .orb button:hover { background: rgba(156,195,228,.08); }
+.sat-vista .orb button[aria-pressed="true"] i { background: #9CC3E4; border-color: #9CC3E4; box-shadow: 0 0 8px rgba(156,195,228,.8); }
+.sat-vista .orb button[aria-pressed="false"] .n { color: var(--muted); }
+.sat-vista .seg { display: flex; gap: 2px; padding: 3px; border-radius: 999px; border: 1px solid var(--line); }
+.sat-vista .seg button { all: unset; cursor: pointer; flex: 1; text-align: center; padding: 6px 10px; border-radius: 999px; font: 500 11px/1 var(--texto); color: var(--muted); white-space: nowrap; transition: color .2s, background .2s; }
+.sat-vista .seg button:hover:not(:disabled) { color: var(--fg); }
+.sat-vista .seg [aria-checked="true"] { color: var(--fg); background: rgba(156,195,228,.16); }
+.sat-vista button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .sat-vista .orb [aria-pressed="false"] b { color: #5F6873; }
 .sat-vista button:disabled { opacity: .35; cursor: default; }
 .sat-vista button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

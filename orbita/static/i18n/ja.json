@@ -510,5 +510,7 @@
   "precision": "精度 {1}",
   "medidoConfirmado": "システムの位置情報で測定[（精度 {1}）]し、あなたが確認しました。このパソコンにだけ保存されます。",
   "elegidoConfirmado": "{t:Elegido por ti}、あなたが確認しました。このパソコンにだけ保存されます。"
- }
+ },
+ "Datos verificados": "検証済みデータ",
+ "Trazado aproximado por mar": "おおよその海上ルート"
 }
