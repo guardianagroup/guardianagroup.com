@@ -1,0 +1,28 @@
+[
+{
+"nombre": "Balticconnector (cable de telecomunicaciones Finlandia–Estonia, Elisa)",
+"llegadas": [
+{
+"lugar": "Inkoo",
+"pais": "FI",
+"lat": 60.05,
+"lon": 24.01
+},
+{
+"lugar": "Paldiski",
+"pais": "EE",
+"lat": 59.36,
+"lon": 24.05
+}
+],
+"anio": 2019,
+"km": 77,
+"duenos": [
+"Elisa"
+],
+"fuentes": [
+"https://en.wikipedia.org/wiki/Balticconnector",
+"https://corporate.elisa.com/"
+]
+}
+]
