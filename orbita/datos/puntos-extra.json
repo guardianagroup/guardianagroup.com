@@ -1,0 +1,23 @@
+{
+ "nota": "Puntos comprobados a mano por la agencia GUARDIANA, con su fuente; completan lo que OpenStreetMap no tiene.",
+ "puntos": [
+  {
+   "lon": 14.4378,
+   "lat": 50.0755,
+   "tipo": "intercambio",
+   "nombre": "NIX.CZ",
+   "operador": "NIX.CZ, z.s.p.o.",
+   "nota": "Punto neutro de intercambio de internet de Chequia (Praga); por él se cruzan las redes checas y las de los países vecinos. Posición aproximada: sus nodos están repartidos en varios centros de datos de Praga.",
+   "fuente": "https://www.nix.cz"
+  },
+  {
+   "lon": 16.6068,
+   "lat": 49.1951,
+   "tipo": "intercambio",
+   "nombre": "NIX.CZ Brno",
+   "operador": "NIX.CZ, z.s.p.o.",
+   "nota": "Nodo de NIX.CZ en Brno (posición aproximada, centro de la ciudad).",
+   "fuente": "https://www.nix.cz"
+  }
+ ]
+}

@@ -79,6 +79,9 @@
         const q = { w: P().vec(f[il], f[ia]).map((x) => x * 1.002), t: f[it], n: f[inm] || '', o: f[iop] || '', x: ex[k] || null, lon: f[il], lat: f[ia] };
         if (f[it] === 'datos') PT.p.push(q); else if (f[it] === 'intercambio') PT.ix.push(q); else if (f[it] === 'aterrizaje') (PT.at || (PT.at = [])).push(q);
       });
+      // hand-verified additions (datos/puntos-extra.json, with their sources): exchange points, polar stations…
+      // OpenStreetMap does not know; they survive the automatic data updates
+      try { const e2 = await cargaJSON('datos/puntos-extra.json'); for (const f of (e2.puntos || [])) { if (!Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; const q = { w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: f.nota ? { nota: f.nota, enlace: f.enlace || '' } : null, lon: f.lon, lat: f.lat, extra: true }; if (f.tipo === 'datos') PT.p.push(q); else if (f.tipo === 'intercambio') PT.ix.push(q); else if (f.tipo === 'estacion') (PT.est || (PT.est = [])).push(q); } } catch (_) {}
       // how many data centres each operator has on the map
       PT.porOp = new Map(); for (const q of PT.p) if (q.o) PT.porOp.set(q.o, (PT.porOp.get(q.o) || 0) + 1);
       lugares();
@@ -945,6 +948,7 @@
       filas.push([T('Operador'), op]);
       const n = PT.porOp.get(q.o) || 0; if (n > 1) filas.push([T('Del mismo operador'), num(n) + ' ' + T('centros de datos en el mapa')]);
     }
+    if (X.nota) filas.push([T('Datos'), X.nota]); // a hand-verified point carries its own note
     const duenos = X.dueno || (W.duenos && W.duenos.join(', '));
     if (duenos && duenos !== q.o) filas.push([T('Dueño'), duenos]);
     const desde = X.desde || W.desde; if (desde) filas.push([T('En servicio desde'), String(desde).slice(0, 4)]);
