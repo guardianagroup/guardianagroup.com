@@ -448,12 +448,12 @@ body.solo-tu #capas, body.solo-tu #sat-vista, body.solo-tu #sat-fase, body.solo-
 .lista-cerca .cerrar { all: unset; cursor: pointer; position: absolute; top: 6px; right: 10px; font: 400 18px/1 var(--texto); color: #8A95A2; padding: 2px 4px; }
 .lista-cerca .cerrar:hover { color: var(--fg); }
 /* altitude gauge beside the zoom rail (22 Oct 2026) */
-.altura { position: fixed; right: calc(64px + env(safe-area-inset-right, 0px)); bottom: calc(50% + 112px); width: 34px; display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 4; opacity: 0; transition: opacity .8s 1.6s; pointer-events: none; }
+.altura { position: fixed; right: calc(64px + env(safe-area-inset-right, 0px)); top: max(124px, calc(50% - 300px)); width: 34px; display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 4; opacity: 0; transition: opacity .8s 1.6s; pointer-events: none; }
 body.listo .altura { opacity: 1; }
 .altura .k { font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8A95A2; }
-.altura .barra { position: relative; width: 2px; height: 150px; background: linear-gradient(#2A3442, #3A4656); border-radius: 2px; }
+.altura .barra { position: relative; width: 2px; height: 140px; margin: 4px 0; background: linear-gradient(#2A3442, #3A4656); border-radius: 2px; }
 .altura .barra b { position: absolute; left: 10px; font: 400 9.5px/1 var(--mono); color: #7A8591; white-space: nowrap; }
-.altura .barra b:first-child { top: -3px; } .altura .barra b:last-of-type { bottom: -3px; }
+.altura .barra b:first-child { top: 1px; } .altura .barra b:last-of-type { bottom: 1px; }
 .altura .barra i { position: absolute; left: -4px; top: 0; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: #9CC3E4; box-shadow: 0 0 8px rgba(156,195,228,.8); transition: top .15s linear; }
 .altura .v { font: 500 11px/1 var(--mono); color: var(--fg); white-space: nowrap; font-variant-numeric: tabular-nums; }
 body.dentro .altura { opacity: 0; }
