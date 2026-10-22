@@ -61,9 +61,14 @@ def main():
             voces.setdefault(v, []).append((t, pares, fu))
         ts = [max(x[0] for x in xs) for xs in voces.values()]  # one figure per voice: its latest (highest) upgrade
         if len(ts) >= 2:
-            if max(ts) > 1.3 * min(ts) and k not in conf:
+            # the largest group of voices that agree within 30 % wins (two of three agreeing is enough)
+            mejor = None
+            for v in ts:
+                grupo = [u for u in ts if v / 1.3 <= u <= v * 1.3]
+                if len(grupo) >= 2 and (mejor is None or len(grupo) > len(mejor)): mejor = grupo
+            if mejor is None and k not in conf:
                 descartes.append((nombre, 'las voces no coinciden: ' + ', '.join('%s=%g' % (v, max(x[0] for x in xs)) for v, xs in voces.items()))); continue
-            t = statistics.median(ts)
+            t = statistics.median(mejor or ts)
         elif k in conf:
             t = ts[0]
         else:

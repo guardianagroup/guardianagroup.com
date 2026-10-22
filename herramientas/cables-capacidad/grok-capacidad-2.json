@@ -1,0 +1,242 @@
+[
+{
+"nombre": "FALCON",
+"tbps": 1.28,
+"pares": null,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "FASTER",
+"tbps": 60,
+"pares": 6,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "GLO-1 (Globacom-1)",
+"tbps": 2.5,
+"pares": null,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Grace Hopper",
+"tbps": 352,
+"pares": 16,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Havfrue/AEC-2",
+"tbps": 108,
+"pares": 6,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "HAVFRUE / America Europe Connect-2 (AEC-2)",
+"tbps": 108,
+"pares": 6,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Hawaiki Cable",
+"tbps": 67,
+"pares": 3,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "IMEWE",
+"tbps": 3.84,
+"pares": 3,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "INDIGO-Central",
+"tbps": 36,
+"pares": 2,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "INDIGO-West",
+"tbps": 36,
+"pares": 2,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "IONIAN",
+"tbps": 15.3,
+"pares": 24,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "JUPITER",
+"tbps": 60,
+"pares": 5,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "MAREA",
+"tbps": 200,
+"pares": 8,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Malaysia India Singapore Transit (MIST)",
+"tbps": 216,
+"pares": 12,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Manatua (One Polynesia Cable)",
+"tbps": 20,
+"pares": 2,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Medusa",
+"tbps": 480,
+"pares": 24,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "METISS",
+"tbps": 24,
+"pares": 2,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Monet",
+"tbps": 64,
+"pares": 6,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "New Cross Pacific (NCP)",
+"tbps": 70,
+"pares": 7,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Nuvem",
+"tbps": 384,
+"pares": 16,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Pacific Caribbean Cable System (PCCS)",
+"tbps": 80,
+"pares": 8,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Pacific Caribbean Cable System",
+"tbps": 80,
+"pares": 8,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Pacific Crossing-1 (PC-1)",
+"tbps": 0.64,
+"pares": 4,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Pacific Light Cable Network (PLCN)",
+"tbps": 144,
+"pares": 6,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "PLCN",
+"tbps": 144,
+"pares": 6,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "PIPE Pacific Cable-1 (PPC-1)",
+"tbps": 2.56,
+"pares": 2,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "PEACE Cable",
+"tbps": 24,
+"pares": null,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "South America-1 (SAm-1)",
+"tbps": 1.92,
+"pares": 4,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Sam-1",
+"tbps": 1.92,
+"pares": 4,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "SEA-ME-WE 5",
+"tbps": 36.6,
+"pares": 3,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "SEACOM",
+"tbps": 12,
+"pares": null,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Seabras-1",
+"tbps": 72,
+"pares": 6,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Southeast Asia-Japan Cable 2 (SJC2)",
+"tbps": 126,
+"pares": 7,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Southern Cross NEXT",
+"tbps": 72,
+"pares": 4,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Tannat",
+"tbps": 90,
+"pares": 6,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Tasman Global Access (TGA)",
+"tbps": 20,
+"pares": 2,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Topaz",
+"tbps": 240,
+"pares": 16,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "West Africa Cable System (WACS)",
+"tbps": 14.5,
+"pares": 4,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "EllaLink",
+"tbps": 100,
+"pares": 4,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Firmina",
+"tbps": 240,
+"pares": 16,
+"fuente": "Grok 22-10-2026"
+}
+]
