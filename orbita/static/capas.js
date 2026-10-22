@@ -72,7 +72,9 @@
   let PT = null;
   // The polar stations (bases and satellite ground stations) live in puntos-extra.json and are drawn with the cable layer
   // too, so they load on their own, without the 420 KB of data centres (22 Oct 2026, 14:15, owner: «que aparezca»).
-  let EST = null;
+  let EST = null, NOTAS = null;
+  const norm = (t) => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  async function cargaNotas() { if (NOTAS || cargando.notas) return; cargando.notas = true; try { const n = await cargaJSON('datos/cables-notas.json'); NOTAS = (n.cables || []).map((q) => ({ ...q, clave: norm(q.clave) })); } catch (_) { NOTAS = []; } cargando.notas = false; }
   async function cargaEstaciones() {
     if (EST || cargando.est) return; cargando.est = true;
     try { const e2 = await cargaJSON('datos/puntos-extra.json'); EST = []; for (const f of (e2.puntos || [])) { if (f.tipo !== 'estacion' || !Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; EST.push({ w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: { nota: f.nota || '', enlace: f.enlace || '', clase: f.clase || '', programa: f.programa || '', desde: f.desde || '', gente: f.gente || '', telemetria: f.telemetria || '', antenas: f.antenas || '', cambios: f.cambios || '', local: f.local || '', fuente: f.fuente || '' }, lon: f.lon, lat: f.lat, extra: true }); } } catch (_) { EST = []; }
@@ -1117,6 +1119,8 @@
       if (inf.aprox) {  // rebuilt by the agency: say so, and where it was checked
         mas.push(T('Trazado aproximado por mar') + ' · ' + T('Datos verificados'));
       }
+      // 22 Oct 2026, 14:34 (owner): «el cable que se rompió también lo indicamos»: known cuts and repairs, by hand
+      { const nn = norm(gr ? gr[0] : (d.n || '')); const nt = NOTAS && NOTAS.find((q) => nn.includes(q.clave)); if (nt) { if (nt.incidentes) mas.push(T('Incidencias conocidas') + ': ' + nt.incidentes); if (nt.estado) mas.push(T('Estado') + ': ' + T(nt.estado === 'en servicio' ? 'En servicio' : 'En construcción')); } }
       f.querySelector('span').textContent = donde + (mas.length ? '\n' + mas.join('\n') : '');
     }
     f.hidden = false; colocaFicha(x, y);
@@ -1250,7 +1254,7 @@
     estado[clave] = on; guarda();
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
     if (on && clave === 'sat') estado.satPlegado = false;
-    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else if (clave === 'fibra') cargaFibra(); else { cargaCables(clave); if (clave === 'sub') { cargaFibra(); cargaEstaciones(); } } }
+    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else if (clave === 'fibra') cargaFibra(); else { cargaCables(clave); if (clave === 'sub') { cargaFibra(); cargaEstaciones(); cargaNotas(); } } }
     if (!on) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; }
     pintaNota(); pintaVista();
   }

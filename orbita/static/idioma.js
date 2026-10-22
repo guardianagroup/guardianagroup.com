@@ -264,6 +264,7 @@
     'Antenas': ['Antennas', 'Antenas'],
     'Enlaces locales': ['Local links', 'Ligações locais'],
     'Novedades': ['What is new', 'Novidades'],
+    'Incidencias conocidas': ['Known incidents', 'Incidentes conhecidos'],
     'Personal': ['Staff', 'Pessoal'],
     'Desde': ['Since', 'Desde'],
     'Qué quieren hacer': ['What they want to do', 'O que querem fazer'],

@@ -1,0 +1,105 @@
+{
+ "nota": "Incidencias conocidas de cables (cortes, reparaciones) verificadas a mano; se muestran en la ficha del cable. «clave» se busca dentro del nombre del cable, sin mayúsculas ni acentos.",
+ "cables": [
+  {
+   "clave": "svalbard",
+   "estado": "en servicio",
+   "incidentes": "7 de enero de 2022: uno de los dos cables Svalbard–Andøya quedó dañado a unos 130 km de Longyearbyen (causa no aclarada; se investigó un arrastrero); el otro cable mantuvo el servicio y el dañado se reparó en 2022. Noruega estudia un tercer cable de respaldo."
+  },
+  {
+   "clave": "tonga cable",
+   "estado": "en servicio",
+   "incidentes": "15 de enero de 2022: la erupción del volcán Hunga Tonga–Hunga Haʻapai cortó el cable internacional y el nacional; Tonga quedó sin internet (solo satélite) hasta la reparación del internacional el 22 de febrero de 2022. El nacional tardó más de un año. En junio de 2024 el internacional volvió a cortarse y se reparó semanas después."
+  },
+  {
+   "clave": "c-lion",
+   "estado": "en servicio",
+   "incidentes": "18 de noviembre de 2024: cortado en el Báltico, al sur de Öland (junto con el BCS East-West Lituania–Suecia), en un episodio atribuido al arrastre del ancla de un carguero; Cinia lo reparó el 28 de noviembre de 2024."
+  },
+  {
+   "clave": "seacom",
+   "estado": "en servicio",
+   "incidentes": "24 de febrero de 2024: cortado en el mar Rojo (con AAE-1 y EIG) por el ancla del carguero Rubymar, hundido tras un ataque hutí; reparado en julio de 2024. 12 de mayo de 2024: nuevo corte entre Mozambique y Sudáfrica (con EASSy), reparado en semanas."
+  },
+  {
+   "clave": "aae-1",
+   "estado": "en servicio",
+   "incidentes": "24 de febrero de 2024: cortado en el mar Rojo (con SEACOM y EIG) por el ancla del carguero Rubymar; reparado en el verano de 2024."
+  },
+  {
+   "clave": "asia-africa-europe 1",
+   "estado": "en servicio",
+   "incidentes": "24 de febrero de 2024: cortado en el mar Rojo (con SEACOM y EIG) por el ancla del carguero Rubymar; reparado en el verano de 2024."
+  },
+  {
+   "clave": "eig",
+   "estado": "en servicio",
+   "incidentes": "24 de febrero de 2024: cortado en el mar Rojo (con SEACOM y AAE-1); reparado en el verano de 2024."
+  },
+  {
+   "clave": "europe india gateway",
+   "estado": "en servicio",
+   "incidentes": "24 de febrero de 2024: cortado en el mar Rojo (con SEACOM y AAE-1); reparado en el verano de 2024."
+  },
+  {
+   "clave": "sea-me-we 4",
+   "estado": "en servicio",
+   "incidentes": "6 de septiembre de 2025: cortado en el mar Rojo cerca de Yeda (con IMEWE); afectó al tráfico Asia–Europa (Microsoft avisó de latencias en Azure) hasta su reparación."
+  },
+  {
+   "clave": "imewe",
+   "estado": "en servicio",
+   "incidentes": "6 de septiembre de 2025: cortado en el mar Rojo cerca de Yeda (con SEA-ME-WE 4); reparado después."
+  },
+  {
+   "clave": "west africa cable system",
+   "estado": "en servicio",
+   "incidentes": "14 de marzo de 2024: cortado frente a Costa de Marfil (cañón submarino Trou sans Fond, con MainOne, ACE y SAT-3), probablemente por un deslizamiento submarino; dejó a medio África occidental con internet degradado durante semanas; reparado en abril–mayo de 2024."
+  },
+  {
+   "clave": "wacs",
+   "estado": "en servicio",
+   "incidentes": "14 de marzo de 2024: cortado frente a Costa de Marfil (con MainOne, ACE y SAT-3); reparado en abril–mayo de 2024."
+  },
+  {
+   "clave": "mainone",
+   "estado": "en servicio",
+   "incidentes": "14 de marzo de 2024: cortado frente a Costa de Marfil (con WACS, ACE y SAT-3); fue el primero en repararse, a principios de abril de 2024."
+  },
+  {
+   "clave": "africa coast to europe",
+   "estado": "en servicio",
+   "incidentes": "14 de marzo de 2024: cortado frente a Costa de Marfil (con WACS, MainOne y SAT-3); reparado en abril–mayo de 2024."
+  },
+  {
+   "clave": "sat-3",
+   "estado": "en servicio",
+   "incidentes": "14 de marzo de 2024: cortado frente a Costa de Marfil (con WACS, MainOne y ACE); reparado en mayo de 2024."
+  },
+  {
+   "clave": "eassy",
+   "estado": "en servicio",
+   "incidentes": "12 de mayo de 2024: cortado entre Mozambique y Sudáfrica (con SEACOM), afectando a África oriental; reparado en semanas."
+  },
+  {
+   "clave": "shefa-2",
+   "estado": "en servicio",
+   "incidentes": "Octubre de 2022: dos roturas en pocos días (Shetland–Escocia y Feroe–Shetland) que dejaron Shetland sin comunicaciones; reparadas en días."
+  },
+  {
+   "clave": "balticconnector",
+   "estado": "en servicio",
+   "incidentes": "8 de octubre de 2023: el cable de telecomunicaciones Finlandia–Estonia que acompaña al gasoducto quedó dañado por el ancla del carguero Newnew Polar Bear; reparado después."
+  },
+  {
+   "clave": "bcs east-west",
+   "estado": "en servicio",
+   "incidentes": "17 de noviembre de 2024: cortado en el Báltico (con C-Lion 1); reparado a finales de noviembre de 2024."
+  },
+  {
+   "clave": "polar express",
+   "estado": "en construcción",
+   "incidentes": ""
+  }
+ ]
+}
