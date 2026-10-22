@@ -342,7 +342,7 @@
     const texto = km >= 1000 ? Math.round(km / 100) * 100 + ' km' : km >= 100 ? Math.round(km / 10) * 10 + ' km' : km >= 10 ? Math.round(km) + ' km'
       : km >= 1 ? (Math.round(km * 10) / 10).toLocaleString(loc, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' km' : Math.round(km * 1000 / 10) * 10 + ' m';
     if (v) v.textContent = '≈ ' + (km >= 10 ? Number(texto.split(' ')[0]).toLocaleString(loc) + ' ' + texto.split(' ')[1] : texto);
-    if (i) i.style.top = (100 * Math.log(z) / Math.log(ZOOM.MAX)).toFixed(1) + '%';
+    if (i) i.style.top = (5 + 90 * Math.log(z) / Math.log(ZOOM.MAX)).toFixed(1) + '%'; // the dot never touches the ends of the bar (owner, 22 Oct 2026, 17:54)
   }
   const libreZoom = () => !dentro && caja.hidden;
   addEventListener('wheel', (e) => {
