@@ -45,7 +45,11 @@
    "fuentes": [
     "https://www.emol.com/noticias/Nacional/2026/08/18/1208799/cable-fibra-optica-magallanes-antartica.html",
     "https://maritime-executive.com/article/antarctica-submarine-cable-project-confirmed-feasible"
-   ]
+   ],
+   "promotor": "Subsecretaría de Telecomunicaciones de Chile (Subtel)",
+   "que": "Llevar fibra óptica desde Magallanes hasta las bases chilenas de la Antártida, enlazando con la Fibra Óptica Austral que ya termina en Puerto Williams, para que la ciencia y las bases tengan internet de verdad en vez de satélite.",
+   "cuando": "Sin fecha: el estudio de factibilidad se entregó en agosto de 2026; la construcción depende de decisión política y financiación (plazo estimado de unos 8 años).",
+   "estudio": "Salience Consulting y Pioneer Consulting, por encargo de Subtel."
   },
   {
    "nombre": "Polar Express (Полярный экспресс)",
@@ -116,6 +120,140 @@
     "https://en.wikipedia.org/wiki/Polar_Express_(cable_system)",
     "https://www.arctictoday.com/?p=37369",
     "https://subtelforum.com/russia-to-begin-laying-polar-express/"
+   ],
+   "promotor": "Morsviazsputnik (Rosmorrechflot, Ministerio de Transporte de Rusia)",
+   "que": "Un cable troncal de 12.650 km por toda la costa ártica rusa, de Múrmansk a Vladivostok, para dar conectividad a los puertos de la Ruta Marítima del Norte y al Lejano Oriente.",
+   "cuando": "Comenzó en Teriberka en agosto de 2021; se tiende por tramos (Teriberka–Amderma el primero) y la terminación prevista es 2026.",
+   "capacidad": "6 pares de fibra, unos 104 Tbit/s",
+   "coste": "Unos 65.000 millones de rublos (presupuesto estatal)"
+  },
+  {
+   "nombre": "Far North Fiber",
+   "llegadas": [
+    {
+     "lugar": "Fukuoka (Japón)",
+     "pais": "JP",
+     "lat": 33.59,
+     "lon": 130.4
+    },
+    {
+     "lugar": "Nome (Alaska)",
+     "pais": "US",
+     "lat": 64.5,
+     "lon": -165.41
+    },
+    {
+     "lugar": "Prudhoe Bay (Alaska)",
+     "pais": "US",
+     "lat": 70.3,
+     "lon": -148.4
+    },
+    {
+     "lugar": "Nuuk (Groenlandia)",
+     "pais": "GL",
+     "lat": 64.18,
+     "lon": -51.72
+    },
+    {
+     "lugar": "Irlanda",
+     "pais": "IE",
+     "lat": 53.3,
+     "lon": -9.0
+    },
+    {
+     "lugar": "Noruega",
+     "pais": "NO",
+     "lat": 60.4,
+     "lon": 5.3
+    },
+    {
+     "lugar": "Helsinki (Finlandia)",
+     "pais": "FI",
+     "lat": 60.17,
+     "lon": 24.94
+    }
+   ],
+   "anio": null,
+   "km": 14500,
+   "estado": "propuesto",
+   "duenos": [
+    "Far North Digital (EE. UU.) y Cinia (Finlandia)"
+   ],
+   "promotor": "Far North Digital (Alaska) con Cinia (empresa estatal finlandesa); Alcatel Submarine Networks como suministrador previsto",
+   "que": "Unir Japón con Europa del norte por el Paso del Noroeste, pasando por Alaska, el Ártico canadiense y Groenlandia: una ruta nueva que no depende del Índico ni del mar Rojo, con ramales para las comunidades del Ártico.",
+   "cuando": "Anunciado en 2021; se ha hablado de entrada en servicio hacia 2027–2028, sin inicio de tendido confirmado.",
+   "nota": "La traza por el Ártico canadiense se dibuja aquí en línea recta entre amarres, como aviso.",
+   "fuentes": [
+    "https://en.wikipedia.org/wiki/Far_North_Fiber",
+    "https://www.cinia.fi/en/news/"
+   ]
+  },
+  {
+   "nombre": "PolarConnect",
+   "llegadas": [
+    {
+     "lugar": "Noruega (Svalbard / norte)",
+     "pais": "NO",
+     "lat": 78.2,
+     "lon": 15.6
+    },
+    {
+     "lugar": "Polo Norte (paso por el océano Ártico central)",
+     "pais": "",
+     "lat": 89.0,
+     "lon": 0.0,
+     "via": true
+    },
+    {
+     "lugar": "Japón",
+     "pais": "JP",
+     "lat": 43.0,
+     "lon": 141.0
+    }
+   ],
+   "anio": null,
+   "km": 10000,
+   "estado": "propuesto",
+   "duenos": [
+    "NORDUnet / Sunet (redes académicas nórdicas), con apoyo de la Unión Europea"
+   ],
+   "promotor": "NORDUnet y Sunet (Suecia); estudios de viabilidad financiados por la UE (Connecting Europe Facility)",
+   "que": "Un cable científico y de datos entre Europa del norte y Asia oriental cruzando el océano Ártico central, con sensores en el propio cable para medir el hielo y el clima.",
+   "cuando": "En fase de estudio de viabilidad (2024–2026); se habla de la década de 2030.",
+   "nota": "Traza indicativa: el punto del Polo Norte es solo el paso previsto por el Ártico central.",
+   "fuentes": [
+    "https://www.nordu.net/",
+    "https://www.polarconnect.net/"
+   ]
+  },
+  {
+   "nombre": "Cable McMurdo (Antártida)–Nueva Zelanda (NSF)",
+   "llegadas": [
+    {
+     "lugar": "Christchurch / Lyttelton",
+     "pais": "NZ",
+     "lat": -43.6,
+     "lon": 172.72
+    },
+    {
+     "lugar": "Estación McMurdo",
+     "pais": "AQ",
+     "lat": -77.85,
+     "lon": 166.67
+    }
+   ],
+   "anio": null,
+   "km": 4000,
+   "estado": "propuesto",
+   "duenos": [
+    "National Science Foundation (EE. UU.) — promotor; sin dueño definido"
+   ],
+   "promotor": "National Science Foundation (programa antártico de EE. UU.), con la red académica de Nueva Zelanda (REANNZ) como socio natural",
+   "que": "Conectar la mayor base de la Antártida, McMurdo, con Nueva Zelanda por fibra, para sacar los datos científicos que hoy pasan por satélite con muy poca capacidad; podría extenderse a la base Scott (NZ).",
+   "cuando": "Estudio de mesa publicado en 2021; sin financiación ni fecha de construcción.",
+   "fuentes": [
+    "https://www.nsf.gov/",
+    "https://www.reannz.co.nz/"
    ]
   }
  ]

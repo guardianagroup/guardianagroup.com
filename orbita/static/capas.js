@@ -831,7 +831,15 @@
     filas.push([T('Estado'), est + (c.anio ? ' · ' + c.anio : '')]);
     filas.push([T('Origen'), c.llegadas[0].lugar + ' (' + paisNombre(c.llegadas[0].pais) + ')']);
     filas.push([T('Destino'), c.llegadas[c.llegadas.length - 1].lugar + ' (' + paisNombre(c.llegadas[c.llegadas.length - 1].pais) + ')']);
-    if (c.km) filas.push([T('Longitud'), num(c.km) + ' km']);
+    if (c.km) filas.push([T('Longitud'), '≈ ' + num(c.km) + ' km']);
+    // 22 Oct 2026, 14:05 (owner): «que salga la información de lo que quieren hacer y quién lo quiere hacer, todo lo que se sepa»
+    if (c.promotor) filas.push([T('Quién lo quiere hacer'), c.promotor]);
+    if (c.que) filas.push([T('Qué quieren hacer'), c.que]);
+    if (c.cuando) filas.push([T('Para cuándo'), c.cuando]);
+    if (c.capacidad) filas.push([T('Capacidad prevista'), c.capacidad]);
+    if (c.coste) filas.push([T('Coste'), c.coste]);
+    if (c.estudio) filas.push([T('Estudio'), c.estudio]);
+    const am = c.llegadas.filter((l) => !l.via); if (am.length > 2) filas.push([T('Amarres previstos'), am.map((l) => l.lugar).join(' · ')]);
     if (c.duenos && c.duenos.length) filas.push([T('Dueños'), c.duenos.join(', ')]);
     if (c.nota) filas.push([T('Datos'), c.nota]);
     fichaRica(c.nombre, filas, T('Todavía no existe: se dibuja en línea recta, como aviso.') + ' · ' + T('Datos verificados'), x, y);
