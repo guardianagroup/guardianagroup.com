@@ -71,7 +71,7 @@
       PT = { d, p: [], ix: [] };
       d.puntos.forEach((f, k) => {
         const q = { w: P().vec(f[il], f[ia]).map((x) => x * 1.002), t: f[it], n: f[inm] || '', o: f[iop] || '', x: ex[k] || null, lon: f[il], lat: f[ia] };
-        if (f[it] === 'datos') PT.p.push(q); else if (f[it] === 'intercambio') PT.ix.push(q);
+        if (f[it] === 'datos') PT.p.push(q); else if (f[it] === 'intercambio') PT.ix.push(q); else if (f[it] === 'aterrizaje') (PT.at || (PT.at = [])).push(q);
       });
       // how many data centres each operator has on the map
       PT.porOp = new Map(); for (const q of PT.p) if (q.o) PT.porOp.set(q.o, (PT.porOp.get(q.o) || 0) + 1);
@@ -255,7 +255,7 @@
     if (estado.tierra && capas.tierra && capas.tierra.lineas) pintaLineas(cx, p, G, capas.tierra.lineas, `rgba(${ACERO},.30)`, 0.7);
     if (estado.sub && FT && FT.lineas) pintaFibra(cx, p, G);
     if (estado.sub && capas.sub && capas.sub.lineas) { pintaLineas(cx, p, G, capas.sub.lineas, `rgba(${ACERO},.62)`, 1); pintaLuz(cx, p, G, capas.sub.lineas, t); }
-    if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; }
+    if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
     if (estado.sub && capas.sub && capas.sub.lineas) {
       if (cableMarcado >= 0) { const l = capas.sub.lineas[cableMarcado]; if (l) pintaLineas(cx, p, G, [l], `rgba(${BLANCO},.95)`, 2.2); }
       if (llegadaMarcada >= 0 && LUG && LUG.llegadas) { const ls = LUG.llegadas[llegadaMarcada].seg.map((i) => capas.sub.lineas[i]).filter(Boolean); pintaLineas(cx, p, G, ls, `rgba(${BLANCO},.95)`, 2); }
@@ -634,6 +634,7 @@
     if (fl) lin.push([T('Operador'), fl[0] + ' · ' + paisNombre(fl[1])], [T('Para qué'), T(fl[2])]);
     else if (grupo) lin.push([T('Flota'), grupo.nombre]);
     lin.push([T('Altura'), num(Math.round(alto)) + ' km']);
+    lin.push([T('Luz del Sol'), T(S.sombra[i] ? 'en la sombra de la Tierra: funciona con sus baterías' : 'al sol: sus paneles generan energía')]);
     if (p) lin.push([T('Velocidad'), num(Math.round(p.v * 3600)) + ' km/h']);
     if (geo) lin.push([T('Órbita'), T('geoestacionaria: gira con la Tierra y parece quieto en el cielo')]);
     else lin.push([T('Vuelta a la Tierra'), T('cada') + ' ' + num(Math.round(periodo)) + ' min · ' + num(Math.round(1440 / periodo * 10) / 10) + ' ' + T('al día')], [T('Inclinación'), num(Math.round(rec.inclo / RAD * 10) / 10) + '°']);
@@ -704,7 +705,135 @@
     });
     return mejor;
   }
-  const colocaFicha = (x, y) => { const f = ficha(); const G = P().geo, w = f.offsetWidth || 280, h = f.offsetHeight || 80; f.style.left = (x + 16 + w > G.W - 8 ? Math.max(8, x - 16 - w) : x + 16) + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, y - 46)) + 'px'; };
+  // the card goes beside the pointer; while a data centre's route is drawn, on the side away from it, so it never
+  // covers the line the person is looking at
+  const colocaFicha = (x, y) => {
+    const f = ficha(); const G = P().geo, w = f.offsetWidth || 280, h = f.offsetHeight || 80;
+    const der = x + 16 + w <= G.W - 8, izq = x - 16 - w >= 8;
+    let left = der ? x + 16 : Math.max(8, x - 16 - w), top = y - 46;
+    const r = puntoMarcado >= 0 ? RUTAS.get(puntoMarcado) : null;
+    if (r && LUG && LUG.llegadas) {
+      const q = P().pantalla(LUG.llegadas[r.llegada].w);
+      if (q.ve) {
+        if (q.x > x && izq) left = x - 16 - w; else if (q.x <= x && der) left = x + 16;
+        if (q.y > y + 20 && y - h - 16 >= 70) top = y - h - 16; else if (q.y < y - 20) top = y + 16;
+      }
+    }
+    f.style.left = left + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, top)) + 'px';
+  };
+  // ---------- where a data centre's cables come from (owner, 22 Oct 2026: «al pasar por el centro de datos, que
+  // aparezca el cable que le viene, y al quitarme desaparece: que se vea de forma visual de dónde viene») ----------
+  // From the nearest place where submarine cables land to the building: along the land backbones we know
+  // (fibra-tierra.json) when they join the two, or else a dashed straight line, and the card says so: the exact land
+  // route is not public. The submarine cables that land there light up across the ocean, with their light inside.
+  let RED = null;
+  const kmLL = (a, b) => { const la1 = a[1] * RAD, la2 = b[1] * RAD, h = Math.sin((la2 - la1) / 2) ** 2 + Math.cos(la1) * Math.cos(la2) * Math.sin((b[0] - a[0]) * RAD / 2) ** 2; return 2 * 6371 * Math.asin(Math.min(1, Math.sqrt(h))); };
+  const lonLat = (w) => { const m = Math.hypot(w[0], w[1], w[2]); return [Math.atan2(w[0], w[2]) / RAD, Math.asin(w[1] / m) / RAD]; };
+  function red() { // the land backbones as a graph: their vertices, joined along each line and where lines meet
+    if (RED || !FT || !FT.lineas) return RED;
+    const nodos = [], idx = new Map(), ady = [], celda = new Map();
+    const nodo = (lon, lat) => {
+      const k = Math.round(lon * 50) + ',' + Math.round(lat * 50); let i = idx.get(k);
+      if (i === undefined) { i = nodos.length; idx.set(k, i); nodos.push([lon, lat]); ady.push([]); const c = Math.floor(lon * 4) + ',' + Math.floor(lat * 4); (celda.get(c) || celda.set(c, []).get(c)).push(i); }
+      return i;
+    };
+    const une = (a, b, li) => { if (a === b) return; const d = kmLL(nodos[a], nodos[b]); ady[a].push([b, d, li]); ady[b].push([a, d, li]); };
+    const extremos = [];
+    FT.lineas.forEach((l, li) => {
+      let prev = -1;
+      for (const [lon, lat] of l.x.l) { const i = nodo(lon, lat); if (prev >= 0) une(prev, i, li); prev = i; }
+      extremos.push([nodo(l.x.l[0][0], l.x.l[0][1]), li], [prev, li]);
+    });
+    // where one line ends within 15 km of another one, the two are taken as joined
+    for (const [e, li] of extremos) {
+      const [lon, lat] = nodos[e], cx0 = Math.floor(lon * 4), cy0 = Math.floor(lat * 4), cerca = [];
+      for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) for (const j of celda.get((cx0 + dx) + ',' + (cy0 + dy)) || []) { if (j === e) continue; const d = kmLL(nodos[e], nodos[j]); if (d < 15) cerca.push([d, j]); }
+      cerca.sort((a, b) => a[0] - b[0]); for (const [, j] of cerca.slice(0, 3)) une(e, j, -1);
+    }
+    RED = { nodos, ady };
+    return RED;
+  }
+  function cercano(ll, lim) { let m = -1, dm = lim; RED.nodos.forEach((n, i) => { if (Math.abs(n[1] - ll[1]) > 1 || Math.abs(n[0] - ll[0]) > 1.5 / Math.max(0.2, Math.cos(ll[1] * RAD))) return; const d = kmLL(n, ll); if (d < dm) { dm = d; m = i; } }); return m; }
+  function camino(a, b) { // Dijkstra over the backbones
+    const N = RED.nodos.length, dist = new Float64Array(N).fill(Infinity), prev = new Int32Array(N).fill(-1), por = new Int32Array(N).fill(-1);
+    const heap = [[0, a]]; dist[a] = 0;
+    const sube = (h) => { let i = h.length - 1; while (i > 0) { const p = (i - 1) >> 1; if (h[p][0] <= h[i][0]) break; [h[p], h[i]] = [h[i], h[p]]; i = p; } };
+    const baja = (h) => { const top = h[0], last = h.pop(); if (h.length) { h[0] = last; let i = 0; for (;;) { const l = 2 * i + 1, r = l + 1; let m = i; if (l < h.length && h[l][0] < h[m][0]) m = l; if (r < h.length && h[r][0] < h[m][0]) m = r; if (m === i) break; [h[m], h[i]] = [h[i], h[m]]; i = m; } } return top; };
+    while (heap.length) {
+      const [d, u] = baja(heap); if (d > dist[u]) continue; if (u === b) break;
+      for (const [v, w, li] of RED.ady[u]) { const nd = d + w; if (nd < dist[v]) { dist[v] = nd; prev[v] = u; por[v] = li; heap.push([nd, v]); sube(heap); } }
+    }
+    if (!isFinite(dist[b])) return null;
+    const pts = [], ops = []; let u = b;
+    while (u >= 0) { pts.push(RED.nodos[u]); const li = por[u]; if (li >= 0) { const o = FT.lineas[li].x.o; if (o && !ops.includes(o)) ops.push(o); } u = prev[u]; }
+    return { pts: pts.reverse(), km: dist[b], ops: ops.reverse() };
+  }
+  function lineaDe(pts) { // a line on the sphere through these [lon, lat] points, with its length for the light
+    const w = [];
+    pts.forEach(([lon, lat], k) => {
+      const v = P().vec(lon, lat);
+      if (k) { const a = w[w.length - 1], m = Math.hypot(...a), u = [a[0] / m, a[1] / m, a[2] / m]; const ang = Math.acos(Math.max(-1, Math.min(1, u[0] * v[0] + u[1] * v[1] + u[2] * v[2]))), n = Math.floor(ang / (0.5 * RAD)); for (let j = 1; j <= n; j++) { const s = j / (n + 1), sa = Math.sin(ang), f0 = Math.sin((1 - s) * ang) / sa, f1 = Math.sin(s * ang) / sa; w.push([(u[0] * f0 + v[0] * f1) * 1.003, (u[1] * f0 + v[1] * f1) * 1.003, (u[2] * f0 + v[2] * f1) * 1.003]); } }
+      w.push([v[0] * 1.003, v[1] * 1.003, v[2] * 1.003]);
+    });
+    const acc = [0]; for (let j = 1; j < w.length; j++) { const a = w[j - 1], b = w[j]; acc.push(acc[j - 1] + Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]) / 1.003); }
+    return { w, acc, L: acc[acc.length - 1], fase: 0 };
+  }
+  const RUTAS = new Map();
+  function rutaCentro(i) {
+    if (RUTAS.has(i)) return RUTAS.get(i);
+    if (!LUG || !LUG.llegadas || !LUG.llegadas.length) return null;
+    const q = PT.p[i], cll = [q.lon, q.lat];
+    let li = -1, dm = 1e9;
+    LUG.llegadas.forEach((l, k) => { const d = kmLL(cll, l.ll || (l.ll = lonLat(l.w))); if (d < dm) { dm = d; li = k; } });
+    const L = LUG.llegadas[li], r = { llegada: li, km: dm, linea: null, via: false, kmRuta: 0, ops: [], estacion: null, lejos: false };
+    // a cable landing station mapped in OpenStreetMap, closer than any cable end we have, is used instead
+    // (OpenStreetMap has few submarine cables in some seas, e.g. around southern Africa)
+    let desde = L.ll;
+    for (const e of PT.at || []) { const d = kmLL(cll, [e.lon, e.lat]); if (d < r.km) { r.km = d; r.estacion = e; desde = [e.lon, e.lat]; } }
+    if (r.km > 1500) r.lejos = true; // too far to be its real way in: said on the card, not drawn
+    else if (r.km >= 2) {
+      let c = null;
+      if (red()) { const a = cercano(desde, 40), b = cercano(cll, 40); if (a >= 0 && b >= 0 && a !== b) c = camino(a, b); }
+      if (c && c.km < Math.max(3 * r.km, r.km + 300)) { r.via = true; r.kmRuta = c.km + kmLL(desde, c.pts[0]) + kmLL(c.pts[c.pts.length - 1], cll); r.ops = c.ops; r.linea = lineaDe([desde, ...c.pts, cll]); }
+      else r.linea = lineaDe([desde, cll]);
+    }
+    if (FT && FT.lineas) RUTAS.set(i, r); // with the backbones loaded the answer will not change
+    return r;
+  }
+  function pintaRuta(cx, p, G, t) {
+    const r = rutaCentro(puntoMarcado); if (!r || r.lejos) return;
+    const L = LUG.llegadas[r.llegada];
+    // the submarine cables that land there, lit across the ocean
+    if (!r.estacion && capas.sub && capas.sub.lineas) { const ls = L.seg.map((k) => capas.sub.lineas[k]).filter(Boolean); pintaLineas(cx, p, G, ls, `rgba(${BLANCO},.9)`, 1.8); pintaLuz(cx, p, G, ls, t); }
+    if (r.linea) {
+      cx.setLineDash(r.via ? [] : [5, 4]);
+      pintaLineas(cx, p, G, [r.linea], `rgba(${BLANCO},.95)`, 1.8);
+      cx.setLineDash([]);
+      // the light along the land stretch, both ways, like inside every fibre
+      const l = r.linea, n = Math.max(3, Math.round(l.L / 0.02)), sep = l.L / n;
+      cx.fillStyle = `rgba(${BLANCO},.95)`;
+      for (let dir = 0; dir < 2; dir++) for (let k = 0; k < n; k++) {
+        let s = ((t * VLUZ * 0.35 + dir * sep / 2) % sep) + k * sep; if (s > l.L) continue; if (dir) s = l.L - s;
+        const v = p.aVista(puntoEn(l, s)); if (v[2] <= 0.02) continue;
+        cx.fillRect(G.CX + G.R * v[0] - 1.1, G.CY - G.R * v[1] - 1.1, 2.2, 2.2);
+      }
+    }
+    // the landing, ringed and named
+    const v = p.aVista(r.estacion ? r.estacion.w : L.w);
+    if (v[2] > 0.05) {
+      const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
+      cx.globalCompositeOperation = 'source-over';
+      cx.strokeStyle = `rgba(${BLANCO},.95)`; cx.lineWidth = 1.2; cx.beginPath(); cx.arc(x, y, 7, 0, 7); cx.stroke();
+      cx.fillStyle = `rgba(${BLANCO},1)`; cx.beginPath(); cx.arc(x, y, 2.6, 0, 7); cx.fill();
+      const n = new Set(L.seg.map((k) => (LUG.g && LUG.g[k] >= 0 ? 'g' + LUG.g[k] : 's' + k))).size;
+      const txt = r.estacion ? (r.estacion.n || T('Estación de llegada de cables')) : L.ciudad + ' · ' + num(n) + ' ' + T(n === 1 ? 'cable submarino' : 'cables submarinos');
+      cx.font = '500 11px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle';
+      cx.lineWidth = 3; cx.strokeStyle = 'rgba(6,8,12,.85)'; cx.strokeText(txt, x + 12, y);
+      cx.fillStyle = `rgba(${BLANCO},.98)`; cx.fillText(txt, x + 12, y);
+      cx.globalCompositeOperation = 'lighter';
+    }
+  }
+
   // a card with labels and values in two columns (satellites, data centres)
   function fichaRica(titulo, filas, pie, x, y) {
     const f = ficha(); if (!f) return;
@@ -715,8 +844,7 @@
     sp.append(dl);
     if (pie) { const s2 = document.createElement('small'); s2.textContent = pie; sp.append(s2); }
     f.classList.add('sat'); f.hidden = false;
-    const G = P().geo, w = f.offsetWidth || 320, h = f.offsetHeight || 260;
-    f.style.left = (x + 16 + w > G.W - 8 ? x - 16 - w : x + 16) + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, y - 40)) + 'px';
+    colocaFicha(x, y);
   }
   const kmEntre = (a, b) => { const d = Math.hypot(a[0] / 1.002 - b[0], a[1] / 1.002 - b[1], a[2] / 1.002 - b[2]); return 2 * 6371 * Math.asin(Math.min(1, d / 2)); };
   const dominio = (u) => { try { return new URL(/^https?:/.test(u) ? u : 'https://' + u).hostname.replace(/^www\./, ''); } catch (_) { return ''; } };
@@ -744,10 +872,17 @@
     if (X.pue) filas.push(['PUE', X.pue]);
     if (X.medio) filas.push([T('Conexión'), X.medio]);
     if (c && c.ciudad) filas.push([T('Dónde'), c.ciudad + ', ' + paisNombre(c.cc) + (c.n > 1 ? ' · ' + num(c.n) + ' ' + T('centros de datos en esta ciudad') : '')]);
-    // measured on the map: the nearest submarine-cable landing and the nearest internet exchange point
-    if (LUG && LUG.llegadas && LUG.llegadas.length) {
-      let m = null, dm = 1e9; for (const l of LUG.llegadas) { const d = kmEntre(q.w, l.w.map((v) => v / 1.003)); if (d < dm) { dm = d; m = l; } }
-      if (m) filas.push([T('Cables submarinos'), dm < 2 ? T('llegan aquí mismo') : T('llegan a') + ' ' + num(Math.round(dm)) + ' km (' + m.ciudad + ')']);
+    // measured on the map: the nearest submarine-cable landing (drawn while the pointer is here), its cables, the
+    // land stretch, and the nearest internet exchange point
+    const r = rutaCentro(i);
+    if (r) {
+      const L = LUG.llegadas[r.llegada], nombres = [];
+      for (const k of L.seg) { const gi = LUG.g ? LUG.g[k] : -1, nm = gi >= 0 ? LUG.grupos[gi][0] : ''; if (nm && !nombres.includes(nm)) nombres.push(nm); }
+      if (r.lejos) filas.push([T('Cables submarinos'), T('las llegadas de esta zona aún no están en nuestros datos')]);
+      else if (r.estacion) filas.push([T('Cables submarinos'), T('estación de llegada más cercana') + ': ' + (r.estacion.n || '') + (r.estacion.o ? ' (' + r.estacion.o + ')' : '') + ', ' + T('a') + ' ' + num(Math.round(r.km)) + ' km']);
+      else filas.push([T('Cables submarinos'), r.km < 2 ? T('llegan aquí mismo') + ' (' + L.ciudad + ')' : T('los más cercanos llegan a') + ' ' + L.ciudad + ' (' + paisNombre(L.cc) + '), ' + T('a') + ' ' + num(Math.round(r.km)) + ' km']);
+      if (nombres.length && !r.estacion && !r.lejos) filas.push([T('Cables'), nombres.slice(0, 4).join(' · ') + (nombres.length > 4 ? ' · +' + (nombres.length - 4) : '')]);
+      if (r.km >= 2 && !r.lejos) filas.push([T('Por tierra'), r.via ? num(Math.round(r.kmRuta)) + ' km ' + T('por fibra troncal conocida') + (r.ops.length ? ' (' + r.ops.slice(0, 2).join(', ') + ')' : '') : T('ruta exacta no pública; en el mapa, en línea recta')]);
     }
     if (PT.ix && PT.ix.length) {
       let m = null, dm = 1e9; for (const ix of PT.ix) { const d = kmEntre(q.w, ix.w.map((v) => v / 1.002)); if (d < dm) { dm = d; m = ix; } }
@@ -805,12 +940,12 @@
   }
   function mira(x, y) {
     if (P() && P().dentro) { if (marcado >= 0 || centroMarcado >= 0 || cableMarcado >= 0 || llegadaMarcada >= 0 || puntoMarcado >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = -1; muestra(-1); } return; }
+    const q = buscaPunto(x, y);
+    if (q >= 0) { if (marcado >= 0) { marcado = -1; } cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; if (q !== puntoMarcado) { puntoMarcado = q; fichaLugar('punto', q, x, y); } else colocaFicha(x, y); return; }
+    puntoMarcado = -1;
     const i = estado.sat ? busca(x, y) : -1;
     if (i >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = -1; muestra(i, x, y); return; }
     if (marcado >= 0) muestra(-1);
-    const q = buscaPunto(x, y);
-    if (q >= 0) { cableMarcado = llegadaMarcada = centroMarcado = -1; if (q !== puntoMarcado) { puntoMarcado = q; fichaLugar('punto', q, x, y); } else colocaFicha(x, y); return; }
-    puntoMarcado = -1;
     const g = buscaLlegada(x, y);
     if (g >= 0) { cableMarcado = centroMarcado = -1; if (g !== llegadaMarcada) { llegadaMarcada = g; fichaLugar('llegada', g, x, y); } else colocaFicha(x, y); return; }
     llegadaMarcada = -1;
@@ -825,6 +960,7 @@
     fibraMarcada = -1;
     const f = ficha(); if (f && !f.hidden) f.hidden = true;
   }
+  addEventListener('click', (e) => { if (!e.target.closest('header, #puertas, #directo, #lugar, #seccion, .zoom')) mira(e.clientX, e.clientY); });
   addEventListener('pointermove', (e) => {
     if (pendiente) { pendiente.x = e.clientX; pendiente.y = e.clientY; return; }
     pendiente = { x: e.clientX, y: e.clientY };
@@ -872,7 +1008,7 @@
   function pon(clave, on) {
     estado[clave] = on; guarda();
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
-    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') cargaPuntos(); else { cargaCables(clave); if (clave === 'sub') cargaFibra(); } }
+    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else { cargaCables(clave); if (clave === 'sub') cargaFibra(); } }
     if (!on) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; }
     pintaNota(); pintaVista();
   }
