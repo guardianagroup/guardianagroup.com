@@ -366,6 +366,7 @@
       pintaLuz(cx, p, G, capas.sub.lineas, t);
     }
     if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaEstaciones(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
+    else if (estado.sub && PT && PT.est) { cx.globalCompositeOperation = 'source-over'; pintaEstaciones(cx, p, G); cx.globalCompositeOperation = 'lighter'; } // 22 Oct 2026, 14:15 (owner): the polar stations show with the cables too
     if (estado.sub && capas.sub && capas.sub.lineas) {
       if (cableMarcado >= 0) { const l = capas.sub.lineas[cableMarcado]; if (l) pintaLineas(cx, p, G, [l], `rgba(${BLANCO},.95)`, 2.2); }
       if (llegadaMarcada >= 0 && LUG && LUG.llegadas) { const ls = LUG.llegadas[llegadaMarcada].seg.map((i) => capas.sub.lineas[i]).filter(Boolean); pintaLineas(cx, p, G, ls, `rgba(${BLANCO},.95)`, 2); }
@@ -784,7 +785,7 @@
   }
   let centroMarcado = -1, cableMarcado = -1, llegadaMarcada = -1, puntoMarcado = -1, pendiente = null;
   function buscaEstacion(x, y) {
-    if (!estado.puntos || !PT || !PT.est) return -1;
+    if (!(estado.puntos || estado.sub) || !PT || !PT.est) return -1;
     const p = P(), G = p.geo; let mejor = -1, dm = 8 * 8;
     for (let i = 0; i < PT.est.length; i++) { const v = p.aVista(PT.est[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
     return mejor;
