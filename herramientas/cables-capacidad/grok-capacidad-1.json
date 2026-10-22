@@ -1,0 +1,104 @@
+[
+{
+"nombre": "2Africa",
+"tbps": 180,
+"pares": 16,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "AAE-1",
+"tbps": 100,
+"pares": 5,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Africa-1",
+"tbps": 96,
+"pares": 8,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "AMITIE",
+"tbps": 400,
+"pares": 16,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Anjana",
+"tbps": 480,
+"pares": 24,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "APRICOT",
+"tbps": 211,
+"pares": 12,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Asia Direct Cable (ADC)",
+"tbps": 160,
+"pares": 8,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Asia Pacific Cable Network 2 (APCN-2)",
+"tbps": 2.56,
+"pares": 4,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Asia Pacific Gateway (APG)",
+"tbps": 54.8,
+"pares": 6,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Australia-Singapore Cable (ASC)",
+"tbps": 60,
+"pares": 4,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Bifrost",
+"tbps": 260,
+"pares": 12,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "BRUSA",
+"tbps": 160,
+"pares": 8,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "C-Lion 1",
+"tbps": 144,
+"pares": 8,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Curie",
+"tbps": 72,
+"pares": 4,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Dunant",
+"tbps": 250,
+"pares": 12,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Eastern Africa Submarine System (EASSy)",
+"tbps": 36,
+"pares": 2,
+"fuente": "Grok 22-10-2026"
+},
+{
+"nombre": "Equiano",
+"tbps": 144,
+"pares": 12,
+"fuente": "Grok 22-10-2026"
+}
+]
