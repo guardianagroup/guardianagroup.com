@@ -1,110 +1,132 @@
-# Traspaso de Órbita · 22 de octubre de 2026, 14:40 (hora de Bogotá)
+# Traspaso de Órbita · 22 de octubre de 2026, 16:40 (hora de Bogotá)
 
 Documento para que otra sesión de Claude siga el trabajo exactamente donde quedó. Léelo entero antes de tocar nada.
 El dueño es Fran (GUARDIANA GROUP S.A.S., Cartagena). **Siempre en español.** Lo último que dijo: «Sí a todo; no hace falta
 que me preguntes más si te doy permiso». Avísale cuando algo quede listo, en pocas líneas, sin pegar código en el chat.
+Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi amigo lo podamos ir viendo»).
 
 ## 1. Reglas fijas del dueño (no negociables)
 - No mostrar nunca el nombre real de la fundadora: en mockups se usa «Marta Ortega».
 - No pegar código en el chat; no inventar cifras (los datos de demostración, etiquetados como tal); no prometer protección absoluta.
 - Sin marcas reales de terceros en mockups (dominios `.example`). Colores: fondo #06080C, acento #9CC3E4, texto #F4F6F8; rojo #E07A6C solo para cortes.
 - «Primer nivel de agencia» y «ponte en la piel del cliente»: calidad tipo Apple; el objetivo es «superar a Google Earth en datos».
-- **No decir las fuentes en Órbita** (nada de OpenStreetMap, Natural Earth, etc. en pantalla): las fichas dicen «Datos verificados»;
+- **Todo lo que esté en el mapa, a máxima resolución, también al hacer zoom.**
+- **No decir las fuentes en Órbita** (nada de OpenStreetMap, Natural Earth, ETOPO… en pantalla): las fichas dicen «Datos verificados»;
   las atribuciones de licencia van solo en `terminos.html` (sección 6). Prohibido usar submarinecablemap.com / TeleGeography como fuente.
-- Regla de la agencia: **solo entra lo que confirman al menos dos voces** (ChatGPT, Grok, Claude, Gemini). Nada «no verificado» a la vista del cliente.
+- Regla de la agencia: **solo entra lo que confirman al menos dos voces** (ChatGPT, Grok, Claude; Gemini se niega). Nada «no verificado» a la vista del cliente.
 - Nada de «no verificado» ni huecos en fichas: si no se sabe, se omite la fila.
 - Idiomas: solo español e inglés activos en la web (`ABIERTOS = ['es','en']` en `orbita/static/idioma.js`); los 42 están traducidos en `orbita/static/i18n/*.json`
   salvo las claves más nuevas (ver §6).
-- La web pública `guardianagroup.com` sigue siendo la anterior (portada + botón de descarga beta activo para su amigo). Órbita vive en
-  `guardianagroup.com/orbita/` como página **no listada** (meta noindex) para que el dueño y su amigo (pueblo cerca de Praga, Chequia) la vean.
-  **22 Oct 2026, 15:07: el dueño pidió que nadie pueda descargar nada («todo próximamente»)**: en `main` los botones de descarga de
-  `index.html`, `instalar.html`, `en/`, `pt/` y `zero` están desactivados (`is-off`, `data-off`) y la carpeta `descargas/` se eliminó de `main`
-  (sigue en `web-idiomas`). **No copiar nunca `index.html`, `instalar.html`, `en/`, `pt/` ni `descargas/` de `web-idiomas` a `main`** sin volver a desactivarlos.
+- Órbita vive en `guardianagroup.com/orbita/` como página **no listada** (meta noindex) para que el dueño y su amigo (pueblo cerca de Praga, Chequia) la vean.
+  **Nadie puede descargar nada de la web pública («todo próximamente»)**: en `main` los botones de descarga de `index.html`, `instalar.html`, `en/`, `pt/`
+  y `zero` están desactivados (`is-off`, `data-off`) y la carpeta `descargas/` se eliminó de `main` (sigue en `web-idiomas`).
+  **No copiar nunca `index.html`, `instalar.html`, `en/`, `pt/` ni `descargas/` de `web-idiomas` a `main`** sin volver a desactivarlos.
+- **«El viaje de tus datos» es solo para PC** («solo versión PC descargable, de momento»; en el móvil irá en la aplicación): los botones aparecen
+  solo si `!(pointer:coarse) && innerWidth >= 900`, y el vídeo solo se graba fuera de pantallas táctiles.
+- Nunca presentar los arcos como la ruta real de los paquetes: en pantalla y en el informe va siempre «conexiones medidas, trayectorias ilustrativas».
+  Nunca traducir los ms de más en «kilómetros de rodeo» (la razón ×N y los «+X ms sobre el mínimo» sí).
 
 ## 2. Repositorio y cómo publicar (procedimiento que funciona)
 - Repo `guardianagroup/guardianagroup.com`. GitHub Pages sirve la rama `main`. Se trabaja en la rama **`web-idiomas`** (push autorizado).
-- La rama `orbita-datos` y el workflow `.github/workflows/datos-orbita.yml` (corre también en `main` por horario) regeneran `orbita/datos`.
+- El workflow `.github/workflows/datos-orbita.yml` corre en `main` (por horario y con `gh workflow run datos-orbita.yml --ref main`) y regenera
+  `orbita/datos` (OSM, fibra, relieve ETOPO) con commit a `main`. **Después de cada ejecución**, traer sus datos a `web-idiomas`:
+  `git fetch origin main && git checkout origin/main -- orbita/datos && git commit`, para no pisarlos en la siguiente publicación.
 - **Siempre `git commit` en `web-idiomas` antes de cambiar de rama** (se perdió trabajo una vez por un `reset --hard`).
 - Publicar (el merge de historias no relacionadas está bloqueado; esto es lo que funciona):
   ```
   git add -A && git commit -m "…" && git push origin web-idiomas
   git checkout main && git fetch origin main && git reset --hard origin/main
-  git checkout web-idiomas -- orbita herramientas        # (y index.html/terminos.html solo si cambiaron)
+  git checkout web-idiomas -- orbita herramientas terminos.html .github/workflows/datos-orbita.yml
   git add -A && git commit -m "Publicar …" && git push origin main && git checkout web-idiomas
   ```
-- **Caché**: todos los `static/*.js|css` de `orbita/index.html` llevan `?v=20261022x`. Sube la letra en cada publicación (siguiente: `y`).
+- **Caché**: todos los `static/*.js|css` de `orbita/index.html` llevan `?v=20261022zn`. Sube la letra en cada publicación (siguiente: `zo`, luego `zp`…).
 - Comprobar el despliegue: `gh run list --repo guardianagroup/guardianagroup.com --limit 1` hasta `completed success` (1–3 min).
-  Desde el contenedor **no se puede** hacer curl a guardianagroup.com ni a overpass-api.de (proxy); se comprueba con el navegador integrado
-  (pestaña de guardianagroup.com/orbita/?r=X) y `OrbitaPlaneta.ir(lon, lat, zoom)` desde la consola JS.
+  Desde el contenedor **no se puede** hacer curl a guardianagroup.com, overpass-api.de ni NOAA (proxy); se comprueba con el navegador integrado
+  (pestaña `tab-4` = guardianagroup.com/orbita/?r=X) y desde `javascript_tool`: `OrbitaPlaneta.ir(lon, lat, zoom)`, `OrbitaConexion.abre(true)`,
+  `OrbitaConexion.medirRutas()` (≈40 s), `OrbitaViaje.empieza()`, `OrbitaViaje.informe()`. `OrbitaPlaneta.ir()` no hace caso durante la animación de entrada:
+  esperar unos segundos. Pulsar «Ahora no» del aviso al cargar.
 - Commits: terminar con `Co-Authored-By: Claude … <noreply@anthropic.com>` y la línea `Claude-Session:` que dé el sistema.
 
-## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión x)
+## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión zn)
 - Planeta WebGL con mapa 16K en teselas; modo «limpio» desde ×4 (agua negra, tierra gris, datos en blanco, sin luces).
-- **Zoom hasta ×80.000 (500 m de altura nominal)**, suavizado en escala logarítmica, doble clic por pasos (1,5 · 4 · 8 · 20 · 80 · 400 · 2.000 · 10.000 · máx).
-  Indicador de altura a la derecha, encima de los botones (`#altura`, 40.000 km → 500 m, en metros por debajo de 10 km).
-  Desde ×8 (`body.hondo`) desaparecen los botones de capas y el filtro de satélites. Límite de latitud ±75° a ×1 y hasta ±89,5° al acercarse (polos alcanzables).
-  **Límite real**: el fondo (costas) es de 1–2 km de resolución; los puntos son precisos. Próximo paso posible: costas finas por teselas (OSM land polygons).
-- Capas: Cables submarinos (OSM filtrado 1.190 + agencia **219 confirmados**, trazado aproximado punteado), Fibra por tierra (6.695 tramos, 90 países,
-  por niveles; se desvanece por debajo de ~100 km de altura porque va de ciudad a ciudad), Centros de datos (1.903 lugares, 4.493 edificios, cuadrado blanco
-  con anillo sutil al acercarse; clic en zona densa abre lista `lista-cerca`), Satélites (tiempo real).
-- Fronteras Natural Earth (`datos/fronteras.json`), nombres de regiones muy cerca, **nombres de país** desde ×2,2 con **ficha de país** al pasar el ratón
-  (`fichaPais` en capas.js; datos en `datos/paises.json`: CZ, ES, CO, US, CN, DE, FR, GB, JP, KR, verificados por ChatGPT el 22 Oct → `confirmado:true`, pie «Datos verificados»). Siguientes países por tandas: resto de Europa, América Latina, Asia.
-- **Polos**: 34 estaciones (bases antárticas y estaciones terrenas de satélite) en `datos/puntos-extra.json` (tipo `estacion`), cargadas aparte
-  (`cargaEstaciones`, variable `EST`) y visibles con la capa de cables; ficha al pasar el ratón con tipo, programa, desde, personal, cómo se conecta,
-  por dónde salen los datos, antenas, enlaces locales, novedades. 5 cables previstos punteados en `datos/cables-previstos.json`
-  (Chile–Antártida, McMurdo–NZ, Polar Express, Far North Fiber, PolarConnect) con promotor, qué, para cuándo, coste, capacidad, estudio, amarres.
-- Ficha de cable: origen/destino/paradas, año, km, distancias punto a punto, dueños, operador, e **incidencias conocidas** (`datos/cables-notas.json`:
-  Svalbard 2022, Tonga 2022/2024, C-Lion 1 y BCS East-West 2024, mar Rojo 2024 y 2025, Costa de Marfil 2024, EASSy 2024, SHEFA-2 2022, Balticconnector 2023).
-- «Mi conexión» (conexion.js): datos del propio visitante, Ver/No ver, planeta en modo solo-tú. Puerta ZERO abre la demo `zero/?orbita=1&entrada=0`.
-- Descargas: retiradas de la web el 22 Oct 2026 a las 15:07 (los instaladores 1.0.46 siguen en la rama `web-idiomas`, carpeta `descargas/`).
-
-## 3b. Cables por potencia (en marcha, 22 Oct 2026, 15:03)
-- El dueño pidió «los que llevan tantos terabytes… en otro color, un ramal diferente por potencia». Hecho en código (rama `web-idiomas`,
-  commit «cables por potencia»): `herramientas/capacidad_cables.py` lee `herramientas/cables-capacidad/<voz>-*.json`
-  (`[{nombre, tbps, pares, fuente}]`, nombre exacto del grupo de `lugares-capas.json`), consenso de dos voces (±30 %) o
-  `cables-capacidad/confirmados.txt`, y escribe `orbita/datos/cables-capacidad.json`. capas.js dibuja tres clases:
-  gigante (≥ 100 Tbit/s: blanco, grueso, con halo), grande (≥ 20: acero más brillante), regional (el resto); la ficha añade
-  «Capacidad: X Tbit/s · N pares de fibra · troncal gigante/grande/regional». Hay voz de Claude (`claude-capacidad-1.json`, 49 cables).
-- Pendiente: ChatGPT estaba respondiendo la tanda de capacidades (409 nombres); guardar como `chatgpt-capacidad-1.json`,
-  pedir lo mismo a Grok (`grok-capacidad-1.json`), ejecutar `python3 herramientas/capacidad_cables.py`, publicar y avisar al dueño.
-  Además: una leyenda pequeña (tres trazos) junto al botón «Cables submarinos» cuando la capa está activa.
+- **Zoom hasta ×80.000 (500 m de altura nominal)**, suavizado logarítmico, doble clic por pasos. Indicador de altura a la derecha, encima de los botones
+  (`#altura`, 40.000 km → 500 m). Desde ×8 (`body.hondo`) desaparecen los botones de capas y el filtro de satélites. Latitud hasta ±89,5° al acercarse.
+  **Límite real**: el fondo (costas) es de 1–2 km de resolución; los puntos son precisos.
+- Capas: Cables submarinos (OSM filtrado + agencia **234 confirmados** (más los que OSM ya tenía), trazado aproximado punteado), Fibra por tierra (6.695 tramos, 90 países; se desvanece
+  por debajo de ~100 km de altura), Centros de datos (1.903 lugares, cuadrado blanco con anillo sutil al acercarse), Satélites (tiempo real).
+- **Cables por potencia** (`orbita/datos/cables-capacidad.json`, 52 cables: 23 gigantes ≥ 100 Tbit/s, 26 grandes ≥ 20): gigantes en blanco, más gruesos y
+  con halo (énfasis que crece con el zoom, `kq`), grandes en acero brillante, el resto regional; fila «Capacidad: X Tbit/s · N pares · troncal gigante/grande/regional».
+- **Profundidad y altitud** (`cables-relieve.json`, 1.243 tramos; `fibra-relieve.json`, 5.039): generadas por el workflow con `herramientas/relieve.py`
+  (ETOPO 2022 60s, en caché del runner). Fila «Profundidad del fondo bajo este tramo: máxima · media · % en plataforma · % en llanura abisal» y
+  «Altitud del terreno: hasta · media». Clave de cada tramo = `n_puntos:Σ(round(lon·1000)+round(lat·1000))`, la misma en `relieve.py` y `claveRelieve` (capas.js).
+- Fronteras, nombres de regiones, **nombres de país** desde ×2,2 con **ficha de país** (`fichaPais`; `datos/paises.json`: 25 países; CZ, ES, CO, US, CN, DE, FR, GB,
+  JP, KR verificados → `confirmado:true`; AT, SK, PL, HU, PT, IT, NL, CH, SE, NO, IE, MX, BR, AR, CL pendientes de verificar → pie «Datos en verificación»).
+- **Polos**: 34 estaciones en `datos/puntos-extra.json` (tipo `estacion`, `cargaEstaciones`/`EST`), visibles con la capa de cables, ficha al pasar el ratón.
+  5 cables previstos punteados en `datos/cables-previstos.json` con toda la información del proyecto. Incidencias en `datos/cables-notas.json` (20 claves).
+- **Ficha completa** (`panel()` en capas.js): al pasar el ratón, resumen; al hacer clic, panel lateral `#ficha-panel` con resumen, «Qué significa para ti»,
+  secciones desplegables, «Copiar ficha» y «Guardar PDF». Modelos para estación, previsto, país, centro, cable, fibra (`modelo(tipo, titulo, filas, pie, plan)`).
+- **«Mi conexión»** (conexion.js) con **«Por dónde viajan tus datos»**: mide desde el navegador la ida y vuelta a 33 regiones AWS (`NUBES`) y al borde más cercano
+  (Cloudflare `cdn-cgi/trace`, `colo=` → tabla IATA); `fetch(no-cors, cache:no-store)` sin `redirect:'manual'` (rompe); calentamiento + 3 sondas, mínimo;
+  mínimo físico = 2·km/200 ms. Dibuja los arcos (los 3 mejores brillantes, pulso a ms×20). Desde el PC del dueño: borde BOG ~70 ms, Ohio 74, Virginia 64–84…
+- **«El viaje de tus datos»** (viaje.js, nuevo hoy; solo PC): secuencia automática sobre el planeta — intro, **constelación** (los 32 arcos aparecen del más
+  cercano al más lejano mientras la cámara gira 40°, etiquetas sin choques), un **vuelo por continente** (el más rápido de cada uno, ≤ 6: cámara al punto medio
+  del arco, estela con cabeza brillante, contadores km/ms, **carrera contra la luz**: un segundo punto marca dónde iría la luz en línea recta y «la luz ya habría
+  llegado»; al llegar «La luz en línea recta tardaría X ms · tus datos han tardado +Y ms sobre ese mínimo (×Z)»), y **final** con el planeta girando despacio,
+  «Así viajan tus datos», cifras y la escala humana («en lo que dura un parpadeo (unos 150 ms) tus datos van y vuelven de N de ellos»).
+  Botones: «Guardar el viaje (PDF)», «Descargar vídeo (N MB)», «Verlo otra vez», «Volver a Órbita». Esc sale.
+  - **Vídeo**: `canvas.captureStream(30)` + MediaRecorder (mp4/avc1 si lo hay, si no webm) sobre un lienzo que compone estrellas+tierra+rutas y los textos del HUD
+    (`cuadroGrabado`, enganchado en `window.OrbitaDespues`, que orbita.js llama tras `pintaRutas`). ≈ 11–13 MB por viaje. Descarga con `<a download>`.
+  - **Informe** (`informe()`): artículo `#informe` a pantalla completa — **dos caras del planeta** (ortográfico centrado en ti + la cara opuesta, arcos elevados
+    recortados en el horizonte), cifras, **brújula de tiempos** (rumbo real, raíz cuadrada de los ms, anillos 50/100/200/400), «Qué significa» / «Cómo se ha medido»,
+    **la luz contra la realidad** (barras mínimo vs medido), **distancia frente a tiempo** (dispersión con la línea del mínimo físico), tabla, pie
+    «Son tus datos y de nadie más…». «Guardar PDF» = `window.print()` con `body.imprime-informe` (el usuario elige «Guardar como PDF»).
+  - Durante el viaje capas.js no pinta nombres de país (`soloTu && body.viaje`); el marcador de casa y su etiqueta son los de orbita.js (no duplicar).
+- Puerta ZERO abre la demo `zero/?orbita=1&entrada=0`; el programa puede mandar `postMessage({tipo:'orbita-ruta', ruta:[…]})` para pintar su traceroute real
+  (`OrbitaConexion.ruta`).
 
 ## 4. La agencia (cómo se trabaja con ChatGPT, Grok, Gemini)
-- Pestañas del navegador integrado: ChatGPT (`seed`, conversación «Lista cables submarinos África», cuadro `#prompt-textarea` o `[contenteditable=true]`),
-  Grok (`tab-3`, conversación «Verificación independiente de cables submarinos», modo Expert), Gemini (`tab-1`; **se niega a casi todo desde hoy**, no contar con él).
-  Para escribir en los cuadros: enfocar y `document.execCommand('insertText', false, texto)` desde `javascript_tool`, luego tecla Return.
-  Para leer respuestas largas: `document.body.innerText.split('\n').filter(l => l.trim().startsWith('[{"nombre"'))` y coger la última.
+- Pestañas del navegador integrado: ChatGPT (`seed`; **chat nuevo «Guion visual 3D»** https://chatgpt.com/c/6ada79f7-4158-83e9-af6b-27be8adcf2b9 — el anterior
+  «Lista cables submarinos África» llegó al límite de longitud; cuadro `#prompt-textarea` o `[contenteditable=true]`), Grok (`tab-3`, conversación «Verificación
+  independiente de cables submarinos», modo Expert, cuadro `ref_247`), Gemini (`tab-1`; **se niega a casi todo**, no contar con él).
+  Para escribir: enfocar y `document.execCommand('insertText', false, texto)` desde `javascript_tool`, luego tecla Return. Para leer respuestas largas con la
+  pestaña en segundo plano `innerText` se agota: traer la pestaña al frente (`tabs_select`) y recorrer nodos de texto con un TreeWalker a partir del marcador del prompt;
+  en Grok, las líneas que empiezan por `[{"nombre"` o los bloques `pre, code`.
 - Esquema JSON por cable: `{"nombre","llegadas":[{"lugar","pais","lat","lon"}],"anio","km","duenos":[],"fuentes":[]}`.
-  Las respuestas se guardan en `herramientas/cables-agencia/<voz>-<zona>-<n>.json` (voces: `chatgpt`, `grok`, `claude`, `gemini`; la voz la da el prefijo del archivo).
-- Cruce: `python3 herramientas/cables_agencia.py && python3 herramientas/lugares_capas.py` (3–5 min) → `orbita/datos/cables-agencia.json`, `cables.json`,
-  `lugares-capas.json`. Imprime «aceptados» y la lista «solo lo nombra X» (una sola voz: pendientes de confirmar).
-- Estado: 199 cables confirmados; **126 todavía con una sola voz** (lista en `/tmp/.../scratchpad/solos_nombres.txt`, se regenera con el script).
-- **En curso ahora mismo**:
-  - Grok: verificando los 84 cables de una sola voz; tandas 1–4 guardadas (`grok-verifica-1..4.json`); le pedí la tanda 5 (último grupo: ALASIA, ORVAL, Rioja, Pencan-9, Kerch, Leif Erikson, Kelvin, Mistral, X-Link, ARIMAO, TGN-WE, Alaska, Dhiraagu, NZ, ATISA, Picot, Vaka, Kinmen, ESAT-1, Circe South, SIRIUS North, N0R5KE, Balticconnector, Eastern Light, Danica, Emerald Bridge, Tampnet, Denmark-Russia, ULYSSES-1). Cuando responda: guardar como `grok-verifica-5.json`, cruzar, publicar.
-    (Mediterráneo, Atlántico/Caribe, Pacífico). Cuando responda: guardar como `grok-verifica-3.json` (y 4…), cruzar, publicar.
-  - ChatGPT: la tanda Rusia/Golfo/sur de Asia ya está guardada (`chatgpt-rusia-golfo-1.json`, 39 cables). AHORA está verificando las 10 fichas de país de `datos/paises.json` (responderá un objeto JSON {"CC":{campos…,"ok":true/false}}): fusionar sus correcciones en `paises.json` y poner `confirmado:true` en los países con ok=true o cuyas correcciones sean menores; publicar.
-- Licencias comprobadas hoy: **PeeringDB no se puede usar** (su AUP prohíbe reproducir y uso comercial); IXPDB (Euro-IX) sin licencia clara → no usar.
-  Los puntos de intercambio se hacen con la agencia (hechos públicos) y OSM (`telecom=internet_exchange`).
+  Respuestas en `herramientas/cables-agencia/<voz>-<zona>-<n>.json` (voces por prefijo: `chatgpt`, `grok`, `claude`, `gemini`). Comprobadas a mano: `confirmados.txt`.
+- Cruce: `python3 herramientas/cables_agencia.py && python3 herramientas/lugares_capas.py && python3 herramientas/capacidad_cables.py` (3–5 min) →
+  `orbita/datos/cables-agencia.json`, `cables.json`, `lugares-capas.json`, `cables-capacidad.json`. Imprime «aceptados» y «solo lo nombra X» (pendientes).
+- Capacidades: `herramientas/cables-capacidad/<voz>-*.json` (`[{nombre, tbps, pares, fuente}]`, nombre exacto del grupo de `lugares-capas.json`); mayoría de voces
+  dentro del 30 % (dos de tres bastan) o `cables-capacidad/confirmados.txt`. Hay claude (49), chatgpt (75), grok (17+40).
+- Estado: **234 cables confirmados**; **95 de una sola voz** (lista en la salida de `cables_agencia.py`). Todas las tandas de Grok (`grok-verifica-1..6`) están cruzadas.
+  Desde hoy `clave()` ignora las palabras genéricas (submarine, subsea, cable, system, fiber, network, project, domestic…): «KetchCan1» y
+  «KetchCan1 Submarine Fiber Cable System» son el mismo cable. Añadidos alias EIG, GBI, OAC.
+- Ideas de la agencia para el viaje ya aplicadas: aparición progresiva de arcos con giro de cámara (Grok), carrera de dos pulsos luz/medido y escala humana del
+  milisegundo (Grok, ChatGPT), leyenda permanente «conexiones medidas, trayectorias ilustrativas» y dispersión km/ms con la línea de la fibra (ChatGPT).
+  También la gráfica de ms de más por continente (ChatGPT), ya en el informe.
+- Licencias comprobadas: **PeeringDB no se puede usar** (AUP), IXPDB sin licencia clara, OONI solo no comercial, Ookla/Cloudflare Radar/OpenCellID no comerciales.
+  Sí: ETOPO/GEBCO/USGS/Banco Mundial/RIPE Atlas/M-Lab.
 
 ## 5. Porcentaje de «mapa completo» (estimación dada al dueño)
-Cables submarinos ~65 % · llegadas ~80 % · centros de datos ~25–35 % · puntos de intercambio <1 % · fibra terrestre ~45 % · satélites ~95 % · polos ~90 %.
-Conjunto ~50–55 %. Orden de prioridad acordado: (1) centros de datos, (2) puntos de intercambio, (3) terminar cables con la agencia, (4) fibra de países grandes.
+Cables submarinos ~70 % · llegadas ~80 % · centros de datos ~25–35 % · puntos de intercambio <1 % · fibra terrestre ~45 % · satélites ~95 % · polos ~90 %.
+Conjunto ~55 %. Orden acordado: (1) centros de datos, (2) puntos de intercambio, (3) terminar cables con la agencia, (4) fibra de países grandes.
 
 ## 6. Pendiente inmediato (por orden)
-1. Recoger las respuestas de Grok y ChatGPT (ver §4), guardar, cruzar, publicar (subir `?v=`).
-2. **Ficha de país**: los 10 primeros ya están verificados; añadir países nuevos por tandas (Claude escribe, ChatGPT verifica → `confirmado:true`). Campos: `movil`,
-   `operadores`, `fija`, `diez` (10G), `troncales`, `intercambio`, `novedades`. Lo que el mapa ya sabe (cables y centros de datos por país) se calcula solo.
-3. Centros de datos: ampliar la consulta Overpass de `herramientas/datos_orbita.py` (`puntos()`) con `building=data_center`, `office=data_center`,
-   `industrial=data_center`, `man_made=data_center` (probar en el workflow de GitHub; desde el contenedor no hay acceso a Overpass).
-4. Puntos de intercambio por la agencia (nombre, ciudad, país, desde cuándo, operador) → `datos/puntos-extra.json` tipo `intercambio`.
-5. Traducir a los 39 idiomas restantes las claves nuevas de hoy (están solo en es/en/pt dentro de `idioma.js`): «Quién lo quiere hacer», «Qué quieren hacer»,
-   «Para cuándo», «Capacidad prevista», «Coste», «Estudio», «Amarres previstos», «Cómo se conecta», «Por dónde salen los datos», «Antenas», «Personal», «Desde»,
-   «Enlaces locales», «Novedades», «Incidencias conocidas», «Datos en verificación», «Ninguno con nombre en el mapa», «Red móvil», «Operadores»,
-   «Fibra al hogar», «Troncales», «Intercambio de internet», y las etiquetas «40.000 km / 500 m» del indicador de altura.
-6. Costas finas para el zoom profundo (opcional, grande): teselas vectoriales de OSM land polygons generadas en el workflow.
-7. (Hecho: descargas retiradas.) Artefacto de vista previa https://claude.ai/artifact/2ofNX33VVYed7qwqDxSrqa (v11) desfasado; no es necesario.
+1. Que el dueño pruebe «El viaje de tus datos» en su PC (Mi conexión → Medir rutas → «Ver el viaje en 3D» → «Descargar vídeo» y «Guardar el viaje (PDF)»)
+   y afinar lo que pida. Posible: sonido; elegir resolución del vídeo.
+2. **Ficha de país**: verificar con ChatGPT (chat nuevo) los 15 países `confirmado:false` de `datos/paises.json` y añadir más por tandas (Claude escribe, ChatGPT verifica).
+   Campos: `movil`, `operadores`, `fija`, `diez` (10G), `troncales`, `intercambio`, `novedades`.
+3. Capacidades: pedir a Grok el resto de la lista; cables de una sola voz (95): seguir con Grok/ChatGPT por tandas de 15–20 nombres.
+4. Centros de datos: la consulta Overpass de `datos_orbita.py` (`puntos()`) ya incluye `building/office/industrial/man_made=data_center` con
+   deduplicado nodo/edificio (22 Oct, 16:45); **comprobar el resultado del workflow** (`gh workflow run datos-orbita.yml --ref main`, luego traer `orbita/datos` a `web-idiomas`)
+   y actualizar el recuento en la ficha de país / porcentaje.
+5. Puntos de intercambio por la agencia (nombre, ciudad, país, desde cuándo, operador) → `datos/puntos-extra.json` tipo `intercambio`.
+6. Traducir a los 39 idiomas restantes las claves nuevas (solo en es/en/pt dentro de `idioma.js`): polos, incidencias, país, capacidad, profundidad, rutas,
+   ficha completa, viaje e informe.
+7. Capas futuras propuestas por la agencia: terremotos (USGS), regiones de nube, latencia RIPE Atlas, DNSSEC por país, caídas conocidas.
+8. Costas finas para el zoom profundo (opcional, grande): teselas vectoriales de OSM land polygons generadas en el workflow.
 
 ## 7. Archivos clave
-`orbita/index.html` · `orbita/static/orbita.js` (planeta, zoom, altura, API `OrbitaPlaneta`) · `orbita/static/capas.js` (capas, fichas, país, estaciones, notas)
-· `orbita/static/conexion.js` · `orbita/static/idioma.js` + `i18n/` · `orbita/static/orbita.css` · `orbita/datos/*.json` · `herramientas/cables_agencia.py`,
-`lugares_capas.py`, `datos_orbita.py`, `fibra_tierra.py`, `fibra_zoo.py`, `cables-agencia/*.json`, `informes-agencia-polar.md`.
+`orbita/index.html` · `orbita/static/orbita.js` (planeta, zoom, altura, API `OrbitaPlaneta`, gancho `OrbitaDespues`) · `orbita/static/capas.js` (capas, fichas,
+panel completo, país, estaciones, notas, potencia, relieve) · `orbita/static/conexion.js` (Mi conexión, rutas) · `orbita/static/viaje.js` (viaje, vídeo, informe)
+· `orbita/static/idioma.js` + `i18n/` · `orbita/static/orbita.css` · `orbita/datos/*.json` · `herramientas/cables_agencia.py`, `lugares_capas.py`,
+`capacidad_cables.py`, `relieve.py`, `datos_orbita.py`, `fibra_tierra.py`, `cables-agencia/*.json`, `cables-capacidad/*.json`, `informes-agencia-polar.md`.

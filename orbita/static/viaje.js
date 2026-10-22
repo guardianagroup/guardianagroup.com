@@ -232,8 +232,7 @@
     cx.fillStyle = '#06080C'; cx.fillRect(0, 0, W, H);
     const esfera = (cLon, cLat, CX, CY, R, grande) => {
       const la = cLat * RAD, lo = cLon * RAD, cl = Math.cos(la), sl = Math.sin(la), co = Math.cos(lo), so = Math.sin(lo);
-      // a point lifted `alza` above the surface is seen when it is on this side, or when it rises past the limb
-      const proy = (lon, lat, alza) => { const [x0, y0, z0] = vec(lon, lat); const x1 = x0 * co - z0 * so, z1 = x0 * so + z0 * co; const y2 = y0 * cl - z1 * sl, z2 = y0 * sl + z1 * cl; const h = 1 + (alza || 0); return { x: CX + R * x1 * h, y: CY - R * y2 * h, z: z2, ve: z2 > 0 || (x1 * x1 + y2 * y2) * h * h > 1.0005 }; };
+      const proy = (lon, lat, alza) => { const [x0, y0, z0] = vec(lon, lat); const x1 = x0 * co - z0 * so, z1 = x0 * so + z0 * co; const y2 = y0 * cl - z1 * sl, z2 = y0 * sl + z1 * cl; const h = 1 + (alza || 0); return { x: CX + R * x1 * h, y: CY - R * y2 * h, z: z2, ve: z2 > -0.015 }; }; // clipped at the horizon: an arc to the far side ends at the limb, it does not poke out of the sphere
       let g = cx.createRadialGradient(CX - R * 0.3, CY - R * 0.35, R * 0.1, CX, CY, R * 1.02); g.addColorStop(0, '#111822'); g.addColorStop(0.8, '#0A0E14'); g.addColorStop(1, '#06080C'); cx.fillStyle = g; cx.beginPath(); cx.arc(CX, CY, R, 0, 7); cx.fill();
       g = cx.createRadialGradient(CX, CY, R * 0.96, CX, CY, R * 1.06); g.addColorStop(0, 'rgba(' + ACENTO + ',0)'); g.addColorStop(0.5, 'rgba(' + ACENTO + ',.35)'); g.addColorStop(1, 'rgba(' + ACENTO + ',0)'); cx.fillStyle = g; cx.beginPath(); cx.arc(CX, CY, R * 1.06, 0, 7); cx.fill();
       const linea = (puntos, alzaDe) => { cx.beginPath(); let prev = false; for (let i = 0; i < puntos.length; i++) { const q = proy(puntos[i][0], puntos[i][1], alzaDe ? alzaDe(i) : 0); if (q.ve && prev) cx.lineTo(q.x, q.y); else if (q.ve) cx.moveTo(q.x, q.y); prev = q.ve; } cx.stroke(); };
@@ -259,7 +258,7 @@
       if (!grande) { cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textAlign = 'center'; cx.fillStyle = 'rgba(' + BLANCO + ',.6)'; cx.fillText(T('La otra cara del planeta').toUpperCase(), CX, CY + R + 22); }
     };
     esfera(L.lon, L.lat, 390, H / 2 + 6, 300, true);
-    esfera(L.lon + 180, -L.lat, 905, H / 2 - 20, 150, false);
+    esfera(L.lon + 180, -L.lat, 880, H / 2 - 20, 150, false);
     return c;
   }
   // 2. the compass of times: each destination at its true bearing from you, the spoke as long as its milliseconds
@@ -315,6 +314,22 @@
     return c;
   }
   const minimoMs = (km) => 2 * km / 200;
+  // 5. by continent: the milliseconds over the physical minimum, on average, towards each part of the world
+  function figuraContinentes(r) {
+    const porCont = new Map();
+    for (const n of r.nubes) { const k = continente(n.region); if (!porCont.has(k)) porCont.set(k, []); porCont.get(k).push(n); }
+    const filas = [...porCont.entries()].map(([k, ns]) => ({ k, n: ns.length, extra: ns.reduce((s, n) => s + n.ms - n.minimo, 0) / ns.length, razon: ns.reduce((s, n) => s + n.ms / n.minimo, 0) / ns.length, ms: ns.reduce((s, n) => s + n.ms, 0) / ns.length })).sort((a, b) => a.extra - b.extra);
+    const W = 1100, fh = 30, H = 24 + filas.length * fh + 16, [c, cx] = lienzo(W, H), x0 = 250, ancho = W - x0 - 230, maxExtra = Math.max(...filas.map((f) => f.extra)) || 1;
+    cx.fillStyle = '#06080C'; cx.fillRect(0, 0, W, H);
+    cx.font = '500 11px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle';
+    filas.forEach((f, i) => {
+      const y = 24 + i * fh, w = ancho * f.extra / maxExtra;
+      cx.textAlign = 'right'; cx.fillStyle = '#F4F6F8'; cx.fillText(f.k + ' · ' + f.n, x0 - 12, y + 9);
+      const g = cx.createLinearGradient(x0, 0, x0 + w, 0); g.addColorStop(0, 'rgba(' + ACENTO + ',.9)'); g.addColorStop(1, 'rgba(' + ACENTO + ',.35)'); cx.fillStyle = g; cx.fillRect(x0, y, w, 18);
+      cx.textAlign = 'left'; cx.fillStyle = 'rgba(' + BLANCO + ',.85)'; cx.fillText('+' + num(Math.round(f.extra)) + ' ms ' + T('de media') + ' · ×' + num(f.razon, 1) + ' · ' + num(Math.round(f.ms)) + ' ms', x0 + w + 8, y + 9);
+    });
+    return c;
+  }
   async function informe(rutas) {
     const r = rutas || (C() && C().datos.rutas); if (!r || !r.nubes || !r.nubes.length || !r.origen) return;
     const lineas = await fronteras(), paradasV = paradas(r), fuera = C() && C().datos.fuera;
@@ -342,6 +357,7 @@
     sec.append(el('p', '', T('Desde tu navegador, una petición mínima a la puerta pública de cada región (Amazon Web Services) y al borde de red más cercano (Cloudflare), tres veces, quedándonos con la mejor. La ubicación de cada centro es la zona metropolitana publicada por su operador. No se sabe por qué cable exacto ha ido cada dato: ningún mapa puede saberlo sin medir dentro de la red, y por eso no se dibuja.')));
     dos.append(sec); a.append(dos);
     const f3 = el('figure'); f3.append(figuraLuz(r)); f3.append(el('figcaption', '', T('La luz contra la realidad: en azul, lo que tardaría la luz en línea recta; en gris, lo que han tardado tus datos.'))); a.append(f3);
+    const f5 = el('figure'); f5.append(figuraContinentes(r)); f5.append(el('figcaption', '', T('Por continente: los milisegundos de más sobre el mínimo físico, de media, hacia cada parte del mundo (destinos medidos, razón sobre el mínimo y tiempo medio).'))); a.append(f5);
     const f4 = el('figure'); f4.append(figuraDispersion(r)); f4.append(el('figcaption', '', T('Distancia frente a tiempo: cada punto es un destino; la línea de puntos es el mínimo físico para esa distancia. Lo que queda por encima son equipos, colas y caminos que no van rectos: no se traduce en kilómetros.'))); a.append(f4);
     const tabla = el('table'); const th = el('tr'); [T('Destino'), T('Continente'), 'ms', 'km', T('mínimo'), '× ' + T('mínimo')].forEach((k) => th.append(el('th', '', k))); tabla.append(th);
     for (const n of orden) { const tr = el('tr'); [n.nombre, continente(n.region), n.ms + ' ms', num(Math.round(n.km)), num(Math.round(n.minimo)) + ' ms', '×' + num(n.ms / n.minimo, 1)].forEach((v) => tr.append(el('td', '', v))); tabla.append(tr); }
