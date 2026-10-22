@@ -134,14 +134,6 @@
       if (!st || !tot) return null;
       return { k: 'mundo', v: num(st.n), t: tx().star(num(100 * st.n / tot)), f: tx().starF + ', ' + new Date(S.d.descargado).toLocaleDateString(loc()) };
     },
-    async function cablesPais() {
-      const cc = window.OrbitaPlaneta && window.OrbitaPlaneta.pais; if (!cc) return null;
-      const G = await lugaresCapas(); if (!G || !G.llegadas) return null;
-      const nombres = new Set();
-      for (const l of G.llegadas) if (l[3] === cc) for (const k of l[4]) { const gi = G.g ? G.g[k] : -1; nombres.add(gi >= 0 ? 'g' + gi : 's' + k); }
-      if (!nombres.size) return null;
-      return { k: 'mundo', v: num(nombres.size), t: tx().llegan(pais(cc)), f: tx().lleganF };
-    },
   ];
   // This computer: in the program, from the panel's measurements; outside it, three labelled examples.
   function equipo() {
