@@ -254,6 +254,7 @@
     'De punto a punto, en línea recta': ['Point to point, as the crow flies', 'De ponto a ponto, em linha reta'],
     'aquí': ['here', 'aqui'], 'Elige uno para ver su ficha.': ['Choose one to see its card.', 'Escolhe um para ver a sua ficha.'], 'acerca más para verlos todos': ['zoom in to see them all', 'aproxima mais para os ver todos'],
     'Navegador · demostración': ['Browser · demo', 'Navegador · demonstração'], 'El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.': ['The browser that shows every cut, live. What you see here is a demo.', 'O navegador que mostra cada corte, ao vivo. O que vês aqui é uma demonstração.'],
+    'Según el mapa de la red de': ['According to the network map of', 'Segundo o mapa da rede de'],
     'En servicio desde': ['In service since', 'Em serviço desde'], 'Longitud': ['Length', 'Comprimento'], 'Longitud en el mapa': ['Length on the map', 'Comprimento no mapa'], 'Trazado aproximado por mar': ['Approximate sea route', 'Traçado aproximado pelo mar'], 'Datos verificados': ['Verified data', 'Dados verificados'], 'Fuentes': ['Sources', 'Fontes'], 'Dueños': ['Owners', 'Donos'],
     'Desde el mar': ['From the sea', 'Desde o mar'],
     'Capas de satélites': ['Satellite layers', 'Camadas de satélites'], 'Plegar': ['Fold', 'Recolher'],

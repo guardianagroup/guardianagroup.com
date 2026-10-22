@@ -219,6 +219,7 @@
     if (l.o) lin.push(T('Operador') + ': ' + l.o);
     if (l.km) lin.push(T('Longitud en el mapa') + ': ' + num(l.km) + ' km');
     if (l.obra) lin.push(T('En construcción según la fuente'));
+    if (l.anio) lin.push(T('Según el mapa de la red de') + ' ' + l.anio); // Topology Zoo lines carry the year of the map they come from
     lin.push(T('Trazado aproximado') + ' · ' + T('Datos verificados'));
     f.querySelector('span').textContent = lin.join('\n');
     f.hidden = false; colocaFicha(x, y);
@@ -344,8 +345,13 @@
     for (let c = 0; c < 3; c++) {
       cx.fillStyle = c ? `rgba(${ACERO},${alfa[c]})` : `rgba(${BLANCO},${alfa[c]})`;
       const h = tam[c] / 2;
-      for (const l of lineas) {
+      // many short land links (Topology Zoo gives thousands): skip the lights on the lines facing away and keep
+      // the pulse count bounded, so the planet stays smooth on a modest computer
+      const salto = lineas.length > 2500 ? Math.ceil(lineas.length / 2500) : 1;
+      for (let li = c === 0 ? 0 : 0; li < lineas.length; li += salto) {
+        const l = lineas[li];
         if (l.L < 0.01) continue;
+        if (l.w && l.w.length && p.aVista(l.w[0])[2] <= 0.02 && p.aVista(l.w[l.w.length - 1])[2] <= 0.02) continue;
         const n = Math.max(1, Math.round(l.L / PASO)), sep = l.L / n;
         for (let dir = 0; dir < 2; dir++) {
           const base = ((t * VLUZ + l.fase * sep + dir * sep / 2) % sep);
