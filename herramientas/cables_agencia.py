@@ -57,6 +57,23 @@ ALIAS = {  # the same cable under different names (lower case, letters and digit
     'southeastasiamiddleeastwesterneurope3': 'smw3', 'southeastasiamiddleeastwesterneurope4': 'smw4',
     'southeastasiamiddleeastwesterneurope5': 'smw5', 'southeastasiamiddleeastwesterneurope6': 'smw6',
     'indiamiddleeastwesterneuropeimewe': 'imewe', 'indiamiddleeastwesterneurope': 'imewe',
+    # Asia–Pacific
+    'transpacificexpress': 'tpe', 'transpacificexpresscablesystem': 'tpe', 'unityeacpacific': 'unity',
+    'pacificlightcablenetwork': 'plcn', 'newcrosspacific': 'ncp', 'newcrosspacificcablesystem': 'ncp', 'pacificcrossing1': 'pc1',
+    'japanuscablenetwork': 'japanus', 'tatatgnpacific': 'tgnpacific', 'asiaamericagateway': 'aag', 'asiaamericagatewaycablesystem': 'aag',
+    'asiapacificcablenetwork2': 'apcn2', 'asiapacificgateway': 'apg', 'asiadirectcable': 'adc', 'southeastasiajapancable': 'sjc',
+    'southeastasiajapancable2': 'sjc2', 'asiasubmarinecableexpress': 'ase', 'asiasubmarinecableexpresscahayamalaysia': 'ase',
+    'eastasiacrossing': 'eacc2c', 'eastasiacrossingeacintegradoeneacc2c': 'eacc2c', 'citytocitycablesystem': 'eacc2c', 'citytocitycablesystemc2cintegradoeneacc2c': 'eacc2c', 'c2c': 'eacc2c', 'eac': 'eacc2c',
+    'tgnintraasia': 'tgnia', 'flagnorthasialoop': 'fnal', 'flagnorthasialoopreachnorthasialoop': 'fnal', 'fnalrnal': 'fnal',
+    'taiwanstraitexpress1': 'tse1', 'hainantohongkongexpress': 'h2he', 'southeastasiahainanhongkongexpress': 'seah2x',
+    'malaysiaindiasingaporetransit': 'mist', 'indiaasiaxpress': 'iax', 'koreajapancablenetwork': 'kjcn', 'malaysiacambodiathailand': 'mct',
+    'indonesiaglobalgateway': 'igg', 'matrixcablesystem': 'matrix', 'thailandindonesiasingapore': 'tis', 'bayofbengalgateway': 'bbg',
+    'i2icablenetwork': 'i2i', 'tgntataindicomcable': 'tic', 'tgntataindicom': 'tic', 'southeastasiaunitedstates': 'seaus',
+    'southerncrosscablenetwork': 'southerncross', 'southerncrosscable': 'southerncross', 'southerncrossnext': 'sxnext',
+    'telstraendeavour': 'endeavour', 'pipepacificcable': 'ppc1', 'australiajapancable': 'ajc', 'tasmanglobalaccess': 'tga',
+    'coralseacablesystem': 'coralsea', 'coralseacable': 'coralsea', 'australiasingaporecable': 'asc',
+    'jgasouth': 'jgas', 'japanguamaustraliasouth': 'jgas', 'jganorth': 'jgan', 'japanguamaustralianorth': 'jgan',
+    'interchangecablenetwork1': 'icn1', 'hantru1': 'hantru1', 'kumuldomesticsubmarinecable': 'kumul', 'kumulsubmarinecablenetwork': 'kumul',
 }
 
 def clave(n):
@@ -125,6 +142,17 @@ class Agua:
         p = [goal]
         while p[-1] != start: p.append(prev[p[-1]])
         return p[::-1]
+
+def suaviza(pts, veces=2):
+    """Chaikin's corner cutting: the pixel route loses its staircase and reads like a cable, not a maze."""
+    for _ in range(veces):
+        if len(pts) < 3: return pts
+        out = [pts[0]]
+        for a, b in zip(pts, pts[1:]):
+            out.append((a[0] * 0.75 + b[0] * 0.25, a[1] * 0.75 + b[1] * 0.25))
+            out.append((a[0] * 0.25 + b[0] * 0.75, a[1] * 0.25 + b[1] * 0.75))
+        out.append(pts[-1]); pts = out
+    return pts
 
 def simplifica(pts, tol):
     """Douglas–Peucker on pixel coordinates."""
@@ -262,7 +290,7 @@ def main():
             r = agua.ruta((pa[1], pa[2]), (pb[1], pb[2])) if recto > 25 and pa and pb else None
             linea, por = None, 'mar'
             if r:
-                r = simplifica(r, 0.8)
+                r = simplifica(suaviza(r), 0.6)
                 linea = [[A['lon'], A['lat']]] + [[round(x, 3), round(y, 3)] for x, y in (agua.lonlat(px, py) for px, py in r[1:-1])] + [[B['lon'], B['lat']]]
                 largo = sum(km(p[1], p[0], q[1], q[0]) for p, q in zip(linea, linea[1:]))
                 if largo > 2.5 * recto + 200: linea = None  # the mask has no way through (Suez, a strait too narrow): the real cable crosses land there
