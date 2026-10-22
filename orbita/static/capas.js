@@ -10,7 +10,7 @@
   const P = () => window.OrbitaPlaneta;
   const RE = 6378.137, RAD = Math.PI / 180;
   const ACERO = '156,195,228', BLANCO = '244,246,248';
-  const estado = { sub: true, tierra: false, puntos: false, sat: true, vista: 'equilibrada', orb: { baja: true, media: true, geo: true } };
+  const estado = { sub: true, tierra: false, fibra: true, puntos: false, sat: true, vista: 'equilibrada', orb: { baja: true, media: true, geo: true } };
   try { const g = JSON.parse(localStorage.getItem('guardiana-orbita-capas') || '{}'); Object.assign(estado, g); estado.orb = Object.assign({ baja: true, media: true, geo: true }, g.orb || {}); if (!['equilibrada', 'todos', 'cielo'].includes(estado.vista)) estado.vista = 'equilibrada'; } catch (_) {}
   const guarda = () => { try { localStorage.setItem('guardiana-orbita-capas', JSON.stringify(estado)); } catch (_) {} };
 
@@ -146,7 +146,7 @@
   function pintaFibra(cx, p, G) {
     const z = G.R / (G.R0 || G.R);
     for (const obra of [false, true]) {
-      cx.strokeStyle = `rgba(${ACERO},${obra ? 0.42 : 0.55})`; cx.lineWidth = Math.min(1.6, 0.75 + 0.18 * (z - 1));
+      cx.strokeStyle = `rgba(${ACERO},${obra ? 0.5 : 0.72})`; cx.lineWidth = Math.min(1.8, 0.9 + 0.2 * (z - 1));
       cx.setLineDash(obra ? [3, 3] : []);
       cx.beginPath();
       for (const l of FT.lineas) {
@@ -170,7 +170,7 @@
   }
   let fibraMarcada = -1;
   function buscaFibra(x, y) {
-    if (!estado.sub || !FT || !FT.lineas) return -1;
+    if (!estado.fibra || !FT || !FT.lineas) return -1;
     const p = P(), G = p.geo; let mejor = -1, dm = 6 * 6;
     FT.lineas.forEach((l, i) => {
       let ax = 0, ay = 0, prev = false;
@@ -253,7 +253,7 @@
     const cx = p.ctx, G = p.geo;
     cx.globalCompositeOperation = 'lighter';
     if (estado.tierra && capas.tierra && capas.tierra.lineas) pintaLineas(cx, p, G, capas.tierra.lineas, `rgba(${ACERO},.30)`, 0.7);
-    if (estado.sub && FT && FT.lineas) pintaFibra(cx, p, G);
+    if (estado.fibra && FT && FT.lineas) pintaFibra(cx, p, G);
     if (estado.sub && capas.sub && capas.sub.lineas) { pintaLineas(cx, p, G, capas.sub.lineas, `rgba(${ACERO},.62)`, 1); pintaLuz(cx, p, G, capas.sub.lineas, t); }
     if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
     if (estado.sub && capas.sub && capas.sub.lineas) {
@@ -533,8 +533,10 @@
     }
     if (estado.sub) {
       const c = capas.sub;
-      const ft = FT && FT.d ? ' · ' + num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' (' + FT.d.fuentes.map((x) => x.n.split(' (')[0].split(' · ')[0]).join(', ') + ')' : '';
-      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + ' · © OpenStreetMap (ODbL) · ' + T('puede faltar alguno') + ft + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
+      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + ' · © OpenStreetMap (ODbL) · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
+    }
+    if (estado.fibra) {
+      meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + FT.d.fuentes.map((x) => x.n.split(' (')[0].split(' · ')[0] + ' (' + T(x.lic) + ')').join(', ') : FT && FT.error ? T('No se pudo cargar la fibra por tierra.') : T('Cargando fibra por tierra…'));
     }
     if (estado.tierra) {
       const c = capas.tierra;
@@ -1008,7 +1010,7 @@
   function pon(clave, on) {
     estado[clave] = on; guarda();
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
-    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else { cargaCables(clave); if (clave === 'sub') cargaFibra(); } }
+    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else if (clave === 'fibra') cargaFibra(); else { cargaCables(clave); if (clave === 'sub') cargaFibra(); } }
     if (!on) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; }
     pintaNota(); pintaVista();
   }
@@ -1020,7 +1022,7 @@
     estado.tierra = false; // land fibre left out (owner, 21 Oct 2026): OpenStreetMap knows too little of it
     enganchaVista();
     document.querySelectorAll('#capas [data-capa]').forEach((b) => b.addEventListener('click', () => pon(b.dataset.capa, b.getAttribute('aria-pressed') !== 'true')));
-    for (const k of ['sub', 'tierra', 'puntos', 'sat']) if (estado[k]) pon(k, true);
+    for (const k of ['sub', 'fibra', 'puntos', 'sat']) if (estado[k]) pon(k, true);
     pintaNota();
     addEventListener('guardiana-idioma', pintaNota);
   }
