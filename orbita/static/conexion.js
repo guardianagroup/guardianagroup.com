@@ -230,17 +230,27 @@
     return pts;
   }
   function traza(cx, pts) { let prev = false; cx.beginPath(); for (const q of pts) { if (q && prev) cx.lineTo(q[0], q[1]); else if (q) cx.moveTo(q[0], q[1]); prev = !!q; } cx.stroke(); }
-  function marca(cx, p, G, lon, lat, texto, t, fuerte) {
+  // labels never pile up: each one takes its box; a later label that would overlap is left out (the dot stays).
+  // The fastest clouds come first in the list, so they keep their name when Europe gets crowded.
+  let cajas = [];
+  function marca(cx, p, G, lon, lat, texto, t, fuerte, abajo) {
     const w = p.vec(lon, lat).map((c) => c * 1.003), v = p.aVista(w); if (v[2] <= 0.02) return null;
     const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], pulso = 0.5 + 0.5 * Math.sin((t || 0) / 450);
     if (fuerte) { cx.strokeStyle = 'rgba(156,195,228,' + (0.25 + 0.35 * pulso) + ')'; cx.lineWidth = 1.2; cx.beginPath(); cx.arc(x, y, 9 + 6 * pulso, 0, 7); cx.stroke(); }
     cx.fillStyle = fuerte ? '#9CC3E4' : 'rgba(244,246,248,.85)'; cx.beginPath(); cx.arc(x, y, fuerte ? 3.2 : 2.2, 0, 7); cx.fill();
-    if (texto) { cx.font = (fuerte ? '500 10.5px' : '400 10px') + ' "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle'; cx.fillStyle = fuerte ? 'rgba(232,236,241,.92)' : 'rgba(232,236,241,.78)'; cx.fillText(texto, x + (fuerte ? 12 : 7), y); }
+    if (texto) {
+      const px = fuerte ? 10.5 : 10, w = px * 0.62 * texto.length, lx = x + (fuerte ? 12 : 7), ly = y + (abajo ? 14 : 0), caja = [lx, ly - 7, w, 14];
+      const choca = cajas.some((c) => lx < c[0] + c[2] + 4 && lx + w > c[0] - 4 && ly - 7 < c[1] + c[3] && ly + 7 > c[1]);
+      if (!choca || fuerte) { cajas.push(caja); cx.font = (fuerte ? '500 ' : '400 ') + px + 'px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle'; cx.fillStyle = fuerte ? 'rgba(232,236,241,.92)' : 'rgba(232,236,241,.78)'; cx.fillText(texto, lx, ly); }
+    }
     return [x, y];
   }
   function pintaMio(cx, p, G, t) {
-    cx.save(); cx.globalCompositeOperation = 'source-over';
+    cx.save(); cx.globalCompositeOperation = 'source-over'; cajas = [];
     const P = window.OrbitaPlaneta, L = (rutas && rutas.origen) || (P && P.lugar);
+    // you first, so your label is never pushed out: measured from outside if you asked for it, otherwise the place you chose
+    if (fuera && !fuera.error && Number.isFinite(fuera.lat)) marca(cx, p, G, fuera.lon, fuera.lat, (T('Cómo te ve internet') + ' · ' + (fuera.ciudad || '')).toUpperCase(), t, true);
+    else if (L && (rutas || rutaReal)) marca(cx, p, G, L.lon, L.lat, (T('Tú') + ' · ' + L.nombre + (L.aprox ? ' (' + T('aproximada') + ')' : '')).toUpperCase(), t, true);
     // the measured arcs to the clouds: fastest three bright, the rest fainter; a pulse rides each one at 1/20 of real speed
     if (rutas && rutas.nubes && rutas.nubes.length && L) {
       const mejor = rutas.nubes[0].ms || 1;
@@ -251,7 +261,7 @@
         if (q) { cx.fillStyle = top ? '#9CC3E4' : 'rgba(244,246,248,.8)'; cx.beginPath(); cx.arc(q[0], q[1], top ? 2.6 : 1.8, 0, 7); cx.fill(); }
         marca(cx, p, G, n.lon, n.lat, n.nombre + ' · ' + n.ms + ' ms', t, top);
       });
-      if (rutas.borde && Number.isFinite(rutas.borde.lat)) { cx.setLineDash([3, 4]); cx.strokeStyle = 'rgba(156,195,228,.6)'; cx.lineWidth = 1; traza(cx, arco(p, G, L, rutas.borde, 24)); cx.setLineDash([]); marca(cx, p, G, rutas.borde.lon, rutas.borde.lat, T('borde') + ' · ' + rutas.borde.nombre + (rutas.borde.ms != null ? ' · ' + rutas.borde.ms + ' ms' : ''), t, false); }
+      if (rutas.borde && Number.isFinite(rutas.borde.lat)) { cx.setLineDash([3, 4]); cx.strokeStyle = 'rgba(156,195,228,.6)'; cx.lineWidth = 1; traza(cx, arco(p, G, L, rutas.borde, 24)); cx.setLineDash([]); marca(cx, p, G, rutas.borde.lon, rutas.borde.lat, T('borde') + ' · ' + rutas.borde.nombre + (rutas.borde.ms != null ? ' · ' + rutas.borde.ms + ' ms' : ''), t, false, true); }
     }
     // the real route from the program: hop by hop, numbered
     if (rutaReal && rutaReal.saltos.length) {
@@ -260,9 +270,6 @@
       for (const h of hs) { if (prev) traza(cx, arco(p, G, prev, h, 48)); prev = h; }
       hs.forEach((h, i) => marca(cx, p, G, h.lon, h.lat, (h.n || i + 1) + ' · ' + (h.nombre || h.ip || '') + (Number.isFinite(h.ms) ? ' · ' + num(h.ms) + ' ms' : ''), t, i === hs.length - 1));
     }
-    // you: measured from outside if you asked for it, otherwise the place you chose (or your country, approximately)
-    if (fuera && !fuera.error && Number.isFinite(fuera.lat)) marca(cx, p, G, fuera.lon, fuera.lat, (T('Cómo te ve internet') + ' · ' + (fuera.ciudad || '')).toUpperCase(), t, true);
-    else if (L && (rutas || rutaReal)) marca(cx, p, G, L.lon, L.lat, (T('Tú') + ' · ' + L.nombre + (L.aprox ? ' (' + T('aproximada') + ')' : '')).toUpperCase(), t, true);
     cx.restore();
   }
   function abre(si) {
