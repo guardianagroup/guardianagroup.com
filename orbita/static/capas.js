@@ -10,8 +10,11 @@
   const P = () => window.OrbitaPlaneta;
   const RE = 6378.137, RAD = Math.PI / 180;
   const ACERO = '156,195,228', BLANCO = '244,246,248';
-  const estado = { sub: true, tierra: false, fibra: true, puntos: false, sat: true, vista: 'equilibrada', orb: { baja: true, media: true, geo: true } };
-  try { const g = JSON.parse(localStorage.getItem('guardiana-orbita-capas') || '{}'); Object.assign(estado, g); estado.orb = Object.assign({ baja: true, media: true, geo: true }, g.orb || {}); if (!['equilibrada', 'todos', 'cielo'].includes(estado.vista)) estado.vista = 'equilibrada'; } catch (_) {}
+  // Owner, 22 Oct 2026: «cuando la persona abra Órbita, que no salgan los satélites de golpe, se ve demasiado ruido:
+  // que abra solo con los cables submarinos, y luego la persona va abriendo y cerrando». So every opening starts with
+  // the submarine cables alone; only the view and the orbit filter are remembered between visits.
+  const estado = { sub: true, tierra: false, fibra: false, puntos: false, sat: false, vista: 'equilibrada', orb: { baja: true, media: true, geo: true } };
+  try { const g = JSON.parse(localStorage.getItem('guardiana-orbita-capas') || '{}'); if (g.vista) estado.vista = g.vista; estado.orb = Object.assign({ baja: true, media: true, geo: true }, g.orb || {}); if (!['equilibrada', 'todos', 'cielo'].includes(estado.vista)) estado.vista = 'equilibrada'; } catch (_) {}
   const guarda = () => { try { localStorage.setItem('guardiana-orbita-capas', JSON.stringify(estado)); } catch (_) {} };
 
   // ---------- data ----------
