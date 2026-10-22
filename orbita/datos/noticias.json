@@ -2,6 +2,17 @@
  "nota": "Noticias sobre cables, centros de datos, datos personales y GUARDIANA, cada una confirmada por al menos dos fuentes públicas (las URL quedan aquí; en pantalla solo se dice «Noticia verificada»). Las añade la agencia; la tarea programada «Noticias Órbita» las renueva.",
  "noticias": [
   {
+   "fecha": "2026-10-22",
+   "tema": "datos",
+   "es": "Capcom reconoció el 22 de octubre que un acceso no autorizado del 19 de octubre expuso los correos y metadatos (fechas de alta y último acceso, IP) de 11.774.247 cuentas Capcom ID en todo el mundo; las contraseñas y las tarjetas no se vieron afectadas, pero el atacante cambió la contraseña de 196 cuentas y la empresa avisa de posibles correos de phishing.",
+   "en": "Capcom acknowledged on 22 October that unauthorised access on 19 October exposed the email addresses and metadata (sign-up and last-login dates, IP) of 11,774,247 Capcom ID accounts worldwide; passwords and card data were not affected, but the attacker changed the password of 196 accounts and the company warns of possible phishing emails.",
+   "pt": "a Capcom reconheceu a 22 de outubro que um acesso não autorizado a 19 de outubro expôs os e-mails e metadados (datas de registo e último acesso, IP) de 11.774.247 contas Capcom ID em todo o mundo; as palavras-passe e os cartões não foram afetados, mas o atacante alterou a palavra-passe de 196 contas e a empresa alerta para possíveis e-mails de phishing.",
+   "fuentes": [
+    "https://www.que.es/2026/10/22/filtracion-capcom-11-millones-cuentas/",
+    "https://www.gamereactor.es/la-filtracion-de-capcom-id-expuso-los-datos-de-casi-12-millones-de-cuentas/"
+   ]
+  },
+  {
    "fecha": "2026-10-21",
    "tema": "datos",
    "es": "un juez de Nuevo México (EE. UU.) condenó a Meta a pagar 25.000 millones de dólares, la multa más alta de su historia, por engañar a los usuarios de Facebook sobre quién podía acceder a sus datos personales en el caso Cambridge Analytica; el jurado contó 43 millones de infracciones de la ley de protección al consumidor y Meta anunció que recurrirá.",
@@ -21,6 +32,28 @@
    "fuentes": [
     "https://en.interfax.com.ua/news/telecom/1223706.html",
     "https://biz.liga.net/en/it/news/the-gigacenter-data-center-in-kyiv-ceased-operations-following-an-attack-by-russia"
+   ]
+  },
+  {
+   "fecha": "2026-10-20",
+   "tema": "centros",
+   "es": "el concejo de Memphis (EE. UU.) rechazó el 20 de octubre, con un empate 6–6, una moratoria de 18 meses a nuevos centros de datos tras cinco horas y media de debate; la ciudad acoge los centros de datos de xAI de Elon Musk y el alcalde ha encargado una revisión de 90 días de las normas para grandes centros.",
+   "en": "the Memphis (USA) city council rejected on 20 October, in a 6–6 tie, an 18-month moratorium on new data centres after five and a half hours of debate; the city hosts Elon Musk's xAI data centres and the mayor has ordered a 90-day review of the rules for large data centres.",
+   "pt": "a câmara municipal de Memphis (EUA) rejeitou a 20 de outubro, num empate 6–6, uma moratória de 18 meses a novos centros de dados após cinco horas e meia de debate; a cidade acolhe os centros de dados da xAI de Elon Musk e o presidente da câmara encomendou uma revisão de 90 dias das regras para grandes centros.",
+   "fuentes": [
+    "https://www.datacenterdynamics.com/en/news/memphis-data-center-moratorium-xai-elon-musk/",
+    "https://www.newsweek.com/memphis-faces-data-center-reckoning-as-freeze-sparks-city-hall-brawl-12596729"
+   ]
+  },
+  {
+   "fecha": "2026-10-20",
+   "tema": "cables",
+   "es": "mandos de la Guardia Revolucionaria de Irán advirtieron los días 19 y 21 de octubre de que los cables submarinos de internet que cruzan el estrecho de Ormuz podrían ser objetivo si se ataca a Irán; su portavoz afirmó que siete grandes cables pasan bajo ese estrecho.",
+   "en": "commanders of Iran's Revolutionary Guards warned on 19 and 21 October that the undersea internet cables crossing the Strait of Hormuz could be targeted if Iran is attacked; their spokesman claimed that seven major cables run beneath the strait.",
+   "pt": "comandantes da Guarda Revolucionária do Irão avisaram a 19 e 21 de outubro que os cabos submarinos de internet que atravessam o estreito de Ormuz poderiam ser alvo se o Irão for atacado; o seu porta-voz afirmou que sete grandes cabos passam sob esse estreito.",
+   "fuentes": [
+    "https://www.tasnimnews.ir/en/news/2026/10/21/3728916/undersea-internet-cables-in-strait-of-hormuz-could-be-targeted-if-iran-is-attacked-irgc-commander",
+    "https://vinnews.com/2026/10/20/irgc-spokesman-warns-of-control-over-seven-vital-undersea-internet-cables-in-strait-of-hormuz/"
    ]
   },
   {
@@ -54,6 +87,17 @@
    "fuentes": [
     "https://www.biobiochile.cl/noticias/ciencia-y-tecnologia/adelantos/2026/10/19/europa-y-canada-buscan-tender-nuevo-cable-submarino-para-conectarse-sin-pasar-por-eeuu.shtml",
     "https://thenextweb.com/news/bulk-leif-erikson-cable-canadian-partner"
+   ]
+  },
+  {
+   "fecha": "2026-10-15",
+   "tema": "cables",
+   "es": "Estados Unidos anunció el 15 de octubre 175,8 millones de dólares para cables submarinos en el Caribe y Centroamérica, la mayor partida de un paquete de unos 340 millones presentado en el Diálogo EE. UU.–Caribe en Washington.",
+   "en": "the United States announced on 15 October 175.8 million dollars for undersea cables in the Caribbean and Central America, the largest item in a package of about 340 million presented at the U.S.–Caribbean Dialogue in Washington.",
+   "pt": "os Estados Unidos anunciaram a 15 de outubro 175,8 milhões de dólares para cabos submarinos nas Caraíbas e na América Central, a maior parcela de um pacote de cerca de 340 milhões apresentado no Diálogo EUA–Caraíbas em Washington.",
+   "fuentes": [
+    "https://en.cibercuba.com/noticias/2026-10-16-u1-e199894-s27061-nid343045-eeuu-anuncia-1758-millones-cables-submarinos-caribe",
+    "https://www.cnc3.co.tt/us-announces-more-than-us340m-in-new-caribbean-funding/"
    ]
   },
   {
