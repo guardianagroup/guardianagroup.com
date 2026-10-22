@@ -52,19 +52,19 @@ jobs:
 
       - name: Satélites (CelesTrak) y cables (OpenStreetMap)
         timeout-minutes: 15
-        run: python3 herramientas/datos_orbita.py satelites cables ${{ github.event_name == 'push' && 'forzar' || '' }}
+        run: pip install --quiet pillow && python3 herramientas/datos_orbita.py satelites cables ${{ github.event_name == 'push' && 'forzar' || '' }}
 
       # Each OpenStreetMap job on its own, with its own limit: if one is slow, the others are still saved.
       - name: Puntos de internet (OpenStreetMap, una vez por semana)
         timeout-minutes: 8
         continue-on-error: true
-        run: python3 herramientas/datos_orbita.py puntos ${{ github.event_name == 'push' && 'forzar' || '' }}
+        run: pip install --quiet pillow && python3 herramientas/datos_orbita.py puntos ${{ github.event_name == 'push' && 'forzar' || '' }}
 
       - name: Fibra de tierra, borrador y medida (OpenStreetMap, solo a mano o al cambiar la herramienta)
         if: github.event_name != 'schedule'
         timeout-minutes: 25
         continue-on-error: true
-        run: python3 herramientas/datos_orbita.py tierra medir
+        run: pip install --quiet pillow && python3 herramientas/datos_orbita.py tierra medir
 
       # 22 Oct 2026 (owner: «las redes troncales de tierra, las principales… búscalo por todo internet»):
       # AfTerFibre (CC BY 4.0), the OFDS public data and OpenStreetMap, joined in one file

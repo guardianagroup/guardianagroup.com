@@ -1016,7 +1016,48 @@
     }
     f.hidden = false; colocaFicha(x, y);
   }
-  function mira(x, y) {
+  // ---------- a crowded spot (owner, 22 Oct 2026): «se hace muy difícil clicar» ----------
+  // A click near several data centres opens a small list of the ones within reach; it stays until one is chosen
+  // (or Esc / a click elsewhere), and hovering the planet does not replace it meanwhile.
+  let lista = null, fichaFija = false; // fijo: a card chosen from the list stays until the next click
+  function cercanos(x, y, r) {
+    if (!estado.puntos || !PT || !PT.p) return [];
+    const p = P(), G = p.geo, out = [];
+    for (let i = 0; i < PT.p.length; i++) { const v = p.aVista(PT.p[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 <= r * r) out.push([d2, i]); }
+    return out.sort((a, b) => a[0] - b[0]).map((a) => a[1]);
+  }
+  function cierraLista() { if (lista) { lista.remove(); lista = null; } }
+  function abreLista(idx, x, y) {
+    cierraLista(); const f = ficha(); if (f) f.hidden = true;
+    const ciudad = (() => { const c = buscaCentro(x, y); return c >= 0 && LUG && LUG.centros[c] && LUG.centros[c].ciudad ? LUG.centros[c].ciudad : ''; })();
+    lista = document.createElement('div'); lista.className = 'lista-cerca'; lista.setAttribute('role', 'listbox');
+    const t = document.createElement('div'); t.className = 'titulo'; t.textContent = num(idx.length) + ' ' + T(idx.length === 1 ? 'centro de datos' : 'centros de datos') + ' ' + T('aquí') + (ciudad ? ' · ' + ciudad : ''); lista.appendChild(t);
+    const h = document.createElement('p'); h.className = 'pista'; h.textContent = T('Elige uno para ver su ficha.'); lista.appendChild(h);
+    const ul = document.createElement('div'); ul.className = 'filas';
+    for (const i of idx.slice(0, 40)) {
+      const q = PT.p[i], b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'option');
+      b.innerHTML = '<b></b><span></span>'; b.querySelector('b').textContent = q.n || q.o || T('Centro de datos sin nombre'); b.querySelector('span').textContent = q.n && q.o && q.o !== q.n ? q.o : '';
+      b.addEventListener('mouseenter', () => { puntoMarcado = i; }); // the dot lights up on the planet while you look at the row
+      b.addEventListener('click', (e) => { e.stopPropagation(); const r = b.getBoundingClientRect(); cierraLista(); cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; puntoMarcado = i; fichaLugar('punto', i, r.right + 8, r.top); fichaFija = true; });
+      ul.appendChild(b);
+    }
+    if (idx.length > 40) { const m = document.createElement('p'); m.className = 'pista'; m.textContent = '+' + num(idx.length - 40) + ' · ' + T('acerca más para verlos todos'); ul.appendChild(m); }
+    lista.appendChild(ul);
+    const x0 = document.createElement('button'); x0.type = 'button'; x0.className = 'cerrar'; x0.setAttribute('aria-label', T('Cerrar')); x0.textContent = '×'; x0.addEventListener('click', (e) => { e.stopPropagation(); cierraLista(); }); lista.appendChild(x0);
+    document.body.appendChild(lista);
+    const W = innerWidth, H = innerHeight, r = lista.getBoundingClientRect();
+    lista.style.left = Math.max(8, Math.min(W - r.width - 8, x + 14)) + 'px'; lista.style.top = Math.max(60, Math.min(H - r.height - 8, y - 20)) + 'px';
+    lista.addEventListener('click', (e) => e.stopPropagation());
+  }
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lista) cierraLista(); });
+  function mira(x, y, clic) {
+    if ((lista || fichaFija) && !clic) return; // the list is open, or a card was chosen from it: hovering changes nothing
+    if (clic) {
+      fichaFija = false;
+      const z = P() ? P().geo.R / (P().geo.R0 || 1) : 1, cerca = cercanos(x, y, z >= 8 ? 14 : 22);
+      if (cerca.length >= 2) { abreLista(cerca, x, y); return; }
+      if (lista) cierraLista();
+    }
     if (P() && P().dentro) { if (marcado >= 0 || centroMarcado >= 0 || cableMarcado >= 0 || llegadaMarcada >= 0 || puntoMarcado >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = -1; muestra(-1); } return; }
     const q = buscaPunto(x, y);
     if (q >= 0) { if (marcado >= 0) { marcado = -1; } cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; if (q !== puntoMarcado) { puntoMarcado = q; fichaLugar('punto', q, x, y); } else colocaFicha(x, y); return; }
@@ -1038,7 +1079,7 @@
     fibraMarcada = -1;
     const f = ficha(); if (f && !f.hidden) f.hidden = true;
   }
-  addEventListener('click', (e) => { if (!soloTu && !e.target.closest('header, #puertas, #directo, #lugar, #seccion, .zoom, .conexion')) mira(e.clientX, e.clientY); });
+  addEventListener('click', (e) => { if (!soloTu && !e.target.closest('header, #puertas, #directo, #lugar, #seccion, .zoom, .conexion, .lista-cerca, #sat-ficha')) mira(e.clientX, e.clientY, true); });
   addEventListener('pointermove', (e) => {
     if (pendiente) { pendiente.x = e.clientX; pendiente.y = e.clientY; return; }
     pendiente = { x: e.clientX, y: e.clientY };
@@ -1114,7 +1155,7 @@
     addEventListener('guardiana-idioma', pintaNota);
   }
   let soloTu = false, soloTuPinta = null;
-  function ponSoloTu(on, dibuja) { soloTu = !!on; soloTuPinta = on ? dibuja || null : null; document.body.classList.toggle('solo-tu', soloTu); if (soloTu) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; } pintaNota(); pintaVista(); }
+  function ponSoloTu(on, dibuja) { soloTu = !!on; soloTuPinta = on ? dibuja || null : null; document.body.classList.toggle('solo-tu', soloTu); if (soloTu) { cierraLista(); muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; } pintaNota(); pintaVista(); }
   window.OrbitaCapas = { pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arranca); else arranca();
 })();

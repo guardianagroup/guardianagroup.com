@@ -134,6 +134,30 @@ def satelites():
     return True
 
 
+_AGUA = None
+def en_tierra(p):
+    """Share of a line (sampled every ~10 km) that is on land, by the water mask Órbita ships; 0 when no mask."""
+    global _AGUA
+    if _AGUA is None:
+        try:
+            from fibra_tierra import Agua
+            _AGUA = Agua()
+        except Exception as e:
+            print('sin máscara de agua para los cables:', e); _AGUA = False
+    if not _AGUA or not getattr(_AGUA, 'm', None): return 0.0
+    n = t = 0
+    for a, b in zip(p, p[1:]):
+        k = max(1, int(km(a, b) / 10))
+        for j in range(k):
+            f = j / k; n += 1
+            if not _AGUA.mar(a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f): t += 1
+    return t / n if n else 0.0
+
+def junto_al_mar(p):
+    """True when some point of the line is within about 30 km of the sea (a landing stretch of a real cable)."""
+    if not _AGUA or not getattr(_AGUA, 'm', None): return True
+    return any(_AGUA.mar(x + dx, y + dy) for x, y in p for dx in (-0.3, 0, 0.3) for dy in (-0.3, 0, 0.3))
+
 def km(a, b):
     la1, lo1, la2, lo2 = map(math.radians, (a[1], a[0], b[1], b[0]))
     h = math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2
@@ -379,6 +403,12 @@ out tags geom;'''
             continue
         n = t.get('name') or t.get('name:en') or t.get('seamark:name') or ''
         if any(x in n.lower() for x in ('telegraph', 'telégrafo', 'telegrafo', '1865', '1866', '1858')):
+            continue
+        # 22 Oct 2026 (owner, with a friend: «en el medio de Alemania aparecen cables submarinos»): OpenStreetMap
+        # also tags short river or canal crossings and some land fibre as «underwater»; a way that runs mostly over
+        # land is not a submarine cable. A named one longer than 150 km is kept (the Suez land crossing of real
+        # systems, for example); the rest go.
+        if en_tierra(p) > 0.6 and not (n and (largo >= 150 or junto_al_mar(p))):
             continue
         if n:
             nombres.add(n.strip())
