@@ -1,0 +1,2122 @@
+[
+{
+"nombre": "IX.br São Paulo",
+"ciudad": "São Paulo",
+"pais": "BR",
+"lat": -23.5505,
+"lon": -46.6333,
+"operador": "NIC.br",
+"desde": 2004,
+"nota": "Uno de los mayores puntos de intercambio del mundo por redes participantes y tráfico."
+},
+{
+"nombre": "DE-CIX Frankfurt",
+"ciudad": "Fráncfort",
+"pais": "DE",
+"lat": 50.1109,
+"lon": 8.6821,
+"operador": "DE-CIX",
+"desde": 1995,
+"nota": "Uno de los principales centros mundiales de intercambio de tráfico de Internet."
+},
+{
+"nombre": "AMS-IX",
+"ciudad": "Ámsterdam",
+"pais": "NL",
+"lat": 52.3676,
+"lon": 4.9041,
+"operador": "AMS-IX",
+"desde": 1997,
+"nota": "Uno de los grandes puntos neutros europeos, con numerosas redes internacionales."
+},
+{
+"nombre": "LINX LON1",
+"ciudad": "Londres",
+"pais": "GB",
+"lat": 51.5074,
+"lon": -0.1278,
+"operador": "London Internet Exchange",
+"desde": 1994,
+"nota": "Uno de los principales puntos de interconexión del Reino Unido y Europa."
+},
+{
+"nombre": "Equinix Ashburn",
+"ciudad": "Ashburn",
+"pais": "US",
+"lat": 39.0437,
+"lon": -77.4875,
+"operador": "Equinix",
+"desde": null,
+"nota": "Intercambio situado en uno de los mayores centros de concentración de redes y centros de datos de Estados Unidos."
+},
+{
+"nombre": "JPNAP Tokyo",
+"ciudad": "Tokio",
+"pais": "JP",
+"lat": 35.6762,
+"lon": 139.6503,
+"operador": "Internet Multifeed Co., Ltd.",
+"desde": 2001,
+"nota": "Uno de los principales puntos de intercambio de Japón y Asia oriental."
+},
+{
+"nombre": "HKIX",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.3193,
+"lon": 114.1694,
+"operador": "Hong Kong Internet eXchange Limited",
+"desde": 1995,
+"nota": "Importante punto de intercambio asiático impulsado originalmente por la Universidad China de Hong Kong."
+},
+{
+"nombre": "NAPAfrica Johannesburg",
+"ciudad": "Johannesburgo",
+"pais": "ZA",
+"lat": -26.2041,
+"lon": 28.0473,
+"operador": "NAPAfrica / Teraco",
+"desde": 2012,
+"nota": "Uno de los principales intercambios africanos por redes conectadas."
+},
+{
+"nombre": "NL-ix",
+"ciudad": "La Haya",
+"pais": "NL",
+"lat": 52.0705,
+"lon": 4.3007,
+"operador": "NL-ix",
+"desde": 2002,
+"nota": "Plataforma distribuida que interconecta numerosas redes y ubicaciones europeas."
+},
+{
+"nombre": "GNM-IX",
+"ciudad": "Ámsterdam",
+"pais": "NL",
+"lat": 52.3676,
+"lon": 4.9041,
+"operador": "GNM Internet Exchange",
+"desde": null,
+"nota": "Intercambio neerlandés con una amplia comunidad de redes conectadas."
+},
+{
+"nombre": "IX.br Fortaleza",
+"ciudad": "Fortaleza",
+"pais": "BR",
+"lat": -3.7319,
+"lon": -38.5267,
+"operador": "NIC.br",
+"desde": null,
+"nota": "Importante intercambio brasileño en una ciudad estratégica para las conexiones transatlánticas."
+},
+{
+"nombre": "IX.br Rio de Janeiro",
+"ciudad": "Río de Janeiro",
+"pais": "BR",
+"lat": -22.9068,
+"lon": -43.1729,
+"operador": "NIC.br",
+"desde": null,
+"nota": "Uno de los principales puntos de intercambio del sureste de Brasil."
+},
+{
+"nombre": "MSK-IX",
+"ciudad": "Moscú",
+"pais": "RU",
+"lat": 55.7558,
+"lon": 37.6173,
+"operador": "MSK-IX",
+"desde": 1995,
+"nota": "Importante infraestructura histórica de interconexión de redes en Rusia."
+},
+{
+"nombre": "MIX-IT",
+"ciudad": "Milán",
+"pais": "IT",
+"lat": 45.4642,
+"lon": 9.19,
+"operador": "MIX S.r.l.",
+"desde": 2000,
+"nota": "Uno de los principales intercambios italianos, situado en el centro de conectividad de Milán."
+},
+{
+"nombre": "SIX Seattle",
+"ciudad": "Seattle",
+"pais": "US",
+"lat": 47.6062,
+"lon": -122.3321,
+"operador": "Seattle Internet Exchange",
+"desde": 1997,
+"nota": "Importante punto de interconexión de la costa del Pacífico estadounidense."
+},
+{
+"nombre": "LONAP",
+"ciudad": "Londres",
+"pais": "GB",
+"lat": 51.5074,
+"lon": -0.1278,
+"operador": "LONAP Ltd",
+"desde": 1997,
+"nota": "Alternativa neutral de intercambio de tráfico en Londres."
+},
+{
+"nombre": "LINX LON2",
+"ciudad": "Londres",
+"pais": "GB",
+"lat": 51.5074,
+"lon": -0.1278,
+"operador": "London Internet Exchange",
+"desde": null,
+"nota": "Segunda plataforma de intercambio de LINX en el área de Londres."
+},
+{
+"nombre": "SGIX",
+"ciudad": "Singapur",
+"pais": "SG",
+"lat": 1.3521,
+"lon": 103.8198,
+"operador": "Singapore Internet Exchange Limited",
+"desde": 2009,
+"nota": "Intercambio neutral que facilita la conectividad regional e internacional en Singapur."
+},
+{
+"nombre": "DE-CIX Mumbai",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.076,
+"lon": 72.8777,
+"operador": "DE-CIX India",
+"desde": null,
+"nota": "Uno de los principales intercambios de la India por redes conectadas."
+},
+{
+"nombre": "TorIX",
+"ciudad": "Toronto",
+"pais": "CA",
+"lat": 43.6532,
+"lon": -79.3832,
+"operador": "Toronto Internet Exchange",
+"desde": 1996,
+"nota": "Uno de los principales puntos de intercambio de Canadá."
+},
+{
+"nombre": "NAPAfrica Cape Town",
+"ciudad": "Ciudad del Cabo",
+"pais": "ZA",
+"lat": -33.9249,
+"lon": 18.4241,
+"operador": "NAPAfrica / Teraco",
+"desde": 2012,
+"nota": "Importante plataforma de intercambio de tráfico en el extremo sur de África."
+},
+{
+"nombre": "NaMeX",
+"ciudad": "Roma",
+"pais": "IT",
+"lat": 41.9028,
+"lon": 12.4964,
+"operador": "Namex",
+"desde": 1995,
+"nota": "Uno de los principales puntos neutros italianos, con sede en Roma."
+},
+{
+"nombre": "France-IX Paris",
+"ciudad": "París",
+"pais": "FR",
+"lat": 48.8566,
+"lon": 2.3522,
+"operador": "France-IX",
+"desde": 2010,
+"nota": "Uno de los principales puntos neutros de Francia."
+},
+{
+"nombre": "France-IX Marseille",
+"ciudad": "Marsella",
+"pais": "FR",
+"lat": 43.2965,
+"lon": 5.3698,
+"operador": "France-IX",
+"desde": null,
+"nota": "Interconecta redes en Marsella, importante puerta de conectividad del Mediterráneo."
+},
+{
+"nombre": "Equinix Paris",
+"ciudad": "París",
+"pais": "FR",
+"lat": 48.8566,
+"lon": 2.3522,
+"operador": "Equinix",
+"desde": null,
+"nota": "Facilita el intercambio de tráfico entre redes presentes en el área de París."
+},
+{
+"nombre": "SFINX",
+"ciudad": "París",
+"pais": "FR",
+"lat": 48.8566,
+"lon": 2.3522,
+"operador": "RENATER",
+"desde": null,
+"nota": "Punto de intercambio francés vinculado a la infraestructura académica de RENATER."
+},
+{
+"nombre": "LyonIX",
+"ciudad": "Lyon",
+"pais": "FR",
+"lat": 45.764,
+"lon": 4.8357,
+"operador": "Rezopole",
+"desde": null,
+"nota": "Punto de intercambio regional que facilita la interconexión en Lyon."
+},
+{
+"nombre": "TOUIX",
+"ciudad": "Toulouse",
+"pais": "FR",
+"lat": 43.6047,
+"lon": 1.4442,
+"operador": null,
+"desde": null,
+"nota": "Punto de intercambio regional para redes del área de Toulouse."
+},
+{
+"nombre": "Netnod Stockholm",
+"ciudad": "Estocolmo",
+"pais": "SE",
+"lat": 59.3293,
+"lon": 18.0686,
+"operador": "Netnod",
+"desde": null,
+"nota": "Uno de los principales puntos de intercambio de los países nórdicos."
+},
+{
+"nombre": "STHIX Stockholm",
+"ciudad": "Estocolmo",
+"pais": "SE",
+"lat": 59.3293,
+"lon": 18.0686,
+"operador": "STHIX",
+"desde": null,
+"nota": "Plataforma de intercambio adicional para redes nacionales e internacionales en Estocolmo."
+},
+{
+"nombre": "Netnod Gothenburg",
+"ciudad": "Gotemburgo",
+"pais": "SE",
+"lat": 57.7089,
+"lon": 11.9746,
+"operador": "Netnod",
+"desde": null,
+"nota": "Punto regional de Netnod en la costa occidental de Suecia."
+},
+{
+"nombre": "BCIX",
+"ciudad": "Berlín",
+"pais": "DE",
+"lat": 52.52,
+"lon": 13.405,
+"operador": "BCIX e.V.",
+"desde": 2002,
+"nota": "Intercambio neutral que conecta operadores y proveedores de contenido en Berlín."
+},
+{
+"nombre": "DE-CIX Hamburg",
+"ciudad": "Hamburgo",
+"pais": "DE",
+"lat": 53.5511,
+"lon": 9.9937,
+"operador": "DE-CIX",
+"desde": null,
+"nota": "Punto de intercambio de DE-CIX en el norte de Alemania."
+},
+{
+"nombre": "DE-CIX Düsseldorf",
+"ciudad": "Düsseldorf",
+"pais": "DE",
+"lat": 51.2277,
+"lon": 6.7735,
+"operador": "DE-CIX",
+"desde": null,
+"nota": "Interconecta redes del área industrial y urbana del Rin-Ruhr."
+},
+{
+"nombre": "DE-CIX Munich",
+"ciudad": "Múnich",
+"pais": "DE",
+"lat": 48.1351,
+"lon": 11.582,
+"operador": "DE-CIX",
+"desde": null,
+"nota": "Punto de intercambio de DE-CIX en el sur de Alemania."
+},
+{
+"nombre": "VIX",
+"ciudad": "Viena",
+"pais": "AT",
+"lat": 48.2082,
+"lon": 16.3738,
+"operador": "Universidad de Viena",
+"desde": 1996,
+"nota": "Principal intercambio austríaco y punto de interconexión relevante para Europa central."
+},
+{
+"nombre": "BNIX",
+"ciudad": "Bruselas",
+"pais": "BE",
+"lat": 50.8503,
+"lon": 4.3517,
+"operador": "Belnet",
+"desde": 1995,
+"nota": "Punto nacional de intercambio de Bélgica."
+},
+{
+"nombre": "NIX.CZ",
+"ciudad": "Praga",
+"pais": "CZ",
+"lat": 50.0755,
+"lon": 14.4378,
+"operador": "NIX.CZ",
+"desde": 1996,
+"nota": "Principal plataforma de intercambio neutral de la República Checa."
+},
+{
+"nombre": "Peering.cz",
+"ciudad": "Praga",
+"pais": "CZ",
+"lat": 50.0755,
+"lon": 14.4378,
+"operador": "Peering.cz",
+"desde": null,
+"nota": "Plataforma adicional de interconexión de redes en Praga."
+},
+{
+"nombre": "SwissIX",
+"ciudad": "Zúrich",
+"pais": "CH",
+"lat": 47.3769,
+"lon": 8.5417,
+"operador": "SwissIX",
+"desde": 2001,
+"nota": "Intercambio neutral suizo con presencia en distintas instalaciones de interconexión."
+},
+{
+"nombre": "CIXP",
+"ciudad": "Ginebra",
+"pais": "CH",
+"lat": 46.2044,
+"lon": 6.1432,
+"operador": "CERN",
+"desde": 1996,
+"nota": "Punto de intercambio histórico operado por el CERN en Ginebra."
+},
+{
+"nombre": "INEX",
+"ciudad": "Dublín",
+"pais": "IE",
+"lat": 53.3498,
+"lon": -6.2603,
+"operador": "Internet Neutral Exchange Association",
+"desde": 1996,
+"nota": "Principal plataforma neutral de intercambio de tráfico en Irlanda."
+},
+{
+"nombre": "LINX Manchester",
+"ciudad": "Mánchester",
+"pais": "GB",
+"lat": 53.4808,
+"lon": -2.2426,
+"operador": "London Internet Exchange",
+"desde": null,
+"nota": "Extiende el intercambio neutral de LINX al norte de Inglaterra."
+},
+{
+"nombre": "ESpanix",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.4168,
+"lon": -3.7038,
+"operador": "Asociación ESpanix",
+"desde": 1997,
+"nota": "Punto neutro histórico de España con sede en Madrid."
+},
+{
+"nombre": "DE-CIX Madrid",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.4168,
+"lon": -3.7038,
+"operador": "DE-CIX",
+"desde": 2016,
+"nota": "Importante intercambio que conecta operadores nacionales e internacionales en Madrid."
+},
+{
+"nombre": "CATNIX",
+"ciudad": "Barcelona",
+"pais": "ES",
+"lat": 41.3874,
+"lon": 2.1686,
+"operador": "CSUC",
+"desde": 1999,
+"nota": "Punto neutro de Internet de Cataluña."
+},
+{
+"nombre": "DE-CIX Barcelona",
+"ciudad": "Barcelona",
+"pais": "ES",
+"lat": 41.3874,
+"lon": 2.1686,
+"operador": "DE-CIX",
+"desde": null,
+"nota": "Plataforma de intercambio de DE-CIX en Barcelona."
+},
+{
+"nombre": "GR-IX",
+"ciudad": "Atenas",
+"pais": "GR",
+"lat": 37.9838,
+"lon": 23.7275,
+"operador": "GRNET",
+"desde": null,
+"nota": "Principal punto de intercambio neutral griego."
+},
+{
+"nombre": "FICIX",
+"ciudad": "Helsinki",
+"pais": "FI",
+"lat": 60.1699,
+"lon": 24.9384,
+"operador": "FICIX ry",
+"desde": 1993,
+"nota": "Uno de los intercambios más antiguos del norte de Europa."
+},
+{
+"nombre": "TREX",
+"ciudad": "Tampere",
+"pais": "FI",
+"lat": 61.4978,
+"lon": 23.761,
+"operador": "TREX",
+"desde": null,
+"nota": "Punto de intercambio regional finlandés situado en Tampere."
+},
+{
+"nombre": "DIX",
+"ciudad": "Kongens Lyngby",
+"pais": "DK",
+"lat": 55.7704,
+"lon": 12.5038,
+"operador": "DeiC",
+"desde": 1994,
+"nota": "Punto de intercambio histórico de Dinamarca."
+},
+{
+"nombre": "Netnod Copenhagen",
+"ciudad": "Copenhague",
+"pais": "DK",
+"lat": 55.6761,
+"lon": 12.5683,
+"operador": "Netnod",
+"desde": null,
+"nota": "Plataforma de intercambio de Netnod en la capital danesa."
+},
+{
+"nombre": "NIX Oslo",
+"ciudad": "Oslo",
+"pais": "NO",
+"lat": 59.9139,
+"lon": 10.7522,
+"operador": null,
+"desde": null,
+"nota": "Intercambio histórico utilizado por redes del mercado noruego."
+},
+{
+"nombre": "LU-CIX",
+"ciudad": "Luxemburgo",
+"pais": "LU",
+"lat": 49.6116,
+"lon": 6.1319,
+"operador": "LU-CIX",
+"desde": 2009,
+"nota": "Punto neutro nacional del Gran Ducado de Luxemburgo."
+},
+{
+"nombre": "GigaPIX",
+"ciudad": "Lisboa",
+"pais": "PT",
+"lat": 38.7223,
+"lon": -9.1393,
+"operador": "FCCN / FCT",
+"desde": null,
+"nota": "Punto de intercambio portugués vinculado a la infraestructura nacional de redes."
+},
+{
+"nombre": "TPIX Warsaw",
+"ciudad": "Varsovia",
+"pais": "PL",
+"lat": 52.2297,
+"lon": 21.0122,
+"operador": "Orange Polska",
+"desde": null,
+"nota": "Importante plataforma de intercambio de tráfico en Polonia."
+},
+{
+"nombre": "EPIX Warsaw",
+"ciudad": "Varsovia",
+"pais": "PL",
+"lat": 52.2297,
+"lon": 21.0122,
+"operador": "EPIX",
+"desde": null,
+"nota": "Punto de intercambio polaco con una amplia comunidad de operadores."
+},
+{
+"nombre": "InterLAN-IX",
+"ciudad": "Bucarest",
+"pais": "RO",
+"lat": 44.4268,
+"lon": 26.1025,
+"operador": "InterLAN Internet Exchange",
+"desde": null,
+"nota": "Uno de los principales intercambios neutrales de Rumanía."
+},
+{
+"nombre": "BIX Budapest",
+"ciudad": "Budapest",
+"pais": "HU",
+"lat": 47.4979,
+"lon": 19.0402,
+"operador": "ISZT",
+"desde": 1995,
+"nota": "Principal punto neutro histórico de Hungría."
+},
+{
+"nombre": "CIX Zagreb",
+"ciudad": "Zagreb",
+"pais": "HR",
+"lat": 45.815,
+"lon": 15.9819,
+"operador": "CARNET",
+"desde": 2000,
+"nota": "Punto nacional de intercambio de Croacia."
+},
+{
+"nombre": "SIX Ljubljana",
+"ciudad": "Liubliana",
+"pais": "SI",
+"lat": 46.0569,
+"lon": 14.5058,
+"operador": "ARNES",
+"desde": null,
+"nota": "Intercambio nacional esloveno que mantiene tráfico local entre redes."
+},
+{
+"nombre": "BIX.BG",
+"ciudad": "Sofía",
+"pais": "BG",
+"lat": 42.6977,
+"lon": 23.3219,
+"operador": "BIX.BG",
+"desde": null,
+"nota": "Plataforma de intercambio neutral de Bulgaria."
+},
+{
+"nombre": "SIX Bratislava",
+"ciudad": "Bratislava",
+"pais": "SK",
+"lat": 48.1486,
+"lon": 17.1077,
+"operador": "Universidad Eslovaca de Tecnología",
+"desde": 1996,
+"nota": "Punto de intercambio histórico de Eslovaquia."
+},
+{
+"nombre": "KOSIX",
+"ciudad": "Pristina",
+"pais": "XK",
+"lat": 42.6629,
+"lon": 21.1655,
+"operador": null,
+"desde": null,
+"nota": "Infraestructura de intercambio de tráfico entre redes de Kosovo."
+},
+{
+"nombre": "ARMIX",
+"ciudad": "Ereván",
+"pais": "AM",
+"lat": 40.1792,
+"lon": 44.4991,
+"operador": "ARMIX Foundation",
+"desde": null,
+"nota": "Punto de intercambio que facilita el tráfico nacional en Armenia."
+},
+{
+"nombre": "TLLIX",
+"ciudad": "Tallin",
+"pais": "EE",
+"lat": 59.437,
+"lon": 24.7536,
+"operador": null,
+"desde": null,
+"nota": "Punto de intercambio de redes en la capital de Estonia."
+},
+{
+"nombre": "LIX Riga",
+"ciudad": "Riga",
+"pais": "LV",
+"lat": 56.9496,
+"lon": 24.1052,
+"operador": null,
+"desde": null,
+"nota": "Infraestructura de intercambio de tráfico local en Letonia."
+},
+{
+"nombre": "LIXP Vilnius",
+"ciudad": "Vilna",
+"pais": "LT",
+"lat": 54.6872,
+"lon": 25.2797,
+"operador": null,
+"desde": null,
+"nota": "Punto de intercambio de tráfico entre redes lituanas."
+},
+{
+"nombre": "CyIX",
+"ciudad": "Nicosia",
+"pais": "CY",
+"lat": 35.1856,
+"lon": 33.3823,
+"operador": null,
+"desde": null,
+"nota": "Punto de intercambio de tráfico en Chipre."
+},
+{
+"nombre": "TOP-IX",
+"ciudad": "Turín",
+"pais": "IT",
+"lat": 45.0703,
+"lon": 7.6869,
+"operador": "Consorzio TOP-IX",
+"desde": 2002,
+"nota": "Intercambio regional del noroeste de Italia."
+},
+{
+"nombre": "VSIX",
+"ciudad": "Padua",
+"pais": "IT",
+"lat": 45.4064,
+"lon": 11.8768,
+"operador": "Universidad de Padua",
+"desde": null,
+"nota": "Punto de intercambio de tráfico del noreste italiano."
+},
+{
+"nombre": "DE-CIX Palermo",
+"ciudad": "Palermo",
+"pais": "IT",
+"lat": 38.1157,
+"lon": 13.3615,
+"operador": "DE-CIX",
+"desde": null,
+"nota": "Punto mediterráneo de intercambio ubicado en Sicilia."
+},
+{
+"nombre": "DE-CIX New York",
+"ciudad": "Nueva York",
+"pais": "US",
+"lat": 40.7128,
+"lon": -74.006,
+"operador": "DE-CIX",
+"desde": 2014,
+"nota": "Importante intercambio neutral del área metropolitana de Nueva York."
+},
+{
+"nombre": "NYIIX",
+"ciudad": "Nueva York",
+"pais": "US",
+"lat": 40.7128,
+"lon": -74.006,
+"operador": "Telehouse",
+"desde": null,
+"nota": "Intercambio de tráfico histórico del mercado de Nueva York."
+},
+{
+"nombre": "LINX NoVA",
+"ciudad": "Ashburn",
+"pais": "US",
+"lat": 39.0437,
+"lon": -77.4875,
+"operador": "London Internet Exchange",
+"desde": 2014,
+"nota": "Plataforma de LINX en el importante centro de conectividad del norte de Virginia."
+},
+{
+"nombre": "FL-IX",
+"ciudad": "Miami",
+"pais": "US",
+"lat": 25.7617,
+"lon": -80.1918,
+"operador": "Florida Internet Exchange",
+"desde": null,
+"nota": "Intercambio neutral en una puerta de conectividad entre Norteamérica, Latinoamérica y el Caribe."
+},
+{
+"nombre": "MICE",
+"ciudad": "Mineápolis",
+"pais": "US",
+"lat": 44.9778,
+"lon": -93.265,
+"operador": "Midwest Internet Cooperative Exchange",
+"desde": null,
+"nota": "Intercambio comunitario de redes de la región central de Estados Unidos."
+},
+{
+"nombre": "NWAX",
+"ciudad": "Portland",
+"pais": "US",
+"lat": 45.5152,
+"lon": -122.6784,
+"operador": "Northwest Access Exchange",
+"desde": null,
+"nota": "Intercambio del noroeste estadounidense."
+},
+{
+"nombre": "Any2 Los Angeles",
+"ciudad": "Los Ángeles",
+"pais": "US",
+"lat": 34.0522,
+"lon": -118.2437,
+"operador": "CoreSite",
+"desde": null,
+"nota": "Punto de intercambio importante en el mercado de conectividad de Los Ángeles."
+},
+{
+"nombre": "SFMIX",
+"ciudad": "San Francisco",
+"pais": "US",
+"lat": 37.7749,
+"lon": -122.4194,
+"operador": "SFMIX",
+"desde": null,
+"nota": "Intercambio neutral del área de la bahía de San Francisco."
+},
+{
+"nombre": "FCIX",
+"ciudad": "Fremont",
+"pais": "US",
+"lat": 37.5483,
+"lon": -121.9886,
+"operador": "Fremont Cabal Internet Exchange",
+"desde": null,
+"nota": "Punto de intercambio comunitario en el área de la bahía de San Francisco."
+},
+{
+"nombre": "DE-CIX Chicago",
+"ciudad": "Chicago",
+"pais": "US",
+"lat": 41.8781,
+"lon": -87.6298,
+"operador": "DE-CIX",
+"desde": null,
+"nota": "Intercambio neutral en uno de los grandes mercados de conectividad del interior estadounidense."
+},
+{
+"nombre": "Equinix Chicago",
+"ciudad": "Chicago",
+"pais": "US",
+"lat": 41.8781,
+"lon": -87.6298,
+"operador": "Equinix",
+"desde": null,
+"nota": "Plataforma de intercambio entre redes alojadas en el mercado de Chicago."
+},
+{
+"nombre": "Equinix Dallas",
+"ciudad": "Dallas",
+"pais": "US",
+"lat": 32.7767,
+"lon": -96.797,
+"operador": "Equinix",
+"desde": null,
+"nota": "Interconexión de redes en uno de los principales centros digitales de Texas."
+},
+{
+"nombre": "Equinix Miami",
+"ciudad": "Miami",
+"pais": "US",
+"lat": 25.7617,
+"lon": -80.1918,
+"operador": "Equinix",
+"desde": null,
+"nota": "Plataforma de intercambio en un centro estratégico para las comunicaciones con América Latina."
+},
+{
+"nombre": "Equinix Los Angeles",
+"ciudad": "Los Ángeles",
+"pais": "US",
+"lat": 34.0522,
+"lon": -118.2437,
+"operador": "Equinix",
+"desde": null,
+"nota": "Intercambio del mercado californiano con conectividad internacional."
+},
+{
+"nombre": "VANIX",
+"ciudad": "Vancouver",
+"pais": "CA",
+"lat": 49.2827,
+"lon": -123.1207,
+"operador": "Vancouver Internet Exchange",
+"desde": null,
+"nota": "Principal punto neutro comunitario del área de Vancouver."
+},
+{
+"nombre": "QIX",
+"ciudad": "Montreal",
+"pais": "CA",
+"lat": 45.5017,
+"lon": -73.5673,
+"operador": "Quebec Internet Exchange",
+"desde": 1995,
+"nota": "Intercambio neutral de Quebec y del mercado de Montreal."
+},
+{
+"nombre": "YYCIX",
+"ciudad": "Calgary",
+"pais": "CA",
+"lat": 51.0447,
+"lon": -114.0719,
+"operador": "Calgary Internet Exchange",
+"desde": null,
+"nota": "Punto de intercambio regional de Alberta."
+},
+{
+"nombre": "YEGIX",
+"ciudad": "Edmonton",
+"pais": "CA",
+"lat": 53.5461,
+"lon": -113.4938,
+"operador": "Edmonton Internet Exchange",
+"desde": null,
+"nota": "Intercambio de redes de Edmonton y su región."
+},
+{
+"nombre": "MBIX",
+"ciudad": "Winnipeg",
+"pais": "CA",
+"lat": 49.8951,
+"lon": -97.1384,
+"operador": "Manitoba Internet Exchange",
+"desde": null,
+"nota": "Punto de intercambio neutral de Manitoba."
+},
+{
+"nombre": "HFXIX",
+"ciudad": "Halifax",
+"pais": "CA",
+"lat": 44.6488,
+"lon": -63.5752,
+"operador": "Halifax Internet Exchange",
+"desde": null,
+"nota": "Punto regional de intercambio de redes del Canadá atlántico."
+},
+{
+"nombre": "ONIX",
+"ciudad": "Toronto",
+"pais": "CA",
+"lat": 43.6532,
+"lon": -79.3832,
+"operador": "Ontario Internet Exchange",
+"desde": null,
+"nota": "Plataforma adicional de intercambio en el área metropolitana de Toronto."
+},
+{
+"nombre": "OGIX",
+"ciudad": "Ottawa",
+"pais": "CA",
+"lat": 45.4215,
+"lon": -75.6972,
+"operador": "Ottawa-Gatineau Internet Exchange",
+"desde": null,
+"nota": "Punto de intercambio del área de Ottawa y Gatineau."
+},
+{
+"nombre": "IX.br Brasília",
+"ciudad": "Brasilia",
+"pais": "BR",
+"lat": -15.7939,
+"lon": -47.8828,
+"operador": "NIC.br",
+"desde": null,
+"nota": "Punto de intercambio de IX.br en la capital federal de Brasil."
+},
+{
+"nombre": "IX.br Porto Alegre",
+"ciudad": "Porto Alegre",
+"pais": "BR",
+"lat": -30.0346,
+"lon": -51.2177,
+"operador": "NIC.br",
+"desde": null,
+"nota": "Importante punto regional de intercambio del sur de Brasil."
+},
+{
+"nombre": "IX.br Curitiba",
+"ciudad": "Curitiba",
+"pais": "BR",
+"lat": -25.4284,
+"lon": -49.2733,
+"operador": "NIC.br",
+"desde": null,
+"nota": "Interconecta redes del estado de Paraná."
+},
+{
+"nombre": "IX.br Recife",
+"ciudad": "Recife",
+"pais": "BR",
+"lat": -8.0476,
+"lon": -34.877,
+"operador": "NIC.br",
+"desde": null,
+"nota": "Punto de intercambio importante del nordeste brasileño."
+},
+{
+"nombre": "IX.br Salvador",
+"ciudad": "Salvador",
+"pais": "BR",
+"lat": -12.9777,
+"lon": -38.5016,
+"operador": "NIC.br",
+"desde": null,
+"nota": "Intercambio de tráfico del estado de Bahía."
+},
+{
+"nombre": "IX.br Manaus",
+"ciudad": "Manaos",
+"pais": "BR",
+"lat": -3.119,
+"lon": -60.0217,
+"operador": "NIC.br",
+"desde": null,
+"nota": "Punto de intercambio de IX.br para redes de la Amazonía brasileña."
+},
+{
+"nombre": "IX.br Belo Horizonte",
+"ciudad": "Belo Horizonte",
+"pais": "BR",
+"lat": -19.9167,
+"lon": -43.9345,
+"operador": "NIC.br",
+"desde": null,
+"nota": "Intercambio de tráfico entre redes del estado de Minas Gerais."
+},
+{
+"nombre": "IX.br Belém",
+"ciudad": "Belém",
+"pais": "BR",
+"lat": -1.4558,
+"lon": -48.4902,
+"operador": "NIC.br",
+"desde": null,
+"nota": "Punto de intercambio regional en el norte de Brasil."
+},
+{
+"nombre": "IX.br Campinas",
+"ciudad": "Campinas",
+"pais": "BR",
+"lat": -22.9099,
+"lon": -47.0626,
+"operador": "NIC.br",
+"desde": null,
+"nota": "Plataforma de intercambio en el interior del estado de São Paulo."
+},
+{
+"nombre": "IX.br Florianópolis",
+"ciudad": "Florianópolis",
+"pais": "BR",
+"lat": -27.5949,
+"lon": -48.5482,
+"operador": "NIC.br",
+"desde": null,
+"nota": "Punto de intercambio del estado de Santa Catarina."
+},
+{
+"nombre": "CABASE Buenos Aires",
+"ciudad": "Buenos Aires",
+"pais": "AR",
+"lat": -34.6037,
+"lon": -58.3816,
+"operador": "CABASE",
+"desde": null,
+"nota": "Intercambio del principal mercado argentino de conectividad."
+},
+{
+"nombre": "CABASE Córdoba",
+"ciudad": "Córdoba",
+"pais": "AR",
+"lat": -31.4201,
+"lon": -64.1888,
+"operador": "CABASE",
+"desde": null,
+"nota": "Punto regional de interconexión de operadores argentinos."
+},
+{
+"nombre": "CABASE Rosario",
+"ciudad": "Rosario",
+"pais": "AR",
+"lat": -32.9442,
+"lon": -60.6505,
+"operador": "CABASE",
+"desde": null,
+"nota": "Intercambio regional en una de las principales ciudades argentinas."
+},
+{
+"nombre": "CABASE Mendoza",
+"ciudad": "Mendoza",
+"pais": "AR",
+"lat": -32.8895,
+"lon": -68.8458,
+"operador": "CABASE",
+"desde": null,
+"nota": "Punto regional que facilita el intercambio de tráfico en el oeste argentino."
+},
+{
+"nombre": "PIT Chile",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.4489,
+"lon": -70.6693,
+"operador": "PIT Chile",
+"desde": null,
+"nota": "Importante plataforma neutral de intercambio de tráfico en Chile."
+},
+{
+"nombre": "NAP Chile",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.4489,
+"lon": -70.6693,
+"operador": "NAP Chile",
+"desde": null,
+"nota": "Intercambio de tráfico entre operadores del mercado chileno."
+},
+{
+"nombre": "NAP Colombia",
+"ciudad": "Bogotá",
+"pais": "CO",
+"lat": 4.711,
+"lon": -74.0721,
+"operador": "CCIT",
+"desde": null,
+"nota": "Punto nacional de intercambio que interconecta redes colombianas."
+},
+{
+"nombre": "PIT Colombia Bogotá",
+"ciudad": "Bogotá",
+"pais": "CO",
+"lat": 4.711,
+"lon": -74.0721,
+"operador": "PIT Colombia",
+"desde": null,
+"nota": "Plataforma alternativa de intercambio de tráfico en la capital colombiana."
+},
+{
+"nombre": "PIT Colombia Medellín",
+"ciudad": "Medellín",
+"pais": "CO",
+"lat": 6.2442,
+"lon": -75.5812,
+"operador": "PIT Colombia",
+"desde": null,
+"nota": "Intercambio regional de redes en Medellín."
+},
+{
+"nombre": "PIT Colombia Cali",
+"ciudad": "Cali",
+"pais": "CO",
+"lat": 3.4516,
+"lon": -76.532,
+"operador": "PIT Colombia",
+"desde": null,
+"nota": "Punto de intercambio regional del suroccidente colombiano."
+},
+{
+"nombre": "PIT Colombia Barranquilla",
+"ciudad": "Barranquilla",
+"pais": "CO",
+"lat": 10.9639,
+"lon": -74.7964,
+"operador": "PIT Colombia",
+"desde": null,
+"nota": "Punto de intercambio regional en la costa Caribe colombiana."
+},
+{
+"nombre": "CRIX",
+"ciudad": "San José",
+"pais": "CR",
+"lat": 9.9281,
+"lon": -84.0907,
+"operador": "NIC Costa Rica",
+"desde": null,
+"nota": "Intercambio neutral de tráfico entre redes de Costa Rica."
+},
+{
+"nombre": "NAP.EC Quito",
+"ciudad": "Quito",
+"pais": "EC",
+"lat": -0.1807,
+"lon": -78.4678,
+"operador": "AEPROVI",
+"desde": null,
+"nota": "Punto de intercambio nacional ecuatoriano en Quito."
+},
+{
+"nombre": "NAP.EC Guayaquil",
+"ciudad": "Guayaquil",
+"pais": "EC",
+"lat": -2.1894,
+"lon": -79.8891,
+"operador": "AEPROVI",
+"desde": null,
+"nota": "Intercambio ecuatoriano ubicado en Guayaquil."
+},
+{
+"nombre": "Perú IX Lima",
+"ciudad": "Lima",
+"pais": "PE",
+"lat": -12.0464,
+"lon": -77.0428,
+"operador": "Perú IX",
+"desde": null,
+"nota": "Plataforma de intercambio de tráfico local en Lima."
+},
+{
+"nombre": "IX.py",
+"ciudad": "Asunción",
+"pais": "PY",
+"lat": -25.2637,
+"lon": -57.5759,
+"operador": "IX.py",
+"desde": null,
+"nota": "Punto de intercambio de tráfico de Paraguay."
+},
+{
+"nombre": "IX.gt",
+"ciudad": "Ciudad de Guatemala",
+"pais": "GT",
+"lat": 14.6349,
+"lon": -90.5069,
+"operador": null,
+"desde": null,
+"nota": "Infraestructura de interconexión de redes en Guatemala."
+},
+{
+"nombre": "NAP del Caribe",
+"ciudad": "Santo Domingo",
+"pais": "DO",
+"lat": 18.4861,
+"lon": -69.9312,
+"operador": "NAP del Caribe",
+"desde": null,
+"nota": "Intercambio y centro de conectividad del Caribe."
+},
+{
+"nombre": "InterRed",
+"ciudad": "Ciudad de Panamá",
+"pais": "PA",
+"lat": 8.9824,
+"lon": -79.5199,
+"operador": "InterRed",
+"desde": null,
+"nota": "Punto de intercambio de tráfico en Panamá."
+},
+{
+"nombre": "AMS-IX Caribbean",
+"ciudad": "Willemstad",
+"pais": "CW",
+"lat": 12.1224,
+"lon": -68.8824,
+"operador": "AMS-IX Caribbean",
+"desde": null,
+"nota": "Intercambio regional del Caribe con sede en Curazao."
+},
+{
+"nombre": "IXP Yucatán",
+"ciudad": "Mérida",
+"pais": "MX",
+"lat": 20.9674,
+"lon": -89.5926,
+"operador": null,
+"desde": null,
+"nota": "Punto de intercambio regional de la península de Yucatán."
+},
+{
+"nombre": "IXPN Lagos",
+"ciudad": "Lagos",
+"pais": "NG",
+"lat": 6.5244,
+"lon": 3.3792,
+"operador": "Internet Exchange Point of Nigeria",
+"desde": 2007,
+"nota": "Uno de los principales intercambios de Internet de África occidental."
+},
+{
+"nombre": "KIXP Nairobi",
+"ciudad": "Nairobi",
+"pais": "KE",
+"lat": -1.2864,
+"lon": 36.8172,
+"operador": "TESPOK",
+"desde": 2002,
+"nota": "Importante intercambio de África oriental que favorece el tráfico regional."
+},
+{
+"nombre": "LINX Nairobi",
+"ciudad": "Nairobi",
+"pais": "KE",
+"lat": -1.2864,
+"lon": 36.8172,
+"operador": "London Internet Exchange",
+"desde": 2023,
+"nota": "Plataforma de LINX para interconexión neutral en Kenia."
+},
+{
+"nombre": "LINX Mombasa",
+"ciudad": "Mombasa",
+"pais": "KE",
+"lat": -4.0435,
+"lon": 39.6682,
+"operador": "London Internet Exchange",
+"desde": 2025,
+"nota": "Intercambio en una ciudad estratégica para los cables submarinos de África oriental."
+},
+{
+"nombre": "KIXP Mombasa",
+"ciudad": "Mombasa",
+"pais": "KE",
+"lat": -4.0435,
+"lon": 39.6682,
+"operador": "TESPOK",
+"desde": 2014,
+"nota": "Extensión del intercambio keniano hacia la costa del océano Índico."
+},
+{
+"nombre": "CINX",
+"ciudad": "Ciudad del Cabo",
+"pais": "ZA",
+"lat": -33.9249,
+"lon": 18.4241,
+"operador": "INX-ZA",
+"desde": 1997,
+"nota": "Punto neutral histórico de intercambio de redes en Sudáfrica."
+},
+{
+"nombre": "JINX",
+"ciudad": "Johannesburgo",
+"pais": "ZA",
+"lat": -26.2041,
+"lon": 28.0473,
+"operador": "INX-ZA",
+"desde": 1996,
+"nota": "Uno de los intercambios más antiguos de África."
+},
+{
+"nombre": "DINX",
+"ciudad": "Durban",
+"pais": "ZA",
+"lat": -29.8587,
+"lon": 31.0218,
+"operador": "INX-ZA",
+"desde": 2012,
+"nota": "Intercambio neutral de tráfico en la ciudad sudafricana de Durban."
+},
+{
+"nombre": "NAPAfrica Durban",
+"ciudad": "Durban",
+"pais": "ZA",
+"lat": -29.8587,
+"lon": 31.0218,
+"operador": "NAPAfrica / Teraco",
+"desde": 2011,
+"nota": "Plataforma de NAPAfrica en la costa oriental de Sudáfrica."
+},
+{
+"nombre": "GIX Ghana",
+"ciudad": "Accra",
+"pais": "GH",
+"lat": 5.6037,
+"lon": -0.187,
+"operador": "Ghana Internet Exchange",
+"desde": 2005,
+"nota": "Punto nacional de intercambio que permite mantener tráfico entre redes de Ghana."
+},
+{
+"nombre": "UIXP",
+"ciudad": "Kampala",
+"pais": "UG",
+"lat": 0.3476,
+"lon": 32.5825,
+"operador": "Uganda Internet Exchange Point",
+"desde": 2001,
+"nota": "Intercambio neutral histórico de Uganda."
+},
+{
+"nombre": "TIX Tanzania",
+"ciudad": "Dar es-Salam",
+"pais": "TZ",
+"lat": -6.7924,
+"lon": 39.2083,
+"operador": "Tanzania Internet eXchange",
+"desde": 2004,
+"nota": "Principal intercambio histórico de tráfico nacional en Tanzania."
+},
+{
+"nombre": "IXPN Abuja",
+"ciudad": "Abuya",
+"pais": "NG",
+"lat": 9.0765,
+"lon": 7.3986,
+"operador": "Internet Exchange Point of Nigeria",
+"desde": 2011,
+"nota": "Punto de intercambio del operador IXPN en la capital de Nigeria."
+},
+{
+"nombre": "AMS-IX Lagos",
+"ciudad": "Lagos",
+"pais": "NG",
+"lat": 6.5244,
+"lon": 3.3792,
+"operador": "AMS-IX",
+"desde": 2023,
+"nota": "Plataforma de intercambio de AMS-IX en África occidental."
+},
+{
+"nombre": "AF-CIX Lagos",
+"ciudad": "Lagos",
+"pais": "NG",
+"lat": 6.5244,
+"lon": 3.3792,
+"operador": "African Cloud Interconnection Exchange",
+"desde": 2023,
+"nota": "Intercambio de conectividad de redes y servicios digitales en Lagos."
+},
+{
+"nombre": "Angonix",
+"ciudad": "Luanda",
+"pais": "AO",
+"lat": -8.839,
+"lon": 13.2894,
+"operador": "Angonix",
+"desde": 2015,
+"nota": "Importante plataforma de intercambio de tráfico en Angola."
+},
+{
+"nombre": "ANG-IXP",
+"ciudad": "Luanda",
+"pais": "AO",
+"lat": -8.839,
+"lon": 13.2894,
+"operador": null,
+"desde": 2006,
+"nota": "Intercambio nacional histórico de Angola."
+},
+{
+"nombre": "CAIX",
+"ciudad": "El Cairo",
+"pais": "EG",
+"lat": 30.0444,
+"lon": 31.2357,
+"operador": "Telecom Egypt",
+"desde": 2002,
+"nota": "Punto histórico de intercambio de tráfico de Internet en Egipto."
+},
+{
+"nombre": "EG-IX",
+"ciudad": "El Cairo",
+"pais": "EG",
+"lat": 30.0444,
+"lon": 31.2357,
+"operador": null,
+"desde": 2022,
+"nota": "Plataforma de intercambio de redes en El Cairo."
+},
+{
+"nombre": "AMS-IX Djibouti",
+"ciudad": "Yibuti",
+"pais": "DJ",
+"lat": 11.5721,
+"lon": 43.1456,
+"operador": "AMS-IX",
+"desde": 2016,
+"nota": "Intercambio en un importante punto de llegada de cables submarinos del mar Rojo."
+},
+{
+"nombre": "CIVIX",
+"ciudad": "Abiyán",
+"pais": "CI",
+"lat": 5.36,
+"lon": -4.0083,
+"operador": "CIVIX",
+"desde": 2013,
+"nota": "Punto de intercambio de tráfico de Costa de Marfil."
+},
+{
+"nombre": "RINEX",
+"ciudad": "Kigali",
+"pais": "RW",
+"lat": -1.9441,
+"lon": 30.0619,
+"operador": "Rwanda Internet Exchange",
+"desde": 2004,
+"nota": "Punto nacional que facilita el intercambio local de tráfico en Ruanda."
+},
+{
+"nombre": "BENINIX",
+"ciudad": "Cotonú",
+"pais": "BJ",
+"lat": 6.3703,
+"lon": 2.3912,
+"operador": null,
+"desde": 2013,
+"nota": "Punto nacional de intercambio de tráfico de Benín."
+},
+{
+"nombre": "BFIX",
+"ciudad": "Uagadugú",
+"pais": "BF",
+"lat": 12.3714,
+"lon": -1.5197,
+"operador": null,
+"desde": 2015,
+"nota": "Infraestructura de intercambio nacional de Burkina Faso."
+},
+{
+"nombre": "CAMIX Douala",
+"ciudad": "Duala",
+"pais": "CM",
+"lat": 4.0511,
+"lon": 9.7679,
+"operador": "CAMIX",
+"desde": 2016,
+"nota": "Intercambio de redes camerunesas en la principal ciudad comercial del país."
+},
+{
+"nombre": "KINIX",
+"ciudad": "Kinsasa",
+"pais": "CD",
+"lat": -4.4419,
+"lon": 15.2663,
+"operador": "ISPA-DRC",
+"desde": 2012,
+"nota": "Punto de intercambio de tráfico de la República Democrática del Congo."
+},
+{
+"nombre": "MOZIX",
+"ciudad": "Maputo",
+"pais": "MZ",
+"lat": -25.9692,
+"lon": 32.5732,
+"operador": "MOZIX",
+"desde": 2002,
+"nota": "Punto nacional de intercambio de Mozambique."
+},
+{
+"nombre": "IXWHK",
+"ciudad": "Windhoek",
+"pais": "NA",
+"lat": -22.5609,
+"lon": 17.0658,
+"operador": null,
+"desde": 2014,
+"nota": "Punto de intercambio nacional de Namibia."
+},
+{
+"nombre": "MIXP Mauritius",
+"ciudad": "Ebene",
+"pais": "MU",
+"lat": -20.244,
+"lon": 57.489,
+"operador": "Mauritius Internet Exchange Point",
+"desde": 2008,
+"nota": "Intercambio de redes de Mauricio en el océano Índico."
+},
+{
+"nombre": "BIXP Botswana",
+"ciudad": "Gaborone",
+"pais": "BW",
+"lat": -24.6282,
+"lon": 25.9231,
+"operador": "Botswana Internet Exchange",
+"desde": 2005,
+"nota": "Punto nacional de intercambio de Botsuana."
+},
+{
+"nombre": "SENIX",
+"ciudad": "Dakar",
+"pais": "SN",
+"lat": 14.7167,
+"lon": -17.4677,
+"operador": "Senegal Internet Exchange",
+"desde": 2017,
+"nota": "Intercambio nacional para redes de Senegal."
+},
+{
+"nombre": "GABIX",
+"ciudad": "Libreville",
+"pais": "GA",
+"lat": 0.3924,
+"lon": 9.4536,
+"operador": "Gabon Internet Exchange",
+"desde": 2014,
+"nota": "Punto nacional de intercambio de tráfico de Gabón."
+},
+{
+"nombre": "LIXP Lesotho",
+"ciudad": "Maseru",
+"pais": "LS",
+"lat": -29.3151,
+"lon": 27.4869,
+"operador": null,
+"desde": 2011,
+"nota": "Intercambio nacional de Lesoto."
+},
+{
+"nombre": "TGIX",
+"ciudad": "Lomé",
+"pais": "TG",
+"lat": 6.1375,
+"lon": 1.2123,
+"operador": "Togo Internet Exchange Point",
+"desde": 2017,
+"nota": "Punto nacional de intercambio de Togo."
+},
+{
+"nombre": "Lusaka IXP",
+"ciudad": "Lusaka",
+"pais": "ZM",
+"lat": -15.3875,
+"lon": 28.3228,
+"operador": "Lusaka Internet Exchange Point",
+"desde": 2022,
+"nota": "Intercambio de redes en la capital de Zambia."
+},
+{
+"nombre": "TunIXP",
+"ciudad": "Túnez",
+"pais": "TN",
+"lat": 36.8065,
+"lon": 10.1815,
+"operador": "Agence Tunisienne d'Internet",
+"desde": 2011,
+"nota": "Punto de intercambio de tráfico de Internet en Túnez."
+},
+{
+"nombre": "LIONEX",
+"ciudad": "Lilongüe",
+"pais": "MW",
+"lat": -13.9626,
+"lon": 33.7741,
+"operador": "Lilongwe Open Neutral Internet Exchange",
+"desde": 2024,
+"nota": "Intercambio neutral establecido en la capital de Malaui."
+},
+{
+"nombre": "UAE-IX",
+"ciudad": "Dubái",
+"pais": "AE",
+"lat": 25.2048,
+"lon": 55.2708,
+"operador": "DE-CIX / datamena",
+"desde": 2012,
+"nota": "Importante plataforma de interconexión de redes de Oriente Medio."
+},
+{
+"nombre": "SAIX Riyadh",
+"ciudad": "Riad",
+"pais": "SA",
+"lat": 24.7136,
+"lon": 46.6753,
+"operador": "Saudi Arabian Internet Exchange",
+"desde": null,
+"nota": "Punto de intercambio de tráfico de Internet en la capital saudí."
+},
+{
+"nombre": "SAIX Jeddah",
+"ciudad": "Yeda",
+"pais": "SA",
+"lat": 21.4858,
+"lon": 39.1925,
+"operador": "Saudi Arabian Internet Exchange",
+"desde": null,
+"nota": "Plataforma saudí de intercambio de tráfico en la costa del mar Rojo."
+},
+{
+"nombre": "center3 IX Jeddah",
+"ciudad": "Yeda",
+"pais": "SA",
+"lat": 21.4858,
+"lon": 39.1925,
+"operador": "center3 / LINX",
+"desde": null,
+"nota": "Intercambio operado con tecnología y colaboración de LINX en Arabia Saudí."
+},
+{
+"nombre": "Oman-IX",
+"ciudad": "Mascate",
+"pais": "OM",
+"lat": 23.588,
+"lon": 58.3829,
+"operador": "Oman-IX / Awasr / Alliance Networks / AMS-IX",
+"desde": 2023,
+"nota": "Punto neutral de intercambio de tráfico y contenido en Omán."
+},
+{
+"nombre": "Equinix Muscat",
+"ciudad": "Mascate",
+"pais": "OM",
+"lat": 23.588,
+"lon": 58.3829,
+"operador": "Equinix",
+"desde": null,
+"nota": "Plataforma de interconexión de redes del mercado omaní."
+},
+{
+"nombre": "IIX Israel",
+"ciudad": "Petaj Tikva",
+"pais": "IL",
+"lat": 32.084,
+"lon": 34.8878,
+"operador": "Israel Internet Association",
+"desde": 1996,
+"nota": "Intercambio histórico destinado a facilitar el tráfico entre proveedores israelíes."
+},
+{
+"nombre": "IL-IX",
+"ciudad": null,
+"pais": "IL",
+"lat": null,
+"lon": null,
+"operador": "Israel Internet Association Services Ltd.",
+"desde": 2025,
+"nota": "Nueva plataforma multisede de interconexión neutral de Israel."
+},
+{
+"nombre": "DE-CIX Istanbul",
+"ciudad": "Estambul",
+"pais": "TR",
+"lat": 41.0082,
+"lon": 28.9784,
+"operador": "DE-CIX",
+"desde": 2015,
+"nota": "Intercambio neutral en una ciudad situada entre Europa y Asia."
+},
+{
+"nombre": "JPNAP Osaka",
+"ciudad": "Osaka",
+"pais": "JP",
+"lat": 34.6937,
+"lon": 135.5023,
+"operador": "Internet Multifeed Co., Ltd.",
+"desde": null,
+"nota": "Punto de intercambio de JPNAP en el oeste de Japón."
+},
+{
+"nombre": "JPNAP Fukuoka",
+"ciudad": "Fukuoka",
+"pais": "JP",
+"lat": 33.5904,
+"lon": 130.4017,
+"operador": "Internet Multifeed Co., Ltd.",
+"desde": null,
+"nota": "Extiende la interconexión de JPNAP al suroeste de Japón."
+},
+{
+"nombre": "JPIX Tokyo",
+"ciudad": "Tokio",
+"pais": "JP",
+"lat": 35.6762,
+"lon": 139.6503,
+"operador": "JPIX Inc.",
+"desde": null,
+"nota": "Uno de los intercambios comerciales más importantes de Japón."
+},
+{
+"nombre": "JPIX Osaka",
+"ciudad": "Osaka",
+"pais": "JP",
+"lat": 34.6937,
+"lon": 135.5023,
+"operador": "JPIX Inc.",
+"desde": null,
+"nota": "Punto de interconexión de JPIX en Osaka."
+},
+{
+"nombre": "BBIX Tokyo",
+"ciudad": "Tokio",
+"pais": "JP",
+"lat": 35.6762,
+"lon": 139.6503,
+"operador": "BBIX Inc.",
+"desde": null,
+"nota": "Plataforma de intercambio comercial del mercado japonés."
+},
+{
+"nombre": "KINX",
+"ciudad": "Seúl",
+"pais": "KR",
+"lat": 37.5665,
+"lon": 126.978,
+"operador": "KINX Inc.",
+"desde": 2000,
+"nota": "Importante punto de intercambio neutral de Corea del Sur."
+},
+{
+"nombre": "NIXI Delhi",
+"ciudad": "Nueva Delhi",
+"pais": "IN",
+"lat": 28.6139,
+"lon": 77.209,
+"operador": "National Internet Exchange of India",
+"desde": null,
+"nota": "Punto de intercambio de la infraestructura nacional india."
+},
+{
+"nombre": "NIXI Mumbai",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.076,
+"lon": 72.8777,
+"operador": "National Internet Exchange of India",
+"desde": null,
+"nota": "Intercambio nacional de la India en Bombay."
+},
+{
+"nombre": "NIXI Chennai",
+"ciudad": "Chennai",
+"pais": "IN",
+"lat": 13.0827,
+"lon": 80.2707,
+"operador": "National Internet Exchange of India",
+"desde": null,
+"nota": "Plataforma de intercambio nacional de la India en Chennai."
+},
+{
+"nombre": "Extreme IX Mumbai",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.076,
+"lon": 72.8777,
+"operador": "Extreme Internet Exchange",
+"desde": null,
+"nota": "Plataforma comercial de intercambio de tráfico en el mercado indio."
+},
+{
+"nombre": "IIX Jakarta",
+"ciudad": "Yakarta",
+"pais": "ID",
+"lat": -6.2088,
+"lon": 106.8456,
+"operador": "APJII",
+"desde": null,
+"nota": "Punto de intercambio histórico de Indonesia."
+},
+{
+"nombre": "OpenIXP Jakarta",
+"ciudad": "Yakarta",
+"pais": "ID",
+"lat": -6.2088,
+"lon": 106.8456,
+"operador": null,
+"desde": null,
+"nota": "Intercambio neutral adicional del mercado de Yakarta."
+},
+{
+"nombre": "MyIX Kuala Lumpur",
+"ciudad": "Kuala Lumpur",
+"pais": "MY",
+"lat": 3.139,
+"lon": 101.6869,
+"operador": "Persatuan Pengendali Internet Malaysia",
+"desde": 2006,
+"nota": "Punto de intercambio neutral nacional de Malasia."
+},
+{
+"nombre": "MyIX Johor Bahru",
+"ciudad": "Johor Bahru",
+"pais": "MY",
+"lat": 1.4927,
+"lon": 103.7414,
+"operador": "Persatuan Pengendali Internet Malaysia",
+"desde": null,
+"nota": "Extensión de la infraestructura de intercambio de MyIX en el sur de Malasia."
+},
+{
+"nombre": "Equinix Singapore",
+"ciudad": "Singapur",
+"pais": "SG",
+"lat": 1.3521,
+"lon": 103.8198,
+"operador": "Equinix",
+"desde": null,
+"nota": "Plataforma de interconexión en uno de los principales mercados digitales del sudeste asiático."
+},
+{
+"nombre": "BBIX Singapore",
+"ciudad": "Singapur",
+"pais": "SG",
+"lat": 1.3521,
+"lon": 103.8198,
+"operador": "BBIX Inc.",
+"desde": null,
+"nota": "Extensión internacional de la plataforma de intercambio japonesa BBIX."
+},
+{
+"nombre": "BKNIX",
+"ciudad": "Bangkok",
+"pais": "TH",
+"lat": 13.7563,
+"lon": 100.5018,
+"operador": "THNIC Foundation",
+"desde": 2015,
+"nota": "Punto de intercambio neutral impulsado por THNIC en Tailandia."
+},
+{
+"nombre": "TPIX Taipei",
+"ciudad": "Taipéi",
+"pais": "TW",
+"lat": 25.033,
+"lon": 121.5654,
+"operador": "Chief Telecom",
+"desde": null,
+"nota": "Punto de intercambio de tráfico entre redes en Taiwán."
+},
+{
+"nombre": "BDIX",
+"ciudad": "Daca",
+"pais": "BD",
+"lat": 23.8103,
+"lon": 90.4125,
+"operador": "Bangladesh Internet Exchange",
+"desde": null,
+"nota": "Plataforma de intercambio de tráfico entre redes de Bangladés."
+},
+{
+"nombre": "VNIX Hanoi",
+"ciudad": "Hanói",
+"pais": "VN",
+"lat": 21.0278,
+"lon": 105.8342,
+"operador": "VNNIC",
+"desde": null,
+"nota": "Punto nacional de intercambio de Vietnam en su capital."
+},
+{
+"nombre": "VNIX Ho Chi Minh",
+"ciudad": "Ciudad Ho Chi Minh",
+"pais": "VN",
+"lat": 10.8231,
+"lon": 106.6297,
+"operador": "VNNIC",
+"desde": null,
+"nota": "Intercambio de tráfico nacional de Vietnam en el sur del país."
+},
+{
+"nombre": "NPIX",
+"ciudad": "Katmandú",
+"pais": "NP",
+"lat": 27.7172,
+"lon": 85.324,
+"operador": "Nepal Internet Exchange",
+"desde": null,
+"nota": "Punto nacional de intercambio de tráfico de Nepal."
+},
+{
+"nombre": "PHOpenIX",
+"ciudad": "Manila",
+"pais": "PH",
+"lat": 14.5995,
+"lon": 120.9842,
+"operador": "DOST-ASTI",
+"desde": null,
+"nota": "Punto abierto de intercambio de tráfico impulsado por la infraestructura científica filipina."
+},
+{
+"nombre": "Manila IX",
+"ciudad": "Manila",
+"pais": "PH",
+"lat": 14.5995,
+"lon": 120.9842,
+"operador": "Manila Internet Exchange",
+"desde": null,
+"nota": "Plataforma de intercambio de tráfico entre redes de Filipinas."
+},
+{
+"nombre": "KAZ-IX",
+"ciudad": "Almaty",
+"pais": "KZ",
+"lat": 43.222,
+"lon": 76.8512,
+"operador": null,
+"desde": null,
+"nota": "Infraestructura de intercambio de redes en Kazajistán."
+},
+{
+"nombre": "CNX Cambodia",
+"ciudad": "Nom Pen",
+"pais": "KH",
+"lat": 11.5564,
+"lon": 104.9282,
+"operador": "Cambodian Network Exchange",
+"desde": null,
+"nota": "Intercambio neutral de redes en la capital de Camboya."
+},
+{
+"nombre": "NSW-IX",
+"ciudad": "Sídney",
+"pais": "AU",
+"lat": -33.8688,
+"lon": 151.2093,
+"operador": "IX Australia",
+"desde": null,
+"nota": "Uno de los principales puntos de intercambio de Australia, situado en Nueva Gales del Sur."
+},
+{
+"nombre": "IX-SYD",
+"ciudad": "Sídney",
+"pais": "AU",
+"lat": -33.8688,
+"lon": 151.2093,
+"operador": null,
+"desde": null,
+"nota": "Plataforma adicional de intercambio de tráfico en Sídney."
+},
+{
+"nombre": "VIC-IX",
+"ciudad": "Melbourne",
+"pais": "AU",
+"lat": -37.8136,
+"lon": 144.9631,
+"operador": "IX Australia",
+"desde": null,
+"nota": "Intercambio regional de IX Australia en Victoria."
+},
+{
+"nombre": "IX-MEL",
+"ciudad": "Melbourne",
+"pais": "AU",
+"lat": -37.8136,
+"lon": 144.9631,
+"operador": null,
+"desde": null,
+"nota": "Plataforma de interconexión de redes en Melbourne."
+},
+{
+"nombre": "QLD-IX",
+"ciudad": "Brisbane",
+"pais": "AU",
+"lat": -27.4698,
+"lon": 153.0251,
+"operador": "IX Australia",
+"desde": null,
+"nota": "Punto de intercambio de IX Australia en Queensland."
+},
+{
+"nombre": "IX-BNE",
+"ciudad": "Brisbane",
+"pais": "AU",
+"lat": -27.4698,
+"lon": 153.0251,
+"operador": null,
+"desde": null,
+"nota": "Intercambio adicional del mercado de Brisbane."
+},
+{
+"nombre": "WA-IX",
+"ciudad": "Perth",
+"pais": "AU",
+"lat": -31.9505,
+"lon": 115.8605,
+"operador": "IX Australia",
+"desde": 1997,
+"nota": "Importante intercambio de Australia occidental."
+},
+{
+"nombre": "IX-PER",
+"ciudad": "Perth",
+"pais": "AU",
+"lat": -31.9505,
+"lon": 115.8605,
+"operador": null,
+"desde": null,
+"nota": "Plataforma de intercambio adicional en Australia occidental."
+},
+{
+"nombre": "SA-IX",
+"ciudad": "Adelaida",
+"pais": "AU",
+"lat": -34.9285,
+"lon": 138.6007,
+"operador": "IX Australia",
+"desde": null,
+"nota": "Punto de intercambio regional de Australia meridional."
+},
+{
+"nombre": "ACT-IX",
+"ciudad": "Canberra",
+"pais": "AU",
+"lat": -35.2809,
+"lon": 149.13,
+"operador": "IX Australia",
+"desde": null,
+"nota": "Intercambio de IX Australia en el territorio de la capital."
+},
+{
+"nombre": "AKL-IX",
+"ciudad": "Auckland",
+"pais": "NZ",
+"lat": -36.8485,
+"lon": 174.7633,
+"operador": "NZIX",
+"desde": null,
+"nota": "Uno de los principales intercambios de redes de Nueva Zelanda."
+},
+{
+"nombre": "CHC-IX",
+"ciudad": "Christchurch",
+"pais": "NZ",
+"lat": -43.5321,
+"lon": 172.6362,
+"operador": "NZIX",
+"desde": null,
+"nota": "Punto de intercambio de NZIX en la isla Sur."
+},
+{
+"nombre": "WLG-IX",
+"ciudad": "Wellington",
+"pais": "NZ",
+"lat": -41.2866,
+"lon": 174.7756,
+"operador": "NZIX",
+"desde": null,
+"nota": "Intercambio de NZIX en la capital de Nueva Zelanda."
+},
+{
+"nombre": "APE",
+"ciudad": "Auckland",
+"pais": "NZ",
+"lat": -36.8485,
+"lon": 174.7633,
+"operador": null,
+"desde": null,
+"nota": "Punto histórico de intercambio de tráfico del mercado de Auckland."
+},
+{
+"nombre": "WIX Wellington",
+"ciudad": "Wellington",
+"pais": "NZ",
+"lat": -41.2866,
+"lon": 174.7756,
+"operador": null,
+"desde": null,
+"nota": "Intercambio histórico de redes en Wellington."
+}
+]
