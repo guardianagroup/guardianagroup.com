@@ -17,7 +17,9 @@ que me preguntes más si te doy permiso». Avísale cuando algo quede listo, en 
   salvo las claves más nuevas (ver §6).
 - La web pública `guardianagroup.com` sigue siendo la anterior (portada + botón de descarga beta activo para su amigo). Órbita vive en
   `guardianagroup.com/orbita/` como página **no listada** (meta noindex) para que el dueño y su amigo (pueblo cerca de Praga, Chequia) la vean.
-  Cuando el dueño diga, hay que desactivar los botones de descarga de `index.html` en `main`.
+  **22 Oct 2026, 15:07: el dueño pidió que nadie pueda descargar nada («todo próximamente»)**: en `main` los botones de descarga de
+  `index.html`, `instalar.html`, `en/`, `pt/` y `zero` están desactivados (`is-off`, `data-off`) y la carpeta `descargas/` se eliminó de `main`
+  (sigue en `web-idiomas`). **No copiar nunca `index.html`, `instalar.html`, `en/`, `pt/` ni `descargas/` de `web-idiomas` a `main`** sin volver a desactivarlos.
 
 ## 2. Repositorio y cómo publicar (procedimiento que funciona)
 - Repo `guardianagroup/guardianagroup.com`. GitHub Pages sirve la rama `main`. Se trabaja en la rama **`web-idiomas`** (push autorizado).
@@ -54,7 +56,7 @@ que me preguntes más si te doy permiso». Avísale cuando algo quede listo, en 
 - Ficha de cable: origen/destino/paradas, año, km, distancias punto a punto, dueños, operador, e **incidencias conocidas** (`datos/cables-notas.json`:
   Svalbard 2022, Tonga 2022/2024, C-Lion 1 y BCS East-West 2024, mar Rojo 2024 y 2025, Costa de Marfil 2024, EASSy 2024, SHEFA-2 2022, Balticconnector 2023).
 - «Mi conexión» (conexion.js): datos del propio visitante, Ver/No ver, planeta en modo solo-tú. Puerta ZERO abre la demo `zero/?orbita=1&entrada=0`.
-- Descargas beta 1.0.46 (Windows ES/EN/PT, Mac) en `/descargas/1.0.46/`, enlazadas desde `/instalar.html#descargar` y la portada.
+- Descargas: retiradas de la web el 22 Oct 2026 a las 15:07 (los instaladores 1.0.46 siguen en la rama `web-idiomas`, carpeta `descargas/`).
 
 ## 4. La agencia (cómo se trabaja con ChatGPT, Grok, Gemini)
 - Pestañas del navegador integrado: ChatGPT (`seed`, conversación «Lista cables submarinos África», cuadro `#prompt-textarea` o `[contenteditable=true]`),
@@ -90,7 +92,7 @@ Conjunto ~50–55 %. Orden de prioridad acordado: (1) centros de datos, (2) punt
    «Enlaces locales», «Novedades», «Incidencias conocidas», «Datos en verificación», «Ninguno con nombre en el mapa», «Red móvil», «Operadores»,
    «Fibra al hogar», «Troncales», «Intercambio de internet», y las etiquetas «40.000 km / 500 m» del indicador de altura.
 6. Costas finas para el zoom profundo (opcional, grande): teselas vectoriales de OSM land polygons generadas en el workflow.
-7. Cuando el dueño avise: quitar el botón de descarga de `index.html` en `main`. Artefacto de vista previa https://claude.ai/artifact/2ofNX33VVYed7qwqDxSrqa (v11) desfasado; no es necesario.
+7. (Hecho: descargas retiradas.) Artefacto de vista previa https://claude.ai/artifact/2ofNX33VVYed7qwqDxSrqa (v11) desfasado; no es necesario.
 
 ## 7. Archivos clave
 `orbita/index.html` · `orbita/static/orbita.js` (planeta, zoom, altura, API `OrbitaPlaneta`) · `orbita/static/capas.js` (capas, fichas, país, estaciones, notas)
