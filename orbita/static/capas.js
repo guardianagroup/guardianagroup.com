@@ -189,8 +189,11 @@
   }
   function pintaFibra(cx, p, G) {
     const z = G.R / (G.R0 || G.R), lineas = fibraVisible(z);
+    // 22 Oct 2026: the land fibre is drawn from city to city (its nodes are cities, not street addresses), so below
+    // about 100 km of height the lines would all meet at one false point; they fade out between ×200 and ×600.
+    const fz = z <= 200 ? 1 : Math.max(0, 1 - (z - 200) / 400); if (fz <= 0) return;
     for (const obra of [false, true]) {
-      cx.strokeStyle = `rgba(${ACERO},${obra ? 0.5 : 0.72})`; cx.lineWidth = Math.min(1.8, 0.9 + 0.2 * (z - 1));
+      cx.strokeStyle = `rgba(${ACERO},${(obra ? 0.5 : 0.72) * fz})`; cx.lineWidth = Math.min(1.8, 0.9 + 0.2 * (z - 1));
       cx.setLineDash(obra ? [3, 3] : []);
       cx.beginPath();
       for (const l of lineas) {
