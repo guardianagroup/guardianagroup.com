@@ -1411,8 +1411,11 @@
     const f = ficha(); if (f && !f.hidden) f.hidden = true;
     if (clic && panelModelo) cierraPanel(); // a click on nothing closes the full card
   }
-  addEventListener('click', (e) => { if (!soloTu && !e.target.closest('header, #puertas, #directo, #lugar, #seccion, .zoom, .conexion, .lista-cerca, #sat-ficha, #ficha-panel')) mira(e.clientX, e.clientY, true); });
+  // the interface on top of the planet (layer buttons, satellite filter, gauges…) never reaches the map underneath (owner, 22 Oct 2026, 18:03)
+  const UI_ENCIMA = 'header, #puertas, #directo, #lugar, #seccion, .zoom, .conexion, .lista-cerca, #sat-ficha, #ficha-panel, #capas, #sat-vista, #sat-fase, #capa-nota, .altura, #dato, #viaje, #informe, button, a, select, input, label';
+  addEventListener('click', (e) => { if (!soloTu && !e.target.closest(UI_ENCIMA)) mira(e.clientX, e.clientY, true); });
   addEventListener('pointermove', (e) => {
+    if (e.target && e.target.closest && e.target.closest(UI_ENCIMA)) { if (!fichaFija && (cableMarcado >= 0 || llegadaMarcada >= 0 || centroMarcado >= 0 || fibraMarcada >= 0 || puntoMarcado >= 0 || previstoMarcado >= 0 || estacionMarcada >= 0)) { cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = puntoMarcado = previstoMarcado = estacionMarcada = -1; muestra(-1); } return; }
     if (pendiente) { pendiente.x = e.clientX; pendiente.y = e.clientY; return; }
     pendiente = { x: e.clientX, y: e.clientY };
     requestAnimationFrame(() => { const q = pendiente; pendiente = null; mira(q.x, q.y); });
