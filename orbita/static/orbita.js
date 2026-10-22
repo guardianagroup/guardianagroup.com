@@ -305,7 +305,7 @@
   const zControl = $('zoom'), zNivel = $('zoom-nivel');
   // how far towards the poles the camera may turn: ±60° with the whole planet in view (the poles are then at the limb),
   // up to ±89.5° once zoomed in, so the polar stations can be reached (22 Oct 2026: Antarctica and the Arctic are data too)
-  const latMax = () => ZOOM.z <= 1.5 ? 60 : Math.min(89.5, 60 + 29.5 * Math.min(1, Math.log(ZOOM.z / 1.5) / Math.log(4)));
+  const latMax = () => ZOOM.z <= 1.5 ? 75 : Math.min(89.5, 75 + 14.5 * Math.min(1, Math.log(ZOOM.z / 1.5) / Math.log(4))); // ±75° with the whole planet (both poles in view), to the poles when zoomed
   function acerca(zt, x, y) {
     zt = Math.max(1, Math.min(ZOOM.MAX, zt));
     // 20 Oct 2026 (owner): the zoom stays on the same point; the planet does not turn when you zoom.
