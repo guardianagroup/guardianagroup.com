@@ -202,7 +202,7 @@
   // ---------- Geometry shared with the CSS (--u) ----------
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
   // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
-  const ZOOM = { z: 1, zt: 1, MAX: 5 }; // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 («un zoom más para ver bien las cosas»)
+  const ZOOM = { z: 1, zt: 1, MAX: 7 }; // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
   function mide() {
@@ -365,7 +365,7 @@
     const vs = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
     const fs = `precision highp float;
 uniform vec2 uC;uniform float uR;uniform mat3 uM;uniform vec3 uL;uniform float uT,uNubOn,uAten;
-uniform sampler2D uDia,uLuz,uNub,uAgua;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
+uniform sampler2D uDia,uLuz,uNub,uAgua,uZona;uniform vec4 uZonaBox;uniform float uZonaOn;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
 const float PI=3.14159265;
 void main(){
  vec2 p=(gl_FragCoord.xy-uC)/uR;float r=length(p);vec3 atm=vec3(.47,.67,.92);
@@ -375,6 +375,7 @@ void main(){
   float lat=asin(clamp(w.y,-1.,1.));float lon=atan(w.x,w.z);
   vec2 uv=vec2(lon/(2.*PI)+.5,.5-lat/PI);
   vec3 dia=texture2D(uDia,uv).rgb;float agua=texture2D(uAgua,uv).r;
+  if(uZonaOn>.5){float ux=uv.x;if(ux<uZonaBox.x)ux+=1.;vec2 q=(vec2(ux,uv.y)-uZonaBox.xy)/(uZonaBox.zw-uZonaBox.xy);if(q.x>0.&&q.x<1.&&q.y>0.&&q.y<1.)dia=texture2D(uZona,q).rgb;}
   float nub=texture2D(uNub,vec2(fract(uv.x-uT*.0016),uv.y)).r*uNubOn;nub=smoothstep(.12,.9,nub);
   vec3 luz=texture2D(uLuz,uv).rgb;
   float lam=dot(n,uL);float dl=smoothstep(-.22,.42,lam);
@@ -402,7 +403,7 @@ void main(){
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const la = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la, 2, gl.FLOAT, false, 0, 0);
-      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
+      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaBox', 'uZonaOn', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
       G = { pr, u, tex: {}, nubOn: 0 };
       const tex = (unidad, nombre, url, si) => {
         const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unidad); gl.bindTexture(gl.TEXTURE_2D, t);
@@ -440,7 +441,86 @@ void main(){
         };
         im.src = TIERRA + 'dia-8k.jpg';
       };
+      // 22 Oct 2026 (owner: «un zoom o dos más, sin perder calidad, sobre todo»): past ×2.6 the planet is painted from
+      // a 16K map cut in 32 tiles (static/tierra/dia-16k, NASA, public domain; built by herramientas/mapa_16k.py).
+      // (from ×1.8 on; «past ×2.6» below means: once the planet's circumference outgrows the 8K map's pixels)
+      // Only the tiles under the part of the planet on screen are fetched, composed into one «zone» texture
+      // (up to 4096 px a side) that the shader uses inside its window; outside it, the 8K map goes on. Computers only.
+      gl.uniform1f(u.uZonaOn, 0); gl.uniform1i(u.uZona, 4);
+      G.zona = { on: false, tex: null, caja: null, lista: new Map(), falta: false, pendiente: 0, ultimo: 0, lienzo: null, z: 0 };
+      G.zonaMax = Math.min(4096, gl.getParameter(gl.MAX_TEXTURE_SIZE));
+      G.zonaPuede = !matchMedia('(pointer: coarse)').matches && G.zonaMax >= 4096;
+      G.tesela = (c, f) => {
+        const k = c + '_' + f; let t = G.zona.lista.get(k);
+        if (t) return t;
+        t = { im: new Image(), ok: false, mal: false }; G.zona.lista.set(k, t);
+        t.im.onload = () => { t.ok = true; G.zona.pendiente = 0; };
+        t.im.onerror = () => { t.mal = true; if (c === 0 && f === 0) G.zona.falta = true; G.zona.pendiente = 0; };
+        t.im.src = TIERRA + 'dia-16k/' + k + '.jpg';
+        return t;
+      };
     } catch (e) { G = null; }
+  }
+  // the window of the planet on screen, in lon/lat, from the screen's corners and edges (clamped to the disc)
+  function ventanaVisible() {
+    const pts = [], n = 6;
+    for (let i = 0; i <= n; i++) for (let j = 0; j <= n; j++) pts.push([W * i / n, H * j / n]);
+    let lonMin = 1e9, lonMax = -1e9, latMin = 1e9, latMax = -1e9, lon0 = null;
+    for (const [x, y] of pts) {
+      let px = (x - CX) / R, py = (CY - y) / R; const r = Math.hypot(px, py);
+      if (r >= 0.985) { px *= 0.985 / r; py *= 0.985 / r; }
+      const w = aMundo([px, py, Math.sqrt(Math.max(0, 1 - px * px - py * py))]);
+      const lat = Math.asin(Math.max(-1, Math.min(1, w[1]))) / RAD; let lon = Math.atan2(w[0], w[2]) / RAD;
+      if (lon0 === null) lon0 = lon;
+      lon = lon0 + (((lon - lon0) % 360) + 540) % 360 - 180; // unwrapped around the first point
+      lonMin = Math.min(lonMin, lon); lonMax = Math.max(lonMax, lon); latMin = Math.min(latMin, lat); latMax = Math.max(latMax, lat);
+    }
+    return { lonMin, lonMax, latMin: Math.max(-90, latMin), latMax: Math.min(90, latMax) };
+  }
+  function zonaActualiza(now) {
+    const Z = G && G.zona; if (!Z || !G.zonaPuede || Z.falta) return;
+    // worth it once the planet's circumference on screen passes the 8K map's 8,192 texels (a 4K screen gets there sooner)
+    const quiere = ZOOM.z > 1.8 && 2 * Math.PI * R * DPR > 7000;
+    if (!quiere) { if (Z.on) { Z.on = false; gl.uniform1f(G.u.uZonaOn, 0); } return; }
+    if (Z.pendiente && now - Z.pendiente < 1500) return;  // tiles on their way
+    const v = ventanaVisible();
+    const dl = Math.max(4, v.lonMax - v.lonMin), db = Math.max(4, v.latMax - v.latMin);
+    // still inside the zone we have (with its margin) and the zoom has not changed much: nothing to do
+    if (Z.caja && Math.abs(ZOOM.z - Z.z) / Z.z < 0.3 && v.lonMin >= Z.caja.lonMin && v.lonMax <= Z.caja.lonMax && v.latMin >= Z.caja.latMin && v.latMax <= Z.caja.latMax) return;
+    if (now - Z.ultimo < 250) return; // let the camera settle
+    const m = 0.15, caja = { lonMin: v.lonMin - dl * m, lonMax: v.lonMax + dl * m, latMin: Math.max(-90, v.latMin - db * m), latMax: Math.min(90, v.latMax + db * m) };
+    if (caja.lonMax - caja.lonMin > 180) { caja.lonMin = v.lonMin - 20; caja.lonMax = v.lonMax + 20; }
+    // the tiles this window touches (45° each; columns wrap around the date line)
+    const ppd = 16384 / 360; // pixels per degree in the 16K map
+    const cw = Math.round((caja.lonMax - caja.lonMin) * ppd), ch = Math.round((caja.latMax - caja.latMin) * ppd);
+    const esc = Math.min(1, G.zonaMax / Math.max(cw, ch));
+    const c0 = Math.floor((caja.lonMin + 180) / 45), c1 = Math.floor((caja.lonMax + 180 - 1e-6) / 45);
+    const f0 = Math.max(0, Math.floor((90 - caja.latMax) / 45)), f1 = Math.min(3, Math.floor((90 - caja.latMin - 1e-6) / 45));
+    if ((c1 - c0 + 1) * (f1 - f0 + 1) > 12) { Z.ultimo = now; return; } // half the planet: the 8K map serves it better than a tiny zone
+    const falta = [];
+    for (let c = c0; c <= c1; c++) for (let f = f0; f <= f1; f++) { const t = G.tesela(((c % 8) + 8) % 8, f); if (!t.ok && !t.mal) falta.push(t); }
+    if (falta.length) { Z.pendiente = now; return; }
+    if (!Z.lienzo) Z.lienzo = document.createElement('canvas');
+    const L = Z.lienzo, g2 = L.getContext('2d');
+    L.width = Math.max(1, Math.round(cw * esc)); L.height = Math.max(1, Math.round(ch * esc));
+    g2.imageSmoothingQuality = 'high';
+    for (let c = c0; c <= c1; c++) for (let f = f0; f <= f1; f++) {
+      const t = G.tesela(((c % 8) + 8) % 8, f); if (!t.ok) continue;
+      const x = (c * 45 - 180 - caja.lonMin) * ppd * esc, y = (caja.latMax - (90 - f * 45)) * ppd * esc, lado = 45 * ppd * esc;
+      g2.drawImage(t.im, x, y, lado, lado);
+    }
+    if (!Z.tex) Z.tex = gl.createTexture();
+    gl.activeTexture(gl.TEXTURE4); gl.bindTexture(gl.TEXTURE_2D, Z.tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, L);
+    if (gl.getError() !== gl.NO_ERROR) { G.zonaPuede = false; gl.uniform1f(G.u.uZonaOn, 0); return; }
+    // the window in the shader's uv (u from 180° W, v from the north pole), unwrapped across the date line
+    let u0 = (caja.lonMin + 180) / 360, u1 = (caja.lonMax + 180) / 360; const v0 = (90 - caja.latMax) / 180, v1 = (90 - caja.latMin) / 180;
+    if (u0 < 0) { u0 += 1; u1 += 1; } // the shader adds a turn to u when it falls left of the box
+    gl.uniform4f(G.u.uZonaBox, u0, v0, u1, v1); gl.uniform1f(G.u.uZonaOn, 1);
+    Z.on = true; Z.caja = caja; Z.z = ZOOM.z; Z.ultimo = now;
+    window.__orbitaZona = { caja, cw, ch, esc, teselas: (c1 - c0 + 1) * (f1 - f0 + 1), z: ZOOM.z };
   }
   // The real Sun (owner, 20 Oct 2026: «true to reality»): the point where it is overhead right now, from the
   // standard low-precision solar formulas (good to about a hundredth of a degree), so day, night and the city lights
@@ -462,6 +542,7 @@ void main(){
     gl.viewport(0, 0, cvT.width, cvT.height);
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
     if (ZOOM.z > 1.6 && G.pide8) G.pide8();
+    zonaActualiza(performance.now());
     if (G.tex8) { gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, ZOOM.z > 1.45 ? G.tex8 : G.tex.dia); }
     const u = G.u;
     gl.uniform2f(u.uC, CX * DPR, (H - CY) * DPR);

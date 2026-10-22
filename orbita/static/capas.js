@@ -10,8 +10,14 @@
   const P = () => window.OrbitaPlaneta;
   const RE = 6378.137, RAD = Math.PI / 180;
   const ACERO = '156,195,228', BLANCO = '244,246,248';
-  const estado = { sub: true, tierra: false, fibra: true, puntos: false, sat: true, vista: 'equilibrada', orb: { baja: true, media: true, geo: true } };
-  try { const g = JSON.parse(localStorage.getItem('guardiana-orbita-capas') || '{}'); Object.assign(estado, g); estado.orb = Object.assign({ baja: true, media: true, geo: true }, g.orb || {}); if (!['equilibrada', 'todos', 'cielo'].includes(estado.vista)) estado.vista = 'equilibrada'; } catch (_) {}
+  // Owner, 22 Oct 2026: «cuando la persona abra Órbita, que no salgan los satélites de golpe, se ve demasiado ruido:
+  // que abra solo con los cables submarinos, y luego la persona va abriendo y cerrando». So every opening starts with
+  // the submarine cables alone; only the view and the orbit filter are remembered between visits.
+  // Owner, 22 Oct 2026, 10:41: «cuando la persona abre satélites aparecen todos de golpe; tienen que ser por capas,
+  // si no se inunda el globo». So the satellites open with the geostationary ring alone (a few hundred, still), and
+  // the person adds the medium and the low orbit one by one; each orbit button is a layer of its own.
+  const estado = { sub: true, tierra: false, fibra: false, puntos: false, sat: false, vista: 'equilibrada', orb: { baja: false, media: false, geo: true } };
+  try { const g = JSON.parse(localStorage.getItem('guardiana-orbita-capas') || '{}'); if (g.vista) estado.vista = g.vista; if (!['equilibrada', 'todos', 'cielo'].includes(estado.vista)) estado.vista = 'equilibrada'; } catch (_) {}
   const guarda = () => { try { localStorage.setItem('guardiana-orbita-capas', JSON.stringify(estado)); } catch (_) {} };
 
   // ---------- data ----------
@@ -39,7 +45,7 @@
         // arc length along the cable (radians of the sphere), for the light travelling inside it
         const acc = [0];
         for (let j = 1; j < w.length; j++) { const a = w[j - 1], b = w[j]; acc.push(acc[j - 1] + Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]) / 1.003); }
-        return { n: c.n, w, acc, L: acc[acc.length - 1], fase: Math.random() };
+        return { n: c.n, w, acc, L: acc[acc.length - 1], fase: Math.random(), aprox: !!c.aprox };
       });
       capas[clave] = { d, lineas, nombres: new Set(d.cables.map((c) => c.n).filter(Boolean)).size };
     } catch (e) { capas[clave] = { error: true }; }
@@ -254,7 +260,14 @@
     cx.globalCompositeOperation = 'lighter';
     if (estado.tierra && capas.tierra && capas.tierra.lineas) pintaLineas(cx, p, G, capas.tierra.lineas, `rgba(${ACERO},.30)`, 0.7);
     if (estado.fibra && FT && FT.lineas) pintaFibra(cx, p, G);
-    if (estado.sub && capas.sub && capas.sub.lineas) { pintaLineas(cx, p, G, capas.sub.lineas, `rgba(${ACERO},.62)`, 1); pintaLuz(cx, p, G, capas.sub.lineas, t); }
+    if (estado.sub && capas.sub && capas.sub.lineas) {
+      // OpenStreetMap's cables as drawn; the ones the agency rebuilt from public sources (cables_agencia.py) are
+      // an approximate sea trace, so they go dashed and a touch lighter (owner: «rotulado trazado aproximado»)
+      if (!capas.sub.exactas) { capas.sub.exactas = capas.sub.lineas.filter((l) => !l.aprox); capas.sub.aprox = capas.sub.lineas.filter((l) => l.aprox); }
+      pintaLineas(cx, p, G, capas.sub.exactas, `rgba(${ACERO},.62)`, 1);
+      if (capas.sub.aprox.length) { cx.setLineDash([6, 4]); pintaLineas(cx, p, G, capas.sub.aprox, `rgba(${ACERO},.5)`, 1); cx.setLineDash([]); }
+      pintaLuz(cx, p, G, capas.sub.lineas, t);
+    }
     if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
     if (estado.sub && capas.sub && capas.sub.lineas) {
       if (cableMarcado >= 0) { const l = capas.sub.lineas[cableMarcado]; if (l) pintaLineas(cx, p, G, [l], `rgba(${BLANCO},.95)`, 2.2); }
@@ -936,6 +949,10 @@
       if (inf.duenos && inf.duenos.length) mas.push(T('Dueños') + ': ' + inf.duenos.join(', '));
       const ops = inf.operan && inf.operan.length ? inf.operan.join(', ') : d.o;
       if (ops) mas.push(T('Operador') + ': ' + ops);
+      if (inf.aprox) {  // rebuilt by the agency: say so, and where it was checked
+        mas.push(T('Trazado aproximado por mar: este cable no está en OpenStreetMap y lo reconstruyó la agencia GUARDIANA de fuentes públicas.'));
+        if (inf.fuentes && inf.fuentes.length) mas.push(T('Fuentes') + ': ' + inf.fuentes.map((u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (_) { return u; } }).filter((h, i, a) => a.indexOf(h) === i).slice(0, 4).join(', '));
+      }
       f.querySelector('span').textContent = donde + (mas.length ? '\n' + mas.join('\n') : '');
     }
     f.hidden = false; colocaFicha(x, y);
@@ -997,11 +1014,13 @@
   function enganchaVista() {
     const caja = $('sat-vista'); if (!caja) return;
     caja.querySelectorAll('[data-vista]').forEach((b) => b.addEventListener('click', () => { estado.vista = b.dataset.vista; guarda(); pintaVista(); pintaNota(); }));
-    // 22 Oct 2026 (owner: «que se divida en tres… por fases, para que no se vea aglomerado»): one orbit at a time.
-    // A click shows only that orbit; the same click again brings back all three.
+    // 22 Oct 2026 (owner: «por capas… la persona tiene que ver»): every orbit is a layer the person switches on or
+    // off on its own; the satellites open with the geostationary ring only. The last layer on cannot be switched off
+    // (the button would show nothing); the person turns the satellites off instead.
     caja.querySelectorAll('[data-orb]').forEach((b) => b.addEventListener('click', () => {
-      const k = b.dataset.orb, solo = Object.keys(estado.orb).filter((x) => estado.orb[x]);
-      estado.orb = solo.length === 1 && solo[0] === k ? { baja: true, media: true, geo: true } : { baja: k === 'baja', media: k === 'media', geo: k === 'geo' };
+      const k = b.dataset.orb, encendidas = Object.keys(estado.orb).filter((x) => estado.orb[x]);
+      if (estado.orb[k] && encendidas.length === 1) return;
+      estado.orb[k] = !estado.orb[k];
       guarda(); pintaVista(); pintaNota();
     }));
   }

@@ -108,6 +108,8 @@ def main():
             if idx not in g['seg']:
                 g['seg'].append(idx)
         a, b = s['l'][0], s['l'][-1]
+        if s.get('src') == 'agencia':  # the agency names the landing itself (cables_agencia.py)
+            extremos.append([s['de'][0], s['de'][1], s['a'][0], s['a'][1]]); continue
         ka, kb = rj.cercana(a[1], a[0], 80), rj.cercana(b[1], b[0], 80)
         fila = []
         for k in (ka, kb):
@@ -132,6 +134,7 @@ def main():
             if v and v not in G[k]: G[k].append(v)
         if s.get('web') and not G['web']: G['web'] = s['web']
         if s.get('w') and s['w'] not in G['wiki']: G['wiki'].append(s['w'])
+        if s.get('src') == 'agencia': G['agencia'] = s.get('info') or {}
         e = extremos[idx]
         for (lo, la), (c, cc) in zip((s['l'][0], s['l'][-1]), ((e[0], e[1]), (e[2], e[3]))):
             if c and (c, cc) not in grupos_c[gi]['lugares']:
@@ -153,10 +156,17 @@ def main():
         operan = [n for x in w for n in x.get('operan', [])] or g['operan']
         if operan: i['operan'] = list(dict.fromkeys(operan))[:4]
         if g['web']: i['web'] = g['web']
+        ag = g.get('agencia')
+        if ag:  # rebuilt by the agency from public sources: its own figures, and the route is approximate
+            i['aprox'] = 1
+            if ag.get('anio'): i['anio'] = ag['anio']
+            if ag.get('km'): i['km'] = ag['km']; i.pop('kmMapa', None)
+            if ag.get('duenos'): i['duenos'] = ag['duenos'][:6]
+            if ag.get('fuentes'): i['fuentes'] = ag['fuentes'][:6]
         return i
     grupos_out = [[g['nombres'].most_common(1)[0][0], [[c, cc, round(lo, 2)] for (c, cc), lo in sorted(g['lugares'].items(), key=lambda x: x[1])], info(g)] for g in grupos_c]
     out = {
-        'fuente': 'Centros de datos y cables: OpenStreetMap (ODbL). Ciudades: GeoNames cities15000 (CC BY 4.0).',
+        'fuente': 'Centros de datos y cables: OpenStreetMap (ODbL); cables que faltan en OpenStreetMap, reconstruidos por la agencia GUARDIANA de fuentes públicas (trazado aproximado). Ciudades: GeoNames cities15000 (CC BY 4.0).',
         'generado_desde': {'puntos': pts.get('descargado'), 'cables': cab.get('descargado')},
         'centros': centros,
         'de': de,
