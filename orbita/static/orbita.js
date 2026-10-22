@@ -206,7 +206,11 @@
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
   function mide() {
-    W = innerWidth; H = innerHeight; DPR = Math.min(devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    // 22 Oct 2026 (owner: «máxima calidad, 4K»): the screen's own resolution, up to a 4K budget of pixels
+    // (a 4K laptop at 250 % draws every pixel); phones and tablets keep 2×, their GPUs paint the whole planet.
+    { const d = devicePixelRatio || 1, tactil = matchMedia('(pointer: coarse)').matches;
+      DPR = Math.max(1, Math.min(d, tactil ? 2 : 4, Math.sqrt(3840 * 2160 * 1.15 / Math.max(1, W * H)))); }
     // The ring's unit. Wide: «En directo» and the door's reading take the two lower corners, so the
     // ring stays clear of them (the lower doors' labels reach 26.4 units out and 130 px beyond).
     // Narrow: both move off the corners and the ring keeps clear of the top and bottom lines.
@@ -262,7 +266,7 @@
   // 20 Oct 2026: the planet's layers (cables, satellites) live in static/capas.js and draw through this.
   window.OrbitaPlaneta = {
     aVista, pantalla, vec, ctx: cx2,
-    get geo() { return { W, H, CX, CY, R, R0, U }; },
+    get geo() { return { W, H, CX, CY, R, R0, U, DPR }; },
     get dentro() { return dentro; },
     get pais() { return (LUGAR && LUGAR.pais) || CASA || null; },
     get lugar() { try { if (LUGAR) return { lat: LUGAR.lat, lon: LUGAR.lon, nombre: LUGAR.ciudad, aprox: false }; const p = centros[CASA]; return p ? { lat: p.lat, lon: p.lon, nombre: nombrePais(CASA), aprox: true } : null; } catch (_) { return null; } },

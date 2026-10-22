@@ -217,23 +217,115 @@
     }
     cx.stroke();
   }
-  // Starlink-like low fleet, other low/medium orbits, geostationary: steel, steel, cold white
-  let SPR = null;
-  function sprites() {
-    if (SPR) return SPR;
-    const defs = [[1.7, ACERO, 0.7], [2.2, ACERO, 0.92], [2.8, BLANCO, 0.92]];
-    SPR = defs.map(([diam, rgb, a]) => {
-      const k = 4, d = Math.ceil(diam + 3), c = document.createElement('canvas');
-      c.width = c.height = d * k;
-      const g = c.getContext('2d'), m = d * k / 2, gr = g.createRadialGradient(m, m, 0, m, m, m);
-      const nuc = diam / 2 / (d / 2);
-      gr.addColorStop(0, `rgba(${rgb},${a})`); gr.addColorStop(nuc * 0.75, `rgba(${rgb},${a})`);
-      gr.addColorStop(nuc, `rgba(${rgb},${a * 0.45})`); gr.addColorStop(1, `rgba(${rgb},0)`);
-      g.fillStyle = gr; g.fillRect(0, 0, d * k, d * k);
-      return { img: c, d };
-    });
-    return SPR;
+  // ---------- satellites at full quality (owner, 22 Oct 2026: «mucho más realistas y de máxima calidad») ----------
+  // Three silhouettes, drawn once per size and angle at the screen's own resolution (no blur at any zoom):
+  //   0 Starlink-like broadband fleets: a flat body with one long solar wing, as the real ones fly;
+  //   1 other low and medium orbits (Iridium, OneWeb, GPS-like): a box with two wings;
+  //   2 geostationary: a bigger box, two long wings and the dish facing the Earth.
+  // The wings lie across the direction of travel; geostationary wings point north–south, as they do in orbit.
+  // Brightness follows the real Sun: dim in the Earth's shadow, brightest when the Sun lights the face we see.
+  const ANG = 24;                                   // one pre-drawn sprite every 15°
+  const FORMA = [{ largo: 5.6, kind: 0 }, { largo: 7.2, kind: 1 }, { largo: 10, kind: 2 }];
+  let SPR = null, sprDPR = 0;
+  function dibujaForma(g, kind, L, s) {
+    // L: wing span in device pixels; drawn around (0,0) with the wings along the x axis
+    const panel = (x0, x1, h) => {
+      const gr = g.createLinearGradient(0, -h, 0, h);
+      gr.addColorStop(0, 'rgba(176,210,238,1)'); gr.addColorStop(0.5, `rgba(${ACERO},1)`); gr.addColorStop(1, 'rgba(98,140,180,1)');
+      g.fillStyle = gr; g.fillRect(x0, -h, x1 - x0, 2 * h);
+      if (L > 18) { // solar cells, only where the eye can see them
+        g.strokeStyle = 'rgba(6,8,12,.55)'; g.lineWidth = Math.max(0.6, s * 0.35);
+        const n = Math.max(2, Math.round(Math.abs(x1 - x0) / (h * 1.6)));
+        g.beginPath();
+        for (let k = 1; k < n; k++) { const x = x0 + (x1 - x0) * k / n; g.moveTo(x, -h); g.lineTo(x, h); }
+        g.moveTo(x0, 0); g.lineTo(x1, 0); g.stroke();
+      }
+    };
+    const cuerpo = (w, h) => {
+      const gr = g.createLinearGradient(-w, -h, w, h);
+      gr.addColorStop(0, `rgba(${BLANCO},1)`); gr.addColorStop(1, 'rgba(196,206,216,1)');
+      g.fillStyle = gr; g.fillRect(-w, -h, 2 * w, 2 * h);
+    };
+    const brazo = (x0, x1) => { g.fillStyle = 'rgba(200,214,228,.9)'; g.fillRect(Math.min(x0, x1), -Math.max(0.5, s * 0.3), Math.abs(x1 - x0), Math.max(1, s * 0.6)); };
+    if (kind === 0) {
+      const hb = L * 0.13, wb = L * 0.16, hp = L * 0.15;
+      panel(wb + L * 0.04, L * 0.5, hp); brazo(wb, wb + L * 0.05);
+      cuerpo(wb, hb);
+      g.fillStyle = `rgba(${BLANCO},1)`; g.fillRect(-wb, -hb, 2 * wb, Math.max(1, hb * 0.5)); // the flat antenna deck
+    } else if (kind === 1) {
+      const wb = L * 0.11, hb = L * 0.12, hp = L * 0.12;
+      panel(-L * 0.5, -wb - L * 0.06, hp); panel(wb + L * 0.06, L * 0.5, hp);
+      brazo(-wb - L * 0.06, -wb); brazo(wb, wb + L * 0.06);
+      cuerpo(wb, hb);
+    } else {
+      const wb = L * 0.1, hb = L * 0.1, hp = L * 0.085;
+      panel(-L * 0.5, -wb - L * 0.08, hp); panel(wb + L * 0.08, L * 0.5, hp);
+      brazo(-wb - L * 0.08, -wb); brazo(wb, wb + L * 0.08);
+      cuerpo(wb, hb);
+      g.fillStyle = `rgba(${BLANCO},1)`; g.beginPath(); g.ellipse(0, hb + L * 0.035, wb * 0.9, L * 0.04, 0, 0, 7); g.fill(); // the dish
+    }
   }
+  function sprite(kind, z, ang) {
+    const dpr = (P().geo.DPR) || 1;
+    if (!SPR || sprDPR !== dpr) { SPR = new Map(); sprDPR = dpr; }
+    const zb = z < 1.35 ? 0 : z < 1.75 ? 1 : z < 2.4 ? 2 : 3;
+    const key = kind * 1000 + zb * 100 + ang;
+    let sp = SPR.get(key);
+    if (sp) return sp;
+    const css = FORMA[kind].largo * [1, 1.3, 1.65, 2.05][zb];          // wing span in CSS pixels at this zoom
+    const halo = css * 0.5 + 3, d = Math.ceil(2 * halo), px = Math.ceil(d * dpr);
+    const c = document.createElement('canvas'); c.width = c.height = px;
+    const g = c.getContext('2d'), m = px / 2;
+    // a soft glow first, so a satellite still reads as light against the night side of the planet
+    const gr = g.createRadialGradient(m, m, 0, m, m, m);
+    gr.addColorStop(0, `rgba(${kind === 2 ? BLANCO : ACERO},.42)`); gr.addColorStop(0.35, `rgba(${ACERO},.12)`); gr.addColorStop(1, `rgba(${ACERO},0)`);
+    g.fillStyle = gr; g.fillRect(0, 0, px, px);
+    g.translate(m, m); g.rotate(ang * 2 * Math.PI / ANG);
+    dibujaForma(g, kind, css * dpr, dpr);
+    sp = { img: c, d };
+    SPR.set(key, sp);
+    return sp;
+  }
+
+  // the orbit of the satellite under the pointer: its next lap, computed with SGP4 (not a drawn circle)
+  let ESTELA = null;
+  function estela(i, ahora) {
+    if (ESTELA && ESTELA.i === i && ahora - ESTELA.t < 3000) return ESTELA;
+    const r = S.rec[i], periodo = 2 * Math.PI / (r.no || 0.06);       // minutes
+    const pts = [], n = 160, desde = -0.12 * periodo, hasta = 0.88 * periodo;
+    for (let k = 0; k <= n; k++) {
+      const m = desde + (hasta - desde) * k / n, ms = ahora + m * 60000;
+      let pv = null;
+      try { pv = window.satellite.sgp4(r, (ms / 86400000 + 2440587.5 - r.jdsatepoch) * 1440); } catch (_) {}
+      if (!pv || !pv.position || typeof pv.position === 'boolean' || !isFinite(pv.position.x)) { pts.push(null); continue; }
+      const gm = window.satellite.gstime(new Date(ms)), cg = Math.cos(gm), sg = Math.sin(gm);
+      const X = pv.position.x, Y = pv.position.y, Z = pv.position.z;
+      const ex = X * cg + Y * sg, ey = -X * sg + Y * cg, ez = Z, rr = Math.hypot(ex, ey, ez), f = escala(rr) / rr;
+      pts.push({ w: [ey * f, ez * f, ex * f], futuro: m >= 0 });
+    }
+    ESTELA = { i, t: ahora, pts, geo: periodo > 1300 };
+    return ESTELA;
+  }
+  function pintaEstela(cx, p, G, i, ahora) {
+    const e = estela(i, ahora); if (e.geo) return;                    // a geostationary satellite stays over one spot
+    const n = e.pts.length, R = G.R;
+    cx.lineCap = 'round';
+    let prev = null;
+    for (let k = 0; k < n; k++) {
+      const q = e.pts[k]; if (!q) { prev = null; continue; }
+      const v = p.aVista(q.w), x = G.CX + R * v[0], y = G.CY - R * v[1];
+      const ve = v[2] > 0 || v[0] * v[0] + v[1] * v[1] > 1;
+      if (prev && ve && prev.ve) {
+        // the lap ahead fades out; the short stretch behind is a faint wake
+        const a = q.futuro ? 0.55 * (1 - k / n) + 0.06 : 0.24 * (k / (n * 0.12));
+        cx.strokeStyle = `rgba(${q.futuro ? BLANCO : ACERO},${Math.max(0, Math.min(0.6, a)).toFixed(3)})`;
+        cx.lineWidth = q.futuro ? 1.1 : 0.8;
+        cx.beginPath(); cx.moveTo(prev.x, prev.y); cx.lineTo(x, y); cx.stroke();
+      }
+      prev = { x, y, ve };
+    }
+  }
+
   function pintaSat(cx, p, G, t) {
     const ahora = Date.now(), N = S.N;
     // refresh about 1/120 of the fleet per frame: every satellite is recomputed every two seconds or so
@@ -248,9 +340,13 @@
     const sol = window.OrbitaSol ? window.OrbitaSol() : null;
     let sx0 = 0, sy0 = 0, sz0 = 0;
     if (sol) { const a = sol.lat * RAD, b = sol.lon * RAD; sx0 = Math.cos(a) * Math.cos(b); sy0 = Math.cos(a) * Math.sin(b); sz0 = Math.sin(a); }
+    // where the viewer looks from, in the planet's frame: the Sun behind the viewer lights the whole face we see
+    const c0 = p.aVista([1, 0, 0])[2], c1 = p.aVista([0, 1, 0])[2], c2 = p.aVista([0, 0, 1])[2];
+    const fase = sol ? (1 + sy0 * c0 + sz0 * c1 + sx0 * c2) / 2 : 1;   // 0 back-lit … 1 front-lit (same Sun for all)
     const capasPinta = [[], [], []];
     const cuentaOrb = { baja: 0, media: 0, geo: 0 }; let nSel = 0;
     const z = G.R / (G.R0 || G.R), paso = z < 1.35 ? 10 : z < 1.75 ? 5 : 3; S.paso = paso; // starlink-like low fleet, other low/medium, geostationary
+    if (!S.ang) S.ang = new Uint8Array(N);
     for (let i = 0; i < N; i++) {
       if (!S.ok[i]) { S.vis[i] = 0; continue; }
       const k = i * 3, dt = (ahora - S.t[i]) / 1000;
@@ -279,29 +375,43 @@
       let sombra = 0;
       if (sol) { const d = ex * sx0 + ey * sy0 + ez * sz0; if (d < 0 && r * r - d * d < RE * RE) sombra = 1; }
       S.sombra[i] = sombra;
-      capasPinta[alto > 30000 ? 2 : S.g[i] === 0 ? 0 : 1].push(sombra ? -1 - i : i);
+      const kind = alto > 30000 ? 2 : S.g[i] === 0 ? 0 : 1;
+      // which way it flies on the screen: wings across the motion; geostationary wings along the north–south axis
+      let dx, dy;
+      if (kind === 2) { const w = p.aVista([ey * f, ez * f + 0.05, ex * f]); dx = w[0] - v[0]; dy = -(w[1] - v[1]); }
+      else {
+        const q = 20, X2 = X + S.vel[k] * q, Y2 = Y + S.vel[k + 1] * q, Z2 = Z + S.vel[k + 2] * q;
+        const e2x = X2 * cg + Y2 * sg, e2y = -X2 * sg + Y2 * cg, f2 = escala(Math.hypot(e2x, e2y, Z2)) / Math.hypot(e2x, e2y, Z2);
+        const w = p.aVista([e2y * f2, Z2 * f2, e2x * f2]); dx = -(w[1] - v[1]); dy = -(w[0] - v[0]); // perpendicular
+      }
+      S.ang[i] = ((Math.round(Math.atan2(dy, dx) / (2 * Math.PI) * ANG) % ANG) + ANG) % ANG;
+      capasPinta[kind].push(sombra ? -1 - i : i);
     }
     if (cuentaArriba) { S.nArriba = n; S.tArriba = ahora; }
     const cambia = nSel !== S.nSel || cuentaArriba; S.nSel = nSel; S.cuentaOrb = cuentaOrb;
     if (cambia) { pintaNota(); pintaVista(); }
-    // small soft discs, one pre-drawn sprite per kind (agency, 20 Oct 2026); in sunlight full, in the shadow dim
+    if (marcado >= 0 && S.vis[marcado] && S.dib[marcado]) pintaEstela(cx, p, G, marcado, ahora);
+    // in sunlight, brighter the more of its lit face we see; in the Earth's shadow, only a faint shape
+    const luz = 0.62 + 0.38 * fase;
     for (let c = 0; c < 3; c++) {
-      const sp = sprites()[c], s = sp.d, h = s / 2;
       for (const j of capasPinta[c]) {
         const sombra = j < 0, i = sombra ? -1 - j : j;
-        cx.globalAlpha = sombra ? 0.28 : 1;
-        cx.drawImage(sp.img, S.sx[i] - h, S.sy[i] - h, s, s);
+        const sp = sprite(c, z, S.ang[i]), h = sp.d / 2;
+        cx.globalAlpha = sombra ? 0.22 : luz;
+        cx.drawImage(sp.img, S.sx[i] - h, S.sy[i] - h, sp.d, sp.d);
       }
     }
     cx.globalAlpha = 1;
     // the ones over your sky right now: a quiet ring each
     if (L) {
-      cx.fillStyle = `rgba(${BLANCO},.95)`;
-      const sp = sprites()[2], h = sp.d / 2; for (let i = 0; i < N; i++) if (S.arriba[i] && S.vis[i] && S.dib[i]) cx.drawImage(sp.img, S.sx[i] - h, S.sy[i] - h, sp.d, sp.d);
+      cx.strokeStyle = `rgba(${BLANCO},.7)`; cx.lineWidth = 1; cx.beginPath();
+      const rr = 3.2 + 1.6 * Math.min(2, z - 1);
+      for (let i = 0; i < N; i++) if (S.arriba[i] && S.vis[i] && S.dib[i]) { cx.moveTo(S.sx[i] + rr + 2, S.sy[i]); cx.arc(S.sx[i], S.sy[i], rr + 2, 0, 7); }
+      cx.stroke();
     }
     if (marcado >= 0 && S.vis[marcado]) {
       cx.strokeStyle = `rgba(${BLANCO},.95)`; cx.lineWidth = 1.4;
-      cx.beginPath(); cx.arc(S.sx[marcado], S.sy[marcado], 7, 0, 7); cx.stroke();
+      cx.beginPath(); cx.arc(S.sx[marcado], S.sy[marcado], 7 + 2 * Math.min(2, z - 1), 0, 7); cx.stroke();
     }
   }
 
@@ -341,7 +451,7 @@
     for (const [k, txt] of Object.entries(porCapa)) { const b = document.querySelector(`#capas [data-capa="${k}"]`); if (b) b.title = txt; }
     el.hidden = true;
     document.body.classList.toggle('ver-sat', estado.sat);
-    if (estado.sat) el.title = T('Satélites bajos a su altura real; los de órbita media y geoestacionaria, en los anillos exteriores (distancia no a escala). Más tenues, los que están ahora en la sombra de la Tierra.');
+    if (estado.sat) el.title = T('Satélites bajos a su altura real; los de órbita media y geoestacionaria, en los anillos exteriores (distancia no a escala). Su brillo sigue al Sol de ahora: más tenues los que están en la sombra de la Tierra. Pase el ratón por uno para ver su próxima vuelta.');
     else el.removeAttribute('title');
   }
 

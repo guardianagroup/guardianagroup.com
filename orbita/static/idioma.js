@@ -153,7 +153,7 @@
     'No se pudieron cargar los satélites.': ['The satellites could not be loaded.', 'Não foi possível carregar os satélites.'],
     'No se pudieron cargar los cables.': ['The cables could not be loaded.', 'Não foi possível carregar os cabos.'],
     'No se pudieron cargar los cables de tierra.': ['The land cables could not be loaded.', 'Não foi possível carregar os cabos terrestres.'],
-    'Satélites bajos a su altura real; los de órbita media y geoestacionaria, en los anillos exteriores (distancia no a escala). Más tenues, los que están ahora en la sombra de la Tierra.': ['Low satellites at their real height; medium and geostationary ones on the outer rings (distance not to scale). Dimmer: those now in the Earth\'s shadow.', 'Satélites baixos na altura real; os de órbita média e geoestacionária, nos anéis externos (distância fora de escala). Mais tênues: os que estão agora na sombra da Terra.'],
+    'Satélites bajos a su altura real; los de órbita media y geoestacionaria, en los anillos exteriores (distancia no a escala). Su brillo sigue al Sol de ahora: más tenues los que están en la sombra de la Tierra. Pase el ratón por uno para ver su próxima vuelta.': ['Low satellites at their real height; medium and geostationary ones on the outer rings (distance not to scale). Their brightness follows the Sun right now: dimmer, those in the Earth\'s shadow. Hover over one to see its next lap.', 'Satélites baixos na altura real; os de órbita média e geoestacionária, nos anéis externos (distância fora de escala). O brilho segue o Sol de agora: mais tênues os que estão na sombra da Terra. Passe o mouse sobre um para ver a próxima volta.'],
     // what is cut, Órbita and ZERO
     'Este PC': ['This PC', 'Este PC'],
     'Teléfono': ['Phone', 'Telefone'],
