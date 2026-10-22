@@ -289,6 +289,7 @@
     lin.push(T('Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.'));
     lin.push(T('Trazado aproximado') + ' · ' + T('Datos verificados'));
     f.querySelector('span').textContent = lin.join('\n');
+    if (clicActual) { const filas = lin.map((t) => { const j = t.indexOf(': '); return j > 0 && j < 40 ? [t.slice(0, j), t.slice(j + 2)] : ['', t]; }); abreModelo(modelo(T('Fibra troncal por tierra'), f.querySelector('b').textContent, filas, T('Trazado aproximado') + ' · ' + T('Datos verificados'), { resumen: [T('Fibra troncal por tierra'), T('Operador'), T('Longitud en el mapa'), T('Altitud del terreno')], para: T('Por aquí viaja internet dentro del continente: de las llegadas de los cables submarinos a las ciudades, y entre ciudades. Va bajo tierra, junto a carreteras y vías.'), secciones: [{ t: T('Datos'), claves: [T('Según el mapa de la red de'), T('En construcción según la fuente')] }] }), x, y); return; }
     f.hidden = false; colocaFicha(x, y);
   }
 
@@ -413,7 +414,11 @@
       if (D.intercambio) filas.push([T('Intercambio de internet'), D.intercambio]);
       if (D.novedades) filas.push([T('Novedades'), D.novedades]);
     }
-    fichaRica(paisNombre(cc), filas, D && D.confirmado ? T('Datos verificados') : T('Datos en verificación'), x, y);
+    abreModelo(modelo(T('País'), paisNombre(cc), filas, D && D.confirmado ? T('Datos verificados') : T('Datos en verificación'), {
+      resumen: [T('Cables submarinos'), T('Centros de datos'), T('Red móvil')],
+      para: T('Si estás aquí, tus datos salen al mundo por los cables y las troncales de esta ficha; la red móvil y la fibra son el primer tramo de ese camino.'),
+      secciones: [{ t: T('Red móvil y fija'), claves: [T('Red móvil'), T('Operadores'), T('Fibra al hogar'), '10G'], abierta: true }, { t: T('Por dónde entra internet'), claves: [T('Troncales'), T('Cables submarinos'), T('Intercambio de internet')] }, { t: T('Novedades'), claves: [T('Novedades')] }],
+    }), x, y);
   }
 
   // ---------- drawing ----------
@@ -889,7 +894,12 @@
     if (X.local) filas.push([T('Enlaces locales'), X.local]);
     if (X.cambios) filas.push([T('Novedades'), X.cambios]);
     if (X.nota) filas.push([T('Datos'), X.nota]);
-    fichaRica(q.n || T('Estación'), filas, T('Datos verificados'), x, y);
+    const base = X.clase === 'base';
+    abreModelo(modelo(base ? T('Base antártica') : T('Estación terrena de satélites'), q.n || T('Estación'), filas, T('Datos verificados'), {
+      resumen: [T('Tipo'), T('Operador'), T('Cómo se conecta'), T('Desde')],
+      para: base ? T('Desde aquí no hay cable: todo lo que entra y sale va por satélite, con la capacidad y los retrasos que eso impone. Es el internet más caro y escaso del planeta.') : T('Por aquí bajan a tierra las imágenes y medidas de los satélites que luego ves en los mapas del tiempo, en la navegación y en las noticias.'),
+      secciones: [{ t: T('Conexión y datos'), claves: [T('Cómo se conecta'), T('Por dónde salen los datos'), T('Antenas')], abierta: true }, { t: base ? T('La base') : T('La estación'), claves: [T('Desde'), T('Personal'), T('Datos')] }, { t: T('Enlaces locales'), claves: [T('Enlaces locales')] }, { t: T('Novedades'), claves: [T('Novedades')] }],
+    }), x, y);
   }
   function buscaPunto(x, y) {
     if (!estado.puntos || !PT || !PT.p) return -1;
@@ -936,7 +946,11 @@
     const am = c.llegadas.filter((l) => !l.via); if (am.length > 2) filas.push([T('Amarres previstos'), am.map((l) => l.lugar).join(' · ')]);
     if (c.duenos && c.duenos.length) filas.push([T('Dueños'), c.duenos.join(', ')]);
     if (c.nota) filas.push([T('Datos'), c.nota]);
-    fichaRica(c.nombre, filas, T('Todavía no existe: se dibuja en línea recta, como aviso.') + ' · ' + T('Datos verificados'), x, y);
+    abreModelo(modelo(T('Cable previsto'), c.nombre, filas, T('Todavía no existe: se dibuja en línea recta, como aviso.') + ' · ' + T('Datos verificados'), {
+      resumen: [T('Estado'), T('Origen'), T('Destino'), T('Quién lo quiere hacer')],
+      para: T('Todavía no existe y no lleva datos. Si se construye, abrirá una ruta nueva entre') + ' ' + c.llegadas[0].lugar + ' ' + T('y') + ' ' + c.llegadas[c.llegadas.length - 1].lugar + '.',
+      secciones: [{ t: T('El proyecto'), claves: [T('Qué quieren hacer'), T('Para cuándo'), T('Coste'), T('Capacidad prevista'), T('Estudio')], abierta: true }, { t: T('Amarres previstos'), claves: [T('Amarres previstos')] }, { t: T('Datos'), claves: [T('Longitud'), T('Dueños'), T('Datos')] }],
+    }), x, y);
   }
   function buscaCable(x, y) {
     if (!estado.sub || !capas.sub || !capas.sub.lineas) return -1;
@@ -1084,6 +1098,75 @@
     }
   }
 
+  // ---------- Ficha completa (owner, 22 Oct 2026, 15:24: «una estructura bien hecha para que no sea caótico… con un
+  // desplegable e irla bajando»; agencia: «entender en tres segundos y profundizar solo cuando interese»).
+  // Two levels for every kind of thing: hovering shows the summary card (title + up to five lines); a click opens this
+  // panel: the same summary on top and then sections that unfold one by one, «Copiar ficha» and «Guardar PDF».
+  // On a phone it is a sheet that rises from the bottom (tap the handle to raise it). ----------
+  let clicActual = false, panelModelo = null;
+  const esTactil = () => matchMedia && matchMedia('(pointer: coarse)').matches;
+  function panel() {
+    let p = $('ficha-panel'); if (p) return p;
+    p = document.createElement('aside'); p.id = 'ficha-panel'; p.className = 'ficha-panel'; p.hidden = true; p.setAttribute('aria-label', T('Ficha'));
+    p.innerHTML = '<div class="asa" aria-hidden="true"></div><div class="cab"><span class="tipo"></span><span class="botones"><button type="button" class="atras" hidden>‹</button><button type="button" class="cerrar" aria-label="' + T('Cerrar') + '">×</button></span></div><h2 class="tit"></h2><p class="sub"></p><dl class="sat-dl resumen"></dl><div class="secs"></div><div class="acciones"><button type="button" class="copiar">' + T('Copiar ficha') + '</button><button type="button" class="pdf">' + T('Guardar PDF') + '</button></div><p class="pie"></p>';
+    document.body.append(p);
+    p.querySelector('.cerrar').addEventListener('click', cierraPanel);
+    p.querySelector('.asa').addEventListener('click', () => p.classList.toggle('alta'));
+    p.querySelector('.copiar').addEventListener('click', async (e) => { const b = e.currentTarget; try { await navigator.clipboard.writeText(textoFicha(panelModelo)); b.textContent = T('Copiada'); } catch (_) { b.textContent = T('No se pudo copiar'); } setTimeout(() => { b.textContent = T('Copiar ficha'); }, 1800); });
+    p.querySelector('.pdf').addEventListener('click', () => { p.querySelectorAll('details').forEach((d) => { d.open = true; }); document.body.classList.add('imprime-ficha'); setTimeout(() => { try { window.print(); } finally { setTimeout(() => document.body.classList.remove('imprime-ficha'), 500); } }, 50); });
+    p.querySelector('.atras').addEventListener('click', () => { const m = historial.pop(); if (m) { historial.pop(); abrePanel(m); } });
+    p.addEventListener('click', (e) => e.stopPropagation());
+    return p;
+  }
+  const historial = [];
+  function textoFicha(m) {
+    if (!m) return '';
+    const L = [m.titulo + (m.sub ? ' — ' + m.sub : ''), ''];
+    for (const [k, v] of m.resumen) L.push((k ? k + ': ' : '') + v);
+    for (const sec of m.secciones) { L.push('', sec.t.toUpperCase()); if (sec.texto) L.push(sec.texto); for (const [k, v] of sec.filas || []) L.push((k ? k + ': ' : '') + v); }
+    if (m.pie) L.push('', m.pie);
+    L.push('', 'GUARDIANA · Órbita · ' + new Date().toLocaleDateString(document.documentElement.lang === 'en' ? 'en-GB' : 'es-ES'));
+    return L.join('\n');
+  }
+  function abrePanel(m) {
+    const p = panel(); panelModelo = m; historial.push(m); if (historial.length > 12) historial.shift();
+    p.querySelector('.tipo').textContent = m.tipo || ''; p.querySelector('.tit').textContent = m.titulo || ''; p.querySelector('.sub').textContent = m.sub || ''; p.querySelector('.sub').hidden = !m.sub;
+    const dl = p.querySelector('.resumen'); dl.textContent = '';
+    for (const [k, v] of m.resumen) { if (!v) continue; const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k || ''; dd.textContent = v; if (!k) dd.className = 'ancho'; dl.append(dt, dd); }
+    const secs = p.querySelector('.secs'); secs.textContent = '';
+    m.secciones.forEach((sec, i) => {
+      const filas = (sec.filas || []).filter(([, v]) => v); if (!filas.length && !sec.texto) return;
+      const d = document.createElement('details'); d.open = !!sec.abierta; const sm = document.createElement('summary'); sm.textContent = sec.t; d.append(sm);
+      if (sec.texto) { const t = document.createElement('p'); t.className = 'texto'; t.textContent = sec.texto; d.append(t); }
+      if (filas.length) { const dl2 = document.createElement('dl'); dl2.className = 'sat-dl'; for (const [k, v] of filas) { const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k || ''; dd.textContent = v; if (!k) dd.className = 'ancho'; dl2.append(dt, dd); } d.append(dl2); }
+      secs.append(d);
+    });
+    p.querySelector('.pie').textContent = m.pie || ''; p.querySelector('.atras').hidden = historial.length < 2;
+    p.hidden = false; p.scrollTop = 0; p.classList.remove('alta');
+    const f = ficha(); if (f) f.hidden = true;
+    document.body.classList.add('con-ficha');
+  }
+  function cierraPanel() { const p = $('ficha-panel'); if (p) p.hidden = true; panelModelo = null; historial.length = 0; fichaFija = false; document.body.classList.remove('con-ficha'); }
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panelModelo) cierraPanel(); });
+  // a model from a flat list of rows: the summary takes the keys named first (or the first five), each remaining row
+  // goes to the section its key belongs to; unknown keys fall into «Más datos»
+  function modelo(tipo, titulo, filas, pie, plan) {
+    plan = plan || {};
+    const quitar = new Set(), resumen = [], secciones = [];
+    const toma = (k) => filas.filter(([kk, v]) => kk === k && v);
+    for (const k of plan.resumen || []) { for (const f of toma(k)) { resumen.push(f); quitar.add(f); } }
+    if (!resumen.length) for (const f of filas.slice(0, 5)) { if (f[1]) { resumen.push(f); quitar.add(f); } }
+    if (plan.para) secciones.push({ t: T('Qué significa para ti'), texto: plan.para, abierta: true });
+    for (const sec of plan.secciones || []) { const fs = []; for (const k of sec.claves) for (const f of toma(k)) if (!quitar.has(f)) { fs.push(f); quitar.add(f); } if (fs.length || sec.texto) secciones.push({ t: sec.t, filas: fs, texto: sec.texto, abierta: !!sec.abierta }); }
+    const resto = filas.filter((f) => f[1] && !quitar.has(f)); if (resto.length) secciones.push({ t: T('Más datos'), filas: resto });
+    return { tipo, titulo, sub: plan.sub || '', resumen, secciones, pie };
+  }
+  // hover → summary card; click → the whole panel
+  function abreModelo(m, x, y) {
+    if (clicActual) { abrePanel(m); return; }
+    const pista = esTactil() ? T('Toca para la ficha completa') : T('Clic: ficha completa');
+    fichaRica(m.titulo + (m.sub ? ' · ' + m.sub : ''), m.resumen, (m.pie ? m.pie + ' · ' : '') + pista, x, y);
+  }
   // a card with labels and values in two columns (satellites, data centres)
   function fichaRica(titulo, filas, pie, x, y) {
     const f = ficha(); if (!f) return;
@@ -1146,7 +1229,12 @@
     if (X.nota) filas.push([T('Nota'), X.nota]);
     const titulo = q.n && q.n !== q.o ? q.n : (q.o ? q.o + ' · ' + T('centro de datos') : T('Centro de datos sin nombre'));
     const fuentes = T('Datos verificados');
-    fichaRica(titulo, filas.length ? filas : [[T('Datos'), T('Sin más datos públicos sobre este edificio')]], fuentes, x, y);
+    const nube = q.o && /amazon|aws|google|microsoft|azure|meta|facebook|apple|oracle|alibaba|cloudflare|ovh|equinix|digital realty|telefónica|telefonica|orange|vodafone|claro|movistar/i.test(q.o);
+    abreModelo(modelo(T('Centro de datos'), titulo, filas.length ? filas : [[T('Datos'), T('Sin más datos públicos sobre este edificio')]], fuentes, {
+      resumen: [T('Operador'), T('Dónde'), T('En servicio desde'), T('Desde el mar')],
+      para: T('Aquí viven servicios de internet: cada vez que abres una web o guardas algo «en la nube», tus datos pasan por sitios como este.') + (nube ? ' ' + T('Si usas servicios de') + ' ' + q.o + ', ' + T('parte de tus datos puede estar guardada en edificios así.') : ''),
+      secciones: [{ t: T('Cómo llega internet aquí'), claves: [T('Desde el mar'), T('Cables que llegan ahí'), T('Por tierra'), T('Intercambio de internet')], abierta: true }, { t: T('El edificio'), claves: [T('Operador'), T('Del mismo operador'), T('Dueño'), T('En servicio desde'), T('Superficie'), T('Potencia'), T('Plantas'), T('Altura del edificio'), 'Tier', 'PUE', T('Conexión'), T('Dónde'), T('Web')] }, { t: T('Notas'), claves: [T('Datos'), T('Nota')] }],
+    }), x, y);
   }
   function fichaLugar(tipo, i, x, y) {
     const f = ficha(); if (!f) return;
@@ -1171,13 +1259,17 @@
       let lados;
       if (gr) lados = gr[1].map(([c, cc]) => c + ' (' + paisNombre(cc) + ')');
       else { lados = []; if (e[0]) lados.push(e[0] + ' (' + paisNombre(e[1]) + ')'); if (e[2] && (e[2] !== e[0] || e[3] !== e[1])) lados.push(e[2] + ' (' + paisNombre(e[3]) + ')'); }
-      f.querySelector('b').textContent = gr ? gr[0] : (d.n || T('Cable submarino sin nombre'));
+      const titulo = gr ? gr[0] : (d.n || T('Cable submarino sin nombre'));
+      f.querySelector('b').textContent = titulo;
       // owner, 22 Oct 2026: «origen Francia, destino Brasil… sería más entendible». West to east; data goes both ways.
       const medio = lados.slice(1, -1);
       const donde = lados.length >= 2 ? T('Origen') + ': ' + lados[0] + '\n' + T('Destino') + ': ' + lados[lados.length - 1]
           + (medio.length ? '\n' + T('Paradas') + ': ' + medio.slice(0, 4).join(' · ') + (medio.length > 4 ? ' · +' + (medio.length - 4) : '') : '')
           + '\n' + T('Los datos viajan por él en los dos sentidos.')
         : lados.length === 1 ? T('Llega a tierra en') + ' ' + lados[0] : T('Sus extremos no están cerca de ninguna ciudad');
+      const filas = [];
+      if (lados.length >= 2) { filas.push([T('Origen'), lados[0]], [T('Destino'), lados[lados.length - 1]]); if (medio.length) filas.push([T('Paradas'), medio.join(' · ')]); }
+      else if (lados.length === 1) filas.push([T('Llega a tierra en'), lados[0]]);
       // everything we know about the whole cable (owner, 22 Oct 2026: «el año, los kilómetros… todos los datos que sepamos»)
       const inf = (gr && gr[2]) || {}, mas = [];
       if (inf.anio) mas.push(T('En servicio desde') + ' ' + inf.anio);
@@ -1201,6 +1293,18 @@
       // 22 Oct 2026, 14:34 (owner): «el cable que se rompió también lo indicamos»: known cuts and repairs, by hand
       { const nn = norm(gr ? gr[0] : (d.n || '')); const nt = NOTAS && NOTAS.find((q) => new RegExp('(^|[^a-z0-9])' + q.clave.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '([^a-z0-9]|$)').test(nn)); if (nt) { if (nt.incidentes) mas.push(T('Incidencias conocidas') + ': ' + nt.incidentes); if (nt.estado) mas.push(T('Estado') + ': ' + T(nt.estado === 'en servicio' ? 'En servicio' : 'En construcción')); } }
       f.querySelector('span').textContent = donde + (mas.length ? '\n' + mas.join('\n') : '');
+      if (clicActual) {
+        for (const m of mas) { const j = m.indexOf(': '); if (j > 0 && j < 40) filas.push([m.slice(0, j), m.slice(j + 2)]); else filas.push(['', m]); }
+        const cp = capacidadDe(i), L = P() && P().lugar, miPais = L && P().pais;
+        const toca = gr && miPais ? gr[1].find((q) => q[1] === miPais) : null;
+        abreModelo(modelo(gr && gr[2] && gr[2].aprox ? T('Cable submarino') + ' · ' + T('trazado aproximado') : T('Cable submarino'), titulo, filas, T('Datos verificados'), {
+          sub: lados.length >= 2 ? lados[0].replace(/ \(.*\)$/, '') + ' → ' + lados[lados.length - 1].replace(/ \(.*\)$/, '') : '',
+          resumen: [T('Origen'), T('Destino'), T('En servicio desde'), T('Longitud'), T('Capacidad')],
+          para: (lados.length >= 2 ? T('Une') + ' ' + lados[0] + ' ' + T('con') + ' ' + lados[lados.length - 1] + ' ' + T('por el fondo del mar.') + ' ' : '') + T('Cuando tus datos cruzan entre esos dos lados —un vídeo, un correo, una copia de seguridad— pueden ir por este cable o por otros paralelos; si uno se corta, el tráfico se reparte por los demás y lo notas como lentitud, no como apagón.') + (toca ? ' ' + T('Llega a tu país por') + ' ' + toca[0] + '.' : '') + (cp && cp.tbps >= 100 ? ' ' + T('Es una de las grandes autopistas: por él cabe el tráfico de decenas de millones de personas a la vez.') : ''),
+          secciones: [{ t: T('Recorrido y profundidad'), claves: [T('Paradas'), T('De punto a punto, en línea recta'), T('Profundidad del fondo bajo este tramo'), T('Longitud en el mapa')], abierta: true }, { t: T('Datos'), claves: [T('Dueños'), T('Operador'), T('Capacidad'), T('Longitud'), T('En servicio desde')] }, { t: T('Incidencias y estado'), claves: [T('Incidencias conocidas'), T('Estado')] }],
+        }), x, y);
+        return;
+      }
     }
     f.hidden = false; colocaFicha(x, y);
   }
@@ -1226,7 +1330,7 @@
       const q = PT.p[i], b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'option');
       b.innerHTML = '<b></b><span></span>'; b.querySelector('b').textContent = q.n || q.o || T('Centro de datos sin nombre'); b.querySelector('span').textContent = q.n && q.o && q.o !== q.n ? q.o : '';
       b.addEventListener('mouseenter', () => { puntoMarcado = i; }); // the dot lights up on the planet while you look at the row
-      b.addEventListener('click', (e) => { e.stopPropagation(); const r = b.getBoundingClientRect(); cierraLista(); cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; puntoMarcado = i; fichaLugar('punto', i, r.right + 8, r.top); fichaFija = true; });
+      b.addEventListener('click', (e) => { e.stopPropagation(); const r = b.getBoundingClientRect(); cierraLista(); cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; puntoMarcado = i; clicActual = true; fichaLugar('punto', i, r.right + 8, r.top); fichaFija = true; });
       ul.appendChild(b);
     }
     if (idx.length > 40) { const m = document.createElement('p'); m.className = 'pista'; m.textContent = '+' + num(idx.length - 40) + ' · ' + T('acerca más para verlos todos'); ul.appendChild(m); }
@@ -1241,6 +1345,7 @@
   let estacionMarcada = -1, previstoMarcado = -1;
   function mira(x, y, clic) {
     if ((lista || fichaFija) && !clic) return; // the list is open, or a card was chosen from it: hovering changes nothing
+    clicActual = !!clic;
     if (clic) {
       fichaFija = false;
       const z = P() ? P().geo.R / (P().geo.R0 || 1) : 1, cerca = cercanos(x, y, z >= 8 ? 14 : 22);
@@ -1255,29 +1360,30 @@
     if (est >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = previstoMarcado = -1; if (est !== estacionMarcada || clic) { estacionMarcada = est; fichaEstacion(est, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
     estacionMarcada = -1;
     const q = buscaPunto(x, y);
-    if (q >= 0) { if (marcado >= 0) { marcado = -1; } cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; if (q !== puntoMarcado) { puntoMarcado = q; fichaLugar('punto', q, x, y); } else colocaFicha(x, y); return; }
+    if (q >= 0) { if (marcado >= 0) { marcado = -1; } cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; if (q !== puntoMarcado || clic) { puntoMarcado = q; fichaLugar('punto', q, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
     puntoMarcado = -1;
     const i = estado.sat ? busca(x, y) : -1;
     if (i >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = -1; muestra(i, x, y); return; }
     if (marcado >= 0) muestra(-1);
     const g = buscaLlegada(x, y);
-    if (g >= 0) { cableMarcado = centroMarcado = -1; if (g !== llegadaMarcada) { llegadaMarcada = g; fichaLugar('llegada', g, x, y); } else colocaFicha(x, y); return; }
+    if (g >= 0) { cableMarcado = centroMarcado = -1; if (g !== llegadaMarcada || clic) { llegadaMarcada = g; fichaLugar('llegada', g, x, y); } else colocaFicha(x, y); return; }
     llegadaMarcada = -1;
     const c = buscaCentro(x, y);
-    if (c >= 0) { cableMarcado = -1; if (c !== centroMarcado) { centroMarcado = c; fichaLugar('centro', c, x, y); } else colocaFicha(x, y); return; }
+    if (c >= 0) { cableMarcado = -1; if (c !== centroMarcado || clic) { centroMarcado = c; fichaLugar('centro', c, x, y); } else colocaFicha(x, y); return; }
     centroMarcado = -1;
     const pv = buscaPrevisto(x, y);
     if (pv >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; if (pv !== previstoMarcado || clic) { previstoMarcado = pv; fichaPrevisto(pv, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
     previstoMarcado = -1;
     const k = buscaCable(x, y);
-    if (k >= 0) { fibraMarcada = -1; if (k !== cableMarcado) { cableMarcado = k; fichaLugar('cable', k, x, y); } else colocaFicha(x, y); return; }
+    if (k >= 0) { fibraMarcada = -1; if (k !== cableMarcado || clic) { cableMarcado = k; fichaLugar('cable', k, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
     if (cableMarcado >= 0) cableMarcado = -1;
     const ft = buscaFibra(x, y);
-    if (ft >= 0) { if (ft !== fibraMarcada) { fibraMarcada = ft; fichaFibra(ft, x, y); } else colocaFicha(x, y); return; }
+    if (ft >= 0) { if (ft !== fibraMarcada || clic) { fibraMarcada = ft; fichaFibra(ft, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
     fibraMarcada = -1;
     const f = ficha(); if (f && !f.hidden) f.hidden = true;
+    if (clic && panelModelo) cierraPanel(); // a click on nothing closes the full card
   }
-  addEventListener('click', (e) => { if (!soloTu && !e.target.closest('header, #puertas, #directo, #lugar, #seccion, .zoom, .conexion, .lista-cerca, #sat-ficha')) mira(e.clientX, e.clientY, true); });
+  addEventListener('click', (e) => { if (!soloTu && !e.target.closest('header, #puertas, #directo, #lugar, #seccion, .zoom, .conexion, .lista-cerca, #sat-ficha, #ficha-panel')) mira(e.clientX, e.clientY, true); });
   addEventListener('pointermove', (e) => {
     if (pendiente) { pendiente.x = e.clientX; pendiente.y = e.clientY; return; }
     pendiente = { x: e.clientX, y: e.clientY };

@@ -462,3 +462,47 @@ body.hondo:not(.dentro) #capas, body.hondo:not(.dentro) #sat-vista, body.hondo:n
 /* «Por dónde viajan tus datos» (22 Oct 2026): the measured list is long; keep it tight and let the labels wrap */
 .conexion .rutas .sat-dl { grid-template-columns: minmax(118px, max-content) 1fr; row-gap: 3px; }
 .conexion .rutas .sat-dl dd { font-variant-numeric: tabular-nums; }
+
+/* ---------- Ficha completa (22 Oct 2026): the panel that opens on click, with sections that unfold ---------- */
+.ficha-panel { position: fixed; top: 74px; right: 40px; width: 400px; max-width: calc(100vw - 32px); max-height: calc(100vh - 100px); overflow: auto; display: flex; flex-direction: column; gap: 6px; padding: 12px 16px 14px; border-radius: 16px; border: 1px solid var(--line); background: rgba(10,14,20,.9); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 18px 50px rgba(0,0,0,.45); z-index: 32; scrollbar-width: thin; color: var(--fg); }
+.ficha-panel[hidden] { display: none; }
+body.con-conexion .ficha-panel, .conexion:not([hidden]) ~ .ficha-panel { right: 420px; }
+.ficha-panel .asa { display: none; }
+.ficha-panel .cab { display: flex; justify-content: space-between; align-items: center; font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8A95A2; }
+.ficha-panel .botones button { all: unset; cursor: pointer; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--muted); font: 500 16px/1 var(--texto); }
+.ficha-panel .botones button:hover { color: var(--fg); background: rgba(156,195,228,.12); }
+.ficha-panel .botones button[hidden] { display: none; }
+.ficha-panel .tit { margin: 2px 0 0; font: 600 17px/1.25 var(--texto); color: var(--fg); text-wrap: balance; }
+.ficha-panel .sub { margin: 0 0 4px; font: 400 12px/1.4 var(--texto); color: var(--muted); }
+.ficha-panel .sub[hidden] { display: none; }
+.ficha-panel .sat-dl { grid-template-columns: minmax(104px, max-content) 1fr; row-gap: 4px; }
+.ficha-panel .sat-dl dd { color: var(--fg); }
+.ficha-panel .sat-dl dd.ancho { grid-column: 1 / -1; }
+.ficha-panel .sat-dl dt:empty { display: none; }
+.ficha-panel .secs { display: flex; flex-direction: column; margin-top: 4px; border-top: 1px solid var(--line); }
+.ficha-panel details { border-bottom: 1px solid var(--line); }
+.ficha-panel summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; padding: 9px 0; font: 600 12.5px/1.3 var(--texto); color: var(--fg); }
+.ficha-panel summary::-webkit-details-marker { display: none; }
+.ficha-panel summary::after { content: '+'; color: var(--muted); font: 400 15px/1 var(--mono); }
+.ficha-panel details[open] summary::after { content: '−'; }
+.ficha-panel details > .sat-dl, .ficha-panel details > .texto { padding: 0 0 10px; }
+.ficha-panel .texto { margin: 0; font: 400 12.5px/1.5 var(--texto); color: var(--fg); }
+.ficha-panel .acciones { display: flex; gap: 8px; margin-top: 8px; }
+.ficha-panel .acciones button { all: unset; cursor: pointer; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font: 600 12px/1 var(--texto); }
+.ficha-panel .acciones button:hover { background: var(--accent); color: var(--accent-fg); }
+.ficha-panel .acciones button:focus-visible, .ficha-panel .botones button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ficha-panel .pie { margin: 6px 0 0; font: 400 10.5px/1.4 var(--mono); color: #8A95A2; }
+body.dentro .ficha-panel { opacity: 0; pointer-events: none; }
+@media (max-width: 760px) {
+  .ficha-panel { top: auto; bottom: 0; left: 0; right: 0 !important; width: 100%; max-width: none; height: 46vh; max-height: 90vh; border-radius: 16px 16px 0 0; padding-top: 6px; transition: height .25s; }
+  .ficha-panel.alta { height: 88vh; }
+  .ficha-panel .asa { display: block; width: 44px; height: 4px; margin: 0 auto 8px; border-radius: 2px; background: rgba(156,195,228,.4); cursor: pointer; }
+}
+@media print {
+  body.imprime-ficha > *:not(#ficha-panel) { display: none !important; }
+  body.imprime-ficha { background: #fff; }
+  body.imprime-ficha #ficha-panel { position: static; width: auto; max-width: none; max-height: none; overflow: visible; border: 0; box-shadow: none; background: #fff; color: #000; backdrop-filter: none; }
+  body.imprime-ficha #ficha-panel .tit, body.imprime-ficha #ficha-panel .texto, body.imprime-ficha #ficha-panel .sat-dl dd, body.imprime-ficha #ficha-panel summary { color: #000; }
+  body.imprime-ficha #ficha-panel .acciones, body.imprime-ficha #ficha-panel .botones, body.imprime-ficha #ficha-panel .asa { display: none; }
+  body.imprime-ficha #ficha-panel summary::after { content: ''; }
+}
