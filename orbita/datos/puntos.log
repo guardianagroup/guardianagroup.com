@@ -1,0 +1,4 @@
+  fallo 1/1 en https://overpass-api.de/api/interpreter: HTTP Error 502: Bad Gateway
+edificios data_center sin etiqueta telecom: 1139
+wikidata centros: 91 edificios, 58 empresas
+puntos: {'aterrizaje': 55, 'datos': 4388, 'intercambio': 24}
