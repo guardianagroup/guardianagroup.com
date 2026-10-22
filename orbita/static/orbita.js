@@ -186,7 +186,11 @@
   $('volver').addEventListener('click', atras);
   // ZERO asks to go back to Órbita (its «‹» button, «Órbita ↗» or Esc on its home screen)
   addEventListener('message', (e) => {
-    if (e.source !== marco.contentWindow || !e.data) return;
+    if (!e.data) return;
+    // the real route of the visitor's data, hop by hop, measured by the GUARDIANA program that hosts Órbita
+    // (owner, 22 Oct 2026): {tipo:'orbita-ruta', ruta:{destino:{nombre,ip,lat,lon}, saltos:[{n,ip,nombre,lat,lon,ms,red,cc}]}}
+    if (e.data.tipo === 'orbita-ruta' && (e.source === window.parent || e.source === marco.contentWindow) && window.OrbitaConexion) { window.OrbitaConexion.ruta(e.data.ruta); return; }
+    if (e.source !== marco.contentWindow) return;
     if (e.data.tipo === 'orbita-volver' && dentro) atras();
     // «Verme en Órbita» from inside ZERO: back to the planet with the visitor's own card open (owner, 22 Oct 2026)
     if (e.data.tipo === 'orbita-verme') { if (dentro) atras(); setTimeout(() => { if (window.OrbitaConexion) window.OrbitaConexion.abre(true); }, 400); }
