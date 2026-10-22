@@ -39,7 +39,7 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   git checkout web-idiomas -- orbita herramientas terminos.html .github/workflows/datos-orbita.yml
   git add -A && git commit -m "Publicar …" && git push origin main && git checkout web-idiomas
   ```
-- **Caché**: todos los `static/*.js|css` de `orbita/index.html` llevan `?v=20261022zn`. Sube la letra en cada publicación (siguiente: `zo`, luego `zp`…).
+- **Caché**: todos los `static/*.js|css` de `orbita/index.html` llevan `?v=20261022zo`. Sube la letra en cada publicación (siguiente: `zp`, luego `zq`…).
 - Comprobar el despliegue: `gh run list --repo guardianagroup/guardianagroup.com --limit 1` hasta `completed success` (1–3 min).
   Desde el contenedor **no se puede** hacer curl a guardianagroup.com, overpass-api.de ni NOAA (proxy); se comprueba con el navegador integrado
   (pestaña `tab-4` = guardianagroup.com/orbita/?r=X) y desde `javascript_tool`: `OrbitaPlaneta.ir(lon, lat, zoom)`, `OrbitaConexion.abre(true)`,
@@ -47,7 +47,7 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   esperar unos segundos. Pulsar «Ahora no» del aviso al cargar.
 - Commits: terminar con `Co-Authored-By: Claude … <noreply@anthropic.com>` y la línea `Claude-Session:` que dé el sistema.
 
-## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión zn)
+## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión zo)
 - Planeta WebGL con mapa 16K en teselas; modo «limpio» desde ×4 (agua negra, tierra gris, datos en blanco, sin luces).
 - **Zoom hasta ×80.000 (500 m de altura nominal)**, suavizado logarítmico, doble clic por pasos. Indicador de altura a la derecha, encima de los botones
   (`#altura`, 40.000 km → 500 m). Desde ×8 (`body.hondo`) desaparecen los botones de capas y el filtro de satélites. Latitud hasta ±89,5° al acercarse.
