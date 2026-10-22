@@ -1,0 +1,122 @@
+{
+ "nota": "Cables que todavía no existen (propuestos, planeados o en construcción), con su fuente. Se dibujan punteados y la ficha dice su estado.",
+ "cables": [
+  {
+   "nombre": "Cable Chile–Antártida (Subtel)",
+   "llegadas": [
+    {
+     "lugar": "Punta Arenas",
+     "pais": "CL",
+     "lat": -53.16,
+     "lon": -70.91
+    },
+    {
+     "lugar": "Puerto Williams",
+     "pais": "CL",
+     "lat": -54.93,
+     "lon": -67.61
+    },
+    {
+     "lugar": "Base Presidente Eduardo Frei (Isla Rey Jorge)",
+     "pais": "AQ",
+     "lat": -62.2,
+     "lon": -58.96
+    },
+    {
+     "lugar": "Base General Bernardo O'Higgins",
+     "pais": "AQ",
+     "lat": -63.32,
+     "lon": -57.9
+    },
+    {
+     "lugar": "Base Arturo Prat (Isla Greenwich)",
+     "pais": "AQ",
+     "lat": -62.48,
+     "lon": -59.66
+    }
+   ],
+   "anio": null,
+   "km": 1600,
+   "estado": "propuesto",
+   "duenos": [
+    "Subtel (Chile) — promotor; dueño/operador sin definir"
+   ],
+   "nota": "Estudio de factibilidad terminado en agosto de 2026 (Subtel, Salience + Pioneer): opción básica Punta Arenas y Puerto Williams → bases Frei, O’Higgins y Prat (~1.600 km); opción ampliada con nueve amarres antárticos (~4.100 km). Pendiente de decisión política y financiación; plazo estimado de unos 8 años.",
+   "fuentes": [
+    "https://www.emol.com/noticias/Nacional/2026/08/18/1208799/cable-fibra-optica-magallanes-antartica.html",
+    "https://maritime-executive.com/article/antarctica-submarine-cable-project-confirmed-feasible"
+   ]
+  },
+  {
+   "nombre": "Polar Express (Полярный экспресс)",
+   "llegadas": [
+    {
+     "lugar": "Teriberka (Múrmansk)",
+     "pais": "RU",
+     "lat": 69.17,
+     "lon": 35.13
+    },
+    {
+     "lugar": "Amderma",
+     "pais": "RU",
+     "lat": 69.76,
+     "lon": 61.67
+    },
+    {
+     "lugar": "Dikson",
+     "pais": "RU",
+     "lat": 73.51,
+     "lon": 80.55
+    },
+    {
+     "lugar": "Tiksi",
+     "pais": "RU",
+     "lat": 71.64,
+     "lon": 128.87
+    },
+    {
+     "lugar": "Pevek",
+     "pais": "RU",
+     "lat": 69.7,
+     "lon": 170.31
+    },
+    {
+     "lugar": "Anadyr",
+     "pais": "RU",
+     "lat": 64.73,
+     "lon": 177.51
+    },
+    {
+     "lugar": "Petropávlovsk-Kamchatski",
+     "pais": "RU",
+     "lat": 53.02,
+     "lon": 158.65
+    },
+    {
+     "lugar": "Yuzhno-Sajalinsk",
+     "pais": "RU",
+     "lat": 46.96,
+     "lon": 142.74
+    },
+    {
+     "lugar": "Vladivostok",
+     "pais": "RU",
+     "lat": 43.12,
+     "lon": 131.89
+    }
+   ],
+   "anio": 2026,
+   "km": 12650,
+   "estado": "en construcción",
+   "duenos": [
+    "Morsviazsputnik (Rosmorrechflot, Ministerio de Transporte de Rusia)"
+   ],
+   "nota": "Cable ruso por la costa ártica, en construcción por tramos desde 2021 (Morsviazsputnik); fecha prevista de terminación 2026.",
+   "fuentes": [
+    "https://en.wikipedia.org/wiki/Polar_Express_(cable_system)",
+    "https://www.arctictoday.com/?p=37369",
+    "https://subtelforum.com/russia-to-begin-laying-polar-express/"
+   ]
+  }
+ ]
+}

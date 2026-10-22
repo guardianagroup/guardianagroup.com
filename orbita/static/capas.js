@@ -84,7 +84,7 @@
       });
       // hand-verified additions (datos/puntos-extra.json, with their sources): exchange points, polar stations…
       // OpenStreetMap does not know; they survive the automatic data updates
-      try { const e2 = await cargaJSON('datos/puntos-extra.json'); for (const f of (e2.puntos || [])) { if (!Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; const q = { w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: f.nota ? { nota: f.nota, enlace: f.enlace || '' } : null, lon: f.lon, lat: f.lat, extra: true }; if (f.tipo === 'datos') PT.p.push(q); else if (f.tipo === 'intercambio') PT.ix.push(q); else if (f.tipo === 'estacion') (PT.est || (PT.est = [])).push(q); } } catch (_) {}
+      try { const e2 = await cargaJSON('datos/puntos-extra.json'); for (const f of (e2.puntos || [])) { if (!Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; const q = { w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: (f.nota || f.enlace || f.clase) ? { nota: f.nota || '', enlace: f.enlace || '', clase: f.clase || '' } : null, lon: f.lon, lat: f.lat, extra: true }; if (f.tipo === 'datos') PT.p.push(q); else if (f.tipo === 'intercambio') PT.ix.push(q); else if (f.tipo === 'estacion') (PT.est || (PT.est = [])).push(q); } } catch (_) {}
       // how many data centres each operator has on the map
       PT.porOp = new Map(); for (const q of PT.p) if (q.o) PT.porOp.set(q.o, (PT.porOp.get(q.o) || 0) + 1);
       lugares();
@@ -131,12 +131,13 @@
     if (!PT.est || !PT.est.length) return;
     const z = G.R / (G.R0 || G.R), L = esLimpio();
     cx.lineWidth = 1.1; cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle';
+    const ocupado = [];
     for (const q of PT.est) {
       const v = p.aVista(q.w); if (v[2] <= 0.05) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
       cx.strokeStyle = `rgba(${BLANCO},${L ? 0.9 : 0.75})`; cx.beginPath(); cx.arc(x, y, 4.2, 0, 7); cx.stroke();
       cx.fillStyle = `rgba(${BLANCO},.95)`; cx.beginPath(); cx.arc(x, y, 1.4, 0, 7); cx.fill();
-      if (z >= 1.8 && q.n) { cx.fillStyle = `rgba(${BLANCO},.85)`; cx.fillText(q.n, x + 8, y); }
+      if (z >= 1.8 && q.n) { const txt = q.n.split(' (')[0].split(' / ')[0], w = 6.2 * txt.length; if (!ocupado.some((o) => Math.abs(x - o[0]) < (w + o[2]) / 2 + 12 && Math.abs(y - o[1]) < 13)) { ocupado.push([x + 8 + w / 2, y, w]); cx.fillStyle = `rgba(${BLANCO},.85)`; cx.fillText(txt, x + 8, y); } }
     }
   }
   function pintaCiudades(cx, p, G) {
@@ -779,6 +780,7 @@
   }
   function fichaEstacion(i, x, y) {
     const q = PT.est[i], X = q.x || {}, filas = [];
+    if (X.clase) filas.push([T('Tipo'), X.clase === 'base' ? T('Base antártica') : T('Estación terrena de satélites')]);
     if (q.o) filas.push([T('Operador'), q.o]);
     if (X.enlace) filas.push([T('Enlace'), X.enlace]);
     if (X.nota) filas.push([T('Datos'), X.nota]);

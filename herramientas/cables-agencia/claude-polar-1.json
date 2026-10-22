@@ -1,0 +1,148 @@
+[
+ {
+  "nombre": "Svalbard Undersea Cable System",
+  "llegadas": [
+   {
+    "lugar": "Hotellneset (Longyearbyen)",
+    "pais": "NO",
+    "lat": 78.24,
+    "lon": 15.5
+   },
+   {
+    "lugar": "Breivika (Andøya)",
+    "pais": "NO",
+    "lat": 69.3,
+    "lon": 16.1
+   },
+   {
+    "lugar": "Harstad",
+    "pais": "NO",
+    "lat": 68.8,
+    "lon": 16.54
+   }
+  ],
+  "anio": 2004,
+  "km": 1375,
+  "duenos": [
+   "Space Norway (antes Norwegian Space Centre / Telenor Svalbard)"
+  ],
+  "fuentes": [
+   "https://en.wikipedia.org/wiki/Svalbard_Undersea_Cable_System",
+   "https://totaltele.com/ciena-upgrades-space-norways-arctic-cables/",
+   "https://www.rcinet.ca/eye-on-the-arctic/2022/01/10/disruption-at-one-of-two-undersea-cables-to-svalbard/"
+  ]
+ },
+ {
+  "nombre": "Greenland Connect",
+  "llegadas": [
+   {
+    "lugar": "Milton (Trinity Bay, Terranova)",
+    "pais": "CA",
+    "lat": 48.1,
+    "lon": -53.5
+   },
+   {
+    "lugar": "Qaqortoq",
+    "pais": "GL",
+    "lat": 60.72,
+    "lon": -46.03
+   },
+   {
+    "lugar": "Nuuk",
+    "pais": "GL",
+    "lat": 64.18,
+    "lon": -51.72
+   },
+   {
+    "lugar": "Landeyjasandur",
+    "pais": "IS",
+    "lat": 63.6,
+    "lon": -20.1
+   }
+  ],
+  "anio": 2009,
+  "km": null,
+  "duenos": [
+   "Tusass (antes TELE Greenland)"
+  ],
+  "fuentes": [
+   "https://en.wikipedia.org/wiki/Greenland_Connect",
+   "https://www.tusass.gl/en/infrastructure/submarine-cable/"
+  ]
+ },
+ {
+  "nombre": "Greenland Connect North",
+  "llegadas": [
+   {
+    "lugar": "Nuuk",
+    "pais": "GL",
+    "lat": 64.18,
+    "lon": -51.72
+   },
+   {
+    "lugar": "Aasiaat",
+    "pais": "GL",
+    "lat": 68.71,
+    "lon": -52.87
+   }
+  ],
+  "anio": 2017,
+  "km": 680,
+  "duenos": [
+   "Tusass"
+  ],
+  "fuentes": [
+   "https://en.wikipedia.org/wiki/Greenland_Connect"
+  ]
+ },
+ {
+  "nombre": "Quintillion Subsea Cable System",
+  "llegadas": [
+   {
+    "lugar": "Nome",
+    "pais": "US",
+    "lat": 64.5,
+    "lon": -165.41
+   },
+   {
+    "lugar": "Kotzebue",
+    "pais": "US",
+    "lat": 66.9,
+    "lon": -162.6
+   },
+   {
+    "lugar": "Point Hope",
+    "pais": "US",
+    "lat": 68.35,
+    "lon": -166.8
+   },
+   {
+    "lugar": "Wainwright",
+    "pais": "US",
+    "lat": 70.64,
+    "lon": -160.04
+   },
+   {
+    "lugar": "Utqiaġvik",
+    "pais": "US",
+    "lat": 71.29,
+    "lon": -156.79
+   },
+   {
+    "lugar": "Prudhoe Bay",
+    "pais": "US",
+    "lat": 70.33,
+    "lon": -148.4
+   }
+  ],
+  "anio": 2017,
+  "km": 2250,
+  "duenos": [
+   "Quintillion"
+  ],
+  "fuentes": [
+   "https://www.capacitymedia.com/articles/3772562/arctic-subsea-cable-goes-into-service-to-connect-northern-alaska",
+   "https://www.lightwaveonline.com/network-design/article/16673719/quintillion-announces-launch-of-alaskan-submarine-fiber-optic-cable-system"
+  ]
+ }
+]

@@ -185,7 +185,13 @@
   const atras = () => { if (history.state && history.state.puerta) history.back(); else cierra(); };
   $('volver').addEventListener('click', atras);
   // ZERO asks to go back to Órbita (its «‹» button, «Órbita ↗» or Esc on its home screen)
-  addEventListener('message', (e) => { if (e.source === marco.contentWindow && e.data && e.data.tipo === 'orbita-volver' && dentro) atras(); });
+  addEventListener('message', (e) => {
+    if (e.source !== marco.contentWindow || !e.data) return;
+    if (e.data.tipo === 'orbita-volver' && dentro) atras();
+    // «Verme en Órbita» from inside ZERO: back to the planet with the visitor's own card open (owner, 22 Oct 2026)
+    if (e.data.tipo === 'orbita-verme') { if (dentro) atras(); setTimeout(() => { if (window.OrbitaConexion) window.OrbitaConexion.abre(true); }, 400); }
+  });
+  if (location.hash === '#mi-conexion') setTimeout(() => { if (window.OrbitaConexion) window.OrbitaConexion.abre(true); }, 1500);
   addEventListener('popstate', (e) => {
     const id = e.state && e.state.puerta;
     const i = PUERTAS.findIndex((p) => p.id === id);
