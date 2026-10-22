@@ -280,6 +280,8 @@
   // 20 Oct 2026: the planet's layers (cables, satellites) live in static/capas.js and draw through this.
   window.OrbitaPlaneta = {
     aVista, pantalla, vec, ctx: cx2,
+    get lienzos() { return { estrellas: cvE, tierra: cvT, rutas: cvR }; }, // for the journey recorder
+    get vista() { return { lon: vista.lon, lat: vista.lat }; },
     get geo() { return { W, H, CX, CY, R, R0, U, DPR }; },
     get dentro() { return dentro; },
     get centros() { return centros; }, // country centroids for the country labels and cards (22 Oct 2026)
@@ -1089,6 +1091,8 @@ void main(){
     avanzaVista(dentro ? dt * 2 : dt, now);
     pintaTierra(t, dentro ? 0.9 : 1);
     pintaRutas(t, dt);
+    // after the frame is complete (same task, so the WebGL buffer is still readable): the journey recorder (viaje.js)
+    if (window.OrbitaDespues) { try { window.OrbitaDespues(t); } catch (_) {} }
   }
   mide();
   addEventListener('resize', mide);
