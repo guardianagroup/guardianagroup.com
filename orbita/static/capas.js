@@ -113,8 +113,8 @@
     } catch (e) { PT = { error: true }; }
     cargando.puntos = false; pintaNota();
   }
-  // Several data centres can share one position (same building, same address in the data). From ×12 the ones that
-  // would sit on top of each other open like a flower around the shared spot, each with its own thin spoke, so every
+  // Several data centres can share one position (same building, same address in the data). From ×60 the ones that
+  // still sit on top of each other open like a flower around the shared spot, each with its own thin spoke, so every
   // one can be pointed at and chosen (owner, 22 Oct 2026, 18:05: «siguen saliendo apiñados y no puedo elegir»).
   let ABANICO = null, abanicoFrame = -1;
   function posiciones(p, G) {
@@ -126,12 +126,12 @@
       const v = p.aVista(q.w); if (v[2] <= 0.02) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1]; if (x < -60 || y < -60 || x > G.W + 60 || y > G.H + 60) continue;
       pos.set(i, [x, y, 0, 0]);
-      if (z >= 12) { const k = Math.round(x / 9) + ':' + Math.round(y / 9); const g = grupos.get(k); if (g) g.push(i); else grupos.set(k, [i]); }
+      if (z >= 60) { const k = Math.round(x / 4) + ':' + Math.round(y / 4); const g = grupos.get(k); if (g) g.push(i); else grupos.set(k, [i]); } // only what really sits on the same spot, once the zoom has already separated the rest
     }
     for (const g of grupos.values()) {
       if (g.length < 2) continue;
       let cx0 = 0, cy0 = 0; for (const i of g) { cx0 += pos.get(i)[0]; cy0 += pos.get(i)[1]; } cx0 /= g.length; cy0 /= g.length;
-      const r = Math.min(34, 9 + 2.2 * g.length);
+      const r = Math.min(30, 8 + 1.6 * g.length);
       g.forEach((i, j) => { const a = -Math.PI / 2 + j * 2 * Math.PI / g.length; pos.set(i, [cx0 + r * Math.cos(a), cy0 + r * Math.sin(a), cx0, cy0]); });
     }
     return pos;
@@ -140,7 +140,7 @@
     const forma = { aterrizaje: 0, datos: 1, intercambio: 2 }, z = G.R / (G.R0 || G.R), L = esLimpio();
     ABANICO = posiciones(p, G); abanicoFrame = performance.now();
     // the spokes of the fans, under the marks
-    if (z >= 12) { cx.save(); cx.globalCompositeOperation = 'source-over'; cx.strokeStyle = `rgba(${L ? BLANCO : ACERO},.35)`; cx.lineWidth = 0.8; cx.beginPath(); for (const [, q] of ABANICO) { if (q[2] || q[3]) { cx.moveTo(q[2], q[3]); cx.lineTo(q[0], q[1]); } } cx.stroke(); cx.restore(); }
+    if (z >= 60) { cx.save(); cx.globalCompositeOperation = 'source-over'; cx.strokeStyle = `rgba(${L ? BLANCO : ACERO},.35)`; cx.lineWidth = 0.8; cx.beginPath(); for (const [, q] of ABANICO) { if (q[2] || q[3]) { cx.moveTo(q[2], q[3]); cx.lineTo(q[0], q[1]); } } cx.stroke(); cx.restore(); }
     const sd = Math.max(1.5, Math.min(4, 1 + z * 0.22)); // data-centre squares grow a little with the zoom (owner: «que se separen bien»)
     const anillo = Math.max(0, Math.min(1, (z - 1.5) / 1.5)), anillos = [];
     for (let k = 0; k < 3; k++) {
