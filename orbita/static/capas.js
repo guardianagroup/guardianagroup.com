@@ -39,7 +39,7 @@
         // arc length along the cable (radians of the sphere), for the light travelling inside it
         const acc = [0];
         for (let j = 1; j < w.length; j++) { const a = w[j - 1], b = w[j]; acc.push(acc[j - 1] + Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]) / 1.003); }
-        return { n: c.n, w, acc, L: acc[acc.length - 1], fase: Math.random() };
+        return { n: c.n, w, acc, L: acc[acc.length - 1], fase: Math.random(), aprox: !!c.aprox };
       });
       capas[clave] = { d, lineas, nombres: new Set(d.cables.map((c) => c.n).filter(Boolean)).size };
     } catch (e) { capas[clave] = { error: true }; }
@@ -254,7 +254,14 @@
     cx.globalCompositeOperation = 'lighter';
     if (estado.tierra && capas.tierra && capas.tierra.lineas) pintaLineas(cx, p, G, capas.tierra.lineas, `rgba(${ACERO},.30)`, 0.7);
     if (estado.fibra && FT && FT.lineas) pintaFibra(cx, p, G);
-    if (estado.sub && capas.sub && capas.sub.lineas) { pintaLineas(cx, p, G, capas.sub.lineas, `rgba(${ACERO},.62)`, 1); pintaLuz(cx, p, G, capas.sub.lineas, t); }
+    if (estado.sub && capas.sub && capas.sub.lineas) {
+      // OpenStreetMap's cables as drawn; the ones the agency rebuilt from public sources (cables_agencia.py) are
+      // an approximate sea trace, so they go dashed and a touch lighter (owner: «rotulado trazado aproximado»)
+      if (!capas.sub.exactas) { capas.sub.exactas = capas.sub.lineas.filter((l) => !l.aprox); capas.sub.aprox = capas.sub.lineas.filter((l) => l.aprox); }
+      pintaLineas(cx, p, G, capas.sub.exactas, `rgba(${ACERO},.62)`, 1);
+      if (capas.sub.aprox.length) { cx.setLineDash([6, 4]); pintaLineas(cx, p, G, capas.sub.aprox, `rgba(${ACERO},.5)`, 1); cx.setLineDash([]); }
+      pintaLuz(cx, p, G, capas.sub.lineas, t);
+    }
     if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
     if (estado.sub && capas.sub && capas.sub.lineas) {
       if (cableMarcado >= 0) { const l = capas.sub.lineas[cableMarcado]; if (l) pintaLineas(cx, p, G, [l], `rgba(${BLANCO},.95)`, 2.2); }
@@ -936,6 +943,10 @@
       if (inf.duenos && inf.duenos.length) mas.push(T('Dueños') + ': ' + inf.duenos.join(', '));
       const ops = inf.operan && inf.operan.length ? inf.operan.join(', ') : d.o;
       if (ops) mas.push(T('Operador') + ': ' + ops);
+      if (inf.aprox) {  // rebuilt by the agency: say so, and where it was checked
+        mas.push(T('Trazado aproximado por mar: este cable no está en OpenStreetMap y lo reconstruyó la agencia GUARDIANA de fuentes públicas.'));
+        if (inf.fuentes && inf.fuentes.length) mas.push(T('Fuentes') + ': ' + inf.fuentes.map((u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (_) { return u; } }).filter((h, i, a) => a.indexOf(h) === i).slice(0, 4).join(', '));
+      }
       f.querySelector('span').textContent = donde + (mas.length ? '\n' + mas.join('\n') : '');
     }
     f.hidden = false; colocaFicha(x, y);

@@ -172,7 +172,7 @@
     'No se pudo cargar la fibra por tierra.': ['The land fibre could not be loaded.', 'Não foi possível carregar a fibra terrestre.'],
     'Cargando fibra por tierra…': ['Loading land fibre…', 'Carregando fibra terrestre…'],
     'Origen': ['From', 'Origem'], 'Destino': ['To', 'Destino'], 'Paradas': ['Stops', 'Paradas'],
-    'En servicio desde': ['In service since', 'Em serviço desde'], 'Longitud': ['Length', 'Comprimento'], 'Longitud en el mapa': ['Length on the map', 'Comprimento no mapa'], 'Dueños': ['Owners', 'Donos'],
+    'En servicio desde': ['In service since', 'Em serviço desde'], 'Longitud': ['Length', 'Comprimento'], 'Longitud en el mapa': ['Length on the map', 'Comprimento no mapa'], 'Trazado aproximado por mar: este cable no está en OpenStreetMap y lo reconstruyó la agencia GUARDIANA de fuentes públicas.': ['Approximate sea route: this cable is not in OpenStreetMap; the GUARDIANA agency rebuilt it from public sources.', 'Traçado aproximado pelo mar: este cabo não está no OpenStreetMap e a agência GUARDIANA reconstruiu-o a partir de fontes públicas.'], 'Fuentes': ['Sources', 'Fontes'], 'Dueños': ['Owners', 'Donos'],
     'Los datos viajan por él en los dos sentidos.': ['Data travels through it both ways.', 'Os dados viajam por ele nos dois sentidos.'],
     'Según OpenStreetMap; puede faltar algún tramo.': ['According to OpenStreetMap; some sections may be missing.', 'Segundo o OpenStreetMap; pode faltar algum trecho.'],
     'Sus extremos no están cerca de ninguna ciudad': ['Its ends are not near any city', 'Suas pontas não estão perto de nenhuma cidade'],
