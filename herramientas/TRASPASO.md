@@ -39,7 +39,7 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   git checkout web-idiomas -- orbita herramientas terminos.html .github/workflows/datos-orbita.yml
   git add -A && git commit -m "Publicar …" && git push origin main && git checkout web-idiomas
   ```
-- **Caché**: todos los `static/*.js|css` de `orbita/index.html` llevan `?v=20261022zo`. Sube la letra en cada publicación (siguiente: `zp`, luego `zq`…).
+- **Caché**: todos los `static/*.js|css` de `orbita/index.html` llevan `?v=20261022zp`. Sube la letra en cada publicación (siguiente: `zq`, luego `zr`…).
 - Comprobar el despliegue: `gh run list --repo guardianagroup/guardianagroup.com --limit 1` hasta `completed success` (1–3 min).
   Desde el contenedor **no se puede** hacer curl a guardianagroup.com, overpass-api.de ni NOAA (proxy); se comprueba con el navegador integrado
   (pestaña `tab-4` = guardianagroup.com/orbita/?r=X) y desde `javascript_tool`: `OrbitaPlaneta.ir(lon, lat, zoom)`, `OrbitaConexion.abre(true)`,
@@ -47,20 +47,20 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   esperar unos segundos. Pulsar «Ahora no» del aviso al cargar.
 - Commits: terminar con `Co-Authored-By: Claude … <noreply@anthropic.com>` y la línea `Claude-Session:` que dé el sistema.
 
-## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión zo)
+## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión zp)
 - Planeta WebGL con mapa 16K en teselas; modo «limpio» desde ×4 (agua negra, tierra gris, datos en blanco, sin luces).
 - **Zoom hasta ×80.000 (500 m de altura nominal)**, suavizado logarítmico, doble clic por pasos. Indicador de altura a la derecha, encima de los botones
   (`#altura`, 40.000 km → 500 m). Desde ×8 (`body.hondo`) desaparecen los botones de capas y el filtro de satélites. Latitud hasta ±89,5° al acercarse.
   **Límite real**: el fondo (costas) es de 1–2 km de resolución; los puntos son precisos.
 - Capas: Cables submarinos (OSM filtrado + agencia **234 confirmados** (más los que OSM ya tenía), trazado aproximado punteado), Fibra por tierra (6.695 tramos, 90 países; se desvanece
   por debajo de ~100 km de altura), Centros de datos (1.903 lugares, cuadrado blanco con anillo sutil al acercarse), Satélites (tiempo real).
-- **Cables por potencia** (`orbita/datos/cables-capacidad.json`, 52 cables: 23 gigantes ≥ 100 Tbit/s, 26 grandes ≥ 20): gigantes en blanco, más gruesos y
+- **Cables por potencia** (`orbita/datos/cables-capacidad.json`, 59 cables: 23 gigantes ≥ 100 Tbit/s, 26 grandes ≥ 20): gigantes en blanco, más gruesos y
   con halo (énfasis que crece con el zoom, `kq`), grandes en acero brillante, el resto regional; fila «Capacidad: X Tbit/s · N pares · troncal gigante/grande/regional».
 - **Profundidad y altitud** (`cables-relieve.json`, 1.243 tramos; `fibra-relieve.json`, 5.039): generadas por el workflow con `herramientas/relieve.py`
   (ETOPO 2022 60s, en caché del runner). Fila «Profundidad del fondo bajo este tramo: máxima · media · % en plataforma · % en llanura abisal» y
   «Altitud del terreno: hasta · media». Clave de cada tramo = `n_puntos:Σ(round(lon·1000)+round(lat·1000))`, la misma en `relieve.py` y `claveRelieve` (capas.js).
-- Fronteras, nombres de regiones, **nombres de país** desde ×2,2 con **ficha de país** (`fichaPais`; `datos/paises.json`: 25 países; CZ, ES, CO, US, CN, DE, FR, GB,
-  JP, KR verificados → `confirmado:true`; AT, SK, PL, HU, PT, IT, NL, CH, SE, NO, IE, MX, BR, AR, CL pendientes de verificar → pie «Datos en verificación»).
+- Fronteras, nombres de regiones, **nombres de país** desde ×2,2 con **ficha de país** (`fichaPais`; `datos/paises.json`: **25 países, todos verificados** (Claude escribe, ChatGPT corrige → `confirmado:true`; respuestas en
+  `herramientas/paises-agencia/`). Siguientes tandas: CA, AU, IN, SG, ZA, NG, KE, EG, TR, IL, AE, SA, FI, DK, BE…).
 - **Polos**: 34 estaciones en `datos/puntos-extra.json` (tipo `estacion`, `cargaEstaciones`/`EST`), visibles con la capa de cables, ficha al pasar el ratón.
   5 cables previstos punteados en `datos/cables-previstos.json` con toda la información del proyecto. Incidencias en `datos/cables-notas.json` (20 claves).
 - **Ficha completa** (`panel()` en capas.js): al pasar el ratón, resumen; al hacer clic, panel lateral `#ficha-panel` con resumen, «Qué significa para ti»,
@@ -96,7 +96,7 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
 - Cruce: `python3 herramientas/cables_agencia.py && python3 herramientas/lugares_capas.py && python3 herramientas/capacidad_cables.py` (3–5 min) →
   `orbita/datos/cables-agencia.json`, `cables.json`, `lugares-capas.json`, `cables-capacidad.json`. Imprime «aceptados» y «solo lo nombra X» (pendientes).
 - Capacidades: `herramientas/cables-capacidad/<voz>-*.json` (`[{nombre, tbps, pares, fuente}]`, nombre exacto del grupo de `lugares-capas.json`); mayoría de voces
-  dentro del 30 % (dos de tres bastan) o `cables-capacidad/confirmados.txt`. Hay claude (49), chatgpt (75), grok (17+40).
+  dentro del 30 % (dos de tres bastan) o `cables-capacidad/confirmados.txt`. Hay claude (49), chatgpt (75), grok (17+40+36). Las discrepancias (p. ej. SEA-ME-WE 4: chatgpt 4,6 / grok 122) se quedan fuera hasta una tercera voz.
 - Estado: **234 cables confirmados**; **95 de una sola voz** (lista en la salida de `cables_agencia.py`). Todas las tandas de Grok (`grok-verifica-1..6`) están cruzadas.
   Desde hoy `clave()` ignora las palabras genéricas (submarine, subsea, cable, system, fiber, network, project, domestic…): «KetchCan1» y
   «KetchCan1 Submarine Fiber Cable System» son el mismo cable. Añadidos alias EIG, GBI, OAC.
@@ -113,7 +113,8 @@ Conjunto ~55 %. Orden acordado: (1) centros de datos, (2) puntos de intercambio,
 ## 6. Pendiente inmediato (por orden)
 1. Que el dueño pruebe «El viaje de tus datos» en su PC (Mi conexión → Medir rutas → «Ver el viaje en 3D» → «Descargar vídeo» y «Guardar el viaje (PDF)»)
    y afinar lo que pida. Posible: sonido; elegir resolución del vídeo.
-2. **Ficha de país**: verificar con ChatGPT (chat nuevo) los 15 países `confirmado:false` de `datos/paises.json` y añadir más por tandas (Claude escribe, ChatGPT verifica).
+2. **Ficha de país**: los 25 están verificados; añadir más por tandas de 15 (Claude escribe, ChatGPT verifica en el chat «Verificar fichas de infraestructura»
+   https://chatgpt.com/c/6ada832b-0b94-83e8-ab23-e58008ece741; guardar la respuesta en `herramientas/paises-agencia/chatgpt-paises-N.json` y fusionar).
    Campos: `movil`, `operadores`, `fija`, `diez` (10G), `troncales`, `intercambio`, `novedades`.
 3. Capacidades: pedir a Grok el resto de la lista; cables de una sola voz (95): seguir con Grok/ChatGPT por tandas de 15–20 nombres.
 4. Centros de datos: la consulta Overpass de `datos_orbita.py` (`puntos()`) ya incluye `building/office/industrial/man_made=data_center` con
