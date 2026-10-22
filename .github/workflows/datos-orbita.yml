@@ -15,6 +15,7 @@ on:
       - 'herramientas/fibra_tierra.py'
       - 'herramientas/lugares_capas.py'
       - 'herramientas/mapa_16k.py'
+      - 'herramientas/relieve.py'
 
 permissions:
   contents: write
@@ -84,6 +85,17 @@ jobs:
         timeout-minutes: 10
         continue-on-error: true
         run: python3 herramientas/lugares_capas.py
+
+      # 22 Oct 2026 (owner: «la profundidad a la que está el cable submarino, y también el de tierra»): the seabed and the
+      # land under every line, from ETOPO 2022 (NOAA, public domain), cached between runs (about 470 MB)
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/etopo
+          key: etopo-2022-60s-surface
+      - name: Profundidad y altitud bajo cables y fibra (ETOPO 2022)
+        timeout-minutes: 25
+        continue-on-error: true
+        run: pip install --quiet numpy netCDF4 && python3 herramientas/relieve.py
 
       # 22 Oct 2026 (owner: «un zoom o dos más, sin perder calidad»): the day map at 16K in tiles, from NASA
       # (public domain). Only when the tool changes or by hand: the file is big and the image does not change.

@@ -72,7 +72,14 @@
   let PT = null;
   // The polar stations (bases and satellite ground stations) live in puntos-extra.json and are drawn with the cable layer
   // too, so they load on their own, without the 420 KB of data centres (22 Oct 2026, 14:15, owner: «que aparezca»).
-  let EST = null, NOTAS = null, CAP = null;
+  let EST = null, NOTAS = null, CAP = null, REL = null;
+  // 22 Oct 2026, 15:23 (owner): «la profundidad a la que está el cable submarino, y también el de tierra». The seabed
+  // and the land under each line (datos/cables-relieve.json, datos/fibra-relieve.json, from ETOPO 2022), keyed by the
+  // line's own coordinates — the same key herramientas/relieve.py writes — so it survives any regeneration.
+  const claveRelieve = (l) => { let s = 0; for (const [lon, lat] of l) s += Math.round(lon * 1000) + Math.round(lat * 1000); return l.length + ':' + s; };
+  async function cargaRelieve() { if (REL || cargando.rel) return; cargando.rel = true; REL = { cables: {}, fibra: {} }; try { const c = await cargaJSON('datos/cables-relieve.json'); REL.cables = c.tramos || {}; } catch (_) {} try { const f = await cargaJSON('datos/fibra-relieve.json'); REL.fibra = f.tramos || {}; } catch (_) {} cargando.rel = false; }
+  const relieveCable = (i) => { if (!REL || !capas.sub || !capas.sub.d) return null; const d = capas.sub.d.cables[i]; return d && d.l ? REL.cables[claveRelieve(d.l)] || null : null; };
+  const relieveFibra = (i) => { if (!REL || !FT || !FT.lineas[i]) return null; const l = FT.lineas[i].x; return l && l.l ? REL.fibra[claveRelieve(l.l)] || null : null; };
   // 22 Oct 2026, 15:03 (owner): «los que llevan tantos terabytes… en otro color… un ramal diferente por potencia»:
   // design capacity per cable from the agency (datos/cables-capacidad.json, keyed by the group name of lugares-capas).
   async function cargaCapacidad() { if (CAP || cargando.cap) return; cargando.cap = true; try { const c = await cargaJSON('datos/cables-capacidad.json'); CAP = { cables: c.cables || {}, umbrales: c.umbrales || { gigante: 100, grande: 20 } }; if (capas.sub) capas.sub.porPotencia = null; pintaNota(); } catch (_) { CAP = { cables: {}, umbrales: { gigante: 100, grande: 20 } }; } cargando.cap = false; }
@@ -278,6 +285,8 @@
     if (l.km) lin.push(T('Longitud en el mapa') + ': ' + num(l.km) + ' km');
     if (l.obra) lin.push(T('En construcción según la fuente'));
     if (l.anio) lin.push(T('Según el mapa de la red de') + ' ' + l.anio); // Topology Zoo lines carry the year of the map they come from
+    { const rl = relieveFibra(i); if (rl) lin.push(T('Altitud del terreno') + ': ' + T('hasta') + ' ' + num(rl.max) + ' m · ' + T('media') + ' ' + num(rl.med) + ' m'); }
+    lin.push(T('Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.'));
     lin.push(T('Trazado aproximado') + ' · ' + T('Datos verificados'));
     f.querySelector('span').textContent = lin.join('\n');
     f.hidden = false; colocaFicha(x, y);
@@ -1184,6 +1193,7 @@
       }
       const ops = inf.operan && inf.operan.length ? inf.operan.join(', ') : d.o;
       if (ops) mas.push(T('Operador') + ': ' + ops);
+      { const rl = relieveCable(i); if (rl) { mas.push(T('Profundidad del fondo bajo este tramo') + ': ' + T('máxima') + ' ' + num(rl.max) + ' m · ' + T('media') + ' ' + num(rl.med) + ' m' + (rl.plataforma ? ' · ' + rl.plataforma + ' % ' + T('en plataforma (menos de 200 m, donde va enterrado)') : '') + (rl.abisal ? ' · ' + rl.abisal + ' % ' + T('en llanura abisal (más de 4.000 m, apoyado en el fondo)') : '')); } }
       { const cp = capacidadDe(i); if (cp) { const clase = cp.tbps >= CAP.umbrales.gigante ? T('troncal gigante') : cp.tbps >= CAP.umbrales.grande ? T('troncal grande') : T('cable regional'); mas.push(T('Capacidad') + ': ' + (cp.tbps >= 1 ? num(cp.tbps) + ' Tbit/s' : num(Math.round(cp.tbps * 1000)) + ' Gbit/s') + (cp.pares ? ' · ' + cp.pares + ' ' + T('pares de fibra') : '') + ' · ' + clase); } }
       if (inf.aprox) {  // rebuilt by the agency: say so, and where it was checked
         mas.push(T('Trazado aproximado por mar') + ' · ' + T('Datos verificados'));
@@ -1326,7 +1336,7 @@
     estado[clave] = on; guarda();
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
     if (on && clave === 'sat') estado.satPlegado = false;
-    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else if (clave === 'fibra') cargaFibra(); else { cargaCables(clave); if (clave === 'sub') { cargaFibra(); cargaEstaciones(); cargaNotas(); cargaPaises(); cargaCapacidad(); } } }
+    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else if (clave === 'fibra') cargaFibra(); else { cargaCables(clave); if (clave === 'sub') { cargaFibra(); cargaEstaciones(); cargaNotas(); cargaPaises(); cargaCapacidad(); cargaRelieve(); } } }
     if (!on) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; }
     pintaNota(); pintaVista();
   }
