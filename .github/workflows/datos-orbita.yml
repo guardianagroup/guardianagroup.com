@@ -73,6 +73,12 @@ jobs:
         continue-on-error: true
         run: python3 herramientas/fibra_tierra.py
 
+      # 22 Oct 2026 (owner, plan B): the cables OpenStreetMap lacks, rebuilt by the agency from public sources
+      - name: Cables reconstruidos por la agencia
+        timeout-minutes: 10
+        continue-on-error: true
+        run: pip install --quiet pillow && python3 herramientas/cables_agencia.py
+
       - name: Ciudades de cables y centros de datos
         timeout-minutes: 10
         continue-on-error: true

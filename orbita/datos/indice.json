@@ -12,13 +12,13 @@
    "relations": "0",
    "total": "11"
   },
-  "way[\"communication\"=\"line\"][\"name\"];": {
+  "way[\"communication\"=\"line\"][\"name\"];": "sin respuesta: the JSON object must be str, bytes or bytearray, not NoneType",
+  "way[\"telecom\"=\"line\"][\"operator\"];": {
    "nodes": "0",
-   "ways": "839",
+   "ways": "2360",
    "relations": "0",
-   "total": "839"
+   "total": "2360"
   },
-  "way[\"telecom\"=\"line\"][\"operator\"];": "sin respuesta: the JSON object must be str, bytes or bytearray, not NoneType",
   "way[\"telecom\"=\"line\"];": {
    "nodes": "0",
    "ways": "4022",
@@ -38,5 +38,5 @@
    "total": "0"
   }
  },
- "medida_tierra_fecha": "2026-10-22T06:32:18Z"
+ "medida_tierra_fecha": "2026-10-22T15:36:31Z"
 }
