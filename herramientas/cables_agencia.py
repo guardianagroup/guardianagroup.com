@@ -189,7 +189,7 @@ def simplifica(pts, tol):
 # ---------- the agency's answers ----------
 def quien(nombre_archivo):
     n = os.path.basename(nombre_archivo).lower()
-    for q in ('chatgpt', 'gemini', 'claude'):
+    for q in ('chatgpt', 'gemini', 'claude', 'grok'):
         if n.startswith(q): return q
     return 'otro'
 
@@ -322,7 +322,7 @@ def main():
         salida[-1]['_tramos'] = cab_nuevos
     # write
     tramos_todos = [t for c in salida for t in c.pop('_tramos')]
-    out = {'fuente': 'Reconstruido por la agencia GUARDIANA (Claude, ChatGPT y Gemini) de fuentes públicas; trazado aproximado por mar.',
+    out = {'fuente': 'Reconstruido por la agencia GUARDIANA (Claude, ChatGPT, Grok y Gemini) de fuentes públicas; trazado aproximado por mar.',
            'nota': 'Se guarda solo lo que coincide entre al menos dos miembros de la agencia; coordenadas validadas con GeoNames y la máscara de agua.',
            'cables': salida, 'tramos': tramos_todos}
     with open(os.path.join(RAIZ, 'datos', 'cables-agencia.json'), 'w', encoding='utf-8') as f:

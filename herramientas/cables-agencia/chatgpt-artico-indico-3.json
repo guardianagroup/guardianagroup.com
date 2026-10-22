@@ -1,0 +1,3057 @@
+[
+{
+"nombre": "Quintillion Subsea Cable Network",
+"llegadas": [
+{
+"lugar": "Nome, Alaska",
+"pais": "US",
+"lat": 64.5,
+"lon": -165.41
+},
+{
+"lugar": "Kotzebue, Alaska",
+"pais": "US",
+"lat": 66.9,
+"lon": -162.6
+},
+{
+"lugar": "Point Hope, Alaska",
+"pais": "US",
+"lat": 68.35,
+"lon": -166.81
+},
+{
+"lugar": "Wainwright, Alaska",
+"pais": "US",
+"lat": 70.64,
+"lon": -160.04
+},
+{
+"lugar": "Utqiaġvik, Alaska",
+"pais": "US",
+"lat": 71.29,
+"lon": -156.79
+},
+{
+"lugar": "Prudhoe Bay / Oliktok Point, Alaska",
+"pais": "US",
+"lat": 70.5,
+"lon": -149.88
+}
+],
+"anio": 2017,
+"km": 1900,
+"duenos": [
+"Quintillion"
+],
+"fuentes": [
+"https://quintillionglobal.com/quintillions-subsea-system-in-the-arctic-cable-landing-stationoperations-in-extreme-environments/",
+"https://geocables.com/cable/quintillion-subsea-cable-network"
+]
+},
+{
+"nombre": "Alaska United Aleutians Fiber Project (AU-Aleutians)",
+"llegadas": [
+{
+"lugar": "Kodiak, Alaska",
+"pais": "US",
+"lat": 57.79,
+"lon": -152.41
+},
+{
+"lugar": "Larsen Bay, Alaska",
+"pais": "US",
+"lat": 57.54,
+"lon": -153.99
+},
+{
+"lugar": "Chignik Bay, Alaska",
+"pais": "US",
+"lat": 56.3,
+"lon": -158.4
+},
+{
+"lugar": "Sand Point, Alaska",
+"pais": "US",
+"lat": 55.34,
+"lon": -160.5
+},
+{
+"lugar": "King Cove, Alaska",
+"pais": "US",
+"lat": 55.06,
+"lon": -162.31
+},
+{
+"lugar": "Akutan, Alaska",
+"pais": "US",
+"lat": 54.13,
+"lon": -165.78
+},
+{
+"lugar": "Unalaska, Alaska",
+"pais": "US",
+"lat": 53.87,
+"lon": -166.54
+}
+],
+"anio": 2022,
+"km": null,
+"duenos": [
+"GCI Communication Corp."
+],
+"fuentes": [
+"https://www.gci.com/about/digital-divide/aleutian-fiber-project",
+"https://news.gci.com/news-releases/gci-celebrates-year-of-remarkable-progress-for-aleutians-fiber-project",
+"https://news.gci.com/news-releases/akutan-residents-now-have-access-to-lightning-fast-2-5-gig-internet-speeds"
+]
+},
+{
+"nombre": "AIRRAQ Submarine Cable System",
+"llegadas": [
+{
+"lugar": "Dillingham, Alaska",
+"pais": "US",
+"lat": 59.04,
+"lon": -158.46
+},
+{
+"lugar": "Togiak, Alaska",
+"pais": "US",
+"lat": 59.06,
+"lon": -160.38
+},
+{
+"lugar": "Platinum, Alaska",
+"pais": "US",
+"lat": 59.01,
+"lon": -161.82
+},
+{
+"lugar": "Eek, Alaska",
+"pais": "US",
+"lat": 60.22,
+"lon": -162.03
+},
+{
+"lugar": "Quinhagak, Alaska",
+"pais": "US",
+"lat": 59.75,
+"lon": -161.92
+}
+],
+"anio": 2025,
+"km": 680,
+"duenos": [
+"Unicom Inc.",
+"GCI Communication Corp."
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/north-america/airraq",
+"https://www.gci.com/about/digital-divide"
+]
+},
+{
+"nombre": "Alaska United East (AU-East)",
+"llegadas": [
+{
+"lugar": "Lynnwood, Washington",
+"pais": "US",
+"lat": 47.82,
+"lon": -122.32
+},
+{
+"lugar": "Lena Point, Juneau, Alaska",
+"pais": "US",
+"lat": 58.55,
+"lon": -134.75
+},
+{
+"lugar": "Valdez, Alaska",
+"pais": "US",
+"lat": 61.13,
+"lon": -146.35
+},
+{
+"lugar": "Whittier, Alaska",
+"pais": "US",
+"lat": 60.77,
+"lon": -148.68
+}
+],
+"anio": 1999,
+"km": 3751,
+"duenos": [
+"GCI Communication Corp."
+],
+"fuentes": [
+"https://www.gci.com/business/support/b/business-alaska-united-support",
+"https://www.submarinenetworks.com/en/stations/north-america/usa-west/harbour-pointe",
+"https://www.sec.gov/Archives/edgar/data/808461/000080846109000032/gciform10k12312008.htm"
+]
+},
+{
+"nombre": "Alaska United West (AU-West)",
+"llegadas": [
+{
+"lugar": "Warrenton, Oregon",
+"pais": "US",
+"lat": 46.17,
+"lon": -123.93
+},
+{
+"lugar": "Seward, Alaska",
+"pais": "US",
+"lat": 60.1,
+"lon": -149.44
+}
+],
+"anio": 2004,
+"km": 2485,
+"duenos": [
+"GCI Communication Corp."
+],
+"fuentes": [
+"https://www.gci.com/business/support/b/business-alaska-united-support",
+"https://www.sec.gov/Archives/edgar/data/808461/000080846109000032/gciform10k12312008.htm"
+]
+},
+{
+"nombre": "ACS Alaska-Oregon Network (AKORN)",
+"llegadas": [
+{
+"lugar": "Florence, Oregon",
+"pais": "US",
+"lat": 43.98,
+"lon": -124.11
+},
+{
+"lugar": "Homer, Alaska",
+"pais": "US",
+"lat": 59.64,
+"lon": -151.55
+},
+{
+"lugar": "Nikiski, Alaska",
+"pais": "US",
+"lat": 60.69,
+"lon": -151.3
+},
+{
+"lugar": "Anchorage, Alaska",
+"pais": "US",
+"lat": 61.22,
+"lon": -149.9
+}
+],
+"anio": 2009,
+"km": 3000,
+"duenos": [
+"Alaska Communications"
+],
+"fuentes": [
+"https://www.alaskacommunications.com/Business/Our-Network-Map",
+"https://www.submarinenetworks.com/en/stations/north-america/usa-west/harbour-pointe"
+]
+},
+{
+"nombre": "NorthStar Submarine Cable System",
+"llegadas": [
+{
+"lugar": "Hillsboro, Oregon",
+"pais": "US",
+"lat": 45.52,
+"lon": -122.99
+},
+{
+"lugar": "Lena Point, Juneau, Alaska",
+"pais": "US",
+"lat": 58.55,
+"lon": -134.75
+},
+{
+"lugar": "Valdez, Alaska",
+"pais": "US",
+"lat": 61.13,
+"lon": -146.35
+},
+{
+"lugar": "Whittier, Alaska",
+"pais": "US",
+"lat": 60.77,
+"lon": -148.68
+}
+],
+"anio": 1999,
+"km": 3229,
+"duenos": [
+"Alaska Communications"
+],
+"fuentes": [
+"https://www.alaskacommunications.com/Business/Our-Network-Map"
+]
+},
+{
+"nombre": "KetchCan1",
+"llegadas": [
+{
+"lugar": "Prince Rupert, Columbia Británica",
+"pais": "CA",
+"lat": 54.32,
+"lon": -130.32
+},
+{
+"lugar": "Ketchikan, Alaska",
+"pais": "US",
+"lat": 55.34,
+"lon": -131.65
+}
+],
+"anio": 2020,
+"km": 167,
+"duenos": [
+"Ketchikan Public Utilities"
+],
+"fuentes": [
+"https://www.kputel.com/",
+"https://www.submarinenetworks.com/en/systems/north-america"
+]
+},
+{
+"nombre": "Kodiak-Kenai Fiber Link",
+"llegadas": [
+{
+"lugar": "Anchorage, Alaska",
+"pais": "US",
+"lat": 61.22,
+"lon": -149.9
+},
+{
+"lugar": "Kenai, Alaska",
+"pais": "US",
+"lat": 60.55,
+"lon": -151.26
+},
+{
+"lugar": "Homer, Alaska",
+"pais": "US",
+"lat": 59.64,
+"lon": -151.55
+},
+{
+"lugar": "Kodiak, Alaska",
+"pais": "US",
+"lat": 57.79,
+"lon": -152.41
+},
+{
+"lugar": "Narrow Cape, Kodiak",
+"pais": "US",
+"lat": 57.43,
+"lon": -152.34
+},
+{
+"lugar": "Seward, Alaska",
+"pais": "US",
+"lat": 60.1,
+"lon": -149.44
+}
+],
+"anio": 2007,
+"km": 966,
+"duenos": [
+"Kodiak-Kenai Cable Company",
+"GCI Communication Corp."
+],
+"fuentes": [
+"https://www.sec.gov/Archives/edgar/data/808461/000080846109000032/gciform10k12312008.htm"
+]
+},
+{
+"nombre": "GCI Southeast Alaska Submarine Fiber System",
+"llegadas": [
+{
+"lugar": "Ketchikan, Alaska",
+"pais": "US",
+"lat": 55.34,
+"lon": -131.65
+},
+{
+"lugar": "Wrangell, Alaska",
+"pais": "US",
+"lat": 56.47,
+"lon": -132.38
+},
+{
+"lugar": "Petersburg, Alaska",
+"pais": "US",
+"lat": 56.81,
+"lon": -132.96
+},
+{
+"lugar": "Angoon, Alaska",
+"pais": "US",
+"lat": 57.5,
+"lon": -134.58
+},
+{
+"lugar": "Sitka, Alaska",
+"pais": "US",
+"lat": 57.05,
+"lon": -135.33
+}
+],
+"anio": 2008,
+"km": null,
+"duenos": [
+"GCI Communication Corp."
+],
+"fuentes": [
+"https://www.sec.gov/Archives/edgar/data/808461/000080846109000032/gciform10k12312008.htm"
+]
+},
+{
+"nombre": "Greenland Connect",
+"llegadas": [
+{
+"lugar": "Milton, Trinity Bay, Terranova y Labrador",
+"pais": "CA",
+"lat": 48.21,
+"lon": -53.96
+},
+{
+"lugar": "Nuuk, Groenlandia",
+"pais": "GL",
+"lat": 64.18,
+"lon": -51.73
+},
+{
+"lugar": "Qaqortoq, Groenlandia",
+"pais": "GL",
+"lat": 60.72,
+"lon": -46.04
+},
+{
+"lugar": "Landeyjarsandur, Islandia",
+"pais": "IS",
+"lat": 63.64,
+"lon": -20.14
+}
+],
+"anio": 2009,
+"km": 4600,
+"duenos": [
+"Tusass"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/trans-atlantic/greenland-connect",
+"https://www.releases.gov.nl.ca/releases/2008/intrd/0711n05.htm"
+]
+},
+{
+"nombre": "Greenland Connect North",
+"llegadas": [
+{
+"lugar": "Nuuk, Groenlandia",
+"pais": "GL",
+"lat": 64.18,
+"lon": -51.73
+},
+{
+"lugar": "Maniitsoq, Groenlandia",
+"pais": "GL",
+"lat": 65.42,
+"lon": -52.9
+},
+{
+"lugar": "Sisimiut, Groenlandia",
+"pais": "GL",
+"lat": 66.94,
+"lon": -53.67
+},
+{
+"lugar": "Aasiaat, Groenlandia",
+"pais": "GL",
+"lat": 68.71,
+"lon": -52.87
+}
+],
+"anio": 2017,
+"km": 680,
+"duenos": [
+"Tusass"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/trans-atlantic/greenland-connect"
+]
+},
+{
+"nombre": "FARICE-1",
+"llegadas": [
+{
+"lugar": "Seyðisfjörður, Islandia",
+"pais": "IS",
+"lat": 65.26,
+"lon": -14.01
+},
+{
+"lugar": "Funningsfjørður, Islas Feroe",
+"pais": "FO",
+"lat": 62.24,
+"lon": -6.93
+},
+{
+"lugar": "Dunnet Bay, Escocia",
+"pais": "GB",
+"lat": 58.62,
+"lon": -3.35
+}
+],
+"anio": 2004,
+"km": 1205,
+"duenos": [
+"Farice"
+],
+"fuentes": [
+"https://farice.is/",
+"https://en.wikipedia.org/wiki/FARICE-1"
+]
+},
+{
+"nombre": "DANICE",
+"llegadas": [
+{
+"lugar": "Landeyjarsandur, Islandia",
+"pais": "IS",
+"lat": 63.64,
+"lon": -20.14
+},
+{
+"lugar": "Blaabjerg, Dinamarca",
+"pais": "DK",
+"lat": 55.75,
+"lon": 8.16
+}
+],
+"anio": 2009,
+"km": 2304,
+"duenos": [
+"Farice"
+],
+"fuentes": [
+"https://farice.is/",
+"https://en.wikipedia.org/wiki/Danice"
+]
+},
+{
+"nombre": "ÍRIS",
+"llegadas": [
+{
+"lugar": "Þorlákshöfn, Islandia",
+"pais": "IS",
+"lat": 63.86,
+"lon": -21.38
+},
+{
+"lugar": "Ballyloughane Strand, Galway, Irlanda",
+"pais": "IE",
+"lat": 53.28,
+"lon": -9.01
+}
+],
+"anio": 2023,
+"km": 1770,
+"duenos": [
+"Farice"
+],
+"fuentes": [
+"https://farice.is/iris-will-be-ready-for-service-on-march-1st/",
+"https://www.ciena.com/about/newsroom/press-releases/farice-lights-up-third-submarine-cable-system%2C-iris%2C-with-ciena"
+]
+},
+{
+"nombre": "Svalbard Undersea Cable System",
+"llegadas": [
+{
+"lugar": "Harstad, Noruega",
+"pais": "NO",
+"lat": 68.8,
+"lon": 16.54
+},
+{
+"lugar": "Breivika, Andøya",
+"pais": "NO",
+"lat": null,
+"lon": null
+},
+{
+"lugar": "Hotellneset, Longyearbyen, Svalbard",
+"pais": "NO",
+"lat": 78.25,
+"lon": 15.47
+}
+],
+"anio": 2004,
+"km": null,
+"duenos": [
+"Space Norway"
+],
+"fuentes": [
+"https://spacenorway.com/satellite-connectivity-solutions/fibre-connectivity/svalbard-fibre/",
+"https://en.wikipedia.org/wiki/Svalbard_Undersea_Cable_System"
+]
+},
+{
+"nombre": "Kamchatka-Sakhalin-Magadan Submarine Cable",
+"llegadas": [
+{
+"lugar": "Oja, Sajalín",
+"pais": "RU",
+"lat": 53.59,
+"lon": 142.95
+},
+{
+"lugar": "Magadán",
+"pais": "RU",
+"lat": 59.57,
+"lon": 150.81
+},
+{
+"lugar": "Ust-Bolshéretsk, Kamchatka",
+"pais": "RU",
+"lat": 52.82,
+"lon": 156.28
+}
+],
+"anio": 2016,
+"km": 2000,
+"duenos": [
+"Rostelecom"
+],
+"fuentes": [
+"https://www.company.rt.ru/projects/digital_economy_rf/focl/FarEast_FOCL/about/",
+"https://www.company.rt.ru/projects/digital_economy_rf/focl/FarEast_FOCL/?PAGEN_1=2&sequence_key=news_list_1851719",
+"https://www.huawei.com/en/news/2016/6/Submarine-Network-Connecting-Kamchtka-Sakhalin"
+]
+},
+{
+"nombre": "Petropavlovsk-Kamchatsky-Anadyr Submarine Cable",
+"llegadas": [
+{
+"lugar": "Petropávlovsk-Kamchatski",
+"pais": "RU",
+"lat": 53.02,
+"lon": 158.65
+},
+{
+"lugar": "Anádyr, Chukotka",
+"pais": "RU",
+"lat": 64.73,
+"lon": 177.51
+}
+],
+"anio": 2022,
+"km": null,
+"duenos": [
+"Rostelecom"
+],
+"fuentes": [
+"https://www.company.rt.ru/press/news_fill/far_east/d479069/",
+"https://en.wikipedia.org/wiki/Polar_Express_(cable_system)"
+]
+},
+{
+"nombre": "Mauritius and Rodrigues Submarine Cable System (MARS)",
+"llegadas": [
+{
+"lugar": "Baie du Jacotet, Mauricio",
+"pais": "MU",
+"lat": -20.46,
+"lon": 57.4
+},
+{
+"lugar": "Grand Baie, Rodrigues",
+"pais": "MU",
+"lat": -19.68,
+"lon": 63.45
+}
+],
+"anio": 2019,
+"km": 700,
+"duenos": [
+"Mauritius Telecom"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/mars"
+]
+},
+{
+"nombre": "Lower Indian Ocean Network (LION)",
+"llegadas": [
+{
+"lugar": "Terre Rouge, Mauricio",
+"pais": "MU",
+"lat": -20.08,
+"lon": 57.51
+},
+{
+"lugar": "Sainte-Marie, Reunión",
+"pais": "RE",
+"lat": -20.9,
+"lon": 55.55
+},
+{
+"lugar": "Toamasina, Madagascar",
+"pais": "MG",
+"lat": -18.15,
+"lon": 49.4
+}
+],
+"anio": 2009,
+"km": 1090,
+"duenos": [
+"Orange",
+"Mauritius Telecom",
+"Orange Madagascar"
+],
+"fuentes": [
+"https://lion-submarinesystem.com/",
+"https://submarinenetworks.com/en/systems/asia-europe-africa/lion-2"
+]
+},
+{
+"nombre": "Lower Indian Ocean Network 2 (LION2)",
+"llegadas": [
+{
+"lugar": "Conexión submarina con LION al este de Madagascar",
+"pais": null,
+"lat": null,
+"lon": null
+},
+{
+"lugar": "Kaweni, Mayotte",
+"pais": "YT",
+"lat": -12.82,
+"lon": 45.17
+},
+{
+"lugar": "Mombasa, Kenia",
+"pais": "KE",
+"lat": -4.05,
+"lon": 39.67
+}
+],
+"anio": 2012,
+"km": 2700,
+"duenos": [
+"Orange",
+"Mauritius Telecom",
+"Orange Madagascar",
+"Telkom Kenya",
+"Emtel"
+],
+"fuentes": [
+"https://lion-submarinesystem.com/",
+"https://submarinenetworks.com/en/systems/asia-europe-africa/lion-2"
+]
+},
+{
+"nombre": "FLY-LION3",
+"llegadas": [
+{
+"lugar": "Kaweni, Mayotte",
+"pais": "YT",
+"lat": -12.82,
+"lon": 45.17
+},
+{
+"lugar": "Moroni, Gran Comora",
+"pais": "KM",
+"lat": -11.7,
+"lon": 43.24
+}
+],
+"anio": 2019,
+"km": 400,
+"duenos": [
+"Comoros Cables",
+"Orange",
+"Société Réunionnaise du Radiotéléphone"
+],
+"fuentes": [
+"https://geocables.com/cable/fly-lion3",
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/lion-2"
+]
+},
+{
+"nombre": "METISS (Melting Pot Indianoceanic Submarine System)",
+"llegadas": [
+{
+"lugar": "Baie du Jacotet, Mauricio",
+"pais": "MU",
+"lat": -20.46,
+"lon": 57.4
+},
+{
+"lugar": "Saint-Paul, Reunión",
+"pais": "RE",
+"lat": -21.01,
+"lon": 55.27
+},
+{
+"lugar": "Toliara, Madagascar",
+"pais": "MG",
+"lat": -23.35,
+"lon": 43.67
+},
+{
+"lugar": "Amanzimtoti, Sudáfrica",
+"pais": "ZA",
+"lat": -30.05,
+"lon": 30.89
+}
+],
+"anio": 2021,
+"km": 3200,
+"duenos": [
+"Canal+ Télécom",
+"CEB Fibernet",
+"Emtel",
+"Zeop",
+"SRR",
+"Telma"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/metiss"
+]
+},
+{
+"nombre": "Seychelles East Africa System (SEAS)",
+"llegadas": [
+{
+"lugar": "Victoria, Mahé, Seychelles",
+"pais": "SC",
+"lat": -4.62,
+"lon": 55.45
+},
+{
+"lugar": "Dar es Salaam, Tanzania",
+"pais": "TZ",
+"lat": -6.79,
+"lon": 39.28
+}
+],
+"anio": 2012,
+"km": 1917,
+"duenos": [
+"Seychelles Cable Systems Company",
+"Gobierno de Seychelles",
+"Cable & Wireless Seychelles",
+"Airtel Seychelles"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/seas"
+]
+},
+{
+"nombre": "Eastern Africa Submarine System (EASSy)",
+"llegadas": [
+{
+"lugar": "Port Sudan",
+"pais": "SD",
+"lat": 19.62,
+"lon": 37.22
+},
+{
+"lugar": "Yibuti",
+"pais": "DJ",
+"lat": 11.59,
+"lon": 43.15
+},
+{
+"lugar": "Mogadiscio",
+"pais": "SO",
+"lat": 2.04,
+"lon": 45.34
+},
+{
+"lugar": "Mombasa",
+"pais": "KE",
+"lat": -4.05,
+"lon": 39.67
+},
+{
+"lugar": "Dar es Salaam",
+"pais": "TZ",
+"lat": -6.79,
+"lon": 39.28
+},
+{
+"lugar": "Moroni",
+"pais": "KM",
+"lat": -11.7,
+"lon": 43.24
+},
+{
+"lugar": "Toliara",
+"pais": "MG",
+"lat": -23.35,
+"lon": 43.67
+},
+{
+"lugar": "Maputo",
+"pais": "MZ",
+"lat": -25.97,
+"lon": 32.58
+},
+{
+"lugar": "Mtunzini",
+"pais": "ZA",
+"lat": -28.95,
+"lon": 31.76
+}
+],
+"anio": 2010,
+"km": 10000,
+"duenos": [
+"Consorcio EASSy",
+"WIOCC",
+"MTN Group",
+"Bharti Airtel",
+"Comores Telecom",
+"Djibouti Telecom",
+"Telkom South Africa",
+"Vodacom",
+"Telma"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/eassy",
+"https://nca.gov.so/what-we-do/submarine-cables"
+]
+},
+{
+"nombre": "SEACOM",
+"llegadas": [
+{
+"lugar": "Mtunzini, Sudáfrica",
+"pais": "ZA",
+"lat": -28.95,
+"lon": 31.76
+},
+{
+"lugar": "Maputo, Mozambique",
+"pais": "MZ",
+"lat": -25.97,
+"lon": 32.58
+},
+{
+"lugar": "Dar es Salaam, Tanzania",
+"pais": "TZ",
+"lat": -6.79,
+"lon": 39.28
+},
+{
+"lugar": "Mombasa, Kenia",
+"pais": "KE",
+"lat": -4.05,
+"lon": 39.67
+},
+{
+"lugar": "Yibuti",
+"pais": "DJ",
+"lat": 11.59,
+"lon": 43.15
+},
+{
+"lugar": "Mumbai, India",
+"pais": "IN",
+"lat": 19.08,
+"lon": 72.88
+},
+{
+"lugar": "Zafarana, Egipto",
+"pais": "EG",
+"lat": 29.12,
+"lon": 32.65
+},
+{
+"lugar": "Abu Talat, Egipto",
+"pais": "EG",
+"lat": 31.07,
+"lon": 29.7
+},
+{
+"lugar": "Marsella, Francia",
+"pais": "FR",
+"lat": 43.3,
+"lon": 5.37
+}
+],
+"anio": 2009,
+"km": 17000,
+"duenos": [
+"SEACOM",
+"Industrial Promotion Services",
+"Remgro",
+"Sanlam",
+"Convergence Partners"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/seacom"
+]
+},
+{
+"nombre": "Djibouti Africa Regional Express 1 (DARE1)",
+"llegadas": [
+{
+"lugar": "Yibuti",
+"pais": "DJ",
+"lat": 11.59,
+"lon": 43.15
+},
+{
+"lugar": "Bosaso, Somalia",
+"pais": "SO",
+"lat": 11.28,
+"lon": 49.19
+},
+{
+"lugar": "Mogadiscio, Somalia",
+"pais": "SO",
+"lat": 2.04,
+"lon": 45.34
+},
+{
+"lugar": "Mombasa, Kenia",
+"pais": "KE",
+"lat": -4.05,
+"lon": 39.67
+}
+],
+"anio": 2021,
+"km": 4854,
+"duenos": [
+"Djibouti Telecom",
+"Somtel",
+"Hormuud Telecom",
+"Telkom Kenya"
+],
+"fuentes": [
+"https://submarinenetworks.com/en/systems/asia-europe-africa/dare1",
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/dare1/dare-1-cable-ready-for-service",
+"https://nca.gov.so/what-we-do/submarine-cables"
+]
+},
+{
+"nombre": "The East African Marine System (TEAMS)",
+"llegadas": [
+{
+"lugar": "Mombasa, Kenia",
+"pais": "KE",
+"lat": -4.05,
+"lon": 39.67
+},
+{
+"lugar": "Fujairah, Emiratos Árabes Unidos",
+"pais": "AE",
+"lat": 25.13,
+"lon": 56.33
+}
+],
+"anio": 2009,
+"km": 5000,
+"duenos": [
+"TEAMS Kenya Ltd.",
+"Etisalat"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/teams"
+]
+},
+{
+"nombre": "South Africa Far East (SAFE)",
+"llegadas": [
+{
+"lugar": "Melkbosstrand, Sudáfrica",
+"pais": "ZA",
+"lat": -33.73,
+"lon": 18.45
+},
+{
+"lugar": "Mtunzini, Sudáfrica",
+"pais": "ZA",
+"lat": -28.95,
+"lon": 31.76
+},
+{
+"lugar": "Saint-Paul, Reunión",
+"pais": "RE",
+"lat": -21.01,
+"lon": 55.27
+},
+{
+"lugar": "Baie du Jacotet, Mauricio",
+"pais": "MU",
+"lat": -20.46,
+"lon": 57.4
+},
+{
+"lugar": "Kochi, India",
+"pais": "IN",
+"lat": 9.97,
+"lon": 76.28
+},
+{
+"lugar": "Penang, Malasia",
+"pais": "MY",
+"lat": 5.41,
+"lon": 100.34
+}
+],
+"anio": 2002,
+"km": 13500,
+"duenos": [
+"Consorcio SAFE",
+"Mauritius Telecom",
+"Orange",
+"Telkom South Africa",
+"Tata Communications",
+"Telekom Malaysia",
+"Singtel"
+],
+"fuentes": [
+"https://submarinenetworks.com/en/systems/asia-europe-africa/safe"
+]
+},
+{
+"nombre": "Gulf2Africa (G2A)",
+"llegadas": [
+{
+"lugar": "Salalah, Omán",
+"pais": "OM",
+"lat": 17.1,
+"lon": 54.15
+},
+{
+"lugar": "Bosaso, Somalia",
+"pais": "SO",
+"lat": 11.28,
+"lon": 49.19
+},
+{
+"lugar": "Berbera, Somalia",
+"pais": "SO",
+"lat": 10.44,
+"lon": 45.01
+}
+],
+"anio": 2017,
+"km": 1500,
+"duenos": [
+"Golis Telecommunications",
+"Telesom",
+"Zain Omantel International"
+],
+"fuentes": [
+"https://nca.gov.so/what-we-do/submarine-cables",
+"https://geocables.com/cable/gulf2africa-g2a"
+]
+},
+{
+"nombre": "PEACE Cable, secciones operativas",
+"llegadas": [
+{
+"lugar": "Marsella, Francia",
+"pais": "FR",
+"lat": 43.3,
+"lon": 5.37
+},
+{
+"lugar": "Abu Talat, Egipto",
+"pais": "EG",
+"lat": 31.07,
+"lon": 29.7
+},
+{
+"lugar": "Zafarana, Egipto",
+"pais": "EG",
+"lat": 29.12,
+"lon": 32.65
+},
+{
+"lugar": "Yibuti",
+"pais": "DJ",
+"lat": 11.59,
+"lon": 43.15
+},
+{
+"lugar": "Berbera, Somalia",
+"pais": "SO",
+"lat": 10.44,
+"lon": 45.01
+},
+{
+"lugar": "Bosaso, Somalia",
+"pais": "SO",
+"lat": 11.28,
+"lon": 49.19
+},
+{
+"lugar": "Mogadiscio, Somalia",
+"pais": "SO",
+"lat": 2.04,
+"lon": 45.34
+},
+{
+"lugar": "Kismayo, Somalia",
+"pais": "SO",
+"lat": -0.36,
+"lon": 42.55
+},
+{
+"lugar": "Mombasa, Kenia",
+"pais": "KE",
+"lat": -4.05,
+"lon": 39.67
+},
+{
+"lugar": "Karachi, Pakistán",
+"pais": "PK",
+"lat": 24.86,
+"lon": 67.01
+},
+{
+"lugar": "Kulhudhuffushi, Maldivas",
+"pais": "MV",
+"lat": 6.62,
+"lon": 73.07
+}
+],
+"anio": 2022,
+"km": null,
+"duenos": [
+"PEACE Cable International Network",
+"Hengtong Group"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/peace",
+"https://nca.gov.so/what-we-do/submarine-cables"
+]
+},
+{
+"nombre": "Bharat Lanka Cable System",
+"llegadas": [
+{
+"lugar": "Thoothukudi (Tuticorin), India",
+"pais": "IN",
+"lat": 8.8,
+"lon": 78.15
+},
+{
+"lugar": "Mount Lavinia, Sri Lanka",
+"pais": "LK",
+"lat": 6.83,
+"lon": 79.87
+}
+],
+"anio": 2006,
+"km": 325,
+"duenos": [
+"Bharat Sanchar Nigam Limited",
+"Sri Lanka Telecom"
+],
+"fuentes": [
+"https://www.slt.lk/index.php/ta/about-us/milestones",
+"https://www.sundaytimes.lk/061001/News/nws20.html",
+"https://geocables.com/cable/bharat-lanka-cable-system"
+]
+},
+{
+"nombre": "Dhiraagu-SLT Submarine Cable Network",
+"llegadas": [
+{
+"lugar": "Malé, Maldivas",
+"pais": "MV",
+"lat": 4.17,
+"lon": 73.5
+},
+{
+"lugar": "Colombo, Sri Lanka",
+"pais": "LK",
+"lat": 6.93,
+"lon": 79.86
+}
+],
+"anio": 2006,
+"km": 850,
+"duenos": [
+"Dhiraagu",
+"Sri Lanka Telecom"
+],
+"fuentes": [
+"https://www.slt.lk/en/node/4701",
+"https://www.dhiraagu.com.mv/about-us/corporate-information/milestones-and-achievements"
+]
+},
+{
+"nombre": "Dhiraagu Domestic Submarine Cable Network",
+"llegadas": [
+{
+"lugar": "Kulhudhuffushi",
+"pais": "MV",
+"lat": 6.62,
+"lon": 73.07
+},
+{
+"lugar": "Eydhafushi",
+"pais": "MV",
+"lat": 5.1,
+"lon": 73.07
+},
+{
+"lugar": "Hulhumalé",
+"pais": "MV",
+"lat": 4.21,
+"lon": 73.54
+},
+{
+"lugar": "Dhangethi",
+"pais": "MV",
+"lat": 3.61,
+"lon": 72.95
+},
+{
+"lugar": "Gahdhoo",
+"pais": "MV",
+"lat": 0.29,
+"lon": 73.46
+},
+{
+"lugar": "Fuvahmulah",
+"pais": "MV",
+"lat": -0.3,
+"lon": 73.42
+},
+{
+"lugar": "Gan, Addu",
+"pais": "MV",
+"lat": -0.69,
+"lon": 73.15
+},
+{
+"lugar": "Hithadhoo, Addu",
+"pais": "MV",
+"lat": -0.6,
+"lon": 73.09
+}
+],
+"anio": 2012,
+"km": 1253,
+"duenos": [
+"Dhiraagu"
+],
+"fuentes": [
+"https://www.dhiraagu.com.mv/about-us/corporate-information/milestones-and-achievements",
+"https://cablestatus.com/cables/dhiraagu-cable-network"
+]
+},
+{
+"nombre": "India-Asia-Xpress (IAX)",
+"llegadas": [
+{
+"lugar": "Mumbai, India",
+"pais": "IN",
+"lat": 19.08,
+"lon": 72.88
+},
+{
+"lugar": "Chennai, India",
+"pais": "IN",
+"lat": 13.08,
+"lon": 80.27
+},
+{
+"lugar": "Matara, Sri Lanka",
+"pais": "LK",
+"lat": 5.94,
+"lon": 80.54
+},
+{
+"lugar": "Hulhumalé, Maldivas",
+"pais": "MV",
+"lat": 4.21,
+"lon": 73.54
+},
+{
+"lugar": "Satun, Tailandia",
+"pais": "TH",
+"lat": 6.62,
+"lon": 100.07
+},
+{
+"lugar": "Morib, Malasia",
+"pais": "MY",
+"lat": 2.75,
+"lon": 101.44
+},
+{
+"lugar": "Tuas, Singapur",
+"pais": "SG",
+"lat": 1.34,
+"lon": 103.65
+}
+],
+"anio": 2025,
+"km": 5791,
+"duenos": [
+"Reliance Jio Infocomm"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/intra-asia/iax",
+"https://dialog.lk/news/dialog-axiata-connects-sri-lanka-to-the-world-with-the-india-asia-xpress-subsea-cable-strengthening-redundancy-and-global-data-connectivity"
+]
+},
+{
+"nombre": "Malaysia India Singapore Transit (MIST)",
+"llegadas": [
+{
+"lugar": "Mumbai, India",
+"pais": "IN",
+"lat": 19.08,
+"lon": 72.88
+},
+{
+"lugar": "Chennai, India",
+"pais": "IN",
+"lat": 13.08,
+"lon": 80.27
+},
+{
+"lugar": "Satun, Tailandia",
+"pais": "TH",
+"lat": 6.62,
+"lon": 100.07
+},
+{
+"lugar": "Morib, Malasia",
+"pais": "MY",
+"lat": 2.75,
+"lon": 101.44
+},
+{
+"lugar": "Tuas, Singapur",
+"pais": "SG",
+"lat": 1.34,
+"lon": 103.65
+}
+],
+"anio": 2025,
+"km": 8100,
+"duenos": [
+"Orient Link",
+"NTT DATA",
+"JICT",
+"WEN Capital"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/intra-asia/mist",
+"https://www.submarinenetworks.com/en/systems/intra-asia/mist/ntt-data-to-commission-mist-cable-system-by-june-2025"
+]
+},
+{
+"nombre": "FALCON",
+"llegadas": [
+{
+"lugar": "Mumbai, India",
+"pais": "IN",
+"lat": 19.08,
+"lon": 72.88
+},
+{
+"lugar": "Colombo, Sri Lanka",
+"pais": "LK",
+"lat": 6.93,
+"lon": 79.86
+},
+{
+"lugar": "Al Seeb, Omán",
+"pais": "OM",
+"lat": 23.68,
+"lon": 58.18
+},
+{
+"lugar": "Khasab, Omán",
+"pais": "OM",
+"lat": 26.18,
+"lon": 56.25
+},
+{
+"lugar": "Dubái, Emiratos Árabes Unidos",
+"pais": "AE",
+"lat": 25.27,
+"lon": 55.31
+},
+{
+"lugar": "Doha, Catar",
+"pais": "QA",
+"lat": 25.29,
+"lon": 51.53
+},
+{
+"lugar": "Manama, Baréin",
+"pais": "BH",
+"lat": 26.23,
+"lon": 50.59
+},
+{
+"lugar": "Al Khobar, Arabia Saudita",
+"pais": "SA",
+"lat": 26.29,
+"lon": 50.21
+},
+{
+"lugar": "Kuwait City, Kuwait",
+"pais": "KW",
+"lat": 29.38,
+"lon": 47.98
+},
+{
+"lugar": "Al Faw, Irak",
+"pais": "IQ",
+"lat": 29.92,
+"lon": 48.53
+},
+{
+"lugar": "Bandar Abbas, Irán",
+"pais": "IR",
+"lat": 27.18,
+"lon": 56.28
+},
+{
+"lugar": "Chabahar, Irán",
+"pais": "IR",
+"lat": 25.29,
+"lon": 60.64
+},
+{
+"lugar": "Al Ghaydah, Yemen",
+"pais": "YE",
+"lat": 16.21,
+"lon": 52.18
+},
+{
+"lugar": "Al Hudaydah, Yemen",
+"pais": "YE",
+"lat": 14.8,
+"lon": 42.95
+},
+{
+"lugar": "Jeddah, Arabia Saudita",
+"pais": "SA",
+"lat": 21.49,
+"lon": 39.19
+},
+{
+"lugar": "Port Sudan, Sudán",
+"pais": "SD",
+"lat": 19.62,
+"lon": 37.22
+},
+{
+"lugar": "Suez, Egipto",
+"pais": "EG",
+"lat": 29.97,
+"lon": 32.55
+}
+],
+"anio": 2006,
+"km": 11859,
+"duenos": [
+"Global Cloud Xchange"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/falcon"
+]
+},
+{
+"nombre": "Europe India Gateway (EIG)",
+"llegadas": [
+{
+"lugar": "Bude, Reino Unido",
+"pais": "GB",
+"lat": 50.83,
+"lon": -4.54
+},
+{
+"lugar": "Sesimbra, Portugal",
+"pais": "PT",
+"lat": 38.44,
+"lon": -9.1
+},
+{
+"lugar": "Gibraltar",
+"pais": "GI",
+"lat": 36.14,
+"lon": -5.35
+},
+{
+"lugar": "Mónaco",
+"pais": "MC",
+"lat": 43.74,
+"lon": 7.42
+},
+{
+"lugar": "Marsella, Francia",
+"pais": "FR",
+"lat": 43.3,
+"lon": 5.37
+},
+{
+"lugar": "Trípoli, Libia",
+"pais": "LY",
+"lat": 32.89,
+"lon": 13.19
+},
+{
+"lugar": "Abu Talat, Egipto",
+"pais": "EG",
+"lat": 31.07,
+"lon": 29.7
+},
+{
+"lugar": "Zafarana, Egipto",
+"pais": "EG",
+"lat": 29.12,
+"lon": 32.65
+},
+{
+"lugar": "Jeddah, Arabia Saudita",
+"pais": "SA",
+"lat": 21.49,
+"lon": 39.19
+},
+{
+"lugar": "Yibuti",
+"pais": "DJ",
+"lat": 11.59,
+"lon": 43.15
+},
+{
+"lugar": "Barka, Omán",
+"pais": "OM",
+"lat": 23.68,
+"lon": 57.89
+},
+{
+"lugar": "Fujairah, Emiratos Árabes Unidos",
+"pais": "AE",
+"lat": 25.13,
+"lon": 56.33
+},
+{
+"lugar": "Mumbai, India",
+"pais": "IN",
+"lat": 19.08,
+"lon": 72.88
+}
+],
+"anio": 2011,
+"km": 15000,
+"duenos": [
+"Consorcio Europe India Gateway",
+"Bharti Airtel",
+"BT",
+"Telecom Egypt",
+"Djibouti Telecom",
+"Omantel",
+"Vodafone",
+"Verizon"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/eig"
+]
+},
+{
+"nombre": "Gulf Bridge International Cable System (GBICS)",
+"llegadas": [
+{
+"lugar": "Mumbai, India",
+"pais": "IN",
+"lat": 19.08,
+"lon": 72.88
+},
+{
+"lugar": "Al Seeb, Omán",
+"pais": "OM",
+"lat": 23.68,
+"lon": 58.18
+},
+{
+"lugar": "Fujairah, Emiratos Árabes Unidos",
+"pais": "AE",
+"lat": 25.13,
+"lon": 56.33
+},
+{
+"lugar": "Al Khor, Catar",
+"pais": "QA",
+"lat": 25.68,
+"lon": 51.51
+},
+{
+"lugar": "Al Hidd, Baréin",
+"pais": "BH",
+"lat": 26.24,
+"lon": 50.66
+},
+{
+"lugar": "Al Khobar, Arabia Saudita",
+"pais": "SA",
+"lat": 26.29,
+"lon": 50.21
+},
+{
+"lugar": "Bushehr, Irán",
+"pais": "IR",
+"lat": 28.97,
+"lon": 50.84
+},
+{
+"lugar": "Kuwait City",
+"pais": "KW",
+"lat": 29.38,
+"lon": 47.98
+},
+{
+"lugar": "Al Faw, Irak",
+"pais": "IQ",
+"lat": 29.92,
+"lon": 48.53
+}
+],
+"anio": 2012,
+"km": null,
+"duenos": [
+"Gulf Bridge International"
+],
+"fuentes": [
+"https://www.gbiinc.com/network-solutions/",
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/gbi"
+]
+},
+{
+"nombre": "Tata TGN-Gulf",
+"llegadas": [
+{
+"lugar": "Qalhat, Omán",
+"pais": "OM",
+"lat": 22.7,
+"lon": 59.37
+},
+{
+"lugar": "Fujairah, Emiratos Árabes Unidos",
+"pais": "AE",
+"lat": 25.13,
+"lon": 56.33
+},
+{
+"lugar": "Dubái, Emiratos Árabes Unidos",
+"pais": "AE",
+"lat": 25.27,
+"lon": 55.31
+},
+{
+"lugar": "Al Kheesa, Catar",
+"pais": "QA",
+"lat": 25.38,
+"lon": 51.49
+},
+{
+"lugar": "Amwaj Island, Baréin",
+"pais": "BH",
+"lat": 26.29,
+"lon": 50.67
+},
+{
+"lugar": "Al Khobar, Arabia Saudita",
+"pais": "SA",
+"lat": 26.29,
+"lon": 50.21
+}
+],
+"anio": 2012,
+"km": 4031,
+"duenos": [
+"Tata Communications"
+],
+"fuentes": [
+"https://www.tatacommunications.com/press-release/tata-communications-launches-tgn-gulf-cable-system-connecting-india-oman-uae-qatar-bahrain-saudi-arabia-onward",
+"https://submarinenetworks.com/en/systems/intra-asia/tgn-gulf"
+]
+},
+{
+"nombre": "Bay of Bengal Gateway (BBG)",
+"llegadas": [
+{
+"lugar": "Fujairah, Emiratos Árabes Unidos",
+"pais": "AE",
+"lat": 25.13,
+"lon": 56.33
+},
+{
+"lugar": "Barka, Omán",
+"pais": "OM",
+"lat": 23.68,
+"lon": 57.89
+},
+{
+"lugar": "Mumbai, India",
+"pais": "IN",
+"lat": 19.08,
+"lon": 72.88
+},
+{
+"lugar": "Chennai, India",
+"pais": "IN",
+"lat": 13.08,
+"lon": 80.27
+},
+{
+"lugar": "Ratmalana, Sri Lanka",
+"pais": "LK",
+"lat": 6.82,
+"lon": 79.89
+},
+{
+"lugar": "Penang, Malasia",
+"pais": "MY",
+"lat": 5.41,
+"lon": 100.34
+}
+],
+"anio": 2016,
+"km": 8000,
+"duenos": [
+"Consorcio BBG",
+"Omantel",
+"Reliance Jio Infocomm",
+"Telekom Malaysia",
+"Dialog Axiata",
+"Vodafone"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/intra-asia/bbg"
+]
+},
+{
+"nombre": "SEA-ME-WE 4",
+"llegadas": [
+{
+"lugar": "Marsella, Francia",
+"pais": "FR",
+"lat": 43.3,
+"lon": 5.37
+},
+{
+"lugar": "Annaba, Argelia",
+"pais": "DZ",
+"lat": 36.9,
+"lon": 7.76
+},
+{
+"lugar": "Bizerta, Túnez",
+"pais": "TN",
+"lat": 37.28,
+"lon": 9.87
+},
+{
+"lugar": "Palermo, Italia",
+"pais": "IT",
+"lat": 38.12,
+"lon": 13.36
+},
+{
+"lugar": "Alejandría, Egipto",
+"pais": "EG",
+"lat": 31.2,
+"lon": 29.92
+},
+{
+"lugar": "Suez, Egipto",
+"pais": "EG",
+"lat": 29.97,
+"lon": 32.55
+},
+{
+"lugar": "Jeddah, Arabia Saudita",
+"pais": "SA",
+"lat": 21.49,
+"lon": 39.19
+},
+{
+"lugar": "Fujairah, Emiratos Árabes Unidos",
+"pais": "AE",
+"lat": 25.13,
+"lon": 56.33
+},
+{
+"lugar": "Karachi, Pakistán",
+"pais": "PK",
+"lat": 24.86,
+"lon": 67.01
+},
+{
+"lugar": "Mumbai, India",
+"pais": "IN",
+"lat": 19.08,
+"lon": 72.88
+},
+{
+"lugar": "Colombo, Sri Lanka",
+"pais": "LK",
+"lat": 6.93,
+"lon": 79.86
+},
+{
+"lugar": "Chennai, India",
+"pais": "IN",
+"lat": 13.08,
+"lon": 80.27
+},
+{
+"lugar": "Cox's Bazar, Bangladés",
+"pais": "BD",
+"lat": 21.43,
+"lon": 92.0
+},
+{
+"lugar": "Satun, Tailandia",
+"pais": "TH",
+"lat": 6.62,
+"lon": 100.07
+},
+{
+"lugar": "Melaka, Malasia",
+"pais": "MY",
+"lat": 2.19,
+"lon": 102.25
+},
+{
+"lugar": "Tuas, Singapur",
+"pais": "SG",
+"lat": 1.34,
+"lon": 103.65
+}
+],
+"anio": 2005,
+"km": 18800,
+"duenos": [
+"Consorcio SEA-ME-WE 4"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/smw4",
+"https://www.slt.lk/index.php/en/content/consortium-starts-deployment-sea-me-we-5-cable-system"
+]
+},
+{
+"nombre": "SEA-ME-WE 5",
+"llegadas": [
+{
+"lugar": "La Seyne-sur-Mer, Francia",
+"pais": "FR",
+"lat": 43.1,
+"lon": 5.88
+},
+{
+"lugar": "Catania, Italia",
+"pais": "IT",
+"lat": 37.51,
+"lon": 15.07
+},
+{
+"lugar": "Marmaris, Turquía",
+"pais": "TR",
+"lat": 36.86,
+"lon": 28.25
+},
+{
+"lugar": "Abu Talat, Egipto",
+"pais": "EG",
+"lat": 31.07,
+"lon": 29.7
+},
+{
+"lugar": "Zafarana, Egipto",
+"pais": "EG",
+"lat": 29.12,
+"lon": 32.65
+},
+{
+"lugar": "Yanbu, Arabia Saudita",
+"pais": "SA",
+"lat": 24.07,
+"lon": 38.11
+},
+{
+"lugar": "Al Hudaydah, Yemen",
+"pais": "YE",
+"lat": 14.8,
+"lon": 42.95
+},
+{
+"lugar": "Yibuti",
+"pais": "DJ",
+"lat": 11.59,
+"lon": 43.15
+},
+{
+"lugar": "Qalhat, Omán",
+"pais": "OM",
+"lat": 22.7,
+"lon": 59.37
+},
+{
+"lugar": "Fujairah, Emiratos Árabes Unidos",
+"pais": "AE",
+"lat": 25.13,
+"lon": 56.33
+},
+{
+"lugar": "Karachi, Pakistán",
+"pais": "PK",
+"lat": 24.86,
+"lon": 67.01
+},
+{
+"lugar": "Matara, Sri Lanka",
+"pais": "LK",
+"lat": 5.94,
+"lon": 80.54
+},
+{
+"lugar": "Ngwe Saung, Birmania",
+"pais": "MM",
+"lat": 16.86,
+"lon": 94.39
+},
+{
+"lugar": "Kuakata, Bangladés",
+"pais": "BD",
+"lat": 21.82,
+"lon": 90.12
+},
+{
+"lugar": "Medan, Indonesia",
+"pais": "ID",
+"lat": 3.6,
+"lon": 98.68
+},
+{
+"lugar": "Dumai, Indonesia",
+"pais": "ID",
+"lat": 1.67,
+"lon": 101.45
+},
+{
+"lugar": "Melaka, Malasia",
+"pais": "MY",
+"lat": 2.19,
+"lon": 102.25
+},
+{
+"lugar": "Tuas, Singapur",
+"pais": "SG",
+"lat": 1.34,
+"lon": 103.65
+}
+],
+"anio": 2016,
+"km": 20000,
+"duenos": [
+"Consorcio SEA-ME-WE 5"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/smw5",
+"https://slt.lk/index.php/en/content/consortium-starts-deployment-sea-me-we-5-cable-system"
+]
+},
+{
+"nombre": "Asia-Africa-Europe 1 (AAE-1)",
+"llegadas": [
+{
+"lugar": "Marsella, Francia",
+"pais": "FR",
+"lat": 43.3,
+"lon": 5.37
+},
+{
+"lugar": "Bari, Italia",
+"pais": "IT",
+"lat": 41.13,
+"lon": 16.87
+},
+{
+"lugar": "Chania, Creta",
+"pais": "GR",
+"lat": 35.51,
+"lon": 24.02
+},
+{
+"lugar": "Abu Talat, Egipto",
+"pais": "EG",
+"lat": 31.07,
+"lon": 29.7
+},
+{
+"lugar": "Zafarana, Egipto",
+"pais": "EG",
+"lat": 29.12,
+"lon": 32.65
+},
+{
+"lugar": "Jeddah, Arabia Saudita",
+"pais": "SA",
+"lat": 21.49,
+"lon": 39.19
+},
+{
+"lugar": "Yibuti",
+"pais": "DJ",
+"lat": 11.59,
+"lon": 43.15
+},
+{
+"lugar": "Al Bustan, Omán",
+"pais": "OM",
+"lat": 23.56,
+"lon": 58.61
+},
+{
+"lugar": "Fujairah, Emiratos Árabes Unidos",
+"pais": "AE",
+"lat": 25.13,
+"lon": 56.33
+},
+{
+"lugar": "Doha, Catar",
+"pais": "QA",
+"lat": 25.29,
+"lon": 51.53
+},
+{
+"lugar": "Karachi, Pakistán",
+"pais": "PK",
+"lat": 24.86,
+"lon": 67.01
+},
+{
+"lugar": "Mumbai, India",
+"pais": "IN",
+"lat": 19.08,
+"lon": 72.88
+},
+{
+"lugar": "Satun, Tailandia",
+"pais": "TH",
+"lat": 6.62,
+"lon": 100.07
+},
+{
+"lugar": "Songkhla, Tailandia",
+"pais": "TH",
+"lat": 7.2,
+"lon": 100.6
+},
+{
+"lugar": "Butterworth, Malasia",
+"pais": "MY",
+"lat": 5.4,
+"lon": 100.36
+},
+{
+"lugar": "Vung Tau, Vietnam",
+"pais": "VN",
+"lat": 10.35,
+"lon": 107.08
+},
+{
+"lugar": "Cape D'Aguilar, Hong Kong",
+"pais": "HK",
+"lat": 22.21,
+"lon": 114.26
+}
+],
+"anio": 2017,
+"km": 25000,
+"duenos": [
+"Consorcio AAE-1"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/aae-1",
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/aae-1/aae-1-ready-for-service"
+]
+},
+{
+"nombre": "Oman Australia Cable (OAC)",
+"llegadas": [
+{
+"lugar": "Barka, Omán",
+"pais": "OM",
+"lat": 23.68,
+"lon": 57.89
+},
+{
+"lugar": "Perth, Australia Occidental",
+"pais": "AU",
+"lat": -31.95,
+"lon": 115.86
+}
+],
+"anio": 2022,
+"km": 9800,
+"duenos": [
+"SUBCO"
+],
+"fuentes": [
+"https://sub.co/news/final-splice-for-oac-australias-9800km-express-cable-to-oman-europe-and-beyond",
+"https://sub.co/news/prime-minister-switches-on-new-300-million-international-digital-super-highway"
+]
+},
+{
+"nombre": "INDIGO-West",
+"llegadas": [
+{
+"lugar": "Perth, Australia Occidental",
+"pais": "AU",
+"lat": -31.95,
+"lon": 115.86
+},
+{
+"lugar": "Jakarta, Indonesia",
+"pais": "ID",
+"lat": -6.17,
+"lon": 106.83
+},
+{
+"lugar": "Tuas, Singapur",
+"pais": "SG",
+"lat": 1.34,
+"lon": 103.65
+}
+],
+"anio": 2019,
+"km": 4600,
+"duenos": [
+"AARNet",
+"Google",
+"Indosat",
+"Singtel",
+"SubPartners",
+"Telstra"
+],
+"fuentes": [
+"https://aarnet.edu.au/indigo-subsea-cable-system-between-australia-and-south-east-asia-now-commissioned-and-is-ready-for-use/",
+"https://www.submarinenetworks.com/en/systems/asia-australia/indigo"
+]
+},
+{
+"nombre": "INDIGO-Central",
+"llegadas": [
+{
+"lugar": "Perth, Australia Occidental",
+"pais": "AU",
+"lat": -31.95,
+"lon": 115.86
+},
+{
+"lugar": "Sídney, Nueva Gales del Sur",
+"pais": "AU",
+"lat": -33.87,
+"lon": 151.21
+}
+],
+"anio": 2019,
+"km": 4600,
+"duenos": [
+"AARNet",
+"Google",
+"Indosat",
+"Singtel",
+"SubPartners",
+"Telstra"
+],
+"fuentes": [
+"https://aarnet.edu.au/indigo-subsea-cable-system-between-australia-and-south-east-asia-now-commissioned-and-is-ready-for-use/",
+"https://www.submarinenetworks.com/en/systems/asia-australia/indigo"
+]
+},
+{
+"nombre": "Australia-Singapore Cable (ASC)",
+"llegadas": [
+{
+"lugar": "Perth, Australia Occidental",
+"pais": "AU",
+"lat": -31.95,
+"lon": 115.86
+},
+{
+"lugar": "Flying Fish Cove, Isla de Navidad",
+"pais": "CX",
+"lat": -10.44,
+"lon": 105.7
+},
+{
+"lugar": "Anyer, Indonesia",
+"pais": "ID",
+"lat": -6.07,
+"lon": 105.88
+},
+{
+"lugar": "Tanah Merah, Singapur",
+"pais": "SG",
+"lat": 1.38,
+"lon": 103.99
+}
+],
+"anio": 2018,
+"km": 4600,
+"duenos": [
+"Vocus Group"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-australia/asc",
+"https://www.submarinenetworks.com/en/systems/asia-australia/asc/vocus-to-start-laying-australia-singapore-cable-in-february"
+]
+},
+{
+"nombre": "North-West Cable System (NWCS)",
+"llegadas": [
+{
+"lugar": "Port Hedland, Australia Occidental",
+"pais": "AU",
+"lat": -20.31,
+"lon": 118.58
+},
+{
+"lugar": "Darwin, Territorio del Norte",
+"pais": "AU",
+"lat": -12.47,
+"lon": 130.84
+}
+],
+"anio": 2016,
+"km": 2100,
+"duenos": [
+"Vocus Group"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-australia/asc/vocus-acquires-nextgen-networks-and-its-shares-in-australia-singapore-cable",
+"https://www.submarinenetworks.com/en/systems/asia-australia/asc/vocus-to-start-laying-australia-singapore-cable-in-february"
+]
+},
+{
+"nombre": "Darwin-Jakarta-Singapore Cable (DJSC), enlace nuevo entre NWCS y ASC",
+"llegadas": [
+{
+"lugar": "Port Hedland, Australia Occidental",
+"pais": "AU",
+"lat": -20.31,
+"lon": 118.58
+},
+{
+"lugar": "Punto submarino de conexión con Australia-Singapore Cable",
+"pais": null,
+"lat": null,
+"lon": null
+}
+],
+"anio": 2023,
+"km": 1000,
+"duenos": [
+"Vocus Group"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-australia/png-national/djsc/vocus-completes-final-segment-of-djsc-connecting-darwin-to-singapore",
+"https://www.submarinenetworks.com/en/systems/asia-australia/djsc"
+]
+},
+{
+"nombre": "Timor-Leste South Submarine Cable System (TLSSC)",
+"llegadas": [
+{
+"lugar": "Bebonuk, Dili, Timor Oriental",
+"pais": "TL",
+"lat": -8.57,
+"lon": 125.58
+},
+{
+"lugar": "Empalme submarino con North-West Cable System",
+"pais": null,
+"lat": null,
+"lon": null
+}
+],
+"anio": 2026,
+"km": 607,
+"duenos": [
+"Cabos de Timor-Leste E.P.",
+"Gobierno de Timor-Leste"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-australia/png-national/tlssc/timor-leste-activates-its-first-international-submarine-cable",
+"https://www.submarinenetworks.com/en/systems/asia-australia/png-national/tlssc/tlssc-cable-lands-in-timor-leste"
+]
+},
+{
+"nombre": "Bass Strait-1",
+"llegadas": [
+{
+"lugar": "Sandy Point, Victoria",
+"pais": "AU",
+"lat": -38.83,
+"lon": 146.12
+},
+{
+"lugar": "Boat Harbour, Tasmania",
+"pais": "AU",
+"lat": -40.95,
+"lon": 145.62
+}
+],
+"anio": 1995,
+"km": 241,
+"duenos": [
+"Telstra"
+],
+"fuentes": [
+"https://en.wikipedia.org/wiki/Bass_Strait",
+"https://prefix.pch.net/applications/cablesystem/"
+]
+},
+{
+"nombre": "Bass Strait-2",
+"llegadas": [
+{
+"lugar": "Inverloch, Victoria",
+"pais": "AU",
+"lat": -38.63,
+"lon": 145.73
+},
+{
+"lugar": "Stanley, Tasmania",
+"pais": "AU",
+"lat": -40.76,
+"lon": 145.3
+}
+],
+"anio": 2003,
+"km": 239,
+"duenos": [
+"Telstra"
+],
+"fuentes": [
+"https://en.wikipedia.org/wiki/Bass_Strait",
+"https://prefix.pch.net/applications/cablesystem/"
+]
+},
+{
+"nombre": "Basslink Telecoms, fibra óptica de telecomunicaciones",
+"llegadas": [
+{
+"lugar": "McGaurans Beach, Victoria",
+"pais": "AU",
+"lat": -38.65,
+"lon": 146.89
+},
+{
+"lugar": "Four Mile Bluff, Tasmania",
+"pais": "AU",
+"lat": -40.95,
+"lon": 146.83
+}
+],
+"anio": 2009,
+"km": 298,
+"duenos": [
+"APA Group",
+"Basslink Telecoms"
+],
+"fuentes": [
+"https://www.apa.com.au/operations-and-projects/electricity-transmission/electricity-interconnectors/basslink",
+"https://en.wikipedia.org/wiki/Basslink"
+]
+},
+{
+"nombre": "Aqualink",
+"llegadas": [
+{
+"lugar": "Auckland, Nueva Zelanda",
+"pais": "NZ",
+"lat": -36.88,
+"lon": 174.77
+},
+{
+"lugar": "Raglan",
+"pais": "NZ",
+"lat": -37.8,
+"lon": 174.87
+},
+{
+"lugar": "New Plymouth",
+"pais": "NZ",
+"lat": -39.07,
+"lon": 174.08
+},
+{
+"lugar": "Whanganui",
+"pais": "NZ",
+"lat": -39.93,
+"lon": 175.05
+},
+{
+"lugar": "Waikanae",
+"pais": "NZ",
+"lat": -40.86,
+"lon": 175.05
+},
+{
+"lugar": "Paraparaumu",
+"pais": "NZ",
+"lat": -40.92,
+"lon": 175.0
+},
+{
+"lugar": "Titahi Bay",
+"pais": "NZ",
+"lat": -41.11,
+"lon": 174.84
+},
+{
+"lugar": "Wellington",
+"pais": "NZ",
+"lat": -41.28,
+"lon": 174.77
+},
+{
+"lugar": "Kaikōura",
+"pais": "NZ",
+"lat": -42.4,
+"lon": 173.68
+},
+{
+"lugar": "Oaro",
+"pais": "NZ",
+"lat": -42.52,
+"lon": 173.51
+},
+{
+"lugar": "Christchurch",
+"pais": "NZ",
+"lat": -43.53,
+"lon": 172.64
+}
+],
+"anio": 2001,
+"km": null,
+"duenos": [
+"One New Zealand"
+],
+"fuentes": [
+"https://submarinecablestatus.com/cables/aqualink",
+"https://www.submarinenetworks.com/en/stations/oceania/new-zealand"
+]
+},
+{
+"nombre": "Cook Strait Telecommunications Cable (Transpower)",
+"llegadas": [
+{
+"lugar": "Oteranga Bay, Isla Norte",
+"pais": "NZ",
+"lat": -41.32,
+"lon": 174.62
+},
+{
+"lugar": "Fighting Bay, Isla Sur",
+"pais": "NZ",
+"lat": -41.31,
+"lon": 174.13
+}
+],
+"anio": 2020,
+"km": null,
+"duenos": [
+"Transpower New Zealand"
+],
+"fuentes": [
+"https://www.transpower.co.nz/news/submarine-telecommunications-cable-deployment-and-removal-successful"
+]
+},
+{
+"nombre": "Nelson-Levin",
+"llegadas": [
+{
+"lugar": "Nelson, Isla Sur",
+"pais": "NZ",
+"lat": -41.27,
+"lon": 173.28
+},
+{
+"lugar": "Levin, Isla Norte",
+"pais": "NZ",
+"lat": -40.63,
+"lon": 175.29
+}
+],
+"anio": 2001,
+"km": 212,
+"duenos": [
+"Spark New Zealand"
+],
+"fuentes": [
+"https://cablestatus.com/cables/nelson-levin",
+"https://geocables.com/location/levin-new-zealand"
+]
+},
+{
+"nombre": "Fibra Óptica Austral, Troncal Submarina Austral",
+"llegadas": [
+{
+"lugar": "Puerto Montt, Chile",
+"pais": "CL",
+"lat": -41.47,
+"lon": -72.94
+},
+{
+"lugar": "Caleta Tortel, Chile",
+"pais": "CL",
+"lat": -47.8,
+"lon": -73.54
+},
+{
+"lugar": "Punta Arenas, Chile",
+"pais": "CL",
+"lat": -53.16,
+"lon": -70.91
+},
+{
+"lugar": "Puerto Williams, Chile",
+"pais": "CL",
+"lat": -54.93,
+"lon": -67.61
+}
+],
+"anio": 2020,
+"km": null,
+"duenos": [],
+"fuentes": [
+"https://foa.subtel.gob.cl/proyecto-fibra-optica-austral/",
+"https://www.subtel.gob.cl/caleta-tortel-se-conecta-a-4g-gracias-a-la-fibra-optica-austral/",
+"https://foa.subtel.gob.cl/habitantes-de-puerto-williams-podran-acceder-a-conectividad-movil-de-alta-velocidad-gracias-a-la-fibra-optica-austral/"
+]
+},
+{
+"nombre": "Prat",
+"llegadas": [
+{
+"lugar": "Arica, Chile",
+"pais": "CL",
+"lat": -18.48,
+"lon": -70.31
+},
+{
+"lugar": "Iquique, Chile",
+"pais": "CL",
+"lat": -20.22,
+"lon": -70.14
+},
+{
+"lugar": "Tocopilla, Chile",
+"pais": "CL",
+"lat": -22.09,
+"lon": -70.2
+},
+{
+"lugar": "Antofagasta, Chile",
+"pais": "CL",
+"lat": -23.65,
+"lon": -70.4
+},
+{
+"lugar": "Caldera, Chile",
+"pais": "CL",
+"lat": -27.07,
+"lon": -70.82
+},
+{
+"lugar": "La Serena, Chile",
+"pais": "CL",
+"lat": -29.9,
+"lon": -71.25
+},
+{
+"lugar": "Valparaíso, Chile",
+"pais": "CL",
+"lat": -33.05,
+"lon": -71.62
+},
+{
+"lugar": "San Antonio, Chile",
+"pais": "CL",
+"lat": -33.59,
+"lon": -71.61
+},
+{
+"lugar": "Constitución, Chile",
+"pais": "CL",
+"lat": -35.33,
+"lon": -72.42
+},
+{
+"lugar": "Talcahuano, Chile",
+"pais": "CL",
+"lat": -36.72,
+"lon": -73.12
+},
+{
+"lugar": "Puerto Saavedra, Chile",
+"pais": "CL",
+"lat": -38.78,
+"lon": -73.4
+},
+{
+"lugar": "Puerto Montt, Chile",
+"pais": "CL",
+"lat": -41.47,
+"lon": -72.94
+}
+],
+"anio": 2021,
+"km": 3500,
+"duenos": [
+"Grupo GTD"
+],
+"fuentes": [
+"https://www.subtel.gob.cl/gobierno-y-gtd-inauguraron-en-arica-cable-submarino-prat-que-proveera-de-fibra-optica-a-gran-parte-del-territorio-nacional/"
+]
+},
+{
+"nombre": "Australia-Papua New Guinea Cable 2 (APNG-2)",
+"llegadas": [
+{
+"lugar": "Narrabeen / Oxford Falls, Sídney",
+"pais": "AU",
+"lat": -33.72,
+"lon": 151.3
+},
+{
+"lugar": "Ela Beach, Port Moresby",
+"pais": "PG",
+"lat": -9.49,
+"lon": 147.16
+}
+],
+"anio": 2006,
+"km": 1800,
+"duenos": [
+"Telikom PNG",
+"Telstra",
+"Telecom New Zealand"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/australia-usa/apng-2"
+]
+},
+{
+"nombre": "Kumul Submarine Cable Network (KSCN)",
+"llegadas": [
+{
+"lugar": "Port Moresby, Papúa Nueva Guinea",
+"pais": "PG",
+"lat": -9.48,
+"lon": 147.19
+},
+{
+"lugar": "Madang, Papúa Nueva Guinea",
+"pais": "PG",
+"lat": -5.23,
+"lon": 145.78
+},
+{
+"lugar": "Wewak, Papúa Nueva Guinea",
+"pais": "PG",
+"lat": -3.55,
+"lon": 143.63
+},
+{
+"lugar": "Vanimo, Papúa Nueva Guinea",
+"pais": "PG",
+"lat": -2.68,
+"lon": 141.3
+},
+{
+"lugar": "Lae, Papúa Nueva Guinea",
+"pais": "PG",
+"lat": -6.72,
+"lon": 146.99
+},
+{
+"lugar": "Kimbe, Papúa Nueva Guinea",
+"pais": "PG",
+"lat": -5.55,
+"lon": 150.14
+},
+{
+"lugar": "Rabaul, Papúa Nueva Guinea",
+"pais": "PG",
+"lat": -4.2,
+"lon": 152.17
+},
+{
+"lugar": "Kokopo, Papúa Nueva Guinea",
+"pais": "PG",
+"lat": -4.34,
+"lon": 152.27
+},
+{
+"lugar": "Kavieng, Papúa Nueva Guinea",
+"pais": "PG",
+"lat": -2.57,
+"lon": 150.8
+},
+{
+"lugar": "Alotau, Papúa Nueva Guinea",
+"pais": "PG",
+"lat": -10.31,
+"lon": 150.45
+},
+{
+"lugar": "Popondetta, Papúa Nueva Guinea",
+"pais": "PG",
+"lat": -8.77,
+"lon": 148.24
+},
+{
+"lugar": "Jayapura, Indonesia",
+"pais": "ID",
+"lat": -2.53,
+"lon": 140.72
+}
+],
+"anio": 2020,
+"km": 5457,
+"duenos": [
+"PNG DataCo Limited"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-australia/png-national/png-national"
+]
+},
+{
+"nombre": "Japan Information Highway (JIH)",
+"llegadas": [
+{
+"lugar": "Ishikari, Hokkaido",
+"pais": "JP",
+"lat": 43.17,
+"lon": 141.32
+},
+{
+"lugar": "Sendai, Miyagi",
+"pais": "JP",
+"lat": 38.27,
+"lon": 140.87
+},
+{
+"lugar": "Ibaraki",
+"pais": "JP",
+"lat": null,
+"lon": null
+},
+{
+"lugar": "Chikura, Chiba",
+"pais": "JP",
+"lat": 34.98,
+"lon": 139.95
+},
+{
+"lugar": "Ninomiya, Kanagawa",
+"pais": "JP",
+"lat": 35.3,
+"lon": 139.25
+},
+{
+"lugar": "Toyohashi, Aichi",
+"pais": "JP",
+"lat": 34.77,
+"lon": 137.39
+},
+{
+"lugar": "Shima, Mie",
+"pais": "JP",
+"lat": 34.34,
+"lon": 136.87
+},
+{
+"lugar": "Kochi",
+"pais": "JP",
+"lat": 33.56,
+"lon": 133.53
+},
+{
+"lugar": "Miyazaki",
+"pais": "JP",
+"lat": 31.91,
+"lon": 131.42
+},
+{
+"lugar": "Okinawa",
+"pais": "JP",
+"lat": null,
+"lon": null
+},
+{
+"lugar": "Fukuoka",
+"pais": "JP",
+"lat": 33.59,
+"lon": 130.4
+},
+{
+"lugar": "Hamada, Shimane",
+"pais": "JP",
+"lat": 34.9,
+"lon": 132.08
+},
+{
+"lugar": "Kumihama, Kioto",
+"pais": "JP",
+"lat": 35.64,
+"lon": 134.9
+},
+{
+"lugar": "Naoetsu, Niigata",
+"pais": "JP",
+"lat": 37.17,
+"lon": 138.24
+},
+{
+"lugar": "Niigata",
+"pais": "JP",
+"lat": 37.91,
+"lon": 139.04
+},
+{
+"lugar": "Akita",
+"pais": "JP",
+"lat": 39.72,
+"lon": 140.1
+}
+],
+"anio": null,
+"km": 10000,
+"duenos": [
+"KDDI"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/stations/asia/japan/ninomiya",
+"https://www.submarinenetworks.com/en/stations/asia/japan/miyazaki"
+]
+},
+{
+"nombre": "Hokkaido-Sakhalin Cable System (HSCS)",
+"llegadas": [
+{
+"lugar": "Ishikari, Hokkaido",
+"pais": "JP",
+"lat": 43.17,
+"lon": 141.32
+},
+{
+"lugar": "Nevelsk, Sajalín",
+"pais": "RU",
+"lat": 46.68,
+"lon": 141.86
+}
+],
+"anio": 2008,
+"km": 570,
+"duenos": [
+"NTT Communications",
+"TransTeleCom"
+],
+"fuentes": [
+"https://www.submarinenetworks.com/en/systems/asia-europe-africa/hscs/hscs-starts-operations"
+]
+},
+{
+"nombre": "Tasman Global Access (TGA)",
+"llegadas": [
+{
+"lugar": "Narrabeen Beach, Sídney",
+"pais": "AU",
+"lat": -33.72,
+"lon": 151.3
+},
+{
+"lugar": "Ngarunui Beach, Raglan",
+"pais": "NZ",
+"lat": -37.82,
+"lon": 174.87
+}
+],
+"anio": 2017,
+"km": 2288,
+"duenos": [
+"Spark New Zealand",
+"One New Zealand",
+"Telstra"
+],
+"fuentes": [
+"https://media.one.nz/article/tasman-global-access-cable-goes-live-improving-new-zealands-connectivity-world",
+"https://www.submarinenetworks.com/en/systems/australia-usa/tga"
+]
+},
+{
+"nombre": "Hawaiki Cable",
+"llegadas": [
+{
+"lugar": "Sídney, Australia",
+"pais": "AU",
+"lat": -33.87,
+"lon": 151.21
+},
+{
+"lugar": "Mangawhai Heads, Nueva Zelanda",
+"pais": "NZ",
+"lat": -36.13,
+"lon": 174.57
+},
+{
+"lugar": "Pago Pago, Samoa Americana",
+"pais": "AS",
+"lat": -14.28,
+"lon": -170.7
+},
+{
+"lugar": "Kapolei, Hawái",
+"pais": "US",
+"lat": 21.34,
+"lon": -158.06
+},
+{
+"lugar": "Pacific City, Oregon",
+"pais": "US",
+"lat": 45.2,
+"lon": -123.96
+}
+],
+"anio": 2018,
+"km": 15000,
+"duenos": [
+"BW Digital"
+],
+"fuentes": [
+"https://www.bw-digital.com/projects/hawaiki/",
+"https://submarinenetworks.com/en/systems/australia-usa/hawaiki-cable/hawaiki-cable-terminates-at-brookwood-data-center-in-hillsboro"
+]
+}
+]
