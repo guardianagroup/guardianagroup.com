@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "í skugga jarðar",
   "Yahoo Japón": "Yahoo Japan",
   "De punto a punto, en línea recta": "Punkt til punkts, í beinni línu",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Vafrinn sem sýnir hverja rofna tengingu í beinni. Kemur þegar hann er tilbúinn og prófaður."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Vafrinn sem sýnir hverja rofna tengingu í beinni. Kemur þegar hann er tilbúinn og prófaður.",
+  "aquí": "hér",
+  "Elige uno para ver su ficha.": "Veldu eitt til að sjá spjaldið.",
+  "acerca más para verlos todos": "þysjaðu inn til að sjá þau öll",
+  "Navegador · demostración": "Vafri · kynning",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Vafrinn sem sýnir hvert rof í beinni. Það sem þú sérð hér er kynning.",
+  "Según el mapa de la red de": "Samkvæmt netkorti frá",
+  "Altura aproximada desde la que se ve el planeta": "Áætluð hæð sem plánetan sést frá",
+  "Enlace": "Tenging",
+  "Estación": "Stöð",
+  "Previsto": "Fyrirhugað",
+  "Propuesto": "Lagt til",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Er ekki til enn: teiknað sem bein lína, til ábendingar.",
+  "Tipo": "Tegund",
+  "Base antártica": "Suðurskautsstöð",
+  "Estación terrena de satélites": "Jarðstöð fyrir gervitungl"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

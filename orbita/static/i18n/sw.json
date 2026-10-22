@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "katika kivuli cha Dunia",
   "Yahoo Japón": "Yahoo Japani",
   "De punto a punto, en línea recta": "Nukta hadi nukta, kwa mstari ulionyooka",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Kivinjari kinachoonyesha kila ukataji, moja kwa moja. Kitafika kikikamilika na kujaribiwa."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Kivinjari kinachoonyesha kila ukataji, moja kwa moja. Kitafika kikikamilika na kujaribiwa.",
+  "aquí": "hapa",
+  "Elige uno para ver su ficha.": "Chagua moja ili kuona kadi yake.",
+  "acerca más para verlos todos": "kuza ili kuona zote",
+  "Navegador · demostración": "Kivinjari · onyesho",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Kivinjari kinachoonyesha kila mkato, moja kwa moja. Unachokiona hapa ni onyesho.",
+  "Según el mapa de la red de": "Kulingana na ramani ya mtandao ya",
+  "Altura aproximada desde la que se ve el planeta": "Urefu wa takriban ambapo sayari inaonekana",
+  "Enlace": "Kiungo",
+  "Estación": "Kituo",
+  "Previsto": "Imepangwa",
+  "Propuesto": "Imependekezwa",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Bado haipo: imechorwa kwa mstari ulionyooka, kama tahadhari.",
+  "Tipo": "Aina",
+  "Base antártica": "Kituo cha Antaktika",
+  "Estación terrena de satélites": "Kituo cha ardhini cha satelaiti"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

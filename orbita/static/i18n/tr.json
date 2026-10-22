@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "Dünya'nın gölgesinde",
   "Yahoo Japón": "Yahoo Japonya",
   "De punto a punto, en línea recta": "Noktadan noktaya, kuş uçuşu",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Her kesintiyi canlı gösteren tarayıcı. Bitip test edildiğinde gelecek."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Her kesintiyi canlı gösteren tarayıcı. Bitip test edildiğinde gelecek.",
+  "aquí": "burada",
+  "Elige uno para ver su ficha.": "Kartını görmek için birini seçin.",
+  "acerca más para verlos todos": "hepsini görmek için yakınlaştırın",
+  "Navegador · demostración": "Tarayıcı · tanıtım",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Her kesintiyi canlı gösteren tarayıcı. Burada gördüğünüz bir tanıtımdır.",
+  "Según el mapa de la red de": "Ağ haritasına göre, yıl",
+  "Altura aproximada desde la que se ve el planeta": "Gezegenin görüldüğü yaklaşık yükseklik",
+  "Enlace": "Bağlantı",
+  "Estación": "İstasyon",
+  "Previsto": "Planlanan",
+  "Propuesto": "Önerilen",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Henüz mevcut değil: uyarı olarak düz çizgiyle çizilmiştir.",
+  "Tipo": "Tür",
+  "Base antártica": "Antarktika istasyonu",
+  "Estación terrena de satélites": "Uydu yer istasyonu"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

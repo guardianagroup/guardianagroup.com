@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "i jordens skugga",
   "Yahoo Japón": "Yahoo Japan",
   "De punto a punto, en línea recta": "Punkt till punkt, fågelvägen",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Webbläsaren som visar varje avbrott, live. Kommer när den är klar och testad."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Webbläsaren som visar varje avbrott, live. Kommer när den är klar och testad.",
+  "aquí": "här",
+  "Elige uno para ver su ficha.": "Välj ett för att se dess kort.",
+  "acerca más para verlos todos": "zooma in för att se alla",
+  "Navegador · demostración": "Webbläsare · demo",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Webbläsaren som visar varje avbrott, live. Det du ser här är en demo.",
+  "Según el mapa de la red de": "Enligt nätverkskartan från",
+  "Altura aproximada desde la que se ve el planeta": "Ungefärlig höjd som planeten ses från",
+  "Enlace": "Länk",
+  "Estación": "Station",
+  "Previsto": "Planerad",
+  "Propuesto": "Föreslagen",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Finns inte ännu: ritad som en rak linje, som en upplysning.",
+  "Tipo": "Typ",
+  "Base antártica": "Antarktisk station",
+  "Estación terrena de satélites": "Satellitmarkstation"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

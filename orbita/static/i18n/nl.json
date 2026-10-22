@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "in de schaduw van de aarde",
   "Yahoo Japón": "Yahoo Japan",
   "De punto a punto, en línea recta": "Van punt tot punt, hemelsbreed",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "De browser die elke onderbreking live laat zien. Komt zodra hij af en getest is."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "De browser die elke onderbreking live laat zien. Komt zodra hij af en getest is.",
+  "aquí": "hier",
+  "Elige uno para ver su ficha.": "Kies er een om de kaart te bekijken.",
+  "acerca más para verlos todos": "zoom in om ze allemaal te zien",
+  "Navegador · demostración": "Browser · demo",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "De browser die elke onderbreking live toont. Wat u hier ziet, is een demo.",
+  "Según el mapa de la red de": "Volgens de netwerkkaart van",
+  "Altura aproximada desde la que se ve el planeta": "Hoogte bij benadering van waaruit de planeet wordt gezien",
+  "Enlace": "Verbinding",
+  "Estación": "Station",
+  "Previsto": "Gepland",
+  "Propuesto": "Voorgesteld",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Bestaat nog niet: getekend als rechte lijn, ter indicatie.",
+  "Tipo": "Type",
+  "Base antártica": "Antarctisch station",
+  "Estación terrena de satélites": "Satellietgrondstation"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

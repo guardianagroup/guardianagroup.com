@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "nell'ombra della Terra",
   "Yahoo Japón": "Yahoo Giappone",
   "De punto a punto, en línea recta": "Da punto a punto, in linea d’aria",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Il browser che mostra ogni taglio, in diretta. Arriverà quando sarà finito e collaudato."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Il browser che mostra ogni taglio, in diretta. Arriverà quando sarà finito e collaudato.",
+  "aquí": "qui",
+  "Elige uno para ver su ficha.": "Scegline uno per vedere la sua scheda.",
+  "acerca más para verlos todos": "avvicinati per vederli tutti",
+  "Navegador · demostración": "Browser · dimostrazione",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Il browser che mostra ogni interruzione, in diretta. Quello che vedi qui è una dimostrazione.",
+  "Según el mapa de la red de": "Secondo la mappa della rete del",
+  "Altura aproximada desde la que se ve el planeta": "Altezza approssimativa da cui si vede il pianeta",
+  "Enlace": "Collegamento",
+  "Estación": "Stazione",
+  "Previsto": "Previsto",
+  "Propuesto": "Proposto",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Non esiste ancora: è disegnato in linea retta, a titolo di avviso.",
+  "Tipo": "Tipo",
+  "Base antártica": "Base antartica",
+  "Estación terrena de satélites": "Stazione terrestre satellitare"
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "nasa anino ng Mundo",
   "Yahoo Japón": "Yahoo Japan",
   "De punto a punto, en línea recta": "Punto sa punto, tuwid na linya",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Ang browser na nagpapakita ng bawat pagputol, live. Darating kapag tapos na at nasubok."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Ang browser na nagpapakita ng bawat pagputol, live. Darating kapag tapos na at nasubok.",
+  "aquí": "dito",
+  "Elige uno para ver su ficha.": "Pumili ng isa para makita ang card nito.",
+  "acerca más para verlos todos": "mag-zoom in para makita lahat",
+  "Navegador · demostración": "Browser · demo",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Ang browser na nagpapakita ng bawat pagkaputol, nang live. Ang nakikita mo rito ay isang demo.",
+  "Según el mapa de la red de": "Ayon sa mapa ng network ng",
+  "Altura aproximada desde la que se ve el planeta": "Tinatayang taas kung saan nakikita ang planeta",
+  "Enlace": "Link",
+  "Estación": "Istasyon",
+  "Previsto": "Nakaplano",
+  "Propuesto": "Iminungkahi",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Wala pa ito: iginuhit bilang tuwid na linya, bilang paalala.",
+  "Tipo": "Uri",
+  "Base antártica": "Istasyon sa Antarctica",
+  "Estación terrena de satélites": "Satellite ground station"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

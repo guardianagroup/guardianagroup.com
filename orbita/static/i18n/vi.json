@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "trong bóng của Trái Đất",
   "Yahoo Japón": "Yahoo Nhật Bản",
   "De punto a punto, en línea recta": "Điểm tới điểm, đường thẳng",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Trình duyệt hiển thị mọi lần cắt, trực tiếp. Sẽ có khi hoàn thiện và được kiểm thử."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Trình duyệt hiển thị mọi lần cắt, trực tiếp. Sẽ có khi hoàn thiện và được kiểm thử.",
+  "aquí": "tại đây",
+  "Elige uno para ver su ficha.": "Chọn một để xem thẻ thông tin.",
+  "acerca más para verlos todos": "phóng to để xem tất cả",
+  "Navegador · demostración": "Trình duyệt · bản demo",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Trình duyệt hiển thị trực tiếp mọi sự cố đứt kết nối. Những gì bạn thấy ở đây là bản demo.",
+  "Según el mapa de la red de": "Theo bản đồ mạng năm",
+  "Altura aproximada desde la que se ve el planeta": "Độ cao ước tính mà từ đó nhìn thấy hành tinh",
+  "Enlace": "Liên kết",
+  "Estación": "Trạm",
+  "Previsto": "Dự kiến",
+  "Propuesto": "Đề xuất",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Chưa tồn tại: được vẽ bằng đường thẳng, để lưu ý.",
+  "Tipo": "Loại",
+  "Base antártica": "Trạm Nam Cực",
+  "Estación terrena de satélites": "Trạm mặt đất vệ tinh"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

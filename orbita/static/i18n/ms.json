@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "dalam bayang Bumi",
   "Yahoo Japón": "Yahoo Jepun",
   "De punto a punto, en línea recta": "Titik ke titik, garis lurus",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Pelayar yang menunjukkan setiap pemutusan secara langsung. Akan tiba apabila siap dan diuji."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Pelayar yang menunjukkan setiap pemutusan secara langsung. Akan tiba apabila siap dan diuji.",
+  "aquí": "di sini",
+  "Elige uno para ver su ficha.": "Pilih satu untuk melihat kadnya.",
+  "acerca más para verlos todos": "zum masuk untuk melihat semuanya",
+  "Navegador · demostración": "Pelayar · demo",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Pelayar yang menunjukkan setiap gangguan secara langsung. Apa yang anda lihat di sini ialah demo.",
+  "Según el mapa de la red de": "Menurut peta rangkaian tahun",
+  "Altura aproximada desde la que se ve el planeta": "Anggaran ketinggian dari mana planet dilihat",
+  "Enlace": "Pautan",
+  "Estación": "Stesen",
+  "Previsto": "Dirancang",
+  "Propuesto": "Dicadangkan",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Belum wujud: dilukis sebagai garis lurus, sebagai makluman.",
+  "Tipo": "Jenis",
+  "Base antártica": "Stesen Antartika",
+  "Estación terrena de satélites": "Stesen bumi satelit"
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

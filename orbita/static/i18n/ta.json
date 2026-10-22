@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "பூமியின் நிழலில்",
   "Yahoo Japón": "Yahoo ஜப்பான்",
   "De punto a punto, en línea recta": "புள்ளியிலிருந்து புள்ளி, நேர்கோட்டில்",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "ஒவ்வொரு துண்டிப்பையும் நேரலையில் காட்டும் உலாவி. முடிந்து சோதிக்கப்பட்டதும் வரும்."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "ஒவ்வொரு துண்டிப்பையும் நேரலையில் காட்டும் உலாவி. முடிந்து சோதிக்கப்பட்டதும் வரும்.",
+  "aquí": "இங்கே",
+  "Elige uno para ver su ficha.": "அதன் அட்டையைப் பார்க்க ஒன்றைத் தேர்ந்தெடுக்கவும்.",
+  "acerca más para verlos todos": "அனைத்தையும் பார்க்க பெரிதாக்கவும்",
+  "Navegador · demostración": "உலாவி · செயல்விளக்கம்",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "ஒவ்வொரு துண்டிப்பையும் நேரலையில் காட்டும் உலாவி. இங்கே நீங்கள் காண்பது ஒரு செயல்விளக்கம்.",
+  "Según el mapa de la red de": "வலையமைப்பு வரைபடத்தின்படி, ஆண்டு",
+  "Altura aproximada desde la que se ve el planeta": "கோள் காணப்படும் தோராயமான உயரம்",
+  "Enlace": "இணைப்பு",
+  "Estación": "நிலையம்",
+  "Previsto": "திட்டமிடப்பட்டது",
+  "Propuesto": "முன்மொழியப்பட்டது",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "இன்னும் இல்லை: அறிவிப்பாக நேர்கோட்டில் வரையப்பட்டுள்ளது.",
+  "Tipo": "வகை",
+  "Base antártica": "அண்டார்டிக் நிலையம்",
+  "Estación terrena de satélites": "செயற்கைக்கோள் தரை நிலையம்"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

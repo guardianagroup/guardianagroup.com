@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "지구 그림자 속",
   "Yahoo Japón": "야후 재팬",
   "De punto a punto, en línea recta": "지점 간 직선거리",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "모든 차단을 실시간으로 보여주는 브라우저. 완성되고 검증되면 제공됩니다."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "모든 차단을 실시간으로 보여주는 브라우저. 완성되고 검증되면 제공됩니다.",
+  "aquí": "여기",
+  "Elige uno para ver su ficha.": "하나를 선택하면 카드가 표시됩니다.",
+  "acerca más para verlos todos": "모두 보려면 확대하세요",
+  "Navegador · demostración": "브라우저 · 데모",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "모든 단절을 실시간으로 보여주는 브라우저입니다. 여기에 보이는 것은 데모입니다.",
+  "Según el mapa de la red de": "네트워크 지도 기준, 연도",
+  "Altura aproximada desde la que se ve el planeta": "지구를 바라보는 대략적인 높이",
+  "Enlace": "링크",
+  "Estación": "기지국",
+  "Previsto": "계획됨",
+  "Propuesto": "제안됨",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "아직 존재하지 않음: 안내용으로 직선으로 표시됩니다.",
+  "Tipo": "유형",
+  "Base antártica": "남극 기지",
+  "Estación terrena de satélites": "위성 지상국"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

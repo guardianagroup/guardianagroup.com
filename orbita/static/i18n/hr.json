@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "u Zemljinoj sjeni",
   "Yahoo Japón": "Yahoo Japan",
   "De punto a punto, en línea recta": "Od točke do točke, zračnom linijom",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Preglednik koji prikazuje svaki prekid uživo. Stiže kad bude dovršen i testiran."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Preglednik koji prikazuje svaki prekid uživo. Stiže kad bude dovršen i testiran.",
+  "aquí": "ovdje",
+  "Elige uno para ver su ficha.": "Odaberite jedan da biste vidjeli njegovu karticu.",
+  "acerca más para verlos todos": "približite da biste vidjeli sve",
+  "Navegador · demostración": "Preglednik · demonstracija",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Preglednik koji uživo prikazuje svaki prekid. Ono što ovdje vidite je demonstracija.",
+  "Según el mapa de la red de": "Prema karti mreže iz",
+  "Altura aproximada desde la que se ve el planeta": "Približna visina s koje se vidi planet",
+  "Enlace": "Veza",
+  "Estación": "Postaja",
+  "Previsto": "Planirano",
+  "Propuesto": "Predloženo",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Još ne postoji: nacrtano ravnom linijom, kao upozorenje.",
+  "Tipo": "Vrsta",
+  "Base antártica": "Antarktička postaja",
+  "Estación terrena de satélites": "Satelitska zemaljska postaja"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "в тени Земли",
   "Yahoo Japón": "Yahoo Япония",
   "De punto a punto, en línea recta": "От точки до точки, по прямой",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Браузер, показывающий каждое отключение в прямом эфире. Появится, когда будет готов и проверен."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Браузер, показывающий каждое отключение в прямом эфире. Появится, когда будет готов и проверен.",
+  "aquí": "здесь",
+  "Elige uno para ver su ficha.": "Выберите один, чтобы увидеть его карточку.",
+  "acerca más para verlos todos": "приблизьте, чтобы увидеть все",
+  "Navegador · demostración": "Браузер · демонстрация",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Браузер, который показывает каждый обрыв в прямом эфире. То, что вы видите здесь, — демонстрация.",
+  "Según el mapa de la red de": "Согласно карте сети за",
+  "Altura aproximada desde la que se ve el planeta": "Приблизительная высота, с которой видна планета",
+  "Enlace": "Линия связи",
+  "Estación": "Станция",
+  "Previsto": "Запланировано",
+  "Propuesto": "Предложено",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Пока не существует: нарисовано прямой линией, в качестве предупреждения.",
+  "Tipo": "Тип",
+  "Base antártica": "Антарктическая станция",
+  "Estación terrena de satélites": "Наземная спутниковая станция"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

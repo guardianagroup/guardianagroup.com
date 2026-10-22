@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "στη σκιά της Γης",
   "Yahoo Japón": "Yahoo Ιαπωνίας",
   "De punto a punto, en línea recta": "Από σημείο σε σημείο, σε ευθεία γραμμή",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Ο περιηγητής που δείχνει κάθε αποκοπή, ζωντανά. Θα έρθει όταν ολοκληρωθεί και δοκιμαστεί."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Ο περιηγητής που δείχνει κάθε αποκοπή, ζωντανά. Θα έρθει όταν ολοκληρωθεί και δοκιμαστεί.",
+  "aquí": "εδώ",
+  "Elige uno para ver su ficha.": "Επιλέξτε ένα για να δείτε την καρτέλα του.",
+  "acerca más para verlos todos": "κάντε ζουμ για να τα δείτε όλα",
+  "Navegador · demostración": "Πρόγραμμα περιήγησης · επίδειξη",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Το πρόγραμμα περιήγησης που δείχνει κάθε διακοπή, ζωντανά. Αυτό που βλέπετε εδώ είναι μια επίδειξη.",
+  "Según el mapa de la red de": "Σύμφωνα με τον χάρτη του δικτύου του",
+  "Altura aproximada desde la que se ve el planeta": "Κατά προσέγγιση ύψος από το οποίο φαίνεται ο πλανήτης",
+  "Enlace": "Ζεύξη",
+  "Estación": "Σταθμός",
+  "Previsto": "Προγραμματισμένο",
+  "Propuesto": "Προτεινόμενο",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Δεν υπάρχει ακόμη: σχεδιάζεται σε ευθεία γραμμή, ως ειδοποίηση.",
+  "Tipo": "Τύπος",
+  "Base antártica": "Ανταρκτικός σταθμός",
+  "Estación terrena de satélites": "Επίγειος δορυφορικός σταθμός"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

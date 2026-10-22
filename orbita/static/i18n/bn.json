@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "পৃথিবীর ছায়ায়",
   "Yahoo Japón": "Yahoo জাপান",
   "De punto a punto, en línea recta": "বিন্দু থেকে বিন্দু, সরলরেখায়",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "যে ব্রাউজার প্রতিটি কাট সরাসরি দেখায়। শেষ ও পরীক্ষিত হলে আসবে।"
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "যে ব্রাউজার প্রতিটি কাট সরাসরি দেখায়। শেষ ও পরীক্ষিত হলে আসবে।",
+  "aquí": "এখানে",
+  "Elige uno para ver su ficha.": "কার্ড দেখতে একটি বেছে নিন।",
+  "acerca más para verlos todos": "সব দেখতে জুম ইন করুন",
+  "Navegador · demostración": "ব্রাউজার · ডেমো",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "যে ব্রাউজার প্রতিটি বিচ্ছিন্নতা সরাসরি দেখায়। এখানে যা দেখছেন তা একটি ডেমো।",
+  "Según el mapa de la red de": "নেটওয়ার্ক মানচিত্র অনুযায়ী, বছর",
+  "Altura aproximada desde la que se ve el planeta": "আনুমানিক উচ্চতা যেখান থেকে গ্রহটি দেখা যায়",
+  "Enlace": "লিংক",
+  "Estación": "স্টেশন",
+  "Previsto": "পরিকল্পিত",
+  "Propuesto": "প্রস্তাবিত",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "এখনও নেই: সতর্কতা হিসেবে সরলরেখায় আঁকা হয়েছে।",
+  "Tipo": "ধরন",
+  "Base antártica": "অ্যান্টার্কটিক স্টেশন",
+  "Estación terrena de satélites": "স্যাটেলাইট ভূ-স্টেশন"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "زمین کے سائے میں",
   "Yahoo Japón": "Yahoo جاپان",
   "De punto a punto, en línea recta": "نقطہ تا نقطہ، سیدھی لکیر میں",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "وہ براؤزر جو ہر کٹ براہِ راست دکھاتا ہے۔ مکمل اور آزمائش کے بعد آئے گا۔"
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "وہ براؤزر جو ہر کٹ براہِ راست دکھاتا ہے۔ مکمل اور آزمائش کے بعد آئے گا۔",
+  "aquí": "یہاں",
+  "Elige uno para ver su ficha.": "اس کا کارڈ دیکھنے کے لیے ایک منتخب کریں۔",
+  "acerca más para verlos todos": "سب دیکھنے کے لیے زوم اِن کریں",
+  "Navegador · demostración": "براؤزر · ڈیمو",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "وہ براؤزر جو ہر انقطاع براہِ راست دکھاتا ہے۔ جو آپ یہاں دیکھ رہے ہیں وہ ایک ڈیمو ہے۔",
+  "Según el mapa de la red de": "نیٹ ورک کے نقشے کے مطابق، سال",
+  "Altura aproximada desde la que se ve el planeta": "تخمینی بلندی جہاں سے سیارہ نظر آتا ہے",
+  "Enlace": "لنک",
+  "Estación": "اسٹیشن",
+  "Previsto": "منصوبہ بند",
+  "Propuesto": "تجویز کردہ",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "ابھی موجود نہیں: اطلاع کے طور پر سیدھی لکیر سے بنایا گیا ہے۔",
+  "Tipo": "قسم",
+  "Base antártica": "انٹارکٹک اسٹیشن",
+  "Estación terrena de satélites": "سیٹلائٹ زمینی اسٹیشن"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

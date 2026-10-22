@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "în umbra Pământului",
   "Yahoo Japón": "Yahoo Japonia",
   "De punto a punto, en línea recta": "Din punct în punct, în linie dreaptă",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Browserul care arată fiecare întrerupere, în direct. Va veni când este terminat și testat."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "Browserul care arată fiecare întrerupere, în direct. Va veni când este terminat și testat.",
+  "aquí": "aici",
+  "Elige uno para ver su ficha.": "Alegeți unul pentru a-i vedea fișa.",
+  "acerca más para verlos todos": "apropiați-vă pentru a le vedea pe toate",
+  "Navegador · demostración": "Navigator · demonstrație",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "Navigatorul care arată fiecare întrerupere, în direct. Ceea ce vedeți aici este o demonstrație.",
+  "Según el mapa de la red de": "Conform hărții rețelei din",
+  "Altura aproximada desde la que se ve el planeta": "Înălțimea aproximativă de la care se vede planeta",
+  "Enlace": "Legătură",
+  "Estación": "Stație",
+  "Previsto": "Planificat",
+  "Propuesto": "Propus",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Nu există încă: desenat în linie dreaptă, ca avertisment.",
+  "Tipo": "Tip",
+  "Base antártica": "Stație antarctică",
+  "Estación terrena de satélites": "Stație terestră de sateliți"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

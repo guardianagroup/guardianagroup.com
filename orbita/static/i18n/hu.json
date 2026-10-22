@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "a Föld árnyékában",
   "Yahoo Japón": "Yahoo Japán",
   "De punto a punto, en línea recta": "Ponttól pontig, légvonalban",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "A böngésző, amely minden megszakítást élőben mutat. Akkor érkezik, ha kész és tesztelt."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "A böngésző, amely minden megszakítást élőben mutat. Akkor érkezik, ha kész és tesztelt.",
+  "aquí": "itt",
+  "Elige uno para ver su ficha.": "Válasszon egyet az adatlapja megtekintéséhez.",
+  "acerca más para verlos todos": "nagyítson rá, hogy mindet lássa",
+  "Navegador · demostración": "Böngésző · bemutató",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "A böngésző, amely minden kimaradást élőben mutat. Amit itt lát, az egy bemutató.",
+  "Según el mapa de la red de": "A hálózati térkép alapján, év:",
+  "Altura aproximada desde la que se ve el planeta": "Hozzávetőleges magasság, ahonnan a bolygó látszik",
+  "Enlace": "Kapcsolat",
+  "Estación": "Állomás",
+  "Previsto": "Tervezett",
+  "Propuesto": "Javasolt",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "Még nem létezik: egyenes vonallal rajzolva, figyelmeztetésként.",
+  "Tipo": "Típus",
+  "Base antártica": "Antarktiszi állomás",
+  "Estación terrena de satélites": "Műholdas földi állomás"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

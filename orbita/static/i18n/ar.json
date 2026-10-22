@@ -559,7 +559,22 @@
   "en la sombra de la Tierra": "في ظل الأرض",
   "Yahoo Japón": "Yahoo اليابان",
   "De punto a punto, en línea recta": "نقطة إلى نقطة، في خط مستقيم",
-  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "المتصفح الذي يعرض كل قطع، مباشرة. سيصل عندما يكتمل ويُختبر."
+  "El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.": "المتصفح الذي يعرض كل قطع، مباشرة. سيصل عندما يكتمل ويُختبر.",
+  "aquí": "هنا",
+  "Elige uno para ver su ficha.": "اختر واحدًا لعرض بطاقته.",
+  "acerca más para verlos todos": "قرّب لرؤيتها كلها",
+  "Navegador · demostración": "المتصفح · عرض توضيحي",
+  "El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.": "المتصفح الذي يعرض كل انقطاع مباشرةً. ما تراه هنا عرض توضيحي.",
+  "Según el mapa de la red de": "وفقًا لخريطة الشبكة لعام",
+  "Altura aproximada desde la que se ve el planeta": "الارتفاع التقريبي الذي يُرى منه الكوكب",
+  "Enlace": "وصلة",
+  "Estación": "محطة",
+  "Previsto": "مخطط",
+  "Propuesto": "مقترح",
+  "Todavía no existe: se dibuja en línea recta, como aviso.": "غير موجود بعد: مرسوم بخط مستقيم، على سبيل التنبيه.",
+  "Tipo": "النوع",
+  "Base antártica": "محطة في القارة القطبية الجنوبية",
+  "Estación terrena de satélites": "محطة أرضية للأقمار الصناعية"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",
