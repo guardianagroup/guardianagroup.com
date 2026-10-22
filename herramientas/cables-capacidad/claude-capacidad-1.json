@@ -1,0 +1,296 @@
+[
+{
+"nombre": "2Africa",
+"tbps": 180,
+"pares": 16,
+"fuente": ""
+},
+{
+"nombre": "AAE-1",
+"tbps": 40,
+"pares": 5,
+"fuente": ""
+},
+{
+"nombre": "AMITIE",
+"tbps": 400,
+"pares": 16,
+"fuente": ""
+},
+{
+"nombre": "APRICOT",
+"tbps": 190,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "ARCOS-1",
+"tbps": 0.96,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "Asia Direct Cable (ADC)",
+"tbps": 140,
+"pares": 8,
+"fuente": ""
+},
+{
+"nombre": "Asia Pacific Cable Network 2 (APCN-2)",
+"tbps": 2.56,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "Asia Pacific Gateway (APG)",
+"tbps": 54,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "Asia-America Gateway (AAG)",
+"tbps": 2.88,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "Australia-Singapore Cable (ASC)",
+"tbps": 40,
+"pares": 4,
+"fuente": ""
+},
+{
+"nombre": "C-Lion 1",
+"tbps": 144,
+"pares": 8,
+"fuente": ""
+},
+{
+"nombre": "Curie",
+"tbps": 72,
+"pares": 4,
+"fuente": ""
+},
+{
+"nombre": "Dunant",
+"tbps": 250,
+"pares": 12,
+"fuente": ""
+},
+{
+"nombre": "EIG",
+"tbps": 3.84,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "Equiano",
+"tbps": 144,
+"pares": 12,
+"fuente": ""
+},
+{
+"nombre": "FASTER",
+"tbps": 60,
+"pares": 6,
+"fuente": ""
+},
+{
+"nombre": "Grace Hopper",
+"tbps": 350,
+"pares": 16,
+"fuente": ""
+},
+{
+"nombre": "HAVFRUE / America Europe Connect-2 (AEC-2)",
+"tbps": 108,
+"pares": 6,
+"fuente": ""
+},
+{
+"nombre": "Hawaiki Cable",
+"tbps": 44,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "IMEWE",
+"tbps": 3.84,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "JUPITER",
+"tbps": 60,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "JGA South",
+"tbps": 36,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "MAREA",
+"tbps": 200,
+"pares": 8,
+"fuente": ""
+},
+{
+"nombre": "Monet",
+"tbps": 64,
+"pares": 6,
+"fuente": ""
+},
+{
+"nombre": "New Cross Pacific (NCP)",
+"tbps": 80,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "Pacific Light Cable Network (PLCN)",
+"tbps": 144,
+"pares": 6,
+"fuente": ""
+},
+{
+"nombre": "PEACE Cable",
+"tbps": 96,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "South Atlantic Cable System (SACS)",
+"tbps": 40,
+"pares": 4,
+"fuente": ""
+},
+{
+"nombre": "South Atlantic Inter Link (SAIL)",
+"tbps": 32,
+"pares": 4,
+"fuente": ""
+},
+{
+"nombre": "SEA-ME-WE 5",
+"tbps": 24,
+"pares": 3,
+"fuente": ""
+},
+{
+"nombre": "SJC",
+"tbps": 28,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "Southeast Asia-Japan Cable 2 (SJC2)",
+"tbps": 144,
+"pares": 8,
+"fuente": ""
+},
+{
+"nombre": "Southern Cross NEXT",
+"tbps": 72,
+"pares": 4,
+"fuente": ""
+},
+{
+"nombre": "Trans-Pacific Express (TPE)",
+"tbps": 5.12,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "Unity",
+"tbps": 7.68,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "Seabras-1",
+"tbps": 72,
+"pares": 6,
+"fuente": ""
+},
+{
+"nombre": "Tannat",
+"tbps": 90,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "BRUSA",
+"tbps": 138,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "CANTAT 3",
+"tbps": 0.005,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "GLO-1 (Globacom-1)",
+"tbps": 2.5,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "PIPE Pacific Cable-1 (PPC-1)",
+"tbps": 1.92,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "INDIGO-Central",
+"tbps": 36,
+"pares": 2,
+"fuente": ""
+},
+{
+"nombre": "INDIGO-West",
+"tbps": 36,
+"pares": 2,
+"fuente": ""
+},
+{
+"nombre": "JUNO",
+"tbps": 350,
+"pares": 20,
+"fuente": ""
+},
+{
+"nombre": "Medusa",
+"tbps": 480,
+"pares": 24,
+"fuente": ""
+},
+{
+"nombre": "Anjana",
+"tbps": 480,
+"pares": 24,
+"fuente": ""
+},
+{
+"nombre": "Southeast Asia-United States (SEA-US)",
+"tbps": 20,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "Tasman Global Access (TGA)",
+"tbps": 20,
+"pares": null,
+"fuente": ""
+},
+{
+"nombre": "Pacific Caribbean Cable System (PCCS)",
+"tbps": 80,
+"pares": null,
+"fuente": ""
+}
+]

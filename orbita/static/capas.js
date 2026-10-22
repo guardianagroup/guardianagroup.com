@@ -72,7 +72,12 @@
   let PT = null;
   // The polar stations (bases and satellite ground stations) live in puntos-extra.json and are drawn with the cable layer
   // too, so they load on their own, without the 420 KB of data centres (22 Oct 2026, 14:15, owner: «que aparezca»).
-  let EST = null, NOTAS = null;
+  let EST = null, NOTAS = null, CAP = null;
+  // 22 Oct 2026, 15:03 (owner): «los que llevan tantos terabytes… en otro color… un ramal diferente por potencia»:
+  // design capacity per cable from the agency (datos/cables-capacidad.json, keyed by the group name of lugares-capas).
+  async function cargaCapacidad() { if (CAP || cargando.cap) return; cargando.cap = true; try { const c = await cargaJSON('datos/cables-capacidad.json'); CAP = { cables: c.cables || {}, umbrales: c.umbrales || { gigante: 100, grande: 20 } }; if (capas.sub) capas.sub.porPotencia = null; pintaNota(); } catch (_) { CAP = { cables: {}, umbrales: { gigante: 100, grande: 20 } }; } cargando.cap = false; }
+  const capacidadDe = (i) => { if (!CAP || !LUG || !LUG.g) return null; const gi = LUG.g[i]; if (gi == null || gi < 0) return null; const g = LUG.grupos[gi]; return g ? CAP.cables[g[0]] || null : null; };
+  const potencia = (i) => { const c = capacidadDe(i); if (!c) return 0; return c.tbps >= CAP.umbrales.gigante ? 2 : c.tbps >= CAP.umbrales.grande ? 1 : 0; };
   const norm = (t) => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   async function cargaNotas() { if (NOTAS || cargando.notas) return; cargando.notas = true; try { const n = await cargaJSON('datos/cables-notas.json'); NOTAS = (n.cables || []).map((q) => ({ ...q, clave: norm(q.clave) })); } catch (_) { NOTAS = []; } cargando.notas = false; }
   async function cargaEstaciones() {
@@ -417,9 +422,25 @@
       // OpenStreetMap's cables as drawn; the ones the agency rebuilt from public sources (cables_agencia.py) are
       // an approximate sea trace, so they go dashed and a touch lighter (owner: «rotulado trazado aproximado»)
       if (!capas.sub.exactas) { capas.sub.exactas = capas.sub.lineas.filter((l) => !l.aprox); capas.sub.aprox = capas.sub.lineas.filter((l) => l.aprox); }
-      pintaLineas(cx, p, G, capas.sub.exactas, `rgba(${ACERO},.62)`, 1);
+      // by power (owner, 22 Oct 2026): the giant trunks (≥ 100 Tbit/s) thick and bright, the big ones (≥ 20) a little
+      // less, the rest as before. Grouped once per data load; CAP and LUG arrive asynchronously, so it is rebuilt when they do.
+      if (!capas.sub.porPotencia || capas.sub.porPotencia.n !== capas.sub.lineas.length || capas.sub.porPotencia.cap !== CAP || capas.sub.porPotencia.lug !== LUG) {
+        const P3 = { n: capas.sub.lineas.length, cap: CAP, lug: LUG, ex: [[], [], []], ap: [[], [], []] };
+        capas.sub.lineas.forEach((l, i) => { (l.aprox ? P3.ap : P3.ex)[potencia(i)].push(l); });
+        capas.sub.porPotencia = P3;
+      }
+      const P3 = capas.sub.porPotencia, L3 = esLimpio();
+      pintaLineas(cx, p, G, P3.ex[0], `rgba(${ACERO},.55)`, 0.9);
+      if (P3.ex[1].length) pintaLineas(cx, p, G, P3.ex[1], `rgba(${ACERO},.8)`, 1.3);
+      if (P3.ex[2].length) { pintaLineas(cx, p, G, P3.ex[2], `rgba(${BLANCO},${L3 ? 0.22 : 0.16})`, 4); pintaLineas(cx, p, G, P3.ex[2], `rgba(${BLANCO},.92)`, 1.7); }
       if (PREV && PREV.length) { cx.save(); cx.setLineDash([2, 6]); pintaLineas(cx, p, G, PREV, `rgba(${BLANCO},.4)`, 1); cx.restore(); }
-      if (capas.sub.aprox.length) { cx.setLineDash([6, 4]); pintaLineas(cx, p, G, capas.sub.aprox, `rgba(${ACERO},.5)`, 1); cx.setLineDash([]); }
+      if (capas.sub.aprox.length) {
+        cx.setLineDash([6, 4]);
+        pintaLineas(cx, p, G, P3.ap[0], `rgba(${ACERO},.45)`, 0.9);
+        if (P3.ap[1].length) pintaLineas(cx, p, G, P3.ap[1], `rgba(${ACERO},.7)`, 1.3);
+        if (P3.ap[2].length) { pintaLineas(cx, p, G, P3.ap[2], `rgba(${BLANCO},${L3 ? 0.2 : 0.14})`, 4); pintaLineas(cx, p, G, P3.ap[2], `rgba(${BLANCO},.85)`, 1.7); }
+        cx.setLineDash([]);
+      }
       pintaLuz(cx, p, G, capas.sub.lineas, t);
     }
     if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaEstaciones(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
@@ -706,7 +727,7 @@
     }
     if (estado.sub) {
       const c = capas.sub;
-      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
+      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + (CAP && Object.keys(CAP.cables).length ? ' · ' + T('trazo blanco y grueso: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s') : '') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
     }
     if (estado.fibra) {
       meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + T('Datos verificados') : FT && FT.error ? T('No se pudo cargar la fibra por tierra.') : T('Cargando fibra por tierra…'));
@@ -1163,6 +1184,7 @@
       }
       const ops = inf.operan && inf.operan.length ? inf.operan.join(', ') : d.o;
       if (ops) mas.push(T('Operador') + ': ' + ops);
+      { const cp = capacidadDe(i); if (cp) { const clase = cp.tbps >= CAP.umbrales.gigante ? T('troncal gigante') : cp.tbps >= CAP.umbrales.grande ? T('troncal grande') : T('cable regional'); mas.push(T('Capacidad') + ': ' + (cp.tbps >= 1 ? num(cp.tbps) + ' Tbit/s' : num(Math.round(cp.tbps * 1000)) + ' Gbit/s') + (cp.pares ? ' · ' + cp.pares + ' ' + T('pares de fibra') : '') + ' · ' + clase); } }
       if (inf.aprox) {  // rebuilt by the agency: say so, and where it was checked
         mas.push(T('Trazado aproximado por mar') + ' · ' + T('Datos verificados'));
       }
@@ -1304,7 +1326,7 @@
     estado[clave] = on; guarda();
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
     if (on && clave === 'sat') estado.satPlegado = false;
-    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else if (clave === 'fibra') cargaFibra(); else { cargaCables(clave); if (clave === 'sub') { cargaFibra(); cargaEstaciones(); cargaNotas(); cargaPaises(); } } }
+    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else if (clave === 'fibra') cargaFibra(); else { cargaCables(clave); if (clave === 'sub') { cargaFibra(); cargaEstaciones(); cargaNotas(); cargaPaises(); cargaCapacidad(); } } }
     if (!on) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; }
     pintaNota(); pintaVista();
   }
