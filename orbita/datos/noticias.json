@@ -2,6 +2,50 @@
  "nota": "Noticias sobre cables, centros de datos, datos personales y GUARDIANA, cada una confirmada por al menos dos fuentes públicas (las URL quedan aquí; en pantalla solo se dice «Noticia verificada»). Las añade la agencia; la tarea programada «Noticias Órbita» las renueva.",
  "noticias": [
   {
+   "fecha": "2026-10-21",
+   "tema": "datos",
+   "es": "un juez de Nuevo México (EE. UU.) condenó a Meta a pagar 25.000 millones de dólares, la multa más alta de su historia, por engañar a los usuarios de Facebook sobre quién podía acceder a sus datos personales en el caso Cambridge Analytica; el jurado contó 43 millones de infracciones de la ley de protección al consumidor y Meta anunció que recurrirá.",
+   "en": "a New Mexico (US) judge ordered Meta to pay 25 billion dollars, the largest penalty in its history, for misleading Facebook users about who could access their personal data in the Cambridge Analytica case; the jury counted 43 million violations of the state's consumer protection law and Meta said it will appeal.",
+   "pt": "um juiz do Novo México (EUA) condenou a Meta a pagar 25 mil milhões de dólares, a maior multa da sua história, por enganar os utilizadores do Facebook sobre quem podia aceder aos seus dados pessoais no caso Cambridge Analytica; o júri contou 43 milhões de infrações à lei de proteção do consumidor e a Meta anunciou que vai recorrer.",
+   "fuentes": [
+    "https://www.infobae.com/tecno/2026/10/21/meta-debera-pagar-usd-25000-millones-a-nuevo-mexico-la-mayor-multa-en-su-historia/",
+    "https://www.yucatan.com.mx/mundo/2026/10/21/meta-debera-pagar-multa-millonaria-por-el-caso-cambridge-analytica-en-nuevo-mexico.html"
+   ]
+  },
+  {
+   "fecha": "2026-10-21",
+   "tema": "centros",
+   "es": "en dos noches seguidas los ataques rusos sobre Kiev alcanzaron dos centros de datos: el de Datagroup (19 de octubre) quedó completamente destruido y no podrá recuperarse, y el de GigaCenter (20 de octubre) sufrió daños críticos y avisó a sus clientes de posibles interrupciones en los equipos alojados allí.",
+   "en": "on two consecutive nights Russian attacks on Kyiv hit two data centers: Datagroup's (19 October) was completely destroyed and cannot be restored, and GigaCenter's (20 October) suffered critical damage and warned its customers of possible disruptions to the equipment hosted there.",
+   "pt": "em duas noites seguidas os ataques russos sobre Kiev atingiram dois centros de dados: o da Datagroup (19 de outubro) ficou completamente destruído e não poderá ser recuperado, e o da GigaCenter (20 de outubro) sofreu danos críticos e avisou os clientes de possíveis interrupções nos equipamentos ali alojados.",
+   "fuentes": [
+    "https://en.interfax.com.ua/news/telecom/1223706.html",
+    "https://biz.liga.net/en/it/news/the-gigacenter-data-center-in-kyiv-ceased-operations-following-an-attack-by-russia"
+   ]
+  },
+  {
+   "fecha": "2026-10-20",
+   "tema": "redes",
+   "es": "Orange apagó el 20 de octubre su red 2G en los 43 últimos departamentos de la Francia continental (París, Lyon, Lille, Burdeos…), 34 años después de lanzarla como Itinéris; solo quedará encendida en zonas blancas hasta el 15 de diciembre, y SFR y Bouygues la apagarán entre noviembre y diciembre.",
+   "en": "on 20 October Orange switched off its 2G network in the last 43 departments of mainland France (Paris, Lyon, Lille, Bordeaux…), 34 years after launching it as Itinéris; it will stay on only in regulatory coverage gaps until 15 December, and SFR and Bouygues will switch theirs off between November and December.",
+   "pt": "a Orange desligou a 20 de outubro a sua rede 2G nos últimos 43 departamentos da França continental (Paris, Lyon, Lille, Bordéus…), 34 anos depois de a lançar como Itinéris; só ficará ligada em zonas brancas até 15 de dezembro, e a SFR e a Bouygues desligarão as suas entre novembro e dezembro.",
+   "fuentes": [
+    "https://www.clubic.com/actualite-635053-orange-vient-d-eteindre-la-2g-presque-partout-en-france-sfr-et-bouygues-telecom-vont-tres-vite-suivre.html",
+    "https://www.degrouptest.com/actualite/c-est-fini-orange-tourne-la-page-de-la-2g-apres-34-ans-de-service"
+   ]
+  },
+  {
+   "fecha": "2026-10-20",
+   "tema": "cables",
+   "es": "el cable Medusa tocó tierra el 17 de octubre en Bengasi, su primera llegada a Libia, y ya tiene instalado el tramo de orilla; es un sistema abierto de más de 8.700 km por el Mediterráneo, con hasta 24 pares de fibra y 20 Tbit/s por par, y la segunda llegada libia prevista es Trípoli.",
+   "en": "the Medusa cable landed on 17 October in Benghazi, its first landing in Libya, and the shore-end section is now installed; it is an open system of more than 8,700 km across the Mediterranean, with up to 24 fibre pairs and 20 Tbit/s per pair, and the second Libyan landing planned is Tripoli.",
+   "pt": "o cabo Medusa chegou a terra a 17 de outubro em Bengasi, a sua primeira amarração na Líbia, e já tem instalado o troço de costa; é um sistema aberto de mais de 8.700 km pelo Mediterrâneo, com até 24 pares de fibra e 20 Tbit/s por par, e a segunda amarração líbia prevista é Trípoli.",
+   "fuentes": [
+    "https://subtelforum.com/medusa-completes-benghazi-shore-end-installation/",
+    "https://techafricanews.com/?p=89396"
+   ]
+  },
+  {
    "fecha": "2026-10-19",
    "tema": "cables",
    "es": "la noruega Bulk busca un socio canadiense para construir Leif Erikson, un cable de unos 4.600 km entre el sur de Noruega y Terranova que uniría Europa y Canadá sin pasar por Estados Unidos; costaría más de 620 millones de dólares y aún no tiene financiación ni permisos.",
@@ -10,6 +54,17 @@
    "fuentes": [
     "https://www.biobiochile.cl/noticias/ciencia-y-tecnologia/adelantos/2026/10/19/europa-y-canada-buscan-tender-nuevo-cable-submarino-para-conectarse-sin-pasar-por-eeuu.shtml",
     "https://thenextweb.com/news/bulk-leif-erikson-cable-canadian-partner"
+   ]
+  },
+  {
+   "fecha": "2026-10-15",
+   "tema": "cables",
+   "es": "Malasia eligió Bintulu (Sarawak) como llegada clave de su futuro cable submarino nacional SALAM («cable Madani»), que tendrá 10 puntos de llegada (tres en Sarawak, cinco en Sabah y dos en la península) para unir las tres regiones del país; las obras empezarían en el primer trimestre de 2027 y acabarían a finales de 2029.",
+   "en": "Malaysia picked Bintulu (Sarawak) as a key landing for its future domestic submarine cable SALAM (the \"Madani cable\"), which will have 10 landing points (three in Sarawak, five in Sabah and two in the peninsula) to link the country's three regions; work would start in the first quarter of 2027 and finish at the end of 2029.",
+   "pt": "a Malásia escolheu Bintulu (Sarawak) como amarração-chave do seu futuro cabo submarino nacional SALAM («cabo Madani»), que terá 10 pontos de amarração (três em Sarawak, cinco em Sabah e dois na península) para ligar as três regiões do país; as obras começariam no primeiro trimestre de 2027 e terminariam no final de 2029.",
+   "fuentes": [
+    "https://subtelforum.com/bintulu-named-madani-cable-landing-point/",
+    "https://bernama.com/en/general/news.php?id=2620800"
    ]
   },
   {
