@@ -204,7 +204,8 @@
   // ---------- Geometry shared with the CSS (--u) ----------
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
   // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
-  const ZOOM = { z: 1, zt: 1, MAX: 10 }; // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
+  const ZOOM = { z: 1, zt: 1, MAX: 16 };
+  const LIMPIO_DESDE = 4; // from here the planet is drawn flat: black water, grey land, data in white // 22 Oct 2026 (owner): «sube más el zoom aún» // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
   function mide() {
@@ -320,7 +321,7 @@
   }, { passive: false });
   cvT.addEventListener('dblclick', (e) => {
     if (!libreZoom()) return;
-    if (ZOOM.zt >= ZOOM.MAX - 1e-3) acerca(1); else acerca(ZOOM.zt < 1.5 - 1e-3 ? 1.5 : ZOOM.MAX, e.clientX, e.clientY);
+    if (ZOOM.zt >= ZOOM.MAX - 1e-3) acerca(1); else acerca(ZOOM.zt < 1.5 - 1e-3 ? 1.5 : ZOOM.zt < 4 - 1e-3 ? 4 : ZOOM.zt < 8 - 1e-3 ? 8 : ZOOM.MAX, e.clientX, e.clientY);
   });
   const dedos = new Map(); let pellizco = null;
   cvT.addEventListener('pointerdown', (e) => { if (e.pointerType === 'touch') dedos.set(e.pointerId, e); if (dedos.size === 2) { const [a, b] = [...dedos.values()]; pellizco = { d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), z: ZOOM.zt }; arrastre = null; } });
@@ -333,13 +334,13 @@
   if (zControl) zControl.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     const k = b.dataset.z;
-    acerca(k === 'mas' ? ZOOM.zt + 0.25 : k === 'menos' ? ZOOM.zt - 0.25 : 1, k === 'mas' ? CX : null, CY);
+    acerca(k === 'mas' ? ZOOM.zt * 1.25 : k === 'menos' ? ZOOM.zt / 1.25 : 1, k === 'mas' ? CX : null, CY); // geometric steps: the same feel at ×1 and at ×12
   });
   addEventListener('keydown', (e) => {
     if (!libreZoom() || (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName))) return;
     if (e.key === 'Escape' && ZOOM.zt > 1) { e.preventDefault(); acerca(1); }
-    else if (e.key === '+' || e.key === '=') acerca(ZOOM.zt + 0.25, CX, CY);
-    else if (e.key === '-') acerca(ZOOM.zt - 0.25);
+    else if (e.key === '+' || e.key === '=') acerca(ZOOM.zt * 1.25, CX, CY);
+    else if (e.key === '-') acerca(ZOOM.zt / 1.25);
   });
   pintaZoom();
   function mira(pais, punto) {
@@ -368,7 +369,7 @@
   if (gl) {
     const vs = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
     const fs = `precision highp float;
-uniform vec2 uC;uniform float uR;uniform mat3 uM;uniform vec3 uL;uniform float uT,uNubOn,uAten;
+uniform vec2 uC;uniform float uR;uniform mat3 uM;uniform vec3 uL;uniform float uT,uNubOn,uAten,uLimpio;
 uniform sampler2D uDia,uLuz,uNub,uAgua,uZona;uniform vec4 uZonaBox;uniform float uZonaOn;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
 const float PI=3.14159265;
 void main(){
@@ -389,6 +390,10 @@ void main(){
   c+=luz*vec3(1.,.78,.48)*1.5*(1.-dl)*(1.-nub*.8);
   vec3 h=normalize(uL+vec3(0.,0.,1.));c+=vec3(.8,.9,1.)*pow(max(dot(n,h),0.),160.)*agua*(1.-nub)*.32;
   float fr=pow(1.-n.z,2.4);c=mix(c,atm*(.18+.8*max(lam+.35,0.)),fr*.6);
+  // 22 Oct 2026 (owner): from a certain zoom the planet goes «limpio»: no lights, no colours, black water and
+  // grey land told apart sharply (the coast comes from the day map itself, 16K when loaded), so the data read white.
+  if(uLimpio>0.){float lum=dot(dia,vec3(.3,.59,.11));float mar=(dia.b>max(dia.r,dia.g)*1.08&&lum<.5)?1.:0.;mar=max(mar,step(.85,agua)*step(lum,.35));
+   vec3 cl=mix(vec3(.165,.19,.225),vec3(.03,.045,.07),mar);cl=mix(cl,cl*1.35,fr*.5);c=mix(c,cl,uLimpio);}
   for(int i=0;i<${ONDAS};i++){vec4 o=uO[i];if(o.w>0.&&o.w<1.){
    float d=acos(clamp(dot(w,o.xyz),-1.,1.));float rd=.02+o.w*.32;float f=1.-o.w;
    float ring=exp(-pow((d-rd)/(.008+.01*o.w),2.))*f*f;float core=exp(-d*d/.0008)*f*f*f;
@@ -407,7 +412,7 @@ void main(){
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const la = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la, 2, gl.FLOAT, false, 0, 0);
-      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaBox', 'uZonaOn', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
+      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uLimpio', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaBox', 'uZonaOn', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
       G = { pr, u, tex: {}, nubOn: 0 };
       const tex = (unidad, nombre, url, si) => {
         const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unidad); gl.bindTexture(gl.TEXTURE_2D, t);
@@ -556,6 +561,8 @@ void main(){
     { const ms = Date.now(); if (ms - solT > 10000) { SOL = solAhora(ms); solT = ms; } L = aVista(vec(SOL.lon, SOL.lat)); }
     gl.uniform3f(u.uL, L[0], L[1], L[2]);
     gl.uniform1f(u.uT, t); gl.uniform1f(u.uNubOn, G.nubOn); gl.uniform1f(u.uAten, aten);
+    // «mapa limpio» from ×4 (owner, 22 Oct 2026): eased in over a third of a second, body.limpio tells the layers
+    { const quiere = ZOOM.z >= LIMPIO_DESDE ? 1 : 0, ahora = performance.now(), dtl = Math.min(0.05, (ahora - (G.limpioT || ahora)) / 1000); G.limpioT = ahora; if (G.limpio == null) G.limpio = quiere; G.limpio += (quiere - G.limpio) * Math.min(1, dtl * 7); if (Math.abs(G.limpio - quiere) < 0.01) G.limpio = quiere; gl.uniform1f(u.uLimpio, G.limpio); if ((G.limpio > 0.5) !== document.body.classList.contains('limpio')) document.body.classList.toggle('limpio', G.limpio > 0.5); }
     const o = new Float32Array(ONDAS * 4), k = new Float32Array(ONDAS);
     ondas.slice(-ONDAS).forEach((x, i) => { const edad = (t - x.t0) / (x.corte ? 2.6 : 1.8); o.set([...x.w, edad], i * 4); k[i] = x.corte ? 1 : 0; });
     gl.uniform4fv(u.uO, o); gl.uniform1fv(u.uOk, k);

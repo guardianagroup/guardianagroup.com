@@ -138,7 +138,7 @@ def main():
         e = extremos[idx]
         for (lo, la), (c, cc) in zip((s['l'][0], s['l'][-1]), ((e[0], e[1]), (e[2], e[3]))):
             if c and (c, cc) not in grupos_c[gi]['lugares']:
-                grupos_c[gi]['lugares'][(c, cc)] = lo
+                grupos_c[gi]['lugares'][(c, cc)] = (lo, la)
     wiki = cab.get('wikidata', {})
     def info(g):
         # Wikidata first (what the cable's own record states), then OpenStreetMap's tags, then the length drawn on the map
@@ -164,7 +164,8 @@ def main():
             if ag.get('duenos'): i['duenos'] = ag['duenos'][:6]
             if ag.get('fuentes'): i['fuentes'] = ag['fuentes'][:6]
         return i
-    grupos_out = [[g['nombres'].most_common(1)[0][0], [[c, cc, round(lo, 2)] for (c, cc), lo in sorted(g['lugares'].items(), key=lambda x: x[1])], info(g)] for g in grupos_c]
+    # each landing with its longitude and latitude (owner, 22 Oct 2026: «la distancia punto a punto» in the card)
+    grupos_out = [[g['nombres'].most_common(1)[0][0], [[c, cc, round(lo, 2), round(la, 2)] for (c, cc), (lo, la) in sorted(g['lugares'].items(), key=lambda x: x[1][0])], info(g)] for g in grupos_c]
     out = {
         'fuente': 'Centros de datos y cables: OpenStreetMap (ODbL); cables que faltan en OpenStreetMap, reconstruidos por la agencia GUARDIANA de fuentes públicas (trazado aproximado). Ciudades: GeoNames cities15000 (CC BY 4.0).',
         'generado_desde': {'puntos': pts.get('descargado'), 'cables': cab.get('descargado')},

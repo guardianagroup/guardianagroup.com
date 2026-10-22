@@ -251,6 +251,7 @@
     'verificado': ['verified', 'verificado'],
     'estimado': ['estimated', 'estimado'],
     'El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.': ['The browser that shows every cut, live. It will arrive when it is finished and tested.', 'O navegador que mostra cada corte, ao vivo. Chegará quando estiver terminado e testado.'],
+    'De punto a punto, en línea recta': ['Point to point, as the crow flies', 'De ponto a ponto, em linha reta'],
     'En servicio desde': ['In service since', 'Em serviço desde'], 'Longitud': ['Length', 'Comprimento'], 'Longitud en el mapa': ['Length on the map', 'Comprimento no mapa'], 'Trazado aproximado por mar': ['Approximate sea route', 'Traçado aproximado pelo mar'], 'Datos verificados': ['Verified data', 'Dados verificados'], 'Fuentes': ['Sources', 'Fontes'], 'Dueños': ['Owners', 'Donos'],
     'Desde el mar': ['From the sea', 'Desde o mar'],
     'Capas de satélites': ['Satellite layers', 'Camadas de satélites'], 'Plegar': ['Fold', 'Recolher'],

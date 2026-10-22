@@ -86,7 +86,8 @@
     cargando.puntos = false; pintaNota();
   }
   function pintaPuntos(cx, p, G) {
-    const forma = { aterrizaje: 0, datos: 1, intercambio: 2 };
+    const forma = { aterrizaje: 0, datos: 1, intercambio: 2 }, z = G.R / (G.R0 || G.R), L = esLimpio();
+    const sd = Math.max(1.5, Math.min(4, 1 + z * 0.22)); // data-centre squares grow a little with the zoom (owner: «que se separen bien»)
     for (let k = 0; k < 3; k++) {
       cx.beginPath();
       for (const q of PT.p) {
@@ -94,11 +95,11 @@
         const v = p.aVista(q.w); if (v[2] <= 0.02) continue;
         const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
         if (k === 0) { cx.moveTo(x, y - 2.6); cx.lineTo(x + 2.6, y); cx.lineTo(x, y + 2.6); cx.lineTo(x - 2.6, y); cx.closePath(); }
-        else if (k === 1) cx.rect(x - 1.5, y - 1.5, 3, 3);
+        else if (k === 1) cx.rect(x - sd, y - sd, 2 * sd, 2 * sd);
         else { cx.moveTo(x + 2.8, y); cx.arc(x, y, 2.8, 0, 7); }
       }
       if (k === 2) { cx.strokeStyle = `rgba(${BLANCO},.85)`; cx.lineWidth = 1; cx.stroke(); }
-      else { cx.fillStyle = k === 0 ? `rgba(${BLANCO},.9)` : `rgba(${ACERO},.75)`; cx.fill(); }
+      else { cx.fillStyle = k === 0 ? `rgba(${BLANCO},.9)` : L ? `rgba(${BLANCO},.92)` : `rgba(${ACERO},.75)`; cx.fill(); }
     }
   }
 
@@ -262,6 +263,7 @@
   // Natural Earth, public domain (datos/fronteras.json, built by herramientas/fronteras.py): countries from ×1.5,
   // states and provinces from ×2.5, their names when close enough. Loaded once, the first time the zoom asks for it.
   let FR = null;
+  const esLimpio = () => document.body.classList.contains('limpio');
   async function cargaFronteras() {
     if (FR || cargando.fronteras) return; cargando.fronteras = true;
     try {
@@ -276,14 +278,16 @@
     if (z < 1.5) return;
     if (!FR) { cargaFronteras(); return; }
     if (FR.error) return;
+    const L = esLimpio();
     cx.save(); cx.globalCompositeOperation = 'source-over';
-    pintaLineas(cx, p, G, FR.paises, `rgba(${BLANCO},${Math.min(0.28, 0.06 + 0.05 * z)})`, 0.8);
+    pintaLineas(cx, p, G, FR.paises, `rgba(${BLANCO},${L ? 0.5 : Math.min(0.28, 0.06 + 0.05 * z)})`, L ? 1 : 0.8);
     if (z >= 2.5) {
-      pintaLineas(cx, p, G, FR.regiones, `rgba(${BLANCO},${Math.min(0.2, 0.03 + 0.03 * z)})`, 0.6);
-      if (z >= 4) {
+      pintaLineas(cx, p, G, FR.regiones, `rgba(${BLANCO},${L ? 0.26 : Math.min(0.2, 0.03 + 0.03 * z)})`, 0.6);
+      // region names: on the clean map only when very close, so they never fight the data-centre cities
+      if (z >= (L ? 12 : 4)) {
         const ocupado = []; cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textAlign = 'center'; cx.textBaseline = 'middle';
         for (const q of FR.nombres) {
-          if (q.r > (z >= 7 ? 9 : z >= 5.5 ? 6 : 3)) continue;
+          if (q.r > (L ? (z >= 14 ? 6 : 3) : z >= 7 ? 9 : z >= 5.5 ? 6 : 3)) continue;
           const v = p.aVista(q.w); if (v[2] <= 0.4) continue;
           const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1]; if (x < -40 || x > G.W + 40 || y < -20 || y > G.H + 20) continue;
           const txt = q.n.toUpperCase(), w = 6.2 * txt.length;
@@ -996,6 +1000,13 @@
       if (inf.km) mas.push(T('Longitud') + ': ' + num(inf.km) + ' km');
       else if (inf.kmMapa) mas.push(T('Longitud en el mapa') + ': ' + num(inf.kmMapa) + ' km');
       if (inf.duenos && inf.duenos.length) mas.push(T('Dueños') + ': ' + inf.duenos.join(', '));
+      // owner, 22 Oct 2026: «la distancia punto a punto»: between consecutive landings, west to east, as the crow
+      // flies over the sea (the exact route of each stretch is not public), so it is said plainly
+      if (gr && gr[1].length >= 2 && gr[1].every((q) => Number.isFinite(q[3]))) {
+        const tramos = [];
+        for (let k = 1; k < gr[1].length && tramos.length < 6; k++) { const a = gr[1][k - 1], b = gr[1][k]; const d = kmLL([a[2], a[3]], [b[2], b[3]]); if (d >= 20) tramos.push(a[0] + ' → ' + b[0] + ': ' + num(Math.round(d)) + ' km'); }
+        if (tramos.length) mas.push(T('De punto a punto, en línea recta') + ': ' + tramos.join(' · ') + (gr[1].length - 1 > 6 ? ' · …' : ''));
+      }
       const ops = inf.operan && inf.operan.length ? inf.operan.join(', ') : d.o;
       if (ops) mas.push(T('Operador') + ': ' + ops);
       if (inf.aprox) {  // rebuilt by the agency: say so, and where it was checked
