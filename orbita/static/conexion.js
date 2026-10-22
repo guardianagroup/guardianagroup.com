@@ -189,6 +189,12 @@
       : T('Se mide desde este navegador: una petición mínima a la puerta pública de 33 centros de datos de nube (Amazon Web Services) y al borde de red más cercano (Cloudflare), solo cuando tú pulsas. No se envía nada tuyo. La ruta salto a salto solo puede medirla el programa GUARDIANA, y Órbita la dibuja igual.');
     s.append(p);
     const b = document.createElement('button'); b.type = 'button'; b.className = 'medir'; b.disabled = midiendo; b.textContent = midiendo ? T('Midiendo…') : rutas && rutas.nubes && rutas.nubes.length ? T('Volver a medir') : T('Medir rutas'); b.addEventListener('click', mideRutas); s.append(b);
+    // the journey and its report: on a computer only for now (owner, 22 Oct 2026: «solo versión PC, de momento»)
+    const pc = !(matchMedia && matchMedia('(pointer: coarse)').matches) && innerWidth >= 900;
+    if (pc && rutas && rutas.nubes && rutas.nubes.length && !midiendo && window.OrbitaViaje) {
+      const v = document.createElement('button'); v.type = 'button'; v.className = 'medir viaje3d'; v.textContent = T('Ver el viaje en 3D'); v.addEventListener('click', () => window.OrbitaViaje.empieza(rutas)); s.append(' ', v);
+      const i = document.createElement('button'); i.type = 'button'; i.className = 'medir'; i.textContent = T('Guardar el viaje (PDF)'); i.addEventListener('click', () => window.OrbitaViaje.informe(rutas)); s.append(' ', i);
+    }
     return s;
   }
   // ---------- panel ----------

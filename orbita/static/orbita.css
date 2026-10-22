@@ -506,3 +506,59 @@ body.dentro .ficha-panel { opacity: 0; pointer-events: none; }
   body.imprime-ficha #ficha-panel .acciones, body.imprime-ficha #ficha-panel .botones, body.imprime-ficha #ficha-panel .asa { display: none; }
   body.imprime-ficha #ficha-panel summary::after { content: ''; }
 }
+
+/* ---------- El viaje de tus datos (22 Oct 2026): the HUD over the planet, and the report ---------- */
+body.viaje header, body.viaje #capas, body.viaje #puertas, body.viaje #directo, body.viaje .zoom, body.viaje .altura, body.viaje .conexion, body.viaje .ficha-panel, body.viaje .sat-ficha, body.viaje #capa-nota, body.viaje #sat-vista { opacity: 0 !important; pointer-events: none !important; transition: opacity .4s; }
+.viaje { position: fixed; inset: 0; z-index: 40; pointer-events: none; font-family: var(--texto); color: var(--fg); }
+.viaje[hidden] { display: none; }
+.viaje .arriba { position: absolute; left: 28px; top: 22px; }
+.viaje .k { margin: 0; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--fg); }
+.viaje .sub { margin: 6px 0 0; font: 400 11px/1.4 var(--mono); color: #A9B3BE; }
+.viaje .centro { position: absolute; left: 0; right: 0; bottom: 70px; text-align: center; transition: opacity .5s; }
+.viaje .destino { margin: 0 0 6px; font: 500 12px/1.3 var(--mono); letter-spacing: .1em; color: #A9B3BE; }
+.viaje .cifras { display: flex; justify-content: center; gap: 48px; }
+.viaje .cifras b { display: block; font: 600 46px/1 var(--texto); color: var(--fg); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.viaje .cifras span { display: block; margin-top: 4px; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #8A95A2; }
+.viaje .luz { margin: 12px 0 0; font: 500 12px/1.4 var(--mono); color: var(--accent); transition: opacity .6s; }
+.viaje .abajo { position: absolute; right: 28px; bottom: 24px; display: flex; gap: 8px; pointer-events: auto; }
+.viaje button { all: unset; cursor: pointer; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); color: #C4CCD5; font: 500 12px/1 var(--texto); background: rgba(12,17,24,.6); }
+.viaje button:hover { color: var(--fg); border-color: rgba(156,195,228,.5); }
+.viaje .fin { position: absolute; left: 0; right: 0; bottom: 70px; text-align: center; pointer-events: auto; }
+.viaje .fin[hidden] { display: none; }
+.viaje .fin .t { margin: 0; font: 600 30px/1.2 var(--texto); color: var(--fg); }
+.viaje .fin .d { margin: 8px 0 16px; font: 400 12px/1.5 var(--mono); color: #A9B3BE; }
+.viaje .fin .botones { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.viaje .fin .informe, .viaje .fin .video { border-color: var(--accent); color: var(--accent); }
+.viaje .fin .informe:hover, .viaje .fin .video:hover { background: var(--accent); color: var(--accent-fg); }
+.viaje .fin .video[hidden] { display: none; }
+.informe { position: fixed; inset: 0; z-index: 45; overflow: auto; background: #06080C; color: var(--fg); padding: 32px max(24px, 6vw) 48px; font-family: var(--texto); scrollbar-width: thin; }
+.informe .cab { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+.informe .cab .k { margin: 0; font: 500 11px/1 var(--mono); letter-spacing: .16em; color: var(--accent); }
+.informe .cab .t { margin: 8px 0 6px; font: 600 38px/1.1 var(--texto); letter-spacing: -.01em; }
+.informe .cab .s { margin: 0; font: 400 12px/1.5 var(--mono); color: #A9B3BE; max-width: 70ch; }
+.informe .acciones { display: flex; gap: 8px; }
+.informe .acciones button { all: unset; cursor: pointer; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font: 600 12px/1 var(--texto); }
+.informe .acciones button:hover { background: var(--accent); color: var(--accent-fg); }
+.informe figure { margin: 0 0 22px; }
+.informe figure canvas { display: block; border-radius: 14px; border: 1px solid var(--line); }
+.informe figcaption { margin-top: 8px; font: 400 11px/1.5 var(--mono); color: #8A95A2; }
+.informe .cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 0 0 22px; }
+.informe .cifras div { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: rgba(12,17,24,.6); }
+.informe .cifras b { display: block; font: 600 30px/1.1 var(--texto); color: var(--fg); font-variant-numeric: tabular-nums; }
+.informe .cifras span { display: block; margin-top: 6px; font: 500 10.5px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #8A95A2; }
+.informe .dos { display: grid; grid-template-columns: minmax(280px, 560px) 1fr; gap: 24px; align-items: start; margin-bottom: 22px; }
+.informe .texto h2 { margin: 0 0 8px; font: 600 15px/1.3 var(--texto); }
+.informe .texto p { margin: 0 0 14px; font: 400 13.5px/1.6 var(--texto); color: var(--fg); max-width: 62ch; }
+.informe table { width: 100%; border-collapse: collapse; font: 400 12px/1.4 var(--mono); margin-bottom: 22px; }
+.informe th, .informe td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.informe th { font-weight: 500; color: #8A95A2; letter-spacing: .06em; text-transform: uppercase; font-size: 10px; }
+.informe .pie { margin: 0; font: 400 10.5px/1.5 var(--mono); color: #8A95A2; }
+@media (max-width: 760px) { .informe .dos { grid-template-columns: 1fr; } .informe .cab .t { font-size: 28px; } }
+@media print {
+  body.imprime-informe > *:not(#informe) { display: none !important; }
+  body.imprime-informe { background: #06080C; }
+  body.imprime-informe #informe { position: static; overflow: visible; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body.imprime-informe #informe .acciones { display: none; }
+  body.imprime-informe #informe figure, body.imprime-informe #informe .cifras, body.imprime-informe #informe table { break-inside: avoid; }
+  @page { background: #06080C; margin: 12mm; }
+}
