@@ -205,7 +205,7 @@
   // ---------- Geometry shared with the CSS (--u) ----------
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
   // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
-  const ZOOM = { z: 1, zt: 1, MAX: 16 };
+  const ZOOM = { z: 1, zt: 1, MAX: 20 }; // 22 Oct 2026, 13:11 (owner): «hasta 20×, y que entre despacito, suave»
   const LIMPIO_DESDE = 4; // from here the planet is drawn flat: black water, grey land, data in white // 22 Oct 2026 (owner): «sube más el zoom aún» // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
@@ -313,6 +313,17 @@
       zControl.querySelector('[data-z="base"]').hidden = ZOOM.zt <= 1 + 1e-3;
     }
     document.body.classList.toggle('cerca', ZOOM.zt > 1.02);
+    pintaAltura();
+  }
+  // 22 Oct 2026, 13:12 (owner): «en un lado de la pantalla, que se vaya viendo la altitud a la que está el zoom».
+  // A nominal height: the whole planet in view counts as a look from about 40 000 km; each ×2 halves it.
+  const alturaEl = $('altura');
+  function pintaAltura() {
+    if (!alturaEl) return;
+    const z = Math.max(1, ZOOM.z), km = Math.round(40000 / z / (z >= 10 ? 10 : 100)) * (z >= 10 ? 10 : 100);
+    const v = alturaEl.querySelector('.v'), i = alturaEl.querySelector('i');
+    if (v) v.textContent = '≈ ' + km.toLocaleString(document.documentElement.lang === 'en' ? 'en-GB' : 'es-ES') + ' km';
+    if (i) i.style.top = (100 * Math.log(z) / Math.log(ZOOM.MAX)).toFixed(1) + '%';
   }
   const libreZoom = () => !dentro && caja.hidden;
   addEventListener('wheel', (e) => {
@@ -1057,7 +1068,7 @@ void main(){
     if (dentro && impar) return; // behind glass, half the frames are enough
     while (cola.length && cola[0].at <= now / 1000) lanza(cola.shift(), t);
     while (ondas.length && t - ondas[0].t0 > 3) ondas.shift();
-    if (Math.abs(ZOOM.zt - ZOOM.z) > 1e-4) { ZOOM.z += (ZOOM.zt - ZOOM.z) * Math.min(1, dt * 9); if (Math.abs(ZOOM.zt - ZOOM.z) < 1e-3) ZOOM.z = ZOOM.zt; R = R0 * ZOOM.z; RAIZ.style.setProperty('--cerca', ((ZOOM.z - 1) / (ZOOM.MAX - 1)).toFixed(3)); }
+    if (Math.abs(ZOOM.zt - ZOOM.z) > 1e-4) { ZOOM.z += (ZOOM.zt - ZOOM.z) * Math.min(1, dt * 4.5); /* half the old speed: the zoom glides in */ if (Math.abs(ZOOM.zt - ZOOM.z) < 1e-3) ZOOM.z = ZOOM.zt; R = R0 * ZOOM.z; RAIZ.style.setProperty('--cerca', ((ZOOM.z - 1) / (ZOOM.MAX - 1)).toFixed(3)); pintaAltura(); }
     avanzaVista(dentro ? dt * 2 : dt, now);
     pintaTierra(t, dentro ? 0.9 : 1);
     pintaRutas(t, dt);
