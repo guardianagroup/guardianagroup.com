@@ -18,7 +18,7 @@
 
   const X = {
     es: {
-      k: { mundo: 'EL MUNDO, AHORA', equipo: 'TU EQUIPO', ejemplo: 'EJEMPLO', sabias: '¿SABÍAS QUE…?', noticia: 'NOTICIA' }, noticiaF: 'Noticia verificada · dos fuentes', sabiaF: 'Datos verificados · dos fuentes',
+      k: { mundo: 'EL MUNDO, AHORA', equipo: 'TU EQUIPO', ejemplo: 'EJEMPLO', sabias: '¿SABÍAS QUE…?', noticia: 'NOTICIA', fijar: 'Toca los puntos para que se quede fijo y pasarlos tú', seguir: 'Fijo · toca los puntos para que siga solo' }, noticiaF: 'Noticia verificada · dos fuentes', sabiaF: 'Datos verificados · dos fuentes',
       sat: (d) => `satélites de datos están ahora mismo sobre el horizonte de ${d}.`, satF: 'Datos verificados · posiciones calculadas ahora',
       noche: (p) => `ciudades de más de 15.000 habitantes están ahora de noche: el ${p} % del total.`, nocheF: 'GeoNames · el Sol, calculado ahora',
       cerca: (n, o, c) => `te separan del centro de datos más cercano del mapa: ${n}${o && o !== n ? ' (' + o + ')' : ''}${c ? ', en ' + c : ''}.`, cercaF: 'Datos verificados · cobertura parcial',
@@ -44,7 +44,7 @@
       nuevo: (c, ab) => `es el año de ${c}${ab ? ' (' + ab + ')' : ''}, el cable más moderno del mapa ya en servicio.`,
     },
     en: {
-      k: { mundo: 'THE WORLD, NOW', equipo: 'YOUR COMPUTER', ejemplo: 'EXAMPLE', sabias: 'DID YOU KNOW…?', noticia: 'NEWS' }, noticiaF: 'Verified news · two sources', sabiaF: 'Verified data · two sources',
+      k: { mundo: 'THE WORLD, NOW', equipo: 'YOUR COMPUTER', ejemplo: 'EXAMPLE', sabias: 'DID YOU KNOW…?', noticia: 'NEWS', fijar: 'Tap the dots to hold it and move through yourself', seguir: 'Held · tap the dots to let it run again' }, noticiaF: 'Verified news · two sources', sabiaF: 'Verified data · two sources',
       sat: (d) => `data satellites are above the horizon of ${d} right now.`, satF: 'Verified data · positions computed now',
       noche: (p) => `cities of more than 15,000 people are in night right now: ${p}% of them.`, nocheF: 'GeoNames · the Sun, computed now',
       cerca: (n, o, c) => `to the nearest data centre on the map: ${n}${o && o !== n ? ' (' + o + ')' : ''}${c ? ', in ' + c : ''}.`, cercaF: 'Verified data · partial coverage',
@@ -70,7 +70,7 @@
       nuevo: (c, ab) => `is the year of ${c}${ab ? ' (' + ab + ')' : ''}, the newest cable on the map already in service.`,
     },
     pt: {
-      k: { mundo: 'O MUNDO, AGORA', equipo: 'SEU COMPUTADOR', ejemplo: 'EXEMPLO', sabias: 'SABIA QUE…?', noticia: 'NOTÍCIA' }, noticiaF: 'Notícia verificada · duas fontes', sabiaF: 'Dados verificados · duas fontes',
+      k: { mundo: 'O MUNDO, AGORA', equipo: 'SEU COMPUTADOR', ejemplo: 'EXEMPLO', sabias: 'SABIA QUE…?', noticia: 'NOTÍCIA', fijar: 'Toca nos pontos para fixar e passar você mesmo', seguir: 'Fixo · toca nos pontos para voltar a correr' }, noticiaF: 'Notícia verificada · duas fontes', sabiaF: 'Dados verificados · duas fontes',
       sat: (d) => `satélites de dados estão agora acima do horizonte de ${d}.`, satF: 'Dados verificados · posições calculadas agora',
       noche: (p) => `cidades com mais de 15 mil habitantes estão agora à noite: ${p} % do total.`, nocheF: 'GeoNames · o Sol, calculado agora',
       cerca: (n, o, c) => `até o centro de dados mais próximo do mapa: ${n}${o && o !== n ? ' (' + o + ')' : ''}${c ? ', em ' + c : ''}.`, cercaF: 'Dados verificados · cobertura parcial',
@@ -276,7 +276,7 @@
 
   // ---------- the card ----------
   const caja = $('dato'); if (!caja) return;
-  let parado = false, temp = 0, cola = [], ultimo = null, vuelta = 0, pos = 0;
+  let parado = false, temp = 0, cola = [], ultimo = null, vuelta = 0, pos = 0, fijo = false, vistos = [], cursor = -1;
   // each pass is a fresh shuffle of the world's facts with this computer's facts woven in, so the card never repeats
   // the same sequence (owner, 22 Oct 2026: «se tienen que ir renovando, que no sean siempre los mismos»)
   async function noticia() {
@@ -300,23 +300,35 @@
       if (!cola.length) rellena();
       const f = cola.shift(); pos++;
       const d = typeof f === 'function' ? await f() : f;
-      if (d) { ultimo = f; pinta(d, (pos - 1) % Math.max(1, vuelta), vuelta); break; }
+      if (d) { ultimo = f; vistos.push(d); if (vistos.length > 60) vistos.shift(); cursor = vistos.length - 1; pinta(d, (pos - 1) % Math.max(1, vuelta), vuelta); break; }
     }
-    temp = setTimeout(() => { if (!parado && !document.hidden) siguiente(); else temp = setTimeout(siguiente, 3000); }, 9000);
+    if (!fijo) temp = setTimeout(() => { if (!parado && !document.hidden) siguiente(); else temp = setTimeout(siguiente, 3000); }, 9000);
   }
+  // fixed mode: the card stops by itself and the person moves it: tap the card for the next one, the «‹» for the previous
+  function fija(on) { fijo = on; caja.classList.toggle('fijo', on); clearTimeout(temp); if (!on) temp = setTimeout(siguiente, 2500); }
+  function anterior() { if (cursor > 0) { cursor--; const d = vistos[cursor]; pinta(d, cursor, vistos.length); } }
   function pinta(d, k, n) {
     const t = tx();
     caja.classList.remove('entra'); void caja.offsetWidth; caja.classList.add('entra');
     $('dato-k').textContent = d.k === 'noticia' ? t.k.noticia + ' · ' + t.k.sabias : (d.fijo || (d.k === 'mundo' && Math.random() < 0.5) ? t.k.sabias : t.k[d.k]);
     const e = $('dato-e'); e.hidden = !d.e; e.textContent = t.k.ejemplo;
     $('dato-v').textContent = d.v; $('dato-t').textContent = d.t; $('dato-f').textContent = d.f;
-    const p = $('dato-p'); p.textContent = '';
+    const p = $('dato-p'); p.textContent = ''; p.title = fijo ? (t.k.seguir || '') : (t.k.fijar || '');
+    if (fijo) { const a = document.createElement('b'); a.className = 'datras'; a.textContent = '‹'; p.append(a); }
     for (let j = 0; j < n; j++) { const b = document.createElement('i'); if (j === k) b.className = 'on'; p.append(b); }
+    if (fijo) { const a = document.createElement('b'); a.className = 'dfijo'; a.textContent = '⏸'; p.append(a); }
     caja.hidden = false;
   }
   caja.addEventListener('mouseenter', () => { parado = true; });
   caja.addEventListener('mouseleave', () => { parado = false; });
-  caja.addEventListener('click', () => siguiente());
+  caja.addEventListener('click', (e) => {
+    const p = e.target.closest('#dato-p'); const k = e.target.closest('#dato-k'); const atras = e.target.closest('.datras');
+    if (p) { fija(!fijo); return; }            // the dots: stop here / let it run again
+    if (atras) { anterior(); return; }         // «‹»: the previous one, when fixed
+    if (k && fijo) { fija(false); return; }    // the label while fixed: let it run again
+    if (fijo && cursor < vistos.length - 1) { cursor++; pinta(vistos[cursor], cursor, vistos.length); return; }
+    siguiente();
+  });
   addEventListener('guardiana-idioma', () => { cola = []; siguiente(); });
   setTimeout(siguiente, 3500);
 })();
