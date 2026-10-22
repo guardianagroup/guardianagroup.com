@@ -1,0 +1,432 @@
+[
+{
+"nombre": "MENA Submarine Cable System",
+"llegadas": [
+{
+"lugar": "Mazara del Vallo, Sicilia",
+"pais": "IT",
+"lat": 37.65,
+"lon": 12.59
+},
+{
+"lugar": "Abu Talat",
+"pais": "EG",
+"lat": 31.1,
+"lon": 29.7
+},
+{
+"lugar": "Zafarana",
+"pais": "EG",
+"lat": 29.1,
+"lon": 32.65
+},
+{
+"lugar": "Jeddah",
+"pais": "SA",
+"lat": 21.54,
+"lon": 39.17
+},
+{
+"lugar": "Qalhat",
+"pais": "OM",
+"lat": 22.69,
+"lon": 59.37
+},
+{
+"lugar": "Mumbai",
+"pais": "IN",
+"lat": 19.08,
+"lon": 72.88
+}
+],
+"anio": 2014,
+"km": 9100,
+"duenos": [
+"Telecom Egypt"
+],
+"fuentes": [
+"https://en.wikipedia.org/wiki/MENA_(cable_system)"
+]
+},
+{
+"nombre": "GTMO-1",
+"llegadas": [
+{
+"lugar": "Dania Beach, Florida",
+"pais": "US",
+"lat": 26.05,
+"lon": -80.14
+},
+{
+"lugar": "Base Naval de Guantánamo",
+"pais": "CU",
+"lat": 19.94,
+"lon": -75.16
+}
+],
+"anio": 2016,
+"km": 1528,
+"duenos": [
+"Gobierno de Estados Unidos"
+],
+"fuentes": [
+"https://www.federalregister.gov/documents/2015/03/12/2015-05680/guantanamo-bay-to-dania-beach-florida-submarine-fiber-optic-cable-system-gtmo-1-sfoc-environmental"
+]
+},
+{
+"nombre": "GTMO-PR",
+"llegadas": [
+{
+"lugar": "Base Naval de Guantánamo",
+"pais": "CU",
+"lat": 19.94,
+"lon": -75.16
+},
+{
+"lugar": "Punta Salinas, Toa Baja",
+"pais": "PR",
+"lat": 18.47,
+"lon": -66.19
+}
+],
+"anio": 2019,
+"km": 1400,
+"duenos": [
+"Gobierno de Estados Unidos"
+],
+"fuentes": [
+"https://www.federalregister.gov/documents/2017/12/22/2017-27584/guantanamo-bay-to-punta-salinas-toa-baja-puerto-rico-submarine-fiber-optic-cable-system-gtmo-pr-sfoc"
+]
+},
+{
+"nombre": "GO-1",
+"llegadas": [
+{
+"lugar": "St Paul's Bay",
+"pais": "MT",
+"lat": 35.95,
+"lon": 14.41
+},
+{
+"lugar": "Mazara del Vallo, Sicilia",
+"pais": "IT",
+"lat": 37.65,
+"lon": 12.59
+}
+],
+"anio": 2008,
+"km": 290,
+"duenos": [
+"GO plc"
+],
+"fuentes": [
+"https://en.wikipedia.org/wiki/GO-1",
+"https://www.go.com.mt/news/go-launches-eu-funded-upgrade-of-maltas-strategic-go-1-submarine-cable-link/"
+]
+},
+{
+"nombre": "IONIAN",
+"llegadas": [
+{
+"lugar": "Crotone, Calabria",
+"pais": "IT",
+"lat": 39.08,
+"lon": 17.13
+},
+{
+"lugar": "Preveza",
+"pais": "GR",
+"lat": 38.96,
+"lon": 20.75
+}
+],
+"anio": null,
+"km": 330,
+"duenos": [
+"Islalink"
+],
+"fuentes": [
+"https://islalink.com/2022/04/22/submarine-route/",
+"https://www.nokia.com/customer-success/nokia-and-islalink-achieve-800gbps-capacity-reach-record-over-the-ionian-submarine-cable/"
+]
+},
+{
+"nombre": "Unitirreno",
+"llegadas": [
+{
+"lugar": "Génova",
+"pais": "IT",
+"lat": 44.41,
+"lon": 8.93
+},
+{
+"lugar": "Roma / Fiumicino",
+"pais": "IT",
+"lat": 41.77,
+"lon": 12.24
+},
+{
+"lugar": "Olbia, Cerdeña",
+"pais": "IT",
+"lat": 40.92,
+"lon": 9.5
+},
+{
+"lugar": "Mazara del Vallo, Sicilia",
+"pais": "IT",
+"lat": 37.65,
+"lon": 12.59
+}
+],
+"anio": 2025,
+"km": 1156,
+"duenos": [
+"Unitirreno Submarine Network"
+],
+"fuentes": [
+"https://www.datacenterdynamics.com/en/news/unitirreno-launches-domestic-subsea-cable-in-italy/"
+]
+},
+{
+"nombre": "Medusa",
+"llegadas": [
+{
+"lugar": "Marsella",
+"pais": "FR",
+"lat": 43.3,
+"lon": 5.37
+},
+{
+"lugar": "Bizerta",
+"pais": "TN",
+"lat": 37.27,
+"lon": 9.87
+},
+{
+"lugar": "Nador",
+"pais": "MA",
+"lat": 35.17,
+"lon": -2.93
+}
+],
+"anio": null,
+"km": 8700,
+"duenos": [
+"AFR-IX Telecom"
+],
+"fuentes": [
+"https://medusascs.com/",
+"https://www.datacenterdynamics.com/en/news/medusa-subsea-cable-lands-in-marseille-france/"
+]
+},
+{
+"nombre": "Firmina",
+"llegadas": [
+{
+"lugar": "Myrtle Beach, South Carolina",
+"pais": "US",
+"lat": 33.69,
+"lon": -78.88
+},
+{
+"lugar": "Praia Grande, São Paulo",
+"pais": "BR",
+"lat": -24.01,
+"lon": -46.41
+},
+{
+"lugar": "Punta del Este",
+"pais": "UY",
+"lat": -34.97,
+"lon": -54.95
+},
+{
+"lugar": "Las Toninas",
+"pais": "AR",
+"lat": -36.47,
+"lon": -56.7
+}
+],
+"anio": 2025,
+"km": 14517,
+"duenos": [
+"Google"
+],
+"fuentes": [
+"https://en.wikipedia.org/wiki/Firmina"
+]
+},
+{
+"nombre": "Greenland Connect North",
+"llegadas": [
+{
+"lugar": "Nuuk",
+"pais": "GL",
+"lat": 64.18,
+"lon": -51.72
+},
+{
+"lugar": "Aasiaat",
+"pais": "GL",
+"lat": 68.71,
+"lon": -52.87
+}
+],
+"anio": 2017,
+"km": 673,
+"duenos": [
+"Tusass"
+],
+"fuentes": [
+"https://en.wikipedia.org/wiki/Greenland_Connect"
+]
+},
+{
+"nombre": "Paniolo",
+"llegadas": [
+{
+"lugar": "Makaha, Oahu",
+"pais": "US",
+"lat": 21.47,
+"lon": -158.21
+},
+{
+"lugar": "Kawaihae, Hawaii",
+"pais": "US",
+"lat": 20.04,
+"lon": -155.83
+},
+{
+"lugar": "Kahului, Maui",
+"pais": "US",
+"lat": 20.89,
+"lon": -156.47
+},
+{
+"lugar": "Lanai City, Lanai",
+"pais": "US",
+"lat": 20.83,
+"lon": -156.92
+},
+{
+"lugar": "Kaunakakai, Molokai",
+"pais": "US",
+"lat": 21.09,
+"lon": -157.02
+},
+{
+"lugar": "Lihue, Kauai",
+"pais": "US",
+"lat": 21.98,
+"lon": -159.37
+}
+],
+"anio": 2009,
+"km": null,
+"duenos": [
+"Hawaiian Telcom"
+],
+"fuentes": [
+"https://en.wikipedia.org/wiki/Paniolo_Cable_System"
+]
+},
+{
+"nombre": "Cook Strait Telecommunications Cable",
+"llegadas": [
+{
+"lugar": "Oteranga Bay",
+"pais": "NZ",
+"lat": -41.3,
+"lon": 174.63
+},
+{
+"lugar": "Fighting Bay",
+"pais": "NZ",
+"lat": -41.35,
+"lon": 174.0
+}
+],
+"anio": 2020,
+"km": null,
+"duenos": [
+"Transpower"
+],
+"fuentes": [
+"https://www.transpower.co.nz/news/submarine-telecommunications-cable-deployment-and-removal-successful"
+]
+},
+{
+"nombre": "Quintillion Subsea Cable Network",
+"llegadas": [
+{
+"lugar": "Nome, Alaska",
+"pais": "US",
+"lat": 64.5,
+"lon": -165.41
+},
+{
+"lugar": "Kotzebue, Alaska",
+"pais": "US",
+"lat": 66.9,
+"lon": -162.6
+},
+{
+"lugar": "Point Hope, Alaska",
+"pais": "US",
+"lat": 68.35,
+"lon": -166.8
+},
+{
+"lugar": "Wainwright, Alaska",
+"pais": "US",
+"lat": 70.64,
+"lon": -160.04
+},
+{
+"lugar": "Utqiaġvik, Alaska",
+"pais": "US",
+"lat": 71.29,
+"lon": -156.79
+},
+{
+"lugar": "Oliktok Point / Prudhoe Bay, Alaska",
+"pais": "US",
+"lat": 70.2,
+"lon": -148.4
+}
+],
+"anio": null,
+"km": null,
+"duenos": [
+"Quintillion"
+],
+"fuentes": [
+"https://quintillionglobal.com/system-in-alaska/"
+]
+},
+{
+"nombre": "Medusa - ViaTunisia",
+"llegadas": [
+{
+"lugar": "Marsella",
+"pais": "FR",
+"lat": 43.3,
+"lon": 5.37
+},
+{
+"lugar": "Bizerta",
+"pais": "TN",
+"lat": 37.27,
+"lon": 9.87
+}
+],
+"anio": null,
+"km": null,
+"duenos": [
+"AFR-IX Telecom"
+],
+"fuentes": [
+"https://medusascs.com/news/medusa-lands-in-marseille/"
+]
+}
+]

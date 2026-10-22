@@ -84,7 +84,7 @@
       });
       // hand-verified additions (datos/puntos-extra.json, with their sources): exchange points, polar stations…
       // OpenStreetMap does not know; they survive the automatic data updates
-      try { const e2 = await cargaJSON('datos/puntos-extra.json'); for (const f of (e2.puntos || [])) { if (!Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; const q = { w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: (f.nota || f.enlace || f.clase) ? { nota: f.nota || '', enlace: f.enlace || '', clase: f.clase || '' } : null, lon: f.lon, lat: f.lat, extra: true }; if (f.tipo === 'datos') PT.p.push(q); else if (f.tipo === 'intercambio') PT.ix.push(q); else if (f.tipo === 'estacion') (PT.est || (PT.est = [])).push(q); } } catch (_) {}
+      try { const e2 = await cargaJSON('datos/puntos-extra.json'); for (const f of (e2.puntos || [])) { if (!Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; const q = { w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: (f.nota || f.enlace || f.clase) ? { nota: f.nota || '', enlace: f.enlace || '', clase: f.clase || '', programa: f.programa || '', desde: f.desde || '', gente: f.gente || '', telemetria: f.telemetria || '', antenas: f.antenas || '' } : null, lon: f.lon, lat: f.lat, extra: true }; if (f.tipo === 'datos') PT.p.push(q); else if (f.tipo === 'intercambio') PT.ix.push(q); else if (f.tipo === 'estacion') (PT.est || (PT.est = [])).push(q); } } catch (_) {}
       // how many data centres each operator has on the map
       PT.porOp = new Map(); for (const q of PT.p) if (q.o) PT.porOp.set(q.o, (PT.porOp.get(q.o) || 0) + 1);
       lugares();
@@ -793,8 +793,12 @@
   function fichaEstacion(i, x, y) {
     const q = PT.est[i], X = q.x || {}, filas = [];
     if (X.clase) filas.push([T('Tipo'), X.clase === 'base' ? T('Base antártica') : T('Estación terrena de satélites')]);
-    if (q.o) filas.push([T('Operador'), q.o]);
-    if (X.enlace) filas.push([T('Enlace'), X.enlace]);
+    if (q.o) filas.push([T('Operador'), /^[A-Z]{2}$/.test(q.o) ? paisNombre(q.o) + (X.programa ? ' · ' + X.programa : '') : q.o]);
+    if (X.desde) filas.push([T('Desde'), String(X.desde)]);
+    if (X.gente) filas.push([T('Personal'), X.gente]);
+    if (X.enlace) filas.push([T('Cómo se conecta'), X.enlace]);
+    if (X.telemetria) filas.push([T('Por dónde salen los datos'), X.telemetria]);
+    if (X.antenas) filas.push([T('Antenas'), X.antenas]);
     if (X.nota) filas.push([T('Datos'), X.nota]);
     fichaRica(q.n || T('Estación'), filas, T('Datos verificados'), x, y);
   }
@@ -1141,6 +1145,7 @@
     lista.addEventListener('click', (e) => e.stopPropagation());
   }
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lista) cierraLista(); });
+  let estacionMarcada = -1, previstoMarcado = -1;
   function mira(x, y, clic) {
     if ((lista || fichaFija) && !clic) return; // the list is open, or a card was chosen from it: hovering changes nothing
     if (clic) {
@@ -1151,7 +1156,8 @@
     }
     if (P() && P().dentro) { if (marcado >= 0 || centroMarcado >= 0 || cableMarcado >= 0 || llegadaMarcada >= 0 || puntoMarcado >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = -1; muestra(-1); } return; }
     const est = buscaEstacion(x, y);
-    if (est >= 0) { if (!clic) return; centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; fichaEstacion(est, x, y); fichaFija = true; return; }
+    if (est >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = previstoMarcado = -1; if (est !== estacionMarcada || clic) { estacionMarcada = est; fichaEstacion(est, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
+    estacionMarcada = -1;
     const q = buscaPunto(x, y);
     if (q >= 0) { if (marcado >= 0) { marcado = -1; } cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; if (q !== puntoMarcado) { puntoMarcado = q; fichaLugar('punto', q, x, y); } else colocaFicha(x, y); return; }
     puntoMarcado = -1;
@@ -1165,7 +1171,8 @@
     if (c >= 0) { cableMarcado = -1; if (c !== centroMarcado) { centroMarcado = c; fichaLugar('centro', c, x, y); } else colocaFicha(x, y); return; }
     centroMarcado = -1;
     const pv = buscaPrevisto(x, y);
-    if (pv >= 0) { if (!clic) return; centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; fichaPrevisto(pv, x, y); fichaFija = true; return; }
+    if (pv >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; if (pv !== previstoMarcado || clic) { previstoMarcado = pv; fichaPrevisto(pv, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
+    previstoMarcado = -1;
     const k = buscaCable(x, y);
     if (k >= 0) { fibraMarcada = -1; if (k !== cableMarcado) { cableMarcado = k; fichaLugar('cable', k, x, y); } else colocaFicha(x, y); return; }
     if (cableMarcado >= 0) cableMarcado = -1;
