@@ -72,7 +72,9 @@
   // guardians («Una descarga. Tres guardianes»): ZERO on top, the only one that works, opens the browser
   // itself full screen; Radiografías and Comunicaciones say «En construcción» and promise nothing.
   PUERTAS.splice(0, PUERTAS.length,
-    { id: 'zero', n: 'ZERO', s: 'Navegador', d: 'El navegador que muestra cada corte, en directo.', pagina: 'zero/?orbita=1&entrada=0' },
+    // 22 Oct 2026 (owner): until ZERO is finished the door says «En construcción» and does not open; the program
+    // itself is downloaded from the website (beta). Put `pagina: 'zero/?orbita=1&entrada=0'` back to open the demo.
+    { id: 'zero', n: 'ZERO', s: 'En construcción', d: 'El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.', url: null, desarrollo: true },
     { id: 'radiografias', n: 'Radiografías', s: 'En construcción', d: 'A qué empresas y países habla tu computador, tu IA y tu antivirus. Llegará cuando esté terminada y probada.', url: null, desarrollo: true },
     { id: 'comunicaciones', n: 'Comunicaciones', s: 'En construcción', d: 'Chat, llamadas y archivos cifrados de extremo a extremo. Llegará cuando esté terminada y probada.', url: null, desarrollo: true });
   const nav = $('puertas');
@@ -147,7 +149,7 @@
       return;
     }
     // a door with its own show uses the common section (orbita-secciones.js)
-    if (window.GuardianaSecciones && window.GuardianaSecciones.abre(p.id)) {
+    if (!p.desarrollo && window.GuardianaSecciones && window.GuardianaSecciones.abre(p.id)) {
       marco.hidden = true; marco.removeAttribute('src'); $('sin-pagina').hidden = true;
       if (apila) history.pushState({ puerta: p.id }, '', '#' + p.id);
       setTimeout(() => { if (dentro) $('volver').focus(); }, 900);
@@ -202,11 +204,15 @@
   // ---------- Geometry shared with the CSS (--u) ----------
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
   // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
-  const ZOOM = { z: 1, zt: 1, MAX: 2 };
+  const ZOOM = { z: 1, zt: 1, MAX: 10 }; // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
   function mide() {
-    W = innerWidth; H = innerHeight; DPR = Math.min(devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    // 22 Oct 2026 (owner: «máxima calidad, 4K»): the screen's own resolution, up to a 4K budget of pixels
+    // (a 4K laptop at 250 % draws every pixel); phones and tablets keep 2×, their GPUs paint the whole planet.
+    { const d = devicePixelRatio || 1, tactil = matchMedia('(pointer: coarse)').matches;
+      DPR = Math.max(1, Math.min(d, tactil ? 2 : 4, Math.sqrt(3840 * 2160 * 1.15 / Math.max(1, W * H)))); }
     // The ring's unit. Wide: «En directo» and the door's reading take the two lower corners, so the
     // ring stays clear of them (the lower doors' labels reach 26.4 units out and 130 px beyond).
     // Narrow: both move off the corners and the ring keeps clear of the top and bottom lines.
@@ -262,8 +268,11 @@
   // 20 Oct 2026: the planet's layers (cables, satellites) live in static/capas.js and draw through this.
   window.OrbitaPlaneta = {
     aVista, pantalla, vec, ctx: cx2,
-    get geo() { return { W, H, CX, CY, R, R0, U }; },
+    get geo() { return { W, H, CX, CY, R, R0, U, DPR }; },
     get dentro() { return dentro; },
+    get pais() { return (LUGAR && LUGAR.pais) || CASA || null; },
+    // 22 Oct 2026: used by the automated checks (Playwright) to look at a place at a given zoom.
+    ir(lon, lat, z) { vista.lon = lon; vista.lat = Math.max(-60, Math.min(60, lat)); vista.vlon = vista.vlat = 0; meta = null; ZOOM.zt = Math.max(1, Math.min(ZOOM.MAX, z || 1)); quietoHasta = performance.now() + 60000; pintaZoom(); },
     get lugar() { try { if (LUGAR) return { lat: LUGAR.lat, lon: LUGAR.lon, nombre: LUGAR.ciudad, aprox: false }; const p = centros[CASA]; return p ? { lat: p.lat, lon: p.lon, nombre: nombrePais(CASA), aprox: true } : null; } catch (_) { return null; } },
   };
   cvT.addEventListener('pointerdown', (e) => {
@@ -360,7 +369,7 @@
     const vs = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
     const fs = `precision highp float;
 uniform vec2 uC;uniform float uR;uniform mat3 uM;uniform vec3 uL;uniform float uT,uNubOn,uAten;
-uniform sampler2D uDia,uLuz,uNub,uAgua;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
+uniform sampler2D uDia,uLuz,uNub,uAgua,uZona;uniform vec4 uZonaBox;uniform float uZonaOn;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
 const float PI=3.14159265;
 void main(){
  vec2 p=(gl_FragCoord.xy-uC)/uR;float r=length(p);vec3 atm=vec3(.47,.67,.92);
@@ -370,12 +379,13 @@ void main(){
   float lat=asin(clamp(w.y,-1.,1.));float lon=atan(w.x,w.z);
   vec2 uv=vec2(lon/(2.*PI)+.5,.5-lat/PI);
   vec3 dia=texture2D(uDia,uv).rgb;float agua=texture2D(uAgua,uv).r;
+  if(uZonaOn>.5){float ux=uv.x;if(ux<uZonaBox.x)ux+=1.;vec2 q=(vec2(ux,uv.y)-uZonaBox.xy)/(uZonaBox.zw-uZonaBox.xy);if(q.x>0.&&q.x<1.&&q.y>0.&&q.y<1.)dia=texture2D(uZona,q).rgb;}
   float nub=texture2D(uNub,vec2(fract(uv.x-uT*.0016),uv.y)).r*uNubOn;nub=smoothstep(.12,.9,nub);
   vec3 luz=texture2D(uLuz,uv).rgb;
   float lam=dot(n,uL);float dl=smoothstep(-.22,.42,lam);
   vec3 sup=mix(dia*vec3(.96,1.,1.06),vec3(.97,.98,1.),nub*.88);
   vec3 c=sup*(.05+1.08*max(lam,0.))*mix(.3,1.,dl);
-  c+=sup*vec3(.62,.74,.92)*.17*(1.-dl);
+  c+=sup*vec3(.62,.74,.92)*.31*(1.-dl); // 21 Oct 2026 (owner): the night side a little clearer, still plainly night
   c+=luz*vec3(1.,.78,.48)*1.5*(1.-dl)*(1.-nub*.8);
   vec3 h=normalize(uL+vec3(0.,0.,1.));c+=vec3(.8,.9,1.)*pow(max(dot(n,h),0.),160.)*agua*(1.-nub)*.32;
   float fr=pow(1.-n.z,2.4);c=mix(c,atm*(.18+.8*max(lam+.35,0.)),fr*.6);
@@ -397,10 +407,11 @@ void main(){
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const la = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la, 2, gl.FLOAT, false, 0, 0);
-      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
+      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaBox', 'uZonaOn', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
       G = { pr, u, tex: {}, nubOn: 0 };
       const tex = (unidad, nombre, url, si) => {
         const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unidad); gl.bindTexture(gl.TEXTURE_2D, t);
+        if (unidad === 0) G.tex.dia = t;
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([10, 14, 20, 255]));
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -416,7 +427,104 @@ void main(){
       if (NUBES) tex(2, 'uNub', TIERRA + 'nubes.jpg', () => { G.nubOn = 1; });
       else { gl.uniform1i(u.uNub, 0); }
       tex(3, 'uAgua', TIERRA + 'agua.png');
+      // 22 Oct 2026 (owner: «un zoom más para ver bien las cosas»): a sharper day map (8192 × 4096, the same
+      // colours with NASA Blue Marble's finer relief on land), loaded only on a computer, only the first time
+      // someone zooms in past ×1.6, and only if the graphics card holds it. Back near ×1 the 4K map returns,
+      // so the whole planet never shimmers.
+      G.tex8 = null; G.pide8 = () => {
+        if (G.tex8 !== null || matchMedia('(pointer: coarse)').matches || gl.getParameter(gl.MAX_TEXTURE_SIZE) < 8192) return;
+        G.tex8 = false;
+        const im = new Image();
+        im.onload = () => {
+          const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, t);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im);
+          G.tex8 = gl.getError() === gl.NO_ERROR ? t : false;
+          gl.bindTexture(gl.TEXTURE_2D, G.tex.dia);
+        };
+        im.src = TIERRA + 'dia-8k.jpg';
+      };
+      // 22 Oct 2026 (owner: «un zoom o dos más, sin perder calidad, sobre todo»): past ×2.6 the planet is painted from
+      // a 16K map cut in 32 tiles (static/tierra/dia-16k, NASA, public domain; built by herramientas/mapa_16k.py).
+      // (from ×1.8 on; «past ×2.6» below means: once the planet's circumference outgrows the 8K map's pixels)
+      // Only the tiles under the part of the planet on screen are fetched, composed into one «zone» texture
+      // (up to 4096 px a side) that the shader uses inside its window; outside it, the 8K map goes on. Computers only.
+      gl.uniform1f(u.uZonaOn, 0); gl.uniform1i(u.uZona, 4);
+      G.zona = { on: false, tex: null, caja: null, lista: new Map(), falta: false, pendiente: 0, ultimo: 0, lienzo: null, z: 0 };
+      G.zonaMax = Math.min(4096, gl.getParameter(gl.MAX_TEXTURE_SIZE));
+      G.zonaPuede = !matchMedia('(pointer: coarse)').matches && G.zonaMax >= 4096;
+      G.tesela = (c, f) => {
+        const k = c + '_' + f; let t = G.zona.lista.get(k);
+        if (t) return t;
+        t = { im: new Image(), ok: false, mal: false }; G.zona.lista.set(k, t);
+        t.im.onload = () => { t.ok = true; G.zona.pendiente = 0; };
+        t.im.onerror = () => { t.mal = true; if (c === 0 && f === 0) G.zona.falta = true; G.zona.pendiente = 0; };
+        t.im.src = TIERRA + 'dia-16k/' + k + '.jpg';
+        return t;
+      };
     } catch (e) { G = null; }
+  }
+  // the window of the planet on screen, in lon/lat, from the screen's corners and edges (clamped to the disc)
+  function ventanaVisible() {
+    const pts = [], n = 6;
+    for (let i = 0; i <= n; i++) for (let j = 0; j <= n; j++) pts.push([W * i / n, H * j / n]);
+    let lonMin = 1e9, lonMax = -1e9, latMin = 1e9, latMax = -1e9, lon0 = null;
+    for (const [x, y] of pts) {
+      let px = (x - CX) / R, py = (CY - y) / R; const r = Math.hypot(px, py);
+      if (r >= 0.985) { px *= 0.985 / r; py *= 0.985 / r; }
+      const w = aMundo([px, py, Math.sqrt(Math.max(0, 1 - px * px - py * py))]);
+      const lat = Math.asin(Math.max(-1, Math.min(1, w[1]))) / RAD; let lon = Math.atan2(w[0], w[2]) / RAD;
+      if (lon0 === null) lon0 = lon;
+      lon = lon0 + (((lon - lon0) % 360) + 540) % 360 - 180; // unwrapped around the first point
+      lonMin = Math.min(lonMin, lon); lonMax = Math.max(lonMax, lon); latMin = Math.min(latMin, lat); latMax = Math.max(latMax, lat);
+    }
+    return { lonMin, lonMax, latMin: Math.max(-90, latMin), latMax: Math.min(90, latMax) };
+  }
+  function zonaActualiza(now) {
+    const Z = G && G.zona; if (!Z || !G.zonaPuede || Z.falta) return;
+    // worth it once the planet's circumference on screen passes the 8K map's 8,192 texels (a 4K screen gets there sooner)
+    const quiere = ZOOM.z > 1.8 && 2 * Math.PI * R * DPR > 7000;
+    if (!quiere) { if (Z.on) { Z.on = false; gl.uniform1f(G.u.uZonaOn, 0); } return; }
+    if (Z.pendiente && now - Z.pendiente < 1500) return;  // tiles on their way
+    const v = ventanaVisible();
+    const dl = Math.max(4, v.lonMax - v.lonMin), db = Math.max(4, v.latMax - v.latMin);
+    // still inside the zone we have (with its margin) and the zoom has not changed much: nothing to do
+    if (Z.caja && Math.abs(ZOOM.z - Z.z) / Z.z < 0.3 && v.lonMin >= Z.caja.lonMin && v.lonMax <= Z.caja.lonMax && v.latMin >= Z.caja.latMin && v.latMax <= Z.caja.latMax) return;
+    if (now - Z.ultimo < 250) return; // let the camera settle
+    const m = 0.15, caja = { lonMin: v.lonMin - dl * m, lonMax: v.lonMax + dl * m, latMin: Math.max(-90, v.latMin - db * m), latMax: Math.min(90, v.latMax + db * m) };
+    if (caja.lonMax - caja.lonMin > 180) { caja.lonMin = v.lonMin - 20; caja.lonMax = v.lonMax + 20; }
+    // the tiles this window touches (45° each; columns wrap around the date line)
+    const ppd = 16384 / 360; // pixels per degree in the 16K map
+    const cw = Math.round((caja.lonMax - caja.lonMin) * ppd), ch = Math.round((caja.latMax - caja.latMin) * ppd);
+    const esc = Math.min(1, G.zonaMax / Math.max(cw, ch));
+    const c0 = Math.floor((caja.lonMin + 180) / 45), c1 = Math.floor((caja.lonMax + 180 - 1e-6) / 45);
+    const f0 = Math.max(0, Math.floor((90 - caja.latMax) / 45)), f1 = Math.min(3, Math.floor((90 - caja.latMin - 1e-6) / 45));
+    if ((c1 - c0 + 1) * (f1 - f0 + 1) > 12) { Z.ultimo = now; return; } // half the planet: the 8K map serves it better than a tiny zone
+    const falta = [];
+    for (let c = c0; c <= c1; c++) for (let f = f0; f <= f1; f++) { const t = G.tesela(((c % 8) + 8) % 8, f); if (!t.ok && !t.mal) falta.push(t); }
+    if (falta.length) { Z.pendiente = now; return; }
+    if (!Z.lienzo) Z.lienzo = document.createElement('canvas');
+    const L = Z.lienzo, g2 = L.getContext('2d');
+    L.width = Math.max(1, Math.round(cw * esc)); L.height = Math.max(1, Math.round(ch * esc));
+    g2.imageSmoothingQuality = 'high';
+    for (let c = c0; c <= c1; c++) for (let f = f0; f <= f1; f++) {
+      const t = G.tesela(((c % 8) + 8) % 8, f); if (!t.ok) continue;
+      const x = (c * 45 - 180 - caja.lonMin) * ppd * esc, y = (caja.latMax - (90 - f * 45)) * ppd * esc, lado = 45 * ppd * esc;
+      g2.drawImage(t.im, x, y, lado, lado);
+    }
+    if (!Z.tex) Z.tex = gl.createTexture();
+    gl.activeTexture(gl.TEXTURE4); gl.bindTexture(gl.TEXTURE_2D, Z.tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, L);
+    if (gl.getError() !== gl.NO_ERROR) { G.zonaPuede = false; gl.uniform1f(G.u.uZonaOn, 0); return; }
+    // the window in the shader's uv (u from 180° W, v from the north pole), unwrapped across the date line
+    let u0 = (caja.lonMin + 180) / 360, u1 = (caja.lonMax + 180) / 360; const v0 = (90 - caja.latMax) / 180, v1 = (90 - caja.latMin) / 180;
+    if (u0 < 0) { u0 += 1; u1 += 1; } // the shader adds a turn to u when it falls left of the box
+    gl.uniform4f(G.u.uZonaBox, u0, v0, u1, v1); gl.uniform1f(G.u.uZonaOn, 1);
+    Z.on = true; Z.caja = caja; Z.z = ZOOM.z; Z.ultimo = now;
+    window.__orbitaZona = { caja, cw, ch, esc, teselas: (c1 - c0 + 1) * (f1 - f0 + 1), z: ZOOM.z };
   }
   // The real Sun (owner, 20 Oct 2026: «true to reality»): the point where it is overhead right now, from the
   // standard low-precision solar formulas (good to about a hundredth of a degree), so day, night and the city lights
@@ -437,6 +545,9 @@ void main(){
     if (!G) return;
     gl.viewport(0, 0, cvT.width, cvT.height);
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    if (ZOOM.z > 1.6 && G.pide8) G.pide8();
+    zonaActualiza(performance.now());
+    if (G.tex8) { gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, ZOOM.z > 1.45 ? G.tex8 : G.tex.dia); }
     const u = G.u;
     gl.uniform2f(u.uC, CX * DPR, (H - CY) * DPR);
     gl.uniform1f(u.uR, R * DPR);
@@ -697,6 +808,7 @@ void main(){
         const r = await fetch('/api/por-dentro', { headers: { 'X-Guardiana-Token': TOKEN, 'X-Guardiana-Lang': 'es', 'X-Guardiana-Tz': String(-new Date().getTimezoneOffset()) } });
         if (!r.ok) throw new Error(String(r.status));
         const u = await r.json();
+        window.__orbitaPD = u; // «Ahora mismo» (datos-curiosos.js) reads this computer's facts from the same measurements
         fallos = 0;
         const mapa = new Map(); let total = 0;
         for (const d of u.destinos || []) { mapa.set(d.programa + '|' + d.destino + '|' + d.pais, d); total += d.paradas || 0; }

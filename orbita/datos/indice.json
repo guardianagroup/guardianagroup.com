@@ -6,36 +6,21 @@
   "puntos": true
  },
  "medida_tierra_osm": {
-  "way[\"telecom\"=\"line\"][\"name\"];": {
-   "nodes": "0",
-   "ways": "11",
-   "relations": "0",
-   "total": "11"
-  },
+  "way[\"telecom\"=\"line\"][\"name\"];": "sin respuesta: the JSON object must be str, bytes or bytearray, not NoneType",
   "way[\"communication\"=\"line\"][\"name\"];": {
    "nodes": "0",
    "ways": "839",
    "relations": "0",
    "total": "839"
   },
-  "way[\"telecom\"=\"line\"][\"operator\"];": {
-   "nodes": "0",
-   "ways": "2357",
-   "relations": "0",
-   "total": "2357"
-  },
+  "way[\"telecom\"=\"line\"][\"operator\"];": "sin respuesta: the JSON object must be str, bytes or bytearray, not NoneType",
   "way[\"telecom\"=\"line\"];": {
    "nodes": "0",
-   "ways": "4019",
+   "ways": "4022",
    "relations": "0",
-   "total": "4019"
+   "total": "4022"
   },
-  "relation[\"route\"=\"fiber\"];": {
-   "nodes": "0",
-   "ways": "0",
-   "relations": "0",
-   "total": "0"
-  },
+  "relation[\"route\"=\"fiber\"];": "sin respuesta: the JSON object must be str, bytes or bytearray, not NoneType",
   "relation[\"type\"=\"route\"][\"route\"=\"fibre\"];": {
    "nodes": "0",
    "ways": "0",
@@ -43,5 +28,5 @@
    "total": "0"
   }
  },
- "medida_tierra_fecha": "2026-10-21T05:34:11Z"
+ "medida_tierra_fecha": "2026-10-22T16:19:04Z"
 }

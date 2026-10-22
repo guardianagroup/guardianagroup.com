@@ -4,7 +4,24 @@
    (guardiana-lang), so a visitor who picked a language there finds it here. Nothing leaves this computer. */
 (() => {
   'use strict';
-  const IDIOMAS = ['es', 'en', 'pt'];
+  // 22 Oct 2026 (owner: «dentro de Órbita tienen que aparecer todos los idiomas»): the 42 of the website.
+  // code · own name · html lang · locale for numbers and dates · right-to-left
+  const IDI = [['es', 'Español', 'es', 'es-CO'], ['en', 'English', 'en', 'en-US'], ['pt', 'Português (Brasil)', 'pt-BR', 'pt-BR'],
+    ['fr', 'Français', 'fr', 'fr-FR'], ['de', 'Deutsch', 'de', 'de-DE'], ['it', 'Italiano', 'it', 'it-IT'], ['nl', 'Nederlands', 'nl', 'nl-NL'],
+    ['sv', 'Svenska', 'sv', 'sv-SE'], ['da', 'Dansk', 'da', 'da-DK'], ['nb', 'Norsk', 'nb', 'nb-NO'], ['fi', 'Suomi', 'fi', 'fi-FI'], ['is', 'Íslenska', 'is', 'is-IS'], ['pl', 'Polski', 'pl', 'pl-PL'],
+    ['uk', 'Українська', 'uk', 'uk-UA'], ['ru', 'Русский', 'ru', 'ru-RU'], ['tr', 'Türkçe', 'tr', 'tr-TR'],
+    ['zh', '简体中文', 'zh-Hans', 'zh-CN'], ['ja', '日本語', 'ja', 'ja-JP'], ['ko', '한국어', 'ko', 'ko-KR'],
+    ['hi', 'हिन्दी', 'hi', 'hi-IN'], ['bn', 'বাংলা', 'bn', 'bn-BD'], ['id', 'Bahasa Indonesia', 'id', 'id-ID'], ['vi', 'Tiếng Việt', 'vi', 'vi-VN'], ['th', 'ไทย', 'th', 'th-TH'],
+    ['ar', 'العربية', 'ar', 'ar-u-nu-latn', 1], ['fa', 'فارسی', 'fa', 'fa-IR', 1], ['he', 'עברית', 'he', 'he-IL', 1], ['ur', 'اردو', 'ur', 'ur-PK', 1],
+    ['zh-tw', '繁體中文', 'zh-Hant', 'zh-TW'], ['cs', 'Čeština', 'cs', 'cs-CZ'], ['ro', 'Română', 'ro', 'ro-RO'], ['hu', 'Magyar', 'hu', 'hu-HU'], ['el', 'Ελληνικά', 'el', 'el-GR'],
+    ['sk', 'Slovenčina', 'sk', 'sk-SK'], ['bg', 'Български', 'bg', 'bg-BG'], ['hr', 'Hrvatski', 'hr', 'hr-HR'], ['ms', 'Bahasa Melayu', 'ms', 'ms-MY'], ['fil', 'Filipino', 'fil', 'fil-PH'],
+    ['sw', 'Kiswahili', 'sw', 'sw-KE'], ['ta', 'தமிழ்', 'ta', 'ta-IN'], ['te', 'తెలుగు', 'te', 'te-IN'], ['pt-pt', 'Português (Portugal)', 'pt-PT', 'pt-PT']];
+  // 22 Oct 2026 (owner): «42 idiomas es muy largo: publícala con español e inglés de momento». The other 40 stay
+  // ready in the files; only these are offered and chosen until the owner opens the rest (data-idiomas="todos").
+  const ABIERTOS = (document.documentElement.dataset.idiomas === 'todos') ? null : ['es', 'en'];
+  const IDI_ABIERTOS = ABIERTOS ? IDI.filter((x) => ABIERTOS.includes(x[0])) : IDI;
+  const IDIOMAS = IDI_ABIERTOS.map((x) => x[0]);
+  const INFO = Object.fromEntries(IDI.map((x) => [x[0], { nombre: x[1], lang: x[2], locale: x[3], rtl: !!x[4] }]));
   // Spanish → [English, Portuguese]. Upper-case versions are found automatically.
   const D = {
     // Órbita
@@ -73,7 +90,185 @@
     'Acercar el planeta': ['Zoom the planet', 'Aproximar o planeta'],
     'Acercar': ['Zoom in', 'Aproximar'],
     'Cables': ['Cables', 'Cabos'],
-    'Infraestructura': ['Infrastructure', 'Infraestrutura'],
+    'Centros de datos': ['Data centres', 'Centros de dados'],
+    'centro de datos': ['data centre', 'centro de dados'],
+    'Lejos de cualquier ciudad': ['Far from any city', 'Longe de qualquer cidade'],
+    'Operador': ['Operator', 'Operador'],
+    'Centro de datos sin nombre': ['Unnamed data centre', 'Centro de dados sem nome'],
+    'centros de datos en esta ciudad': ['data centres in this city', 'centros de dados nesta cidade'],
+    'Sin más datos en OpenStreetMap': ['No more details in OpenStreetMap', 'Sem mais dados no OpenStreetMap'],
+    'Aquí llegan cables submarinos': ['Submarine cables land here', 'Aqui chegam cabos submarinos'],
+    'sin nombre': ['unnamed', 'sem nome'], 'cable sin nombre': ['unnamed cable', 'cabo sem nome'], 'cables sin nombre': ['unnamed cables', 'cabos sem nome'],
+    'Cable submarino sin nombre': ['Unnamed submarine cable', 'Cabo submarino sem nome'],
+    'Llega a tierra en': ['Lands at', 'Chega à terra em'], 'y en': ['and at', 'e em'],
+    'Une': ['Connects', 'Liga'], 'con': ['with', 'com'], 'lugares': ['places', 'lugares'],
+    'Internet por satélite para hogares, barcos y aviones': ['Satellite internet for homes, ships and aircraft', 'Internet por satélite para casas, navios e aviões'],
+    'Internet por satélite para empresas, gobiernos y aviones': ['Satellite internet for businesses, governments and aircraft', 'Internet por satélite para empresas, governos e aviões'],
+    'Internet por satélite, en despliegue': ['Satellite internet, being deployed', 'Internet por satélite, em implantação'],
+    'Red estatal china de internet por satélite, en despliegue': ['China\'s state satellite internet network, being deployed', 'Rede estatal chinesa de internet por satélite, em implantação'],
+    'Teléfonos y datos por satélite en todo el planeta, también en los polos': ['Satellite phones and data anywhere on Earth, poles included', 'Telefones e dados por satélite em todo o planeta, inclusive nos polos'],
+    'Teléfonos satelitales y mensajes de emergencia por satélite': ['Satellite phones and emergency messages via satellite', 'Telefones por satélite e mensagens de emergência via satélite'],
+    'Datos de máquinas: seguimiento de barcos, camiones y contenedores': ['Machine data: tracking ships, trucks and containers', 'Dados de máquinas: rastreamento de navios, caminhões e contêineres'],
+    'Televisión, internet y comunicaciones': ['Television, internet and communications', 'Televisão, internet e comunicações'],
+    'Televisión e internet': ['Television and internet', 'Televisão e internet'],
+    'Televisión y comunicaciones': ['Television and communications', 'Televisão e comunicações'],
+    'Flota': ['Fleet', 'Frota'],
+    'Altura': ['Altitude', 'Altitude'],
+    'Velocidad': ['Speed', 'Velocidade'],
+    'geoestacionaria: gira con la Tierra y parece quieto en el cielo': ['geostationary: it turns with the Earth and seems still in the sky', 'geoestacionária: gira com a Terra e parece parado no céu'],
+    'Vuelta a la Tierra': ['One lap of the Earth', 'Volta à Terra'],
+    'cada': ['every', 'a cada'],
+    'al día': ['a day', 'por dia'],
+    'Inclinación': ['Inclination', 'Inclinação'],
+    'Ahora sobre': ['Now over', 'Agora sobre'],
+    'una zona sin ciudades grandes cerca': ['an area with no large city nearby', 'uma zona sem cidades grandes por perto'],
+    'Desde': ['From', 'De'],
+    'sobre tu horizonte': ['above your horizon', 'acima do seu horizonte'],
+    'bajo tu horizonte': ['below your horizon', 'abaixo do seu horizonte'],
+    'Próximo paso alto': ['Next high pass', 'Próxima passagem alta'],
+    'no en las próximas 24 h': ['not in the next 24 h', 'não nas próximas 24 h'],
+    'Lanzado': ['Launched', 'Lançado'],
+    'Catálogo': ['Catalogue', 'Catálogo'],
+    'Posición calculada ahora con su órbita publicada': ['Position computed now from its published orbit', 'Posição calculada agora com a órbita publicada'],
+    'Fibra troncal por tierra': ['Land backbone fibre', 'Fibra troncal terrestre'],
+    'En construcción según la fuente': ['Under construction, according to the source', 'Em construção, segundo a fonte'],
+    'Trazado aproximado': ['Approximate route', 'Traçado aproximado'],
+    'Fuente': ['Source', 'Fonte'],
+    'Sigue por tierra': ['Continues on land', 'Segue por terra'],
+    'Su ruta por tierra no es pública': ['Its route on land is not public', 'A rota por terra não é pública'],
+    'de fibra troncal por tierra en': ['of land backbone fibre in', 'de fibra troncal terrestre em'],
+    'por confirmar': ['to be confirmed', 'a confirmar'],
+    'satélites': ['satellites', 'satélites'],
+    'a': ['at', 'a'],
+    'a una media de': ['at an average of', 'a uma média de'],
+    'giran con la Tierra y parecen quietos sobre el mismo punto': ['they turn with the Earth and seem still over the same spot', 'giram com a Terra e parecem parados sobre o mesmo ponto'],
+    'dan la vuelta a la Tierra en unos': ['they go round the Earth in about', 'dão a volta à Terra em cerca de'],
+    'la señal tarda al menos': ['the signal takes at least', 'o sinal leva pelo menos'],
+    'en subir y bajar': ['to go up and down', 'para subir e descer'],
+    'Capa: la órbita baja, por debajo de 2.000 km (Starlink, OneWeb, Iridium…); es la más poblada': ['Layer: low orbit, below 2,000 km (Starlink, OneWeb, Iridium…); the most crowded', 'Camada: a órbita baixa, abaixo de 2.000 km (Starlink, OneWeb, Iridium…); a mais povoada'],
+    'Capa: la órbita media, entre 2.000 y 30.000 km (GPS, Galileo, O3b…)': ['Layer: medium orbit, 2,000 to 30,000 km (GPS, Galileo, O3b…)', 'Camada: a órbita média, entre 2.000 e 30.000 km (GPS, Galileo, O3b…)'],
+    'Capa: la órbita geoestacionaria, a unos 35.786 km; parecen quietos sobre el mismo punto': ['Layer: geostationary orbit, about 35,786 km; they seem still over the same spot', 'Camada: a órbita geoestacionária, a cerca de 35.786 km; parecem parados sobre o mesmo ponto'],
+    'fundada en': ['founded in', 'fundada em'],
+    'del grupo': ['part of', 'do grupo'],
+    'Del mismo operador': ['Same operator', 'Do mesmo operador'],
+    'centros de datos en el mapa': ['data centres on the map', 'centros de dados no mapa'],
+    'Dueño': ['Owner', 'Dono'],
+    'Superficie': ['Floor area', 'Área'],
+    'Potencia': ['Power', 'Potência'],
+    'Plantas': ['Floors', 'Andares'],
+    'Altura del edificio': ['Building height', 'Altura do prédio'],
+    'Conexión': ['Connection', 'Conexão'],
+    'Dónde': ['Where', 'Onde'],
+    'llegan aquí mismo': ['land right here', 'chegam aqui mesmo'],
+    'llegan a': ['land', 'chegam a'],
+    'Intercambio de internet': ['Internet exchange', 'Ponto de troca de tráfego'],
+    'en el mismo sitio': ['in the same place', 'no mesmo lugar'],
+    'la luz por fibra tarda al menos': ['light in fibre takes at least', 'a luz pela fibra leva pelo menos'],
+    'ida y vuelta': ['there and back', 'ida e volta'],
+    'Nota': ['Note', 'Nota'],
+    'Datos': ['Data', 'Dados'],
+    'Sin más datos públicos sobre este edificio': ['No more public data on this building', 'Sem mais dados públicos sobre este prédio'],
+    'Posición de este instante, calculada con su órbita': ['Position at this very moment, computed from its orbit', 'Posição deste instante, calculada com a órbita'],
+    'datos del propio operador': ['the operator\'s own data', 'dados do próprio operador'],
+    'órbita medida': ['orbit measured', 'órbita medida'],
+    'Luz del Sol': ['Sunlight', 'Luz do Sol'],
+    'en la sombra de la Tierra: funciona con sus baterías': ['in the Earth\'s shadow: running on its batteries', 'na sombra da Terra: funciona com as baterias'],
+    'al sol: sus paneles generan energía': ['in sunlight: its panels are generating power', 'ao sol: os painéis geram energia'],
+    'los más cercanos llegan a': ['the nearest land at', 'os mais próximos chegam a'],
+    'Por tierra': ['Over land', 'Por terra'],
+    'por fibra troncal conocida': ['along known backbone fibre', 'por fibra troncal conhecida'],
+    'ruta exacta no pública; en el mapa, en línea recta': ['exact route not public; drawn as a straight line', 'rota exata não pública; no mapa, em linha reta'],
+    'cable submarino': ['submarine cable', 'cabo submarino'],
+    'cables submarinos': ['submarine cables', 'cabos submarinos'],
+    'las llegadas de esta zona aún no están en nuestros datos': ['the landings in this area are not in our data yet', 'as chegadas desta zona ainda não estão nos nossos dados'],
+    'estación de llegada más cercana': ['nearest landing station', 'estação de chegada mais próxima'],
+    'Estación de llegada de cables': ['Cable landing station', 'Estação de chegada de cabos'],
+    'Fibra por tierra': ['Land fibre', 'Fibra terrestre'],
+    'Las grandes redes de fibra que llevan internet por tierra, de las llegadas de cables al interior': ['The big fibre networks that carry the internet over land, from the cable landings inland', 'As grandes redes de fibra que levam a internet por terra, das chegadas dos cabos ao interior'],
+    'trazados aproximados de redes reales': ['approximate routes of real networks', 'traçados aproximados de redes reais'],
+    'No se pudo cargar la fibra por tierra.': ['The land fibre could not be loaded.', 'Não foi possível carregar a fibra terrestre.'],
+    'Cargando fibra por tierra…': ['Loading land fibre…', 'Carregando fibra terrestre…'],
+    'Origen': ['From', 'Origem'], 'Destino': ['To', 'Destino'], 'Paradas': ['Stops', 'Paradas'],
+    'Ver mi conexión': ['See my connection', 'Ver a minha ligação'],
+    'Mi conexión': ['My connection', 'A minha ligação'],
+    'Ver': ['Show', 'Ver'],
+    'No ver': ['Hide', 'Não ver'],
+    'Son tus datos y de nadie más. Nada se guarda fuera de este equipo.': ["These are your data and nobody else's. Nothing is stored outside this computer.", 'São os teus dados e de mais ninguém. Nada se guarda fora deste equipamento.'],
+    'Ahora mismo': ['Right now', 'Agora mesmo'],
+    'Medido en este navegador, sin consultar a nadie.': ['Measured in this browser, without asking anyone.', 'Medido neste navegador, sem consultar ninguém.'],
+    'Cómo te ve internet': ['How the internet sees you', 'Como a internet te vê'],
+    'Medido una vez, al pulsar tú. No se repite solo.': ['Measured once, when you pressed. It does not repeat by itself.', 'Medido uma vez, quando carregaste. Não se repete sozinho.'],
+    'Para saberlo hay que preguntar fuera: una sola consulta, solo si tú pulsas. Hasta entonces, nada sale de aquí.': ['To know this we must ask outside: one single request, only if you press. Until then, nothing leaves this page.', 'Para o saber é preciso perguntar fora: uma única consulta, só se carregares. Até lá, nada sai daqui.'],
+    'Volver a medir': ['Measure again', 'Medir de novo'],
+    'Medir desde fuera': ['Measure from outside', 'Medir a partir de fora'],
+    'Midiendo…': ['Measuring…', 'A medir…'],
+    'Lo que cualquier web ve de ti': ['What any website sees of you', 'O que qualquer site vê de ti'],
+    'Sin pedir permiso. Por eso existe GUARDIANA.': ['Without asking permission. That is why GUARDIANA exists.', 'Sem pedir licença. É por isso que a GUARDIANA existe.'],
+    'Lo que solo ve el programa': ['What only the program sees', 'O que só o programa vê'],
+    'Qué programas hablan con internet, con quién y cuánto, y la ruta real de tus datos: eso se mide dentro del equipo, con ZERO. Aquí no se inventa.': ['Which programs talk to the internet, with whom and how much, and the real route of your data: that is measured inside the computer, with ZERO. Nothing is invented here.', 'Que programas falam com a internet, com quem e quanto, e o percurso real dos teus dados: isso mede-se dentro do equipamento, com o ZERO. Aqui nada se inventa.'],
+    'sin conexión ahora': ['offline right now', 'sem ligação agora'],
+    'en línea': ['online', 'em linha'],
+    'Tipo de red': ['Network type', 'Tipo de rede'],
+    'móvil': ['mobile', 'móvel'],
+    'cable de red': ['wired', 'cabo de rede'],
+    'sin red': ['no network', 'sem rede'],
+    'Calidad estimada': ['Estimated quality', 'Qualidade estimada'],
+    'muy lenta': ['very slow', 'muito lenta'],
+    'lenta': ['slow', 'lenta'],
+    'media': ['average', 'média'],
+    'buena': ['good', 'boa'],
+    'Ida y vuelta estimada': ['Estimated round trip', 'Ida e volta estimada'],
+    'Ida y vuelta real hasta GUARDIANA': ['Real round trip to GUARDIANA', 'Ida e volta real até à GUARDIANA'],
+    'midiendo…': ['measuring…', 'a medir…'],
+    'Esta página': ['This page', 'Esta página'],
+    'cifrada (HTTPS)': ['encrypted (HTTPS)', 'cifrada (HTTPS)'],
+    'sin cifrar': ['not encrypted', 'sem cifra'],
+    'Ahorro de datos': ['Data saver', 'Poupança de dados'],
+    'activado': ['on', 'ativado'],
+    'Sistema': ['System', 'Sistema'],
+    'Idioma del navegador': ['Browser language', 'Idioma do navegador'],
+    'Zona horaria': ['Time zone', 'Fuso horário'],
+    'Pantalla': ['Screen', 'Ecrã'],
+    'Procesador': ['Processor', 'Processador'],
+    'núcleos': ['cores', 'núcleos'],
+    'Memoria': ['Memory', 'Memória'],
+    'al menos': ['at least', 'pelo menos'],
+    'Puntero': ['Pointer', 'Ponteiro'],
+    'táctil': ['touch', 'tátil'],
+    'ratón o panel táctil': ['mouse or trackpad', 'rato ou painel tátil'],
+    'Señal «no me rastrees»': ['“Do not track me” signal', 'Sinal «não me rastreies»'],
+    'enviada (GPC)': ['sent (GPC)', 'enviado (GPC)'],
+    'enviada (DNT)': ['sent (DNT)', 'enviado (DNT)'],
+    'no enviada': ['not sent', 'não enviado'],
+    'Ubicación en Órbita': ['Location in Órbita', 'Localização no Órbita'],
+    'aproximada': ['approximate', 'aproximada'],
+    'sin precisar': ['not set', 'por definir'],
+    'Estado': ['Status', 'Estado'],
+    'No se pudo medir ahora. Vuelve a intentarlo.': ['Could not measure right now. Try again.', 'Não foi possível medir agora. Tenta de novo.'],
+    'Dirección pública': ['Public address', 'Endereço público'],
+    'Ciudad que ve internet': ['City the internet sees', 'Cidade que a internet vê'],
+    'medido': ['measured', 'medido'],
+    'verificado': ['verified', 'verificado'],
+    'estimado': ['estimated', 'estimado'],
+    'El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.': ['The browser that shows every cut, live. It will arrive when it is finished and tested.', 'O navegador que mostra cada corte, ao vivo. Chegará quando estiver terminado e testado.'],
+    'En servicio desde': ['In service since', 'Em serviço desde'], 'Longitud': ['Length', 'Comprimento'], 'Longitud en el mapa': ['Length on the map', 'Comprimento no mapa'], 'Trazado aproximado por mar': ['Approximate sea route', 'Traçado aproximado pelo mar'], 'Datos verificados': ['Verified data', 'Dados verificados'], 'Fuentes': ['Sources', 'Fontes'], 'Dueños': ['Owners', 'Donos'],
+    'Desde el mar': ['From the sea', 'Desde o mar'],
+    'Capas de satélites': ['Satellite layers', 'Camadas de satélites'], 'Plegar': ['Fold', 'Recolher'],
+    'A 35.786 km; parecen quietos sobre el mismo punto (televisión, internet por satélite).': ['At 35,786 km; they seem still over the same spot (television, satellite internet).', 'A 35.786 km; parecem parados sobre o mesmo ponto (televisão, internet por satélite).'],
+    'Entre 2.000 y 30.000 km: GPS, Galileo, O3b.': ['Between 2,000 and 30,000 km: GPS, Galileo, O3b.', 'Entre 2.000 e 30.000 km: GPS, Galileo, O3b.'],
+    'Por debajo de 2.000 km: Starlink, OneWeb, Iridium. Es la más poblada.': ['Below 2,000 km: Starlink, OneWeb, Iridium. The most crowded.', 'Abaixo de 2.000 km: Starlink, OneWeb, Iridium. É a mais povoada.'],
+    'De las llegadas de cables de esta zona aún no tenemos datos.': ['We have no data yet on the cable landings of this area.', 'Ainda não temos dados das chegadas de cabos desta zona.'],
+    'La estación de cables submarinos más cercana es': ['The nearest submarine-cable station is', 'A estação de cabos submarinos mais próxima é'],
+    'de este centro de datos': ['from this data centre', 'deste centro de dados'],
+    'Los cables submarinos salen del mar aquí mismo, en': ['The submarine cables come ashore right here, in', 'Os cabos submarinos saem do mar aqui mesmo, em'],
+    'El cable submarino más cercano sale del mar en': ['The nearest submarine cable comes ashore in', 'O cabo submarino mais próximo sai do mar em'],
+    'Cables que llegan ahí': ['Cables landing there', 'Cabos que chegam ali'],
+    'Desde esa llegada, unos': ['From that landing, about', 'A partir dessa chegada, uns'],
+    'por una red de fibra conocida': ['over a known fibre network', 'por uma rede de fibra conhecida'],
+    'La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.': ['The exact land route is not public; the map draws it as a straight line.', 'A rota exata por terra não é pública; no mapa desenha-se em linha reta.'],
+    'Los datos viajan por él en los dos sentidos.': ['Data travels through it both ways.', 'Os dados viajam por ele nos dois sentidos.'],
+    'Según OpenStreetMap; puede faltar algún tramo.': ['According to OpenStreetMap; some sections may be missing.', 'Segundo o OpenStreetMap; pode faltar algum trecho.'],
+    'Sus extremos no están cerca de ninguna ciudad': ['Its ends are not near any city', 'Suas pontas não estão perto de nenhuma cidade'],
     'Satélites': ['Satellites', 'Satélites'],
     'Los cables submarinos por donde viajan los datos entre continentes': ['The submarine cables that carry data between continents', 'Os cabos submarinos por onde os dados viajam entre continentes'],
     'Los centros de datos donde se guarda y se sirve internet': ['The data centres where the internet is stored and served', 'Os centros de dados onde a internet é guardada e servida'],
@@ -137,7 +332,7 @@
     'No se pudieron cargar los satélites.': ['The satellites could not be loaded.', 'Não foi possível carregar os satélites.'],
     'No se pudieron cargar los cables.': ['The cables could not be loaded.', 'Não foi possível carregar os cabos.'],
     'No se pudieron cargar los cables de tierra.': ['The land cables could not be loaded.', 'Não foi possível carregar os cabos terrestres.'],
-    'Satélites bajos a su altura real; los de órbita media y geoestacionaria, en los anillos exteriores (distancia no a escala). Más tenues, los que están ahora en la sombra de la Tierra.': ['Low satellites at their real height; medium and geostationary ones on the outer rings (distance not to scale). Dimmer: those now in the Earth\'s shadow.', 'Satélites baixos na altura real; os de órbita média e geoestacionária, nos anéis externos (distância fora de escala). Mais tênues: os que estão agora na sombra da Terra.'],
+    'Satélites bajos a su altura real; los de órbita media y geoestacionaria, en los anillos exteriores (distancia no a escala). Su brillo sigue al Sol de ahora: más tenues los que están en la sombra de la Tierra. Pase el ratón por uno para ver su próxima vuelta.': ['Low satellites at their real height; medium and geostationary ones on the outer rings (distance not to scale). Their brightness follows the Sun right now: dimmer, those in the Earth\'s shadow. Hover over one to see its next lap.', 'Satélites baixos na altura real; os de órbita média e geoestacionária, nos anéis externos (distância fora de escala). O brilho segue o Sol de agora: mais tênues os que estão na sombra da Terra. Passe o mouse sobre um para ver a próxima volta.'],
     // what is cut, Órbita and ZERO
     'Este PC': ['This PC', 'Este PC'],
     'Teléfono': ['Phone', 'Telefone'],
@@ -199,8 +394,8 @@
     'Por empresa': ['By company', 'Por empresa'],
     'Al cargar la web, aquí aparece cada empresa que intenta conectarse y se corta.': ['When the page loads, every company that tries to connect and is cut appears here.', 'Ao carregar a página, aqui aparece cada empresa que tenta se conectar e é cortada.'],
     'Simular corte': ['Simulate a cut', 'Simular corte'],
-    'Corte máximo': ['Maximum cut', 'Corte máximo'],
-    'Corte máximo: corta todo lo que no es de la propia web': ['Maximum cut: cuts everything that is not the site\'s own', 'Corte máximo: corta tudo o que não é do próprio site'],
+    'Modo estricto': ['Strict mode', 'Modo estrito'],
+    'Modo estricto: corta todo lo que no es de la propia web': ['Strict mode: cuts everything that is not the site\'s own', 'Modo estrito: corta tudo o que não é do próprio site'],
     'Corta los rastreadores conocidos.': ['Cuts known trackers.', 'Corta os rastreadores conhecidos.'],
     'Corta todo lo que no es de esta web. Alguna web puede fallar.': ['Cuts everything that is not this site\'s own. Some sites may break.', 'Corta tudo o que não é deste site. Algum site pode falhar.'],
     'Tercero': ['Third party', 'Terceiro'],
@@ -264,6 +459,94 @@
     'Tu proveedor de internet puede ver que usas Tor, aunque no qué visitas.': ['Your internet provider can see that you use Tor, though not what you visit.', 'Seu provedor de internet pode ver que você usa Tor, mas não o que visita.'],
     'Ninguna herramienta garantiza el anonimato total.': ['No tool guarantees total anonymity.', 'Nenhuma ferramenta garante o anonimato total.'],
     'Diseño en prueba: aquí no hay conexión Tor real. ULTRA llegará a ZERO cuando supere pruebas independientes de fugas.': ['Design under test: there is no real Tor connection here. ULTRA will reach ZERO when it passes independent leak tests.', 'Design em teste: aqui não há conexão Tor real. O ULTRA chegará ao ZERO quando passar em testes independentes de vazamento.'],
+    // ZERO, the card at the top of the panel (21 Oct 2026)
+    'Ficha': ['Card', 'Ficha'],
+    'Para qué': ['What for', 'Para quê'],
+    'Pasa el ratón por una empresa para ver su ficha. Haz clic para fijarla.': ['Point at a company to see its card. Click to pin it.', 'Passe o mouse sobre uma empresa para ver a ficha. Clique para fixá-la.'],
+    'Cortada': ['Cut', 'Cortada'],
+    'FIJADA': ['PINNED', 'FIXADA'],
+    'Volver al resumen': ['Back to the summary', 'Voltar ao resumo'],
+    'Volver al resumen (Esc)': ['Back to the summary (Esc)', 'Voltar ao resumo (Esc)'],
+    'Qué intentaba llevarse': ['What it tried to take', 'O que tentava levar'],
+    'Desde dónde': ['From where', 'De onde'],
+    'Intentos': ['Attempts', 'Tentativas'],
+    'Cuándo': ['When', 'Quando'],
+    'También en': ['Also seen on', 'Também em'],
+    'Datos de ejemplo de la demostración.': ['Example data from the demo.', 'Dados de exemplo da demonstração.'],
+    'Datos de ejemplo.': ['Example data.', 'Dados de exemplo.'],
+    'Búsquedas con DuckDuckGo dentro de Tor (.onion).': ['Searches with DuckDuckGo inside Tor (.onion).', 'Buscas com o DuckDuckGo dentro do Tor (.onion).'],
+    'Exportar ficha': ['Export card', 'Exportar ficha'],
+    'Solo en esta web, por ahora.': ['Only on this site, so far.', 'Só neste site, por enquanto.'],
+    'Aún no hay cortes en esta web.': ['No cuts on this site yet.', 'Ainda não há cortes neste site.'],
+    'Sin descripción.': ['No description.', 'Sem descrição.'],
+    'No identificado': ['Not identified', 'Não identificado'],
+    'Ciudad no identificada': ['City not identified', 'Cidade não identificada'],
+    'Nueva York': ['New York', 'Nova York'], 'Dublín': ['Dublin', 'Dublin'], 'Berlín': ['Berlin', 'Berlim'], 'París': ['Paris', 'Paris'],
+    'Ámsterdam': ['Amsterdam', 'Amsterdã'], 'Londres': ['London', 'Londres'], 'Múnich': ['Munich', 'Munique'], 'San Francisco': ['San Francisco', 'São Francisco'],
+    'Vende tu visita a anunciantes en una subasta que dura milisegundos.': ['Sells your visit to advertisers in an auction that lasts milliseconds.', 'Vende sua visita a anunciantes num leilão que dura milissegundos.'],
+    'Mide audiencias y une tus visitas a distintas webs en un mismo perfil.': ['Measures audiences and joins your visits to different sites into one profile.', 'Mede audiências e junta suas visitas a vários sites num mesmo perfil.'],
+    'Compra y vende perfiles de personas a otras empresas.': ['Buys and sells profiles of people to other companies.', 'Compra e vende perfis de pessoas para outras empresas.'],
+    'Registra lo que haces en la página: clics, desplazamiento y de dónde vienes.': ['Records what you do on the page: clicks, scrolling and where you came from.', 'Registra o que você faz na página: cliques, rolagem e de onde você vem.'],
+    'Muestra anuncios y comprueba si los has visto.': ['Shows ads and checks whether you saw them.', 'Mostra anúncios e verifica se você os viu.'],
+    'Te reconoce sin cookies por cómo es tu equipo.': ['Recognises you without cookies by what your computer is like.', 'Reconhece você sem cookies pelo jeito do seu computador.'],
+    'Avisa a una red social de que estás aquí, aunque no pulses nada.': ['Tells a social network you are here, even if you press nothing.', 'Avisa uma rede social de que você está aqui, mesmo sem clicar em nada.'],
+    'Ofrece tu visita a varios compradores a la vez y se queda una comisión.': ['Offers your visit to several buyers at once and keeps a commission.', 'Oferece sua visita a vários compradores ao mesmo tempo e fica com uma comissão.'],
+    'Código de otra empresa que la web carga sin que lo veas.': ['Another company\'s code that the site loads without you seeing it.', 'Código de outra empresa que o site carrega sem você ver.'],
+    'Sirve tipos de letra y, al hacerlo, ve tu dirección y la web que visitas.': ['Serves fonts and, in doing so, sees your address and the site you visit.', 'Fornece fontes e, ao fazer isso, vê seu endereço e o site que você visita.'],
+    'Un reproductor de vídeo de otra empresa, con sus propias cookies.': ['A video player from another company, with its own cookies.', 'Um player de vídeo de outra empresa, com seus próprios cookies.'],
+    'Una ventana de chat de otra empresa que se carga aunque no la uses.': ['Another company\'s chat window that loads even if you never use it.', 'Uma janela de chat de outra empresa que carrega mesmo que você não a use.'],
+    'Identificador de cookie': ['Cookie identifier', 'Identificador de cookie'], 'Web que visitas': ['Site you visit', 'Site que você visita'],
+    'Ubicación aproximada': ['Approximate location', 'Localização aproximada'], 'Identificador del dispositivo': ['Device identifier', 'Identificador do dispositivo'],
+    'Tiempo en la página': ['Time on the page', 'Tempo na página'], 'Pantalla y navegador': ['Screen and browser', 'Tela e navegador'],
+    'Perfil de intereses': ['Interest profile', 'Perfil de interesses'], 'Correo cifrado': ['Hashed email', 'E-mail cifrado'],
+    'Clics y desplazamiento': ['Clicks and scrolling', 'Cliques e rolagem'], 'Web de procedencia': ['Referring site', 'Site de origem'],
+    'Identificador publicitario': ['Advertising identifier', 'Identificador publicitário'], 'Anuncios que has visto': ['Ads you have seen', 'Anúncios que você viu'],
+    'Tipos de letra instalados': ['Installed fonts', 'Fontes instaladas'], 'Tarjeta gráfica': ['Graphics card', 'Placa de vídeo'],
+    'Zona horaria e idioma': ['Time zone and language', 'Fuso horário e idioma'], 'Sesión de la red social': ['Social network session', 'Sessão da rede social'],
+    'Tipo de dispositivo': ['Device type', 'Tipo de dispositivo'], 'Dirección IP': ['IP address', 'Endereço IP'],
+    'Vídeos que ves': ['Videos you watch', 'Vídeos que você assiste'], 'Identificador de visitante': ['Visitor identifier', 'Identificador de visitante'],
+    'Páginas que ves': ['Pages you view', 'Páginas que você vê'],
+    // ZERO, Tor and black and white (21 Oct 2026)
+    'Tor': ['Tor', 'Tor'],
+    'Webs en color': ['Sites in colour', 'Sites em cores'],
+    'ZERO se queda en blanco y negro; las webs se ven en color.': ['ZERO stays in black and white; sites show in colour.', 'O ZERO fica em preto e branco; os sites aparecem em cores.'],
+    // ZERO, the auction (22 Oct 2026)
+    'Subasta': ['Auction', 'Leilão'],
+    'Minimizar': ['Minimise', 'Minimizar'], 'Minimizar el panel': ['Minimise the panel', 'Minimizar o painel'],
+    'Ocultar el panel y ver la web en grande': ['Hide the panel and see the site full size', 'Ocultar o painel e ver o site grande'],
+    'Tu privacidad hoy': ['Your privacy today', 'Sua privacidade hoje'],
+    'empresas evitadas': ['companies kept out', 'empresas evitadas'], 'subastas vistas': ['auctions seen', 'leilões vistos'], 'países': ['countries', 'países'], 'cortes': ['cuts', 'cortes'],
+    'Abre una web y ZERO te contará aquí lo que ha cortado.': ['Open a site and ZERO will tell you here what it cut.', 'Abra um site e o ZERO vai contar aqui o que cortou.'],
+    'Ficha de la empresa': ['Company card', 'Ficha da empresa'],
+    'Resumen de la subasta': ['Auction summary', 'Resumo do leilão'],
+    'el anuncio de arriba': ['the top ad', 'o anúncio do topo'], 'el anuncio de al lado': ['the side ad', 'o anúncio lateral'],
+    'el anuncio entre párrafos': ['the ad between paragraphs', 'o anúncio entre parágrafos'], 'el anuncio de abajo': ['the bottom ad', 'o anúncio de baixo'],
+    'el anuncio de vídeo': ['the video ad', 'o anúncio em vídeo'],
+    'Es la franja ancha de arriba del todo (728 × 90 píxeles).': ['It is the wide strip at the very top (728 × 90 pixels).', 'É a faixa larga bem no alto (728 × 90 pixels).'],
+    'Es el recuadro de la columna de al lado del texto (300 × 250 píxeles).': ['It is the box in the column beside the text (300 × 250 pixels).', 'É o quadro na coluna ao lado do texto (300 × 250 pixels).'],
+    'Es el recuadro entre dos párrafos del artículo (300 × 250 píxeles), el anuncio más común de internet.': ['It is the box between two paragraphs of the article (300 × 250 pixels), the most common ad on the internet.', 'É o quadro entre dois parágrafos do artigo (300 × 250 pixels), o anúncio mais comum da internet.'],
+    'Es la franja fija al pie de la pantalla (320 × 50 píxeles).': ['It is the strip fixed to the bottom of the screen (320 × 50 pixels).', 'É a faixa fixa no pé da tela (320 × 50 pixels).'],
+    'Es el vídeo publicitario que sale antes del vídeo que quieres ver (640 × 360 píxeles).': ['It is the advertising video that plays before the video you want to watch (640 × 360 pixels).', 'É o vídeo publicitário que aparece antes do vídeo que você quer ver (640 × 360 pixels).'],
+    'Nadie ganó: ninguna oferta llegó a tiempo.': ['Nobody won: no offer arrived in time.', 'Ninguém venceu: nenhuma oferta chegou a tempo.'],
+    'Qué ver': ['What to show', 'O que ver'],
+    'Empresa': ['Company', 'Empresa'],
+    'Ofreció': ['Offered', 'Ofereceu'],
+    'Resultado': ['Result', 'Resultado'],
+    'Ganó': ['Won', 'Venceu'], 'Perdió': ['Lost', 'Perdeu'], 'Llegó tarde': ['Too late', 'Chegou tarde'], 'No ofreció': ['No offer', 'Não ofereceu'],
+    'Nadie ganó': ['Nobody won', 'Ninguém venceu'], 'nadie ganó': ['nobody won', 'ninguém venceu'],
+    'Anunciante declarado:': ['Declared advertiser:', 'Anunciante declarado:'],
+    'Cada oferta es lo que esa empresa pagaría por mostrar su anuncio mil veces (en publicidad se llama CPM). No es el precio de tus datos.': ['Each offer is what that company would pay to show its ad a thousand times (advertisers call it CPM). It is not the price of your data.', 'Cada oferta é o que essa empresa pagaria para mostrar o anúncio mil vezes (em publicidade se chama CPM). Não é o preço dos seus dados.'],
+    'Cuando la web subaste un espacio de anuncios, aquí verás quién pujó por tu visita y cuánto ofreció.': ['When the site auctions an ad space, you will see here who bid for your visit and how much they offered.', 'Quando o site leiloar um espaço de anúncio, aqui você verá quem deu lance pela sua visita e quanto ofereceu.'],
+    'Anuncio en lo alto de la página': ['Ad at the top of the page', 'Anúncio no topo da página'],
+    'Anuncio al lado del texto': ['Ad beside the text', 'Anúncio ao lado do texto'],
+    'Anuncio en medio del artículo': ['Ad in the middle of the article', 'Anúncio no meio do artigo'],
+    'Anuncio pegado abajo': ['Ad stuck to the bottom', 'Anúncio fixo embaixo'],
+    'Vídeo antes del contenido': ['Video before the content', 'Vídeo antes do conteúdo'],
+    'Una franja ancha arriba del todo (728 × 90 píxeles).': ['A wide strip at the very top (728 × 90 pixels).', 'Uma faixa larga bem no alto (728 × 90 pixels).'],
+    'Un recuadro en la columna de al lado (300 × 250 píxeles).': ['A box in the side column (300 × 250 pixels).', 'Um quadro na coluna ao lado (300 × 250 pixels).'],
+    'Un recuadro entre dos párrafos (300 × 250 píxeles), el anuncio más común de internet.': ['A box between two paragraphs (300 × 250 pixels), the most common ad on the internet.', 'Um quadro entre dois parágrafos (300 × 250 pixels), o anúncio mais comum da internet.'],
+    'Una franja fija al pie de la pantalla (320 × 50 píxeles).': ['A strip fixed to the bottom of the screen (320 × 50 pixels).', 'Uma faixa fixa no pé da tela (320 × 50 pixels).'],
+    'Un anuncio de vídeo que sale antes del vídeo que quieres ver (640 × 360 píxeles).': ['A video ad that plays before the video you want to watch (640 × 360 pixels).', 'Um anúncio em vídeo que aparece antes do vídeo que você quer ver (640 × 360 pixels).'],
     // ZERO, design-review controls (outside Órbita)
     'Entradas de cine': ['Cinematic entrances', 'Entradas de cinema'],
     'Entrada': ['Entrance', 'Entrada'],
@@ -296,25 +579,87 @@
   }
   function una(s) {
     const k = norm(s); if (!k) return s;
+    if (cur !== 'en' && cur !== 'pt') {
+      const x = Xn[cur] && (Xn[cur].get(k) || Xup[cur].get(k)); if (x) return x;
+      const p0 = pais(k); if (p0) return p0;
+      const e0 = N.get(k) || UP.get(k); if (e0) return e0[0]; // not yet in that language: English, never Spanish
+      return null;
+    }
     const e = N.get(k) || UP.get(k); if (e) return e[ix()];
     const p = pais(k); if (p) return p;
     return null;
   }
-  const PATRONES = [
-    [/^Abrir (.+)$/, (m) => ({ en: 'Open ', pt: 'Abrir ' })[cur] + t(m[1])],
-    [/^(\d+) cortes?$/, (m) => m[1] + ' ' + (cur === 'en' ? (m[1] === '1' ? 'cut' : 'cuts') : (m[1] === '1' ? 'corte' : 'cortes'))],
-    [/^Cortado: (.+), (.+)\. Ver en el planeta$/, (m) => t('Cortado') + ': ' + t(m[1]) + ', ' + t(m[2]) + '. ' + t('Ver en el planeta')],
-    [/^Dirección de ejemplo: «(.*)» · ZERO abriría (.+)$/, (m) => (cur === 'en' ? 'Example address: «' + m[1] + '» · ZERO would open ' : 'Endereço de exemplo: «' + m[1] + '» · O ZERO abriria ') + m[2]],
-    [/^Tu consulta de ejemplo: «(.*)» · Se buscaría en ([^:]+): (.+)$/, (m) => (cur === 'en' ? 'Your example query: «' + m[1] + '» · It would be searched on ' + m[2] + ': ' : 'Sua consulta de exemplo: «' + m[1] + '» · Seria buscada no ' + m[2] + ': ') + m[3]],
-    [/^del (.+) al (.+)$/, (m) => (cur === 'en' ? 'from ' + m[1] + ' to ' + m[2] : 'de ' + m[1] + ' a ' + m[2])],
-    [/^Generado el (.+) en este equipo\. ZERO no envía este informe a nadie\.$/, (m) => (cur === 'en' ? 'Generated on ' + m[1] + ' on this computer. ZERO sends this report to no one.' : 'Gerado em ' + m[1] + ' neste computador. O ZERO não envia este relatório a ninguém.')],
-    [/^NIVEL (.+)$/, (m) => t('NIVEL') + ' ' + t(m[1])],
-    [/^Este equipo está en (.+?)(\. Cambiar)?$/, (m) => (cur === 'en' ? 'This computer is in ' + m[1] + (m[2] ? '. Change' : '') : 'Este computador está em ' + m[1] + (m[2] ? '. Mudar' : ''))],
-    [/^Parece que este equipo está ahora en (.+)$/, (m) => (cur === 'en' ? 'This computer seems to be in ' + m[1] + ' now' : 'Parece que este computador está agora em ' + m[1])],
-    [/^Tu punto está a (\d+) km de (.+), la población más cercana que conoce el programa\. Si tu municipio es otro, elígelo\.$/, (m) => (cur === 'en' ? 'Your point is ' + m[1] + ' km from ' + m[2] + ', the nearest town the program knows. If your town is another, choose it.' : 'Seu ponto está a ' + m[1] + ' km de ' + m[2] + ', a localidade mais próxima que o programa conhece. Se o seu município for outro, escolha-o.')],
-    [/^precisión (.+)$/, (m) => (cur === 'en' ? 'accuracy ' : 'precisão ') + m[1]],
-    [/^(Medido con la ubicación de tu sistema(?: \(precisión ([^)]+)\))?|Elegido por ti) y confirmado por ti\. Se guarda solo en este equipo\.$/, (m) => (m[1].startsWith('Elegido') ? t('Elegido por ti') : (cur === 'en' ? 'Measured with your system\'s location' : 'Medido com a localização do seu sistema') + (m[2] ? (cur === 'en' ? ' (accuracy ' : ' (precisão ') + m[2] + ')' : '')) + (cur === 'en' ? ' and confirmed by you. It is stored only on this computer.' : ' e confirmado por você. Fica guardado só neste computador.')],
+  // Sentences with a number or a name inside. Each one is a Spanish pattern and a template per language:
+  // {1} {2} are the captured pieces (those listed in «tr» are translated first), {2?vez|veces} picks by the number,
+  // [ … {2} … ] is kept only when that piece exists, {t:Cortado} inserts a translated key. The other 39 languages
+  // bring their templates in their own file, under the same ids.
+  const PAT = [
+    { id: 'intento', re: /^La que más lo intentó hoy: (.+), (\d+) (vez|veces)\.$/, tr: [1], es: 'La que más lo intentó hoy: {1}, {2} {2?vez|veces}.', en: 'Tried hardest today: {1}, {2} {2?time|times}.', pt: 'A que mais tentou hoje: {1}, {2} {2?vez|vezes}.' },
+    { id: 'subasto', re: /^Se subastó (.+)$/, tr: [1], es: 'Se subastó {1}', en: 'Auctioned: {1}', pt: 'Leiloado: {1}' },
+    { id: 'pujaronPor', re: /^(\d+) empresas pujaron por mostrarte (.+)$/, tr: [2], es: '{1} empresas pujaron por mostrarte {2}', en: '{1} companies bid to show you {2}', pt: '{1} empresas deram lances para mostrar a você {2}' },
+    { id: 'pujaron', re: /^(\d+) empresas pujaron$/, es: '{1} empresas pujaron', en: '{1} companies bid', pt: '{1} empresas deram lances' },
+    { id: 'ganoOfrecio', re: /^Ganó (.+): ofreció (.+) por mostrar el anuncio mil veces\.$/, tr: [1], es: 'Ganó {1}: ofreció {2} por mostrar el anuncio mil veces.', en: 'Won by {1}: offered {2} to show the ad a thousand times.', pt: 'Venceu {1}: ofereceu {2} para mostrar o anúncio mil vezes.' },
+    { id: 'empresas', re: /^(\d+) empresas$/, es: '{1} empresas', en: '{1} companies', pt: '{1} empresas' },
+    { id: 'querian', re: /^(\d+) empresas querían tu visita$/, es: '{1} empresas querían tu visita', en: '{1} companies wanted your visit', pt: '{1} empresas queriam sua visita' },
+    { id: 'ofertas', re: /^(\d+) ofertas?$/, es: '{1} {1?oferta|ofertas}', en: '{1} {1?offer|offers}', pt: '{1} {1?oferta|ofertas}' },
+    { id: 'cortadasZero', re: /^(\d+) cortadas? por ZERO$/, es: '{1} {1?cortada|cortadas} por ZERO', en: '{1} cut by ZERO', pt: '{1} {1?cortada|cortadas} pelo ZERO' },
+    { id: 'decidio', re: /^se decidió en (.+) s$/, es: 'se decidió en {1} s', en: 'decided in {1} s', pt: 'decidido em {1} s' },
+    { id: 'gano', re: /^ganó (.+)$/, tr: [1], es: 'ganó {1}', en: 'won by {1}', pt: 'venceu {1}' },
+    { id: 'Gano', re: /^Ganó (.+)$/, tr: [1], es: 'Ganó {1}', en: 'Won by {1}', pt: 'Venceu {1}' },
+    { id: 'enEstaWeb', re: /^(\d+) en esta web$/, es: '{1} en esta web', en: '{1} on this site', pt: '{1} neste site' },
+    { id: 'enTotal', re: /^(\d+) en total$/, es: '{1} en total', en: '{1} in total', pt: '{1} no total' },
+    { id: 'primera', re: /^Primera (.+)$/, es: 'Primera {1}', en: 'First {1}', pt: 'Primeira {1}' },
+    { id: 'ultima', re: /^Última (.+)$/, es: 'Última {1}', en: 'Last {1}', pt: 'Última {1}' },
+    { id: 'abrir', re: /^Abrir (.+)$/, tr: [1], es: 'Abrir {1}', en: 'Open {1}', pt: 'Abrir {1}' },
+    { id: 'cortes', re: /^(\d+) cortes?$/, es: '{1} {1?corte|cortes}', en: '{1} {1?cut|cuts}', pt: '{1} {1?corte|cortes}' },
+    { id: 'cortadoVer', re: /^Cortado: (.+), (.+)\. Ver en el planeta$/, tr: [1, 2], es: '{t:Cortado}: {1}, {2}. {t:Ver en el planeta}', en: '{t:Cortado}: {1}, {2}. {t:Ver en el planeta}', pt: '{t:Cortado}: {1}, {2}. {t:Ver en el planeta}' },
+    { id: 'direccionEjemplo', re: /^Dirección de ejemplo: «(.*)» · ZERO abriría (.+)$/, es: 'Dirección de ejemplo: «{1}» · ZERO abriría {2}', en: 'Example address: «{1}» · ZERO would open {2}', pt: 'Endereço de exemplo: «{1}» · O ZERO abriria {2}' },
+    { id: 'consultaEjemplo', re: /^Tu consulta de ejemplo: «(.*)» · Se buscaría en ([^:]+): (.+)$/, es: 'Tu consulta de ejemplo: «{1}» · Se buscaría en {2}: {3}', en: 'Your example query: «{1}» · It would be searched on {2}: {3}', pt: 'Sua consulta de exemplo: «{1}» · Seria buscada no {2}: {3}' },
+    { id: 'delAl', re: /^del (.+) al (.+)$/, es: 'del {1} al {2}', en: 'from {1} to {2}', pt: 'de {1} a {2}' },
+    { id: 'generado', re: /^Generado el (.+) en este equipo\. ZERO no envía este informe a nadie\.$/, es: 'Generado el {1} en este equipo. ZERO no envía este informe a nadie.', en: 'Generated on {1} on this computer. ZERO sends this report to no one.', pt: 'Gerado em {1} neste computador. O ZERO não envia este relatório a ninguém.' },
+    { id: 'nivel', re: /^NIVEL (.+)$/, tr: [1], es: '{t:NIVEL} {1}', en: '{t:NIVEL} {1}', pt: '{t:NIVEL} {1}' },
+    { id: 'equipoEn', re: /^Este equipo está en (.+?)(\. Cambiar)?$/, es: 'Este equipo está en {1}[. Cambiar{2}]', en: 'This computer is in {1}[. Change{2}]', pt: 'Este computador está em {1}[. Mudar{2}]' },
+    { id: 'pareceEn', re: /^Parece que este equipo está ahora en (.+)$/, es: 'Parece que este equipo está ahora en {1}', en: 'This computer seems to be in {1} now', pt: 'Parece que este computador está agora em {1}' },
+    { id: 'puntoKm', re: /^Tu punto está a (\d+) km de (.+), la población más cercana que conoce el programa\. Si tu municipio es otro, elígelo\.$/, es: 'Tu punto está a {1} km de {2}, la población más cercana que conoce el programa. Si tu municipio es otro, elígelo.', en: 'Your point is {1} km from {2}, the nearest town the program knows. If your town is another, choose it.', pt: 'Seu ponto está a {1} km de {2}, a localidade mais próxima que o programa conhece. Se o seu município for outro, escolha-o.' },
+    { id: 'precision', re: /^precisión (.+)$/, es: 'precisión {1}', en: 'accuracy {1}', pt: 'precisão {1}' },
+    { id: 'medidoConfirmado', re: /^Medido con la ubicación de tu sistema(?: \(precisión ([^)]+)\))? y confirmado por ti\. Se guarda solo en este equipo\.$/, es: 'Medido con la ubicación de tu sistema[ (precisión {1})] y confirmado por ti. Se guarda solo en este equipo.', en: "Measured with your system's location[ (accuracy {1})] and confirmed by you. It is stored only on this computer.", pt: 'Medido com a localização do seu sistema[ (precisão {1})] e confirmado por você. Fica guardado só neste computador.' },
+    { id: 'elegidoConfirmado', re: /^Elegido por ti y confirmado por ti\. Se guarda solo en este equipo\.$/, es: '{t:Elegido por ti} y confirmado por ti. Se guarda solo en este equipo.', en: '{t:Elegido por ti} and confirmed by you. It is stored only on this computer.', pt: '{t:Elegido por ti} e confirmado por você. Fica guardado só neste computador.' },
   ];
+  // Fill a template with the captured pieces.
+  function plantilla(tpl, m, tr) {
+    const piezas = {}; for (let i = 1; i < m.length; i++) piezas[i] = m[i];
+    if (tr) for (const i of tr) if (piezas[i] != null) piezas[i] = t(piezas[i]);
+    let out = tpl.replace(/\[([^\[\]]*)\]/g, (_, seg) => { const ids = [...seg.matchAll(/\{(\d+)\}/g)].map((x) => +x[1]); return ids.length && ids.every((i) => piezas[i] != null && piezas[i] !== '') ? seg : ''; });
+    out = out.replace(/\{(\d+)\?([^|}]*)\|([^}]*)\}/g, (_, i, uno, varios) => (m[i] === '1' ? uno : varios));
+    out = out.replace(/\{t:([^}]+)\}/g, (_, k) => t(k));
+    out = out.replace(/\{(\d+)\}/g, (_, i) => (piezas[i] != null ? piezas[i] : ''));
+    return out;
+  }
+  function porPatron(k) {
+    for (const p of PAT) {
+      const m = k.match(p.re); if (!m) continue;
+      const tpl = cur === 'en' || cur === 'pt' ? p[cur] : (X[cur] && X[cur].p && X[cur].p[p.id]) || p.en;
+      // {2} in «equipoEn» stands for the optional tail: present when captured, empty otherwise
+      if (p.id === 'equipoEn') m[2] = m[2] ? '' : undefined;
+      return plantilla(tpl, m, p.tr);
+    }
+    return null;
+  }
+  // The other languages: one small file each (static/i18n/<code>.json), with «t» (Spanish → that language),
+  // «p» (the templates above, by id), «rtl» and «locale». Downloaded only by its readers.
+  const X = {}, Xn = {}, Xup = {};
+  const BASE = (() => { try { const u = document.currentScript && document.currentScript.src; return u ? u.replace(/[^\/]*$/, '') : 'static/'; } catch (_) { return 'static/'; } })();
+  async function cargaIdioma(l) {
+    if (X[l] || l === 'es' || l === 'en' || l === 'pt') return X[l];
+    try {
+      const r = await fetch(BASE + 'i18n/' + l + '.json', { cache: 'force-cache' });
+      if (!r.ok) throw new Error(r.status);
+      const d = await r.json();
+      X[l] = d; Xn[l] = new Map(); Xup[l] = new Map();
+      for (const k in d.t || {}) { const nk = norm(k); Xn[l].set(nk, d.t[k]); try { Xup[l].set(nk.toLocaleUpperCase('es'), String(d.t[k]).toLocaleUpperCase(l)); } catch (_) { Xup[l].set(nk.toLocaleUpperCase('es'), String(d.t[k]).toUpperCase()); } }
+      return d;
+    } catch (e) { X[l] = { error: true, t: {}, p: {} }; return X[l]; }
+  }
   // Translate one string: whole, by pattern, or piece by piece around « · » and « → ».
   function t(s) {
     if (cur === 'es' || s == null) return s;
@@ -322,10 +667,10 @@
     const lead = s.match(/^\s*/)[0], tail = s.match(/\s*$/)[0], k = norm(s);
     if (!k) return s;
     let r = una(k);
-    if (r == null) for (const [re, f] of PATRONES) { const m = k.match(re); if (m) { r = f(m); break; } }
+    if (r == null) r = porPatron(k);
     if (r == null && /( · | → |\s\/\s)/.test(k)) {
       let algo = false;
-      r = k.split(/( · | → | \/ )/).map((p, i) => { if (i % 2) return p; const x = una(p); if (x != null) { algo = true; return x; } const y = PATRONES.find(([re]) => re.test(p)); if (y) { algo = true; return y[1](p.match(y[0])); } return p; }).join('');
+      r = k.split(/( · | → | \/ )/).map((p, i) => { if (i % 2) return p; const x = una(p); if (x != null) { algo = true; return x; } const y = porPatron(p); if (y != null) { algo = true; return y; } return p; }).join('');
       if (!algo) r = null;
     }
     if (r == null) { const m = k.match(/^([●◎↙⛶✳↻♪]\s*)(.+)$/); if (m) { const x = t(m[2]); if (x !== m[2]) r = m[1] + x; } }
@@ -363,8 +708,10 @@
     if (titulo0 == null || (document.title !== titulo0.v)) titulo0 = { es: document.title };
     titulo0.v = t(titulo0.es); if (document.title !== titulo0.v) document.title = titulo0.v;
     if (document.body) recorre(document.body);
-    document.documentElement.lang = cur;
-    document.querySelectorAll('.idiomas button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.l === cur)));
+    document.documentElement.lang = (INFO[cur] && INFO[cur].lang) || cur;
+    document.documentElement.dir = INFO[cur] && INFO[cur].rtl ? 'rtl' : 'ltr';
+    document.querySelectorAll('.idiomas button[data-l]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.l === cur)));
+    document.querySelectorAll('.idiomas .idioma-actual').forEach((b) => { b.textContent = cur.toUpperCase().replace('-', '·'); b.setAttribute('aria-label', (INFO[cur] && INFO[cur].nombre) || cur); });
   }
   const obs = new MutationObserver((ms) => {
     if (cur === 'es') return;
@@ -377,6 +724,7 @@
 
   function pon(l, recuerda) {
     if (!IDIOMAS.includes(l)) l = 'es';
+    if (l !== 'es' && l !== 'en' && l !== 'pt' && !X[l]) { cargaIdioma(l).then(() => pon(l, recuerda)); return; }
     const antes = cur; cur = l;
     if (recuerda) { try { localStorage.setItem('guardiana-lang', l); localStorage.setItem('guardiana-lang-chosen', '1'); } catch (_) {} }
     if (antes !== l || recuerda !== undefined) todo();
@@ -387,20 +735,39 @@
     try {
       const q = new URLSearchParams(location.search).get('lang');
       if (IDIOMAS.includes(q)) return q;
-      if (window.parent !== window && window.parent.GuardianaIdioma) return window.parent.GuardianaIdioma.lang;
+      try { if (window.parent !== window && window.parent.GuardianaIdioma) return window.parent.GuardianaIdioma.lang; } catch (_) {} // a parent from another site cannot be read
       const st = localStorage.getItem('guardiana-lang'), ch = localStorage.getItem('guardiana-lang-chosen');
       if (ch && IDIOMAS.includes(st)) return st;
-      const nav = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']).map((x) => String(x).slice(0, 2).toLowerCase()).find((x) => IDIOMAS.includes(x));
+      const navs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']).map((x) => String(x).toLowerCase());
+      const nav = navs.map((x) => (x.startsWith('zh') && /tw|hk|hant/.test(x) ? 'zh-tw' : x === 'pt-pt' ? 'pt-pt' : x.slice(0, 2))).find((x) => IDIOMAS.includes(x));
       return nav || 'en';
     } catch (_) { return 'es'; }
   }
-  window.GuardianaIdioma = { t, pon: (l) => pon(l), get lang() { return cur; }, get locale() { return cur === 'en' ? 'en-GB' : cur === 'pt' ? 'pt-BR' : 'es-ES'; } };
+  window.GuardianaIdioma = { t, pon: (l) => pon(l), get lang() { return cur; }, get locale() { return cur === 'en' ? 'en-GB' : cur === 'pt' ? 'pt-BR' : cur === 'es' ? 'es-ES' : (INFO[cur] && INFO[cur].locale) || cur; }, get idiomas() { return IDI_ABIERTOS; } };
   addEventListener('storage', (e) => { if (e.key === 'guardiana-lang' && IDIOMAS.includes(e.newValue) && e.newValue !== cur) pon(e.newValue); });
+  // The selector: one small button with the current code; it unfolds a list of the 42 languages, each in its own
+  // name, three columns on a computer and one on a phone. Esc or a click outside folds it.
+  function selector() {
+    document.querySelectorAll('.idiomas').forEach((caja) => {
+      if (caja.dataset.listo) return; caja.dataset.listo = '1'; caja.setAttribute('translate', 'no');
+      caja.innerHTML = '';
+      const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'idioma-actual'; btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false');
+      const menu = document.createElement('div'); menu.className = 'idioma-menu'; menu.setAttribute('role', 'listbox'); menu.hidden = true;
+      for (const [c, n] of IDI_ABIERTOS) { const b = document.createElement('button'); b.type = 'button'; b.dataset.l = c; b.setAttribute('role', 'option'); b.lang = INFO[c].lang; b.innerHTML = '<span class="cod">' + c.toUpperCase().replace('-', '·') + '</span><span class="nom">' + n + '</span>'; b.addEventListener('click', () => { pon(c, true); cierra(); }); menu.appendChild(b); }
+      const cierra = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+      btn.addEventListener('click', (e) => { e.stopPropagation(); const abre = menu.hidden; menu.hidden = !abre; btn.setAttribute('aria-expanded', String(abre)); if (abre) { const act = menu.querySelector('[aria-pressed="true"]'); if (act) act.focus(); } });
+      document.addEventListener('click', (e) => { if (!caja.contains(e.target)) cierra(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { cierra(); btn.focus(); } });
+      caja.appendChild(btn); caja.appendChild(menu);
+    });
+  }
   const arranca = () => {
-    cur = inicial(); todo();
+    selector();
+    cur = inicial();
+    if (cur !== 'es' && cur !== 'en' && cur !== 'pt') { const l = cur; cur = 'es'; cargaIdioma(l).then(() => { cur = l; todo(); }); }
+    todo();
     obs.observe(document.documentElement, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ATR });
     new MutationObserver(() => { if (cur !== 'es' && document.title !== (titulo0 && titulo0.v)) todo(); }).observe(document.querySelector('title') || document.head, { childList: true, characterData: true, subtree: true });
-    document.querySelectorAll('.idiomas button').forEach((b) => b.addEventListener('click', () => pon(b.dataset.l, true)));
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arranca); else arranca();
 })();

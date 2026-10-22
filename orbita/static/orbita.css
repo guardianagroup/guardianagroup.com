@@ -234,12 +234,25 @@ body.pantalla #marco { background: #06080C; }
 /* 20 Oct 2026 (owner): nothing has been cut yet, so no live list and no cut counter. */
 body.sin-cortes #directo, body.sin-cortes #estado { display: none; }
 
-/* 20 Oct 2026 (owner): the languages, next to «Precisar ubicación», like the website's switcher. */
-.idiomas { display: inline-flex; padding: 3px; border-radius: 999px; border: 1px solid var(--line); }
-.idiomas button { all: unset; cursor: pointer; font: 500 11px/1 var(--mono); letter-spacing: .08em; color: var(--muted); padding: 7px 9px; border-radius: 999px; transition: color .2s, background .2s; }
-.idiomas button:hover { color: var(--fg); }
-.idiomas button[aria-pressed="true"] { color: #06080C; background: #9CC3E4; }
-.idiomas button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* 20–22 Oct 2026 (owner): the languages, next to «Precisar ubicación»; «todos los idiomas, minimizado, muy elegante»:
+   one small pill with the current code, and a folded list of the 42 languages in their own names. */
+.idiomas { position: relative; display: inline-flex; }
+.idiomas .idioma-actual { all: unset; cursor: pointer; font: 500 11px/1 var(--mono); letter-spacing: .08em; color: var(--fg); padding: 8px 12px 8px 13px; border-radius: 999px; border: 1px solid var(--line); background: rgba(12,17,24,.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: inline-flex; align-items: center; gap: 7px; transition: border-color .2s, background .2s; }
+.idiomas .idioma-actual::after { content: ''; width: 5px; height: 5px; border-right: 1.3px solid currentColor; border-bottom: 1.3px solid currentColor; transform: translateY(-1px) rotate(45deg); opacity: .7; transition: transform .2s; }
+.idiomas .idioma-actual:hover, .idiomas .idioma-actual[aria-expanded="true"] { border-color: rgba(156,195,228,.5); background: rgba(156,195,228,.12); }
+.idiomas .idioma-actual[aria-expanded="true"]::after { transform: translateY(1px) rotate(-135deg); }
+.idiomas .idioma-actual:focus-visible, .idioma-menu button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.idioma-menu { position: absolute; top: calc(100% + 8px); inset-inline-end: 0; z-index: 40; width: min(560px, calc(100vw - 32px)); max-height: min(62vh, 520px); overflow: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 8px; border-radius: 16px; border: 1px solid var(--line); background: rgba(10,14,20,.86); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 18px 50px rgba(0,0,0,.45); scrollbar-width: thin; }
+.idioma-menu[hidden] { display: none; }
+.idioma-menu button { all: unset; cursor: pointer; display: flex; align-items: baseline; gap: 10px; padding: 8px 10px; border-radius: 9px; color: var(--muted); font: 400 12.5px/1.2 var(--texto); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .15s, background .15s; }
+.idioma-menu button .cod { font: 500 10px/1 var(--mono); letter-spacing: .08em; color: #8A95A2; min-width: 28px; }
+.idioma-menu button .nom { overflow: hidden; text-overflow: ellipsis; }
+.idioma-menu button:hover { color: var(--fg); background: rgba(156,195,228,.1); }
+.idioma-menu button[aria-pressed="true"] { color: var(--fg); background: rgba(156,195,228,.18); }
+.idioma-menu button[aria-pressed="true"] .cod { color: #9CC3E4; }
+@media (max-width: 760px) { .idioma-menu { grid-template-columns: 1fr 1fr; width: min(420px, calc(100vw - 24px)); position: fixed; top: auto; bottom: 16px; left: 12px; right: 12px; } }
+/* right-to-left languages: the page mirrors; the planet, the codes and the figures keep their direction */
+[dir="rtl"] .idiomas .idioma-actual, [dir="rtl"] .idioma-menu .cod, [dir="rtl"] #zoom, [dir="rtl"] .ms { direction: ltr; }
 
 /* 20 Oct 2026 (owner): the doors leave the ring for a centred dock at the bottom, so the planet's layers
    (cables, satellites) have the sky to themselves. Comunicaciones · ZERO · Radiografías. */
@@ -267,6 +280,7 @@ body.dentro .capas, body.dentro .capa-nota, body.dentro .sat-ficha { opacity: 0;
 .capa-nota { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(96px + env(safe-area-inset-bottom, 0px)); margin: 0; max-width: calc(100vw - 48px); text-align: center; font: 400 11px/1.5 var(--mono); letter-spacing: .04em; color: #8A95A2; transition: opacity .45s; }
 .sat-ficha { position: fixed; z-index: 5; pointer-events: none; display: flex; flex-direction: column; gap: 3px; padding: 9px 12px; border-radius: 10px; border: 1px solid rgba(156,195,228,.35); background: rgba(8,11,16,.9); font: 400 11px/1.3 var(--mono); color: #A9B3BE; }
 .sat-ficha b { font: 600 12.5px/1.2 var(--texto); color: var(--fg); }
+.sat-ficha span { white-space: pre-line; max-width: 300px; line-height: 1.45; }
 @media (max-width: 1100px) {
   .capas { position: static; transform: none; order: 3; width: 100%; justify-content: center; flex-wrap: wrap; }
   body.dock .puerta button { padding: 9px 14px 9px 12px; }
@@ -322,20 +336,99 @@ body.cerca .capa-nota { background: rgba(6,8,12,.78); padding: 6px 14px; border-
    they wake up again under the pointer. */
 body:not(.dentro) #puertas { opacity: calc(1 - var(--cerca, 0) * .88); transition: opacity .25s; }
 body:not(.dentro) #puertas:hover, body:not(.dentro) #puertas:focus-within { opacity: 1; }
+/* 21 Oct 2026 (owner): the top bar steps back with the zoom too, so the planet is seen whole; it wakes under the pointer. */
+body.listo:not(.dentro) header > :not(#sat-vista):not(#sat-fase) { opacity: calc(1 - var(--cerca, 0) * .85); transition: opacity .25s; }
+body.listo:not(.dentro) header:hover > *, body.listo:not(.dentro) header:focus-within > * { opacity: 1; }
+/* 22 Oct 2026 (owner: «ya no se pueden clasificar los satélites»): the orbit filter stays readable at any zoom,
+   on a darker glass so it reads over the bright day side too */
+body.listo:not(.dentro).cerca .sat-vista { background: rgba(8,11,16,.84); border-color: rgba(156,195,228,.28); }
+body.listo:not(.dentro) header:hover, body.listo:not(.dentro) header:focus-within, body.listo:not(.dentro) .sat-vista:hover, body.listo:not(.dentro) .sat-vista:focus-within { opacity: 1; }
 
 /* Which satellites (owner + agency, 20 Oct 2026): a quiet second row under the layers, only with satellites on. */
-.sat-vista { position: absolute; left: 50%; top: 74px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 3px; border-radius: 999px; border: 1px solid var(--line); background: rgba(12,17,24,.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+/* 22 Oct 2026 (owner: «un desplegable con las tres fases para clicar cada una»): a folded card under the «Satélites»
+   button, one row per orbit (a lit dot when it is on), and the view below. */
+.sat-vista { position: absolute; top: 74px; left: 50%; transform: translateX(-50%); width: 340px; max-width: calc(100vw - 32px); display: flex; flex-direction: column; gap: 10px; padding: 10px; border-radius: 16px; border: 1px solid var(--line); background: rgba(10,14,20,.86); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 18px 50px rgba(0,0,0,.45); z-index: 30; }
 .sat-vista[hidden] { display: none; }
-.sat-vista .seg, .sat-vista .orb { display: flex; gap: 2px; }
-.sat-vista .sep { width: 1px; height: 16px; background: var(--line); }
-.sat-vista button { all: unset; cursor: pointer; padding: 6px 11px; border-radius: 999px; font: 500 11px/1 var(--texto); color: var(--muted); white-space: nowrap; transition: color .2s, background .2s; }
-.sat-vista button b { font: 400 10px/1 var(--mono); color: #8A95A2; margin-left: 4px; letter-spacing: .02em; }
-.sat-vista button:hover:not(:disabled) { color: var(--fg); }
-.sat-vista [aria-checked="true"] { color: var(--fg); background: rgba(156,195,228,.16); }
-.sat-vista .orb [aria-pressed="false"] { color: #5F6873; text-decoration: line-through; text-decoration-color: rgba(156,195,228,.35); }
+.sat-vista .titulo { display: flex; justify-content: space-between; align-items: center; font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8A95A2; padding: 4px 10px 8px; }
+.sat-vista .plegar { all: unset; cursor: pointer; color: #8A95A2; padding: 0 4px; font: 500 12px/1 var(--mono); } .sat-vista .plegar:hover { color: var(--fg); }
+.sat-vista .orb { display: flex; flex-direction: column; gap: 2px; }
+.sat-vista .orb button { all: unset; cursor: pointer; display: grid; grid-template-columns: 14px 1fr; column-gap: 10px; align-items: start; padding: 8px 10px; border-radius: 10px; transition: background .15s; }
+.sat-vista .orb button i { width: 8px; height: 8px; margin-top: 4px; border-radius: 50%; border: 1.3px solid #5F6873; transition: background .2s, box-shadow .2s, border-color .2s; }
+.sat-vista .orb button .n { font: 500 13px/1.3 var(--texto); color: var(--fg); }
+.sat-vista .orb button .n b { font: 400 10.5px/1 var(--mono); color: #8A95A2; margin-left: 6px; letter-spacing: .02em; }
+.sat-vista .orb button .d { grid-column: 2; font: 400 11.5px/1.35 var(--texto); color: var(--muted); margin-top: 2px; }
+.sat-vista .orb button:hover { background: rgba(156,195,228,.08); }
+.sat-vista .orb button[aria-pressed="true"] i { background: #9CC3E4; border-color: #9CC3E4; box-shadow: 0 0 8px rgba(156,195,228,.8); }
+.sat-vista .orb button[aria-pressed="false"] .n { color: var(--muted); }
+.sat-vista .seg { display: flex; gap: 2px; padding: 3px; border-radius: 999px; border: 1px solid var(--line); }
+.sat-vista .seg button { all: unset; cursor: pointer; flex: 1; text-align: center; padding: 6px 10px; border-radius: 999px; font: 500 11px/1 var(--texto); color: var(--muted); white-space: nowrap; transition: color .2s, background .2s; }
+.sat-vista .seg button:hover:not(:disabled) { color: var(--fg); }
+.sat-vista .seg [aria-checked="true"] { color: var(--fg); background: rgba(156,195,228,.16); }
+.sat-vista button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .sat-vista .orb [aria-pressed="false"] b { color: #5F6873; }
 .sat-vista button:disabled { opacity: .35; cursor: default; }
 .sat-vista button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 body.dentro .sat-vista { opacity: 0; pointer-events: none; }
 @media (max-width: 760px) { .sat-vista { position: static; transform: none; order: 4; width: 100%; justify-content: center; flex-wrap: wrap; border-radius: 16px; } }
 @media (max-width: 760px) { .sat-vista .sep { display: none; } .zoom { display: none; } }
+
+/* «Ahora mismo» (owner, 22 Oct 2026): one true fact at a time, bottom right (static/datos-curiosos.js). */
+.dato { box-sizing: border-box; width: 100%; margin-bottom: 14px; padding: 14px 16px 12px; border: 1px solid var(--line); border-radius: 14px; background: rgba(10,14,20,.74); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); cursor: pointer; transition: border-color .2s; }
+.dato:hover { border-color: rgba(156,195,228,.45); }
+.dato[hidden] { display: none; }
+.dato.entra { animation: datoEntra .5s cubic-bezier(.2,.7,.2,1); }
+@keyframes datoEntra { from { opacity: 0; transform: translateY(6px); } }
+.dato .dk { display: flex; justify-content: space-between; align-items: center; font: 500 10px/1 var(--mono); letter-spacing: .16em; color: #8A95A2; }
+.dato .de { color: var(--aviso); border: 1px solid #4A3C22; border-radius: 999px; padding: 3px 7px; font-size: 9px; letter-spacing: .12em; }
+.dato .de[hidden] { display: none; }
+.dato .dv { margin-top: 10px; font: 300 30px/1.05 var(--display); color: var(--fg); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.dato .dt { margin: 6px 0 0; font: 400 13px/1.45 var(--texto); color: #C4CCD5; }
+.dato .dpie { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 10px; }
+.dato .dpie small { font: 400 10px/1.4 var(--mono); color: #6F7B88; letter-spacing: .02em; }
+.dato .dpuntos { display: flex; gap: 4px; flex: none; }
+.dato .dpuntos i { width: 4px; height: 4px; border-radius: 50%; background: rgba(156,195,228,.25); }
+.dato .dpuntos i.on { background: var(--accent); }
+body.sin-cortes #directo { display: block; }
+body.sin-cortes #directo h2, body.sin-cortes #lista, body.sin-cortes #espera { display: none; }
+body.estrecho .dato { display: none; }
+@media (prefers-reduced-motion: reduce) { .dato.entra { animation: none; } }
+/* 22 Oct 2026 (owner: «más información de cada satélite, siempre real»): the satellite card, label and value in two columns */
+.sat-ficha.sat { width: min(360px, calc(100vw - 32px)); padding: 12px 14px; gap: 6px; }
+.sat-ficha.sat b { font-size: 14px; letter-spacing: .01em; }
+.sat-ficha.sat span { max-width: none; white-space: normal; }
+.sat-dl { display: grid; grid-template-columns: max-content 1fr; gap: 5px 14px; margin: 4px 0 0; }
+.sat-dl dt { color: var(--muted); font: 400 10.5px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+.sat-dl dd { margin: 0; color: var(--fg); font: 400 12px/1.4 var(--texto); font-variant-numeric: tabular-nums; }
+.sat-ficha.sat small { display: block; margin-top: 8px; padding-top: 7px; border-top: 1px solid rgba(156,195,228,.18); color: var(--muted); font: 400 10px/1.4 var(--mono); }
+/* 22 Oct 2026: one orbit at a time, and a line on what that orbit is (measured on the satellites shown) */
+.sat-fase { position: absolute; left: 50%; top: 116px; transform: translateX(-50%); width: max-content; max-width: min(640px, calc(100vw - 32px)); padding: 7px 16px; border-radius: 14px; border: 1px solid rgba(156,195,228,.22); background: rgba(8,11,16,.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); font: 400 11px/1.4 var(--mono); color: var(--muted); letter-spacing: .02em; text-align: center; text-wrap: balance; }
+.sat-fase[hidden] { display: none; }
+body.dentro .sat-fase { opacity: 0; pointer-events: none; }
+@media (max-width: 760px) { .sat-fase { position: static; transform: none; order: 5; width: 100%; white-space: normal; border-radius: 14px; } }
+
+/* «Mi conexión» (22 Oct 2026): your world, in a card on the right; two labels say where certainty ends */
+.conexion-btn[aria-pressed="true"] { color: var(--fg); border-color: #3A4656; background: rgba(156,195,228,.1); }
+.conexion { position: fixed; top: 74px; right: 40px; width: 360px; max-width: calc(100vw - 32px); max-height: calc(100vh - 100px); overflow: auto; display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border-radius: 16px; border: 1px solid var(--line); background: rgba(10,14,20,.88); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 18px 50px rgba(0,0,0,.45); z-index: 31; scrollbar-width: thin; }
+.conexion[hidden] { display: none; }
+.conexion .titulo { display: flex; justify-content: space-between; align-items: center; font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8A95A2; padding: 2px 0 6px; }
+.conexion .acciones { display: flex; gap: 2px; padding: 2px; border-radius: 999px; border: 1px solid var(--line); text-transform: none; letter-spacing: 0; }
+.conexion .acciones button { all: unset; cursor: pointer; padding: 4px 10px; border-radius: 999px; font: 500 11px/1 var(--texto); color: var(--muted); }
+.conexion .acciones button[aria-pressed="true"] { color: var(--fg); background: rgba(156,195,228,.16); }
+.conexion .bloque { padding: 8px 0 10px; border-top: 1px solid var(--line); }
+.conexion .bloque:first-child { border-top: 0; }
+.conexion h3 { margin: 0 0 6px; font: 600 13px/1.3 var(--texto); color: var(--fg); }
+.conexion .sat-dl { grid-template-columns: minmax(96px, max-content) 1fr; }
+.conexion .sat-dl dd { color: var(--fg); }
+.conexion .et { font: 500 9px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; font-style: normal; padding: 2px 5px; border-radius: 4px; vertical-align: 1px; white-space: nowrap; }
+.conexion .et.medido, .conexion .et.verificado { color: #9CC3E4; background: rgba(156,195,228,.12); }
+.conexion .et.estimado { color: var(--aviso); background: var(--aviso-suave); }
+.conexion .nota { margin: 6px 0 0; font: 400 11.5px/1.4 var(--texto); color: var(--muted); }
+.conexion .medir { all: unset; cursor: pointer; display: inline-block; margin-top: 8px; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font: 600 12px/1 var(--texto); }
+.conexion .medir:hover:not(:disabled) { background: var(--accent); color: var(--accent-fg); }
+.conexion .medir:disabled { opacity: .5; cursor: default; }
+.conexion .pie { margin: 4px 0 0; font: 400 10.5px/1.4 var(--mono); color: #8A95A2; }
+.conexion button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+body.dentro .conexion { opacity: 0; pointer-events: none; }
+@media (max-width: 760px) { .conexion { top: auto; bottom: 0; right: 0; left: 0; width: 100%; max-width: none; max-height: 70vh; border-radius: 16px 16px 0 0; } }
+/* while «Mi conexión» is open the planet is empty of everything that is not the visitor's: the layer buttons rest */
+body.solo-tu #capas, body.solo-tu #sat-vista, body.solo-tu #sat-fase, body.solo-tu #capa-nota, body.solo-tu #directo { opacity: .25 !important; pointer-events: none; }

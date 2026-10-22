@@ -12,6 +12,9 @@ on:
     paths:
       - '.github/workflows/datos-orbita.yml'
       - 'herramientas/datos_orbita.py'
+      - 'herramientas/fibra_tierra.py'
+      - 'herramientas/lugares_capas.py'
+      - 'herramientas/mapa_16k.py'
 
 permissions:
   contents: write
@@ -63,12 +66,41 @@ jobs:
         continue-on-error: true
         run: python3 herramientas/datos_orbita.py tierra medir
 
+      # 22 Oct 2026 (owner: «las redes troncales de tierra, las principales… búscalo por todo internet»):
+      # AfTerFibre (CC BY 4.0), the OFDS public data and OpenStreetMap, joined in one file
+      - name: Fibra troncal por tierra (a mano o al cambiar la herramienta; GitHub no admite «%» en las expresiones)
+        if: github.event_name != 'schedule'
+        timeout-minutes: 10
+        continue-on-error: true
+        run: pip install --quiet pillow && python3 herramientas/fibra_tierra.py --sin-ofds
+
+      # 22 Oct 2026 (owner, plan B): the cables OpenStreetMap lacks, rebuilt by the agency from public sources
+      - name: Cables reconstruidos por la agencia
+        timeout-minutes: 10
+        continue-on-error: true
+        run: pip install --quiet pillow && python3 herramientas/cables_agencia.py
+
+      - name: Ciudades de cables y centros de datos
+        timeout-minutes: 10
+        continue-on-error: true
+        run: python3 herramientas/lugares_capas.py
+
+      # 22 Oct 2026 (owner: «un zoom o dos más, sin perder calidad»): the day map at 16K in tiles, from NASA
+      # (public domain). Only when the tool changes or by hand: the file is big and the image does not change.
+      - name: Mapa de día 16K en mosaico (solo a mano o al cambiar la herramienta)
+        if: github.event_name != 'schedule'
+        timeout-minutes: 20
+        continue-on-error: true
+        run: |
+          if [ -f orbita/static/tierra/dia-16k/7_3.jpg ]; then echo "Ya está"; exit 0; fi
+          pip install --quiet pillow && python3 herramientas/mapa_16k.py
+
       - name: Guardar si ha cambiado
         if: always()
         run: |
           git config user.name "GUARDIANA datos"
           git config user.email "datos@guardianagroup.com"
-          git add orbita/datos orbita/static/vendor
+          git add orbita/datos orbita/static/vendor orbita/static/tierra/dia-16k
           if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
           git commit -m "Órbita: datos reales actualizados ($(date -u +%Y-%m-%dT%H:%MZ))"
           git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
