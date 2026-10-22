@@ -70,6 +70,14 @@
 
   // where the internet touches the ground (OpenStreetMap): landing stations, data centres, exchange points
   let PT = null;
+  // The polar stations (bases and satellite ground stations) live in puntos-extra.json and are drawn with the cable layer
+  // too, so they load on their own, without the 420 KB of data centres (22 Oct 2026, 14:15, owner: «que aparezca»).
+  let EST = null;
+  async function cargaEstaciones() {
+    if (EST || cargando.est) return; cargando.est = true;
+    try { const e2 = await cargaJSON('datos/puntos-extra.json'); EST = []; for (const f of (e2.puntos || [])) { if (f.tipo !== 'estacion' || !Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; EST.push({ w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: { nota: f.nota || '', enlace: f.enlace || '', clase: f.clase || '', programa: f.programa || '', desde: f.desde || '', gente: f.gente || '', telemetria: f.telemetria || '', antenas: f.antenas || '', cambios: f.cambios || '', local: f.local || '', fuente: f.fuente || '' }, lon: f.lon, lat: f.lat, extra: true }); } } catch (_) { EST = []; }
+    cargando.est = false;
+  }
   async function cargaPuntos() {
     if (PT || cargando.puntos) return;
     cargando.puntos = true;
@@ -84,7 +92,7 @@
       });
       // hand-verified additions (datos/puntos-extra.json, with their sources): exchange points, polar stations…
       // OpenStreetMap does not know; they survive the automatic data updates
-      try { const e2 = await cargaJSON('datos/puntos-extra.json'); for (const f of (e2.puntos || [])) { if (!Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; const q = { w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: (f.nota || f.enlace || f.clase) ? { nota: f.nota || '', enlace: f.enlace || '', clase: f.clase || '', programa: f.programa || '', desde: f.desde || '', gente: f.gente || '', telemetria: f.telemetria || '', antenas: f.antenas || '' } : null, lon: f.lon, lat: f.lat, extra: true }; if (f.tipo === 'datos') PT.p.push(q); else if (f.tipo === 'intercambio') PT.ix.push(q); else if (f.tipo === 'estacion') (PT.est || (PT.est = [])).push(q); } } catch (_) {}
+      try { const e2 = await cargaJSON('datos/puntos-extra.json'); for (const f of (e2.puntos || [])) { if (!Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; const q = { w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: (f.nota || f.enlace || f.clase) ? { nota: f.nota || '', enlace: f.enlace || '', clase: f.clase || '', programa: f.programa || '', desde: f.desde || '', gente: f.gente || '', telemetria: f.telemetria || '', antenas: f.antenas || '' } : null, lon: f.lon, lat: f.lat, extra: true }; if (f.tipo === 'datos') PT.p.push(q); else if (f.tipo === 'intercambio') PT.ix.push(q); } } catch (_) {}
       // how many data centres each operator has on the map
       PT.porOp = new Map(); for (const q of PT.p) if (q.o) PT.porOp.set(q.o, (PT.porOp.get(q.o) || 0) + 1);
       lugares();
@@ -136,11 +144,11 @@
   // Polar bases and satellite ground stations (datos/puntos-extra.json, tipo «estacion»; owner, 22 Oct 2026: «polo
   // norte, polo sur, Antártida, todo»): a ring with a dot, and the name when there is room
   function pintaEstaciones(cx, p, G) {
-    if (!PT.est || !PT.est.length) return;
+    if (!EST || !EST.length) return;
     const z = G.R / (G.R0 || G.R), L = esLimpio();
     cx.lineWidth = 1.1; cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle';
     const ocupado = [];
-    for (const q of PT.est) {
+    for (const q of EST) {
       const v = p.aVista(q.w); if (v[2] <= 0.05) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
       cx.strokeStyle = `rgba(${BLANCO},${L ? 0.9 : 0.75})`; cx.beginPath(); cx.arc(x, y, 4.2, 0, 7); cx.stroke();
@@ -366,7 +374,7 @@
       pintaLuz(cx, p, G, capas.sub.lineas, t);
     }
     if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaEstaciones(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
-    else if (estado.sub && PT && PT.est) { cx.globalCompositeOperation = 'source-over'; pintaEstaciones(cx, p, G); cx.globalCompositeOperation = 'lighter'; } // 22 Oct 2026, 14:15 (owner): the polar stations show with the cables too
+    else if (estado.sub && EST) { cx.globalCompositeOperation = 'source-over'; pintaEstaciones(cx, p, G); cx.globalCompositeOperation = 'lighter'; } // 22 Oct 2026, 14:15 (owner): the polar stations show with the cables too
     if (estado.sub && capas.sub && capas.sub.lineas) {
       if (cableMarcado >= 0) { const l = capas.sub.lineas[cableMarcado]; if (l) pintaLineas(cx, p, G, [l], `rgba(${BLANCO},.95)`, 2.2); }
       if (llegadaMarcada >= 0 && LUG && LUG.llegadas) { const ls = LUG.llegadas[llegadaMarcada].seg.map((i) => capas.sub.lineas[i]).filter(Boolean); pintaLineas(cx, p, G, ls, `rgba(${BLANCO},.95)`, 2); }
@@ -785,13 +793,13 @@
   }
   let centroMarcado = -1, cableMarcado = -1, llegadaMarcada = -1, puntoMarcado = -1, pendiente = null;
   function buscaEstacion(x, y) {
-    if (!(estado.puntos || estado.sub) || !PT || !PT.est) return -1;
+    if (!(estado.puntos || estado.sub) || !EST) return -1;
     const p = P(), G = p.geo; let mejor = -1, dm = 8 * 8;
-    for (let i = 0; i < PT.est.length; i++) { const v = p.aVista(PT.est[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
+    for (let i = 0; i < EST.length; i++) { const v = p.aVista(EST[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
     return mejor;
   }
   function fichaEstacion(i, x, y) {
-    const q = PT.est[i], X = q.x || {}, filas = [];
+    const q = EST[i], X = q.x || {}, filas = [];
     if (X.clase) filas.push([T('Tipo'), X.clase === 'base' ? T('Base antártica') : T('Estación terrena de satélites')]);
     if (q.o) filas.push([T('Operador'), /^[A-Z]{2}$/.test(q.o) ? paisNombre(q.o) + (X.programa ? ' · ' + X.programa : '') : q.o]);
     if (X.desde) filas.push([T('Desde'), String(X.desde)]);
@@ -799,6 +807,8 @@
     if (X.enlace) filas.push([T('Cómo se conecta'), X.enlace]);
     if (X.telemetria) filas.push([T('Por dónde salen los datos'), X.telemetria]);
     if (X.antenas) filas.push([T('Antenas'), X.antenas]);
+    if (X.local) filas.push([T('Enlaces locales'), X.local]);
+    if (X.cambios) filas.push([T('Novedades'), X.cambios]);
     if (X.nota) filas.push([T('Datos'), X.nota]);
     fichaRica(q.n || T('Estación'), filas, T('Datos verificados'), x, y);
   }
@@ -1240,7 +1250,7 @@
     estado[clave] = on; guarda();
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
     if (on && clave === 'sat') estado.satPlegado = false;
-    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else if (clave === 'fibra') cargaFibra(); else { cargaCables(clave); if (clave === 'sub') cargaFibra(); } }
+    if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else if (clave === 'fibra') cargaFibra(); else { cargaCables(clave); if (clave === 'sub') { cargaFibra(); cargaEstaciones(); } } }
     if (!on) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; }
     pintaNota(); pintaVista();
   }

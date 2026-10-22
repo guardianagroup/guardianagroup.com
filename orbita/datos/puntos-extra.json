@@ -32,7 +32,9 @@
    "programa": "Programa Antártico de EE. UU. (USAP / NSF)",
    "desde": 1956,
    "gente": "hasta ~1.000 en verano, ~150 en invierno",
-   "telemetria": "Todo sale por satélite: el enlace principal es el de banda C/Ku de Ross Island hacia Nueva Zelanda y EE. UU.; los datos científicos pesados (NASA, NOAA) bajan también por la estación de la NASA de al lado. No hay cable: el proyecto McMurdo–Nueva Zelanda es solo un estudio."
+   "telemetria": "Todo sale por satélite: el enlace principal es el de banda C/Ku de Ross Island hacia Nueva Zelanda y EE. UU.; los datos científicos pesados (NASA, NOAA) bajan también por la estación de la NASA de al lado. No hay cable: el proyecto McMurdo–Nueva Zelanda es solo un estudio.",
+   "cambios": "2022: nueva estación terrena de Ross Island, que jubila la de Black Island (40 km, por microondas) y multiplica el ancho de banda; 2022–2024: Starlink desplegado para todo el personal; en estudio el cable a Nueva Zelanda.",
+   "local": "Fibra y radioenlace con Scott Base (3 km) y con la estación de la NASA y los laboratorios de Arrival Heights; hasta 2022, microondas a Black Island."
   },
   {
    "lon": 166.667,
@@ -47,7 +49,8 @@
    "programa": "NASA Near Space Network (NEN)",
    "desde": 1994,
    "antenas": "Una antena de 10 m (MG1) y otra menor",
-   "telemetria": "Recibe datos de satélites en órbita polar cuando pasan sobre la Antártida (misiones de observación de la Tierra de la NASA y NOAA) y los reenvía a White Sands (Nuevo México) por satélite."
+   "telemetria": "Recibe datos de satélites en órbita polar cuando pasan sobre la Antártida (misiones de observación de la Tierra de la NASA y NOAA) y los reenvía a White Sands (Nuevo México) por satélite.",
+   "local": "Enlazada con McMurdo (red de la base) y con el relé TDRSS para sacar los datos."
   },
   {
    "lon": 0.0,
@@ -62,7 +65,9 @@
    "programa": "Programa Antártico de EE. UU. (USAP / NSF)",
    "desde": 1956,
    "gente": "~150 en verano, ~45 en invierno",
-   "telemetria": "Los datos del telescopio IceCube y del resto de experimentos (del orden de 1 TB al día) salen por las ventanas de TDRS hacia White Sands (Nuevo México); lo urgente, por Iridium."
+   "telemetria": "Los datos del telescopio IceCube y del resto de experimentos (del orden de 1 TB al día) salen por las ventanas de TDRS hacia White Sands (Nuevo México); lo urgente, por Iridium.",
+   "cambios": "2023: primeras pruebas de Starlink (satélites polares) en el polo; la ventana TDRS sigue siendo el canal de los datos científicos; nueva antena SPTR-2 desde 2018.",
+   "local": "Red local de la base y enlace con el detector IceCube (1 km) y el South Pole Telescope."
   },
   {
    "lon": -64.053,
@@ -77,7 +82,9 @@
    "programa": "Programa Antártico de EE. UU. (USAP / NSF)",
    "desde": 1968,
    "gente": "~45 en verano, ~20 en invierno",
-   "telemetria": "Por el VSAT hacia EE. UU.; es la única base estadounidense al norte del Círculo Polar Antártico y la que mejor ve los satélites geoestacionarios."
+   "telemetria": "Por el VSAT hacia EE. UU.; es la única base estadounidense al norte del Círculo Polar Antártico y la que mejor ve los satélites geoestacionarios.",
+   "cambios": "2023: Starlink; es la base de EE. UU. mejor conectada por su latitud (64° S).",
+   "local": "Red local; la base se abastece por barco desde Punta Arenas (Chile)."
   },
   {
    "lon": -68.128,
@@ -92,7 +99,9 @@
    "programa": "British Antarctic Survey (BAS)",
    "desde": 1975,
    "gente": "~160 en verano, ~25 en invierno",
-   "telemetria": "Los datos científicos y de la flota de aviones salen por el VSAT hacia Cambridge (Reino Unido)."
+   "telemetria": "Los datos científicos y de la flota de aviones salen por el VSAT hacia Cambridge (Reino Unido).",
+   "cambios": "2023: Starlink («game changer» según BAS); 2023: nuevo edificio científico Discovery; muelle nuevo para el buque Sir David Attenborough.",
+   "local": "Red local de la base; enlace con el aeródromo y los laboratorios Bonner."
   },
   {
    "lon": -25.5,
@@ -107,7 +116,9 @@
    "programa": "British Antarctic Survey (BAS)",
    "desde": 2013,
    "gente": "~70 en verano; sin personal en invierno desde 2017",
-   "telemetria": "Las medidas de ozono, clima espacial y meteorología salen por satélite de forma automática todo el invierno: Halley es donde se descubrió el agujero de ozono (1985)."
+   "telemetria": "Las medidas de ozono, clima espacial y meteorología salen por satélite de forma automática todo el invierno: Halley es donde se descubrió el agujero de ozono (1985).",
+   "cambios": "2017: se deja de invernar (grietas en la plataforma Brunt); 2019–2022: sistema de energía autónomo que mantiene los instrumentos transmitiendo todo el invierno sin nadie; 2021: el iceberg A-74 se desprende cerca de la base.",
+   "local": "Los instrumentos remotos (clima espacial, ozono) enlazan con los módulos por radio y de ahí al satélite."
   },
   {
    "lon": 2.535,
@@ -122,7 +133,9 @@
    "programa": "Instituto Polar Noruego",
    "desde": 1990,
    "gente": "~40 en verano, ~6 en invierno",
-   "telemetria": "Por el mismo enlace de TrollSat hacia Tromsø; la base aloja además una estación del sistema Galileo."
+   "telemetria": "Por el mismo enlace de TrollSat hacia Tromsø; la base aloja además una estación del sistema Galileo.",
+   "cambios": "Noruega ha aprobado construir una base Troll nueva (proyecto en marcha para la década de 2020–2030); TrollSat crece con antenas de banda Ka.",
+   "local": "Fibra de 100 m con TrollSat; estación Galileo (GSS) y observatorio de aire limpio junto a la base."
   },
   {
    "lon": 2.5333,
@@ -137,7 +150,9 @@
    "programa": "Kongsberg Satellite Services (KSAT)",
    "desde": 2008,
    "antenas": "Varias antenas de 7,3 m de banda S/X y una de banda Ka",
-   "telemetria": "Baja datos de satélites polares (Copernicus Sentinel, EUMETSAT Metop, NOAA JPSS, Radarsat…) y los reenvía a Tromsø (KSAT) por el satélite; junto con SvalSat ve cada satélite polar dos veces por órbita."
+   "telemetria": "Baja datos de satélites polares (Copernicus Sentinel, EUMETSAT Metop, NOAA JPSS, Radarsat…) y los reenvía a Tromsø (KSAT) por el satélite; junto con SvalSat ve cada satélite polar dos veces por órbita.",
+   "cambios": "Antenas de banda Ka añadidas en los últimos años para los satélites Copernicus de nueva generación; se estudia reforzar el enlace a Europa.",
+   "local": "Fibra con la base Troll; el resto, satélite."
   },
   {
    "lon": -8.274,
@@ -152,7 +167,9 @@
    "programa": "Instituto Alfred Wegener (AWI)",
    "desde": 2009,
    "gente": "~50 en verano, 9 en invierno",
-   "telemetria": "Observatorios meteorológico, geofísico y de aire limpio: los datos salen por satélite hacia Bremerhaven (Alemania)."
+   "telemetria": "Observatorios meteorológico, geofísico y de aire limpio: los datos salen por satélite hacia Bremerhaven (Alemania).",
+   "cambios": "2024: pruebas de Starlink; el edificio se eleva cada año para seguir sobre la nieve acumulada.",
+   "local": "Red local; observatorios a 1–2 km unidos por cable."
   },
   {
    "lon": 123.333,
@@ -167,7 +184,9 @@
    "programa": "IPEV (Francia) y PNRA (Italia)",
    "desde": 2005,
    "gente": "~60 en verano, ~13 en invierno",
-   "telemetria": "Los datos de la ESA (estudios de aislamiento para vuelos espaciales), astronomía y glaciología salen por satélite en lotes."
+   "telemetria": "Los datos de la ESA (estudios de aislamiento para vuelos espaciales), astronomía y glaciología salen por satélite en lotes.",
+   "cambios": "Ancho de banda reforzado en los últimos años, pero sigue siendo de los más bajos del continente; la ESA la usa como análogo de misiones a Marte.",
+   "local": "Red local entre los dos cilindros de la base y los instrumentos del Domo C."
   },
   {
    "lon": 140.001,
@@ -182,7 +201,8 @@
    "programa": "IPEV (Francia)",
    "desde": 1956,
    "gente": "~90 en verano, ~25 en invierno",
-   "telemetria": "Por el VSAT; es la puerta logística de Concordia (la ruta terrestre de 1.100 km sale de aquí)."
+   "telemetria": "Por el VSAT; es la puerta logística de Concordia (la ruta terrestre de 1.100 km sale de aquí).",
+   "local": "Red local; enlace con la base de verano de Cap Prud'homme (5 km), inicio de la ruta a Concordia."
   },
   {
    "lon": 110.527,
@@ -197,7 +217,9 @@
    "programa": "Australian Antarctic Division (AAD)",
    "desde": 1969,
    "gente": "~150 en verano, ~20 en invierno",
-   "telemetria": "Por ANARESAT hacia Hobart (Tasmania)."
+   "telemetria": "Por ANARESAT hacia Hobart (Tasmania).",
+   "cambios": "Australia moderniza sus enlaces ANARESAT y prueba servicios de órbita baja en sus bases.",
+   "local": "Red local; enlace con la pista Wilkins (65 km) por radio."
   },
   {
    "lon": 77.969,
@@ -212,7 +234,8 @@
    "programa": "Australian Antarctic Division (AAD)",
    "desde": 1957,
    "gente": "~120 en verano, ~20 en invierno",
-   "telemetria": "Por ANARESAT hacia Hobart."
+   "telemetria": "Por ANARESAT hacia Hobart.",
+   "local": "Red local; el aeródromo previsto (pavimentado) se canceló en 2021."
   },
   {
    "lon": 62.873,
@@ -227,7 +250,8 @@
    "programa": "Australian Antarctic Division (AAD)",
    "desde": 1954,
    "gente": "~60 en verano, ~15 en invierno",
-   "telemetria": "Por ANARESAT hacia Hobart."
+   "telemetria": "Por ANARESAT hacia Hobart.",
+   "local": "Red local; aerogeneradores que cubren buena parte de la energía desde 2003."
   },
   {
    "lon": -56.627,
@@ -242,7 +266,9 @@
    "programa": "Dirección Nacional del Antártico / Fuerza Aérea Argentina",
    "desde": 1969,
    "gente": "~150 en verano, ~55 en invierno",
-   "telemetria": "Por ARSAT hacia Argentina; la pista de tierra permite vuelos todo el año desde Río Gallegos."
+   "telemetria": "Por ARSAT hacia Argentina; la pista de tierra permite vuelos todo el año desde Río Gallegos.",
+   "cambios": "Argentina estudia reforzar la conectividad de sus bases con ARSAT y órbita baja.",
+   "local": "Red local; radioenlaces con las bases vecinas de la península."
   },
   {
    "lon": -56.998,
@@ -257,7 +283,8 @@
    "programa": "Dirección Nacional del Antártico / Ejército Argentino",
    "desde": 1952,
    "gente": "~90 en verano (con familias), ~55 en invierno",
-   "telemetria": "Por ARSAT; tiene emisora de radio (LRA 36) y escuela."
+   "telemetria": "Por ARSAT; tiene emisora de radio (LRA 36) y escuela.",
+   "local": "Red local; enlace de radio con Marambio y con las bases vecinas; emisora LRA 36 Arcángel San Gabriel."
   },
   {
    "lon": -58.963,
@@ -272,7 +299,9 @@
    "programa": "Fuerza Aérea de Chile / INACH",
    "desde": 1969,
    "gente": "~150 en verano, ~80 en invierno (con familias)",
-   "telemetria": "Por satélite hacia Punta Arenas; con el cable propuesto saldría por fibra a Puerto Williams y la Fibra Óptica Austral."
+   "telemetria": "Por satélite hacia Punta Arenas; con el cable propuesto saldría por fibra a Puerto Williams y la Fibra Óptica Austral.",
+   "cambios": "2026: Subtel entrega el estudio de factibilidad del cable Chile–Antártida, con Frei como amarre principal.",
+   "local": "Red local Frei–Escudero–Villa Las Estrellas; radio con las bases vecinas de la isla Rey Jorge (Bellingshausen, Gran Muralla, King Sejong, Ferraz, Artigas, Arctowski, Carlini), todas a pocos kilómetros."
   },
   {
    "lon": -58.787,
@@ -287,7 +316,8 @@
    "programa": "Instituto Coreano de Investigación Polar (KOPRI)",
    "desde": 1988,
    "gente": "~70 en verano, ~17 en invierno",
-   "telemetria": "Por satélite hacia Corea."
+   "telemetria": "Por satélite hacia Corea.",
+   "local": "Red local; radio con las bases vecinas de la isla Rey Jorge."
   },
   {
    "lon": -58.963,
@@ -302,7 +332,8 @@
    "programa": "Administración Ártica y Antártica de China (CAA)",
    "desde": 1985,
    "gente": "~40 en verano, ~14 en invierno",
-   "telemetria": "Por satélite hacia China."
+   "telemetria": "Por satélite hacia China.",
+   "local": "Red local; radio con las bases vecinas (Frei a 2 km)."
   },
   {
    "lon": 76.377,
@@ -317,7 +348,9 @@
    "programa": "Administración Ártica y Antártica de China (CAA)",
    "desde": 1989,
    "gente": "~60 en verano, ~20 en invierno",
-   "telemetria": "Por satélite hacia China; apoyo de la ruta interior a la base Kunlun (Domo A)."
+   "telemetria": "Por satélite hacia China; apoyo de la ruta interior a la base Kunlun (Domo A).",
+   "cambios": "China amplía su red de estaciones (Qinling, 2024, en la isla Inexpressible) y sus enlaces de satélite propios.",
+   "local": "Enlace local con la base rusa Progress (1 km); estación BeiDou."
   },
   {
    "lon": 106.837,
@@ -332,7 +365,9 @@
    "programa": "Instituto de Investigación Ártica y Antártica (AARI, Rusia)",
    "desde": 1957,
    "gente": "~25 en verano, ~13 en invierno",
-   "telemetria": "Por satélite; nueva estación modular inaugurada en 2024."
+   "telemetria": "Por satélite; nueva estación modular inaugurada en 2024.",
+   "cambios": "2024: inaugurada la nueva estación modular, que sustituye a los edificios de 1957 enterrados por la nieve.",
+   "local": "Red local; se abastece por convoy terrestre desde Progress (1.400 km)."
   },
   {
    "lon": 76.389,
@@ -347,7 +382,8 @@
    "programa": "Instituto de Investigación Ártica y Antártica (AARI, Rusia)",
    "desde": 1988,
    "gente": "~80 en verano, ~30 en invierno",
-   "telemetria": "Por satélite hacia Rusia; base logística principal rusa (pista de nieve)."
+   "telemetria": "Por satélite hacia Rusia; base logística principal rusa (pista de nieve).",
+   "local": "Enlace local con Zhongshan (China) a 1 km; pista de nieve y convoyes a Vostok."
   },
   {
    "lon": 39.581,
@@ -362,7 +398,9 @@
    "programa": "Instituto Nacional de Investigación Polar (NIPR, Japón)",
    "desde": 1957,
    "gente": "~110 en verano, ~30 en invierno",
-   "telemetria": "Por Intelsat hacia Japón: datos del radar PANSY y de las auroras."
+   "telemetria": "Por Intelsat hacia Japón: datos del radar PANSY y de las auroras.",
+   "cambios": "Enlace Intelsat ampliado en los últimos años para el radar PANSY (el mayor radar atmosférico de la Antártida).",
+   "local": "Red local; enlaces con los observatorios cercanos."
   },
   {
    "lon": 11.733,
@@ -377,7 +415,9 @@
    "programa": "Centro Nacional de Investigación Polar y Oceánica (NCPOR, India)",
    "desde": 1989,
    "gente": "~65 en verano, ~25 en invierno",
-   "telemetria": "Por satélite hacia Goa."
+   "telemetria": "Por satélite hacia Goa.",
+   "cambios": "India construye Maitri II para sustituir a la base de 1989.",
+   "local": "Red local; radio con la base rusa Novolazarevskaya (5 km)."
   },
   {
    "lon": 76.188,
@@ -392,7 +432,8 @@
    "programa": "Centro Nacional de Investigación Polar y Oceánica (NCPOR, India)",
    "desde": 2012,
    "gente": "~70 en verano, ~25 en invierno",
-   "telemetria": "Por satélite hacia la India; AGEOS baja datos de los satélites polares indios cada vez que pasan."
+   "telemetria": "Por satélite hacia la India; AGEOS baja datos de los satélites polares indios cada vez que pasan.",
+   "local": "Enlace local con AGEOS (ISRO) y radio con Progress y Zhongshan (pocos kilómetros)."
   },
   {
    "lon": 166.768,
@@ -407,7 +448,9 @@
    "programa": "Antarctica New Zealand",
    "desde": 1957,
    "gente": "~85 en verano, ~11 en invierno",
-   "telemetria": "Por McMurdo hacia Nueva Zelanda; posible extensión del cable McMurdo–Nueva Zelanda que estudia la NSF."
+   "telemetria": "Por McMurdo hacia Nueva Zelanda; posible extensión del cable McMurdo–Nueva Zelanda que estudia la NSF.",
+   "cambios": "En reconstrucción total (nueva base prefabricada en Nueva Zelanda); Starlink en pruebas.",
+   "local": "Fibra y radio con McMurdo (3 km), por donde sale su tráfico."
   },
   {
    "lon": -2.842,
@@ -422,7 +465,8 @@
    "programa": "Programa Antártico Nacional de Sudáfrica (SANAP)",
    "desde": 1997,
    "gente": "~80 en verano, ~10 en invierno",
-   "telemetria": "Por satélite hacia Ciudad del Cabo; radar SuperDARN y observatorio geomagnético."
+   "telemetria": "Por satélite hacia Ciudad del Cabo; radar SuperDARN y observatorio geomagnético.",
+   "local": "Red local; radar SuperDARN junto a la base."
   },
   {
    "lon": -58.393,
@@ -437,7 +481,9 @@
    "programa": "Programa Antártico Brasileño (PROANTAR, Marina de Brasil)",
    "desde": 1984,
    "gente": "~60 en verano, ~20 en invierno",
-   "telemetria": "Por satélite hacia Brasil."
+   "telemetria": "Por satélite hacia Brasil.",
+   "cambios": "2020: base nueva tras el incendio de 2012.",
+   "local": "Red local; radio con las bases vecinas de la isla Rey Jorge."
   },
   {
    "lon": 15.39,
@@ -452,7 +498,9 @@
    "programa": "Kongsberg Satellite Services (KSAT)",
    "desde": 1997,
    "antenas": "Más de 100 antenas (hasta 13 m), la mayor concentración del mundo",
-   "telemetria": "Desde 78° N ve todos los satélites polares en cada órbita: Copernicus Sentinel, EUMETSAT Metop, NOAA, NASA, Galileo…; los datos salen por la fibra submarina hacia Tromsø y Europa."
+   "telemetria": "Desde 78° N ve todos los satélites polares en cada órbita: Copernicus Sentinel, EUMETSAT Metop, NOAA, NASA, Galileo…; los datos salen por la fibra submarina hacia Tromsø y Europa.",
+   "cambios": "Crece cada año (más de 100 antenas); el cable de Svalbard sufrió una rotura en enero de 2022 (un par reparado meses después) y Noruega estudia un tercer cable.",
+   "local": "Fibra con Longyearbyen y, por los dos cables submarinos, con Andøya y la red noruega; enlace con la estación de la ESA en Svalbard."
   },
   {
    "lon": 18.94,
@@ -467,7 +515,8 @@
    "programa": "Kongsberg Satellite Services (KSAT)",
    "desde": 1967,
    "antenas": "Varias antenas de banda S/X/Ka",
-   "telemetria": "Centro de operaciones de la red polar de KSAT: aquí llegan y se distribuyen los datos de SvalSat y TrollSat a las agencias espaciales."
+   "telemetria": "Centro de operaciones de la red polar de KSAT: aquí llegan y se distribuyen los datos de SvalSat y TrollSat a las agencias espaciales.",
+   "local": "Fibra con SvalSat (vía cables Svalbard) y satélite con TrollSat."
   },
   {
    "lon": -133.55,
@@ -482,7 +531,9 @@
    "programa": "Natural Resources Canada (NRCan), con DLR, SSC y Planet",
    "desde": 2010,
    "antenas": "Más de una decena de antenas (hasta 13 m) de Canadá, Alemania, Suecia y operadores privados",
-   "telemetria": "Baja datos de satélites polares (Radarsat, TerraSAR-X, Sentinel…) y los envía al sur por la fibra del valle del Mackenzie."
+   "telemetria": "Baja datos de satélites polares (Radarsat, TerraSAR-X, Sentinel…) y los envía al sur por la fibra del valle del Mackenzie.",
+   "cambios": "2017: la fibra del valle del Mackenzie sustituye al satélite para sacar los datos; nuevas antenas de SSC y DLR desde 2020.",
+   "local": "Fibra local entre las antenas y el centro de la estación; de ahí la fibra Mackenzie Valley hacia el sur."
   },
   {
    "lon": 21.06,
@@ -497,7 +548,9 @@
    "programa": "Swedish Space Corporation (SSC)",
    "desde": 1966,
    "antenas": "Más de 20 antenas (hasta 13 m), de SSC y de ESA",
-   "telemetria": "Datos de satélites polares y de misiones de ESA/NASA; también lanza cohetes sonda y globos estratosféricos."
+   "telemetria": "Datos de satélites polares y de misiones de ESA/NASA; también lanza cohetes sonda y globos estratosféricos.",
+   "cambios": "2023: inaugurada la nueva zona de lanzamiento orbital Spaceport Esrange.",
+   "local": "Fibra con Kiruna y la red sueca."
   },
   {
    "lon": -147.85,
@@ -512,7 +565,8 @@
    "programa": "Universidad de Alaska Fairbanks / NASA Near Space Network",
    "desde": 1991,
    "antenas": "Tres antenas de 11 m",
-   "telemetria": "Recibe datos de satélites polares (NASA, ESA Sentinel-1, JAXA…) y los distribuye como centro de datos de radar (SAR) de la NASA."
+   "telemetria": "Recibe datos de satélites polares (NASA, ESA Sentinel-1, JAXA…) y los distribuye como centro de datos de radar (SAR) de la NASA.",
+   "local": "Fibra del campus de la Universidad de Alaska; salida por la fibra de Alaska hacia los cables submarinos del Pacífico."
   },
   {
    "lon": 26.63,
@@ -527,7 +581,8 @@
    "programa": "Instituto Meteorológico Finlandés (FMI) y ESA",
    "desde": 2008,
    "antenas": "Varias antenas de banda S/X",
-   "telemetria": "Datos de satélites polares (NOAA, Metop, Sentinel) y centro de procesado de la ESA; también observatorio geofísico desde 1913."
+   "telemetria": "Datos de satélites polares (NOAA, Metop, Sentinel) y centro de procesado de la ESA; también observatorio geofísico desde 1913.",
+   "local": "Fibra con la red finlandesa (Funet)."
   }
  ]
 }
