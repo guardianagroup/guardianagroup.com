@@ -201,6 +201,8 @@
     'en lo que dura un parpadeo (unos 150 ms) tus datos van y vuelven de': ['in the time of a blink (about 150 ms) your data goes and comes back from', 'no tempo de um pestanejar (uns 150 ms) os teus dados vão e voltam de'],
     'de ellos': ['of them', 'deles'],
     'La otra cara del planeta': ['The other face of the planet', 'A outra face do planeta'],
+    'de media': ['on average', 'em média'],
+    'Por continente: los milisegundos de más sobre el mínimo físico, de media, hacia cada parte del mundo (destinos medidos, razón sobre el mínimo y tiempo medio).': ['By continent: the milliseconds over the physical minimum, on average, towards each part of the world (destinations measured, ratio over the minimum and average time).', 'Por continente: os milissegundos a mais sobre o mínimo físico, em média, para cada parte do mundo (destinos medidos, razão sobre o mínimo e tempo médio).'],
     'Se abre el cuadro de impresión: elige «Guardar como PDF».': ['The print dialog opens: choose "Save as PDF".', 'Abre-se a caixa de impressão: escolhe «Guardar como PDF».'],
     'tiempo medio sobre el mínimo físico': ['average time over the physical minimum', 'tempo médio sobre o mínimo físico'],
     'Conexiones medidas, trayectorias ilustrativas: el arco une origen y destino, no muestra por dónde fueron los paquetes.': ['Measured connections, illustrative paths: the arc joins origin and destination; it does not show where the packets went.', 'Ligações medidas, trajetórias ilustrativas: o arco une origem e destino, não mostra por onde foram os pacotes.'],

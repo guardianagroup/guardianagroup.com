@@ -89,15 +89,29 @@ ALIAS = {  # the same cable under different names (lower case, letters and digit
     'colombiafloridasubseafiber': 'cfx1', 'colombiafloridasubseafibercfx1': 'cfx1', 'colombiafloridaxpress': 'cfx1',
     'globalcaribbeannetwork': 'gcn', 'globalcaribbeannetworkgcn': 'gcn', 'surinameguyanasubmarinecablesystem': 'sgscs', 'surinameguyanasubmarinecablesystemsgscs': 'sgscs',
     'challengerbermuda1': 'cb1', 'challengerbermuda1cb1': 'cb1', 'cbuscaribbeanbermudaus': 'cbus', 'caribbeanbermudaus': 'cbus',
+    'europeindiagateway': 'eig', 'gulfbridgeinternational': 'gbi', 'gulfbridgeinternationalcablesystem': 'gbi', 'omanaustraliacable': 'oac',
     'akornalaskaoregonnetwork': 'akorn', 'alaskaoregonnetwork': 'akorn', 'quintillionsubseacable': 'quintillion', 'alaskaunitedaueastyauwest': 'alaskaunited',
 }
 
+# words that say what the thing is, not which one it is: «KetchCan1» and «KetchCan1 Submarine Fiber Cable System» are the same cable
+GENERICAS = re.compile(r'\b(?:submarine|submarino|submarina|subsea|undersea|cable|cables|system|sistema|fiber|fibre|fibra|optic|optica|óptica|project|proyecto|network|domestic|doméstico|domestica|secciones|operativas|slt)\b', re.I)
+compacta = lambda x: re.sub(r'[^a-z0-9]', '', (x or '').lower())
+def generica(k):
+    """The same stripping on a compact key (for the alias targets, which have no word boundaries)."""
+    for w in ('submarine', 'subsea', 'cablesystem', 'fibersystem', 'cable', 'system', 'fiber', 'fibre', 'network', 'project', 'domestic'):
+        k = k.replace(w, '')
+    return k
+
 def clave(n):
     b = re.sub(r'\s*\(.*?\)\s*', ' ', n or '')  # «GLO-1 (Globacom-1)» → the part outside the brackets and the part inside
-    k = re.sub(r'[^a-z0-9]', '', base_cable(b).lower())
-    k2 = re.sub(r'[^a-z0-9]', '', (n or '').lower())
+    k = compacta(base_cable(b))
+    k2 = compacta(n)
     for c in (k2, k):
-        if c in ALIAS: return ALIAS[c]
+        if c in ALIAS: return generica(ALIAS[c]) or ALIAS[c]
+    k3 = compacta(GENERICAS.sub(' ', base_cable(b)))
+    if len(k3) >= 3:
+        if k3 in ALIAS: return generica(ALIAS[k3]) or ALIAS[k3]
+        return k3
     return ALIAS.get(k, k)
 
 # ---------- water mask ----------

@@ -465,6 +465,10 @@ def puntos():
 (
   nwr["telecom"="cable_landing_station"];
   nwr["telecom"="data_center"];
+  nwr["building"="data_center"];
+  nwr["office"="data_center"];
+  nwr["industrial"="data_center"];
+  nwr["man_made"="data_center"];
   nwr["telecom"="internet_exchange"];
 );
 out tags center;''')
@@ -478,10 +482,12 @@ out tags center;''')
         if not c or any(k in t for k in ('disused', 'abandoned', 'removed', 'razed', 'end_date')):
             continue
         tipo = 'aterrizaje' if t.get('telecom') == 'cable_landing_station' else 'intercambio' if t.get('telecom') == 'internet_exchange' else 'datos'
-        clave = (tipo, round(c['lon'], 3), round(c['lat'], 3))
-        if clave in vistos:
+        # the same building can be a node (telecom=data_center) and an outline (building=data_center): one entry
+        nombre = (t.get('name') or t.get('name:en') or '').strip().lower()
+        claves = [(tipo, round(c['lon'], 3), round(c['lat'], 3))] + ([(tipo, nombre, round(c['lon'], 2), round(c['lat'], 2))] if nombre else [])
+        if any(k in vistos for k in claves):
             continue
-        vistos.add(clave); cuenta[tipo] += 1
+        vistos.update(claves); cuenta[tipo] += 1
         out.append([round(c['lon'], 3), round(c['lat'], 3), tipo, t.get('name') or t.get('name:en') or '', t.get('operator', '')])
         # 22 Oct 2026 (owner: «de los centros de datos, quiero saberlo todo: dueño, año, tecnologías…»): every tag
         # OpenStreetMap has that says something real about the building, kept as written there
