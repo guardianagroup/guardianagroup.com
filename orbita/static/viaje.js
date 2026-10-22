@@ -34,8 +34,20 @@
   }
 
   // ---------- drawing on the planet (in «solo tú» mode) ----------
+  // 22 Oct 2026, 18:13 (owner): the data travel along the map's cables and fibre, not over the planet from city to city.
+  // conexion.js finds the way through the network (and the satellite leg when the operator is one); the great circle
+  // remains only where the map has no way. «alza» lifts the whole trayecto a little for the flight camera.
   function arcoPantalla(p, G, a, b, n, alza) {
-    const va = vec(a.lon, a.lat), vb = vec(b.lon, b.lat), pts = [];
+    const CN = window.OrbitaConexion, c = CN && CN.trayecto ? CN.trayecto(p, a, b, n) : null, pts = [];
+    if (c) {
+      for (let i = 0; i <= n; i++) {
+        const t = i / n; let h = 1.004 + (alza || 0) * Math.sin(Math.PI * t);
+        if (c.alza && i <= c.alza.hasta) { const s = i / c.alza.hasta; h = Math.max(h, 1.004 + (c.alza.alto - 1.004) * Math.sin(s * Math.PI)); }
+        const w = c.w[i], v = p.aVista([w[0] * h, w[1] * h, w[2] * h]); pts.push(v[2] > 0.02 || h > 1.05 ? [G.CX + G.R * v[0], G.CY - G.R * v[1]] : null);
+      }
+      pts.red = c.red; pts.satelite = !!c.alza; return pts;
+    }
+    const va = vec(a.lon, a.lat), vb = vec(b.lon, b.lat);
     for (let i = 0; i <= n; i++) { const t = i / n, w = slerp(va, vb, t), h = 1.004 + (alza || 0) * Math.sin(Math.PI * t); const v = p.aVista([w[0] * h, w[1] * h, w[2] * h]); pts.push(v[2] > 0.02 ? [G.CX + G.R * v[0], G.CY - G.R * v[1]] : null); }
     return pts;
   }
@@ -148,12 +160,14 @@
   }
   function empieza(rutas) {
     const r = rutas || (C() && C().datos.rutas); if (!r || !r.nubes || !r.nubes.length || !r.origen || !P()) return;
+    // the map's network first, so the journey travels along the cables from its first frame (a few hundred ms at most)
+    if (window.OrbitaRed && !window.OrbitaRed.lista && !empieza.intentado) { empieza.intentado = true; window.OrbitaRed.prepara().then(() => empieza(rutas)); return; }
     const h = hud(); h.hidden = false; h.classList.remove('final'); h.querySelector('.fin').hidden = true; h.querySelector('.centro').style.opacity = '0';
     document.body.classList.add('viaje');
     V = { rutas: r, paradas: paradas(r), porKm: r.nubes.slice().sort((a, b) => a.km - b.km), hechas: [], actual: null, fase: 'intro', progreso: 0, t0: performance.now(), salta: false, cam: null };
     if (window.OrbitaCapas) window.OrbitaCapas.soloTu(true, pintaViaje);
     const hora = new Date(r.fin || r.cuando || Date.now()).toLocaleTimeString(loc(), { hour: '2-digit', minute: '2-digit' });
-    h.querySelector('.sub').textContent = T('Medido ahora desde') + ' ' + r.origen.nombre + ' · ' + hora + (r.borde ? ' · ' + T('borde') + ': ' + r.borde.nombre : '') + ' · ' + T('conexiones medidas, trayectorias ilustrativas');
+    h.querySelector('.sub').textContent = T('Medido ahora desde') + ' ' + r.origen.nombre + ' · ' + hora + (r.borde ? ' · ' + T('borde') + ': ' + r.borde.nombre : '') + ' · ' + (window.OrbitaRed && window.OrbitaRed.lista ? T('conexiones medidas, trayectos por los cables del mapa') : T('conexiones medidas, trayectorias ilustrativas'));
     camara(r.origen.lon, r.origen.lat, 1.7, 1600);
     h.querySelector('.video').hidden = true;
     if (!esTactil()) empiezaGrabacion();
@@ -243,9 +257,11 @@
       for (const l of lineas) linea(l);
       const arco = (n, fuerte) => {
         const va = vec(L.lon, L.lat), vb = vec(n.lon, n.lat), N = 80, ps = [];
-        for (let i = 0; i <= N; i++) { const w = slerp(va, vb, i / N); ps.push([Math.atan2(w[0], w[2]) / RAD, Math.asin(Math.max(-1, Math.min(1, w[1]))) / RAD]); }
+        // the same trayecto as on the planet: along the map's network when there is a way (then flat on the sphere)
+        const CN = window.OrbitaConexion, c = CN && CN.trayecto ? CN.trayecto(window.OrbitaPlaneta, L, n, N) : null, porRed = !!(c && c.red);
+        for (let i = 0; i <= N; i++) { const w = porRed ? c.w[i] : slerp(va, vb, i / N); ps.push([Math.atan2(w[0], w[2]) / RAD, Math.asin(Math.max(-1, Math.min(1, w[1]))) / RAD]); }
         cx.strokeStyle = fuerte ? 'rgba(' + BLANCO + ',.95)' : 'rgba(' + ACENTO + ',.32)'; cx.lineWidth = fuerte ? (grande ? 1.8 : 1.3) : 0.8; if (fuerte) { cx.shadowColor = 'rgba(' + ACENTO + ',.9)'; cx.shadowBlur = 10; }
-        linea(ps, (i) => (fuerte ? 0.16 : 0.07) * Math.sin(Math.PI * i / N)); cx.shadowBlur = 0;
+        linea(ps, (i) => porRed ? (c.alza && i <= c.alza.hasta ? (c.alza.alto - 1) * Math.sin(Math.PI * i / c.alza.hasta) : 0.004) : (fuerte ? 0.16 : 0.07) * Math.sin(Math.PI * i / N)); cx.shadowBlur = 0;
       };
       for (const n of r.nubes) if (!paradasV.includes(n)) arco(n, false);
       for (const n of paradasV) arco(n, true);
@@ -332,6 +348,7 @@
   }
   async function informe(rutas) {
     const r = rutas || (C() && C().datos.rutas); if (!r || !r.nubes || !r.nubes.length || !r.origen) return;
+    if (window.OrbitaRed && !window.OrbitaRed.lista) await window.OrbitaRed.prepara();
     const lineas = await fronteras(), paradasV = paradas(r), fuera = C() && C().datos.fuera;
     let a = $('informe'); if (a) a.remove();
     a = document.createElement('article'); a.id = 'informe'; a.className = 'informe'; a.setAttribute('aria-label', T('El viaje de tus datos'));
@@ -342,7 +359,7 @@
     const cab = el('div', 'cab'); // not a <header>: the page's own header rule would fix it to the top cab.append(el('p', 'k', 'GUARDIANA · ÓRBITA'), el('h1', 't', T('El viaje de tus datos')), el('p', 's', r.origen.nombre + (r.origen.aprox ? ' (' + T('aproximada') + ')' : '') + (fuera && !fuera.error && fuera.operador ? ' · ' + fuera.operador : '') + ' · ' + cuando.toLocaleDateString(loc(), { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + cuando.toLocaleTimeString(loc(), { hour: '2-digit', minute: '2-digit' }) + (r.borde ? ' · ' + T('borde de internet más cercano') + ': ' + r.borde.nombre + (r.borde.ms != null ? ' (' + r.borde.ms + ' ms)' : '') : '')));
     const acc = el('div', 'acciones'); const bPdf = el('button', '', T('Guardar PDF')); bPdf.type = 'button'; const bX = el('button', '', T('Cerrar')); bX.type = 'button'; acc.append(bPdf, bX, el('small', '', T('Se abre el cuadro de impresión: elige «Guardar como PDF».'))); cab.append(acc);
     a.append(cab);
-    const f1 = el('figure'); f1.append(figuraGlobo(r, lineas, paradasV)); f1.append(el('figcaption', '', T('Tu planeta: cada arco es un camino medido desde tu equipo; los brillantes, el más rápido de cada continente.') + ' ' + T('Conexiones medidas, trayectorias ilustrativas: el arco une origen y destino, no muestra por dónde fueron los paquetes.'))); a.append(f1);
+    const f1 = el('figure'); f1.append(figuraGlobo(r, lineas, paradasV)); f1.append(el('figcaption', '', T('Tu planeta: cada línea es un camino medido desde tu equipo; las brillantes, el más rápido de cada continente.') + ' ' + (window.OrbitaRed && window.OrbitaRed.lista ? T('Cada trayecto va por los cables submarinos y la fibra terrestre del mapa, por el camino más corto entre ellos. El cable exacto que usaron tus datos no se conoce desde fuera de la red.') : T('Conexiones medidas, trayectorias ilustrativas: el arco une origen y destino, no muestra por dónde fueron los paquetes.')))); a.append(f1);
     const cifras = el('section', 'cifras');
     const dato = (v, k) => { const d = el('div'); d.append(el('b', '', v), el('span', '', k)); return d; };
     cifras.append(dato(num(orden.length), T('destinos medidos')), dato(mejor.ms + ' ms', T('el más rápido') + ': ' + mejor.nombre.replace(/ \(.*\)/, '')), dato(num(Math.round(peor.km)) + ' km', T('el más lejano') + ': ' + peor.nombre.replace(/ \(.*\)/, '')), dato('×' + num(orden.reduce((s, n) => s + n.ms / n.minimo, 0) / orden.length, 1), T('tiempo medio sobre el mínimo físico')));

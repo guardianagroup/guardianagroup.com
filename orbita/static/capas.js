@@ -1534,6 +1534,14 @@
   }
   let soloTu = false, soloTuPinta = null;
   function ponSoloTu(on, dibuja) { soloTu = !!on; soloTuPinta = on ? dibuja || null : null; document.body.classList.toggle('solo-tu', soloTu); if (soloTu) { cierraLista(); muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; } pintaNota(); pintaVista(); }
-  window.OrbitaCapas = { pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; } };
+  window.OrbitaCapas = { pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; },
+    // the map's network as lines of unit vectors, for the routes that travel along it (red.js)
+    get red() { return { sub: capas.sub && capas.sub.lineas, tierra: capas.tierra && capas.tierra.lineas, fibra: FT && FT.lineas }; },
+    // loads the whole network (whether or not its layers are shown) and resolves when it is there
+    cargaRed() {
+      cargaCables('sub'); cargaFibra(); // the land-cable layer has no file yet (indice.json), so it is not asked for
+      const listo = () => capas.sub && FT;
+      return new Promise((ok) => { const mira = () => listo() ? ok(this.red) : setTimeout(mira, 120); mira(); });
+    } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arranca); else arranca();
 })();

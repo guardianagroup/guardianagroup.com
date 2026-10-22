@@ -54,7 +54,7 @@
     if (midiendo) return;
     const P = window.OrbitaPlaneta, L = P && P.lugar;
     if (!L) { rutas = { sinLugar: true }; pinta(); return; }
-    midiendo = true; rutas = { origen: L, nubes: [], borde: null, hechas: 0, total: NUBES.length + 1, cuando: Date.now() }; pinta();
+    midiendo = true; rutas = { origen: L, nubes: [], borde: null, hechas: 0, total: NUBES.length + 1, cuando: Date.now() }; CAMINOS.clear(); preparaRed(); pinta();
     // the nearest edge of the internet (Cloudflare names its site by airport code), then its round trip
     try {
       const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 6000);
@@ -185,7 +185,7 @@
     if (dl.children.length) s.append(dl);
     const p = document.createElement('p'); p.className = 'nota';
     p.textContent = rutas && rutas.nubes && rutas.nubes.length
-      ? T('Ida y vuelta medida ahora desde este navegador hasta la puerta pública de cada centro de datos. «Mínimo» es lo que tardaría la luz por la fibra en línea recta: lo que sobra es el camino real de tus datos (cables que no van rectos, saltos entre redes). En el planeta, los tres más rápidos brillan más; el pulso recorre cada arco a cámara lenta, 20 veces más despacio que tus datos.')
+      ? T('Ida y vuelta medida ahora desde este navegador hasta la puerta pública de cada centro de datos. «Mínimo» es lo que tardaría la luz por la fibra en línea recta: lo que sobra es el camino real de tus datos (cables que no van rectos, saltos entre redes). En el planeta, los tres más rápidos brillan más; el pulso recorre cada trayecto a cámara lenta, 20 veces más despacio que tus datos.') + ' ' + (window.OrbitaRed && window.OrbitaRed.lista ? T('Cada trayecto va por los cables submarinos y la fibra terrestre del mapa, por el camino más corto entre ellos: así viajan tus datos. El cable exacto que usó tu conexión no se conoce desde fuera de la red; donde el mapa no tiene camino, se dibuja el arco directo.') : T('Cargando la red del mapa para dibujar los trayectos por los cables…')) + (porSatelite() ? ' ' + T('Tu operador es de satélite: el primer tramo sube al satélite y baja a la red en tierra.') : '')
       : T('Se mide desde este navegador: una petición mínima a la puerta pública de 33 centros de datos de nube (Amazon Web Services) y al borde de red más cercano (Cloudflare), solo cuando tú pulsas. No se envía nada tuyo. La ruta salto a salto solo puede medirla el programa GUARDIANA, y Órbita la dibuja igual.');
     s.append(p);
     const b = document.createElement('button'); b.type = 'button'; b.className = 'medir'; b.disabled = midiendo; b.textContent = midiendo ? T('Midiendo…') : rutas && rutas.nubes && rutas.nubes.length ? T('Volver a medir') : T('Medir rutas'); b.addEventListener('click', mideRutas); s.append(b);
@@ -236,6 +236,43 @@
     return pts;
   }
   function traza(cx, pts) { let prev = false; cx.beginPath(); for (const q of pts) { if (q && prev) cx.lineTo(q[0], q[1]); else if (q) cx.moveTo(q[0], q[1]); prev = !!q; } cx.stroke(); }
+  // 22 Oct 2026, 18:13 (owner): «deben de llegar por el cable… es mucho más real». The route between two places is
+  // drawn along the submarine cables and the land fibre of the map (red.js finds the shortest way through them); the
+  // straight arc remains only where the map has no way. The exact cable a packet took is not known from outside the
+  // network, and the panel says so. When the operator is a satellite one, the first leg goes up to the satellite.
+  const SATELITE = /starlink|viasat|hughes|hughesnet|oneweb|eutelsat|skydsl|bigblu|konnect|telesat|iridium|inmarsat|ses\b|satel/i;
+  const porSatelite = () => !!(fuera && !fuera.error && SATELITE.test(String(fuera.operador || '') + ' ' + String(fuera.red || '')));
+  const CAMINOS = new Map();
+  // unit vectors from a to b: along the network when there is a way, the great circle otherwise; cached by place pair
+  function trayecto(p, a, b, n) {
+    const key = a.lon.toFixed(2) + ',' + a.lat.toFixed(2) + '>' + b.lon.toFixed(2) + ',' + b.lat.toFixed(2) + '#' + n + (porSatelite() ? 's' : '');
+    let c = CAMINOS.get(key); if (c) return c;
+    const R = window.OrbitaRed, ruta = R && R.lista ? R.camino(a, b) : null;
+    let w;
+    if (ruta) w = R.muestrea(ruta, n);
+    else { const va = p.vec(a.lon, a.lat), vb = p.vec(b.lon, b.lat); const d = Math.max(-1, Math.min(1, va[0] * vb[0] + va[1] * vb[1] + va[2] * vb[2])), om = Math.acos(d), so = Math.sin(om) || 1e-9; w = []; for (let i = 0; i <= n; i++) { const t = i / n, ka = Math.sin((1 - t) * om) / so, kb = Math.sin(t * om) / so; w.push([va[0] * ka + vb[0] * kb, va[1] * ka + vb[1] * kb, va[2] * ka + vb[2] * kb]); } }
+    let alza = null;
+    if (porSatelite() && ruta) {
+      // the first leg climbs to the satellite above the start of the path (low orbit drawn at scale: about 550 km up;
+      // a geostationary one would be six planet radii away, so it is drawn nearer and the panel says «no a escala»)
+      const geo = /viasat|hughes|eutelsat|skydsl|bigblu|konnect|inmarsat|ses\b/i.test(String(fuera.operador || ''));
+      alza = { hasta: Math.max(2, Math.round(n * 0.12)), alto: geo ? 1.35 : 1.09, geo };
+    }
+    c = { w, red: !!ruta, km: ruta ? ruta.km : null, alza }; CAMINOS.set(key, c); return c;
+  }
+  // the screen points of a trayecto (null where it goes behind the planet); the satellite leg is lifted
+  function pantalla(p, G, c) {
+    const out = [], n = c.w.length - 1;
+    for (let i = 0; i <= n; i++) {
+      let h = 1.004;
+      if (c.alza && i <= c.alza.hasta) { const s = i / c.alza.hasta; h = 1.004 + (c.alza.alto - 1.004) * Math.sin(s * Math.PI); }
+      const w = c.w[i], v = p.aVista([w[0] * h, w[1] * h, w[2] * h]);
+      out.push(v[2] > 0.02 || h > 1.05 ? [G.CX + G.R * v[0], G.CY - G.R * v[1]] : null);
+    }
+    return out;
+  }
+  const camino = (p, G, a, b, n) => pantalla(p, G, trayecto(p, a, b, n));
+  const preparaRed = () => { if (window.OrbitaRed && !window.OrbitaRed.lista) window.OrbitaRed.prepara().then((si) => { if (si) { CAMINOS.clear(); if (abierto) pinta(); } }); };
   // labels never pile up: each one takes its box; a later label that would overlap is left out (the dot stays).
   // The fastest clouds come first in the list, so they keep their name when Europe gets crowded.
   let cajas = [];
@@ -261,19 +298,21 @@
     if (rutas && rutas.nubes && rutas.nubes.length && L) {
       const mejor = rutas.nubes[0].ms || 1;
       rutas.nubes.forEach((n, i) => {
-        const pts = arco(p, G, L, n, 72), top = i < 3, k = Math.max(0, Math.min(1, 1 - (n.ms - mejor) / (6 * mejor)));
+        const c = trayecto(p, L, n, 96), pts = pantalla(p, G, c), top = i < 3, k = Math.max(0, Math.min(1, 1 - (n.ms - mejor) / (6 * mejor)));
         cx.strokeStyle = top ? 'rgba(156,195,228,.85)' : 'rgba(244,246,248,' + (0.18 + 0.3 * k).toFixed(2) + ')'; cx.lineWidth = top ? 1.5 : 0.9; traza(cx, pts);
         const f = (((t || 0) - (n.t0 || 0)) / (n.ms * 20)) % 1, q = pts[Math.round(f * (pts.length - 1))];
         if (q) { cx.fillStyle = top ? '#9CC3E4' : 'rgba(244,246,248,.8)'; cx.beginPath(); cx.arc(q[0], q[1], top ? 2.6 : 1.8, 0, 7); cx.fill(); }
+        // the satellite the first leg climbs to, named once (on the fastest route)
+        if (c.alza && i === 0) { const s = pts[Math.round(c.alza.hasta / 2)]; if (s) { cx.fillStyle = '#F4F6F8'; cx.beginPath(); cx.arc(s[0], s[1], 2.4, 0, 7); cx.fill(); cx.strokeStyle = 'rgba(244,246,248,.6)'; cx.lineWidth = 1; cx.beginPath(); cx.arc(s[0], s[1], 6, 0, 7); cx.stroke(); cx.font = '400 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle'; cx.fillStyle = 'rgba(232,236,241,.85)'; cx.fillText((T('satélite') + ' · ' + (fuera.operador || '') + (c.alza.geo ? ' · ' + T('no a escala') : '')).toUpperCase(), s[0] + 9, s[1] - 8); } }
         marca(cx, p, G, n.lon, n.lat, n.nombre + ' · ' + n.ms + ' ms', t, top);
       });
-      if (rutas.borde && Number.isFinite(rutas.borde.lat)) { cx.setLineDash([3, 4]); cx.strokeStyle = 'rgba(156,195,228,.6)'; cx.lineWidth = 1; traza(cx, arco(p, G, L, rutas.borde, 24)); cx.setLineDash([]); marca(cx, p, G, rutas.borde.lon, rutas.borde.lat, T('borde') + ' · ' + rutas.borde.nombre + (rutas.borde.ms != null ? ' · ' + rutas.borde.ms + ' ms' : ''), t, false, true); }
+      if (rutas.borde && Number.isFinite(rutas.borde.lat)) { cx.setLineDash([3, 4]); cx.strokeStyle = 'rgba(156,195,228,.6)'; cx.lineWidth = 1; traza(cx, camino(p, G, L, rutas.borde, 48)); cx.setLineDash([]); marca(cx, p, G, rutas.borde.lon, rutas.borde.lat, T('borde') + ' · ' + rutas.borde.nombre + (rutas.borde.ms != null ? ' · ' + rutas.borde.ms + ' ms' : ''), t, false, true); }
     }
     // the real route from the program: hop by hop, numbered
     if (rutaReal && rutaReal.saltos.length) {
       const hs = rutaReal.saltos; let prev = L;
       cx.strokeStyle = 'rgba(244,246,248,.9)'; cx.lineWidth = 1.6;
-      for (const h of hs) { if (prev) traza(cx, arco(p, G, prev, h, 48)); prev = h; }
+      for (const h of hs) { if (prev) traza(cx, camino(p, G, prev, h, 64)); prev = h; }
       hs.forEach((h, i) => marca(cx, p, G, h.lon, h.lat, (h.n || i + 1) + ' · ' + (h.nombre || h.ip || '') + (Number.isFinite(h.ms) ? ' · ' + num(h.ms) + ' ms' : ''), t, i === hs.length - 1));
     }
     cx.restore();
@@ -282,7 +321,7 @@
     abierto = si; panel.hidden = !si; boton.setAttribute('aria-pressed', si ? 'true' : 'false');
     guarda(si ? 'ver' : 'no');
     if (window.OrbitaCapas && window.OrbitaCapas.soloTu) window.OrbitaCapas.soloTu(si, pintaMio);
-    if (si) { pinta(); if (ping == null) latencia().then((ms) => { ping = ms; if (abierto) pinta(); }); }
+    if (si) { preparaRed(); pinta(); if (ping == null) latencia().then((ms) => { ping = ms; if (abierto) pinta(); }); }
   }
   function monta() {
     const der = document.querySelector('header .derecha'); if (!der) return;
@@ -299,5 +338,5 @@
     window.addEventListener('guardiana-idioma', () => { boton.querySelector('span').textContent = T('Ver mi conexión'); panel.querySelector('.titulo > span').textContent = T('Mi conexión'); panel.querySelector('.ver').textContent = T('Ver'); panel.querySelector('.nover').textContent = T('No ver'); panel.querySelector('.pie').textContent = T('Son tus datos y de nadie más. Nada se guarda fuera de este equipo.'); if (abierto) pinta(); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', monta); else monta();
-  window.OrbitaConexion = { abre, ruta, medirRutas: mideRutas, get datos() { return { local: filasLocales(), fuera: fuera, ping, rutas, rutaReal }; } };
+  window.OrbitaConexion = { abre, ruta, medirRutas: mideRutas, trayecto, porSatelite, get datos() { return { local: filasLocales(), fuera: fuera, ping, rutas, rutaReal }; } };
 })();

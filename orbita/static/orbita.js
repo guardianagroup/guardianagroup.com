@@ -346,7 +346,10 @@
   }
   const libreZoom = () => !dentro && caja.hidden;
   addEventListener('wheel', (e) => {
-    if (!libreZoom() || e.target.closest('#directo, #lugar, #seccion, header, #puertas')) return;
+    // 22 Oct 2026, 18:16 (owner): with a panel open in front of the planet, the wheel moves the panel, not the planet.
+    // The wheel zooms only when it is over the planet itself (a canvas or the bare page), never over any UI element.
+    const t = e.target;
+    if (!libreZoom() || !(t === cvT || (t.tagName === 'CANVAS') || t === document.body || t === document.documentElement)) return;
     e.preventDefault();
     acerca(ZOOM.zt * Math.exp(-e.deltaY * (e.deltaMode ? 0.05 : 0.0016)), e.clientX, e.clientY);
   }, { passive: false });
