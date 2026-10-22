@@ -2282,7 +2282,8 @@ if(btn) btn.addEventListener('click',async()=>{
       const ow = h.style.overflowWrap, hy = h.style.hyphens, wh = h.style.webkitHyphens;
       h.style.overflowWrap = 'normal'; h.style.hyphens = 'manual'; h.style.webkitHyphens = 'manual';
       let f = base, n = 0;
-      while (h.scrollWidth > W + 1 && n < 8) { if (!n && mw !== 'none') h.style.maxWidth = mw; f *= 0.94; h.style.fontSize = f.toFixed(1) + 'px'; n++; }
+      while (h.scrollWidth > W + 1 && f * 0.94 >= base * 0.7) { // never below 70 %: past that a long word may break (Tamil, Telugu)
+        if (!n && mw !== 'none') h.style.maxWidth = mw; f *= 0.94; h.style.fontSize = f.toFixed(1) + 'px'; n++; }
       h.style.overflowWrap = ow; h.style.hyphens = hy; h.style.webkitHyphens = wh;
     }
   }
