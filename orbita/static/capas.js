@@ -120,9 +120,10 @@
   function posiciones(p, G) {
     const z = G.R / (G.R0 || G.R), pos = new Map();
     if (!PT || !PT.p) return pos;
-    const grupos = new Map();
+    const grupos = new Map(), F = CAMPO || campo(p, G), fd = F.d, fc = F.cosP;
     for (let i = 0; i < PT.p.length; i++) {
       const q = PT.p[i]; if (q.t === 'aterrizaje') continue;
+      if (!F.todo) { const w = q.w; if (w[0] * fd[0] + w[1] * fd[1] + w[2] * fd[2] < fc) continue; } // off the visible cap: not even projected
       const v = p.aVista(q.w); if (v[2] <= 0.02) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1]; if (x < -60 || y < -60 || x > G.W + 60 || y > G.H + 60) continue;
       pos.set(i, [x, y, 0, 0]);
@@ -142,13 +143,13 @@
     // the spokes of the fans, under the marks
     if (z >= 60) { cx.save(); cx.globalCompositeOperation = 'source-over'; cx.strokeStyle = `rgba(${L ? BLANCO : ACERO},.35)`; cx.lineWidth = 0.8; cx.beginPath(); for (const [, q] of ABANICO) { if (q[2] || q[3]) { cx.moveTo(q[2], q[3]); cx.lineTo(q[0], q[1]); } } cx.stroke(); cx.restore(); }
     const sd = Math.max(1.5, Math.min(4, 1 + z * 0.22)); // data-centre squares grow a little with the zoom (owner: «que se separen bien»)
-    const anillo = Math.max(0, Math.min(1, (z - 1.5) / 1.5)), anillos = [];
+    const anillo = Math.max(0, Math.min(1, (z - 1.5) / 1.5)), anillos = [], F = CAMPO || campo(p, G), fd = F.d, fc = F.cosP;
     for (let k = 0; k < 3; k++) {
       cx.beginPath();
       for (let qi = 0; qi < PT.p.length; qi++) {
         const q = PT.p[qi]; if (forma[q.t] !== k) continue;
         let x, y; const ab = k ? ABANICO.get(qi) : null;
-        if (ab) { x = ab[0]; y = ab[1]; } else { const v = p.aVista(q.w); if (v[2] <= 0.02) continue; x = G.CX + G.R * v[0]; y = G.CY - G.R * v[1]; }
+        if (ab) { x = ab[0]; y = ab[1]; } else { if (k) continue; const w = q.w; if (!F.todo && w[0] * fd[0] + w[1] * fd[1] + w[2] * fd[2] < fc) continue; const v = p.aVista(w); if (v[2] <= 0.02) continue; x = G.CX + G.R * v[0]; y = G.CY - G.R * v[1]; }
         if (k === 0) { cx.moveTo(x, y - 2.6); cx.lineTo(x + 2.6, y); cx.lineTo(x, y + 2.6); cx.lineTo(x - 2.6, y); cx.closePath(); }
         else if (k === 1) { cx.rect(x - sd, y - sd, 2 * sd, 2 * sd); if (anillo) anillos.push(x, y); }
         else { cx.moveTo(x + 2.8, y); cx.arc(x, y, 2.8, 0, 7); }
@@ -174,9 +175,11 @@
     if (!EXTREMOS_VISTOS) EXTREMOS_VISTOS = new Set();
     const r = 4.5 + Math.min(2.5, (z - 4) / 40);
     cx.save(); cx.globalCompositeOperation = 'source-over'; cx.lineWidth = 0.9;
+    const F = CAMPO || campo(p, G), fd = F.d, fc = F.cosP;
     for (const l of lineas) {
       const w = l.w; if (!w || w.length < 2) continue;
       for (const q of [w[0], w[w.length - 1]]) {
+        if (!F.todo && q[0] * fd[0] + q[1] * fd[1] + q[2] * fd[2] < fc) continue;
         const v = p.aVista(q); if (v[2] <= 0.05) continue;
         const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1]; if (x < -10 || y < -10 || x > G.W + 10 || y > G.H + 10) continue;
         const key = Math.round(x / 2) + ':' + Math.round(y / 2); if (EXTREMOS_VISTOS.has(key)) continue; EXTREMOS_VISTOS.add(key);
@@ -281,14 +284,11 @@
       cx.strokeStyle = rango === 2 && !obra ? `rgba(${BLANCO},${(alfa * 0.95).toFixed(2)})` : `rgba(${ACERO},${alfa.toFixed(2)})`; cx.lineWidth = rango === 2 ? base + 0.5 + 0.5 * kq : rango === 1 ? base : Math.max(0.7, base - 0.25);
       cx.setLineDash(obra ? [3, 3] : []);
       cx.beginPath();
+      const F = CAMPO || campo(p, G);
       for (const l of lineas) {
         if (!!l.x.obra !== obra || rangoFibra(l) !== rango) continue;
-        let prev = false;
-        for (const w of l.w) {
-          const v = p.aVista(w), x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], ve = v[2] > 0.02;
-          if (ve && prev) cx.lineTo(x, y); else if (ve) cx.moveTo(x, y);
-          prev = ve;
-        }
+        if (!F.todo) { capsDe(l); if (!veCap(F, l.cap)) continue; }
+        trazoW(cx, p, G, l.w, 0, l.w.length - 1);
       }
       cx.stroke();
     }
@@ -481,7 +481,7 @@
   // ---------- drawing ----------
   function pinta(t) {
     const p = P(); if (!p) return;
-    const cx = p.ctx, G = p.geo; EXTREMOS_VISTOS = null;
+    const cx = p.ctx, G = p.geo; EXTREMOS_VISTOS = null; CAMPO = campo(p, G);
     pintaFronteras(cx, p, G); if (soloTu && document.body.classList.contains('viaje')) PAIS_CAJAS = []; else pintaPaises(cx, p, G); // the journey wants a clean planet
     // «Mi conexión» (owner, 22 Oct 2026): while the visitor looks at their own data the planet shows only that —
     // no cables, no satellites, nothing that is not theirs — so there is no doubt about what is whose.
@@ -545,10 +545,11 @@
       const h = tam[c] / 2;
       // many short land links (Topology Zoo gives thousands): skip the lights on the lines facing away and keep
       // the pulse count bounded, so the planet stays smooth on a modest computer
-      const salto = lineas.length > 2500 ? Math.ceil(lineas.length / 2500) : 1;
+      const salto = lineas.length > 2500 ? Math.ceil(lineas.length / 2500) : 1, F = CAMPO || campo(p, G);
       for (let li = c === 0 ? 0 : 0; li < lineas.length; li += salto) {
         const l = lineas[li];
         if (l.L < 0.01) continue;
+        if (!F.todo) { capsDe(l); if (!veCap(F, l.cap)) continue; }
         if (l.w && l.w.length && p.aVista(l.w[0])[2] <= 0.02 && p.aVista(l.w[l.w.length - 1])[2] <= 0.02) continue;
         const n = Math.max(1, Math.round(l.L / PASO)), sep = l.L / n;
         for (let dir = 0; dir < 2; dir++) {
@@ -565,17 +566,47 @@
       }
     }
   }
+  // ---------- what the screen can see (22 Oct 2026, 19:05: deep in, almost every line is off screen) ----------
+  // The visible part of the planet is a cap around the view direction; its angular radius comes from the farthest
+  // screen corner. A line (or a chunk of a long one) whose own cap does not touch it is not even projected.
+  let CAMPO = null;
+  function campo(p, G) {
+    const v = p.vista, d = p.vec(v.lon, v.lat);
+    const dm = Math.max(Math.hypot(G.CX, G.CY), Math.hypot(G.W - G.CX, G.CY), Math.hypot(G.CX, G.H - G.CY), Math.hypot(G.W - G.CX, G.H - G.CY)) + 80;
+    const todo = dm >= G.R * 0.995, ang = todo ? Math.PI / 2 : Math.asin(dm / G.R);
+    return { d, ang, todo, cosP: Math.cos(Math.min(Math.PI / 2, ang + 0.0015)) };
+  }
+  const capDe = (w, i0, i1) => {
+    let x = 0, y = 0, z = 0; for (let i = i0; i <= i1; i++) { x += w[i][0]; y += w[i][1]; z += w[i][2]; }
+    const m = Math.hypot(x, y, z) || 1; x /= m; y /= m; z /= m; let mn = 1;
+    for (let i = i0; i <= i1; i++) { const q = w[i], mq = Math.hypot(q[0], q[1], q[2]) || 1, d = (q[0] * x + q[1] * y + q[2] * z) / mq; if (d < mn) mn = d; }
+    return { i0, i1, c: [x, y, z], r: Math.acos(Math.max(-1, Math.min(1, mn))) };
+  };
+  function capsDe(l) {
+    if (l.caps) return l.caps;
+    const w = l.w, n = w.length, out = [];
+    for (let i0 = 0; i0 < n - 1; i0 += 24) out.push(capDe(w, i0, Math.min(n - 1, i0 + 24)));
+    l.cap = capDe(w, 0, n - 1); l.caps = out; return out;
+  }
+  const veCap = (F, cp) => F.d[0] * cp.c[0] + F.d[1] * cp.c[1] + F.d[2] * cp.c[2] >= Math.cos(Math.min(Math.PI, F.ang + cp.r));
   function pintaLineas(cx, p, G, lineas, color, ancho) {
+    const F = CAMPO || campo(p, G);
     cx.strokeStyle = color; cx.lineWidth = ancho; cx.beginPath();
     for (const l of lineas) {
-      let prev = false;
-      for (const w of l.w) {
-        const v = p.aVista(w), x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], ve = v[2] > 0.02;
-        if (ve && prev) cx.lineTo(x, y); else if (ve) cx.moveTo(x, y);
-        prev = ve;
-      }
+      const w = l.w; if (!w || w.length < 2) continue;
+      if (F.todo) { trazoW(cx, p, G, w, 0, w.length - 1); continue; }
+      const caps = capsDe(l); if (!veCap(F, l.cap)) continue;
+      for (const cp of caps) if (veCap(F, cp)) trazoW(cx, p, G, w, cp.i0, cp.i1);
     }
     cx.stroke();
+  }
+  function trazoW(cx, p, G, w, i0, i1) {
+    let prev = false;
+    for (let i = i0; i <= i1; i++) {
+      const v = p.aVista(w[i]), x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], ve = v[2] > 0.02;
+      if (ve && prev) cx.lineTo(x, y); else if (ve) cx.moveTo(x, y);
+      prev = ve;
+    }
   }
   // ---------- satellites at full quality (owner, 22 Oct 2026: «mucho más realistas y de máxima calidad») ----------
   // Three silhouettes, drawn once per size and angle at the screen's own resolution (no blur at any zoom):
