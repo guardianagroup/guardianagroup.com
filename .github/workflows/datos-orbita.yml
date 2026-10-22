@@ -14,6 +14,7 @@ on:
       - 'herramientas/datos_orbita.py'
       - 'herramientas/fibra_tierra.py'
       - 'herramientas/lugares_capas.py'
+      - 'herramientas/mapa_16k.py'
 
 permissions:
   contents: write
@@ -84,12 +85,22 @@ jobs:
         continue-on-error: true
         run: python3 herramientas/lugares_capas.py
 
+      # 22 Oct 2026 (owner: «un zoom o dos más, sin perder calidad»): the day map at 16K in tiles, from NASA
+      # (public domain). Only when the tool changes or by hand: the file is big and the image does not change.
+      - name: Mapa de día 16K en mosaico (solo a mano o al cambiar la herramienta)
+        if: github.event_name != 'schedule'
+        timeout-minutes: 20
+        continue-on-error: true
+        run: |
+          if [ -f orbita/static/tierra/dia-16k/7_3.jpg ]; then echo "Ya está"; exit 0; fi
+          pip install --quiet pillow && python3 herramientas/mapa_16k.py
+
       - name: Guardar si ha cambiado
         if: always()
         run: |
           git config user.name "GUARDIANA datos"
           git config user.email "datos@guardianagroup.com"
-          git add orbita/datos orbita/static/vendor
+          git add orbita/datos orbita/static/vendor orbita/static/tierra/dia-16k
           if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
           git commit -m "Órbita: datos reales actualizados ($(date -u +%Y-%m-%dT%H:%MZ))"
           git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
