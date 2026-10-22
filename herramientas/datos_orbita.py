@@ -465,16 +465,27 @@ def puntos():
 (
   nwr["telecom"="cable_landing_station"];
   nwr["telecom"="data_center"];
-  nwr["building"="data_center"];
-  nwr["office"="data_center"];
-  nwr["industrial"="data_center"];
-  nwr["man_made"="data_center"];
   nwr["telecom"="internet_exchange"];
 );
 out tags center;''')
     if not d:
         print('Sin puntos: no se escribe nada.', file=sys.stderr)
         return False
+    # 22 Oct 2026: the buildings tagged as data centres without the telecom tag, in a second, lighter query
+    # (about 1,300 more; if Overpass is slow with this one, the first set is still saved)
+    d2 = overpass('''[out:json][timeout:220];
+(
+  nwr["building"="data_center"];
+  nwr["office"="data_center"];
+  nwr["industrial"="data_center"];
+  nwr["man_made"="data_center"];
+);
+out tags center;''')
+    if d2 and d2.get('elements'):
+        print('edificios data_center sin etiqueta telecom:', len(d2['elements']))
+        d['elements'] = list(d.get('elements', [])) + list(d2['elements'])
+    else:
+        print('Sin la segunda consulta de centros de datos (edificios).', file=sys.stderr)
     out, extra, vistos, cuenta = [], [], set(), {'aterrizaje': 0, 'datos': 0, 'intercambio': 0}
     for e in d.get('elements', []):
         t = e.get('tags', {})
