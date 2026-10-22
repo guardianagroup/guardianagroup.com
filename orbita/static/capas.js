@@ -75,7 +75,7 @@
   let EST = null, NOTAS = null, CAP = null;
   // 22 Oct 2026, 15:03 (owner): «los que llevan tantos terabytes… en otro color… un ramal diferente por potencia»:
   // design capacity per cable from the agency (datos/cables-capacidad.json, keyed by the group name of lugares-capas).
-  async function cargaCapacidad() { if (CAP || cargando.cap) return; cargando.cap = true; try { const c = await cargaJSON('datos/cables-capacidad.json'); CAP = { cables: c.cables || {}, umbrales: c.umbrales || { gigante: 100, grande: 20 } }; if (capas.sub) capas.sub.porPotencia = null; } catch (_) { CAP = { cables: {}, umbrales: { gigante: 100, grande: 20 } }; } cargando.cap = false; }
+  async function cargaCapacidad() { if (CAP || cargando.cap) return; cargando.cap = true; try { const c = await cargaJSON('datos/cables-capacidad.json'); CAP = { cables: c.cables || {}, umbrales: c.umbrales || { gigante: 100, grande: 20 } }; if (capas.sub) capas.sub.porPotencia = null; pintaNota(); } catch (_) { CAP = { cables: {}, umbrales: { gigante: 100, grande: 20 } }; } cargando.cap = false; }
   const capacidadDe = (i) => { if (!CAP || !LUG || !LUG.g) return null; const gi = LUG.g[i]; if (gi == null || gi < 0) return null; const g = LUG.grupos[gi]; return g ? CAP.cables[g[0]] || null : null; };
   const potencia = (i) => { const c = capacidadDe(i); if (!c) return 0; return c.tbps >= CAP.umbrales.gigante ? 2 : c.tbps >= CAP.umbrales.grande ? 1 : 0; };
   const norm = (t) => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -727,7 +727,7 @@
     }
     if (estado.sub) {
       const c = capas.sub;
-      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
+      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + (CAP && Object.keys(CAP.cables).length ? ' · ' + T('trazo blanco y grueso: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s') : '') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
     }
     if (estado.fibra) {
       meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + T('Datos verificados') : FT && FT.error ? T('No se pudo cargar la fibra por tierra.') : T('Cargando fibra por tierra…'));

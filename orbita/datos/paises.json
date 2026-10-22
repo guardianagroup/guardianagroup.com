@@ -126,6 +126,176 @@
     "claude",
     "chatgpt"
    ]
+  },
+  "AT": {
+   "movil": "4G desde 2010–2011; 5G desde 2019 (Magenta y A1, de los primeros de Europa, tras la subasta de 3,5 GHz de marzo de 2019).",
+   "operadores": "A1 Telekom Austria, Magenta Telekom (Deutsche Telekom), Drei (Hutchison).",
+   "fija": "Fibra al hogar en expansión (A1, Magenta, öGIG, cooperativas regionales) junto a mucho cable coaxial y VDSL; el Estado cofinancia la fibra rural.",
+   "troncales": "Sin mar: Viena es un gran nudo de fibra entre Europa central y los Balcanes; troncales de A1 y Magenta hacia Alemania, Chequia, Hungría, Eslovaquia, Eslovenia e Italia.",
+   "intercambio": "VIX (Vienna Internet Exchange), en la Universidad de Viena, desde 1996.",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "SK": {
+   "movil": "4G desde 2013; 5G desde finales de 2020 (Slovak Telekom primero, después Orange y O2).",
+   "operadores": "Slovak Telekom (Deutsche Telekom), Orange Slovensko, O2 Slovakia, 4ka (Swan).",
+   "fija": "Fibra al hogar relativamente alta para la región (Slovak Telekom, Orange, Swan y operadores locales), concentrada en Bratislava y ciudades.",
+   "troncales": "Sin mar: fibra terrestre hacia Viena, Praga, Budapest y Polonia.",
+   "intercambio": "SIX (Slovak Internet eXchange, Universidad Técnica de Bratislava) y NIX.SK.",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "PL": {
+   "movil": "4G desde 2013 (Plus, con red compartida con Cyfrowy Polsat); 5G desde 2020 sobre 2,1 GHz y, tras la subasta de 3,6 GHz de 2023, despliegue amplio desde 2024.",
+   "operadores": "Orange Polska, Play (Iliad), Plus (Polsat), T-Mobile Polska.",
+   "fija": "Fibra al hogar en fuerte crecimiento (Orange, Nexera, Światłowód Inwestycje, redes municipales con fondos de la UE); también cable coaxial (UPC/Play).",
+   "troncales": "Amarres en el Báltico (Kołobrzeg: Baltica; Gdańsk/Gdynia) y troncales terrestres hacia Alemania, Chequia y los países bálticos; Varsovia como nudo.",
+   "intercambio": "PLIX y Equinix Varsovia; TPIX (Orange).",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "HU": {
+   "movil": "4G desde 2012; 5G desde 2020 (Magyar Telekom, Vodafone, Yettel).",
+   "operadores": "Magyar Telekom (Deutsche Telekom), One (antes Vodafone Hungría), Yettel (PPF).",
+   "fija": "Buena cobertura gigabit por fibra y cable coaxial (Magyar Telekom, One/Vodafone, DIGI); programa estatal de fibra rural.",
+   "troncales": "Sin mar: Budapest es nudo de fibra hacia Austria, Eslovaquia, Rumanía, Serbia y Croacia.",
+   "intercambio": "BIX (Budapest Internet Exchange), desde 1996.",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "PT": {
+   "movil": "4G desde 2012; 5G desde 2021, tras la subasta de finales de 2021 (MEO, NOS, Vodafone).",
+   "operadores": "MEO (Altice Portugal), NOS, Vodafone Portugal, Digi (desde 2024).",
+   "fija": "Fibra al hogar entre las más altas de Europa (más del 90 % de los hogares), con MEO, NOS y Vodafone; el cobre se apaga.",
+   "diez": "Ofertas de 10 Gbit/s al hogar (Vodafone, MEO) desde 2022–2023.",
+   "troncales": "Lisboa/Sesimbra, Carcavelos y Sines son amarres clave del Atlántico (EllaLink a Brasil, Equiano, 2Africa, Nuvem, Columbus-III, Atlantis-2) y puente a Azores y Madeira (CAM).",
+   "intercambio": "GigaPIX (FCCN, Lisboa y Oporto) y DE-CIX Lisboa.",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "IT": {
+   "movil": "4G desde 2012; 5G desde 2019 (Vodafone en junio, TIM después) tras la subasta de 2018; 5G SA en despliegue.",
+   "operadores": "TIM, Vodafone Italia (Swisscom/Fastweb desde 2025), WindTre, Iliad.",
+   "fija": "Fibra al hogar en expansión acelerada (Open Fiber, FiberCop/TIM, Fastweb), con mucho FTTC de cobre todavía; plan estatal «Italia a 1 Giga».",
+   "diez": "Ofertas de 10 Gbit/s (Iliad, Fastweb, Vodafone) desde 2022 en zonas con XGS-PON.",
+   "troncales": "Sicilia (Mazara del Vallo, Catania, Palermo) y Génova/Savona son nudos del Mediterráneo (SEA-ME-WE, AAE-1, 2Africa, BlueMed, Unitirreno, Medusa); Bari hacia Grecia e Israel.",
+   "intercambio": "MIX (Milán), NaMeX (Roma), TOP-IX (Turín), VSIX (Padua).",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "NL": {
+   "movil": "4G desde 2013; 5G desde 2020 (KPN, Vodafone, T-Mobile/Odido) tras la subasta de julio de 2020; 3,5 GHz desde 2024.",
+   "operadores": "KPN, Odido (antes T-Mobile), VodafoneZiggo.",
+   "fija": "Fibra al hogar en fuerte despliegue (KPN, Glaspoort, Delta Fiber, Open Dutch Fiber) junto a la red de cable coaxial de Ziggo; cobertura gigabit casi universal.",
+   "troncales": "Ámsterdam es uno de los grandes nudos de Europa; amarres en Zandvoort, Katwijk, Castricum (Circe, Farland, Zeus, AC-1, TAT-14) y Eemshaven/Bremerhaven hacia Noruega y EE. UU.",
+   "intercambio": "AMS-IX (Ámsterdam), uno de los mayores del mundo; NL-ix.",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "CH": {
+   "movil": "4G desde 2012; 5G desde abril de 2019 (Swisscom y Sunrise, de los primeros de Europa).",
+   "operadores": "Swisscom, Sunrise, Salt.",
+   "fija": "Fibra al hogar muy extendida (Swisscom, Salt, redes municipales como EWZ en Zúrich); velocidades de hasta 25 Gbit/s en algunas ofertas.",
+   "diez": "Init7 ofrece 25 Gbit/s simétricos al hogar desde 2020 (Fiber7-X2); Salt y Swisscom hasta 10 Gbit/s.",
+   "troncales": "Sin mar: Zúrich y Ginebra son nudos de fibra entre Alemania, Francia e Italia (CERN, bancos).",
+   "intercambio": "SwissIX y Equinix Zúrich; CIXP en el CERN (Ginebra).",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "SE": {
+   "movil": "4G desde diciembre de 2009 (TeliaSonera, la primera red LTE comercial del mundo, en Estocolmo); 5G desde 2020 (Tele2, Telia, Telenor, Tre).",
+   "operadores": "Telia, Tele2, Telenor, Tre (Hutchison).",
+   "fija": "Fibra al hogar entre las más altas del mundo (redes municipales «stadsnät», Telia, Open Infra); más del 90 % de los hogares con acceso gigabit.",
+   "diez": "Ofertas de 10 Gbit/s al hogar (Bahnhof, Telia) desde hace años.",
+   "troncales": "Estocolmo es nudo del Báltico y el Ártico: cables a Finlandia (Eastern Light), Letonia, Alemania y Dinamarca; troncales terrestres hacia Noruega y Finlandia; centros de datos de Meta (Luleå) y Microsoft.",
+   "intercambio": "Netnod (Estocolmo, Gotemburgo, Malmö, Luleå, Sundsvall), uno de los mayores de Europa.",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "NO": {
+   "movil": "4G desde 2009–2010; 5G desde marzo de 2020 (Telenor y Telia).",
+   "operadores": "Telenor, Telia Norge, Ice.",
+   "fija": "Fibra al hogar muy extendida (Telenor, Altibox/Lyse, GlobalConnect); el cobre se apagó en 2025.",
+   "troncales": "Amarres en Kristiansand y el sur (Skagenfiber, Havfrue/AEC-2 hacia EE. UU. y Dinamarca, NO-UK, Leif Erikson previsto); Svalbard por dos cables desde Andøya; troncales de Telenor, Tampnet y GlobalConnect.",
+   "intercambio": "NIX (Oslo, Universidad de Oslo) y FIXO.",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "IE": {
+   "movil": "4G desde 2013; 5G desde 2019 (Vodafone en agosto, después Eir y Three).",
+   "operadores": "Vodafone Ireland, Three, Eir.",
+   "fija": "Fibra al hogar en despliegue rápido (National Broadband Ireland en zonas rurales, SIRO, Eir); cobertura gigabit alta.",
+   "troncales": "Puerta transatlántica: amarres en Cork (Ballinspittle: AEC-1), Killala (Mayo), Dublín/Portmarnock y Kilmore Quay hacia Gales y Cornualles; Dublín aloja grandes centros de datos de Amazon, Microsoft, Google y Meta.",
+   "intercambio": "INEX (Dublín y Cork).",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "MX": {
+   "movil": "4G desde 2012–2013 (Telcel, Movistar); 5G desde febrero de 2022 (Telcel) y AT&T después; Altán como red mayorista compartida.",
+   "operadores": "Telcel (América Movil), AT&T México, Altán Redes (mayorista) y virtuales como Bait (Walmart).",
+   "fija": "Fibra al hogar en expansión (Telmex/Infinitum, Totalplay, Izzi, Megacable); cable coaxial muy presente.",
+   "troncales": "Amarres en Cancún y Tulum (Caribe: ARCOS, AMX-1), Mazatlán y Manzanillo (Pacífico: PAC, AMX-1) y la frontera terrestre con EE. UU.; troncal de CFE Telecom (red eléctrica) y Telmex.",
+   "intercambio": "IXP de Ciudad de México (CITI / Yotta), pequeño frente a la interconexión en Texas.",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "BR": {
+   "movil": "4G desde 2013; 5G desde julio de 2022 (Brasilia primero), tras la subasta de noviembre de 2021; 5G SA en 3,5 GHz desde el inicio.",
+   "operadores": "Vivo (Telefónica), Claro, TIM Brasil; Oi vendió su red móvil en 2022.",
+   "fija": "Fibra al hogar en crecimiento muy rápido (Vivo, Claro, Oi Fibra/V.tal, miles de proveedores regionales): la mayoría de las conexiones fijas ya son FTTH.",
+   "troncales": "Fortaleza es el gran nudo del Atlántico sur (EllaLink, Monet, Seabras-1, SACS, SAIL, 2Africa, Firmina, Malbec); también Río de Janeiro, Santos/Praia Grande y Salvador; troncales terrestres de V.tal, Claro y Telxius.",
+   "intercambio": "IX.br (NIC.br), con São Paulo como uno de los mayores puntos de intercambio del mundo por redes conectadas; nodos en 35 ciudades.",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "AR": {
+   "movil": "4G desde 2014; 5G desde 2023–2024 tras la subasta de octubre de 2023 (Claro, Movistar, Personal).",
+   "operadores": "Personal (Telecom Argentina), Claro, Movistar.",
+   "fija": "Fibra al hogar en crecimiento (Telecom/Personal, Movistar, cooperativas); cable coaxial muy extendido (Flow/Telecom).",
+   "troncales": "Las Toninas (Buenos Aires) es el amarre de casi todo el país (SAm-1, Unisur, Bicentenario, Tannat, Malbec, Firmina); troncales terrestres de ARSAT (Red Federal de Fibra Óptica), Telecom y Telxius.",
+   "intercambio": "CABASE IX, con decenas de nodos en todo el país; el de Buenos Aires es uno de los mayores de la región.",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
+  },
+  "CL": {
+   "movil": "4G desde 2013; 5G desde diciembre de 2021 (Entel, Movistar, WOM, Claro) tras la subasta de 2021.",
+   "operadores": "Entel, Movistar, WOM, Claro (fusionado con VTR como ClaroVTR).",
+   "fija": "Fibra al hogar mayoritaria y en expansión (Movistar, Entel, Mundo, GTD, VTR); el cobre se retira.",
+   "diez": "Ofertas residenciales de hasta 8–10 Gbit/s (Mundo, GTD) desde 2023.",
+   "troncales": "Valparaíso y Arica amarran los cables del Pacífico (SAm-1, PAN-AM, SAC, Curie de Google, Mistral, Prat); la Fibra Óptica Austral une Puerto Montt con Punta Arenas y Puerto Williams; proyecto Humboldt hacia Australia y estudio del cable antártico.",
+   "intercambio": "PIT Chile (Santiago, Valparaíso, Concepción) y NAP Chile.",
+   "confirmado": false,
+   "voces": [
+    "claude"
+   ]
   }
  }
 }

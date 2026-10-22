@@ -266,6 +266,7 @@
     'Novedades': ['What is new', 'Novidades'],
     'Incidencias conocidas': ['Known incidents', 'Incidentes conhecidos'],
     'Capacidad': ['Capacity', 'Capacidade'],
+    'trazo blanco y grueso: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s': ['thick white line: trunks above 100 Tbit/s; medium line: above 20 Tbit/s', 'traço branco e grosso: troncais acima de 100 Tbit/s; traço médio: acima de 20 Tbit/s'],
     'pares de fibra': ['fibre pairs', 'pares de fibra'],
     'troncal gigante': ['giant trunk', 'troncal gigante'],
     'troncal grande': ['major trunk', 'troncal grande'],
