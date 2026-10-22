@@ -44,8 +44,17 @@
     for (let i = desde; i <= hasta; i++) { const q = pts[i]; if (q && prev) cx.lineTo(q[0], q[1]); else if (q) cx.moveTo(q[0], q[1]); prev = !!q; }
     cx.stroke();
   }
-  function punto(cx, p, G, lon, lat, r, color) { const v = p.aVista(vec(lon, lat).map((c) => c * 1.004)); if (v[2] <= 0.02) return null; const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1]; cx.fillStyle = color; cx.beginPath(); cx.arc(x, y, r, 0, 7); cx.fill(); return [x, y]; }
-  function etiqueta(cx, xy, texto, fuerte, abajo) { if (!xy) return; cx.font = (fuerte ? '600 12px' : '500 10.5px') + ' "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle'; cx.lineWidth = 3; cx.strokeStyle = 'rgba(6,8,12,.85)'; const x = xy[0] + 11, y = xy[1] + (abajo ? 14 : 0); cx.strokeText(texto, x, y); cx.fillStyle = fuerte ? '#F4F6F8' : 'rgba(232,236,241,.8)'; cx.fillText(texto, x, y); }
+  function proy(p, G, lon, lat) { const v = p.aVista(vec(lon, lat).map((c) => c * 1.004)); if (v[2] <= 0.02) return null; return [G.CX + G.R * v[0], G.CY - G.R * v[1]]; }
+  function punto(cx, p, G, lon, lat, r, color) { const xy = proy(p, G, lon, lat); if (!xy) return null; cx.fillStyle = color; cx.beginPath(); cx.arc(xy[0], xy[1], r, 0, 7); cx.fill(); return xy; }
+  // labels never sit on top of each other: each frame keeps the boxes already used; a label that would collide is
+  // simply not drawn (the dot stays), unless it is the one the scene is about (`forzar`)
+  let CAJAS = [];
+  function cabe(x, y, w, h, forzar) { const b = [x - 2, y - h / 2, x + w + 2, y + h / 2]; if (!forzar) for (const c of CAJAS) if (b[0] < c[2] && b[2] > c[0] && b[1] < c[3] && b[3] > c[1]) return false; CAJAS.push(b); return true; }
+  function etiqueta(cx, xy, texto, fuerte, abajo, forzar) {
+    if (!xy) return false; cx.font = (fuerte ? '600 12px' : '500 10.5px') + ' "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle'; cx.textAlign = 'left';
+    const x = xy[0] + 11, y = xy[1] + (abajo ? 14 : 0), w = cx.measureText(texto).width; if (!cabe(x, y, w, fuerte ? 15 : 13, forzar)) return false;
+    cx.lineWidth = 3; cx.strokeStyle = 'rgba(6,8,12,.85)'; cx.strokeText(texto, x, y); cx.fillStyle = fuerte ? '#F4F6F8' : 'rgba(232,236,241,.8)'; cx.fillText(texto, x, y); return true;
+  }
 
   let V = null; // the running journey
   // ---------- the recorder (owner, 22 Oct 2026, 16:04: «que la persona lo pueda luego descargar en PDF o en vídeo»):
@@ -75,7 +84,9 @@
     cx.save(); cx.scale(k, k); cx.textBaseline = 'top';
     cx.fillStyle = 'rgba(244,246,248,.92)'; cx.font = '500 11px "IBM Plex Mono", ui-monospace, monospace'; cx.fillText((T('El viaje de tus datos') + ' · GUARDIANA').toUpperCase(), 28, 24);
     cx.fillStyle = 'rgba(169,179,190,.9)'; cx.font = '400 11px "IBM Plex Mono", ui-monospace, monospace'; cx.fillText(h.querySelector('.sub').textContent, 28, 42);
-    if (V.fase === 'vuelo') {
+    if (V.fase === 'constelacion') {
+      cx.textAlign = 'center'; cx.fillStyle = 'rgba(169,179,190,.95)'; cx.font = '500 12px "IBM Plex Mono", ui-monospace, monospace'; cx.fillText(h.querySelector('.destino').textContent, innerWidth / 2, innerHeight - 150);
+    } else if (V.fase === 'vuelo') {
       const W = innerWidth, y = innerHeight - 150; cx.textAlign = 'center';
       cx.fillStyle = 'rgba(169,179,190,.95)'; cx.font = '500 12px "IBM Plex Mono", ui-monospace, monospace'; cx.fillText(h.querySelector('.destino').textContent, W / 2, y);
       cx.fillStyle = '#F4F6F8'; cx.font = '600 44px "IBM Plex Sans", system-ui, sans-serif'; cx.fillText(h.querySelector('.km').textContent + ' km', W / 2 - 150, y + 22); cx.fillText(h.querySelector('.ms').textContent + ' ms', W / 2 + 150, y + 22);
@@ -92,9 +103,16 @@
     if (!V) return;
     const r = V.rutas, L = r.origen;
     cx.save(); cx.globalCompositeOperation = 'source-over';
+    // the home marker and its label are the planet's own (orbita.js draws them); only its box is reserved here
+    CAJAS = []; const casa = proy(p, G, L.lon, L.lat);
+    if (casa) { cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cabe(casa[0] + 12, casa[1] + 4, cx.measureText(T('TU EQUIPO') + ' · ' + L.nombre.toUpperCase() + ' (' + T('APROX.') + ')').width, 14, true); }
     // every path, faint, so the whole web is always there; in the constellation scene they appear nearest first
     const orden = V.porKm, visibles = V.fase === 'constelacion' ? Math.min(orden.length, Math.floor(V.progreso * orden.length)) : (V.fase === 'intro' ? 0 : orden.length);
-    for (let i = 0; i < visibles; i++) { const n = orden[i], ultimo = V.fase === 'constelacion' && i === visibles - 1; cx.strokeStyle = 'rgba(' + BLANCO + ',' + (V.fase === 'final' ? 0.28 : ultimo ? 0.6 : V.fase === 'constelacion' ? 0.22 : 0.1) + ')'; cx.lineWidth = ultimo ? 1.4 : 0.8; trazo(cx, arcoPantalla(p, G, L, n, 64), 0, 64); if (V.fase === 'constelacion') etiqueta(cx, punto(cx, p, G, n.lon, n.lat, ultimo ? 3 : 1.8, ultimo ? '#F4F6F8' : 'rgba(' + BLANCO + ',.7)'), n.nombre.replace(/ \(.*\)/, '') + ' · ' + n.ms + ' ms', ultimo); }
+    for (let i = 0; i < visibles; i++) { const n = orden[i], ultimo = V.fase === 'constelacion' && i === visibles - 1; cx.strokeStyle = 'rgba(' + BLANCO + ',' + (V.fase === 'final' ? 0.28 : ultimo ? 0.6 : V.fase === 'constelacion' ? 0.22 : 0.1) + ')'; cx.lineWidth = ultimo ? 1.4 : 0.8; trazo(cx, arcoPantalla(p, G, L, n, 64), 0, 64); }
+    if (V.fase === 'constelacion' && visibles) { // the newest one first, so its name always wins the space
+      const u = orden[visibles - 1]; etiqueta(cx, punto(cx, p, G, u.lon, u.lat, 3, '#F4F6F8'), u.nombre.replace(/ \(.*\)/, '') + ' · ' + u.ms + ' ms', true, false, true);
+      for (let i = 0; i < visibles - 1; i++) { const n = orden[i]; etiqueta(cx, punto(cx, p, G, n.lon, n.lat, 1.8, 'rgba(' + BLANCO + ',.7)'), n.nombre.replace(/ \(.*\)/, '') + ' · ' + n.ms + ' ms', false); }
+    }
     // the stops already travelled, with their label
     for (const s of V.hechas) { const pts = arcoPantalla(p, G, L, s, 64); cx.strokeStyle = 'rgba(' + ACENTO + ',.55)'; cx.lineWidth = 1.2; trazo(cx, pts, 0, 64); etiqueta(cx, punto(cx, p, G, s.lon, s.lat, 2.6, '#9CC3E4'), s.nombre + ' · ' + s.ms + ' ms', false); }
     // the pulse on its way: a trail that fades behind a bright head
@@ -104,13 +122,10 @@
       const q = pts[cab]; if (q) { const g = cx.createRadialGradient(q[0], q[1], 0, q[0], q[1], 14); g.addColorStop(0, 'rgba(255,255,255,.95)'); g.addColorStop(0.35, 'rgba(' + ACENTO + ',.7)'); g.addColorStop(1, 'rgba(' + ACENTO + ',0)'); cx.fillStyle = g; cx.beginPath(); cx.arc(q[0], q[1], 14, 0, 7); cx.fill(); }
       // the race against light: the fainter head is where light in a straight line would be by now
       const fl = Math.min(1, f * s.ms / Math.max(1, s.minimo)), ql = pts[Math.round(fl * N)];
-      if (ql) { cx.fillStyle = 'rgba(' + BLANCO + ',' + (fl >= 1 ? 0.95 : 0.8) + ')'; cx.beginPath(); cx.arc(ql[0], ql[1], fl >= 1 ? 3.5 : 2.4, 0, 7); cx.fill(); if (fl >= 1 && f < 1) { cx.strokeStyle = 'rgba(' + BLANCO + ',.5)'; cx.lineWidth = 1; cx.beginPath(); cx.arc(ql[0], ql[1], 8, 0, 7); cx.stroke(); etiqueta(cx, ql, T('la luz ya habría llegado'), false, true); } }
-      if (f >= 1) etiqueta(cx, punto(cx, p, G, s.lon, s.lat, 3.2, '#F4F6F8'), s.nombre + ' · ' + s.ms + ' ms', true);
+      if (ql) { cx.fillStyle = 'rgba(' + BLANCO + ',' + (fl >= 1 ? 0.95 : 0.8) + ')'; cx.beginPath(); cx.arc(ql[0], ql[1], fl >= 1 ? 3.5 : 2.4, 0, 7); cx.fill(); if (fl >= 1 && f < 1) { cx.strokeStyle = 'rgba(' + BLANCO + ',.5)'; cx.lineWidth = 1; cx.beginPath(); cx.arc(ql[0], ql[1], 8, 0, 7); cx.stroke(); etiqueta(cx, ql, T('la luz ya habría llegado'), false, true, true); } }
+      if (f >= 1) etiqueta(cx, punto(cx, p, G, s.lon, s.lat, 3.2, '#F4F6F8'), s.nombre + ' · ' + s.ms + ' ms', true, false, true);
       else punto(cx, p, G, s.lon, s.lat, 2.4, 'rgba(' + BLANCO + ',.6)');
     }
-    // you
-    const pulso = 0.5 + 0.5 * Math.sin((t || 0) / 450), xy = punto(cx, p, G, L.lon, L.lat, 3.4, '#9CC3E4');
-    if (xy) { cx.strokeStyle = 'rgba(' + ACENTO + ',' + (0.25 + 0.4 * pulso) + ')'; cx.lineWidth = 1.2; cx.beginPath(); cx.arc(xy[0], xy[1], 9 + 7 * pulso, 0, 7); cx.stroke(); etiqueta(cx, xy, (T('Tú') + ' · ' + L.nombre).toUpperCase(), true, true); }
     cx.restore();
   }
 
@@ -133,7 +148,7 @@
   }
   function empieza(rutas) {
     const r = rutas || (C() && C().datos.rutas); if (!r || !r.nubes || !r.nubes.length || !r.origen || !P()) return;
-    const h = hud(); h.hidden = false; h.querySelector('.fin').hidden = true; h.querySelector('.centro').style.opacity = '0';
+    const h = hud(); h.hidden = false; h.classList.remove('final'); h.querySelector('.fin').hidden = true; h.querySelector('.centro').style.opacity = '0';
     document.body.classList.add('viaje');
     V = { rutas: r, paradas: paradas(r), porKm: r.nubes.slice().sort((a, b) => a.km - b.km), hechas: [], actual: null, fase: 'intro', progreso: 0, t0: performance.now(), salta: false, cam: null };
     if (window.OrbitaCapas) window.OrbitaCapas.soloTu(true, pintaViaje);
@@ -164,7 +179,7 @@
   function paso(now) {
     if (!V) return;
     const h = hud(), r = V.rutas, L = r.origen; mueveCamara(now);
-    const desde = now - V.t0;
+    const desde = now - V.t0, dt = Math.min(100, now - (V.prev || now)); V.prev = now;
     if (V.fase === 'intro') {
       if (desde > 2600 || V.salta) { V.salta = false; V.fase = 'constelacion'; V.tCons = now; V.progreso = 0; camara(L.lon + 40, L.lat * 0.6, 1.25, 9000); h.querySelector('.destino').textContent = T('Hemos medido tu conexión con') + ' ' + r.nubes.length + ' ' + T('regiones del mundo'); h.querySelector('.cifras').style.visibility = 'hidden'; h.querySelector('.luz').style.opacity = '0'; h.querySelector('.centro').style.opacity = '1'; }
     } else if (V.fase === 'constelacion') {
@@ -172,12 +187,14 @@
       if (V.progreso >= 1 && now - V.tCons > 8800 || V.salta) { V.salta = false; h.querySelector('.cifras').style.visibility = ''; siguiente(now); }
     } else if (V.fase === 'vuelo') {
       const s = V.actual, dur = Math.max(2200, Math.min(4200, s.ms * 18)); // slow motion: the far ones take longer, never past four seconds
-      const f = Math.min(1, (now - V.tVuelo) / dur); V.progreso = f;
+      const f = Math.max(0, Math.min(1, (now - V.tVuelo) / dur)); V.progreso = f;
       h.querySelector('.km').textContent = num(Math.round(s.km * f)); h.querySelector('.ms').textContent = num(Math.round(s.ms * f));
       if (f >= 1 && !V.llego) { V.llego = now; h.querySelector('.luz').textContent = T('La luz en línea recta tardaría') + ' ' + num(Math.round(s.minimo)) + ' ms · ' + T('tus datos han tardado') + ' +' + num(Math.round(s.ms - s.minimo)) + ' ms ' + T('sobre ese mínimo') + ' (×' + num(s.ms / s.minimo, 1) + ')'; h.querySelector('.luz').style.opacity = '1'; }
       if ((V.llego && now - V.llego > 1500) || V.salta) { V.salta = false; V.hechas.push(s); V.actual = null; siguiente(now); }
     } else if (V.fase === 'final') {
-      if (REC.on && !V.tFin) V.tFin = now; if (REC.on && V.tFin && now - V.tFin > 3500) paraGrabacion(); // three more seconds of the whole planet, then the file closes
+      if (!V.tFin) V.tFin = now;
+      if (!cam) { const p = P(), v = p && p.vista; if (v) p.ir(v.lon + 0.0025 * dt, L.lat, 1); } // the planet keeps turning, slowly, with the whole web on it
+      if (REC.on && now - V.tFin > 7000) paraGrabacion(); // seven more seconds of the turning planet, then the file closes
     }
     requestAnimationFrame(paso);
   }
@@ -185,7 +202,7 @@
     const h = hud(), r = V.rutas, L = r.origen;
     const s = V.paradas.shift();
     if (!s) { // the end: the whole planet, every path, the numbers
-      V.fase = 'final'; V.actual = null;
+      V.fase = 'final'; V.actual = null; h.classList.add('final');
       camara(L.lon, L.lat, 1, 1400);
       h.querySelector('.centro').style.opacity = '0';
       const ms = r.nubes.map((n) => n.ms), lejos = r.nubes[r.nubes.length - 1];
@@ -197,7 +214,7 @@
     }
     V.fase = 'vuelo'; V.actual = s; V.tVuelo = now + 900; V.llego = 0; V.progreso = 0;
     // frame the arc: its midpoint in the centre, the zoom from the angle it spans
-    const m = puntoMedio(L, s, 0.5), ang = angulo(L, s), z = Math.max(1.15, Math.min(3.2, 1.9 / Math.max(0.35, ang)));
+    const m = puntoMedio(L, s, 0.5), ang = angulo(L, s), z = Math.max(1.15, Math.min(2.4, 1.9 / Math.max(0.35, ang)));
     camara(m.lon, m.lat, z, 1100);
     h.querySelector('.destino').textContent = continente(s.region).toUpperCase() + ' · ' + s.nombre + (s.cc ? ' (' + s.cc + ')' : '');
     h.querySelector('.km').textContent = '0'; h.querySelector('.ms').textContent = '0'; h.querySelector('.luz').style.opacity = '0';
@@ -208,36 +225,41 @@
   let FR = null;
   async function fronteras() { if (FR) return FR; try { const d = await (await fetch('datos/fronteras.json')).json(); FR = d.paises || []; } catch (_) { FR = []; } return FR; }
   function lienzo(w, h) { const c = document.createElement('canvas'); const dpr = Math.min(3, window.devicePixelRatio || 1); c.width = w * dpr; c.height = h * dpr; c.style.width = '100%'; c.style.maxWidth = w + 'px'; c.style.height = 'auto'; const cx = c.getContext('2d'); cx.scale(dpr, dpr); return [c, cx]; }
-  // 1. the globe: an orthographic view centred on you, borders as fine lines, your arcs lifted above the surface
+  // 1. the globe, both faces: an orthographic view centred on you and, smaller, the opposite face of the planet, so
+  // the destinations behind the horizon are seen too; borders as fine lines, your arcs lifted above the surface
   function figuraGlobo(r, lineas, paradasV) {
-    const W = 1100, H = 720, [c, cx] = lienzo(W, H), L = r.origen, R = 300, CX = W / 2, CY = H / 2 + 10;
-    // rotation that brings you to the centre
-    const la = L.lat * RAD, lo = L.lon * RAD, cl = Math.cos(la), sl = Math.sin(la), co = Math.cos(lo), so = Math.sin(lo);
-    const proy = (lon, lat, alza) => { const [x0, y0, z0] = vec(lon, lat); const x1 = x0 * co - z0 * so, z1 = x0 * so + z0 * co; const y2 = y0 * cl - z1 * sl, z2 = y0 * sl + z1 * cl; const h = 1 + (alza || 0); return { x: CX + R * x1 * h, y: CY - R * y2 * h, z: z2 }; };
+    const W = 1100, H = 720, [c, cx] = lienzo(W, H), L = r.origen;
     cx.fillStyle = '#06080C'; cx.fillRect(0, 0, W, H);
-    // the sphere: a soft limb, a darker body
-    let g = cx.createRadialGradient(CX - R * 0.3, CY - R * 0.35, R * 0.1, CX, CY, R * 1.02); g.addColorStop(0, '#111822'); g.addColorStop(0.8, '#0A0E14'); g.addColorStop(1, '#06080C'); cx.fillStyle = g; cx.beginPath(); cx.arc(CX, CY, R, 0, 7); cx.fill();
-    g = cx.createRadialGradient(CX, CY, R * 0.96, CX, CY, R * 1.06); g.addColorStop(0, 'rgba(' + ACENTO + ',0)'); g.addColorStop(0.5, 'rgba(' + ACENTO + ',.35)'); g.addColorStop(1, 'rgba(' + ACENTO + ',0)'); cx.fillStyle = g; cx.beginPath(); cx.arc(CX, CY, R * 1.06, 0, 7); cx.fill();
-    // graticule
-    cx.strokeStyle = 'rgba(' + ACENTO + ',.08)'; cx.lineWidth = 0.6;
-    for (let lat = -60; lat <= 60; lat += 30) { cx.beginPath(); let prev = false; for (let lon = -180; lon <= 180; lon += 3) { const q = proy(lon, lat); if (q.z > 0 && prev) cx.lineTo(q.x, q.y); else if (q.z > 0) cx.moveTo(q.x, q.y); prev = q.z > 0; } cx.stroke(); }
-    for (let lon = -180; lon < 180; lon += 30) { cx.beginPath(); let prev = false; for (let lat = -90; lat <= 90; lat += 3) { const q = proy(lon, lat); if (q.z > 0 && prev) cx.lineTo(q.x, q.y); else if (q.z > 0) cx.moveTo(q.x, q.y); prev = q.z > 0; } cx.stroke(); }
-    // borders
-    cx.strokeStyle = 'rgba(' + ACENTO + ',.38)'; cx.lineWidth = 0.7;
-    for (const l of lineas) { cx.beginPath(); let prev = false; for (const [lon, lat] of l) { const q = proy(lon, lat); if (q.z > 0.01 && prev) cx.lineTo(q.x, q.y); else if (q.z > 0.01) cx.moveTo(q.x, q.y); prev = q.z > 0.01; } cx.stroke(); }
-    // the arcs: every destination faint, the stops bright and lifted
-    const dibujaArco = (n, fuerte) => {
-      const va = vec(L.lon, L.lat), vb = vec(n.lon, n.lat), N = 80; cx.beginPath(); let prev = false;
-      for (let i = 0; i <= N; i++) { const t = i / N, w = slerp(va, vb, t), lat = Math.asin(Math.max(-1, Math.min(1, w[1]))) / RAD, lon = Math.atan2(w[0], w[2]) / RAD, q = proy(lon, lat, (fuerte ? 0.16 : 0.07) * Math.sin(Math.PI * t)); if (q.z > -0.05 && prev) cx.lineTo(q.x, q.y); else if (q.z > -0.05) cx.moveTo(q.x, q.y); prev = q.z > -0.05; }
-      cx.strokeStyle = fuerte ? 'rgba(' + BLANCO + ',.95)' : 'rgba(' + ACENTO + ',.32)'; cx.lineWidth = fuerte ? 1.8 : 0.8; if (fuerte) { cx.shadowColor = 'rgba(' + ACENTO + ',.9)'; cx.shadowBlur = 10; } cx.stroke(); cx.shadowBlur = 0;
+    const esfera = (cLon, cLat, CX, CY, R, grande) => {
+      const la = cLat * RAD, lo = cLon * RAD, cl = Math.cos(la), sl = Math.sin(la), co = Math.cos(lo), so = Math.sin(lo);
+      // a point lifted `alza` above the surface is seen when it is on this side, or when it rises past the limb
+      const proy = (lon, lat, alza) => { const [x0, y0, z0] = vec(lon, lat); const x1 = x0 * co - z0 * so, z1 = x0 * so + z0 * co; const y2 = y0 * cl - z1 * sl, z2 = y0 * sl + z1 * cl; const h = 1 + (alza || 0); return { x: CX + R * x1 * h, y: CY - R * y2 * h, z: z2, ve: z2 > 0 || (x1 * x1 + y2 * y2) * h * h > 1.0005 }; };
+      let g = cx.createRadialGradient(CX - R * 0.3, CY - R * 0.35, R * 0.1, CX, CY, R * 1.02); g.addColorStop(0, '#111822'); g.addColorStop(0.8, '#0A0E14'); g.addColorStop(1, '#06080C'); cx.fillStyle = g; cx.beginPath(); cx.arc(CX, CY, R, 0, 7); cx.fill();
+      g = cx.createRadialGradient(CX, CY, R * 0.96, CX, CY, R * 1.06); g.addColorStop(0, 'rgba(' + ACENTO + ',0)'); g.addColorStop(0.5, 'rgba(' + ACENTO + ',.35)'); g.addColorStop(1, 'rgba(' + ACENTO + ',0)'); cx.fillStyle = g; cx.beginPath(); cx.arc(CX, CY, R * 1.06, 0, 7); cx.fill();
+      const linea = (puntos, alzaDe) => { cx.beginPath(); let prev = false; for (let i = 0; i < puntos.length; i++) { const q = proy(puntos[i][0], puntos[i][1], alzaDe ? alzaDe(i) : 0); if (q.ve && prev) cx.lineTo(q.x, q.y); else if (q.ve) cx.moveTo(q.x, q.y); prev = q.ve; } cx.stroke(); };
+      cx.strokeStyle = 'rgba(' + ACENTO + ',.08)'; cx.lineWidth = 0.6;
+      for (let lat = -60; lat <= 60; lat += 30) { const ps = []; for (let lon = -180; lon <= 180; lon += 3) ps.push([lon, lat]); linea(ps); }
+      for (let lon = -180; lon < 180; lon += 30) { const ps = []; for (let lat = -90; lat <= 90; lat += 3) ps.push([lon, lat]); linea(ps); }
+      cx.strokeStyle = 'rgba(' + ACENTO + ',' + (grande ? 0.38 : 0.3) + ')'; cx.lineWidth = 0.7;
+      for (const l of lineas) linea(l);
+      const arco = (n, fuerte) => {
+        const va = vec(L.lon, L.lat), vb = vec(n.lon, n.lat), N = 80, ps = [];
+        for (let i = 0; i <= N; i++) { const w = slerp(va, vb, i / N); ps.push([Math.atan2(w[0], w[2]) / RAD, Math.asin(Math.max(-1, Math.min(1, w[1]))) / RAD]); }
+        cx.strokeStyle = fuerte ? 'rgba(' + BLANCO + ',.95)' : 'rgba(' + ACENTO + ',.32)'; cx.lineWidth = fuerte ? (grande ? 1.8 : 1.3) : 0.8; if (fuerte) { cx.shadowColor = 'rgba(' + ACENTO + ',.9)'; cx.shadowBlur = 10; }
+        linea(ps, (i) => (fuerte ? 0.16 : 0.07) * Math.sin(Math.PI * i / N)); cx.shadowBlur = 0;
+      };
+      for (const n of r.nubes) if (!paradasV.includes(n)) arco(n, false);
+      for (const n of paradasV) arco(n, true);
+      const cajas = [];
+      const rotulo = (txt, x, y, fuerte) => { cx.font = (fuerte ? '600 12px' : '500 11px') + ' "IBM Plex Mono", ui-monospace, monospace'; const w = cx.measureText(txt).width; for (const dy of [0, -13, 13, -26, 26]) { const b = [x - 2, y + dy - 7, x + w + 2, y + dy + 7]; if (cajas.some((k) => b[0] < k[2] && b[2] > k[0] && b[1] < k[3] && b[3] > k[1])) continue; cajas.push(b); cx.lineWidth = 3; cx.strokeStyle = 'rgba(6,8,12,.9)'; cx.strokeText(txt, x, y + dy); cx.fillStyle = '#F4F6F8'; cx.fillText(txt, x, y + dy); return; } };
+      cx.textBaseline = 'middle'; cx.textAlign = 'left';
+      const me = proy(L.lon, L.lat);
+      if (me.z > 0) { cx.fillStyle = '#9CC3E4'; cx.beginPath(); cx.arc(me.x, me.y, 4.5, 0, 7); cx.fill(); cx.strokeStyle = 'rgba(' + ACENTO + ',.6)'; cx.lineWidth = 1.2; cx.beginPath(); cx.arc(me.x, me.y, 11, 0, 7); cx.stroke(); rotulo((T('Tú') + ' · ' + L.nombre).toUpperCase(), me.x + 16, me.y + 14, true); }
+      for (const n of paradasV) { const q = proy(n.lon, n.lat); if (q.z <= 0) continue; cx.fillStyle = '#F4F6F8'; cx.beginPath(); cx.arc(q.x, q.y, 3, 0, 7); cx.fill(); rotulo(n.nombre.replace(/ \(.*\)/, '') + ' · ' + n.ms + ' ms', q.x + 9, q.y, false); }
+      if (!grande) { cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textAlign = 'center'; cx.fillStyle = 'rgba(' + BLANCO + ',.6)'; cx.fillText(T('La otra cara del planeta').toUpperCase(), CX, CY + R + 22); }
     };
-    for (const n of r.nubes) if (!paradasV.includes(n)) dibujaArco(n, false);
-    for (const n of paradasV) dibujaArco(n, true);
-    // labels
-    cx.font = '500 11px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle';
-    for (const n of paradasV) { const q = proy(n.lon, n.lat, 0.16 * Math.sin(Math.PI)); const q2 = proy(n.lon, n.lat); if (q2.z <= -0.05) continue; cx.fillStyle = '#F4F6F8'; cx.beginPath(); cx.arc(q2.x, q2.y, 3, 0, 7); cx.fill(); const txt = n.nombre + ' · ' + n.ms + ' ms'; cx.lineWidth = 3; cx.strokeStyle = 'rgba(6,8,12,.9)'; cx.strokeText(txt, q2.x + 9, q2.y); cx.fillStyle = '#F4F6F8'; cx.fillText(txt, q2.x + 9, q2.y); }
-    const me = proy(L.lon, L.lat); cx.fillStyle = '#9CC3E4'; cx.beginPath(); cx.arc(me.x, me.y, 4.5, 0, 7); cx.fill(); cx.strokeStyle = 'rgba(' + ACENTO + ',.6)'; cx.lineWidth = 1.2; cx.beginPath(); cx.arc(me.x, me.y, 11, 0, 7); cx.stroke();
-    cx.font = '600 12px "IBM Plex Mono", ui-monospace, monospace'; cx.fillStyle = '#F4F6F8'; cx.fillText((T('Tú') + ' · ' + L.nombre).toUpperCase(), me.x + 16, me.y + 14);
+    esfera(L.lon, L.lat, 390, H / 2 + 6, 300, true);
+    esfera(L.lon + 180, -L.lat, 905, H / 2 - 20, 150, false);
     return c;
   }
   // 2. the compass of times: each destination at its true bearing from you, the spoke as long as its milliseconds
@@ -249,12 +271,12 @@
     for (const ms of [50, 100, 200, 400]) { if (ms > maxMs * 1.05) break; const rr = esc(ms); cx.beginPath(); cx.arc(CX, CY, rr, 0, 7); cx.stroke(); cx.fillText(ms + ' ms', CX + 4, CY - rr - 7); }
     cx.textAlign = 'center'; cx.fillStyle = 'rgba(' + BLANCO + ',.7)';
     [[T('N'), 0], [T('E'), 90], [T('S'), 180], [T('O'), 270]].forEach(([k, a]) => { const q = a * RAD; cx.fillText(k, CX + (Rm + 16) * Math.sin(q), CY - (Rm + 16) * Math.cos(q)); });
-    const orden = r.nubes.slice().sort((a, b) => a.ms - b.ms);
+    const orden = r.nubes.slice().sort((a, b) => a.ms - b.ms), cajas = [[CX - 60, CY + 10, CX + 60, CY + 26]];
     orden.forEach((n, i) => {
       const a = rumbo(L, n) * RAD, rr = esc(n.ms), x = CX + rr * Math.sin(a), y = CY - rr * Math.cos(a), top = i < 5;
       cx.strokeStyle = top ? 'rgba(' + ACENTO + ',.9)' : 'rgba(' + BLANCO + ',.28)'; cx.lineWidth = top ? 1.6 : 0.9; cx.beginPath(); cx.moveTo(CX, CY); cx.lineTo(x, y); cx.stroke();
       cx.fillStyle = top ? '#9CC3E4' : 'rgba(' + BLANCO + ',.6)'; cx.beginPath(); cx.arc(x, y, top ? 3.2 : 2, 0, 7); cx.fill();
-      if (top || i % 3 === 0) { cx.textAlign = Math.sin(a) >= 0 ? 'left' : 'right'; cx.fillStyle = top ? '#F4F6F8' : 'rgba(' + BLANCO + ',.6)'; cx.font = (top ? '600 10.5px' : '400 9.5px') + ' "IBM Plex Mono", ui-monospace, monospace'; cx.fillText(n.nombre.replace(/ \(.*\)/, '') + ' ' + n.ms, x + (Math.sin(a) >= 0 ? 7 : -7), y); }
+      if (top || i % 3 === 0) { const txt = n.nombre.replace(/ \(.*\)/, '') + ' ' + n.ms, der = Math.sin(a) >= 0; cx.font = (top ? '600 10.5px' : '400 9.5px') + ' "IBM Plex Mono", ui-monospace, monospace'; const w = cx.measureText(txt).width, x0 = der ? x + 7 : x - 7 - w; for (const dy of [0, -12, 12, -24, 24, -36, 36]) { const b = [x0 - 2, y + dy - 6, x0 + w + 2, y + dy + 6]; if (cajas.some((k) => b[0] < k[2] && b[2] > k[0] && b[1] < k[3] && b[3] > k[1])) continue; cajas.push(b); cx.textAlign = 'left'; cx.fillStyle = top ? '#F4F6F8' : 'rgba(' + BLANCO + ',.6)'; cx.fillText(txt, x0, y + dy); break; } }
     });
     cx.fillStyle = '#9CC3E4'; cx.beginPath(); cx.arc(CX, CY, 4, 0, 7); cx.fill();
     cx.textAlign = 'center'; cx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace'; cx.fillStyle = '#F4F6F8'; cx.fillText((T('Tú') + ' · ' + L.nombre).toUpperCase(), CX, CY + 18);
@@ -263,7 +285,7 @@
   // 3. light against reality: for each destination, the physical minimum and what was measured
   function figuraLuz(r) {
     const filas = r.nubes.slice().sort((a, b) => a.ms - b.ms).slice(0, 16), W = 1100, fh = 26, H = 40 + filas.length * fh + 30, [c, cx] = lienzo(W, H);
-    const maxMs = Math.max(...filas.map((n) => n.ms)), x0 = 250, ancho = W - x0 - 90, esc = (ms) => ancho * ms / maxMs;
+    const maxMs = Math.max(...filas.map((n) => n.ms)), x0 = 250, ancho = W - x0 - 150, esc = (ms) => ancho * ms / maxMs;
     cx.fillStyle = '#06080C'; cx.fillRect(0, 0, W, H);
     cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle'; cx.fillStyle = 'rgba(' + BLANCO + ',.6)';
     cx.fillText(T('mínimo de la luz por la fibra').toUpperCase(), x0, 16); cx.fillStyle = '#9CC3E4'; cx.fillRect(x0 - 14, 12, 8, 8);
@@ -287,7 +309,7 @@
     for (let ms = 50; ms < maxMs; ms += 50) { cx.beginPath(); cx.moveTo(x0, Y(ms)); cx.lineTo(x0 + ancho, Y(ms)); cx.stroke(); cx.textAlign = 'right'; cx.fillText(ms + ' ms', x0 - 8, Y(ms)); }
     for (let km = 2000; km < maxKm; km += 2000) { cx.textAlign = 'center'; cx.fillText(num(km) + ' km', X(km), y0 + 16); }
     cx.strokeStyle = 'rgba(' + ACENTO + ',.85)'; cx.lineWidth = 1.4; cx.setLineDash([5, 4]); cx.beginPath(); cx.moveTo(X(0), Y(0)); cx.lineTo(X(maxKm), Y(minimoMs(maxKm))); cx.stroke(); cx.setLineDash([]);
-    cx.textAlign = 'left'; cx.fillStyle = '#9CC3E4'; cx.fillText(T('mínimo de la luz por la fibra'), X(maxKm * 0.55) + 8, Y(minimoMs(maxKm * 0.55)) - 12);
+    cx.textAlign = 'left'; cx.fillStyle = '#9CC3E4'; cx.fillText(T('mínimo de la luz por la fibra'), X(maxKm * 0.55) + 8, Y(minimoMs(maxKm * 0.55)) + 14);
     for (const n of r.nubes) { cx.fillStyle = 'rgba(' + BLANCO + ',.85)'; cx.beginPath(); cx.arc(X(n.km), Y(n.ms), 3.2, 0, 7); cx.fill(); }
     const top = r.nubes.slice().sort((a, b) => a.ms - b.ms); [top[0], top[Math.floor(top.length / 2)], top[top.length - 1]].forEach((n) => { if (!n) return; cx.fillStyle = '#F4F6F8'; cx.fillText(n.nombre.replace(/ \(.*\)/, '') + ' · ' + n.ms + ' ms', X(n.km) + 7, Y(n.ms) - 8); });
     return c;
@@ -303,7 +325,7 @@
     const porCont = new Map(); for (const n of orden) { const k = continente(n.region); if (!porCont.has(k)) porCont.set(k, n); }
     const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
     const cab = el('header', 'cab'); cab.append(el('p', 'k', 'GUARDIANA · ÓRBITA'), el('h1', 't', T('El viaje de tus datos')), el('p', 's', r.origen.nombre + (r.origen.aprox ? ' (' + T('aproximada') + ')' : '') + (fuera && !fuera.error && fuera.operador ? ' · ' + fuera.operador : '') + ' · ' + cuando.toLocaleDateString(loc(), { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + cuando.toLocaleTimeString(loc(), { hour: '2-digit', minute: '2-digit' }) + (r.borde ? ' · ' + T('borde de internet más cercano') + ': ' + r.borde.nombre + (r.borde.ms != null ? ' (' + r.borde.ms + ' ms)' : '') : '')));
-    const acc = el('div', 'acciones'); const bPdf = el('button', '', T('Guardar PDF')); bPdf.type = 'button'; const bX = el('button', '', T('Cerrar')); bX.type = 'button'; acc.append(bPdf, bX); cab.append(acc);
+    const acc = el('div', 'acciones'); const bPdf = el('button', '', T('Guardar PDF')); bPdf.type = 'button'; const bX = el('button', '', T('Cerrar')); bX.type = 'button'; acc.append(bPdf, bX, el('small', '', T('Se abre el cuadro de impresión: elige «Guardar como PDF».'))); cab.append(acc);
     a.append(cab);
     const f1 = el('figure'); f1.append(figuraGlobo(r, lineas, paradasV)); f1.append(el('figcaption', '', T('Tu planeta: cada arco es un camino medido desde tu equipo; los brillantes, el más rápido de cada continente.') + ' ' + T('Conexiones medidas, trayectorias ilustrativas: el arco une origen y destino, no muestra por dónde fueron los paquetes.'))); a.append(f1);
     const cifras = el('section', 'cifras');
@@ -321,7 +343,7 @@
     dos.append(sec); a.append(dos);
     const f3 = el('figure'); f3.append(figuraLuz(r)); f3.append(el('figcaption', '', T('La luz contra la realidad: en azul, lo que tardaría la luz en línea recta; en gris, lo que han tardado tus datos.'))); a.append(f3);
     const f4 = el('figure'); f4.append(figuraDispersion(r)); f4.append(el('figcaption', '', T('Distancia frente a tiempo: cada punto es un destino; la línea de puntos es el mínimo físico para esa distancia. Lo que queda por encima son equipos, colas y caminos que no van rectos: no se traduce en kilómetros.'))); a.append(f4);
-    const tabla = el('table'); const th = el('tr'); [T('Destino'), T('Continente'), 'ms', 'km', T('mínimo'), T('rodeo')].forEach((k) => th.append(el('th', '', k))); tabla.append(th);
+    const tabla = el('table'); const th = el('tr'); [T('Destino'), T('Continente'), 'ms', 'km', T('mínimo'), '× ' + T('mínimo')].forEach((k) => th.append(el('th', '', k))); tabla.append(th);
     for (const n of orden) { const tr = el('tr'); [n.nombre, continente(n.region), n.ms + ' ms', num(Math.round(n.km)), num(Math.round(n.minimo)) + ' ms', '×' + num(n.ms / n.minimo, 1)].forEach((v) => tr.append(el('td', '', v))); tabla.append(tr); }
     a.append(tabla);
     a.append(el('p', 'pie', T('Son tus datos y de nadie más: este informe se ha generado en tu equipo y no se ha enviado a ningún sitio.') + ' · GUARDIANA · guardianagroup.com'));

@@ -536,7 +536,8 @@ body.viaje header, body.viaje #capas, body.viaje #puertas, body.viaje #directo, 
 .informe .cab .k { margin: 0; font: 500 11px/1 var(--mono); letter-spacing: .16em; color: var(--accent); }
 .informe .cab .t { margin: 8px 0 6px; font: 600 38px/1.1 var(--texto); letter-spacing: -.01em; }
 .informe .cab .s { margin: 0; font: 400 12px/1.5 var(--mono); color: #A9B3BE; max-width: 70ch; }
-.informe .acciones { display: flex; gap: 8px; }
+.informe .acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.informe .acciones small { flex-basis: 100%; font: 400 10.5px/1.4 var(--mono); color: #8A95A2; }
 .informe .acciones button { all: unset; cursor: pointer; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font: 600 12px/1 var(--texto); }
 .informe .acciones button:hover { background: var(--accent); color: var(--accent-fg); }
 .informe figure { margin: 0 0 22px; }
@@ -546,14 +547,15 @@ body.viaje header, body.viaje #capas, body.viaje #puertas, body.viaje #directo, 
 .informe .cifras div { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: rgba(12,17,24,.6); }
 .informe .cifras b { display: block; font: 600 30px/1.1 var(--texto); color: var(--fg); font-variant-numeric: tabular-nums; }
 .informe .cifras span { display: block; margin-top: 6px; font: 500 10.5px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #8A95A2; }
-.informe .dos { display: grid; grid-template-columns: minmax(280px, 560px) 1fr; gap: 24px; align-items: start; margin-bottom: 22px; }
+.informe .dos { display: grid; grid-template-columns: minmax(280px, 460px) minmax(300px, 1fr); gap: 28px; align-items: start; margin-bottom: 22px; }
 .informe .texto h2 { margin: 0 0 8px; font: 600 15px/1.3 var(--texto); }
 .informe .texto p { margin: 0 0 14px; font: 400 13.5px/1.6 var(--texto); color: var(--fg); max-width: 62ch; }
 .informe table { width: 100%; border-collapse: collapse; font: 400 12px/1.4 var(--mono); margin-bottom: 22px; }
 .informe th, .informe td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
 .informe th { font-weight: 500; color: #8A95A2; letter-spacing: .06em; text-transform: uppercase; font-size: 10px; }
 .informe .pie { margin: 0; font: 400 10.5px/1.5 var(--mono); color: #8A95A2; }
-@media (max-width: 760px) { .informe .dos { grid-template-columns: 1fr; } .informe .cab .t { font-size: 28px; } }
+@media (max-width: 1000px) { .informe .dos { grid-template-columns: 1fr; } .informe .cab .t { font-size: 28px; } }
+.viaje.final .abajo { display: none; }
 @media print {
   body.imprime-informe > *:not(#informe) { display: none !important; }
   body.imprime-informe { background: #06080C; }

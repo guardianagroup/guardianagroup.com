@@ -425,7 +425,7 @@
   function pinta(t) {
     const p = P(); if (!p) return;
     const cx = p.ctx, G = p.geo;
-    pintaFronteras(cx, p, G); pintaPaises(cx, p, G);
+    pintaFronteras(cx, p, G); if (soloTu && document.body.classList.contains('viaje')) PAIS_CAJAS = []; else pintaPaises(cx, p, G); // the journey wants a clean planet
     // «Mi conexión» (owner, 22 Oct 2026): while the visitor looks at their own data the planet shows only that —
     // no cables, no satellites, nothing that is not theirs — so there is no doubt about what is whose.
     if (soloTu) { cx.globalCompositeOperation = 'lighter'; if (typeof soloTuPinta === 'function') soloTuPinta(cx, p, G, t); return; }
