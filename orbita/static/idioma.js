@@ -328,6 +328,8 @@
     'ZERO se queda en blanco y negro; las webs se ven en color.': ['ZERO stays in black and white; sites show in colour.', 'O ZERO fica em preto e branco; os sites aparecem em cores.'],
     // ZERO, the auction (22 Oct 2026)
     'Subasta': ['Auction', 'Leilão'],
+    'Minimizar': ['Minimise', 'Minimizar'], 'Minimizar el panel': ['Minimise the panel', 'Minimizar o painel'],
+    'Ocultar el panel y ver la web en grande': ['Hide the panel and see the site full size', 'Ocultar o painel e ver o site grande'],
     'Tu privacidad hoy': ['Your privacy today', 'Sua privacidade hoje'],
     'empresas evitadas': ['companies kept out', 'empresas evitadas'], 'subastas vistas': ['auctions seen', 'leilões vistos'], 'países': ['countries', 'países'], 'cortes': ['cuts', 'cortes'],
     'Abre una web y ZERO te contará aquí lo que ha cortado.': ['Open a site and ZERO will tell you here what it cut.', 'Abra um site e o ZERO vai contar aqui o que cortou.'],
