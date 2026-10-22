@@ -505,7 +505,7 @@
 "nivel": "{t:NIVEL} {1}",
 "equipoEn": "Questo computer si trova a {1}[. Cambia{2}]",
 "pareceEn": "Sembra che questo computer ora si trovi a {1}",
-"puntoKm": "Il tuo punto è a {1} km da {2}, la località più vicina che il programma conosce. Se il tuo comune è un altro, scéglilo.",
+"puntoKm": "Il tuo punto è a {1} km da {2}, la località più vicina che il programma conosce. Se il tuo comune è un altro, sceglilo.",
 "precision": "precisione {1}",
 "medidoConfirmado": "Misurata con la posizione del tuo sistema[ (precisione {1})] e confermata da te. Resta solo su questo computer.",
 "elegidoConfirmado": "{t:Elegido por ti} e confermata da te. Resta solo su questo computer."

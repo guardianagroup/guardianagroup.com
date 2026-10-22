@@ -13,7 +13,8 @@ Runs in the workflow (it needs the network); nothing else of the site changes.
 import io, os, sys, urllib.request
 
 RAIZ = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'orbita', 'static', 'tierra')
-FUENTE = 'https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73776/world.topo.bathy.200407.3x21600x10800.jpg'
+FUENTE = 'https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography-bathymetry/july/world.topo.bathy.200407.3x21600x10800.jpg'
+FUENTE2 = 'https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73776/world.topo.bathy.200407.3x21600x10800.jpg'  # the old address, in case the new one moves
 ANCHO, ALTO, TESELA = 16384, 8192, 2048
 
 def main():
@@ -25,10 +26,18 @@ def main():
     if local:
         im = Image.open(local)
     else:
-        print('descargando', FUENTE)
-        req = urllib.request.Request(FUENTE, headers={'User-Agent': 'GUARDIANA Orbita (guardianagroup.com)'})
-        with urllib.request.urlopen(req, timeout=600) as r:
-            datos = r.read()
+        datos = None
+        for url in (FUENTE, FUENTE2):
+            try:
+                print('descargando', url, flush=True)
+                req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 GUARDIANA Orbita (guardianagroup.com)'})
+                with urllib.request.urlopen(req, timeout=900) as r:
+                    datos = r.read()
+                break
+            except Exception as e:
+                print('no se pudo:', e, flush=True)
+        if not datos:
+            raise SystemExit('sin mapa de la NASA')
         print('descargado', len(datos) // 1048576, 'MB')
         im = Image.open(io.BytesIO(datos))
     im = im.convert('RGB')
