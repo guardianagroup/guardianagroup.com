@@ -48,6 +48,9 @@
         return { n: c.n, w, acc, L: acc[acc.length - 1], fase: Math.random(), aprox: !!c.aprox };
       });
       capas[clave] = { d, lineas, nombres: new Set(d.cables.map((c) => c.n).filter(Boolean)).size };
+      // cables that do not exist yet (datos/cables-previstos.json: planned, tendered, under construction), drawn
+      // dotted and said so in their card; never counted with the ones in service
+      if (clave === 'sub') try { const pv = await cargaJSON('datos/cables-previstos.json'); PREV = (pv.cables || []).filter((c) => c.llegadas && c.llegadas.length >= 2).map((c) => { const w = []; c.llegadas.forEach((q, k) => { const v = P().vec(q.lon, q.lat); if (k) { const a = w[w.length - 1], m = Math.hypot(...a), u = [a[0] / m, a[1] / m, a[2] / m]; const ang = Math.acos(Math.max(-1, Math.min(1, u[0] * v[0] + u[1] * v[1] + u[2] * v[2]))), n = Math.floor(ang / (2 * RAD)); for (let j = 1; j <= n; j++) { const t = j / (n + 1), sa = Math.sin(ang) || 1, f0 = Math.sin((1 - t) * ang) / sa, f1 = Math.sin(t * ang) / sa; w.push([(u[0] * f0 + v[0] * f1) * 1.003, (u[1] * f0 + v[1] * f1) * 1.003, (u[2] * f0 + v[2] * f1) * 1.003]); } } w.push([v[0] * 1.003, v[1] * 1.003, v[2] * 1.003]); }); return { c, w }; }); } catch (_) { PREV = []; }
     } catch (e) { capas[clave] = { error: true }; }
     cargando[clave] = false; pintaNota();
   }
@@ -122,6 +125,20 @@
   // Cities with several data centres: a fine ring that grows with the count, and the number beside the big ones
   // when the planet is close enough to read it.
   const radioCiudad = (n, z) => (2.5 + 1.25 * Math.sqrt(n)) * Math.min(1.5, Math.max(1, z * 0.75));
+  // Polar bases and satellite ground stations (datos/puntos-extra.json, tipo «estacion»; owner, 22 Oct 2026: «polo
+  // norte, polo sur, Antártida, todo»): a ring with a dot, and the name when there is room
+  function pintaEstaciones(cx, p, G) {
+    if (!PT.est || !PT.est.length) return;
+    const z = G.R / (G.R0 || G.R), L = esLimpio();
+    cx.lineWidth = 1.1; cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle';
+    for (const q of PT.est) {
+      const v = p.aVista(q.w); if (v[2] <= 0.05) continue;
+      const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
+      cx.strokeStyle = `rgba(${BLANCO},${L ? 0.9 : 0.75})`; cx.beginPath(); cx.arc(x, y, 4.2, 0, 7); cx.stroke();
+      cx.fillStyle = `rgba(${BLANCO},.95)`; cx.beginPath(); cx.arc(x, y, 1.4, 0, 7); cx.fill();
+      if (z >= 1.8 && q.n) { cx.fillStyle = `rgba(${BLANCO},.85)`; cx.fillText(q.n, x + 8, y); }
+    }
+  }
   function pintaCiudades(cx, p, G) {
     if (!LUG || !LUG.centros) return;
     const z = G.R / (G.R0 || G.R);
@@ -277,7 +294,7 @@
   // ---------- borders (owner, 22 Oct 2026: «que me salgan como divididos los estados») ----------
   // Natural Earth, public domain (datos/fronteras.json, built by herramientas/fronteras.py): countries from ×1.5,
   // states and provinces from ×2.5, their names when close enough. Loaded once, the first time the zoom asks for it.
-  let FR = null;
+  let FR = null, PREV = null;
   const esLimpio = () => document.body.classList.contains('limpio');
   async function cargaFronteras() {
     if (FR || cargando.fronteras) return; cargando.fronteras = true;
@@ -332,10 +349,11 @@
       // an approximate sea trace, so they go dashed and a touch lighter (owner: «rotulado trazado aproximado»)
       if (!capas.sub.exactas) { capas.sub.exactas = capas.sub.lineas.filter((l) => !l.aprox); capas.sub.aprox = capas.sub.lineas.filter((l) => l.aprox); }
       pintaLineas(cx, p, G, capas.sub.exactas, `rgba(${ACERO},.62)`, 1);
+      if (PREV && PREV.length) { cx.save(); cx.setLineDash([2, 6]); pintaLineas(cx, p, G, PREV, `rgba(${BLANCO},.4)`, 1); cx.restore(); }
       if (capas.sub.aprox.length) { cx.setLineDash([6, 4]); pintaLineas(cx, p, G, capas.sub.aprox, `rgba(${ACERO},.5)`, 1); cx.setLineDash([]); }
       pintaLuz(cx, p, G, capas.sub.lineas, t);
     }
-    if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
+    if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaEstaciones(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
     if (estado.sub && capas.sub && capas.sub.lineas) {
       if (cableMarcado >= 0) { const l = capas.sub.lineas[cableMarcado]; if (l) pintaLineas(cx, p, G, [l], `rgba(${BLANCO},.95)`, 2.2); }
       if (llegadaMarcada >= 0 && LUG && LUG.llegadas) { const ls = LUG.llegadas[llegadaMarcada].seg.map((i) => capas.sub.lineas[i]).filter(Boolean); pintaLineas(cx, p, G, ls, `rgba(${BLANCO},.95)`, 2); }
@@ -753,6 +771,19 @@
     f.style.left = (x + 16 + w > G.W - 8 ? x - 16 - w : x + 16) + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, y - 40)) + 'px';
   }
   let centroMarcado = -1, cableMarcado = -1, llegadaMarcada = -1, puntoMarcado = -1, pendiente = null;
+  function buscaEstacion(x, y) {
+    if (!estado.puntos || !PT || !PT.est) return -1;
+    const p = P(), G = p.geo; let mejor = -1, dm = 8 * 8;
+    for (let i = 0; i < PT.est.length; i++) { const v = p.aVista(PT.est[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
+    return mejor;
+  }
+  function fichaEstacion(i, x, y) {
+    const q = PT.est[i], X = q.x || {}, filas = [];
+    if (q.o) filas.push([T('Operador'), q.o]);
+    if (X.enlace) filas.push([T('Enlace'), X.enlace]);
+    if (X.nota) filas.push([T('Datos'), X.nota]);
+    fichaRica(q.n || T('Estación'), filas, T('Datos verificados'), x, y);
+  }
   function buscaPunto(x, y) {
     if (!estado.puntos || !PT || !PT.p) return -1;
     const p = P(), G = p.geo; let mejor = -1, dm = 5.5 * 5.5;
@@ -774,6 +805,23 @@
       if (d < lim && d - lim < dm) { dm = d - lim; mejor = i; }
     }
     return mejor;
+  }
+  function buscaPrevisto(x, y) {
+    if (!estado.sub || !PREV || !PREV.length) return -1;
+    const p = P(), G = p.geo; let mejor = -1, dm = 7 * 7;
+    PREV.forEach((l, i) => { let ax = 0, ay = 0, prev = false; for (const w of l.w) { const v = p.aVista(w), bx = G.CX + G.R * v[0], by = G.CY - G.R * v[1], ve = v[2] > 0.02; if (ve && prev) { const vx = bx - ax, vy = by - ay, L2 = vx * vx + vy * vy || 1, t = Math.max(0, Math.min(1, ((x - ax) * vx + (y - ay) * vy) / L2)); const qx = ax + vx * t - x, qy = ay + vy * t - y, d2 = qx * qx + qy * qy; if (d2 < dm) { dm = d2; mejor = i; } } ax = bx; ay = by; prev = ve; } });
+    return mejor;
+  }
+  function fichaPrevisto(i, x, y) {
+    const c = PREV[i].c, filas = [];
+    const est = { 'en construcción': T('En construcción'), planeado: T('Previsto'), propuesto: T('Propuesto') }[c.estado] || T('Previsto');
+    filas.push([T('Estado'), est + (c.anio ? ' · ' + c.anio : '')]);
+    filas.push([T('Origen'), c.llegadas[0].lugar + ' (' + paisNombre(c.llegadas[0].pais) + ')']);
+    filas.push([T('Destino'), c.llegadas[c.llegadas.length - 1].lugar + ' (' + paisNombre(c.llegadas[c.llegadas.length - 1].pais) + ')']);
+    if (c.km) filas.push([T('Longitud'), num(c.km) + ' km']);
+    if (c.duenos && c.duenos.length) filas.push([T('Dueños'), c.duenos.join(', ')]);
+    if (c.nota) filas.push([T('Datos'), c.nota]);
+    fichaRica(c.nombre, filas, T('Todavía no existe: se dibuja en línea recta, como aviso.') + ' · ' + T('Datos verificados'), x, y);
   }
   function buscaCable(x, y) {
     if (!estado.sub || !capas.sub || !capas.sub.lineas) return -1;
@@ -1080,6 +1128,8 @@
       if (lista) cierraLista();
     }
     if (P() && P().dentro) { if (marcado >= 0 || centroMarcado >= 0 || cableMarcado >= 0 || llegadaMarcada >= 0 || puntoMarcado >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = -1; muestra(-1); } return; }
+    const est = buscaEstacion(x, y);
+    if (est >= 0) { if (!clic) return; centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; fichaEstacion(est, x, y); fichaFija = true; return; }
     const q = buscaPunto(x, y);
     if (q >= 0) { if (marcado >= 0) { marcado = -1; } cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; if (q !== puntoMarcado) { puntoMarcado = q; fichaLugar('punto', q, x, y); } else colocaFicha(x, y); return; }
     puntoMarcado = -1;
@@ -1092,6 +1142,8 @@
     const c = buscaCentro(x, y);
     if (c >= 0) { cableMarcado = -1; if (c !== centroMarcado) { centroMarcado = c; fichaLugar('centro', c, x, y); } else colocaFicha(x, y); return; }
     centroMarcado = -1;
+    const pv = buscaPrevisto(x, y);
+    if (pv >= 0) { if (!clic) return; centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; fichaPrevisto(pv, x, y); fichaFija = true; return; }
     const k = buscaCable(x, y);
     if (k >= 0) { fibraMarcada = -1; if (k !== cableMarcado) { cableMarcado = k; fichaLugar('cable', k, x, y); } else colocaFicha(x, y); return; }
     if (cableMarcado >= 0) cableMarcado = -1;
