@@ -147,12 +147,54 @@ def ofds(d):
     return out
 
 
+class Agua:
+    """The water mask Órbita already ships (static/tierra/agua.png, 2048×1024): is this point at sea?"""
+    def __init__(self):
+        try:
+            from PIL import Image
+            im = Image.open(os.path.join(DATOS, '..', 'static', 'tierra', 'agua.png')).convert('L')
+            self.W, self.H = im.size
+            self.m = im.tobytes()
+        except Exception as e:  # without Pillow the land test is skipped (it only ever drops lines)
+            print('sin máscara de agua:', e); self.m = None
+    def mar(self, lon, lat):
+        if not self.m: return False
+        x = int((lon + 180) / 360 * self.W) % self.W; y = min(self.H - 1, max(0, int((90 - lat) / 180 * self.H)))
+        return self.m[y * self.W + x] >= 128
+    def parte_en_mar(self, l):
+        # sample the line every ~20 km so a long straight hop over a bay counts for what it is
+        if not self.m: return 0.0
+        n = mar = 0
+        for a, b in zip(l, l[1:]):
+            pasos = max(1, int(km(a, b) / 20))
+            for i in range(pasos):
+                t = i / pasos
+                n += 1; mar += self.mar(a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t)
+        return mar / max(1, n)
+
+
 def osm():
+    """OpenStreetMap's telecom lines on land. Owner, 22 Oct 2026: «si dice fibra por tierra y me sale en el mar, no sé»:
+    a line that runs mostly over the sea is a submarine cable tagged as a line (FLAG Europe-Asia, for instance), and
+    one whose name is a submarine cable of cables.json is the same cable twice; both stay out of this layer."""
     p = os.path.join(DATOS, 'tierra-borrador.json')
     if not os.path.exists(p):
         return [], ''
     d = json.load(open(p, encoding='utf-8'))
-    out = [{'n': c.get('n', ''), 'o': c.get('o', ''), 'cc': '', 'e': 'ok', 'l': c['l']} for c in d.get('cables', [])]
+    agua = Agua()
+    sub = set()
+    try:
+        for c in json.load(open(os.path.join(DATOS, 'cables.json'), encoding='utf-8')).get('cables', []):
+            k = re.sub(r'[^a-z0-9]', '', (c.get('n') or '').lower())
+            if len(k) >= 4: sub.add(k)
+    except Exception: pass
+    out, fuera = [], 0
+    for c in d.get('cables', []):
+        k = re.sub(r'[^a-z0-9]', '', (c.get('n') or '').lower())
+        if (len(k) >= 4 and any(k == s or k in s for s in sub)) or agua.parte_en_mar(c['l']) > 0.2:
+            fuera += 1; continue
+        out.append({'n': c.get('n', ''), 'o': c.get('o', ''), 'cc': '', 'e': 'ok', 'l': c['l']})
+    if fuera: print('OpenStreetMap: fuera', fuera, 'líneas que van por el mar o son cables submarinos')
     return out, (d.get('descargado') or '')[:10]
 
 
