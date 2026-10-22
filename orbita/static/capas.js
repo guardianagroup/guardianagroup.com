@@ -94,6 +94,7 @@
   function pintaPuntos(cx, p, G) {
     const forma = { aterrizaje: 0, datos: 1, intercambio: 2 }, z = G.R / (G.R0 || G.R), L = esLimpio();
     const sd = Math.max(1.5, Math.min(4, 1 + z * 0.22)); // data-centre squares grow a little with the zoom (owner: «que se separen bien»)
+    const anillo = Math.max(0, Math.min(1, (z - 1.5) / 1.5)), anillos = [];
     for (let k = 0; k < 3; k++) {
       cx.beginPath();
       for (const q of PT.p) {
@@ -101,11 +102,18 @@
         const v = p.aVista(q.w); if (v[2] <= 0.02) continue;
         const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
         if (k === 0) { cx.moveTo(x, y - 2.6); cx.lineTo(x + 2.6, y); cx.lineTo(x, y + 2.6); cx.lineTo(x - 2.6, y); cx.closePath(); }
-        else if (k === 1) cx.rect(x - sd, y - sd, 2 * sd, 2 * sd);
+        else if (k === 1) { cx.rect(x - sd, y - sd, 2 * sd, 2 * sd); if (anillo) anillos.push(x, y); }
         else { cx.moveTo(x + 2.8, y); cx.arc(x, y, 2.8, 0, 7); }
       }
       if (k === 2) { cx.strokeStyle = `rgba(${BLANCO},.85)`; cx.lineWidth = 1; cx.stroke(); }
       else { cx.fillStyle = k === 0 ? `rgba(${BLANCO},.9)` : L ? `rgba(${BLANCO},.92)` : `rgba(${ACERO},.75)`; cx.fill(); }
+      // 22 Oct 2026, 14:03 (owner): «alrededor un circulito, sutil, para que se identifique mejor» — a faint ring
+      // around each data-centre square once the zoom separates them (it fades in between ×1.5 and ×3)
+      if (k === 1 && anillo) {
+        const ra = sd * 2.3; cx.beginPath();
+        for (let i = 0; i < anillos.length; i += 2) { cx.moveTo(anillos[i] + ra, anillos[i + 1]); cx.arc(anillos[i], anillos[i + 1], ra, 0, 7); }
+        cx.strokeStyle = `rgba(${L ? BLANCO : ACERO},${(0.34 * anillo).toFixed(2)})`; cx.lineWidth = 0.9; cx.stroke();
+      }
     }
   }
 
