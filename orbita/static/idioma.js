@@ -262,6 +262,8 @@
     'Cómo se conecta': ['How it connects', 'Como se liga'],
     'Por dónde salen los datos': ['How the data gets out', 'Por onde saem os dados'],
     'Antenas': ['Antennas', 'Antenas'],
+    'Enlaces locales': ['Local links', 'Ligações locais'],
+    'Novedades': ['What is new', 'Novidades'],
     'Personal': ['Staff', 'Pessoal'],
     'Desde': ['Since', 'Desde'],
     'Qué quieren hacer': ['What they want to do', 'O que querem fazer'],
