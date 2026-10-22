@@ -67,8 +67,8 @@ jobs:
 
       # 22 Oct 2026 (owner: «las redes troncales de tierra, las principales… búscalo por todo internet»):
       # AfTerFibre (CC BY 4.0), the OFDS public data and OpenStreetMap, joined in one file
-      - name: Fibra troncal por tierra (una vez al día, o a mano)
-        if: github.event_name != 'schedule' || github.run_number % 4 == 0
+      - name: Fibra troncal por tierra (a mano o al cambiar la herramienta; GitHub no admite «%» en las expresiones)
+        if: github.event_name != 'schedule'
         timeout-minutes: 10
         continue-on-error: true
         run: python3 herramientas/fibra_tierra.py
