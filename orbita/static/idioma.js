@@ -16,7 +16,11 @@
     ['zh-tw', '繁體中文', 'zh-Hant', 'zh-TW'], ['cs', 'Čeština', 'cs', 'cs-CZ'], ['ro', 'Română', 'ro', 'ro-RO'], ['hu', 'Magyar', 'hu', 'hu-HU'], ['el', 'Ελληνικά', 'el', 'el-GR'],
     ['sk', 'Slovenčina', 'sk', 'sk-SK'], ['bg', 'Български', 'bg', 'bg-BG'], ['hr', 'Hrvatski', 'hr', 'hr-HR'], ['ms', 'Bahasa Melayu', 'ms', 'ms-MY'], ['fil', 'Filipino', 'fil', 'fil-PH'],
     ['sw', 'Kiswahili', 'sw', 'sw-KE'], ['ta', 'தமிழ்', 'ta', 'ta-IN'], ['te', 'తెలుగు', 'te', 'te-IN'], ['pt-pt', 'Português (Portugal)', 'pt-PT', 'pt-PT']];
-  const IDIOMAS = IDI.map((x) => x[0]);
+  // 22 Oct 2026 (owner): «42 idiomas es muy largo: publícala con español e inglés de momento». The other 40 stay
+  // ready in the files; only these are offered and chosen until the owner opens the rest (data-idiomas="todos").
+  const ABIERTOS = (document.documentElement.dataset.idiomas === 'todos') ? null : ['es', 'en'];
+  const IDI_ABIERTOS = ABIERTOS ? IDI.filter((x) => ABIERTOS.includes(x[0])) : IDI;
+  const IDIOMAS = IDI_ABIERTOS.map((x) => x[0]);
   const INFO = Object.fromEntries(IDI.map((x) => [x[0], { nombre: x[1], lang: x[2], locale: x[3], rtl: !!x[4] }]));
   // Spanish → [English, Portuguese]. Upper-case versions are found automatically.
   const D = {
@@ -246,6 +250,7 @@
     'medido': ['measured', 'medido'],
     'verificado': ['verified', 'verificado'],
     'estimado': ['estimated', 'estimado'],
+    'El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.': ['The browser that shows every cut, live. It will arrive when it is finished and tested.', 'O navegador que mostra cada corte, ao vivo. Chegará quando estiver terminado e testado.'],
     'En servicio desde': ['In service since', 'Em serviço desde'], 'Longitud': ['Length', 'Comprimento'], 'Longitud en el mapa': ['Length on the map', 'Comprimento no mapa'], 'Trazado aproximado por mar': ['Approximate sea route', 'Traçado aproximado pelo mar'], 'Datos verificados': ['Verified data', 'Dados verificados'], 'Fuentes': ['Sources', 'Fontes'], 'Dueños': ['Owners', 'Donos'],
     'Desde el mar': ['From the sea', 'Desde o mar'],
     'Capas de satélites': ['Satellite layers', 'Camadas de satélites'], 'Plegar': ['Fold', 'Recolher'],
@@ -738,7 +743,7 @@
       return nav || 'en';
     } catch (_) { return 'es'; }
   }
-  window.GuardianaIdioma = { t, pon: (l) => pon(l), get lang() { return cur; }, get locale() { return cur === 'en' ? 'en-GB' : cur === 'pt' ? 'pt-BR' : cur === 'es' ? 'es-ES' : (INFO[cur] && INFO[cur].locale) || cur; }, get idiomas() { return IDI; } };
+  window.GuardianaIdioma = { t, pon: (l) => pon(l), get lang() { return cur; }, get locale() { return cur === 'en' ? 'en-GB' : cur === 'pt' ? 'pt-BR' : cur === 'es' ? 'es-ES' : (INFO[cur] && INFO[cur].locale) || cur; }, get idiomas() { return IDI_ABIERTOS; } };
   addEventListener('storage', (e) => { if (e.key === 'guardiana-lang' && IDIOMAS.includes(e.newValue) && e.newValue !== cur) pon(e.newValue); });
   // The selector: one small button with the current code; it unfolds a list of the 42 languages, each in its own
   // name, three columns on a computer and one on a phone. Esc or a click outside folds it.
@@ -748,7 +753,7 @@
       caja.innerHTML = '';
       const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'idioma-actual'; btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false');
       const menu = document.createElement('div'); menu.className = 'idioma-menu'; menu.setAttribute('role', 'listbox'); menu.hidden = true;
-      for (const [c, n] of IDI) { const b = document.createElement('button'); b.type = 'button'; b.dataset.l = c; b.setAttribute('role', 'option'); b.lang = INFO[c].lang; b.innerHTML = '<span class="cod">' + c.toUpperCase().replace('-', '·') + '</span><span class="nom">' + n + '</span>'; b.addEventListener('click', () => { pon(c, true); cierra(); }); menu.appendChild(b); }
+      for (const [c, n] of IDI_ABIERTOS) { const b = document.createElement('button'); b.type = 'button'; b.dataset.l = c; b.setAttribute('role', 'option'); b.lang = INFO[c].lang; b.innerHTML = '<span class="cod">' + c.toUpperCase().replace('-', '·') + '</span><span class="nom">' + n + '</span>'; b.addEventListener('click', () => { pon(c, true); cierra(); }); menu.appendChild(b); }
       const cierra = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
       btn.addEventListener('click', (e) => { e.stopPropagation(); const abre = menu.hidden; menu.hidden = !abre; btn.setAttribute('aria-expanded', String(abre)); if (abre) { const act = menu.querySelector('[aria-pressed="true"]'); if (act) act.focus(); } });
       document.addEventListener('click', (e) => { if (!caja.contains(e.target)) cierra(); });

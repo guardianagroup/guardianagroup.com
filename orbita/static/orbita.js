@@ -72,7 +72,9 @@
   // guardians («Una descarga. Tres guardianes»): ZERO on top, the only one that works, opens the browser
   // itself full screen; Radiografías and Comunicaciones say «En construcción» and promise nothing.
   PUERTAS.splice(0, PUERTAS.length,
-    { id: 'zero', n: 'ZERO', s: 'Navegador', d: 'El navegador que muestra cada corte, en directo.', pagina: 'zero/?orbita=1&entrada=0' },
+    // 22 Oct 2026 (owner): until ZERO is finished the door says «En construcción» and does not open; the program
+    // itself is downloaded from the website (beta). Put `pagina: 'zero/?orbita=1&entrada=0'` back to open the demo.
+    { id: 'zero', n: 'ZERO', s: 'En construcción', d: 'El navegador que muestra cada corte, en directo. Llegará cuando esté terminado y probado.', url: null, desarrollo: true },
     { id: 'radiografias', n: 'Radiografías', s: 'En construcción', d: 'A qué empresas y países habla tu computador, tu IA y tu antivirus. Llegará cuando esté terminada y probada.', url: null, desarrollo: true },
     { id: 'comunicaciones', n: 'Comunicaciones', s: 'En construcción', d: 'Chat, llamadas y archivos cifrados de extremo a extremo. Llegará cuando esté terminada y probada.', url: null, desarrollo: true });
   const nav = $('puertas');
@@ -147,7 +149,7 @@
       return;
     }
     // a door with its own show uses the common section (orbita-secciones.js)
-    if (window.GuardianaSecciones && window.GuardianaSecciones.abre(p.id)) {
+    if (!p.desarrollo && window.GuardianaSecciones && window.GuardianaSecciones.abre(p.id)) {
       marco.hidden = true; marco.removeAttribute('src'); $('sin-pagina').hidden = true;
       if (apila) history.pushState({ puerta: p.id }, '', '#' + p.id);
       setTimeout(() => { if (dentro) $('volver').focus(); }, 900);
