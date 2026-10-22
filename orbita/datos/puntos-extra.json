@@ -26,9 +26,13 @@
    "nombre": "McMurdo",
    "operador": "US",
    "clase": "base",
-   "enlace": "VSAT/Ross Island Earth Station (2022) + Starlink (pruebas desde sep-2022)",
-   "nota": "Conexión compartida histórica de 17 Mbps; estación terrena de 4 plantas con NOAA/JPSS comisionada mar-2022, reemplaza Black Island.",
-   "fuente": "https://future.usap.gov/communications-improvements"
+   "enlace": "Satélite geoestacionario desde la estación terrena de Ross Island (en servicio desde 2022, sustituye a la de Black Island, que enlazaba por microondas) + Starlink desde 2022.",
+   "nota": "La mayor base de la Antártida, en la isla de Ross; puerto, pistas de hielo y centro logístico del Polo Sur. Hasta 2022 todo el personal compartía unos 17 Mbps.",
+   "fuente": "https://future.usap.gov/communications-improvements",
+   "programa": "Programa Antártico de EE. UU. (USAP / NSF)",
+   "desde": 1956,
+   "gente": "hasta ~1.000 en verano, ~150 en invierno",
+   "telemetria": "Todo sale por satélite: el enlace principal es el de banda C/Ku de Ross Island hacia Nueva Zelanda y EE. UU.; los datos científicos pesados (NASA, NOAA) bajan también por la estación de la NASA de al lado. No hay cable: el proyecto McMurdo–Nueva Zelanda es solo un estudio."
   },
   {
    "lon": 166.667,
@@ -37,9 +41,13 @@
    "nombre": "McMurdo · estación NASA",
    "operador": "US",
    "clase": "estación terrena",
-   "enlace": "Descarga de satélites polares (NASA)",
-   "nota": "Estación terrena de la NASA en la isla de Ross (antena de 10 m) dentro del Near Space Network: baja datos de satélites polares cuando pasan sobre la Antártida.",
-   "fuente": "https://www.nasa.gov/near-space-network/"
+   "enlace": "Enlaza con la red de la NASA en EE. UU. por satélite (relé TDRSS y enlace geoestacionario de McMurdo).",
+   "nota": "Estación terrena de la NASA en la isla de Ross, junto a McMurdo.",
+   "fuente": "https://www.nasa.gov/near-space-network/",
+   "programa": "NASA Near Space Network (NEN)",
+   "desde": 1994,
+   "antenas": "Una antena de 10 m (MG1) y otra menor",
+   "telemetria": "Recibe datos de satélites en órbita polar cuando pasan sobre la Antártida (misiones de observación de la Tierra de la NASA y NOAA) y los reenvía a White Sands (Nuevo México) por satélite."
   },
   {
    "lon": 0.0,
@@ -48,9 +56,13 @@
    "nombre": "Polo Sur (Amundsen-Scott)",
    "operador": "US",
    "clase": "base",
-   "enlace": "NASA TDRS (SPTR, 50 Mbps) + DSCS (DoD) + GOES + Iridium; Starlink en evaluación",
-   "nota": "No ve satélites geoestacionarios; depende de satélites viejos en órbitas inclinadas con cobertura parcial del día.",
-   "fuente": "https://en.wikipedia.org/wiki/Telecommunications_in_Antarctica"
+   "enlace": "Desde el polo no se ve ningún satélite geoestacionario: la base usa los satélites de relé TDRS de la NASA (antena SPTR-2) y satélites militares DSCS/Skynet en órbitas inclinadas, unas horas al día cada uno; Iridium todo el día para voz y datos ligeros; pruebas de Starlink desde 2023.",
+   "nota": "Base en el polo geográfico, a 2.835 m sobre el hielo; alberga el detector de neutrinos IceCube y el South Pole Telescope.",
+   "fuente": "https://en.wikipedia.org/wiki/Telecommunications_in_Antarctica",
+   "programa": "Programa Antártico de EE. UU. (USAP / NSF)",
+   "desde": 1956,
+   "gente": "~150 en verano, ~45 en invierno",
+   "telemetria": "Los datos del telescopio IceCube y del resto de experimentos (del orden de 1 TB al día) salen por las ventanas de TDRS hacia White Sands (Nuevo México); lo urgente, por Iridium."
   },
   {
    "lon": -64.053,
@@ -59,9 +71,13 @@
    "nombre": "Palmer",
    "operador": "US",
    "clase": "base",
-   "enlace": "Satélite comercial (nuevo proveedor oct-2020, capacidad x3)",
-   "nota": "Candidata a amarre en la Opción 2 del cable chileno.",
-   "fuente": "https://future.usap.gov/communications-improvements"
+   "enlace": "Satélite geoestacionario (VSAT de banda C) y Starlink desde 2023.",
+   "nota": "En la isla Anvers, península Antártica; investigación marina. Candidata a amarre en la opción ampliada del cable chileno.",
+   "fuente": "https://future.usap.gov/communications-improvements",
+   "programa": "Programa Antártico de EE. UU. (USAP / NSF)",
+   "desde": 1968,
+   "gente": "~45 en verano, ~20 en invierno",
+   "telemetria": "Por el VSAT hacia EE. UU.; es la única base estadounidense al norte del Círculo Polar Antártico y la que mejor ve los satélites geoestacionarios."
   },
   {
    "lon": -68.128,
@@ -70,9 +86,13 @@
    "nombre": "Rothera",
    "operador": "GB",
    "clase": "base",
-   "enlace": "Eutelsat OneWeb (TALARIA, hasta 120 Mbps, abr-2024) vía gateway en Chile",
-   "nota": "Antes ≤5 Mbps; BAS lo califica de 'game changer'.",
-   "fuente": "https://www.datacenterdynamics.com/en/news/eutelsat-oneweb-launches-antarctic-connectivity-services/"
+   "enlace": "Satélite geoestacionario (VSAT) y, desde 2023, Starlink, que BAS califica de «game changer» frente a los ≤5 Mbps anteriores.",
+   "nota": "La mayor base británica, en la isla Adelaida, con pista de grava y muelle; nuevo edificio Discovery (2023).",
+   "fuente": "https://www.datacenterdynamics.com/en/news/eutelsat-oneweb-launches-antarctic-connectivity-services/",
+   "programa": "British Antarctic Survey (BAS)",
+   "desde": 1975,
+   "gente": "~160 en verano, ~25 en invierno",
+   "telemetria": "Los datos científicos y de la flota de aviones salen por el VSAT hacia Cambridge (Reino Unido)."
   },
   {
    "lon": -25.5,
@@ -81,9 +101,13 @@
    "nombre": "Halley VI",
    "operador": "GB",
    "clase": "base",
-   "enlace": "",
-   "nota": "Base del British Antarctic Survey sobre la plataforma de hielo Brunt, módulos sobre esquís que se trasladan; abierta en 2013. Comunicaciones por satélite.",
-   "fuente": "https://www.bas.ac.uk/polar-operations/sites-and-facilities/facility/halley/"
+   "enlace": "Satélite geoestacionario (VSAT) en verano; en invierno la base funciona sola, automatizada, y transmite por satélite con generación propia (sistema de energía autónomo desde 2022).",
+   "nota": "Ocho módulos sobre patas hidráulicas con esquís, trasladables cuando la plataforma de hielo Brunt se agrieta.",
+   "fuente": "https://www.bas.ac.uk/polar-operations/sites-and-facilities/facility/halley/",
+   "programa": "British Antarctic Survey (BAS)",
+   "desde": 2013,
+   "gente": "~70 en verano; sin personal en invierno desde 2017",
+   "telemetria": "Las medidas de ozono, clima espacial y meteorología salen por satélite de forma automática todo el invierno: Halley es donde se descubrió el agujero de ozono (1985)."
   },
   {
    "lon": 2.535,
@@ -92,9 +116,13 @@
    "nombre": "Troll",
    "operador": "NO",
    "clase": "base",
-   "enlace": "Vía TrollSat (uplink banda C 45 Mbps)",
-   "nota": "Base del Instituto Polar Noruego; aloja TrollSat.",
-   "fuente": "https://en.wikipedia.org/wiki/Troll_Satellite_Station"
+   "enlace": "Comparte las antenas de TrollSat (KSAT), a 100 m: enlace de banda C hacia Europa (unos 45 Mbps) vía satélite geoestacionario.",
+   "nota": "En Tierra de la Reina Maud, sobre roca (no sobre hielo), a 1.270 m; pista aérea Troll Airfield sobre hielo azul.",
+   "fuente": "https://en.wikipedia.org/wiki/Troll_Satellite_Station",
+   "programa": "Instituto Polar Noruego",
+   "desde": 1990,
+   "gente": "~40 en verano, ~6 en invierno",
+   "telemetria": "Por el mismo enlace de TrollSat hacia Tromsø; la base aloja además una estación del sistema Galileo."
   },
   {
    "lon": 2.5333,
@@ -103,9 +131,13 @@
    "nombre": "TrollSat",
    "operador": "NO",
    "clase": "estación terrena",
-   "enlace": "Banda C 45 Mbps a Europa/Norteamérica; conectada al NOC de KSAT en Tromsø",
-   "nota": "Operativa desde mar-2007, inaugurada 20-ene-2008; con SvalSat permite descargas dos veces por órbita; KSAT anunció 6 antenas más (2021).",
-   "fuente": "https://en.wikipedia.org/wiki/Troll_Satellite_Station"
+   "enlace": "Enlace de satélite geoestacionario de banda C hacia Europa (45 Mbps); no hay cable.",
+   "nota": "Estación terrena polar del hemisferio sur de KSAT, operativa desde marzo de 2007 e inaugurada en enero de 2008.",
+   "fuente": "https://en.wikipedia.org/wiki/Troll_Satellite_Station",
+   "programa": "Kongsberg Satellite Services (KSAT)",
+   "desde": 2008,
+   "antenas": "Varias antenas de 7,3 m de banda S/X y una de banda Ka",
+   "telemetria": "Baja datos de satélites polares (Copernicus Sentinel, EUMETSAT Metop, NOAA JPSS, Radarsat…) y los reenvía a Tromsø (KSAT) por el satélite; junto con SvalSat ve cada satélite polar dos veces por órbita."
   },
   {
    "lon": -8.274,
@@ -114,9 +146,13 @@
    "nombre": "Neumayer III",
    "operador": "DE",
    "clase": "base",
-   "enlace": "",
-   "nota": "Base alemana del Instituto Alfred Wegener sobre la plataforma de hielo Ekström, abierta en 2009; habitada todo el año. Comunicaciones por satélite.",
-   "fuente": "https://www.awi.de/en/expedition/stations/neumayer-station-iii.html"
+   "enlace": "Satélite geoestacionario (Intelsat, banda C) y, desde 2024, Starlink en pruebas.",
+   "nota": "Sobre la plataforma de hielo Ekström; el edificio se eleva hidráulicamente cada año para no quedar enterrado.",
+   "fuente": "https://www.awi.de/en/expedition/stations/neumayer-station-iii.html",
+   "programa": "Instituto Alfred Wegener (AWI)",
+   "desde": 2009,
+   "gente": "~50 en verano, 9 en invierno",
+   "telemetria": "Observatorios meteorológico, geofísico y de aire limpio: los datos salen por satélite hacia Bremerhaven (Alemania)."
   },
   {
    "lon": 123.333,
@@ -125,9 +161,13 @@
    "nombre": "Concordia",
    "operador": "FR/IT",
    "clase": "base",
-   "enlace": "",
-   "nota": "Base franco-italiana (IPEV y PNRA) en el Domo C, a 3.233 m, abierta en 2005; una de las más aisladas del continente. Comunicaciones por satélite.",
-   "fuente": "https://www.institut-polaire.fr/"
+   "enlace": "Satélite (Inmarsat y VSAT de banda C) con muy poco ancho de banda; a 3.233 m y lejos de la costa, los geoestacionarios se ven muy bajos.",
+   "nota": "Domo C, interior del continente: una de las bases más aisladas de la Tierra, con inviernos de −80 °C.",
+   "fuente": "https://www.institut-polaire.fr/",
+   "programa": "IPEV (Francia) y PNRA (Italia)",
+   "desde": 2005,
+   "gente": "~60 en verano, ~13 en invierno",
+   "telemetria": "Los datos de la ESA (estudios de aislamiento para vuelos espaciales), astronomía y glaciología salen por satélite en lotes."
   },
   {
    "lon": 140.001,
@@ -136,9 +176,13 @@
    "nombre": "Dumont d'Urville",
    "operador": "FR",
    "clase": "base",
-   "enlace": "",
-   "nota": "Base francesa (IPEV) en Tierra Adelia, desde 1956; punto de partida de la ruta terrestre a Concordia. Comunicaciones por satélite.",
-   "fuente": "https://www.institut-polaire.fr/"
+   "enlace": "Satélite geoestacionario (VSAT).",
+   "nota": "En la isla de los Petreles, Tierra Adelia.",
+   "fuente": "https://www.institut-polaire.fr/",
+   "programa": "IPEV (Francia)",
+   "desde": 1956,
+   "gente": "~90 en verano, ~25 en invierno",
+   "telemetria": "Por el VSAT; es la puerta logística de Concordia (la ruta terrestre de 1.100 km sale de aquí)."
   },
   {
    "lon": 110.527,
@@ -147,9 +191,13 @@
    "nombre": "Casey",
    "operador": "AU",
    "clase": "base",
-   "enlace": "Speedcast, 9 Mbps simétricos (según Wikipedia)",
-   "nota": "Base australiana (Australian Antarctic Division) en la costa de Wilkes, habitada todo el año. Comunicaciones por satélite.",
-   "fuente": "https://www.antarctica.gov.au/antarctic-operations/stations/casey/"
+   "enlace": "Estación terrena propia ANARESAT (satélite geoestacionario Intelsat, banda C), como las demás bases australianas.",
+   "nota": "Costa de Wilkes, frente a la bahía Vincennes; pista de hielo Wilkins para vuelos desde Hobart.",
+   "fuente": "https://www.antarctica.gov.au/antarctic-operations/stations/casey/",
+   "programa": "Australian Antarctic Division (AAD)",
+   "desde": 1969,
+   "gente": "~150 en verano, ~20 en invierno",
+   "telemetria": "Por ANARESAT hacia Hobart (Tasmania)."
   },
   {
    "lon": 77.969,
@@ -158,9 +206,13 @@
    "nombre": "Davis",
    "operador": "AU",
    "clase": "base",
-   "enlace": "Speedcast, 9 Mbps simétricos (según Wikipedia)",
-   "nota": "Base australiana (Australian Antarctic Division) en las colinas Vestfold, desde 1957; la más al sur de Australia. Comunicaciones por satélite.",
-   "fuente": "https://www.antarctica.gov.au/antarctic-operations/stations/davis/"
+   "enlace": "Estación terrena ANARESAT (Intelsat, banda C).",
+   "nota": "Colinas Vestfold; la base australiana más al sur.",
+   "fuente": "https://www.antarctica.gov.au/antarctic-operations/stations/davis/",
+   "programa": "Australian Antarctic Division (AAD)",
+   "desde": 1957,
+   "gente": "~120 en verano, ~20 en invierno",
+   "telemetria": "Por ANARESAT hacia Hobart."
   },
   {
    "lon": 62.873,
@@ -169,9 +221,13 @@
    "nombre": "Mawson",
    "operador": "AU",
    "clase": "base",
-   "enlace": "Speedcast, 9 Mbps simétricos (según Wikipedia)",
-   "nota": "Base australiana más antigua en el continente (1954), en Mac.Robertson Land. Comunicaciones por satélite.",
-   "fuente": "https://www.antarctica.gov.au/antarctic-operations/stations/mawson/"
+   "enlace": "Estación terrena ANARESAT (Intelsat, banda C).",
+   "nota": "La base más antigua en funcionamiento continuo al sur del Círculo Polar Antártico; aerogeneradores desde 2003.",
+   "fuente": "https://www.antarctica.gov.au/antarctic-operations/stations/mawson/",
+   "programa": "Australian Antarctic Division (AAD)",
+   "desde": 1954,
+   "gente": "~60 en verano, ~15 en invierno",
+   "telemetria": "Por ANARESAT hacia Hobart."
   },
   {
    "lon": -56.627,
@@ -180,9 +236,13 @@
    "nombre": "Marambio",
    "operador": "AR",
    "clase": "base",
-   "enlace": "Internet inalámbrico + Orbcomm (mensajes cortos)",
-   "nota": "Base argentina permanente en la isla Marambio (Seymour), desde 1969, con pista aérea todo el año. Comunicaciones por satélite.",
-   "fuente": "https://www.cancilleria.gob.ar/es/dna"
+   "enlace": "Satélite geoestacionario argentino ARSAT (banda Ku).",
+   "nota": "En la isla Marambio (Seymour); la base argentina de referencia logística.",
+   "fuente": "https://www.cancilleria.gob.ar/es/dna",
+   "programa": "Dirección Nacional del Antártico / Fuerza Aérea Argentina",
+   "desde": 1969,
+   "gente": "~150 en verano, ~55 en invierno",
+   "telemetria": "Por ARSAT hacia Argentina; la pista de tierra permite vuelos todo el año desde Río Gallegos."
   },
   {
    "lon": -56.998,
@@ -191,9 +251,13 @@
    "nombre": "Esperanza",
    "operador": "AR",
    "clase": "base",
-   "enlace": "",
-   "nota": "Base argentina permanente en la bahía Esperanza (1952), con escuela y familias. Candidata a amarre en la opción ampliada del cable chileno.",
-   "fuente": "https://www.cancilleria.gob.ar/es/dna"
+   "enlace": "Satélite geoestacionario ARSAT.",
+   "nota": "Bahía Esperanza, extremo norte de la península. Candidata a amarre en la opción ampliada del cable chileno.",
+   "fuente": "https://www.cancilleria.gob.ar/es/dna",
+   "programa": "Dirección Nacional del Antártico / Ejército Argentino",
+   "desde": 1952,
+   "gente": "~90 en verano (con familias), ~55 en invierno",
+   "telemetria": "Por ARSAT; tiene emisora de radio (LRA 36) y escuela."
   },
   {
    "lon": -58.963,
@@ -202,9 +266,13 @@
    "nombre": "Base Frei / Escudero (Isla Rey Jorge)",
    "operador": "CL",
    "clase": "base",
-   "enlace": "",
-   "nota": "Amarre principal previsto del cable chileno.",
-   "fuente": "https://www.emol.com/noticias/Nacional/2026/08/18/1208799/cable-fibra-optica-magallanes-antartica.html"
+   "enlace": "Satélite geoestacionario (Entel), telefonía móvil local; amarre principal previsto del futuro cable Chile–Antártida.",
+   "nota": "Villa Las Estrellas, aeródromo Teniente Marsh: la puerta de entrada aérea a la península para muchos países.",
+   "fuente": "https://www.emol.com/noticias/Nacional/2026/08/18/1208799/cable-fibra-optica-magallanes-antartica.html",
+   "programa": "Fuerza Aérea de Chile / INACH",
+   "desde": 1969,
+   "gente": "~150 en verano, ~80 en invierno (con familias)",
+   "telemetria": "Por satélite hacia Punta Arenas; con el cable propuesto saldría por fibra a Puerto Williams y la Fibra Óptica Austral."
   },
   {
    "lon": -58.787,
@@ -213,9 +281,13 @@
    "nombre": "King Sejong",
    "operador": "KR",
    "clase": "base",
-   "enlace": "",
-   "nota": "Base surcoreana (KOPRI) en la isla Rey Jorge, desde 1988; habitada todo el año. Comunicaciones por satélite.",
-   "fuente": "https://www.kopri.re.kr/"
+   "enlace": "Satélite geoestacionario (KT SAT).",
+   "nota": "Isla Rey Jorge, bahía Marian.",
+   "fuente": "https://www.kopri.re.kr/",
+   "programa": "Instituto Coreano de Investigación Polar (KOPRI)",
+   "desde": 1988,
+   "gente": "~70 en verano, ~17 en invierno",
+   "telemetria": "Por satélite hacia Corea."
   },
   {
    "lon": -58.963,
@@ -224,9 +296,13 @@
    "nombre": "Gran Muralla",
    "operador": "CN",
    "clase": "base",
-   "enlace": "",
-   "nota": "Primera base china en la Antártida (1985), en la isla Rey Jorge; habitada todo el año. Comunicaciones por satélite.",
-   "fuente": "https://www.chinare.org.cn/"
+   "enlace": "Satélite geoestacionario.",
+   "nota": "Primera base china, en la isla Rey Jorge.",
+   "fuente": "https://www.chinare.org.cn/",
+   "programa": "Administración Ártica y Antártica de China (CAA)",
+   "desde": 1985,
+   "gente": "~40 en verano, ~14 en invierno",
+   "telemetria": "Por satélite hacia China."
   },
   {
    "lon": 76.377,
@@ -235,9 +311,13 @@
    "nombre": "Zhongshan",
    "operador": "CN",
    "clase": "base",
-   "enlace": "",
-   "nota": "Base china en las colinas Larsemann (1989), base de apoyo de la ruta interior a Kunlun. Comunicaciones por satélite.",
-   "fuente": "https://www.chinare.org.cn/"
+   "enlace": "Satélite geoestacionario; aloja una estación terrena del sistema de navegación BeiDou.",
+   "nota": "Colinas Larsemann, junto a Progress (Rusia) y Bharati (India).",
+   "fuente": "https://www.chinare.org.cn/",
+   "programa": "Administración Ártica y Antártica de China (CAA)",
+   "desde": 1989,
+   "gente": "~60 en verano, ~20 en invierno",
+   "telemetria": "Por satélite hacia China; apoyo de la ruta interior a la base Kunlun (Domo A)."
   },
   {
    "lon": 106.837,
@@ -246,9 +326,13 @@
    "nombre": "Vostok",
    "operador": "RU",
    "clase": "base",
-   "enlace": "",
-   "nota": "Base rusa interior (1957) sobre el lago subglacial Vostok, a 3.488 m; registro de la temperatura más baja medida en la Tierra. Comunicaciones por satélite.",
-   "fuente": "https://www.aari.ru/"
+   "enlace": "Satélite geoestacionario de baja capacidad (vista muy baja desde el interior).",
+   "nota": "Sobre el lago subglacial Vostok, a 3.488 m; −89,2 °C en 1983, la temperatura más baja medida en la Tierra.",
+   "fuente": "https://www.aari.ru/",
+   "programa": "Instituto de Investigación Ártica y Antártica (AARI, Rusia)",
+   "desde": 1957,
+   "gente": "~25 en verano, ~13 en invierno",
+   "telemetria": "Por satélite; nueva estación modular inaugurada en 2024."
   },
   {
    "lon": 76.389,
@@ -257,9 +341,13 @@
    "nombre": "Progress",
    "operador": "RU",
    "clase": "base",
-   "enlace": "",
-   "nota": "Base rusa principal (desde 1988) en las colinas Larsemann, junto a Zhongshan y Bharati. Comunicaciones por satélite.",
-   "fuente": "https://www.aari.ru/"
+   "enlace": "Satélite geoestacionario; aloja una estación del sistema GLONASS.",
+   "nota": "Colinas Larsemann, bahía Prydz.",
+   "fuente": "https://www.aari.ru/",
+   "programa": "Instituto de Investigación Ártica y Antártica (AARI, Rusia)",
+   "desde": 1988,
+   "gente": "~80 en verano, ~30 en invierno",
+   "telemetria": "Por satélite hacia Rusia; base logística principal rusa (pista de nieve)."
   },
   {
    "lon": 39.581,
@@ -268,9 +356,13 @@
    "nombre": "Syowa",
    "operador": "JP",
    "clase": "base",
-   "enlace": "",
-   "nota": "Base japonesa (JARE) en la isla Ongul Oriental, desde 1957; habitada todo el año. Comunicaciones por satélite (Intelsat).",
-   "fuente": "https://www.nipr.ac.jp/english/"
+   "enlace": "Estación terrena propia de satélite geoestacionario Intelsat (antena de 7,6 m, desde 2004).",
+   "nota": "Isla Ongul Oriental, bahía Lützow-Holm; atendida por el rompehielos Shirase.",
+   "fuente": "https://www.nipr.ac.jp/english/",
+   "programa": "Instituto Nacional de Investigación Polar (NIPR, Japón)",
+   "desde": 1957,
+   "gente": "~110 en verano, ~30 en invierno",
+   "telemetria": "Por Intelsat hacia Japón: datos del radar PANSY y de las auroras."
   },
   {
    "lon": 11.733,
@@ -279,9 +371,13 @@
    "nombre": "Maitri",
    "operador": "IN",
    "clase": "base",
-   "enlace": "",
-   "nota": "Segunda base india (1989) en el oasis de Schirmacher, habitada todo el año. Comunicaciones por satélite.",
-   "fuente": "https://ncpor.res.in/"
+   "enlace": "Satélite geoestacionario (ISRO / BSNL).",
+   "nota": "Oasis de Schirmacher, Tierra de la Reina Maud; se prevé sustituirla por Maitri II.",
+   "fuente": "https://ncpor.res.in/",
+   "programa": "Centro Nacional de Investigación Polar y Oceánica (NCPOR, India)",
+   "desde": 1989,
+   "gente": "~65 en verano, ~25 en invierno",
+   "telemetria": "Por satélite hacia Goa."
   },
   {
    "lon": 76.188,
@@ -290,9 +386,13 @@
    "nombre": "Bharati",
    "operador": "IN",
    "clase": "base",
-   "enlace": "",
-   "nota": "Base india (2012) en las colinas Larsemann, construida con contenedores reutilizables. Comunicaciones por satélite.",
-   "fuente": "https://ncpor.res.in/"
+   "enlace": "Satélite geoestacionario; junto a la base está AGEOS, la estación terrena de ISRO para satélites de observación de la Tierra (2013).",
+   "nota": "Colinas Larsemann; 134 contenedores reutilizados dentro de una envolvente aerodinámica.",
+   "fuente": "https://ncpor.res.in/",
+   "programa": "Centro Nacional de Investigación Polar y Oceánica (NCPOR, India)",
+   "desde": 2012,
+   "gente": "~70 en verano, ~25 en invierno",
+   "telemetria": "Por satélite hacia la India; AGEOS baja datos de los satélites polares indios cada vez que pasan."
   },
   {
    "lon": 166.768,
@@ -301,9 +401,13 @@
    "nombre": "Scott Base",
    "operador": "NZ",
    "clase": "base",
-   "enlace": "Banda C (Spark NZ / Horizons 3E); Starlink en prueba desde abr-2023",
-   "nota": "Base neozelandesa (1957) en la isla de Ross, a 3 km de McMurdo, con la que comparte apoyo logístico. Comunicaciones por satélite; posible extensión del cable McMurdo–Nueva Zelanda.",
-   "fuente": "https://www.antarcticanz.govt.nz/scott-base/"
+   "enlace": "Comparte el enlace de satélite de McMurdo (a 3 km); Starlink en pruebas.",
+   "nota": "Isla de Ross; se está reconstruyendo por completo (nueva base en construcción).",
+   "fuente": "https://www.antarcticanz.govt.nz/scott-base/",
+   "programa": "Antarctica New Zealand",
+   "desde": 1957,
+   "gente": "~85 en verano, ~11 en invierno",
+   "telemetria": "Por McMurdo hacia Nueva Zelanda; posible extensión del cable McMurdo–Nueva Zelanda que estudia la NSF."
   },
   {
    "lon": -2.842,
@@ -312,9 +416,13 @@
    "nombre": "SANAE IV",
    "operador": "ZA",
    "clase": "base",
-   "enlace": "",
-   "nota": "Base sudafricana (1997) sobre el nunatak Vesleskarvet, habitada todo el año. Comunicaciones por satélite.",
-   "fuente": "https://www.sanap.ac.za/"
+   "enlace": "Satélite geoestacionario (VSAT).",
+   "nota": "Sobre el nunatak Vesleskarvet, a 850 m, Tierra de la Reina Maud.",
+   "fuente": "https://www.sanap.ac.za/",
+   "programa": "Programa Antártico Nacional de Sudáfrica (SANAP)",
+   "desde": 1997,
+   "gente": "~80 en verano, ~10 en invierno",
+   "telemetria": "Por satélite hacia Ciudad del Cabo; radar SuperDARN y observatorio geomagnético."
   },
   {
    "lon": -58.393,
@@ -323,9 +431,13 @@
    "nombre": "Comandante Ferraz",
    "operador": "BR",
    "clase": "base",
-   "enlace": "",
-   "nota": "Candidata a amarre en Opción 2 del cable chileno.",
-   "fuente": "https://www.emol.com/noticias/Nacional/2026/08/18/1208799/cable-fibra-optica-magallanes-antartica.html"
+   "enlace": "Satélite geoestacionario (banda Ku).",
+   "nota": "Bahía del Almirantazgo, isla Rey Jorge; reconstruida en 2020 tras el incendio de 2012. Candidata a amarre en la opción ampliada del cable chileno.",
+   "fuente": "https://www.emol.com/noticias/Nacional/2026/08/18/1208799/cable-fibra-optica-magallanes-antartica.html",
+   "programa": "Programa Antártico Brasileño (PROANTAR, Marina de Brasil)",
+   "desde": 1984,
+   "gente": "~60 en verano, ~20 en invierno",
+   "telemetria": "Por satélite hacia Brasil."
   },
   {
    "lon": 15.39,
@@ -334,9 +446,13 @@
    "nombre": "SvalSat (Svalbard)",
    "operador": "NO",
    "clase": "estación terrena",
-   "enlace": "Fibra: Svalbard Undersea Cable System (antes 55 Mbps vía Intelsat)",
-   "nota": "Abierta 15-abr-1999 (NASA + Norwegian Space Centre); mayor estación polar del mundo.",
-   "fuente": "https://en.wikipedia.org/wiki/Svalbard_Satellite_Station"
+   "enlace": "Dos cables submarinos de fibra Svalbard–Andøya (Svalbard Undersea Cable System, 2004, 1.375 km cada uno, Space Norway) hasta el continente noruego.",
+   "nota": "Platåberget, sobre Longyearbyen; abierta en 1997 y ampliada por NASA y el Centro Espacial Noruego desde 1999.",
+   "fuente": "https://en.wikipedia.org/wiki/Svalbard_Satellite_Station",
+   "programa": "Kongsberg Satellite Services (KSAT)",
+   "desde": 1997,
+   "antenas": "Más de 100 antenas (hasta 13 m), la mayor concentración del mundo",
+   "telemetria": "Desde 78° N ve todos los satélites polares en cada órbita: Copernicus Sentinel, EUMETSAT Metop, NOAA, NASA, Galileo…; los datos salen por la fibra submarina hacia Tromsø y Europa."
   },
   {
    "lon": 18.94,
@@ -345,9 +461,13 @@
    "nombre": "Tromsø (KSAT)",
    "operador": "NO",
    "clase": "estación terrena",
-   "enlace": "Fibra terrestre; centro de operaciones de KSAT",
-   "nota": "Enlaza TrollSat y SvalSat.",
-   "fuente": "https://en.wikipedia.org/wiki/Troll_Satellite_Station"
+   "enlace": "Red de fibra terrestre noruega.",
+   "nota": "Primera estación terrena de Noruega (1967); sede de KSAT.",
+   "fuente": "https://en.wikipedia.org/wiki/Troll_Satellite_Station",
+   "programa": "Kongsberg Satellite Services (KSAT)",
+   "desde": 1967,
+   "antenas": "Varias antenas de banda S/X/Ka",
+   "telemetria": "Centro de operaciones de la red polar de KSAT: aquí llegan y se distribuyen los datos de SvalSat y TrollSat a las agencias espaciales."
   },
   {
    "lon": -133.55,
@@ -356,9 +476,13 @@
    "nombre": "Inuvik",
    "operador": "CA",
    "clase": "estación terrena",
-   "enlace": "Fibra (Mackenzie Valley Fibre Link)",
-   "nota": "Estación terrena del Gobierno de Canadá (Natural Resources Canada) en Inuvik, Territorios del Noroeste, con antenas de varias agencias espaciales; baja datos de satélites de observación de la Tierra.",
-   "fuente": "https://natural-resources.canada.ca/"
+   "enlace": "Fibra terrestre Mackenzie Valley Fibre Link (2017, 1.154 km hasta la red del sur de Canadá).",
+   "nota": "Inuvik, Territorios del Noroeste, a 68° N; la estación terrena más al norte de Canadá.",
+   "fuente": "https://natural-resources.canada.ca/",
+   "programa": "Natural Resources Canada (NRCan), con DLR, SSC y Planet",
+   "desde": 2010,
+   "antenas": "Más de una decena de antenas (hasta 13 m) de Canadá, Alemania, Suecia y operadores privados",
+   "telemetria": "Baja datos de satélites polares (Radarsat, TerraSAR-X, Sentinel…) y los envía al sur por la fibra del valle del Mackenzie."
   },
   {
    "lon": 21.06,
@@ -367,9 +491,13 @@
    "nombre": "Esrange (Kiruna)",
    "operador": "SE",
    "clase": "estación terrena",
-   "enlace": "Fibra terrestre",
-   "nota": "Centro espacial de la Swedish Space Corporation cerca de Kiruna, desde 1966: base de lanzamiento de cohetes sonda y una de las mayores estaciones terrenas de satélite del mundo.",
-   "fuente": "https://sscspace.com/esrange/"
+   "enlace": "Fibra terrestre sueca.",
+   "nota": "A 40 km de Kiruna, 68° N; uno de los mayores centros de recepción polar del mundo.",
+   "fuente": "https://sscspace.com/esrange/",
+   "programa": "Swedish Space Corporation (SSC)",
+   "desde": 1966,
+   "antenas": "Más de 20 antenas (hasta 13 m), de SSC y de ESA",
+   "telemetria": "Datos de satélites polares y de misiones de ESA/NASA; también lanza cohetes sonda y globos estratosféricos."
   },
   {
    "lon": -147.85,
@@ -378,9 +506,13 @@
    "nombre": "Fairbanks (ASF)",
    "operador": "US",
    "clase": "estación terrena",
-   "enlace": "Fibra terrestre (NASA NSN)",
-   "nota": "Estación terrena de la Universidad de Alaska Fairbanks (Instituto de Geofísica), parte de la red de estaciones de la NASA; recibe datos de satélites polares de observación de la Tierra.",
-   "fuente": "https://asf.alaska.edu/"
+   "enlace": "Fibra terrestre de Alaska (GCI / Alaska Communications) hasta la costa y los cables submarinos a Oregón y Washington.",
+   "nota": "Alaska Satellite Facility, Instituto de Geofísica, 64° N.",
+   "fuente": "https://asf.alaska.edu/",
+   "programa": "Universidad de Alaska Fairbanks / NASA Near Space Network",
+   "desde": 1991,
+   "antenas": "Tres antenas de 11 m",
+   "telemetria": "Recibe datos de satélites polares (NASA, ESA Sentinel-1, JAXA…) y los distribuye como centro de datos de radar (SAR) de la NASA."
   },
   {
    "lon": 26.63,
@@ -389,9 +521,13 @@
    "nombre": "Sodankylä",
    "operador": "FI",
    "clase": "estación terrena",
-   "enlace": "Fibra terrestre",
-   "nota": "Centro del Instituto Meteorológico Finlandés en Laponia, con la estación terrena de satélites Sodankylä (desde 2008) y centro de procesado de datos de la ESA.",
-   "fuente": "https://en.ilmatieteenlaitos.fi/"
+   "enlace": "Fibra terrestre finlandesa.",
+   "nota": "Laponia finlandesa, 67° N.",
+   "fuente": "https://en.ilmatieteenlaitos.fi/",
+   "programa": "Instituto Meteorológico Finlandés (FMI) y ESA",
+   "desde": 2008,
+   "antenas": "Varias antenas de banda S/X",
+   "telemetria": "Datos de satélites polares (NOAA, Metop, Sentinel) y centro de procesado de la ESA; también observatorio geofísico desde 1913."
   }
  ]
 }
