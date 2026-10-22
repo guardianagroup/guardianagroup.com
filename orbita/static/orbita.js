@@ -267,10 +267,13 @@
     const y = v[1] * ca + v[2] * sa, z = -v[1] * sa + v[2] * ca;
     return [v[0] * cb + z * sb, y, -v[0] * sb + z * cb];
   };
+  // the view's rotation is computed once per view change, not once per point (tens of thousands of points a frame;
+  // 22 Oct 2026, 19:05: the cables alone cost 90 ms a frame deep in over Paris with the trig inside the loop)
+  const VC = { lat: NaN, lon: NaN, ca: 1, sa: 0, cb: 1, sb: 0 };
   const aVista = (w) => {
-    const a = vista.lat * RAD, b = vista.lon * RAD, ca = Math.cos(a), sa = Math.sin(a), cb = Math.cos(b), sb = Math.sin(b);
-    const x = w[0] * cb - w[2] * sb, z = w[0] * sb + w[2] * cb;
-    return [x, w[1] * ca - z * sa, w[1] * sa + z * ca];
+    if (VC.lat !== vista.lat || VC.lon !== vista.lon) { const a = vista.lat * RAD, b = vista.lon * RAD; VC.lat = vista.lat; VC.lon = vista.lon; VC.ca = Math.cos(a); VC.sa = Math.sin(a); VC.cb = Math.cos(b); VC.sb = Math.sin(b); }
+    const x = w[0] * VC.cb - w[2] * VC.sb, z = w[0] * VC.sb + w[2] * VC.cb;
+    return [x, w[1] * VC.ca - z * VC.sa, w[1] * VC.sa + z * VC.ca];
   };
   // A world point (unit sphere times its height) on the screen; `ve` false when the Earth hides it.
   const pantalla = (w) => {
