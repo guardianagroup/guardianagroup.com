@@ -1682,6 +1682,7 @@
     enganchaVista(); enganchaClases();
     document.querySelectorAll('#capas [data-capa]').forEach((b) => b.addEventListener('click', () => pon(b.dataset.capa, b.getAttribute('aria-pressed') !== 'true')));
     for (const k of ['sub', 'fibra', 'puntos', 'sat']) if (estado[k]) pon(k, true);
+    for (const k of Object.keys(PLEGADO)) PLEGADO[k] = true; estado.satPlegado = estado.satPlegado || false; pintaClases(); // on arrival no class card covers the planet: they open from the buttons
     pintaNota();
     addEventListener('guardiana-idioma', pintaNota);
   }
