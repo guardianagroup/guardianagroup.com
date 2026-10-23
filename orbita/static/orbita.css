@@ -604,7 +604,3 @@ body.viaje header, body.viaje #capas, body.viaje #puertas, body.viaje #directo, 
 .capas button[aria-pressed="true"]:hover i, .sat-vista .orb button[aria-pressed="true"]:hover i { border-color: rgba(var(--si),.85); }
 .sat-vista .orb button { grid-template-columns: 26px 1fr; align-items: center; }
 @media (prefers-reduced-motion: reduce) { .capas button i::before, .sat-vista .orb button i::before { transition: none; } }
-/* 22 Oct 2026, 22:41 (owner: «arriba… cables submarinos, no puede tenerlo el botón… eso es el título»): the layer bar shows titles only;
-   the switches live in the cards underneath. The lit background still says which layers are on. */
-.capas button i { display: none; }
-.capas button { padding: 7px 14px; }
