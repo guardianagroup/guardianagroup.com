@@ -158,7 +158,10 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   cuáles NO están ya en el mapa; (3) mirar a mano lo que OSM tiene en cada ciudad (nombres antiguos: Interxion, Lamda Hellix, Telepoint, DEAC/Delska,
   Euclyde→nLighten…) y vetar duplicados en `herramientas/centros-agencia/vetados.txt` («nombre|país  # motivo»; Claude como tercera voz);
   (4) mandar a Grok solo los que quedan, en tandas de 23; (5) correr el script y publicar. Coordenadas: gana la de edificio (≥5 decimales), si no la de ChatGPT.
-  Siguiente: Norteamérica (pedido en tab-1 el 22 Oct 21:00), luego Asia, África y Oceanía.
+  **Hecho también (22 Oct 21:50)**: Norteamérica (`chatgpt-centros-4` + `grok-centros-4`), Asia y Oriente Medio (`-5`), África y Oceanía (`-6`)
+  → **314 centros de la agencia**. Pendiente: tanda Asia-2 (China, Rusia, Asia central, Sudeste asiático restante) ya pedida a ChatGPT en el chat
+  «Verificar fichas de infraestructura» https://chatgpt.com/c/6ada832b-0b94-83e8-ab23-e58008ece741 (recoger, guardar como `chatgpt-centros-7.json`, mismo método).
+  La pestaña tab-1/seed ahora tiene otro chat (evaluación de seguridad); volver a esos chats por su URL.
   Procedimiento de verificación: pedir a Grok (tab `seed`) la verificación en tandas de ≤21 con el formato «una línea JSON por centro {nombre, ciudad, pais, lat, lon, estado}» (estado ok / cerrado /
   no existe / es otra cosa / no verificado; pedir lat/lon del edificio si las conoce), guardar en `grok-centros-1.json` (claves en español; Grok a veces responde con
   name/city/country: convertir), correr `python3 herramientas/centros_agencia.py`, publicar. Después, la misma lista para Europa, Norteamérica, Asia, África y Oceanía.
