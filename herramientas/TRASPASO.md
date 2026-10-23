@@ -243,3 +243,16 @@ botón (pintaVista/enganchaVista en capas.js, con botón «—» para plegar y e
 - **Satélites**: ya está (órbitas + vista); unificar el estilo de la tarjeta con las nuevas (misma clase CSS `.sat-vista`, renombrar a `.capa-vista`).
 Reglas: todo encendido por defecto; la última clase encendida no se puede apagar (se apaga la capa); guardar en `guarda()`; textos en es/en/pt
 (idioma.js); la tarjeta se cierra con «—» y al pulsar fuera no se cierra (como la de satélites); la nota de la capa (`pintaNota`) dice qué se muestra.
+
+### 8.1 Hecho después (22 Oct 21:55, versiones …r y …s) y lo que pidió el dueño al final
+- **Desplegables de clasificación: hechos** (`CLASES`, `TEXTOS_CLASES`, `enganchaClases`/`pintaClases` en capas.js; tarjetas `#sub-vista`, `#fibra-vista`,
+  `#puntos-vista` con la misma clase CSS `.sat-vista.capa-vista`). Una sola tarjeta abierta a la vez; ninguna al llegar; se abre al pulsar el botón de la
+  capa; «—» la pliega. Filtros aplicados en dibujo y en selección (veSub/veFibra/vePunto). Satélites sigue con su tarjeta propia (`#sat-vista`).
+  Falta: comprobar en móvil (<760 px la tarjeta no se recoloca) y el contador de «Solo grandes operadores» (cuenta operadores, no centros).
+- **Doble clic**: pasos 2,5 → 5 → 10 → 25 → 80…; va al punto del clic. Funcionaba ya (probado con doble clic real); el dueño quizá no había recargado.
+- **Puertas de sección** (ZERO/Radiografías/Comunicaciones): desaparecen a partir de ×3 (`body.explorando`) y vuelven al alejar.
+- **Nombres de país**: solo con el planeta «limpio» (gris), nunca con el planeta en color (`pintaPaises` sale si `!esLimpio()`).
+- **Pedido pendiente (21:53): datos curiosos en «¿Sabías que…?»**: cuántos km de cable submarino hay en el mundo, cuántos de fibra por tierra,
+  cuánto pesarían juntos, cuánto han costado aproximadamente. Lo del mapa ya está (242.193 km de cable submarino medidos en el mapa, 1.897.837 km de
+  fibra por tierra en el mapa: `FT.d.medida`). Lo del mundo real (km totales, peso, coste) hay que pedirlo a la agencia (ChatGPT + Grok, ≥2 voces,
+  sin fuentes en pantalla) y meterlo en `orbita/datos/sabias.json` con el mismo formato que los 121 que hay; nunca inventar cifras.
