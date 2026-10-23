@@ -1,0 +1,370 @@
+[
+{
+"nombre": "NTT Vienna 1",
+"ciudad": "Wien",
+"pais": "AT",
+"lat": 48.2082,
+"lon": 16.3738,
+"estado": "ok"
+},
+{
+"nombre": "Digital Realty ZUR2",
+"ciudad": "Glattbrugg",
+"pais": "CH",
+"lat": 47.4305,
+"lon": 8.5621,
+"estado": "ok"
+},
+{
+"nombre": "Equinix ZH2",
+"ciudad": "Zurich",
+"pais": "CH",
+"lat": 47.3769,
+"lon": 8.5417,
+"estado": "ok"
+},
+{
+"nombre": "Equinix ZH4",
+"ciudad": "Zurich",
+"pais": "CH",
+"lat": 47.3769,
+"lon": 8.5417,
+"estado": "ok"
+},
+{
+"nombre": "Aruba CZ1",
+"ciudad": "Ktiš",
+"pais": "CZ",
+"lat": 48.9211,
+"lon": 14.1428,
+"estado": "ok"
+},
+{
+"nombre": "CE Colo Prague",
+"ciudad": "Praha",
+"pais": "CZ",
+"lat": 50.0755,
+"lon": 14.4378,
+"estado": "ok"
+},
+{
+"nombre": "MasterDC Brno",
+"ciudad": "Brno",
+"pais": "CZ",
+"lat": 49.1951,
+"lon": 16.6068,
+"estado": "ok"
+},
+{
+"nombre": "CyrusOne FRA2",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.1109,
+"lon": 8.6821,
+"estado": "ok"
+},
+{
+"nombre": "Global Switch Frankfurt North",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.1109,
+"lon": 8.6821,
+"estado": "ok"
+},
+{
+"nombre": "Global Switch Frankfurt South",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.1109,
+"lon": 8.6821,
+"estado": "ok"
+},
+{
+"nombre": "NTT Berlin 1",
+"ciudad": "Berlin",
+"pais": "DE",
+"lat": 52.52,
+"lon": 13.405,
+"estado": "ok"
+},
+{
+"nombre": "NTT Frankfurt 3",
+"ciudad": "Rüsselsheim am Main",
+"pais": "DE",
+"lat": 49.9917,
+"lon": 8.4228,
+"estado": "ok"
+},
+{
+"nombre": "NTT Frankfurt 4",
+"ciudad": "Hattersheim am Main",
+"pais": "DE",
+"lat": 50.0689,
+"lon": 8.4822,
+"estado": "ok"
+},
+{
+"nombre": "atNorth DEN01",
+"ciudad": "Copenhagen",
+"pais": "DK",
+"lat": 55.6761,
+"lon": 12.5683,
+"estado": "ok"
+},
+{
+"nombre": "Digital Realty CPH3",
+"ciudad": "Ballerup",
+"pais": "DK",
+"lat": 55.7306,
+"lon": 12.3631,
+"estado": "ok"
+},
+{
+"nombre": "Digital Realty BCN1",
+"ciudad": "Badalona",
+"pais": "ES",
+"lat": 41.45,
+"lon": 2.2474,
+"estado": "ok"
+},
+{
+"nombre": "Digital Realty MAD1",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.4168,
+"lon": -3.7038,
+"estado": "ok"
+},
+{
+"nombre": "Digital Realty MAD3",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.4168,
+"lon": -3.7038,
+"estado": "ok"
+},
+{
+"nombre": "Equinix BA1",
+"ciudad": "Barcelona",
+"pais": "ES",
+"lat": 41.3874,
+"lon": 2.1686,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MD1",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.4168,
+"lon": -3.7038,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MD2",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.4168,
+"lon": -3.7038,
+"estado": "ok"
+},
+{
+"nombre": "Nabiax Alcalá",
+"ciudad": "Alcalá de Henares",
+"pais": "ES",
+"lat": 40.4818,
+"lon": -3.3635,
+"estado": "ok"
+},
+{
+"nombre": "Nabiax Julián Camarillo",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.4168,
+"lon": -3.7038,
+"estado": "ok"
+},
+{
+"nombre": "Nabiax Terrassa",
+"ciudad": "Terrassa",
+"pais": "ES",
+"lat": 41.5632,
+"lon": 2.0089,
+"estado": "ok"
+},
+{
+"nombre": "atNorth FIN01",
+"ciudad": "Helsinki",
+"pais": "FI",
+"lat": 60.1699,
+"lon": 24.9384,
+"estado": "ok"
+},
+{
+"nombre": "atNorth FIN02",
+"ciudad": "Espoo",
+"pais": "FI",
+"lat": 60.2055,
+"lon": 24.6559,
+"estado": "ok"
+},
+{
+"nombre": "Equinix HE1",
+"ciudad": "Helsinki",
+"pais": "FI",
+"lat": 60.1699,
+"lon": 24.9384,
+"estado": "no existe"
+},
+{
+"nombre": "Global Switch Paris East",
+"ciudad": "Clichy",
+"pais": "FR",
+"lat": 48.9044,
+"lon": 2.305,
+"estado": "ok"
+},
+{
+"nombre": "Global Switch Paris West",
+"ciudad": "Clichy",
+"pais": "FR",
+"lat": 48.9044,
+"lon": 2.305,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MA3",
+"ciudad": "Manchester",
+"pais": "GB",
+"lat": 53.4808,
+"lon": -2.2426,
+"estado": "ok"
+},
+{
+"nombre": "Telehouse North Two",
+"ciudad": "London",
+"pais": "GB",
+"lat": 51.5074,
+"lon": -0.1278,
+"estado": "ok"
+},
+{
+"nombre": "Aruba IT3 Global Cloud Data Center",
+"ciudad": "Ponte San Pietro",
+"pais": "IT",
+"lat": 45.6981,
+"lon": 9.5881,
+"estado": "ok"
+},
+{
+"nombre": "Aruba IT4 Hyper Cloud Data Center",
+"ciudad": "Roma",
+"pais": "IT",
+"lat": 41.9028,
+"lon": 12.4964,
+"estado": "ok"
+},
+{
+"nombre": "Equinix ML2",
+"ciudad": "Milano",
+"pais": "IT",
+"lat": 45.4642,
+"lon": 9.19,
+"estado": "ok"
+},
+{
+"nombre": "Green Mountain OSL-Enebakk",
+"ciudad": "Enebakk",
+"pais": "NO",
+"lat": 59.7667,
+"lon": 11.15,
+"estado": "ok"
+},
+{
+"nombre": "Green Mountain OSL-Hamar",
+"ciudad": "Hamar",
+"pais": "NO",
+"lat": 60.7945,
+"lon": 11.0679,
+"estado": "ok"
+},
+{
+"nombre": "Green Mountain SVG-Rennesøy",
+"ciudad": "Rennesøy",
+"pais": "NO",
+"lat": 59.0989,
+"lon": 5.7122,
+"estado": "ok"
+},
+{
+"nombre": "Green Mountain TEL-Rjukan",
+"ciudad": "Rjukan",
+"pais": "NO",
+"lat": 59.8781,
+"lon": 8.5931,
+"estado": "ok"
+},
+{
+"nombre": "Atman KTW-1",
+"ciudad": "Katowice",
+"pais": "PL",
+"lat": 50.2649,
+"lon": 19.0238,
+"estado": "ok"
+},
+{
+"nombre": "Atman WAW-2",
+"ciudad": "Warszawa",
+"pais": "PL",
+"lat": 52.2297,
+"lon": 21.0122,
+"estado": "ok"
+},
+{
+"nombre": "Equinix WA1",
+"ciudad": "Warszawa",
+"pais": "PL",
+"lat": 52.2297,
+"lon": 21.0122,
+"estado": "ok"
+},
+{
+"nombre": "Digital Realty LIS1",
+"ciudad": "Carnaxide",
+"pais": "PT",
+"lat": 38.7223,
+"lon": -9.1393,
+"estado": "ok"
+},
+{
+"nombre": "atNorth SWE01",
+"ciudad": "Stockholm",
+"pais": "SE",
+"lat": 59.3293,
+"lon": 18.0686,
+"estado": "ok"
+},
+{
+"nombre": "Digital Realty STO2",
+"ciudad": "Kista",
+"pais": "SE",
+"lat": 59.4032,
+"lon": 17.9447,
+"estado": "ok"
+},
+{
+"nombre": "Digital Realty STO6",
+"ciudad": "Kista",
+"pais": "SE",
+"lat": 59.4032,
+"lon": 17.9447,
+"estado": "ok"
+},
+{
+"nombre": "Equinix SK1",
+"ciudad": "Stockholm",
+"pais": "SE",
+"lat": 59.3293,
+"lon": 18.0686,
+"estado": "ok"
+}
+]

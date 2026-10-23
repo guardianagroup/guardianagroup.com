@@ -31,7 +31,9 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
 - El workflow `.github/workflows/datos-orbita.yml` corre en `main` (por horario y con `gh workflow run datos-orbita.yml --ref main`) y regenera
   `orbita/datos` (OSM, fibra, relieve ETOPO) con commit a `main`. **Después de cada ejecución**, traer sus datos a `web-idiomas`:
   `git fetch origin main && git checkout origin/main -- orbita/datos && git commit`, para no pisarlos en la siguiente publicación.
-- **Siempre `git commit` en `web-idiomas` antes de cambiar de rama** (se perdió trabajo una vez por un `reset --hard`).
+- **Siempre `git commit` en `web-idiomas` antes de cambiar de rama** (se perdió trabajo dos veces por un `reset --hard`: la segunda, 22 Oct 20:00, al publicar
+  solo unos archivos con otros cambios sin guardar: el `reset --hard` borró los modificados y el `git add -A` de main se llevó los no seguidos).
+  Antes de `git checkout main`, comprobar `test -z "$(git status --porcelain)"`; si no está limpio, commit primero.
 - Publicar (el merge de historias no relacionadas está bloqueado; esto es lo que funciona):
   ```
   git add -A && git commit -m "…" && git push origin web-idiomas
@@ -148,7 +150,11 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
 - **Centros de datos por la agencia (nuevo, 22 Oct 19:50)**: `herramientas/centros_agencia.py` (copia de ixp_agencia.py: lee `herramientas/centros-agencia/<voz>-*.json`
   `[{nombre, operador, ciudad, pais, lat, lon, desde, nota}]`, ≥2 voces en el mismo país a <30 km, no duplica OSM a <600 m, escribe tipo `datos` con `agencia:true` en
   puntos-extra.json). **Primera lista ya guardada**: `herramientas/centros-agencia/chatgpt-centros-1.json` (130 centros de América Latina, ChatGPT; coordenadas a nivel de ciudad, nota vacía).
-  Siguiente paso: pedir a Grok (tab-3) la verificación en 3 tandas de ≤45 con el formato «una línea JSON por centro {nombre, ciudad, pais, lat, lon, estado}» (estado ok / cerrado /
+  **Hecho (22 Oct 20:10, Opus)**: Grok verificó las 130 en 4 tandas (la 3.ª de 42 falló; en dos de 21 sí) → **95 centros de América Latina** en el mapa;
+  35 descartados (30 ya estaban en OSM, comprobado uno a uno; Cirion RIO2 y KIO MER2 «no verificado»). La regla de duplicados ya no usa la distancia
+  (la agencia da a menudo las coordenadas de la ciudad): mismo nombre, mismo código del mismo operador, o el único de ese operador en esa ciudad (ver `repetido()`).
+  Siguiente: Europa (`chatgpt-centros-2.json`, pedido en tab-1 el 22 Oct 20:10), luego Norteamérica, Asia, África y Oceanía.
+  Procedimiento de verificación: pedir a Grok (tab `seed`) la verificación en tandas de ≤21 con el formato «una línea JSON por centro {nombre, ciudad, pais, lat, lon, estado}» (estado ok / cerrado /
   no existe / es otra cosa / no verificado; pedir lat/lon del edificio si las conoce), guardar en `grok-centros-1.json` (claves en español; Grok a veces responde con
   name/city/country: convertir), correr `python3 herramientas/centros_agencia.py`, publicar. Después, la misma lista para Europa, Norteamérica, Asia, África y Oceanía.
   Comprobar antes que capas.js pinta los `datos` de puntos-extra con su ficha (operador, desde, nota): buscar `agencia` en capas.js. `python3 herramientas/ixp_agencia.py` cruza por país+nombre (≥2 voces, <60 km), descarta los que
@@ -172,7 +178,7 @@ Conjunto ~55 % (puntos de intercambio ya ~40 % con los 160 de la agencia). Orden
 6.4 Lo demás como estaba (abajo). Las traducciones a los otros 39 idiomas siguen siendo lo último.
 1. Que el dueño pruebe «El viaje de tus datos» en su PC (Mi conexión → Medir rutas → «Ver el viaje en 3D» → «Descargar vídeo» y «Guardar el viaje (PDF)»)
    y afinar lo que pida. Posible: sonido; elegir resolución del vídeo.
-2. **Ficha de país**: 70 verificados; seguir por tandas de 15 (ahora ChatGPT escribe en el chat «Verificar fichas de infraestructura»
+2. **Ficha de país**: **hecho, 195 países y territorios** (lote 13 el 22 Oct 20:00). Antes: seguir por tandas de 15 (ahora ChatGPT escribe en el chat «Verificar fichas de infraestructura»
    https://chatgpt.com/c/6ada832b-0b94-83e8-ab23-e58008ece741 y Claude revisa como segunda voz; guardar en `herramientas/paises-agencia/chatgpt-paises-N.json` y fusionar).
    Campos: `movil`, `operadores`, `fija`, `diez` (10G), `troncales`, `intercambio`, `novedades`.
 3. Capacidades: pedir a Grok el resto de la lista; cables de una sola voz: **20** (`grok-verifica-10/11.json` resolvieron SPCS, Austral, MARS, Latvia–Sweden 1, Circe South,

@@ -61,6 +61,13 @@ def main():
         for l in open(p, encoding='utf-8'):
             l = l.split('#')[0].strip()
             if '|' in l: n, cc = l.split('|', 1); conf.add(clave(n.strip(), cc.strip()))
+    # vetoes by the third voice (Claude): what the other two confirm but is wrong or already on the map under another name
+    vetos = {}
+    p = os.path.join(CARPETA, 'vetados.txt')
+    if os.path.exists(p):
+        for l in open(p, encoding='utf-8'):
+            l, _, por_que = l.partition('#')
+            if '|' in l: n, cc = l.split('|', 1); vetos[clave(n.strip(), cc.strip())] = por_que.strip() or 'vetado'
     # what the map already has
     extra_p = os.path.join(DATOS, 'puntos-extra.json')
     extra = json.load(open(extra_p, encoding='utf-8'))
@@ -106,11 +113,23 @@ def main():
     salida, descartes = [], []
     for k, rs in sorted(por.items()):
         voces = {v for v, _ in rs}
+        if k in vetos:
+            descartes.append((k, 'vetado: ' + vetos[k])); continue
         if len(voces) < 2 and k not in conf:
             descartes.append((k, 'solo lo nombra ' + ', '.join(voces))); continue
         lats = [num(c['lat']) for _, c in rs]; lons = [num(c['lon']) for _, c in rs]
         lat, lon = statistics.median(lats), statistics.median(lons)
         if max(km(lat, lon, a, b) for a, b in zip(lats, lons)) > 30:
+            descartes.append((k, 'las voces lo sitúan a más de 30 km')); continue
+        # 22 Oct 2026: the mean of a building and a city centre is neither (Telehouse North Two would land in
+        # Shoreditch). Building-level coordinates (5+ decimals) win; otherwise those of the voice that wrote the list
+        # with the addresses (ChatGPT)
+        dec = lambda v: len(str(v).split('.')[1]) if '.' in str(v) else 0
+        fino = [(c['lat'], c['lon']) for _, c in rs if min(dec(c['lat']), dec(c['lon'])) >= 5]
+        prim = [(c['lat'], c['lon']) for v, c in rs if v == 'chatgpt']
+        if fino: lat, lon = num(fino[0][0]), num(fino[0][1])
+        elif prim: lat, lon = num(prim[0][0]), num(prim[0][1])
+        if False:
             descartes.append((k, 'las voces lo sitúan a más de 30 km')); continue
         nombre = max((c['nombre'] for _, c in rs), key=len)
         ops = [c.get('operador') for _, c in rs if c.get('operador')]
