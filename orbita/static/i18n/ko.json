@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "심해 평원 구간(4,000 m 초과, 해저에 놓임)",
   "Altitud del terreno": "지표 고도",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "지하 0.6~1.5 m 깊이에 묻히며, 거의 항상 도로, 철도, 가스관, 전력선을 따라 놓인 관로 안에 있습니다.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "후광이 있는 밝은 굵은 선: 100 Tbit/s 초과 백본; 중간 선: 20 Tbit/s 초과"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "후광이 있는 밝은 굵은 선: 100 Tbit/s 초과 백본; 중간 선: 20 Tbit/s 초과",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "내 도시에서 각 대륙의 데이터 센터까지, 실제 응답 시간과 함께하는 3D 비행.",
+  "Al pulsar, se miden en unos segundos.": "클릭하면 몇 초 만에 측정합니다."
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

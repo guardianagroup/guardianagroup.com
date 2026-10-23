@@ -53,7 +53,7 @@
   async function mideRutas() {
     if (midiendo) return;
     const P = window.OrbitaPlaneta, L = P && P.lugar;
-    if (!L) { rutas = { sinLugar: true }; pinta(); return; }
+    if (!L) { rutas = { sinLugar: true }; quiereViaje = false; pinta(); return; }
     midiendo = true; rutas = { origen: L, nubes: [], borde: null, hechas: 0, total: NUBES.length + 1, cuando: Date.now() }; CAMINOS.clear(); preparaRed(); pinta();
     // the nearest edge of the internet (Cloudflare names its site by airport code), then its round trip
     try {
@@ -68,6 +68,8 @@
     const obrero = async () => { while (cola.length) { const n = cola.shift(); const ms = await sonda(URL_NUBE(n[0]), 3, 5000); const km = kmEntre(L, { lat: n[3], lon: n[4] }); if (ms != null) rutas.nubes.push({ region: n[0], nombre: n[1], cc: n[2], lat: n[3], lon: n[4], ms, km, minimo: minimoMs(km), t0: performance.now() }); rutas.hechas++; if (abierto) pinta(); } };
     await Promise.all([obrero(), obrero(), obrero(), obrero()]);
     rutas.nubes.sort((a, b) => a.ms - b.ms); rutas.fin = Date.now(); midiendo = false; pinta();
+    if (quiereViaje && rutas.nubes.length && window.OrbitaViaje) { quiereViaje = false; window.OrbitaViaje.empieza(rutas); return; }
+    quiereViaje = false;
     if (P && P.ir) P.ir(L.lon, L.lat, 1); // the whole planet, you in the middle: every arc in view
   }
   // The real route, hop by hop, as the program measures it (web pages cannot): {destino:{nombre,ip,lat,lon}, saltos:[{n,ip,nombre,lat,lon,ms,red,cc}]}
@@ -189,12 +191,31 @@
       : T('Se mide desde este navegador: una petición mínima a la puerta pública de 33 centros de datos de nube (Amazon Web Services) y al borde de red más cercano (Cloudflare), solo cuando tú pulsas. No se envía nada tuyo. La ruta salto a salto solo puede medirla el programa GUARDIANA, y Órbita la dibuja igual.');
     s.append(p);
     const b = document.createElement('button'); b.type = 'button'; b.className = 'medir'; b.disabled = midiendo; b.textContent = midiendo ? T('Midiendo…') : rutas && rutas.nubes && rutas.nubes.length ? T('Volver a medir') : T('Medir rutas'); b.addEventListener('click', mideRutas); s.append(b);
-    // the journey and its report: on a computer only for now (owner, 22 Oct 2026: «solo versión PC, de momento»)
-    const pc = !(matchMedia && matchMedia('(pointer: coarse)').matches) && innerWidth >= 900;
-    if (pc && rutas && rutas.nubes && rutas.nubes.length && !midiendo && window.OrbitaViaje) {
-      const v = document.createElement('button'); v.type = 'button'; v.className = 'medir viaje3d'; v.textContent = T('Ver el viaje en 3D'); v.addEventListener('click', () => window.OrbitaViaje.empieza(rutas)); s.append(' ', v);
-      const i = document.createElement('button'); i.type = 'button'; i.className = 'medir'; i.textContent = T('Guardar el viaje (PDF)'); i.addEventListener('click', () => window.OrbitaViaje.informe(rutas)); s.append(' ', i);
-    }
+    return s;
+  }
+  // 23 Oct 2026 (owner): «el viaje en 3D está muy escondido… al darle a ver mi conexión, tiene que aparecer arriba». The
+  // agency (ChatGPT, Grok) agreed: the journey heads the panel, one button that measures first when needed and then
+  // flies; the report is the secondary action once there is something to report. On a computer only, as before.
+  const enPC = () => !(matchMedia && matchMedia('(pointer: coarse)').matches) && innerWidth >= 900;
+  let quiereViaje = false;
+  function vuela() {
+    if (rutas && rutas.nubes && rutas.nubes.length && !midiendo) { quiereViaje = false; window.OrbitaViaje.empieza(rutas); return; }
+    quiereViaje = true; mideRutas();
+  }
+  function seccionViaje() {
+    const s = document.createElement('section'); s.className = 'bloque viaje-cta';
+    const k = document.createElement('span'); k.className = 'k'; k.textContent = T('El viaje de tus datos'); s.append(k);
+    const hecho = rutas && rutas.nubes && rutas.nubes.length && !midiendo;
+    const p = document.createElement('p'); p.className = 'nota';
+    p.textContent = T('Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.') + (hecho ? '' : ' ' + T('Al pulsar, se miden en unos segundos.'));
+    s.append(p);
+    if (rutas && rutas.sinLugar) { const q = document.createElement('p'); q.className = 'nota aviso'; q.textContent = T('Hace falta tu ubicación para dibujarlo: pulsa «Precisar ubicación» arriba y vuelve a intentarlo.'); s.append(q); }
+    const fila = document.createElement('div'); fila.className = 'fila';
+    const v = document.createElement('button'); v.type = 'button'; v.className = 'medir principal'; v.disabled = midiendo;
+    v.textContent = midiendo ? T('Midiendo…') + ' ' + rutas.hechas + ' / ' + rutas.total : T('Ver el viaje en 3D');
+    v.addEventListener('click', vuela); fila.append(v);
+    if (hecho) { const i = document.createElement('button'); i.type = 'button'; i.className = 'medir secundario'; i.textContent = T('Guardar el viaje (PDF)'); i.addEventListener('click', () => window.OrbitaViaje.informe(rutas)); fila.append(i); }
+    s.append(fila);
     return s;
   }
   // ---------- panel ----------
@@ -210,6 +231,7 @@
   function pinta() {
     if (!panel) return;
     const cuerpo = panel.querySelector('.cuerpo'); cuerpo.textContent = '';
+    if (enPC() && window.OrbitaViaje) cuerpo.append(seccionViaje());
     const f = filasLocales();
     cuerpo.append(seccion(T('Ahora mismo'), f.ahora, T('Medido en este navegador, sin consultar a nadie.')));
     const sf = filasFuera();
@@ -333,13 +355,13 @@
     boton.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12.5" r="1.2"/><path d="M5.2 9.7a4 4 0 0 1 5.6 0M2.6 7a7.6 7.6 0 0 1 10.8 0"/></svg><span>' + T('Ver mi conexión') + '</span>';
     der.insertBefore(boton, der.firstChild);
     panel = document.createElement('aside'); panel.id = 'conexion'; panel.className = 'conexion'; panel.hidden = true; panel.setAttribute('aria-label', T('Mi conexión'));
-    panel.innerHTML = '<div class="titulo"><span>' + T('Mi conexión') + '</span><span class="acciones"><button type="button" class="ver" aria-pressed="true">' + T('Ver') + '</button><button type="button" class="nover" aria-pressed="false">' + T('No ver') + '</button></span></div><div class="cuerpo"></div><p class="pie">' + T('Son tus datos y de nadie más. Nada se guarda fuera de este equipo.') + '</p>';
+    panel.innerHTML = '<div class="titulo"><span>' + T('Mi conexión') + '</span><button type="button" class="cerrar" aria-label="' + T('Cerrar') + '" title="' + T('Cerrar') + '"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div><div class="cuerpo"></div><p class="pie">' + T('Son tus datos y de nadie más. Nada se guarda fuera de este equipo.') + '</p>';
     document.body.append(panel);
     boton.addEventListener('click', () => abre(!abierto));
-    panel.querySelector('.nover').addEventListener('click', () => abre(false));
-    panel.querySelector('.ver').addEventListener('click', () => abre(true));
+    panel.querySelector('.cerrar').addEventListener('click', () => abre(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && abierto && !document.body.classList.contains('viaje') && !document.body.classList.contains('con-informe')) abre(false); }, true); // capture: runs before the journey's own Escape, while it is still on
     window.addEventListener('online', () => abierto && pinta()); window.addEventListener('offline', () => abierto && pinta());
-    window.addEventListener('guardiana-idioma', () => { boton.querySelector('span').textContent = T('Ver mi conexión'); panel.querySelector('.titulo > span').textContent = T('Mi conexión'); panel.querySelector('.ver').textContent = T('Ver'); panel.querySelector('.nover').textContent = T('No ver'); panel.querySelector('.pie').textContent = T('Son tus datos y de nadie más. Nada se guarda fuera de este equipo.'); if (abierto) pinta(); });
+    window.addEventListener('guardiana-idioma', () => { boton.querySelector('span').textContent = T('Ver mi conexión'); panel.querySelector('.titulo > span').textContent = T('Mi conexión'); { const x = panel.querySelector('.cerrar'); x.setAttribute('aria-label', T('Cerrar')); x.title = T('Cerrar'); } panel.querySelector('.pie').textContent = T('Son tus datos y de nadie más. Nada se guarda fuera de este equipo.'); if (abierto) pinta(); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', monta); else monta();
   window.OrbitaConexion = { abre, ruta, medirRutas: mideRutas, trayecto, porSatelite, get datos() { return { local: filasLocales(), fuera: fuera, ping, rutas, rutaReal }; } };

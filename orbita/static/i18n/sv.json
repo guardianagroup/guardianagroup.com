@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "på djuphavsslätten (över 4 000 m, vilande på botten)",
   "Altitud del terreno": "Terränghöjd",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Fibern ligger nedgrävd 0,6 till 1,5 m djupt, nästan alltid i rör längs vägar, järnvägar, gasledningar eller kraftledningar.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "ljust, tjockt streck med gloria: stamnät över 100 Tbit/s; medeltjockt streck: över 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "ljust, tjockt streck med gloria: stamnät över 100 Tbit/s; medeltjockt streck: över 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "En flygning i 3D från din stad till datacentren på varje kontinent, med dina verkliga tider.",
+  "Al pulsar, se miden en unos segundos.": "När du klickar mäts de på några sekunder."
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

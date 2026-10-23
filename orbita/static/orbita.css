@@ -606,3 +606,18 @@ body.viaje header, body.viaje #capas, body.viaje #puertas, body.viaje #directo, 
 @media (prefers-reduced-motion: reduce) { .capas button i::before, .sat-vista .orb button i::before { transition: none; } }
 .sat-vista .orb button:disabled { opacity: .38; cursor: default; } /* 22 Oct 2026, 22:48: a refinement whose class is off (Compañías pequeñas without Centros de datos) */
 .sat-vista .orb button:disabled:hover { background: none; }
+
+/* «Mi conexión» (23 Oct 2026, owner + agency): the journey heads the panel; a quiet close instead of «Ver / No ver» */
+.conexion .titulo .cerrar { all: unset; cursor: pointer; display: grid; place-items: center; width: 28px; height: 28px; margin: -6px -6px -6px 0; border-radius: 999px; color: #8A95A2; transition: color .15s, background .15s; }
+.conexion .titulo .cerrar:hover { color: var(--fg); background: rgba(156,195,228,.1); }
+.conexion .bloque.viaje-cta { padding: 12px 14px 14px; margin: 2px 0 6px; border: 1px solid rgba(156,195,228,.28); border-radius: 12px; background: linear-gradient(180deg, rgba(156,195,228,.11), rgba(156,195,228,.03)); }
+.conexion .viaje-cta .k { display: block; font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.conexion .viaje-cta .nota { margin-top: 7px; color: #C4CCD6; }
+.conexion .viaje-cta .nota.aviso { color: var(--aviso); }
+.conexion .viaje-cta .fila { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 11px; }
+.conexion .viaje-cta .medir { margin-top: 0; }
+.conexion .medir.principal { background: var(--accent); color: var(--accent-fg); }
+.conexion .medir.principal:hover:not(:disabled) { background: var(--accent); color: var(--accent-fg); filter: brightness(1.08); }
+.conexion .medir.principal:disabled { opacity: .75; font-variant-numeric: tabular-nums; }
+.conexion .medir.secundario { border-color: var(--line); color: var(--fg); }
+.conexion .medir.secundario:hover { background: rgba(156,195,228,.1); color: var(--fg); border-color: var(--accent); }

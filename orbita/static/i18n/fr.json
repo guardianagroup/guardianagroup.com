@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "dans la plaine abyssale (plus de 4 000 m, posé sur le fond)",
   "Altitud del terreno": "Altitude du terrain",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Elle est enfouie entre 0,6 et 1,5 m de profondeur, presque toujours dans des fourreaux le long des routes, des voies ferrées, des gazoducs ou des lignes électriques.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "trait clair et épais avec halo : dorsales de plus de 100 Tbit/s ; trait moyen : plus de 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "trait clair et épais avec halo : dorsales de plus de 100 Tbit/s ; trait moyen : plus de 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Un vol en 3D depuis votre ville jusqu’aux centres de données de chaque continent, avec vos temps réels.",
+  "Al pulsar, se miden en unos segundos.": "En cliquant, ils sont mesurés en quelques secondes."
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

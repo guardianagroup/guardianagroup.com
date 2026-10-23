@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "di dataran abisal (lebih dari 4.000 m, terletak di dasar laut)",
   "Altitud del terreno": "Ketinggian daratan",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Ditanam sedalam 0,6 hingga 1,5 m, hampir selalu di dalam saluran di sepanjang jalan raya, rel kereta, pipa gas, atau jalur listrik.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "garis terang dan tebal dengan halo: tulang punggung di atas 100 Tbit/s; garis sedang: di atas 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "garis terang dan tebal dengan halo: tulang punggung di atas 100 Tbit/s; garis sedang: di atas 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Penerbangan 3D dari kota Anda ke pusat data di setiap benua, dengan waktu nyata Anda.",
+  "Al pulsar, se miden en unos segundos.": "Saat diklik, waktunya diukur dalam beberapa detik."
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "na abisalnoj ravnici (više od 4.000 m, položen na dno)",
   "Altitud del terreno": "Nadmorska visina terena",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Ukopana je na dubini od 0,6 do 1,5 m, gotovo uvijek u cijevima uz ceste, željezničke pruge, plinovode ili dalekovode.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "svijetla debela crta s aureolom: okosnice iznad 100 Tbit/s; srednja crta: iznad 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "svijetla debela crta s aureolom: okosnice iznad 100 Tbit/s; srednja crta: iznad 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Let u 3D-u od vašeg grada do podatkovnih centara na svakom kontinentu, s vašim stvarnim vremenima.",
+  "Al pulsar, se miden en unos segundos.": "Klikom se izmjere za nekoliko sekundi."
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

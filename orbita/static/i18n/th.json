@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "บนที่ราบก้นสมุทร (มากกว่า 4,000 ม. วางอยู่บนพื้นทะเล)",
   "Altitud del terreno": "ความสูงของพื้นดิน",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "ฝังอยู่ลึก 0.6 ถึง 1.5 ม. เกือบทุกครั้งอยู่ในท่อร้อยสายเลียบถนน ทางรถไฟ ท่อส่งก๊าซ หรือสายไฟฟ้า",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "เส้นสว่างหนาพร้อมแสงเรือง: โครงข่ายหลักเกิน 100 Tbit/s; เส้นขนาดกลาง: เกิน 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "เส้นสว่างหนาพร้อมแสงเรือง: โครงข่ายหลักเกิน 100 Tbit/s; เส้นขนาดกลาง: เกิน 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "การบิน 3D จากเมืองของคุณไปยังศูนย์ข้อมูลในทุกทวีป พร้อมเวลาจริงของคุณ",
+  "Al pulsar, se miden en unos segundos.": "เมื่อคลิก จะวัดภายในไม่กี่วินาที"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

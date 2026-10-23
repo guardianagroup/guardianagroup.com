@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "na abysální plošině (přes 4 000 m, leží na dně)",
   "Altitud del terreno": "Nadmořská výška terénu",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Je uložena v hloubce 0,6 až 1,5 m, téměř vždy v chráničkách podél silnic, železnic, plynovodů nebo elektrických vedení.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "světlá silná čára se září: páteřní sítě nad 100 Tbit/s; střední čára: nad 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "světlá silná čára se září: páteřní sítě nad 100 Tbit/s; střední čára: nad 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Let ve 3D z vašeho města do datových center na každém kontinentu, s vašimi skutečnými časy.",
+  "Al pulsar, se miden en unos segundos.": "Po kliknutí se změří během několika sekund."
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

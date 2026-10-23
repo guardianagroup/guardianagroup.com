@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "گہرے سمندری میدان میں (4,000 m سے زیادہ، تہہ پر ٹکی ہوئی)",
   "Altitud del terreno": "زمین کی بلندی",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "یہ 0.6 سے 1.5 m کی گہرائی میں دفن ہوتا ہے، تقریباً ہمیشہ سڑکوں، ریلوے لائنوں، گیس پائپ لائنوں یا بجلی کی لائنوں کے ساتھ ڈکٹس میں۔",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "ہلکی اور موٹی لکیر ہالے کے ساتھ: 100 Tbit/s سے زیادہ کی بنیادی لائنیں؛ درمیانی لکیر: 20 Tbit/s سے زیادہ"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "ہلکی اور موٹی لکیر ہالے کے ساتھ: 100 Tbit/s سے زیادہ کی بنیادی لائنیں؛ درمیانی لکیر: 20 Tbit/s سے زیادہ",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "آپ کے شہر سے ہر براعظم کے ڈیٹا سینٹرز تک 3D میں ایک پرواز، آپ کے حقیقی اوقات کے ساتھ۔",
+  "Al pulsar, se miden en unos segundos.": "کلک کرنے پر یہ چند سیکنڈ میں ناپے جاتے ہیں۔"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

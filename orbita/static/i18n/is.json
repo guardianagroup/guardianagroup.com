@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "á djúpsjávarsléttunni (yfir 4.000 m, liggjandi á botninum)",
   "Altitud del terreno": "Hæð lands",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Ljósleiðarinn er grafinn á 0,6 til 1,5 m dýpi, nær alltaf í rörum meðfram vegum, járnbrautum, gasleiðslum eða raflínum.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "ljós, þykk lína með geislabaug: stofnnet yfir 100 Tbit/s; meðalþykk lína: yfir 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "ljós, þykk lína með geislabaug: stofnnet yfir 100 Tbit/s; meðalþykk lína: yfir 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Flug í 3D frá borginni þinni að gagnaverum í hverri heimsálfu, með raunverulegum tímum þínum.",
+  "Al pulsar, se miden en unos segundos.": "Þegar þú smellir eru þeir mældir á nokkrum sekúndum."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

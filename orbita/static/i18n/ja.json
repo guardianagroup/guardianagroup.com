@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "深海平原上（4,000 m超、海底に設置）",
   "Altitud del terreno": "地表の標高",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "地下 0.6〜1.5 m に埋設され、ほぼ常に道路、鉄道、ガスパイプライン、送電線沿いの管路に収められています。",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "光彩付きの明るい太線：100 Tbit/s超の基幹線；中太線：20 Tbit/s超"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "光彩付きの明るい太線：100 Tbit/s超の基幹線；中太線：20 Tbit/s超",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "あなたの街から各大陸のデータセンターまで、実際の応答時間とともに 3D で飛ぶ旅。",
+  "Al pulsar, se miden en unos segundos.": "クリックすると、数秒で測定します。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

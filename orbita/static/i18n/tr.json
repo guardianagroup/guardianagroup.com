@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "abisal düzlükte (4.000 m'den derin, tabana oturmuş hâlde)",
   "Altitud del terreno": "Arazi yüksekliği",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "0,6 ile 1,5 m derinliğe gömülüdür; neredeyse her zaman karayolları, demiryolları, gaz boru hatları veya elektrik hatları boyunca uzanan kanallar içindedir.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "açık renkli, kalın ve haleli çizgi: 100 Tbit/s üzeri omurgalar; orta çizgi: 20 Tbit/s üzeri"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "açık renkli, kalın ve haleli çizgi: 100 Tbit/s üzeri omurgalar; orta çizgi: 20 Tbit/s üzeri",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Şehrinizden her kıtadaki veri merkezlerine, gerçek sürelerinizle 3D bir uçuş.",
+  "Al pulsar, se miden en unos segundos.": "Tıkladığınızda birkaç saniyede ölçülür."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

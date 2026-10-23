@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "на абісальній рівнині (понад 4 000 м, лежить на дні)",
   "Altitud del terreno": "Висота місцевості",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Прокладене на глибині від 0,6 до 1,5 м, майже завжди в каналах уздовж доріг, залізниць, газопроводів або ліній електропередачі.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "світла товста лінія з ореолом: магістралі понад 100 Tbit/s; середня лінія: понад 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "світла товста лінія з ореолом: магістралі понад 100 Tbit/s; середня лінія: понад 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Політ у 3D від вашого міста до центрів обробки даних на кожному континенті — з вашими реальними затримками.",
+  "Al pulsar, se miden en unos segundos.": "Після натискання їх буде виміряно за кілька секунд."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",
