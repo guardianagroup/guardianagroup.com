@@ -318,6 +318,16 @@ body.dock .puerta .p { flex: none; width: 9px; height: 9px; }
 body.dock .puerta .et, body.dock .puerta:nth-child(1) .et { font-size: 13px; color: #AEB8C3; }
 body.dock .puerta .et small { font-size: 9.5px; margin-top: 2px; letter-spacing: .08em; }
 body.dock .puerta button:hover .et, body.dock .puerta.on .et { color: var(--fg); }
+/* GUARDIANA OS (23 Oct 2026): not a door into the web but a download, so it stands apart, under the rail of the three,
+   with a hollow dot; the three keep their place and their rail. Phones: not shown (it is a system for computers). */
+body.dock .puerta.aparte { position: absolute !important; left: 0 !important; right: 0 !important; top: calc(50% + 74px) !important; padding-top: 12px; }
+body.dock .puerta.aparte::before { content: ""; position: absolute; left: 0; top: 0; width: 120px; height: 1px; background: linear-gradient(90deg, rgba(156,195,228,.28), transparent); }
+body.dock .puerta.aparte .p { background: none; border: 1px solid rgba(156,195,228,.5); box-shadow: none; }
+body.dock .puerta.aparte.on .p { background: rgba(156,195,228,.35); }
+body.dock .puerta.aparte .et { color: #96A1AD; }
+@media (max-width: 760px) {
+  body.dock .puerta.aparte { display: none; }
+}
 @media (max-width: 760px) {
   body.dock #puertas { inset: auto 0 calc(22px + env(safe-area-inset-bottom, 0px)) 0; width: auto; gap: 22px; }
   body.dock #puertas::before { display: none; }
