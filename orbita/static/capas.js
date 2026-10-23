@@ -1585,6 +1585,7 @@
     caja.querySelectorAll('[data-vista]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.vista === estado.vista)));
     caja.querySelectorAll('[data-orb]').forEach((b) => { b.setAttribute('aria-pressed', String(!!estado.orb[b.dataset.orb])); const c = S && S.cuentaOrb ? S.cuentaOrb[b.dataset.orb] : 0; b.querySelector('b').textContent = c ? num(c) : ''; });
     pintaFase();
+    document.body.classList.toggle('tarjeta', !caja.hidden || !!document.querySelector('.capa-vista:not([hidden])'));
     const cielo = caja.querySelector('[data-vista="cielo"]'); const L = P() && P().lugar;
     if (cielo) { cielo.disabled = !L; const t = cielo.querySelector('.cielo-t'); const v = L && L.nombre ? T('Sobre') + ' ' + L.nombre : T('Sobre ti'); if (t.textContent !== v) t.textContent = v; }
   }
@@ -1609,7 +1610,7 @@
 
   // ---------- the class cards under the layer buttons (22 Oct 2026, 21:48) ----------
   const TEXTOS_CLASES = {
-    sub: { titulo: 'Qué cables ver', clases: { gigante: ['Troncales gigantes', 'Más de 100 Tbit/s: los cables que mueven continentes enteros.'], grande: ['Troncales grandes', 'Entre 20 y 100 Tbit/s.'], regional: ['Cables regionales', 'Menos de 20 Tbit/s: entre islas y países vecinos.'], sinDato: ['Capacidad no publicada', 'En servicio; su capacidad no se conoce.'], aprox: ['Trazado aproximado', 'Los discontinuos: se conoce el cable, no su ruta exacta.'], previstos: ['Previstos', 'Anunciados o en construcción; punteados.'] } },
+    sub: { titulo: 'Qué cables ver', clases: { gigante: ['Troncales gigantes', 'Más de 100 Tbit/s: los cables que mueven continentes enteros.'], grande: ['Troncales grandes', 'Entre 20 y 100 Tbit/s.'], regional: ['Cables regionales', 'Menos de 20 Tbit/s: entre islas y países vecinos.'], sinDato: ['Otros cables en servicio', 'Funcionan, pero su dueño no publica cuántos datos pueden llevar.'], aprox: ['Ruta estimada', 'Sabemos que el cable existe y dónde llega, pero no por dónde va exactamente: se dibuja en discontinuo.'], previstos: ['Previstos', 'Anunciados o en construcción; punteados.'] } },
     fibra: { titulo: 'Qué fibra ver', clases: { principal: ['Troncales principales', '800 km o más, o corredores que comparten cuatro compañías.'], largo: ['Largo recorrido', '400 km o más.'], nacional: ['Troncales nacionales', '150 km o más; aparecen al acercarse.'], regional: ['Enlaces regionales', 'El resto; aparecen cerca.'], obra: ['En construcción', 'Según la fuente; discontinuos.'] } },
     puntos: { titulo: 'Qué puntos ver', clases: { datos: ['Centros de datos', 'Donde se guarda y se sirve internet.'], intercambio: ['Puntos de intercambio', 'Donde las redes se conectan entre sí.'], estaciones: ['Estaciones', 'Bases polares y estaciones terrestres de satélites.'], grandes: ['Solo grandes operadores', 'Compañías con cinco o más centros en el mapa.'] } },
   };
@@ -1636,9 +1637,9 @@
         bt.innerHTML = '<i aria-hidden="true"></i><span class="n"></span><span class="d"></span>';
         bt.querySelector('.n').append(T(n), ' ', Object.assign(document.createElement('b'), {})); bt.querySelector('.d').textContent = T(d);
         bt.addEventListener('click', () => {
-          const principales = PRINCIPALES[k], encendidas = principales.filter((q) => CLASES[k][q]);
-          if (principales.includes(c) && CLASES[k][c] && encendidas.length === 1) return; // the last main class stays: switch the layer off instead
-          CLASES[k][c] = !CLASES[k][c]; if (k === 'sub' && capas.sub) capas.sub.visK = null; pintaClases(); pintaNota();
+          CLASES[k][c] = !CLASES[k][c];
+          // every main class switched off = the layer off (and its classes back on for the next time), never an empty layer that looks broken
+          if (PRINCIPALES[k].every((q) => !CLASES[k][q])) { for (const q of PRINCIPALES[k]) CLASES[k][q] = true; if (k === 'sub' && capas.sub) capas.sub.visK = null; pon(k, false); return; } if (k === 'sub' && capas.sub) capas.sub.visK = null; pintaClases(); pintaNota();
         });
         orb.appendChild(bt);
       }
@@ -1649,13 +1650,16 @@
     addEventListener('resize', pintaClases);
   }
   function pintaClases() {
+    let abierta = !!(estado.sat && !estado.satPlegado);
     for (const k of Object.keys(TEXTOS_CLASES)) {
       const caja = $(k + '-vista'); if (!caja) continue;
       caja.hidden = !estado[k] || !!PLEGADO[k];
+      if (!caja.hidden) abierta = true;
       const b = document.querySelector(`#capas [data-capa="${k}"]`);
       if (b && !caja.hidden && innerWidth > 760) { const r = b.getBoundingClientRect(), w = caja.offsetWidth || 340; let x = r.left + r.width / 2 - w / 2; x = Math.max(12, Math.min(innerWidth - w - 12, x)); caja.style.left = x + 'px'; caja.style.transform = 'none'; caja.style.top = (r.bottom + 10) + 'px'; }
       caja.querySelectorAll('[data-clase]').forEach((bt) => { const c = bt.dataset.clase; bt.setAttribute('aria-pressed', String(!!CLASES[k][c])); const n = cuentaClase(k, c); bt.querySelector('b').textContent = n ? num(n) : ''; });
     }
+    document.body.classList.toggle('tarjeta', abierta);
   }
   // ---------- the three buttons ----------
   function pon(clave, on) {
