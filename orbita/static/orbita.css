@@ -678,7 +678,7 @@ body.solo-tu:not(.espejo-hud) .espejo-modo .pre { opacity: .35; }
 /* the mirror open: a clean planet and its own instruments */
 body.en-espejo #directo, body.en-espejo #puertas, body.en-espejo #capas, body.en-espejo #sat-vista, body.en-espejo #sat-fase, body.en-espejo #capa-nota, body.en-espejo #ficha, body.en-espejo .sat-ficha, body.en-espejo .ficha-panel, body.en-espejo .altura { opacity: 0 !important; pointer-events: none !important; transition: opacity .4s; }
 body.en-espejo #estado { opacity: .35; }
-.espejo-hud { position: fixed; left: calc(40px + env(safe-area-inset-left, 0px)); top: max(104px, calc(50% - 330px)); width: 300px; max-height: calc(100vh - 230px); overflow: auto; z-index: 20; display: flex; flex-direction: column; gap: 12px; scrollbar-width: none; animation: espejo-entra .6s cubic-bezier(.2,.7,.2,1); }
+.espejo-hud { position: fixed; left: calc(40px + env(safe-area-inset-left, 0px)); top: max(104px, calc(50% - 330px)); width: 300px; max-height: calc(100vh - 140px); overflow: auto; z-index: 20; display: flex; flex-direction: column; gap: 12px; scrollbar-width: none; animation: espejo-entra .6s cubic-bezier(.2,.7,.2,1); }
 .espejo-hud::-webkit-scrollbar { display: none; }
 .espejo-hud[hidden] { display: none; }
 @keyframes espejo-entra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -734,19 +734,24 @@ body.en-espejo #estado { opacity: .35; }
 .espejo-lista .met b { font-weight: 500; color: var(--accent); }
 .espejo-lista li.cortada b { color: #8A95A2; text-decoration: line-through; text-decoration-color: rgba(224,122,108,.7); }
 @media (max-width: 1100px) { .espejo-hud { width: 268px; } .espejo-hud .t { font-size: 26px; } .espejo-hud .cifras b { font-size: 24px; } }
+/* short windows: the bars by country give way (the planet already labels each country), so the method and «Datos verificados» stay in view */
+@media (max-height: 860px) and (min-width: 961px) { .espejo-hud .paises { display: none; } }
+/* when the planet leaves no room on its left, the instruments become one compact card at the top */
+@media (max-width: 960px) {
+  .espejo-hud { left: 12px; right: 12px; top: calc(74px + env(safe-area-inset-top, 0px)); width: auto; max-width: 640px; margin: 0 auto; max-height: 40vh; gap: 8px; padding: 10px 12px 12px; border-radius: 16px; background: rgba(8,11,16,.8); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .espejo-hud .t { font-size: 21px; } .espejo-hud .d, .espejo-hud .met, .espejo-hud .paises { display: none; } .espejo-hud .d2 { display: block; margin: -4px 0 0; font: 400 11.5px/1.35 var(--texto); color: #B4BEC9; }
+  .espejo-hud .ver { padding: 7px 12px; font-size: 11.5px; }
+  .espejo-hud .cifras { padding: 7px 0; gap: 6px; } .espejo-hud .cifras b { font-size: 20px; } .espejo-hud .cifras span { font-size: 8.5px; }
+  .espejo-hud .sitios { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -12px; padding: 0 12px; }
+  .espejo-hud .sitios::-webkit-scrollbar { display: none; }
+  .espejo-lista { top: auto; bottom: 0; right: 0; left: 0; width: 100%; max-width: none; max-height: 70vh; border-radius: 16px 16px 0 0; }
+}
 @media (max-width: 760px) {
   .espejo-modo { bottom: calc(66px + env(safe-area-inset-bottom, 0px)); }
   .espejo-modo .pre { font-size: 9px; }
   .espejo-modo [data-modo] { padding: 9px 13px 9px 11px; font-size: 12px; }
   .capa-nota { bottom: calc(150px + env(safe-area-inset-bottom, 0px)); }
   body.en-espejo .espejo-modo { bottom: calc(18px + env(safe-area-inset-bottom, 0px)); }
-  .espejo-hud { left: 12px; right: 12px; top: calc(108px + env(safe-area-inset-top, 0px)); width: auto; max-height: 40vh; gap: 8px; padding: 10px 12px 12px; border-radius: 16px; background: rgba(8,11,16,.8); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-  .espejo-hud .t { font-size: 21px; } .espejo-hud .d, .espejo-hud .met { display: none; } .espejo-hud .d2 { display: block; margin: -4px 0 0; font: 400 11.5px/1.35 var(--texto); color: #B4BEC9; }
-  .espejo-hud .ver { padding: 7px 12px; font-size: 11.5px; }
-  .espejo-hud .cifras { padding: 7px 0; gap: 6px; } .espejo-hud .cifras b { font-size: 20px; } .espejo-hud .cifras span { font-size: 8.5px; }
-  .espejo-hud .sitios { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -12px; padding: 0 12px; }
-  .espejo-hud .sitios::-webkit-scrollbar { display: none; }
-  .espejo-hud .paises { display: none; }
-  .espejo-lista { top: auto; bottom: 0; right: 0; left: 0; width: 100%; max-width: none; max-height: 70vh; border-radius: 16px 16px 0 0; }
+  .espejo-hud { top: calc(108px + env(safe-area-inset-top, 0px)); }
 }
 @media (prefers-reduced-motion: reduce) { .espejo-hud { animation: none; } .espejo-hud .paises .barra i { transition: none; } }
