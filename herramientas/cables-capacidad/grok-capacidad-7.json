@@ -1,0 +1,9 @@
+[
+{"nombre":"Tata TGN-Western Europe","tbps":3.84,"pares":4,"fuente":"Tyco Telecommunications presentation 2004 (cited in secondary sources including Wikipedia)"},
+{"nombre":"Tata North Europe","tbps":2.56,"pares":4,"fuente":"Tyco Telecommunications presentation 2004 (cited in secondary sources including Wikipedia)"},
+{"nombre":"ALVAL / ORVAL","tbps":40,"pares":4,"fuente":"Algérie Télécom / Ministère de la Poste et des Télécommunications (déclarations officielles et presse sectorielle confirmant mise en service)"},
+{"nombre":"H2H Express","tbps":307.2,"pares":16,"fuente":"HMN Tech press release (acceptance tests completed, RFS 2021)"},
+{"nombre":"FARICE-1","tbps":10,"pares":2,"fuente":"Farice ehf company history (farice.is; upgrade 2013 completed and documented)"},
+{"nombre":"Tui-Samoa","tbps":8,"pares":null,"fuente":"Samoa Submarine Cable Company / Alcatel Submarine Networks announcements (RFS 2018, 'at least 8 Tbit/s')"},
+{"nombre":"Fibralink","tbps":0.32,"pares":null,"fuente":"Alcatel press release (2006 inauguration: designed with 320 Gbit/s per fiber pair)"}
+]
