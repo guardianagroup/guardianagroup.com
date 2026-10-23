@@ -461,7 +461,10 @@ body.dentro .altura { opacity: 0; }
 
 /* 22 Oct 2026, 13:54 (owner): «cuando entramos dentro del planeta, los botoneros de arriba que no se vean» — from ×8 the
    layer buttons and the satellite filter disappear; they come back as you zoom out. */
-body.hondo:not(.dentro) #capas, body.hondo:not(.dentro) #sat-vista, body.hondo:not(.dentro) #sat-fase { opacity: 0 !important; pointer-events: none; transition: opacity .4s; }
+/* 22 Oct 2026, 21:35 (owner): deep in, the layer buttons do not go away any more — they stay, faint, and light up under
+   the pointer, so the layers can be switched at any zoom («tiene que estar en todo momento difuminada») */
+body.hondo:not(.dentro) #capas, body.hondo:not(.dentro) #sat-vista, body.hondo:not(.dentro) #sat-fase { opacity: .16; transition: opacity .3s; }
+body.hondo:not(.dentro) header:hover #capas, body.hondo:not(.dentro) header:focus-within #capas, body.hondo:not(.dentro) header:hover #sat-vista, body.hondo:not(.dentro) header:focus-within #sat-vista, body.hondo:not(.dentro) header:hover #sat-fase, body.hondo:not(.dentro) header:focus-within #sat-fase, body.hondo:not(.dentro) #sat-vista:hover, body.hondo:not(.dentro) #sat-fase:hover { opacity: 1; }
 
 /* «Por dónde viajan tus datos» (22 Oct 2026): the measured list is long; keep it tight and let the labels wrap */
 .conexion .rutas .sat-dl { grid-template-columns: minmax(118px, max-content) 1fr; row-gap: 3px; }

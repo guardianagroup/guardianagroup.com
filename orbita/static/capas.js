@@ -260,33 +260,53 @@
   }
   // Land fibre by levels (owner, 22 Oct 2026: «mucha carga en el planeta… para que no haya tanto ruido»): from afar
   // only the long corridors, one per corridor (operators sharing a route are drawn once), and the rest as you zoom in.
-  function fibraVisible(z) {
-    if (!FT.niveles) {
-      const clave = (l) => { const a = l.x.l[0], b = l.x.l[l.x.l.length - 1]; const k = (q) => Math.round(q[0] * 2) + ',' + Math.round(q[1] * 2); const ka = k(a), kb = k(b); return ka < kb ? ka + '|' + kb : kb + '|' + ka; };
-      const lejos = [], medio = [], vistos = new Set();
-      for (const l of FT.lineas) { const km = l.x.km || 0, c = clave(l); if (km >= 250 && !vistos.has(c)) { vistos.add(c); lejos.push(l); } if (km >= 90) medio.push(l); }
-      FT.niveles = { lejos, medio };
-    }
-    return z < 2.2 ? FT.niveles.lejos : z < 4 ? FT.niveles.medio : FT.lineas;
+  // 22 Oct 2026, 21:33 (owner): «no puede salir todo de una vez; hay que clasificarla de alta potencia, de menos potencia».
+  // Nobody publishes the capacity of land fibre, so each line's level comes from two proxies: its length (a line of
+  // 800 km is a backbone) and company (a corridor that four operators share is a main road). Four levels, and each
+  // one fades in with the zoom instead of appearing all at once:
+  //   3 · troncal principal: 800 km or more, or a corridor shared by four lines (250 km or more) — always drawn
+  //   2 · largo recorrido: 400 km or more, or a corridor shared by three (150 km or more) — from ×1.5
+  //   1 · nacional: 150 km or more — from ×2.4
+  //   0 · regional: the rest — from ×4
+  const claveCorredor = (l) => { const a = l.x.l[0], b = l.x.l[l.x.l.length - 1]; const k = (q) => Math.round(q[0] * 2) + ',' + Math.round(q[1] * 2); const ka = k(a), kb = k(b); return ka < kb ? ka + '|' + kb : kb + '|' + ka; };
+  function preparaNiveles() {
+    if (FT.corr) return;
+    FT.corr = new Map();
+    for (const l of FT.lineas) { l.corr = claveCorredor(l); FT.corr.set(l.corr, (FT.corr.get(l.corr) || 0) + 1); }
+    for (const l of FT.lineas) { const km = l.x.km || 0, c = FT.corr.get(l.corr) || 1; l.nivel = km >= 800 || (c >= 4 && km >= 250) ? 3 : km >= 400 || (c >= 3 && km >= 150) ? 2 : km >= 150 ? 1 : 0; }
   }
-  const rangoFibra = (l) => { const km = (l.x && l.x.km) || 0; return km >= 600 ? 2 : km >= 250 ? 1 : 0; };
-  const nombreRango = (r) => r === 2 ? T('Troncal de largo recorrido') : r === 1 ? T('Troncal nacional') : T('Enlace regional');
+  const aparece = (v) => Math.min(1, Math.max(0, v));
+  // how much of a level shows at this zoom: 0 hidden, 1 fully there
+  const fundidoNivel = (n, z) => n === 3 ? 1 : n === 2 ? aparece((z - 1.5) / 0.6) : n === 1 ? aparece((z - 2.4) / 0.8) : aparece((z - 4) / 1.2);
+  function fibraVisible(z) {
+    preparaNiveles();
+    const paso = Math.round(z * 20) / 20; // recomputed only when the zoom moves a notch
+    if (FT.vis && FT.vis.paso === paso) return FT.vis.lineas;
+    // from afar, one line per corridor (operators sharing a route are drawn once); past ×2.6 every line
+    const una = z < 2.6, vistos = new Set(), lineas = [];
+    for (const l of FT.lineas) { if (fundidoNivel(l.nivel, z) <= 0) continue; if (una) { if (vistos.has(l.corr)) continue; vistos.add(l.corr); } lineas.push(l); }
+    FT.vis = { paso, lineas };
+    return lineas;
+  }
+  const rangoFibra = (l) => { if (l.nivel == null) preparaNiveles(); return l.nivel; };
+  const nombreRango = (r) => r === 3 ? T('Troncal principal de largo recorrido') : r === 2 ? T('Troncal de largo recorrido') : r === 1 ? T('Troncal nacional') : T('Enlace regional');
   function pintaFibra(cx, p, G) {
     const z = G.R / (G.R0 || G.R), lineas = fibraVisible(z);
     // 22 Oct 2026: the land fibre is drawn from city to city (its nodes are cities, not street addresses), so below
     // about 100 km of height the lines would all meet at one false point; they fade out between ×200 and ×600.
     const fz = z <= 200 ? 1 : Math.max(0, 1 - (z - 200) / 400); if (fz <= 0) return;
-    // 22 Oct 2026, 18:10 (owner): the land fibre told apart by range, since nobody publishes its capacity — long-distance
-    // trunks (600 km and more) brighter and wider, national trunks (250 km) in between, regional links thin
+    // 22 Oct 2026, 18:10 (owner): the land fibre told apart by level — main trunks brighter and wider, regional links thin
     const kq = Math.min(1, Math.max(0, (z - 1.4) / 2.6)), base = Math.min(1.8, 0.9 + 0.2 * (z - 1));
-    for (const obra of [false, true]) for (const rango of [0, 1, 2]) {
-      const alfa = (obra ? 0.5 : rango === 2 ? 0.8 + 0.15 * kq : rango === 1 ? 0.72 : 0.5) * fz;
-      cx.strokeStyle = rango === 2 && !obra ? `rgba(${BLANCO},${(alfa * 0.95).toFixed(2)})` : `rgba(${ACERO},${alfa.toFixed(2)})`; cx.lineWidth = rango === 2 ? base + 0.5 + 0.5 * kq : rango === 1 ? base : Math.max(0.7, base - 0.25);
+    for (const obra of [false, true]) for (const nivel of [0, 1, 2, 3]) {
+      const fn = fundidoNivel(nivel, z); if (fn <= 0) continue;
+      const alfa = (obra ? 0.5 : nivel === 3 ? 0.85 + 0.12 * kq : nivel === 2 ? 0.74 + 0.12 * kq : nivel === 1 ? 0.66 : 0.48) * fz * fn;
+      cx.strokeStyle = nivel >= 2 && !obra ? `rgba(${BLANCO},${(alfa * (nivel === 3 ? 0.97 : 0.86)).toFixed(2)})` : `rgba(${ACERO},${alfa.toFixed(2)})`;
+      cx.lineWidth = nivel === 3 ? base + 0.9 + 0.5 * kq : nivel === 2 ? base + 0.35 + 0.3 * kq : nivel === 1 ? base : Math.max(0.7, base - 0.25);
       cx.setLineDash(obra ? [3, 3] : []);
       cx.beginPath();
       const F = CAMPO || campo(p, G);
       for (const l of lineas) {
-        if (!!l.x.obra !== obra || rangoFibra(l) !== rango) continue;
+        if (!!l.x.obra !== obra || l.nivel !== nivel) continue;
         if (!F.todo) { capsDe(l); if (!veCap(F, l.cap)) continue; }
         trazoW(cx, p, G, l.w, 0, l.w.length - 1);
       }
@@ -305,7 +325,9 @@
   function buscaFibra(x, y) {
     if (!estado.fibra || !FT || !FT.lineas) return -1;
     const p = P(), G = p.geo; let mejor = -1, dm = 6 * 6;
+    const vis = new Set(fibraVisible(G.R / (G.R0 || G.R))); // only what is drawn at this zoom can be picked
     FT.lineas.forEach((l, i) => {
+      if (!vis.has(l)) return;
       let ax = 0, ay = 0, prev = false;
       for (const w of l.w) {
         const v = p.aVista(w), bx = G.CX + G.R * v[0], by = G.CY - G.R * v[1], ve = v[2] > 0.02;
@@ -836,7 +858,7 @@
       meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + (CAP && Object.keys(CAP.cables).length ? ' · ' + T('trazo blanco y grueso: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s') : '') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
     }
     if (estado.fibra) {
-      meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + T('más gruesas y claras las troncales de largo recorrido (600 km o más), finas las regionales') + ' · ' + T('Datos verificados') : FT && FT.error ? T('No se pudo cargar la fibra por tierra.') : T('Cargando fibra por tierra…'));
+      meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + T('por niveles: de lejos solo las troncales principales; las nacionales y las regionales aparecen al acercarse') + ' · ' + T('Datos verificados') : FT && FT.error ? T('No se pudo cargar la fibra por tierra.') : T('Cargando fibra por tierra…'));
     }
     if (estado.tierra) {
       const c = capas.tierra;
