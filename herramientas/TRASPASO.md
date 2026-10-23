@@ -153,7 +153,12 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   **Hecho (22 Oct 20:10, Opus)**: Grok verificó las 130 en 4 tandas (la 3.ª de 42 falló; en dos de 21 sí) → **95 centros de América Latina** en el mapa;
   35 descartados (30 ya estaban en OSM, comprobado uno a uno; Cirion RIO2 y KIO MER2 «no verificado»). La regla de duplicados ya no usa la distancia
   (la agencia da a menudo las coordenadas de la ciudad): mismo nombre, mismo código del mismo operador, o el único de ese operador en esa ciudad (ver `repetido()`).
-  Siguiente: Europa (`chatgpt-centros-2.json`, pedido en tab-1 el 22 Oct 20:10), luego Norteamérica, Asia, África y Oceanía.
+  **Europa hecha (22 Oct 21:00)**: `chatgpt-centros-2.json` (121) y `-3.json` (85) + `grok-centros-2.json`/`-3.json` → **169 centros de la agencia** en total.
+  Método que funciona: (1) ChatGPT da la lista; (2) simular con una copia (CARPETA/DATOS a una carpeta temporal, la misma lista como «grok») para ver
+  cuáles NO están ya en el mapa; (3) mirar a mano lo que OSM tiene en cada ciudad (nombres antiguos: Interxion, Lamda Hellix, Telepoint, DEAC/Delska,
+  Euclyde→nLighten…) y vetar duplicados en `herramientas/centros-agencia/vetados.txt` («nombre|país  # motivo»; Claude como tercera voz);
+  (4) mandar a Grok solo los que quedan, en tandas de 23; (5) correr el script y publicar. Coordenadas: gana la de edificio (≥5 decimales), si no la de ChatGPT.
+  Siguiente: Norteamérica (pedido en tab-1 el 22 Oct 21:00), luego Asia, África y Oceanía.
   Procedimiento de verificación: pedir a Grok (tab `seed`) la verificación en tandas de ≤21 con el formato «una línea JSON por centro {nombre, ciudad, pais, lat, lon, estado}» (estado ok / cerrado /
   no existe / es otra cosa / no verificado; pedir lat/lon del edificio si las conoce), guardar en `grok-centros-1.json` (claves en español; Grok a veces responde con
   name/city/country: convertir), correr `python3 herramientas/centros_agencia.py`, publicar. Después, la misma lista para Europa, Norteamérica, Asia, África y Oceanía.
