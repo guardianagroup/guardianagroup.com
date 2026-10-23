@@ -335,6 +335,7 @@
     'Tú': ['You', 'Tu'],
     'saltos': ['hops', 'saltos'],
     'hasta': ['to', 'até'],
+    'máxima': ['maximum', 'máxima'],
     'Ruta real medida por el programa': ['Real route measured by the program', 'Rota real medida pelo programa'],
     'Hace falta tu ubicación para dibujarlo: pulsa «Precisar ubicación» arriba y vuelve a intentarlo.': ['Your location is needed to draw it: press "Set location" above and try again.', 'É precisa a tua localização para o desenhar: carrega em «Indicar localização» em cima e tenta de novo.'],
     'Ida y vuelta medida ahora desde este navegador hasta la puerta pública de cada centro de datos. «Mínimo» es lo que tardaría la luz por la fibra en línea recta: lo que sobra es el camino real de tus datos (cables que no van rectos, saltos entre redes). En el planeta, los tres más rápidos brillan más; el pulso recorre cada arco a cámara lenta, 20 veces más despacio que tus datos.': ['Round trip measured right now from this browser to the public front door of each data centre. "Minimum" is what light would take through fibre in a straight line: anything above it is the real path of your data (cables that do not run straight, hops between networks). On the planet the three fastest shine brighter; the pulse rides each arc in slow motion, 20 times slower than your data.', 'Ida e volta medida agora desde este navegador até à porta pública de cada centro de dados. «Mínimo» é o que a luz levaria pela fibra em linha reta: o que sobra é o caminho real dos teus dados (cabos que não vão direitos, saltos entre redes). No planeta, os três mais rápidos brilham mais; o pulso percorre cada arco em câmara lenta, 20 vezes mais devagar que os teus dados.'],
@@ -881,10 +882,11 @@
   // «p» (the templates above, by id), «rtl» and «locale». Downloaded only by its readers.
   const X = {}, Xn = {}, Xup = {};
   const BASE = (() => { try { const u = document.currentScript && document.currentScript.src; return u ? u.replace(/[^\/]*$/, '') : 'static/'; } catch (_) { return 'static/'; } })();
+  const VER = (() => { try { const u = document.currentScript && document.currentScript.src; const m = u && u.match(/\?v=[^&#]*/); return m ? m[0] : ''; } catch (_) { return ''; } })(); // the page's cache version, so a new release never reads a stale language file
   async function cargaIdioma(l) {
     if (X[l] || l === 'es' || l === 'en' || l === 'pt') return X[l];
     try {
-      const r = await fetch(BASE + 'i18n/' + l + '.json', { cache: 'force-cache' });
+      const r = await fetch(BASE + 'i18n/' + l + '.json' + VER, { cache: 'force-cache' });
       if (!r.ok) throw new Error(r.status);
       const d = await r.json();
       X[l] = d; Xn[l] = new Map(); Xup[l] = new Map();
