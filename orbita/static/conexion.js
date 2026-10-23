@@ -343,6 +343,38 @@
     }
     cx.restore();
   }
+  // ---------- «Descargar»: exactly the rows on screen, each with how it is known (measured, estimated, verified) ----------
+  function documento() {
+    const f = filasLocales(), sf = filasFuera(), filas = [], datos = { ahora: [], como_te_ve_internet: null, por_donde_viajan_tus_datos: null, lo_que_cualquier_web_ve_de_ti: [] };
+    const listo = (x) => x && x.v !== T('midiendo…');
+    const pon = (apartado, lista, destino) => lista.filter(listo).forEach((x) => { filas.push([apartado, x.k, x.v, x.e ? T(x.e) : '']); destino.push({ dato: x.k, valor: x.v, como_se_sabe: x.e || '' }); });
+    pon(T('Ahora mismo'), f.ahora, datos.ahora);
+    if (sf && !fuera.error) { datos.como_te_ve_internet = []; pon(T('Cómo te ve internet'), sf, datos.como_te_ve_internet); }
+    if (rutas && rutas.nubes && rutas.nubes.length && !midiendo) {
+      const ap = T('Por dónde viajan tus datos'), viaje = { cuando: new Date(rutas.cuando).toISOString(), borde: null, centros_de_datos: [] };
+      if (rutas.borde) { filas.push([ap, T('Borde de internet más cercano'), rutas.borde.nombre + ' (' + rutas.borde.colo + ')' + (rutas.borde.ms != null ? ' · ' + rutas.borde.ms + ' ms' : ''), T('medido')]); viaje.borde = { sitio: rutas.borde.nombre, codigo: rutas.borde.colo, ms: rutas.borde.ms }; }
+      rutas.nubes.forEach((n, i) => {
+        filas.push([ap, (i + 1) + '. ' + n.nombre, n.ms + ' ms · ' + num(Math.round(n.km)) + ' km · ' + T('mínimo') + ' ' + num(Math.round(n.minimo)) + ' ms', T('medido')]);
+        viaje.centros_de_datos.push({ lugar: n.nombre, pais: n.cc, ms: n.ms, km_en_linea_recta: Math.round(n.km), minimo_ms: Math.round(n.minimo) });
+      });
+      datos.por_donde_viajan_tus_datos = viaje;
+    }
+    pon(T('Lo que cualquier web ve de ti'), f.vista, datos.lo_que_cualquier_web_ve_de_ti);
+    const lineas = [T('Medido en este navegador, sin consultar a nadie.')];
+    if (datos.como_te_ve_internet) lineas.push(T('«Cómo te ve internet»: una sola consulta, hecha cuando pulsaste.'));
+    if (datos.por_donde_viajan_tus_datos) lineas.push(T('Ida y vuelta medida desde este navegador hasta la puerta pública de cada centro de datos. «Mínimo» es lo que tardaría la luz por la fibra en línea recta.'));
+    return {
+      archivo: 'GUARDIANA-mi-radiografia',
+      titulo: T('Mi radiografía'),
+      subtitulo: T('Lo que cualquier web puede saber de ti y de tu conexión.'),
+      lineas,
+      totales: [],
+      columnas: [T('Apartado'), T('Dato'), T('Valor'), T('Cómo se sabe')],
+      filas,
+      notas: [T('Son tus datos y de nadie más. Nada se guarda fuera de este equipo.')],
+      datos,
+    };
+  }
   function abre(si) {
     abierto = si; panel.hidden = !si; boton.setAttribute('aria-pressed', si ? 'true' : 'false');
     guarda(si ? 'ver' : 'no');
@@ -357,6 +389,8 @@
     panel = document.createElement('aside'); panel.id = 'conexion'; panel.className = 'conexion'; panel.hidden = true; panel.setAttribute('aria-label', T('Mi conexión'));
     panel.innerHTML = '<div class="titulo"><span>' + T('Mi conexión') + '</span><button type="button" class="cerrar" aria-label="' + T('Cerrar') + '" title="' + T('Cerrar') + '"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div><div class="cuerpo"></div><p class="pie">' + T('Son tus datos y de nadie más. Nada se guarda fuera de este equipo.') + '</p>';
     document.body.append(panel);
+    // «Descargar» (owner, 23 Oct 2026, 15:50): what the panel shows, as a report or as data, made in this browser
+    if (window.GuardianaDescargas) { const titulo = panel.querySelector('.titulo'); titulo.insertBefore(window.GuardianaDescargas.boton(documento), titulo.querySelector('.cerrar')); }
     boton.addEventListener('click', () => abre(!abierto));
     panel.querySelector('.cerrar').addEventListener('click', () => abre(false));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && abierto && !document.body.classList.contains('viaje') && !document.body.classList.contains('con-informe')) abre(false); }, true); // capture: runs before the journey's own Escape, while it is still on
