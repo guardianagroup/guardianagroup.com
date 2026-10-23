@@ -210,6 +210,8 @@
     'de ellos': ['of them', 'deles'],
     'La otra cara del planeta': ['The other face of the planet', 'A outra face do planeta'],
     'de media': ['on average', 'em média'],
+    'Troncal principal de largo recorrido': ['Main long-distance trunk', 'Tronco principal de longa distância'],
+    'por niveles: de lejos solo las troncales principales; las nacionales y las regionales aparecen al acercarse': ['by levels: from afar only the main trunks; national and regional links appear as you zoom in', 'por níveis: de longe só os troncos principais; os nacionais e os regionais aparecem ao aproximar'],
     'Troncal de largo recorrido': ['Long-distance trunk', 'Tronco de longa distância'],
     'Troncal nacional': ['National trunk', 'Tronco nacional'],
     'Enlace regional': ['Regional link', 'Ligação regional'],
