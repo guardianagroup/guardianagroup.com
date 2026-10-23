@@ -266,18 +266,18 @@
   // one fades in with the zoom instead of appearing all at once:
   //   3 · troncal principal: 800 km or more, or a corridor shared by four lines (250 km or more) — always drawn
   //   2 · largo recorrido: 400 km or more, or a corridor shared by three (150 km or more) — from ×1.5
-  //   1 · nacional: 150 km or more — from ×2.4
-  //   0 · regional: the rest — from ×4
+  //   1 · nacional: 150 km or more — from ×2.6
+  //   0 · regional: the rest — from ×6
   const claveCorredor = (l) => { const a = l.x.l[0], b = l.x.l[l.x.l.length - 1]; const k = (q) => Math.round(q[0] * 2) + ',' + Math.round(q[1] * 2); const ka = k(a), kb = k(b); return ka < kb ? ka + '|' + kb : kb + '|' + ka; };
   function preparaNiveles() {
     if (FT.corr) return;
-    FT.corr = new Map();
-    for (const l of FT.lineas) { l.corr = claveCorredor(l); FT.corr.set(l.corr, (FT.corr.get(l.corr) || 0) + 1); }
-    for (const l of FT.lineas) { const km = l.x.km || 0, c = FT.corr.get(l.corr) || 1; l.nivel = km >= 800 || (c >= 4 && km >= 250) ? 3 : km >= 400 || (c >= 3 && km >= 150) ? 2 : km >= 150 ? 1 : 0; }
+    FT.corr = new Map(); // corridor → the companies that run a line along it (one company drawing it twice counts once)
+    for (const l of FT.lineas) { l.corr = claveCorredor(l); if (!FT.corr.has(l.corr)) FT.corr.set(l.corr, new Set()); FT.corr.get(l.corr).add(l.x.o || l.x.n || ''); }
+    for (const l of FT.lineas) { const km = l.x.km || 0, c = FT.corr.get(l.corr).size || 1; l.nivel = km >= 800 || (c >= 4 && km >= 250) ? 3 : km >= 400 || (c >= 3 && km >= 150) ? 2 : km >= 150 ? 1 : 0; }
   }
   const aparece = (v) => Math.min(1, Math.max(0, v));
   // how much of a level shows at this zoom: 0 hidden, 1 fully there
-  const fundidoNivel = (n, z) => n === 3 ? 1 : n === 2 ? aparece((z - 1.5) / 0.6) : n === 1 ? aparece((z - 2.4) / 0.8) : aparece((z - 4) / 1.2);
+  const fundidoNivel = (n, z) => n === 3 ? 1 : n === 2 ? aparece((z - 1.5) / 0.6) : n === 1 ? aparece((z - 2.6) / 1.0) : aparece((z - 6) / 2);
   function fibraVisible(z) {
     preparaNiveles();
     const paso = Math.round(z * 20) / 20; // recomputed only when the zoom moves a notch
