@@ -390,7 +390,8 @@
   function elige(sitio) {
     if (!E) return; E.sitio = sitio; E.res = resumen(sitio); rehace(); E.tSel = performance.now(); pintaHud(); encuadra();
   }
-  async function abre(modo) {
+  // `sitio` (optional): open straight on one measured front page — Radiografías › «Una web» (23 Oct 2026)
+  async function abre(modo, sitio) {
     if (document.body.classList.contains('viaje') || document.body.classList.contains('dentro')) return;
     try { await carga(); } catch (_) { return; }
     if (!P()) return;
@@ -401,10 +402,13 @@
       montaHud(); hud.hidden = false; control.querySelector('.salir').hidden = false;
       document.body.classList.add('en-espejo');
       if (window.OrbitaCapas) window.OrbitaCapas.soloTu(true, pinta);
-      elige('todas');
+      elige(sitio && D.sitios.some((x) => x.id === sitio) ? sitio : 'todas');
       // the map's network, so the trayectos go along the cables; meanwhile a sheaf of arcs
       const Rd = window.OrbitaRed; if (Rd && !Rd.lista) Rd.prepara().then((si) => { if (si && E) rehace(); });
-    } else if (E.modo !== modo) { E.modo = modo; E.tModo = performance.now(); pintaHud(); }
+    } else {
+      if (E.modo !== modo) { E.modo = modo; E.tModo = performance.now(); pintaHud(); }
+      if (sitio && sitio !== E.sitio && D.sitios.some((x) => x.id === sitio)) elige(sitio);
+    }
   }
   function cierra() {
     if (!E) return; E = null; cam = null;
@@ -421,5 +425,5 @@
 
   function arranca() { montaControl(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arranca); else arranca();
-  window.OrbitaEspejo = { abre, cierra, get activo() { return !!E; }, get datos() { return D; } };
+  window.OrbitaEspejo = { abre, cierra, carga, get activo() { return !!E; }, get datos() { return D; } };
 })();

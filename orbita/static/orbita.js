@@ -75,8 +75,11 @@
     // 22 Oct 2026 (owner): until ZERO is finished the door says «En construcción» and does not open; the program
     // itself is downloaded from the website (beta). Put `pagina: 'zero/?orbita=1&entrada=0'` back to open the demo.
     // 22 Oct 2026, 12:56 (owner): «que se abra ZERO para que mi amigo vea al menos un poquito»: the demo opens again.
+    // 23 Oct 2026, 13:40 (owner, after the agency's sixth round): Radiografías has its own door and comes first — what
+    // anyone can look at, free of any installation — then ZERO and Comunicaciones. It opens its own panel over the
+    // planet (static/radiografias.js), not a page.
+    { id: 'radiografias', n: 'Radiografías', s: 'Lo que ven de ti', d: 'Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.', propia: true },
     { id: 'zero', n: 'ZERO', s: 'Navegador · demostración', d: 'El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.', pagina: 'zero/?orbita=1&entrada=0' },
-    { id: 'radiografias', n: 'Radiografías', s: 'En construcción', d: 'A qué empresas y países habla tu computador, tu IA y tu antivirus. Llegará cuando esté terminada y probada.', url: null, desarrollo: true },
     { id: 'comunicaciones', n: 'Comunicaciones', s: 'En construcción', d: 'Chat, llamadas y archivos cifrados de extremo a extremo. Llegará cuando esté terminada y probada.', url: null, desarrollo: true });
   const nav = $('puertas');
   const NP = PUERTAS.length;
@@ -133,6 +136,14 @@
   function abre(i, apila = true) {
     elige(i);
     const p = PUERTAS[sel];
+    // a door with its own panel over the planet (Radiografías): the planet and its instruments stay
+    if (p.propia && window.OrbitaRadiografias) {
+      if (dentro) cierra();
+      if (apila) history.pushState({ puerta: p.id }, '', '#' + p.id);
+      window.OrbitaRadiografias.abre(() => { if (history.state && history.state.puerta === p.id) history.back(); else window.OrbitaRadiografias.cierra(); });
+      return;
+    }
+    if (window.OrbitaRadiografias) window.OrbitaRadiografias.cierra();
     dentro = true;
     document.body.classList.add('dentro');
     $('volver').hidden = false;
@@ -174,6 +185,7 @@
     setTimeout(() => { if (dentro) $('volver').focus(); }, 900);
   }
   function cierra() {
+    if (window.OrbitaRadiografias) window.OrbitaRadiografias.cierra();
     if (!dentro) return;
     dentro = false;
     document.body.classList.remove('dentro', 'pantalla');
@@ -211,6 +223,8 @@
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); elige(sel - 1); PUERTAS[sel].el.querySelector('button').focus(); }
   });
   { const i = PUERTAS.findIndex((p) => '#' + p.id === location.hash); if (i >= 0) { history.replaceState({ puerta: PUERTAS[i].id }, '', location.hash); setTimeout(() => abre(i, false), 400); } }
+  // «Empezar» and the other buttons open a door by its name, the same way as a click on it
+  window.OrbitaPuertas = { abre(id) { const i = PUERTAS.findIndex((p) => p.id === id); if (i >= 0) abre(i); } };
 
   // ---------- Geometry shared with the CSS (--u) ----------
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
@@ -1174,4 +1188,32 @@ void main(){
   mide();
   addEventListener('resize', mide);
   requestAnimationFrame(cuadro);
+})();
+
+// ---------- The header's layer bar: centred while it fits, on its own line when it does not (23 Oct 2026) ----------
+// Between 1100 and about 1430 px the centred bar ran into «Ver mi conexión» and the place button (at 1280 and 1366, the
+// most common laptop widths). Measured, not guessed: the bar's own width against the brand on the left and the buttons
+// on the right; with a city chosen the place button is shorter and the bar goes back to the middle.
+(function () {
+  'use strict';
+  const bar = document.getElementById('capas'), izq = document.querySelector('header .izq'), der = document.querySelector('header .derecha');
+  if (!bar || !izq || !der) return;
+  let natural = 0;
+  function mide() {
+    const abajo = document.body.classList.contains('capas-abajo');
+    if (abajo) document.body.classList.remove('capas-abajo');
+    natural = bar.getBoundingClientRect().width;
+    const W = innerWidth, a = izq.getBoundingClientRect().right, b = der.getBoundingClientRect().left;
+    const choca = W > 1100 && (W / 2 - natural / 2 - 16 < a || W / 2 + natural / 2 + 16 > b);
+    document.body.classList.toggle('capas-abajo', choca);
+  }
+  addEventListener('resize', mide);
+  addEventListener('guardiana-idioma', () => setTimeout(mide, 0));
+  // «Conocer GUARDIANA» opens the presentation in the language Órbita is showing
+  const conocer = document.getElementById('conocer');
+  const idiomaConocer = () => { const l = window.GuardianaIdioma && window.GuardianaIdioma.lang; if (conocer && l) conocer.href = '/conocer.html?lang=' + l; };
+  addEventListener('guardiana-idioma', idiomaConocer); idiomaConocer();
+  if (window.ResizeObserver) new ResizeObserver(() => mide()).observe(der);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(mide);
+  mide();
 })();
