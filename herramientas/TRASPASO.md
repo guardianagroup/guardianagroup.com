@@ -256,3 +256,26 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   cuánto pesarían juntos, cuánto han costado aproximadamente. Lo del mapa ya está (242.193 km de cable submarino medidos en el mapa, 1.897.837 km de
   fibra por tierra en el mapa: `FT.d.medida`). Lo del mundo real (km totales, peso, coste) hay que pedirlo a la agencia (ChatGPT + Grok, ≥2 voces,
   sin fuentes en pantalla) y meterlo en `orbita/datos/sabias.json` con el mismo formato que los 121 que hay; nunca inventar cifras.
+
+## 9. Sesión del 22 Oct 2026, 22:05–22:45 (Opus 5.5), versiones 23y → 24b
+- **Desplegables compactos**: solo nombre y cuenta; la explicación va en el `title` (al pasar el ratón). CSS `.capa-vista/.sat-vista .orb button .d {display:none}`.
+- **Interruptores verde/rojo** (al final de orbita.css, bloque «22:21»): el `<i>` de cada botón con `aria-pressed` es una pista con bola; encendido
+  `--si: 95,203,147` con ✓, apagado `--no: 224,122,108` con ✕ (SVG en data URI). Barra 23×13, tarjetas 26×15. Deben ir AL FINAL del CSS (las reglas
+  viejas del punto azul tienen la misma especificidad).
+- **Satélites**: la última órbita encendida ya se puede apagar → `pon('sat', false)` y las órbitas vuelven a {geo} para la próxima vez.
+- **Borde del planeta**: el halo empezaba de golpe en r=1 (`r>1.?…:0.`) y dejaba una muesca oscura escalonada; ahora `d0=max(r-1,0)` continuo. Mapas con
+  mipmaps + anisótropo (`mipea()`), y el sombreador usa `texture2DGradEXT` con gradientes sin costura (`fract(uv.x+.5)`) si hay OES_standard_derivatives +
+  EXT_shader_texture_lod (`MIP`); si no, como antes. Comprobado sin GPU (swiftshader): antes/después en el borde.
+- **Zoom anclado** (orbita.js `ancla`, `anclaEn`, `fijaAncla` tras `avanzaVista`): doble clic y rueda (al acercar, con el puntero sobre el planeta) dejan
+  el punto bajo el puntero quieto mientras dura el zoom (8 iteraciones lon/lat por cuadro). Los botones +/teclado siguen yendo al `foco` del clic.
+- **Ficha completa**: `encajaPanel()` (capas.js) sube la ficha suelta al desplegar secciones y limita su `max-height` a la pantalla.
+  «Qué significa para ti» → **«En la práctica»**; frase del país nueva (es/en/pt).
+- **ZERO**: `zero/index.html` llama `layout()` nada más definirlo (antes solo tras montar WebGL: se veía el escenario 1440×900 sin escalar, «de lado»).
+  En `body.pantalla` la sección entra con un fundido limpio (sin escala ni desplazamiento) y `.altura` desaparece al instante al entrar en una puerta.
+- **Ubicación** (ChatGPT y Grok coinciden; chat ChatGPT «Redacción UX de privacidad» https://chatgpt.com/c/6adad5c8-6f30-83e9-af18-2870cab2663c,
+  Grok https://grok.com/c/21a76627-5150-49d5-a01f-873b64655859): sin «no investigamos» (suena defensivo). Kicker «TU UBICACIÓN, TU DECISIÓN» y texto
+  «Es opcional: Órbita funciona sin ella…». El chat viejo de ChatGPT «Verificar fichas de infraestructura» llegó al máximo de longitud: usar chats nuevos.
+- **«¿Sabías que…?»**: 5 datos nuevos en verificación con las dos voces (99 % del tráfico internacional; >500 cables y ~1,7 M km según la ONU 2026;
+  ~2 cm de diámetro / ~5 cm blindado; ~650 kg/km ligero, >2 t/km doble blindaje; Amitié 400 Tbit/s).
+- Pendiente: Asia-2 de centros de datos (42 candidatos) con Grok en dos tandas de 21; IXP de África y Asia; cables de una sola voz (20); capacidades;
+  fibra de países grandes; traducciones a los otros idiomas al final.
