@@ -63,6 +63,25 @@ def satelites():
         pide_cat = (datetime.now(timezone.utc) - t0).total_seconds() > 12 * 3600
     except ValueError:
         pass
+    # A group whose download comes back empty keeps its rows from the last download, with that download's date, for up
+    # to 3 days (22 Oct 2026, 22:55Z: Starlink came back empty and the map said «0 Starlink satellites» until the next
+    # update). Older than that, the orbits are too stale to draw and the group is left out.
+    campos = ['grupo', 'nombre', 'norad'] + CAMPOS + ['cospar', 'lanzado', 'sitio', 'origen']
+    ahora = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+    guardados, fecha_prev = {}, {}
+    if pc == campos:
+        ids = [x.get('id') for x in previo.get('grupos', [])]
+        for r in previo.get('sat', []):
+            if isinstance(r[0], int) and 0 <= r[0] < len(ids):
+                guardados.setdefault(ids[r[0]], []).append(r)
+        fecha_prev = {x.get('id'): x.get('descargado') or previo.get('descargado', '') for x in previo.get('grupos', [])}
+
+    def reciente(fecha):
+        try:
+            t = datetime.strptime(fecha or '', '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=timezone.utc)
+        except ValueError:
+            return False
+        return (datetime.now(timezone.utc) - t).total_seconds() <= 3 * 86400
 
     vistos, filas, grupos, sup_n = set(), [], [], {}
     for gid, nombre in GRUPOS:
@@ -81,8 +100,16 @@ def satelites():
             vistos.add(cat)
             fila = [g, o.get('OBJECT_NAME', ''), cat] + [o[k] for k in CAMPOS] + [o.get('OBJECT_ID', ''), '', '', '']
             filas.append(fila); mias[cat] = fila
+        guardado = False
+        if not mias and guardados.get(gid) and reciente(fecha_prev.get(gid)):
+            for r in guardados[gid]:
+                if r[2] in vistos:
+                    continue
+                vistos.add(r[2]); f = list(r); f[0] = g; filas.append(f); mias[r[2]] = f
+            guardado = True
+            print(f'  {gid}: la descarga llegó vacía; se conservan los {len(mias)} de la descarga de {fecha_prev.get(gid)}', file=sys.stderr)
         # the operator's own orbit, when CelesTrak publishes it and it is newer
-        if gid in SUPGP and mias:
+        if gid in SUPGP and mias and not guardado:
             cs = baja('https://celestrak.org/NORAD/elements/supplemental/sup-gp.php?' + urllib.parse.urlencode({'FILE': SUPGP[gid], 'FORMAT': 'json'}), intentos=2)
             try:
                 sup = json.loads(cs) if cs else []
@@ -100,7 +127,7 @@ def satelites():
             time.sleep(2)
         # launch date and site (SATCAT): asked again only every 12 hours, otherwise kept from the last download
         reg = {}
-        if pide_cat:
+        if pide_cat and not guardado:
             cat_sat = baja('https://celestrak.org/satcat/records.php?' + urllib.parse.urlencode({'GROUP': gid, 'FORMAT': 'json'}), intentos=2)
             try:
                 reg = {r.get('NORAD_CAT_ID'): r for r in (json.loads(cat_sat) if cat_sat else [])}
@@ -114,18 +141,17 @@ def satelites():
             elif cat in lanz_prev:
                 f[-3], f[-2] = lanz_prev[cat]
         print(f'{gid}: {len(mias)} · órbita del operador: {sup_n.get(gid, 0)} · catálogo: {len(reg) if pide_cat else "guardado"}')
-        grupos.append({'id': gid, 'nombre': nombre, 'n': len(mias)})
+        grupos.append({'id': gid, 'nombre': nombre, 'n': len(mias), 'descargado': fecha_prev.get(gid, '') if guardado else ahora})
         time.sleep(2)
-    if not filas:
-        print('Sin satélites: no se escribe nada.', file=sys.stderr)
+    if not filas or not any(x['descargado'] == ahora for x in grupos):
+        print('Sin satélites nuevos: no se escribe nada.', file=sys.stderr)
         return False
-    ahora = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     salida = {
         'fuente': 'CelesTrak (celestrak.org), elementos orbitales GP y SupGP (efemérides de los operadores)',
         'descargado': ahora,
         'catalogo_descargado': ahora if pide_cat else previo.get('catalogo_descargado', ''),
         'grupos': grupos,
-        'campos': ['grupo', 'nombre', 'norad'] + CAMPOS + ['cospar', 'lanzado', 'sitio', 'origen'],
+        'campos': campos,
         'sat': filas,
     }
     with open(os.path.join(RAIZ, 'satelites.json'), 'w', encoding='utf-8') as f:

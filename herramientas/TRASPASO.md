@@ -423,3 +423,22 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   descartado («cero» = nulidad). Grok → Umbral (choca con Umbral Trade, otro proyecto del fundador), Vigía, VAELIS. ChatGPT, en curso.
 - **Ideas del dueño para más adelante**: ESPEJO también en tiempo real y como resumen de las últimas horas (12:25); al entrar al navegador, un
   espectáculo: una habitación, una puerta, una jaula especial en medio y todo se sella al entrar (12:34), con el generador de vídeo cuando lleguemos.
+
+## 16. 23 Oct 2026, 12:47–13:10 (Opus 5.5): la frase con la letra de la web y en el centro exacto del hueco. Versión `z`
+- **Letra** (dueño, 12:47: «con el mismo tipo de letra de la web»): Instrument Serif, la de los titulares de la web, servida desde
+  `orbita/static/fonts/InstrumentSerif-Regular.woff` (convertida del TTF de Google Fonts, licencia OFL al lado). Se carga antes de que se
+  encienda la primera palabra. Ruso, ucraniano, búlgaro, griego, vietnamita, chino y japonés usan las mismas serifas de reserva que la web.
+- **Sitio** (dueño, 12:53: «justo en el medio, donde acaba el planeta y la zona de abajo… visualmente tiene que ser perfecto»): se mide en cada
+  pantalla. Techo = borde del planeta + su halo (1,04 R); suelo = lo primero que haya debajo en el centro (la cápsula Sin/Con GUARDIANA).
+  La banda óptica de las letras (de lo alto de las mayúsculas a la última línea base, medida con marcas de línea base) queda en el centro
+  exacto: comprobado en 11 tamaños, la misma distancia arriba y abajo (±0,1 px). El ancho evita las tarjetas de al lado (el «¿Sabías qué?»
+  en portátiles de 1280–1366). Una línea mientras quepa a ≥ 24 px; si no, una frase por línea (nunca parte una frase salvo en pantallas
+  muy estrechas). Si no cabe (móvil en horizontal), no sale. Si la persona hace zoom, se va; si cambia el tamaño de la ventana, se recoloca.
+- **Rankings del «¿Sabías qué?»**: un primer puesto compartido se dice compartido («BT y Arelion operan más cables submarinos que ninguna otra
+  empresa del mapa: 11 cada una»), no como un ganador.
+- **Starlink a 0**: la descarga de CelesTrak de las 22:55Z del 22 oct llegó vacía para Starlink y el mapa dijo «0 satélites Starlink» hasta la
+  siguiente. La tarjeta ya no sale con un grupo vacío, y `herramientas/datos_orbita.py` conserva las filas de la descarga anterior de un grupo
+  que llega vacío (con su propia fecha, `grupos[].descargado`, hasta 3 días; después lo deja fuera). Si no llega nada nuevo, no escribe.
+  La nota de la capa de satélites fecha con el grupo más antiguo. Probado con descargas simuladas (todo vacío, solo Starlink vacío, Starlink
+  de hace 5 días).
+- terminos.html: créditos de los tipos de letra de Órbita (OFL 1.1).

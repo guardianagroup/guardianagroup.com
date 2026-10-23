@@ -4,6 +4,7 @@
    the page runs without the panel it says «Demostración» and nothing it draws is a measurement. */
 @font-face { font-family: 'Schibsted Grotesk'; font-weight: 400 900; font-display: swap; src: url(fonts/SchibstedGrotesk-var.woff) format('woff'); }
 @font-face { font-family: 'Hanken Grotesk'; font-weight: 100 900; font-display: swap; src: url(fonts/HankenGrotesk-var.woff) format('woff'); }
+@font-face { font-family: 'Instrument Serif'; font-weight: 400; font-style: normal; font-display: swap; src: url(fonts/InstrumentSerif-Regular.woff) format('woff'); } /* the website's display face (OFL, licence beside it) */
 @font-face { font-family: 'IBM Plex Mono'; font-weight: 400; font-display: swap; src: url(fonts/IBMPlexMono-400-latin.woff2) format('woff2'); }
 @font-face { font-family: 'IBM Plex Mono'; font-weight: 500; font-display: swap; src: url(fonts/IBMPlexMono-500-latin.woff2) format('woff2'); }
 
@@ -757,13 +758,21 @@ body.en-espejo #estado { opacity: .35; }
 @media (prefers-reduced-motion: reduce) { .espejo-hud { animation: none; } .espejo-hud .paises .barra i { transition: none; } }
 
 /* The phrase under the planet (owner, 23 Oct 2026): once per visit, word by word, lit like the website's titles. */
-.frase { position: fixed; left: 50%; top: 76%; transform: translate(-50%, 6px); z-index: 6; margin: 0; padding: 0 16px; width: max-content; max-width: min(92vw, 760px); box-sizing: border-box; text-align: center; font: 500 clamp(17px, 2vw, 24px)/1.3 'Schibsted Grotesk', var(--texto); letter-spacing: -.005em; color: rgba(232,238,245,.13); pointer-events: none; opacity: 0; transition: opacity .6s ease, transform .9s cubic-bezier(.2,.7,.2,1); text-wrap: balance; }
+.frase { position: fixed; left: 50%; top: 76%; transform: translate(-50%, 6px); z-index: 6; margin: 0; padding: 0 16px; width: max-content; max-width: min(92vw, 820px); box-sizing: border-box; text-align: center; font: 400 clamp(23px, 2.5vw, 34px)/1.15 'Instrument Serif', Georgia, 'Times New Roman', serif; letter-spacing: -.01em; color: rgba(232,238,245,.13); pointer-events: none; opacity: 0; transition: opacity .6s ease, transform .9s cubic-bezier(.2,.7,.2,1); text-wrap: balance; }
 .frase.entra { opacity: 1; transform: translate(-50%, 0); }
 .frase.fuera { transition-duration: 1.3s, 1.3s; }
 .frase.fuera { opacity: 0; transform: translate(-50%, -4px); }
+.frase .fs { display: inline-block; white-space: nowrap; } /* a line breaks only between the two sentences */
+.frase.parte .fs { display: inline; white-space: normal; }
+.frase .bl { display: inline-block; width: 0; height: 0; vertical-align: baseline; } /* baseline marks for the optical centring */
 .frase .fw { transition: color .4s ease, text-shadow .55s ease; }
 .frase .fw.m { color: #FFFFFF; text-shadow: 0 0 .32em rgba(156,195,228,.75), 0 0 .9em rgba(156,195,228,.35); }
 .frase .fw.on { color: #F4F6F8; text-shadow: 0 0 .5em rgba(6,8,12,.9); }
 body.con-frase .espejo-modo .pre { opacity: 0; }
-@media (max-width: 760px) { .frase { font-size: 16px; } }
+@media (max-width: 760px) { .frase { font-size: 22px; } }
+/* the website's own fallbacks where Instrument Serif has no letters */
+:lang(ru) .frase, :lang(uk) .frase, :lang(bg) .frase, :lang(el) .frase, :lang(vi) .frase { font-family: 'Times New Roman', Times, 'Liberation Serif', serif; }
+:lang(zh-Hans) .frase { font-family: 'Songti SC', 'STSong', 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'SimSun', serif; }
+:lang(zh-Hant) .frase { font-family: 'Songti TC', 'Noto Serif TC', 'Noto Serif CJK TC', 'Source Han Serif TC', 'PMingLiU', serif; }
+:lang(ja) .frase { font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Noto Serif JP', 'Noto Serif CJK JP', 'Source Han Serif JP', serif; }
 @media (prefers-reduced-motion: reduce) { .frase, .frase .fw { transition: opacity .6s ease; } }
