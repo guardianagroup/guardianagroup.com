@@ -1,0 +1,2 @@
+ChatGPT (22 Oct 2026, 19:20) sobre claude-sabias-historia.json: 1 corrección (Cap Gris-Nez, falló la primera noche), 2 corrección (mensaje del 16 de agosto; horas), 6 corrección (Java–Darwin nov. 1871, Overland 22 ago. 1872, inauguración 22 oct. 1872); 3,4,5,7,8,9,10,11,12 ok. Aplicadas.
+Claude sobre chatgpt-sabias-historia.json (8): los 8 correctos; el de TAT-1 se deja fuera por repetir el del lote 2.
