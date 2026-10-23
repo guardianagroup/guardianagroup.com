@@ -397,7 +397,7 @@
     'en llanura abisal (más de 4.000 m, apoyado en el fondo)': ['on the abyssal plain (over 4,000 m, resting on the seabed)', 'na planície abissal (mais de 4.000 m, pousado no fundo)'],
     'Altitud del terreno': ['Ground elevation', 'Altitude do terreno'],
     'Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.': ['Buried 0.6 to 1.5 m deep, almost always in ducts along roads, railways, gas pipelines or power lines.', 'Vai enterrada entre 0,6 e 1,5 m, quase sempre em condutas junto a estradas, vias férreas, gasodutos ou linhas elétricas.'],
-    'trazo blanco y grueso: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s': ['thick white line: trunks above 100 Tbit/s; medium line: above 20 Tbit/s', 'traço branco e grosso: troncais acima de 100 Tbit/s; traço médio: acima de 20 Tbit/s'],
+    'trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s': ['thick light line with a halo: trunks above 100 Tbit/s; medium line: above 20 Tbit/s', 'traço claro e grosso com halo: troncais acima de 100 Tbit/s; traço médio: acima de 20 Tbit/s'],
     'pares de fibra': ['fibre pairs', 'pares de fibra'],
     'troncal gigante': ['giant trunk', 'troncal gigante'],
     'troncal grande': ['major trunk', 'troncal grande'],

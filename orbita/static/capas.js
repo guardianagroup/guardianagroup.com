@@ -10,6 +10,10 @@
   const P = () => window.OrbitaPlaneta;
   const RE = 6378.137, RAD = Math.PI / 180;
   const ACERO = '156,195,228', BLANCO = '244,246,248';
+  // 22 Oct 2026, 21:43 (owner): «los cables azules están muy logrados; los blancos de alta potencia no me gustan» — the giants
+  // are drawn in a light blue of the same family, with a soft blue halo, never white; and what the pointer touches
+  // lights up in its own colour (brighter and wider), never white either («se resalta en blanco: eso no puede ser»)
+  const CLARO = '206,226,243';
   // Owner, 22 Oct 2026: «cuando la persona abra Órbita, que no salgan los satélites de golpe, se ve demasiado ruido:
   // que abra solo con los cables submarinos, y luego la persona va abriendo y cerrando». So every opening starts with
   // the submarine cables alone; only the view and the orbit filter are remembered between visits.
@@ -300,7 +304,7 @@
     for (const obra of [false, true]) for (const nivel of [0, 1, 2, 3]) {
       const fn = fundidoNivel(nivel, z); if (fn <= 0) continue;
       const alfa = (obra ? 0.5 : nivel === 3 ? 0.85 + 0.12 * kq : nivel === 2 ? 0.74 + 0.12 * kq : nivel === 1 ? 0.66 : 0.48) * fz * fn;
-      cx.strokeStyle = nivel >= 2 && !obra ? `rgba(${BLANCO},${(alfa * (nivel === 3 ? 0.97 : 0.86)).toFixed(2)})` : `rgba(${ACERO},${alfa.toFixed(2)})`;
+      cx.strokeStyle = nivel >= 2 && !obra ? `rgba(${CLARO},${(alfa * (nivel === 3 ? 0.97 : 0.86)).toFixed(2)})` : `rgba(${ACERO},${alfa.toFixed(2)})`;
       cx.lineWidth = nivel === 3 ? base + 0.9 + 0.5 * kq : nivel === 2 ? base + 0.35 + 0.3 * kq : nivel === 1 ? base : Math.max(0.7, base - 0.25);
       cx.setLineDash(obra ? [3, 3] : []);
       cx.beginPath();
@@ -315,10 +319,7 @@
     cx.setLineDash([]);
     if (z >= 4) { pintaExtremos(cx, p, G, lineas, z, ACERO); cx.globalCompositeOperation = 'lighter'; }
     if (fibraMarcada >= 0) {
-      const l = FT.lineas[fibraMarcada]; cx.strokeStyle = `rgba(${BLANCO},.95)`; cx.lineWidth = 2; cx.beginPath();
-      let prev = false;
-      for (const w of l.w) { const v = p.aVista(w), x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], ve = v[2] > 0.02; if (ve && prev) cx.lineTo(x, y); else if (ve) cx.moveTo(x, y); prev = ve; }
-      cx.stroke();
+      const l = FT.lineas[fibraMarcada]; resalta(cx, p, G, [l], l.nivel >= 2 ? CLARO : ACERO);
     }
   }
   let fibraMarcada = -1;
@@ -527,13 +528,13 @@
       const P3 = capas.sub.porPotencia, L3 = esLimpio(), zq = G.R / (G.R0 || G.R), kq = Math.min(1, Math.max(0, (zq - 1.4) / 2.6));
       pintaLineas(cx, p, G, P3.ex[0], `rgba(${ACERO},.55)`, 0.9);
       if (P3.ex[1].length) pintaLineas(cx, p, G, P3.ex[1], `rgba(${ACERO},${(0.62 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
-      if (P3.ex[2].length) { if (kq > 0) pintaLineas(cx, p, G, P3.ex[2], `rgba(${BLANCO},${((L3 ? 0.2 : 0.14) * kq).toFixed(3)})`, 2 + 2 * kq); pintaLineas(cx, p, G, P3.ex[2], `rgba(${BLANCO},${(0.7 + 0.22 * kq).toFixed(2)})`, 1.1 + 0.6 * kq); }
-      if (PREV && PREV.length) { cx.save(); cx.setLineDash([2, 6]); pintaLineas(cx, p, G, PREV, `rgba(${BLANCO},.4)`, 1); cx.restore(); }
+      if (P3.ex[2].length) { pintaLineas(cx, p, G, P3.ex[2], `rgba(${ACERO},${((L3 ? 0.22 : 0.16) + 0.14 * kq).toFixed(3)})`, 3 + 3 * kq); pintaLineas(cx, p, G, P3.ex[2], `rgba(${CLARO},${(0.78 + 0.2 * kq).toFixed(2)})`, 1.2 + 0.7 * kq); }
+      if (PREV && PREV.length) { cx.save(); cx.setLineDash([2, 6]); pintaLineas(cx, p, G, PREV, `rgba(${CLARO},.45)`, 1); cx.restore(); }
       if (capas.sub.aprox.length) {
         cx.setLineDash([6, 4]);
         pintaLineas(cx, p, G, P3.ap[0], `rgba(${ACERO},.45)`, 0.9);
         if (P3.ap[1].length) pintaLineas(cx, p, G, P3.ap[1], `rgba(${ACERO},${(0.55 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
-        if (P3.ap[2].length) { if (kq > 0) pintaLineas(cx, p, G, P3.ap[2], `rgba(${BLANCO},${((L3 ? 0.18 : 0.12) * kq).toFixed(3)})`, 2 + 2 * kq); pintaLineas(cx, p, G, P3.ap[2], `rgba(${BLANCO},${(0.62 + 0.23 * kq).toFixed(2)})`, 1.1 + 0.6 * kq); }
+        if (P3.ap[2].length) { pintaLineas(cx, p, G, P3.ap[2], `rgba(${ACERO},${((L3 ? 0.2 : 0.14) + 0.12 * kq).toFixed(3)})`, 3 + 3 * kq); pintaLineas(cx, p, G, P3.ap[2], `rgba(${CLARO},${(0.7 + 0.22 * kq).toFixed(2)})`, 1.2 + 0.7 * kq); }
         cx.setLineDash([]);
       }
       pintaLuz(cx, p, G, capas.sub.lineas, t);
@@ -541,9 +542,9 @@
     if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaEstaciones(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
     else if (estado.sub && EST) { cx.globalCompositeOperation = 'source-over'; pintaEstaciones(cx, p, G); cx.globalCompositeOperation = 'lighter'; } // 22 Oct 2026, 14:15 (owner): the polar stations show with the cables too
     if (estado.sub && capas.sub && capas.sub.lineas) {
-      if (cableMarcado >= 0) { const l = capas.sub.lineas[cableMarcado]; if (l) pintaLineas(cx, p, G, [l], `rgba(${BLANCO},.95)`, 2.2); }
-      if (previstoMarcado >= 0 && PREV && PREV[previstoMarcado]) { cx.save(); cx.setLineDash([3, 5]); pintaLineas(cx, p, G, [PREV[previstoMarcado]], `rgba(${BLANCO},.95)`, 2.2); cx.restore(); } // the planned cable under the pointer lights up like the real ones (owner, 22 Oct 2026, 17:57)
-      if (llegadaMarcada >= 0 && LUG && LUG.llegadas) { const ls = LUG.llegadas[llegadaMarcada].seg.map((i) => capas.sub.lineas[i]).filter(Boolean); pintaLineas(cx, p, G, ls, `rgba(${BLANCO},.95)`, 2); }
+      if (cableMarcado >= 0) { const l = capas.sub.lineas[cableMarcado]; if (l) resalta(cx, p, G, [l], potencia(cableMarcado) === 2 ? CLARO : ACERO); }
+      if (previstoMarcado >= 0 && PREV && PREV[previstoMarcado]) { cx.save(); cx.setLineDash([3, 5]); resalta(cx, p, G, [PREV[previstoMarcado]], CLARO); cx.restore(); } // the planned cable under the pointer lights up like the real ones (owner, 22 Oct 2026, 17:57)
+      if (llegadaMarcada >= 0 && LUG && LUG.llegadas) { const ls = LUG.llegadas[llegadaMarcada].seg.map((i) => capas.sub.lineas[i]).filter(Boolean); resalta(cx, p, G, ls, ACERO); }
       pintaLlegadas(cx, p, G);
       { const ze = G.R / (G.R0 || G.R); if (ze >= 4) { pintaExtremos(cx, p, G, capas.sub.lineas, ze, BLANCO); if (PREV && PREV.length) pintaExtremos(cx, p, G, PREV, ze, BLANCO); } }
     }
@@ -611,6 +612,8 @@
     l.cap = capDe(w, 0, n - 1); l.caps = out; return out;
   }
   const veCap = (F, cp) => F.d[0] * cp.c[0] + F.d[1] * cp.c[1] + F.d[2] * cp.c[2] >= Math.cos(Math.min(Math.PI, F.ang + cp.r));
+  // what the pointer touches: a soft halo and a brighter, wider core in the line's own colour
+  function resalta(cx, p, G, lineas, rgb) { pintaLineas(cx, p, G, lineas, `rgba(${rgb},.22)`, 7); pintaLineas(cx, p, G, lineas, `rgba(${rgb},1)`, 2.3); }
   function pintaLineas(cx, p, G, lineas, color, ancho) {
     const F = CAMPO || campo(p, G);
     cx.strokeStyle = color; cx.lineWidth = ancho; cx.beginPath();
@@ -855,7 +858,7 @@
     }
     if (estado.sub) {
       const c = capas.sub;
-      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + (CAP && Object.keys(CAP.cables).length ? ' · ' + T('trazo blanco y grueso: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s') : '') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
+      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + (CAP && Object.keys(CAP.cables).length ? ' · ' + T('trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s') : '') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
     }
     if (estado.fibra) {
       meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + T('por niveles: de lejos solo las troncales principales; las nacionales y las regionales aparecen al acercarse') + ' · ' + T('Datos verificados') : FT && FT.error ? T('No se pudo cargar la fibra por tierra.') : T('Cargando fibra por tierra…'));
