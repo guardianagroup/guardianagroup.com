@@ -17,6 +17,8 @@ every open source we found, keeps what each one says about itself, and writes or
      wide (GÉANT, Cogent, Tata…), as straight lines, from herramientas/fuentes/topology-zoo.json written by
      fibra_zoo.py (committed, because the Zoo's site is not reachable from every runner).
      http://www.topology-zoo.org
+  5. The GUARDIANA agency: big countries' backbones that two voices confirm separately, city to city, from
+     herramientas/fuentes/fibra-agencia.json written by fibra_agencia.py.
 
 Every line keeps its source; nothing is drawn where no source has data. Planned and metro lines are left out:
 only long-distance fibre that the source gives as built (or does not qualify).
@@ -277,6 +279,15 @@ def main():
         for x in zl:
             x['f'] = len(fuentes) - 1
             lineas.append(x)
+
+    # 5. the agency's backbones (two voices, see fibra_agencia.py): last, so earlier lines keep their place
+    pa = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fuentes', 'fibra-agencia.json')
+    if os.path.exists(pa):
+        dag = json.load(open(pa, encoding='utf-8'))
+        if dag.get('lineas'):
+            fuentes.append(dag['fuente'])
+            for c in dag['lineas']:
+                lineas.append({'n': c['n'], 'o': c['o'], 'cc': c['cc'], 'e': 'ok', 'l': c['l'], 'f': len(fuentes) - 1})
 
     salida, tot, paises, por_f = [], 0.0, set(), {}
     for x in lineas:

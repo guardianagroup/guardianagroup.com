@@ -1,0 +1,439 @@
+[
+{
+"nombre": "TEA NEXT — Troncal TransEuroasiática",
+"operador": "Atlas / Rostelecom",
+"pais": "RU",
+"ciudades": [
+"Moscú",
+"Nizhni Nóvgorod",
+"Kazán",
+"Ekaterimburgo",
+"Tiumén",
+"Novosibirsk",
+"Krasnoyarsk",
+"Irkutsk",
+"Ulán-Udé",
+"Chitá",
+"Jabárovsk",
+"Vladivostok"
+],
+"estado": "en servicio",
+"fuente": "https://mintrans.gov.ru/eye/press-center/branch-news/9588"
+},
+{
+"nombre": "Troncal Óptica del Norte",
+"operador": "Rostelecom",
+"pais": "RU",
+"ciudades": [
+"Ekaterimburgo",
+"Janti-Mansisk",
+"Surgut",
+"Noyabrsk",
+"Novi Urengói",
+"Salejard"
+],
+"estado": "en servicio",
+"fuente": "https://www.company.rt.ru/about/history.php"
+},
+{
+"nombre": "National Knowledge Network — Corredor norte-oeste y sur",
+"operador": "National Informatics Centre / NKN",
+"pais": "IN",
+"ciudades": [
+"Nueva Delhi",
+"Jaipur",
+"Bombay",
+"Pune",
+"Hyderabad",
+"Chennai"
+],
+"estado": "en servicio",
+"fuente": "https://nkn.gov.in/core/"
+},
+{
+"nombre": "National Knowledge Network — Corredor norte y noreste",
+"operador": "National Informatics Centre / NKN",
+"pais": "IN",
+"ciudades": [
+"Nueva Delhi",
+"Lucknow",
+"Calcuta",
+"Guwahati",
+"Shillong"
+],
+"estado": "en servicio",
+"fuente": "https://nkn.gov.in/core/"
+},
+{
+"nombre": "Rede Ipê — Corredor Santa Catarina–São Paulo",
+"operador": "Rede Nacional de Ensino e Pesquisa (RNP)",
+"pais": "BR",
+"ciudades": [
+"Florianópolis",
+"Itajaí",
+"Joinville",
+"São Paulo"
+],
+"estado": "en servicio",
+"fuente": "https://redeipe.rnp.br/conectividade/pop/24"
+},
+{
+"nombre": "Red Provincial de Fibra Óptica de Tierra del Fuego — REFEFO",
+"operador": "ARSAT / Gobierno de Tierra del Fuego",
+"pais": "AR",
+"ciudades": [
+"Estancia Cullen",
+"San Sebastián",
+"Río Grande",
+"Tolhuin",
+"Ushuaia"
+],
+"estado": "en servicio",
+"fuente": "https://www.argentina.gob.ar/noticias/cafiero-y-melella-firmaron-acuerdo-de-conectividad-para-tierra-del-fuego"
+},
+{
+"nombre": "Kazakhtelecom — Troncal occidental del Caspio",
+"operador": "Kazakhtelecom",
+"pais": "KZ",
+"ciudades": [
+"Oral",
+"Atyrau",
+"Aktau"
+],
+"estado": "en servicio",
+"fuente": "https://www.gov.kz/uploads/2023/9/14/4c82391fa0e10b9ac168b12125dfc4e0_original.9897506.pdf"
+},
+{
+"nombre": "Kazakhtelecom — Troncal septentrional y oriental",
+"operador": "Kazakhtelecom",
+"pais": "KZ",
+"ciudades": [
+"Aktobé",
+"Kostanay",
+"Petropávlovsk",
+"Pavlodar",
+"Semey",
+"Oskemen"
+],
+"estado": "en servicio",
+"fuente": "https://www.gov.kz/uploads/2023/9/14/4c82391fa0e10b9ac168b12125dfc4e0_original.9897506.pdf"
+},
+{
+"nombre": "Kazakhtelecom — Troncal meridional",
+"operador": "Kazakhtelecom",
+"pais": "KZ",
+"ciudades": [
+"Aktobé",
+"Kyzylorda",
+"Shymkent",
+"Almaty"
+],
+"estado": "en servicio",
+"fuente": "https://www.gov.kz/uploads/2023/9/14/4c82391fa0e10b9ac168b12125dfc4e0_original.9897506.pdf"
+},
+{
+"nombre": "TNS-PLUS — Corredor central",
+"operador": "TNS-PLUS",
+"pais": "KZ",
+"ciudades": [
+"Astaná",
+"Karagandá",
+"Almaty"
+],
+"estado": "en servicio",
+"fuente": "https://www.gov.kz/uploads/2023/9/14/4c82391fa0e10b9ac168b12125dfc4e0_original.9897506.pdf"
+},
+{
+"nombre": "Salam / ITC — Troncal noroccidental y central",
+"operador": "Salam (Integrated Telecom Company)",
+"pais": "SA",
+"ciudades": [
+"Haql",
+"Duba",
+"Tabuk",
+"Jaharah",
+"Hail",
+"Riad"
+],
+"estado": "en servicio",
+"fuente": "https://salam.sa/marketing-mangment/uploads/salam_network_map_en_bb94993a74.PDF"
+},
+{
+"nombre": "Salam / ITC — Troncal occidental y central",
+"operador": "Salam (Integrated Telecom Company)",
+"pais": "SA",
+"ciudades": [
+"Yeda",
+"La Meca",
+"Medina",
+"Hail"
+],
+"estado": "en servicio",
+"fuente": "https://salam.sa/marketing-mangment/uploads/salam_network_map_en_bb94993a74.PDF"
+},
+{
+"nombre": "Salam / ITC — Troncal suroccidental",
+"operador": "Salam (Integrated Telecom Company)",
+"pais": "SA",
+"ciudades": [
+"Yeda",
+"Taif",
+"Abha",
+"Jamís Mushait",
+"Najrán"
+],
+"estado": "en servicio",
+"fuente": "https://salam.sa/marketing-mangment/uploads/salam_network_map_en_bb94993a74.PDF"
+},
+{
+"nombre": "Red Dorsal Nacional de Fibra Óptica — Lima–Huancavelica",
+"operador": "PRONATEL",
+"pais": "PE",
+"ciudades": [
+"Lima",
+"Huancayo",
+"Repartición (Isla Grande)"
+],
+"estado": "en servicio",
+"fuente": "https://www.osiptel.gob.pe/media/ad2pojdf/azteca-electropuno-24-112015.pdf"
+},
+{
+"nombre": "Red Dorsal Nacional de Fibra Óptica — Corredor Ayacucho",
+"operador": "PRONATEL",
+"pais": "PE",
+"ciudades": [
+"La Merced",
+"Huanta",
+"Ayacucho",
+"Querobamba",
+"Tintay",
+"Puquio"
+],
+"estado": "en servicio",
+"fuente": "https://www.osiptel.gob.pe/media/ad2pojdf/azteca-electropuno-24-112015.pdf"
+},
+{
+"nombre": "Red Dorsal Nacional de Fibra Óptica — Corredor Ayacucho–Ica–Lima",
+"operador": "PRONATEL",
+"pais": "PE",
+"ciudades": [
+"Puquio",
+"Nazca",
+"Palpa",
+"Ica",
+"Dos Palmas",
+"Chincha Alta",
+"Lurín"
+],
+"estado": "en servicio",
+"fuente": "https://www.osiptel.gob.pe/media/ad2pojdf/azteca-electropuno-24-112015.pdf"
+},
+{
+"nombre": "Red Dorsal Nacional de Fibra Óptica — Corredor Apurímac",
+"operador": "PRONATEL",
+"pais": "PE",
+"ciudades": [
+"Andahuaylas",
+"Abancay",
+"Tambobamba"
+],
+"estado": "en servicio",
+"fuente": "https://www.osiptel.gob.pe/media/ad2pojdf/azteca-electropuno-24-112015.pdf"
+},
+{
+"nombre": "Red Dorsal Nacional de Fibra Óptica — Corredor Pasco–Huánuco",
+"operador": "PRONATEL",
+"pais": "PE",
+"ciudades": [
+"Cerro de Pasco",
+"Maya Maya",
+"Huánuco",
+"Panao"
+],
+"estado": "en servicio",
+"fuente": "https://www.osiptel.gob.pe/media/ad2pojdf/azteca-electropuno-24-112015.pdf"
+},
+{
+"nombre": "National Fiber Backbone — Fase 1, corredor norte de Luzón",
+"operador": "Department of Information and Communications Technology (DICT)",
+"pais": "PH",
+"ciudades": [
+"Laoag",
+"Bantay",
+"San Esteban",
+"Bacnotan",
+"Bauang",
+"Balingueo",
+"Concepción",
+"San José del Monte",
+"Quezon City"
+],
+"estado": "en servicio",
+"fuente": "BCDA, National Broadband Backbone Network – Phase 1, Annex B1–B10"
+},
+{
+"nombre": "RENATA — Anillo del Eje Cafetero",
+"operador": "Red Nacional Académica de Tecnología Avanzada (RENATA)",
+"pais": "CO",
+"ciudades": [
+"Manizales",
+"Pereira",
+"Armenia"
+],
+"estado": "en servicio",
+"fuente": "https://renata.edu.co/"
+},
+{
+"nombre": "Palapa Ring Tengah — Proyecto 5, corredor de Célebes",
+"operador": "PT LEN Telekomunikasi Indonesia / BAKTI Komdigi",
+"pais": "ID",
+"ciudades": [
+"Kendari",
+"Wanggudu",
+"Bungku",
+"Petasia",
+"Tentena"
+],
+"estado": "en servicio",
+"fuente": "https://baktikominfo.id/layanan/palapa-ring"
+},
+{
+"nombre": "Fibra Óptica Austral — Troncal Terrestre Aysén",
+"operador": "Silica Networks Chile",
+"pais": "CL",
+"ciudades": [
+"Caleta Tortel",
+"Los Ñadis",
+"Cochrane",
+"Puerto Bertrand",
+"Puerto Río Tranquilo",
+"Bahía Murta",
+"Cerro Castillo",
+"El Blanco",
+"Coyhaique"
+],
+"estado": "en servicio",
+"fuente": "https://www.subtel.gob.cl/wp-content/uploads/2024/07/Informe_Nacional_2T_2024_V02.pdf"
+},
+{
+"nombre": "Fibra Óptica Austral — Troncal Terrestre Los Lagos",
+"operador": "Silica Networks Chile",
+"pais": "CL",
+"ciudades": [
+"Puerto Montt",
+"Alerce",
+"Ensenada",
+"Ralún",
+"Cochamó",
+"Puelo Alto",
+"Contao",
+"El Manzano",
+"Pichicolo",
+"Río Negro",
+"Hualaihué"
+],
+"estado": "en servicio",
+"fuente": "https://www.subtel.gob.cl/wp-content/uploads/2024/07/Informe_Nacional_2T_2024_V02.pdf"
+},
+{
+"nombre": "CNT EP — Red Troncal Andina",
+"operador": "Corporación Nacional de Telecomunicaciones (CNT EP)",
+"pais": "EC",
+"ciudades": [
+"Tulcán",
+"Ibarra",
+"Quito",
+"Latacunga",
+"Ambato",
+"Riobamba",
+"Azogues",
+"Cuenca"
+],
+"estado": "en servicio",
+"fuente": "https://www.iirsa.org/admin_iirsa_web/Uploads/Documents/telco_gt_asuncion12_7_ecuador.pdf"
+},
+{
+"nombre": "CNT EP — Red Troncal del Pacífico",
+"operador": "Corporación Nacional de Telecomunicaciones (CNT EP)",
+"pais": "EC",
+"ciudades": [
+"Manta",
+"Jipijapa",
+"Punta Carnero",
+"Guayaquil",
+"Machala",
+"Huaquillas"
+],
+"estado": "en servicio",
+"fuente": "https://www.iirsa.org/admin_iirsa_web/Uploads/Documents/telco_gt_asuncion12_7_ecuador.pdf"
+},
+{
+"nombre": "CNT EP — Troncal Oriental sobre Transelectric",
+"operador": "Corporación Nacional de Telecomunicaciones (CNT EP)",
+"pais": "EC",
+"ciudades": [
+"Nueva Loja",
+"Coca",
+"Tena",
+"Puyo",
+"Macas",
+"Zamora"
+],
+"estado": "en servicio",
+"fuente": "https://www.iirsa.org/admin_iirsa_web/Uploads/Documents/telco_gt_asuncion12_7_ecuador.pdf"
+},
+{
+"nombre": "ENTEL — Red Nacional DWDM, eje central",
+"operador": "ENTEL Bolivia",
+"pais": "BO",
+"ciudades": [
+"La Paz",
+"Cochabamba",
+"Santa Cruz de la Sierra",
+"Trinidad"
+],
+"estado": "en servicio",
+"fuente": "https://institucional.entel.bo/inicio3.0/files/licitaciones/0932019/Informacion_Tecnologia_SUBGERENCIA_DE_OyM_CONSOLIDADO_AL_21.10.2019.pdf"
+},
+{
+"nombre": "ENTEL — Red Nacional DWDM, corredor occidental y sur",
+"operador": "ENTEL Bolivia",
+"pais": "BO",
+"ciudades": [
+"La Paz",
+"Oruro",
+"Potosí",
+"Tarija",
+"Yacuiba"
+],
+"estado": "en servicio",
+"fuente": "https://institucional.entel.bo/inicio3.0/files/licitaciones/0932019/Informacion_Tecnologia_SUBGERENCIA_DE_OyM_CONSOLIDADO_AL_21.10.2019.pdf"
+},
+{
+"nombre": "ENTEL — Red Nacional DWDM, corredor sudoriental",
+"operador": "ENTEL Bolivia",
+"pais": "BO",
+"ciudades": [
+"Cochabamba",
+"Sucre",
+"Camiri",
+"Yacuiba"
+],
+"estado": "en servicio",
+"fuente": "https://institucional.entel.bo/inicio3.0/files/licitaciones/0932019/Informacion_Tecnologia_SUBGERENCIA_DE_OyM_CONSOLIDADO_AL_21.10.2019.pdf"
+},
+{
+"nombre": "ENTEL — Red Nacional DWDM, eje La Paz–Beni–Santa Cruz",
+"operador": "ENTEL Bolivia",
+"pais": "BO",
+"ciudades": [
+"La Paz",
+"Trinidad",
+"Santa Cruz de la Sierra",
+"Camiri",
+"Yacuiba"
+],
+"estado": "en servicio",
+"fuente": "https://institucional.entel.bo/inicio3.0/files/licitaciones/0932019/Informacion_Tecnologia_SUBGERENCIA_DE_OyM_CONSOLIDADO_AL_21.10.2019.pdf"
+}
+]
