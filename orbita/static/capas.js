@@ -1644,7 +1644,7 @@
     try {
       if (k === 'sub') { if (!capas.sub || !capas.sub.lineas || !CAP) return 0; if (c === 'previstos') return PREV ? PREV.length : 0; if (c === 'aprox') return capas.sub.aprox ? capas.sub.aprox.length : 0; let n = 0; capas.sub.lineas.forEach((l, i) => { if (claseSub(i) === c) n++; }); return n; }
       if (k === 'fibra') { if (!FT || !FT.lineas) return 0; preparaNiveles(); return FT.lineas.filter((l) => claseFibra(l) === c).length; }
-      if (k === 'puntos') { if (c === 'estaciones') return EST ? EST.length : 0; if (!PT || !PT.p) return 0; if (c === 'pequenos') return PT.porOp ? PT.p.filter((q) => q.t === 'datos' && !(q.o && (PT.porOp.get(q.o) || 0) >= 5)).length : 0; return PT.p.filter((q) => q.t === c).length; }
+      if (k === 'puntos') { if (c === 'estaciones') return EST ? EST.length : 0; if (!PT || !PT.p) return 0; if (c === 'intercambio') return PT.ix ? PT.ix.length : 0; if (c === 'pequenos') return PT.porOp ? PT.p.filter((q) => q.t === 'datos' && !(q.o && (PT.porOp.get(q.o) || 0) >= 5)).length : 0; return PT.p.filter((q) => q.t === c).length; }
     } catch (_) {}
     return 0;
   }

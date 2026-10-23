@@ -1,0 +1,702 @@
+[
+{
+"nombre": "Niger Internet Exchange Point",
+"ciudad": "Niamey",
+"pais": "NE",
+"lat": 13.5116,
+"lon": 2.1254,
+"operador": "Agencia Nacional para la Sociedad de la Información (ANSI)",
+"desde": 2025,
+"nota": "Primer punto de intercambio de Níger, inaugurado el 19 de agosto de 2025 para facilitar el intercambio local de tráfico."
+},
+{
+"nombre": "Centro Nacional de Intercambio de Internet de Mauritania",
+"ciudad": "Nuakchot",
+"pais": "MR",
+"lat": 18.0735,
+"lon": -15.9582,
+"operador": "Institución de Infraestructuras Digitales de Mauritania",
+"desde": 2025,
+"nota": "Infraestructura nacional inaugurada en mayo de 2025 para intercambiar tráfico entre operadores dentro de Mauritania."
+},
+{
+"nombre": "Liberia Internet Exchange Point (LIXP)",
+"ciudad": "Monrovia",
+"pais": "LR",
+"lat": 6.3156,
+"lon": -10.8074,
+"operador": "Liberia Internet Exchange Point Association (LIXPA)",
+"desde": 2015,
+"nota": "Punto de intercambio nacional activo que permite mantener dentro de Liberia parte del tráfico entre proveedores."
+},
+{
+"nombre": "Somali Internet Exchange Point (SoIXP)",
+"ciudad": "Mogadiscio",
+"pais": "SO",
+"lat": 2.0469,
+"lon": 45.3182,
+"operador": "National Communications Authority of Somalia",
+"desde": 2018,
+"nota": "Intercambio nacional registrado como activo, con infraestructura de interconexión en Mogadiscio."
+},
+{
+"nombre": "Harare Internet Exchange (Harare IX)",
+"ciudad": "Harare",
+"pais": "ZW",
+"lat": -17.8252,
+"lon": 31.0335,
+"operador": "Harare Internet Exchange",
+"desde": 2017,
+"nota": "Intercambio regional de Zimbabue con participantes y estadísticas de tráfico publicados."
+},
+{
+"nombre": "Goma Internet Exchange (GOMIX)",
+"ciudad": "Goma",
+"pais": "CD",
+"lat": -1.6585,
+"lon": 29.2205,
+"operador": "ISPA-DRC",
+"desde": 2021,
+"nota": "Interconecta proveedores en el este de la República Democrática del Congo."
+},
+{
+"nombre": "Lubumbashi Internet Exchange (LUBIX)",
+"ciudad": "Lubumbashi",
+"pais": "CD",
+"lat": -11.6876,
+"lon": 27.5026,
+"operador": "ISPA-DRC",
+"desde": 2019,
+"nota": "Punto de intercambio de la región de Katanga, independiente del nodo KINIX de Kinshasa."
+},
+{
+"nombre": "Africa Congo Internet Exchange (ACIX)",
+"ciudad": "Kinshasa",
+"pais": "CD",
+"lat": -4.4419,
+"lon": 15.2663,
+"operador": "ACIX",
+"desde": 2023,
+"nota": "Intercambio adicional de Kinshasa, registrado separadamente de KINIX y con redes participantes."
+},
+{
+"nombre": "Accra Internet Exchange LBG",
+"ciudad": "Accra",
+"pais": "GH",
+"lat": 5.6037,
+"lon": -0.187,
+"operador": "Accra Internet Exchange LBG",
+"desde": null,
+"nota": "Intercambio independiente de Accra con más de veinte redes participantes."
+},
+{
+"nombre": "LINX Accra",
+"ciudad": "Accra",
+"pais": "GH",
+"lat": 5.6037,
+"lon": -0.187,
+"operador": "London Internet Exchange (LINX)",
+"desde": 2025,
+"nota": "Extensión africana de LINX que facilita el intercambio de tráfico entre redes locales e internacionales."
+},
+{
+"nombre": "Malawi Internet Exchange (MIX-BT)",
+"ciudad": "Blantyre",
+"pais": "MW",
+"lat": -15.7861,
+"lon": 35.0058,
+"operador": "Malawi Internet Service Providers Association (MISPA)",
+"desde": 2008,
+"nota": "Intercambio histórico de Blantyre que mantiene tráfico nacional dentro de Malaui."
+},
+{
+"nombre": "CAMIX Yaoundé",
+"ciudad": "Yaundé",
+"pais": "CM",
+"lat": 3.848,
+"lon": 11.5021,
+"operador": "CAMIX",
+"desde": 2016,
+"nota": "Nodo de intercambio de la capital camerunesa, geográficamente distinto de CAMIX Douala."
+},
+{
+"nombre": "IXPN Kano",
+"ciudad": "Kano",
+"pais": "NG",
+"lat": 12.0022,
+"lon": 8.592,
+"operador": "Internet Exchange Point of Nigeria (IXPN)",
+"desde": null,
+"nota": "Nodo regional de IXPN que amplía el intercambio local de tráfico al norte de Nigeria."
+},
+{
+"nombre": "Arusha Internet Exchange Point (AIXP)",
+"ciudad": "Arusha",
+"pais": "TZ",
+"lat": -3.3869,
+"lon": 36.683,
+"operador": "Tanzania Internet Service Providers Association",
+"desde": 2006,
+"nota": "Intercambio regional de Arusha que evita enviar al exterior parte del tráfico entre redes locales."
+},
+{
+"nombre": "Dodoma Internet Exchange Point (DIXP)",
+"ciudad": "Dodoma",
+"pais": "TZ",
+"lat": -6.1629,
+"lon": 35.7516,
+"operador": "Tanzania Internet Exchange",
+"desde": null,
+"nota": "Punto de intercambio de la capital de Tanzania, con participantes propios."
+},
+{
+"nombre": "Mwanza Internet Exchange Point (MIXP)",
+"ciudad": "Mwanza",
+"pais": "TZ",
+"lat": -2.5164,
+"lon": 32.9175,
+"operador": "Tanzania Internet Exchange",
+"desde": 2016,
+"nota": "Intercambio regional situado junto al lago Victoria, separado del nodo de Dar es Salaam."
+},
+{
+"nombre": "Zanzibar Internet Exchange Point (ZIXP)",
+"ciudad": "Zanzíbar",
+"pais": "TZ",
+"lat": -6.1659,
+"lon": 39.2026,
+"operador": "Tanzania Internet Exchange",
+"desde": 2018,
+"nota": "Intercambio local del archipiélago de Zanzíbar que mejora la conectividad entre sus operadores."
+},
+{
+"nombre": "BGP.Exchange Johannesburg (BGPIX-JNB)",
+"ciudad": "Johannesburgo",
+"pais": "ZA",
+"lat": -26.2041,
+"lon": 28.0473,
+"operador": "BGP.Exchange",
+"desde": null,
+"nota": "Plataforma de intercambio adicional en Johannesburgo, independiente de JINX y NAPAfrica."
+},
+{
+"nombre": "Lao National Internet Center (LANIC)",
+"ciudad": "Vientián",
+"pais": "LA",
+"lat": 17.9757,
+"lon": 102.6331,
+"operador": "Lao National Internet Center",
+"desde": 2010,
+"nota": "Infraestructura nacional de intercambio de Laos, registrada como activa y con participantes locales."
+},
+{
+"nombre": "Cyprus Internet Exchange (CyIX)",
+"ciudad": "Nicosia",
+"pais": "CY",
+"lat": 35.1856,
+"lon": 33.3823,
+"operador": "Cyprus Internet Exchange",
+"desde": null,
+"nota": "Punto de intercambio de Nicosia que permite interconexiones nacionales en Chipre."
+},
+{
+"nombre": "JumboIX Cyprus",
+"ciudad": "Limassol",
+"pais": "CY",
+"lat": 34.6786,
+"lon": 33.0413,
+"operador": "IPTP Networks",
+"desde": null,
+"nota": "Intercambio comercial de Limassol operado por IPTP Networks."
+},
+{
+"nombre": "ZXIX Hangzhou",
+"ciudad": "Hangzhou",
+"pais": "CN",
+"lat": 30.2741,
+"lon": 120.1551,
+"operador": "ZX Internet Exchange",
+"desde": null,
+"nota": "Intercambio de Hangzhou incluido entre los puntos chinos con mayor número de redes declaradas."
+},
+{
+"nombre": "China Internet Exchange (CNIX Beijing)",
+"ciudad": "Pekín",
+"pais": "CN",
+"lat": 39.9042,
+"lon": 116.4074,
+"operador": "China Internet Exchange",
+"desde": null,
+"nota": "Plataforma de intercambio de Pekín."
+},
+{
+"nombre": "Better CNIX Shanghai",
+"ciudad": "Shanghái",
+"pais": "CN",
+"lat": 31.2304,
+"lon": 121.4737,
+"operador": "Better China Internet Exchange",
+"desde": null,
+"nota": "Intercambio de Shanghái con instalaciones físicas y redes participantes registradas."
+},
+{
+"nombre": "TOHU IX",
+"ciudad": "Cantón",
+"pais": "CN",
+"lat": 23.1291,
+"lon": 113.2644,
+"operador": "TOHU IX",
+"desde": null,
+"nota": "Intercambio de Guangzhou que reúne redes registradas en el sur de China."
+},
+{
+"nombre": "SHIXP",
+"ciudad": "Shanghái",
+"pais": "CN",
+"lat": 31.2304,
+"lon": 121.4737,
+"operador": "SHIXP",
+"desde": null,
+"nota": "Punto de intercambio de Shanghái registrado como plataforma distinta de Better CNIX."
+},
+{
+"nombre": "CNIX Qianhai Shenzhen",
+"ciudad": "Shenzhen",
+"pais": "CN",
+"lat": 22.5431,
+"lon": 114.0579,
+"operador": "China Internet Exchange",
+"desde": null,
+"nota": "Nodo de intercambio de Qianhai, Shenzhen, con instalaciones físicas registradas."
+},
+{
+"nombre": "LoLi-IX Ningbo",
+"ciudad": "Ningbo",
+"pais": "CN",
+"lat": 29.8683,
+"lon": 121.544,
+"operador": "LoLi Internet Exchange",
+"desde": null,
+"nota": "Punto de intercambio de Ningbo con participantes propios en la provincia de Zhejiang."
+},
+{
+"nombre": "SMARTHUB Internet Exchange (SH-IX)",
+"ciudad": "Fujairah",
+"pais": "AE",
+"lat": 25.1288,
+"lon": 56.3265,
+"operador": "e& Carrier & Wholesale",
+"desde": null,
+"nota": "Intercambio de Fujairah vinculado al complejo SmartHub, importante enclave de conectividad internacional."
+},
+{
+"nombre": "center3 IX Riyadh",
+"ciudad": "Riad",
+"pais": "SA",
+"lat": 24.7136,
+"lon": 46.6753,
+"operador": "center3, en colaboración con LINX",
+"desde": null,
+"nota": "Intercambio neutral de Riad que complementa la infraestructura de center3 en Yeda."
+},
+{
+"nombre": "KazNIX",
+"ciudad": "Semey",
+"pais": "KZ",
+"lat": 50.4111,
+"lon": 80.2275,
+"operador": "KazNIX",
+"desde": 2018,
+"nota": "Intercambio regional de Kazajistán distinto de KAZ-IX y ubicado en Semey."
+},
+{
+"nombre": "GIBIRIX",
+"ciudad": "Estambul",
+"pais": "TR",
+"lat": 41.0082,
+"lon": 28.9784,
+"operador": "GIBIRIX",
+"desde": null,
+"nota": "Plataforma turca de intercambio de tráfico independiente de DE-CIX Istanbul."
+},
+{
+"nombre": "STUIX",
+"ciudad": "Taipéi",
+"pais": "TW",
+"lat": 25.033,
+"lon": 121.5654,
+"operador": "STUIX",
+"desde": null,
+"nota": "Intercambio taiwanés con más de cien redes participantes registradas."
+},
+{
+"nombre": "Poema IX Taipei",
+"ciudad": "Taipéi",
+"pais": "TW",
+"lat": 25.033,
+"lon": 121.5654,
+"operador": "Poema Internet Exchange",
+"desde": null,
+"nota": "Intercambio independiente de Taipéi, con decenas de redes participantes."
+},
+{
+"nombre": "Equinix Internet Exchange Hong Kong",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.3193,
+"lon": 114.1694,
+"operador": "Equinix",
+"desde": null,
+"nota": "Uno de los principales intercambios de Hong Kong por número de redes conectadas."
+},
+{
+"nombre": "BBIX Hong Kong",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.3193,
+"lon": 114.1694,
+"operador": "BBIX",
+"desde": null,
+"nota": "Intercambio comercial con más de cien redes registradas en Hong Kong."
+},
+{
+"nombre": "AMS-IX Hong Kong",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.3193,
+"lon": 114.1694,
+"operador": "AMS-IX",
+"desde": null,
+"nota": "Nodo asiático de AMS-IX que facilita interconexiones entre operadores y proveedores de contenido."
+},
+{
+"nombre": "BBIX Osaka",
+"ciudad": "Osaka",
+"pais": "JP",
+"lat": 34.6937,
+"lon": 135.5023,
+"operador": "BBIX",
+"desde": null,
+"nota": "Gran punto de intercambio japonés con más de cien redes participantes."
+},
+{
+"nombre": "Equinix Internet Exchange Tokyo",
+"ciudad": "Tokio",
+"pais": "JP",
+"lat": 35.6762,
+"lon": 139.6503,
+"operador": "Equinix",
+"desde": null,
+"nota": "Plataforma de intercambio de Tokio distribuida entre instalaciones de Equinix."
+},
+{
+"nombre": "Tokyo Internet Exchange (TYIX)",
+"ciudad": "Tokio",
+"pais": "JP",
+"lat": 35.6762,
+"lon": 139.6503,
+"operador": "Tokyo Internet Exchange",
+"desde": null,
+"nota": "Intercambio adicional de Tokio registrado de forma independiente de JPIX, JPNAP y BBIX."
+},
+{
+"nombre": "DE-CIX ASEAN",
+"ciudad": "Singapur",
+"pais": "SG",
+"lat": 1.3521,
+"lon": 103.8198,
+"operador": "DE-CIX",
+"desde": 2020,
+"nota": "Plataforma regional de intercambio que conecta redes de distintos mercados del sudeste asiático."
+},
+{
+"nombre": "Megaport MegaIX Singapore",
+"ciudad": "Singapur",
+"pais": "SG",
+"lat": 1.3521,
+"lon": 103.8198,
+"operador": "Megaport",
+"desde": 2017,
+"nota": "Intercambio distribuido entre varios centros de datos de Singapur."
+},
+{
+"nombre": "Thailand Internet Exchange (TH-IX)",
+"ciudad": "Bangkok",
+"pais": "TH",
+"lat": 13.7563,
+"lon": 100.5018,
+"operador": "NT Data Center / National Telecom",
+"desde": 1995,
+"nota": "Intercambio histórico de Tailandia, originado como CAT NIX y posteriormente denominado TH-IX."
+},
+{
+"nombre": "BBIX Thailand",
+"ciudad": "Bangkok",
+"pais": "TH",
+"lat": 13.7563,
+"lon": 100.5018,
+"operador": "BBIX Thailand",
+"desde": null,
+"nota": "Intercambio comercial de Bangkok con unas cincuenta redes participantes."
+},
+{
+"nombre": "GetaFIX Manila",
+"ciudad": "Manila",
+"pais": "PH",
+"lat": 14.5995,
+"lon": 120.9842,
+"operador": "GetaFIX",
+"desde": null,
+"nota": "Uno de los mayores intercambios de Filipinas por cantidad de redes conectadas."
+},
+{
+"nombre": "BBIX Manila",
+"ciudad": "Manila",
+"pais": "PH",
+"lat": 14.5995,
+"lon": 120.9842,
+"operador": "BBIX",
+"desde": null,
+"nota": "Intercambio filipino con amplia presencia en centros de datos de Manila."
+},
+{
+"nombre": "Maharlika Internet Exchange",
+"ciudad": "Manila",
+"pais": "PH",
+"lat": 14.5995,
+"lon": 120.9842,
+"operador": "Maharlika Internet Exchange",
+"desde": null,
+"nota": "Plataforma independiente de Manila con más de cincuenta redes registradas."
+},
+{
+"nombre": "DE-CIX Kuala Lumpur",
+"ciudad": "Kuala Lumpur",
+"pais": "MY",
+"lat": 3.139,
+"lon": 101.6869,
+"operador": "DE-CIX",
+"desde": null,
+"nota": "Intercambio neutral internacional presente en varios centros de datos de Kuala Lumpur."
+},
+{
+"nombre": "Penang IX",
+"ciudad": "George Town",
+"pais": "MY",
+"lat": 5.4141,
+"lon": 100.3288,
+"operador": "Penang IX, powered by DE-CIX",
+"desde": null,
+"nota": "Punto de intercambio de Penang que diversifica la interconexión fuera del área de Kuala Lumpur."
+},
+{
+"nombre": "Alien Internet Exchange (AIX)",
+"ciudad": "Depok",
+"pais": "ID",
+"lat": -6.4025,
+"lon": 106.7942,
+"operador": "Alien Internet Exchange",
+"desde": 2024,
+"nota": "Intercambio de Tapos, Depok, con más de trescientas redes participantes registradas."
+},
+{
+"nombre": "CLOUDXCHANGE Jakarta",
+"ciudad": "Yakarta",
+"pais": "ID",
+"lat": -6.2088,
+"lon": 106.8456,
+"operador": "CLOUDXCHANGE",
+"desde": null,
+"nota": "Gran plataforma de intercambio de Yakarta distribuida entre diversos centros de datos."
+},
+{
+"nombre": "Omadata Internet Exchange (ODIX)",
+"ciudad": "Surabaya",
+"pais": "ID",
+"lat": -7.2575,
+"lon": 112.7521,
+"operador": "Omadata",
+"desde": null,
+"nota": "Intercambio de Surabaya con una comunidad numerosa de redes participantes."
+},
+{
+"nombre": "Biznet Internet Exchange Jakarta (BIX)",
+"ciudad": "Yakarta",
+"pais": "ID",
+"lat": -6.2088,
+"lon": 106.8456,
+"operador": "Biznet",
+"desde": null,
+"nota": "Punto de intercambio de Biznet con una amplia base de redes conectadas en Yakarta."
+},
+{
+"nombre": "DE-CIX Jakarta",
+"ciudad": "Yakarta",
+"pais": "ID",
+"lat": -6.2088,
+"lon": 106.8456,
+"operador": "DE-CIX",
+"desde": null,
+"nota": "Intercambio neutral internacional con presencia en varios centros de datos de Yakarta."
+},
+{
+"nombre": "Digital Edge EPIX Jakarta",
+"ciudad": "Yakarta",
+"pais": "ID",
+"lat": -6.2088,
+"lon": 106.8456,
+"operador": "Digital Edge",
+"desde": null,
+"nota": "Intercambio comercial de Digital Edge que conecta redes dentro de su ecosistema de centros de datos."
+},
+{
+"nombre": "IIX Jawa Timur",
+"ciudad": "Surabaya",
+"pais": "ID",
+"lat": -7.2575,
+"lon": 112.7521,
+"operador": "Asosiasi Penyelenggara Jasa Internet Indonesia (APJII)",
+"desde": null,
+"nota": "Intercambio regional de Java Oriental que complementa los grandes nodos de Yakarta."
+},
+{
+"nombre": "Extreme IX Delhi",
+"ciudad": "Nueva Delhi",
+"pais": "IN",
+"lat": 28.6139,
+"lon": 77.209,
+"operador": "Extreme IX",
+"desde": 2016,
+"nota": "Uno de los mayores intercambios del norte de India por número de redes participantes."
+},
+{
+"nombre": "DE-CIX Delhi",
+"ciudad": "Nueva Delhi",
+"pais": "IN",
+"lat": 28.6139,
+"lon": 77.209,
+"operador": "DE-CIX India",
+"desde": 2019,
+"nota": "Intercambio neutral con más de cien redes participantes y presencia en múltiples instalaciones."
+},
+{
+"nombre": "Extreme IX Chennai",
+"ciudad": "Chennai",
+"pais": "IN",
+"lat": 13.0827,
+"lon": 80.2707,
+"operador": "Extreme IX",
+"desde": 2016,
+"nota": "Importante intercambio del sur de India, conectado a numerosos operadores regionales."
+},
+{
+"nombre": "DE-CIX Chennai",
+"ciudad": "Chennai",
+"pais": "IN",
+"lat": 13.0827,
+"lon": 80.2707,
+"operador": "DE-CIX India",
+"desde": 2019,
+"nota": "Intercambio distribuido por centros de datos de Chennai, independiente del nodo NIXI existente."
+},
+{
+"nombre": "AMS-IX Mumbai",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.076,
+"lon": 72.8777,
+"operador": "AMS-IX",
+"desde": 2017,
+"nota": "Intercambio internacional de Bombay con decenas de redes participantes."
+},
+{
+"nombre": "Extreme IX Bangalore",
+"ciudad": "Bengaluru",
+"pais": "IN",
+"lat": 12.9716,
+"lon": 77.5946,
+"operador": "Extreme IX",
+"desde": 2017,
+"nota": "Intercambio de Bengaluru que conecta redes del importante polo tecnológico del sur de India."
+},
+{
+"nombre": "Equinix Internet Exchange Mumbai",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.076,
+"lon": 72.8777,
+"operador": "Equinix",
+"desde": null,
+"nota": "Intercambio de Equinix con participantes registrados en sus instalaciones de Bombay."
+},
+{
+"nombre": "Extreme IX Kolkata",
+"ciudad": "Calcuta",
+"pais": "IN",
+"lat": 22.5726,
+"lon": 88.3639,
+"operador": "Extreme IX",
+"desde": 2017,
+"nota": "Punto de intercambio del este de India con conexiones entre operadores regionales."
+},
+{
+"nombre": "DE-CIX Kolkata",
+"ciudad": "Calcuta",
+"pais": "IN",
+"lat": 22.5726,
+"lon": 88.3639,
+"operador": "DE-CIX India",
+"desde": 2019,
+"nota": "Intercambio neutral de Calcuta que amplía la presencia de DE-CIX en el este de India."
+},
+{
+"nombre": "Kolkata IX",
+"ciudad": "Calcuta",
+"pais": "IN",
+"lat": 22.5726,
+"lon": 88.3639,
+"operador": "India Internet Foundation",
+"desde": 2016,
+"nota": "Intercambio comunitario independiente de Calcuta con decenas de redes conectadas."
+},
+{
+"nombre": "DE-CIX Hyderabad",
+"ciudad": "Hyderabad",
+"pais": "IN",
+"lat": 17.385,
+"lon": 78.4867,
+"operador": "DE-CIX India",
+"desde": 2023,
+"nota": "Nodo de intercambio de DE-CIX que da servicio al ecosistema digital de Hyderabad."
+},
+{
+"nombre": "Extreme IX Hyderabad",
+"ciudad": "Hyderabad",
+"pais": "IN",
+"lat": 17.385,
+"lon": 78.4867,
+"operador": "Extreme IX",
+"desde": 2016,
+"nota": "Intercambio adicional en Hyderabad con conexiones entre proveedores y redes de contenido."
+},
+{
+"nombre": "ANI-IX Delhi",
+"ciudad": "Nueva Delhi",
+"pais": "IN",
+"lat": 28.6139,
+"lon": 77.209,
+"operador": "ANO Peering Exchange",
+"desde": 2018,
+"nota": "Intercambio independiente del área de Delhi con decenas de sistemas autónomos participantes."
+},
+{
+"nombre": "Extreme IX Pune",
+"ciudad": "Pune",
+"pais": "IN",
+"lat": 18.5204,
+"lon": 73.8567,
+"operador": "Extreme IX",
+"desde": 2019,
+"nota": "Nodo regional de intercambio en Pune que amplía la conectividad local del estado de Maharashtra."
+}
+]

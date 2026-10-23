@@ -279,3 +279,21 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   ~2 cm de diámetro / ~5 cm blindado; ~650 kg/km ligero, >2 t/km doble blindaje; Amitié 400 Tbit/s).
 - Pendiente: Asia-2 de centros de datos (42 candidatos) con Grok en dos tandas de 21; IXP de África y Asia; cables de una sola voz (20); capacidades;
   fibra de países grandes; traducciones a los otros idiomas al final.
+
+## 10. Sesión del 22 Oct 2026, 22:45–23:30 (Opus 5.5): agencia sin pedir permiso («sigue trabajando»)
+- **Semáforo**: al encender una capa, todas sus clases en verde (`pon()`); la tarjeta solo se cierra cuando TODOS sus interruptores están en rojo
+  (`todasApagadas`); «Solo las grandes compañías» pasó a ser la clase «Compañías pequeñas» (`CLASES.puntos.pequenos`, verde = se ve; en gris si
+  «Centros de datos» está apagado: `cuentaEn`). Satélites: al encender, las tres órbitas.
+- **Centros de datos Asia-2**: 42 confirmados (ChatGPT `chatgpt-centros-7` + Grok `grok-centros-7`) → **356 de la agencia**. Grok rellena con 5
+  decimales las coordenadas de la ciudad: Claude las dejó a 3 decimales en el archivo de Grok cuando eran el centro de la ciudad (si no, ganarían como
+  «edificio» en `centros_agencia.py`).
+- **Cables: un cable, un grupo** (`lugares_capas.py` agrupa con `cables_agencia.clave`; `compacta` quita tildes): «ACE» = «Africa Coast to Europe (ACE)»,
+  «Sam-1» = «South America-1 (SAm-1)», «EIG», «H2HE», «PCCS», «PLCN», «SJC», «BRUS/BRUSA», «ÍRIS/IRIS», «Amitié» (OSM «AMITIE»)… → 467 → **450 cables**.
+  Nombre del grupo unido: el de la agencia; si no, el más largo. Alias nuevos: `australtroncalaustral→austral`, `mauritiusandrodrigues→mars`.
+- **Una sola voz**: Grok (`grok-verifica-12.json`) confirmó FOA y MARS (ya estaban con otro nombre: unidos por alias); ALASIA, Elektra-GC1 y Leif Erikson
+  no existen (proyectos); Rioja y ESAT-1 retirados; SFS-4, SFL, EESF-3 sin verificar; Balticconnector FOC, Tampnet, C-Lion1, Eastern Light, Baltica,
+  AU-East/West ya están en el mapa con otro nombre. Pendiente solo North Sea Connect (pedido a ChatGPT junto con capacidades).
+- **Capacidades**: Grok `grok-capacidad-6`, ChatGPT `chatgpt-capacidad-2` (Amitié 400) y `-3` (38 cables); la 2.ª tanda de ChatGPT (39) en el chat
+  «Verificación de cables submarinos» https://chatgpt.com/c/6adadd4e-67ac-83ea-a97b-383cc11c0ff1.
+- **IXP África y Asia**: ChatGPT dio 70 nuevos (`chatgpt-ixp-3.json`, chat https://chatgpt.com/c/6adada8b-f2b0-83e8-a872-203b6b08837b); Grok verifica en dos
+  tandas de 35 (`grok-ixp-7.json` hecho: 33 ok, LANIC «es otra cosa», GIBIRIX «no verificado»).
