@@ -303,3 +303,17 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
 - **Vista previa para el amigo de Praga** (artefacto privado «GUARDIANA · Órbita», https://claude.ai/artifact/2ofNX33VVYed7qwqDxSrqa, compartido por el
   dueño): se reconstruye con `python3 herramientas/vista_previa.py <carpeta>` y se publica con la herramienta Artifact (mismo `url`, `root` = carpeta,
   `files` = las rutas; `ciudades.tsv` con contentType text/plain; solo hay que mandar los archivos que cambian, los demás se conservan). Versión 13.
+
+## 11. Cierre de la noche del 22→23 Oct 2026 (Opus 5.5): cables previstos, traducciones y copia
+- **Cables previstos**: `datos/cables-previstos.json` pasa a 19 (14 nuevos con `chatgpt-previstos-1.json` + Grok): Candle, Humboldt, Sol, Synapse,
+  AUG East, ALC, I-AM, I-2SEA, APX East/West, Hawaiki Nui 1, Honomoana, Umoja, Pisces. Fase y año solo donde coinciden las dos voces; sin km.
+- **Traducciones**: los 190 textos nuevos de `idioma.js` están ya en los 39 `static/i18n/<código>.json` (791 claves cada uno, 0 vacías).
+  Clave nueva `máxima` para la línea «Altitud del terreno: máxima N m · media N m» (antes usaba «hasta», que en varios idiomas solo vale para «hasta destino»).
+  `idioma.js` pide el fichero de idioma con la versión de la página (`?v=…`), para que nadie lea traducciones viejas de la caché.
+  Siguen abiertos al público solo **es** y **en** (decisión del dueño); los otros 40 se abren con `data-idiomas="todos"` en `<html>`.
+  Las plantillas «p» (frases con números) ya estaban traducidas; no se tocaron.
+- **Versión** de Órbita: `v=20261024h` (la siguiente, `i`). Vista previa del amigo: **versión 15**.
+- **Copia del proyecto** para pasarlo a otra nube: zip de la rama `web-idiomas` sin `descargas/` ni `v/` (enviado al dueño en el chat). Todo está también
+  en GitHub, en las dos ramas.
+- **Lo que queda** (por orden): tercera voz para las 19 capacidades en discrepancia; fibra terrestre de los países grandes; más centros de datos e IXP
+  por regiones (Asia, África); revisar con el dueño cuándo abrir los 40 idiomas.
