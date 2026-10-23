@@ -1,0 +1,336 @@
+{
+ "_nota": "Voto de Claude (la cuarta voz de la agencia) solo donde ChatGPT y Grok no coinciden o uno no sabe. Sin voto cuando no hay certeza. 23 oct 2026.",
+ "20m.es": {
+  "empresa": "Henneo",
+  "pais": "ES",
+  "categoria": "funcional",
+  "nota": "20minutos (Henneo) cargado en otro diario: contenido de un tercero, no del propio grupo"
+ },
+ "a-mo.net": {
+  "empresa": "AdaptMX",
+  "pais": "US",
+  "categoria": "publicidad"
+ },
+ "a-mx.com": {
+  "empresa": "AdaptMX",
+  "pais": "US",
+  "categoria": "publicidad",
+  "nota": "sincronización de cookies con fines publicitarios"
+ },
+ "adnxs.com": {
+  "empresa": "Microsoft",
+  "pais": "US",
+  "categoria": "publicidad"
+ },
+ "adobedtm.com": {
+  "empresa": "Adobe",
+  "pais": "US",
+  "categoria": "medición",
+  "nota": "gestor de etiquetas que carga la analítica"
+ },
+ "anonymised.io": {
+  "empresa": "Anonymised",
+  "pais": "GB",
+  "categoria": "rastreo"
+ },
+ "appboycdn.com": {
+  "empresa": "Braze",
+  "pais": "US",
+  "categoria": "rastreo"
+ },
+ "bamgrid.com": {
+  "empresa": "The Walt Disney Company",
+  "pais": "US",
+  "categoria": "grupo editorial"
+ },
+ "bunny.net": {
+  "empresa": "BunnyWay",
+  "pais": "SI",
+  "categoria": "funcional"
+ },
+ "disqus.com": {
+  "empresa": "Zeta Global",
+  "pais": "US",
+  "categoria": "funcional"
+ },
+ "espn.com": {
+  "empresa": "The Walt Disney Company",
+  "pais": "US",
+  "categoria": "grupo editorial"
+ },
+ "espncdn.com": {
+  "empresa": "The Walt Disney Company",
+  "pais": "US",
+  "categoria": "grupo editorial"
+ },
+ "facil-iti.app": {
+  "empresa": "FACIL'iti",
+  "pais": "FR",
+  "categoria": "funcional"
+ },
+ "googletagmanager.com": {
+  "empresa": "Google",
+  "pais": "US",
+  "categoria": "medición",
+  "nota": "gestor de etiquetas que carga analítica y publicidad"
+ },
+ "jsdelivr.net": {
+  "empresa": "jsDelivr",
+  "pais": "PL",
+  "categoria": "funcional"
+ },
+ "listenlive.co": {
+  "empresa": "Triton Digital",
+  "pais": "US",
+  "categoria": "funcional"
+ },
+ "mathilde-ads.com": {
+  "empresa": "ADL Digital Lab",
+  "pais": "CO",
+  "categoria": "publicidad",
+  "nota": "Mathilde-ads, de ADL Digital Lab (Grupo Aval): Portafolio y Valora Analitik"
+ },
+ "mrf.io": {
+  "empresa": "Marfeel",
+  "pais": "ES",
+  "categoria": "medición"
+ },
+ "newsroom.bi": {
+  "empresa": "Marfeel",
+  "pais": "ES",
+  "categoria": "medición"
+ },
+ "opti-digital.com": {
+  "empresa": "Opti Digital",
+  "pais": "FR",
+  "categoria": "publicidad"
+ },
+ "pa-cd.com": {
+  "empresa": "Piano",
+  "pais": "US",
+  "categoria": "medición"
+ },
+ "parsely.com": {
+  "empresa": "Automattic",
+  "pais": "US",
+  "categoria": "medición"
+ },
+ "pbstck.com": {
+  "empresa": "Pubstack",
+  "pais": "FR",
+  "categoria": "medición"
+ },
+ "piano.io": {
+  "empresa": "Piano",
+  "pais": "US",
+  "categoria": "funcional"
+ },
+ "tinypass.com": {
+  "empresa": "Piano",
+  "pais": "US",
+  "categoria": "funcional"
+ },
+ "privacy-center.org": {
+  "empresa": "Didomi",
+  "pais": "FR",
+  "categoria": "consentimiento"
+ },
+ "rcsmetrics.it": {
+  "empresa": "RCS MediaGroup",
+  "pais": "IT",
+  "categoria": "medición",
+  "nota": "analítica del grupo bajo su propio dominio"
+ },
+ "richaudience.com": {
+  "empresa": "Rich Audience",
+  "pais": "ES",
+  "categoria": "publicidad"
+ },
+ "sascdn.com": {
+  "empresa": "Equativ",
+  "pais": "FR",
+  "categoria": "publicidad"
+ },
+ "sensic.net": {
+  "empresa": "GfK",
+  "pais": "DE",
+  "categoria": "medición"
+ },
+ "smilewanted.com": {
+  "empresa": "SmileWanted",
+  "pais": "FR",
+  "categoria": "publicidad"
+ },
+ "taboola.com": {
+  "empresa": "Taboola",
+  "pais": "US",
+  "categoria": "publicidad"
+ },
+ "tblcontent.com": {
+  "empresa": "Taboola",
+  "pais": "US",
+  "categoria": "publicidad"
+ },
+ "teads.tv": {
+  "empresa": "Teads",
+  "pais": "US",
+  "categoria": "publicidad",
+  "nota": "desde 2025, Teads Holding Co., con sede en Nueva York"
+ },
+ "tiqcdn.com": {
+  "empresa": "Tealium",
+  "pais": "US",
+  "categoria": "medición"
+ },
+ "365dm.com": {
+  "empresa": "Sky",
+  "pais": "GB",
+  "categoria": "grupo editorial",
+  "nota": "imágenes de Sky Sports; Sky es la empresa que lo opera (su matriz es Comcast)"
+ },
+ "adition.com": {
+  "empresa": "Virtual Minds",
+  "pais": "DE",
+  "categoria": "publicidad"
+ },
+ "adobe.com": {
+  "empresa": "Adobe",
+  "pais": "US",
+  "categoria": "funcional",
+  "nota": "auth.adobe.com: Adobe Pass, inicio de sesión de TV"
+ },
+ "ads-twitter.com": {
+  "empresa": "X Corp.",
+  "pais": "US",
+  "categoria": "rastreo",
+  "nota": "píxel de X para anuncios: por definición, rastreo"
+ },
+ "adsafeprotected.com": {
+  "empresa": "Integral Ad Science",
+  "pais": "US",
+  "categoria": "medición"
+ },
+ "branch.io": {
+  "empresa": "Branch",
+  "pais": "US",
+  "categoria": "rastreo"
+ },
+ "confiant-integrations.net": {
+  "empresa": "Confiant",
+  "pais": "US",
+  "categoria": "publicidad",
+  "nota": "revisa los anuncios: sin anuncios no hace falta"
+ },
+ "covatic.io": {
+  "empresa": "Covatic",
+  "pais": "GB",
+  "categoria": "rastreo"
+ },
+ "dailymotion.com": {
+  "empresa": "Dailymotion",
+  "pais": "FR",
+  "categoria": "funcional"
+ },
+ "dm-event.net": {
+  "empresa": "Dailymotion",
+  "pais": "FR",
+  "categoria": "medición"
+ },
+ "digitalvideoplatform.com": {
+  "empresa": "Fox Corporation",
+  "pais": "US",
+  "categoria": "grupo editorial"
+ },
+ "dotomi.com": {
+  "empresa": "Epsilon",
+  "pais": "US",
+  "categoria": "publicidad"
+ },
+ "fwmrm.net": {
+  "empresa": "FreeWheel",
+  "pais": "US",
+  "categoria": "publicidad"
+ },
+ "insurads.com": {
+  "empresa": "InsurAds",
+  "pais": "PT",
+  "categoria": "publicidad"
+ },
+ "intentiq.com": {
+  "empresa": "Intent IQ",
+  "pais": "US",
+  "categoria": "rastreo"
+ },
+ "oddschecker.com": {
+  "empresa": "FairPlay Sports Media",
+  "pais": "GB",
+  "categoria": "funcional",
+  "nota": "widget de cuotas de un tercero"
+ },
+ "poool.fr": {
+  "empresa": "Poool",
+  "pais": "FR",
+  "categoria": "funcional"
+ },
+ "privacy-mgmt.com": {
+  "empresa": "Sourcepoint",
+  "pais": "US",
+  "categoria": "consentimiento"
+ },
+ "rcs.it": {
+  "empresa": "RCS MediaGroup",
+  "pais": "IT",
+  "categoria": "grupo editorial"
+ },
+ "sky.com": {
+  "empresa": "Sky",
+  "pais": "GB",
+  "categoria": "grupo editorial"
+ },
+ "skycdp.com": {
+  "empresa": "Sky",
+  "pais": "GB",
+  "categoria": "rastreo"
+ },
+ "zencdn.net": {
+  "empresa": "Brightcove",
+  "pais": "US",
+  "categoria": "funcional",
+  "nota": "CDN de Video.js, de Brightcove"
+ },
+ "btloader.com": {
+  "empresa": "eyeo",
+  "pais": "DE",
+  "categoria": "publicidad",
+  "nota": "Blockthrough, comprada por eyeo (AdExchanger, The Media Leader)"
+ },
+ "dotmetrics.net": {
+  "empresa": "Ipsos",
+  "pais": "FR",
+  "categoria": "medición",
+  "nota": "Ipsos compró Fistnet-Dotmetrics en enero de 2021 (ipsos.com)"
+ },
+ "xplosion.de": {
+  "empresa": "Xplosion Interactive",
+  "pais": "DE",
+  "categoria": "publicidad",
+  "nota": "de Deutsche Telekom desde 2013 (ExchangeWire)"
+ },
+ "privacymanager.io": {
+  "empresa": "LiveRamp",
+  "pais": "US",
+  "categoria": "rastreo",
+  "nota": "ats-wrapper: identificador de LiveRamp (docs.liveramp.com)"
+ },
+ "appsflyersdk.com": {
+  "empresa": "AppsFlyer",
+  "pais": "US",
+  "categoria": "medición"
+ },
+ "geoedge.be": {
+  "empresa": "GeoEdge",
+  "pais": "US",
+  "categoria": "publicidad",
+  "nota": "revisa los anuncios; sede en Nueva York (Built In NYC)"
+ }
+}

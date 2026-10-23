@@ -375,3 +375,31 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   arrastrar y acercar (dueño, 10:43). Causa: la regla CSS `.viaje{position:fixed;pointer-events:none}` también se aplicaba a `body.viaje`, y el
   `pointer-events` se hereda: toda la página dejaba de responder al ratón. Ahora las reglas del HUD cuelgan de `#viaje`; durante el espectáculo
   `body.viaje:not(.viaje-fin) #escena` sigue sin responder (manda la cámara) y en el final vuelven la barra de zoom y la altura. La siguiente, `w`.
+
+## 14. 23 Oct 2026, 11:00–12:40 (Opus 5.5): ESPEJO «Con / Sin GUARDIANA» en Órbita, versión `w`
+- **Qué es** (dueño, 10:27: «dos botones… con guardiana y sin guardiana… sin guardiana, que sería un bombardeo»; 11:05: «sobre todo diarios
+  deportivos»): dos botones bajo el planeta. «Sin GUARDIANA» deja el planeta limpio y dibuja, desde ti, un arco a cada empresa con la que conecta
+  el navegador al abrir la portada de once diarios, con pulsos continuos (más dominios, más pulsos). «Con GUARDIANA» es la MISMA medición con las
+  reglas de GUARDIANA: lo de publicidad, rastreo y medición se repliega en rojo contra un anillo alrededor de ti; lo funcional, el grupo
+  editorial y el consentimiento siguen. Lo dice la pantalla: no es una medición del equipo del visitante. Arcos al PAÍS DE LA SEDE de cada empresa
+  (nunca una ruta de datos). Panel izquierdo: tres cifras, filtro por diario, barras por país; lista de empresas a demanda; método y «Datos verificados».
+- **Medición** (`herramientas/espejo/medicion-2026-10-23.json`): panel de navegación de la app de escritorio (Chromium sin bloqueadores),
+  desde Colombia, cookies aceptadas cuando la web las pidió (API de Didomi/Usercentrics/OneTrust o botón). Se recorre la portada, se esperan
+  10 s y se apunta cada host de Resource Timing (búfer ampliado a 100.000) y de los iframes. **Ojo**: una versión intermedia leyó también
+  `script[src]`, `img[src]` y `link[href]` del DOM y metía hosts que no se cargan (alternates hreflang, scripts bloqueados hasta consentimiento
+  por Ketch, android-app://): se descartó y se volvió a medir solo con Resource Timing + iframes. Unión de 1 o 2 visitas por web. Webs: Marca,
+  AS (edición Colombia), Sport, L'Équipe, Gazzetta, Kicker, Sky Sports, ESPN (edición Colombia), CBS Sports, Fox Sports, El Tiempo.
+  Resultado: **172 dominios de terceros**; mundodeportivo.com está bloqueado en el panel. Las web de alto riesgo piden aprobación por carga y por acción.
+- **Empresa y país, regla de dos voces** (`construye.py`): votan ChatGPT y Grok (todas), Claude donde discrepan (con fuente cuando no es obvio,
+  p. ej. Ipsos–Dotmetrics, eyeo–Blockthrough, LiveRamp–privacymanager.io, Mathilde-ads de ADL Digital Lab) y Gemini cuando responda
+  (rehusó dos veces: «Soy un modelo de lenguaje…»; tercer intento con el modelo Argon en curso). Criterio: la EMPRESA QUE OPERA el servicio
+  (Sky y no Comcast, Brightcove y no Bending Spoons, RCS y no Cairo), país de su sede. Hoy: **153 de 172 dominios con empresa, 100 empresas,
+  16 países, 89 dominios cortables**. Los 19 sin dos voces cuentan en «dominios de otras empresas», no se dibujan y nunca se cortan.
+  Para regenerar: `python3 herramientas/espejo/construye.py` (escribe `orbita/datos/espejo.json` y lista lo que falta).
+- **Código**: `orbita/static/espejo.js` (modo limpio con `OrbitaCapas.soloTu(true, pinta)`; abanico de arcos que se abre hacia arriba y de lado;
+  cámara que encuadra; cierra con Esc, con la ×, al abrir «Mi conexión», una puerta o el viaje), estilos al final de `orbita.css`.
+  **Trampa evitada**: el HUD no puede llamarse `.espejo` porque el body lleva `en-espejo`… y la primera versión puso `body.espejo` y la regla `.espejo{position:fixed;…}` le cayó al body (en el móvil, `backdrop-filter` en el body descolocaba todo). Ahora: body `en-espejo`, HUD `.espejo-hud`.
+  Textos en español en el DOM; inglés y portugués en `idioma.js` (los otros 39 idiomas, pendientes: están cerrados).
+- **terminos.html §6**: describe la medición y su regla. La siguiente versión, `x`.
+- **Consulta (ronda 3)**: Brave/DuckDuckGo/Tor y el nombre ZEROSS (doc «GUARDIANA sin instalar nada», sección «Igual o mejor que Brave,
+  DuckDuckGo y Tor», y «Lo que no existe todavía en el mundo» con el escaneo mundial). zeross.tech = Zeroday Security Solutions (comprobado).
