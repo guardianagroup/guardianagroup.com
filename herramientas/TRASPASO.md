@@ -485,3 +485,15 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   «Un tramo por tierra sin dibujar» (SAm-1 y SAC Las Toninas → Valparaíso; SMPCS Packet-2 Jayapura → Merauke). Revisión completa de los
   1 487 tramos: de 30 tramos con tierra sospechosa quedan solo los cruces reales de Egipto y Guatemala. La profundidad de los tramos nuevos
   llega con la siguiente pasada del workflow (relieve.py).
+
+## 19. 23 Oct 2026, 14:37–14:50 (Opus 5.5): cables sueltos, la medida real y fuera la pregunta del diario. Versión `20261025c`
+- **Cable «que no comunica con nada»** (dueño, 14:37, al este de Dominica): «ECFS 6.1», un trozo del Eastern Caribbean Fiber System que
+  OpenStreetMap tiene suelto en mar abierto. `datos_orbita.py` ya quita los trozos con los dos extremos sueltos (`quita_sueltos`): sin
+  tierra a 30 km, sin ciudad a 25 km, sin estación de aterrizaje, sin empalme a 5 km y sin otro trozo de su sistema a 20 km; si no tiene
+  nombre, es un «umbilical», es de una petrolera o es un trozo perdido de un sistema dibujado en otra parte. Fuera 14 (ECFS 6.1, Lanis 3,
+  Solveig Umbilical y 11 sin nombre, casi todos enlaces de plataformas). Se quedan los enlaces con nombre entre islas pequeñas que la
+  máscara no ve (Fehmarn Belt, Flores–Corvo).
+- **La medida** («km de cable submarino en el mapa» del «¿Sabías qué?»): sumaba también lo que se descartaba (en desuso, eléctricos, por
+  tierra). Ahora cuenta solo lo dibujado: 214 707 km de OpenStreetMap (antes 242 193).
+- **Abajo, sin «¿Qué pasa al abrir un diario deportivo?»** (dueño, 14:39: «tiene que ser sobre sus datos»): quedan los dos botones; el panel
+  sigue explicando qué se midió al abrirlo.
