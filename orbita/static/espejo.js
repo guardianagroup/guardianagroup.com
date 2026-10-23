@@ -285,8 +285,9 @@
   function montaControl() {
     if (control) return control;
     control = document.createElement('div'); control.id = 'espejo-modo'; control.className = 'espejo-modo';
-    control.innerHTML = '<div class="pre">¿Qué pasa al abrir un diario deportivo?</div>'
-      + '<div class="seg" role="radiogroup" aria-label="Con y sin GUARDIANA">'
+    // 23 Oct 2026, 14:39 (owner): no «¿Qué pasa al abrir un diario deportivo?» over the two buttons: someone arriving for
+    // the first time should meet their own data, not our example. The panel still says what was measured, once opened.
+    control.innerHTML = '<div class="seg" role="radiogroup" aria-label="Con y sin GUARDIANA">'
       + '<button type="button" role="radio" aria-checked="false" data-modo="sin"><i aria-hidden="true"></i>Sin GUARDIANA</button>'
       + '<button type="button" role="radio" aria-checked="false" data-modo="con"><i aria-hidden="true"></i>Con GUARDIANA</button>'
       + '<button type="button" class="salir" aria-label="Salir" title="Salir" hidden><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div>';

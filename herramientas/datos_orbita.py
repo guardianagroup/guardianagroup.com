@@ -8,7 +8,7 @@
 
 Only the standard library. Writes orbita/datos/satelites.json and orbita/datos/cables.json.
 """
-import json, math, os, sys, time, urllib.parse, urllib.request
+import collections, json, math, os, re, sys, time, urllib.parse, urllib.request
 from datetime import datetime, timezone
 
 RAIZ = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'orbita', 'datos')
@@ -183,6 +183,77 @@ def junto_al_mar(p):
     """True when some point of the line is within about 30 km of the sea (a landing stretch of a real cable)."""
     if not _AGUA or not getattr(_AGUA, 'm', None): return True
     return any(_AGUA.mar(x + dx, y + dy) for x, y in p for dx in (-0.3, 0, 0.3) for dy in (-0.3, 0, 0.3))
+
+# 23 Oct 2026 (owner, on a short cable east of Dominica: «un cable submarino cortito que no comunica con nada; mira
+# a ver si es real o hay un error»): «ECFS 6.1» is a piece of the Eastern Caribbean Fiber System that OpenStreetMap
+# has on its own in open sea, joined to none of the other ECFS pieces. Such pieces go: a way whose two ends touch
+# nothing — no land within 30 km (water mask), no city within 25 km (GeoNames), no landing station, no other way's end
+# within 5 km and no piece of its own system within 20 km — when it is unnamed, an umbilical or an oil company's
+# (platform links), or a stray piece of a system mapped elsewhere. A named link on its own stays (Fehmarn Belt or the
+# Azores, whose small islands the 20 km mask does not show).
+PETROLERAS = ('chevron', 'lundin', 'equinor', 'shell', 'bp ', 'bp exploration', 'petrocom', 'aker bp', 'conocophillips', 'totalenergies', 'exxon', 'woodside', 'petrobras', 'aramco', 'adnoc')
+
+def sistema(n):
+    """The cable system a way belongs to: its name without segment numbers, letters, «seg», «branch» or brackets."""
+    n = re.sub(r'\(.*?\)', '', (n or '').lower())
+    n = re.sub(r"\b(seg(ment)?|s\d+(\.\d+)*|\d+(\.\d+)*(/\d+)?|[a-z]'?|branch|ramal|tramo)\b", ' ', n)
+    return re.sub(r'[^a-z]', '', n).replace('souh', 'south')
+
+def quita_sueltos(out):
+    global _AGUA
+    if _AGUA is None:
+        try:
+            from fibra_tierra import Agua
+            _AGUA = Agua()
+        except Exception as e:
+            print('sin máscara de agua para los cables:', e); _AGUA = False
+    if not _AGUA or not getattr(_AGUA, 'm', None): return out
+    lugares = collections.defaultdict(list)  # cities and landing stations in half-degree cells
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from lugares_capas import lee_ciudades
+        for n, cc, la, lo in lee_ciudades(): lugares[(int((lo + 180) // 0.5) % 720, int((la + 90) // 0.5))].append((lo, la))
+    except Exception as e:
+        print('sin ciudades para los cables sueltos:', e)
+    try:
+        P = json.load(open(os.path.join(RAIZ, 'puntos.json'), encoding='utf-8')); c = P['campos']
+        for x in P['puntos']:
+            if x[c.index('tipo')] == 'aterrizaje':
+                lo, la = x[c.index('lon')], x[c.index('lat')]; lugares[(int((lo + 180) // 0.5) % 720, int((la + 90) // 0.5))].append((lo, la))
+    except Exception:
+        pass
+    celda = lambda p: (int((p[0] + 180) // 0.5) % 720, int((p[1] + 90) // 0.5))
+    def cerca(rejilla, p, r):
+        gx, gy = celda(p)
+        return any(km(p, q[1] if isinstance(q[0], int) else q) <= r for dx in (-1, 0, 1) for dy in (-1, 0, 1) for q in rejilla.get(((gx + dx) % 720, gy + dy), ()))
+    extremos, vertices = collections.defaultdict(list), collections.defaultdict(list)
+    for i, f in enumerate(out):
+        for p in (f['l'][0], f['l'][-1]): extremos[celda(p)].append((i, p))
+        for p in f['l']: vertices[celda(p)].append((i, p))
+    sistemas = collections.Counter(sistema(f['n']) for f in out if sistema(f['n']))
+    def tierra_cerca(p, r_km=30):
+        rp = int(r_km / 19.5) + 1
+        return any(not _AGUA.mar(p[0] + dx * 0.176, p[1] + dy * 0.176) for dx in range(-rp, rp + 1) for dy in range(-rp, rp + 1))
+    def atado(i, p):
+        if abs(p[0]) >= 179.8 or tierra_cerca(p) or cerca(lugares, p, 25): return True
+        gx, gy = celda(p); si = sistema(out[i]['n'])
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                for j, q in extremos.get(((gx + dx) % 720, gy + dy), ()):
+                    if j != i and km(p, q) <= 5: return True
+                if si:
+                    for j, q in vertices.get(((gx + dx) % 720, gy + dy), ()):
+                        if j != i and sistema(out[j]['n']) == si and km(p, q) <= 20: return True
+        return False
+    quedan, fuera = [], []
+    for i, f in enumerate(out):
+        if not atado(i, f['l'][0]) and not atado(i, f['l'][-1]):
+            n, o, si = f['n'] or '', (f.get('o') or '').lower(), sistema(f['n'])
+            if not n or 'umbilical' in n.lower() or any(x in o for x in PETROLERAS) or sistemas[si] > 1:
+                fuera.append(n or '(sin nombre)'); continue
+        quedan.append(f)
+    if fuera: print('cables sueltos en mar abierto, fuera:', len(fuera), '·', ', '.join(sorted(set(fuera))))
+    return quedan
 
 def km(a, b):
     la1, lo1, la2, lo2 = map(math.radians, (a[1], a[0], b[1], b[0]))
@@ -412,14 +483,13 @@ out tags geom;'''
         print('Sin cables: no se escribe nada.', file=sys.stderr)
         return False
     d = json.loads(cuerpo)
-    out, nombres, total = [], set(), 0.0
+    out, nombres = [], set()
     for e in d.get('elements', []):
         g = e.get('geometry') or []
         if len(g) < 2:
             continue
         p = [[round(x['lon'], 3), round(x['lat'], 3)] for x in g]
         largo = sum(km(p[i], p[i + 1]) for i in range(len(p) - 1))
-        total += largo
         t = e.get('tags', {})
         # only cables in service: nothing disused, abandoned, removed, historic or with an end date
         if any(k in t for k in ('disused', 'abandoned', 'historic', 'removed', 'razed', 'end_date', 'disused:communication', 'abandoned:communication')) \
@@ -458,6 +528,10 @@ out tags geom;'''
                 if t.get('website'): fila['web'] = t['website']
                 if t.get('wikidata', '').startswith('Q'): fila['w'] = t['wikidata']
                 out.append(fila)
+    out = quita_sueltos(out)
+    # 23 Oct 2026: the length counts only what the map draws (it used to add the disused, power and land ways it left out)
+    total = sum(km(a, b) for f in out for a, b in zip(f['l'], f['l'][1:]))
+    nombres = {f['n'].strip() for f in out if f['n']}
     wiki = wikidata_cables(sorted({c['w'] for c in out if c.get('w')}))
     salida = {
         'fuente': 'OpenStreetMap',
