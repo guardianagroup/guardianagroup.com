@@ -345,8 +345,8 @@ body.explorando:not(.dentro) #puertas { opacity: 0 !important; pointer-events: n
    their clicks. While a class card is open the doors step aside, and the cards always sit above everything on the planet. */
 body.tarjeta:not(.dentro) #puertas { opacity: 0 !important; pointer-events: none !important; transition: opacity .25s; }
 .sat-vista, .capa-vista { z-index: 60; }
-.capa-vista .orb button .d { display: none; } /* names and counts only; the sentence is the button's tooltip (owner, 22 Oct 2026, 22:09) */
-.capa-vista .orb button { padding: 7px 10px; }
+.capa-vista .orb button .d, .sat-vista .orb button .d { display: none; } /* names and counts only; the sentence is the button's tooltip (owner, 22 Oct 2026, 22:09) */
+.capa-vista .orb button, .sat-vista .orb button { padding: 7px 10px; }
 header { z-index: 50; }
 /* 21 Oct 2026 (owner): the top bar steps back with the zoom too, so the planet is seen whole; it wakes under the pointer. */
 body.listo:not(.dentro) header > :not(.sat-vista):not(#sat-fase) { opacity: calc(1 - var(--cerca, 0) * .85); transition: opacity .25s; }
@@ -586,3 +586,17 @@ body.viaje header, body.viaje #capas, body.viaje #puertas, body.viaje #directo, 
   body.imprime-informe #informe figure, body.imprime-informe #informe .cifras, body.imprime-informe #informe table { break-inside: avoid; }
   @page { background: #06080C; margin: 12mm; }
 }
+
+/* 22 Oct 2026, 22:21 (owner: «un check verde-rojo… de la máxima calidad… que se vea cómo se activa y cómo se desactiva,
+   sutil y bonito»): every on/off in the layer bar and in its cards is a small switch. On: green, the knob to the right with
+   a tick. Off: red, the knob to the left with a cross. Tinted glass tracks, so it stays quiet on the dark header. */
+:root { --si: 95,203,147; --no: 224,122,108; }
+.capas button i, .sat-vista .orb button i { --w: 26px; --h: 15px; --k: 11px; position: relative; flex: none; box-sizing: border-box; width: var(--w); height: var(--h); margin: 0; align-self: center; border-radius: 999px; border: 1px solid rgba(var(--no),.5); background: rgba(var(--no),.12); box-shadow: none; transition: background .25s, border-color .25s, box-shadow .25s; }
+.capas button i { --w: 23px; --h: 13px; --k: 9px; }
+.capas button i::before, .sat-vista .orb button i::before { content: ""; position: absolute; top: 1px; left: 1px; width: var(--k); height: var(--k); border-radius: 50%; background: rgb(var(--no)) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M2.5 2.5l3 3M5.5 2.5l-3 3' fill='none' stroke='%2306080C' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E") center / 78% no-repeat; box-shadow: 0 1px 2px rgba(0,0,0,.4); transition: transform .28s cubic-bezier(.3,.75,.25,1), background-color .25s; }
+.capas button[aria-pressed="true"] i, .sat-vista .orb button[aria-pressed="true"] i { border-color: rgba(var(--si),.62); background: rgba(var(--si),.16); box-shadow: 0 0 10px rgba(var(--si),.16); }
+.capas button[aria-pressed="true"] i::before, .sat-vista .orb button[aria-pressed="true"] i::before { transform: translateX(calc(var(--w) - var(--k) - 4px)); background: rgb(var(--si)) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M1.7 4.2l1.5 1.5 3.1-3.4' fill='none' stroke='%2306080C' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 78% no-repeat; }
+.capas button:hover i, .sat-vista .orb button:hover i { border-color: rgba(var(--no),.75); }
+.capas button[aria-pressed="true"]:hover i, .sat-vista .orb button[aria-pressed="true"]:hover i { border-color: rgba(var(--si),.85); }
+.sat-vista .orb button { grid-template-columns: 26px 1fr; align-items: center; }
+@media (prefers-reduced-motion: reduce) { .capas button i::before, .sat-vista .orb button i::before { transition: none; } }
