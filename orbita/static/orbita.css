@@ -537,6 +537,9 @@ body.dentro .ficha-panel { opacity: 0; pointer-events: none; }
 body.viaje header, body.viaje #capas, body.viaje #puertas, body.viaje #directo, body.viaje .zoom, body.viaje .altura, body.viaje .conexion, body.viaje .ficha-panel, body.viaje .sat-ficha, body.viaje #capa-nota, body.viaje #sat-vista { opacity: 0 !important; pointer-events: none !important; transition: opacity .4s; }
 .viaje { position: fixed; inset: 0; z-index: 40; pointer-events: none; font-family: var(--texto); color: var(--fg); }
 .viaje[hidden] { display: none; }
+/* 23 Oct 2026: the counters stay legible over bright land when the camera is close: a soft dark band behind them, as in a film's lower third */
+.viaje::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 290px; background: linear-gradient(to top, rgba(6,8,12,.86) 0%, rgba(6,8,12,.55) 48%, rgba(6,8,12,0) 100%); pointer-events: none; }
+.viaje .destino, .viaje .cifras b, .viaje .luz, .viaje .fin .t, .viaje .fin .d, .viaje .sub { text-shadow: 0 0 2px rgba(6,8,12,.9), 0 1px 14px rgba(6,8,12,.85); }
 .viaje .arriba { position: absolute; left: 28px; top: 22px; }
 .viaje .k { margin: 0; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--fg); }
 .viaje .sub { margin: 6px 0 0; font: 400 11px/1.4 var(--mono); color: #A9B3BE; }

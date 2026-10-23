@@ -102,8 +102,9 @@
     if (!REC.on || !V) return; const p = P(); if (!p) return; const l = p.lienzos, c = REC.lienzo, cx = REC.cx; if (!l || !c) return;
     cx.fillStyle = '#06080C'; cx.fillRect(0, 0, c.width, c.height);
     try { cx.drawImage(l.estrellas, 0, 0, c.width, c.height); cx.drawImage(l.tierra, 0, 0, c.width, c.height); cx.drawImage(l.rutas, 0, 0, c.width, c.height); } catch (_) { return; }
-    // the counters, drawn as the HUD shows them
+    // the counters, drawn as the HUD shows them, over the same dark band
     const k = c.width / Math.max(1, innerWidth), h = $('viaje'); if (!h) return;
+    { const alto = 290 * k, gb = cx.createLinearGradient(0, c.height, 0, c.height - alto); gb.addColorStop(0, 'rgba(6,8,12,.86)'); gb.addColorStop(0.48, 'rgba(6,8,12,.55)'); gb.addColorStop(1, 'rgba(6,8,12,0)'); cx.fillStyle = gb; cx.fillRect(0, c.height - alto, c.width, alto); }
     cx.save(); cx.scale(k, k); cx.textBaseline = 'top';
     cx.fillStyle = 'rgba(244,246,248,.92)'; cx.font = '500 11px "IBM Plex Mono", ui-monospace, monospace'; cx.fillText((T('El viaje de tus datos') + ' · GUARDIANA').toUpperCase(), 28, 24);
     cx.fillStyle = 'rgba(169,179,190,.9)'; cx.font = '400 11px "IBM Plex Mono", ui-monospace, monospace'; cx.fillText(h.querySelector('.sub').textContent, 28, 42);
@@ -251,10 +252,11 @@
     if (q) {
       dibujoSatelite(cx, q, aparece);
       const fl = (t - SAT_T0 - SAT_SUBE) / 800; if (fl > 0 && fl < 1) { onda(cx, q, 10 + 30 * fl, 1 - fl); onda(cx, q, 10 + 14 * fl, (1 - fl) * 0.6); }
-      // its name, on the side with room
+      // its name: to the right when there is room, otherwise above it (the beams arrive from below), otherwise to the left
       const txt = T('Órbita geoestacionaria') + ' · ' + T('no a escala'); cx.font = '500 10.5px "IBM Plex Mono", ui-monospace, monospace';
-      const w = cx.measureText(txt).width, izq = q[0] + 26 + w > G.W - 16;
-      if (aparece > 0.5) etiqueta(cx, [izq ? q[0] - 37 - w : q[0] + 15, q[1] - 15], txt, false, false, true);
+      const w = cx.measureText(txt).width;
+      const sitio = q[0] + 26 + w <= G.W - 16 ? [q[0] + 15, q[1] - 15] : q[1] - 30 > 70 ? [Math.max(16, Math.min(G.W - 16 - w, q[0] - w / 2)) - 11, q[1] - 30] : [q[0] - 37 - w, q[1] - 15];
+      if (aparece > 0.5) etiqueta(cx, sitio, txt, false, false, true);
     }
     const llega = t - SAT_FIN, xy = punto(cx, p, G, S.D.lon, S.D.lat, llega >= 0 ? 3.4 : 2.4, llega >= 0 ? '#F4F6F8' : 'rgba(' + BLANCO + ',.7)');
     if (xy && llega >= 0) { if (llega < 1000) { onda(cx, xy, 4 + 24 * llega / 1000, 1 - llega / 1000); } etiqueta(cx, xy, corto(S.D) + ' · ' + continente(S.D.region), true, false, true); }
@@ -350,7 +352,9 @@
     const h = hud(), g = V.grupos.shift();
     if (!g) { if (V.sat) satelite(now); else final(now); return; }
     V.fase = 'repaso'; V.grupo = g; V.tGrupo = now;
-    const z = Math.max(1.1, Math.min(2.6, 1.6 / Math.max(0.25, g.abre * 2)));
+    // close enough to tell the destinations apart, never so close that the planet fills the screen and hides where the
+    // lines come from (23 Oct 2026: a single destination took ×2.6 and the counters sat on bright desert)
+    const z = Math.max(1.05, Math.min(1.8, 1.25 / Math.max(0.3, g.abre * 2)));
     camara(g.lon, g.lat, z, 1300);
     const m = g.nubes[0];
     h.querySelector('.destino').textContent = g.k.toUpperCase() + ' · ' + (g.nubes.length > 1 ? num(g.nubes.length) + ' ' + T('destinos medidos') : corto(m));
