@@ -304,11 +304,59 @@
       + '<div class="cifras"><div class="c1"><b>—</b><span></span></div><div class="c2"><b>—</b><span></span></div><div class="c3"><b>—</b><span></span></div></div>'
       + '<div class="sitios" role="radiogroup" aria-label="Webs medidas"></div>'
       + '<div class="paises"><div class="k2">País de la sede de cada empresa</div><ol></ol></div>'
-      + '<button type="button" class="ver"><span>Ver las empresas</span> <b class="n" translate="no"></b></button>'
+      + '<div class="acciones"><button type="button" class="ver"><span>Ver las empresas</span> <b class="n" translate="no"></b></button></div>'
       + '<p class="met"><span>Medido el</span> <span class="fecha2"></span> <span>desde Colombia, en un navegador sin bloqueadores y aceptando las cookies cuando la web las pidió. Cuenta mínima: lo que pasa dentro de los anuncios no se ve.</span> <span>Los trayectos son ilustrativos: van por los cables y satélites del mapa, no por la ruta real de cada dato.</span> <b>Datos verificados</b></p>';
     document.body.append(hud);
     hud.querySelector('.ver').addEventListener('click', () => muestraLista(!lista || lista.hidden));
+    // «Descargar»: the same measurement as a report (PDF) or as data (CSV, JSON), made in this browser
+    if (window.GuardianaDescargas) hud.querySelector('.acciones').append(window.GuardianaDescargas.boton(documento));
     return hud;
+  }
+
+  // ---------- «Descargar» (owner, 23 Oct 2026, 15:50: «todo lo que vemos en pantalla tiene que poder ser descargable…
+  //   para que la persona pueda… reclamar sus derechos sobre sus datos»). What the screen shows, nothing more: the
+  //   companies, their country, what they are for and their domains, and what GUARDIANA's rules would cut. ----------
+  function documento() {
+    if (!E || !D) return null;
+    const r = E.res, con = E.modo === 'con', s = E.sitio !== 'todas' ? D.sitios.find((x) => x.id === E.sitio) : null;
+    const estado = (e) => (e.corta && !e.queda ? 'cortada' : e.corta ? 'cortada_en_parte' : 'se_queda');
+    const ESTADO = { cortada: 'Cortada', cortada_en_parte: 'Cortada en parte', se_queda: 'Se queda' };
+    const emp = [...r.emp.values()].sort((a, b) => paisNombre(a.pais).localeCompare(paisNombre(b.pais)) || a.nombre.localeCompare(b.nombre));
+    const conEmpresa = new Set(); emp.forEach((e) => e.dominios.forEach((d) => conEmpresa.add(d)));
+    const sinEmpresa = []; r.sitios.forEach((x) => x.dominios.forEach((d) => { if (!conEmpresa.has(d) && !sinEmpresa.includes(d)) sinEmpresa.push(d); }));
+    sinEmpresa.sort();
+    const webs = r.sitios.map((x) => x.nombre + ' (' + String(x.web || '').replace(/^https?:\/\//, '').replace(/\/$/, '') + ')');
+    const totales = con
+      ? [[T('dominios cortados'), num(r.cortados)], [T('dominios se quedan'), num(r.quedan)], [T('países'), num(r.quedanPaises)]]
+      : [[T('dominios de otras empresas'), num(r.doms)], [T('empresas identificadas'), num(r.emp.size)], [T('países'), num(r.paises.size)]];
+    const notas = [];
+    if (sinEmpresa.length) notas.push(T('Dominios sin empresa confirmada por dos voces de la agencia') + ': ' + num(sinEmpresa.length) + '. ' + T('Cuentan en el total, pero no tienen fila propia.'));
+    notas.push(T('País de la sede: donde la empresa tiene su sede, no el camino que siguen los datos.'));
+    notas.push(T('«Con GUARDIANA» es la misma medición con las reglas de GUARDIANA aplicadas: no significa que hoy estés protegido.'));
+    notas.push(T('Datos verificados'));
+    return {
+      archivo: 'GUARDIANA-radiografia-' + (s ? s.id : 'once-diarios') + '-' + (con ? 'con' : 'sin'),
+      titulo: (s ? s.nombre : T('Once diarios deportivos y de noticias')) + ' · ' + T(con ? 'Con GUARDIANA' : 'Sin GUARDIANA'),
+      subtitulo: T(con
+        ? 'La misma medición con las reglas de GUARDIANA: se cortan la publicidad, el rastreo y la medición, y queda lo necesario para ver la web.'
+        : (s ? 'Al abrir la portada de este diario, el navegador conecta con todas estas empresas, que no son el diario.' : 'Al abrir la portada de once diarios deportivos y de noticias, el navegador conecta con todas estas empresas, que no son el diario.')),
+      lineas: [
+        T(s ? 'Web medida' : 'Webs medidas') + ': ' + webs.join(', '),
+        T('Medido el') + ' ' + fechaLarga() + ' ' + T('desde Colombia, en un navegador sin bloqueadores y aceptando las cookies cuando la web las pidió. Cuenta mínima: lo que pasa dentro de los anuncios no se ve.'),
+      ],
+      totales,
+      columnas: [T('Empresa'), T('País de la sede'), T('Para qué'), T('Dominios'), T('Con GUARDIANA')],
+      filas: emp.map((e) => [e.nombre, paisNombre(e.pais), [...e.cats].map((c) => T(CATS[c] || c)).join(', '), e.dominios.slice().sort().join(' · '), T(ESTADO[estado(e)])]),
+      notas,
+      datos: {
+        medicion: { fecha: D.fecha, desde: D.desde, metodo: 'Portada abierta en un navegador sin bloqueadores, aceptando las cookies cuando la web las pidió. Cuenta mínima: lo que pasa dentro de los anuncios no se ve.' },
+        webs: r.sitios.map((x) => ({ id: x.id, nombre: x.nombre, web: x.web, pais: x.pais, dominios_de_otras_empresas: x.dominios.length })),
+        vista: con ? 'con_guardiana' : 'sin_guardiana',
+        resumen: { dominios_de_otras_empresas: r.doms, empresas_identificadas: r.emp.size, paises: r.paises.size, dominios_cortados_con_guardiana: r.cortados, dominios_que_se_quedan: r.quedan, paises_con_guardiana: r.quedanPaises },
+        empresas: emp.map((e) => ({ empresa: e.nombre, pais_sede: e.pais, para_que: [...e.cats].sort(), dominios: e.dominios.slice().sort(), con_guardiana: estado(e) })),
+        dominios_sin_empresa_confirmada: sinEmpresa,
+      },
+    };
   }
   function montaLista() {
     if (lista) return lista;
