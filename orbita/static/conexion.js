@@ -240,7 +240,7 @@
   // drawn along the submarine cables and the land fibre of the map (red.js finds the shortest way through them); the
   // straight arc remains only where the map has no way. The exact cable a packet took is not known from outside the
   // network, and the panel says so. When the operator is a satellite one, the first leg goes up to the satellite.
-  const SATELITE = /starlink|viasat|hughes|hughesnet|oneweb|eutelsat|skydsl|bigblu|konnect|telesat|iridium|inmarsat|ses\b|satel/i;
+  const SATELITE = /starlink|viasat|hughes|hughesnet|oneweb|eutelsat|skydsl|bigblu|konnect|telesat|iridium|inmarsat|\bses\b|satelit|satellite/i;
   const porSatelite = () => !!(fuera && !fuera.error && SATELITE.test(String(fuera.operador || '') + ' ' + String(fuera.red || '')));
   const CAMINOS = new Map();
   // unit vectors from a to b: along the network when there is a way, the great circle otherwise; cached by place pair
@@ -255,7 +255,7 @@
     if (porSatelite() && ruta) {
       // the first leg climbs to the satellite above the start of the path (low orbit drawn at scale: about 550 km up;
       // a geostationary one would be six planet radii away, so it is drawn nearer and the panel says «no a escala»)
-      const geo = /viasat|hughes|eutelsat|skydsl|bigblu|konnect|inmarsat|ses\b/i.test(String(fuera.operador || ''));
+      const geo = /viasat|hughes|eutelsat|skydsl|bigblu|konnect|inmarsat|\bses\b/i.test(String(fuera.operador || ''));
       alza = { hasta: Math.max(2, Math.round(n * 0.12)), alto: geo ? 1.35 : 1.09, geo };
     }
     c = { w, red: !!ruta, km: ruta ? ruta.km : null, alza }; CAMINOS.set(key, c); return c;
