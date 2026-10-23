@@ -447,3 +447,15 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   al pasar, brillo azul y mano; al pulsar, se hunden. Se crean una vez (el que está bajo el ratón no parpadea al cambiar de tarjeta) y son
   botones de verdad para lectores de pantalla («Anterior» / «Siguiente»). Los puntos van en una sola línea entre ellas (se estrechan en
   vez de saltar de línea) y la tarjeta actual es una barrita encendida. Versión `20261025a`.
+
+## 17. 23 Oct 2026, 13:20–13:45 (Opus 5.5): agencia, rondas 5 y 6, y lo que decidió el dueño
+- **Ronda 6 (estructura)**: las cuatro voces (ChatGPT, Grok, Gemini, Claude) proponen Órbita como portada y quitar descargas, instalación y
+  licencias; paneles sobre el planeta; esta semana solo la parte visual, el servidor después. Radiografías con puerta propia: ChatGPT, Grok y
+  Claude (Gemini la quería dentro del navegador y del DNS). Orden: ChatGPT y Grok ponen ZERO primero; Claude, Radiografías (lo gratis engancha).
+- **Ronda 5 (nombre)**: VERALUN, la única que nadie puso la última. ZERVELA suena a «cerveza» (los tres); VERIGIA a «verija» (RAE: ingle;
+  vulgar en Puerto Rico y Santo Domingo). Nuevas: VELARIA (Grok) y AVIZOR (Gemini; ya es marca de líquidos para lentillas).
+- **Decisiones del dueño (13:40)**: 1) guardianagroup.com abre Órbita directamente; la presentación pasa a «Conocer GUARDIANA», sin descargas;
+  2) Radiografías con puerta propia; 3) orden Radiografías, ZERO, Comunicaciones; 4) la IA se llama **VERALUN** (antes de invertir en
+  logotipo o voz: búsqueda profesional de marca en SIC, EUIPO, USPTO e INPI, clases 9 y 42, y dominios).
+- El perfil DNS no se llamará «Vigía» en público: hay una marca VIGIA registrada en EE. UU. (clase 42, software de redes con IA).
+- Grok, con el panel del navegador oculto, a veces deja la respuesta en blanco o cortada: recargar la conversación la muestra entera.
