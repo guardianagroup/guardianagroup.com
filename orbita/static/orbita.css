@@ -621,3 +621,10 @@ body.viaje header, body.viaje #capas, body.viaje #puertas, body.viaje #directo, 
 .conexion .medir.principal:disabled { opacity: .75; font-variant-numeric: tabular-nums; }
 .conexion .medir.secundario { border-color: var(--line); color: var(--fg); }
 .conexion .medir.secundario:hover { background: rgba(156,195,228,.1); color: var(--fg); border-color: var(--accent); }
+
+/* the info card can be dragged on a computer (23 Oct 2026, owner) */
+@media (pointer: fine) and (min-width: 760px) {
+  .ficha-panel { cursor: grab; }
+  .ficha-panel.moviendo, .ficha-panel.moviendo * { cursor: grabbing !important; user-select: none; }
+  .ficha-panel.moviendo { box-shadow: 0 18px 50px rgba(0,0,0,.55); transition: none; }
+}

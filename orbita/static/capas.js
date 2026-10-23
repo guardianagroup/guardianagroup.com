@@ -46,7 +46,12 @@
   const esGrande = (q) => !!(PT && PT.porOp && q.o && (PT.porOp.get(q.o) || 0) >= 5);
   // which class a submarine cable belongs to (by its published capacity) and whether it shows now
   const claseSub = (i) => { const c = capacidadDe(i); return !c ? 'sinDato' : c.tbps >= CAP.umbrales.gigante ? 'gigante' : c.tbps >= CAP.umbrales.grande ? 'grande' : 'regional'; };
-  const veSub = (i, l) => CLASES.sub[claseSub(i)] && (!l.aprox || CLASES.sub.aprox);
+  // 23 Oct 2026 (owner: «la ruta estimada… son unos puntos fijos»): the power lights hold every cable of that power; «Ruta
+  // estimada» off hides the cables whose route is approximate, and on by itself (no power light on) shows all of them.
+  const sinPotencia = () => !CLASES.sub.gigante && !CLASES.sub.grande && !CLASES.sub.regional && !CLASES.sub.sinDato;
+  const veSub = (i, l) => !l.aprox ? CLASES.sub[claseSub(i)] : CLASES.sub.aprox && (CLASES.sub[claseSub(i)] || sinPotencia());
+  // a landing shows only while one of its cables is shown (23 Oct 2026: with just the planned cables on, the landings of every other cable stayed as fixed dots)
+  const veLlegada = (ll) => !ll.seg || !ll.seg.length || !capas.sub || !capas.sub.lineas || ll.seg.some((j) => { const l = capas.sub.lineas[j]; return l && veSub(j, l); });
   const claseFibra = (l) => l.x.obra ? 'obra' : l.nivel === 3 ? 'principal' : l.nivel === 2 ? 'largo' : l.nivel === 1 ? 'nacional' : 'regional';
   const veFibra = (l) => (!l.x.obra || CLASES.fibra.obra) && CLASES.fibra[l.nivel === 3 ? 'principal' : l.nivel === 2 ? 'largo' : l.nivel === 1 ? 'nacional' : 'regional'];
   const vePunto = (q) => q.t === 'datos' ? (esGrande(q) ? CLASES.puntos.datos : CLASES.puntos.pequenos) : q.t === 'intercambio' ? CLASES.puntos.intercambio : true;
@@ -226,6 +231,7 @@
     const zl = G.R / (G.R0 || G.R), ka = Math.min(1, (zl - 4) / 4);
     cx.globalCompositeOperation = 'source-over';
     for (let i = 0; i < LUG.llegadas.length; i++) {
+      if (i !== llegadaMarcada && !veLlegada(LUG.llegadas[i])) continue;
       const v = p.aVista(LUG.llegadas[i].w); if (v[2] <= 0.05) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], on = i === llegadaMarcada;
       cx.fillStyle = on ? `rgba(${BLANCO},1)` : `rgba(${BLANCO},.8)`;
@@ -564,14 +570,18 @@
       // the layer is painted additively (overlapping lines glow), which turns any bright core white: the giants' core is
       // painted normally, so it stays the accent blue, and only its halo adds up with the rest
       if (CS.gigante && P3.ex[2].length) { pintaLineas(cx, p, G, P3.ex[2], `rgba(${CLARO},${((L3 ? 0.2 : 0.14) + 0.12 * kq).toFixed(3)})`, 3.5 + 3 * kq); opaco(cx, () => pintaLineas(cx, p, G, P3.ex[2], `rgba(${ACERO},${(0.92 + 0.08 * kq).toFixed(2)})`, 1.3 + 0.7 * kq)); }
-      if (CS.previstos && PREV && PREV.length) { cx.save(); cx.setLineDash([2, 6]); pintaLineas(cx, p, G, PREV, `rgba(${CLARO},.45)`, 1); cx.restore(); }
+      // 23 Oct 2026, 08:16 (owner): «una línea fina discontinua… que va y viene, así la pantalla está viva». The planned
+      // cables (short dashes) and the approximate routes (longer ones) breathe: their dashes slide gently back and forth.
+      const vaiven = (fase) => 9 * Math.sin((t || 0) / 1100 + fase);
+      if (CS.previstos && PREV && PREV.length) { cx.save(); cx.setLineDash([4, 5]); cx.lineDashOffset = vaiven(0); pintaLineas(cx, p, G, PREV, `rgba(${CLARO},.6)`, 1.1); cx.restore(); }
       if (CS.aprox && capas.sub.aprox.length) {
-        cx.setLineDash([6, 4]);
-        if (CS.regional) pintaLineas(cx, p, G, P3.ap[0], `rgba(${ACERO},.45)`, 0.9);
-        if (CS.sinDato) pintaLineas(cx, p, G, P3.ap[3], `rgba(${ACERO},.45)`, 0.9);
-        if (CS.grande && P3.ap[1].length) pintaLineas(cx, p, G, P3.ap[1], `rgba(${ACERO},${(0.55 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
-        if (CS.gigante && P3.ap[2].length) { pintaLineas(cx, p, G, P3.ap[2], `rgba(${CLARO},${((L3 ? 0.18 : 0.12) + 0.1 * kq).toFixed(3)})`, 3.5 + 3 * kq); opaco(cx, () => pintaLineas(cx, p, G, P3.ap[2], `rgba(${ACERO},${(0.85 + 0.12 * kq).toFixed(2)})`, 1.3 + 0.7 * kq)); }
-        cx.setLineDash([]);
+        cx.setLineDash([7, 5]); cx.lineDashOffset = vaiven(1.7);
+        const todas = sinPotencia();
+        if (CS.regional || todas) pintaLineas(cx, p, G, P3.ap[0], `rgba(${ACERO},.5)`, 0.9);
+        if (CS.sinDato || todas) pintaLineas(cx, p, G, P3.ap[3], `rgba(${ACERO},.5)`, 0.9);
+        if ((CS.grande || todas) && P3.ap[1].length) pintaLineas(cx, p, G, P3.ap[1], `rgba(${ACERO},${(0.55 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
+        if ((CS.gigante || todas) && P3.ap[2].length) { pintaLineas(cx, p, G, P3.ap[2], `rgba(${CLARO},${((L3 ? 0.18 : 0.12) + 0.1 * kq).toFixed(3)})`, 3.5 + 3 * kq); opaco(cx, () => pintaLineas(cx, p, G, P3.ap[2], `rgba(${ACERO},${(0.85 + 0.12 * kq).toFixed(2)})`, 1.3 + 0.7 * kq)); }
+        cx.setLineDash([]); cx.lineDashOffset = 0;
       }
       pintaLuz(cx, p, G, subVisibles(), t);
     }
@@ -1073,7 +1083,7 @@
   function buscaLlegada(x, y) {
     if (!estado.sub || !LUG || !LUG.llegadas) return -1;
     const p = P(), G = p.geo; let mejor = -1, dm = 8 * 8;
-    for (let i = 0; i < LUG.llegadas.length; i++) { const v = p.aVista(LUG.llegadas[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
+    for (let i = 0; i < LUG.llegadas.length; i++) { if (!veLlegada(LUG.llegadas[i])) continue; const v = p.aVista(LUG.llegadas[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
     return mejor;
   }
   function buscaCentro(x, y) {
@@ -1285,7 +1295,36 @@
     // tall, the card scrolls inside itself.
     p.addEventListener('toggle', () => encajaPanel(), true);
     addEventListener('resize', () => encajaPanel());
+    arrastrable(p);
     return p;
+  }
+  // 23 Oct 2026, 08:17 (owner): «ese cuadro queda fijo. Lo tiene que poder mover clicando encima… y lo pone en la pantalla
+  // donde le sea mejor y que no le tape nada». On a computer the card is dragged from anywhere that is not a button or a
+  // section title; the place chosen is kept for the next cards of this visit.
+  let posUsuario = null;
+  const encaja = (left, top, w, h) => { const M = 8; return { left: Math.round(Math.max(M, Math.min(innerWidth - w - M, left))), top: Math.round(Math.max(M, Math.min(Math.max(M, innerHeight - h - M), top))) }; };
+  function arrastrable(p) {
+    let ini = null;
+    p.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0 || esTactil() || innerWidth < 760) return;
+      if (e.target.closest('button, a, summary, input, select, textarea, [contenteditable]')) return;
+      const r = p.getBoundingClientRect();
+      ini = { x: e.clientX, y: e.clientY, l: r.left, t: r.top, mov: false, id: e.pointerId };
+    });
+    addEventListener('pointermove', (e) => {
+      if (!ini || e.pointerId !== ini.id) return;
+      const dx = e.clientX - ini.x, dy = e.clientY - ini.y;
+      if (!ini.mov) {
+        if (Math.hypot(dx, dy) < 5) return; // a click stays a click
+        ini.mov = true; p.classList.add('suelto', 'moviendo');
+        try { const sel = getSelection(); if (sel) sel.removeAllRanges(); } catch (_) {}
+      }
+      const q = encaja(ini.l + dx, ini.t + dy, p.offsetWidth, p.offsetHeight);
+      p.style.left = q.left + 'px'; p.style.top = q.top + 'px'; posUsuario = q;
+      e.preventDefault();
+    });
+    const fin = () => { if (ini && ini.mov) p.classList.remove('moviendo'); ini = null; };
+    addEventListener('pointerup', fin); addEventListener('pointercancel', fin);
   }
   function encajaPanel() {
     const p = $('ficha-panel'); if (!p || p.hidden || !p.classList.contains('suelto')) return;
@@ -1327,6 +1366,7 @@
       const w = p.offsetWidth, h = p.offsetHeight, M = 16, arriba = 74;
       let left = x + 18; if (left + w > innerWidth - M) left = x - w - 18; if (left < M) left = Math.max(M, Math.round((innerWidth - w) / 2));
       let top = y - 24; if (top + h > innerHeight - M) top = innerHeight - M - h; if (top < arriba) top = arriba;
+      if (posUsuario) { const q = encaja(posUsuario.left, posUsuario.top, w, h); left = q.left; top = q.top; } // where the person put it
       p.style.left = left + 'px'; p.style.top = top + 'px';
     } else { p.classList.remove('suelto'); p.style.left = ''; p.style.top = ''; p.style.maxHeight = ''; }
     const f = ficha(); if (f) f.hidden = true;
