@@ -1,0 +1,282 @@
+[
+{
+"nombre": "BBIX Hong Kong",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.3193,
+"lon": 114.1694,
+"estado": "ok"
+},
+{
+"nombre": "AMS-IX Hong Kong",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.3193,
+"lon": 114.1694,
+"estado": "ok"
+},
+{
+"nombre": "BBIX Osaka",
+"ciudad": "Osaka",
+"pais": "JP",
+"lat": 34.6937,
+"lon": 135.5023,
+"estado": "ok"
+},
+{
+"nombre": "Equinix Internet Exchange Tokyo",
+"ciudad": "Tokio",
+"pais": "JP",
+"lat": 35.6762,
+"lon": 139.6503,
+"estado": "ok"
+},
+{
+"nombre": "Tokyo Internet Exchange (TYIX)",
+"ciudad": "Tokio",
+"pais": "JP",
+"lat": 35.6762,
+"lon": 139.6503,
+"estado": "ok"
+},
+{
+"nombre": "DE-CIX ASEAN",
+"ciudad": "Singapur",
+"pais": "SG",
+"lat": 1.3521,
+"lon": 103.8198,
+"estado": "ok"
+},
+{
+"nombre": "Megaport MegaIX Singapore",
+"ciudad": "Singapur",
+"pais": "SG",
+"lat": 1.3521,
+"lon": 103.8198,
+"estado": "ok"
+},
+{
+"nombre": "Thailand Internet Exchange (TH-IX)",
+"ciudad": "Bangkok",
+"pais": "TH",
+"lat": 13.7563,
+"lon": 100.5018,
+"estado": "ok"
+},
+{
+"nombre": "BBIX Thailand",
+"ciudad": "Bangkok",
+"pais": "TH",
+"lat": 13.7563,
+"lon": 100.5018,
+"estado": "ok"
+},
+{
+"nombre": "GetaFIX Manila",
+"ciudad": "Manila",
+"pais": "PH",
+"lat": 14.5995,
+"lon": 120.9842,
+"estado": "ok"
+},
+{
+"nombre": "BBIX Manila",
+"ciudad": "Manila",
+"pais": "PH",
+"lat": 14.5995,
+"lon": 120.9842,
+"estado": "ok"
+},
+{
+"nombre": "Maharlika Internet Exchange",
+"ciudad": "Manila",
+"pais": "PH",
+"lat": 14.5995,
+"lon": 120.9842,
+"estado": "ok"
+},
+{
+"nombre": "DE-CIX Kuala Lumpur",
+"ciudad": "Kuala Lumpur",
+"pais": "MY",
+"lat": 3.139,
+"lon": 101.6869,
+"estado": "ok"
+},
+{
+"nombre": "Penang IX",
+"ciudad": "George Town",
+"pais": "MY",
+"lat": 5.4141,
+"lon": 100.3288,
+"estado": "ok"
+},
+{
+"nombre": "Alien Internet Exchange (AIX)",
+"ciudad": "Depok",
+"pais": "ID",
+"lat": -6.4025,
+"lon": 106.7942,
+"estado": "ok"
+},
+{
+"nombre": "CLOUDXCHANGE Jakarta",
+"ciudad": "Yakarta",
+"pais": "ID",
+"lat": -6.2088,
+"lon": 106.8456,
+"estado": "ok"
+},
+{
+"nombre": "Omadata Internet Exchange (ODIX)",
+"ciudad": "Surabaya",
+"pais": "ID",
+"lat": -7.2575,
+"lon": 112.7521,
+"estado": "ok"
+},
+{
+"nombre": "Biznet Internet Exchange Jakarta (BIX)",
+"ciudad": "Yakarta",
+"pais": "ID",
+"lat": -6.2088,
+"lon": 106.8456,
+"estado": "ok"
+},
+{
+"nombre": "DE-CIX Jakarta",
+"ciudad": "Yakarta",
+"pais": "ID",
+"lat": -6.2088,
+"lon": 106.8456,
+"estado": "ok"
+},
+{
+"nombre": "Digital Edge EPIX Jakarta",
+"ciudad": "Yakarta",
+"pais": "ID",
+"lat": -6.2088,
+"lon": 106.8456,
+"estado": "ok"
+},
+{
+"nombre": "IIX Jawa Timur",
+"ciudad": "Surabaya",
+"pais": "ID",
+"lat": -7.2575,
+"lon": 112.7521,
+"estado": "ok"
+},
+{
+"nombre": "Extreme IX Delhi",
+"ciudad": "Nueva Delhi",
+"pais": "IN",
+"lat": 28.6139,
+"lon": 77.209,
+"estado": "ok"
+},
+{
+"nombre": "DE-CIX Delhi",
+"ciudad": "Nueva Delhi",
+"pais": "IN",
+"lat": 28.6139,
+"lon": 77.209,
+"estado": "ok"
+},
+{
+"nombre": "Extreme IX Chennai",
+"ciudad": "Chennai",
+"pais": "IN",
+"lat": 13.0827,
+"lon": 80.2707,
+"estado": "ok"
+},
+{
+"nombre": "DE-CIX Chennai",
+"ciudad": "Chennai",
+"pais": "IN",
+"lat": 13.0827,
+"lon": 80.2707,
+"estado": "ok"
+},
+{
+"nombre": "AMS-IX Mumbai",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.076,
+"lon": 72.8777,
+"estado": "ok"
+},
+{
+"nombre": "Extreme IX Bangalore",
+"ciudad": "Bengaluru",
+"pais": "IN",
+"lat": 12.9716,
+"lon": 77.5946,
+"estado": "ok"
+},
+{
+"nombre": "Equinix Internet Exchange Mumbai",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.076,
+"lon": 72.8777,
+"estado": "ok"
+},
+{
+"nombre": "Extreme IX Kolkata",
+"ciudad": "Calcuta",
+"pais": "IN",
+"lat": 22.5726,
+"lon": 88.3639,
+"estado": "ok"
+},
+{
+"nombre": "DE-CIX Kolkata",
+"ciudad": "Calcuta",
+"pais": "IN",
+"lat": 22.5726,
+"lon": 88.3639,
+"estado": "ok"
+},
+{
+"nombre": "Kolkata IX",
+"ciudad": "Calcuta",
+"pais": "IN",
+"lat": 22.5726,
+"lon": 88.3639,
+"estado": "ok"
+},
+{
+"nombre": "DE-CIX Hyderabad",
+"ciudad": "Hyderabad",
+"pais": "IN",
+"lat": 17.385,
+"lon": 78.4867,
+"estado": "ok"
+},
+{
+"nombre": "Extreme IX Hyderabad",
+"ciudad": "Hyderabad",
+"pais": "IN",
+"lat": 17.385,
+"lon": 78.4867,
+"estado": "ok"
+},
+{
+"nombre": "ANI-IX Delhi",
+"ciudad": "Nueva Delhi",
+"pais": "IN",
+"lat": 28.6139,
+"lon": 77.209,
+"estado": "ok"
+},
+{
+"nombre": "Extreme IX Pune",
+"ciudad": "Pune",
+"pais": "IN",
+"lat": 18.5204,
+"lon": 73.8567,
+"estado": "ok"
+}
+]
