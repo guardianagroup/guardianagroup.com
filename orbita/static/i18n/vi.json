@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "trên đồng bằng biển thẳm (trên 4.000 m, nằm trên đáy biển)",
   "Altitud del terreno": "Độ cao địa hình",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Được chôn ở độ sâu từ 0,6 đến 1,5 m, hầu như luôn trong ống dẫn dọc theo đường bộ, đường sắt, đường ống khí đốt hoặc đường dây điện.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "nét sáng, đậm, có quầng: trục chính trên 100 Tbit/s; nét vừa: trên 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "nét sáng, đậm, có quầng: trục chính trên 100 Tbit/s; nét vừa: trên 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Một chuyến bay 3D từ thành phố của bạn đến các trung tâm dữ liệu ở mỗi châu lục, với thời gian thực của bạn.",
+  "Al pulsar, se miden en unos segundos.": "Khi bấm, chúng được đo trong vài giây."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

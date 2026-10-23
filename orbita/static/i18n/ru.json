@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "на абиссальной равнине (более 4 000 м, лежит на дне)",
   "Altitud del terreno": "Высота местности",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Проложено на глубине от 0,6 до 1,5 м, почти всегда в каналах вдоль автомобильных и железных дорог, газопроводов или линий электропередачи.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "светлая толстая линия с ореолом: магистрали свыше 100 Tbit/s; средняя линия: свыше 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "светлая толстая линия с ореолом: магистрали свыше 100 Tbit/s; средняя линия: свыше 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Полёт в 3D от вашего города до центров обработки данных на каждом континенте — с вашими реальными задержками.",
+  "Al pulsar, se miden en unos segundos.": "После нажатия они будут измерены за несколько секунд."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

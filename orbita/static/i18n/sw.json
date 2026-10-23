@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "kwenye uwanda wa kina kirefu (zaidi ya m 4,000, ukiwa juu ya sakafu ya bahari)",
   "Altitud del terreno": "Mwinuko wa ardhi",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Huzikwa kwa kina cha m 0.6 hadi 1.5, karibu kila mara ndani ya mifereji kando ya barabara, reli, mabomba ya gesi au njia za umeme.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "mstari angavu na mnene wenye mwangaza wa kuzunguka: mitandao mikuu ya zaidi ya 100 Tbit/s; mstari wa wastani: zaidi ya 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "mstari angavu na mnene wenye mwangaza wa kuzunguka: mitandao mikuu ya zaidi ya 100 Tbit/s; mstari wa wastani: zaidi ya 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Safari ya angani kwa 3D kutoka mji wako hadi vituo vya data vya kila bara, kwa muda wako halisi.",
+  "Al pulsar, se miden en unos segundos.": "Ukibofya, inapimwa kwa sekunde chache."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

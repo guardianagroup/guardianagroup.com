@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "op de abyssale vlakte (meer dan 4.000 m, rustend op de bodem)",
   "Altitud del terreno": "Hoogte van het terrein",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Ligt op 0,6 tot 1,5 m diepte ingegraven, bijna altijd in buizen langs wegen, spoorlijnen, gasleidingen of hoogspanningslijnen.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "lichte, dikke lijn met halo: backbones van meer dan 100 Tbit/s; middeldikke lijn: meer dan 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "lichte, dikke lijn met halo: backbones van meer dan 100 Tbit/s; middeldikke lijn: meer dan 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Een vlucht in 3D van jouw stad naar de datacenters op elk continent, met jouw echte tijden.",
+  "Al pulsar, se miden en unos segundos.": "Na een klik worden ze in een paar seconden gemeten."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

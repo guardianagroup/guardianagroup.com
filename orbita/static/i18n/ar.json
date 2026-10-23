@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "في السهل السحيق (أكثر من 4,000 m، مستقرًّا على القاع)",
   "Altitud del terreno": "ارتفاع الأرض",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "مدفون على عمق بين 0.6 و1.5 m، وغالبًا في قنوات بمحاذاة الطرق أو السكك الحديدية أو أنابيب الغاز أو خطوط الكهرباء.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "خط فاتح وسميك بهالة: شبكات رئيسية تتجاوز 100 Tbit/s؛ خط متوسط: أكثر من 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "خط فاتح وسميك بهالة: شبكات رئيسية تتجاوز 100 Tbit/s؛ خط متوسط: أكثر من 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "رحلة بتقنية 3D من مدينتك إلى مراكز البيانات في كل قارة، بأزمنتك الفعلية.",
+  "Al pulsar, se miden en unos segundos.": "عند النقر، تُقاس في بضع ثوانٍ."
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

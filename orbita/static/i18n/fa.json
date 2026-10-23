@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "در دشت مغاکی (بیش از 4,000 m، آرمیده بر بستر)",
   "Altitud del terreno": "ارتفاع زمین",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "در عمق 0.6 تا 1.5 m دفن شده است، تقریباً همیشه در مجراهایی کنار جاده‌ها، راه‌آهن، خطوط لولهٔ گاز یا خطوط برق.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "خط روشن و ضخیم با هاله: شاهراه‌های بیش از 100 Tbit/s؛ خط متوسط: بیش از 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "خط روشن و ضخیم با هاله: شاهراه‌های بیش از 100 Tbit/s؛ خط متوسط: بیش از 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "پروازی به‌صورت 3D از شهر شما تا مراکز داده در هر قاره، با زمان‌های واقعی شما.",
+  "Al pulsar, se miden en unos segundos.": "با کلیک، در چند ثانیه اندازه‌گیری می‌شوند."
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

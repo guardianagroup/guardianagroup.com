@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "位于深海平原（超过 4,000 m，铺设于海底）",
   "Altitud del terreno": "地面海拔",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "埋深 0.6 至 1.5 m，几乎总是铺设在公路、铁路、燃气管道或电力线路旁的管道中。",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "带光晕的浅色粗线：超过 100 Tbit/s 的骨干；中等线：超过 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "带光晕的浅色粗线：超过 100 Tbit/s 的骨干；中等线：超过 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "从你的城市飞往各大洲数据中心的 3D 之旅，带上你的真实时延。",
+  "Al pulsar, se miden en unos segundos.": "点击后，几秒内即可测出。"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "গভীর সমুদ্রের সমভূমিতে (4,000 m-এর বেশি, তলদেশের উপর রাখা)",
   "Altitud del terreno": "ভূমির উচ্চতা",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "এটি 0.6 থেকে 1.5 m গভীরে পোঁতা থাকে, প্রায় সবসময় রাস্তা, রেলপথ, গ্যাস পাইপলাইন বা বিদ্যুৎ লাইনের পাশে নালির ভেতরে।",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "হালকা রঙের মোটা রেখা, আভাসহ: 100 Tbit/s-এর বেশি ব্যাকবোন; মাঝারি রেখা: 20 Tbit/s-এর বেশি"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "হালকা রঙের মোটা রেখা, আভাসহ: 100 Tbit/s-এর বেশি ব্যাকবোন; মাঝারি রেখা: 20 Tbit/s-এর বেশি",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "আপনার শহর থেকে প্রতিটি মহাদেশের ডেটা সেন্টার পর্যন্ত 3D-তে একটি উড়ান, আপনার আসল সময়সহ।",
+  "Al pulsar, se miden en unos segundos.": "ক্লিক করলে কয়েক সেকেন্ডে সেগুলো মাপা হয়।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

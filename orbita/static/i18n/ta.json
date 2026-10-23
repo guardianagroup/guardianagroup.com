@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "ஆழ்கடல் சமவெளியில் (4,000 m-க்கு மேல், கடல் தரையில் கிடக்கிறது)",
   "Altitud del terreno": "நிலத்தின் உயரம்",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "0.6 முதல் 1.5 m ஆழத்தில் புதைக்கப்படுகிறது, பெரும்பாலும் சாலைகள், ரயில் பாதைகள், எரிவாயுக் குழாய்கள் அல்லது மின் கம்பிகளை ஒட்டிய குழாய்களுக்குள்.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "ஒளிவட்டத்துடன் வெளிர் தடித்த கோடு: 100 Tbit/s-க்கு மேற்பட்ட முதுகெலும்பு வலைகள்; நடுத்தர கோடு: 20 Tbit/s-க்கு மேல்"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "ஒளிவட்டத்துடன் வெளிர் தடித்த கோடு: 100 Tbit/s-க்கு மேற்பட்ட முதுகெலும்பு வலைகள்; நடுத்தர கோடு: 20 Tbit/s-க்கு மேல்",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "உங்கள் நகரத்திலிருந்து ஒவ்வொரு கண்டத்தின் டேட்டா சென்டர்கள் வரை 3D-யில் ஒரு பயணம், உங்கள் உண்மையான நேரங்களுடன்.",
+  "Al pulsar, se miden en unos segundos.": "கிளிக் செய்தால், சில விநாடிகளில் அவை அளவிடப்படும்."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

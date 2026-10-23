@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "az abisszális síkságon (4 000 m felett, a fenéken fekve)",
   "Altitud del terreno": "Terepmagasság",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "0,6–1,5 m mélyen van a földben, szinte mindig védőcsövekben, utak, vasutak, gázvezetékek vagy villamos távvezetékek mentén.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "világos, vastag vonal fényudvarral: 100 Tbit/s feletti gerinchálózatok; közepes vonal: 20 Tbit/s felett"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "világos, vastag vonal fényudvarral: 100 Tbit/s feletti gerinchálózatok; közepes vonal: 20 Tbit/s felett",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "3D-s repülés a városodtól minden kontinens adatközpontjaiig, a valódi időiddel.",
+  "Al pulsar, se miden en unos segundos.": "Kattintásra néhány másodperc alatt lemérjük őket."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

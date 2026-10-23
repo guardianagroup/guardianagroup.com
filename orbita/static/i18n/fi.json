@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "syvänmeren tasangolla (yli 4 000 m, pohjan varassa)",
   "Altitud del terreno": "Maaston korkeus",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Haudattu 0,6–1,5 metrin syvyyteen, lähes aina suojaputkiin teiden, rautateiden, kaasuputkien tai sähkölinjojen varrelle.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "vaalea, paksu viiva hehkulla: runkoverkot yli 100 Tbit/s; keskipaksu viiva: yli 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "vaalea, paksu viiva hehkulla: runkoverkot yli 100 Tbit/s; keskipaksu viiva: yli 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "3D-lento kaupungistasi jokaisen maanosan datakeskuksiin todellisilla ajoillasi.",
+  "Al pulsar, se miden en unos segundos.": "Kun napsautat, ne mitataan muutamassa sekunnissa."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

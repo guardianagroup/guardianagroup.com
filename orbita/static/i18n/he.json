@@ -790,7 +790,9 @@
   "en llanura abisal (más de 4.000 m, apoyado en el fondo)": "במישור התהומי (יותר מ־4,000 m, מונח על הקרקעית)",
   "Altitud del terreno": "גובה פני הקרקע",
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "קבור בעומק של 0.6 עד 1.5 m, כמעט תמיד בתעלות לאורך כבישים, מסילות רכבת, צינורות גז או קווי חשמל.",
-  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "קו בהיר ועבה עם הילה: עורקים מעל 100 Tbit/s; קו בינוני: מעל 20 Tbit/s"
+  "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "קו בהיר ועבה עם הילה: עורקים מעל 100 Tbit/s; קו בינוני: מעל 20 Tbit/s",
+  "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "טיסה ב־3D מהעיר שלך אל מרכזי הנתונים בכל יבשת, עם הזמנים האמיתיים שלך.",
+  "Al pulsar, se miden en unos segundos.": "בלחיצה, הם נמדדים תוך כמה שניות."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",
