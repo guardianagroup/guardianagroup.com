@@ -14,6 +14,9 @@
   // are drawn in a light blue of the same family, with a soft blue halo, never white; and what the pointer touches
   // lights up in its own colour (brighter and wider), never white either («se resalta en blanco: eso no puede ser»)
   const CLARO = '206,226,243';
+  // 23 Oct 2026, 18:47 (owner: «cables submarinos y fibra por tierra se ven del mismo color, que haya un orden»): the sea
+  // stays steel; the land fibre gets its own warm family, brighter and wider the more important the route.
+  const FIBRA_COL = (window.__FIBRA_COL) || { 3: '240,178,110', 2: '222,160,104', 1: '196,146,112', 0: '160,130,116' };
   // Owner, 22 Oct 2026: «cuando la persona abra Órbita, que no salgan los satélites de golpe, se ve demasiado ruido:
   // que abra solo con los cables submarinos, y luego la persona va abriendo y cerrando». So every opening starts with
   // the submarine cables alone; only the view and the orbit filter are remembered between visits.
@@ -339,7 +342,7 @@
     for (const obra of [false, true]) for (const nivel of [0, 1, 2, 3]) {
       const fn = fundidoNivel(nivel, z); if (fn <= 0) continue;
       const alfa = (obra ? 0.5 : nivel === 3 ? 0.85 + 0.12 * kq : nivel === 2 ? 0.74 + 0.12 * kq : nivel === 1 ? 0.66 : 0.48) * fz * fn;
-      cx.strokeStyle = nivel >= 2 && !obra ? `rgba(${ACERO},${(alfa * (nivel === 3 ? 1 : 0.9)).toFixed(2)})` : `rgba(${ACERO},${alfa.toFixed(2)})`;
+      cx.strokeStyle = `rgba(${FIBRA_COL[nivel]},${alfa.toFixed(2)})`;
       if (nivel === 3 && !obra) { const g = cx.globalCompositeOperation; cx.globalCompositeOperation = 'source-over'; cx.lineWidth = base + 0.9 + 0.5 * kq; cx.setLineDash([]); cx.beginPath(); const F0 = CAMPO || campo(p, G); for (const l of lineas) { if (l.x.obra || l.nivel !== 3) continue; if (!F0.todo) { capsDe(l); if (!veCap(F0, l.cap)) continue; } trazoW(cx, p, G, l.w, 0, l.w.length - 1); } cx.stroke(); cx.globalCompositeOperation = g; continue; }
       cx.lineWidth = nivel === 3 ? base + 0.9 + 0.5 * kq : nivel === 2 ? base + 0.35 + 0.3 * kq : nivel === 1 ? base : Math.max(0.7, base - 0.25);
       cx.setLineDash(obra ? [3, 3] : []);
@@ -353,7 +356,7 @@
       cx.stroke();
     }
     cx.setLineDash([]);
-    if (z >= 4) { pintaExtremos(cx, p, G, lineas, z, ACERO); cx.globalCompositeOperation = 'lighter'; }
+    if (z >= 4) { pintaExtremos(cx, p, G, lineas, z, FIBRA_COL[3]); cx.globalCompositeOperation = 'lighter'; }
     if (fibraMarcada >= 0) {
       const l = FT.lineas[fibraMarcada]; resalta(cx, p, G, [l], l.nivel >= 2 ? CLARO : ACERO);
     }
