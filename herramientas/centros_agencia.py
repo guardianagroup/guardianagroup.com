@@ -100,6 +100,7 @@ def main():
             if len(corto) >= 6 and re.search(r'\d', corto) and (kn in n or n in kn): return True   # «Centro de datos Ascenty Querétaro 1»
             mismo = marca and (marca in n or marca in op)
             if mismo and codigo and len(codigo) >= 3 and codigo in n: return True
+            if mismo and any(len(t) >= 3 and re.search(r'\d', t) and t in n for t in map(norm, palabras)): return True  # «KIO MEX4 Interlomas» = «KIO MEX4»
             if mismo and cifra and d <= 25 and re.search(r'(?<!\d)' + cifra + r'[a-z]?$', n): return True  # «Ascenty SP1» = «Ascenty São Paulo 1»
             if solo and mismo and d <= 8 and not re.search(r'\d', n): return True  # «Ascenty Infraestrutura de Data Centers» (Maracanaú) = «Ascenty Fortaleza 1», el único de Ascenty allí
         return False
