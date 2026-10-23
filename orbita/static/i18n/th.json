@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "ฝังอยู่ลึก 0.6 ถึง 1.5 ม. เกือบทุกครั้งอยู่ในท่อร้อยสายเลียบถนน ทางรถไฟ ท่อส่งก๊าซ หรือสายไฟฟ้า",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "เส้นสว่างหนาพร้อมแสงเรือง: โครงข่ายหลักเกิน 100 Tbit/s; เส้นขนาดกลาง: เกิน 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "การบิน 3D จากเมืองของคุณไปยังศูนย์ข้อมูลในทุกทวีป พร้อมเวลาจริงของคุณ",
-  "Al pulsar, se miden en unos segundos.": "เมื่อคลิก จะวัดภายในไม่กี่วินาที"
+  "Al pulsar, se miden en unos segundos.": "เมื่อคลิก จะวัดภายในไม่กี่วินาที",
+  "Centros de grandes compañías": "ศูนย์ของบริษัทใหญ่",
+  "Centros de compañías pequeñas": "ศูนย์ของบริษัทเล็ก",
+  "De compañías con cinco o más centros de datos en el mapa.": "ของบริษัทที่มีศูนย์ข้อมูลบนแผนที่ตั้งแต่ห้าแห่งขึ้นไป",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "ของบริษัทที่มีศูนย์บนแผนที่น้อยกว่าห้าแห่ง หรือไม่ทราบบริษัท"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

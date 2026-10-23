@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Huzikwa kwa kina cha m 0.6 hadi 1.5, karibu kila mara ndani ya mifereji kando ya barabara, reli, mabomba ya gesi au njia za umeme.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "mstari angavu na mnene wenye mwangaza wa kuzunguka: mitandao mikuu ya zaidi ya 100 Tbit/s; mstari wa wastani: zaidi ya 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Safari ya angani kwa 3D kutoka mji wako hadi vituo vya data vya kila bara, kwa muda wako halisi.",
-  "Al pulsar, se miden en unos segundos.": "Ukibofya, inapimwa kwa sekunde chache."
+  "Al pulsar, se miden en unos segundos.": "Ukibofya, inapimwa kwa sekunde chache.",
+  "Centros de grandes compañías": "Vituo vya kampuni kubwa",
+  "Centros de compañías pequeñas": "Vituo vya kampuni ndogo",
+  "De compañías con cinco o más centros de datos en el mapa.": "Vya kampuni zenye vituo vya data vitano au zaidi kwenye ramani.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Vya kampuni zenye vituo chini ya vitano kwenye ramani, au ambazo kampuni yake haijulikani."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "یہ 0.6 سے 1.5 m کی گہرائی میں دفن ہوتا ہے، تقریباً ہمیشہ سڑکوں، ریلوے لائنوں، گیس پائپ لائنوں یا بجلی کی لائنوں کے ساتھ ڈکٹس میں۔",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "ہلکی اور موٹی لکیر ہالے کے ساتھ: 100 Tbit/s سے زیادہ کی بنیادی لائنیں؛ درمیانی لکیر: 20 Tbit/s سے زیادہ",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "آپ کے شہر سے ہر براعظم کے ڈیٹا سینٹرز تک 3D میں ایک پرواز، آپ کے حقیقی اوقات کے ساتھ۔",
-  "Al pulsar, se miden en unos segundos.": "کلک کرنے پر یہ چند سیکنڈ میں ناپے جاتے ہیں۔"
+  "Al pulsar, se miden en unos segundos.": "کلک کرنے پر یہ چند سیکنڈ میں ناپے جاتے ہیں۔",
+  "Centros de grandes compañías": "بڑی کمپنیوں کے مراکز",
+  "Centros de compañías pequeñas": "چھوٹی کمپنیوں کے مراکز",
+  "De compañías con cinco o más centros de datos en el mapa.": "ان کمپنیوں کے جن کے نقشے پر پانچ یا زیادہ ڈیٹا سینٹر ہیں۔",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "ان کمپنیوں کے جن کے نقشے پر پانچ سے کم مراکز ہیں، یا جن کی کمپنی معلوم نہیں۔"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

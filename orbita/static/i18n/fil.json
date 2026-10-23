@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Nakabaon sa lalim na 0.6 hanggang 1.5 m, halos palaging nasa mga daluyan kahanay ng mga kalsada, riles ng tren, tubo ng gas o linya ng kuryente.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "maliwanag at makapal na guhit na may halo: mga backbone na higit sa 100 Tbit/s; katamtamang guhit: higit sa 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Isang lipad sa 3D mula sa iyong lungsod hanggang sa mga data center ng bawat kontinente, kasama ang iyong totoong oras.",
-  "Al pulsar, se miden en unos segundos.": "Kapag pinindot, sinusukat ang mga ito sa ilang segundo."
+  "Al pulsar, se miden en unos segundos.": "Kapag pinindot, sinusukat ang mga ito sa ilang segundo.",
+  "Centros de grandes compañías": "Mga sentro ng malalaking kumpanya",
+  "Centros de compañías pequeñas": "Mga sentro ng maliliit na kumpanya",
+  "De compañías con cinco o más centros de datos en el mapa.": "Mula sa mga kumpanyang may lima o higit pang data center sa mapa.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Mula sa mga kumpanyang may mas kaunti sa limang sentro sa mapa, o hindi alam ang kumpanya."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Fiberen ligger nedgravd 0,6 til 1,5 m dypt, nesten alltid i rør langs veier, jernbaner, gassrørledninger eller kraftlinjer.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "lys, tykk strek med glorie: stamnett over 100 Tbit/s; middels strek: over 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "En flytur i 3D fra byen din til datasentrene på hvert kontinent, med dine faktiske tider.",
-  "Al pulsar, se miden en unos segundos.": "Når du klikker, måles de på noen sekunder."
+  "Al pulsar, se miden en unos segundos.": "Når du klikker, måles de på noen sekunder.",
+  "Centros de grandes compañías": "Store selskapers sentre",
+  "Centros de compañías pequeñas": "Små selskapers sentre",
+  "De compañías con cinco o más centros de datos en el mapa.": "Fra selskaper med fem eller flere datasentre på kartet.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Fra selskaper med færre enn fem sentre på kartet, eller der selskapet ikke er kjent."
  },
  "p": {
   "intento": "Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

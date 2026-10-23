@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "埋深 0.6 至 1.5 m，几乎总是铺设在公路、铁路、燃气管道或电力线路旁的管道中。",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "带光晕的浅色粗线：超过 100 Tbit/s 的骨干；中等线：超过 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "从你的城市飞往各大洲数据中心的 3D 之旅，带上你的真实时延。",
-  "Al pulsar, se miden en unos segundos.": "点击后，几秒内即可测出。"
+  "Al pulsar, se miden en unos segundos.": "点击后，几秒内即可测出。",
+  "Centros de grandes compañías": "大型公司的数据中心",
+  "Centros de compañías pequeñas": "小型公司的数据中心",
+  "De compañías con cinco o más centros de datos en el mapa.": "来自在地图上有五个或以上数据中心的公司。",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "来自在地图上不足五个中心的公司，或所属公司不详。"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

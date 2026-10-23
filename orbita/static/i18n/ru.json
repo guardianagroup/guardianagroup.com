@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Проложено на глубине от 0,6 до 1,5 м, почти всегда в каналах вдоль автомобильных и железных дорог, газопроводов или линий электропередачи.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "светлая толстая линия с ореолом: магистрали свыше 100 Tbit/s; средняя линия: свыше 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Полёт в 3D от вашего города до центров обработки данных на каждом континенте — с вашими реальными задержками.",
-  "Al pulsar, se miden en unos segundos.": "После нажатия они будут измерены за несколько секунд."
+  "Al pulsar, se miden en unos segundos.": "После нажатия они будут измерены за несколько секунд.",
+  "Centros de grandes compañías": "Центры крупных компаний",
+  "Centros de compañías pequeñas": "Центры небольших компаний",
+  "De compañías con cinco o más centros de datos en el mapa.": "Компаний, у которых на карте пять и более центров обработки данных.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Компаний, у которых на карте меньше пяти центров, или с неизвестной компанией."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

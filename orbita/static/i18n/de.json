@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Die Glasfaser liegt 0,6 bis 1,5 m tief, fast immer in Schutzrohren entlang von Straßen, Bahnstrecken, Gaspipelines oder Stromleitungen.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "heller, dicker Strich mit Halo: Backbones über 100 Tbit/s; mittlerer Strich: über 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Ein 3D-Flug von Ihrer Stadt zu den Rechenzentren auf jedem Kontinent, mit Ihren echten Zeiten.",
-  "Al pulsar, se miden en unos segundos.": "Beim Klick werden sie in wenigen Sekunden gemessen."
+  "Al pulsar, se miden en unos segundos.": "Beim Klick werden sie in wenigen Sekunden gemessen.",
+  "Centros de grandes compañías": "Zentren großer Unternehmen",
+  "Centros de compañías pequeñas": "Zentren kleiner Unternehmen",
+  "De compañías con cinco o más centros de datos en el mapa.": "Von Unternehmen mit fünf oder mehr Rechenzentren auf der Karte.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Von Unternehmen mit weniger als fünf Zentren auf der Karte oder ohne bekanntes Unternehmen."
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "קבור בעומק של 0.6 עד 1.5 m, כמעט תמיד בתעלות לאורך כבישים, מסילות רכבת, צינורות גז או קווי חשמל.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "קו בהיר ועבה עם הילה: עורקים מעל 100 Tbit/s; קו בינוני: מעל 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "טיסה ב־3D מהעיר שלך אל מרכזי הנתונים בכל יבשת, עם הזמנים האמיתיים שלך.",
-  "Al pulsar, se miden en unos segundos.": "בלחיצה, הם נמדדים תוך כמה שניות."
+  "Al pulsar, se miden en unos segundos.": "בלחיצה, הם נמדדים תוך כמה שניות.",
+  "Centros de grandes compañías": "מרכזים של חברות גדולות",
+  "Centros de compañías pequeñas": "מרכזים של חברות קטנות",
+  "De compañías con cinco o más centros de datos en el mapa.": "של חברות עם חמישה מרכזי נתונים או יותר במפה.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "של חברות עם פחות מחמישה מרכזים במפה, או שהחברה אינה ידועה."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

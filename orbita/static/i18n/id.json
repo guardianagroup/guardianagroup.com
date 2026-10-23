@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Ditanam sedalam 0,6 hingga 1,5 m, hampir selalu di dalam saluran di sepanjang jalan raya, rel kereta, pipa gas, atau jalur listrik.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "garis terang dan tebal dengan halo: tulang punggung di atas 100 Tbit/s; garis sedang: di atas 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Penerbangan 3D dari kota Anda ke pusat data di setiap benua, dengan waktu nyata Anda.",
-  "Al pulsar, se miden en unos segundos.": "Saat diklik, waktunya diukur dalam beberapa detik."
+  "Al pulsar, se miden en unos segundos.": "Saat diklik, waktunya diukur dalam beberapa detik.",
+  "Centros de grandes compañías": "Pusat milik perusahaan besar",
+  "Centros de compañías pequeñas": "Pusat milik perusahaan kecil",
+  "De compañías con cinco o más centros de datos en el mapa.": "Dari perusahaan dengan lima pusat data atau lebih di peta.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Dari perusahaan dengan kurang dari lima pusat di peta, atau yang perusahaannya tidak diketahui."
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

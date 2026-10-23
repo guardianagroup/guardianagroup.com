@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Haudattu 0,6–1,5 metrin syvyyteen, lähes aina suojaputkiin teiden, rautateiden, kaasuputkien tai sähkölinjojen varrelle.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "vaalea, paksu viiva hehkulla: runkoverkot yli 100 Tbit/s; keskipaksu viiva: yli 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "3D-lento kaupungistasi jokaisen maanosan datakeskuksiin todellisilla ajoillasi.",
-  "Al pulsar, se miden en unos segundos.": "Kun napsautat, ne mitataan muutamassa sekunnissa."
+  "Al pulsar, se miden en unos segundos.": "Kun napsautat, ne mitataan muutamassa sekunnissa.",
+  "Centros de grandes compañías": "Suurten yritysten keskukset",
+  "Centros de compañías pequeñas": "Pienten yritysten keskukset",
+  "De compañías con cinco o más centros de datos en el mapa.": "Yrityksiltä, joilla on kartalla vähintään viisi datakeskusta.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Yrityksiltä, joilla on kartalla alle viisi keskusta, tai joiden yritystä ei tiedetä."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

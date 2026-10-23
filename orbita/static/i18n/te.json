@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "0.6 నుంచి 1.5 m లోతులో పాతిపెడతారు, దాదాపు ఎల్లప్పుడూ రోడ్లు, రైలు మార్గాలు, గ్యాస్ పైప్‌లైన్లు లేదా విద్యుత్ లైన్ల వెంట ఉండే గొట్టాల్లో.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "కాంతివలయంతో లేత, మందపాటి గీత: 100 Tbit/s కంటే ఎక్కువ బ్యాక్‌బోన్‌లు; మధ్యస్థ గీత: 20 Tbit/s కంటే ఎక్కువ",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "మీ నగరం నుండి ప్రతి ఖండంలోని డేటా సెంటర్ల వరకు 3Dలో ఒక ప్రయాణం, మీ నిజమైన సమయాలతో.",
-  "Al pulsar, se miden en unos segundos.": "క్లిక్ చేస్తే, అవి కొన్ని సెకన్లలో కొలవబడతాయి."
+  "Al pulsar, se miden en unos segundos.": "క్లిక్ చేస్తే, అవి కొన్ని సెకన్లలో కొలవబడతాయి.",
+  "Centros de grandes compañías": "పెద్ద సంస్థల కేంద్రాలు",
+  "Centros de compañías pequeñas": "చిన్న సంస్థల కేంద్రాలు",
+  "De compañías con cinco o más centros de datos en el mapa.": "మ్యాప్‌లో ఐదు లేదా అంతకంటే ఎక్కువ డేటా సెంటర్లు ఉన్న సంస్థలవి.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "మ్యాప్‌లో ఐదు కంటే తక్కువ కేంద్రాలు ఉన్న, లేదా సంస్థ తెలియనివి."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

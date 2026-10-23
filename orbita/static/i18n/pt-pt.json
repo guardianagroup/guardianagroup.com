@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Vai enterrada entre 0,6 e 1,5 m, quase sempre em condutas junto a estradas, linhas férreas, gasodutos ou linhas elétricas.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "traço claro e grosso com halo: troncais com mais de 100 Tbit/s; traço médio: mais de 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Um voo em 3D desde a sua cidade até aos centros de dados de cada continente, com os seus tempos reais.",
-  "Al pulsar, se miden en unos segundos.": "Ao clicar, são medidos em poucos segundos."
+  "Al pulsar, se miden en unos segundos.": "Ao clicar, são medidos em poucos segundos.",
+  "Centros de grandes compañías": "Centros de grandes empresas",
+  "Centros de compañías pequeñas": "Centros de pequenas empresas",
+  "De compañías con cinco o más centros de datos en el mapa.": "De empresas com cinco ou mais centros de dados no mapa.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "De empresas com menos de cinco centros no mapa, ou cuja empresa não consta."
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

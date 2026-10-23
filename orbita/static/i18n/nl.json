@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Ligt op 0,6 tot 1,5 m diepte ingegraven, bijna altijd in buizen langs wegen, spoorlijnen, gasleidingen of hoogspanningslijnen.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "lichte, dikke lijn met halo: backbones van meer dan 100 Tbit/s; middeldikke lijn: meer dan 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Een vlucht in 3D van jouw stad naar de datacenters op elk continent, met jouw echte tijden.",
-  "Al pulsar, se miden en unos segundos.": "Na een klik worden ze in een paar seconden gemeten."
+  "Al pulsar, se miden en unos segundos.": "Na een klik worden ze in een paar seconden gemeten.",
+  "Centros de grandes compañías": "Centra van grote bedrijven",
+  "Centros de compañías pequeñas": "Centra van kleine bedrijven",
+  "De compañías con cinco o más centros de datos en el mapa.": "Van bedrijven met vijf of meer datacenters op de kaart.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Van bedrijven met minder dan vijf centra op de kaart, of waarvan het bedrijf niet bekend is."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",
