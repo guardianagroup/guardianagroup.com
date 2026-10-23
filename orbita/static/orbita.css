@@ -345,6 +345,8 @@ body.explorando:not(.dentro) #puertas { opacity: 0 !important; pointer-events: n
    their clicks. While a class card is open the doors step aside, and the cards always sit above everything on the planet. */
 body.tarjeta:not(.dentro) #puertas { opacity: 0 !important; pointer-events: none !important; transition: opacity .25s; }
 .sat-vista, .capa-vista { z-index: 60; }
+.capa-vista .orb button .d { display: none; } /* names and counts only; the sentence is the button's tooltip (owner, 22 Oct 2026, 22:09) */
+.capa-vista .orb button { padding: 7px 10px; }
 header { z-index: 50; }
 /* 21 Oct 2026 (owner): the top bar steps back with the zoom too, so the planet is seen whole; it wakes under the pointer. */
 body.listo:not(.dentro) header > :not(.sat-vista):not(#sat-fase) { opacity: calc(1 - var(--cerca, 0) * .85); transition: opacity .25s; }
