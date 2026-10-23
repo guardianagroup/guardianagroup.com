@@ -405,3 +405,21 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   vean. La siguiente, `y`.
 - **Consulta (ronda 3)**: Brave/DuckDuckGo/Tor y el nombre ZEROSS (doc «GUARDIANA sin instalar nada», sección «Igual o mejor que Brave,
   DuckDuckGo y Tor», y «Lo que no existe todavía en el mundo» con el escaneo mundial). zeross.tech = Zeroday Security Solutions (comprobado).
+
+## 15. 23 Oct 2026, 12:15–12:50 (Opus 5.5): ESPEJO por cables y satélites, la frase bajo el planeta, naming. Versión `y`
+- **ESPEJO sin «misiles»** (dueño, 12:22: «todo debe ser por cableada o satélites… combínalo»): los pulsos de cada empresa viajan al país de su
+  sede por el camino más corto de los cables submarinos y la fibra del mapa (`OrbitaRed.camino`, el mismo que usa el viaje); una de cada seis
+  empresas (por `semilla(nombre)`) y los países sin camino en el mapa van por satélite. Las empresas de un país comparten el trayecto: se ve
+  tráfico. Mientras la red del mapa carga, abanico de arcos. **El satélite es el del viaje** (dueño, 12:35: «el mismo satélite que tenemos en
+  la órbita»): dibujo `dibujoSatelite`, 1,7 radios, cinturón geoestacionario y colocación donde el peor de los dos ángulos es menor (≤ 66°),
+  rótulo «Órbita geoestacionaria · no a escala». En pantalla y en terminos.html: trayectos ilustrativos, no la ruta real de cada dato.
+- **La frase** (dueño, 12:18 y 12:36, eligió la nº 3 de Gemini): «Entiende cada conexión. Decide tu propio rumbo.» Bajo el planeta, una vez por
+  visita, palabra a palabra en orden de lectura (de derecha a izquierda en árabe, hebreo, persa y urdu porque se encienden en el orden del
+  texto), con la luz de los títulos de la web (palabras en espera atenuadas, nunca invisibles; la que se lee brilla un momento); unos 7 s y se
+  va. Espera a que se cierre la pregunta de ubicación (si la interrumpe, vuelve a empezar después) y se aparta si se abre ESPEJO, una puerta,
+  «Mi conexión» o el viaje. `static/frase.js`; mientras está, se oculta el «¿Qué pasa al abrir un diario deportivo?».
+- **Gemini** contesta si se le pide «sin buscar en la web» y con 3.1 Pro: su búsqueda falla y devuelve «Solo soy un modelo de lenguaje…».
+- **Naming de la IA (ronda 4)**: Gemini → Prisma (descartado: Palo Alto Networks vende Prisma Access/Cloud, ciberseguridad), Sonar, Lumina; ZEROSS
+  descartado («cero» = nulidad). Grok → Umbral (choca con Umbral Trade, otro proyecto del fundador), Vigía, VAELIS. ChatGPT, en curso.
+- **Ideas del dueño para más adelante**: ESPEJO también en tiempo real y como resumen de las últimas horas (12:25); al entrar al navegador, un
+  espectáculo: una habitación, una puerta, una jaula especial en medio y todo se sella al entrar (12:34), con el generador de vídeo cuando lleguemos.

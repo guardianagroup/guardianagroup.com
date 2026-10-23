@@ -63,41 +63,73 @@
   // where the arcs start: the visitor's place (or country); when the planet knows neither, the country the measurement was made from
   function origen() { const p = P(); if (!p) return null; const L = p.lugar; if (L) return L; const c = D && p.centros && p.centros[D.desde]; return c ? { lon: c.lon, lat: c.lat } : null; }
 
-  // ---------- the arcs: one per company (two when some of its domains are cut and some stay) ----------
+  // ---------- the trayectos: along the map's cables and fibre, or up to a satellite and down ----------
+  // 23 Oct 2026, 12:22 (owner): «parecen misiles… todo debe ser por cableada o satélites… que unos lleguen por cables y
+  // otros por satélite». Each company's pulses travel to its country along the shortest way through the submarine cables
+  // and land fibre of the map (red.js), or, for about one company in six and wherever the map has no way, up to a
+  // satellite above the equator and down again. Illustrative: nobody outside the networks knows the way each datum
+  // took, and the screen says so. Companies of one country share the trayecto, so a busy country shows as traffic.
+  // 23 Oct 2026, 12:35 (owner): «tiene que ser el mismo satélite que tenemos en la órbita»: the same drawing, height
+  // (1.7 radii; real: 6.6, so «no a escala») and placement as the journey's satellite (viaje.js), and its belt of orbits
+  const N_CABLE = 110, N_SAT = 70, SAT_ALTO = 1.7, SAT_MAX = 66 * RAD;
+  // over the equator, where the worse of the two angles (to you and to the country) is smallest; null when no
+  // geostationary satellite could see both ends
+  function lonSatelite(L, c) {
+    const va = vec(L.lon, L.lat), vb = vec(c.lon, c.lat); let mejor = null, peor = Infinity;
+    for (let lon = -180; lon < 180; lon += 1) { const s = vec(lon, 0), g = Math.max(angulo(s, va), angulo(s, vb)); if (g < peor) { peor = g; mejor = lon; } }
+    return peor <= SAT_MAX ? mejor : null;
+  }
   function arcos(res) {
-    const p = P(), L = origen(); if (!L || !p.centros) return [];
-    const casa = vec(L.lon, L.lat), lista = [];
-    for (const e of res.emp.values()) {
-      const c = p.centros[e.pais]; if (!c) continue;
-      if (e.corta) lista.push({ e, pais: e.pais, c, n: e.corta, corta: true });
-      if (e.queda) lista.push({ e, pais: e.pais, c, n: e.queda, corta: false });
-    }
-    // the fan: the arcs to one country rise at different heights, so a country that receives many companies shows
-    // as a sheaf of arcs and not as one line
-    const porPais = new Map(); lista.forEach((a) => { if (!porPais.has(a.pais)) porPais.set(a.pais, []); porPais.get(a.pais).push(a); });
-    for (const grupo of porPais.values()) {
-      grupo.sort((a, b) => semilla(a.e.nombre + a.corta) - semilla(b.e.nombre + b.corta));
-      grupo.forEach((a, i) => { a.k = grupo.length > 1 ? i / (grupo.length - 1) : 0.5; });
-    }
-    const N = 56;
-    for (const a of lista) {
-      const dest = vec(a.c.lon, a.c.lat), ang0 = angulo(casa, dest);
-      // a company in your own country: a short loop that rises and comes back near you, not a line of zero length
-      const fin = ang0 < 0.035 ? vec(a.c.lon + 4 + 6 * a.k, a.c.lat + 3) : dest, ang = angulo(casa, fin);
-      // the sheaf opens both upwards and sideways, so it reads as many arcs from any side of the planet
-      const solo = porPais.get(a.pais).length < 2, alto = 0.03 + 0.17 * Math.min(1, ang / 1.6) + (solo ? 0 : 0.06 * a.k);
+    const p = P(), L = origen(); if (!L || !p.centros) return { arcos: [], rutas: [] };
+    const casa = vec(L.lon, L.lat), Rd = window.OrbitaRed, red = !!(Rd && Rd.lista);
+    const rutas = new Map(), lista = [];
+    const nueva = (key, via, cc, w) => { const o = { key, via, cc, w, N: w.length - 1, pts: new Array(w.length), cortan: 0, quedan: 0, sat: w.sat || null }; rutas.set(key, o); return o; };
+    function ruta(via, cc, c, extra) {
+      const key = via + ':' + cc + (extra ? ':' + extra.clave : '');
+      if (rutas.has(key)) return rutas.get(key);
+      const dest = vec(c.lon, c.lat);
+      if (via === 'cable') {
+        const r = Rd.camino(L, { lon: c.lon, lat: c.lat }); if (!r) return null;
+        return nueva(key, via, cc, Rd.muestrea(r, N_CABLE).map((v) => [v[0] * 1.004, v[1] * 1.004, v[2] * 1.004]));
+      }
+      if (via === 'sat') {
+        const ls = lonSatelite(L, c); if (ls == null) return null;
+        const sub = vec(ls, 0), h = N_SAT / 2, w = [];
+        for (let i = 0; i <= h; i++) { const t = i / h, g = slerp(casa, sub, t), a = 1.004 + (SAT_ALTO - 1.004) * Math.sin(t * Math.PI / 2); w.push([g[0] * a, g[1] * a, g[2] * a]); }
+        for (let i = 1; i <= h; i++) { const t = i / h, g = slerp(sub, dest, t), a = 1.004 + (SAT_ALTO - 1.004) * Math.cos(t * Math.PI / 2); w.push([g[0] * a, g[1] * a, g[2] * a]); }
+        w.sat = [sub[0] * SAT_ALTO, sub[1] * SAT_ALTO, sub[2] * SAT_ALTO];
+        return nueva(key, via, cc, w);
+      }
+      // 'arco': a company in your own country (a short loop that rises and comes back), or the map's network not loaded yet
+      const kk = extra ? extra.k : 0.5, ang0 = angulo(casa, dest);
+      const fin = ang0 < 0.035 ? vec(c.lon + 4 + 6 * kk, c.lat + 3) : dest, ang = angulo(casa, fin);
+      const alto = 0.03 + 0.17 * Math.min(1, ang / 1.6) + (extra ? 0.06 * kk : 0);
       let n = [casa[1] * fin[2] - casa[2] * fin[1], casa[2] * fin[0] - casa[0] * fin[2], casa[0] * fin[1] - casa[1] * fin[0]];
       const ln = Math.hypot(n[0], n[1], n[2]); n = ln > 1e-6 ? n.map((x) => x / ln) : [0, 1, 0];
-      const lado = solo ? 0 : (a.k - 0.5) * 2 * (0.05 + 0.11 * Math.min(1, ang / 1.6));
-      a.w = [];
-      for (let i = 0; i <= N; i++) {
-        const t = i / N, s = Math.sin(Math.PI * t), g = slerp(casa, fin, t), w = [g[0] + n[0] * lado * s, g[1] + n[1] * lado * s, g[2] + n[2] * lado * s];
-        const lw = Math.hypot(w[0], w[1], w[2]), h = (1.004 + alto * s) / lw; a.w.push([w[0] * h, w[1] * h, w[2] * h]);
+      const lado = extra ? (kk - 0.5) * 2 * (0.05 + 0.11 * Math.min(1, ang / 1.6)) : 0, w = [];
+      for (let i = 0; i <= 56; i++) {
+        const t = i / 56, s = Math.sin(Math.PI * t), g = slerp(casa, fin, t), v = [g[0] + n[0] * lado * s, g[1] + n[1] * lado * s, g[2] + n[2] * lado * s];
+        const lw = Math.hypot(v[0], v[1], v[2]), a = (1.004 + alto * s) / lw; w.push([v[0] * a, v[1] * a, v[2] * a]);
       }
-      a.N = N; a.fase = semilla(a.e.nombre + a.pais); a.periodo = 1800 + 2200 * semilla(a.e.nombre);
-      a.pulsos = Math.min(4, 1 + Math.floor(a.n / 1.5)); // more domains, more pulses: the «bombardeo»
+      return nueva(key, 'arco', cc, w);
     }
-    return lista;
+    const emp = [...res.emp.values()].sort((a, b) => semilla(a.nombre) - semilla(b.nombre));
+    const porPais = new Map(); emp.forEach((e) => { if (!porPais.has(e.pais)) porPais.set(e.pais, []); porPais.get(e.pais).push(e); });
+    for (const e of emp) {
+      const c = p.centros[e.pais]; if (!c) continue;
+      const ang = angulo(casa, vec(c.lon, c.lat)), grupo = porPais.get(e.pais), k = grupo.length > 1 ? grupo.indexOf(e) / (grupo.length - 1) : 0.5;
+      let r = null;
+      if (red && ang > 0.035) {
+        const porSat = ang > 0.35 && semilla(e.nombre + '·satélite') < 0.17;
+        // the satellite when it is this company's turn and one can see both ends; the map has no way: the satellite too
+        r = porSat ? (ruta('sat', e.pais, c) || ruta('cable', e.pais, c)) : (ruta('cable', e.pais, c) || (ang > 0.35 ? ruta('sat', e.pais, c) : null));
+      }
+      if (!r) r = ruta('arco', e.pais, c, red ? null : { clave: e.nombre, k }); // before the network is loaded, a sheaf of arcs
+      const base = { e, pais: e.pais, r, fase: semilla(e.nombre + e.pais), periodo: (r.via === 'arco' ? 1800 : 3200) + 2400 * semilla(e.nombre) };
+      if (e.corta) { lista.push({ ...base, n: e.corta, corta: true, pulsos: Math.min(4, 1 + Math.floor(e.corta / 1.5)) }); r.cortan++; }
+      if (e.queda) { lista.push({ ...base, n: e.queda, corta: false, pulsos: Math.min(4, 1 + Math.floor(e.queda / 1.5)) }); r.quedan++; }
+    }
+    return { arcos: lista, rutas: [...rutas.values()] };
   }
 
   // ---------- drawing (in the planet's clean mode) ----------
@@ -108,8 +140,35 @@
     const w = cx.measureText(texto).width; if (!cabe(x, y, w, fuerte ? 15 : 13)) return false;
     cx.lineWidth = 3; cx.strokeStyle = 'rgba(6,8,12,.86)'; cx.strokeText(texto, x, y); cx.fillStyle = color || (fuerte ? '#F4F6F8' : 'rgba(232,236,241,.82)'); cx.fillText(texto, x, y); return true;
   }
+  // the belt of geostationary orbits: a ring over the equator, hidden where the planet is in front; the near half brighter
+  function anillo(cx, p, G, a) {
+    if (a <= 0) return; const N = 360, cerca = [], lejos = [];
+    for (let i = 0; i <= N; i++) {
+      const l = i / N * 2 * Math.PI, v = p.aVista([Math.sin(l) * SAT_ALTO, 0, Math.cos(l) * SAT_ALTO]), x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
+      const ve = v[2] > 0 || v[0] * v[0] + v[1] * v[1] > 1;
+      cerca.push(ve && v[2] >= 0 ? [x, y] : null); lejos.push(ve && v[2] < 0 ? [x, y] : null);
+    }
+    const traza = (pts) => { let prev = false; cx.beginPath(); for (const q of pts) { if (q && prev) cx.lineTo(q[0], q[1]); else if (q) cx.moveTo(q[0], q[1]); prev = !!q; } cx.stroke(); };
+    cx.save(); cx.setLineDash([2, 6]); cx.lineWidth = 1;
+    cx.strokeStyle = `rgba(${ACENTO},${(0.16 * a).toFixed(3)})`; traza(lejos);
+    cx.strokeStyle = `rgba(${ACENTO},${(0.4 * a).toFixed(3)})`; traza(cerca);
+    cx.restore();
+  }
+  // the satellite itself (viaje.js, «dibujoSatelite»): body, boom and two solar panels with their cells, in a soft glow
+  function dibujoSatelite(cx, q, a) {
+    const [x, y] = q; cx.save(); cx.globalAlpha = a;
+    const g = cx.createRadialGradient(x, y, 0, x, y, 22); g.addColorStop(0, 'rgba(255,255,255,.5)'); g.addColorStop(0.4, `rgba(${ACENTO},.18)`); g.addColorStop(1, `rgba(${ACENTO},0)`); cx.fillStyle = g; cx.beginPath(); cx.arc(x, y, 22, 0, 7); cx.fill();
+    cx.strokeStyle = `rgba(${BLANCO},.85)`; cx.lineWidth = 1; cx.beginPath(); cx.moveTo(x - 7, y); cx.lineTo(x + 7, y); cx.stroke();
+    for (const s of [-1, 1]) {
+      const x0 = s < 0 ? x - 19 : x + 7; cx.fillStyle = `rgba(${ACENTO},.92)`; cx.fillRect(x0, y - 3.5, 12, 7);
+      cx.strokeStyle = 'rgba(6,8,12,.55)'; cx.lineWidth = 0.8; cx.beginPath(); for (const k of [4, 8]) { cx.moveTo(x0 + k, y - 3.5); cx.lineTo(x0 + k, y + 3.5); } cx.moveTo(x0, y); cx.lineTo(x0 + 12, y); cx.stroke();
+    }
+    cx.fillStyle = '#F4F6F8'; cx.fillRect(x - 3.5, y - 3.5, 7, 7);
+    cx.strokeStyle = 'rgba(244,246,248,.9)'; cx.lineWidth = 1; cx.beginPath(); cx.arc(x, y + 6.5, 3, Math.PI * 1.15, Math.PI * 1.85, true); cx.stroke(); // the dish, facing the Earth
+    cx.restore();
+  }
   function pinta(cx, p, G, t) {
-    if (!E || !E.arcos) return;
+    if (!E || !E.arcos || !E.rutas) return;
     const now = performance.now(), L = origen(); if (!L) return;
     CAJAS = [];
     // mezcla: 0 = without, 1 = with; it glides, so the cut arcs fold back to you instead of vanishing
@@ -120,41 +179,43 @@
     const casa = (() => { const v = p.aVista(vec(L.lon, L.lat).map((c) => c * 1.004)); return v[2] > 0 ? [G.CX + G.R * v[0], G.CY - G.R * v[1]] : null; })();
     const anilloR = Math.max(16, Math.min(34, 14 + G.R * 0.035));
     if (casa) CAJAS.push([casa[0] - 16, casa[1] - 16, casa[0] + 16, casa[1] + 16]); // the planet's own marker for you
-    // screen points of every arc, once per frame
-    for (const a of E.arcos) {
-      const pts = a.pts || (a.pts = new Array(a.N + 1));
-      for (let i = 0; i <= a.N; i++) { const v = p.aVista(a.w[i]); pts[i] = (v[2] > 0 || v[0] * v[0] + v[1] * v[1] > 1) ? [G.CX + G.R * v[0], G.CY - G.R * v[1]] : null; }
-      // where the arc leaves GUARDIANA's ring around you: the cut ones stop there
-      a.sale = a.N;
-      if (casa) for (let i = 1; i <= a.N; i++) { const q = pts[i]; if (q && Math.hypot(q[0] - casa[0], q[1] - casa[1]) > anilloR) { a.sale = i; break; } }
-      a.largo = a.corta ? Math.max(a.sale, Math.round(a.N - (a.N - a.sale) * mez)) : a.N;
+    // screen points of every trayecto, once per frame
+    for (const r of E.rutas) {
+      const pts = r.pts;
+      for (let i = 0; i <= r.N; i++) { const w = r.w[i], v = p.aVista(w), alto = w[0] * w[0] + w[1] * w[1] + w[2] * w[2] > 1.02; pts[i] = (v[2] > 0.02 || (alto && v[0] * v[0] + v[1] * v[1] > 1)) ? [G.CX + G.R * v[0], G.CY - G.R * v[1]] : null; }
+      // where it leaves GUARDIANA's ring around you: what is cut stops there
+      r.sale = r.N;
+      if (casa) for (let i = 1; i <= r.N; i++) { const q = pts[i]; if (q && Math.hypot(q[0] - casa[0], q[1] - casa[1]) > anilloR) { r.sale = i; break; } }
+      r.largoCorta = Math.max(r.sale, Math.round(r.N - (r.N - r.sale) * mez));
     }
-    // 1 · the arcs themselves, faint
-    for (const a of E.arcos) {
-      const pts = a.pts, rojo = a.corta && mez > 0.02;
-      const alfa = (a.corta ? 0.16 + 0.1 * mez : 0.17 + 0.07 * mez) * aparece;
-      cx.strokeStyle = rojo ? `rgba(${ROJO},${(alfa * (0.4 + 0.6 * mez) + 0.12 * (1 - mez)).toFixed(3)})` : `rgba(${ACENTO},${alfa.toFixed(3)})`;
-      cx.lineWidth = a.corta ? 1 : 1.1;
+    // 1 · the trayectos, faint: cables hug the planet, the satellite hops are dashed; a trayecto that only cut
+    //     companies use folds back to you in red
+    for (const r of E.rutas) {
+      const pts = r.pts, soloCorta = r.quedan === 0, largo = soloCorta ? r.largoCorta : r.N, uso = r.cortan + r.quedan;
+      const alfa = Math.min(0.5, (r.via === 'cable' ? 0.14 : 0.12) + 0.025 * uso) * aparece;
+      cx.strokeStyle = soloCorta && mez > 0.02 ? `rgba(${ROJO},${(alfa * (0.5 + 0.5 * mez) + 0.1 * (1 - mez)).toFixed(3)})` : `rgba(${ACENTO},${alfa.toFixed(3)})`;
+      cx.lineWidth = r.via === 'cable' ? 1.3 : 1;
+      if (r.via === 'sat') cx.setLineDash([3, 4]);
       cx.beginPath(); let prev = false;
-      for (let i = 0; i <= a.largo; i++) { const q = pts[i]; if (q && prev) cx.lineTo(q[0], q[1]); else if (q) cx.moveTo(q[0], q[1]); prev = !!q; }
-      cx.stroke();
+      for (let i = 0; i <= largo; i++) { const q = pts[i]; if (q && prev) cx.lineTo(q[0], q[1]); else if (q) cx.moveTo(q[0], q[1]); prev = !!q; }
+      cx.stroke(); cx.setLineDash([]);
     }
-    // 2 · the pulses: what leaves your browser. Without GUARDIANA all of them reach their country; with it, the cut
-    //     ones burst red against the ring around you
+    // 2 · the pulses: what leaves your browser, company by company. Without GUARDIANA all of them reach their country;
+    //     with it, the cut ones burst red against the ring around you
     cx.globalCompositeOperation = 'lighter';
     const quieto = reducido();
     for (const a of E.arcos) {
-      const pts = a.pts, tope = a.largo;
+      const r = a.r, pts = r.pts, tope = a.corta ? r.largoCorta : r.N;
       for (let k = 0; k < a.pulsos; k++) {
         const f = quieto ? 0.62 : (((now + a.fase * a.periodo + k * a.periodo / a.pulsos) / a.periodo) % 1);
         const cab = Math.round(f * tope), rojo = a.corta && mez > 0.5;
         if (a.corta && mez > 0.5 && cab >= tope - 1) {
           // the cut: a red flash where the pulse meets the ring
-          const q = pts[tope]; if (!q) continue; const r = 3 + 9 * ((f * tope - (tope - 1)) % 1);
-          const g = cx.createRadialGradient(q[0], q[1], 0, q[0], q[1], r + 6); g.addColorStop(0, `rgba(${ROJO},.95)`); g.addColorStop(1, `rgba(${ROJO},0)`);
-          cx.fillStyle = g; cx.beginPath(); cx.arc(q[0], q[1], r + 6, 0, 7); cx.fill(); continue;
+          const q = pts[tope]; if (!q) continue; const rr = 3 + 9 * ((f * tope - (tope - 1)) % 1);
+          const g = cx.createRadialGradient(q[0], q[1], 0, q[0], q[1], rr + 6); g.addColorStop(0, `rgba(${ROJO},.95)`); g.addColorStop(1, `rgba(${ROJO},0)`);
+          cx.fillStyle = g; cx.beginPath(); cx.arc(q[0], q[1], rr + 6, 0, 7); cx.fill(); continue;
         }
-        const largoCola = Math.max(4, Math.round(tope * 0.16));
+        const largoCola = Math.max(4, Math.round(tope * 0.1));
         for (let i = Math.max(1, cab - largoCola); i <= cab; i++) {
           const q0 = pts[i - 1], q1 = pts[i]; if (!q0 || !q1) continue;
           const v = 1 - (cab - i) / largoCola; if (v <= 0) continue;
@@ -166,6 +227,16 @@
         g.addColorStop(0, rojo ? 'rgba(255,236,232,.95)' : `rgba(255,255,255,${(0.9 * aparece).toFixed(3)})`); g.addColorStop(0.4, rojo ? `rgba(${ROJO},.7)` : `rgba(${ACENTO},${(0.6 * aparece).toFixed(3)})`); g.addColorStop(1, `rgba(${rojo ? ROJO : ACENTO},0)`);
         cx.fillStyle = g; cx.beginPath(); cx.arc(q[0], q[1], R, 0, 7); cx.fill();
       }
+    }
+    // the satellites the hops go through, and the belt of geostationary orbits: the same as in the journey
+    cx.globalCompositeOperation = 'source-over';
+    if (E.rutas.some((r) => r.sat)) anillo(cx, p, G, aparece);
+    let rotulado = false;
+    for (const r of E.rutas) {
+      if (!r.sat) continue; const v = p.aVista(r.sat); if (v[2] < 0 && v[0] * v[0] + v[1] * v[1] < 1) continue;
+      const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
+      dibujoSatelite(cx, [x, y], aparece);
+      if (!rotulado) rotulado = etiqueta(cx, x + 24, y - 14, T('Órbita geoestacionaria') + ' · ' + T('no a escala'), false);
     }
     cx.globalCompositeOperation = 'source-over';
     // 3 · GUARDIANA's ring around you (with GUARDIANA)
@@ -233,7 +304,7 @@
       + '<div class="sitios" role="radiogroup" aria-label="Webs medidas"></div>'
       + '<div class="paises"><div class="k2">País de la sede de cada empresa</div><ol></ol></div>'
       + '<button type="button" class="ver"><span>Ver las empresas</span> <b class="n" translate="no"></b></button>'
-      + '<p class="met">Medido el <span class="fecha2"></span> desde Colombia, en un navegador sin bloqueadores y aceptando las cookies cuando la web las pidió. Cuenta mínima: lo que pasa dentro de los anuncios no se ve. <b>Datos verificados</b></p>';
+      + '<p class="met"><span>Medido el</span> <span class="fecha2"></span> <span>desde Colombia, en un navegador sin bloqueadores y aceptando las cookies cuando la web las pidió. Cuenta mínima: lo que pasa dentro de los anuncios no se ve.</span> <span>Los trayectos son ilustrativos: van por los cables y satélites del mapa, no por la ruta real de cada dato.</span> <b>Datos verificados</b></p>';
     document.body.append(hud);
     hud.querySelector('.ver').addEventListener('click', () => muestraLista(!lista || lista.hidden));
     return hud;
@@ -315,8 +386,9 @@
   }
 
   // ---------- opening, choosing, closing ----------
+  function rehace() { const x = arcos(E.res); E.arcos = x.arcos; E.rutas = x.rutas; }
   function elige(sitio) {
-    if (!E) return; E.sitio = sitio; E.res = resumen(sitio); E.arcos = arcos(E.res); E.tSel = performance.now(); pintaHud(); encuadra();
+    if (!E) return; E.sitio = sitio; E.res = resumen(sitio); rehace(); E.tSel = performance.now(); pintaHud(); encuadra();
   }
   async function abre(modo) {
     if (document.body.classList.contains('viaje') || document.body.classList.contains('dentro')) return;
@@ -330,6 +402,8 @@
       document.body.classList.add('en-espejo');
       if (window.OrbitaCapas) window.OrbitaCapas.soloTu(true, pinta);
       elige('todas');
+      // the map's network, so the trayectos go along the cables; meanwhile a sheaf of arcs
+      const Rd = window.OrbitaRed; if (Rd && !Rd.lista) Rd.prepara().then((si) => { if (si && E) rehace(); });
     } else if (E.modo !== modo) { E.modo = modo; E.tModo = performance.now(); pintaHud(); }
   }
   function cierra() {
