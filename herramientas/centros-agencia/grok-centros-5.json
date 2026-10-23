@@ -1,0 +1,562 @@
+[
+{
+"nombre": "datamena Dubai",
+"ciudad": "Dubái",
+"pais": "AE",
+"lat": 25.2,
+"lon": 55.27,
+"estado": "ok"
+},
+{
+"nombre": "Khazna AUH6",
+"ciudad": "Abu Dabi",
+"pais": "AE",
+"lat": 24.43,
+"lon": 54.61,
+"estado": "ok"
+},
+{
+"nombre": "National Data Center Dhaka",
+"ciudad": "Daca",
+"pais": "BD",
+"lat": 23.81,
+"lon": 90.37,
+"estado": "ok"
+},
+{
+"nombre": "Batelco White Space Data Centre",
+"ciudad": "Askar",
+"pais": "BH",
+"lat": 26.05,
+"lon": 50.6,
+"estado": "ok"
+},
+{
+"nombre": "AirTrunk HKG1",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.37,
+"lon": 114.12,
+"estado": "ok"
+},
+{
+"nombre": "Equinix HK1",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.37,
+"lon": 114.11,
+"estado": "ok"
+},
+{
+"nombre": "Equinix HK2",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.37,
+"lon": 114.12,
+"estado": "ok"
+},
+{
+"nombre": "Equinix HK3",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.32,
+"lon": 114.26,
+"estado": "ok"
+},
+{
+"nombre": "Equinix HK4",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.38,
+"lon": 114.19,
+"estado": "ok"
+},
+{
+"nombre": "Equinix HK5",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.3,
+"lon": 114.26,
+"estado": "ok"
+},
+{
+"nombre": "SUNeVision MEGA Gateway",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.37,
+"lon": 114.12,
+"estado": "ok"
+},
+{
+"nombre": "SUNeVision MEGA-i",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.28,
+"lon": 114.18,
+"estado": "ok"
+},
+{
+"nombre": "SUNeVision MEGA Plus",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.3,
+"lon": 114.26,
+"estado": "ok"
+},
+{
+"nombre": "SUNeVision MEGA Two",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.4,
+"lon": 114.18,
+"estado": "ok"
+},
+{
+"nombre": "DCI Indonesia JK1",
+"ciudad": "Cibitung",
+"pais": "ID",
+"lat": -6.26,
+"lon": 107.1,
+"estado": "ok"
+},
+{
+"nombre": "MedOne PT1",
+"ciudad": "Petah Tikva",
+"pais": "IL",
+"lat": 32.09,
+"lon": 34.89,
+"estado": "ok"
+},
+{
+"nombre": "MedOne RM1",
+"ciudad": "Ramla",
+"pais": "IL",
+"lat": 31.93,
+"lon": 34.87,
+"estado": "ok"
+},
+{
+"nombre": "MedOne TC1",
+"ciudad": "Tirat Carmel",
+"pais": "IL",
+"lat": 32.76,
+"lon": 34.97,
+"estado": "ok"
+},
+{
+"nombre": "MedOne TC2",
+"ciudad": "Tirat Carmel",
+"pais": "IL",
+"lat": 32.76,
+"lon": 34.97,
+"estado": "ok"
+},
+{
+"nombre": "Equinix CN1",
+"ciudad": "Chennai",
+"pais": "IN",
+"lat": 12.82,
+"lon": 80.22,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MB1",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.12,
+"lon": 72.9,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MB2",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.12,
+"lon": 72.89,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MB3",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.11,
+"lon": 72.89,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MB4",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.16,
+"lon": 72.99,
+"estado": "ok"
+},
+{
+"nombre": "NTT Chennai 1",
+"ciudad": "Chennai",
+"pais": "IN",
+"lat": 13.05,
+"lon": 80.09,
+"estado": "ok"
+},
+{
+"nombre": "NTT Chennai 2",
+"ciudad": "Chennai",
+"pais": "IN",
+"lat": 13.1,
+"lon": 80.16,
+"estado": "ok"
+},
+{
+"nombre": "NTT Mumbai 5",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.1,
+"lon": 72.87,
+"estado": "ok"
+},
+{
+"nombre": "NTT Mumbai 6",
+"ciudad": "Bombay",
+"pais": "IN",
+"lat": 19.11,
+"lon": 72.89,
+"estado": "ok"
+},
+{
+"nombre": "NTT Navi Mumbai 1A",
+"ciudad": "Navi Mumbai",
+"pais": "IN",
+"lat": 19.11,
+"lon": 73.02,
+"estado": "ok"
+},
+{
+"nombre": "NTT Noida 1",
+"ciudad": "Noida",
+"pais": "IN",
+"lat": 28.54,
+"lon": 77.39,
+"estado": "ok"
+},
+{
+"nombre": "Equinix OS1",
+"ciudad": "Osaka",
+"pais": "JP",
+"lat": 34.67,
+"lon": 135.5,
+"estado": "ok"
+},
+{
+"nombre": "Equinix OS3",
+"ciudad": "Osaka",
+"pais": "JP",
+"lat": 34.68,
+"lon": 135.51,
+"estado": "ok"
+},
+{
+"nombre": "Equinix TY2",
+"ciudad": "Tokio",
+"pais": "JP",
+"lat": 35.66,
+"lon": 139.76,
+"estado": "ok"
+},
+{
+"nombre": "Equinix TY4",
+"ciudad": "Tokio",
+"pais": "JP",
+"lat": 35.63,
+"lon": 139.79,
+"estado": "ok"
+},
+{
+"nombre": "Equinix TY8",
+"ciudad": "Tokio",
+"pais": "JP",
+"lat": 35.7,
+"lon": 139.75,
+"estado": "ok"
+},
+{
+"nombre": "Telehouse Tokyo Tama 3",
+"ciudad": "Tama",
+"pais": "JP",
+"lat": 35.64,
+"lon": 139.45,
+"estado": "ok"
+},
+{
+"nombre": "Equinix SL1",
+"ciudad": "Seúl",
+"pais": "KR",
+"lat": 37.58,
+"lon": 126.89,
+"estado": "ok"
+},
+{
+"nombre": "Equinix SL4",
+"ciudad": "Seúl",
+"pais": "KR",
+"lat": 37.62,
+"lon": 126.87,
+"estado": "ok"
+},
+{
+"nombre": "KT Mokdong IDC",
+"ciudad": "Seúl",
+"pais": "KR",
+"lat": 37.53,
+"lon": 126.87,
+"estado": "ok"
+},
+{
+"nombre": "LG U+ Pyeongchon IDC",
+"ciudad": "Anyang",
+"pais": "KR",
+"lat": 37.39,
+"lon": 126.96,
+"estado": "ok"
+},
+{
+"nombre": "Ooredoo Kuwait Data Center",
+"ciudad": "Ciudad de Kuwait",
+"pais": "KW",
+"lat": 29.37,
+"lon": 47.98,
+"estado": "ok"
+},
+{
+"nombre": "Dialog Piliyandala Data Centre",
+"ciudad": "Piliyandala",
+"pais": "LK",
+"lat": 6.8,
+"lon": 79.92,
+"estado": "ok"
+},
+{
+"nombre": "AIMS KL2 Bangunan AIMS",
+"ciudad": "Kuala Lumpur",
+"pais": "MY",
+"lat": 3.15,
+"lon": 101.7,
+"estado": "ok"
+},
+{
+"nombre": "AirTrunk JHB1",
+"ciudad": "Johor Bahru",
+"pais": "MY",
+"lat": 1.42,
+"lon": 103.62,
+"estado": "ok"
+},
+{
+"nombre": "Equinix JH1",
+"ciudad": "Johor",
+"pais": "MY",
+"lat": 1.42,
+"lon": 103.65,
+"estado": "ok"
+},
+{
+"nombre": "Equinix KL1",
+"ciudad": "Cyberjaya",
+"pais": "MY",
+"lat": 2.92,
+"lon": 101.66,
+"estado": "ok"
+},
+{
+"nombre": "Datamount Al Bandar",
+"ciudad": "Mascate",
+"pais": "OM",
+"lat": 23.61,
+"lon": 58.54,
+"estado": "ok"
+},
+{
+"nombre": "Datamount Jabal Al Akhdar",
+"ciudad": "Jabal Al Akhdar",
+"pais": "OM",
+"lat": 23.07,
+"lon": 57.65,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MC1",
+"ciudad": "Barka",
+"pais": "OM",
+"lat": 23.69,
+"lon": 57.89,
+"estado": "ok"
+},
+{
+"nombre": "Equinix SN1",
+"ciudad": "Salalah",
+"pais": "OM",
+"lat": 17.02,
+"lon": 54.09,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MN1",
+"ciudad": "Manila",
+"pais": "PH",
+"lat": 14.55,
+"lon": 121.02,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MN2",
+"ciudad": "Manila",
+"pais": "PH",
+"lat": 14.55,
+"lon": 121.02,
+"estado": "ok"
+},
+{
+"nombre": "VITRO Makati 2",
+"ciudad": "Makati",
+"pais": "PH",
+"lat": 14.55,
+"lon": 121.02,
+"estado": "ok"
+},
+{
+"nombre": "VITRO Sta. Rosa",
+"ciudad": "Santa Rosa",
+"pais": "PH",
+"lat": 14.31,
+"lon": 121.11,
+"estado": "ok"
+},
+{
+"nombre": "Cybernet Karachi Data Center",
+"ciudad": "Karachi",
+"pais": "PK",
+"lat": 24.86,
+"lon": 67.0,
+"estado": "ok"
+},
+{
+"nombre": "PTCL Commercial Data Center Karachi",
+"ciudad": "Karachi",
+"pais": "PK",
+"lat": 24.86,
+"lon": 67.0,
+"estado": "ok"
+},
+{
+"nombre": "MEEZA M-VAULT 1",
+"ciudad": "Doha",
+"pais": "QA",
+"lat": 25.29,
+"lon": 51.53,
+"estado": "ok"
+},
+{
+"nombre": "MEEZA M-VAULT 2",
+"ciudad": "Doha",
+"pais": "QA",
+"lat": 25.29,
+"lon": 51.53,
+"estado": "ok"
+},
+{
+"nombre": "center3 Dammam Data Center",
+"ciudad": "Dammam",
+"pais": "SA",
+"lat": 26.43,
+"lon": 50.1,
+"estado": "ok"
+},
+{
+"nombre": "center3 DC2 Jeddah",
+"ciudad": "Yeda",
+"pais": "SA",
+"lat": 21.49,
+"lon": 39.19,
+"estado": "ok"
+},
+{
+"nombre": "center3 DC3 Riyadh",
+"ciudad": "Riad",
+"pais": "SA",
+"lat": 24.71,
+"lon": 46.67,
+"estado": "ok"
+},
+{
+"nombre": "Equinix SG1",
+"ciudad": "Singapur",
+"pais": "SG",
+"lat": 1.29,
+"lon": 103.79,
+"estado": "ok"
+},
+{
+"nombre": "NTT Serangoon Data Center",
+"ciudad": "Singapur",
+"pais": "SG",
+"lat": 1.35,
+"lon": 103.87,
+"estado": "ok"
+},
+{
+"nombre": "AIMS Bangkok",
+"ciudad": "Bangkok",
+"pais": "TH",
+"lat": 13.75,
+"lon": 100.5,
+"estado": "ok"
+},
+{
+"nombre": "NTT Bangkok Data Center",
+"ciudad": "Bangkok",
+"pais": "TH",
+"lat": 13.7,
+"lon": 100.75,
+"estado": "ok"
+},
+{
+"nombre": "Telehouse Bangkok",
+"ciudad": "Bangkok",
+"pais": "TH",
+"lat": 13.76,
+"lon": 100.57,
+"estado": "ok"
+},
+{
+"nombre": "Chief Telecom HD IDC",
+"ciudad": "Taipéi",
+"pais": "TW",
+"lat": 25.08,
+"lon": 121.58,
+"estado": "ok"
+},
+{
+"nombre": "Chief Telecom LY2 AI Data Center",
+"ciudad": "Taipéi",
+"pais": "TW",
+"lat": 25.08,
+"lon": 121.59,
+"estado": "ok"
+},
+{
+"nombre": "Chief Telecom LY IDC",
+"ciudad": "Taipéi",
+"pais": "TW",
+"lat": 25.08,
+"lon": 121.58,
+"estado": "ok"
+},
+{
+"nombre": "CMC Tan Thuan Data Center",
+"ciudad": "Ciudad Ho Chi Minh",
+"pais": "VN",
+"lat": 10.74,
+"lon": 106.73,
+"estado": "ok"
+}
+]
