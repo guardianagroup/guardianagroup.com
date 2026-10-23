@@ -1,0 +1,1482 @@
+{
+ "nota": "Revisión de la agencia GUARDIANA (Claude, ChatGPT y Grok, 23 Oct 2026) de las redes de The Internet Topology Zoo: fuera los mapas de colecciones históricas y las redes que dos voces no confirman; las absorbidas, con su dueño de hoy cuando dos voces lo nombran igual. La lee fibra_tierra.py.",
+ "redes": {
+  "UUNET": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "GlobalCenter": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "GoodNet": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "InternetMCI": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "IBM": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "DIGEX": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "ANS": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "Sprint": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "AGIS": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "CRL": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "GridNet": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "CWIX": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "BBNplanet": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "PsiNet": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "Compuserve": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "NSF": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "ATMnet": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "Savvis": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "NapNet": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "DataXchange": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "iSTAR": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "Epoch": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "Netrail": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "GetNet": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: nthelp.com (años noventa)"
+  },
+  "BTN": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: isp-planet.com (hacia 1999–2005)"
+  },
+  "Xspedius": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: isp-planet.com (hacia 1999–2005)"
+  },
+  "Electric Lightwave": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: isp-planet.com (hacia 1999–2005)"
+  },
+  "Tecove (level3)": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: isp-planet.com (hacia 1999–2005)"
+  },
+  "Bell Canada": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: isp-planet.com (hacia 1999–2005)"
+  },
+  "Bell South": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: isp-planet.com (hacia 1999–2005)"
+  },
+  "Quest": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: isp-planet.com (hacia 1999–2005)"
+  },
+  "Oxford": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: isp-planet.com (hacia 1999–2005)"
+  },
+  "Sago": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: isp-planet.com (hacia 1999–2005)"
+  },
+  "Gambia": {
+   "accion": "quita",
+   "motivo": "Mapa de una colección histórica: mapa de 2001"
+  },
+  "BT North America": {
+   "accion": "deja",
+   "operador": "BT North America",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "absorbida → BT"
+   }
+  },
+  "China Telecom": {
+   "accion": "deja",
+   "operador": "China Telecom",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "TW Telecom": {
+   "accion": "deja",
+   "operador": "Lumen Technologies",
+   "red": "TW Telecom",
+   "voces": {
+    "claude": "absorbida → Lumen Technologies",
+    "chatgpt": "absorbida → Lumen Technologies",
+    "grok": "absorbida → Lumen Technologies"
+   }
+  },
+  "ATT North America": {
+   "accion": "deja",
+   "operador": "AT&T",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Cogent": {
+   "accion": "deja",
+   "operador": "Cogent",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Kentucky Datalink": {
+   "accion": "deja",
+   "operador": "Uniti (Windstream)",
+   "red": "Kentucky Datalink",
+   "voces": {
+    "claude": "absorbida → Uniti (Windstream)",
+    "chatgpt": "absorbida → Uniti (Windstream)",
+    "grok": "absorbida → Uniti (Windstream)"
+   }
+  },
+  "Cernet": {
+   "accion": "deja",
+   "operador": "CERNET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Tinet": {
+   "accion": "deja",
+   "operador": "GTT Communications",
+   "red": "Tinet",
+   "voces": {
+    "claude": "absorbida → GTT Communications",
+    "chatgpt": "absorbida → GTT Communications",
+    "grok": "absorbida → GTT Communications"
+   }
+  },
+  "NTT": {
+   "accion": "deja",
+   "operador": "NTT",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "ULAKNET": {
+   "accion": "deja",
+   "operador": "ULAKNET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Highwinds": {
+   "accion": "deja",
+   "operador": "",
+   "red": "Highwinds",
+   "voces": {
+    "claude": "absorbida",
+    "chatgpt": "desaparecida",
+    "grok": "absorbida → StackPath"
+   }
+  },
+  "Hibernia Atlantic": {
+   "accion": "deja",
+   "operador": "EXA Infrastructure",
+   "red": "Hibernia Atlantic",
+   "voces": {
+    "claude": "absorbida → EXA Infrastructure",
+    "chatgpt": "absorbida → EXA Infrastructure",
+    "grok": "absorbida → EXA Infrastructure"
+   }
+  },
+  "GTS CE": {
+   "accion": "deja",
+   "operador": "Deutsche Telekom",
+   "red": "GTS CE",
+   "voces": {
+    "claude": "absorbida → Deutsche Telekom",
+    "chatgpt": "absorbida → Deutsche Telekom",
+    "grok": "absorbida → Deutsche Telekom"
+   }
+  },
+  "Xeex": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "RNP": {
+   "accion": "deja",
+   "operador": "RNP",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Colt Telecom": {
+   "accion": "deja",
+   "operador": "Colt",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Bandcon": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "desaparecida",
+    "grok": "absorbida → StackPath"
+   }
+  },
+  "GEANT": {
+   "accion": "deja",
+   "operador": "GEANT",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Integra Telecom": {
+   "accion": "deja",
+   "operador": "Zayo",
+   "red": "Integra Telecom",
+   "voces": {
+    "claude": "absorbida → Zayo",
+    "chatgpt": "absorbida → Zayo",
+    "grok": "absorbida → Zayo"
+   }
+  },
+  "Interroute": {
+   "accion": "deja",
+   "operador": "EXA Infrastructure",
+   "red": "Interroute",
+   "voces": {
+    "claude": "absorbida → EXA Infrastructure",
+    "chatgpt": "absorbida → EXA Infrastructure",
+    "grok": "absorbida → GTT Communications"
+   }
+  },
+  "Canerie": {
+   "accion": "deja",
+   "operador": "CANARIE",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Deutsche Telekom": {
+   "accion": "deja",
+   "operador": "Deutsche Telekom",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "ESnet": {
+   "accion": "deja",
+   "operador": "ESnet",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Packet Exchange": {
+   "accion": "deja",
+   "operador": "GTT Communications",
+   "red": "Packet Exchange",
+   "voces": {
+    "claude": "absorbida → GTT Communications",
+    "chatgpt": "absorbida → GTT Communications",
+    "grok": "no_se"
+   }
+  },
+  "AboveNet": {
+   "accion": "deja",
+   "operador": "Zayo",
+   "red": "AboveNet",
+   "voces": {
+    "claude": "absorbida → Zayo",
+    "chatgpt": "absorbida → Zayo",
+    "grok": "absorbida → Zayo"
+   }
+  },
+  "ITC Deltacom": {
+   "accion": "deja",
+   "operador": "Uniti (Windstream)",
+   "red": "ITC Deltacom",
+   "voces": {
+    "claude": "absorbida → Uniti (Windstream)",
+    "chatgpt": "absorbida → Uniti (Windstream)",
+    "grok": "absorbida → EarthLink"
+   }
+  },
+  "peer1": {
+   "accion": "deja",
+   "operador": "Aptum Technologies",
+   "red": "peer1",
+   "voces": {
+    "claude": "absorbida → Aptum Technologies",
+    "chatgpt": "absorbida → Aptum Technologies",
+    "grok": "absorbida → Cogeco"
+   }
+  },
+  "Abilene": {
+   "accion": "deja",
+   "operador": "Internet2",
+   "red": "Abilene",
+   "voces": {
+    "claude": "absorbida → Internet2",
+    "chatgpt": "absorbida → Internet2",
+    "grok": "absorbida → Internet2"
+   }
+  },
+  "Darkstrand": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "BICS": {
+   "accion": "deja",
+   "operador": "BICS",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Hostway International": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "IIJ": {
+   "accion": "deja",
+   "operador": "IIJ",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Navigata": {
+   "accion": "deja",
+   "operador": "",
+   "red": "Navigata",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "absorbida → Bell Canada",
+    "grok": "absorbida → Telus"
+   }
+  },
+  "BT Europe": {
+   "accion": "deja",
+   "operador": "BT Europe",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "GlobeNet": {
+   "accion": "deja",
+   "operador": "GlobeNet",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "absorbida → V.tal",
+    "grok": "existe"
+   }
+  },
+  "ERNET": {
+   "accion": "deja",
+   "operador": "ERNET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Hurricane Electric": {
+   "accion": "deja",
+   "operador": "Hurricane Electric",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "BT Latin America": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "existe",
+    "grok": "absorbida → BT"
+   }
+  },
+  "US Carrier": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "absorbida → Zayo",
+    "grok": "no_se"
+   }
+  },
+  "Bestel": {
+   "accion": "deja",
+   "operador": "Grupo Televisa",
+   "red": "Bestel",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "absorbida → Grupo Televisa",
+    "grok": "absorbida → Grupo Televisa"
+   }
+  },
+  "AARNET": {
+   "accion": "deja",
+   "operador": "AARNet",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Intellifiber": {
+   "accion": "deja",
+   "operador": "Uniti (Windstream)",
+   "red": "Intellifiber",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "absorbida → Uniti (Windstream)",
+    "grok": "absorbida → Uniti (Windstream)"
+   }
+  },
+  "Uninett": {
+   "accion": "deja",
+   "operador": "Sikt (Uninett)",
+   "voces": {
+    "claude": "absorbida → Sikt",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "DFN": {
+   "accion": "deja",
+   "operador": "DFN",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "OTEGlobe": {
+   "accion": "deja",
+   "operador": "",
+   "red": "OTEGlobe",
+   "voces": {
+    "claude": "absorbida → OTE",
+    "chatgpt": "existe",
+    "grok": "absorbida → Deutsche Telekom"
+   }
+  },
+  "Layer42": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "Hibernia Atlantic (US)": {
+   "accion": "deja",
+   "operador": "EXA Infrastructure",
+   "red": "Hibernia Atlantic (US)",
+   "voces": {
+    "claude": "absorbida → EXA Infrastructure",
+    "chatgpt": "absorbida → EXA Infrastructure",
+    "grok": "absorbida → EXA Infrastructure"
+   }
+  },
+  "IINET": {
+   "accion": "deja",
+   "operador": "TPG Telecom",
+   "red": "IINET",
+   "voces": {
+    "claude": "absorbida → TPG Telecom",
+    "chatgpt": "absorbida → TPG Telecom",
+    "grok": "absorbida → TPG Telecom"
+   }
+  },
+  "RedIris": {
+   "accion": "deja",
+   "operador": "RedIRIS",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Renater": {
+   "accion": "deja",
+   "operador": "RENATER",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Hibernia Atlantic (Canada)": {
+   "accion": "deja",
+   "operador": "EXA Infrastructure",
+   "red": "Hibernia Atlantic (Canada)",
+   "voces": {
+    "claude": "absorbida → EXA Infrastructure",
+    "chatgpt": "absorbida → EXA Infrastructure",
+    "grok": "absorbida → EXA Infrastructure"
+   }
+  },
+  "BSONetworkSolutions": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "absorbida → BSO",
+    "grok": "no_se"
+   }
+  },
+  "VinaREN": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "existe"
+   }
+  },
+  "Claranet": {
+   "accion": "deja",
+   "operador": "Claranet",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Nextgen": {
+   "accion": "deja",
+   "operador": "Vocus",
+   "red": "Nextgen",
+   "voces": {
+    "claude": "absorbida → Vocus",
+    "chatgpt": "absorbida → Vocus",
+    "grok": "absorbida → Vocus"
+   }
+  },
+  "US Signal": {
+   "accion": "deja",
+   "operador": "US Signal",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Janet Backbone": {
+   "accion": "deja",
+   "operador": "Janet Backbone",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Viatel": {
+   "accion": "deja",
+   "operador": "",
+   "red": "Viatel",
+   "voces": {
+    "claude": "absorbida → Zayo",
+    "chatgpt": "no_se",
+    "grok": "absorbida → EXA Infrastructure"
+   }
+  },
+  "Internode": {
+   "accion": "deja",
+   "operador": "TPG Telecom",
+   "red": "Internode",
+   "voces": {
+    "claude": "absorbida → TPG Telecom",
+    "chatgpt": "absorbida → TPG Telecom",
+    "grok": "absorbida → TPG Telecom"
+   }
+  },
+  "GTS Romania": {
+   "accion": "deja",
+   "operador": "Deutsche Telekom",
+   "red": "GTS Romania",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "absorbida → Deutsche Telekom",
+    "grok": "absorbida → Deutsche Telekom"
+   }
+  },
+  "GARR": {
+   "accion": "deja",
+   "operador": "GARR",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "ION": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "Sinet": {
+   "accion": "deja",
+   "operador": "SINET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "PalmettoNet": {
+   "accion": "deja",
+   "operador": "Segra",
+   "red": "PalmettoNet",
+   "voces": {
+    "claude": "absorbida → Segra",
+    "chatgpt": "absorbida → Segra",
+    "grok": "absorbida → Spirit Communications"
+   }
+  },
+  "PIONIER": {
+   "accion": "deja",
+   "operador": "PIONIER",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "LATNET": {
+   "accion": "deja",
+   "operador": "LATNET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "no_se",
+    "grok": "existe"
+   }
+  },
+  "CESNET": {
+   "accion": "deja",
+   "operador": "CESNET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "SWITCH": {
+   "accion": "deja",
+   "operador": "SWITCH",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "URAN": {
+   "accion": "deja",
+   "operador": "URAN",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "ARN": {
+   "accion": "deja",
+   "operador": "ARN",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Network USA": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "NTELOS": {
+   "accion": "deja",
+   "operador": "",
+   "red": "NTELOS",
+   "voces": {
+    "claude": "absorbida → Segra",
+    "chatgpt": "absorbida → Deutsche Telekom",
+    "grok": "absorbida → Shentel"
+   }
+  },
+  "EvoLink": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "existe",
+    "grok": "no_se"
+   }
+  },
+  "Pacific-Wave": {
+   "accion": "deja",
+   "operador": "Pacific-Wave",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Missouri Network Alliance": {
+   "accion": "deja",
+   "operador": "Bluebird Network",
+   "red": "Missouri Network Alliance",
+   "voces": {
+    "claude": "absorbida → Bluebird Network",
+    "chatgpt": "absorbida → Bluebird Network",
+    "grok": "no_se"
+   }
+  },
+  "FORTHNET": {
+   "accion": "deja",
+   "operador": "Nova (United Group)",
+   "red": "FORTHNET",
+   "voces": {
+    "claude": "absorbida → Nova (United Group)",
+    "chatgpt": "absorbida → Nova (United Group)",
+    "grok": "absorbida → Nova (United Group)"
+   }
+  },
+  "LITNET": {
+   "accion": "deja",
+   "operador": "LITNET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "GTS Poland": {
+   "accion": "deja",
+   "operador": "Deutsche Telekom",
+   "red": "GTS Poland",
+   "voces": {
+    "claude": "absorbida → Deutsche Telekom",
+    "chatgpt": "absorbida → Deutsche Telekom",
+    "grok": "absorbida → Deutsche Telekom"
+   }
+  },
+  "NIIF": {
+   "accion": "deja",
+   "operador": "KIFÜ",
+   "red": "NIIF",
+   "voces": {
+    "claude": "absorbida → KIFÜ",
+    "chatgpt": "absorbida → KIFÜ",
+    "grok": "existe"
+   }
+  },
+  "IRIS Networks": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "existe",
+    "grok": "no_se"
+   }
+  },
+  "RoEduNet": {
+   "accion": "deja",
+   "operador": "RoEduNet",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "FUNET": {
+   "accion": "deja",
+   "operador": "FUNET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "euNetworks": {
+   "accion": "deja",
+   "operador": "euNetworks",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Vision Net": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "existe",
+    "grok": "no_se"
+   }
+  },
+  "GTS Hungary": {
+   "accion": "deja",
+   "operador": "Deutsche Telekom",
+   "red": "GTS Hungary",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "absorbida → Deutsche Telekom",
+    "grok": "absorbida → Deutsche Telekom"
+   }
+  },
+  "Myren": {
+   "accion": "deja",
+   "operador": "MYREN",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "FCCN": {
+   "accion": "deja",
+   "operador": "FCCN",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Lambdanet": {
+   "accion": "deja",
+   "operador": "euNetworks",
+   "red": "Lambdanet",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "absorbida → euNetworks",
+    "grok": "absorbida → euNetworks"
+   }
+  },
+  "Noel Communications": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "OPTOSUNET": {
+   "accion": "deja",
+   "operador": "SUNET",
+   "red": "OPTOSUNET",
+   "voces": {
+    "claude": "absorbida → SUNET",
+    "chatgpt": "absorbida → SUNET",
+    "grok": "existe"
+   }
+  },
+  "GTS Slovakia": {
+   "accion": "deja",
+   "operador": "Deutsche Telekom",
+   "red": "GTS Slovakia",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "absorbida → Deutsche Telekom",
+    "grok": "absorbida → Deutsche Telekom"
+   }
+  },
+  "Syringa Networks": {
+   "accion": "deja",
+   "operador": "Syringa Networks",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Dial Telecom": {
+   "accion": "deja",
+   "operador": "",
+   "red": "Dial Telecom",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "absorbida → Quantcom",
+    "grok": "absorbida → CETIN"
+   }
+  },
+  "SURFNET": {
+   "accion": "deja",
+   "operador": "SURF",
+   "red": "SURFNET",
+   "voces": {
+    "claude": "absorbida → SURF",
+    "chatgpt": "absorbida → SURF",
+    "grok": "existe"
+   }
+  },
+  "Reuna": {
+   "accion": "deja",
+   "operador": "Reuna",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "BizNetworks": {
+   "accion": "deja",
+   "operador": "Biznet",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "no_se"
+   }
+  },
+  "WIDE": {
+   "accion": "deja",
+   "operador": "WIDE",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Airtel": {
+   "accion": "deja",
+   "operador": "Airtel",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "GRnet": {
+   "accion": "deja",
+   "operador": "GRNET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "INS IXC Services": {
+   "accion": "deja",
+   "operador": "Aureon",
+   "red": "INS IXC Services",
+   "voces": {
+    "claude": "absorbida → Aureon",
+    "chatgpt": "absorbida → Aureon",
+    "grok": "no_se"
+   }
+  },
+  "Sanren": {
+   "accion": "deja",
+   "operador": "SANReN",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "KAREN": {
+   "accion": "deja",
+   "operador": "KAREN",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "absorbida → REANNZ",
+    "grok": "existe"
+   }
+  },
+  "Carnet": {
+   "accion": "deja",
+   "operador": "CARNET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "PERN": {
+   "accion": "deja",
+   "operador": "PERN",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Itnet": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "EasyNet": {
+   "accion": "deja",
+   "operador": "GTT Communications",
+   "red": "EasyNet",
+   "voces": {
+    "claude": "absorbida → GTT Communications",
+    "chatgpt": "absorbida → GTT Communications",
+    "grok": "absorbida → GTT Communications"
+   }
+  },
+  "GTS Czech Republic": {
+   "accion": "deja",
+   "operador": "Deutsche Telekom",
+   "red": "GTS Czech Republic",
+   "voces": {
+    "claude": "absorbida → Deutsche Telekom",
+    "chatgpt": "absorbida → Deutsche Telekom",
+    "grok": "absorbida → Deutsche Telekom"
+   }
+  },
+  "YorkDataServices": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "ACOnet": {
+   "accion": "deja",
+   "operador": "ACOnet",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "ValleyNet": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "BT Asia-Pacific": {
+   "accion": "deja",
+   "operador": "BT Asia-Pacific",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "absorbida → BT"
+   }
+  },
+  "GlobalNetRu": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "SpiraLight": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "Zamren": {
+   "accion": "deja",
+   "operador": "ZAMREN",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "ARNES": {
+   "accion": "deja",
+   "operador": "ARNES",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "SANET": {
+   "accion": "deja",
+   "operador": "SANET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "MARWAN": {
+   "accion": "deja",
+   "operador": "MARWAN",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "BASNET": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "existe"
+   }
+  },
+  "KREONET": {
+   "accion": "deja",
+   "operador": "KREONET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "JGN2plus-Japan": {
+   "accion": "deja",
+   "operador": "NICT (JGN)",
+   "red": "JGN2plus-Japan",
+   "voces": {
+    "claude": "absorbida → NICT (JGN)",
+    "chatgpt": "absorbida → NICT (JGN)",
+    "grok": "absorbida → NICT (JGN)"
+   }
+  },
+  "AMRES": {
+   "accion": "deja",
+   "operador": "AMRES",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "BREN": {
+   "accion": "deja",
+   "operador": "BREN",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "NORDU": {
+   "accion": "deja",
+   "operador": "NORDUnet",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Hibernia Atlantic (UK)": {
+   "accion": "deja",
+   "operador": "EXA Infrastructure",
+   "red": "Hibernia Atlantic (UK)",
+   "voces": {
+    "claude": "absorbida → EXA Infrastructure",
+    "chatgpt": "absorbida → EXA Infrastructure",
+    "grok": "absorbida → EXA Infrastructure"
+   }
+  },
+  "TelecomSerbia": {
+   "accion": "deja",
+   "operador": "Telekom Srbija",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Janet Lense": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "existe"
+   }
+  },
+  "RHnet": {
+   "accion": "deja",
+   "operador": "RHnet",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "BELNET": {
+   "accion": "deja",
+   "operador": "Belnet",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Shentel": {
+   "accion": "deja",
+   "operador": "Shentel",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "FatMan": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "no_se"
+   }
+  },
+  "Heanet": {
+   "accion": "deja",
+   "operador": "HEAnet",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Uni-C": {
+   "accion": "deja",
+   "operador": "DeiC",
+   "red": "Uni-C",
+   "voces": {
+    "claude": "absorbida → DeiC",
+    "chatgpt": "absorbida → DeiC",
+    "grok": "existe"
+   }
+  },
+  "Hibernia Atlantic (Ireland)": {
+   "accion": "deja",
+   "operador": "EXA Infrastructure",
+   "red": "Hibernia Atlantic (Ireland)",
+   "voces": {
+    "claude": "absorbida → EXA Infrastructure",
+    "chatgpt": "absorbida → EXA Infrastructure",
+    "grok": "absorbida → EXA Infrastructure"
+   }
+  },
+  "EEnet": {
+   "accion": "deja",
+   "operador": "EENet",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Hibernia Atlantic (N. Ireland)": {
+   "accion": "deja",
+   "operador": "EXA Infrastructure",
+   "red": "Hibernia Atlantic (N. Ireland)",
+   "voces": {
+    "claude": "absorbida → EXA Infrastructure",
+    "chatgpt": "absorbida → EXA Infrastructure",
+    "grok": "absorbida → EXA Infrastructure"
+   }
+  },
+  "GRENA": {
+   "accion": "deja",
+   "operador": "GRENA",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Columbus Networks": {
+   "accion": "deja",
+   "operador": "Liberty Latin America",
+   "red": "Columbus Networks",
+   "voces": {
+    "claude": "absorbida → Liberty Latin America",
+    "chatgpt": "absorbida → Liberty Latin America",
+    "grok": "absorbida → Liberty Latin America"
+   }
+  },
+  "ILAN": {
+   "accion": "deja",
+   "operador": "ILAN",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "MREN": {
+   "accion": "deja",
+   "operador": "MREN",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "no_se",
+    "grok": "existe"
+   }
+  },
+  "Renam": {
+   "accion": "deja",
+   "operador": "RENAM",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "MARNET": {
+   "accion": "deja",
+   "operador": "MARnet",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "KentMan": {
+   "accion": "quita",
+   "motivo": "Sin dos voces que confirmen que sigue operando",
+   "voces": {
+    "claude": "no_se",
+    "chatgpt": "no_se",
+    "grok": "existe"
+   }
+  },
+  "Restena": {
+   "accion": "deja",
+   "operador": "RESTENA",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  },
+  "Cynet": {
+   "accion": "deja",
+   "operador": "CYNET",
+   "voces": {
+    "claude": "existe",
+    "chatgpt": "existe",
+    "grok": "existe"
+   }
+  }
+ }
+}

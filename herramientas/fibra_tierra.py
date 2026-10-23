@@ -214,7 +214,16 @@ def zoo():
         d = json.load(open(p, encoding='utf-8'))
     except Exception as e:
         print('Topology Zoo: no se pudo leer', p, '·', e); return [], None
-    out = []
+    # the agency's review, network by network (zoo_agencia.py, 23 Oct 2026): historical maps and networks that two voices
+    # do not confirm stay out; absorbed ones carry today's owner (when two voices name the same one) and the map's network
+    dec = {}
+    pd = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'zoo-agencia', 'decisiones.json')
+    if os.path.exists(pd):
+        try:
+            dec = json.load(open(pd, encoding='utf-8')).get('redes') or {}
+        except Exception as e:
+            print('Topology Zoo: no se pudo leer la revisión de la agencia ·', e)
+    out, fuera = [], 0
     for c in d.get('lineas', []):
         l = c.get('l') or []
         if len(l) < 2 or not all(isinstance(q, list) and len(q) >= 2 for q in l):
@@ -222,7 +231,19 @@ def zoo():
         x = {'n': c.get('n', ''), 'o': c.get('o', ''), 'cc': c.get('cc', '') or '', 'e': 'obra' if c.get('obra') else 'ok', 'l': [q[:2] for q in l]}
         if c.get('anio'):
             x['anio'] = c['anio']
+        if dec:
+            r = dec.get(x['o'])
+            if not r or r.get('accion') != 'deja':  # a network the agency has not confirmed is not drawn
+                fuera += 1; continue
+            if r.get('red'):
+                x['red'], x['n'], x['o'] = r['red'], '', r.get('operador', '')
+            else:
+                if x['n'] == x['o']:
+                    x['n'] = r.get('operador', x['o'])
+                x['o'] = r.get('operador', x['o'])
         out.append(x)
+    if fuera:
+        print('Topology Zoo: fuera', fuera, 'enlaces de redes históricas o sin confirmar por dos voces')
     f = d.get('fuente') or {}
     fuente = {'n': f.get('n') or 'The Internet Topology Zoo (Universidad de Adelaida)', 'lic': f.get('lic') or 'CC BY 4.0',
               'url': f.get('url') or 'http://www.topology-zoo.org', 'fecha': f.get('fecha') or '',
@@ -308,6 +329,8 @@ def main():
             r['obra'] = 1
         if x.get('anio'):
             r['anio'] = x['anio']
+        if x.get('red'):
+            r['red'] = x['red']  # the network in the map, now part of another company (the card says so)
         salida.append(r)
 
     for i, f in enumerate(fuentes):

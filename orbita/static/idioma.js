@@ -45,6 +45,8 @@
     'Una web': ['A website', 'Um site'],
     'A quién habla cada web': ['Who each website talks to', 'Com quem cada site fala'],
     'Abrimos su portada en un navegador aparte y apuntamos cada conexión: la empresa, su país y para qué sirve, y qué cortaría GUARDIANA. Ya medidas:': ['We open its front page in a separate browser and note every connection: the company, its country, what it is for and what GUARDIANA would cut. Already measured:', 'Abrimos a página inicial num navegador à parte e anotamos cada conexão: a empresa, o seu país, para que serve e o que a GUARDIANA cortaria. Já medidas:'],
+    // land backbones reviewed by the agency (23 Oct 2026)
+    'Red en el mapa': ['Network on the map', 'Rede no mapa'],
     // «Abrir sin miedo» (23 Oct 2026, 15:05)
     'Un enlace o archivo': ['A link or a file', 'Um link ou arquivo'],
     'Ábrelo sin miedo': ['Open it without fear', 'Abra sem medo'],

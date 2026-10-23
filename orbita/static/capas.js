@@ -400,7 +400,10 @@
     if (l.km) lin.push(T('Longitud en el mapa') + ': ' + num(l.km) + ' km');
     lin.push(T('Rango') + ': ' + nombreRango(rangoFibra(FT.lineas[i])) + (l.km ? '' : ''));
     if (l.obra) lin.push(T('En construcción según la fuente'));
-    if (l.anio) lin.push(T('Según el mapa de la red de') + ' ' + l.anio); // Topology Zoo lines carry the year of the map they come from
+    // Topology Zoo lines carry the year of the map they come from; a network another company took over since (23 Oct
+    // 2026, the agency's review) names the network of the map, and the operator above is today's owner when two voices agree
+    if (l.red) lin.push(T('Red en el mapa') + ': ' + l.red + (l.anio ? ' (' + l.anio + ')' : ''));
+    else if (l.anio) lin.push(T('Según el mapa de la red de') + ' ' + l.anio);
     { const rl = relieveFibra(i); if (rl) lin.push(T('Altitud del terreno') + ': ' + T('máxima') + ' ' + num(rl.max) + ' m · ' + T('media') + ' ' + num(rl.med) + ' m'); }
     lin.push(T('Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.'));
     lin.push(T('Trazado aproximado') + ' · ' + T('Datos verificados'));
