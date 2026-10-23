@@ -221,3 +221,25 @@ panel completo, país, estaciones, notas, potencia, relieve) · `orbita/static/c
   Grok https://grok.com/c/d2e135ed-cd4f-429c-abd4-d4749bf04786). El dueño lo está leyendo; sus comentarios llegan como comentarios del documento.
 - Pendiente de la noche: tanda Asia-2 de centros de datos (pedida a ChatGPT en «Verificar fichas de infraestructura»); el dueño pidió además que el
   navegador ZERO sea «el que más para» (reglas en el documento) y la anti-suplantación en SECURE (órdenes firmadas, verificación en persona, Sello).
+
+## 8. Para Opus (22 Oct 2026, 21:50; Fable se agota): lo último publicado y lo que queda a medias
+Publicado esta noche (versiones `?v=20261023j…q`): zoom hacia el clic; fibra por niveles con fundido; barra de capas siempre visible (difuminada, viva al
+pasar el ratón); «cable, nombre no publicado»; cursor de flecha y mano solo sobre lo que tiene ficha (`body.mano`, `pintaMano()` en capas.js);
+**troncales gigantes ya no blancas**: núcleo azul acento (`ACERO`) pintado sin brillo aditivo (`opaco()`), halo azul claro (`CLARO`); todo resaltado
+(cable, llegada, previsto, fibra) en su propio color con halo (`resalta()`), nunca blanco. Pendiente de comprobar en pantalla tras el último deploy (×5,5
+sobre Portugal): si aún se ven blancas, bajar la alfa del halo o el ancho; el dueño dijo «los azules muy logrados, los blancos no me gustan».
+
+**Siguiente tarea pedida (21:48): desplegables de clasificación en cada botón de capa** («le da cable submarinos y se le abre un desplegable y los
+clasificamos; fibra por tierra lo mismo; centros de datos lo mismo; satélites igual»). Ya existe el patrón para satélites: `#sat-vista` cuelga bajo el
+botón (pintaVista/enganchaVista en capas.js, con botón «—» para plegar y el botón de la capa lo vuelve a desplegar). Hacer lo mismo, genérico, para:
+- **Cables submarinos** (`estado.subClases`): troncal gigante (≥100 Tbit/s), troncal grande (≥20), cable regional (con capacidad publicada), sin
+  capacidad publicada, trazado aproximado (los discontinuos, `capas.sub.aprox`), previstos (`PREV`). Aplicar en el bucle de dibujo (porPotencia: separar
+  ex[0] en «regional con dato» y «sin dato»), en `pintaLuz`, en `buscaCable`/`buscaPrevisto` (no elegir lo oculto). Contador por clase junto al nombre.
+- **Fibra por tierra** (`estado.fibraClases`): troncal principal (nivel 3), largo recorrido (2), nacional (1), regional (0), en construcción (`x.obra`).
+  Aplicar en `fibraVisible` (meter las clases en la clave de caché `paso`) y en el bucle de `pintaFibra`.
+- **Centros de datos** (`estado.puntosClases`): centros de datos (PT.p), puntos de intercambio (PT.ix), estaciones polares y terrestres (EST), y un
+  interruptor «solo grandes operadores» (≥5 centros en el mapa, `PT.porOp`). Aplicar en `posiciones`/`pintaPuntos`, `pintaEstaciones`, `buscaPunto`,
+  `buscaEstacion`, y en los centros de la agencia (`q.extra`).
+- **Satélites**: ya está (órbitas + vista); unificar el estilo de la tarjeta con las nuevas (misma clase CSS `.sat-vista`, renombrar a `.capa-vista`).
+Reglas: todo encendido por defecto; la última clase encendida no se puede apagar (se apaga la capa); guardar en `guarda()`; textos en es/en/pt
+(idioma.js); la tarjeta se cierra con «—» y al pulsar fuera no se cierra (como la de satélites); la nota de la capa (`pintaNota`) dice qué se muestra.
