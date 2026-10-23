@@ -371,4 +371,7 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
 - **Traducciones**: los 5 textos nuevos del viaje y del PDF, «borde de internet más cercano» (también en inglés y portugués; salía en español) y
   las letras de la brújula E/S/O (en alemán la «O» de Oeste se leía como Ost) en los 39 idiomas; en suajili la brújula pasa a N/E/S/W.
 - Versión `v=20261024t`; luego `u` (10:20): repaso con zoom máximo ×1,8 (un destino solo llevaba ×2,6 y el planeta llenaba la pantalla),
-  banda oscura suave bajo los contadores (también en el vídeo) y el rótulo del satélite encima de él cuando no cabe a la derecha. La siguiente, `v`.
+  banda oscura suave bajo los contadores (también en el vídeo) y el rótulo del satélite encima de él cuando no cabe a la derecha. Luego `v` (10:55): en el resumen final del viaje el planeta se puede
+  arrastrar y acercar (dueño, 10:43). Causa: la regla CSS `.viaje{position:fixed;pointer-events:none}` también se aplicaba a `body.viaje`, y el
+  `pointer-events` se hereda: toda la página dejaba de responder al ratón. Ahora las reglas del HUD cuelgan de `#viaje`; durante el espectáculo
+  `body.viaje:not(.viaje-fin) #escena` sigue sin responder (manda la cámara) y en el final vuelven la barra de zoom y la altura. La siguiente, `w`.
