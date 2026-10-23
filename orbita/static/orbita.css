@@ -14,8 +14,11 @@ body { font-family: var(--texto); -webkit-font-smoothing: antialiased; }
 
 #escena { position: fixed; inset: 0; }
 #escena canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-#tierra { cursor: grab; touch-action: none; }
-#tierra.arrastra { cursor: grabbing; }
+/* 22 Oct 2026, 21:42 (owner): the usual arrow on the planet; the hand only over something with a card (body.mano, set by capas.js);
+   the closed hand only while actually dragging */
+#tierra { cursor: default; touch-action: none; }
+body.mano #tierra, body.mano #rutas { cursor: pointer; }
+#tierra.arrastra, body.mano #tierra.arrastra { cursor: grabbing; }
 #rutas { pointer-events: none; }
 
 /* The intro: the planet arrives, then the ring draws itself, then the doors. */

@@ -1514,8 +1514,14 @@
     if (e.target && e.target.closest && e.target.closest(UI_ENCIMA)) { if (!fichaFija && (cableMarcado >= 0 || llegadaMarcada >= 0 || centroMarcado >= 0 || fibraMarcada >= 0 || puntoMarcado >= 0 || previstoMarcado >= 0 || estacionMarcada >= 0)) { cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = puntoMarcado = previstoMarcado = estacionMarcada = -1; muestra(-1); } return; }
     if (pendiente) { pendiente.x = e.clientX; pendiente.y = e.clientY; return; }
     pendiente = { x: e.clientX, y: e.clientY };
-    requestAnimationFrame(() => { const q = pendiente; pendiente = null; mira(q.x, q.y); });
+    requestAnimationFrame(() => { const q = pendiente; pendiente = null; mira(q.x, q.y); pintaMano(); });
   }, { passive: true });
+  // 22 Oct 2026, 21:42 (owner): «el ratón debe ser el de siempre, una flechita; cuando paso por encima de un cable tiene que ser
+  // la mano, para que se entienda que hay algo que se puede ver». The hand shows only over something with a card.
+  function pintaMano() {
+    const algo = !!paisMarcado || marcado >= 0 || centroMarcado >= 0 || cableMarcado >= 0 || llegadaMarcada >= 0 || puntoMarcado >= 0 || previstoMarcado >= 0 || estacionMarcada >= 0 || fibraMarcada >= 0;
+    document.body.classList.toggle('mano', algo);
+  }
 
   // ---------- one orbit at a time: what that orbit is, measured on the satellites themselves ----------
   function pintaFase() {
