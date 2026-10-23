@@ -1,0 +1,6 @@
+Grok (Expert), 22 Oct 2026, 19:40 — lote 3 (29 datos de chatgpt-sabias-3.json; el de CRU se quitó antes por fuentes flojas)
+6: corrección (396-400 satélites; el texto dice «se acercaba a los 400», se mantiene)
+9: no — no confirma 360/147 de agosto de 2026 (GSA ~392 operadores en abril) → fuera
+11: no — no confirma 98 SA (~95 en abril) → fuera
+20: corrección (1.500-2.000 instancias; el texto dice «más de 1.500», se mantiene)
+resto: ok
