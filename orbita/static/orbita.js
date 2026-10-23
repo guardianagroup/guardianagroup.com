@@ -1017,7 +1017,7 @@ void main(){
     let primero = null;
     if (modo === 'inicio') {
       t.textContent = '¿En qué ciudad está este equipo?';
-      d.textContent = 'Para dibujarlo en su sitio. Se mide con la ubicación de tu sistema o lo eliges tú, y siempre lo confirmas. Se guarda solo en este equipo; GUARDIANA no lo envía a nadie.';
+      d.textContent = 'Es opcional: Órbita funciona sin ella. Puedes detectarla o, sin GPS, elegirla de la lista. Tú decides y confirmas. Se queda en este equipo, GUARDIANA no la recibe y puedes borrarla cuando quieras.'; // 22 Oct 2026, 22:19 (owner + agency, ChatGPT and Grok agree): «tú decides», facts only, nothing defensive
       primero = accion('Detectar ubicación', 'boton principal', mideLugar);
       accion('Elegir ciudad', 'boton', () => abreLugar('buscar'));
       accion('Ahora no', 'boton texto', () => cierraLugar(true));
