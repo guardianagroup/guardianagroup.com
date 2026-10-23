@@ -23,6 +23,22 @@
   const estado = { sub: true, tierra: false, fibra: false, puntos: false, sat: false, vista: 'equilibrada', orb: { baja: false, media: false, geo: true } };
   try { const g = JSON.parse(localStorage.getItem('guardiana-orbita-capas') || '{}'); if (g.vista) estado.vista = g.vista; if (!['equilibrada', 'todos', 'cielo'].includes(estado.vista)) estado.vista = 'equilibrada'; } catch (_) {}
   const guarda = () => { try { localStorage.setItem('guardiana-orbita-capas', JSON.stringify(estado)); } catch (_) {} };
+  // 22 Oct 2026, 21:48 (owner): «le da cables submarinos y se le abre un desplegable y los clasificamos; fibra por tierra lo
+  // mismo; centros de datos lo mismo». Every class starts on; the person switches them off one by one (the last main
+  // class of a layer cannot be switched off: the layer is switched off instead). Not remembered between visits.
+  const CLASES = {
+    sub: { gigante: true, grande: true, regional: true, sinDato: true, aprox: true, previstos: true },
+    fibra: { principal: true, largo: true, nacional: true, regional: true, obra: true },
+    puntos: { datos: true, intercambio: true, estaciones: true, grandes: false },
+  };
+  const PRINCIPALES = { sub: ['gigante', 'grande', 'regional', 'sinDato'], fibra: ['principal', 'largo', 'nacional', 'regional'], puntos: ['datos', 'intercambio', 'estaciones'] };
+  // which class a submarine cable belongs to (by its published capacity) and whether it shows now
+  const claseSub = (i) => { const c = capacidadDe(i); return !c ? 'sinDato' : c.tbps >= CAP.umbrales.gigante ? 'gigante' : c.tbps >= CAP.umbrales.grande ? 'grande' : 'regional'; };
+  const veSub = (i, l) => CLASES.sub[claseSub(i)] && (!l.aprox || CLASES.sub.aprox);
+  const claseFibra = (l) => l.x.obra ? 'obra' : l.nivel === 3 ? 'principal' : l.nivel === 2 ? 'largo' : l.nivel === 1 ? 'nacional' : 'regional';
+  const veFibra = (l) => (!l.x.obra || CLASES.fibra.obra) && CLASES.fibra[l.nivel === 3 ? 'principal' : l.nivel === 2 ? 'largo' : l.nivel === 1 ? 'nacional' : 'regional'];
+  const vePunto = (q) => q.t === 'datos' ? CLASES.puntos.datos && (!CLASES.puntos.grandes || (PT && PT.porOp && q.o && (PT.porOp.get(q.o) || 0) >= 5)) : q.t === 'intercambio' ? CLASES.puntos.intercambio : true;
+  const claveClases = (k) => Object.values(CLASES[k]).map((v) => (v ? 1 : 0)).join('');
 
   // ---------- data ----------
   const cargaJSON = async (url) => { const r = await fetch(url, { cache: 'no-cache' }); if (!r.ok) throw new Error(r.status); return r.json(); };
@@ -126,7 +142,7 @@
     if (!PT || !PT.p) return pos;
     const grupos = new Map(), F = CAMPO || campo(p, G), fd = F.d, fc = F.cosP;
     for (let i = 0; i < PT.p.length; i++) {
-      const q = PT.p[i]; if (q.t === 'aterrizaje') continue;
+      const q = PT.p[i]; if (q.t === 'aterrizaje' || !vePunto(q)) continue;
       if (!F.todo) { const w = q.w; if (w[0] * fd[0] + w[1] * fd[1] + w[2] * fd[2] < fc) continue; } // off the visible cap: not even projected
       const v = p.aVista(q.w); if (v[2] <= 0.02) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1]; if (x < -60 || y < -60 || x > G.W + 60 || y > G.H + 60) continue;
@@ -151,7 +167,7 @@
     for (let k = 0; k < 3; k++) {
       cx.beginPath();
       for (let qi = 0; qi < PT.p.length; qi++) {
-        const q = PT.p[qi]; if (forma[q.t] !== k) continue;
+        const q = PT.p[qi]; if (forma[q.t] !== k || !vePunto(q)) continue;
         let x, y; const ab = k ? ABANICO.get(qi) : null;
         if (ab) { x = ab[0]; y = ab[1]; } else { if (k) continue; const w = q.w; if (!F.todo && w[0] * fd[0] + w[1] * fd[1] + w[2] * fd[2] < fc) continue; const v = p.aVista(w); if (v[2] <= 0.02) continue; x = G.CX + G.R * v[0]; y = G.CY - G.R * v[1]; }
         if (k === 0) { cx.moveTo(x, y - 2.6); cx.lineTo(x + 2.6, y); cx.lineTo(x, y + 2.6); cx.lineTo(x - 2.6, y); cx.closePath(); }
@@ -214,6 +230,7 @@
   // Polar bases and satellite ground stations (datos/puntos-extra.json, tipo «estacion»; owner, 22 Oct 2026: «polo
   // norte, polo sur, Antártida, todo»): a ring with a dot, and the name when there is room
   function pintaEstaciones(cx, p, G) {
+    if (!CLASES.puntos.estaciones) return;
     if (!EST || !EST.length) return;
     const z = G.R / (G.R0 || G.R), L = esLimpio();
     cx.lineWidth = 1.1; cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle';
@@ -284,11 +301,11 @@
   const fundidoNivel = (n, z) => n === 3 ? 1 : n === 2 ? aparece((z - 1.5) / 0.6) : n === 1 ? aparece((z - 2.6) / 1.0) : aparece((z - 6) / 2);
   function fibraVisible(z) {
     preparaNiveles();
-    const paso = Math.round(z * 20) / 20; // recomputed only when the zoom moves a notch
+    const paso = Math.round(z * 20) / 20 + '|' + claveClases('fibra'); // recomputed only when the zoom moves a notch or a class changes
     if (FT.vis && FT.vis.paso === paso) return FT.vis.lineas;
     // from afar, one line per corridor (operators sharing a route are drawn once); past ×2.6 every line
     const una = z < 2.6, vistos = new Set(), lineas = [];
-    for (const l of FT.lineas) { if (fundidoNivel(l.nivel, z) <= 0) continue; if (una) { if (vistos.has(l.corr)) continue; vistos.add(l.corr); } lineas.push(l); }
+    for (const l of FT.lineas) { if (!veFibra(l) || fundidoNivel(l.nivel, z) <= 0) continue; if (una) { if (vistos.has(l.corr)) continue; vistos.add(l.corr); } lineas.push(l); }
     FT.vis = { paso, lineas };
     return lineas;
   }
@@ -520,27 +537,30 @@
       // by power (owner, 22 Oct 2026): the giant trunks (≥ 100 Tbit/s) thick and bright, the big ones (≥ 20) a little
       // less, the rest as before. Grouped once per data load; CAP and LUG arrive asynchronously, so it is rebuilt when they do.
       if (!capas.sub.porPotencia || capas.sub.porPotencia.n !== capas.sub.lineas.length || capas.sub.porPotencia.cap !== CAP || capas.sub.porPotencia.lug !== LUG) {
-        const P3 = { n: capas.sub.lineas.length, cap: CAP, lug: LUG, ex: [[], [], []], ap: [[], [], []] };
-        capas.sub.lineas.forEach((l, i) => { (l.aprox ? P3.ap : P3.ex)[potencia(i)].push(l); });
+        const P3 = { n: capas.sub.lineas.length, cap: CAP, lug: LUG, ex: [[], [], [], []], ap: [[], [], [], []] };
+        capas.sub.lineas.forEach((l, i) => { (l.aprox ? P3.ap : P3.ex)[capacidadDe(i) ? potencia(i) : 3].push(l); }); // 3 = capacity not published
         capas.sub.porPotencia = P3;
       }
       // the difference grows with the zoom: on the whole planet the giants are only a little brighter (2Africa alone
       // rings a continent); close up they get their halo and their width
       const P3 = capas.sub.porPotencia, L3 = esLimpio(), zq = G.R / (G.R0 || G.R), kq = Math.min(1, Math.max(0, (zq - 1.4) / 2.6));
-      pintaLineas(cx, p, G, P3.ex[0], `rgba(${ACERO},.55)`, 0.9);
-      if (P3.ex[1].length) pintaLineas(cx, p, G, P3.ex[1], `rgba(${ACERO},${(0.62 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
+      const CS = CLASES.sub;
+      if (CS.regional) pintaLineas(cx, p, G, P3.ex[0], `rgba(${ACERO},.55)`, 0.9);
+      if (CS.sinDato) pintaLineas(cx, p, G, P3.ex[3], `rgba(${ACERO},.55)`, 0.9);
+      if (CS.grande && P3.ex[1].length) pintaLineas(cx, p, G, P3.ex[1], `rgba(${ACERO},${(0.62 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
       // the layer is painted additively (overlapping lines glow), which turns any bright core white: the giants' core is
       // painted normally, so it stays the accent blue, and only its halo adds up with the rest
-      if (P3.ex[2].length) { pintaLineas(cx, p, G, P3.ex[2], `rgba(${CLARO},${((L3 ? 0.2 : 0.14) + 0.12 * kq).toFixed(3)})`, 3.5 + 3 * kq); opaco(cx, () => pintaLineas(cx, p, G, P3.ex[2], `rgba(${ACERO},${(0.92 + 0.08 * kq).toFixed(2)})`, 1.3 + 0.7 * kq)); }
-      if (PREV && PREV.length) { cx.save(); cx.setLineDash([2, 6]); pintaLineas(cx, p, G, PREV, `rgba(${CLARO},.45)`, 1); cx.restore(); }
-      if (capas.sub.aprox.length) {
+      if (CS.gigante && P3.ex[2].length) { pintaLineas(cx, p, G, P3.ex[2], `rgba(${CLARO},${((L3 ? 0.2 : 0.14) + 0.12 * kq).toFixed(3)})`, 3.5 + 3 * kq); opaco(cx, () => pintaLineas(cx, p, G, P3.ex[2], `rgba(${ACERO},${(0.92 + 0.08 * kq).toFixed(2)})`, 1.3 + 0.7 * kq)); }
+      if (CS.previstos && PREV && PREV.length) { cx.save(); cx.setLineDash([2, 6]); pintaLineas(cx, p, G, PREV, `rgba(${CLARO},.45)`, 1); cx.restore(); }
+      if (CS.aprox && capas.sub.aprox.length) {
         cx.setLineDash([6, 4]);
-        pintaLineas(cx, p, G, P3.ap[0], `rgba(${ACERO},.45)`, 0.9);
-        if (P3.ap[1].length) pintaLineas(cx, p, G, P3.ap[1], `rgba(${ACERO},${(0.55 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
-        if (P3.ap[2].length) { pintaLineas(cx, p, G, P3.ap[2], `rgba(${CLARO},${((L3 ? 0.18 : 0.12) + 0.1 * kq).toFixed(3)})`, 3.5 + 3 * kq); opaco(cx, () => pintaLineas(cx, p, G, P3.ap[2], `rgba(${ACERO},${(0.85 + 0.12 * kq).toFixed(2)})`, 1.3 + 0.7 * kq)); }
+        if (CS.regional) pintaLineas(cx, p, G, P3.ap[0], `rgba(${ACERO},.45)`, 0.9);
+        if (CS.sinDato) pintaLineas(cx, p, G, P3.ap[3], `rgba(${ACERO},.45)`, 0.9);
+        if (CS.grande && P3.ap[1].length) pintaLineas(cx, p, G, P3.ap[1], `rgba(${ACERO},${(0.55 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
+        if (CS.gigante && P3.ap[2].length) { pintaLineas(cx, p, G, P3.ap[2], `rgba(${CLARO},${((L3 ? 0.18 : 0.12) + 0.1 * kq).toFixed(3)})`, 3.5 + 3 * kq); opaco(cx, () => pintaLineas(cx, p, G, P3.ap[2], `rgba(${ACERO},${(0.85 + 0.12 * kq).toFixed(2)})`, 1.3 + 0.7 * kq)); }
         cx.setLineDash([]);
       }
-      pintaLuz(cx, p, G, capas.sub.lineas, t);
+      pintaLuz(cx, p, G, subVisibles(), t);
     }
     if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaEstaciones(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
     else if (estado.sub && EST) { cx.globalCompositeOperation = 'source-over'; pintaEstaciones(cx, p, G); cx.globalCompositeOperation = 'lighter'; } // 22 Oct 2026, 14:15 (owner): the polar stations show with the cables too
@@ -615,6 +635,12 @@
     l.cap = capDe(w, 0, n - 1); l.caps = out; return out;
   }
   const veCap = (F, cp) => F.d[0] * cp.c[0] + F.d[1] * cp.c[1] + F.d[2] * cp.c[2] >= Math.cos(Math.min(Math.PI, F.ang + cp.r));
+  // the submarine cables that show with the classes switched on now (cached while nothing changes)
+  function subVisibles() {
+    const k = claveClases('sub') + '|' + capas.sub.lineas.length + '|' + (CAP ? 1 : 0);
+    if (capas.sub.visK !== k) { capas.sub.visK = k; capas.sub.vis = capas.sub.lineas.filter((l, i) => veSub(i, l)); }
+    return capas.sub.vis;
+  }
   // what the pointer touches: a soft halo and a brighter, wider core in the line's own colour
   function resalta(cx, p, G, lineas, rgb) { pintaLineas(cx, p, G, lineas, `rgba(${rgb},.22)`, 7); opaco(cx, () => pintaLineas(cx, p, G, lineas, `rgba(${rgb},1)`, 2.3)); }
   // paint something without the additive glow (so a blue stays blue), then go back to how the layer was painting
@@ -847,6 +873,7 @@
   const haceTxt = (x) => { const l = window.GuardianaIdioma && window.GuardianaIdioma.lang; return l === 'en' ? x + ' ago' : l === 'pt' ? 'há ' + x : 'hace ' + x; };
   const num = (n) => n.toLocaleString((window.GuardianaIdioma && window.GuardianaIdioma.locale) || 'es-ES');
   function pintaNota() {
+    try { if (typeof pintaClases === 'function') pintaClases(); } catch (_) {} // the class counts follow the data as it arrives
     const el = $('capa-nota'); if (!el) return;
     const partes = [], porCapa = {};
     const meter = (k, txt) => { partes.push(txt); porCapa[k] = txt; };
@@ -999,7 +1026,7 @@
   }
   let centroMarcado = -1, cableMarcado = -1, llegadaMarcada = -1, puntoMarcado = -1, pendiente = null;
   function buscaEstacion(x, y) {
-    if (!(estado.puntos || estado.sub) || !EST) return -1;
+    if (!(estado.puntos || estado.sub) || !EST || !CLASES.puntos.estaciones) return -1;
     const p = P(), G = p.geo; let mejor = -1, dm = 8 * 8;
     for (let i = 0; i < EST.length; i++) { const v = p.aVista(EST[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
     return mejor;
@@ -1027,7 +1054,7 @@
     if (!estado.puntos || !PT || !PT.p) return -1;
     const p = P(), G = p.geo; let mejor = -1, dm = 5.5 * 5.5;
     const ab = ABANICO && performance.now() - abanicoFrame < 400 ? ABANICO : null; // where the marks really are on screen (fans included)
-    for (let i = 0; i < PT.p.length; i++) { let px, py; const a = ab && ab.get(i); if (a) { px = a[0]; py = a[1]; } else { const v = p.aVista(PT.p[i].w); if (v[2] <= 0.05) continue; px = G.CX + G.R * v[0]; py = G.CY - G.R * v[1]; } const dx = px - x, dy = py - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
+    for (let i = 0; i < PT.p.length; i++) { if (!vePunto(PT.p[i])) continue; let px, py; const a = ab && ab.get(i); if (a) { px = a[0]; py = a[1]; } else { const v = p.aVista(PT.p[i].w); if (v[2] <= 0.05) continue; px = G.CX + G.R * v[0]; py = G.CY - G.R * v[1]; } const dx = px - x, dy = py - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
     return mejor;
   }
   function buscaLlegada(x, y) {
@@ -1047,7 +1074,7 @@
     return mejor;
   }
   function buscaPrevisto(x, y) {
-    if (!estado.sub || !PREV || !PREV.length) return -1;
+    if (!estado.sub || !PREV || !PREV.length || !CLASES.sub.previstos) return -1;
     const p = P(), G = p.geo; let mejor = -1, dm = 7 * 7;
     PREV.forEach((l, i) => { let ax = 0, ay = 0, prev = false; for (const w of l.w) { const v = p.aVista(w), bx = G.CX + G.R * v[0], by = G.CY - G.R * v[1], ve = v[2] > 0.02; if (ve && prev) { const vx = bx - ax, vy = by - ay, L2 = vx * vx + vy * vy || 1, t = Math.max(0, Math.min(1, ((x - ax) * vx + (y - ay) * vy) / L2)); const qx = ax + vx * t - x, qy = ay + vy * t - y, d2 = qx * qx + qy * qy; if (d2 < dm) { dm = d2; mejor = i; } } ax = bx; ay = by; prev = ve; } });
     return mejor;
@@ -1079,6 +1106,7 @@
     if (!estado.sub || !capas.sub || !capas.sub.lineas) return -1;
     const p = P(), G = p.geo; let mejor = -1, dm = 7 * 7;
     capas.sub.lineas.forEach((l, i) => {
+      if (!veSub(i, l)) return; // a class switched off cannot be picked
       let ax = 0, ay = 0, prev = false;
       for (const w of l.w) {
         const v = p.aVista(w), bx = G.CX + G.R * v[0], by = G.CY - G.R * v[1], ve = v[2] > 0.02;
@@ -1516,7 +1544,7 @@
     if (clic && panelModelo) cierraPanel(); // a click on nothing closes the full card
   }
   // the interface on top of the planet (layer buttons, satellite filter, gauges…) never reaches the map underneath (owner, 22 Oct 2026, 18:03)
-  const UI_ENCIMA = 'header, #puertas, #directo, #lugar, #seccion, .zoom, .conexion, .lista-cerca, #sat-ficha, #ficha-panel, #capas, #sat-vista, #sat-fase, #capa-nota, .altura, #dato, #viaje, #informe, button, a, select, input, label';
+  const UI_ENCIMA = 'header, .capa-vista, #puertas, #directo, #lugar, #seccion, .zoom, .conexion, .lista-cerca, #sat-ficha, #ficha-panel, #capas, #sat-vista, #sat-fase, #capa-nota, .altura, #dato, #viaje, #informe, button, a, select, input, label';
   addEventListener('click', (e) => { if (!soloTu && !e.target.closest(UI_ENCIMA)) mira(e.clientX, e.clientY, true); });
   addEventListener('pointermove', (e) => {
     if (e.target && e.target.closest && e.target.closest(UI_ENCIMA)) { if (!fichaFija && (cableMarcado >= 0 || llegadaMarcada >= 0 || centroMarcado >= 0 || fibraMarcada >= 0 || puntoMarcado >= 0 || previstoMarcado >= 0 || estacionMarcada >= 0)) { cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = puntoMarcado = previstoMarcado = estacionMarcada = -1; muestra(-1); } return; }
@@ -1578,14 +1606,65 @@
     }));
   }
 
+  // ---------- the class cards under the layer buttons (22 Oct 2026, 21:48) ----------
+  const TEXTOS_CLASES = {
+    sub: { titulo: 'Qué cables ver', clases: { gigante: ['Troncales gigantes', 'Más de 100 Tbit/s: los cables que mueven continentes enteros.'], grande: ['Troncales grandes', 'Entre 20 y 100 Tbit/s.'], regional: ['Cables regionales', 'Menos de 20 Tbit/s: entre islas y países vecinos.'], sinDato: ['Capacidad no publicada', 'En servicio; su capacidad no se conoce.'], aprox: ['Trazado aproximado', 'Los discontinuos: se conoce el cable, no su ruta exacta.'], previstos: ['Previstos', 'Anunciados o en construcción; punteados.'] } },
+    fibra: { titulo: 'Qué fibra ver', clases: { principal: ['Troncales principales', '800 km o más, o corredores que comparten cuatro compañías.'], largo: ['Largo recorrido', '400 km o más.'], nacional: ['Troncales nacionales', '150 km o más; aparecen al acercarse.'], regional: ['Enlaces regionales', 'El resto; aparecen cerca.'], obra: ['En construcción', 'Según la fuente; discontinuos.'] } },
+    puntos: { titulo: 'Qué puntos ver', clases: { datos: ['Centros de datos', 'Donde se guarda y se sirve internet.'], intercambio: ['Puntos de intercambio', 'Donde las redes se conectan entre sí.'], estaciones: ['Estaciones', 'Bases polares y estaciones terrestres de satélites.'], grandes: ['Solo grandes operadores', 'Compañías con cinco o más centros en el mapa.'] } },
+  };
+  const PLEGADO = {};
+  function cuentaClase(k, c) {
+    try {
+      if (k === 'sub') { if (!capas.sub || !capas.sub.lineas || !CAP) return 0; if (c === 'previstos') return PREV ? PREV.length : 0; if (c === 'aprox') return capas.sub.aprox ? capas.sub.aprox.length : 0; let n = 0; capas.sub.lineas.forEach((l, i) => { if (claseSub(i) === c) n++; }); return n; }
+      if (k === 'fibra') { if (!FT || !FT.lineas) return 0; preparaNiveles(); return FT.lineas.filter((l) => claseFibra(l) === c).length; }
+      if (k === 'puntos') { if (c === 'estaciones') return EST ? EST.length : 0; if (!PT || !PT.p) return 0; if (c === 'grandes') return PT.porOp ? [...PT.porOp.values()].filter((n) => n >= 5).length : 0; return PT.p.filter((q) => q.t === c).length; }
+    } catch (_) {}
+    return 0;
+  }
+  function enganchaClases() {
+    const header = document.querySelector('header'); if (!header) return;
+    for (const k of Object.keys(TEXTOS_CLASES)) {
+      const b = document.querySelector(`#capas [data-capa="${k}"]`); if (!b) continue;
+      const caja = document.createElement('div'); caja.id = k + '-vista'; caja.className = 'sat-vista capa-vista'; caja.hidden = true; caja.setAttribute('role', 'group');
+      const orb = document.createElement('div'); orb.className = 'orb'; caja.appendChild(orb);
+      const ti = document.createElement('div'); ti.className = 'titulo'; ti.textContent = T(TEXTOS_CLASES[k].titulo); orb.appendChild(ti);
+      const x = document.createElement('button'); x.type = 'button'; x.className = 'plegar'; x.setAttribute('aria-label', T('Plegar')); x.textContent = '—'; x.addEventListener('click', () => { PLEGADO[k] = true; pintaClases(); }); ti.appendChild(x);
+      for (const c of Object.keys(TEXTOS_CLASES[k].clases)) {
+        const [n, d] = TEXTOS_CLASES[k].clases[c];
+        const bt = document.createElement('button'); bt.type = 'button'; bt.dataset.clase = c; bt.setAttribute('aria-pressed', String(!!CLASES[k][c]));
+        bt.innerHTML = '<i aria-hidden="true"></i><span class="n"></span><span class="d"></span>';
+        bt.querySelector('.n').append(T(n), ' ', Object.assign(document.createElement('b'), {})); bt.querySelector('.d').textContent = T(d);
+        bt.addEventListener('click', () => {
+          const principales = PRINCIPALES[k], encendidas = principales.filter((q) => CLASES[k][q]);
+          if (principales.includes(c) && CLASES[k][c] && encendidas.length === 1) return; // the last main class stays: switch the layer off instead
+          CLASES[k][c] = !CLASES[k][c]; if (k === 'sub' && capas.sub) capas.sub.visK = null; pintaClases(); pintaNota();
+        });
+        orb.appendChild(bt);
+      }
+      header.appendChild(caja);
+      // the layer button unfolds the card again when the layer is on but the card was folded
+      b.addEventListener('click', (e) => { if (estado[k] && PLEGADO[k]) { e.stopImmediatePropagation(); PLEGADO[k] = false; pintaClases(); } }, true);
+    }
+    addEventListener('resize', pintaClases);
+  }
+  function pintaClases() {
+    for (const k of Object.keys(TEXTOS_CLASES)) {
+      const caja = $(k + '-vista'); if (!caja) continue;
+      caja.hidden = !estado[k] || !!PLEGADO[k];
+      const b = document.querySelector(`#capas [data-capa="${k}"]`);
+      if (b && !caja.hidden && innerWidth > 760) { const r = b.getBoundingClientRect(), w = caja.offsetWidth || 340; let x = r.left + r.width / 2 - w / 2; x = Math.max(12, Math.min(innerWidth - w - 12, x)); caja.style.left = x + 'px'; caja.style.transform = 'none'; caja.style.top = (r.bottom + 10) + 'px'; }
+      caja.querySelectorAll('[data-clase]').forEach((bt) => { const c = bt.dataset.clase; bt.setAttribute('aria-pressed', String(!!CLASES[k][c])); const n = cuentaClase(k, c); bt.querySelector('b').textContent = n ? num(n) : ''; });
+    }
+  }
   // ---------- the three buttons ----------
   function pon(clave, on) {
     estado[clave] = on; guarda();
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
     if (on && clave === 'sat') estado.satPlegado = false;
+    if (on) PLEGADO[clave] = false;
     if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else if (clave === 'fibra') cargaFibra(); else { cargaCables(clave); if (clave === 'sub') { cargaFibra(); cargaEstaciones(); cargaNotas(); cargaPaises(); cargaCapacidad(); cargaRelieve(); } } }
     if (!on) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; }
-    pintaNota(); pintaVista();
+    pintaNota(); pintaVista(); pintaClases();
   }
   async function arranca() {
     // the land layer only appears when there is land data to show
@@ -1593,7 +1672,7 @@
     let ind = null; try { const r = await fetch('datos/indice.json', { cache: 'no-cache' }); if (r.ok) ind = await r.json(); } catch (_) {}
     for (const k of ['puntos']) if (!ind || !ind.capas || !ind.capas[k]) { const b = document.querySelector(`#capas [data-capa="${k}"]`); if (b) b.remove(); estado[k] = false; }
     estado.tierra = false; // land fibre left out (owner, 21 Oct 2026): OpenStreetMap knows too little of it
-    enganchaVista();
+    enganchaVista(); enganchaClases();
     document.querySelectorAll('#capas [data-capa]').forEach((b) => b.addEventListener('click', () => pon(b.dataset.capa, b.getAttribute('aria-pressed') !== 'true')));
     for (const k of ['sub', 'fibra', 'puntos', 'sat']) if (estado[k]) pon(k, true);
     pintaNota();
