@@ -1370,7 +1370,7 @@
       const lista = nombres.slice(0, 5).join(' · ') + (nombres.length > 5 ? ' · +' + (nombres.length - 5) : '');
       const ti = porTierra(l);
       const sigue = !ti ? '' : ti.length ? '\n' + T('Sigue por tierra') + ': ' + ti.slice(0, 4).join(' · ') + (ti.length > 4 ? ' · +' + (ti.length - 4) : '') : '\n' + T('Su ruta por tierra no es pública');
-      f.querySelector('span').textContent = paisNombre(l.cc) + '\n' + (lista ? lista + (sin.n ? ' · ' + num(sin.n) + ' ' + T(sin.n === 1 ? 'sin nombre' : 'sin nombre') : '') : num(sin.n) + ' ' + T(sin.n === 1 ? 'cable sin nombre' : 'cables sin nombre')) + sigue;
+      f.querySelector('span').textContent = paisNombre(l.cc) + '\n' + (lista ? lista + (sin.n ? ' · +' + num(sin.n) : '') : num(sin.n) + ' ' + T(sin.n === 1 ? 'cable, nombre no publicado' : 'cables, nombres no publicados')) /* 22 Oct 2026, 21:30 (owner): «sin nombre» reads as a hole; the fact is that the source does not publish the name */ + sigue;
     } else if (tipo === 'centro') {
       const c = LUG.centros[i];
       f.querySelector('b').textContent = c.ciudad ? c.ciudad + ' · ' + paisNombre(c.cc) : T('Lejos de cualquier ciudad');
