@@ -25,3 +25,16 @@ NTT Berlin 1|DE  # los dos de NTT en Berlín ya están en OpenStreetMap (sin nom
 NTT Berlin 2|DE  # ídem
 Aruba IT4 Hyper Cloud Data Center|IT  # los dos de Aruba en Roma ya están en OpenStreetMap
 TOP-IX Torino Colocation|IT  # TOP-IX es un punto de intercambio; no tiene centro de datos propio
+Equinix MI1|US  # es «NAP of the Americas» de OpenStreetMap
+Equinix DA1|US  # dentro de «Equinix Infomart» de OpenStreetMap (un punto por edificio)
+Equinix DA2|US  # ídem
+Equinix DA3|US  # ídem
+Equinix DA6|US  # ídem
+CoreSite LA1|US  # es «One Wilshire» de OpenStreetMap
+CoreSite NY1|US  # dentro de «32 Avenue of the Americas» de OpenStreetMap
+Equinix SE2|US  # dentro del «Westin Building» de OpenStreetMap
+DataBank SEA1|US  # ídem
+Cologix VAN5|CA  # Harbour Centre, ya en el mapa como Cologix VAN1
+Equinix CH4|US  # 350 East Cermak, ya en el mapa (Equinix CH1, Digital Realty ORD10)
+Digital Realty YYZ12|CA  # 151 Front Street West, ya en el mapa (Equinix TR1)
+Cologix TOR1|CA  # ídem

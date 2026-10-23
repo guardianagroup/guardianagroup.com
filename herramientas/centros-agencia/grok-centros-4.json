@@ -1,0 +1,306 @@
+[
+{
+"nombre": "Cologix MTL1",
+"ciudad": "Montreal",
+"pais": "CA",
+"lat": 45.5017,
+"lon": -73.5673,
+"estado": "ok"
+},
+{
+"nombre": "Cologix MTL11",
+"ciudad": "Montreal",
+"pais": "CA",
+"lat": 45.504,
+"lon": -73.564,
+"estado": "ok"
+},
+{
+"nombre": "Cologix MTL2",
+"ciudad": "Montreal",
+"pais": "CA",
+"lat": 45.47,
+"lon": -73.55,
+"estado": "ok"
+},
+{
+"nombre": "Cologix MTL3",
+"ciudad": "Montreal",
+"pais": "CA",
+"lat": 45.4995,
+"lon": -73.57,
+"estado": "ok"
+},
+{
+"nombre": "Cologix MTL4",
+"ciudad": "Montreal",
+"pais": "CA",
+"lat": 45.58,
+"lon": -73.56,
+"estado": "ok"
+},
+{
+"nombre": "Cologix TOR2",
+"ciudad": "Toronto",
+"pais": "CA",
+"lat": 43.6426,
+"lon": -79.401,
+"estado": "ok"
+},
+{
+"nombre": "Cologix TOR3",
+"ciudad": "Toronto",
+"pais": "CA",
+"lat": 43.6426,
+"lon": -79.401,
+"estado": "ok"
+},
+{
+"nombre": "Digital Realty TOR1",
+"ciudad": "Vaughan",
+"pais": "CA",
+"lat": 43.8167,
+"lon": -79.5333,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MT1",
+"ciudad": "Saint-Laurent",
+"pais": "CA",
+"lat": 45.5,
+"lon": -73.68,
+"estado": "ok"
+},
+{
+"nombre": "Aligned PHX-01",
+"ciudad": "Phoenix",
+"pais": "US",
+"lat": 33.669,
+"lon": -112.1,
+"estado": "ok"
+},
+{
+"nombre": "Aligned PHX-02",
+"ciudad": "Phoenix",
+"pais": "US",
+"lat": 33.67,
+"lon": -112.1,
+"estado": "ok"
+},
+{
+"nombre": "Aligned PHX-03",
+"ciudad": "Phoenix",
+"pais": "US",
+"lat": 33.67,
+"lon": -112.1,
+"estado": "ok"
+},
+{
+"nombre": "Aligned PHX-04",
+"ciudad": "Chandler",
+"pais": "US",
+"lat": 33.3,
+"lon": -111.84,
+"estado": "ok"
+},
+{
+"nombre": "Cologix NNJ2",
+"ciudad": "Cedar Knolls",
+"pais": "US",
+"lat": 40.82,
+"lon": -74.45,
+"estado": "ok"
+},
+{
+"nombre": "CoreSite AT1",
+"ciudad": "Atlanta",
+"pais": "US",
+"lat": 33.755,
+"lon": -84.39,
+"estado": "ok"
+},
+{
+"nombre": "CoreSite DE1",
+"ciudad": "Denver",
+"pais": "US",
+"lat": 39.745,
+"lon": -104.995,
+"estado": "ok"
+},
+{
+"nombre": "CoreSite DE2",
+"ciudad": "Denver",
+"pais": "US",
+"lat": 39.745,
+"lon": -104.98,
+"estado": "ok"
+},
+{
+"nombre": "CoreSite LA3",
+"ciudad": "Los Ángeles",
+"pais": "US",
+"lat": 34.055,
+"lon": -118.235,
+"estado": "ok"
+},
+{
+"nombre": "Digital Realty DFW36",
+"ciudad": "Dallas",
+"pais": "US",
+"lat": 32.82,
+"lon": -96.85,
+"estado": "ok"
+},
+{
+"nombre": "Digital Realty ORD01",
+"ciudad": "Chicago",
+"pais": "US",
+"lat": 41.87,
+"lon": -87.63,
+"estado": "no existe"
+},
+{
+"nombre": "Digital Realty SJC14",
+"ciudad": "Santa Clara",
+"pais": "US",
+"lat": 37.3861,
+"lon": -121.97,
+"estado": "ok"
+},
+{
+"nombre": "Equinix AT1",
+"ciudad": "Atlanta",
+"pais": "US",
+"lat": 33.755,
+"lon": -84.388,
+"estado": "ok"
+},
+{
+"nombre": "Equinix AT4",
+"ciudad": "Atlanta",
+"pais": "US",
+"lat": 33.9,
+"lon": -84.45,
+"estado": "ok"
+},
+{
+"nombre": "Equinix DA11",
+"ciudad": "Dallas",
+"pais": "US",
+"lat": 32.8,
+"lon": -96.82,
+"estado": "ok"
+},
+{
+"nombre": "Equinix DA4",
+"ciudad": "Dallas",
+"pais": "US",
+"lat": 32.785,
+"lon": -96.795,
+"estado": "ok"
+},
+{
+"nombre": "Equinix DA7",
+"ciudad": "Plano",
+"pais": "US",
+"lat": 33.05,
+"lon": -96.82,
+"estado": "ok"
+},
+{
+"nombre": "Equinix DE1",
+"ciudad": "Centennial",
+"pais": "US",
+"lat": 39.6,
+"lon": -104.87,
+"estado": "ok"
+},
+{
+"nombre": "Equinix DE2",
+"ciudad": "Englewood",
+"pais": "US",
+"lat": 39.58,
+"lon": -104.87,
+"estado": "ok"
+},
+{
+"nombre": "Equinix LA1",
+"ciudad": "Los Ángeles",
+"pais": "US",
+"lat": 34.048,
+"lon": -118.255,
+"estado": "ok"
+},
+{
+"nombre": "Equinix LA3",
+"ciudad": "El Segundo",
+"pais": "US",
+"lat": 33.92,
+"lon": -118.39,
+"estado": "ok"
+},
+{
+"nombre": "Equinix LA4",
+"ciudad": "El Segundo",
+"pais": "US",
+"lat": 33.92,
+"lon": -118.4,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MI2",
+"ciudad": "Miami",
+"pais": "US",
+"lat": 25.775,
+"lon": -80.19,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MI3",
+"ciudad": "Boca Ratón",
+"pais": "US",
+"lat": 26.35,
+"lon": -80.08,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MI6",
+"ciudad": "Doral",
+"pais": "US",
+"lat": 25.8,
+"lon": -80.34,
+"estado": "ok"
+},
+{
+"nombre": "Equinix NY9",
+"ciudad": "Nueva York",
+"pais": "US",
+"lat": 40.74,
+"lon": -74.0,
+"estado": "ok"
+},
+{
+"nombre": "Equinix SE4",
+"ciudad": "Kent",
+"pais": "US",
+"lat": 47.39,
+"lon": -122.28,
+"estado": "ok"
+},
+{
+"nombre": "QTS Miami 1",
+"ciudad": "Miami",
+"pais": "US",
+"lat": 25.79,
+"lon": -80.38,
+"estado": "ok"
+},
+{
+"nombre": "Switch The Keep Campus",
+"ciudad": "Atlanta",
+"pais": "US",
+"lat": 33.75,
+"lon": -84.65,
+"estado": "ok"
+}
+]
