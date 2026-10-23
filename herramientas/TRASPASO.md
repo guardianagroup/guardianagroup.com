@@ -400,6 +400,8 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   cámara que encuadra; cierra con Esc, con la ×, al abrir «Mi conexión», una puerta o el viaje), estilos al final de `orbita.css`.
   **Trampa evitada**: el HUD no puede llamarse `.espejo` porque el body lleva `en-espejo`… y la primera versión puso `body.espejo` y la regla `.espejo{position:fixed;…}` le cayó al body (en el móvil, `backdrop-filter` en el body descolocaba todo). Ahora: body `en-espejo`, HUD `.espejo-hud`.
   Textos en español en el DOM; inglés y portugués en `idioma.js` (los otros 39 idiomas, pendientes: están cerrados).
-- **terminos.html §6**: describe la medición y su regla. La siguiente versión, `x`.
+- **terminos.html §6**: describe la medición y su regla. Versión `x` (12:45): por debajo de 960 px de ancho el panel pasa a ser una tarjeta
+  compacta arriba (a 808 px tapaba medio planeta) y en ventanas bajas se ocultan las barras por país para que el método y «Datos verificados» se
+  vean. La siguiente, `y`.
 - **Consulta (ronda 3)**: Brave/DuckDuckGo/Tor y el nombre ZEROSS (doc «GUARDIANA sin instalar nada», sección «Igual o mejor que Brave,
   DuckDuckGo y Tor», y «Lo que no existe todavía en el mundo» con el escaneo mundial). zeross.tech = Zeroday Security Solutions (comprobado).
