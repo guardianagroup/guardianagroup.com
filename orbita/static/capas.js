@@ -1517,6 +1517,8 @@
       { const cp = capacidadDe(i); if (cp) { const clase = cp.tbps >= CAP.umbrales.gigante ? T('troncal gigante') : cp.tbps >= CAP.umbrales.grande ? T('troncal grande') : T('cable regional'); mas.push(T('Capacidad') + ': ' + (cp.tbps >= 1 ? num(cp.tbps) + ' Tbit/s' : num(Math.round(cp.tbps * 1000)) + ' Gbit/s') + (cp.pares ? ' · ' + cp.pares + ' ' + T('pares de fibra') : '') + ' · ' + clase); } }
       if (inf.aprox) {  // rebuilt by the agency: say so, and where it was checked
         mas.push(T('Trazado aproximado por mar') + ' · ' + T('Datos verificados'));
+        // 23 Oct 2026: a hop that would run hundreds of km over land is not drawn (a terrestrial link we cannot trace)
+        if (inf.sinTrazar) mas.push(inf.sinTrazar === 1 ? T('Un tramo por tierra sin dibujar') : num(inf.sinTrazar) + ' ' + T('tramos por tierra sin dibujar'));
       }
       // 22 Oct 2026, 14:34 (owner): «el cable que se rompió también lo indicamos»: known cuts and repairs, by hand
       { const nn = norm(gr ? gr[0] : (d.n || '')); const nt = NOTAS && NOTAS.find((q) => new RegExp('(^|[^a-z0-9])' + q.clave.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '([^a-z0-9]|$)').test(nn)); if (nt) { if (nt.incidentes) mas.push(T('Incidencias conocidas') + ': ' + nt.incidentes); if (nt.estado) mas.push(T('Estado') + ': ' + T(nt.estado === 'en servicio' ? 'En servicio' : 'En construcción')); } }
@@ -1612,7 +1614,7 @@
     if (clic && panelModelo) cierraPanel(); // a click on nothing closes the full card
   }
   // the interface on top of the planet (layer buttons, satellite filter, gauges…) never reaches the map underneath (owner, 22 Oct 2026, 18:03)
-  const UI_ENCIMA = 'header, .capa-vista, #puertas, #directo, #lugar, #seccion, .zoom, .conexion, .lista-cerca, #sat-ficha, #ficha-panel, #capas, #sat-vista, #sat-fase, #capa-nota, .altura, #dato, #viaje, #informe, button, a, select, input, label';
+  const UI_ENCIMA = 'header, .capa-vista, #puertas, #radiografias, #directo, #lugar, #seccion, .zoom, .conexion, .lista-cerca, #sat-ficha, #ficha-panel, #capas, #sat-vista, #sat-fase, #capa-nota, .altura, #dato, #viaje, #informe, button, a, select, input, label';
   addEventListener('click', (e) => { if (!soloTu && !e.target.closest(UI_ENCIMA)) { recogeTarjetas(); mira(e.clientX, e.clientY, true); } });
   // 23 Oct 2026, 09:06 (owner): «cuando una persona clique en la pantalla… desaparezca cualquier cuadro de los de arriba…
   // que no se anule, que se quede como estaba». A click on the planet only folds the open layer card; the layer and its

@@ -792,3 +792,72 @@ body.con-frase .espejo-modo .pre { opacity: 0; }
 :lang(zh-Hant) .frase { font-family: 'Songti TC', 'Noto Serif TC', 'Noto Serif CJK TC', 'Source Han Serif TC', 'PMingLiU', serif; }
 :lang(ja) .frase { font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Noto Serif JP', 'Noto Serif CJK JP', 'Source Han Serif JP', serif; }
 @media (prefers-reduced-motion: reduce) { .frase, .frase .fw { transition: opacity .6s ease; } }
+
+/* ---------- Radiografías (23 Oct 2026, 13:40, owner: its own door, the first one; «Empezar» leads here) ----------
+   The panel opens where the doors are and the planet stays in view: on a computer a column on the left, on a phone a
+   sheet from the bottom. Three ways of looking: «Tú», «Una web», «Tus aparatos» (the last one not built yet). */
+/* «Empezar»: after the phrase, in the middle of the same gap under the planet */
+.empezar { all: unset; box-sizing: border-box; position: fixed; left: 50%; top: 80%; z-index: 6; transform: translate(-50%, 8px); opacity: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px 13px 24px; border-radius: 999px; background: var(--accent); color: var(--accent-fg); font: 600 14px/1 var(--texto); letter-spacing: .01em; white-space: nowrap; box-shadow: 0 0 0 1px rgba(156,195,228,.35), 0 8px 26px rgba(156,195,228,.20); transition: opacity .7s ease, transform .9s cubic-bezier(.2,.7,.2,1), box-shadow .25s, filter .2s; }
+.empezar[hidden] { display: none; }
+.empezar.entra { opacity: 1; transform: translate(-50%, 0); }
+.empezar svg { transition: transform .25s cubic-bezier(.2,.7,.2,1); }
+.empezar:hover { filter: brightness(1.08); box-shadow: 0 0 0 1px rgba(156,195,228,.6), 0 0 0 6px rgba(156,195,228,.12), 0 10px 32px rgba(156,195,228,.34); }
+.empezar:hover svg { transform: translateX(3px); }
+.empezar.entra:active { transform: translate(-50%, 0) scale(.96); }
+.empezar:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+body.con-frase .empezar, body.en-radio .empezar { opacity: 0 !important; pointer-events: none; }
+[dir="rtl"] .empezar svg { transform: scaleX(-1); }
+[dir="rtl"] .empezar:hover svg { transform: scaleX(-1) translateX(3px); }
+
+.radio-panel { position: fixed; left: calc(40px + env(safe-area-inset-left, 0px)); top: max(96px, calc(50% - 310px)); width: 340px; max-height: calc(100vh - 124px); overflow: auto; z-index: 25; display: flex; flex-direction: column; gap: 12px; padding: 2px; scrollbar-width: none; animation: radio-entra .55s cubic-bezier(.2,.7,.2,1); }
+.radio-panel::-webkit-scrollbar { display: none; }
+.radio-panel[hidden] { display: none; }
+.radio-panel.sale { animation: radio-sale .26s ease forwards; }
+@keyframes radio-entra { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+@keyframes radio-sale { to { opacity: 0; transform: translateX(-8px); } }
+.radio-panel .cab { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.radio-panel .k { font: 500 10px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #8A95A2; }
+.radio-panel .cerrar { all: unset; cursor: pointer; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: var(--muted); border: 1px solid transparent; transition: color .2s, border-color .2s, background .2s; }
+.radio-panel .cerrar:hover { color: var(--fg); border-color: var(--line); background: rgba(156,195,228,.08); }
+.radio-panel .cerrar:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.radio-panel .t { margin: 0; font: 400 36px/1.02 'Instrument Serif', Georgia, 'Times New Roman', serif; letter-spacing: -.01em; color: var(--fg); text-shadow: 0 2px 18px rgba(6,8,12,.9); text-wrap: balance; }
+.radio-panel .d { margin: -2px 0 2px; font: 400 13px/1.5 var(--texto); color: #B4BEC9; text-shadow: 0 1px 10px rgba(6,8,12,.95); max-width: 34ch; }
+.radio-panel .tarjeta { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px 15px; border: 1px solid var(--line); border-radius: 14px; background: rgba(10,14,20,.78); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.radio-panel .tarjeta .tk { display: flex; align-items: center; justify-content: space-between; gap: 8px; font: 500 10px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+.radio-panel .tarjeta .pronto { color: var(--aviso); border: 1px solid #4A3C22; border-radius: 999px; padding: 3px 7px; font-size: 9px; letter-spacing: .12em; }
+.radio-panel .tarjeta h3 { margin: 0; font: 600 16px/1.25 var(--texto); color: var(--fg); letter-spacing: -.005em; text-wrap: balance; }
+.radio-panel .tarjeta p { margin: 0; font: 400 12.5px/1.5 var(--texto); color: #B4BEC9; }
+.radio-panel .tarjeta .nota { font: 400 10.5px/1.5 var(--mono); color: #7C8794; }
+.radio-panel .accion { all: unset; cursor: pointer; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; padding: 9px 15px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font: 600 12px/1 var(--texto); transition: background .2s, color .2s, box-shadow .25s; }
+.radio-panel .accion svg { transition: transform .25s cubic-bezier(.2,.7,.2,1); }
+.radio-panel .accion:hover { background: var(--accent); color: var(--accent-fg); box-shadow: 0 0 0 4px rgba(156,195,228,.12); }
+.radio-panel .accion:hover svg { transform: translateX(2px); }
+.radio-panel .accion:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.radio-panel .sitios { display: flex; flex-wrap: wrap; gap: 5px; }
+.radio-panel .sitios button { all: unset; cursor: pointer; display: inline-flex; align-items: baseline; gap: 5px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); background: rgba(12,17,24,.6); font: 500 11.5px/1 var(--texto); color: #C4CCD5; white-space: nowrap; transition: color .2s, border-color .2s, background .2s; }
+.radio-panel .sitios button small { font: 500 9px/1 var(--mono); letter-spacing: .06em; color: #6F7B88; }
+.radio-panel .sitios button:hover { color: var(--fg); border-color: rgba(156,195,228,.6); background: rgba(156,195,228,.12); }
+.radio-panel .sitios button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.radio-panel .aparatos h3, .radio-panel .aparatos p { opacity: .8; }
+[dir="rtl"] .radio-panel { left: auto; right: calc(40px + env(safe-area-inset-right, 0px)); }
+[dir="rtl"] .radio-panel .accion svg { transform: scaleX(-1); }
+/* the panel takes the doors' place; the planet and the rest stay */
+body.en-radio #puertas, body.en-radio #ficha { opacity: 0 !important; pointer-events: none !important; transition: opacity .3s; }
+@media (max-width: 760px) {
+  .radio-panel { z-index: 60; left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: 86vh; gap: 10px; padding: 16px max(16px, env(safe-area-inset-right, 0px)) calc(18px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); border-top: 1px solid var(--line); border-radius: 18px 18px 0 0; background: rgba(8,11,16,.96); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); animation-name: radio-sube; }
+  .radio-panel.sale { animation-name: radio-baja; }
+  .radio-panel .t { font-size: 30px; }
+  [dir="rtl"] .radio-panel { right: 0; }
+  body.en-radio .espejo-modo, body.en-radio #directo { opacity: 0 !important; pointer-events: none !important; }
+}
+@keyframes radio-sube { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes radio-baja { to { opacity: 0; transform: translateY(16px); } }
+@media (prefers-reduced-motion: reduce) { .radio-panel, .radio-panel.sale { animation-duration: .01ms; } .empezar svg, .radio-panel .accion svg { transition: none; } }
+/* the layer bar on its own line when the centred bar would run into the header's buttons (orbita.js measures it) */
+body.capas-abajo .capas { position: static; transform: none; order: 3; width: max-content; max-width: 100%; margin: 0 auto; justify-content: center; flex-wrap: wrap; }
+/* «Conocer GUARDIANA»: the presentation, now behind Órbita (23 Oct 2026, 13:40) */
+.izq .conocer { font: 500 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #8A95A2; text-decoration: none; padding: 6px 0 5px; border-bottom: 1px solid rgba(156,195,228,.18); transition: color .2s, border-color .2s; white-space: nowrap; }
+.izq .conocer:hover { color: var(--fg); border-color: rgba(156,195,228,.6); }
+.izq .conocer:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+body.dentro .izq .conocer { display: none; }
+@media (max-width: 420px) { .izq .conocer { letter-spacing: .1em; } }

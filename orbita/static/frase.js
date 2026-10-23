@@ -15,7 +15,7 @@
   const FRASE = 'Entiende cada conexión. Decide tu propio rumbo.';
   const T = (s) => (window.GuardianaIdioma ? window.GuardianaIdioma.t(s) : s);
   const reducido = () => !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
-  const ocupado = () => /\b(dentro|en-espejo|viaje|solo-tu)\b/.test(document.body.className);
+  const ocupado = () => /\b(dentro|en-espejo|en-radio|viaje|solo-tu)\b/.test(document.body.className);
   // the location question can open over the planet on a first visit: the phrase waits for it (or starts again after it)
   const pregunta = () => { const l = document.getElementById('lugar'); return !!(l && !l.hidden); };
   // the website's display face, loaded before the first word lights up so no letter changes shape while it is read
@@ -44,18 +44,26 @@
     const r = el.getBoundingClientRect(), m = el.querySelectorAll('.bl');
     return { arriba: m[0].getBoundingClientRect().top - r.top - mayuscula(), abajo: m[m.length - 1].getBoundingClientRect().top - r.top };
   }
-  function coloca() {
-    const G = plan(); if (!el || !G || !G.R) return !!el; // without the planet's measures the stylesheet's own place stands
+  // the gap under the planet: from its glowing rim down to the first control below it, and as wide as the cards
+  // beside it allow (also used by «Empezar», which takes the phrase's place afterwards)
+  function mideHueco() {
+    const G = plan(); if (!G || !G.R) return null;
     const W = innerWidth, H = innerHeight;
     const techo = G.CY + G.R * 1.04; // the soft glow under the rim still reads as planet
     const cajas = [...document.querySelectorAll(ALREDEDOR)].map(caja).filter(Boolean);
     const enMedio = (r) => r.left < G.CX + 60 && r.right > G.CX - 60;
     let suelo = H - 16;
     for (const r of cajas) if (enMedio(r) && r.top > techo - 1) suelo = Math.min(suelo, r.top);
-    const hueco = suelo - techo; if (hueco < 44) return false;
     let izq = 0, der = W;
     for (const r of cajas) { if (enMedio(r) || r.bottom <= techo || r.top >= suelo) continue; if (r.right <= G.CX) izq = Math.max(izq, r.right + 8); else if (r.left >= G.CX) der = Math.min(der, r.left - 8); }
-    const ancho = Math.floor(Math.min(820, W * 0.92, 2 * Math.min(G.CX - izq, der - G.CX)));
+    return { techo, suelo, cx: G.CX, ancho: Math.floor(Math.min(820, W * 0.92, 2 * Math.min(G.CX - izq, der - G.CX))) };
+  }
+  window.OrbitaHueco = mideHueco;
+  function coloca() {
+    if (!el) return false;
+    const h0 = mideHueco(); if (!h0) return true; // without the planet's measures the stylesheet's own place stands
+    const { techo, suelo, ancho } = h0;
+    const hueco = suelo - techo; if (hueco < 44) return false;
     // the stylesheet's size first; one line while it can stay large, otherwise one sentence per line
     el.classList.remove('parte'); el.style.fontSize = ''; el.style.maxWidth = 'none'; el.style.whiteSpace = 'nowrap';
     const s = getComputedStyle(el), f0 = parseFloat(s.fontSize), pad = parseFloat(s.paddingLeft) + parseFloat(s.paddingRight);
@@ -84,8 +92,10 @@
   }
 
   // ---------- the phrase ----------
+  const avisa = () => dispatchEvent(new CustomEvent('guardiana-frase-fin'));
   function quita() {
     if (!el) return; const x = el; el = null;
+    setTimeout(avisa, 900);
     relojes.splice(0).forEach(clearTimeout); cancelAnimationFrame(vigia); removeEventListener('resize', reajusta);
     x.classList.add('fuera'); document.body.classList.remove('con-frase');
     setTimeout(() => x.remove(), 1400);
