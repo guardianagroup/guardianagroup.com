@@ -128,6 +128,28 @@ class Agua:
         im = Image.open(os.path.join(RAIZ, 'static', 'tierra', 'agua.png')).convert('L')
         self.W, self.H = im.size  # 2048×1024: one pixel is about 20 km at the equator
         self.m = bytearray(im.tobytes())
+        self.abre_pasos()
+    # 23 Oct 2026 (owner, on a straight «cable» from Marseille to Karachi across Turkey and Iran: «¿ese cable submarino es
+    # un error? revisa todo»): at 20 km a pixel the mask closes the Gulf of Suez and the Suez crossing, the Bosphorus and
+    # the Dardanelles, and Panama, so a hop through them found no sea route and fell back to a straight line over land.
+    # For tracing only (the planet's own water is not touched), those passages are opened along their real course:
+    # the cables there cross Egypt and Panama by land or go through the Turkish straits, a few tens of km either way.
+    PASOS = {
+        'Suez y golfo de Suez': [(32.32, 31.32), (32.30, 31.00), (32.28, 30.60), (32.35, 30.30), (32.55, 29.95), (32.62, 29.60), (32.95, 29.05), (33.45, 28.45), (33.85, 27.95), (34.20, 27.70)],
+        'Bósforo, Mármara y Dardanelos': [(29.15, 41.30), (29.05, 41.10), (28.98, 40.98), (28.60, 40.85), (28.00, 40.75), (27.40, 40.60), (26.85, 40.45), (26.60, 40.30), (26.38, 40.12), (26.15, 39.95), (25.90, 39.85)],
+        'Panamá': [(-79.95, 9.55), (-79.92, 9.30), (-79.85, 9.15), (-79.68, 9.02), (-79.55, 8.90), (-79.45, 8.70)],
+        'Golfo de Aqaba': [(35.00, 29.52), (34.92, 29.10), (34.72, 28.60), (34.50, 28.10), (34.42, 27.85)],
+    }
+    def abre_pasos(self):
+        for linea in self.PASOS.values():
+            for (lo1, la1), (lo2, la2) in zip(linea, linea[1:]):
+                x1, y1 = self.px(lo1, la1); x2, y2 = self.px(lo2, la2)
+                n = max(abs(x2 - x1), abs(y2 - y1), 1)
+                for j in range(n + 1):
+                    x = round(x1 + (x2 - x1) * j / n); y = round(y1 + (y2 - y1) * j / n)
+                    for dx in (-1, 0, 1):
+                        for dy in (-1, 0, 1):
+                            if 0 <= y + dy < self.H: self.m[(y + dy) * self.W + ((x + dx) % self.W)] = 255
     def px(self, lon, lat):
         return int((lon + 180) / 360 * self.W) % self.W, min(self.H - 1, max(0, int((90 - lat) / 180 * self.H)))
     def lonlat(self, x, y):
@@ -147,8 +169,9 @@ class Agua:
                     d = dx * dx + dy * dy
                     if best is None or d < best[0]: best = (d, x % self.W, y)
         return best
-    def ruta(self, a, b):
-        """A* over water pixels from a to b (pixel coords), 8 neighbours, wrapping east–west. Returns pixel list."""
+    def ruta(self, a, b, umbral=96):
+        """A* over water pixels from a to b (pixel coords), 8 neighbours, wrapping east–west. Returns pixel list.
+        «umbral»: how much water a pixel needs to be crossed (the coast is soft: higher keeps narrow land closed)."""
         W, H = self.W, self.H
         def h(x, y):
             dx = abs(x - b[0]); dx = min(dx, W - dx)
@@ -167,7 +190,7 @@ class Agua:
                 for dy in (-1, 0, 1):
                     if not dx and not dy: continue
                     nx, ny = (x + dx) % W, y + dy
-                    if ny < 0 or ny >= H or not self.agua(nx, ny, 96): continue
+                    if ny < 0 or ny >= H or not self.agua(nx, ny, umbral): continue
                     # a slightly higher cost next to the coast keeps the trace in open water
                     c = math.hypot(dx, dy) * (1.0 if self.agua(nx + 1, ny) and self.agua(nx - 1, ny) and self.agua(nx, min(H - 1, ny + 1)) and self.agua(nx, max(0, ny - 1)) else 1.6)
                     ng = gc + c
@@ -179,6 +202,47 @@ class Agua:
         p = [goal]
         while p[-1] != start: p.append(prev[p[-1]])
         return p[::-1]
+
+def tierra_en(agua, linea, bordes=40):
+    """(longest stretch over land inside the line, total km over land) for a lon/lat line, following the great circle
+    between its points every ~10 km. The first and last «bordes» km are the landing itself and do not count."""
+    pts, pos = [], 0.0
+    for (lo1, la1), (lo2, la2) in zip(linea, linea[1:]):
+        d = km(la1, lo1, la2, lo2); n = max(1, int(d / 10))
+        a1, b1, a2, b2 = map(math.radians, (la1, lo1, la2, lo2))
+        u = (math.cos(a1) * math.cos(b1), math.cos(a1) * math.sin(b1), math.sin(a1)); v = (math.cos(a2) * math.cos(b2), math.cos(a2) * math.sin(b2), math.sin(a2))
+        ang = math.acos(max(-1.0, min(1.0, sum(p * q for p, q in zip(u, v)))))
+        for j in range(n + (1 if (lo2, la2) == tuple(linea[-1]) else 0)):
+            f = j / n
+            if ang < 1e-9: w = u
+            else:
+                f0, f1 = math.sin((1 - f) * ang) / math.sin(ang), math.sin(f * ang) / math.sin(ang)
+                w = tuple(f0 * p + f1 * q for p, q in zip(u, v))
+            lo, la = math.degrees(math.atan2(w[1], w[0])), math.degrees(math.asin(max(-1.0, min(1.0, w[2]))))
+            x, y = agua.px(lo, la)
+            pts.append((pos + d * f, agua.agua(x, y, 128)))
+        pos += d
+    larga = total = 0.0; ini = None
+    for i, (k, w) in enumerate(pts):
+        dentro = bordes < k < pos - bordes
+        if not w and dentro and ini is None: ini = k
+        if (w or not dentro) and ini is not None:
+            larga = max(larga, k - ini); total += k - ini; ini = None
+    return larga, total
+
+def densa(linea, paso=150):
+    """Points every «paso» km at most, straight on the map: the planet draws each hop as a great circle, which over a
+    long hop bows away from the traced route and can cut across a cape (Baja California on Curie, 23 Oct 2026)."""
+    out = [linea[0]]
+    for (lo1, la1), (lo2, la2) in zip(linea, linea[1:]):
+        if lo2 - lo1 > 180: lo2 -= 360
+        elif lo1 - lo2 > 180: lo2 += 360
+        n = int(km(la1, lo1, la2, lo2) // paso)
+        for j in range(1, n + 1):
+            f = j / (n + 1); lo = lo1 + (lo2 - lo1) * f
+            out.append([round(((lo + 180) % 360) - 180, 3), round(la1 + (la2 - la1) * f, 3)])
+        out.append([round(((lo2 + 180) % 360) - 180, 3), round(la2, 3)])
+    return out
 
 def suaviza(pts, veces=2):
     """Chaikin's corner cutting: the pixel route loses its staircase and reads like a cable, not a maze."""
@@ -320,23 +384,39 @@ def main():
                 u = str(u).strip()
                 if u.startswith('http') and 'submarinecablemap' not in u and 'telegeography' not in u and u not in fuentes: fuentes.append(u)
         # trace the sea route between consecutive landings
-        tramos = []
+        tramos, sin_trazar = [], []
         for A, B in zip(llegadas, llegadas[1:]):
             recto = km(A['lat'], A['lon'], B['lat'], B['lon'])
             pa, pb = agua.cerca_agua(A['lon'], A['lat'], 12, 128), agua.cerca_agua(B['lon'], B['lat'], 12, 128)
-            r = agua.ruta((pa[1], pa[2]), (pb[1], pb[2])) if recto > 25 and pa and pb else None
-            linea, por = None, 'mar'
-            if r:
-                r = simplifica(suaviza(r), 0.6)
-                linea = [[A['lon'], A['lat']]] + [[round(x, 3), round(y, 3)] for x, y in (agua.lonlat(px, py) for px, py in r[1:-1])] + [[B['lon'], B['lat']]]
-                largo = sum(km(p[1], p[0], q[1], q[0]) for p, q in zip(linea, linea[1:]))
-                if largo > 2.5 * recto + 200: linea = None  # the mask has no way through (Suez, a strait too narrow): the real cable crosses land there
+            linea, por, mejor = None, 'mar', None
+            if recto > 25 and pa and pb:
+                # 23 Oct 2026: the soft coast let some routes cut across narrow land (Baja California, the coast of
+                # Ecuador); a route that does is traced again over a stricter mask, and the one with least land is kept
+                for umbral in (96, 150, 200):
+                    r = agua.ruta((pa[1], pa[2]), (pb[1], pb[2]), umbral)
+                    if not r: continue
+                    r = simplifica(suaviza(r), 0.6)
+                    cand = densa([[A['lon'], A['lat']]] + [[round(x, 3), round(y, 3)] for x, y in (agua.lonlat(px, py) for px, py in r[1:-1])] + [[B['lon'], B['lat']]])
+                    largo = sum(km(p[1], p[0], q[1], q[0]) for p, q in zip(cand, cand[1:]))
+                    if largo > 2.5 * recto + 200: break  # no way through by sea, even with the passages open
+                    t = tierra_en(agua, cand)[0]
+                    if mejor is None or t < mejor[0]: mejor = (t, cand)
+                    if t <= 60: break
+                if mejor: linea = mejor[1]
             if linea is None:
-                linea, por = [[A['lon'], A['lat']], [B['lon'], B['lat']]], 'tierra'  # a straight hop (Abu Talat → Zafarana across Egypt, for instance)
+                # A straight hop only where the cable really crosses a little land (Abu Talat → Zafarana in Egypt,
+                # Panama, Guatemala…); a hop that would run hundreds of kilometres over land is left out, never
+                # drawn as a submarine cable where there is none.
+                recta = [[A['lon'], A['lat']], [B['lon'], B['lat']]]
+                if tierra_en(agua, recta)[1] <= 400: linea, por = recta, 'tierra'
+                else:
+                    sin_trazar.append('%s (%s) → %s (%s)' % (A['lugar'], A['cc'], B['lugar'], B['cc'])); continue
             tramos.append({'n': nombre, 'l': linea, 'src': 'agencia', 'aprox': 1, 'por': por, 'de': [A['lugar'], A['cc']], 'a': [B['lugar'], B['cc']]})
+        if sin_trazar: descartes.append((k, 'tramos sin trazar (cruzarían cientos de km de tierra): ' + '; '.join(sin_trazar)))
         if not tramos: continue
         kmMapa = sum(km(p[1], p[0], q[1], q[0]) for t in tramos for p, q in zip(t['l'], t['l'][1:]))
         info = {'anio': anio, 'km': kmv, 'kmMapa': round(kmMapa), 'duenos': ds, 'fuentes': fuentes[:8], 'miembros': sorted(miembros)}
+        if sin_trazar: info['sinTrazar'] = len(sin_trazar)
         for t in tramos: t['info'] = info
         salida.append({'clave': k, 'nombre': nombre, 'llegadas': [{x: L[x] for x in ('lugar', 'cc', 'lat', 'lon')} for L in llegadas], 'info': info, 'tramos': len(tramos)})
         cab_nuevos = tramos

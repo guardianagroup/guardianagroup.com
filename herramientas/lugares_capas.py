@@ -168,6 +168,7 @@ def main():
             if ag.get('km'): i['km'] = ag['km']; i.pop('kmMapa', None)
             if ag.get('duenos'): i['duenos'] = ag['duenos'][:6]
             if ag.get('fuentes'): i['fuentes'] = ag['fuentes'][:6]
+            if ag.get('sinTrazar'): i['sinTrazar'] = ag['sinTrazar']  # hops not drawn: they would cross hundreds of km of land
         return i
     # each landing with its longitude and latitude (owner, 22 Oct 2026: «la distancia punto a punto» in the card)
     # the name: as before; when two names were joined, the agency's (the full one), else the longest («SEA-ME-WE 4»)

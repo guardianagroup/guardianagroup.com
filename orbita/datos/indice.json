@@ -6,7 +6,12 @@
   "puntos": true
  },
  "medida_tierra_osm": {
-  "way[\"telecom\"=\"line\"][\"name\"];": "sin respuesta: the JSON object must be str, bytes or bytearray, not NoneType",
+  "way[\"telecom\"=\"line\"][\"name\"];": {
+   "nodes": "0",
+   "ways": "11",
+   "relations": "0",
+   "total": "11"
+  },
   "way[\"communication\"=\"line\"][\"name\"];": {
    "nodes": "0",
    "ways": "839",
@@ -38,5 +43,5 @@
    "total": "0"
   }
  },
- "medida_tierra_fecha": "2026-10-22T21:59:12Z"
+ "medida_tierra_fecha": "2026-10-22T23:25:15Z"
 }
