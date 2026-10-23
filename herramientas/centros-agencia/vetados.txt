@@ -43,3 +43,9 @@ AIMS KL1 Menara AIMS|MY  # el «AIMS» de Kuala Lumpur de OpenStreetMap (Menara 
 Digital Realty SIN10|SG  # «Jurong Data Center» de OpenStreetMap
 Digital Realty SIN11|SG  # el «Digital Realty Data Center» de Loyang de OpenStreetMap
 Digital Realty SIN12|SG  # «Digital Loyang 2» de OpenStreetMap
+AirTrunk SYD2|AU  # «AirTrunk Sydney North» de OpenStreetMap
+CDC Fyshwick Campus|AU  # «Fyshwick 1» y «Fyshwick 2» de OpenStreetMap
+CDC Hume Campus|AU  # los edificios «Hume» de CDC ya están en OpenStreetMap
+CDC Hobsonville|NZ  # «CDC Data Centre HV1» de OpenStreetMap
+Datacom Highbrook|NZ  # el «Datacom Data Centre» de Highbrook de OpenStreetMap
+Equinix JN1|ZA  # el «Equinix» de Johannesburgo de OpenStreetMap

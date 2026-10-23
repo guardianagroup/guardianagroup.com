@@ -1,0 +1,314 @@
+[
+{
+"nombre": "AngoNAP I",
+"ciudad": "Luanda",
+"pais": "AO",
+"lat": -8.84,
+"lon": 13.23,
+"estado": "ok"
+},
+{
+"nombre": "Raxio AO1",
+"ciudad": "Luanda",
+"pais": "AO",
+"lat": -8.8,
+"lon": 13.3,
+"estado": "ok"
+},
+{
+"nombre": "Equinix AE1",
+"ciudad": "Adelaida",
+"pais": "AU",
+"lat": -34.93,
+"lon": 138.6,
+"estado": "ok"
+},
+{
+"nombre": "Equinix BR1",
+"ciudad": "Brisbane",
+"pais": "AU",
+"lat": -27.47,
+"lon": 153.03,
+"estado": "ok"
+},
+{
+"nombre": "Equinix PE1",
+"ciudad": "Perth",
+"pais": "AU",
+"lat": -31.95,
+"lon": 115.86,
+"estado": "ok"
+},
+{
+"nombre": "Global Switch Sydney",
+"ciudad": "Sídney",
+"pais": "AU",
+"lat": -33.88,
+"lon": 151.2,
+"estado": "cerrado"
+},
+{
+"nombre": "NEXTDC M2",
+"ciudad": "Tullamarine",
+"pais": "AU",
+"lat": -37.7,
+"lon": 144.88,
+"estado": "ok"
+},
+{
+"nombre": "NEXTDC P1",
+"ciudad": "Malaga, Perth",
+"pais": "AU",
+"lat": -31.86,
+"lon": 115.89,
+"estado": "ok"
+},
+{
+"nombre": "Djibouti Data Centre",
+"ciudad": "Yibuti",
+"pais": "DJ",
+"lat": 11.57,
+"lon": 43.15,
+"estado": "ok"
+},
+{
+"nombre": "eBS WebServices Sidi Abdellah",
+"ciudad": "Sidi Abdellah",
+"pais": "DZ",
+"lat": 36.68,
+"lon": 2.85,
+"estado": "ok"
+},
+{
+"nombre": "Raya Data Center 6th of October",
+"ciudad": "Ciudad 6 de Octubre",
+"pais": "EG",
+"lat": 29.93,
+"lon": 30.91,
+"estado": "ok"
+},
+{
+"nombre": "Raya Data Center Cairo",
+"ciudad": "El Cairo",
+"pais": "EG",
+"lat": 30.04,
+"lon": 31.24,
+"estado": "ok"
+},
+{
+"nombre": "Raxio ET1",
+"ciudad": "Adís Abeba",
+"pais": "ET",
+"lat": 9.03,
+"lon": 38.75,
+"estado": "ok"
+},
+{
+"nombre": "Wingu Ethiopia Data Centre",
+"ciudad": "Adís Abeba",
+"pais": "ET",
+"lat": 9.03,
+"lon": 38.75,
+"estado": "ok"
+},
+{
+"nombre": "PAIX Accra ACC-1",
+"ciudad": "Acra",
+"pais": "GH",
+"lat": 5.6,
+"lon": -0.19,
+"estado": "ok"
+},
+{
+"nombre": "Africa Data Centres NBO1",
+"ciudad": "Nairobi",
+"pais": "KE",
+"lat": -1.29,
+"lon": 36.82,
+"estado": "ok"
+},
+{
+"nombre": "iXAfrica NBOX1.1",
+"ciudad": "Nairobi",
+"pais": "KE",
+"lat": -1.32,
+"lon": 36.89,
+"estado": "ok"
+},
+{
+"nombre": "PAIX Nairobi NBO-1",
+"ciudad": "Nairobi",
+"pais": "KE",
+"lat": -1.29,
+"lon": 36.82,
+"estado": "ok"
+},
+{
+"nombre": "N+ONE CMN Campus",
+"ciudad": "Nouaceur",
+"pais": "MA",
+"lat": 33.37,
+"lon": -7.59,
+"estado": "ok"
+},
+{
+"nombre": "Rogers Capital Data Center",
+"ciudad": "Ébène",
+"pais": "MU",
+"lat": -20.24,
+"lon": 57.49,
+"estado": "ok"
+},
+{
+"nombre": "Raxio MZ1",
+"ciudad": "Maputo",
+"pais": "MZ",
+"lat": -25.97,
+"lon": 32.46,
+"estado": "ok"
+},
+{
+"nombre": "Africa Data Centres LOS1",
+"ciudad": "Lagos",
+"pais": "NG",
+"lat": 6.42,
+"lon": 3.42,
+"estado": "ok"
+},
+{
+"nombre": "Equinix LG1",
+"ciudad": "Lagos",
+"pais": "NG",
+"lat": 6.45,
+"lon": 3.47,
+"estado": "ok"
+},
+{
+"nombre": "Equinix LG2",
+"ciudad": "Lagos",
+"pais": "NG",
+"lat": 6.45,
+"lon": 3.47,
+"estado": "ok"
+},
+{
+"nombre": "Galaxy Backbone Abuja Data Centre",
+"ciudad": "Abuya",
+"pais": "NG",
+"lat": 9.06,
+"lon": 7.49,
+"estado": "ok"
+},
+{
+"nombre": "OADC Lagos",
+"ciudad": "Lagos",
+"pais": "NG",
+"lat": 6.43,
+"lon": 3.48,
+"estado": "ok"
+},
+{
+"nombre": "Rack Centre LGS 1",
+"ciudad": "Lagos",
+"pais": "NG",
+"lat": 6.6,
+"lon": 3.35,
+"estado": "ok"
+},
+{
+"nombre": "CDC Silverdale",
+"ciudad": "Silverdale",
+"pais": "NZ",
+"lat": -36.61,
+"lon": 174.68,
+"estado": "ok"
+},
+{
+"nombre": "Datacom Abel",
+"ciudad": "Wellington",
+"pais": "NZ",
+"lat": -41.29,
+"lon": 174.77,
+"estado": "ok"
+},
+{
+"nombre": "Datacom Gloucester",
+"ciudad": "Christchurch",
+"pais": "NZ",
+"lat": -43.53,
+"lon": 172.63,
+"estado": "ok"
+},
+{
+"nombre": "PNG DataCo Port Moresby Data Centre",
+"ciudad": "Port Moresby",
+"pais": "PG",
+"lat": -9.44,
+"lon": 147.18,
+"estado": "ok"
+},
+{
+"nombre": "Rwanda National Data Centre",
+"ciudad": "Kigali",
+"pais": "RW",
+"lat": -1.95,
+"lon": 30.06,
+"estado": "ok"
+},
+{
+"nombre": "DataXion Tunis",
+"ciudad": "Túnez",
+"pais": "TN",
+"lat": 36.81,
+"lon": 10.18,
+"estado": "ok"
+},
+{
+"nombre": "Tanzania National Data Centre",
+"ciudad": "Dar es Salaam",
+"pais": "TZ",
+"lat": -6.79,
+"lon": 39.21,
+"estado": "ok"
+},
+{
+"nombre": "Africa Data Centres CPT1",
+"ciudad": "Ciudad del Cabo",
+"pais": "ZA",
+"lat": -34.0,
+"lon": 18.47,
+"estado": "ok"
+},
+{
+"nombre": "Teraco CT1",
+"ciudad": "Ciudad del Cabo",
+"pais": "ZA",
+"lat": -33.97,
+"lon": 18.47,
+"estado": "ok"
+},
+{
+"nombre": "Teraco DB1",
+"ciudad": "Durban",
+"pais": "ZA",
+"lat": -29.86,
+"lon": 31.02,
+"estado": "ok"
+},
+{
+"nombre": "Paratus Zambia Data Centre",
+"ciudad": "Lusaka",
+"pais": "ZM",
+"lat": -15.42,
+"lon": 28.28,
+"estado": "ok"
+},
+{
+"nombre": "Liquid Intelligent Technologies Harare Data Centre",
+"ciudad": "Harare",
+"pais": "ZW",
+"lat": -17.83,
+"lon": 31.05,
+"estado": "ok"
+}
+]
