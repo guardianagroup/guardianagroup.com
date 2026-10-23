@@ -29,7 +29,7 @@
   const CLASES = {
     sub: { gigante: true, grande: true, regional: true, sinDato: true, aprox: true, previstos: true },
     fibra: { principal: true, largo: true, nacional: true, regional: true, obra: true },
-    puntos: { datos: true, intercambio: true, estaciones: true, grandes: false },
+    puntos: { datos: true, intercambio: true, estaciones: true, pequenos: true }, // 22 Oct 2026, 22:42 (owner: «es un semáforo»): every class is «on = shown», no inverted filters
   };
   const PRINCIPALES = { sub: ['gigante', 'grande', 'regional', 'sinDato'], fibra: ['principal', 'largo', 'nacional', 'regional'], puntos: ['datos', 'intercambio', 'estaciones'] };
   // which class a submarine cable belongs to (by its published capacity) and whether it shows now
@@ -37,7 +37,7 @@
   const veSub = (i, l) => CLASES.sub[claseSub(i)] && (!l.aprox || CLASES.sub.aprox);
   const claseFibra = (l) => l.x.obra ? 'obra' : l.nivel === 3 ? 'principal' : l.nivel === 2 ? 'largo' : l.nivel === 1 ? 'nacional' : 'regional';
   const veFibra = (l) => (!l.x.obra || CLASES.fibra.obra) && CLASES.fibra[l.nivel === 3 ? 'principal' : l.nivel === 2 ? 'largo' : l.nivel === 1 ? 'nacional' : 'regional'];
-  const vePunto = (q) => q.t === 'datos' ? CLASES.puntos.datos && (!CLASES.puntos.grandes || (PT && PT.porOp && q.o && (PT.porOp.get(q.o) || 0) >= 5)) : q.t === 'intercambio' ? CLASES.puntos.intercambio : true;
+  const vePunto = (q) => q.t === 'datos' ? CLASES.puntos.datos && (CLASES.puntos.pequenos || (PT && PT.porOp && q.o && (PT.porOp.get(q.o) || 0) >= 5)) : q.t === 'intercambio' ? CLASES.puntos.intercambio : true;
   const claveClases = (k) => Object.values(CLASES[k]).map((v) => (v ? 1 : 0)).join('');
 
   // ---------- data ----------
@@ -1619,7 +1619,7 @@
     caja.querySelectorAll('[data-orb]').forEach((b) => b.addEventListener('pointerenter', () => { const d = b.querySelector('.d'); if (d) b.title = d.textContent; }));
     caja.querySelectorAll('[data-orb]').forEach((b) => b.addEventListener('click', () => {
       const k = b.dataset.orb, encendidas = Object.keys(estado.orb).filter((x) => estado.orb[x]);
-      if (estado.orb[k] && encendidas.length === 1) { estado.orb = { baja: false, media: false, geo: true }; guarda(); pon('sat', false); return; }
+      if (estado.orb[k] && encendidas.length === 1) { estado.orb = { baja: true, media: true, geo: true }; guarda(); pon('sat', false); return; }
       estado.orb[k] = !estado.orb[k];
       guarda(); pintaVista(); pintaNota();
     }));
@@ -1630,7 +1630,7 @@
     // 22 Oct 2026, 22:02 (owner): «palabras para que sean entendibles, todo»
     sub: { titulo: 'Qué cables ver', clases: { gigante: ['Autopistas entre continentes', 'Los cables más potentes: más de 100 Tbit/s.'], grande: ['Grandes rutas', 'Entre 20 y 100 Tbit/s: unen países y regiones.'], regional: ['Cables pequeños', 'Menos de 20 Tbit/s: unen islas y países vecinos.'], sinDato: ['Otros cables en servicio', 'Funcionan, pero su dueño no publica cuántos datos pueden llevar.'], aprox: ['Ruta estimada', 'Sabemos que el cable existe y dónde llega, pero no por dónde va exactamente: se dibuja en discontinuo.'], previstos: ['Cables en proyecto', 'Anunciados o en construcción; todavía no llevan datos. Punteados.'] } },
     fibra: { titulo: 'Qué fibra ver', clases: { principal: ['Grandes autopistas por tierra', 'Las rutas más largas (800 km o más) o las que comparten varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'], obra: ['En obras', 'Rutas que se están construyendo; en discontinuo.'] } },
-    puntos: { titulo: 'Qué puntos ver', clases: { datos: ['Centros de datos', 'Edificios donde se guardan y se sirven las webs y las aplicaciones.'], intercambio: ['Puntos de intercambio', 'Donde las redes de distintas compañías se conectan entre sí.'], estaciones: ['Bases y antenas', 'Bases en la Antártida y el Ártico, y estaciones que hablan con satélites.'], grandes: ['Solo las grandes compañías', 'Muestra solo los centros de compañías con 5 o más en el mapa.'] } },
+    puntos: { titulo: 'Qué puntos ver', clases: { datos: ['Centros de datos', 'Edificios donde se guardan y se sirven las webs y las aplicaciones.'], intercambio: ['Puntos de intercambio', 'Donde las redes de distintas compañías se conectan entre sí.'], estaciones: ['Bases y antenas', 'Bases en la Antártida y el Ártico, y estaciones que hablan con satélites.'], pequenos: ['Compañías pequeñas', 'Centros de compañías con menos de cinco en el mapa. Apágalo para ver solo las grandes.'] } },
   };
 
   const PLEGADO = { sub: true, fibra: true, puntos: true }; // the cards open on the button's click, one at a time; on arrival none is open
@@ -1638,7 +1638,7 @@
     try {
       if (k === 'sub') { if (!capas.sub || !capas.sub.lineas || !CAP) return 0; if (c === 'previstos') return PREV ? PREV.length : 0; if (c === 'aprox') return capas.sub.aprox ? capas.sub.aprox.length : 0; let n = 0; capas.sub.lineas.forEach((l, i) => { if (claseSub(i) === c) n++; }); return n; }
       if (k === 'fibra') { if (!FT || !FT.lineas) return 0; preparaNiveles(); return FT.lineas.filter((l) => claseFibra(l) === c).length; }
-      if (k === 'puntos') { if (c === 'estaciones') return EST ? EST.length : 0; if (!PT || !PT.p) return 0; if (c === 'grandes') return PT.porOp ? [...PT.porOp.values()].filter((n) => n >= 5).length : 0; return PT.p.filter((q) => q.t === c).length; }
+      if (k === 'puntos') { if (c === 'estaciones') return EST ? EST.length : 0; if (!PT || !PT.p) return 0; if (c === 'pequenos') return PT.porOp ? PT.p.filter((q) => q.t === 'datos' && !(q.o && (PT.porOp.get(q.o) || 0) >= 5)).length : 0; return PT.p.filter((q) => q.t === c).length; }
     } catch (_) {}
     return 0;
   }
@@ -1686,6 +1686,10 @@
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
     // one card at a time: the layer just switched on shows its card, the others fold
     if (on) { for (const k of Object.keys(PLEGADO)) PLEGADO[k] = k !== clave; estado.satPlegado = clave !== 'sat'; }
+    // 22 Oct 2026, 22:42 (owner: «si los pongo todos… no puede quedar entremezclado… es un semáforo»): a layer switched on
+    // shows everything — all its classes green; the person switches off what they do not want from the card.
+    if (on && CLASES[clave]) { for (const q of Object.keys(CLASES[clave])) CLASES[clave][q] = true; if (clave === 'sub' && capas.sub) capas.sub.visK = null; }
+    if (on && clave === 'sat') estado.orb = { baja: true, media: true, geo: true };
     if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else if (clave === 'fibra') cargaFibra(); else { cargaCables(clave); if (clave === 'sub') { cargaFibra(); cargaEstaciones(); cargaNotas(); cargaPaises(); cargaCapacidad(); cargaRelieve(); } } }
     if (!on) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; }
     pintaNota(); pintaVista(); pintaClases();

@@ -245,6 +245,8 @@
     "Bases y antenas": ["Bases and antennas", "Bases e antenas"],
     "Bases en la Antártida y el Ártico, y estaciones que hablan con satélites.": ["Bases in Antarctica and the Arctic, and stations that talk to satellites.", "Bases na Antártida e no Ártico, e estações que falam com satélites."],
     "Solo las grandes compañías": ["Only the big companies", "Só as grandes empresas"],
+    "Compañías pequeñas": ["Small companies", "Empresas pequenas"],
+    "Centros de compañías con menos de cinco en el mapa. Apágalo para ver solo las grandes.": ["Centres of companies with fewer than five on the map. Switch it off to see only the big ones.", "Centros de empresas com menos de cinco no mapa. Desliga-o para ver só as grandes."],
     "Muestra solo los centros de compañías con 5 o más en el mapa.": ["Shows only centres of companies with 5 or more on the map.", "Mostra só os centros de empresas com 5 ou mais no mapa."],
     "Gran autopista por tierra": ["Major land highway", "Grande autoestrada por terra"],
     "Ruta larga": ["Long route", "Rota longa"],
