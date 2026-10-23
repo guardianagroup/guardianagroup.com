@@ -147,8 +147,10 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   con `estado`; Claude dejó «no verificado» RUDAKI-IX, PITER-IX Kiev e ixFabric Kyiv) → **225 IXP de la agencia**. Grok con tandas >45 falla («no pudo terminar»); pedir en dos mitades.
 - **Centros de datos por la agencia (nuevo, 22 Oct 19:50)**: `herramientas/centros_agencia.py` (copia de ixp_agencia.py: lee `herramientas/centros-agencia/<voz>-*.json`
   `[{nombre, operador, ciudad, pais, lat, lon, desde, nota}]`, ≥2 voces en el mismo país a <30 km, no duplica OSM a <600 m, escribe tipo `datos` con `agencia:true` en
-  puntos-extra.json). Primera lista pedida a ChatGPT (chat «Lista de IXP mundiales», pestaña `seed`): 120–200 centros de América Latina → guardar en
-  `herramientas/centros-agencia/chatgpt-centros-1.json`, pedir a Grok la verificación (misma fórmula que los IXP, en tandas de ≤45), guardar `grok-centros-1.json`, correr el script, publicar.
+  puntos-extra.json). **Primera lista ya guardada**: `herramientas/centros-agencia/chatgpt-centros-1.json` (130 centros de América Latina, ChatGPT; coordenadas a nivel de ciudad, nota vacía).
+  Siguiente paso: pedir a Grok (tab-3) la verificación en 3 tandas de ≤45 con el formato «una línea JSON por centro {nombre, ciudad, pais, lat, lon, estado}» (estado ok / cerrado /
+  no existe / es otra cosa / no verificado; pedir lat/lon del edificio si las conoce), guardar en `grok-centros-1.json` (claves en español; Grok a veces responde con
+  name/city/country: convertir), correr `python3 herramientas/centros_agencia.py`, publicar. Después, la misma lista para Europa, Norteamérica, Asia, África y Oceanía.
   Comprobar antes que capas.js pinta los `datos` de puntos-extra con su ficha (operador, desde, nota): buscar `agencia` en capas.js. `python3 herramientas/ixp_agencia.py` cruza por país+nombre (≥2 voces, <60 km), descarta los que
   Grok marca «es otra cosa» (p. ej. Equinix Ashburn/Paris no son IXP neutrales), evita duplicar los de OSM y los escritos a mano, y escribe en `datos/puntos-extra.json`
   tipo `intercambio` con `agencia: true`. capas.js ya los pinta con la capa de centros de datos.
@@ -158,8 +160,7 @@ Cables submarinos ~70 % · llegadas ~80 % · centros de datos ~25–35 % · punt
 Conjunto ~55 % (puntos de intercambio ya ~40 % con los 160 de la agencia). Orden acordado: (1) centros de datos, (2) puntos de intercambio, (3) terminar cables con la agencia, (4) fibra de países grandes.
 
 ## 6. Pendiente inmediato (por orden) — escrito para Opus 5.5 (22 Oct 2026, 19:50; el dueño cambia de modelo para ahorrar Fable)
-6.1 **Antes de nada**: `git status`; si hay cambios sin publicar, publicar (§2). Luego recoger lo que quedó en marcha en el navegador: en la pestaña `seed`
-    (chat «Lista de IXP mundiales») ChatGPT estaba generando la lista de centros de datos de América Latina (ver §4c); en `tab-5` nada pendiente.
+6.1 **Antes de nada**: `git status`; si hay cambios sin publicar, publicar (§2). Nada quedó a medias en el navegador (la lista de centros de datos ya está guardada, §4c).
 6.2 **Fichas de país, procedimiento exacto** (lo que se hizo en los lotes 5–12): en `tab-5` (chat «Verificar fichas de infraestructura») escribir en el cuadro
     «Pregunta a ChatGPT» (`find` → ref) con `form_input`, clic y Return: «Gracias. Mismo esquema y reglas para 15 fichas más: XX, YY… Devuelve SOLO el JSON.»
     Esperar 2–4 min (poll con `javascript_tool`: innerText de `main` desde el último «ChatGPT dijo», JSON entre el primer `{` y el último `}`; en segundo plano el
