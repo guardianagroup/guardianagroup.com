@@ -1,0 +1,22 @@
+[
+{"nombre": "AAE-1", "tbps": 100.0, "pares": 5, "fuente": "wikipedia.org"},
+{"nombre": "ACE", "tbps": 30.0, "pares": 2, "fuente": "wikipedia.org"},
+{"nombre": "Africa Coast to Europe (ACE)", "tbps": 30.0, "pares": 2, "fuente": "wikipedia.org"},
+{"nombre": "CANTAT 3", "tbps": 7.5, "pares": 3, "fuente": "wikipedia.org"},
+{"nombre": "CanaLink", "tbps": 5.12, "pares": 4, "fuente": "lightwaveonline.com"},
+{"nombre": "FALCON", "tbps": 11.6, "pares": null, "fuente": "tra.gov.bh"},
+{"nombre": "H2HE", "tbps": 307.2, "pares": 16, "fuente": "submarinenetworks.com"},
+{"nombre": "Hainan to Hong Kong Express (H2HE)", "tbps": 307.2, "pares": 16, "fuente": "submarinenetworks.com"},
+{"nombre": "IONIAN", "tbps": 360.0, "pares": 24, "fuente": "islalink.com"},
+{"nombre": "Manatua (One Polynesia Cable)", "tbps": 20.0, "pares": 2, "fuente": "subcom.com"},
+{"nombre": "NCSCS (Nigeria-Cameroon Submarine Cable System)", "tbps": 12.8, "pares": 4, "fuente": "hmntech.com"},
+{"nombre": "PEACE Cable", "tbps": 192.0, "pares": null, "fuente": "peacecable.com"},
+{"nombre": "PIPE Pacific Cable-1 (PPC-1)", "tbps": 2.56, "pares": 2, "fuente": "wikipedia.org"},
+{"nombre": "Pacific Crossing-1 (PC-1)", "tbps": 8.4, "pares": 4, "fuente": "submarinenetworks.com"},
+{"nombre": "Quintillion Subsea Cable Network", "tbps": 30.0, "pares": 3, "fuente": "quintillionglobal.com"},
+{"nombre": "SEA-ME-WE 4", "tbps": 122.0, "pares": 2, "fuente": "wikipedia.org"},
+{"nombre": "Sam-1", "tbps": 43.2, "pares": 4, "fuente": "submarinenetworks.com"},
+{"nombre": "South America-1 (SAm-1)", "tbps": 43.2, "pares": 4, "fuente": "submarinenetworks.com"},
+{"nombre": "Unitirreno", "tbps": 624.0, "pares": 24, "fuente": "capacityglobal.com"},
+{"nombre": "Unity", "tbps": 7.68, "pares": 5, "fuente": "wikipedia.org"}
+]

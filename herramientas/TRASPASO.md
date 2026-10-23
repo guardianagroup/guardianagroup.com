@@ -256,3 +256,44 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   cuánto pesarían juntos, cuánto han costado aproximadamente. Lo del mapa ya está (242.193 km de cable submarino medidos en el mapa, 1.897.837 km de
   fibra por tierra en el mapa: `FT.d.medida`). Lo del mundo real (km totales, peso, coste) hay que pedirlo a la agencia (ChatGPT + Grok, ≥2 voces,
   sin fuentes en pantalla) y meterlo en `orbita/datos/sabias.json` con el mismo formato que los 121 que hay; nunca inventar cifras.
+
+## 9. Sesión del 22 Oct 2026, 22:05–22:45 (Opus 5.5), versiones 23y → 24b
+- **Desplegables compactos**: solo nombre y cuenta; la explicación va en el `title` (al pasar el ratón). CSS `.capa-vista/.sat-vista .orb button .d {display:none}`.
+- **Interruptores verde/rojo** (al final de orbita.css, bloque «22:21»): el `<i>` de cada botón con `aria-pressed` es una pista con bola; encendido
+  `--si: 95,203,147` con ✓, apagado `--no: 224,122,108` con ✕ (SVG en data URI). Barra 23×13, tarjetas 26×15. Deben ir AL FINAL del CSS (las reglas
+  viejas del punto azul tienen la misma especificidad).
+- **Satélites**: la última órbita encendida ya se puede apagar → `pon('sat', false)` y las órbitas vuelven a {geo} para la próxima vez.
+- **Borde del planeta**: el halo empezaba de golpe en r=1 (`r>1.?…:0.`) y dejaba una muesca oscura escalonada; ahora `d0=max(r-1,0)` continuo. Mapas con
+  mipmaps + anisótropo (`mipea()`), y el sombreador usa `texture2DGradEXT` con gradientes sin costura (`fract(uv.x+.5)`) si hay OES_standard_derivatives +
+  EXT_shader_texture_lod (`MIP`); si no, como antes. Comprobado sin GPU (swiftshader): antes/después en el borde.
+- **Zoom anclado** (orbita.js `ancla`, `anclaEn`, `fijaAncla` tras `avanzaVista`): doble clic y rueda (al acercar, con el puntero sobre el planeta) dejan
+  el punto bajo el puntero quieto mientras dura el zoom (8 iteraciones lon/lat por cuadro). Los botones +/teclado siguen yendo al `foco` del clic.
+- **Ficha completa**: `encajaPanel()` (capas.js) sube la ficha suelta al desplegar secciones y limita su `max-height` a la pantalla.
+  «Qué significa para ti» → **«En la práctica»**; frase del país nueva (es/en/pt).
+- **ZERO**: `zero/index.html` llama `layout()` nada más definirlo (antes solo tras montar WebGL: se veía el escenario 1440×900 sin escalar, «de lado»).
+  En `body.pantalla` la sección entra con un fundido limpio (sin escala ni desplazamiento) y `.altura` desaparece al instante al entrar en una puerta.
+- **Ubicación** (ChatGPT y Grok coinciden; chat ChatGPT «Redacción UX de privacidad» https://chatgpt.com/c/6adad5c8-6f30-83e9-af18-2870cab2663c,
+  Grok https://grok.com/c/21a76627-5150-49d5-a01f-873b64655859): sin «no investigamos» (suena defensivo). Kicker «TU UBICACIÓN, TU DECISIÓN» y texto
+  «Es opcional: Órbita funciona sin ella…». El chat viejo de ChatGPT «Verificar fichas de infraestructura» llegó al máximo de longitud: usar chats nuevos.
+- **«¿Sabías que…?»**: 5 datos nuevos en verificación con las dos voces (99 % del tráfico internacional; >500 cables y ~1,7 M km según la ONU 2026;
+  ~2 cm de diámetro / ~5 cm blindado; ~650 kg/km ligero, >2 t/km doble blindaje; Amitié 400 Tbit/s).
+- Pendiente: Asia-2 de centros de datos (42 candidatos) con Grok en dos tandas de 21; IXP de África y Asia; cables de una sola voz (20); capacidades;
+  fibra de países grandes; traducciones a los otros idiomas al final.
+
+## 10. Sesión del 22 Oct 2026, 22:45–23:30 (Opus 5.5): agencia sin pedir permiso («sigue trabajando»)
+- **Semáforo**: al encender una capa, todas sus clases en verde (`pon()`); la tarjeta solo se cierra cuando TODOS sus interruptores están en rojo
+  (`todasApagadas`); «Solo las grandes compañías» pasó a ser la clase «Compañías pequeñas» (`CLASES.puntos.pequenos`, verde = se ve; en gris si
+  «Centros de datos» está apagado: `cuentaEn`). Satélites: al encender, las tres órbitas.
+- **Centros de datos Asia-2**: 42 confirmados (ChatGPT `chatgpt-centros-7` + Grok `grok-centros-7`) → **356 de la agencia**. Grok rellena con 5
+  decimales las coordenadas de la ciudad: Claude las dejó a 3 decimales en el archivo de Grok cuando eran el centro de la ciudad (si no, ganarían como
+  «edificio» en `centros_agencia.py`).
+- **Cables: un cable, un grupo** (`lugares_capas.py` agrupa con `cables_agencia.clave`; `compacta` quita tildes): «ACE» = «Africa Coast to Europe (ACE)»,
+  «Sam-1» = «South America-1 (SAm-1)», «EIG», «H2HE», «PCCS», «PLCN», «SJC», «BRUS/BRUSA», «ÍRIS/IRIS», «Amitié» (OSM «AMITIE»)… → 467 → **450 cables**.
+  Nombre del grupo unido: el de la agencia; si no, el más largo. Alias nuevos: `australtroncalaustral→austral`, `mauritiusandrodrigues→mars`.
+- **Una sola voz**: Grok (`grok-verifica-12.json`) confirmó FOA y MARS (ya estaban con otro nombre: unidos por alias); ALASIA, Elektra-GC1 y Leif Erikson
+  no existen (proyectos); Rioja y ESAT-1 retirados; SFS-4, SFL, EESF-3 sin verificar; Balticconnector FOC, Tampnet, C-Lion1, Eastern Light, Baltica,
+  AU-East/West ya están en el mapa con otro nombre. Pendiente solo North Sea Connect (pedido a ChatGPT junto con capacidades).
+- **Capacidades**: Grok `grok-capacidad-6`, ChatGPT `chatgpt-capacidad-2` (Amitié 400) y `-3` (38 cables); la 2.ª tanda de ChatGPT (39) en el chat
+  «Verificación de cables submarinos» https://chatgpt.com/c/6adadd4e-67ac-83ea-a97b-383cc11c0ff1.
+- **IXP África y Asia**: ChatGPT dio 70 nuevos (`chatgpt-ixp-3.json`, chat https://chatgpt.com/c/6adada8b-f2b0-83e8-a872-203b6b08837b); Grok verifica en dos
+  tandas de 35 (`grok-ixp-7.json` hecho: 33 ok, LANIC «es otra cosa», GIBIRIX «no verificado»).

@@ -23,6 +23,7 @@ Output: orbita/datos/cables-agencia.json, and the same segments merged into orbi
 (field "src": "agencia"; a run first removes the previous agency segments, so it is safe to repeat). When
 OpenStreetMap already has the cable with at least half of its landings, the agency's version is not added.
 """
+import unicodedata
 import json, math, os, re, glob, heapq, collections, sys
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -32,6 +33,8 @@ sys.path.insert(0, AQUI)
 from lugares_capas import lee_ciudades, Rejilla, km, base_cable  # noqa: E402
 
 ALIAS = {  # the same cable under different names (lower case, letters and digits only)
+    'australtroncalaustral': 'austral',  # «Fibra Óptica Austral (FOA), Troncal Submarina Austral» = «Fibra Óptica Austral (troncal submarina)»
+    'mauritiusandrodrigues': 'mars', 'mauritiusandrodriguessubmarinecablesystem': 'mars',  # 22 Oct 2026: MARS under its long name
     'sat3wasc': 'sat3', 'sat3wascsafe': 'sat3', 'southatlantic3': 'sat3',
     'seacomtatatgneurasia': 'seacom', 'seacomafricancablesystem': 'seacom',
     'asiaafricaeurope1aae1': 'aae1', 'asiaafricaeurope1': 'aae1',
@@ -97,7 +100,8 @@ ALIAS = {  # the same cable under different names (lower case, letters and digit
 
 # words that say what the thing is, not which one it is: «KetchCan1» and «KetchCan1 Submarine Fiber Cable System» are the same cable
 GENERICAS = re.compile(r'\b(?:submarine|submarino|submarina|subsea|undersea|cable|cables|system|sistema|fiber|fibre|fibra|optic|optica|óptica|project|proyecto|network|domestic|doméstico|domestica|secciones|operativas|slt)\b', re.I)
-compacta = lambda x: re.sub(r'[^a-z0-9]', '', (x or '').lower())
+# 22 Oct 2026: accents folded first («ÍRIS» and «IRIS» are one cable)
+compacta = lambda x: re.sub(r'[^a-z0-9]', '', unicodedata.normalize('NFKD', x or '').encode('ascii', 'ignore').decode().lower())
 def generica(k):
     """The same stripping on a compact key (for the alias targets, which have no word boundaries)."""
     for w in ('submarine', 'subsea', 'cablesystem', 'fibersystem', 'cable', 'system', 'fiber', 'fibre', 'network', 'project', 'domestic'):

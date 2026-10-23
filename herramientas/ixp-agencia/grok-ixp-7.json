@@ -1,0 +1,282 @@
+[
+{
+"nombre": "Niger Internet Exchange Point",
+"ciudad": "Niamey",
+"pais": "NE",
+"lat": 13.5128,
+"lon": 2.1128,
+"estado": "ok"
+},
+{
+"nombre": "Centro Nacional de Intercambio de Internet de Mauritania",
+"ciudad": "Nuakchot",
+"pais": "MR",
+"lat": 18.0735,
+"lon": -15.9582,
+"estado": "ok"
+},
+{
+"nombre": "Liberia Internet Exchange Point (LIXP)",
+"ciudad": "Monrovia",
+"pais": "LR",
+"lat": 6.3006,
+"lon": -10.797,
+"estado": "ok"
+},
+{
+"nombre": "Somali Internet Exchange Point (SoIXP)",
+"ciudad": "Mogadiscio",
+"pais": "SO",
+"lat": 2.0469,
+"lon": 45.3182,
+"estado": "ok"
+},
+{
+"nombre": "Harare Internet Exchange (Harare IX)",
+"ciudad": "Harare",
+"pais": "ZW",
+"lat": -17.8252,
+"lon": 31.0335,
+"estado": "ok"
+},
+{
+"nombre": "Goma Internet Exchange (GOMIX)",
+"ciudad": "Goma",
+"pais": "CD",
+"lat": -1.6792,
+"lon": 29.2228,
+"estado": "ok"
+},
+{
+"nombre": "Lubumbashi Internet Exchange (LUBIX)",
+"ciudad": "Lubumbashi",
+"pais": "CD",
+"lat": -11.6876,
+"lon": 27.5026,
+"estado": "ok"
+},
+{
+"nombre": "Africa Congo Internet Exchange (ACIX)",
+"ciudad": "Kinshasa",
+"pais": "CD",
+"lat": -4.4419,
+"lon": 15.2663,
+"estado": "ok"
+},
+{
+"nombre": "Accra Internet Exchange LBG",
+"ciudad": "Accra",
+"pais": "GH",
+"lat": 5.6037,
+"lon": -0.187,
+"estado": "ok"
+},
+{
+"nombre": "LINX Accra",
+"ciudad": "Accra",
+"pais": "GH",
+"lat": 5.6037,
+"lon": -0.187,
+"estado": "ok"
+},
+{
+"nombre": "Malawi Internet Exchange (MIX-BT)",
+"ciudad": "Blantyre",
+"pais": "MW",
+"lat": -15.7861,
+"lon": 35.0058,
+"estado": "ok"
+},
+{
+"nombre": "CAMIX Yaoundé",
+"ciudad": "Yaundé",
+"pais": "CM",
+"lat": 3.848,
+"lon": 11.5021,
+"estado": "ok"
+},
+{
+"nombre": "IXPN Kano",
+"ciudad": "Kano",
+"pais": "NG",
+"lat": 12.0022,
+"lon": 8.592,
+"estado": "ok"
+},
+{
+"nombre": "Arusha Internet Exchange Point (AIXP)",
+"ciudad": "Arusha",
+"pais": "TZ",
+"lat": -3.3869,
+"lon": 36.683,
+"estado": "ok"
+},
+{
+"nombre": "Dodoma Internet Exchange Point (DIXP)",
+"ciudad": "Dodoma",
+"pais": "TZ",
+"lat": -6.163,
+"lon": 35.7516,
+"estado": "ok"
+},
+{
+"nombre": "Mwanza Internet Exchange Point (MIXP)",
+"ciudad": "Mwanza",
+"pais": "TZ",
+"lat": -2.5164,
+"lon": 32.9175,
+"estado": "ok"
+},
+{
+"nombre": "Zanzibar Internet Exchange Point (ZIXP)",
+"ciudad": "Zanzíbar",
+"pais": "TZ",
+"lat": -6.1659,
+"lon": 39.2026,
+"estado": "ok"
+},
+{
+"nombre": "BGP.Exchange Johannesburg (BGPIX-JNB)",
+"ciudad": "Johannesburgo",
+"pais": "ZA",
+"lat": -26.2041,
+"lon": 28.0473,
+"estado": "ok"
+},
+{
+"nombre": "Lao National Internet Center (LANIC)",
+"ciudad": "Vientián",
+"pais": "LA",
+"lat": 17.9757,
+"lon": 102.6331,
+"estado": "es otra cosa"
+},
+{
+"nombre": "Cyprus Internet Exchange (CyIX)",
+"ciudad": "Nicosia",
+"pais": "CY",
+"lat": 35.1856,
+"lon": 33.3823,
+"estado": "ok"
+},
+{
+"nombre": "JumboIX Cyprus",
+"ciudad": "Limassol",
+"pais": "CY",
+"lat": 34.7071,
+"lon": 33.0226,
+"estado": "ok"
+},
+{
+"nombre": "ZXIX Hangzhou",
+"ciudad": "Hangzhou",
+"pais": "CN",
+"lat": 30.2741,
+"lon": 120.1551,
+"estado": "ok"
+},
+{
+"nombre": "China Internet Exchange (CNIX Beijing)",
+"ciudad": "Pekín",
+"pais": "CN",
+"lat": 39.9042,
+"lon": 116.4074,
+"estado": "ok"
+},
+{
+"nombre": "Better CNIX Shanghai",
+"ciudad": "Shanghái",
+"pais": "CN",
+"lat": 31.2304,
+"lon": 121.4737,
+"estado": "ok"
+},
+{
+"nombre": "TOHU IX",
+"ciudad": "Cantón",
+"pais": "CN",
+"lat": 23.1291,
+"lon": 113.2644,
+"estado": "ok"
+},
+{
+"nombre": "SHIXP",
+"ciudad": "Shanghái",
+"pais": "CN",
+"lat": 31.2304,
+"lon": 121.4737,
+"estado": "ok"
+},
+{
+"nombre": "CNIX Qianhai Shenzhen",
+"ciudad": "Shenzhen",
+"pais": "CN",
+"lat": 22.5431,
+"lon": 114.0579,
+"estado": "ok"
+},
+{
+"nombre": "LoLi-IX Ningbo",
+"ciudad": "Ningbo",
+"pais": "CN",
+"lat": 29.8683,
+"lon": 121.544,
+"estado": "ok"
+},
+{
+"nombre": "SMARTHUB Internet Exchange (SH-IX)",
+"ciudad": "Fujairah",
+"pais": "AE",
+"lat": 25.1288,
+"lon": 56.3265,
+"estado": "ok"
+},
+{
+"nombre": "center3 IX Riyadh",
+"ciudad": "Riad",
+"pais": "SA",
+"lat": 24.7136,
+"lon": 46.6753,
+"estado": "ok"
+},
+{
+"nombre": "KazNIX",
+"ciudad": "Semey",
+"pais": "KZ",
+"lat": 50.4111,
+"lon": 80.2275,
+"estado": "ok"
+},
+{
+"nombre": "GIBIRIX",
+"ciudad": "Estambul",
+"pais": "TR",
+"lat": 41.0082,
+"lon": 28.9784,
+"estado": "no verificado"
+},
+{
+"nombre": "STUIX",
+"ciudad": "Taipéi",
+"pais": "TW",
+"lat": 25.033,
+"lon": 121.5654,
+"estado": "ok"
+},
+{
+"nombre": "Poema IX Taipei",
+"ciudad": "Taipéi",
+"pais": "TW",
+"lat": 25.033,
+"lon": 121.5654,
+"estado": "ok"
+},
+{
+"nombre": "Equinix Internet Exchange Hong Kong",
+"ciudad": "Hong Kong",
+"pais": "HK",
+"lat": 22.3193,
+"lon": 114.1694,
+"estado": "ok"
+}
+]

@@ -116,16 +116,21 @@ def main():
             fila += [ciudades[k][0], ciudades[k][1]] if k is not None else ['', '']
         extremos.append(fila)
     # whole cables
+    # 22 Oct 2026: one cable, one group — the agency's key (cables_agencia.clave: aliases, accents, generic words) joins
+    # «ACE» (OpenStreetMap) with «Africa Coast to Europe (ACE)» (agency), «Sam-1» with «South America-1 (SAm-1)»…
+    from cables_agencia import clave as clave_cable  # here, not at the top: cables_agencia imports this module
     claves_g, grupos_c, g_de = {}, [], []
     for idx, s in enumerate(cab['cables']):
         b = base_cable(s.get('n'))
-        k = re.sub(r'[^a-z0-9]', '', b.lower())
-        if not k:
+        k0 = re.sub(r'[^a-z0-9]', '', b.lower())
+        if not k0:
             g_de.append(-1); continue
+        k = clave_cable(b) or k0
         if k not in claves_g:
-            claves_g[k] = len(grupos_c); grupos_c.append({'nombres': collections.Counter(), 'lugares': {}, 'km': 0.0, 'anios': [], 'duenos': [], 'operan': [], 'web': '', 'wiki': []})
+            claves_g[k] = len(grupos_c); grupos_c.append({'nombres': collections.Counter(), 'lugares': {}, 'km': 0.0, 'anios': [], 'duenos': [], 'operan': [], 'web': '', 'wiki': [], 'k0': set(), 'nombreAg': ''})
         gi = claves_g[k]; g_de.append(gi)
-        grupos_c[gi]['nombres'][b] += 1
+        grupos_c[gi]['nombres'][b] += 1; grupos_c[gi]['k0'].add(k0)
+        if s.get('src') == 'agencia' and not grupos_c[gi]['nombreAg']: grupos_c[gi]['nombreAg'] = b
         G = grupos_c[gi]
         G['km'] += sum(km(p[1], p[0], q[1], q[0]) for p, q in zip(s['l'], s['l'][1:]))
         if s.get('y'): G['anios'].append(s['y'])
@@ -165,7 +170,9 @@ def main():
             if ag.get('fuentes'): i['fuentes'] = ag['fuentes'][:6]
         return i
     # each landing with its longitude and latitude (owner, 22 Oct 2026: «la distancia punto a punto» in the card)
-    grupos_out = [[g['nombres'].most_common(1)[0][0], [[c, cc, round(lo, 2), round(la, 2)] for (c, cc), (lo, la) in sorted(g['lugares'].items(), key=lambda x: x[1][0])], info(g)] for g in grupos_c]
+    # the name: as before; when two names were joined, the agency's (the full one), else the longest («SEA-ME-WE 4»)
+    nombreDe = lambda g: g['nombres'].most_common(1)[0][0] if len(g['k0']) <= 1 else (g['nombreAg'] or max(g['nombres'], key=lambda n: (len(n), g['nombres'][n])))
+    grupos_out = [[nombreDe(g), [[c, cc, round(lo, 2), round(la, 2)] for (c, cc), (lo, la) in sorted(g['lugares'].items(), key=lambda x: x[1][0])], info(g)] for g in grupos_c]
     out = {
         'fuente': 'Centros de datos y cables: OpenStreetMap (ODbL); cables que faltan en OpenStreetMap, reconstruidos por la agencia GUARDIANA de fuentes públicas (trazado aproximado). Ciudades: GeoNames cities15000 (CC BY 4.0).',
         'generado_desde': {'puntos': pts.get('descargado'), 'cables': cab.get('descargado')},
