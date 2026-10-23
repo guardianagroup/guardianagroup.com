@@ -475,6 +475,7 @@
     PAIS_CAJAS = [];
     const z = G.R / (G.R0 || G.R); if (z < 2.2 || z > 400 || !p.centros) return;
     const L = esLimpio(), ocupado = [];
+    if (!L) return; // 22 Oct 2026, 21:54 (owner): no country names while the planet is in colour; they come with the grey, «limpio» planet
     cx.save(); cx.globalCompositeOperation = 'source-over';
     cx.font = '600 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textAlign = 'center'; cx.textBaseline = 'middle';
     const al = Math.min(0.62, 0.22 + 0.08 * z);
@@ -1593,7 +1594,7 @@
     if (ti) { const x = document.createElement('button'); x.type = 'button'; x.className = 'plegar'; x.setAttribute('aria-label', T('Plegar')); x.textContent = '—'; x.addEventListener('click', () => { estado.satPlegado = true; pintaVista(); }); ti.appendChild(x); }
     // the «Satélites» button unfolds the card again when the layer is on but the card was folded
     const sb = document.querySelector('#capas [data-capa="sat"]');
-    if (sb) sb.addEventListener('click', (e) => { if (estado.sat && estado.satPlegado) { e.stopImmediatePropagation(); estado.satPlegado = false; pintaVista(); } }, true);
+    if (sb) sb.addEventListener('click', (e) => { if (estado.sat && estado.satPlegado) { e.stopImmediatePropagation(); estado.satPlegado = false; for (const q of Object.keys(PLEGADO)) PLEGADO[q] = true; pintaVista(); pintaClases(); } }, true);
     caja.querySelectorAll('[data-vista]').forEach((b) => b.addEventListener('click', () => { estado.vista = b.dataset.vista; guarda(); pintaVista(); pintaNota(); }));
     // 22 Oct 2026 (owner: «por capas… la persona tiene que ver»): every orbit is a layer the person switches on or
     // off on its own; the satellites open with the geostationary ring only. The last layer on cannot be switched off
@@ -1612,7 +1613,7 @@
     fibra: { titulo: 'Qué fibra ver', clases: { principal: ['Troncales principales', '800 km o más, o corredores que comparten cuatro compañías.'], largo: ['Largo recorrido', '400 km o más.'], nacional: ['Troncales nacionales', '150 km o más; aparecen al acercarse.'], regional: ['Enlaces regionales', 'El resto; aparecen cerca.'], obra: ['En construcción', 'Según la fuente; discontinuos.'] } },
     puntos: { titulo: 'Qué puntos ver', clases: { datos: ['Centros de datos', 'Donde se guarda y se sirve internet.'], intercambio: ['Puntos de intercambio', 'Donde las redes se conectan entre sí.'], estaciones: ['Estaciones', 'Bases polares y estaciones terrestres de satélites.'], grandes: ['Solo grandes operadores', 'Compañías con cinco o más centros en el mapa.'] } },
   };
-  const PLEGADO = {};
+  const PLEGADO = { sub: true, fibra: true, puntos: true }; // the cards open on the button's click, one at a time; on arrival none is open
   function cuentaClase(k, c) {
     try {
       if (k === 'sub') { if (!capas.sub || !capas.sub.lineas || !CAP) return 0; if (c === 'previstos') return PREV ? PREV.length : 0; if (c === 'aprox') return capas.sub.aprox ? capas.sub.aprox.length : 0; let n = 0; capas.sub.lineas.forEach((l, i) => { if (claseSub(i) === c) n++; }); return n; }
@@ -1643,7 +1644,7 @@
       }
       header.appendChild(caja);
       // the layer button unfolds the card again when the layer is on but the card was folded
-      b.addEventListener('click', (e) => { if (estado[k] && PLEGADO[k]) { e.stopImmediatePropagation(); PLEGADO[k] = false; pintaClases(); } }, true);
+      b.addEventListener('click', (e) => { if (estado[k] && PLEGADO[k]) { e.stopImmediatePropagation(); for (const q of Object.keys(PLEGADO)) PLEGADO[q] = q !== k; estado.satPlegado = true; pintaVista(); pintaClases(); } }, true);
     }
     addEventListener('resize', pintaClases);
   }
@@ -1660,8 +1661,8 @@
   function pon(clave, on) {
     estado[clave] = on; guarda();
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
-    if (on && clave === 'sat') estado.satPlegado = false;
-    if (on) PLEGADO[clave] = false;
+    // one card at a time: the layer just switched on shows its card, the others fold
+    if (on) { for (const k of Object.keys(PLEGADO)) PLEGADO[k] = k !== clave; estado.satPlegado = clave !== 'sat'; }
     if (on) { if (clave === 'sat') cargaSat(); else if (clave === 'puntos') { cargaPuntos(); cargaCables('sub'); cargaFibra(); } else if (clave === 'fibra') cargaFibra(); else { cargaCables(clave); if (clave === 'sub') { cargaFibra(); cargaEstaciones(); cargaNotas(); cargaPaises(); cargaCapacidad(); cargaRelieve(); } } }
     if (!on) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; }
     pintaNota(); pintaVista(); pintaClases();
