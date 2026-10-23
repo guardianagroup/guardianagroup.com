@@ -333,3 +333,13 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   «Ver el viaje en 3D» que mide primero si hace falta y despega solo; «Guardar el viaje (PDF)» aparece al lado cuando ya hay medida. «Ver / No ver»
   pasa a una × de cierre (y Escape, que no cierra el panel si se está saliendo del viaje). Frases nuevas traducidas a los 42 idiomas.
 - Versión `v=20261024k` (la siguiente, `l`). Vista previa del amigo: **versión 16**.
+- **Tarjetas de capas** (08:11–08:13, dueño): nunca se cierran solas. Con todo en rojo la capa se apaga en el mapa y su botón también, pero la
+  tarjeta sigue abierta (`VACIA[k]` en capas.js) hasta que la persona la pliega con «—»; encender una luz en esa tarjeta vuelve a encender la capa
+  solo con lo que está en verde. Lo mismo en satélites (`VACIA.sat`). Centros: «Centros de grandes compañías» (5 o más en el mapa) y «Centros de
+  compañías pequeñas» son luces independientes. Probado midiendo los píxeles del lienzo `#rutas`: con todo en rojo no queda nada dibujado.
+- **Cables** (08:16): «Cables en proyecto» y «Ruta estimada» en discontinuo con vaivén (`lineDashOffset` sinusoidal). «Ruta estimada» encendida sola
+  muestra todos los trazados aproximados; con potencias encendidas filtra dentro de ellas. Las llegadas solo se pintan si se ve uno de sus cables.
+- **Ficha arrastrable** (08:17): en ordenador se arrastra desde cualquier zona que no sea botón o título de sección; la posición elegida se conserva
+  para las siguientes fichas de la visita (`posUsuario`). En el robot sin GPU los clics sobre el planeta no abren fichas (fotogramas lentos):
+  para probar, abrir la ficha inyectando una llamada a `abreModelo`.
+- Versión `v=20261024n` (la siguiente, `o`). Vista previa del amigo: **versión 17**.
