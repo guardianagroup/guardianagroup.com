@@ -206,3 +206,18 @@ Conjunto ~55 % (puntos de intercambio ya ~40 % con los 160 de la agencia). Orden
 panel completo, país, estaciones, notas, potencia, relieve) · `orbita/static/conexion.js` (Mi conexión, rutas) · `orbita/static/viaje.js` (viaje, vídeo, informe)
 · `orbita/static/idioma.js` + `i18n/` · `orbita/static/orbita.css` · `orbita/datos/*.json` · `herramientas/cables_agencia.py`, `lugares_capas.py`,
 `capacidad_cables.py`, `relieve.py`, `datos_orbita.py`, `fibra_tierra.py`, `cables-agencia/*.json`, `cables-capacidad/*.json`, `informes-agencia-polar.md`.
+
+## 7. Sesión del 22 Oct 2026, 21:00–21:50 (Fable 5.1 de nuevo): cambios de Órbita y documento de estrategia
+- **Clic + zoom**: un clic (sin arrastrar) en el planeta guarda el punto (`foco` en orbita.js, `geoDe()` = inversa de `pantalla`); cada zoom de entrada
+  (rueda, pellizco, +, teclado, doble clic) pone `meta` hacia ese punto y la vista se desliza allí. Arrastrar o volver a ×1 olvida el foco. (v=…j)
+- **Fibra por niveles** (capas.js `preparaNiveles`/`fundidoNivel`/`fibraVisible`): nivel 3 (≥800 km o corredor con ≥4 compañías y ≥250 km) siempre;
+  2 (≥400 km o ≥3 compañías y ≥150 km) desde ×1,5; 1 (≥150 km) desde ×2,6; 0 (resto) desde ×6; cada nivel se funde al entrar. De lejos, una línea por
+  corredor. `buscaFibra` solo elige entre lo dibujado. Nota de la capa actualizada (es/en/pt). (v=…k, …l)
+- **Barra de capas**: ya no desaparece en `hondo` (≥×8): se queda difuminada y se enciende al pasar el ratón (orbita.css). (v=…k)
+- **Llegadas**: «cable sin nombre» → «cable, nombre no publicado» / «+N». (v=…m)
+- **Documento de estrategia** (Claude Docs): «GUARDIANA: las puertas de tu equipo» https://claude.ai/artifact/JVYczV8kMrHGuYXxaKfjPf — tesis de las diez
+  puertas, familia de seis piezas (ZERO, VIGÍA, RADIOGRAFÍA, ÓRBITA, SECURE, TRANSPARENCIA), doce servicios nuevos, capa anti-suplantación, reglas de ZERO,
+  viralidad, calendario propuesto y lo que dijo la agencia (chats: ChatGPT https://chatgpt.com/c/6adabe5b-3dbc-83e8-8a92-736412839b21 ·
+  Grok https://grok.com/c/d2e135ed-cd4f-429c-abd4-d4749bf04786). El dueño lo está leyendo; sus comentarios llegan como comentarios del documento.
+- Pendiente de la noche: tanda Asia-2 de centros de datos (pedida a ChatGPT en «Verificar fichas de infraestructura»); el dueño pidió además que el
+  navegador ZERO sea «el que más para» (reglas en el documento) y la anti-suplantación en SECURE (órdenes firmadas, verificación en persona, Sello).
