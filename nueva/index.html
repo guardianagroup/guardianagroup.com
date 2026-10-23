@@ -24,7 +24,7 @@
 <link rel="preload" href="/fonts/InstrumentSerif-Italic.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" as="image" href="/portada/planeta-1200.webp" imagesrcset="/portada/planeta-560.webp 560w, /portada/planeta-800.webp 800w, /portada/planeta-1200.webp 1200w, /portada/planeta-1600.webp 1600w" imagesizes="(max-width: 700px) 138vw, (max-width: 1100px) 112vw, 1060px" fetchpriority="high">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://guardianagroup.com/#org","name":"GUARDIANA","legalName":"GUARDIANA GROUP S.A.S.","url":"https://guardianagroup.com/","logo":"https://guardianagroup.com/icon-512.png","sameAs":["https://github.com/guardianagroup"],"address":{"@type":"PostalAddress","addressLocality":"Cartagena de Indias","addressCountry":"CO"}},{"@type":"WebSite","@id":"https://guardianagroup.com/#web","url":"https://guardianagroup.com/","name":"GUARDIANA","inLanguage":"es","publisher":{"@id":"https://guardianagroup.com/#org"}}]}</script>
-<script>document.documentElement.classList.add('js')</script>
+<script>document.documentElement.classList.add('js', matchMedia('(pointer: coarse)').matches ? 'tactil' : 'raton')</script>
 <style>
 @font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/InstrumentSerif-Regular.woff) format('woff')}
 @font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url(/fonts/InstrumentSerif-Italic.woff) format('woff')}
@@ -69,6 +69,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .top-in{height:76px;display:flex;align-items:center;gap:24px;max-width:1440px;margin-inline:auto;padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
 .marca{font-weight:700;font-size:15px;letter-spacing:.34em;color:var(--ink);white-space:nowrap}
 .marca small{display:block;font-weight:500;font-size:11px;line-height:1.3;letter-spacing:.03em;color:#8E99A6;margin-top:5px}
+@media (max-width:560px){.marca small{display:none}}
 .conocer{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#8A95A2;padding-bottom:3px;border-bottom:1px solid #3A4656;transition:color .2s,border-color .2s;white-space:nowrap}
 .conocer:hover{color:var(--ink);border-color:var(--ink-2)}
 .acciones{margin-left:auto;display:flex;align-items:center;gap:10px}
@@ -89,13 +90,19 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* ---------- hero ---------- */
 .hero{position:relative;min-height:100svh;overflow:clip;padding-top:44px;padding-bottom:104px}
 .planeta{position:relative;width:var(--pw);aspect-ratio:1605/1028;margin-left:calc(50% - var(--pw) / 2)}
-.planeta img{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transform:translateY(22px) scale(.985);filter:blur(8px);animation:llega 1.9s .1s cubic-bezier(.2,.7,.1,1) forwards}
+.planeta .poster{position:absolute;inset:0;opacity:0;transform:translateY(22px) scale(.985);filter:blur(8px);animation:llega 1.9s .1s cubic-bezier(.2,.7,.1,1) forwards}
+.planeta .poster img{position:absolute;inset:0;width:100%;height:100%;display:block;transition:opacity 1.1s ease}
+.planeta.vivo .poster img{opacity:0}
 @keyframes llega{to{opacity:1;transform:none;filter:none}}
-.planeta canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.globo-gl{position:absolute;display:block;opacity:0;transition:opacity 1.1s ease;pointer-events:none}
+.globo-ov{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.1s ease;cursor:grab;-webkit-user-select:none;user-select:none}
+.girando .globo-ov{cursor:grabbing}
+.vivo>.globo-gl,.vivo>.globo-ov{opacity:1}
 .velo{position:absolute;left:-30%;right:-30%;bottom:-2px;height:54%;background:linear-gradient(180deg,rgba(6,8,12,0) 0%,rgba(6,8,12,.84) 46%,var(--void) 92%);pointer-events:none}
 .rotulo{position:absolute;left:55.4%;top:8.2%;transform:translateY(-50%);font-family:var(--mono);font-size:10.5px;line-height:1.7;letter-spacing:.12em;color:#8A95A2;white-space:nowrap;text-transform:uppercase;opacity:0;animation:aparece 1.2s 1.8s forwards}
 .rotulo span{display:block;color:var(--ink-4)}
 .rotulo span.solo-movil{display:none}
+.rotulo i{font-style:normal}
 @keyframes aparece{to{opacity:1}}
 .hero-texto{position:relative;z-index:2;margin-top:calc(var(--pw) * -0.173);display:flex;flex-direction:column;align-items:center;text-align:center;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,min(5.2vw,8.2svh),78px);line-height:1.02;letter-spacing:-.012em}
@@ -164,8 +171,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .estado::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
 
 /* reveal, as on Conocer */
-.js .r{opacity:0;transform:translate3d(0,28px,0);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
-.js .r.visto{opacity:1;transform:none}
+.js .r{opacity:0;will-change:transform,opacity}
+.js.tactil .r{will-change:auto;transform:translate3d(0,28px,0);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.js.tactil .r.visto{opacity:1;transform:none}
+/* titles that light up word by word as you reach them (CSS Custom Highlight API), as on the old page */
+::highlight(luz-0){color:rgba(232,238,245,.13)}
+::highlight(luz-m){color:#FFFFFF;text-shadow:0 0 .32em rgba(156,195,228,.75),0 0 .9em rgba(156,195,228,.35)}
+.luz-act .g-light{background:none!important;color:#B9D7F0!important}
 
 /* ---------- 01 · the auction ---------- */
 .dos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(36px,5vw,84px);align-items:center}
@@ -214,7 +226,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .subasta-vis{aspect-ratio:auto;padding:16px}
   .ficha{position:relative;left:auto;top:auto;transform:none;width:100%}
   .postores{position:relative;inset:auto;width:100%;margin-top:70px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-  .postores li{padding:0 10px}
+  .postores li{padding:0 10px;gap:7px}
+  .postores .pe{font-size:9px;letter-spacing:.04em}
   .ilus{position:relative;left:auto;bottom:auto;display:block;margin-top:14px}
 }
 .frases{margin-top:clamp(96px,11vw,160px);display:grid;gap:clamp(56px,8vw,110px);justify-items:center;text-align:center}
@@ -237,29 +250,40 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .quien .verif{margin-top:30px}
 
 /* ---------- 02 · measured ---------- */
-.conmut{margin-top:36px;display:inline-flex;padding:4px;border:1px solid var(--hair);border-radius:999px;background:rgba(10,14,20,.85)}
-.conmut button{appearance:none;border:0;background:transparent;color:var(--ink-2);font-weight:600;font-size:14px;padding:11px 20px;border-radius:999px;cursor:pointer;transition:background .25s,color .25s}
+.informe{margin-top:40px;border:1px solid var(--hair);border-radius:22px;background:linear-gradient(180deg,rgba(13,18,26,.95),rgba(8,11,16,.95));padding:clamp(20px,3vw,36px)}
+.inf-cab{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;padding-bottom:22px;border-bottom:1px solid var(--hair)}
+.inf-t{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.conmut{display:inline-flex;padding:4px;border:1px solid var(--hair);border-radius:999px;background:rgba(6,8,12,.75)}
+.conmut button{appearance:none;border:0;background:transparent;color:var(--ink-2);font-weight:600;font-size:14px;padding:10px 18px;border-radius:999px;cursor:pointer;transition:background .25s,color .25s}
 .conmut button[aria-pressed="true"]{background:var(--ink);color:var(--void)}
 .conmut button[data-v="con"][aria-pressed="true"]{background:var(--steel)}
-.medida-vis{margin-top:34px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(30px,4.5vw,64px);align-items:center}
-@media (max-width:920px){.medida-vis{grid-template-columns:minmax(0,1fr)}.medida-vis>[aria-live]{order:-1}}
-.rejilla{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:6px}
-@media (max-width:560px){.rejilla{grid-template-columns:repeat(10,minmax(0,1fr));gap:5px}}
-.rejilla i{aspect-ratio:1;border-radius:4px;background:var(--steel);opacity:.9;transition:background .55s ease var(--d),opacity .55s ease var(--d),transform .55s ease var(--d),box-shadow .55s ease var(--d)}
-.medida[data-v="con"] .rejilla i.c{background:transparent;box-shadow:inset 0 0 0 1.5px var(--coral);opacity:.75;transform:scale(.8)}
-.medida[data-v="con"] .rejilla i.p{background:linear-gradient(135deg,var(--steel) 50%,transparent 50%);box-shadow:inset 0 0 0 1.5px var(--coral)}
-.leyenda{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--ink-3)}
+.medida[data-v="sin"] .m-con,.medida[data-v="con"] .m-sin{display:none!important}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid var(--hair)}
+.kpi{padding:26px 24px 28px 0;min-width:0}
+.kpi+.kpi{padding-left:24px;border-left:1px solid var(--hair)}
+.kl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+.kv{margin-top:12px;font-family:var(--display);font-size:clamp(56px,6vw,90px);line-height:.92;color:var(--ink);display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.kv s{font-size:.48em;color:var(--ink-4);text-decoration-thickness:2px;text-decoration-color:rgba(224,122,108,.8)}
+.kv b{font-weight:400;color:var(--steel)}
+.kn{margin-top:12px;font-size:14.5px;line-height:1.45;color:var(--ink-3);max-width:32ch}
+@media (max-width:760px){.kpis{grid-template-columns:minmax(0,1fr)}.kpi{padding:20px 0}.kpi+.kpi{padding-left:0;border-left:0;border-top:1px solid var(--hair)}}
+.paises{padding-top:26px}
+.pt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.barras{margin-top:18px;display:grid;gap:13px}
+.barras li{display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr) 92px;align-items:center;gap:18px}
+.barras .pn{font-size:15px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barras .pista{height:12px;border-radius:6px;background:rgba(30,38,49,.6);overflow:hidden;display:flex}
+.barras .pista i{display:block;height:100%;width:0;transition:width 1s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
+.barras .q{background:var(--steel)}
+.barras .k{background:repeating-linear-gradient(135deg,rgba(224,122,108,.75) 0 4px,rgba(224,122,108,.3) 4px 8px)}
+.barras .pv{font-family:var(--mono);font-size:13px;color:var(--ink);text-align:right;white-space:nowrap}
+.barras .pv small{font-size:12px;color:var(--ink-4)}
+.leyenda{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--ink-3)}
 .leyenda span{display:inline-flex;align-items:center;gap:8px}
-.leyenda i{width:11px;height:11px;border-radius:3px;background:var(--steel)}
-.leyenda i.c{background:transparent;box-shadow:inset 0 0 0 1.5px var(--coral)}
-.leyenda i.p{background:linear-gradient(135deg,var(--steel) 50%,transparent 50%);box-shadow:inset 0 0 0 1.5px var(--coral)}
-.medida:not([data-v="con"]) .leyenda .solo-con{display:none}
-.totales{display:grid;gap:4px}
-.tot{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--hair);padding:12px 0}
-.tot .n{font-family:var(--display);font-size:clamp(50px,5.4vw,76px);line-height:1;min-width:2.1ch;color:var(--ink)}
-.tot .n.rojo{color:var(--coral)}
-.tot .l{color:var(--ink-2);font-size:16px;line-height:1.4}
-.tot .l small{display:block;color:var(--ink-3);font-size:13.5px;margin-top:2px}
+.leyenda i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.leyenda i.q{background:var(--steel)}
+.leyenda i.k{background:repeating-linear-gradient(135deg,rgba(224,122,108,.75) 0 3px,rgba(224,122,108,.3) 3px 6px)}
+@media (max-width:560px){.barras li{grid-template-columns:minmax(0,98px) minmax(0,1fr) 62px;gap:10px}.barras .pn{font-size:13.5px}.inf-cab{flex-direction:column;align-items:flex-start}}
 .medida .nota{margin-top:30px;font-size:14px;line-height:1.6;color:var(--ink-3);max-width:72ch}
 
 /* ---------- 03 · X-rays ---------- */
@@ -291,7 +315,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 /* ---------- 05 · Órbita ---------- */
 .orbita-img{position:relative}
-.orbita-img img{width:100%;height:auto;display:block}
+.globo2{position:relative;width:100%;max-width:600px;aspect-ratio:1/.74;margin:0 auto}
+.globo2 .respaldo{position:absolute;left:4%;top:0;width:92%;height:auto;display:block;transition:opacity 1.1s ease}
+.globo2.vivo .respaldo{opacity:0}
+.rot2{margin-top:6px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4)}
 
 /* ---------- 06 · open ---------- */
 .lista-estado{margin-top:34px;display:grid;gap:12px;max-width:640px}
@@ -312,9 +339,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .pie nav a:hover{color:var(--ink)}
 
 @media (prefers-reduced-motion:reduce){
-  .w,.sub,.entradas,.micro,.desliza,.rotulo,.planeta img{animation:none;opacity:1;transform:none;filter:none}
-  .js .r{opacity:1;transform:none;transition:none}
-  .rejilla i,.ventana li.corta .barrita::after{transition:none}
+  .w,.sub,.entradas,.micro,.desliza,.rotulo,.planeta .poster{animation:none;opacity:1;transform:none;filter:none}
+  .js .r{opacity:1!important;transform:none!important;transition:none}
+  .barras .pista i,.ventana li.corta .barrita::after{transition:none}
   .desliza i{animation:none}
 }
 </style>
@@ -335,9 +362,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 <main>
 <section class="hero" id="inicio" aria-labelledby="titular">
   <figure class="planeta">
-    <img src="/portada/planeta-1200.webp" srcset="/portada/planeta-560.webp 560w, /portada/planeta-800.webp 800w, /portada/planeta-1200.webp 1200w, /portada/planeta-1600.webp 1600w" sizes="(max-width: 700px) 138vw, (max-width: 1100px) 112vw, 1060px" width="1600" height="1025" fetchpriority="high" decoding="async" alt="La Tierra vista desde el sur, con los cables submarinos de América y, encima, un satélite en la órbita geoestacionaria.">
-    <canvas aria-hidden="true"></canvas>
-    <p class="rotulo" aria-hidden="true">Órbita geoestacionaria<span class="no-movil">Cables reales · señales ilustrativas · no a escala</span><span class="solo-movil">Ilustración · no a escala</span></p>
+    <div class="poster"><img src="/portada/planeta-1200.webp" srcset="/portada/planeta-560.webp 560w, /portada/planeta-800.webp 800w, /portada/planeta-1200.webp 1200w, /portada/planeta-1600.webp 1600w" sizes="(max-width: 700px) 138vw, (max-width: 1100px) 112vw, 1060px" width="1600" height="1025" fetchpriority="high" decoding="async" alt="La Tierra vista desde el sur, con los cables submarinos de América y, encima, un satélite en la órbita geoestacionaria."></div>
+    <p class="rotulo" aria-hidden="true">Órbita geoestacionaria<i class="no-movil"> · no a escala</i><span class="no-movil">Cables reales · señales ilustrativas</span><span class="no-movil">Arrástralo para girarlo</span><span class="solo-movil">No a escala</span><span class="solo-movil">Gíralo con el dedo</span></p>
     <div class="velo" aria-hidden="true"></div>
   </figure>
   <div class="hero-texto">
@@ -369,7 +395,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
         <li data-p="1"><b>Abres una página.</b></li>
         <li data-p="2"><b>Tu ficha sale hacia muchas empresas a la vez:</b> navegador, sistema, idioma, zona, pantalla y la página que lees.</li>
         <li data-p="3"><b>Pujan por enseñarte un anuncio.</b></li>
-        <li data-p="4"><b>Gana una.</b> Las demás ya tienen tu ficha.</li>
+        <li data-p="4"><b>Gana una.</b> Las demás ya tienen tus datos, aunque no ganen.</li>
       </ol>
     </div>
     <div class="r">
@@ -403,7 +429,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </div>
 
   <div class="wrap frases">
-    <p class="frase r">Pujan muchas. Gana una. <span class="g-light">Las demás ya tienen tu ficha.</span></p>
+    <p class="frase r">Pujan muchas empresas. Gana una. <span class="g-light">Las demás ya tienen tus datos, aunque no ganen.</span></p>
     <div class="cifras r">
       <div><p class="n">376</p><p class="u">veces al día, en Europa</p></div>
       <div><p class="n">747</p><p class="u">veces al día, en Estados Unidos</p></div>
@@ -432,26 +458,31 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     <p class="kick r">02 · Lo hemos medido</p>
     <h2 class="r" id="t-medida">Abrimos once diarios. Tu navegador habló con <em>100 empresas</em> de 16 países.</h2>
     <p class="lead r">Solo en la portada de Marca contamos 22 empresas de publicidad.</p>
-    <div class="conmut r" role="group" aria-label="Ver la medición">
-      <button type="button" data-v="sin" aria-pressed="true">Sin GUARDIANA</button>
-      <button type="button" data-v="con" aria-pressed="false">Con GUARDIANA</button>
-    </div>
-    <div class="medida-vis r">
-      <div>
-        <div class="rejilla" id="rejilla" aria-hidden="true"></div>
-        <p class="leyenda" aria-hidden="true"><span><i></i>Empresa que recibe tus datos</span><span class="solo-con"><i class="c"></i>Cortada</span><span class="solo-con"><i class="p"></i>Cortada en parte</span></p>
+    <div class="informe r" id="informe">
+      <div class="inf-cab">
+        <p class="inf-t">Once diarios · 23 de octubre de 2026 · medidos desde Colombia</p>
+        <div class="conmut" role="group" aria-label="Ver la medición">
+          <button type="button" data-v="sin" aria-pressed="true">Sin GUARDIANA</button>
+          <button type="button" data-v="con" aria-pressed="false">Con GUARDIANA</button>
+        </div>
       </div>
-      <div aria-live="polite">
-        <div class="totales" data-modo="sin">
-          <p class="tot"><span class="n">172</span><span class="l">dominios de otras empresas<small>con los que habló el navegador</small></span></p>
-          <p class="tot"><span class="n">100</span><span class="l">empresas<small>detrás de esos dominios</small></span></p>
-          <p class="tot"><span class="n">16</span><span class="l">países<small>donde tienen su sede</small></span></p>
-        </div>
-        <div class="totales" data-modo="con" hidden>
-          <p class="tot"><span class="n rojo">89</span><span class="l">dominios cortados<small>se quedan 83, los que hacen falta para ver la web</small></span></p>
-          <p class="tot"><span class="n rojo">65</span><span class="l">empresas cortadas del todo<small>y 7 en parte; se quedan 28</small></span></p>
-          <p class="tot"><span class="n">12</span><span class="l">países<small>en vez de 16</small></span></p>
-        </div>
+      <div class="kpis" aria-live="polite">
+        <div class="kpi"><p class="kl">Empresas que reciben tus datos</p><p class="kv"><span class="m-sin">100</span><span class="m-con"><s>100</s> <b>35</b></span></p><p class="kn"><span class="m-sin">Detrás de 172 dominios que no son del diario.</span><span class="m-con">Se cortan del todo 65 y otras 7 en parte.</span></p></div>
+        <div class="kpi"><p class="kl">Dominios de otras empresas</p><p class="kv"><span class="m-sin">172</span><span class="m-con"><s>172</s> <b>83</b></span></p><p class="kn"><span class="m-sin">Direcciones a las que se conectó tu navegador.</span><span class="m-con">Se cortan 89. Quedan los que hacen falta para ver la web.</span></p></div>
+        <div class="kpi"><p class="kl">Países que reciben tus datos</p><p class="kv"><span class="m-sin">16</span><span class="m-con"><s>16</s> <b>12</b></span></p><p class="kn"><span class="m-sin">Donde tienen su sede esas empresas.</span><span class="m-con">Cuatro países dejan de recibir nada.</span></p></div>
+      </div>
+      <div class="paises">
+        <p class="pt">Empresas por país de su sede</p>
+        <ul class="barras" id="barras">
+          <li data-cc="US" data-n="47" data-q="16"><span class="pn">Estados Unidos</span><span class="pista"><i class="q"></i><i class="k"></i></span><span class="pv"><span class="m-sin">47</span><span class="m-con">16 <small>/ 47</small></span></span></li>
+          <li data-cc="FR" data-n="14" data-q="4"><span class="pn">Francia</span><span class="pista"><i class="q"></i><i class="k"></i></span><span class="pv"><span class="m-sin">14</span><span class="m-con">4 <small>/ 14</small></span></span></li>
+          <li data-cc="DE" data-n="8" data-q="1"><span class="pn">Alemania</span><span class="pista"><i class="q"></i><i class="k"></i></span><span class="pv"><span class="m-sin">8</span><span class="m-con">1 <small>/ 8</small></span></span></li>
+          <li data-cc="ES" data-n="8" data-q="4"><span class="pn">España</span><span class="pista"><i class="q"></i><i class="k"></i></span><span class="pv"><span class="m-sin">8</span><span class="m-con">4 <small>/ 8</small></span></span></li>
+          <li data-cc="GB" data-n="8" data-q="3"><span class="pn">Reino Unido</span><span class="pista"><i class="q"></i><i class="k"></i></span><span class="pv"><span class="m-sin">8</span><span class="m-con">3 <small>/ 8</small></span></span></li>
+          <li data-cc="CO" data-n="2" data-q="1"><span class="pn">Colombia</span><span class="pista"><i class="q"></i><i class="k"></i></span><span class="pv"><span class="m-sin">2</span><span class="m-con">1 <small>/ 2</small></span></span></li>
+          <li data-n="13" data-q="6"><span class="pn">Otros 10 países</span><span class="pista"><i class="q"></i><i class="k"></i></span><span class="pv"><span class="m-sin">13</span><span class="m-con">6 <small>/ 13</small></span></span></li>
+        </ul>
+        <p class="leyenda" aria-hidden="true"><span><i class="q"></i>Reciben tus datos</span><span class="m-con"><i class="k"></i>Cortadas por GUARDIANA</span></p>
       </div>
     </div>
     <p class="nota r">Medido el 23 de octubre de 2026 desde Colombia, en las portadas de Marca, AS, Sport, L’Équipe, La Gazzetta dello Sport, Kicker, Sky Sports, ESPN, CBS Sports, Fox Sports y El Tiempo. «Con GUARDIANA» es la misma medición con nuestras reglas: no es una promesa.</p>
@@ -489,7 +520,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
         <ul>
           <li class="corta" style="--d:.2s"><span class="cat">Publicidad</span><span class="barrita"></span><span class="st">Cortada</span></li>
           <li class="corta" style="--d:.45s"><span class="cat">Rastreo</span><span class="barrita"></span><span class="st">Cortada</span></li>
-          <li class="queda"><span class="cat">La propia web</span><span class="barrita"></span><span class="st">Se queda</span></li>
+          <li class="queda"><span class="cat">La web que visitas</span><span class="barrita"></span><span class="st">Se queda</span></li>
           <li class="corta" style="--d:.7s"><span class="cat">Medición</span><span class="barrita"></span><span class="st">Cortada</span></li>
           <li class="corta" style="--d:.95s"><span class="cat">Publicidad</span><span class="barrita"></span><span class="st">Cortada</span></li>
           <li class="queda"><span class="cat">Funcional</span><span class="barrita"></span><span class="st">Se queda</span></li>
@@ -509,7 +540,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
       <p class="lead r">Cables submarinos, fibra en tierra, centros de datos y satélites, en un planeta que puedes girar.</p>
       <div class="fila r"><a class="btn fant" href="/orbita/">Explorar Órbita <span aria-hidden="true">↗</span></a></div>
     </div>
-    <div class="orbita-img r"><img src="/portada/planeta-entera-800.webp" srcset="/portada/planeta-entera-800.webp 800w, /portada/planeta-entera-1200.webp 1200w" sizes="(max-width: 920px) 92vw, 560px" width="800" height="598" alt="El planeta de Órbita con sus cables y la órbita geoestacionaria." loading="lazy" decoding="async"></div>
+    <div class="orbita-img r"><figure class="globo2" id="globo2"><img class="respaldo" src="/portada/planeta-entera-800.webp" width="800" height="598" alt="El planeta de Órbita con sus cables y la órbita geoestacionaria." loading="lazy" decoding="async"></figure><p class="rot2" aria-hidden="true">Arrástralo para girarlo · cables reales · señales ilustrativas</p></div>
   </div>
 </section>
 
@@ -557,6 +588,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </div>
 </footer>
 
+<script src="/portada/globo.js?v=20261023b"></script>
 <script>
 (() => {
   'use strict';
@@ -570,133 +602,109 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   addEventListener('scroll', alBajar, { passive: true }); alBajar();
   new IntersectionObserver(([e]) => { const fuera = !e.isIntersecting; top.classList.toggle('fuera', fuera); mini.classList.toggle('on', fuera); }, { rootMargin: '-35% 0px 0px 0px' }).observe(hero);
 
-  // ---------- reveals, as on Conocer ----------
-  const io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); } }, { rootMargin: '0px 0px -14% 0px' });
-  document.querySelectorAll('.r').forEach((el) => io.observe(el));
+  // ---------- blocks come in as you scroll, as on the old page ----------
+  // Pointer screens: each block follows the scroll, entering from below and leaving at the top. Touch screens
+  // scroll on their own thread, so there each block appears once, with a CSS transition (19 Oct 2026, the owner
+  // on an iPad: anything moved by script to follow the scroll shakes there).
+  const TACTIL = matchMedia('(pointer: coarse)').matches;
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), easeOut = (t) => 1 - Math.pow(1 - t, 3);
+  const reveals = [...document.querySelectorAll('.r')];
+  if (RM) reveals.forEach((el) => el.classList.add('visto'));
+  else if (TACTIL) {
+    const io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); } }, { rootMargin: '0px 0px -14% 0px' });
+    reveals.forEach((el) => io.observe(el));
+  } else {
+    const MED = new Map();
+    const pos = (el) => { let m = MED.get(el); if (!m) { let t = 0, e = el; while (e) { t += e.offsetTop; e = e.offsetParent; } m = { t, h: el.offsetHeight }; MED.set(el, m); } return m; };
+    let pend = false;
+    const mueve = () => { pend = false; const vh = innerHeight, sy = scrollY;
+      for (const el of reveals) { const m = pos(el), top = m.t - sy, bottom = top + m.h;
+        if (bottom < -200 || top > vh + 200) { if (el.__v !== 0) { el.style.opacity = '0'; el.__v = 0; } continue; }
+        const enter = easeOut(clamp((vh * 0.96 - top) / (vh * 0.26))), exit = easeOut(clamp((bottom - vh * 0.04) / (vh * 0.24))), v = Math.min(enter, exit);
+        el.__v = v; el.style.opacity = v.toFixed(3);
+        el.style.transform = 'translateY(' + ((1 - enter) * 48 - (1 - exit) * 36).toFixed(1) + 'px) scale(' + (0.97 + 0.03 * v).toFixed(4) + ')'; } };
+    const pide = () => { if (!pend) { pend = true; requestAnimationFrame(mueve); } };
+    addEventListener('scroll', pide, { passive: true });
+    addEventListener('resize', () => { MED.clear(); pide(); });
+    new ResizeObserver(() => { MED.clear(); pide(); }).observe(document.body);
+    mueve();
+  }
 
-  // ---------- the planet: a few signals on real cables, satellites passing, Colombia to the satellite ----------
-  // Same view as the picture (from 42°S over 72°W). Cables and land fibre are real; the light on them and the
-  // satellite hop are illustrations, and the picture says so.
-  const PISTAS = {"sub":[[[-74.01,40.19],[-65.0,32.53],[-35.46,1.1],[-32.21,-20.18],[-42.19,-26.59],[-46.32,-24.17],[-46.42,-24.02]],[[-78.89,33.69],[-43.04,-2.13],[-41.86,-2.55],[-40.19,-2.56],[-38.56,-3.46],[-37.2,-4.62],[-36.76,-4.83],[-35.75,-4.87],[-34.93,-5.69],[-34.54,-7.18],[-34.73,-8.5],[-35.13,-9.29],[-36.94,-11.1],[-37.42,-12.11],[-38.75,-13.47],[-38.76,-16.19],[-38.94,-16.5],[-38.94,-17.42],[-39.45,-18.39],[-39.47,-19.23],[-40.02,-20.32],[-40.48,-20.81],[-40.73,-21.73],[-42.3,-23.1],[-44.14,-23.11],[-45.64,-23.98],[-46.41,-24.01]],[[-75.16,10.68],[-74.99,11.13],[-74.25,11.5],[-73.41,11.53],[-71.74,12.57],[-71.39,12.39],[-70.42,12.38],[-69.32,11.7],[-68.8,11.66],[-68.05,10.99],[-62.86,10.97],[-62.16,10.32],[-61.46,10.27],[-60.67,9.69],[-59.74,8.77],[-58.73,8.11],[-57.06,6.45],[-54.6,6.41],[-54.03,6.08],[-53.2,5.88],[-51.75,4.98],[-46.87,0.12],[-41.02,-2.54],[-40.19,-2.56],[-39.09,-3.11],[-38.52,-3.73]],[[-74.8,10.96],[-74.64,11.3],[-74.29,11.35],[-73.89,11.68],[-73.06,11.7],[-71.7,12.57],[-71.26,12.23],[-70.11,12.22],[-69.32,11.7],[-68.84,11.68],[-68.05,10.99],[-62.86,10.97],[-62.16,10.32],[-61.46,10.27],[-60.67,9.69],[-59.74,8.77],[-58.73,8.11],[-57.06,6.45],[-54.6,6.41],[-54.03,6.08],[-53.2,5.88],[-51.75,4.98],[-46.87,0.12],[-41.02,-2.54],[-40.19,-2.56],[-39.09,-3.11],[-38.52,-3.73]],[[-43.19,-22.91],[-42.91,-23.11],[-42.3,-23.1],[-40.76,-21.77],[-40.48,-20.81],[-40.02,-20.32],[-39.47,-19.23],[-39.45,-18.39],[-38.94,-17.42],[-38.57,-13.29],[-37.39,-12.06],[-36.94,-11.1],[-35.13,-9.29],[-34.73,-8.5],[-34.54,-7.18],[-34.93,-5.69],[-38.21,-2.41],[-49.33,2.58],[-51.7,4.94],[-53.2,5.88],[-54.65,6.42],[-57.06,6.45],[-58.73,8.11],[-59.74,8.77],[-61.41,10.25],[-62.12,10.29],[-62.91,10.99],[-66.12,10.99],[-66.95,10.6]],[[-80.11,26.0],[-79.76,25.35],[-79.88,24.74],[-81.0,23.92],[-83.25,23.71],[-84.83,22.89],[-85.95,21.64],[-85.72,20.38],[-84.83,19.1],[-82.35,17.39],[-81.0,16.1],[-80.55,13.93],[-80.1,13.05],[-78.3,10.63],[-76.5,10.08],[-75.59,9.52]],[[-80.09,26.36],[-78.99,25.24],[-78.2,25.23],[-77.89,25.05],[-75.08,24.98],[-71.34,21.25],[-70.86,21.12],[-56.18,6.45],[-54.65,6.42],[-53.15,5.86],[-51.7,4.94],[-46.87,0.12],[-41.02,-2.54],[-40.19,-2.56],[-39.09,-3.11],[-38.52,-3.73]],[[-80.72,-0.95],[-80.6,-0.37],[-80.6,4.59],[-79.72,5.6],[-79.65,9.65],[-76.4,9.77],[-75.04,11.1],[-74.6,11.33],[-73.41,11.53],[-71.78,12.56],[-70.05,12.6]],[[-76.87,-12.28],[-77.93,-11.01],[-79.22,-8.15],[-81.09,-6.09],[-81.47,-4.94],[-80.95,-2.66],[-80.94,-0.99],[-80.45,-0.29],[-80.03,0.81],[-77.03,3.88]],[[-79.55,8.96],[-79.54,1.38],[-80.03,0.81],[-80.43,-0.24],[-80.95,-1.03],[-80.95,-3.71],[-81.47,-4.55],[-81.47,-7.58],[-77.97,-11.18],[-77.95,-19.23],[-71.62,-33.05]],[[-64.65,32.36],[-46.88,14.7],[-38.52,-3.73]],[[-64.61,18.42],[-66.38,16.62],[-69.54,16.58],[-75.43,10.7],[-75.51,10.39]],[[13.2,-9.51],[-2.0,-9.57],[-7.36,-4.31],[-37.11,-4.31],[-38.52,-3.73]],[[-118.42,33.92],[-118.32,33.6],[-117.37,32.63],[-116.47,31.0],[-116.39,29.03],[-104.52,17.35],[-101.4,17.31],[-100.08,16.62],[-99.08,16.43],[-97.8,15.74],[-97.32,15.72],[-96.53,15.38],[-93.45,15.37],[-93.01,15.14],[-91.87,14.01],[-91.12,13.63],[-90.33,13.62],[-88.83,13.06],[-85.36,9.61],[-84.62,9.55],[-83.25,8.21],[-82.2,7.99],[-80.75,7.13],[-80.1,7.62],[-80.06,7.98],[-79.55,8.72],[-79.55,8.96]],[[9.91,2.94],[-4.46,2.89],[-10.53,-3.08],[-32.54,-3.08],[-32.85,-3.25],[-37.81,-3.25],[-38.52,-3.73]],[[-38.52,-3.73],[-36.8,-4.82],[-35.75,-4.87],[-34.96,-5.65],[-34.54,-7.18],[-34.54,-7.76],[-35.1,-9.25],[-36.94,-11.1],[-37.42,-12.11],[-38.75,-13.47],[-38.76,-16.19],[-38.94,-16.5],[-38.94,-17.42],[-39.45,-18.39],[-39.47,-19.23],[-40.02,-20.32],[-40.48,-20.81],[-40.73,-21.73],[-54.51,-35.53],[-56.7,-36.48]]],"tie":[[[-47.93,-15.78],[-46.37,-14.09],[-43.42,-13.26],[-38.32,-12.7],[-38.49,-12.98],[-37.07,-10.91],[-37.79,-9.66],[-35.74,-9.67],[-34.88,-8.05],[-35.88,-7.23],[-35.21,-5.79],[-38.54,-3.72]],[[-61.13,4.62],[-66.92,10.5]],[[-77.03,-12.04],[-78.59,-9.08],[-79.03,-8.12],[-79.85,-6.77],[-80.66,-5.18]],[[-47.93,-15.78],[-60.67,2.82]],[[-77.03,-12.04],[-75.73,-14.08],[-71.54,-16.4]],[[-74.17,40.74],[-95.36,29.76]],[[-118.31,34.18],[-95.36,29.76]],[[-118.24,34.05],[-95.36,29.76]],[[-38.54,-3.72],[-43.21,-22.9]],[[-75.57,6.25],[-75.88,8.75],[-75.39,9.3],[-75.49,10.4],[-74.78,10.97]],[[-77.72,0.81],[-78.12,0.35],[-78.52,-0.23],[-78.62,-0.93],[-78.66,-1.67],[-78.85,-2.74],[-79.0,-2.9]],[[-74.08,4.61],[-72.5,7.88]],[[-75.54,6.29],[-72.5,7.88]],[[-99.52,27.48],[-100.32,25.68],[-100.39,20.59]],[[-68.15,-16.5],[-67.09,-17.97],[-66.16,-17.38],[-63.18,-17.79]],[[-17.17,14.72],[-17.07,14.63],[-16.97,14.42],[-16.6,14.42],[-16.07,14.14],[-15.42,14.1],[-15.07,13.97],[-14.46,13.98],[-13.7,13.77],[-12.45,14.3],[-12.35,14.39],[-12.21,14.41],[-12.21,14.46]],[[-100.38,20.6],[-100.32,25.67]],[[-15.5,16.51],[-14.45,16.49],[-13.98,16.17],[-13.92,16.07],[-13.77,16.05],[-13.59,15.96],[-13.48,15.88],[-13.31,15.55],[-13.18,15.48],[-13.13,15.37],[-13.03,15.35],[-12.93,15.25],[-12.95,15.12],[-12.87,15.07],[-12.77,15.08],[-12.53,14.91],[-12.21,14.46]],[[-65.75,-19.58],[-64.73,-21.54],[-63.68,-22.02]]]};
-  (function planeta() {
-    const fig = document.querySelector('.planeta'); if (!fig || RM) return;
-    const cv = fig.querySelector('canvas'), ctx = cv.getContext('2d');
-    const G = { w: 1605, cx: 802, cy: 662, r: 470 };
-    const L0 = -72 * D, P0 = -42 * D;
-    const F = [Math.cos(P0) * Math.cos(L0), Math.cos(P0) * Math.sin(L0), Math.sin(P0)];
-    const E = [-Math.sin(L0), Math.cos(L0), 0];
-    const N = [F[1] * E[2] - F[2] * E[1], F[2] * E[0] - F[0] * E[2], F[0] * E[1] - F[1] * E[0]];
-    const v3 = (lo, la, h) => [h * Math.cos(la * D) * Math.cos(lo * D), h * Math.cos(la * D) * Math.sin(lo * D), h * Math.sin(la * D)];
-    let k = 1, W = 0, H = 0, dpr = 1;
-    // screen position, and whether the point can be seen (in front of the planet, or outside its disc)
-    const pr = (q) => { const x = q[0] * E[0] + q[1] * E[1] + q[2] * E[2], y = q[0] * N[0] + q[1] * N[1] + q[2] * N[2], z = q[0] * F[0] + q[1] * F[1] + q[2] * F[2];
-      return [(G.cx + x * G.r) * k, (G.cy - y * G.r) * k, z > 0.03 || x * x + y * y > 1.0004]; };
-    const pista = (pts) => { const s = [0]; for (let i = 1; i < pts.length; i++) { const a = pts[i - 1], b = pts[i]; s.push(s[i - 1] + Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2])); } return { p: pts, s, L: s[s.length - 1] }; };
-    const curva = (lista, h) => { const out = [];
-      for (let i = 0; i < lista.length; i++) { const b = v3(lista[i][0], lista[i][1], 1);
-        if (i) { const a = v3(lista[i - 1][0], lista[i - 1][1], 1), ang = Math.acos(Math.min(1, Math.max(-1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]))), n = Math.floor(ang / (0.7 * D));
-          for (let j = 1; j <= n; j++) { const t = j / (n + 1), sn = Math.sin(ang), f0 = Math.sin((1 - t) * ang) / sn, f1 = Math.sin(t * ang) / sn; out.push([(a[0] * f0 + b[0] * f1) * h, (a[1] * f0 + b[1] * f1) * h, (a[2] * f0 + b[2] * f1) * h]); } }
-        out.push([b[0] * h, b[1] * h, b[2] * h]); }
-      return pista(out); };
-    const recta = (a, b) => { const out = []; for (let i = 0; i <= 48; i++) { const t = i / 48; out.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]); } return pista(out); };
-    const punto = (t, u) => { const s = t.s; if (u <= 0) return t.p[0]; if (u >= t.L) return t.p[t.p.length - 1];
-      let lo = 0, hi = s.length - 1; while (hi - lo > 1) { const m = (lo + hi) >> 1; if (s[m] < u) lo = m; else hi = m; }
-      const f = (u - s[lo]) / ((s[hi] - s[lo]) || 1), a = t.p[lo], b = t.p[hi]; return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f]; };
-    // a comet: a bright head and a tail that fades, as the old front page drew them
-    const cometa = (t, u, cola, rgb, ancho, alfa, sentido) => {
-      const at = (x) => (sentido > 0 ? x : t.L - x);
-      let prev = null;
-      for (let i = 12; i >= 0; i--) { const uu = u - cola * i / 12; if (uu < 0 || uu > t.L) { prev = null; continue; }
-        const q = pr(punto(t, at(uu))); if (!q[2]) { prev = null; continue; }
-        if (prev) { const f = 1 - i / 12; ctx.globalAlpha = alfa * f * f; ctx.strokeStyle = 'rgb(' + rgb + ')'; ctx.lineWidth = ancho * (0.35 + 0.9 * f); ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); }
-        prev = q; }
-      if (u < 0 || u > t.L) return;
-      const h = pr(punto(t, at(u))); if (!h[2]) return;
-      const r = ancho * 3.4, g = ctx.createRadialGradient(h[0], h[1], 0, h[0], h[1], r);
-      g.addColorStop(0, 'rgba(255,255,255,' + alfa + ')'); g.addColorStop(0.25, 'rgba(' + rgb + ',' + alfa * 0.85 + ')'); g.addColorStop(1, 'rgba(' + rgb + ',0)');
-      ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(h[0], h[1], r, 0, 6.2832); ctx.fill();
-    };
-    const SUB = PISTAS.sub.map((l) => curva(l, 1.004)).filter((t) => t.L > 0.05);
-    const TIE = PISTAS.tie.map((l) => curva(l, 1.003)).filter((t) => t.L > 0.03);
-    const LOTES = {
-      sub: { pistas: SUB, max: MOVIL ? 2 : 5, vel: 0.16, cola: 0.09, rgb: '214,232,248', ancho: MOVIL ? 1.2 : 1.5, alfa: 0.95 },
-      tie: { pistas: TIE, max: MOVIL ? 1 : 4, vel: 0.075, cola: 0.05, rgb: '156,195,228', ancho: MOVIL ? 1.0 : 1.25, alfa: 0.9 }
-    };
-    let reloj = 0;
-    const activos = [];
-    const lanza = (tipo, espera) => { const l = LOTES[tipo], libres = [];
-      for (let i = 0; i < l.pistas.length; i++) if (!activos.some((a) => a.tipo === tipo && a.i === i)) libres.push(i);
-      if (!libres.length) return; activos.push({ tipo, i: libres[Math.floor(Math.random() * libres.length)], t0: reloj + espera, sentido: Math.random() < 0.5 ? 1 : -1 }); };
-    for (const tipo in LOTES) for (let j = 0; j < LOTES[tipo].max; j++) lanza(tipo, 0.3 + j * 1.4 + Math.random() * 1.2);
-    // the satellite hop: from Colombia up to the geostationary satellite over 72°W, and down in another country
-    const CTG = v3(-75.51, 10.39, 1.004), SAT = v3(-72, 0, 1.7);
-    const DESTINOS = [['BR', -47.88, -15.79], ['MX', -99.13, 19.43], ['US', -80.19, 25.76], ['SN', -17.45, 14.69], ['PE', -77.04, -12.05]];
-    const SUBIDA = recta(CTG, SAT), BAJADAS = DESTINOS.map((d) => recta(SAT, v3(d[1], d[2], 1.004)));
-    const lang = document.documentElement.lang || 'es';
-    let nombres = null; try { nombres = new Intl.DisplayNames([lang], { type: 'region' }); } catch (e) {}
-    const nombre = (cc) => { let n = cc; try { n = nombres ? nombres.of(cc) : cc; } catch (e) {} return n.toLocaleUpperCase(lang); };
-    let salto = { d: 0, t0: 2.2 };
-    const PAUSA = MOVIL ? 5.5 : 3.2;
-    // a few low satellites crossing (orbits drawn 1.09 radii out and sped up: illustration)
-    const LEO = [{ i: 53, o: -40, f: 0.4, w: 2 * Math.PI / 66 }, { i: 97, o: -105, f: 2.4, w: 2 * Math.PI / 78 }, { i: 70, o: 10, f: 4.1, w: 2 * Math.PI / 60 }].slice(0, MOVIL ? 2 : 3);
-    const leo = (s, t) => { const th = s.f + s.w * t, ci = Math.cos(s.i * D), si = Math.sin(s.i * D), co = Math.cos(s.o * D), so = Math.sin(s.o * D), c = Math.cos(th), sn = Math.sin(th), r = 1.09;
-      return [r * (co * c - so * ci * sn), r * (so * c + co * ci * sn), r * si * sn]; };
-    const etiqueta = (txt, p, alfa, lado) => { if (alfa <= 0.01 || W < 560) return; ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = alfa;
-      ctx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; ctx.fillStyle = '#C9D7E6'; ctx.textAlign = lado < 0 ? 'right' : 'left'; ctx.textBaseline = 'middle';
-      ctx.fillText(txt, p[0] + lado * 12, p[1]); ctx.globalCompositeOperation = 'lighter'; };
-    const onda = (p, q, rgb, alfa, tam) => { if (q <= 0 || q >= 1) return; ctx.globalAlpha = alfa * (1 - q) * (1 - q); ctx.strokeStyle = 'rgb(' + rgb + ')'; ctx.lineWidth = 1.2;
-      ctx.beginPath(); ctx.arc(p[0], p[1], tam * (0.3 + q * 2.2), 0, 6.2832); ctx.stroke(); };
-    const pinta = () => {
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
-      ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round';
-      // 1 · light on the cables and on the land fibre
-      for (let j = activos.length - 1; j >= 0; j--) { const a = activos[j], l = LOTES[a.tipo], t = l.pistas[a.i], u = (reloj - a.t0) * l.vel;
-        if (u < 0) continue;
-        if (u > t.L + l.cola) { activos.splice(j, 1); lanza(a.tipo, 0.8 + Math.random() * 2.6); continue; }
-        const borde = Math.min(1, u / 0.06, (t.L + l.cola - u) / 0.06);
-        cometa(t, u, l.cola, l.rgb, l.ancho, l.alfa * borde, a.sentido); }
-      // 2 · low satellites
-      for (const s of LEO) { let prev = null;
-        for (let i = 10; i >= 0; i--) { const q = pr(leo(s, reloj - i * 0.16)); if (!q[2]) { prev = null; continue; }
-          if (prev) { const f = 1 - i / 10; ctx.globalAlpha = 0.5 * f * f; ctx.strokeStyle = 'rgb(156,195,228)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); }
-          prev = q; }
-        const q = pr(leo(s, reloj)); if (q[2]) { ctx.globalAlpha = 0.95; ctx.fillStyle = '#DCEBFA'; const z = MOVIL ? 2.2 : 2.6; ctx.fillRect(q[0] - z / 2, q[1] - z / 2, z, z); } }
-      // 3 · Cartagena, always there, breathing
-      const c = pr(CTG), ph = (reloj * 0.35) % 1;
-      ctx.globalAlpha = 0.55 * (1 - ph); ctx.strokeStyle = '#F4F6F8'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(c[0], c[1], 3 + ph * 14, 0, 6.2832); ctx.stroke();
-      ctx.globalAlpha = 0.95; ctx.fillStyle = '#F4F6F8'; ctx.beginPath(); ctx.arc(c[0], c[1], 2.1, 0, 6.2832); ctx.fill();
-      // 4 · the satellite's beacon
-      const s = pr(SAT), bp = (reloj * 0.42) % 1; onda(s, bp, '156,195,228', 0.45, 7);
-      // 5 · the hop
-      const dt = reloj - salto.t0, baja = BAJADAS[salto.d], dest = pr(punto(baja, baja.L));
-      const T1 = 1.05, T2 = 1.3, T3 = 2.35, T4 = 3.5;
-      if (dt >= 0) {
-        const alfaEt = Math.min(1, dt / 0.4) * (dt < T4 ? 1 : Math.max(0, 1 - (dt - T4) / 0.6));
-        etiqueta(nombre('CO'), c, 0.9 * alfaEt, -1);
-        if (dt < T1) { const u = SUBIDA.L * (dt / T1); haz(SUBIDA, u, 0.22); cometa(SUBIDA, u, 0.22, '244,246,248', MOVIL ? 1.4 : 1.8, 1, 1); }
-        else if (dt < T3 + 0.3) haz(SUBIDA, SUBIDA.L, 0.22 * Math.max(0, 1 - (dt - T1) / 1.6));
-        if (dt >= T1 - 0.05 && dt < T2 + 0.5) { const q = Math.min(1, (dt - T1 + 0.05) / 0.75), g = ctx.createRadialGradient(s[0], s[1], 0, s[0], s[1], 26);
-          g.addColorStop(0, 'rgba(255,255,255,' + 0.9 * (1 - q) + ')'); g.addColorStop(1, 'rgba(156,195,228,0)'); ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(s[0], s[1], 26, 0, 6.2832); ctx.fill(); }
-        if (dt >= T2 && dt < T3) { const u = baja.L * ((dt - T2) / (T3 - T2)); haz(baja, u, 0.22); cometa(baja, u, 0.22, '244,246,248', MOVIL ? 1.4 : 1.8, 1, 1); }
-        else if (dt >= T3) haz(baja, baja.L, 0.22 * Math.max(0, 1 - (dt - T3) / 1.6));
-        if (dt >= T3) { onda(dest, (dt - T3) / 1.2, '244,246,248', 0.9, 6); etiqueta(nombre(DESTINOS[salto.d][0]), dest, 0.9 * Math.min(1, (dt - T3) / 0.3) * Math.max(0, 1 - Math.max(0, dt - T4) / 0.6), DESTINOS[salto.d][1] < -72 ? -1 : 1); }
-        if (dt > T4 + 0.6 + PAUSA) salto = { d: (salto.d + 1) % DESTINOS.length, t0: reloj + 0.2 };
+  // ---------- titles that light up word by word as you reach them (as on the old page, 20–21 Oct 2026) ----------
+  // Dimmed while they wait (never invisible), lit when they rise past 78 % of the screen, the last words reached
+  // shining for a moment; the light walks one word at a time. It colours ranges of text (CSS Custom Highlight API):
+  // the text and its order never change, so screen readers, translation and selection keep working.
+  (() => {
+    if (RM || !window.CSS || !CSS.highlights || typeof Highlight === 'undefined') return;
+    const trozos = (t) => { const l = document.documentElement.lang || 'es', out = [];
+      if (window.Intl && Intl.Segmenter && /^(zh|ja|th)/.test(l)) { const seg = new Intl.Segmenter(l, { granularity: 'word' });
+        for (const x of seg.segment(t)) { const a = x.index, b = a + x.segment.length; if (/^\s+$/.test(x.segment)) continue; if (!x.isWordLike && out.length && !/^\s/.test(x.segment)) out[out.length - 1][1] = b; else out.push([a, b]); }
+        return out; }
+      const re = /\S+/g; let m; while ((m = re.exec(t))) out.push([m.index, m.index + m[0].length]); return out; };
+    const H0 = new Highlight(), HM = new Highlight(); CSS.highlights.set('luz-0', H0); CSS.highlights.set('luz-m', HM);
+    const GR = [[0, [185, 215, 240]], [0.38, [156, 195, 228]], [1, [240, 199, 127]]], NB = 8;
+    const enGr = (t) => { for (let i = 1; i < GR.length; i++) if (t <= GR[i][0]) { const [a, ca] = GR[i - 1], [b, cb] = GR[i], u = (t - a) / (b - a); return ca.map((c, j) => Math.round(c + (cb[j] - c) * u)); } return GR[GR.length - 1][1]; };
+    const HC = [], HG = []; let css = '';
+    for (let k = 0; k < NB; k++) { const c = enGr(k / (NB - 1)).join(','); HC.push(new Highlight()); HG.push(new Highlight()); CSS.highlights.set('luz-c' + k, HC[k]); CSS.highlights.set('luz-cg' + k, HG[k]);
+      css += '::highlight(luz-c' + k + '){color:rgb(' + c + ')}::highlight(luz-cg' + k + '){color:rgb(' + c + ');text-shadow:0 0 .32em rgba(' + c + ',.75),0 0 .9em rgba(' + c + ',.35)}'; }
+    const est = document.createElement('style'); est.textContent = css; document.head.appendChild(est);
+    const BR = new Map();
+    const brillo = (c) => { if (BR.has(c)) return BR.get(c); const m = (c.match(/[\d.]+/g) || [244, 246, 248]).slice(0, 3).join(','), h = new Highlight(), n = 'luz-b' + BR.size; CSS.highlights.set(n, h);
+      est.textContent += '::highlight(' + n + '){color:rgb(' + m + ');text-shadow:0 0 .32em rgba(156,195,228,.75),0 0 .9em rgba(156,195,228,.35)}'; BR.set(c, h); return h; };
+    const quita = (b, i) => { const r = b.words[i]; H0.delete(r); HM.delete(r); const c = b.color[i]; if (c >= 0) { HC[c].delete(r); HG[c].delete(r); } if (b.glow[i]) b.glow[i].delete(r); };
+    const pon = (b, i, e) => { quita(b, i); const c = b.color[i], r = b.words[i];
+      if (e === 2) H0.add(r); else if (c >= 0) (e === 1 ? HG[c] : HC[c]).add(r); else if (e === 1) (b.glow[i] || HM).add(r); };
+    const estado = (i, k) => (i < k - 2 ? 0 : i < k ? 1 : 2); // 0 lit, 1 the light passing, 2 waiting
+    let bloques = [], pendiente = false;
+    function construye() {
+      H0.clear(); HM.clear(); HC.forEach((h) => h.clear()); HG.forEach((h) => h.clear()); BR.forEach((h) => h.clear()); bloques = [];
+      document.querySelectorAll('.sec h2, .sec .frase, .quien h3, .gratis .sello').forEach((el) => {
+        const words = [], tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
+        while ((n = tw.nextNode())) for (const [a, b] of trozos(n.data)) { const r = new Range(); r.setStart(n, a); r.setEnd(n, b); words.push(r); }
+        if (words.length < 2) return;
+        const grupos = new Map();
+        const color = words.map((r) => { const e = r.startContainer.parentElement && r.startContainer.parentElement.closest('.g-light'); if (!e || !el.contains(e)) return -1; if (!grupos.has(e)) grupos.set(e, []); grupos.get(e).push(r); return -2; });
+        words.forEach((r, i) => { if (color[i] !== -2) return; const g = grupos.get(r.startContainer.parentElement.closest('.g-light')), j = g.indexOf(r); color[i] = Math.round((g.length > 1 ? j / (g.length - 1) : 0.5) * (NB - 1)); });
+        el.classList.add('luz-act');
+        const glow = words.map((r, i) => (color[i] >= 0 ? null : brillo(getComputedStyle(r.startContainer.parentElement).color)));
+        bloques.push({ el, words, color, glow, k: null });
+      });
+      pinta();
+    }
+    function pinta() {
+      pendiente = false; const vh = innerHeight;
+      for (const b of bloques) {
+        const r = b.el.getBoundingClientRect(), n = b.words.length, linea = vh * 0.78; let k;
+        if (r.bottom < 0) k = n + 2; else if (r.top > vh) k = 0;
+        else { let c = 0; for (let i = 0; i < n; i++) { const w = b.words[i].getBoundingClientRect(); if (w.top + w.height / 2 < linea) c = i + 1; } k = c >= n ? n + 2 : c; }
+        if (b.k == null || r.bottom < 0 || r.top > vh) { if (b.k !== k) for (let i = 0; i < n; i++) pon(b, i, estado(i, k)); b.k = k; b.kt = k; continue; }
+        b.kt = k;
       }
-      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
-    };
-    // the straight beam behind the hop, fading
-    function haz(t, u, alfa) { if (alfa <= 0.01) return; const a = pr(t.p[0]), b = pr(punto(t, u)); ctx.globalAlpha = alfa; ctx.strokeStyle = 'rgb(156,195,228)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
-    const mide = () => { W = fig.clientWidth; H = fig.clientHeight; dpr = Math.min(devicePixelRatio || 1, MOVIL ? 1.5 : 2); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); k = W / G.w; };
-    new ResizeObserver(mide).observe(fig); mide();
-    let corre = false, visto = false, listo = false, antes = 0, salta = false;
-    const cuadro = (ms) => { if (!corre) return; requestAnimationFrame(cuadro);
-      if (MOVIL && (salta = !salta)) return; // phones: 30 frames a second
-      const dt = antes ? Math.min(0.1, (ms - antes) / 1000) : 0; antes = ms; reloj += dt; pinta(); };
-    const arranca = () => { const debe = listo && visto && !document.hidden; if (debe && !corre) { corre = true; antes = 0; requestAnimationFrame(cuadro); } else if (!debe) corre = false; };
-    new IntersectionObserver(([e]) => { visto = e.isIntersecting; arranca(); }).observe(fig);
-    document.addEventListener('visibilitychange', arranca);
-    setTimeout(() => { listo = true; arranca(); }, 1300); // after the planet has arrived
+      anda();
+    }
+    let andando = false, tAnt = 0;
+    const paso1 = (b, k) => { const n = b.words.length, lo = Math.max(0, Math.min(k, b.k) - 3), hi = Math.min(n, Math.max(k, b.k) + 3); for (let i = lo; i < hi; i++) { const e = estado(i, k); if (e !== estado(i, b.k)) pon(b, i, e); } b.k = k; };
+    function anda() { if (!andando) { andando = true; tAnt = performance.now(); requestAnimationFrame(cuadro); } }
+    function cuadro(t) {
+      const dt = Math.min(400, t - tAnt); tAnt = t; let falta = false;
+      for (const b of bloques) { if (b.k == null || b.kt == null || b.k === b.kt) continue;
+        const d = b.kt - b.k, cada = Math.max(26, 120 - Math.abs(d) * 14); b.acc = (b.acc || 0) + dt;
+        while (b.acc >= cada && b.k !== b.kt) { b.acc -= cada; paso1(b, b.k + Math.sign(b.kt - b.k)); }
+        if (b.k !== b.kt) falta = true; else b.acc = 0; }
+      if (falta) requestAnimationFrame(cuadro); else andando = false;
+    }
+    const pide = () => { if (!pendiente) { pendiente = true; requestAnimationFrame(pinta); } };
+    setInterval(() => { if (!document.hidden) pide(); }, 250); // blocks fading in move their titles: re-measured a few times a second
+    addEventListener('scroll', pide, { passive: true }); addEventListener('resize', pide);
+    document.addEventListener('guardiana:lang', () => setTimeout(construye, 0));
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(construye); else construye();
   })();
+
+  // ---------- the planet you can turn (portada/globo.js); the picture shows until it is ready ----------
+  const fig = document.querySelector('.planeta');
+  if (fig && window.GuardianaGlobo) window.GuardianaGlobo(fig, { lon: -72, lat: -42, auto: 5, cx: 802 / 1605, cy: 662 / 1028, r: 470 / 1605, salto: true, etiquetas: true, antes: performance.now() + 1900 });
+  const g2 = document.getElementById('globo2');
+  if (g2 && window.GuardianaGlobo) window.GuardianaGlobo(g2, { lon: 12, lat: 20, auto: 6, cx: 0.5, cy: 0.5, r: 0.285 });
 
   // ---------- the auction, with the visitor's own card (computed here, never sent) ----------
   (function subasta() {
@@ -712,7 +720,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     const cv = vis.querySelector('canvas'), ctx = cv.getContext('2d'), ficha = vis.querySelector('.ficha');
     const lis = [...vis.querySelectorAll('.postores li')], pes = lis.map((li) => li.querySelector('.pe')), pasos = [...document.querySelectorAll('#pasos li')];
     const GANA = 4, CICLO = 8.6;
-    const TXT = { rec: 'Recibida', puja: 'Puja', gana: 'Gana', tiene: 'La tiene' };
+    const TXT = { rec: 'Recibe', puja: 'Puja', gana: 'Gana', tiene: 'Los tiene' };
     let W = 0, H = 0, dpr = 1, A = [0, 0], B = [], apilado = false;
     const mide = () => { const r = vis.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(devicePixelRatio || 1, 2); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       const f = ficha.getBoundingClientRect(); apilado = getComputedStyle(vis.querySelector('.postores')).position !== 'absolute';
@@ -752,20 +760,28 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     document.addEventListener('visibilitychange', arranca);
   })();
 
-  // ---------- measured: 100 companies, with and without GUARDIANA ----------
+  // ---------- measured: before and after, and the countries the data goes to ----------
   (function medida() {
-    const sec = document.getElementById('medida'), rej = document.getElementById('rejilla'); if (!sec || !rej) return;
-    const est = [].concat(Array(65).fill('c'), Array(7).fill('p'), Array(28).fill('q'));
-    let semilla = 11; const azar = () => (semilla = (semilla * 16807) % 2147483647) / 2147483647;
-    for (let i = est.length - 1; i > 0; i--) { const j = Math.floor(azar() * (i + 1)); [est[i], est[j]] = [est[j], est[i]]; }
-    rej.innerHTML = est.map((e, i) => '<i class="' + e + '" style="--d:' + ((i % 20) * 16 + Math.floor(i / 20) * 34) + 'ms"></i>').join('');
-    const bts = sec.querySelectorAll('.conmut button');
-    const pon = (v) => { sec.dataset.v = v; bts.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === v))); sec.querySelectorAll('[data-modo]').forEach((el) => { el.hidden = el.dataset.modo !== v; }); };
+    const sec = document.getElementById('medida'); if (!sec) return;
+    const bts = sec.querySelectorAll('.conmut button'), filas = [...sec.querySelectorAll('.barras li')], MAX = 47;
+    const nombres = () => { const lang = document.documentElement.lang || 'es'; let dn = null; try { dn = new Intl.DisplayNames([lang], { type: 'region' }); } catch (e) {}
+      if (dn) filas.forEach((li) => { const cc = li.dataset.cc; if (cc) try { li.querySelector('.pn').textContent = dn.of(cc); } catch (e) {} }); };
+    nombres(); document.addEventListener('guardiana:lang', nombres);
+    filas.forEach((li, i) => li.style.setProperty('--d', i * 70 + 'ms'));
+    const pon = (v) => { sec.dataset.v = v; bts.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
+      filas.forEach((li) => { const n = +li.dataset.n, q = +li.dataset.q;
+        li.querySelector('.q').style.width = (100 * (v === 'con' ? q : n) / MAX).toFixed(2) + '%';
+        li.querySelector('.k').style.width = (v === 'con' ? 100 * (n - q) / MAX : 0).toFixed(2) + '%'; }); };
     bts.forEach((b) => b.addEventListener('click', () => { sec.dataset.tocado = '1'; pon(b.dataset.v); }));
     pon('sin');
     // once it is on screen it switches by itself, once, to show the difference (unless the visitor already chose)
-    if (!RM) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { o.disconnect(); setTimeout(() => { if (!sec.dataset.tocado) pon('con'); }, 2400); } }, { threshold: 0.6 }).observe(rej);
+    if (!RM) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { o.disconnect(); setTimeout(() => { if (!sec.dataset.tocado) pon('con'); }, 1800); } }, { threshold: 0.45 }).observe(document.getElementById('informe'));
   })();
+
+  // ---------- GUARDIANA, at the top left, takes you back to the very start ----------
+  document.querySelectorAll('a.marca').forEach((a) => a.addEventListener('click', (e) => {
+    if (new URL(a.href, location.href).pathname !== location.pathname) return;
+    e.preventDefault(); scrollTo({ top: 0, behavior: RM ? 'auto' : 'smooth' }); }));
 
   // ---------- ZERO's illustration: the cuts run when it is on screen ----------
   (function zero() { const v = document.getElementById('ventana'); if (!v) return;
