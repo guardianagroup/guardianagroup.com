@@ -1611,7 +1611,16 @@
   }
   // the interface on top of the planet (layer buttons, satellite filter, gauges…) never reaches the map underneath (owner, 22 Oct 2026, 18:03)
   const UI_ENCIMA = 'header, .capa-vista, #puertas, #directo, #lugar, #seccion, .zoom, .conexion, .lista-cerca, #sat-ficha, #ficha-panel, #capas, #sat-vista, #sat-fase, #capa-nota, .altura, #dato, #viaje, #informe, button, a, select, input, label';
-  addEventListener('click', (e) => { if (!soloTu && !e.target.closest(UI_ENCIMA)) mira(e.clientX, e.clientY, true); });
+  addEventListener('click', (e) => { if (!soloTu && !e.target.closest(UI_ENCIMA)) { recogeTarjetas(); mira(e.clientX, e.clientY, true); } });
+  // 23 Oct 2026, 09:06 (owner): «cuando una persona clique en la pantalla… desaparezca cualquier cuadro de los de arriba…
+  // que no se anule, que se quede como estaba». A click on the planet only folds the open layer card; the layer and its
+  // switches stay exactly as they were, and the layer button opens the card again.
+  function recogeTarjetas() {
+    let algo = false;
+    for (const k of Object.keys(PLEGADO)) if (!PLEGADO[k] && (estado[k] || VACIA[k])) { PLEGADO[k] = true; algo = true; }
+    if (estado.sat && !estado.satPlegado) { estado.satPlegado = true; algo = true; }
+    if (algo) { pintaClases(); pintaVista(); }
+  }
   addEventListener('pointermove', (e) => {
     if (e.target && e.target.closest && e.target.closest(UI_ENCIMA)) { if (!fichaFija && (cableMarcado >= 0 || llegadaMarcada >= 0 || centroMarcado >= 0 || fibraMarcada >= 0 || puntoMarcado >= 0 || previstoMarcado >= 0 || estacionMarcada >= 0)) { cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = puntoMarcado = previstoMarcado = estacionMarcada = -1; muestra(-1); } return; }
     if (pendiente) { pendiente.x = e.clientX; pendiente.y = e.clientY; return; }
@@ -1657,7 +1666,7 @@
   function enganchaVista() {
     const caja = $('sat-vista'); if (!caja) return;
     const ti = caja.querySelector('.titulo');
-    if (ti) { const x = document.createElement('button'); x.type = 'button'; x.className = 'plegar'; x.setAttribute('aria-label', T('Plegar')); x.textContent = '—'; x.addEventListener('click', () => { estado.satPlegado = true; if (VACIA.sat) { VACIA.sat = false; estado.orb = { baja: true, media: true, geo: true }; guarda(); } pintaVista(); }); ti.appendChild(x); }
+    if (ti) { const x = document.createElement('button'); x.type = 'button'; x.className = 'plegar'; x.setAttribute('aria-label', T('Minimizar el panel')); x.title = T('Minimizar el panel'); x.innerHTML = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10l4-4 4 4"/></svg><span>' + T('Minimizar') + '</span>'; x.addEventListener('click', () => { estado.satPlegado = true; if (VACIA.sat) { VACIA.sat = false; estado.orb = { baja: true, media: true, geo: true }; guarda(); } pintaVista(); }); ti.appendChild(x); }
     // the «Satélites» button unfolds the card again when the layer is on but the card was folded
     const sb = document.querySelector('#capas [data-capa="sat"]');
     if (sb) sb.addEventListener('click', (e) => { if (estado.sat && estado.satPlegado) { e.stopImmediatePropagation(); estado.satPlegado = false; for (const q of Object.keys(PLEGADO)) PLEGADO[q] = true; pintaVista(); pintaClases(); } }, true);
@@ -1702,7 +1711,7 @@
       const caja = document.createElement('div'); caja.id = k + '-vista'; caja.className = 'sat-vista capa-vista'; caja.hidden = true; caja.setAttribute('role', 'group');
       const orb = document.createElement('div'); orb.className = 'orb'; caja.appendChild(orb);
       const ti = document.createElement('div'); ti.className = 'titulo'; ti.textContent = T(TEXTOS_CLASES[k].titulo); orb.appendChild(ti);
-      const x = document.createElement('button'); x.type = 'button'; x.className = 'plegar'; x.setAttribute('aria-label', T('Plegar')); x.textContent = '—'; x.addEventListener('click', () => { PLEGADO[k] = true; if (VACIA[k]) { VACIA[k] = false; for (const q of Object.keys(CLASES[k])) CLASES[k][q] = true; } pintaClases(); }); ti.appendChild(x);
+      const x = document.createElement('button'); x.type = 'button'; x.className = 'plegar'; x.setAttribute('aria-label', T('Minimizar el panel')); x.title = T('Minimizar el panel'); x.innerHTML = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10l4-4 4 4"/></svg><span>' + T('Minimizar') + '</span>'; x.addEventListener('click', () => { PLEGADO[k] = true; if (VACIA[k]) { VACIA[k] = false; for (const q of Object.keys(CLASES[k])) CLASES[k][q] = true; } pintaClases(); }); ti.appendChild(x);
       for (const c of Object.keys(TEXTOS_CLASES[k].clases)) {
         const [n, d] = TEXTOS_CLASES[k].clases[c];
         const bt = document.createElement('button'); bt.type = 'button'; bt.dataset.clase = c; bt.setAttribute('aria-pressed', String(!!CLASES[k][c]));

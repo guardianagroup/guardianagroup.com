@@ -18,7 +18,7 @@
 
   const X = {
     es: {
-      k: { mundo: 'EL MUNDO, AHORA', equipo: 'TU EQUIPO', ejemplo: 'EJEMPLO', sabias: '¿SABÍAS QUE…?', noticia: 'NOTICIA', fijar: 'Toca los puntos para que se quede fijo y pasarlos tú', seguir: 'Fijo · toca los puntos para que siga solo' }, noticiaF: 'Noticia verificada · dos fuentes', sabiaF: 'Datos verificados · dos fuentes',
+      k: { ant: 'Anterior', sig: 'Siguiente', mundo: 'EL MUNDO, AHORA', equipo: 'TU EQUIPO', ejemplo: 'EJEMPLO', sabias: '¿SABÍAS QUE…?', noticia: 'NOTICIA', fijar: 'Toca los puntos para que se quede fijo y pasarlos tú', seguir: 'Fijo · toca los puntos para que siga solo' }, noticiaF: 'Noticia verificada · dos fuentes', sabiaF: 'Datos verificados · dos fuentes',
       sat: (d) => `satélites de datos están ahora mismo sobre el horizonte de ${d}.`, satF: 'Datos verificados · posiciones calculadas ahora',
       noche: (p) => `ciudades de más de 15.000 habitantes están ahora de noche: el ${p} % del total.`, nocheF: 'GeoNames · el Sol, calculado ahora',
       cerca: (n, o, c) => `te separan del centro de datos más cercano del mapa: ${n}${o && o !== n ? ' (' + o + ')' : ''}${c ? ', en ' + c : ''}.`, cercaF: 'Datos verificados · cobertura parcial',
@@ -44,7 +44,7 @@
       nuevo: (c, ab) => `es el año de ${c}${ab ? ' (' + ab + ')' : ''}, el cable más moderno del mapa ya en servicio.`,
     },
     en: {
-      k: { mundo: 'THE WORLD, NOW', equipo: 'YOUR COMPUTER', ejemplo: 'EXAMPLE', sabias: 'DID YOU KNOW…?', noticia: 'NEWS', fijar: 'Tap the dots to hold it and move through yourself', seguir: 'Held · tap the dots to let it run again' }, noticiaF: 'Verified news · two sources', sabiaF: 'Verified data · two sources',
+      k: { ant: 'Previous', sig: 'Next', mundo: 'THE WORLD, NOW', equipo: 'YOUR COMPUTER', ejemplo: 'EXAMPLE', sabias: 'DID YOU KNOW…?', noticia: 'NEWS', fijar: 'Tap the dots to hold it and move through yourself', seguir: 'Held · tap the dots to let it run again' }, noticiaF: 'Verified news · two sources', sabiaF: 'Verified data · two sources',
       sat: (d) => `data satellites are above the horizon of ${d} right now.`, satF: 'Verified data · positions computed now',
       noche: (p) => `cities of more than 15,000 people are in night right now: ${p}% of them.`, nocheF: 'GeoNames · the Sun, computed now',
       cerca: (n, o, c) => `to the nearest data centre on the map: ${n}${o && o !== n ? ' (' + o + ')' : ''}${c ? ', in ' + c : ''}.`, cercaF: 'Verified data · partial coverage',
@@ -70,7 +70,7 @@
       nuevo: (c, ab) => `is the year of ${c}${ab ? ' (' + ab + ')' : ''}, the newest cable on the map already in service.`,
     },
     pt: {
-      k: { mundo: 'O MUNDO, AGORA', equipo: 'SEU COMPUTADOR', ejemplo: 'EXEMPLO', sabias: 'SABIA QUE…?', noticia: 'NOTÍCIA', fijar: 'Toca nos pontos para fixar e passar você mesmo', seguir: 'Fixo · toca nos pontos para voltar a correr' }, noticiaF: 'Notícia verificada · duas fontes', sabiaF: 'Dados verificados · duas fontes',
+      k: { ant: 'Anterior', sig: 'Seguinte', mundo: 'O MUNDO, AGORA', equipo: 'SEU COMPUTADOR', ejemplo: 'EXEMPLO', sabias: 'SABIA QUE…?', noticia: 'NOTÍCIA', fijar: 'Toca nos pontos para fixar e passar você mesmo', seguir: 'Fixo · toca nos pontos para voltar a correr' }, noticiaF: 'Notícia verificada · duas fontes', sabiaF: 'Dados verificados · duas fontes',
       sat: (d) => `satélites de dados estão agora acima do horizonte de ${d}.`, satF: 'Dados verificados · posições calculadas agora',
       noche: (p) => `cidades com mais de 15 mil habitantes estão agora à noite: ${p} % do total.`, nocheF: 'GeoNames · o Sol, calculado agora',
       cerca: (n, o, c) => `até o centro de dados mais próximo do mapa: ${n}${o && o !== n ? ' (' + o + ')' : ''}${c ? ', em ' + c : ''}.`, cercaF: 'Dados verificados · cobertura parcial',
@@ -297,41 +297,64 @@
     while (e < eq.length) orden.push(eq[e++]);
     cola = orden; vuelta = orden.length; pos = 0;
   }
-  async function siguiente() {
-    clearTimeout(temp);
-    for (let intento = 0; intento < 12; intento++) {
-      if (!cola.length) rellena();
-      const f = cola.shift(); pos++;
-      const d = typeof f === 'function' ? await f() : f;
-      if (d) { ultimo = f; vistos.push(d); if (vistos.length > 60) vistos.shift(); cursor = vistos.length - 1; pinta(d, (pos - 1) % Math.max(1, vuelta), vuelta); break; }
-    }
-    if (!fijo) temp = setTimeout(() => { if (!parado && !document.hidden) siguiente(); else temp = setTimeout(siguiente, 3000); }, 9000);
+  // 23 Oct 2026, 09:04 (owner): «las noticias deben de poder ir adelante y atrás… en cuanto la persona toca adelante o
+  // atrás o ahí dentro, ya tiene que parar… y las bolitas, cuando me ponga encima, la pueda ver». Each pass is prepared
+  // whole (one dot per card); it runs by itself until the person touches it, and from then on only they move it.
+  let mazo = [], idx = -1, manual = false, preparando = null;
+  async function preparaMazo() {
+    if (preparando) return preparando;
+    preparando = (async () => {
+      rellena();
+      const hechos = await Promise.all(cola.map(async (f) => { try { return typeof f === 'function' ? await f() : f; } catch (_) { return null; } }));
+      const nuevo = hechos.filter(Boolean);
+      if (nuevo.length) { mazo = nuevo; ultimo = cola[cola.length - 1]; }
+      cola = []; preparando = null;
+      return mazo;
+    })();
+    return preparando;
   }
-  // fixed mode: the card stops by itself and the person moves it: tap the card for the next one, the «‹» for the previous
-  function fija(on) { fijo = on; caja.classList.toggle('fijo', on); clearTimeout(temp); if (!on) temp = setTimeout(siguiente, 2500); }
-  function anterior() { if (cursor > 0) { cursor--; const d = vistos[cursor]; pinta(d, cursor, vistos.length); } }
+  function muestra(j) {
+    if (!mazo.length) return;
+    idx = (j + mazo.length) % mazo.length;
+    pinta(mazo[idx], idx, mazo.length);
+  }
+  function programa() {
+    clearTimeout(temp); if (manual) return;
+    temp = setTimeout(async () => {
+      if (manual) return;
+      if (parado || document.hidden) { programa(); return; }
+      if (idx + 1 >= mazo.length) { await preparaMazo(); if (manual) return; muestra(0); } else muestra(idx + 1);
+      programa();
+    }, 9000);
+  }
+  // the person takes over: from now on the card never moves by itself
+  function toma() { if (manual) return; manual = true; clearTimeout(temp); caja.classList.add('fijo'); }
+  async function siguiente() { if (!mazo.length) await preparaMazo(); muestra(idx + 1); programa(); }
   function pinta(d, k, n) {
     const t = tx();
     caja.classList.remove('entra'); void caja.offsetWidth; caja.classList.add('entra');
     $('dato-k').textContent = d.k === 'noticia' ? t.k.noticia + ' · ' + t.k.sabias : (d.fijo || (d.k === 'mundo' && Math.random() < 0.5) ? t.k.sabias : t.k[d.k]);
     const e = $('dato-e'); e.hidden = !d.e; e.textContent = t.k.ejemplo;
     $('dato-v').textContent = d.v; $('dato-t').textContent = d.t; $('dato-f').textContent = d.f;
-    const p = $('dato-p'); p.textContent = ''; p.title = fijo ? (t.k.seguir || '') : (t.k.fijar || '');
-    if (fijo) { const a = document.createElement('b'); a.className = 'datras'; a.textContent = '‹'; p.append(a); }
-    for (let j = 0; j < n; j++) { const b = document.createElement('i'); if (j === k) b.className = 'on'; p.append(b); }
-    if (fijo) { const a = document.createElement('b'); a.className = 'dfijo'; a.textContent = '⏸'; p.append(a); }
+    const p = $('dato-p'); p.textContent = '';
+    const flecha = (cls, txt, et) => { const a = document.createElement('button'); a.type = 'button'; a.className = cls; a.textContent = txt; a.setAttribute('aria-label', et); a.title = et; return a; };
+    p.append(flecha('datras', '‹', t.k.ant));
+    for (let j = 0; j < n; j++) { const b = document.createElement('i'); b.dataset.j = j; if (j === k) b.className = 'on'; p.append(b); }
+    p.append(flecha('dsig', '›', t.k.sig));
     caja.hidden = false;
   }
+  caja.removeAttribute('title');
   caja.addEventListener('mouseenter', () => { parado = true; });
   caja.addEventListener('mouseleave', () => { parado = false; });
+  // a dot under the pointer shows its card (and the person has taken over)
+  caja.addEventListener('mouseover', (e) => { const b = e.target.closest('#dato-p i[data-j]'); if (!b) return; const j = +b.dataset.j; if (j !== idx) { toma(); muestra(j); } });
   caja.addEventListener('click', (e) => {
-    const p = e.target.closest('#dato-p'); const k = e.target.closest('#dato-k'); const atras = e.target.closest('.datras');
-    if (p) { fija(!fijo); return; }            // the dots: stop here / let it run again
-    if (atras) { anterior(); return; }         // «‹»: the previous one, when fixed
-    if (k && fijo) { fija(false); return; }    // the label while fixed: let it run again
-    if (fijo && cursor < vistos.length - 1) { cursor++; pinta(vistos[cursor], cursor, vistos.length); return; }
-    siguiente();
+    toma();
+    if (e.target.closest('.datras')) { muestra(idx - 1); return; }
+    if (e.target.closest('.dsig')) { muestra(idx + 1); return; }
+    const b = e.target.closest('#dato-p i[data-j]'); if (b) muestra(+b.dataset.j);
   });
-  addEventListener('guardiana-idioma', () => { cola = []; siguiente(); });
+  caja.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') { toma(); muestra(idx - 1); } else if (e.key === 'ArrowRight') { toma(); muestra(idx + 1); } });
+  addEventListener('guardiana-idioma', async () => { const j = Math.max(0, idx); mazo = []; await preparaMazo(); muestra(Math.min(j, mazo.length - 1)); });
   setTimeout(siguiente, 3500);
 })();
