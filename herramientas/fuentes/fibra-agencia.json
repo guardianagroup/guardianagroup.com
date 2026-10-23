@@ -1,0 +1,627 @@
+{
+"fuente": {
+"n": "Agencia GUARDIANA (dos voces)",
+"lic": "GUARDIANA",
+"url": "",
+"fecha": "2026-10-23",
+"nota": "Troncales que dos voces de la agencia confirman por separado, entre ciudades, en línea recta: la ruta exacta no es pública."
+},
+"lineas": [
+{
+"n": "TEA NEXT",
+"o": "Atlas / Rostelecom",
+"cc": "RU",
+"l": [
+[
+30.31,
+59.94
+],
+[
+37.62,
+55.75
+],
+[
+44.0,
+56.33
+],
+[
+49.12,
+55.79
+],
+[
+60.62,
+56.86
+],
+[
+65.53,
+57.15
+],
+[
+82.93,
+55.02
+],
+[
+92.93,
+56.04
+],
+[
+104.29,
+52.3
+],
+[
+107.6,
+51.83
+],
+[
+113.49,
+52.04
+],
+[
+135.1,
+48.46
+],
+[
+131.87,
+43.11
+]
+]
+},
+{
+"n": "Kazakhtelecom National Backbone",
+"o": "Kazakhtelecom",
+"cc": "KZ",
+"l": [
+[
+51.17,
+43.66
+],
+[
+51.88,
+47.1
+],
+[
+51.43,
+51.25
+],
+[
+57.21,
+50.28
+],
+[
+65.51,
+44.85
+],
+[
+69.6,
+42.31
+],
+[
+71.37,
+42.9
+],
+[
+76.91,
+43.25
+],
+[
+78.37,
+45.02
+],
+[
+73.1,
+49.8
+],
+[
+71.45,
+51.18
+]
+]
+},
+{
+"n": "RDNFO",
+"o": "Pronatel / Azteca (original)",
+"cc": "PE",
+"l": [
+[
+-77.03,
+-12.04
+],
+[
+-78.59,
+-9.08
+],
+[
+-79.03,
+-8.12
+],
+[
+-79.85,
+-6.77
+],
+[
+-80.66,
+-5.18
+]
+]
+},
+{
+"n": "RDNFO",
+"o": "Pronatel / Azteca (original)",
+"cc": "PE",
+"l": [
+[
+-77.03,
+-12.04
+],
+[
+-75.73,
+-14.08
+],
+[
+-71.54,
+-16.4
+]
+]
+},
+{
+"n": "Azteca PNFO",
+"o": "Azteca Comunicaciones Colombia",
+"cc": "CO",
+"l": [
+[
+-75.57,
+6.25
+],
+[
+-75.51,
+5.07
+],
+[
+-75.69,
+4.81
+],
+[
+-76.52,
+3.43
+]
+]
+},
+{
+"n": "Azteca PNFO",
+"o": "Azteca Comunicaciones Colombia",
+"cc": "CO",
+"l": [
+[
+-75.57,
+6.25
+],
+[
+-75.88,
+8.75
+],
+[
+-75.39,
+9.3
+],
+[
+-75.49,
+10.4
+],
+[
+-74.78,
+10.97
+]
+]
+},
+{
+"n": "EurasiaHighway",
+"o": "TransTeleCom (TTK)",
+"cc": "RU",
+"l": [
+[
+65.53,
+57.15
+],
+[
+73.37,
+54.99
+],
+[
+82.93,
+55.02
+]
+]
+},
+{
+"n": "CNT Red Troncal Nacional de Fibra Óptica",
+"o": "CNT (Corporación Nacional de Telecomunicaciones)",
+"cc": "EC",
+"l": [
+[
+-77.72,
+0.81
+],
+[
+-78.12,
+0.35
+],
+[
+-78.52,
+-0.23
+],
+[
+-78.62,
+-0.93
+],
+[
+-78.62,
+-1.25
+],
+[
+-78.66,
+-1.67
+],
+[
+-78.85,
+-2.74
+],
+[
+-79.0,
+-2.9
+]
+]
+},
+{
+"n": "National Knowledge Network — Corredor norte-oeste y sur",
+"o": "National Informatics Centre / NKN",
+"cc": "IN",
+"l": [
+[
+77.21,
+28.62
+],
+[
+75.79,
+26.92
+],
+[
+72.68,
+23.22
+],
+[
+72.88,
+19.07
+],
+[
+73.86,
+18.52
+],
+[
+78.46,
+17.38
+]
+]
+},
+{
+"n": "Superistral North-South Ring",
+"o": "Kazakhtelecom",
+"cc": "KZ",
+"l": [
+[
+69.15,
+54.87
+],
+[
+63.62,
+53.21
+]
+]
+},
+{
+"n": "Superistral North-South Ring",
+"o": "Kazakhtelecom",
+"cc": "KZ",
+"l": [
+[
+69.15,
+54.87
+],
+[
+76.97,
+52.28
+],
+[
+80.25,
+50.42
+],
+[
+82.61,
+49.97
+]
+]
+},
+{
+"n": "National Fiber Backbone Phase 1",
+"o": "DICT",
+"cc": "PH",
+"l": [
+[
+120.6,
+18.2
+],
+[
+120.39,
+17.58
+],
+[
+120.33,
+16.53
+],
+[
+120.66,
+15.33
+],
+[
+121.05,
+14.81
+],
+[
+121.05,
+14.65
+]
+]
+},
+{
+"n": "TIC National Backbone",
+"o": "Telecommunication Infrastructure Company",
+"cc": "IR",
+"l": [
+[
+51.42,
+35.69
+],
+[
+50.88,
+34.64
+],
+[
+51.67,
+32.65
+],
+[
+52.53,
+29.61
+],
+[
+56.28,
+27.19
+]
+]
+},
+{
+"n": "NT National Fiber North",
+"o": "National Telecom",
+"cc": "TH",
+"l": [
+[
+100.5,
+13.75
+],
+[
+100.58,
+14.35
+],
+[
+100.14,
+15.7
+],
+[
+99.49,
+18.29
+],
+[
+98.98,
+18.79
+]
+]
+},
+{
+"n": "NT National Fiber South",
+"o": "National Telecom",
+"cc": "TH",
+"l": [
+[
+100.5,
+13.75
+],
+[
+99.94,
+13.11
+],
+[
+99.18,
+10.5
+],
+[
+99.33,
+9.14
+],
+[
+100.48,
+7.01
+]
+]
+},
+{
+"n": "REFEFO NOA-Patagonia Extensions",
+"o": "ARSAT",
+"cc": "AR",
+"l": [
+[
+-58.38,
+-34.61
+],
+[
+-60.64,
+-32.95
+],
+[
+-64.19,
+-31.41
+],
+[
+-65.21,
+-26.82
+],
+[
+-65.42,
+-24.81
+]
+]
+},
+{
+"n": "ENTEL — Red Nacional DWDM, eje central",
+"o": "ENTEL Bolivia",
+"cc": "BO",
+"l": [
+[
+-68.15,
+-16.5
+],
+[
+-67.09,
+-17.97
+],
+[
+-66.16,
+-17.38
+],
+[
+-63.18,
+-17.79
+]
+]
+},
+{
+"n": "RENATA — Anillo del Eje Cafetero",
+"o": "Red Nacional Académica de Tecnología Avanzada (RENATA)",
+"cc": "CO",
+"l": [
+[
+-75.69,
+4.81
+],
+[
+-75.67,
+4.54
+]
+]
+},
+{
+"n": "ENTEL — Red Nacional DWDM, corredor occidental y sur",
+"o": "ENTEL Bolivia",
+"cc": "BO",
+"l": [
+[
+-65.75,
+-19.58
+],
+[
+-64.73,
+-21.54
+],
+[
+-63.68,
+-22.02
+]
+]
+},
+{
+"n": "TEA (Transit Europe-Asia)",
+"o": "Rostelecom",
+"cc": "RU",
+"l": [
+[
+30.31,
+59.94
+],
+[
+34.96,
+57.04
+],
+[
+37.62,
+55.75
+]
+]
+},
+{
+"n": "Mobily National Fiber Network (SNFN)",
+"o": "Mobily",
+"cc": "SA",
+"l": [
+[
+50.21,
+26.28
+],
+[
+50.1,
+26.43
+],
+[
+46.72,
+24.69
+]
+]
+},
+{
+"n": "TE North-South Red Sea Terrestrial Corridor",
+"o": "Telecom Egypt",
+"cc": "EG",
+"l": [
+[
+32.53,
+29.97
+],
+[
+32.65,
+29.11
+],
+[
+33.08,
+28.36
+]
+]
+},
+{
+"n": "CNT EP — Red Troncal del Pacífico",
+"o": "Corporación Nacional de Telecomunicaciones (CNT EP)",
+"cc": "EC",
+"l": [
+[
+-79.89,
+-2.2
+],
+[
+-79.96,
+-3.26
+]
+]
+},
+{
+"n": "REFEFO (Red Federal de Fibra Óptica) - Troncal Norte-Sur",
+"o": "ARSAT",
+"cc": "AR",
+"l": [
+[
+-67.49,
+-45.86
+],
+[
+-69.25,
+-51.63
+]
+]
+}
+]
+}

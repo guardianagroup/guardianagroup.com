@@ -1,0 +1,169 @@
+[
+{
+"nombre": "Mobily National Fiber",
+"operador": "Mobily",
+"pais": "SA",
+"ciudades": [
+"Jeddah",
+"Riyadh",
+"Dammam",
+"Al Khobar"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+},
+{
+"nombre": "Salam National Backbone",
+"operador": "Salam",
+"pais": "SA",
+"ciudades": [
+"Jeddah",
+"Riyadh",
+"Al Khobar"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+},
+{
+"nombre": "TIC National Backbone",
+"operador": "Telecommunication Infrastructure Company",
+"pais": "IR",
+"ciudades": [
+"Tehran",
+"Isfahan",
+"Shiraz",
+"Bandar Abbas"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+},
+{
+"nombre": "Telecom Egypt Red Sea-Mediterranean Crossings",
+"operador": "Telecom Egypt",
+"pais": "EG",
+"ciudades": [
+"Ras Ghareb",
+"Zafarana",
+"Suez",
+"Port Said"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+},
+{
+"nombre": "NT National Fiber North",
+"operador": "National Telecom",
+"pais": "TH",
+"ciudades": [
+"Bangkok",
+"Chiang Mai"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+},
+{
+"nombre": "NT National Fiber South",
+"operador": "National Telecom",
+"pais": "TH",
+"ciudades": [
+"Bangkok",
+"Hat Yai"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+},
+{
+"nombre": "National Fiber Backbone Phase 1",
+"operador": "DICT",
+"pais": "PH",
+"ciudades": [
+"Laoag",
+"Quezon City"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+},
+{
+"nombre": "National Fiber Backbone Phases 2-5",
+"operador": "DICT",
+"pais": "PH",
+"ciudades": [
+"Quezon City",
+"Cebu",
+"Cagayan de Oro",
+"Davao"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+},
+{
+"nombre": "TransIndonesia Java Rings",
+"operador": "TransIndonesia Network",
+"pais": "ID",
+"ciudades": [
+"Jakarta",
+"Bandung",
+"Semarang",
+"Surabaya"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+},
+{
+"nombre": "TEA NEXT",
+"operador": "Atlas / Rostelecom",
+"pais": "RU",
+"ciudades": [
+"Saint Petersburg",
+"Moscow",
+"Yekaterinburg",
+"Novosibirsk",
+"Krasnoyarsk",
+"Irkutsk",
+"Vladivostok"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+},
+{
+"nombre": "RailTel OFC Backbone",
+"operador": "RailTel",
+"pais": "IN",
+"ciudades": [
+"Delhi",
+"Mumbai",
+"Chennai",
+"Kolkata",
+"Hyderabad"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+},
+{
+"nombre": "Eletronet Additional Routes",
+"operador": "Eletronet",
+"pais": "BR",
+"ciudades": [
+"Sao Paulo",
+"Brasilia",
+"Belo Horizonte",
+"Recife",
+"Fortaleza"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+},
+{
+"nombre": "REFEFO NOA-Patagonia Extensions",
+"operador": "ARSAT",
+"pais": "AR",
+"ciudades": [
+"Buenos Aires",
+"Cordoba",
+"Salta",
+"San Antonio Oeste"
+],
+"estado": "en servicio",
+"fuente": "Grok (ronda 3)"
+}
+]
