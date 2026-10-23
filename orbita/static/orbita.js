@@ -380,7 +380,7 @@
   cvT.addEventListener('dblclick', (e) => {
     if (!libreZoom()) return;
     foco = geoDe(e.clientX, e.clientY) || foco; // a double click is a click too: the zoom goes where it landed
-    if (ZOOM.zt >= ZOOM.MAX - 1e-3) acerca(1); else { const pasos = [1.5, 4, 8, 20, 80, 400, 2000, 10000, ZOOM.MAX]; acerca(pasos.find((p) => ZOOM.zt < p - 1e-3) || ZOOM.MAX, e.clientX, e.clientY); }
+    if (ZOOM.zt >= ZOOM.MAX - 1e-3) acerca(1); else { const pasos = [2.5, 5, 10, 25, 80, 400, 2000, 10000, ZOOM.MAX]; /* 22 Oct 2026, 21:52 (owner): «con doble clic se tiene que poder hacer zoom en la zona del clic» — a clear step each time, gliding to the spot */ acerca(pasos.find((p) => ZOOM.zt < p - 1e-3) || ZOOM.MAX, e.clientX, e.clientY); }
   });
   const dedos = new Map(); let pellizco = null;
   cvT.addEventListener('pointerdown', (e) => { if (e.pointerType === 'touch') dedos.set(e.pointerId, e); if (dedos.size === 2) { const [a, b] = [...dedos.values()]; pellizco = { d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), z: ZOOM.zt }; arrastre = null; } });
@@ -1117,7 +1117,7 @@ void main(){
     if (dentro && impar) return; // behind glass, half the frames are enough
     while (cola.length && cola[0].at <= now / 1000) lanza(cola.shift(), t);
     while (ondas.length && t - ondas[0].t0 > 3) ondas.shift();
-    if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) > 1e-5) { ZOOM.z *= Math.exp(Math.log(ZOOM.zt / ZOOM.z) * Math.min(1, dt * 4.5)); /* eased in log space: the same glide at ×2 and at ×50 000 (22 Oct 2026) */ if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) < 1e-4) ZOOM.z = ZOOM.zt; R = R0 * ZOOM.z; RAIZ.style.setProperty('--cerca', Math.min(1, (ZOOM.z - 1) / 19).toFixed(3)); document.body.classList.toggle('hondo', ZOOM.z >= 8); /* 22 Oct 2026, 13:54 (owner): deep in, the top layer buttons step back; 21:35: they stay faint and wake under the pointer */ pintaAltura(); }
+    if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) > 1e-5) { ZOOM.z *= Math.exp(Math.log(ZOOM.zt / ZOOM.z) * Math.min(1, dt * 4.5)); /* eased in log space: the same glide at ×2 and at ×50 000 (22 Oct 2026) */ if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) < 1e-4) ZOOM.z = ZOOM.zt; R = R0 * ZOOM.z; RAIZ.style.setProperty('--cerca', Math.min(1, (ZOOM.z - 1) / 19).toFixed(3)); document.body.classList.toggle('hondo', ZOOM.z >= 8); document.body.classList.toggle('explorando', ZOOM.z >= 3); /* 22 Oct 2026, 21:51 (owner): past ×3 the section doors on the left go away; they come back on the way out */ /* 22 Oct 2026, 13:54 (owner): deep in, the top layer buttons step back; 21:35: they stay faint and wake under the pointer */ pintaAltura(); }
     avanzaVista(dentro ? dt * 2 : dt, now);
     pintaTierra(t, dentro ? 0.9 : 1);
     pintaRutas(t, dt);

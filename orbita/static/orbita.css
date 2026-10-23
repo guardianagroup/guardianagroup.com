@@ -339,8 +339,10 @@ body.cerca .capa-nota { background: rgba(6,8,12,.78); padding: 6px 14px; border-
    they wake up again under the pointer. */
 body:not(.dentro) #puertas { opacity: calc(1 - var(--cerca, 0) * .88); transition: opacity .25s; }
 body:not(.dentro) #puertas:hover, body:not(.dentro) #puertas:focus-within { opacity: 1; }
+/* 22 Oct 2026, 21:51 (owner): while exploring (past ×3) the doors are not needed; they return when the zoom comes back */
+body.explorando:not(.dentro) #puertas { opacity: 0 !important; pointer-events: none; transition: opacity .35s; }
 /* 21 Oct 2026 (owner): the top bar steps back with the zoom too, so the planet is seen whole; it wakes under the pointer. */
-body.listo:not(.dentro) header > :not(#sat-vista):not(#sat-fase) { opacity: calc(1 - var(--cerca, 0) * .85); transition: opacity .25s; }
+body.listo:not(.dentro) header > :not(.sat-vista):not(#sat-fase) { opacity: calc(1 - var(--cerca, 0) * .85); transition: opacity .25s; }
 body.listo:not(.dentro) header:hover > *, body.listo:not(.dentro) header:focus-within > * { opacity: 1; }
 /* 22 Oct 2026 (owner: «ya no se pueden clasificar los satélites»): the orbit filter stays readable at any zoom,
    on a darker glass so it reads over the bright day side too */
