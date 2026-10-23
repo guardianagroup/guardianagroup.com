@@ -465,7 +465,8 @@ body.listo .altura { opacity: 1; }
 .altura .barra b { position: absolute; left: 10px; font: 400 9.5px/1 var(--mono); color: #7A8591; white-space: nowrap; }
 .altura .barra b:first-child { top: 1px; } .altura .barra b:last-of-type { bottom: 1px; }
 .altura .barra i { position: absolute; left: -4px; top: 0; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: #9CC3E4; box-shadow: 0 0 8px rgba(156,195,228,.8); transition: top .15s linear; }
-.altura .v { font: 500 11px/1 var(--mono); color: var(--fg); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.altura .v { display: none; } /* 22 Oct 2026, 22:07 (owner): no fixed «≈ 40.000 km» under the bar; the height travels beside the dot */
+.altura .barra i .vv { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font: 500 11px/1 var(--mono); color: var(--fg); white-space: nowrap; font-variant-numeric: tabular-nums; text-shadow: 0 0 6px rgba(6,8,12,.9); pointer-events: none; }
 body.dentro .altura { opacity: 0; }
 @media (max-width: 760px) { .altura { display: none; } }
 
