@@ -1637,7 +1637,7 @@
         const [n, d] = TEXTOS_CLASES[k].clases[c];
         const bt = document.createElement('button'); bt.type = 'button'; bt.dataset.clase = c; bt.setAttribute('aria-pressed', String(!!CLASES[k][c]));
         bt.innerHTML = '<i aria-hidden="true"></i><span class="n"></span><span class="d"></span>';
-        bt.querySelector('.n').append(T(n), ' ', Object.assign(document.createElement('b'), {})); bt.querySelector('.d').textContent = T(d);
+        bt.querySelector('.n').append(T(n), ' ', Object.assign(document.createElement('b'), {})); bt.querySelector('.d').textContent = T(d); bt.title = T(d); // 22 Oct 2026, 22:09 (owner): the card lists classes only; the explanation shows under the pointer
         bt.addEventListener('click', () => {
           CLASES[k][c] = !CLASES[k][c];
           // every main class switched off = the layer off (and its classes back on for the next time), never an empty layer that looks broken
