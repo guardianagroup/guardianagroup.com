@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "0,6–1,5 m mélyen van a földben, szinte mindig védőcsövekben, utak, vasutak, gázvezetékek vagy villamos távvezetékek mentén.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "világos, vastag vonal fényudvarral: 100 Tbit/s feletti gerinchálózatok; közepes vonal: 20 Tbit/s felett",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "3D-s repülés a városodtól minden kontinens adatközpontjaiig, a valódi időiddel.",
-  "Al pulsar, se miden en unos segundos.": "Kattintásra néhány másodperc alatt lemérjük őket."
+  "Al pulsar, se miden en unos segundos.": "Kattintásra néhány másodperc alatt lemérjük őket.",
+  "Centros de grandes compañías": "Nagyvállalatok központjai",
+  "Centros de compañías pequeñas": "Kisvállalatok központjai",
+  "De compañías con cinco o más centros de datos en el mapa.": "Olyan cégektől, amelyeknek legalább öt adatközpontja van a térképen.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Olyan cégektől, amelyeknek ötnél kevesebb központja van a térképen, vagy amelyeknél a cég nem ismert."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

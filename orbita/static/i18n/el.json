@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Είναι θαμμένη σε βάθος από 0,6 έως 1,5 m, σχεδόν πάντα σε αγωγούς κατά μήκος δρόμων, σιδηροδρομικών γραμμών, αγωγών φυσικού αερίου ή γραμμών ηλεκτρικού ρεύματος.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "ανοιχτόχρωμη παχιά γραμμή με φωτοστέφανο: κορμοί άνω των 100 Tbit/s· μεσαία γραμμή: άνω των 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Μια πτήση σε 3D από την πόλη σας ως τα κέντρα δεδομένων κάθε ηπείρου, με τους πραγματικούς σας χρόνους.",
-  "Al pulsar, se miden en unos segundos.": "Με το πάτημα, μετρώνται σε λίγα δευτερόλεπτα."
+  "Al pulsar, se miden en unos segundos.": "Με το πάτημα, μετρώνται σε λίγα δευτερόλεπτα.",
+  "Centros de grandes compañías": "Κέντρα μεγάλων εταιρειών",
+  "Centros de compañías pequeñas": "Κέντρα μικρών εταιρειών",
+  "De compañías con cinco o más centros de datos en el mapa.": "Εταιρειών με πέντε ή περισσότερα κέντρα δεδομένων στον χάρτη.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Εταιρειών με λιγότερα από πέντε κέντρα στον χάρτη ή άγνωστης εταιρείας."
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

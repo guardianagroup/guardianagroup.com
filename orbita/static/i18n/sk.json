@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Je uložená v hĺbke 0,6 až 1,5 m, takmer vždy v chráničkách popri cestách, železniciach, plynovodoch alebo elektrických vedeniach.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "svetlá hrubá čiara so žiarou: chrbticové siete nad 100 Tbit/s; stredná čiara: nad 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Let v 3D z vášho mesta do dátových centier na každom kontinente, s vašimi skutočnými časmi.",
-  "Al pulsar, se miden en unos segundos.": "Po kliknutí sa zmerajú za pár sekúnd."
+  "Al pulsar, se miden en unos segundos.": "Po kliknutí sa zmerajú za pár sekúnd.",
+  "Centros de grandes compañías": "Centrá veľkých firiem",
+  "Centros de compañías pequeñas": "Centrá malých firiem",
+  "De compañías con cinco o más centros de datos en el mapa.": "Firiem s piatimi a viac dátovými centrami na mape.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Firiem s menej ako piatimi centrami na mape alebo s neznámou firmou."
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

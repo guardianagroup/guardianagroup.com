@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Được chôn ở độ sâu từ 0,6 đến 1,5 m, hầu như luôn trong ống dẫn dọc theo đường bộ, đường sắt, đường ống khí đốt hoặc đường dây điện.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "nét sáng, đậm, có quầng: trục chính trên 100 Tbit/s; nét vừa: trên 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Một chuyến bay 3D từ thành phố của bạn đến các trung tâm dữ liệu ở mỗi châu lục, với thời gian thực của bạn.",
-  "Al pulsar, se miden en unos segundos.": "Khi bấm, chúng được đo trong vài giây."
+  "Al pulsar, se miden en unos segundos.": "Khi bấm, chúng được đo trong vài giây.",
+  "Centros de grandes compañías": "Trung tâm của các công ty lớn",
+  "Centros de compañías pequeñas": "Trung tâm của các công ty nhỏ",
+  "De compañías con cinco o más centros de datos en el mapa.": "Của các công ty có từ năm trung tâm dữ liệu trở lên trên bản đồ.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Của các công ty có dưới năm trung tâm trên bản đồ, hoặc không rõ công ty."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Ljósleiðarinn er grafinn á 0,6 til 1,5 m dýpi, nær alltaf í rörum meðfram vegum, járnbrautum, gasleiðslum eða raflínum.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "ljós, þykk lína með geislabaug: stofnnet yfir 100 Tbit/s; meðalþykk lína: yfir 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Flug í 3D frá borginni þinni að gagnaverum í hverri heimsálfu, með raunverulegum tímum þínum.",
-  "Al pulsar, se miden en unos segundos.": "Þegar þú smellir eru þeir mældir á nokkrum sekúndum."
+  "Al pulsar, se miden en unos segundos.": "Þegar þú smellir eru þeir mældir á nokkrum sekúndum.",
+  "Centros de grandes compañías": "Gagnaver stórra fyrirtækja",
+  "Centros de compañías pequeñas": "Gagnaver lítilla fyrirtækja",
+  "De compañías con cinco o más centros de datos en el mapa.": "Frá fyrirtækjum með fimm eða fleiri gagnaver á kortinu.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Frá fyrirtækjum með færri en fimm gagnaver á kortinu, eða þar sem fyrirtækið er óþekkt."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

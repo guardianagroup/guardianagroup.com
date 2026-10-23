@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Заровена е на дълбочина между 0,6 и 1,5 m, почти винаги в тръби покрай пътища, железопътни линии, газопроводи или електропроводи.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "светла дебела линия с ореол: магистрали над 100 Tbit/s; средна линия: над 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Полет в 3D от вашия град до центровете за данни на всеки континент, с вашите реални времена за отговор.",
-  "Al pulsar, se miden en unos segundos.": "При щракване те се измерват за няколко секунди."
+  "Al pulsar, se miden en unos segundos.": "При щракване те се измерват за няколко секунди.",
+  "Centros de grandes compañías": "Центрове на големи компании",
+  "Centros de compañías pequeñas": "Центрове на малки компании",
+  "De compañías con cinco o más centros de datos en el mapa.": "На компании с пет или повече центъра за данни на картата.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "На компании с по-малко от пет центъра на картата или с неизвестна компания."
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

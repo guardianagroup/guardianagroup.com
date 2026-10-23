@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "Este îngropată la o adâncime între 0,6 și 1,5 m, aproape întotdeauna în tuburi de-a lungul drumurilor, căilor ferate, gazoductelor sau liniilor electrice.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "linie deschisă și groasă cu halo: magistrale de peste 100 Tbit/s; linie medie: peste 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "Un zbor în 3D din orașul tău până la centrele de date de pe fiecare continent, cu timpii tăi reali.",
-  "Al pulsar, se miden en unos segundos.": "La clic, sunt măsurați în câteva secunde."
+  "Al pulsar, se miden en unos segundos.": "La clic, sunt măsurați în câteva secunde.",
+  "Centros de grandes compañías": "Centrele companiilor mari",
+  "Centros de compañías pequeñas": "Centrele companiilor mici",
+  "De compañías con cinco o más centros de datos en el mapa.": "Ale companiilor cu cinci sau mai multe centre de date pe hartă.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "Ale companiilor cu mai puțin de cinci centre pe hartă sau a căror companie nu este cunoscută."
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

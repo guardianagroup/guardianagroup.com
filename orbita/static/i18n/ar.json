@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "مدفون على عمق بين 0.6 و1.5 m، وغالبًا في قنوات بمحاذاة الطرق أو السكك الحديدية أو أنابيب الغاز أو خطوط الكهرباء.",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "خط فاتح وسميك بهالة: شبكات رئيسية تتجاوز 100 Tbit/s؛ خط متوسط: أكثر من 20 Tbit/s",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "رحلة بتقنية 3D من مدينتك إلى مراكز البيانات في كل قارة، بأزمنتك الفعلية.",
-  "Al pulsar, se miden en unos segundos.": "عند النقر، تُقاس في بضع ثوانٍ."
+  "Al pulsar, se miden en unos segundos.": "عند النقر، تُقاس في بضع ثوانٍ.",
+  "Centros de grandes compañías": "مراكز الشركات الكبرى",
+  "Centros de compañías pequeñas": "مراكز الشركات الصغيرة",
+  "De compañías con cinco o más centros de datos en el mapa.": "لشركات لديها خمسة مراكز بيانات أو أكثر على الخريطة.",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "لشركات لديها أقل من خمسة مراكز على الخريطة، أو لا تُعرف الشركة المالكة لها."
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

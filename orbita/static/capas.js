@@ -29,21 +29,27 @@
   const CLASES = {
     sub: { gigante: true, grande: true, regional: true, sinDato: true, aprox: true, previstos: true },
     fibra: { principal: true, largo: true, nacional: true, regional: true, obra: true },
-    puntos: { datos: true, intercambio: true, estaciones: true, pequenos: true }, // 22 Oct 2026, 22:42 (owner: «es un semáforo»): every class is «on = shown», no inverted filters
+    puntos: { datos: true, pequenos: true, intercambio: true, estaciones: true }, // 22 Oct 2026, 22:42 (owner: «es un semáforo»): every class is «on = shown», no inverted filters
   };
   const PRINCIPALES = { sub: ['gigante', 'grande', 'regional', 'sinDato'], fibra: ['principal', 'largo', 'nacional', 'regional'], puntos: ['datos', 'intercambio', 'estaciones'] };
   // 22 Oct 2026, 22:48 (owner: «llevo cuatro… se cierra y aún me quedaba uno… no se puede cerrar antes ni después»): the card
   // closes (the layer goes off) only when every switch that shows something is red. «Compañías pequeñas» only refines the
   // data centres, so it counts only while «Centros de datos» is on (otherwise it is greyed out).
-  const depende = (k, q) => k === 'puntos' && q === 'pequenos';
-  const cuentaEn = (k, q) => !depende(k, q) || !!CLASES.puntos.datos;
-  const todasApagadas = (k) => Object.keys(CLASES[k]).every((q) => !cuentaEn(k, q) || !CLASES[k][q]);
+  // 23 Oct 2026, 08:11 (owner): «se cierra automáticamente sin dejarme tocar compañías pequeñas». Every switch is its own
+  // light and every one counts: «Centros de datos» are the centres of the companies with five or more on the map,
+  // «Compañías pequeñas» the rest, so either can be on without the other.
+  const cuentaEn = () => true;
+  const todasApagadas = (k) => Object.keys(CLASES[k]).every((q) => !CLASES[k][q]);
+  // 23 Oct 2026, 08:12 (owner): «cuando borro el último, se cierra la pestaña. Eso no debe pasar… tiene que cerrar el
+  // cliente». A layer whose switches are all red goes off on the map, but its card stays open until the person closes it.
+  const VACIA = {};
+  const esGrande = (q) => !!(PT && PT.porOp && q.o && (PT.porOp.get(q.o) || 0) >= 5);
   // which class a submarine cable belongs to (by its published capacity) and whether it shows now
   const claseSub = (i) => { const c = capacidadDe(i); return !c ? 'sinDato' : c.tbps >= CAP.umbrales.gigante ? 'gigante' : c.tbps >= CAP.umbrales.grande ? 'grande' : 'regional'; };
   const veSub = (i, l) => CLASES.sub[claseSub(i)] && (!l.aprox || CLASES.sub.aprox);
   const claseFibra = (l) => l.x.obra ? 'obra' : l.nivel === 3 ? 'principal' : l.nivel === 2 ? 'largo' : l.nivel === 1 ? 'nacional' : 'regional';
   const veFibra = (l) => (!l.x.obra || CLASES.fibra.obra) && CLASES.fibra[l.nivel === 3 ? 'principal' : l.nivel === 2 ? 'largo' : l.nivel === 1 ? 'nacional' : 'regional'];
-  const vePunto = (q) => q.t === 'datos' ? CLASES.puntos.datos && (CLASES.puntos.pequenos || (PT && PT.porOp && q.o && (PT.porOp.get(q.o) || 0) >= 5)) : q.t === 'intercambio' ? CLASES.puntos.intercambio : true;
+  const vePunto = (q) => q.t === 'datos' ? (esGrande(q) ? CLASES.puntos.datos : CLASES.puntos.pequenos) : q.t === 'intercambio' ? CLASES.puntos.intercambio : true;
   const claveClases = (k) => Object.values(CLASES[k]).map((v) => (v ? 1 : 0)).join('');
 
   // ---------- data ----------
@@ -1597,7 +1603,7 @@
   // ---------- which satellites: view and orbit (with the real count beside each orbit) ----------
   function pintaVista() {
     const caja = $('sat-vista'); if (!caja) return;
-    caja.hidden = !estado.sat || !!estado.satPlegado;
+    caja.hidden = !(estado.sat || VACIA.sat) || !!estado.satPlegado;
     // the card hangs under the «Satélites» button (owner: «un desplegable»); centred on it when there is room
     const b = document.querySelector('#capas [data-capa="sat"]');
     if (b && !caja.hidden && innerWidth > 760) { const r = b.getBoundingClientRect(), w = caja.offsetWidth || 340; let x = r.left + r.width / 2 - w / 2; x = Math.max(12, Math.min(innerWidth - w - 12, x)); caja.style.left = x + 'px'; caja.style.transform = 'none'; caja.style.top = (r.bottom + 10) + 'px'; }
@@ -1611,7 +1617,7 @@
   function enganchaVista() {
     const caja = $('sat-vista'); if (!caja) return;
     const ti = caja.querySelector('.titulo');
-    if (ti) { const x = document.createElement('button'); x.type = 'button'; x.className = 'plegar'; x.setAttribute('aria-label', T('Plegar')); x.textContent = '—'; x.addEventListener('click', () => { estado.satPlegado = true; pintaVista(); }); ti.appendChild(x); }
+    if (ti) { const x = document.createElement('button'); x.type = 'button'; x.className = 'plegar'; x.setAttribute('aria-label', T('Plegar')); x.textContent = '—'; x.addEventListener('click', () => { estado.satPlegado = true; if (VACIA.sat) { VACIA.sat = false; estado.orb = { baja: true, media: true, geo: true }; guarda(); } pintaVista(); }); ti.appendChild(x); }
     // the «Satélites» button unfolds the card again when the layer is on but the card was folded
     const sb = document.querySelector('#capas [data-capa="sat"]');
     if (sb) sb.addEventListener('click', (e) => { if (estado.sat && estado.satPlegado) { e.stopImmediatePropagation(); estado.satPlegado = false; for (const q of Object.keys(PLEGADO)) PLEGADO[q] = true; pintaVista(); pintaClases(); } }, true);
@@ -1625,8 +1631,9 @@
     caja.querySelectorAll('[data-orb]').forEach((b) => b.addEventListener('pointerenter', () => { const d = b.querySelector('.d'); if (d) b.title = d.textContent; }));
     caja.querySelectorAll('[data-orb]').forEach((b) => b.addEventListener('click', () => {
       const k = b.dataset.orb, encendidas = Object.keys(estado.orb).filter((x) => estado.orb[x]);
-      if (estado.orb[k] && encendidas.length === 1) { estado.orb = { baja: true, media: true, geo: true }; guarda(); pon('sat', false); return; }
+      if (estado.orb[k] && encendidas.length === 1) { estado.orb[k] = false; VACIA.sat = true; guarda(); pon('sat', false); return; }
       estado.orb[k] = !estado.orb[k];
+      if (!estado.sat) { const queda = Object.assign({}, estado.orb); pon('sat', true); estado.orb = queda; }
       guarda(); pintaVista(); pintaNota();
     }));
   }
@@ -1636,7 +1643,7 @@
     // 22 Oct 2026, 22:02 (owner): «palabras para que sean entendibles, todo»
     sub: { titulo: 'Qué cables ver', clases: { gigante: ['Autopistas entre continentes', 'Los cables más potentes: más de 100 Tbit/s.'], grande: ['Grandes rutas', 'Entre 20 y 100 Tbit/s: unen países y regiones.'], regional: ['Cables pequeños', 'Menos de 20 Tbit/s: unen islas y países vecinos.'], sinDato: ['Otros cables en servicio', 'Funcionan, pero su dueño no publica cuántos datos pueden llevar.'], aprox: ['Ruta estimada', 'Sabemos que el cable existe y dónde llega, pero no por dónde va exactamente: se dibuja en discontinuo.'], previstos: ['Cables en proyecto', 'Anunciados o en construcción; todavía no llevan datos. Punteados.'] } },
     fibra: { titulo: 'Qué fibra ver', clases: { principal: ['Grandes autopistas por tierra', 'Las rutas más largas (800 km o más) o las que comparten varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'], obra: ['En obras', 'Rutas que se están construyendo; en discontinuo.'] } },
-    puntos: { titulo: 'Qué puntos ver', clases: { datos: ['Centros de datos', 'Edificios donde se guardan y se sirven las webs y las aplicaciones.'], intercambio: ['Puntos de intercambio', 'Donde las redes de distintas compañías se conectan entre sí.'], estaciones: ['Bases y antenas', 'Bases en la Antártida y el Ártico, y estaciones que hablan con satélites.'], pequenos: ['Compañías pequeñas', 'Centros de compañías con menos de cinco en el mapa. Apágalo para ver solo las grandes.'] } },
+    puntos: { titulo: 'Qué puntos ver', clases: { datos: ['Centros de grandes compañías', 'De compañías con cinco o más centros de datos en el mapa.'], pequenos: ['Centros de compañías pequeñas', 'De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.'], intercambio: ['Puntos de intercambio', 'Donde las redes de distintas compañías se conectan entre sí.'], estaciones: ['Bases y antenas', 'Bases en la Antártida y el Ártico, y estaciones que hablan con satélites.'] } },
   };
 
   const PLEGADO = { sub: true, fibra: true, puntos: true }; // the cards open on the button's click, one at a time; on arrival none is open
@@ -1644,7 +1651,7 @@
     try {
       if (k === 'sub') { if (!capas.sub || !capas.sub.lineas || !CAP) return 0; if (c === 'previstos') return PREV ? PREV.length : 0; if (c === 'aprox') return capas.sub.aprox ? capas.sub.aprox.length : 0; let n = 0; capas.sub.lineas.forEach((l, i) => { if (claseSub(i) === c) n++; }); return n; }
       if (k === 'fibra') { if (!FT || !FT.lineas) return 0; preparaNiveles(); return FT.lineas.filter((l) => claseFibra(l) === c).length; }
-      if (k === 'puntos') { if (c === 'estaciones') return EST ? EST.length : 0; if (!PT || !PT.p) return 0; if (c === 'intercambio') return PT.ix ? PT.ix.length : 0; if (c === 'pequenos') return PT.porOp ? PT.p.filter((q) => q.t === 'datos' && !(q.o && (PT.porOp.get(q.o) || 0) >= 5)).length : 0; return PT.p.filter((q) => q.t === c).length; }
+      if (k === 'puntos') { if (c === 'estaciones') return EST ? EST.length : 0; if (!PT || !PT.p) return 0; if (c === 'intercambio') return PT.ix ? PT.ix.length : 0; if (c === 'pequenos') return PT.p.filter((q) => q.t === 'datos' && !esGrande(q)).length; if (c === 'datos') return PT.p.filter((q) => q.t === 'datos' && esGrande(q)).length; return PT.p.filter((q) => q.t === c).length; }
     } catch (_) {}
     return 0;
   }
@@ -1655,7 +1662,7 @@
       const caja = document.createElement('div'); caja.id = k + '-vista'; caja.className = 'sat-vista capa-vista'; caja.hidden = true; caja.setAttribute('role', 'group');
       const orb = document.createElement('div'); orb.className = 'orb'; caja.appendChild(orb);
       const ti = document.createElement('div'); ti.className = 'titulo'; ti.textContent = T(TEXTOS_CLASES[k].titulo); orb.appendChild(ti);
-      const x = document.createElement('button'); x.type = 'button'; x.className = 'plegar'; x.setAttribute('aria-label', T('Plegar')); x.textContent = '—'; x.addEventListener('click', () => { PLEGADO[k] = true; pintaClases(); }); ti.appendChild(x);
+      const x = document.createElement('button'); x.type = 'button'; x.className = 'plegar'; x.setAttribute('aria-label', T('Plegar')); x.textContent = '—'; x.addEventListener('click', () => { PLEGADO[k] = true; if (VACIA[k]) { VACIA[k] = false; for (const q of Object.keys(CLASES[k])) CLASES[k][q] = true; } pintaClases(); }); ti.appendChild(x);
       for (const c of Object.keys(TEXTOS_CLASES[k].clases)) {
         const [n, d] = TEXTOS_CLASES[k].clases[c];
         const bt = document.createElement('button'); bt.type = 'button'; bt.dataset.clase = c; bt.setAttribute('aria-pressed', String(!!CLASES[k][c]));
@@ -1663,8 +1670,12 @@
         bt.querySelector('.n').append(T(n), ' ', Object.assign(document.createElement('b'), {})); bt.querySelector('.d').textContent = T(d); bt.title = T(d); // 22 Oct 2026, 22:09 (owner): the card lists classes only; the explanation shows under the pointer
         bt.addEventListener('click', () => {
           CLASES[k][c] = !CLASES[k][c];
-          // every main class switched off = the layer off (and its classes back on for the next time), never an empty layer that looks broken
-          if (todasApagadas(k)) { for (const q of Object.keys(CLASES[k])) CLASES[k][q] = true; if (k === 'sub' && capas.sub) capas.sub.visK = null; pon(k, false); return; } if (k === 'sub' && capas.sub) capas.sub.visK = null; pintaClases(); pintaNota();
+          if (k === 'sub' && capas.sub) capas.sub.visK = null;
+          // every switch red = the layer off on the map (its button too), the card stays open for the person
+          if (todasApagadas(k)) { VACIA[k] = true; pon(k, false); return; }
+          // a switch turned green again in an emptied card lights the layer with just what is green
+          if (!estado[k]) { const queda = Object.assign({}, CLASES[k]); pon(k, true); Object.assign(CLASES[k], queda); if (k === 'sub' && capas.sub) capas.sub.visK = null; }
+          pintaClases(); pintaNota();
         });
         orb.appendChild(bt);
       }
@@ -1678,7 +1689,7 @@
     let abierta = !!(estado.sat && !estado.satPlegado);
     for (const k of Object.keys(TEXTOS_CLASES)) {
       const caja = $(k + '-vista'); if (!caja) continue;
-      caja.hidden = !estado[k] || !!PLEGADO[k];
+      caja.hidden = !(estado[k] || VACIA[k]) || !!PLEGADO[k];
       if (!caja.hidden) abierta = true;
       const b = document.querySelector(`#capas [data-capa="${k}"]`);
       if (b && !caja.hidden && innerWidth > 760) { const r = b.getBoundingClientRect(), w = caja.offsetWidth || 340; let x = r.left + r.width / 2 - w / 2; x = Math.max(12, Math.min(innerWidth - w - 12, x)); caja.style.left = x + 'px'; caja.style.transform = 'none'; caja.style.top = (r.bottom + 10) + 'px'; }
@@ -1689,6 +1700,7 @@
   // ---------- the three buttons ----------
   function pon(clave, on) {
     estado[clave] = on; guarda();
+    if (on) VACIA[clave] = false;
     const b = document.querySelector(`#capas [data-capa="${clave}"]`); if (b) b.setAttribute('aria-pressed', String(on));
     // one card at a time: the layer just switched on shows its card, the others fold
     if (on) { for (const k of Object.keys(PLEGADO)) PLEGADO[k] = k !== clave; estado.satPlegado = clave !== 'sat'; }

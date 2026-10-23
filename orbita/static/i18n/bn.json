@@ -792,7 +792,11 @@
   "Va enterrada a entre 0,6 y 1,5 m, casi siempre en conductos junto a carreteras, vías de tren, gasoductos o líneas eléctricas.": "এটি 0.6 থেকে 1.5 m গভীরে পোঁতা থাকে, প্রায় সবসময় রাস্তা, রেলপথ, গ্যাস পাইপলাইন বা বিদ্যুৎ লাইনের পাশে নালির ভেতরে।",
   "trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s": "হালকা রঙের মোটা রেখা, আভাসহ: 100 Tbit/s-এর বেশি ব্যাকবোন; মাঝারি রেখা: 20 Tbit/s-এর বেশি",
   "Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.": "আপনার শহর থেকে প্রতিটি মহাদেশের ডেটা সেন্টার পর্যন্ত 3D-তে একটি উড়ান, আপনার আসল সময়সহ।",
-  "Al pulsar, se miden en unos segundos.": "ক্লিক করলে কয়েক সেকেন্ডে সেগুলো মাপা হয়।"
+  "Al pulsar, se miden en unos segundos.": "ক্লিক করলে কয়েক সেকেন্ডে সেগুলো মাপা হয়।",
+  "Centros de grandes compañías": "বড় কোম্পানির কেন্দ্র",
+  "Centros de compañías pequeñas": "ছোট কোম্পানির কেন্দ্র",
+  "De compañías con cinco o más centros de datos en el mapa.": "মানচিত্রে পাঁচ বা তার বেশি ডেটা সেন্টার আছে এমন কোম্পানির।",
+  "De compañías con menos de cinco centros en el mapa, o de las que no consta la compañía.": "মানচিত্রে পাঁচটির কম কেন্দ্র আছে, বা কোম্পানি জানা নেই এমন।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",
