@@ -44,7 +44,11 @@
     'Hacer mi radiografía': ['Run my X-ray', 'Fazer meu raio-X'],
     'Una web': ['A website', 'Um site'],
     'A quién habla cada web': ['Who each website talks to', 'Com quem cada site fala'],
-    'Abrimos su portada en un navegador aparte y apuntamos cada conexión: la empresa, su país y para qué sirve. Ya medidas:': ['We open its front page in a separate browser and note every connection: the company, its country and what it is for. Already measured:', 'Abrimos a página inicial num navegador à parte e anotamos cada conexão: a empresa, o seu país e para que serve. Já medidas:'],
+    'Abrimos su portada en un navegador aparte y apuntamos cada conexión: la empresa, su país y para qué sirve, y qué cortaría GUARDIANA. Ya medidas:': ['We open its front page in a separate browser and note every connection: the company, its country, what it is for and what GUARDIANA would cut. Already measured:', 'Abrimos a página inicial num navegador à parte e anotamos cada conexão: a empresa, o seu país, para que serve e o que a GUARDIANA cortaria. Já medidas:'],
+    // «Abrir sin miedo» (23 Oct 2026, 15:05)
+    'Un enlace o archivo': ['A link or a file', 'Um link ou arquivo'],
+    'Ábrelo sin miedo': ['Open it without fear', 'Abra sem medo'],
+    'Pega un enlace sospechoso o sube un archivo: lo abrimos en un navegador desechable en la nube, lejos de tu equipo, y te enseñamos qué intenta hacer antes de que lo abras tú.': ['Paste a suspicious link or upload a file: we open it in a disposable browser in the cloud, away from your device, and show you what it tries to do before you open it yourself.', 'Cole um link suspeito ou envie um arquivo: nós o abrimos num navegador descartável na nuvem, longe do seu aparelho, e mostramos o que ele tenta fazer antes que você mesmo o abra.'],
     'Cualquier web que tú elijas: pronto, con el navegador en la nube.': ['Any website you choose: soon, with the cloud browser.', 'Qualquer site que você escolher: em breve, com o navegador na nuvem.'],
     'Tus aparatos': ['Your devices', 'Seus aparelhos'],
     'Próximamente': ['Coming soon', 'Em breve'],

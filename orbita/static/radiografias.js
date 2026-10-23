@@ -6,7 +6,12 @@
        operator, approximate city) is made only when the person asks for it.
      · «Una web»: who a website talks to. Today, the eleven sports and news front pages measured on 23 Oct 2026 (ESPEJO,
        drawn on the planet); any site the person chooses needs the browser in the cloud, so it says «pronto».
+     · «Un enlace o archivo» («Abrir sin miedo»): a suspicious link or file opened in a disposable browser in the cloud.
+       Not built yet: it says so.
      · «Tus aparatos»: what your phone and TV look up, with a DNS profile. Not built yet: it says so.
+   23 Oct 2026, 15:05 (owner approves the structure the agency's four voices agree on): the mirror «Sin / Con» leaves the
+   bottom of the front page and lives here, in «Una web» (its control only shows while the mirror is open), and «Abrir
+   sin miedo» joins as a card of its own.
    The panel opens where the doors are (on the left; on a phone, from the bottom) and the planet stays in view.
    Nothing here is invented: no figure is shown that was not measured. */
 (function () {
@@ -47,24 +52,31 @@
     const web = crea('article', 'tarjeta web');
     const webK = crea('div', 'tk', 'Una web');
     const webT = crea('h3', '', 'A quién habla cada web');
-    const webD = crea('p', '', 'Abrimos su portada en un navegador aparte y apuntamos cada conexión: la empresa, su país y para qué sirve. Ya medidas:');
+    const webD = crea('p', '', 'Abrimos su portada en un navegador aparte y apuntamos cada conexión: la empresa, su país y para qué sirve, y qué cortaría GUARDIANA. Ya medidas:');
     const sitios = crea('div', 'sitios'); sitios.setAttribute('translate', 'no');
     const webN = crea('p', 'nota', 'Cualquier web que tú elijas: pronto, con el navegador en la nube.');
     web.append(webK, webT, webD, sitios, webN);
     sitios.addEventListener('click', (e) => {
       const b = e.target.closest('button[data-s]'); if (!b) return;
-      const s = b.dataset.s; vete();
+      const s = b.dataset.s; vete(); // «todas» is not a site id: the mirror opens on the eleven together
       setTimeout(() => { if (window.OrbitaEspejo) window.OrbitaEspejo.abre('sin', s); }, 380);
     });
 
+    // «Un enlace o archivo» («Abrir sin miedo», in all four voices of the agency's seventh round)
+    const en = crea('article', 'tarjeta enlace pendiente');
+    const enK = crea('div', 'tk'); const enKs = crea('span', '', 'Un enlace o archivo'); const enP = crea('span', 'pronto', 'Próximamente'); enK.append(enKs, enP);
+    const enT = crea('h3', '', 'Ábrelo sin miedo');
+    const enD = crea('p', '', 'Pega un enlace sospechoso o sube un archivo: lo abrimos en un navegador desechable en la nube, lejos de tu equipo, y te enseñamos qué intenta hacer antes de que lo abras tú.');
+    en.append(enK, enT, enD);
+
     // «Tus aparatos»
-    const ap = crea('article', 'tarjeta aparatos');
+    const ap = crea('article', 'tarjeta aparatos pendiente');
     const apK = crea('div', 'tk'); const apKs = crea('span', '', 'Tus aparatos'); const apP = crea('span', 'pronto', 'Próximamente'); apK.append(apKs, apP);
     const apT = crea('h3', '', 'Lo que consultan tu móvil y tu tele');
     const apD = crea('p', '', 'Con un perfil DNS, sin instalar nada, verás qué dominios consultan tus aparatos y cuáles se pueden cortar.');
     ap.append(apK, apT, apD);
 
-    panel.append(cab, t, d, tu, web, ap);
+    panel.append(cab, t, d, tu, web, en, ap);
     document.body.append(panel);
     traduce();
     pintaSitios();
@@ -76,6 +88,9 @@
     let D = null;
     try { D = window.OrbitaEspejo && window.OrbitaEspejo.carga ? await window.OrbitaEspejo.carga() : null; } catch (_) { D = null; }
     if (!D || !D.sitios) { caja.hidden = true; return; }
+    // the eleven at once first (what the bottom control used to open), then each front page
+    const todas = document.createElement('button'); todas.type = 'button'; todas.dataset.s = 'todas'; todas.className = 'todas';
+    const tn = document.createElement('span'); texto(tn, 'Todas'); todas.append(tn); caja.append(todas);
     D.sitios.forEach((s) => {
       const b = document.createElement('button'); b.type = 'button'; b.dataset.s = s.id; b.title = s.web;
       const n = document.createElement('span'); n.textContent = s.nombre;
