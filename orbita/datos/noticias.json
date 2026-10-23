@@ -3,6 +3,39 @@
  "noticias": [
   {
    "fecha": "2026-10-22",
+   "tema": "cables",
+   "es": "Korda Networks (la antigua Farice) confirmó el 21 de octubre las llegadas de Auður, su nuevo cable entre Islandia y Escocia: Meðalland, en la costa sur islandesa, e Irvine Bay, en el fiordo de Clyde al oeste de Glasgow; tendrá unos 1.300 km y entre 16 y 24 pares de fibra, el estudio del fondo marino se hará en el verano de 2027 y la entrada en servicio se prevé entre finales de 2029 y principios de 2030.",
+   "en": "Korda Networks (formerly Farice) confirmed on 21 October the landings of Auður, its new cable between Iceland and Scotland: Meðalland, on Iceland's south coast, and Irvine Bay, on the Firth of Clyde west of Glasgow; it will be about 1,300 km long with 16 to 24 fibre pairs, the seabed survey is planned for summer 2027 and service is expected between late 2029 and early 2030.",
+   "pt": "a Korda Networks (a antiga Farice) confirmou a 21 de outubro as amarrações do Auður, o seu novo cabo entre a Islândia e a Escócia: Meðalland, na costa sul islandesa, e Irvine Bay, no fiorde de Clyde a oeste de Glasgow; terá cerca de 1.300 km e entre 16 e 24 pares de fibra, o estudo do fundo marinho será feito no verão de 2027 e a entrada em serviço está prevista entre o final de 2029 e o início de 2030.",
+   "fuentes": [
+    "https://subtelforum.com/audur-confirms-iceland-scotland-landing-sites/",
+    "https://www.ispreview.co.uk/index.php/2026/10/future-audur-subsea-fibre-link-between-iceland-and-uk-makes-progress.html"
+   ]
+  },
+  {
+   "fecha": "2026-10-22",
+   "tema": "centros",
+   "es": "la estadounidense Crusoe anunció el 22 de octubre, con la paraguaya Araico, su primer centro de datos en América Latina: junto a la central hidroeléctrica de Itaipú (Paraguay), alimentado con su energía, con hasta 106 MW de capacidad informática y opción de llegar a unos 280 MW; la primera fase está prevista para mediados de 2027 y el anuncio coincidió con la visita a Paraguay del subsecretario de Estado de EE. UU., Christopher Landau.",
+   "en": "US firm Crusoe announced on 22 October, with Paraguay's Araico, its first data centre in Latin America: next to the Itaipú hydroelectric plant (Paraguay), powered by its energy, with up to 106 MW of IT capacity and an option to reach about 280 MW; the first phase is planned for mid-2027 and the announcement coincided with US Deputy Secretary of State Christopher Landau's visit to Paraguay.",
+   "pt": "a norte-americana Crusoe anunciou a 22 de outubro, com a paraguaia Araico, o seu primeiro centro de dados na América Latina: junto à central hidroelétrica de Itaipu (Paraguai), alimentado com a sua energia, com até 106 MW de capacidade informática e opção de chegar a cerca de 280 MW; a primeira fase está prevista para meados de 2027 e o anúncio coincidiu com a visita ao Paraguai do subsecretário de Estado dos EUA, Christopher Landau.",
+   "fuentes": [
+    "https://www.datacenterdynamics.com/en/news/crusoe-to-develop-106mw-data-center-site-in-paraguay/",
+    "https://www.infobae.com/america/agencias/2026/10/22/la-fabrica-de-ia-crusoe-construira-en-paraguay-un-centro-de-datos-alimentado-con-itaipu/"
+   ]
+  },
+  {
+   "fecha": "2026-10-22",
+   "tema": "centros",
+   "es": "el ministro español de Transformación Digital, Óscar López, dijo el 22 de octubre que el Gobierno sigue trabajando en el real decreto de centros de datos y no puso fecha a su aprobación; la norma exigirá que al menos el 80 % de la electricidad que consuman venga de fuentes renovables y, según el ministro, garantizará las inversiones sin encarecer la factura de la luz; preguntado por una posible pausa de Google en España, respondió que la empresa seguirá invirtiendo.",
+   "en": "Spain's minister for Digital Transformation, Óscar López, said on 22 October that the government is still working on the royal decree on data centres and set no date for its approval; the rule will require at least 80% of the electricity they consume to come from renewable sources and, according to the minister, will secure investment without raising electricity bills; asked about a possible pause by Google in Spain, he replied that the company will keep investing.",
+   "pt": "o ministro espanhol da Transformação Digital, Óscar López, disse a 22 de outubro que o Governo continua a trabalhar no decreto real dos centros de dados e não marcou data para a sua aprovação; a norma exigirá que pelo menos 80 % da eletricidade que consomem venha de fontes renováveis e, segundo o ministro, garantirá os investimentos sem encarecer a fatura da luz; questionado sobre uma possível pausa da Google em Espanha, respondeu que a empresa continuará a investir.",
+   "fuentes": [
+    "https://www.infobae.com/espana/agencias/2026/10/22/el-gobierno-trabaja-en-sellar-inversiones-en-centros-de-datos-sin-afectar-a-otros-sectores/",
+    "https://www.pressdigital.es/articulo/economia/2026-10-22/6061745-lopez-no-fija-fecha-real-decreto-centros-datos-garantiza-norma-asegurara-inversiones"
+   ]
+  },
+  {
+   "fecha": "2026-10-22",
    "tema": "datos",
    "es": "Capcom reconoció el 22 de octubre que un acceso no autorizado del 19 de octubre expuso los correos y metadatos (fechas de alta y último acceso, IP) de 11.774.247 cuentas Capcom ID en todo el mundo; las contraseñas y las tarjetas no se vieron afectadas, pero el atacante cambió la contraseña de 196 cuentas y la empresa avisa de posibles correos de phishing.",
    "en": "Capcom acknowledged on 22 October that unauthorised access on 19 October exposed the email addresses and metadata (sign-up and last-login dates, IP) of 11,774,247 Capcom ID accounts worldwide; passwords and card data were not affected, but the attacker changed the password of 196 accounts and the company warns of possible phishing emails.",
@@ -10,6 +43,17 @@
    "fuentes": [
     "https://www.que.es/2026/10/22/filtracion-capcom-11-millones-cuentas/",
     "https://www.gamereactor.es/la-filtracion-de-capcom-id-expuso-los-datos-de-casi-12-millones-de-cuentas/"
+   ]
+  },
+  {
+   "fecha": "2026-10-21",
+   "tema": "redes",
+   "es": "la Subsecretaría de Telecomunicaciones de Chile (Subtel) confirmó el 21 de octubre ante el Senado que WOM no cumplió el hito de tener instalado el 90 % de las antenas 5G comprometidas al 30 de septiembre (el 10 % restante vence el 31 de diciembre): hubo recepciones de obras rechazadas y la empresa presentó 86 solicitudes de fuerza mayor; Subtel evalúa cobrar garantías de hasta 211.123 UF (unos 8.697 millones de pesos), y el Estado exigirá además en efectivo las 950.000 UF (unos 38 millones de dólares) del acuerdo por el incumplimiento anterior.",
+   "en": "Chile's telecoms regulator Subtel confirmed on 21 October before the Senate that WOM missed the milestone of having 90% of its committed 5G antennas installed by 30 September (the remaining 10% is due on 31 December): some works were rejected at acceptance and the company filed 86 force majeure requests; Subtel is weighing calling guarantees of up to 211,123 UF (about 8,697 million pesos), and the State will also demand in cash the 950,000 UF (about 38 million dollars) from the settlement over the earlier breach.",
+   "pt": "a Subsecretaria de Telecomunicações do Chile (Subtel) confirmou a 21 de outubro perante o Senado que a WOM não cumpriu a meta de ter instaladas 90 % das antenas 5G prometidas até 30 de setembro (os 10 % restantes vencem a 31 de dezembro): houve receções de obras rejeitadas e a empresa apresentou 86 pedidos de força maior; a Subtel avalia cobrar garantias de até 211.123 UF (cerca de 8.697 milhões de pesos), e o Estado exigirá ainda em dinheiro as 950.000 UF (cerca de 38 milhões de dólares) do acordo pelo incumprimento anterior.",
+   "fuentes": [
+    "https://www.biobiochile.cl/noticias/nacional/chile/2026/10/21/subtel-confirma-incumplimiento-de-wom-en-despliegue-de-red-5g-y-evalua-cobro-de-garantias.shtml",
+    "https://www.cnnchile.com/pais/subtel-advierte-incumplimiento-de-wom-en-red-5g-y-evalua-exigir-pago-de-garantias/"
    ]
   },
   {
