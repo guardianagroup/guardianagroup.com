@@ -30,8 +30,8 @@
       top: (pr, k) => `conexiones ha hecho hoy ${pr}, el programa que más habla con internet, a ${k} ${k === 1 ? 'país' : 'países'}.`, topF: 'Medido en este equipo por GUARDIANA',
       tel: (k) => `conexiones de telemetría ha enviado hoy tu equipo, a ${k} ${k === 1 ? 'país' : 'países'}.`, telF: 'Medido en este equipo por GUARDIANA',
       ej: 'Ejemplo: en el programa, medido en tu equipo', tu: 'tu ciudad',
-      rankCab: (n, resto) => `es el país con más cables submarinos del mapa: ${n}. Le siguen ${resto}.`, rankF: 'Datos verificados · ranking calculado ahora',
-      rankCen: (n, resto) => `tiene más centros de datos que ningún otro país del mapa: ${n}. Después, ${resto}.`,
+      rankCab: (n, resto) => `es el país con más cables submarinos del mapa: ${n}. Le siguen ${resto}.`, rankCabEmp: (n, resto) => `son los países con más cables submarinos del mapa: ${n} cada uno. Les siguen ${resto}.`, rankF: 'Datos verificados · ranking calculado ahora',
+      rankCen: (n, resto) => `tiene más centros de datos que ningún otro país del mapa: ${n}. Después, ${resto}.`, rankCenEmp: (n, resto) => `tienen más centros de datos que ningún otro país del mapa: ${n} cada uno. Después, ${resto}.`,
       menosCab: (paises) => `es todo lo que une por mar a ${paises} con el resto del mundo: un solo cable submarino cada uno.`, menosF: 'Datos verificados · cobertura parcial',
       potente: (c, ab) => `puede llevar ${c}, el cable más potente del mapa${ab ? ', entre ' + ab : ''}: tanto como millones de conexiones de fibra doméstica a la vez.`, potenteF: 'Datos verificados · capacidad de diseño',
       hondo: (c) => `de profundidad alcanza el fondo bajo ${c}, el tramo de cable más hondo del mapa: más que la altura del Everest… hacia abajo.`, hondoF: 'Datos verificados · relieve del fondo marino',
@@ -40,7 +40,7 @@
       antiguo: (c, ab) => `es el año en que entró en servicio ${c}${ab ? ' (' + ab + ')' : ''}, el cable más veterano del mapa que sigue en uso.`,
       reciben: (p, n, resto) => `es el país que más datos recibe de tu equipo: ${n} conexiones. Después, ${resto}.`, recibenF: 'Medido en este equipo por GUARDIANA',
       y: ' y ',
-      dueno: (e, n, resto) => `es la empresa que opera más cables submarinos del mapa: ${n}. Le siguen ${resto}.`, duenoF: 'Datos verificados · operadores declarados',
+      dueno: (e, n, resto) => `es la empresa que opera más cables submarinos del mapa: ${n}. Le siguen ${resto}.`, duenoEmp: (n, resto) => `operan más cables submarinos que ninguna otra empresa del mapa: ${n} cada una. Les siguen ${resto}.`, duenoF: 'Datos verificados · operadores declarados',
       nuevo: (c, ab) => `es el año de ${c}${ab ? ' (' + ab + ')' : ''}, el cable más moderno del mapa ya en servicio.`,
     },
     en: {
@@ -56,8 +56,8 @@
       top: (pr, k) => `connections today by ${pr}, the program that talks to the internet most, to ${k} ${k === 1 ? 'country' : 'countries'}.`, topF: 'Measured on this computer by GUARDIANA',
       tel: (k) => `telemetry connections sent by your computer today, to ${k} ${k === 1 ? 'country' : 'countries'}.`, telF: 'Measured on this computer by GUARDIANA',
       ej: 'Example: in the program, measured on your computer', tu: 'your city',
-      rankCab: (n, resto) => `is the country with the most submarine cables on the map: ${n}. Then ${resto}.`, rankF: 'Verified data · ranking computed now',
-      rankCen: (n, resto) => `has more data centres than any other country on the map: ${n}. Then ${resto}.`,
+      rankCab: (n, resto) => `is the country with the most submarine cables on the map: ${n}. Then ${resto}.`, rankCabEmp: (n, resto) => `are the countries with the most submarine cables on the map: ${n} each. Then ${resto}.`, rankF: 'Verified data · ranking computed now',
+      rankCen: (n, resto) => `has more data centres than any other country on the map: ${n}. Then ${resto}.`, rankCenEmp: (n, resto) => `have more data centres than any other country on the map: ${n} each. Then ${resto}.`,
       menosCab: (paises) => `is all that links ${paises} to the rest of the world by sea: a single submarine cable each.`, menosF: 'Verified data · partial coverage',
       potente: (c, ab) => `can be carried by ${c}, the most powerful cable on the map${ab ? ', between ' + ab : ''}: as much as millions of home fibre connections at once.`, potenteF: 'Verified data · design capacity',
       hondo: (c) => `is the depth of the seabed under ${c}, the deepest cable stretch on the map: more than the height of Everest… downwards.`, hondoF: 'Verified data · seabed relief',
@@ -66,7 +66,7 @@
       antiguo: (c, ab) => `is the year ${c}${ab ? ' (' + ab + ')' : ''} came into service, the oldest cable on the map still in use.`,
       reciben: (p, n, resto) => `is the country that receives the most data from your computer: ${n} connections. Then ${resto}.`, recibenF: 'Measured on this computer by GUARDIANA',
       y: ' and ',
-      dueno: (e, n, resto) => `is the company operating the most submarine cables on the map: ${n}. Then ${resto}.`, duenoF: 'Verified data · declared operators',
+      dueno: (e, n, resto) => `is the company operating the most submarine cables on the map: ${n}. Then ${resto}.`, duenoEmp: (n, resto) => `operate more submarine cables than any other company on the map: ${n} each. Then ${resto}.`, duenoF: 'Verified data · declared operators',
       nuevo: (c, ab) => `is the year of ${c}${ab ? ' (' + ab + ')' : ''}, the newest cable on the map already in service.`,
     },
     pt: {
@@ -82,8 +82,8 @@
       top: (pr, k) => `conexões hoje do ${pr}, o programa que mais fala com a internet, para ${k} ${k === 1 ? 'país' : 'países'}.`, topF: 'Medido neste computador pela GUARDIANA',
       tel: (k) => `conexões de telemetria enviadas hoje pelo seu computador, para ${k} ${k === 1 ? 'país' : 'países'}.`, telF: 'Medido neste computador pela GUARDIANA',
       ej: 'Exemplo: no programa, medido no seu computador', tu: 'sua cidade',
-      rankCab: (n, resto) => `é o país com mais cabos submarinos do mapa: ${n}. Depois, ${resto}.`, rankF: 'Dados verificados · ranking calculado agora',
-      rankCen: (n, resto) => `tem mais centros de dados do que qualquer outro país do mapa: ${n}. Depois, ${resto}.`,
+      rankCab: (n, resto) => `é o país com mais cabos submarinos do mapa: ${n}. Depois, ${resto}.`, rankCabEmp: (n, resto) => `são os países com mais cabos submarinos do mapa: ${n} cada um. Depois, ${resto}.`, rankF: 'Dados verificados · ranking calculado agora',
+      rankCen: (n, resto) => `tem mais centros de dados do que qualquer outro país do mapa: ${n}. Depois, ${resto}.`, rankCenEmp: (n, resto) => `têm mais centros de dados do que qualquer outro país do mapa: ${n} cada um. Depois, ${resto}.`,
       menosCab: (paises) => `é tudo o que liga ${paises} ao resto do mundo pelo mar: um único cabo submarino cada um.`, menosF: 'Dados verificados · cobertura parcial',
       potente: (c, ab) => `pode levar o ${c}, o cabo mais potente do mapa${ab ? ', entre ' + ab : ''}: tanto quanto milhões de ligações de fibra doméstica ao mesmo tempo.`, potenteF: 'Dados verificados · capacidade de projeto',
       hondo: (c) => `de profundidade alcança o fundo sob o ${c}, o troço de cabo mais fundo do mapa: mais do que a altura do Evereste… para baixo.`, hondoF: 'Dados verificados · relevo do fundo do mar',
@@ -92,7 +92,7 @@
       antiguo: (c, ab) => `é o ano em que o ${c}${ab ? ' (' + ab + ')' : ''} entrou em serviço, o cabo mais veterano do mapa ainda em uso.`,
       reciben: (p, n, resto) => `é o país que mais dados recebe do seu computador: ${n} ligações. Depois, ${resto}.`, recibenF: 'Medido neste computador pela GUARDIANA',
       y: ' e ',
-      dueno: (e, n, resto) => `é a empresa que opera mais cabos submarinos do mapa: ${n}. Depois, ${resto}.`, duenoF: 'Dados verificados · operadores declarados',
+      dueno: (e, n, resto) => `é a empresa que opera mais cabos submarinos do mapa: ${n}. Depois, ${resto}.`, duenoEmp: (n, resto) => `operam mais cabos submarinos do que qualquer outra empresa do mapa: ${n} cada uma. Depois, ${resto}.`, duenoF: 'Dados verificados · operadores declarados',
       nuevo: (c, ab) => `é o ano do ${c}${ab ? ' (' + ab + ')' : ''}, o cabo mais moderno do mapa já em serviço.`,
     },
   };
@@ -126,6 +126,8 @@
   const sabias = () => una('sab', () => json('datos/sabias.json'));
   const lista = (arr) => { const t = tx(); return arr.length <= 1 ? arr.join('') : arr.slice(0, -1).join(', ') + t.y + arr[arr.length - 1]; };
   const extremos = (g) => { const ll = g && g[1]; if (!ll || ll.length < 2) return ''; const a = ll[0], b = ll[ll.length - 1]; return (a[0] || pais(a[1])) + ' (' + pais(a[1]) + ') – ' + (b[0] || pais(b[1])) + ' (' + pais(b[1]) + ')'; };
+  // a shared first place is told as shared, never as one winner (23 Oct 2026: BT and Arelion both operate 11 cables)
+  const podio = (por, n) => { const todo = [...por.entries()].sort((a, b) => b[1] - a[1]); let k = 1; while (k < todo.length && todo[k][1] === todo[0][1]) k++; const top = todo.slice(0, Math.max(n, k + 2)); return top.length < n || k >= top.length ? null : { k, top, primeros: top.slice(0, k).map((e) => e[0]), resto: top.slice(k) }; };
   const grupoDe = (G, nombre) => G && G.grupos ? G.grupos.find((g) => g[0] === nombre) : null;
 
   // ---------- the facts ----------
@@ -175,23 +177,25 @@
     async function starlink() {
       const S = await satelites(); if (!S) return null;
       const g = S.d.grupos, st = g.find((x) => x.id === 'starlink'), tot = g.reduce((a, x) => a + x.n, 0);
-      if (!st || !tot) return null;
-      return { k: 'mundo', v: num(st.n), t: tx().star(num(100 * st.n / tot)), f: tx().starF + ', ' + new Date(S.d.descargado).toLocaleDateString(loc()) };
+      if (!st || !st.n || !tot) return null; // a download that came back empty is not «0 satellites» (22 Oct 2026, 22:55Z)
+      return { k: 'mundo', v: num(st.n), t: tx().star(num(100 * st.n / tot)), f: tx().starF + ', ' + new Date(st.descargado || S.d.descargado).toLocaleDateString(loc()) };
     },
     // rankings from the map itself (owner, 22 Oct 2026: «un ranking de los que más y los que menos… que se vayan renovando»)
     async function rankingCables() {
       const G = await lugaresCapas(); if (!G || !G.grupos) return null;
       const por = new Map();
       for (const g of G.grupos) for (const cc of new Set(g[1].map((q) => q[1]))) por.set(cc, (por.get(cc) || 0) + 1);
-      const top = [...por.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5); if (top.length < 5) return null;
-      return { k: 'mundo', v: pais(top[0][0]), t: tx().rankCab(num(top[0][1]), lista(top.slice(1).map(([cc, n]) => pais(cc) + ' (' + num(n) + ')'))), f: tx().rankF };
+      const P = podio(por, 5); if (!P) return null;
+      const resto = lista(P.resto.map(([cc, n]) => pais(cc) + ' (' + num(n) + ')')), n = num(P.top[0][1]);
+      return { k: 'mundo', v: lista(P.primeros.map(pais)), t: P.k > 1 ? tx().rankCabEmp(n, resto) : tx().rankCab(n, resto), f: tx().rankF };
     },
     async function rankingCentros() {
       const G = await lugaresCapas(); if (!G || !G.centros) return null;
       const por = new Map();
       for (const c of G.centros) por.set(c[3], (por.get(c[3]) || 0) + (c[4] || 1));
-      const top = [...por.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5); if (top.length < 5) return null;
-      return { k: 'mundo', v: pais(top[0][0]), t: tx().rankCen(num(top[0][1]), lista(top.slice(1).map(([cc, n]) => pais(cc) + ' (' + num(n) + ')'))), f: tx().rankF };
+      const P = podio(por, 5); if (!P) return null;
+      const resto = lista(P.resto.map(([cc, n]) => pais(cc) + ' (' + num(n) + ')')), n = num(P.top[0][1]);
+      return { k: 'mundo', v: lista(P.primeros.map(pais)), t: P.k > 1 ? tx().rankCenEmp(n, resto) : tx().rankCen(n, resto), f: tx().rankF };
     },
     async function menosCables() {
       const G = await lugaresCapas(); if (!G || !G.grupos) return null;
@@ -238,8 +242,9 @@
       const G = await lugaresCapas(); if (!G || !G.grupos) return null;
       const por = new Map();
       for (const g of G.grupos) for (const o of new Set((g[2] && g[2].operan) || [])) por.set(o, (por.get(o) || 0) + 1);
-      const top = [...por.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4); if (top.length < 4 || top[0][1] < 3) return null;
-      return { k: 'mundo', v: top[0][0], t: tx().dueno(top[0][0], num(top[0][1]), lista(top.slice(1).map(([o, n]) => o + ' (' + num(n) + ')'))), f: tx().duenoF };
+      const P = podio(por, 4); if (!P || P.top[0][1] < 3) return null;
+      const resto = lista(P.resto.map(([o, n]) => o + ' (' + num(n) + ')')), n = num(P.top[0][1]);
+      return { k: 'mundo', v: lista(P.primeros), t: P.k > 1 ? tx().duenoEmp(n, resto) : tx().dueno(P.primeros[0], n, resto), f: tx().duenoF };
     },
   ];
   // the agency's verified «did you know» facts (datos/sabias.json): owners, leases, costs, projects…
