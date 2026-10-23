@@ -1,1 +1,1042 @@
-[{"nombre":"Equinix SP1","ciudad":"São Paulo","pais":"BR","lat":-23.5505,"lon":-46.6333,"estado":"ok"},{"nombre":"Equinix SP2","ciudad":"Barueri","pais":"BR","lat":-23.5113,"lon":-46.8761,"estado":"ok"},{"nombre":"Equinix SP3","ciudad":"Santana de Parnaíba","pais":"BR","lat":-23.4436,"lon":-46.9178,"estado":"ok"},{"nombre":"Equinix SP4","ciudad":"Barueri","pais":"BR","lat":-23.5113,"lon":-46.8761,"estado":"ok"},{"nombre":"Equinix SP5x","ciudad":"Santana de Parnaíba","pais":"BR","lat":-23.4436,"lon":-46.9178,"estado":"ok"},{"nombre":"Equinix SP6","ciudad":"São Paulo","pais":"BR","lat":-23.5505,"lon":-46.6333,"estado":"ok"},{"nombre":"Equinix RJ1","ciudad":"Río de Janeiro","pais":"BR","lat":-22.9068,"lon":-43.1729,"estado":"ok"},{"nombre":"Equinix RJ2","ciudad":"Río de Janeiro","pais":"BR","lat":-22.9068,"lon":-43.1729,"estado":"ok"},{"nombre":"Equinix RJ3","ciudad":"Río de Janeiro","pais":"BR","lat":-22.9068,"lon":-43.1729,"estado":"ok"},{"nombre":"Equinix ST1","ciudad":"Santiago","pais":"CL","lat":-33.4489,"lon":-70.6693,"estado":"ok"},{"nombre":"Equinix ST2","ciudad":"Santiago","pais":"CL","lat":-33.4489,"lon":-70.6693,"estado":"ok"},{"nombre":"Equinix ST3","ciudad":"Santiago","pais":"CL","lat":-33.4489,"lon":-70.6693,"estado":"ok"},{"nombre":"Equinix ST4","ciudad":"Santiago","pais":"CL","lat":-33.4489,"lon":-70.6693,"estado":"ok"},{"nombre":"Equinix BG1","ciudad":"Bogotá","pais":"CO","lat":4.711,"lon":-74.0721,"estado":"ok"},{"nombre":"Equinix BG2","ciudad":"Bogotá","pais":"CO","lat":4.711,"lon":-74.0721,"estado":"ok"},{"nombre":"Equinix MX1","ciudad":"El Marqués","pais":"MX","lat":20.5888,"lon":-100.3899,"estado":"ok"},{"nombre":"Equinix MX2","ciudad":"El Marqués","pais":"MX","lat":20.5888,"lon":-100.3899,"estado":"ok"},{"nombre":"Equinix MX3x","ciudad":"Querétaro","pais":"MX","lat":20.5888,"lon":-100.3899,"estado":"ok"},{"nombre":"Equinix MO1","ciudad":"Apodaca","pais":"MX","lat":25.7833,"lon":-100.1867,"estado":"ok"},{"nombre":"Equinix LM1","ciudad":"Lima","pais":"PE","lat":-12.0464,"lon":-77.0428,"estado":"ok"},{"nombre":"Ascenty São Paulo 1","ciudad":"São Paulo","pais":"BR","lat":-23.5505,"lon":-46.6333,"estado":"ok"},{"nombre":"Ascenty São Paulo 2","ciudad":"São Paulo","pais":"BR","lat":-23.5505,"lon":-46.6333,"estado":"ok"},{"nombre":"Ascenty São Paulo 3","ciudad":"São Paulo","pais":"BR","lat":-23.5505,"lon":-46.6333,"estado":"ok"},{"nombre":"Ascenty São Paulo 4","ciudad":"São Paulo","pais":"BR","lat":-23.5505,"lon":-46.6333,"estado":"ok"},{"nombre":"Ascenty Vinhedo 1","ciudad":"Vinhedo","pais":"BR","lat":-23.0297,"lon":-46.975,"estado":"ok"},{"nombre":"Ascenty Vinhedo 2","ciudad":"Vinhedo","pais":"BR","lat":-23.0297,"lon":-46.975,"estado":"ok"},{"nombre":"Ascenty Sumaré 1","ciudad":"Sumaré","pais":"BR","lat":-22.8219,"lon":-47.2669,"estado":"ok"},{"nombre":"Ascenty Sumaré 2","ciudad":"Sumaré","pais":"BR","lat":-22.8219,"lon":-47.2669,"estado":"ok"},{"nombre":"Ascenty Jundiaí 1","ciudad":"Jundiaí","pais":"BR","lat":-23.1864,"lon":-46.8842,"estado":"ok"},{"nombre":"Ascenty Jundiaí 2","ciudad":"Jundiaí","pais":"BR","lat":-23.1864,"lon":-46.8842,"estado":"ok"},{"nombre":"Ascenty Hortolândia 1","ciudad":"Hortolândia","pais":"BR","lat":-22.8583,"lon":-47.22,"estado":"ok"},{"nombre":"Ascenty Hortolândia 2","ciudad":"Hortolândia","pais":"BR","lat":-22.8583,"lon":-47.22,"estado":"ok"},{"nombre":"Ascenty Hortolândia 3","ciudad":"Hortolândia","pais":"BR","lat":-22.8583,"lon":-47.22,"estado":"ok"},{"nombre":"Ascenty Hortolândia 4","ciudad":"Hortolândia","pais":"BR","lat":-22.8583,"lon":-47.22,"estado":"ok"},{"nombre":"Ascenty Hortolândia 5","ciudad":"Hortolândia","pais":"BR","lat":-22.8583,"lon":-47.22,"estado":"ok"},{"nombre":"Ascenty Campinas 1","ciudad":"Campinas","pais":"BR","lat":-22.9099,"lon":-47.0626,"estado":"ok"},{"nombre":"Ascenty Rio de Janeiro 1","ciudad":"Río de Janeiro","pais":"BR","lat":-22.9068,"lon":-43.1729,"estado":"ok"},{"nombre":"Ascenty Rio de Janeiro 2","ciudad":"Río de Janeiro","pais":"BR","lat":-22.9068,"lon":-43.1729,"estado":"ok"},{"nombre":"Ascenty Fortaleza 1","ciudad":"Maracanaú","pais":"BR","lat":-3.8767,"lon":-38.6256,"estado":"ok"},{"nombre":"Ascenty Santiago 1","ciudad":"Santiago","pais":"CL","lat":-33.4489,"lon":-70.6693,"estado":"ok"},{"nombre":"Ascenty Santiago 2","ciudad":"Quilicura","pais":"CL","lat":-33.3667,"lon":-70.7333,"estado":"ok"},{"nombre":"Ascenty Santiago 3","ciudad":"Quilicura","pais":"CL","lat":-33.3667,"lon":-70.7333,"estado":"ok"},{"nombre":"Ascenty Querétaro 1","ciudad":"Querétaro","pais":"MX","lat":20.5888,"lon":-100.3899,"estado":"ok"},{"nombre":"Ascenty Querétaro 2","ciudad":"Querétaro","pais":"MX","lat":20.5888,"lon":-100.3899,"estado":"ok"},{"nombre":"Scala SGRUTB01","ciudad":"Barueri","pais":"BR","lat":-23.5113,"lon":-46.8761,"estado":"ok"},{"nombre":"Scala SGRUSP02","ciudad":"São Paulo","pais":"BR","lat":-23.5505,"lon":-46.6333,"estado":"ok"},{"nombre":"Scala SGRUTB03","ciudad":"Barueri","pais":"BR","lat":-23.5113,"lon":-46.8761,"estado":"ok"},{"nombre":"Scala SGRUTB04","ciudad":"Barueri","pais":"BR","lat":-23.5113,"lon":-46.8761,"estado":"ok"},{"nombre":"Scala SGRUTB05","ciudad":"Barueri","pais":"BR","lat":-23.5113,"lon":-46.8761,"estado":"ok"},{"nombre":"Scala SGRUTB06","ciudad":"Barueri","pais":"BR","lat":-23.5113,"lon":-46.8761,"estado":"ok"},{"nombre":"Scala SGRUTB08","ciudad":"Barueri","pais":"BR","lat":-23.5113,"lon":-46.8761,"estado":"ok"},{"nombre":"Scala SGRUTB12","ciudad":"Barueri","pais":"BR","lat":-23.5113,"lon":-46.8761,"estado":"ok"},{"nombre":"Scala SVCPCP01","ciudad":"Campinas","pais":"BR","lat":-22.9099,"lon":-47.0626,"estado":"ok"},{"nombre":"Scala SGIGSM01","ciudad":"Río de Janeiro","pais":"BR","lat":-22.9068,"lon":-43.1729,"estado":"ok"},{"nombre":"Scala SPOAPA01","ciudad":"Porto Alegre","pais":"BR","lat":-30.0346,"lon":-51.2177,"estado":"ok"},{"nombre":"Scala SSCLCR01","ciudad":"Valparaíso","pais":"CL","lat":-33.0472,"lon":-71.6127,"estado":"ok"},{"nombre":"Scala SMEXTP01","ciudad":"Tepotzotlán","pais":"MX","lat":19.7167,"lon":-99.2167,"estado":"ok"},{"nombre":"ODATA SP01","ciudad":"Santana de Parnaíba","pais":"BR","lat":-23.4436,"lon":-46.9178,"estado":"ok"},{"nombre":"ODATA SP02","ciudad":"Hortolândia","pais":"BR","lat":-22.8583,"lon":-47.22,"estado":"ok"},{"nombre":"ODATA SP03","ciudad":"Barueri","pais":"BR","lat":-23.5113,"lon":-46.8761,"estado":"ok"},{"nombre":"ODATA SP04","ciudad":"Osasco","pais":"BR","lat":-23.5325,"lon":-46.7917,"estado":"ok"},{"nombre":"ODATA RJ01","ciudad":"São João de Meriti","pais":"BR","lat":-22.8042,"lon":-43.3722,"estado":"ok"},{"nombre":"ODATA ST01","ciudad":"Lampa","pais":"CL","lat":-33.2833,"lon":-70.8833,"estado":"ok"},{"nombre":"ODATA ST02","ciudad":"San Bernardo","pais":"CL","lat":-33.5922,"lon":-70.7,"estado":"ok"},{"nombre":"ODATA BG01","ciudad":"Cota","pais":"CO","lat":4.81,"lon":-74.1,"estado":"ok"},{"nombre":"ODATA QR01","ciudad":"Querétaro","pais":"MX","lat":20.5888,"lon":-100.3899,"estado":"ok"},{"nombre":"ODATA QR02","ciudad":"Querétaro","pais":"MX","lat":20.5888,"lon":-100.3899,"estado":"ok"},{"nombre":"ODATA QR03","ciudad":"Querétaro","pais":"MX","lat":20.5888,"lon":-100.3899,"estado":"ok"},{"nombre":"Elea SPO1","ciudad":"São Paulo","pais":"BR","lat":-23.5505,"lon":-46.6333,"estado":"ok"},{"nombre":"Elea SPO2","ciudad":"São Bernardo do Campo","pais":"BR","lat":-23.6914,"lon":-46.5646,"estado":"ok"},{"nombre":"Elea SPO3","ciudad":"Barueri","pais":"BR","lat":-23.5113,"lon":-46.8761,"estado":"ok"},{"nombre":"Elea RJO1","ciudad":"Río de Janeiro","pais":"BR","lat":-22.9068,"lon":-43.1729,"estado":"ok"},{"nombre":"Elea BSB1","ciudad":"Brasilia","pais":"BR","lat":-15.8267,"lon":-47.9218,"estado":"ok"},{"nombre":"Elea BSB2","ciudad":"Brasilia","pais":"BR","lat":-15.8267,"lon":-47.9218,"estado":"ok"},{"nombre":"Elea POA1","ciudad":"Porto Alegre","pais":"BR","lat":-30.0346,"lon":-51.2177,"estado":"ok"},{"nombre":"Elea POA2","ciudad":"Porto Alegre","pais":"BR","lat":-30.0346,"lon":-51.2177,"estado":"ok"},{"nombre":"Elea CTA1","ciudad":"Curitiba","pais":"BR","lat":-25.4284,"lon":-49.2733,"estado":"ok"},{"nombre":"Cirion SAO1","ciudad":"São Paulo","pais":"BR","lat":-23.5505,"lon":-46.6333,"estado":"ok"},{"nombre":"Cirion RIO1","ciudad":"Río de Janeiro","pais":"BR","lat":-22.9068,"lon":-43.1729,"estado":"ok"},{"nombre":"Cirion RIO2","ciudad":"Río de Janeiro","pais":"BR","lat":-22.9068,"lon":-43.1729,"estado":"no verificado"},{"nombre":"Cirion CUR1","ciudad":"Curitiba","pais":"BR","lat":-25.4284,"lon":-49.2733,"estado":"ok"},{"nombre":"Cirion SAN1","ciudad":"Santiago","pais":"CL","lat":-33.4489,"lon":-70.6693,"estado":"ok"},{"nombre":"Cirion SAN2","ciudad":"Santiago","pais":"CL","lat":-33.4489,"lon":-70.6693,"estado":"ok"},{"nombre":"Cirion BOG2","ciudad":"Bogotá","pais":"CO","lat":4.711,"lon":-74.0721,"estado":"ok"},{"nombre":"Cirion BUE1","ciudad":"Buenos Aires","pais":"AR","lat":-34.6037,"lon":-58.3816,"estado":"ok"},{"nombre":"Cirion LIM1","ciudad":"Lima","pais":"PE","lat":-12.0464,"lon":-77.0428,"estado":"ok"},{"nombre":"Cirion LIM2","ciudad":"Lima","pais":"PE","lat":-12.0464,"lon":-77.0428,"estado":"ok"},{"nombre":"Cirion QUI2","ciudad":"Quito","pais":"EC","lat":-0.1807,"lon":-78.4678,"estado":"ok"}]
+[
+{
+"nombre": "Equinix SP1",
+"ciudad": "São Paulo",
+"pais": "BR",
+"lat": -23.5505,
+"lon": -46.6333,
+"estado": "ok"
+},
+{
+"nombre": "Equinix SP2",
+"ciudad": "Barueri",
+"pais": "BR",
+"lat": -23.5113,
+"lon": -46.8761,
+"estado": "ok"
+},
+{
+"nombre": "Equinix SP3",
+"ciudad": "Santana de Parnaíba",
+"pais": "BR",
+"lat": -23.4436,
+"lon": -46.9178,
+"estado": "ok"
+},
+{
+"nombre": "Equinix SP4",
+"ciudad": "Barueri",
+"pais": "BR",
+"lat": -23.5113,
+"lon": -46.8761,
+"estado": "ok"
+},
+{
+"nombre": "Equinix SP5x",
+"ciudad": "Santana de Parnaíba",
+"pais": "BR",
+"lat": -23.4436,
+"lon": -46.9178,
+"estado": "ok"
+},
+{
+"nombre": "Equinix SP6",
+"ciudad": "São Paulo",
+"pais": "BR",
+"lat": -23.5505,
+"lon": -46.6333,
+"estado": "ok"
+},
+{
+"nombre": "Equinix RJ1",
+"ciudad": "Río de Janeiro",
+"pais": "BR",
+"lat": -22.9068,
+"lon": -43.1729,
+"estado": "ok"
+},
+{
+"nombre": "Equinix RJ2",
+"ciudad": "Río de Janeiro",
+"pais": "BR",
+"lat": -22.9068,
+"lon": -43.1729,
+"estado": "ok"
+},
+{
+"nombre": "Equinix RJ3",
+"ciudad": "Río de Janeiro",
+"pais": "BR",
+"lat": -22.9068,
+"lon": -43.1729,
+"estado": "ok"
+},
+{
+"nombre": "Equinix ST1",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.4489,
+"lon": -70.6693,
+"estado": "ok"
+},
+{
+"nombre": "Equinix ST2",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.4489,
+"lon": -70.6693,
+"estado": "ok"
+},
+{
+"nombre": "Equinix ST3",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.4489,
+"lon": -70.6693,
+"estado": "ok"
+},
+{
+"nombre": "Equinix ST4",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.4489,
+"lon": -70.6693,
+"estado": "ok"
+},
+{
+"nombre": "Equinix BG1",
+"ciudad": "Bogotá",
+"pais": "CO",
+"lat": 4.711,
+"lon": -74.0721,
+"estado": "ok"
+},
+{
+"nombre": "Equinix BG2",
+"ciudad": "Bogotá",
+"pais": "CO",
+"lat": 4.711,
+"lon": -74.0721,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MX1",
+"ciudad": "El Marqués",
+"pais": "MX",
+"lat": 20.5888,
+"lon": -100.3899,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MX2",
+"ciudad": "El Marqués",
+"pais": "MX",
+"lat": 20.5888,
+"lon": -100.3899,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MX3x",
+"ciudad": "Querétaro",
+"pais": "MX",
+"lat": 20.5888,
+"lon": -100.3899,
+"estado": "ok"
+},
+{
+"nombre": "Equinix MO1",
+"ciudad": "Apodaca",
+"pais": "MX",
+"lat": 25.7833,
+"lon": -100.1867,
+"estado": "ok"
+},
+{
+"nombre": "Equinix LM1",
+"ciudad": "Lima",
+"pais": "PE",
+"lat": -12.0464,
+"lon": -77.0428,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty São Paulo 1",
+"ciudad": "São Paulo",
+"pais": "BR",
+"lat": -23.5505,
+"lon": -46.6333,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty São Paulo 2",
+"ciudad": "São Paulo",
+"pais": "BR",
+"lat": -23.5505,
+"lon": -46.6333,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty São Paulo 3",
+"ciudad": "São Paulo",
+"pais": "BR",
+"lat": -23.5505,
+"lon": -46.6333,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty São Paulo 4",
+"ciudad": "São Paulo",
+"pais": "BR",
+"lat": -23.5505,
+"lon": -46.6333,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Vinhedo 1",
+"ciudad": "Vinhedo",
+"pais": "BR",
+"lat": -23.0297,
+"lon": -46.975,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Vinhedo 2",
+"ciudad": "Vinhedo",
+"pais": "BR",
+"lat": -23.0297,
+"lon": -46.975,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Sumaré 1",
+"ciudad": "Sumaré",
+"pais": "BR",
+"lat": -22.8219,
+"lon": -47.2669,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Sumaré 2",
+"ciudad": "Sumaré",
+"pais": "BR",
+"lat": -22.8219,
+"lon": -47.2669,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Jundiaí 1",
+"ciudad": "Jundiaí",
+"pais": "BR",
+"lat": -23.1864,
+"lon": -46.8842,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Jundiaí 2",
+"ciudad": "Jundiaí",
+"pais": "BR",
+"lat": -23.1864,
+"lon": -46.8842,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Hortolândia 1",
+"ciudad": "Hortolândia",
+"pais": "BR",
+"lat": -22.8583,
+"lon": -47.22,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Hortolândia 2",
+"ciudad": "Hortolândia",
+"pais": "BR",
+"lat": -22.8583,
+"lon": -47.22,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Hortolândia 3",
+"ciudad": "Hortolândia",
+"pais": "BR",
+"lat": -22.8583,
+"lon": -47.22,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Hortolândia 4",
+"ciudad": "Hortolândia",
+"pais": "BR",
+"lat": -22.8583,
+"lon": -47.22,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Hortolândia 5",
+"ciudad": "Hortolândia",
+"pais": "BR",
+"lat": -22.8583,
+"lon": -47.22,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Campinas 1",
+"ciudad": "Campinas",
+"pais": "BR",
+"lat": -22.9099,
+"lon": -47.0626,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Rio de Janeiro 1",
+"ciudad": "Río de Janeiro",
+"pais": "BR",
+"lat": -22.9068,
+"lon": -43.1729,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Rio de Janeiro 2",
+"ciudad": "Río de Janeiro",
+"pais": "BR",
+"lat": -22.9068,
+"lon": -43.1729,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Fortaleza 1",
+"ciudad": "Maracanaú",
+"pais": "BR",
+"lat": -3.8767,
+"lon": -38.6256,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Santiago 1",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.4489,
+"lon": -70.6693,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Santiago 2",
+"ciudad": "Quilicura",
+"pais": "CL",
+"lat": -33.3667,
+"lon": -70.7333,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Santiago 3",
+"ciudad": "Quilicura",
+"pais": "CL",
+"lat": -33.3667,
+"lon": -70.7333,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Querétaro 1",
+"ciudad": "Querétaro",
+"pais": "MX",
+"lat": 20.5888,
+"lon": -100.3899,
+"estado": "ok"
+},
+{
+"nombre": "Ascenty Querétaro 2",
+"ciudad": "Querétaro",
+"pais": "MX",
+"lat": 20.5888,
+"lon": -100.3899,
+"estado": "ok"
+},
+{
+"nombre": "Scala SGRUTB01",
+"ciudad": "Barueri",
+"pais": "BR",
+"lat": -23.5113,
+"lon": -46.8761,
+"estado": "ok"
+},
+{
+"nombre": "Scala SGRUSP02",
+"ciudad": "São Paulo",
+"pais": "BR",
+"lat": -23.5505,
+"lon": -46.6333,
+"estado": "ok"
+},
+{
+"nombre": "Scala SGRUTB03",
+"ciudad": "Barueri",
+"pais": "BR",
+"lat": -23.5113,
+"lon": -46.8761,
+"estado": "ok"
+},
+{
+"nombre": "Scala SGRUTB04",
+"ciudad": "Barueri",
+"pais": "BR",
+"lat": -23.5113,
+"lon": -46.8761,
+"estado": "ok"
+},
+{
+"nombre": "Scala SGRUTB05",
+"ciudad": "Barueri",
+"pais": "BR",
+"lat": -23.5113,
+"lon": -46.8761,
+"estado": "ok"
+},
+{
+"nombre": "Scala SGRUTB06",
+"ciudad": "Barueri",
+"pais": "BR",
+"lat": -23.5113,
+"lon": -46.8761,
+"estado": "ok"
+},
+{
+"nombre": "Scala SGRUTB08",
+"ciudad": "Barueri",
+"pais": "BR",
+"lat": -23.5113,
+"lon": -46.8761,
+"estado": "ok"
+},
+{
+"nombre": "Scala SGRUTB12",
+"ciudad": "Barueri",
+"pais": "BR",
+"lat": -23.5113,
+"lon": -46.8761,
+"estado": "ok"
+},
+{
+"nombre": "Scala SVCPCP01",
+"ciudad": "Campinas",
+"pais": "BR",
+"lat": -22.9099,
+"lon": -47.0626,
+"estado": "ok"
+},
+{
+"nombre": "Scala SGIGSM01",
+"ciudad": "Río de Janeiro",
+"pais": "BR",
+"lat": -22.9068,
+"lon": -43.1729,
+"estado": "ok"
+},
+{
+"nombre": "Scala SPOAPA01",
+"ciudad": "Porto Alegre",
+"pais": "BR",
+"lat": -30.0346,
+"lon": -51.2177,
+"estado": "ok"
+},
+{
+"nombre": "Scala SSCLCR01",
+"ciudad": "Valparaíso",
+"pais": "CL",
+"lat": -33.0472,
+"lon": -71.6127,
+"estado": "ok"
+},
+{
+"nombre": "Scala SMEXTP01",
+"ciudad": "Tepotzotlán",
+"pais": "MX",
+"lat": 19.7167,
+"lon": -99.2167,
+"estado": "ok"
+},
+{
+"nombre": "ODATA SP01",
+"ciudad": "Santana de Parnaíba",
+"pais": "BR",
+"lat": -23.4436,
+"lon": -46.9178,
+"estado": "ok"
+},
+{
+"nombre": "ODATA SP02",
+"ciudad": "Hortolândia",
+"pais": "BR",
+"lat": -22.8583,
+"lon": -47.22,
+"estado": "ok"
+},
+{
+"nombre": "ODATA SP03",
+"ciudad": "Barueri",
+"pais": "BR",
+"lat": -23.5113,
+"lon": -46.8761,
+"estado": "ok"
+},
+{
+"nombre": "ODATA SP04",
+"ciudad": "Osasco",
+"pais": "BR",
+"lat": -23.5325,
+"lon": -46.7917,
+"estado": "ok"
+},
+{
+"nombre": "ODATA RJ01",
+"ciudad": "São João de Meriti",
+"pais": "BR",
+"lat": -22.8042,
+"lon": -43.3722,
+"estado": "ok"
+},
+{
+"nombre": "ODATA ST01",
+"ciudad": "Lampa",
+"pais": "CL",
+"lat": -33.2833,
+"lon": -70.8833,
+"estado": "ok"
+},
+{
+"nombre": "ODATA ST02",
+"ciudad": "San Bernardo",
+"pais": "CL",
+"lat": -33.5922,
+"lon": -70.7,
+"estado": "ok"
+},
+{
+"nombre": "ODATA BG01",
+"ciudad": "Cota",
+"pais": "CO",
+"lat": 4.81,
+"lon": -74.1,
+"estado": "ok"
+},
+{
+"nombre": "ODATA QR01",
+"ciudad": "Querétaro",
+"pais": "MX",
+"lat": 20.5888,
+"lon": -100.3899,
+"estado": "ok"
+},
+{
+"nombre": "ODATA QR02",
+"ciudad": "Querétaro",
+"pais": "MX",
+"lat": 20.5888,
+"lon": -100.3899,
+"estado": "ok"
+},
+{
+"nombre": "ODATA QR03",
+"ciudad": "Querétaro",
+"pais": "MX",
+"lat": 20.5888,
+"lon": -100.3899,
+"estado": "ok"
+},
+{
+"nombre": "Elea SPO1",
+"ciudad": "São Paulo",
+"pais": "BR",
+"lat": -23.5505,
+"lon": -46.6333,
+"estado": "ok"
+},
+{
+"nombre": "Elea SPO2",
+"ciudad": "São Bernardo do Campo",
+"pais": "BR",
+"lat": -23.6914,
+"lon": -46.5646,
+"estado": "ok"
+},
+{
+"nombre": "Elea SPO3",
+"ciudad": "Barueri",
+"pais": "BR",
+"lat": -23.5113,
+"lon": -46.8761,
+"estado": "ok"
+},
+{
+"nombre": "Elea RJO1",
+"ciudad": "Río de Janeiro",
+"pais": "BR",
+"lat": -22.9068,
+"lon": -43.1729,
+"estado": "ok"
+},
+{
+"nombre": "Elea BSB1",
+"ciudad": "Brasilia",
+"pais": "BR",
+"lat": -15.8267,
+"lon": -47.9218,
+"estado": "ok"
+},
+{
+"nombre": "Elea BSB2",
+"ciudad": "Brasilia",
+"pais": "BR",
+"lat": -15.8267,
+"lon": -47.9218,
+"estado": "ok"
+},
+{
+"nombre": "Elea POA1",
+"ciudad": "Porto Alegre",
+"pais": "BR",
+"lat": -30.0346,
+"lon": -51.2177,
+"estado": "ok"
+},
+{
+"nombre": "Elea POA2",
+"ciudad": "Porto Alegre",
+"pais": "BR",
+"lat": -30.0346,
+"lon": -51.2177,
+"estado": "ok"
+},
+{
+"nombre": "Elea CTA1",
+"ciudad": "Curitiba",
+"pais": "BR",
+"lat": -25.4284,
+"lon": -49.2733,
+"estado": "ok"
+},
+{
+"nombre": "Cirion SAO1",
+"ciudad": "São Paulo",
+"pais": "BR",
+"lat": -23.5505,
+"lon": -46.6333,
+"estado": "ok"
+},
+{
+"nombre": "Cirion RIO1",
+"ciudad": "Río de Janeiro",
+"pais": "BR",
+"lat": -22.9068,
+"lon": -43.1729,
+"estado": "ok"
+},
+{
+"nombre": "Cirion RIO2",
+"ciudad": "Río de Janeiro",
+"pais": "BR",
+"lat": -22.9068,
+"lon": -43.1729,
+"estado": "no verificado"
+},
+{
+"nombre": "Cirion CUR1",
+"ciudad": "Curitiba",
+"pais": "BR",
+"lat": -25.4284,
+"lon": -49.2733,
+"estado": "ok"
+},
+{
+"nombre": "Cirion SAN1",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.4489,
+"lon": -70.6693,
+"estado": "ok"
+},
+{
+"nombre": "Cirion SAN2",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.4489,
+"lon": -70.6693,
+"estado": "ok"
+},
+{
+"nombre": "Cirion BOG2",
+"ciudad": "Bogotá",
+"pais": "CO",
+"lat": 4.711,
+"lon": -74.0721,
+"estado": "ok"
+},
+{
+"nombre": "Cirion BUE1",
+"ciudad": "Buenos Aires",
+"pais": "AR",
+"lat": -34.6037,
+"lon": -58.3816,
+"estado": "ok"
+},
+{
+"nombre": "Cirion LIM1",
+"ciudad": "Lima",
+"pais": "PE",
+"lat": -12.0464,
+"lon": -77.0428,
+"estado": "ok"
+},
+{
+"nombre": "Cirion LIM2",
+"ciudad": "Lima",
+"pais": "PE",
+"lat": -12.0464,
+"lon": -77.0428,
+"estado": "ok"
+},
+{
+"nombre": "Cirion QUI2",
+"ciudad": "Quito",
+"pais": "EC",
+"lat": -0.1807,
+"lon": -78.4678,
+"estado": "ok"
+},
+{
+"nombre": "KIO MEX1 Santa Fe 1",
+"ciudad": "Ciudad de México",
+"pais": "MX",
+"lat": 19.364231,
+"lon": -99.277069,
+"estado": "ok"
+},
+{
+"nombre": "KIO MEX2 Santa Fe 2",
+"ciudad": "Ciudad de México",
+"pais": "MX",
+"lat": 19.36375,
+"lon": -99.28075,
+"estado": "ok"
+},
+{
+"nombre": "KIO MEX3 Santa Fe 3",
+"ciudad": "Ciudad de México",
+"pais": "MX",
+"lat": 19.372972,
+"lon": -99.2605,
+"estado": "ok"
+},
+{
+"nombre": "KIO MEX4 Interlomas",
+"ciudad": "Huixquilucan",
+"pais": "MX",
+"lat": 19.400361,
+"lon": -99.274194,
+"estado": "ok"
+},
+{
+"nombre": "KIO MEX5 Tultitlán",
+"ciudad": "Tultitlán",
+"pais": "MX",
+"lat": 19.628167,
+"lon": -99.148667,
+"estado": "ok"
+},
+{
+"nombre": "KIO MEX6 Toluca",
+"ciudad": "Toluca",
+"pais": "MX",
+"lat": 19.202028,
+"lon": -99.555417,
+"estado": "ok"
+},
+{
+"nombre": "KIO QRO1",
+"ciudad": "Querétaro",
+"pais": "MX",
+"lat": 20.566667,
+"lon": -100.256667,
+"estado": "ok"
+},
+{
+"nombre": "KIO MTY1",
+"ciudad": "Monterrey",
+"pais": "MX",
+"lat": 25.649333,
+"lon": -100.358556,
+"estado": "ok"
+},
+{
+"nombre": "KIO HER1",
+"ciudad": "Hermosillo",
+"pais": "MX",
+"lat": 29.085444,
+"lon": -110.961111,
+"estado": "ok"
+},
+{
+"nombre": "KIO MER1",
+"ciudad": "Mérida",
+"pais": "MX",
+"lat": 20.931728,
+"lon": -89.681728,
+"estado": "ok"
+},
+{
+"nombre": "KIO MER2",
+"ciudad": "Mérida",
+"pais": "MX",
+"lat": 20.97,
+"lon": -89.62,
+"estado": "no verificado"
+},
+{
+"nombre": "KIO BOG1",
+"ciudad": "Bogotá",
+"pais": "CO",
+"lat": 4.674667,
+"lon": -74.155056,
+"estado": "ok"
+},
+{
+"nombre": "KIO GTM1",
+"ciudad": "Ciudad de Guatemala",
+"pais": "GT",
+"lat": 14.656083,
+"lon": -90.544472,
+"estado": "ok"
+},
+{
+"nombre": "KIO PAN1",
+"ciudad": "Ciudad de Panamá",
+"pais": "PA",
+"lat": 8.919889,
+"lon": -79.593667,
+"estado": "ok"
+},
+{
+"nombre": "KIO SDO1",
+"ciudad": "Santo Domingo",
+"pais": "DO",
+"lat": 18.463139,
+"lon": -69.708278,
+"estado": "ok"
+},
+{
+"nombre": "GTD Panamericana",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.45,
+"lon": -70.67,
+"estado": "ok"
+},
+{
+"nombre": "GTD Lídice I",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.45,
+"lon": -70.67,
+"estado": "ok"
+},
+{
+"nombre": "GTD Lídice II",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.45,
+"lon": -70.67,
+"estado": "ok"
+},
+{
+"nombre": "GTD Huérfanos",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.45,
+"lon": -70.67,
+"estado": "ok"
+},
+{
+"nombre": "GTD Moneda",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.45,
+"lon": -70.67,
+"estado": "ok"
+},
+{
+"nombre": "GTD Holanda",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.45,
+"lon": -70.67,
+"estado": "ok"
+},
+{
+"nombre": "GTD Puerto Montt",
+"ciudad": "Puerto Montt",
+"pais": "CL",
+"lat": -41.47,
+"lon": -72.94,
+"estado": "ok"
+},
+{
+"nombre": "GTD Surco",
+"ciudad": "Lima",
+"pais": "PE",
+"lat": -12.12,
+"lon": -76.99,
+"estado": "ok"
+},
+{
+"nombre": "GTD Lurín",
+"ciudad": "Lurín",
+"pais": "PE",
+"lat": -12.28,
+"lon": -76.87,
+"estado": "ok"
+},
+{
+"nombre": "GTD El Poblado",
+"ciudad": "Medellín",
+"pais": "CO",
+"lat": 6.21,
+"lon": -75.57,
+"estado": "ok"
+},
+{
+"nombre": "Claro Triara Bogotá",
+"ciudad": "Bogotá",
+"pais": "CO",
+"lat": 4.65,
+"lon": -74.1,
+"estado": "ok"
+},
+{
+"nombre": "Claro Triara MegaCenter Medellín",
+"ciudad": "Medellín",
+"pais": "CO",
+"lat": 6.24,
+"lon": -75.58,
+"estado": "ok"
+},
+{
+"nombre": "Triara Querétaro",
+"ciudad": "Querétaro",
+"pais": "MX",
+"lat": 20.59,
+"lon": -100.39,
+"estado": "ok"
+},
+{
+"nombre": "Triara Monterrey",
+"ciudad": "Apodaca",
+"pais": "MX",
+"lat": 25.78,
+"lon": -100.19,
+"estado": "ok"
+},
+{
+"nombre": "HostDime João Pessoa",
+"ciudad": "João Pessoa",
+"pais": "BR",
+"lat": -7.12,
+"lon": -34.85,
+"estado": "ok"
+},
+{
+"nombre": "HostDime São Paulo",
+"ciudad": "São Paulo",
+"pais": "BR",
+"lat": -23.55,
+"lon": -46.63,
+"estado": "ok"
+},
+{
+"nombre": "Antel Data Center Ing. José Luis Massera",
+"ciudad": "Pando",
+"pais": "UY",
+"lat": -34.72,
+"lon": -55.96,
+"estado": "ok"
+},
+{
+"nombre": "Tigo Business Villa Elisa",
+"ciudad": "Villa Elisa",
+"pais": "PY",
+"lat": -25.37,
+"lon": -57.59,
+"estado": "ok"
+},
+{
+"nombre": "Tigo Business Santa Cruz",
+"ciudad": "Santa Cruz de la Sierra",
+"pais": "BO",
+"lat": -17.78,
+"lon": -63.18,
+"estado": "ok"
+},
+{
+"nombre": "ICE Kosmös Hub Guatuso",
+"ciudad": "Cartago",
+"pais": "CR",
+"lat": 9.86,
+"lon": -83.92,
+"estado": "ok"
+},
+{
+"nombre": "ICE Kosmös Hub Sabana",
+"ciudad": "San José",
+"pais": "CR",
+"lat": 9.93,
+"lon": -84.08,
+"estado": "ok"
+},
+{
+"nombre": "Nabiax Paine",
+"ciudad": "Paine",
+"pais": "CL",
+"lat": -33.81,
+"lon": -70.74,
+"estado": "ok"
+},
+{
+"nombre": "SONDA Data Center Santiago",
+"ciudad": "Santiago",
+"pais": "CL",
+"lat": -33.45,
+"lon": -70.67,
+"estado": "ok"
+},
+{
+"nombre": "Telconet Cloud Center I",
+"ciudad": "Guayaquil",
+"pais": "EC",
+"lat": -2.19,
+"lon": -79.89,
+"estado": "ok"
+},
+{
+"nombre": "Telconet Cloud Center II",
+"ciudad": "Quito",
+"pais": "EC",
+"lat": -0.18,
+"lon": -78.47,
+"estado": "ok"
+},
+{
+"nombre": "Telconet Cloud Center III",
+"ciudad": "Guayaquil",
+"pais": "EC",
+"lat": -2.19,
+"lon": -79.89,
+"estado": "ok"
+},
+{
+"nombre": "HUB787",
+"ciudad": "Carolina",
+"pais": "PR",
+"lat": 18.38,
+"lon": -65.96,
+"estado": "ok"
+}
+]
