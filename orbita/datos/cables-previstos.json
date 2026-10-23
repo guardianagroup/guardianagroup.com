@@ -1,5 +1,5 @@
 {
- "nota": "Cables que todavía no existen (propuestos, planeados o en construcción), con su fuente. Se dibujan punteados y la ficha dice su estado.",
+ "nota": "Cables que todavía no existen (propuestos, planeados o en construcción), con su fuente. Se dibujan punteados y la ficha dice su estado. 22 Oct 2026, 23:50: 14 grandes cables en proyecto o en construcción fuera de las zonas polares (ChatGPT con fuentes + Grok confirma que existen, que aún no funcionan y los países); fase y año solo donde las dos voces coinciden (si no, «planeado» y sin año).",
  "cables": [
   {
    "nombre": "Cable Chile–Antártida (Subtel)",
@@ -255,6 +255,629 @@
     "https://www.nsf.gov/",
     "https://www.reannz.co.nz/"
    ]
+  },
+  {
+   "nombre": "Candle",
+   "llegadas": [
+    {
+     "lugar": "Maruyama",
+     "pais": "JP",
+     "lat": 35.0054,
+     "lon": 139.9755
+    },
+    {
+     "lugar": "Toucheng",
+     "pais": "TW",
+     "lat": 24.8636,
+     "lon": 121.8015
+    },
+    {
+     "lugar": "Baler",
+     "pais": "PH",
+     "lat": 15.7615,
+     "lon": 121.5602
+    },
+    {
+     "lugar": "Nasugbu",
+     "pais": "PH",
+     "lat": 14.0882,
+     "lon": 120.623
+    },
+    {
+     "lugar": "Batam",
+     "pais": "ID",
+     "lat": 1.0668,
+     "lon": 104.0166
+    },
+    {
+     "lugar": "Sedili",
+     "pais": "MY",
+     "lat": 1.9279,
+     "lon": 104.1121
+    },
+    {
+     "lugar": "Changi",
+     "pais": "SG",
+     "lat": 1.3735,
+     "lon": 104.0041
+    }
+   ],
+   "anio": 2028,
+   "estado": "en construcción",
+   "duenos": [
+    "Meta"
+   ],
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://engineering.fb.com/2025/10/05/connectivity/introducing-the-candle-subsea-cable-updates-to-our-asia-pacific-connectivity-projects/",
+    "https://www.softbank.jp/en/corp/news/press/sbkk/2025/20250922_01/"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Japón, Taiwán, Filipinas, Indonesia, Malasia y Singapur."
+  },
+  {
+   "nombre": "Sistema Humboldt",
+   "llegadas": [
+    {
+     "lugar": "Sídney",
+     "pais": "AU",
+     "lat": -33.8697,
+     "lon": 151.207
+    },
+    {
+     "lugar": "Santo Domingo, región de Valparaíso",
+     "pais": "CL",
+     "lat": -33.635,
+     "lon": -71.622
+    },
+    {
+     "lugar": "Ciudad de Panamá",
+     "pais": "PA",
+     "lat": 8.9824,
+     "lon": -79.5199
+    }
+   ],
+   "anio": 2028,
+   "estado": "planeado",
+   "duenos": [
+    "Google",
+    "Desarrollo País"
+   ],
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://www.gob.cl/en/news/humboldt-cable-installation-of-googles-underwater-cable-linking-chile-to-asia-pacific-approved/"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Chile, Australia y Panamá."
+  },
+  {
+   "nombre": "Sol",
+   "llegadas": [
+    {
+     "lugar": "Palm Coast y Flagler Beach, Florida",
+     "pais": "US",
+     "lat": 29.5769,
+     "lon": -81.2209
+    },
+    {
+     "lugar": "Annie's Bay, Bermudas",
+     "pais": "BM",
+     "lat": 32.3616,
+     "lon": -64.6592
+    },
+    {
+     "lugar": "Ponta Delgada, isla de São Miguel",
+     "pais": "PT",
+     "lat": 37.7412,
+     "lon": -25.6756
+    },
+    {
+     "lugar": "Santander",
+     "pais": "ES",
+     "lat": 43.4615,
+     "lon": -3.81
+    }
+   ],
+   "anio": 2027,
+   "estado": "en construcción",
+   "duenos": [
+    "Google"
+   ],
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://blog.google/intl/es-es/noticias-compania/google-cloud-anuncia-su-segundo-cable-submarino-que-conectara-espana-con-estados-unidos/",
+    "https://www.gov.bm/news/google-subsea-cable-landing-marks-major-milestone-bermudas-digital-future"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Estados Unidos, Bermudas, Portugal (Azores) y España."
+  },
+  {
+   "nombre": "Synapse",
+   "llegadas": [
+    {
+     "lugar": "Tuckerton, Nueva Jersey",
+     "pais": "US",
+     "lat": 39.6032,
+     "lon": -74.3407
+    },
+    {
+     "lugar": "Praia Grande, São Paulo",
+     "pais": "BR",
+     "lat": -24.0058,
+     "lon": -46.4127
+    }
+   ],
+   "anio": null,
+   "estado": "planeado",
+   "duenos": [
+    "V.tal"
+   ],
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://teletime.com.br/20/01/2026/vtal-synapse-cabo-submarino/"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Estados Unidos y Brasil."
+  },
+  {
+   "nombre": "Asia United Gateway East (AUG East)",
+   "llegadas": [
+    {
+     "lugar": "Gunsan",
+     "pais": "KR",
+     "lat": 35.9677,
+     "lon": 126.7366
+    },
+    {
+     "lugar": "Wada, prefectura de Chiba",
+     "pais": "JP",
+     "lat": 35.0359,
+     "lon": 140.0168
+    },
+    {
+     "lugar": "Wujie",
+     "pais": "TW",
+     "lat": 24.6604,
+     "lon": 121.8312
+    },
+    {
+     "lugar": "Dawu",
+     "pais": "TW",
+     "lat": 22.3405,
+     "lon": 120.8898
+    },
+    {
+     "lugar": "Luna",
+     "pais": "PH",
+     "lat": 16.8307,
+     "lon": 120.3548
+    },
+    {
+     "lugar": "Mumong",
+     "pais": "BN",
+     "lat": 4.5922,
+     "lon": 114.2376
+    },
+    {
+     "lugar": "Kuala Sedili",
+     "pais": "MY",
+     "lat": 1.9279,
+     "lon": 104.1121
+    },
+    {
+     "lugar": "Batam",
+     "pais": "ID",
+     "lat": 1.0668,
+     "lon": 104.0166
+    },
+    {
+     "lugar": "Changi",
+     "pais": "SG",
+     "lat": 1.3735,
+     "lon": 104.0041
+    }
+   ],
+   "anio": 2029,
+   "estado": "planeado",
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://www.nec.com/en/press/202507/global_20250716_01.html"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Japón, Taiwán, Filipinas, Malasia, Indonesia, Corea del Sur, Brunéi y Singapur."
+  },
+  {
+   "nombre": "Asia Link Cable (ALC)",
+   "llegadas": [
+    {
+     "lugar": "Luna",
+     "pais": "PH",
+     "lat": 16.8307,
+     "lon": 120.3548
+    },
+    {
+     "lugar": "Bauang",
+     "pais": "PH",
+     "lat": 16.514,
+     "lon": 120.3556
+    },
+    {
+     "lugar": "Chung Hom Kok, Hong Kong",
+     "pais": "HK",
+     "lat": 22.2221,
+     "lon": 114.203
+    },
+    {
+     "lugar": "Lingshui, Hainan",
+     "pais": "CN",
+     "lat": 18.3899,
+     "lon": 110.0494
+    },
+    {
+     "lugar": "Da Nang",
+     "pais": "VN",
+     "lat": 16.0516,
+     "lon": 108.2147
+    },
+    {
+     "lugar": "Tungku",
+     "pais": "BN",
+     "lat": 4.9264,
+     "lon": 114.8858
+    },
+    {
+     "lugar": "Kuala Sedili",
+     "pais": "MY",
+     "lat": 1.9259,
+     "lon": 104.1141
+    },
+    {
+     "lugar": "Changi",
+     "pais": "SG",
+     "lat": 1.3735,
+     "lon": 104.0041
+    }
+   ],
+   "anio": null,
+   "estado": "en construcción",
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://www.chinatelecomglobal.com/whats-new/37553"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Hong Kong, China, Filipinas, Vietnam, Brunéi, Malasia y Singapur."
+  },
+  {
+   "nombre": "Intra-Asia Marine Cable (I-AM Cable)",
+   "llegadas": [
+    {
+     "lugar": "Minamiboso, Chiba",
+     "pais": "JP",
+     "lat": 35.0436,
+     "lon": 139.8401
+    },
+    {
+     "lugar": "Shima, Mie",
+     "pais": "JP",
+     "lat": 34.3362,
+     "lon": 136.8618
+    },
+    {
+     "lugar": "Fukuoka",
+     "pais": "JP",
+     "lat": 33.5902,
+     "lon": 130.4017
+    },
+    {
+     "lugar": "Singapur",
+     "pais": "SG",
+     "lat": 1.2903,
+     "lon": 103.852
+    }
+   ],
+   "anio": 2029,
+   "estado": "planeado",
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://www.nttdata.com/global/en/news/press-release/2026/january/011300"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Japón y Singapur."
+  },
+  {
+   "nombre": "India-Southeast Asia (I-2SEA)",
+   "llegadas": [
+    {
+     "lugar": "Machilipatnam",
+     "pais": "IN",
+     "lat": 16.1753,
+     "lon": 81.1377
+    },
+    {
+     "lugar": "Sur de Chennai",
+     "pais": "IN",
+     "lat": 12.9,
+     "lon": 80.25
+    },
+    {
+     "lugar": "Singapur",
+     "pais": "SG",
+     "lat": 1.2903,
+     "lon": 103.852
+    }
+   ],
+   "anio": 2029,
+   "estado": "planeado",
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://www.nec.com/en/press/202607/global_20260703_02.html"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir India y Singapur."
+  },
+  {
+   "nombre": "Australia-US Express (APX East)",
+   "llegadas": [
+    {
+     "lugar": "Sídney",
+     "pais": "AU",
+     "lat": -33.8697,
+     "lon": 151.207
+    },
+    {
+     "lugar": "San Diego, California",
+     "pais": "US",
+     "lat": 32.7157,
+     "lon": -117.1617
+    }
+   ],
+   "anio": 2028,
+   "estado": "en construcción",
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://sub.co/news/apx-east-reaches-contract-in-force"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Australia y Estados Unidos."
+  },
+  {
+   "nombre": "APX West",
+   "llegadas": [
+    {
+     "lugar": "Perth",
+     "pais": "AU",
+     "lat": -31.9523,
+     "lon": 115.8613
+    },
+    {
+     "lugar": "Yakarta",
+     "pais": "ID",
+     "lat": -6.12,
+     "lon": 106.83
+    },
+    {
+     "lugar": "Batam",
+     "pais": "ID",
+     "lat": 1.0668,
+     "lon": 104.0166
+    },
+    {
+     "lugar": "Singapur",
+     "pais": "SG",
+     "lat": 1.2903,
+     "lon": 103.852
+    }
+   ],
+   "anio": 2029,
+   "estado": "planeado",
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://sub.co/news/subco-announces-three-new-subsea-cables-to-meet-surging-ai-demand"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Australia, Indonesia y Singapur."
+  },
+  {
+   "nombre": "Hawaiki Nui 1",
+   "llegadas": [
+    {
+     "lugar": "Singapur",
+     "pais": "SG",
+     "lat": 1.2903,
+     "lon": 103.852
+    },
+    {
+     "lugar": "Batam",
+     "pais": "ID",
+     "lat": 1.0668,
+     "lon": 104.0166
+    },
+    {
+     "lugar": "Yakarta",
+     "pais": "ID",
+     "lat": -6.12,
+     "lon": 106.83
+    },
+    {
+     "lugar": "Darwin",
+     "pais": "AU",
+     "lat": -12.4634,
+     "lon": 130.8456
+    },
+    {
+     "lugar": "Sídney",
+     "pais": "AU",
+     "lat": -33.8697,
+     "lon": 151.207
+    }
+   ],
+   "anio": null,
+   "estado": "planeado",
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://www.bw-digital.com/projects/hawaiki-nui/"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Singapur, Indonesia y Australia."
+  },
+  {
+   "nombre": "Honomoana",
+   "llegadas": [
+    {
+     "lugar": "San Diego, California",
+     "pais": "US",
+     "lat": 32.7157,
+     "lon": -117.1617
+    },
+    {
+     "lugar": "Papenoo, Tahití",
+     "pais": "PF",
+     "lat": -17.5123,
+     "lon": -149.4411
+    },
+    {
+     "lugar": "Faratea, Tahití",
+     "pais": "PF",
+     "lat": -17.7186,
+     "lon": -149.3059
+    },
+    {
+     "lugar": "Orewa, Auckland",
+     "pais": "NZ",
+     "lat": -36.585,
+     "lon": 174.696
+    },
+    {
+     "lugar": "Sídney",
+     "pais": "AU",
+     "lat": -33.8697,
+     "lon": 151.207
+    },
+    {
+     "lugar": "Melbourne",
+     "pais": "AU",
+     "lat": -37.8175,
+     "lon": 144.9671
+    }
+   ],
+   "anio": null,
+   "estado": "en construcción",
+   "duenos": [
+    "Google"
+   ],
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://gouvernement.pf/fr/actualites/cable-honomoana-une-nouvelle-etape-pour-renforcer-la-connectivite-de-la-polynesie-francaise"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Estados Unidos, Polinesia Francesa, Nueva Zelanda y Australia."
+  },
+  {
+   "nombre": "Umoja",
+   "llegadas": [
+    {
+     "lugar": "Amanzimtoti, KwaZulu-Natal",
+     "pais": "ZA",
+     "lat": -30.0577,
+     "lon": 30.8804
+    },
+    {
+     "lugar": "Mandurah, Australia Occidental",
+     "pais": "AU",
+     "lat": -32.5362,
+     "lon": 115.7402
+    }
+   ],
+   "anio": null,
+   "estado": "planeado",
+   "duenos": [
+    "Google"
+   ],
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://cloud.google.com/blog/products/infrastructure/investing-in-connectivity-and-growth-for-africa"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Sudáfrica y Australia."
+  },
+  {
+   "nombre": "Pisces",
+   "llegadas": [
+    {
+     "lugar": "Galway",
+     "pais": "IE",
+     "lat": 53.2707,
+     "lon": -9.0568
+    },
+    {
+     "lugar": "Saint-Hilaire-de-Riez",
+     "pais": "FR",
+     "lat": 46.7206,
+     "lon": -1.9495
+    },
+    {
+     "lugar": "Sopelana",
+     "pais": "ES",
+     "lat": 43.3806,
+     "lon": -2.9836
+    },
+    {
+     "lugar": "Carcavelos",
+     "pais": "PT",
+     "lat": 38.6867,
+     "lon": -9.3352
+    }
+   ],
+   "anio": 2028,
+   "estado": "planeado",
+   "nota": "Proyecto anunciado por sus promotores; todavía no está en servicio.",
+   "fuentes": [
+    "https://newsroom.orange.com/equitix-mdm-and-orange-form-a-joint-venture-to-deliver-the-pisces-subsea-cable-system-with-the-financial-support-of-the-european-union/?lang=eng"
+   ],
+   "voces": [
+    "chatgpt",
+    "grok"
+   ],
+   "que": "Unir Irlanda, Francia, España y Portugal."
   }
  ]
 }

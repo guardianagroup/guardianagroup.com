@@ -297,3 +297,9 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   «Verificación de cables submarinos» https://chatgpt.com/c/6adadd4e-67ac-83ea-a97b-383cc11c0ff1.
 - **IXP África y Asia**: ChatGPT dio 70 nuevos (`chatgpt-ixp-3.json`, chat https://chatgpt.com/c/6adada8b-f2b0-83e8-a872-203b6b08837b); Grok verifica en dos
   tandas de 35 (`grok-ixp-7.json` hecho: 33 ok, LANIC «es otra cosa», GIBIRIX «no verificado»).
+- **Hecho después (23:20–23:40)**: IXP de la agencia **256** (`grok-ixp-7/8.json`); capacidades **113 cables** (32 gigantes ≥100 Tbit/s, 42 grandes)
+  con `chatgpt-capacidad-3/4.json`; discrepancias que siguen fuera hasta una tercera voz: SEA-ME-WE 4, ACE, MainOne, AEC-1, FA-1, BBG, EAC, MENA,
+  Japan-US, FALCON, HAWK, FNAL, MAYA-1, Americas-II, Svalbard, CANTAT 3, PPC-1, AKORN, AU-West.
+- **Vista previa para el amigo de Praga** (artefacto privado «GUARDIANA · Órbita», https://claude.ai/artifact/2ofNX33VVYed7qwqDxSrqa, compartido por el
+  dueño): se reconstruye con `python3 herramientas/vista_previa.py <carpeta>` y se publica con la herramienta Artifact (mismo `url`, `root` = carpeta,
+  `files` = las rutas; `ciudades.tsv` con contentType text/plain; solo hay que mandar los archivos que cambian, los demás se conservan). Versión 13.
