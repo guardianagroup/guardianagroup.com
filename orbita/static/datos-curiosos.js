@@ -341,11 +341,18 @@
     $('dato-k').textContent = d.k === 'noticia' ? t.k.noticia + ' · ' + t.k.sabias : (d.fijo || (d.k === 'mundo' && Math.random() < 0.5) ? t.k.sabias : t.k[d.k]);
     const e = $('dato-e'); e.hidden = !d.e; e.textContent = t.k.ejemplo;
     $('dato-v').textContent = d.v; $('dato-t').textContent = d.t; $('dato-f').textContent = d.f;
-    const p = $('dato-p'); p.textContent = '';
-    const flecha = (cls, txt, et) => { const a = document.createElement('button'); a.type = 'button'; a.className = cls; a.textContent = txt; a.setAttribute('aria-label', et); a.title = et; return a; };
-    p.append(flecha('datras', '‹', t.k.ant));
-    for (let j = 0; j < n; j++) { const b = document.createElement('i'); b.dataset.j = j; if (j === k) b.className = 'on'; p.append(b); }
-    p.append(flecha('dsig', '›', t.k.sig));
+    // 23 Oct 2026, 13:20 (owner): «una flecha a la derecha y otra a la izquierda, de diseño, bien bonita… que al pasar por
+    // encima el mouse cambie a la mano». Built once, so the arrow under the pointer stays lit while the cards change.
+    const p = $('dato-p');
+    if (!p.querySelector('.dpts')) {
+      p.textContent = ''; p.removeAttribute('aria-hidden');
+      const flecha = (cls, d) => { const a = document.createElement('button'); a.type = 'button'; a.className = 'dflecha ' + cls; a.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="' + d + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'; return a; };
+      const pts = document.createElement('span'); pts.className = 'dpts'; pts.setAttribute('aria-hidden', 'true');
+      p.append(flecha('datras', 'M10 3.5 5.5 8l4.5 4.5'), pts, flecha('dsig', 'M6 3.5 10.5 8 6 12.5'));
+    }
+    for (const [c, et] of [['.datras', t.k.ant], ['.dsig', t.k.sig]]) { const a = p.querySelector(c); a.setAttribute('aria-label', et); a.title = et; }
+    const pts = p.querySelector('.dpts'); pts.textContent = '';
+    for (let j = 0; j < n; j++) { const b = document.createElement('i'); b.dataset.j = j; if (j === k) b.className = 'on'; pts.append(b); }
     caja.hidden = false;
   }
   caja.removeAttribute('title');
