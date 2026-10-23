@@ -39,7 +39,7 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   git checkout web-idiomas -- orbita herramientas terminos.html .github/workflows/datos-orbita.yml
   git add -A && git commit -m "Publicar …" && git push origin main && git checkout web-idiomas
   ```
-- **Caché**: todos los `static/*.js|css` de `orbita/index.html` llevan `?v=20261023g` (esquema `2026102<día><letra>`). Sube la letra en cada publicación (siguiente: `23h`, luego `23i`…).
+- **Caché**: todos los `static/*.js|css` de `orbita/index.html` llevan `?v=20261023i` (esquema `2026102<día><letra>`). Sube la letra en cada publicación (siguiente: `23j`, luego `23k`…).
 - Comprobar el despliegue: `gh run list --repo guardianagroup/guardianagroup.com --limit 1` hasta `completed success` (1–3 min).
   Desde el contenedor **no se puede** hacer curl a guardianagroup.com, overpass-api.de ni NOAA (proxy); se comprueba con el navegador integrado
   (pestaña `tab-7` = guardianagroup.com/orbita/?v=X; `tab-6` es una pestaña del dueño, no tocar) y desde `javascript_tool`: `OrbitaPlaneta.ir(lon, lat, zoom)`, `OrbitaConexion.abre(true)`,
@@ -47,7 +47,7 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   esperar unos segundos. Pulsar «Ahora no» del aviso al cargar.
 - Commits: terminar con `Co-Authored-By: Claude … <noreply@anthropic.com>` y la línea `Claude-Session:` que dé el sistema.
 
-## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión 23g)
+## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión 23i)
 - Planeta WebGL con mapa 16K en teselas; modo «limpio» desde ×4 (agua negra, tierra gris, datos en blanco, sin luces).
 - **Zoom hasta ×80.000 (500 m de altura nominal)**, suavizado logarítmico, doble clic por pasos. Indicador de altura a la derecha, encima de los botones
   (`#altura`, 40.000 km → 500 m). Desde ×8 (`body.hondo`) desaparecen los botones de capas y el filtro de satélites. Latitud hasta ±89,5° al acercarse.
@@ -59,8 +59,8 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
 - **Profundidad y altitud** (`cables-relieve.json`, 1.243 tramos; `fibra-relieve.json`, 5.039): generadas por el workflow con `herramientas/relieve.py`
   (ETOPO 2022 60s, en caché del runner). Fila «Profundidad del fondo bajo este tramo: máxima · media · % en plataforma · % en llanura abisal» y
   «Altitud del terreno: hasta · media». Clave de cada tramo = `n_puntos:Σ(round(lon·1000)+round(lat·1000))`, la misma en `relieve.py` y `claveRelieve` (capas.js).
-- Fronteras, nombres de regiones, **nombres de país** desde ×2,2 con **ficha de país** (`fichaPais`; `datos/paises.json`: **70 países, todos verificados** (Claude escribe, ChatGPT corrige → `confirmado:true`; respuestas en
-  `herramientas/paises-agencia/`). Lote 6 pedido a ChatGPT el 22 Oct 18:40: UY, PY, BO, VE, CR, PA, DO, CU, GT, HN, SV, PR, JM, TT, IS → recoger en tab-5, revisar como segunda voz (quitar fechas de 2026 que solo dé una voz), fusionar).
+- Fronteras, nombres de regiones, **nombres de país** desde ×2,2 con **ficha de país** (`fichaPais`; `datos/paises.json`: **115 países, todos verificados** (Claude escribe, ChatGPT corrige → `confirmado:true`; respuestas en
+  `herramientas/paises-agencia/`). Lotes 5–8 hechos (22 Oct, 18:30–19:40). Lote 9 pedido a ChatGPT (tab-5): KH, LA, MM, BN, PG, FJ, LY, SD, ZM, ZW, NA, BW, MG, MW, ML → recoger, revisar como segunda voz (quitar fechas de 2026 que solo dé una voz; el merge es un script corto en bash, ver lotes 5–8 en el historial), fusionar).
 - **Polos**: 34 estaciones en `datos/puntos-extra.json` (tipo `estacion`, `cargaEstaciones`/`EST`), visibles con la capa de cables, ficha al pasar el ratón.
   5 cables previstos punteados en `datos/cables-previstos.json` con toda la información del proyecto. Incidencias en `datos/cables-notas.json` (20 claves).
 - **Ficha completa** (`panel()` en capas.js): al pasar el ratón, resumen; al hacer clic, panel lateral `#ficha-panel` con resumen, «Qué significa para ti»,
@@ -73,6 +73,7 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   es Starlink/Viasat/Hughes/OneWeb… → primer tramo sube al satélite (LEO ×1,09 a escala; GEO ×1,35 «no a escala») con etiqueta. viaje.js `arcoPantalla` usa el
   mismo trayecto; el informe también. Textos honestos: «trayectos por los cables del mapa… el cable exacto que usó tu conexión no se conoce desde fuera».
   Prueba sin navegador: `node scratchpad/prueba-red.js` (Cartagena→Fráncfort ×1,21, Sídney ×1,26, Singapur ×1,11; 200 ms en total).
+- **Rendimiento (23h, 19:10)**: `aVista` en orbita.js cachea los senos/cosenos de la vista (`VC`); capas.js tiene `campo(p,G)` (casquete visible: dirección `d`, ángulo `ang`, `todo` si cabe el planeta entero), `capsDe(l)` (casquetes por tramos de 24 vértices, cacheados en `l.caps`/`l.cap`), `veCap`, y `pintaLineas`/`pintaFibra`/`pintaPuntos`/`posiciones`/`pintaExtremos`/`pintaLuz` saltan lo que no toca el casquete. De 162 ms a ~10 ms por fotograma a ×300 sobre París.
 - **Rueda sobre paneles** (18:16): la rueda solo hace zoom si el objetivo es un canvas o el body; sobre cualquier panel, desplaza el panel.
 - **«Mi conexión»** (conexion.js) con **«Por dónde viajan tus datos»**: mide desde el navegador la ida y vuelta a 33 regiones AWS (`NUBES`) y al borde más cercano
   (Cloudflare `cdn-cgi/trace`, `colo=` → tabla IATA); `fetch(no-cors, cache:no-store)` sin `redirect:'manual'` (rompe); calentamiento + 3 sondas, mínimo;
@@ -132,18 +133,18 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
 - `orbita/datos/noticias.json`: noticias con dos fuentes (campos fecha, tema, es/en/pt, fuentes); en pantalla «NOTICIA · ¿SABÍAS QUE…?» y «Noticia verificada · dos fuentes».
   **Tarea programada «Noticias Órbita (GUARDIANA)»** (id `trig_016bgAVZovsMq3wBuUESmpqN`, cada día a las 7:41 de Bogotá, aprobación automática): una sesión
   nueva clona el repo, busca noticias de la semana, exige dos fuentes, añade a noticias.json y publica en web-idiomas y main. El dueño no tiene que hacer nada.
-- `orbita/datos/sabias.json`: **35 «¿Sabías que…?» verificados** (ChatGPT redacta 40 → `herramientas/sabias-agencia/chatgpt-sabias-1.json`; Grok verifica →
+- `orbita/datos/sabias.json`: **75 «¿Sabías que…?» verificados** (lote 2 de 42: Grok dio ok a 41, rechazó el 42; el 41 repetía el 5) (ChatGPT redacta 40 → `herramientas/sabias-agencia/chatgpt-sabias-1.json`; Grok verifica →
   `grok-sabias-1-verificacion.txt`; entran los que pasan, `voces: [chatgpt, grok]`). Tarjeta: `sabia()` (fijo, etiqueta «¿SABÍAS QUE…?») y `noticia()` (más nuevas,
-  más probables) en cada vuelta. **Lote 2 de 40 pedido a ChatGPT el 22 Oct 18:42** (chat «Investigación cables submarinos», pestaña `seed`): estaciones de amarre,
-  IRU, cables más antiguos/retirados, costes publicados, públicos/privados, Egipto, sabotajes, barcos cableros, torres (Indus, China Tower, SBA, Crown Castle),
-  centros de datos récord → recoger, verificar con Grok (tab-3), añadir a sabias.json.
+  más probables) en cada vuelta. Lote 2 hecho (`chatgpt-sabias-2.json`, `grok-sabias-2-verificacion.txt`). Siguiente lote posible: satélites (Starlink, OneWeb, Kuiper),
+  radiofrecuencia, 5G, fabricantes de fibra (Corning, Prysmian), récords de velocidad (NICT), latencia, DNS raíz.
 - La **tarea de noticias ya se ejecutó una vez a mano** (sesión cse_01QJZrcY2qdxAmghLwn69sei): 11 noticias. Tras cada ejecución diaria hay que traer
   `orbita/datos/noticias.json` de origin/main a web-idiomas (`git checkout origin/main -- orbita/datos/noticias.json`).
 - Lo de la subasta (quién paga por los datos) NO va en el viaje 3D: será un capítulo aparte del informe cuando se genere desde el programa (dueño de acuerdo, 17:10).
 
 ## 4c. Puntos de intercambio (IXP) por la agencia
 - `herramientas/ixp-agencia/chatgpt-ixp-1.json` (212 IXP de ChatGPT) y `grok-ixp-1..4.json` (las cuatro tandas verificadas por Grok): **160 IXP de la agencia**
-  ya en `puntos-extra.json`. `python3 herramientas/ixp_agencia.py` cruza por país+nombre (≥2 voces, <60 km), descarta los que
+  ya en `puntos-extra.json`. **Lote 2**: `chatgpt-ixp-2.json` (82 IXP de los países que faltaban: Magreb, Sahel, Oriente Medio, Caribe, Cáucaso, Asia central,
+  Ucrania, Pacífico) pedido a Grok el 22 Oct 19:45 (tab-3, formato una línea JSON por IXP con `estado`) → guardar en `grok-ixp-5.json`, correr `ixp_agencia.py`, publicar. `python3 herramientas/ixp_agencia.py` cruza por país+nombre (≥2 voces, <60 km), descarta los que
   Grok marca «es otra cosa» (p. ej. Equinix Ashburn/Paris no son IXP neutrales), evita duplicar los de OSM y los escritos a mano, y escribe en `datos/puntos-extra.json`
   tipo `intercambio` con `agencia: true`. capas.js ya los pinta con la capa de centros de datos.
 
@@ -157,7 +158,8 @@ Conjunto ~55 % (puntos de intercambio ya ~40 % con los 160 de la agencia). Orden
 2. **Ficha de país**: 70 verificados; seguir por tandas de 15 (ahora ChatGPT escribe en el chat «Verificar fichas de infraestructura»
    https://chatgpt.com/c/6ada832b-0b94-83e8-ab23-e58008ece741 y Claude revisa como segunda voz; guardar en `herramientas/paises-agencia/chatgpt-paises-N.json` y fusionar).
    Campos: `movil`, `operadores`, `fija`, `diez` (10G), `troncales`, `intercambio`, `novedades`.
-3. Capacidades: pedir a Grok el resto de la lista; cables de una sola voz (34, casi todos alias o ramales): seguir con Grok/ChatGPT por tandas.
+3. Capacidades: pedir a Grok el resto de la lista; cables de una sola voz (29 tras los alias Basslink/BCS North/AMX-1/AKORN/Hibernia): Grok falló dos veces
+   con la petición de 28 cables de golpe (modo Expert, demasiadas búsquedas) → pedir en tandas de 8–10, exigiendo lat/lon de la localidad de amarre.
 4. Centros de datos: `datos_orbita.py` hace ahora dos consultas Overpass (telecom=* y building/office/industrial/man_made=data_center, ~1.300 edificios más).
    El workflow tiene entrada `forzar` (`gh workflow run datos-orbita.yml --ref main -f forzar=true`) que vuelve a descargar los puntos; el push a main NO dispara el workflow
    (solo la rama orbita-datos). **Hecho** (run 39868036356, 22:52Z): overpass-api.de dio 502 y respondió un espejo; 4.467 puntos (4.388 datos: los 1.139
