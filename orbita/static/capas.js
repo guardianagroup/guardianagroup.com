@@ -310,7 +310,7 @@
     return lineas;
   }
   const rangoFibra = (l) => { if (l.nivel == null) preparaNiveles(); return l.nivel; };
-  const nombreRango = (r) => r === 3 ? T('Troncal principal de largo recorrido') : r === 2 ? T('Troncal de largo recorrido') : r === 1 ? T('Troncal nacional') : T('Enlace regional');
+  const nombreRango = (r) => r === 3 ? T('Gran autopista por tierra') : r === 2 ? T('Ruta larga') : r === 1 ? T('Ruta entre ciudades') : T('Enlace corto');
   function pintaFibra(cx, p, G) {
     const z = G.R / (G.R0 || G.R), lineas = fibraVisible(z);
     // 22 Oct 2026: the land fibre is drawn from city to city (its nodes are cities, not street addresses), so below
@@ -1610,10 +1610,12 @@
 
   // ---------- the class cards under the layer buttons (22 Oct 2026, 21:48) ----------
   const TEXTOS_CLASES = {
-    sub: { titulo: 'Qué cables ver', clases: { gigante: ['Troncales gigantes', 'Más de 100 Tbit/s: los cables que mueven continentes enteros.'], grande: ['Troncales grandes', 'Entre 20 y 100 Tbit/s.'], regional: ['Cables regionales', 'Menos de 20 Tbit/s: entre islas y países vecinos.'], sinDato: ['Otros cables en servicio', 'Funcionan, pero su dueño no publica cuántos datos pueden llevar.'], aprox: ['Ruta estimada', 'Sabemos que el cable existe y dónde llega, pero no por dónde va exactamente: se dibuja en discontinuo.'], previstos: ['Previstos', 'Anunciados o en construcción; punteados.'] } },
-    fibra: { titulo: 'Qué fibra ver', clases: { principal: ['Troncales principales', '800 km o más, o corredores que comparten cuatro compañías.'], largo: ['Largo recorrido', '400 km o más.'], nacional: ['Troncales nacionales', '150 km o más; aparecen al acercarse.'], regional: ['Enlaces regionales', 'El resto; aparecen cerca.'], obra: ['En construcción', 'Según la fuente; discontinuos.'] } },
-    puntos: { titulo: 'Qué puntos ver', clases: { datos: ['Centros de datos', 'Donde se guarda y se sirve internet.'], intercambio: ['Puntos de intercambio', 'Donde las redes se conectan entre sí.'], estaciones: ['Estaciones', 'Bases polares y estaciones terrestres de satélites.'], grandes: ['Solo grandes operadores', 'Compañías con cinco o más centros en el mapa.'] } },
+    // 22 Oct 2026, 22:02 (owner): «palabras para que sean entendibles, todo»
+    sub: { titulo: 'Qué cables ver', clases: { gigante: ['Autopistas entre continentes', 'Los cables más potentes: más de 100 Tbit/s.'], grande: ['Grandes rutas', 'Entre 20 y 100 Tbit/s: unen países y regiones.'], regional: ['Cables pequeños', 'Menos de 20 Tbit/s: unen islas y países vecinos.'], sinDato: ['Otros cables en servicio', 'Funcionan, pero su dueño no publica cuántos datos pueden llevar.'], aprox: ['Ruta estimada', 'Sabemos que el cable existe y dónde llega, pero no por dónde va exactamente: se dibuja en discontinuo.'], previstos: ['Cables en proyecto', 'Anunciados o en construcción; todavía no llevan datos. Punteados.'] } },
+    fibra: { titulo: 'Qué fibra ver', clases: { principal: ['Grandes autopistas por tierra', 'Las rutas más largas (800 km o más) o las que comparten varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'], obra: ['En obras', 'Rutas que se están construyendo; en discontinuo.'] } },
+    puntos: { titulo: 'Qué puntos ver', clases: { datos: ['Centros de datos', 'Edificios donde se guardan y se sirven las webs y las aplicaciones.'], intercambio: ['Puntos de intercambio', 'Donde las redes de distintas compañías se conectan entre sí.'], estaciones: ['Bases y antenas', 'Bases en la Antártida y el Ártico, y estaciones que hablan con satélites.'], grandes: ['Solo las grandes compañías', 'Muestra solo los centros de compañías con 5 o más en el mapa.'] } },
   };
+
   const PLEGADO = { sub: true, fibra: true, puntos: true }; // the cards open on the button's click, one at a time; on arrival none is open
   function cuentaClase(k, c) {
     try {

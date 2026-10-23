@@ -49,3 +49,5 @@ CDC Hume Campus|AU  # los edificios «Hume» de CDC ya están en OpenStreetMap
 CDC Hobsonville|NZ  # «CDC Data Centre HV1» de OpenStreetMap
 Datacom Highbrook|NZ  # el «Datacom Data Centre» de Highbrook de OpenStreetMap
 Equinix JN1|ZA  # el «Equinix» de Johannesburgo de OpenStreetMap
+Selectel Dubrovka|RU  # «ЦОД "Дубровка-1/2/3"» de OpenStreetMap
+Selectel Tsvetochnaya|RU  # «Selectel Tsvetochnaya 1» de OpenStreetMap
