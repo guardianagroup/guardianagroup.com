@@ -22,7 +22,18 @@
   function puntoMedio(a, b, t) { const w = slerp(vec(a.lon, a.lat), vec(b.lon, b.lat), t); return { lat: Math.asin(Math.max(-1, Math.min(1, w[1]))) / RAD, lon: Math.atan2(w[0], w[2]) / RAD }; }
   const angulo = (a, b) => { const va = vec(a.lon, a.lat), vb = vec(b.lon, b.lat); return Math.acos(Math.max(-1, Math.min(1, va[0] * vb[0] + va[1] * vb[1] + va[2] * vb[2]))); };
   function rumbo(a, b) { const f1 = a.lat * RAD, f2 = b.lat * RAD, dl = (b.lon - a.lon) * RAD; const y = Math.sin(dl) * Math.cos(f2), x = Math.cos(f1) * Math.sin(f2) - Math.sin(f1) * Math.cos(f2) * Math.cos(dl); return ((Math.atan2(y, x) / RAD) + 360) % 360; }
-  const continente = (region) => /^(us|ca|mx)-/.test(region) ? T('América del Norte') : /^sa-/.test(region) ? T('América del Sur') : /^eu-/.test(region) ? T('Europa') : /^(il|me)-/.test(region) ? T('Oriente Medio') : /^af-/.test(region) ? T('África') : /^ap-southeast-(2|4)/.test(region) ? T('Oceanía') : T('Asia');
+  const contKey = (region) => /^(us|ca|mx)-/.test(region) ? 'América del Norte' : /^sa-/.test(region) ? 'América del Sur' : /^eu-/.test(region) ? 'Europa' : /^(il|me)-/.test(region) ? 'Oriente Medio' : /^af-/.test(region) ? 'África' : /^ap-southeast-(2|4)/.test(region) ? 'Oceanía' : 'Asia';
+  const continente = (region) => T(contKey(region));
+  // the visitor's own continent comes from the country (23 Oct 2026: taken from the nearest measured region, Colombia
+  // came out as North America — Querétaro is nearer than São Paulo); every country not listed is Asia
+  const CONT_PAIS = {};
+  [['América del Norte', 'US CA MX GT BZ SV HN NI CR PA CU JM HT DO PR BS BB TT AG AI AW BL BM BQ CW DM GD GP KN KY LC MF MQ MS PM SX TC VC VG VI GL UM'],
+    ['América del Sur', 'CO VE EC PE BO BR PY UY AR CL GY SR GF FK GS'],
+    ['Europa', 'AD AL AT AX BA BE BG BY CH CY CZ DE DK EE ES FI FO FR GB GG GI GR HR HU IE IM IS IT JE LI LT LU LV MC MD ME MK MT NL NO PL PT RO RS RU SE SI SJ SK SM UA VA XK'],
+    ['Oriente Medio', 'AE BH IL IQ IR JO KW LB OM PS QA SA SY YE TR'],
+    ['África', 'DZ AO BJ BW BF BI CM CV CF TD KM CG CD CI DJ EG GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML MR MU YT MA MZ NA NE NG RE RW SH ST SN SC SL SO ZA SS SD TZ TG TN UG EH ZM ZW'],
+    ['Oceanía', 'AU NZ FJ PG SB VU NC PF WS TO KI TV NR FM MH PW GU MP AS CK NU TK WF PN NF']].forEach(([k, s]) => s.split(' ').forEach((c) => { CONT_PAIS[c] = k; }));
+  const contDePais = (cc) => cc ? (CONT_PAIS[String(cc).toUpperCase()] || 'Asia') : '';
   const esTactil = () => matchMedia && matchMedia('(pointer: coarse)').matches;
   const suave = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
@@ -96,13 +107,11 @@
     cx.save(); cx.scale(k, k); cx.textBaseline = 'top';
     cx.fillStyle = 'rgba(244,246,248,.92)'; cx.font = '500 11px "IBM Plex Mono", ui-monospace, monospace'; cx.fillText((T('El viaje de tus datos') + ' · GUARDIANA').toUpperCase(), 28, 24);
     cx.fillStyle = 'rgba(169,179,190,.9)'; cx.font = '400 11px "IBM Plex Mono", ui-monospace, monospace'; cx.fillText(h.querySelector('.sub').textContent, 28, 42);
-    if (V.fase === 'constelacion') {
-      cx.textAlign = 'center'; cx.fillStyle = 'rgba(169,179,190,.95)'; cx.font = '500 12px "IBM Plex Mono", ui-monospace, monospace'; cx.fillText(h.querySelector('.destino').textContent, innerWidth / 2, innerHeight - 150);
-    } else if (V.fase === 'vuelo') {
+    if (V.fase === 'despliegue' || V.fase === 'repaso' || V.fase === 'satelite') {
       const W = innerWidth, y = innerHeight - 150; cx.textAlign = 'center';
       cx.fillStyle = 'rgba(169,179,190,.95)'; cx.font = '500 12px "IBM Plex Mono", ui-monospace, monospace'; cx.fillText(h.querySelector('.destino').textContent, W / 2, y);
       cx.fillStyle = '#F4F6F8'; cx.font = '600 44px "IBM Plex Sans", system-ui, sans-serif'; cx.fillText(h.querySelector('.km').textContent + ' km', W / 2 - 150, y + 22); cx.fillText(h.querySelector('.ms').textContent + ' ms', W / 2 + 150, y + 22);
-      if (V.llego) { cx.fillStyle = '#9CC3E4'; cx.font = '500 12px "IBM Plex Mono", ui-monospace, monospace'; cx.fillText(h.querySelector('.luz').textContent, W / 2, y + 82); }
+      cx.fillStyle = '#9CC3E4'; cx.font = '500 12px "IBM Plex Mono", ui-monospace, monospace'; cx.fillText(h.querySelector('.luz').textContent, W / 2, y + 82);
     } else if (V.fase === 'final') {
       const W = innerWidth, y = innerHeight - 140; cx.textAlign = 'center';
       cx.fillStyle = '#F4F6F8'; cx.font = '600 30px "IBM Plex Sans", system-ui, sans-serif'; cx.fillText(h.querySelector('.fin .t').textContent, W / 2, y);
@@ -111,36 +120,146 @@
     cx.restore();
   }
   window.OrbitaDespues = cuadroGrabado;
+  // 23 Oct 2026, 09:24 (owner): «el primer recorrido lo quitaría, es demasiado rápido… que salgan todas las líneas a la
+  // vez… en modo despacio… y luego haces un repaso» continent by continent, nearest first. 09:26: «que suba hasta el
+  // satélite y el satélite la lleve a otro continente» — shown as an EXAMPLE, never as the visitor's measured route.
+  const LENTO = 22, DESP_MIN = 1800, DESP_MAX = 7500; // slow motion: each pulse takes its real round trip × 22 (1.8 to 7.5 s)
+  const durDe = (n) => Math.max(DESP_MIN, Math.min(DESP_MAX, n.ms * LENTO));
+  const corto = (n) => n.nombre.replace(/ \(.*\)/, '');
+  // a pulse of light: a trail that fades behind a bright head
+  function pulso(cx, pts, f, N, fuerte) {
+    const cab = Math.round(Math.max(0, Math.min(1, f)) * N);
+    for (let i = 1; i <= cab; i++) { const q0 = pts[i - 1], q1 = pts[i]; if (!q0 || !q1) continue; const k = 1 - (cab - i) / Math.max(10, N * 0.3); if (k <= 0) continue; cx.strokeStyle = 'rgba(' + ACENTO + ',' + (0.12 + 0.8 * k).toFixed(3) + ')'; cx.lineWidth = (fuerte ? 1 : 0.7) + (fuerte ? 2.2 : 1.4) * k; cx.beginPath(); cx.moveTo(q0[0], q0[1]); cx.lineTo(q1[0], q1[1]); cx.stroke(); }
+    const q = pts[cab]; if (q && f < 1) { const R = fuerte ? 13 : 8, g = cx.createRadialGradient(q[0], q[1], 0, q[0], q[1], R); g.addColorStop(0, 'rgba(255,255,255,.95)'); g.addColorStop(0.35, 'rgba(' + ACENTO + ',.7)'); g.addColorStop(1, 'rgba(' + ACENTO + ',0)'); cx.fillStyle = g; cx.beginPath(); cx.arc(q[0], q[1], R, 0, 7); cx.fill(); }
+  }
   function pintaViaje(cx, p, G, t) {
     if (!V) return;
-    const r = V.rutas, L = r.origen;
+    const r = V.rutas, L = r.origen, now = performance.now(), N = 72;
     cx.save(); cx.globalCompositeOperation = 'source-over';
     // the home marker and its label are the planet's own (orbita.js draws them); only its box is reserved here
     CAJAS = []; const casa = proy(p, G, L.lon, L.lat);
     if (casa) { cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cabe(casa[0] + 12, casa[1] + 4, cx.measureText(T('TU EQUIPO') + ' · ' + L.nombre.toUpperCase() + ' (' + T('APROX.') + ')').width, 14, true); }
-    // every path, faint, so the whole web is always there; in the constellation scene they appear nearest first
-    const orden = V.porKm, visibles = V.fase === 'constelacion' ? Math.min(orden.length, Math.floor(V.progreso * orden.length)) : (V.fase === 'intro' ? 0 : orden.length);
-    for (let i = 0; i < visibles; i++) { const n = orden[i], ultimo = V.fase === 'constelacion' && i === visibles - 1; cx.strokeStyle = 'rgba(' + BLANCO + ',' + (V.fase === 'final' ? 0.28 : ultimo ? 0.6 : V.fase === 'constelacion' ? 0.22 : 0.1) + ')'; cx.lineWidth = ultimo ? 1.4 : 0.8; trazo(cx, arcoPantalla(p, G, L, n, 64), 0, 64); }
-    if (V.fase === 'constelacion' && visibles) { // the newest one first, so its name always wins the space
-      const u = orden[visibles - 1]; etiqueta(cx, punto(cx, p, G, u.lon, u.lat, 3, '#F4F6F8'), u.nombre.replace(/ \(.*\)/, '') + ' · ' + u.ms + ' ms', true, false, true);
-      for (let i = 0; i < visibles - 1; i++) { const n = orden[i]; etiqueta(cx, punto(cx, p, G, n.lon, n.lat, 1.8, 'rgba(' + BLANCO + ',.7)'), n.nombre.replace(/ \(.*\)/, '') + ' · ' + n.ms + ' ms', false); }
-    }
-    // the stops already travelled, with their label
-    for (const s of V.hechas) { const pts = arcoPantalla(p, G, L, s, 64); cx.strokeStyle = 'rgba(' + ACENTO + ',.55)'; cx.lineWidth = 1.2; trazo(cx, pts, 0, 64); etiqueta(cx, punto(cx, p, G, s.lon, s.lat, 2.6, '#9CC3E4'), s.nombre + ' · ' + s.ms + ' ms', false); }
-    // the pulse on its way: a trail that fades behind a bright head
-    if (V.actual && V.fase === 'vuelo') {
-      const s = V.actual, N = 96, pts = arcoPantalla(p, G, L, s, N), f = Math.max(0, Math.min(1, V.progreso)), cab = Math.round(f * N);
-      for (let i = 1; i <= cab; i++) { const q0 = pts[i - 1], q1 = pts[i]; if (!q0 || !q1) continue; const k = 1 - (cab - i) / Math.max(12, N * 0.35); if (k <= 0) continue; cx.strokeStyle = 'rgba(' + ACENTO + ',' + (0.15 + 0.85 * k).toFixed(3) + ')'; cx.lineWidth = 1 + 2.2 * k; cx.beginPath(); cx.moveTo(q0[0], q0[1]); cx.lineTo(q1[0], q1[1]); cx.stroke(); }
-      const q = pts[cab]; if (q) { const g = cx.createRadialGradient(q[0], q[1], 0, q[0], q[1], 14); g.addColorStop(0, 'rgba(255,255,255,.95)'); g.addColorStop(0.35, 'rgba(' + ACENTO + ',.7)'); g.addColorStop(1, 'rgba(' + ACENTO + ',0)'); cx.fillStyle = g; cx.beginPath(); cx.arc(q[0], q[1], 14, 0, 7); cx.fill(); }
-      // the race against light: the fainter head is where light in a straight line would be by now
-      const fl = Math.min(1, f * s.ms / Math.max(1, s.minimo)), ql = pts[Math.round(fl * N)];
-      if (ql) { cx.fillStyle = 'rgba(' + BLANCO + ',' + (fl >= 1 ? 0.95 : 0.8) + ')'; cx.beginPath(); cx.arc(ql[0], ql[1], fl >= 1 ? 3.5 : 2.4, 0, 7); cx.fill(); if (fl >= 1 && f < 1) { cx.strokeStyle = 'rgba(' + BLANCO + ',.5)'; cx.lineWidth = 1; cx.beginPath(); cx.arc(ql[0], ql[1], 8, 0, 7); cx.stroke(); etiqueta(cx, ql, T('la luz ya habría llegado'), false, true, true); } }
-      if (f >= 1) etiqueta(cx, punto(cx, p, G, s.lon, s.lat, 3.2, '#F4F6F8'), s.nombre + ' · ' + s.ms + ' ms', true, false, true);
-      else punto(cx, p, G, s.lon, s.lat, 2.4, 'rgba(' + BLANCO + ',.6)');
+    if (V.fase === 'despliegue') {
+      // every path at once, each pulse at its own pace: the near ones arrive first, the far ones keep travelling
+      const desde = now - V.tDesp;
+      for (const n of V.porKm) { const f = desde / durDe(n), pts = arcoPantalla(p, G, L, n, N); if (f >= 1) { cx.strokeStyle = 'rgba(' + ACENTO + ',.45)'; cx.lineWidth = 1; trazo(cx, pts, 0, N); } else pulso(cx, pts, f, N, false); }
+      for (const n of V.porKm) { if (desde >= durDe(n)) etiqueta(cx, punto(cx, p, G, n.lon, n.lat, 2.4, '#F4F6F8'), corto(n) + ' · ' + n.ms + ' ms', false); else punto(cx, p, G, n.lon, n.lat, 1.6, 'rgba(' + BLANCO + ',.45)'); }
+    } else if (V.fase === 'repaso' || V.fase === 'satelite' || V.fase === 'final') {
+      const g = V.fase === 'repaso' ? V.grupo : null;
+      for (const n of V.porKm) { const dentro = !!(g && g.nubes.includes(n)); cx.strokeStyle = dentro ? 'rgba(' + ACENTO + ',.85)' : 'rgba(' + BLANCO + ',' + (V.fase === 'final' ? 0.28 : V.fase === 'satelite' ? 0.07 : 0.13) + ')'; cx.lineWidth = dentro ? 1.7 : 0.8; trazo(cx, arcoPantalla(p, G, L, n, N), 0, N); }
+      if (g) { const ns = g.nubes; etiqueta(cx, punto(cx, p, G, ns[0].lon, ns[0].lat, 3.4, '#F4F6F8'), corto(ns[0]) + ' · ' + ns[0].ms + ' ms', true, false, true); for (const n of ns.slice(1)) etiqueta(cx, punto(cx, p, G, n.lon, n.lat, 2.4, '#9CC3E4'), corto(n) + ' · ' + n.ms + ' ms', false); }
+      if (V.fase === 'satelite' && V.sat) pintaSatelite(cx, p, G, now);
     }
     cx.restore();
   }
-
+  // ---------- the satellite example (owner, 23 Oct 2026, 09:26: «una sube hasta el satélite, y el satélite la lleva a
+  // otro continente… con una realidad muy bonita») ----------
+  // A geostationary satellite stays 35,786 km above the equator, turning with the Earth. The example lands on a measured
+  // destination of ANOTHER continent that one satellite sees together with the visitor, both well above the horizon
+  // (at most 66° from the point under the satellite: more than 15° of elevation at true scale). The satellite sits over
+  // the equator between the two, where the lower of the two elevations is highest. It is drawn much nearer than it is
+  // (1.7 Earth radii from the centre instead of 6.6), so it says «no a escala»; the belt of those orbits is drawn too.
+  const SAT_ALTO = 1.7, SAT_MAX = 66 * RAD;
+  function ejemploSatelite(r) {
+    const L = r.origen; if (!L || Math.abs(L.lat) > 60) return null;
+    const cerca = r.nubes.slice().sort((a, b) => a.km - b.km)[0];
+    const propio = contDePais(P() && P().pais) || (cerca && cerca.km < 1500 ? contKey(cerca.region) : '');
+    let mejor = null;
+    for (const n of r.nubes) {
+      if (contKey(n.region) === propio || n.km < 4000) continue;
+      let lonS = 0, peor = Infinity;
+      for (let lon = -180; lon < 180; lon += 1) { const S0 = { lon, lat: 0 }, g = Math.max(angulo(S0, L), angulo(S0, n)); if (g < peor) { peor = g; lonS = lon; } }
+      if (peor > SAT_MAX) continue;
+      // the most beautiful scene wins: the camera's own score, plus a long journey (up to ~90° of the planet)
+      const S0 = { lon: lonS, lat: 0 }, C = encuadre(L, n, S0); if (!C.nota) continue;
+      const nota = C.nota + 0.02 * Math.min(90, angulo(L, n) / RAD);
+      if (!mejor || nota > mejor.nota) mejor = { nota, D: n, S0, C };
+    }
+    return mejor;
+  }
+  // world → view for a camera that is not the current one (the same rotation as the planet's aVista)
+  function desde(C, w) { const a = C.lat * RAD, b = C.lon * RAD, ca = Math.cos(a), sa = Math.sin(a), cb = Math.cos(b), sb = Math.sin(b); const x = w[0] * cb - w[2] * sb, z = w[0] * sb + w[2] * cb; return [x, w[1] * ca - z * sa, w[1] * sa + z * ca]; }
+  // where the camera looks: both ends well inside the visible face, the satellite out in space beyond the planet's
+  // edge when the geometry allows it (preferably above, never down among the counters), the whole scene centred
+  function encuadre(U, D, S0) {
+    const g = P() && P().geo, Rp = g ? g.R0 : 250, mx = g ? g.W / 2 : 700, my = g ? g.H / 2 : 450;
+    const wU = vec(U.lon, U.lat), wD = vec(D.lon, D.lat), wS = vec(S0.lon, S0.lat).map((c) => c * SAT_ALTO);
+    let mejor = null;
+    for (let lat = -64; lat <= 64; lat += 2) for (let dl = -64; dl <= 64; dl += 2) {
+      const C = { lon: S0.lon + dl, lat }, u = desde(C, wU), d = desde(C, wD), s = desde(C, wS), rho = Math.hypot(s[0], s[1]);
+      if (u[2] < 0.5 || d[2] < 0.5) continue;
+      if (s[2] <= 0 && rho <= 1.02) continue;
+      if (s[1] < -0.3 || Math.abs(s[0]) * Rp > mx - 150 || s[1] * Rp > my - 70) continue;
+      const nota = 3 * Math.min(rho, 1.2) + Math.min(s[1], 1.1) + 2 * Math.min(u[2], d[2]) - 0.8 * Math.abs((u[0] + d[0] + s[0]) / 3) - 0.4 * Math.abs((u[1] + d[1] + s[1]) / 3);
+      if (!mejor || nota > mejor.nota) mejor = { nota, lon: C.lon, lat: C.lat };
+    }
+    return mejor || { nota: 0, lon: S0.lon, lat: (U.lat + D.lat) / 3 };
+  }
+  function tramoSat(p, G, a, b, sube, N) { // along the great circle from a to b, rising (or falling) between the ground and the satellite
+    const va = vec(a.lon, a.lat), vb = vec(b.lon, b.lat), pts = [];
+    for (let i = 0; i <= N; i++) {
+      const t = i / N, w = slerp(va, vb, t), h = 1.004 + (SAT_ALTO - 1.004) * (sube ? Math.sin(t * Math.PI / 2) : Math.cos(t * Math.PI / 2));
+      const v = p.aVista([w[0] * h, w[1] * h, w[2] * h]), fuera = v[0] * v[0] + v[1] * v[1] > 1;
+      pts.push(v[2] > 0.02 || fuera ? [G.CX + G.R * v[0], G.CY - G.R * v[1]] : null);
+    }
+    return pts;
+  }
+  // the belt of geostationary orbits: a ring over the equator, hidden where the planet is in front of it; the near
+  // half brighter than the far one, and never across the counters
+  function zonasHud() {
+    const h = $('viaje'); if (!h) return [];
+    return [...h.querySelectorAll('.centro .destino, .centro .luz, .centro .cifras > div')].map((el) => { const r = document.createRange(); r.selectNodeContents(el); const b = r.getBoundingClientRect(); return [b.left - 14, b.top - 8, b.right + 14, b.bottom + 8]; });
+  }
+  function anillo(cx, p, G, a) {
+    if (a <= 0) return; const N = 360, cerca = [], lejos = [], zonas = zonasHud();
+    const libre = (x, y) => !zonas.some((z) => x > z[0] && x < z[2] && y > z[1] && y < z[3]);
+    for (let i = 0; i <= N; i++) {
+      const l = i / N * 2 * Math.PI, v = p.aVista([Math.sin(l) * SAT_ALTO, 0, Math.cos(l) * SAT_ALTO]), x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
+      const ve = (v[2] > 0 || v[0] * v[0] + v[1] * v[1] > 1) && libre(x, y);
+      cerca.push(ve && v[2] >= 0 ? [x, y] : null); lejos.push(ve && v[2] < 0 ? [x, y] : null);
+    }
+    cx.save(); cx.setLineDash([2, 6]); cx.lineWidth = 1;
+    cx.strokeStyle = 'rgba(' + ACENTO + ',' + (0.2 * a).toFixed(3) + ')'; trazo(cx, lejos, 0, N);
+    cx.strokeStyle = 'rgba(' + ACENTO + ',' + (0.5 * a).toFixed(3) + ')'; trazo(cx, cerca, 0, N);
+    cx.restore();
+  }
+  function onda(cx, xy, r, a) { if (a <= 0) return; cx.save(); cx.strokeStyle = 'rgba(' + ACENTO + ',' + (0.85 * a).toFixed(3) + ')'; cx.lineWidth = 1.3; cx.beginPath(); cx.arc(xy[0], xy[1], r, 0, 7); cx.stroke(); cx.restore(); }
+  // the satellite itself: body, boom and two solar panels with their cells, in a soft glow
+  function dibujoSatelite(cx, q, a) {
+    const [x, y] = q; cx.save(); cx.globalAlpha = a;
+    const g = cx.createRadialGradient(x, y, 0, x, y, 22); g.addColorStop(0, 'rgba(255,255,255,.5)'); g.addColorStop(0.4, 'rgba(' + ACENTO + ',.18)'); g.addColorStop(1, 'rgba(' + ACENTO + ',0)'); cx.fillStyle = g; cx.beginPath(); cx.arc(x, y, 22, 0, 7); cx.fill();
+    cx.strokeStyle = 'rgba(' + BLANCO + ',.85)'; cx.lineWidth = 1; cx.beginPath(); cx.moveTo(x - 7, y); cx.lineTo(x + 7, y); cx.stroke();
+    for (const s of [-1, 1]) {
+      const x0 = s < 0 ? x - 19 : x + 7; cx.fillStyle = 'rgba(' + ACENTO + ',.92)'; cx.fillRect(x0, y - 3.5, 12, 7);
+      cx.strokeStyle = 'rgba(6,8,12,.55)'; cx.lineWidth = 0.8; cx.beginPath(); for (const k of [4, 8]) { cx.moveTo(x0 + k, y - 3.5); cx.lineTo(x0 + k, y + 3.5); } cx.moveTo(x0, y); cx.lineTo(x0 + 12, y); cx.stroke();
+    }
+    cx.fillStyle = '#F4F6F8'; cx.fillRect(x - 3.5, y - 3.5, 7, 7);
+    cx.strokeStyle = 'rgba(244,246,248,.9)'; cx.lineWidth = 1; cx.beginPath(); cx.arc(x, y + 6.5, 3, Math.PI * 1.15, Math.PI * 1.85, true); cx.stroke(); // the dish, facing the Earth
+    cx.restore();
+  }
+  const SAT_T0 = 2000, SAT_SUBE = 2800, SAT_PAUSA = 450, SAT_BAJA = 2800, SAT_FIN = SAT_T0 + SAT_SUBE + SAT_PAUSA + SAT_BAJA;
+  function pintaSatelite(cx, p, G, now) {
+    const L = V.rutas.origen, S = V.sat, N = 64, t = now - V.tSat, aparece = Math.max(0, Math.min(1, (t - 600) / 900));
+    anillo(cx, p, G, aparece);
+    if (aparece > 0.5) etiqueta(cx, proy(p, G, L.lon, L.lat), T('Tú') + ' · ' + L.nombre, true, true, true);
+    const sube = tramoSat(p, G, L, S.S0, true, N), baja = tramoSat(p, G, S.S0, S.D, false, N);
+    const f1 = (t - SAT_T0) / SAT_SUBE, f2 = (t - SAT_T0 - SAT_SUBE - SAT_PAUSA) / SAT_BAJA;
+    cx.save(); cx.globalAlpha = aparece; cx.setLineDash([3, 5]); cx.strokeStyle = 'rgba(' + BLANCO + ',.3)'; cx.lineWidth = 1; trazo(cx, sube, 0, N); trazo(cx, baja, 0, N); cx.restore();
+    if (f1 > 0) pulso(cx, sube, Math.min(1, f1), N, true);
+    if (f2 > 0) pulso(cx, baja, Math.min(1, f2), N, true);
+    const q = sube[N];
+    if (q) {
+      dibujoSatelite(cx, q, aparece);
+      const fl = (t - SAT_T0 - SAT_SUBE) / 800; if (fl > 0 && fl < 1) { onda(cx, q, 10 + 30 * fl, 1 - fl); onda(cx, q, 10 + 14 * fl, (1 - fl) * 0.6); }
+      // its name, on the side with room
+      const txt = T('Órbita geoestacionaria') + ' · ' + T('no a escala'); cx.font = '500 10.5px "IBM Plex Mono", ui-monospace, monospace';
+      const w = cx.measureText(txt).width, izq = q[0] + 26 + w > G.W - 16;
+      if (aparece > 0.5) etiqueta(cx, [izq ? q[0] - 37 - w : q[0] + 15, q[1] - 15], txt, false, false, true);
+    }
+    const llega = t - SAT_FIN, xy = punto(cx, p, G, S.D.lon, S.D.lat, llega >= 0 ? 3.4 : 2.4, llega >= 0 ? '#F4F6F8' : 'rgba(' + BLANCO + ',.7)');
+    if (xy && llega >= 0) { if (llega < 1000) { onda(cx, xy, 4 + 24 * llega / 1000, 1 - llega / 1000); } etiqueta(cx, xy, corto(S.D) + ' · ' + continente(S.D.region), true, false, true); }
+  }
+  function centroDe(ns) { let x = 0, y = 0, z = 0; for (const n of ns) { const v = vec(n.lon, n.lat); x += v[0]; y += v[1]; z += v[2]; } const m = Math.hypot(x, y, z) || 1; return { lat: Math.asin(y / m) / RAD, lon: Math.atan2(x / m, z / m) / RAD }; }
   // ---------- the sequence ----------
   function hud() {
     let h = $('viaje'); if (h) return h;
@@ -154,7 +273,7 @@
     h.querySelector('.salir').addEventListener('click', termina);
     h.querySelector('.volver').addEventListener('click', termina);
     h.querySelector('.otra').addEventListener('click', () => { const r = V && V.rutas; termina(); if (r) empieza(r); });
-    h.querySelector('.informe').addEventListener('click', () => informe(V && V.rutas));
+    h.querySelector('.informe').addEventListener('click', () => informe(V && V.rutas, { pdf: true }));
     h.querySelector('.video').addEventListener('click', descargaVideo);
     return h;
   }
@@ -164,7 +283,9 @@
     if (window.OrbitaRed && !window.OrbitaRed.lista && !empieza.intentado) { empieza.intentado = true; window.OrbitaRed.prepara().then(() => empieza(rutas)); return; }
     const h = hud(); h.hidden = false; h.classList.remove('final'); h.querySelector('.fin').hidden = true; h.querySelector('.centro').style.opacity = '0';
     document.body.classList.add('viaje');
-    V = { rutas: r, paradas: paradas(r), porKm: r.nubes.slice().sort((a, b) => a.km - b.km), hechas: [], actual: null, fase: 'intro', progreso: 0, t0: performance.now(), salta: false, cam: null };
+    const porCont = new Map(); for (const n of r.nubes) { const k = continente(n.region); if (!porCont.has(k)) porCont.set(k, []); porCont.get(k).push(n); }
+    const grupos = [...porCont.entries()].map(([k, ns]) => { ns.sort((a, b) => a.ms - b.ms); const c = centroDe(ns); return { k, nubes: ns, lon: c.lon, lat: c.lat, km: Math.min(...ns.map((n) => n.km)), abre: Math.max(...ns.map((n) => angulo(c, n))) }; }).sort((a, b) => a.km - b.km);
+    V = { rutas: r, porKm: r.nubes.slice().sort((a, b) => a.km - b.km), grupos, grupo: null, sat: ejemploSatelite(r), fase: 'intro', t0: performance.now(), salta: false, cam: null };
     if (window.OrbitaCapas) window.OrbitaCapas.soloTu(true, pintaViaje);
     const hora = new Date(r.fin || r.cuando || Date.now()).toLocaleTimeString(loc(), { hour: '2-digit', minute: '2-digit' });
     h.querySelector('.sub').textContent = T('Medido ahora desde') + ' ' + r.origen.nombre + ' · ' + hora + (r.borde ? ' · ' + T('borde') + ': ' + r.borde.nombre : '') + ' · ' + (window.OrbitaRed && window.OrbitaRed.lista ? T('conexiones medidas, trayectos por los cables del mapa') : T('conexiones medidas, trayectorias ilustrativas'));
@@ -195,16 +316,19 @@
     const h = hud(), r = V.rutas, L = r.origen; mueveCamara(now);
     const desde = now - V.t0, dt = Math.min(100, now - (V.prev || now)); V.prev = now;
     if (V.fase === 'intro') {
-      if (desde > 2600 || V.salta) { V.salta = false; V.fase = 'constelacion'; V.tCons = now; V.progreso = 0; camara(L.lon + 40, L.lat * 0.6, 1.25, 9000); h.querySelector('.destino').textContent = T('Hemos medido tu conexión con') + ' ' + r.nubes.length + ' ' + T('regiones del mundo'); h.querySelector('.cifras').style.visibility = 'hidden'; h.querySelector('.luz').style.opacity = '0'; h.querySelector('.centro').style.opacity = '1'; }
-    } else if (V.fase === 'constelacion') {
-      V.progreso = Math.min(1, (now - V.tCons) / 7500);
-      if (V.progreso >= 1 && now - V.tCons > 8800 || V.salta) { V.salta = false; h.querySelector('.cifras').style.visibility = ''; siguiente(now); }
-    } else if (V.fase === 'vuelo') {
-      const s = V.actual, dur = Math.max(2200, Math.min(4200, s.ms * 18)); // slow motion: the far ones take longer, never past four seconds
-      const f = Math.max(0, Math.min(1, (now - V.tVuelo) / dur)); V.progreso = f;
-      h.querySelector('.km').textContent = num(Math.round(s.km * f)); h.querySelector('.ms').textContent = num(Math.round(s.ms * f));
-      if (f >= 1 && !V.llego) { V.llego = now; h.querySelector('.luz').textContent = T('La luz en línea recta tardaría') + ' ' + num(Math.round(s.minimo)) + ' ms · ' + T('tus datos han tardado') + ' +' + num(Math.round(s.ms - s.minimo)) + ' ms ' + T('sobre ese mínimo') + ' (×' + num(s.ms / s.minimo, 1) + ')'; h.querySelector('.luz').style.opacity = '1'; }
-      if ((V.llego && now - V.llego > 1500) || V.salta) { V.salta = false; V.hechas.push(s); V.actual = null; siguiente(now); }
+      if (desde > 2600 || V.salta) { V.salta = false; despliega(now); }
+    } else if (V.fase === 'despliegue') {
+      const t = now - V.tDesp, ultimo = Math.max(...V.porKm.map(durDe)), llegados = V.porKm.filter((n) => t >= durDe(n));
+      h.querySelector('.ms').textContent = num(Math.min(Math.max(...r.nubes.map((n) => n.ms)), Math.round(t / LENTO)));
+      h.querySelector('.km').textContent = num(llegados.length ? Math.round(Math.max(...llegados.map((n) => n.km))) : 0);
+      h.querySelector('.luz').textContent = num(llegados.length) + ' / ' + num(r.nubes.length) + ' ' + T('destinos medidos');
+      if (t > ultimo + 1600 || V.salta) { V.salta = false; siguienteGrupo(now); }
+    } else if (V.fase === 'repaso') {
+      if (now - V.tGrupo > 4700 || V.salta) { V.salta = false; siguienteGrupo(now); }
+    } else if (V.fase === 'satelite') {
+      const t = now - V.tSat, f = Math.max(0, Math.min(1, (t - SAT_T0) / (SAT_FIN - SAT_T0)));
+      h.querySelector('.km').textContent = num(Math.round(71572 * f)); h.querySelector('.ms').textContent = num(Math.round(477 * f));
+      if (t > SAT_FIN + 2700 || V.salta) { V.salta = false; final(now); }
     } else if (V.fase === 'final') {
       if (!V.tFin) V.tFin = now;
       if (!cam) { const p = P(), v = p && p.vista; if (v) p.ir(v.lon + 0.0025 * dt, L.lat, 1); } // the planet keeps turning, slowly, with the whole web on it
@@ -212,27 +336,49 @@
     }
     requestAnimationFrame(paso);
   }
-  function siguiente(now) {
+  // 1. every path at once, slowly, from your city
+  function despliega(now) {
     const h = hud(), r = V.rutas, L = r.origen;
-    const s = V.paradas.shift();
-    if (!s) { // the end: the whole planet, every path, the numbers
-      V.fase = 'final'; V.actual = null; h.classList.add('final');
-      camara(L.lon, L.lat, 1, 1400);
-      h.querySelector('.centro').style.opacity = '0';
-      const ms = r.nubes.map((n) => n.ms), lejos = r.nubes[r.nubes.length - 1];
-      h.querySelector('.fin .t').textContent = T('Así viajan tus datos');
-      const parpadeo = r.nubes.filter((n) => n.ms <= 150).length;
-      h.querySelector('.fin .d').textContent = num(r.nubes.length) + ' ' + T('destinos medidos') + ' · ' + T('de') + ' ' + num(Math.min(...ms)) + ' ' + T('a') + ' ' + num(Math.max(...ms)) + ' ms · ' + T('el más lejano') + ': ' + lejos.nombre + ', ' + num(Math.round(lejos.km)) + ' km' + (parpadeo ? ' · ' + T('en lo que dura un parpadeo (unos 150 ms) tus datos van y vuelven de') + ' ' + num(parpadeo) + ' ' + T('de ellos') : '');
-      h.querySelector('.fin').hidden = false;
-      return;
-    }
-    V.fase = 'vuelo'; V.actual = s; V.tVuelo = now + 900; V.llego = 0; V.progreso = 0;
-    // frame the arc: its midpoint in the centre, the zoom from the angle it spans
-    const m = puntoMedio(L, s, 0.5), ang = angulo(L, s), z = Math.max(1.15, Math.min(2.4, 1.9 / Math.max(0.35, ang)));
-    camara(m.lon, m.lat, z, 1100);
-    h.querySelector('.destino').textContent = continente(s.region).toUpperCase() + ' · ' + s.nombre + (s.cc ? ' (' + s.cc + ')' : '');
-    h.querySelector('.km').textContent = '0'; h.querySelector('.ms').textContent = '0'; h.querySelector('.luz').style.opacity = '0';
-    h.querySelector('.centro').style.opacity = '1';
+    V.fase = 'despliegue'; V.tDesp = now + 400;
+    camara(L.lon, L.lat * 0.6, 1.05, 1600);
+    h.querySelector('.destino').textContent = T('Hemos medido tu conexión con') + ' ' + r.nubes.length + ' ' + T('regiones del mundo');
+    h.querySelector('.cifras').style.visibility = ''; h.querySelector('.km').textContent = '0'; h.querySelector('.ms').textContent = '0';
+    h.querySelector('.luz').style.opacity = '1'; h.querySelector('.centro').style.opacity = '1';
+  }
+  // 2. the review: the camera visits each continent, nearest first, with its destinations named
+  function siguienteGrupo(now) {
+    const h = hud(), g = V.grupos.shift();
+    if (!g) { if (V.sat) satelite(now); else final(now); return; }
+    V.fase = 'repaso'; V.grupo = g; V.tGrupo = now;
+    const z = Math.max(1.1, Math.min(2.6, 1.6 / Math.max(0.25, g.abre * 2)));
+    camara(g.lon, g.lat, z, 1300);
+    const m = g.nubes[0];
+    h.querySelector('.destino').textContent = g.k.toUpperCase() + ' · ' + (g.nubes.length > 1 ? num(g.nubes.length) + ' ' + T('destinos medidos') : corto(m));
+    h.querySelector('.km').textContent = num(Math.round(m.km)); h.querySelector('.ms').textContent = num(m.ms);
+    h.querySelector('.luz').textContent = corto(m) + ' · ' + T('La luz en línea recta tardaría') + ' ' + num(Math.round(m.minimo)) + ' ms · ' + T('tus datos han tardado') + ' ' + num(m.ms) + ' ms';
+    h.querySelector('.luz').style.opacity = '1'; h.querySelector('.centro').style.opacity = '1';
+  }
+  // 3. an example, marked as such: how a piece of data travels through a geostationary satellite
+  function satelite(now) {
+    const h = hud(), S = V.sat, L = V.rutas.origen;
+    V.fase = 'satelite'; V.grupo = null; V.tSat = now;
+    camara(S.C.lon, S.C.lat, 1, 1700);
+    h.querySelector('.destino').textContent = T('Ejemplo · así viaja un dato por satélite');
+    h.querySelector('.km').textContent = '0'; h.querySelector('.ms').textContent = '0';
+    h.querySelector('.luz').textContent = T('Sube 35.786 km hasta un satélite geoestacionario y baja en otro continente: como mínimo 71.572 km y casi medio segundo de ida y vuelta.');
+    h.querySelector('.luz').style.opacity = '1'; h.querySelector('.centro').style.opacity = '1';
+  }
+  // 4. the end: the whole planet, every path, the numbers
+  function final(now) {
+    const h = hud(), r = V.rutas, L = r.origen;
+    V.fase = 'final'; V.grupo = null; h.classList.add('final');
+    camara(L.lon, L.lat, 1, 1400);
+    h.querySelector('.centro').style.opacity = '0';
+    const ms = r.nubes.map((n) => n.ms), lejos = r.nubes.slice().sort((a, b) => b.km - a.km)[0];
+    h.querySelector('.fin .t').textContent = T('Así viajan tus datos');
+    const parpadeo = r.nubes.filter((n) => n.ms <= 150).length;
+    h.querySelector('.fin .d').textContent = num(r.nubes.length) + ' ' + T('destinos medidos') + ' · ' + T('de') + ' ' + num(Math.min(...ms)) + ' ' + T('a') + ' ' + num(Math.max(...ms)) + ' ms · ' + T('el más lejano') + ': ' + lejos.nombre + ', ' + num(Math.round(lejos.km)) + ' km' + (parpadeo ? ' · ' + T('en lo que dura un parpadeo (unos 150 ms) tus datos van y vuelven de') + ' ' + num(parpadeo) + ' ' + T('de ellos') : '');
+    h.querySelector('.fin').hidden = false;
   }
 
   // ---------- the report ----------
@@ -346,7 +492,7 @@
     });
     return c;
   }
-  async function informe(rutas) {
+  async function informe(rutas, opciones) {
     const r = rutas || (C() && C().datos.rutas); if (!r || !r.nubes || !r.nubes.length || !r.origen) return;
     if (window.OrbitaRed && !window.OrbitaRed.lista) await window.OrbitaRed.prepara();
     const lineas = await fronteras(), paradasV = paradas(r), fuera = C() && C().datos.fuera;
@@ -356,8 +502,10 @@
     const orden = r.nubes.slice().sort((x, y) => x.ms - y.ms), mejor = orden[0], peor = orden[orden.length - 1];
     const porCont = new Map(); for (const n of orden) { const k = continente(n.region); if (!porCont.has(k)) porCont.set(k, n); }
     const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
-    const cab = el('div', 'cab'); // not a <header>: the page's own header rule would fix it to the top cab.append(el('p', 'k', 'GUARDIANA · ÓRBITA'), el('h1', 't', T('El viaje de tus datos')), el('p', 's', r.origen.nombre + (r.origen.aprox ? ' (' + T('aproximada') + ')' : '') + (fuera && !fuera.error && fuera.operador ? ' · ' + fuera.operador : '') + ' · ' + cuando.toLocaleDateString(loc(), { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + cuando.toLocaleTimeString(loc(), { hour: '2-digit', minute: '2-digit' }) + (r.borde ? ' · ' + T('borde de internet más cercano') + ': ' + r.borde.nombre + (r.borde.ms != null ? ' (' + r.borde.ms + ' ms)' : '') : '')));
-    const acc = el('div', 'acciones'); const bPdf = el('button', '', T('Guardar PDF')); bPdf.type = 'button'; const bX = el('button', '', T('Cerrar')); bX.type = 'button'; acc.append(bPdf, bX, el('small', '', T('Se abre el cuadro de impresión: elige «Guardar como PDF».'))); cab.append(acc);
+    // not a <header>: the page's own header rule would fix it to the top (23 Oct 2026: this comment had swallowed the
+    // line that fills the block, so the report came out without its title, place and date)
+    const cab = el('div', 'cab'), titulo = el('div', 'titulo'); cab.append(titulo); titulo.append(el('p', 'k', 'GUARDIANA · ÓRBITA'), el('h1', 't', T('El viaje de tus datos')), el('p', 's',r.origen.nombre + (r.origen.aprox ? ' (' + T('aproximada') + ')' : '') + (fuera && !fuera.error && fuera.operador ? ' · ' + fuera.operador : '') + ' · ' + cuando.toLocaleDateString(loc(), { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + cuando.toLocaleTimeString(loc(), { hour: '2-digit', minute: '2-digit' }) + (r.borde ? ' · ' + T('borde de internet más cercano') + ': ' + r.borde.nombre + (r.borde.ms != null ? ' (' + r.borde.ms + ' ms)' : '') : '')));
+    const acc = el('div', 'acciones'); const bPdf = el('button', '', T('Guardar PDF')); bPdf.type = 'button'; const bX = el('button', '', T('Cerrar')); bX.type = 'button'; acc.append(bPdf, bX, el('small', '', T('El PDF se descarga en tu equipo; no se envía a ningún sitio.'))); cab.append(acc);
     a.append(cab);
     const f1 = el('figure'); f1.append(figuraGlobo(r, lineas, paradasV)); f1.append(el('figcaption', '', T('Tu planeta: cada línea es un camino medido desde tu equipo; las brillantes, el más rápido de cada continente.') + ' ' + (window.OrbitaRed && window.OrbitaRed.lista ? T('Cada trayecto va por los cables submarinos y la fibra terrestre del mapa, por el camino más corto entre ellos. El cable exacto que usaron tus datos no se conoce desde fuera de la red.') : T('Conexiones medidas, trayectorias ilustrativas: el arco une origen y destino, no muestra por dónde fueron los paquetes.')))); a.append(f1);
     const cifras = el('section', 'cifras');
@@ -383,9 +531,67 @@
     document.body.append(a); document.body.classList.add('con-informe');
     const cierra = () => { a.remove(); document.body.classList.remove('con-informe'); };
     bX.addEventListener('click', cierra);
-    bPdf.addEventListener('click', () => { document.body.classList.add('imprime-informe'); setTimeout(() => { try { window.print(); } finally { setTimeout(() => document.body.classList.remove('imprime-informe'), 500); } }, 50); });
+    bPdf.addEventListener('click', () => pdfInforme(a, bPdf));
+    if (opciones && opciones.pdf) setTimeout(() => pdfInforme(a, bPdf), 120);
     document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { cierra(); document.removeEventListener('keydown', esc); } });
     a.scrollTop = 0;
+  }
+  // ---------- the PDF (23 Oct 2026, 09:24, owner: «cuando le doy a guardar el viaje en PDF, la pantalla se queda
+  // bloqueada y no hace nada»): the print dialog does not open in every browser (in some embedded ones it never shows and
+  // the page waits for it). The report is photographed here (html2canvas, MIT, served from this site), cut into A4 pages
+  // at the edges of its blocks, and written as a PDF of images by the small writer below; nothing leaves the computer.
+  const BASE_V = (() => { try { const u = document.currentScript && document.currentScript.src; return u ? u.replace(/[^\/]*$/, '') : 'static/'; } catch (_) { return 'static/'; } })();
+  function cargaScript(src) { return new Promise((ok, mal) => { const e = document.createElement('script'); e.src = src; e.onload = ok; e.onerror = mal; document.head.append(e); }); }
+  const jpeg = (c) => new Promise((ok) => c.toBlob((b) => b.arrayBuffer().then((x) => ok(new Uint8Array(x))), 'image/jpeg', 0.9));
+  function pdfDeImagenes(paginas) {
+    const enc = new TextEncoder(), partes = [], ofs = []; let pos = 0;
+    const pon = (x) => { const b = typeof x === 'string' ? enc.encode(x) : x; partes.push(b); pos += b.length; };
+    const obj = (id, cuerpo) => { ofs[id] = pos; pon(id + ' 0 obj\n'); cuerpo(); pon('\nendobj\n'); };
+    const W = 595.28, H = 841.89, n = paginas.length;
+    pon('%PDF-1.4\n%\u00e2\u00e3\u00cf\u00d3\n');
+    obj(1, () => pon('<< /Type /Catalog /Pages 2 0 R >>'));
+    obj(2, () => pon('<< /Type /Pages /Kids [' + paginas.map((_, i) => (3 + 3 * i) + ' 0 R').join(' ') + '] /Count ' + n + ' >>'));
+    paginas.forEach((pg, i) => {
+      const Pg = 3 + 3 * i, Cn = 4 + 3 * i, Im = 5 + 3 * i, cs = 'q ' + W + ' 0 0 ' + H + ' 0 0 cm /Im0 Do Q';
+      obj(Pg, () => pon('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + W + ' ' + H + '] /Resources << /XObject << /Im0 ' + Im + ' 0 R >> >> /Contents ' + Cn + ' 0 R >>'));
+      obj(Cn, () => { pon('<< /Length ' + cs.length + ' >>\nstream\n'); pon(cs); pon('\nendstream'); });
+      obj(Im, () => { pon('<< /Type /XObject /Subtype /Image /Width ' + pg.w + ' /Height ' + pg.h + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + pg.bytes.length + ' >>\nstream\n'); pon(pg.bytes); pon('\nendstream'); });
+    });
+    const total = 3 + 3 * n, xref = pos;
+    pon('xref\n0 ' + total + '\n0000000000 65535 f \n');
+    for (let i = 1; i < total; i++) pon(String(ofs[i]).padStart(10, '0') + ' 00000 n \n');
+    pon('trailer\n<< /Size ' + total + ' /Root 1 0 R >>\nstartxref\n' + xref + '\n%%EOF\n');
+    return new Blob(partes, { type: 'application/pdf' });
+  }
+  async function pdfInforme(a, boton) {
+    if (!a || !a.isConnected || pdfInforme.ocupado) return; pdfInforme.ocupado = true;
+    const antes = boton.textContent; boton.disabled = true; boton.textContent = T('Preparando el PDF…');
+    try {
+      if (!window.html2canvas) await cargaScript(BASE_V + 'vendor/html2canvas.min.js');
+      const ar = a.getBoundingClientRect(), ancho = a.clientWidth, alto = a.scrollHeight, k = Math.min(2, 2400 / Math.max(1, ancho));
+      // where the pages may break: the top of every block, so no figure, paragraph or row is cut in two
+      const cortes = [...a.querySelectorAll('.cab, figure, .cifras, .dos, h2, p, table, tr, .pie')].map((e) => Math.round((e.getBoundingClientRect().top - ar.top + a.scrollTop) * k)).filter((y) => y > 0).sort((x, y) => x - y);
+      const lienzo = await window.html2canvas(a, {
+        backgroundColor: '#06080C', scale: k, width: ancho, height: alto, windowWidth: innerWidth, windowHeight: alto, logging: false, useCORS: true,
+        onclone: (doc) => { const x = doc.getElementById('informe'); if (!x) return; Object.assign(x.style, { position: 'absolute', inset: 'auto', left: '0', top: '0', boxSizing: 'border-box', width: ancho + 'px', height: 'auto', overflow: 'visible' }); /* border-box: with its side padding inside the width, as on screen (without it the right edge was cut off) */ const ac = x.querySelector('.acciones'); if (ac) ac.style.visibility = 'hidden'; }
+      });
+      const PW = lienzo.width, PH = Math.round(PW * 297 / 210), paginas = [];
+      for (let y = 0; y < lienzo.height - 4;) {
+        let fin = Math.min(lienzo.height, y + PH);
+        if (fin < lienzo.height) { const c = cortes.filter((v) => v > y + PH * 0.45 && v <= y + PH); if (c.length) fin = c[c.length - 1]; }
+        const pg = document.createElement('canvas'); pg.width = PW; pg.height = PH; const g = pg.getContext('2d');
+        g.fillStyle = '#06080C'; g.fillRect(0, 0, PW, PH); g.drawImage(lienzo, 0, y, PW, fin - y, 0, 0, PW, fin - y);
+        paginas.push({ w: PW, h: PH, bytes: await jpeg(pg) });
+        y = fin;
+      }
+      const blob = pdfDeImagenes(paginas), enl = document.createElement('a');
+      enl.href = URL.createObjectURL(blob); enl.download = 'GUARDIANA-' + T('El viaje de tus datos').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w]+/g, '-').replace(/^-|-$/g, '') + '-' + new Date().toISOString().slice(0, 10) + '.pdf';
+      document.body.append(enl); enl.click(); setTimeout(() => { URL.revokeObjectURL(enl.href); enl.remove(); }, 60000);
+      boton.textContent = antes;
+    } catch (e) {
+      boton.textContent = T('No se pudo crear el PDF');
+      setTimeout(() => { boton.textContent = antes; }, 3000);
+    } finally { boton.disabled = false; pdfInforme.ocupado = false; }
   }
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && V) termina(); });
   window.OrbitaViaje = { empieza, informe, get activo() { return !!V; } };

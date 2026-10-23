@@ -343,3 +343,30 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   para las siguientes fichas de la visita (`posUsuario`). En el robot sin GPU los clics sobre el planeta no abren fichas (fotogramas lentos):
   para probar, abrir la ficha inyectando una llamada a `abreModelo`.
 - Versión `v=20261024n` (la siguiente, `o`). Vista previa del amigo: **versión 17**.
+
+## 13. Mañana del 23 Oct 2026, 09:00–10:15 (Opus 5.5): nombres, «¿Sabías que…?», viaje nuevo y PDF directo
+- **Nombres de las cuatro tarjetas** (revisados con ChatGPT y Grok): «Cables submarinos» (Autopistas entre continentes · Grandes rutas · Cables
+  regionales · Capacidad no publicada · Trazado aproximado · Cables en proyecto), «Fibra por tierra» (Grandes troncales · Rutas largas · Rutas
+  entre ciudades · Enlaces cortos · En construcción), «Puntos de red» (Grandes operadores · Otros centros de datos · Puntos de intercambio · Bases y
+  antenas), «Satélites» (Órbita geoestacionaria…). Cada luz con su explicación al pasar el ratón.
+- **«¿Sabías que…?»**: flechas ‹ ›, los puntos muestran su dato al pasar por encima, y en cuanto la persona toca la tarjeta deja de pasar sola
+  para siempre (clase `fijo`). **Clic en el planeta** pliega las tarjetas de capas sin cambiar nada; el botón de plegar es «Minimizar» con su icono.
+- **Fibra de Brasil y México** por acuerdo de voces: `fuentes/fibra-agencia.json` con **30 tramos, 35.526 km**. **Capacidades**: tanda 7 de Grok
+  guardada; la de ChatGPT de esa tanda salió vacía (se le volvió a pedir a las 10:05); siguen **127 cables** con capacidad.
+- **Viaje en 3D rehecho** (dueño, 09:24 y 09:26): sin el primer barrido rápido. 1) Todas las líneas salen a la vez y despacio (cada pulso tarda su
+  ida y vuelta real × 22, entre 1,8 y 7,5 s); 2) repaso por continentes, del más cercano al más lejano, con sus destinos nombrados; 3) **ejemplo de
+  satélite**: el dato sube a un satélite geoestacionario y baja **en otro continente**. El continente propio sale del país (`P().pais`, tabla
+  `CONT_PAIS` en viaje.js; antes se tomaba del destino medido más cercano y Colombia salía como Norteamérica → bajaba en São Paulo). El destino es
+  uno medido de otro continente que un mismo satélite ve junto a la persona (≤ 66° del punto bajo el satélite: más de 15° sobre el horizonte); el
+  satélite se coloca sobre el ecuador donde la peor de las dos elevaciones es la más alta; la cámara se elige por búsqueda (`encuadre`) para que el
+  satélite quede fuera del borde del planeta, nunca entre los contadores. Se dibuja el anillo de la órbita geoestacionaria (mitad cercana más
+  viva), «Tú · <lugar>» en el origen y «<destino> · <continente>» al llegar. Satélite a 1,7 radios (real: 6,6) → rótulo «no a escala».
+  Desde Colombia: Ciudad del Cabo (África), satélite sobre el Atlántico; desde España: Ciudad del Cabo; desde México: São Paulo.
+- **PDF directo** (dueño: «la pantalla se queda bloqueada»): ya no se usa el diálogo de imprimir. El informe se fotografía con html2canvas 1.4.1
+  (MIT, servido desde `static/vendor/`, licencia al lado, atribución en terminos.html), se corta en páginas A4 por los bordes de los bloques y se
+  escribe como PDF de imágenes con un escritor propio (`pdfDeImagenes`). Probado: descarga real, PDF válido de 3 páginas A4, ~1,1 MB.
+  Arreglado de paso: un comentario se había tragado la línea de la cabecera del informe (salía sin título, lugar ni fecha) y el clon que se
+  fotografía no tenía `box-sizing: border-box` (se cortaba el borde derecho).
+- **Traducciones**: los 5 textos nuevos del viaje y del PDF, «borde de internet más cercano» (también en inglés y portugués; salía en español) y
+  las letras de la brújula E/S/O (en alemán la «O» de Oeste se leía como Ost) en los 39 idiomas; en suajili la brújula pasa a N/E/S/W.
+- Versión `v=20261024t` (la siguiente, `u`).

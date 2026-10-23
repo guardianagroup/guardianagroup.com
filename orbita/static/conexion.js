@@ -214,7 +214,7 @@
     const v = document.createElement('button'); v.type = 'button'; v.className = 'medir principal'; v.disabled = midiendo;
     v.textContent = midiendo ? T('Midiendo…') + ' ' + rutas.hechas + ' / ' + rutas.total : T('Ver el viaje en 3D');
     v.addEventListener('click', vuela); fila.append(v);
-    if (hecho) { const i = document.createElement('button'); i.type = 'button'; i.className = 'medir secundario'; i.textContent = T('Guardar el viaje (PDF)'); i.addEventListener('click', () => window.OrbitaViaje.informe(rutas)); fila.append(i); }
+    if (hecho) { const i = document.createElement('button'); i.type = 'button'; i.className = 'medir secundario'; i.textContent = T('Guardar el viaje (PDF)'); i.addEventListener('click', () => window.OrbitaViaje.informe(rutas, { pdf: true })); fila.append(i); }
     s.append(fila);
     return s;
   }
