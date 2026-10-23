@@ -260,6 +260,7 @@
   const vista = { lon: (centros[CASA] ? centros[CASA].lon : -40) + 18, lat: 14, vlon: 0, vlat: 0 };
   let meta = null;           // a country the person asked to see (a row of «En directo»)
   let arrastre = null, quietoHasta = 0, manual = false; // manual: once the visitor has moved the planet, it never turns by itself again (owner, 22 Oct 2026, 17:55)
+  let foco = null;           // 22 Oct 2026, 21:29 (owner): a click on the planet marks the spot; every zoom in after it glides there
   const VEL = QUIETO ? 1.2 : 2.6; // degrees per second
   // view → world: Ry(lon) · Rx(−lat)
   const aMundo = (v) => {
@@ -290,13 +291,20 @@
     get centros() { return centros; }, // country centroids for the country labels and cards (22 Oct 2026)
     get pais() { return (LUGAR && LUGAR.pais) || CASA || null; },
     // 22 Oct 2026: used by the automated checks (Playwright) to look at a place at a given zoom.
-    ir(lon, lat, z) { vista.lon = lon; vista.lat = Math.max(-89.5, Math.min(89.5, lat)); vista.vlon = vista.vlat = 0; meta = null; ZOOM.zt = Math.max(1, Math.min(ZOOM.MAX, z || 1)); quietoHasta = performance.now() + 60000; manual = true; pintaZoom(); },
+    ir(lon, lat, z) { vista.lon = lon; vista.lat = Math.max(-89.5, Math.min(89.5, lat)); vista.vlon = vista.vlat = 0; meta = null; foco = null; ZOOM.zt = Math.max(1, Math.min(ZOOM.MAX, z || 1)); quietoHasta = performance.now() + 60000; manual = true; pintaZoom(); },
     get lugar() { try { if (LUGAR) return { lat: LUGAR.lat, lon: LUGAR.lon, nombre: LUGAR.ciudad, aprox: false }; const p = centros[CASA]; return p ? { lat: p.lat, lon: p.lon, nombre: nombrePais(CASA), aprox: true } : null; } catch (_) { return null; } },
+  };
+  // The place on the globe under a screen point (null off the globe): the inverse of `pantalla`, via the view → world rotation.
+  const geoDe = (x, y) => {
+    const px = (x - CX) / R, py = (CY - y) / R, r2 = px * px + py * py;
+    if (!(r2 <= 1)) return null;
+    const w = aMundo([px, py, Math.sqrt(1 - r2)]);
+    return { lon: Math.atan2(w[0], w[2]) / RAD, lat: Math.asin(Math.max(-1, Math.min(1, w[1]))) / RAD };
   };
   cvT.addEventListener('pointerdown', (e) => {
     const dx = e.clientX - CX, dy = e.clientY - CY;
     if (dx * dx + dy * dy > R * R * 1.15) return;
-    arrastre = { x: e.clientX, y: e.clientY, t: performance.now() };
+    arrastre = { x: e.clientX, y: e.clientY, t: performance.now(), x0: e.clientX, y0: e.clientY, movido: false };
     meta = null; cvT.classList.add('arrastra'); cvT.setPointerCapture(e.pointerId);
   });
   cvT.addEventListener('pointermove', (e) => {
@@ -306,9 +314,18 @@
     const k = 57 / R;
     vista.lon -= dx * k; vista.lat = Math.max(-latMax(), Math.min(latMax(), vista.lat + dy * k));
     vista.vlon = -dx * k / dt * 1000; vista.vlat = dy * k / dt * 1000;
-    arrastre = { x: e.clientX, y: e.clientY, t: now };
+    // a real drag (not the tremor of a click) is the person choosing another view: the clicked spot no longer rules the zoom
+    const movido = arrastre.movido || Math.hypot(e.clientX - arrastre.x0, e.clientY - arrastre.y0) > 6;
+    if (movido && !arrastre.movido) foco = null;
+    arrastre = { x: e.clientX, y: e.clientY, t: now, x0: arrastre.x0, y0: arrastre.y0, movido };
   });
-  const suelta = () => { if (!arrastre) return; arrastre = null; cvT.classList.remove('arrastra'); quietoHasta = performance.now() + 2500; manual = true; };
+  const suelta = (e) => {
+    if (!arrastre) return;
+    // 22 Oct 2026, 21:29 (owner): «cuando una persona hace clic en el planeta y después hace zoom, tiene que ir sobre la zona donde ha hecho clic»
+    const toque = !arrastre.movido && e && e.type === 'pointerup' && !pellizco;
+    arrastre = null; cvT.classList.remove('arrastra'); quietoHasta = performance.now() + 2500; manual = true;
+    if (toque) foco = geoDe(e.clientX, e.clientY);
+  };
   cvT.addEventListener('pointerup', suelta); cvT.addEventListener('pointercancel', suelta);
 
   // ---------- Zoom: wheel, pinch, double click, the +/− rail on the right; Esc returns ----------
@@ -318,7 +335,11 @@
   const latMax = () => ZOOM.z <= 1.5 ? 75 : Math.min(89.5, 75 + 14.5 * Math.min(1, Math.log(ZOOM.z / 1.5) / Math.log(4))); // ±75° with the whole planet (both poles in view), to the poles when zoomed
   function acerca(zt, x, y) {
     zt = Math.max(1, Math.min(ZOOM.MAX, zt));
-    // 20 Oct 2026 (owner): the zoom stays on the same point; the planet does not turn when you zoom.
+    // 20 Oct 2026 (owner): the zoom stays on the same point; the planet does not turn when you zoom…
+    // 22 Oct 2026, 21:29 (owner): …unless the person clicked on the planet first: then every zoom in glides to that spot
+    // (wheel, pinch, the + button, the keyboard). A drag, or going back to the whole planet, forgets the spot.
+    if (foco && zt > ZOOM.zt + 1e-6) { const lm = latMax(); meta = { lon: foco.lon, lat: Math.max(-lm, Math.min(lm, foco.lat)) }; }
+    if (zt <= 1 + 1e-3) foco = null;
     ZOOM.zt = zt;
     quietoHasta = performance.now() + 4000; manual = true;
     pintaZoom();
@@ -358,6 +379,7 @@
   }, { passive: false });
   cvT.addEventListener('dblclick', (e) => {
     if (!libreZoom()) return;
+    foco = geoDe(e.clientX, e.clientY) || foco; // a double click is a click too: the zoom goes where it landed
     if (ZOOM.zt >= ZOOM.MAX - 1e-3) acerca(1); else { const pasos = [1.5, 4, 8, 20, 80, 400, 2000, 10000, ZOOM.MAX]; acerca(pasos.find((p) => ZOOM.zt < p - 1e-3) || ZOOM.MAX, e.clientX, e.clientY); }
   });
   const dedos = new Map(); let pellizco = null;
