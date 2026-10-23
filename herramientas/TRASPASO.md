@@ -352,7 +352,8 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
 - **«¿Sabías que…?»**: flechas ‹ ›, los puntos muestran su dato al pasar por encima, y en cuanto la persona toca la tarjeta deja de pasar sola
   para siempre (clase `fijo`). **Clic en el planeta** pliega las tarjetas de capas sin cambiar nada; el botón de plegar es «Minimizar» con su icono.
 - **Fibra de Brasil y México** por acuerdo de voces: `fuentes/fibra-agencia.json` con **30 tramos, 35.526 km**. **Capacidades**: tanda 7 de Grok
-  guardada; la de ChatGPT de esa tanda salió vacía (se le volvió a pedir a las 10:05); siguen **127 cables** con capacidad.
+  guardada; la de ChatGPT salió vacía la primera vez y a la segunda dio 15 (`chatgpt-capacidad-5.json`): **131 cables** con capacidad
+  (nuevos por acuerdo: H2H Express 307, ALVAL/ORVAL 40, FARICE-1 10, Tata TGN-Western Europe 3,84 Tbit/s).
 - **Viaje en 3D rehecho** (dueño, 09:24 y 09:26): sin el primer barrido rápido. 1) Todas las líneas salen a la vez y despacio (cada pulso tarda su
   ida y vuelta real × 22, entre 1,8 y 7,5 s); 2) repaso por continentes, del más cercano al más lejano, con sus destinos nombrados; 3) **ejemplo de
   satélite**: el dato sube a un satélite geoestacionario y baja **en otro continente**. El continente propio sale del país (`P().pais`, tabla
@@ -369,4 +370,5 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   fotografía no tenía `box-sizing: border-box` (se cortaba el borde derecho).
 - **Traducciones**: los 5 textos nuevos del viaje y del PDF, «borde de internet más cercano» (también en inglés y portugués; salía en español) y
   las letras de la brújula E/S/O (en alemán la «O» de Oeste se leía como Ost) en los 39 idiomas; en suajili la brújula pasa a N/E/S/W.
-- Versión `v=20261024t` (la siguiente, `u`).
+- Versión `v=20261024t`; luego `u` (10:20): repaso con zoom máximo ×1,8 (un destino solo llevaba ×2,6 y el planeta llenaba la pantalla),
+  banda oscura suave bajo los contadores (también en el vídeo) y el rótulo del satélite encima de él cuando no cabe a la derecha. La siguiente, `v`.
