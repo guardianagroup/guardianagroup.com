@@ -437,5 +437,8 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
 - **Rankings del «¿Sabías qué?»**: un primer puesto compartido se dice compartido («BT y Arelion operan más cables submarinos que ninguna otra
   empresa del mapa: 11 cada una»), no como un ganador.
 - **Starlink a 0**: la descarga de CelesTrak de las 22:55Z del 22 oct llegó vacía para Starlink y el mapa dijo «0 satélites Starlink» hasta la
-  siguiente. La tarjeta ya no sale con un grupo vacío.
+  siguiente. La tarjeta ya no sale con un grupo vacío, y `herramientas/datos_orbita.py` conserva las filas de la descarga anterior de un grupo
+  que llega vacío (con su propia fecha, `grupos[].descargado`, hasta 3 días; después lo deja fuera). Si no llega nada nuevo, no escribe.
+  La nota de la capa de satélites fecha con el grupo más antiguo. Probado con descargas simuladas (todo vacío, solo Starlink vacío, Starlink
+  de hace 5 días).
 - terminos.html: créditos de los tipos de letra de Órbita (OFL 1.1).

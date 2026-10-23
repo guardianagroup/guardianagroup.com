@@ -904,7 +904,9 @@
       if (S && S.N) {
         const vistaTxt = estado.vista === 'todos' && estado.orb.baja && estado.orb.media && estado.orb.geo ? num(S.N) + ' ' + T('satélites de datos')
           : T('Mostrando') + ' ' + num(S.nSel || 0) + ' ' + T('de') + ' ' + num(S.N) + ' ' + T('satélites de datos') + (estado.vista === 'equilibrada' && estado.orb.baja && (S.paso || 10) > 1 ? ' (' + T('Starlink: 1 de cada') + ' ' + (S.paso || 10) + ')' : estado.vista === 'cielo' ? ' (' + T('a más de 25° sobre tu horizonte') + ')' : '');
-        let s = vistaTxt + ' · ' + T('Datos verificados') + ', ' + haceTxt(hace(S.d.descargado)) + ' · ' + T('posición calculada ahora');
+        // the oldest group on the map sets the age (a group whose download came back empty keeps its previous one)
+        const fechaSat = (S.d.grupos || []).filter((g) => g.n && g.descargado).map((g) => g.descargado).sort()[0] || S.d.descargado;
+        let s = vistaTxt + ' · ' + T('Datos verificados') + ', ' + haceTxt(hace(fechaSat)) + ' · ' + T('posición calculada ahora');
         const L = P() && P().lugar;
         if (L && S.tArriba) s += ' · ' + T('sobre') + ' ' + L.nombre + ': ' + num(S.nArriba);
         meter('sat', s);
