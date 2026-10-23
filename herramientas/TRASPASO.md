@@ -459,3 +459,29 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   logotipo o voz: búsqueda profesional de marca en SIC, EUIPO, USPTO e INPI, clases 9 y 42, y dominios).
 - El perfil DNS no se llamará «Vigía» en público: hay una marca VIGIA registrada en EE. UU. (clase 42, software de redes con IA).
 - Grok, con el panel del navegador oculto, a veces deja la respuesta en blanco o cortada: recargar la conversación la muestra entera.
+
+## 18. 23 Oct 2026, 13:45–14:45 (Opus 5.5): Órbita es la portada, Radiografías primero y cables sin cruzar tierra. Versión `20261025b`
+- **Portada** (decisión del dueño): en `main`, `index.html` es una página mínima que lleva a `/orbita/` conservando `?lang=` y `#puerta`;
+  `en/index.html` lleva a `/orbita/?lang=en`. La presentación de antes vive en **`/conocer.html`** («Conocer GUARDIANA»): es la portada de
+  `main` con los botones de descarga cambiados por «Empezar» (→ Órbita), «Una descarga» → «Sin instalar nada» y el paso «Instálalo» →
+  «Empieza». **El resto del texto aún habla del programa (navegador para Windows, binario firmado, planes): hay que reescribirlo con la
+  agencia.** `/es/` y `/pt/` (landings antiguas) siguen igual. `sitemap.xml`: `/orbita/` y `/conocer.html` en lugar de `/`. En
+  `web-idiomas`, `index.html` sigue siendo la portada multilingüe (no copiarla a `main`).
+- **Radiografías** (`static/radiografias.js`): puerta propia y la primera (Radiografías, ZERO, Comunicaciones). Panel a la izquierda (en el
+  móvil, hoja desde abajo) con «Tú» (abre «Mi conexión»), «Una web» (los 11 diarios medidos: abre ESPEJO en ese diario;
+  `OrbitaEspejo.abre(modo, sitio)`) y «Tus aparatos» (próximamente). `#radiografias` abre la puerta; Esc y × vuelven.
+  `window.OrbitaPuertas.abre(id)` abre cualquier puerta por su nombre.
+- **«Empezar»**: no cabe en la cabecera de un portátil, así que aparece **bajo el planeta cuando se va la frase**, en el centro exacto del
+  mismo hueco (`window.OrbitaHueco()`, evento `guardiana-frase-fin`), y lleva a Radiografías. Se va para siempre en cuanto la persona
+  empieza algo (puerta, ESPEJO, Mi conexión, viaje o zoom); `localStorage.guardiana_empezado`.
+- **Cabecera**: «Conocer GUARDIANA» bajo la marca (lleva `?lang=`). La barra de capas centrada chocaba con «Ver mi conexión» entre 1100 y
+  ~1430 px (1280 y 1366): ahora se mide y, si choca, baja a su propia línea (`body.capas-abajo`).
+- **Cables por tierra** (dueño, 14:20, con captura de un «cable» recto de Marsella a Karachi por Turquía e Irán: «¿es un error? revisa
+  todo»): era SEA-ME-WE 6 de la agencia. `herramientas/cables_agencia.py` trazaba por mar con A* sobre `agua.png` (20 km por píxel), que
+  cierra Suez y el golfo de Suez, el golfo de Aqaba, los estrechos turcos y Panamá; sin ruta, caía en una recta «por tierra» de cualquier
+  longitud. Ahora: esos pasos se abren solo para trazar (`Agua.PASOS`); si una ruta corta tierra se repite con máscara más estricta; los
+  tramos se densifican cada 150 km (el planeta dibuja círculos máximos, que en saltos largos se curvan y cortaban cabos: Curie en Baja
+  California); y una recta por tierra solo se acepta si cruza ≤ 400 km (Egipto, Panamá, Guatemala). Lo demás no se dibuja y la ficha dice
+  «Un tramo por tierra sin dibujar» (SAm-1 y SAC Las Toninas → Valparaíso; SMPCS Packet-2 Jayapura → Merauke). Revisión completa de los
+  1 487 tramos: de 30 tramos con tierra sospechosa quedan solo los cruces reales de Egipto y Guatemala. La profundidad de los tramos nuevos
+  llega con la siguiente pasada del workflow (relieve.py).
