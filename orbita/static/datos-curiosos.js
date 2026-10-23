@@ -245,7 +245,10 @@
   // the agency's verified «did you know» facts (datos/sabias.json): owners, leases, costs, projects…
   async function sabia() {
     const S = await sabias(); if (!S || !S.sabias || !S.sabias.length) return null;
-    const l = lang(), vivas = S.sabias.filter((n) => n[l] || n.es); const n = vivas[Math.floor(Math.random() * vivas.length)]; if (!n) return null;
+    const l = lang(), vivas = S.sabias.filter((n) => n[l] || n.es);
+    // 22 Oct 2026, 22:09 (owner): the big curious numbers (km of cable, weight, thickness…) come up often, not 1 in 120
+    const top = vivas.filter((n) => n.destacado), de = top.length && Math.random() < 0.4 ? top : vivas;
+    const n = de[Math.floor(Math.random() * de.length)]; if (!n) return null;
     return { k: 'mundo', v: n.cifra || '', t: (n[l] || n.es).replace(/\s*\?\s*$/, '.'), f: tx().sabiaF, s: true, fijo: true };
   }
   // This computer: in the program, from the panel's measurements; outside it, three labelled examples.
