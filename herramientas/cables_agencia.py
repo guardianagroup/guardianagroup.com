@@ -90,7 +90,7 @@ ALIAS = {  # the same cable under different names (lower case, letters and digit
     'colombiafloridasubseafiber': 'cfx1', 'colombiafloridasubseafibercfx1': 'cfx1', 'colombiafloridaxpress': 'cfx1',
     'globalcaribbeannetwork': 'gcn', 'globalcaribbeannetworkgcn': 'gcn', 'surinameguyanasubmarinecablesystem': 'sgscs', 'surinameguyanasubmarinecablesystemsgscs': 'sgscs',
     'challengerbermuda1': 'cb1', 'challengerbermuda1cb1': 'cb1', 'cbuscaribbeanbermudaus': 'cbus', 'caribbeanbermudaus': 'cbus',
-    'basslinktelecomsdetelecomunicaciones': 'basslink', 'amricamvil1': 'amx1', 'americamovil1': 'amx1', 'basslinktelecoms': 'basslink', 'bcsnorthphase1': 'bcsnorth', 'hibernia': 'exanorth', 'acsalaskaoregon': 'akorn',
+    'basslinktelecomsdetelecomunicaciones': 'basslink', 'englandskabelen': 'nouk', 'italcro': 'italycroatia', 'amricamvil1': 'amx1', 'americamovil1': 'amx1', 'basslinktelecoms': 'basslink', 'bcsnorthphase1': 'bcsnorth', 'hibernia': 'exanorth', 'acsalaskaoregon': 'akorn',
     'brus': 'brusa', 'europeindiagateway': 'eig', 'gulfbridgeinternational': 'gbi', 'gulfbridgeinternationalcablesystem': 'gbi', 'omanaustraliacable': 'oac',
     'akornalaskaoregonnetwork': 'akorn', 'alaskaoregonnetwork': 'akorn', 'quintillionsubseacable': 'quintillion', 'alaskaunitedaueastyauwest': 'alaskaunited',
 }
