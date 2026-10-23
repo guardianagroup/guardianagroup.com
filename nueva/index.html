@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GUARDIANA · ¿Sabes a dónde van tus datos y quién los compra?</title>
+<meta name="description" content="Mientras carga una página, tus datos salen a subasta. Mira gratis qué ve de ti cualquier web y a quién habla cada página, sin instalar nada. Código abierto.">
+<!-- Preview of the new front page: not indexed until the owner says «publícala» -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#06080C">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GUARDIANA">
+<meta property="og:title" content="¿Sabes a dónde van tus datos y quién los compra?">
+<meta property="og:description" content="Mientras carga una página, tus datos salen a subasta. Mira tu radiografía gratis, sin instalar nada.">
+<meta property="og:image" content="https://guardianagroup.com/portada/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="El planeta con sus cables y un satélite encima, y el titular «¿Sabes a dónde van tus datos y quién los compra?»">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/InstrumentSerif-Regular.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSerif-Italic.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" as="image" href="/portada/planeta-1200.webp" imagesrcset="/portada/planeta-560.webp 560w, /portada/planeta-800.webp 800w, /portada/planeta-1200.webp 1200w, /portada/planeta-1600.webp 1600w" imagesizes="(max-width: 700px) 138vw, (max-width: 1100px) 112vw, 1060px" fetchpriority="high">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://guardianagroup.com/#org","name":"GUARDIANA","legalName":"GUARDIANA GROUP S.A.S.","url":"https://guardianagroup.com/","logo":"https://guardianagroup.com/icon-512.png","sameAs":["https://github.com/guardianagroup"],"address":{"@type":"PostalAddress","addressLocality":"Cartagena de Indias","addressCountry":"CO"}},{"@type":"WebSite","@id":"https://guardianagroup.com/#web","url":"https://guardianagroup.com/","name":"GUARDIANA","inLanguage":"es","publisher":{"@id":"https://guardianagroup.com/#org"}}]}</script>
+<script>document.documentElement.classList.add('js')</script>
+<style>
+@font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/InstrumentSerif-Regular.woff) format('woff')}
+@font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url(/fonts/InstrumentSerif-Italic.woff) format('woff')}
+@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/HankenGrotesk-var.woff) format('woff')}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{
+  --void:#06080C;--ink:#F4F6F8;--ink-2:#B4BEC9;--ink-3:#7C8794;--ink-4:#5B6672;--steel:#9CC3E4;--steel-2:#C9DFF2;
+  --coral:#E07A6C;--amber:#F0C77F;--amber-2:#E0B66A;--hair:#1E2631;--hair-2:#2A3442;--card:rgba(10,14,20,.86);
+  --grad-light:linear-gradient(92deg,#B9D7F0 0%,#9CC3E4 38%,#F0C77F 100%);
+  --display:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --body:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --pw:clamp(600px,calc((100svh - 400px) * 2.08),1060px);
+  color-scheme:dark;
+}
+@media (max-width:1100px){:root{--pw:min(112vw,940px)}}
+@media (max-width:700px){:root{--pw:138vw}}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--void)}
+body{margin:0;background:var(--void);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
+h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0;padding:0}
+li{list-style:none}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--steel);outline-offset:3px;border-radius:10px}
+::selection{background:rgba(156,195,228,.35)}
+h1,h2,h3{text-wrap:balance}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel)}
+.g-light{background:var(--grad-light);-webkit-background-clip:text;background-clip:text;color:transparent}
+.solo-movil{display:none}
+@media (max-width:700px){.solo-movil{display:inline}.no-movil{display:none}}
+
+/* header: clear over the planet, solid once you scroll */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--void);z-index:60}
+.top{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;border-bottom:1px solid transparent;transition:background .35s,border-color .35s}
+.top.fijo{background:rgba(6,8,12,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom-color:var(--hair)}
+.top-in{height:76px;display:flex;align-items:center;gap:24px;max-width:1440px;margin-inline:auto;padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
+.marca{font-weight:700;font-size:15px;letter-spacing:.34em;color:var(--ink);white-space:nowrap}
+.conocer{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#8A95A2;padding-bottom:3px;border-bottom:1px solid #3A4656;transition:color .2s,border-color .2s;white-space:nowrap}
+.conocer:hover{color:var(--ink);border-color:var(--ink-2)}
+.acciones{margin-left:auto;display:flex;align-items:center;gap:10px}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border:1px solid var(--hair);border-radius:999px;font-size:14px;color:var(--ink);background:rgba(6,8,12,.4);transition:border-color .2s,background .2s,color .2s;white-space:nowrap}
+.pill:hover{border-color:var(--ink-3)}
+.pill.idioma{font-family:var(--mono);font-size:12px;color:var(--ink-2);padding:0 13px}
+.pill.prim{background:var(--steel);border-color:var(--steel);color:var(--void);font-weight:600}
+.pill.prim:hover{background:var(--steel-2);border-color:var(--steel-2)}
+.top .c-radio{display:none}
+.top.fuera .c-radio{display:inline-flex}
+.top.fuera .c-conexion{display:none}
+@media (max-width:700px){
+  .top-in{height:60px;gap:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .conocer{display:none}.marca{font-size:13px;letter-spacing:.3em}
+  .pill{min-height:38px;padding:0 13px;font-size:13px}
+}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;overflow:clip;padding-top:44px;padding-bottom:104px}
+.planeta{position:relative;width:var(--pw);aspect-ratio:1605/1028;margin-left:calc(50% - var(--pw) / 2)}
+.planeta img{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transform:translateY(22px) scale(.985);filter:blur(8px);animation:llega 1.9s .1s cubic-bezier(.2,.7,.1,1) forwards}
+@keyframes llega{to{opacity:1;transform:none;filter:none}}
+.planeta canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.velo{position:absolute;left:-30%;right:-30%;bottom:-2px;height:54%;background:linear-gradient(180deg,rgba(6,8,12,0) 0%,rgba(6,8,12,.84) 46%,var(--void) 92%);pointer-events:none}
+.rotulo{position:absolute;left:55.4%;top:8.2%;transform:translateY(-50%);font-family:var(--mono);font-size:10.5px;line-height:1.7;letter-spacing:.12em;color:#8A95A2;white-space:nowrap;text-transform:uppercase;opacity:0;animation:aparece 1.2s 1.8s forwards}
+.rotulo span{display:block;color:var(--ink-4)}
+.rotulo span.solo-movil{display:none}
+@keyframes aparece{to{opacity:1}}
+.hero-texto{position:relative;z-index:2;margin-top:calc(var(--pw) * -0.173);display:flex;flex-direction:column;align-items:center;text-align:center;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,min(5.2vw,8.2svh),78px);line-height:1.02;letter-spacing:-.012em}
+.w{display:inline-block;opacity:0;transform:translateY(18px);filter:blur(10px);animation:word 1.1s cubic-bezier(.2,.7,.1,1) forwards}
+@keyframes word{to{opacity:1;transform:none;filter:none}}
+.w.g-light{font-style:italic;padding:0 .08em .06em;margin:0 -.08em -.06em}
+.sub{margin-top:18px;font-size:clamp(17px,1.4vw,20px);color:var(--ink-2);opacity:0;animation:aparece 1s 1.55s forwards}
+.entradas{margin-top:26px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;opacity:0;animation:aparece 1s 1.8s forwards}
+.cta{order:2;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 26px;border-radius:999px;background:var(--steel);color:var(--void);font-weight:600;font-size:16px;transition:background .2s,transform .2s}
+.cta:hover{background:var(--steel-2)}
+.cta span{transition:transform .25s}
+.cta:hover span{transform:translateX(3px)}
+.puertas{display:contents}
+.puerta{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid var(--hair);background:rgba(12,17,24,.75);color:var(--ink);font-size:15px;transition:border-color .2s,background .2s}
+.puerta:hover{border-color:var(--ink-3);background:rgba(18,24,33,.9)}
+.puerta b{font-weight:600}
+.puerta small{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--steel);text-transform:uppercase}
+.puerta small.ambar{color:var(--amber-2)}
+.micro{margin-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--ink-3);text-transform:uppercase;opacity:0;animation:aparece 1s 2.1s forwards}
+.desliza{position:absolute;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--ink-3);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:aparece 1s 2.6s forwards}
+.desliza i{width:1px;height:34px;background:linear-gradient(var(--ink-3),transparent);animation:gotea 2.2s ease-in-out infinite}
+@keyframes gotea{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:1100px){.hero h1{font-size:clamp(46px,7.4vw,66px)}}
+@media (max-width:700px){
+  .hero{padding-top:52px;padding-bottom:40px;min-height:auto}
+  .hero-texto{margin-top:calc(var(--pw) * -0.13)}
+  .hero h1{font-size:clamp(36px,10.6vw,46px);line-height:1.04}
+  .hero h1 br{display:none}
+  .rotulo{font-size:9px;letter-spacing:.1em;left:55.6%;top:9%}
+  .rotulo span.solo-movil{display:block}
+  .rotulo span.no-movil{display:none}
+  .entradas{flex-direction:column;align-items:stretch;width:100%;max-width:420px;gap:8px}
+  .cta{order:0;min-height:56px;font-size:17px;margin-bottom:6px}
+  .puerta{justify-content:space-between;min-height:56px;border-radius:16px;padding:0 18px}
+  .puerta b{font-size:16px}
+  .micro{font-size:10px;letter-spacing:.12em}
+  .desliza{display:none}
+}
+
+/* small planet in the corner once the hero is gone (wide screens only) */
+.mini{position:fixed;right:max(22px,env(safe-area-inset-right,0px));top:92px;z-index:40;display:flex;flex-direction:column;align-items:center;gap:4px;opacity:0;transform:translateY(-8px) scale(.94);pointer-events:none;transition:opacity .5s,transform .6s cubic-bezier(.2,.7,.1,1)}
+.mini.on{opacity:1;transform:none;pointer-events:auto}
+.mini img{width:140px;height:auto;display:block}
+.mini span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:#8A95A2;text-transform:uppercase}
+.mini:hover span{color:var(--ink)}
+@media (max-width:1319px){.mini{display:none}}
+
+/* ---------- sections ---------- */
+.sec{position:relative;padding-block:clamp(96px,12vw,170px)}
+.sec + .sec{border-top:1px solid rgba(30,38,49,.55)}
+.sec h2{margin-top:18px;font-family:var(--display);font-weight:400;font-size:clamp(38px,4.7vw,70px);line-height:1.02;letter-spacing:-.01em}
+.sec h2 em{font-style:italic;color:var(--steel)}
+.lead{margin-top:22px;font-size:clamp(17px,1.35vw,20px);line-height:1.6;color:var(--ink-2);max-width:56ch}
+.centro{text-align:center}
+.centro .lead{margin-inline:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;background:var(--steel);color:var(--void);font-weight:600;font-size:16px;transition:background .2s}
+.btn:hover{background:var(--steel-2)}
+.btn.fant{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--hair-2)}
+.btn.fant:hover{box-shadow:inset 0 0 0 1px var(--steel)}
+.fila{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.centro .fila{justify-content:center}
+.verif{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.verif a{color:var(--steel);border-bottom:1px solid rgba(156,195,228,.35);padding-bottom:2px}
+.verif a:hover{color:var(--ink);border-color:var(--ink-2)}
+.estado{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-2);border:1px solid rgba(224,182,106,.35);border-radius:999px;padding:6px 12px}
+.estado::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* reveal, as on Conocer */
+.js .r{opacity:0;transform:translate3d(0,28px,0);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.js .r.visto{opacity:1;transform:none}
+
+/* ---------- 01 · the auction ---------- */
+.dos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(36px,5vw,84px);align-items:center}
+@media (max-width:920px){.dos{grid-template-columns:minmax(0,1fr)}}
+/* on narrow screens the auction is shown right after its title, and the steps follow it */
+@media (max-width:920px){
+  .subasta .dos{row-gap:0}
+  .subasta .dos>div:first-child{display:contents}
+  .subasta .dos>.r:last-child{order:1;margin-top:34px}
+  .subasta .pasos{order:2}
+}
+.pasos{margin-top:32px;display:grid;counter-reset:p;max-width:520px}
+.pasos li{position:relative;padding:13px 0 13px 46px;border-top:1px solid var(--hair);color:var(--ink-3);font-size:16px;transition:color .4s}
+.pasos li:last-child{border-bottom:1px solid var(--hair)}
+.pasos li::before{counter-increment:p;content:counter(p);position:absolute;left:0;top:12px;width:28px;height:28px;border-radius:50%;border:1px solid var(--hair-2);display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);transition:background .4s,border-color .4s,color .4s}
+.pasos li b{font-weight:600;color:var(--ink-2);transition:color .4s}
+.pasos li.on{color:var(--ink-2)}
+.pasos li.on b{color:var(--ink)}
+.pasos li.on::before{background:var(--steel);border-color:var(--steel);color:var(--void)}
+.pasos li.on.oro::before{background:var(--amber);border-color:var(--amber)}
+.subasta-vis{position:relative;aspect-ratio:1/.9;border:1px solid var(--hair);border-radius:24px;background:radial-gradient(120% 90% at 18% 45%,rgba(156,195,228,.07),transparent 60%),rgba(8,11,16,.92);overflow:hidden}
+.subasta-vis canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ficha{position:absolute;left:5%;top:50%;transform:translateY(-50%);width:45%;padding:16px 16px 13px;border:1px solid var(--hair-2);border-radius:16px;background:rgba(6,8,12,.94);z-index:1;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.ficha .fk{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+.ficha dl{margin-top:11px;display:grid;gap:7px}
+.ficha dl div{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:12.5px;border-bottom:1px dashed rgba(42,52,66,.8);padding-bottom:6px;min-width:0}
+.ficha dt{color:var(--ink-3);flex:none}
+.ficha dd{color:var(--ink);font-family:var(--mono);font-size:11.5px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.ficha .fn{margin-top:10px;font-size:11px;line-height:1.45;color:var(--ink-3)}
+.postores{position:absolute;right:5%;top:6%;bottom:9%;width:35%;display:flex;flex-direction:column;justify-content:space-between;z-index:1}
+.postores li{display:flex;align-items:center;gap:9px;height:30px;padding:0 11px;border:1px solid var(--hair);border-radius:999px;background:rgba(6,8,12,.94);font-size:12px;transition:border-color .35s,background .35s}
+.postores i{width:8px;height:8px;border-radius:50%;background:var(--hair-2);flex:none;transition:background .3s,box-shadow .3s}
+.postores .pn{color:var(--ink-2);white-space:nowrap}
+.postores .pe{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--ink-4);text-transform:uppercase;white-space:nowrap}
+.postores li.rec i{background:var(--steel);box-shadow:0 0 10px rgba(156,195,228,.7)}
+.postores li.rec .pe{color:var(--steel)}
+.postores li.puja i{background:var(--amber);box-shadow:0 0 10px rgba(240,199,127,.8)}
+.postores li.puja .pe{color:var(--amber)}
+.postores li.gana{border-color:var(--amber);background:rgba(240,199,127,.09)}
+.postores li.gana .pn{color:var(--ink)}
+.postores li.gana .pe{color:var(--amber);font-weight:500}
+.postores li.tiene i{background:var(--steel);box-shadow:none;opacity:.6}
+.postores li.tiene .pe{color:var(--ink-2)}
+.ilus{position:absolute;left:5%;bottom:3.2%;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--ink-4);text-transform:uppercase}
+@media (max-width:560px){
+  .subasta-vis{aspect-ratio:auto;padding:16px}
+  .ficha{position:relative;left:auto;top:auto;transform:none;width:100%}
+  .postores{position:relative;inset:auto;width:100%;margin-top:70px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .postores li{padding:0 10px}
+  .ilus{position:relative;left:auto;bottom:auto;display:block;margin-top:14px}
+}
+.frases{margin-top:clamp(96px,11vw,160px);display:grid;gap:clamp(56px,8vw,110px);justify-items:center;text-align:center}
+.frase{font-family:var(--display);font-size:clamp(31px,3.7vw,56px);line-height:1.1;max-width:22ch;color:var(--ink)}
+.frase em{font-style:italic;color:var(--steel)}
+.frase.media{font-size:clamp(26px,2.9vw,42px);max-width:28ch;color:var(--ink-2)}
+.frase.media b{font-weight:400;color:var(--ink)}
+.frase.oro{font-style:italic;color:var(--amber)}
+.cifras{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px clamp(28px,6vw,90px);max-width:780px;width:100%}
+.cifras .n{font-family:var(--display);font-size:clamp(76px,10.5vw,156px);line-height:.88;color:var(--ink)}
+.cifras .u{margin-top:12px;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+.cifras .nota{grid-column:1/-1;margin-top:14px;font-size:15px;line-height:1.55;color:var(--ink-3);max-width:54ch;margin-inline:auto}
+.quien{margin-top:clamp(100px,12vw,170px);text-align:center}
+.quien h3{font-family:var(--display);font-weight:400;font-size:clamp(36px,4.2vw,62px);line-height:1.04}
+.tres{margin-top:38px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;text-align:left}
+.tres li{padding:24px 24px 26px;border:1px solid var(--hair);border-radius:18px;background:var(--card)}
+.tres .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.tres p:not(.k){margin-top:12px;font-size:17px;line-height:1.5;color:var(--ink-2)}
+@media (max-width:760px){.tres{grid-template-columns:minmax(0,1fr)}}
+.quien .verif{margin-top:30px}
+
+/* ---------- 02 · measured ---------- */
+.conmut{margin-top:36px;display:inline-flex;padding:4px;border:1px solid var(--hair);border-radius:999px;background:rgba(10,14,20,.85)}
+.conmut button{appearance:none;border:0;background:transparent;color:var(--ink-2);font-weight:600;font-size:14px;padding:11px 20px;border-radius:999px;cursor:pointer;transition:background .25s,color .25s}
+.conmut button[aria-pressed="true"]{background:var(--ink);color:var(--void)}
+.conmut button[data-v="con"][aria-pressed="true"]{background:var(--steel)}
+.medida-vis{margin-top:34px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(30px,4.5vw,64px);align-items:center}
+@media (max-width:920px){.medida-vis{grid-template-columns:minmax(0,1fr)}.medida-vis>[aria-live]{order:-1}}
+.rejilla{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:6px}
+@media (max-width:560px){.rejilla{grid-template-columns:repeat(10,minmax(0,1fr));gap:5px}}
+.rejilla i{aspect-ratio:1;border-radius:4px;background:var(--steel);opacity:.9;transition:background .55s ease var(--d),opacity .55s ease var(--d),transform .55s ease var(--d),box-shadow .55s ease var(--d)}
+.medida[data-v="con"] .rejilla i.c{background:transparent;box-shadow:inset 0 0 0 1.5px var(--coral);opacity:.75;transform:scale(.8)}
+.medida[data-v="con"] .rejilla i.p{background:linear-gradient(135deg,var(--steel) 50%,transparent 50%);box-shadow:inset 0 0 0 1.5px var(--coral)}
+.leyenda{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--ink-3)}
+.leyenda span{display:inline-flex;align-items:center;gap:8px}
+.leyenda i{width:11px;height:11px;border-radius:3px;background:var(--steel)}
+.leyenda i.c{background:transparent;box-shadow:inset 0 0 0 1.5px var(--coral)}
+.leyenda i.p{background:linear-gradient(135deg,var(--steel) 50%,transparent 50%);box-shadow:inset 0 0 0 1.5px var(--coral)}
+.medida:not([data-v="con"]) .leyenda .solo-con{display:none}
+.totales{display:grid;gap:4px}
+.tot{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--hair);padding:12px 0}
+.tot .n{font-family:var(--display);font-size:clamp(50px,5.4vw,76px);line-height:1;min-width:2.1ch;color:var(--ink)}
+.tot .n.rojo{color:var(--coral)}
+.tot .l{color:var(--ink-2);font-size:16px;line-height:1.4}
+.tot .l small{display:block;color:var(--ink-3);font-size:13.5px;margin-top:2px}
+.medida .nota{margin-top:30px;font-size:14px;line-height:1.6;color:var(--ink-3);max-width:72ch}
+
+/* ---------- 03 · X-rays ---------- */
+.tarjetas{margin-top:42px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;text-align:left}
+.tarjetas li{padding:24px;border:1px solid var(--hair);border-radius:18px;background:var(--card);display:flex;flex-direction:column;gap:8px}
+.tarjetas .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--steel);text-transform:uppercase}
+.tarjetas b{font-size:18px;font-weight:600}
+.tarjetas span{font-size:15px;line-height:1.5;color:var(--ink-3)}
+@media (max-width:860px){.tarjetas{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- 04 · ZERO ---------- */
+.ventana{border:1px solid var(--hair);border-radius:18px;background:rgba(8,11,16,.94);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.ventana .barra{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--hair)}
+.ventana .barra i{width:9px;height:9px;border-radius:50%;background:var(--hair-2)}
+.ventana .dir{flex:1;min-width:0;height:28px;border-radius:999px;background:rgba(30,38,49,.6);display:flex;align-items:center;padding:0 12px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+.ventana .demo{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--amber-2);text-transform:uppercase}
+.ventana ul{padding:8px 16px 14px}
+.ventana li{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(30,38,49,.7);font-size:14px}
+.ventana li:last-child{border-bottom:0}
+.ventana .barrita{height:8px;border-radius:4px;background:var(--hair-2);flex:1;position:relative;overflow:hidden}
+.ventana .cat{width:118px;color:var(--ink-2)}
+.ventana .st{width:88px;text-align:right;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--steel)}
+.ventana li.corta .st{color:var(--coral)}
+.ventana li.corta .barrita::after{content:"";position:absolute;inset:0;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.2,.7,.2,1) var(--d)}
+.ventana.visto li.corta .barrita::after{transform:scaleX(1)}
+.ventana li.queda .barrita{background:rgba(156,195,228,.45)}
+.ventana .pie-v{padding:10px 16px;border-top:1px solid var(--hair);font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--ink-4);text-transform:uppercase}
+@media (max-width:560px){.ventana .cat{width:96px;font-size:13px}.ventana .st{width:72px}}
+
+/* ---------- 05 · Órbita ---------- */
+.orbita-img{position:relative}
+.orbita-img img{width:100%;height:auto;display:block}
+
+/* ---------- 06 · open ---------- */
+.lista-estado{margin-top:34px;display:grid;gap:12px;max-width:640px}
+.lista-estado li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:center;padding:18px 20px;border:1px solid var(--hair);border-radius:16px;background:var(--card)}
+.lista-estado b{font-size:17px;font-weight:600}
+.lista-estado p{grid-column:1/-1;color:var(--ink-3);font-size:15px;line-height:1.5}
+
+/* ---------- 07 · seven days ---------- */
+.gratis h2{font-size:clamp(48px,7vw,104px);margin-inline:auto}
+.gratis .sello{margin-top:16px;font-family:var(--display);font-style:italic;font-size:clamp(26px,3vw,44px);line-height:1.15;color:var(--steel);max-width:24ch;margin-inline:auto;text-wrap:balance}
+.gratis .fila{margin-top:38px}
+
+/* footer */
+.pie{border-top:1px solid var(--hair);padding-block:46px calc(40px + env(safe-area-inset-bottom,0px));font-size:13px;color:var(--ink-3)}
+.pie-in{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.pie nav{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 20px}
+.pie nav a{display:inline-flex;align-items:center;min-height:34px;transition:color .2s}
+.pie nav a:hover{color:var(--ink)}
+
+@media (prefers-reduced-motion:reduce){
+  .w,.sub,.entradas,.micro,.desliza,.rotulo,.planeta img{animation:none;opacity:1;transform:none;filter:none}
+  .js .r{opacity:1;transform:none;transition:none}
+  .rejilla i,.ventana li.corta .barrita::after{transition:none}
+  .desliza i{animation:none}
+}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <div class="top-in">
+    <a class="marca" href="/nueva/" aria-label="GUARDIANA, inicio">GUARDIANA</a>
+    <a class="conocer" href="/conocer.html">CONOCER GUARDIANA</a>
+    <nav class="acciones" aria-label="Principal">
+      <a class="pill c-conexion" href="/orbita/#mi-conexion"><span class="no-movil">Ver mi conexión</span><span class="solo-movil">Mi conexión</span></a>
+      <a class="pill prim c-radio" href="/orbita/#radiografias"><span class="no-movil">Ver mi radiografía</span><span class="solo-movil">Mi radiografía</span></a>
+      <a class="pill idioma" href="/nueva/" hreflang="es" aria-current="page" title="Español">ES</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio" aria-labelledby="titular">
+  <figure class="planeta">
+    <img src="/portada/planeta-1200.webp" srcset="/portada/planeta-560.webp 560w, /portada/planeta-800.webp 800w, /portada/planeta-1200.webp 1200w, /portada/planeta-1600.webp 1600w" sizes="(max-width: 700px) 138vw, (max-width: 1100px) 112vw, 1060px" width="1600" height="1025" fetchpriority="high" decoding="async" alt="La Tierra vista desde el sur, con los cables submarinos de América y, encima, un satélite en la órbita geoestacionaria.">
+    <canvas aria-hidden="true"></canvas>
+    <p class="rotulo" aria-hidden="true">Órbita geoestacionaria<span class="no-movil">Cables reales · señales ilustrativas · no a escala</span><span class="solo-movil">Ilustración · no a escala</span></p>
+    <div class="velo" aria-hidden="true"></div>
+  </figure>
+  <div class="hero-texto">
+    <h1 id="titular"><span class="w" style="animation-delay:.3s">¿Sabes</span> <span class="w" style="animation-delay:.42s">a</span> <span class="w" style="animation-delay:.52s">dónde</span> <span class="w" style="animation-delay:.64s">van</span> <span class="w" style="animation-delay:.76s">tus</span> <span class="w" style="animation-delay:.88s">datos</span><br> <span class="w" style="animation-delay:1.04s">y</span> <span class="w g-light" style="animation-delay:1.2s">quién los compra?</span></h1>
+    <p class="sub">Navega en ZERO. Mira tu radiografía.</p>
+    <div class="entradas">
+      <a class="cta" href="/orbita/#radiografias">Ver mi radiografía gratis <span aria-hidden="true">→</span></a>
+      <nav class="puertas" aria-label="Las tres puertas">
+        <a class="puerta" href="/orbita/#radiografias"><b>Radiografías</b><small>Gratis</small></a>
+        <a class="puerta" href="/orbita/#zero"><b>ZERO</b><small class="ambar">Demostración</small></a>
+        <a class="puerta" href="/orbita/#comunicaciones"><b>Comunicaciones</b><small class="ambar">En construcción</small></a>
+      </nav>
+    </div>
+    <p class="micro">Gratis · sin instalar nada · sin registrarte</p>
+  </div>
+  <p class="desliza" aria-hidden="true">Desliza<i></i></p>
+</section>
+
+<a class="mini" id="mini" href="/orbita/" aria-label="Explorar Órbita, el mapa de internet"><img src="/portada/planeta-mini.webp" width="320" height="239" alt="" loading="lazy" decoding="async"><span>Órbita · explorar ↗</span></a>
+
+<!-- 01 · The auction -->
+<section class="sec subasta" id="subasta" aria-labelledby="t-subasta">
+  <div class="wrap dos">
+    <div>
+      <p class="kick r">01 · La subasta</p>
+      <h2 class="r" id="t-subasta">Mientras carga la página, tus datos salen a subasta. <em>Tú no estás invitado.</em></h2>
+      <p class="lead r">Cada vez que abres una web con anuncios, lo que se sabe de ti se envía a muchas empresas a la vez para que pujen por enseñarte uno. Todo ocurre antes de que la página termine de cargar.</p>
+      <ol class="pasos r" id="pasos">
+        <li data-p="1"><b>Abres una página.</b></li>
+        <li data-p="2"><b>Tu ficha sale hacia muchas empresas a la vez:</b> navegador, sistema, idioma, zona, pantalla y la página que lees.</li>
+        <li data-p="3"><b>Pujan por enseñarte un anuncio.</b></li>
+        <li data-p="4"><b>Gana una.</b> Las demás ya tienen tu ficha.</li>
+      </ol>
+    </div>
+    <div class="r">
+      <div class="subasta-vis" id="subasta-vis" aria-hidden="true">
+        <canvas></canvas>
+        <div class="ficha">
+          <p class="fk">Tu ficha, ahora mismo</p>
+          <dl>
+            <div><dt>Navegador</dt><dd data-f="nav">—</dd></div>
+            <div><dt>Sistema</dt><dd data-f="so">—</dd></div>
+            <div><dt>Idioma</dt><dd data-f="idioma">—</dd></div>
+            <div><dt>Zona horaria</dt><dd data-f="zona">—</dd></div>
+            <div><dt>Pantalla</dt><dd data-f="pantalla">—</dd></div>
+            <div><dt>Página</dt><dd data-f="pagina">—</dd></div>
+          </dl>
+          <p class="fn">Calculada en tu navegador. No sale de aquí.</p>
+        </div>
+        <ul class="postores">
+          <li><i></i><span class="pn">Postor 1</span><span class="pe"></span></li>
+          <li><i></i><span class="pn">Postor 2</span><span class="pe"></span></li>
+          <li><i></i><span class="pn">Postor 3</span><span class="pe"></span></li>
+          <li><i></i><span class="pn">Postor 4</span><span class="pe"></span></li>
+          <li><i></i><span class="pn">Postor 5</span><span class="pe"></span></li>
+          <li><i></i><span class="pn">Postor 6</span><span class="pe"></span></li>
+          <li><i></i><span class="pn">Postor 7</span><span class="pe"></span></li>
+          <li><i></i><span class="pn">Postor 8</span><span class="pe"></span></li>
+        </ul>
+        <p class="ilus">Simulación ilustrativa</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap frases">
+    <p class="frase r">Pujan muchas. Gana una. <span class="g-light">Las demás ya tienen tu ficha.</span></p>
+    <div class="cifras r">
+      <div><p class="n">376</p><p class="u">veces al día, en Europa</p></div>
+      <div><p class="n">747</p><p class="u">veces al día, en Estados Unidos</p></div>
+      <p class="nota">Veces que lo que hace una persona en internet, y desde dónde, sale en estas subastas cada día. Estimación de 2022.</p>
+    </div>
+    <p class="frase r">Y hay empresas que viven de comprar datos de personas y revenderlos: <em>los brókers de datos</em>. Muchas nunca han tratado contigo.</p>
+    <p class="frase media r">En Estados Unidos, un bróker fue acusado de vender la ubicación de cientos de millones de móviles. <b>Con ella se podía seguir a una persona hasta un centro de salud o un templo.</b></p>
+    <p class="frase media r">Entre las etiquetas con las que te clasifican puede haber <b>salud, religión o política.</b></p>
+    <p class="frase oro r">Tú pones los datos. Otros cobran.</p>
+  </div>
+
+  <div class="wrap quien">
+    <h3 class="r">¿Quién los compra?</h3>
+    <ul class="tres r">
+      <li><p class="k">Anunciantes</p><p>Pujan por ponerte su anuncio delante.</p></li>
+      <li><p class="k">Intermediarios</p><p>Montan la subasta en milisegundos y cobran su parte.</p></li>
+      <li><p class="k">Brókers de datos</p><p>Compran, mezclan y revenden perfiles de personas.</p></li>
+    </ul>
+    <p class="verif r"><a href="/terminos.html#fuentes-portada">Datos verificados</a></p>
+  </div>
+</section>
+
+<!-- 02 · Measured -->
+<section class="sec medida" id="medida" data-v="sin" aria-labelledby="t-medida">
+  <div class="wrap">
+    <p class="kick r">02 · Lo hemos medido</p>
+    <h2 class="r" id="t-medida">Abrimos once diarios. Tu navegador habló con <em>100 empresas</em> de 16 países.</h2>
+    <p class="lead r">Solo en la portada de Marca contamos 22 empresas de publicidad.</p>
+    <div class="conmut r" role="group" aria-label="Ver la medición">
+      <button type="button" data-v="sin" aria-pressed="true">Sin GUARDIANA</button>
+      <button type="button" data-v="con" aria-pressed="false">Con GUARDIANA</button>
+    </div>
+    <div class="medida-vis r">
+      <div>
+        <div class="rejilla" id="rejilla" aria-hidden="true"></div>
+        <p class="leyenda" aria-hidden="true"><span><i></i>Empresa que recibe tus datos</span><span class="solo-con"><i class="c"></i>Cortada</span><span class="solo-con"><i class="p"></i>Cortada en parte</span></p>
+      </div>
+      <div aria-live="polite">
+        <div class="totales" data-modo="sin">
+          <p class="tot"><span class="n">172</span><span class="l">dominios de otras empresas<small>con los que habló el navegador</small></span></p>
+          <p class="tot"><span class="n">100</span><span class="l">empresas<small>detrás de esos dominios</small></span></p>
+          <p class="tot"><span class="n">16</span><span class="l">países<small>donde tienen su sede</small></span></p>
+        </div>
+        <div class="totales" data-modo="con" hidden>
+          <p class="tot"><span class="n rojo">89</span><span class="l">dominios cortados<small>se quedan 83, los que hacen falta para ver la web</small></span></p>
+          <p class="tot"><span class="n rojo">65</span><span class="l">empresas cortadas del todo<small>y 7 en parte; se quedan 28</small></span></p>
+          <p class="tot"><span class="n">12</span><span class="l">países<small>en vez de 16</small></span></p>
+        </div>
+      </div>
+    </div>
+    <p class="nota r">Medido el 23 de octubre de 2026 desde Colombia, en las portadas de Marca, AS, Sport, L’Équipe, La Gazzetta dello Sport, Kicker, Sky Sports, ESPN, CBS Sports, Fox Sports y El Tiempo. «Con GUARDIANA» es la misma medición con nuestras reglas: no es una promesa.</p>
+    <div class="fila r"><a class="btn fant" href="/orbita/#radiografias">Ver cada diario en Radiografías <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+<!-- 03 · X-rays -->
+<section class="sec centro" id="radiografias" aria-labelledby="t-radio">
+  <div class="wrap">
+    <p class="kick r">03 · Radiografías · gratis</p>
+    <h2 class="r" id="t-radio">Mira tu radiografía.</h2>
+    <p class="lead r">Qué ve de ti cualquier web y a quién habla cada página. Gratis y sin instalar nada.</p>
+    <ul class="tarjetas r">
+      <li><span class="k">Tú</span><b>Lo que cualquier web ve de ti</b><span>Tu navegador, tu sistema, tu idioma, tu hora y tu pantalla.</span></li>
+      <li><span class="k">Una web</span><b>A quién habla cada página</b><span>Cada empresa, su país y para qué sirve, y qué cortaría GUARDIANA.</span></li>
+      <li><span class="k">Descargable</span><b>Tu radiografía, en un archivo</b><span>Informe en PDF y datos en CSV y JSON, con fecha y huella. Se hace en tu navegador.</span></li>
+    </ul>
+    <div class="fila r"><a class="btn" href="/orbita/#radiografias">Ver mi radiografía gratis <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+<!-- 04 · ZERO -->
+<section class="sec" id="zero" aria-labelledby="t-zero">
+  <div class="wrap dos">
+    <div>
+      <p class="kick r">04 · ZERO · demostración</p>
+      <h2 class="r" id="t-zero">Navega en ZERO.</h2>
+      <p class="lead r">El navegador que muestra cada corte, en directo: qué quería llevarse cada página mientras la lees. Hoy puedes ver la demostración; cuando esté terminado, lo abrirás desde aquí.</p>
+      <div class="fila r"><a class="btn" href="/orbita/#zero">Ver la demostración <span aria-hidden="true">→</span></a></div>
+    </div>
+    <div class="r">
+      <div class="ventana" id="ventana" aria-hidden="true">
+        <div class="barra"><i></i><i></i><i></i><span class="dir">ZERO</span><span class="demo">Demostración</span></div>
+        <ul>
+          <li class="corta" style="--d:.2s"><span class="cat">Publicidad</span><span class="barrita"></span><span class="st">Cortada</span></li>
+          <li class="corta" style="--d:.45s"><span class="cat">Rastreo</span><span class="barrita"></span><span class="st">Cortada</span></li>
+          <li class="queda"><span class="cat">La propia web</span><span class="barrita"></span><span class="st">Se queda</span></li>
+          <li class="corta" style="--d:.7s"><span class="cat">Medición</span><span class="barrita"></span><span class="st">Cortada</span></li>
+          <li class="corta" style="--d:.95s"><span class="cat">Publicidad</span><span class="barrita"></span><span class="st">Cortada</span></li>
+          <li class="queda"><span class="cat">Funcional</span><span class="barrita"></span><span class="st">Se queda</span></li>
+        </ul>
+        <p class="pie-v">Ilustración</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · Órbita -->
+<section class="sec" id="orbita" aria-labelledby="t-orbita">
+  <div class="wrap dos">
+    <div>
+      <p class="kick r">05 · Órbita</p>
+      <h2 class="r" id="t-orbita">El mapa de por dónde viaja internet.</h2>
+      <p class="lead r">Cables submarinos, fibra en tierra, centros de datos y satélites, en un planeta que puedes girar.</p>
+      <div class="fila r"><a class="btn fant" href="/orbita/">Explorar Órbita <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="orbita-img r"><img src="/portada/planeta-entera-800.webp" srcset="/portada/planeta-entera-800.webp 800w, /portada/planeta-entera-1200.webp 1200w" sizes="(max-width: 920px) 92vw, 560px" width="800" height="598" alt="El planeta de Órbita con sus cables y la órbita geoestacionaria." loading="lazy" decoding="async"></div>
+  </div>
+</section>
+
+<!-- 06 · Open -->
+<section class="sec" id="abierto" aria-labelledby="t-abierto">
+  <div class="wrap">
+    <p class="kick r">06 · Código abierto</p>
+    <h2 class="r" id="t-abierto">No te pedimos que confíes. <em>Compruébalo.</em></h2>
+    <p class="lead r">El código de GUARDIANA es abierto, con licencia AGPL-3.0: cualquiera puede leerlo, auditarlo y comprobar que hace lo que dice.</p>
+    <div class="fila r"><a class="btn fant" href="https://github.com/guardianagroup/guardianagroup.com" rel="noopener">Ver el código <span aria-hidden="true">↗</span></a></div>
+    <ul class="lista-estado r">
+      <li><b>Comunicaciones</b><span class="estado">En construcción</span><p>Chat, llamadas y archivos cifrados de extremo a extremo. Llegará cuando esté terminada y probada.</p></li>
+      <li><b>GUARDIANA OS</b><span class="estado">En preparación</span><p>Un sistema operativo de código abierto que se descargará desde aquí: verás y podrás cortar cada conexión de tu equipo, programa por programa.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 07 · Seven days -->
+<section class="sec centro gratis" id="gratis" aria-labelledby="t-gratis">
+  <div class="wrap">
+    <p class="kick r">07 · Para todos</p>
+    <h2 class="r" id="t-gratis">Siete días gratis.</h2>
+    <p class="sello r">Sin tarjeta. Sin darnos tu nombre ni tu correo.</p>
+    <p class="lead r">Cuando abramos la suscripción, podrás probarlo todo durante una semana, con un límite de horas al día en ZERO. El precio lo publicaremos antes de cobrar nada.</p>
+    <div class="fila r"><span class="estado">Próximamente</span></div>
+    <div class="fila r"><a class="btn" href="/orbita/#radiografias">Ver mi radiografía gratis <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+</main>
+
+<footer class="pie">
+  <div class="wrap pie-in">
+    <a class="marca" href="/nueva/">GUARDIANA</a>
+    <nav aria-label="Pie de página">
+      <a href="/conocer.html">Conocer GUARDIANA</a>
+      <a href="/orbita/">Órbita</a>
+      <a href="/negocio-de-tus-datos.html">El negocio de tus datos</a>
+      <a href="/empresas/">Empresas</a>
+      <a href="/privacidad.html">Privacidad</a>
+      <a href="/terminos.html">Términos</a>
+      <a href="/contacto.html">Contacto</a>
+      <a href="https://github.com/guardianagroup/guardianagroup.com" rel="noopener">Código abierto ↗</a>
+    </nav>
+    <p>GUARDIANA GROUP S.A.S. · Cartagena de Indias, Colombia · Esta página no usa cookies ni analíticas.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const MOVIL = matchMedia('(max-width: 700px)').matches || matchMedia('(pointer: coarse)').matches;
+  const D = Math.PI / 180;
+
+  // ---------- header and the small planet in the corner ----------
+  const top = document.getElementById('top'), hero = document.getElementById('inicio'), mini = document.getElementById('mini');
+  const alBajar = () => top.classList.toggle('fijo', scrollY > 30);
+  addEventListener('scroll', alBajar, { passive: true }); alBajar();
+  new IntersectionObserver(([e]) => { const fuera = !e.isIntersecting; top.classList.toggle('fuera', fuera); mini.classList.toggle('on', fuera); }, { rootMargin: '-35% 0px 0px 0px' }).observe(hero);
+
+  // ---------- reveals, as on Conocer ----------
+  const io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); } }, { rootMargin: '0px 0px -14% 0px' });
+  document.querySelectorAll('.r').forEach((el) => io.observe(el));
+
+  // ---------- the planet: a few signals on real cables, satellites passing, Colombia to the satellite ----------
+  // Same view as the picture (from 42°S over 72°W). Cables and land fibre are real; the light on them and the
+  // satellite hop are illustrations, and the picture says so.
+  const PISTAS = {"sub":[[[-74.01,40.19],[-65.0,32.53],[-35.46,1.1],[-32.21,-20.18],[-42.19,-26.59],[-46.32,-24.17],[-46.42,-24.02]],[[-78.89,33.69],[-43.04,-2.13],[-41.86,-2.55],[-40.19,-2.56],[-38.56,-3.46],[-37.2,-4.62],[-36.76,-4.83],[-35.75,-4.87],[-34.93,-5.69],[-34.54,-7.18],[-34.73,-8.5],[-35.13,-9.29],[-36.94,-11.1],[-37.42,-12.11],[-38.75,-13.47],[-38.76,-16.19],[-38.94,-16.5],[-38.94,-17.42],[-39.45,-18.39],[-39.47,-19.23],[-40.02,-20.32],[-40.48,-20.81],[-40.73,-21.73],[-42.3,-23.1],[-44.14,-23.11],[-45.64,-23.98],[-46.41,-24.01]],[[-75.16,10.68],[-74.99,11.13],[-74.25,11.5],[-73.41,11.53],[-71.74,12.57],[-71.39,12.39],[-70.42,12.38],[-69.32,11.7],[-68.8,11.66],[-68.05,10.99],[-62.86,10.97],[-62.16,10.32],[-61.46,10.27],[-60.67,9.69],[-59.74,8.77],[-58.73,8.11],[-57.06,6.45],[-54.6,6.41],[-54.03,6.08],[-53.2,5.88],[-51.75,4.98],[-46.87,0.12],[-41.02,-2.54],[-40.19,-2.56],[-39.09,-3.11],[-38.52,-3.73]],[[-74.8,10.96],[-74.64,11.3],[-74.29,11.35],[-73.89,11.68],[-73.06,11.7],[-71.7,12.57],[-71.26,12.23],[-70.11,12.22],[-69.32,11.7],[-68.84,11.68],[-68.05,10.99],[-62.86,10.97],[-62.16,10.32],[-61.46,10.27],[-60.67,9.69],[-59.74,8.77],[-58.73,8.11],[-57.06,6.45],[-54.6,6.41],[-54.03,6.08],[-53.2,5.88],[-51.75,4.98],[-46.87,0.12],[-41.02,-2.54],[-40.19,-2.56],[-39.09,-3.11],[-38.52,-3.73]],[[-43.19,-22.91],[-42.91,-23.11],[-42.3,-23.1],[-40.76,-21.77],[-40.48,-20.81],[-40.02,-20.32],[-39.47,-19.23],[-39.45,-18.39],[-38.94,-17.42],[-38.57,-13.29],[-37.39,-12.06],[-36.94,-11.1],[-35.13,-9.29],[-34.73,-8.5],[-34.54,-7.18],[-34.93,-5.69],[-38.21,-2.41],[-49.33,2.58],[-51.7,4.94],[-53.2,5.88],[-54.65,6.42],[-57.06,6.45],[-58.73,8.11],[-59.74,8.77],[-61.41,10.25],[-62.12,10.29],[-62.91,10.99],[-66.12,10.99],[-66.95,10.6]],[[-80.11,26.0],[-79.76,25.35],[-79.88,24.74],[-81.0,23.92],[-83.25,23.71],[-84.83,22.89],[-85.95,21.64],[-85.72,20.38],[-84.83,19.1],[-82.35,17.39],[-81.0,16.1],[-80.55,13.93],[-80.1,13.05],[-78.3,10.63],[-76.5,10.08],[-75.59,9.52]],[[-80.09,26.36],[-78.99,25.24],[-78.2,25.23],[-77.89,25.05],[-75.08,24.98],[-71.34,21.25],[-70.86,21.12],[-56.18,6.45],[-54.65,6.42],[-53.15,5.86],[-51.7,4.94],[-46.87,0.12],[-41.02,-2.54],[-40.19,-2.56],[-39.09,-3.11],[-38.52,-3.73]],[[-80.72,-0.95],[-80.6,-0.37],[-80.6,4.59],[-79.72,5.6],[-79.65,9.65],[-76.4,9.77],[-75.04,11.1],[-74.6,11.33],[-73.41,11.53],[-71.78,12.56],[-70.05,12.6]],[[-76.87,-12.28],[-77.93,-11.01],[-79.22,-8.15],[-81.09,-6.09],[-81.47,-4.94],[-80.95,-2.66],[-80.94,-0.99],[-80.45,-0.29],[-80.03,0.81],[-77.03,3.88]],[[-79.55,8.96],[-79.54,1.38],[-80.03,0.81],[-80.43,-0.24],[-80.95,-1.03],[-80.95,-3.71],[-81.47,-4.55],[-81.47,-7.58],[-77.97,-11.18],[-77.95,-19.23],[-71.62,-33.05]],[[-64.65,32.36],[-46.88,14.7],[-38.52,-3.73]],[[-64.61,18.42],[-66.38,16.62],[-69.54,16.58],[-75.43,10.7],[-75.51,10.39]],[[13.2,-9.51],[-2.0,-9.57],[-7.36,-4.31],[-37.11,-4.31],[-38.52,-3.73]],[[-118.42,33.92],[-118.32,33.6],[-117.37,32.63],[-116.47,31.0],[-116.39,29.03],[-104.52,17.35],[-101.4,17.31],[-100.08,16.62],[-99.08,16.43],[-97.8,15.74],[-97.32,15.72],[-96.53,15.38],[-93.45,15.37],[-93.01,15.14],[-91.87,14.01],[-91.12,13.63],[-90.33,13.62],[-88.83,13.06],[-85.36,9.61],[-84.62,9.55],[-83.25,8.21],[-82.2,7.99],[-80.75,7.13],[-80.1,7.62],[-80.06,7.98],[-79.55,8.72],[-79.55,8.96]],[[9.91,2.94],[-4.46,2.89],[-10.53,-3.08],[-32.54,-3.08],[-32.85,-3.25],[-37.81,-3.25],[-38.52,-3.73]],[[-38.52,-3.73],[-36.8,-4.82],[-35.75,-4.87],[-34.96,-5.65],[-34.54,-7.18],[-34.54,-7.76],[-35.1,-9.25],[-36.94,-11.1],[-37.42,-12.11],[-38.75,-13.47],[-38.76,-16.19],[-38.94,-16.5],[-38.94,-17.42],[-39.45,-18.39],[-39.47,-19.23],[-40.02,-20.32],[-40.48,-20.81],[-40.73,-21.73],[-54.51,-35.53],[-56.7,-36.48]]],"tie":[[[-47.93,-15.78],[-46.37,-14.09],[-43.42,-13.26],[-38.32,-12.7],[-38.49,-12.98],[-37.07,-10.91],[-37.79,-9.66],[-35.74,-9.67],[-34.88,-8.05],[-35.88,-7.23],[-35.21,-5.79],[-38.54,-3.72]],[[-61.13,4.62],[-66.92,10.5]],[[-77.03,-12.04],[-78.59,-9.08],[-79.03,-8.12],[-79.85,-6.77],[-80.66,-5.18]],[[-47.93,-15.78],[-60.67,2.82]],[[-77.03,-12.04],[-75.73,-14.08],[-71.54,-16.4]],[[-74.17,40.74],[-95.36,29.76]],[[-118.31,34.18],[-95.36,29.76]],[[-118.24,34.05],[-95.36,29.76]],[[-38.54,-3.72],[-43.21,-22.9]],[[-75.57,6.25],[-75.88,8.75],[-75.39,9.3],[-75.49,10.4],[-74.78,10.97]],[[-77.72,0.81],[-78.12,0.35],[-78.52,-0.23],[-78.62,-0.93],[-78.66,-1.67],[-78.85,-2.74],[-79.0,-2.9]],[[-74.08,4.61],[-72.5,7.88]],[[-75.54,6.29],[-72.5,7.88]],[[-99.52,27.48],[-100.32,25.68],[-100.39,20.59]],[[-68.15,-16.5],[-67.09,-17.97],[-66.16,-17.38],[-63.18,-17.79]],[[-17.17,14.72],[-17.07,14.63],[-16.97,14.42],[-16.6,14.42],[-16.07,14.14],[-15.42,14.1],[-15.07,13.97],[-14.46,13.98],[-13.7,13.77],[-12.45,14.3],[-12.35,14.39],[-12.21,14.41],[-12.21,14.46]],[[-100.38,20.6],[-100.32,25.67]],[[-15.5,16.51],[-14.45,16.49],[-13.98,16.17],[-13.92,16.07],[-13.77,16.05],[-13.59,15.96],[-13.48,15.88],[-13.31,15.55],[-13.18,15.48],[-13.13,15.37],[-13.03,15.35],[-12.93,15.25],[-12.95,15.12],[-12.87,15.07],[-12.77,15.08],[-12.53,14.91],[-12.21,14.46]],[[-65.75,-19.58],[-64.73,-21.54],[-63.68,-22.02]]]};
+  (function planeta() {
+    const fig = document.querySelector('.planeta'); if (!fig || RM) return;
+    const cv = fig.querySelector('canvas'), ctx = cv.getContext('2d');
+    const G = { w: 1605, cx: 802, cy: 662, r: 470 };
+    const L0 = -72 * D, P0 = -42 * D;
+    const F = [Math.cos(P0) * Math.cos(L0), Math.cos(P0) * Math.sin(L0), Math.sin(P0)];
+    const E = [-Math.sin(L0), Math.cos(L0), 0];
+    const N = [F[1] * E[2] - F[2] * E[1], F[2] * E[0] - F[0] * E[2], F[0] * E[1] - F[1] * E[0]];
+    const v3 = (lo, la, h) => [h * Math.cos(la * D) * Math.cos(lo * D), h * Math.cos(la * D) * Math.sin(lo * D), h * Math.sin(la * D)];
+    let k = 1, W = 0, H = 0, dpr = 1;
+    // screen position, and whether the point can be seen (in front of the planet, or outside its disc)
+    const pr = (q) => { const x = q[0] * E[0] + q[1] * E[1] + q[2] * E[2], y = q[0] * N[0] + q[1] * N[1] + q[2] * N[2], z = q[0] * F[0] + q[1] * F[1] + q[2] * F[2];
+      return [(G.cx + x * G.r) * k, (G.cy - y * G.r) * k, z > 0.03 || x * x + y * y > 1.0004]; };
+    const pista = (pts) => { const s = [0]; for (let i = 1; i < pts.length; i++) { const a = pts[i - 1], b = pts[i]; s.push(s[i - 1] + Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2])); } return { p: pts, s, L: s[s.length - 1] }; };
+    const curva = (lista, h) => { const out = [];
+      for (let i = 0; i < lista.length; i++) { const b = v3(lista[i][0], lista[i][1], 1);
+        if (i) { const a = v3(lista[i - 1][0], lista[i - 1][1], 1), ang = Math.acos(Math.min(1, Math.max(-1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]))), n = Math.floor(ang / (0.7 * D));
+          for (let j = 1; j <= n; j++) { const t = j / (n + 1), sn = Math.sin(ang), f0 = Math.sin((1 - t) * ang) / sn, f1 = Math.sin(t * ang) / sn; out.push([(a[0] * f0 + b[0] * f1) * h, (a[1] * f0 + b[1] * f1) * h, (a[2] * f0 + b[2] * f1) * h]); } }
+        out.push([b[0] * h, b[1] * h, b[2] * h]); }
+      return pista(out); };
+    const recta = (a, b) => { const out = []; for (let i = 0; i <= 48; i++) { const t = i / 48; out.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]); } return pista(out); };
+    const punto = (t, u) => { const s = t.s; if (u <= 0) return t.p[0]; if (u >= t.L) return t.p[t.p.length - 1];
+      let lo = 0, hi = s.length - 1; while (hi - lo > 1) { const m = (lo + hi) >> 1; if (s[m] < u) lo = m; else hi = m; }
+      const f = (u - s[lo]) / ((s[hi] - s[lo]) || 1), a = t.p[lo], b = t.p[hi]; return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f]; };
+    // a comet: a bright head and a tail that fades, as the old front page drew them
+    const cometa = (t, u, cola, rgb, ancho, alfa, sentido) => {
+      const at = (x) => (sentido > 0 ? x : t.L - x);
+      let prev = null;
+      for (let i = 12; i >= 0; i--) { const uu = u - cola * i / 12; if (uu < 0 || uu > t.L) { prev = null; continue; }
+        const q = pr(punto(t, at(uu))); if (!q[2]) { prev = null; continue; }
+        if (prev) { const f = 1 - i / 12; ctx.globalAlpha = alfa * f * f; ctx.strokeStyle = 'rgb(' + rgb + ')'; ctx.lineWidth = ancho * (0.35 + 0.9 * f); ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); }
+        prev = q; }
+      if (u < 0 || u > t.L) return;
+      const h = pr(punto(t, at(u))); if (!h[2]) return;
+      const r = ancho * 3.4, g = ctx.createRadialGradient(h[0], h[1], 0, h[0], h[1], r);
+      g.addColorStop(0, 'rgba(255,255,255,' + alfa + ')'); g.addColorStop(0.25, 'rgba(' + rgb + ',' + alfa * 0.85 + ')'); g.addColorStop(1, 'rgba(' + rgb + ',0)');
+      ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(h[0], h[1], r, 0, 6.2832); ctx.fill();
+    };
+    const SUB = PISTAS.sub.map((l) => curva(l, 1.004)).filter((t) => t.L > 0.05);
+    const TIE = PISTAS.tie.map((l) => curva(l, 1.003)).filter((t) => t.L > 0.03);
+    const LOTES = {
+      sub: { pistas: SUB, max: MOVIL ? 2 : 5, vel: 0.16, cola: 0.09, rgb: '214,232,248', ancho: MOVIL ? 1.2 : 1.5, alfa: 0.95 },
+      tie: { pistas: TIE, max: MOVIL ? 1 : 4, vel: 0.075, cola: 0.05, rgb: '156,195,228', ancho: MOVIL ? 1.0 : 1.25, alfa: 0.9 }
+    };
+    let reloj = 0;
+    const activos = [];
+    const lanza = (tipo, espera) => { const l = LOTES[tipo], libres = [];
+      for (let i = 0; i < l.pistas.length; i++) if (!activos.some((a) => a.tipo === tipo && a.i === i)) libres.push(i);
+      if (!libres.length) return; activos.push({ tipo, i: libres[Math.floor(Math.random() * libres.length)], t0: reloj + espera, sentido: Math.random() < 0.5 ? 1 : -1 }); };
+    for (const tipo in LOTES) for (let j = 0; j < LOTES[tipo].max; j++) lanza(tipo, 0.3 + j * 1.4 + Math.random() * 1.2);
+    // the satellite hop: from Colombia up to the geostationary satellite over 72°W, and down in another country
+    const CTG = v3(-75.51, 10.39, 1.004), SAT = v3(-72, 0, 1.7);
+    const DESTINOS = [['BR', -47.88, -15.79], ['MX', -99.13, 19.43], ['US', -80.19, 25.76], ['SN', -17.45, 14.69], ['PE', -77.04, -12.05]];
+    const SUBIDA = recta(CTG, SAT), BAJADAS = DESTINOS.map((d) => recta(SAT, v3(d[1], d[2], 1.004)));
+    const lang = document.documentElement.lang || 'es';
+    let nombres = null; try { nombres = new Intl.DisplayNames([lang], { type: 'region' }); } catch (e) {}
+    const nombre = (cc) => { let n = cc; try { n = nombres ? nombres.of(cc) : cc; } catch (e) {} return n.toLocaleUpperCase(lang); };
+    let salto = { d: 0, t0: 2.2 };
+    const PAUSA = MOVIL ? 5.5 : 3.2;
+    // a few low satellites crossing (orbits drawn 1.09 radii out and sped up: illustration)
+    const LEO = [{ i: 53, o: -40, f: 0.4, w: 2 * Math.PI / 66 }, { i: 97, o: -105, f: 2.4, w: 2 * Math.PI / 78 }, { i: 70, o: 10, f: 4.1, w: 2 * Math.PI / 60 }].slice(0, MOVIL ? 2 : 3);
+    const leo = (s, t) => { const th = s.f + s.w * t, ci = Math.cos(s.i * D), si = Math.sin(s.i * D), co = Math.cos(s.o * D), so = Math.sin(s.o * D), c = Math.cos(th), sn = Math.sin(th), r = 1.09;
+      return [r * (co * c - so * ci * sn), r * (so * c + co * ci * sn), r * si * sn]; };
+    const etiqueta = (txt, p, alfa, lado) => { if (alfa <= 0.01 || W < 560) return; ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = alfa;
+      ctx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; ctx.fillStyle = '#C9D7E6'; ctx.textAlign = lado < 0 ? 'right' : 'left'; ctx.textBaseline = 'middle';
+      ctx.fillText(txt, p[0] + lado * 12, p[1]); ctx.globalCompositeOperation = 'lighter'; };
+    const onda = (p, q, rgb, alfa, tam) => { if (q <= 0 || q >= 1) return; ctx.globalAlpha = alfa * (1 - q) * (1 - q); ctx.strokeStyle = 'rgb(' + rgb + ')'; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.arc(p[0], p[1], tam * (0.3 + q * 2.2), 0, 6.2832); ctx.stroke(); };
+    const pinta = () => {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round';
+      // 1 · light on the cables and on the land fibre
+      for (let j = activos.length - 1; j >= 0; j--) { const a = activos[j], l = LOTES[a.tipo], t = l.pistas[a.i], u = (reloj - a.t0) * l.vel;
+        if (u < 0) continue;
+        if (u > t.L + l.cola) { activos.splice(j, 1); lanza(a.tipo, 0.8 + Math.random() * 2.6); continue; }
+        const borde = Math.min(1, u / 0.06, (t.L + l.cola - u) / 0.06);
+        cometa(t, u, l.cola, l.rgb, l.ancho, l.alfa * borde, a.sentido); }
+      // 2 · low satellites
+      for (const s of LEO) { let prev = null;
+        for (let i = 10; i >= 0; i--) { const q = pr(leo(s, reloj - i * 0.16)); if (!q[2]) { prev = null; continue; }
+          if (prev) { const f = 1 - i / 10; ctx.globalAlpha = 0.5 * f * f; ctx.strokeStyle = 'rgb(156,195,228)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); }
+          prev = q; }
+        const q = pr(leo(s, reloj)); if (q[2]) { ctx.globalAlpha = 0.95; ctx.fillStyle = '#DCEBFA'; const z = MOVIL ? 2.2 : 2.6; ctx.fillRect(q[0] - z / 2, q[1] - z / 2, z, z); } }
+      // 3 · Cartagena, always there, breathing
+      const c = pr(CTG), ph = (reloj * 0.35) % 1;
+      ctx.globalAlpha = 0.55 * (1 - ph); ctx.strokeStyle = '#F4F6F8'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(c[0], c[1], 3 + ph * 14, 0, 6.2832); ctx.stroke();
+      ctx.globalAlpha = 0.95; ctx.fillStyle = '#F4F6F8'; ctx.beginPath(); ctx.arc(c[0], c[1], 2.1, 0, 6.2832); ctx.fill();
+      // 4 · the satellite's beacon
+      const s = pr(SAT), bp = (reloj * 0.42) % 1; onda(s, bp, '156,195,228', 0.45, 7);
+      // 5 · the hop
+      const dt = reloj - salto.t0, baja = BAJADAS[salto.d], dest = pr(punto(baja, baja.L));
+      const T1 = 1.05, T2 = 1.3, T3 = 2.35, T4 = 3.5;
+      if (dt >= 0) {
+        const alfaEt = Math.min(1, dt / 0.4) * (dt < T4 ? 1 : Math.max(0, 1 - (dt - T4) / 0.6));
+        etiqueta(nombre('CO'), c, 0.9 * alfaEt, -1);
+        if (dt < T1) { const u = SUBIDA.L * (dt / T1); haz(SUBIDA, u, 0.22); cometa(SUBIDA, u, 0.22, '244,246,248', MOVIL ? 1.4 : 1.8, 1, 1); }
+        else if (dt < T3 + 0.3) haz(SUBIDA, SUBIDA.L, 0.22 * Math.max(0, 1 - (dt - T1) / 1.6));
+        if (dt >= T1 - 0.05 && dt < T2 + 0.5) { const q = Math.min(1, (dt - T1 + 0.05) / 0.75), g = ctx.createRadialGradient(s[0], s[1], 0, s[0], s[1], 26);
+          g.addColorStop(0, 'rgba(255,255,255,' + 0.9 * (1 - q) + ')'); g.addColorStop(1, 'rgba(156,195,228,0)'); ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(s[0], s[1], 26, 0, 6.2832); ctx.fill(); }
+        if (dt >= T2 && dt < T3) { const u = baja.L * ((dt - T2) / (T3 - T2)); haz(baja, u, 0.22); cometa(baja, u, 0.22, '244,246,248', MOVIL ? 1.4 : 1.8, 1, 1); }
+        else if (dt >= T3) haz(baja, baja.L, 0.22 * Math.max(0, 1 - (dt - T3) / 1.6));
+        if (dt >= T3) { onda(dest, (dt - T3) / 1.2, '244,246,248', 0.9, 6); etiqueta(nombre(DESTINOS[salto.d][0]), dest, 0.9 * Math.min(1, (dt - T3) / 0.3) * Math.max(0, 1 - Math.max(0, dt - T4) / 0.6), DESTINOS[salto.d][1] < -72 ? -1 : 1); }
+        if (dt > T4 + 0.6 + PAUSA) salto = { d: (salto.d + 1) % DESTINOS.length, t0: reloj + 0.2 };
+      }
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    };
+    // the straight beam behind the hop, fading
+    function haz(t, u, alfa) { if (alfa <= 0.01) return; const a = pr(t.p[0]), b = pr(punto(t, u)); ctx.globalAlpha = alfa; ctx.strokeStyle = 'rgb(156,195,228)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
+    const mide = () => { W = fig.clientWidth; H = fig.clientHeight; dpr = Math.min(devicePixelRatio || 1, MOVIL ? 1.5 : 2); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); k = W / G.w; };
+    new ResizeObserver(mide).observe(fig); mide();
+    let corre = false, visto = false, listo = false, antes = 0, salta = false;
+    const cuadro = (ms) => { if (!corre) return; requestAnimationFrame(cuadro);
+      if (MOVIL && (salta = !salta)) return; // phones: 30 frames a second
+      const dt = antes ? Math.min(0.1, (ms - antes) / 1000) : 0; antes = ms; reloj += dt; pinta(); };
+    const arranca = () => { const debe = listo && visto && !document.hidden; if (debe && !corre) { corre = true; antes = 0; requestAnimationFrame(cuadro); } else if (!debe) corre = false; };
+    new IntersectionObserver(([e]) => { visto = e.isIntersecting; arranca(); }).observe(fig);
+    document.addEventListener('visibilitychange', arranca);
+    setTimeout(() => { listo = true; arranca(); }, 1300); // after the planet has arrived
+  })();
+
+  // ---------- the auction, with the visitor's own card (computed here, never sent) ----------
+  (function subasta() {
+    const vis = document.getElementById('subasta-vis'); if (!vis) return;
+    const ua = navigator.userAgent;
+    const nav = (() => { let m; if ((m = ua.match(/Edg\/(\d+)/))) return 'Edge ' + m[1]; if ((m = ua.match(/OPR\/(\d+)/))) return 'Opera ' + m[1]; if ((m = ua.match(/(?:Firefox|FxiOS)\/(\d+)/))) return 'Firefox ' + m[1];
+      if ((m = ua.match(/(?:Chrome|CriOS)\/(\d+)/))) return 'Chrome ' + m[1]; if ((m = ua.match(/Version\/(\d+)[^ ]* .*Safari/))) return 'Safari ' + m[1]; return '—'; })();
+    const so = /Windows/.test(ua) ? 'Windows' : /iPhone|iPad|iPod/.test(ua) ? 'iOS' : /Android/.test(ua) ? 'Android' : /Mac OS X|Macintosh/.test(ua) ? 'macOS' : /CrOS/.test(ua) ? 'ChromeOS' : /Linux/.test(ua) ? 'Linux' : '—';
+    const pon = (k, v) => { const el = vis.querySelector('[data-f="' + k + '"]'); if (el && v) el.textContent = v; };
+    pon('nav', nav); pon('so', so); pon('idioma', navigator.language);
+    try { pon('zona', Intl.DateTimeFormat().resolvedOptions().timeZone); } catch (e) {}
+    pon('pantalla', screen.width + ' × ' + screen.height); pon('pagina', location.host + location.pathname);
+    const cv = vis.querySelector('canvas'), ctx = cv.getContext('2d'), ficha = vis.querySelector('.ficha');
+    const lis = [...vis.querySelectorAll('.postores li')], pes = lis.map((li) => li.querySelector('.pe')), pasos = [...document.querySelectorAll('#pasos li')];
+    const GANA = 4, CICLO = 8.6;
+    const TXT = { rec: 'Recibida', puja: 'Puja', gana: 'Gana', tiene: 'La tiene' };
+    let W = 0, H = 0, dpr = 1, A = [0, 0], B = [], apilado = false;
+    const mide = () => { const r = vis.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(devicePixelRatio || 1, 2); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      const f = ficha.getBoundingClientRect(); apilado = getComputedStyle(vis.querySelector('.postores')).position !== 'absolute';
+      A = apilado ? [f.left - r.left + f.width / 2, f.bottom - r.top] : [f.right - r.left, f.top - r.top + f.height / 2];
+      B = lis.map((li) => { const d = li.querySelector('i').getBoundingClientRect(); return [d.left - r.left + d.width / 2, d.top - r.top + d.height / 2]; }); };
+    const bez = (a, b, t) => { const c1 = apilado ? [a[0], a[1] + (b[1] - a[1]) * 0.55] : [a[0] + (b[0] - a[0]) * 0.5, a[1]], c2 = apilado ? [b[0], b[1] - (b[1] - a[1]) * 0.55] : [a[0] + (b[0] - a[0]) * 0.5, b[1]], u = 1 - t;
+      return [u * u * u * a[0] + 3 * u * u * t * c1[0] + 3 * u * t * t * c2[0] + t * t * t * b[0], u * u * u * a[1] + 3 * u * u * t * c1[1] + 3 * u * t * t * c2[1] + t * t * t * b[1]]; };
+    const traza = (a, b, hasta, rgb, alfa, ancho) => { if (alfa <= 0.01 || hasta <= 0) return; ctx.globalAlpha = alfa; ctx.strokeStyle = 'rgb(' + rgb + ')'; ctx.lineWidth = ancho; ctx.beginPath();
+      const n = 28; for (let i = 0; i <= n * hasta; i++) { const p = bez(a, b, i / n); if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); } const p = bez(a, b, hasta); ctx.lineTo(p[0], p[1]); ctx.stroke(); };
+    const bola = (p, rgb, alfa, r) => { const g = ctx.createRadialGradient(p[0], p[1], 0, p[0], p[1], r); g.addColorStop(0, 'rgba(255,255,255,' + alfa + ')'); g.addColorStop(0.3, 'rgba(' + rgb + ',' + alfa * 0.8 + ')'); g.addColorStop(1, 'rgba(' + rgb + ',0)'); ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p[0], p[1], r, 0, 6.2832); ctx.fill(); };
+    const estado = (i, e) => { const li = lis[i]; if (li.dataset.e === e) return; li.dataset.e = e; li.className = e || ''; pes[i].textContent = e ? TXT[e] : ''; };
+    const paso = (n) => pasos.forEach((li, i) => { li.classList.toggle('on', i + 1 === n); li.classList.toggle('oro', i + 1 === n && n === 4); });
+    const llega = (i) => 0.75 + i * 0.09 + 0.8;
+    const pinta = (t) => {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+      const fin = t > CICLO - 0.6 ? Math.max(0, 1 - (t - (CICLO - 0.6)) / 0.6) : 1;
+      paso(t < 0.75 ? 1 : t < 2.7 ? 2 : t < 4.3 ? 3 : 4);
+      B.forEach((b, i) => {
+        traza(A, b, 1, '156,195,228', 0.07 * fin, 1);
+        const t0 = 0.75 + i * 0.09, q = Math.min(1, Math.max(0, (t - t0) / 0.8));
+        if (t >= 4.3) traza(A, b, 1, i === GANA ? '240,199,127' : '156,195,228', (i === GANA ? 0.7 : 0.16) * fin, i === GANA ? 1.8 : 1);
+        else traza(A, b, q, '156,195,228', 0.3 * fin, 1.1);
+        if (q > 0 && q < 1) bola(bez(A, b, q), '156,195,228', 0.95, 7);
+        const tp = 2.75 + ((i * 5) % 8) * 0.17;
+        if (t >= tp && t < tp + 0.9) { const k2 = (t - tp) / 0.9; ctx.globalAlpha = 0.8 * (1 - k2); ctx.strokeStyle = 'rgb(240,199,127)'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(b[0], b[1], 5 + k2 * 16, 0, 6.2832); ctx.stroke(); }
+        estado(i, t < llega(i) ? '' : t < tp ? 'rec' : t < 4.3 ? 'puja' : i === GANA ? 'gana' : 'tiene');
+      });
+      if (t >= 4.3 && t < 5.2) bola(bez(B[GANA], A, (t - 4.3) / 0.9), '240,199,127', 1, 8);
+      ctx.globalAlpha = 1;
+    };
+    new ResizeObserver(mide).observe(vis); mide();
+    if (RM) { pinta(6); return; }
+    let corre = false, visto = false, t0 = 0;
+    const cuadro = (ms) => { if (!corre) return; if (!t0) t0 = ms; pinta(((ms - t0) / 1000) % CICLO); requestAnimationFrame(cuadro); };
+    const arranca = () => { const debe = visto && !document.hidden; if (debe && !corre) { corre = true; t0 = 0; requestAnimationFrame(cuadro); } else if (!debe) corre = false; };
+    new IntersectionObserver(([e]) => { visto = e.isIntersecting; arranca(); }, { threshold: 0.25 }).observe(vis);
+    document.addEventListener('visibilitychange', arranca);
+  })();
+
+  // ---------- measured: 100 companies, with and without GUARDIANA ----------
+  (function medida() {
+    const sec = document.getElementById('medida'), rej = document.getElementById('rejilla'); if (!sec || !rej) return;
+    const est = [].concat(Array(65).fill('c'), Array(7).fill('p'), Array(28).fill('q'));
+    let semilla = 11; const azar = () => (semilla = (semilla * 16807) % 2147483647) / 2147483647;
+    for (let i = est.length - 1; i > 0; i--) { const j = Math.floor(azar() * (i + 1)); [est[i], est[j]] = [est[j], est[i]]; }
+    rej.innerHTML = est.map((e, i) => '<i class="' + e + '" style="--d:' + ((i % 20) * 16 + Math.floor(i / 20) * 34) + 'ms"></i>').join('');
+    const bts = sec.querySelectorAll('.conmut button');
+    const pon = (v) => { sec.dataset.v = v; bts.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === v))); sec.querySelectorAll('[data-modo]').forEach((el) => { el.hidden = el.dataset.modo !== v; }); };
+    bts.forEach((b) => b.addEventListener('click', () => { sec.dataset.tocado = '1'; pon(b.dataset.v); }));
+    pon('sin');
+    // once it is on screen it switches by itself, once, to show the difference (unless the visitor already chose)
+    if (!RM) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { o.disconnect(); setTimeout(() => { if (!sec.dataset.tocado) pon('con'); }, 2400); } }, { threshold: 0.6 }).observe(rej);
+  })();
+
+  // ---------- ZERO's illustration: the cuts run when it is on screen ----------
+  (function zero() { const v = document.getElementById('ventana'); if (!v) return;
+    new IntersectionObserver(([e], o) => { if (e.isIntersecting) { v.classList.add('visto'); o.disconnect(); } }, { threshold: 0.4 }).observe(v); })();
+})();
+</script>
+</body>
+</html>
