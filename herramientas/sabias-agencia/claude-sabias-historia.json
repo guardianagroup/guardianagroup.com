@@ -1,14 +1,134 @@
 [
-{"cifra":"1850","es":"el primer cable submarino de telégrafo se tendió el 28 de agosto de 1850 entre Dover y Calais, por los hermanos Brett, y dejó de funcionar al día siguiente; el primero duradero entre Inglaterra y Francia llegó en 1851?","en":"the first submarine telegraph cable was laid on 28 August 1850 between Dover and Calais by the Brett brothers and stopped working the next day; the first lasting England–France cable followed in 1851?","pt":"o primeiro cabo submarino de telégrafo foi lançado em 28 de agosto de 1850 entre Dover e Calais, pelos irmãos Brett, e deixou de funcionar no dia seguinte; o primeiro duradouro entre Inglaterra e França chegou em 1851?","tema":"historia","fuentes":["https://atlantic-cable.com/Cables/1850Channel/index.htm","https://collection.sciencemuseumgroup.org.uk/objects/co33341"]},
-{"cifra":"1858","es":"el primer cable telegráfico transatlántico, entre Valentia (Irlanda) y Trinity Bay (Terranova), se completó el 5 de agosto de 1858; el mensaje de la reina Victoria al presidente Buchanan tardó unas 16 horas y el cable murió a las pocas semanas?","en":"the first transatlantic telegraph cable, between Valentia (Ireland) and Trinity Bay (Newfoundland), was completed on 5 August 1858; Queen Victoria's message to President Buchanan took about 16 hours and the cable died within weeks?","pt":"o primeiro cabo telegráfico transatlântico, entre Valentia (Irlanda) e Trinity Bay (Terra Nova), ficou pronto em 5 de agosto de 1858; a mensagem da rainha Vitória ao presidente Buchanan demorou cerca de 16 horas e o cabo morreu em poucas semanas?","tema":"historia","fuentes":["https://atlantic-cable.com/Cables/1858Atlantic/index.htm","https://www.history.com/this-day-in-history/first-transatlantic-telegraph-cable-completed"]},
-{"cifra":"1866","es":"el primer cable transatlántico duradero lo tendió en julio de 1866 el vapor Great Eastern, el barco más grande de su época, entre Valentia (Irlanda) y Heart's Content (Terranova), tras el fracaso de 1858 y la pérdida del cable de 1865?","en":"the first lasting transatlantic cable was laid in July 1866 by the steamship Great Eastern, the largest ship of its day, between Valentia (Ireland) and Heart's Content (Newfoundland), after the failure of 1858 and the loss of the 1865 cable?","pt":"o primeiro cabo transatlântico duradouro foi lançado em julho de 1866 pelo vapor Great Eastern, o maior navio da época, entre Valentia (Irlanda) e Heart's Content (Terra Nova), depois do fracasso de 1858 e da perda do cabo de 1865?","tema":"historia","fuentes":["https://atlantic-cable.com/Cables/1866Atlantic/index.htm","https://www.heartscontentcablestation.ca/"]},
-{"cifra":"1861","es":"la primera línea telegráfica transcontinental de Estados Unidos se completó el 24 de octubre de 1861 y dejó sin sentido al Pony Express, que cerró dos días después?","en":"the first transcontinental telegraph line in the United States was completed on 24 October 1861 and made the Pony Express pointless; it closed two days later?","pt":"a primeira linha telegráfica transcontinental dos Estados Unidos foi concluída em 24 de outubro de 1861 e tornou inútil o Pony Express, que fechou dois dias depois?","tema":"historia","fuentes":["https://www.loc.gov/item/today-in-history/october-24/","https://www.nps.gov/poex/learn/historyculture/index.htm"]},
-{"cifra":"1870","es":"en 1870 un cable submarino unió por primera vez Gran Bretaña con la India (Bombay–Adén–Suez–Malta–Gibraltar–Porthcurno) y un telegrama entre Londres y Bombay pasó a tardar horas en vez de semanas?","en":"in 1870 a submarine cable linked Britain with India for the first time (Bombay–Aden–Suez–Malta–Gibraltar–Porthcurno), and a telegram between London and Bombay took hours instead of weeks?","pt":"em 1870 um cabo submarino uniu pela primeira vez a Grã-Bretanha à Índia (Bombaim–Áden–Suez–Malta–Gibraltar–Porthcurno), e um telegrama entre Londres e Bombaim passou a demorar horas em vez de semanas?","tema":"historia","fuentes":["https://atlantic-cable.com/Cables/1870BritishIndian/index.htm","https://pkporthcurno.com/"]},
-{"cifra":"1872","es":"Australia quedó conectada al mundo en 1871–1872: un cable submarino entre Java y Darwin y la línea terrestre Darwin–Adelaida (Overland Telegraph, 3.200 km) convirtieron meses de viaje en horas de telegrama?","en":"Australia was connected to the world in 1871–1872: a submarine cable from Java to Darwin and the Darwin–Adelaide Overland Telegraph (3,200 km) turned months of travel into hours by telegram?","pt":"a Austrália ficou ligada ao mundo em 1871–1872: um cabo submarino entre Java e Darwin e a linha terrestre Darwin–Adelaide (Overland Telegraph, 3.200 km) transformaram meses de viagem em horas de telegrama?","tema":"historia","fuentes":["https://atlantic-cable.com/Cables/1871Australia/index.htm","https://www.nma.gov.au/defining-moments/resources/overland-telegraph"]},
-{"cifra":"1902","es":"el primer cable transpacífico se completó en 1902: el Pacific Cable, de Vancouver (Bamfield) a Australia y Nueva Zelanda vía Fanning, Fiyi y Norfolk, y ese mismo año San Francisco quedó unido a Honolulú; Manila se alcanzó en 1903?","en":"the first transpacific cable was completed in 1902: the Pacific Cable from Vancouver (Bamfield) to Australia and New Zealand via Fanning, Fiji and Norfolk, and that same year San Francisco was linked to Honolulu; Manila was reached in 1903?","pt":"o primeiro cabo transpacífico ficou pronto em 1902: o Pacific Cable, de Vancouver (Bamfield) à Austrália e Nova Zelândia via Fanning, Fiji e Norfolk, e nesse mesmo ano São Francisco ficou ligada a Honolulu; Manila foi alcançada em 1903?","tema":"historia","fuentes":["https://atlantic-cable.com/Cables/1902PacificCable/index.htm","https://atlantic-cable.com/Cables/1903Pacific/index.htm"]},
-{"cifra":"1964","es":"el primer cable telefónico transpacífico, TPC-1, entró en servicio en 1964 entre Japón, Guam y Hawái, y se inauguró con una conversación entre el primer ministro japonés y el presidente de Estados Unidos?","en":"the first transpacific telephone cable, TPC-1, entered service in 1964 between Japan, Guam and Hawaii, and was inaugurated with a call between the Japanese prime minister and the US president?","pt":"o primeiro cabo telefônico transpacífico, TPC-1, entrou em operação em 1964 entre Japão, Guam e Havaí, e foi inaugurado com uma conversa entre o primeiro-ministro japonês e o presidente dos Estados Unidos?","tema":"historia","fuentes":["https://atlantic-cable.com/Cables/1964TPC1/index.htm","https://www.kddi.com/english/corporate/kddi/history/"]},
-{"cifra":"1989","es":"el primer cable de fibra óptica transpacífico, TPC-3/HAW-4, entró en servicio en 1989 entre California, Hawái, Guam y Japón, un año después de que TAT-8 llevara la fibra al Atlántico?","en":"the first transpacific fibre-optic cable, TPC-3/HAW-4, entered service in 1989 between California, Hawaii, Guam and Japan, a year after TAT-8 brought fibre to the Atlantic?","pt":"o primeiro cabo de fibra óptica transpacífico, TPC-3/HAW-4, entrou em operação em 1989 entre Califórnia, Havaí, Guam e Japão, um ano depois de o TAT-8 levar a fibra ao Atlântico?","tema":"historia","fuentes":["https://atlantic-cable.com/Cables/CableTimeLine/index1951.htm","https://ethw.org/Milestones:TAT-8_Transatlantic_Fiber_Optic_Cable,_1988"]},
-{"cifra":"1988","es":"TAT-8, el primer cable transatlántico de fibra óptica (1988), llevaba solo tres pares de fibra y podía cursar unas 40.000 llamadas a la vez, diez veces más que el último cable coaxial; es un hito reconocido por el IEEE?","en":"TAT-8, the first transatlantic fibre-optic cable (1988), carried only three fibre pairs and could handle about 40,000 calls at once, ten times more than the last coaxial cable; it is a recognised IEEE Milestone?","pt":"o TAT-8, primeiro cabo transatlântico de fibra óptica (1988), tinha apenas três pares de fibra e podia cursar cerca de 40.000 chamadas ao mesmo tempo, dez vezes mais que o último cabo coaxial; é um marco reconhecido pelo IEEE?","tema":"historia","fuentes":["https://ethw.org/Milestones:TAT-8_Transatlantic_Fiber_Optic_Cable,_1988","https://atlantic-cable.com/Cables/1988TAT8/index.htm"]},
-{"cifra":"1902","es":"en 1902 ya existía una red telegráfica submarina que daba la vuelta al mundo (la «All Red Line» británica), medio siglo antes de la primera llamada telefónica transoceánica por cable?","en":"by 1902 there was already a submarine telegraph network circling the globe (Britain's \"All Red Line\"), half a century before the first transoceanic telephone call by cable?","pt":"em 1902 já existia uma rede telegráfica submarina que dava a volta ao mundo (a «All Red Line» britânica), meio século antes da primeira chamada telefônica transoceânica por cabo?","tema":"historia","fuentes":["https://atlantic-cable.com/Cables/1902PacificCable/index.htm","https://www.sciencemuseum.org.uk/objects-and-stories/wiring-world"]},
-{"cifra":"1 Mbit/s → 1 Pbit/s","es":"el cable de 1866 transmitía unas 8 palabras por minuto; un cable moderno como Dunant mueve 250 terabits por segundo, y Petal, previsto para 2029, aspira a un petabit por segundo?","en":"the 1866 cable carried about 8 words per minute; a modern cable such as Dunant moves 250 terabits per second, and Petal, planned for 2029, aims at one petabit per second?","pt":"o cabo de 1866 transmitia cerca de 8 palavras por minuto; um cabo moderno como o Dunant move 250 terabits por segundo, e o Petal, previsto para 2029, aspira a um petabit por segundo?","tema":"historia","fuentes":["https://atlantic-cable.com/Cables/1866Atlantic/index.htm","https://cloud.google.com/blog/products/infrastructure/googles-dunant-subsea-cable-is-now-ready-for-service"]}
+{
+"cifra": "1850",
+"es": "el primer cable submarino de telégrafo se tendió el 28 de agosto de 1850 entre Dover y el cabo Gris-Nez, junto a Calais, por los hermanos Brett, y falló la primera noche; el primero duradero entre Inglaterra y Francia llegó en 1851?",
+"en": "the first submarine telegraph cable was laid on 28 August 1850 between Dover and Cap Gris-Nez, near Calais, by the Brett brothers, and failed on its first night; the first lasting England–France cable followed in 1851?",
+"pt": "o primeiro cabo submarino de telégrafo foi lançado em 28 de agosto de 1850 entre Dover e o cabo Gris-Nez, junto a Calais, pelos irmãos Brett, e falhou na primeira noite; o primeiro duradouro entre Inglaterra e França chegou em 1851?",
+"tema": "historia",
+"fuentes": [
+"https://atlantic-cable.com/Cables/1850Channel/index.htm",
+"https://collection.sciencemuseumgroup.org.uk/objects/co33341"
+]
+},
+{
+"cifra": "1858",
+"es": "el primer cable telegráfico transatlántico, entre Valentia (Irlanda) y Trinity Bay (Terranova), se completó el 5 de agosto de 1858; el mensaje de la reina Victoria al presidente Buchanan, del 16 de agosto, tardó horas en llegar completo y el cable murió a las pocas semanas?",
+"en": "the first transatlantic telegraph cable, between Valentia (Ireland) and Trinity Bay (Newfoundland), was completed on 5 August 1858; Queen Victoria's message to President Buchanan on 16 August took hours to arrive in full, and the cable died within weeks?",
+"pt": "o primeiro cabo telegráfico transatlântico, entre Valentia (Irlanda) e Trinity Bay (Terra Nova), ficou pronto em 5 de agosto de 1858; a mensagem da rainha Vitória ao presidente Buchanan, de 16 de agosto, demorou horas a chegar completa e o cabo morreu em poucas semanas?",
+"tema": "historia",
+"fuentes": [
+"https://atlantic-cable.com/Cables/1858Atlantic/index.htm",
+"https://www.history.com/this-day-in-history/first-transatlantic-telegraph-cable-completed"
+]
+},
+{
+"cifra": "1866",
+"es": "el primer cable transatlántico duradero lo tendió en julio de 1866 el vapor Great Eastern, el barco más grande de su época, entre Valentia (Irlanda) y Heart's Content (Terranova), tras el fracaso de 1858 y la pérdida del cable de 1865?",
+"en": "the first lasting transatlantic cable was laid in July 1866 by the steamship Great Eastern, the largest ship of its day, between Valentia (Ireland) and Heart's Content (Newfoundland), after the failure of 1858 and the loss of the 1865 cable?",
+"pt": "o primeiro cabo transatlântico duradouro foi lançado em julho de 1866 pelo vapor Great Eastern, o maior navio da época, entre Valentia (Irlanda) e Heart's Content (Terra Nova), depois do fracasso de 1858 e da perda do cabo de 1865?",
+"tema": "historia",
+"fuentes": [
+"https://atlantic-cable.com/Cables/1866Atlantic/index.htm",
+"https://www.heartscontentcablestation.ca/"
+]
+},
+{
+"cifra": "1861",
+"es": "la primera línea telegráfica transcontinental de Estados Unidos se completó el 24 de octubre de 1861 y dejó sin sentido al Pony Express, que cerró dos días después?",
+"en": "the first transcontinental telegraph line in the United States was completed on 24 October 1861 and made the Pony Express pointless; it closed two days later?",
+"pt": "a primeira linha telegráfica transcontinental dos Estados Unidos foi concluída em 24 de outubro de 1861 e tornou inútil o Pony Express, que fechou dois dias depois?",
+"tema": "historia",
+"fuentes": [
+"https://www.loc.gov/item/today-in-history/october-24/",
+"https://www.nps.gov/poex/learn/historyculture/index.htm"
+]
+},
+{
+"cifra": "1870",
+"es": "en 1870 un cable submarino unió por primera vez Gran Bretaña con la India (Bombay–Adén–Suez–Malta–Gibraltar–Porthcurno) y un telegrama entre Londres y Bombay pasó a tardar horas en vez de semanas?",
+"en": "in 1870 a submarine cable linked Britain with India for the first time (Bombay–Aden–Suez–Malta–Gibraltar–Porthcurno), and a telegram between London and Bombay took hours instead of weeks?",
+"pt": "em 1870 um cabo submarino uniu pela primeira vez a Grã-Bretanha à Índia (Bombaim–Áden–Suez–Malta–Gibraltar–Porthcurno), e um telegrama entre Londres e Bombaim passou a demorar horas em vez de semanas?",
+"tema": "historia",
+"fuentes": [
+"https://atlantic-cable.com/Cables/1870BritishIndian/index.htm",
+"https://pkporthcurno.com/"
+]
+},
+{
+"cifra": "1872",
+"es": "Australia quedó conectada al mundo en 1872: el cable submarino Java–Darwin llegó en noviembre de 1871 y la línea terrestre Darwin–Adelaida (Overland Telegraph, unos 3.200 km) se terminó el 22 de agosto de 1872; la conexión internacional se inauguró el 22 de octubre de ese año?",
+"en": "Australia was connected to the world in 1872: the Java–Darwin submarine cable arrived in November 1871 and the Darwin–Adelaide Overland Telegraph (about 3,200 km) was finished on 22 August 1872; the international link opened on 22 October that year?",
+"pt": "a Austrália ficou ligada ao mundo em 1872: o cabo submarino Java–Darwin chegou em novembro de 1871 e a linha terrestre Darwin–Adelaide (Overland Telegraph, cerca de 3.200 km) ficou pronta em 22 de agosto de 1872; a ligação internacional foi inaugurada em 22 de outubro desse ano?",
+"tema": "historia",
+"fuentes": [
+"https://atlantic-cable.com/Cables/1871Australia/index.htm",
+"https://www.nma.gov.au/defining-moments/resources/overland-telegraph"
+]
+},
+{
+"cifra": "1902",
+"es": "el primer cable transpacífico se completó en 1902: el Pacific Cable, de Vancouver (Bamfield) a Australia y Nueva Zelanda vía Fanning, Fiyi y Norfolk, y ese mismo año San Francisco quedó unido a Honolulú; Manila se alcanzó en 1903?",
+"en": "the first transpacific cable was completed in 1902: the Pacific Cable from Vancouver (Bamfield) to Australia and New Zealand via Fanning, Fiji and Norfolk, and that same year San Francisco was linked to Honolulu; Manila was reached in 1903?",
+"pt": "o primeiro cabo transpacífico ficou pronto em 1902: o Pacific Cable, de Vancouver (Bamfield) à Austrália e Nova Zelândia via Fanning, Fiji e Norfolk, e nesse mesmo ano São Francisco ficou ligada a Honolulu; Manila foi alcançada em 1903?",
+"tema": "historia",
+"fuentes": [
+"https://atlantic-cable.com/Cables/1902PacificCable/index.htm",
+"https://atlantic-cable.com/Cables/1903Pacific/index.htm"
+]
+},
+{
+"cifra": "1964",
+"es": "el primer cable telefónico transpacífico, TPC-1, entró en servicio en 1964 entre Japón, Guam y Hawái, y se inauguró con una conversación entre el primer ministro japonés y el presidente de Estados Unidos?",
+"en": "the first transpacific telephone cable, TPC-1, entered service in 1964 between Japan, Guam and Hawaii, and was inaugurated with a call between the Japanese prime minister and the US president?",
+"pt": "o primeiro cabo telefônico transpacífico, TPC-1, entrou em operação em 1964 entre Japão, Guam e Havaí, e foi inaugurado com uma conversa entre o primeiro-ministro japonês e o presidente dos Estados Unidos?",
+"tema": "historia",
+"fuentes": [
+"https://atlantic-cable.com/Cables/1964TPC1/index.htm",
+"https://www.kddi.com/english/corporate/kddi/history/"
+]
+},
+{
+"cifra": "1989",
+"es": "el primer cable de fibra óptica transpacífico, TPC-3/HAW-4, entró en servicio en 1989 entre California, Hawái, Guam y Japón, un año después de que TAT-8 llevara la fibra al Atlántico?",
+"en": "the first transpacific fibre-optic cable, TPC-3/HAW-4, entered service in 1989 between California, Hawaii, Guam and Japan, a year after TAT-8 brought fibre to the Atlantic?",
+"pt": "o primeiro cabo de fibra óptica transpacífico, TPC-3/HAW-4, entrou em operação em 1989 entre Califórnia, Havaí, Guam e Japão, um ano depois de o TAT-8 levar a fibra ao Atlântico?",
+"tema": "historia",
+"fuentes": [
+"https://atlantic-cable.com/Cables/CableTimeLine/index1951.htm",
+"https://ethw.org/Milestones:TAT-8_Transatlantic_Fiber_Optic_Cable,_1988"
+]
+},
+{
+"cifra": "1988",
+"es": "TAT-8, el primer cable transatlántico de fibra óptica (1988), llevaba solo tres pares de fibra y podía cursar unas 40.000 llamadas a la vez, diez veces más que el último cable coaxial; es un hito reconocido por el IEEE?",
+"en": "TAT-8, the first transatlantic fibre-optic cable (1988), carried only three fibre pairs and could handle about 40,000 calls at once, ten times more than the last coaxial cable; it is a recognised IEEE Milestone?",
+"pt": "o TAT-8, primeiro cabo transatlântico de fibra óptica (1988), tinha apenas três pares de fibra e podia cursar cerca de 40.000 chamadas ao mesmo tempo, dez vezes mais que o último cabo coaxial; é um marco reconhecido pelo IEEE?",
+"tema": "historia",
+"fuentes": [
+"https://ethw.org/Milestones:TAT-8_Transatlantic_Fiber_Optic_Cable,_1988",
+"https://atlantic-cable.com/Cables/1988TAT8/index.htm"
+]
+},
+{
+"cifra": "1902",
+"es": "en 1902 ya existía una red telegráfica submarina que daba la vuelta al mundo (la «All Red Line» británica), medio siglo antes de la primera llamada telefónica transoceánica por cable?",
+"en": "by 1902 there was already a submarine telegraph network circling the globe (Britain's \"All Red Line\"), half a century before the first transoceanic telephone call by cable?",
+"pt": "em 1902 já existia uma rede telegráfica submarina que dava a volta ao mundo (a «All Red Line» britânica), meio século antes da primeira chamada telefônica transoceânica por cabo?",
+"tema": "historia",
+"fuentes": [
+"https://atlantic-cable.com/Cables/1902PacificCable/index.htm",
+"https://www.sciencemuseum.org.uk/objects-and-stories/wiring-world"
+]
+},
+{
+"cifra": "1 Mbit/s → 1 Pbit/s",
+"es": "el cable de 1866 transmitía unas 8 palabras por minuto; un cable moderno como Dunant mueve 250 terabits por segundo, y Petal, previsto para 2029, aspira a un petabit por segundo?",
+"en": "the 1866 cable carried about 8 words per minute; a modern cable such as Dunant moves 250 terabits per second, and Petal, planned for 2029, aims at one petabit per second?",
+"pt": "o cabo de 1866 transmitia cerca de 8 palavras por minuto; um cabo moderno como o Dunant move 250 terabits por segundo, e o Petal, previsto para 2029, aspira a um petabit por segundo?",
+"tema": "historia",
+"fuentes": [
+"https://atlantic-cable.com/Cables/1866Atlantic/index.htm",
+"https://cloud.google.com/blog/products/infrastructure/googles-dunant-subsea-cable-is-now-ready-for-service"
+]
+}
 ]
