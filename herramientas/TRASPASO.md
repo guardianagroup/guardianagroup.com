@@ -317,3 +317,19 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   en GitHub, en las dos ramas.
 - **Lo que queda** (por orden): tercera voz para las 19 capacidades en discrepancia; fibra terrestre de los países grandes; más centros de datos e IXP
   por regiones (Asia, África); revisar con el dueño cuándo abrir los 40 idiomas.
+
+## 12. Mañana del 23 Oct 2026 (Opus 5.5): capacidades, fibra de países grandes y viaje en 3D a la vista
+- **Capacidades**: tercera voz con fuentes (Claude, `cables-capacidad/claude-capacidad-2.json`, cada cifra con URL del operador, el fabricante,
+  la FCC o prensa del sector; nada de TeleGeography). 113 → **127 cables** (SEA-ME-WE 4 122, Firmina 240, BBG 55, MainOne 10, HAWK 20, PPC-1 12…).
+  Siguen fuera, sin acuerdo: CANTAT 3, Americas-II, ACE (12,8 en servicio; los 30 de Ciena están anunciados, no terminados), MAYA-1, FNAL, FA-1,
+  AEC-1, MENA. Gemini no llegó a contestar la ronda de capacidades.
+- **Fibra de países grandes**: no hay datos abiertos con trazados para ninguno (informe en el chat; OFDS sin licencia). Nueva herramienta
+  `herramientas/fibra_agencia.py`: ChatGPT, Grok y Gemini dan las troncales por país como lista ordenada de ciudades
+  (`herramientas/fibra-agencia/<voz>-troncales-N.json`); un tramo entra solo si otra voz da la misma operadora por esas dos ciudades sin rodeo
+  (≤ 1,35 × la recta + 60 km); se dibuja ciudad a ciudad (GeoNames) con el detalle de la voz más precisa. Sale `herramientas/fuentes/fibra-agencia.json`,
+  que `fibra_tierra.py` añade como 5.ª fuente, al final (no mueve las líneas anteriores). Hoy: **24 tramos, 27.020 km** en RU, KZ, IN, IR, SA, EG, TH,
+  PH, PE, CO, EC, BO, AR. Faltan por acuerdo: Brasil, México, Indonesia y Chile (las voces no coinciden en operadora o ciudades).
+- **Viaje en 3D** (dueño: «está muy escondido»; ChatGPT y Grok de acuerdo con su propuesta): encabeza el panel «Mi conexión» en ordenador, con
+  «Ver el viaje en 3D» que mide primero si hace falta y despega solo; «Guardar el viaje (PDF)» aparece al lado cuando ya hay medida. «Ver / No ver»
+  pasa a una × de cierre (y Escape, que no cierra el panel si se está saliendo del viaje). Frases nuevas traducidas a los 42 idiomas.
+- Versión `v=20261024k` (la siguiente, `l`). Vista previa del amigo: **versión 16**.
