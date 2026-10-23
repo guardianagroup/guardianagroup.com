@@ -61,6 +61,11 @@ body.mano #tierra, body.mano #rutas { cursor: pointer; }
 header { position: fixed; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 26px 40px; flex-wrap: wrap; opacity: 0; transition: opacity 1.2s .9s; }
 .listo header { opacity: 1; }
 .marca { font: 700 15px/1 var(--display); letter-spacing: .32em; }
+/* 23 Oct 2026, 18:42 (owner): the line under GUARDIANA, as in «Conocer GUARDIANA» */
+.marca small { display: block; font: 500 11px/1.3 var(--texto); letter-spacing: .03em; color: #8E99A6; margin-top: 5px; }
+/* 23 Oct 2026 (owner): GUARDIANA takes you back to the main page, at the very start */
+a.marca { color: inherit; text-decoration: none; }
+a.marca:hover { color: #FFFFFF; }
 #estado { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px; border: 1px solid var(--line); border-radius: 999px; background: rgba(12,17,24,.72); backdrop-filter: blur(12px); font: 500 13px/1.2 var(--texto); }
 #estado .punto { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); animation: respira 3s ease-in-out infinite; }
 @keyframes respira { 50% { opacity: .45; } }

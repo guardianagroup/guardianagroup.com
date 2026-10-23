@@ -33,6 +33,7 @@
     'Radiografías': ['X-Rays', 'Radiografias'],
     // Radiografías, its own door (23 Oct 2026, 13:40)
     'Conocer GUARDIANA': ['About GUARDIANA', 'Conhecer a GUARDIANA'],
+    'Tus datos, bajo tu control': ['Your data, under your control', 'Seus dados, sob seu controle'],
     'Un tramo por tierra sin dibujar': ['One stretch over land not drawn', 'Um trecho por terra não desenhado'],
     'tramos por tierra sin dibujar': ['stretches over land not drawn', 'trechos por terra não desenhados'],
     'Lo que ven de ti': ['What they see of you', 'O que veem de você'],
