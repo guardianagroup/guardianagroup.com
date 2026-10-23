@@ -604,3 +604,5 @@ body.viaje header, body.viaje #capas, body.viaje #puertas, body.viaje #directo, 
 .capas button[aria-pressed="true"]:hover i, .sat-vista .orb button[aria-pressed="true"]:hover i { border-color: rgba(var(--si),.85); }
 .sat-vista .orb button { grid-template-columns: 26px 1fr; align-items: center; }
 @media (prefers-reduced-motion: reduce) { .capas button i::before, .sat-vista .orb button i::before { transition: none; } }
+.sat-vista .orb button:disabled { opacity: .38; cursor: default; } /* 22 Oct 2026, 22:48: a refinement whose class is off (Compañías pequeñas without Centros de datos) */
+.sat-vista .orb button:disabled:hover { background: none; }

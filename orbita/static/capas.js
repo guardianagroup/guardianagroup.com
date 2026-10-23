@@ -32,6 +32,12 @@
     puntos: { datos: true, intercambio: true, estaciones: true, pequenos: true }, // 22 Oct 2026, 22:42 (owner: «es un semáforo»): every class is «on = shown», no inverted filters
   };
   const PRINCIPALES = { sub: ['gigante', 'grande', 'regional', 'sinDato'], fibra: ['principal', 'largo', 'nacional', 'regional'], puntos: ['datos', 'intercambio', 'estaciones'] };
+  // 22 Oct 2026, 22:48 (owner: «llevo cuatro… se cierra y aún me quedaba uno… no se puede cerrar antes ni después»): the card
+  // closes (the layer goes off) only when every switch that shows something is red. «Compañías pequeñas» only refines the
+  // data centres, so it counts only while «Centros de datos» is on (otherwise it is greyed out).
+  const depende = (k, q) => k === 'puntos' && q === 'pequenos';
+  const cuentaEn = (k, q) => !depende(k, q) || !!CLASES.puntos.datos;
+  const todasApagadas = (k) => Object.keys(CLASES[k]).every((q) => !cuentaEn(k, q) || !CLASES[k][q]);
   // which class a submarine cable belongs to (by its published capacity) and whether it shows now
   const claseSub = (i) => { const c = capacidadDe(i); return !c ? 'sinDato' : c.tbps >= CAP.umbrales.gigante ? 'gigante' : c.tbps >= CAP.umbrales.grande ? 'grande' : 'regional'; };
   const veSub = (i, l) => CLASES.sub[claseSub(i)] && (!l.aprox || CLASES.sub.aprox);
@@ -1658,7 +1664,7 @@
         bt.addEventListener('click', () => {
           CLASES[k][c] = !CLASES[k][c];
           // every main class switched off = the layer off (and its classes back on for the next time), never an empty layer that looks broken
-          if (PRINCIPALES[k].every((q) => !CLASES[k][q])) { for (const q of PRINCIPALES[k]) CLASES[k][q] = true; if (k === 'sub' && capas.sub) capas.sub.visK = null; pon(k, false); return; } if (k === 'sub' && capas.sub) capas.sub.visK = null; pintaClases(); pintaNota();
+          if (todasApagadas(k)) { for (const q of Object.keys(CLASES[k])) CLASES[k][q] = true; if (k === 'sub' && capas.sub) capas.sub.visK = null; pon(k, false); return; } if (k === 'sub' && capas.sub) capas.sub.visK = null; pintaClases(); pintaNota();
         });
         orb.appendChild(bt);
       }
@@ -1676,7 +1682,7 @@
       if (!caja.hidden) abierta = true;
       const b = document.querySelector(`#capas [data-capa="${k}"]`);
       if (b && !caja.hidden && innerWidth > 760) { const r = b.getBoundingClientRect(), w = caja.offsetWidth || 340; let x = r.left + r.width / 2 - w / 2; x = Math.max(12, Math.min(innerWidth - w - 12, x)); caja.style.left = x + 'px'; caja.style.transform = 'none'; caja.style.top = (r.bottom + 10) + 'px'; }
-      caja.querySelectorAll('[data-clase]').forEach((bt) => { const c = bt.dataset.clase; bt.setAttribute('aria-pressed', String(!!CLASES[k][c])); const n = cuentaClase(k, c); bt.querySelector('b').textContent = n ? num(n) : ''; });
+      caja.querySelectorAll('[data-clase]').forEach((bt) => { const c = bt.dataset.clase; bt.setAttribute('aria-pressed', String(!!CLASES[k][c])); bt.disabled = !cuentaEn(k, c); const n = cuentaClase(k, c); bt.querySelector('b').textContent = n ? num(n) : ''; });
     }
     document.body.classList.toggle('tarjeta', abierta);
   }
