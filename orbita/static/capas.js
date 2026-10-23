@@ -28,7 +28,7 @@
   // class of a layer cannot be switched off: the layer is switched off instead). Not remembered between visits.
   const CLASES = {
     sub: { gigante: true, grande: true, regional: true, sinDato: true, aprox: true, previstos: true },
-    fibra: { principal: true, largo: true, nacional: true, regional: true, obra: true },
+    fibra: { principal: true, largo: true, nacional: true, regional: true }, // 23 Oct 2026, 18:45 (owner): «En construcción» out — its 8 routes could not be seen anywhere
     puntos: { datos: true, pequenos: true, intercambio: true, estaciones: true }, // 22 Oct 2026, 22:42 (owner: «es un semáforo»): every class is «on = shown», no inverted filters
   };
   const PRINCIPALES = { sub: ['gigante', 'grande', 'regional', 'sinDato'], fibra: ['principal', 'largo', 'nacional', 'regional'], puntos: ['datos', 'intercambio', 'estaciones'] };
@@ -1699,7 +1699,7 @@
     // 22 Oct 2026, 22:02 (owner): «palabras para que sean entendibles, todo»
     // 23 Oct 2026, 09:17 (owner: «busca las palabras más apropiadas, entendibles y profesionales»): agency round with ChatGPT and Grok
     sub: { titulo: 'Cables submarinos', clases: { gigante: ['Autopistas entre continentes', 'Los cables más potentes: más de 100 Tbit/s.'], grande: ['Grandes rutas', 'Entre 20 y 100 Tbit/s: unen países y regiones.'], regional: ['Cables regionales', 'Menos de 20 Tbit/s: unen islas y países vecinos.'], sinDato: ['Capacidad no publicada', 'Cables en funcionamiento cuya capacidad no han publicado sus propietarios.'], aprox: ['Trazado aproximado', 'Sabemos dónde llega, pero no su recorrido exacto. Línea discontinua.'], previstos: ['Cables en proyecto', 'Anunciados o en construcción; aún no transportan datos. Línea discontinua.'] } },
-    fibra: { titulo: 'Fibra por tierra', clases: { principal: ['Grandes troncales', 'Rutas de 800 km o más, o compartidas por varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'], obra: ['En construcción', 'Rutas en construcción. Línea discontinua.'] } },
+    fibra: { titulo: 'Fibra por tierra', clases: { principal: ['Grandes troncales', 'Rutas de 800 km o más, o compartidas por varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'] } },
     puntos: { titulo: 'Puntos de red', clases: { datos: ['Grandes operadores', 'Centros de datos de compañías con cinco o más en el mapa.'], pequenos: ['Otros centros de datos', 'De compañías con menos de cinco en el mapa, o sin operador identificado.'], intercambio: ['Puntos de intercambio', 'Donde las redes de distintas compañías se conectan entre sí.'], estaciones: ['Bases y antenas', 'Bases del Ártico y la Antártida, y estaciones terrestres de satélites.'] } },
   };
 
