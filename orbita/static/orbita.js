@@ -765,10 +765,8 @@ void main(){
       cabeza(qc, ACERO, 1.8);
     }
     cx2.globalCompositeOperation = 'source-over';
-    if (qc.ve && qc.z > 0) {
-      cx2.font = '500 10px "IBM Plex Mono", monospace'; cx2.fillStyle = 'rgba(232,236,241,.82)';
-      cx2.textAlign = 'left'; cx2.fillText(etiquetaCasa(), qc.x + 12, qc.y + 4);
-    }
+    // 22 Oct 2026, 22:05 (owner): «quita del mapa lo que pone tu equipo, Colombia, aproximadamente; no queda bien» — the
+    // pulse stays (it is where the journey starts), the words go
     // what was cut, said in words next to where it happened. 20 Oct 2026 (owner): one at a time, it opens
     // outwards from the planet's centre (left half to the left, right half to the right) and never covers a door,
     // the header or the live list.
