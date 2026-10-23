@@ -651,3 +651,102 @@ body.viaje.viaje-fin .altura { opacity: 1 !important; transition-delay: 0s; }
 .sat-vista .orb .titulo .plegar, .sat-vista .titulo .plegar { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px 4px 7px; margin: -4px -6px -4px 8px; border: 1px solid var(--line); border-radius: 999px; color: #A9B4C0; font: 500 10.5px/1 var(--texto); letter-spacing: 0; text-transform: none; transition: color .15s, border-color .15s, background .15s; }
 .sat-vista .orb .titulo .plegar:hover, .sat-vista .titulo .plegar:hover { color: var(--fg); border-color: rgba(156,195,228,.5); background: rgba(156,195,228,.1); }
 .sat-vista .orb .titulo .plegar:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ESPEJO, «Con / Sin GUARDIANA» (owner, 23 Oct 2026): two buttons under the planet; pressing one turns the planet into
+   the measurement of eleven sports and news sites. Left: what was measured; bottom: the choice; right, on demand: the list. */
+.espejo-modo { position: fixed; left: 50%; bottom: calc(26px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 30; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; transition: opacity .8s 1.9s; }
+.listo .espejo-modo { opacity: 1; }
+.espejo-modo .pre { font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8A95A2; white-space: nowrap; transition: opacity .3s; }
+body.en-espejo .espejo-modo .pre { opacity: 0; height: 0; margin-top: -8px; overflow: hidden; }
+.espejo-modo .seg { display: flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; border: 1px solid var(--line); background: rgba(12,17,24,.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.espejo-modo [data-modo] { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 9px; padding: 10px 18px 10px 14px; border-radius: 999px; font: 600 13px/1 var(--texto); color: var(--muted); white-space: nowrap; transition: color .2s, background .2s, box-shadow .2s; }
+.espejo-modo [data-modo] i { width: 8px; height: 8px; border-radius: 50%; border: 1.4px solid currentColor; transition: background .2s, box-shadow .2s; }
+.espejo-modo [data-modo]:hover { color: var(--fg); background: rgba(156,195,228,.08); }
+.espejo-modo [data-modo="sin"][aria-checked="true"] { color: var(--fg); background: rgba(156,195,228,.16); }
+.espejo-modo [data-modo="sin"][aria-checked="true"] i { background: #9CC3E4; border-color: #9CC3E4; box-shadow: 0 0 10px rgba(156,195,228,.9); }
+.espejo-modo [data-modo="con"][aria-checked="true"] { color: var(--accent-fg); background: var(--accent); }
+.espejo-modo [data-modo="con"][aria-checked="true"] i { background: var(--accent-fg); border-color: var(--accent-fg); }
+.espejo-modo [data-modo]:focus-visible, .espejo-modo .salir:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.espejo-modo .salir { all: unset; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; margin-left: 2px; border-radius: 50%; color: var(--muted); border: 1px solid transparent; }
+.espejo-modo .salir:hover { color: var(--fg); border-color: var(--line); }
+.espejo-modo .salir[hidden] { display: none; }
+body.dentro .espejo-modo, body.viaje .espejo-modo, body.con-informe .espejo-modo { opacity: 0 !important; pointer-events: none; }
+body.solo-tu:not(.espejo-hud) .espejo-modo .pre { opacity: .35; }
+/* the layer note moves up while the two buttons sit at the bottom */
+.capa-nota { bottom: calc(108px + env(safe-area-inset-bottom, 0px)); }
+
+/* the mirror open: a clean planet and its own instruments */
+body.en-espejo #directo, body.en-espejo #puertas, body.en-espejo #capas, body.en-espejo #sat-vista, body.en-espejo #sat-fase, body.en-espejo #capa-nota, body.en-espejo #ficha, body.en-espejo .sat-ficha, body.en-espejo .ficha-panel, body.en-espejo .altura { opacity: 0 !important; pointer-events: none !important; transition: opacity .4s; }
+body.en-espejo #estado { opacity: .35; }
+.espejo-hud { position: fixed; left: calc(40px + env(safe-area-inset-left, 0px)); top: max(104px, calc(50% - 330px)); width: 300px; max-height: calc(100vh - 230px); overflow: auto; z-index: 20; display: flex; flex-direction: column; gap: 12px; scrollbar-width: none; animation: espejo-entra .6s cubic-bezier(.2,.7,.2,1); }
+.espejo-hud::-webkit-scrollbar { display: none; }
+.espejo-hud[hidden] { display: none; }
+@keyframes espejo-entra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.espejo-hud .k { display: flex; gap: 8px; align-items: center; font: 500 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #8A95A2; }
+.espejo-hud .k .sep { color: #4A5664; }
+.espejo-hud .t { margin: 0; font: 650 30px/1.05 var(--texto); letter-spacing: -.01em; color: var(--fg); text-shadow: 0 2px 18px rgba(6,8,12,.9); text-wrap: balance; }
+.espejo-hud.con .t { color: var(--accent); }
+.espejo-hud .d2 { display: none; }
+.espejo-hud .d { margin: 0; font: 400 13px/1.5 var(--texto); color: #B4BEC9; text-shadow: 0 1px 10px rgba(6,8,12,.95); max-width: 34ch; }
+.espejo-hud .cifras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.espejo-hud .cifras div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.espejo-hud .cifras b { font: 650 28px/1 var(--texto); font-variant-numeric: tabular-nums; color: var(--fg); letter-spacing: -.01em; }
+.espejo-hud .cifras .rojo b { color: var(--alerta); }
+.espejo-hud .cifras span { font: 500 9.5px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #8A95A2; }
+.espejo-hud .sitios { display: flex; flex-wrap: wrap; gap: 5px; }
+.espejo-hud .sitios button { all: unset; cursor: pointer; display: inline-flex; align-items: baseline; gap: 5px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); background: rgba(12,17,24,.6); font: 500 11.5px/1 var(--texto); color: var(--muted); white-space: nowrap; transition: color .2s, border-color .2s, background .2s; }
+.espejo-hud .sitios button small { font: 500 9px/1 var(--mono); letter-spacing: .06em; color: #6F7B88; }
+.espejo-hud .sitios button:hover { color: var(--fg); border-color: #3A4656; }
+.espejo-hud .sitios button[aria-checked="true"] { color: var(--fg); border-color: rgba(156,195,228,.6); background: rgba(156,195,228,.14); }
+.espejo-hud .sitios button:focus-visible, .espejo-hud .ver:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.espejo-hud .paises .k2 { font: 500 9.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8A95A2; margin-bottom: 8px; }
+.espejo-hud .paises ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.espejo-hud .paises li { display: grid; grid-template-columns: 112px 1fr 52px; align-items: center; gap: 10px; font: 500 12px/1.2 var(--texto); color: #C4CCD5; }
+.espejo-hud .paises .n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.espejo-hud .paises .barra { position: relative; display: flex; height: 6px; border-radius: 3px; background: rgba(30,38,49,.8); overflow: hidden; }
+.espejo-hud .paises .barra i { display: block; height: 100%; transition: width .9s cubic-bezier(.2,.7,.2,1); }
+.espejo-hud .paises .barra .q { background: var(--accent); }
+.espejo-hud .paises .barra .k { background: var(--alerta); opacity: .85; }
+.espejo-hud .paises .v { text-align: right; font: 500 11px/1 var(--mono); font-variant-numeric: tabular-nums; color: var(--muted); }
+.espejo-hud .ver { all: unset; cursor: pointer; align-self: flex-start; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font: 600 12px/1 var(--texto); }
+.espejo-hud .ver:hover { background: var(--accent); color: var(--accent-fg); }
+.espejo-hud .met { margin: 0; font: 400 10.5px/1.5 var(--mono); color: #7C8794; }
+.espejo-hud .met b { font-weight: 500; color: var(--accent); white-space: nowrap; }
+.espejo-lista { position: fixed; top: 96px; right: calc(96px + env(safe-area-inset-right, 0px)); width: 340px; max-width: calc(100vw - 32px); max-height: calc(100vh - 230px); overflow: auto; z-index: 31; display: flex; flex-direction: column; padding: 12px 14px; border-radius: 16px; border: 1px solid var(--line); background: rgba(10,14,20,.9); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 18px 50px rgba(0,0,0,.45); scrollbar-width: thin; }
+.espejo-lista[hidden] { display: none; }
+.espejo-lista .titulo { position: sticky; top: -12px; display: flex; justify-content: space-between; align-items: center; margin: -12px -14px 4px; padding: 12px 14px 8px; background: rgba(10,14,20,.96); font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8A95A2; }
+.espejo-lista .cerrar { all: unset; cursor: pointer; display: inline-flex; padding: 4px; border-radius: 6px; color: var(--muted); }
+.espejo-lista .cerrar:hover { color: var(--fg); background: rgba(156,195,228,.1); }
+.espejo-lista .grupo { padding: 8px 0; border-top: 1px solid var(--line); }
+.espejo-lista h3 { display: flex; justify-content: space-between; margin: 0 0 6px; font: 600 13px/1.3 var(--texto); color: var(--fg); }
+.espejo-lista h3 span { font: 500 11px/1.3 var(--mono); color: var(--muted); }
+.espejo-lista ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.espejo-lista li { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; }
+.espejo-lista li b { font: 500 12.5px/1.3 var(--texto); color: #DDE3EA; }
+.espejo-lista li .cats { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.espejo-lista li .cats i, .espejo-lista li .cats em { font: 500 9px/1 var(--mono); font-style: normal; letter-spacing: .06em; text-transform: uppercase; padding: 3px 5px; border-radius: 4px; color: #8A95A2; background: rgba(30,38,49,.8); white-space: nowrap; }
+.espejo-lista li .cats i.corta { color: #C9A9A3; }
+.espejo-lista li .cats em.corte { color: var(--alerta); background: var(--alerta-suave); }
+.espejo-lista li .cats em.parte { color: #E0B66A; background: rgba(224,182,106,.1); }
+.espejo-lista li .cats em.queda { color: var(--accent); background: rgba(156,195,228,.1); }
+.espejo-lista li small { grid-column: 1 / -1; font: 400 10px/1.4 var(--mono); color: #6F7B88; overflow-wrap: anywhere; }
+.espejo-lista .met { margin: 10px 0 2px; padding-top: 10px; border-top: 1px solid var(--line); font: 400 10px/1.5 var(--mono); color: #7C8794; }
+.espejo-lista .met b { font-weight: 500; color: var(--accent); }
+.espejo-lista li.cortada b { color: #8A95A2; text-decoration: line-through; text-decoration-color: rgba(224,122,108,.7); }
+@media (max-width: 1100px) { .espejo-hud { width: 268px; } .espejo-hud .t { font-size: 26px; } .espejo-hud .cifras b { font-size: 24px; } }
+@media (max-width: 760px) {
+  .espejo-modo { bottom: calc(66px + env(safe-area-inset-bottom, 0px)); }
+  .espejo-modo .pre { font-size: 9px; }
+  .espejo-modo [data-modo] { padding: 9px 13px 9px 11px; font-size: 12px; }
+  .capa-nota { bottom: calc(150px + env(safe-area-inset-bottom, 0px)); }
+  body.en-espejo .espejo-modo { bottom: calc(18px + env(safe-area-inset-bottom, 0px)); }
+  .espejo-hud { left: 12px; right: 12px; top: calc(108px + env(safe-area-inset-top, 0px)); width: auto; max-height: 40vh; gap: 8px; padding: 10px 12px 12px; border-radius: 16px; background: rgba(8,11,16,.8); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .espejo-hud .t { font-size: 21px; } .espejo-hud .d, .espejo-hud .met { display: none; } .espejo-hud .d2 { display: block; margin: -4px 0 0; font: 400 11.5px/1.35 var(--texto); color: #B4BEC9; }
+  .espejo-hud .ver { padding: 7px 12px; font-size: 11.5px; }
+  .espejo-hud .cifras { padding: 7px 0; gap: 6px; } .espejo-hud .cifras b { font-size: 20px; } .espejo-hud .cifras span { font-size: 8.5px; }
+  .espejo-hud .sitios { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -12px; padding: 0 12px; }
+  .espejo-hud .sitios::-webkit-scrollbar { display: none; }
+  .espejo-hud .paises { display: none; }
+  .espejo-lista { top: auto; bottom: 0; right: 0; left: 0; width: 100%; max-width: none; max-height: 70vh; border-radius: 16px 16px 0 0; }
+}
+@media (prefers-reduced-motion: reduce) { .espejo-hud { animation: none; } .espejo-hud .paises .barra i { transition: none; } }
