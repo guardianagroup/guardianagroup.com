@@ -47,7 +47,7 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
   esperar unos segundos. Pulsar «Ahora no» del aviso al cargar.
 - Commits: terminar con `Co-Authored-By: Claude … <noreply@anthropic.com>` y la línea `Claude-Session:` que dé el sistema.
 
-## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión 23i)
+## 3. Estado de Órbita hoy (todo publicado en guardianagroup.com/orbita/, versión 23i; la 23j será la siguiente)
 - Planeta WebGL con mapa 16K en teselas; modo «limpio» desde ×4 (agua negra, tierra gris, datos en blanco, sin luces).
 - **Zoom hasta ×80.000 (500 m de altura nominal)**, suavizado logarítmico, doble clic por pasos. Indicador de altura a la derecha, encima de los botones
   (`#altura`, 40.000 km → 500 m). Desde ×8 (`body.hondo`) desaparecen los botones de capas y el filtro de satélites. Latitud hasta ±89,5° al acercarse.
@@ -59,8 +59,8 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
 - **Profundidad y altitud** (`cables-relieve.json`, 1.243 tramos; `fibra-relieve.json`, 5.039): generadas por el workflow con `herramientas/relieve.py`
   (ETOPO 2022 60s, en caché del runner). Fila «Profundidad del fondo bajo este tramo: máxima · media · % en plataforma · % en llanura abisal» y
   «Altitud del terreno: hasta · media». Clave de cada tramo = `n_puntos:Σ(round(lon·1000)+round(lat·1000))`, la misma en `relieve.py` y `claveRelieve` (capas.js).
-- Fronteras, nombres de regiones, **nombres de país** desde ×2,2 con **ficha de país** (`fichaPais`; `datos/paises.json`: **115 países, todos verificados** (Claude escribe, ChatGPT corrige → `confirmado:true`; respuestas en
-  `herramientas/paises-agencia/`). Lotes 5–8 hechos (22 Oct, 18:30–19:40). Lote 9 pedido a ChatGPT (tab-5): KH, LA, MM, BN, PG, FJ, LY, SD, ZM, ZW, NA, BW, MG, MW, ML → recoger, revisar como segunda voz (quitar fechas de 2026 que solo dé una voz; el merge es un script corto en bash, ver lotes 5–8 en el historial), fusionar).
+- Fronteras, nombres de regiones, **nombres de país** desde ×2,2 con **ficha de país** (`fichaPais`; `datos/paises.json`: **175 países, todos verificados** (Claude escribe, ChatGPT corrige → `confirmado:true`; respuestas en
+  `herramientas/paises-agencia/`). Lotes 5–12 hechos (22 Oct, 18:30–19:50; respuestas en `herramientas/paises-agencia/chatgpt-paises-5..12.json`). **Faltan** (lote 13, el último útil): VU, SB, PF, NC, FM, MO, LI, AD, MC, SM, GL, FO, AW, CW, GI, BM, KY, MQ, GP, RE. Procedimiento exacto en §6.2.
 - **Polos**: 34 estaciones en `datos/puntos-extra.json` (tipo `estacion`, `cargaEstaciones`/`EST`), visibles con la capa de cables, ficha al pasar el ratón.
   5 cables previstos punteados en `datos/cables-previstos.json` con toda la información del proyecto. Incidencias en `datos/cables-notas.json` (20 claves).
 - **Ficha completa** (`panel()` en capas.js): al pasar el ratón, resumen; al hacer clic, panel lateral `#ficha-panel` con resumen, «Qué significa para ti»,
@@ -133,18 +133,23 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
 - `orbita/datos/noticias.json`: noticias con dos fuentes (campos fecha, tema, es/en/pt, fuentes); en pantalla «NOTICIA · ¿SABÍAS QUE…?» y «Noticia verificada · dos fuentes».
   **Tarea programada «Noticias Órbita (GUARDIANA)»** (id `trig_016bgAVZovsMq3wBuUESmpqN`, cada día a las 7:41 de Bogotá, aprobación automática): una sesión
   nueva clona el repo, busca noticias de la semana, exige dos fuentes, añade a noticias.json y publica en web-idiomas y main. El dueño no tiene que hacer nada.
-- `orbita/datos/sabias.json`: **75 «¿Sabías que…?» verificados** (lote 2 de 42: Grok dio ok a 41, rechazó el 42; el 41 repetía el 5) (ChatGPT redacta 40 → `herramientas/sabias-agencia/chatgpt-sabias-1.json`; Grok verifica →
+- `orbita/datos/sabias.json`: **121 «¿Sabías que…?» verificados** (lote 1: 35; lote 2: 40 — dueños, IRU, antiguos, costes, públicos/privados, Egipto, cortes, barcos, torres, centros de datos; historia: 19 — primer cable 1850, 1858/1866, 1861, 1870, 1872, 1902, 1943, 1956, 1964, 1985, 1988, 1989, 1996; lote 3: 27 — satélites, 5G, fabricantes, récords, DNS, tráfico, energía, latencia). Verificaciones en `herramientas/sabias-agencia/*-verificacion.txt` (ChatGPT redacta 40 → `herramientas/sabias-agencia/chatgpt-sabias-1.json`; Grok verifica →
   `grok-sabias-1-verificacion.txt`; entran los que pasan, `voces: [chatgpt, grok]`). Tarjeta: `sabia()` (fijo, etiqueta «¿SABÍAS QUE…?») y `noticia()` (más nuevas,
-  más probables) en cada vuelta. Lote 2 hecho (`chatgpt-sabias-2.json`, `grok-sabias-2-verificacion.txt`). Siguiente lote posible: satélites (Starlink, OneWeb, Kuiper),
-  radiofrecuencia, 5G, fabricantes de fibra (Corning, Prysmian), récords de velocidad (NICT), latencia, DNS raíz.
+  más probables) en cada vuelta. Lotes 2 y 3 e historia hechos. Siguientes lotes posibles: cables por región (África, Pacífico, Ártico), centros de datos récord por país, fibra terrestre (RailTel, Lumen, China Telecom),
+  ciberseguridad de la infraestructura (cortes, reparaciones), espacio (estaciones terrenas, Deep Space Network).
 - La **tarea de noticias ya se ejecutó una vez a mano** (sesión cse_01QJZrcY2qdxAmghLwn69sei): 11 noticias. Tras cada ejecución diaria hay que traer
   `orbita/datos/noticias.json` de origin/main a web-idiomas (`git checkout origin/main -- orbita/datos/noticias.json`).
 - Lo de la subasta (quién paga por los datos) NO va en el viaje 3D: será un capítulo aparte del informe cuando se genere desde el programa (dueño de acuerdo, 17:10).
 
 ## 4c. Puntos de intercambio (IXP) por la agencia
 - `herramientas/ixp-agencia/chatgpt-ixp-1.json` (212 IXP de ChatGPT) y `grok-ixp-1..4.json` (las cuatro tandas verificadas por Grok): **160 IXP de la agencia**
-  ya en `puntos-extra.json`. **Lote 2**: `chatgpt-ixp-2.json` (82 IXP de los países que faltaban: Magreb, Sahel, Oriente Medio, Caribe, Cáucaso, Asia central,
-  Ucrania, Pacífico) pedido a Grok el 22 Oct 19:45 (tab-3, formato una línea JSON por IXP con `estado`) → guardar en `grok-ixp-5.json`, correr `ixp_agencia.py`, publicar. `python3 herramientas/ixp_agencia.py` cruza por país+nombre (≥2 voces, <60 km), descarta los que
+  ya en `puntos-extra.json`. **Lote 2 hecho**: `chatgpt-ixp-2.json` (82) + `grok-ixp-5.json` y `grok-ixp-6.json` (Grok en dos tandas de 41, formato una línea JSON por IXP
+  con `estado`; Claude dejó «no verificado» RUDAKI-IX, PITER-IX Kiev e ixFabric Kyiv) → **225 IXP de la agencia**. Grok con tandas >45 falla («no pudo terminar»); pedir en dos mitades.
+- **Centros de datos por la agencia (nuevo, 22 Oct 19:50)**: `herramientas/centros_agencia.py` (copia de ixp_agencia.py: lee `herramientas/centros-agencia/<voz>-*.json`
+  `[{nombre, operador, ciudad, pais, lat, lon, desde, nota}]`, ≥2 voces en el mismo país a <30 km, no duplica OSM a <600 m, escribe tipo `datos` con `agencia:true` en
+  puntos-extra.json). Primera lista pedida a ChatGPT (chat «Lista de IXP mundiales», pestaña `seed`): 120–200 centros de América Latina → guardar en
+  `herramientas/centros-agencia/chatgpt-centros-1.json`, pedir a Grok la verificación (misma fórmula que los IXP, en tandas de ≤45), guardar `grok-centros-1.json`, correr el script, publicar.
+  Comprobar antes que capas.js pinta los `datos` de puntos-extra con su ficha (operador, desde, nota): buscar `agencia` en capas.js. `python3 herramientas/ixp_agencia.py` cruza por país+nombre (≥2 voces, <60 km), descarta los que
   Grok marca «es otra cosa» (p. ej. Equinix Ashburn/Paris no son IXP neutrales), evita duplicar los de OSM y los escritos a mano, y escribe en `datos/puntos-extra.json`
   tipo `intercambio` con `agencia: true`. capas.js ya los pinta con la capa de centros de datos.
 
@@ -152,14 +157,25 @@ Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi
 Cables submarinos ~70 % · llegadas ~80 % · centros de datos ~25–35 % · puntos de intercambio <1 % · fibra terrestre ~45 % · satélites ~95 % · polos ~90 %.
 Conjunto ~55 % (puntos de intercambio ya ~40 % con los 160 de la agencia). Orden acordado: (1) centros de datos, (2) puntos de intercambio, (3) terminar cables con la agencia, (4) fibra de países grandes.
 
-## 6. Pendiente inmediato (por orden)
+## 6. Pendiente inmediato (por orden) — escrito para Opus 5.5 (22 Oct 2026, 19:50; el dueño cambia de modelo para ahorrar Fable)
+6.1 **Antes de nada**: `git status`; si hay cambios sin publicar, publicar (§2). Luego recoger lo que quedó en marcha en el navegador: en la pestaña `seed`
+    (chat «Lista de IXP mundiales») ChatGPT estaba generando la lista de centros de datos de América Latina (ver §4c); en `tab-5` nada pendiente.
+6.2 **Fichas de país, procedimiento exacto** (lo que se hizo en los lotes 5–12): en `tab-5` (chat «Verificar fichas de infraestructura») escribir en el cuadro
+    «Pregunta a ChatGPT» (`find` → ref) con `form_input`, clic y Return: «Gracias. Mismo esquema y reglas para 15 fichas más: XX, YY… Devuelve SOLO el JSON.»
+    Esperar 2–4 min (poll con `javascript_tool`: innerText de `main` desde el último «ChatGPT dijo», JSON entre el primer `{` y el último `}`; en segundo plano el
+    innerText se corta mientras genera, esperar a que termine). Guardar la respuesta tal cual en `herramientas/paises-agencia/chatgpt-paises-N.json`, revisar como
+    segunda voz (Claude): quitar las fechas de 2026 y los lanzamientos que solo dé ChatGPT (sustituir por «en despliegue inicial» / «sin lanzamiento comercial
+    generalizado»), quitar `novedades` salvo las que no lleven fecha, quitar frases que citen «Internet Society Pulse 2026», y fusionar en `orbita/datos/paises.json`
+    con `confirmado:true, voces:['chatgpt','claude']` y una línea en `nota`. Publicar en las dos ramas.
+6.3 Centros de datos por la agencia (§4c), país por país empezando por América Latina y Europa; después IXP y centros de Asia.
+6.4 Lo demás como estaba (abajo). Las traducciones a los otros 39 idiomas siguen siendo lo último.
 1. Que el dueño pruebe «El viaje de tus datos» en su PC (Mi conexión → Medir rutas → «Ver el viaje en 3D» → «Descargar vídeo» y «Guardar el viaje (PDF)»)
    y afinar lo que pida. Posible: sonido; elegir resolución del vídeo.
 2. **Ficha de país**: 70 verificados; seguir por tandas de 15 (ahora ChatGPT escribe en el chat «Verificar fichas de infraestructura»
    https://chatgpt.com/c/6ada832b-0b94-83e8-ab23-e58008ece741 y Claude revisa como segunda voz; guardar en `herramientas/paises-agencia/chatgpt-paises-N.json` y fusionar).
    Campos: `movil`, `operadores`, `fija`, `diez` (10G), `troncales`, `intercambio`, `novedades`.
-3. Capacidades: pedir a Grok el resto de la lista; cables de una sola voz (29 tras los alias Basslink/BCS North/AMX-1/AKORN/Hibernia): Grok falló dos veces
-   con la petición de 28 cables de golpe (modo Expert, demasiadas búsquedas) → pedir en tandas de 8–10, exigiendo lat/lon de la localidad de amarre.
+3. Capacidades: pedir a Grok el resto de la lista; cables de una sola voz: **20** (`grok-verifica-10/11.json` resolvieron SPCS, Austral, MARS, Latvia–Sweden 1, Circe South,
+   Qatar–UAE, AU-West, ITAL-CRO, NO-UK/Englandskabelen vía alias). Grok falla con >10 cables de golpe → tandas de 8, exigiendo lat/lon de la localidad de amarre.
 4. Centros de datos: `datos_orbita.py` hace ahora dos consultas Overpass (telecom=* y building/office/industrial/man_made=data_center, ~1.300 edificios más).
    El workflow tiene entrada `forzar` (`gh workflow run datos-orbita.yml --ref main -f forzar=true`) que vuelve a descargar los puntos; el push a main NO dispara el workflow
    (solo la rama orbita-datos). **Hecho** (run 39868036356, 22:52Z): overpass-api.de dio 502 y respondió un espejo; 4.467 puntos (4.388 datos: los 1.139
