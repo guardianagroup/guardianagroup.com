@@ -1,0 +1,1099 @@
+[
+{
+"nombre": "Equinix FR2",
+"operador": "Equinix",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Centro de colocación e interconexión en Friesstrasse; acceso al ecosistema DE-CIX."
+},
+{
+"nombre": "Equinix FR4",
+"operador": "Equinix",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Centro IBX del campus Lärchenstrasse, con múltiples operadores de red."
+},
+{
+"nombre": "Equinix FR5",
+"operador": "Equinix",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Centro IBX en Kleyerstrasse 90, importante nodo de interconexión."
+},
+{
+"nombre": "Equinix FR6",
+"operador": "Equinix",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Instalación de colocación en el campus Lärchenstrasse."
+},
+{
+"nombre": "Equinix FR7",
+"operador": "Equinix",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Centro IBX de alta conectividad para redes, empresas y servicios cloud."
+},
+{
+"nombre": "Equinix FR8",
+"operador": "Equinix",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Centro de colocación del área metropolitana de Frankfurt."
+},
+{
+"nombre": "Equinix MU1",
+"operador": "Equinix",
+"ciudad": "Munich",
+"pais": "DE",
+"lat": 48.14,
+"lon": 11.58,
+"nota": "Centro de colocación e interconexión para el mercado del sur de Alemania."
+},
+{
+"nombre": "NTT Frankfurt 2",
+"operador": "NTT Global Data Centers",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Centro neutral en Hanauer Landstrasse, con conectividad DE-CIX."
+},
+{
+"nombre": "NTT Frankfurt 3",
+"operador": "NTT Global Data Centers",
+"ciudad": "Rüsselsheim am Main",
+"pais": "DE",
+"lat": 49.99,
+"lon": 8.42,
+"nota": "Campus de gran escala en Karl-Landsteiner-Ring, dentro de la región Frankfurt."
+},
+{
+"nombre": "NTT Frankfurt 4",
+"operador": "NTT Global Data Centers",
+"ciudad": "Hattersheim am Main",
+"pais": "DE",
+"lat": 50.07,
+"lon": 8.49,
+"nota": "Campus de colocación e infraestructura para grandes clientes empresariales y cloud."
+},
+{
+"nombre": "NTT Berlin 1",
+"operador": "NTT Global Data Centers",
+"ciudad": "Berlin",
+"pais": "DE",
+"lat": 52.52,
+"lon": 13.41,
+"nota": "Centro de datos en Spandau, con acceso a redes e intercambios de Berlín."
+},
+{
+"nombre": "Global Switch Frankfurt North",
+"operador": "Global Switch",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Centro neutral en Eschborner Landstrasse, conectado al ecosistema DE-CIX."
+},
+{
+"nombre": "Global Switch Frankfurt South",
+"operador": "Global Switch",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Centro del campus de Frankfurt orientado a colocación y conectividad empresarial."
+},
+{
+"nombre": "Iron Mountain FRA-1",
+"operador": "Iron Mountain Data Centers",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Instalación de infraestructura a gran escala para clientes empresariales y cloud."
+},
+{
+"nombre": "Iron Mountain FRA-2",
+"operador": "Iron Mountain Data Centers",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Centro de colocación neutral con acceso al ecosistema de interconexión de Frankfurt."
+},
+{
+"nombre": "CyrusOne FRA1",
+"operador": "CyrusOne",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Centro de datos en Sossenheim, dedicado a infraestructura empresarial e hiperescala."
+},
+{
+"nombre": "CyrusOne FRA2",
+"operador": "CyrusOne",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Instalación contigua a FRA1, destinada a grandes cargas informáticas."
+},
+{
+"nombre": "Telehouse Frankfurt",
+"operador": "Telehouse",
+"ciudad": "Frankfurt",
+"pais": "DE",
+"lat": 50.11,
+"lon": 8.68,
+"nota": "Campus de colocación neutral en la zona de Kleyerstrasse, nodo principal de telecomunicaciones."
+},
+{
+"nombre": "Equinix LD4",
+"operador": "Equinix",
+"ciudad": "London",
+"pais": "GB",
+"lat": 51.51,
+"lon": -0.13,
+"nota": "Centro IBX de colocación en el mercado londinense de interconexión."
+},
+{
+"nombre": "Equinix LD5",
+"operador": "Equinix",
+"ciudad": "London",
+"pais": "GB",
+"lat": 51.51,
+"lon": -0.13,
+"nota": "Centro de colocación para redes, empresas y conectividad cloud."
+},
+{
+"nombre": "Equinix LD8",
+"operador": "Equinix",
+"ciudad": "London",
+"pais": "GB",
+"lat": 51.51,
+"lon": -0.13,
+"nota": "Instalación IBX del ecosistema de centros de datos de Londres."
+},
+{
+"nombre": "Equinix LD9",
+"operador": "Equinix",
+"ciudad": "London",
+"pais": "GB",
+"lat": 51.51,
+"lon": -0.13,
+"nota": "Centro neutral con servicios de interconexión y acceso a proveedores cloud."
+},
+{
+"nombre": "Equinix MA1",
+"operador": "Equinix",
+"ciudad": "Manchester",
+"pais": "GB",
+"lat": 53.48,
+"lon": -2.24,
+"nota": "Centro de colocación e interconexión en el norte de Inglaterra."
+},
+{
+"nombre": "Equinix MA3",
+"operador": "Equinix",
+"ciudad": "Manchester",
+"pais": "GB",
+"lat": 53.48,
+"lon": -2.24,
+"nota": "Instalación IBX del área metropolitana de Manchester."
+},
+{
+"nombre": "Telehouse North",
+"operador": "Telehouse",
+"ciudad": "London",
+"pais": "GB",
+"lat": 51.51,
+"lon": -0.01,
+"nota": "Centro histórico de Docklands y pieza importante del ecosistema LINX."
+},
+{
+"nombre": "Telehouse North Two",
+"operador": "Telehouse",
+"ciudad": "London",
+"pais": "GB",
+"lat": 51.51,
+"lon": -0.01,
+"nota": "Instalación del campus Docklands, conectada al ecosistema de operadores de Telehouse."
+},
+{
+"nombre": "Telehouse West",
+"operador": "Telehouse",
+"ciudad": "London",
+"pais": "GB",
+"lat": 51.51,
+"lon": -0.01,
+"nota": "Centro neutral de Docklands para interconexión y colocación."
+},
+{
+"nombre": "Telehouse South",
+"operador": "Telehouse",
+"ciudad": "London",
+"pais": "GB",
+"lat": 51.51,
+"lon": -0.01,
+"nota": "Centro operativo del campus londinense de Telehouse."
+},
+{
+"nombre": "Global Switch London East",
+"operador": "Global Switch",
+"ciudad": "London",
+"pais": "GB",
+"lat": 51.51,
+"lon": -0.01,
+"nota": "Centro neutral en Nutmeg Lane, dentro del importante nodo de Docklands."
+},
+{
+"nombre": "Global Switch London North",
+"operador": "Global Switch",
+"ciudad": "London",
+"pais": "GB",
+"lat": 51.51,
+"lon": -0.01,
+"nota": "Centro en East India Dock Road, conectado al campus London East."
+},
+{
+"nombre": "NTT London 1",
+"operador": "NTT Global Data Centers",
+"ciudad": "Dagenham",
+"pais": "GB",
+"lat": 51.54,
+"lon": 0.15,
+"nota": "Centro de datos de gran escala en Yew Tree Avenue, al este de Londres."
+},
+{
+"nombre": "Digital Realty LON1",
+"operador": "Digital Realty",
+"ciudad": "London",
+"pais": "GB",
+"lat": 51.52,
+"lon": -0.07,
+"nota": "Centro de colocación en Hanbury Street, en el área de Shoreditch."
+},
+{
+"nombre": "Digital Realty LHR26",
+"operador": "Digital Realty",
+"ciudad": "Slough",
+"pais": "GB",
+"lat": 51.51,
+"lon": -0.6,
+"nota": "Centro de colocación del corredor tecnológico de Slough."
+},
+{
+"nombre": "Iron Mountain LON-1",
+"operador": "Iron Mountain Data Centers",
+"ciudad": "Slough",
+"pais": "GB",
+"lat": 51.51,
+"lon": -0.6,
+"nota": "Instalación de colocación dentro del campus londinense de Iron Mountain."
+},
+{
+"nombre": "Equinix AM1",
+"operador": "Equinix",
+"ciudad": "Amsterdam",
+"pais": "NL",
+"lat": 52.37,
+"lon": 4.9,
+"nota": "Centro IBX del principal mercado neerlandés de interconexión."
+},
+{
+"nombre": "Equinix AM2",
+"operador": "Equinix",
+"ciudad": "Amsterdam",
+"pais": "NL",
+"lat": 52.37,
+"lon": 4.9,
+"nota": "Centro de colocación con conectividad a redes y servicios cloud."
+},
+{
+"nombre": "Equinix AM4",
+"operador": "Equinix",
+"ciudad": "Amsterdam",
+"pais": "NL",
+"lat": 52.37,
+"lon": 4.9,
+"nota": "Instalación IBX del ecosistema de centros de datos de Ámsterdam."
+},
+{
+"nombre": "Equinix AM5",
+"operador": "Equinix",
+"ciudad": "Amsterdam",
+"pais": "NL",
+"lat": 52.37,
+"lon": 4.9,
+"nota": "Centro de colocación e interconexión entre operadores."
+},
+{
+"nombre": "Equinix AM7",
+"operador": "Equinix",
+"ciudad": "Amsterdam",
+"pais": "NL",
+"lat": 52.37,
+"lon": 4.9,
+"nota": "Centro neutral con conectividad hacia redes internacionales."
+},
+{
+"nombre": "Equinix AM8",
+"operador": "Equinix",
+"ciudad": "Amsterdam",
+"pais": "NL",
+"lat": 52.37,
+"lon": 4.9,
+"nota": "Instalación de colocación de la red metropolitana Equinix."
+},
+{
+"nombre": "NTT Amsterdam 1",
+"operador": "NTT Global Data Centers",
+"ciudad": "Rozenburg",
+"pais": "NL",
+"lat": 52.28,
+"lon": 4.75,
+"nota": "Campus de colocación en Aviolanda, próximo a Schiphol-Rijk."
+},
+{
+"nombre": "Global Switch Amsterdam West",
+"operador": "Global Switch",
+"ciudad": "Amsterdam",
+"pais": "NL",
+"lat": 52.37,
+"lon": 4.9,
+"nota": "Gran centro neutral en Johan Huizingalaan, con operadores y servicios cloud."
+},
+{
+"nombre": "Iron Mountain AMS-1",
+"operador": "Iron Mountain Data Centers",
+"ciudad": "Haarlem",
+"pais": "NL",
+"lat": 52.38,
+"lon": 4.64,
+"nota": "Campus de colocación con presencia de operadores e interconexión regional."
+},
+{
+"nombre": "Equinix EN1",
+"operador": "Equinix",
+"ciudad": "Enschede",
+"pais": "NL",
+"lat": 52.22,
+"lon": 6.9,
+"nota": "Centro regional de colocación e interconexión en el este de Países Bajos."
+},
+{
+"nombre": "Equinix PA2",
+"operador": "Equinix",
+"ciudad": "Saint-Denis",
+"pais": "FR",
+"lat": 48.94,
+"lon": 2.36,
+"nota": "Centro IBX de colocación de la región metropolitana de París."
+},
+{
+"nombre": "Equinix PA3",
+"operador": "Equinix",
+"ciudad": "Saint-Denis",
+"pais": "FR",
+"lat": 48.94,
+"lon": 2.36,
+"nota": "Centro de interconexión y servicios cloud en el área parisina."
+},
+{
+"nombre": "Equinix PA4",
+"operador": "Equinix",
+"ciudad": "Pantin",
+"pais": "FR",
+"lat": 48.89,
+"lon": 2.4,
+"nota": "Instalación de colocación en Pantin, próxima a París."
+},
+{
+"nombre": "Equinix PA5",
+"operador": "Equinix",
+"ciudad": "Aubervilliers",
+"pais": "FR",
+"lat": 48.91,
+"lon": 2.38,
+"nota": "Centro IBX de alta conectividad en el área de París."
+},
+{
+"nombre": "Equinix PA10",
+"operador": "Equinix",
+"ciudad": "Saint-Denis",
+"pais": "FR",
+"lat": 48.94,
+"lon": 2.36,
+"nota": "Centro de colocación para interconexión de redes y grandes clientes."
+},
+{
+"nombre": "Digital Realty MRS1",
+"operador": "Digital Realty",
+"ciudad": "Marseille",
+"pais": "FR",
+"lat": 43.3,
+"lon": 5.38,
+"nota": "Centro de datos en Avenue Roger Salengro, importante nodo de conectividad mediterránea."
+},
+{
+"nombre": "Digital Realty MRS2",
+"operador": "Digital Realty",
+"ciudad": "Marseille",
+"pais": "FR",
+"lat": 43.3,
+"lon": 5.37,
+"nota": "Centro dentro del recinto portuario de Marsella, próximo a rutas submarinas."
+},
+{
+"nombre": "Digital Realty MRS3",
+"operador": "Digital Realty",
+"ciudad": "Marseille",
+"pais": "FR",
+"lat": 43.3,
+"lon": 5.37,
+"nota": "Centro portuario de colocación e interconexión con operadores internacionales."
+},
+{
+"nombre": "Digital Realty MRS4",
+"operador": "Digital Realty",
+"ciudad": "Marseille",
+"pais": "FR",
+"lat": 43.3,
+"lon": 5.37,
+"nota": "Centro del campus portuario de Marsella para conectividad internacional."
+},
+{
+"nombre": "Global Switch Paris East",
+"operador": "Global Switch",
+"ciudad": "Clichy",
+"pais": "FR",
+"lat": 48.9,
+"lon": 2.31,
+"nota": "Centro neutral del campus de Clichy, con interconexión empresarial y cloud."
+},
+{
+"nombre": "Global Switch Paris West",
+"operador": "Global Switch",
+"ciudad": "Clichy",
+"pais": "FR",
+"lat": 48.9,
+"lon": 2.31,
+"nota": "Centro de colocación del campus parisino de Global Switch."
+},
+{
+"nombre": "Telehouse Paris Voltaire",
+"operador": "Telehouse",
+"ciudad": "Paris",
+"pais": "FR",
+"lat": 48.86,
+"lon": 2.35,
+"desde": 1999,
+"nota": "Centro histórico de interconexión y sede importante de France-IX."
+},
+{
+"nombre": "Equinix DB1",
+"operador": "Equinix",
+"ciudad": "Dublin",
+"pais": "IE",
+"lat": 53.35,
+"lon": -6.26,
+"nota": "Centro de colocación en el principal mercado de interconexión de Irlanda."
+},
+{
+"nombre": "Equinix DB2",
+"operador": "Equinix",
+"ciudad": "Dublin",
+"pais": "IE",
+"lat": 53.35,
+"lon": -6.26,
+"nota": "Instalación IBX de servicios empresariales e interconexión."
+},
+{
+"nombre": "Equinix DB3",
+"operador": "Equinix",
+"ciudad": "Dublin",
+"pais": "IE",
+"lat": 53.35,
+"lon": -6.26,
+"nota": "Centro neutral conectado al ecosistema de operadores y servicios cloud de Dublín."
+},
+{
+"nombre": "Equinix DB4",
+"operador": "Equinix",
+"ciudad": "Dublin",
+"pais": "IE",
+"lat": 53.35,
+"lon": -6.26,
+"nota": "Centro IBX de colocación y conectividad metropolitana."
+},
+{
+"nombre": "CyrusOne DUB1",
+"operador": "CyrusOne",
+"ciudad": "Dublin",
+"pais": "IE",
+"lat": 53.35,
+"lon": -6.26,
+"nota": "Centro de infraestructura para grandes clientes y servicios de nube."
+},
+{
+"nombre": "Equinix MD1",
+"operador": "Equinix",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.42,
+"lon": -3.7,
+"nota": "Centro IBX de colocación e interconexión en Madrid."
+},
+{
+"nombre": "Equinix MD2",
+"operador": "Equinix",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.42,
+"lon": -3.7,
+"nota": "Instalación de colocación con conectividad a redes internacionales."
+},
+{
+"nombre": "Equinix MD6",
+"operador": "Equinix",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.42,
+"lon": -3.7,
+"nota": "Centro IBX del área metropolitana madrileña."
+},
+{
+"nombre": "Equinix BA1",
+"operador": "Equinix",
+"ciudad": "Barcelona",
+"pais": "ES",
+"lat": 41.39,
+"lon": 2.17,
+"nota": "Centro de interconexión y colocación en Barcelona."
+},
+{
+"nombre": "Digital Realty MAD1",
+"operador": "Digital Realty",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.43,
+"lon": -3.63,
+"nota": "Centro de datos en Albasanz 71, importante nodo de operadores y cloud."
+},
+{
+"nombre": "Digital Realty MAD3",
+"operador": "Digital Realty",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.43,
+"lon": -3.63,
+"nota": "Centro de colocación en Emilio Muñoz 49, integrado en el ecosistema de Madrid."
+},
+{
+"nombre": "Digital Realty BCN1",
+"operador": "Digital Realty",
+"ciudad": "Badalona",
+"pais": "ES",
+"lat": 41.45,
+"lon": 2.25,
+"nota": "Centro neutral de colocación en la avenida del Maresme, área de Barcelona."
+},
+{
+"nombre": "Nabiax Julián Camarillo",
+"operador": "Nabiax",
+"ciudad": "Madrid",
+"pais": "ES",
+"lat": 40.43,
+"lon": -3.63,
+"nota": "Campus neutral de varios módulos en Julián Camarillo, para grandes clientes."
+},
+{
+"nombre": "Nabiax Alcalá",
+"operador": "Nabiax",
+"ciudad": "Alcalá de Henares",
+"pais": "ES",
+"lat": 40.48,
+"lon": -3.36,
+"nota": "Campus de centros de datos en avenida Punto Com, para colocación e hiperescala."
+},
+{
+"nombre": "Nabiax Terrassa",
+"operador": "Nabiax",
+"ciudad": "Terrassa",
+"pais": "ES",
+"lat": 41.56,
+"lon": 2.01,
+"nota": "Centro neutral de datos en el área metropolitana de Barcelona."
+},
+{
+"nombre": "Equinix LS1",
+"operador": "Equinix",
+"ciudad": "Lisboa",
+"pais": "PT",
+"lat": 38.72,
+"lon": -9.14,
+"nota": "Centro IBX de colocación e interconexión del mercado portugués."
+},
+{
+"nombre": "Digital Realty LIS1",
+"operador": "Digital Realty",
+"ciudad": "Carnaxide",
+"pais": "PT",
+"lat": 38.73,
+"lon": -9.24,
+"nota": "Centro de colocación en Rua do Proletariado, área metropolitana de Lisboa."
+},
+{
+"nombre": "Start Campus SIN01",
+"operador": "Start Campus",
+"ciudad": "Sines",
+"pais": "PT",
+"lat": 37.96,
+"lon": -8.87,
+"desde": 2024,
+"nota": "Primer edificio operativo del SINES Data Campus, para nube e infraestructura de alta densidad."
+},
+{
+"nombre": "Equinix ML2",
+"operador": "Equinix",
+"ciudad": "Milano",
+"pais": "IT",
+"lat": 45.46,
+"lon": 9.19,
+"nota": "Centro IBX de colocación e interconexión en Milán."
+},
+{
+"nombre": "Equinix ML3",
+"operador": "Equinix",
+"ciudad": "Milano",
+"pais": "IT",
+"lat": 45.46,
+"lon": 9.19,
+"nota": "Centro neutral conectado al ecosistema de redes y cloud de Milán."
+},
+{
+"nombre": "Equinix ML5",
+"operador": "Equinix",
+"ciudad": "Milano",
+"pais": "IT",
+"lat": 45.46,
+"lon": 9.19,
+"nota": "Centro de colocación e interconexión para clientes empresariales."
+},
+{
+"nombre": "Aruba IT1",
+"operador": "Aruba",
+"ciudad": "Arezzo",
+"pais": "IT",
+"lat": 43.46,
+"lon": 11.88,
+"nota": "Centro propio de nube y alojamiento de servidores en Arezzo."
+},
+{
+"nombre": "Aruba IT2",
+"operador": "Aruba",
+"ciudad": "Arezzo",
+"pais": "IT",
+"lat": 43.46,
+"lon": 11.88,
+"nota": "Segundo centro de nube en Arezzo, interconectado con IT1."
+},
+{
+"nombre": "Aruba IT3 Global Cloud Data Center",
+"operador": "Aruba",
+"ciudad": "Ponte San Pietro",
+"pais": "IT",
+"lat": 45.7,
+"lon": 9.59,
+"nota": "Campus de nube y colocación neutral situado cerca de Bérgamo."
+},
+{
+"nombre": "Aruba IT4 Hyper Cloud Data Center",
+"operador": "Aruba",
+"ciudad": "Roma",
+"pais": "IT",
+"lat": 41.9,
+"lon": 12.5,
+"desde": 2024,
+"nota": "Campus de nube y colocación neutral en el Tecnopolo Tiburtino de Roma."
+},
+{
+"nombre": "Equinix ZH2",
+"operador": "Equinix",
+"ciudad": "Zurich",
+"pais": "CH",
+"lat": 47.38,
+"lon": 8.54,
+"nota": "Centro IBX del ecosistema financiero y tecnológico de Zúrich."
+},
+{
+"nombre": "Equinix ZH4",
+"operador": "Equinix",
+"ciudad": "Zurich",
+"pais": "CH",
+"lat": 47.38,
+"lon": 8.54,
+"nota": "Centro neutral de colocación e interconexión para redes y empresas."
+},
+{
+"nombre": "Equinix GV1",
+"operador": "Equinix",
+"ciudad": "Genève",
+"pais": "CH",
+"lat": 46.2,
+"lon": 6.15,
+"nota": "Centro IBX de colocación en Ginebra."
+},
+{
+"nombre": "Digital Realty ZUR1",
+"operador": "Digital Realty",
+"ciudad": "Glattbrugg",
+"pais": "CH",
+"lat": 47.43,
+"lon": 8.56,
+"nota": "Centro de colocación en Sägereistrasse, cerca del aeropuerto de Zúrich."
+},
+{
+"nombre": "Digital Realty ZUR2",
+"operador": "Digital Realty",
+"ciudad": "Glattbrugg",
+"pais": "CH",
+"lat": 47.43,
+"lon": 8.56,
+"nota": "Centro neutral en Bäulerwisenstrasse, del campus metropolitano de Zúrich."
+},
+{
+"nombre": "NTT Zurich 1",
+"operador": "NTT Global Data Centers",
+"ciudad": "Rümlang",
+"pais": "CH",
+"lat": 47.45,
+"lon": 8.53,
+"nota": "Campus de colocación en Hofwisenstrasse, con conectividad a SwissIX."
+},
+{
+"nombre": "Digital Realty VIE1",
+"operador": "Digital Realty",
+"ciudad": "Wien",
+"pais": "AT",
+"lat": 48.21,
+"lon": 16.37,
+"nota": "Centro neutral en Louis-Häfliger-Gasse, importante nodo de interconexión de Viena."
+},
+{
+"nombre": "Digital Realty VIE2",
+"operador": "Digital Realty",
+"ciudad": "Wien",
+"pais": "AT",
+"lat": 48.21,
+"lon": 16.37,
+"nota": "Centro del campus de Viena para operadores, empresas y cloud."
+},
+{
+"nombre": "NTT Vienna 1",
+"operador": "NTT Global Data Centers",
+"ciudad": "Wien",
+"pais": "AT",
+"lat": 48.21,
+"lon": 16.37,
+"nota": "Centro neutral en Computerstrasse, con acceso a Vienna Internet Exchange."
+},
+{
+"nombre": "MasterDC Prague",
+"operador": "MasterDC",
+"ciudad": "Praha",
+"pais": "CZ",
+"lat": 50.08,
+"lon": 14.44,
+"nota": "Centro de colocación, servidores dedicados y nube en Kodaňská 46."
+},
+{
+"nombre": "MasterDC Brno",
+"operador": "MasterDC",
+"ciudad": "Brno",
+"pais": "CZ",
+"lat": 49.2,
+"lon": 16.61,
+"nota": "Centro operativo en Cejl 20, utilizado para colocación y servicios cloud."
+},
+{
+"nombre": "Aruba CZ1",
+"operador": "Aruba",
+"ciudad": "Ktiš",
+"pais": "CZ",
+"lat": 48.92,
+"lon": 14.13,
+"nota": "Centro de datos propio de Aruba Cloud para Europa central."
+},
+{
+"nombre": "CE Colo Prague",
+"operador": "CE Colo",
+"ciudad": "Praha",
+"pais": "CZ",
+"lat": 50.08,
+"lon": 14.44,
+"nota": "Centro neutral de colocación en Nad Elektrárnou, Praga 10."
+},
+{
+"nombre": "CE Colo DC7",
+"operador": "CE Colo",
+"ciudad": "Praha",
+"pais": "CZ",
+"lat": 50.08,
+"lon": 14.44,
+"nota": "Centro de datos de colocación en K Pérovně, Praga."
+},
+{
+"nombre": "Equinix WA1",
+"operador": "Equinix",
+"ciudad": "Warszawa",
+"pais": "PL",
+"lat": 52.23,
+"lon": 21.01,
+"nota": "Centro IBX de colocación e interconexión en Varsovia."
+},
+{
+"nombre": "Equinix WA3",
+"operador": "Equinix",
+"ciudad": "Warszawa",
+"pais": "PL",
+"lat": 52.23,
+"lon": 21.01,
+"nota": "Centro neutral de la red metropolitana Equinix, conectado al ecosistema de operadores."
+},
+{
+"nombre": "Atman WAW-1",
+"operador": "Atman",
+"ciudad": "Warszawa",
+"pais": "PL",
+"lat": 52.236467,
+"lon": 21.116726,
+"nota": "Campus de colocación neutral en Grochowska 21a, con varios edificios operativos."
+},
+{
+"nombre": "Atman WAW-2",
+"operador": "Atman",
+"ciudad": "Warszawa",
+"pais": "PL",
+"lat": 52.19,
+"lon": 20.99,
+"nota": "Centro de colocación en Konstruktorska 5, con nodo Thinx IX."
+},
+{
+"nombre": "Atman WAW-3",
+"operador": "Atman",
+"ciudad": "Duchnice",
+"pais": "PL",
+"lat": 52.206582,
+"lon": 20.808124,
+"desde": 2025,
+"nota": "Primer edificio operativo del nuevo campus de alta densidad de Atman."
+},
+{
+"nombre": "Atman KTW-1",
+"operador": "Atman",
+"ciudad": "Katowice",
+"pais": "PL",
+"lat": 50.26,
+"lon": 19.02,
+"nota": "Centro regional de colocación neutral en la aglomeración de Silesia."
+},
+{
+"nombre": "Equinix SK1",
+"operador": "Equinix",
+"ciudad": "Stockholm",
+"pais": "SE",
+"lat": 59.33,
+"lon": 18.07,
+"nota": "Centro IBX de interconexión del mercado sueco."
+},
+{
+"nombre": "Equinix SK2",
+"operador": "Equinix",
+"ciudad": "Stockholm",
+"pais": "SE",
+"lat": 59.33,
+"lon": 18.07,
+"nota": "Centro neutral de colocación y conectividad cloud en Estocolmo."
+},
+{
+"nombre": "Digital Realty STO1",
+"operador": "Digital Realty",
+"ciudad": "Kista",
+"pais": "SE",
+"lat": 59.4,
+"lon": 17.94,
+"nota": "Centro de colocación en Esbogatan 11, dentro del nodo tecnológico de Kista."
+},
+{
+"nombre": "Digital Realty STO2",
+"operador": "Digital Realty",
+"ciudad": "Kista",
+"pais": "SE",
+"lat": 59.4,
+"lon": 17.94,
+"nota": "Centro del campus de Esbogatan, conectado a redes y operadores."
+},
+{
+"nombre": "Digital Realty STO6",
+"operador": "Digital Realty",
+"ciudad": "Kista",
+"pais": "SE",
+"lat": 59.4,
+"lon": 17.94,
+"nota": "Centro de colocación en Vandagatan, área tecnológica de Kista."
+},
+{
+"nombre": "atNorth SWE01",
+"operador": "atNorth",
+"ciudad": "Stockholm",
+"pais": "SE",
+"lat": 59.33,
+"lon": 18.07,
+"desde": 2022,
+"nota": "Centro de alta densidad con reutilización de calor residual para calefacción urbana."
+},
+{
+"nombre": "Digital Realty CPH1",
+"operador": "Digital Realty",
+"ciudad": "Ballerup",
+"pais": "DK",
+"lat": 55.73,
+"lon": 12.36,
+"nota": "Centro de colocación en Industriparken 20A, área de Copenhague."
+},
+{
+"nombre": "Digital Realty CPH2",
+"operador": "Digital Realty",
+"ciudad": "Ballerup",
+"pais": "DK",
+"lat": 55.73,
+"lon": 12.36,
+"nota": "Centro del campus de Ballerup, con conectividad a operadores y cloud."
+},
+{
+"nombre": "Digital Realty CPH3",
+"operador": "Digital Realty",
+"ciudad": "Ballerup",
+"pais": "DK",
+"lat": 55.73,
+"lon": 12.36,
+"nota": "Centro de colocación en Industriparken 24, integrado en el campus de Copenhague."
+},
+{
+"nombre": "atNorth DEN01",
+"operador": "atNorth",
+"ciudad": "Copenhagen",
+"pais": "DK",
+"lat": 55.68,
+"lon": 12.57,
+"desde": 2026,
+"nota": "Centro metropolitano de colocación y computación de alta densidad."
+},
+{
+"nombre": "Green Mountain SVG-Rennesøy",
+"operador": "Green Mountain",
+"ciudad": "Rennesøy",
+"pais": "NO",
+"lat": 59.1,
+"lon": 5.7,
+"nota": "Centro de datos en instalaciones subterráneas cerca de Stavanger."
+},
+{
+"nombre": "Green Mountain TEL-Rjukan",
+"operador": "Green Mountain",
+"ciudad": "Rjukan",
+"pais": "NO",
+"lat": 59.88,
+"lon": 8.59,
+"nota": "Centro de datos con infraestructura hidroeléctrica en la región de Telemark."
+},
+{
+"nombre": "Green Mountain OSL-Enebakk",
+"operador": "Green Mountain",
+"ciudad": "Enebakk",
+"pais": "NO",
+"lat": 59.77,
+"lon": 11.15,
+"desde": 2020,
+"nota": "Campus de colocación e hiperescala situado al sureste de Oslo."
+},
+{
+"nombre": "Green Mountain OSL-Hamar",
+"operador": "Green Mountain",
+"ciudad": "Hamar",
+"pais": "NO",
+"lat": 60.8,
+"lon": 11.07,
+"nota": "Campus operativo de gran escala para computación y servicios cloud."
+},
+{
+"nombre": "Equinix HE1",
+"operador": "Equinix",
+"ciudad": "Helsinki",
+"pais": "FI",
+"lat": 60.17,
+"lon": 24.94,
+"nota": "Centro IBX de colocación del mercado finlandés."
+},
+{
+"nombre": "Equinix HE3",
+"operador": "Equinix",
+"ciudad": "Helsinki",
+"pais": "FI",
+"lat": 60.17,
+"lon": 24.94,
+"nota": "Centro neutral de interconexión y servicios cloud."
+},
+{
+"nombre": "Equinix HE5",
+"operador": "Equinix",
+"ciudad": "Helsinki",
+"pais": "FI",
+"lat": 60.17,
+"lon": 24.94,
+"nota": "Centro de colocación del ecosistema de conectividad de Helsinki."
+},
+{
+"nombre": "Equinix HE6",
+"operador": "Equinix",
+"ciudad": "Helsinki",
+"pais": "FI",
+"lat": 60.17,
+"lon": 24.94,
+"nota": "Centro IBX para empresas y proveedores de redes internacionales."
+},
+{
+"nombre": "atNorth FIN01",
+"operador": "atNorth",
+"ciudad": "Helsinki",
+"pais": "FI",
+"lat": 60.17,
+"lon": 24.94,
+"nota": "Centro metropolitano de colocación próximo al ecosistema FICIX."
+},
+{
+"nombre": "atNorth FIN02",
+"operador": "atNorth",
+"ciudad": "Espoo",
+"pais": "FI",
+"lat": 60.21,
+"lon": 24.66,
+"desde": 2025,
+"nota": "Campus de alta densidad en Sinimäentie, con recuperación de calor para uso local."
+}
+]

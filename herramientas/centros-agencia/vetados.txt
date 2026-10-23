@@ -1,0 +1,7 @@
+# nombre|país  # motivo (Claude, tercera voz). El script no mete estos aunque dos voces los confirmen.
+CE Colo Prague|CZ  # es el «CE Colo» de OpenStreetMap (Nad Elektrárnou), ya en el mapa
+CE Colo DC7|CZ  # DC7 es de T-Mobile (K Perovně), no de CE Colo
+Global Switch Frankfurt North|DE  # Global Switch tiene un campus en Frankfurt, ya en el mapa
+Global Switch Frankfurt South|DE  # ídem
+Global Switch Paris East|FR  # el campus de Clichy ya está en el mapa como «Global Switch»
+Global Switch Paris West|FR  # ídem
