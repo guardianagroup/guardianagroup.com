@@ -230,6 +230,10 @@ body.dentro #seccion .plantilla:not([hidden]) .escenario { animation: escenario 
 body.pantalla #seccion { left: 0; right: 0; top: 0; bottom: 0; border: 0; border-radius: 0; background: #06080C; backdrop-filter: none; box-shadow: none; }
 body.pantalla header, body.pantalla #escena { opacity: 0; pointer-events: none; transition: opacity .5s; }
 body.pantalla #marco { background: #06080C; }
+/* 22 Oct 2026, 22:24 (owner: «una pequeña pantalla durante un segundo con el navegador como de lado»): ZERO arrives as one
+   clean fade over the whole screen — no slide, no scale, and Órbita's own bar leaves at once instead of crossing ZERO's. */
+body.pantalla #seccion { transform: none; transition: opacity .45s .12s, visibility 0s; }
+body.pantalla header, body.pantalla #escena { transition: opacity .2s; }
 
 /* 20 Oct 2026 (owner): no door reading at the bottom left; the planet and the doors say enough. */
 #ficha { display: none; }
@@ -469,7 +473,7 @@ body.listo .altura { opacity: 1; }
 .altura .barra i { position: absolute; left: -4px; top: 0; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: #9CC3E4; box-shadow: 0 0 8px rgba(156,195,228,.8); transition: top .15s linear; }
 .altura .v { display: none; } /* 22 Oct 2026, 22:07 (owner): no fixed «≈ 40.000 km» under the bar; the height travels beside the dot */
 .altura .barra i .vv { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font: 500 11px/1 var(--mono); color: var(--fg); white-space: nowrap; font-variant-numeric: tabular-nums; text-shadow: 0 0 6px rgba(6,8,12,.9); pointer-events: none; }
-body.dentro .altura { opacity: 0; }
+body.dentro .altura { opacity: 0; pointer-events: none; transition: opacity .3s; } /* 22 Oct 2026, 22:24: gone at once when a door opens (it lingered 2 s over ZERO) */
 @media (max-width: 760px) { .altura { display: none; } }
 
 /* 22 Oct 2026, 13:54 (owner): «cuando entramos dentro del planeta, los botoneros de arriba que no se vean» — from ×8 the

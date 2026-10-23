@@ -515,7 +515,7 @@
     }
     abreModelo(modelo(T('País'), paisNombre(cc), filas, D && D.confirmado ? T('Datos verificados') : T('Datos en verificación'), {
       resumen: [T('Cables submarinos'), T('Centros de datos'), T('Red móvil')],
-      para: T('Si estás aquí, tus datos salen al mundo por los cables y las troncales de esta ficha; la red móvil y la fibra son el primer tramo de ese camino.'),
+      para: T('El tráfico internacional de este país sale por los cables y las troncales que recoge esta ficha. Las redes móvil y fija son el primer tramo de ese recorrido.'), // 22 Oct 2026, 22:23 (owner): «la frase… a lo más profesional»
       secciones: [{ t: T('Red móvil y fija'), claves: [T('Red móvil'), T('Operadores'), T('Fibra al hogar'), '10G'], abierta: true }, { t: T('Por dónde entra internet'), claves: [T('Troncales'), T('Cables submarinos'), T('Intercambio de internet')] }, { t: T('Novedades'), claves: [T('Novedades')] }],
     }), x, y);
   }
@@ -1268,7 +1268,20 @@
     p.querySelector('.pdf').addEventListener('click', () => { p.querySelectorAll('details').forEach((d) => { d.open = true; }); document.body.classList.add('imprime-ficha'); setTimeout(() => { try { window.print(); } finally { setTimeout(() => document.body.classList.remove('imprime-ficha'), 500); } }, 50); });
     p.querySelector('.atras').addEventListener('click', () => { const m = historial.pop(); if (m) { historial.pop(); abrePanel(m); } });
     p.addEventListener('click', (e) => e.stopPropagation());
+    // 22 Oct 2026, 22:24 (owner: «le doy a por dónde entra internet, se baja más para abajo y se pierde… no puede pasar de
+    // los márgenes de la pantalla»): a section that unfolds lifts the card back inside the screen; if it is still too
+    // tall, the card scrolls inside itself.
+    p.addEventListener('toggle', () => encajaPanel(), true);
+    addEventListener('resize', () => encajaPanel());
     return p;
+  }
+  function encajaPanel() {
+    const p = $('ficha-panel'); if (!p || p.hidden || !p.classList.contains('suelto')) return;
+    const M = 16, arriba = 74;
+    p.style.maxHeight = Math.max(160, innerHeight - arriba - M) + 'px';
+    const h = p.offsetHeight; let top = parseFloat(p.style.top) || arriba;
+    if (top + h > innerHeight - M) top = Math.max(arriba, innerHeight - M - h);
+    p.style.top = Math.round(top) + 'px';
   }
   const historial = [];
   function textoFicha(m) {
@@ -1298,12 +1311,12 @@
     // On a computer the full card opens where the pointer is, whole, never cut by the edges; if there is no room
     // beside the point it goes to the middle (owner, 22 Oct 2026, 18:07). On a phone it stays a bottom sheet.
     if (Number.isFinite(x) && Number.isFinite(y) && !esTactil() && innerWidth >= 760) {
-      p.classList.add('suelto'); p.style.left = '0px'; p.style.top = '0px';
+      p.classList.add('suelto'); p.style.left = '0px'; p.style.top = '0px'; p.style.maxHeight = Math.max(160, innerHeight - 74 - 16) + 'px';
       const w = p.offsetWidth, h = p.offsetHeight, M = 16, arriba = 74;
       let left = x + 18; if (left + w > innerWidth - M) left = x - w - 18; if (left < M) left = Math.max(M, Math.round((innerWidth - w) / 2));
       let top = y - 24; if (top + h > innerHeight - M) top = innerHeight - M - h; if (top < arriba) top = arriba;
       p.style.left = left + 'px'; p.style.top = top + 'px';
-    } else { p.classList.remove('suelto'); p.style.left = ''; p.style.top = ''; }
+    } else { p.classList.remove('suelto'); p.style.left = ''; p.style.top = ''; p.style.maxHeight = ''; }
     const f = ficha(); if (f) f.hidden = true;
     document.body.classList.add('con-ficha');
   }
@@ -1317,7 +1330,7 @@
     const toma = (k) => filas.filter(([kk, v]) => kk === k && v);
     for (const k of plan.resumen || []) { for (const f of toma(k)) { resumen.push(f); quitar.add(f); } }
     if (!resumen.length) for (const f of filas.slice(0, 5)) { if (f[1]) { resumen.push(f); quitar.add(f); } }
-    if (plan.para) secciones.push({ t: T('Qué significa para ti'), texto: plan.para, abierta: true });
+    if (plan.para) secciones.push({ t: T('En la práctica'), /* 22 Oct 2026, 22:23 (owner): instead of «Qué significa para ti», more professional */ texto: plan.para, abierta: true });
     for (const sec of plan.secciones || []) { const fs = []; for (const k of sec.claves) for (const f of toma(k)) if (!quitar.has(f)) { fs.push(f); quitar.add(f); } if (fs.length || sec.texto) secciones.push({ t: sec.t, filas: fs, texto: sec.texto, abierta: !!sec.abierta }); }
     const resto = filas.filter((f) => f[1] && !quitar.has(f)); if (resto.length) secciones.push({ t: T('Más datos'), filas: resto });
     return { tipo, titulo, sub: plan.sub || '', resumen, secciones, pie };
