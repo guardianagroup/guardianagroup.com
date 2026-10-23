@@ -535,31 +535,35 @@ body.dentro .ficha-panel { opacity: 0; pointer-events: none; }
 
 /* ---------- El viaje de tus datos (22 Oct 2026): the HUD over the planet, and the report ---------- */
 body.viaje header, body.viaje #capas, body.viaje #puertas, body.viaje #directo, body.viaje .zoom, body.viaje .altura, body.viaje .conexion, body.viaje .ficha-panel, body.viaje .sat-ficha, body.viaje #capa-nota, body.viaje #sat-vista { opacity: 0 !important; pointer-events: none !important; transition: opacity .4s; }
-.viaje { position: fixed; inset: 0; z-index: 40; pointer-events: none; font-family: var(--texto); color: var(--fg); }
-.viaje[hidden] { display: none; }
+#viaje { position: fixed; inset: 0; z-index: 40; pointer-events: none; font-family: var(--texto); color: var(--fg); }
+#viaje[hidden] { display: none; }
+/* 23 Oct 2026, 10:43 (owner): at the journey's summary the planet is the person's again: turn it, zoom it; the zoom rail and the altitude come back */
+body.viaje:not(.viaje-fin) #escena { pointer-events: none; } /* during the show the camera leads; the HUD rules now hang from #viaje, not from any .viaje (body.viaje took them and the whole page stopped answering the pointer) */
+body.viaje.viaje-fin .zoom { opacity: 1 !important; pointer-events: auto !important; transition-delay: 0s; }
+body.viaje.viaje-fin .altura { opacity: 1 !important; transition-delay: 0s; }
 /* 23 Oct 2026: the counters stay legible over bright land when the camera is close: a soft dark band behind them, as in a film's lower third */
-.viaje::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 290px; background: linear-gradient(to top, rgba(6,8,12,.86) 0%, rgba(6,8,12,.55) 48%, rgba(6,8,12,0) 100%); pointer-events: none; }
-.viaje .destino, .viaje .cifras b, .viaje .luz, .viaje .fin .t, .viaje .fin .d, .viaje .sub { text-shadow: 0 0 2px rgba(6,8,12,.9), 0 1px 14px rgba(6,8,12,.85); }
-.viaje .arriba { position: absolute; left: 28px; top: 22px; }
-.viaje .k { margin: 0; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--fg); }
-.viaje .sub { margin: 6px 0 0; font: 400 11px/1.4 var(--mono); color: #A9B3BE; }
-.viaje .centro { position: absolute; left: 0; right: 0; bottom: 70px; text-align: center; transition: opacity .5s; }
-.viaje .destino { margin: 0 0 6px; font: 500 12px/1.3 var(--mono); letter-spacing: .1em; color: #A9B3BE; }
-.viaje .cifras { display: flex; justify-content: center; gap: 48px; }
-.viaje .cifras b { display: block; font: 600 46px/1 var(--texto); color: var(--fg); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
-.viaje .cifras span { display: block; margin-top: 4px; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #8A95A2; }
-.viaje .luz { margin: 12px 0 0; font: 500 12px/1.4 var(--mono); color: var(--accent); transition: opacity .6s; }
-.viaje .abajo { position: absolute; right: 28px; bottom: 24px; display: flex; gap: 8px; pointer-events: auto; }
-.viaje button { all: unset; cursor: pointer; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); color: #C4CCD5; font: 500 12px/1 var(--texto); background: rgba(12,17,24,.6); }
-.viaje button:hover { color: var(--fg); border-color: rgba(156,195,228,.5); }
-.viaje .fin { position: absolute; left: 0; right: 0; bottom: 70px; text-align: center; pointer-events: auto; }
-.viaje .fin[hidden] { display: none; }
-.viaje .fin .t { margin: 0; font: 600 30px/1.2 var(--texto); color: var(--fg); }
-.viaje .fin .d { margin: 8px 0 16px; font: 400 12px/1.5 var(--mono); color: #A9B3BE; }
-.viaje .fin .botones { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-.viaje .fin .informe, .viaje .fin .video { border-color: var(--accent); color: var(--accent); }
-.viaje .fin .informe:hover, .viaje .fin .video:hover { background: var(--accent); color: var(--accent-fg); }
-.viaje .fin .video[hidden] { display: none; }
+#viaje::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 290px; background: linear-gradient(to top, rgba(6,8,12,.86) 0%, rgba(6,8,12,.55) 48%, rgba(6,8,12,0) 100%); pointer-events: none; }
+#viaje .destino, #viaje .cifras b, #viaje .luz, #viaje .fin .t, #viaje .fin .d, #viaje .sub { text-shadow: 0 0 2px rgba(6,8,12,.9), 0 1px 14px rgba(6,8,12,.85); }
+#viaje .arriba { position: absolute; left: 28px; top: 22px; }
+#viaje .k { margin: 0; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--fg); }
+#viaje .sub { margin: 6px 0 0; font: 400 11px/1.4 var(--mono); color: #A9B3BE; }
+#viaje .centro { position: absolute; left: 0; right: 0; bottom: 70px; text-align: center; transition: opacity .5s; }
+#viaje .destino { margin: 0 0 6px; font: 500 12px/1.3 var(--mono); letter-spacing: .1em; color: #A9B3BE; }
+#viaje .cifras { display: flex; justify-content: center; gap: 48px; }
+#viaje .cifras b { display: block; font: 600 46px/1 var(--texto); color: var(--fg); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+#viaje .cifras span { display: block; margin-top: 4px; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #8A95A2; }
+#viaje .luz { margin: 12px 0 0; font: 500 12px/1.4 var(--mono); color: var(--accent); transition: opacity .6s; }
+#viaje .abajo { position: absolute; right: 28px; bottom: 24px; display: flex; gap: 8px; pointer-events: auto; }
+#viaje button { all: unset; cursor: pointer; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); color: #C4CCD5; font: 500 12px/1 var(--texto); background: rgba(12,17,24,.6); }
+#viaje button:hover { color: var(--fg); border-color: rgba(156,195,228,.5); }
+#viaje .fin { position: absolute; left: 0; right: 0; bottom: 70px; text-align: center; pointer-events: auto; }
+#viaje .fin[hidden] { display: none; }
+#viaje .fin .t { margin: 0; font: 600 30px/1.2 var(--texto); color: var(--fg); }
+#viaje .fin .d { margin: 8px 0 16px; font: 400 12px/1.5 var(--mono); color: #A9B3BE; }
+#viaje .fin .botones { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+#viaje .fin .informe, #viaje .fin .video { border-color: var(--accent); color: var(--accent); }
+#viaje .fin .informe:hover, #viaje .fin .video:hover { background: var(--accent); color: var(--accent-fg); }
+#viaje .fin .video[hidden] { display: none; }
 .informe { position: fixed; inset: 0; z-index: 45; overflow: auto; background: #06080C; color: var(--fg); padding: 32px max(24px, 6vw) 48px; font-family: var(--texto); scrollbar-width: thin; }
 .informe .cab { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
 .informe .cab .k { margin: 0; font: 500 11px/1 var(--mono); letter-spacing: .16em; color: var(--accent); }
@@ -584,7 +588,7 @@ body.viaje header, body.viaje #capas, body.viaje #puertas, body.viaje #directo, 
 .informe th { font-weight: 500; color: #8A95A2; letter-spacing: .06em; text-transform: uppercase; font-size: 10px; }
 .informe .pie { margin: 0; font: 400 10.5px/1.5 var(--mono); color: #8A95A2; }
 @media (max-width: 1000px) { .informe .dos { grid-template-columns: 1fr; } .informe .cab .t { font-size: 28px; } }
-.viaje.final .abajo { display: none; }
+#viaje.final .abajo { display: none; }
 @media print {
   body.imprime-informe > *:not(#informe) { display: none !important; }
   body.imprime-informe { background: #06080C; }

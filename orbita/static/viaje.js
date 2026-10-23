@@ -299,7 +299,7 @@
   function termina() {
     if (!V) return; V = null; paraGrabacion();
     const h = $('viaje'); if (h) h.hidden = true;
-    document.body.classList.remove('viaje');
+    document.body.classList.remove('viaje', 'viaje-fin');
     if (window.OrbitaCapas) window.OrbitaCapas.soloTu(false);
     if (C() && C().abre) C().abre(true); // back to «Mi conexión», with the results still there
   }
@@ -333,7 +333,9 @@
       if (t > SAT_FIN + 2700 || V.salta) { V.salta = false; final(now); }
     } else if (V.fase === 'final') {
       if (!V.tFin) V.tFin = now;
-      if (!cam) { const p = P(), v = p && p.vista; if (v) p.ir(v.lon + 0.0025 * dt, L.lat, 1); } // the planet keeps turning, slowly, with the whole web on it
+      // the planet keeps turning, slowly, with the whole web on it — until the person takes it: then it is theirs to turn
+      // and zoom (23 Oct 2026, 10:43, owner: «he tocado el planeta y no me deja moverlo… y que tenga zoom»)
+      if (!cam && !V.libre) { const p = P(), v = p && p.vista; if (v) p.ir(v.lon + 0.0025 * dt, L.lat, 1); }
       if (REC.on && now - V.tFin > 7000) paraGrabacion(); // seven more seconds of the turning planet, then the file closes
     }
     requestAnimationFrame(paso);
@@ -377,6 +379,15 @@
     const h = hud(), r = V.rutas, L = r.origen;
     V.fase = 'final'; V.grupo = null; h.classList.add('final');
     camara(L.lon, L.lat, 1, 1400);
+    // from here the planet is the person's: a touch, a drag or the wheel stops the slow turn; the zoom rail comes back
+    const p = P(), lienzo = p && p.lienzos && p.lienzos.tierra, rail = $('zoom'), este = V;
+    const tecla = (e) => { if (/^[+\-=]$|^Arrow/.test(e.key)) toma(); };
+    const toma = () => { removeEventListener('keydown', tecla); if (V && V === este && V.fase === 'final') { V.libre = true; cam = null; } };
+    if (lienzo) lienzo.addEventListener('pointerdown', toma, { once: true });
+    if (rail) rail.addEventListener('pointerdown', toma, { once: true });
+    addEventListener('wheel', toma, { once: true, passive: true });
+    addEventListener('keydown', tecla);
+    document.body.classList.add('viaje-fin');
     h.querySelector('.centro').style.opacity = '0';
     const ms = r.nubes.map((n) => n.ms), lejos = r.nubes.slice().sort((a, b) => b.km - a.km)[0];
     h.querySelector('.fin .t').textContent = T('Así viajan tus datos');
