@@ -497,3 +497,36 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   tierra). Ahora cuenta solo lo dibujado: 214 707 km de OpenStreetMap (antes 242 193).
 - **Abajo, sin «¿Qué pasa al abrir un diario deportivo?»** (dueño, 14:39: «tiene que ser sobre sus datos»): quedan los dos botones; el panel
   sigue explicando qué se midió al abrirlo.
+
+## 20. 23 Oct 2026, 14:46–15:45 (Opus 5.5): estructura aprobada, espejo dentro de Radiografías, troncales revisadas, radar mundial y sistema operativo. Versiones `20261025d` y `e`
+- **Reglas nuevas del dueño**: «Antes de hacer nada me lo decís» (proponer y esperar el OK antes de tocar la web); todo cambio se enseña en
+  pantalla (pestaña de guardianagroup.com y documento de la agencia); **principio n.º 1: abierta y auditable** (código abierto con licencia,
+  compilación reproducible, versiones firmadas en registro público, atestación de servidores, auditorías externas y propias, Centro de
+  confianza); **principio n.º 2: facilísimo** («Navega en ZERO. Mira tu radiografía»); **7 días de prueba gratis para todo el mundo**.
+  El repositorio es público pero **sin licencia** (pendiente de que el dueño elija; propuesta AGPL-3.0).
+- **Estructura aprobada (ronda 7, «Sí, tal cual»)**: Órbita portada; tres puertas (Radiografías, ZERO, Comunicaciones); VERALUN sin puerta
+  (botón propio cuando exista y con la marca registrada); DNS y «Abrir sin miedo» dentro de Radiografías; el espejo «Sin / Con» dentro de
+  Radiografías › Una web. Inventos que entran (dueño, 15:19–15:20): ESPEJO con recibo, CÉLULA (búnker coordinado), PULSO, la subasta en
+  directo dentro de ZERO, y toda la lista «Lo que todavía no existe en el mundo» del documento.
+- **Versión `d`** (`radiografias.js`, `orbita.css`, `idioma.js`): el control «Sin / Con» solo se ve con el espejo abierto
+  (`body:not(.en-espejo) .espejo-modo` oculto; al abrir, transición corta); «Una web» con chip «Todas» primero; tarjeta nueva «Un enlace o
+  archivo · Ábrelo sin miedo» (Próximamente); el panel cabe en pantalla (`max-height: calc(100vh - max(96px, 50vh - 310px) - 28px)`).
+- **Versión `e`, troncales revisadas** (dueño aprobó solo esto de los datos; geoestacionarios y cables pendientes, no por ahora):
+  `herramientas/zoo_agencia.py` + `herramientas/zoo-agencia/` (votos de Claude, ChatGPT y Grok; `decisiones.json`). Fuera los mapas de
+  colecciones históricas (nthelp.com, de los noventa; isp-planet.com; Gambia 2001) y las redes que dos voces no confirman; las absorbidas
+  quedan con su dueño de hoy si dos voces coinciden (si no, sin operador) y la ficha dice «Red en el mapa: X (año)». `fibra_tierra.py`
+  aplica `decisiones.json` en cada pasada del workflow (red no revisada = fuera). Resultado: 5 214 líneas, 1 229 888 km, 93 países (antes
+  6 730, 1 933 363 km, 96). Para rehacer: `python3 herramientas/zoo_agencia.py --aplica`.
+- **Satélites**: el catálogo agotó los números de cinco cifras en julio de 2026; Órbita ya usa OMM/JSON y `json2satrec`: los 547 con número
+  de seis cifras se dibujan (comprobado con satellite.min.js en Node).
+- **Radar tecnológico mundial**: notas en `/home/claude/research_notes/Radar tecnológico mundial GUARDIANA/` (fuera del repositorio) e
+  informe en `/home/claude/reports/`. La ronda 8 de la agencia (ChatGPT, Grok, Gemini con búsqueda web) está resumida en
+  `agencia_ronda8.md`; Grok y Gemini citan TeleGeography (prohibido) y cifras de mercado sin verificar.
+- **Documento de la agencia** (rev 35): secciones nuevas «Principio número uno», «Principio número dos», «Cómo será GUARDIANA» (tabla de
+  piezas), «¿Es el modo definitivo?», «Lo que todavía no existe en el mundo, dentro de GUARDIANA», «Orden de construcción», «Qué dice cada
+  voz», «La columna izquierda», «Datos de Órbita», «Sistema operativo GUARDIANA y hardware»; pendiente el bloque del radar.
+- **Pendiente de decisión del dueño**: dónde y con qué palabra va el sistema operativo en la web («Próximamente» o «En preparación»);
+  licencia del código; tope de horas de ZERO en la prueba de 7 días; Radiografías también dentro de ZERO (propuesto: las dos cosas).
+- Pestañas del panel: `tab-3` Gemini, `tab-6` ChatGPT (chat «Verificación de redes troncales»), `tab-7` Grok (clasificación de redes),
+  `tab-9` guardianagroup.com, `tab-10` ChatGPT consulta, `tab-11` Grok consulta. `preview_start` reutiliza la pestaña del mismo origen:
+  para abrir otra, `tabs_create` + `navigate`.
