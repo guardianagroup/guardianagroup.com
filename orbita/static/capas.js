@@ -1600,9 +1600,13 @@
     // 22 Oct 2026 (owner: «por capas… la persona tiene que ver»): every orbit is a layer the person switches on or
     // off on its own; the satellites open with the geostationary ring only. The last layer on cannot be switched off
     // (the button would show nothing); the person turns the satellites off instead.
+    // 22 Oct 2026, 22:20 (owner: «no me deja borrar la geoestacionaria para poder quitar todos del mapa»): every orbit
+    // switches off; switching off the last one clears the satellites from the map (the layer turns off) and the
+    // orbits go back to their opening state for the next time.
+    caja.querySelectorAll('[data-orb]').forEach((b) => b.addEventListener('pointerenter', () => { const d = b.querySelector('.d'); if (d) b.title = d.textContent; }));
     caja.querySelectorAll('[data-orb]').forEach((b) => b.addEventListener('click', () => {
       const k = b.dataset.orb, encendidas = Object.keys(estado.orb).filter((x) => estado.orb[x]);
-      if (estado.orb[k] && encendidas.length === 1) return;
+      if (estado.orb[k] && encendidas.length === 1) { estado.orb = { baja: false, media: false, geo: true }; guarda(); pon('sat', false); return; }
       estado.orb[k] = !estado.orb[k];
       guarda(); pintaVista(); pintaNota();
     }));

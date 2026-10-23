@@ -260,6 +260,7 @@
   const vista = { lon: (centros[CASA] ? centros[CASA].lon : -40) + 18, lat: 14, vlon: 0, vlat: 0 };
   let meta = null;           // a country the person asked to see (a row of «En directo»)
   let arrastre = null, quietoHasta = 0, manual = false; // manual: once the visitor has moved the planet, it never turns by itself again (owner, 22 Oct 2026, 17:55)
+  let ancla = null;          // 22 Oct 2026, 22:18 (owner: «con doble clic… se mueve un poco hacia los lados. Tiene que ser preciso»): the spot under the pointer stays under it while the zoom runs
   let foco = null;           // 22 Oct 2026, 21:29 (owner): a click on the planet marks the spot; every zoom in after it glides there
   const VEL = QUIETO ? 1.2 : 2.6; // degrees per second
   // view → world: Ry(lon) · Rx(−lat)
@@ -305,7 +306,7 @@
     const dx = e.clientX - CX, dy = e.clientY - CY;
     if (dx * dx + dy * dy > R * R * 1.15) return;
     arrastre = { x: e.clientX, y: e.clientY, t: performance.now(), x0: e.clientX, y0: e.clientY, movido: false };
-    meta = null; cvT.classList.add('arrastra'); cvT.setPointerCapture(e.pointerId);
+    meta = null; ancla = null; cvT.classList.add('arrastra'); cvT.setPointerCapture(e.pointerId);
   });
   cvT.addEventListener('pointermove', (e) => {
     if (!arrastre) return;
@@ -344,6 +345,21 @@
     quietoHasta = performance.now() + 4000; manual = true;
     pintaZoom();
   }
+  // Pin the spot under (x, y) for the zoom that follows: wheel and double click zoom INTO the pointer, nothing slides sideways.
+  function anclaEn(x, y) {
+    const q = geoDe(x, y); if (!q) return false;
+    ancla = { lon: q.lon, lat: q.lat, x, y }; meta = null; vista.vlon = 0; vista.vlat = 0;
+    return true;
+  }
+  function fijaAncla() {
+    for (let i = 0; i < 8; i++) { // the spot that is under the pointer now vs the one that must be: turn the view by the difference
+      const q = geoDe(ancla.x, ancla.y); if (!q) { ancla = null; return; }
+      const dl = ((ancla.lon - q.lon) % 360 + 540) % 360 - 180, db = ancla.lat - q.lat;
+      if (Math.abs(dl) < 1e-10 && Math.abs(db) < 1e-10) break;
+      vista.lon += dl; vista.lat = Math.max(-latMax(), Math.min(latMax(), vista.lat + db));
+    }
+    if (ZOOM.z === ZOOM.zt) ancla = null;
+  }
   function pintaZoom() {
     const z = Math.round(ZOOM.zt * 10) / 10;
     if (zNivel) zNivel.textContent = '×' + (z < 100 && z % 1 ? z.toFixed(1).replace('.', ',') : Math.round(z).toLocaleString(document.documentElement.lang === 'en' ? 'en-GB' : 'es-ES'));
@@ -377,12 +393,20 @@
     const t = e.target;
     if (!libreZoom() || !(t === cvT || (t.tagName === 'CANVAS') || t === document.body || t === document.documentElement)) return;
     e.preventDefault();
-    acerca(ZOOM.zt * Math.exp(-e.deltaY * (e.deltaMode ? 0.05 : 0.0016)), e.clientX, e.clientY);
+    const zt = ZOOM.zt * Math.exp(-e.deltaY * (e.deltaMode ? 0.05 : 0.0016));
+    const dentroDisco = zt > ZOOM.zt && anclaEn(e.clientX, e.clientY);
+    acerca(zt, e.clientX, e.clientY);
+    if (dentroDisco) meta = null; else if (zt < ZOOM.zt) ancla = null; // the pointer rules over an earlier click's glide
   }, { passive: false });
   cvT.addEventListener('dblclick', (e) => {
     if (!libreZoom()) return;
-    foco = geoDe(e.clientX, e.clientY) || foco; // a double click is a click too: the zoom goes where it landed
-    if (ZOOM.zt >= ZOOM.MAX - 1e-3) acerca(1); else { const pasos = [2.5, 5, 10, 25, 80, 400, 2000, 10000, ZOOM.MAX]; /* 22 Oct 2026, 21:52 (owner): «con doble clic se tiene que poder hacer zoom en la zona del clic» — a clear step each time, gliding to the spot */ acerca(pasos.find((p) => ZOOM.zt < p - 1e-3) || ZOOM.MAX, e.clientX, e.clientY); }
+    // 22 Oct 2026, 22:18 (owner: «tiene que ser preciso»): the double-clicked spot stays exactly under the pointer while the planet grows
+    if (ZOOM.zt >= ZOOM.MAX - 1e-3) { ancla = null; acerca(1); return; }
+    const q = geoDe(e.clientX, e.clientY);
+    const pasos = [2.5, 5, 10, 25, 80, 400, 2000, 10000, ZOOM.MAX]; // a clear step each time (owner, 21:52)
+    anclaEn(e.clientX, e.clientY);
+    acerca(pasos.find((p) => ZOOM.zt < p - 1e-3) || ZOOM.MAX, e.clientX, e.clientY);
+    meta = null; if (q) foco = q;
   });
   const dedos = new Map(); let pellizco = null;
   cvT.addEventListener('pointerdown', (e) => { if (e.pointerType === 'touch') dedos.set(e.pointerId, e); if (dedos.size === 2) { const [a, b] = [...dedos.values()]; pellizco = { d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), z: ZOOM.zt }; arrastre = null; } });
@@ -429,21 +453,34 @@
   let G = null;
   if (gl) {
     const vs = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
-    const fs = `precision highp float;
+    // 22 Oct 2026, 22:08 (owner: «el contorno… pixelación en un cuadrado en los bordes… máxima calidad»): the maps
+    // get mipmaps and anisotropic filtering, so the planet's edge (where the map is squeezed hardest) stops
+    // sparkling; the shader passes its own seam-safe gradients, so the date line leaves no thin line.
+    const EXT = { der: gl.getExtension('OES_standard_derivatives'), lod: gl.getExtension('EXT_shader_texture_lod'), ani: gl.getExtension('EXT_texture_filter_anisotropic') || gl.getExtension('WEBKIT_EXT_texture_filter_anisotropic') };
+    const MIP = !!(EXT.der && EXT.lod);
+    const fs = `${MIP ? '#extension GL_OES_standard_derivatives : enable\n#extension GL_EXT_shader_texture_lod : enable\n#define MIP 1\n' : ''}precision highp float;
 uniform vec2 uC;uniform float uR;uniform mat3 uM;uniform vec3 uL;uniform float uT,uNubOn,uAten,uLimpio;
 uniform sampler2D uDia,uLuz,uNub,uAgua,uZona;uniform vec4 uZonaBox;uniform float uZonaOn;uniform float uSiempreDia;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
 const float PI=3.14159265;
+#ifdef MIP
+vec4 tx(sampler2D s,vec2 uv,vec2 gx,vec2 gy){return texture2DGradEXT(s,uv,gx,gy);}
+#else
+vec4 tx(sampler2D s,vec2 uv,vec2 gx,vec2 gy){return texture2D(s,uv);}
+#endif
 void main(){
  vec2 p=(gl_FragCoord.xy-uC)/uR;float r=length(p);vec3 atm=vec3(.47,.67,.92);
  vec3 col=vec3(0.);float al=0.;
+ vec2 pc=r<1.?p:p/r;vec3 n=vec3(pc,sqrt(max(0.,1.-dot(pc,pc))));vec3 w=uM*n;
+ float lat=asin(clamp(w.y,-1.,1.));float lon=atan(w.x,w.z);
+ vec2 uv=vec2(lon/(2.*PI)+.5,.5-lat/PI);vec2 gx=vec2(0.),gy=vec2(0.);
+#ifdef MIP
+ gx=dFdx(uv);gy=dFdy(uv);{float u2=fract(uv.x+.5);float a=dFdx(u2),b=dFdy(u2);if(abs(a)<abs(gx.x))gx.x=a;if(abs(b)<abs(gy.x))gy.x=b;}
+#endif
  if(r<1.){
-  vec3 n=vec3(p,sqrt(max(0.,1.-r*r)));vec3 w=uM*n;
-  float lat=asin(clamp(w.y,-1.,1.));float lon=atan(w.x,w.z);
-  vec2 uv=vec2(lon/(2.*PI)+.5,.5-lat/PI);
-  vec3 dia=texture2D(uDia,uv).rgb;float agua=texture2D(uAgua,uv).r;
+  vec3 dia=tx(uDia,uv,gx,gy).rgb;float agua=tx(uAgua,uv,gx,gy).r;
   if(uZonaOn>.5){float ux=uv.x;if(ux<uZonaBox.x)ux+=1.;vec2 q=(vec2(ux,uv.y)-uZonaBox.xy)/(uZonaBox.zw-uZonaBox.xy);if(q.x>0.&&q.x<1.&&q.y>0.&&q.y<1.)dia=texture2D(uZona,q).rgb;}
-  float nub=texture2D(uNub,vec2(fract(uv.x-uT*.0016),uv.y)).r*uNubOn;nub=smoothstep(.12,.9,nub);
-  vec3 luz=texture2D(uLuz,uv).rgb;
+  float nub=tx(uNub,vec2(fract(uv.x-uT*.0016),uv.y),gx,gy).r*uNubOn;nub=smoothstep(.12,.9,nub);
+  vec3 luz=tx(uLuz,uv,gx,gy).rgb;
   float lam=dot(n,uL);float dl=smoothstep(-.22,.42,lam);
   if(uSiempreDia>.5){lam=.45+.55*max(lam,0.);dl=1.;} // 22 Oct 2026 (owner): always day, like Google Earth; the Sun only shades the limb
   vec3 sup=mix(dia*vec3(.96,1.,1.06),vec3(.97,.98,1.),nub*.88);
@@ -462,7 +499,7 @@ void main(){
    vec3 oc=uOk[i]>.5?vec3(.95,.5,.42):vec3(.66,.82,.96);c+=oc*(ring*1.25+core*2.);}}
   float e=smoothstep(1.,1.-max(1.6/uR,4e-7),r);col=c*uAten*e;al=e;
  }
- float h1=r>1.?exp(-(r-1.)/.05)*.5:0.;float h2=r>1.?exp(-(r-1.)/.011)*.55:0.;
+ float d0=max(r-1.,0.);float h1=exp(-d0/.05)*.5;float h2=exp(-d0/.011)*.55; // continuous through the limb: the edge's own smoothing blends planet and air
  vec3 hc=atm*(h1+h2)*uAten;
  gl_FragColor=vec4(col+hc*(1.-al),al+(h1+h2)*.9*(1.-al));
 }`;
@@ -476,6 +513,14 @@ void main(){
       const la = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la, 2, gl.FLOAT, false, 0, 0);
       const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uLimpio', 'uSiempreDia', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaBox', 'uZonaOn', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
       G = { pr, u, tex: {}, nubOn: 0 };
+      // mipmaps + anisotropic filtering on a freshly loaded map (all are powers of two); if the card refuses, plain linear
+      const mipea = () => {
+        if (!MIP) return;
+        gl.generateMipmap(gl.TEXTURE_2D);
+        if (gl.getError() !== gl.NO_ERROR) return;
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+        if (EXT.ani) gl.texParameterf(gl.TEXTURE_2D, EXT.ani.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(16, gl.getParameter(EXT.ani.MAX_TEXTURE_MAX_ANISOTROPY_EXT)));
+      };
       const tex = (unidad, nombre, url, si) => {
         const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unidad); gl.bindTexture(gl.TEXTURE_2D, t);
         if (unidad === 0) G.tex.dia = t;
@@ -484,7 +529,7 @@ void main(){
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
         gl.uniform1i(u[nombre], unidad);
         const im = new Image();
-        im.onload = () => { gl.activeTexture(gl.TEXTURE0 + unidad); gl.bindTexture(gl.TEXTURE_2D, t); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im); if (si) si(); };
+        im.onload = () => { gl.activeTexture(gl.TEXTURE0 + unidad); gl.bindTexture(gl.TEXTURE_2D, t); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im); mipea(); if (si) si(); };
         im.src = url;
       };
       tex(0, 'uDia', TIERRA + 'dia.jpg', () => listo());
@@ -508,6 +553,7 @@ void main(){
           gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im);
           G.tex8 = gl.getError() === gl.NO_ERROR ? t : false;
+          if (G.tex8) mipea();
           gl.bindTexture(gl.TEXTURE_2D, G.tex.dia);
         };
         im.src = TIERRA + 'dia-8k.jpg';
@@ -1119,6 +1165,7 @@ void main(){
     while (ondas.length && t - ondas[0].t0 > 3) ondas.shift();
     if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) > 1e-5) { ZOOM.z *= Math.exp(Math.log(ZOOM.zt / ZOOM.z) * Math.min(1, dt * 4.5)); /* eased in log space: the same glide at ×2 and at ×50 000 (22 Oct 2026) */ if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) < 1e-4) ZOOM.z = ZOOM.zt; R = R0 * ZOOM.z; RAIZ.style.setProperty('--cerca', Math.min(1, (ZOOM.z - 1) / 19).toFixed(3)); document.body.classList.toggle('hondo', ZOOM.z >= 8); document.body.classList.toggle('explorando', ZOOM.z >= 3); /* 22 Oct 2026, 21:51 (owner): past ×3 the section doors on the left go away; they come back on the way out */ /* 22 Oct 2026, 13:54 (owner): deep in, the top layer buttons step back; 21:35: they stay faint and wake under the pointer */ pintaAltura(); }
     avanzaVista(dentro ? dt * 2 : dt, now);
+    if (ancla) fijaAncla();
     pintaTierra(t, dentro ? 0.9 : 1);
     pintaRutas(t, dt);
     // after the frame is complete (same task, so the WebGL buffer is still readable): the journey recorder (viaje.js)
