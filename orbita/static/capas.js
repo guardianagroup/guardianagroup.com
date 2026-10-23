@@ -528,13 +528,13 @@
       const P3 = capas.sub.porPotencia, L3 = esLimpio(), zq = G.R / (G.R0 || G.R), kq = Math.min(1, Math.max(0, (zq - 1.4) / 2.6));
       pintaLineas(cx, p, G, P3.ex[0], `rgba(${ACERO},.55)`, 0.9);
       if (P3.ex[1].length) pintaLineas(cx, p, G, P3.ex[1], `rgba(${ACERO},${(0.62 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
-      if (P3.ex[2].length) { pintaLineas(cx, p, G, P3.ex[2], `rgba(${ACERO},${((L3 ? 0.22 : 0.16) + 0.14 * kq).toFixed(3)})`, 3 + 3 * kq); pintaLineas(cx, p, G, P3.ex[2], `rgba(${CLARO},${(0.78 + 0.2 * kq).toFixed(2)})`, 1.2 + 0.7 * kq); }
+      if (P3.ex[2].length) { pintaLineas(cx, p, G, P3.ex[2], `rgba(${CLARO},${((L3 ? 0.2 : 0.14) + 0.12 * kq).toFixed(3)})`, 3.5 + 3 * kq); pintaLineas(cx, p, G, P3.ex[2], `rgba(${ACERO},${(0.92 + 0.08 * kq).toFixed(2)})`, 1.3 + 0.7 * kq); }
       if (PREV && PREV.length) { cx.save(); cx.setLineDash([2, 6]); pintaLineas(cx, p, G, PREV, `rgba(${CLARO},.45)`, 1); cx.restore(); }
       if (capas.sub.aprox.length) {
         cx.setLineDash([6, 4]);
         pintaLineas(cx, p, G, P3.ap[0], `rgba(${ACERO},.45)`, 0.9);
         if (P3.ap[1].length) pintaLineas(cx, p, G, P3.ap[1], `rgba(${ACERO},${(0.55 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
-        if (P3.ap[2].length) { pintaLineas(cx, p, G, P3.ap[2], `rgba(${ACERO},${((L3 ? 0.2 : 0.14) + 0.12 * kq).toFixed(3)})`, 3 + 3 * kq); pintaLineas(cx, p, G, P3.ap[2], `rgba(${CLARO},${(0.7 + 0.22 * kq).toFixed(2)})`, 1.2 + 0.7 * kq); }
+        if (P3.ap[2].length) { pintaLineas(cx, p, G, P3.ap[2], `rgba(${CLARO},${((L3 ? 0.18 : 0.12) + 0.1 * kq).toFixed(3)})`, 3.5 + 3 * kq); pintaLineas(cx, p, G, P3.ap[2], `rgba(${ACERO},${(0.85 + 0.12 * kq).toFixed(2)})`, 1.3 + 0.7 * kq); }
         cx.setLineDash([]);
       }
       pintaLuz(cx, p, G, capas.sub.lineas, t);
@@ -542,8 +542,8 @@
     if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaEstaciones(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
     else if (estado.sub && EST) { cx.globalCompositeOperation = 'source-over'; pintaEstaciones(cx, p, G); cx.globalCompositeOperation = 'lighter'; } // 22 Oct 2026, 14:15 (owner): the polar stations show with the cables too
     if (estado.sub && capas.sub && capas.sub.lineas) {
-      if (cableMarcado >= 0) { const l = capas.sub.lineas[cableMarcado]; if (l) resalta(cx, p, G, [l], potencia(cableMarcado) === 2 ? CLARO : ACERO); }
-      if (previstoMarcado >= 0 && PREV && PREV[previstoMarcado]) { cx.save(); cx.setLineDash([3, 5]); resalta(cx, p, G, [PREV[previstoMarcado]], CLARO); cx.restore(); } // the planned cable under the pointer lights up like the real ones (owner, 22 Oct 2026, 17:57)
+      if (cableMarcado >= 0) { const l = capas.sub.lineas[cableMarcado]; if (l) resalta(cx, p, G, [l], ACERO); }
+      if (previstoMarcado >= 0 && PREV && PREV[previstoMarcado]) { cx.save(); cx.setLineDash([3, 5]); resalta(cx, p, G, [PREV[previstoMarcado]], ACERO); cx.restore(); } // the planned cable under the pointer lights up like the real ones (owner, 22 Oct 2026, 17:57)
       if (llegadaMarcada >= 0 && LUG && LUG.llegadas) { const ls = LUG.llegadas[llegadaMarcada].seg.map((i) => capas.sub.lineas[i]).filter(Boolean); resalta(cx, p, G, ls, ACERO); }
       pintaLlegadas(cx, p, G);
       { const ze = G.R / (G.R0 || G.R); if (ze >= 4) { pintaExtremos(cx, p, G, capas.sub.lineas, ze, BLANCO); if (PREV && PREV.length) pintaExtremos(cx, p, G, PREV, ze, BLANCO); } }
