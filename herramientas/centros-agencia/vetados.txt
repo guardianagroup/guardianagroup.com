@@ -5,3 +5,23 @@ Global Switch Frankfurt North|DE  # Global Switch tiene un campus en Frankfurt, 
 Global Switch Frankfurt South|DE  # ídem
 Global Switch Paris East|FR  # el campus de Clichy ya está en el mapa como «Global Switch»
 Global Switch Paris West|FR  # ídem
+Digital Realty ATH1|GR  # «Athens 1» de OpenStreetMap (antiguo Lamda Hellix)
+Digital Realty ATH3|GR  # «Athens 3» de OpenStreetMap
+Telepoint 1|BG  # «Телепоинт София Изток» de OpenStreetMap
+EU North Riga LV DC1|LV  # los tres de Delska en Riga ya están en OpenStreetMap (sin nombre)
+EU North Riga LV DC2|LV  # ídem
+EU North Riga LV DC3|LV  # ídem
+LuxConnect DC1.1|LU  # «ICT Campus Bettembourg DC 1.1» de OpenStreetMap
+LuxConnect DC1.2|LU  # ídem DC 1.2
+LuxConnect DC1.3|LU  # ídem DC 1.3
+ETIX Lille #2|FR  # «CIV Sainghin-en-Mélantois» de OpenStreetMap
+nLighten Strasbourg SXB1|FR  # «DC7 - Euclyde Datacenters» de OpenStreetMap (Euclyde es ahora nLighten)
+Equinix HH1|DE  # el «Equinix» de Hamburgo de OpenStreetMap
+NTT Munich 1|DE  # probablemente «NTT Data Inc, München Data Center» de OpenStreetMap
+Green Mountain OSL-Enebakk|NO  # «Green Mountain Ytre Enebakk» de OpenStreetMap
+Green Mountain OSL-Hamar|NO  # Green Mountain en Hamar ya está en OpenStreetMap
+Digital Realty STO2|SE  # incluido en «Digital Realty Stockholm STO1-STO5» de OpenStreetMap
+NTT Berlin 1|DE  # los dos de NTT en Berlín ya están en OpenStreetMap (sin nombre)
+NTT Berlin 2|DE  # ídem
+Aruba IT4 Hyper Cloud Data Center|IT  # los dos de Aruba en Roma ya están en OpenStreetMap
+TOP-IX Torino Colocation|IT  # TOP-IX es un punto de intercambio; no tiene centro de datos propio
