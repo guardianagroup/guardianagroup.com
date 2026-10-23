@@ -80,13 +80,19 @@
     // planet (static/radiografias.js), not a page.
     { id: 'radiografias', n: 'Radiografías', s: 'Lo que ven de ti', d: 'Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.', propia: true },
     { id: 'zero', n: 'ZERO', s: 'Navegador · demostración', d: 'El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.', pagina: 'zero/?orbita=1&entrada=0' },
-    { id: 'comunicaciones', n: 'Comunicaciones', s: 'En construcción', d: 'Chat, llamadas y archivos cifrados de extremo a extremo. Llegará cuando esté terminada y probada.', url: null, desarrollo: true });
+    { id: 'comunicaciones', n: 'Comunicaciones', s: 'En construcción', d: 'Chat, llamadas y archivos cifrados de extremo a extremo. Llegará cuando esté terminada y probada.', url: null, desarrollo: true },
+    // 23 Oct 2026, 15:49 (owner: «dónde va el sistema operativo… y con qué palabra: donde tú lo veas»): GUARDIANA OS, a
+    // download rather than a door into the web, sits apart under the three doors and says «En preparación» until a
+    // first version runs (then «Próximamente»); it promises only what that version can do, and says what it will not.
+    { id: 'sistema', n: 'GUARDIANA OS', s: 'En preparación', estado: 'EN PREPARACIÓN', separada: true, url: null, desarrollo: true,
+      d: 'Un sistema operativo de código abierto que se descarga desde aquí: verás y podrás cortar cada conexión de tu equipo, programa por programa.',
+      aparte: 'Cada descarga llevará su firma para comprobar que nadie la ha tocado. Lo que no hará: frenar el phishing ni a quien entrega su contraseña, ni ejecutar programas de Windows sin virtualizarlos.' });
   const nav = $('puertas');
   const NP = PUERTAS.length;
   PUERTAS.forEach((p, i) => {
     const a = (NP === 3 ? i : i + 0.5) * 2 * Math.PI / NP, s = Math.sin(a), c = Math.cos(a); // three: ZERO at the top
     const el = document.createElement('div');
-    el.className = 'puerta';
+    el.className = 'puerta' + (p.separada ? ' aparte' : '');
     el.style.left = `calc(50% + var(--anillo) * ${s.toFixed(4)})`;
     el.style.top = `calc(50% - var(--anillo) * ${c.toFixed(4)})`;
     el.style.transitionDelay = (1.3 + i * 0.08).toFixed(2) + 's';
@@ -116,6 +122,7 @@
     nav.appendChild(el);
     p.el = el;
   });
+  { const de = document.querySelector('#ficha .de'); if (de) de.textContent = '/' + String(NP).padStart(2, '0'); }
   let sel = 0;
   function elige(i) {
     sel = (i + NP) % NP;
@@ -176,7 +183,7 @@
       marco.src = p.url + (p.url.includes('?') ? '&' : '?') + 'orbita=1';
     } else {
       marco.removeAttribute('src');
-      $('sp-k').textContent = p.desarrollo ? 'EN CONSTRUCCIÓN' : p.s.toUpperCase();
+      $('sp-k').textContent = p.estado || (p.desarrollo ? 'EN CONSTRUCCIÓN' : p.s.toUpperCase());
       $('sp-k').classList.toggle('desarrollo', !!p.desarrollo);
       $('sp-t').textContent = p.n;
       $('sp-d').textContent = p.aparte ? p.d + ' ' + p.aparte : (DEMO && p.url ? p.d + ' En el programa, aquí entra la página real.' : p.d);
