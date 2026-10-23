@@ -304,7 +304,8 @@
     for (const obra of [false, true]) for (const nivel of [0, 1, 2, 3]) {
       const fn = fundidoNivel(nivel, z); if (fn <= 0) continue;
       const alfa = (obra ? 0.5 : nivel === 3 ? 0.85 + 0.12 * kq : nivel === 2 ? 0.74 + 0.12 * kq : nivel === 1 ? 0.66 : 0.48) * fz * fn;
-      cx.strokeStyle = nivel >= 2 && !obra ? `rgba(${CLARO},${(alfa * (nivel === 3 ? 0.97 : 0.86)).toFixed(2)})` : `rgba(${ACERO},${alfa.toFixed(2)})`;
+      cx.strokeStyle = nivel >= 2 && !obra ? `rgba(${ACERO},${(alfa * (nivel === 3 ? 1 : 0.9)).toFixed(2)})` : `rgba(${ACERO},${alfa.toFixed(2)})`;
+      if (nivel === 3 && !obra) { const g = cx.globalCompositeOperation; cx.globalCompositeOperation = 'source-over'; cx.lineWidth = base + 0.9 + 0.5 * kq; cx.setLineDash([]); cx.beginPath(); const F0 = CAMPO || campo(p, G); for (const l of lineas) { if (l.x.obra || l.nivel !== 3) continue; if (!F0.todo) { capsDe(l); if (!veCap(F0, l.cap)) continue; } trazoW(cx, p, G, l.w, 0, l.w.length - 1); } cx.stroke(); cx.globalCompositeOperation = g; continue; }
       cx.lineWidth = nivel === 3 ? base + 0.9 + 0.5 * kq : nivel === 2 ? base + 0.35 + 0.3 * kq : nivel === 1 ? base : Math.max(0.7, base - 0.25);
       cx.setLineDash(obra ? [3, 3] : []);
       cx.beginPath();
@@ -528,13 +529,15 @@
       const P3 = capas.sub.porPotencia, L3 = esLimpio(), zq = G.R / (G.R0 || G.R), kq = Math.min(1, Math.max(0, (zq - 1.4) / 2.6));
       pintaLineas(cx, p, G, P3.ex[0], `rgba(${ACERO},.55)`, 0.9);
       if (P3.ex[1].length) pintaLineas(cx, p, G, P3.ex[1], `rgba(${ACERO},${(0.62 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
-      if (P3.ex[2].length) { pintaLineas(cx, p, G, P3.ex[2], `rgba(${CLARO},${((L3 ? 0.2 : 0.14) + 0.12 * kq).toFixed(3)})`, 3.5 + 3 * kq); pintaLineas(cx, p, G, P3.ex[2], `rgba(${ACERO},${(0.92 + 0.08 * kq).toFixed(2)})`, 1.3 + 0.7 * kq); }
+      // the layer is painted additively (overlapping lines glow), which turns any bright core white: the giants' core is
+      // painted normally, so it stays the accent blue, and only its halo adds up with the rest
+      if (P3.ex[2].length) { pintaLineas(cx, p, G, P3.ex[2], `rgba(${CLARO},${((L3 ? 0.2 : 0.14) + 0.12 * kq).toFixed(3)})`, 3.5 + 3 * kq); opaco(cx, () => pintaLineas(cx, p, G, P3.ex[2], `rgba(${ACERO},${(0.92 + 0.08 * kq).toFixed(2)})`, 1.3 + 0.7 * kq)); }
       if (PREV && PREV.length) { cx.save(); cx.setLineDash([2, 6]); pintaLineas(cx, p, G, PREV, `rgba(${CLARO},.45)`, 1); cx.restore(); }
       if (capas.sub.aprox.length) {
         cx.setLineDash([6, 4]);
         pintaLineas(cx, p, G, P3.ap[0], `rgba(${ACERO},.45)`, 0.9);
         if (P3.ap[1].length) pintaLineas(cx, p, G, P3.ap[1], `rgba(${ACERO},${(0.55 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
-        if (P3.ap[2].length) { pintaLineas(cx, p, G, P3.ap[2], `rgba(${CLARO},${((L3 ? 0.18 : 0.12) + 0.1 * kq).toFixed(3)})`, 3.5 + 3 * kq); pintaLineas(cx, p, G, P3.ap[2], `rgba(${ACERO},${(0.85 + 0.12 * kq).toFixed(2)})`, 1.3 + 0.7 * kq); }
+        if (P3.ap[2].length) { pintaLineas(cx, p, G, P3.ap[2], `rgba(${CLARO},${((L3 ? 0.18 : 0.12) + 0.1 * kq).toFixed(3)})`, 3.5 + 3 * kq); opaco(cx, () => pintaLineas(cx, p, G, P3.ap[2], `rgba(${ACERO},${(0.85 + 0.12 * kq).toFixed(2)})`, 1.3 + 0.7 * kq)); }
         cx.setLineDash([]);
       }
       pintaLuz(cx, p, G, capas.sub.lineas, t);
@@ -613,7 +616,9 @@
   }
   const veCap = (F, cp) => F.d[0] * cp.c[0] + F.d[1] * cp.c[1] + F.d[2] * cp.c[2] >= Math.cos(Math.min(Math.PI, F.ang + cp.r));
   // what the pointer touches: a soft halo and a brighter, wider core in the line's own colour
-  function resalta(cx, p, G, lineas, rgb) { pintaLineas(cx, p, G, lineas, `rgba(${rgb},.22)`, 7); pintaLineas(cx, p, G, lineas, `rgba(${rgb},1)`, 2.3); }
+  function resalta(cx, p, G, lineas, rgb) { pintaLineas(cx, p, G, lineas, `rgba(${rgb},.22)`, 7); opaco(cx, () => pintaLineas(cx, p, G, lineas, `rgba(${rgb},1)`, 2.3)); }
+  // paint something without the additive glow (so a blue stays blue), then go back to how the layer was painting
+  function opaco(cx, f) { const g = cx.globalCompositeOperation; cx.globalCompositeOperation = 'source-over'; f(); cx.globalCompositeOperation = g; }
   function pintaLineas(cx, p, G, lineas, color, ancho) {
     const F = CAMPO || campo(p, G);
     cx.strokeStyle = color; cx.lineWidth = ancho; cx.beginPath();
