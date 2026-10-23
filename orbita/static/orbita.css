@@ -755,3 +755,15 @@ body.en-espejo #estado { opacity: .35; }
   .espejo-hud { top: calc(108px + env(safe-area-inset-top, 0px)); }
 }
 @media (prefers-reduced-motion: reduce) { .espejo-hud { animation: none; } .espejo-hud .paises .barra i { transition: none; } }
+
+/* The phrase under the planet (owner, 23 Oct 2026): once per visit, word by word, lit like the website's titles. */
+.frase { position: fixed; left: 50%; top: 76%; transform: translate(-50%, 6px); z-index: 6; margin: 0; padding: 0 16px; width: max-content; max-width: min(92vw, 760px); box-sizing: border-box; text-align: center; font: 500 clamp(17px, 2vw, 24px)/1.3 'Schibsted Grotesk', var(--texto); letter-spacing: -.005em; color: rgba(232,238,245,.13); pointer-events: none; opacity: 0; transition: opacity .6s ease, transform .9s cubic-bezier(.2,.7,.2,1); text-wrap: balance; }
+.frase.entra { opacity: 1; transform: translate(-50%, 0); }
+.frase.fuera { transition-duration: 1.3s, 1.3s; }
+.frase.fuera { opacity: 0; transform: translate(-50%, -4px); }
+.frase .fw { transition: color .4s ease, text-shadow .55s ease; }
+.frase .fw.m { color: #FFFFFF; text-shadow: 0 0 .32em rgba(156,195,228,.75), 0 0 .9em rgba(156,195,228,.35); }
+.frase .fw.on { color: #F4F6F8; text-shadow: 0 0 .5em rgba(6,8,12,.9); }
+body.con-frase .espejo-modo .pre { opacity: 0; }
+@media (max-width: 760px) { .frase { font-size: 16px; } }
+@media (prefers-reduced-motion: reduce) { .frase, .frase .fw { transition: opacity .6s ease; } }
