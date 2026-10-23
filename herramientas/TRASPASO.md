@@ -442,3 +442,8 @@ Reglas: todo encendido por defecto; la última clase encendida no se puede apaga
   La nota de la capa de satélites fecha con el grupo más antiguo. Probado con descargas simuladas (todo vacío, solo Starlink vacío, Starlink
   de hace 5 días).
 - terminos.html: créditos de los tipos de letra de Órbita (OFL 1.1).
+- **Flechas del «¿Sabías qué?»** (dueño, 13:20: «una flecha a la derecha y otra a la izquierda, de diseño, bien bonita… que al pasar
+  por encima el mouse cambie a la mano»): dos botones redondos de cristal (32 px) con un chevron fino en SVG que se inclina hacia donde va;
+  al pasar, brillo azul y mano; al pulsar, se hunden. Se crean una vez (el que está bajo el ratón no parpadea al cambiar de tarjeta) y son
+  botones de verdad para lectores de pantalla («Anterior» / «Siguiente»). Los puntos van en una sola línea entre ellas (se estrechan en
+  vez de saltar de línea) y la tarjeta actual es una barrita encendida. Versión `20261025a`.

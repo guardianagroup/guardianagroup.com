@@ -637,16 +637,32 @@ body.viaje.viaje-fin .altura { opacity: 1 !important; transition-delay: 0s; }
   .ficha-panel.moviendo { box-shadow: 0 18px 50px rgba(0,0,0,.55); transition: none; }
 }
 
-/* «¿Sabías que…?» (23 Oct 2026, owner): arrows at both ends, one dot per card that shows it under the pointer */
-.dato .dpie { flex-wrap: wrap; row-gap: 8px; }
-.dato .dpuntos { width: 100%; display: flex; align-items: center; gap: 0; margin: 0; padding: 0; flex: 1 1 100%; cursor: default; }
-.dato .dpuntos .datras { margin-right: auto; }
-.dato .dpuntos .dsig { margin-left: auto; }
-.dato .dpuntos button { all: unset; cursor: pointer; display: inline-grid; place-items: center; width: 24px; height: 22px; border-radius: 7px; font: 500 15px/1 var(--mono); color: var(--accent); transition: background .15s, color .15s; }
-.dato .dpuntos button:hover { background: rgba(156,195,228,.14); color: var(--fg); }
-.dato .dpuntos button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-.dato .dpuntos i { box-sizing: content-box; width: 4px; height: 4px; padding: 4px 2.5px; background-clip: content-box; cursor: pointer; transition: transform .15s; }
-.dato .dpuntos i:hover { transform: scale(1.5); }
+/* «¿Sabías que…?» (23 Oct 2026, owner): one dot per card that shows it under the pointer; 13:20: «una flecha a la derecha
+   y otra a la izquierda, de diseño, bien bonita» with the hand on hover: two round glass buttons at the ends, a thin
+   chevron that leans the way it goes, the dots between them */
+.dato .dpie { flex-wrap: wrap; row-gap: 10px; }
+.dato .dpuntos { width: 100%; display: flex; align-items: center; gap: 10px; margin: 0; padding: 0; flex: 1 1 100%; cursor: default; }
+.dato .dpts { flex: 1 1 auto; min-width: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; row-gap: 2px; }
+.dato .dflecha { all: unset; box-sizing: border-box; flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; color: var(--accent); border: 1px solid rgba(156,195,228,.32); background: linear-gradient(180deg, rgba(156,195,228,.13), rgba(156,195,228,.03)); box-shadow: inset 0 1px 0 rgba(244,246,248,.08), 0 6px 16px rgba(0,0,0,.35); transition: color .2s, border-color .2s, background .2s, box-shadow .25s, transform .12s; -webkit-tap-highlight-color: transparent; }
+.dato .dflecha svg { width: 15px; height: 15px; display: block; pointer-events: none; transition: transform .25s cubic-bezier(.2,.7,.2,1); }
+.dato .dflecha:hover { color: #F4F6F8; border-color: rgba(156,195,228,.78); background: linear-gradient(180deg, rgba(156,195,228,.28), rgba(156,195,228,.10)); box-shadow: inset 0 1px 0 rgba(244,246,248,.14), 0 0 0 4px rgba(156,195,228,.10), 0 0 22px rgba(156,195,228,.30); }
+.dato .datras:hover svg { transform: translateX(-2px); }
+.dato .dsig:hover svg { transform: translateX(2px); }
+.dato .dflecha:active { transform: scale(.92); }
+.dato .dflecha:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+[dir="rtl"] .dato .dflecha svg { transform: scaleX(-1); }
+[dir="rtl"] .dato .datras:hover svg { transform: scaleX(-1) translateX(-2px); }
+[dir="rtl"] .dato .dsig:hover svg { transform: scaleX(-1) translateX(2px); }
+/* the dots share the space between the arrows on one line (they narrow rather than wrap); the current card is a short
+   lit bar */
+.dato .dpts { flex-wrap: nowrap; }
+.dato .dpts i, .dato .dpts i.on { flex: 0 1 9px; min-width: 5px; width: auto; height: 16px; padding: 0; border-radius: 0; background: none; display: grid; place-items: center; cursor: pointer; }
+.dato .dpts i::before { content: ""; width: 4px; height: 4px; border-radius: 2px; background: rgba(156,195,228,.28); transition: width .3s cubic-bezier(.2,.7,.2,1), background .2s, transform .15s, box-shadow .3s; }
+.dato .dpts i:hover::before { transform: scale(1.5); background: rgba(156,195,228,.65); }
+.dato .dpts i.on { flex-basis: 18px; min-width: 14px; }
+.dato .dpts i.on::before { width: 12px; background: var(--accent); box-shadow: 0 0 8px rgba(156,195,228,.55); }
+.dato .dpts i.on:hover::before { transform: none; }
+@media (prefers-reduced-motion: reduce) { .dato .dflecha, .dato .dflecha svg { transition: color .2s, border-color .2s, background .2s; } .dato .datras:hover svg, .dato .dsig:hover svg { transform: none; } [dir="rtl"] .dato .datras:hover svg, [dir="rtl"] .dato .dsig:hover svg { transform: scaleX(-1); } }
 
 /* layer cards: a clear «Minimizar» instead of the bare dash (23 Oct 2026, owner) */
 .sat-vista .orb .titulo .plegar, .sat-vista .titulo .plegar { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px 4px 7px; margin: -4px -6px -4px 8px; border: 1px solid var(--line); border-radius: 999px; color: #A9B4C0; font: 500 10.5px/1 var(--texto); letter-spacing: 0; text-transform: none; transition: color .15s, border-color .15s, background .15s; }
