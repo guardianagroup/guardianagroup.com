@@ -1,0 +1,122 @@
+[
+{
+"nombre": "Americas-II",
+"tbps": 0.08,
+"pares": 4,
+"fuente": "http://www.prnewswire.com/news-releases/tyco-international-ltd---lead-supplier-in-us310-million-americas-ii-supply-contract-76943022.html"
+},
+{
+"nombre": "Svalbard Undersea Cable System",
+"tbps": 2.5,
+"pares": 8,
+"fuente": "https://www.tu.no/artikler/kabelparadoks-pa-svalbard/266685"
+},
+{
+"nombre": "SEA-ME-WE 4",
+"tbps": 122,
+"pares": 2,
+"fuente": "https://www.ciena.com/about/newsroom/press-releases/sea-me-we-4-enables-global-digitalization-with-enhanced-connectivity-powered-by-ciena"
+},
+{
+"nombre": "Africa Coast to Europe (ACE)",
+"tbps": 12.8,
+"pares": 2,
+"fuente": "https://www.lightwaveonline.com · it-online.co.za (100G: 12,8 Tbit/s en servicio; la mejora a 30 Tbit/s de Ciena está anunciada, no terminada)"
+},
+{
+"nombre": "FLAG North Asia Loop (FNAL/RNAL)",
+"tbps": 3.8,
+"pares": 6,
+"fuente": "https://www.lightwaveonline.com/business/market-research/article/16647343/flag-telecom-level-3-to-deliver-capacity-to-northern-asia"
+},
+{
+"nombre": "MainOne",
+"tbps": 10,
+"pares": 2,
+"fuente": "https://mainone.net/?p=1369"
+},
+{
+"nombre": "HAWK",
+"tbps": 20,
+"pares": 4,
+"fuente": "https://www.capacitymedia.com/article/29otb7j5dko60y6y3iwhs/news/hawk-upgrade-boosts-primetels-cyprus-hub-coverage"
+},
+{
+"nombre": "FLAG Atlantic-1 (FA-1)",
+"tbps": 4.8,
+"pares": 6,
+"fuente": "https://lightwaveonline.com/home/article/16659676/flag-atlantic-1-enters-commercial-service"
+},
+{
+"nombre": "America Europe Connect-1 (AEC-1 / AEConnect)",
+"tbps": 52,
+"pares": null,
+"fuente": "https://lightwaveonline.com/network-design/high-speed-networks/article/16651432/americaeurope-connect-submarine-cable-network-completes-marine-construction"
+},
+{
+"nombre": "AKORN (Alaska-Oregon Network)",
+"tbps": 2.56,
+"pares": 4,
+"fuente": "https://www.petroleumnews.com/pnarchpop/755289567.shtml"
+},
+{
+"nombre": "Alaska United West (AU-West)",
+"tbps": 0.64,
+"pares": null,
+"fuente": "https://www.nec.com/en/global/prod/nw/submarine/news/archive/20030722.html"
+},
+{
+"nombre": "FALCON",
+"tbps": 2.56,
+"pares": null,
+"fuente": "https://tele.net.in/reliance-communication-inaugurates-undersea-cable/"
+},
+{
+"nombre": "Bay of Bengal Gateway (BBG)",
+"tbps": 55,
+"pares": 3,
+"fuente": "https://www.capacitymedia.com/article/29ot80p0rgoaqtgmce77k/news/reliance-jio-announces-100gbps-bbg-cable-system-launch"
+},
+{
+"nombre": "East Asia Crossing (EAC, integrado en EAC-C2C)",
+"tbps": 2.56,
+"pares": 4,
+"fuente": "https://www.nec.com/en/global/prod/nw/submarine/news/archive/20001018.html"
+},
+{
+"nombre": "Japan-U.S. Cable Network",
+"tbps": 1.28,
+"pares": 4,
+"fuente": "https://info.archives.global.fujitsu/global/about/resources/news/press-releases/2008/0327-01.html"
+},
+{
+"nombre": "MENA Submarine Cable System",
+"tbps": 40,
+"pares": 5,
+"fuente": "https://oceannews.com/?p=40363"
+},
+{
+"nombre": "PIPE Pacific Cable-1 (PPC-1)",
+"tbps": 12,
+"pares": 2,
+"fuente": "https://www.capacitymedia.com/articles/3829227/tpg-telecom-turns-to-infinera-for-ppc-1-upgrade"
+},
+{
+"nombre": "Manatua (One Polynesia Cable)",
+"tbps": 20,
+"pares": 2,
+"fuente": "https://subtelforum.com/manatua-consortium-confirms-one-polynesia-cable-rfs/"
+},
+{
+"nombre": "Guam-Philippines Cable System (G-P)",
+"tbps": 0.02,
+"pares": 2,
+"fuente": "https://www.lightwaveonline.com/home/article/16655268/tyco-submarine-systems-ltd-morristown-nj-kanematsu-corp-tokyo-and-kdd-submarine-cable"
+},
+{
+"nombre": "Firmina",
+"tbps": 240,
+"pares": 16,
+"fuente": "https://docs.fcc.gov/public/attachments/DOC-384367A1.pdf"
+}
+]
