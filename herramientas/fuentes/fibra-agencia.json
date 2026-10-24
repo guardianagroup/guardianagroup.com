@@ -1099,6 +1099,37 @@
 ]
 },
 {
+"n": "Dorsal Sur N'Djamena–Doba",
+"o": "Sotel Tchad",
+"cc": "TD",
+"l": [
+[
+15.04,
+12.11
+],
+[
+15.55,
+10.92
+],
+[
+15.37,
+10.28
+],
+[
+15.81,
+9.31
+],
+[
+16.08,
+8.57
+],
+[
+16.85,
+8.66
+]
+]
+},
+{
 "n": "Greater Mekong Subregion Information Superhighway, corredor Myanmar–China",
 "o": "MPT",
 "cc": "MM",
@@ -1393,6 +1424,37 @@
 ]
 },
 {
+"n": "TWAREN – fibra propia entre los nodos troncales Taipei–Hsinchu–Taichung–Tainan",
+"o": "TWAREN (NCHC)",
+"cc": "TW",
+"l": [
+[
+121.53,
+25.05
+],
+[
+121.3,
+24.99
+],
+[
+120.97,
+24.8
+],
+[
+120.68,
+24.15
+],
+[
+120.449,
+23.479
+],
+[
+120.21,
+22.99
+]
+]
+},
+{
 "n": "Superistral North-South Ring",
 "o": "Kazakhtelecom",
 "cc": "KZ",
@@ -1681,6 +1743,60 @@
 ]
 },
 {
+"n": "RNFO — corredor continental nororiental",
+"o": "GITGE",
+"cc": "GQ",
+"l": [
+[
+9.77,
+1.86
+],
+[
+9.951,
+1.883
+],
+[
+10.471,
+2.016
+],
+[
+10.613,
+2.136
+],
+[
+11.33,
+2.15
+]
+]
+},
+{
+"n": "TWAREN – anillo de la isla por Yilan y Hualien",
+"o": "TWAREN (NCHC)",
+"cc": "TW",
+"l": [
+[
+121.75,
+24.76
+],
+[
+121.604,
+23.977
+],
+[
+121.14,
+22.76
+],
+[
+120.31,
+22.62
+],
+[
+120.21,
+22.99
+]
+]
+},
+{
 "n": "TIC National Backbone",
 "o": "Telecommunication Infrastructure Company",
 "cc": "IR",
@@ -1950,6 +2066,29 @@
 ]
 },
 {
+"n": "HONDUTEL – Troncal Puerto Cortés–Tegucigalpa–El Amatillo",
+"o": "Hondutel",
+"cc": "HN",
+"l": [
+[
+-87.93,
+15.826
+],
+[
+-88.03,
+15.51
+],
+[
+-87.21,
+14.08
+],
+[
+-87.489,
+13.539
+]
+]
+},
+{
 "n": "Rede Ipê",
 "o": "RNP (Rede Nacional de Ensino e Pesquisa)",
 "cc": "BR",
@@ -2076,6 +2215,25 @@
 ]
 },
 {
+"n": "Fibra óptica UTE sobre líneas de transmisión Bonete–Young–Paysandú–Salto",
+"o": "UTE",
+"cc": "UY",
+"l": [
+[
+-57.63,
+-32.7
+],
+[
+-58.08,
+-32.32
+],
+[
+-57.96,
+-31.39
+]
+]
+},
+{
 "n": "NEXT Fiber Network",
 "o": "Neutral Networks",
 "cc": "MX",
@@ -2186,6 +2344,78 @@
 ]
 },
 {
+"n": "RNFO — corredor Niefang–Anisoc–Mongomo",
+"o": "GITGE",
+"cc": "GQ",
+"l": [
+[
+10.69,
+1.856
+],
+[
+10.77,
+1.87
+],
+[
+11.313,
+1.627
+]
+]
+},
+{
+"n": "HONDUTEL – Ramal Tegucigalpa–Choluteca",
+"o": "Hondutel",
+"cc": "HN",
+"l": [
+[
+-87.489,
+13.539
+],
+[
+-87.179,
+13.306
+]
+]
+},
+{
+"n": "HONDUTEL – Troncal Bajo Aguán",
+"o": "Hondutel",
+"cc": "HN",
+"l": [
+[
+-86.78,
+15.76
+],
+[
+-86.25,
+15.47
+],
+[
+-86.0,
+15.68
+]
+]
+},
+{
+"n": "Troncal de Berbice",
+"o": "E-Networks",
+"cc": "GY",
+"l": [
+[
+-58.16,
+6.8
+],
+[
+-57.52,
+6.25
+],
+[
+-57.149,
+5.933
+]
+]
+},
+{
 "n": "TEA (Transit Europe-Asia)",
 "o": "Rostelecom",
 "cc": "RU",
@@ -2262,6 +2492,21 @@
 ]
 },
 {
+"n": "TWAREN National Research and Education Optical Ring",
+"o": "TWAREN",
+"cc": "TW",
+"l": [
+[
+121.75,
+24.76
+],
+[
+121.53,
+25.05
+]
+]
+},
+{
 "n": "Azerbaijan East-West Backbone (Digital Silk Way / Georgia Transit)",
 "o": "AzerTelecom",
 "cc": "AZ",
@@ -2334,6 +2579,51 @@
 ]
 },
 {
+"n": "National Transmission Network – Mount Hagen–Tari",
+"o": "PNG DataCo",
+"cc": "PG",
+"l": [
+[
+144.23,
+-5.86
+],
+[
+142.947,
+-5.845
+]
+]
+},
+{
+"n": "Savusavu–Labasa Fibre Project, Vanua Levu",
+"o": "Telecom Fiji",
+"cc": "FJ",
+"l": [
+[
+179.336,
+-16.779
+],
+[
+179.36,
+-16.43
+]
+]
+},
+{
+"n": "Red OPGW Costa Caribe Norte Siuna–Rosita–Bilwi",
+"o": "ENATREL",
+"cc": "NI",
+"l": [
+[
+-84.78,
+13.73
+],
+[
+-83.389,
+14.035
+]
+]
+},
+{
 "n": "Enlace internacional de fibra Myanmar–India",
 "o": "MPT",
 "cc": "MM",
@@ -2375,6 +2665,51 @@
 [
 62.2,
 34.35
+]
+]
+},
+{
+"n": "RNFO — corredor continental meridional",
+"o": "GITGE",
+"cc": "GQ",
+"l": [
+[
+10.467,
+1.581
+],
+[
+10.551,
+1.437
+]
+]
+},
+{
+"n": "SIEPAC / REDCA – Troncal Costa Rica",
+"o": "REDCA",
+"cc": "CR",
+"l": [
+[
+-85.1,
+10.43
+],
+[
+-84.323,
+9.522
+]
+]
+},
+{
+"n": "Troncal Georgetown–Linden",
+"o": "E-Networks",
+"cc": "GY",
+"l": [
+[
+-58.16,
+6.8
+],
+[
+-58.31,
+6.01
 ]
 ]
 },
