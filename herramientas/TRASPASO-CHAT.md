@@ -538,3 +538,4 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
 - 11:38 · Europa 5: 168 países, 1.342.401 km, 413 tramos de la agencia.
 - 11:40 · Europa 6: 168 países, 1.343.773 km, 416 tramos de la agencia.
 - 11:41 · Oceanía 1: 169 países, 1.345.645 km, 420 tramos de la agencia.
+- 12:25 · Ronda 24, lotes 1–2: cables de la agencia aceptados: 352 · tramos: 1058; lugares-capas: 521 grupos.
