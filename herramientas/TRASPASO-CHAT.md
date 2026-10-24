@@ -66,7 +66,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
 
 **Lo que quedó a medias**
 - **Revisión de Astra 6 por continentes (ronda 23): terminada** el 24 de octubre a las 11:41. Todas las tandas de `ronda23/tandas.md` están procesadas y publicadas (registro al final del §11). Resultado: 169 países (entró Nueva Caledonia), 1.345.645 km y 420 tramos de la agencia. Astra no dio rutas para MU, ST, SC, SB ni VU.
-- **Kimi** (kimi.ai): la cuenta gratuita se satura en la hora punta de China. Sus preguntas están en `herramientas/agencia-rondas/kimi-pendientes/`. Quedan 13 por hacer:
+- **Kimi** (kimi.ai): la cuenta gratuita se satura en la hora punta de China. A las 12:30 se relanzaron sus 13 preguntas: mira qué `kimi-troncales-3..8.json` y `kimi-faltan-*.json` existen ya y sigue por lo que falte. Sus preguntas están en `herramientas/agencia-rondas/kimi-pendientes/`. Quedan 13 por hacer:
   - `q-A3`: trazados aproximados de los países sin datos. La respuesta va a `herramientas/fibra-agencia/kimi-troncales-3.json`.
   - `q-B1` a `q-B5`: troncales en servicio. Las respuestas van a `kimi-troncales-4.json` hasta `-8.json`.
   - `q-C-<región>` (siete regiones): cables submarinos que faltan. Las respuestas van a `herramientas/cables-agencia/kimi-faltan-<región>.json`.
@@ -75,7 +75,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
 - **Gemini:** le falta la tanda 9 (KP, TD, NI y CV). Su límite se renueva el 24 de octubre a las 12:47.
 - **Grok:** le faltan las tandas 8 y 9. Su límite semanal se renueva el 27 de octubre.
 - **Cables submarinos que solo nombra una voz:** 131. Son 64 de ChatGPT, 55 de Gemini, 9 de Claude, 2 de Astra y 1 de Grok; `cables_agencia.py` los lista con «solo lo nombra».
-  - **Ronda 24, parada a las 12:30:** hechos los lotes 1–7. Astra solo confirmó 3 cables de 48, ya publicados (352 cables de la agencia). En los lotes 3–6 devolvió `[]`, quizá por prudencia, porque se le piden fuentes oficiales. Quedan los lotes 8–17 de `herramientas/agencia-rondas/ronda24/lotes.json`, mejor con otra voz (Gemini, Kimi o ChatGPT).
+  - **Ronda 24, parada a las 12:30:** hechos los lotes 1–7. Astra solo confirmó 3 cables de 56, ya publicados (352 cables de la agencia). En los lotes 3–7 devolvió `[]`, quizá por prudencia, porque se le piden fuentes oficiales. Quedan los lotes 8–17 de `herramientas/agencia-rondas/ronda24/lotes.json`, mejor con otra voz (Gemini, Kimi o ChatGPT).
   - Sus respuestas van a `herramientas/cables-agencia/astra-confirma-<n>.json`. Mira cuáles existen y sigue por el primer lote que falte.
   - Después, el proceso de los cables submarinos.
   - Los 2 que propuso Astra necesitan otra voz.
