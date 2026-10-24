@@ -1,6 +1,26 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-Actualizado el viernes 23 de octubre de 2026 a las 23:50, hora de Bogotá. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
+Actualizado el sábado 24 de octubre de 2026 a las 07:05, hora de Bogotá. Escrito al cerrar la cuenta anterior, al 92 % de su uso semanal. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
+
+## Primeros pasos de la cuenta nueva (24 Oct 2026, 07:05)
+
+1. **GitHub:** conecta GitHub con permiso de escritura en `guardianagroup/guardianagroup.com`. Clona el repositorio, trabaja en la rama `web-idiomas` y usa un worktree aparte para `main` (ver §3).
+2. **Lectura:** lee este documento entero y después `herramientas/TRASPASO.md`.
+3. **Siguiente tarea: Gemini, tandas 5 a 9 de troncales por tierra** (su límite se renovó a las 7:47 del 24 de octubre).
+   - La pregunta está en `herramientas/agencia-rondas/ronda17/pregunta.txt`.
+   - Las tandas están en el §11.
+   - Guarda cada respuesta en `herramientas/fibra-agencia/gemini-troncales-6.json` hasta `-10.json`, y el texto bruto en `ronda17/gemini-lote5.txt` hasta `-lote9.txt`.
+   - Después:
+     1. Publica las respuestas en `main`.
+     2. Lanza `gh workflow run pueblos-cables.yml --ref main`.
+     3. Trae `herramientas/fuentes/pueblos-fibra.tsv` a `web-idiomas`.
+     4. Ejecuta `python3 herramientas/fibra_agencia.py` y luego `python3 herramientas/fibra_tierra.py --sin-ofds`.
+     5. Publica `fibra-tierra.json` y `fuentes/fibra-agencia.json` en las dos ramas.
+4. **Grok, tandas 8 y 9** (desde el 27 de octubre): guárdalas en `grok-troncales-12.json` y `-13.json`.
+5. **Revisión de Órbita:** quedan pendientes los ⬜ de `herramientas/agencia-rondas/qa/revision-orbita-2026-10-24.md`.
+6. **Términos nuevos:** ver §7, punto 1.
+7. **Móvil, tablet y app instalable:** siguen en prueba hasta que el dueño diga lo contrario.
+8. **Hibernación:** no pongas su ordenador en hibernación salvo que lo pida otra vez. Lo había pedido para la noche, pero al cerrar ya estaba despierto.
 
 ## 0. Antes de empezar (para el Claude que lee esto)
 
