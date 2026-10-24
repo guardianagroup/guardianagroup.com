@@ -562,3 +562,4 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
 - 13:54 · Ronda 24, ChatGPT, lotes 7–8: cables de la agencia aceptados: 379 · tramos: 1151; lugares-capas: 548 grupos.
 - 13:58 · Ronda 24, ChatGPT, lote 9: cables de la agencia aceptados: 381 · tramos: 1153; lugares-capas: 550 grupos.
 - 13:58 · Zoom hasta 5 km, antes 500 m (`orbita.js`, `ZOOM.MAX = 8000`; la barra dice «5 km»). Grandes troncales y cables de más de 100 Tbit/s en cobre apagado (`FIBRA_COL[3] = '200,136,88'`, y en `movil.js` `#C88858`). La luz de las grandes troncales y las rutas largas es más grande y está siempre. Los nombres de las bases se pueden pulsar como su marca (`EST_CAJAS`). Todo publicado.
+- 14:12 · Centros de datos en azul propio (`AZUL_CENTRO = '77,166,255'`): cuadrados, aros y aros de ciudad, y la leyenda de la ficha del botón. Se distinguen de las líneas blancas y del gris al acercar. No se usa rojo ni coral, reservados para los cortes.

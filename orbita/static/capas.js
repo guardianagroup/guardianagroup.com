@@ -19,6 +19,9 @@
   // card — gold the great trunks, lavender the long routes, sea green between cities, grey the short links. The smaller
   // classes are drawn a little stronger so their colour reads (FIBRA_ALFA multiplies their opacity, capped at 1).
   const FIBRA_COL = (window.__FIBRA_COL) || { 3: '200,136,88', 2: '196,170,245', 1: '112,222,200', 0: '176,178,190' };
+  // data centres in a colour of their own, so they stand out from the white lines and the grey land when zoomed in (owner,
+  // 24 Oct 2026, 14:04: «que se distinga más»); not red or coral, which the palette keeps for outages
+  const AZUL_CENTRO = '77,166,255';
   const FIBRA_ALFA = window.__FIBRA_ALFA || { 3: 1, 2: 1.12, 1: 1.35, 0: 1.6 };
   // 23 Oct 2026 (owner: «los cables submarinos también los vamos a clasificar por color… vamos a mantener el diseño, unos son
   // más gruesos, otros menos, pero también van a ir por colores»; «para que no haya tanto colorín, van a ser los mismos
@@ -405,13 +408,13 @@
         else { cx.moveTo(x + 2.8, y); cx.arc(x, y, 2.8, 0, 7); }
       }
       if (k === 2) { cx.strokeStyle = `rgba(${BLANCO},.85)`; cx.lineWidth = 1; cx.stroke(); }
-      else { cx.fillStyle = k === 0 ? `rgba(${BLANCO},.9)` : L ? `rgba(${BLANCO},.92)` : `rgba(${ACERO},.75)`; cx.fill(); }
+      else { cx.fillStyle = k === 0 ? `rgba(${BLANCO},.9)` : `rgba(${AZUL_CENTRO},.95)`; cx.fill(); }
       // 22 Oct 2026, 14:03 (owner): «alrededor un circulito, sutil, para que se identifique mejor» — a faint ring
       // around each data-centre square once the zoom separates them (it fades in between ×1.5 and ×3)
       if (k === 1 && anillo) {
         const ra = sd * 2.3; cx.beginPath();
         for (let i = 0; i < anillos.length; i += 2) { cx.moveTo(anillos[i] + ra, anillos[i + 1]); cx.arc(anillos[i], anillos[i + 1], ra, 0, 7); }
-        cx.strokeStyle = `rgba(${L ? BLANCO : ACERO},${(0.34 * anillo).toFixed(2)})`; cx.lineWidth = 0.9; cx.stroke();
+        cx.strokeStyle = `rgba(${AZUL_CENTRO},${(0.5 * anillo).toFixed(2)})`; cx.lineWidth = 0.9; cx.stroke();
       }
     }
   }
@@ -530,7 +533,7 @@
       const c = LUG.centros[i]; if (c.n < 5) break;
       const v = p.aVista(c.w); if (v[2] <= 0.05) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], r = radioCiudad(c.n, z), on = i === centroMarcado;
-      cx.strokeStyle = on ? `rgba(${BLANCO},.95)` : `rgba(${ACERO},${c.n >= 10 ? 0.7 : 0.45})`;
+      cx.strokeStyle = on ? `rgba(${BLANCO},.95)` : `rgba(${AZUL_CENTRO},${c.n >= 10 ? 0.75 : 0.5})`;
       cx.beginPath(); cx.arc(x, y, r, 0, 7); cx.stroke();
       // owner, 22 Oct 2026: «en el mapa no me sale la ciudad»: the city's name by its ring as the zoom grows
       // (the biggest first; closer in, every city with data centres), never one label over another
@@ -2136,7 +2139,7 @@
       const m = PT && PT.d && PT.d.medida;
       if (m) { f.cifra = num(m.datos); f.unidad = T('centros de datos'); }
       f.leyenda = [T('Puntos de red'), ''];
-      for (const q of ['datos', 'pequenos', 'intercambio', 'estaciones']) { const n = PT && PT.p ? cuentaClase('puntos', q) : 0; f.filas.push({ col: q === 'datos' ? BLANCO : ACERO, punto: true, n: T(TEXTOS_CLASES.puntos.clases[q][0]), v: n ? num(n) : '' }); }
+      for (const q of ['datos', 'pequenos', 'intercambio', 'estaciones']) { const n = PT && PT.p ? cuentaClase('puntos', q) : 0; f.filas.push({ col: q === 'datos' || q === 'pequenos' ? AZUL_CENTRO : ACERO, punto: true, n: T(TEXTOS_CLASES.puntos.clases[q][0]), v: n ? num(n) : '' }); }
       f.pie += ' · ' + T('cobertura parcial');
     } else if (k === 'sat') {
       if (S && S.N) { f.cifra = num(S.N); f.unidad = T('satélites de datos'); }
