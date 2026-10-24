@@ -1,0 +1,130 @@
+[
+  {
+    "nombre": "Troncal occidental y septentrional Colombo–Jaffna",
+    "operador": "Sri Lanka Telecom (SLT-MOBITEL)",
+    "pais": "LK",
+    "ciudades": ["Colombo", "Kurunegala", "Dambulla", "Vavuniya", "Kilinochchi", "Jaffna"],
+    "estado": "en servicio",
+    "fuente": "aproximado: SLT-MOBITEL, informes anuales y descripción de su National Backbone Network; secuencia urbana inferida por los corredores A6 y A9, no publicada como itinerario completo de un único cable."
+  },
+  {
+    "nombre": "Troncal costera meridional Colombo–Hambantota",
+    "operador": "Sri Lanka Telecom (SLT-MOBITEL)",
+    "pais": "LK",
+    "ciudades": ["Colombo", "Kalutara", "Ambalangoda", "Galle", "Matara", "Hambantota"],
+    "estado": "en servicio",
+    "fuente": "aproximado: SLT-MOBITEL, información sobre su red troncal nacional de fibra; ciudades ordenadas siguiendo el corredor costero A2. El trazado preciso entre nodos no está publicado."
+  },
+  {
+    "nombre": "Troncal Colombo–Kandy",
+    "operador": "Sri Lanka Telecom (SLT-MOBITEL)",
+    "pais": "LK",
+    "ciudades": ["Colombo", "Kegalle", "Peradeniya", "Kandy"],
+    "estado": "en servicio",
+    "fuente": "aproximado: SLT-MOBITEL, descripción de la National Backbone Network; itinerario terrestre de más de 100 km inferido por el corredor A1."
+  },
+  {
+    "nombre": "Eje troncal Damascus–Aleppo",
+    "operador": "Syrian Telecom",
+    "pais": "SY",
+    "ciudades": ["Damascus", "An Nabk", "Homs", "Hama", "Aleppo"],
+    "estado": "en servicio",
+    "fuente": "aproximado: información de Syrian Telecom y comunicaciones de SANA sobre explotación y reparación de la red interurbana de fibra; secuencia inferida por el corredor M5. No representa una certificación de disponibilidad continua de todos los tramos."
+  },
+  {
+    "nombre": "Troncal Homs–costa mediterránea",
+    "operador": "Syrian Telecom",
+    "pais": "SY",
+    "ciudades": ["Homs", "Tartus", "Baniyas", "Latakia"],
+    "estado": "en servicio",
+    "fuente": "aproximado: información de Syrian Telecom sobre la red interurbana y sus enlaces con las gobernaciones costeras; recorrido inferido por los corredores Homs–Tartus y M1. No representa una certificación de disponibilidad continua de todos los tramos."
+  },
+  {
+    "nombre": "Troncal occidental Taipei–Kaohsiung",
+    "operador": "Chunghwa Telecom",
+    "pais": "TW",
+    "ciudades": ["Taipei", "Taoyuan City", "Hsinchu", "Taichung", "Chiayi City", "Tainan", "Kaohsiung"],
+    "estado": "en servicio",
+    "fuente": "aproximado: Chunghwa Telecom, informes anuales sobre su red óptica troncal nacional; secuencia de los principales nodos del corredor occidental, con trazado intermedio inferido por los ejes ferroviarios y viarios de la costa oeste."
+  },
+  {
+    "nombre": "Troncal oriental Taipei–Kaohsiung",
+    "operador": "Chunghwa Telecom",
+    "pais": "TW",
+    "ciudades": ["Taipei", "Yilan", "Hualien City", "Taitung City", "Pingtung", "Kaohsiung"],
+    "estado": "en servicio",
+    "fuente": "aproximado: Chunghwa Telecom, información de su red óptica nacional y conectividad de la costa oriental; recorrido terrestre inferido por los corredores de las carreteras 9 y 1. No se incluyen cables submarinos de respaldo."
+  },
+  {
+    "nombre": "Troncal Dushanbe–Khujand",
+    "operador": "Tajiktelecom",
+    "pais": "TJ",
+    "ciudades": ["Dushanbe", "Varzob", "Ayni", "Istaravshan", "Khujand"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de Tajiktelecom; secuencia intermedia inferida del corredor viario M34 entre Dushanbe y Khujand. No se presenta como trazado exacto publicado del cable."
+  },
+  {
+    "nombre": "Troncal Dushanbe–Kulob",
+    "operador": "Tajiktelecom",
+    "pais": "TJ",
+    "ciudades": ["Dushanbe", "Vahdat", "Danghara", "Kulob"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red interurbana de Tajiktelecom hacia Kulob; alineamiento probable por el corredor de Vahdat y Danghara. Las ciudades intermedias representan una reconstrucción geográfica, no un itinerario del cable confirmado."
+  },
+  {
+    "nombre": "Troncal norte Bangkok–Chiang Mai",
+    "operador": "National Telecom (NT; redes heredadas de TOT y CAT)",
+    "pais": "TH",
+    "ciudades": ["Bangkok", "Phra Nakhon Si Ayutthaya", "Nakhon Sawan", "Phitsanulok", "Uttaradit", "Lampang", "Lamphun", "Chiang Mai"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de NT; recorrido interurbano inferido por los corredores de las carreteras 32, 117 y 11. Existen itinerarios redundantes y no se afirma que todos los cables sigan esta misma secuencia."
+  },
+  {
+    "nombre": "Troncal nordeste Bangkok–Nong Khai",
+    "operador": "National Telecom (NT; redes heredadas de TOT y CAT)",
+    "pais": "TH",
+    "ciudades": ["Bangkok", "Saraburi", "Nakhon Ratchasima", "Khon Kaen", "Udon Thani", "Nong Khai"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de NT; secuencia probable por las carreteras 1 y 2, que articulan el corredor de telecomunicaciones del nordeste. Se delimita aquí el tramo nacional hasta Nong Khai."
+  },
+  {
+    "nombre": "Troncal sur Bangkok–Hat Yai",
+    "operador": "National Telecom (NT; redes heredadas de TOT y CAT)",
+    "pais": "TH",
+    "ciudades": ["Bangkok", "Phetchaburi", "Hua Hin", "Prachuap Khiri Khan", "Chumphon", "Surat Thani", "Thung Song", "Hat Yai"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de NT hacia el sur de Tailandia; alineamiento inferido por los corredores de las carreteras 4 y 41. No incluye enlaces submarinos ni prolongaciones internacionales."
+  },
+  {
+    "nombre": "Troncal costera norte Dili–Baucau",
+    "operador": "Telemor (Viettel Timor-Leste)",
+    "pais": "TL",
+    "ciudades": ["Dili", "Manatuto", "Baucau"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra óptica de Telemor descrita en la información corporativa de Viettel; recorrido probable por la carretera costera A01 entre Dili y Baucau, de más de 100 km por carretera. La secuencia no procede de un plano público detallado del cable."
+  },
+  {
+    "nombre": "Troncal Istanbul–Ankara–Erzurum",
+    "operador": "Türk Telekom",
+    "pais": "TR",
+    "ciudades": ["Istanbul", "Izmit", "Adapazari", "Bolu", "Ankara", "Kirikkale", "Yozgat", "Sivas", "Erzincan", "Erzurum"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre nacional de Türk Telekom; secuencia reconstruida por los corredores O-4, D200 y D100. Es un corredor continuo de la red mallada, no la identificación de un único cable con itinerario íntegramente publicado."
+  },
+  {
+    "nombre": "Troncal terrestre Istanbul–Izmir",
+    "operador": "Türk Telekom",
+    "pais": "TR",
+    "ciudades": ["Istanbul", "Izmit", "Yalova", "Bursa", "Balikesir", "Manisa", "Izmir"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red interurbana de Türk Telekom en el oeste de Turquía; itinerario terrestre probable rodeando el golfo de Izmit y siguiendo los corredores D130, D575 y D565. Se excluyen expresamente los atajos submarinos a través del mar de Marmara."
+  },
+  {
+    "nombre": "Troncal Ankara–Adana–Gaziantep",
+    "operador": "Türk Telekom",
+    "pais": "TR",
+    "ciudades": ["Ankara", "Aksaray", "Pozanti", "Adana", "Osmaniye", "Gaziantep"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de Türk Telekom hacia el Mediterráneo y el sudeste; alineamiento probable por los corredores D750, O-21 y O-52. Las ciudades intermedias son una aproximación del corredor operativo, no un levantamiento del cable."
+  }
+]
