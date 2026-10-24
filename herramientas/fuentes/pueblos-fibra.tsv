@@ -1,4 +1,11 @@
 # GeoNames cities500, CC BY 4.0, https://www.geonames.org — los pueblos por los que pasan las troncales de la agencia: clave, país, lat, lon, población, nombre
+andorralavella	AD	42.50779	1.52109	20430	Andorra la Vella
+canillo	AD	42.5676	1.59756	3292	Canillo
+encamp	AD	42.53474	1.58014	11223	Encamp
+escaldesengordany	AD	42.50729	1.53414	15853	les Escaldes
+lamassana	AD	42.54499	1.51483	7211	la Massana
+ordino	AD	42.55623	1.53319	3066	Ordino
+santjuliadeloria	AD	42.46372	1.49129	8022	Sant Julià de Lòria
 abudhabi	AE	24.45118	54.39696	1807000	Abu Dhabi
 ajman	AE	25.40177	55.47878	490035	Ajman
 alain	AE	24.19167	55.76056	846747	Al Ain City
@@ -181,6 +188,11 @@ sydney	AU	-33.86785	151.20732	5638830	Sydney
 taree	AU	-31.91099	152.45387	16359	Taree
 wangaratta	AU	-36.35846	146.32056	29808	Wangaratta
 wodonga	AU	-36.12179	146.88809	38949	Wodonga
+noord	AW	12.56596	-70.03198	24193	Noord
+oranjestad	AW	12.52398	-70.02703	29998	Oranjestad
+paradera	AW	12.5351	-70.00688	13834	Paradera
+sannicolas	AW	12.43624	-69.90713	14175	San Nicolas
+savaneta	AW	12.45026	-69.93811	11955	Savaneta
 aghstafa	AZ	41.11889	45.45389	12200	Aghstafa
 agstafa	AZ	41.11889	45.45389	12200	Aghstafa
 agsu	AZ	40.57028	48.40087	22300	Aghsu
@@ -853,6 +865,9 @@ santamaria	CV	16.59796	-22.90509	8400	Santa Maria
 saodomingos	CV	15.02438	-23.5625	2960	São Domingos
 saofilipe	CV	14.8961	-24.49556	10097	São Filipe
 tarrafal	CV	15.27881	-23.75192	13483	Tarrafal
+soto	CW	12.27749	-69.1125	2233	Dorp Soto
+westpunt	CW	12.37047	-69.15405	783	Sabana Westpunt
+willemstad	CW	12.12246	-68.88641	125000	Willemstad
 limassol	CY	34.68406	33.03794	154000	Limassol
 nicosia	CY	35.17284	33.35397	200452	Nicosia
 paphos	CY	34.77679	32.42451	35961	Paphos
@@ -1120,6 +1135,11 @@ samtredia	GE	42.1537	42.33517	21063	Samtredia
 senaki	GE	42.27077	42.06334	14991	Senaki
 tbilisi	GE	41.69143	44.83412	1049498	Tbilisi
 zestaponi	GE	42.10752	43.03291	20183	Zestaponi
+cayenne	GF	4.9381	-52.33455	61550	Cayenne
+kourou	GF	5.16281	-52.64265	24029	Kourou
+macouria	GF	4.91216	-52.37432	8773	Macouria
+matoury	GF	4.84921	-52.32355	26350	Matoury
+remiremontjoly	GF	4.91667	-52.26667	19029	Rémire-Montjoly
 accra	GH	5.55602	-0.1969	1963264	Accra
 bawku	GH	11.05926	-0.24249	76459	Bawku
 bolgatanga	GH	10.78556	-0.85139	81958	Bolgatanga
@@ -1179,6 +1199,13 @@ nzerekore	GN	7.75624	-8.8179	226426	Nzérékoré
 pita	GN	11.05915	-12.39498	25355	Pita
 siguiri	GN	11.42282	-9.16852	148018	Siguiri
 telimele	GN	10.9	-13.03333	30311	Télimélé
+baiemahault	GP	16.26738	-61.58543	30837	Baie-Mahault
+deshaies	GP	16.30672	-61.79435	3792	Deshaies
+legosier	GP	16.20618	-61.49306	28698	Le Gosier
+lesabymes	GP	16.273	-61.50507	53514	Les Abymes
+pointeapitre	GP	16.23638	-61.53459	15181	Pointe-à-Pitre
+sainterose	GP	16.33264	-61.6969	20192	Sainte-Rose
+saintfrancois	GP	16.25236	-61.27332	12732	Saint-François
 acurenam	GQ	1.03225	10.64882	2714	Acurenam
 anisoc	GQ	1.8658	10.76892	16626	Añisoc
 anisok	GQ	1.8658	10.76892	16626	Añisoc
@@ -1230,6 +1257,7 @@ sanarate	GT	14.78828	-90.19876	15843	Sanarate
 santaana	GT	16.80582	-89.82708	9523	Santa Ana
 solola	GT	14.7707	-91.18344	45373	Sololá
 zacapa	GT	14.96867	-89.52732	60424	Zacapa
+hagatna	GU	13.47567	144.74886	1051	Hagåtña
 antula	GW	11.9	-15.58333	30778	Reino de Antula
 bafata	GW	12.16583	-14.66167	33502	Bafatá
 bambadinca	GW	12.02342	-14.86119	7620	Bambadinca
@@ -1251,6 +1279,12 @@ parika	GY	6.83712	-58.42941	4081	Parika
 rosehall	GY	6.25577	-57.35502	8000	Rose Hall
 rosignol	GY	6.27095	-57.53697	5782	Rosignol
 vreedenhoop	GY	6.8109	-58.19375	3073	Vreed-en-Hoop
+central	HK	22.28299	114.15846	11077	Central
+kowloon	HK	22.33047	114.19222	418732	Kowloon City
+shatin	HK	22.38333	114.18333	495200	Sha Tin
+tseungkwano	HK	22.32789	114.24992	412900	Tseung Kwan O
+tsuenwan	HK	22.37137	114.11329	318916	Tsuen Wan
+tuenmun	HK	22.39175	113.97157	507900	Tuen Mun
 choloma	HN	15.61444	-87.95302	139100	Choloma
 choluteca	HN	13.30569	-87.17882	75872	Ciudad Choluteca
 comayagua	HN	14.45577	-87.63968	58784	Comayagua
@@ -1685,6 +1719,11 @@ alwafrah	KW	28.63917	47.93056	10017	Al Wafrah
 fahaheel	KW	29.0825	48.13028	68290	Al Faḩāḩīl
 hawalli	KW	29.33278	48.02861	164212	Ḩawallī
 kuwaitcity	KW	29.367	47.97429	60064	Kuwait City
+boddentown	KY	19.27647	-81.2542	14845	Bodden Town
+eastend	KY	19.3	-81.11667	1846	East End
+georgetown	KY	19.2866	-81.37436	29370	George Town
+prospect	KY	19.27971	-81.33277	6912	Prospect
+westbay	KY	19.38197	-81.39281	15335	West Bay
 aktau	KZ	43.66105	51.17392	147443	Aktau
 aktobe	KZ	50.27969	57.20718	500757	Aktobe
 almaty	KZ	43.25249	76.9115	1977011	Almaty
@@ -1935,6 +1974,16 @@ sukhbaatar	MN	50.23139	106.20778	22741	Sühbaatar
 ulaanbaatar	MN	47.90771	106.88324	844818	Ulan Bator
 undurkhaan	MN	47.31944	110.65556	22741	Undurkhaan
 zuunkharaa	MN	48.63333	106.73333	0	Dzüünkharaa
+coloane	MO	22.11806	113.55194	36384	Luhuan
+cotai	MO	22.14082	113.5631	300	Cotai
+macau	MO	22.20056	113.54611	649335	Macau
+taipa	MO	22.15583	113.55694	112051	Taipa
+fortdefrance	MQ	14.60365	-61.07418	89995	Fort-de-France
+latrinite	MQ	14.73807	-60.96319	15040	La Trinité
+lelamentin	MQ	14.61341	-60.99964	40581	Le Lamentin
+lerobert	MQ	14.67751	-60.94228	23814	Le Robert
+sainteluce	MQ	14.46848	-60.92138	9196	Sainte-Luce
+schlcher	MQ	14.61774	-61.099	0	Schoelcher
 aioun	MR	16.6614	-9.6149	28174	Ayoun El Atrous
 aleg	MR	17.05314	-13.91312	19183	Aleg
 boutilimit	MR	17.54584	-14.69777	27170	Boutilimitt
@@ -2311,6 +2360,11 @@ tambobamba	PE	-13.94528	-72.17139	0	Tambobamba
 tintay	PE	-13.95964	-73.18518	740	Tintay
 trujillo	PE	-8.11599	-79.02998	1067700	Trujillo
 tumbes	PE	-3.55592	-80.44258	96946	Tumbes
+arue	PF	-17.52764	-149.53437	9458	Arue
+mahina	PF	-17.50648	-149.48899	14369	Mahina
+papeete	PF	-17.5347	-149.56843	26357	Papeete
+pirae	PF	-17.52985	-149.55119	14475	Pirae
+punaauia	PF	-17.63333	-149.6	25750	Punaauia
 goroka	PG	-6.085	145.38667	18503	Goroka
 kainantu	PG	-6.28872	145.86548	8509	Kainantu
 kundiawa	PG	-6.01972	144.96917	9383	Kundiawa
@@ -2478,6 +2532,18 @@ lusail	QA	25.4175	51.5075	198600	Lusail
 madinatashshamal	QA	26.12933	51.2009	5267	Madīnat ash Shamāl
 mesaieed	QA	24.99226	51.55067	5769	Musay‘īd
 ummsalalmuhammad	QA	25.41524	51.40647	29391	Umm Şalāl Muḩammad
+braspanon	RE	-20.99667	55.67823	13344	Bras-Panon
+lapossession	RE	-20.92909	55.3348	35245	La Possession
+leport	RE	-20.93752	55.29415	33336	Le Port
+saintandre	RE	-20.96333	55.65031	57150	Saint-André
+saintbenoit	RE	-21.03795	55.71546	37023	Saint-Benoît
+saintdenis	RE	-20.88231	55.4504	154765	Saint-Denis
+saintemarie	RE	-20.89686	55.55056	34344	Sainte-Marie
+saintesuzanne	RE	-20.90616	55.60788	24293	Sainte-Suzanne
+saintleu	RE	-21.17059	55.28824	34893	Saint-Leu
+saintlouis	RE	-21.28585	55.41124	53935	Saint-Louis
+saintpaul	RE	-21.00961	55.27134	105240	Saint-Paul
+saintpierre	RE	-21.3393	55.47811	84077	Saint-Pierre
 brasov	RO	45.64861	25.60613	253200	Braşov
 bucharest	RO	44.43225	26.10626	1877155	Bucharest
 cernavoda	RO	44.33957	28.03273	18502	Cernavodă
@@ -2624,6 +2690,10 @@ sundsvall	SE	62.39129	17.3063	57606	Sundsvall
 umea	SE	63.82842	20.25972	130224	Umeå
 uppsala	SE	59.85882	17.63889	177074	Uppsala
 varberg	SE	57.10557	12.25078	34248	Varberg
+changi	SG	1.39037	103.98674	1850	Changi Village
+jurong	SG	1.33417	103.72278	262730	Jurong Town
+queenstown	SG	1.29417	103.8025	101480	Queenstown Estate
+woodlands	SG	1.43801	103.78877	254440	Woodlands
 brezice	SI	45.90726	15.59319	6843	Brežice
 celje	SI	46.23092	15.26044	38059	Celje
 grosuplje	SI	45.95579	14.65891	7098	Grosuplje
@@ -2910,6 +2980,10 @@ tozeur	TN	33.91968	8.13352	37370	Tozeur
 tunis	TN	36.81897	10.16579	693210	Tunis
 zaghouan	TN	36.40291	10.14292	20798	Zaghouan
 zarzis	TN	33.50398	11.11215	79316	Zarzis
+fuaamotu	TO	-21.26403	-175.13902	1675	Fua'amotu
+kolovai	TO	-21.10101	-175.33766	555	Kolovai
+nukualofa	TO	-21.13683	-175.20114	22400	Nuku‘alofa
+vaini	TO	-21.19292	-175.17678	3295	Vainī
 adana	TR	36.98615	35.32531	1816750	Adana
 adapazari	TR	40.78056	30.40333	286787	Adapazarı
 aksaray	TR	38.37255	34.02537	327575	Aksaray
@@ -3111,6 +3185,10 @@ maracay	VE	10.24972	-67.59475	464700	Maracay
 puertolacruz	VE	10.21382	-64.6328	370000	Puerto La Cruz
 sanfelipe	VE	10.3401	-68.74297	206270	San Felipe
 valencia	VE	10.16153	-68.00044	1619470	Valencia
+charlotteamalie	VI	18.3419	-64.9307	20000	Charlotte Amalie
+christiansted	VI	17.74681	-64.70557	1866	Christiansted
+cruzbay	VI	18.33134	-64.79375	2743	Cruz Bay
+frederiksted	VI	17.71233	-64.88179	528	Frederiksted
 bacgiang	VN	21.27307	106.1946	450000	Bắc Giang
 baclieu	VN	9.29414	105.72776	156110	Bạc Liêu
 bacninh	VN	21.18608	106.07631	287658	Bắc Ninh
@@ -3154,6 +3232,9 @@ tuyhoa	VN	13.09546	109.32094	155921	Tuy Hòa
 vinh	VN	18.67337	105.69232	790000	Vinh
 vinhlong	VN	10.25369	105.9722	137870	Vĩnh Long
 portvila	VU	-17.73648	168.31366	35901	Port-Vila
+apia	WS	-13.83333	-171.76666	40407	Apia
+lufilufi	WS	-13.87449	-171.59857	1074	Lufilufi
+mulifanua	WS	-13.83183	-172.03602	4508	Mulifanua
 decan	XK	42.54018	20.28793	50500	Deçan
 drenas	XK	42.62833	20.89389	58579	Glogovac
 ferizaj	XK	42.37056	21.15528	59504	Ferizaj
@@ -3206,6 +3287,11 @@ tarim	YE	16.05694	48.99889	0	Tarim
 yarim	YE	14.29804	44.37795	33050	Yarīm
 zabid	YE	14.1951	43.31518	52590	Zabīd
 zinjibar	YE	13.12871	45.38073	19879	Zinjibār
+bandrele	YT	-12.91276	45.19256	6350	Bandrele
+dzaoudzi	YT	-12.78339	45.25693	15339	Dzaoudzi
+koungou	YT	-12.73361	45.20417	18118	Koungou
+longoni	YT	-12.73426	45.16298	3983	Longoni
+mamoudzou	YT	-12.78234	45.22878	54831	Mamoudzou
 beaufortwest	ZA	-32.35671	22.58295	44737	Beaufort West
 belabela	ZA	-24.88333	28.28333	90210	Bela Bela
 bloemfontein	ZA	-29.12107	26.214	556637	Bloemfontein
