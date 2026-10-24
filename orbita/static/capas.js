@@ -14,6 +14,13 @@
   // are drawn in a light blue of the same family, with a soft blue halo, never white; and what the pointer touches
   // lights up in its own colour (brighter and wider), never white either («se resalta en blanco: eso no puede ser»)
   const CLARO = '206,226,243';
+  // 23 Oct 2026 (owner, 18:47: «cables submarinos y fibra por tierra se ven del mismo color, que haya un orden»; 19:16:
+  // «los submarinos los dejamos igual, pero los de tierra los vamos a segmentar por colores»; chose B, one colour per
+  // type, over a copper family): the sea stays steel; each land-fibre class has its own colour, shown as a legend in its
+  // card — gold the great trunks, lavender the long routes, sea green between cities, grey the short links. The smaller
+  // classes are drawn a little stronger so their colour reads (FIBRA_ALFA multiplies their opacity, capped at 1).
+  const FIBRA_COL = (window.__FIBRA_COL) || { 3: '236,188,108', 2: '196,170,245', 1: '112,222,200', 0: '176,178,190' };
+  const FIBRA_ALFA = window.__FIBRA_ALFA || { 3: 1, 2: 1.12, 1: 1.35, 0: 1.6 };
   // Owner, 22 Oct 2026: «cuando la persona abra Órbita, que no salgan los satélites de golpe, se ve demasiado ruido:
   // que abra solo con los cables submarinos, y luego la persona va abriendo y cerrando». So every opening starts with
   // the submarine cables alone; only the view and the orbit filter are remembered between visits.
@@ -338,8 +345,8 @@
     const kq = Math.min(1, Math.max(0, (z - 1.4) / 2.6)), base = Math.min(1.8, 0.9 + 0.2 * (z - 1));
     for (const obra of [false, true]) for (const nivel of [0, 1, 2, 3]) {
       const fn = fundidoNivel(nivel, z); if (fn <= 0) continue;
-      const alfa = (obra ? 0.5 : nivel === 3 ? 0.85 + 0.12 * kq : nivel === 2 ? 0.74 + 0.12 * kq : nivel === 1 ? 0.66 : 0.48) * fz * fn;
-      cx.strokeStyle = nivel >= 2 && !obra ? `rgba(${ACERO},${(alfa * (nivel === 3 ? 1 : 0.9)).toFixed(2)})` : `rgba(${ACERO},${alfa.toFixed(2)})`;
+      const alfa = Math.min(1, (obra ? 0.5 : nivel === 3 ? 0.85 + 0.12 * kq : nivel === 2 ? 0.74 + 0.12 * kq : nivel === 1 ? 0.66 : 0.48) * (FIBRA_ALFA[nivel] || 1)) * fz * fn;
+      cx.strokeStyle = `rgba(${FIBRA_COL[nivel]},${alfa.toFixed(2)})`;
       if (nivel === 3 && !obra) { const g = cx.globalCompositeOperation; cx.globalCompositeOperation = 'source-over'; cx.lineWidth = base + 0.9 + 0.5 * kq; cx.setLineDash([]); cx.beginPath(); const F0 = CAMPO || campo(p, G); for (const l of lineas) { if (l.x.obra || l.nivel !== 3) continue; if (!F0.todo) { capsDe(l); if (!veCap(F0, l.cap)) continue; } trazoW(cx, p, G, l.w, 0, l.w.length - 1); } cx.stroke(); cx.globalCompositeOperation = g; continue; }
       cx.lineWidth = nivel === 3 ? base + 0.9 + 0.5 * kq : nivel === 2 ? base + 0.35 + 0.3 * kq : nivel === 1 ? base : Math.max(0.7, base - 0.25);
       cx.setLineDash(obra ? [3, 3] : []);
@@ -353,9 +360,9 @@
       cx.stroke();
     }
     cx.setLineDash([]);
-    if (z >= 4) { pintaExtremos(cx, p, G, lineas, z, ACERO); cx.globalCompositeOperation = 'lighter'; }
+    if (z >= 4) { pintaExtremos(cx, p, G, lineas, z, FIBRA_COL[3]); cx.globalCompositeOperation = 'lighter'; }
     if (fibraMarcada >= 0) {
-      const l = FT.lineas[fibraMarcada]; resalta(cx, p, G, [l], l.nivel >= 2 ? CLARO : ACERO);
+      const l = FT.lineas[fibraMarcada]; resalta(cx, p, G, [l], FIBRA_COL[l.nivel] || ACERO); // lit in its own colour, as every line under the pointer
     }
   }
   let fibraMarcada = -1;
@@ -1725,6 +1732,8 @@
         const bt = document.createElement('button'); bt.type = 'button'; bt.dataset.clase = c; bt.setAttribute('aria-pressed', String(!!CLASES[k][c]));
         bt.innerHTML = '<i aria-hidden="true"></i><span class="n"></span><span class="d"></span>';
         bt.querySelector('.n').append(T(n), ' ', Object.assign(document.createElement('b'), {})); bt.querySelector('.d').textContent = T(d); bt.title = T(d); // 22 Oct 2026, 22:09 (owner): the card lists classes only; the explanation shows under the pointer
+        // 23 Oct 2026 (owner: «los de tierra los vamos a segmentar por colores»): each land-fibre class shows its colour, as in a map legend
+        if (k === 'fibra') { const m = document.createElement('s'); m.className = 'muestra'; m.setAttribute('aria-hidden', 'true'); m.style.setProperty('--c', FIBRA_COL[{ principal: 3, largo: 2, nacional: 1, regional: 0 }[c]]); bt.querySelector('.n').prepend(m); }
         bt.addEventListener('click', () => {
           CLASES[k][c] = !CLASES[k][c];
           if (k === 'sub' && capas.sub) capas.sub.visK = null;

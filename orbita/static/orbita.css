@@ -392,6 +392,9 @@ body.listo:not(.dentro) header:hover, body.listo:not(.dentro) header:focus-withi
 .sat-vista .orb button:hover { background: rgba(156,195,228,.08); }
 .sat-vista .orb button[aria-pressed="true"] i { background: #9CC3E4; border-color: #9CC3E4; box-shadow: 0 0 8px rgba(156,195,228,.8); }
 .sat-vista .orb button[aria-pressed="false"] .n { color: var(--muted); }
+/* the colour of each land-fibre class, as in a map legend (23 Oct 2026) */
+.sat-vista .orb button .n .muestra { display: inline-block; width: 18px; height: 3px; margin-inline-end: 9px; border-radius: 2px; vertical-align: 3px; background: rgb(var(--c)); box-shadow: 0 0 6px rgba(var(--c), .55); text-decoration: none; transition: opacity .2s; }
+.sat-vista .orb button[aria-pressed="false"] .n .muestra { opacity: .3; box-shadow: none; }
 .sat-vista .seg { display: flex; gap: 2px; padding: 3px; border-radius: 999px; border: 1px solid var(--line); }
 .sat-vista .seg button { all: unset; cursor: pointer; flex: 1; text-align: center; padding: 6px 10px; border-radius: 999px; font: 500 11px/1 var(--texto); color: var(--muted); white-space: nowrap; transition: color .2s, background .2s; }
 .sat-vista .seg button:hover:not(:disabled) { color: var(--fg); }
