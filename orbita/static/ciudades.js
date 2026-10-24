@@ -68,6 +68,7 @@
     const cx = p.ctx, lang = idioma(), max = movil() ? 25 : 60, SEP = 8, MARGEN = 6;
     const ocupadas = [];
     // the country names already drawn keep their place (capas.js shares their boxes)
+    const llegadas = window.OrbitaCapas && window.OrbitaCapas.nombresLlegadas;
     const paises = window.OrbitaCapas && window.OrbitaCapas.cajasPaises; if (paises) for (const b of paises) ocupadas.push([b[0], b[1], b[0] + b[2], b[1] + b[3]]);
     const choca = (b) => ocupadas.some((o) => b[0] < o[2] + SEP && b[2] > o[0] - SEP && b[1] < o[3] + SEP && b[3] > o[1] - SEP);
     cx.save(); cx.globalCompositeOperation = 'source-over'; cx.textBaseline = 'middle'; cx.lineJoin = 'round';
@@ -82,6 +83,8 @@
       const alfa = Math.min(1, (c.u * 1.15 - ancho) / (c.u * 0.15)) * Math.min(1, (v[2] - 0.08) / 0.12);
       if (alfa <= 0.02) continue;
       const nombre = c.n[lang] || c.n.local; if (!nombre) continue;
+      // a town already named as a cable landing (capas.js) is not named twice
+      if (llegadas && llegadas.some((q) => Math.abs(q[0] - x) < 160 && Math.abs(q[1] - y) < 90 && (q[2] === nombre || q[2] === c.n.local))) continue;
       cx.font = (c.cap ? '600 ' : '500 ') + '12px ' + letra();
       // the name to the right of its dot; to the left when it would be cut by the edge of the screen
       const w = cx.measureText(nombre).width, izq = x + 7 + w > G.W - MARGEN, lx = izq ? x - 7 - w : x + 7;

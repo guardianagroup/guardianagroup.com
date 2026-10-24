@@ -457,6 +457,47 @@
     }
     cx.globalCompositeOperation = 'lighter';
   }
+  // The name of the town where each cable reaches land (owner, 23 Oct 2026, 23:39: «todo cable que… empiece o termine en
+  // un pueblo, tiene que aparecer el nombre… el resto no hace falta, porque si no el mapa se llenaría de pueblos»). Only
+  // the landings, never other towns; they come in as the planet comes closer (from about a region on screen), the
+  // landings with more cables first, never on top of each other nor of a country's name, and the cities of ciudades.js
+  // give way to them (their boxes and names are shared through OrbitaCapas).
+  let LLEG_CAJAS = [], LLEG_NOMBRES = [];
+  const conHalo = (cx, txt, x, y, al) => { cx.lineWidth = 3.2; cx.strokeStyle = `rgba(6,8,12,${(0.85 * al).toFixed(2)})`; cx.strokeText(txt, x, y); cx.fillStyle = `rgba(${BLANCO},${(0.94 * al).toFixed(2)})`; cx.fillText(txt, x, y); };
+  function pintaNombresLlegadas(cx, p, G) {
+    LLEG_CAJAS = []; LLEG_NOMBRES = [];
+    if (!LUG || !LUG.llegadas || soloTu) return;
+    const B = document.body.classList; if (B.contains('dentro') || B.contains('viaje') || B.contains('en-espejo')) return;
+    const ancho = G.W / G.R * 6371; // km of the Earth across the screen
+    const DESDE = 4200, LLENO = 3400; // they start at about a large region on screen and are fully lit a little closer
+    if (ancho >= DESDE && llegadaMarcada < 0) return;
+    if (!LUG.ordenLl) LUG.ordenLl = LUG.llegadas.map((_, i) => i).sort((a, b) => (LUG.llegadas[b].seg || []).length - (LUG.llegadas[a].seg || []).length);
+    const al0 = Math.max(0, Math.min(1, (DESDE - ancho) / (DESDE - LLENO)));
+    const max = G.W <= 760 ? 22 : 56, SEP = 6, M = 6;
+    const ocupadas = PAIS_CAJAS.map((b) => [b[0], b[1], b[0] + b[2], b[1] + b[3]]);
+    const choca = (b) => ocupadas.some((o) => b[0] < o[2] + SEP && b[2] > o[0] - SEP && b[1] < o[3] + SEP && b[3] > o[1] - SEP);
+    cx.save(); cx.globalCompositeOperation = 'source-over'; cx.textBaseline = 'middle'; cx.lineJoin = 'round';
+    cx.font = '500 11px "Hanken Grotesk", system-ui, sans-serif';
+    let puestas = 0;
+    const pon = (i, forzada) => {
+      const ll = LUG.llegadas[i]; if (!ll || !ll.ciudad) return;
+      if (!forzada && !veLlegada(ll)) return;
+      const v = p.aVista(ll.w); if (v[2] <= 0.08) return;
+      const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
+      if (x < M || y < M || x > G.W - M || y > G.H - M) return;
+      const txt = ll.ciudad, w = cx.measureText(txt).width;
+      const izq = x + 8 + w > G.W - M, lx = izq ? x - 8 - w : x + 8;
+      const caja = izq ? [lx - 2, y - 8, x - 3, y + 8] : [x + 3, y - 8, lx + w + 2, y + 8];
+      if (!forzada && choca(caja)) return;
+      ocupadas.push(caja); LLEG_CAJAS.push([caja[0], caja[1], caja[2] - caja[0], caja[3] - caja[1]]); LLEG_NOMBRES.push([x, y, txt]);
+      const al = forzada ? 1 : al0 * Math.min(1, (v[2] - 0.08) / 0.12);
+      if (al > 0.02) conHalo(cx, txt, lx, y, al);
+      puestas++;
+    };
+    if (llegadaMarcada >= 0) pon(llegadaMarcada, true); // the one under the pointer always says its name
+    if (ancho < DESDE) for (const i of LUG.ordenLl) { if (puestas >= max) break; if (i !== llegadaMarcada) pon(i, false); }
+    cx.restore();
+  }
   // Cities with several data centres: a fine ring that grows with the count, and the number beside the big ones
   // when the planet is close enough to read it.
   const radioCiudad = (n, z) => (2.5 + 1.25 * Math.sqrt(n)) * Math.min(1.5, Math.max(1, z * 0.75));
@@ -818,6 +859,7 @@
       if (previstoMarcado >= 0 && PREV && PREV[previstoMarcado]) { const q = PREV[previstoMarcado]; cx.save(); cx.setLineDash([3, 5]); resalta(cx, p, G, [q], SUB_COL[q.clase || (q.clase = clasePrev(q.c))]); cx.restore(); } // the planned cable under the pointer lights up like the real ones (owner, 22 Oct 2026, 17:57)
       if (llegadaMarcada >= 0 && LUG && LUG.llegadas) for (const j of LUG.llegadas[llegadaMarcada].seg) { const l = capas.sub.lineas[j]; if (l) resalta(cx, p, G, [l], colorSub(j)); }
       pintaLlegadas(cx, p, G);
+      pintaNombresLlegadas(cx, p, G);
       { const ze = G.R / (G.R0 || G.R); if (ze >= 4) { pintaExtremos(cx, p, G, capas.sub.lineas, ze, BLANCO); if (PREV && PREV.length) pintaExtremos(cx, p, G, PREV, ze, BLANCO); } }
     }
     if (estado.sat && S && S.N) pintaSat(cx, p, G, t);
@@ -2149,7 +2191,7 @@
   }
   let soloTu = false, soloTuPinta = null;
   function ponSoloTu(on, dibuja) { soloTu = !!on; soloTuPinta = on ? dibuja || null : null; document.body.classList.toggle('solo-tu', soloTu); if (soloTu) { cierraLista(); muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; } pintaNota(); pintaVista(); }
-  window.OrbitaCapas = { pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get cajasPaises() { return PAIS_CAJAS; }, /* the country names' boxes, so the cities (ciudades.js) never land on them */ get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; },
+  window.OrbitaCapas = { pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get cajasPaises() { return LLEG_CAJAS.length ? PAIS_CAJAS.concat(LLEG_CAJAS) : PAIS_CAJAS; }, /* and the names of the towns where cables land */ get nombresLlegadas() { return LLEG_NOMBRES; }, /* the country names' boxes, so the cities (ciudades.js) never land on them */ get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; },
     // the map's network as lines of unit vectors, for the routes that travel along it (red.js)
     get red() { return { sub: capas.sub && capas.sub.lineas, tierra: capas.tierra && capas.tierra.lineas, fibra: FT && FT.lineas }; },
     // the submarine pieces joined at load time and the ends left fading out into the sea (uneCables), for the automated checks

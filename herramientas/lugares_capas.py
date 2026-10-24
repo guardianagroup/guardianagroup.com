@@ -35,6 +35,7 @@ def lee_ciudades():
             if not l.strip() or l.startswith('#'):
                 continue
             n, cc, adm, la, lo = l.rstrip('\n').split('\t')
+            n = re.sub(r'^(.*\D)\s+\d{1,2}$', r'\1', n)  # «Marseille 02» (a district) is Marseille (23 Oct 2026)
             out.append((n, cc, float(la), float(lo)))
     return out
 
