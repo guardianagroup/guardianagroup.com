@@ -1,0 +1,142 @@
+/* GUARDIANA · Órbita en el móvil, «M1 · Planeta protagonista» (23 Oct 2026; the owner chose M1 and T1 at 21:12).
+   The owner: «la web del móvil tiene que ser distinta, súper fácil… para que el cliente note facilidad de uso». Agency
+   round 14 (ChatGPT M2, Grok M1, Gemini M1.2–M5.1; the same layout under three names): on top only GUARDIANA, «Capas» and
+   «···»; the planet big in the middle; one big «Ver mi conexión»; Radiografías · ZERO · Comunicaciones in a bar at the
+   bottom, as in an app; layers and everything else in sheets that rise from the bottom; no question on arrival.
+   T1 for tablets (touch screens up to 1400 px): the same pieces, bigger; in landscape the planet takes the left and a
+   panel on the right holds the layers and the card, so the planet is never covered. Computers are untouched. */
+/* what M1 adds stays hidden wherever its layout does not apply (a computer's window that grows wide, for instance) */
+.m2-arriba, .m2-velo, .m2-hoja, .m2-ico, .m2-tag, .m2-pista { display: none; }
+@media (max-width: 760px), (max-width: 1400px) and (pointer: coarse) {
+  /* ---- top: the wordmark, «Capas» and «···»; the rest of the header goes into the sheets ---- */
+  body.m2 header .marca small, body.m2 #conocer, body.m2 #capas, body.m2 header .derecha, body.m2 #estado,
+  body.m2 .capa-vista, body.m2 #sat-vista, body.m2 #sat-fase, body.m2 #directo, body.m2 #dato, body.m2 #altura,
+  body.m2 .zoom > :not(.base), body.m2 .frase, body.m2 .empezar { display: none !important; }
+  body.m2 header { padding-top: calc(10px + env(safe-area-inset-top, 0px)) !important; min-height: 0 !important; }
+  body.m2 header > * { opacity: 1 !important; }
+  body.m2 .zoom { right: calc(14px + env(safe-area-inset-right, 0px)) !important; top: calc(68px + env(safe-area-inset-top, 0px)) !important; bottom: auto !important; display: flex !important; background: none !important; border: 0 !important; }
+  body.m2 .zoom .base:not([hidden]) { display: inline-flex !important; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #1E2631; background: rgba(10,14,20,.78); }
+  .m2-arriba { display: none; }
+  body.m2 .m2-arriba { position: fixed; z-index: 70; top: calc(8px + env(safe-area-inset-top, 0px)); right: calc(12px + env(safe-area-inset-right, 0px)); display: flex; gap: 8px; }
+  body.m2 .m2-arriba button { all: unset; box-sizing: border-box; height: 44px; min-width: 44px; padding: 0 15px; border-radius: 999px; border: 1px solid #1E2631; background: rgba(10,14,20,.78); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: #E8ECF1; font: 500 15px/1 var(--texto); display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
+  body.m2 .m2-arriba button.mas { width: 44px; padding: 0; }
+  body.m2 .m2-arriba button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  body.m2 .m2-arriba button .n { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: #9CC3E4; color: #06080C; font: 600 11px/18px var(--texto); text-align: center; box-sizing: border-box; }
+  body.m2 .m2-arriba button .n:empty { display: none; }
+
+  /* ---- «Ver mi conexión»: the one big button, above the bar, where the thumb is ---- */
+  body.m2 #conexion-btn { position: fixed !important; z-index: 65; left: calc(16px + env(safe-area-inset-left, 0px)) !important; right: calc(16px + env(safe-area-inset-right, 0px)) !important; justify-content: center !important; top: auto !important; bottom: calc(86px + env(safe-area-inset-bottom, 0px)) !important; height: 52px !important; padding: 0 20px 0 18px !important; margin: 0 !important; border-radius: 999px !important; border: 0 !important; background: #9CC3E4 !important; color: #06080C !important; font: 600 16px/1 var(--texto) !important; letter-spacing: 0 !important; gap: 10px !important; box-shadow: 0 12px 32px rgba(0,0,0,.5) !important; display: inline-flex !important; align-items: center; }
+  body.m2 #conexion-btn { box-sizing: border-box !important; }
+  body.m2 #conexion-btn svg { width: 18px; height: 18px; }
+  body.m2 #conexion-btn[aria-pressed="true"] { background: #C9DFF2 !important; }
+
+  /* ---- the three doors: a bar at the bottom, as in an app ---- */
+  body.m2 #puertas { position: fixed !important; inset: auto 0 0 0 !important; width: auto !important; height: calc(70px + env(safe-area-inset-bottom, 0px)) !important; padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px) !important; box-sizing: border-box; display: flex !important; flex-direction: row !important; gap: 0 !important; background: rgba(8,11,16,.94); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-top: 1px solid #1E2631; pointer-events: auto !important; opacity: 1 !important; z-index: 60; }
+  body.m2 #puertas::before { display: none !important; }
+  body.m2 #puertas .puerta { position: static !important; flex: 1 1 0; display: flex !important; order: 0 !important; width: auto !important; height: auto !important; }
+  body.m2 #puertas .puerta.aparte { display: none !important; }
+  body.m2 #puertas .puerta button { all: unset; box-sizing: border-box; width: 100%; height: 100%; display: flex !important; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; padding: 6px 4px !important; }
+  body.m2 #puertas .puerta .p { display: none !important; }
+  body.m2 #puertas .puerta .et { position: static !important; transform: none !important; text-align: center !important; font: 500 13px/1.1 var(--texto) !important; color: #C9D2DC !important; }
+  body.m2 #puertas .puerta .et small { display: none !important; }
+  body.m2 #puertas .puerta .m2-ico { color: #9CC3E4; display: block; }
+  body.m2 #puertas .puerta .m2-tag { display: block; font: 500 9.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #7C8794; }
+  body.m2 #puertas .puerta.on .et, body.m2 #puertas .puerta button:active .et { color: #FFFFFF !important; }
+  .m2-ico, .m2-tag { display: none; }
+  /* while a door is open, the bar steps back (the section has its own way back) */
+  body.m2.dentro #puertas, body.m2.dentro #conexion-btn, body.m2.dentro .m2-arriba { opacity: 0 !important; pointer-events: none !important; }
+  body.m2.viaje #puertas, body.m2.viaje #conexion-btn, body.m2.viaje .m2-arriba,
+  body.m2.en-espejo #puertas, body.m2.en-espejo #conexion-btn, body.m2.en-espejo .m2-arriba,
+  body.m2.con-conexion #conexion-btn, body.m2.con-ficha #conexion-btn, body.m2.m2-hoja-abierta #conexion-btn { opacity: 0 !important; pointer-events: none !important; }
+
+  /* ---- the sheets: Capas and «···» ---- */
+  .m2-velo, .m2-hoja { display: none; }
+  body.m2 .m2-velo { display: block; position: fixed; inset: 0; z-index: 88; background: rgba(4,6,9,.5); opacity: 0; pointer-events: none; transition: opacity .25s; }
+  body.m2 .m2-velo.on { opacity: 1; pointer-events: auto; }
+  body.m2 .m2-hoja { display: flex; flex-direction: column; position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; max-height: 84vh; box-sizing: border-box; padding: 8px max(18px, env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) max(18px, env(safe-area-inset-left, 0px)); border-radius: 22px 22px 0 0; border-top: 1px solid #2A3442; background: #0B0F15; box-shadow: 0 -24px 60px rgba(0,0,0,.6); color: #E8ECF1; font-family: var(--texto); transform: translateY(105%); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+  body.m2 .m2-hoja.on { transform: none; }
+  body.m2 .m2-hoja.arrastra { transition: none; }
+  body.m2 .m2-hoja .asa { flex: none; width: 100%; height: 26px; display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; }
+  body.m2 .m2-hoja .asa::before { content: ""; width: 40px; height: 5px; border-radius: 3px; background: #3A4656; }
+  body.m2 .m2-hoja h2 { margin: 0 0 6px; font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #8A95A2; }
+  body.m2 .m2-hoja .cuerpo { overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+  body.m2 .m2-fila { all: unset; box-sizing: border-box; width: 100%; display: flex; align-items: center; gap: 14px; min-height: 58px; padding: 6px 0; border-bottom: 1px solid #161C25; font-size: 17px; line-height: 1.25; color: #E8ECF1; cursor: pointer; text-decoration: none; }
+  body.m2 .m2-fila:last-child { border-bottom: 0; }
+  body.m2 .m2-fila .t { flex: 1; min-width: 0; }
+  body.m2 .m2-fila .t small { display: block; margin-top: 3px; font-size: 13.5px; color: #8A95A2; }
+  body.m2 .m2-fila .v { font-size: 15px; color: #8A95A2; text-align: end; }
+  body.m2 .m2-fila .fl { color: #5B6672; font-size: 20px; line-height: 1; }
+  body.m2 .m2-fila .ley { flex: none; width: 22px; height: 4px; border-radius: 2px; }
+  body.m2 .m2-fila .pto { flex: none; width: 10px; height: 10px; margin: 0 6px; border-radius: 50%; }
+  body.m2 .m2-fila:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 10px; }
+  body.m2 .m2-sw { flex: none; position: relative; width: 50px; height: 30px; border-radius: 999px; background: #2A3442; transition: background .2s; }
+  body.m2 .m2-sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #C9D2DC; transition: left .2s, background .2s; }
+  body.m2 [aria-pressed="true"] > .m2-sw, body.m2 [aria-checked="true"] > .m2-sw { background: #9CC3E4; }
+  body.m2 [aria-pressed="true"] > .m2-sw::after, body.m2 [aria-checked="true"] > .m2-sw::after { left: 23px; background: #06080C; }
+  body.m2 .m2-afinar { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 2px; font-size: 15px; color: #9CC3E4; cursor: pointer; }
+  body.m2 .m2-afinar[aria-expanded="true"] .fl { transform: rotate(90deg); }
+  body.m2 .m2-afinar .fl { transition: transform .2s; }
+  body.m2 .m2-clases { padding: 2px 0 10px 36px; }
+  body.m2 .m2-clases[hidden] { display: none; }
+  body.m2 .m2-clases .m2-fila { min-height: 48px; font-size: 15.5px; border-bottom-color: #121820; }
+  body.m2 .m2-clases .m2-fila b { font: 400 12px/1 var(--mono); color: #7C8794; margin-inline-start: 6px; }
+  body.m2 .m2-seg { display: flex; gap: 4px; margin: 8px 0 4px; padding: 4px; border-radius: 999px; border: 1px solid #1E2631; }
+  body.m2 .m2-seg button { all: unset; flex: 1; text-align: center; min-height: 40px; line-height: 40px; border-radius: 999px; font-size: 14px; color: #8A95A2; cursor: pointer; }
+  body.m2 .m2-seg button[aria-checked="true"] { color: #E8ECF1; background: rgba(156,195,228,.16); }
+  body.m2 .m2-idiomas { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 0 12px; }
+  body.m2 .m2-idiomas[hidden] { display: none; }
+  body.m2 .m2-idiomas button { all: unset; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #2A3442; font-size: 15px; color: #C9D2DC; cursor: pointer; display: inline-flex; align-items: center; }
+  body.m2 .m2-idiomas button[aria-pressed="true"] { border-color: #9CC3E4; color: #06080C; background: #9CC3E4; }
+  body.m2 .m2-pie { display: flex; flex-wrap: wrap; gap: 4px 18px; padding: 14px 0 2px; font-size: 14.5px; }
+  body.m2 .m2-pie a { color: #8A95A2; text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+
+  /* ---- the card of a cable, a station or a satellite: small first, bigger with a swipe up, closed with a swipe down ---- */
+  body.m2 .ficha-panel { height: auto !important; max-height: 42vh; padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important; transition: max-height .28s cubic-bezier(.2,.8,.2,1), transform .28s; z-index: 80; }
+  body.m2 .ficha-panel.alta { max-height: 86vh; }
+  body.m2 .ficha-panel .asa { width: 100% !important; height: 26px !important; margin: 0 0 2px !important; background: none !important; display: flex !important; align-items: center; justify-content: center; touch-action: none; }
+  body.m2 .ficha-panel .asa::before { content: ""; width: 40px; height: 5px; border-radius: 3px; background: #3A4656; }
+  body.m2 .ficha-panel .tit { font: 400 26px/1.1 var(--display) !important; }
+  body.m2 .ficha-panel .botones button { width: 44px !important; height: 44px !important; }
+  body.m2.con-ficha #puertas { opacity: 0 !important; pointer-events: none !important; }
+
+  /* ---- the planet's own hint, once, instead of the location question ---- */
+  body.m2 .m2-pista { display: block; position: fixed; z-index: 64; left: 50%; top: calc(66px + env(safe-area-inset-top, 0px)); transform: translateX(-50%); max-width: calc(100vw - 32px); box-sizing: border-box; padding: 10px 14px; border-radius: 12px; border: 1px solid #2A3442; background: rgba(16,22,30,.92); color: #C9D2DC; font: 400 14px/1.35 var(--texto); text-align: center; pointer-events: none; opacity: 0; transition: opacity .5s; }
+  body.m2 .m2-pista.on { opacity: 1; }
+}
+/* ---------- T1 · tablets ---------- */
+.t1-panel { display: none; }
+@media (min-width: 761px) and (max-width: 1400px) and (pointer: coarse) {
+  body.m2 .m2-arriba { top: calc(14px + env(safe-area-inset-top, 0px)); right: calc(20px + env(safe-area-inset-right, 0px)); }
+  body.m2 .m2-hoja { left: 0; right: 0; margin-inline: auto; width: min(560px, calc(100vw - 32px)); }
+  body.m2 #puertas .puerta .et { font-size: 15px !important; }
+  body.m2 .m2-pista { top: calc(72px + env(safe-area-inset-top, 0px)); }
+}
+@media (min-width: 761px) and (max-width: 1400px) and (pointer: coarse) and (orientation: portrait) {
+  /* the planet big; at the bottom «Mi conexión» and the three doors in one bar */
+  body.m2 #puertas { height: calc(84px + env(safe-area-inset-bottom, 0px)) !important; padding-left: calc(260px + env(safe-area-inset-left, 0px)) !important; }
+  body.m2 #conexion-btn { left: calc(24px + env(safe-area-inset-left, 0px)) !important; right: auto !important; width: 220px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important; z-index: 66; box-shadow: none !important; }
+}
+@media (min-width: 761px) and (max-width: 1400px) and (pointer: coarse) and (orientation: landscape) {
+  /* the planet on the left; on the right a panel with the layers and, below them, the card */
+  body.m2 .m2-arriba { right: calc(356px + env(safe-area-inset-right, 0px)); }
+  body.m2 .m2-arriba .capas { display: none; }
+  body.m2 .t1-panel { display: flex; flex-direction: column; position: fixed; z-index: 62; top: calc(14px + env(safe-area-inset-top, 0px)); right: calc(16px + env(safe-area-inset-right, 0px)); width: 320px; max-height: calc(50vh - 20px); box-sizing: border-box; padding: 14px 16px 6px; border-radius: 18px; border: 1px solid #1E2631; background: rgba(9,12,17,.92); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); color: #E8ECF1; font-family: var(--texto); }
+  body.m2 .t1-panel h2 { margin: 0 0 4px; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #8A95A2; }
+  body.m2 .t1-panel .cuerpo { overflow-y: auto; overscroll-behavior: contain; }
+  body.m2 .t1-panel .m2-fila { min-height: 52px; font-size: 16px; }
+  body.m2 .t1-panel .m2-fila .t small { font-size: 12.5px; }
+  body.m2.viaje .t1-panel, body.m2.en-espejo .t1-panel, body.m2.dentro .t1-panel { opacity: 0; pointer-events: none; }
+  body.m2 #puertas { inset: auto auto calc(20px + env(safe-area-inset-bottom, 0px)) calc(256px + env(safe-area-inset-left, 0px)) !important; width: auto !important; height: 52px !important; padding: 0 !important; gap: 10px !important; background: none !important; border: 0 !important; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  body.m2 #puertas .puerta { flex: none; }
+  body.m2 #puertas .puerta button { flex-direction: row; gap: 8px; height: 52px; padding: 0 18px !important; border-radius: 999px; border: 1px solid #2A3442; background: rgba(10,14,20,.86); }
+  body.m2 #puertas .puerta .m2-ico { width: 18px; height: 18px; }
+  body.m2 #puertas .puerta .m2-tag { display: none; }
+  body.m2.con-ficha #puertas { opacity: 1 !important; pointer-events: auto !important; }
+  body.m2 #conexion-btn { left: calc(24px + env(safe-area-inset-left, 0px)) !important; right: auto !important; width: 220px; bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important; }
+  body.m2.con-ficha #conexion-btn { opacity: 1 !important; pointer-events: auto !important; }
+  body.m2 .ficha-panel { left: auto !important; right: calc(16px + env(safe-area-inset-right, 0px)) !important; top: auto !important; bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important; width: 320px !important; max-height: calc(50vh - 22px) !important; border-radius: 18px !important; }
+  body.m2 .ficha-panel.alta { max-height: calc(100vh - 32px) !important; z-index: 85; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  body.m2 .m2-hoja, body.m2 .m2-velo, body.m2 .ficha-panel { transition: none !important; }
+}

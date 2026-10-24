@@ -385,7 +385,7 @@
   function altoHoja() {
     if (!panel) return;
     if (innerWidth > 760) { panel.style.removeProperty('max-height'); return; }
-    const d = document.querySelector('header .derecha'), b = d ? d.getBoundingClientRect().bottom : 0;
+    const d = document.body.classList.contains('m2') ? document.querySelector('.m2-arriba') : document.querySelector('header .derecha'), b = d ? d.getBoundingClientRect().bottom : 0; // M1 phone: below «Capas» and «···»
     panel.style.maxHeight = Math.max(260, Math.round(innerHeight - b - 12)) + 'px';
   }
   function abre(si, porHistoria) {
