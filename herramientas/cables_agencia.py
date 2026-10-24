@@ -328,9 +328,13 @@ def main():
                 la, lo = num(L.get('lat')), num(L.get('lon'))
                 if la is None or lo is None or not L.get('pais'): continue
                 cc = L['pais'].upper()
-                for g in grupos:
-                    if g['cc'] == cc and km(la, lo, g['lat'], g['lon']) < 120:
-                        g['m'].add(m); g['pts'].append((la, lo)); g['lugares'].append(L.get('lugar') or ''); break
+                # 24 Oct 2026: the NEAREST group within 120 km, and never one where this same member already put another
+                # landing (a short cable inside one country, Malta–Gozo or St. Thomas–St. Croix, keeps its two ends)
+                cerca = [(km(la, lo, g['lat'], g['lon']), i) for i, g in enumerate(grupos) if g['cc'] == cc]
+                cerca = [(d, i) for d, i in cerca if d < 120 and (m not in grupos[i]['m'] or d < 5)]
+                if cerca:
+                    g = grupos[min(cerca)[1]]
+                    g['m'].add(m); g['pts'].append((la, lo)); g['lugares'].append(L.get('lugar') or '')
                 else:
                     grupos.append({'cc': cc, 'lat': la, 'lon': lo, 'm': {m}, 'pts': [(la, lo)], 'lugares': [L.get('lugar') or ''], 'orden': len(grupos)})
         llegadas = []
@@ -338,7 +342,8 @@ def main():
             if len(g['m']) < 2 and k not in conf: continue
             la = sum(p[0] for p in g['pts']) / len(g['pts']); lo = sum(p[1] for p in g['pts']) / len(g['pts'])
             c = rj.cercana(la, lo, 120)
-            if c is not None and ciudades[c][1] != g['cc']:
+            # a border town (Taba by Eilat, Vanimo by Jayapura) is kept when two members put it in its own country
+            if c is not None and ciudades[c][1] != g['cc'] and len(g['m']) < 2:
                 descartes.append((k, 'llegada %s (%s) cae junto a %s (%s)' % (g['lugares'][0], g['cc'], ciudades[c][0], ciudades[c][1]))); continue
             w = agua.cerca_agua(lo, la, 8)  # some water within ~8 px (160 km): the mask's coast is soft and narrow gulfs are missing
             if w is None:
