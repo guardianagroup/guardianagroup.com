@@ -81,6 +81,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
   - Después, el proceso de los cables submarinos.
   - Los 2 que propuso Astra necesitan otra voz.
   - **Ronda 24b, terminada a las 13:55:** ChatGPT, con razonamiento «High», confirmó 33 de los 67 cables y ya están publicados. Ahora hay 381 cables de la agencia y 550 cables enteros con sus pueblos. ChatGPT devolvió «JaKa2LaDeMa» sin su paréntesis: hay que comprobar que case con la propuesta original. Algunas respuestas traen km = 0 o fuentes poco relacionadas, como EESF-3; están en `ronda24/` para revisarlas.
+  - **Ronda 24c, en marcha a las 14:05:** Gemini, con su modelo más potente, confirma los 61 cables de una sola voz que propuso ChatGPT, en 8 lotes (`ronda24/lotes-gemini.json`). Las respuestas van a `herramientas/cables-agencia/gemini-confirma-<n>.json`. Mira cuáles existen, procesa con el proceso de los cables submarinos los que no estén publicados y sigue por el primer lote que falte.
 
 **Lo siguiente que pidió el dueño, por tramos**
 
