@@ -1,0 +1,25 @@
+[
+  {
+    "nombre": "Troncal Bishkek–Osh",
+    "operador": "Kyrgyztelecom",
+    "pais": "KG",
+    "ciudades": [
+      "Bishkek",
+      "Osh"
+    ],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Digital CASA – Kyrgyz Republic (P160230), documento de evaluación del proyecto (2018), descripción de la infraestructura troncal existente: https://projects.worldbank.org/en/projects-operations/project-detail/P160230. Se indican únicamente los extremos publicados, no un itinerario exhaustivo de ciudades intermedias."
+  },
+  {
+    "nombre": "Troncal Bishkek–Balykchy–Naryn",
+    "operador": "ElCat",
+    "pais": "KG",
+    "ciudades": [
+      "Bishkek",
+      "Balykchy",
+      "Naryn"
+    ],
+    "estado": "en servicio",
+    "fuente": "ElCat, información y cartografía de su red de fibra óptica: https://elcat.kg/. Se recoge el tramo nacional documentado; no se prolonga hasta una ciudad china sin un itinerario urbano verificable."
+  }
+]

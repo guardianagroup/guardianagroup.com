@@ -1,0 +1,147 @@
+[
+  {
+    "nombre": "Troncal Norte-Sur FPT, tramo Da Nang–Ho Chi Minh City",
+    "operador": "FPT Telecom",
+    "pais": "VN",
+    "ciudades": [
+      "Da Nang",
+      "Ho Chi Minh City"
+    ],
+    "estado": "en servicio",
+    "fuente": "FPT Telecom, Informe anual 2016, página 9: confirma que en 2014 se completó la tercera ruta troncal entre Ho Chi Minh City y Da Nang. El Gobierno de Da Nang también documenta la infraestructura troncal de FPT: https://cafef1.mediacdn.vn/Images/Uploaded/DuLieuDownload/2016/FOX_16CN_BCTN.pdf ; https://danang.gov.vn/vi/web/dng/w/he-thong-thong-tin-vien-thong-truyen-dan-du-lieu"
+  },
+  {
+    "nombre": "Troncal de transmisión Dhaka–Kuakata–Benapole",
+    "operador": "Power Grid Bangladesh",
+    "pais": "BD",
+    "ciudades": [
+      "Dhaka",
+      "Kuakata",
+      "Benapole"
+    ],
+    "estado": "en servicio",
+    "fuente": "Power Grid Bangladesh PLC, Optical Fiber Leasing, actualización de marzo de 2026: red troncal de 13,2 Tbit/s de capacidad nominal y 800 Gbit/s operativos, con capacidad comercializada. La fuente identifica estos tres nodos, pero no publica los puntos intermedios: https://pgcb.gov.bd/pages/static-pages/6922dfed933eb65569e24af7"
+  },
+  {
+    "nombre": "Enlace internacional de fibra Myanmar–India",
+    "operador": "MPT",
+    "pais": "MM",
+    "ciudades": [
+      "Mandalay",
+      "Sagaing",
+      "Monywa",
+      "Shwebo",
+      "Kyi Gone",
+      "Kampatwa",
+      "Tamu",
+      "Moreh"
+    ],
+    "estado": "en servicio",
+    "fuente": "UN ESCAP, An In-Depth Study on the Broadband Infrastructure in South and West Asia, 2014, página 9: sistema de 640 km terminado en 2010, de MPT y BSNL, con las seis localidades intermedias expresamente identificadas: https://www.unescap.org/sites/default/files/Broadband%20Infrastructure%20in%20South%20and%20West%20Asia%20%28draft%29_0.pdf"
+  },
+  {
+    "nombre": "Greater Mekong Subregion Information Superhighway, corredor Myanmar–China",
+    "operador": "MPT",
+    "pais": "MM",
+    "ciudades": [
+      "Mandalay",
+      "Lashio",
+      "Muse",
+      "Ruili"
+    ],
+    "estado": "en servicio",
+    "fuente": "UN ESCAP, The Operation of Cross-Border Terrestrial Fibre-Optic Networks in Asia and the Pacific, tabla 2, fase 1: tramo nacional Muse–Lashio–Mandalay de 690 km y enlace fronterizo Muse–Ruili de 12 km: https://sdghelpdesk.unescap.org/sites/default/files/2020-01/The%20Operation%20of%20Cross-Border%20Terrestrial%20Fibre-Optic%20Networks%20in%20Asia%20and%20the%20Pacific_0.pdf"
+  },
+  {
+    "nombre": "Greater Mekong Subregion Information Superhighway, corredor Meiktila–Keng Tung",
+    "operador": "MPT",
+    "pais": "MM",
+    "ciudades": [
+      "Meiktila",
+      "Keng Tung"
+    ],
+    "estado": "en servicio",
+    "fuente": "UN ESCAP, The Operation of Cross-Border Terrestrial Fibre-Optic Networks in Asia and the Pacific, tabla 2, fase 1: tramo nacional Meiktila–Keng Tung de 489 km: https://www.unescap.org/sites/default/files/The%20Operation%20of%20Cross-Border%20Terrestrial%20Fibre-Optic%20Networks%20in%20Asia%20and%20the%20Pacific_0.pdf"
+  },
+  {
+    "nombre": "Greater Mekong Subregion Information Superhighway, enlace oriental Myanmar–Thailand",
+    "operador": "MPT",
+    "pais": "MM",
+    "ciudades": [
+      "Keng Tung",
+      "Tachileik",
+      "Mae Sai"
+    ],
+    "estado": "en servicio",
+    "fuente": "UN ESCAP, The Operation of Cross-Border Terrestrial Fibre-Optic Networks in Asia and the Pacific, tabla 2, fase 1: Keng Tung–Tachileik–Mae Sai, 145 km, de los cuales 137 km corresponden a Myanmar: https://www.unescap.org/sites/default/files/The%20Operation%20of%20Cross-Border%20Terrestrial%20Fibre-Optic%20Networks%20in%20Asia%20and%20the%20Pacific_0.pdf"
+  },
+  {
+    "nombre": "Greater Mekong Subregion Information Superhighway, corredor Yangon–Mae Sot",
+    "operador": "MPT",
+    "pais": "MM",
+    "ciudades": [
+      "Yangon",
+      "Kawkareik",
+      "Myawaddy",
+      "Mae Sot"
+    ],
+    "estado": "en servicio",
+    "fuente": "UN ESCAP, The Operation of Cross-Border Terrestrial Fibre-Optic Networks in Asia and the Pacific, tabla 2, fase 1: Yangon–Kakarei, 323 km, y Kakarei–Mae Sot, 75 km. MPT identificó Myawaddy como punto fronterizo en la puesta en servicio del enlace con Thailand en 2009: https://www.unescap.org/sites/default/files/The%20Operation%20of%20Cross-Border%20Terrestrial%20Fibre-Optic%20Networks%20in%20Asia%20and%20the%20Pacific_0.pdf"
+  },
+  {
+    "nombre": "Troncal óptica existente Bukhara–Navoi–Samarkand",
+    "operador": "Uzbektelecom",
+    "pais": "UZ",
+    "ciudades": [
+      "Bukhara",
+      "Navoi",
+      "Samarkand"
+    ],
+    "estado": "en servicio",
+    "fuente": "Communications and Information Agency of Uzbekistan, Fiber-Optic Backbone Network of Uzbekistan, mapa de Existing OFC Backbone Line. La publicación es histórica y no acredita individualmente el estado operativo de cada tramo en 2026: https://www.jp-ca.org/navoiforum/materials/no.1/3uzaci.pdf"
+  },
+  {
+    "nombre": "Sri Lanka Backbone Network, corredor septentrional",
+    "operador": "Sri Lanka Telecom",
+    "pais": "LK",
+    "ciudades": [
+      "Anuradhapura",
+      "Medawachchiya",
+      "Vavuniya",
+      "Kilinochchi",
+      "Jaffna"
+    ],
+    "estado": "en servicio",
+    "fuente": "Sri Lanka Telecom PLC, Annual Report 2021, página 9, mapa oficial de Sri Lanka Backbone Network e IP Network. SLT confirma la continuidad operativa de su red troncal nacional en su información de servicios mayoristas: https://cdn.cse.lk/cmt/upload_report_file/390_1650277337463.pdf ; https://www.slt.lk/en/wholesale"
+  },
+  {
+    "nombre": "Sri Lanka Backbone Network, corredor costero meridional",
+    "operador": "Sri Lanka Telecom",
+    "pais": "LK",
+    "ciudades": [
+      "Colombo",
+      "Kalutara",
+      "Galle",
+      "Matara",
+      "Tangalle",
+      "Hambantota"
+    ],
+    "estado": "en servicio",
+    "fuente": "Sri Lanka Telecom PLC, Annual Report 2021, página 9, mapa oficial de la red nacional de fibra óptica SLBN; Sri Lanka Telecom, National Backbone Network Services: https://cdn.cse.lk/cmt/upload_report_file/390_1650277337463.pdf ; https://www.slt.lk/en/wholesale"
+  },
+  {
+    "nombre": "Greater Mekong Subregion Information Superhighway, corredor occidental-oriental de Cambodia",
+    "operador": "Telecom Cambodia",
+    "pais": "KH",
+    "ciudades": [
+      "Poipet",
+      "Sisophon",
+      "Siem Reap",
+      "Kampong Cham",
+      "Phnom Penh",
+      "Bavet"
+    ],
+    "estado": "en servicio",
+    "fuente": "UN ESCAP, The Operation of Cross-Border Terrestrial Fibre-Optic Networks in Asia and the Pacific, tabla 2, fase 1: ruta publicada como Poipet–Saisophon–Siem Reap–Kampong Cham–Phnom Penh–Bavet, 565 km. Se conserva la secuencia documental y se normaliza Saisophon como Sisophon: https://www.unescap.org/sites/default/files/The%20Operation%20of%20Cross-Border%20Terrestrial%20Fibre-Optic%20Networks%20in%20Asia%20and%20the%20Pacific_0.pdf"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "nombre": "Troncal terrestre Juba–Nimule",
+    "operador": "Liquid Telecom",
+    "pais": "SS",
+    "ciudades": ["Juba", "Nimule"],
+    "estado": "en servicio",
+    "fuente": "Liquid Telecom, comunicado «Liquid Telecom completes South Sudan’s first fibre broadband network», febrero de 2020: confirma la terminación de la conexión terrestre de aproximadamente 200 km entre Juba y Nimule, en la frontera con Uganda."
+  }
+]
