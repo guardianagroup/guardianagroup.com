@@ -48,6 +48,10 @@ PAISES = {
 }
 
 
+# city-states and small islands: their land lines may be shorter than 5 km
+PEQUENOS = {'MC', 'VU', 'SC', 'SM', 'VA', 'LI', 'GI', 'MO', 'MV', 'NR', 'TV', 'MH', 'PW', 'KN', 'AG', 'DM', 'LC', 'VC', 'GD', 'BB',
+            'BM', 'AI', 'VG', 'TC', 'MS', 'SX', 'MF', 'BL', 'KI', 'TO', 'WS', 'CK', 'NU', 'TK', 'WF', 'FM'}
+
 def km(a, b):
     la1, lo1, la2, lo2 = map(math.radians, (a[1], a[0], b[1], b[0]))
     h = math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2
@@ -318,7 +322,8 @@ def main():
         if len(l) < 2:
             continue
         k = largo(x['l'])
-        if k < 5:
+        # 24 Oct 2026 (owner, 15:57, «Si»): the city-states and small islands keep their short lines (Monaco's fibre is 3 km)
+        if k < 5 and not (x['cc'] in PEQUENOS and k >= 0.5):
             continue
         tot += k
         if x['cc']:
