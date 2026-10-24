@@ -72,7 +72,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
   - `q-C-<región>` (siete regiones): cables submarinos que faltan. Las respuestas van a `herramientas/cables-agencia/kimi-faltan-<región>.json`.
   - `q-A1` y `q-A2` ya están respondidas: `kimi-troncales-1.json` y `-2.json`.
   - `save.py` comprueba el hash del texto copiado y lo guarda como JSON.
-- **Gemini:** le falta la tanda 9 (KP, TD, NI y CV). Su límite se renueva el 24 de octubre a las 12:47.
+- **Gemini:** tanda 9 hecha a las 12:44 (`gemini-troncales-10.json`, procesada y publicada). Respondió Nicaragua y Chad, pero no Corea del Norte ni Cabo Verde. La página tenía puesto el modelo Flash-Lite: para lo difícil, mejor uno más potente.
 - **Grok:** le faltan las tandas 8 y 9. Su límite semanal se renueva el 27 de octubre.
 - **Cables submarinos que solo nombra una voz:** 131. Son 64 de ChatGPT, 55 de Gemini, 9 de Claude, 2 de Astra y 1 de Grok; `cables_agencia.py` los lista con «solo lo nombra».
   - **Ronda 24, parada a las 12:30:** hechos los lotes 1–7. Astra solo confirmó 3 cables de 56, ya publicados (352 cables de la agencia). En los lotes 3–7 devolvió `[]`, quizá por prudencia, porque se le piden fuentes oficiales. Quedan los lotes 8–17 de `herramientas/agencia-rondas/ronda24/lotes.json`, mejor con otra voz (Gemini, Kimi o ChatGPT).
@@ -125,7 +125,6 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
    - Astra corta a 4.096 tokens, contando el razonamiento.
    - El Playground no guarda la conversación: si una respuesta se corta, pregunta solo por los países que faltaron.
 6. **Las demás voces**, y después de cada respuesta, el proceso de arriba:
-   - Gemini: la tanda 9, desde las 12:47 del 24 de octubre;
    - Kimi: las preguntas de `kimi-pendientes`, fuera de la hora punta de China;
    - Grok: las tandas 8 y 9, desde el 27 de octubre.
 7. **Cuando el mapa esté al 100 %**, avisa al dueño y sigue con «Lo siguiente», empezando por la captura de diseño.
