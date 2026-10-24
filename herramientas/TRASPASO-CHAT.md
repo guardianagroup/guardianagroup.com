@@ -316,6 +316,22 @@ Actualizado el viernes 23 de octubre de 2026 a las 23:50, hora de Bogotá. Lo es
 - **Respuestas de la agencia:** ChatGPT dio unos 145 cables «que faltan» que ninguna otra voz ha confirmado todavía. Están en `herramientas/cables-agencia/chatgpt-faltan-*.json`; entran solos en cuanto otra voz los nombre (vuelve a ejecutar `cables_agencia.py` y después `lugares_capas.py`).
 - **Grok:** a su cuenta le quedan las tandas 8 y 9 de troncales, porque llegó a su límite semanal (se renueva el 27 de octubre).
 
+**24 Oct 2026, 03:10 — hecho y publicado**
+- **Cables por tierra:** **128 países** (93 al empezar la noche) y 1.266.628 km. Hay 142 tramos de la agencia confirmados por dos voces de cuatro: Astra 6, ChatGPT, Grok y Gemini.
+- **Cables submarinos:** **480 cables enteros**, 1.383 llegadas con su pueblo. Esta noche se han sumado 35 de la agencia (ronda 18), entre ellos Alonso de Ojeda, BICS, PENCAN-7 y 8, SAIT, Scylla, CAM Ring, Deep Blue One y EAUFON.
+- **Arreglos de la revisión de Órbita:** ver `herramientas/agencia-rondas/qa/revision-orbita-2026-10-24.md`, con lo arreglado (✅) y lo pendiente (⬜).
+
+**Qué falta**
+- **Gemini:** le faltan las tandas 5 a 9 de troncales por tierra (límite de uso hasta las 7:47 del 24 de octubre). Hay una tarea programada para las 7:52 que las lanza.
+- **Grok:** le faltan las tandas 8 y 9 (límite semanal hasta el 27 de octubre).
+- **Después de cada tanda:**
+  1. Publica las respuestas en `main`.
+  2. Lanza `gh workflow run pueblos-cables.yml --ref main`.
+  3. Trae `herramientas/fuentes/pueblos-fibra.tsv`.
+  4. Ejecuta `fibra_agencia.py` y luego `fibra_tierra.py --sin-ofds`.
+  5. Publica en las dos ramas.
+- **Hibernación:** cuando el mapa quede terminado, poner en hibernación el ordenador del dueño (lo pidió a las 23:49).
+
 **En marcha (antes)**
 - **Fibra por tierra de los países que faltan.** Hay datos de 93 países; faltan unos 85 con red troncal propia.
   - Astra 6 y ChatGPT responden en tandas. Sus respuestas van a `herramientas/fibra-agencia/astra-troncales-N.json` y `chatgpt-troncales-N.json`, y el texto bruto a `herramientas/agencia-rondas/ronda17/`.
