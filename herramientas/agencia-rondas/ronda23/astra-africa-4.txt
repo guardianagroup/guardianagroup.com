@@ -1,0 +1,90 @@
+[
+  {
+    "nombre": "ECOWAN: corredor sur Banjul–Basse Santa Su",
+    "operador": "Gamtel",
+    "pais": "GM",
+    "ciudades": ["Banjul", "Brikama", "Soma", "Bansang", "Basse Santa Su"],
+    "estado": "en servicio",
+    "fuente": "aproximado: ciudades principales del corredor meridional de la red nacional ECOWAN de Gamtel, siguiendo South Bank Road; la red operativa está documentada por Gamtel y el proyecto ECOWAN del Banco Islámico de Desarrollo, pero no se publica un trazado urbano exhaustivo."
+  },
+  {
+    "nombre": "Troncal Accra–Kumasi",
+    "operador": "Telecel Ghana, anteriormente Vodafone Ghana",
+    "pais": "GH",
+    "ciudades": ["Accra", "Nsawam", "Suhum", "Nkawkaw", "Konongo", "Kumasi"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la carretera Accra–Kumasi, N6; Vodafone Ghana y su sucesora Telecel Ghana describen una red nacional de fibra en servicio, pero la secuencia exacta de localidades de esta troncal no está publicada."
+  },
+  {
+    "nombre": "Troncal Kumasi–Tamale–Bolgatanga",
+    "operador": "Telecel Ghana, anteriormente Vodafone Ghana",
+    "pais": "GH",
+    "ciudades": ["Kumasi", "Techiman", "Kintampo", "Buipe", "Tamale", "Bolgatanga"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor nacional norte-sur por las carreteras N10 y N2; infraestructura nacional de fibra descrita por Vodafone Ghana y Telecel Ghana. Las ciudades intermedias representan el corredor probable, no un levantamiento publicado del cable."
+  },
+  {
+    "nombre": "Backbone nacional Conakry–Kankan",
+    "operador": "Société de Gestion et d’Exploitation du Backbone National (SOGEB)",
+    "pais": "GN",
+    "ciudades": ["Conakry", "Coyah", "Kindia", "Mamou", "Dabola", "Kouroussa", "Kankan"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje occidental-oriental del backbone nacional de Guinea, cuya explotación documentan SOGEB y el ministerio guineano responsable de telecomunicaciones; secuencia probable por el corredor de la N1, sin cartografía pública detallada del tendido."
+  },
+  {
+    "nombre": "Backbone nacional Conakry–Labe",
+    "operador": "Société de Gestion et d’Exploitation du Backbone National (SOGEB)",
+    "pais": "GN",
+    "ciudades": ["Conakry", "Coyah", "Kindia", "Mamou", "Dalaba", "Pita", "Labe"],
+    "estado": "en servicio",
+    "fuente": "aproximado: ramal del backbone nacional hacia Middle Guinea, descrito dentro de la infraestructura operativa de SOGEB; corredor probable por la N1 hasta Mamou y la N5 hacia Labe. No se dispone de una relación pública completa de puntos de paso."
+  },
+  {
+    "nombre": "Enlace terrestre Bissau–Ziguinchor",
+    "operador": "Orange Bissau / Sonatel",
+    "pais": "GW",
+    "ciudades": ["Bissau", "Safim", "Bula", "Sao Domingos", "Mpack", "Ziguinchor"],
+    "estado": "en servicio",
+    "fuente": "aproximado: conexión internacional terrestre de Orange Bissau con la red de Sonatel en Senegal, descrita en la documentación corporativa del grupo Sonatel; corredor probable por Safim, Bula y el paso Sao Domingos–Mpack. Mpack es la primera localidad senegalesa incluida; el trazado exacto del cable no está publicado."
+  },
+  {
+    "nombre": "Troncal Mombasa–Nairobi–frontera de Uganda",
+    "operador": "Liquid Intelligent Technologies, anteriormente Kenya Data Networks",
+    "pais": "KE",
+    "ciudades": ["Mombasa", "Mariakani", "Voi", "Mtito Andei", "Kibwezi", "Emali", "Athi River", "Nairobi", "Naivasha", "Nakuru", "Eldoret", "Webuye", "Bungoma", "Malaba", "Tororo"],
+    "estado": "en servicio",
+    "fuente": "publicado en los mapas de red de Liquid Intelligent Technologies: eje terrestre Mombasa–Nairobi–Uganda; aproximado: localidades intermedias según el corredor viario A109/A104 y el acceso a Malaba. Tororo es la primera ciudad inequívocamente situada en Uganda después de la localidad fronteriza de Malaba."
+  },
+  {
+    "nombre": "NOFBI: corredor Nairobi–Isiolo–Moyale",
+    "operador": "ICT Authority de Kenia / Telkom Kenya",
+    "pais": "KE",
+    "ciudades": ["Nairobi", "Thika", "Embu", "Meru", "Isiolo", "Marsabit", "Moyale"],
+    "estado": "en servicio",
+    "fuente": "publicado en la documentación de ICT Authority sobre NOFBI y su cobertura de las capitales de condado; aproximado: concatenación del corredor oriental por Embu y Meru con el eje septentrional Isiolo–Marsabit–Moyale. No se afirma continuidad transfronteriza hacia Etiopía."
+  },
+  {
+    "nombre": "Troncal septentrional Maseru–Butha-Buthe",
+    "operador": "Econet Telecom Lesotho",
+    "pais": "LS",
+    "ciudades": ["Maseru", "Teyateyaneng", "Maputsoe", "Hlotse", "Butha-Buthe"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de fibra de las tierras bajas septentrionales, siguiendo principalmente la A1 y el acceso a Maputsoe; red nacional de fibra descrita por Econet Telecom Lesotho y Lesotho Communications Authority. El recorrido completo supera 100 km; la secuencia exacta del cable no está publicada."
+  },
+  {
+    "nombre": "Troncal meridional Maseru–Quthing",
+    "operador": "Econet Telecom Lesotho",
+    "pais": "LS",
+    "ciudades": ["Maseru", "Mafeteng", "Mohale's Hoek", "Quthing"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor meridional de la red terrestre de Econet Telecom Lesotho por la carretera A2; infraestructura nacional de fibra descrita por el operador y Lesotho Communications Authority, sin un trazado público detallado entre ciudades."
+  },
+  {
+    "nombre": "Troncal Monrovia–Ganta",
+    "operador": "Orange Liberia",
+    "pais": "LR",
+    "ciudades": ["Monrovia", "Kakata", "Gbarnga", "Ganta"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor interior de la red de fibra de Orange Liberia hacia Ganta, siguiendo la carretera Monrovia–Kakata–Gbarnga–Ganta; despliegue de fibra nacional descrito por Orange Liberia. Las localidades intermedias indican el corredor probable, no una cartografía publicada del cable; no se presupone un cruce operativo hacia Guinea."
+  }
+]
