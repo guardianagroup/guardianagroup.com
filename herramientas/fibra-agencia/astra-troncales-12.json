@@ -1,0 +1,42 @@
+[
+  {
+    "nombre": "Red troncal nacional de fibra óptica de Rwanda",
+    "operador": "KT Rwanda Networks (KTRN)",
+    "pais": "RW",
+    "ciudades": ["Rubavu", "Musanze", "Kigali", "Rwamagana", "Kayonza", "Nyagatare"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor principal inferido siguiendo las carreteras Rubavu–Musanze–Kigali y Kigali–Kayonza–Nyagatare. Representa un eje de la red, no todos sus ramales; el recorrido exacto de la fibra no está verificado."
+  },
+  {
+    "nombre": "Red troncal terrestre de Econet Telecom Lesotho",
+    "operador": "Econet Telecom Lesotho",
+    "pais": "LS",
+    "ciudades": ["Quthing", "Mohale's Hoek", "Mafeteng", "Maseru", "Teyateyaneng", "Hlotse", "Butha-Buthe"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje meridional–septentrional de las tierras bajas, siguiendo los corredores de las carreteras A2 y A1. Secuencia geográfica probable, no trazado de fibra verificado; excluye ramales hacia el interior montañoso."
+  },
+  {
+    "nombre": "Red troncal nacional de fibra óptica de Timor Telecom",
+    "operador": "Timor Telecom",
+    "pais": "TL",
+    "ciudades": ["Batugade", "Liquica", "Dili", "Manatuto", "Baucau", "Lospalos"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje occidental–oriental inferido siguiendo la carretera de la costa norte hasta Baucau y su continuación hacia Lospalos. No representa toda la red ni confirma la posición exacta del cable."
+  },
+  {
+    "nombre": "Red troncal nacional de fibra óptica de UNN",
+    "operador": "Unified National Networks (UNN)",
+    "pais": "BN",
+    "ciudades": ["Kuala Belait", "Seria", "Tutong", "Bandar Seri Begawan", "Bangar"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje costero occidental hasta Bandar Seri Begawan, siguiendo el corredor de las carreteras principales; continuación probable hacia Bangar por el corredor del puente Sultan Haji Omar Ali Saifuddien. El itinerario concreto de la fibra no está verificado."
+  },
+  {
+    "nombre": "Red troncal terrestre de Kosovo Telecom",
+    "operador": "Kosovo Telecom",
+    "pais": "XK",
+    "ciudades": ["Peja", "Gjakova", "Prizren", "Ferizaj", "Pristina", "Mitrovica"],
+    "estado": "en servicio",
+    "fuente": "aproximado: secuencia inferida por los corredores viarios Peja–Gjakova–Prizren, Prizren–Ferizaj y Ferizaj–Pristina–Mitrovica. Es un recorrido representativo entre nodos principales, no un único cable confirmado ni la totalidad de los anillos y ramales."
+  }
+]
