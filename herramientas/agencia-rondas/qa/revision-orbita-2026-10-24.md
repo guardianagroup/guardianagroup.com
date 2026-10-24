@@ -23,14 +23,14 @@ Revisión automática de toda la navegación y los paneles de Órbita en tres ta
 6. ⬜ **Tablet T1 en horizontal:** el panel «Capas» de la derecha tapa Mi conexión. Radiografías queda bajo «Ver mi conexión», y la ficha de cable se sale 12 px por arriba.
 7. ⬜ **Móvil M1 y tablet T1 en vertical:** la barra de puertas y los botones fijos quedan encima de los paneles (Mi conexión, Radiografías, el informe).
    - El primer caso puede quedar resuelto con el arreglo del punto 1; hay que comprobarlo.
-8. ⬜ **Lista «Empresas y países» del espejo:** se corta 30 px por la derecha hasta 960 px de ancho. Es el mismo fallo de `width: 100%` más padding que tenía la ficha de cable.
-9. ⬜ **El atrás del navegador sale de Órbita en vez de cerrar lo abierto.** Pasa al llegar por un enlace de la portada, y con las fichas, la lista de cercanos, la pregunta de ubicación o el espejo abiertos. Durante el viaje, una pulsación cierra solo Mi conexión.
+8. ✅ (commit 9feb951) **Lista «Empresas y países» del espejo:** se corta 30 px por la derecha hasta 960 px de ancho. Es el mismo fallo de `width: 100%` más padding que tenía la ficha de cable.
+9. ✅ en parte (las fichas de cable, país y centro; commit 9ea4e9c) **El atrás del navegador sale de Órbita en vez de cerrar lo abierto.** Siguen pendientes la lista de cercanos, el espejo y la pregunta de ubicación. Pasa al llegar por un enlace de la portada, y con las fichas, la lista de cercanos, la pregunta de ubicación o el espejo abiertos. Durante el viaje, una pulsación cierra solo Mi conexión.
 10. ✅ **La ficha de cable se salía 12 px por debajo de la ventana en el ordenador, y su × se iba con el scroll.**
     - Arreglo: `box-sizing: border-box`, y la fila de arriba queda fija en el ordenador.
 11. ⬜ **GUARDIANA OS no tiene entrada en el móvil sin el interruptor.**
 12. ✅ **Esc en el informe del final del viaje también terminaba el viaje.**
     - Arreglo: Esc solo cierra el informe.
-13. ⬜ **En inglés queda texto en español:**
+13. ✅ en parte (commit da41ffa: la búsqueda de ubicación, la nota de rutas, la altura y el final del viaje) **En inglés queda texto en español:**
     - la búsqueda de ubicación y la nota de rutas de Mi conexión;
     - en Mi conexión, algunos nombres de centros (hay que comprobarlo tras 63a7f03);
     - «Verme en Órbita» y algunas etiquetas aria;
@@ -43,7 +43,7 @@ Revisión automática de toda la navegación y los paneles de Órbita en tres ta
 16. ⬜ **M1, «Capas › Afinar»:** «Trazado aproximado» y «Cables en proyecto» pierden la muestra de línea.
 17. ✅ **Consola: radio negativo en el anillo del punto del visitante al cargar despacio.**
     - Arreglo: el radio nunca es negativo. El aviso de `getImageData` durante el viaje sigue saliendo y es solo un aviso.
-18. ⬜ **Detalles menores:**
+18. ✅ en parte (commit 5f308b5: con Mi conexión abierta se apartan la altura y el zoom, y con una ficha abierta, «¿Sabías que…?») **Detalles menores:**
     - en el ordenador, Mi conexión tapa el indicador de altura y el zoom;
     - la ficha de cable tapa «¿Sabías que…?»;
     - con 360 px, la tabla del informe mide 8 px más que la pantalla.
