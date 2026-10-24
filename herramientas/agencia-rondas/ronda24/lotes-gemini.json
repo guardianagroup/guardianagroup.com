@@ -1,0 +1,82 @@
+{
+ "nota": "Ronda 24c (24 Oct 2026): cables de una sola voz que propuso ChatGPT, para que Gemini (con su modelo más potente) confirme cuáles existen y están en servicio. Misma pregunta que la ronda 24 (pregunta.txt). Lotes de 8.",
+ "lotes": [
+  [
+   "Lake Albert 1 (UG, CD)",
+   "Lake Albert 2 (UG, CD)",
+   "Lake Tanganyika (CD)",
+   "LFON (Libyan Fiber Optic Network) (LY)",
+   "Libreville-Port Gentil Cable (GA)",
+   "Tobrok-Emasaed Cable System (LY)",
+   "Alaska United Turnagain Arm (AUTA) (US)",
+   "SEALink South (US)"
+  ],
+  [
+   "Hawaii Island Fibre Network (HIFN) (US)",
+   "Farewell-Change-Fogo Subsea Cable (CA)",
+   "Grand Bahama Bimini Submarine Cable (BS)",
+   "Guadeloupe Câble des Îles du Sud (GCIS) (GP)",
+   "Caribbean Regional Communications Infrastructure Program (CARCIP) (VC, GD)",
+   "Gulf of California Cable (MX)",
+   "Gulf of Mexico Fiber Optic Network (US)",
+   "Lázaro Cárdenas-Manzanillo Santiago Submarine Cable System (LCMSSCS) (MX)"
+  ],
+  [
+   "Colombian Festoon (CO)",
+   "Fibra Óptica al Pacífico (PE)",
+   "FOS Quellón-Chacabuco (CL)",
+   "ARSAT Submarine Fiber Optic Cable (AR)",
+   "Brazilian Festoon (BR)",
+   "Venezuelan Festoon (VE)",
+   "Bodø-Røst Cable (NO)",
+   "Tverrlinken (NO)"
+  ],
+  [
+   "Eastern Arctic Undersea Fibre Optic Network - EAUFON 1 (CA)",
+   "Eastern Arctic Undersea Fibre Optic Network - EAUFON 2 (CA)",
+   "Jakarta-Surabaya Cable System (JAYABAYA) (ID)",
+   "Medan-Dumai Cable System (DAMAI) (ID)",
+   "Patara-2 (ID)",
+   "BALOK (Bali-Lombok) (ID)",
+   "Besut-Perhentian Islands (MY)",
+   "Lumut-Pangkor Island (MY)"
+  ],
+  [
+   "Rompin-Tioman Island (MY)",
+   "Taiwan-Matsu No. 4 (TW)",
+   "Jeju-Mainland 2 (KR)",
+   "Jeju-Mainland 3 (KR)",
+   "Jeju-Udo (KR)",
+   "Ulleung-Mainland 2 (KR)",
+   "Guam Okinawa Kyushu Incheon (GOKI) (GU, JP)",
+   "Sorsogon-Samar Submarine Fiber Optical Interconnection Project (SSSFOIP) (PH)"
+  ],
+  [
+   "Tanjung Pandan-Sungai Kakap (ID)",
+   "Jalapati (ID)",
+   "DOS CONTINENTES I (ES)",
+   "Azores Fiber Optic System (AFOS) (PT)",
+   "Continente-Madeira (PT)",
+   "BUGIO (PT)",
+   "Lanis-3 (GB)",
+   "Denmark-Sweden 17 (DK, SE)"
+  ],
+  [
+   "GlobalConnect-KPN (DK, DE)",
+   "GlobalConnect 2 (GC2) (DK, SE)",
+   "GlobalConnect 3 (GC3) (DK)",
+   "STO-HEL-One (SE, FI)",
+   "Italy-Monaco (IT, MC)",
+   "Apollo East and West (GR)",
+   "Vodafone Greece Domestic (GR)",
+   "Domestic Submarine Cable of Maldives (DSCoM) (MV)"
+  ],
+  [
+   "Mariana-Guam Cable (GU, MP)",
+   "Tokelau Submarine Cable (TK)",
+   "Tuvalu Vaka Cable (VAKA) (TV)",
+   "Tu'i Vava'u Cable (Tonga Hawaiki Submarine Cable Branch System) (TO)",
+   "Tahiti Iti (Tautira-Teahupo'o) (PF)"
+  ]
+ ]
+}
