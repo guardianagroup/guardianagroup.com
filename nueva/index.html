@@ -617,7 +617,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     <div>
       <p class="kick r">05 · Órbita</p>
       <h2 class="r" id="t-orbita">La infraestructura de internet, en un solo mapa.</h2>
-      <p class="lead r">Cables submarinos, fibra en tierra, centros de datos y satélites, en un planeta que puedes girar.</p>
+      <p class="lead r">Cables submarinos y por tierra, centros de datos y satélites, en un planeta que puedes girar.</p>
       <div class="fila r"><a class="btn fant" href="/orbita/">Explorar Órbita <span aria-hidden="true">↗</span></a></div>
     </div>
     <div class="orbita-img r"><figure class="globo2" id="globo2"><img class="respaldo" src="/portada/planeta-entera-800.webp" width="800" height="598" alt="El planeta de Órbita con sus cables y la órbita geoestacionaria." loading="lazy" decoding="async"></figure><p class="rot2" aria-hidden="true">Arrástralo para girarlo · cables reales · señales ilustrativas</p></div>
@@ -692,7 +692,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   document.querySelectorAll('[aria-label],[alt],[title]').forEach((el) => ['aria-label', 'alt', 'title'].forEach((a) => { const v = el.getAttribute(a); if (v) attrs.push({ el, a, es: v }); }));
   const h1 = document.getElementById('titular'), h1es = h1.innerHTML, tit0 = document.title, meta = document.querySelector('meta[name="description"]'), meta0 = meta ? meta.content : '';
   const CACHE = {}; let J = null;
-  const carga = (l) => CACHE[l] || (CACHE[l] = fetch('/i18n/nueva/' + l + '.json?v=20261023d').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }));
+  const carga = (l) => CACHE[l] || (CACHE[l] = fetch('/i18n/nueva/' + l + '.json?v=20261023e').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }));
   window.__t = (es) => { const v = J && J.t[norm(es)]; return v != null ? v : es; };
   const titular = () => { if (!J) { h1.innerHTML = h1es; return; } h1.textContent = ''; const sep = J.titular.sep != null ? J.titular.sep : ' '; let d = 0.3;
     J.titular.w.forEach((w, i) => { const s = document.createElement('span'); s.className = 'w'; s.style.animationDelay = d.toFixed(2) + 's'; d += 0.12; s.textContent = w; h1.append(s); if (J.titular.br === i) h1.append(document.createElement('br')); if (sep) h1.append(document.createTextNode(sep)); });
