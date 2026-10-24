@@ -75,7 +75,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
 - **Gemini:** le falta la tanda 9 (KP, TD, NI y CV). Su límite se renueva el 24 de octubre a las 12:47.
 - **Grok:** le faltan las tandas 8 y 9. Su límite semanal se renueva el 27 de octubre.
 - **Cables submarinos que solo nombra una voz:** 131. Son 64 de ChatGPT, 55 de Gemini, 9 de Claude, 2 de Astra y 1 de Grok; `cables_agencia.py` los lista con «solo lo nombra».
-  - **Ronda 24, parada a las 12:00 al 97 % de uso (no llegó a terminar ningún lote):** Astra 6 confirma los 129 que no propuso ella, en 17 lotes de 8 (`herramientas/agencia-rondas/ronda24/lotes.json` y `pregunta.txt`). Las respuestas guardadas aún no han pasado por el proceso.
+  - **Ronda 24, parada a las 12:30:** hechos los lotes 1–7. Astra solo confirmó 3 cables de 48, ya publicados (352 cables de la agencia). En los lotes 3–6 devolvió `[]`, quizá por prudencia, porque se le piden fuentes oficiales. Quedan los lotes 8–17 de `herramientas/agencia-rondas/ronda24/lotes.json`, mejor con otra voz (Gemini, Kimi o ChatGPT).
   - Sus respuestas van a `herramientas/cables-agencia/astra-confirma-<n>.json`. Mira cuáles existen y sigue por el primer lote que falte.
   - Después, el proceso de los cables submarinos.
   - Los 2 que propuso Astra necesitan otra voz.
