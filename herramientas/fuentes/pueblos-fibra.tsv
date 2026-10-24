@@ -2138,14 +2138,21 @@ zaria	NG	11.11128	7.7227	980000	Zaria
 bilwi	NI	14.03507	-83.38882	33635	Puerto Cabezas
 chinandega	NI	12.62951	-87.13133	126387	Chinandega
 ciudadsandino	NI	12.15889	-86.34417	50000	Ciudad Sandino
+esteli	NI	13.09291	-86.35589	96422	Estelí
+granada	NI	11.93062	-85.95368	89409	Granada
 lacruz	NI	13.1129	-84.18588	1669	La Cruz de Río Grande
 managua	NI	12.13282	-86.2504	973087	Managua
 masaya	NI	11.97316	-86.09587	130113	Masaya
+matagalpa	NI	12.92795	-85.91906	109089	Matagalpa
 nandaime	NI	11.75696	-86.05286	20810	Nandaime
 rivas	NI	11.43977	-85.82749	30000	Rivas
+sanjuandelsur	NI	11.25292	-85.87049	7790	San Juan del Sur
+sebaco	NI	12.85321	-86.0963	0	Sébaco
 siuna	NI	13.73321	-84.77725	16056	Siuna
 somotillo	NI	13.04387	-86.90506	15385	Somotillo
+somoto	NI	13.4841	-86.58229	20316	Somoto
 ticuantepe	NI	12.02263	-86.20493	13209	Ticuantepe
+tipitapa	NI	12.19732	-86.09706	50000	Tipitapa
 amersfoort	NL	52.155	5.3875	139914	Amersfoort
 amsterdam	NL	52.37403	4.88969	741636	Amsterdam
 assen	NL	52.99667	6.5625	68836	Assen
@@ -2748,6 +2755,7 @@ mongo	TD	12.18514	18.6884	53768	Mongo
 moundou	TD	8.57437	16.07722	196124	Moundou
 ndjamena	TD	12.10672	15.0444	1359526	N'Djamena
 oumhadjer	TD	13.2954	19.6966	37941	Umm Hājar
+sarh	TD	9.14555	18.38331	138928	Sarh
 atakpame	TG	7.53333	1.13333	80683	Atakpamé
 dapaong	TG	10.86225	0.20762	58071	Dapaong
 kara	TG	9.55111	1.18611	104207	Kara
