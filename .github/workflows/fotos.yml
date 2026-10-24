@@ -1,0 +1,34 @@
+# Candidate photos for Órbita's cards (owner, 24 Oct 2026: «que aparezca una foto, si es que la hay… todo lo que se
+# pueda»): Wikimedia Commons files with a free licence for the satellites, data centres, bases and submarine cables on
+# the map, with author and licence, in orbita/datos/fotos-candidatas.json (herramientas/fotos.py). By hand for now.
+name: Fotos candidatas de Órbita
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: datos-orbita
+  cancel-in-progress: false
+
+jobs:
+  fotos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fotos de Wikidata y Wikimedia Commons
+        run: python3 herramientas/fotos.py
+
+      - name: Guardar si ha cambiado
+        run: |
+          git config user.name "GUARDIANA datos"
+          git config user.email "datos@guardianagroup.com"
+          git add orbita/datos/fotos-candidatas.json
+          if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
+          git commit -m "Órbita: fotos candidatas de Wikimedia Commons para las fichas ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+          git push
