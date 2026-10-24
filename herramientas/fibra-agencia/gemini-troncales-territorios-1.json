@@ -1,0 +1,260 @@
+[
+ {
+  "nombre": "HKBN Metropolitan Terrestrial Fiber Optic Ring",
+  "operador": "Hong Kong Broadband Network (HKBN)",
+  "pais": "HK",
+  "ciudades": [
+   "Tuen Mun",
+   "Tsuen Wan",
+   "Kowloon",
+   "Central",
+   "Sha Tin",
+   "Tseung Kwan O"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.hkbn.net/en/about-us/network-coverage"
+ },
+ {
+  "nombre": "Singtel Next Gen NBN Terrestrial Backbone",
+  "operador": "Singtel / NetLink Trust",
+  "pais": "SG",
+  "ciudades": [
+   "Jurong",
+   "Clementi",
+   "Queenstown",
+   "Downtown Core",
+   "Changi",
+   "Woodlands"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.netlinktrust.com/network/network-coverage.html"
+ },
+ {
+  "nombre": "CTM Terrestrial Fiber Optic Ring",
+  "operador": "Companhia de Telecomunicações de Macau (CTM)",
+  "pais": "MO",
+  "ciudades": [
+   "Macau Peninsula",
+   "Taipa",
+   "Cotai",
+   "Coloane"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.ctm.com.mo/en/about-ctm/network-infrastructure.html"
+ },
+ {
+  "nombre": "Monaco Telecom National Terrestrial Fiber Loop",
+  "operador": "Monaco Telecom",
+  "pais": "MC",
+  "ciudades": [
+   "Fontvieille",
+   "La Condamine",
+   "Monaco-Ville",
+   "Monte Carlo",
+   "Larvotto"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.monaco.telecom.mc/en/about/our-network"
+ },
+ {
+  "nombre": "Andorra Telecom FTTH National Backbone",
+  "operador": "Andorra Telecom",
+  "pais": "AD",
+  "ciudades": [
+   "Sant Julià de Lòria",
+   "Andorra la Vella",
+   "Escaldes-Engordany",
+   "Encamp",
+   "La Massana",
+   "Ordino",
+   "Canillo"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.andorratelecom.ad/en/corporate/our-network"
+ },
+ {
+  "nombre": "GTA Teleguam Island Terrestrial Fiber Backbone",
+  "operador": "GTA TeleGuam",
+  "pais": "GU",
+  "ciudades": [
+   "Piti",
+   "Asan",
+   "Hagatna",
+   "Tamuning",
+   "Dededo",
+   "Yigo"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.gta.net/business/network-infrastructure"
+ },
+ {
+  "nombre": "Viya USVI Terrestrial Fiber Optic Backbone",
+  "operador": "Viya (ATN International)",
+  "pais": "VI",
+  "ciudades": [
+   "Frederiksted",
+   "Christiansted",
+   "Charlotte Amalie",
+   "Cruz Bay"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://viya.vi/about-us/network-infrastructure"
+ },
+ {
+  "nombre": "Flow Cayman Submarine Cable Terrestrial Backhaul",
+  "operador": "Flow Cayman (Liberty Latin America)",
+  "pais": "KY",
+  "ciudades": [
+   "West Bay",
+   "George Town",
+   "Bodden Town",
+   "East End"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.flow.ky/corporate/network"
+ },
+ {
+  "nombre": "Flow Aruba Terrestrial Fiber Optic Ring",
+  "operador": "Flow Aruba / SETAR",
+  "pais": "AW",
+  "ciudades": [
+   "San Nicolas",
+   "Santa Cruz",
+   "Oranjestad",
+   "Paradera",
+   "Noord"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.setar.aw/corporate/network"
+ },
+ {
+  "nombre": "Digicel Curaçao Terrestrial Fiber Optic Backbone",
+  "operador": "Digicel Curaçao / UTS",
+  "pais": "CW",
+  "ciudades": [
+   "Westpunt",
+   "Soto",
+   "Willemstad",
+   "Nieuwpoort"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.uts.cw/network"
+ },
+ {
+  "nombre": "Orange Guadeloupe Terrestrial Backhaul Network",
+  "operador": "Orange Caraïbe",
+  "pais": "GP",
+  "ciudades": [
+   "Deshaies",
+   "Sainte-Rose",
+   "Baie-Mahault",
+   "Pointe-à-Pitre",
+   "Les Abymes",
+   "Le Gosier",
+   "Saint-François"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.orange.gp/reseau/fibre"
+ },
+ {
+  "nombre": "SFR Martinique Terrestrial Fiber Optic Ring",
+  "operador": "SFR Caraïbe",
+  "pais": "MQ",
+  "ciudades": [
+   "Schœlcher",
+   "Fort-de-France",
+   "Le Lamentin",
+   "Le Robert",
+   "La Trinité",
+   "Sainte-Luce"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.sfrcaraibe.fr/martinique/reseau"
+ },
+ {
+  "nombre": "Orange Réunion Terrestrial Fiber Backbone",
+  "operador": "Orange Réunion",
+  "pais": "RE",
+  "ciudades": [
+   "Saint-Paul",
+   "Le Port",
+   "Saint-Denis",
+   "Saint-André",
+   "Saint-Benoît",
+   "Saint-Pierre",
+   "Saint-Louis"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://reseaux.orange.fr/reunion"
+ },
+ {
+  "nombre": "Mayotte Telecom Terrestrial Cable Backhaul",
+  "operador": "Mayotte Telecom (SFR Mayotte)",
+  "pais": "YT",
+  "ciudades": [
+   "Longoni",
+   "Koungou",
+   "Mamoudzou",
+   "Dzaoudzi",
+   "Bandrele"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.mayottetelecom.yt/reseau"
+ },
+ {
+  "nombre": "Orange Guyane Terrestrial Fiber Backbone",
+  "operador": "Orange Guyane",
+  "pais": "GF",
+  "ciudades": [
+   "Kourou",
+   "Macouria",
+   "Cayenne",
+   "Matoury",
+   "Rémire-Montjoly"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://reseaux.orange.fr/guyane"
+ },
+ {
+  "nombre": "Vini Tahiti Terrestrial Fiber Optic Network",
+  "operador": "Vini (Onati / OPT Polynésie française)",
+  "pais": "PF",
+  "ciudades": [
+   "Punaauia",
+   "Papeete",
+   "Pirae",
+   "Arue",
+   "Mahina",
+   "Taravao"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.vini.pf/reseau-fibre"
+ },
+ {
+  "nombre": "Bluesky Samoa Upolu Terrestrial Fiber Ring",
+  "operador": "Bluesky Samoa",
+  "pais": "WS",
+  "ciudades": [
+   "Faleolo",
+   "Mulifanua",
+   "Apia",
+   "Lufilufi",
+   "Aleipata"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.bluesky.ws/about-us/network"
+ },
+ {
+  "nombre": "TCC Tongatapu Terrestrial Fiber Backbone",
+  "operador": "Tonga Communications Corporation (TCC)",
+  "pais": "TO",
+  "ciudades": [
+   "Fuaʻamotu",
+   "Vaini",
+   "Nukuʻalofa",
+   "Kolovai"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.tcc.to/network"
+ }
+]
