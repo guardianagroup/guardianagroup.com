@@ -1,0 +1,92 @@
+[
+  {
+    "nombre": "Troncal Santo Domingo–Santiago–Puerto Plata",
+    "operador": "Claro Dominicana",
+    "pais": "DO",
+    "ciudades": ["Santo Domingo", "Bonao", "La Vega", "Santiago de los Caballeros", "Puerto Plata"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de Claro Dominicana (claro.com.do); secuencia urbana inferida por los corredores Duarte y Santiago–Puerto Plata, no por un trazado público detallado del cable."
+  },
+  {
+    "nombre": "Troncal oriental Santo Domingo–Punta Cana",
+    "operador": "Claro Dominicana",
+    "pais": "DO",
+    "ciudades": ["Santo Domingo", "Boca Chica", "San Pedro de Macorís", "La Romana", "Salvaleón de Higüey", "Punta Cana"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de Claro Dominicana (claro.com.do); corredor oriental inferido por Las Américas, la Autovía del Este y las conexiones de Higüey y Punta Cana. La secuencia representa el corredor troncal, no una alineación del cable verificada."
+  },
+  {
+    "nombre": "Troncal suroccidental Santo Domingo–Barahona",
+    "operador": "Claro Dominicana",
+    "pais": "DO",
+    "ciudades": ["Santo Domingo", "San Cristóbal", "Baní", "Azua", "Barahona"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de Claro Dominicana (claro.com.do); itinerario probable por la carretera Sánchez y el corredor Azua–Barahona."
+  },
+  {
+    "nombre": "Troncal interandina Quito–Loja",
+    "operador": "CNT EP",
+    "pais": "EC",
+    "ciudades": ["Quito", "Latacunga", "Ambato", "Riobamba", "Azogues", "Cuenca", "Loja"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de CNT EP (cnt.com.ec); secuencia de nodos principales inferida por el corredor interandino E35. No implica que todos los tramos sigan exactamente la carretera."
+  },
+  {
+    "nombre": "Troncal Quito–Santo Domingo–Guayaquil",
+    "operador": "CNT EP",
+    "pais": "EC",
+    "ciudades": ["Quito", "Santo Domingo de los Colorados", "Quevedo", "Babahoyo", "Guayaquil"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de CNT EP (cnt.com.ec); corredor Sierra–Costa inferido por la E20 y la E25, enlazando sus principales centros urbanos."
+  },
+  {
+    "nombre": "Troncal septentrional Quito–Tulcán",
+    "operador": "CNT EP",
+    "pais": "EC",
+    "ciudades": ["Quito", "Cayambe", "Otavalo", "Ibarra", "Tulcán"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de CNT EP (cnt.com.ec); itinerario probable por el corredor de la Panamericana/E35. Se representa únicamente el tramo ecuatoriano, sin atribuirle una prolongación internacional no comprobada."
+  },
+  {
+    "nombre": "Troncal oriental San Salvador–La Unión",
+    "operador": "Claro El Salvador",
+    "pais": "SV",
+    "ciudades": ["San Salvador", "Cojutepeque", "San Vicente", "San Miguel", "La Unión"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de Claro El Salvador (claro.com.sv); secuencia probable por el corredor de la CA-1 y la conexión San Miguel–La Unión. San Vicente representa el nodo urbano y su acceso, no necesariamente el paso del cable por el centro."
+  },
+  {
+    "nombre": "Troncal noroccidental San Salvador–Metapán",
+    "operador": "Claro El Salvador",
+    "pais": "SV",
+    "ciudades": ["San Salvador", "Santa Ana", "Metapán"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de Claro El Salvador (claro.com.sv); corredor de más de 100 km inferido por la CA-1 y la CA-12, sin identificar una prolongación fronteriza concreta."
+  },
+  {
+    "nombre": "Troncal Guatemala–costa del Pacífico–México",
+    "operador": "UFINET",
+    "pais": "GT",
+    "ciudades": ["Guatemala City", "Escuintla", "Mazatenango", "Retalhuleu", "Coatepeque", "Tecún Umán", "Ciudad Hidalgo"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red terrestre regional de UFINET y su presencia en Guatemala y México (ufinet.com); secuencia probable por los corredores CA-9 y CA-2 y el cruce Tecún Umán–Ciudad Hidalgo. El trazado físico y los accesos urbanos no se presentan como publicados."
+  },
+  {
+    "nombre": "Troncal Guatemala–Puerto Barrios",
+    "operador": "Claro Guatemala",
+    "pais": "GT",
+    "ciudades": ["Guatemala City", "Guastatoya", "Río Hondo", "Gualán", "Morales", "Puerto Barrios"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de Claro Guatemala/TELGUA (claro.com.gt); itinerario principal inferido por el corredor atlántico CA-9. Los nombres representan nodos urbanos del corredor, incluidos sus accesos."
+  },
+  {
+    "nombre": "Troncal Port-au-Prince–Cap-Haïtien",
+    "operador": "Digicel Haiti",
+    "pais": "HT",
+    "ciudades": ["Port-au-Prince", "Saint-Marc", "Gonaïves", "Cap-Haïtien"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de Digicel Haiti (digicelgroup.com); corredor septentrional inferido por la RN1. El trazado interurbano exacto no se presenta como publicado y la disponibilidad instantánea de cada segmento no está verificada."
+  },
+  {
+    "nombre": "Troncal central Tegucigalpa–Puerto Cortés",
+    "operador": "Hondutel
