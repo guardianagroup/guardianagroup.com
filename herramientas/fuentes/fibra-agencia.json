@@ -162,6 +162,73 @@
 ]
 },
 {
+"n": "Red troncal nacional de fibra óptica de ETECSA",
+"o": "Empresa de Telecomunicaciones de Cuba (ETECSA)",
+"cc": "CU",
+"l": [
+[
+-83.7,
+22.42
+],
+[
+-83.06,
+22.72
+],
+[
+-82.76,
+22.81
+],
+[
+-82.38,
+23.13
+],
+[
+-81.58,
+23.04
+],
+[
+-79.97,
+22.41
+],
+[
+-79.65,
+22.31
+],
+[
+-79.44,
+21.93
+],
+[
+-78.76,
+21.84
+],
+[
+-77.92,
+21.38
+],
+[
+-76.95,
+20.96
+],
+[
+-76.26,
+20.89
+],
+[
+-76.64,
+20.37
+],
+[
+-75.82,
+20.02
+],
+[
+-75.21,
+20.14
+]
+]
+},
+{
 "n": "Red troncal terrestre de Claro Puerto Rico",
 "o": "Claro Puerto Rico (América Móvil)",
 "cc": "PR",
@@ -295,65 +362,6 @@
 ]
 },
 {
-"n": "Red troncal nacional de fibra óptica de ETECSA",
-"o": "Empresa de Telecomunicaciones de Cuba (ETECSA)",
-"cc": "CU",
-"l": [
-[
--83.7,
-22.42
-],
-[
--82.76,
-22.81
-],
-[
--82.38,
-23.13
-],
-[
--81.58,
-23.04
-],
-[
--79.97,
-22.41
-],
-[
--79.44,
-21.93
-],
-[
--78.76,
-21.84
-],
-[
--77.92,
-21.38
-],
-[
--76.95,
-20.96
-],
-[
--76.26,
-20.89
-],
-[
--76.64,
-20.37
-],
-[
--75.82,
-20.02
-],
-[
--75.21,
-20.14
-]
-]
-},
-{
 "n": "TEA NEXT",
 "o": "Atlas / Rostelecom",
 "cc": "RU",
@@ -413,61 +421,6 @@
 ]
 },
 {
-"n": "Backbone nacional norte-sur e interconexión con Níger",
-"o": "SBIN / Niger Telecoms",
-"cc": "BJ",
-"l": [
-[
-2.42,
-6.37
-],
-[
-2.36,
-6.45
-],
-[
-2.15,
-6.67
-],
-[
-2.07,
-7.18
-],
-[
-2.18,
-7.75
-],
-[
-2.49,
-8.03
-],
-[
-2.6,
-8.89
-],
-[
-2.63,
-9.34
-],
-[
-2.66,
-10.23
-],
-[
-2.94,
-11.13
-],
-[
-3.38,
-11.87
-],
-[
-3.45,
-11.88
-]
-]
-},
-{
 "n": "Rede Ipê",
 "o": "RNP (Rede Nacional de Ensino e Pesquisa)",
 "cc": "BR",
@@ -523,6 +476,61 @@
 ]
 },
 {
+"n": "Telecom Egypt Nile Valley Terrestrial Backbone",
+"o": "Telecom Egypt",
+"cc": "EG",
+"l": [
+[
+29.92,
+31.2
+],
+[
+30.47,
+31.03
+],
+[
+31.0,
+30.79
+],
+[
+31.18,
+30.46
+],
+[
+31.25,
+30.06
+],
+[
+31.1,
+29.07
+],
+[
+30.76,
+28.09
+],
+[
+31.184,
+27.181
+],
+[
+31.69,
+26.56
+],
+[
+32.727,
+26.164
+],
+[
+32.64,
+25.7
+],
+[
+32.9,
+24.09
+]
+]
+},
+{
 "n": "Red troncal de GO — corredor de la isla de Malta",
 "o": "GO plc",
 "cc": "MT",
@@ -570,57 +578,6 @@
 [
 14.543,
 35.842
-]
-]
-},
-{
-"n": "Kazakhtelecom National Backbone",
-"o": "Kazakhtelecom",
-"cc": "KZ",
-"l": [
-[
-51.17,
-43.66
-],
-[
-51.88,
-47.1
-],
-[
-51.43,
-51.25
-],
-[
-57.21,
-50.28
-],
-[
-65.51,
-44.85
-],
-[
-69.6,
-42.31
-],
-[
-71.37,
-42.9
-],
-[
-76.91,
-43.25
-],
-[
-78.37,
-45.02
-],
-[
-73.1,
-49.8
-],
-[
-71.45,
-51.18
 ]
 ]
 },
@@ -871,6 +828,25 @@
 ]
 },
 {
+"n": "Rostelecom national transcontinental backbone",
+"o": "Rostelecom",
+"cc": "RU",
+"l": [
+[
+60.62,
+56.86
+],
+[
+73.37,
+54.99
+],
+[
+82.93,
+55.02
+]
+]
+},
+{
 "n": "EurasiaHighway",
 "o": "TransTeleCom (TTK)",
 "cc": "RU",
@@ -882,10 +858,6 @@
 [
 73.37,
 54.99
-],
-[
-82.93,
-55.02
 ]
 ]
 },
@@ -972,6 +944,135 @@
 [
 -88.6,
 15.73
+]
+]
+},
+{
+"n": "Backbone nacional norte-sur e interconexión con Níger",
+"o": "SBIN / Niger Telecoms",
+"cc": "BJ",
+"l": [
+[
+2.42,
+6.37
+],
+[
+2.07,
+7.18
+],
+[
+2.18,
+7.75
+],
+[
+2.49,
+8.03
+],
+[
+2.6,
+8.89
+],
+[
+2.63,
+9.34
+],
+[
+2.94,
+11.13
+],
+[
+3.38,
+11.87
+],
+[
+3.45,
+11.88
+]
+]
+},
+{
+"n": "BoFiNet North-East Corridor",
+"o": "BoFiNet",
+"cc": "BW",
+"l": [
+[
+25.91,
+-24.65
+],
+[
+26.15,
+-24.42
+],
+[
+26.81,
+-23.1
+],
+[
+27.13,
+-22.55
+],
+[
+27.46,
+-21.44
+],
+[
+27.51,
+-21.17
+],
+[
+26.183,
+-20.217
+],
+[
+25.627,
+-18.528
+],
+[
+25.16,
+-17.802
+]
+]
+},
+{
+"n": "Fibra N'Djamena–Adré (frontera de Sudán)",
+"o": "Sudachad",
+"cc": "TD",
+"l": [
+[
+15.04,
+12.11
+],
+[
+15.44,
+12.48
+],
+[
+17.06,
+12.38
+],
+[
+18.21,
+11.98
+],
+[
+18.69,
+12.19
+],
+[
+19.61,
+12.35
+],
+[
+19.697,
+13.295
+],
+[
+20.83,
+13.83
+],
+[
+22.2,
+13.47
 ]
 ]
 },
@@ -1073,6 +1174,49 @@
 [
 -14.214,
 13.31
+]
+]
+},
+{
+"n": "Kazakhtelecom National Backbone",
+"o": "Kazakhtelecom",
+"cc": "KZ",
+"l": [
+[
+51.17,
+43.66
+],
+[
+51.88,
+47.1
+],
+[
+51.43,
+51.25
+],
+[
+57.21,
+50.28
+],
+[
+65.51,
+44.85
+],
+[
+69.6,
+42.31
+],
+[
+71.37,
+42.9
+],
+[
+76.91,
+43.25
+],
+[
+71.45,
+51.18
 ]
 ]
 },
@@ -1276,6 +1420,29 @@
 ]
 },
 {
+"n": "Troncal norte-sur: Cotonou–Malanville",
+"o": "Société Béninoise d’Infrastructures Numériques (SBIN)",
+"cc": "BJ",
+"l": [
+[
+2.42,
+6.37
+],
+[
+2.36,
+6.45
+],
+[
+2.15,
+6.67
+],
+[
+2.07,
+7.18
+]
+]
+},
+{
 "n": "TSTT - Troncal nacional de Trinidad",
 "o": "TSTT",
 "cc": "TT",
@@ -1385,6 +1552,29 @@
 [
 71.55,
 37.49
+]
+]
+},
+{
+"n": "TE North-South Red Sea Terrestrial Corridor",
+"o": "Telecom Egypt",
+"cc": "EG",
+"l": [
+[
+31.25,
+30.06
+],
+[
+32.53,
+29.97
+],
+[
+32.65,
+29.11
+],
+[
+33.08,
+28.36
 ]
 ]
 },
@@ -1720,6 +1910,41 @@
 ]
 },
 {
+"n": "BTCL Dhaka–Sylhet trunk",
+"o": "Bangladesh Telecommunications Company Limited (BTCL)",
+"cc": "BD",
+"l": [
+[
+90.41,
+23.71
+],
+[
+90.72,
+23.92
+],
+[
+90.98,
+24.05
+],
+[
+91.11,
+23.97
+],
+[
+91.41,
+24.38
+],
+[
+91.771,
+24.489
+],
+[
+91.87,
+24.9
+]
+]
+},
+{
 "n": "Internexa Chile (Interchile Power Grid Backbone)",
 "o": "Internexa / ISA Interchile",
 "cc": "CL",
@@ -1948,6 +2173,64 @@
 ]
 },
 {
+"n": "N'Djamena–Moundou–Doba",
+"o": "SOTEL Tchad",
+"cc": "TD",
+"l": [
+[
+15.04,
+12.11
+],
+[
+15.55,
+10.92
+],
+[
+15.37,
+10.28
+],
+[
+15.81,
+9.31
+],
+[
+16.08,
+8.57
+],
+[
+16.85,
+8.66
+]
+]
+},
+{
+"n": "Troncal continental Bata–Mongomo",
+"o": "GITGE",
+"cc": "GQ",
+"l": [
+[
+9.951,
+1.883
+],
+[
+10.471,
+2.016
+],
+[
+10.613,
+2.136
+],
+[
+11.33,
+2.15
+],
+[
+11.313,
+1.627
+]
+]
+},
+{
 "n": "National Knowledge Network — Corredor norte-oeste y sur",
 "o": "National Informatics Centre / NKN",
 "cc": "IN",
@@ -1975,37 +2258,6 @@
 [
 78.46,
 17.38
-]
-]
-},
-{
-"n": "Dorsal Sur N'Djamena–Doba",
-"o": "Sotel Tchad",
-"cc": "TD",
-"l": [
-[
-15.04,
-12.11
-],
-[
-15.55,
-10.92
-],
-[
-15.37,
-10.28
-],
-[
-15.81,
-9.31
-],
-[
-16.08,
-8.57
-],
-[
-16.85,
-8.66
 ]
 ]
 },
@@ -2304,33 +2556,6 @@
 ]
 },
 {
-"n": "RNFO — corredor continental nororiental",
-"o": "GITGE",
-"cc": "GQ",
-"l": [
-[
-9.951,
-1.883
-],
-[
-10.471,
-2.016
-],
-[
-10.613,
-2.136
-],
-[
-11.33,
-2.15
-],
-[
-11.313,
-1.627
-]
-]
-},
-{
 "n": "MTL National Fibre Network – Anillo Sur Occidental",
 "o": "MTL",
 "cc": "MW",
@@ -2362,33 +2587,79 @@
 ]
 },
 {
-"n": "TWAREN – fibra propia entre los nodos troncales Taipei–Hsinchu–Taichung–Tainan",
-"o": "TWAREN (NCHC)",
-"cc": "TW",
+"n": "Projet de Couverture Nationale - Pointe-Noire to Ouesso",
+"o": "Congo Telecom",
+"cc": "CG",
 "l": [
 [
-121.53,
-25.05
+15.28,
+-4.27
 ],
 [
-121.3,
-24.99
+15.86,
+-1.88
 ],
 [
-120.97,
-24.8
+15.97,
+-1.17
 ],
 [
-120.68,
-24.15
+15.9,
+-0.48
 ],
 [
-120.449,
-23.479
+15.63,
+0.01
 ],
 [
-120.21,
-22.99
+16.05,
+1.61
+]
+]
+},
+{
+"n": "ENTEL dorsal oeste–este Desaguadero–Puerto Quijarro",
+"o": "ENTEL Bolivia",
+"cc": "BO",
+"l": [
+[
+-69.04,
+-16.57
+],
+[
+-68.15,
+-16.5
+],
+[
+-67.09,
+-17.97
+],
+[
+-66.16,
+-17.38
+],
+[
+-63.18,
+-17.79
+],
+[
+-57.77,
+-17.78
+]
+]
+},
+{
+"n": "RDNFO – corredor norte",
+"o": "PRONATEL / Estado peruano",
+"cc": "PE",
+"l": [
+[
+-80.66,
+-5.18
+],
+[
+-80.44,
+-3.56
 ]
 ]
 },
@@ -2427,6 +2698,60 @@
 [
 82.61,
 49.97
+]
+]
+},
+{
+"n": "Axe Central Nord-Sud (Abidjan - Bouaké - Frontière Burkina Faso)",
+"o": "Orange Côte d'Ivoire",
+"cc": "CI",
+"l": [
+[
+-5.28,
+6.82
+],
+[
+-5.22,
+7.16
+],
+[
+-5.03,
+7.69
+],
+[
+-5.1,
+8.14
+],
+[
+-5.29,
+8.66
+],
+[
+-5.16,
+9.07
+]
+]
+},
+{
+"n": "Axe Nord-Mali (Abidjan - Korhogo - Frontière Mali)",
+"o": "Orange Côte d'Ivoire",
+"cc": "CI",
+"l": [
+[
+-4.0,
+5.35
+],
+[
+-4.76,
+5.86
+],
+[
+-5.02,
+6.56
+],
+[
+-5.28,
+6.82
 ]
 ]
 },
@@ -2774,6 +3099,79 @@
 ]
 },
 {
+"n": "Troncal occidental: Ouagadougou–Niangoloko",
+"o": "ONATEL / Moov Africa Burkina Faso",
+"cc": "BF",
+"l": [
+[
+-2.93,
+11.75
+],
+[
+-3.52,
+11.5
+],
+[
+-4.29,
+11.18
+],
+[
+-4.75,
+10.64
+],
+[
+-4.92,
+10.28
+]
+]
+},
+{
+"n": "Bangui–Bouar–interconexión con Camerún",
+"o": "Red nacional CAB de la República Centroafricana",
+"cc": "CF",
+"l": [
+[
+18.55,
+4.36
+],
+[
+18.13,
+4.8
+],
+[
+17.65,
+5.27
+],
+[
+17.1,
+5.32
+],
+[
+15.97,
+5.67
+]
+]
+},
+{
+"n": "Troncal occidental y meridional de Eswatini",
+"o": "Eswatini Posts and Telecommunications Corporation (EPTC)",
+"cc": "SZ",
+"l": [
+[
+31.38,
+-26.5
+],
+[
+31.326,
+-26.98
+],
+[
+31.198,
+-27.112
+]
+]
+},
+{
 "n": "Claro Puerto Rico - Troncal costera sur",
 "o": "Claro Puerto Rico",
 "cc": "PR",
@@ -3015,6 +3413,83 @@
 ]
 },
 {
+"n": "ECOWAN North Bank / Banjul-Basse corridor",
+"o": "Gamtel / ECOWAN",
+"cc": "GM",
+"l": [
+[
+-16.546,
+13.483
+],
+[
+-16.089,
+13.49
+],
+[
+-15.6,
+13.57
+],
+[
+-14.764,
+13.54
+]
+]
+},
+{
+"n": "BoFiNet Western-North-West Corridor",
+"o": "BoFiNet",
+"cc": "BW",
+"l": [
+[
+25.91,
+-24.65
+],
+[
+25.33,
+-24.97
+],
+[
+24.73,
+-24.6
+],
+[
+22.788,
+-23.675
+],
+[
+21.65,
+-21.7
+]
+]
+},
+{
+"n": "RDNFO – corredor centro-sur andino",
+"o": "PRONATEL / Estado peruano",
+"cc": "PE",
+"l": [
+[
+-75.21,
+-12.07
+],
+[
+-74.97,
+-12.79
+],
+[
+-74.22,
+-13.16
+],
+[
+-72.88,
+-13.63
+],
+[
+-71.97,
+-13.53
+]
+]
+},
+{
 "n": "TWAREN – anillo de la isla por Yilan y Hualien",
 "o": "TWAREN (NCHC)",
 "cc": "TW",
@@ -3038,40 +3513,6 @@
 [
 120.21,
 22.99
-]
-]
-},
-{
-"n": "Somaliland Terrestrial Fiber Optic Backbone - Berbera - Eastern Corridor",
-"o": "Somcable",
-"cc": "SO",
-"l": [
-[
-45.01,
-10.44
-],
-[
-44.06,
-9.56
-]
-]
-},
-{
-"n": "Somaliland Terrestrial Fiber Optic Backbone - Berbera - Eastern Corridor",
-"o": "Somcable",
-"cc": "SO",
-"l": [
-[
-45.01,
-10.44
-],
-[
-45.53,
-9.52
-],
-[
-47.36,
-8.477
 ]
 ]
 },
@@ -3249,29 +3690,6 @@
 ]
 },
 {
-"n": "ENTEL — Red Nacional DWDM, eje central",
-"o": "ENTEL Bolivia",
-"cc": "BO",
-"l": [
-[
--68.15,
--16.5
-],
-[
--67.09,
--17.97
-],
-[
--66.16,
--17.38
-],
-[
--63.18,
--17.79
-]
-]
-},
-{
 "n": "National Transmission Network – Highlands Terrestrial Fibre Backbone",
 "o": "PNG DataCo",
 "cc": "PG",
@@ -3310,6 +3728,29 @@
 [
 124.4,
 40.1
+]
+]
+},
+{
+"n": "SomCable western Somaliland terrestrial backbone",
+"o": "SomCable",
+"cc": "SO",
+"l": [
+[
+43.18,
+9.94
+],
+[
+43.62,
+9.7
+],
+[
+44.06,
+9.56
+],
+[
+45.01,
+10.44
 ]
 ]
 },
@@ -3498,6 +3939,117 @@
 ]
 },
 {
+"n": "Trans-Saharan Fibre Backbone - Algeria southbound spine",
+"o": "Algérie Télécom / Government of Algeria",
+"cc": "DZ",
+"l": [
+[
+3.67,
+32.49
+],
+[
+2.884,
+30.576
+],
+[
+2.48,
+27.2
+],
+[
+5.523,
+22.785
+]
+]
+},
+{
+"n": "Telecom Egypt Port Said-Cairo-Suez terrestrial crossing",
+"o": "Telecom Egypt",
+"cc": "EG",
+"l": [
+[
+32.3,
+31.27
+],
+[
+32.27,
+30.6
+],
+[
+31.25,
+30.06
+]
+]
+},
+{
+"n": "Kazakhtelecom Almaty–Astana core link",
+"o": "Kazakhtelecom",
+"cc": "KZ",
+"l": [
+[
+76.91,
+43.25
+],
+[
+78.37,
+45.02
+],
+[
+73.1,
+49.8
+],
+[
+71.45,
+51.18
+]
+]
+},
+{
+"n": "TWAREN north-south core backbone",
+"o": "National Center for High-performance Computing (NCHC) / TWAREN",
+"cc": "TW",
+"l": [
+[
+121.53,
+25.05
+],
+[
+120.97,
+24.8
+],
+[
+120.68,
+24.15
+],
+[
+120.21,
+22.99
+]
+]
+},
+{
+"n": "e& UAE Abu Dhabi–Dubai–Fujairah terrestrial backbone",
+"o": "e& UAE / Etisalat",
+"cc": "AE",
+"l": [
+[
+54.4,
+24.45
+],
+[
+55.31,
+25.08
+],
+[
+55.41,
+25.33
+],
+[
+56.34,
+25.12
+]
+]
+},
+{
 "n": "Red Troncal Nacional (RNFO) – nodos Oyala–Evinayong–Bicurga",
 "o": "GITGE",
 "cc": "GQ",
@@ -3643,6 +4195,25 @@
 ]
 },
 {
+"n": "Somaliland Terrestrial Fiber Optic Backbone - Berbera - Eastern Corridor",
+"o": "Somcable",
+"cc": "SO",
+"l": [
+[
+44.06,
+9.56
+],
+[
+45.53,
+9.52
+],
+[
+47.36,
+8.477
+]
+]
+},
+{
 "n": "EPTC National Fibre Optic Backbone - Ruta Oeste-Sur",
 "o": "EPTC",
 "cc": "SZ",
@@ -3667,12 +4238,50 @@
 "cc": "SO",
 "l": [
 [
-43.18,
-9.94
+45.01,
+10.44
 ],
 [
-44.06,
-9.56
+45.53,
+9.52
+]
+]
+},
+{
+"n": "Troncal sudoriental: Ouagadougou–Bitou",
+"o": "ONATEL / Moov Africa Burkina Faso",
+"cc": "BF",
+"l": [
+[
+-1.53,
+12.37
+],
+[
+-0.615,
+12.249
+],
+[
+-0.35,
+12.18
+]
+]
+},
+{
+"n": "Troncal meridional: Bujumbura–Gitega",
+"o": "Burundi Backbone System (BBS)",
+"cc": "BI",
+"l": [
+[
+29.36,
+-3.38
+],
+[
+29.44,
+-3.97
+],
+[
+29.804,
+-4.135
 ]
 ]
 },
@@ -3745,6 +4354,25 @@
 [
 -90.51,
 14.64
+]
+]
+},
+{
+"n": "Golis Puntland backbone",
+"o": "Golis Telecom",
+"cc": "SO",
+"l": [
+[
+49.18,
+11.28
+],
+[
+48.483,
+8.402
+],
+[
+47.431,
+6.77
 ]
 ]
 },
@@ -3878,40 +4506,6 @@
 ]
 },
 {
-"n": "Djibouti Telecom — interconexión terrestre con Etiopía por Ali Sabieh",
-"o": "Djibouti Telecom",
-"cc": "DJ",
-"l": [
-[
-42.85,
-11.53
-],
-[
-42.712,
-11.156
-]
-]
-},
-{
-"n": "Somcable — corredor occidental de Somaliland",
-"o": "Somcable",
-"cc": "SO",
-"l": [
-[
-43.18,
-9.94
-],
-[
-43.62,
-9.7
-],
-[
-44.06,
-9.56
-]
-]
-},
-{
 "n": "HONDUTEL – Ramal Tegucigalpa–Choluteca",
 "o": "Hondutel",
 "cc": "HN",
@@ -3965,6 +4559,36 @@
 ]
 },
 {
+"n": "Sierra Leone backbone to Guinea border",
+"o": "Leonecom / National Fibre Backbone Network",
+"cc": "SL",
+"l": [
+[
+-13.24,
+8.49
+],
+[
+-12.53,
+8.68
+]
+]
+},
+{
+"n": "BTCL Dhaka–Chattogram trunk",
+"o": "Bangladesh Telecommunications Company Limited (BTCL)",
+"cc": "BD",
+"l": [
+[
+91.4,
+23.01
+],
+[
+91.83,
+22.34
+]
+]
+},
+{
 "n": "TEA (Transit Europe-Asia)",
 "o": "Rostelecom",
 "cc": "RU",
@@ -4003,21 +4627,17 @@
 ]
 },
 {
-"n": "TE North-South Red Sea Terrestrial Corridor",
-"o": "Telecom Egypt",
-"cc": "EG",
+"n": "Rwanda National Fiber Optic Backbone",
+"o": "Korea Telecom Rwanda Networks (KtRN)",
+"cc": "RW",
 "l": [
 [
-32.53,
-29.97
+30.06,
+-1.95
 ],
 [
-32.65,
-29.11
-],
-[
-33.08,
-28.36
+29.71,
+-2.02
 ]
 ]
 },
@@ -4139,6 +4759,66 @@
 ]
 },
 {
+"n": "Troncal centro-noroeste: Bohicon–Natitingou",
+"o": "Société Béninoise d’Infrastructures Numériques (SBIN)",
+"cc": "BJ",
+"l": [
+[
+1.67,
+9.71
+],
+[
+1.38,
+10.3
+]
+]
+},
+{
+"n": "Troncal septentrional y salida a Tanzania",
+"o": "Burundi Backbone System (BBS) / Tanzania Telecommunications Corporation (TTCL)",
+"cc": "BI",
+"l": [
+[
+29.63,
+-2.92
+],
+[
+29.83,
+-2.91
+]
+]
+},
+{
+"n": "Pointe-Noire–Brazzaville",
+"o": "Congo Telecom",
+"cc": "CG",
+"l": [
+[
+11.86,
+-4.78
+],
+[
+12.67,
+-4.2
+]
+]
+},
+{
+"n": "Djibouti–Ali Sabieh–frontera etíope",
+"o": "Djibouti Telecom / Ethio telecom",
+"cc": "DJ",
+"l": [
+[
+43.15,
+11.59
+],
+[
+42.712,
+11.156
+]
+]
+},
+{
 "n": "CNT EP — Red Troncal del Pacífico",
 "o": "Corporación Nacional de Telecomunicaciones (CNT EP)",
 "cc": "EC",
@@ -4214,6 +4894,21 @@
 ]
 },
 {
+"n": "Homs-Palmyra-Deir ez-Zor optical backbone",
+"o": "Syrian Telecommunications Company",
+"cc": "SY",
+"l": [
+[
+38.284,
+34.562
+],
+[
+40.14,
+35.34
+]
+]
+},
+{
 "n": "Enlace internacional de fibra Myanmar–India",
 "o": "MPT",
 "cc": "MM",
@@ -4255,21 +4950,6 @@
 [
 62.2,
 34.35
-]
-]
-},
-{
-"n": "ECOWAN — troncal de la orilla norte",
-"o": "Gamtel",
-"cc": "GM",
-"l": [
-[
--16.089,
-13.49
-],
-[
--15.6,
-13.57
 ]
 ]
 },
@@ -4426,6 +5106,36 @@
 {
 "n": "",
 "o": "",
+"cc": "PE",
+"l": [
+[
+-77.03,
+-12.04
+],
+[
+-75.21,
+-12.07
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "PE",
+"l": [
+[
+-71.97,
+-13.53
+],
+[
+-71.54,
+-16.4
+]
+]
+},
+{
+"n": "",
+"o": "",
 "cc": "NP",
 "l": [
 [
@@ -4508,22 +5218,6 @@
 "o": "",
 "cc": "CF",
 "l": [
-[
-18.55,
-4.36
-],
-[
-18.13,
-4.8
-],
-[
-17.65,
-5.27
-],
-[
-17.1,
-5.32
-],
 [
 15.97,
 5.67
@@ -4665,22 +5359,6 @@
 [
 -2.93,
 11.75
-],
-[
--3.52,
-11.5
-],
-[
--4.29,
-11.18
-],
-[
--4.75,
-10.64
-],
-[
--4.92,
-10.28
 ]
 ]
 },
@@ -5040,21 +5718,6 @@
 {
 "n": "",
 "o": "",
-"cc": "PE",
-"l": [
-[
--77.03,
--12.04
-],
-[
--75.21,
--12.07
-]
-]
-},
-{
-"n": "",
-"o": "",
 "cc": "TL",
 "l": [
 [
@@ -5133,6 +5796,21 @@
 [
 -75.67,
 4.54
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "CI",
+"l": [
+[
+-5.16,
+9.07
+],
+[
+-5.63,
+9.46
 ]
 ]
 },
@@ -5417,29 +6095,6 @@
 {
 "n": "",
 "o": "",
-"cc": "CI",
-"l": [
-[
--4.0,
-5.35
-],
-[
--4.21,
-5.93
-],
-[
--4.71,
-6.65
-],
-[
--5.28,
-6.82
-]
-]
-},
-{
-"n": "",
-"o": "",
 "cc": "SA",
 "l": [
 [
@@ -5580,6 +6235,25 @@
 {
 "n": "",
 "o": "",
+"cc": "CO",
+"l": [
+[
+-74.08,
+4.61
+],
+[
+-73.36,
+5.54
+],
+[
+-73.12,
+7.12
+]
+]
+},
+{
+"n": "",
+"o": "",
 "cc": "BR",
 "l": [
 [
@@ -5646,6 +6320,21 @@
 [
 125.61,
 7.07
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "CO",
+"l": [
+[
+-74.08,
+4.61
+],
+[
+-73.63,
+4.13
 ]
 ]
 },
@@ -5720,6 +6409,25 @@
 {
 "n": "",
 "o": "",
+"cc": "UY",
+"l": [
+[
+-56.19,
+-34.9
+],
+[
+-55.758,
+-34.772
+],
+[
+-54.95,
+-34.9
+]
+]
+},
+{
+"n": "",
+"o": "",
 "cc": "PY",
 "l": [
 [
@@ -5739,19 +6447,30 @@
 {
 "n": "",
 "o": "",
+"cc": "BF",
+"l": [
+[
+-0.35,
+12.18
+],
+[
+-0.37,
+11.78
+]
+]
+},
+{
+"n": "",
+"o": "",
 "cc": "CI",
 "l": [
 [
--5.03,
-7.69
+-5.36,
+5.84
 ],
 [
--5.19,
-9.59
-],
-[
--5.63,
-9.46
+-5.95,
+6.13
 ]
 ]
 },
@@ -5818,21 +6537,6 @@
 {
 "n": "",
 "o": "",
-"cc": "AE",
-"l": [
-[
-55.31,
-25.08
-],
-[
-54.4,
-24.45
-]
-]
-},
-{
-"n": "",
-"o": "",
 "cc": "LR",
 "l": [
 [
@@ -5842,21 +6546,6 @@
 [
 -10.05,
 5.88
-]
-]
-},
-{
-"n": "",
-"o": "",
-"cc": "RW",
-"l": [
-[
-29.71,
--2.02
-],
-[
-30.06,
--1.95
 ]
 ]
 },
@@ -5878,15 +6567,15 @@
 {
 "n": "",
 "o": "",
-"cc": "PE",
+"cc": "BT",
 "l": [
 [
--71.97,
--13.53
+89.64,
+27.47
 ],
 [
--71.54,
--16.4
+90.488,
+26.868
 ]
 ]
 },
