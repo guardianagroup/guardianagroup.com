@@ -1,0 +1,9 @@
+Eres analista de infraestructura de telecomunicaciones. Otras voces de la agencia proponen estas rutas de fibra óptica TERRESTRE (no submarina) en servicio. Devuelve SOLO las que respaldes, con las mismas localidades y en el mismo orden (puedes recortar una ruta a los tramos que respaldes). Si respaldas que el operador tiene fibra en servicio entre esas localidades aunque el trazado exacto no esté publicado, dilo en "fuente" ("aproximado: …"). No incluyas lo que esté en proyecto o vaya por radioenlace. No uses submarinecablemap.com, TeleGeography ni PeeringDB. Responde SOLO con un array JSON válido, sin texto antes ni después (vacío si no respaldas ninguna), con objetos así:
+{"nombre": "...", "operador": "...", "pais": "...", "ciudades": ["Localidad A", "Localidad B"], "estado": "en servicio", "fuente": "publicado en … / aproximado: …"}
+Rutas:
+1. BB · Digicel Barbados · Carlton – Speightstown
+2. BB · Digicel Barbados · Oistins – Six Roads
+3. FO · P/F Net · Strendur – Morskranes – Kolbeinagjógv
+4. TO · Tonga Communications Corporation · Fua'amotu – Vaini – Nuku'alofa – Kolovai
+5. CW · Digicel Curaçao / UTS · Westpunt – Soto – Willemstad – Nieuwpoort
+6. CW · Flow / UTS · Blue Bay – Boka Sami

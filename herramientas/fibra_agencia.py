@@ -101,6 +101,17 @@ SITIOS = {
     # from Wikidata (P625), where Nominatim had no settlement: Addu's districts, two towns of Curaçao and Catalan Bay
     ('MV', 'hithadhoo'): (73.089, -0.603), ('MV', 'feydhoo'): (73.135, -0.682),
     ('CW', 'janthiel'): (-68.873, 12.079), ('CW', 'sintmichiel'): (-68.996, 12.142), ('GI', 'catalanbay'): (-5.341, 36.139),
+    ('FM', 'nimar'): (138.120, 9.519),  # GeoNames «Nimaar», Weloy (Yap), from its search page
+    # the villages of Streymoy and Eysturoy (Faroe Islands), from Wikidata (P625); keys as pliega() folds them (ø, ð drop out)
+    ('FO', 'tjrnuvik'): (-7.147, 62.290), ('FO', 'haldarsvik'): (-7.092, 62.276), ('FO', 'langasandur'): (-7.054, 62.237),
+    ('FO', 'streymnes'): (-7.031, 62.191), ('FO', 'hvalvik'): (-7.035, 62.187), ('FO', 'hosvik'): (-6.940, 62.155),
+    ('FO', 'kollafjrur'): (-6.906, 62.118), ('FO', 'kaldbaksbotnur'): (-6.912, 62.066), ('FO', 'hoyvik'): (-6.759, 62.026),
+    ('FO', 'leirvik'): (-6.706, 62.211), ('FO', 'norragta'): (-6.741, 62.201), ('FO', 'syrugta'): (-6.756, 62.186),
+    ('FO', 'sldarfjrur'): (-6.753, 62.159), ('FO', 'glyvrar'): (-6.724, 62.131), ('FO', 'saltangara'): (-6.717, 62.117),
+    ('FO', 'runavik'): (-6.719, 62.109), ('FO', 'toftir'): (-6.737, 62.093),
+    # Western Sahara's towns on the N1 (Wikidata); Tah is the first town across the northern line, in Tarfaya province
+    ('EH', 'daoura'): (-12.991, 27.464), ('EH', 'elargoub'): (-15.858, 23.611), ('EH', 'birgandouz'): (-16.469, 21.616),
+    ('EH', 'guerguerat'): (-16.959, 21.426), ('EH', 'tah'): (-12.956, 27.672),
 }
 
 PARECIDO = 1.35  # the other voice's path between two cities may be this much longer than the straight line (+ 60 km)

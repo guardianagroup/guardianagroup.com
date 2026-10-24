@@ -6053,6 +6053,29 @@
 ]
 },
 {
+"n": "Corredor terrestre de Streymoy: Tjørnuvík–Tórshavn",
+"o": "NET / Føroya Tele",
+"cc": "FO",
+"l": [
+[
+-7.054,
+62.237
+],
+[
+-7.031,
+62.191
+],
+[
+-7.035,
+62.187
+],
+[
+-6.94,
+62.155
+]
+]
+},
+{
 "n": "ENTEL — Red Nacional DWDM, eje La Paz–Beni–Santa Cruz",
 "o": "ENTEL Bolivia",
 "cc": "BO",
@@ -6416,6 +6439,29 @@
 [
 -16.201,
 12.402
+]
+]
+},
+{
+"n": "Red terrestre de fibra óptica NET – Kollafjørður y Tórshavn",
+"o": "NET / Føroya Tele",
+"cc": "FO",
+"l": [
+[
+-6.906,
+62.118
+],
+[
+-6.912,
+62.066
+],
+[
+-6.759,
+62.026
+],
+[
+-6.77,
+62.01
 ]
 ]
 },
@@ -7003,6 +7049,44 @@
 [
 120.31,
 22.62
+]
+]
+},
+{
+"n": "Corredor terrestre oriental de Eysturoy: Leirvík–Toftir",
+"o": "NET / Føroya Tele",
+"cc": "FO",
+"l": [
+[
+-6.706,
+62.211
+],
+[
+-6.741,
+62.201
+],
+[
+-6.756,
+62.186
+]
+]
+},
+{
+"n": "Corredor terrestre oriental de Eysturoy: Leirvík–Toftir",
+"o": "NET / Føroya Tele",
+"cc": "FO",
+"l": [
+[
+-6.717,
+62.117
+],
+[
+-6.719,
+62.109
+],
+[
+-6.737,
+62.093
 ]
 ]
 },
@@ -7694,6 +7778,21 @@
 [
 19.51,
 42.07
+]
+]
+},
+{
+"n": "Red terrestre de acceso Gibraltar–Catalan Bay",
+"o": "Gibtelecom",
+"cc": "GI",
+"l": [
+[
+-5.35,
+36.14
+],
+[
+-5.341,
+36.139
 ]
 ]
 },
@@ -11407,6 +11506,21 @@
 [
 175.28,
 -37.78
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "FM",
+"l": [
+[
+138.12,
+9.519
+],
+[
+138.122,
+9.516
 ]
 ]
 },

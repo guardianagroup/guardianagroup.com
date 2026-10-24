@@ -1,0 +1,57 @@
+{
+ "nota": "Ronda 26b (24 Oct 2026): los 36 cables submarinos que nombra una sola voz, para que Astra 6 (y Claude, con fuentes oficiales) den la segunda voz. Lotes de 5.",
+ "lotes": [
+  [
+   "Sorsogon-Samar Submarine Fiber Optical Interconnection Project (SSSFOIP) (PH; llegadas según otra voz: Santa Magdalena, Sorsogon PH – Allen, Northern Samar PH)",
+   "Tuvalu Vaka Cable (VAKA) (TV; llegadas según otra voz: Funafuti, Tuvalu TV)",
+   "Balticconnector FOC (EE, FI; llegadas según otra voz: Inkoo FI – Paldiski EE)",
+   "Channel Islands (UK–Channel Islands 8, HUGO, Guernsey–Jersey) (FR, GB, GG, JE; llegadas según otra voz: Guernsey GG – Jersey JE – Sennen Cove, Cornwall GB – Pirou FR)",
+   "ESAT-1 (GB, IE; llegadas según otra voz: Kilmore Quay IE – Sennen Cove, Cornwall GB)"
+  ],
+  [
+   "Angola Domestic Network System (ADONES) (AO; llegadas según otra voz: Cabinda AO – Soyo AO – Luanda AO – Porto Amboim AO – Benguela AO – Namibe AO)",
+   "Aphrodite 2 (CY, GR; llegadas según otra voz: Chania GR – Yeroskipou CY)",
+   "Aquilink (NZ; llegadas según otra voz: Oneroa NZ – Maraetai NZ)",
+   "Blue Sky Submarine Cable System (BSSCS) (NZ; llegadas según otra voz: Kawhia NZ – Taharoa NZ)",
+   "Bonaire-Curaçao Cable System (BQ, CW; llegadas según otra voz: Willemstad CW – Kralendijk BQ)"
+  ],
+  [
+   "Cabo San Lucas-Mazatlán (MX; llegadas según otra voz: Cabo San Lucas MX – Mazatlán MX)",
+   "Denmark-Germany 2 (DE, DK; llegadas según otra voz: Gedser DK – Warnemünde DE)",
+   "Denmark-Norway 6 (DN-6) (DK, NO; llegadas según otra voz: Hjørring DK – Kristiansand NO)",
+   "Denmark-Sweden 16 (DS-16) (DK, SE; llegadas según otra voz: Helsingør DK – Helsingborg SE)",
+   "Denmark-Sweden 18 (DS-18) (DK, SE; llegadas según otra voz: Frederikshavn DK – Göteborg SE)"
+  ],
+  [
+   "Digicel Marianas Cable System (GU, MP; llegadas según otra voz: Tanguisson Point GU – Rota MP – Tinian MP – Saipan MP)",
+   "Eastern Light Sweden-Finland II (FI, SE; llegadas según otra voz: Stockholm SE – Mariehamn FI – Hanko FI – Bromarv FI – Helsinki FI)",
+   "Fiji Domestic Savusavu-Taveuni (FJ; llegadas según otra voz: Savusavu FJ – Waiyevo FJ)",
+   "GLO-2 (Globacom-2) (NG; llegadas según otra voz: Lagos NG – Escravos NG – Forcados NG – Bonny NG – Kwa Ibo NG)",
+   "HaidaLink (CA; llegadas según otra voz: Prince Rupert CA – Tlell CA)"
+  ],
+  [
+   "Hawaiki Nui 1 (AU, NZ; llegadas según otra voz: Whangarei NZ – Sydney AU)",
+   "Lanka Bell Submarine Cable (LK; llegadas según otra voz: Mount Lavinia LK)",
+   "Mazatlán-La Paz (MX; llegadas según otra voz: Mazatlán MX – La Paz MX)",
+   "Mozambique Festoon (MZ; llegadas según otra voz: Maputo MZ – Xai-Xai MZ – Inhambane MZ – Vilanculos MZ – Beira MZ – Quelimane MZ – Ilha de Moçambique MZ – Nacala MZ – Pemba MZ)",
+   "Sistema Cable Submarino Nacional (SCSN) (VE; llegadas según otra voz: Maracaibo VE – Punto Fijo VE – Puerto Cabello VE – Camurí VE – Higuerote VE – Puerto La Cruz VE – Cumaná VE – Porlamar VE – Carúpano VE)"
+  ],
+  [
+   "Oahu-Kauai (OK) (US; llegadas según otra voz: Makaha US – Lihue US)",
+   "PENBAL-5 (ES; llegadas según otra voz: Valencia ES – Palma de Mallorca ES)",
+   "Pichilingue-Topolobampo (MX; llegadas según otra voz: Pichilingue (La Paz) MX – Topolobampo MX)",
+   "Puerto Montt-Puerto Chacabuco (CL; llegadas según otra voz: Puerto Montt CL – Quellón CL – Melinka CL – Puerto Cisnes CL – Puerto Chacabuco CL)",
+   "Réseau Phoebus (CA; llegadas según otra voz: L'Anse-à-Valleau (Gaspé) CA – L'Étang-du-Nord (Îles-de-la-Madeleine) CA)"
+  ],
+  [
+   "Sabr (AU; llegadas según otra voz: Darwin AU – Wurrumiyanga (Bathurst Island) AU)",
+   "SunCable / Groote-Bickerton-Mainland (AU; llegadas según otra voz: Umbakumba AU – Milyakburra AU)",
+   "Sydney-Melbourne-Adelaide-Perth (SMAP) - Kangaroo Island Segment (AU; llegadas según otra voz: Fishery Beach AU – Cuttlefish Bay (Kangaroo Island) AU)",
+   "Trans-Cook Strait Cable (Aquatronics) (NZ; llegadas según otra voz: Oteranga Bay NZ – Fighting Bay NZ)",
+   "Vanuatu-Fiji / Tui-Samoa Extension to Vanua Levu (FJ; llegadas según otra voz: Suva FJ – Savusavu FJ)"
+  ],
+  [
+   "WARF Submarine Cable (IN, MV; llegadas según otra voz: Thiruvananthapuram IN – Kulhudhuffushi MV – Hulhumalé MV)"
+  ]
+ ]
+}

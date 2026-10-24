@@ -1,0 +1,13 @@
+Cuarta parte. Mismas reglas, pero ahora vale también una fuente pública que respalde que el operador tiene fibra TERRESTRE en servicio en esas localidades y entre ellas aunque el trazado exacto no esté publicado: en ese caso pon la URL y añade «aproximado» en "fuente". Devuelve SOLO las rutas que respaldes (mismas localidades y mismo orden; puedes recortarlas a los tramos que respaldes). Responde SOLO con un array JSON válido, sin texto antes ni después (vacío si no respaldas ninguna).
+1. EH · Maroc Telecom · Laayoune – Daoura – Tah
+2. EH · Maroc Telecom · Laayoune – Boujdour – Dakhla
+3. EH · Maroc Telecom / Mauritel · Dakhla – El Argoub – Bir Gandouz – Guerguerat – Nouadhibou
+4. BB · Flow Barbados · Bridgetown – Holetown – Speightstown
+5. BB · Flow Barbados · Bridgetown – Hastings – Worthing – Oistins
+6. BM · Digicel Bermuda / Bermuda Telephone Company · Hamilton – Flatts Village – St. George's
+7. BM · Digicel Bermuda / Bermuda Telephone Company · Hamilton – Somerset Village
+8. CW · Flow / UTS · Willemstad – Sint Michiel
+9. CW · Digicel · Willemstad – Jan Thiel
+10. TO · Tonga Cable Limited · Sopu – Nuku'alofa
+11. TO · Tonga Communications Corporation · Fua'amotu – Vaini – Nuku'alofa – Kolovai
+12. FM · FSM Telecommunications Corporation · Kolonia – Palikir
