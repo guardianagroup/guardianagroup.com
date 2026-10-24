@@ -1,0 +1,42 @@
+[
+ {
+  "nombre": "Red troncal de fibra óptica de Our Telekom en Guadalcanal",
+  "operador": "Our Telekom (Solomon Telekom Company Limited)",
+  "pais": "SB",
+  "ciudades": ["Henderson", "Honiara", "White River"],
+  "estado": "en servicio",
+  "fuente": "https://www.ourtelekom.com.sb/news/ready-for-fibre-speed/ (18 Oct 2019): «a fibre-optic backbone that runs from Henderson right through Honiara CBD to White River». Comprobado por Claude contra el texto del operador."
+ },
+ {
+  "nombre": "Red troncal de fibra óptica LKW – corredor sur-norte",
+  "operador": "Liechtensteinische Kraftwerke (LKW)",
+  "pais": "LI",
+  "ciudades": ["Balzers", "Triesen", "Vaduz", "Schaan", "Nendeln", "Eschen", "Gamprin", "Ruggell"],
+  "estado": "en servicio",
+  "fuente": "https://www.lkw.li/userdata/Alle-Download-Dokumente/Netze-Kommunikation/TAL-Teilnehmeranschlussleitung/lkw-standardangebot-zugang-zur-infrastruktur-v1.0.pdf (1 Ene 2024): LKW construyó en 2017–2023 una red de fibra en todo el país; la fibra troncal (Kernnetz-Glasfaser) une sus centrales (Anschlusszentralen), que están en estas localidades (tabla 2). El orden sigue la carretera del valle: aproximado. Comprobado por Claude contra el documento."
+ },
+ {
+  "nombre": "Red troncal de fibra óptica LKW – ramal oriental",
+  "operador": "Liechtensteinische Kraftwerke (LKW)",
+  "pais": "LI",
+  "ciudades": ["Eschen", "Mauren", "Schaanwald"],
+  "estado": "en servicio",
+  "fuente": "https://www.lkw.li/userdata/Alle-Download-Dokumente/Netze-Kommunikation/TAL-Teilnehmeranschlussleitung/lkw-standardangebot-zugang-zur-infrastruktur-v1.0.pdf (1 Ene 2024): centrales de LKW en Eschen, Mauren y Schaanwald unidas por la fibra troncal; orden por la carretera: aproximado. Comprobado por Claude contra el documento."
+ },
+ {
+  "nombre": "Red troncal de fibra óptica LKW – ramal de Triesenberg",
+  "operador": "Liechtensteinische Kraftwerke (LKW)",
+  "pais": "LI",
+  "ciudades": ["Vaduz", "Triesenberg", "Malbun"],
+  "estado": "en servicio",
+  "fuente": "https://www.lkw.li/userdata/Alle-Download-Dokumente/Netze-Kommunikation/TAL-Teilnehmeranschlussleitung/lkw-standardangebot-zugang-zur-infrastruktur-v1.0.pdf (1 Ene 2024): centrales de LKW en Vaduz, Triesenberg y Malbun unidas por la fibra troncal; orden por la carretera: aproximado. Comprobado por Claude contra el documento."
+ },
+ {
+  "nombre": "Red de fibra de GIBFIBRE, Gibraltar – La Línea",
+  "operador": "GIBFIBRE",
+  "pais": "GI",
+  "ciudades": ["Gibraltar", "La Línea de la Concepción"],
+  "estado": "en servicio",
+  "fuente": "https://gibfibre.com/enterprise/: «private fiber rings around Gibraltar» y «Our fibre mesh extends into Spain, where we have dual presence (La Linea)». Comprobado por Claude contra el texto del operador."
+ }
+]

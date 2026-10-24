@@ -1,0 +1,51 @@
+Ha pensado durante 5m 15s
+ChatGPT dijo:
+
+[
+{
+"nombre": "Enlace terrestre de fibra óptica de la estación de llegada de Vaivase-Tai",
+"operador": "Samoa Submarine Cable Company",
+"pais": "WS",
+"ciudades": ["Vaivase Tai", "Apia"],
+"estado": "en servicio",
+"fuente": "https://www.ssccsamoa.com/wp-content/uploads/2026/03/Rio-2026.pdf"
+},
+{
+"nombre": "Red terrestre de fibra óptica de Upolu occidental",
+"operador": "Vodafone Samoa",
+"pais": "WS",
+"ciudades": ["Apia", "Vaitele", "Leulumoega", "Satapuala", "Mulifanua"],
+"estado": "en servicio",
+"fuente": "https://www.unescap.org/sites/default/d8files/event-documents/Session%203-1_Promoting%20Rural%20ICT%20Connectivity%20in%20Samoa_Ms.%20Leota%20Sarai%20Faleupolu%20Tevita.pdf"
+},
+{
+"nombre": "Red terrestre de fibra óptica de Savai'i oriental",
+"operador": "Vodafone Samoa",
+"pais": "WS",
+"ciudades": ["Tuasivi", "Sapapali'i", "Salelologa"],
+"estado": "en servicio",
+"fuente": "https://www.unescap.org/sites/default/d8files/event-documents/Session%203-1_Promoting%20Rural%20ICT%20Connectivity%20in%20Samoa_Ms.%20Leota%20Sarai%20Faleupolu%20Tevita.pdf"
+},
+{
+"nombre": "Red terrestre de fibra óptica FTTH de San Marino – corredor principal",
+"operador": "AASS",
+"pais": "SM",
+"ciudades": ["Dogana", "Serravalle", "Domagnano", "Borgo Maggiore", "San Marino"],
+"estado": "en servicio",
+"fuente": "https://www.aass.sm/site/home/lazienda/bilancio-consuntivo/documento50026384.html"
+},
+{
+"nombre": "Red troncal terrestre de fibra óptica de Honiara",
+"operador": "Our Telekom",
+"pais": "SB",
+"ciudades": ["White River", "Point Cruz", "Honiara", "Ranadi", "Henderson"],
+"estado": "en servicio",
+"fuente": "https://www.ourtelekom.com.sb/dial-333-before-you-dig/"
+}
+]
+
+ChatGPT puede cometer errores. Comprueba la información importante.
+Última respuesta
+
+Esfuerzo de razonamiento
+Alta

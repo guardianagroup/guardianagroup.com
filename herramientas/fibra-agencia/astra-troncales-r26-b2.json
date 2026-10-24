@@ -1,0 +1,92 @@
+[
+ {
+  "nombre": "Eje occidental del valle del Rin",
+  "operador": "Liechtensteinische Kraftwerke (LKW)",
+  "pais": "LI",
+  "ciudades": [
+   "Balzers",
+   "Triesen",
+   "Vaduz",
+   "Schaan",
+   "Bendern",
+   "Ruggell"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: LKW describe su red nacional de fibra óptica en servicio en lkw.li; secuencia probable por los corredores viarios que enlazan estas localidades. No representa un trazado de conductos publicado por el operador."
+ },
+ {
+  "nombre": "Eje Schaan–Schaanwald",
+  "operador": "Liechtensteinische Kraftwerke (LKW)",
+  "pais": "LI",
+  "ciudades": [
+   "Schaan",
+   "Nendeln",
+   "Schaanwald"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: red nacional de fibra óptica de LKW, descrita en lkw.li; recorrido probable siguiendo el corredor de la carretera principal entre las localidades atendidas. No se afirma una prolongación transfronteriza."
+ },
+ {
+  "nombre": "Conexión transversal del Unterland",
+  "operador": "Liechtensteinische Kraftwerke (LKW)",
+  "pais": "LI",
+  "ciudades": [
+   "Bendern",
+   "Eschen",
+   "Mauren",
+   "Schaanwald"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: cobertura de la red de fibra óptica de LKW, descrita en lkw.li; orden probable por las carreteras que conectan estas localidades. El itinerario físico exacto no está acreditado mediante un plano público del operador."
+ },
+ {
+  "nombre": "Acceso a Triesenberg",
+  "operador": "Liechtensteinische Kraftwerke (LKW)",
+  "pais": "LI",
+  "ciudades": [
+   "Triesen",
+   "Triesenberg"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: red de fibra óptica en servicio de LKW, descrita en lkw.li, con cobertura en ambos municipios; conexión probable por el corredor de ascenso desde Triesen. No implica que todos los circuitos de Triesenberg sigan este recorrido."
+ },
+ {
+  "nombre": "Corredor terrestre del Gran Malé",
+  "operador": "Dhiraagu",
+  "pais": "MV",
+  "ciudades": [
+   "Malé",
+   "Hulhulé",
+   "Hulhumalé"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: red fija y servicios de fibra de Dhiraagu en el Gran Malé, descritos en dhiraagu.com.mv; recorrido terrestre probable por el puente Sinamalé y la calzada entre Hulhulé y Hulhumalé. La cobertura está documentada, pero no se dispone aquí de un plano que confirme el recorrido de los cables por esas estructuras."
+ },
+ {
+  "nombre": "Corredor de las islas conectadas de Addu",
+  "operador": "Dhiraagu",
+  "pais": "MV",
+  "ciudades": [
+   "Hithadhoo",
+   "Maradhoo",
+   "Maradhoo-Feydhoo",
+   "Feydhoo",
+   "Gan"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: despliegue y cobertura de fibra de Dhiraagu en Addu, publicados por el operador en dhiraagu.com.mv; secuencia probable por Link Road y las calzadas que unen estas islas. Gan corresponde al atolón de Addu. No se incluyen conexiones con islas separadas por mar abierto."
+ },
+ {
+  "nombre": "Corredor terrestre de Laamu",
+  "operador": "Dhiraagu",
+  "pais": "MV",
+  "ciudades": [
+   "Gan",
+   "Maandhoo",
+   "Kadhdhoo",
+   "Fonadhoo"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: presencia de la red y servicios de fibra de Dhiraagu en Laamu, descritos en dhiraagu.com.mv; recorrido probable por Laamu Link Road y sus calzadas. Gan corresponde al atolón de Laamu; Maandhoo y Kadhdhoo son puntos geográficos intermedios, no una afirmación de cobertura residencial. El trazado físico entre las islas no está confirmado por un plano público del operador."
+ }
+]

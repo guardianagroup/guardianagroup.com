@@ -1,9 +1,10 @@
 # Saves the text of the latest tool result that contains a marker (from this session's transcript),
 # so long answers from the agency are kept word for word without retyping them.
-import json, sys, re, glob
+import json, sys, re, glob, os
 marca, salida = sys.argv[1], sys.argv[2]
 desde = sys.argv[3] if len(sys.argv) > 3 else None
-f = '/root/.claude/projects/-home-claude/598c721e-3dfe-5661-b133-736ea6904a93.jsonl'
+# the newest transcript of this machine (each session writes its own .jsonl)
+f = max(glob.glob('/root/.claude/projects/*/*.jsonl'), key=os.path.getmtime)
 ultimo = None
 for linea in open(f, encoding='utf-8'):
     try: o = json.loads(linea)

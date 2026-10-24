@@ -1,0 +1,16 @@
+Tercera parte (más confirmación cruzada, mismas reglas que la segunda). Devuelve SOLO las rutas que respaldes con una fuente pública, con las mismas localidades y en el mismo orden (puedes recortarlas a los tramos que respaldes), en el mismo formato JSON y con la URL en "fuente". Responde SOLO con un array JSON válido (vacío si no respaldas ninguna).
+1. BB · Flow Barbados · Bridgetown – Holetown – Speightstown
+2. BB · Flow Barbados · Bridgetown – Hastings – Worthing – Oistins
+3. BB · Digicel Barbados · Bridgetown – Warrens
+4. BM · Digicel Bermuda / Bermuda Telephone Company · Hamilton – Somerset Village
+5. BM · Digicel Bermuda / Bermuda Telephone Company · Hamilton – Flatts Village – St. George's
+6. CW · Flow / UTS · Willemstad – Sint Michiel
+7. CW · Digicel · Willemstad – Jan Thiel
+8. FM · FSM Telecommunications Corporation · Kolonia – Palikir
+9. FO · NET / Føroya Tele · Tjørnuvík – Haldarsvík – Langasandur – Streymnes – Hvalvík – Hósvík – Kollafjørður – Kaldbaksbotnur – Hoyvík – Tórshavn
+10. FO · NET / Føroya Tele · Leirvík – Norðragøta – Syðrugøta – Søldarfjørður – Glyvrar – Saltangará – Runavík – Toftir
+11. FO · NET / Føroya Tele · Sørvágur – Vatnsoyrar – Miðvágur – Sandavágur
+12. FO · NET / Føroya Tele · Tvøroyri – Trongisvágur – Øravík – Hov – Porkeri – Vágur
+13. GI · Gibtelecom · Gibraltar – Catalan Bay
+14. MV · Dhiraagu · Malé – Hulhulé – Hulhumalé
+15. MV · Dhiraagu · Gan (atolón de Laamu) – Maandhoo – Kadhdhoo – Fonadhoo

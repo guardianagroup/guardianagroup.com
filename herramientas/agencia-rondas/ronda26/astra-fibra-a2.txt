@@ -1,0 +1,34 @@
+[
+  {
+    "nombre": "Willemstad–Sint Michiel",
+    "operador": "Flow / UTS",
+    "pais": "CW",
+    "ciudades": ["Willemstad", "Sint Michiel"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red fija de fibra de Flow/UTS en Curazao, descrita comercialmente por Flow Curaçao (discoverflow.co/curacao). La secuencia representa el corredor terrestre entre ambas localidades; no un trazado de ingeniería publicado."
+  },
+  {
+    "nombre": "Willemstad–Jan Thiel",
+    "operador": "Digicel",
+    "pais": "CW",
+    "ciudades": ["Willemstad", "Jan Thiel"],
+    "estado": "en servicio",
+    "fuente": "aproximado: cobertura de la red fija de fibra de Digicel Curaçao. Se representa el corredor terrestre hacia Jan Thiel; la documentación comercial del operador no permite establecer las calles ni los empalmes exactos."
+  },
+  {
+    "nombre": "Kolonia–Palikir",
+    "operador": "FSM Telecommunications Corporation",
+    "pais": "FM",
+    "ciudades": ["Kolonia", "Palikir"],
+    "estado": "en servicio",
+    "fuente": "aproximado: enlace terrestre de la red de FSM Telecommunications Corporation en Pohnpei entre Kolonia y el centro administrativo de Palikir; corredor viario occidental de Pohnpei. No se presenta como una polilínea publicada ni como una identificación de todos sus nodos intermedios."
+  },
+  {
+    "nombre": "Nimar–Colonia",
+    "operador": "FSM Telecommunications Cable Corporation",
+    "pais": "FM",
+    "ciudades": ["Nimar", "Colonia"],
+    "estado": "en servicio",
+    "fuente": "aproximado: documentación del proyecto de conectividad de los Estados Federados de Micronesia del Banco Mundial y de FSM Telecommunications Cable Corporation sobre la conexión de Yap, operativa desde 2018. Se representa únicamente el enlace terrestre entre el área de llegada en Nimar y Colonia, no el segmento submarino; recorrido intermedio no publicado con suficiente detalle. Para Chuuk y Kosrae no dispongo de evidencia suficientemente precisa para añadir rutas terrestres entre localidades y afirmar que están en servicio sin especular."
+  }
+]

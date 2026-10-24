@@ -2255,6 +2255,45 @@
 ]
 },
 {
+"n": "Eje occidental del valle del Rin",
+"o": "Liechtensteinische Kraftwerke (LKW)",
+"cc": "LI",
+"l": [
+[
+9.506,
+47.069
+],
+[
+9.527,
+47.107
+],
+[
+9.52,
+47.14
+],
+[
+9.51,
+47.166
+],
+[
+9.543,
+47.197
+],
+[
+9.523,
+47.213
+],
+[
+9.51,
+47.219
+],
+[
+9.526,
+47.24
+]
+]
+},
+{
 "n": "TSTT - Troncal nacional de Trinidad",
 "o": "TSTT",
 "cc": "TT",
@@ -4452,6 +4491,37 @@
 ]
 },
 {
+"n": "Red troncal terrestre de fibra óptica de Honiara",
+"o": "Our Telekom",
+"cc": "SB",
+"l": [
+[
+159.922,
+-9.425
+],
+[
+159.958,
+-9.426
+],
+[
+159.95,
+-9.43
+],
+[
+159.979,
+-9.435
+],
+[
+160.001,
+-9.428
+],
+[
+160.05,
+-9.429
+]
+]
+},
+{
 "n": "Superistral North-South Ring",
 "o": "Kazakhtelecom",
 "cc": "KZ",
@@ -5113,6 +5183,87 @@
 [
 30.02,
 52.89
+]
+]
+},
+{
+"n": "Corredor de las islas conectadas de Addu",
+"o": "Dhiraagu",
+"cc": "MV",
+"l": [
+[
+73.089,
+-0.603
+],
+[
+73.119,
+-0.668
+],
+[
+73.126,
+-0.673
+],
+[
+73.135,
+-0.682
+],
+[
+73.156,
+-0.691
+]
+]
+},
+{
+"n": "Eje Dogana–San Marino de la red pública de fibra",
+"o": "Azienda Autonoma di Stato per i Servizi Pubblici (AASS)",
+"cc": "SM",
+"l": [
+[
+12.489,
+43.981
+],
+[
+12.48,
+43.97
+],
+[
+12.469,
+43.948
+],
+[
+12.447,
+43.941
+],
+[
+12.45,
+43.94
+]
+]
+},
+{
+"n": "Corredor terrestre de fibra del noroeste de Upolu",
+"o": "Vodafone Samoa (antes Bluesky Samoa / SamoaTel)",
+"cc": "WS",
+"l": [
+[
+-171.77,
+-13.83
+],
+[
+-171.816,
+-13.826
+],
+[
+-171.961,
+-13.827
+],
+[
+-171.985,
+-13.832
+],
+[
+-172.036,
+-13.832
 ]
 ]
 },
@@ -6856,6 +7007,44 @@
 ]
 },
 {
+"n": "Conexión transversal del Unterland",
+"o": "Liechtensteinische Kraftwerke (LKW)",
+"cc": "LI",
+"l": [
+[
+9.523,
+47.213
+],
+[
+9.542,
+47.22
+],
+[
+9.57,
+47.217
+]
+]
+},
+{
+"n": "Corredor terrestre de fibra del sureste de Savai'i",
+"o": "Vodafone Samoa (antes Bluesky Samoa / SamoaTel)",
+"cc": "WS",
+"l": [
+[
+-172.178,
+-13.669
+],
+[
+-172.199,
+-13.688
+],
+[
+-172.219,
+-13.743
+]
+]
+},
+{
 "n": "RENATA — Anillo del Eje Cafetero",
 "o": "Red Nacional Académica de Tecnología Avanzada (RENATA)",
 "cc": "CO",
@@ -7189,6 +7378,25 @@
 ]
 },
 {
+"n": "Red troncal de fibra óptica LKW – ramal de Triesenberg",
+"o": "Liechtensteinische Kraftwerke (LKW)",
+"cc": "LI",
+"l": [
+[
+9.52,
+47.14
+],
+[
+9.543,
+47.119
+],
+[
+9.608,
+47.103
+]
+]
+},
+{
 "n": "Mobily National Fiber Network (SNFN)",
 "o": "Mobily",
 "cc": "SA",
@@ -7490,6 +7698,21 @@
 ]
 },
 {
+"n": "Enlace terrestre Vaivase Tai–Apia",
+"o": "Samoa Submarine Cable Company (SSCC)",
+"cc": "WS",
+"l": [
+[
+-171.749,
+-13.846
+],
+[
+-171.77,
+-13.83
+]
+]
+},
+{
 "n": "CNT EP — Red Troncal del Pacífico",
 "o": "Corporación Nacional de Telecomunicaciones (CNT EP)",
 "cc": "EC",
@@ -7681,6 +7904,21 @@
 [
 43.26,
 -11.7
+]
+]
+},
+{
+"n": "Red terrestre transfronteriza de GIBFIBRE",
+"o": "GIBFIBRE",
+"cc": "GI",
+"l": [
+[
+-5.35,
+36.14
+],
+[
+-5.35,
+36.17
 ]
 ]
 },

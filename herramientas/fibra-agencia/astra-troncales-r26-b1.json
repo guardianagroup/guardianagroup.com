@@ -1,0 +1,88 @@
+[
+ {
+  "nombre": "Corredor terrestre de Streymoy: Tjørnuvík–Tórshavn",
+  "operador": "NET / Føroya Tele",
+  "pais": "FO",
+  "ciudades": [
+   "Tjørnuvík",
+   "Haldarsvík",
+   "Langasandur",
+   "Streymnes",
+   "Hvalvík",
+   "Hósvík",
+   "Kollafjørður",
+   "Kaldbaksbotnur",
+   "Hoyvík",
+   "Tórshavn"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: infraestructura terrestre de NET y red de Føroya Tele (https://www.net.fo/; https://www.ft.fo/). Secuencia inferida por el corredor viario entre la llegada de cable de Tjørnuvík y Tórshavn; no representa un trazado de conductos publicado."
+ },
+ {
+  "nombre": "Corredor terrestre oriental de Eysturoy: Leirvík–Toftir",
+  "operador": "NET / Føroya Tele",
+  "pais": "FO",
+  "ciudades": [
+   "Leirvík",
+   "Norðragøta",
+   "Syðrugøta",
+   "Søldarfjørður",
+   "Glyvrar",
+   "Saltangará",
+   "Runavík",
+   "Toftir"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: red fija y transporte terrestre de NET/Føroya Tele en Eysturoy (https://www.net.fo/; https://www.ft.fo/). Localidades ordenadas según el corredor de carreteras que enlaza las poblaciones servidas; recorrido exacto de la fibra no publicado."
+ },
+ {
+  "nombre": "Corredor terrestre de Vágar: Sørvágur–Sandavágur",
+  "operador": "NET / Føroya Tele",
+  "pais": "FO",
+  "ciudades": [
+   "Sørvágur",
+   "Vatnsoyrar",
+   "Miðvágur",
+   "Sandavágur"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: infraestructura de red fija de NET/Føroya Tele en Vágar (https://www.net.fo/; https://www.ft.fo/). Secuencia inferida siguiendo la carretera entre estas localidades; se excluyen las conexiones marítimas con otras islas."
+ },
+ {
+  "nombre": "Corredor terrestre de Suðuroy: Tvøroyri–Vágur",
+  "operador": "NET / Føroya Tele",
+  "pais": "FO",
+  "ciudades": [
+   "Tvøroyri",
+   "Trongisvágur",
+   "Øravík",
+   "Hov",
+   "Porkeri",
+   "Vágur"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: infraestructura terrestre de NET/Føroya Tele en Suðuroy (https://www.net.fo/; https://www.ft.fo/). Orden inferido por el corredor viario entre las localidades con servicio; no se afirma una alineación concreta de conductos ni un túnel determinado."
+ },
+ {
+  "nombre": "Interconexión terrestre Gibraltar–España",
+  "operador": "Gibtelecom",
+  "pais": "GI",
+  "ciudades": [
+   "Gibraltar",
+   "La Línea de la Concepción"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: Gibtelecom describe conectividad internacional mediante fibra terrestre a través de España en su información corporativa y de red (https://www.gibtele.com/). La Línea de la Concepción es la primera localidad española; el paso exacto de los conductos fronterizos no se identifica aquí."
+ },
+ {
+  "nombre": "Red terrestre de acceso Gibraltar–Catalan Bay",
+  "operador": "Gibtelecom",
+  "pais": "GI",
+  "ciudades": [
+   "Gibraltar",
+   "Catalan Bay"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: red de acceso de fibra de Gibtelecom en Gibraltar (https://www.gibtele.com/). Enlace local inferido a partir de la cobertura del operador en la vertiente oriental; no se dispone de un trazado público que permita precisar las calles o conductos utilizados."
+ }
+]
