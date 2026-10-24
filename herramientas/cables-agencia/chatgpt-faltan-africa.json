@@ -1,0 +1,566 @@
+[
+  {
+    "nombre": "Aden-Djibouti",
+    "llegadas": [
+      {
+        "lugar": "Adén",
+        "pais": "YE",
+        "lat": 12.8007,
+        "lon": 45.0335
+      },
+      {
+        "lugar": "Yibuti",
+        "pais": "DJ",
+        "lat": 11.5947,
+        "lon": 43.148
+      }
+    ],
+    "anio": 1994,
+    "km": 269,
+    "duenos": [
+      "Djibouti Telecom",
+      "TeleYemen"
+    ],
+    "fuentes": [
+      "https://international.djiboutitelecom.dj/aden-djibouti/"
+    ]
+  },
+  {
+    "nombre": "Aletar",
+    "llegadas": [
+      {
+        "lugar": "Alejandría",
+        "pais": "EG",
+        "lat": 31.1919,
+        "lon": 29.8898
+      },
+      {
+        "lugar": "Tartús",
+        "pais": "SY",
+        "lat": 34.8917,
+        "lon": 35.8978
+      }
+    ],
+    "anio": 1997,
+    "km": 787,
+    "duenos": [
+      "Telecom Egypt",
+      "Syrian Telecommunications Establishment",
+      "Ministerio de Telecomunicaciones del Líbano"
+    ],
+    "fuentes": [
+      "https://www.submarinenetworks.com/en/systems/asia-europe-africa/aletar",
+      "https://www.datacenterdynamics.com/en/news/medusa-subsea-cable-to-land-in-syria/",
+      "https://www.submarinecablemap.com/submarine-cable/aletar"
+    ]
+  },
+  {
+    "nombre": "Almería-Melilla (ALME)",
+    "llegadas": [
+      {
+        "lugar": "Almería",
+        "pais": "ES",
+        "lat": 36.8419,
+        "lon": -2.4638
+      },
+      {
+        "lugar": "Melilla",
+        "pais": "ES",
+        "lat": 35.2923,
+        "lon": -2.9381
+      }
+    ],
+    "anio": 1990,
+    "km": 198,
+    "duenos": [
+      "Telefónica"
+    ],
+    "fuentes": [
+      "https://www.cnmc.es/sites/default/files/6106289.pdf",
+      "https://geocables.com/cable/almera-melilla-alme"
+    ]
+  },
+  {
+    "nombre": "Coral Bridge",
+    "llegadas": [
+      {
+        "lugar": "Taba",
+        "pais": "EG",
+        "lat": 29.4926,
+        "lon": 34.8949
+      },
+      {
+        "lugar": "Aqaba",
+        "pais": "JO",
+        "lat": 29.581,
+        "lon": 35.0051
+      }
+    ],
+    "anio": 2025,
+    "km": 15,
+    "duenos": [
+      "Telecom Egypt",
+      "NaiTel"
+    ],
+    "fuentes": [
+      "https://ir.te.eg/en/CorporateNews/PressRelease/223/The-Express-Subsea-Cable-Coral-Bridge-Laying-Completed-Connecting-Egypt-and-Jordan"
+    ]
+  },
+  {
+    "nombre": "Italy-Libya",
+    "llegadas": [
+      {
+        "lugar": "Mazara del Vallo",
+        "pais": "IT",
+        "lat": 37.6501,
+        "lon": 12.5913
+      },
+      {
+        "lugar": "Trípoli",
+        "pais": "LY",
+        "lat": 32.8773,
+        "lon": 13.1873
+      }
+    ],
+    "anio": 1998,
+    "km": 570,
+    "duenos": [
+      "Sparkle",
+      "Libya International Telecommunications Company"
+    ],
+    "fuentes": [
+      "https://www.submarinecablemap.com/submarine-cable/italy-libya",
+      "https://geocables.com/cable/italy-libya"
+    ]
+  },
+  {
+    "nombre": "Lake Albert 1",
+    "llegadas": [
+      {
+        "lugar": "Nkusi",
+        "pais": "UG",
+        "lat": 1.115,
+        "lon": 30.6636
+      },
+      {
+        "lugar": "Tchoima",
+        "pais": "CD",
+        "lat": 1.44,
+        "lon": 30.4811
+      }
+    ],
+    "anio": 2019,
+    "km": 51,
+    "duenos": [
+      "Bandwidth and Cloud Services (BCS)"
+    ],
+    "fuentes": [
+      "https://www.submarinecablemap.com/submarine-cable/lake-albert-1",
+      "https://geocables.com/cable/lake-albert-1"
+    ]
+  },
+  {
+    "nombre": "Lake Albert 2",
+    "llegadas": [
+      {
+        "lugar": "Mpeefu",
+        "pais": "UG",
+        "lat": 1.1016,
+        "lon": 30.6484
+      },
+      {
+        "lugar": "Kasenyi",
+        "pais": "CD",
+        "lat": 1.3934,
+        "lon": 30.4384
+      }
+    ],
+    "anio": 2020,
+    "km": 44,
+    "duenos": [
+      "Bandwidth and Cloud Services (BCS)"
+    ],
+    "fuentes": [
+      "https://www.submarinecablemap.com/submarine-cable/lake-albert-2",
+      "https://geocables.com/cable/lake-albert-2"
+    ]
+  },
+  {
+    "nombre": "Lake Tanganyika",
+    "llegadas": [
+      {
+        "lugar": "Uvira",
+        "pais": "CD",
+        "lat": -3.3777,
+        "lon": 29.1499
+      },
+      {
+        "lugar": "Kalemie",
+        "pais": "CD",
+        "lat": -5.9134,
+        "lon": 29.2036
+      }
+    ],
+    "anio": 2025,
+    "km": 370,
+    "duenos": [
+      "Bandwidth and Cloud Services (BCS)"
+    ],
+    "fuentes": [
+      "https://www.submarinecablemap.com/submarine-cable/lake-tanganyika",
+      "https://geocables.com/cable/lake-tanganyika"
+    ]
+  },
+  {
+    "nombre": "LFON (Libyan Fiber Optic Network)",
+    "llegadas": [
+      {
+        "lugar": "Zuwara",
+        "pais": "LY",
+        "lat": 32.9334,
+        "lon": 12.0834
+      },
+      {
+        "lugar": "Zawia",
+        "pais": "LY",
+        "lat": 32.7747,
+        "lon": 12.5298
+      },
+      {
+        "lugar": "Trípoli",
+        "pais": "LY",
+        "lat": 32.8773,
+        "lon": 13.1873
+      },
+      {
+        "lugar": "Al Khums",
+        "pais": "LY",
+        "lat": 32.6497,
+        "lon": 14.2644
+      },
+      {
+        "lugar": "Misurata",
+        "pais": "LY",
+        "lat": 32.3743,
+        "lon": 15.0948
+      },
+      {
+        "lugar": "Sirte",
+        "pais": "LY",
+        "lat": 31.2053,
+        "lon": 16.5883
+      },
+      {
+        "lugar": "Ras Lanuf",
+        "pais": "LY",
+        "lat": 30.5867,
+        "lon": 18.4119
+      },
+      {
+        "lugar": "Brega",
+        "pais": "LY",
+        "lat": 30.3781,
+        "lon": 19.5765
+      },
+      {
+        "lugar": "Bengasi",
+        "pais": "LY",
+        "lat": 32.1166,
+        "lon": 20.0668
+      },
+      {
+        "lugar": "Tolmeta",
+        "pais": "LY",
+        "lat": 32.7167,
+        "lon": 20.95
+      },
+      {
+        "lugar": "Al Bayda",
+        "pais": "LY",
+        "lat": 32.8817,
+        "lon": 21.7417
+      },
+      {
+        "lugar": "Derna",
+        "pais": "LY",
+        "lat": 32.7636,
+        "lon": 22.6392
+      },
+      {
+        "lugar": "Tobruk",
+        "pais": "LY",
+        "lat": 32.0796,
+        "lon": 23.9603
+      }
+    ],
+    "anio": 1999,
+    "km": 1639,
+    "duenos": [
+      "Libyan Post, Telecommunications and Information Technology Company (LPTIC Holding)"
+    ],
+    "fuentes": [
+      "https://www.submarinecablemap.com/submarine-cable/lfon-libyan-fiber-optic-network",
+      "https://geocables.com/cable/lfon-libyan-fiber-optic-network"
+    ]
+  },
+  {
+    "nombre": "Libreville-Port Gentil Cable",
+    "llegadas": [
+      {
+        "lugar": "Libreville",
+        "pais": "GA",
+        "lat": 0.3943,
+        "lon": 9.4544
+      },
+      {
+        "lugar": "Port-Gentil",
+        "pais": "GA",
+        "lat": -0.721,
+        "lon": 8.7816
+      }
+    ],
+    "anio": 2012,
+    "km": 198,
+    "duenos": [
+      "República Gabonesa"
+    ],
+    "fuentes": [
+      "https://www.ppiaf.org/sites/default/files/documents/2014-01/Rapport1___Etat_des_lieux_interconnexions_r_seaux_FO_CEEAC.pdf",
+      "https://www.submarinecablemap.com/submarine-cable/libreville-port-gentil-cable"
+    ]
+  },
+  {
+    "nombre": "Saudi Arabia-Sudan-2 (SAS-2)",
+    "llegadas": [
+      {
+        "lugar": "Yeda",
+        "pais": "SA",
+        "lat": 21.4813,
+        "lon": 39.1828
+      },
+      {
+        "lugar": "Puerto Sudán",
+        "pais": "SD",
+        "lat": 19.6156,
+        "lon": 37.2197
+      }
+    ],
+    "anio": 2011,
+    "km": 330,
+    "duenos": [
+      "Sudatel",
+      "Saudi Telecom Company (stc/center3)"
+    ],
+    "fuentes": [
+      "https://sudatel.sd/wp-content/uploads/2017/11/an_rep_2016_en.pdf",
+      "https://www.submarinecablemap.com/submarine-cable/saudi-arabia-sudan-2-sas-2"
+    ]
+  },
+  {
+    "nombre": "Silphium",
+    "llegadas": [
+      {
+        "lugar": "Chania",
+        "pais": "GR",
+        "lat": 35.5118,
+        "lon": 24.0122
+      },
+      {
+        "lugar": "Derna",
+        "pais": "LY",
+        "lat": 32.7636,
+        "lon": 22.6392
+      }
+    ],
+    "anio": 2012,
+    "km": 425,
+    "duenos": [
+      "Libya International Telecommunications Company (LITC)"
+    ],
+    "fuentes": [
+      "https://litc.ly/en/2018/12/15/reactivation-of-the-international-submarine-cable-libya-greece-silphium/",
+      "https://www.submarinecablemap.com/submarine-cable/silphium"
+    ]
+  },
+  {
+    "nombre": "T3",
+    "llegadas": [
+      {
+        "lugar": "Baie Jacotet",
+        "pais": "MU",
+        "lat": -20.474,
+        "lon": 57.4854
+      },
+      {
+        "lugar": "Amanzimtoti",
+        "pais": "ZA",
+        "lat": -30.0577,
+        "lon": 30.8804
+      }
+    ],
+    "anio": 2023,
+    "km": 3200,
+    "duenos": [
+      "Mauritius Telecom",
+      "Liquid Intelligent Technologies"
+    ],
+    "fuentes": [
+      "https://za.liquid.tech/about-us/news/liquid-intelligent-technologies-deploys-mauritius-telecom-t3-subsea-cable-enhancing-connectivity-between-mauritius-and-south-africa/",
+      "https://www.submarinecablemap.com/submarine-cable/t3"
+    ]
+  },
+  {
+    "nombre": "Tobrok-Emasaed Cable System",
+    "llegadas": [
+      {
+        "lugar": "Tobruk",
+        "pais": "LY",
+        "lat": 32.0796,
+        "lon": 23.9603
+      },
+      {
+        "lugar": "El-Quawef",
+        "pais": "LY",
+        "lat": 31.7608,
+        "lon": 25.0874
+      }
+    ],
+    "anio": 2010,
+    "km": 178,
+    "duenos": [
+      "Libya International Telecommunications Company"
+    ],
+    "fuentes": [
+      "https://www.meed.com/libya-awards-submarine-cable-deal-to-huawei-marine-networks/",
+      "https://www.submarinecablemap.com/submarine-cable/tobrok-emasaed-cable-system"
+    ]
+  },
+  {
+    "nombre": "Ultramar GE",
+    "llegadas": [
+      {
+        "lugar": "Annobón",
+        "pais": "GQ",
+        "lat": -1.4351,
+        "lon": 5.6369
+      },
+      {
+        "lugar": "São Tomé",
+        "pais": "ST",
+        "lat": 0.3333,
+        "lon": 6.7333
+      }
+    ],
+    "anio": 2023,
+    "km": 263,
+    "duenos": [
+      "GITGE (Gestor de Infraestructuras de Telecomunicaciones de Guinea Ecuatorial)"
+    ],
+    "fuentes": [
+      "https://gitge.com/wp-content/uploads/2025/09/informe-anual-2024.pdf",
+      "https://www.submarinecablemap.com/submarine-cable/ultramar-ge"
+    ]
+  },
+  {
+    "nombre": "Unitel North Submarine Cable (UNSC)",
+    "llegadas": [
+      {
+        "lugar": "Cacongo",
+        "pais": "AO",
+        "lat": -5.231,
+        "lon": 12.1409
+      },
+      {
+        "lugar": "Cabinda",
+        "pais": "AO",
+        "lat": -5.5565,
+        "lon": 12.1898
+      },
+      {
+        "lugar": "Soyo",
+        "pais": "AO",
+        "lat": -6.141,
+        "lon": 12.3521
+      },
+      {
+        "lugar": "N'zeto",
+        "pais": "AO",
+        "lat": -7.2333,
+        "lon": 12.8667
+      }
+    ],
+    "anio": 2023,
+    "km": 1145,
+    "duenos": [
+      "Unitel (Angola)"
+    ],
+    "fuentes": [
+      "https://www.inacom.gov.ao/ao/noticias/sistema-de-cabo-submarino-norte-da-unitel-entra-em-servico/",
+      "https://www.submarinecablemap.com/submarine-cable/unitel-north-submarine-cable-unsc"
+    ]
+  },
+  {
+    "nombre": "Roquetas-Melilla (CAM)",
+    "llegadas": [
+      {
+        "lugar": "Roquetas de Mar",
+        "pais": "ES",
+        "lat": 36.7638,
+        "lon": -2.6125
+      },
+      {
+        "lugar": "Melilla",
+        "pais": "ES",
+        "lat": 35.2923,
+        "lon": -2.9381
+      }
+    ],
+    "anio": 2014,
+    "km": 181,
+    "duenos": [
+      "Ciudad Autónoma de Melilla"
+    ],
+    "fuentes": [
+      "https://www.cnmc.es/sites/default/files/6106289.pdf",
+      "https://geocables.com/cable/roquetas-melilla-cam"
+    ]
+  },
+  {
+    "nombre": "DOS CONTINENTES I & II",
+    "llegadas": [
+      {
+        "lugar": "La Línea de la Concepción",
+        "pais": "ES",
+        "lat": 36.2103,
+        "lon": -5.3252
+      },
+      {
+        "lugar": "Playa de Benítez, Ceuta",
+        "pais": "ES",
+        "lat": 35.8939,
+        "lon": -5.3347
+      },
+      {
+        "lugar": "Playa de la Ribera, Ceuta",
+        "pais": "ES",
+        "lat": 35.8868,
+        "lon": -5.3137
+      },
+      {
+        "lugar": "Tarifa",
+        "pais": "ES",
+        "lat": 36.0143,
+        "lon": -5.6045
+      }
+    ],
+    "anio": 2020,
+    "km": 95,
+    "duenos": [
+      "GTD España"
+    ],
+    "fuentes": [
+      "https://www.cnmc.es/sites/default/files/6106289.pdf",
+      "https://www.submarinecablemap.com/submarine-cable/dos-continentes-l-ll"
+    ]
+  }
+]
