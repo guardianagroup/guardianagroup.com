@@ -1,0 +1,280 @@
+[
+{
+"nombre": "TERRA SW",
+"llegadas": [
+{
+"lugar": "Homer",
+"pais": "US",
+"lat": 59.6464,
+"lon": -151.5443
+},
+{
+"lugar": "Williamsport",
+"pais": "US",
+"lat": 59.6824,
+"lon": -153.6321
+}
+],
+"anio": 2012,
+"km": 0,
+"duenos": [
+"GCI Communication Corp.",
+"United Utilities, Inc."
+],
+"fuentes": [
+"https://www.gci.com/business/support/b/business-alaska-united-support",
+"https://docs.fcc.gov/public/attachments/DOC-301669A1.pdf",
+"https://fcc.report/IBFS/SCL-T-C-20200828-00043/2689226.pdf"
+]
+},
+{
+"nombre": "Connected Coast",
+"llegadas": [
+{
+"lugar": "Prince Rupert",
+"pais": "CA",
+"lat": 54.315,
+"lon": -130.3208
+},
+{
+"lugar": "Lax Kw'alaams",
+"pais": "CA",
+"lat": 54.556,
+"lon": -130.431
+},
+{
+"lugar": "Tlell",
+"pais": "CA",
+"lat": 53.5607,
+"lon": -131.933
+},
+{
+"lugar": "Bella Bella",
+"pais": "CA",
+"lat": 52.161,
+"lon": -128.147
+},
+{
+"lugar": "Port Hardy",
+"pais": "CA",
+"lat": 50.724,
+"lon": -127.499
+},
+{
+"lugar": "Campbell River",
+"pais": "CA",
+"lat": 50.0244,
+"lon": -125.2475
+},
+{
+"lugar": "Nanaimo",
+"pais": "CA",
+"lat": 49.1659,
+"lon": -123.9401
+},
+{
+"lugar": "Vancouver",
+"pais": "CA",
+"lat": 49.2497,
+"lon": -123.1193
+}
+],
+"anio": 2022,
+"km": 2810,
+"duenos": [
+"CityWest Management Corp.",
+"Strathcona Regional District"
+],
+"fuentes": [
+"https://www.connectedcoast.ca/about/",
+"https://www.connectedcoast.ca/operations/",
+"https://connectedcoast.ca/lax-kwalaams-first-community-to-receive-services-via-the-connected-coast/",
+"https://connectedcoast.ca/summer-2023-update/",
+"https://lims.leg.bc.ca/pdms/ldp/43rd1st/votes/v251006.htm"
+]
+},
+{
+"nombre": "Jakarta-Bangka-Bintan-Batam-Singapore (B2JS)",
+"llegadas": [
+{
+"lugar": "Jakarta",
+"pais": "ID",
+"lat": -6.1716,
+"lon": 106.8279
+},
+{
+"lugar": "Batu Prahu",
+"pais": "ID",
+"lat": -3.0799,
+"lon": 106.5475
+},
+{
+"lugar": "Pesaren",
+"pais": "ID",
+"lat": -1.5539,
+"lon": 105.5827
+},
+{
+"lugar": "Batam",
+"pais": "ID",
+"lat": 1.0668,
+"lon": 104.0166
+},
+{
+"lugar": "Bintan",
+"pais": "ID",
+"lat": 1.1367,
+"lon": 104.4258
+},
+{
+"lugar": "Tanah Merah",
+"pais": "SG",
+"lat": 1.3273,
+"lon": 103.9466
+}
+],
+"anio": 2013,
+"km": 760,
+"duenos": [
+"PT Ketrosden Triasmitra"
+],
+"fuentes": [
+"https://triasmitra.com/services/developer",
+"https://triasmitra.com/investors/1753416574_AR-SR%20KETR%202024.pdf",
+"https://www.triasmitra.com/images/update022021/TRIASMITRA-AR2021-31052022.pdf",
+"https://triasmitra.com/index.php/news-updates/news/triasmitra-genjot-bisnis-managed-service-kabel-laut-dan-darat"
+]
+},
+{
+"nombre": "JaKa2LaDeMa",
+"llegadas": [
+{
+"lugar": "Beculuk",
+"pais": "ID",
+"lat": -8.6156,
+"lon": 114.0971
+},
+{
+"lugar": "Denpasar",
+"pais": "ID",
+"lat": -8.6567,
+"lon": 115.2215
+},
+{
+"lugar": "Gianyar",
+"pais": "ID",
+"lat": -8.5367,
+"lon": 115.3314
+},
+{
+"lugar": "Mataram",
+"pais": "ID",
+"lat": -8.5864,
+"lon": 116.0815
+},
+{
+"lugar": "Pontianak",
+"pais": "ID",
+"lat": -0.0274,
+"lon": 109.3356
+},
+{
+"lugar": "Ketapang",
+"pais": "ID",
+"lat": -1.8591,
+"lon": 109.9719
+},
+{
+"lugar": "Pankalan",
+"pais": "ID",
+"lat": -2.8497,
+"lon": 111.7529
+},
+{
+"lugar": "Banjarmasin",
+"pais": "ID",
+"lat": -3.328,
+"lon": 114.604
+},
+{
+"lugar": "Sangata",
+"pais": "ID",
+"lat": 0.3269,
+"lon": 117.551
+},
+{
+"lugar": "Toweli",
+"pais": "ID",
+"lat": -1.1425,
+"lon": 119.3884
+}
+],
+"anio": 2010,
+"km": 1800,
+"duenos": [
+"PT Telekomunikasi Indonesia Tbk"
+],
+"fuentes": [
+"https://www.fujitsu.com/global/imagesgig5/fujitsu2011report-e.pdf",
+"https://www.fujitsu.com/global/documents/about/ir/library/presentations/20100709-01.pdf",
+"https://www.telkom.co.id/sites/news-resources/en_US/news/strengthening-the-digital-ecosystem-in-the-ikn-region-and-kalimantan-island%2C-telkom-launches-neucentrix-pontianak-1909",
+"https://kominfo.jatimprov.go.id/berita/20686"
+]
+},
+{
+"nombre": "Mataram-Kupang Cable System (MKCS)",
+"llegadas": [
+{
+"lugar": "Pringgabaya",
+"pais": "ID",
+"lat": -8.5371,
+"lon": 116.6549
+},
+{
+"lugar": "Sumbawa Besar",
+"pais": "ID",
+"lat": -8.8412,
+"lon": 118.0822
+},
+{
+"lugar": "Bima",
+"pais": "ID",
+"lat": -8.4643,
+"lon": 118.7449
+},
+{
+"lugar": "Saraemee",
+"pais": "ID",
+"lat": -8.7969,
+"lon": 118.7118
+},
+{
+"lugar": "Ende",
+"pais": "ID",
+"lat": -8.8457,
+"lon": 121.6427
+},
+{
+"lugar": "Waingapu",
+"pais": "ID",
+"lat": -9.6462,
+"lon": 120.253
+},
+{
+"lugar": "Kupang",
+"pais": "ID",
+"lat": -10.1833,
+"lon": 123.5834
+}
+],
+"anio": 2011,
+"km": 1318,
+"duenos": [
+"PT Telekomunikasi Indonesia Tbk"
+],
+"fuentes": [
+"https://www.telkom.co.id/sites/berita/id_ID/news/indihome-targetkan-60-kota-di-pelosok-indonesia-52",
+"https://kominfo.jatimprov.go.id/berita/20686"
+]
+}
+]
