@@ -1,0 +1,12 @@
+[
+ {"nombre": "Enlace terrestre Orange Bissau–Contuboel", "operador": "Orange Bissau", "pais": "GW", "ciudades": ["Bissau", "Contuboel"], "estado": "en servicio", "fuente": "https://documents1.worldbank.org/curated/en/099745006262216743/pdf/P177016084979202b08dd501a5690c82506.pdf"},
+ {"nombre": "Enlace terrestre MTN Bissau–São Domingos", "operador": "MTN Guinea-Bissau", "pais": "GW", "ciudades": ["Bissau", "São Domingos"], "estado": "en servicio", "fuente": "https://documents1.worldbank.org/curated/en/099745006262216743/pdf/P177016084979202b08dd501a5690c82506.pdf"},
+ {"nombre": "Red de fibra óptica CST – Zona Norte", "operador": "CST", "pais": "ST", "ciudades": ["São Tomé", "Neves"], "estado": "en servicio", "fuente": "https://cst.st/PT/sobre-nos/noticias/cst-expande-a-sua-rede-de-fibra-otica-para-zona-norte"},
+ {"nombre": "SEAS – Tramo terrestre Beau Vallon–Victoria", "operador": "Seychelles Cable Systems", "pais": "SC", "ciudades": ["Beau Vallon", "Victoria"], "estado": "en servicio", "fuente": "https://www.nation.sc/archive/231908/submarine-cable-project-on-track"},
+ {"nombre": "Red terrestre Comores Telecom – Moroni–Iconi", "operador": "Comores Telecom", "pais": "KM", "ciudades": ["Moroni", "Iconi"], "estado": "en servicio", "fuente": "https://www.comorestelecom.km/portail/pg/apropos/4"},
+ {"nombre": "Red terrestre Comores Telecom – Moroni–Mitsoudjé", "operador": "Comores Telecom", "pais": "KM", "ciudades": ["Moroni", "Mitsoudjé"], "estado": "en servicio", "fuente": "https://www.comorestelecom.km/portail/pg/apropos/4"},
+ {"nombre": "Red terrestre Comores Telecom – Moroni–Mavingouni", "operador": "Comores Telecom", "pais": "KM", "ciudades": ["Moroni", "Mavingouni"], "estado": "en servicio", "fuente": "https://www.comorestelecom.km/portail/pg/apropos/4"},
+ {"nombre": "EASSy – Tramo terrestre Itsandra–Moroni", "operador": "Comores Telecom", "pais": "KM", "ciudades": ["Itsandra", "Moroni"], "estado": "en servicio", "fuente": "https://www.comorestelecom.km/portail/pg/apropos/4"},
+ {"nombre": "Interchange – Enlace terrestre Mele–Port Vila", "operador": "Interchange Limited", "pais": "VU", "ciudades": ["Mele", "Port Vila"], "estado": "en servicio", "fuente": "https://interchange.vu/vanuatu-government-provides-free-wi-fi-at-independence-park-and-vnh/"},
+ {"nombre": "BICS – Tramo terrestre de fibra óptica de Abaco", "operador": "Cable Bahamas", "pais": "BS", "ciudades": ["Fox Town", "Crossing Rocks"], "estado": "en servicio", "fuente": "https://www.bisxbahamas.com/viewPDF/CBL-AR-2021-20251029191931.pdf"}
+]

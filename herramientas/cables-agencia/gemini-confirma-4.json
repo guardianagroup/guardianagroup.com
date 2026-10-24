@@ -1,0 +1,627 @@
+[
+ {
+  "nombre": "Tanjung Pandan-Sungai Kakap",
+  "llegadas": [
+   {
+    "lugar": "Sungai Kakap",
+    "pais": "ID",
+    "lat": -0.057,
+    "lon": 109.185
+   },
+   {
+    "lugar": "Tanjung Pandan",
+    "pais": "ID",
+    "lat": -2.741,
+    "lon": 107.634
+   }
+  ],
+  "anio": 2019,
+  "km": 348,
+  "duenos": [
+   "Moratelindo"
+  ],
+  "fuentes": [
+   "https://www.moratelindo.co.id/"
+  ]
+ },
+ {
+  "nombre": "Jalapati",
+  "llegadas": [
+   {
+    "lugar": "Candikusuma",
+    "pais": "ID",
+    "lat": -8.321,
+    "lon": 114.526
+   },
+   {
+    "lugar": "Muncar",
+    "pais": "ID",
+    "lat": -8.433,
+    "lon": 114.333
+   }
+  ],
+  "anio": 2023,
+  "km": 45,
+  "duenos": [
+   "CCSI"
+  ],
+  "fuentes": [
+   "https://cablestatus.com/cables/jalapati"
+  ]
+ },
+ {
+  "nombre": "DOS CONTINENTES I",
+  "llegadas": [
+   {
+    "lugar": "Ceuta",
+    "pais": "ES",
+    "lat": 35.889,
+    "lon": -5.321
+   },
+   {
+    "lugar": "La Línea de la Concepción",
+    "pais": "ES",
+    "lat": 36.168,
+    "lon": -5.347
+   },
+   {
+    "lugar": "Tarifa",
+    "pais": "ES",
+    "lat": 36.014,
+    "lon": -5.604
+   }
+  ],
+  "anio": 2020,
+  "km": 95,
+  "duenos": [
+   "GTD España"
+  ],
+  "fuentes": [
+   "https://www.gtd.es/",
+   "https://www.miteco.gob.es/"
+  ]
+ },
+ {
+  "nombre": "Azores Fiber Optic System (AFOS)",
+  "llegadas": [
+   {
+    "lugar": "Angra do Heroísmo",
+    "pais": "PT",
+    "lat": 38.655,
+    "lon": -27.221
+   },
+   {
+    "lugar": "Faial",
+    "pais": "PT",
+    "lat": 38.533,
+    "lon": -28.633
+   },
+   {
+    "lugar": "Graciosa",
+    "pais": "PT",
+    "lat": 39.083,
+    "lon": -28
+   },
+   {
+    "lugar": "Ponta Delgada",
+    "pais": "PT",
+    "lat": 37.741,
+    "lon": -25.676
+   },
+   {
+    "lugar": "São Mateus",
+    "pais": "PT",
+    "lat": 38.433,
+    "lon": -28.45
+   },
+   {
+    "lugar": "Velas",
+    "pais": "PT",
+    "lat": 38.68,
+    "lon": -28.207
+   },
+   {
+    "lugar": "Vila do Porto",
+    "pais": "PT",
+    "lat": 36.945,
+    "lon": -25.145
+   }
+  ],
+  "anio": 1998,
+  "km": 1100,
+  "duenos": [
+   "Altice Portugal"
+  ],
+  "fuentes": [
+   "https://www.altice.pt/",
+   "https://www.anacom.pt/"
+  ]
+ },
+ {
+  "nombre": "Continente-Madeira",
+  "llegadas": [
+   {
+    "lugar": "Carcavelos",
+    "pais": "PT",
+    "lat": 38.688,
+    "lon": -9.334
+   },
+   {
+    "lugar": "Funchal",
+    "pais": "PT",
+    "lat": 32.667,
+    "lon": -16.924
+   }
+  ],
+  "anio": 2000,
+  "km": 1179,
+  "duenos": [
+   "Altice Portugal"
+  ],
+  "fuentes": [
+   "https://www.altice.pt/",
+   "https://www.anacom.pt/"
+  ]
+ },
+ {
+  "nombre": "BUGIO",
+  "llegadas": [
+   {
+    "lugar": "Carcavelos",
+    "pais": "PT",
+    "lat": 38.688,
+    "lon": -9.334
+   },
+   {
+    "lugar": "Sesimbra",
+    "pais": "PT",
+    "lat": 38.444,
+    "lon": -9.101
+   }
+  ],
+  "anio": 1996,
+  "km": 73,
+  "duenos": [
+   "Altice Portugal"
+  ],
+  "fuentes": [
+   "https://www.altice.pt/",
+   "https://www.anacom.pt/"
+  ]
+ },
+ {
+  "nombre": "Lanis-3",
+  "llegadas": [
+   {
+    "lugar": "Blackpool",
+    "pais": "GB",
+    "lat": 53.818,
+    "lon": -3.036
+   },
+   {
+    "lugar": "Douglas",
+    "pais": "GB",
+    "lat": 54.15,
+    "lon": -4.483
+   }
+  ],
+  "anio": 1992,
+  "km": 122,
+  "duenos": [
+   "Vodafone"
+  ],
+  "fuentes": [
+   "https://www.vodafone.co.uk/"
+  ]
+ },
+ {
+  "nombre": "Denmark-Sweden 17",
+  "llegadas": [
+   {
+    "lugar": "Helsingør",
+    "pais": "DK",
+    "lat": 56.036,
+    "lon": 12.614
+   },
+   {
+    "lugar": "Helsingborg",
+    "pais": "SE",
+    "lat": 56.047,
+    "lon": 12.694
+   }
+  ],
+  "anio": 1995,
+  "km": 6,
+  "duenos": [
+   "TDC",
+   "Telia"
+  ],
+  "fuentes": [
+   "https://tdcgroup.com/",
+   "https://www.teliacompany.com/"
+  ]
+ },
+ {
+  "nombre": "GlobalConnect-KPN",
+  "llegadas": [
+   {
+    "lugar": "Gedser",
+    "pais": "DK",
+    "lat": 54.574,
+    "lon": 11.931
+   },
+   {
+    "lugar": "Rostock",
+    "pais": "DE",
+    "lat": 54.089,
+    "lon": 12.14
+   }
+  ],
+  "anio": 2006,
+  "km": 43,
+  "duenos": [
+   "GlobalConnect",
+   "KPN"
+  ],
+  "fuentes": [
+   "https://www.globalconnectgroup.com/",
+   "https://www.kpn.com/"
+  ]
+ },
+ {
+  "nombre": "GlobalConnect 2 (GC2)",
+  "llegadas": [
+   {
+    "lugar": "Kungsbacka",
+    "pais": "SE",
+    "lat": 57.487,
+    "lon": 12.076
+   },
+   {
+    "lugar": "Sæby",
+    "pais": "DK",
+    "lat": 57.332,
+    "lon": 10.517
+   }
+  ],
+  "anio": 2001,
+  "km": 95,
+  "duenos": [
+   "GlobalConnect"
+  ],
+  "fuentes": [
+   "https://www.globalconnectgroup.com/"
+  ]
+ },
+ {
+  "nombre": "GlobalConnect 3 (GC3)",
+  "llegadas": [
+   {
+    "lugar": "Kalundborg",
+    "pais": "DK",
+    "lat": 55.679,
+    "lon": 11.089
+   },
+   {
+    "lugar": "Juelsminde",
+    "pais": "DK",
+    "lat": 55.71,
+    "lon": 10.015
+   }
+  ],
+  "anio": 2005,
+  "km": 60,
+  "duenos": [
+   "GlobalConnect"
+  ],
+  "fuentes": [
+   "https://www.globalconnectgroup.com/"
+  ]
+ },
+ {
+  "nombre": "STO-HEL-One",
+  "llegadas": [
+   {
+    "lugar": "Helsinki",
+    "pais": "FI",
+    "lat": 60.169,
+    "lon": 24.935
+   },
+   {
+    "lugar": "Mariehamn",
+    "pais": "FI",
+    "lat": 60.097,
+    "lon": 19.935
+   },
+   {
+    "lugar": "Stockholm",
+    "pais": "SE",
+    "lat": 59.329,
+    "lon": 18.069
+   }
+  ],
+  "anio": 2024,
+  "km": 500,
+  "duenos": [
+   "GlobalConnect"
+  ],
+  "fuentes": [
+   "https://www.globalconnectgroup.com/"
+  ]
+ },
+ {
+  "nombre": "Italy-Monaco",
+  "llegadas": [
+   {
+    "lugar": "Monte-Carlo",
+    "pais": "MC",
+    "lat": 43.74,
+    "lon": 7.427
+   },
+   {
+    "lugar": "Savona",
+    "pais": "IT",
+    "lat": 44.309,
+    "lon": 8.477
+   }
+  ],
+  "anio": 1995,
+  "km": 162,
+  "duenos": [
+   "Monaco Telecom",
+   "Sparkle"
+  ],
+  "fuentes": [
+   "https://www.monaco-telecom.mc/",
+   "https://www.tisparkle.com/"
+  ]
+ },
+ {
+  "nombre": "Apollo East and West",
+  "llegadas": [
+   {
+    "lugar": "Chania",
+    "pais": "GR",
+    "lat": 35.511,
+    "lon": 24.029
+   },
+   {
+    "lugar": "Heraklion",
+    "pais": "GR",
+    "lat": 35.328,
+    "lon": 25.143
+   },
+   {
+    "lugar": "Lavrio",
+    "pais": "GR",
+    "lat": 37.714,
+    "lon": 24.056
+   },
+   {
+    "lugar": "Neapoli",
+    "pais": "GR",
+    "lat": 36.511,
+    "lon": 23.057
+   }
+  ],
+  "anio": 2024,
+  "km": 700,
+  "duenos": [
+   "Grid Telecom"
+  ],
+  "fuentes": [
+   "https://www.grid-telecom.com/"
+  ]
+ },
+ {
+  "nombre": "Vodafone Greece Domestic",
+  "llegadas": [
+   {
+    "lugar": "Attica",
+    "pais": "GR",
+    "lat": 37.984,
+    "lon": 23.727
+   },
+   {
+    "lugar": "Syros",
+    "pais": "GR",
+    "lat": 37.445,
+    "lon": 24.943
+   },
+   {
+    "lugar": "Tinos",
+    "pais": "GR",
+    "lat": 37.538,
+    "lon": 25.163
+   }
+  ],
+  "anio": 2019,
+  "km": 92,
+  "duenos": [
+   "Vodafone Greece"
+  ],
+  "fuentes": [
+   "https://www.vodafone.gr/"
+  ]
+ },
+ {
+  "nombre": "Domestic Submarine Cable of Maldives (DSCoM)",
+  "llegadas": [
+   {
+    "lugar": "Dhangethi",
+    "pais": "MV",
+    "lat": 3.607,
+    "lon": 72.955
+   },
+   {
+    "lugar": "Dhuvaafaru",
+    "pais": "MV",
+    "lat": 5.63,
+    "lon": 73.039
+   },
+   {
+    "lugar": "Eydhafushi",
+    "pais": "MV",
+    "lat": 5.103,
+    "lon": 73.071
+   },
+   {
+    "lugar": "Hulhumalé",
+    "pais": "MV",
+    "lat": 4.212,
+    "lon": 73.54
+   },
+   {
+    "lugar": "Kudahuvadhoo",
+    "pais": "MV",
+    "lat": 2.671,
+    "lon": 72.894
+   },
+   {
+    "lugar": "Maafushi",
+    "pais": "MV",
+    "lat": 3.942,
+    "lon": 73.491
+   },
+   {
+    "lugar": "Maamigili",
+    "pais": "MV",
+    "lat": 3.474,
+    "lon": 72.837
+   },
+   {
+    "lugar": "Velidhoo",
+    "pais": "MV",
+    "lat": 5.665,
+    "lon": 73.274
+   }
+  ],
+  "anio": 2024,
+  "km": 286,
+  "duenos": [
+   "Dhiraagu",
+   "Ooredoo Maldives"
+  ],
+  "fuentes": [
+   "https://www.dhiraagu.com.mv/",
+   "https://www.ooredoo.mv/"
+  ]
+ },
+ {
+  "nombre": "Mariana-Guam Cable",
+  "llegadas": [
+   {
+    "lugar": "Rota",
+    "pais": "MP",
+    "lat": 14.154,
+    "lon": 145.203
+   },
+   {
+    "lugar": "Saipan",
+    "pais": "MP",
+    "lat": 15.183,
+    "lon": 145.75
+   },
+   {
+    "lugar": "Tanguisson Point",
+    "pais": "GU",
+    "lat": 13.547,
+    "lon": 144.809
+   },
+   {
+    "lugar": "Tinian",
+    "pais": "MP",
+    "lat": 15,
+    "lon": 145.633
+   }
+  ],
+  "anio": 1997,
+  "km": 268,
+  "duenos": [
+   "PTI Pacifica"
+  ],
+  "fuentes": [
+   "https://www.fcc.gov/",
+   "https://www.itandega.com/"
+  ]
+ },
+ {
+  "nombre": "Tokelau Submarine Cable",
+  "llegadas": [
+   {
+    "lugar": "Atafu",
+    "pais": "TK",
+    "lat": -8.542,
+    "lon": -172.516
+   },
+   {
+    "lugar": "Fakaofo",
+    "pais": "TK",
+    "lat": -9.38,
+    "lon": -171.219
+   },
+   {
+    "lugar": "Nukunonu",
+    "pais": "TK",
+    "lat": -9.2,
+    "lon": -171.848
+   }
+  ],
+  "anio": 2021,
+  "km": 210,
+  "duenos": [
+   "Telecommunications Tokelau Corporation (Teletok)"
+  ],
+  "fuentes": [
+   "https://www.teletok.tk/",
+   "https://www.tokelau.org.nz/"
+  ]
+ },
+ {
+  "nombre": "Tu'i Vava'u Cable (Tonga Hawaiki Submarine Cable Branch System)",
+  "llegadas": [
+   {
+    "lugar": "Neiafu",
+    "pais": "TO",
+    "lat": -18.651,
+    "lon": -173.984
+   }
+  ],
+  "anio": 2026,
+  "km": 405,
+  "duenos": [
+   "Tonga Cable Limited",
+   "BW Digital"
+  ],
+  "fuentes": [
+   "https://www.tongacable.to/",
+   "https://bwdigital.com/"
+  ]
+ },
+ {
+  "nombre": "Tahiti Iti (Tautira-Teahupo'o)",
+  "llegadas": [
+   {
+    "lugar": "Tautira",
+    "pais": "PF",
+    "lat": -17.738,
+    "lon": -149.153
+   },
+   {
+    "lugar": "Teahupoo",
+    "pais": "PF",
+    "lat": -17.847,
+    "lon": -149.266
+   }
+  ],
+  "anio": 2024,
+  "km": 36,
+  "duenos": [
+   "ONATi"
+  ],
+  "fuentes": [
+   "https://www.onati.pf/",
+   "https://www.service-public.pf/"
+  ]
+ }
+]
