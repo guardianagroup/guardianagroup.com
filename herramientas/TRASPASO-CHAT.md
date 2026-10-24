@@ -556,3 +556,4 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
 - 13:28 · Ronda 24, ChatGPT, lotes 1–2: cables de la agencia aceptados: 359 · tramos: 1079; lugares-capas: 528 grupos.
 - 13:36 · Ronda 24, ChatGPT, lotes 3–4: cables de la agencia aceptados: 367 · tramos: 1117; lugares-capas: 536 grupos.
 - 13:47 · Ronda 24, ChatGPT, lotes 5–6: cables de la agencia aceptados: 374 · tramos: 1144; lugares-capas: 543 grupos.
+- 13:54 · Ronda 24, ChatGPT, lotes 7–8: cables de la agencia aceptados: 379 · tramos: 1151; lugares-capas: 548 grupos.
