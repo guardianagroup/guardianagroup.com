@@ -305,7 +305,18 @@ Actualizado el viernes 23 de octubre de 2026 a las 23:50, hora de Bogotá. Lo es
 - **Correcciones:** «Souh America-1» pasa a South America-1 (errata de OpenStreetMap, corregida en `datos_orbita.py`), «Marseille 02/08» pasa a Marseille, y el gris de «capacidad no publicada» ya no parece blanco al resaltarlo.
 - **Compra y descarga:** las páginas en «muy pronto desde la web» y los planes en «Próximamente». No queda ningún enlace de pago.
 
-**En marcha**
+**24 Oct 2026, 02:30 — hecho y publicado**
+- **Cables por tierra:** 112 países (93 al empezar la noche).
+  - Hay 19 países nuevos: AL, AM, BD, BJ, BT, BY, CF, DJ, GM, KG, LR, MN, MW, PY, SL, SO, TJ, TM y VN.
+  - Hay 88 tramos de la agencia confirmados por dos voces.
+  - Cambio en `fibra_agencia.py`: un tramo vale si dos voces ponen fibra entre las mismas dos ciudades, aunque nombren operadores distintos. Esos tramos se dibujan sin nombre ni operador.
+  - Las ciudades al otro lado de la frontera se buscan a menos de 800 km.
+  - Los pueblos de las troncales salen de GeoNames cities500, en `herramientas/fuentes/pueblos-fibra.tsv`, que escribe el workflow de los pueblos.
+- **Cables submarinos:** 8 más, confirmados por Astra 6 y ChatGPT en la ronda 18: Bahamas-2, Chuuk-Pohnpei, Danica North, Italy-Greece 1, Italy-Libya, Maldives Sri Lanka Cable, Melita-1 y Silphium. En total hay 453 cables enteros y 1.338 llegadas.
+- **Respuestas de la agencia:** ChatGPT dio unos 145 cables «que faltan» que ninguna otra voz ha confirmado todavía. Están en `herramientas/cables-agencia/chatgpt-faltan-*.json`; entran solos en cuanto otra voz los nombre (vuelve a ejecutar `cables_agencia.py` y después `lugares_capas.py`).
+- **Grok:** a su cuenta le quedan las tandas 8 y 9 de troncales, porque llegó a su límite semanal (se renueva el 27 de octubre).
+
+**En marcha (antes)**
 - **Fibra por tierra de los países que faltan.** Hay datos de 93 países; faltan unos 85 con red troncal propia.
   - Astra 6 y ChatGPT responden en tandas. Sus respuestas van a `herramientas/fibra-agencia/astra-troncales-N.json` y `chatgpt-troncales-N.json`, y el texto bruto a `herramientas/agencia-rondas/ronda17/`.
   - Después hay que seguir estos pasos:
