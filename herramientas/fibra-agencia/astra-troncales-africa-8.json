@@ -1,0 +1,82 @@
+[
+  {
+    "nombre": "Troncal nacional Lomé–Dapaong",
+    "operador": "Togo Telecom (grupo Togocom)",
+    "pais": "TG",
+    "ciudades": ["Lome", "Tsevie", "Notsé", "Atakpame", "Sokode", "Kara", "Mango", "Dapaong"],
+    "estado": "en servicio",
+    "fuente": "aproximado: secuencia urbana del corredor de la carretera N1; la troncal nacional de fibra de Togo Telecom está documentada por ARCEP Togo y por el programa WARCIP del Banco Mundial, pero esas fuentes no publican un trazado continuo a escala de calle."
+  },
+  {
+    "nombre": "Troncal litoral Tunis–Gabès",
+    "operador": "Tunisie Telecom",
+    "pais": "TN",
+    "ciudades": ["Tunis", "Hammamet", "Enfidha", "Sousse", "Msaken", "El Jem", "Sfax", "Gabes"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor litoral A1 y GP1 entre los principales nodos de la red nacional de transmisión óptica de Tunisie Telecom; la existencia del backbone está documentada por el operador, pero la secuencia intermedia se infiere del corredor viario y no de un plano público de canalizaciones."
+  },
+  {
+    "nombre": "Troncal del noroeste Tunis–Jendouba",
+    "operador": "Tunisie Telecom",
+    "pais": "TN",
+    "ciudades": ["Tunis", "Medjez el Bab", "Beja", "Bou Salem", "Jendouba"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor occidental A3 y GP6 de la red óptica nacional de Tunisie Telecom; ciudades intermedias inferidas del corredor viario que conecta los nodos regionales, no de una ruta física publicada."
+  },
+  {
+    "nombre": "Troncal oriental Kampala–Mbale",
+    "operador": "NITA-U / Uganda National Backbone Infrastructure",
+    "pais": "UG",
+    "ciudades": ["Kampala", "Mukono", "Jinja", "Iganga", "Tororo", "Mbale"],
+    "estado": "en servicio",
+    "fuente": "aproximado: ciudades y enlaces regionales documentados en los mapas y descripciones de las fases I y II del proyecto NBI/EGI de NITA-U; orden intermedio inferido del corredor Kampala–Jinja–Tororo y de la conexión Tororo–Mbale."
+  },
+  {
+    "nombre": "Troncal suroccidental Kampala–Kabale",
+    "operador": "NITA-U / Uganda National Backbone Infrastructure",
+    "pais": "UG",
+    "ciudades": ["Kampala", "Masaka", "Lyantonde", "Mbarara", "Ntungamo", "Kabale"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor suroccidental de fibra del NBI/EGI, documentado por NITA-U en sus ampliaciones operativas; secuencia urbana inferida de las carreteras Kampala–Masaka–Mbarara y Mbarara–Kabale, sin afirmar un trazado exacto de canalizaciones."
+  },
+  {
+    "nombre": "Troncal Lusaka–Copperbelt",
+    "operador": "Fibrecom (ZESCO)",
+    "pais": "ZM",
+    "ciudades": ["Lusaka", "Kabwe", "Kapiri Mposhi", "Ndola", "Kitwe"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor Lusaka–Copperbelt de la red operativa de Fibrecom, documentada por Fibrecom y ZESCO; secuencia de nodos urbanos inferida del corredor eléctrico y de transporte. La fibra sobre líneas de alta tensión puede evitar los centros urbanos."
+  },
+  {
+    "nombre": "Troncal meridional Lusaka–Livingstone",
+    "operador": "Fibrecom (ZESCO)",
+    "pais": "ZM",
+    "ciudades": ["Lusaka", "Kafue", "Mazabuka", "Monze", "Choma", "Kalomo", "Livingstone"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor meridional de la red de fibra de Fibrecom/ZESCO hasta Livingstone; orden urbano inferido del eje eléctrico y viario de Southern Province. La documentación del operador acredita la red, no el paso exacto por cada centro urbano."
+  },
+  {
+    "nombre": "Troncal Harare–Bulawayo",
+    "operador": "Liquid Intelligent Technologies",
+    "pais": "ZW",
+    "ciudades": ["Harare", "Norton", "Chegutu", "Kadoma", "Kwekwe", "Gweru", "Bulawayo"],
+    "estado": "en servicio",
+    "fuente": "aproximado: enlace operativo Harare–Bulawayo representado en la red de Liquid Intelligent Technologies; ciudades intermedias ordenadas según el corredor de la carretera A5, sin plano público continuo del tendido."
+  },
+  {
+    "nombre": "Troncal oriental Harare–Mutare–Mozambique",
+    "operador": "Liquid Intelligent Technologies",
+    "pais": "ZW",
+    "ciudades": ["Harare", "Marondera", "Rusape", "Mutare", "Machipanda"],
+    "estado": "en servicio",
+    "fuente": "aproximado: conexión terrestre operativa de Liquid hacia Mozambique por Mutare, documentada en sus mapas de red panafricana; secuencia urbana inferida del corredor A3. Machipanda es la primera localidad incluida del lado mozambiqueño."
+  },
+  {
+    "nombre": "Troncal meridional Harare–Beitbridge–Sudáfrica",
+    "operador": "Liquid Intelligent Technologies",
+    "pais": "ZW",
+    "ciudades": ["Harare", "Chivhu", "Mvuma", "Masvingo", "Beitbridge", "Musina"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor operativo de fibra Harare–Beitbridge y conexión con Sudáfrica documentados por Liquid Intelligent Technologies; ciudades intermedias inferidas de las carreteras A4 y N1. Musina es la primera ciudad incluida del lado sudafricano."
+  }
+]

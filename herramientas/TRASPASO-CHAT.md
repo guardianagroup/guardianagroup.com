@@ -514,6 +514,6 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 
 **Ronda 23 de Astra, tandas procesadas y publicadas**
 - 10:25 · África 1–3: 168 países, 1.295.161 km, 277 tramos de la agencia.
-- 10:35 · Arreglo en `fibra_agencia.py` para la ciudad de frontera que abre una ruta: 279 tramos, 1.296.013 km.
-- 05:32 · África 4–5: 168 países, 1.298.289 km, 283 tramos de la agencia.
+- 10:22 · Arreglo en `fibra_agencia.py` para la ciudad de frontera que abre una ruta: 279 tramos, 1.296.013 km.
+- 10:32 · África 4–5: 168 países, 1.298.289 km, 283 tramos de la agencia.
 - 10:37 · África 6–7: 168 países, 1.302.357 km, 293 tramos de la agencia.
