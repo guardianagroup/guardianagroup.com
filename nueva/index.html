@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-idiomas="es,en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -24,7 +24,27 @@
 <link rel="preload" href="/fonts/InstrumentSerif-Italic.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" as="image" href="/portada/planeta-1200.webp" imagesrcset="/portada/planeta-560.webp 560w, /portada/planeta-800.webp 800w, /portada/planeta-1200.webp 1200w, /portada/planeta-1600.webp 1600w" imagesizes="(max-width: 700px) 138vw, (max-width: 1100px) 112vw, 1060px" fetchpriority="high">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://guardianagroup.com/#org","name":"GUARDIANA","legalName":"GUARDIANA GROUP S.A.S.","url":"https://guardianagroup.com/","logo":"https://guardianagroup.com/icon-512.png","sameAs":["https://github.com/guardianagroup"],"address":{"@type":"PostalAddress","addressLocality":"Cartagena de Indias","addressCountry":"CO"}},{"@type":"WebSite","@id":"https://guardianagroup.com/#web","url":"https://guardianagroup.com/","name":"GUARDIANA","inLanguage":"es","publisher":{"@id":"https://guardianagroup.com/#org"}}]}</script>
-<script>document.documentElement.classList.add('js', matchMedia('(pointer: coarse)').matches ? 'tactil' : 'raton')</script>
+<script>
+(() => {
+  const H = document.documentElement; H.classList.add('js', matchMedia('(pointer: coarse)').matches ? 'tactil' : 'raton');
+  // the page opens in the visitor's language when it is one of ours; a language picked by hand (the picker or
+  // ?lang=) wins and is remembered, shared with Órbita and Conocer; with an English browser in a Spanish- or
+  // Portuguese-speaking time zone it starts in that language (owner, 20 Oct 2026)
+  const ACT = (H.dataset.idiomas || 'es').split(','), ok = (l) => ACT.includes(l);
+  const mapa = (x) => { x = String(x || '').toLowerCase(); if (/^zh-(tw|hk|mo|hant)/.test(x)) return 'zh-tw'; if (x === 'pt-pt') return 'pt-pt'; const b = x.slice(0, 2); if (b === 'nn' || b === 'no') return 'nb'; if (b === 'iw') return 'he'; if (b === 'in') return 'id'; if (b === 'tl' || x.startsWith('fil')) return 'fil'; return b; };
+  let l = 'es';
+  try {
+    const q = new URLSearchParams(location.search).get('lang'), st = localStorage.getItem('guardiana-lang'), ch = localStorage.getItem('guardiana-lang-chosen');
+    const nav = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']).map(mapa).find(ok);
+    let zona = ''; try { zona = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+    const ZPT = /^(America\/(Sao_Paulo|Bahia|Fortaleza|Recife|Belem|Manaus|Cuiaba|Campo_Grande|Porto_Velho|Boa_Vista|Rio_Branco|Araguaina|Maceio|Noronha|Santarem|Eirunepe)|Europe\/Lisbon|Atlantic\/(Azores|Madeira)|Africa\/(Luanda|Maputo|Bissau|Sao_Tome))$/;
+    const ZES = /^(America\/|Europe\/Madrid|Atlantic\/Canary|Africa\/(Ceuta|Malabo)|Pacific\/Galapagos)/;
+    const porZona = ZPT.test(zona) ? 'pt' : (ZES.test(zona) && !/^America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Toronto|Vancouver|Edmonton|Winnipeg|Halifax|St_Johns|Detroit|Indiana|Kentucky|Boise|Juneau|Regina)/.test(zona) ? 'es' : null);
+    if (q && ok(q)) l = q; else if (ch && st && ok(st)) l = st; else if (nav === 'en' && porZona && ok(porZona)) l = porZona; else if (nav) l = nav; else if (porZona && ok(porZona)) l = porZona;
+  } catch (e) {}
+  window.__l0 = l; if (l !== 'es') H.classList.add('i18n-espera');
+})();
+</script>
 <style>
 @font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/InstrumentSerif-Regular.woff) format('woff')}
 @font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url(/fonts/InstrumentSerif-Italic.woff) format('woff')}
@@ -75,7 +95,22 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .acciones{margin-left:auto;display:flex;align-items:center;gap:10px}
 .pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border:1px solid var(--hair);border-radius:999px;font-size:14px;color:var(--ink);background:rgba(6,8,12,.4);transition:border-color .2s,background .2s,color .2s;white-space:nowrap}
 .pill:hover{border-color:var(--ink-3)}
-.pill.idioma{font-family:var(--mono);font-size:12px;color:var(--ink-2);padding:0 13px}
+.pill.idioma{font-family:var(--mono);font-size:12px;color:var(--ink-2);padding:0 13px;cursor:pointer;gap:7px}
+.idi{position:relative}
+.idi-p{position:absolute;inset-inline-end:0;top:calc(100% + 10px);width:min(560px,calc(100vw - 32px));max-height:min(70vh,560px);overflow:auto;padding:10px;border:1px solid var(--hair);border-radius:16px;background:rgba(10,14,20,.98);box-shadow:0 30px 80px rgba(0,0,0,.6);z-index:70}
+.idi-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px}
+.idi-g button{appearance:none;border:0;background:transparent;color:var(--ink-2);display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:9px 10px;border-radius:10px;font:inherit;font-size:14px;cursor:pointer;text-align:start}
+.idi-g button:hover,.idi-g button:focus-visible{background:rgba(156,195,228,.1);color:var(--ink)}
+.idi-g button[aria-current="true"]{color:var(--ink);background:rgba(156,195,228,.14)}
+.idi-g button span{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-4);text-transform:uppercase}
+@media (max-width:560px){.idi-g{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.i18n-espera .top,.i18n-espera .hero-texto,.i18n-espera main>.sec,.i18n-espera .rotulo{visibility:hidden}
+:is(:lang(de),:lang(nl),:lang(sv),:lang(da),:lang(nb),:lang(fi),:lang(is),:lang(ru),:lang(uk),:lang(pl),:lang(cs),:lang(sk),:lang(hu),:lang(hr),:lang(ro),:lang(bg),:lang(el)) :is(h1,h2,h3,.frase,.sello){-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+:is(:lang(ta),:lang(te),:lang(bn),:lang(hi)) :is(h1,h2,h3,.frase,.sello){overflow-wrap:anywhere;line-height:1.3}
+:lang(ur) :is(h1,h2,.frase,.sello){line-height:1.8!important}:lang(ur) :is(p,li){line-height:2}
+:lang(ko) :is(h1,h2,h3,.frase,.sello){word-break:keep-all;overflow-wrap:anywhere}
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja)) :is(h1,h2,h3,.frase,.sello){word-break:normal;line-break:strict}
+[dir="rtl"] .cta span,[dir="rtl"] .btn span{transform:scaleX(-1)}
 .pill.prim{background:var(--steel);border-color:var(--steel);color:var(--void);font-weight:600}
 .pill.prim:hover{background:var(--steel-2);border-color:var(--steel-2)}
 .top .c-radio{display:none}
@@ -190,9 +225,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .subasta .pasos{order:2}
 }
 .pasos{margin-top:32px;display:grid;counter-reset:p;max-width:520px}
-.pasos li{position:relative;padding:13px 0 13px 46px;border-top:1px solid var(--hair);color:var(--ink-3);font-size:16px;transition:color .4s}
+.pasos li{position:relative;padding-block:13px;padding-inline:46px 0;border-top:1px solid var(--hair);color:var(--ink-3);font-size:16px;transition:color .4s}
 .pasos li:last-child{border-bottom:1px solid var(--hair)}
-.pasos li::before{counter-increment:p;content:counter(p);position:absolute;left:0;top:12px;width:28px;height:28px;border-radius:50%;border:1px solid var(--hair-2);display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);transition:background .4s,border-color .4s,color .4s}
+.pasos li::before{counter-increment:p;content:counter(p);position:absolute;inset-inline-start:0;top:12px;width:28px;height:28px;border-radius:50%;border:1px solid var(--hair-2);display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:var(--ink-3);transition:background .4s,border-color .4s,color .4s}
 .pasos li b{font-weight:600;color:var(--ink-2);transition:color .4s}
 .pasos li.on{color:var(--ink-2)}
 .pasos li.on b{color:var(--ink)}
@@ -259,14 +294,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .conmut button[data-v="con"][aria-pressed="true"]{background:var(--steel)}
 .medida[data-v="sin"] .m-con,.medida[data-v="con"] .m-sin{display:none!important}
 .kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid var(--hair)}
-.kpi{padding:26px 24px 28px 0;min-width:0}
-.kpi+.kpi{padding-left:24px;border-left:1px solid var(--hair)}
+.kpi{padding-block:26px 28px;padding-inline:0 24px;min-width:0}
+.kpi+.kpi{padding-inline-start:24px;border-inline-start:1px solid var(--hair)}
 .kl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
 .kv{margin-top:12px;font-family:var(--display);font-size:clamp(56px,6vw,90px);line-height:.92;color:var(--ink);display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
 .kv s{font-size:.48em;color:var(--ink-4);text-decoration-thickness:2px;text-decoration-color:rgba(224,122,108,.8)}
 .kv b{font-weight:400;color:var(--steel)}
 .kn{margin-top:12px;font-size:14.5px;line-height:1.45;color:var(--ink-3);max-width:32ch}
-@media (max-width:760px){.kpis{grid-template-columns:minmax(0,1fr)}.kpi{padding:20px 0}.kpi+.kpi{padding-left:0;border-left:0;border-top:1px solid var(--hair)}}
+@media (max-width:760px){.kpis{grid-template-columns:minmax(0,1fr)}.kpi{padding:20px 0}.kpi+.kpi{padding-inline-start:0;border-inline-start:0;border-top:1px solid var(--hair)}}
 .paises{padding-top:26px}
 .pt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
 .barras{margin-top:18px;display:grid;gap:13px}
@@ -276,7 +311,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .barras .pista i{display:block;height:100%;width:0;transition:width 1s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
 .barras .q{background:var(--steel)}
 .barras .k{background:repeating-linear-gradient(135deg,rgba(224,122,108,.75) 0 4px,rgba(224,122,108,.3) 4px 8px)}
-.barras .pv{font-family:var(--mono);font-size:13px;color:var(--ink);text-align:right;white-space:nowrap}
+.barras .pv{font-family:var(--mono);font-size:13px;color:var(--ink);text-align:end;white-space:nowrap}
 .barras .pv small{font-size:12px;color:var(--ink-4)}
 .leyenda{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--ink-3)}
 .leyenda span{display:inline-flex;align-items:center;gap:8px}
@@ -354,7 +389,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     <nav class="acciones" aria-label="Principal">
       <a class="pill c-conexion" href="/orbita/#mi-conexion"><span class="no-movil">Ver mi conexión</span><span class="solo-movil">Mi conexión</span></a>
       <a class="pill prim c-radio" href="/orbita/#radiografias"><span class="no-movil">Ver mi radiografía</span><span class="solo-movil">Mi radiografía</span></a>
-      <a class="pill idioma" href="/nueva/" hreflang="es" aria-current="page" title="Español">ES</a>
+      <div class="idi"><button type="button" class="pill idioma" id="idi-b" aria-haspopup="true" aria-expanded="false" aria-controls="idi-p" aria-label="Idioma"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9M12 3C9.4 5.6 8.1 8.6 8.1 12s1.3 6.4 3.9 9"/></svg><span id="idi-c" translate="no">ES</span></button><div class="idi-p" id="idi-p" hidden><div class="idi-g" id="idi-g"></div></div></div>
     </nav>
   </div>
 </header>
@@ -596,6 +631,58 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   const MOVIL = matchMedia('(max-width: 700px)').matches || matchMedia('(pointer: coarse)').matches;
   const D = Math.PI / 180;
 
+  // ---------- languages: the same 42 as Órbita and Conocer; each one is a small file only its readers download ----------
+  const IDI = [['es','Español','es'],['en','English','en'],['pt','Português (Brasil)','pt-BR'],['fr','Français','fr'],['de','Deutsch','de'],['it','Italiano','it'],['nl','Nederlands','nl'],
+    ['sv','Svenska','sv'],['da','Dansk','da'],['nb','Norsk','nb'],['fi','Suomi','fi'],['is','Íslenska','is'],['pl','Polski','pl'],['uk','Українська','uk'],['ru','Русский','ru'],['tr','Türkçe','tr'],
+    ['zh','简体中文','zh-Hans'],['ja','日本語','ja'],['ko','한국어','ko'],['hi','हिन्दी','hi'],['bn','বাংলা','bn'],['id','Bahasa Indonesia','id'],['vi','Tiếng Việt','vi'],['th','ไทย','th'],
+    ['ar','العربية','ar'],['fa','فارسی','fa'],['he','עברית','he'],['ur','اردو','ur'],['zh-tw','繁體中文','zh-Hant'],['cs','Čeština','cs'],['ro','Română','ro'],['hu','Magyar','hu'],['el','Ελληνικά','el'],
+    ['sk','Slovenčina','sk'],['bg','Български','bg'],['hr','Hrvatski','hr'],['ms','Bahasa Melayu','ms'],['fil','Filipino','fil'],['sw','Kiswahili','sw'],['ta','தமிழ்','ta'],['te','తెలుగు','te'],['pt-pt','Português (Portugal)','pt-PT']];
+  const HTML = document.documentElement, ACT = new Set((HTML.dataset.idiomas || 'es').split(','));
+  const TAG = {}; IDI.forEach((x) => { TAG[x[0]] = x[2]; });
+  const norm = (t) => t.replace(/\s+/g, ' ').trim();
+  const nodos = [], attrs = [];
+  (function walk(el) { for (const n of el.childNodes) {
+    if (n.nodeType === 3) { if (/\S/.test(n.nodeValue)) nodos.push({ n, es: n.nodeValue }); }
+    else if (n.nodeType === 1 && !/^(SCRIPT|STYLE|SVG|CANVAS)$/i.test(n.nodeName) && n.id !== 'titular' && !n.hasAttribute('data-f') && n.getAttribute('translate') !== 'no') walk(n); } })(document.body);
+  document.querySelectorAll('[aria-label],[alt],[title]').forEach((el) => ['aria-label', 'alt', 'title'].forEach((a) => { const v = el.getAttribute(a); if (v) attrs.push({ el, a, es: v }); }));
+  const h1 = document.getElementById('titular'), h1es = h1.innerHTML, tit0 = document.title, meta = document.querySelector('meta[name="description"]'), meta0 = meta ? meta.content : '';
+  const CACHE = {}; let J = null;
+  const carga = (l) => CACHE[l] || (CACHE[l] = fetch('/i18n/nueva/' + l + '.json?v=20261023a').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }));
+  window.__t = (es) => { const v = J && J.t[norm(es)]; return v != null ? v : es; };
+  const titular = () => { if (!J) { h1.innerHTML = h1es; return; } h1.textContent = ''; const sep = J.titular.sep != null ? J.titular.sep : ' '; let d = 0.3;
+    J.titular.w.forEach((w, i) => { const s = document.createElement('span'); s.className = 'w'; s.style.animationDelay = d.toFixed(2) + 's'; d += 0.12; s.textContent = w; h1.append(s); if (J.titular.br === i) h1.append(document.createElement('br')); if (sep) h1.append(document.createTextNode(sep)); });
+    const g = document.createElement('span'); g.className = 'w g-light'; g.style.animationDelay = (d + 0.04).toFixed(2) + 's'; g.textContent = J.titular.g; h1.append(g); };
+  function aplica(l, j, primera) {
+    J = j; HTML.lang = TAG[l] || 'es'; HTML.dir = (j && j.dir) || 'ltr';
+    const pegado = /^(zh|ja)/.test(l);
+    for (const o of nodos) { const v = j ? j.t[norm(o.es)] : null; o.n.nodeValue = v != null ? (pegado ? v : o.es.match(/^\s*/)[0] + v + o.es.match(/\s*$/)[0]) : o.es; }
+    for (const o of attrs) { const v = j ? j.t[norm(o.es)] : null; o.el.setAttribute(o.a, v != null ? v : o.es); }
+    document.title = j && j.title ? j.title : tit0; if (meta) meta.content = j && j.meta ? j.meta : meta0;
+    if (!(primera && l === 'es')) titular();
+    document.getElementById('idi-c').textContent = l.toUpperCase();
+    document.querySelectorAll('#idi-g button').forEach((b) => b.setAttribute('aria-current', String(b.dataset.l === l)));
+    HTML.classList.remove('i18n-espera');
+    if (!primera || l !== 'es') document.dispatchEvent(new CustomEvent('guardiana:lang', { detail: l }));
+  }
+  function ponIdioma(l, recuerda, primera) {
+    if (!ACT.has(l) || !TAG[l]) l = 'es';
+    if (recuerda) try { localStorage.setItem('guardiana-lang', l); localStorage.setItem('guardiana-lang-chosen', '1'); } catch (e) {}
+    if (l === 'es') return aplica('es', null, primera);
+    const t = setTimeout(() => HTML.classList.remove('i18n-espera'), 2500);
+    carga(l).then((j) => { clearTimeout(t); aplica(l, j, primera); }).catch(() => { clearTimeout(t); aplica('es', null, primera); });
+  }
+  (function selector() {
+    const b = document.getElementById('idi-b'), p = document.getElementById('idi-p'), g = document.getElementById('idi-g');
+    IDI.filter((x) => ACT.has(x[0])).forEach(([c, n, t]) => { const o = document.createElement('button'); o.type = 'button'; o.dataset.l = c; o.lang = t; o.setAttribute('translate', 'no');
+      const nb = document.createElement('b'); nb.style.fontWeight = '400'; nb.textContent = n; const sp = document.createElement('span'); sp.textContent = c; o.append(nb, sp); g.append(o); });
+    const abre = (v) => { b.setAttribute('aria-expanded', String(v)); p.hidden = !v; if (v) { const a = g.querySelector('[aria-current="true"]') || g.firstChild; if (a) a.focus({ preventScroll: true }); } };
+    b.addEventListener('click', (e) => { e.stopPropagation(); abre(b.getAttribute('aria-expanded') !== 'true'); });
+    g.addEventListener('click', (e) => { const o = e.target.closest('button'); if (!o) return; abre(false); b.focus({ preventScroll: true }); ponIdioma(o.dataset.l, true); });
+    document.addEventListener('click', (e) => { if (!p.hidden && !p.contains(e.target)) abre(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !p.hidden) { abre(false); b.focus(); } });
+  })();
+  ponIdioma(window.__l0 || 'es', false, true);
+
   // ---------- header and the small planet in the corner ----------
   const top = document.getElementById('top'), hero = document.getElementById('inicio'), mini = document.getElementById('mini');
   const alBajar = () => top.classList.toggle('fijo', scrollY > 30);
@@ -731,7 +818,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     const traza = (a, b, hasta, rgb, alfa, ancho) => { if (alfa <= 0.01 || hasta <= 0) return; ctx.globalAlpha = alfa; ctx.strokeStyle = 'rgb(' + rgb + ')'; ctx.lineWidth = ancho; ctx.beginPath();
       const n = 28; for (let i = 0; i <= n * hasta; i++) { const p = bez(a, b, i / n); if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); } const p = bez(a, b, hasta); ctx.lineTo(p[0], p[1]); ctx.stroke(); };
     const bola = (p, rgb, alfa, r) => { const g = ctx.createRadialGradient(p[0], p[1], 0, p[0], p[1], r); g.addColorStop(0, 'rgba(255,255,255,' + alfa + ')'); g.addColorStop(0.3, 'rgba(' + rgb + ',' + alfa * 0.8 + ')'); g.addColorStop(1, 'rgba(' + rgb + ',0)'); ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p[0], p[1], r, 0, 6.2832); ctx.fill(); };
-    const estado = (i, e) => { const li = lis[i]; if (li.dataset.e === e) return; li.dataset.e = e; li.className = e || ''; pes[i].textContent = e ? TXT[e] : ''; };
+    const estado = (i, e) => { const li = lis[i]; if (li.dataset.e === e) return; li.dataset.e = e; li.className = e || ''; pes[i].textContent = e ? window.__t(TXT[e]) : ''; };
     const paso = (n) => pasos.forEach((li, i) => { li.classList.toggle('on', i + 1 === n); li.classList.toggle('oro', i + 1 === n && n === 4); });
     const llega = (i) => 0.75 + i * 0.09 + 0.8;
     const pinta = (t) => {
