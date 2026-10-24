@@ -469,6 +469,9 @@ uberaba	BR	-19.74833	-47.93194	356781	Uberaba
 uberlandia	BR	-18.91861	-48.27722	754954	Uberlândia
 vitoria	BR	-20.31944	-40.33778	312656	Vitória
 voltaredonda	BR	-22.52306	-44.10417	279971	Volta Redonda
+freeport	BS	26.53333	-78.7	26910	Freeport
+lucaya	BS	26.53333	-78.66667	46525	Lucaya
+westend	BS	26.68711	-78.97702	12724	West End
 chhukha	BT	27.0989	89.53604	2855	Tsimasham
 chukha	BT	27.0989	89.53604	2855	Tsimasham
 gelephu	BT	26.86833	90.48778	9858	Geylegphug
@@ -1227,6 +1230,7 @@ sanarate	GT	14.78828	-90.19876	15843	Sanarate
 santaana	GT	16.80582	-89.82708	9523	Santa Ana
 solola	GT	14.7707	-91.18344	45373	Sololá
 zacapa	GT	14.96867	-89.52732	60424	Zacapa
+antula	GW	11.9	-15.58333	30778	Reino de Antula
 bafata	GW	12.16583	-14.66167	33502	Bafatá
 bambadinca	GW	12.02342	-14.86119	7620	Bambadinca
 bissau	GW	11.86357	-15.59767	439704	Bissau
@@ -1636,6 +1640,14 @@ sisophon	KH	13.58588	102.97369	23218	Sisophon
 stungtreng	KH	13.52586	105.9683	25000	Stung Treng
 svayrieng	KH	11.08785	105.79935	23956	Svay Rieng
 takeo	KH	10.99081	104.78498	843931	Takeo
+chindini	KM	-11.92328	43.49109	1471	Chindini
+foumbouni	KM	-11.86537	43.49529	3386	Foumbouni
+itsandra	KM	-11.67638	43.26466	2684	Itsandra
+mavingouni	KM	-11.71953	43.26233	1390	Mavingouni
+mitsamiouli	KM	-11.38472	43.28444	4811	Mitsamiouli
+mitsoudje	KM	-11.81209	43.28043	3129	Mitsoudjé
+moroni	KM	-11.70216	43.25506	74749	Moroni
+mvouni	KM	-11.71965	43.2752	4791	Mvouni
 anju	KP	39.61778	125.66472	50196	Anju
 chongjin	KP	41.79556	129.77583	327000	Chongjin
 chongju	KP	39.69252	125.21355	29065	Chŏngju-si
@@ -2583,6 +2595,10 @@ taif	SA	21.27028	40.41583	688693	Ta’if
 tayma	SA	27.62233	38.53882	37579	Taymā’
 thuwal	SA	22.28272	39.11245	26957	Thuwal
 yanbu	SA	24.08954	38.0618	200161	Yanbu
+honiara	SB	-9.43333	159.95	56298	Honiara
+anseroyale	SC	-4.73333	55.51667	3818	Anse Royale
+beauvallon	SC	-4.62091	55.43015	4142	Beau Vallon
+victoria	SC	-4.62001	55.45501	22881	Victoria
 atbara	SD	17.70217	33.98638	112021	Atbara
 portsudan	SD	19.61745	37.21644	489725	Port Sudan
 sinkat	SD	18.8405	36.8351	35617	Sinkat
@@ -2694,6 +2710,11 @@ paramaribo	SR	5.86638	-55.16682	223757	Paramaribo
 totness	SR	5.87618	-56.32572	2150	Totness
 wageningen	SR	5.7601	-56.66523	2937	Wageningen
 juba	SS	4.85165	31.58247	450000	Juba
+guadalupe	ST	0.37917	6.6375	0	Guadalupe
+neves	ST	0.35671	6.54897	8391	Neves
+saojoaodosangolares	ST	0.13417	6.64944	0	São João dos Angolares
+saotome	ST	0.33756	6.7299	53300	São Tomé
+trindade	ST	0.29667	6.68139	0	Trindade
 ahuachapan	SV	13.92403	-89.84344	34102	Ahuachapán
 chalchuapa	SV	13.98667	-89.68111	32282	Chalchuapa
 cojutepeque	SV	13.71971	-88.93309	48411	Cojutepeque
@@ -3132,6 +3153,7 @@ trangbang	VN	11.02987	106.35751	161831	Trảng Bàng
 tuyhoa	VN	13.09546	109.32094	155921	Tuy Hòa
 vinh	VN	18.67337	105.69232	790000	Vinh
 vinhlong	VN	10.25369	105.9722	137870	Vĩnh Long
+portvila	VU	-17.73648	168.31366	35901	Port-Vila
 decan	XK	42.54018	20.28793	50500	Deçan
 drenas	XK	42.62833	20.89389	58579	Glogovac
 ferizaj	XK	42.37056	21.15528	59504	Ferizaj
