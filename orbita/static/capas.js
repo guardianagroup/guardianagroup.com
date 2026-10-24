@@ -1671,8 +1671,17 @@
     } else { p.classList.remove('suelto'); p.style.left = ''; p.style.top = ''; p.style.maxHeight = ''; }
     const f = ficha(); if (f) f.hidden = true;
     document.body.classList.add('con-ficha');
+    // 24 Oct 2026 (QA): the browser's or phone's back closes the card instead of leaving Órbita: an open card is one
+    // step in the history (a second card replaces the first, it does not add another step)
+    if (!fichaEnHistoria()) { try { history.pushState(Object.assign({}, history.state || {}, { ficha: 1 }), ''); } catch (_) {} }
   }
-  function cierraPanel() { const p = $('ficha-panel'); if (p) p.hidden = true; panelModelo = null; historial.length = 0; fichaFija = false; document.body.classList.remove('con-ficha'); }
+  const fichaEnHistoria = () => !!(history.state && history.state.ficha);
+  function cierraPanel(desdeHistoria) {
+    const p = $('ficha-panel'); const abierta = !!(p && !p.hidden);
+    if (p) p.hidden = true; panelModelo = null; historial.length = 0; fichaFija = false; document.body.classList.remove('con-ficha');
+    if (abierta && desdeHistoria !== true && fichaEnHistoria()) { try { history.back(); } catch (_) {} } // its step goes too
+  }
+  addEventListener('popstate', () => { if (panelModelo && !fichaEnHistoria()) cierraPanel(true); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panelModelo) cierraPanel(); });
   // a model from a flat list of rows: the summary takes the keys named first (or the first five), each remaining row
   // goes to the section its key belongs to; unknown keys fall into «Más datos»
