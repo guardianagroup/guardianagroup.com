@@ -55,6 +55,12 @@ SITIOS = {
     ('PH', 'mexico'): (120.72, 15.06), ('AR', 'riogrande'): (-67.71, -53.79), ('AR', 'tolhuin'): (-67.19, -54.51), ('PE', 'lurin'): (-76.87, -12.27),
     ('PE', 'puquio'): (-74.13, -14.70), ('PE', 'huanuco'): (-76.24, -9.93), ('SA', 'haql'): (34.94, 29.29), ('BO', 'puertoquijarro'): (-57.77, -17.78),
     ('PE', 'lamerced'): (-75.33, -11.06), ('TH', 'sadao'): (100.42, 6.64), ('RU', 'kyakhta'): (106.45, 50.35),
+    # 24 Oct 2026 (ronda 25, países isla): coordinates from OpenStreetMap (Nominatim), not in GeoNames cities500
+    ('GW', 'ilonde'): (-15.736, 11.900), ('GW', 'bissalanca'): (-15.672, 11.899), ('GW', 'saltinho'): (-14.687, 11.618),
+    ('SN', 'tanaff'): (-15.428, 12.656), ('SN', 'mpack'): (-16.236, 12.461), ('ST', 'santana'): (6.707, 0.262),
+    ('KM', 'iconi'): (43.238, -11.745), ('KM', 'hahaya'): (43.271, -11.564), ('KM', 'voidjou'): (43.263, -11.650), ('KM', 'mkazi'): (43.266, -11.732),
+    ('VU', 'mele'): (168.263, -17.697), ('VU', 'blacksands'): (168.297, -17.712),
+    ('BS', 'crossingrocks'): (-77.197, 26.124), ('BS', 'eightmilerock'): (-78.806, 26.541),
 }
 
 PARECIDO = 1.35  # the other voice's path between two cities may be this much longer than the straight line (+ 60 km)

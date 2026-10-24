@@ -4343,6 +4343,37 @@
 ]
 },
 {
+"n": "Red terrestre Comores Telecom – Moroni–Mavingouni",
+"o": "Comores Telecom",
+"cc": "KM",
+"l": [
+[
+43.26,
+-11.7
+],
+[
+43.238,
+-11.745
+],
+[
+43.275,
+-11.72
+],
+[
+43.266,
+-11.732
+],
+[
+43.28,
+-11.812
+],
+[
+43.262,
+-11.72
+]
+]
+},
+{
 "n": "Superistral North-South Ring",
 "o": "Kazakhtelecom",
 "cc": "KZ",
@@ -6056,6 +6087,29 @@
 ]
 },
 {
+"n": "Enlace terrestre MTN Bissau–São Domingos",
+"o": "MTN Guinea-Bissau",
+"cc": "GW",
+"l": [
+[
+-15.6,
+11.86
+],
+[
+-15.65,
+11.95
+],
+[
+-15.708,
+12.104
+],
+[
+-16.201,
+12.402
+]
+]
+},
+{
 "n": "Red Troncal Nacional (RNFO) – nodos Oyala–Evinayong–Bicurga",
 "o": "GITGE",
 "cc": "GQ",
@@ -6627,6 +6681,25 @@
 ]
 },
 {
+"n": "OMVG Guinea-Bissau OPGW backbone",
+"o": "OMVG/SOGESART; EDG fue el operador temporal documentado en la puesta en servicio",
+"cc": "GW",
+"l": [
+[
+-14.687,
+11.618
+],
+[
+-14.861,
+12.023
+],
+[
+-15.319,
+12.073
+]
+]
+},
+{
 "n": "AzerTelecom - troncal occidental hacia Georgia",
 "o": "AzerTelecom",
 "cc": "AZ",
@@ -6865,6 +6938,25 @@
 [
 30.54,
 56.34
+]
+]
+},
+{
+"n": "Red de fibra óptica CST – Zona Norte",
+"o": "CST",
+"cc": "ST",
+"l": [
+[
+6.73,
+0.34
+],
+[
+6.638,
+0.379
+],
+[
+6.549,
+0.357
 ]
 ]
 },
@@ -7331,6 +7423,36 @@
 [
 -58.31,
 6.01
+]
+]
+},
+{
+"n": "SEAS – Tramo terrestre Beau Vallon–Victoria",
+"o": "Seychelles Cable Systems",
+"cc": "SC",
+"l": [
+[
+55.43,
+-4.621
+],
+[
+55.46,
+-4.62
+]
+]
+},
+{
+"n": "EASSy – Tramo terrestre Itsandra–Moroni",
+"o": "Comores Telecom",
+"cc": "KM",
+"l": [
+[
+43.265,
+-11.676
+],
+[
+43.26,
+-11.7
 ]
 ]
 },
@@ -10268,6 +10390,21 @@
 [
 46.72,
 24.69
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "GW",
+"l": [
+[
+-15.6,
+11.86
+],
+[
+-15.319,
+12.073
 ]
 ]
 },
