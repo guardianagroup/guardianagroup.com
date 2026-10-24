@@ -1,8 +1,76 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-Actualizado el sábado 24 de octubre de 2026 a las 14:30, hora de Bogotá, al cerrar la cuenta anterior al 98 % de su uso semanal. Copia de seguridad: todo está en GitHub con su historial completo. Al cerrar, `main` iba en `3658db6` y `web-idiomas` en el commit de este documento. Desde esta sesión no se pueden subir etiquetas de git: el proxy lo rechaza. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
+Actualizado el sábado 24 de octubre de 2026 a las 15:45, hora de Bogotá, al cerrar la segunda cuenta del día al 86 % de su uso semanal. Copia de seguridad: todo está en GitHub con su historial completo. Al cerrar, `main` iba en `6487cd6` (más el commit que hará el workflow de empresas al terminar) y `web-idiomas` en el commit de este documento. Desde esta sesión no se pueden subir etiquetas de git: el proxy lo rechaza. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
 
-## Estado al cerrar la cuenta (24 Oct 2026, 14:30, al 98 % de uso)
+## Estado al cerrar esta cuenta (24 Oct 2026, 15:45, al 86 % de uso) — empieza por aquí
+
+**Todo está subido y publicado.** No queda nada sin guardar en local. Lo de más abajo («Estado anterior», «Lo que quedó a medias») es de las 14:30 y vale como referencia de cómo funcionan las cosas; lo vigente es esta sección.
+
+**Hecho y publicado en esta cuenta (14:20–15:45)**
+- **Ronda 24c:** Gemini confirma 59 de los 61 cables de una sola voz → **435 cables submarinos de la agencia**.
+- **Fotos en las fichas de Órbita:** 29 fotos revisadas una a una, con crédito en la ficha y en `terminos.html` §6. El dueño aprobó el diseño (14:46).
+- **Rondas 25 y 25b, cables por tierra:** **181 países**, 1.346.147 km, 437 tramos de la agencia.
+  - Ronda 25: entran Guinea-Bisáu, Santo Tomé y Comoras.
+  - Ronda 25b: entran Andorra, Macao, Guam, Islas Vírgenes de EE. UU., Islas Caimán, Guadalupe, Martinica, Reunión y Guayana Francesa.
+- **Fichas de empresas (punto 6 de «Lo siguiente»):** la herramienta está hecha y su primera búsqueda estaba en marcha al cerrar (ver abajo).
+
+**Lo que falta para el mapa «al 100 %»**
+- **Sin cables por tierra todavía:**
+  - Hong Kong, Singapur, Mónaco, Aruba, Curazao, Polinesia Francesa, Samoa, Mayotte y Tonga: en la ronda 25b, ChatGPT y Gemini dan tramos distintos. ChatGPT no respondió Mayotte ni Tonga.
+  - Vanuatu, Bahamas e Islas Salomón: lo mismo, en la ronda 25.
+  - Seychelles: su tramo mide menos de 5 km, y `fibra_tierra.py` quita las líneas de menos de 5 km. A Mónaco le pasará lo mismo: cualquier tramo suyo mide menos de 5 km; pregúntale al dueño si se hace una excepción para las ciudades-Estado.
+  - Eritrea: usa radioenlaces, no fibra.
+  - Sáhara Occidental y otros territorios pequeños.
+- **Siguiente paso: una ronda de confirmación cruzada.** Pídele a ChatGPT que confirme o corrija, ciudad por ciudad, las rutas de Gemini, y a Gemini las de ChatGPT, con las mismas listas de ciudades para que casen. Las respuestas están en `herramientas/fibra-agencia/gemini-troncales-territorios-1.json`, `chatgpt-troncales-territorios-1.json` y los `*-troncales-islas-1.json` (Vanuatu, Bahamas e Islas Salomón). Después, el proceso de los cables por tierra de más abajo.
+- **Pueblos sin situar** (solo hacen falta si una ruta llega a casar): Chai Wan (HK); Ayer Rajah, Tai Seng, Tuas y Downtown Core (SG); Fontvieille, La Condamine y Larvotto (MC); Havensight y Red Hook (VI); Seven Mile Beach y South Sound (KY); Blue Bay, Boka Sami y Nieuwpoort (CW); Papenoo y Taravao (PF); Fagali'i, Faleolo y Aleipata (WS).
+  - Se añaden a `SITIOS` en `fibra_agencia.py` con las coordenadas de Nominatim (OpenStreetMap), pedidas con `fetch` desde la pestaña de Wikimedia Commons del navegador integrado.
+- **Cables submarinos:** quedan 36 que nombra una sola voz (lista «solo lo nombra» de `cables_agencia.py`). Necesitan una segunda voz.
+
+**En marcha al cerrar: fichas de empresas con su sede**
+- **Qué hay:** `herramientas/empresas.py` y su workflow `.github/workflows/empresas.yml`, con dos modos: `buscar` y `copiar`.
+- **Run en marcha:** el `40129919220` (modo `buscar`, lanzado a las 15:25 en `main`). Al terminar, guarda `orbita/datos/empresas-candidatas.json` en `main` y sube el artefacto `hojas-empresas`: hojas de contacto con las fotos candidatas numeradas, que nunca se publican.
+- **Qué busca:** 121 empresas (las 100 de `espejo.json` y las 49 páginas de `empresas/`, juntas; la página «X» es «X Corp.»).
+  - Empareja cada empresa con su elemento de Wikidata por el dominio de su web, o por el mismo nombre, siendo empresa, en el mismo país.
+  - Recoge la sede (P159 y sus calificadores), la dirección según varias voces, el año de fundación, la matriz, el sector, los empleados, la bolsa y la Wikipedia.
+    - Las voces de la dirección son Wikidata, la SEC (EDGAR, por P5531), SIRENE (Francia, por P1616), el registro de corredores de datos de California (CPPA, `registry.csv`, por dominio o nombre) y OpenStreetMap (Overpass, junto a la sede).
+  - Fotos candidatas, con licencia, autor y GPS:
+    - la P18 de la empresa y la del edificio de la sede;
+    - los edificios que ocupa (P466);
+    - los archivos de Commons cuyo nombre o categoría dice sede, oficina o edificio;
+    - los archivos con GPS a menos de 150 m de la dirección.
+  - Propone una dirección: la de un registro oficial, o una en la que coincidan dos voces (mismo número y misma calle).
+- **Si el run falla:** mira el error con `gh run view 40129919220 --log-failed -R guardianagroup/guardianagroup.com`, arregla `empresas.py`, publícalo en `main` y relánzalo con `gh workflow run empresas.yml --ref main`.
+- **Pasos siguientes**
+  1. `git fetch origin` y trae `orbita/datos/empresas-candidatas.json` a `web-idiomas`. Descarga las hojas con `gh run download <id> -n hojas-empresas -D <carpeta temporal>` y míralas una a una con Read.
+  2. **Revisión una a una.**
+     - Foto: solo si es el edificio real de la sede, sin personas, sin logotipos y sin productos.
+     - Dirección: solo si la da un registro oficial o la confirman dos voces.
+     - Escribe `herramientas/agencia-rondas/empresas/revision-1.json` con este formato: `{"empresas": {"Criteo": {"foto": "<nombre exacto del archivo en Commons>" o null, "que_foto": "Sede de Criteo en París", "direccion": {"texto": "…", "voces": ["sirene", "wikidata"], "fuente": "…", "oficial": true} o null, "lonlat": [lon, lat]}}}`.
+     - Las de `sin_emparejar`: busca a mano su elemento de Wikidata y añádelo a `FORZADAS` en `empresas.py`, con el motivo.
+  3. Publica la revisión en `main` y lanza `gh workflow run empresas.yml --ref main -f modo=copiar`. Escribe `orbita/datos/empresas.json` y `orbita/static/fotos/empresa-*.jpg`; tráelos a `web-idiomas`.
+  4. **Captura de diseño para que el dueño la apruebe antes de programar.** La ficha de empresa lleva la foto de la sede con su crédito, la dirección con su fuente, un mapa pequeño, los datos y las fuentes. Dónde va:
+     - **Órbita, ESPEJO** (`orbita/static/espejo.js`, la lista `#espejo-lista`): al pulsar una empresa, su ficha.
+     - **Páginas `empresas/*.html`**: un bloque «Sede» con la foto y la dirección. Esas páginas no tienen generador en este repositorio: se parchean con un script entre marcadores. Tienen versión en `en/` y `pt/`; nunca copies `en/` ni `pt/` de `web-idiomas` a `main`.
+     - **ZERO** (`orbita/zero/index.html`, una demostración con empresas inventadas «· ejemplo»): `pintaFicha` y el informe PDF `informe()`, que tiene la columna «País · sede». El programa de escritorio ya no existe (§1), así que solo la web.
+     - **Radiografías:** nombran empresas en el texto; se añadirían enlaces a sus fichas, si el dueño lo aprueba.
+     - **PDF:** el de la ficha de Órbita (`capas.js`, botón `.pdf`, clase `imprime-ficha`), el informe de ZERO (`informe()`) y «El viaje de tus datos» (`viaje.js`). Llevan la foto con su crédito y la dirección.
+  5. Crédito de cada foto en `terminos.html` §6 (`#fotos`), como las de Órbita.
+- **Datos útiles en el repositorio del programa** `guardianagroup/guardiana` (público; aquí solo se puede leer):
+  - `crates/lists/data/fichas.json`: las 49 fichas de empresa (qué hace, cómo gana dinero, sanciones, filtraciones…).
+  - `crates/lists/data/corredores.txt`: el registro de California, con 603 inscripciones (8 de octubre de 2026).
+
+**La agencia ahora:** Gemini (Argon), ChatGPT («Alta»), Astra 6 (Playground de platform.cheaperinference.com, modelo `gpt-6-astra`, máximo 4.096 tokens) y Claude. Kimi y Grok están fuera.
+
+**Pestañas del navegador integrado al cerrar**
+- `seed`: Gemini, chat de los territorios.
+- `tab-1`: ChatGPT, chat «Redes de fibra terrestre».
+- `tab-2`: Cheaper Inference.
+- `tab-9`: Wikimedia Commons, para pedir con `fetch` a Nominatim y a Wikidata.
+- `tab-10`: guardianagroup.com.
+
+**Sin empezar, de «Lo siguiente»:** los puntos 2 (captura de diseño de Países, línea del tiempo, «Verlo en Órbita» y ficha de país), 3 (comparativa de los 11 diarios), 4 (ficha de país, línea del tiempo y Measurement Lab) y 7 (propuesta «Cómo funciona internet»); los ⬜ de `qa/revision-orbita-2026-10-24.md`; los términos nuevos; las páginas antiguas que todavía hablan del programa; y los idiomas de Órbita.
+
+## Estado anterior (24 Oct 2026, 14:30, al 98 % de uso de la cuenta anterior)
 
 **Ramas:** `main` (la web en vivo) y `web-idiomas` están al día. `web-idiomas` tiene además este documento y las preguntas de Kimi.
 
@@ -127,6 +195,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 14:30, hora de Bogotá, al ce
    - Para cada empresa que vende, compra o subasta datos (y telemetría, publicidad, etc.): foto real de su **sede** (Wikimedia Commons con licencia libre, copiada a `guardianagroup.com`, con autor y licencia), **dirección de la sede principal** y todo lo verificable (año de fundación, matriz, país, a qué se dedica, sanciones públicas).
    - Fuentes: Wikidata (P159 sede, P6375 dirección, P18 o la foto del edificio de la sede, P571, P749), el registro de corredores de datos de California (CPPA, ya en `corredores.txt`), OpenStreetMap. Nada de PeeringDB ni TeleGeography. Sin logotipos.
    - Mismo método que las fotos de Órbita: un workflow las busca, se revisan una a una (solo fotos reales del edificio, sin personas) y se guardan en un JSON con crédito. Que salga en las fichas de Radiografías, ZERO y Órbita y en sus PDF.
+   - **Estado a las 15:45:** `herramientas/empresas.py` y `empresas.yml` hechos; la primera búsqueda estaba en marcha. Los pasos siguientes están en «Estado al cerrar esta cuenta», al principio.
 7. **Propuesta, pendiente de que el dueño la apruebe:** una explicación «Cómo funciona internet» en Órbita, sobre las capas que ya existen: tu equipo → la antena o el wifi → la red de tu operador → las troncales por tierra → los puntos de intercambio y los centros de datos → los cables submarinos → el servidor de la web. El dueño preguntó (13:56) de dónde «sale» internet. Se podría añadir una capa con las copias de los servidores raíz del DNS, si su licencia lo permite.
 
 **Lo que el dueño encargó a Astra 6** (todo en `herramientas/agencia-rondas/`)
@@ -153,10 +222,10 @@ Actualizado el sábado 24 de octubre de 2026 a las 14:30, hora de Bogotá, al ce
    - Usa un worktree aparte para `main`: `git worktree add ../wt-main --detach origin/main` (ver §3).
 2. **El ordenador del dueño**
    - Enlaza el chat con su ordenador desde la app de escritorio de Claude.
-   - Las voces de la agencia (ChatGPT, Gemini, Grok, Kimi y Astra 6, en platform.cheaperinference.com) se usan desde el **navegador integrado** de esa app, con las sesiones del dueño.
+   - Las voces de la agencia (ChatGPT, Gemini y Astra 6, en platform.cheaperinference.com; Kimi y Grok ya no) se usan desde el **navegador integrado** de esa app, con las sesiones del dueño.
    - Si alguna sesión no está abierta, pídele al dueño que la abra. Tú nunca escribes contraseñas ni claves.
 3. **Lectura:** este documento entero; después, `herramientas/TRASPASO.md` y `herramientas/agencia-rondas/qa/revision-orbita-2026-10-24.md`.
-4. **Primera tarea:** a las 14:30 todo lo guardado estaba procesado y publicado. Sigue por la ronda 24c (Gemini) y después por las fotos (punto 5 de «Lo siguiente»).
+4. **Primera tarea:** a las 15:45 todo lo guardado estaba procesado y publicado. Sigue por lo que dice «Estado al cerrar esta cuenta», al principio: el resultado del workflow de empresas y la ronda de confirmación cruzada de los territorios. La ronda 24c y las fotos de Órbita ya están hechas.
 5. **La ronda 23 de Astra está terminada.** Si vuelves a preguntarle algo, hazlo en tandas pequeñas.
    - Astra corta a 4.096 tokens, contando el razonamiento.
    - El Playground no guarda la conversación: si una respuesta se corta, pregunta solo por los países que faltaron.
@@ -591,3 +660,8 @@ Actualizado el sábado 24 de octubre de 2026 a las 14:30, hora de Bogotá, al ce
 - **Fotos de las fichas (punto 5 de «Lo siguiente»): hechas y publicadas.** Revisión una a una de las 59 candidatas (`agencia-rondas/fotos/revision-1.json`): 29 aceptadas (1 satélite, 14 centros, 14 bases). `herramientas/fotos.py copiar` (workflow `fotos.yml` con `modo=copiar`) las copia a `orbita/static/fotos/` y escribe `orbita/datos/fotos.json`. En `capas.js`: `pideFotos`, `fotoDe(tipo, id)`, `pintaFoto`, `fotoFicha`; la ficha completa lleva la foto arriba con su crédito y la ficha al pasar el ratón una tira; los satélites abren ya ficha completa al hacer clic. Créditos en `terminos.html` (`#fotos`, sección 6). El dueño aprobó el diseño (14:46). Versiones: `capas.js?v=20261025y`, `orbita.css?v=20261025t`, `idioma.js?v=20261025r`.
 - **Ronda 25 (fibra por tierra de los países que faltaban):** Astra, ChatGPT y Gemini. Entran **Guinea-Bisáu, Santo Tomé y Comoras** → **172 países**, 1.345.952 km. No entran Vanuatu, Bahamas ni Islas Salomón (cada voz da un tramo distinto). Coordenadas de pueblos que no están en GeoNames cities500, puestas en `SITIOS` desde OpenStreetMap (Nominatim). En marcha: ChatGPT y Gemini con los territorios y ciudades-Estado (HK, SG, MO, MC, AD, GU, VI, KY, AW, CW, GP, MQ, RE, YT, GF, PF, WS, TO).
 - **Tarea nueva del dueño** (14:42): fichas de empresas de datos con foto de la sede y dirección (punto 6 de «Lo siguiente»).
+
+**24 Oct 2026, 15:40–15:45 — hecho y publicado en las dos ramas (cierre de esta cuenta, al 86 %)**
+- **Ronda 25b terminada:** ChatGPT (21 rutas) y Gemini (18) con los territorios y las ciudades-Estado (`fibra-agencia/chatgpt-troncales-territorios-1.json` y `gemini-troncales-territorios-1.json`). Con dos voces entran 9: AD, MO, GU, VI, KY, GP, MQ, RE y GF → **181 países**, 1.346.147 km y 437 tramos de la agencia (commit `6487cd6` en `main`). Piti, Asan y Grove Place, situados con Nominatim, están en `SITIOS`.
+- **Fichas de empresas:** `herramientas/empresas.py` y `.github/workflows/empresas.yml` están publicados (commit `b1fe782` en `main`). El run `40129919220` (modo `buscar`) estaba en marcha al cerrar.
+- **Repositorio del programa:** `guardianagroup/guardiana` está clonado solo para leer (sus fichas y el registro de corredores de California).
