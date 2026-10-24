@@ -966,6 +966,8 @@
     'Los trayectos son ilustrativos: van por los cables y satélites del mapa, no por la ruta real de cada dato.': ['The paths are illustrative: they follow the cables and satellites on the map, not the real route of each piece of data.', 'Os trajetos são ilustrativos: seguem os cabos e satélites do mapa, não a rota real de cada dado.'],
     'Entiende cada conexión. Decide tu propio rumbo.': ['Understand every connection. Decide your own course.', 'Entenda cada conexão. Decida o seu próprio rumo.'],
     'Satélite': ['Satellite', 'Satélite'],
+    'Foto': ['Photo', 'Foto'],
+    'autor sin nombre': ['author not named', 'autor sem nome'],
     'Rastreo': ['Tracking', 'Rastreamento'],
     'Medición': ['Measurement', 'Medição'],
     'Funcional': ['Functional', 'Funcional'],
