@@ -2209,8 +2209,10 @@ chiangrai	TH	19.90858	99.8325	78756	Chiang Rai
 chonburi	TH	13.3622	100.98345	219164	Chon Buri
 chumphon	TH	10.4957	99.17971	55835	Chumphon
 hatyai	TH	7.00836	100.47668	191696	Hat Yai
+huahin	TH	12.57065	99.95876	126355	Hua Hin
 khonkaen	TH	16.44671	102.833	114459	Khon Kaen
 lampang	TH	18.29232	99.49277	156139	Lampang
+lamphun	TH	18.58054	99.00745	43196	Lamphun
 nakhonratchasima	TH	14.97066	102.10196	126391	Nakhon Ratchasima
 nakhonsawan	TH	15.70472	100.13717	82305	Nakhon Sawan
 nongkhai	TH	17.87847	102.742	63609	Nong Khai
@@ -2220,10 +2222,13 @@ phranakhonsiayutthaya	TH	14.35167	100.57739	50830	Phra Nakhon Si Ayutthaya
 prachuapkhirikhan	TH	11.82098	99.7841	33521	Prachuap Khiri Khan
 ratchaburi	TH	13.53671	99.81712	92448	Ratchaburi
 sadao	TH	6.63883	100.42342	46236	Sadao
+saraburi	TH	14.53333	100.91667	67763	Saraburi
 suratthani	TH	9.14011	99.33311	132040	Surat Thani
 tak	TH	16.86968	99.12898	24149	Tak
+thungsong	TH	8.16453	99.68039	28223	Thung Song
 ubonratchathani	TH	15.23844	104.84866	122533	Ubon Ratchathani
 udonthani	TH	17.41567	102.78589	130531	Udon Thani
+uttaradit	TH	17.62557	100.09421	58313	Uttaradit
 ayni	TJ	39.39406	68.53766	2128	Ayní
 bokhtar	TJ	37.83654	68.77762	110800	Bokhtar
 buston	TJ	40.23417	69.69481	36900	Buston
@@ -2323,8 +2328,26 @@ tozeur	TN	33.91968	8.13352	37370	Tozeur
 tunis	TN	36.81897	10.16579	693210	Tunis
 zaghouan	TN	36.40291	10.14292	20798	Zaghouan
 zarzis	TN	33.50398	11.11215	79316	Zarzis
+adana	TR	36.98615	35.32531	1816750	Adana
+adapazari	TR	40.78056	30.40333	286787	Adapazarı
+aksaray	TR	38.37255	34.02537	327575	Aksaray
 ankara	TR	39.91987	32.85427	3517182	Ankara
+balikesir	TR	39.64917	27.88611	238151	Balıkesir
+bolu	TR	40.73583	31.60611	184682	Bolu
+bursa	TR	40.19559	29.06013	3101833	Bursa
+erzincan	TR	39.73919	39.49015	150714	Erzincan
+erzurum	TR	39.90861	41.27694	767848	Erzurum
+gaziantep	TR	37.05944	37.3825	2222415	Gaziantep
 istanbul	TR	41.01384	28.94966	15701602	Istanbul
+izmir	TR	38.41273	27.13838	2938292	İzmir
+izmit	TR	40.76499	29.92928	196571	İzmit
+kirikkale	TR	39.84528	33.50639	186960	Kırıkkale
+manisa	TR	38.61202	27.42647	243971	Manisa
+osmaniye	TR	37.07417	36.24778	202837	Osmaniye
+pozanti	TR	37.42778	34.87167	10517	Pozantı
+sivas	TR	39.74833	37.01611	264022	Sivas
+yalova	TR	40.65501	29.27693	71289	Yalova
+yozgat	TR	39.82	34.80444	87881	Yozgat
 arima	TT	10.63737	-61.28228	35000	Arima
 chaguanas	TT	10.51667	-61.41667	67433	Chaguanas
 couva	TT	10.42248	-61.46748	5178	Couva
@@ -2339,10 +2362,12 @@ tunapuna	TT	10.65245	-61.38878	17758	Tunapuna
 banqiao	TW	25.01427	121.46719	551221	Banqiao
 changhua	TW	24.07327	120.56276	226564	Chang-hua
 chiayi	TW	23.47917	120.44889	263188	Chiayi City
+chiayicity	TW	23.47917	120.44889	263188	Chiayi City
 douliu	TW	23.70944	120.54333	107924	Douliu
 hengchun	TW	22.00417	120.74389	29702	Hengchun
 hsinchu	TW	24.80361	120.96861	453536	Hsinchu
 hualien	TW	23.97694	121.60444	99458	Hualien City
+hualiencity	TW	23.97694	121.60444	99458	Hualien City
 kaohsiung	TW	22.61626	120.31333	2737660	Kaohsiung
 keelung	TW	25.13089	121.74094	362487	Keelung
 miaoli	TW	24.56427	120.82367	86327	Miaoli
@@ -2353,6 +2378,7 @@ tainan	TW	22.99259	120.20507	1856642	Tainan
 taipei	TW	25.05306	121.52639	7871900	Taipei
 taitung	TW	22.75991	121.14457	103260	Taitung
 taoyuan	TW	24.99368	121.29696	475798	Taoyuan
+taoyuancity	TW	24.99368	121.29696	475798	Taoyuan
 yilan	TW	24.757	121.753	94188	Yilan
 arusha	TZ	-3.36667	36.68333	617631	Arusha
 chalinze	TZ	-6.63784	38.35396	34335	Chalinze
