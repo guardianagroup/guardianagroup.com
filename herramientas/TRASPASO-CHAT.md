@@ -1,6 +1,6 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-Actualizado el sábado 24 de octubre de 2026 a las 14:30, hora de Bogotá, al cerrar la cuenta anterior al 98 % de su uso semanal. Copia de seguridad en GitHub con las etiquetas `copia-2026-10-24-1430-web-idiomas` y `copia-2026-10-24-1430-main`. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
+Actualizado el sábado 24 de octubre de 2026 a las 14:30, hora de Bogotá, al cerrar la cuenta anterior al 98 % de su uso semanal. Copia de seguridad: todo está en GitHub con su historial completo. Al cerrar, `main` iba en `3658db6` y `web-idiomas` en el commit de este documento. Desde esta sesión no se pueden subir etiquetas de git: el proxy lo rechaza. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
 
 ## Estado al cerrar la cuenta (24 Oct 2026, 14:30, al 98 % de uso)
 
