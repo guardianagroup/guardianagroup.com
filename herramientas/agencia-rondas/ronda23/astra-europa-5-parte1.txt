@@ -1,0 +1,70 @@
+[
+  {
+    "nombre": "Lisbon–Porto",
+    "operador": "IP Telecom",
+    "pais": "PT",
+    "ciudades": ["Lisbon", "Santarém", "Entroncamento", "Pombal", "Coimbra", "Aveiro", "Porto"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra óptica ferroviaria de IP Telecom (iptelecom.pt); secuencia urbana inferida del corredor ferroviario Linha do Norte, no de un trazado de cable publicado."
+  },
+  {
+    "nombre": "Lisbon–Faro",
+    "operador": "IP Telecom",
+    "pais": "PT",
+    "ciudades": ["Lisbon", "Setúbal", "Alcácer do Sal", "Grândola", "Tunes", "Faro"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra óptica ferroviaria de IP Telecom (iptelecom.pt); secuencia probable por las líneas ferroviarias del sur y del Algarve."
+  },
+  {
+    "nombre": "Entroncamento–Vilar Formoso",
+    "operador": "IP Telecom",
+    "pais": "PT",
+    "ciudades": ["Entroncamento", "Abrantes", "Castelo Branco", "Covilhã", "Guarda", "Vilar Formoso"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra óptica ferroviaria de IP Telecom (iptelecom.pt); secuencia inferida de las líneas Beira Baixa y Beira Alta. El segmento descrito termina dentro de Portugal."
+  },
+  {
+    "nombre": "Bucharest–Timișoara",
+    "operador": "Digi România",
+    "pais": "RO",
+    "ciudades": ["Bucharest", "Pitești", "Râmnicu Vâlcea", "Sibiu", "Sebeș", "Deva", "Lugoj", "Timișoara"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra descrita en los informes de Digi Communications (digicommunications.ro); secuencia probable por los corredores DN7, A1 y DN68A. No representa una alineación de cable publicada."
+  },
+  {
+    "nombre": "Bucharest–Cluj-Napoca–Oradea",
+    "operador": "Digi România",
+    "pais": "RO",
+    "ciudades": ["Bucharest", "Ploiești", "Brașov", "Sighișoara", "Târgu Mureș", "Turda", "Cluj-Napoca", "Oradea"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de Digi Communications (digicommunications.ro); secuencia urbana probable por los corredores DN1, DN13, DN15 y nuevamente DN1."
+  },
+  {
+    "nombre": "Bucharest–Constanța",
+    "operador": "Digi România",
+    "pais": "RO",
+    "ciudades": ["Bucharest", "Fetești", "Cernavodă", "Constanța"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de Digi Communications (digicommunications.ro); secuencia inferida del corredor de transporte A2 y ferroviario Bucharest–Constanța, sin identificar la canalización exacta."
+  },
+  {
+    "nombre": "Moscow–Saint Petersburg",
+    "operador": "TransTeleCom (TTK)",
+    "pais": "RU",
+    "ciudades": ["Moscow", "Tver", "Bologoye", "Saint Petersburg"],
+    "estado": "en servicio",
+    "fuente": "aproximado: mapa y descripción de la red troncal de TTK (ttk.ru), desplegada principalmente sobre infraestructura ferroviaria; ciudades intermedias inferidas del ferrocarril Moscow–Saint Petersburg."
+  },
+  {
+    "nombre": "Moscow–Novosibirsk",
+    "operador": "TransTeleCom (TTK)",
+    "pais": "RU",
+    "ciudades": ["Moscow", "Vladimir", "Nizhny Novgorod", "Kirov", "Perm", "Yekaterinburg", "Tyumen", "Ishim", "Omsk", "Novosibirsk"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal ferroviaria de TTK (ttk.ru); secuencia probable por el corredor ferroviario septentrional hacia Siberia, íntegramente dentro de Rusia."
+  },
+  {
+    "nombre": "Novosibirsk–Vladivostok",
+    "operador": "TransTeleCom (TTK)",
+    "pais": "RU",
+    "ciudades": ["Novosibirsk", "Krasnoyarsk", "Tayshet", "Irkutsk", "Ulan-Ude", "Chita", "Skovorodino", "Belogorsk", "Khabarov
