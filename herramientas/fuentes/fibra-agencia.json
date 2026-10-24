@@ -6053,6 +6053,29 @@
 ]
 },
 {
+"n": "Corredor de fibra de la costa meridional de Barbados",
+"o": "Flow Barbados",
+"cc": "BB",
+"l": [
+[
+-59.62,
+13.11
+],
+[
+-59.599,
+13.075
+],
+[
+-59.581,
+13.071
+],
+[
+-59.542,
+13.063
+]
+]
+},
+{
 "n": "Corredor terrestre de Streymoy: Tjørnuvík–Tórshavn",
 "o": "NET / Føroya Tele",
 "cc": "FO",
@@ -7053,6 +7076,44 @@
 ]
 },
 {
+"n": "Corredor de fibra de la costa occidental de Barbados",
+"o": "Flow Barbados",
+"cc": "BB",
+"l": [
+[
+-59.62,
+13.11
+],
+[
+-59.637,
+13.186
+],
+[
+-59.642,
+13.25
+]
+]
+},
+{
+"n": "Corredor oriental de fibra de Bermudas",
+"o": "Digicel Bermuda / Bermuda Telephone Company",
+"cc": "BM",
+"l": [
+[
+-64.78,
+32.29
+],
+[
+-64.739,
+32.321
+],
+[
+-64.677,
+32.381
+]
+]
+},
+{
 "n": "Corredor terrestre oriental de Eysturoy: Leirvík–Toftir",
 "o": "NET / Føroya Tele",
 "cc": "FO",
@@ -7125,6 +7186,25 @@
 [
 -172.219,
 -13.743
+]
+]
+},
+{
+"n": "Laayoune–Boujdour–Dakhla",
+"o": "Maroc Telecom",
+"cc": "EH",
+"l": [
+[
+-13.19,
+27.14
+],
+[
+-14.49,
+26.13
+],
+[
+-15.96,
+23.68
 ]
 ]
 },
@@ -7778,6 +7858,51 @@
 [
 19.51,
 42.07
+]
+]
+},
+{
+"n": "Corredor occidental de fibra de Bermudas",
+"o": "Digicel Bermuda / Bermuda Telephone Company",
+"cc": "BM",
+"l": [
+[
+-64.78,
+32.29
+],
+[
+-64.87,
+32.296
+]
+]
+},
+{
+"n": "Willemstad–Sint Michiel",
+"o": "Flow / UTS",
+"cc": "CW",
+"l": [
+[
+-68.89,
+12.12
+],
+[
+-68.996,
+12.142
+]
+]
+},
+{
+"n": "Kolonia–Palikir",
+"o": "FSM Telecommunications Corporation",
+"cc": "FM",
+"l": [
+[
+158.209,
+6.964
+],
+[
+158.163,
+6.921
 ]
 ]
 },
