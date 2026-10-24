@@ -1693,22 +1693,29 @@ salima	MW	-13.7804	34.4587	41492	Salima
 zomba	MW	-15.38596	35.3188	118440	Zomba
 acapulco	MX	16.84942	-99.90891	658609	Acapulco de Juárez
 aguascalientes	MX	21.88262	-102.2843	722250	Aguascalientes
+campeche	MX	19.84073	-90.51676	220389	Campeche
 cancun	MX	21.17429	-86.84656	888797	Cancún
 chetumal	MX	18.51957	-88.30397	169028	Chetumal
 chihuahua	MX	28.63528	-106.08889	925762	Chihuahua
 ciudadjuarez	MX	31.72024	-106.46084	1512450	Ciudad Juárez
 ciudadobregon	MX	27.48642	-109.94079	329404	Ciudad Obregón
+coatzacoalcos	MX	18.14905	-94.4447	310698	Coatzacoalcos
 cordoba	MX	18.8842	-96.92559	204721	Córdoba
 cuernavaca	MX	18.9261	-99.23075	338650	Cuernavaca
 culiacan	MX	24.80209	-107.39421	808416	Culiacán
+escarcega	MX	18.60891	-90.74544	29477	Escárcega
 guadalajara	MX	20.67738	-103.34749	1385629	Guadalajara
+guaymas	MX	27.91989	-110.89888	117253	Heroica Guaymas
 hermosillo	MX	29.08874	-110.96677	812229	Hermosillo
 leondelosaldama	MX	21.12183	-101.68253	1579803	León de los Aldama
+losmochis	MX	25.79097	-108.99825	256613	Los Mochis
+matehuala	MX	23.64824	-100.64334	77328	Matehuala
 mazatlan	MX	23.22163	-106.41885	381583	Mazatlán
 merida	MX	20.967	-89.62318	1201000	Mérida
 mexicocity	MX	19.42847	-99.12766	12294193	Mexico City
 monterrey	MX	25.68435	-100.31721	1135512	Monterrey
 morelia	MX	19.70078	-101.18443	743275	Morelia
+navojoa	MX	27.07057	-109.44345	113836	Navojoa
 nuevolaredo	MX	27.47629	-99.51639	416055	Nuevo Laredo
 oaxaca	MX	17.06025	-96.72544	255029	Oaxaca
 orizaba	MX	18.85195	-97.09957	123182	Orizaba
@@ -1832,8 +1839,15 @@ ore	NG	6.74716	4.8761	13905	Ore
 sagamu	NG	6.8485	3.64633	214558	Shagamu
 zaria	NG	11.11128	7.7227	980000	Zaria
 bilwi	NI	14.03507	-83.38882	33635	Puerto Cabezas
+chinandega	NI	12.62951	-87.13133	126387	Chinandega
 ciudadsandino	NI	12.15889	-86.34417	50000	Ciudad Sandino
+lacruz	NI	13.1129	-84.18588	1669	La Cruz de Río Grande
+managua	NI	12.13282	-86.2504	973087	Managua
+masaya	NI	11.97316	-86.09587	130113	Masaya
+nandaime	NI	11.75696	-86.05286	20810	Nandaime
+rivas	NI	11.43977	-85.82749	30000	Rivas
 siuna	NI	13.73321	-84.77725	16056	Siuna
+somotillo	NI	13.04387	-86.90506	15385	Somotillo
 ticuantepe	NI	12.02263	-86.20493	13209	Ticuantepe
 rotterdam	NL	51.9225	4.47917	868135	Rotterdam
 oslo	NO	59.91273	10.74609	1082575	Oslo
@@ -1896,7 +1910,12 @@ abancay	PE	-13.63426	-72.8838	72277	Abancay
 andahuaylas	PE	-13.65556	-73.38722	17444	Andahuaylas
 arequipa	PE	-16.39899	-71.53747	1195700	Arequipa
 ayacucho	PE	-13.1638	-74.22345	140033	Ayacucho
+barranca	PE	-10.75	-77.76667	46290	Barranca
+camana	PE	-16.62375	-72.71055	16434	Camaná
+casma	PE	-9.47472	-78.30167	0	Casma
 cerrodepasco	PE	-10.66577	-76.25309	58899	Cerro de Pasco
+chancay	PE	-11.57139	-77.26722	26958	Chancay
+chepen	PE	-7.22436	-79.42476	41992	Chepén
 chiclayo	PE	-6.77008	-79.85495	609400	Chiclayo
 chimbote	PE	-9.07508	-78.59373	316966	Chimbote
 chinchaalta	PE	-13.40985	-76.13235	153076	Chincha Alta
@@ -1907,6 +1926,7 @@ huancavelica	PE	-12.78691	-74.97298	49570	Huancavelica
 huancayo	PE	-12.06866	-75.21027	456250	Huancayo
 huanta	PE	-12.93333	-74.25	18627	Huanta
 huanuco	PE	-9.92882	-76.23989	196627	Huánuco
+huarmey	PE	-10.06806	-78.15222	16172	Huarmey
 ica	PE	-14.07538	-75.73422	282407	Ica
 juliaca	PE	-15.5	-70.13333	245675	Juliaca
 lamerced	PE	-12.78824	-74.359	647	La Merced
@@ -1915,10 +1935,13 @@ moquegua	PE	-17.19747	-70.93587	69882	Moquegua
 nazca	PE	-14.83098	-74.93895	23556	Nazca
 palpa	PE	-14.53361	-75.18556	5883	Palpa
 panao	PE	-9.89778	-75.99333	0	Panao
+pisco	PE	-13.71029	-76.20538	61869	Pisco
 piura	PE	-5.18192	-80.65715	630000	Piura
 puno	PE	-15.84003	-70.02198	128637	Puno
 puquio	PE	-14.7	-74.13333	10491	Puquio
 querobamba	PE	-14.01333	-73.83972	0	Querobamba
+sanvicentedecanete	PE	-13.07556	-76.38528	25517	San Vicente de Cañete
+sullana	PE	-4.90389	-80.68528	160789	Sullana
 tacna	PE	-18.01465	-70.25362	286240	Tacna
 tambobamba	PE	-13.94528	-72.17139	0	Tambobamba
 tintay	PE	-13.95964	-73.18518	740	Tintay
@@ -2026,6 +2049,7 @@ asuncion	PY	-25.28646	-57.647	1482200	Asunción
 ayolas	PY	-27.38421	-56.83953	12061	Ayolas
 caacupe	PY	-25.38575	-57.14217	56864	Caacupé
 caaguazu	PY	-25.47104	-56.01603	54808	Caaguazú
+caapucu	PY	-26.23523	-57.18212	2284	Caapucú
 ciudaddeleste	PY	-25.5036	-54.65067	301815	Ciudad del Este
 concepcion	PY	-23.39985	-57.43236	48123	Concepción
 coroneloviedo	PY	-25.44613	-56.43928	51286	Coronel Oviedo
@@ -2033,12 +2057,14 @@ encarnacion	PY	-27.33176	-55.86662	74983	Encarnación
 filadelfia	PY	-22.33936	-60.03157	19927	Filadelfia
 guarambare	PY	-25.49096	-57.45567	9065	Guarambaré
 horqueta	PY	-23.34323	-57.05212	10531	Horqueta
+ita	PY	-25.50054	-57.36717	18459	Itá
 laureles	PY	-27.24979	-57.45857	708	Laureles
 lomaplata	PY	-22.3829	-59.83549	16460	Loma Plata
 paraguari	PY	-25.62075	-57.14724	10079	Paraguarí
 pedrojuancaballero	PY	-22.54925	-55.7387	75109	Pedro Juan Caballero
 pilar	PY	-26.85874	-58.30639	32810	Pilar
 puertoantequera	PY	-24.08526	-57.20221	2701	Antequera
+quiindy	PY	-25.97606	-57.23353	5137	Quiindy
 sanjuanbautista	PY	-26.67028	-57.14073	16593	San Juan Bautista
 sanlorenzo	PY	-25.33968	-57.50879	227876	San Lorenzo
 sanpatricio	PY	-26.97626	-56.8269	1525	San Patricio
