@@ -515,6 +515,19 @@ pinardelrio	CU	22.41649	-83.69657	186990	Pinar del Río
 sanctispiritus	CU	21.93429	-79.4398	127069	Sancti Spíritus
 santaclara	CU	22.40711	-79.96581	250512	Santa Clara
 santiagodecuba	CU	20.02287	-75.82171	555865	Santiago de Cuba
+assomada	CV	15.1	-23.68333	21297	Assomada
+calhetadesaomiguel	CV	15.18613	-23.59228	6329	Calheta de São Miguel
+espargos	CV	16.75524	-22.9446	24500	Espargos
+mosteiros	CV	15.03333	-24.33333	4084	Igreja
+pedrabadejo	CV	15.1375	-23.53083	10038	Pedra Badejo
+pontadosol	CV	17.20171	-25.09217	3300	Ponta do Sol
+portonovo	CV	17.01969	-25.06471	11138	Porto Novo
+praia	CV	14.93152	-23.51254	137868	Praia
+ribeiragrande	CV	17.1825	-25.065	3000	Ribeira Grande
+santamaria	CV	16.59796	-22.90509	8400	Santa Maria
+saodomingos	CV	15.02438	-23.5625	2960	São Domingos
+saofilipe	CV	14.8961	-24.49556	10097	São Filipe
+tarrafal	CV	15.27881	-23.75192	13483	Tarrafal
 alisabieh	DJ	11.15583	42.7125	50006	Ali Sabih
 arta	DJ	11.52639	42.85194	17477	Arta
 dikhil	DJ	11.10454	42.36971	32801	Dikhil
@@ -591,6 +604,9 @@ suez	EG	29.97371	32.52627	699541	Suez
 tanta	EG	30.78847	31.00192	576648	Tanta
 zafarana	EG	29.11007	32.66012	46993	Zaafarana
 zagazig	EG	30.58768	31.502	430445	Zagazig
+asmara	ER	15.33805	38.93184	563930	Asmara
+massawa	ER	15.60811	39.47455	23100	Massawa
+mendefera	ER	14.88722	38.81528	17781	Mendefera
 ba	FJ	-17.5343	177.67407	14596	Ba
 labasa	FJ	-16.4332	179.36451	27949	Labasa
 lautoka	FJ	-17.61686	177.45049	52500	Lautoka
@@ -664,16 +680,26 @@ chimaltenango	GT	14.65881	-90.8216	96985	Chimaltenango
 coatepeque	GT	14.70413	-91.86426	105415	Coatepeque
 elprogreso	GT	14.85442	-90.06991	24831	Guastatoya
 escuintla	GT	14.30097	-90.78816	156313	Escuintla
+guastatoya	GT	14.85442	-90.06991	24831	Guastatoya
 guatemalacity	GT	14.64072	-90.51327	994938	Guatemala City
 jutiapa	GT	14.28491	-89.88798	145880	Jutiapa
 mazatenango	GT	14.53412	-91.50311	77431	Mazatenango
+morales	GT	15.47225	-88.8407	18994	Morales
 moyuta	GT	14.03861	-90.08083	8145	Moyuta
 puertobarrios	GT	15.72724	-88.59787	100593	Puerto Barrios
 quetzaltenango	GT	14.84462	-91.52316	180706	Quetzaltenango
 retalhuleu	GT	14.53575	-91.67848	90505	Retalhuleu
+sanarate	GT	14.78828	-90.19876	15843	Sanarate
 santaana	GT	16.80582	-89.82708	9523	Santa Ana
 solola	GT	14.7707	-91.18344	45373	Sololá
 zacapa	GT	14.96867	-89.52732	60424	Zacapa
+bafata	GW	12.16583	-14.66167	33502	Bafatá
+bambadinca	GW	12.02342	-14.86119	7620	Bambadinca
+bissau	GW	11.86357	-15.59767	439704	Bissau
+contuboel	GW	12.39081	-14.57139	4871	Contuboel
+gabu	GW	12.28	-14.22222	49371	Gabú
+mansoa	GW	12.07333	-15.31889	9422	Mansôa
+safim	GW	11.95	-15.65	3193	Safim
 corriverton	GY	5.933	-57.14939	11488	Corriverton
 georgetown	GY	6.80448	-58.15527	235017	Georgetown
 linden	GY	6.00815	-58.30724	44690	Linden
@@ -1089,6 +1115,42 @@ sukhbaatar	MN	50.23139	106.20778	22741	Sühbaatar
 ulaanbaatar	MN	47.90771	106.88324	844818	Ulan Bator
 undurkhaan	MN	47.31944	110.65556	22741	Undurkhaan
 zuunkharaa	MN	48.63333	106.73333	0	Dzüünkharaa
+attard	MT	35.88967	14.4425	11377	Attard
+birkirkara	MT	35.89706	14.46115	24356	Birkirkara
+birzebbuga	MT	35.82546	14.52685	12915	Birżebbuġa
+dingli	MT	35.8615	14.38213	3711	Dingli
+floriana	MT	35.89583	14.50833	2032	Floriana
+ghajnsielem	MT	36.02572	14.2864	2931	Għajnsielem
+gzira	MT	35.90583	14.48806	11669	Gżira
+hamrun	MT	35.88452	14.48498	9743	Ħamrun
+marsaxlokk	MT	35.84214	14.54296	3660	Marsaxlokk
+mellieha	MT	35.95663	14.36259	11389	Mellieħa
+mosta	MT	35.90942	14.42566	23482	Mosta
+msida	MT	35.8925	14.48278	13713	Imsida
+paola	MT	35.87297	14.49897	8706	Paola
+rabat	MT	35.88152	14.39872	11936	Rabat
+sliema	MT	35.91247	14.50175	22591	Sliema
+stpaulsbay	MT	35.95064	14.41561	32042	San Pawl il-Baħar
+valletta	MT	35.89968	14.5148	6794	Valletta
+victoria	MT	36.04473	14.24118	6596	Victoria
+xewkija	MT	36.03413	14.25591	3303	Xewkija
+zabbar	MT	35.87687	14.53592	15648	Żabbar
+zebbug	MT	36.07187	14.23705	1770	Żebbuġ
+zejtun	MT	35.85547	14.53341	11549	Żejtun
+beaubassin	MU	-20.23325	57.46609	111355	Beau Bassin-Rose Hill
+beaubassinrosehill	MU	-20.23325	57.46609	111355	Beau Bassin-Rose Hill
+centredeflacq	MU	-20.18972	57.71444	17710	Centre de Flacq
+curepipe	MU	-20.31628	57.52594	78618	Curepipe
+grandbaie	MU	-20.01816	57.58015	12173	Grand Baie
+mahebourg	MU	-20.40806	57.7	17042	Mahébourg
+moka	MU	-20.21904	57.51083	9364	Moka
+pamplemousses	MU	-20.10389	57.57028	9682	Pamplemousses
+portlouis	MU	-20.16194	57.49889	155226	Port Louis
+quartiermilitaire	MU	-20.2479	57.59737	6424	Quartier Militaire
+quatrebornes	MU	-20.26381	57.4791	77308	Quatre Bornes
+rosebelle	MU	-20.40028	57.59667	12619	Rose Belle
+triolet	MU	-20.0576	57.55025	24361	Triolet
+vacoas	MU	-20.29806	57.47833	115289	Vacoas
 balaka	MW	-14.97928	34.95575	40950	Balaka
 blantyre	MW	-15.78499	35.00854	902588	Blantyre
 chitipa	MW	-9.70237	33.26969	20011	Chitipa
@@ -1288,10 +1350,16 @@ cayey	PR	18.11191	-66.166	18494	Cayey
 fajardo	PR	18.32579	-65.65238	32124	Fajardo
 guayama	PR	17.98413	-66.11378	21575	Guayama
 humacao	PR	18.14968	-65.82738	20387	Humacao
+isabela	PR	18.50078	-67.02435	12505	Isabela
+manati	PR	18.42745	-66.49212	16092	Manatí
 mayaguez	PR	18.20107	-67.13962	73077	Mayagüez
 ponce	PR	18.01031	-66.62398	137491	Ponce
+riogrande	PR	18.38023	-65.83127	13467	Río Grande
 salinas	PR	17.97747	-66.29795	6375	Salinas
+sangerman	PR	18.08163	-67.0449	12055	San Germán
 sanjuan	PR	18.46633	-66.10572	418140	San Juan
+vegabaja	PR	18.44439	-66.38767	29325	Vega Baja
+yauco	PR	18.03496	-66.8499	20295	Yauco
 bethlehem	PS	31.70487	35.20376	29019	Bethlehem
 deirelbalah	PS	31.41834	34.34933	59504	Dayr al Balaḩ
 gaza	PS	31.50161	34.46672	410000	Gaza
@@ -1486,10 +1554,13 @@ palmyra	SY	34.5624	38.28402	51015	Tadmur
 raqqa	SY	35.95283	39.00788	531952	Ar Raqqah
 tartus	SY	34.88902	35.88659	458327	Ţarţūs
 bigbend	SZ	-26.7905	31.93736	6433	Big Bend
+ezulwini	SZ	-26.4	31.16667	2661	Ezulwini
+hlatikulu	SZ	-26.97991	31.32569	2748	Hlathikhulu
 lavumisa	SZ	-27.31005	31.89198	2000	Lavumisa
 lobamba	SZ	-26.46667	31.2	4557	Lobamba
 manzini	SZ	-26.49884	31.38004	110537	Manzini
 mbabane	SZ	-26.31667	31.13333	76218	Mbabane
+ngwenya	SZ	-26.2279	31.03926	842	Ngwenya
 nhlangano	SZ	-27.11222	31.19833	9016	Nhlangano
 piggspeak	SZ	-25.96082	31.24666	5750	Piggs Peak
 siteki	SZ	-26.4525	31.94722	6152	Siteki
@@ -1628,6 +1699,7 @@ princestown	TT	10.27184	-61.37103	10000	Princes Town
 rioclaro	TT	10.30594	-61.17556	35650	Rio Claro
 sanfernando	TT	10.27969	-61.46835	55419	San Fernando
 sangregrande	TT	10.58705	-61.13008	15968	Sangre Grande
+scarborough	TT	11.18229	-60.73525	17000	Scarborough
 tunapuna	TT	10.65245	-61.38878	17758	Tunapuna
 banqiao	TW	25.01427	121.46719	551221	Banqiao
 changhua	TW	24.07327	120.56276	226564	Chang-hua
