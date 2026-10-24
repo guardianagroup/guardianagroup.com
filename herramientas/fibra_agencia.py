@@ -159,10 +159,17 @@ def main():
             # «lo más aproximado posible»); «no verificado» or planned is not
             est = (r.get('estado') or 'en servicio').lower().strip()
             if not est.startswith(('en servicio', 'operativo', 'in service')) or 'no verificad' in est: continue
+            nombres = r.get('ciudades') or []
+            res = [situa(c, cc, idx, idx_div) for c in nombres]
+            # a town across the border is looked for near the previous placed town, or near the next one when it opens
+            # the route (Somalia's «Djibouti–Hargeisa–Berbera»)
+            for i, c in enumerate(nombres):
+                if res[i] is not None: continue
+                ref = next((res[j] for j in range(i - 1, -1, -1) if res[j] is not None), None)
+                if ref is None: ref = next((res[j] for j in range(i + 1, len(res)) if res[j] is not None), None)
+                res[i] = fuera(c, ref, idx)
             pts, nom, sin = [], [], []
-            for c in r.get('ciudades') or []:
-                p = situa(c, cc, idx, idx_div)
-                if p is None: p = fuera(c, pts[-1] if pts else None, idx)
+            for c, p in zip(nombres, res):
                 if p is None: sin.append(c); continue
                 if pts and p == pts[-1]: continue
                 pts.append(p); nom.append(c)
