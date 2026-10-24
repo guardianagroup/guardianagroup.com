@@ -1,0 +1,493 @@
+{
+"jurisdicciones": [
+{
+"pais": "Colombia",
+"ley": "Ley Estatutaria 1581 de 2012, reglamentada por el Decreto 1377 de 2013, compilado en el Decreto 1074 de 2015.",
+"entrada_en_vigor": "Ley 1581 de 2012: 18 de octubre de 2012. Sus disposiciones se encuentran vigentes a octubre de 2026.",
+"derechos": [
+{
+"derecho": "acceso y consulta de datos personales",
+"articulo": "Ley 1581/2012, artículos 8.c, 8.f y 14"
+},
+{
+"derecho": "rectificación y actualización",
+"articulo": "Ley 1581/2012, artículos 8.a y 15"
+},
+{
+"derecho": "supresión, cuando sea procedente",
+"articulo": "Ley 1581/2012, artículo 8.e; Decreto 1074/2015, artículo 2.2.2.25.2.6"
+},
+{
+"derecho": "revocación de la autorización, cuando sea procedente",
+"articulo": "Ley 1581/2012, artículo 8.e; Decreto 1074/2015, artículo 2.2.2.25.2.6"
+}
+],
+"plazo": {
+"dias": 10,
+"tipo": "hábiles",
+"prorroga": "Para consultas o acceso: máximo 5 días hábiles adicionales, previa comunicación de la demora. Para reclamaciones de rectificación o supresión: 15 días hábiles, prorrogables hasta 8 días hábiles adicionales.",
+"articulo": "Ley 1581/2012, artículos 14 y 15"
+},
+"autoridad": {
+"nombre": "Superintendencia de Industria y Comercio (SIC), Delegatura para la Protección de Datos Personales",
+"web": "https://www.sic.gov.co"
+},
+"requisitos": "Identificar al titular o acreditar representación, indicar una dirección o medio de contacto, identificar al responsable y describir los datos y la petición. Para una reclamación, expresar los hechos que la motivan y adjuntar los documentos pertinentes. Debe dirigirse inicialmente al responsable o encargado del tratamiento.",
+"correo_valido": true,
+"gratuito": true,
+"empresas_extranjeras": "La ley se aplica al tratamiento efectuado en territorio colombiano y a responsables o encargados no establecidos en Colombia cuando les resulte aplicable la legislación colombiana conforme a normas o tratados internacionales. La residencia colombiana de una persona no basta, por sí sola, para afirmar que cualquier empresa extranjera está sometida a esta ley.",
+"fuente": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981 ; https://www.sic.gov.co",
+"dudas": "No existe en la Ley 1581 un derecho general y autónomo a la portabilidad ni una oposición configurada con la misma amplitud que en el RGPD. La revocación y la supresión pueden estar limitadas por obligaciones legales o contractuales. El correo electrónico es utilizable a través de los canales habilitados por la empresa; debe conservarse prueba del envío y, preferiblemente, de su recepción."
+},
+{
+"pais": "España",
+"ley": "Reglamento (UE) 2016/679, Reglamento General de Protección de Datos (RGPD), y Ley Orgánica 3/2018, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).",
+"entrada_en_vigor": "RGPD aplicable desde el 25 de mayo de 2018. LOPDGDD en vigor desde el 7 de diciembre de 2018.",
+"derechos": [
+{
+"derecho": "acceso",
+"articulo": "RGPD, artículo 15; LOPDGDD, artículo 13"
+},
+{
+"derecho": "rectificación",
+"articulo": "RGPD, artículo 16; LOPDGDD, artículo 14"
+},
+{
+"derecho": "supresión",
+"articulo": "RGPD, artículo 17; LOPDGDD, artículo 15"
+},
+{
+"derecho": "oposición, incluida la oposición a la mercadotecnia directa",
+"articulo": "RGPD, artículo 21; LOPDGDD, artículo 18"
+},
+{
+"derecho": "portabilidad",
+"articulo": "RGPD, artículo 20; LOPDGDD, artículo 17"
+},
+{
+"derecho": "retirada del consentimiento",
+"articulo": "RGPD, artículo 7.3"
+}
+],
+"plazo": {
+"dias": null,
+"tipo": null,
+"prorroga": "Un mes natural desde la recepción de la solicitud. Puede ampliarse otros dos meses, atendiendo a la complejidad y al número de solicitudes, informando al interesado dentro del primer mes.",
+"articulo": "RGPD, artículo 12.3"
+},
+"autoridad": {
+"nombre": "Agencia Española de Protección de Datos (AEPD)",
+"web": "https://www.aepd.es"
+},
+"requisitos": "Identificación suficiente del interesado, datos de contacto, identificación del responsable y descripción del derecho ejercido. Para rectificación conviene aportar los datos correctos y la justificación pertinente. El responsable solo debe solicitar información adicional para verificar la identidad cuando existan dudas razonables. No debe exigirse automáticamente una copia del documento de identidad.",
+"correo_valido": true,
+"gratuito": true,
+"empresas_extranjeras": "Sí, cuando concurren los criterios del artículo 3.2 del RGPD: oferta de bienes o servicios a personas que se encuentran en la Unión Europea o control de su comportamiento dentro de la Unión. No es necesario que la empresa tenga sede en Europa.",
+"fuente": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679 ; https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673 ; https://www.aepd.es",
+"dudas": "El plazo legal es de un mes, no de 30 días exactos; por eso dias y tipo figuran como null. La gratuidad admite excepciones para solicitudes manifiestamente infundadas o excesivas y para determinadas copias adicionales, conforme al artículo 12.5. La supresión, la oposición y la portabilidad están sujetas a sus respectivos requisitos y excepciones. El correo debe enviarse a un canal válido del responsable, preferiblemente el publicado para privacidad."
+},
+{
+"pais": "México",
+"ley": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares, nueva ley publicada el 20 de marzo de 2025, con última reforma publicada el 14 de noviembre de 2025.",
+"entrada_en_vigor": "21 de marzo de 2025. Sustituyó la ley federal de 2010.",
+"derechos": [
+{
+"derecho": "acceso",
+"articulo": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares, artículos 22 y 27"
+},
+{
+"derecho": "rectificación",
+"articulo": "Artículos 23, 27 y 30"
+},
+{
+"derecho": "cancelación, con bloqueo previo cuando corresponda",
+"articulo": "Artículos 24 y 27"
+},
+{
+"derecho": "oposición",
+"articulo": "Artículos 26 y 27"
+},
+{
+"derecho": "revocación del consentimiento",
+"articulo": "Artículo 7"
+}
+],
+"plazo": {
+"dias": 20,
+"tipo": "hábiles",
+"prorroga": "El responsable debe comunicar su determinación en un máximo de 20 días hábiles. Si procede, debe hacer efectivo el derecho dentro de los 15 días hábiles siguientes a la comunicación. Ambos plazos pueden ampliarse una sola vez por un período igual cuando las circunstancias lo justifiquen.",
+"articulo": "Artículos 2.VIII y 31"
+},
+"autoridad": {
+"nombre": "Secretaría Anticorrupción y Buen Gobierno",
+"web": "https://www.gob.mx/buengobierno"
+},
+"requisitos": "Nombre del titular; domicilio u otro medio para recibir notificaciones; documentos que acrediten identidad o representación; descripción clara de los datos, salvo para acceso; indicación del derecho ARCO solicitado; y elementos que faciliten localizar los datos. En rectificación deben precisarse los cambios y aportarse la documentación que los sustente.",
+"correo_valido": true,
+"gratuito": true,
+"empresas_extranjeras": "La ley es de observancia general en territorio mexicano. La aplicación a empresas extranjeras depende de la existencia de conexiones jurídicas y territoriales suficientes con México; la residencia del titular por sí sola no permite concluir que siempre sea aplicable.",
+"fuente": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf ; https://www.gob.mx/buengobierno/prensa/arrancan-los-dialogos-para-la-actualizacion-del-marco-normativo-en-materia-de-proteccion-de-datos-personales-en-posesion-de-particulares",
+"dudas": "La ley vigente de 2025 reconoce los derechos ARCO, pero no un derecho general autónomo de portabilidad equivalente al RGPD. El ejercicio es gratuito, aunque pueden cobrarse determinados gastos de reproducción, envío u otros supuestos legales. El correo electrónico es admisible cuando se utiliza el medio habilitado por el responsable y permite acreditar los requisitos legales. No debe presentarse al desaparecido INAI como autoridad competente en octubre de 2026."
+},
+{
+"pais": "Argentina",
+"ley": "Ley 25.326 de Protección de los Datos Personales y Decreto reglamentario 1558/2001, con sus modificaciones vigentes.",
+"entrada_en_vigor": "Ley 25.326 publicada el 2 de noviembre de 2000; Decreto 1558/2001 publicado el 3 de diciembre de 2001.",
+"derechos": [
+{
+"derecho": "acceso",
+"articulo": "Ley 25.326, artículo 14"
+},
+{
+"derecho": "rectificación y actualización",
+"articulo": "Ley 25.326, artículo 16"
+},
+{
+"derecho": "supresión, cuando proceda",
+"articulo": "Ley 25.326, artículo 16"
+},
+{
+"derecho": "retirada o bloqueo de datos utilizados para publicidad y prospección comercial",
+"articulo": "Ley 25.326, artículo 27; Decreto 1558/2001, reglamentación del artículo 27"
+},
+{
+"derecho": "revocación del consentimiento",
+"articulo": "Decreto 1558/2001, reglamentación del artículo 5 de la Ley 25.326"
+}
+],
+"plazo": {
+"dias": 10,
+"tipo": "naturales",
+"prorroga": "Acceso: 10 días corridos desde la intimación fehaciente. Rectificación, actualización y supresión: 5 días hábiles desde la recepción del reclamo. No se ha verificado una prórroga general automática para estos derechos.",
+"articulo": "Ley 25.326, artículos 14.2 y 16.2"
+},
+"autoridad": {
+"nombre": "Agencia de Acceso a la Información Pública (AAIP)",
+"web": "https://www.argentina.gob.ar/aaip"
+},
+"requisitos": "Identificar al titular o representante, indicar un medio de respuesta, identificar al responsable, expresar claramente la petición y facilitar información para localizar los datos. En caso de rectificación, aportar los datos correctos y sus justificantes. Es importante poder acreditar fehacientemente el requerimiento y su recepción.",
+"correo_valido": null,
+"gratuito": true,
+"empresas_extranjeras": "No se ha verificado en la Ley 25.326 una regla general de aplicación extraterritorial basada únicamente en la residencia argentina del interesado. La aplicabilidad a empresas extranjeras requiere analizar el tratamiento, el establecimiento y los nexos jurídicos con Argentina.",
+"fuente": "https://www.argentina.gob.ar/normativa/nacional/ley-25326-64790/texto ; https://www.argentina.gob.ar/normativa/nacional/decreto-1558-2001-70368/actualizacion ; https://www.argentina.gob.ar/justicia/derechofacil/leysimple/datos-personales",
+"dudas": "La ley exige intimación fehaciente para el cómputo del acceso. No se ha confirmado que cualquier correo electrónico ordinario, sin acuse o mecanismo de acreditación, satisfaga siempre esa exigencia; por eso correo_valido es null. El acceso es gratuito a intervalos de seis meses, salvo interés legítimo que permita ejercerlo antes. No existe un derecho general autónomo a la portabilidad ni una oposición general equivalente a la del RGPD. La revocación del consentimiento carece de efectos retroactivos."
+},
+{
+"pais": "Chile",
+"ley": "Ley 19.628 sobre Protección de la Vida Privada, en su versión vigente hasta el 30 de noviembre de 2026. Ley 21.719, publicada el 13 de diciembre de 2024, que reforma integralmente la Ley 19.628 y crea la Agencia de Protección de Datos Personales, con entrada en vigor diferida.",
+"entrada_en_vigor": "Ley 19.628: 28 de agosto de 1999. Reforma de la Ley 21.719: entrada en vigor prevista para el 1 de diciembre de 2026; todavía no vigente el 23 de octubre de 2026.",
+"derechos": [
+{
+"derecho": "acceso e información",
+"articulo": "Ley 19.628 vigente, artículo 12"
+},
+{
+"derecho": "rectificación o modificación",
+"articulo": "Ley 19.628 vigente, artículo 12"
+},
+{
+"derecho": "cancelación o eliminación, cuando proceda",
+"articulo": "Ley 19.628 vigente, artículo 12"
+},
+{
+"derecho": "oposición al uso de datos para publicidad, estudios de mercado y encuestas",
+"articulo": "Ley 19.628 vigente, artículo 3"
+},
+{
+"derecho": "revocación de la autorización",
+"articulo": "Ley 19.628 vigente, artículo 4"
+}
+],
+"plazo": {
+"dias": 2,
+"tipo": "hábiles",
+"prorroga": "Si el responsable no se pronuncia en 2 días hábiles, el titular puede recurrir al juez civil competente. No se ha identificado una prórroga general en el texto vigente.",
+"articulo": "Ley 19.628 vigente, artículo 16"
+},
+"autoridad": {
+"nombre": "Juzgados de Letras en lo Civil competentes, mediante acción judicial de protección de datos; no existe todavía una agencia administrativa general de protección de datos plenamente habilitada por la Ley 21.719",
+"web": "https://www.pjud.cl"
+},
+"requisitos": "Identificar al titular, al responsable y los datos o tratamientos afectados; indicar el derecho solicitado y un medio de respuesta. Para modificación o cancelación, explicar el motivo. La revocación de la autorización debe constar por escrito.",
+"correo_valido": null,
+"gratuito": true,
+"empresas_extranjeras": "La Ley 19.628 vigente no contiene una regla general de extraterritorialidad equiparable a la prevista por la reforma de la Ley 21.719. No debe presumirse su aplicación a todas las empresas extranjeras que traten datos de residentes chilenos.",
+"fuente": "https://www.bcn.cl/leychile/navegar?i=141599&f=2023-05-09 ; https://www.bcn.cl/leychile/navegar?idNorma=1209272 ; https://www.suseso.gob.cl/612/w3-propertyvalue-121298.html ; https://www.pjud.cl",
+"dudas": "Es esencial utilizar la versión histórica vigente de la Ley 19.628, no el texto diferido de diciembre de 2026. La reforma añadirá un régimen más amplio, incluido el derecho de portabilidad y una agencia administrativa, pero no debe aplicarse anticipadamente. Durante 2026 se propuso aplazar su entrada en vigor; no se ha confirmado una modificación promulgada que sustituya la fecha del 1 de diciembre de 2026. La información, modificación y eliminación reguladas por el artículo 12 son gratuitas, con particularidades para copias sucesivas. No se ha verificado que un simple correo electrónico satisfaga en todos los casos la exigencia de revocación escrita, por lo que correo_valido es null."
+},
+{
+"pais": "Perú",
+"ley": "Ley 29733, Ley de Protección de Datos Personales, y nuevo Reglamento aprobado por Decreto Supremo 016-2024-JUS, que reemplazó al Reglamento aprobado por Decreto Supremo 003-2013-JUS.",
+"entrada_en_vigor": "Ley 29733 publicada el 3 de julio de 2011. Nuevo Reglamento 016-2024-JUS publicado el 30 de noviembre de 2024 y vigente desde marzo de 2025.",
+"derechos": [
+{
+"derecho": "acceso",
+"articulo": "Ley 29733, artículo 19; Reglamento 016-2024-JUS, artículo 69"
+},
+{
+"derecho": "rectificación, actualización e inclusión",
+"articulo": "Ley 29733, artículo 20; Reglamento 016-2024-JUS, artículo 69"
+},
+{
+"derecho": "supresión o cancelación",
+"articulo": "Ley 29733, artículo 20; Reglamento 016-2024-JUS, artículo 69"
+},
+{
+"derecho": "oposición",
+"articulo": "Ley 29733, artículo 22; Reglamento 016-2024-JUS, artículo 69"
+},
+{
+"derecho": "revocación del consentimiento",
+"articulo": "Ley 29733, artículo 13.7"
+}
+],
+"plazo": {
+"dias": 20,
+"tipo": "hábiles",
+"prorroga": "Acceso: 20 días hábiles. Rectificación, cancelación y oposición: 10 días hábiles. El nuevo Reglamento contempla una ampliación excepcional por una sola vez, por un plazo equivalente, debidamente justificada y comunicada oportunamente.",
+"articulo": "Reglamento aprobado por Decreto Supremo 016-2024-JUS, artículos 69 y 71"
+},
+"autoridad": {
+"nombre": "Autoridad Nacional de Protección de Datos Personales (ANPD), del Ministerio de Justicia y Derechos Humanos",
+"web": "https://www.gob.pe/anpd"
+},
+"requisitos": "Identificación del titular o representante, acreditación de identidad o representación cuando corresponda, domicilio o medio de notificación, petición concreta y datos suficientes para localizar la información. Las solicitudes de rectificación deben acompañarse de los documentos que correspondan. Dirigir el pedido al responsable por sus canales establecidos.",
+"correo_valido": true,
+"gratuito": true,
+"empresas_extranjeras": "La aplicación a un responsable extranjero depende de los supuestos de alcance territorial y extraterritorial establecidos en la Ley 29733 y en el Reglamento vigente, especialmente cuando el tratamiento presenta conexión jurídicamente relevante con Perú. La residencia peruana no debe utilizarse como único criterio automático.",
+"fuente": "https://www.leyes.congreso.gob.pe/documentos/leyes/29733.pdf ; https://www.gob.pe/institucion/minjus/noticias/1067368-ejecutivo-aprueba-nuevo-reglamento-de-la-ley-de-proteccion-de-datos-personales/ ; https://www.gob.pe/anpd",
+"dudas": "Los plazos citados corresponden al nuevo Reglamento de 2024 y no al derogado Reglamento de 2013. No se ha confirmado un derecho general de portabilidad equivalente al RGPD. Debe validarse el día exacto de entrada en vigor del nuevo Reglamento antes de mostrarlo en una ficha pública, ya que las referencias consultadas difieren entre el 30 y el 31 de marzo de 2025. El correo es válido cuando constituye un canal habilitado que permite identificar al solicitante."
+},
+{
+"pais": "Ecuador",
+"ley": "Ley Orgánica de Protección de Datos Personales, publicada en el Quinto Suplemento del Registro Oficial 459 de 26 de mayo de 2021, y Reglamento General expedido mediante Decreto Ejecutivo 904 de 2023.",
+"entrada_en_vigor": "Ley publicada el 26 de mayo de 2021, con disposiciones transitorias para determinados efectos. Reglamento General expedido el 13 de noviembre de 2023.",
+"derechos": [
+{
+"derecho": "acceso",
+"articulo": "Ley Orgánica de Protección de Datos Personales, artículo 13"
+},
+{
+"derecho": "rectificación y actualización",
+"articulo": "Artículo 14"
+},
+{
+"derecho": "eliminación",
+"articulo": "Artículo 15"
+},
+{
+"derecho": "oposición, incluida la mercadotecnia directa y la elaboración de perfiles asociada",
+"articulo": "Artículo 16"
+},
+{
+"derecho": "portabilidad",
+"articulo": "Artículo 17"
+},
+{
+"derecho": "revocación del consentimiento",
+"articulo": "Artículos 8 y 15.6"
+}
+],
+"plazo": {
+"dias": 15,
+"tipo": null,
+"prorroga": null,
+"articulo": "Ley Orgánica de Protección de Datos Personales, artículos 13, 14, 15 y 16"
+},
+"autoridad": {
+"nombre": "Superintendencia de Protección de Datos Personales (SPDP)",
+"web": "https://www.spdp.gob.ec"
+},
+"requisitos": "Identificación del titular o de su representante, medio de contacto y notificación, responsable al que se dirige, derecho que se ejerce y descripción de los datos o tratamientos afectados. Para rectificación pueden exigirse justificantes pertinentes. La empresa debe habilitar mecanismos razonables para el ejercicio de los derechos.",
+"correo_valido": true,
+"gratuito": true,
+"empresas_extranjeras": "La ley contempla supuestos de aplicación a responsables o encargados no establecidos en Ecuador, según las conexiones territoriales y las actividades dirigidas a titulares en el país. Deben verificarse los supuestos del artículo 3 antes de dirigir una reclamación a una empresa extranjera.",
+"fuente": "https://www.spdp.gob.ec/marco-normativo/ ; https://www.registrospublicos.gob.ec/base-legal-ejercicio-de-los-derechos-de-proteccion-de-datos-personales/ ; https://www.spdp.gob.ec/docs/proteccion-de-datos-personales/cuales-son-mis-derechos/derecho-de-oposicion/ ; https://www.bce.fin.ec/banco-central-del-ecuador/ejercicio-de-derechos-de-proteccion-de-datos-personales/",
+"dudas": "La ley utiliza la expresión plazo de quince días. No se ha verificado con suficiente certeza una regla de cómputo uniforme que permita clasificarlo aquí como días hábiles o naturales; por ello tipo es null. Tampoco se ha confirmado una prórroga general aplicable a todos estos derechos. El correo electrónico es un canal aceptado por organismos públicos, pero para empresas privadas debe utilizarse el canal válido establecido por el responsable."
+},
+{
+"pais": "Uruguay",
+"ley": "Ley 18.331 de Protección de Datos Personales y Acción de Habeas Data, reglamentada por Decreto 414/009 y modificada, entre otras normas, por las Leyes 19.670 de 2018 y 20.075 de 2022.",
+"entrada_en_vigor": "Ley 18.331 publicada el 18 de agosto de 2008. Las disposiciones de alcance territorial incorporadas por el artículo 37 de la Ley 19.670 rigen desde el 1 de enero de 2019.",
+"derechos": [
+{
+"derecho": "acceso",
+"articulo": "Ley 18.331, artículo 14"
+},
+{
+"derecho": "rectificación, actualización e inclusión",
+"articulo": "Artículo 15"
+},
+{
+"derecho": "supresión, en los supuestos legales",
+"articulo": "Artículo 15"
+},
+{
+"derecho": "retiro o bloqueo de datos de bases con fines publicitarios",
+"articulo": "Artículo 21"
+},
+{
+"derecho": "revocación del consentimiento para la comunicación de datos",
+"articulo": "Artículo 17"
+}
+],
+"plazo": {
+"dias": 5,
+"tipo": "hábiles",
+"prorroga": "La ley establece cinco días hábiles para proporcionar información y para atender rectificaciones o supresiones. No se ha verificado una prórroga general automática.",
+"articulo": "Ley 18.331, artículos 14 y 15"
+},
+"autoridad": {
+"nombre": "Unidad Reguladora y de Control de Datos Personales (URCDP)",
+"web": "https://www.gub.uy/unidad-reguladora-control-datos-personales/"
+},
+"requisitos": "Acreditar la identidad del titular mediante documento de identidad o representación suficiente; indicar responsable, datos o tratamiento, petición y un medio de contacto. Para rectificación o supresión, precisar el error, la causa legal o la situación que fundamenta el pedido.",
+"correo_valido": true,
+"gratuito": true,
+"empresas_extranjeras": "Sí, cuando el tratamiento realizado por un responsable no establecido en Uruguay se relaciona con la oferta de bienes o servicios dirigidos a habitantes de la República, el análisis de su comportamiento o los demás supuestos territoriales previstos por la ley.",
+"fuente": "https://www.impo.com.uy/bases/leyes/18331-2008 ; https://www.impo.com.uy/bases/leyes/19670-2018/37 ; https://www.gub.uy/unidad-reguladora-control-datos-personales/",
+"dudas": "El acceso es gratuito ordinariamente una vez cada seis meses, salvo que exista un nuevo interés legítimo; para datos de bases publicitarias el artículo 21 reconoce acceso sin cargo. La rectificación y supresión procedentes son gratuitas. La ley no reconoce una portabilidad general equiparable al RGPD. La oposición aquí identificada se refiere específicamente al retiro o bloqueo de datos publicitarios. El artículo 17 contempla expresamente la revocación del consentimiento para comunicar datos; no debe presentarse como una revocación general de alcance idéntico al RGPD. El correo electrónico puede utilizarse como medio electrónico idóneo, pero la identidad y la recepción efectiva deben quedar acreditadas."
+},
+{
+"pais": "Brasil",
+"ley": "Lei 13.709/2018, Lei Geral de Proteção de Dados Pessoais (LGPD), modificada por la Lei 13.853/2019 y otras reformas posteriores.",
+"entrada_en_vigor": "La parte principal del régimen material de la LGPD comenzó a aplicarse en septiembre de 2020; el régimen de sanciones administrativas entró en vigor el 1 de agosto de 2021.",
+"derechos": [
+{
+"derecho": "confirmación del tratamiento y acceso",
+"articulo": "LGPD, artículos 18.I, 18.II y 19"
+},
+{
+"derecho": "rectificación de datos incompletos, inexactos o desactualizados",
+"articulo": "Artículo 18.III"
+},
+{
+"derecho": "anonimización, bloqueo o eliminación de datos innecesarios, excesivos o tratados ilícitamente; eliminación de datos tratados mediante consentimiento en los supuestos legales",
+"articulo": "Artículos 18.IV, 18.VI y 16"
+},
+{
+"derecho": "oposición a tratamientos no basados en consentimiento cuando incumplan la ley",
+"articulo": "Artículo 18, apartado 2"
+},
+{
+"derecho": "portabilidad",
+"articulo": "Artículo 18.V"
+},
+{
+"derecho": "revocación del consentimiento",
+"articulo": "Artículos 8, apartado 5, y 18.IX"
+}
+],
+"plazo": {
+"dias": 15,
+"tipo": "naturales",
+"prorroga": "Para el acceso: respuesta simplificada inmediata o declaración clara y completa dentro de 15 días. No debe aplicarse automáticamente ese plazo a todos los demás derechos. Existen reglas diferenciadas para agentes de tratamiento de pequeño porte, incluidos plazos ampliados en determinados supuestos. No se ha verificado una prórroga general ordinaria de 15 días adicionales.",
+"articulo": "LGPD, artículo 19.I-II; Resolución CD/ANPD 2/2022"
+},
+"autoridad": {
+"nombre": "Agência Nacional de Proteção de Dados (ANPD)",
+"web": "https://www.gov.br/anpd/pt-br"
+},
+"requisitos": "Presentar una solicitud expresa al responsable, identificando al titular, el derecho ejercido, los datos afectados y un canal de respuesta. El responsable puede aplicar medidas proporcionadas de autenticación para impedir divulgaciones indebidas. Conviene dirigirse al encargado de protección de datos o al canal de privacidad publicado.",
+"correo_valido": true,
+"gratuito": true,
+"empresas_extranjeras": "Sí. Según el artículo 3 de la LGPD, la ley puede aplicarse con independencia del país de establecimiento del responsable cuando el tratamiento se efectúe en Brasil, persiga la oferta de bienes o servicios a personas localizadas en Brasil, se refiera a datos de personas localizadas en Brasil o los datos hayan sido recogidos en territorio brasileño, según las condiciones legales.",
+"fuente": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm ; https://www.gov.br/anpd/pt-br ; https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/resolucao-cd-anpd-no-2-de-27-de-janeiro-de-2022",
+"dudas": "Los 15 días del artículo 19 corresponden a la declaración completa relativa al acceso; no constituyen un plazo único para rectificación, oposición, supresión y portabilidad. Las normas especiales para agentes pequeños pueden modificar plazos. La eliminación no es absoluta cuando existen obligaciones legales de conservación. La autoridad brasileña pasó a denominarse Agência Nacional de Proteção de Dados en 2026, por lo que no debe utilizarse exclusivamente su denominación institucional antigua."
+},
+{
+"pais": "Estados Unidos (California)",
+"ley": "California Consumer Privacy Act of 2018 (CCPA), modificada por la California Privacy Rights Act of 2020 (CPRA), codificada principalmente en California Civil Code, secciones 1798.100 a 1798.199.100, y su reglamentación del California Code of Regulations, título 11.",
+"entrada_en_vigor": "CCPA: 1 de enero de 2020. Principales reformas CPRA: 1 de enero de 2023. Regulaciones adicionales de privacidad vigentes desde el 1 de enero de 2026.",
+"derechos": [
+{
+"derecho": "conocer y acceder a los datos personales tratados, recopilados y comunicados",
+"articulo": "California Civil Code, secciones 1798.110 y 1798.115"
+},
+{
+"derecho": "corrección de información personal inexacta",
+"articulo": "Sección 1798.106"
+},
+{
+"derecho": "eliminación de información personal, con excepciones",
+"articulo": "Sección 1798.105"
+},
+{
+"derecho": "oposición a la venta o intercambio de información personal para publicidad conductual entre contextos",
+"articulo": "Secciones 1798.120 y 1798.135"
+},
+{
+"derecho": "recepción de los datos en formato portable como parte del derecho de acceso",
+"articulo": "Sección 1798.130"
+},
+{
+"derecho": "limitación del uso y divulgación de información personal sensible",
+"articulo": "Sección 1798.121"
+}
+],
+"plazo": {
+"dias": 45,
+"tipo": "naturales",
+"prorroga": "Para acceso, eliminación y corrección: 45 días naturales, ampliables otros 45 días naturales con explicación y aviso, hasta un máximo de 90 días. Debe confirmarse la recepción en un máximo de 10 días hábiles. Para la oposición a la venta o intercambio, el cumplimiento debe ser tan pronto como sea viable y no superar 15 días hábiles.",
+"articulo": "California Code of Regulations, título 11, secciones 7021 y 7026"
+},
+"autoridad": {
+"nombre": "California Privacy Protection Agency (CPPA); California Attorney General conserva competencias de aplicación",
+"web": "https://cppa.ca.gov"
+},
+"requisitos": "Ser un consumidor cubierto por la CCPA, formular una petición suficientemente clara y utilizar uno de los métodos designados por la empresa. Para solicitudes verificables de acceso, corrección o eliminación, proporcionar los datos razonablemente necesarios para verificar identidad o autoridad del representante. No se requiere una solicitud verificable para oponerse a la venta o intercambio de datos. La empresa no puede exigir crear una cuenta para ejercer estos derechos.",
+"correo_valido": null,
+"gratuito": true,
+"empresas_extranjeras": "Sí, cuando la entidad realiza negocios en California y cumple los criterios legales para ser considerada business sujeto a la CCPA. No es imprescindible una sede física en California, pero la ley no obliga automáticamente a cualquier empresa extranjera que trate información de un residente californiano.",
+"fuente": "https://cppa.ca.gov/regulations/pdf/ccpa_statute_eff_20260101.pdf ; https://cppa.ca.gov/faq ; https://oag.ca.gov/privacy/ccpa ; https://cppa.ca.gov/webapplications/complaint",
+"dudas": "California no reconoce una oposición general idéntica a la del RGPD: el derecho más relevante para rastreadores y anunciantes es la exclusión de venta o intercambio de información personal. La portabilidad forma parte del mecanismo de acceso y no equivale necesariamente a un derecho general de transferencia entre proveedores. No existe un derecho universal a retirar todo consentimiento equivalente al artículo 7.3 del RGPD. Un correo electrónico puede ser válido si la empresa lo designa como método de solicitud, pero no está garantizado que un mensaje enviado a cualquier dirección corporativa sea una solicitud formalmente válida; por eso correo_valido es null. Las solicitudes ordinarias son gratuitas, con excepciones legales para determinadas peticiones infundadas o excesivas."
+},
+{
+"pais": "Reino Unido",
+"ley": "UK General Data Protection Regulation (UK GDPR), Data Protection Act 2018, capítulo 12, y modificaciones introducidas por la Data (Use and Access) Act 2025, capítulo 18.",
+"entrada_en_vigor": "Data Protection Act 2018: 25 de mayo de 2018. UK GDPR aplicable como régimen británico desde el 1 de enero de 2021. La Data (Use and Access) Act 2025 introdujo cambios escalonados durante 2025 y 2026.",
+"derechos": [
+{
+"derecho": "acceso",
+"articulo": "UK GDPR, artículo 15, modificado cuando corresponda por la Data (Use and Access) Act 2025"
+},
+{
+"derecho": "rectificación",
+"articulo": "UK GDPR, artículo 16"
+},
+{
+"derecho": "supresión",
+"articulo": "UK GDPR, artículo 17"
+},
+{
+"derecho": "oposición, incluida la mercadotecnia directa",
+"articulo": "UK GDPR, artículo 21"
+},
+{
+"derecho": "portabilidad",
+"articulo": "UK GDPR, artículo 20"
+},
+{
+"derecho": "retirada del consentimiento",
+"articulo": "UK GDPR, artículo 7.3"
+}
+],
+"plazo": {
+"dias": null,
+"tipo": null,
+"prorroga": "Un mes natural desde la recepción, sujeto a las reglas aplicables sobre comprobación de identidad y aclaración. Puede ampliarse otros dos meses en casos complejos o numerosas solicitudes, con comunicación dentro del primer mes. Las reformas de 2025 introdujeron precisiones sobre búsquedas razonables y proporcionadas y la gestión de aclaraciones en solicitudes de acceso.",
+"articulo": "UK GDPR, artículo 12.3; modificaciones pertinentes de la Data (Use and Access) Act 2025"
+},
+"autoridad": {
+"nombre": "Information Commission, a través de la Information Commission's Office (ICO)",
+"web": "https://ico.org.uk"
+},
+"requisitos": "Proporcionar información suficiente para identificar al interesado y el derecho ejercido, un medio de respuesta y detalles que ayuden a localizar los datos. La solicitud de acceso puede realizarse por escrito, electrónicamente e incluso verbalmente; no requiere una fórmula específica. La empresa puede solicitar pruebas proporcionadas de identidad cuando sean necesarias.",
+"correo_valido": true,
+"gratuito": true,
+"empresas_extranjeras": "Sí. El artículo 3 del UK GDPR alcanza a determinados responsables no establecidos en Reino Unido cuando ofrecen bienes o servicios a personas situadas allí o supervisan su comportamiento dentro del territorio británico.",
+"fuente": "https://www.legislation.gov.uk/ukpga/2018/12/contents ; https://www.legislation.gov.uk/ukpga/2025/18/contents ; https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/right-of-access/ ; https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/2026/09/ico-welcomes-transition-to-new-information-commission-and-marks-new-chapter-with-manchester-head-office-opening/",
+"dudas": "El plazo es de un mes natural y no de 30 días fijos; dias y tipo se mantienen como null para evitar una conversión incorrecta. Las excepciones a la gratuidad incluyen solicitudes manifiestamente infundadas o excesivas y determinadas copias adicionales. Desde el 30 de septiembre de 2026, el regulador pasó formalmente a ser la Information Commission, aunque continúa utilizando la marca ICO; no debe publicarse su antigua denominación como si no hubiese cambiado. La aplicación extraterritorial depende de la localización y actividad concretas, no exclusivamente de la nacionalidad o residencia permanente."
+}
+]
+}

@@ -1,0 +1,7 @@
+# ¿Es un error? Los cables que se quedan en el mar
+
+No es un error del dibujo: Órbita pinta los cables tal como vienen en los datos abiertos (OpenStreetMap), y algunos están trazados ahí solo en parte.
+Lo medimos: de los 1.226 extremos de cable de OpenStreetMap, 914 acaban en la costa o cerca de ella, 200 son empalmes con otro trozo del mismo cable y 88 acaban junto a otro cable. Solo 24 se quedan en mar abierto sin nada a menos de 30 km: 22 son cables trazados a medias y 2 son un cable corto entre islas de las Azores.
+Los de tu foto son tres de esos 22: salen de Fortaleza y se cortan a la altura de 15° N, a entre 290 y 520 km de Barbados, la tierra más cercana. Uno es BRUSA; otro, según su ficha de Wikidata, es South America-1 (OpenStreetMap lo escribe «Souh America-1»), y el tercero no tiene nombre en los datos. El recorrido entero de BRUSA y de South America-1 ya estaba en el mapa como ruta aproximada, en línea discontinua.
+Lo que cambia: los trozos de un mismo cable que se tocan se unen y se iluminan juntos, y esos 22 extremos se dibujan apagándose hacia el mar, sin inventar lo que falta. Su ficha lo dice: «En los datos abiertos (OpenStreetMap) este cable está trazado solo hasta donde se apaga la línea».
+Además, los cables submarinos ya van por colores, los mismos de la fibra por tierra: dorado, más de 100 Tbit/s; lavanda, de 20 a 100; verde agua, menos de 20; gris, si la capacidad no está publicada.

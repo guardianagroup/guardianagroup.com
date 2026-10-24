@@ -1,0 +1,13 @@
+Ronda 9 de la agencia GUARDIANA: cómo cobrar después de los 7 días gratis. Usa búsqueda web y fuentes oficiales con fecha. Otra voz hace lo mismo por su lado y solo se usará lo que coincida.
+
+Contexto: GUARDIANA GROUP S.A.S. (Colombia) ofrece un servicio web de privacidad: Radiografías (gratis), ZERO (navegador aislado en la nube), Comunicaciones (cifradas de extremo a extremo) y, más adelante, GUARDIANA OS (gratis y abierto). Principios: código abierto AGPL-3.0, auditable, sin recoger datos personales y muy fácil de usar. Decidido: 7 días gratis para todo el mundo; durante la prueba, ZERO tiene un tope de horas al día; después hay que cobrar. Cuentas sin datos personales, con llaves de acceso (passkeys). Todavía no hay clientes de pago. Mercados: Colombia primero, luego Latinoamérica y España.
+
+Necesito, a octubre de 2026:
+1. Prueba gratis: ¿con tarjeta o sin tarjeta? Ventajas y riesgos (conversión, abuso de pruebas) y cómo evitar el abuso sin rastrear a la persona (sin huella digital del navegador).
+2. Cobrar sin datos personales: métodos de pago en Colombia (tarjeta, PSE, Nequi, Daviplata, Bre-B), Latinoamérica (Pix, Mercado Pago, SPEI…) y España (tarjeta, Bizum, SEPA), y qué pasarelas los ofrecen (Wompi, ePayco, PayU, Mercado Pago, Stripe, otras), con sus comisiones publicadas. ¿Cuáles permiten cobrar sin pedir nombre ni correo al comprador? ¿Tiene sentido vender códigos prepago o vales, como hace Mullvad?
+3. Ley en Colombia: derecho de retracto (Ley 1480 de 2011), renovación automática y cancelación, información obligatoria antes de cobrar, factura electrónica de la DIAN (¿se puede facturar a «consumidor final» sin datos del comprador?) e IVA de los servicios digitales.
+4. Vender desde Colombia a consumidores de España y la UE, México, Brasil y Chile: ¿hay que registrarse para el IVA de servicios digitales de cada país? ¿Desde qué umbral?
+5. Precios: ¿cuánto cobran hoy servicios comparables (navegador aislado en la nube, VPN de privacidad, mensajería o correo cifrados)? Solo precios publicados, con enlace.
+6. Cómo hacerlo bien: plan único o varios, mensual o anual, precio en pesos y en euros, qué pasa con los datos al terminar la prueba y cómo cancelar en un clic.
+
+Devuelve: una recomendación en 10 puntos; una tabla de pasarelas (métodos, comisión, si exige datos del comprador, fuente); y la lista de obligaciones legales con artículo y enlace oficial. No inventes nada: si no estás seguro de un dato, dilo.

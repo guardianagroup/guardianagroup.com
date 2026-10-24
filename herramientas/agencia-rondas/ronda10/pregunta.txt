@@ -1,0 +1,9 @@
+Ronda 10 de la agencia GUARDIANA: ¿qué debe ser la portada de guardianagroup.com? Usa búsqueda web si te ayuda (guías de Google sobre SEO y sitios con mucho JavaScript o WebGL, y ejemplos reales). Otras voces responden por su lado y solo se usará lo que coincida.
+
+Contexto: GUARDIANA es un servicio web de privacidad (Colombia, en español y en inglés). Hoy guardianagroup.com redirige a /orbita/: un planeta 3D interactivo (canvas) con los cables submarinos, la fibra, los centros de datos y los satélites, y a la izquierda tres puertas: Radiografías (qué ve de ti cualquier web y a quién habla cada web, gratis y sin instalar nada), ZERO (navegador aislado en la nube) y Comunicaciones (cifradas). Abajo, un botón «Empezar» que lleva a Radiografías. Casi no hay texto en la página: un título, una frase y las puertas. La presentación con texto («¿Sabes a dónde van tus datos?», qué es GUARDIANA, cómo funciona) está en otra página, «Conocer GUARDIANA», enlazada arriba junto al logo. El fundador duda entre:
+A) Órbita como portada, como ahora.
+B) Primero una presentación con texto («¿Sabes a dónde van tus datos?») y un botón «Entrar» que abre Órbita.
+C) Las dos en una sola página: el planeta arriba y, al bajar, la presentación con texto.
+Principios: muy fácil de entender («Navega en ZERO. Mira tu radiografía»), nada inventado en pantalla, rápida en móviles y conexiones lentas, y que Google entienda de qué va la web.
+
+Pregunta: ¿cuál recomiendas y por qué, pensando en (1) SEO y cómo Google indexa una página casi toda canvas, (2) quien llega por primera vez sin saber qué es GUARDIANA, (3) móviles y conexiones lentas, (4) quien vuelve? Si eliges C, di cómo evitar que el desplazamiento choque con el zoom del planeta. Responde en español, con una recomendación clara en 5 a 8 puntos y las fuentes que uses.
