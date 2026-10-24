@@ -1,0 +1,98 @@
+[
+  {
+    "nombre": "Stockholm–Luleå",
+    "operador": "GlobalConnect",
+    "pais": "SE",
+    "ciudades": ["Stockholm", "Uppsala", "Gävle", "Sundsvall", "Örnsköldsvik", "Umeå", "Skellefteå", "Luleå"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal sueca descrita por GlobalConnect; secuencia urbana inferida siguiendo el corredor E4. No representa un itinerario físico completo publicado por el operador."
+  },
+  {
+    "nombre": "Stockholm–Gothenburg",
+    "operador": "GlobalConnect",
+    "pais": "SE",
+    "ciudades": ["Stockholm", "Södertälje", "Norrköping", "Linköping", "Jönköping", "Borås", "Gothenburg"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de GlobalConnect; corredor probable E4 y carretera 40 entre Stockholm y Gothenburg. Las ciudades intermedias son una reconstrucción geográfica, no una relación publicada de pasos del cable."
+  },
+  {
+    "nombre": "Gothenburg–Malmö",
+    "operador": "GlobalConnect",
+    "pais": "SE",
+    "ciudades": ["Gothenburg", "Kungsbacka", "Varberg", "Falkenberg", "Halmstad", "Helsingborg", "Lund", "Malmö"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de GlobalConnect; corredor costero E6 y ferroviario de la costa occidental. El paso urbano exacto y las derivaciones locales no están publicados."
+  },
+  {
+    "nombre": "Geneva–Zurich",
+    "operador": "SBB Telecom",
+    "pais": "CH",
+    "ciudades": ["Geneva", "Lausanne", "Fribourg", "Bern", "Olten", "Aarau", "Zurich"],
+    "estado": "en servicio",
+    "fuente": "aproximado: SBB Infrastructure, documentación de SBB Telecom sobre su red nacional de fibra óptica en servicio; secuencia inferida del corredor ferroviario Geneva–Lausanne–Bern–Olten–Zurich, no del trazado publicado de una fibra individual."
+  },
+  {
+    "nombre": "Basel–Chiasso por el Gotthard",
+    "operador": "SBB Telecom",
+    "pais": "CH",
+    "ciudades": ["Basel", "Olten", "Lucerne", "Arth", "Altdorf", "Bellinzona", "Lugano", "Chiasso"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra ferroviaria en servicio de SBB Telecom; corredor norte–sur del Gotthard. La secuencia indica el eje urbano probable y no distingue las variantes de tendido por los túneles y la línea histórica."
+  },
+  {
+    "nombre": "Basel–St. Gallen por Zurich",
+    "operador": "SBB Telecom",
+    "pais": "CH",
+    "ciudades": ["Basel", "Rheinfelden", "Brugg", "Baden", "Zurich", "Winterthur", "Wil", "St. Gallen"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra óptica de SBB Telecom; secuencia reconstruida sobre los corredores ferroviarios Basel–Brugg–Zurich y Zurich–Winterthur–St. Gallen. No es un itinerario de cable individual publicado."
+  },
+  {
+    "nombre": "Kyiv–Lviv por Rivne",
+    "operador": "Datagroup",
+    "pais": "UA",
+    "ciudades": ["Kyiv", "Zhytomyr", "Rivne", "Dubno", "Brody", "Lviv"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Datagroup; recorrido urbano probable por el corredor M06/E40. La red continúa prestando servicio, pero no se dispone de verificación en tiempo real de cortes o desvíos en cada tramo."
+  },
+  {
+    "nombre": "Kyiv–Lviv por Vinnytsia",
+    "operador": "Ukrtelecom",
+    "pais": "UA",
+    "ciudades": ["Kyiv", "Zhytomyr", "Berdychiv", "Vinnytsia", "Khmelnytskyi", "Ternopil", "Lviv"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red interurbana de fibra de Ukrtelecom; secuencia probable por M06, M21 y el corredor M30 hacia Lviv. No se publica el itinerario físico completo; sin verificación en tiempo real de cortes o desvíos."
+  },
+  {
+    "nombre": "Kyiv–Odesa",
+    "operador": "Datagroup",
+    "pais": "UA",
+    "ciudades": ["Kyiv", "Bila Tserkva", "Uman", "Odesa"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Datagroup; eje probable M05/E95, con acceso urbano a Bila Tserkva y Uman. Servicio general de la red, sin comprobación en tiempo real de la continuidad de cada tramo físico."
+  },
+  {
+    "nombre": "London–Glasgow por Birmingham y Manchester",
+    "operador": "BT",
+    "pais": "GB",
+    "ciudades": ["London", "Milton Keynes", "Coventry", "Birmingham", "Stoke-on-Trent", "Manchester", "Preston", "Lancaster", "Carlisle", "Glasgow"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de BT; reconstrucción del corredor occidental sobre los ejes M1/M6/M74 y ferroviarios paralelos. Los accesos a las ciudades no equivalen a un trazado de cable publicado."
+  },
+  {
+    "nombre": "London–Edinburgh por el corredor oriental",
+    "operador": "BT",
+    "pais": "GB",
+    "ciudades": ["London", "Stevenage", "Peterborough", "Newark-on-Trent", "Doncaster", "York", "Darlington", "Durham", "Newcastle upon Tyne", "Berwick-upon-Tweed", "Edinburgh"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de BT; secuencia urbana probable sobre el corredor ferroviario East Coast Main Line y el eje A1. No se publica el recorrido completo de una fibra individual entre estos extremos."
+  },
+  {
+    "nombre": "London–Plymouth",
+    "operador": "BT",
+    "pais": "GB",
+    "ciudades": ["London", "Reading", "Swindon", "Bristol", "Taunton", "Exeter", "Plymouth"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de BT; corredor terrestre probable M4–M5–A38 y líneas ferroviarias paralelas hacia el suroeste. Secuencia geográfica inferida, no itinerario físico completo publicado."
+  }
+]
