@@ -1,0 +1,4033 @@
+[
+ {
+  "nombre": "Palau Cable",
+  "propone": "astra",
+  "llegadas": [
+   [
+    "Ngeremlengui",
+    "PW"
+   ]
+  ],
+  "anio": 2017,
+  "fuentes": [
+   "https://www.belaucable.com/"
+  ]
+ },
+ {
+  "nombre": "Yap Cable",
+  "propone": "astra",
+  "llegadas": [
+   [
+    "Colonia",
+    "FM"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://www.fsmcable.com/"
+  ]
+ },
+ {
+  "nombre": "Almería-Melilla (ALME)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Almería",
+    "ES"
+   ],
+   [
+    "Melilla",
+    "ES"
+   ]
+  ],
+  "anio": 1990,
+  "fuentes": [
+   "https://www.cnmc.es/sites/default/files/6106289.pdf",
+   "https://geocables.com/cable/almera-melilla-alme"
+  ]
+ },
+ {
+  "nombre": "Coral Bridge",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Taba",
+    "EG"
+   ],
+   [
+    "Aqaba",
+    "JO"
+   ]
+  ],
+  "anio": 2025,
+  "fuentes": [
+   "https://ir.te.eg/en/CorporateNews/PressRelease/223/The-Express-Subsea-Cable-Coral-Bridge-Laying-Completed-Connecting-Egypt-and-Jordan"
+  ]
+ },
+ {
+  "nombre": "Lake Albert 1",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Nkusi",
+    "UG"
+   ],
+   [
+    "Tchoima",
+    "CD"
+   ]
+  ],
+  "anio": 2019,
+  "fuentes": [
+   "https://www.submarinecablemap.com/submarine-cable/lake-albert-1",
+   "https://geocables.com/cable/lake-albert-1"
+  ]
+ },
+ {
+  "nombre": "Lake Albert 2",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Mpeefu",
+    "UG"
+   ],
+   [
+    "Kasenyi",
+    "CD"
+   ]
+  ],
+  "anio": 2020,
+  "fuentes": [
+   "https://www.submarinecablemap.com/submarine-cable/lake-albert-2",
+   "https://geocables.com/cable/lake-albert-2"
+  ]
+ },
+ {
+  "nombre": "Lake Tanganyika",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Uvira",
+    "CD"
+   ],
+   [
+    "Kalemie",
+    "CD"
+   ]
+  ],
+  "anio": 2025,
+  "fuentes": [
+   "https://www.submarinecablemap.com/submarine-cable/lake-tanganyika",
+   "https://geocables.com/cable/lake-tanganyika"
+  ]
+ },
+ {
+  "nombre": "LFON (Libyan Fiber Optic Network)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Zuwara",
+    "LY"
+   ],
+   [
+    "Zawia",
+    "LY"
+   ],
+   [
+    "Trípoli",
+    "LY"
+   ],
+   [
+    "Al Khums",
+    "LY"
+   ],
+   [
+    "Misurata",
+    "LY"
+   ],
+   [
+    "Sirte",
+    "LY"
+   ],
+   [
+    "Ras Lanuf",
+    "LY"
+   ],
+   [
+    "Brega",
+    "LY"
+   ],
+   [
+    "Bengasi",
+    "LY"
+   ],
+   [
+    "Tolmeta",
+    "LY"
+   ],
+   [
+    "Al Bayda",
+    "LY"
+   ],
+   [
+    "Derna",
+    "LY"
+   ],
+   [
+    "Tobruk",
+    "LY"
+   ]
+  ],
+  "anio": 1999,
+  "fuentes": [
+   "https://www.submarinecablemap.com/submarine-cable/lfon-libyan-fiber-optic-network",
+   "https://geocables.com/cable/lfon-libyan-fiber-optic-network"
+  ]
+ },
+ {
+  "nombre": "Libreville-Port Gentil Cable",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Libreville",
+    "GA"
+   ],
+   [
+    "Port-Gentil",
+    "GA"
+   ]
+  ],
+  "anio": 2012,
+  "fuentes": [
+   "https://www.ppiaf.org/sites/default/files/documents/2014-01/Rapport1___Etat_des_lieux_interconnexions_r_seaux_FO_CEEAC.pdf",
+   "https://www.submarinecablemap.com/submarine-cable/libreville-port-gentil-cable"
+  ]
+ },
+ {
+  "nombre": "Tobrok-Emasaed Cable System",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Tobruk",
+    "LY"
+   ],
+   [
+    "El-Quawef",
+    "LY"
+   ]
+  ],
+  "anio": 2010,
+  "fuentes": [
+   "https://www.meed.com/libya-awards-submarine-cable-deal-to-huawei-marine-networks/",
+   "https://www.submarinecablemap.com/submarine-cable/tobrok-emasaed-cable-system"
+  ]
+ },
+ {
+  "nombre": "Unitel North Submarine Cable (UNSC)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Cacongo",
+    "AO"
+   ],
+   [
+    "Cabinda",
+    "AO"
+   ],
+   [
+    "Soyo",
+    "AO"
+   ],
+   [
+    "N'zeto",
+    "AO"
+   ]
+  ],
+  "anio": 2023,
+  "fuentes": [
+   "https://www.inacom.gov.ao/ao/noticias/sistema-de-cabo-submarino-norte-da-unitel-entra-em-servico/",
+   "https://www.submarinecablemap.com/submarine-cable/unitel-north-submarine-cable-unsc"
+  ]
+ },
+ {
+  "nombre": "Roquetas-Melilla (CAM)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Roquetas de Mar",
+    "ES"
+   ],
+   [
+    "Melilla",
+    "ES"
+   ]
+  ],
+  "anio": 2014,
+  "fuentes": [
+   "https://www.cnmc.es/sites/default/files/6106289.pdf",
+   "https://geocables.com/cable/roquetas-melilla-cam"
+  ]
+ },
+ {
+  "nombre": "DOS CONTINENTES I & II",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "La Línea de la Concepción",
+    "ES"
+   ],
+   [
+    "Playa de Benítez, Ceuta",
+    "ES"
+   ],
+   [
+    "Playa de la Ribera, Ceuta",
+    "ES"
+   ],
+   [
+    "Tarifa",
+    "ES"
+   ]
+  ],
+  "anio": 2020,
+  "fuentes": [
+   "https://www.cnmc.es/sites/default/files/6106289.pdf",
+   "https://www.submarinecablemap.com/submarine-cable/dos-continentes-l-ll"
+  ]
+ },
+ {
+  "nombre": "Alaska United Southeast (AU-SE)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Ketchikan, Alaska",
+    "US"
+   ],
+   [
+    "Wrangell, Alaska",
+    "US"
+   ],
+   [
+    "Petersburg, Alaska",
+    "US"
+   ],
+   [
+    "Sitka, Alaska",
+    "US"
+   ],
+   [
+    "Angoon, Alaska",
+    "US"
+   ],
+   [
+    "Hawk Inlet, Alaska",
+    "US"
+   ],
+   [
+    "Juneau, Alaska",
+    "US"
+   ]
+  ],
+  "anio": 2008,
+  "fuentes": [
+   "https://docs.fcc.gov/public/attachments/DA-20-1018A1.pdf",
+   "https://www.submarinecablemap.com/submarine-cable/alaska-united-southeast-au-se"
+  ]
+ },
+ {
+  "nombre": "Alaska United Turnagain Arm (AUTA)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "McHugh Point, Alaska",
+    "US"
+   ],
+   [
+    "Portage, Alaska",
+    "US"
+   ]
+  ],
+  "anio": 2012,
+  "fuentes": [
+   "https://www.gci.com/",
+   "https://geocables.com/cable/alaska-united-turnagain-arm-auta"
+  ]
+ },
+ {
+  "nombre": "AU-Aleutian",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Kodiak, Alaska",
+    "US"
+   ],
+   [
+    "Ouzinkie, Alaska",
+    "US"
+   ],
+   [
+    "Port Lions, Alaska",
+    "US"
+   ],
+   [
+    "Larsen Bay, Alaska",
+    "US"
+   ],
+   [
+    "Chignik Bay, Alaska",
+    "US"
+   ],
+   [
+    "Chignik Lagoon, Alaska",
+    "US"
+   ],
+   [
+    "Chignik Lake, Alaska",
+    "US"
+   ],
+   [
+    "Perryville, Alaska",
+    "US"
+   ],
+   [
+    "Sand Point, Alaska",
+    "US"
+   ],
+   [
+    "King Cove, Alaska",
+    "US"
+   ],
+   [
+    "Cold Bay, Alaska",
+    "US"
+   ],
+   [
+    "False Pass, Alaska",
+    "US"
+   ],
+   [
+    "Akutan, Alaska",
+    "US"
+   ],
+   [
+    "Unalaska, Alaska",
+    "US"
+   ]
+  ],
+  "anio": 2022,
+  "fuentes": [
+   "https://www.gci.com/about/digital-divide/aleutian-fiber-project",
+   "https://news.gci.com/news-releases/gci-celebrates-year-of-remarkable-progress-for-aleutians-fiber-project"
+  ]
+ },
+ {
+  "nombre": "SEALink South",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Coffman Cove, Alaska",
+    "US"
+   ],
+   [
+    "Hollis, Alaska",
+    "US"
+   ],
+   [
+    "Ketchikan, Alaska",
+    "US"
+   ]
+  ],
+  "anio": 2024,
+  "fuentes": [
+   "https://aptalaska.com/apt-completes-installation-of-the-sealink-south/"
+  ]
+ },
+ {
+  "nombre": "Hawaii Island Fibre Network (HIFN)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Lihue, Hawái",
+    "US"
+   ],
+   [
+    "Makaha, Hawái",
+    "US"
+   ],
+   [
+    "Koko Head, Hawái",
+    "US"
+   ],
+   [
+    "Kaunakakai, Hawái",
+    "US"
+   ],
+   [
+    "Manele Bay, Hawái",
+    "US"
+   ],
+   [
+    "Kihei, Hawái",
+    "US"
+   ],
+   [
+    "Kawaihae, Hawái",
+    "US"
+   ]
+  ],
+  "anio": 1997,
+  "fuentes": [
+   "https://docs.fcc.gov/public/attachments/DOC-381242A1.pdf"
+  ]
+ },
+ {
+  "nombre": "St. Pierre and Miquelon Cable",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Fortune, Terranova",
+    "CA"
+   ],
+   [
+    "Miquelon-Langlade",
+    "PM"
+   ],
+   [
+    "Saint-Pierre",
+    "PM"
+   ],
+   [
+    "Lamaline, Terranova",
+    "CA"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://www.jo-spm.fr/doc_jo/DELIB2021-0289.pdf",
+   "https://jo-spm.fr/doc_jo/DELIB2022-0290.pdf"
+  ]
+ },
+ {
+  "nombre": "Farewell-Change-Fogo Subsea Cable",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Farewell, Terranova",
+    "CA"
+   ],
+   [
+    "Fogo Island, Terranova",
+    "CA"
+   ],
+   [
+    "Stag Harbour, Terranova",
+    "CA"
+   ]
+  ],
+  "anio": 2025,
+  "fuentes": [
+   "https://www.newswire.ca/news-releases/bell-completes-subsea-fibre-optic-cable-deployment-to-fogo-and-change-islands-815315741.html"
+  ]
+ },
+ {
+  "nombre": "Grand Bahama Bimini Submarine Cable",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Eight-Mile Rock",
+    "BS"
+   ],
+   [
+    "Alice Town, Bimini",
+    "BS"
+   ]
+  ],
+  "anio": 2005,
+  "fuentes": [
+   "https://www.btcbahamas.com/",
+   "https://www.submarinecablemap.com/submarine-cable/grand-bahama-bimini-submarine-cable"
+  ]
+ },
+ {
+  "nombre": "Amerigo Vespucci",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Willemstad, Curazao",
+    "CW"
+   ],
+   [
+    "Kralendijk, Bonaire",
+    "BQ"
+   ]
+  ],
+  "anio": 1999,
+  "fuentes": [
+   "https://saba-news.com/wp-content/uploads/2025/09/Telecom-in-the-Caribbean-Netherlands.pdf"
+  ]
+ },
+ {
+  "nombre": "Jerry Newton",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Willemstad, Curazao",
+    "CW"
+   ],
+   [
+    "North Salina, Bonaire",
+    "BQ"
+   ]
+  ],
+  "anio": 2007,
+  "fuentes": [
+   "https://saba-news.com/wp-content/uploads/2025/09/Telecom-in-the-Caribbean-Netherlands.pdf"
+  ]
+ },
+ {
+  "nombre": "EC Link",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Willemstad, Curazao",
+    "CW"
+   ],
+   [
+    "Chaguaramas, Trinidad",
+    "TT"
+   ]
+  ],
+  "anio": 2007,
+  "fuentes": [
+   "https://www.libertynetworks.com/",
+   "https://btnp.org/wp-content/uploads/2020/12/20201124-BTP-Telecommunication-Services-Performance-Indicators-Statistical-Publication-2020-V10.pdf"
+  ]
+ },
+ {
+  "nombre": "Guadeloupe Câble des Îles du Sud (GCIS)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Saint-François, Guadalupe",
+    "GP"
+   ],
+   [
+    "Beauséjour, La Désirade",
+    "GP"
+   ],
+   [
+    "Saint-Louis, Marie-Galante",
+    "GP"
+   ],
+   [
+    "Terre-de-Haut, Les Saintes",
+    "GP"
+   ],
+   [
+    "Capesterre-Belle-Eau, Guadalupe",
+    "GP"
+   ]
+  ],
+  "anio": 2020,
+  "fuentes": [
+   "https://www.guadeloupe.gouv.fr/content/download/18488/117799/file/E19000010-97%20Rapport%20et%20conclusions%20%28sign%C3%A9%29.pdf",
+   "https://www.ccomptes.fr/sites/default/files/2023-10/RAN2023-0013.pdf"
+  ]
+ },
+ {
+  "nombre": "Caribbean Regional Communications Infrastructure Program (CARCIP)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Owia, San Vicente",
+    "VC"
+   ],
+   [
+    "Chateaubelair, San Vicente",
+    "VC"
+   ],
+   [
+    "Kingstown, San Vicente",
+    "VC"
+   ],
+   [
+    "Bequia",
+    "VC"
+   ],
+   [
+    "Mustique",
+    "VC"
+   ],
+   [
+    "Canouan",
+    "VC"
+   ],
+   [
+    "Union Island",
+    "VC"
+   ],
+   [
+    "Carriacou",
+    "GD"
+   ],
+   [
+    "Conference, Granada",
+    "GD"
+   ]
+  ],
+  "anio": 2019,
+  "fuentes": [
+   "https://www.worldbank.org/en/news/press-release/2020/03/26/world-bank-approves-us119-million-additional-financing-for-telecommunications-development-in-the-eastern-caribbean"
+  ]
+ },
+ {
+  "nombre": "Gulf of California Cable",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "La Paz, Baja California Sur",
+    "MX"
+   ],
+   [
+    "Topolobampo, Sinaloa",
+    "MX"
+   ]
+  ],
+  "anio": 2019,
+  "fuentes": [
+   "https://repositorio.cepal.org/server/api/core/bitstreams/fd7acab3-009e-4156-9362-9fd75bea5c4b/content"
+  ]
+ },
+ {
+  "nombre": "Gulf of Mexico Fiber Optic Network",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Freeport, Texas",
+    "US"
+   ],
+   [
+    "Pascagoula, Mississippi",
+    "US"
+   ]
+  ],
+  "anio": 2008,
+  "fuentes": [
+   "https://www.tampnet.com/",
+   "https://geocables.com/cable/gulf-of-mexico-fiber-optic-network"
+  ]
+ },
+ {
+  "nombre": "Lázaro Cárdenas-Manzanillo Santiago Submarine Cable System (LCMSSCS)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Manzanillo, Colima",
+    "MX"
+   ],
+   [
+    "Ciudad Lázaro Cárdenas, Michoacán",
+    "MX"
+   ],
+   [
+    "Ixtapa-Zihuatanejo, Guerrero",
+    "MX"
+   ]
+  ],
+  "anio": 2013,
+  "fuentes": [
+   "https://s3-us-gov-west-1.amazonaws.com/cg-654ebf73-8576-4082-ba73-dd1f1a7fe8dc/uploads/LAC-ICT-Volume-4-02052022-FINAL.pdf"
+  ]
+ },
+ {
+  "nombre": "Colombian Festoon",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Tolú, Sucre",
+    "CO"
+   ],
+   [
+    "Cartagena, Bolívar",
+    "CO"
+   ],
+   [
+    "Puerto Colombia, Atlántico",
+    "CO"
+   ],
+   [
+    "Parque Isla de Salamanca, Magdalena",
+    "CO"
+   ],
+   [
+    "Santa Marta, Magdalena",
+    "CO"
+   ]
+  ],
+  "anio": 1997,
+  "fuentes": [
+   "https://mintic.gov.co/micrositios/PlanConectividadDigital/870/articles-399396_recurso_1.pdf"
+  ]
+ },
+ {
+  "nombre": "Fibra Óptica al Pacífico",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Ilo, Moquegua",
+    "PE"
+   ],
+   [
+    "Lurín, Lima",
+    "PE"
+   ]
+  ],
+  "anio": 2020,
+  "fuentes": [
+   "https://institucional.entel.bo/inicio3.0/index.php/sala-de-prensa/item/2631-entel-ingresa-a-una-transformacion-digital-con-una-conexion-directa-de-fibra-optica-al-pacifico?print=1&tmpl=component",
+   "https://www.oopp.gob.bo/wp-content/uploads/2023/05/PSDI-MOPSV-VMTEL.pdf"
+  ]
+ },
+ {
+  "nombre": "FOS Quellón-Chacabuco",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Quellón, Chiloé",
+    "CL"
+   ],
+   [
+    "Puerto Chacabuco, Aysén",
+    "CL"
+   ]
+  ],
+  "anio": 2015,
+  "fuentes": [
+   "https://www.biobiochile.cl/noticias/2014/01/31/telcoy-y-telsur-anuncian-construccion-de-nueva-fibra-optica-submarina-para-aysen.shtml"
+  ]
+ },
+ {
+  "nombre": "ARSAT Submarine Fiber Optic Cable",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Cabo Espíritu Santo, Tierra del Fuego",
+    "AR"
+   ],
+   [
+    "Punta Dungeness, Santa Cruz",
+    "AR"
+   ]
+  ],
+  "anio": 2012,
+  "fuentes": [
+   "https://powersublink.com/projects/submarine-cable-lines-year-2012/",
+   "https://repositorio.cepal.org/bitstream/handle/11362/46388/S2000651_es.pdf"
+  ]
+ },
+ {
+  "nombre": "Brazilian Festoon",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Natal",
+    "BR"
+   ],
+   [
+    "João Pessoa",
+    "BR"
+   ],
+   [
+    "Recife",
+    "BR"
+   ],
+   [
+    "Maceió",
+    "BR"
+   ],
+   [
+    "Aracaju",
+    "BR"
+   ],
+   [
+    "Sítio",
+    "BR"
+   ],
+   [
+    "Salvador",
+    "BR"
+   ],
+   [
+    "Ilhéus",
+    "BR"
+   ],
+   [
+    "Porto Seguro",
+    "BR"
+   ],
+   [
+    "São Mateus",
+    "BR"
+   ],
+   [
+    "Vitória",
+    "BR"
+   ],
+   [
+    "Atafona",
+    "BR"
+   ],
+   [
+    "Macaé",
+    "BR"
+   ],
+   [
+    "Río de Janeiro",
+    "BR"
+   ]
+  ],
+  "anio": 1996,
+  "fuentes": [
+   "https://www1.folha.uol.com.br/fsp/1996/3/13/dinheiro/19.html"
+  ]
+ },
+ {
+  "nombre": "Venezuelan Festoon",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Maracaibo",
+    "VE"
+   ],
+   [
+    "Cabimas",
+    "VE"
+   ],
+   [
+    "Punto Fijo",
+    "VE"
+   ],
+   [
+    "Coro",
+    "VE"
+   ],
+   [
+    "Chichiriviche",
+    "VE"
+   ],
+   [
+    "Puerto Cabello",
+    "VE"
+   ],
+   [
+    "Camurí",
+    "VE"
+   ],
+   [
+    "Higuerote",
+    "VE"
+   ],
+   [
+    "Puerto La Cruz",
+    "VE"
+   ],
+   [
+    "Cumaná",
+    "VE"
+   ],
+   [
+    "Porlamar, isla Margarita",
+    "VE"
+   ],
+   [
+    "Carúpano",
+    "VE"
+   ]
+  ],
+  "anio": 1998,
+  "fuentes": [
+   "https://repositoriotec.tec.ac.cr/bitstream/handle/2238/144/BJFIE200399.pdf?sequence=1"
+  ]
+ },
+ {
+  "nombre": "St. Thomas-St. Croix System",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Brewer's Bay, Saint Thomas",
+    "VI"
+   ],
+   [
+    "Vila Olga, Saint Thomas",
+    "VI"
+   ],
+   [
+    "Banana Bay, Saint Thomas",
+    "VI"
+   ],
+   [
+    "Flamingo Bay, Saint Thomas",
+    "VI"
+   ],
+   [
+    "Great Bay, Saint Thomas",
+    "VI"
+   ],
+   [
+    "Christiansted, Saint Croix",
+    "VI"
+   ],
+   [
+    "Frederiksted, Saint Croix",
+    "VI"
+   ]
+  ],
+  "anio": 2013,
+  "fuentes": [
+   "https://usvieda.org/wp-content/uploads/2024/06/TIS_2014_0.pdf",
+   "https://faculty.nps.edu/dlalders/usvi/NPS-OR-18-005.pdf"
+  ]
+ },
+ {
+  "nombre": "Polar Circle Cable",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Narvik",
+    "NO"
+   ],
+   [
+    "Bodø",
+    "NO"
+   ],
+   [
+    "Nesna",
+    "NO"
+   ],
+   [
+    "Sandnessjøen",
+    "NO"
+   ],
+   [
+    "Brønnøysund",
+    "NO"
+   ],
+   [
+    "Rørvik",
+    "NO"
+   ],
+   [
+    "Trondheim",
+    "NO"
+   ]
+  ],
+  "anio": 2007,
+  "fuentes": [
+   "https://www.kysttele.no/about/",
+   "https://www.regjeringen.no/contentassets/4b9d05c6dd134d8aa67dfbe576605a45/off_rapport_sarbarhetsanalyse_for_trondelag_2024-02-05.pdf"
+  ]
+ },
+ {
+  "nombre": "Bodø-Røst Cable",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Bodø",
+    "NO"
+   ],
+   [
+    "Røst",
+    "NO"
+   ]
+  ],
+  "anio": 2016,
+  "fuentes": [
+   "https://www.mynewsdesk.com/no/telenor/pressreleases/norges-lengste-sjoekabel-lagt-ut-1497037",
+   "https://seaworkskabel.no/subsea-cable-project-rost-bodo/"
+  ]
+ },
+ {
+  "nombre": "Tverrlinken",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Nesna",
+    "NO"
+   ],
+   [
+    "Mo i Rana",
+    "NO"
+   ]
+  ],
+  "anio": 2010,
+  "fuentes": [
+   "https://www.kysttele.no/about/",
+   "https://www.regjeringen.no/contentassets/4b9d05c6dd134d8aa67dfbe576605a45/off_rapport_sarbarhetsanalyse_for_trondelag_2024-02-05.pdf"
+  ]
+ },
+ {
+  "nombre": "Eastern Arctic Undersea Fibre Optic Network - EAUFON 1",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Chisasibi",
+    "CA"
+   ],
+   [
+    "Kuujjuarapik",
+    "CA"
+   ],
+   [
+    "Umiujaq",
+    "CA"
+   ],
+   [
+    "Inukjuak",
+    "CA"
+   ],
+   [
+    "Puvirnituq",
+    "CA"
+   ]
+  ],
+  "anio": 2022,
+  "fuentes": [
+   "https://www.krg.ca/fr-CA/assets/Council/2024/May/EAUFON.pdf",
+   "https://www.krg.ca/en-CA/assets/press-releases/2024/jan/Media_Release_EAUFON_2_activation_Final.pdf"
+  ]
+ },
+ {
+  "nombre": "Eastern Arctic Undersea Fibre Optic Network - EAUFON 2",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Puvirnituq",
+    "CA"
+   ],
+   [
+    "Akulivik",
+    "CA"
+   ],
+   [
+    "Ivujivik",
+    "CA"
+   ],
+   [
+    "Salluit",
+    "CA"
+   ],
+   [
+    "Deception Bay",
+    "CA"
+   ]
+  ],
+  "anio": 2024,
+  "fuentes": [
+   "https://www.krg.ca/en-CA/assets/press-releases/2024/jan/Media_Release_EAUFON_2_activation_Final.pdf",
+   "https://www.krg.ca/fr-CA/assets/Council/2024/May/EAUFON.pdf"
+  ]
+ },
+ {
+  "nombre": "RISING 8 (tramo Jakarta-Batam en servicio)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Tanjung Pakis",
+    "ID"
+   ],
+   [
+    "Tanjung Bemban, Batam",
+    "ID"
+   ]
+  ],
+  "anio": 2026,
+  "fuentes": [
+   "https://www.morarepublic.co.id/our-company/news/rising-8-submarine-cable-system-commissioned-strengthening-indonesia-digital-connectivity",
+   "https://www.submarinenetworks.com/en/systems/intra-asia/rising-8"
+  ]
+ },
+ {
+  "nombre": "Jakarta-Surabaya Cable System (JAYABAYA)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Tanjung Pakis",
+    "ID"
+   ],
+   [
+    "Cirebon",
+    "ID"
+   ],
+   [
+    "Kendal",
+    "ID"
+   ],
+   [
+    "Banyu Urip, Surabaya",
+    "ID"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://triasmitra.com/services/developer",
+   "https://triasmitra.com/index.php/news-updates/news/sistem-komunikasi-kabel-laut-jakarta-surabaya-triasmitra-resmi-beroperasi"
+  ]
+ },
+ {
+  "nombre": "Medan-Dumai Cable System (DAMAI)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Medan",
+    "ID"
+   ],
+   [
+    "Panipahan",
+    "ID"
+   ],
+   [
+    "Dumai",
+    "ID"
+   ]
+  ],
+  "anio": 2020,
+  "fuentes": [
+   "https://triasmitra.com/services/developer",
+   "https://triasmitra.com/about/company-overview"
+  ]
+ },
+ {
+  "nombre": "Biznet Nusantara Cable System-1 (BNCS-1), segmento Anyer-Kalianda",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Anyer, Serang",
+    "ID"
+   ],
+   [
+    "Kalianda",
+    "ID"
+   ]
+  ],
+  "anio": 2024,
+  "fuentes": [
+   "https://www.biznetnetworks.com/wp-content/uploads/2025/07/Biznet-Nusantara-Cable-System.pdf"
+  ]
+ },
+ {
+  "nombre": "Biznet Nusantara Cable System-1 (BNCS-1), segmento Sungsang-Muntok",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Sungsang, Banyuasin",
+    "ID"
+   ],
+   [
+    "Muntok, Bangka Barat",
+    "ID"
+   ]
+  ],
+  "anio": 2024,
+  "fuentes": [
+   "https://www.biznetnetworks.com/wp-content/uploads/2025/07/Biznet-Nusantara-Cable-System.pdf"
+  ]
+ },
+ {
+  "nombre": "Patara-2",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Waisai",
+    "ID"
+   ],
+   [
+    "Manokwari",
+    "ID"
+   ],
+   [
+    "Supiori",
+    "ID"
+   ]
+  ],
+  "anio": 2023,
+  "fuentes": [
+   "https://aro.telkom.co.id/sites/berita/id_ID/news/sinergi-telkomgroup-dan-pemerintah-demi-wujudkan-infrastruktur-skkl-berkualitas-1597",
+   "https://geocables.com/cable/patara-2"
+  ]
+ },
+ {
+  "nombre": "BALOK (Bali-Lombok)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Seraya, Bali",
+    "ID"
+   ],
+   [
+    "Senggigi, Lombok",
+    "ID"
+   ]
+  ],
+  "anio": 2016,
+  "fuentes": [
+   "https://pktl.menlhk.go.id/assets/img/publication/BukuDatadanInformasiTahun2016.pdf",
+   "https://www.submarinecablemap.com/submarine-cable/balok"
+  ]
+ },
+ {
+  "nombre": "Labuan-Brunei Cable System (LBC)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Kiamsam, Labuan",
+    "MY"
+   ],
+   [
+    "Tungku",
+    "BN"
+   ]
+  ],
+  "anio": 2021,
+  "fuentes": [
+   "https://cttsb.com.my/labuan-brunei-cable-system/",
+   "https://cttsb.com.my/company-overview/achievements/"
+  ]
+ },
+ {
+  "nombre": "Besut-Perhentian Islands",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Kampung Raja, Besut",
+    "MY"
+   ],
+   [
+    "Pulau Perhentian Kecil",
+    "MY"
+   ],
+   [
+    "Pulau Perhentian Besar",
+    "MY"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://www.mcmc.gov.my/skmmgovmy/media/General/pdf/Industry-Performance-Report-2018.pdf",
+   "https://geocables.com/cable/besut-perhentian-islands"
+  ]
+ },
+ {
+  "nombre": "Lumut-Pangkor Island",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Lumut",
+    "MY"
+   ],
+   [
+    "Pantai Teluk Baharu, Pulau Pangkor",
+    "MY"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://www.mcmc.gov.my/skmmgovmy/media/General/pdf/Industry-Performance-Report-2018.pdf",
+   "https://geocables.com/cable/lumut-pangkor-island"
+  ]
+ },
+ {
+  "nombre": "Rompin-Tioman Island",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Kuala Rompin",
+    "MY"
+   ],
+   [
+    "Kampung Tekek, Pulau Tioman",
+    "MY"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://www.mcmc.gov.my/skmmgovmy/media/General/pdf/Industry-Performance-Report-2018.pdf",
+   "https://geocables.com/cable/rompin-tioman-island"
+  ]
+ },
+ {
+  "nombre": "Ogasawara Cable Network",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Hachijojima",
+    "JP"
+   ],
+   [
+    "Chichijima",
+    "JP"
+   ],
+   [
+    "Hahajima",
+    "JP"
+   ]
+  ],
+  "anio": 2011,
+  "fuentes": [
+   "https://www.digitalservice.metro.tokyo.lg.jp/business/tokyo-data-highway/island",
+   "https://geocables.com/cable/ogasawara-cable-network"
+  ]
+ },
+ {
+  "nombre": "YUI-1 (Okinawa-Ishigaki)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Naha, Okinawa",
+    "JP"
+   ],
+   [
+    "Shiraho, Ishigaki",
+    "JP"
+   ]
+  ],
+  "anio": 2023,
+  "fuentes": [
+   "https://okinawa-cellular.jp/common/uploads/A3_sustainabilityreport2023_240214_ENG.pdf",
+   "https://geocables.com/cable/yui"
+  ]
+ },
+ {
+  "nombre": "YUI-2 (Kume-Miyako)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Nakadomari, Kumejima",
+    "JP"
+   ],
+   [
+    "Hirara, Miyakojima",
+    "JP"
+   ]
+  ],
+  "anio": 2023,
+  "fuentes": [
+   "https://okinawa-cellular.jp/common/uploads/A3_sustainabilityreport2023_240214_ENG.pdf",
+   "https://geocables.com/cable/yui"
+  ]
+ },
+ {
+  "nombre": "Taiwan-Matsu No. 4",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Bali, Nueva Taipéi",
+    "TW"
+   ],
+   [
+    "Dongyin",
+    "TW"
+   ],
+   [
+    "Nangan",
+    "TW"
+   ],
+   [
+    "Xiju",
+    "TW"
+   ]
+  ],
+  "anio": 2026,
+  "fuentes": [
+   "https://web.moda.gov.tw/en/press/press-releases/20658",
+   "https://www.cht.com.tw/zh-tw/home/cht/messages/2026/0918-1100"
+  ]
+ },
+ {
+  "nombre": "Palawan-Iloilo Cable System",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "San Jose de Buenavista, Antique",
+    "PH"
+   ],
+   [
+    "Taytay, Palawan",
+    "PH"
+   ]
+  ],
+  "anio": 2014,
+  "fuentes": [
+   "https://www.philstar.com/business/2014/01/27/1283294/pldt-completes-p861-m-submarine-cable-palawan/amp/",
+   "https://geocables.com/cable/palawan-iloilo-cable-system"
+  ]
+ },
+ {
+  "nombre": "Jeju-Mainland 2",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Goheung",
+    "KR"
+   ],
+   [
+    "Goseong-ri, Jeju",
+    "KR"
+   ]
+  ],
+  "anio": 1996,
+  "fuentes": [
+   "https://biz.chosun.com/site/data/html_dir/1996/12/19/1996121970137.html",
+   "https://geocables.com/cable/jeju-mainland-2"
+  ]
+ },
+ {
+  "nombre": "Jeju-Mainland 3",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Mijo-myeon, Namhae",
+    "KR"
+   ],
+   [
+    "Goseong-ri, Jeju",
+    "KR"
+   ]
+  ],
+  "anio": 2000,
+  "fuentes": [
+   "https://lsmarinesolution.co.kr/eng/History",
+   "https://geocables.com/cable/jeju-mainland-3"
+  ]
+ },
+ {
+  "nombre": "Jeju-Udo",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Goseong-ri, Jeju",
+    "KR"
+   ],
+   [
+    "Udo",
+    "KR"
+   ]
+  ],
+  "anio": 2023,
+  "fuentes": [
+   "https://news.sktelecom.com/200215",
+   "https://www.investkorea.org/jj-en/bbs/i-1497/detail.do?ntt_sn=491371"
+  ]
+ },
+ {
+  "nombre": "Ulleung-Mainland 2",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Hosan-ri",
+    "KR"
+   ],
+   [
+    "Ulleung",
+    "KR"
+   ]
+  ],
+  "anio": 2016,
+  "fuentes": [
+   "https://lsmarinesolution.co.kr/eng/Performance120152016",
+   "https://lsmarinesolution.co.kr/eng/History"
+  ]
+ },
+ {
+  "nombre": "Guam Okinawa Kyushu Incheon (GOKI)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Tumon Bay, Guam",
+    "GU"
+   ],
+   [
+    "Naha, Okinawa",
+    "JP"
+   ],
+   [
+    "Kitakyushu",
+    "JP"
+   ]
+  ],
+  "anio": 2013,
+  "fuentes": [
+   "https://xtera.com/experience/",
+   "https://geocables.com/cable/guam-okinawa-kyushu-incheon-goki"
+  ]
+ },
+ {
+  "nombre": "Nationwide Submarine Cable Ooredoo Maldives (NaSCOM)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Kulhudhufushi",
+    "MV"
+   ],
+   [
+    "Eydhafushi",
+    "MV"
+   ],
+   [
+    "Hulhumalé",
+    "MV"
+   ],
+   [
+    "Kolhufushi",
+    "MV"
+   ],
+   [
+    "Thinadhoo",
+    "MV"
+   ],
+   [
+    "Hithadhoo",
+    "MV"
+   ]
+  ],
+  "anio": 2016,
+  "fuentes": [
+   "https://www.ooredoo.com/en/media/news_view/ooredoos-nationwide-submarine-cable-paves-the-way-to-4g-network-across-maldives/",
+   "https://www.huawei.com/en/news/2016/12/Ooredoo-Huawei-Submarine-Cable-Maldives"
+  ]
+ },
+ {
+  "nombre": "Sorsogon-Samar Submarine Fiber Optical Interconnection Project (SSSFOIP)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Santa Magdalena, Sorsogon",
+    "PH"
+   ],
+   [
+    "Allen, Northern Samar",
+    "PH"
+   ]
+  ],
+  "anio": 2019,
+  "fuentes": [
+   "https://www.sbss.com/uploads/SBSS%202021%20Corporate%20Presentation.pdf",
+   "https://geocables.com/cable/sorsogon-samar-submarine-fiber-optical-interconnection-project-sssfoip"
+  ]
+ },
+ {
+  "nombre": "Tanjung Pandan-Sungai Kakap",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Tanjung Pandan, Belitung",
+    "ID"
+   ],
+   [
+    "Sungai Kakap, Kalimantan Occidental",
+    "ID"
+   ]
+  ],
+  "anio": 2019,
+  "fuentes": [
+   "https://www.moratelindo.co.id/download/public-announcement/11.%20080719%20-%20LRPD%20Obligasi%20per%20300619%20%28English%29.pdf",
+   "https://geocables.com/cable/tanjung-pandan-sungai-kakap"
+  ]
+ },
+ {
+  "nombre": "Jalapati",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Muncar, Java Oriental",
+    "ID"
+   ],
+   [
+    "Candikusuma, Bali",
+    "ID"
+   ]
+  ],
+  "anio": 2023,
+  "fuentes": [
+   "https://www.ccsi.co.id/wp-content/uploads/2025/03/AR-CCSI-2024-_-FINAL-Small.pdf",
+   "https://geocables.com/cable/jalapati"
+  ]
+ },
+ {
+  "nombre": "CANDALTA-1",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Alta Vista, Gran Canaria",
+    "ES"
+   ],
+   [
+    "Candelaria, Tenerife",
+    "ES"
+   ]
+  ],
+  "anio": 1999,
+  "fuentes": [
+   "https://www.octsi.es/octsi/noticias-del-octsi/cables-submarinos-en-las-islas-canarias"
+  ]
+ },
+ {
+  "nombre": "TRANSCAN-2",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Agüimes, Gran Canaria",
+    "ES"
+   ],
+   [
+    "Morro Jable, Fuerteventura",
+    "ES"
+   ],
+   [
+    "Puerto del Rosario, Fuerteventura",
+    "ES"
+   ],
+   [
+    "Arrecife, Lanzarote",
+    "ES"
+   ]
+  ],
+  "anio": 1990,
+  "fuentes": [
+   "https://www.octsi.es/octsi/noticias-del-octsi/cables-submarinos-en-las-islas-canarias"
+  ]
+ },
+ {
+  "nombre": "TRANSCAN-3",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Alta Vista, Gran Canaria",
+    "ES"
+   ],
+   [
+    "Playa Blanca, Lanzarote",
+    "ES"
+   ]
+  ],
+  "anio": 1999,
+  "fuentes": [
+   "https://www.octsi.es/octsi/noticias-del-octsi/cables-submarinos-en-las-islas-canarias"
+  ]
+ },
+ {
+  "nombre": "TEGOPA",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Granadilla de Abona, Tenerife",
+    "ES"
+   ],
+   [
+    "San Sebastián de La Gomera",
+    "ES"
+   ],
+   [
+    "Santa Cruz de La Palma",
+    "ES"
+   ]
+  ],
+  "anio": 1995,
+  "fuentes": [
+   "https://www.octsi.es/octsi/noticias-del-octsi/cables-submarinos-en-las-islas-canarias"
+  ]
+ },
+ {
+  "nombre": "MAME-1",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Cala Millor, Mallorca",
+    "ES"
+   ],
+   [
+    "Punta Prima, Menorca",
+    "ES"
+   ]
+  ],
+  "anio": 1995,
+  "fuentes": [
+   "https://www.servimedia.es/noticias/telefonica-pone-servicio-cable-submarino-mallorca-menorca/1410883585",
+   "https://dev.octsi.es/images/documentos/2025/CNMC-2025-08-informe-conectividad-archipielagos.pdf"
+  ]
+ },
+ {
+  "nombre": "DOS CONTINENTES I",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "La Línea de la Concepción",
+    "ES"
+   ],
+   [
+    "Ceuta",
+    "ES"
+   ]
+  ],
+  "anio": 2020,
+  "fuentes": [
+   "https://www.juntadeandalucia.es/boja/2019/205/36",
+   "https://dev.octsi.es/images/documentos/2025/CNMC-2025-08-informe-conectividad-archipielagos.pdf"
+  ]
+ },
+ {
+  "nombre": "Azores Fiber Optic System (AFOS)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Vila do Porto, Santa Maria",
+    "PT"
+   ],
+   [
+    "Ponta Delgada, São Miguel",
+    "PT"
+   ],
+   [
+    "Angra do Heroísmo, Terceira",
+    "PT"
+   ],
+   [
+    "Velas, São Jorge",
+    "PT"
+   ],
+   [
+    "Faial",
+    "PT"
+   ],
+   [
+    "São Mateus, Pico",
+    "PT"
+   ],
+   [
+    "Graciosa",
+    "PT"
+   ]
+  ],
+  "anio": 1998,
+  "fuentes": [
+   "https://diariodarepublica.pt/dr/detalhe/resolucao-conselho-ministros/184-2025-953220527",
+   "https://diariodarepublica.pt/dr/detalhe/despacho/9169-2024-876599974"
+  ]
+ },
+ {
+  "nombre": "Continente-Madeira",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Carcavelos",
+    "PT"
+   ],
+   [
+    "Funchal",
+    "PT"
+   ]
+  ],
+  "anio": 2000,
+  "fuentes": [
+   "https://diariodarepublica.pt/dr/detalhe/despacho/9333-2020-144137764"
+  ]
+ },
+ {
+  "nombre": "BUGIO",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Carcavelos",
+    "PT"
+   ],
+   [
+    "Sesimbra",
+    "PT"
+   ]
+  ],
+  "anio": 1996,
+  "fuentes": [
+   "https://www.meo.pt/"
+  ]
+ },
+ {
+  "nombre": "Lanis-3",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Troon",
+    "GB"
+   ],
+   [
+    "Whitehead",
+    "GB"
+   ]
+  ],
+  "anio": 1992,
+  "fuentes": [
+   "https://globalnetworkmap.vodafone.com/"
+  ]
+ },
+ {
+  "nombre": "Denmark-Sweden 17",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Alsgarde",
+    "DK"
+   ],
+   [
+    "Kristinelund",
+    "SE"
+   ]
+  ],
+  "anio": 1994,
+  "fuentes": [
+   "https://tdcgroup.com/",
+   "https://www.tele2.com/"
+  ]
+ },
+ {
+  "nombre": "GlobalConnect-KPN",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Gedser",
+    "DK"
+   ],
+   [
+    "Rostock",
+    "DE"
+   ]
+  ],
+  "anio": 2006,
+  "fuentes": [
+   "https://globalconnectcarrier.com/our-story/"
+  ]
+ },
+ {
+  "nombre": "GlobalConnect 2 (GC2)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Sæby",
+    "DK"
+   ],
+   [
+    "Kungsbacka",
+    "SE"
+   ]
+  ],
+  "anio": 2001,
+  "fuentes": [
+   "https://globalconnectcarrier.com/our-story/"
+  ]
+ },
+ {
+  "nombre": "GlobalConnect 3 (GC3)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Nyborg",
+    "DK"
+   ],
+   [
+    "Korsør",
+    "DK"
+   ]
+  ],
+  "anio": 2006,
+  "fuentes": [
+   "https://globalconnectcarrier.com/our-story/"
+  ]
+ },
+ {
+  "nombre": "STO-HEL-One",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Nothamnsbacken",
+    "SE"
+   ],
+   [
+    "Hamnäs",
+    "FI"
+   ],
+   [
+    "Skatörarna",
+    "FI"
+   ],
+   [
+    "Lokalahti",
+    "FI"
+   ]
+  ],
+  "anio": 2008,
+  "fuentes": [
+   "https://globalconnectcarrier.com/our-story/"
+  ]
+ },
+ {
+  "nombre": "Italy-Monaco",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Savona",
+    "IT"
+   ],
+   [
+    "Montecarlo",
+    "MC"
+   ]
+  ],
+  "anio": 1995,
+  "fuentes": [
+   "https://www.monaco-telecom.mc/",
+   "https://www.tisparkle.com/"
+  ]
+ },
+ {
+  "nombre": "Malta-Gozo Cable",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Golden Bay, Malta",
+    "MT"
+   ],
+   [
+    "Mġarr ix-Xini, Gozo",
+    "MT"
+   ]
+  ],
+  "anio": 2020,
+  "fuentes": [
+   "https://jcs.com.mt/project_posts/fiber-optic-cables/"
+  ]
+ },
+ {
+  "nombre": "Trans Adriatic Express (TAE)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Seman",
+    "AL"
+   ],
+   [
+    "San Foca",
+    "IT"
+   ]
+  ],
+  "anio": 2023,
+  "fuentes": [
+   "https://www.exainfra.net/network/tae-trans-adriatic-express"
+  ]
+ },
+ {
+  "nombre": "Apollo East and West",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Korakia, Creta",
+    "GR"
+   ],
+   [
+    "Pachi",
+    "GR"
+   ]
+  ],
+  "anio": 2025,
+  "fuentes": [
+   "https://admieholding.gr/app/uploads/2023/05/Corporate-Presentation_FY_2022.pdf"
+  ]
+ },
+ {
+  "nombre": "Vodafone Greece Domestic",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Porto Rafti",
+    "GR"
+   ],
+   [
+    "Syros",
+    "GR"
+   ]
+  ],
+  "anio": 2008,
+  "fuentes": [
+   "https://globalnetworkmap.vodafone.com/"
+  ]
+ },
+ {
+  "nombre": "Domestic Submarine Cable of Maldives (DSCoM)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Velidhoo",
+    "MV"
+   ],
+   [
+    "Dhuvaafaru",
+    "MV"
+   ],
+   [
+    "Eydhafushi",
+    "MV"
+   ],
+   [
+    "Hulhumale",
+    "MV"
+   ],
+   [
+    "Maafushi",
+    "MV"
+   ],
+   [
+    "Dhangethi",
+    "MV"
+   ],
+   [
+    "Maamigili",
+    "MV"
+   ],
+   [
+    "Kudahuvadhoo",
+    "MV"
+   ]
+  ],
+  "anio": 2024,
+  "fuentes": [
+   "https://www.dhiraagu.com.mv/about-us/investor-relations/announcements-disclosures/domestic-submarine-cable-system-expansion-project",
+   "https://www.ooredoo.mv/static/ooredoo_maldives1/pdf/20221012-press-release-establishment-of-a-domestic-submarine-cable.pdf",
+   "https://geocables.com/cable/domestic-submarine-cable-of-maldives-dscom"
+  ]
+ },
+ {
+  "nombre": "Padang-Tua Pejat",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Padang",
+    "ID"
+   ],
+   [
+    "Tua Pejat",
+    "ID"
+   ]
+  ],
+  "anio": 2019,
+  "fuentes": [
+   "https://diskominfo.mentawaikab.go.id/2024/08/tawarkan-rencana-pengembangan.html",
+   "https://geocables.com/cable/padang-tua-pejat",
+   "https://sumbar.antaranews.com/berita/518745/telkomsel-kembangkan-jaringan-di-dua-pulau-mentawai"
+  ]
+ },
+ {
+  "nombre": "Sydney-Melbourne-Adelaide-Perth (SMAP)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Broadarrow Reserve, Maroubra, Sídney",
+    "AU"
+   ],
+   [
+    "Torquay, Victoria",
+    "AU"
+   ],
+   [
+    "West Beach, Adelaida",
+    "AU"
+   ],
+   [
+    "Garden Island, Australia Occidental",
+    "AU"
+   ],
+   [
+    "City Beach, Perth",
+    "AU"
+   ]
+  ],
+  "anio": 2026,
+  "fuentes": [
+   "https://sub.co/news/subco-announces-smap-hypercable-ready-for-service",
+   "https://epbcpublicportal.environment.gov.au/all-referrals/project-referral-summary/?id=78d5a4fd-3d6f-ef11-a670-7c1e522a9100",
+   "https://westernrocklobster.org/offshore-cable-installations-are-underway-notice-to-c-zone-fishers/"
+  ]
+ },
+ {
+  "nombre": "Mariana-Guam Cable",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Tanguisson Point, Guam",
+    "GU"
+   ],
+   [
+    "Rota, Islas Marianas del Norte",
+    "MP"
+   ],
+   [
+    "Tinian, Islas Marianas del Norte",
+    "MP"
+   ],
+   [
+    "Saipán, Islas Marianas del Norte",
+    "MP"
+   ]
+  ],
+  "anio": 1997,
+  "fuentes": [
+   "https://fcc.report/IBFS/SCL-LIC-19970111-00016",
+   "https://geocables.com/cable/mariana-guam-cable"
+  ]
+ },
+ {
+  "nombre": "Tokelau Submarine Cable",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Atafu",
+    "TK"
+   ],
+   [
+    "Nukunonu",
+    "TK"
+   ],
+   [
+    "Fakaofo",
+    "TK"
+   ]
+  ],
+  "anio": 2023,
+  "fuentes": [
+   "https://digitallibrary.un.org/record/4077116/files/A_AC.109_2025_14-EN.pdf",
+   "https://www.submarinecablemap.com/submarine-cable/tokelau-submarine-cable"
+  ]
+ },
+ {
+  "nombre": "Pukpuk-1 Cable System (Puk-Puk 1)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Jayapura, Papúa",
+    "ID"
+   ],
+   [
+    "Vanimo, Sandaun",
+    "PG"
+   ]
+  ],
+  "anio": 2026,
+  "fuentes": [
+   "https://www.telkom.co.id/sites/berita/id_ID/news/telkomgroup-resmikan-kabel-laut-pukpuk-jembatan-digital-pertama-yang-menghubungkan-indonesia-papua-nugini-3757",
+   "https://www.submarinecablemap.com/submarine-cable/pukpuk-1-cable-system"
+  ]
+ },
+ {
+  "nombre": "Tuvalu Vaka Cable (VAKA)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Funafuti, Tuvalu",
+    "TV"
+   ]
+  ],
+  "anio": 2025,
+  "fuentes": [
+   "https://www.ccrc.gov.au/index.php/news-and-media/tuvalu-leads-way-protecting-its-first-undersea-cable",
+   "https://www.aiffp.gov.au/news/australia-and-tuvalu-celebrate-milestone-connection-vaka-cable",
+   "https://www.aiffp.gov.au/investments/investment-list/tuvalu-vaka-cable"
+  ]
+ },
+ {
+  "nombre": "Tu'i Vava'u Cable (Tonga Hawaiki Submarine Cable Branch System)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Neiafu, Vava'u, Tonga",
+    "TO"
+   ]
+  ],
+  "anio": 2026,
+  "fuentes": [
+   "https://pmo.gov.to/wp-content/uploads/2026/06/English-PR-HMDS-Media-Release-on-Tui-Vavau-Cable-.rev4_.docx.pdf",
+   "https://www.aiffp.gov.au/news/tongas-second-international-cable-officially-launched",
+   "https://www.aiffp.gov.au/investments/investment-list/expanding-digital-connectivity-tonga-second-international-undersea-cable"
+  ]
+ },
+ {
+  "nombre": "Tahiti Iti (Tautira-Teahupo'o)",
+  "propone": "chatgpt",
+  "llegadas": [
+   [
+    "Marina Tautira, Tahití",
+    "PF"
+   ],
+   [
+    "Marina Teahupo'o, Tahití",
+    "PF"
+   ]
+  ],
+  "anio": 2024,
+  "fuentes": [
+   "https://www.service-public.pf/dpam/2024/06/25/precautions-en-mer-aux-abords-du-nouveau-cable-de-fibre-deploye-de-teahupoo-a-tautira/",
+   "https://www.service-public.pf/dpam/wp-content/uploads/sites/20/2024/06/Cable-sublagonaire-.pdf",
+   "https://api.groupe-keran.com/api/upload/9412d1309a275b3f33a9c5769385dc9b.pdf"
+  ]
+ },
+ {
+  "nombre": "Alaska United (AU-East y AU-West)",
+  "propone": "claude",
+  "llegadas": [
+   [
+    "Whittier, Alaska",
+    "US"
+   ],
+   [
+    "Juneau, Alaska",
+    "US"
+   ],
+   [
+    "Seattle, Washington",
+    "US"
+   ],
+   [
+    "Seward, Alaska",
+    "US"
+   ],
+   [
+    "Warrenton, Oregon",
+    "US"
+   ]
+  ],
+  "anio": 1999,
+  "fuentes": [
+   "https://www.submarinenetworks.com/en/systems/americas/alaska-united"
+  ]
+ },
+ {
+  "nombre": "Tampnet (North Sea)",
+  "propone": "claude",
+  "llegadas": [
+   [
+    "Kårstø",
+    "NO"
+   ],
+   [
+    "Lowestoft",
+    "GB"
+   ]
+  ],
+  "anio": 2006,
+  "fuentes": [
+   "https://www.tampnet.com/"
+  ]
+ },
+ {
+  "nombre": "Baltic Highway (C-Lion1)",
+  "propone": "claude",
+  "llegadas": [
+   [
+    "Helsinki",
+    "FI"
+   ],
+   [
+    "Rostock",
+    "DE"
+   ]
+  ],
+  "anio": 2016,
+  "fuentes": [
+   "https://en.wikipedia.org/wiki/C-Lion1"
+  ]
+ },
+ {
+  "nombre": "Balticconnector FOC",
+  "propone": "claude",
+  "llegadas": [
+   [
+    "Inkoo",
+    "FI"
+   ],
+   [
+    "Paldiski",
+    "EE"
+   ]
+  ],
+  "anio": 2020,
+  "fuentes": [
+   "https://www.submarinenetworks.com/en/systems/intra-europe/balticconnector"
+  ]
+ },
+ {
+  "nombre": "EESF-3 (Estonia-Finland)",
+  "propone": "claude",
+  "llegadas": [
+   [
+    "Helsinki",
+    "FI"
+   ],
+   [
+    "Tallinn",
+    "EE"
+   ]
+  ],
+  "anio": 2004,
+  "fuentes": [
+   "https://www.submarinenetworks.com/en/systems/intra-europe/eesf-3"
+  ]
+ },
+ {
+  "nombre": "Denmark-Poland 2 (Baltica)",
+  "propone": "claude",
+  "llegadas": [
+   [
+    "Kołobrzeg",
+    "PL"
+   ],
+   [
+    "Rødvig",
+    "DK"
+   ],
+   [
+    "Karlshamn",
+    "SE"
+   ]
+  ],
+  "anio": 1999,
+  "fuentes": [
+   "https://www.submarinenetworks.com/en/systems/intra-europe/baltica"
+  ]
+ },
+ {
+  "nombre": "ESAT-1",
+  "propone": "claude",
+  "llegadas": [
+   [
+    "Kilmore Quay",
+    "IE"
+   ],
+   [
+    "Sennen Cove, Cornwall",
+    "GB"
+   ]
+  ],
+  "anio": 1999,
+  "fuentes": [
+   "https://www.submarinenetworks.com/en/systems/intra-europe/esat-1"
+  ]
+ },
+ {
+  "nombre": "Pan-European Crossing (PEC)",
+  "propone": "claude",
+  "llegadas": [
+   [
+    "Whitstable",
+    "GB"
+   ],
+   [
+    "Zandvoort",
+    "NL"
+   ],
+   [
+    "Knokke-Heist",
+    "BE"
+   ]
+  ],
+  "anio": 2000,
+  "fuentes": [
+   "https://www.submarinenetworks.com/en/systems/intra-europe/pec"
+  ]
+ },
+ {
+  "nombre": "Channel Islands (UK–Channel Islands 8, HUGO, Guernsey–Jersey)",
+  "propone": "claude",
+  "llegadas": [
+   [
+    "Guernsey",
+    "GG"
+   ],
+   [
+    "Jersey",
+    "JE"
+   ],
+   [
+    "Sennen Cove, Cornwall",
+    "GB"
+   ],
+   [
+    "Pirou",
+    "FR"
+   ]
+  ],
+  "anio": null,
+  "fuentes": []
+ },
+ {
+  "nombre": "Eastern Light",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Estocolmo",
+    "SE"
+   ],
+   [
+    "Helsinki",
+    "FI"
+   ]
+  ],
+  "anio": 2021,
+  "fuentes": [
+   "https://easternlight.se/"
+  ]
+ },
+ {
+  "nombre": "Libya Fiber Optic Network (LFON)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Zawia",
+    "LY"
+   ],
+   [
+    "Tripoli",
+    "LY"
+   ],
+   [
+    "Al Khums",
+    "LY"
+   ],
+   [
+    "Zliten",
+    "LY"
+   ],
+   [
+    "Misurata",
+    "LY"
+   ],
+   [
+    "Sirte",
+    "LY"
+   ],
+   [
+    "Ras Lanuf",
+    "LY"
+   ],
+   [
+    "Brega",
+    "LY"
+   ],
+   [
+    "Benghazi",
+    "LY"
+   ],
+   [
+    "Tolmeita",
+    "LY"
+   ],
+   [
+    "Derna",
+    "LY"
+   ],
+   [
+    "Tobruk",
+    "LY"
+   ]
+  ],
+  "anio": 2010,
+  "fuentes": [
+   "https://lptic.ly",
+   "https://www.submarinecablemap.com/submarine-cable/libya-fiber-optic-network-lfon"
+  ]
+ },
+ {
+  "nombre": "GLO-2 (Globacom-2)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Lagos",
+    "NG"
+   ],
+   [
+    "Escravos",
+    "NG"
+   ],
+   [
+    "Forcados",
+    "NG"
+   ],
+   [
+    "Bonny",
+    "NG"
+   ],
+   [
+    "Kwa Ibo",
+    "NG"
+   ]
+  ],
+  "anio": 2020,
+  "fuentes": [
+   "https://www.gloworld.com",
+   "https://www.ncc.gov.ng",
+   "https://www.submarinecablemap.com/submarine-cable/glo-2"
+  ]
+ },
+ {
+  "nombre": "Angola Domestic Network System (ADONES)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Cabinda",
+    "AO"
+   ],
+   [
+    "Soyo",
+    "AO"
+   ],
+   [
+    "Luanda",
+    "AO"
+   ],
+   [
+    "Porto Amboim",
+    "AO"
+   ],
+   [
+    "Benguela",
+    "AO"
+   ],
+   [
+    "Namibe",
+    "AO"
+   ]
+  ],
+  "anio": 2008,
+  "fuentes": [
+   "https://www.angolatelecom.ao",
+   "https://www.submarinecablemap.com/submarine-cable/angola-domestic-network-system-adones"
+  ]
+ },
+ {
+  "nombre": "Comoros Domestic Submarine Cable System",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Moroni",
+    "KM"
+   ],
+   [
+    "Fomboni",
+    "KM"
+   ],
+   [
+    "Mutsamudu",
+    "KM"
+   ]
+  ],
+  "anio": 2010,
+  "fuentes": [
+   "https://www.comorestelecom.km",
+   "https://www.submarinecablemap.com/submarine-cable/comoros-domestic-submarine-cable-system"
+  ]
+ },
+ {
+  "nombre": "Cabo Verde Telecom Domestic Submarine Cable Network",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Praia",
+    "CV"
+   ],
+   [
+    "Tarrafal",
+    "CV"
+   ],
+   [
+    "Vila do Maio",
+    "CV"
+   ],
+   [
+    "Sal Rei",
+    "CV"
+   ],
+   [
+    "Santa Maria",
+    "CV"
+   ],
+   [
+    "Tarrafal de São Nicolau",
+    "CV"
+   ],
+   [
+    "Mindelo",
+    "CV"
+   ],
+   [
+    "Porto Novo",
+    "CV"
+   ],
+   [
+    "São Filipe",
+    "CV"
+   ],
+   [
+    "Furna",
+    "CV"
+   ]
+  ],
+  "anio": 2001,
+  "fuentes": [
+   "https://www.cvtelecom.cv",
+   "https://www.arme.cv",
+   "https://www.submarinecablemap.com/submarine-cable/cabo-verde-telecom-domestic-submarine-cable-network"
+  ]
+ },
+ {
+  "nombre": "Bahamas Domestic Submarine Network (BDSNi)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Eight Mile Rock",
+    "BS"
+   ],
+   [
+    "Marsh Harbour",
+    "BS"
+   ],
+   [
+    "Nassau",
+    "BS"
+   ],
+   [
+    "Fresh Creek",
+    "BS"
+   ],
+   [
+    "Tarpum Bay",
+    "BS"
+   ],
+   [
+    "George Town",
+    "BS"
+   ],
+   [
+    "Clarence Town",
+    "BS"
+   ],
+   [
+    "Cockburn Town",
+    "BS"
+   ],
+   [
+    "Matthew Town",
+    "BS"
+   ],
+   [
+    "Port-au-Prince",
+    "HT"
+   ]
+  ],
+  "anio": 2006,
+  "fuentes": [
+   "https://www.btcbahamas.com",
+   "https://www.submarinecablemap.com/submarine-cable/bahamas-domestic-submarine-network-bdsni"
+  ]
+ },
+ {
+  "nombre": "Bonaire-Curaçao Cable System",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Willemstad",
+    "CW"
+   ],
+   [
+    "Kralendijk",
+    "BQ"
+   ]
+  ],
+  "anio": 2009,
+  "fuentes": [
+   "https://www.discoverflow.co",
+   "https://www.acm.nl"
+  ]
+ },
+ {
+  "nombre": "Sistema Cable Submarino Nacional (SCSN)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Maracaibo",
+    "VE"
+   ],
+   [
+    "Punto Fijo",
+    "VE"
+   ],
+   [
+    "Puerto Cabello",
+    "VE"
+   ],
+   [
+    "Camurí",
+    "VE"
+   ],
+   [
+    "Higuerote",
+    "VE"
+   ],
+   [
+    "Puerto La Cruz",
+    "VE"
+   ],
+   [
+    "Cumaná",
+    "VE"
+   ],
+   [
+    "Porlamar",
+    "VE"
+   ],
+   [
+    "Carúpano",
+    "VE"
+   ]
+  ],
+  "anio": 1998,
+  "fuentes": [
+   "https://www.cantv.com.ve",
+   "http://www.conatel.gob.ve"
+  ]
+ },
+ {
+  "nombre": "Pichilingue-Topolobampo",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Pichilingue (La Paz)",
+    "MX"
+   ],
+   [
+    "Topolobampo",
+    "MX"
+   ]
+  ],
+  "anio": 2006,
+  "fuentes": [
+   "https://www.telmex.com",
+   "https://www.ift.org.mx"
+  ]
+ },
+ {
+  "nombre": "Mazatlán-La Paz",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Mazatlán",
+    "MX"
+   ],
+   [
+    "La Paz",
+    "MX"
+   ]
+  ],
+  "anio": 2019,
+  "fuentes": [
+   "https://www.megacable.com.mx",
+   "https://www.submarinecablemap.com/submarine-cable/mazatlan-la-paz"
+  ]
+ },
+ {
+  "nombre": "Cabo San Lucas-Mazatlán",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Cabo San Lucas",
+    "MX"
+   ],
+   [
+    "Mazatlán",
+    "MX"
+   ]
+  ],
+  "anio": 1995,
+  "fuentes": [
+   "https://www.telmex.com",
+   "https://www.ift.org.mx"
+  ]
+ },
+ {
+  "nombre": "Hawaiian Islands Fiber Network (HIFN)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Lihue (Kauai)",
+    "US"
+   ],
+   [
+    "Makaha (Oahu)",
+    "US"
+   ],
+   [
+    "Waimanalo (Oahu)",
+    "US"
+   ],
+   [
+    "Kaunakakai (Molokai)",
+    "US"
+   ],
+   [
+    "Manele Bay (Lanai)",
+    "US"
+   ],
+   [
+    "Mokulele (Maui)",
+    "US"
+   ],
+   [
+    "Kawaihae (Hawaii)",
+    "US"
+   ]
+  ],
+  "anio": 1997,
+  "fuentes": [
+   "https://www.hawaiiantel.com",
+   "https://www.fcc.gov"
+  ]
+ },
+ {
+  "nombre": "AU-Aleutians",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Kodiak",
+    "US"
+   ],
+   [
+    "Chignik",
+    "US"
+   ],
+   [
+    "Perryville",
+    "US"
+   ],
+   [
+    "Sand Point",
+    "US"
+   ],
+   [
+    "King Cove",
+    "US"
+   ],
+   [
+    "Cold Bay",
+    "US"
+   ],
+   [
+    "Akutan",
+    "US"
+   ],
+   [
+    "Unalaska (Dutch Harbor)",
+    "US"
+   ]
+  ],
+  "anio": 2022,
+  "fuentes": [
+   "https://www.gci.com",
+   "https://www.submarinecablemap.com/submarine-cable/au-aleutians"
+  ]
+ },
+ {
+  "nombre": "TERRA SW",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Homer",
+    "US"
+   ],
+   [
+    "Williamsport",
+    "US"
+   ]
+  ],
+  "anio": 2012,
+  "fuentes": [
+   "https://www.gci.com",
+   "https://www.submarinecablemap.com/submarine-cable/terra-sw"
+  ]
+ },
+ {
+  "nombre": "HaidaLink",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Prince Rupert",
+    "CA"
+   ],
+   [
+    "Tlell",
+    "CA"
+   ]
+  ],
+  "anio": 2016,
+  "fuentes": [
+   "https://www.citywest.ca",
+   "https://www.submarinecablemap.com/submarine-cable/haidalink"
+  ]
+ },
+ {
+  "nombre": "Connected Coast",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Prince Rupert",
+    "CA"
+   ],
+   [
+    "Masset",
+    "CA"
+   ],
+   [
+    "Bella Bella",
+    "CA"
+   ],
+   [
+    "Campbell River",
+    "CA"
+   ],
+   [
+    "Nanaimo",
+    "CA"
+   ],
+   [
+    "Richmond (Vancouver)",
+    "CA"
+   ]
+  ],
+  "anio": 2024,
+  "fuentes": [
+   "https://connectedcoast.ca",
+   "https://www.citywest.ca"
+  ]
+ },
+ {
+  "nombre": "Réseau Phoebus",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "L'Anse-à-Valleau (Gaspé)",
+    "CA"
+   ],
+   [
+    "L'Étang-du-Nord (Îles-de-la-Madeleine)",
+    "CA"
+   ]
+  ],
+  "anio": 2019,
+  "fuentes": [
+   "https://www.bce.ca",
+   "https://www.telebec.com"
+  ]
+ },
+ {
+  "nombre": "Crosslake Fibre",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Toronto",
+    "CA"
+   ],
+   [
+    "Olcott",
+    "US"
+   ]
+  ],
+  "anio": 2019,
+  "fuentes": [
+   "https://www.crosslakefibre.ca",
+   "https://www.submarinecablemap.com/submarine-cable/crosslake-fibre"
+  ]
+ },
+ {
+  "nombre": "Puerto Montt-Puerto Chacabuco",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Puerto Montt",
+    "CL"
+   ],
+   [
+    "Quellón",
+    "CL"
+   ],
+   [
+    "Melinka",
+    "CL"
+   ],
+   [
+    "Puerto Cisnes",
+    "CL"
+   ],
+   [
+    "Puerto Chacabuco",
+    "CL"
+   ]
+  ],
+  "anio": 2015,
+  "fuentes": [
+   "https://www.gtd.cl",
+   "https://www.subtel.gob.cl"
+  ]
+ },
+ {
+  "nombre": "Jakarta-Bangka-Bintan-Batam-Singapore (B2JS)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Ancol, Jakarta",
+    "ID"
+   ],
+   [
+    "Sungailiat, Bangka",
+    "ID"
+   ],
+   [
+    "Tanjung Bemban, Batam",
+    "ID"
+   ],
+   [
+    "Lagoi, Bintan",
+    "ID"
+   ],
+   [
+    "Tuas",
+    "SG"
+   ]
+  ],
+  "anio": 2012,
+  "fuentes": [
+   "https://www.moratelindo.co.id",
+   "https://www.submarinecablemap.com"
+  ]
+ },
+ {
+  "nombre": "JaKa2LaDeMa (Java-Kalimantan-Sulawesi-Denpasar-Makassar)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Banjarmasin",
+    "ID"
+   ],
+   [
+    "Kotabaru",
+    "ID"
+   ],
+   [
+    "Makassar",
+    "ID"
+   ],
+   [
+    "Gresik",
+    "ID"
+   ],
+   [
+    "Padangbai, Bali",
+    "ID"
+   ]
+  ],
+  "anio": 2010,
+  "fuentes": [
+   "https://www.telkom.co.id",
+   "https://www.nec.com",
+   "https://www.submarinecablemap.com"
+  ]
+ },
+ {
+  "nombre": "Mataram-Kupang Cable System (MKCS)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Mataram, Lombok",
+    "ID"
+   ],
+   [
+    "Pringgabaya, Lombok",
+    "ID"
+   ],
+   [
+    "Sumbawa Besar",
+    "ID"
+   ],
+   [
+    "Bima",
+    "ID"
+   ],
+   [
+    "Waingapu, Sumba",
+    "ID"
+   ],
+   [
+    "Kupang",
+    "ID"
+   ]
+  ],
+  "anio": 2011,
+  "fuentes": [
+   "https://www.telkom.co.id",
+   "https://www.submarinecablemap.com"
+  ]
+ },
+ {
+  "nombre": "SMPCS Packet-1",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Manado",
+    "ID"
+   ],
+   [
+    "Ternate",
+    "ID"
+   ],
+   [
+    "Labuha",
+    "ID"
+   ],
+   [
+    "Sorong",
+    "ID"
+   ],
+   [
+    "Manokwari",
+    "ID"
+   ],
+   [
+    "Biak",
+    "ID"
+   ],
+   [
+    "Sarmi",
+    "ID"
+   ],
+   [
+    "Jayapura",
+    "ID"
+   ]
+  ],
+  "anio": 2015,
+  "fuentes": [
+   "https://www.telkom.co.id",
+   "https://www.submarinecablemap.com"
+  ]
+ },
+ {
+  "nombre": "Jayabaya (Jakarta-Surabaya)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Ancol, Jakarta",
+    "ID"
+   ],
+   [
+    "Cirebon",
+    "ID"
+   ],
+   [
+    "Semarang",
+    "ID"
+   ],
+   [
+    "Surabaya",
+    "ID"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://www.moratelindo.co.id",
+   "https://www.submarinecablemap.com"
+  ]
+ },
+ {
+  "nombre": "Converge Domestic Submarine Cable Network (CDSCN)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Batangas City",
+    "PH"
+   ],
+   [
+    "Roxas City",
+    "PH"
+   ],
+   [
+    "Bacolod",
+    "PH"
+   ],
+   [
+    "Talisay, Cebu",
+    "PH"
+   ],
+   [
+    "Tagbilaran, Bohol",
+    "PH"
+   ],
+   [
+    "Ormoc, Leyte",
+    "PH"
+   ],
+   [
+    "Cagayan de Oro",
+    "PH"
+   ]
+  ],
+  "anio": 2021,
+  "fuentes": [
+   "https://www.convergeict.com",
+   "https://www.submarinenetworks.com"
+  ]
+ },
+ {
+  "nombre": "WARF Submarine Cable",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Thiruvananthapuram",
+    "IN"
+   ],
+   [
+    "Kulhudhuffushi",
+    "MV"
+   ],
+   [
+    "Hulhumalé",
+    "MV"
+   ]
+  ],
+  "anio": 2007,
+  "fuentes": [
+   "https://www.ooredoo.mv",
+   "https://www.submarinecablemap.com"
+  ]
+ },
+ {
+  "nombre": "Ooredoo Maldives Nationwide Submarine Cable",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Kulhudhuffushi",
+    "MV"
+   ],
+   [
+    "Eydhafushi",
+    "MV"
+   ],
+   [
+    "Hulhumalé",
+    "MV"
+   ],
+   [
+    "Muli",
+    "MV"
+   ],
+   [
+    "Thinadhoo",
+    "MV"
+   ],
+   [
+    "Hithadhoo",
+    "MV"
+   ]
+  ],
+  "anio": 2017,
+  "fuentes": [
+   "https://www.ooredoo.mv",
+   "https://www.submarinecablemap.com"
+  ]
+ },
+ {
+  "nombre": "Eastern Light Sweden-Finland II",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Stockholm",
+    "SE"
+   ],
+   [
+    "Mariehamn",
+    "FI"
+   ],
+   [
+    "Hanko",
+    "FI"
+   ],
+   [
+    "Bromarv",
+    "FI"
+   ],
+   [
+    "Helsinki",
+    "FI"
+   ]
+  ],
+  "anio": 2022,
+  "fuentes": [
+   "https://www.globalconnect.se"
+  ]
+ },
+ {
+  "nombre": "Denmark-Germany 2",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Gedser",
+    "DK"
+   ],
+   [
+    "Warnemünde",
+    "DE"
+   ]
+  ],
+  "anio": 1995,
+  "fuentes": [
+   "https://www.telekom.com"
+  ]
+ },
+ {
+  "nombre": "Denmark-Norway 6 (DN-6)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Hjørring",
+    "DK"
+   ],
+   [
+    "Kristiansand",
+    "NO"
+   ]
+  ],
+  "anio": 1993,
+  "fuentes": [
+   "https://www.telenor.com"
+  ]
+ },
+ {
+  "nombre": "Denmark-Sweden 16 (DS-16)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Helsingør",
+    "DK"
+   ],
+   [
+    "Helsingborg",
+    "SE"
+   ]
+  ],
+  "anio": 1991,
+  "fuentes": [
+   "https://www.teliacompany.com"
+  ]
+ },
+ {
+  "nombre": "Denmark-Sweden 18 (DS-18)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Frederikshavn",
+    "DK"
+   ],
+   [
+    "Göteborg",
+    "SE"
+   ]
+  ],
+  "anio": 1996,
+  "fuentes": [
+   "https://www.teliacompany.com"
+  ]
+ },
+ {
+  "nombre": "Pencan-6",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Conil de la Frontera",
+    "ES"
+   ],
+   [
+    "El Médano",
+    "ES"
+   ],
+   [
+    "Las Palmas de Gran Canaria",
+    "ES"
+   ]
+  ],
+  "anio": 1999,
+  "fuentes": [
+   "https://www.telefonica.com"
+  ]
+ },
+ {
+  "nombre": "PENBAL-5",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Valencia",
+    "ES"
+   ],
+   [
+    "Palma de Mallorca",
+    "ES"
+   ]
+  ],
+  "anio": 1994,
+  "fuentes": [
+   "https://www.telefonica.com"
+  ]
+ },
+ {
+  "nombre": "Aphrodite 2",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Chania",
+    "GR"
+   ],
+   [
+    "Yeroskipou",
+    "CY"
+   ]
+  ],
+  "anio": 1994,
+  "fuentes": [
+   "https://www.cyta.com.cy"
+  ]
+ },
+ {
+  "nombre": "BT Highlands and Islands Submarine Cable System",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Keiss",
+    "GB"
+   ],
+   [
+    "Kirkwall",
+    "GB"
+   ],
+   [
+    "Lerwick",
+    "GB"
+   ],
+   [
+    "Ullapool",
+    "GB"
+   ],
+   [
+    "Stornoway",
+    "GB"
+   ]
+  ],
+  "anio": 2014,
+  "fuentes": [
+   "https://www.bt.com"
+  ]
+ },
+ {
+  "nombre": "TGN-Eurasia (TGN-EA)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Mumbai",
+    "IN"
+   ],
+   [
+    "Al Seeb",
+    "OM"
+   ],
+   [
+    "Jeddah",
+    "SA"
+   ],
+   [
+    "Zafarana",
+    "EG"
+   ],
+   [
+    "Abu Talat",
+    "EG"
+   ]
+  ],
+  "anio": 2012,
+  "fuentes": [
+   "https://www.tatacommunications.com",
+   "https://www.submarinenetworks.com"
+  ]
+ },
+ {
+  "nombre": "Ooredoo Maldives Domestic Submarine Cable (OMDSC)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Hithadhoo",
+    "MV"
+   ],
+   [
+    "Fuvahmulah",
+    "MV"
+   ],
+   [
+    "Thinadhoo",
+    "MV"
+   ],
+   [
+    "Gan",
+    "MV"
+   ],
+   [
+    "Maamigili",
+    "MV"
+   ],
+   [
+    "Hulhumalé",
+    "MV"
+   ],
+   [
+    "Eydhafushi",
+    "MV"
+   ],
+   [
+    "Naifaru",
+    "MV"
+   ],
+   [
+    "Kulhudhuffushi",
+    "MV"
+   ]
+  ],
+  "anio": 2017,
+  "fuentes": [
+   "https://www.ooredoo.mv",
+   "https://www.submarinenetworks.com"
+  ]
+ },
+ {
+  "nombre": "Mozambique Festoon",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Maputo",
+    "MZ"
+   ],
+   [
+    "Xai-Xai",
+    "MZ"
+   ],
+   [
+    "Inhambane",
+    "MZ"
+   ],
+   [
+    "Vilanculos",
+    "MZ"
+   ],
+   [
+    "Beira",
+    "MZ"
+   ],
+   [
+    "Quelimane",
+    "MZ"
+   ],
+   [
+    "Ilha de Moçambique",
+    "MZ"
+   ],
+   [
+    "Nacala",
+    "MZ"
+   ],
+   [
+    "Pemba",
+    "MZ"
+   ]
+  ],
+  "anio": 2006,
+  "fuentes": [
+   "https://www.tmcel.mz",
+   "https://www.submarinecablemap.com"
+  ]
+ },
+ {
+  "nombre": "Lanka Bell Submarine Cable",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Mount Lavinia",
+    "LK"
+   ]
+  ],
+  "anio": 2006,
+  "fuentes": [
+   "https://www.lankabell.com",
+   "https://www.submarinecablemap.com"
+  ]
+ },
+ {
+  "nombre": "Aquilink",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Oneroa",
+    "NZ"
+   ],
+   [
+    "Maraetai",
+    "NZ"
+   ]
+  ],
+  "anio": 2005,
+  "fuentes": [
+   "https://www.spark.co.nz",
+   "https://www.submarinecablemap.com/submarine-cable/aquilink"
+  ]
+ },
+ {
+  "nombre": "AT&T GOKI",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Tanguisson Point",
+    "GU"
+   ],
+   [
+    "Chinen",
+    "JP"
+   ]
+  ],
+  "anio": 2013,
+  "fuentes": [
+   "https://www.fcc.gov",
+   "https://www.submarinecablemap.com/submarine-cable/att-goki"
+  ]
+ },
+ {
+  "nombre": "Blue Sky Submarine Cable System (BSSCS)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Kawhia",
+    "NZ"
+   ],
+   [
+    "Taharoa",
+    "NZ"
+   ]
+  ],
+  "anio": 2002,
+  "fuentes": [
+   "https://www.linz.govt.nz",
+   "https://www.submarinecablemap.com/submarine-cable/blue-sky-submarine-cable-system-bsscs"
+  ]
+ },
+ {
+  "nombre": "Digicel Marianas Cable System",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Tanguisson Point",
+    "GU"
+   ],
+   [
+    "Rota",
+    "MP"
+   ],
+   [
+    "Tinian",
+    "MP"
+   ],
+   [
+    "Saipan",
+    "MP"
+   ]
+  ],
+  "anio": 2017,
+  "fuentes": [
+   "https://www.itehq.net",
+   "https://www.submarinecablemap.com/submarine-cable/atisa"
+  ]
+ },
+ {
+  "nombre": "Fiji Domestic Savusavu-Taveuni",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Savusavu",
+    "FJ"
+   ],
+   [
+    "Waiyevo",
+    "FJ"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://www.telecomfiji.com.fj",
+   "https://www.fintel.com.fj"
+  ]
+ },
+ {
+  "nombre": "Hawaiki Nui 1",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Whangarei",
+    "NZ"
+   ],
+   [
+    "Sydney",
+    "AU"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://www.bw-digital.com"
+  ]
+ },
+ {
+  "nombre": "Marianas-Guam Cable",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Tanguisson Point",
+    "GU"
+   ],
+   [
+    "Rota",
+    "MP"
+   ],
+   [
+    "Tinian",
+    "MP"
+   ],
+   [
+    "Saipan",
+    "MP"
+   ]
+  ],
+  "anio": 1997,
+  "fuentes": [
+   "https://www.itehq.net",
+   "https://www.fcc.gov"
+  ]
+ },
+ {
+  "nombre": "Oahu-Kauai (OK)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Makaha",
+    "US"
+   ],
+   [
+    "Lihue",
+    "US"
+   ]
+  ],
+  "anio": 1994,
+  "fuentes": [
+   "https://www.hawaiiantel.com"
+  ]
+ },
+ {
+  "nombre": "Palau Cable 1 (PC1) / Belau Submarine Cable",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Ngeremlengui",
+    "PW"
+   ],
+   [
+    "Colonia (Yap)",
+    "FM"
+   ],
+   [
+    "Piti",
+    "GU"
+   ]
+  ],
+  "anio": 2017,
+  "fuentes": [
+   "https://www.belaucable.com",
+   "https://www.adb.org"
+  ]
+ },
+ {
+  "nombre": "PNG LNG",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Port Moresby",
+    "PG"
+   ],
+   [
+    "Omati River",
+    "PG"
+   ]
+  ],
+  "anio": 2013,
+  "fuentes": [
+   "https://www.pnglng.com",
+   "https://www.submarinecablemap.com/submarine-cable/png-lng"
+  ]
+ },
+ {
+  "nombre": "Sabr",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Darwin",
+    "AU"
+   ],
+   [
+    "Wurrumiyanga (Bathurst Island)",
+    "AU"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://www.vocus.com.au",
+   "https://nt.gov.au"
+  ]
+ },
+ {
+  "nombre": "Savaii-Upolu Cable",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Mulifanua (Upolu)",
+    "WS"
+   ],
+   [
+    "Salelologa (Savai'i)",
+    "WS"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://www.sscc.ws"
+  ]
+ },
+ {
+  "nombre": "SunCable / Groote-Bickerton-Mainland",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Umbakumba",
+    "AU"
+   ],
+   [
+    "Milyakburra",
+    "AU"
+   ]
+  ],
+  "anio": 2021,
+  "fuentes": [
+   "https://www.telstra.com.au"
+  ]
+ },
+ {
+  "nombre": "Sydney-Melbourne-Adelaide-Perth (SMAP) - Kangaroo Island Segment",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Fishery Beach",
+    "AU"
+   ],
+   [
+    "Cuttlefish Bay (Kangaroo Island)",
+    "AU"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://www.telstra.com.au",
+   "https://www.acma.gov.au"
+  ]
+ },
+ {
+  "nombre": "Trans-Cook Strait Cable (Aquatronics)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Oteranga Bay",
+    "NZ"
+   ],
+   [
+    "Fighting Bay",
+    "NZ"
+   ]
+  ],
+  "anio": 1995,
+  "fuentes": [
+   "https://www.transpower.co.nz",
+   "https://www.linz.govt.nz"
+  ]
+ },
+ {
+  "nombre": "Vanuatu-Fiji / Tui-Samoa Extension to Vanua Levu",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Suva",
+    "FJ"
+   ],
+   [
+    "Savusavu",
+    "FJ"
+   ]
+  ],
+  "anio": 2018,
+  "fuentes": [
+   "https://www.fintel.com.fj",
+   "https://www.sscc.ws"
+  ]
+ },
+ {
+  "nombre": "Viti Levu-Vanua Levu (Fiji Domestic)",
+  "propone": "gemini",
+  "llegadas": [
+   [
+    "Vatuwaqa (Suva)",
+    "FJ"
+   ],
+   [
+    "Savusavu",
+    "FJ"
+   ]
+  ],
+  "anio": 2007,
+  "fuentes": [
+   "https://www.telecomfiji.com.fj"
+  ]
+ },
+ {
+  "nombre": "North Sea Connect (NSC)",
+  "propone": "grok",
+  "llegadas": [
+   [
+    "Newcastle",
+    "GB"
+   ],
+   [
+    "Houstrup",
+    "DK"
+   ]
+  ],
+  "anio": 2022,
+  "fuentes": [
+   "https://submarinenetworks.com/en/systems/intra-europe/cc-2/aqua-comms-activates-celtixconnect-2-and-north-sea-connect"
+  ]
+ }
+]

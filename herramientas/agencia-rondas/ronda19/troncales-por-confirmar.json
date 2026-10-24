@@ -1,0 +1,1346 @@
+{
+ "SS": [
+  {
+   "voz": "astra",
+   "operador": "Liquid Telecom",
+   "nombre": "Troncal terrestre Juba–Nimule",
+   "ciudades": [
+    "Juba",
+    "Nimule"
+   ],
+   "fuente": "Liquid Telecom, comunicado «Liquid Telecom completes South Sudan’s first fibre broadband network», febrero de 2020: confirma la terminación de la conexión terrestre de aproximadamente 200 km entre Juba y Nimule, en la frontera con Uganda."
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "Liquid",
+   "nombre": "Liquid — interconexión Juba–Uganda por Nimule",
+   "ciudades": [
+    "Juba",
+    "Nimule",
+    "Elegu"
+   ],
+   "fuente": "Liquid Intelligent Technologies, The First to Bring Fibre to South Sudan, 11 de febrero de 2020: confirma la finalización en enero de 2020 de 200 km de fibra desde Juba, pasando por Nimule, hasta la frontera ugandesa. Banco Mundial, South Sudan Digital Economy Assessment, 2023, confirma la operación de la ruta. https://za.liquid.tech/the-first-to-bring-fibre-to-south-sudan/ ; https://documents1.worldbank.org/curated/en/099062323175598193/pdf/P17636100e4ab00f3097160e63e7bf53f6a.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "Muya Fibre",
+   "nombre": "Muya Fibre — interconexión Juba–Uganda por Nimule",
+   "ciudades": [
+    "Juba",
+    "Nimule",
+    "Elegu"
+   ],
+   "fuente": "Banco Mundial, South Sudan Digital Economy Assessment, 2023, sección 2.2.1: confirma expresamente que Muya Fibre Construction opera una ruta de fibra por el mismo corredor Juba–Uganda que Liquid. Banco Mundial, Missing Broadband Links in the Horn of Africa Region, tabla 19: identifica el despliegue de Muya y Liquid desde Juba por Nimule hasta la frontera ugandesa. https://documents1.worldbank.org/curated/en/099062323175598193/pdf/P17636100e4ab00f3097160e63e7bf53f6a.pdf ; https://documents1.worldbank.org/curated/en/099450206282323160/pdf/IDU00f2d51f40fd4a04e630b0b60d27b1a4f548b.pdf"
+  }
+ ],
+ "UY": [
+  {
+   "voz": "chatgpt",
+   "operador": "UTE",
+   "nombre": "Fibra óptica UTE sobre líneas de transmisión Bonete–Young–Paysandú–Salto",
+   "ciudades": [
+    "Young",
+    "Paysandu",
+    "Salto"
+   ],
+   "fuente": "UTE, Memoria Anual 2021, apartado «Tendido de fibras ópticas en líneas aéreas de trasmisión». Confirma la finalización de los tramos Bonete–Bonete B, Bonete B–Young, Young–Paysandú y Paysandú–Salto. https://www.ute.com.uy/sites/default/files/memorias/Memoria%20anual%202021.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "UTE",
+   "nombre": "Fibra óptica UTE Tacuarembó–Rivera",
+   "ciudades": [
+    "Tacuarembo",
+    "Rivera"
+   ],
+   "fuente": "UTE, Ejecución Presupuestal 2022, proyecto 2.2.21. Confirma la finalización del tendido de fibra óptica sobre la línea de transmisión Tacuarembó–Rivera. https://www.ute.com.uy/sites/default/files/docs/TOMO%202022%20VF.pdf"
+  }
+ ],
+ "PG": [
+  {
+   "voz": "chatgpt",
+   "operador": "PNG DataCo",
+   "nombre": "National Transmission Network – Madang–Yonki",
+   "ciudades": [
+    "Madang",
+    "Yonki"
+   ],
+   "fuente": "PNG DataCo, comunicado del 27 de septiembre de 2026, «Network Outages, Restoration Update and International Service Degradation». Identifica expresamente el corredor terrestre de fibra Madang–Yonki y confirma su restablecimiento el 21 de septiembre de 2026. https://www.pngdataco.com/network-outages-restoration-update-and-international-service-degradation/"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "PNG DataCo",
+   "nombre": "National Transmission Network – Highlands Terrestrial Fibre Backbone",
+   "ciudades": [
+    "Madang",
+    "Yonki",
+    "Goroka",
+    "Kundiawa",
+    "Mount Hagen",
+    "Mendi"
+   ],
+   "fuente": "Gobierno de Papúa Nueva Guinea, Public Investment Program 2023–2026, volumen 3B, página 167, proyecto 05095. Documenta la troncal terrestre desde Madang hacia Goroka, Kundiawa, Mount Hagen y Mendi. PNG DataCo confirma el tramo Madang–Yonki en su comunicado del 27 de septiembre de 2026. https://www.treasury.gov.pg/wp-content/uploads/2023/05/budget-2023-Volume-3B.pdf ; https://www.pngdataco.com/network-outages-restoration-update-and-international-service-degradation/"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "PNG DataCo",
+   "nombre": "National Transmission Network – Mount Hagen–Tari",
+   "ciudades": [
+    "Mount Hagen",
+    "Tari"
+   ],
+   "fuente": "PNG DataCo, comunicado del 6 de octubre de 2026, «Network Outages and Restoration Update». Identifica expresamente la ruta terrestre de fibra Tari–Hagen y confirma su restablecimiento el 2 de octubre de 2026. https://www.pngdataco.com/network-outages-and-restoration-update/"
+  }
+ ],
+ "FJ": [
+  {
+   "voz": "chatgpt",
+   "operador": "Telecom Fiji",
+   "nombre": "Telecom Fiji – Coastal Route, Viti Levu",
+   "ciudades": [
+    "Suva",
+    "Navua",
+    "Korolevu",
+    "Sigatoka",
+    "Nadi",
+    "Lautoka"
+   ],
+   "fuente": "Telecom Fiji, mapa «Telecom Fiji Footprints», ©2024, reproducido en la presentación oficial de Fiji ante la OACI, CRV Workshop for Pacific Small Island Developing States, 2025, diapositiva 6. La leyenda diferencia expresamente los trazados de fibra de los enlaces de microondas y submarinos. https://www.icao.int/sites/default/files/APAC/Meetings/2025/2025%20CRV%20OG-13/CRV%20Workshop%20for%20PSIDS/5-Presentations/SP08-Sharing-of-current-ATS-infrastructure-constraintsissues-and-Fiji.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "Telecom Fiji",
+   "nombre": "Telecom Fiji – Viti Levu Route",
+   "ciudades": [
+    "Suva",
+    "Nausori",
+    "Korovou",
+    "Rakiraki",
+    "Tavua",
+    "Ba",
+    "Lautoka"
+   ],
+   "fuente": "Telecom Fiji, mapa «Telecom Fiji Footprints», ©2024, presentado ante la OACI en 2025, diapositiva 6. Identifica la ruta de fibra terrestre por el norte de Viti Levu. https://www.icao.int/sites/default/files/APAC/Meetings/2025/2025%20CRV%20OG-13/CRV%20Workshop%20for%20PSIDS/5-Presentations/SP08-Sharing-of-current-ATS-infrastructure-constraintsissues-and-Fiji.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "Telecom Fiji",
+   "nombre": "Telecom Fiji – Insular Route, Viti Levu",
+   "ciudades": [
+    "Ba",
+    "Nadarivatu",
+    "Wailoa",
+    "Suva"
+   ],
+   "fuente": "Telecom Fiji, mapa oficial «Telecom Fiji Footprints», ©2024, reproducido en la presentación de Fiji ante la OACI en 2025, diapositiva 6. El mapa identifica el corredor interior como «Insular Route» y representa su trazado de fibra óptica. https://www.icao.int/sites/default/files/APAC/Meetings/2025/2025%20CRV%20OG-13/CRV%20Workshop%20for%20PSIDS/5-Presentations/SP08-Sharing-of-current-ATS-infrastructure-constraintsissues-and-Fiji.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "Telecom Fiji",
+   "nombre": "Savusavu–Labasa Fibre Project, Vanua Levu",
+   "ciudades": [
+    "Savusavu",
+    "Seaqaqa",
+    "Labasa"
+   ],
+   "fuente": "Telecom Fiji, comunicado del 2 de marzo de 2026, «Telecom Fiji wins Infrastructure Initiative of the Year at Asian Telecom Awards 2026». Confirma la puesta en servicio de 102 kilómetros de fibra óptica terrestre subterránea entre Savusavu, Seaqaqa y Labasa. https://www.telecom.com.fj/telecom-fiji-knowledge/telecom-fiji-wins-infrastructure-initiative-of-the-year-at-asian-telecom-awards-2026/"
+  }
+ ],
+ "KP": [
+  {
+   "voz": "chatgpt",
+   "operador": "KPTC",
+   "nombre": "Red nacional de fibra óptica Pyongyang–Hamhung–Chongjin–Rajin",
+   "ciudades": [
+    "Pyongyang",
+    "Hamhung",
+    "Chongjin",
+    "Rajin"
+   ],
+   "fuente": "DNI/Open Source Center, North Korea's IT Strategy, tabla 3-5, documenta los tramos Pyongyang–Hamhung (300 km) y Hamhung–Chongjin–Najin (parte de 530 km), terminados en 1995: https://irp.fas.org/dni/osc/dprk-it.pdf ; declaración oficial de Corea del Norte ante la UIT, PP-22 (2022), confirma la existencia de una red nacional de fibra óptica operativa, aunque no actualiza el estado individual de cada tramo: https://pp.itu.int/2022/ar/itu_policy_statements/pyong-du-ri-dem-peoples-rep-of-korea/"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "KPTC",
+   "nombre": "Red nacional e internacional Pyongyang–Sinuiju–Dandong",
+   "ciudades": [
+    "Pyongyang",
+    "Sinuiju",
+    "Dandong"
+   ],
+   "fuente": "DNI/Open Source Center, North Korea's IT Strategy, tabla 3-5: enlace Pyongyang–Sinuiju de 400 km completado en 1998, https://irp.fas.org/dni/osc/dprk-it.pdf ; Korea Institute for International Economic Policy, estudio sobre Corea del Norte, documenta la conexión de fibra óptica Pyongyang–Dandong: https://www.kiep.kr/galleryDownload.es?bid=0001&list_no=647&seq=1 ; Ministerio de Exteriores de Japón, MSMT Report 2025, documenta la ampliación de conectividad de China Unicom en Corea del Norte: https://www.mofa.go.jp/mofaj/files/100922718.pdf"
+  }
+ ],
+ "TD": [
+  {
+   "voz": "chatgpt",
+   "operador": "Sotel Tchad",
+   "nombre": "Dorsal Sur N'Djamena–Kagpal",
+   "ciudades": [
+    "N'Djamena",
+    "Guelendeng",
+    "Bongor",
+    "Kelo",
+    "Moundou",
+    "M'Baikoro",
+    "Kagpal"
+   ],
+   "fuente": "Banco Mundial, Chad Digital Economy Diagnostic (2023), página 37, tabla 6 y figura 7: tramo de 610 km N'Djamena–Kagpal, con las localidades y distancias intermedias expresamente identificadas. El informe confirma que continúa en servicio para transmisión nacional, aunque ya no proporciona salida internacional: https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "Sotel Tchad",
+   "nombre": "Dorsal Sur N'Djamena–Doba",
+   "ciudades": [
+    "N'Djamena",
+    "Guelendeng",
+    "Bongor",
+    "Kelo",
+    "Moundou",
+    "M'Baikoro",
+    "Doba"
+   ],
+   "fuente": "Banco Mundial, Chad Digital Economy Diagnostic (2023), página 37, figura 7: recorrido principal N'Djamena–M'Baikoro y ramal de 76 km hasta Doba. La tabla 6 clasifica la dorsal Sur como infraestructura en servicio: https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "EEPCI",
+   "nombre": "Fibra del oleoducto Chad–Cameroon, sección Komé–Mberé",
+   "ciudades": [
+    "Kome",
+    "Kagpal",
+    "Bessao",
+    "Mbere"
+   ],
+   "fuente": "Banco Mundial, Chad Digital Economy Diagnostic (2023), página 37, figura 7: distingue la fibra de EEPCI asociada al oleoducto y representa los nodos Kome, Kagpal, Bessao y Mbere; la dorsal Sur figura en servicio, pero su salida internacional está inactiva. https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf ; Banco Mundial, Central African Backbone Project (2016): https://ppp.worldbank.org/library/central-african-backbone-project-0"
+  }
+ ],
+ "NI": [
+  {
+   "voz": "chatgpt",
+   "operador": "ENATREL",
+   "nombre": "Red OPGW Costa Caribe Norte Siuna–Rosita–Bilwi",
+   "ciudades": [
+    "Siuna",
+    "Rosita",
+    "Bilwi"
+   ],
+   "fuente": "ENATREL, Toda Nicaragua interconectada a finales de 2019, identifica los más de 200 km de la línea Siuna–Rosita–Bilwi y confirma que transporta fibra OPGW: https://www.enatrel.gob.ni/toda-nicaragua-interconectada-a-finales-de-2019/ ; ENATREL, Boletín Informativo de enero de 2022, página 7, confirma la entrada en operación de la interconexión: https://www.enatrel.gob.ni/wp-content/uploads/2024/04/boletin-142.pdf"
+  }
+ ],
+ "GQ": [
+  {
+   "voz": "chatgpt",
+   "operador": "GITGE",
+   "nombre": "RNFO — corredor continental nororiental",
+   "ciudades": [
+    "Bata",
+    "Machinda",
+    "Niefang",
+    "Nkimi",
+    "Nkue",
+    "Micomeseng",
+    "Bidjabidjan",
+    "Ebebiyin",
+    "Mongomo"
+   ],
+   "fuente": "GITGE, Resumen Ejecutivo 2024, páginas 5–6: confirma la puesta en servicio de las fases I y II de la Red Nacional de Fibra Óptica y publica el mapa RNFO con los nodos y enlaces continentales. https://gitge.com/wp-content/uploads/2025/09/informe-anual-2024.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "GITGE",
+   "nombre": "RNFO — corredor Niefang–Anisoc–Mongomo",
+   "ciudades": [
+    "Bata",
+    "Machinda",
+    "Niefang",
+    "Nkimi",
+    "Ayene",
+    "Anisoc",
+    "Mongomeyen",
+    "Mongomo"
+   ],
+   "fuente": "GITGE, Resumen Ejecutivo 2024, página 6, mapa de la Red Nacional de Fibra Óptica, y página 5, confirmación de entrada en operación de la red continental. https://gitge.com/wp-content/uploads/2025/09/informe-anual-2024.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "GITGE",
+   "nombre": "RNFO — corredor continental meridional",
+   "ciudades": [
+    "Bata",
+    "Machinda",
+    "Niefang",
+    "Bicurga",
+    "Evinayong",
+    "Acurenam",
+    "Oveng",
+    "Nsork"
+   ],
+   "fuente": "GITGE, Resumen Ejecutivo 2024, páginas 5–6, mapa RNFO de los enlaces terrestres de la Región Continental. https://gitge.com/wp-content/uploads/2025/09/informe-anual-2024.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "GITGE",
+   "nombre": "RNFO — corredor costero Bata–Cabo San Juan",
+   "ciudades": [
+    "Bata",
+    "Mbini",
+    "Mboete",
+    "Cabo San Juan"
+   ],
+   "fuente": "GITGE, Resumen Ejecutivo 2024, página 6, mapa RNFO; página 5, declaración de operación de la red nacional. https://gitge.com/wp-content/uploads/2025/09/informe-anual-2024.pdf"
+  }
+ ],
+ "RW": [
+  {
+   "voz": "chatgpt",
+   "operador": "BSC",
+   "nombre": "National Fibre Optic Backbone – Corredor Norte-Oeste",
+   "ciudades": [
+    "Kigali",
+    "Rulindo",
+    "Musanze",
+    "Nyabihu",
+    "Rubavu"
+   ],
+   "fuente": "Gobierno de Rwanda, informe WSIS+10 presentado a la UIT, página 13, mapa National Backbone Fibre-Optic Network, fuente BSC. https://www.itu.int/net/wsis/review/inc/docs/rcreports/wsis10_country_reporting-rwa.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "BSC",
+   "nombre": "National Fibre Optic Backbone – Anillo Occidental",
+   "ciudades": [
+    "Rubavu",
+    "Rutsiro",
+    "Karongi",
+    "Muhanga",
+    "Kigali"
+   ],
+   "fuente": "Gobierno de Rwanda, informe WSIS+10 a la UIT, página 13, mapa de la red nacional de fibra de BSC. https://www.itu.int/net/wsis/review/inc/docs/rcreports/wsis10_country_reporting-rwa.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "BSC",
+   "nombre": "National Fibre Optic Backbone – Corredor Sur",
+   "ciudades": [
+    "Kigali",
+    "Muhanga",
+    "Ruhango",
+    "Nyanza",
+    "Huye"
+   ],
+   "fuente": "Gobierno de Rwanda, informe WSIS+10 a la UIT, página 13, mapa National Backbone Fibre-Optic Network. https://www.itu.int/net/wsis/review/inc/docs/rcreports/wsis10_country_reporting-rwa.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "BSC",
+   "nombre": "National Fibre Optic Backbone – Anillo Suroccidental",
+   "ciudades": [
+    "Karongi",
+    "Nyamasheke",
+    "Rusizi",
+    "Nyamagabe",
+    "Huye"
+   ],
+   "fuente": "Gobierno de Rwanda, informe WSIS+10 a la UIT, página 13, mapa de la red troncal nacional, trazado occidental y meridional. https://www.itu.int/net/wsis/review/inc/docs/rcreports/wsis10_country_reporting-rwa.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "BSC",
+   "nombre": "National Fibre Optic Backbone – Corredor Oriental",
+   "ciudades": [
+    "Kigali",
+    "Rwamagana",
+    "Kayonza",
+    "Ngoma",
+    "Kirehe"
+   ],
+   "fuente": "Gobierno de Rwanda, informe WSIS+10 a la UIT, página 13, mapa National Backbone Fibre-Optic Network. https://www.itu.int/net/wsis/review/inc/docs/rcreports/wsis10_country_reporting-rwa.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "BSC",
+   "nombre": "National Fibre Optic Backbone – Corredor Nororiental",
+   "ciudades": [
+    "Kigali",
+    "Rwamagana",
+    "Kayonza",
+    "Gatsibo",
+    "Nyagatare"
+   ],
+   "fuente": "Gobierno de Rwanda, informe WSIS+10 a la UIT, página 13, mapa nacional de BSC, enlaces orientales y nororientales. https://www.itu.int/net/wsis/review/inc/docs/rcreports/wsis10_country_reporting-rwa.pdf"
+  },
+  {
+   "voz": "grok",
+   "operador": "KTRN",
+   "nombre": "National Backbone Network",
+   "ciudades": [
+    "Kigali",
+    "Gatuna"
+   ],
+   "fuente": "Informes del gobierno de Rwanda y RDB sobre el National Backbone Network (2010-2011)"
+  },
+  {
+   "voz": "grok",
+   "operador": "KTRN",
+   "nombre": "National Backbone Network",
+   "ciudades": [
+    "Kigali",
+    "Rusumo"
+   ],
+   "fuente": "Informes del gobierno de Rwanda y RDB sobre el National Backbone Network (2010-2011)"
+  }
+ ],
+ "LS": [
+  {
+   "voz": "chatgpt",
+   "operador": "ETL",
+   "nombre": "ETL Backbone – Corredor Septentrional",
+   "ciudades": [
+    "Maseru",
+    "Berea",
+    "Leribe",
+    "Butha-Buthe",
+    "Mokhotlong"
+   ],
+   "fuente": "Banco Mundial, Lesotho Digital Economy Diagnostic, febrero de 2020, anexo 4, página PDF 81, mapa ETL backbone network. https://documents1.worldbank.org/curated/en/196401591179805910/pdf/Lesotho-Digital-Economy-Diagnostic.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "ETL",
+   "nombre": "ETL Backbone – Corredor Meridional",
+   "ciudades": [
+    "Maseru",
+    "Mafeteng",
+    "Mohale's Hoek"
+   ],
+   "fuente": "Banco Mundial, Lesotho Digital Economy Diagnostic, febrero de 2020, anexo 4, página PDF 81, mapa ETL backbone network, trazado occidental hacia el sur del país. https://documents1.worldbank.org/curated/en/196401591179805910/pdf/Lesotho-Digital-Economy-Diagnostic.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "LECC",
+   "nombre": "LECC OPGW Backbone – Corredor Septentrional",
+   "ciudades": [
+    "Maseru",
+    "Berea",
+    "Leribe",
+    "Butha-Buthe",
+    "Mokhotlong"
+   ],
+   "fuente": "Banco Mundial, Lesotho Digital Economy Diagnostic, febrero de 2020, anexo 4, página PDF 81, mapa ECC backbone network, correspondiente a la red eléctrica de fibra óptica LECC. https://documents1.worldbank.org/curated/en/196401591179805910/pdf/Lesotho-Digital-Economy-Diagnostic.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "LECC",
+   "nombre": "LECC OPGW Backbone – Corredor Meridional",
+   "ciudades": [
+    "Maseru",
+    "Mafeteng",
+    "Mohale's Hoek"
+   ],
+   "fuente": "Banco Mundial, Lesotho Digital Economy Diagnostic, febrero de 2020, anexo 4, página PDF 81, mapa ECC backbone network, trazado sur de la red eléctrica. https://documents1.worldbank.org/curated/en/196401591179805910/pdf/Lesotho-Digital-Economy-Diagnostic.pdf"
+  },
+  {
+   "voz": "grok",
+   "operador": "LECC",
+   "nombre": "OPGW Fiber Link",
+   "ciudades": [
+    "Roma",
+    "Thaba-Tseka"
+   ],
+   "fuente": "Gobierno de Lesotho y African Development Bank (proyectos e-Government Infrastructure)"
+  }
+ ],
+ "GT": [
+  {
+   "voz": "chatgpt",
+   "operador": "REDCA",
+   "nombre": "SIEPAC / REDCA – Corredor Guatemala Norte y Frontera con Honduras",
+   "ciudades": [
+    "Guatemala City",
+    "Panaluya",
+    "El Florido"
+   ],
+   "fuente": "Empresa Propietaria de la Red (EPR), Línea SIEPAC, tabla de líneas inauguradas en 2012: Guate Norte–Panaluya, 109,91 km, y Panaluya–El Florido, 73,46 km. La subestación Guate Norte está en el área de Guatemala City. La infraestructura dispone de cable OPGW de 36 fibras. https://eprsiepac.com/linea-siepac/"
+  }
+ ],
+ "HN": [
+  {
+   "voz": "chatgpt",
+   "operador": "Hondutel",
+   "nombre": "HONDUTEL – Troncal Puerto Cortés–Tegucigalpa–El Amatillo",
+   "ciudades": [
+    "Puerto Cortes",
+    "San Pedro Sula",
+    "Tegucigalpa",
+    "Nacaome",
+    "El Amatillo"
+   ],
+   "fuente": "PNUD y HONDUTEL, Informe Final del Proyecto Apoyo a la Gestión, Expansión y Modernización de HONDUTEL 2002–2012, marzo de 2013, página PDF 30, detalle de tramos de fibra instalados de 53, 270,33, 102,29 y 60 km respectivamente. https://orientacionuniversitaria.weebly.com/uploads/4/0/0/1/40018067/informe_final_pnud-hondutel.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "Hondutel",
+   "nombre": "HONDUTEL – Ramal Tegucigalpa–Choluteca",
+   "ciudades": [
+    "Tegucigalpa",
+    "Nacaome",
+    "Choluteca"
+   ],
+   "fuente": "PNUD y HONDUTEL, Informe Final del Proyecto Apoyo a la Gestión, Expansión y Modernización de HONDUTEL 2002–2012, marzo de 2013, página PDF 30: Tegucigalpa–Nacaome 102,29 km y Nacaome–Choluteca 36,43 km. https://orientacionuniversitaria.weebly.com/uploads/4/0/0/1/40018067/informe_final_pnud-hondutel.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "Hondutel",
+   "nombre": "HONDUTEL – Troncal Bajo Aguán",
+   "ciudades": [
+    "La Ceiba",
+    "Saba",
+    "Tocoa"
+   ],
+   "fuente": "PNUD y HONDUTEL, Informe Final del Proyecto Apoyo a la Gestión, Expansión y Modernización de HONDUTEL 2002–2012, marzo de 2013, página PDF 30: red Bajo Aguán, 92 km entre La Ceiba y Saba más 10 km entre Saba y Tocoa. https://orientacionuniversitaria.weebly.com/uploads/4/0/0/1/40018067/informe_final_pnud-hondutel.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "REDCA",
+   "nombre": "SIEPAC / REDCA – Corredor El Florido–San Buenaventura",
+   "ciudades": [
+    "El Florido",
+    "San Buenaventura"
+   ],
+   "fuente": "Empresa Propietaria de la Red (EPR), Línea SIEPAC, tabla de infraestructura existente: El Florido–San Buenaventura, 141 km, en servicio desde el 19 de marzo de 2012; instalación de cable óptico OPGW de 36 fibras. https://eprsiepac.com/linea-siepac/"
+  }
+ ],
+ "SV": [
+  {
+   "voz": "chatgpt",
+   "operador": "Tigo",
+   "nombre": "Telemóvil / Tigo – Troncal Panamericana San Salvador–San Miguel",
+   "ciudades": [
+    "San Salvador",
+    "Cojutepeque",
+    "San Vicente",
+    "San Miguel"
+   ],
+   "fuente": "JICA y SIGET, Estudio de Factibilidad del Establecimiento de la Plataforma de e-Gobierno en El Salvador, diciembre de 2006, figura 3.1, página PDF 52, mapa Red de Fibra Óptica de Telemóvil, ruta verde San Salvador–San Miguel (Panamericana). Documento histórico de la infraestructura, posteriormente operada bajo la marca Tigo. https://openjicareport.jica.go.jp/pdf/11838877_01.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "Tigo",
+   "nombre": "Telemóvil / Tigo – Troncal San Salvador–Sonsonate–Santa Ana",
+   "ciudades": [
+    "San Salvador",
+    "Sonsonate",
+    "Santa Ana"
+   ],
+   "fuente": "JICA y SIGET, Estudio de Factibilidad del Establecimiento de la Plataforma de e-Gobierno en El Salvador, diciembre de 2006, figura 3.1, página PDF 52, mapa Red de Fibra Óptica de Telemóvil, ruta azul San Salvador–Sonsonate–Santa Ana. https://openjicareport.jica.go.jp/pdf/11838877_01.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "Tigo",
+   "nombre": "Telemóvil / Tigo – Corredor Internacional Occidental y Oriental",
+   "ciudades": [
+    "Chalchuapa",
+    "Santa Ana",
+    "San Salvador",
+    "Zacatecoluca",
+    "Usulutan",
+    "San Miguel",
+    "La Union"
+   ],
+   "fuente": "JICA y SIGET, Estudio de Factibilidad del Establecimiento de la Plataforma de e-Gobierno en El Salvador, diciembre de 2006, figura 3.1, página PDF 52, mapa Red de Fibra Óptica de Telemóvil, ruta internacional representada en rojo. Es una referencia histórica del trazado, no una comprobación independiente de cada tramo en 2026. https://openjicareport.jica.go.jp/pdf/11838877_01.pdf"
+  }
+ ],
+ "CR": [
+  {
+   "voz": "chatgpt",
+   "operador": "REDCA",
+   "nombre": "SIEPAC / REDCA – Troncal Costa Rica",
+   "ciudades": [
+    "Cañas",
+    "Parrita",
+    "Palmar Norte",
+    "Rio Claro"
+   ],
+   "fuente": "Empresa Propietaria de la Red (EPR), Línea SIEPAC, tramos operativos Cañas–Parrita (159,24 km), Parrita–Palmar Norte (130,56 km) y Palmar Norte–Río Claro (50,7 km), con cable OPGW de 36 fibras. https://eprsiepac.com/linea-siepac/"
+  }
+ ],
+ "PA": [
+  {
+   "voz": "chatgpt",
+   "operador": "REDCA",
+   "nombre": "SIEPAC / REDCA – Enlace Costa Rica–Panamá",
+   "ciudades": [
+    "Rio Claro",
+    "Veladero"
+   ],
+   "fuente": "Empresa Propietaria de la Red (EPR), Línea SIEPAC, enlace Río Claro–frontera de Panamá y frontera de Costa Rica–Veladero, de 22,63 y 150,2 km respectivamente. Entrada en servicio del tramo panameño: 31 de diciembre de 2010. Veladero corresponde a la localidad del distrito de Tolé, Chiriquí. https://eprsiepac.com/linea-siepac/"
+  }
+ ],
+ "DO": [
+  {
+   "voz": "chatgpt",
+   "operador": "Claro",
+   "nombre": "Troncal norte Puerto Plata–Santiago–Santo Domingo",
+   "ciudades": [
+    "Puerto Plata",
+    "Santiago de los Caballeros",
+    "Santo Domingo"
+   ],
+   "fuente": "Claro Dominicana, historia de su red de fibra óptica interprovincial: https://www.claro.com.do/institucional/ ; A4AI, Estudio de caso: República Dominicana (2015), apartado 4.3, que identifica expresamente el corredor Puerto Plata–Santiago–Santo Domingo: https://a4ai.org/wp-content/uploads/2015/04/Estudio-de-Caso_Republica-Dominicana.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "ETED",
+   "nombre": "Enlace de fibra óptica Puerto Plata–Navarrete–NAP del Caribe",
+   "ciudades": [
+    "Puerto Plata",
+    "Villa Bisonó",
+    "Santo Domingo"
+   ],
+   "fuente": "A4AI, Estudio de caso: República Dominicana (2015), apartado 4.3, con información de INDOTEL sobre el enlace de 48 fibras de ETED desde Puerto Plata hasta Navarrete (Villa Bisonó) y el NAP del Caribe: https://a4ai.org/wp-content/uploads/2015/04/Estudio-de-Caso_Republica-Dominicana.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "CPEM",
+   "nombre": "Enlace NAP del Caribe–Bávaro",
+   "ciudades": [
+    "Santo Domingo",
+    "Bávaro"
+   ],
+   "fuente": "A4AI, Estudio de caso: República Dominicana (2015), apartado 4.3, que documenta aproximadamente 240 km de fibra óptica entre el NAP del Caribe y la estación eléctrica de CPEM en Bávaro: https://a4ai.org/wp-content/uploads/2015/04/Estudio-de-Caso_Republica-Dominicana.pdf"
+  }
+ ],
+ "HT": [
+  {
+   "voz": "chatgpt",
+   "operador": "Natcom",
+   "nombre": "Dorsal nacional norte de Natcom",
+   "ciudades": [
+    "Port-au-Prince",
+    "Saint-Marc",
+    "Gonaïves",
+    "Cap-Haïtien"
+   ],
+   "fuente": "Gobierno de Haití, Ministère de la Planification et de la Coopération Externe, Plan stratégique de développement d’Haïti (2012), programa 1.7, que identifica expresamente el itinerario de la red de Natcom: https://www.haitidocs.org/doc/mpce-2012-haiti-strategic-development-plan-2?lang=fr ; UIT, Telecommunications networks and infrastructures resilience assessment in Haiti (2024), que documenta la infraestructura troncal y sus vulnerabilidades: https://www.itu.int/dms_pub/itu-d/opb/ldc/D-LDC-ICTLDC-2024-01-PDF-E.pdf"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "Natcom",
+   "nombre": "Dorsal nacional sur de Natcom",
+   "ciudades": [
+    "Port-au-Prince",
+    "Miragoâne",
+    "Les Cayes"
+   ],
+   "fuente": "Gobierno de Haití, Ministère de la Planification et de la Coopération Externe, Plan stratégique de développement d’Haïti (2012), programa 1.7, que describe la conexión Port-au-Prince–Les Cayes vía Miragoâne: https://www.haitidocs.org/doc/mpce-2012-haiti-strategic-development-plan-2?lang=fr ; CONATEL Haití, informe sobre daños a la fibra de Natcom en la carretera nacional 2: https://www.conatel.gouv.ht/node/273"
+  }
+ ],
+ "GY": [
+  {
+   "voz": "chatgpt",
+   "operador": "E-Networks",
+   "nombre": "Troncal Georgetown–Linden",
+   "ciudades": [
+    "Georgetown",
+    "Kuru Kururu",
+    "Linden"
+   ],
+   "fuente": "E-Networks, comunicado del 9 de mayo de 2022 sobre la puesta en servicio de la fibra Georgetown–Linden por la carretera Soesdyke–Linden y la expansión a Kuru Kururu, reproducido en News Room: https://newsroom.gy/2022/05/09/e-networks-now-operates-guyanas-largest-fiber-optic-backbone/ ; operador, confirmación de la cobertura de su backbone en Linden: https://enetworks.gy/2022/11/15/enetworks-fiber-upgrades.html"
+  },
+  {
+   "voz": "chatgpt",
+   "operador": "E-Networks",
+   "nombre": "Troncal de Berbice",
+   "ciudades": [
+    "Georgetown",
+    "New Amsterdam",
+    "Corriverton"
+   ],
+   "fuente": "E-Networks, comunicado del 15 de noviembre de 2022, que confirma una red troncal de fibra activa con servicio en Georgetown, New Amsterdam y Corriverton: https://enetworks.gy/2022/11/15/enetworks-fiber-upgrades.html"
+  }
+ ],
+ "TW": [
+  {
+   "voz": "gemini",
+   "operador": "Chunghwa Telecom",
+   "nombre": "Western Coastal Trunk Fiber Optic Backbone",
+   "ciudades": [
+    "Keelung",
+    "Taipei",
+    "Banqiao",
+    "Taoyuan",
+    "Hsinchu",
+    "Miaoli",
+    "Taichung",
+    "Changhua",
+    "Douliu",
+    "Chiayi",
+    "Tainan",
+    "Kaohsiung",
+    "Pingtung",
+    "Hengchun"
+   ],
+   "fuente": "Chunghwa Telecom (CHT) Annual Report / National Communications Commission (NCC) Taiwan"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Chunghwa Telecom",
+   "nombre": "Eastern Coastal Trunk Fiber Optic Backbone",
+   "ciudades": [
+    "Taipei",
+    "Yilan",
+    "Hualien",
+    "Taitung",
+    "Pingtung",
+    "Kaohsiung"
+   ],
+   "fuente": "Chunghwa Telecom (CHT) / NCC Taiwan Telecommunications Infrastructure Statistics"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Taiwan Mobile",
+   "nombre": "TFN West Coast Railway & Highway Backbone",
+   "ciudades": [
+    "Keelung",
+    "Taipei",
+    "Taoyuan",
+    "Hsinchu",
+    "Miaoli",
+    "Taichung",
+    "Changhua",
+    "Chiayi",
+    "Tainan",
+    "Kaohsiung"
+   ],
+   "fuente": "Taiwan Fixed Network (Taiwan Mobile) / NCC Fixed Network Operator Disclosures"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Far EasTone",
+   "nombre": "NCIC Island-Wide Optical Fiber Backbone",
+   "ciudades": [
+    "Taipei",
+    "Banqiao",
+    "Taoyuan",
+    "Hsinchu",
+    "Taichung",
+    "Changhua",
+    "Chiayi",
+    "Tainan",
+    "Kaohsiung"
+   ],
+   "fuente": "New Century InfoComm Tech (Far EasTone) Corporate Filings / NCC Taiwan"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Taipower",
+   "nombre": "345kV North-South Extra-High Voltage Grid OPGW Trunk",
+   "ciudades": [
+    "Taipei",
+    "Taoyuan",
+    "Hsinchu",
+    "Taichung",
+    "Nantou",
+    "Chiayi",
+    "Tainan",
+    "Kaohsiung"
+   ],
+   "fuente": "Taiwan Power Company (Taipower) Transmission System Reports"
+  },
+  {
+   "voz": "gemini",
+   "operador": "TWAREN",
+   "nombre": "TWAREN National Research and Education Optical Ring",
+   "ciudades": [
+    "Taipei",
+    "Taoyuan",
+    "Hsinchu",
+    "Taichung",
+    "Chiayi",
+    "Tainan",
+    "Kaohsiung",
+    "Taitung",
+    "Hualien",
+    "Yilan",
+    "Taipei"
+   ],
+   "fuente": "National Center for High-performance Computing (NCHC) Taiwan"
+  }
+ ],
+ "NP": [
+  {
+   "voz": "gemini",
+   "operador": "Nepal Telecom",
+   "nombre": "East-West Mahendra Highway Optical Fiber Backbone",
+   "ciudades": [
+    "Bhadrapur",
+    "Birtamod",
+    "Itahari",
+    "Lahan",
+    "Bardibas",
+    "Hetauda",
+    "Bharatpur",
+    "Butwal",
+    "Kohalpur",
+    "Dhangadhi",
+    "Mahendranagar",
+    "Banbasa"
+   ],
+   "fuente": "Nepal Telecom (NDCL) / Nepal Telecommunications Authority (NTA) MIS Reports"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Nepal Telecom",
+   "nombre": "Kathmandu-Birgunj-India Cross-Border Terrestrial Link",
+   "ciudades": [
+    "Kathmandu",
+    "Hetauda",
+    "Birgunj",
+    "Raxaul"
+   ],
+   "fuente": "Nepal Telecom / UNESCAP APIS Nepal Country Study"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Nepal Telecom",
+   "nombre": "Kathmandu-Rasuwagadhi-China Cross-Border Terrestrial Link",
+   "ciudades": [
+    "Kathmandu",
+    "Bidur",
+    "Dhunche",
+    "Gyirong"
+   ],
+   "fuente": "Nepal Telecom / NTA Cross-Border Optical Fiber Gateway Documentation"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Nepal Telecom",
+   "nombre": "Kathmandu-Pokhara-Butwal-India Siddhartha Corridor",
+   "ciudades": [
+    "Kathmandu",
+    "Bharatpur",
+    "Pokhara",
+    "Tansen",
+    "Butwal",
+    "Siddharthanagar",
+    "Nautanwa"
+   ],
+   "fuente": "Nepal Telecom / ITU South Asia Terrestrial Transmission Map"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Ncell",
+   "nombre": "Ncell East-West & Kathmandu Valley Optical Backbone",
+   "ciudades": [
+    "Biratnagar",
+    "Itahari",
+    "Lahan",
+    "Bardibas",
+    "Hetauda",
+    "Bharatpur",
+    "Kathmandu",
+    "Pokhara",
+    "Butwal",
+    "Kohalpur",
+    "Dhangadhi"
+   ],
+   "fuente": "Ncell Axiata Ltd. / Nepal Telecommunications Authority (NTA) Infrastructure Reports"
+  },
+  {
+   "voz": "gemini",
+   "operador": "NEA",
+   "nombre": "NEA East-West 132kV/400kV National Grid OPGW & India Interconnector",
+   "ciudades": [
+    "Itahari",
+    "Lahan",
+    "Dhalkebar",
+    "Hetauda",
+    "Bharatpur",
+    "Butwal",
+    "Kohalpur",
+    "Dhangadhi",
+    "Mahendranagar"
+   ],
+   "fuente": "Nepal Electricity Authority (NEA) Transmission Directorate Annual Report"
+  }
+ ],
+ "BN": [
+  {
+   "voz": "gemini",
+   "operador": "UNN",
+   "nombre": "Brunei Coastal & Trans-Borneo Terrestrial Fiber Backbone",
+   "ciudades": [
+    "Miri",
+    "Kuala Belait",
+    "Seria",
+    "Tutong",
+    "Bandar Seri Begawan",
+    "Muara",
+    "Limbang",
+    "Bangar",
+    "Lawas"
+   ],
+   "fuente": "Unified National Networks (UNN) Brunei / AITI Regulatory Reports / ITU ASEAN Terrestrial Map"
+  }
+ ],
+ "TL": [
+  {
+   "voz": "gemini",
+   "operador": "Telemor",
+   "nombre": "Northern Coastal National Backbone",
+   "ciudades": [
+    "Atambua",
+    "Batugade",
+    "Liquica",
+    "Dili",
+    "Manatuto",
+    "Baucau",
+    "Lospalos"
+   ],
+   "fuente": "Telemor (Viettel Timor-Leste) / Autoridade Nacional de Comunicações (ANC) / World Bank Timor-Leste Digital Assessment"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Telemor",
+   "nombre": "Central-South Terrestrial Fiber Backbone",
+   "ciudades": [
+    "Dili",
+    "Aileu",
+    "Ainaro",
+    "Same",
+    "Suai"
+   ],
+   "fuente": "Autoridade Nacional de Comunicações (ANC) / Viettel Global Infrastructure Reports"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Timor Telecom",
+   "nombre": "Timor Telecom National Inter-District Backbone",
+   "ciudades": [
+    "Atambua",
+    "Batugade",
+    "Maliana",
+    "Liquica",
+    "Dili",
+    "Baucau",
+    "Viqueque"
+   ],
+   "fuente": "Timor Telecom Annual Reports / ITU Asia-Pacific Transmission Map"
+  }
+ ],
+ "SY": [
+  {
+   "voz": "gemini",
+   "operador": "Syrian Telecom",
+   "nombre": "Syria North-South M5 National Backbone (JADI / RCN Segment)",
+   "ciudades": [
+    "Gaziantep",
+    "Azaz",
+    "Aleppo",
+    "Maarrat al-Numan",
+    "Hama",
+    "Homs",
+    "An Nabk",
+    "Damascus",
+    "Daraa",
+    "Ramtha"
+   ],
+   "fuente": "Syrian Telecommunications Establishment (STE) / ITU Arab Regional Transmission Map / ESCWA"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Syrian Telecom",
+   "nombre": "Mediterranean Coastal & Northern Backbone",
+   "ciudades": [
+    "Tripoli",
+    "Tartus",
+    "Baniyas",
+    "Jableh",
+    "Latakia",
+    "Jisr ash-Shughur",
+    "Idlib",
+    "Aleppo"
+   ],
+   "fuente": "Syrian Telecommunications Establishment (STE) / ITU Interactive Transmission Map"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Syrian Telecom",
+   "nombre": "Euphrates Valley Eastern Corridor",
+   "ciudades": [
+    "Aleppo",
+    "Al-Thawrah",
+    "Raqqa",
+    "Deir ez-Zor",
+    "Mayadin",
+    "Al-Bukamal",
+    "Al-Qaim"
+   ],
+   "fuente": "ITU Arab Regional Transmission Map / UN ESCWA Infrastructure Reports"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Syrian Telecom",
+   "nombre": "Central Desert & Jazira Backbone",
+   "ciudades": [
+    "Damascus",
+    "Adra",
+    "Palmyra",
+    "Deir ez-Zor",
+    "Al-Hasakah",
+    "Qamishli"
+   ],
+   "fuente": "Syrian Telecommunications Establishment (STE) / ITU Transmission Map"
+  }
+ ],
+ "YE": [
+  {
+   "voz": "gemini",
+   "operador": "PTC",
+   "nombre": "Western Highlands North-South National Backbone",
+   "ciudades": [
+    "Dhahran Al Janoub",
+    "Saada",
+    "Amran",
+    "Sanaa",
+    "Dhamar",
+    "Yarim",
+    "Ibb",
+    "Taiz",
+    "Lahij",
+    "Aden"
+   ],
+   "fuente": "Public Telecommunication Corporation (PTC) Yemen / ITU Arab Regional Transmission Map"
+  },
+  {
+   "voz": "gemini",
+   "operador": "PTC",
+   "nombre": "Tihamah Red Sea Coastal Fiber Route",
+   "ciudades": [
+    "Jizan",
+    "Harad",
+    "Abs",
+    "Al Hudaydah",
+    "Bayt al-Faqih",
+    "Zabid",
+    "Mocha",
+    "Aden"
+   ],
+   "fuente": "Ministry of Telecommunications and Information Technology (MTIT) Yemen / ITU Transmission Map"
+  },
+  {
+   "voz": "gemini",
+   "operador": "PTC",
+   "nombre": "Southern Coastal & Oman Cross-Border Backbone",
+   "ciudades": [
+    "Aden",
+    "Zinjibar",
+    "Shuqrah",
+    "Ahwar",
+    "Al Mukalla",
+    "Ash Shihr",
+    "Sayhut",
+    "Qishn",
+    "Al Ghaydah",
+    "Hawf",
+    "Salalah"
+   ],
+   "fuente": "TeleYemen / PTC / ITU Interactive Transmission Map / World Bank Yemen ICT Study"
+  },
+  {
+   "voz": "gemini",
+   "operador": "PTC",
+   "nombre": "Central Interior & Hadhramaut Backbone",
+   "ciudades": [
+    "Sanaa",
+    "Marib",
+    "Ataq",
+    "Seiyun",
+    "Tarim",
+    "Al Mukalla"
+   ],
+   "fuente": "Public Telecommunication Corporation (PTC) / ITU Arab Regional Transmission Map"
+  }
+ ],
+ "KW": [
+  {
+   "voz": "gemini",
+   "operador": "MOC Kuwait",
+   "nombre": "Kuwait-Iraq Northern Terrestrial Fiber Trunk",
+   "ciudades": [
+    "Kuwait City",
+    "Al Jahrah",
+    "Abdali",
+    "Safwan",
+    "Basrah"
+   ],
+   "fuente": "ITU Interactive Transmission Map / Ministry of Communications (MOC) Kuwait & CITRA"
+  },
+  {
+   "voz": "gemini",
+   "operador": "MOC Kuwait",
+   "nombre": "Kuwait-Saudi Arabia Southern Coastal Trunk",
+   "ciudades": [
+    "Kuwait City",
+    "Al Farwaniyah",
+    "Al Ahmadi",
+    "Al Wafrah",
+    "An Nuwaysib",
+    "Khafji"
+   ],
+   "fuente": "ITU Interactive Transmission Map / CITRA Kuwait"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Zain",
+   "nombre": "Kuwait-Saudi Arabia Western Terrestrial Link (Salmi Route)",
+   "ciudades": [
+    "Kuwait City",
+    "Al Jahrah",
+    "As Salmi",
+    "Ar Ruqi",
+    "Hafar Al-Batin"
+   ],
+   "fuente": "ITU Interactive Transmission Map / GCC Interconnection & Zain Network Reports"
+  }
+ ],
+ "QA": [
+  {
+   "voz": "gemini",
+   "operador": "Ooredoo",
+   "nombre": "Qatar National North-South Backbone & Saudi Interconnect",
+   "ciudades": [
+    "Ar Ru'ays",
+    "Al Khor",
+    "Lusail",
+    "Doha",
+    "Al Wakrah",
+    "Mesaieed",
+    "Abu Samra",
+    "Salwa"
+   ],
+   "fuente": "Ooredoo Qatar Reference Interconnection Offer / Communications Regulatory Authority (CRA) Qatar"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Ooredoo",
+   "nombre": "Qatar East-West Terrestrial Fiber Trunk",
+   "ciudades": [
+    "Doha",
+    "Ar Rayyan",
+    "Ash Shahaniyah",
+    "Dukhan"
+   ],
+   "fuente": "ITU Interactive Transmission Map / CRA Qatar"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Vodafone",
+   "nombre": "Vodafone Qatar National Fiber Backbone",
+   "ciudades": [
+    "Al Khor",
+    "Lusail",
+    "Doha",
+    "Ar Rayyan",
+    "Al Wakrah",
+    "Mesaieed",
+    "Abu Samra"
+   ],
+   "fuente": "Vodafone Qatar Annual Report / CRA Qatar"
+  }
+ ],
+ "LB": [
+  {
+   "voz": "gemini",
+   "operador": "Ogero",
+   "nombre": "Lebanon Coastal Fiber Optic Backbone",
+   "ciudades": [
+    "Tripoli",
+    "Batroun",
+    "Byblos",
+    "Jounieh",
+    "Beirut",
+    "Sidon",
+    "Tyre",
+    "An Naqurah"
+   ],
+   "fuente": "Ogero / Ministry of Telecommunications Lebanon National Fiber Optic Network Map"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Ogero",
+   "nombre": "Beirut-Bekaa-Damascus Terrestrial Trunk",
+   "ciudades": [
+    "Beirut",
+    "Baabda",
+    "Aley",
+    "Bhamdoun",
+    "Chtaura",
+    "Zahle",
+    "Anjar",
+    "Damascus"
+   ],
+   "fuente": "ITU Arab Region Transmission Map / Ogero Telecom"
+  },
+  {
+   "voz": "gemini",
+   "operador": "Ogero",
+   "nombre": "Bekaa Valley Northern Backbone (Zahle-Homs Route)",
+   "ciudades": [
+    "Chtaura",
+    "Zahle",
+    "Rayak",
+    "Baalbek",
+    "Al Labwah",
+    "Al Qaa",
+    "Homs"
+   ],
+   "fuente": "ITU Interactive Transmission Map / Ministry of Telecommunications Lebanon"
+  }
+ ],
+ "PS": [
+  {
+   "voz": "gemini",
+   "operador": "Paltel",
+   "nombre": "West Bank North-South Core Fiber Backbone",
+   "ciudades": [
+    "Jenin",
+    "Tulkarm",
+    "Qalqilyah",
+    "Nablus",
+    "Salfit",
+    "Ramallah",
+    "Jericho",
+    "Bethlehem",
+    "Hebron",
+    "Adh Dhahiriyah"
+   ],
+   "fuente": "Paltel Group Annual Report / Ministry of Telecom and Information Technology (MTIT) Palestine & World Bank"
+  }
+ ],
+ "BH": [
+  {
+   "voz": "gemini",
+   "operador": "Batelco",
+   "nombre": "Bahrain-Saudi Arabia Terrestrial Fiber Interconnect (King Fahd Causeway)",
+   "ciudades": [
+    "Al Muharraq",
+    "Manama",
+    "Madinat Hamad",
+    "Ar Rifa'",
+    "Al Jasra",
+    "Al Khobar",
+    "Dammam"
+   ],
+   "fuente": "Batelco (Beyon) / Telecommunications Regulatory Authority (TRA) Bahrain & ITU Transmission Map"
+  }
+ ],
+ "XK": [
+  {
+   "voz": "gemini",
+   "operador": "Telekomi i Kosoves",
+   "nombre": "North-South Transit Route (Mitrovica - Pristina - Skopje)",
+   "ciudades": [
+    "Raska",
+    "Leposavic",
+    "Mitrovica",
+    "Vushtrri",
+    "Pristina",
+    "Lipjan",
+    "Ferizaj",
+    "Kacanik",
+    "Hani i Elezit",
+    "Skopje"
+   ],
+   "fuente": "ARKEP (Regulatory Authority of Electronic and Postal Communications)"
+  },
+  {
+   "voz": "gemini",
+   "operador": "IPKO",
+   "nombre": "West-East Trunk (Peja - Pristina - Gjilan)",
+   "ciudades": [
+    "Peja",
+    "Klina",
+    "Drenas",
+    "Fushe Kosove",
+    "Pristina",
+    "Gjilan",
+    "Bujanovac"
+   ],
+   "fuente": "ARKEP / IPKO Telecommunications"
+  },
+  {
+   "voz": "gemini",
+   "operador": "KOSTT",
+   "nombre": "OPGW 400kV/220kV Interconnector Route (Mitrovica - Prizren - Albania Border)",
+   "ciudades": [
+    "Mitrovica",
+    "Obiliq",
+    "Pristina",
+    "Ferizaj",
+    "Suhareka",
+    "Prizren",
+    "Kukes"
+   ],
+   "fuente": "KOSTT (Transmission, System and Market Operator of Kosovo)"
+  }
+ ],
+ "CU": [
+  {
+   "voz": "grok",
+   "operador": "ETECSA",
+   "nombre": "Fibra Óptica Nacional",
+   "ciudades": [
+    "Pinar del Rio",
+    "Havana",
+    "Matanzas",
+    "Santa Clara",
+    "Sancti Spiritus",
+    "Ciego de Avila",
+    "Camaguey",
+    "Las Tunas",
+    "Holguin",
+    "Santiago de Cuba",
+    "Guantanamo"
+   ],
+   "fuente": "ETECSA (publicación oficial sobre enlace de capitales provinciales desde Pinar del Río hasta Guantánamo, culminado 2004)"
+  }
+ ],
+ "JM": [
+  {
+   "voz": "grok",
+   "operador": "Flow",
+   "nombre": "Backbone de transmisión May Pen - St. James",
+   "ciudades": [
+    "May Pen",
+    "Montego Bay"
+   ],
+   "fuente": "Flow Jamaica / Jamaica Observer (ruta arterial de backbone de transmisión entre May Pen y St. James / Montego Bay, en proceso de undergrounding)"
+  }
+ ],
+ "BZ": [
+  {
+   "voz": "grok",
+   "operador": "Digi / BTL",
+   "nombre": "Ruta terrestre principal norte",
+   "ciudades": [
+    "Belize City",
+    "Orange Walk",
+    "Corozal"
+   ],
+   "fuente": "BTL / 7 News Belize (rutas mayores terrestres de fibra Belize City-Corozal instaladas y en servicio desde finales de los 1990s)"
+  },
+  {
+   "voz": "grok",
+   "operador": "Digi / BTL",
+   "nombre": "Ruta terrestre oeste",
+   "ciudades": [
+    "Belize City",
+    "Belmopan",
+    "San Ignacio"
+   ],
+   "fuente": "BTL / 7 News Belize (fibra a Belmopan y oeste del país en servicio, con rutas terrestres documentadas)"
+  }
+ ]
+}
