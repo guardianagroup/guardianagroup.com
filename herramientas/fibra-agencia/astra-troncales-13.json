@@ -1,0 +1,50 @@
+[
+  {
+    "nombre": "Red troncal terrestre de Claro Guatemala",
+    "operador": "Claro Guatemala (América Móvil)",
+    "pais": "GT",
+    "ciudades": ["Tecún Umán", "Retalhuleu", "Escuintla", "Guatemala City", "Guastatoya", "Zacapa", "Puerto Barrios"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor probable desde la frontera mexicana hasta el Caribe, siguiendo la CA-2, la CA-9 y accesos urbanos. Secuencia geográfica inferida, no un trazado del operador verificado; no representa todas las ramas de la red."
+  },
+  {
+    "nombre": "Red troncal terrestre de Cable & Wireless Panamá",
+    "operador": "Cable & Wireless Panamá (+Móvil)",
+    "pais": "PA",
+    "ciudades": ["Paso Canoas", "David", "Santiago", "Penonomé", "La Chorrera", "Panama City", "Colón"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje occidental-central siguiendo la carretera Panamericana, prolongado hacia Colón por el corredor vial transístmico. Secuencia inferida, no un trazado del operador verificado; existen ramificaciones adicionales."
+  },
+  {
+    "nombre": "Red troncal terrestre de Claro Puerto Rico",
+    "operador": "Claro Puerto Rico (América Móvil)",
+    "pais": "PR",
+    "ciudades": ["San Juan", "Bayamón", "Arecibo", "Aguadilla", "Mayagüez", "Ponce", "Caguas", "San Juan"],
+    "estado": "en servicio",
+    "fuente": "aproximado: recorrido anular probable por los corredores PR-22 y PR-2 en el norte y oeste, y PR-52 entre Ponce, Caguas y San Juan. El cierre del anillo y la secuencia son una simplificación geográfica, no una topología del operador verificada."
+  },
+  {
+    "nombre": "Red troncal terrestre de TSTT en Trinidad",
+    "operador": "Telecommunications Services of Trinidad and Tobago (TSTT)",
+    "pais": "TT",
+    "ciudades": ["Port of Spain", "Chaguanas", "Couva", "San Fernando", "Point Fortin"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor norte-sur de Trinidad, siguiendo los ejes de las autopistas Uriah Butler y Solomon Hochoy y el corredor vial hacia Point Fortin. No es un trazado del operador verificado; omite ramales orientales y la red terrestre separada de Tobago, cuya conexión interinsular no es terrestre."
+  },
+  {
+    "nombre": "Red troncal terrestre de Telesur",
+    "operador": "Telesur",
+    "pais": "SR",
+    "ciudades": ["Nieuw Nickerie", "Totness", "Paramaribo", "Moengo", "Albina"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje costero oeste-este siguiendo el corredor de la carretera East-West Link y sus accesos urbanos. Secuencia probable de la troncal entre los principales núcleos costeros, no un trazado del operador verificado; no especifica cómo se resuelve cada cruce fluvial."
+  },
+  {
+    "nombre": "Red troncal terrestre de Eswatini",
+    "operador": "Eswatini Posts and Telecommunications Corporation (EPTC)",
+    "pais": "SZ",
+    "ciudades": ["Ngwenya", "Mbabane", "Manzini", "Big Bend", "Nhlangano"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor inferido por la MR3 entre Ngwenya, Mbabane y Manzini, el eje de la MR8 hacia Big Bend y la MR11 hacia Nhlangano. Es una secuencia geográfica orientativa dentro de una red ramificada, no un trazado de fibra del operador verificado."
+  }
+]
