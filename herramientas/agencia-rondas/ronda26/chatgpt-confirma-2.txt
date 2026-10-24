@@ -1,0 +1,55 @@
+CHATGPT-CONFIRMA-2
+Ha pensado durante 4m 10s
+ChatGPT dijo:
+
+[
+{
+"nombre": "Red terrestre de fibra óptica NET – Norðurstreymoy",
+"operador": "NET / Føroya Tele",
+"pais": "FO",
+"ciudades": ["Langasandur", "Streymnes", "Hvalvík", "Hósvík"],
+"estado": "en servicio",
+"fuente": "https://www.nema.fo/fipurnet-til-strendur-og-hoyvik/"
+},
+{
+"nombre": "Red terrestre de fibra óptica NET – Kollafjørður y Tórshavn",
+"operador": "NET / Føroya Tele",
+"pais": "FO",
+"ciudades": ["Kollafjørður", "Tórshavn"],
+"estado": "en servicio",
+"fuente": "https://www.nema.fo/fipurnet-til-strendur-og-hoyvik/"
+},
+{
+"nombre": "Red terrestre de fibra óptica NET – Eysturoy oriental",
+"operador": "NET / Føroya Tele",
+"pais": "FO",
+"ciudades": ["Leirvík", "Norðragøta", "Syðrugøta"],
+"estado": "en servicio",
+"fuente": "https://www.nema.fo/fipurnet-til-strendur-og-hoyvik/"
+},
+{
+"nombre": "Red terrestre de fibra óptica NET – Skálafjørður",
+"operador": "NET / Føroya Tele",
+"pais": "FO",
+"ciudades": ["Saltangará", "Runavík", "Toftir"],
+"estado": "en servicio",
+"fuente": "https://www.nema.fo/fipurnet-til-strendur-og-hoyvik/"
+},
+{
+"nombre": "Red terrestre de fibra óptica Gibtelecom – Catalan Bay",
+"operador": "Gibtelecom",
+"pais": "GI",
+"ciudades": ["Gibraltar", "Catalan Bay"],
+"estado": "en servicio",
+"fuente": "https://www.parliament.gi/uploads/contents/hansard/hansard_2006/consolidated/consolidated_hansard_2006.pdf"
+}
+]
+
+ChatGPT puede cometer errores. Comprueba la información importante.
+Última respuesta
+
+
+
+
+Esfuerzo de razonamiento
+Alta

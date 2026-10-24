@@ -76,6 +76,42 @@ SITIOS = {
     ('SB', 'henderson'): (160.050, -9.429),
     ('BS', 'hawksbill'): (-78.735, 26.511),
     ('KY', 'sevenmilebeach'): (-81.381, 19.339), ('KY', 'southsound'): (-81.357, 19.271),
+    # round 26 (24 Oct 2026), from OpenStreetMap (Nominatim): the three places of earlier answers still without coordinates
+    ('BS', 'foxtown'): (-77.791, 26.920), ('VI', 'havensight'): (-64.922, 18.330), ('VI', 'redhook'): (-64.852, 18.326),
+    # round 26: the towns of San Marino, Samoa, Tonga and Honiara that the voices name (OpenStreetMap, Nominatim)
+    ('SB', 'kukum'): (159.979, -9.435),
+    ('SM', 'dogana'): (12.489, 43.981), ('SM', 'serravalle'): (12.480, 43.970), ('SM', 'domagnano'): (12.469, 43.948),
+    ('SM', 'borgomaggiore'): (12.447, 43.941), ('SM', 'acquaviva'): (12.419, 43.946), ('SM', 'gualdicciolo'): (12.408, 43.951),
+    ('TO', 'sopu'): (-175.219, -21.127),
+    ('WS', 'vaivasetai'): (-171.749, -13.846), ('WS', 'vaitele'): (-171.816, -13.826), ('WS', 'leulumoega'): (-171.961, -13.827),
+    ('WS', 'satapuala'): (-171.985, -13.832), ('WS', 'tuasivi'): (-172.178, -13.669), ('WS', 'sapapalii'): (-172.199, -13.688),
+    ('WS', 'salelologa'): (-172.219, -13.743), ('WS', 'faleasiu'): (-171.926, -13.811),
+    ('SM', 'rovereta'): (12.512, 43.990), ('SM', 'falciano'): (12.502, 43.980), ('SB', 'lengakiki'): (159.946, -9.420),
+    ('BB', 'holetown'): (-59.637, 13.186), ('BB', 'speightstown'): (-59.642, 13.250), ('BB', 'hastings'): (-59.599, 13.075),
+    ('BB', 'worthing'): (-59.581, 13.071), ('BB', 'oistins'): (-59.542, 13.063), ('BB', 'warrens'): (-59.608, 13.140),
+    ('BB', 'carlton'): (-59.639, 13.222), ('BB', 'sixroads'): (-59.477, 13.118),
+    ('BM', 'somersetvillage'): (-64.870, 32.296), ('BM', 'flattsvillage'): (-64.739, 32.321), ('BM', 'stgeorges'): (-64.677, 32.381),
+    ('FM', 'colonia'): (138.122, 9.516), ('FM', 'kolonia'): (158.209, 6.964), ('FM', 'palikir'): (158.163, 6.921),
+    ('FO', 'strendur'): (-6.761, 62.109), ('FO', 'kolbeinagjogv'): (-6.786, 62.110), ('FO', 'morskranes'): (-6.838, 62.131),
+    ('LI', 'balzers'): (9.506, 47.069), ('LI', 'triesen'): (9.527, 47.107), ('LI', 'schaan'): (9.510, 47.166),
+    ('LI', 'nendeln'): (9.543, 47.197), ('LI', 'eschen'): (9.523, 47.213), ('LI', 'gamprin'): (9.510, 47.219),
+    ('LI', 'ruggell'): (9.526, 47.240), ('LI', 'mauren'): (9.542, 47.220), ('LI', 'schaanwald'): (9.570, 47.217),
+    ('LI', 'triesenberg'): (9.543, 47.119), ('LI', 'malbun'): (9.608, 47.103),
+    ('MV', 'maradhoo'): (73.119, -0.668), ('MV', 'maradhoofeydhoo'): (73.126, -0.673), ('MV', 'gan'): (73.156, -0.691),
+    # from Wikidata (P625), where Nominatim had no settlement: Addu's districts, two towns of Curaçao and Catalan Bay
+    ('MV', 'hithadhoo'): (73.089, -0.603), ('MV', 'feydhoo'): (73.135, -0.682),
+    ('CW', 'janthiel'): (-68.873, 12.079), ('CW', 'sintmichiel'): (-68.996, 12.142), ('GI', 'catalanbay'): (-5.341, 36.139),
+    ('FM', 'nimar'): (138.120, 9.519),  # GeoNames «Nimaar», Weloy (Yap), from its search page
+    # the villages of Streymoy and Eysturoy (Faroe Islands), from Wikidata (P625); keys as pliega() folds them (ø, ð drop out)
+    ('FO', 'tjrnuvik'): (-7.147, 62.290), ('FO', 'haldarsvik'): (-7.092, 62.276), ('FO', 'langasandur'): (-7.054, 62.237),
+    ('FO', 'streymnes'): (-7.031, 62.191), ('FO', 'hvalvik'): (-7.035, 62.187), ('FO', 'hosvik'): (-6.940, 62.155),
+    ('FO', 'kollafjrur'): (-6.906, 62.118), ('FO', 'kaldbaksbotnur'): (-6.912, 62.066), ('FO', 'hoyvik'): (-6.759, 62.026),
+    ('FO', 'leirvik'): (-6.706, 62.211), ('FO', 'norragta'): (-6.741, 62.201), ('FO', 'syrugta'): (-6.756, 62.186),
+    ('FO', 'sldarfjrur'): (-6.753, 62.159), ('FO', 'glyvrar'): (-6.724, 62.131), ('FO', 'saltangara'): (-6.717, 62.117),
+    ('FO', 'runavik'): (-6.719, 62.109), ('FO', 'toftir'): (-6.737, 62.093),
+    # Western Sahara's towns on the N1 (Wikidata); Tah is the first town across the northern line, in Tarfaya province
+    ('EH', 'daoura'): (-12.991, 27.464), ('EH', 'elargoub'): (-15.858, 23.611), ('EH', 'birgandouz'): (-16.469, 21.616),
+    ('EH', 'guerguerat'): (-16.959, 21.426), ('EH', 'tah'): (-12.956, 27.672),
 }
 
 PARECIDO = 1.35  # the other voice's path between two cities may be this much longer than the straight line (+ 60 km)

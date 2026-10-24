@@ -1,0 +1,11 @@
+Segunda parte (confirmación cruzada). Otras voces de la agencia proponen estas rutas de fibra óptica TERRESTRE en servicio. Para cada una, dime si la respaldas con una fuente pública (operador, regulador, gobierno, Banco Mundial, Banco Asiático de Desarrollo, UIT…; nada de submarinecablemap.com, TeleGeography ni PeeringDB). Devuelve SOLO las que respaldes, con las mismas localidades y en el mismo orden (puedes recortar una ruta a los tramos que sí respaldes), en el mismo formato JSON de antes y con la URL en "fuente". Responde SOLO con un array JSON válido, sin texto antes ni después (vacío si no respaldas ninguna).
+1. TO · Tonga Cable Limited · Sopu – Nuku'alofa
+2. TO · Tonga Communications Corporation · Fua'amotu – Vaini – Nuku'alofa – Kolovai
+3. CW · Digicel Curaçao / UTS · Westpunt – Soto – Willemstad – Nieuwpoort
+4. WS · Samoa Submarine Cable Company · Vaivase Tai – Apia
+5. WS · Vodafone Samoa (antes Bluesky Samoa) · Apia – Vaitele – Leulumoega – Satapuala – Mulifanua
+6. WS · Vodafone Samoa (antes Bluesky Samoa) · Tuasivi – Sapapali'i – Salelologa
+7. WS · Bluesky Samoa · Faleolo – Mulifanua – Apia – Lufilufi – Aleipata
+8. SM · AASS · Dogana – Serravalle – Domagnano – Borgo Maggiore – San Marino
+9. SM · AASS · Borgo Maggiore – Acquaviva – Gualdicciolo
+10. SB · Our Telekom · White River – Point Cruz – Honiara – Ranadi – Henderson

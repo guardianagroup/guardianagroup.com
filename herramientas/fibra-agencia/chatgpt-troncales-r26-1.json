@@ -1,0 +1,193 @@
+[
+ {
+  "nombre": "Red terrestre de fibra óptica Digicel Play – corredor occidental",
+  "operador": "Digicel Barbados",
+  "pais": "BB",
+  "ciudades": [
+   "Carlton",
+   "Speightstown"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.sknvibes.com/news/newsdetails.cfm/95434"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica Digicel Play – corredor suroriental",
+  "operador": "Digicel Barbados",
+  "pais": "BB",
+  "ciudades": [
+   "Oistins",
+   "Six Roads"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.sknvibes.com/news/newsdetails.cfm/95434"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica de St. George's",
+  "operador": "Digicel Bermuda",
+  "pais": "BM",
+  "ciudades": [
+   "St. George's",
+   "Ferry Reach"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.digicelgroup.com/bm/en/campaign/fibre-upgrade-bermuda"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica de Yap – estación de llegada y Colonia",
+  "operador": "Boom! Inc. (iBoom!)",
+  "pais": "FM",
+  "ciudades": [
+   "Nimar",
+   "Colonia"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://apnic.foundation/technical-report/broadband-for-all-yap-state-fsm/"
+ },
+ {
+  "nombre": "Red de fibra óptica de Eysturoy – Strendur, Morskranes y Kolbeinagjógv",
+  "operador": "P/F Net",
+  "pais": "FO",
+  "ciudades": [
+   "Strendur",
+   "Morskranes",
+   "Kolbeinagjógv"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.net.fo/stoda/"
+ },
+ {
+  "nombre": "Red terrestre transfronteriza de GIBFIBRE",
+  "operador": "GIBFIBRE",
+  "pais": "GI",
+  "ciudades": [
+   "Gibraltar",
+   "La Línea de la Concepción"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://gibfibre.com/enterprise/"
+ },
+ {
+  "nombre": "Anillos de fibra óptica de Sapphire Networks – Gibraltar y La Línea",
+  "operador": "Sapphire Networks",
+  "pais": "GI",
+  "ciudades": [
+   "Gibraltar",
+   "La Línea de la Concepción"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://sapphire-networks.com/"
+ },
+ {
+  "nombre": "Red troncal de fibra óptica LKW – corredor sur-norte",
+  "operador": "Liechtensteinische Kraftwerke (LKW)",
+  "pais": "LI",
+  "ciudades": [
+   "Balzers",
+   "Triesen",
+   "Vaduz",
+   "Schaan",
+   "Nendeln",
+   "Eschen",
+   "Gamprin",
+   "Ruggell"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.lkw.li/userdata/Alle-Download-Dokumente/Netze-Kommunikation/TAL-Teilnehmeranschlussleitung/lkw-standardangebot-zugang-zur-infrastruktur-v1.0.pdf"
+ },
+ {
+  "nombre": "Red troncal de fibra óptica LKW – ramal oriental",
+  "operador": "Liechtensteinische Kraftwerke (LKW)",
+  "pais": "LI",
+  "ciudades": [
+   "Eschen",
+   "Mauren",
+   "Schaanwald"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.lkw.li/userdata/Alle-Download-Dokumente/Netze-Kommunikation/TAL-Teilnehmeranschlussleitung/lkw-standardangebot-zugang-zur-infrastruktur-v1.0.pdf"
+ },
+ {
+  "nombre": "Red troncal de fibra óptica LKW – ramal de Triesenberg",
+  "operador": "Liechtensteinische Kraftwerke (LKW)",
+  "pais": "LI",
+  "ciudades": [
+   "Vaduz",
+   "Triesenberg",
+   "Malbun"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.lkw.li/userdata/Alle-Download-Dokumente/Netze-Kommunikation/TAL-Teilnehmeranschlussleitung/lkw-standardangebot-zugang-zur-infrastruktur-v1.0.pdf"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica de Addu City",
+  "operador": "Dhiraagu",
+  "pais": "MV",
+  "ciudades": [
+   "Hithadhoo",
+   "Maradhoo",
+   "Maradhoo-Feydhoo",
+   "Feydhoo",
+   "Gan"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.dhiraagu.com.mv/business/products-solutions/voice-collaboration/fixed-lines"
+ },
+ {
+  "nombre": "Enlace terrestre de fibra óptica de la estación de llegada de Honiara",
+  "operador": "Solomon Islands Submarine Cable Company (SISCC)",
+  "pais": "SB",
+  "ciudades": [
+   "Point Cruz",
+   "Townground",
+   "Lengakiki"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://siscc.com.sb/milestones/2019/7/9/honiara-land-cables-installed"
+ },
+ {
+  "nombre": "Red pública FTTH AASS – corredor de Serravalle",
+  "operador": "Azienda Autonoma di Stato per i Servizi Pubblici (AASS)",
+  "pais": "SM",
+  "ciudades": [
+   "Rovereta",
+   "Falciano",
+   "Dogana",
+   "Serravalle"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.aass.sm/site/home/documento50024127.html"
+ },
+ {
+  "nombre": "Red pública FTTH AASS – San Marino y Borgo Maggiore",
+  "operador": "Azienda Autonoma di Stato per i Servizi Pubblici (AASS)",
+  "pais": "SM",
+  "ciudades": [
+   "San Marino",
+   "Borgo Maggiore"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.aass.sm/site/home/articolo50005463.html"
+ },
+ {
+  "nombre": "Red pública FTTH AASS – Borgo Maggiore y Domagnano",
+  "operador": "Azienda Autonoma di Stato per i Servizi Pubblici (AASS)",
+  "pais": "SM",
+  "ciudades": [
+   "Borgo Maggiore",
+   "Domagnano"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.aass.sm/site/home/articolo50005492.html"
+ },
+ {
+  "nombre": "Red troncal terrestre de fibra óptica de Upolu – Faleasiu y Apia",
+  "operador": "SamoaTel / Vodafone Samoa",
+  "pais": "WS",
+  "ciudades": [
+   "Faleasiu",
+   "Apia"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://info.archives.global.fujitsu/nz/about/resources/news/press-releases/2002/20020508-02.html"
+ }
+]

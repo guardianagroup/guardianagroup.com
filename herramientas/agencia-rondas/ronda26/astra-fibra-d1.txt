@@ -1,0 +1,26 @@
+[
+  {
+    "nombre": "Laayoune–frontera septentrional–Tah",
+    "operador": "Maroc Telecom",
+    "pais": "EH",
+    "ciudades": ["Laayoune", "Daoura", "Tah"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de Maroc Telecom hacia las provincias meridionales, descrita en la documentación corporativa del operador; secuencia de localidades inferida siguiendo la carretera N1. Tah es la primera localidad incluida al norte de la frontera entre Sáhara Occidental y Marruecos; el trazado detallado de la fibra no está publicado."
+  },
+  {
+    "nombre": "Laayoune–Boujdour–Dakhla",
+    "operador": "Maroc Telecom",
+    "pais": "EH",
+    "ciudades": ["Laayoune", "Boujdour", "Dakhla"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone terrestre transafricano de Maroc Telecom y conexión de Dakhla a la red del operador, descritos en su documentación corporativa; recorrido interurbano inferido por la N1 y la carretera de acceso a la península de Dakhla. No representa un trazado de conductos publicado."
+  },
+  {
+    "nombre": "Dakhla–Guerguerat–Nouadhibou",
+    "operador": "Maroc Telecom / Mauritel",
+    "pais": "EH",
+    "ciudades": ["Dakhla", "El Argoub", "Bir Gandouz", "Guerguerat", "Nouadhibou"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión terrestre operativa Marruecos–Mauritania del backbone transafricano de Maroc Telecom, descrita en los informes corporativos del grupo; localidades intermedias inferidas siguiendo el acceso terrestre de Dakhla y la N1 hasta Guerguerat. Nouadhibou es la primera localidad mauritana incluida en este itinerario; no se dispone del trazado detallado publicado."
+  }
+]

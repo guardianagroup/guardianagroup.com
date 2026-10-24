@@ -1,0 +1,88 @@
+[
+ {
+  "nombre": "Eje metropolitano de fibra de Honiara",
+  "operador": "Solomon Telekom Company Limited (Our Telekom)",
+  "pais": "SB",
+  "ciudades": [
+   "Honiara",
+   "Kukum",
+   "Ranadi"
+  ],
+  "estado": "en servicio",
+  "fuente": "Our Telekom, información sobre su red y sus servicios de fibra óptica en Honiara (telekom.com.sb). Aproximado: secuencia por el corredor urbano de Kukum Highway; la disponibilidad de fibra está documentada, pero no un plano público del trazado físico entre estas localidades."
+ },
+ {
+  "nombre": "Eje Dogana–San Marino de la red pública de fibra",
+  "operador": "Azienda Autonoma di Stato per i Servizi Pubblici (AASS)",
+  "pais": "SM",
+  "ciudades": [
+   "Dogana",
+   "Serravalle",
+   "Domagnano",
+   "Borgo Maggiore",
+   "San Marino"
+  ],
+  "estado": "en servicio",
+  "fuente": "AASS, información institucional sobre la red pública de fibra óptica y sus servicios de telecomunicaciones (aass.sm). Aproximado: orden de localidades siguiendo el corredor de la Strada Consolare y los accesos a la capital; no representa una canalización publicada ni necesariamente un único circuito óptico."
+ },
+ {
+  "nombre": "Ramal occidental Borgo Maggiore–Gualdicciolo",
+  "operador": "Azienda Autonoma di Stato per i Servizi Pubblici (AASS)",
+  "pais": "SM",
+  "ciudades": [
+   "Borgo Maggiore",
+   "Acquaviva",
+   "Gualdicciolo"
+  ],
+  "estado": "en servicio",
+  "fuente": "AASS, información institucional sobre su red pública de fibra óptica (aass.sm). Aproximado: conexión entre localidades atendidas por la red, siguiendo el corredor viario occidental por Acquaviva; el itinerario de las canalizaciones no está publicado. No se presupone una continuación transfronteriza."
+ },
+ {
+  "nombre": "Enlace terrestre de la estación de llegada de Sopu a Nuku'alofa",
+  "operador": "Tonga Cable Limited (TCL)",
+  "pais": "TO",
+  "ciudades": [
+   "Sopu",
+   "Nuku'alofa"
+  ],
+  "estado": "en servicio",
+  "fuente": "Tonga Cable Limited y Asian Development Bank, documentación del Tonga–Fiji Submarine Cable Project y de su puesta en funcionamiento. El sistema incluye la conexión terrestre entre la estación de Sopu y la red de telecomunicaciones de Nuku'alofa. Aproximado: se indican los extremos; no se atribuye un recorrido callejero concreto. Se excluye íntegramente el segmento submarino."
+ },
+ {
+  "nombre": "Enlace terrestre Vaivase Tai–Apia",
+  "operador": "Samoa Submarine Cable Company (SSCC)",
+  "pais": "WS",
+  "ciudades": [
+   "Vaivase Tai",
+   "Apia"
+  ],
+  "estado": "en servicio",
+  "fuente": "Samoa Submarine Cable Company, información de la estación de llegada de Vaivase y de la interconexión terrestre del sistema Tui-Samoa; documentación del Samoa Connectivity Project del Banco Mundial. Aproximado: extremos del enlace de acceso a los operadores de Apia, sin asignar calles ni incluir ningún tramo submarino."
+ },
+ {
+  "nombre": "Corredor terrestre de fibra del noroeste de Upolu",
+  "operador": "Vodafone Samoa (antes Bluesky Samoa / SamoaTel)",
+  "pais": "WS",
+  "ciudades": [
+   "Apia",
+   "Vaitele",
+   "Leulumoega",
+   "Satapuala",
+   "Mulifanua"
+  ],
+  "estado": "en servicio",
+  "fuente": "Vodafone Samoa, información sobre su red fija y servicios de fibra óptica (vodafone.com.ws), y documentación sectorial de la Office of the Regulator de Samoa. Aproximado: corredor de la red terrestre heredada de SamoaTel/Bluesky por Main West Coast Road; las localidades están ordenadas de este a oeste, pero no se dispone de un plano público de las canalizaciones."
+ },
+ {
+  "nombre": "Corredor terrestre de fibra del sureste de Savai'i",
+  "operador": "Vodafone Samoa (antes Bluesky Samoa / SamoaTel)",
+  "pais": "WS",
+  "ciudades": [
+   "Tuasivi",
+   "Sapapali'i",
+   "Salelologa"
+  ],
+  "estado": "en servicio",
+  "fuente": "Vodafone Samoa (respuesta cortada)"
+ }
+]

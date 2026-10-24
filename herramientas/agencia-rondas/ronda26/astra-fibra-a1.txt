@@ -1,0 +1,42 @@
+[
+  {
+    "nombre": "Corredor de fibra de la costa occidental de Barbados",
+    "operador": "Flow Barbados",
+    "pais": "BB",
+    "ciudades": ["Bridgetown", "Holetown", "Speightstown"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red comercial de fibra de Flow Barbados, descrita en https://discoverflow.co/barbados. Secuencia de localidades inferida siguiendo el corredor costero de Highway 1; no representa un trazado físico confirmado por el operador."
+  },
+  {
+    "nombre": "Corredor de fibra de la costa meridional de Barbados",
+    "operador": "Flow Barbados",
+    "pais": "BB",
+    "ciudades": ["Bridgetown", "Hastings", "Worthing", "Oistins"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red comercial de fibra de Flow Barbados, descrita en https://discoverflow.co/barbados. Recorrido probable por el corredor de Highway 7 entre Bridgetown y Oistins; las localidades intermedias indican el corredor vial, no empalmes de fibra documentados."
+  },
+  {
+    "nombre": "Corredor de fibra Bridgetown–Warrens",
+    "operador": "Digicel Barbados",
+    "pais": "BB",
+    "ciudades": ["Bridgetown", "Warrens"],
+    "estado": "en servicio",
+    "fuente": "aproximado: oferta comercial de fibra de Digicel Barbados —Digicel+, https://www.digicelgroup.com/— y presencia de su red en el área urbana de Bridgetown y Warrens. Se infiere una conexión por los corredores viales urbanos; no se dispone aquí de cartografía del tendido exacto."
+  },
+  {
+    "nombre": "Corredor occidental de fibra de Bermudas",
+    "operador": "Digicel Bermuda / Bermuda Telephone Company",
+    "pais": "BM",
+    "ciudades": ["Hamilton", "Somerset Village"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra residencial de Digicel Bermuda/BTC, comercializada como Digicel Fibre —https://www.digicelgroup.com/—. Corredor probable desde Hamilton por Middle Road y Somerset Road, cruzando Somerset Bridge por infraestructura vial; no se afirma un trazado de conductos confirmado."
+  },
+  {
+    "nombre": "Corredor oriental de fibra de Bermudas",
+    "operador": "Digicel Bermuda / Bermuda Telephone Company",
+    "pais": "BM",
+    "ciudades": ["Hamilton", "Flatts Village", "St. George's"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra residencial de Digicel Bermuda/BTC, comercializada como Digicel Fibre —https://www.digicelgroup.com/—. Secuencia probable por los corredores de North Shore Road, Blue Hole Hill, The Causeway y Wellington Street. El paso hacia St. George's se interpreta por la infraestructura vial de The Causeway, no como un tramo submarino; el itinerario físico no está confirmado aquí."
+  }
+]
