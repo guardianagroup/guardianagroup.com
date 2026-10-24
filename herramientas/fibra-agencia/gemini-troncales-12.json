@@ -1,0 +1,165 @@
+[
+  {
+    "nombre": "Red Troncal Nacional de Fibra Óptica del Este-Oeste y Colinas Medias",
+    "operador": "Nepal Telecom (NTC) / Nepal Telecommunications Authority (NTA)",
+    "pais": "NP",
+    "ciudades": [
+      "Biratnagar",
+      "Itahari",
+      "Dharan",
+      "Janakpur",
+      "Birgunj",
+      "Hetauda",
+      "Kathmandu",
+      "Bharatpur",
+      "Pokhara",
+      "Butwal",
+      "Nepalgunj",
+      "Dhangadhi",
+      "Mahendranagar"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: sigue la carretera Mahendra (East-West Highway) y los ramales troncales hacia Kathmandu y Pokhara según mapas de la NTA y ITU"
+  },
+  {
+    "nombre": "Red Troncal Nacional de Fibra Óptica de Siria",
+    "operador": "Syrian Telecom (STE)",
+    "pais": "SY",
+    "ciudades": [
+      "Daraa",
+      "Damascus",
+      "Homs",
+      "Tartus",
+      "Latakia",
+      "Hama",
+      "Idlib",
+      "Aleppo",
+      "Ar Raqqah",
+      "Dayr az Zawr",
+      "Al Hasakah",
+      "Al Qamishli"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: sigue el eje principal de las autopistas M5 y M4, la costa mediterránea desde los puntos de amarre en Tartus y el corredor del Éufrates"
+  },
+  {
+    "nombre": "Red Troncal Nacional de Fibra Óptica de Yemen",
+    "operador": "Public Telecommunication Corporation (PTC) / TeleYemen",
+    "pais": "YE",
+    "ciudades": [
+      "Sa'dah",
+      "Amran",
+      "Sanaa",
+      "Al Hudaydah",
+      "Dhamar",
+      "Ibb",
+      "Taizz",
+      "Aden",
+      "Zinjibar",
+      "Al Mukalla",
+      "Say'un",
+      "Al Ghaydah"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: sigue la carretera nacional N1 por el corredor montañoso norte-sur y la carretera costera oriental desde Aden hasta Al Ghaydah según mapas de la ITU"
+  },
+  {
+    "nombre": "Red Troncal Nacional de Fibra Óptica del Líbano",
+    "operador": "Ogero / Ministry of Telecommunications",
+    "pais": "LB",
+    "ciudades": [
+      "Halba",
+      "Tripoli",
+      "Batroun",
+      "Byblos",
+      "Jounieh",
+      "Beirut",
+      "Baabda",
+      "Zahle",
+      "Baalbek",
+      "Sidon",
+      "Nabatieh",
+      "Tyre"
+    ],
+    "estado": "en servicio",
+    "fuente": "publicado en mapas de despliegue de Ogero Telecom / aproximado: sigue la autopista costera de norte a sur y el eje Beirut-Valle de la Becá"
+  },
+  {
+    "nombre": "Red Troncal Nacional de Fibra Óptica de Palestina",
+    "operador": "Palestine Telecommunications Company (Paltel)",
+    "pais": "PS",
+    "ciudades": [
+      "Jenin",
+      "Tulkarm",
+      "Nablus",
+      "Qalqilyah",
+      "Ramallah",
+      "Jericho",
+      "East Jerusalem",
+      "Bethlehem",
+      "Hebron",
+      "Gaza",
+      "Deir el-Balah",
+      "Khan Yunis",
+      "Rafah"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: sigue el corredor central de la carretera 60 en Cisjordania y el eje longitudinal de la carretera Salah al-Din en la Franja de Gaza"
+  },
+  {
+    "nombre": "Red Troncal Nacional de Fibra Óptica de Kuwait",
+    "operador": "Ministry of Communications (MOC) / CITRA",
+    "pais": "KW",
+    "ciudades": [
+      "Al Abdali",
+      "Al Jahrah",
+      "Kuwait City",
+      "Hawalli",
+      "As Salimiyah",
+      "Al Farwaniyah",
+      "Al Fahahil",
+      "Al Ahmadi",
+      "Al Wafrah",
+      "An Nuwaysib"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: sigue el eje de las autopistas 80, 30 y 40 desde la frontera norte con Irak hasta la frontera sur con Arabia Saudita pasando por la costa metropolitana"
+  },
+  {
+    "nombre": "Red Troncal Nacional de Fibra Óptica de Catar",
+    "operador": "Ooredoo Qatar",
+    "pais": "QA",
+    "ciudades": [
+      "Ar Ru'ays",
+      "Al Khor",
+      "Lusail",
+      "Doha",
+      "Ar Rayyan",
+      "Al Wakrah",
+      "Mesaieed",
+      "Dukhan",
+      "Abu Samra"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: sigue la autopista Al Shamal (Q1) de norte a sur, el corredor costero oriental y las autopistas Dukhan (Q3) y Salwa (Q5) hacia la frontera terrestre"
+  },
+  {
+    "nombre": "Red Nacional de Banda Ancha de Baréin",
+    "operador": "Bahrain Network (BNET) / Batelco",
+    "pais": "BH",
+    "ciudades": [
+      "Al Muharraq",
+      "Manama",
+      "Jidhafs",
+      "Sitrah",
+      "Madinat 'Isa",
+      "Ar Rifa'",
+      "Madinat Hamad",
+      "Al Malikiyah",
+      "Zallaq",
+      "Awali"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: sigue las autopistas principales (Sheikh Isa bin Salman y Sheikh Khalifa bin Salman) de noreste a suroeste conectando los centros urbanos principales"
+  }
+]

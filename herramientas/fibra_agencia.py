@@ -108,6 +108,11 @@ def fuera(nombre, previo, idx):
     return mejor
 
 
+# the countries where no open source has land fibre: approximate stretches that two voices agree on are allowed there
+APROX = {'BH', 'BN', 'BZ', 'CU', 'DO', 'HT', 'JM', 'KP', 'KW', 'LB', 'LS', 'NP', 'PS', 'QA', 'RW', 'SY', 'TL', 'XK', 'YE',
+         'SR', 'TT', 'PR', 'GW', 'SZ', 'ER', 'CV', 'MU', 'MT', 'BS'}
+
+
 def situa(nombre, cc, idx, idx_div):
     base = re.split(r'[(/,]', nombre)[0]
     for k in (pliega(nombre), pliega(base)):
@@ -166,27 +171,31 @@ def main():
     for voz, rutas in voces.items():
         otras = [r for v, rs in voces.items() if v != voz for r in rs]
         for r in rutas:
-            ok, ok2 = [], []  # per stretch: None, or the points to draw from A to B (ok: same operator; ok2: another one)
+            ok, ok2, ok3 = [], [], []  # per stretch: None, or the points to draw from A to B (ok: same operator; ok2: another one; ok3: approximate)
             for a in range(len(r['pts']) - 1):
                 A, B = r['pts'][a], r['pts'][a + 1]
                 recta = km(A, B)
-                bien = bien2 = None
+                bien = bien2 = bien3 = None
                 for o in otras:
                     if o['cc'] != r['cc']: continue
                     if A in o['pts'] and B in o['pts']:
                         i, j = o['pts'].index(A), o['pts'].index(B)
+                        # 24 Oct 2026 (owner, 07:43: «en esos países intenta ponerlos en el mapa según los datos aproximados»): in
+                        # the countries with no other source, two voices that both put A and B on the national backbone confirm an
+                        # approximate A–B stretch even when their paths between them differ more (up to 2.5 × the straight line)
+                        if r['cc'] in APROX and bien3 is None and camino(o['pts'], i, j) <= recta * 2.5 + 150: bien3 = [A, B]
                         if camino(o['pts'], i, j) <= recta * PARECIDO + 60:
                             # both voices put fibre between A and B; the more detailed voice draws it
                             sub = o['pts'][i:j + 1] if i < j else o['pts'][j:i + 1][::-1]
                             sub = sub if len(sub) > 2 else [A, B]
                             if mismo_operador(o['o'], r['o']): bien = sub; break
                             if bien2 is None: bien2 = sub
-                ok.append(bien); ok2.append(None if bien else bien2)
+                ok.append(bien); ok2.append(None if bien else bien2); ok3.append(None if (bien or bien2) else bien3)
             # contiguous confirmed stretches become polylines. 24 Oct 2026 (round 17): two voices that both put long-
             # distance fibre between the same two cities confirm the stretch even when they name different operators
             # («Government of Rwanda» and «RDB»); such a stretch is drawn without a name or an operator, since those
             # are what the voices do not agree on.
-            for lista, neutra in ((ok, False), (ok2, True)):
+            for lista, neutra in ((ok, False), (ok2, True), (ok3, True)):
                 tramo = []
                 for a, b in enumerate(lista):
                     if b:
