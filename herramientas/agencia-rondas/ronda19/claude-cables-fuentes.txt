@@ -1,6 +1,6 @@
 GUARDIANA · Órbita · ronda 19 · cables que nombró una sola voz, comprobados por Claude contra fuentes oficiales o primarias
 (sin submarinecablemap, TeleGeography ni PeeringDB). Fecha: 24-10-2026.
-Resumen: 26 OK · 40 no confirmados · 2 alias sin entrada propia
+Resumen: 37 OK · 106 no confirmados · 27 alias sin entrada propia
 
 [OK] Coral Bridge — https://ir.te.eg/en/CorporateNews/PressRelease/223/The-Express-Subsea-Cable-Coral-Bridge-Laying-Completed-Connecting-Egypt-and-Jordan — Telecom Egypt (21-08-2025): tendido completado; cable de 15 km entre su punto de amarre de Taba y el Aqaba Digital Hub (Aqaba), con NaiTel
 [OK] Unitel North Submarine Cable (UNSC) — ANGOP (agencia estatal): inaugurado, rutas Cacongo–N'Zeto y Cabinda–Soyo. Año y km sin dato fiable en la fuente (null). Orden elegido para un solo trazo: N'Zeto–Cacongo–Cabinda–Soyo
@@ -70,3 +70,105 @@ Resumen: 26 OK · 40 no confirmados · 2 alias sin entrada propia
 [NO CONFIRMADO] Tverrlinken — KystTele: Nesna – Mo i Rana – Umbukta, 80 km, pero no dice que sea submarino ni da estado
 [NO CONFIRMADO] Bodø-Røst Cable — Telenor (29-07-2016): cable de 109 km Bodø–Røst tendido en julio de 2016; ni Telenor ni Seaworks dicen que esté en servicio
 [NO CONFIRMADO] Taiwan-Matsu No. 4 — MODA y Chunghwa (18-09-2026): en servicio, ~300 km, isla de Taiwán – Dongyin – Nangan – Xiju, pero no nombran el amarre en Taiwán
+[OK] Malta-Gozo Cable — JCS (contratista del proyecto): instalado y en servicio desde dic-2020; km = tramo submarino
+[OK] Sydney-Melbourne-Adelaide-Perth (SMAP) — SUBCO: RFS 25-06-2026. La fuente da las ciudades, no las playas de amarre: coordenadas de cada ciudad
+[OK] Eastern Light Sweden-Finland I — Eastern Light: en operación desde 2019. ALIAS: 'Eastern Light' (gemini, Estocolmo–Helsinki) = 'Eastern Light Sweden-Finland I', que ya existe (chatgpt + grok); escrito con ese nombre
+[OK] Alaska United East (AU-East) — GCI 10-K: en servicio desde 1999. ALIAS: 'Alaska United (AU-East y AU-West)' (claude) = AU-East + AU-West, que ya existen; escrito por separado con sus nombres
+[OK] Alaska United West (AU-West) — GCI 10-K: en servicio desde 2004. Parte del alias 'Alaska United (AU-East y AU-West)' (claude)
+[OK] CANDALTA-1 — CNMC jun-2024: operativo. La fuente oficial da solo las islas, no el pueblo de amarre: lugar = isla y coordenada de su capital como referencia
+[OK] TRANSCAN-2 — CNMC jun-2024: operativo (dos segmentos). La fuente oficial da solo las islas, no el pueblo de amarre: lugar = isla y coordenada de su capital como referencia
+[OK] TRANSCAN-3 — CNMC jun-2024: operativo. La fuente oficial da solo las islas, no el pueblo de amarre: lugar = isla y coordenada de su capital como referencia
+[OK] TEGOPA — CNMC jun-2024: operativo (dos segmentos). La fuente oficial da solo las islas, no el pueblo de amarre: lugar = isla y coordenada de su capital como referencia
+[OK] MAME-1 — CNMC jun-2024: operativo. La fuente oficial da solo las islas, no el pueblo de amarre: lugar = isla y coordenada de su capital como referencia
+[NO CONFIRMADO] Palau Cable — BSCC/NEC (8-12-2017, ACN Newswire) y Gobierno de Palau (2017): el ramal de Palau, de BSCC (estatal), llega a Ngeremlengui y se une a SEA-US en una unidad de derivación en el mar entre Filipinas y Guam; listo para servicio comercial desde dic-2017. Confirmado en servicio, pero tiene un solo amarre (el otro extremo es una unidad de derivación), así que no se puede dibujar con el formato de llegadas
+[ALIAS] Palau Cable 1 (PC1) / Belau Submarine Cable — Mismo ramal de Palau que 'Palau Cable' (astra); Yap y Guam no son amarres de este ramal según BSCC/NEC
+[NO CONFIRMADO] Yap Cable — Telin (miembro de SEA-US) titula 'SEA-US to Yap (FSM) Interconnection is now Ready for Service', pero la página no da el punto de amarre ni la fecha; ramal a una unidad de derivación, un solo amarre
+[NO CONFIRMADO] Tokelau Submarine Cable — MFAT (Nueva Zelanda): el cable llega a Nukunonu y lo une a Southern Cross NEXT; el cable entre atolones (Atafu, Fakaofo) estaba previsto; no da fecha de servicio. El documento de la ONU citado no se pudo abrir
+[ALIAS] Tuvalu Vaka Cable (VAKA) — Ya existe como 'Vaka Cable' (chatgpt + grok); no se escribe de nuevo
+[ALIAS] Tu'i Vava'u Cable (Tonga Hawaiki Submarine Cable Branch System) — Ya existe como 'Tonga Hawaiki Submarine Cable Branch System (Tu'i Vava'u)' (chatgpt + grok); no se escribe de nuevo
+[NO CONFIRMADO] Tahiti Iti (Tautira-Teahupo'o) — Service-public.pf (DPAM, 25-06-2024): cable de telecomunicaciones de 36 km en la laguna entre Tautira y Teahupo'o, tendido en abril de 2024 por ONATI, que 'permettra de sécuriser la connexion'; no dice que esté en servicio
+[NO CONFIRMADO] Mariana-Guam Cable — FCC 1997 (SCL-LIC-19970111-00016): licencia de GST Telecom para un 'Mariana-Guam Cable' CNMI–Guam sin amarres concretos; la FCC concedió en 2022 licencia al 'MTC Interisland Cable System (MICS)' (Saipán, Tinián, Rota, Guam), posible sucesor, pero ninguna fuente lo enlaza ni da estado
+[NO CONFIRMADO] Marianas-Guam Cable — Mismo caso que 'Mariana-Guam Cable' (ALIAS)
+[NO CONFIRMADO] Digicel Marianas Cable System — Ninguna fuente oficial de un cable de Digicel en las Marianas; la fuente que cita gemini es la del cable ATISA (Docomo Pacific, FCC 2017: Guam–Saipán–Rota–Tinián), que ya existe (chatgpt + grok)
+[ALIAS] North Sea Connect (NSC) — Aqua Comms (Business Wire, 25-03-2022) anuncia el 'successful launch' de NSC Newcastle (Stellium) – Blaabjerg; ya existe como 'Havhingsten / North Sea Connect (NSC)' (clave havhingsten, chatgpt + claude + grok); no se escribe de nuevo
+[ALIAS] Baltic Highway (C-Lion1) — Ya existe como 'C-Lion1' (chatgpt + gemini)
+[ALIAS] Balticconnector FOC — Ya existe como 'Balticconnector (cable de telecomunicaciones Finlandia–Estonia, Elisa)' (claude + grok, y en confirmados.txt)
+[ALIAS] EESF-3 (Estonia-Finland) — Ya existe como 'Finland-Estonia 3 (EESF-3)' (chatgpt + grok)
+[ALIAS] Denmark-Poland 2 (Baltica) — Ya existe como 'Baltica' (chatgpt + grok)
+[ALIAS] Tampnet (North Sea) — Kårstø–Lowestoft es 'NorSea Com-1 (Tampnet)', que ya existe (chatgpt + claude); Tampnet no publica amarres en su web
+[ALIAS] Eastern Arctic Undersea Fibre Optic Network - EAUFON 1 — Fase 1 del 'Eastern Arctic Undersea Fibre Optic Network (EAUFON)'; escrito como sistema completo (ver OK)
+[ALIAS] Eastern Arctic Undersea Fibre Optic Network - EAUFON 2 — Fase 2 del 'Eastern Arctic Undersea Fibre Optic Network (EAUFON)'; escrito como sistema completo (ver OK)
+[ALIAS] AU-Aleutian — = 'Alaska United Aleutians (AU-Aleutians)' (ver OK)
+[ALIAS] AU-Aleutians — = 'Alaska United Aleutians (AU-Aleutians)' (ver OK)
+[ALIAS] Hawaii Island Fibre Network (HIFN) — = 'Hawaiian Islands Fiber Network (HIFN)' (ver OK)
+[ALIAS] Jakarta-Surabaya Cable System (JAYABAYA) — = 'Jayabaya (Jakarta-Surabaya)' (ver OK)
+[ALIAS] Ooredoo Maldives Nationwide Submarine Cable — = 'Nationwide Submarine Cable Ooredoo Maldives (NaSCOM)' (ver OK)
+[ALIAS] Ooredoo Maldives Domestic Submarine Cable (OMDSC) — = 'Nationwide Submarine Cable Ooredoo Maldives (NaSCOM)' (ver OK)
+[ALIAS] Alaska United (AU-East y AU-West) — = 'Alaska United East (AU-East)' + 'Alaska United West (AU-West)', que ya existen (ver OK)
+[ALIAS] Eastern Light — = 'Eastern Light Sweden-Finland I' (ver OK)
+[ALIAS] Jakarta-Bangka-Bintan-Batam-Singapore (B2JS) — Triasmitra lo lista como B3JS (Jakarta–Bangka–Batam–Singapur y Batam–Bintan, 2012-2013), que ya existe como 'B3JS (MIC-2)' (chatgpt + claude)
+[ALIAS] Savaii-Upolu Cable — Banco Mundial (9-02-2018): el cable Tui-Samoa, en servicio desde el 9-02-2018, une Upolu y Savai'i; ya existe como 'Tui-Samoa' (chatgpt + claude)
+[ALIAS] Vanuatu-Fiji / Tui-Samoa Extension to Vanua Levu — Suva–Savusavu es parte de 'Tui-Samoa', que ya existe (chatgpt + claude)
+[ALIAS] Trans-Cook Strait Cable (Aquatronics) — Oteranga Bay–Fighting Bay ya existe como 'Cook Strait Telecommunications Cable' (chatgpt + grok, Transpower); no hallé fuente oficial del cable 'Aquatronics' de 1995
+[NO CONFIRMADO] Pencan-6 — No figura entre los cables operativos de la CNMC (tablas jun-2024: solo PENCAN-7 y PENCAN-8 Península–Canarias de Telefónica)
+[NO CONFIRMADO] PENBAL-5 — CNMC jun-2024: operativo (Telefónica, 1995) pero solo 'Península–Mallorca'; sin amarre peninsular en fuente oficial
+[NO CONFIRMADO] Azores Fiber Optic System (AFOS) — Los Diários da República citados no se pueden leer (requieren JavaScript); el Gobierno portugués (comunicado sobre el Anel CAM) no nombra los cables interinsulares
+[NO CONFIRMADO] Continente-Madeira — Igual que AFOS: sin fuente oficial legible con nombre, amarres y estado
+[NO CONFIRMADO] BUGIO — Sin fuente oficial (la cita es la portada de meo.pt)
+[NO CONFIRMADO] Lanis-3 — Sin fuente oficial accesible (mapa de red de Vodafone)
+[NO CONFIRMADO] Denmark-Sweden 17 — Sin fuente oficial
+[NO CONFIRMADO] GlobalConnect-KPN — La página 'our story' de GlobalConnect no nombra este cable (solo dice que tiene 19 cables submarinos)
+[NO CONFIRMADO] GlobalConnect 2 (GC2) — Igual: GlobalConnect no lo nombra
+[NO CONFIRMADO] GlobalConnect 3 (GC3) — Igual: GlobalConnect no lo nombra
+[NO CONFIRMADO] STO-HEL-One — Igual: GlobalConnect no lo nombra
+[NO CONFIRMADO] Italy-Monaco — Sin fuente oficial (Monaco Telecom / Sparkle)
+[NO CONFIRMADO] Apollo East and West — La fuente citada es de ADMIE (operador eléctrico): fibras dentro de interconexiones eléctricas; sin fuente de un cable de telecomunicaciones en servicio
+[NO CONFIRMADO] Vodafone Greece Domestic — Sin fuente oficial accesible
+[NO CONFIRMADO] Eastern Light Sweden-Finland II — Eastern Light (build-out): 'in process of building' en 2025; no está en servicio
+[NO CONFIRMADO] Denmark-Germany 2 — Sin fuente oficial
+[NO CONFIRMADO] Denmark-Norway 6 (DN-6) — Sin fuente oficial
+[NO CONFIRMADO] Denmark-Sweden 16 (DS-16) — Sin fuente oficial
+[NO CONFIRMADO] Denmark-Sweden 18 (DS-18) — Sin fuente oficial
+[NO CONFIRMADO] Aphrodite 2 — Sin fuente oficial (Cyta) del estado actual
+[NO CONFIRMADO] BT Highlands and Islands Submarine Cable System — Solo prensa (BT tendió ~20 cables en 2014); sin fuente oficial con amarres
+[NO CONFIRMADO] ESAT-1 — Sin fuente oficial
+[NO CONFIRMADO] Pan-European Crossing (PEC) — Sin fuente oficial
+[NO CONFIRMADO] Channel Islands (UK–Channel Islands 8, HUGO, Guernsey–Jersey) — Sin fuente oficial (JT/Sure) con amarres y estado
+[NO CONFIRMADO] Medan-Dumai Cable System (DAMAI) — Triasmitra lo lista (Medan–Dumai, 572 km submarinos, obra Q4-2018–Q1-2020) pero no dice que esté en servicio
+[NO CONFIRMADO] Patara-2 — Telkom solo dice que el gobierno apoya acelerar su despliegue como respaldo de Papúa; sin amarres ni servicio
+[NO CONFIRMADO] BALOK (Bali-Lombok) — Sin fuente oficial hallada
+[NO CONFIRMADO] Besut-Perhentian Islands — El informe de la MCMC citado no se pudo abrir; sin otra fuente oficial
+[NO CONFIRMADO] Lumut-Pangkor Island — Igual: informe MCMC no accesible
+[NO CONFIRMADO] Rompin-Tioman Island — Igual: informe MCMC no accesible
+[NO CONFIRMADO] Jeju-Mainland 2 — LS Marine Solution solo dice que ganó el pedido en 1996; sin amarres ni estado
+[NO CONFIRMADO] Jeju-Mainland 3 — LS Marine Solution solo dice que ganó el pedido en 1999; sin amarres ni estado
+[NO CONFIRMADO] Jeju-Udo — SK Telecom (7-12-2023): cable de ~3,23 km Jeju–Udo terminado de construir en dic-2023; no dice que esté en servicio
+[NO CONFIRMADO] Ulleung-Mainland 2 — LS Marine Solution: contrato firmado en 2016; sin fuente de servicio ni amarres
+[NO CONFIRMADO] Guam Okinawa Kyushu Incheon (GOKI) — Solo noticias del contrato (Xtera/Kokusai, 2011); sin fuente oficial de servicio
+[NO CONFIRMADO] AT&T GOKI — Mismo cable que GOKI (ALIAS); sin fuente oficial
+[NO CONFIRMADO] Sorsogon-Samar Submarine Fiber Optical Interconnection Project (SSSFOIP) — La presentación de SBSS no se pudo abrir; sin otra fuente
+[NO CONFIRMADO] Tanjung Pandan-Sungai Kakap — Sin fuente oficial leída (documento de bonos de Moratelindo no consultado)
+[NO CONFIRMADO] Jalapati — Informe anual de CCSI bloqueado por permisos: https://www.ccsi.co.id/wp-content/uploads/2025/03/AR-CCSI-2024-_-FINAL-Small.pdf
+[NO CONFIRMADO] Domestic Submarine Cable of Maldives (DSCoM) — Dhiraagu (12-10-2022): ampliación de 4 tramos (168,5 km) prevista para Q4-2023; sin confirmación de que esté terminada
+[NO CONFIRMADO] JaKa2LaDeMa (Java-Kalimantan-Sulawesi-Denpasar-Makassar) — Sin fuente oficial leída
+[NO CONFIRMADO] Mataram-Kupang Cable System (MKCS) — Sin fuente oficial (solo noticias del contrato con Huawei)
+[NO CONFIRMADO] SMPCS Packet-1 — Sin fuente oficial leída
+[NO CONFIRMADO] Converge Domestic Submarine Cable Network (CDSCN) — Solo prensa (2021: proyecto terminado); sin comunicado oficial leído
+[NO CONFIRMADO] WARF Submarine Cable — Sin fuente oficial
+[NO CONFIRMADO] Lanka Bell Submarine Cable — Sin fuente oficial
+[NO CONFIRMADO] Aquilink — Sin fuente oficial; no es el 'Aqualink' de One NZ (otra ruta)
+[NO CONFIRMADO] Blue Sky Submarine Cable System (BSSCS) — Sin fuente oficial
+[NO CONFIRMADO] Fiji Domestic Savusavu-Taveuni — Sin fuente oficial (Telecom Fiji 2025 habla de fibra terrestre Savusavu–Labasa)
+[NO CONFIRMADO] Hawaiki Nui 1 — Sistema en proyecto; no está en servicio
+[NO CONFIRMADO] Oahu-Kauai (OK) — La FCC solo describe el segmento A Kauai–Makaha del HIFN (confirmado); sin fuente de un cable 'Oahu-Kauai' aparte
+[NO CONFIRMADO] PNG LNG — Global Marine (instalador): cable de 72 km paralelo al gasoducto, 24 km por el río Omati (2012); sin otros amarres ni estado
+[NO CONFIRMADO] Sabr — Gobierno del Territorio del Norte: cable submarino de Vocus a las islas Tiwi 'installed and commissioned' (2020), pero sin amarres; el nombre 'Sabr' no aparece
+[NO CONFIRMADO] SunCable / Groote-Bickerton-Mainland — Sin fuente oficial del tramo Umbakumba–Milyakburra
+[NO CONFIRMADO] Sydney-Melbourne-Adelaide-Perth (SMAP) - Kangaroo Island Segment — Gobierno de Australia del Sur (2023): cable de fibra a Kangaroo Island 'planned'; no en servicio
+[NO CONFIRMADO] Viti Levu-Vanua Levu (Fiji Domestic) — Sin fuente oficial
+[NO CONFIRMADO] Connected Coast — CityWest: proyecto en curso, sin servicio declarado
+[NO CONFIRMADO] HaidaLink — Sin fuente oficial de un cable 'HaidaLink' en servicio
+[NO CONFIRMADO] Réseau Phoebus — Gobierno de Canadá (2004): cables a las Îles-de-la-Madeleine (>230 km, RICEIM) a instalar en otoño de 2004; sin fuente de estado actual ni del nombre 'Phoebus'
+[OK] Palawan-Iloilo Cable System — PLDT 2014: terminado y conectado a su red. San Jose de Buenavista está en la provincia de Antique (PLDT dice 'Iloilo', región de Visayas Occidentales)
+[ALIAS] St. Thomas-St. Croix System — Escrito como 'St. Thomas-St. Croix Cable System' (nombre de la FCC; misma clave del pipeline)
+[ALIAS] RISING 8 (tramo Jakarta-Batam en servicio) — Escrito como 'RISING 8' (misma clave del pipeline); solo el tramo Jakarta–Batam está en servicio

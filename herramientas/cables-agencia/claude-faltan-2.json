@@ -1,0 +1,336 @@
+[
+  {
+    "nombre": "Malta-Gozo Cable",
+    "llegadas": [
+      {
+        "lugar": "Mġarr ix-Xini (Tal-Fessej), Gozo",
+        "pais": "MT",
+        "lat": 36.02,
+        "lon": 14.27
+      },
+      {
+        "lugar": "Golden Bay, Malta",
+        "pais": "MT",
+        "lat": 35.93,
+        "lon": 14.34
+      }
+    ],
+    "anio": 2020,
+    "km": 13,
+    "duenos": [
+      "Gozo Fibre Optic Cable Ltd (Gobierno de Malta)"
+    ],
+    "fuentes": [
+      "https://jcs.com.mt/project_posts/fiber-optic-cables/ — JCS (coordinador local del proyecto para Elettra TLC/Orange Marine): segundo cable de fibra Malta–Gozo, inaugurado por el primer ministro a finales de diciembre de 2020; sale de Xewkija, toca costa en Tal-Fessej (Mġarr ix-Xini), 13 km submarinos hasta Golden Bay y termina en Żebbiegħ (Mġarr); lo opera la estatal Gozo Fibre Optic Cable Ltd"
+    ]
+  },
+  {
+    "nombre": "Sydney-Melbourne-Adelaide-Perth (SMAP)",
+    "llegadas": [
+      {
+        "lugar": "Sídney",
+        "pais": "AU",
+        "lat": -33.87,
+        "lon": 151.21
+      },
+      {
+        "lugar": "Melbourne",
+        "pais": "AU",
+        "lat": -37.81,
+        "lon": 144.96
+      },
+      {
+        "lugar": "Adelaida",
+        "pais": "AU",
+        "lat": -34.93,
+        "lon": 138.6
+      },
+      {
+        "lugar": "Perth",
+        "pais": "AU",
+        "lat": -31.95,
+        "lon": 115.86
+      }
+    ],
+    "anio": 2026,
+    "km": 5000,
+    "duenos": [
+      "SUBCO"
+    ],
+    "fuentes": [
+      "https://sub.co/news/subco-announces-smap-hypercable-ready-for-service — SUBCO (dueño), 25-06-2026: 'Ready for Service (RFS) of SMAP', hipercable de 5000 km Sydney–Melbourne–Adelaide–Perth, el primer cable submarino que llega a Melbourne y a Adelaida"
+    ]
+  },
+  {
+    "nombre": "Eastern Light Sweden-Finland I",
+    "llegadas": [
+      {
+        "lugar": "Estocolmo",
+        "pais": "SE",
+        "lat": 59.33,
+        "lon": 18.06
+      },
+      {
+        "lugar": "Utö",
+        "pais": "FI",
+        "lat": 59.78,
+        "lon": 21.37
+      },
+      {
+        "lugar": "Hanko",
+        "pais": "FI",
+        "lat": 59.82,
+        "lon": 22.97
+      },
+      {
+        "lugar": "Helsinki",
+        "pais": "FI",
+        "lat": 60.17,
+        "lon": 24.94
+      },
+      {
+        "lugar": "Kotka",
+        "pais": "FI",
+        "lat": 60.47,
+        "lon": 26.95
+      }
+    ],
+    "anio": 2019,
+    "km": null,
+    "duenos": [
+      "Eastern Light"
+    ],
+    "fuentes": [
+      "https://easternlight.se/build-out/ — Eastern Light (dueño): 'the first new fiber optic sea cable system between Sweden (Stockholm) and Finland (Utö, Hanko, Helsinki and Kotka)', en operación desde 2019; Sweden-Finland II está en construcción (2025)"
+    ]
+  },
+  {
+    "nombre": "Alaska United East (AU-East)",
+    "llegadas": [
+      {
+        "lugar": "Whittier",
+        "pais": "US",
+        "lat": 60.77,
+        "lon": -148.68
+      },
+      {
+        "lugar": "Valdez",
+        "pais": "US",
+        "lat": 61.13,
+        "lon": -146.35
+      },
+      {
+        "lugar": "Juneau",
+        "pais": "US",
+        "lat": 58.3,
+        "lon": -134.42
+      },
+      {
+        "lugar": "Seattle (área)",
+        "pais": "US",
+        "lat": 47.61,
+        "lon": -122.33
+      }
+    ],
+    "anio": 1999,
+    "km": null,
+    "duenos": [
+      "GCI"
+    ],
+    "fuentes": [
+      "https://www.sec.gov/Archives/edgar/data/0000075679/000080846112000013/incform10k12312011.htm — GCI, informe 10-K 2011 (SEC): Alaska United East 'connects Whittier, Valdez and Juneau, Alaska and Seattle'; 'placed into service in 1999'"
+    ]
+  },
+  {
+    "nombre": "Alaska United West (AU-West)",
+    "llegadas": [
+      {
+        "lugar": "Seward",
+        "pais": "US",
+        "lat": 60.1,
+        "lon": -149.44
+      },
+      {
+        "lugar": "Warrenton, Oregón",
+        "pais": "US",
+        "lat": 46.17,
+        "lon": -123.92
+      }
+    ],
+    "anio": 2004,
+    "km": null,
+    "duenos": [
+      "GCI"
+    ],
+    "fuentes": [
+      "https://www.sec.gov/Archives/edgar/data/0000075679/000080846112000013/incform10k12312011.htm — GCI, informe 10-K 2011 (SEC): Alaska United West 'connects Seward, Alaska to Warrenton, Oregon'; 'placed into service in 2004'"
+    ]
+  },
+  {
+    "nombre": "CANDALTA-1",
+    "llegadas": [
+      {
+        "lugar": "Gran Canaria (isla)",
+        "pais": "ES",
+        "lat": 28.1,
+        "lon": -15.41
+      },
+      {
+        "lugar": "Tenerife (isla)",
+        "pais": "ES",
+        "lat": 28.47,
+        "lon": -16.25
+      }
+    ],
+    "anio": 1999,
+    "km": null,
+    "duenos": [
+      "Telefónica"
+    ],
+    "fuentes": [
+      "https://www.cnmc.es/sites/default/files/6106289.pdf — CNMC (regulador), tablas de cables submarinos a junio de 2024: 'TELEFÓNICA CANDALTA–1', Tenerife–Gran Canaria, 1999, operativo: Sí",
+      "https://www.octsi.es/octsi/noticias-del-octsi/cables-submarinos-en-las-islas-canarias — OCTSI (observatorio del Gobierno de Canarias): cables interinsulares de Telefónica: 'Candalta 1: Tenerife - Gran Canaria (1999)'"
+    ]
+  },
+  {
+    "nombre": "TRANSCAN-2",
+    "llegadas": [
+      {
+        "lugar": "Gran Canaria (isla)",
+        "pais": "ES",
+        "lat": 28.1,
+        "lon": -15.41
+      },
+      {
+        "lugar": "Fuerteventura (isla)",
+        "pais": "ES",
+        "lat": 28.5,
+        "lon": -13.86
+      },
+      {
+        "lugar": "Lanzarote (isla)",
+        "pais": "ES",
+        "lat": 28.96,
+        "lon": -13.55
+      }
+    ],
+    "anio": 1990,
+    "km": null,
+    "duenos": [
+      "Telefónica"
+    ],
+    "fuentes": [
+      "https://www.cnmc.es/sites/default/files/6106289.pdf — CNMC (regulador), tablas de cables submarinos a junio de 2024: TRANSCAN–2/1 Gran Canaria–Fuerteventura y TRANSCAN–2/2 Lanzarote–Fuerteventura, Telefónica, 1990, operativos: Sí",
+      "https://www.octsi.es/octsi/noticias-del-octsi/cables-submarinos-en-las-islas-canarias — OCTSI (observatorio del Gobierno de Canarias): cables interinsulares de Telefónica: 'Transcan 2 - S1: Gran Canaria - Fuerteventura (1990)'; 'Transcan 2 - S2: Fuerteventura - Lanzarote (1990)'"
+    ]
+  },
+  {
+    "nombre": "TRANSCAN-3",
+    "llegadas": [
+      {
+        "lugar": "Gran Canaria (isla)",
+        "pais": "ES",
+        "lat": 28.1,
+        "lon": -15.41
+      },
+      {
+        "lugar": "Lanzarote (isla)",
+        "pais": "ES",
+        "lat": 28.96,
+        "lon": -13.55
+      }
+    ],
+    "anio": 1999,
+    "km": null,
+    "duenos": [
+      "Telefónica"
+    ],
+    "fuentes": [
+      "https://www.cnmc.es/sites/default/files/6106289.pdf — CNMC (regulador), tablas de cables submarinos a junio de 2024: 'TELEFÓNICA TRANSCAN–3', Gran Canaria–Lanzarote, 1999, operativo: Sí",
+      "https://www.octsi.es/octsi/noticias-del-octsi/cables-submarinos-en-las-islas-canarias — OCTSI (observatorio del Gobierno de Canarias): cables interinsulares de Telefónica: 'Transcan 3: Gran Canaria - Lanzarote (1999)'"
+    ]
+  },
+  {
+    "nombre": "TEGOPA",
+    "llegadas": [
+      {
+        "lugar": "Tenerife (isla)",
+        "pais": "ES",
+        "lat": 28.47,
+        "lon": -16.25
+      },
+      {
+        "lugar": "La Gomera (isla)",
+        "pais": "ES",
+        "lat": 28.09,
+        "lon": -17.11
+      },
+      {
+        "lugar": "La Palma (isla)",
+        "pais": "ES",
+        "lat": 28.68,
+        "lon": -17.76
+      }
+    ],
+    "anio": 1995,
+    "km": null,
+    "duenos": [
+      "Telefónica"
+    ],
+    "fuentes": [
+      "https://www.cnmc.es/sites/default/files/6106289.pdf — CNMC (regulador), tablas de cables submarinos a junio de 2024: TEGOPA–1 Tenerife–La Gomera y TEGOPA–2 La Palma–La Gomera, Telefónica, 1995, operativos: Sí",
+      "https://www.octsi.es/octsi/noticias-del-octsi/cables-submarinos-en-las-islas-canarias — OCTSI (observatorio del Gobierno de Canarias): cables interinsulares de Telefónica: 'Tegopa - S1: Tenerife - La Gomera (1995)'; 'Tegopa - S2: La Gomera - La Palma (1995)'"
+    ]
+  },
+  {
+    "nombre": "MAME-1",
+    "llegadas": [
+      {
+        "lugar": "Mallorca (isla)",
+        "pais": "ES",
+        "lat": 39.57,
+        "lon": 2.65
+      },
+      {
+        "lugar": "Menorca (isla)",
+        "pais": "ES",
+        "lat": 39.89,
+        "lon": 4.26
+      }
+    ],
+    "anio": 1995,
+    "km": null,
+    "duenos": [
+      "Telefónica"
+    ],
+    "fuentes": [
+      "https://www.cnmc.es/sites/default/files/6106289.pdf — CNMC (regulador), tablas de cables submarinos a junio de 2024: 'TELEFÓNICA MAME–1', Mallorca–Menorca, 1995, operativo: Sí"
+    ]
+  },
+  {
+    "nombre": "Palawan-Iloilo Cable System",
+    "llegadas": [
+      {
+        "lugar": "Taytay, Palawan",
+        "pais": "PH",
+        "lat": 10.82,
+        "lon": 119.52
+      },
+      {
+        "lugar": "San Jose de Buenavista, Antique",
+        "pais": "PH",
+        "lat": 10.75,
+        "lon": 121.94
+      }
+    ],
+    "anio": 2014,
+    "km": null,
+    "duenos": [
+      "PLDT"
+    ],
+    "fuentes": [
+      "https://cms.pldt.com/drupal/node/823 — PLDT (dueño), 27-01-2014: 'PLDT completes P861 million Palawan undersea fiber optic cable project'; el cable 'extends from Taytay in Palawan to San Jose de Buenavista in Iloilo'",
+      "https://cms.pldt.com/drupal/node/1301 — PLDT, 13-04-2014: 620 km de cables de fibra terrestres y submarinos que unen Palawan a la red de PLDT (rutas Puerto Princesa–Taytay y San Jose de Buenavista–La Paz, Iloilo)"
+    ]
+  }
+]
