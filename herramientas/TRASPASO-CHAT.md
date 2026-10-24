@@ -66,7 +66,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
 
 **Lo que quedó a medias**
 - **Revisión de Astra 6 por continentes (ronda 23): terminada** el 24 de octubre a las 11:41. Todas las tandas de `ronda23/tandas.md` están procesadas y publicadas (registro al final del §11). Resultado: 169 países (entró Nueva Caledonia), 1.345.645 km y 420 tramos de la agencia. Astra no dio rutas para MU, ST, SC, SB ni VU.
-- **Kimi** (kimi.ai): la cuenta gratuita se satura en la hora punta de China. A las 12:30 se relanzaron sus 13 preguntas: mira qué `kimi-troncales-3..8.json` y `kimi-faltan-*.json` existen ya y sigue por lo que falte. Sus preguntas están en `herramientas/agencia-rondas/kimi-pendientes/`. Quedan 13 por hacer:
+- **Kimi** (kimi.ai): la cuenta gratuita se satura en la hora punta de China. A las 12:30–12:45 seguía saturado: respondía «Muchas personas están chateando con Kimi en este momento» y ofrecía una suscripción de pago, que es decisión del dueño. Las 13 preguntas siguen sin hacer. Truco: pega el texto con un evento `paste` en el editor y vacía antes el borrador, que Kimi guarda. Sus preguntas están en `herramientas/agencia-rondas/kimi-pendientes/`. Quedan 13 por hacer:
   - `q-A3`: trazados aproximados de los países sin datos. La respuesta va a `herramientas/fibra-agencia/kimi-troncales-3.json`.
   - `q-B1` a `q-B5`: troncales en servicio. Las respuestas van a `kimi-troncales-4.json` hasta `-8.json`.
   - `q-C-<región>` (siete regiones): cables submarinos que faltan. Las respuestas van a `herramientas/cables-agencia/kimi-faltan-<región>.json`.
