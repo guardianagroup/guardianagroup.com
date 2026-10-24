@@ -1,0 +1,62 @@
+# Company cards with their headquarters (owner, 24 Oct 2026, 14:42: «la foto de la empresa, si es que está por el
+# edificio… dónde está la dirección de la sede principal o todo lo que se pueda saber»): herramientas/empresas.py.
+# buscar: Wikidata, SEC, SIRENE, California's data broker register, OpenStreetMap and Wikimedia Commons →
+# orbita/datos/empresas-candidatas.json, and contact sheets of the candidate photos as an artifact (never published).
+# copiar: the reviewed ones (herramientas/agencia-rondas/empresas/revision-*.json) → orbita/datos/empresas.json and
+# orbita/static/fotos/empresa-*.jpg. By hand for now.
+name: Fichas de empresas
+
+on:
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: 'buscar (candidatas y hojas de contacto) o copiar (las revisadas, a orbita/datos/empresas.json)'
+        required: false
+        default: buscar
+
+permissions:
+  contents: write
+
+concurrency:
+  group: datos-orbita
+  cancel-in-progress: false
+
+jobs:
+  empresas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Buscar sedes, direcciones y fotos
+        if: github.event.inputs.modo != 'copiar'
+        run: |
+          pip install --quiet pillow
+          python3 herramientas/empresas.py
+
+      - name: Hojas de contacto para revisar las fotos
+        if: github.event.inputs.modo != 'copiar'
+        uses: actions/upload-artifact@v4
+        with:
+          name: hojas-empresas
+          path: hojas/
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Copiar las fichas revisadas a guardianagroup.com
+        if: github.event.inputs.modo == 'copiar'
+        run: |
+          pip install --quiet pillow
+          python3 herramientas/empresas.py copiar
+
+      - name: Guardar si ha cambiado
+        run: |
+          rm -rf hojas
+          git config user.name "GUARDIANA datos"
+          git config user.email "datos@guardianagroup.com"
+          git add orbita/datos/empresas-candidatas.json orbita/datos/empresas.json orbita/static/fotos 2>/dev/null || true
+          git add orbita/datos/empresas-candidatas.json 2>/dev/null || true
+          if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
+          git commit -m "Fichas de empresas: ${{ github.event.inputs.modo || 'buscar' }} ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+          git push
