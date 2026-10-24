@@ -554,3 +554,4 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
 - 12:44 · Gemini, tanda 9: 169 países, 1.345.669 km, 421 tramos de la agencia.
 - 13:00 · Arreglo del solape que vio el dueño (12:34): mientras está abierta la ficha de un botón de capas, los paneles de clases de debajo se apartan (`body.con-ficha-capa` en `orbita.css`; `capas.js?v=20261025t`, `orbita.css?v=20261025s`). Probado en local: la ficha sale, el panel se oculta y vuelve al quitar el ratón.
 - 13:28 · Ronda 24, ChatGPT, lotes 1–2: cables de la agencia aceptados: 359 · tramos: 1079; lugares-capas: 528 grupos.
+- 13:36 · Ronda 24, ChatGPT, lotes 3–4: cables de la agencia aceptados: 367 · tramos: 1117; lugares-capas: 536 grupos.
