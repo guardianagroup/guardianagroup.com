@@ -1,0 +1,67 @@
+[
+  {
+    "nombre": "Eje central Puerto Cortes–Tegucigalpa",
+    "operador": "Tigo Honduras",
+    "pais": "HN",
+    "ciudades": [
+      "Puerto Cortes",
+      "Choloma",
+      "San Pedro Sula",
+      "Villanueva",
+      "Santa Cruz de Yojoa",
+      "Siguatepeque",
+      "Comayagua",
+      "Tegucigalpa"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la red terrestre nacional de Tigo Honduras/Millicom; secuencia probable por las carreteras CA-13 y CA-5. Las ciudades intermedias son una reconstrucción geográfica, no un itinerario técnico publicado por el operador."
+  },
+  {
+    "nombre": "Troncal del litoral norte San Pedro Sula–La Ceiba",
+    "operador": "Tigo Honduras",
+    "pais": "HN",
+    "ciudades": [
+      "San Pedro Sula",
+      "El Progreso",
+      "Tela",
+      "La Ceiba"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la red terrestre nacional de Tigo Honduras/Millicom hacia el litoral atlántico; secuencia probable por la carretera CA-13. No se dispone aquí de un trazado técnico público que confirme cada punto de paso."
+  },
+  {
+    "nombre": "Troncal Kingston–Montego Bay por el interior y la costa norte",
+    "operador": "Flow Jamaica (Cable & Wireless Jamaica)",
+    "pais": "JM",
+    "ciudades": [
+      "Kingston",
+      "Spanish Town",
+      "Linstead",
+      "Moneague",
+      "Ocho Rios",
+      "Runaway Bay",
+      "Discovery Bay",
+      "Falmouth",
+      "Montego Bay"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra terrestre de Flow/Cable & Wireless Jamaica; itinerario probable entre sus principales centros urbanos, siguiendo los corredores viarios del interior y las carreteras A3 y A1. La secuencia no constituye un trazado técnico publicado."
+  },
+  {
+    "nombre": "Troncal meridional Kingston–Montego Bay",
+    "operador": "Digicel Jamaica",
+    "pais": "JM",
+    "ciudades": [
+      "Kingston",
+      "Spanish Town",
+      "May Pen",
+      "Mandeville",
+      "Santa Cruz",
+      "Black River",
+      "Savanna-la-Mar",
+      "Montego Bay"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional terrestre de fibra de Digicel Jamaica, comercializada mediante Digicel Business y Digicel+; secuencia probable por el corredor meridional A2 y la conexión occidental hacia Montego Bay. El paso por cada ciudad se infiere de la geografía y no de un plano técnico público."
+  }
+]
