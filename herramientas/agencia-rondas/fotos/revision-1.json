@@ -1,0 +1,420 @@
+{
+ "nota": "Revisión de las 59 fotos candidatas (24 Oct 2026, 15:00): Claude las vio una a una en una cuadrícula de miniaturas y comprobó qué es cada elemento en Wikidata (P31). Se aceptan solo fotos reales del elemento concreto y sin personas; las bases y los edificios de los centros, sí; ilustraciones, lanzamientos, sedes de empresa y mapas, no.",
+ "aceptadas": [
+  {
+   "tipo": "satelite",
+   "id": 45027,
+   "nombre": "EUTELSAT KONNECT",
+   "archivo": "Satellite Konnect.jpg",
+   "motivo": "satélite real en sala limpia"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q560347",
+   "nombre": "SuperMUC",
+   "archivo": "HLRB.II-SuperMUC-Munich.jpg",
+   "motivo": "edificio del centro de supercomputación"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q1277574",
+   "nombre": "earthDATAsafe",
+   "archivo": "EarthDATAsafe haupt.jpg",
+   "motivo": "el propio centro de datos"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q2466390",
+   "nombre": "Terminal Annex",
+   "archivo": "U.S. Post Office - Los Angeles Terminal Annex.JPG",
+   "motivo": "el edificio del centro"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q4635219",
+   "nombre": "33 Thomas Street",
+   "archivo": "33 thomas st.jpg",
+   "motivo": "el edificio (centro de telecomunicaciones)"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q7988917",
+   "nombre": "Westin Building",
+   "archivo": "WestinBuilding.jpg",
+   "motivo": "el edificio (carrier hotel)"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q11079418",
+   "nombre": "Digital Beijing Building",
+   "archivo": "数字北京大厦.JPG",
+   "motivo": "el edificio"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q21540371",
+   "nombre": "One Wilshire",
+   "archivo": "One Wilshire, Los Angeles.jpg",
+   "motivo": "el edificio (carrier hotel)"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q23206187",
+   "nombre": "Marysville Cotton Mill",
+   "archivo": "MarysvillePlaceMarysvilleNB2014.jpg",
+   "motivo": "el edificio del centro"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q24259253",
+   "nombre": "Centro de Supercomputación NCAR-Wyoming",
+   "archivo": "NSF-supported Research Facilities (15326178104).jpg",
+   "motivo": "el centro de supercomputación"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q26263559",
+   "nombre": "Global Switch London North",
+   "archivo": "East India Dock House, Tower Hamlets.jpg",
+   "motivo": "el edificio del centro"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q101251270",
+   "nombre": "Denver Gas & Electric Building",
+   "archivo": "PublicServiceBuilding.JPG",
+   "motivo": "el edificio del centro"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q111679093",
+   "nombre": "Mayoral Drive Exchange",
+   "archivo": "Mayoral Drive Exchange (MDR) partly obscured.jpg",
+   "motivo": "el edificio del centro"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q119855829",
+   "nombre": "Telehouse South",
+   "archivo": "Reuters.london.arp.jpg",
+   "motivo": "el edificio del centro"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q138426707",
+   "nombre": "Global Switch London East",
+   "archivo": "Global Switch London East.jpg",
+   "motivo": "el edificio del centro"
+  },
+  {
+   "tipo": "estacion",
+   "id": "McMurdo",
+   "nombre": "McMurdo",
+   "archivo": "McMurdo Station.jpg",
+   "motivo": "la base"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Polo Sur (Amundsen-Scott)",
+   "nombre": "Polo Sur (Amundsen-Scott)",
+   "archivo": "Geographic Southpole crop.jpg",
+   "motivo": "el polo sur junto a la base"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Rothera",
+   "nombre": "Rothera",
+   "archivo": "BAS Rothera.jpg",
+   "motivo": "la base"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Halley VI",
+   "nombre": "Halley VI",
+   "archivo": "Halley VI Antarctic Research Station - view from North East.jpg",
+   "motivo": "la base"
+  },
+  {
+   "tipo": "estacion",
+   "id": "TrollSat",
+   "nombre": "TrollSat",
+   "archivo": "Troll research station Antarctica.JPG",
+   "motivo": "la base de Troll, donde está la estación"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Neumayer III",
+   "nombre": "Neumayer III",
+   "archivo": "Neumayer Station Antarctica 2009-12 2.jpg",
+   "motivo": "la base"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Dumont d'Urville",
+   "nombre": "Dumont d'Urville",
+   "archivo": "Base Dumont d'Urville - Dumont d'Urville station.jpg",
+   "motivo": "la base"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Marambio",
+   "nombre": "Marambio",
+   "archivo": "B.MARAMBIO.JPG",
+   "motivo": "la base"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Base Frei / Escudero (Isla Rey Jorge)",
+   "nombre": "Base Frei / Escudero (Isla Rey Jorge)",
+   "archivo": "Base Frei.jpg",
+   "motivo": "la base"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Syowa",
+   "nombre": "Syowa",
+   "archivo": "Shōwa Station 19 square and administrative building.jpg",
+   "motivo": "la base"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Scott Base",
+   "nombre": "Scott Base",
+   "archivo": "Scott Base from air.jpg",
+   "motivo": "la base"
+  },
+  {
+   "tipo": "estacion",
+   "id": "SANAE IV",
+   "nombre": "SANAE IV",
+   "archivo": "SANAE IV from above the northern buttress.jpg",
+   "motivo": "la base"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Comandante Ferraz",
+   "nombre": "Comandante Ferraz",
+   "archivo": "Estação Antártica Mar 2019 (49352520916).png",
+   "motivo": "la base"
+  },
+  {
+   "tipo": "estacion",
+   "id": "SvalSat (Svalbard)",
+   "nombre": "SvalSat (Svalbard)",
+   "archivo": "Longyearbyen Plataaberget IMG 3014.jpg",
+   "motivo": "Platåberget, donde están las antenas de SvalSat"
+  }
+ ],
+ "descartadas": [
+  {
+   "tipo": "satelite",
+   "id": 43632,
+   "nombre": "AZERSPACE 2 (IS-38)",
+   "archivo": "Ilham Aliyev visited Bakutel 2015 exhibition 14.jpg",
+   "motivo": "salen personas (feria)"
+  },
+  {
+   "tipo": "satelite",
+   "id": 43175,
+   "nombre": "SES-14",
+   "archivo": "SES-14 with GOLD hosted payload.jpg",
+   "motivo": "ilustración"
+  },
+  {
+   "tipo": "satelite",
+   "id": 37258,
+   "nombre": "EUTELSAT KA-SAT 9A",
+   "archivo": "KA-SAT artist view.png",
+   "motivo": "ilustración"
+  },
+  {
+   "tipo": "satelite",
+   "id": 43488,
+   "nombre": "SES-12",
+   "archivo": "SES-12 Mission (27695627327).jpg",
+   "motivo": "es el lanzamiento, no el satélite"
+  },
+  {
+   "tipo": "satelite",
+   "id": 42740,
+   "nombre": "VIASAT-2",
+   "archivo": "Viasat-2-satellite.jpg",
+   "motivo": "ilustración"
+  },
+  {
+   "tipo": "satelite",
+   "id": 39460,
+   "nombre": "SES-8",
+   "archivo": "Falcon 9 carrying SES-8 (04).jpg",
+   "motivo": "es el lanzamiento, no el satélite"
+  },
+  {
+   "tipo": "satelite",
+   "id": 42741,
+   "nombre": "EUTELSAT 172B",
+   "archivo": "EUTELSAT-172B-SATELLITE.jpg",
+   "motivo": "ilustración"
+  },
+  {
+   "tipo": "satelite",
+   "id": 49332,
+   "nombre": "SES-17",
+   "archivo": "Caspk PSTSBN 100 SBNEO og.jpg",
+   "motivo": "ilustración"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q11463",
+   "nombre": "Adobe Inc.",
+   "archivo": "Adobe World Headquarters.jpg",
+   "motivo": "sede de la empresa, no el centro"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q571156",
+   "nombre": "Natixis",
+   "archivo": "NatixisParis.JPG",
+   "motivo": "sede de la empresa"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q971946",
+   "nombre": "KDDI",
+   "archivo": "Garden Air Tower.jpg",
+   "motivo": "sede de la empresa"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q19721053",
+   "nombre": "Foulum Data Center",
+   "archivo": "Foulum datacenter, panorama mod øst, 2016-10-01.jpg",
+   "motivo": "solar en obras, no se ve el centro"
+  },
+  {
+   "tipo": "centro",
+   "id": "Q64008087",
+   "nombre": "Fugaku",
+   "archivo": "Fugaku 20200809 3.jpg",
+   "motivo": "sale una persona"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Tromsø (KSAT)",
+   "nombre": "Tromsø (KSAT)",
+   "archivo": "Tromso Tromsø Norway tunliweb 02.jpg",
+   "motivo": "vista de la ciudad, no la estación"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Inuvik",
+   "nombre": "Inuvik",
+   "archivo": "Fall Colors Over Inuvik 1.jpg",
+   "motivo": "paisaje de la ciudad"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Esrange (Kiruna)",
+   "nombre": "Esrange (Kiruna)",
+   "archivo": "TEXUS 50 launched with a VSB-30 rocket.jpg",
+   "motivo": "es un lanzamiento de cohete"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Fairbanks (ASF)",
+   "nombre": "Fairbanks (ASF)",
+   "archivo": "Fairbanks, Alaska skyline.jpg",
+   "motivo": "vista de la ciudad"
+  },
+  {
+   "tipo": "cable",
+   "id": "SEA-ME-WE 3",
+   "nombre": "SEA-ME-WE 3",
+   "archivo": "SEA-ME-WE-3-Route.png",
+   "motivo": "mapa de ruta, no es una foto"
+  },
+  {
+   "tipo": "cable",
+   "id": "SEA-ME-WE 4",
+   "nombre": "SEA-ME-WE 4",
+   "archivo": "SEA-ME-WE-4-Route.png",
+   "motivo": "mapa de ruta, no es una foto"
+  },
+  {
+   "tipo": "cable",
+   "id": "SAFE",
+   "nombre": "SAFE",
+   "archivo": "SAFE-route.png",
+   "motivo": "mapa de ruta, no es una foto"
+  },
+  {
+   "tipo": "cable",
+   "id": "SAT-3/WASC",
+   "nombre": "SAT-3/WASC",
+   "archivo": "SAT-3--WASC-route.png",
+   "motivo": "mapa de ruta, no es una foto"
+  },
+  {
+   "tipo": "cable",
+   "id": "Americas-II",
+   "nombre": "Americas-II",
+   "archivo": "AMERICAS-II-route.png",
+   "motivo": "mapa de ruta, no es una foto"
+  },
+  {
+   "tipo": "cable",
+   "id": "METISS",
+   "nombre": "METISS",
+   "archivo": "Cable METISS.png",
+   "motivo": "mapa de ruta, no es una foto"
+  },
+  {
+   "tipo": "cable",
+   "id": "SEA ME WE2",
+   "nombre": "SEA ME WE2",
+   "archivo": "SEA-ME-WE-2-Route.svg",
+   "motivo": "mapa de ruta, no es una foto"
+  },
+  {
+   "tipo": "cable",
+   "id": "Apollo",
+   "nombre": "Apollo",
+   "archivo": "Apollo-Cable-route.png",
+   "motivo": "mapa de ruta, no es una foto"
+  },
+  {
+   "tipo": "cable",
+   "id": "FARICE-1",
+   "nombre": "FARICE-1",
+   "archivo": "FARICE-1-map.png",
+   "motivo": "mapa de ruta, no es una foto"
+  },
+  {
+   "tipo": "cable",
+   "id": "REMBRANDT 1",
+   "nombre": "REMBRANDT 1",
+   "archivo": "REMBRANDT-1-route.png",
+   "motivo": "mapa de ruta, no es una foto"
+  },
+  {
+   "tipo": "cable",
+   "id": "Unisur",
+   "nombre": "Unisur",
+   "archivo": "UNISUR-route.png",
+   "motivo": "mapa de ruta, no es una foto"
+  },
+  {
+   "tipo": "cable",
+   "id": "EllaLink",
+   "nombre": "EllaLink",
+   "archivo": "Map of Ellalink submarine cable routes.jpg",
+   "motivo": "mapa de ruta, no es una foto"
+  },
+  {
+   "tipo": "cable",
+   "id": "Monet",
+   "nombre": "Monet",
+   "archivo": "Cable Route.png",
+   "motivo": "mapa de ruta, no es una foto"
+  }
+ ]
+}
