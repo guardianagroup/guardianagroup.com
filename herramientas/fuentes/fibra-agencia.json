@@ -3916,6 +3916,29 @@
 ]
 },
 {
+"n": "Djibouti Telecom — interconexión terrestre con Etiopía por Ali Sabieh",
+"o": "Djibouti Telecom",
+"cc": "DJ",
+"l": [
+[
+43.15,
+11.59
+],
+[
+42.712,
+11.156
+],
+[
+42.648,
+11.095
+],
+[
+42.631,
+11.035
+]
+]
+},
+{
 "n": "HONDUTEL – Troncal Puerto Cortés–Tegucigalpa–El Amatillo",
 "o": "Hondutel",
 "cc": "HN",
@@ -4800,21 +4823,6 @@
 [
 12.67,
 -4.2
-]
-]
-},
-{
-"n": "Djibouti–Ali Sabieh–frontera etíope",
-"o": "Djibouti Telecom / Ethio telecom",
-"cc": "DJ",
-"l": [
-[
-43.15,
-11.59
-],
-[
-42.712,
-11.156
 ]
 ]
 },
