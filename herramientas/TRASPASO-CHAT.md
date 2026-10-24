@@ -80,7 +80,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
   - Sus respuestas van a `herramientas/cables-agencia/astra-confirma-<n>.json`. Mira cuáles existen y sigue por el primer lote que falte.
   - Después, el proceso de los cables submarinos.
   - Los 2 que propuso Astra necesitan otra voz.
-  - **Ronda 24b, en marcha a las 13:15:** ChatGPT confirma los 67 cables de una sola voz que no propuso él, en 9 lotes (`ronda24/lotes-chatgpt.json`). Las respuestas van a `herramientas/cables-agencia/chatgpt-confirma-<n>.json`. Mira cuáles existen, procesa los que no estén publicados y sigue por el primer lote que falte. Los 64 que propuso ChatGPT necesitan otra voz, por ejemplo Gemini con un modelo potente o Kimi.
+  - **Ronda 24b, terminada a las 13:55:** ChatGPT, con razonamiento «High», confirmó 33 de los 67 cables y ya están publicados. Ahora hay 381 cables de la agencia y 550 cables enteros con sus pueblos. ChatGPT devolvió «JaKa2LaDeMa» sin su paréntesis: hay que comprobar que case con la propuesta original. Algunas respuestas traen km = 0 o fuentes poco relacionadas, como EESF-3; están en `ronda24/` para revisarlas.
 
 **Lo siguiente que pidió el dueño, por tramos**
 
@@ -104,7 +104,9 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
    - **Privacidad, por coherencia con GUARDIANA:** copiar las miniaturas a `guardianagroup.com`, con su licencia, en vez de enlazarlas a Wikimedia u otros sitios. Así ninguna visita avisa a terceros.
    - **Licencias:** cada foto lleva autor y licencia en `terminos.html` (sección 6), y en la ficha un crédito pequeño.
    - **Cómo hacerlo:** un workflow de GitHub busca las fotos, porque desde la consola no hay acceso a esas webs. Guarda un `orbita/datos/fotos.json` (id del elemento, archivo, autor, licencia y enlace a la fuente) y las miniaturas comprimidas en `orbita/static/fotos/`. Las fichas de `capas.js` las muestran con carga diferida.
+   - **También en los PDF** (dueño, 13:52: «para que se pueda ver en el documento y se pueda sacar por PDF, todo, el máximo que podáis»). El informe descargable debe llevar las fotos con su crédito.
    - **Antes de programar:** captura del diseño de la ficha con foto, para que el dueño la apruebe.
+6. **Propuesta, pendiente de que el dueño la apruebe:** una explicación «Cómo funciona internet» en Órbita, sobre las capas que ya existen: tu equipo → la antena o el wifi → la red de tu operador → las troncales por tierra → los puntos de intercambio y los centros de datos → los cables submarinos → el servidor de la web. El dueño preguntó (13:56) de dónde «sale» internet. Se podría añadir una capa con las copias de los servidores raíz del DNS, si su licencia lo permite.
 
 **Lo que el dueño encargó a Astra 6** (todo en `herramientas/agencia-rondas/`)
 - **Ronda 20**
@@ -558,3 +560,4 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
 - 13:47 · Ronda 24, ChatGPT, lotes 5–6: cables de la agencia aceptados: 374 · tramos: 1144; lugares-capas: 543 grupos.
 - 13:54 · Ronda 24, ChatGPT, lotes 7–8: cables de la agencia aceptados: 379 · tramos: 1151; lugares-capas: 548 grupos.
 - 13:58 · Ronda 24, ChatGPT, lote 9: cables de la agencia aceptados: 381 · tramos: 1153; lugares-capas: 550 grupos.
+- 13:58 · Zoom hasta 5 km, antes 500 m (`orbita.js`, `ZOOM.MAX = 8000`; la barra dice «5 km»). Grandes troncales y cables de más de 100 Tbit/s en cobre apagado (`FIBRA_COL[3] = '200,136,88'`, y en `movil.js` `#C88858`). La luz de las grandes troncales y las rutas largas es más grande y está siempre. Los nombres de las bases se pueden pulsar como su marca (`EST_CAJAS`). Todo publicado.
