@@ -59,9 +59,10 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 
 **Proceso de los cables submarinos**
 1. Guarda la respuesta en `herramientas/cables-agencia/<voz>-*.json`.
-2. Ejecuta `python3 herramientas/cables_agencia.py`, que actualiza `orbita/datos/cables.json` y `cables-agencia.json`.
-3. Ejecuta `python3 herramientas/lugares_capas.py`.
-4. Publica `cables.json`, `cables-agencia.json`, `lugares-capas.json` y la carpeta `herramientas/cables-agencia` en las dos ramas.
+2. Ejecuta `python3 herramientas/cables_agencia.py`, que tarda unos 3 minutos y actualiza `orbita/datos/cables.json` y `cables-agencia.json`.
+3. Publica `cables.json`, `cables-agencia.json` y la carpeta `herramientas/cables-agencia` en las dos ramas.
+4. Lanza `gh workflow run pueblos-cables.yml --ref main`. Busca los pueblos de las llegadas nuevas y rehace `lugares-capas.json` en `main`.
+5. Trae a `web-idiomas` `orbita/datos/lugares-capas.json`, `orbita/static/tierra/pueblos-cables.tsv` y `herramientas/fuentes/pueblos-fibra.tsv`.
 
 **Lo que quedó a medias**
 - **Revisión de Astra 6 por continentes (ronda 23): terminada** el 24 de octubre a las 11:41. Todas las tandas de `ronda23/tandas.md` están procesadas y publicadas (registro al final del §11). Resultado: 169 países (entró Nueva Caledonia), 1.345.645 km y 420 tramos de la agencia. Astra no dio rutas para MU, ST, SC, SB ni VU.
@@ -73,7 +74,11 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
   - `save.py` comprueba el hash del texto copiado y lo guarda como JSON.
 - **Gemini:** le falta la tanda 9 (KP, TD, NI y CV). Su límite se renueva el 24 de octubre a las 12:47.
 - **Grok:** le faltan las tandas 8 y 9. Su límite semanal se renueva el 27 de octubre.
-- **Cables submarinos sin confirmar:** los 107 de una sola voz (`ronda19/cables-por-confirmar.json` y `claude-cables-fuentes.txt`). Cada uno entra solo en cuanto otra voz lo nombre, al volver a ejecutar `cables_agencia.py` y `lugares_capas.py`.
+- **Cables submarinos que solo nombra una voz:** 131. Son 64 de ChatGPT, 55 de Gemini, 9 de Claude, 2 de Astra y 1 de Grok; `cables_agencia.py` los lista con «solo lo nombra».
+  - **Ronda 24, en marcha a las 11:55:** Astra 6 confirma los 129 que no propuso ella, en 17 lotes de 8 (`herramientas/agencia-rondas/ronda24/lotes.json` y `pregunta.txt`).
+  - Sus respuestas van a `herramientas/cables-agencia/astra-confirma-<n>.json`. Mira cuáles existen y sigue por el primer lote que falte.
+  - Después, el proceso de los cables submarinos.
+  - Los 2 que propuso Astra necesitan otra voz.
 
 **Lo siguiente que pidió el dueño, por tramos**
 
