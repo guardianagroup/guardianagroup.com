@@ -146,9 +146,10 @@ void main(){
     const CTG = v3(-75.51, 10.39, 1.004), SAT = v3(-72, 0, 1.7);
     const DESTINOS = [['BR', -47.88, -15.79], ['MX', -99.13, 19.43], ['US', -80.19, 25.76], ['SN', -17.45, 14.69], ['PE', -77.04, -12.05]];
     const SUBIDA = recta(CTG, SAT), BAJADAS = DESTINOS.map((d) => recta(SAT, v3(d[1], d[2], 1.004)));
-    const lang = document.documentElement.lang || 'es';
-    let nombres = null; try { nombres = new Intl.DisplayNames([lang], { type: 'region' }); } catch (e) {}
-    const nombre = (cc) => { let n = cc; try { n = nombres ? nombres.of(cc) : cc; } catch (e) {} return n.toLocaleUpperCase(lang); };
+    const DN = new Map(); // country names in the page's language, whichever it is now
+    const nombre = (cc) => { const lang = document.documentElement.lang || 'es'; let dn = DN.get(lang);
+      if (dn === undefined) { try { dn = new Intl.DisplayNames([lang], { type: 'region' }); } catch (e) { dn = null; } DN.set(lang, dn); }
+      let n = cc; try { n = dn ? dn.of(cc) : cc; } catch (e) {} return n.toLocaleUpperCase(lang); };
     let salto = { d: 0, t0: 2.5 };
     const GEO = [-72, -25, 20, 64, 110, 157, -150, -115];
     const LEO = [{ i: 53, o: -40, f: 0.4, w: 2 * Math.PI / 66 }, { i: 97, o: -105, f: 2.4, w: 2 * Math.PI / 78 }, { i: 70, o: 10, f: 4.1, w: 2 * Math.PI / 60 }].slice(0, MOVIL ? 2 : 3);
