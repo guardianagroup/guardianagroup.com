@@ -105,6 +105,17 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
    - **Privacidad, por coherencia con GUARDIANA:** copiar las miniaturas a `guardianagroup.com`, con su licencia, en vez de enlazarlas a Wikimedia u otros sitios. Así ninguna visita avisa a terceros.
    - **Licencias:** cada foto lleva autor y licencia en `terminos.html` (sección 6), y en la ficha un crédito pequeño.
    - **Cómo hacerlo:** un workflow de GitHub busca las fotos, porque desde la consola no hay acceso a esas webs. Guarda un `orbita/datos/fotos.json` (id del elemento, archivo, autor, licencia y enlace a la fuente) y las miniaturas comprimidas en `orbita/static/fotos/`. Las fichas de `capas.js` las muestran con carga diferida.
+   - **Primer paso, hecho el 24 de octubre a las 14:20:** el workflow `.github/workflows/fotos.yml` ejecuta `herramientas/fotos.py`, a mano. Busca fotos de Wikimedia Commons con licencia libre, con autor y licencia:
+     - satélites, por su número NORAD;
+     - centros de datos, por los elementos de Wikidata ya enlazados en `puntos.json`;
+     - bases, por nombre y a menos de 60 km;
+     - cables submarinos, por nombre.
+     Las guarda en `orbita/datos/fotos-candidatas.json`, que la web aún no usa.
+   - **Siguientes pasos:**
+     1. revisar las candidatas;
+     2. copiar las miniaturas elegidas a `orbita/static/fotos/`;
+     3. hacer la captura del diseño de la ficha con foto y que el dueño la apruebe;
+     4. mostrarlas en las fichas de `capas.js` y en los PDF, con crédito en la ficha y en `terminos.html`.
    - **También en los PDF** (dueño, 13:52: «para que se pueda ver en el documento y se pueda sacar por PDF, todo, el máximo que podáis»). El informe descargable debe llevar las fotos con su crédito.
    - **Antes de programar:** captura del diseño de la ficha con foto, para que el dueño la apruebe.
 6. **Propuesta, pendiente de que el dueño la apruebe:** una explicación «Cómo funciona internet» en Órbita, sobre las capas que ya existen: tu equipo → la antena o el wifi → la red de tu operador → las troncales por tierra → los puntos de intercambio y los centros de datos → los cables submarinos → el servidor de la web. El dueño preguntó (13:56) de dónde «sale» internet. Se podría añadir una capa con las copias de los servidores raíz del DNS, si su licencia lo permite.
