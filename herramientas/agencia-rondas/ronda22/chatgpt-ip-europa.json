@@ -1,0 +1,474 @@
+[
+  {
+    "nombre": "ACOnet west backbone",
+    "operador": "ACOnet",
+    "pais": "AT",
+    "ciudades": [
+      "Vienna",
+      "Linz",
+      "Salzburg",
+      "Innsbruck"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.aco.net/fileadmin/aconet/Publikationen/Jahresberichte/ACOnet_Jahresbericht_2018.pdf — ACOnet documenta la infraestructura nacional de fibra, la conversión a doble anillo y los enlaces directos que incluyen Salzburg–Innsbruck; la renovación posterior mantiene estos nodos en el backbone."
+  },
+  {
+    "nombre": "Eurofiber Belgium east-west backbone",
+    "operador": "Eurofiber",
+    "pais": "BE",
+    "ciudades": [
+      "Bruges",
+      "Ghent",
+      "Brussels",
+      "Liege"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.eurofiber.com/fiber-optic-network — Eurofiber publica su red óptica vigente en Belgium, Netherlands, France y Germany y su topología interurbana de larga distancia."
+  },
+  {
+    "nombre": "Quantcom Prague-Brno",
+    "operador": "Quantcom",
+    "pais": "CZ",
+    "ciudades": [
+      "Prague",
+      "Brno"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.quantcom.cz/en/opticka-sit/ — Quantcom dice que expande continuamente su backbone óptico y mantiene un mapa actualizado de la red; Prague–Brno figura como corredor troncal."
+  },
+  {
+    "nombre": "RENATER northeast corridor",
+    "operador": "RENATER",
+    "pais": "FR",
+    "ciudades": [
+      "Paris",
+      "Reims",
+      "Nancy",
+      "Strasbourg"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.renater.fr/wp-content/uploads/2025/01/carte-reseau-backbone-01-2025-avec-ip-1.pdf — el mapa oficial RENATER de enero de 2025 muestra el encadenamiento Paris–Reims–Nancy–Strasbourg como enlaces del backbone."
+  },
+  {
+    "nombre": "RENATER Paris-Lyon-Marseille corridor",
+    "operador": "RENATER",
+    "pais": "FR",
+    "ciudades": [
+      "Paris",
+      "Lyon",
+      "Marseille"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.renater.fr/wp-content/uploads/2025/01/carte-reseau-backbone-01-2025-avec-ip-1.pdf — el mapa oficial de enero de 2025 muestra los grandes nodos Paris, Lyon y Marseille unidos por el backbone nacional."
+  },
+  {
+    "nombre": "RENATER Mediterranean-southwest corridor",
+    "operador": "RENATER",
+    "pais": "FR",
+    "ciudades": [
+      "Bordeaux",
+      "Toulouse",
+      "Montpellier",
+      "Marseille"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.renater.fr/wp-content/uploads/2025/01/carte-reseau-backbone-01-2025-avec-ip-1.pdf — el mapa oficial RENATER muestra el corredor terrestre Bordeaux–Toulouse–Montpellier–Marseille."
+  },
+  {
+    "nombre": "RETN Frankfurt-Hamburg",
+    "operador": "RETN",
+    "pais": "DE",
+    "ciudades": [
+      "Frankfurt am Main",
+      "Hamburg"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://retn.net/news-events/retn-shortest-fibre-route-hamburg-frankfurt — RETN anunció el 4 de octubre de 2017 el lanzamiento de una ruta DWDM de fibra Frankfurt–Hamburg de 588.7 km."
+  },
+  {
+    "nombre": "HBONE+ Budapest-Szeged corridor",
+    "operador": "KIFU / HBONE+",
+    "pais": "HU",
+    "ciudades": [
+      "Budapest",
+      "Kecskemet",
+      "Szeged"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://compendium.geant.org/network-map — el Compendium oficial de GÉANT enlaza el mapa vigente de la NREN húngara; la topología muestra el eje Budapest–Kecskemet–Szeged."
+  },
+  {
+    "nombre": "HEAnet Dublin-Cork backbone",
+    "operador": "HEAnet",
+    "pais": "IE",
+    "ciudades": [
+      "Dublin",
+      "Cork"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.heanet.ie/the-network — HEAnet declara un backbone nacional de más de 2,500 km de fibra y fibra oscura entre las principales ciudades; https://www.heanet.ie/news/bridging-the-network-divide documenta la extensión de la nueva ruta GÉANT desde Dublin hasta Cork."
+  },
+  {
+    "nombre": "GARR north-south mainland backbone",
+    "operador": "GARR",
+    "pais": "IT",
+    "ciudades": [
+      "Milan",
+      "Bologna",
+      "Florence",
+      "Rome",
+      "Naples"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.garr.it/en/infrastructures/network-infrastructure/our-network — GARR publica su red nacional de más de 24,000 km, casi enteramente sobre fibra gestionada directamente, y el mapa del backbone muestra el eje Milan–Bologna–Florence–Rome–Naples."
+  },
+  {
+    "nombre": "Eurofiber Rotterdam-Frankfurt",
+    "operador": "Eurofiber",
+    "pais": "NL",
+    "ciudades": [
+      "Rotterdam",
+      "Frankfurt am Main"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.eurofiber.com/unique-long-haul-fiber-routes-2026 — Eurofiber presenta sus rutas Long Haul en servicio entre grandes hubs; su comunicación de la ruta Rotterdam–Frankfurt la describe como un trayecto de fibra oscura de aproximadamente 635 km."
+  },
+  {
+    "nombre": "PIONIER Poznan-Warsaw",
+    "operador": "PIONIER / PSNC",
+    "pais": "PL",
+    "ciudades": [
+      "Poznan",
+      "Warsaw"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://pionier.net.pl/en/about-pionier/ — PIONIER publica su mapa y declara 8,504 km de fibra, de los que 6,878 km están en Poland; Poznan y Warsaw forman parte del backbone óptico nacional."
+  },
+  {
+    "nombre": "RCTS Lisbon-Porto spine",
+    "operador": "FCCN/FCT - RCTS",
+    "pais": "PT",
+    "ciudades": [
+      "Lisbon",
+      "Coimbra",
+      "Porto"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://compendium.geant.org/network-map — el directorio oficial de GÉANT enlaza el mapa actual de la NREN portuguesa; su eje terrestre principal une Lisbon, Coimbra y Porto."
+  },
+  {
+    "nombre": "SANET west-east backbone",
+    "operador": "SANET",
+    "pais": "SK",
+    "ciudades": [
+      "Bratislava",
+      "Trnava",
+      "Trencin",
+      "Zilina",
+      "Poprad",
+      "Kosice"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://compendium.geant.org/network-map — el Compendium oficial de GÉANT enlaza la topología vigente de SANET; el backbone oeste-este atraviesa los nodos Bratislava–Trnava–Trencin–Zilina–Poprad–Kosice."
+  },
+  {
+    "nombre": "RedIRIS Madrid-Barcelona corridor",
+    "operador": "RedIRIS",
+    "pais": "ES",
+    "ciudades": [
+      "Madrid",
+      "Zaragoza",
+      "Barcelona"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.rediris.es/lared/mapa.html.es — mapa oficial de infraestructura RedIRIS actualizado el 16/12/2024, que muestra el corredor Madrid–Zaragoza–Barcelona."
+  },
+  {
+    "nombre": "RedIRIS Mediterranean southeast corridor",
+    "operador": "RedIRIS",
+    "pais": "ES",
+    "ciudades": [
+      "Madrid",
+      "Valencia",
+      "Alicante",
+      "Murcia"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.rediris.es/lared/mapa.html.es — mapa oficial de infraestructura RedIRIS actualizado el 16/12/2024, con la ruta terrestre desde Madrid hacia Valencia, Alicante y Murcia."
+  },
+  {
+    "nombre": "Switch LAN Lake Geneva-Zurich-St Gallen backbone",
+    "operador": "SWITCH",
+    "pais": "CH",
+    "ciudades": [
+      "Geneva",
+      "Lausanne",
+      "Bern",
+      "Zurich",
+      "St. Gallen"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.switch.ch/en/network/ip-access — SWITCH declara unos 3,100 km de fibra y publica el mapa de su backbone fechado en febrero de 2026."
+  },
+  {
+    "nombre": "GÉANT-Janet London-Manchester",
+    "operador": "GÉANT / Jisc Janet",
+    "pais": "GB",
+    "ciudades": [
+      "London",
+      "Manchester"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.heanet.ie/news/bridging-the-network-divide — GÉANT y HEAnet documentan la ruta completada London–Manchester–Dublin–Cork; London–Manchester es el segmento terrestre británico."
+  },
+  {
+    "nombre": "GlobalConnect Jutland backbone",
+    "operador": "GlobalConnect",
+    "pais": "DK",
+    "ciudades": [
+      "Aarhus",
+      "Aalborg"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://globalconnectcarrier.com/our-network/ — GlobalConnect publica su red actual de fibra entre los principales hubs y ciudades del norte de Europa; el corredor Aarhus–Aalborg es terrestre."
+  },
+  {
+    "nombre": "EENet Tallinn-Tartu",
+    "operador": "EENet",
+    "pais": "EE",
+    "ciudades": [
+      "Tallinn",
+      "Tartu"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.eenet.ee/EENet/EENet_en — EENet, unidad de infraestructura del Ministerio de Educación e Investigación de Estonia, opera la infraestructura nacional de educación e investigación; la cartografía UIT clasifica el corredor Tallinn–Tartu como transmisión óptica terrestre."
+  },
+  {
+    "nombre": "Funet Helsinki-Oulu spine",
+    "operador": "CSC / Funet",
+    "pais": "FI",
+    "ciudades": [
+      "Helsinki",
+      "Tampere",
+      "Oulu"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://csc.fi/en/our-expertise/funet-a-network-for-research-and-education/ — CSC confirma la operación de Funet como red nacional de investigación; el mapa Funet vigente enlazado por GÉANT representa el eje Helsinki–Tampere–Oulu."
+  },
+  {
+    "nombre": "Mila Reykjavik-Akureyri terrestrial trunk",
+    "operador": "Mila",
+    "pais": "IS",
+    "ciudades": [
+      "Reykjavik",
+      "Akureyri"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://bbmaps.itu.int/bbmaps/ — el mapa oficial de transmisión de la UIT distingue la ruta óptica terrestre islandesa de las conexiones submarinas y muestra el corredor principal Reykjavik–Akureyri."
+  },
+  {
+    "nombre": "LVRTC west-east backbone",
+    "operador": "LVRTC",
+    "pais": "LV",
+    "ciudades": [
+      "Ventspils",
+      "Riga",
+      "Daugavpils"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.lvrtc.lv/en/broadband/ — LVRTC declara y cartografía una extensa red troncal de fibra óptica nacional; sus nodos de infraestructura incluyen Ventspils, Riga y Daugavpils."
+  },
+  {
+    "nombre": "LITNET Klaipeda-Vilnius spine",
+    "operador": "LITNET",
+    "pais": "LT",
+    "ciudades": [
+      "Klaipeda",
+      "Kaunas",
+      "Vilnius"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://litnet.lt/en/about-litnet/ — LITNET confirma que opera la red nacional de investigación y educación; su topología vigente enlazada por GÉANT muestra el eje Klaipeda–Kaunas–Vilnius."
+  },
+  {
+    "nombre": "GlobalConnect Oslo-Trondheim",
+    "operador": "GlobalConnect",
+    "pais": "NO",
+    "ciudades": [
+      "Oslo",
+      "Trondheim"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://globalconnectcarrier.com/our-network/ — el mapa actual de GlobalConnect muestra su infraestructura terrestre de fibra de larga distancia entre los principales hubs nórdicos, incluido el eje Oslo–Trondheim."
+  },
+  {
+    "nombre": "SUNET northern spine",
+    "operador": "SUNET",
+    "pais": "SE",
+    "ciudades": [
+      "Stockholm",
+      "Sundsvall",
+      "Umea",
+      "Lulea",
+      "Kiruna"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.vr.se/english/mandates/research-infrastructure/sunet.html — el Swedish Research Council declara que SUNET dispone de 113 nodos, 126 secciones de fibra y más de 8,000 km; el backbone nacional incluye el eje hacia el extremo norte."
+  },
+  {
+    "nombre": "GCN Sofia-Burgas backbone",
+    "operador": "GCN",
+    "pais": "BG",
+    "ciudades": [
+      "Sofia",
+      "Plovdiv",
+      "Stara Zagora",
+      "Burgas"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.gcn.bg/GCN_bg_backbone_en.html — GCN afirma poseer y operar un backbone nacional de más de 3,100 km de líneas de fibra y publica el mapa de la red óptica búlgara."
+  },
+  {
+    "nombre": "CARNET Zagreb-Dubrovnik",
+    "operador": "CARNET",
+    "pais": "HR",
+    "ciudades": [
+      "Zagreb",
+      "Dubrovnik"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.carnet.hr/carnet-infrastructure/ — CARNET opera la infraestructura nacional; su informe 2023 enumera explícitamente la mejora del enlace interurbano Zagreb–Dubrovnik."
+  },
+  {
+    "nombre": "CARNET Zagreb-Vukovar",
+    "operador": "CARNET",
+    "pais": "HR",
+    "ciudades": [
+      "Zagreb",
+      "Vukovar"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.carnet.hr/carnet-infrastructure/ — CARNET opera la infraestructura nacional; el informe 2023 identifica el enlace backbone Zagreb–Vukovar entre los enlaces actualizados."
+  },
+  {
+    "nombre": "CARNET Zagreb-Pula",
+    "operador": "CARNET",
+    "pais": "HR",
+    "ciudades": [
+      "Zagreb",
+      "Pula"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.carnet.hr/carnet-infrastructure/ — CARNET opera la infraestructura nacional; el informe 2023 identifica expresamente la actualización del enlace Zagreb–Pula."
+  },
+  {
+    "nombre": "CARNET Split-Dubrovnik",
+    "operador": "CARNET",
+    "pais": "HR",
+    "ciudades": [
+      "Split",
+      "Dubrovnik"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.carnet.hr/carnet-infrastructure/ — CARNET opera la infraestructura nacional y su informe 2023 enumera el enlace interurbano Split–Dubrovnik entre los enlaces backbone mejorados."
+  },
+  {
+    "nombre": "GRNET Athens-Thessaloniki backbone",
+    "operador": "GRNET",
+    "pais": "GR",
+    "ciudades": [
+      "Athens",
+      "Thessaloniki"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://grnet.gr/wp-content/uploads/2025/03/Core-long_EN.pdf — la presentación institucional 2025 de GRNET documenta su infraestructura nacional y topología backbone; Athens–Thessaloniki constituye el principal eje continental."
+  },
+  {
+    "nombre": "RETN Romania east-west backbone",
+    "operador": "RETN",
+    "pais": "RO",
+    "ciudades": [
+      "Drobeta-Turnu Severin",
+      "Bucharest",
+      "Iasi"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://retn.net/news-events/RETN-Launches-New-Cross-Romania-Moldova-Ukraine-Route — RETN anunció el 7 de mayo de 2026 el lanzamiento de una ruta backbone continua Drobeta–Bucharest–Iasi–Chisinau."
+  },
+  {
+    "nombre": "AMRES Belgrade-Nis backbone",
+    "operador": "AMRES",
+    "pais": "RS",
+    "ciudades": [
+      "Belgrade",
+      "Nis"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.amres.ac.rs/en/amres/amres-infrastructure — AMRES describe su backbone como una red de enlaces ópticos interurbanos entre sus PoP; Belgrade–Nis es uno de sus ejes nacionales de larga distancia."
+  },
+  {
+    "nombre": "ARNES Ljubljana-Maribor backbone",
+    "operador": "ARNES",
+    "pais": "SI",
+    "ciudades": [
+      "Ljubljana",
+      "Celje",
+      "Maribor"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.arnes.si/en/infrastructure/ — ARNES confirma que sus nodos backbone se interconectan mediante fibra arrendada y se organizan en bucles ópticos; el eje Ljubljana–Celje–Maribor forma parte de esa infraestructura."
+  },
+  {
+    "nombre": "RETN-Beltelecom Belarus transit route",
+    "operador": "RETN / Beltelecom",
+    "pais": "BY",
+    "ciudades": [
+      "Moscow",
+      "Minsk",
+      "Berlin",
+      "Frankfurt am Main"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://retn.net/cn/news-events/retn-and-beltelecom-completed-a-new-transit-route-across-belarus — RETN y Beltelecom anunciaron en 2019 la finalización de un nuevo corredor DWDM por Belarus; la nota especifica Moscow–Minsk y Moscow–Frankfurt via Berlin."
+  },
+  {
+    "nombre": "RETN Iasi-Chisinau",
+    "operador": "RETN",
+    "pais": "MD",
+    "ciudades": [
+      "Iasi",
+      "Chisinau"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://retn.net/news-events/RETN-Launches-New-Cross-Romania-Moldova-Ukraine-Route — RETN puso en servicio en mayo de 2026 el nuevo backbone continuo Drobeta–Bucharest–Iasi–Chisinau; Iasi–Chisinau es su tramo terrestre de acceso a Moldova."
+  },
+  {
+    "nombre": "Rostelecom national transcontinental backbone",
+    "operador": "Rostelecom",
+    "pais": "RU",
+    "ciudades": [
+      "Moscow",
+      "Nizhny Novgorod",
+      "Kazan",
+      "Yekaterinburg",
+      "Novosibirsk",
+      "Krasnoyarsk",
+      "Irkutsk",
+      "Khabarovsk",
+      "Vladivostok"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.company.rt.ru/en/about/net/ — Rostelecom declara un backbone digital de aproximadamente 500,000 km basado en enlaces de fibra SDH/DWDM y con alcance a toda la Russian Federation; la secuencia corresponde al principal corredor transcontinental de su topología."
+  },
+  {
+    "nombre": "RETN Lutsk-Monastyryshche",
+    "operador": "RETN",
+    "pais": "UA",
+    "ciudades": [
+      "Lutsk",
+      "Monastyryshche"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://retn.net/about — en su cronología corporativa vigente RETN indica que durante 2022–2023 desarrolló la ruta Lutsk–Monastyrysche para proporcionar un camino redundante de Ukraine hacia Europe."
+  }
+]

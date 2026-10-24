@@ -1,0 +1,270 @@
+[
+  {
+    "nombre": "REFEFO – corredor central Buenos Aires–Rosario–Córdoba",
+    "operador": "ARSAT",
+    "pais": "AR",
+    "ciudades": [
+      "Buenos Aires",
+      "Rosario",
+      "Córdoba"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.arsat.com.ar/ — ARSAT mantiene la Red Federal de Fibra Óptica; el Gobierno argentino informó en 2023 34,500 km desplegados y más de 1,000 localidades atravesadas. La secuencia es una síntesis de nodos principales de REFEFO, no una lista exhaustiva de localidades intermedias."
+  },
+  {
+    "nombre": "ENTEL dorsal oeste–este Desaguadero–Puerto Quijarro",
+    "operador": "ENTEL Bolivia",
+    "pais": "BO",
+    "ciudades": [
+      "Desaguadero",
+      "La Paz",
+      "Oruro",
+      "Cochabamba",
+      "Santa Cruz de la Sierra",
+      "Puerto Quijarro"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.entel.bo/ — ENTEL documenta su red terrestre nacional de más de 44,000 km y el corredor que conecta Lurín, Perú, con Puerto Quijarro, Bolivia; la UIT documenta como principales ciudades de la fibra boliviana La Paz, Oruro, Cochabamba y Santa Cruz."
+  },
+  {
+    "nombre": "FOA Aysén – eje principal",
+    "operador": "Silica Networks Chile",
+    "pais": "CL",
+    "ciudades": [
+      "Tortel",
+      "Cochrane",
+      "Puerto Bertrand",
+      "Puerto Río Tranquilo",
+      "Bahía Murta",
+      "Cerro Castillo",
+      "El Blanco",
+      "Coyhaique"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.subtel.gob.cl/ — SUBTEL, informe nacional de proyectos FDT 3T 2025: FOA Aysén tiene más de 617 km, figura EN OPERACIÓN y la etapa de operación comenzó el 4-Nov-2021; el mapa oficial muestra estos POIIT sobre el eje principal."
+  },
+  {
+    "nombre": "FOA Los Lagos",
+    "operador": "Silica Networks Chile",
+    "pais": "CL",
+    "ciudades": [
+      "Puerto Montt",
+      "Alerce",
+      "Ensenada",
+      "Ralún",
+      "Cochamó",
+      "Puelo",
+      "Contao",
+      "El Manzano",
+      "Pichicolo",
+      "Río Negro",
+      "Hualaihué"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.subtel.gob.cl/ — SUBTEL, informe nacional de proyectos FDT 3T 2025: FOA Los Lagos supera 247 km y su etapa de operación comenzó el 7-Mar-2022; el documento publica el mapa y las localidades de la troncal."
+  },
+  {
+    "nombre": "PNFO – corredor Bogotá–Cúcuta",
+    "operador": "Azteca Comunicaciones Colombia",
+    "pais": "CO",
+    "ciudades": [
+      "Bogotá",
+      "Bucaramanga",
+      "Cúcuta"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.mintic.gov.co/ — MinTIC documenta más de 19,000 km instalados por el Proyecto Nacional de Fibra Óptica, inicialmente 788 municipios, y en documentación más reciente atribuye a Azteca presencia en alrededor de 910 municipios; la secuencia es una síntesis de nodos troncales principales."
+  },
+  {
+    "nombre": "PNFO – corredor oriental Bogotá–San José del Guaviare",
+    "operador": "Azteca Comunicaciones Colombia",
+    "pais": "CO",
+    "ciudades": [
+      "Bogotá",
+      "Villavicencio",
+      "Granada",
+      "San José del Guaviare"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.mintic.gov.co/ — MinTIC confirma la cobertura nacional del PNFO y distingue las zonas amazónicas que todavía dependen de otras soluciones; la cadena indicada es una síntesis conservadora del corredor de fibra hasta San José del Guaviare y no se prolonga a Inírida o Mitú."
+  },
+  {
+    "nombre": "CELEC OPGW Pomasqui–Tulcán",
+    "operador": "CELEC EP / Transelectric",
+    "pais": "EC",
+    "ciudades": [
+      "Pomasqui",
+      "Tulcán"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.celec.gob.ec/ — CELEC documenta trabajos operacionales y de reparación sobre el cable OPGW del enlace Pomasqui–Tulcán, identificando expresamente esta ruta de fibra."
+  },
+  {
+    "nombre": "CELEC OPGW La Concordia–Quinindé–Esmeraldas",
+    "operador": "CELEC EP / Transelectric",
+    "pais": "EC",
+    "ciudades": [
+      "La Concordia",
+      "Quinindé",
+      "Esmeraldas"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.celec.gob.ec/ — CELEC documenta mantenimiento de los enlaces OPGW La Concordia–Quinindé y Quinindé–Esmeraldas, formando un corredor óptico terrestre continuo superior a 100 km."
+  },
+  {
+    "nombre": "RDNFO – corredor norte",
+    "operador": "PRONATEL / Estado peruano",
+    "pais": "PE",
+    "ciudades": [
+      "Lima",
+      "Chimbote",
+      "Trujillo",
+      "Chiclayo",
+      "Piura",
+      "Tumbes"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.pronatel.gob.pe/ — PRONATEL mantiene la operación provisional de la Red Dorsal Nacional de Fibra Óptica; documentos oficiales/Banco Mundial describen aproximadamente 13,400–13,500 km, cientos de nodos y conexión de capitales regionales. La lista contiene los grandes nodos del eje norte."
+  },
+  {
+    "nombre": "RDNFO – corredor centro-sur andino",
+    "operador": "PRONATEL / Estado peruano",
+    "pais": "PE",
+    "ciudades": [
+      "Lima",
+      "Huancayo",
+      "Huancavelica",
+      "Ayacucho",
+      "Abancay",
+      "Cusco"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.pronatel.gob.pe/ — PRONATEL confirma que el Estado seguía operando provisionalmente la RDNFO en 2025; la secuencia resume nodos regionales del corredor andino y omite nodos distritales intermedios."
+  },
+  {
+    "nombre": "ANTEL – corredor oriental Montevideo–Maldonado",
+    "operador": "Antel",
+    "pais": "UY",
+    "ciudades": [
+      "Montevideo",
+      "Atlántida",
+      "Maldonado"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.antel.com.uy/ — Antel informó en octubre de 2026 cortes físicos de su red nacional de transporte de fibra sobre Ruta 9 y la Interbalnearia, incluido un punto cerca de Atlántida, que afectaron el acceso internacional asociado a Maldonado; ello confirma la operación actual del corredor."
+  },
+  {
+    "nombre": "REDCA/SIEPAC Guatemala – Guate Norte–El Florido",
+    "operador": "REDCA",
+    "pais": "GT",
+    "ciudades": [
+      "Guatemala City",
+      "Panaluya",
+      "El Florido"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.eprsiepac.com/ — EPR publica Guate Norte–Panaluya 109.91 km y Panaluya–El Florido 73.46 km; ENATREL identifica a REDCA como operador/administrador de la fibra instalada sobre SIEPAC y documenta su operación regional. Guate Norte se normaliza a Guatemala City."
+  },
+  {
+    "nombre": "REDCA/SIEPAC El Salvador – corredor oeste–este",
+    "operador": "REDCA",
+    "pais": "SV",
+    "ciudades": [
+      "Ahuachapán",
+      "Nejapa"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.eprsiepac.com/ — EPR publica la ruta nacional frontera Guatemala–Ahuachapán–Nejapa–15 de Septiembre–frontera Honduras, total 287.65 km. El array enumera sólo localidades urbanas inequívocas; 15 de Septiembre es una subestación."
+  },
+  {
+    "nombre": "REDCA/SIEPAC Honduras – El Florido–San Buenaventura",
+    "operador": "REDCA",
+    "pais": "HN",
+    "ciudades": [
+      "El Florido",
+      "San Buenaventura"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.eprsiepac.com/ — EPR publica un tramo El Florido–San Buenaventura de 141 km; la fibra de REDCA utiliza la infraestructura SIEPAC y está en explotación regional."
+  },
+  {
+    "nombre": "REDCA/SIEPAC Nicaragua – corredor nacional",
+    "operador": "REDCA",
+    "pais": "NI",
+    "ciudades": [
+      "Ciudad Sandino",
+      "Ticuantepe"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.eprsiepac.com/ — EPR publica para Nicaragua 305.64 km: frontera Honduras–Sandino 144.88 km, Sandino–Ticuantepe 64.78 km y Ticuantepe–frontera Costa Rica 125.98 km. El array contiene los nodos urbanos interiores de la ruta."
+  },
+  {
+    "nombre": "REDCA/SIEPAC Costa Rica – Cañas–Río Claro",
+    "operador": "REDCA",
+    "pais": "CR",
+    "ciudades": [
+      "Cañas",
+      "Parrita",
+      "Palmar Norte",
+      "Río Claro"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://sutel.go.cr/ — SUTEL enumera expresamente como enlaces de fibra REDCA Ticuantepe–Cañas, Cañas–Parrita, Parrita–Palmar Norte, Palmar Norte–Río Claro y Río Claro–Veladero; EPR da 159.24 km Cañas–Parrita y 130.56 km Parrita–Palmar Norte."
+  },
+  {
+    "nombre": "REDCA/SIEPAC Panamá – frontera Costa Rica–Veladero",
+    "operador": "REDCA",
+    "pais": "PA",
+    "ciudades": [
+      "Paso Canoas",
+      "Veladero"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.eprsiepac.com/ — EPR publica 150.2 km entre la frontera de Costa Rica y Veladero; Paso Canoas se usa para normalizar el extremo fronterizo a la localidad correspondiente."
+  },
+  {
+    "nombre": "ETECSA – dorsal occidental-central",
+    "operador": "ETECSA",
+    "pais": "CU",
+    "ciudades": [
+      "Sandino",
+      "Pinar del Río",
+      "San Cristóbal",
+      "Artemisa",
+      "San José de las Lajas",
+      "Matanzas",
+      "Santa Clara",
+      "Placetas",
+      "Sancti Spíritus",
+      "Ciego de Ávila"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.revistatono.etecsa.cu/tono/article/download/91/158/306 — Revista Técnica de ETECSA muestra el mapa del Backbone nacional soportado por una amplia red de cable de fibra óptica; publicaciones posteriores de ETECSA describen la culminación del dorsal nacional SDH/DWDM. Se excluye del objeto el corredor oriental afectado por cortes de Melissa en 2025 por falta de una confirmación posterior de restauración integral."
+  },
+  {
+    "nombre": "ETED Red Nacional de Fibra Óptica – Santo Domingo–Santiago",
+    "operador": "Empresa de Transmisión Eléctrica Dominicana (ETED)",
+    "pais": "DO",
+    "ciudades": [
+      "Santo Domingo",
+      "Santiago de los Caballeros"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://eted.gob.do/eted-impulsa-la-modernizacion-del-sistema-nacional-de-transmision-e-infraestructura-de-fibra-optica-fortaleciendo-la-inversion-en-talento-humano/ — ETED confirma en 2026 que mantiene y moderniza su infraestructura nacional de transmisión y fibra; INDOTEL documentó previamente la presentación de la Red Nacional de Fibra Óptica de ETED a los operadores. La lista muestra los principales extremos urbanos del corredor."
+  },
+  {
+    "nombre": "Government of Jamaica National Broadband Backbone – corredor sur y oeste",
+    "operador": "Government of Jamaica / NWA / eGov Jamaica, con infraestructura aportada por operadores y utilities",
+    "pais": "JM",
+    "ciudades": [
+      "Kingston",
+      "Spanish Town",
+      "May Pen",
+      "Mandeville",
+      "Savanna-la-Mar",
+      "Montego Bay"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.mset.gov.jm/wp-content/uploads/2022/05/MSET-Sectoral-Presentation-Full.pdf — El Gobierno informó en 2022 que 95% del backbone previsto estaba completado, todas las Municipal Corporations estaban conectadas por fibra y las alianzas público-privadas daban acceso a más de 630 km de fibra. La secuencia resume los principales nodos municipales del corredor sur-oeste."
+  }
+]

@@ -1,0 +1,64 @@
+[
+  {
+    "nombre": "Djibouti–Ali Sabieh–frontera etíope",
+    "operador": "Djibouti Telecom / Ethio telecom",
+    "pais": "DJ",
+    "ciudades": ["Djibouti", "Ali Sabieh", "Guelile", "Dewele"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión terrestre Djibouti–Etiopía por Dewele, descrita por Djibouti Telecom y Ethio telecom; secuencia urbana estimada por el corredor meridional. Dewele es la primera localidad del lado etíope."
+  },
+  {
+    "nombre": "Corredor mediterráneo–Cairo–Suez",
+    "operador": "Telecom Egypt",
+    "pais": "EG",
+    "ciudades": ["Alexandria", "Damanhur", "Tanta", "Banha", "Cairo", "Suez"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional y corredores terrestres Mediterranean–Red Sea de Telecom Egypt; ciudades intermedias estimadas siguiendo los corredores viarios del delta y Cairo–Suez. No representa el trazado exacto de una canalización publicada."
+  },
+  {
+    "nombre": "Troncal del valle del Nilo",
+    "operador": "Telecom Egypt",
+    "pais": "EG",
+    "ciudades": ["Cairo", "Beni Suef", "Minya", "Asyut", "Sohag", "Qena", "Luxor", "Aswan"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de Telecom Egypt que atiende el Alto Egipto; secuencia estimada por el corredor ferroviario y viario del valle del Nilo, sin afirmar una margen del río ni una canalización concreta."
+  },
+  {
+    "nombre": "Cairo–Ismailia–Port Said",
+    "operador": "Telecom Egypt",
+    "pais": "EG",
+    "ciudades": ["Cairo", "Ismailia", "Port Said"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red terrestre de Telecom Egypt hacia las ciudades del canal de Suez; secuencia estimada por las carreteras Cairo–Ismailia e Ismailia–Port Said."
+  },
+  {
+    "nombre": "Troncal continental Bata–Mongomo",
+    "operador": "GITGE",
+    "pais": "GQ",
+    "ciudades": ["Bata", "Niefang", "Mongomo"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional terrestre de fibra óptica continental de GITGE; se indican ciudades principales del corredor oeste–este, no todos los pasos intermedios ni el trazado exacto."
+  },
+  {
+    "nombre": "Troncal continental Bata–Ebebiyin",
+    "operador": "GITGE",
+    "pais": "GQ",
+    "ciudades": ["Bata", "Niefang", "Nkue", "Ebebiyin"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red terrestre continental de GITGE; secuencia probable siguiendo el corredor de carreteras Bata–Niefang–Nkue–Ebebiyin. Comparte el tramo occidental con otras rutas del backbone."
+  },
+  {
+    "nombre": "Troncal occidental y meridional de Eswatini",
+    "operador": "Eswatini Posts and Telecommunications Corporation (EPTC)",
+    "pais": "SZ",
+    "ciudades": ["Mbabane", "Manzini", "Nhlangano"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de fibra de EPTC; secuencia de ciudades principales estimada por los corredores MR3, MR9 y MR11. El recorrido completo supera 100 km."
+  },
+  {
+    "nombre": "Troncal oriental e interconexión con Mozambique",
+    "operador": "EPTC / Tmcel",
+    "pais": "SZ",
+    "ciudades": ["Mbabane", "Manzini", "Siteki", "Mhlumeni", "Goba"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone de EPTC e interconexión terrestre con Mozambique por Mhlumeni–Goba; ciudades intermedias estimadas

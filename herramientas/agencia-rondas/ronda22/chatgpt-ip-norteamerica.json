@@ -1,0 +1,15 @@
+[
+  {
+    "nombre": "Alaska United Fiber (AUFS)",
+    "operador": "GCI",
+    "pais": "US",
+    "ciudades": [
+      "Seattle",
+      "Portland",
+      "Anchorage",
+      "Fairbanks"
+    ],
+    "estado": "en servicio",
+    "fuente": "GCI Alaska United: \"Anchorage and Fairbanks with Internet points of presence in Seattle and Portland\"【21†L223-L226】"
+  }
+]
