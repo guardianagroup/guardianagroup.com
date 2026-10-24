@@ -1,0 +1,63 @@
+[
+  {
+    "nombre": "National Fiber Backbone",
+    "operador": "ESCOM",
+    "pais": "MW",
+    "ciudades": [
+      "Chitipa",
+      "Lilongwe",
+      "Blantyre",
+      "Zomba",
+      "Nsanje"
+    ],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Información de Malawi (ict.gov.mw) y documentos del proyecto Huawei/China Exim Bank"
+  },
+  {
+    "nombre": "OFC National Backbone",
+    "operador": "ESCOM",
+    "pais": "MW",
+    "ciudades": [
+      "Songwe",
+      "Mzuzu",
+      "Lilongwe",
+      "Blantyre",
+      "Zobue"
+    ],
+    "estado": "en servicio",
+    "fuente": "Sitio oficial de ESCOM OFC (escom.mw)"
+  },
+  {
+    "nombre": "National Backbone Network",
+    "operador": "KTRN",
+    "pais": "RW",
+    "ciudades": [
+      "Kigali",
+      "Gatuna"
+    ],
+    "estado": "en servicio",
+    "fuente": "Informes del gobierno de Rwanda y RDB sobre el National Backbone Network (2010-2011)"
+  },
+  {
+    "nombre": "National Backbone Network",
+    "operador": "KTRN",
+    "pais": "RW",
+    "ciudades": [
+      "Kigali",
+      "Rusumo"
+    ],
+    "estado": "en servicio",
+    "fuente": "Informes del gobierno de Rwanda y RDB sobre el National Backbone Network (2010-2011)"
+  },
+  {
+    "nombre": "OPGW Fiber Link",
+    "operador": "LECC",
+    "pais": "LS",
+    "ciudades": [
+      "Roma",
+      "Thaba-Tseka"
+    ],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Lesotho y African Development Bank (proyectos e-Government Infrastructure)"
+  }
+]

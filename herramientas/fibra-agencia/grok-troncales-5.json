@@ -1,0 +1,69 @@
+[
+  {
+    "nombre": "VSTN Vietnam-Singapore Terrestrial Network",
+    "operador": "VNPT",
+    "pais": "VN",
+    "ciudades": [
+      "Da Nang",
+      "Vientiane",
+      "Bangkok",
+      "Kuala Lumpur",
+      "Singapore"
+    ],
+    "estado": "en servicio",
+    "fuente": "VietnamPlus, Vietnam News, Light Reading, Telecom Review Asia (2025 inauguration reports and operator statements)"
+  },
+  {
+    "nombre": "National Optical Fiber Backbone Ring",
+    "operador": "Afghan Telecom",
+    "pais": "AF",
+    "ciudades": [
+      "Kabul",
+      "Kandahar",
+      "Herat",
+      "Mazar-e-Sharif",
+      "Kabul"
+    ],
+    "estado": "en servicio",
+    "fuente": "Afghan Telecom website, MCIT project documents (archived), AFCEA, The Kabul Times, ITU/World Bank related reports on OFC ring"
+  },
+  {
+    "nombre": "Kabul-Mazar-Hairatan Fiber Network",
+    "operador": "AWCC",
+    "pais": "AF",
+    "ciudades": [
+      "Kabul",
+      "Mazar-e-Sharif",
+      "Hairatan"
+    ],
+    "estado": "en servicio",
+    "fuente": "Ariana News (2023 inauguration), ATRA statements"
+  },
+  {
+    "nombre": "Silk Route Transit Network",
+    "operador": "iQ Networks",
+    "pais": "IQ",
+    "ciudades": [
+      "Al-Faw",
+      "Basra",
+      "Baghdad",
+      "Mosul",
+      "Ibrahim Xalil"
+    ],
+    "estado": "en servicio",
+    "fuente": "iQ Group / iQ Networks site, Wikipedia, Submarine Networks, Capacity Global, Rest of World (operational since 2023, 3500 km transit corridor)"
+  },
+  {
+    "nombre": "BTCL Dhaka-Chittagong Long-Haul OFC",
+    "operador": "BTCL",
+    "pais": "BD",
+    "ciudades": [
+      "Dhaka",
+      "Comilla",
+      "Feni",
+      "Chittagong"
+    ],
+    "estado": "en servicio",
+    "fuente": "BTCL historical network tables and project documents (lawyersnjurists compilation of operator data, lengths confirming >100 km segments)"
+  }
+]

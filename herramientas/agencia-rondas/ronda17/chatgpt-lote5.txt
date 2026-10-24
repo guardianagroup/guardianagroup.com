@@ -1,0 +1,186 @@
+[
+  {
+    "nombre": "Red nacional Leonecom — corredor Freetown–frontera de Guinea",
+    "operador": "Leonecom",
+    "pais": "SL",
+    "ciudades": ["Freetown", "Jui", "Waterloo", "Rogbere", "Port Loko", "Kambia", "Gbalamuya", "Pamelap"],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Comunicación, Tecnología e Innovación de Sierra Leona, National Broadband Strategy 2023–2028, figuras 2 y 8, páginas 22 y 29. https://mocti.gov.sl/wp-content/uploads/2024/10/National-Broadband-Strategy.pdf"
+  },
+  {
+    "nombre": "Red nacional Leonecom — troncal septentrional y oriental",
+    "operador": "Leonecom",
+    "pais": "SL",
+    "ciudades": ["Rogbere", "Lunsar", "Makeni", "Magburaka", "Masingbi", "Jaiama Sewafe", "Koidu", "Tongo Fields", "Mano Junction", "Segbwema", "Daru", "Pendembu", "Kailahun"],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Comunicación, Tecnología e Innovación de Sierra Leona, National Broadband Strategy 2023–2028, figura 8: National Fibre Optic Topology Schematic, enlaces operativos señalados en verde. https://mocti.gov.sl/wp-content/uploads/2024/10/National-Broadband-Strategy.pdf"
+  },
+  {
+    "nombre": "Red nacional Leonecom — ramal Makeni–Kabala",
+    "operador": "Leonecom",
+    "pais": "SL",
+    "ciudades": ["Makeni", "Fadugu", "Kabala"],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Comunicación, Tecnología e Innovación de Sierra Leona, National Broadband Strategy 2023–2028, figura 8, página 29. https://mocti.gov.sl/wp-content/uploads/2024/10/National-Broadband-Strategy.pdf"
+  },
+  {
+    "nombre": "Red nacional Leonecom — corredor central y sudoriental",
+    "operador": "Leonecom",
+    "pais": "SL",
+    "ciudades": ["Freetown", "Jui", "Masiaka", "Mile 91", "Moyamba Junction", "Taiama", "Bo", "Kenema", "Joru", "Zimmi"],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Comunicación, Tecnología e Innovación de Sierra Leona, National Broadband Strategy 2023–2028, figura 8. Se excluye la continuación Zimmi–Gendema porque el mapa identifica ese enlace como dañado. https://mocti.gov.sl/wp-content/uploads/2024/10/National-Broadband-Strategy.pdf"
+  },
+  {
+    "nombre": "Red nacional Leonecom — corredor meridional",
+    "operador": "Leonecom",
+    "pais": "SL",
+    "ciudades": ["Moyamba Junction", "Moyamba", "Gbangbatok", "Moriba Town", "Matru", "Koribondo", "Pujehun", "Zimmi"],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Comunicación, Tecnología e Innovación de Sierra Leona, National Broadband Strategy 2023–2028, figura 8: National Fibre Optic Topology Schematic. https://mocti.gov.sl/wp-content/uploads/2024/10/National-Broadband-Strategy.pdf"
+  },
+  {
+    "nombre": "Red nacional Leonecom — conexión Bo–Pujehun",
+    "operador": "Leonecom",
+    "pais": "SL",
+    "ciudades": ["Bo", "Koribondo", "Pujehun"],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Comunicación, Tecnología e Innovación de Sierra Leona, National Broadband Strategy 2023–2028, figura 8, enlaces operativos representados en verde. https://mocti.gov.sl/wp-content/uploads/2024/10/National-Broadband-Strategy.pdf"
+  },
+  {
+    "nombre": "CSquared Liberia — troncal nacional hacia Nimba",
+    "operador": "CSquared",
+    "pais": "LR",
+    "ciudades": ["Monrovia", "Kakata", "Gbarnga", "Ganta", "Sanniquellie"],
+    "estado": "en servicio",
+    "fuente": "CSquared, From Pilot to Permanent: What Ganta Shows About Connectivity and AI Readiness, septiembre de 2026; confirma más de 350 km de infraestructura troncal nacional y servicio activo en Kakata, Gbarnga, Ganta y Sanniquellie. La secuencia figura también en el informe USAID ProICT publicado por la Liberia Telecommunications Authority. https://csquared.com/connectingganta/ ; https://lta.gov.lr/wp-content/uploads/2024/01/USAID-ProICT-Report-on-Optical-Fiber-Cable.pdf"
+  },
+  {
+    "nombre": "Orange Liberia — troncal Monrovia–Buchanan",
+    "operador": "Orange Liberia",
+    "pais": "LR",
+    "ciudades": ["Monrovia", "Buchanan"],
+    "estado": "en servicio",
+    "fuente": "Liberia Telecommunications Authority, USAID ProICT Report on Optical Fiber Cable, página 19: identifica expresamente como completada la ruta aérea de fibra óptica Monrovia–Buchanan, desplegada principalmente por Orange. https://lta.gov.lr/wp-content/uploads/2024/01/USAID-ProICT-Report-on-Optical-Fiber-Cable.pdf"
+  },
+  {
+    "nombre": "ECOWAN — troncal de la orilla sur",
+    "operador": "Gamtel",
+    "pais": "GM",
+    "ciudades": ["Banjul", "Brikama", "Faraba", "Bwiam", "Soma", "Brikama Ba", "Janjanbureh", "Bansang", "Basse", "Fatoto"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Gambia, National Broadband Policy 2020–2024, página 31, mapa ECOWAN South Bank Fiber Network; confirma la finalización de la red en 2013. Banco Mundial, Innovative Business Models for Expanding Fiber-Optic Networks and Closing the Access Gaps, 2018, estudio de caso ECOWAN. https://mocde.gov.gm/wp-content/uploads/2023/10/BROADBAND-POLICY-2024.pdf ; https://documents1.worldbank.org/curated/en/674601544534500678/pdf/Main-Report.pdf"
+  },
+  {
+    "nombre": "ECOWAN — troncal de la orilla norte",
+    "operador": "Gamtel",
+    "pais": "GM",
+    "ciudades": ["Essau", "Kerewan", "Farafenni", "Kaur", "Kuntaur"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Gambia, National Broadband Policy 2020–2024, página 31, mapa ECOWAN North Bank Fiber Network. Banco Mundial, Innovative Business Models for Expanding Fiber-Optic Networks and Closing the Access Gaps, estudio de caso de Gambia. https://mocde.gov.gm/wp-content/uploads/2023/10/BROADBAND-POLICY-2024.pdf ; https://documents1.worldbank.org/curated/en/674601544534500678/pdf/Main-Report.pdf"
+  },
+  {
+    "nombre": "RNFO — corredor continental nororiental",
+    "operador": "GITGE",
+    "pais": "GQ",
+    "ciudades": ["Bata", "Machinda", "Niefang", "Nkimi", "Nkue", "Micomeseng", "Bidjabidjan", "Ebebiyin", "Mongomo"],
+    "estado": "en servicio",
+    "fuente": "GITGE, Resumen Ejecutivo 2024, páginas 5–6: confirma la puesta en servicio de las fases I y II de la Red Nacional de Fibra Óptica y publica el mapa RNFO con los nodos y enlaces continentales. https://gitge.com/wp-content/uploads/2025/09/informe-anual-2024.pdf"
+  },
+  {
+    "nombre": "RNFO — corredor Niefang–Anisoc–Mongomo",
+    "operador": "GITGE",
+    "pais": "GQ",
+    "ciudades": ["Bata", "Machinda", "Niefang", "Nkimi", "Ayene", "Anisoc", "Mongomeyen", "Mongomo"],
+    "estado": "en servicio",
+    "fuente": "GITGE, Resumen Ejecutivo 2024, página 6, mapa de la Red Nacional de Fibra Óptica, y página 5, confirmación de entrada en operación de la red continental. https://gitge.com/wp-content/uploads/2025/09/informe-anual-2024.pdf"
+  },
+  {
+    "nombre": "RNFO — corredor continental meridional",
+    "operador": "GITGE",
+    "pais": "GQ",
+    "ciudades": ["Bata", "Machinda", "Niefang", "Bicurga", "Evinayong", "Acurenam", "Oveng", "Nsork"],
+    "estado": "en servicio",
+    "fuente": "GITGE, Resumen Ejecutivo 2024, páginas 5–6, mapa RNFO de los enlaces terrestres de la Región Continental. https://gitge.com/wp-content/uploads/2025/09/informe-anual-2024.pdf"
+  },
+  {
+    "nombre": "RNFO — corredor costero Bata–Cabo San Juan",
+    "operador": "GITGE",
+    "pais": "GQ",
+    "ciudades": ["Bata", "Mbini", "Mboete", "Cabo San Juan"],
+    "estado": "en servicio",
+    "fuente": "GITGE, Resumen Ejecutivo 2024, página 6, mapa RNFO; página 5, declaración de operación de la red nacional. https://gitge.com/wp-content/uploads/2025/09/informe-anual-2024.pdf"
+  },
+  {
+    "nombre": "Central African Backbone — corredor Bangui–Berberati–Camerún",
+    "operador": "CAB-RCA",
+    "pais": "CF",
+    "ciudades": ["Bangui", "Boali", "Bossembele", "Yaloke", "Bawi", "Baoro", "Carnot", "Berberati", "Gamboula", "Kentzou"],
+    "estado": "en servicio",
+    "fuente": "Banco Africano de Desarrollo, comunicado de inauguración de la dorsal nacional del 8 de febrero de 2023: confirma la puesta en operación de 935 km de fibra y la interconexión con Camerún por Gamboula. BAD, informe de evaluación del proyecto CAB-RCA, sección 2.2.1, que publica la secuencia Bangui–Boali–Bossembélé–Yaloké–Bawi–Baoro–Carnot–Berbérati y el ramal hacia Gamboula. La convocatoria oficial de explotación de 2022 identifica Kentzou como localidad fronteriza camerunesa. https://www.afdb.org/fr/news-and-events/press-releases/inauguration-de-la-dorsale-optique-nationale-de-la-republique-centrafricaine-et-de-linterconnexion-avec-le-congo-58835 ; https://www.afdb.org/fr/documents/ami-rca-delegataire-de-service-public-en-charge-de-lexploitation-la-commercialisation-la-maintenance-et-lextension-des-infrastructures-optiques-en-republique-centrafricaine-rca-cab-rca"
+  },
+  {
+    "nombre": "Central African Backbone — corredor Bangui–Berberati–Congo",
+    "operador": "CAB-RCA",
+    "pais": "CF",
+    "ciudades": ["Bangui", "Boali", "Bossembele", "Yaloke", "Bawi", "Baoro", "Carnot", "Berberati", "Nola", "Bayanga", "Bomassa"],
+    "estado": "en servicio",
+    "fuente": "Banco Africano de Desarrollo, inauguración de la dorsal nacional y de la interconexión con Congo, febrero de 2023; confirma el ramal operativo por Bomassa. BAD, CAB-RCA, Environmental and Social Management Plan Summary, noviembre de 2017, que documenta el trazado terrestre por Nola y Bayanga hasta Bomassa, en la República del Congo. https://www.afdb.org/fr/news-and-events/press-releases/inauguration-de-la-dorsale-optique-nationale-de-la-republique-centrafricaine-et-de-linterconnexion-avec-le-congo-58835 ; https://www.afdb.org/en/documents/document/central-african-republic-central-african-fibre-optic-backbone-project-cab-car-component-esmp-summary-98762"
+  },
+  {
+    "nombre": "Djibouti Telecom — interconexión terrestre con Etiopía por Galafi",
+    "operador": "Djibouti Telecom",
+    "pais": "DJ",
+    "ciudades": ["Djibouti", "Dikhil", "Galafi"],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Missing Broadband Links in the Horn of Africa Region, sección 4.2.1.2 y mapa 22: identifica la ruta por Galafi como una de las dos interconexiones de fibra existentes entre Djibouti y Etiopía; no se incluyen los enlaces propuestos hacia Balho, Tadjourah u Obock. https://documents1.worldbank.org/curated/en/099450206282323160/pdf/IDU00f2d51f40fd4a04e630b0b60d27b1a4f548b.pdf"
+  },
+  {
+    "nombre": "Djibouti Telecom — interconexión terrestre con Etiopía por Ali Sabieh",
+    "operador": "Djibouti Telecom",
+    "pais": "DJ",
+    "ciudades": ["Djibouti", "Ali Sabieh", "Dewele"],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Missing Broadband Links in the Horn of Africa Region, sección 4.2.1.2: confirma como existente la conexión terrestre por Ali Sabieh. Banco Mundial, Overview of Digital Development in the Horn of Africa: identifica el corredor Dire Dawa–Deweleh–Ali Sabieh–Djibouti. https://documents1.worldbank.org/curated/en/099450206282323160/pdf/IDU00f2d51f40fd4a04e630b0b60d27b1a4f548b.pdf ; https://documents1.worldbank.org/curated/en/233431634259568617/pdf/Overview-of-Digital-Development-in-the-Horn-of-Africa.pdf"
+  },
+  {
+    "nombre": "Somcable — corredor occidental de Somaliland",
+    "operador": "Somcable",
+    "pais": "SO",
+    "ciudades": ["Loyada", "Zeila", "Asha Ado", "Elgal", "Geerisa", "Boon", "Borama", "Tog Wajale", "Gabiley", "Hargeisa"],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Comunicaciones y Tecnología de Somalia, Digital Inclusion Policy Development: Contextual Analysis Report, julio de 2023, figura 8, página 32, mapa de la red terrestre Somcable. Operador Somcable, presentación de su infraestructura de fibra en Somaliland. https://kcl.co.ug/wp-content/uploads/2024/04/20230808-Somalia-Digital-Inclusion-Policy-Development_Contextual-Analysis-Report-Final.pdf ; https://somcable.com/"
+  },
+  {
+    "nombre": "Somcable — corredor Hargeisa–Berbera",
+    "operador": "Somcable",
+    "pais": "SO",
+    "ciudades": ["Hargeisa", "Abdal", "Dacarbudhuq", "Berbera"],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Comunicaciones y Tecnología de Somalia, Digital Inclusion Policy Development: Contextual Analysis Report, figura 8, página 32, red Somcable. El operador confirma la cobertura de Hargeisa y Berbera. https://kcl.co.ug/wp-content/uploads/2024/04/20230808-Somalia-Digital-Inclusion-Policy-Development_Contextual-Analysis-Report-Final.pdf ; https://somcable.com/"
+  },
+  {
+    "nombre": "Somcable — corredor Berbera–Burao–Las Anod",
+    "operador": "Somcable",
+    "pais": "SO",
+    "ciudades": ["Berbera", "Sheikh", "Burao", "Ainabo", "Las Anod"],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Comunicaciones y Tecnología de Somalia, Digital Inclusion Policy Development: Contextual Analysis Report, julio de 2023, figura 8, página 32, mapa Somcable, que representa el corredor terrestre oriental con línea continua. https://kcl.co.ug/wp-content/uploads/2024/04/20230808-Somalia-Digital-Inclusion-Policy-Development_Contextual-Analysis-Report-Final.pdf"
+  },
+  {
+    "nombre": "Liquid — interconexión Juba–Uganda por Nimule",
+    "operador": "Liquid",
+    "pais": "SS",
+    "ciudades": ["Juba", "Nimule", "Elegu"],
+    "estado": "en servicio",
+    "fuente": "Liquid Intelligent Technologies, The First to Bring Fibre to South Sudan, 11 de febrero de 2020: confirma la finalización en enero de 2020 de 200 km de fibra desde Juba, pasando por Nimule, hasta la frontera ugandesa. Banco Mundial, South Sudan Digital Economy Assessment, 2023, confirma la operación de la ruta. https://za.liquid.tech/the-first-to-bring-fibre-to-south-sudan/ ; https://documents1.worldbank.org/curated/en/099062323175598193/pdf/P17636100e4ab00f3097160e63e7bf53f6a.pdf"
+  },
+  {
+    "nombre": "Muya Fibre — interconexión Juba–Uganda por Nimule",
+    "operador": "Muya Fibre",
+    "pais": "SS",
+    "ciudades": ["Juba", "Nimule", "Elegu"],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, South Sudan Digital Economy Assessment, 2023, sección 2.2.1: confirma expresamente que Muya Fibre Construction opera una ruta de fibra por el mismo corredor Juba–Uganda que Liquid. Banco Mundial, Missing Broadband Links in the Horn of Africa Region, tabla 19: identifica el despliegue de Muya y Liquid desde Juba por Nimule hasta la frontera ugandesa. https://documents1.worldbank.org/curated/en/099062323175598193/pdf/P17636100e4ab00f3097160e63e7bf53f6a.pdf ; https://documents1.worldbank.org/curated/en/099450206282323160/pdf/IDU00f2d51f40fd4a04e630b0b60d27b1a4f548b.pdf"
+  }
+]

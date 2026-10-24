@@ -1,0 +1,50 @@
+[
+  {
+    "nombre": "Fibra Óptica Nacional",
+    "operador": "ETECSA",
+    "pais": "CU",
+    "ciudades": ["Pinar del Rio", "Havana", "Matanzas", "Santa Clara", "Sancti Spiritus", "Ciego de Avila", "Camaguey", "Las Tunas", "Holguin", "Santiago de Cuba", "Guantanamo"],
+    "estado": "en servicio",
+    "fuente": "ETECSA (publicación oficial sobre enlace de capitales provinciales desde Pinar del Río hasta Guantánamo, culminado 2004)"
+  },
+  {
+    "nombre": "Red Nacional de Fibra Óptica - Etapa Sur",
+    "operador": "COPACO / ANDE",
+    "pais": "PY",
+    "ciudades": ["Asuncion", "Alberdi", "Pilar", "Laureles", "Ayolas", "Encarnacion"],
+    "estado": "en servicio",
+    "fuente": "MITIC / BNamericas (integración de redes estatales de fibra, etapas del backbone nacional)"
+  },
+  {
+    "nombre": "Red Nacional de Fibra Óptica - Triángulo Central",
+    "operador": "COPACO / ANDE",
+    "pais": "PY",
+    "ciudades": ["Asuncion", "Ciudad del Este", "Encarnacion"],
+    "estado": "en servicio",
+    "fuente": "MITIC / BNamericas (primera etapa del backbone nacional con topología de anillo en el triángulo Asunción-Ciudad del Este-Encarnación)"
+  },
+  {
+    "nombre": "Backbone de transmisión May Pen - St. James",
+    "operador": "Flow",
+    "pais": "JM",
+    "ciudades": ["May Pen", "Montego Bay"],
+    "estado": "en servicio",
+    "fuente": "Flow Jamaica / Jamaica Observer (ruta arterial de backbone de transmisión entre May Pen y St. James / Montego Bay, en proceso de undergrounding)"
+  },
+  {
+    "nombre": "Ruta terrestre principal norte",
+    "operador": "Digi / BTL",
+    "pais": "BZ",
+    "ciudades": ["Belize City", "Orange Walk", "Corozal"],
+    "estado": "en servicio",
+    "fuente": "BTL / 7 News Belize (rutas mayores terrestres de fibra Belize City-Corozal instaladas y en servicio desde finales de los 1990s)"
+  },
+  {
+    "nombre": "Ruta terrestre oeste",
+    "operador": "Digi / BTL",
+    "pais": "BZ",
+    "ciudades": ["Belize City", "Belmopan", "San Ignacio"],
+    "estado": "en servicio",
+    "fuente": "BTL / 7 News Belize (fibra a Belmopan y oeste del país en servicio, con rutas terrestres documentadas)"
+  }
+]
