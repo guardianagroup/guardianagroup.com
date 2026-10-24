@@ -7,8 +7,8 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 **Ramas:** `main` (la web en vivo) y `web-idiomas` están al día. `web-idiomas` tiene además este documento y las preguntas de Kimi.
 
 **En vivo en guardianagroup.com/orbita/**
-- **Cables por tierra:** 168 países y 1.296.013 km, en `orbita/datos/fibra-tierra.json`. Al empezar la noche eran 93 países.
-  - 279 tramos salen de la agencia, confirmados al menos por dos voces de siete: Astra 6, ChatGPT («Alta» e «Investigación avanzada»), Gemini, Grok, Kimi y Claude comprobando fuentes oficiales. El resto viene de OpenStreetMap y AfTerFibre.
+- **Cables por tierra:** 168 países y 1.302.357 km, en `orbita/datos/fibra-tierra.json`. Al empezar la noche eran 93 países.
+  - 293 tramos salen de la agencia, confirmados al menos por dos voces de siete: Astra 6, ChatGPT («Alta» e «Investigación avanzada»), Gemini, Grok, Kimi y Claude comprobando fuentes oficiales. El resto viene de OpenStreetMap y AfTerFibre.
   - En los países sin fuentes abiertas valen los tramos aproximados. El dueño, a las 9:00: «Lo más aproximado posible ok».
   - Siria, Yemen y Palestina entran con redes «en servicio parcial».
   - Corea del Norte se queda en el mapa. El dueño, a las 8:02: «Añádela si».
@@ -516,3 +516,4 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 - 10:25 · África 1–3: 168 países, 1.295.161 km, 277 tramos de la agencia.
 - 10:35 · Arreglo en `fibra_agencia.py` para la ciudad de frontera que abre una ruta: 279 tramos, 1.296.013 km.
 - 05:32 · África 4–5: 168 países, 1.298.289 km, 283 tramos de la agencia.
+- 10:37 · África 6–7: 168 países, 1.302.357 km, 293 tramos de la agencia.
