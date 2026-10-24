@@ -1131,7 +1131,7 @@ void main(){
       accion('Ahora no', 'boton texto', () => cierraLugar(true));
     } else if (modo === 'buscar') {
       t.textContent = 'Elige la ciudad de este equipo';
-      d.textContent = (extra && extra.motivo) || 'Escribe su nombre. La lista viaja con el programa: no se consulta nada en internet.';
+      d.textContent = (extra && extra.motivo) || T('Escribe su nombre. La lista está en esta página: no se consulta nada en internet.'); // 24 Oct 2026: translated, and no «programa» (it is no longer distributed)
       $('lugar-buscar').hidden = false;
       $('lugar-q').value = ''; $('lugar-res').innerHTML = '';
       primero = $('lugar-q');

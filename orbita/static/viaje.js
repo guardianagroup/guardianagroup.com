@@ -392,7 +392,7 @@
     const ms = r.nubes.map((n) => n.ms), lejos = r.nubes.slice().sort((a, b) => b.km - a.km)[0];
     h.querySelector('.fin .t').textContent = T('Así viajan tus datos');
     const parpadeo = r.nubes.filter((n) => n.ms <= 150).length;
-    h.querySelector('.fin .d').textContent = num(r.nubes.length) + ' ' + T('destinos medidos') + ' · ' + T('de') + ' ' + num(Math.min(...ms)) + ' ' + T('a') + ' ' + num(Math.max(...ms)) + ' ms · ' + T('el más lejano') + ': ' + T(lejos.nombre) + ', ' + num(Math.round(lejos.km)) + ' km' + (parpadeo ? ' · ' + T('en lo que dura un parpadeo (unos 150 ms) tus datos van y vuelven de') + ' ' + num(parpadeo) + ' ' + T('de ellos') : '');
+    h.querySelector('.fin .d').textContent = num(r.nubes.length) + ' ' + T('destinos medidos') + ' · ' + T('de X a Y ms').replace('X', num(Math.min(...ms))).replace('Y', num(Math.max(...ms))) + ' · ' + T('el más lejano') + ': ' + T(lejos.nombre) + ', ' + num(Math.round(lejos.km)) + ' km' + (parpadeo ? ' · ' + T('en lo que dura un parpadeo (unos 150 ms) tus datos van y vuelven de') + ' ' + num(parpadeo) + ' ' + T('de ellos') : '');
     h.querySelector('.fin').hidden = false;
   }
 
