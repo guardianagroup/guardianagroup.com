@@ -111,6 +111,11 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
      - bases, por nombre y a menos de 60 km;
      - cables submarinos, por nombre.
      Las guarda en `orbita/datos/fotos-candidatas.json`, que la web aún no usa.
+   - **Resultado de la primera búsqueda (14:30):** 59 candidatas: 18 bases, 19 centros de datos, 9 satélites y 13 cables. Hay que revisarlas una a una:
+     - **Bases:** buenas, por ejemplo McMurdo, Polo Sur y Rothera.
+     - **Centros de datos:** algunas fotos son la sede de la empresa, no el centro de datos.
+     - **Satélites:** algunas son ilustraciones; la de AZERSPACE 2 es una foto de una persona en una feria y no sirve. Hay que descartar toda foto con personas.
+     - **Cables:** son mapas de ruta, no fotos.
    - **Siguientes pasos:**
      1. revisar las candidatas;
      2. copiar las miniaturas elegidas a `orbita/static/fotos/`;
