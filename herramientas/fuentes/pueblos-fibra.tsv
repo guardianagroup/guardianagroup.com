@@ -94,19 +94,25 @@ lucala	AO	-9.27268	15.25206	19422	Lucala
 malanje	AO	-9.54015	16.34096	455000	Malanje
 ndalatando	AO	-9.29782	14.91162	161584	N'dalatando
 sumbe	AO	-11.20605	13.84371	205832	Sumbe
+azul	AR	-36.77803	-59.85848	64884	Azul
 bahiablanca	AR	-38.7176	-62.26545	299101	Bahía Blanca
 buenosaires	AR	-34.61315	-58.37723	2891082	Buenos Aires
 catamarca	AR	-28.46957	-65.78524	159139	Catamarca
+choelechoel	AR	-39.28941	-65.6606	13013	Choele Choel
+cipolletti	AR	-38.93392	-67.99032	95524	Cipolletti
 comodororivadavia	AR	-45.86256	-67.494	140850	Comodoro Rivadavia
 cordoba	AR	-31.40648	-64.18853	2106734	Córdoba
 esquel	AR	-42.91147	-71.31947	28486	Esquel
+generalroca	AR	-39.03333	-67.58333	73212	General Roca
 junin	AR	-34.59391	-60.94644	87509	Junín
 laplata	AR	-34.92126	-57.95442	195443	La Plata
 larioja	AR	-29.41328	-66.85637	178872	La Rioja
+lasflores	AR	-36.01427	-59.09986	25075	Las Flores
 mendoza	AR	-32.88946	-68.84582	114893	Mendoza
 mercedes	AR	-34.65072	-59.43143	63284	Mercedes
 neuquen	AR	-38.95078	-68.0592	231198	Neuquén
 puertomadryn	AR	-42.76848	-65.03827	64555	Puerto Madryn
+riocolorado	AR	-38.99081	-64.09574	16132	Río Colorado
 riocuarto	AR	-33.13044	-64.35272	157010	Río Cuarto
 riogallegos	AR	-51.6253	-69.25229	95796	Río Gallegos
 riogrande	AR	-53.78773	-67.70975	52681	Río Grande
@@ -117,12 +123,17 @@ sanantoniooeste	AR	-40.73193	-64.94769	16966	San Antonio Oeste
 sancarlosdebariloche	AR	-41.14557	-71.30822	95394	San Carlos de Bariloche
 sanjuan	AR	-31.53726	-68.52568	109123	San Juan
 sanluis	AR	-33.2914	-66.32467	169947	San Luis
+sanmartin	AR	-33.08338	-68.47312	82549	San Martín
 sanmigueldetucuman	AR	-26.81601	-65.21051	548866	San Miguel de Tucumán
+sannicolasdelosarroyos	AR	-33.33425	-60.2108	134217	San Nicolás de los Arroyos
 sansalvadordejujuy	AR	-24.1928	-65.29342	257970	San Salvador de Jujuy
 santafe	AR	-31.64881	-60.70868	391164	Santa Fe
 tolhuin	AR	-54.51083	-67.1955	3000	Tolhuin
 trelew	AR	-43.24895	-65.30505	97915	Trelew
 ushuaia	AR	-54.81084	-68.31591	56825	Ushuaia
+villamaria	AR	-32.40751	-63.24016	92453	Villa María
+villamercedes	AR	-33.67571	-65.45783	96781	Villa Mercedes
+zarate	AR	-34.09584	-59.02423	99061	Zárate
 innsbruck	AT	47.26266	11.39454	132493	Innsbruck
 linz	AT	48.30639	14.28611	204846	Linz
 salzburg	AT	47.79941	13.04399	157245	Salzburg
@@ -336,9 +347,11 @@ seria	BN	4.60637	114.32476	2659	Seria
 telisai	BN	4.73558	114.56324	13253	Telisai
 tutong	BN	4.80278	114.64917	19151	Tutong
 camiri	BO	-20.04063	-63.52396	27961	Camiri
+challapata	BO	-18.90208	-66.77048	8016	Challapata
 cochabamba	BO	-17.38195	-66.15995	841276	Cochabamba
 desaguadero	BO	-16.56834	-69.03415	8635	Desaguadero
 lapaz	BO	-16.5	-68.15	2004652	La Paz
+montero	BO	-17.33874	-63.25093	88616	Montero
 oruro	BO	-17.97153	-67.0932	208684	Oruro
 potosi	BO	-19.58361	-65.75306	141251	Potosí
 puertoquijarro	BO	-17.78333	-57.76667	10392	Puerto Quijarro
@@ -347,6 +360,7 @@ santacruzdelasierra	BO	-17.78629	-63.18117	1831434	Santa Cruz de la Sierra
 sucre	BO	-19.03332	-65.26274	224838	Sucre
 tarija	BO	-21.53549	-64.72956	159269	Tarija
 trinidad	BO	-14.83223	-64.90335	84259	Trinidad
+villamontes	BO	-21.26235	-63.46903	39800	Villamontes
 yacuiba	BO	-22.01643	-63.67753	82803	Yacuiba
 aracaju	BR	-10.91111	-37.07167	664908	Aracaju
 araraquara	BR	-21.79444	-48.17556	168468	Araraquara
@@ -361,7 +375,10 @@ camacari	BR	-12.6975	-38.32417	321636	Camaçari
 campinagrande	BR	-7.23056	-35.88111	443911	Campina Grande
 campinas	BR	-22.90556	-47.06083	1031554	Campinas
 canindedesaofrancisco	BR	-9.66	-37.78944	26834	Canindé de São Francisco
+catalao	BR	-18.16583	-47.94639	114427	Catalão
 caxiasdosul	BR	-29.16806	-51.17944	479599	Caxias do Sul
+criciuma	BR	-28.6775	-49.36972	227438	Criciúma
+cristalina	BR	-16.76769	-47.6153	60210	Cristalina
 cuiaba	BR	-15.59611	-56.09667	618124	Cuiabá
 curitiba	BR	-25.42778	-49.27306	1948626	Curitiba
 florianopolis	BR	-27.59667	-48.54917	508826	Florianópolis
@@ -377,16 +394,24 @@ maceio	BR	-9.66583	-35.73528	1031597	Maceió
 manaus	BR	-3.10194	-60.025	2219580	Manaus
 maraba	BR	-5.38146	-49.13232	283542	Marabá
 natal	BR	-5.795	-35.20944	896708	Natal
+osorio	BR	-29.88667	-50.26972	47396	Osório
 palmas	BR	-10.16745	-48.32766	306296	Palmas
 portoalegre	BR	-30.03283	-51.23019	1488252	Porto Alegre
 portovelho	BR	-8.76194	-63.90389	548952	Porto Velho
 posse	BR	-14.09306	-46.36944	37414	Posse
 recife	BR	-8.05389	-34.88111	1653461	Recife
+resende	BR	-22.46889	-44.44667	137697	Resende
+ribeiraopreto	BR	-21.1775	-47.81028	698642	Ribeirão Preto
 riodejaneiro	BR	-22.90642	-43.18223	6747815	Rio de Janeiro
 salvador	BR	-12.97563	-38.49096	2711840	Salvador
+saojosedoscampos	BR	-23.17944	-45.88694	727078	São José dos Campos
 saopaulo	BR	-23.5475	-46.63611	12400232	São Paulo
+taubate	BR	-23.02639	-45.55528	322397	Taubaté
 teresina	BR	-5.08917	-42.80194	871126	Teresina
+tubarao	BR	-28.46667	-49.00694	116725	Tubarão
 tucurui	BR	-3.76585	-49.67923	115144	Tucuruí
+uberaba	BR	-19.74833	-47.93194	356781	Uberaba
+uberlandia	BR	-18.91861	-48.27722	754954	Uberlândia
 vitoria	BR	-20.31944	-40.33778	312656	Vitória
 voltaredonda	BR	-22.52306	-44.10417	279971	Volta Redonda
 chhukha	BT	27.0989	89.53604	2855	Tsimasham
@@ -547,16 +572,22 @@ toumodi	CI	6.55799	-5.01769	55986	Toumodi
 yamoussoukro	CI	6.82055	-5.27674	275686	Yamoussoukro
 antofagasta	CL	-23.65094	-70.39752	401096	Antofagasta
 arica	CL	-18.47552	-70.30058	241653	Arica
+casablanca	CL	-33.31712	-71.40311	24537	Casablanca
 chillan	CL	-36.60664	-72.10344	150396	Chillán
 cochamo	CL	-41.49752	-72.30789	3908	Cochamó
 cochrane	CL	-47.2557	-72.5695	2867	Cochrane
 concepcion	CL	-36.82699	-73.04977	223574	Concepción
 copiapo	CL	-27.36737	-70.33219	129280	Copiapó
+coquimbo	CL	-29.95332	-71.33947	161317	Coquimbo
 coyhaique	CL	-45.57524	-72.06619	45787	Coyhaique
+curacavi	CL	-33.39762	-71.12708	18378	Curacaví
 curico	CL	-34.98279	-71.23943	102438	Curicó
 diegodealmagro	CL	-26.39022	-70.04556	13925	Diego de Almagro
 iquique	CL	-20.21326	-70.15027	199587	Iquique
 laserena	CL	-29.90591	-71.25014	154521	La Serena
+linares	CL	-35.84667	-71.59308	69535	Linares
+losangeles	CL	-37.46973	-72.35366	125430	Los Ángeles
+losvilos	CL	-31.91292	-71.50045	18275	Los Vilos
 osorno	CL	-40.57395	-73.13348	135773	Osorno
 puertomontt	CL	-41.4693	-72.94237	245902	Puerto Montt
 quillota	CL	-32.88341	-71.24882	67779	Quillota
@@ -621,28 +652,48 @@ yueyang	CN	29.37455	113.09481	991465	Yueyang
 zhengzhou	CN	34.75778	113.64861	6650532	Zhengzhou
 zhenjiang	CN	32.21086	119.45508	950516	Zhenjiang
 armenia	CO	4.53656	-75.67263	304314	Armenia
+barbosa	CO	6.43809	-75.33136	53943	Barbosa
 barranquilla	CO	10.96854	-74.78132	1206319	Barranquilla
 bogota	CO	4.60971	-74.08175	7674366	Bogotá
 bucaramanga	CO	7.125	-73.11895	581130	Bucaramanga
+buga	CO	3.901	-76.29826	114316	Guadalajara de Buga
+cajamarca	CO	4.44234	-75.42874	9309	Cajamarca
 cali	CO	3.43054	-76.5199	2392877	Cali
 cartagena	CO	10.39817	-75.49328	914552	Cartagena
+caucasia	CO	7.98654	-75.19349	58034	Caucasia
+chiquinquira	CO	5.61637	-73.81748	45294	Chiquinquirá
 cucuta	CO	7.90745	-72.5049	777106	Cúcuta
+fusagasuga	CO	4.33646	-74.36378	88820	Fusagasugá
+girardot	CO	4.30079	-74.80754	107324	Girardot City
 granada	CO	3.54625	-73.70687	68876	Granada
+guaduas	CO	5.06692	-74.59499	41838	Guaduas
+honda	CO	5.20856	-74.73584	28158	Honda
 ibague	CO	4.43573	-75.20289	529635	Ibagué
 ipiales	CO	0.82501	-77.63966	77729	Ipiales
 manizales	CO	5.0668	-75.50684	434403	Manizales
+marinilla	CO	6.17358	-75.33621	57403	Marinilla
 medellin	CO	6.245	-75.57151	1999979	Medellín
+melgar	CO	4.20475	-74.64075	25980	Melgar
 monteria	CO	8.75081	-75.87823	490935	Montería
 neiva	CO	2.93001	-75.27973	357392	Neiva
+palmira	CO	3.53479	-76.29774	312519	Palmira
+pamplona	CO	7.37565	-72.64795	53587	Pamplona
 pasto	CO	1.21456	-77.27846	392930	Pasto
 pereira	CO	4.81428	-75.69488	467269	Pereira
 popayan	CO	2.43823	-76.61316	318059	Popayán
+puertotriunfo	CO	5.87259	-74.6405	17231	Puerto Triunfo
 riohacha	CO	11.54444	-72.90722	188014	Riohacha
+sangil	CO	6.55952	-73.13637	46152	San Gil
 sanjosedelguaviare	CO	2.56799	-72.63972	52815	San José del Guaviare
 santamarta	CO	11.23855	-74.19427	499192	Santa Marta
 sincelejo	CO	9.3045	-75.3905	277773	Sincelejo
+socorro	CO	6.46838	-73.26022	29997	Socorro
 tunja	CO	5.54481	-73.35756	172548	Tunja
+ubate	CO	5.30933	-73.81575	20485	Villa de San Diego de Ubaté
 villavicencio	CO	4.13238	-73.62564	321717	Villavicencio
+villeta	CO	5.00886	-74.47226	20689	Villeta
+yarumal	CO	6.96321	-75.41738	22368	Yarumal
+zipaquira	CO	5.02208	-74.00481	130432	Zipaquirá
 alajuela	CR	10.01723	-84.21275	47494	Alajuela
 bagaces	CR	10.52541	-85.25537	4108	Bagaces
 buenosaires	CR	9.17298	-83.33277	11680	Buenos Aires
@@ -650,14 +701,19 @@ canas	CR	10.43105	-85.09825	20306	Cañas
 cartago	CR	9.86371	-83.9195	26594	Cartago
 esparza	CR	9.99197	-84.66628	15575	Esparza
 golfito	CR	8.60327	-83.11342	6777	Golfito
+guacimo	CR	10.2129	-83.68793	7022	Guácimo
+guapiles	CR	10.21682	-83.78483	19092	Guápiles
 heredia	CR	9.99872	-84.11587	21947	Heredia
 liberia	CR	10.63517	-85.43779	45380	Liberia
 limon	CR	9.99074	-83.03596	63081	Limón
+matina	CR	10.08363	-83.28431	2315	Matina
 parrita	CR	9.52166	-84.32289	3734	Parrita
 puntarenas	CR	9.97691	-84.8379	35650	Puntarenas
 quepos	CR	9.43063	-84.16231	7810	Quepos
 sanisidro	CR	9.3674	-83.69713	34877	San Isidro
+sanisidrodeelgeneral	CR	9.3674	-83.69713	34877	San Isidro
 sanjose	CR	9.93388	-84.08489	335007	San José
+sanramon	CR	10.08802	-84.47022	10765	San Ramón
 siquirres	CR	10.09748	-83.50659	18231	Siquirres
 turrialba	CR	9.90371	-83.68361	28955	Turrialba
 artemisa	CU	22.81366	-82.75814	68073	Artemisa
@@ -666,11 +722,16 @@ bayamo	CU	20.37368	-76.64272	192632	Bayamo
 camaguey	CU	21.38083	-77.91694	347562	Camagüey
 ciegodeavila	CU	21.8422	-78.76034	142027	Ciego de Ávila
 cienfuegos	CU	22.14681	-80.4481	186644	Cienfuegos
+colon	CU	22.72108	-80.90368	63882	Colón
+consolaciondelsur	CU	22.50545	-83.51309	69857	Consolación del Sur
+contramaestre	CU	20.29884	-76.24499	70438	Contramaestre
 guantanamo	CU	20.14444	-75.20917	272801	Guantánamo
 havana	CU	23.13302	-82.38304	2163824	Havana
 holguin	CU	20.88722	-76.26306	319102	Holguín
 lastunas	CU	20.96135	-76.95192	203684	Las Tunas
+lospalacios	CU	22.58756	-83.24757	25703	Los Palacios
 matanzas	CU	23.04388	-81.58284	146733	Matanzas
+palmasoriano	CU	20.21149	-75.99438	102826	Palma Soriano
 pinardelrio	CU	22.41649	-83.69657	186990	Pinar del Río
 placetas	CU	22.31377	-79.65384	55408	Placetas
 sancristobal	CU	22.71658	-83.05647	59579	San Cristobal
