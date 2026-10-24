@@ -139,11 +139,13 @@ porthedland	AU	-20.31215	118.61059	15298	Port Hedland
 sydney	AU	-33.86785	151.20732	5638830	Sydney
 aghstafa	AZ	41.11889	45.45389	12200	Aghstafa
 agstafa	AZ	41.11889	45.45389	12200	Aghstafa
+agsu	AZ	40.57028	48.40087	22300	Aghsu
 astara	AZ	38.45598	48.87498	15190	Astara
 baku	AZ	40.37767	49.89201	2351300	Baku
 balakan	AZ	41.72626	46.40478	14800	Belokany
 beylagan	AZ	39.77556	47.61861	15599	Beylagan
 ganja	AZ	40.68157	46.36134	330663	Ganja
+gazakh	AZ	41.09246	45.36561	20800	Gazakh
 gobustan	AZ	40.08238	49.41205	13398	Qobustan
 goranboy	AZ	40.61028	46.78972	9200	Goranboy
 goychay	AZ	40.65055	47.74219	42500	Göyçay
@@ -216,6 +218,7 @@ barisal	BD	22.70497	90.37013	202242	Barishal
 bhairabbazar	BD	24.0524	90.9764	105457	Bhairab Bāzār
 bheramara	BD	24.02452	88.99234	38159	Bherāmāra
 bogra	BD	24.85098	89.37108	210000	Bogra
+bogura	BD	24.85098	89.37108	210000	Bogra
 brahmanbaria	BD	23.97464	91.11228	264326	Brāhmanbāria
 chattogram	BD	22.3384	91.83168	3920222	Chattogram
 chittagong	BD	22.3384	91.83168	3920222	Chattogram
@@ -224,11 +227,15 @@ coxsbazar	BD	21.43973	92.00955	253788	Cox’s Bāzār
 dhaka	BD	23.7104	90.40744	10356500	Dhaka
 faridpur	BD	23.60612	89.84064	112187	Farīdpur
 feni	BD	23.0144	91.3966	84028	Feni
+gazipur	BD	23.99844	90.42234	2674697	Gazipur
 habiganj	BD	24.38044	91.41299	88760	Habiganj
+jashore	BD	23.16971	89.21371	243987	Jessore
 jessore	BD	23.16971	89.21371	243987	Jessore
+magura	BD	23.48702	89.41592	0	Magura
 manikganj	BD	23.85768	90.00957	71698	Mānikganj
 maulvibazar	BD	24.48888	91.77075	57441	Maulavi Bāzār
 mymensingh	BD	24.75636	90.40646	225126	Mymensingh
+narayanganj	BD	23.61352	90.50298	223622	Narayanganj
 narsingdi	BD	23.92298	90.71768	281080	Narsingdi
 panchagarh	BD	26.33338	88.55777	48531	Panchagarh
 patuakhali	BD	22.36833	90.3458	65000	Patuakhali
@@ -382,6 +389,7 @@ teresina	BR	-5.08917	-42.80194	871126	Teresina
 tucurui	BR	-3.76585	-49.67923	115144	Tucuruí
 vitoria	BR	-20.31944	-40.33778	312656	Vitória
 voltaredonda	BR	-22.52306	-44.10417	279971	Volta Redonda
+chhukha	BT	27.0989	89.53604	2855	Tsimasham
 chukha	BT	27.0989	89.53604	2855	Tsimasham
 gelephu	BT	26.86833	90.48778	9858	Geylegphug
 jakar	BT	27.54918	90.7525	6243	Jakar
@@ -2017,6 +2025,14 @@ mongo	TD	12.18514	18.6884	53768	Mongo
 moundou	TD	8.57437	16.07722	196124	Moundou
 ndjamena	TD	12.10672	15.0444	1359526	N'Djamena
 oumhadjer	TD	13.2954	19.6966	37941	Umm Hājar
+atakpame	TG	7.53333	1.13333	80683	Atakpamé
+dapaong	TG	10.86225	0.20762	58071	Dapaong
+kara	TG	9.55111	1.18611	104207	Kara
+lome	TG	6.12874	1.22154	2188376	Lomé
+mango	TG	10.35917	0.47083	37748	Mango
+notse	TG	6.95	1.16667	35039	Notsé
+sokode	TG	8.98333	1.13333	117811	Sokodé
+tsevie	TG	6.42611	1.21333	55775	Tsévié
 bangkok	TH	13.75398	100.50144	5104476	Bangkok
 chiangmai	TH	18.79038	98.98468	127240	Chiang Mai
 chiangrai	TH	19.90858	99.8325	78756	Chiang Rai
@@ -2125,6 +2141,7 @@ medenine	TN	33.35495	10.50548	71406	Medenine
 medjezelbab	TN	36.64964	9.61231	24100	Medjez el Bab
 metlaoui	TN	34.32081	8.40157	39021	Metlaoui
 monastir	TN	35.77799	10.82617	93306	Monastir
+msaken	TN	35.72917	10.58082	89745	Msaken
 nabeul	TN	36.45606	10.73763	70437	Nabeul
 nefta	TN	33.87309	7.87765	22745	Nefta
 sbeitla	TN	35.23151	9.12321	23764	Sbeitla
@@ -2189,13 +2206,18 @@ monastyryshche	UA	48.99494	29.80992	8647	Monastyryshche
 arua	UG	3.02013	30.91105	72400	Arua
 busia	UG	0.46588	34.09221	64900	Busia
 gulu	UG	2.77457	32.29899	177400	Gulu
+iganga	UG	0.60917	33.46861	65500	Iganga
 jinja	UG	0.43902	33.20317	93061	Jinja
 kabale	UG	-1.24857	29.98993	53200	Kabale
 kampala	UG	0.31628	32.58219	1680600	Kampala
 luwero	UG	0.84917	32.47306	49100	Luwero
+lyantonde	UG	-0.40306	31.15722	16300	Lyantonde
 masaka	UG	-0.33379	31.73409	116600	Masaka
 mbale	UG	1.08209	34.17503	111300	Mbale
 mbarara	UG	-0.60467	30.64851	221300	Mbarara
+mukono	UG	0.35333	32.75528	191300	Mukono
+ntungamo	UG	-0.87944	30.26417	20900	Ntungamo
+tororo	UG	0.69299	34.18085	48500	Tororo
 artigas	UY	-30.40431	-56.46926	43897	Artigas
 atlantida	UY	-34.7719	-55.7584	5562	Atlántida
 bellaunion	UY	-30.25966	-57.59919	12200	Bella Unión
@@ -2365,10 +2387,30 @@ pretoria	ZA	-25.74486	28.18783	2112693	Pretoria
 richmond	ZA	-29.87196	30.27235	32445	Richmond
 villiers	ZA	-27.03026	28.60061	20745	Villiers
 worcester	ZA	-33.64651	19.44852	127597	Worcester
+choma	ZM	-16.80889	26.9875	98974	Choma
+kabwe	ZM	-14.4469	28.44644	288598	Kabwe
+kafue	ZM	-15.76911	28.18136	104174	Kafue
+kalomo	ZM	-17.02581	26.48369	30781	Kalomo
+kapirimposhi	ZM	-13.97147	28.66985	83211	Kapiri Mposhi
+kitwe	ZM	-12.80243	28.21323	665961	Kitwe
+livingstone	ZM	-17.84194	25.85425	178361	Livingstone
+lusaka	ZM	-15.40669	28.28713	2212301	Lusaka
+mazabuka	ZM	-15.85601	27.748	104412	Mazabuka
+monze	ZM	-16.27149	27.47724	60281	Monze
+ndola	ZM	-12.95867	28.63659	627503	Ndola
 beitbridge	ZW	-22.21667	30.0	58574	Beitbridge
 bulawayo	ZW	-20.15	28.58333	665952	Bulawayo
+chegutu	ZW	-18.13021	30.14074	65800	Chegutu
+chivhu	ZW	-19.02112	30.89218	12958	Chivhu
+gweru	ZW	-19.45	29.81667	158200	Gweru
 harare	ZW	-17.82772	31.05337	1542813	Harare
+kadoma	ZW	-18.33328	29.91534	117381	Kadoma
+kwekwe	ZW	-18.92809	29.81486	119863	Kwekwe
+marondera	ZW	-18.18527	31.55193	66204	Marondera
 masvingo	ZW	-20.06373	30.82766	90286	Masvingo
 mutare	ZW	-18.9707	32.67086	224802	Mutare
+mvuma	ZW	-19.27924	30.52828	4331	Mvuma
+norton	ZW	-17.88333	30.7	87039	Norton
 plumtree	ZW	-20.48333	27.81667	14460	Plumtree
+rusape	ZW	-18.52785	32.12843	37906	Rusape
 victoriafalls	ZW	-17.93285	25.83066	35215	Victoria Falls
