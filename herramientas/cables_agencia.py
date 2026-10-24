@@ -6,7 +6,7 @@ llegadas en orden con coordenadas, año, km, dueños y fuentes públicas. Guarda
 confirme una fuente; validar coordenadas; trazado aproximado por mar y rotulado "trazado aproximado"».
 
 Input: every JSON in herramientas/cables-agencia/ (one file per answer; name says who answered: chatgpt-*, gemini-*,
-claude-*). Each is a list of {nombre, llegadas:[{lugar, pais, lat, lon}], anio, km, duenos:[], fuentes:[]}.
+claude-*, grok-*, astra-*). Each is a list of {nombre, llegadas:[{lugar, pais, lat, lon}], anio, km, duenos:[], fuentes:[]}.
 
 What is kept (nothing is invented):
   - a cable named by at least two different members of the agency (ChatGPT, Gemini, Claude), or by one member when
@@ -274,7 +274,7 @@ def simplifica(pts, tol):
 # ---------- the agency's answers ----------
 def quien(nombre_archivo):
     n = os.path.basename(nombre_archivo).lower()
-    for q in ('chatgpt', 'gemini', 'claude', 'grok'):
+    for q in ('chatgpt', 'gemini', 'claude', 'grok', 'astra'):  # astra: GPT-6 Astra (Cheaper Inference), a voice since 23 Oct 2026
         if n.startswith(q): return q
     return 'otro'
 
