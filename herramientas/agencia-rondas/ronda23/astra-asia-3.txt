@@ -1,0 +1,114 @@
+[
+  {
+    "nombre": "Baghdad–Basra",
+    "operador": "Iraqi Telecommunications and Post Company (ITPC)",
+    "pais": "IQ",
+    "ciudades": ["Baghdad", "Hillah", "Ad Diwaniyah", "As Samawah", "Nasiriyah", "Basra"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor meridional de la red nacional de fibra de ITPC; secuencia probable por los principales centros urbanos y corredores viarios del valle del Éufrates. No representa un trazado físico publicado."
+  },
+  {
+    "nombre": "Baghdad–Erbil",
+    "operador": "ITPC / Newroz Telecom",
+    "pais": "IQ",
+    "ciudades": ["Baghdad", "Baqubah", "Kirkuk", "Erbil"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión de las redes de fibra de ITPC y Newroz Telecom entre Baghdad y Kurdistán; itinerario probable por el corredor oriental hacia Kirkuk. No está publicada la secuencia completa de ciudades del cable."
+  },
+  {
+    "nombre": "Jerusalem–Tel Aviv–Haifa",
+    "operador": "Bezeq",
+    "pais": "IL",
+    "ciudades": ["Jerusalem", "Tel Aviv", "Netanya", "Hadera", "Haifa"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Bezeq; secuencia inferida a partir de los principales nodos metropolitanos y los corredores viarios Jerusalem–Tel Aviv y costero. No es un itinerario de cable publicado."
+  },
+  {
+    "nombre": "Tel Aviv–Eilat",
+    "operador": "Bezeq",
+    "pais": "IL",
+    "ciudades": ["Tel Aviv", "Beersheba", "Dimona", "Eilat"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor meridional de la red nacional de Bezeq; recorrido probable por Beersheba, Dimona y el corredor de la carretera 90 hacia Eilat. La canalización exacta no es pública."
+  },
+  {
+    "nombre": "Tokyo–Nagoya–Osaka",
+    "operador": "NTT DOCOMO BUSINESS, anteriormente NTT Communications",
+    "pais": "JP",
+    "ciudades": ["Tokyo", "Yokohama", "Shizuoka", "Hamamatsu", "Toyohashi", "Nagoya", "Kyoto", "Osaka"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal doméstica de NTT Communications, actualmente NTT DOCOMO BUSINESS; corredor terrestre de Tokaido entre las principales áreas metropolitanas. Las ciudades intermedias se infieren del corredor de transporte, no de un plano público de canalizaciones."
+  },
+  {
+    "nombre": "Osaka–Hiroshima–Shimonoseki",
+    "operador": "NTT DOCOMO BUSINESS, anteriormente NTT Communications",
+    "pais": "JP",
+    "ciudades": ["Osaka", "Kobe", "Himeji", "Okayama", "Fukuyama", "Hiroshima", "Iwakuni", "Shunan", "Shimonoseki"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal doméstica de NTT Communications, actualmente NTT DOCOMO BUSINESS; corredor terrestre de Sanyo en Honshu. Se termina en Shimonoseki para no incluir cruces marítimos hacia Kyushu; itinerario urbano inferido."
+  },
+  {
+    "nombre": "Tokyo–Sendai–Aomori",
+    "operador": "KDDI",
+    "pais": "JP",
+    "ciudades": ["Tokyo", "Utsunomiya", "Koriyama", "Fukushima", "Sendai", "Ichinoseki", "Morioka", "Aomori"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de KDDI en el corredor de Tohoku; secuencia probable siguiendo los principales ejes terrestres de transporte. No se incluyen los enlaces submarinos hacia Hokkaido."
+  },
+  {
+    "nombre": "Amman–Aqaba",
+    "operador": "Orange Jordan",
+    "pais": "JO",
+    "ciudades": ["Amman", "Al Qatranah", "Ma'an", "Aqaba"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor norte-sur de la red nacional de fibra de Orange Jordan; ciudades intermedias inferidas siguiendo la Desert Highway y el acceso terrestre a Aqaba. No es un trazado físico publicado."
+  },
+  {
+    "nombre": "Astana–Almaty",
+    "operador": "Kazakhtelecom",
+    "pais": "KZ",
+    "ciudades": ["Astana", "Karaganda", "Balkhash", "Almaty"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor central de la National Information Superhighway de Kazakhtelecom, descrita en sus informes corporativos; secuencia urbana probable siguiendo el eje viario Astana–Karaganda–Balkhash–Almaty."
+  },
+  {
+    "nombre": "Almaty–Shymkent–Aktobe",
+    "operador": "Kazakhtelecom",
+    "pais": "KZ",
+    "ciudades": ["Almaty", "Taraz", "Shymkent", "Turkestan", "Kyzylorda", "Aralsk", "Aktobe"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredores meridional y occidental de la National Information Superhighway de Kazakhtelecom; itinerario probable por los principales ejes ferroviarios y viarios. No implica que todas las ciudades figuren como nodos en un único circuito publicado."
+  },
+  {
+    "nombre": "Aktobe–Atyrau–Aktau",
+    "operador": "Kazakhtelecom",
+    "pais": "KZ",
+    "ciudades": ["Aktobe", "Kandyagash", "Atyrau", "Kulsary", "Beyneu", "Aktau"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal occidental de Kazakhtelecom; secuencia inferida de los corredores terrestres que conectan Aktobe, Atyrau y Mangystau. La posición exacta de la fibra y sus derivaciones urbanas no está publicada."
+  },
+  {
+    "nombre": "Kuwait City–Al Khafji",
+    "operador": "stc Kuwait / stc Saudi Arabia",
+    "pais": "KW",
+    "ciudades": ["Kuwait City", "Al Ahmadi", "Al Khafji"],
+    "estado": "en servicio",
+    "fuente": "aproximado: conectividad terrestre internacional del grupo stc entre Kuwait y Arabia Saudita; recorrido probable por el corredor meridional y el paso fronterizo de Nuwaiseeb. Al Khafji es la primera ciudad saudí incluida; no se dispone de un itinerario público completo del cable."
+  },
+  {
+    "nombre": "Bishkek–Osh",
+    "operador": "Kyrgyztelecom",
+    "pais": "KG",
+    "ciudades": ["Bishkek", "Kara-Balta", "Toktogul", "Tash-Kumyr", "Jalal-Abad", "Osh"],
+    "estado": "en servicio",
+    "fuente": "aproximado: enlace troncal de fibra norte-sur de Kyrgyztelecom; secuencia probable por el corredor de la carretera Bishkek–Osh y sus accesos a los principales centros urbanos. No se incluyen enlaces de respaldo por radio."
+  },
+  {
+    "nombre": "Bishkek–Karakol por la costa norte de Issyk-Kul",
+    "operador": "Kyrgyztelecom",
+    "pais": "KG",
+    "ciudades": ["Bishkek", "Tokmok", "Balykchy", "Cholpon-Ata", "Karakol"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal de Kyrgyztelecom hacia Issyk-Kul; recorrido probable por el valle de Chuy, el desfiladero de Boom y la carretera de la costa norte del lago. La secuencia corresponde al corredor terrestre, no a un plano publicado de empalmes."
+  }
+]
