@@ -1044,6 +1044,7 @@
       setTimeout(() => { boton.textContent = antes; }, 3000);
     } finally { boton.disabled = false; pdfInforme.ocupado = false; }
   }
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && V) termina(); });
+  // 24 Oct 2026 (QA): Esc with the report open closes only the report; the journey under it stays
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && V && !document.body.classList.contains('con-informe')) termina(); });
   window.OrbitaViaje = { empieza, informe, get activo() { return !!V; } };
 })();
