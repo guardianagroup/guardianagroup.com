@@ -5250,6 +5250,29 @@
 ]
 },
 {
+"n": "Red Troncal Nacional de Fibra Óptica de Yemen",
+"o": "Public Telecommunication Corporation (PTC) / TeleYemen",
+"cc": "YE",
+"l": [
+[
+44.21,
+15.35
+],
+[
+43.742,
+15.074
+],
+[
+43.29,
+15.06
+],
+[
+42.95,
+14.8
+]
+]
+},
+{
 "n": "South-East Submarine Cable Backhaul Backbone (Dhaka-Cox's Bazar)",
 "o": "BTCL",
 "cc": "BD",
@@ -5929,25 +5952,6 @@
 [
 50.1,
 26.43
-]
-]
-},
-{
-"n": "Red Troncal Nacional de Fibra Óptica de Yemen",
-"o": "Public Telecommunication Corporation (PTC) / TeleYemen",
-"cc": "YE",
-"l": [
-[
-44.21,
-15.35
-],
-[
-43.29,
-15.06
-],
-[
-42.95,
-14.8
 ]
 ]
 },
