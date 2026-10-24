@@ -503,18 +503,21 @@
   const radioCiudad = (n, z) => (2.5 + 1.25 * Math.sqrt(n)) * Math.min(1.5, Math.max(1, z * 0.75));
   // Polar bases and satellite ground stations (datos/puntos-extra.json, tipo «estacion»; owner, 22 Oct 2026: «polo
   // norte, polo sur, Antártida, todo»): a ring with a dot, and the name when there is room
+  // the bases' names can be touched like their ring (owner, 24 Oct 2026, 13:43: «que se puedan tocar ambos… también el nombre»)
+  let EST_CAJAS = [];
   function pintaEstaciones(cx, p, G) {
+    EST_CAJAS = [];
     if (!CLASES.puntos.estaciones) return;
     if (!EST || !EST.length) return;
     const z = G.R / (G.R0 || G.R), L = esLimpio();
     cx.lineWidth = 1.1; cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle';
     const ocupado = [];
-    for (const q of EST) {
-      const v = p.aVista(q.w); if (v[2] <= 0.05) continue;
+    for (let iq = 0; iq < EST.length; iq++) {
+      const q = EST[iq], v = p.aVista(q.w); if (v[2] <= 0.05) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
       cx.strokeStyle = `rgba(${BLANCO},${L ? 0.9 : 0.75})`; cx.beginPath(); cx.arc(x, y, 4.2, 0, 7); cx.stroke();
       cx.fillStyle = `rgba(${BLANCO},.95)`; cx.beginPath(); cx.arc(x, y, 1.4, 0, 7); cx.fill();
-      if (z >= 1.8 && q.n) { const txt = q.n.split(' (')[0].split(' / ')[0], w = 6.2 * txt.length; if (!ocupado.some((o) => Math.abs(x - o[0]) < (w + o[2]) / 2 + 12 && Math.abs(y - o[1]) < 13)) { ocupado.push([x + 8 + w / 2, y, w]); cx.fillStyle = `rgba(${BLANCO},.85)`; cx.fillText(txt, x + 8, y); } }
+      if (z >= 1.8 && q.n) { const txt = q.n.split(' (')[0].split(' / ')[0], w = 6.2 * txt.length; if (!ocupado.some((o) => Math.abs(x - o[0]) < (w + o[2]) / 2 + 12 && Math.abs(y - o[1]) < 13)) { ocupado.push([x + 8 + w / 2, y, w]); EST_CAJAS.push([x + 4, y - 8, w + 8, 16, iq]); cx.fillStyle = `rgba(${BLANCO},.85)`; cx.fillText(txt, x + 8, y); } }
     }
   }
   function pintaCiudades(cx, p, G) {
@@ -1348,6 +1351,7 @@
   let centroMarcado = -1, cableMarcado = -1, llegadaMarcada = -1, puntoMarcado = -1, pendiente = null;
   function buscaEstacion(x, y) {
     if (!(estado.puntos || estado.sub) || !EST || !CLASES.puntos.estaciones) return -1;
+    for (const b of EST_CAJAS) if (x >= b[0] && x <= b[0] + b[2] && y >= b[1] && y <= b[1] + b[3]) return b[4]; // its name
     const p = P(), G = p.geo; let mejor = -1, dm = 8 * 8;
     for (let i = 0; i < EST.length; i++) { const v = p.aVista(EST[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
     return mejor;
