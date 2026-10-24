@@ -1341,6 +1341,12 @@
     const lz = dato('lanzado'), base = BASES[dato('sitio')];
     if (lz) lin.push([T('Lanzado'), fechaTxt(Date.parse(lz + 'T12:00:00Z'), false) + (base ? ' · ' + base[0] + ' (' + paisNombre(base[1]) + ')' : '')]);
     lin.push([T('Catálogo'), 'NORAD ' + S.norad[i] + (dato('cospar') ? ' · COSPAR ' + dato('cospar') : '')]);
+    const foto = fotoDe('satelite', S.norad[i]);
+    if (clicActual) {
+      abreModelo(modelo(T('Satélite'), S.nom[i], lin, T('Datos verificados'), { foto, resumen: [T('Operador'), T('Para qué'), T('Altura'), T('Velocidad'), T('Ahora sobre')] }), x, y);
+      return;
+    }
+    fotoFicha(f, foto, S.nom[i]);
     f.querySelector('b').textContent = S.nom[i];
     const sp = f.querySelector('span'); sp.textContent = '';
     const dl = document.createElement('dl'); dl.className = 'sat-dl';
@@ -1378,6 +1384,7 @@
     if (X.nota) filas.push([T('Datos'), X.nota]);
     const base = X.clase === 'base';
     abreModelo(modelo(base ? T('Base antártica') : T('Estación terrena de satélites'), q.n || T('Estación'), filas, T('Datos verificados'), {
+      foto: fotoDe('estacion', q.n),
       resumen: [T('Tipo'), T('Operador'), T('Cómo se conecta'), T('Desde')],
       para: base ? T('Desde aquí no hay cable: todo lo que entra y sale va por satélite, con la capacidad y los retrasos que eso impone. Es el internet más caro y escaso del planeta.') : T('Por aquí bajan a tierra las imágenes y medidas de los satélites que luego ves en los mapas del tiempo, en la navegación y en las noticias.'),
       secciones: [{ t: T('Conexión y datos'), claves: [T('Cómo se conecta'), T('Por dónde salen los datos'), T('Antenas')], abierta: true }, { t: base ? T('La base') : T('La estación'), claves: [T('Desde'), T('Personal'), T('Datos')] }, { t: T('Enlaces locales'), claves: [T('Enlaces locales')] }, { t: T('Novedades'), claves: [T('Novedades')] }],
@@ -1593,7 +1600,7 @@
   function panel() {
     let p = $('ficha-panel'); if (p) return p;
     p = document.createElement('aside'); p.id = 'ficha-panel'; p.className = 'ficha-panel'; p.hidden = true; p.setAttribute('aria-label', T('Ficha'));
-    p.innerHTML = '<div class="asa" aria-hidden="true"></div><div class="cab"><span class="tipo"></span><span class="botones"><button type="button" class="atras" hidden>‹</button><button type="button" class="cerrar" aria-label="' + T('Cerrar') + '">×</button></span></div><h2 class="tit"></h2><p class="sub"></p><dl class="sat-dl resumen"></dl><div class="secs"></div><div class="acciones"><button type="button" class="copiar">' + T('Copiar ficha') + '</button><button type="button" class="pdf">' + T('Guardar PDF') + '</button></div><p class="pie"></p>';
+    p.innerHTML = '<div class="asa" aria-hidden="true"></div><div class="cab"><span class="tipo"></span><span class="botones"><button type="button" class="atras" hidden>‹</button><button type="button" class="cerrar" aria-label="' + T('Cerrar') + '">×</button></span></div><figure class="foto" hidden><img alt="" decoding="async"><figcaption></figcaption></figure><h2 class="tit"></h2><p class="sub"></p><dl class="sat-dl resumen"></dl><div class="secs"></div><div class="acciones"><button type="button" class="copiar">' + T('Copiar ficha') + '</button><button type="button" class="pdf">' + T('Guardar PDF') + '</button></div><p class="pie"></p>';
     document.body.append(p);
     p.querySelector('.cerrar').addEventListener('click', cierraPanel);
     p.querySelector('.asa').addEventListener('click', () => p.classList.toggle('alta'));
@@ -1669,6 +1676,7 @@
       if (filas.length) { const dl2 = document.createElement('dl'); dl2.className = 'sat-dl'; for (const [k, v] of filas) { const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k || ''; dd.textContent = v; if (!k) dd.className = 'ancho'; dl2.append(dt, dd); } d.append(dl2); }
       secs.append(d);
     });
+    pintaFoto(p.querySelector('.foto'), m.foto, m.titulo);
     p.querySelector('.pie').textContent = m.pie || ''; p.querySelector('.atras').hidden = historial.length < 2;
     p.hidden = false; p.scrollTop = 0; p.classList.remove('alta');
     // On a computer the full card opens where the pointer is, whole, never cut by the edges; if there is no room
@@ -1706,19 +1714,44 @@
     if (plan.para) secciones.push({ t: T('En la práctica'), /* 22 Oct 2026, 22:23 (owner): instead of «Qué significa para ti», more professional */ texto: plan.para, abierta: true });
     for (const sec of plan.secciones || []) { const fs = []; for (const k of sec.claves) for (const f of toma(k)) if (!quitar.has(f)) { fs.push(f); quitar.add(f); } if (fs.length || sec.texto) secciones.push({ t: sec.t, filas: fs, texto: sec.texto, abierta: !!sec.abierta }); }
     const resto = filas.filter((f) => f[1] && !quitar.has(f)); if (resto.length) secciones.push({ t: T('Más datos'), filas: resto });
-    return { tipo, titulo, sub: plan.sub || '', resumen, secciones, pie, color: plan.color || '' };
+    return { tipo, titulo, sub: plan.sub || '', resumen, secciones, pie, color: plan.color || '', foto: plan.foto || null };
+  }
+  // ---------- photos in the cards (owner, 24 Oct 2026: «cuando toquemos centro de datos… que aparezca una foto, si es que
+  // la hay… en los cables, en los satélites también»). Only real photos of that very element, reviewed one by one, with a
+  // free licence, copied to our own site (orbita/static/fotos): no visit asks a third party for anything. Each carries its
+  // author and licence, in the card and in terminos.html. No photo, no frame: the card stays as it was. ----------
+  let FOTOS = null, cargaFotos = null;
+  const pliegaF = (s) => String(s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const pideFotos = () => cargaFotos || (cargaFotos = cargaJSON('datos/fotos.json').then((d) => { FOTOS = d.fotos || {}; return FOTOS; }).catch(() => { FOTOS = {}; return FOTOS; }));
+  const fotoDe = (tipo, id) => (FOTOS && id != null ? FOTOS[tipo + '-' + pliegaF(id)] || null : null);
+  const creditoFoto = (fo) => T('Foto') + ': ' + (fo.autor || T('autor sin nombre')) + ' · ' + (fo.licencia || '') + ' · Wikimedia Commons';
+  function pintaFoto(fig, fo, titulo) {
+    if (!fig) return;
+    if (!fo) { fig.hidden = true; fig.querySelector('img').removeAttribute('src'); return; }
+    const im = fig.querySelector('img');
+    im.width = fo.ancho || 640; im.height = fo.alto || 360; im.alt = titulo || '';
+    im.src = 'static/fotos/' + fo.archivo;
+    fig.querySelector('figcaption').textContent = creditoFoto(fo);
+    fig.hidden = false;
+  }
+  function fotoFicha(f, fo, titulo) { // the summary card: a small strip on top
+    let fig = f.querySelector('figure.foto');
+    if (!fo) { if (fig) fig.hidden = true; return; }
+    if (!fig) { fig = document.createElement('figure'); fig.className = 'foto'; fig.innerHTML = '<img alt="" decoding="async"><figcaption></figcaption>'; f.prepend(fig); }
+    pintaFoto(fig, fo, titulo);
   }
   // hover → summary card; click → the whole panel
   function abreModelo(m, x, y) {
     if (clicActual) { abrePanel(m, x, y); return; }
     const pista = esTactil() ? T('Toca para la ficha completa') : T('Clic: ficha completa');
-    fichaRica(m.titulo + (m.sub ? ' · ' + m.sub : ''), m.resumen, (m.pie ? m.pie + ' · ' : '') + pista, x, y, m.color);
+    fichaRica(m.titulo + (m.sub ? ' · ' + m.sub : ''), m.resumen, (m.pie ? m.pie + ' · ' : '') + pista, x, y, m.color, m.foto);
   }
   // a card with labels and values in two columns (satellites, data centres)
   // the colour of a cable beside its name, as in the legend of its layer (23 Oct 2026)
   function muestraEn(el, rgb) { if (!el || !rgb) return; const s = document.createElement('s'); s.className = 'muestra'; s.setAttribute('aria-hidden', 'true'); s.style.setProperty('--c', rgb); el.prepend(s); }
-  function fichaRica(titulo, filas, pie, x, y, color) {
+  function fichaRica(titulo, filas, pie, x, y, color, foto) {
     const f = ficha(); if (!f) return;
+    fotoFicha(f, foto, titulo);
     f.querySelector('b').textContent = titulo; muestraEn(f.querySelector('b'), color);
     const sp = f.querySelector('span'); sp.textContent = '';
     const dl = document.createElement('dl'); dl.className = 'sat-dl';
@@ -1780,6 +1813,7 @@
     const fuentes = T('Datos verificados');
     const nube = q.o && /amazon|aws|google|microsoft|azure|meta|facebook|apple|oracle|alibaba|cloudflare|ovh|equinix|digital realty|telefónica|telefonica|orange|vodafone|claro|movistar/i.test(q.o);
     abreModelo(modelo(T('Centro de datos'), titulo, filas.length ? filas : [[T('Datos'), T('Sin más datos públicos sobre este edificio')]], fuentes, {
+      foto: fotoDe('centro', X.w),
       resumen: [T('Operador'), T('Dónde'), T('En servicio desde'), T('Desde el mar')],
       para: T('Aquí viven servicios de internet: cada vez que abres una web o guardas algo «en la nube», tus datos pasan por sitios como este.') + (nube ? ' ' + T('Si usas servicios de') + ' ' + q.o + ', ' + T('parte de tus datos puede estar guardada en edificios así.') : ''),
       secciones: [{ t: T('Cómo llega internet aquí'), claves: [T('Desde el mar'), T('Cables que llegan ahí'), T('Por tierra'), T('Intercambio de internet')], abierta: true }, { t: T('El edificio'), claves: [T('Operador'), T('Del mismo operador'), T('Dueño'), T('En servicio desde'), T('Superficie'), T('Potencia'), T('Plantas'), T('Altura del edificio'), 'Tier', 'PUE', T('Conexión'), T('Dónde'), T('Web')] }, { t: T('Notas'), claves: [T('Datos'), T('Nota')] }],
@@ -1918,7 +1952,7 @@
     if (q >= 0) { if (marcado >= 0) { marcado = -1; } cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; if (q !== puntoMarcado || clic) { puntoMarcado = q; fichaLugar('punto', q, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
     puntoMarcado = -1;
     const i = estado.sat ? busca(x, y) : -1;
-    if (i >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = -1; muestra(i, x, y); return; }
+    if (i >= 0) { centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = -1; muestra(i, x, y); if (clic) fichaFija = true; return; }
     if (marcado >= 0) muestra(-1);
     const g = buscaLlegada(x, y);
     if (g >= 0) { cableMarcado = centroMarcado = -1; if (g !== llegadaMarcada || clic) { llegadaMarcada = g; fichaLugar('llegada', g, x, y); } else colocaFicha(x, y); return; }
@@ -2213,6 +2247,7 @@
   }
 
   async function arranca() {
+    pideFotos(); // small (a few dozen entries): ready before the first card opens
     // the land layer only appears when there is land data to show
     // (asked to the small index, so the page never requests a file that is not there)
     let ind = null; try { const r = await fetch('datos/indice.json', { cache: 'no-cache' }); if (r.ok) ind = await r.json(); } catch (_) {}
