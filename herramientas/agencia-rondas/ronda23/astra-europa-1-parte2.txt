@@ -1,0 +1,122 @@
+[
+  {
+    "nombre": "Troncal occidental Minsk–Brest",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": ["Minsk", "Baranavichy", "Ivatsevichy", "Kobryn", "Brest"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Beltelecom (beltelecom.by); secuencia urbana inferida del corredor M1 hacia Brest. No representa un trazado de cable publicado ciudad por ciudad."
+  },
+  {
+    "nombre": "Troncal nororiental Minsk–Orsha–Vitebsk",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": ["Minsk", "Barysaw", "Orsha", "Vitebsk"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Beltelecom (beltelecom.by); recorrido probable por los corredores M1 y M8, enlazando los nodos regionales indicados."
+  },
+  {
+    "nombre": "Troncal sudoriental Minsk–Gomel",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": ["Minsk", "Babruysk", "Zhlobin", "Gomel"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Beltelecom (beltelecom.by); secuencia urbana inferida del corredor M5. La alineación exacta de la fibra no está confirmada."
+  },
+  {
+    "nombre": "Troncal occidental Brussels–Ostend",
+    "operador": "Proximus",
+    "pais": "BE",
+    "ciudades": ["Brussels", "Ghent", "Bruges", "Ostend"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte óptico de Proximus (proximus.com); recorrido probable por el corredor E40 entre Brussels y la costa."
+  },
+  {
+    "nombre": "Troncal oriental Brussels–Verviers",
+    "operador": "Proximus",
+    "pais": "BE",
+    "ciudades": ["Brussels", "Leuven", "Liege", "Verviers"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte óptico de Proximus (proximus.com); secuencia urbana inferida de los corredores E40 y E42. No es una alineación de cable publicada."
+  },
+  {
+    "nombre": "Troncal norte–sureste Antwerp–Arlon",
+    "operador": "Proximus",
+    "pais": "BE",
+    "ciudades": ["Antwerp", "Mechelen", "Brussels", "Wavre", "Namur", "Arlon"],
+    "estado": "en servicio",
+    "fuente": "aproximado: concatenación probable de tramos de la red troncal de Proximus (proximus.com), siguiendo los corredores E19 y E411; no implica un único cable continuo."
+  },
+  {
+    "nombre": "Troncal Sarajevo–Tuzla",
+    "operador": "BH Telecom",
+    "pais": "BA",
+    "ciudades": ["Sarajevo", "Olovo", "Kladanj", "Živinice", "Tuzla"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red interurbana de fibra de BH Telecom (bhtelecom.ba); itinerario probable por el corredor M18. Las ciudades intermedias se infieren del corredor, no de un plano público del cable."
+  },
+  {
+    "nombre": "Troncal Sarajevo–Mostar",
+    "operador": "BH Telecom",
+    "pais": "BA",
+    "ciudades": ["Sarajevo", "Konjic", "Jablanica", "Mostar"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red interurbana de fibra de BH Telecom (bhtelecom.ba); recorrido por el corredor Sarajevo–Mostar, asociado a la M17 y al ferrocarril del valle del Neretva. No se especifica la alineación física exacta."
+  },
+  {
+    "nombre": "Troncal septentrional Banja Luka–Bijeljina",
+    "operador": "m:tel",
+    "pais": "BA",
+    "ciudades": ["Banja Luka", "Prnjavor", "Derventa", "Modriča", "Brčko", "Bijeljina"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal óptica de m:tel (mtel.ba); secuencia probable por los corredores viarios del norte de Bosnia y Herzegovina. No corresponde a una ruta de cable publicada ciudad por ciudad."
+  },
+  {
+    "nombre": "Troncal meridional Sofia–Burgas",
+    "operador": "Vivacom",
+    "pais": "BG",
+    "ciudades": ["Sofia", "Pazardzhik", "Plovdiv", "Stara Zagora", "Sliven", "Burgas"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Vivacom (vivacom.bg); recorrido probable por el eje de la autopista A1 y sus accesos a los principales nodos urbanos."
+  },
+  {
+    "nombre": "Troncal septentrional Sofia–Varna",
+    "operador": "Vivacom",
+    "pais": "BG",
+    "ciudades": ["Sofia", "Botevgrad", "Veliko Tarnovo", "Targovishte", "Shumen", "Varna"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Vivacom (vivacom.bg); secuencia inferida de los corredores A2, I-4 e I-2. La continuidad óptica no depende de que toda la autopista A2 esté terminada."
+  },
+  {
+    "nombre": "Troncal suroccidental Sofia–Sandanski",
+    "operador": "Vivacom",
+    "pais": "BG",
+    "ciudades": ["Sofia", "Pernik", "Dupnitsa", "Blagoevgrad", "Sandanski"],
+    "estado": "en servicio",
+    "fuente": "aproximado: tramo nacional del corredor óptico de Vivacom hacia el suroeste (vivacom.bg); itinerario probable por el eje E79/A3. Se representa únicamente el tramo hasta Sandanski."
+  },
+  {
+    "nombre": "Troncal dálmata Zagreb–Split",
+    "operador": "Hrvatski Telekom",
+    "pais": "HR",
+    "ciudades": ["Zagreb", "Karlovac", "Gospić", "Zadar", "Šibenik", "Split"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal óptica nacional de Hrvatski Telekom (t.ht.hr); secuencia probable por el corredor A1 y las conexiones a los nodos urbanos de Lika y Dalmacia."
+  },
+  {
+    "nombre": "Troncal de Eslavonia Zagreb–Osijek",
+    "operador": "Hrvatski Telekom",
+    "pais": "HR",
+    "ciudades": ["Zagreb", "Kutina", "Novska", "Nova Gradiška", "Slavonski Brod", "Đakovo", "Osijek"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal óptica nacional de Hrvatski Telekom (t.ht.hr); itinerario inferido de los corredores A3 y A5, con entrada a los nodos urbanos indicados."
+  },
+  {
+    "nombre": "Troncal de Kvarner e Istria Zagreb–Pula",
+    "operador": "Hrvatski Telekom",
+    "pais": "HR",
+    "ciudades": ["Zagreb", "Karlovac", "Delnice", "Rijeka", "Pazin", "Pula"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal óptica nacional de Hrvatski Telekom (t.ht.hr); recorrido probable por los corredores A1/A6 y A8/A9. No se dispone de una alineación pública del cable ciudad por ciudad."
+  }
+]

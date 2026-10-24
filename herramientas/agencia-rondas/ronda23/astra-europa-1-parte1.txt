@@ -1,0 +1,64 @@
+[
+  {
+    "nombre": "Tirana–Durres–Vlore",
+    "operador": "ONE Albania, antigua red de ALBtelecom",
+    "pais": "AL",
+    "ciudades": ["Tirana", "Durres", "Kavaje", "Rrogozhine", "Lushnje", "Fier", "Vlore"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de ALBtelecom, integrada en ONE Albania (one.al); secuencia probable por los corredores SH2, SH4 y SH8, no trazado urbano publicado."
+  },
+  {
+    "nombre": "Tirana–Shkoder–Montenegro",
+    "operador": "ONE Albania, antigua red de ALBtelecom; tramo albanés",
+    "pais": "AL",
+    "ciudades": ["Tirana", "Fushe-Kruje", "Lezhe", "Shkoder", "Koplik", "Tuzi"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal e interconexión terrestre de ALBtelecom con Montenegro, actualmente ONE Albania (one.al); corredor probable SH1 por Hani i Hotit. Tuzi es la primera ciudad incluida en Montenegro."
+  },
+  {
+    "nombre": "Tirana–Elbasan–Macedonia del Norte",
+    "operador": "ONE Albania, antigua red de ALBtelecom; tramo albanés",
+    "pais": "AL",
+    "ciudades": ["Tirana", "Elbasan", "Librazhd", "Prrenjas", "Struga"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal e interconexión terrestre de ALBtelecom con Macedonia del Norte, actualmente ONE Albania (one.al); secuencia probable por SH3 y Qafe Thane. Struga es la primera ciudad incluida en el país vecino."
+  },
+  {
+    "nombre": "Corredor occidental Vienna–Salzburg",
+    "operador": "ÖBB-Infrastruktur AG",
+    "pais": "AT",
+    "ciudades": ["Vienna", "Sankt Poelten", "Amstetten", "Linz", "Wels", "Salzburg"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra óptica ferroviaria en explotación de ÖBB-Infrastruktur (infrastruktur.oebb.at, servicios de telecomunicaciones); secuencia inferida del corredor Westbahn, no de un plano de cables por ciudad."
+  },
+  {
+    "nombre": "Corredor meridional Vienna–Graz",
+    "operador": "ÖBB-Infrastruktur AG",
+    "pais": "AT",
+    "ciudades": ["Vienna", "Wiener Neustadt", "Muerzzuschlag", "Bruck an der Mur", "Graz"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra óptica ferroviaria de ÖBB-Infrastruktur (infrastruktur.oebb.at); corredor Südbahn por la línea histórica de Semmering, sin incorporar el nuevo túnel en construcción."
+  },
+  {
+    "nombre": "Corredor de Arlberg Innsbruck–Bregenz",
+    "operador": "ÖBB-Infrastruktur AG",
+    "pais": "AT",
+    "ciudades": ["Innsbruck", "Landeck", "Bludenz", "Feldkirch", "Dornbirn", "Bregenz"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra óptica ferroviaria de ÖBB-Infrastruktur (infrastruktur.oebb.at); secuencia inferida de las líneas Arlbergbahn y Vorarlbergbahn."
+  },
+  {
+    "nombre": "Minsk–Brest",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": ["Minsk", "Baranavichy", "Ivatsevichy", "Kobryn", "Brest"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de Beltelecom (beltelecom.by); principales ciudades del corredor occidental, con trazado probable próximo a la M1/E30 y al ferrocarril Minsk–Brest."
+  },
+  {
+    "nombre": "Minsk–Orsha–Vitebsk",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": ["Minsk", "Barysaw", "Orsha", "Vitebsk"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de Beltelecom (beltelecom.by); secuencia probable por el corredor M1 hasta
