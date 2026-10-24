@@ -45,3 +45,28 @@ PS  NO CONFIRMADO. Nada oficial con rutas (Paltel solo informes de sostenibilida
 QA  NO CONFIRMADO. Solo prensa sobre Ooredoo (inversión en rutas internacionales), sin troncal nacional con rutas.
 RW  NO CONFIRMADO. Informe WSIS+10 de Rwanda en la UIT (2.500–5.003 km, 30 distritos y 11 pasos fronterizos, sin nombres; el mapa de BSC es una imagen);
     itu.int/hub 2020 (sin rutas); za.liquid.tech (14 jun 2024: fibra de Liquid en Kigali, Rubavu, Musanze, Nyamata, Huye, Muhanga, Rusizi, sin trazado).
+
+== Grupo 4 → fibra-agencia/claude-troncales-4.json ==
+SS  2 rutas. za.liquid.tech/the-first-to-bring-fibre-to-south-sudan/ (200 km frontera de Uganda–Nimule–Juba, primera fase enero 2020);
+    Banco Mundial, South Sudan Digital Economy Assessment 2023 (P17636100…pdf): rutas operativas de Liquid y de Muya Fiber por el mismo corredor.
+SV  1 ruta. eprsiepac.com/linea-siepac/ (Ahuachapán–Nejapa, 29-feb-2012). El estudio JICA de 2006 sobre la red de Telemóvil no se pudo leer
+    (el capítulo 3 con el mapa no está en el texto del PDF).
+SY  NO CONFIRMADO. Solo prensa (Enab Baladi, SilkLink anunciado); nada oficial con rutas.
+TD  3 rutas. Banco Mundial, Chad Digital Economy Diagnostic (thedocs.worldbank.org/…/Chad-country-diagnostic.pdf), tabla 6 y figura 7:
+    dorsal sur N'Djamena–Guelendeng–Bongor–Kelo–Moundou–M'Baikoro–Kagpal (610 km, uso nacional), ramal M'Baikoro–Doba (76 km),
+    N'Djamena–Adré (Sudachad, 1.142 km, 2019). (Daboua–N'Djamena y Doba–Sarh–Abéché solo previstos: excluidos.)
+TL  NO CONFIRMADO. en.tatoli.tl (20 nov 2023): pasarela de SACOM TL en Batugade lanzada, sin ruta ni estado de servicio.
+TW  2 rutas. twaren.net/NetworkInfra/Intro/index.php (TWAREN/NCHC: 4 nodos troncales unidos por fibra propia; Yilan y Hualien cierran el anillo
+    con Taipei y Tainan); glif.is 2009 (NCHC, mismos nodos).
+UY  1 ruta. ute.com.uy Memoria Anual 2021 p. 33 (fibra en líneas de 150 kV Bonete–Young–Paysandú–Salto terminada).
+    El Tomo 2022 de UTE (Tacuarembó–Rivera) no se pudo leer (error del servidor); ANTEL solo en prensa.
+XK  NO CONFIRMADO. energy-community.org PLIMA EL06: interconexión de 400 kV de KOSTT con Albania solo prevista (2030), sin OPGW mencionado.
+YE  NO CONFIRMADO. Banco Mundial P179887 (2023): PTC tiene un «extensive fiber backbone» hasta las fronteras de Omán y Arabia Saudí, sin rutas.
+
+== Países opcionales (sin archivo: ninguna ruta confirmada) ==
+SR  NO CONFIRMADO. telesur.sr/zakelijk/oil-gas/: red de fibra «expansive» y FTTH nacional, sin rutas; solo el cable submarino SG-SCS.
+PR  NO CONFIRMADO. Solo prensa (newsismybusiness, dplnews) sobre PREPA Networks/PrepaNet; un EA de la NTIA (INTECO, 2010) es un proyecto, no una ruta en servicio.
+GW  NO CONFIRMADO. La troncal nacional de fibra está en licitación (diseño y construcción), no en servicio.
+SZ  NO CONFIRMADO. Solo planes de despliegue (Ecofin, TCS+), sin fuente oficial con rutas.
+ER, TT, CV, MU, MT, BS  No investigados a fondo: islas o países muy pequeños sin rutas terrestres de más de ~100 km
+    documentadas, o sin fuentes oficiales accesibles (EriTel).

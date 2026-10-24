@@ -1,0 +1,116 @@
+[
+  {
+    "nombre": "Backbone de fibra Juba–Nimule–frontera de Uganda",
+    "operador": "Liquid",
+    "pais": "SS",
+    "ciudades": [
+      "Juba",
+      "Nimule"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://za.liquid.tech/the-first-to-bring-fibre-to-south-sudan/ — Liquid: «200km fibre backbone» que conecta la frontera de Uganda, por Nimule, con Juba; primera fase terminada en enero de 2020. https://documents1.worldbank.org/curated/en/099062323175598193/pdf/P17636100e4ab00f3097160e63e7bf53f6a.pdf — Banco Mundial, South Sudan Digital Economy Assessment (2023): ruta de fibra de Liquid de ~200 km hasta Juba por la carretera de Uganda, operativa."
+  },
+  {
+    "nombre": "Ruta de fibra Juba–Nimule (corredor de la carretera de Uganda)",
+    "operador": "Muya Fibre",
+    "pais": "SS",
+    "ciudades": [
+      "Juba",
+      "Nimule"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://documents1.worldbank.org/curated/en/099062323175598193/pdf/P17636100e4ab00f3097160e63e7bf53f6a.pdf — Banco Mundial, South Sudan Digital Economy Assessment (2023): «Muya Fiber Construction also operates a fiber route along the same route as Liquid» (la ruta Juba–frontera de Uganda que pasa por Nimule según Liquid); tabla 6: 300 km de rutas de fibra operativas en el país."
+  },
+  {
+    "nombre": "SIEPAC (OPGW de 36 fibras) – tramo El Salvador Ahuachapán–Nejapa",
+    "operador": "EPR / REDCA",
+    "pais": "SV",
+    "ciudades": [
+      "Ahuachapan",
+      "Nejapa"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://eprsiepac.com/linea-siepac/ — Empresa Propietaria de la Red (EPR), tabla de la Línea SIEPAC (cable de guarda OPGW con 36 hilos de fibra óptica): tramo Ahuachapán–Nejapa (89,91 km, 29-feb-2012); la línea sigue Nejapa–15 de Septiembre (85,59 km) y 15 de Septiembre–frontera de Honduras (93,18 km), y llega desde Guatemala por frontera–Ahuachapán (18,97 km)."
+  },
+  {
+    "nombre": "Dorsal Sur (Southern Backbone) N'Djamena–Kagpal",
+    "operador": "Sotel Tchad",
+    "pais": "TD",
+    "ciudades": [
+      "N'Djamena",
+      "Guelendeng",
+      "Bongor",
+      "Kelo",
+      "Moundou",
+      "M'Baikoro",
+      "Kagpal"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf — Banco Mundial, Chad Digital Economy Diagnostic, tabla 6 «Key National Fiber Optic Infrastructures» y figura 7: Southern Backbone N'Djamena–Guelendeng (162 km)–Bongor (79)–Kelo (129)–Moundou (105)–M'Baikoro (20)–Kagpal (39), tramo de 610 km; en servicio desde 2011 y hoy usado solo para transmisión nacional («only used for domestic transmission»)."
+  },
+  {
+    "nombre": "Dorsal Sur – ramal M'Baikoro–Doba",
+    "operador": "Sotel Tchad",
+    "pais": "TD",
+    "ciudades": [
+      "N'Djamena",
+      "Guelendeng",
+      "Bongor",
+      "Kelo",
+      "Moundou",
+      "M'Baikoro",
+      "Doba"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf — Banco Mundial, Chad Digital Economy Diagnostic, tabla 6 «Key National Fiber Optic Infrastructures» y figura 7: la Southern Backbone N'Djamena–…–Moundou–M'Baikoro tiene un ramal («slip road») M'Baikoro–Doba de 76 km; en servicio para transmisión nacional."
+  },
+  {
+    "nombre": "Fibra N'Djamena–Adré (frontera de Sudán)",
+    "operador": "Sudachad",
+    "pais": "TD",
+    "ciudades": [
+      "N'Djamena",
+      "Adre"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf — Banco Mundial, Chad Digital Economy Diagnostic, tabla 6 «Key National Fiber Optic Infrastructures» y figura 7: N'Djamena–Adré (Sudán), 1.142 km, operador Sudachad, en servicio desde 2019. La fuente solo da los extremos."
+  },
+  {
+    "nombre": "TWAREN – fibra propia entre los nodos troncales Taipei–Hsinchu–Taichung–Tainan",
+    "operador": "TWAREN (NCHC)",
+    "pais": "TW",
+    "ciudades": [
+      "Taipei",
+      "Hsinchu",
+      "Taichung",
+      "Tainan"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.twaren.net/NetworkInfra/Intro/index.php — TWAREN (NCHC): cuatro nodos troncales principales (Taipei, Hsinchu, Taichung y Tainan) unidos por «國網中心自建骨幹光纖» (fibra troncal construida por el propio NCHC), 1,6 Tbps entre nodos. https://www.glif.is/meetings/2009/plenary/liu-nchc-research.pdf — NCHC: los mismos cuatro nodos troncales. La fuente no da el orden: es el de la costa oeste."
+  },
+  {
+    "nombre": "TWAREN – anillo de la isla por Yilan y Hualien",
+    "operador": "TWAREN (NCHC)",
+    "pais": "TW",
+    "ciudades": [
+      "Taipei",
+      "Yilan",
+      "Hualien",
+      "Tainan"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.twaren.net/NetworkInfra/Intro/index.php — TWAREN (NCHC): los centros regionales de Yilan y Hualien se conectan a los nodos troncales de Taipei y Tainan y cierran un «環島網路» (red alrededor de la isla)."
+  },
+  {
+    "nombre": "Fibra óptica UTE en líneas de 150 kV Bonete–Young–Paysandú–Salto",
+    "operador": "UTE",
+    "pais": "UY",
+    "ciudades": [
+      "Young",
+      "Paysandu",
+      "Salto"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.ute.com.uy/sites/default/files/memorias/Memoria%20anual%202021.pdf — UTE, Memoria Anual 2021, p. 33, «Tendido de fibras ópticas en líneas aéreas de Trasmisión»: realizado el tendido de cable de fibra óptica en las líneas de 150 kV Bonete–Bonete B, Bonete B–Young, Young–Paysandú y Paysandú–Salto (Tacuarembó–Rivera seguía en ejecución)."
+  }
+]
