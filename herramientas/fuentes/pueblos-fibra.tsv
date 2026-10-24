@@ -488,6 +488,32 @@ independence	BZ	16.5344	-88.41878	4878	Independence and Mango Creek
 orangewalk	BZ	18.08124	-88.56328	15298	Orange Walk
 puntagorda	BZ	16.09835	-88.8097	5406	Punta Gorda
 sanignacio	BZ	17.1588	-89.0696	21229	San Ignacio
+banff	CA	51.17622	-115.56982	8305	Banff
+brandon	CA	49.84692	-99.95306	48859	Brandon
+calgary	CA	51.05011	-114.08529	1306784	Calgary
+edmonton	CA	53.55014	-113.46871	1010899	Edmonton
+golden	CA	51.29995	-116.9689	4038	Golden
+hope	CA	49.38299	-121.44144	6686	Hope
+kamloops	CA	50.66648	-120.3192	104460	Kamloops
+kenora	CA	49.76741	-94.48985	15096	Kenora
+kingston	CA	44.22976	-76.48098	132485	Kingston
+london	CA	42.98339	-81.23304	422324	London
+medicinehat	CA	50.03928	-110.67661	63138	Medicine Hat
+merritt	CA	50.11225	-120.7942	7139	Merritt
+montreal	CA	45.50884	-73.58781	1762949	Montréal
+moosejaw	CA	50.40005	-105.53445	33890	Moose Jaw
+ottawa	CA	45.41117	-75.69812	1017449	Ottawa
+quebec	CA	46.81228	-71.21454	531902	Québec
+reddeer	CA	52.26682	-113.802	100844	Red Deer
+regina	CA	50.45008	-104.6178	226404	Regina
+revelstoke	CA	50.99712	-118.1953	7547	Revelstoke
+sudbury	CA	46.49	-80.99001	166004	Greater Sudbury
+swiftcurrent	CA	50.28337	-107.80135	16604	Swift Current
+thunderbay	CA	48.38202	-89.25018	108843	Thunder Bay
+toronto	CA	43.70643	-79.39864	2794356	Toronto
+vancouver	CA	49.24966	-123.11934	662248	Vancouver
+windsor	CA	42.30008	-83.01654	229660	Windsor
+winnipeg	CA	49.8844	-97.14704	749607	Winnipeg
 boma	CD	-5.85098	13.05364	297009	Boma
 kasangulu	CD	-4.5833	15.16554	45400	Kasangulu
 kimpese	CD	-5.5615	14.43159	79539	Kimpese
@@ -1031,9 +1057,11 @@ mansoa	GW	12.07333	-15.31889	9422	Mansôa
 safim	GW	11.95	-15.65	3193	Safim
 saodomingos	GW	12.40194	-16.20056	6004	São Domingos
 corriverton	GY	5.933	-57.14939	11488	Corriverton
+fortwellington	GY	6.39185	-57.59628	118	Fort Wellington
 georgetown	GY	6.80448	-58.15527	235017	Georgetown
 linden	GY	6.00815	-58.30724	44690	Linden
 mahaica	GY	6.6817	-57.92181	4867	Mahaica Village
+mahaicony	GY	6.57212	-57.80624	2130	Mahaicony Village
 newamsterdam	GY	6.24924	-57.51578	35039	New Amsterdam
 parika	GY	6.83712	-58.42941	4081	Parika
 rosehall	GY	6.25577	-57.35502	8000	Rose Hall
@@ -2513,6 +2541,33 @@ mbarara	UG	-0.60467	30.64851	221300	Mbarara
 mukono	UG	0.35333	32.75528	191300	Mukono
 ntungamo	UG	-0.87944	30.26417	20900	Ntungamo
 tororo	UG	0.69299	34.18085	48500	Tororo
+atlanta	US	33.749	-84.38798	510823	Atlanta
+bakersfield	US	35.37329	-119.01871	373640	Bakersfield
+baltimore	US	39.29038	-76.61219	585708	Baltimore
+charlotte	US	35.22709	-80.84313	911311	Charlotte
+chicago	US	41.85003	-87.65005	2664452	Chicago
+davenport	US	41.52364	-90.57764	102582	Davenport
+denver	US	39.73915	-104.9847	729019	Denver
+desmoines	US	41.60054	-93.60911	214133	Des Moines
+eugene	US	44.05207	-123.08675	176654	Eugene
+fresno	US	36.74773	-119.77237	542107	Fresno
+lincoln	US	40.8	-96.66696	294757	Lincoln
+losangeles	US	34.05223	-118.24368	3820914	Los Angeles
+medford	US	42.32652	-122.87559	79805	Medford
+newark	US	40.73566	-74.17237	281944	Newark
+newyorkcity	US	40.71427	-74.00597	8804190	New York City
+northplatte	US	41.12389	-100.76542	24194	North Platte
+omaha	US	41.25626	-95.94043	486051	Omaha
+philadelphia	US	39.95238	-75.16362	1573916	Philadelphia
+portland	US	45.52345	-122.67621	652503	Portland
+raleigh	US	35.7721	-78.63861	482295	Raleigh
+redding	US	40.58654	-122.39168	91582	Redding
+richmond	US	37.55376	-77.46026	226610	Richmond
+sacramento	US	38.58157	-121.4944	524943	Sacramento
+seattle	US	47.60621	-122.33207	780995	Seattle
+stockton	US	37.9577	-121.29078	305658	Stockton
+tacoma	US	47.25288	-122.44429	222906	Tacoma
+washington	US	38.89511	-77.03637	689545	Washington
 artigas	UY	-30.40431	-56.46926	43897	Artigas
 atlantida	UY	-34.7719	-55.7584	5562	Atlántida
 bellaunion	UY	-30.25966	-57.59919	12200	Bella Unión
@@ -2572,6 +2627,22 @@ samarkand	UZ	39.65456	66.96445	595200	Samarkand
 tashkent	UZ	41.26465	69.21627	1978028	Tashkent
 termez	UZ	37.22417	67.27833	182800	Tirmiz
 urgench	UZ	41.55177	60.63143	145000	Urganch
+barcelona	VE	10.1384	-64.68769	815141	Barcelona
+barquisimeto	VE	10.0647	-69.35703	1240714	Barquisimeto
+cabimas	VE	10.39907	-71.45206	351736	Cabimas
+caracas	VE	10.48801	-66.87919	3000000	Caracas
+carora	VE	10.17283	-70.081	121741	Carora
+caucagua	VE	10.2831	-66.37591	31788	Caucagua
+ciudadojeda	VE	10.20161	-71.3148	240283	Ciudad Ojeda
+clarines	VE	9.93991	-65.16517	21582	Clarines
+cumana	VE	10.4639	-64.17859	405626	Cumaná
+guarenas	VE	10.47027	-66.61934	248588	Guarenas
+guatire	VE	10.474	-66.54241	227666	Guatire
+maracaibo	VE	10.64232	-71.61089	1752602	Maracaibo
+maracay	VE	10.24972	-67.59475	464700	Maracay
+puertolacruz	VE	10.21382	-64.6328	370000	Puerto La Cruz
+sanfelipe	VE	10.3401	-68.74297	206270	San Felipe
+valencia	VE	10.16153	-68.00044	1619470	Valencia
 bacgiang	VN	21.27307	106.1946	450000	Bắc Giang
 baclieu	VN	9.29414	105.72776	156110	Bạc Liêu
 bacninh	VN	21.18608	106.07631	287658	Bắc Ninh
