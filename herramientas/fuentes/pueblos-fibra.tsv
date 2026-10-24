@@ -1716,6 +1716,7 @@ siauliai	LT	55.93333	23.31667	99462	Šiauliai
 ukmerge	LT	55.25	24.75	20154	Ukmerge
 vievis	LT	54.77258	24.81129	4521	Vievis
 vilnius	LT	54.68916	25.2798	542366	Vilnius
+luxembourg	LU	49.60982	6.13268	76684	Luxembourg
 daugavpils	LV	55.88333	26.53333	78126	Daugavpils
 grobina	LV	56.53521	21.16782	3674	Grobiņa
 jekabpils	LV	56.49903	25.85735	21014	Jēkabpils
@@ -1751,7 +1752,18 @@ settat	MA	33.00103	-7.61662	155333	Settat
 tangier	MA	35.76727	-5.79975	1035141	Tangier
 taourirt	MA	34.40731	-2.89732	112908	Taourirt
 taza	MA	34.21	-4.01	162110	Taza
+balti	MD	47.76291	27.92854	125000	Bălţi
+cahul	MD	45.90456	28.19516	34492	Cahul
+cantemir	MD	46.27749	28.20052	3829	Cantemir
 chisinau	MD	47.00902	28.85938	635994	Chisinau
+hincesti	MD	46.83089	28.58999	16900	Hînceşti
+leova	MD	46.48195	28.25298	14301	Leova
+orhei	MD	47.38503	28.82535	24918	Orhei
+bar	ME	42.0937	19.09841	15868	Bar
+bijelopolje	ME	43.03834	19.74758	15400	Bijelo Polje
+kolasin	ME	42.82229	19.51653	2989	Kolašin
+mojkovac	ME	42.96044	19.5833	4120	Mojkovac
+podgorica	ME	42.44124	19.26309	236852	Podgorica
 ambalavao	MG	-21.83333	46.93333	45784	Ambalavao
 ambositra	MG	-20.53034	47.24344	43504	Ambositra
 ankazobe	MG	-18.31667	47.11667	28430	Ankazobe
@@ -1766,6 +1778,15 @@ moramanga	MG	-18.94948	48.23007	60456	Moramanga
 sakaraha	MG	-22.9	44.53333	21826	Sakaraha
 toamasina	MG	-18.1492	49.40234	345107	Toamasina
 toliara	MG	-23.35	43.66667	178725	Toliara
+demirkapija	MK	41.40633	22.24305	4451	Demir Kapija
+gevgelija	MK	41.14289	22.50108	20664	Gevgelija
+gostivar	MK	41.79627	20.90799	50974	Gostivar
+kicevo	MK	41.51274	20.95867	31123	Kičevo
+negotino	MK	41.48456	22.09056	19515	Negotino
+ohrid	MK	41.11701	20.80175	42033	Ohrid
+skopje	MK	41.99646	21.43141	474889	Skopje
+tetovo	MK	42.00989	20.97138	63176	Tetovo
+veles	MK	41.71719	21.77196	57873	Veles
 bamako	ML	12.60915	-7.97522	4227569	Bamako
 bougouni	ML	11.41769	-7.48323	90234	Bougouni
 fana	ML	12.7787	-6.9564	56809	Fana
@@ -2054,9 +2075,38 @@ rivas	NI	11.43977	-85.82749	30000	Rivas
 siuna	NI	13.73321	-84.77725	16056	Siuna
 somotillo	NI	13.04387	-86.90506	15385	Somotillo
 ticuantepe	NI	12.02263	-86.20493	13209	Ticuantepe
+amersfoort	NL	52.155	5.3875	139914	Amersfoort
+amsterdam	NL	52.37403	4.88969	741636	Amsterdam
+assen	NL	52.99667	6.5625	68836	Assen
+breda	NL	51.58656	4.77596	184126	Breda
+delft	NL	52.00667	4.35556	95060	Delft
+dordrecht	NL	51.81	4.67361	119260	Dordrecht
+eindhoven	NL	51.44083	5.47778	235691	Eindhoven
+groningen	NL	53.21917	6.56667	244807	Groningen
+leiden	NL	52.15833	4.49306	119713	Leiden
+maastricht	NL	50.84833	5.68889	122378	Maastricht
+meppel	NL	52.69583	6.19444	30697	Meppel
 rotterdam	NL	51.9225	4.47917	868135	Rotterdam
+shertogenbosch	NL	51.69917	5.30417	160783	's-Hertogenbosch
+sittard	NL	50.99833	5.86944	48400	Sittard
+thehague	NL	52.07667	4.29861	474292	The Hague
+utrecht	NL	52.09083	5.12222	376435	Utrecht
+weert	NL	51.25167	5.70694	48662	Weert
+zwolle	NL	52.5125	6.09444	129840	Zwolle
+bergen	NO	60.39299	5.32415	294029	Bergen
+dombas	NO	62.07554	9.12785	1163	Dombås
+fagernes	NO	60.98584	9.23236	1951	Fagernes
+halden	NO	59.12478	11.38754	21970	Halden
+hamar	NO	60.7945	11.06798	29479	Hamar
+hnefoss	NO	60.16804	10.25647	13678	Hønefoss
+lillehammer	NO	61.11514	10.46628	29011	Lillehammer
+lrdalsyri	NO	61.10001	7.47374	1135	Lærdalsøyri
+moss	NO	59.43403	10.65771	49668	Moss
+oppdal	NO	62.59431	9.6912	4310	Oppdal
 oslo	NO	59.91273	10.74609	1082575	Oslo
+sarpsborg	NO	59.28391	11.10962	59038	Sarpsborg
 trondheim	NO	63.43049	10.39506	216518	Trondheim
+voss	NO	60.62869	6.41474	5571	Voss
 bhadrapur	NP	26.54404	88.09436	19523	Bhadrapur
 bhairahawa	NP	27.5	83.45	63367	Siddharthanagar
 bharatpur	NP	27.68027	84.43647	369377	Bharatpur
@@ -2213,8 +2263,25 @@ mansehra	PK	34.33023	73.19679	66486	Mansehra
 multan	PK	30.19679	71.47824	2169915	Multan
 rawalpindi	PK	33.59733	73.0479	3357612	Rawalpindi
 sukkur	PK	27.70323	68.85889	563851	Sukkur
+czestochowa	PL	50.79646	19.12409	248125	Częstochowa
+gdansk	PL	54.35227	18.64912	487371	Gdańsk
+grudziadz	PL	53.48411	18.75366	92552	Grudziądz
+katowice	PL	50.2597	19.02173	286960	Katowice
+konin	PL	52.22338	18.25121	81258	Konin
+kutno	PL	52.23064	19.36409	48323	Kutno
+nowytomysl	PL	52.3195	16.12844	15179	Nowy Tomyśl
+odz	PL	51.77058	19.47395	639890	Łódź
+owicz	PL	52.10714	19.94525	29809	Łowicz
+piotrkowtrybunalski	PL	51.40547	19.70321	80128	Piotrków Trybunalski
+pock	PL	52.54682	19.70638	127474	Płock
 poznan	PL	52.40692	16.92993	536151	Poznań
+sochaczew	PL	52.22944	20.23838	38267	Sochaczew
+subice	PL	52.35088	14.56065	17567	Słubice
+swiebodzin	PL	52.24751	15.53355	21757	Świebodzin
+tczew	PL	54.09242	18.77787	60133	Tczew
+torun	PL	53.01375	18.59814	196935	Toruń
 warsaw	PL	52.22977	21.01178	1702139	Warsaw
+wocawek	PL	52.64817	19.0678	120339	Włocławek
 aguadilla	PR	18.42745	-67.15407	16073	Aguadilla
 arecibo	PR	18.47245	-66.71573	87754	Arecibo
 bayamon	PR	18.39856	-66.15572	203499	Bayamón
