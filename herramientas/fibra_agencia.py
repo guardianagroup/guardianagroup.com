@@ -46,6 +46,7 @@ ALIAS = {
 
 # Towns below GeoNames' 15 000 inhabitants (border posts, junctions) that the voices name: (country, folded name) → (lon, lat)
 SITIOS = {
+    ('SS', 'nimule'): (32.06, 3.60),  # 24 Oct 2026: the border town on the Juba–Uganda backbone (four voices name it; not in GeoNames cities500)
     ('EG', 'benisuef'): (31.10, 29.07), ('SA', 'hofuf'): (49.59, 25.38), ('KZ', 'dostyk'): (82.48, 45.25), ('EG', 'zafarana'): (32.65, 29.11),
     ('EG', 'marsaalam'): (34.89, 25.07), ('IR', 'bazargan'): (44.39, 39.39), ('IR', 'khosravi'): (45.46, 34.38), ('IN', 'hazira'): (72.65, 21.10),
     ('IN', 'vijaipur'): (77.17, 24.47), ('SA', 'majmaah'): (45.35, 25.90), ('BO', 'pisiga'): (-68.65, -19.25), ('BO', 'puertosuarez'): (-57.80, -18.96),
@@ -110,7 +111,7 @@ def fuera(nombre, previo, idx):
 
 # the countries where no open source has land fibre: approximate stretches that two voices agree on are allowed there
 APROX = {'BH', 'BN', 'BZ', 'CU', 'DO', 'HT', 'JM', 'KP', 'KW', 'LB', 'LS', 'NP', 'PS', 'QA', 'RW', 'SY', 'TL', 'XK', 'YE',
-         'SR', 'TT', 'PR', 'GW', 'SZ', 'ER', 'CV', 'MU', 'MT', 'BS'}
+         'SR', 'TT', 'PR', 'GW', 'SZ', 'ER', 'CV', 'MU', 'MT', 'BS', 'GT', 'PA', 'SS'}
 
 
 def situa(nombre, cc, idx, idx_div):
