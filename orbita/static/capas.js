@@ -2170,6 +2170,9 @@
   function abreFichaCapa(b) {
     clearTimeout(fichaCapaT);
     if (!conRaton.matches || document.body.classList.contains('m2') || document.body.classList.contains('dentro')) return;
+    // with a layer's class panel open below the buttons the card would land on top of it (owner, 24 Oct 2026, 12:34:
+    // «se me solapa una pantalla con la otra»): the panel already says the same, so no card then
+    if (document.querySelector('.capa-vista:not([hidden]), #sat-vista:not([hidden])')) return;
     llenaFichaCapa(b.dataset.capa); fichaCapa.hidden = false; colocaFichaCapa(b);
     if (fichaCapaDe && fichaCapaDe !== b) fichaCapaDe.removeAttribute('aria-describedby');
     fichaCapaDe = b; b.setAttribute('aria-describedby', 'capa-ficha');
