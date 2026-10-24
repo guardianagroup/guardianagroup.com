@@ -1,0 +1,141 @@
+[
+  {
+    "nombre": "SomCable western Somaliland terrestrial backbone",
+    "operador": "SomCable",
+    "pais": "SO",
+    "ciudades": [
+      "Borama",
+      "Hargeisa",
+      "Berbera"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.ppiaf.org/sites/default/files/documents/2017-01/Strategy_and_PPP_Options_ICT_Broadband_Somalia__Final_3_Feb_.pdf ; el estudio del Banco Mundial/PPIAF describe la red terrestre existente de SomCable que conecta Berbera, Hargeisa y Borama hacia Djibouti. https://somcable.com/ ; el operador mantiene a Borama, Hargeisa y Berbera entre las ciudades cubiertas por su red de fibra."
+  },
+  {
+    "nombre": "SomCable Hargeisa-Burao backbone",
+    "operador": "SomCable",
+    "pais": "SO",
+    "ciudades": [
+      "Hargeisa",
+      "Burao"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/IDU105f167fa1085214f8b1919f141249b1e8fae.pdf ; el Banco Mundial documenta la extensión hacia el este de la red de SomCable en Somaliland. https://somcable.com/ ; SomCable incluye Burco/Burao entre las ciudades cubiertas por su red de fibra."
+  },
+  {
+    "nombre": "Golis Puntland backbone",
+    "operador": "Golis Telecom",
+    "pais": "SO",
+    "ciudades": [
+      "Bosaso",
+      "Garowe",
+      "Galkayo"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/IDU105f167fa1085214f8b1919f141249b1e8fae.pdf ; el Banco Mundial señala que Golis tendió fibra en Puntland hasta Galkayo y representa el corredor como fibra existente en su mapa de backbone."
+  },
+  {
+    "nombre": "OMVG Guinea-Bissau OPGW backbone",
+    "operador": "OMVG/SOGESART; EDG fue el operador temporal documentado en la puesta en servicio",
+    "pais": "GW",
+    "ciudades": [
+      "Saltinho",
+      "Bambadinca",
+      "Mansoa",
+      "Tanaff"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://documents1.worldbank.org/curated/en/099122224101536812/pdf/P146830-acb9ba83-2bc3-43c4-8743-38881c02b40d.pdf ; el Banco Mundial dice que la interconexión de 225 kV lleva un cable de fibra correspondiente, que Saltinho-Bambadinca-Mansoa terminó en noviembre de 2023, Mansoa-Tanaff en diciembre de 2023 y que la puesta en servicio de la infraestructura de Guinea-Bissau terminó en marzo de 2024. La capacidad óptica excedente para telecomunicaciones seguía pendiente de comercialización."
+  },
+  {
+    "nombre": "CAB-RCA western backbone to Cameroon",
+    "operador": "CAB-RCA / Gobierno de la República Centroafricana, Ministerio competente en telecomunicaciones",
+    "pais": "CF",
+    "ciudades": [
+      "Bangui",
+      "Boali",
+      "Bossembele",
+      "Yaloke",
+      "Bossemptele",
+      "Baoro",
+      "Carnot",
+      "Berberati",
+      "Gamboula"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.gouv.cf/les-grands-dossiers/55/projet-dorsale-fibre-optique-dafrique-centrale-composante-rca ; página oficial del proyecto CAB-RCA y sus interconexiones. https://www.afdb.org/fr/success-stories/avec-larrivee-de-la-fibre-optique-la-centrafrique-entre-de-plain-pied-dans-lere-du-numerique-74042 ; el BAD informa que desde 2023 aproximadamente 900 km de fibra conectan la RCA con Camerún y Congo; fuentes oficiales de la inauguración enumeran el eje Bangui-Boali-Bossembele-Yaloke-Bossemptele-Baoro-Carnot-Berberati hacia Gamboula."
+  },
+  {
+    "nombre": "CAB-RCA southern backbone to Congo",
+    "operador": "CAB-RCA / Gobierno de la República Centroafricana, Ministerio competente en telecomunicaciones",
+    "pais": "CF",
+    "ciudades": [
+      "Berberati",
+      "Nola",
+      "Salo"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.gouv.cf/les-grands-dossiers/55/projet-dorsale-fibre-optique-dafrique-centrale-composante-rca ; el Gobierno describe el componente RCA del Central African Backbone y las interconexiones regionales. https://www.afdb.org/fr/success-stories/avec-larrivee-de-la-fibre-optique-la-centrafrique-entre-de-plain-pied-dans-lere-du-numerique-74042 ; el BAD confirma la entrada en servicio desde 2023 de la red que conecta también con la República del Congo."
+  },
+  {
+    "nombre": "Chad Southern Backbone, N'Djamena-Kagpal section",
+    "operador": "Sotel Tchad",
+    "pais": "TD",
+    "ciudades": [
+      "N'Djamena",
+      "Guelendeng",
+      "Bongor",
+      "Kelo",
+      "Moundou",
+      "Mbaïkoro",
+      "Kagpal"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf ; el Banco Mundial clasifica N'Djamena-M'Béré como 'In service', completion 2011 y gestión Sotel Tchad, y detalla el tramo de 610 km N'Djamena-Kagpal por Guelendeng, Bongor, Kelo, Moundou y M'Baikoro. Aclara que actualmente se usa para transmisión doméstica aunque ya no como salida internacional principal."
+  },
+  {
+    "nombre": "Chad Eastern Backbone N'Djamena-Adre",
+    "operador": "Sudachad",
+    "pais": "TD",
+    "ciudades": [
+      "N'Djamena",
+      "Djermaya",
+      "Massaguet",
+      "Moito",
+      "Bokoro",
+      "Bitkine",
+      "Mongo",
+      "Mangalme",
+      "Oum Hadjer",
+      "Abeche",
+      "Farchana",
+      "Adre"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf ; el Banco Mundial clasifica la dorsal N'Djamena-Adré de 1.142 km como 'In service', con cable de 24 pares y gestión Sudachad; el texto sitúa su commissioning en 2018 y la tabla completion en 2019. Fuentes institucionales chadianas de la puesta en servicio enumeran Djermaya, Massaguet, Moito, Bokoro, Bitkine, Mongo, Mangalme, Oum Hadjer, Abeche, Farchana y Adre."
+  },
+  {
+    "nombre": "Damascus-Homs optical backbone",
+    "operador": "Syrian Telecommunications Company",
+    "pais": "SY",
+    "ciudades": [
+      "Damascus",
+      "Homs"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://sana.sy/locals/2489298/ ; en mayo de 2026 la agencia oficial SANA, citando al sector de telecomunicaciones, informó de la reparación y retorno a la normalidad del 'optical route linking Damascus and Homs' y lo calificó como uno de los ejes principales de la red que transporta tráfico hacia las provincias centrales, septentrionales y costeras."
+  },
+  {
+    "nombre": "Homs-Palmyra-Deir ez-Zor optical backbone",
+    "operador": "Syrian Telecommunications Company",
+    "pais": "SY",
+    "ciudades": [
+      "Homs",
+      "Tiyas",
+      "Palmyra",
+      "Deir ez-Zor"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://sana.sy/governorates/dayer-al-zoor/2431357/ ; en marzo de 2026 la Dirección de Telecomunicaciones de Deir ez-Zor identificó como causa de la caída provincial una avería en el cable óptico alimentador entre Palmyra y la estación T4. https://sana.sy/locals/2453699/ ; en abril de 2026 las cuadrillas de Homs y Deir ez-Zor repararon dos cortes entre Palmyra y T4 y restablecieron progresivamente las comunicaciones, demostrando que la troncal seguía en operación."
+  }
+]
