@@ -1,0 +1,77 @@
+[
+  {
+    "nombre": "Loukkos",
+    "llegadas": [
+      {
+        "lugar": "Rota",
+        "pais": "ES",
+        "lat": 36.621,
+        "lon": -6.36
+      },
+      {
+        "lugar": "Asilah",
+        "pais": "MA",
+        "lat": 35.465,
+        "lon": -6.034
+      }
+    ],
+    "anio": 2012,
+    "km": 187,
+    "duenos": [
+      "Maroc Telecom"
+    ],
+    "fuentes": [
+      "https://www.iam.ma/"
+    ]
+  },
+  {
+    "nombre": "Melita-1",
+    "llegadas": [
+      {
+        "lugar": "Pozzallo",
+        "pais": "IT",
+        "lat": 36.7303,
+        "lon": 14.8467
+      },
+      {
+        "lugar": "Baħar iċ-Ċagħaq",
+        "pais": "MT",
+        "lat": 35.9386,
+        "lon": 14.4533
+      }
+    ],
+    "anio": 2009,
+    "km": 100,
+    "duenos": [
+      "Melita"
+    ],
+    "fuentes": [
+      "https://www.melita.com/"
+    ]
+  },
+  {
+    "nombre": "Silphium",
+    "llegadas": [
+      {
+        "lugar": "Chania",
+        "pais": "GR",
+        "lat": 35.5138,
+        "lon": 24.018
+      },
+      {
+        "lugar": "Derna",
+        "pais": "LY",
+        "lat": 32.767,
+        "lon": 22.636
+      }
+    ],
+    "anio": 2013,
+    "km": 425,
+    "duenos": [
+      "Libyan International Telecom Company (LITC)"
+    ],
+    "fuentes": [
+      "https://www.litc.ly/"
+    ]
+  }
+]

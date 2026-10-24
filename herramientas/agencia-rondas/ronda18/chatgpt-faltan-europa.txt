@@ -1,0 +1,417 @@
+[
+{
+"nombre": "Almería-Melilla (ALME)",
+"llegadas": [
+{"lugar": "Almería", "pais": "ES", "lat": 36.8419, "lon": -2.4638},
+{"lugar": "Melilla", "pais": "ES", "lat": 35.2923, "lon": -2.9381}
+],
+"anio": 1990,
+"km": 198,
+"duenos": ["Telefónica"],
+"fuentes": ["https://dev.octsi.es/images/documentos/2025/CNMC-2025-08-informe-conectividad-archipielagos.pdf"]
+},
+{
+"nombre": "Roquetas-Melilla (CAM)",
+"llegadas": [
+{"lugar": "Roquetas de Mar", "pais": "ES", "lat": 36.7638, "lon": -2.6125},
+{"lugar": "Melilla", "pais": "ES", "lat": 35.2923, "lon": -2.9381}
+],
+"anio": 2014,
+"km": 181,
+"duenos": ["Ciudad Autónoma de Melilla"],
+"fuentes": ["https://dev.octsi.es/images/documentos/2025/CNMC-2025-08-informe-conectividad-archipielagos.pdf"]
+},
+{
+"nombre": "PENCAN-7",
+"llegadas": [
+{"lugar": "Las Palmas de Gran Canaria", "pais": "ES", "lat": 28.1235, "lon": -15.4363},
+{"lugar": "Candelaria", "pais": "ES", "lat": 28.3555, "lon": -16.3717},
+{"lugar": "Chipiona", "pais": "ES", "lat": 36.7393, "lon": -6.4370}
+],
+"anio": 2001,
+"km": 1400,
+"duenos": ["Telefónica"],
+"fuentes": [
+"https://blog.cnmc.es/2017/09/05/que-cables-submarinos-conectan-el-territorio-espanol-enganchados-a-los-cables-submarinos-ii/",
+"https://www.telefonica.com/es/wp-content/uploads/sites/4/2021/11/2001-20f.pdf"
+]
+},
+{
+"nombre": "PENCAN-8",
+"llegadas": [
+{"lugar": "Candelaria", "pais": "ES", "lat": 28.3555, "lon": -16.3717},
+{"lugar": "Conil de la Frontera", "pais": "ES", "lat": 36.2766, "lon": -6.0872}
+],
+"anio": 2011,
+"km": 1400,
+"duenos": ["Telefónica"],
+"fuentes": ["https://blog.cnmc.es/2017/09/05/que-cables-submarinos-conectan-el-territorio-espanol-enganchados-a-los-cables-submarinos-ii/"]
+},
+{
+"nombre": "CANDALTA-1",
+"llegadas": [
+{"lugar": "Alta Vista, Gran Canaria", "pais": "ES", "lat": 27.9995, "lon": -15.7000},
+{"lugar": "Candelaria, Tenerife", "pais": "ES", "lat": 28.3555, "lon": -16.3717}
+],
+"anio": 1999,
+"km": 110,
+"duenos": ["Telefónica"],
+"fuentes": ["https://www.octsi.es/octsi/noticias-del-octsi/cables-submarinos-en-las-islas-canarias"]
+},
+{
+"nombre": "TRANSCAN-2",
+"llegadas": [
+{"lugar": "Agüimes, Gran Canaria", "pais": "ES", "lat": 27.8955, "lon": -15.3907},
+{"lugar": "Morro Jable, Fuerteventura", "pais": "ES", "lat": 28.0487, "lon": -14.3584},
+{"lugar": "Puerto del Rosario, Fuerteventura", "pais": "ES", "lat": 28.4965, "lon": -13.8622},
+{"lugar": "Arrecife, Lanzarote", "pais": "ES", "lat": 28.9595, "lon": -13.5476}
+],
+"anio": 1990,
+"km": 238,
+"duenos": ["Telefónica"],
+"fuentes": ["https://www.octsi.es/octsi/noticias-del-octsi/cables-submarinos-en-las-islas-canarias"]
+},
+{
+"nombre": "TRANSCAN-3",
+"llegadas": [
+{"lugar": "Alta Vista, Gran Canaria", "pais": "ES", "lat": 27.9995, "lon": -15.7000},
+{"lugar": "Playa Blanca, Lanzarote", "pais": "ES", "lat": 28.8634, "lon": -13.8273}
+],
+"anio": 1999,
+"km": 210,
+"duenos": ["Telefónica"],
+"fuentes": ["https://www.octsi.es/octsi/noticias-del-octsi/cables-submarinos-en-las-islas-canarias"]
+},
+{
+"nombre": "TEGOPA",
+"llegadas": [
+{"lugar": "Granadilla de Abona, Tenerife", "pais": "ES", "lat": 28.0591, "lon": -16.5181},
+{"lugar": "San Sebastián de La Gomera", "pais": "ES", "lat": 28.0880, "lon": -17.1082},
+{"lugar": "Santa Cruz de La Palma", "pais": "ES", "lat": 28.6632, "lon": -17.7652}
+],
+"anio": 1995,
+"km": 221,
+"duenos": ["Telefónica"],
+"fuentes": ["https://www.octsi.es/octsi/noticias-del-octsi/cables-submarinos-en-las-islas-canarias"]
+},
+{
+"nombre": "MAME-1",
+"llegadas": [
+{"lugar": "Cala Millor, Mallorca", "pais": "ES", "lat": 39.5950, "lon": 3.3830},
+{"lugar": "Punta Prima, Menorca", "pais": "ES", "lat": 39.8160, "lon": 4.2770}
+],
+"anio": 1995,
+"km": 118,
+"duenos": ["Telefónica"],
+"fuentes": [
+"https://www.servimedia.es/noticias/telefonica-pone-servicio-cable-submarino-mallorca-menorca/1410883585",
+"https://dev.octsi.es/images/documentos/2025/CNMC-2025-08-informe-conectividad-archipielagos.pdf"
+]
+},
+{
+"nombre": "DOS CONTINENTES I",
+"llegadas": [
+{"lugar": "La Línea de la Concepción", "pais": "ES", "lat": 36.1613, "lon": -5.3487},
+{"lugar": "Ceuta", "pais": "ES", "lat": 35.8894, "lon": -5.3213}
+],
+"anio": 2020,
+"km": 95,
+"duenos": ["GTD España"],
+"fuentes": [
+"https://www.juntadeandalucia.es/boja/2019/205/36",
+"https://dev.octsi.es/images/documentos/2025/CNMC-2025-08-informe-conectividad-archipielagos.pdf"
+]
+},
+{
+"nombre": "Azores Fiber Optic System (AFOS)",
+"llegadas": [
+{"lugar": "Vila do Porto, Santa Maria", "pais": "PT", "lat": 36.9568, "lon": -25.1413},
+{"lugar": "Ponta Delgada, São Miguel", "pais": "PT", "lat": 37.7392, "lon": -25.6688},
+{"lugar": "Angra do Heroísmo, Terceira", "pais": "PT", "lat": 38.6585, "lon": -27.2158},
+{"lugar": "Velas, São Jorge", "pais": "PT", "lat": 38.6838, "lon": -28.2132},
+{"lugar": "Faial", "pais": "PT", "lat": 38.5251, "lon": -28.6476},
+{"lugar": "São Mateus, Pico", "pais": "PT", "lat": 38.4323, "lon": -28.4612},
+{"lugar": "Graciosa", "pais": "PT", "lat": 39.0110, "lon": -27.9635}
+],
+"anio": 1998,
+"km": 1100,
+"duenos": ["Altice Portugal"],
+"fuentes": [
+"https://diariodarepublica.pt/dr/detalhe/resolucao-conselho-ministros/184-2025-953220527",
+"https://diariodarepublica.pt/dr/detalhe/despacho/9169-2024-876599974"
+]
+},
+{
+"nombre": "CAM Ring",
+"llegadas": [
+{"lugar": "Funchal, Madeira", "pais": "PT", "lat": 32.6469, "lon": -16.9089},
+{"lugar": "Porto Santo", "pais": "PT", "lat": 33.0473, "lon": -16.3477},
+{"lugar": "Ponta Delgada, Azores", "pais": "PT", "lat": 37.7392, "lon": -25.6688}
+],
+"anio": 2003,
+"km": 1120,
+"duenos": ["Altice Portugal"],
+"fuentes": [
+"https://diariodarepublica.pt/dr/detalhe/despacho/9333-2020-144137764",
+"https://diariodarepublica.pt/dr/detalhe/resolucao-assembleia-legislativa-regiao-autonoma-acores/20-2022-184002942"
+]
+},
+{
+"nombre": "Continente-Madeira",
+"llegadas": [
+{"lugar": "Carcavelos", "pais": "PT", "lat": 38.6902, "lon": -9.3316},
+{"lugar": "Funchal", "pais": "PT", "lat": 32.6469, "lon": -16.9089}
+],
+"anio": 2000,
+"km": 1179,
+"duenos": ["Altice Portugal"],
+"fuentes": ["https://diariodarepublica.pt/dr/detalhe/despacho/9333-2020-144137764"]
+},
+{
+"nombre": "BUGIO",
+"llegadas": [
+{"lugar": "Carcavelos", "pais": "PT", "lat": 38.6902, "lon": -9.3316},
+{"lugar": "Sesimbra", "pais": "PT", "lat": 38.4427, "lon": -9.1028}
+],
+"anio": 1996,
+"km": 73,
+"duenos": ["Altice Portugal"],
+"fuentes": ["https://www.meo.pt/"]
+},
+{
+"nombre": "Circe South",
+"llegadas": [
+{"lugar": "Pevensey Bay", "pais": "GB", "lat": 50.8190, "lon": 0.3667},
+{"lugar": "Cayeux-sur-Mer", "pais": "FR", "lat": 50.1788, "lon": 1.4934}
+],
+"anio": 1999,
+"km": 115,
+"duenos": ["Zayo", "euNetworks"],
+"fuentes": ["https://www.eunetworks.com/", "https://www.zayo.com/"]
+},
+{
+"nombre": "Lanis-3",
+"llegadas": [
+{"lugar": "Troon", "pais": "GB", "lat": 55.5400, "lon": -4.6600},
+{"lugar": "Whitehead", "pais": "GB", "lat": 54.7500, "lon": -5.7100}
+],
+"anio": 1992,
+"km": 122,
+"duenos": ["Vodafone"],
+"fuentes": ["https://globalnetworkmap.vodafone.com/"]
+},
+{
+"nombre": "Danica North",
+"llegadas": [
+{"lugar": "Tuborg", "pais": "DK", "lat": 55.7220, "lon": 12.5456},
+{"lugar": "Barsebäck", "pais": "SE", "lat": 55.7704, "lon": 12.9554}
+],
+"anio": 1998,
+"km": 25,
+"duenos": ["Colt"],
+"fuentes": ["https://www.colt.net/"]
+},
+{
+"nombre": "Denmark-Sweden 17",
+"llegadas": [
+{"lugar": "Alsgarde", "pais": "DK", "lat": 56.0749, "lon": 12.5369},
+{"lugar": "Kristinelund", "pais": "SE", "lat": 56.1347, "lon": 12.5886}
+],
+"anio": 1994,
+"km": 11,
+"duenos": ["TDC Group", "Tele2"],
+"fuentes": ["https://tdcgroup.com/", "https://www.tele2.com/"]
+},
+{
+"nombre": "Elektra-GlobalConnect 1 (GC1)",
+"llegadas": [
+{"lugar": "Gedser", "pais": "DK", "lat": 54.5763, "lon": 11.9290},
+{"lugar": "Rostock", "pais": "DE", "lat": 54.0789, "lon": 12.1324}
+],
+"anio": 2000,
+"km": 44,
+"duenos": ["GlobalConnect"],
+"fuentes": ["https://globalconnectcarrier.com/our-story/"]
+},
+{
+"nombre": "GlobalConnect-KPN",
+"llegadas": [
+{"lugar": "Gedser", "pais": "DK", "lat": 54.5763, "lon": 11.9290},
+{"lugar": "Rostock", "pais": "DE", "lat": 54.0789, "lon": 12.1324}
+],
+"anio": 2006,
+"km": 43,
+"duenos": ["GlobalConnect"],
+"fuentes": ["https://globalconnectcarrier.com/our-story/"]
+},
+{
+"nombre": "GlobalConnect 2 (GC2)",
+"llegadas": [
+{"lugar": "Sæby", "pais": "DK", "lat": 57.3308, "lon": 10.5166},
+{"lugar": "Kungsbacka", "pais": "SE", "lat": 57.4875, "lon": 12.0762}
+],
+"anio": 2001,
+"km": 95,
+"duenos": ["GlobalConnect"],
+"fuentes": ["https://globalconnectcarrier.com/our-story/"]
+},
+{
+"nombre": "GlobalConnect 3 (GC3)",
+"llegadas": [
+{"lugar": "Nyborg", "pais": "DK", "lat": 55.3241, "lon": 10.7995},
+{"lugar": "Korsør", "pais": "DK", "lat": 55.3258, "lon": 11.1494}
+],
+"anio": 2006,
+"km": 19,
+"duenos": ["GlobalConnect"],
+"fuentes": ["https://globalconnectcarrier.com/our-story/"]
+},
+{
+"nombre": "STO-HEL-One",
+"llegadas": [
+{"lugar": "Nothamnsbacken", "pais": "SE", "lat": 60.0320, "lon": 18.5654},
+{"lugar": "Hamnäs", "pais": "FI", "lat": 60.0993, "lon": 19.8050},
+{"lugar": "Skatörarna", "pais": "FI", "lat": 60.2726, "lon": 19.7248},
+{"lugar": "Lokalahti", "pais": "FI", "lat": 60.6795, "lon": 21.4462}
+],
+"anio": 2008,
+"km": 560,
+"duenos": ["GlobalConnect"],
+"fuentes": ["https://globalconnectcarrier.com/our-story/"]
+},
+{
+"nombre": "Bodø-Røst Cable",
+"llegadas": [
+{"lugar": "Bodø", "pais": "NO", "lat": 67.2860, "lon": 14.4001},
+{"lugar": "Røst", "pais": "NO", "lat": 67.5026, "lon": 12.0701}
+],
+"anio": 2016,
+"km": 109,
+"duenos": ["Telenor"],
+"fuentes": ["https://www.telenor.no/"]
+},
+{
+"nombre": "Italy-Croatia",
+"llegadas": [
+{"lugar": "Mestre", "pais": "IT", "lat": 45.4959, "lon": 12.2441},
+{"lugar": "Umag", "pais": "HR", "lat": 45.4331, "lon": 13.5202}
+],
+"anio": 1994,
+"km": 230,
+"duenos": ["Hrvatski Telekom", "Sparkle"],
+"fuentes": ["https://www.hrvatskitelekom.hr/", "https://www.tisparkle.com/"]
+},
+{
+"nombre": "Italy-Greece 1 (IG-1)",
+"llegadas": [
+{"lugar": "Otranto", "pais": "IT", "lat": 40.1481, "lon": 18.4857},
+{"lugar": "Aethos", "pais": "GR", "lat": 39.6836, "lon": 20.0154}
+],
+"anio": 1995,
+"km": 169,
+"duenos": ["WIS Telecom"],
+"fuentes": ["https://www.submarinenetworks.com/en/systems/intra-europe/ig1"]
+},
+{
+"nombre": "Italy-Libya",
+"llegadas": [
+{"lugar": "Mazara del Vallo", "pais": "IT", "lat": 37.6501, "lon": 12.5913},
+{"lugar": "Trípoli", "pais": "LY", "lat": 32.8773, "lon": 13.1873}
+],
+"anio": 1998,
+"km": 570,
+"duenos": ["Sparkle", "Libya International Telecommunications Company"],
+"fuentes": ["https://lana.gov.ly/post.php?id=216951&lang=en"]
+},
+{
+"nombre": "Italy-Monaco",
+"llegadas": [
+{"lugar": "Savona", "pais": "IT", "lat": 44.3055, "lon": 8.4838},
+{"lugar": "Montecarlo", "pais": "MC", "lat": 43.7397, "lon": 7.4272}
+],
+"anio": 1995,
+"km": 162,
+"duenos": ["Monaco Telecom", "Sparkle"],
+"fuentes": ["https://www.monaco-telecom.mc/", "https://www.tisparkle.com/"]
+},
+{
+"nombre": "Turcyos-1",
+"llegadas": [
+{"lugar": "Bozyazı", "pais": "TR", "lat": 36.1000, "lon": 32.9667},
+{"lugar": "Girne", "pais": "CY", "lat": 35.2991, "lon": 33.2363}
+],
+"anio": 1993,
+"km": 110,
+"duenos": ["Türk Telekom"],
+"fuentes": ["https://www.turktelekom.com.tr/"]
+},
+{
+"nombre": "Silphium",
+"llegadas": [
+{"lugar": "Chania, Creta", "pais": "GR", "lat": 35.5118, "lon": 24.0122},
+{"lugar": "Derna", "pais": "LY", "lat": 32.7636, "lon": 22.6392}
+],
+"anio": 2013,
+"km": 425,
+"duenos": ["Libya International Telecommunications Company"],
+"fuentes": [
+"https://litc.ly/en/2018/12/15/reactivation-of-the-international-submarine-cable-libya-greece-silphium/",
+"https://lana.gov.ly/post.php?id=216951&lang=en"
+]
+},
+{
+"nombre": "Melita 1",
+"llegadas": [
+{"lugar": "Pozzallo", "pais": "IT", "lat": 36.7337, "lon": 14.8539},
+{"lugar": "Baħar iċ-Ċagħaq", "pais": "MT", "lat": 35.9341, "lon": 14.4588}
+],
+"anio": 2009,
+"km": 97,
+"duenos": ["Melita"],
+"fuentes": ["https://www.melita.com/melita-invests-over-e150-million-in-its-infrastructure-to-satiate-demand-to-be-constantly-connected/"]
+},
+{
+"nombre": "Malta-Gozo Cable",
+"llegadas": [
+{"lugar": "Golden Bay, Malta", "pais": "MT", "lat": 35.9387, "lon": 14.3445},
+{"lugar": "Mġarr ix-Xini, Gozo", "pais": "MT", "lat": 36.0204, "lon": 14.2713}
+],
+"anio": 2020,
+"km": 13,
+"duenos": ["Gozo Fibre Optic Cable Ltd."],
+"fuentes": ["https://jcs.com.mt/project_posts/fiber-optic-cables/"]
+},
+{
+"nombre": "Trans Adriatic Express (TAE)",
+"llegadas": [
+{"lugar": "Seman", "pais": "AL", "lat": 40.7867, "lon": 19.3762},
+{"lugar": "San Foca", "pais": "IT", "lat": 40.3020, "lon": 18.4052}
+],
+"anio": 2023,
+"km": 106,
+"duenos": ["EXA Infrastructure", "Trans Adriatic Pipeline AG"],
+"fuentes": ["https://www.exainfra.net/network/tae-trans-adriatic-express"]
+},
+{
+"nombre": "Apollo East and West",
+"llegadas": [
+{"lugar": "Korakia, Creta", "pais": "GR", "lat": 35.4047, "lon": 24.9316},
+{"lugar": "Pachi", "pais": "GR", "lat": 37.9740, "lon": 23.3632}
+],
+"anio": 2025,
+"km": 670,
+"duenos": ["Grid Telecom"],
+"fuentes": ["https://admieholding.gr/app/uploads/2023/05/Corporate-Presentation_FY_2022.pdf"]
+},
+{
+"nombre": "Vodafone Greece Domestic",
+"llegadas": [
+{"lugar": "Porto Rafti", "pais": "GR", "lat": 37.8882, "lon": 24.0114},
+{"lugar": "Syros", "pais": "GR", "lat": 37.4416, "lon": 24.9360}
+],
+"anio": 2008,
+"km": 92,
+"duenos": ["Vodafone"],
+"fuentes": ["https://globalnetworkmap.vodafone.com/"]
+}
+]

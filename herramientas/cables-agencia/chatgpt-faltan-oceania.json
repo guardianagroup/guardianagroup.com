@@ -1,0 +1,390 @@
+[
+  {
+    "nombre": "Sydney-Melbourne-Adelaide-Perth (SMAP)",
+    "llegadas": [
+      {
+        "lugar": "Broadarrow Reserve, Maroubra, Sídney",
+        "pais": "AU",
+        "lat": -33.94755,
+        "lon": 151.25389
+      },
+      {
+        "lugar": "Torquay, Victoria",
+        "pais": "AU",
+        "lat": -38.333,
+        "lon": 144.32
+      },
+      {
+        "lugar": "West Beach, Adelaida",
+        "pais": "AU",
+        "lat": -34.944,
+        "lon": 138.509
+      },
+      {
+        "lugar": "Garden Island, Australia Occidental",
+        "pais": "AU",
+        "lat": -32.19417,
+        "lon": 115.67417
+      },
+      {
+        "lugar": "City Beach, Perth",
+        "pais": "AU",
+        "lat": -31.94,
+        "lon": 115.76
+      }
+    ],
+    "anio": 2026,
+    "km": 5000,
+    "duenos": [
+      "SUBCO"
+    ],
+    "fuentes": [
+      "https://sub.co/news/subco-announces-smap-hypercable-ready-for-service",
+      "https://epbcpublicportal.environment.gov.au/all-referrals/project-referral-summary/?id=78d5a4fd-3d6f-ef11-a670-7c1e522a9100",
+      "https://westernrocklobster.org/offshore-cable-installations-are-underway-notice-to-c-zone-fishers/"
+    ]
+  },
+  {
+    "nombre": "Hawaii Island Fibre Network (HIFN)",
+    "llegadas": [
+      {
+        "lugar": "Lihue, Kauai, Hawái",
+        "pais": "US",
+        "lat": 21.9749,
+        "lon": -159.3686
+      },
+      {
+        "lugar": "Makaha, Oahu, Hawái",
+        "pais": "US",
+        "lat": 21.4634,
+        "lon": -158.2206
+      },
+      {
+        "lugar": "Koko Head, Oahu, Hawái",
+        "pais": "US",
+        "lat": 21.2776,
+        "lon": -157.696
+      },
+      {
+        "lugar": "Kaunakakai, Molokai, Hawái",
+        "pais": "US",
+        "lat": 21.0933,
+        "lon": -157.0239
+      },
+      {
+        "lugar": "Manele Bay, Lanai, Hawái",
+        "pais": "US",
+        "lat": 20.7434,
+        "lon": -156.8969
+      },
+      {
+        "lugar": "Kihei, Maui, Hawái",
+        "pais": "US",
+        "lat": 20.7822,
+        "lon": -156.4631
+      },
+      {
+        "lugar": "Kawaihae, isla de Hawái",
+        "pais": "US",
+        "lat": 20.0403,
+        "lon": -155.8312
+      }
+    ],
+    "anio": 1997,
+    "km": 529,
+    "duenos": [
+      "Hawaiian Telcom",
+      "Lumen"
+    ],
+    "fuentes": [
+      "https://docs.fcc.gov/public/attachments/DOC-381242A1.pdf",
+      "https://cca.hawaii.gov/broadband/files/2015/01/Hawaii_Broadband_Strategic_Plan_Dec_2012.pdf",
+      "https://geocables.com/cable/hawaii-island-fibre-network-hifn"
+    ]
+  },
+  {
+    "nombre": "Mariana-Guam Cable",
+    "llegadas": [
+      {
+        "lugar": "Tanguisson Point, Guam",
+        "pais": "GU",
+        "lat": 13.5436,
+        "lon": 144.8124
+      },
+      {
+        "lugar": "Rota, Islas Marianas del Norte",
+        "pais": "MP",
+        "lat": 14.1518,
+        "lon": 145.2125
+      },
+      {
+        "lugar": "Tinian, Islas Marianas del Norte",
+        "pais": "MP",
+        "lat": 15.0111,
+        "lon": 145.6375
+      },
+      {
+        "lugar": "Saipán, Islas Marianas del Norte",
+        "pais": "MP",
+        "lat": 15.1777,
+        "lon": 145.7509
+      }
+    ],
+    "anio": 1997,
+    "km": 268,
+    "duenos": [
+      "PTI Pacifica"
+    ],
+    "fuentes": [
+      "https://fcc.report/IBFS/SCL-LIC-19970111-00016",
+      "https://geocables.com/cable/mariana-guam-cable"
+    ]
+  },
+  {
+    "nombre": "Guam Okinawa Kyushu Incheon (GOKI)",
+    "llegadas": [
+      {
+        "lugar": "Tumon Bay, Guam",
+        "pais": "GU",
+        "lat": 13.5136,
+        "lon": 144.8006
+      },
+      {
+        "lugar": "Naha, Okinawa",
+        "pais": "JP",
+        "lat": 26.2124,
+        "lon": 127.6806
+      },
+      {
+        "lugar": "Kitakyushu, Kyushu",
+        "pais": "JP",
+        "lat": 33.8393,
+        "lon": 131.032
+      }
+    ],
+    "anio": 2013,
+    "km": 4244,
+    "duenos": [
+      "AT&T"
+    ],
+    "fuentes": [
+      "https://archives.guamlegislature.gov/37th_Guam_Legislature/Committee_Reports_37th/Committee%20Report-%20Roundtable%20Hearing%20-%20CLTC%20Submerged%20Land%20Leases%20for%20Fiber%20Optics%20Telecommunication%20Cables.pdf",
+      "https://mpls.jp/2024/presentations/mpls2024-watanabe.pdf",
+      "https://geocables.com/cable/guam-okinawa-kyushu-incheon-goki"
+    ]
+  },
+  {
+    "nombre": "Chuuk-Pohnpei Cable (C-P Cable)",
+    "llegadas": [
+      {
+        "lugar": "Weno, Chuuk",
+        "pais": "FM",
+        "lat": 7.44,
+        "lon": 151.8585
+      },
+      {
+        "lugar": "Kolonia, Pohnpei",
+        "pais": "FM",
+        "lat": 6.964,
+        "lon": 158.209
+      }
+    ],
+    "anio": 2019,
+    "km": 1200,
+    "duenos": [
+      "FSM Telecommunications Cable Corporation"
+    ],
+    "fuentes": [
+      "https://fsmcable.com/states/chuuk/",
+      "https://openjicareport.jica.go.jp/pdf/12368767.pdf"
+    ]
+  },
+  {
+    "nombre": "Natitua Sud",
+    "llegadas": [
+      {
+        "lugar": "Mitirapa, Toahotu, Tahití",
+        "pais": "PF",
+        "lat": -17.7505,
+        "lon": -149.3234
+      },
+      {
+        "lugar": "Moerai, Rurutu",
+        "pais": "PF",
+        "lat": -22.4513,
+        "lon": -151.3429
+      },
+      {
+        "lugar": "Mataura, Tubuai",
+        "pais": "PF",
+        "lat": -23.347,
+        "lon": -149.4859
+      }
+    ],
+    "anio": 2023,
+    "km": 820,
+    "duenos": [
+      "OPT Polynésie française"
+    ],
+    "fuentes": [
+      "https://groupe.opt.pf/communique-de-presse-natitua-sud.html",
+      "https://groupe.opt.pf/natitua-sud-premiere-etape-validee.html",
+      "https://www.polynesie-francaise.gouv.fr/Actualites/Communiques-de-presse/2020/L-Etat-accorde-un-financement-de-358-millions-Fcfp-pour-le-projet-de-cable-numerique-Natitua-Sud"
+    ]
+  },
+  {
+    "nombre": "Tokelau Submarine Cable",
+    "llegadas": [
+      {
+        "lugar": "Atafu",
+        "pais": "TK",
+        "lat": -8.5591,
+        "lon": -172.5109
+      },
+      {
+        "lugar": "Nukunonu",
+        "pais": "TK",
+        "lat": -9.1746,
+        "lon": -171.8115
+      },
+      {
+        "lugar": "Fakaofo",
+        "pais": "TK",
+        "lat": -9.3838,
+        "lon": -171.2615
+      }
+    ],
+    "anio": 2023,
+    "km": 250,
+    "duenos": [
+      "Tokelau Telecommunications Corporation (Teletok)"
+    ],
+    "fuentes": [
+      "https://digitallibrary.un.org/record/4077116/files/A_AC.109_2025_14-EN.pdf",
+      "https://www.submarinecablemap.com/submarine-cable/tokelau-submarine-cable"
+    ]
+  },
+  {
+    "nombre": "Pukpuk-1 Cable System (Puk-Puk 1)",
+    "llegadas": [
+      {
+        "lugar": "Jayapura, Papúa",
+        "pais": "ID",
+        "lat": -2.534,
+        "lon": 140.718
+      },
+      {
+        "lugar": "Vanimo, Sandaun",
+        "pais": "PG",
+        "lat": -2.674,
+        "lon": 141.302
+      }
+    ],
+    "anio": 2026,
+    "km": 134,
+    "duenos": [
+      "PNG DataCo Limited"
+    ],
+    "fuentes": [
+      "https://www.telkom.co.id/sites/berita/id_ID/news/telkomgroup-resmikan-kabel-laut-pukpuk-jembatan-digital-pertama-yang-menghubungkan-indonesia-papua-nugini-3757",
+      "https://www.submarinecablemap.com/submarine-cable/pukpuk-1-cable-system"
+    ]
+  },
+  {
+    "nombre": "Tuvalu Vaka Cable (VAKA)",
+    "llegadas": [
+      {
+        "lugar": "Funafuti, Tuvalu",
+        "pais": "TV",
+        "lat": -8.52,
+        "lon": 179.2
+      }
+    ],
+    "anio": 2025,
+    "km": 668,
+    "duenos": [
+      "Tuvalu Telecommunications Corporation"
+    ],
+    "fuentes": [
+      "https://www.ccrc.gov.au/index.php/news-and-media/tuvalu-leads-way-protecting-its-first-undersea-cable",
+      "https://www.aiffp.gov.au/news/australia-and-tuvalu-celebrate-milestone-connection-vaka-cable",
+      "https://www.aiffp.gov.au/investments/investment-list/tuvalu-vaka-cable"
+    ]
+  },
+  {
+    "nombre": "Tu'i Vava'u Cable (Tonga Hawaiki Submarine Cable Branch System)",
+    "llegadas": [
+      {
+        "lugar": "Neiafu, Vava'u, Tonga",
+        "pais": "TO",
+        "lat": -18.6477,
+        "lon": -173.9837
+      }
+    ],
+    "anio": 2026,
+    "km": 405,
+    "duenos": [
+      "Tonga Cable Limited"
+    ],
+    "fuentes": [
+      "https://pmo.gov.to/wp-content/uploads/2026/06/English-PR-HMDS-Media-Release-on-Tui-Vavau-Cable-.rev4_.docx.pdf",
+      "https://www.aiffp.gov.au/news/tongas-second-international-cable-officially-launched",
+      "https://www.aiffp.gov.au/investments/investment-list/expanding-digital-connectivity-tonga-second-international-undersea-cable"
+    ]
+  },
+  {
+    "nombre": "Groote Eylandt",
+    "llegadas": [
+      {
+        "lugar": "Numbulwar, Territorio del Norte",
+        "pais": "AU",
+        "lat": -14.2775,
+        "lon": 135.7216
+      },
+      {
+        "lugar": "Alyangula, Groote Eylandt",
+        "pais": "AU",
+        "lat": -13.8512,
+        "lon": 136.4203
+      }
+    ],
+    "anio": 2011,
+    "km": 95,
+    "duenos": [
+      "Telstra"
+    ],
+    "fuentes": [
+      "https://www.telstra.com.au/business-enterprise/news-research/case-studies/how-connectivity-is-helping-anindilyakwa-land-council-reclaim-its-identity",
+      "https://www.itnews.com.au/gallery/photos-networking-remote-australia-242557",
+      "https://geocables.com/cable/groote-eylandt"
+    ]
+  },
+  {
+    "nombre": "Tahiti Iti (Tautira-Teahupo'o)",
+    "llegadas": [
+      {
+        "lugar": "Marina Tautira, Tahití",
+        "pais": "PF",
+        "lat": -17.7718,
+        "lon": -149.177
+      },
+      {
+        "lugar": "Marina Teahupo'o, Tahití",
+        "pais": "PF",
+        "lat": -17.8494,
+        "lon": -149.2486
+      }
+    ],
+    "anio": 2024,
+    "km": 36,
+    "duenos": [
+      "ONATi",
+      "Groupe OPT"
+    ],
+    "fuentes": [
+      "https://www.service-public.pf/dpam/2024/06/25/precautions-en-mer-aux-abords-du-nouveau-cable-de-fibre-deploye-de-teahupoo-a-tautira/",
+      "https://www.service-public.pf/dpam/wp-content/uploads/sites/20/2024/06/Cable-sublagonaire-.pdf",
+      "https://api.groupe-keran.com/api/upload/9412d1309a275b3f33a9c5769385dc9b.pdf"
+    ]
+  }
+]

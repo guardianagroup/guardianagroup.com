@@ -1,0 +1,118 @@
+[
+  {
+    "nombre": "Fibra óptica UTE sobre líneas de transmisión Bonete–Young–Paysandú–Salto",
+    "operador": "UTE",
+    "pais": "UY",
+    "ciudades": [
+      "Young",
+      "Paysandu",
+      "Salto"
+    ],
+    "estado": "en servicio",
+    "fuente": "UTE, Memoria Anual 2021, apartado «Tendido de fibras ópticas en líneas aéreas de trasmisión». Confirma la finalización de los tramos Bonete–Bonete B, Bonete B–Young, Young–Paysandú y Paysandú–Salto. https://www.ute.com.uy/sites/default/files/memorias/Memoria%20anual%202021.pdf"
+  },
+  {
+    "nombre": "Fibra óptica UTE Tacuarembó–Rivera",
+    "operador": "UTE",
+    "pais": "UY",
+    "ciudades": [
+      "Tacuarembo",
+      "Rivera"
+    ],
+    "estado": "en servicio",
+    "fuente": "UTE, Ejecución Presupuestal 2022, proyecto 2.2.21. Confirma la finalización del tendido de fibra óptica sobre la línea de transmisión Tacuarembó–Rivera. https://www.ute.com.uy/sites/default/files/docs/TOMO%202022%20VF.pdf"
+  },
+  {
+    "nombre": "National Transmission Network – Madang–Yonki",
+    "operador": "PNG DataCo",
+    "pais": "PG",
+    "ciudades": [
+      "Madang",
+      "Yonki"
+    ],
+    "estado": "en servicio",
+    "fuente": "PNG DataCo, comunicado del 27 de septiembre de 2026, «Network Outages, Restoration Update and International Service Degradation». Identifica expresamente el corredor terrestre de fibra Madang–Yonki y confirma su restablecimiento el 21 de septiembre de 2026. https://www.pngdataco.com/network-outages-restoration-update-and-international-service-degradation/"
+  },
+  {
+    "nombre": "National Transmission Network – Highlands Terrestrial Fibre Backbone",
+    "operador": "PNG DataCo",
+    "pais": "PG",
+    "ciudades": [
+      "Madang",
+      "Yonki",
+      "Goroka",
+      "Kundiawa",
+      "Mount Hagen",
+      "Mendi"
+    ],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Papúa Nueva Guinea, Public Investment Program 2023–2026, volumen 3B, página 167, proyecto 05095. Documenta la troncal terrestre desde Madang hacia Goroka, Kundiawa, Mount Hagen y Mendi. PNG DataCo confirma el tramo Madang–Yonki en su comunicado del 27 de septiembre de 2026. https://www.treasury.gov.pg/wp-content/uploads/2023/05/budget-2023-Volume-3B.pdf ; https://www.pngdataco.com/network-outages-restoration-update-and-international-service-degradation/"
+  },
+  {
+    "nombre": "National Transmission Network – Mount Hagen–Tari",
+    "operador": "PNG DataCo",
+    "pais": "PG",
+    "ciudades": [
+      "Mount Hagen",
+      "Tari"
+    ],
+    "estado": "en servicio",
+    "fuente": "PNG DataCo, comunicado del 6 de octubre de 2026, «Network Outages and Restoration Update». Identifica expresamente la ruta terrestre de fibra Tari–Hagen y confirma su restablecimiento el 2 de octubre de 2026. https://www.pngdataco.com/network-outages-and-restoration-update/"
+  },
+  {
+    "nombre": "Telecom Fiji – Coastal Route, Viti Levu",
+    "operador": "Telecom Fiji",
+    "pais": "FJ",
+    "ciudades": [
+      "Suva",
+      "Navua",
+      "Korolevu",
+      "Sigatoka",
+      "Nadi",
+      "Lautoka"
+    ],
+    "estado": "en servicio",
+    "fuente": "Telecom Fiji, mapa «Telecom Fiji Footprints», ©2024, reproducido en la presentación oficial de Fiji ante la OACI, CRV Workshop for Pacific Small Island Developing States, 2025, diapositiva 6. La leyenda diferencia expresamente los trazados de fibra de los enlaces de microondas y submarinos. https://www.icao.int/sites/default/files/APAC/Meetings/2025/2025%20CRV%20OG-13/CRV%20Workshop%20for%20PSIDS/5-Presentations/SP08-Sharing-of-current-ATS-infrastructure-constraintsissues-and-Fiji.pdf"
+  },
+  {
+    "nombre": "Telecom Fiji – Viti Levu Route",
+    "operador": "Telecom Fiji",
+    "pais": "FJ",
+    "ciudades": [
+      "Suva",
+      "Nausori",
+      "Korovou",
+      "Rakiraki",
+      "Tavua",
+      "Ba",
+      "Lautoka"
+    ],
+    "estado": "en servicio",
+    "fuente": "Telecom Fiji, mapa «Telecom Fiji Footprints», ©2024, presentado ante la OACI en 2025, diapositiva 6. Identifica la ruta de fibra terrestre por el norte de Viti Levu. https://www.icao.int/sites/default/files/APAC/Meetings/2025/2025%20CRV%20OG-13/CRV%20Workshop%20for%20PSIDS/5-Presentations/SP08-Sharing-of-current-ATS-infrastructure-constraintsissues-and-Fiji.pdf"
+  },
+  {
+    "nombre": "Telecom Fiji – Insular Route, Viti Levu",
+    "operador": "Telecom Fiji",
+    "pais": "FJ",
+    "ciudades": [
+      "Ba",
+      "Nadarivatu",
+      "Wailoa",
+      "Suva"
+    ],
+    "estado": "en servicio",
+    "fuente": "Telecom Fiji, mapa oficial «Telecom Fiji Footprints», ©2024, reproducido en la presentación de Fiji ante la OACI en 2025, diapositiva 6. El mapa identifica el corredor interior como «Insular Route» y representa su trazado de fibra óptica. https://www.icao.int/sites/default/files/APAC/Meetings/2025/2025%20CRV%20OG-13/CRV%20Workshop%20for%20PSIDS/5-Presentations/SP08-Sharing-of-current-ATS-infrastructure-constraintsissues-and-Fiji.pdf"
+  },
+  {
+    "nombre": "Savusavu–Labasa Fibre Project, Vanua Levu",
+    "operador": "Telecom Fiji",
+    "pais": "FJ",
+    "ciudades": [
+      "Savusavu",
+      "Seaqaqa",
+      "Labasa"
+    ],
+    "estado": "en servicio",
+    "fuente": "Telecom Fiji, comunicado del 2 de marzo de 2026, «Telecom Fiji wins Infrastructure Initiative of the Year at Asian Telecom Awards 2026». Confirma la puesta en servicio de 102 kilómetros de fibra óptica terrestre subterránea entre Savusavu, Seaqaqa y Labasa. https://www.telecom.com.fj/telecom-fiji-knowledge/telecom-fiji-wins-infrastructure-initiative-of-the-year-at-asian-telecom-awards-2026/"
+  }
+]

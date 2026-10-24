@@ -1,0 +1,85 @@
+
+[
+  {
+    "nombre": "Red nacional de fibra óptica Pyongyang–Hamhung–Chongjin–Rajin",
+    "operador": "KPTC",
+    "pais": "KP",
+    "ciudades": [
+      "Pyongyang",
+      "Hamhung",
+      "Chongjin",
+      "Rajin"
+    ],
+    "estado": "en servicio",
+    "fuente": "DNI/Open Source Center, North Korea's IT Strategy, tabla 3-5, documenta los tramos Pyongyang–Hamhung (300 km) y Hamhung–Chongjin–Najin (parte de 530 km), terminados en 1995: https://irp.fas.org/dni/osc/dprk-it.pdf ; declaración oficial de Corea del Norte ante la UIT, PP-22 (2022), confirma la existencia de una red nacional de fibra óptica operativa, aunque no actualiza el estado individual de cada tramo: https://pp.itu.int/2022/ar/itu_policy_statements/pyong-du-ri-dem-peoples-rep-of-korea/"
+  },
+  {
+    "nombre": "Red nacional e internacional Pyongyang–Sinuiju–Dandong",
+    "operador": "KPTC",
+    "pais": "KP",
+    "ciudades": [
+      "Pyongyang",
+      "Sinuiju",
+      "Dandong"
+    ],
+    "estado": "en servicio",
+    "fuente": "DNI/Open Source Center, North Korea's IT Strategy, tabla 3-5: enlace Pyongyang–Sinuiju de 400 km completado en 1998, https://irp.fas.org/dni/osc/dprk-it.pdf ; Korea Institute for International Economic Policy, estudio sobre Corea del Norte, documenta la conexión de fibra óptica Pyongyang–Dandong: https://www.kiep.kr/galleryDownload.es?bid=0001&list_no=647&seq=1 ; Ministerio de Exteriores de Japón, MSMT Report 2025, documenta la ampliación de conectividad de China Unicom en Corea del Norte: https://www.mofa.go.jp/mofaj/files/100922718.pdf"
+  },
+  {
+    "nombre": "Dorsal Sur N'Djamena–Kagpal",
+    "operador": "Sotel Tchad",
+    "pais": "TD",
+    "ciudades": [
+      "N'Djamena",
+      "Guelendeng",
+      "Bongor",
+      "Kelo",
+      "Moundou",
+      "M'Baikoro",
+      "Kagpal"
+    ],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Chad Digital Economy Diagnostic (2023), página 37, tabla 6 y figura 7: tramo de 610 km N'Djamena–Kagpal, con las localidades y distancias intermedias expresamente identificadas. El informe confirma que continúa en servicio para transmisión nacional, aunque ya no proporciona salida internacional: https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf"
+  },
+  {
+    "nombre": "Dorsal Sur N'Djamena–Doba",
+    "operador": "Sotel Tchad",
+    "pais": "TD",
+    "ciudades": [
+      "N'Djamena",
+      "Guelendeng",
+      "Bongor",
+      "Kelo",
+      "Moundou",
+      "M'Baikoro",
+      "Doba"
+    ],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Chad Digital Economy Diagnostic (2023), página 37, figura 7: recorrido principal N'Djamena–M'Baikoro y ramal de 76 km hasta Doba. La tabla 6 clasifica la dorsal Sur como infraestructura en servicio: https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf"
+  },
+  {
+    "nombre": "Fibra del oleoducto Chad–Cameroon, sección Komé–Mberé",
+    "operador": "EEPCI",
+    "pais": "TD",
+    "ciudades": [
+      "Kome",
+      "Kagpal",
+      "Bessao",
+      "Mbere"
+    ],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Chad Digital Economy Diagnostic (2023), página 37, figura 7: distingue la fibra de EEPCI asociada al oleoducto y representa los nodos Kome, Kagpal, Bessao y Mbere; la dorsal Sur figura en servicio, pero su salida internacional está inactiva. https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf ; Banco Mundial, Central African Backbone Project (2016): https://ppp.worldbank.org/library/central-african-backbone-project-0"
+  },
+  {
+    "nombre": "Red OPGW Costa Caribe Norte Siuna–Rosita–Bilwi",
+    "operador": "ENATREL",
+    "pais": "NI",
+    "ciudades": [
+      "Siuna",
+      "Rosita",
+      "Bilwi"
+    ],
+    "estado": "en servicio",
+    "fuente": "ENATREL, Toda Nicaragua interconectada a finales de 2019, identifica los más de 200 km de la línea Siuna–Rosita–Bilwi y confirma que transporta fibra OPGW: https://www.enatrel.gob.ni/toda-nicaragua-interconectada-a-finales-de-2019/ ; ENATREL, Boletín Informativo de enero de 2022, página 7, confirma la entrada en operación de la interconexión: https://www.enatrel.gob.ni/wp-content/uploads/2024/04/boletin-142.pdf"
+  }
+]

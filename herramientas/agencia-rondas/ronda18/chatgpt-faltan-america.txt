@@ -1,0 +1,424 @@
+[
+{
+"nombre": "Alaska United Southeast (AU-SE)",
+"llegadas": [
+{"lugar":"Ketchikan, Alaska","pais":"US","lat":55.3421,"lon":-131.6478},
+{"lugar":"Wrangell, Alaska","pais":"US","lat":56.4708,"lon":-132.3838},
+{"lugar":"Petersburg, Alaska","pais":"US","lat":56.8076,"lon":-132.9700},
+{"lugar":"Sitka, Alaska","pais":"US","lat":57.0529,"lon":-135.3344},
+{"lugar":"Angoon, Alaska","pais":"US","lat":57.5018,"lon":-134.5823},
+{"lugar":"Hawk Inlet, Alaska","pais":"US","lat":58.1281,"lon":-134.7418},
+{"lugar":"Juneau, Alaska","pais":"US","lat":58.2995,"lon":-134.4069}
+],
+"anio":2008,
+"km":626,
+"duenos":["GCI Communication Corp."],
+"fuentes":["https://docs.fcc.gov/public/attachments/DA-20-1018A1.pdf","https://www.submarinecablemap.com/submarine-cable/alaska-united-southeast-au-se"]
+},
+{
+"nombre":"Alaska United Turnagain Arm (AUTA)",
+"llegadas":[
+{"lugar":"McHugh Point, Alaska","pais":"US","lat":61.0157,"lon":-149.7322},
+{"lugar":"Portage, Alaska","pais":"US","lat":60.8283,"lon":-148.9898}
+],
+"anio":2012,
+"km":53,
+"duenos":["GCI Communication Corp."],
+"fuentes":["https://www.gci.com/","https://geocables.com/cable/alaska-united-turnagain-arm-auta"]
+},
+{
+"nombre":"AU-Aleutian",
+"llegadas":[
+{"lugar":"Kodiak, Alaska","pais":"US","lat":57.7941,"lon":-152.3953},
+{"lugar":"Ouzinkie, Alaska","pais":"US","lat":57.9252,"lon":-152.5017},
+{"lugar":"Port Lions, Alaska","pais":"US","lat":57.8694,"lon":-152.8819},
+{"lugar":"Larsen Bay, Alaska","pais":"US","lat":57.5372,"lon":-153.9860},
+{"lugar":"Chignik Bay, Alaska","pais":"US","lat":56.2944,"lon":-158.4088},
+{"lugar":"Chignik Lagoon, Alaska","pais":"US","lat":56.3213,"lon":-158.5072},
+{"lugar":"Chignik Lake, Alaska","pais":"US","lat":56.2549,"lon":-158.7721},
+{"lugar":"Perryville, Alaska","pais":"US","lat":55.9175,"lon":-159.1448},
+{"lugar":"Sand Point, Alaska","pais":"US","lat":55.3360,"lon":-160.5007},
+{"lugar":"King Cove, Alaska","pais":"US","lat":55.0491,"lon":-162.3044},
+{"lugar":"Cold Bay, Alaska","pais":"US","lat":55.2041,"lon":-162.7040},
+{"lugar":"False Pass, Alaska","pais":"US","lat":54.8508,"lon":-163.4150},
+{"lugar":"Akutan, Alaska","pais":"US","lat":54.1356,"lon":-165.7731},
+{"lugar":"Unalaska, Alaska","pais":"US","lat":53.8844,"lon":-166.5332}
+],
+"anio":2022,
+"km":1491,
+"duenos":["GCI Communication Corp."],
+"fuentes":["https://www.gci.com/about/digital-divide/aleutian-fiber-project","https://news.gci.com/news-releases/gci-celebrates-year-of-remarkable-progress-for-aleutians-fiber-project"]
+},
+{
+"nombre":"SEALink",
+"llegadas":[
+{"lugar":"Lena Point, Alaska","pais":"US","lat":58.5509,"lon":-134.7473},
+{"lugar":"Petersburg, Alaska","pais":"US","lat":56.8076,"lon":-132.9700},
+{"lugar":"Coffman Cove, Alaska","pais":"US","lat":56.0152,"lon":-132.8295}
+],
+"anio":2023,
+"km":345,
+"duenos":["Alaska Power & Telephone Company"],
+"fuentes":["https://www.aptalaska.com/wp-content/uploads/2022/11/SEALink-Sub-Cable-Completion-Press-Release-FINAL-11-3-2022.pdf"]
+},
+{
+"nombre":"SEALink South",
+"llegadas":[
+{"lugar":"Coffman Cove, Alaska","pais":"US","lat":56.0152,"lon":-132.8295},
+{"lugar":"Hollis, Alaska","pais":"US","lat":55.5138,"lon":-133.0219},
+{"lugar":"Ketchikan, Alaska","pais":"US","lat":55.3421,"lon":-131.6478}
+],
+"anio":2024,
+"km":159,
+"duenos":["Alaska Power & Telephone Company"],
+"fuentes":["https://aptalaska.com/apt-completes-installation-of-the-sealink-south/"]
+},
+{
+"nombre":"Hawaii Island Fibre Network (HIFN)",
+"llegadas":[
+{"lugar":"Lihue, Hawái","pais":"US","lat":21.9749,"lon":-159.3686},
+{"lugar":"Makaha, Hawái","pais":"US","lat":21.4634,"lon":-158.2206},
+{"lugar":"Koko Head, Hawái","pais":"US","lat":21.2776,"lon":-157.6960},
+{"lugar":"Kaunakakai, Hawái","pais":"US","lat":21.0933,"lon":-157.0239},
+{"lugar":"Manele Bay, Hawái","pais":"US","lat":20.7434,"lon":-156.8969},
+{"lugar":"Kihei, Hawái","pais":"US","lat":20.7822,"lon":-156.4631},
+{"lugar":"Kawaihae, Hawái","pais":"US","lat":20.0403,"lon":-155.8312}
+],
+"anio":1997,
+"km":529,
+"duenos":["Hawaiian Telcom","Hawaiian Telcom Services Company","Level 3 Telecom of Hawaii"],
+"fuentes":["https://docs.fcc.gov/public/attachments/DOC-381242A1.pdf"]
+},
+{
+"nombre":"St. Pierre and Miquelon Cable",
+"llegadas":[
+{"lugar":"Fortune, Terranova","pais":"CA","lat":47.0720,"lon":-55.8273},
+{"lugar":"Miquelon-Langlade","pais":"PM","lat":47.0837,"lon":-56.3499},
+{"lugar":"Saint-Pierre","pais":"PM","lat":46.7758,"lon":-56.1806},
+{"lugar":"Lamaline, Terranova","pais":"CA","lat":46.8690,"lon":-55.8033}
+],
+"anio":2018,
+"km":140,
+"duenos":["Collectivité territoriale de Saint-Pierre-et-Miquelon"],
+"fuentes":["https://www.jo-spm.fr/doc_jo/DELIB2021-0289.pdf","https://jo-spm.fr/doc_jo/DELIB2022-0290.pdf"]
+},
+{
+"nombre":"Farewell-Change-Fogo Subsea Cable",
+"llegadas":[
+{"lugar":"Farewell, Terranova","pais":"CA","lat":49.5559,"lon":-54.4792},
+{"lugar":"Fogo Island, Terranova","pais":"CA","lat":49.5838,"lon":-54.3952},
+{"lugar":"Stag Harbour, Terranova","pais":"CA","lat":49.5839,"lon":-54.2837}
+],
+"anio":2025,
+"km":16,
+"duenos":["Bell Canada"],
+"fuentes":["https://www.newswire.ca/news-releases/bell-completes-subsea-fibre-optic-cable-deployment-to-fogo-and-change-islands-815315741.html"]
+},
+{
+"nombre":"Bahamas 2",
+"llegadas":[
+{"lugar":"Nassau","pais":"BS","lat":25.0670,"lon":-77.3403},
+{"lugar":"Eight-Mile Rock","pais":"BS","lat":26.5396,"lon":-78.8029},
+{"lugar":"Vero Beach, Florida","pais":"US","lat":27.6384,"lon":-80.3943}
+],
+"anio":1997,
+"km":476,
+"duenos":["Bahamas Telecommunications Company"],
+"fuentes":["https://publications.iadb.org/publications/english/document/Promoting-Investment-in-Information-and-Communications-Technologies-in-the-Caribbean.pdf","https://fcc.report/IBFS/SCL-T-C-20141121-00013/1081674.pdf"]
+},
+{
+"nombre":"Bahamas Internet Cable System (BICS)",
+"llegadas":[
+{"lugar":"Boca Raton, Florida","pais":"US","lat":26.3503,"lon":-80.0889},
+{"lugar":"Hawksbill","pais":"BS","lat":26.5169,"lon":-78.7368},
+{"lugar":"Riding Point","pais":"BS","lat":26.7031,"lon":-78.1517},
+{"lugar":"Crown Haven","pais":"BS","lat":26.9125,"lon":-77.8220},
+{"lugar":"Sandy Point","pais":"BS","lat":26.0252,"lon":-77.3995},
+{"lugar":"Current","pais":"BS","lat":25.4078,"lon":-76.7877},
+{"lugar":"Caves Point","pais":"BS","lat":25.0685,"lon":-77.4530}
+],
+"anio":2001,
+"km":1100,
+"duenos":["Caribbean Crossings"],
+"fuentes":["https://docs.fcc.gov/public/attachments/DA-02-2821A1.pdf"]
+},
+{
+"nombre":"Grand Bahama Bimini Submarine Cable",
+"llegadas":[
+{"lugar":"Eight-Mile Rock","pais":"BS","lat":26.5396,"lon":-78.8029},
+{"lugar":"Alice Town, Bimini","pais":"BS","lat":25.7270,"lon":-79.2934}
+],
+"anio":2005,
+"km":117,
+"duenos":["Bahamas Telecommunications Company"],
+"fuentes":["https://www.btcbahamas.com/","https://www.submarinecablemap.com/submarine-cable/grand-bahama-bimini-submarine-cable"]
+},
+{
+"nombre":"Alonso de Ojeda",
+"llegadas":[
+{"lugar":"Baby Beach, Aruba","pais":"AW","lat":12.4141,"lon":-69.8787},
+{"lugar":"Willemstad, Curazao","pais":"CW","lat":12.0956,"lon":-68.8965}
+],
+"anio":1999,
+"km":122,
+"duenos":["SETAR","United Telecommunication Services"],
+"fuentes":["https://www.setar.aw/setar-history/","https://repositoriotec.tec.ac.cr/bitstream/handle/2238/144/BJFIE200399.pdf?sequence=1"]
+},
+{
+"nombre":"Amerigo Vespucci",
+"llegadas":[
+{"lugar":"Willemstad, Curazao","pais":"CW","lat":12.0956,"lon":-68.8965},
+{"lugar":"Kralendijk, Bonaire","pais":"BQ","lat":12.1507,"lon":-68.2767}
+],
+"anio":1999,
+"km":87,
+"duenos":["Telbo","Cable & Wireless Communications"],
+"fuentes":["https://saba-news.com/wp-content/uploads/2025/09/Telecom-in-the-Caribbean-Netherlands.pdf"]
+},
+{
+"nombre":"Jerry Newton",
+"llegadas":[
+{"lugar":"Willemstad, Curazao","pais":"CW","lat":12.0956,"lon":-68.8965},
+{"lugar":"North Salina, Bonaire","pais":"BQ","lat":12.1638,"lon":-68.2841}
+],
+"anio":2007,
+"km":88,
+"duenos":["Liberty Latin America"],
+"fuentes":["https://saba-news.com/wp-content/uploads/2025/09/Telecom-in-the-Caribbean-Netherlands.pdf"]
+},
+{
+"nombre":"EC Link",
+"llegadas":[
+{"lugar":"Willemstad, Curazao","pais":"CW","lat":12.0956,"lon":-68.8965},
+{"lugar":"Chaguaramas, Trinidad","pais":"TT","lat":10.6862,"lon":-61.6508}
+],
+"anio":2007,
+"km":1078,
+"duenos":["Liberty Networks"],
+"fuentes":["https://www.libertynetworks.com/","https://btnp.org/wp-content/uploads/2020/12/20201124-BTP-Telecommunication-Services-Performance-Indicators-Statistical-Publication-2020-V10.pdf"]
+},
+{
+"nombre":"Saba Statia Cable System (SSCS)",
+"llegadas":[
+{"lugar":"Great Bay Beach, Sint Maarten","pais":"SX","lat":18.0245,"lon":-63.0551},
+{"lugar":"Gustavia, San Bartolomé","pais":"BL","lat":17.8979,"lon":-62.8505},
+{"lugar":"Great Level Bay, Saba","pais":"BQ","lat":17.6151,"lon":-63.2442},
+{"lugar":"Gallows Bay, San Eustaquio","pais":"BQ","lat":17.4759,"lon":-62.9855},
+{"lugar":"Basseterre, San Cristóbal","pais":"KN","lat":17.2986,"lon":-62.7312}
+],
+"anio":2013,
+"km":198,
+"duenos":["Gobierno de los Países Bajos"],
+"fuentes":["https://saba-news.com/wp-content/uploads/2025/09/Telecom-in-the-Caribbean-Netherlands.pdf","https://www.rijksoverheid.nl/binaries/rijksoverheid/documenten/rapporten/2022/10/31/synthese-rapport-beleidsdoorlichting-artikel-8-koninkrijksrelaties-engels/synthese-rapport-beleidsdoorlichting-artikel-8-koninkrijksrelaties-engels.pdf"]
+},
+{
+"nombre":"Deep Blue One",
+"llegadas":[
+{"lugar":"Cayenne, Guayana Francesa","pais":"GF","lat":4.9224,"lon":-52.3135},
+{"lugar":"Paramaribo, Surinam","pais":"SR","lat":5.8240,"lon":-55.1739},
+{"lugar":"Georgetown, Guyana","pais":"GY","lat":6.8045,"lon":-58.1548},
+{"lugar":"Chaguaramas, Trinidad","pais":"TT","lat":10.6862,"lon":-61.6508},
+{"lugar":"Rockly Bay, Tobago","pais":"TT","lat":11.1825,"lon":-60.7353}
+],
+"anio":2024,
+"km":2250,
+"duenos":["Digicel"],
+"fuentes":["https://totaltele.com/digicels-deep-blue-one-subsea-fibre-cable-goes-live/"]
+},
+{
+"nombre":"East-West Cable (EWC)",
+"llegadas":[
+{"lugar":"Harbour View, Jamaica","pais":"JM","lat":17.9497,"lon":-76.7169},
+{"lugar":"Haina, República Dominicana","pais":"DO","lat":18.6990,"lon":-70.1618},
+{"lugar":"Nanny Cay, Islas Vírgenes Británicas","pais":"VG","lat":18.4148,"lon":-64.5972}
+],
+"anio":2011,
+"km":1705,
+"duenos":["Cable & Wireless Communications","Liberty Networks"],
+"fuentes":["https://www.cwc.com/live/assets/uploads/files/Press%20Releases/East-West%20Caribbean%20Cable%20-%20FINAL_240510.pdf"]
+},
+{
+"nombre":"Guadeloupe Câble des Îles du Sud (GCIS)",
+"llegadas":[
+{"lugar":"Saint-François, Guadalupe","pais":"GP","lat":16.2511,"lon":-61.2745},
+{"lugar":"Beauséjour, La Désirade","pais":"GP","lat":16.3036,"lon":-61.0739},
+{"lugar":"Saint-Louis, Marie-Galante","pais":"GP","lat":15.9534,"lon":-61.3191},
+{"lugar":"Terre-de-Haut, Les Saintes","pais":"GP","lat":15.8730,"lon":-61.5788},
+{"lugar":"Capesterre-Belle-Eau, Guadalupe","pais":"GP","lat":16.0424,"lon":-61.5647}
+],
+"anio":2020,
+"km":118,
+"duenos":["Conseil régional de Guadeloupe"],
+"fuentes":["https://www.guadeloupe.gouv.fr/content/download/18488/117799/file/E19000010-97%20Rapport%20et%20conclusions%20%28sign%C3%A9%29.pdf","https://www.ccomptes.fr/sites/default/files/2023-10/RAN2023-0013.pdf"]
+},
+{
+"nombre":"Caribbean Regional Communications Infrastructure Program (CARCIP)",
+"llegadas":[
+{"lugar":"Owia, San Vicente","pais":"VC","lat":13.3731,"lon":-61.1428},
+{"lugar":"Chateaubelair, San Vicente","pais":"VC","lat":13.2909,"lon":-61.2408},
+{"lugar":"Kingstown, San Vicente","pais":"VC","lat":13.1454,"lon":-61.2083},
+{"lugar":"Bequia","pais":"VC","lat":12.9976,"lon":-61.2447},
+{"lugar":"Mustique","pais":"VC","lat":12.8777,"lon":-61.1871},
+{"lugar":"Canouan","pais":"VC","lat":12.6996,"lon":-61.3390},
+{"lugar":"Union Island","pais":"VC","lat":12.6114,"lon":-61.4432},
+{"lugar":"Carriacou","pais":"GD","lat":12.4737,"lon":-61.4786},
+{"lugar":"Conference, Granada","pais":"GD","lat":12.1612,"lon":-61.6064}
+],
+"anio":2019,
+"km":225,
+"duenos":["Digicel"],
+"fuentes":["https://www.worldbank.org/en/news/press-release/2020/03/26/world-bank-approves-us119-million-additional-financing-for-telecommunications-development-in-the-eastern-caribbean"]
+},
+{
+"nombre":"Gulf of California Cable",
+"llegadas":[
+{"lugar":"La Paz, Baja California Sur","pais":"MX","lat":24.1026,"lon":-110.3055},
+{"lugar":"Topolobampo, Sinaloa","pais":"MX","lat":25.6007,"lon":-109.0504}
+],
+"anio":2019,
+"km":217,
+"duenos":["Megacable"],
+"fuentes":["https://repositorio.cepal.org/server/api/core/bitstreams/fd7acab3-009e-4156-9362-9fd75bea5c4b/content"]
+},
+{
+"nombre":"Gulf of Mexico Fiber Optic Network",
+"llegadas":[
+{"lugar":"Freeport, Texas","pais":"US","lat":28.9496,"lon":-95.3444},
+{"lugar":"Pascagoula, Mississippi","pais":"US","lat":30.3658,"lon":-88.5561}
+],
+"anio":2008,
+"km":1200,
+"duenos":["Tampnet"],
+"fuentes":["https://www.tampnet.com/","https://geocables.com/cable/gulf-of-mexico-fiber-optic-network"]
+},
+{
+"nombre":"Lázaro Cárdenas-Manzanillo Santiago Submarine Cable System (LCMSSCS)",
+"llegadas":[
+{"lugar":"Manzanillo, Colima","pais":"MX","lat":19.0858,"lon":-104.3082},
+{"lugar":"Ciudad Lázaro Cárdenas, Michoacán","pais":"MX","lat":17.9568,"lon":-102.1943},
+{"lugar":"Ixtapa-Zihuatanejo, Guerrero","pais":"MX","lat":17.6641,"lon":-101.6105}
+],
+"anio":2013,
+"km":322,
+"duenos":["Telmex"],
+"fuentes":["https://s3-us-gov-west-1.amazonaws.com/cg-654ebf73-8576-4082-ba73-dd1f1a7fe8dc/uploads/LAC-ICT-Volume-4-02052022-FINAL.pdf"]
+},
+{
+"nombre":"San Andrés-Isla Tolú (SAIT)",
+"llegadas":[
+{"lugar":"Tolú, Sucre","pais":"CO","lat":9.4967,"lon":-75.5587},
+{"lugar":"San Andrés","pais":"CO","lat":12.5847,"lon":-81.7006}
+],
+"anio":2010,
+"km":826,
+"duenos":["Energía Integral Andina"],
+"fuentes":["https://www.postdata.gov.co/index.php/dataset/informacion-cable-submarino-sait","https://normograma.crcom.gov.co/crc/compilacion/docs/88001-23-33-000-2018-00021-01%28AP%29_20230303.htm"]
+},
+{
+"nombre":"Colombian Festoon",
+"llegadas":[
+{"lugar":"Tolú, Sucre","pais":"CO","lat":9.4967,"lon":-75.5587},
+{"lugar":"Cartagena, Bolívar","pais":"CO","lat":10.3867,"lon":-75.5057},
+{"lugar":"Puerto Colombia, Atlántico","pais":"CO","lat":11.0052,"lon":-74.9528},
+{"lugar":"Parque Isla de Salamanca, Magdalena","pais":"CO","lat":11.0122,"lon":-74.6119},
+{"lugar":"Santa Marta, Magdalena","pais":"CO","lat":11.2420,"lon":-74.2053}
+],
+"anio":1997,
+"km":400,
+"duenos":["Telefónica Colombia"],
+"fuentes":["https://mintic.gov.co/micrositios/PlanConectividadDigital/870/articles-399396_recurso_1.pdf"]
+},
+{
+"nombre":"Fibra Óptica al Pacífico",
+"llegadas":[
+{"lugar":"Ilo, Moquegua","pais":"PE","lat":-17.6412,"lon":-71.3237},
+{"lugar":"Lurín, Lima","pais":"PE","lat":-12.2785,"lon":-76.8743}
+],
+"anio":2020,
+"km":1180,
+"duenos":["Entel Bolivia"],
+"fuentes":["https://institucional.entel.bo/inicio3.0/index.php/sala-de-prensa/item/2631-entel-ingresa-a-una-transformacion-digital-con-una-conexion-directa-de-fibra-optica-al-pacifico?print=1&tmpl=component","https://www.oopp.gob.bo/wp-content/uploads/2023/05/PSDI-MOPSV-VMTEL.pdf"]
+},
+{
+"nombre":"FOS Quellón-Chacabuco",
+"llegadas":[
+{"lugar":"Quellón, Chiloé","pais":"CL","lat":-43.1175,"lon":-73.4795},
+{"lugar":"Puerto Chacabuco, Aysén","pais":"CL","lat":-45.4583,"lon":-72.8051}
+],
+"anio":2015,
+"km":350,
+"duenos":["Grupo GTD","Telsur","Telcoy"],
+"fuentes":["https://www.biobiochile.cl/noticias/2014/01/31/telcoy-y-telsur-anuncian-construccion-de-nueva-fibra-optica-submarina-para-aysen.shtml"]
+},
+{
+"nombre":"ARSAT Submarine Fiber Optic Cable",
+"llegadas":[
+{"lugar":"Cabo Espíritu Santo, Tierra del Fuego","pais":"AR","lat":-52.6589,"lon":-68.6058},
+{"lugar":"Punta Dungeness, Santa Cruz","pais":"AR","lat":-52.3902,"lon":-68.4198}
+],
+"anio":2012,
+"km":40,
+"duenos":["ARSAT"],
+"fuentes":["https://powersublink.com/projects/submarine-cable-lines-year-2012/","https://repositorio.cepal.org/bitstream/handle/11362/46388/S2000651_es.pdf"]
+},
+{
+"nombre":"Brazilian Festoon",
+"llegadas":[
+{"lugar":"Natal","pais":"BR","lat":-5.7948,"lon":-35.2112},
+{"lugar":"João Pessoa","pais":"BR","lat":-7.1153,"lon":-34.8610},
+{"lugar":"Recife","pais":"BR","lat":-8.0553,"lon":-34.8720},
+{"lugar":"Maceió","pais":"BR","lat":-9.6665,"lon":-35.7350},
+{"lugar":"Aracaju","pais":"BR","lat":-10.9096,"lon":-37.0748},
+{"lugar":"Sítio","pais":"BR","lat":-11.8467,"lon":-37.5705},
+{"lugar":"Salvador","pais":"BR","lat":-12.9700,"lon":-38.5045},
+{"lugar":"Ilhéus","pais":"BR","lat":-14.7880,"lon":-39.0477},
+{"lugar":"Porto Seguro","pais":"BR","lat":-16.4511,"lon":-39.0647},
+{"lugar":"São Mateus","pais":"BR","lat":-18.7167,"lon":-39.8591},
+{"lugar":"Vitória","pais":"BR","lat":-20.2940,"lon":-40.3017},
+{"lugar":"Atafona","pais":"BR","lat":-21.6312,"lon":-41.0272},
+{"lugar":"Macaé","pais":"BR","lat":-22.3718,"lon":-41.7856},
+{"lugar":"Río de Janeiro","pais":"BR","lat":-22.9034,"lon":-43.2096}
+],
+"anio":1996,
+"km":2552,
+"duenos":["Embratel"],
+"fuentes":["https://www1.folha.uol.com.br/fsp/1996/3/13/dinheiro/19.html"]
+},
+{
+"nombre":"Venezuelan Festoon",
+"llegadas":[
+{"lugar":"Maracaibo","pais":"VE","lat":10.6882,"lon":-71.5984},
+{"lugar":"Cabimas","pais":"VE","lat":10.3960,"lon":-71.4511},
+{"lugar":"Punto Fijo","pais":"VE","lat":11.7086,"lon":-70.2044},
+{"lugar":"Coro","pais":"VE","lat":11.4028,"lon":-69.6778},
+{"lugar":"Chichiriviche","pais":"VE","lat":10.9286,"lon":-68.2845},
+{"lugar":"Puerto Cabello","pais":"VE","lat":10.4781,"lon":-68.0096},
+{"lugar":"Camurí","pais":"VE","lat":10.6065,"lon":-66.8782},
+{"lugar":"Higuerote","pais":"VE","lat":10.4803,"lon":-66.0981},
+{"lugar":"Puerto La Cruz","pais":"VE","lat":10.2025,"lon":-64.6449},
+{"lugar":"Cumaná","pais":"VE","lat":10.4543,"lon":-64.1821},
+{"lugar":"Porlamar, isla Margarita","pais":"VE","lat":10.9553,"lon":-63.8476},
+{"lugar":"Carúpano","pais":"VE","lat":10.6668,"lon":-63.2505}
+],
+"anio":1998,
+"km":1200,
+"duenos":["CANTV"],
+"fuentes":["https://repositoriotec.tec.ac.cr/bitstream/handle/2238/144/BJFIE200399.pdf?sequence=1"]
+},
+{
+"nombre":"St. Thomas-St. Croix System",
+"llegadas":[
+{"lugar":"Brewer's Bay, Saint Thomas","pais":"VI","lat":18.3424,"lon":-64.9753},
+{"lugar":"Vila Olga, Saint Thomas","pais":"VI","lat":18.3357,"lon":-64.9480},
+{"lugar":"Banana Bay, Saint Thomas","pais":"VI","lat":18.3282,"lon":-64.9438},
+{"lugar":"Flamingo Bay, Saint Thomas","pais":"VI","lat":18.3128,"lon":-64.9578},
+{"lugar":"Great Bay, Saint Thomas","pais":"VI","lat":18.3225,"lon":-64.8432},
+{"lugar":"Christiansted, Saint Croix","pais":"VI","lat":17.7467,"lon":-64.7032},
+{"lugar":"Frederiksted, Saint Croix","pais":"VI","lat":17.7124,"lon":-64.8815}
+],
+"anio":2013,
+"km":183,
+"duenos":["Virgin Islands Next Generation Network"],
+"fuentes":["https://usvieda.org/wp-content/uploads/2024/06/TIS_2014_0.pdf","https://faculty.nps.edu/dlalders/usvi/NPS-OR-18-005.pdf"]
+}
+]

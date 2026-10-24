@@ -1,0 +1,65 @@
+[
+  {
+    "nombre": "Palau Cable",
+    "llegadas": [
+      {
+        "lugar": "Ngeremlengui",
+        "pais": "PW",
+        "lat": 7.536,
+        "lon": 134.525
+      }
+    ],
+    "anio": 2017,
+    "km": 300,
+    "duenos": [
+      "Belau Submarine Cable Corporation (BSCC)"
+    ],
+    "fuentes": [
+      "https://www.belaucable.com/"
+    ]
+  },
+  {
+    "nombre": "Yap Cable",
+    "llegadas": [
+      {
+        "lugar": "Colonia",
+        "pais": "FM",
+        "lat": 9.516,
+        "lon": 138.122
+      }
+    ],
+    "anio": 2018,
+    "km": 280,
+    "duenos": [
+      "FSM Telecommunications Cable Corporation"
+    ],
+    "fuentes": [
+      "https://www.fsmcable.com/"
+    ]
+  },
+  {
+    "nombre": "Chuuk-Pohnpei Cable",
+    "llegadas": [
+      {
+        "lugar": "Weno",
+        "pais": "FM",
+        "lat": 7.446,
+        "lon": 151.841
+      },
+      {
+        "lugar": "Kolonia",
+        "pais": "FM",
+        "lat": 6.964,
+        "lon": 158.206
+      }
+    ],
+    "anio": 2019,
+    "km": 804,
+    "duenos": [
+      "FSM Telecommunications Cable Corporation"
+    ],
+    "fuentes": [
+      "https://www.fsmcable.com/"
+    ]
+  }
+]

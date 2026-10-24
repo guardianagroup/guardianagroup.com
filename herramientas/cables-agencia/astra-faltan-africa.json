@@ -1,0 +1,80 @@
+[
+  {
+    "nombre": "Italy-Libya",
+    "llegadas": [
+      {
+        "lugar": "Mazara del Vallo",
+        "pais": "IT",
+        "lat": 37.65,
+        "lon": 12.59
+      },
+      {
+        "lugar": "Trípoli",
+        "pais": "LY",
+        "lat": 32.89,
+        "lon": 13.19
+      }
+    ],
+    "anio": 1998,
+    "km": 570,
+    "duenos": [
+      "Sparkle",
+      "Libya International Telecom Company (LITC)"
+    ],
+    "fuentes": [
+      "https://www.tisparkle.com/",
+      "https://litc.ly/"
+    ]
+  },
+  {
+    "nombre": "Loukkos",
+    "llegadas": [
+      {
+        "lugar": "Rota",
+        "pais": "ES",
+        "lat": 36.62,
+        "lon": -6.36
+      },
+      {
+        "lugar": "Asilah",
+        "pais": "MA",
+        "lat": 35.47,
+        "lon": -6.03
+      }
+    ],
+    "anio": 2012,
+    "km": 187,
+    "duenos": [
+      "Maroc Telecom"
+    ],
+    "fuentes": [
+      "https://www.iam.ma/"
+    ]
+  },
+  {
+    "nombre": "Silphium",
+    "llegadas": [
+      {
+        "lugar": "Chania",
+        "pais": "GR",
+        "lat": 35.51,
+        "lon": 24.02
+      },
+      {
+        "lugar": "Derna",
+        "pais": "LY",
+        "lat": 32.77,
+        "lon": 22.64
+      }
+    ],
+    "anio": 2013,
+    "km": 425,
+    "duenos": [
+      "Libya International Telecom Company (LITC)"
+    ],
+    "fuentes": [
+      "https://litc.ly/",
+      "https://www.oteglobe.gr/"
+    ]
+  }
+]

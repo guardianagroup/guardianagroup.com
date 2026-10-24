@@ -1,0 +1,198 @@
+[
+  {
+    "nombre": "Polar Circle Cable",
+    "llegadas": [
+      {
+        "lugar": "Narvik",
+        "pais": "NO",
+        "lat": 68.4206,
+        "lon": 17.56
+      },
+      {
+        "lugar": "Bodø",
+        "pais": "NO",
+        "lat": 67.286,
+        "lon": 14.4001
+      },
+      {
+        "lugar": "Nesna",
+        "pais": "NO",
+        "lat": 66.1981,
+        "lon": 13.0182
+      },
+      {
+        "lugar": "Sandnessjøen",
+        "pais": "NO",
+        "lat": 66.0215,
+        "lon": 12.6315
+      },
+      {
+        "lugar": "Brønnøysund",
+        "pais": "NO",
+        "lat": 65.4736,
+        "lon": 12.2077
+      },
+      {
+        "lugar": "Rørvik",
+        "pais": "NO",
+        "lat": 64.8621,
+        "lon": 11.2373
+      },
+      {
+        "lugar": "Trondheim",
+        "pais": "NO",
+        "lat": 63.431,
+        "lon": 10.3921
+      }
+    ],
+    "anio": 2007,
+    "km": 1013,
+    "duenos": [
+      "KystTele"
+    ],
+    "fuentes": [
+      "https://www.kysttele.no/about/",
+      "https://www.regjeringen.no/contentassets/4b9d05c6dd134d8aa67dfbe576605a45/off_rapport_sarbarhetsanalyse_for_trondelag_2024-02-05.pdf"
+    ]
+  },
+  {
+    "nombre": "Bodø-Røst Cable",
+    "llegadas": [
+      {
+        "lugar": "Bodø",
+        "pais": "NO",
+        "lat": 67.286,
+        "lon": 14.4001
+      },
+      {
+        "lugar": "Røst",
+        "pais": "NO",
+        "lat": 67.5026,
+        "lon": 12.0701
+      }
+    ],
+    "anio": 2016,
+    "km": 109,
+    "duenos": [
+      "Telenor"
+    ],
+    "fuentes": [
+      "https://www.mynewsdesk.com/no/telenor/pressreleases/norges-lengste-sjoekabel-lagt-ut-1497037",
+      "https://seaworkskabel.no/subsea-cable-project-rost-bodo/"
+    ]
+  },
+  {
+    "nombre": "Tverrlinken",
+    "llegadas": [
+      {
+        "lugar": "Nesna",
+        "pais": "NO",
+        "lat": 66.1981,
+        "lon": 13.0182
+      },
+      {
+        "lugar": "Mo i Rana",
+        "pais": "NO",
+        "lat": 66.3137,
+        "lon": 14.142
+      }
+    ],
+    "anio": 2010,
+    "km": 80,
+    "duenos": [
+      "KystTele"
+    ],
+    "fuentes": [
+      "https://www.kysttele.no/about/",
+      "https://www.regjeringen.no/contentassets/4b9d05c6dd134d8aa67dfbe576605a45/off_rapport_sarbarhetsanalyse_for_trondelag_2024-02-05.pdf"
+    ]
+  },
+  {
+    "nombre": "Eastern Arctic Undersea Fibre Optic Network - EAUFON 1",
+    "llegadas": [
+      {
+        "lugar": "Chisasibi",
+        "pais": "CA",
+        "lat": 53.7736,
+        "lon": -78.8935
+      },
+      {
+        "lugar": "Kuujjuarapik",
+        "pais": "CA",
+        "lat": 55.2759,
+        "lon": -77.7624
+      },
+      {
+        "lugar": "Umiujaq",
+        "pais": "CA",
+        "lat": 56.5516,
+        "lon": -76.5471
+      },
+      {
+        "lugar": "Inukjuak",
+        "pais": "CA",
+        "lat": 58.4551,
+        "lon": -78.1051
+      },
+      {
+        "lugar": "Puvirnituq",
+        "pais": "CA",
+        "lat": 60.0371,
+        "lon": -77.2692
+      }
+    ],
+    "anio": 2022,
+    "km": 1175,
+    "duenos": [
+      "Kativik Regional Government (Tamaani Internet)"
+    ],
+    "fuentes": [
+      "https://www.krg.ca/fr-CA/assets/Council/2024/May/EAUFON.pdf",
+      "https://www.krg.ca/en-CA/assets/press-releases/2024/jan/Media_Release_EAUFON_2_activation_Final.pdf"
+    ]
+  },
+  {
+    "nombre": "Eastern Arctic Undersea Fibre Optic Network - EAUFON 2",
+    "llegadas": [
+      {
+        "lugar": "Puvirnituq",
+        "pais": "CA",
+        "lat": 60.0371,
+        "lon": -77.2692
+      },
+      {
+        "lugar": "Akulivik",
+        "pais": "CA",
+        "lat": 60.8177,
+        "lon": -78.1442
+      },
+      {
+        "lugar": "Ivujivik",
+        "pais": "CA",
+        "lat": 62.4167,
+        "lon": -77.9167
+      },
+      {
+        "lugar": "Salluit",
+        "pais": "CA",
+        "lat": 62.2013,
+        "lon": -75.6469
+      },
+      {
+        "lugar": "Deception Bay",
+        "pais": "CA",
+        "lat": 62.1149,
+        "lon": -74.6301
+      }
+    ],
+    "anio": 2024,
+    "km": 675,
+    "duenos": [
+      "Kativik Regional Government (Tamaani Internet)"
+    ],
+    "fuentes": [
+      "https://www.krg.ca/en-CA/assets/press-releases/2024/jan/Media_Release_EAUFON_2_activation_Final.pdf",
+      "https://www.krg.ca/fr-CA/assets/Council/2024/May/EAUFON.pdf"
+    ]
+  }
+]

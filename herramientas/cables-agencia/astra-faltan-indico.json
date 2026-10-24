@@ -1,0 +1,29 @@
+[
+  {
+    "nombre": "Maldives Sri Lanka Cable (MSC)",
+    "llegadas": [
+      {
+        "lugar": "Hulhumalé",
+        "pais": "MV",
+        "lat": 4.213,
+        "lon": 73.536
+      },
+      {
+        "lugar": "Colombo",
+        "pais": "LK",
+        "lat": 6.9271,
+        "lon": 79.8612
+      }
+    ],
+    "anio": 2017,
+    "km": 840,
+    "duenos": [
+      "Ooredoo Maldives",
+      "Dialog Axiata"
+    ],
+    "fuentes": [
+      "https://www.ooredoo.mv/",
+      "https://www.dialog.lk/"
+    ]
+  }
+]
