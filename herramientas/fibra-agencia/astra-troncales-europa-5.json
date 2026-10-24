@@ -1,0 +1,146 @@
+[
+  {
+    "nombre": "Lisbon–Porto",
+    "operador": "IP Telecom",
+    "pais": "PT",
+    "ciudades": ["Lisbon", "Santarém", "Entroncamento", "Pombal", "Coimbra", "Aveiro", "Porto"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra óptica ferroviaria de IP Telecom (iptelecom.pt); secuencia urbana inferida del corredor ferroviario Linha do Norte, no de un trazado de cable publicado."
+  },
+  {
+    "nombre": "Lisbon–Faro",
+    "operador": "IP Telecom",
+    "pais": "PT",
+    "ciudades": ["Lisbon", "Setúbal", "Alcácer do Sal", "Grândola", "Tunes", "Faro"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra óptica ferroviaria de IP Telecom (iptelecom.pt); secuencia probable por las líneas ferroviarias del sur y del Algarve."
+  },
+  {
+    "nombre": "Entroncamento–Vilar Formoso",
+    "operador": "IP Telecom",
+    "pais": "PT",
+    "ciudades": ["Entroncamento", "Abrantes", "Castelo Branco", "Covilhã", "Guarda", "Vilar Formoso"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra óptica ferroviaria de IP Telecom (iptelecom.pt); secuencia inferida de las líneas Beira Baixa y Beira Alta. El segmento descrito termina dentro de Portugal."
+  },
+  {
+    "nombre": "Bucharest–Timișoara",
+    "operador": "Digi România",
+    "pais": "RO",
+    "ciudades": ["Bucharest", "Pitești", "Râmnicu Vâlcea", "Sibiu", "Sebeș", "Deva", "Lugoj", "Timișoara"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra descrita en los informes de Digi Communications (digicommunications.ro); secuencia probable por los corredores DN7, A1 y DN68A. No representa una alineación de cable publicada."
+  },
+  {
+    "nombre": "Bucharest–Cluj-Napoca–Oradea",
+    "operador": "Digi România",
+    "pais": "RO",
+    "ciudades": ["Bucharest", "Ploiești", "Brașov", "Sighișoara", "Târgu Mureș", "Turda", "Cluj-Napoca", "Oradea"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de Digi Communications (digicommunications.ro); secuencia urbana probable por los corredores DN1, DN13, DN15 y nuevamente DN1."
+  },
+  {
+    "nombre": "Bucharest–Constanța",
+    "operador": "Digi România",
+    "pais": "RO",
+    "ciudades": ["Bucharest", "Fetești", "Cernavodă", "Constanța"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de Digi Communications (digicommunications.ro); secuencia inferida del corredor de transporte A2 y ferroviario Bucharest–Constanța, sin identificar la canalización exacta."
+  },
+  {
+    "nombre": "Moscow–Vladivostok: corredor transiberiano",
+    "operador": "TransTeleCom (TTK)",
+    "pais": "RU",
+    "ciudades": ["Moscow", "Vladimir", "Nizhniy Novgorod", "Kirov", "Perm", "Yekaterinburg", "Tyumen", "Omsk", "Novosibirsk", "Krasnoyarsk", "Tayshet", "Irkutsk", "Ulan-Ude", "Chita", "Skovorodino", "Belogorsk", "Birobidzhan", "Khabarovsk", "Ussuriysk", "Vladivostok"],
+    "estado": "en servicio",
+    "fuente": "aproximado: TTK describe su red troncal operativa sobre la infraestructura ferroviaria de Russian Railways; secuencia de ciudades inferida siguiendo el corredor transiberiano, no un trazado óptico publicado tramo por tramo."
+  },
+  {
+    "nombre": "Moscow–Saint Petersburg",
+    "operador": "Rostelecom",
+    "pais": "RU",
+    "ciudades": ["Moscow", "Tver", "Vyshniy Volochek", "Valday", "Velikiy Novgorod", "Saint Petersburg"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Rostelecom; ciudades intermedias inferidas siguiendo el corredor M10. La conexión entre los extremos está operativa, pero esta secuencia no representa un itinerario físico publicado."
+  },
+  {
+    "nombre": "Moscow–Rostov-na-Donu",
+    "operador": "Rostelecom",
+    "pais": "RU",
+    "ciudades": ["Moscow", "Kashira", "Yelets", "Voronezh", "Millerovo", "Kamensk-Shakhtinskiy", "Rostov-na-Donu"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor meridional de la red troncal operativa de Rostelecom; secuencia inferida siguiendo la M4 y sus accesos urbanos, no un trazado óptico publicado."
+  },
+  {
+    "nombre": "Subotica–Belgrade–Nis–Vranje",
+    "operador": "Telekom Srbija",
+    "pais": "RS",
+    "ciudades": ["Subotica", "Novi Sad", "Belgrade", "Smederevo", "Velika Plana", "Jagodina", "Paracin", "Nis", "Leskovac", "Vranje"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red óptica troncal de Telekom Srbija y corredor nacional norte–sur; orden de ciudades inferido siguiendo los corredores A1/E75 y ferroviario. No se afirma que todas sean puntos de paso publicados de un único cable."
+  },
+  {
+    "nombre": "Nis–Dimitrovgrad–Dragoman",
+    "operador": "Telekom Srbija / Vivacom",
+    "pais": "RS",
+    "ciudades": ["Nis", "Bela Palanka", "Pirot", "Dimitrovgrad", "Dragoman"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión terrestre de las redes de Telekom Srbija y Vivacom en el corredor Serbia–Bulgaria; secuencia inferida siguiendo el corredor E80 y ferroviario. Dragoman es la primera ciudad búlgara indicada; se omiten las localidades rurales fronterizas."
+  },
+  {
+    "nombre": "Bratislava–Zilina–Kosice",
+    "operador": "Slovak Telekom",
+    "pais": "SK",
+    "ciudades": ["Bratislava", "Trnava", "Trencin", "Povazska Bystrica", "Zilina", "Ruzomberok", "Liptovsky Mikulas", "Poprad", "Presov", "Kosice"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal óptica operativa de Slovak Telekom; secuencia inferida siguiendo el corredor septentrional D1 y los corredores ferroviarios asociados. No es un itinerario de cable publicado tramo por tramo."
+  },
+  {
+    "nombre": "Bratislava–Nitra–Banska Bystrica",
+    "operador": "Slovak Telekom",
+    "pais": "SK",
+    "ciudades": ["Bratislava", "Trnava", "Nitra", "Ziar nad Hronom", "Zvolen", "Banska Bystrica"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal óptica operativa de Slovak Telekom; corredor occidental–central inferido siguiendo D1/R1 y las principales ciudades conectadas. La secuencia intermedia no es un trazado físico publicado."
+  },
+  {
+    "nombre": "Koper–Ljubljana–Maribor",
+    "operador": "Telekom Slovenije",
+    "pais": "SI",
+    "ciudades": ["Koper", "Postojna", "Ljubljana", "Celje", "Slovenska Bistrica", "Maribor"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal óptica nacional de Telekom Slovenije; secuencia inferida siguiendo el corredor A1 y los corredores ferroviarios asociados. Los accesos exactos a las ciudades no están especificados."
+  },
+  {
+    "nombre": "Ljubljana–Novo Mesto–Brezice",
+    "operador": "Telekom Slovenije",
+    "pais": "SI",
+    "ciudades": ["Ljubljana", "Grosuplje", "Trebnje", "Novo Mesto", "Brezice"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal óptica operativa de Telekom Slovenije hacia el sureste; secuencia inferida siguiendo el corredor A2. El recorrido completo supera los 100 km; no se presenta como un itinerario de cable publicado."
+  },
+  {
+    "nombre": "Madrid–Zaragoza–Barcelona",
+    "operador": "Reintel",
+    "pais": "ES",
+    "ciudades": ["Madrid", "Guadalajara", "Calatayud", "Zaragoza", "Lleida", "Barcelona"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra óptica operativa de Reintel sobre infraestructura ferroviaria, descrita en su información corporativa de red; secuencia de ciudades principales inferida para el corredor Madrid–Zaragoza–Barcelona, sin afirmar entrada en cada casco urbano."
+  },
+  {
+    "nombre": "Madrid–Cordoba–Sevilla",
+    "operador": "Reintel",
+    "pais": "ES",
+    "ciudades": ["Madrid", "Ciudad Real", "Puertollano", "Cordoba", "Sevilla"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red óptica operativa de Reintel sobre infraestructura ferroviaria; secuencia inferida siguiendo el corredor ferroviario de alta velocidad Madrid–Sevilla. Referencia: información corporativa de Reintel sobre su red ferroviaria de fibra."
+  },
+  {
+    "nombre": "Barcelona–Valencia–Murcia: corredor mediterráneo",
+    "operador": "Reintel",
+    "pais": "ES",
+    "ciudades": ["Barcelona", "Tarragona", "Castello de la Plana", "Valencia", "Xativa", "Alacant", "Elche", "Orihuela", "Murcia"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red óptica operativa de Reintel sobre infraestructura ferroviaria; secuencia inferida siguiendo los corredores ferroviarios mediterráneo y Valencia–Xativa–Alacant–Murcia. No se afirma que constituya un único cable sin cambios de tramo."
+  }
+]
