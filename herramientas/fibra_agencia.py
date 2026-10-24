@@ -81,6 +81,16 @@ def ciudades():
         except ValueError: continue
         idx.setdefault((p[1], pliega(p[0])), (lon, lat))
         idx_div.setdefault((p[1], pliega(p[2])), (lon, lat))
+    # 24 Oct 2026: the smaller towns the routes pass through, and the English names the voices use, from GeoNames
+    # cities500 (pueblos_fibra.py, run by the workflow); the big cities above keep their place
+    ruta = os.path.join(AQUI, 'fuentes', 'pueblos-fibra.tsv')
+    if os.path.exists(ruta):
+        for linea in open(ruta, encoding='utf-8'):
+            if linea.startswith('#'): continue
+            p = linea.rstrip('\n').split('\t')
+            if len(p) < 4: continue
+            try: idx.setdefault((p[1], p[0]), (float(p[3]), float(p[2])))
+            except ValueError: continue
     return idx, idx_div
 
 
@@ -156,34 +166,39 @@ def main():
     for voz, rutas in voces.items():
         otras = [r for v, rs in voces.items() if v != voz for r in rs]
         for r in rutas:
-            ok = []  # per stretch: None, or the points to draw from A to B
+            ok, ok2 = [], []  # per stretch: None, or the points to draw from A to B (ok: same operator; ok2: another one)
             for a in range(len(r['pts']) - 1):
                 A, B = r['pts'][a], r['pts'][a + 1]
                 recta = km(A, B)
-                bien = None
+                bien = bien2 = None
                 for o in otras:
-                    if o['cc'] != r['cc'] or not mismo_operador(o['o'], r['o']): continue
+                    if o['cc'] != r['cc']: continue
                     if A in o['pts'] and B in o['pts']:
                         i, j = o['pts'].index(A), o['pts'].index(B)
                         if camino(o['pts'], i, j) <= recta * PARECIDO + 60:
-                            # both voices put the operator's fibre between A and B; the more detailed voice draws it
+                            # both voices put fibre between A and B; the more detailed voice draws it
                             sub = o['pts'][i:j + 1] if i < j else o['pts'][j:i + 1][::-1]
-                            bien = sub if len(sub) > 2 else [A, B]
-                            break
-                ok.append(bien)
-            # contiguous confirmed stretches become polylines
-            tramo = []
-            for a, b in enumerate(ok):
-                if b:
-                    if not tramo: tramo = [r['pts'][a]]
-                    tramo.extend(b[1:])
-                else:
-                    if len(tramo) >= 2: candidatos.append(dict(r, l=tramo))
-                    tramo = []
-            if len(tramo) >= 2: candidatos.append(dict(r, l=tramo))
+                            sub = sub if len(sub) > 2 else [A, B]
+                            if mismo_operador(o['o'], r['o']): bien = sub; break
+                            if bien2 is None: bien2 = sub
+                ok.append(bien); ok2.append(None if bien else bien2)
+            # contiguous confirmed stretches become polylines. 24 Oct 2026 (round 17): two voices that both put long-
+            # distance fibre between the same two cities confirm the stretch even when they name different operators
+            # («Government of Rwanda» and «RDB»); such a stretch is drawn without a name or an operator, since those
+            # are what the voices do not agree on.
+            for lista, neutra in ((ok, False), (ok2, True)):
+                tramo = []
+                for a, b in enumerate(lista):
+                    if b:
+                        if not tramo: tramo = [r['pts'][a]]
+                        tramo.extend(b[1:])
+                    else:
+                        if len(tramo) >= 2: candidatos.append(dict(r, l=tramo, n='' if neutra else r['n'], o='' if neutra else r['o'], neutra=neutra))
+                        tramo = []
+                if len(tramo) >= 2: candidatos.append(dict(r, l=tramo, n='' if neutra else r['n'], o='' if neutra else r['o'], neutra=neutra))
 
     # both voices confirm the same stretch: keep it once, the finer drawing first
-    candidatos.sort(key=lambda c: -len(c['l']))
+    candidatos.sort(key=lambda c: (c.get('neutra', False), -len(c['l'])))  # the ones with an agreed operator first
     hechos, lineas, usados = [], [], set()
     for c in candidatos:
         nuevo, tramo = [], [c['l'][0]]
