@@ -886,9 +886,14 @@
       // many short land links (Topology Zoo gives thousands): skip the lights on the lines facing away and keep
       // the pulse count bounded, so the planet stays smooth on a modest computer
       const salto = lineas.length > 2500 ? Math.ceil(lineas.length / 2500) : 1, F = CAMPO || campo(p, G);
-      for (let li = c === 0 ? 0 : 0; li < lineas.length; li += salto) {
+      for (let li = 0; li < lineas.length; li++) {
         const l = lineas[li];
         if (l.L < 0.01) continue;
+        // the big trunks and long routes always carry their lights, and bigger ones, so the flow shows over their
+        // thick, bright line too (owner, 24 Oct 2026, 13:49: «en las grandes troncales… no se ve el movimiento»)
+        const rg = rangoFibra(l) || 0;
+        if (rg < 2 && salto > 1 && li % salto) continue;
+        const esc = rg >= 3 ? 2.3 : rg === 2 ? 1.6 : 1, tm = tam[c] * esc, hm = tm / 2;
         if (!F.todo) { capsDe(l); if (!veCap(F, l.cap)) continue; }
         if (l.w && l.w.length && p.aVista(l.w[0])[2] <= 0.02 && p.aVista(l.w[l.w.length - 1])[2] <= 0.02) continue;
         const n = Math.max(1, Math.round(l.L / PASO)), sep = l.L / n;
@@ -901,7 +906,7 @@
             if (l.colas && (s < l.acc[l.d0] || s > l.acc[l.d1])) continue; // no light in a stretch that fades out into the sea
             const v = p.aVista(puntoEn(l, s));
             if (v[2] <= 0.02) continue;
-            cx.fillRect(G.CX + G.R * v[0] - h, G.CY - G.R * v[1] - h, tam[c], tam[c]);
+            cx.fillRect(G.CX + G.R * v[0] - hm, G.CY - G.R * v[1] - hm, tm, tm);
           }
         }
       }
