@@ -1,0 +1,59 @@
+[
+  {
+    "nombre": "Viti Levu-Vanua Levu (Fiji Domestic)",
+    "llegadas": [
+      {
+        "lugar": "Suva",
+        "pais": "FJ",
+        "lat": -18.1416,
+        "lon": 178.4419
+      },
+      {
+        "lugar": "Savusavu",
+        "pais": "FJ",
+        "lat": -16.7792,
+        "lon": 179.337
+      }
+    ],
+    "anio": 2018,
+    "km": 75,
+    "duenos": [
+      "Government of Fiji"
+    ],
+    "fuentes": [
+      "https://documents1.worldbank.org/curated/en/099930010182242539/pdf/BOSIB00ae988900640ac830b52f8cd53700.pdf",
+      "https://www.ath.com.fj/wp-content/uploads/2023/07/ATH_Annual_Report_2018.pdf",
+      "https://www.fiji.gov.fj/director-general-digital-transformation-speech-ms-tupou-baravilala-at-the-25th-attorney-generals-conference/"
+    ]
+  },
+  {
+    "nombre": "North Sea Connect (NSC)",
+    "llegadas": [
+      {
+        "lugar": "Newcastle upon Tyne",
+        "pais": "GB",
+        "lat": 54.9782,
+        "lon": -1.6178
+      },
+      {
+        "lugar": "Houstrup",
+        "pais": "DK",
+        "lat": 55.7646,
+        "lon": 8.1931
+      }
+    ],
+    "anio": 2022,
+    "km": 661,
+    "duenos": [
+      "Aqua Comms",
+      "Bulk Fiber Networks",
+      "Meta"
+    ],
+    "fuentes": [
+      "https://www.exainfra.net/press-releases/aqua-comms-announces-the-launch-of-celtixconnect-2-and-north-sea-connect",
+      "https://www.exainfra.net/press-releases/aqua-comms-bulk-fiber-networks-and-meta-complete-construction-of-the-havhingsten-cable-system",
+      "https://bulkinfrastructure.com/fiber-networks/our-systems/havhingsten",
+      "https://about.fb.com/news/2022/03/meta-partners-with-aqua-comms-and-bulk-fibre-to-deliver-aluminum-conductor-powered-subsea-cable-system/"
+    ]
+  }
+]
