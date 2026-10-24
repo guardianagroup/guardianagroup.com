@@ -1370,6 +1370,7 @@ luangnamtha	LA	20.9486	101.40188	3225	Luang Namtha
 luangprabang	LA	19.8933	102.1525	55027	Luang Prabang
 muangphin	LA	16.53399	106.02401	0	Muang Phin
 muangxay	LA	20.69229	101.98368	25000	Muang Xay
+paksan	LA	18.3942	103.6611	21967	Pakxan
 pakse	LA	15.12022	105.79898	77900	Pakse
 pakxan	LA	18.3942	103.6611	21967	Pakxan
 savannakhet	LA	16.5703	104.7622	125760	Savannakhet
@@ -1526,6 +1527,7 @@ taungdwingyi	MM	20.0065	95.54531	70094	Taungdwingyi
 taunggyi	MM	20.78919	97.03776	160115	Taunggyi
 taungoo	MM	18.94291	96.43408	106945	Taungoo
 thaton	MM	16.91867	97.37001	123727	Thaton
+yamethin	MM	20.43189	96.13875	59867	Yamethin
 yangon	MM	16.80528	96.15611	4477638	Yangon
 ye	MM	15.24645	97.85506	34430	Ye
 yenangyaung	MM	20.46504	94.8712	110553	Yenangyaung
@@ -1643,8 +1645,24 @@ tuxtlagutierrez	MX	16.75357	-93.11578	604147	Tuxtla
 veracruz	MX	19.18095	-96.1429	428323	Veracruz
 villahermosa	MX	17.98625	-92.93928	353577	Villahermosa
 zacatecas	MX	22.76843	-102.58141	129011	Zacatecas
+bentong	MY	5.99516	100.47885	94033	Pendang
+betong	MY	1.4	111.51667	36303	Betong
+bintulu	MY	3.16667	113.03333	151617	Bintulu
+butterworth	MY	5.3991	100.36382	107591	Butterworth
 cyberjaya	MY	2.92281	101.65718	79200	Cyberjaya
+ipoh	MY	4.5841	101.0829	759952	Ipoh
 johorbahru	MY	1.4655	103.7578	858118	Johor Bahru
+kotabharu	MY	6.12361	102.24333	568900	Kota Bharu
+kualalumpur	MY	3.1412	101.68653	1453975	Kuala Lumpur
+kualaterengganu	MY	5.3302	103.1408	426500	Kuala Terengganu
+kuantan	MY	3.8077	103.326	548014	Kuantan
+kuching	MY	1.55	110.33333	402738	Kuching
+miri	MY	4.39928	113.99163	300543	Miri
+sarikei	MY	2.11667	111.51667	44039	Sarikei
+seremban	MY	2.7297	101.9381	372917	Seremban
+serian	MY	1.16667	110.56667	58059	Serian
+sibu	MY	2.3	111.81667	198239	Sibu
+sriaman	MY	1.24722	111.45278	47313	Sri Aman
 beira	MZ	-19.84361	34.83889	687764	Beira
 chimoio	MZ	-19.11639	33.48333	422046	Chimoio
 dondo	MZ	-19.60944	34.74306	82260	Dondo
