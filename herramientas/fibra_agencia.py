@@ -61,6 +61,8 @@ SITIOS = {
     ('KM', 'iconi'): (43.238, -11.745), ('KM', 'hahaya'): (43.271, -11.564), ('KM', 'voidjou'): (43.263, -11.650), ('KM', 'mkazi'): (43.266, -11.732),
     ('VU', 'mele'): (168.263, -17.697), ('VU', 'blacksands'): (168.297, -17.712),
     ('BS', 'crossingrocks'): (-77.197, 26.124), ('BS', 'eightmilerock'): (-78.806, 26.541),
+    # round 25b (territories), from OpenStreetMap (Nominatim): villages of Guam and a quarter of Saint Croix
+    ('GU', 'piti'): (144.693, 13.461), ('GU', 'asan'): (144.718, 13.469), ('VI', 'groveplace'): (-64.821, 17.726),
 }
 
 PARECIDO = 1.35  # the other voice's path between two cities may be this much longer than the straight line (+ 60 km)
