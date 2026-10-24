@@ -18,7 +18,7 @@
   // type, over a copper family): the sea stayed steel (until later that day: SUB_COL); each land-fibre class has its own colour, shown as a legend in its
   // card — gold the great trunks, lavender the long routes, sea green between cities, grey the short links. The smaller
   // classes are drawn a little stronger so their colour reads (FIBRA_ALFA multiplies their opacity, capped at 1).
-  const FIBRA_COL = (window.__FIBRA_COL) || { 3: '236,188,108', 2: '196,170,245', 1: '112,222,200', 0: '176,178,190' };
+  const FIBRA_COL = (window.__FIBRA_COL) || { 3: '200,136,88', 2: '196,170,245', 1: '112,222,200', 0: '176,178,190' };
   const FIBRA_ALFA = window.__FIBRA_ALFA || { 3: 1, 2: 1.12, 1: 1.35, 0: 1.6 };
   // 23 Oct 2026 (owner: «los cables submarinos también los vamos a clasificar por color… vamos a mantener el diseño, unos son
   // más gruesos, otros menos, pero también van a ir por colores»; «para que no haya tanto colorín, van a ser los mismos

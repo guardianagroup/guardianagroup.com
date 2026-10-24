@@ -90,8 +90,8 @@
   // ---- Capas: four big switches, each with its colour; «Afinar» shows the classes of a layer that is on ----
   const CAPAS = [
     // both kinds of cable share the colours by class since 23 Oct 2026 (owner, 21:50); «Cables por tierra» (22:55)
-    { k: 'sub', n: 'Cables submarinos', d: 'Por el fondo del mar, entre continentes', ley: 'linear-gradient(90deg,#ECBC6C 0 34%,#C4AAF5 34% 67%,#70DEC8 67%)' },
-    { k: 'fibra', n: 'Cables por tierra', d: 'De las costas al interior', ley: 'linear-gradient(90deg,#ECBC6C 0 34%,#C4AAF5 34% 67%,#70DEC8 67%)' },
+    { k: 'sub', n: 'Cables submarinos', d: 'Por el fondo del mar, entre continentes', ley: 'linear-gradient(90deg,#C88858 0 34%,#C4AAF5 34% 67%,#70DEC8 67%)' },
+    { k: 'fibra', n: 'Cables por tierra', d: 'De las costas al interior', ley: 'linear-gradient(90deg,#C88858 0 34%,#C4AAF5 34% 67%,#70DEC8 67%)' },
     { k: 'puntos', n: 'Centros de datos', d: 'Donde se guarda y se sirve internet', pto: '#E8ECF1' },
     { k: 'sat', n: 'Satélites', d: 'En tiempo real', pto: '#9CC3E4' },
   ];
