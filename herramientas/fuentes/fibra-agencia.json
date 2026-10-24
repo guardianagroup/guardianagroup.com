@@ -1432,6 +1432,49 @@
 ]
 },
 {
+"n": "Troncal norte Montevideo–Rivera–Brasil",
+"o": "Antel (tramo uruguayo)",
+"cc": "UY",
+"l": [
+[
+-56.19,
+-34.9
+],
+[
+-56.22,
+-34.73
+],
+[
+-56.28,
+-34.52
+],
+[
+-56.21,
+-34.1
+],
+[
+-56.52,
+-33.38
+],
+[
+-56.517,
+-32.817
+],
+[
+-55.98,
+-31.72
+],
+[
+-55.55,
+-30.91
+],
+[
+-55.53,
+-30.89
+]
+]
+},
+{
 "n": "Jenin–Hebron, eje norte–sur de Cisjordania",
 "o": "Paltel",
 "cc": "PS",
@@ -2685,6 +2728,41 @@
 ]
 },
 {
+"n": "Troncal del litoral Montevideo–Salto–Argentina",
+"o": "Antel (tramo uruguayo)",
+"cc": "UY",
+"l": [
+[
+-56.19,
+-34.9
+],
+[
+-56.617,
+-34.635
+],
+[
+-56.71,
+-34.34
+],
+[
+-56.9,
+-33.52
+],
+[
+-57.63,
+-32.7
+],
+[
+-58.08,
+-32.32
+],
+[
+-57.96,
+-31.39
+]
+]
+},
+{
 "n": "Corredor Phnom Penh–Poipet–Tailandia",
 "o": "Telecom Cambodia",
 "cc": "KH",
@@ -3157,6 +3235,36 @@
 [
 10.82,
 1.59
+]
+]
+},
+{
+"n": "Troncal Norte-Oeste e Interconexión México-Guatemala",
+"o": "Digi (BTL)",
+"cc": "BZ",
+"l": [
+[
+-88.3,
+18.52
+],
+[
+-88.388,
+18.394
+]
+]
+},
+{
+"n": "Troncal Norte-Oeste e Interconexión México-Guatemala",
+"o": "Digi (BTL)",
+"cc": "BZ",
+"l": [
+[
+-89.07,
+17.16
+],
+[
+-89.139,
+17.075
 ]
 ]
 },
@@ -4147,21 +4255,6 @@
 [
 33.79,
 -13.97
-]
-]
-},
-{
-"n": "Troncal Norte-Oeste e Interconexión México-Guatemala",
-"o": "Digi (BTL)",
-"cc": "BZ",
-"l": [
-[
--89.07,
-17.16
-],
-[
--89.139,
-17.075
 ]
 ]
 },
@@ -5965,6 +6058,25 @@
 ]
 },
 {
+"n": "Troncal costera Georgetown–Corriverton",
+"o": "GTT / One Communications",
+"cc": "GY",
+"l": [
+[
+-57.52,
+6.25
+],
+[
+-57.355,
+6.256
+],
+[
+-57.149,
+5.933
+]
+]
+},
+{
 "n": "Kabul–Jalalabad–Peshawar",
 "o": "Afghan Telecom / PTCL",
 "cc": "AF",
@@ -6109,25 +6221,6 @@
 [
 -75.67,
 4.54
-]
-]
-},
-{
-"n": "Fibra óptica UTE sobre líneas de transmisión Bonete–Young–Paysandú–Salto",
-"o": "UTE",
-"cc": "UY",
-"l": [
-[
--57.63,
--32.7
-],
-[
--58.08,
--32.32
-],
-[
--57.96,
--31.39
 ]
 ]
 },
@@ -6325,10 +6418,6 @@
 [
 -57.52,
 6.25
-],
-[
--57.149,
-5.933
 ]
 ]
 },
@@ -6631,6 +6720,21 @@
 ]
 },
 {
+"n": "Troncal costera Georgetown–Corriverton",
+"o": "GTT / One Communications",
+"cc": "GY",
+"l": [
+[
+-58.16,
+6.8
+],
+[
+-57.922,
+6.682
+]
+]
+},
+{
 "n": "Baku–Ganja–Georgia",
 "o": "Delta Telecom / AzerTelecom",
 "cc": "AZ",
@@ -6717,21 +6821,6 @@
 [
 -79.96,
 -3.26
-]
-]
-},
-{
-"n": "Fibra óptica UTE Tacuarembó–Rivera",
-"o": "UTE",
-"cc": "UY",
-"l": [
-[
--55.98,
--31.72
-],
-[
--55.55,
--30.91
 ]
 ]
 },
@@ -8785,6 +8874,25 @@
 {
 "n": "",
 "o": "",
+"cc": "UY",
+"l": [
+[
+-56.19,
+-34.9
+],
+[
+-55.758,
+-34.772
+],
+[
+-54.95,
+-34.9
+]
+]
+},
+{
+"n": "",
+"o": "",
 "cc": "KZ",
 "l": [
 [
@@ -9151,16 +9259,12 @@
 "cc": "UY",
 "l": [
 [
--56.19,
--34.9
+-57.96,
+-31.39
 ],
 [
--55.758,
--34.772
-],
-[
--54.95,
--34.9
+-56.538,
+-34.381
 ]
 ]
 },
