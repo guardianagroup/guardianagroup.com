@@ -139,6 +139,11 @@
 
   // ---------- A door opened, in the same screen ----------
   let dentro = false;
+  // 23 Oct 2026, 21:45 (owner: «le he dado en una X y me ha vuelto a la página principal»): a door the visitor arrived at
+  // by its link (/orbita/#radiografias from the front page) has no step of Órbita's own behind it, so closing it must not
+  // go back in the history (that leaves the site); it drops the address's #… and closes in place
+  const pasoPropio = (id) => !!(history.state && history.state.puerta && (!id || history.state.puerta === id) && !history.state.llegada);
+  const quitaAncla = () => { if (history.state && history.state.puerta) { try { history.replaceState(null, '', location.pathname + location.search); } catch (_) {} } };
   const marco = $('marco');
   function abre(i, apila = true) {
     elige(i);
@@ -147,7 +152,7 @@
     if (p.propia && window.OrbitaRadiografias) {
       if (dentro) cierra();
       if (apila) history.pushState({ puerta: p.id }, '', '#' + p.id);
-      window.OrbitaRadiografias.abre(() => { if (history.state && history.state.puerta === p.id) history.back(); else window.OrbitaRadiografias.cierra(); });
+      window.OrbitaRadiografias.abre(() => { if (pasoPropio(p.id)) history.back(); else { quitaAncla(); window.OrbitaRadiografias.cierra(); } });
       return;
     }
     if (window.OrbitaRadiografias) window.OrbitaRadiografias.cierra();
@@ -201,7 +206,7 @@
     setTimeout(() => { if (!dentro) { marco.removeAttribute('src'); if (window.GuardianaSecciones) window.GuardianaSecciones.cierra(); } }, 800);
     setTimeout(() => { const b = PUERTAS[sel].el.querySelector('button'); if (!dentro && b) b.focus({ preventScroll: true }); }, 700);
   }
-  const atras = () => { if (history.state && history.state.puerta) history.back(); else cierra(); };
+  const atras = () => { if (pasoPropio()) history.back(); else { quitaAncla(); cierra(); } };
   $('volver').addEventListener('click', atras);
   // ZERO asks to go back to Órbita (its «‹» button, «Órbita ↗» or Esc on its home screen)
   addEventListener('message', (e) => {
@@ -214,7 +219,11 @@
     // «Verme en Órbita» from inside ZERO: back to the planet with the visitor's own card open (owner, 22 Oct 2026)
     if (e.data.tipo === 'orbita-verme') { if (dentro) atras(); setTimeout(() => { if (window.OrbitaConexion) window.OrbitaConexion.abre(true); }, 400); }
   });
-  if (location.hash === '#mi-conexion') setTimeout(() => { if (window.OrbitaConexion) window.OrbitaConexion.abre(true); }, 1500);
+  // 23 Oct 2026 (found while checking the owner's «la X me ha vuelto a la página principal»): a link straight to a door or
+  // to «Mi conexión» waited a fixed 400 ms, and on a slow phone Radiografías (a deferred script) was not there yet, so
+  // the old full-screen section opened instead of its panel; now it waits until every script of the page has run
+  const trasCargar = (f) => (document.readyState === 'loading' ? addEventListener('DOMContentLoaded', f, { once: true }) : f());
+  if (location.hash === '#mi-conexion') trasCargar(() => setTimeout(() => { if (window.OrbitaConexion) window.OrbitaConexion.abre(true); }, 1500));
   addEventListener('popstate', (e) => {
     const id = e.state && e.state.puerta;
     const i = PUERTAS.findIndex((p) => p.id === id);
@@ -229,7 +238,7 @@
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); elige(sel + 1); PUERTAS[sel].el.querySelector('button').focus(); }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); elige(sel - 1); PUERTAS[sel].el.querySelector('button').focus(); }
   });
-  { const i = PUERTAS.findIndex((p) => '#' + p.id === location.hash); if (i >= 0) { history.replaceState({ puerta: PUERTAS[i].id }, '', location.hash); setTimeout(() => abre(i, false), 400); } }
+  { const i = PUERTAS.findIndex((p) => '#' + p.id === location.hash); if (i >= 0) { history.replaceState({ puerta: PUERTAS[i].id, llegada: 1 }, '', location.hash); trasCargar(() => setTimeout(() => abre(i, false), 400)); } }
   // «Empezar» and the other buttons open a door by its name, the same way as a click on it
   window.OrbitaPuertas = { abre(id) { const i = PUERTAS.findIndex((p) => p.id === id); if (i >= 0) abre(i); } };
 
@@ -245,8 +254,23 @@
   // line, so the middle of the screen is not the middle of the free space: the planet goes to the centre of the band
   // between the layer bar and the doors, with the same air above and below. Measured, not guessed; everywhere else
   // (tablets and computers, doors at the side) it stays in the middle of the window.
+  // 23 Oct 2026 (owner: «la web del móvil tiene que ser distinta, súper fácil»; agency round 14, M2): on a phone with the new
+  // layout the planet sits in the middle of the band between the top buttons and «Ver mi conexión» over the bottom bar.
+  // T1 (owner, 21:12): on a touch tablet the same layout; in landscape the planet moves to the left of a 320 px panel.
+  const tactil = matchMedia('(pointer: coarse)').matches;
+  const m2 = () => document.body.classList.contains('m2') && (W <= 760 || (tactil && W <= 1400));
+  const t1h = () => m2() && W > 760 && W > H;
+  function bandaM2() {
+    const marca = document.querySelector('header .marca'), rm = marca && marca.getBoundingClientRect();
+    const arriba = Math.max(rm && rm.height ? rm.bottom + 14 : 0, 64);
+    const pu = $('puertas'), rp = pu && pu.getBoundingClientRect();
+    const tope = rp && rp.height ? rp.top : H - 70;
+    const abajo = W <= 760 ? tope - 52 - 26 : tope - 24; // phone: the bar, the big button above it and some air; tablet: the bar
+    return { arriba, abajo: Math.max(arriba + 120, abajo) };
+  }
   function centroAlto() {
     const sinBanda = () => { RAIZ.style.removeProperty('--cy'); return H / 2; };
+    if (m2()) { const b = bandaM2(), cy = Math.round((b.arriba + b.abajo) / 2); RAIZ.style.setProperty('--cy', cy + 'px'); return cy; }
     if (W > 760 || !document.body.classList.contains('dock')) return sinBanda();
     const capas = $('capas'), rc = capas && capas.getBoundingClientRect();
     if (!rc || rc.height < 1) return sinBanda();
@@ -277,12 +301,13 @@
     // Narrow: both move off the corners and the ring keeps clear of the top and bottom lines.
     const estrecho = W < 1180;
     document.body.classList.toggle('estrecho', estrecho);
-    if (estrecho) U = Math.max(3, Math.min((H / 2 - 200) / 41, (H / 2 - 150) / 41, (W / 2 - 150) / 40.4));
+    if (m2()) { const b = bandaM2(), ancho = t1h() ? W - 352 : W; U = Math.max(3, Math.min(ancho * (W <= 760 ? 0.445 : 0.42), (b.abajo - b.arriba) / 2 * 0.95) / 34); }
+    else if (estrecho) U = Math.max(3, Math.min((H / 2 - 200) / 41, (H / 2 - 150) / 41, (W / 2 - 150) / 40.4));
     // 20 Oct 2026 (owner): air between the header and ZERO's label at the top of the ring.
     else U = Math.max(3, Math.min(H / 100, W * 0.0062, (W / 2 - 40 - 290 - 24 - 130) / 26.4, (H / 2 - 150) / 41));
     RAIZ.style.setProperty('--u', U.toFixed(3) + 'px');
     // 20 Oct 2026 (owner): a bigger planet; the doors' ring stays at 41 units, so ZERO keeps its air above.
-    CX = W / 2; CY = centroAlto(); R0 = U * 34; R = R0 * ZOOM.z;
+    CX = t1h() ? Math.round((W - 352) / 2) : W / 2; CY = centroAlto(); R0 = U * 34; R = R0 * ZOOM.z;
     for (const c of [cvE, cvT, cvR]) { c.width = Math.round(W * DPR); c.height = Math.round(H * DPR); }
     cx2.setTransform(DPR, 0, 0, DPR, 0, 0);
     pintaEstrellas();
@@ -437,8 +462,11 @@
   addEventListener('wheel', (e) => {
     // 22 Oct 2026, 18:16 (owner): with a panel open in front of the planet, the wheel moves the panel, not the planet.
     // The wheel zooms only when it is over the planet itself (a canvas or the bare page), never over any UI element.
+    // 24 Oct 2026 (owner, in the report: «cuando estoy en la foto y le doy para abajo… no baja… tiene que ser en toda la
+    // web, donde yo tenga el ratón»): only the planet's own three canvases count; any other canvas (the report's figures,
+    // a section's show) belongs to a page or a panel that scrolls, and the wheel is left to it. Never behind the report.
     const t = e.target;
-    if (!libreZoom() || !(t === cvT || (t.tagName === 'CANVAS') || t === document.body || t === document.documentElement)) return;
+    if (!libreZoom() || document.body.classList.contains('con-informe') || !(t === cvT || t === cvE || t === cvR || t === document.body || t === document.documentElement)) return;
     e.preventDefault();
     const zt = ZOOM.zt * Math.exp(-e.deltaY * (e.deltaMode ? 0.05 : 0.0016));
     const dentroDisco = zt > ZOOM.zt && anclaEn(e.clientX, e.clientY);
@@ -490,7 +518,9 @@
     }
     vista.lon += vista.vlon * dt; vista.lat = Math.max(-latMax(), Math.min(latMax(), vista.lat + vista.vlat * dt));
     vista.vlon *= Math.pow(0.04, dt); vista.vlat *= Math.pow(0.04, dt);
-    if (!manual && now > quietoHasta && ZOOM.zt <= 1.02) { vista.lon += VEL * dt; vista.lat += (14 - vista.lat) * dt * 0.25; }
+    // 23 Oct 2026, 21:42 (owner: «cuando arranca el planeta, se va hacia el lado izquierdo, que es todo agua. Es mejor que
+    // se vaya hacia el lado derecho»): it turns as the Earth does, the land moving to the right, as the front page planet
+    if (!manual && now > quietoHasta && ZOOM.zt <= 1.02) { vista.lon -= VEL * dt; vista.lat += (14 - vista.lat) * dt * 0.25; }
   }
 
   // ---------- The planet (WebGL 1) ----------
@@ -787,6 +817,7 @@ void main(){
     cx2.clearRect(0, 0, W, H);
     cx2.lineCap = 'round';
     if (window.OrbitaCapas) { cx2.save(); window.OrbitaCapas.pinta(t); cx2.restore(); }
+    if (window.OrbitaCiudades) { cx2.save(); window.OrbitaCiudades.pinta(t); cx2.restore(); } // the cities, as you come closer (ciudades.js)
     cx2.globalCompositeOperation = 'lighter';
     // the traces of the last half minute: the day's web, fading
     for (let i = huellas.length - 1; i >= 0; i--) {
@@ -1185,6 +1216,7 @@ void main(){
     let luego = false;
     try { luego = sessionStorage.getItem('guardiana_orbita_lugar_luego') === '1'; } catch (_) {}
     if (luego) return;
+    if (m2()) return; // M1 phone and T1 tablet: asked inside «Mi conexión», never on arrival
     // What «En vivo» measured or was told in this browser, offered for confirmation first.
     let previo = null;
     try { previo = JSON.parse(localStorage.getItem('guardiana_pd_lugar') || 'null'); } catch (_) {}

@@ -65,7 +65,7 @@
     rutas.hechas++; pinta();
     // the cloud regions, four at a time so one slow probe does not hold the rest
     const cola = NUBES.slice();
-    const obrero = async () => { while (cola.length) { const n = cola.shift(); const ms = await sonda(URL_NUBE(n[0]), 3, 5000); const km = kmEntre(L, { lat: n[3], lon: n[4] }); if (ms != null) rutas.nubes.push({ region: n[0], nombre: n[1], cc: n[2], lat: n[3], lon: n[4], ms, km, minimo: minimoMs(km), t0: performance.now() }); rutas.hechas++; if (abierto) pinta(); } };
+    const obrero = async () => { while (cola.length) { const n = cola.shift(); const ms = await sonda(URL_NUBE(n[0]), 3, 5000); const km = kmEntre(L, { lat: n[3], lon: n[4] }); if (ms != null) rutas.nubes.push({ region: n[0], nombre: n[1], cc: n[2], lat: n[3], lon: n[4], ms, km, minimo: minimoMs(km), t0: turnoLinea() }); rutas.hechas++; if (abierto) pinta(); } };
     await Promise.all([obrero(), obrero(), obrero(), obrero()]);
     rutas.nubes.sort((a, b) => a.ms - b.ms); rutas.fin = Date.now(); midiendo = false; pinta();
     if (quiereViaje && rutas.nubes.length && window.OrbitaViaje) { quiereViaje = false; window.OrbitaViaje.empieza(rutas); return; }
@@ -143,8 +143,11 @@
   }
 
   // ---------- from outside: one request, only on click ----------
-  async function medirFuera() {
-    const b = panel.querySelector('.medir'); b.disabled = true; b.textContent = T('Midiendo…');
+  // 23 Oct 2026, 21:45 (owner: «hay un botón que dice medir desde fuera. Le doy y no hace nada. Se acerca un poco el mapa y
+  // nada más»): it took the panel's first «.medir» (the journey's button, now on top) and, redrawn, the panel jumped to its
+  // top, so the answer was out of sight. Now the pressed button shows «Midiendo…» and the answer is brought into view.
+  async function medirFuera(e) {
+    const b = (e && e.currentTarget) || panel.querySelector('.bloque.fuera .medir'); if (b) { b.disabled = true; b.textContent = T('Midiendo…'); }
     try {
       const ctl = new AbortController(); setTimeout(() => ctl.abort(), 8000);
       const r = await fetch(ORIGEN_FUERA, { signal: ctl.signal, headers: { Accept: 'application/json' } });
@@ -157,6 +160,8 @@
       if (window.OrbitaPlaneta && Number.isFinite(la) && Number.isFinite(lo)) window.OrbitaPlaneta.ir(lo, la, Math.max(2.5, (window.OrbitaPlaneta.geo.R / (window.OrbitaPlaneta.geo.R0 || 1)) || 1));
     } catch (_) { fuera = { error: true }; }
     pinta();
+    const sec = panel.querySelector('.bloque.fuera');
+    if (sec) { sec.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); sec.classList.remove('recien'); void sec.offsetWidth; sec.classList.add('recien'); setTimeout(() => sec.classList.remove('recien'), 2000); }
   }
   function filasFuera() {
     if (!fuera) return null;
@@ -230,14 +235,16 @@
   }
   function pinta() {
     if (!panel) return;
-    const cuerpo = panel.querySelector('.cuerpo'); cuerpo.textContent = '';
+    // the panel is redrawn on every measurement: it keeps the reader's place instead of jumping to the top
+    const y = panel.scrollTop;
+    const cuerpo = panel.querySelector('.cuerpo'); cuerpo.style.minHeight = cuerpo.offsetHeight + 'px'; cuerpo.textContent = '';
     // 23 Oct 2026, 18:59 (owner: «no veo por ningún lado eso de ver el viaje de mis datos en 3D», on his phone): on every
     // screen now, not only on a computer; the journey's own screen adapts to a phone (orbita.css, #viaje)
     if (window.OrbitaViaje) cuerpo.append(seccionViaje());
     const f = filasLocales();
     cuerpo.append(seccion(T('Ahora mismo'), f.ahora, T('Medido en este navegador, sin consultar a nadie.')));
     const sf = filasFuera();
-    const s2 = document.createElement('section'); s2.className = 'bloque';
+    const s2 = document.createElement('section'); s2.className = 'bloque fuera';
     const h2 = document.createElement('h3'); h2.textContent = T('Cómo te ve internet'); s2.append(h2);
     if (sf) { const dl = document.createElement('dl'); dl.className = 'sat-dl'; for (const x of sf) { const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = x.k; dd.textContent = x.v; if (x.e) { const i = document.createElement('i'); i.className = 'et ' + x.e; i.textContent = T(x.e); dd.append(' ', i); } dl.append(dt, dd); } s2.append(dl); }
     const p = document.createElement('p'); p.className = 'nota';
@@ -251,6 +258,7 @@
     const h4 = document.createElement('h3'); h4.textContent = T('Lo que solo ve el programa'); s4.append(h4);
     const p4 = document.createElement('p'); p4.className = 'nota'; p4.textContent = T('Qué programas hablan con internet, con quién y cuánto, y la ruta real de tus datos: eso se mide dentro del equipo, con ZERO. Aquí no se inventa.'); s4.append(p4);
     cuerpo.append(s4);
+    cuerpo.style.minHeight = ''; panel.scrollTop = y;
   }
   // what is drawn on the empty planet while the card is open: only the visitor's own marks
   // a great-circle arc on the sphere, as screen points (null where it goes behind the planet)
@@ -315,26 +323,72 @@
     }
     return [x, y];
   }
-  function pintaMio(cx, p, G, t) {
+  // 23 Oct 2026, 21:38–21:39 (owner: «cuando aparecen las líneas aparecen demasiado rápidas, un poquito más lentas… esos
+  // cables tienen que estar enviando datos ida y vuelta… no se ven datos por dentro circular, ir y venir. Deben de verse»):
+  // each measured line now grows from you to its data centre (the lines start at least a quarter of a second apart, in
+  // the order the answers came), its label appears when it arrives, and then packets go out and come back along it.
+  // The round trip on screen lasts 40 times the one measured, for every line alike, so the faster routes beat faster.
+  const CRECE = 1500, LENTO = 40, QUIETO_C = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  let ultimaLinea = 0;
+  const turnoLinea = () => (ultimaLinea = Math.max(performance.now(), ultimaLinea + 260));
+  const suaveC = (k) => 1 - Math.pow(1 - Math.max(0, Math.min(1, k)), 3);
+  // a point at a fractional position along a line of screen points (null behind the planet)
+  const enPos = (pts, pos) => { const i = Math.max(0, Math.min(pts.length - 1, Math.floor(pos))), a = pts[i], b = pts[Math.min(pts.length - 1, i + 1)], f = pos - i; if (!a || !b) return a || null; return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]; };
+  // one packet with its tail, at u (0 = you, 1 = the data centre), going out (+1) or coming back (−1)
+  function paquete(cx, pts, u, sentido, rgb, fuerza) {
+    const N = pts.length - 1, cab = u * N, cola = Math.max(5, N * 0.16); let prev = null;
+    for (let i = 0; i <= 12; i++) {
+      const pos = cab - sentido * cola * (i / 12); if (pos < 0 || pos > N) { prev = null; continue; }
+      const q = enPos(pts, pos); if (!q) { prev = null; continue; }
+      if (prev) { const f = 1 - i / 12; cx.globalAlpha = f * f * fuerza; cx.strokeStyle = 'rgb(' + rgb + ')'; cx.lineWidth = (fuerza > 0.8 ? 2.4 : 1.6) * (0.35 + 0.65 * f); cx.beginPath(); cx.moveTo(prev[0], prev[1]); cx.lineTo(q[0], q[1]); cx.stroke(); }
+      prev = q;
+    }
+    const h = enPos(pts, cab); if (!h) return;
+    const r = fuerza > 0.8 ? 5.2 : 3.8, g = cx.createRadialGradient(h[0], h[1], 0, h[0], h[1], r);
+    g.addColorStop(0, 'rgba(255,255,255,' + (0.95 * fuerza).toFixed(2) + ')'); g.addColorStop(0.4, 'rgba(' + rgb + ',' + (0.7 * fuerza).toFixed(2) + ')'); g.addColorStop(1, 'rgba(' + rgb + ',0)');
+    cx.globalAlpha = 1; cx.fillStyle = g; cx.beginPath(); cx.arc(h[0], h[1], r, 0, 7); cx.fill();
+  }
+  // a measured line: it grows, then carries packets out and back (two on the way at any moment, half a trip apart)
+  function lineaViva(cx, pts, t, t0, ms, color, ancho, fuerza) {
+    const N = pts.length - 1; if (N < 1) return 1;
+    const k = QUIETO_C ? 1 : suaveC(((t || 0) - t0) / CRECE); if (k <= 0) return 0;
+    cx.strokeStyle = color; cx.lineWidth = ancho; traza(cx, k >= 1 ? pts : pts.slice(0, Math.max(2, Math.ceil(k * N) + 1)));
+    const op = cx.globalCompositeOperation; cx.globalCompositeOperation = 'lighter';
+    if (k < 1) { const h = enPos(pts, k * N); if (h) { const g = cx.createRadialGradient(h[0], h[1], 0, h[0], h[1], 6); g.addColorStop(0, 'rgba(255,255,255,.9)'); g.addColorStop(1, 'rgba(156,195,228,0)'); cx.fillStyle = g; cx.beginPath(); cx.arc(h[0], h[1], 6, 0, 7); cx.fill(); } }
+    else if (!QUIETO_C && ms > 0) {
+      const ciclo = ms * LENTO;
+      for (const desfase of [0, 0.5]) {
+        const f = ((((t || 0) - t0 - CRECE) / ciclo + desfase) % 1 + 1) % 1;
+        if (f < 0.5) paquete(cx, pts, f * 2, 1, '244,246,248', fuerza); else paquete(cx, pts, 2 - f * 2, -1, '156,195,228', fuerza);
+      }
+    }
+    cx.globalCompositeOperation = op; cx.globalAlpha = 1;
+    return k;
+  }
+  function pintaMio(cx, p, G) {
+    // the planet hands over seconds since it started, but every time here (the measurements' t0, the pulses of the
+    // marks) counts in milliseconds of performance.now(): with the planet's seconds the packets never showed (23 Oct 2026)
+    const t = performance.now();
     cx.save(); cx.globalCompositeOperation = 'source-over'; cajas = [];
     const P = window.OrbitaPlaneta, L = (rutas && rutas.origen) || (P && P.lugar);
     // you first, so your label is never pushed out: measured from outside if you asked for it, otherwise the place you chose
     // the planet already names your equipment at the home marker (orbita.js), so here only the pulse, no second label
     if (fuera && !fuera.error && Number.isFinite(fuera.lat)) marca(cx, p, G, fuera.lon, fuera.lat, (T('Cómo te ve internet') + ' · ' + (fuera.ciudad || '')).toUpperCase(), t, true, true);
     else if (L && (rutas || rutaReal)) { const xy = marca(cx, p, G, L.lon, L.lat, '', t, true); if (xy) cajas.push([xy[0] + 12, xy[1] - 7, 180, 14]); }
-    // the measured arcs to the clouds: fastest three bright, the rest fainter; a pulse rides each one at 1/20 of real speed
+    // the measured arcs to the clouds: fastest three bright, the rest fainter; each grows, then carries packets out and
+    // back at 1/40 of the measured round trip (lineaViva, above)
     if (rutas && rutas.nubes && rutas.nubes.length && L) {
       const mejor = rutas.nubes[0].ms || 1;
       rutas.nubes.forEach((n, i) => {
         const c = trayecto(p, L, n, 96), pts = pantalla(p, G, c), top = i < 3, k = Math.max(0, Math.min(1, 1 - (n.ms - mejor) / (6 * mejor)));
-        cx.strokeStyle = top ? 'rgba(156,195,228,.85)' : 'rgba(244,246,248,' + (0.18 + 0.3 * k).toFixed(2) + ')'; cx.lineWidth = top ? 1.5 : 0.9; traza(cx, pts);
-        const f = (((t || 0) - (n.t0 || 0)) / (n.ms * 20)) % 1, q = pts[Math.round(f * (pts.length - 1))];
-        if (q) { cx.fillStyle = top ? '#9CC3E4' : 'rgba(244,246,248,.8)'; cx.beginPath(); cx.arc(q[0], q[1], top ? 2.6 : 1.8, 0, 7); cx.fill(); }
+        const crecido = lineaViva(cx, pts, t, n.t0 || 0, n.ms, top ? 'rgba(156,195,228,.85)' : 'rgba(244,246,248,' + (0.18 + 0.3 * k).toFixed(2) + ')', top ? 1.5 : 0.9, top ? 1 : 0.62);
+        if (crecido < 1) return; // the label and the dot come when the line arrives
         // the satellite the first leg climbs to, named once (on the fastest route)
         if (c.alza && i === 0) { const s = pts[Math.round(c.alza.hasta / 2)]; if (s) { cx.fillStyle = '#F4F6F8'; cx.beginPath(); cx.arc(s[0], s[1], 2.4, 0, 7); cx.fill(); cx.strokeStyle = 'rgba(244,246,248,.6)'; cx.lineWidth = 1; cx.beginPath(); cx.arc(s[0], s[1], 6, 0, 7); cx.stroke(); cx.font = '400 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle'; cx.fillStyle = 'rgba(232,236,241,.85)'; cx.fillText((T('satélite') + ' · ' + (fuera.operador || '') + (c.alza.geo ? ' · ' + T('no a escala') : '')).toUpperCase(), s[0] + 9, s[1] - 8); } }
-        marca(cx, p, G, n.lon, n.lat, n.nombre + ' · ' + n.ms + ' ms', t, top);
+        cx.globalAlpha = QUIETO_C ? 1 : Math.min(1, ((t || 0) - (n.t0 || 0) - CRECE) / 450); marca(cx, p, G, n.lon, n.lat, n.nombre + ' · ' + n.ms + ' ms', t, top); cx.globalAlpha = 1;
       });
-      if (rutas.borde && Number.isFinite(rutas.borde.lat)) { cx.setLineDash([3, 4]); cx.strokeStyle = 'rgba(156,195,228,.6)'; cx.lineWidth = 1; traza(cx, camino(p, G, L, rutas.borde, 48)); cx.setLineDash([]); marca(cx, p, G, rutas.borde.lon, rutas.borde.lat, T('borde') + ' · ' + rutas.borde.nombre + (rutas.borde.ms != null ? ' · ' + rutas.borde.ms + ' ms' : ''), t, false, true); }
+      if (rutas.borde && Number.isFinite(rutas.borde.lat)) { const pb = camino(p, G, L, rutas.borde, 48); cx.setLineDash([3, 4]); cx.strokeStyle = 'rgba(156,195,228,.6)'; cx.lineWidth = 1; traza(cx, pb); cx.setLineDash([]);
+        if (!QUIETO_C && rutas.borde.ms > 0) { const op = cx.globalCompositeOperation; cx.globalCompositeOperation = 'lighter'; const f = (((t || 0) / (rutas.borde.ms * LENTO)) % 1 + 1) % 1; if (f < 0.5) paquete(cx, pb, f * 2, 1, '244,246,248', 0.62); else paquete(cx, pb, 2 - f * 2, -1, '156,195,228', 0.62); cx.globalCompositeOperation = op; cx.globalAlpha = 1; } marca(cx, p, G, rutas.borde.lon, rutas.borde.lat, T('borde') + ' · ' + rutas.borde.nombre + (rutas.borde.ms != null ? ' · ' + rutas.borde.ms + ' ms' : ''), t, false, true); }
     }
     // the real route from the program: hop by hop, numbered
     if (rutaReal && rutaReal.saltos.length) {
@@ -380,18 +434,20 @@
   // 23 Oct 2026, 18:58 (owner, phone: «tiene que volver a haber botón de volver atrás»): opening the panel adds a step to
   // the history, so the phone's own back (button or gesture) closes it instead of leaving the site; «Volver» does the same.
   const enHistoria = () => !!(history.state && history.state.conexion);
-  function cierraConVolver() { if (enHistoria()) history.back(); else { abre(false); if (location.hash === '#mi-conexion') history.replaceState(history.state, '', location.pathname + location.search); } }
+  // (21:45, owner: a close that went back to the front page) arriving by the link /orbita/#mi-conexion there is no step of
+  // ours to go back to: the panel closes in place and the address loses its #mi-conexion
+  function cierraConVolver() { if (enHistoria() && !history.state.llegada) history.back(); else { abre(false); if (location.hash === '#mi-conexion') history.replaceState(history.state, '', location.pathname + location.search); } }
   // on a phone the panel is a sheet from the bottom up to just under the header's buttons (the layer bar hides meanwhile)
   function altoHoja() {
     if (!panel) return;
     if (innerWidth > 760) { panel.style.removeProperty('max-height'); return; }
-    const d = document.querySelector('header .derecha'), b = d ? d.getBoundingClientRect().bottom : 0;
+    const d = document.body.classList.contains('m2') ? document.querySelector('.m2-arriba') : document.querySelector('header .derecha'), b = d ? d.getBoundingClientRect().bottom : 0; // M1 phone: below «Capas» and «···»
     panel.style.maxHeight = Math.max(260, Math.round(innerHeight - b - 12)) + 'px';
   }
   function abre(si, porHistoria) {
     // closed from elsewhere (another panel, the journey): the step stays in the history, but without the panel
-    if (!si && abierto && !porHistoria && enHistoria()) { const st = Object.assign({}, history.state); delete st.conexion; history.replaceState(st, '', location.pathname + location.search); }
-    if (si && !abierto && !enHistoria()) { const st = Object.assign({}, history.state, { conexion: 1 }); if (location.hash === '#mi-conexion') history.replaceState(st, ''); else history.pushState(st, '', '#mi-conexion'); }
+    if (!si && abierto && !porHistoria && enHistoria()) { const st = Object.assign({}, history.state); delete st.conexion; delete st.llegada; history.replaceState(st, '', location.pathname + location.search); }
+    if (si && !abierto && !enHistoria()) { const st = Object.assign({}, history.state, { conexion: 1 }); if (location.hash === '#mi-conexion') history.replaceState(Object.assign(st, { llegada: 1 }), ''); else history.pushState(st, '', '#mi-conexion'); }
     abierto = si; panel.hidden = !si; boton.setAttribute('aria-pressed', si ? 'true' : 'false');
     document.body.classList.toggle('con-conexion', si); altoHoja();
     guarda(si ? 'ver' : 'no');

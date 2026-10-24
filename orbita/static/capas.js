@@ -11,16 +11,22 @@
   const RE = 6378.137, RAD = Math.PI / 180;
   const ACERO = '156,195,228', BLANCO = '244,246,248';
   // 22 Oct 2026, 21:43 (owner): «los cables azules están muy logrados; los blancos de alta potencia no me gustan» — the giants
-  // are drawn in a light blue of the same family, with a soft blue halo, never white; and what the pointer touches
+  // are never white (their light blue gave way to gold on 23 Oct 2026, see SUB_COL); and what the pointer touches
   // lights up in its own colour (brighter and wider), never white either («se resalta en blanco: eso no puede ser»)
-  const CLARO = '206,226,243';
   // 23 Oct 2026 (owner, 18:47: «cables submarinos y fibra por tierra se ven del mismo color, que haya un orden»; 19:16:
   // «los submarinos los dejamos igual, pero los de tierra los vamos a segmentar por colores»; chose B, one colour per
-  // type, over a copper family): the sea stays steel; each land-fibre class has its own colour, shown as a legend in its
+  // type, over a copper family): the sea stayed steel (until later that day: SUB_COL); each land-fibre class has its own colour, shown as a legend in its
   // card — gold the great trunks, lavender the long routes, sea green between cities, grey the short links. The smaller
   // classes are drawn a little stronger so their colour reads (FIBRA_ALFA multiplies their opacity, capped at 1).
   const FIBRA_COL = (window.__FIBRA_COL) || { 3: '236,188,108', 2: '196,170,245', 1: '112,222,200', 0: '176,178,190' };
   const FIBRA_ALFA = window.__FIBRA_ALFA || { 3: 1, 2: 1.12, 1: 1.35, 0: 1.6 };
+  // 23 Oct 2026 (owner: «los cables submarinos también los vamos a clasificar por color… vamos a mantener el diseño, unos son
+  // más gruesos, otros menos, pero también van a ir por colores»; «para que no haya tanto colorín, van a ser los mismos
+  // colores que tenemos en fibra por tierra»): each capacity class takes the colour of the land-fibre class of the same
+  // rank — gold the giants (100 Tbit/s or more), lavender the big ones (20 to 100), sea green the regional ones (under 20),
+  // grey when the capacity is not published. Widths, the giants' halo and the dashes of the approximate and planned
+  // cables stay as they were.
+  const SUB_COL = { gigante: FIBRA_COL[3], grande: FIBRA_COL[2], regional: FIBRA_COL[1], sinDato: FIBRA_COL[0] };
   // Owner, 22 Oct 2026: «cuando la persona abra Órbita, que no salgan los satélites de golpe, se ve demasiado ruido:
   // que abra solo con los cables submarinos, y luego la persona va abriendo y cerrando». So every opening starts with
   // the submarine cables alone; only the view and the orbit filter are remembered between visits.
@@ -53,6 +59,9 @@
   const esGrande = (q) => !!(PT && PT.porOp && q.o && (PT.porOp.get(q.o) || 0) >= 5);
   // which class a submarine cable belongs to (by its published capacity) and whether it shows now
   const claseSub = (i) => { const c = capacidadDe(i); return !c ? 'sinDato' : c.tbps >= CAP.umbrales.gigante ? 'gigante' : c.tbps >= CAP.umbrales.grande ? 'grande' : 'regional'; };
+  const colorSub = (i) => SUB_COL[claseSub(i)];
+  // a planned cable has a class only when its file states a capacity in Tbit/s («unos 104 Tbit/s»); grey otherwise
+  const clasePrev = (c) => { const m = String((c && c.capacidad) || '').match(/([\d.,]+)\s*Tbit\/s/i); if (!m) return 'sinDato'; const t = parseFloat(m[1].replace(/\.(?=\d{3}(\D|$))/g, '').replace(',', '.')), u = (CAP && CAP.umbrales) || { gigante: 100, grande: 20 }; return !isFinite(t) ? 'sinDato' : t >= u.gigante ? 'gigante' : t >= u.grande ? 'grande' : 'regional'; };
   // 23 Oct 2026 (owner: «la ruta estimada… son unos puntos fijos»): the power lights hold every cable of that power; «Ruta
   // estimada» off hides the cables whose route is approximate, and on by itself (no power light on) shows all of them.
   const sinPotencia = () => !CLASES.sub.gigante && !CLASES.sub.grande && !CLASES.sub.regional && !CLASES.sub.sinDato;
@@ -95,6 +104,8 @@
       // cables that do not exist yet (datos/cables-previstos.json: planned, tendered, under construction), drawn
       // dotted and said so in their card; never counted with the ones in service
       if (clave === 'sub') try { const pv = await cargaJSON('datos/cables-previstos.json'); PREV = (pv.cables || []).filter((c) => c.llegadas && c.llegadas.length >= 2).map((c) => { const w = []; c.llegadas.forEach((q, k) => { const v = P().vec(q.lon, q.lat); if (k) { const a = w[w.length - 1], m = Math.hypot(...a), u = [a[0] / m, a[1] / m, a[2] / m]; const ang = Math.acos(Math.max(-1, Math.min(1, u[0] * v[0] + u[1] * v[1] + u[2] * v[2]))), n = Math.floor(ang / (2 * RAD)); for (let j = 1; j <= n; j++) { const t = j / (n + 1), sa = Math.sin(ang) || 1, f0 = Math.sin((1 - t) * ang) / sa, f1 = Math.sin(t * ang) / sa; w.push([(u[0] * f0 + v[0] * f1) * 1.003, (u[1] * f0 + v[1] * f1) * 1.003, (u[2] * f0 + v[2] * f1) * 1.003]); } } w.push([v[0] * 1.003, v[1] * 1.003, v[2] * 1.003]); }); return { c, w }; }); } catch (_) { PREV = []; }
+      // the pieces of one cable are joined and the ends where the open data stop are found once the places are here
+      if (clave === 'sub') lugares().then(uneCables).catch(() => {});
     } catch (e) { capas[clave] = { error: true }; }
     cargando[clave] = false; pintaNota();
   }
@@ -112,6 +123,201 @@
   }).catch(() => { LUG = { error: true }; return LUG; }));
   const paisNombre = (cc) => { if (!cc) return ''; try { const l = (window.GuardianaIdioma && window.GuardianaIdioma.lang) || 'es'; return new Intl.DisplayNames([l], { type: 'region' }).of(cc) || cc; } catch (_) { return cc; } };
 
+  // ---------- one cable, many pieces; and the ends where the open data stop (23 Oct 2026) ----------
+  // Owner, on a photo of an unnamed cable whose card said «Llega a tierra en Fortaleza (Brasil)»: «él llega por la parte de
+  // abajo, ahí a Brasil, pero la parte de arriba… hay varios que se quedan ahí como en el mar. ¿Es un error?». It is not a
+  // drawing error: OpenStreetMap has those cables traced only part of the way (three of them stop at 15° N, 290 to 520 km
+  // from Barbados, the nearest land). Measured on cables.json: of OpenStreetMap's 1,226 piece ends, 342 lie more than 30 km
+  // from any coast; 223 of those meet another piece of the same cable, 96 lie beside another cable, and 23 touch nothing
+  // within 30 km. After the joins below, 22 ends stay loose and fade out.
+  // Done here, at load time, without touching cables.json (red.js and the tools read it as it is):
+  //  1. Pieces of one cable whose ends touch or almost touch (JUNTA_KM) are joined: same Wikidata item, same named cable
+  //     (the groups of lugares-capas), or an unnamed piece that is the only one continuing another. The few km between
+  //     them are closed, the whole cable lights up under the pointer, and an unnamed piece takes the name of the cable it
+  //     belongs to (also through a Wikidata item it shares with named pieces). Two differently named cables are never
+  //     joined through an unnamed piece.
+  //  2. An end of an OpenStreetMap piece that stays loose — no other cable within SUELTO_KM, no city within 80 km (GeoNames,
+  //     as lugares-capas measures it), no land within TIERRA_KM on the planet's water mask — on a cable that reaches land or
+  //     the network somewhere else, fades out over its last stretch, and its card says that the open data stop there.
+  //     Nothing is drawn beyond it. The agency's pieces go from landing to landing and are never marked; nor is a cable
+  //     that touches nothing anywhere (an island link such as Flores–Corvo: the mask does not show such small islands).
+  const JUNTA_KM = 5, SUELTO_KM = 30, TIERRA_KM = 30;
+  let UNION = null;
+  // the named cable (lugares-capas group) a piece belongs to: its own, or the one it takes from the pieces it joins
+  const grupoDe = (i) => { if (!LUG || !LUG.g) return -1; const g = LUG.g[i]; if (g != null && g >= 0) return g; const u = UNION ? UNION.grupo[i] : -1; return u >= 0 ? u : -1; };
+  const cadenaDe = (i) => (UNION && UNION.piezas.get(UNION.raiz[i])) || [i];
+  const cadenaSuelta = (i) => cadenaDe(i).some((j) => { const l = capas.sub && capas.sub.lineas && capas.sub.lineas[j]; return !!(l && l.colas); });
+  const kmV = (a, b) => { const m = Math.hypot(a[0], a[1], a[2]) * Math.hypot(b[0], b[1], b[2]) || 1; return 6371 * Math.acos(Math.max(-1, Math.min(1, (a[0] * b[0] + a[1] * b[1] + a[2] * b[2]) / m))); };
+  // arc length along a line again, after a point was added to it (the light inside runs on it); its visibility caps go
+  const mideLinea = (l) => { const w = l.w, acc = [0]; for (let j = 1; j < w.length; j++) { const a = w[j - 1], b = w[j]; acc.push(acc[j - 1] + Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]) / 1.003); } l.acc = acc; l.L = acc[acc.length - 1]; l.caps = l.cap = null; };
+  function uneCables() {
+    const c = capas.sub; if (!c || !c.lineas || c.unidos) return; c.unidos = true;
+    const cab = c.d.cables, n = cab.length, L0 = LUG && !LUG.error ? LUG : null;
+    const grupo = (i) => (L0 && L0.g && L0.g[i] != null && L0.g[i] >= 0 ? L0.g[i] : -1);
+    const agencia = (i) => !!cab[i].aprox;
+    // every end of every piece, by latitude, so the ends near one are a short scan away
+    const E = [];
+    for (let i = 0; i < n; i++) { const l = cab[i].l; if (!l || l.length < 2) continue; for (let k = 0; k < 2; k++) { const q = k ? l[l.length - 1] : l[0]; E.push({ i, k, id: 2 * i + k, lat: q[1], v: P().vec(q[0], q[1]) }); } }
+    E.sort((a, b) => a.lat - b.lat);
+    const cerca = new Map(), dLat = JUNTA_KM / 111 + 1e-6; // end id → [[end, km], …] of other pieces within JUNTA_KM
+    const anota = (p, q, d) => { if (!cerca.has(p.id)) cerca.set(p.id, []); cerca.get(p.id).push([q, d]); };
+    for (let a = 0; a < E.length; a++) for (let b = a + 1; b < E.length && E[b].lat - E[a].lat <= dLat; b++) { const p = E[a], q = E[b]; if (p.i === q.i) continue; const d = kmV(p.v, q.v); if (d <= JUNTA_KM) { anota(p, q, d); anota(q, p, d); } }
+    const porId = new Map(E.map((q) => [q.id, q]));
+    const mismo = (i, j) => (cab[i].w && cab[i].w === cab[j].w) || (grupo(i) >= 0 && grupo(i) === grupo(j)); // the same cable, for sure
+    const deOSM = (q) => (cerca.get(q.id) || []).filter(([r]) => !agencia(r.i));
+    const juntas = []; // [km, end, end, sure]
+    for (const [id, lista] of cerca) {
+      const p = porId.get(id);
+      for (const [q, d] of lista) {
+        if (q.id < id) continue;
+        if (mismo(p.i, q.i)) { juntas.push([d, p, q, 1]); continue; }
+        // an unnamed piece continuing another (both from OpenStreetMap): each the only other end at that joint
+        if (agencia(p.i) || agencia(q.i) || (cab[p.i].n && cab[q.i].n)) continue;
+        if (deOSM(p).length === 1 && deOSM(q).length === 1) juntas.push([d, p, q, 0]);
+      }
+    }
+    // an unnamed piece that would continue two differently named cables continues none of them
+    const toca = new Map();
+    for (const [, p, q, s] of juntas) if (!s) for (const [u, o] of [[p, q], [q, p]]) if (!cab[u.i].n && grupo(o.i) >= 0) { if (!toca.has(u.i)) toca.set(u.i, new Set()); toca.get(u.i).add(grupo(o.i)); }
+    const raiz = Array.from({ length: n }, (_, i) => i), nombres = Array.from({ length: n }, (_, i) => new Set(grupo(i) >= 0 ? [grupo(i)] : []));
+    const busca = (x) => { while (raiz[x] !== x) { raiz[x] = raiz[raiz[x]]; x = raiz[x]; } return x; };
+    juntas.sort((a, b) => b[3] - a[3] || a[0] - b[0]); // the sure ones first, then the closest
+    const hechas = [];
+    for (const j of juntas) {
+      const [, p, q, seguro] = j;
+      if (!seguro && [p, q].some((u) => toca.has(u.i) && toca.get(u.i).size > 1)) continue;
+      const a = busca(p.i), b = busca(q.i);
+      if (a !== b) {
+        if (!seguro && new Set([...nombres[a], ...nombres[b]]).size > 1) continue; // never two names in one cable through a guess
+        raiz[b] = a; for (const g of nombres[b]) nombres[a].add(g);
+      }
+      hechas.push(j);
+    }
+    const piezas = new Map(); for (let i = 0; i < n; i++) { const r = busca(i); if (!piezas.has(r)) piezas.set(r, []); piezas.get(r).push(i); }
+    // the name of an unnamed piece: the one name of the pieces it is joined to or, when none of them has a name, the one
+    // of the named pieces that share a Wikidata item with them (the same cable for OpenStreetMap's mappers)
+    const porWiki = new Map(); for (let i = 0; i < n; i++) { const w = cab[i].w; if (w && grupo(i) >= 0) { if (!porWiki.has(w)) porWiki.set(w, new Set()); porWiki.get(w).add(grupo(i)); } }
+    const ef = new Int32Array(n).fill(-1), prestados = new Map();
+    for (const [r, ps] of piezas) {
+      let s = nombres[r];
+      if (!s.size) { s = new Set(); for (const i of ps) { const g = cab[i].w && porWiki.get(cab[i].w); if (g) for (const x of g) s.add(x); } }
+      if (s.size !== 1) continue;
+      const g = [...s][0];
+      for (const i of ps) if (grupo(i) < 0 && !cab[i].n) { ef[i] = g; if (!prestados.has(g)) prestados.set(g, []); prestados.get(g).push(i); }
+    }
+    // close the few km left between joined pieces: the end not yet extended reaches the other piece's own end
+    const juntaEn = new Set(), alargado = new Set(); let cerradas = 0;
+    const enTierra = (e) => agencia(e.i) || !!(L0 && L0.cables && L0.cables[e.i] && L0.cables[e.i][2 * e.k]); // a landing (named by the agency, or a city within 80 km)
+    for (const [d, p, q] of hechas) {
+      juntaEn.add(p.id); juntaEn.add(q.id);
+      // a joint in the sea is not an end: no ring there (at a landing the ring stays: «la línea no puede empezar sola»)
+      for (const e of [p, q]) if (!enTierra(e)) { const l = c.lineas[e.i]; (l.sinAro || (l.sinAro = [false, false]))[e.k] = true; }
+      if (d < 0.05 || (alargado.has(p.id) && alargado.has(q.id))) continue;
+      const [x, y] = alargado.has(p.id) ? [q, p] : [p, q], l = c.lineas[x.i], pt = [y.v[0] * 1.003, y.v[1] * 1.003, y.v[2] * 1.003];
+      if (x.k) l.w.push(pt); else l.w.unshift(pt);
+      alargado.add(x.id); mideLinea(l); cerradas++;
+    }
+    UNION = { raiz: raiz.map((_, i) => busca(i)), piezas, grupo: ef, prestados, juntas: hechas.length, cerradas, conNombre: ef.filter((g) => g >= 0).length, sueltos: 0 };
+    c.porPotencia = null; c.visK = null; // a piece that took a name may take that cable's class
+    pintaClases();
+    cargaAgua().then((A) => marcaSueltos(A, juntaEn)).catch(() => {});
+  }
+  // the planet's own water mask (static/tierra/agua.png, 2048 × 1024, light = sea), read a few pixels at a time: is there
+  // land within km of a point? Without it nothing is marked loose.
+  let cargaAguaP = null;
+  const cargaAgua = () => cargaAguaP || (cargaAguaP = new Promise((ok) => {
+    const im = new Image();
+    im.onerror = () => ok(null);
+    im.onload = () => {
+      const W = im.naturalWidth, H = im.naturalHeight, cv = document.createElement('canvas'), g = cv.getContext('2d', { willReadFrequently: true });
+      if (!W || !H || !g) { ok(null); return; }
+      ok((lon, lat, km) => {
+        const x0 = (lon + 180) / 360 * W, y0 = (90 - lat) / 180 * H, ry = Math.ceil(km / (20015 / H)) + 1;
+        const rx = Math.min(Math.floor(W / 2) - 1, Math.ceil(km / (40075 / W * Math.max(0.02, Math.cos(lat * RAD)))) + 1);
+        const sx = Math.floor(x0) - rx, sy = Math.max(0, Math.floor(y0) - ry), sw = 2 * rx + 1, sh = Math.min(H, Math.floor(y0) + ry + 1) - sy;
+        if (sh <= 0) return false;
+        cv.width = sw; cv.height = sh; g.imageSmoothingEnabled = false;
+        g.drawImage(im, sx, sy, sw, sh, 0, 0, sw, sh);
+        if (sx < 0) g.drawImage(im, sx + W, sy, sw, sh, 0, 0, sw, sh); // across the antimeridian
+        if (sx + sw > W) g.drawImage(im, sx - W, sy, sw, sh, 0, 0, sw, sh);
+        const d = g.getImageData(0, 0, sw, sh).data;
+        for (let yy = 0; yy < sh; yy++) for (let xx = 0; xx < sw; xx++) {
+          const o = (yy * sw + xx) * 4; if (!d[o + 3] || d[o] >= 128) continue; // sea, or outside the map
+          if (kmLL([lon, lat], [-180 + (sx + xx + 0.5) / W * 360, 90 - (sy + yy + 0.5) / H * 180]) <= km) return true;
+        }
+        return false;
+      });
+    };
+    im.src = (document.documentElement.dataset.tierra || '/static/tierra/') + 'agua.png';
+  }));
+  // km from a unit vector to the nearest point of a drawn line (its vertices sit at 1.003)
+  function kmALinea(v, w) {
+    let m = Infinity;
+    for (let j = 1; j < w.length; j++) {
+      const a = w[j - 1], b = w[j], ax = a[0] / 1.003, ay = a[1] / 1.003, az = a[2] / 1.003, bx = b[0] / 1.003 - ax, by = b[1] / 1.003 - ay, bz = b[2] / 1.003 - az;
+      const t = Math.max(0, Math.min(1, ((v[0] - ax) * bx + (v[1] - ay) * by + (v[2] - az) * bz) / (bx * bx + by * by + bz * bz || 1e-18)));
+      const d = kmV(v, [ax + bx * t, ay + by * t, az + bz * t]); if (d < m) m = d;
+    }
+    return m;
+  }
+  function marcaSueltos(A, juntaEn) {
+    const c = capas.sub; if (!A || !c || !c.lineas || !UNION) return;
+    const cab = c.d.cables, n = cab.length, ciudad = LUG && !LUG.error && LUG.cables, lim = SUELTO_KM / 6371;
+    const otroCable = (v, i) => c.lineas.some((l, j) => {
+      if (j === i || !l.w || l.w.length < 2) return false;
+      capsDe(l); const cp = l.cap; if (Math.acos(Math.max(-1, Math.min(1, v[0] * cp.c[0] + v[1] * cp.c[1] + v[2] * cp.c[2]))) > cp.r + lim) return false;
+      return kmALinea(v, l.w) <= SUELTO_KM;
+    });
+    // each end: at land (a city within 80 km, a landing named by the agency, land on the mask), a joint, beside another
+    // cable, or free
+    const libres = [], anclada = new Set();
+    for (let i = 0; i < n; i++) {
+      const l = cab[i].l; if (!l || l.length < 2) continue;
+      for (let k = 0; k < 2; k++) {
+        const q = k ? l[l.length - 1] : l[0];
+        if (cab[i].aprox || (ciudad && ciudad[i] && ciudad[i][2 * k])) { anclada.add(UNION.raiz[i]); continue; }
+        if (juntaEn.has(2 * i + k)) continue;
+        if (A(q[0], q[1], TIERRA_KM) || otroCable(P().vec(q[0], q[1]), i)) { anclada.add(UNION.raiz[i]); continue; }
+        libres.push([i, k]);
+      }
+    }
+    // a free end fades out only on a cable that reaches land or the network somewhere else
+    const marca = new Map();
+    for (const [i, k] of libres) if (anclada.has(UNION.raiz[i])) { if (!marca.has(i)) marca.set(i, [false, false]); marca.get(i)[k] = true; }
+    for (const [i, [ini, fin]] of marca) { const l = c.lineas[i]; colas(l, ini, fin); const s = l.sinAro || (l.sinAro = [false, false]); if (ini) s[0] = true; if (fin) s[1] = true; }
+    UNION.sueltos = [...marca.values()].reduce((s, m) => s + m[0] + m[1], 0);
+  }
+  // a vertex of the line at arc length s (inserted when there is none close by); its index
+  function cortaEn(l, s) {
+    let j = 0; while (j < l.acc.length - 2 && l.acc[j + 1] <= s) j++;
+    const f = (s - l.acc[j]) / ((l.acc[j + 1] - l.acc[j]) || 1); if (f <= 0.02) return j; if (f >= 0.98) return j + 1;
+    const a = l.w[j], b = l.w[j + 1], x = a[0] + (b[0] - a[0]) * f, y = a[1] + (b[1] - a[1]) * f, z = a[2] + (b[2] - a[2]) * f, m = Math.hypot(x, y, z) / 1.003;
+    l.w.splice(j + 1, 0, [x / m, y / m, z / m]); mideLinea(l); return j + 1;
+  }
+  // the last stretch before a loose end (a third of the piece, 700 km at most) is drawn apart, fading out (pintaColas);
+  // the rest of the line, from d0 to d1, as always
+  function colas(l, ini, fin) {
+    const largo = Math.min(0.34 * l.L, 700 / 6371);
+    let d0 = 0, d1 = l.w.length - 1;
+    if (ini) d0 = cortaEn(l, largo);
+    if (fin) d1 = cortaEn(l, l.L - largo);
+    l.d0 = d0; l.d1 = d1; l.colas = [];
+    if (ini) l.colas.push({ desde: d0, hasta: 0 });
+    if (fin) l.colas.push({ desde: d1, hasta: l.w.length - 1 });
+  }
+  // every place where a cable reaches land, west to east: its named cable's landings and those of the pieces that joined it
+  // here; for an unnamed cable, the landings of its own pieces. [city, country, lon, lat]
+  function lugaresCable(i) {
+    const gi = grupoDe(i), gr = gi >= 0 && LUG && LUG.grupos ? LUG.grupos[gi] : null, out = gr ? gr[1].slice() : [];
+    const vistos = new Set(out.map((q) => q[0] + '|' + q[1]));
+    let mas = false;
+    for (const j of gr ? (UNION && UNION.prestados.get(gi)) || [] : cadenaDe(i)) {
+      const e = LUG && LUG.cables && LUG.cables[j], d = capas.sub && capas.sub.d && capas.sub.d.cables[j]; if (!e || !d || !d.l) continue;
+      for (const [k, q] of [[0, d.l[0]], [2, d.l[d.l.length - 1]]]) { if (!e[k]) continue; const key = e[k] + '|' + e[k + 1]; if (vistos.has(key)) continue; vistos.add(key); out.push([e[k], e[k + 1], q[0], q[1]]); mas = true; }
+    }
+    return mas ? out.sort((a, b) => a[2] - b[2]) : out;
+  }
+
   // where the internet touches the ground (OpenStreetMap): landing stations, data centres, exchange points
   let PT = null;
   // The polar stations (bases and satellite ground stations) live in puntos-extra.json and are drawn with the cable layer
@@ -127,7 +333,7 @@
   // 22 Oct 2026, 15:03 (owner): «los que llevan tantos terabytes… en otro color… un ramal diferente por potencia»:
   // design capacity per cable from the agency (datos/cables-capacidad.json, keyed by the group name of lugares-capas).
   async function cargaCapacidad() { if (CAP || cargando.cap) return; cargando.cap = true; try { const c = await cargaJSON('datos/cables-capacidad.json'); CAP = { cables: c.cables || {}, umbrales: c.umbrales || { gigante: 100, grande: 20 } }; if (capas.sub) capas.sub.porPotencia = null; pintaNota(); } catch (_) { CAP = { cables: {}, umbrales: { gigante: 100, grande: 20 } }; } cargando.cap = false; }
-  const capacidadDe = (i) => { if (!CAP || !LUG || !LUG.g) return null; const gi = LUG.g[i]; if (gi == null || gi < 0) return null; const g = LUG.grupos[gi]; return g ? CAP.cables[g[0]] || null : null; };
+  const capacidadDe = (i) => { if (!CAP || !LUG || !LUG.g) return null; const gi = grupoDe(i); if (gi == null || gi < 0) return null; const g = LUG.grupos[gi]; return g ? CAP.cables[g[0]] || null : null; };
   const potencia = (i) => { const c = capacidadDe(i); if (!c) return 0; return c.tbps >= CAP.umbrales.gigante ? 2 : c.tbps >= CAP.umbrales.grande ? 1 : 0; };
   const norm = (t) => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   async function cargaNotas() { if (NOTAS || cargando.notas) return; cargando.notas = true; try { const n = await cargaJSON('datos/cables-notas.json'); NOTAS = (n.cables || []).map((q) => ({ ...q, clave: norm(q.clave) })); } catch (_) { NOTAS = []; } cargando.notas = false; }
@@ -222,7 +428,9 @@
     const F = CAMPO || campo(p, G), fd = F.d, fc = F.cosP;
     for (const l of lineas) {
       const w = l.w; if (!w || w.length < 2) continue;
-      for (const q of [w[0], w[w.length - 1]]) {
+      for (let e = 0; e < 2; e++) {
+        if (l.sinAro && l.sinAro[e]) continue; // a joint between two pieces of one cable, or an end that fades out into the sea
+        const q = e ? w[w.length - 1] : w[0];
         if (!F.todo && q[0] * fd[0] + q[1] * fd[1] + q[2] * fd[2] < fc) continue;
         const v = p.aVista(q); if (v[2] <= 0.05) continue;
         const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1]; if (x < -10 || y < -10 || x > G.W + 10 || y > G.H + 10) continue;
@@ -574,23 +782,29 @@
       // rings a continent); close up they get their halo and their width
       const P3 = capas.sub.porPotencia, L3 = esLimpio(), zq = G.R / (G.R0 || G.R), kq = Math.min(1, Math.max(0, (zq - 1.4) / 2.6));
       const CS = CLASES.sub;
-      if (CS.regional) pintaLineas(cx, p, G, P3.ex[0], `rgba(${ACERO},.55)`, 0.9);
-      if (CS.sinDato) pintaLineas(cx, p, G, P3.ex[3], `rgba(${ACERO},.55)`, 0.9);
-      if (CS.grande && P3.ex[1].length) pintaLineas(cx, p, G, P3.ex[1], `rgba(${ACERO},${(0.62 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
-      // the layer is painted additively (overlapping lines glow), which turns any bright core white: the giants' core is
-      // painted normally, so it stays the accent blue, and only its halo adds up with the rest
-      if (CS.gigante && P3.ex[2].length) { pintaLineas(cx, p, G, P3.ex[2], `rgba(${CLARO},${((L3 ? 0.2 : 0.14) + 0.12 * kq).toFixed(3)})`, 3.5 + 3 * kq); opaco(cx, () => pintaLineas(cx, p, G, P3.ex[2], `rgba(${ACERO},${(0.92 + 0.08 * kq).toFixed(2)})`, 1.3 + 0.7 * kq)); }
+      // 23 Oct 2026: every class in its own colour (SUB_COL) and with the widths it had. The lines are painted normally, not
+      // additively, so that where many cables share a corridor they keep their colour instead of adding up to white; only
+      // the giants' soft halo adds up, as before. Grey first and gold last, so the biggest lie on top. A loose end fades
+      // out into the sea (pintaColas).
+      const traza = (ls, rgb, a, ancho) => opaco(cx, () => { pintaLineas(cx, p, G, ls, `rgba(${rgb},${a.toFixed(3)})`, ancho); pintaColas(cx, p, G, ls, rgb, a, ancho); });
+      const halo = (ls, a) => { pintaLineas(cx, p, G, ls, `rgba(${SUB_COL.gigante},${a.toFixed(3)})`, 3.5 + 3 * kq); pintaColas(cx, p, G, ls, SUB_COL.gigante, a, 3.5 + 3 * kq); };
+      // (the thinner classes a little more opaque than before, as the land fibre's, so that their colour reads)
+      if (CS.sinDato) traza(P3.ex[3], SUB_COL.sinDato, 0.6, 0.9);
+      if (CS.regional) traza(P3.ex[0], SUB_COL.regional, 0.72, 0.9);
+      if (CS.grande && P3.ex[1].length) traza(P3.ex[1], SUB_COL.grande, Math.min(1, 0.7 + 0.2 * kq), 1 + 0.3 * kq);
+      if (CS.gigante && P3.ex[2].length) { halo(P3.ex[2], (L3 ? 0.2 : 0.14) + 0.12 * kq); traza(P3.ex[2], SUB_COL.gigante, 0.92 + 0.08 * kq, 1.3 + 0.7 * kq); }
       // 23 Oct 2026, 08:16 (owner): «una línea fina discontinua… que va y viene, así la pantalla está viva». The planned
       // cables (short dashes) and the approximate routes (longer ones) breathe: their dashes slide gently back and forth.
+      // Each in the colour of its capacity when it is known, grey otherwise.
       const vaiven = (fase) => 9 * Math.sin((t || 0) / 1100 + fase);
-      if (CS.previstos && PREV && PREV.length) { cx.save(); cx.setLineDash([4, 5]); cx.lineDashOffset = vaiven(0); pintaLineas(cx, p, G, PREV, `rgba(${CLARO},.6)`, 1.1); cx.restore(); }
+      if (CS.previstos && PREV && PREV.length) { cx.save(); cx.setLineDash([4, 5]); cx.lineDashOffset = vaiven(0); for (const k of ['sinDato', 'regional', 'grande', 'gigante']) { const ls = PREV.filter((q) => (q.clase || (q.clase = clasePrev(q.c))) === k); if (ls.length) traza(ls, SUB_COL[k], 0.6, 1.1); } cx.restore(); }
       if (CS.aprox && capas.sub.aprox.length) {
         cx.setLineDash([7, 5]); cx.lineDashOffset = vaiven(1.7);
         const todas = sinPotencia();
-        if (CS.regional || todas) pintaLineas(cx, p, G, P3.ap[0], `rgba(${ACERO},.5)`, 0.9);
-        if (CS.sinDato || todas) pintaLineas(cx, p, G, P3.ap[3], `rgba(${ACERO},.5)`, 0.9);
-        if ((CS.grande || todas) && P3.ap[1].length) pintaLineas(cx, p, G, P3.ap[1], `rgba(${ACERO},${(0.55 + 0.2 * kq).toFixed(2)})`, 1 + 0.3 * kq);
-        if ((CS.gigante || todas) && P3.ap[2].length) { pintaLineas(cx, p, G, P3.ap[2], `rgba(${CLARO},${((L3 ? 0.18 : 0.12) + 0.1 * kq).toFixed(3)})`, 3.5 + 3 * kq); opaco(cx, () => pintaLineas(cx, p, G, P3.ap[2], `rgba(${ACERO},${(0.85 + 0.12 * kq).toFixed(2)})`, 1.3 + 0.7 * kq)); }
+        if (CS.sinDato || todas) traza(P3.ap[3], SUB_COL.sinDato, 0.55, 0.9);
+        if (CS.regional || todas) traza(P3.ap[0], SUB_COL.regional, 0.66, 0.9);
+        if ((CS.grande || todas) && P3.ap[1].length) traza(P3.ap[1], SUB_COL.grande, 0.62 + 0.2 * kq, 1 + 0.3 * kq);
+        if ((CS.gigante || todas) && P3.ap[2].length) { halo(P3.ap[2], (L3 ? 0.18 : 0.12) + 0.1 * kq); traza(P3.ap[2], SUB_COL.gigante, 0.85 + 0.12 * kq, 1.3 + 0.7 * kq); }
         cx.setLineDash([]); cx.lineDashOffset = 0;
       }
       pintaLuz(cx, p, G, subVisibles(), t);
@@ -598,9 +812,11 @@
     if (estado.puntos && PT && PT.p) { cx.globalCompositeOperation = 'source-over'; pintaPuntos(cx, p, G); pintaEstaciones(cx, p, G); pintaCiudades(cx, p, G); cx.globalCompositeOperation = 'lighter'; if (puntoMarcado >= 0) pintaRuta(cx, p, G, t); }
     else if (estado.sub && EST) { cx.globalCompositeOperation = 'source-over'; pintaEstaciones(cx, p, G); cx.globalCompositeOperation = 'lighter'; } // 22 Oct 2026, 14:15 (owner): the polar stations show with the cables too
     if (estado.sub && capas.sub && capas.sub.lineas) {
-      if (cableMarcado >= 0) { const l = capas.sub.lineas[cableMarcado]; if (l) resalta(cx, p, G, [l], ACERO); }
-      if (previstoMarcado >= 0 && PREV && PREV[previstoMarcado]) { cx.save(); cx.setLineDash([3, 5]); resalta(cx, p, G, [PREV[previstoMarcado]], ACERO); cx.restore(); } // the planned cable under the pointer lights up like the real ones (owner, 22 Oct 2026, 17:57)
-      if (llegadaMarcada >= 0 && LUG && LUG.llegadas) { const ls = LUG.llegadas[llegadaMarcada].seg.map((i) => capas.sub.lineas[i]).filter(Boolean); resalta(cx, p, G, ls, ACERO); }
+      // what the pointer touches lights up in its own colour: the whole cable (every piece joined to the one touched), the
+      // planned cable, or every cable of a landing
+      if (cableMarcado >= 0) for (const j of cadenaDe(cableMarcado)) { const l = capas.sub.lineas[j]; if (l) resalta(cx, p, G, [l], colorSub(j)); }
+      if (previstoMarcado >= 0 && PREV && PREV[previstoMarcado]) { const q = PREV[previstoMarcado]; cx.save(); cx.setLineDash([3, 5]); resalta(cx, p, G, [q], SUB_COL[q.clase || (q.clase = clasePrev(q.c))]); cx.restore(); } // the planned cable under the pointer lights up like the real ones (owner, 22 Oct 2026, 17:57)
+      if (llegadaMarcada >= 0 && LUG && LUG.llegadas) for (const j of LUG.llegadas[llegadaMarcada].seg) { const l = capas.sub.lineas[j]; if (l) resalta(cx, p, G, [l], colorSub(j)); }
       pintaLlegadas(cx, p, G);
       { const ze = G.R / (G.R0 || G.R); if (ze >= 4) { pintaExtremos(cx, p, G, capas.sub.lineas, ze, BLANCO); if (PREV && PREV.length) pintaExtremos(cx, p, G, PREV, ze, BLANCO); } }
     }
@@ -637,6 +853,7 @@
             let s = base + k * sep - cola[c];
             if (s < 0) continue;
             if (dir) s = l.L - s;
+            if (l.colas && (s < l.acc[l.d0] || s > l.acc[l.d1])) continue; // no light in a stretch that fades out into the sea
             const v = p.aVista(puntoEn(l, s));
             if (v[2] <= 0.02) continue;
             cx.fillRect(G.CX + G.R * v[0] - h, G.CY - G.R * v[1] - h, tam[c], tam[c]);
@@ -675,7 +892,7 @@
     return capas.sub.vis;
   }
   // what the pointer touches: a soft halo and a brighter, wider core in the line's own colour
-  function resalta(cx, p, G, lineas, rgb) { pintaLineas(cx, p, G, lineas, `rgba(${rgb},.22)`, 7); opaco(cx, () => pintaLineas(cx, p, G, lineas, `rgba(${rgb},1)`, 2.3)); }
+  function resalta(cx, p, G, lineas, rgb) { pintaLineas(cx, p, G, lineas, `rgba(${rgb},.22)`, 7); pintaColas(cx, p, G, lineas, rgb, 0.22, 7); opaco(cx, () => { pintaLineas(cx, p, G, lineas, `rgba(${rgb},1)`, 2.3); pintaColas(cx, p, G, lineas, rgb, 1, 2.3); }); }
   // paint something without the additive glow (so a blue stays blue), then go back to how the layer was painting
   function opaco(cx, f) { const g = cx.globalCompositeOperation; cx.globalCompositeOperation = 'source-over'; f(); cx.globalCompositeOperation = g; }
   function pintaLineas(cx, p, G, lineas, color, ancho) {
@@ -683,11 +900,32 @@
     cx.strokeStyle = color; cx.lineWidth = ancho; cx.beginPath();
     for (const l of lineas) {
       const w = l.w; if (!w || w.length < 2) continue;
-      if (F.todo) { trazoW(cx, p, G, w, 0, w.length - 1); continue; }
+      // a cable whose open data stop in the sea: its last stretch is drawn apart, fading out (pintaColas)
+      const a = l.colas ? l.d0 : 0, b = l.colas ? l.d1 : w.length - 1;
+      if (F.todo) { trazoW(cx, p, G, w, a, b); continue; }
       const caps = capsDe(l); if (!veCap(F, l.cap)) continue;
-      for (const cp of caps) if (veCap(F, cp)) trazoW(cx, p, G, w, cp.i0, cp.i1);
+      for (const cp of caps) { if (!veCap(F, cp)) continue; const i0 = Math.max(a, cp.i0), i1 = Math.min(b, cp.i1); if (i1 > i0) trazoW(cx, p, G, w, i0, i1); }
     }
     cx.stroke();
+  }
+  // the last stretch before a loose end: its own colour and width, fading to nothing where the open data stop
+  function pintaColas(cx, p, G, lineas, rgb, alfa, ancho) {
+    const F = CAMPO || campo(p, G);
+    for (const l of lineas) {
+      if (!l.colas) continue;
+      if (!F.todo) { capsDe(l); if (!veCap(F, l.cap)) continue; }
+      for (const q of l.colas) {
+        const paso = q.hasta > q.desde ? 1 : -1, pts = [];
+        for (let j = q.desde; ; j += paso) { const v = p.aVista(l.w[j]); pts.push(v[2] > 0.02 ? [G.CX + G.R * v[0], G.CY - G.R * v[1]] : null); if (j === q.hasta) break; }
+        const vis = pts.filter(Boolean); if (vis.length < 2) continue;
+        const a = vis[0], b = vis[vis.length - 1];
+        const gr = cx.createLinearGradient(a[0], a[1], b[0], b[1]);
+        gr.addColorStop(0, `rgba(${rgb},${alfa.toFixed(3)})`); gr.addColorStop(0.55, `rgba(${rgb},${(alfa * 0.4).toFixed(3)})`); gr.addColorStop(1, `rgba(${rgb},0)`);
+        cx.strokeStyle = gr; cx.lineWidth = ancho; cx.beginPath();
+        let prev = false; for (const s of pts) { if (s && prev) cx.lineTo(s[0], s[1]); else if (s) cx.moveTo(s[0], s[1]); prev = !!s; }
+        cx.stroke();
+      }
+    }
   }
   function trazoW(cx, p, G, w, i0, i1) {
     let prev = false;
@@ -925,10 +1163,10 @@
     }
     if (estado.sub) {
       const c = capas.sub;
-      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + (CAP && Object.keys(CAP.cables).length ? ' · ' + T('trazo claro y grueso con halo: troncales de más de 100 Tbit/s; trazo medio: más de 20 Tbit/s') : '') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
+      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + (CAP && Object.keys(CAP.cables).length ? ' · ' + T('color por capacidad: dorado y grueso con halo, más de 100 Tbit/s; lavanda, de 20 a 100 Tbit/s; verde agua, menos de 20 Tbit/s; gris, capacidad no publicada') : '') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
     }
     if (estado.fibra) {
-      meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + T('por niveles: de lejos solo las troncales principales; las nacionales y las regionales aparecen al acercarse') + ' · ' + T('Datos verificados') : FT && FT.error ? T('No se pudo cargar la fibra por tierra.') : T('Cargando fibra por tierra…'));
+      meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + T('por niveles: de lejos solo las troncales principales; las nacionales y las regionales aparecen al acercarse') + ' · ' + T('Datos verificados') : FT && FT.error ? T('No se pudieron cargar los cables por tierra.') : T('Cargando los cables por tierra…'));
     }
     if (estado.tierra) {
       const c = capas.tierra;
@@ -1135,6 +1373,7 @@
       resumen: [T('Estado'), T('Origen'), T('Destino'), T('Quién lo quiere hacer')],
       para: T('Todavía no existe y no lleva datos. Si se construye, abrirá una ruta nueva entre') + ' ' + c.llegadas[0].lugar + ' ' + T('y') + ' ' + c.llegadas[c.llegadas.length - 1].lugar + '.',
       secciones: [{ t: T('El proyecto'), claves: [T('Qué quieren hacer'), T('Para cuándo'), T('Coste'), T('Capacidad prevista'), T('Estudio')], abierta: true }, { t: T('Amarres previstos'), claves: [T('Amarres previstos')] }, { t: T('Datos'), claves: [T('Longitud'), T('Dueños'), T('Datos')] }],
+      color: SUB_COL[PREV[i].clase || (PREV[i].clase = clasePrev(c))],
     }), x, y);
   }
   function buscaCable(x, y) {
@@ -1254,7 +1493,7 @@
     const r = rutaCentro(puntoMarcado); if (!r || r.lejos) return;
     const L = LUG.llegadas[r.llegada];
     // the submarine cables that land there, lit across the ocean
-    if (!r.estacion && capas.sub && capas.sub.lineas) { const ls = L.seg.map((k) => capas.sub.lineas[k]).filter(Boolean); pintaLineas(cx, p, G, ls, `rgba(${BLANCO},.9)`, 1.8); pintaLuz(cx, p, G, ls, t); }
+    if (!r.estacion && capas.sub && capas.sub.lineas) { const ls = L.seg.map((k) => capas.sub.lineas[k]).filter(Boolean); for (const k of L.seg) { const l = capas.sub.lineas[k]; if (l) { pintaLineas(cx, p, G, [l], `rgba(${colorSub(k)},.9)`, 1.8); pintaColas(cx, p, G, [l], colorSub(k), 0.9, 1.8); } } pintaLuz(cx, p, G, ls, t); } // each in its own colour (23 Oct 2026)
     if (r.linea) {
       cx.setLineDash(r.via ? [] : [5, 4]);
       pintaLineas(cx, p, G, [r.linea], `rgba(${BLANCO},.95)`, 1.8);
@@ -1275,7 +1514,7 @@
       cx.globalCompositeOperation = 'source-over';
       cx.strokeStyle = `rgba(${BLANCO},.95)`; cx.lineWidth = 1.2; cx.beginPath(); cx.arc(x, y, 7, 0, 7); cx.stroke();
       cx.fillStyle = `rgba(${BLANCO},1)`; cx.beginPath(); cx.arc(x, y, 2.6, 0, 7); cx.fill();
-      const n = new Set(L.seg.map((k) => (LUG.g && LUG.g[k] >= 0 ? 'g' + LUG.g[k] : 's' + k))).size;
+      const n = new Set(L.seg.map((k) => (grupoDe(k) >= 0 ? 'g' + grupoDe(k) : 's' + k))).size;
       const txt = r.estacion ? (r.estacion.n || T('Estación de llegada de cables')) : L.ciudad + ' · ' + num(n) + ' ' + T(n === 1 ? 'cable submarino' : 'cables submarinos');
       cx.font = '500 11px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle';
       cx.lineWidth = 3; cx.strokeStyle = 'rgba(6,8,12,.85)'; cx.strokeText(txt, x + 12, y);
@@ -1359,6 +1598,7 @@
   function abrePanel(m, x, y) {
     const p = panel(); panelModelo = m; historial.push(m); if (historial.length > 12) historial.shift();
     p.querySelector('.tipo').textContent = m.tipo || ''; p.querySelector('.tit').textContent = m.titulo || ''; p.querySelector('.sub').textContent = m.sub || ''; p.querySelector('.sub').hidden = !m.sub;
+    muestraEn(p.querySelector('.tit'), m.color); // a cable's colour beside its name (23 Oct 2026)
     const dl = p.querySelector('.resumen'); dl.textContent = '';
     for (const [k, v] of m.resumen) { if (!v) continue; const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k || ''; dd.textContent = v; if (!k) dd.className = 'ancho'; dl.append(dt, dd); }
     const secs = p.querySelector('.secs'); secs.textContent = '';
@@ -1397,18 +1637,20 @@
     if (plan.para) secciones.push({ t: T('En la práctica'), /* 22 Oct 2026, 22:23 (owner): instead of «Qué significa para ti», more professional */ texto: plan.para, abierta: true });
     for (const sec of plan.secciones || []) { const fs = []; for (const k of sec.claves) for (const f of toma(k)) if (!quitar.has(f)) { fs.push(f); quitar.add(f); } if (fs.length || sec.texto) secciones.push({ t: sec.t, filas: fs, texto: sec.texto, abierta: !!sec.abierta }); }
     const resto = filas.filter((f) => f[1] && !quitar.has(f)); if (resto.length) secciones.push({ t: T('Más datos'), filas: resto });
-    return { tipo, titulo, sub: plan.sub || '', resumen, secciones, pie };
+    return { tipo, titulo, sub: plan.sub || '', resumen, secciones, pie, color: plan.color || '' };
   }
   // hover → summary card; click → the whole panel
   function abreModelo(m, x, y) {
     if (clicActual) { abrePanel(m, x, y); return; }
     const pista = esTactil() ? T('Toca para la ficha completa') : T('Clic: ficha completa');
-    fichaRica(m.titulo + (m.sub ? ' · ' + m.sub : ''), m.resumen, (m.pie ? m.pie + ' · ' : '') + pista, x, y);
+    fichaRica(m.titulo + (m.sub ? ' · ' + m.sub : ''), m.resumen, (m.pie ? m.pie + ' · ' : '') + pista, x, y, m.color);
   }
   // a card with labels and values in two columns (satellites, data centres)
-  function fichaRica(titulo, filas, pie, x, y) {
+  // the colour of a cable beside its name, as in the legend of its layer (23 Oct 2026)
+  function muestraEn(el, rgb) { if (!el || !rgb) return; const s = document.createElement('s'); s.className = 'muestra'; s.setAttribute('aria-hidden', 'true'); s.style.setProperty('--c', rgb); el.prepend(s); }
+  function fichaRica(titulo, filas, pie, x, y, color) {
     const f = ficha(); if (!f) return;
-    f.querySelector('b').textContent = titulo;
+    f.querySelector('b').textContent = titulo; muestraEn(f.querySelector('b'), color);
     const sp = f.querySelector('span'); sp.textContent = '';
     const dl = document.createElement('dl'); dl.className = 'sat-dl';
     for (const [k, v] of filas) { if (!v) continue; const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k; dd.textContent = v; dl.append(dt, dd); }
@@ -1449,7 +1691,7 @@
     const r = rutaCentro(i);
     if (r) {
       const L = LUG.llegadas[r.llegada], nombres = [];
-      for (const k of L.seg) { const gi = LUG.g ? LUG.g[k] : -1, nm = gi >= 0 ? LUG.grupos[gi][0] : ''; if (nm && !nombres.includes(nm)) nombres.push(nm); }
+      for (const k of L.seg) { const gi = grupoDe(k), nm = gi >= 0 ? LUG.grupos[gi][0] : ''; if (nm && !nombres.includes(nm)) nombres.push(nm); }
       // Owner, 22 Oct 2026: «tiene que ser un idioma comprensible para todos los clientes, fácil y a la vez profesional»
       if (r.lejos) filas.push([T('Desde el mar'), T('De las llegadas de cables de esta zona aún no tenemos datos.')]);
       else if (r.estacion) filas.push([T('Desde el mar'), T('La estación de cables submarinos más cercana es') + ' ' + (r.estacion.n || '') + (r.estacion.o ? ' (' + r.estacion.o + ')' : '') + ', ' + T('a') + ' ' + num(Math.round(r.km)) + ' km ' + T('de este centro de datos') + '.']);
@@ -1479,7 +1721,7 @@
     f.classList.remove('sat');
     if (tipo === 'punto') { fichaCentro(i, x, y); return; } else if (tipo === 'llegada') {
       const l = LUG.llegadas[i], nombres = [], sin = { n: 0 };
-      for (const k of l.seg) { const gi = LUG.g ? LUG.g[k] : -1, nm = gi >= 0 ? LUG.grupos[gi][0] : ''; if (nm) { if (!nombres.includes(nm)) nombres.push(nm); } else sin.n++; }
+      for (const k of l.seg) { const gi = grupoDe(k), nm = gi >= 0 ? LUG.grupos[gi][0] : ''; if (nm) { if (!nombres.includes(nm)) nombres.push(nm); } else sin.n++; }
       f.querySelector('b').textContent = T('Aquí llegan cables submarinos') + ' · ' + l.ciudad;
       const lista = nombres.slice(0, 5).join(' · ') + (nombres.length > 5 ? ' · +' + (nombres.length - 5) : '');
       const ti = porTierra(l);
@@ -1491,14 +1733,13 @@
       const ops = c.ops.map(([o, k]) => o + (k > 1 ? ' ' + num(k) : '')).join(' · ');
       f.querySelector('span').textContent = num(c.n) + ' ' + T(c.n === 1 ? 'centro de datos' : 'centros de datos') + (ops ? '\n' + ops : '');
     } else {
-      const d = capas.sub.d.cables[i], e = (LUG && LUG.cables && LUG.cables[i]) || ['', '', '', ''];
-      // the whole cable when its name is known: every place where one of its pieces reaches land, west to east
-      const gi = LUG && LUG.g ? LUG.g[i] : -1, gr = gi >= 0 ? LUG.grupos[gi] : null;
-      let lados;
-      if (gr) lados = gr[1].map(([c, cc]) => c + ' (' + paisNombre(cc) + ')');
-      else { lados = []; if (e[0]) lados.push(e[0] + ' (' + paisNombre(e[1]) + ')'); if (e[2] && (e[2] !== e[0] || e[3] !== e[1])) lados.push(e[2] + ' (' + paisNombre(e[3]) + ')'); }
+      const d = capas.sub.d.cables[i];
+      // the whole cable when its name is known: every place where one of its pieces reaches land, west to east (with the
+      // pieces that joined it at load time, uneCables); an unnamed cable, the landings of its own pieces
+      const gi = grupoDe(i), gr = gi >= 0 ? LUG.grupos[gi] : null, sitios = lugaresCable(i);
+      const lados = sitios.map(([c, cc]) => c + ' (' + paisNombre(cc) + ')');
       const titulo = gr ? gr[0] : (d.n || T('Cable submarino sin nombre'));
-      f.querySelector('b').textContent = titulo;
+      f.querySelector('b').textContent = titulo; muestraEn(f.querySelector('b'), colorSub(i)); // its colour, as in the legend
       // owner, 22 Oct 2026: «origen Francia, destino Brasil… sería más entendible». West to east; data goes both ways.
       const medio = lados.slice(1, -1);
       const donde = lados.length >= 2 ? T('Origen') + ': ' + lados[0] + '\n' + T('Destino') + ': ' + lados[lados.length - 1]
@@ -1512,14 +1753,14 @@
       const inf = (gr && gr[2]) || {}, mas = [];
       if (inf.anio) mas.push(T('En servicio desde') + ' ' + inf.anio);
       if (inf.km) mas.push(T('Longitud') + ': ' + num(inf.km) + ' km');
-      else if (inf.kmMapa) mas.push(T('Longitud en el mapa') + ': ' + num(inf.kmMapa) + ' km');
+      else if (inf.kmMapa && !(UNION && UNION.prestados.has(gi))) mas.push(T('Longitud en el mapa') + ': ' + num(inf.kmMapa) + ' km'); // (it does not count the pieces that joined it here)
       if (inf.duenos && inf.duenos.length) mas.push(T('Dueños') + ': ' + inf.duenos.join(', '));
       // owner, 22 Oct 2026: «la distancia punto a punto»: between consecutive landings, west to east, as the crow
       // flies over the sea (the exact route of each stretch is not public), so it is said plainly
-      if (gr && gr[1].length >= 2 && gr[1].every((q) => Number.isFinite(q[3]))) {
+      if (sitios.length >= 2 && sitios.every((q) => Number.isFinite(q[3]))) {
         const tramos = [];
-        for (let k = 1; k < gr[1].length && tramos.length < 6; k++) { const a = gr[1][k - 1], b = gr[1][k]; const d = kmLL([a[2], a[3]], [b[2], b[3]]); if (d >= 20) tramos.push(a[0] + ' → ' + b[0] + ': ' + num(Math.round(d)) + ' km'); }
-        if (tramos.length) mas.push(T('De punto a punto, en línea recta') + ': ' + tramos.join(' · ') + (gr[1].length - 1 > 6 ? ' · …' : ''));
+        for (let k = 1; k < sitios.length && tramos.length < 6; k++) { const a = sitios[k - 1], b = sitios[k]; const d = kmLL([a[2], a[3]], [b[2], b[3]]); if (d >= 20) tramos.push(a[0] + ' → ' + b[0] + ': ' + num(Math.round(d)) + ' km'); }
+        if (tramos.length) mas.push(T('De punto a punto, en línea recta') + ': ' + tramos.join(' · ') + (sitios.length - 1 > 6 ? ' · …' : ''));
       }
       const ops = inf.operan && inf.operan.length ? inf.operan.join(', ') : d.o;
       if (ops) mas.push(T('Operador') + ': ' + ops);
@@ -1532,16 +1773,21 @@
       }
       // 22 Oct 2026, 14:34 (owner): «el cable que se rompió también lo indicamos»: known cuts and repairs, by hand
       { const nn = norm(gr ? gr[0] : (d.n || '')); const nt = NOTAS && NOTAS.find((q) => new RegExp('(^|[^a-z0-9])' + q.clave.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '([^a-z0-9]|$)').test(nn)); if (nt) { if (nt.incidentes) mas.push(T('Incidencias conocidas') + ': ' + nt.incidentes); if (nt.estado) mas.push(T('Estado') + ': ' + T(nt.estado === 'en servicio' ? 'En servicio' : 'En construcción')); } }
-      f.querySelector('span').textContent = donde + (mas.length ? '\n' + mas.join('\n') : '');
+      // 23 Oct 2026 (owner: «hay varios que se quedan ahí como en el mar. ¿Es un error?»): a cable whose line fades out into
+      // the sea says why, and nothing more (see uneCables)
+      const corto = cadenaSuelta(i) ? T('En los datos abiertos (OpenStreetMap) este cable está trazado solo hasta donde se apaga la línea.') : '';
+      f.querySelector('span').textContent = donde + (mas.length ? '\n' + mas.join('\n') : '') + (corto ? '\n' + corto : '');
       if (clicActual) {
         for (const m of mas) { const j = m.indexOf(': '); if (j > 0 && j < 40) filas.push([m.slice(0, j), m.slice(j + 2)]); else filas.push(['', m]); }
+        if (corto) filas.push([T('Trazado'), corto]);
         const cp = capacidadDe(i), L = P() && P().lugar, miPais = L && P().pais;
-        const toca = gr && miPais ? gr[1].find((q) => q[1] === miPais) : null;
+        const toca = miPais ? sitios.find((q) => q[1] === miPais) : null;
         abreModelo(modelo(gr && gr[2] && gr[2].aprox ? T('Cable submarino') + ' · ' + T('trazado aproximado') : T('Cable submarino'), titulo, filas, T('Datos verificados'), {
           sub: lados.length >= 2 ? lados[0].replace(/ \(.*\)$/, '') + ' → ' + lados[lados.length - 1].replace(/ \(.*\)$/, '') : '',
           resumen: [T('Origen'), T('Destino'), T('En servicio desde'), T('Longitud'), T('Capacidad')],
           para: (lados.length >= 2 ? T('Une') + ' ' + lados[0] + ' ' + T('con') + ' ' + lados[lados.length - 1] + ' ' + T('por el fondo del mar.') + ' ' : '') + T('Cuando tus datos cruzan entre esos dos lados —un vídeo, un correo, una copia de seguridad— pueden ir por este cable o por otros paralelos; si uno se corta, el tráfico se reparte por los demás y lo notas como lentitud, no como apagón.') + (toca ? ' ' + T('Llega a tu país por') + ' ' + toca[0] + '.' : '') + (cp && cp.tbps >= 100 ? ' ' + T('Es una de las grandes autopistas: por él cabe el tráfico de decenas de millones de personas a la vez.') : ''),
-          secciones: [{ t: T('Recorrido y profundidad'), claves: [T('Paradas'), T('De punto a punto, en línea recta'), T('Profundidad del fondo bajo este tramo'), T('Longitud en el mapa')], abierta: true }, { t: T('Datos'), claves: [T('Dueños'), T('Operador'), T('Capacidad'), T('Longitud'), T('En servicio desde')] }, { t: T('Incidencias y estado'), claves: [T('Incidencias conocidas'), T('Estado')] }],
+          secciones: [{ t: T('Recorrido y profundidad'), claves: [T('Paradas'), T('Trazado'), T('De punto a punto, en línea recta'), T('Profundidad del fondo bajo este tramo'), T('Longitud en el mapa')], abierta: true }, { t: T('Datos'), claves: [T('Dueños'), T('Operador'), T('Capacidad'), T('Longitud'), T('En servicio desde')] }, { t: T('Incidencias y estado'), claves: [T('Incidencias conocidas'), T('Estado')] }],
+          color: colorSub(i),
         }), x, y);
         return;
       }
@@ -1706,7 +1952,7 @@
     // 22 Oct 2026, 22:02 (owner): «palabras para que sean entendibles, todo»
     // 23 Oct 2026, 09:17 (owner: «busca las palabras más apropiadas, entendibles y profesionales»): agency round with ChatGPT and Grok
     sub: { titulo: 'Cables submarinos', clases: { gigante: ['Autopistas entre continentes', 'Los cables más potentes: más de 100 Tbit/s.'], grande: ['Grandes rutas', 'Entre 20 y 100 Tbit/s: unen países y regiones.'], regional: ['Cables regionales', 'Menos de 20 Tbit/s: unen islas y países vecinos.'], sinDato: ['Capacidad no publicada', 'Cables en funcionamiento cuya capacidad no han publicado sus propietarios.'], aprox: ['Trazado aproximado', 'Sabemos dónde llega, pero no su recorrido exacto. Línea discontinua.'], previstos: ['Cables en proyecto', 'Anunciados o en construcción; aún no transportan datos. Línea discontinua.'] } },
-    fibra: { titulo: 'Fibra por tierra', clases: { principal: ['Grandes troncales', 'Rutas de 800 km o más, o compartidas por varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'] } },
+    fibra: { titulo: 'Cables por tierra', /* owner, 23 Oct 2026, 22:55: «Cables por tierra, mejor» */ clases: { principal: ['Grandes troncales', 'Rutas de 800 km o más, o compartidas por varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'] } },
     puntos: { titulo: 'Puntos de red', clases: { datos: ['Grandes operadores', 'Centros de datos de compañías con cinco o más en el mapa.'], pequenos: ['Otros centros de datos', 'De compañías con menos de cinco en el mapa, o sin operador identificado.'], intercambio: ['Puntos de intercambio', 'Donde las redes de distintas compañías se conectan entre sí.'], estaciones: ['Bases y antenas', 'Bases del Ártico y la Antártida, y estaciones terrestres de satélites.'] } },
   };
 
@@ -1727,6 +1973,8 @@
       const orb = document.createElement('div'); orb.className = 'orb'; caja.appendChild(orb);
       const ti = document.createElement('div'); ti.className = 'titulo'; ti.textContent = T(TEXTOS_CLASES[k].titulo); orb.appendChild(ti);
       const x = document.createElement('button'); x.type = 'button'; x.className = 'plegar'; x.setAttribute('aria-label', T('Minimizar el panel')); x.title = T('Minimizar el panel'); x.innerHTML = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10l4-4 4 4"/></svg><span>' + T('Minimizar') + '</span>'; x.addEventListener('click', () => { PLEGADO[k] = true; if (VACIA[k]) { VACIA[k] = false; for (const q of Object.keys(CLASES[k])) CLASES[k][q] = true; } pintaClases(); }); ti.appendChild(x);
+      // 23 Oct 2026: the submarine card says what its colours mean, on screen (a phone has no tooltips)
+      if (k === 'sub') { const ley = document.createElement('p'); ley.className = 'leyenda'; ley.textContent = T('El color indica la capacidad: más de 100 Tbit/s, de 20 a 100, menos de 20 o no publicada.'); orb.appendChild(ley); } // in the order of the coloured classes below
       for (const c of Object.keys(TEXTOS_CLASES[k].clases)) {
         const [n, d] = TEXTOS_CLASES[k].clases[c];
         const bt = document.createElement('button'); bt.type = 'button'; bt.dataset.clase = c; bt.setAttribute('aria-pressed', String(!!CLASES[k][c]));
@@ -1734,6 +1982,9 @@
         bt.querySelector('.n').append(T(n), ' ', Object.assign(document.createElement('b'), {})); bt.querySelector('.d').textContent = T(d); bt.title = T(d); // 22 Oct 2026, 22:09 (owner): the card lists classes only; the explanation shows under the pointer
         // 23 Oct 2026 (owner: «los de tierra los vamos a segmentar por colores»): each land-fibre class shows its colour, as in a map legend
         if (k === 'fibra') { const m = document.createElement('s'); m.className = 'muestra'; m.setAttribute('aria-hidden', 'true'); m.style.setProperty('--c', FIBRA_COL[{ principal: 3, largo: 2, nacional: 1, regional: 0 }[c]]); bt.querySelector('.n').prepend(m); }
+        // 23 Oct 2026 (owner: «los cables submarinos también… van a ir por colores»): the same colours by capacity; the
+        // approximate and planned routes show their dashes (each one is drawn in the colour of its capacity)
+        if (k === 'sub') { const m = document.createElement('s'); m.className = 'muestra' + (c === 'aprox' ? ' raya' : c === 'previstos' ? ' punto' : ''); m.setAttribute('aria-hidden', 'true'); m.style.setProperty('--c', SUB_COL[c] || BLANCO); bt.querySelector('.n').prepend(m); }
         bt.addEventListener('click', () => {
           CLASES[k][c] = !CLASES[k][c];
           if (k === 'sub' && capas.sub) capas.sub.visK = null;
@@ -1793,9 +2044,11 @@
   }
   let soloTu = false, soloTuPinta = null;
   function ponSoloTu(on, dibuja) { soloTu = !!on; soloTuPinta = on ? dibuja || null : null; document.body.classList.toggle('solo-tu', soloTu); if (soloTu) { cierraLista(); muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; } pintaNota(); pintaVista(); }
-  window.OrbitaCapas = { pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; },
+  window.OrbitaCapas = { pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get cajasPaises() { return PAIS_CAJAS; }, /* the country names' boxes, so the cities (ciudades.js) never land on them */ get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; },
     // the map's network as lines of unit vectors, for the routes that travel along it (red.js)
     get red() { return { sub: capas.sub && capas.sub.lineas, tierra: capas.tierra && capas.tierra.lineas, fibra: FT && FT.lineas }; },
+    // the submarine pieces joined at load time and the ends left fading out into the sea (uneCables), for the automated checks
+    get uniones() { return UNION ? { juntas: UNION.juntas, cerradas: UNION.cerradas, conNombre: UNION.conNombre, sueltos: UNION.sueltos, nombres: [...UNION.prestados].map(([g, ps]) => [LUG.grupos[g] ? LUG.grupos[g][0] : g, ps]) } : null; },
     // loads the whole network (whether or not its layers are shown) and resolves when it is there
     cargaRed() {
       cargaCables('sub'); cargaFibra(); // the land-cable layer has no file yet (indice.json), so it is not asked for

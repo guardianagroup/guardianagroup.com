@@ -395,6 +395,12 @@ body.listo:not(.dentro) header:hover, body.listo:not(.dentro) header:focus-withi
 /* the colour of each land-fibre class, as in a map legend (23 Oct 2026) */
 .sat-vista .orb button .n .muestra { display: inline-block; width: 18px; height: 3px; margin-inline-end: 9px; border-radius: 2px; vertical-align: 3px; background: rgb(var(--c)); box-shadow: 0 0 6px rgba(var(--c), .55); text-decoration: none; transition: opacity .2s; }
 .sat-vista .orb button[aria-pressed="false"] .n .muestra { opacity: .3; box-shadow: none; }
+/* the submarine cables take the same colours by capacity (23 Oct 2026): the approximate and planned routes show their dashes,
+   the card says on screen what the colours mean, and a cable's card carries its colour beside its name */
+.sat-vista .orb button .n .muestra.raya { background: repeating-linear-gradient(90deg, rgba(var(--c), .85) 0 5px, transparent 5px 8px); box-shadow: none; }
+.sat-vista .orb button .n .muestra.punto { background: repeating-linear-gradient(90deg, rgba(var(--c), .85) 0 2px, transparent 2px 5px); box-shadow: none; }
+.capa-vista .orb .leyenda { margin: -4px 10px 6px; font: 400 11px/1.45 var(--texto); color: var(--muted); text-wrap: pretty; }
+.sat-ficha b .muestra, .ficha-panel .tit .muestra { display: inline-block; width: 16px; height: 3px; margin-inline-end: 8px; border-radius: 2px; vertical-align: .3em; background: rgb(var(--c)); box-shadow: 0 0 6px rgba(var(--c), .55); text-decoration: none; }
 .sat-vista .seg { display: flex; gap: 2px; padding: 3px; border-radius: 999px; border: 1px solid var(--line); }
 .sat-vista .seg button { all: unset; cursor: pointer; flex: 1; text-align: center; padding: 6px 10px; border-radius: 999px; font: 500 11px/1 var(--texto); color: var(--muted); white-space: nowrap; transition: color .2s, background .2s; }
 .sat-vista .seg button:hover:not(:disabled) { color: var(--fg); }
@@ -559,7 +565,7 @@ body.con-conexion .ficha-panel, .conexion:not([hidden]) ~ .ficha-panel { right: 
 .ficha-panel .pie { margin: 6px 0 0; font: 400 10.5px/1.4 var(--mono); color: #8A95A2; }
 body.dentro .ficha-panel { opacity: 0; pointer-events: none; }
 @media (max-width: 760px) {
-  .ficha-panel { top: auto; bottom: 0; left: 0; right: 0 !important; width: 100%; max-width: none; height: 46vh; max-height: 90vh; border-radius: 16px 16px 0 0; padding-top: 6px; transition: height .25s; }
+  .ficha-panel { top: auto; bottom: 0; left: 0; right: 0 !important; width: auto; box-sizing: border-box; max-width: none; height: 46vh; /* 23 Oct 2026, 23:00 (owner: «en el lado derecho se me corta»): 100% plus the padding came out 34 px wider than the phone */ max-height: 90vh; border-radius: 16px 16px 0 0; padding-top: 6px; transition: height .25s; }
   .ficha-panel.alta { height: 88vh; }
   .ficha-panel .asa { display: block; width: 44px; height: 4px; margin: 0 auto 8px; border-radius: 2px; background: rgba(156,195,228,.4); cursor: pointer; }
 }
@@ -603,30 +609,56 @@ body.viaje.viaje-fin .altura { opacity: 1 !important; transition-delay: 0s; }
 #viaje .fin .informe, #viaje .fin .video { border-color: var(--accent); color: var(--accent); }
 #viaje .fin .informe:hover, #viaje .fin .video:hover { background: var(--accent); color: var(--accent-fg); }
 #viaje .fin .video[hidden] { display: none; }
-.informe { position: fixed; inset: 0; z-index: 45; overflow: auto; background: #06080C; color: var(--fg); padding: 32px max(24px, 6vw) 48px; font-family: var(--texto); scrollbar-width: thin; }
+/* 24 Oct 2026 (owner: the figures «más profesionales»; the wheel «en toda la web»): the report is a page of its own, over
+   the header (50) too; each figure is a card (title and legend, the canvas viaje.js draws at its width, the caption) and
+   every continent wears the same colour in all of them. Small text no dimmer than #A9B3BE on the dark ground. */
+.informe { position: fixed; inset: 0; z-index: 55; overflow: auto; overscroll-behavior: contain; background: #06080C; color: var(--fg); padding: 32px max(24px, 6vw) 48px; font-family: var(--texto); scrollbar-width: thin; }
 .informe .cab { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
 .informe .cab .k { margin: 0; font: 500 11px/1 var(--mono); letter-spacing: .16em; color: var(--accent); }
-.informe .cab .t { margin: 8px 0 6px; font: 600 38px/1.1 var(--texto); letter-spacing: -.01em; }
+.informe .cab .t { margin: 8px 0 6px; font: 600 38px/1.1 var(--display); letter-spacing: -.01em; }
 .informe .cab .s { margin: 0; font: 400 12px/1.5 var(--mono); color: #A9B3BE; max-width: 70ch; }
 .informe .acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.informe .acciones small { flex-basis: 100%; font: 400 10.5px/1.4 var(--mono); color: #8A95A2; }
+.informe .acciones small { flex-basis: 100%; font: 400 10.5px/1.4 var(--mono); color: #A9B3BE; }
 .informe .acciones button { all: unset; cursor: pointer; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font: 600 12px/1 var(--texto); }
 .informe .acciones button:hover { background: var(--accent); color: var(--accent-fg); }
-.informe figure { margin: 0 0 22px; }
-.informe figure canvas { display: block; border-radius: 14px; border: 1px solid var(--line); }
-.informe figcaption { margin-top: 8px; font: 400 11px/1.5 var(--mono); color: #8A95A2; }
+.informe figure { margin: 0 0 22px; padding: 18px 20px 16px; border: 1px solid var(--line); border-radius: 16px; background: #0A0E14; }
+.informe figure canvas { display: block; width: 100%; height: auto; }
+.informe .g-cab { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin: 0 0 14px; }
+.informe .g-t { margin: 0; font: 600 16px/1.3 var(--display); color: var(--fg); letter-spacing: .005em; }
+.informe .leyenda { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0; padding: 0; list-style: none; font: 500 12px/1.4 var(--texto); color: #C4CCD5; }
+.informe .leyenda li { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+.informe .leyenda i { flex: none; display: inline-block; width: 9px; height: 9px; border-radius: 50%; }
+.informe .leyenda i.anillo { box-sizing: border-box; width: 11px; height: 11px; border: 2px solid; background: none; }
+.informe .leyenda i.barra { width: 14px; height: 9px; border-radius: 2px; }
+.informe figcaption { margin-top: 12px; font: 400 12.5px/1.55 var(--texto); color: #A9B3BE; max-width: 120ch; }
 .informe .cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 0 0 22px; }
-.informe .cifras div { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: rgba(12,17,24,.6); }
-.informe .cifras b { display: block; font: 600 30px/1.1 var(--texto); color: var(--fg); font-variant-numeric: tabular-nums; }
-.informe .cifras span { display: block; margin-top: 6px; font: 500 10.5px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #8A95A2; }
-.informe .dos { display: grid; grid-template-columns: minmax(280px, 460px) minmax(300px, 1fr); gap: 28px; align-items: start; margin-bottom: 22px; }
-.informe .texto h2 { margin: 0 0 8px; font: 600 15px/1.3 var(--texto); }
+.informe .cifras div { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: #0A0E14; }
+.informe .cifras b { display: block; font: 600 30px/1.1 var(--texto); color: var(--fg); }
+.informe .cifras span { display: block; margin-top: 6px; font: 500 10.5px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #A9B3BE; }
+.informe .dos { display: grid; grid-template-columns: minmax(300px, 540px) minmax(300px, 1fr); gap: 28px; align-items: start; margin-bottom: 22px; }
+.informe .dos figure { margin: 0; }
+.informe .texto h2 { margin: 0 0 8px; font: 600 16px/1.3 var(--display); }
 .informe .texto p { margin: 0 0 14px; font: 400 13.5px/1.6 var(--texto); color: var(--fg); max-width: 62ch; }
-.informe table { width: 100%; border-collapse: collapse; font: 400 12px/1.4 var(--mono); margin-bottom: 22px; }
+.informe table { width: 100%; border-collapse: collapse; font: 400 12px/1.4 var(--mono); margin-bottom: 22px; font-variant-numeric: tabular-nums; }
 .informe th, .informe td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
-.informe th { font-weight: 500; color: #8A95A2; letter-spacing: .06em; text-transform: uppercase; font-size: 10px; }
-.informe .pie { margin: 0; font: 400 10.5px/1.5 var(--mono); color: #8A95A2; }
-@media (max-width: 1000px) { .informe .dos { grid-template-columns: 1fr; } .informe .cab .t { font-size: 28px; } }
+.informe th { font-weight: 500; color: #A9B3BE; letter-spacing: .06em; text-transform: uppercase; font-size: 10px; }
+.informe th:nth-child(n+3), .informe td:nth-child(n+3) { white-space: nowrap; } /* a figure and its unit never part (on a phone, the names wrap instead) */
+.informe td .cont { display: inline-flex; align-items: center; gap: 8px; }
+.informe td .cont i { flex: none; width: 8px; height: 8px; border-radius: 50%; }
+.informe .pie { margin: 0; font: 400 10.5px/1.5 var(--mono); color: #A9B3BE; }
+/* the card under the pointer: what was measured for the destination (or the continent) nearest to it */
+.informe .tip { position: fixed; z-index: 2; pointer-events: none; max-width: 300px; padding: 9px 12px; border: 1px solid #2A3442; border-radius: 10px; background: rgba(10,14,20,.97); box-shadow: 0 12px 32px rgba(0,0,0,.5); font: 400 12px/1.45 var(--texto); color: #C4CCD5; }
+.informe .tip[hidden] { display: none; }
+.informe .tip b { display: block; margin-bottom: 3px; font-weight: 600; color: var(--fg); }
+.informe .tip span { display: block; }
+@media (max-width: 1000px) { .informe .dos { grid-template-columns: 1fr; } .informe .dos figure { max-width: 620px; } .informe .cab .t { font-size: 28px; } }
+@media (max-width: 600px) {
+  .informe { padding: 20px 16px 40px; }
+  .informe figure { padding: 14px 12px 12px; border-radius: 14px; }
+  .informe .g-t { font-size: 15px; }
+  .informe table { font-size: 11px; }
+  .informe th, .informe td { padding: 6px 4px; }
+}
 #viaje.final .abajo { display: none; }
 /* the journey on a phone (owner, 23 Oct 2026, 18:59: he could not find it there): the same show, sized for a small screen */
 @media (max-width: 760px) {
@@ -931,3 +963,24 @@ body.capas-abajo .capas { position: static; transform: none; order: 3; width: ma
 .izq .conocer:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 body.dentro .izq .conocer { display: none; }
 @media (max-width: 420px) { .izq .conocer { letter-spacing: .1em; } }
+
+/* ---------- every close button of a panel sits in its own small square, always visible (owner, 23 Oct 2026, 21:43, on a
+   photo of Radiografías: «hay una X que está como suelta… tiene que estar metido como lo de abajo, en un cuadradito con
+   otro color») ---------- */
+.radio-panel .cerrar, .conexion .titulo .cerrar, .espejo-lista .cerrar, .espejo-modo .salir, .lista-cerca .cerrar, .ficha-panel .botones button {
+  box-sizing: border-box; width: 34px; height: 34px; padding: 0; display: inline-grid; place-items: center; flex: none; border-radius: 10px;
+  border: 1px solid rgba(156,195,228,.34); background: rgba(156,195,228,.13); color: #E8ECF1; font: 500 18px/1 var(--texto);
+  transition: background .15s, border-color .15s, color .15s; }
+.radio-panel .cerrar:hover, .conexion .titulo .cerrar:hover, .espejo-lista .cerrar:hover, .espejo-modo .salir:hover, .lista-cerca .cerrar:hover, .ficha-panel .botones button:hover {
+  background: rgba(156,195,228,.24); border-color: #9CC3E4; color: #FFFFFF; }
+.radio-panel .cerrar:focus-visible, .conexion .titulo .cerrar:focus-visible, .espejo-lista .cerrar:focus-visible, .lista-cerca .cerrar:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.conexion .titulo .cerrar { margin: -4px -4px -4px 0; }
+.lista-cerca .cerrar { top: 8px; right: 8px; }
+.lista-cerca .titulo { padding-right: 46px; min-height: 34px; display: flex; align-items: center; }
+@media (pointer: coarse) {
+  .radio-panel .cerrar, .conexion .titulo .cerrar, .espejo-lista .cerrar, .espejo-modo .salir, .lista-cerca .cerrar, .ficha-panel .botones button { width: 40px; height: 40px; border-radius: 12px; }
+}
+/* «Medir desde fuera»: the answer lights up for a moment where it appears (owner, 23 Oct 2026, 21:45) */
+.conexion .bloque.recien { animation: conexion-recien 2s ease-out; border-radius: 10px; }
+@keyframes conexion-recien { 0%, 25% { background: rgba(156,195,228,.16); box-shadow: inset 3px 0 0 #9CC3E4; } 100% { background: transparent; box-shadow: inset 3px 0 0 transparent; } }
+@media (prefers-reduced-motion: reduce) { .conexion .bloque.recien { animation: none; } }
