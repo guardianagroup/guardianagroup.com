@@ -11,8 +11,34 @@
 <link rel="stylesheet" href="static/diseno.css?v=20261025j">
 <link rel="preload" href="static/tierra/dia.jpg" as="image">
 <link rel="stylesheet" href="static/orbita.css?v=20261025j">
+<link rel="stylesheet" href="static/movil.css?v=20261025j">
 </head>
 <body class="dock">
+<script>
+/* 23 Oct 2026 · Órbita en el móvil «M1/T1» (owner, 21:12) and the installable app (21:19 and 21:25: «que pueda
+   descargarla… como si fuera tipo aplicación», «¿y en el escritorio de Windows?»). While the owner tries them, both are
+   switched on with ?movil=nuevo (off with ?movil=antes) for this visit, and always inside the installed app. Visitors
+   without the switch see no change. */
+(() => { try {
+  const q = new URLSearchParams(location.search), m = q.get('movil');
+  if (m === 'nuevo') sessionStorage.setItem('guardiana-m2', '1'); else if (m === 'antes') sessionStorage.removeItem('guardiana-m2');
+  const app = q.get('app') === '1' || matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  if (app) sessionStorage.setItem('guardiana-m2', '1');
+  if (sessionStorage.getItem('guardiana-m2') !== '1') return;
+  // the new layout only on phones and tablets (a computer's window keeps its own)
+  if (matchMedia('(max-width: 760px), (max-width: 1400px) and (pointer: coarse)').matches) document.body.classList.add('m2');
+  // what makes the site installable: the manifest, the colour of the browser's bar, the name on the home screen
+  const pon = (tag, at) => { const e = document.createElement(tag); for (const k in at) e.setAttribute(k, at[k]); document.head.appendChild(e); };
+  pon('link', { rel: 'manifest', href: '/manifest.webmanifest' });
+  pon('meta', { name: 'theme-color', content: '#06080C' });
+  pon('meta', { name: 'mobile-web-app-capable', content: 'yes' });
+  pon('meta', { name: 'apple-mobile-web-app-capable', content: 'yes' });
+  pon('meta', { name: 'apple-mobile-web-app-title', content: 'GUARDIANA' });
+  pon('meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' });
+  pon('link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' });
+  window.__guardianaApp = true;
+} catch (e) {} })();
+</script>
 <div id="escena" aria-hidden="true">
   <canvas id="estrellas"></canvas>
   <canvas id="tierra"></canvas>
@@ -167,6 +193,8 @@
 <script src="static/datos-curiosos.js?v=20261025j"></script>
 <script src="static/red.js?v=20261025j"></script>
 <script src="static/conexion.js?v=20261025j"></script>
+<script src="static/movil.js?v=20261025j"></script>
+<script src="static/app.js?v=20261025j"></script>
 <script src="static/viaje.js?v=20261025j" defer></script>
 <script src="static/espejo.js?v=20261025j" defer></script>
 <script src="static/radiografias.js?v=20261025j" defer></script>

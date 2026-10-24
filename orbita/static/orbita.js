@@ -254,8 +254,23 @@
   // line, so the middle of the screen is not the middle of the free space: the planet goes to the centre of the band
   // between the layer bar and the doors, with the same air above and below. Measured, not guessed; everywhere else
   // (tablets and computers, doors at the side) it stays in the middle of the window.
+  // 23 Oct 2026 (owner: «la web del móvil tiene que ser distinta, súper fácil»; agency round 14, M2): on a phone with the new
+  // layout the planet sits in the middle of the band between the top buttons and «Ver mi conexión» over the bottom bar.
+  // T1 (owner, 21:12): on a touch tablet the same layout; in landscape the planet moves to the left of a 320 px panel.
+  const tactil = matchMedia('(pointer: coarse)').matches;
+  const m2 = () => document.body.classList.contains('m2') && (W <= 760 || (tactil && W <= 1400));
+  const t1h = () => m2() && W > 760 && W > H;
+  function bandaM2() {
+    const marca = document.querySelector('header .marca'), rm = marca && marca.getBoundingClientRect();
+    const arriba = Math.max(rm && rm.height ? rm.bottom + 14 : 0, 64);
+    const pu = $('puertas'), rp = pu && pu.getBoundingClientRect();
+    const tope = rp && rp.height ? rp.top : H - 70;
+    const abajo = W <= 760 ? tope - 52 - 26 : tope - 24; // phone: the bar, the big button above it and some air; tablet: the bar
+    return { arriba, abajo: Math.max(arriba + 120, abajo) };
+  }
   function centroAlto() {
     const sinBanda = () => { RAIZ.style.removeProperty('--cy'); return H / 2; };
+    if (m2()) { const b = bandaM2(), cy = Math.round((b.arriba + b.abajo) / 2); RAIZ.style.setProperty('--cy', cy + 'px'); return cy; }
     if (W > 760 || !document.body.classList.contains('dock')) return sinBanda();
     const capas = $('capas'), rc = capas && capas.getBoundingClientRect();
     if (!rc || rc.height < 1) return sinBanda();
@@ -286,12 +301,13 @@
     // Narrow: both move off the corners and the ring keeps clear of the top and bottom lines.
     const estrecho = W < 1180;
     document.body.classList.toggle('estrecho', estrecho);
-    if (estrecho) U = Math.max(3, Math.min((H / 2 - 200) / 41, (H / 2 - 150) / 41, (W / 2 - 150) / 40.4));
+    if (m2()) { const b = bandaM2(), ancho = t1h() ? W - 352 : W; U = Math.max(3, Math.min(ancho * (W <= 760 ? 0.445 : 0.42), (b.abajo - b.arriba) / 2 * 0.95) / 34); }
+    else if (estrecho) U = Math.max(3, Math.min((H / 2 - 200) / 41, (H / 2 - 150) / 41, (W / 2 - 150) / 40.4));
     // 20 Oct 2026 (owner): air between the header and ZERO's label at the top of the ring.
     else U = Math.max(3, Math.min(H / 100, W * 0.0062, (W / 2 - 40 - 290 - 24 - 130) / 26.4, (H / 2 - 150) / 41));
     RAIZ.style.setProperty('--u', U.toFixed(3) + 'px');
     // 20 Oct 2026 (owner): a bigger planet; the doors' ring stays at 41 units, so ZERO keeps its air above.
-    CX = W / 2; CY = centroAlto(); R0 = U * 34; R = R0 * ZOOM.z;
+    CX = t1h() ? Math.round((W - 352) / 2) : W / 2; CY = centroAlto(); R0 = U * 34; R = R0 * ZOOM.z;
     for (const c of [cvE, cvT, cvR]) { c.width = Math.round(W * DPR); c.height = Math.round(H * DPR); }
     cx2.setTransform(DPR, 0, 0, DPR, 0, 0);
     pintaEstrellas();
@@ -1200,6 +1216,7 @@ void main(){
     let luego = false;
     try { luego = sessionStorage.getItem('guardiana_orbita_lugar_luego') === '1'; } catch (_) {}
     if (luego) return;
+    if (m2()) return; // M1 phone and T1 tablet: asked inside «Mi conexión», never on arrival
     // What «En vivo» measured or was told in this browser, offered for confirmation first.
     let previo = null;
     try { previo = JSON.parse(localStorage.getItem('guardiana_pd_lugar') || 'null'); } catch (_) {}

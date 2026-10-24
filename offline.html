@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#06080C">
+<title>GUARDIANA · Sin conexión</title>
+<style>
+:root{color-scheme:dark}
+html,body{margin:0;height:100%;background:#06080C;color:#E8ECF1;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+main{min-height:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:max(24px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left))}
+img{width:88px;height:88px;border-radius:20px}
+h1{margin:0;font:400 34px/1.1 Georgia,'Times New Roman',serif}
+p{margin:0;max-width:34ch;font-size:16px;line-height:1.5;color:#B4BEC9}
+button{appearance:none;border:0;border-radius:999px;background:#9CC3E4;color:#06080C;font:600 16px/1 system-ui,sans-serif;padding:16px 26px;min-height:52px;cursor:pointer}
+</style>
+</head>
+<body>
+<main>
+  <img src="/icon-192.png" alt="">
+  <h1 id="t">Sin conexión</h1>
+  <p id="d">GUARDIANA necesita internet para dibujar el planeta y medir tu conexión en directo. Cuando vuelva la conexión, toca el botón.</p>
+  <button type="button" id="b" onclick="location.reload()">Volver a intentarlo</button>
+</main>
+<script>
+/* the visitor's language when it is one of the first three of the site; the rest read the Spanish page */
+(function () { try {
+  var l = (localStorage.getItem('guardiana-lang') || navigator.language || 'es').slice(0, 2);
+  var T = { en: ['No connection', 'GUARDIANA needs the internet to draw the planet and measure your connection live. When the connection is back, tap the button.', 'Try again'],
+            pt: ['Sem conexão', 'A GUARDIANA precisa de internet para desenhar o planeta e medir a sua conexão ao vivo. Quando a conexão voltar, toque no botão.', 'Tentar de novo'] }[l];
+  if (T) { document.documentElement.lang = l; document.getElementById('t').textContent = T[0]; document.getElementById('d').textContent = T[1]; document.getElementById('b').textContent = T[2]; document.title = 'GUARDIANA · ' + T[0]; }
+} catch (e) {} })();
+</script>
+</body>
+</html>
