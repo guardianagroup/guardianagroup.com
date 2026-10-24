@@ -4,61 +4,138 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 
 ## Estado al cerrar la cuenta (24 Oct 2026, 10:05, al 96 % de uso)
 
-**En vivo en guardianagroup.com (ramas `main` y `web-idiomas` al día)**
-- **Cables por tierra:** 168 países, 1.295.144 km. Hay 277 tramos de la agencia confirmados por dos voces de siete: Astra 6, ChatGPT («Alta» e investigación profunda), Gemini, Grok, Kimi y Claude con fuentes oficiales.
-  - En los países sin fuentes abiertas se aceptan tramos aproximados (dueño: «lo más aproximado posible»).
-  - Siria, Yemen y Palestina entran «en servicio parcial».
-  - Corea del Norte se mantiene, lo pidió el dueño.
-  - Fuera: Eritrea (usa radioenlaces), Guinea-Bisáu (red en licitación) e islas y territorios muy pequeños.
-- **Cables submarinos:** 518 cables enteros y 1.473 llegadas con su pueblo (GeoNames cities500).
-- **Reglas de `herramientas/fibra_agencia.py`:**
-  - acepta operadores distintos;
-  - acepta ciudades de frontera a menos de 800 km;
-  - aplica tramos aproximados en los países de `APROX`;
-  - da por buenas las redes «en servicio parcial».
-- **Reglas de `cables_agencia.py`:** los cables cortos dentro de un país conservan sus dos llegadas, y los pueblos de frontera valen si dos voces los sitúan.
-- **Antártida:** la investigación profunda confirma que no hay fibra entre bases ni llega ningún cable. Las bases van por satélite. Hay que ponerlo así en su ficha (pendiente).
+**Ramas:** `main` (la web en vivo) va en 232fcda. `web-idiomas` tiene además este documento, las preguntas de Kimi y las respuestas de Astra de África 1–3, que todavía no están en `main`.
+
+**En vivo en guardianagroup.com/orbita/**
+- **Cables por tierra:** 168 países y 1.295.144 km, en `orbita/datos/fibra-tierra.json`. Al empezar la noche eran 93 países.
+  - 277 tramos salen de la agencia, confirmados al menos por dos voces de siete: Astra 6, ChatGPT («Alta» e «Investigación avanzada»), Gemini, Grok, Kimi y Claude comprobando fuentes oficiales. El resto viene de OpenStreetMap y AfTerFibre.
+  - En los países sin fuentes abiertas valen los tramos aproximados. El dueño, a las 9:00: «Lo más aproximado posible ok».
+  - Siria, Yemen y Palestina entran con redes «en servicio parcial».
+  - Corea del Norte se queda en el mapa. El dueño, a las 8:02: «Añádela si».
+- **Países sin cables por tierra todavía**
+  - Eritrea: usa radioenlaces, no fibra.
+  - Guinea-Bisáu: su red troncal está en licitación.
+  - Islas y territorios pequeños: HK, SG, MO, MC, AD, GU, VI, KY, AW, CW, GP, MQ, RE, YT, GF, EH, KM, PF, VU, SB, WS, TO, BS y otros.
+- **Cables submarinos:** 518 cables enteros y 1.473 llegadas, cada una con el nombre de su pueblo (GeoNames cities500). Al empezar la noche eran 445.
+  - `orbita/datos/cables-agencia.json` guarda los 349 cables de la agencia.
+  - Hay 107 cables que solo nombra una voz y que ninguna fuente oficial confirma. No se muestran, a propósito; están en `herramientas/agencia-rondas/ronda19/`.
+- **Antártida:** la investigación profunda de ChatGPT confirma que no hay fibra entre bases ni llega ningún cable submarino. Las bases se conectan por satélite (Starlink en McMurdo, ANARESAT). Falta escribirlo en su ficha.
+
+**Cómo deciden los generadores (cambios de esta noche)**
+- **`herramientas/fibra_agencia.py`** lee `herramientas/fibra-agencia/<voz>-troncales-*.json`; la voz es el prefijo del nombre. Un tramo entra por uno de tres niveles:
+  - `ok`: dos voces con el mismo operador;
+  - `ok2`: dos voces con operadores distintos; se dibuja sin nombre ni operador;
+  - `ok3`: solo en los países de `APROX` (BH, BN, BZ, CU, DO, HT, JM, KP, KW, LB, LS, NP, PS, QA, RW, SY, TL, XK, YE, SR, TT, PR, GW, SZ, ER, CV, MU, MT, BS, GT, PA, SS), si el camino mide como mucho 2,5 veces la recta más 150 km. Se dibuja en recta y sin nombre.
+- **Más reglas de `fibra_agencia.py`**
+  - Las ciudades del otro lado de la frontera se buscan a menos de 800 km de la ciudad anterior de la ruta (función `fuera`).
+  - Los nombres se buscan en `ALIAS`, en `SITIOS` (coordenadas puestas a mano, como Nimule, en Sudán del Sur) y en `herramientas/fuentes/pueblos-fibra.tsv`.
+  - Solo entran los estados que empiezan por «en servicio», «operativo» o «in service» y no dicen «no verificad».
+- **`herramientas/cables_agencia.py`**
+  - Voces: chatgpt, gemini, grok, claude, astra y kimi.
+  - Junta cada llegada con el grupo más cercano a menos de 120 km.
+  - Nunca une dos llegadas de una misma voz que estén a más de 5 km: así los cables cortos dentro de un país conservan sus dos extremos.
+  - Si dos voces o más coinciden, ignora el desacuerdo sobre el país de frontera.
+- **`herramientas/lugares_capas.py`** (función `lugar_cable`)
+  - Elige el pueblo más cercano a menos de 20 km, salvo que una ciudad de más de 50.000 habitantes esté a menos de 1,5 veces esa distancia (como mínimo, 6 km): entonces gana la ciudad.
+  - Si no hay pueblo, usa la ciudad de más de 15.000 habitantes más cercana a menos de 80 km.
+  - Quita los números de distrito: «Marseille 02» queda en Marseille.
+- **El workflow `.github/workflows/pueblos-cables.yml`** se lanza a mano y los lunes a las 05:41 UTC. Descarga GeoNames cities500 y guarda en `main` lo que escriben tres scripts:
+  - `pueblos_cables.py` → `orbita/static/tierra/pueblos-cables.tsv`;
+  - `lugares_capas.py` → `orbita/datos/lugares-capas.json`;
+  - `pueblos_fibra.py` → `herramientas/fuentes/pueblos-fibra.tsv`.
+
+**Proceso de los cables por tierra (después de cada respuesta)**
+1. Guarda la respuesta en `herramientas/fibra-agencia/<voz>-troncales-<n>.json` y el texto bruto en la carpeta de su ronda.
+2. Publica esos archivos en `main`, porque el workflow los lee de allí.
+3. Lanza `gh workflow run pueblos-cables.yml --ref main` y espera a que acabe.
+4. En `web-idiomas`: `git checkout origin/main -- herramientas/fuentes/pueblos-fibra.tsv orbita/datos/lugares-capas.json`.
+5. Ejecuta `python3 herramientas/fibra_agencia.py`, que escribe `herramientas/fuentes/fibra-agencia.json`. Si falta una ciudad, añádela a `ALIAS` o a `SITIOS`.
+6. Ejecuta `python3 herramientas/fibra_tierra.py --sin-ofds --fuentes <carpeta temporal>`, que clona AfTerFibre y escribe `orbita/datos/fibra-tierra.json`.
+7. Revisa los países y los km, y publica `fibra-agencia.json` y `fibra-tierra.json` en las dos ramas.
+
+**Proceso de los cables submarinos**
+1. Guarda la respuesta en `herramientas/cables-agencia/<voz>-*.json`.
+2. Ejecuta `python3 herramientas/cables_agencia.py`, que actualiza `orbita/datos/cables.json` y `cables-agencia.json`.
+3. Ejecuta `python3 herramientas/lugares_capas.py`.
+4. Publica `cables.json`, `cables-agencia.json`, `lugares-capas.json` y la carpeta `herramientas/cables-agencia` en las dos ramas.
 
 **Lo que quedó a medias**
-- **Astra 6, revisión por continentes** (ronda 23): hecha África 1–3; se paró al 96 %. Pregunta en `herramientas/agencia-rondas/ronda23/pregunta.txt` y tandas en la ronda 23. Faltan África 4–8, Asia, América, Europa y Oceanía. El saldo de Astra es de unos 7,5 US$.
-- **Kimi:** saturado para cuentas gratuitas en la hora punta de China. Las 13 preguntas pendientes están en la ronda 17 y la 18; ver `kimi-*` en `fibra-agencia` y `cables-agencia`. Reintentar fuera de esa hora.
-- **Gemini:** le falta el lote 9 (KP, TD, NI, CV), con límite de uso hasta las 12:47 del 24 de octubre.
-- **Grok:** le faltan los lotes 8 y 9, desde el 27 de octubre.
-- **Cables submarinos:** 107 propuestos por una sola voz que no tienen fuente oficial (`ronda19/cables-por-confirmar.json` y `claude-cables-fuentes.txt`).
-- **Proceso después de cada respuesta:**
-  1. Publica las respuestas en `main`.
-  2. Lanza `gh workflow run pueblos-cables.yml --ref main`.
-  3. Trae `herramientas/fuentes/pueblos-fibra.tsv` y `orbita/datos/lugares-capas.json`.
-  4. Ejecuta `fibra_agencia.py` y `fibra_tierra.py --sin-ofds`, o `cables_agencia.py` y `lugares_capas.py`.
-  5. Publica en las dos ramas.
+- **Revisión de Astra 6 por continentes** (ronda 23). Orden del dueño a las 9:30: que Astra haga todos los países que faltan y revise los que ya hay, por continentes, con la Antártida y las zonas difíciles.
+  - Hecho: África 1–3, en `herramientas/fibra-agencia/astra-troncales-africa-1.json` a `-3.json`, con el texto bruto en `ronda23/`.
+  - Esas tres respuestas **todavía no han pasado por el proceso ni están en `main`**. Es lo primero que hay que hacer.
+  - Faltan África 4–8, Asia, Europa, América, Oceanía y la Antártida. La pregunta está en `ronda23/pregunta.txt`.
+  - A Astra le quedan unos 7,5 US$ de saldo.
+- **Kimi** (kimi.ai): la cuenta gratuita se satura en la hora punta de China. Hay 15 preguntas preparadas en `herramientas/agencia-rondas/kimi-pendientes/`:
+  - `q-A1` a `q-A3`: trazados aproximados de los países sin datos;
+  - `q-B1` a `q-B5`: troncales en servicio;
+  - `q-C-<región>`: cables submarinos que faltan, por región.
+  - Ya hay 2 respuestas suyas, en `herramientas/fibra-agencia/kimi-*`.
+  - `save.py` comprueba el hash del texto copiado y lo guarda como JSON.
+- **Gemini:** le falta la tanda 9 (KP, TD, NI y CV). Su límite se renueva el 24 de octubre a las 12:47.
+- **Grok:** le faltan las tandas 8 y 9. Su límite semanal se renueva el 27 de octubre.
+- **Cables submarinos sin confirmar:** los 107 de una sola voz (`ronda19/cables-por-confirmar.json` y `claude-cables-fuentes.txt`). Cada uno entra solo en cuanto otra voz lo nombre, al volver a ejecutar `cables_agencia.py` y `lugares_capas.py`.
+- **Ficha de la Antártida:** escribir que no tiene fibra ni cables y que se conecta por satélite.
 
-**Lo siguiente que pidió el dueño (después de cerrar los países)**
-1. **Captura para que el dueño apruebe** antes de programar:
-   - el botón «Países», con las vistas Velocidad (Measurement Lab), Conectividad (Banco Mundial) y Cortes;
-   - la **línea del tiempo**, con **foto y vídeo** para compartir.
-2. **Comparativa de los 11 diarios** con su metodología y paquete de prensa. Antes de publicar, darles a los diarios su derecho de respuesta.
-3. **Ficha de país** con datos de conectividad.
-- Las ideas y estrategias de Astra 6 (navegador, cuántica, comunicaciones, ZERO, buscador, hardware, sin descarga, campaña viral, Órbita) están en `herramientas/agencia-rondas/ronda20/` y `ronda21/`.
+**Lo siguiente que pidió el dueño, por tramos**
 
-## Primeros pasos de la cuenta nueva (24 Oct 2026, 07:05)
+> «Primero terminar todo el mapa de países completo con cables… Lo quiero al 100 % y después el resto de cosas. Así vamos cerrando por tramos todo.»
 
-1. **GitHub:** conecta GitHub con permiso de escritura en `guardianagroup/guardianagroup.com`. Clona el repositorio, trabaja en la rama `web-idiomas` y usa un worktree aparte para `main` (ver §3).
-2. **Lectura:** lee este documento entero y después `herramientas/TRASPASO.md`.
-3. **Siguiente tarea: Gemini, tandas 5 a 9 de troncales por tierra** (su límite se renovó a las 7:47 del 24 de octubre).
-   - La pregunta está en `herramientas/agencia-rondas/ronda17/pregunta.txt`.
-   - Las tandas están en el §11.
-   - Guarda cada respuesta en `herramientas/fibra-agencia/gemini-troncales-6.json` hasta `-10.json`, y el texto bruto en `ronda17/gemini-lote5.txt` hasta `-lote9.txt`.
-   - Después:
-     1. Publica las respuestas en `main`.
-     2. Lanza `gh workflow run pueblos-cables.yml --ref main`.
-     3. Trae `herramientas/fuentes/pueblos-fibra.tsv` a `web-idiomas`.
-     4. Ejecuta `python3 herramientas/fibra_agencia.py` y luego `python3 herramientas/fibra_tierra.py --sin-ofds`.
-     5. Publica `fibra-tierra.json` y `fuentes/fibra-agencia.json` en las dos ramas.
-4. **Grok, tandas 8 y 9** (desde el 27 de octubre): guárdalas en `grok-troncales-12.json` y `-13.json`.
-5. **Revisión de Órbita:** quedan pendientes los ⬜ de `herramientas/agencia-rondas/qa/revision-orbita-2026-10-24.md`.
-6. **Términos nuevos:** ver §7, punto 1.
-7. **Móvil, tablet y app instalable:** siguen en prueba hasta que el dueño diga lo contrario.
-8. **Hibernación:** no pongas su ordenador en hibernación salvo que lo pida otra vez. Lo había pedido para la noche, pero al cerrar ya estaba despierto.
+1. **Cerrar el mapa al 100 %** con lo de arriba.
+2. **Captura de diseño para que el dueño la apruebe antes de programar** (respondió «Ok si»). El plan que aceptó:
+   - un botón nuevo, **«Países»**, con tres vistas: Velocidad (Measurement Lab), Conectividad (Banco Mundial, CC BY 4.0) y Cortes;
+   - la **línea del tiempo** dentro de la ficha de cada cable, para compartir en **foto y vídeo** (7:53: «Foto y video»);
+   - un botón **«Verlo en Órbita»** en Radiografías;
+   - la **ficha de país** ampliada.
+3. **Comparativa de los 11 diarios** (la portada dice «Abrimos once diarios digitales»): con su metodología, el derecho de respuesta de cada diario antes de publicar y un paquete de prensa.
+4. **Programar la ficha de país y la línea del tiempo**, y después el **mapa de calidad** (Measurement Lab).
+
+**Lo que el dueño encargó a Astra 6** (todo en `herramientas/agencia-rondas/`)
+- **Ronda 20**
+  - El navegador con la calidad de Brave y Tor: `astra-navegador.md` y `astra-anonimato.md`.
+  - La tecnología cuántica: `astra-cuantica.md`.
+  - El hardware: `astra-hardware.md`.
+  - El cifrado máximo para chat y voz: `astra-comunicaciones.md`.
+  - GUARDIANA sin descargar nada: `astra-sin-descarga.md`.
+  - ZERO: `astra-zero.md`.
+  - El buscador: `astra-buscador.md`.
+  - Ideas nuevas: `astra-ideas.md`.
+  - Hoja de ruta: `astra-hoja-de-ruta.md`.
+- **Ronda 21**
+  - Publicidad viral para llegar a un millón de usuarios sin dinero: `astra-viral-estrategia.md` y `astra-viral-calendario.md`.
+  - Qué añadir a Órbita: `astra-orbita.md`.
+- **Ronda 22:** la investigación profunda de ChatGPT por continentes (`chatgpt-ip-*.md` y `.json`). Sus tramos, cruzados con otra voz, sumaron 31 (commit 232fcda).
+
+## Primeros pasos de la cuenta nueva
+
+1. **GitHub**
+   - Conecta GitHub con permiso de escritura en `guardianagroup/guardianagroup.com`.
+   - Clona el repositorio y trabaja en la rama `web-idiomas`.
+   - Usa un worktree aparte para `main`: `git worktree add ../wt-main --detach origin/main` (ver §3).
+2. **El ordenador del dueño**
+   - Enlaza el chat con su ordenador desde la app de escritorio de Claude.
+   - Las voces de la agencia (ChatGPT, Gemini, Grok, Kimi y Astra 6, en platform.cheaperinference.com) se usan desde el **navegador integrado** de esa app, con las sesiones del dueño.
+   - Si alguna sesión no está abierta, pídele al dueño que la abra. Tú nunca escribes contraseñas ni claves.
+3. **Lectura:** este documento entero; después, `herramientas/TRASPASO.md` y `herramientas/agencia-rondas/qa/revision-orbita-2026-10-24.md`.
+4. **Primera tarea:** pasa África 1–3 de Astra por el proceso de los cables por tierra y publícalo.
+5. **Sigue la ronda 23 de Astra** con los continentes que faltan, en tandas pequeñas.
+   - Astra corta a 4.096 tokens, contando el razonamiento.
+   - El Playground no guarda la conversación: si una respuesta se corta, pregunta solo por los países que faltaron.
+6. **Las demás voces**, y después de cada respuesta, el proceso de arriba:
+   - Gemini: la tanda 9, desde las 12:47 del 24 de octubre;
+   - Kimi: las preguntas de `kimi-pendientes`, fuera de la hora punta de China;
+   - Grok: las tandas 8 y 9, desde el 27 de octubre.
+7. **Cuando el mapa esté al 100 %**, avisa al dueño y sigue con «Lo siguiente», empezando por la captura de diseño.
+8. **Revisión de Órbita:** quedan los ⬜ de `qa/revision-orbita-2026-10-24.md`:
+   - ZERO en el móvil;
+   - los solapes de T1 en horizontal y de M1;
+   - la entrada a GUARDIANA OS en el móvil;
+   - las muestras de «Afinar» en M1;
+   - el atrás del navegador en la lista de cercanos, el espejo y la pregunta de ubicación;
+   - el resto del texto en inglés, y el portugués.
+9. **Términos nuevos:** ver §7, punto 1.
+10. **Móvil, tablet y app instalable:** siguen en prueba hasta que el dueño diga lo contrario.
+11. **Hibernación:** no pongas su ordenador en hibernación salvo que lo vuelva a pedir.
+12. **Cada 10 minutos**, guarda, sube a GitHub y publica en la web (orden del dueño, 23:42).
 
 ## 0. Antes de empezar (para el Claude que lee esto)
 
@@ -83,7 +160,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 
 **Qué leer después**
 - `herramientas/TRASPASO.md`, en la rama `web-idiomas`: la historia completa del 22 y el 23 de octubre (§1 a §20), con reglas, datos y decisiones.
-- `herramientas/agencia-rondas/`: las consultas a la agencia (rondas 9 a 16), los borradores de términos y las notas de la ley colombiana (`terminos-ley/ley.md`).
+- `herramientas/agencia-rondas/`: las consultas a la agencia (rondas 9 a 23), la revisión de Órbita (`qa/`), las preguntas pendientes de Kimi (`kimi-pendientes/`), los borradores de términos y las notas de la ley colombiana (`terminos-ley/ley.md`).
 
 ## 1. Qué es GUARDIANA hoy
 
@@ -116,10 +193,10 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 
 **Privacidad y cuentas**
 - Nunca muestres el nombre real de la fundadora; en los mockups se usa «Marta Ortega».
-- Las cuentas de ChatGPT, Grok, Gemini y Cheaper Inference muestran el nombre o el correo real del dueño: **nunca los repitas**. Nunca envíes su correo a servicios ajenos.
+- Las cuentas de ChatGPT, Grok, Gemini, Kimi y Cheaper Inference muestran el nombre o el correo real del dueño: **nunca los repitas**. Nunca envíes su correo a servicios ajenos.
 - Nunca copies ni repitas claves de API; la de Cheaper Inference empieza por «ci_live_».
 - Nunca escribas claves ni contraseñas, y no inicies sesión ni crees cuentas: eso lo hace el dueño.
-- Cheaper Inference y los modelos DeepSeek pueden guardar datos en China: comparte con ellos solo información del producto, nunca datos personales.
+- Cheaper Inference, los modelos DeepSeek y Kimi (Moonshot) pueden guardar datos en China: comparte con ellos solo información del producto, nunca datos personales.
 
 **Contenido**
 - Sin código en el chat.
@@ -155,16 +232,18 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 5. Comprueba el despliegue con `gh run list -R guardianagroup/guardianagroup.com -L 1` (unos 30 s) y mira la web en el navegador. Desde la consola no se llega a guardianagroup.com.
 
 **Cuidados**
-- Cuando cambies un `.js` o un `.css` de Órbita, sube su `?v=` en `orbita/index.html`. Hoy van en `20261025k`, salvo `idioma.js`, `conexion.js` y `viaje.js`, que van en `20261025l`.
+- Cuando cambies un `.js` o un `.css` de Órbita, sube su `?v=` en `orbita/index.html`. Hoy: `capas.js` y `orbita.css` en `20261025r`; `idioma.js`, `orbita.js` y `viaje.js` en `20261025q`; `ciudades.js` en `20261025n`; `conexion.js` en `20261025l`; el resto en `20261025k`.
 - Haz siempre commit antes de cambiar de rama: se perdió trabajo dos veces con un `reset --hard`.
 - El workflow `datos-orbita.yml` regenera `orbita/datos` en `main`. Después de cada ejecución, trae esos datos a `web-idiomas` con `git checkout origin/main -- orbita/datos`.
+- El workflow `pueblos-cables.yml` escribe en `main` los pueblos (`orbita/static/tierra/pueblos-cables.tsv` y `herramientas/fuentes/pueblos-fibra.tsv`) y `orbita/datos/lugares-capas.json`. Tráelos igual.
+- No dejes archivos sin guardar en git al acabar: los agentes escriben en `herramientas/agencia-rondas`, `fibra-agencia` y `cables-agencia`. Haz commit y push a menudo.
 
 **Pruebas en local**
 - `python3 -m http.server`.
 - Playwright con Chromium en modo swiftshader, un solo navegador a la vez.
 - El aviso de ubicación se cierra esperando a que se vea «Ahora no» y pulsándolo.
 
-## 4. Qué está en vivo (`main` 05e3005, 23 de octubre, 23:45)
+## 4. Lo publicado hasta el 23 de octubre (`main` 05e3005, 23:45; lo posterior está al principio y en el §11)
 
 **Portada nueva `/nueva/`** (commit 13b3e09)
 - Más satélites trabajando a distintas alturas, igual en móvil, tablet y ordenador.
@@ -221,6 +300,8 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 ## 6. LO PRIMERO AHORA (orden del dueño, 23 de octubre, 23:29–23:32)
 
 > «Lo primero que tienes que hacer es acabar la página web modo ordenador… Hasta que no esté al 100 % con el tema de cables submarinos, cables troncales, cables terrestres, absolutamente todo lo que falta… Ponte a trabajar.»
+
+**Estado el 24 de octubre a las 10:05:** el punto 1 está hecho. Del punto 2 están hechos la errata, el gris y la revisión sistemática (quedan sus ⬜). Los datos siguen: ver el principio de este documento.
 
 **1. Fichas al pasar el ratón por los cuatro botones de capas** (23:32)
 - Hoy sale el aviso nativo del navegador, muy largo y rectangular.
@@ -296,15 +377,27 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 ## 8. La agencia (cómo se trabaja)
 
 **Las voces**
-- ChatGPT, Gemini y Grok se consultan desde el navegador integrado de la app de escritorio del dueño, con sus sesiones abiertas.
-- **Astra 6** (`gpt-6-astra`) se consulta en platform.cheaperinference.com → Playground. Quedan unos 12,80 USD; el dueño quiere que se use para «las cosas más difíciles… lo más complejo».
-- Si una sesión no está abierta, pide al dueño que inicie sesión. Tú no lo haces.
+- ChatGPT, Gemini, Grok y Kimi se consultan desde el navegador integrado de la app de escritorio del dueño, con sus sesiones abiertas.
+- **ChatGPT**
+  - Usa el modo «Alta».
+  - Para los países difíciles, «Investigación avanzada» (deep research). Admite 5 a la vez como mucho: la sexta sale en versión «mini» y no se usa.
+  - El informe se lee en «⋯ › Ver archivos del chat».
+  - Nunca uses Ctrl+A ni Ctrl+C en ese navegador: pisan el portapapeles del dueño.
+- **Gemini:** tiene límite de uso; se renueva el 24 de octubre a las 12:47, hora de Colombia.
+- **Grok:** tiene límite semanal, hasta el 27 de octubre.
+- **Kimi** (kimi.ai): cuenta gratuita, que se satura en la hora punta de China.
+- **Astra 6** (`gpt-6-astra`, en platform.cheaperinference.com → Playground)
+  - Le quedan unos 7,5 US$. El dueño quiere usarla «para todo lo que se pueda» y para lo más difícil.
+  - Corta en 4.096 tokens contando el razonamiento, y el Playground no guarda la conversación.
+- Kimi y Cheaper Inference pueden guardar datos en China: dales solo información del producto.
+- **Claude** cuenta como una voz cuando comprueba contra textos oficiales.
+- Si una sesión no está abierta, pide al dueño que la abra. Tú no inicias sesión.
 
 **Cómo se consulta**
 - Pide «máximo razonamiento» y propuestas numeradas.
 - Guarda cada respuesta en `herramientas/agencia-rondas/rondaN/`, con un archivo consolidado.
 - Publica solo lo que confirman dos voces o más.
-- Las respuestas largas de Astra se cortan en 4.096 tokens: pide «continúa exactamente donde lo dejaste».
+- Pide a Astra tandas pequeñas. Si una respuesta se corta, vuelve a preguntar solo por lo que faltó.
 
 ## 9. Mapa del código (Órbita)
 
@@ -319,6 +412,8 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 - `orbita/static/movil.js` y `movil.css`: M1 y T1.
 - `orbita/static/app.js`: la app instalable.
 - `orbita/static/orbita.css`: estilos.
+- Generadores, en `herramientas/`: `datos_orbita.py`, `fibra_tierra.py`, `fibra_agencia.py`, `cables_agencia.py`, `capacidad_cables.py`, `lugares_capas.py`, `pueblos_cables.py` y `pueblos_fibra.py`.
+- Workflows: `datos-orbita.yml`, cada 6 horas en `main`, y `pueblos-cables.yml`, a mano y los lunes.
 
 **Detalles importantes**
 - `OrbitaPlaneta`
@@ -328,6 +423,15 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 - `OrbitaCapas`
   - `{pinta, pon(k,on), soloTu, enSoloTu, cajasPaises, estado, satelites, lugares, fibra, uniones, red, cargaRed}`.
 - Otras APIs: `OrbitaConexion`, `OrbitaViaje`, `OrbitaCiudades`, `GuardianaApp`.
+- **Novedades del 24 de octubre en `capas.js`**
+  - Fichas de los botones de capas: `FRASE_CAPA`, `NOMBRE_CAPA`, `datosFichaCapa`, `llenaFichaCapa`, `colocaFichaCapa` y `enganchaFichasCapa`. Solo con ratón.
+  - Nombres de las llegadas: `pintaNombresLlegadas` los dibuja desde 4.200 km de ancho de pantalla, como mucho 56 en el ordenador y 22 en el móvil.
+  - `OrbitaCapas.cajasPaises` incluye ya las cajas de esos nombres, y `OrbitaCapas.nombresLlegadas` se los pasa a `ciudades.js` para que no los repita.
+  - `cuentaCables` cuenta cables enteros: cada grupo de piezas cuenta una vez.
+  - El gris al resaltar es `GRIS_RESALTE`.
+  - Cada ficha añade un paso al historial (`{ficha:1}`), y el atrás del navegador la cierra.
+- **En `orbita.js`:** `cargaMarco` y `vaciaMarco` usan `location.replace` (ZERO y las puertas), y la pregunta de ubicación espera con `ocupado()` a que no haya nada abierto.
+- **En `viaje.js`:** Esc cierra el informe sin terminar el viaje.
 - El traductor de la página solo traduce nodos de texto. El texto que se dibuja en el lienzo, y los atributos, necesitan `T()` y una entrada en `D` (es → [en, pt-BR]).
 - Portada nueva:
   - `nueva/index.html` y `portada/globo.js` (los satélites);
@@ -348,6 +452,9 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 - La ficha del móvil medía 34 px de más: usa `width:auto` con `box-sizing:border-box`.
 - Elementos del móvil nuevo salían sin estilo en el ordenador. Esas clases van ocultas por defecto fuera de su media query.
 - Cuidado con la CPU: solo 2 núcleos, un navegador de pruebas a la vez y esperas largas.
+- Con el panel del navegador oculto, el navegador pausa `requestAnimationFrame` y el mapa en vivo no se mueve. Pide al dueño que muestre el panel.
+- Los servidores locales de pruebas se cortan a las 2 horas.
+- En las pruebas con Playwright, la ficha de cable se abre con `OrbitaPlaneta.ir(-46.565, 4.504, 8)` y un clic en (720, 450).
 
 ## 11. Estado al cerrar (se actualiza al final de cada tanda)
 
@@ -379,7 +486,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 - **Cables submarinos:** **480 cables enteros**, 1.383 llegadas con su pueblo. Esta noche se han sumado 35 de la agencia (ronda 18), entre ellos Alonso de Ojeda, BICS, PENCAN-7 y 8, SAIT, Scylla, CAM Ring, Deep Blue One y EAUFON.
 - **Arreglos de la revisión de Órbita:** ver `herramientas/agencia-rondas/qa/revision-orbita-2026-10-24.md`, con lo arreglado (✅) y lo pendiente (⬜).
 
-**Qué falta**
+**Qué faltaba a las 03:10** (superado: lo vigente está al principio de este documento)
 - **Gemini:** le faltan las tandas 5 a 9 de troncales por tierra (límite de uso hasta las 7:47 del 24 de octubre). Hay una tarea programada para las 7:52 que las lanza.
 - **Grok:** le faltan las tandas 8 y 9 (límite semanal hasta el 27 de octubre).
 - **Después de cada tanda:**
@@ -388,9 +495,9 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
   3. Trae `herramientas/fuentes/pueblos-fibra.tsv`.
   4. Ejecuta `fibra_agencia.py` y luego `fibra_tierra.py --sin-ofds`.
   5. Publica en las dos ramas.
-- **Hibernación:** cuando el mapa quede terminado, poner en hibernación el ordenador del dueño (lo pidió a las 23:49).
+- **Hibernación:** ya no vale; solo si el dueño lo vuelve a pedir.
 
-**En marcha (antes)**
+**En marcha a las 03:10** (superado)
 - **Fibra por tierra de los países que faltan.** Hay datos de 93 países; faltan unos 85 con red troncal propia.
   - Astra 6 y ChatGPT responden en tandas. Sus respuestas van a `herramientas/fibra-agencia/astra-troncales-N.json` y `chatgpt-troncales-N.json`, y el texto bruto a `herramientas/agencia-rondas/ronda17/`.
   - Después hay que seguir estos pasos:
@@ -398,4 +505,9 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
     2. `python3 herramientas/fibra_tierra.py --sin-ofds`: funciona en local, porque clona AfTerFibre desde GitHub.
     3. Revisa `orbita/datos/fibra-tierra.json` (países y km).
     4. Publica en las dos ramas.
-- **Al terminar el mapa**, el dueño pidió (23:49) **poner su ordenador en hibernación**. Hay permiso de clic sobre el escritorio de Windows («Explorador de archivos», nivel «click»): Inicio, después el botón de apagado y después «Hibernar». Si «Hibernar» no aparece en el menú, avísale; no cambies la configuración de energía.
+- *Ya no vale (al cerrar, el dueño estaba despierto); solo si lo vuelve a pedir:* al terminar el mapa, el dueño había pedido (23:49) **poner su ordenador en hibernación**. Hay permiso de clic sobre el escritorio de Windows («Explorador de archivos», nivel «click»): Inicio, después el botón de apagado y después «Hibernar». Si «Hibernar» no aparece en el menú, avísale; no cambies la configuración de energía.
+
+**24 Oct 2026, 10:05 — hecho y publicado (cierre de esta cuenta, al 96 %)**
+- **Cables por tierra:** de 128 a **168 países** y 1.295.144 km, con 277 tramos de la agencia. Entraron más respuestas de la agencia y la investigación profunda de ChatGPT (ronda 22).
+- **Cables submarinos:** de 480 a **518 cables enteros** y 1.473 llegadas con su pueblo.
+- **Lo pendiente** está al principio de este documento, en «Lo que quedó a medias» y «Primeros pasos de la cuenta nueva».
