@@ -17,7 +17,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 15:52, hora de Bogotá, al ce
 
 **Lo que falta para el mapa «al 100 %»**
 - **Sin cables por tierra todavía:**
-  - Curazao, Samoa, Tonga e Islas Salomón: ninguna voz confirma la ruta de la otra.
+  - Curazao, Samoa, Tonga e Islas Salomón: ninguna voz confirma la ruta de la otra. Astra 6 tampoco (15:56, devolvió `[]`; notas en `agencia-rondas/ronda25/notas-25c.md`).
   - Mónaco (3,1 km) y Vanuatu (3,4 km): sus tramos sí están confirmados por dos voces, pero `fibra_tierra.py` quita las líneas de menos de 5 km. Lo mismo pasa con Seychelles. **Pregunta hecha al dueño (15:45), sin respuesta todavía:** ¿se hace una excepción para las ciudades-Estado y las islas pequeñas? Si dice que sí, baja el límite para esos países en `fibra_tierra.py` (línea `if k < 5:`).
   - Eritrea: usa radioenlaces, no fibra.
   - Sáhara Occidental y otros territorios pequeños.
@@ -39,6 +39,8 @@ Actualizado el sábado 24 de octubre de 2026 a las 15:52, hora de Bogotá, al ce
     - los archivos con GPS a menos de 150 m de la dirección.
   - Propone una dirección: la de un registro oficial, o una en la que coincidan dos voces (mismo número y misma calle).
 - **Si el run falla:** mira el error con `gh run view 40129919220 --log-failed -R guardianagroup/guardianagroup.com`, arregla `empresas.py`, publícalo en `main` y relánzalo con `gh workflow run empresas.yml --ref main`.
+  - A las 16:00 llevaba más de 30 minutos, probablemente por OpenStreetMap (Overpass), que puede ir lento. El workflow corta a los 90 minutos (hacia las 16:58) y, si corta, no guarda nada.
+  - En `main` ya está una versión más robusta (commit `b9cf010`): pregunta a OpenStreetMap como mucho 20 minutos en total y cada fuente va aparte, de modo que una que falle no hace perder las demás. Si el run en marcha falla o corta, basta con relanzarlo.
 - **Pasos siguientes**
   1. `git fetch origin` y trae `orbita/datos/empresas-candidatas.json` a `web-idiomas`. Descarga las hojas con `gh run download <id> -n hojas-empresas -D <carpeta temporal>` y míralas una a una con Read.
   2. **Revisión una a una.**
