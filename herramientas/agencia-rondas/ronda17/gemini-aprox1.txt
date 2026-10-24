@@ -1,0 +1,112 @@
+[
+{
+"nombre": "Red Troncal Nacional de Fibra Óptica de Cuba",
+"operador": "ETECSA (Empresa de Telecomunicaciones de Cuba S.A.)",
+"pais": "CU",
+"ciudades": [
+"Pinar del Río",
+"Artemisa",
+"Havana",
+"Matanzas",
+"Santa Clara",
+"Sancti Spíritus",
+"Ciego de Ávila",
+"Camagüey",
+"Las Tunas",
+"Holguín",
+"Bayamo",
+"Santiago de Cuba",
+"Guantánamo"
+],
+"estado": "en servicio",
+"fuente": "aproximado: sigue el eje longitudinal de la Carretera Central y el Ferrocarril Central de occidente a oriente según informes técnicos de ETECSA y la UIT"
+},
+{
+"nombre": "Red Nacional de Fibra Óptica / Dorsal Troncal",
+"operador": "Claro Dominicana / INDOTEL",
+"pais": "DO",
+"ciudades": [
+"Monte Cristi",
+"Santiago de los Caballeros",
+"La Vega",
+"Bonao",
+"Santo Domingo",
+"San Pedro de Macorís",
+"La Romana",
+"Salvaleón de Higüey",
+"Punta Cana"
+],
+"estado": "en servicio",
+"fuente": "aproximado: sigue el corredor troncal de la Autopista Duarte (DR-1) y la Autopista del Este/Coral (DR-3) según mapas de infraestructura de INDOTEL"
+},
+{
+"nombre": "Red Troncal Nacional de Fibra Óptica de Haití",
+"operador": "Natcom (National Telecom S.A.)",
+"pais": "HT",
+"ciudades": [
+"Cap-Haïtien",
+"Gonaïves",
+"Saint-Marc",
+"Port-au-Prince",
+"Léogâne",
+"Miragoâne",
+"Les Cayes",
+"Jérémie"
+],
+"estado": "en servicio",
+"fuente": "aproximado: sigue el trazado de las rutas nacionales RN1 (norte) y RN2 (sur) uniendo las principales capitales departamentales según informes de CONATEL y el Banco Mundial"
+},
+{
+"nombre": "Red Troncal Nacional de Fibra Óptica de Jamaica",
+"operador": "Flow Jamaica (Cable & Wireless Jamaica) / GovNet",
+"pais": "JM",
+"ciudades": [
+"Negril",
+"Montego Bay",
+"Falmouth",
+"Saint Ann's Bay",
+"Ocho Rios",
+"Spanish Town",
+"Kingston",
+"Morant Bay",
+"Port Antonio"
+],
+"estado": "en servicio",
+"fuente": "aproximado: sigue el corredor costero norte (carretera A1), la autopista Highway 2000 (T1) y la carretera A4 en el sureste según mapas de infraestructura de la UIT y NROCC"
+},
+{
+"nombre": "Red Troncal Nacional de Fibra Óptica de Belice",
+"operador": "BTL (Belize Telemedia Limited / Digi)",
+"pais": "BZ",
+"ciudades": [
+"Corozal",
+"Orange Walk",
+"Belize City",
+"Belmopan",
+"San Ignacio",
+"Dangriga",
+"Punta Gorda"
+],
+"estado": "en servicio",
+"fuente": "aproximado: sigue las carreteras principales Philip Goldson, George Price, Hummingbird y Southern Highway de norte a sur según documentación de BTL y el BID"
+},
+{
+"nombre": "Red Troncal Nacional de Fibra Óptica de Corea del Norte",
+"operador": "Korea Post and Telecommunications Corporation (KPTC) / Ministerio de Correos y Telecomunicaciones",
+"pais": "KP",
+"ciudades": [
+"Sinuiju",
+"Anju",
+"Pyongsong",
+"Pyongyang",
+"Sariwon",
+"Kaesong",
+"Wonsan",
+"Hamhung",
+"Chongjin",
+"Rason"
+],
+"estado": "en servicio",
+"fuente": "aproximado: sigue los corredores ferroviarios y viales principales (eje occidental Sinuiju-Pyongyang-Kaesong y eje oriental Pyongyang-Wonsan-Hamhung-Chongjin-Rason) según informes del PNUD y estudios sobre la red Kwangmyong"
+}
+]
