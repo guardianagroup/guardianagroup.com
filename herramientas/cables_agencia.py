@@ -274,7 +274,7 @@ def simplifica(pts, tol):
 # ---------- the agency's answers ----------
 def quien(nombre_archivo):
     n = os.path.basename(nombre_archivo).lower()
-    for q in ('chatgpt', 'gemini', 'claude', 'grok', 'astra'):  # astra: GPT-6 Astra (Cheaper Inference), a voice since 23 Oct 2026
+    for q in ('chatgpt', 'gemini', 'claude', 'grok', 'astra', 'kimi'):  # kimi: Kimi (Moonshot AI), a voice since 24 Oct 2026  # astra: GPT-6 Astra (Cheaper Inference), a voice since 23 Oct 2026
         if n.startswith(q): return q
     return 'otro'
 

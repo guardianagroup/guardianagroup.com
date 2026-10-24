@@ -1,0 +1,848 @@
+[
+  {
+    "nombre": "Coral Bridge",
+    "llegadas": [
+      {
+        "lugar": "Taba",
+        "pais": "EG",
+        "lat": 29.49,
+        "lon": 34.9
+      },
+      {
+        "lugar": "Aqaba",
+        "pais": "JO",
+        "lat": 29.53,
+        "lon": 35.01
+      }
+    ],
+    "anio": 2025,
+    "km": 15,
+    "duenos": [
+      "Telecom Egypt",
+      "NaiTel"
+    ],
+    "fuentes": [
+      "https://ir.te.eg/en/CorporateNews/PressRelease/223/The-Express-Subsea-Cable-Coral-Bridge-Laying-Completed-Connecting-Egypt-and-Jordan — Telecom Egypt (21-08-2025): tendido completado; cable de 15 km entre su punto de amarre de Taba y el Aqaba Digital Hub (Aqaba), con NaiTel",
+      "https://ir.te.eg/en/CorporateNews/PressRelease/229/Telecom-Egypt-Expands-into-a-New-Point-of-Presence-at-Aqaba-Digital-Hub-in-Jordan — Telecom Egypt (22-09-2025): 'successful launch' y 'activation' de Coral Bridge, enlace de 15 km Taba–Aqaba"
+    ]
+  },
+  {
+    "nombre": "Unitel North Submarine Cable (UNSC)",
+    "llegadas": [
+      {
+        "lugar": "N'Zeto",
+        "pais": "AO",
+        "lat": -7.23,
+        "lon": 12.87
+      },
+      {
+        "lugar": "Cacongo",
+        "pais": "AO",
+        "lat": -5.22,
+        "lon": 12.13
+      },
+      {
+        "lugar": "Cabinda",
+        "pais": "AO",
+        "lat": -5.56,
+        "lon": 12.19
+      },
+      {
+        "lugar": "Soyo",
+        "pais": "AO",
+        "lat": -6.13,
+        "lon": 12.37
+      }
+    ],
+    "anio": null,
+    "km": null,
+    "duenos": [
+      "Unitel"
+    ],
+    "fuentes": [
+      "https://angop.ao/en/noticias/tecnologia/cabinda-ministra-de-estado-satisfeita-com-telecomunicacoes-do-unsc — ANGOP (agencia estatal de Angola): sistema inaugurado; un tramo con repetidores une Cacongo (Cabinda) con N'Zeto (Zaire) y otro sin repetidores une Cabinda con Soyo; de Unitel"
+    ]
+  },
+  {
+    "nombre": "DOS CONTINENTES I & II",
+    "llegadas": [
+      {
+        "lugar": "La Línea de la Concepción (Torrenueva)",
+        "pais": "ES",
+        "lat": 36.17,
+        "lon": -5.35
+      },
+      {
+        "lugar": "Ceuta",
+        "pais": "ES",
+        "lat": 35.89,
+        "lon": -5.32
+      },
+      {
+        "lugar": "Tarifa (Playa Chica)",
+        "pais": "ES",
+        "lat": 36.01,
+        "lon": -5.61
+      }
+    ],
+    "anio": 2020,
+    "km": null,
+    "duenos": [
+      "GTD"
+    ],
+    "fuentes": [
+      "https://www.juntadeandalucia.es/boja/2019/205/36 — BOJA (Junta de Andalucía): proyecto de cable submarino de telecomunicaciones 'Dos Continentes' de GTD Cableado de Redes Inteligentes, con amarres en Torrenueva (La Línea de la Concepción) y Playa Chica (Tarifa)",
+      "https://www.cnmc.es/sites/default/files/6106289.pdf — CNMC (tablas a junio de 2024): DOS CONTINENTES 1 y DOS CONTINENTES 2, Península–Ceuta, GTD, 2020, operativo: Sí"
+    ]
+  },
+  {
+    "nombre": "Alaska United Southeast (AU-SE)",
+    "llegadas": [
+      {
+        "lugar": "Ketchikan",
+        "pais": "US",
+        "lat": 55.34,
+        "lon": -131.65
+      },
+      {
+        "lugar": "Wrangell",
+        "pais": "US",
+        "lat": 56.47,
+        "lon": -132.38
+      },
+      {
+        "lugar": "Petersburg",
+        "pais": "US",
+        "lat": 56.81,
+        "lon": -132.96
+      },
+      {
+        "lugar": "Angoon",
+        "pais": "US",
+        "lat": 57.5,
+        "lon": -134.58
+      },
+      {
+        "lugar": "Sitka",
+        "pais": "US",
+        "lat": 57.05,
+        "lon": -135.33
+      }
+    ],
+    "anio": 2008,
+    "km": null,
+    "duenos": [
+      "GCI"
+    ],
+    "fuentes": [
+      "https://www.sec.gov/Archives/edgar/data/0000075679/000080846112000013/incform10k12312011.htm — GCI, informe 10-K 2011 (SEC): 'Alaska United Southeast was placed into service in 2008'; conecta Ketchikan, Wrangell, Petersburg, Angoon y Sitka con Alaska United West y Alaska United East"
+    ]
+  },
+  {
+    "nombre": "Alaska United Aleutians (AU-Aleutians)",
+    "llegadas": [
+      {
+        "lugar": "Kodiak",
+        "pais": "US",
+        "lat": 57.79,
+        "lon": -152.41
+      },
+      {
+        "lugar": "Larsen Bay",
+        "pais": "US",
+        "lat": 57.54,
+        "lon": -153.98
+      },
+      {
+        "lugar": "Chignik Bay",
+        "pais": "US",
+        "lat": 56.3,
+        "lon": -158.4
+      },
+      {
+        "lugar": "Sand Point",
+        "pais": "US",
+        "lat": 55.34,
+        "lon": -160.5
+      },
+      {
+        "lugar": "King Cove",
+        "pais": "US",
+        "lat": 55.06,
+        "lon": -162.31
+      },
+      {
+        "lugar": "Akutan",
+        "pais": "US",
+        "lat": 54.14,
+        "lon": -165.77
+      },
+      {
+        "lugar": "Unalaska",
+        "pais": "US",
+        "lat": 53.87,
+        "lon": -166.54
+      }
+    ],
+    "anio": 2022,
+    "km": 1290,
+    "duenos": [
+      "GCI"
+    ],
+    "fuentes": [
+      "https://www.gci.com/about/digital-divide/aleutian-fiber-project — GCI: sistema submarino de más de 800 millas 'from Kodiak along the south side of the Alaska Peninsula to Unalaska'; en servicio Unalaska (2022), Sand Point (2023), King Cove y Akutan (2024), Chignik Bay y Larsen Bay (2025)",
+      "https://news.gci.com/news-releases/gci-celebrates-year-of-remarkable-progress-for-aleutians-fiber-project — GCI: 'an 800-mile-long subsea fiber-optic backbone, deployed in 2022'"
+    ]
+  },
+  {
+    "nombre": "Hawaiian Islands Fiber Network (HIFN)",
+    "llegadas": [
+      {
+        "lugar": "Lihue (Wailua), Kauai",
+        "pais": "US",
+        "lat": 22.04,
+        "lon": -159.34
+      },
+      {
+        "lugar": "Makaha (Waianae), Oahu",
+        "pais": "US",
+        "lat": 21.47,
+        "lon": -158.22
+      },
+      {
+        "lugar": "Koko Head (Sandy Beach), Oahu",
+        "pais": "US",
+        "lat": 21.29,
+        "lon": -157.67
+      },
+      {
+        "lugar": "Kaunakakai, Molokai",
+        "pais": "US",
+        "lat": 21.09,
+        "lon": -157.02
+      },
+      {
+        "lugar": "Manele Bay, Lanai",
+        "pais": "US",
+        "lat": 20.74,
+        "lon": -156.89
+      },
+      {
+        "lugar": "Kihei (Mokapu), Maui",
+        "pais": "US",
+        "lat": 20.76,
+        "lon": -156.46
+      },
+      {
+        "lugar": "Kawaihae (Spencer Beach), Hawaii",
+        "pais": "US",
+        "lat": 20.02,
+        "lon": -155.82
+      }
+    ],
+    "anio": 1997,
+    "km": 644,
+    "duenos": [
+      "Hawaiian Telcom",
+      "Level 3 Telecom of Hawaii"
+    ],
+    "fuentes": [
+      "https://docs.fcc.gov/public/attachments/DOC-381242A1.pdf — FCC (aviso público de renovación de licencia, 2022): HIFN operativo desde el 27-06-1997, unos 400 millas, propiedad de Hawaiian Telcom, HTSC y Level 3; estaciones de amarre Kawaihae (Spencer Beach), Lihue (Wailua), Lanai (Manele Bay), Kihei (Mokapu), Kaunakakai, Kokohead (Sandy Beach) y Waianae (Makaha); el segmento A va de Kauai a Oahu (Makaha); Keawaula inactivo"
+    ]
+  },
+  {
+    "nombre": "St. Pierre and Miquelon Cable",
+    "llegadas": [
+      {
+        "lugar": "Fortune, Terranova",
+        "pais": "CA",
+        "lat": 47.07,
+        "lon": -55.83
+      },
+      {
+        "lugar": "Miquelon",
+        "pais": "PM",
+        "lat": 47.1,
+        "lon": -56.38
+      },
+      {
+        "lugar": "Saint-Pierre",
+        "pais": "PM",
+        "lat": 46.78,
+        "lon": -56.18
+      },
+      {
+        "lugar": "Lamaline, Terranova",
+        "pais": "CA",
+        "lat": 46.86,
+        "lon": -55.8
+      }
+    ],
+    "anio": 2018,
+    "km": 140,
+    "duenos": [
+      "Collectivité territoriale de Saint-Pierre-et-Miquelon"
+    ],
+    "fuentes": [
+      "https://www.jo-spm.fr/doc_jo/DELIB2021-0289.pdf — Délibération n° 289/2021 del Conseil territorial de Saint-Pierre-et-Miquelon: cable de unos 140 km, 24 fibras, doble conexión con Terranova en Lamaline y Fortune, dos estaciones en el archipiélago (Saint-Pierre y Miquelon); construido por Alcatel Submarine Networks, recibido en verano de 2018 y operativo (conectado a la red mundial)"
+    ]
+  },
+  {
+    "nombre": "Jerry Newton",
+    "llegadas": [
+      {
+        "lugar": "Curaçao (isla)",
+        "pais": "CW",
+        "lat": 12.11,
+        "lon": -68.93
+      },
+      {
+        "lugar": "Bonaire (isla)",
+        "pais": "BQ",
+        "lat": 12.15,
+        "lon": -68.27
+      }
+    ],
+    "anio": null,
+    "km": null,
+    "duenos": [
+      "Liberty Latin America (C&W Communications)"
+    ],
+    "fuentes": [
+      "https://saba-news.com/wp-content/uploads/2025/09/Telecom-in-the-Caribbean-Netherlands.pdf — ACM (Autoriteit Consument & Markt, regulador neerlandés), informe 'Telecom in the Caribbean Netherlands': Bonaire está conectada con Curaçao por dos cables; el Jerry Newton es de LLA y lo opera Cable & Wireless Communications desde 2007",
+      "https://btnp.org/wp-content/uploads/2020/12/20201124-BTP-Telecommunication-Services-Performance-Indicators-Statistical-Publication-2020-V10.pdf — BT&P (regulador de Curaçao), 2020: 'Jerry Newton (EC-Link extension)' entre los cables que llegan a Curaçao"
+    ]
+  },
+  {
+    "nombre": "Amerigo Vespucci",
+    "llegadas": [
+      {
+        "lugar": "Curaçao (isla)",
+        "pais": "CW",
+        "lat": 12.11,
+        "lon": -68.93
+      },
+      {
+        "lugar": "Bonaire (isla)",
+        "pais": "BQ",
+        "lat": 12.15,
+        "lon": -68.27
+      }
+    ],
+    "anio": null,
+    "km": null,
+    "duenos": [
+      "C&W Communications (Liberty Latin America)",
+      "Telbo"
+    ],
+    "fuentes": [
+      "https://saba-news.com/wp-content/uploads/2025/09/Telecom-in-the-Caribbean-Netherlands.pdf — ACM (regulador neerlandés), informe 'Telecom in the Caribbean Netherlands': el segundo cable Bonaire–Curaçao, 'Amerigo Vespucci', es en parte de C&W Communications (LLA) y en parte de Telbo; Flamingo le compra capacidad",
+      "https://btnp.org/wp-content/uploads/2020/12/20201124-BTP-Telecommunication-Services-Performance-Indicators-Statistical-Publication-2020-V10.pdf — BT&P (regulador de Curaçao), 2020: Amerigo Vespucci entre los cables que llegan a Curaçao"
+    ]
+  },
+  {
+    "nombre": "EC Link",
+    "llegadas": [
+      {
+        "lugar": "Curaçao (isla)",
+        "pais": "CW",
+        "lat": 12.11,
+        "lon": -68.93
+      },
+      {
+        "lugar": "Trinidad (isla)",
+        "pais": "TT",
+        "lat": 10.66,
+        "lon": -61.51
+      }
+    ],
+    "anio": null,
+    "km": 938,
+    "duenos": [
+      "C&W Networks (Liberty Networks)"
+    ],
+    "fuentes": [
+      "https://cwc.com/news-and-media/press-releases/cw-networks-and-te-subcom-extend-pan-caribbean-partnership-to-provide-capacity-upgrades-to-multiple-cable-systems.html — C&W (dueño), 21-09-2016: 'ECLink is a 938 km regional undersea cable system connecting Trinidad and Curacao'; contrato con TE SubCom para su ampliación de capacidad",
+      "https://btnp.org/wp-content/uploads/2020/12/20201124-BTP-Telecommunication-Services-Performance-Indicators-Statistical-Publication-2020-V10.pdf — BT&P (regulador de Curaçao), 2020: EC-Link entre los cables que llegan a Curaçao"
+    ]
+  },
+  {
+    "nombre": "Eastern Arctic Undersea Fibre Optic Network (EAUFON)",
+    "llegadas": [
+      {
+        "lugar": "Chisasibi",
+        "pais": "CA",
+        "lat": 53.79,
+        "lon": -78.91
+      },
+      {
+        "lugar": "Kuujjuarapik-Whapmagoostui",
+        "pais": "CA",
+        "lat": 55.28,
+        "lon": -77.75
+      },
+      {
+        "lugar": "Umiujaq",
+        "pais": "CA",
+        "lat": 56.55,
+        "lon": -76.55
+      },
+      {
+        "lugar": "Inukjuak",
+        "pais": "CA",
+        "lat": 58.45,
+        "lon": -78.1
+      },
+      {
+        "lugar": "Puvirnituq",
+        "pais": "CA",
+        "lat": 60.04,
+        "lon": -77.28
+      },
+      {
+        "lugar": "Akulivik",
+        "pais": "CA",
+        "lat": 60.81,
+        "lon": -78.2
+      },
+      {
+        "lugar": "Ivujivik",
+        "pais": "CA",
+        "lat": 62.42,
+        "lon": -77.91
+      },
+      {
+        "lugar": "Salluit",
+        "pais": "CA",
+        "lat": 62.2,
+        "lon": -75.64
+      },
+      {
+        "lugar": "Deception Bay",
+        "pais": "CA",
+        "lat": 62.14,
+        "lon": -74.68
+      }
+    ],
+    "anio": 2022,
+    "km": 1850,
+    "duenos": [
+      "Kativik Regional Government (KRG)"
+    ],
+    "fuentes": [
+      "https://www.krg.ca/fr-CA/assets/Council/2024/May/EAUFON.pdf — Administración Regional Kativik (KRG), consejo de mayo de 2024: EAUFON 1, fibra submarina de Chisasibi a Puvirnituq (Whapmagoostui/Kuujjuaraapik, Umiujaq, Inukjuak), 1175 km, activación junio de 2022; EAUFON 2, de Puvirnituq a Akulivik, Ivujivik, Salluit y Deception Bay, 675 km, activación febrero de 2024",
+      "https://www.krg.ca/en-CA/assets/press-releases/2024/jan/Media_Release_EAUFON_2_activation_Final.pdf — KRG: EAUFON-1 'in operation since 2022' (1175 km submarinos, Chisasibi–Puvirnituq); activación de EAUFON-2 anunciada el 12-02-2024 en Salluit (Akulivik–Ivujivik–Salluit, 675 km)"
+    ]
+  },
+  {
+    "nombre": "Crosslake Fibre",
+    "llegadas": [
+      {
+        "lugar": "Toronto",
+        "pais": "CA",
+        "lat": 43.65,
+        "lon": -79.38
+      },
+      {
+        "lugar": "Cambria, Nueva York",
+        "pais": "US",
+        "lat": 43.18,
+        "lon": -78.81
+      }
+    ],
+    "anio": 2019,
+    "km": 58,
+    "duenos": [
+      "Crosslake Fibre"
+    ],
+    "fuentes": [
+      "https://www.fcc.gov/node/232390 — FCC, licencias de amarre concedidas desde 2016: 'Crosslake Fiber Cable' (26-09-2018) 'connecting Toronto, Ontario, with Cambria, New York'",
+      "https://www.newswire.ca/news-releases/crosslake-fibre-goes-live-with-new-toronto-new-york-network-803464042.html — Crosslake Fibre (dueño), 22-10-2019: cable submarino de 192 fibras y 58 km bajo el lago Ontario, de Toronto al estado de Nueva York, 'complete and has entered commercial service'"
+    ]
+  },
+  {
+    "nombre": "St. Thomas-St. Croix Cable System",
+    "llegadas": [
+      {
+        "lugar": "Magens Bay, Saint Thomas",
+        "pais": "VI",
+        "lat": 18.36,
+        "lon": -64.93
+      },
+      {
+        "lugar": "Butler Bay, Saint Croix",
+        "pais": "VI",
+        "lat": 17.76,
+        "lon": -64.89
+      }
+    ],
+    "anio": null,
+    "km": null,
+    "duenos": [],
+    "fuentes": [
+      "https://www.fcc.gov/node/232390 — FCC, licencias de amarre: 'St. Thomas-St. Croix Cable System' (renovación de licencia concedida el 12-04-2023) 'connects Magens Bay, St. Thomas, U.S. Virgin Islands and Butler Bay, St. Croix, U.S. Virgin Islands'"
+    ]
+  },
+  {
+    "nombre": "Trans Adriatic Express (TAE)",
+    "llegadas": [
+      {
+        "lugar": "Seman (Fier)",
+        "pais": "AL",
+        "lat": 40.8,
+        "lon": 19.4
+      },
+      {
+        "lugar": "San Foca (Melendugno)",
+        "pais": "IT",
+        "lat": 40.3,
+        "lon": 18.4
+      }
+    ],
+    "anio": 2023,
+    "km": 106,
+    "duenos": [
+      "EXA Infrastructure",
+      "Trans Adriatic Pipeline AG (TAP)"
+    ],
+    "fuentes": [
+      "https://exainfra.net/media/g3nhbimq/tae-trans-adriatic-express-brochure-032024.pdf — EXA Infrastructure (dueño mayoritario), folleto TAE 03-2024: cables submarinos 'between San Foca, Italy and Senen beach in Albania', cruce del Adriático de 106 km, RFS marzo de 2023; empresa conjunta EXA + TAP",
+      "https://www.exainfra.net/network/tae-trans-adriatic-express — EXA: TAE en operación ('100% uptime over the past five years'), 106 km de cruce submarino del Adriático"
+    ]
+  },
+  {
+    "nombre": "Polar Circle Cable",
+    "llegadas": [
+      {
+        "lugar": "Narvik",
+        "pais": "NO",
+        "lat": 68.44,
+        "lon": 17.43
+      },
+      {
+        "lugar": "Trondheim",
+        "pais": "NO",
+        "lat": 63.43,
+        "lon": 10.4
+      }
+    ],
+    "anio": 2016,
+    "km": 1013,
+    "duenos": [
+      "KystTele"
+    ],
+    "fuentes": [
+      "https://www.kysttele.no/about/ — KystTele (operador): 'The cable stretches from Narvik to Trondheim', 1013 km, 48 fibras, terminado en octubre de 2016; 'Kystteles cable currently extends from Narvik to Trondheim'"
+    ]
+  },
+  {
+    "nombre": "Jayabaya (Jakarta-Surabaya)",
+    "llegadas": [
+      {
+        "lugar": "Jakarta",
+        "pais": "ID",
+        "lat": -6.12,
+        "lon": 106.83
+      },
+      {
+        "lugar": "Cirebon",
+        "pais": "ID",
+        "lat": -6.71,
+        "lon": 108.56
+      },
+      {
+        "lugar": "Semarang",
+        "pais": "ID",
+        "lat": -6.95,
+        "lon": 110.42
+      },
+      {
+        "lugar": "Surabaya",
+        "pais": "ID",
+        "lat": -7.2,
+        "lon": 112.73
+      }
+    ],
+    "anio": 2018,
+    "km": 881,
+    "duenos": [
+      "Triasmitra (PT Ketrosden Triasmitra)"
+    ],
+    "fuentes": [
+      "https://triasmitra.com/index.php/news-updates/news/sistem-komunikasi-kabel-laut-jakarta-surabaya-triasmitra-resmi-beroperasi — Triasmitra (dueño): el sistema de cable submarino Jakarta–Surabaya 'resmi beroperasi' (18-09-2018), une Jakarta, Cirebon, Semarang y Surabaya; 875 km de cable",
+      "https://triasmitra.com/services/developer — Triasmitra: Jayabaya Jakarta–Surabaya, 881 km submarinos (1227 km con tramo terrestre), Q3-2017 a Q4-2018"
+    ]
+  },
+  {
+    "nombre": "RISING 8",
+    "llegadas": [
+      {
+        "lugar": "Jakarta",
+        "pais": "ID",
+        "lat": -6.12,
+        "lon": 106.83
+      },
+      {
+        "lugar": "Batam",
+        "pais": "ID",
+        "lat": 1.08,
+        "lon": 104.03
+      }
+    ],
+    "anio": 2026,
+    "km": null,
+    "duenos": [
+      "Triasmitra (PT Ketrosden Triasmitra)",
+      "MoraRepublic (PT Ekamas Mora Republik)"
+    ],
+    "fuentes": [
+      "https://www.morarepublic.co.id/our-company/news/rising-8-submarine-cable-system-commissioned-strengthening-indonesia-digital-connectivity — MoraRepublic (copropietario): RISING 8 puesto en servicio (ceremonia 17-06-2026); 'The completed section is the first segment connecting Jakarta and Batam'; el tramo Batam–Singapur es la fase siguiente"
+    ]
+  },
+  {
+    "nombre": "Biznet Nusantara Cable System-1 (BNCS-1), segmento Anyer-Kalianda",
+    "llegadas": [
+      {
+        "lugar": "Anyer, Serang",
+        "pais": "ID",
+        "lat": -6.05,
+        "lon": 105.92
+      },
+      {
+        "lugar": "Kalianda, Lampung Selatan",
+        "pais": "ID",
+        "lat": -5.73,
+        "lon": 105.59
+      }
+    ],
+    "anio": 2024,
+    "km": 61.5,
+    "duenos": [
+      "Biznet"
+    ],
+    "fuentes": [
+      "https://www.biznetnetworks.com/wp-content/uploads/2025/07/Biznet-Nusantara-Cable-System.pdf — Biznet (dueño): BNCS-1 'was in service by 1 June 2024'; segmento 1 Anyar (Serang, Java) – Kalianda (Lampung Selatan, Sumatra), 61,5 km, sin repetidores"
+    ]
+  },
+  {
+    "nombre": "Biznet Nusantara Cable System-1 (BNCS-1), segmento Sungsang-Muntok",
+    "llegadas": [
+      {
+        "lugar": "Sungsang, Banyuasin",
+        "pais": "ID",
+        "lat": -2.36,
+        "lon": 104.91
+      },
+      {
+        "lugar": "Muntok, Bangka Barat",
+        "pais": "ID",
+        "lat": -2.06,
+        "lon": 105.16
+      }
+    ],
+    "anio": 2024,
+    "km": 44.2,
+    "duenos": [
+      "Biznet"
+    ],
+    "fuentes": [
+      "https://www.biznetnetworks.com/wp-content/uploads/2025/07/Biznet-Nusantara-Cable-System.pdf — Biznet (dueño): BNCS-1 en servicio desde el 1-06-2024; segmento 2 Sungsang (Banyuasin, Sumatra) – Muntok (Bangka Barat), 44,2 km"
+    ]
+  },
+  {
+    "nombre": "Ogasawara Cable Network",
+    "llegadas": [
+      {
+        "lugar": "Hachijojima",
+        "pais": "JP",
+        "lat": 33.11,
+        "lon": 139.79
+      },
+      {
+        "lugar": "Islas Ogasawara (Chichijima)",
+        "pais": "JP",
+        "lat": 27.09,
+        "lon": 142.19
+      }
+    ],
+    "anio": 2011,
+    "km": null,
+    "duenos": [
+      "Gobierno Metropolitano de Tokio"
+    ],
+    "fuentes": [
+      "https://www.digitalservice.metro.tokyo.lg.jp/business/tokyo-data-highway/island — Gobierno Metropolitano de Tokio: construyó el cable óptico submarino Hachijojima – islas Ogasawara (obras ene-2010 a mar-2011, servicio desde julio de 2011); los operadores privados dan el servicio"
+    ]
+  },
+  {
+    "nombre": "YUI-1 (Okinawa-Ishigaki)",
+    "llegadas": [
+      {
+        "lugar": "Okinawa (isla principal)",
+        "pais": "JP",
+        "lat": 26.21,
+        "lon": 127.68
+      },
+      {
+        "lugar": "Ishigaki",
+        "pais": "JP",
+        "lat": 24.34,
+        "lon": 124.16
+      }
+    ],
+    "anio": 2023,
+    "km": 460,
+    "duenos": [
+      "Okinawa Cellular",
+      "NTT West",
+      "SoftBank"
+    ],
+    "fuentes": [
+      "https://okinawa-cellular.jp/common/uploads/A3_sustainabilityreport2023_240214_ENG.pdf — Okinawa Cellular, informe de sostenibilidad 2023: cable submarino 'YUI', tendido junto con NTT West y SoftBank; YUI-1 une la isla principal de Okinawa con Ishigaki (unos 460 km); en operación desde julio de 2023"
+    ]
+  },
+  {
+    "nombre": "YUI-2 (Kume-Miyako)",
+    "llegadas": [
+      {
+        "lugar": "Kumejima",
+        "pais": "JP",
+        "lat": 26.34,
+        "lon": 126.8
+      },
+      {
+        "lugar": "Miyakojima",
+        "pais": "JP",
+        "lat": 24.8,
+        "lon": 125.28
+      }
+    ],
+    "anio": 2023,
+    "km": 260,
+    "duenos": [
+      "Okinawa Cellular",
+      "NTT West",
+      "SoftBank"
+    ],
+    "fuentes": [
+      "https://okinawa-cellular.jp/common/uploads/A3_sustainabilityreport2023_240214_ENG.pdf — Okinawa Cellular, informe de sostenibilidad 2023: YUI-2 une la isla de Kume con la de Miyako (unos 260 km); en operación desde julio de 2023"
+    ]
+  },
+  {
+    "nombre": "Labuan-Brunei Cable System (LBC)",
+    "llegadas": [
+      {
+        "lugar": "Kiamsam, Labuan",
+        "pais": "MY",
+        "lat": 5.33,
+        "lon": 115.2
+      },
+      {
+        "lugar": "Tungku",
+        "pais": "BN",
+        "lat": 4.96,
+        "lon": 114.89
+      }
+    ],
+    "anio": 2021,
+    "km": null,
+    "duenos": [],
+    "fuentes": [
+      "https://cttsb.com.my/labuan-brunei-cable-system/ — Common Tower Technologies (CTTSB): Labuan-Brunei Cable System, 'Kiamsam, Labuan – Tungku, Brunei', cuarto cable submarino internacional de Brunéi, RFS abril de 2021"
+    ]
+  },
+  {
+    "nombre": "Pukpuk-1 Cable System (Puk-Puk 1)",
+    "llegadas": [
+      {
+        "lugar": "Jayapura",
+        "pais": "ID",
+        "lat": -2.54,
+        "lon": 140.7
+      },
+      {
+        "lugar": "Vanimo",
+        "pais": "PG",
+        "lat": -2.69,
+        "lon": 141.3
+      }
+    ],
+    "anio": 2026,
+    "km": null,
+    "duenos": [
+      "Telkom Indonesia (Telin)",
+      "PNG DataCo"
+    ],
+    "fuentes": [
+      "https://www.telkom.co.id/sites/berita/id_ID/news/telkomgroup-resmikan-kabel-laut-pukpuk-jembatan-digital-pertama-yang-menghubungkan-indonesia-papua-nugini-3757 — Telkom (dueño): sistema Pukpuk (Puk-Puk 1) inaugurado el 8-05-2026 en Jayapura, en colaboración con PNG DataCo; estación de amarre de Jayapura operada por TelkomGroup, enlace con la red Kumul de PNG en Vanimo"
+    ]
+  },
+  {
+    "nombre": "Nationwide Submarine Cable Ooredoo Maldives (NaSCOM)",
+    "llegadas": [
+      {
+        "lugar": "Kulhudhuffushi",
+        "pais": "MV",
+        "lat": 6.62,
+        "lon": 73.07
+      },
+      {
+        "lugar": "Eydhafushi",
+        "pais": "MV",
+        "lat": 5.1,
+        "lon": 73.07
+      },
+      {
+        "lugar": "Hulhumalé",
+        "pais": "MV",
+        "lat": 4.21,
+        "lon": 73.54
+      },
+      {
+        "lugar": "Thinadhoo",
+        "pais": "MV",
+        "lat": 0.53,
+        "lon": 72.99
+      },
+      {
+        "lugar": "Hithadhoo (Addu)",
+        "pais": "MV",
+        "lat": -0.61,
+        "lon": 73.09
+      }
+    ],
+    "anio": 2016,
+    "km": 1200,
+    "duenos": [
+      "Ooredoo Maldives"
+    ],
+    "fuentes": [
+      "https://www.ooredoo.com/en/media/news_view/ooredoos-nationwide-submarine-cable-paves-the-way-to-4g-network-across-maldives/ — Ooredoo (dueño), 15-12-2016: 'today inaugurated' su Nationwide Submarine Cable en Maldivas",
+      "https://www.huawei.com/en/news/2016/12/Ooredoo-Huawei-Submarine-Cable-Maldives — Huawei (proveedor), 16-12-2016: el sistema, de 1200 km, une seis islas principales de Maldivas; inaugurado",
+      "https://saruna.mnu.edu.mv/items/8b595836-4bfd-438a-af32-5b1c56e0cafc — EIA del cable nacional de Ooredoo Maldives (CDE Consulting para Ooredoo, presentado a la EPA, mayo de 2016): seis amarres, entre ellos B. Eydhafushi, Hulhumalé, GDh. Thinadhoo, HDh. Kulhudhuffushi y S. Hithadhoo"
+    ]
+  },
+  {
+    "nombre": "Padang-Tua Pejat",
+    "llegadas": [
+      {
+        "lugar": "Padang",
+        "pais": "ID",
+        "lat": -0.95,
+        "lon": 100.35
+      },
+      {
+        "lugar": "Tua Pejat (Sipora)",
+        "pais": "ID",
+        "lat": -2.03,
+        "lon": 99.59
+      }
+    ],
+    "anio": 2019,
+    "km": 170,
+    "duenos": [],
+    "fuentes": [
+      "https://diskominfo.mentawaikab.go.id/2024/08/tawarkan-rencana-pengembangan.html — Diskominfo de la regencia de Mentawai (gobierno local), ago-2024: el cable de fibra submarino de Padang a Tuapejat se tendió en 2019 (unos 170 km) y hoy la comunicación de Mentawai depende de esa fibra desde Padang"
+    ]
+  }
+]
