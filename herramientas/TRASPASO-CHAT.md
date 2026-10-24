@@ -295,3 +295,22 @@ Actualizado el viernes 23 de octubre de 2026 a las 23:50, hora de Bogotá. Lo es
 
 - 23 Oct 2026, 23:50: fichas de los cuatro botones de capas, **en curso**. El dueño pidió (23:36) usar **Astra 6** también para los cables, «para todo lo que se pueda».
 - Revisión automática de Órbita (navegación, X, «volver», paneles) en marcha; su informe, cuando llegue, irá a `herramientas/agencia-rondas/qa/`.
+
+**24 Oct 2026, 00:15 — hecho y publicado en las dos ramas**
+- **Fichas de los cuatro botones de capas:** cuadradas de 312 × 312 px e iguales, en `capas.js` (`fichaCapa`) y `orbita.css` (`.capa-ficha`). Solo con ratón.
+- **Nombres de los pueblos donde llega o sale cada cable** (orden del dueño, 23:39: «todo cable que… empiece o termine en un pueblo, tiene que aparecer el nombre»):
+  - En el mapa: `pintaNombresLlegadas` en `capas.js` los muestra desde unos 4.200 km de ancho de pantalla; las ciudades de `ciudades.js` les ceden el sitio y no repiten el nombre.
+  - Los datos salen de un workflow nuevo, `.github/workflows/pueblos-cables.yml` (a mano y cada lunes), que descarga GeoNames cities500, escribe `orbita/static/tierra/pueblos-cables.tsv` y vuelve a generar `lugares-capas.json` con `herramientas/lugares_capas.py` (función `lugar_cable`).
+  - Resultado: 1.138 de 1.330 llegadas con nombre, 518 de ellas con el pueblo real.
+- **Correcciones:** «Souh America-1» pasa a South America-1 (errata de OpenStreetMap, corregida en `datos_orbita.py`), «Marseille 02/08» pasa a Marseille, y el gris de «capacidad no publicada» ya no parece blanco al resaltarlo.
+- **Compra y descarga:** las páginas en «muy pronto desde la web» y los planes en «Próximamente». No queda ningún enlace de pago.
+
+**En marcha**
+- **Fibra por tierra de los países que faltan.** Hay datos de 93 países; faltan unos 85 con red troncal propia.
+  - Astra 6 y ChatGPT responden en tandas. Sus respuestas van a `herramientas/fibra-agencia/astra-troncales-N.json` y `chatgpt-troncales-N.json`, y el texto bruto a `herramientas/agencia-rondas/ronda17/`.
+  - Después hay que seguir estos pasos:
+    1. `python3 herramientas/fibra_agencia.py`: solo se quedan los tramos que confirman las dos voces. Si falta alguna ciudad, añade su ALIAS.
+    2. `python3 herramientas/fibra_tierra.py --sin-ofds`: funciona en local, porque clona AfTerFibre desde GitHub.
+    3. Revisa `orbita/datos/fibra-tierra.json` (países y km).
+    4. Publica en las dos ramas.
+- **Al terminar el mapa**, el dueño pidió (23:49) **poner su ordenador en hibernación**. Hay permiso de clic sobre el escritorio de Windows («Explorador de archivos», nivel «click»): Inicio, después el botón de apagado y después «Hibernar». Si «Hibernar» no aparece en el menú, avísale; no cambies la configuración de energía.
