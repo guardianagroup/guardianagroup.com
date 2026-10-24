@@ -1,8 +1,8 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al cerrar la cuenta anterior al 97 % de su uso semanal. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
+Actualizado el sábado 24 de octubre de 2026 a las 14:30, hora de Bogotá, al cerrar la cuenta anterior al 98 % de su uso semanal. Copia de seguridad en GitHub con las etiquetas `copia-2026-10-24-1430-web-idiomas` y `copia-2026-10-24-1430-main`. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
 
-## Estado al cerrar la cuenta (24 Oct 2026, 12:00, al 97 % de uso)
+## Estado al cerrar la cuenta (24 Oct 2026, 14:30, al 98 % de uso)
 
 **Ramas:** `main` (la web en vivo) y `web-idiomas` están al día. `web-idiomas` tiene además este documento y las preguntas de Kimi.
 
@@ -16,9 +16,9 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
   - Eritrea: usa radioenlaces, no fibra.
   - Guinea-Bisáu: su red troncal está en licitación.
   - Islas y territorios pequeños: HK, SG, MO, MC, AD, GU, VI, KY, AW, CW, GP, MQ, RE, YT, GF, EH, KM, PF, VU, SB, WS, TO, BS y otros.
-- **Cables submarinos:** 518 cables enteros y 1.473 llegadas, cada una con el nombre de su pueblo (GeoNames cities500). Al empezar la noche eran 445.
-  - `orbita/datos/cables-agencia.json` guarda los 349 cables de la agencia.
-  - Hay 107 cables que solo nombra una voz y que ninguna fuente oficial confirma. No se muestran, a propósito; están en `herramientas/agencia-rondas/ronda19/`.
+- **Cables submarinos:** 550 cables enteros (los grupos de `lugares-capas.json`; la ficha del botón puede contar alguno más), cada llegada con el nombre de su pueblo (GeoNames cities500). Al empezar la noche eran 445.
+  - `orbita/datos/cables-agencia.json` guarda los 381 cables de la agencia.
+  - Los cables que solo nombra una voz no se muestran, a propósito. La ronda 24 los confirma con una segunda voz (ver «Lo que quedó a medias»).
 - **Antártida:** dos voces coinciden: la investigación profunda de ChatGPT y Astra 6 (`ronda23/astra-antartida.txt`).
   - No llega ningún cable submarino en servicio. Nueva Zelanda–McMurdo y Chile–isla Rey Jorge son proyectos o estudios.
   - Las bases salen a internet por satélite: Starlink en McMurdo y Rothera; ANARESAT y Starlink en Casey, Davis y Mawson; TDRSS, DSCS e Iridium en el Polo Sur.
@@ -81,7 +81,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
   - Después, el proceso de los cables submarinos.
   - Los 2 que propuso Astra necesitan otra voz.
   - **Ronda 24b, terminada a las 13:55:** ChatGPT, con razonamiento «High», confirmó 33 de los 67 cables y ya están publicados. Ahora hay 381 cables de la agencia y 550 cables enteros con sus pueblos. ChatGPT devolvió «JaKa2LaDeMa» sin su paréntesis: hay que comprobar que case con la propuesta original. Algunas respuestas traen km = 0 o fuentes poco relacionadas, como EESF-3; están en `ronda24/` para revisarlas.
-  - **Ronda 24c, en marcha a las 14:05:** Gemini, con su modelo más potente, confirma los 61 cables de una sola voz que propuso ChatGPT, en 8 lotes (`ronda24/lotes-gemini.json`). Las respuestas van a `herramientas/cables-agencia/gemini-confirma-<n>.json`. Mira cuáles existen, procesa con el proceso de los cables submarinos los que no estén publicados y sigue por el primer lote que falte.
+  - **Ronda 24c, parada a las 14:30 sin ningún lote hecho** (el dueño cerró la cuenta al 98 %): Gemini, con su modelo más potente, debe confirmar los 61 cables de una sola voz que propuso ChatGPT, en 8 lotes (`ronda24/lotes-gemini.json`). Las respuestas van a `herramientas/cables-agencia/gemini-confirma-<n>.json` y se procesan con el proceso de los cables submarinos. Para escribir en Gemini: fija un Range dentro del editor, usa `execCommand` línea a línea, envía con `button.send-button` y lee el último `model-response`.
 
 **Lo siguiente que pidió el dueño, por tramos**
 
@@ -152,7 +152,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
    - Las voces de la agencia (ChatGPT, Gemini, Grok, Kimi y Astra 6, en platform.cheaperinference.com) se usan desde el **navegador integrado** de esa app, con las sesiones del dueño.
    - Si alguna sesión no está abierta, pídele al dueño que la abra. Tú nunca escribes contraseñas ni claves.
 3. **Lectura:** este documento entero; después, `herramientas/TRASPASO.md` y `herramientas/agencia-rondas/qa/revision-orbita-2026-10-24.md`.
-4. **Primera tarea:** si hay respuestas `herramientas/fibra-agencia/astra-troncales-*.json` que no figuren como procesadas al final del §11, pásalas por el proceso de los cables por tierra y publícalo.
+4. **Primera tarea:** a las 14:30 todo lo guardado estaba procesado y publicado. Sigue por la ronda 24c (Gemini) y después por las fotos (punto 5 de «Lo siguiente»).
 5. **La ronda 23 de Astra está terminada.** Si vuelves a preguntarle algo, hazlo en tandas pequeñas.
    - Astra corta a 4.096 tokens, contando el razonamiento.
    - El Playground no guarda la conversación: si una respuesta se corta, pregunta solo por los países que faltaron.
