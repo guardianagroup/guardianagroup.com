@@ -1,0 +1,443 @@
+[
+  {
+    "nombre": "Maldives Sri Lanka Cable (MSC)",
+    "llegadas": [
+      {
+        "lugar": "Hulhumalé",
+        "pais": "MV",
+        "lat": 4.2167,
+        "lon": 73.54
+      },
+      {
+        "lugar": "Mount Lavinia",
+        "pais": "LK",
+        "lat": 6.8306,
+        "lon": 79.8633
+      }
+    ],
+    "anio": 2021,
+    "km": 840,
+    "duenos": [
+      "Dhiraagu",
+      "Ooredoo Maldives",
+      "Dialog Axiata"
+    ],
+    "fuentes": [
+      "https://www.dhiraagu.com.mv",
+      "https://www.dialog.lk",
+      "https://www.submarinenetworks.com"
+    ]
+  },
+  {
+    "nombre": "TGN-Eurasia (TGN-EA)",
+    "llegadas": [
+      {
+        "lugar": "Mumbai",
+        "pais": "IN",
+        "lat": 19.076,
+        "lon": 72.8777
+      },
+      {
+        "lugar": "Al Seeb",
+        "pais": "OM",
+        "lat": 23.6703,
+        "lon": 58.1891
+      },
+      {
+        "lugar": "Jeddah",
+        "pais": "SA",
+        "lat": 21.4858,
+        "lon": 39.1925
+      },
+      {
+        "lugar": "Zafarana",
+        "pais": "EG",
+        "lat": 29.1167,
+        "lon": 32.65
+      },
+      {
+        "lugar": "Abu Talat",
+        "pais": "EG",
+        "lat": 31.0667,
+        "lon": 29.7
+      }
+    ],
+    "anio": 2012,
+    "km": 9280,
+    "duenos": [
+      "Tata Communications"
+    ],
+    "fuentes": [
+      "https://www.tatacommunications.com",
+      "https://www.submarinenetworks.com"
+    ]
+  },
+  {
+    "nombre": "T3",
+    "llegadas": [
+      {
+        "lugar": "Baie du Jacotet",
+        "pais": "MU",
+        "lat": -20.4739,
+        "lon": 57.4853
+      },
+      {
+        "lugar": "Amanzimtoti",
+        "pais": "ZA",
+        "lat": -30.05,
+        "lon": 30.8833
+      }
+    ],
+    "anio": 2023,
+    "km": 3200,
+    "duenos": [
+      "Mauritius Telecom"
+    ],
+    "fuentes": [
+      "https://www.mauritiustelecom.com",
+      "https://www.submarinenetworks.com"
+    ]
+  },
+  {
+    "nombre": "Comoros Domestic Submarine Cable System (CDSCS)",
+    "llegadas": [
+      {
+        "lugar": "Chindini",
+        "pais": "KM",
+        "lat": -11.9231,
+        "lon": 43.5126
+      },
+      {
+        "lugar": "Hoani",
+        "pais": "KM",
+        "lat": -12.2575,
+        "lon": 43.6744
+      },
+      {
+        "lugar": "Mutsamudu",
+        "pais": "KM",
+        "lat": -12.1667,
+        "lon": 44.3994
+      }
+    ],
+    "anio": 2016,
+    "km": 263,
+    "duenos": [
+      "Comores Telecom"
+    ],
+    "fuentes": [
+      "https://www.comorestelecom.km",
+      "https://www.submarinenetworks.com"
+    ]
+  },
+  {
+    "nombre": "Dhiraagu Submarine Cable Network (DSCN)",
+    "llegadas": [
+      {
+        "lugar": "Kulhudhuffushi",
+        "pais": "MV",
+        "lat": 6.6221,
+        "lon": 73.07
+      },
+      {
+        "lugar": "Eydhafushi",
+        "pais": "MV",
+        "lat": 5.1033,
+        "lon": 73.0708
+      },
+      {
+        "lugar": "Hulhumalé",
+        "pais": "MV",
+        "lat": 4.2167,
+        "lon": 73.54
+      },
+      {
+        "lugar": "Gan",
+        "pais": "MV",
+        "lat": 1.9167,
+        "lon": 73.5436
+      },
+      {
+        "lugar": "Gadhdhoo",
+        "pais": "MV",
+        "lat": 0.2892,
+        "lon": 73.4561
+      },
+      {
+        "lugar": "Fuvahmulah",
+        "pais": "MV",
+        "lat": -0.2983,
+        "lon": 73.4242
+      },
+      {
+        "lugar": "Hithadhoo",
+        "pais": "MV",
+        "lat": -0.6,
+        "lon": 73.0833
+      }
+    ],
+    "anio": 2012,
+    "km": 1253,
+    "duenos": [
+      "Dhiraagu"
+    ],
+    "fuentes": [
+      "https://www.dhiraagu.com.mv",
+      "https://www.submarinenetworks.com"
+    ]
+  },
+  {
+    "nombre": "Ooredoo Maldives Domestic Submarine Cable (OMDSC)",
+    "llegadas": [
+      {
+        "lugar": "Hithadhoo",
+        "pais": "MV",
+        "lat": -0.6,
+        "lon": 73.0833
+      },
+      {
+        "lugar": "Fuvahmulah",
+        "pais": "MV",
+        "lat": -0.2983,
+        "lon": 73.4242
+      },
+      {
+        "lugar": "Thinadhoo",
+        "pais": "MV",
+        "lat": 0.5306,
+        "lon": 72.9967
+      },
+      {
+        "lugar": "Gan",
+        "pais": "MV",
+        "lat": 1.9167,
+        "lon": 73.5436
+      },
+      {
+        "lugar": "Maamigili",
+        "pais": "MV",
+        "lat": 3.4753,
+        "lon": 72.8361
+      },
+      {
+        "lugar": "Hulhumalé",
+        "pais": "MV",
+        "lat": 4.2167,
+        "lon": 73.54
+      },
+      {
+        "lugar": "Eydhafushi",
+        "pais": "MV",
+        "lat": 5.1033,
+        "lon": 73.0708
+      },
+      {
+        "lugar": "Naifaru",
+        "pais": "MV",
+        "lat": 5.4444,
+        "lon": 73.3656
+      },
+      {
+        "lugar": "Kulhudhuffushi",
+        "pais": "MV",
+        "lat": 6.6221,
+        "lon": 73.07
+      }
+    ],
+    "anio": 2017,
+    "km": 1200,
+    "duenos": [
+      "Ooredoo Maldives"
+    ],
+    "fuentes": [
+      "https://www.ooredoo.mv",
+      "https://www.submarinenetworks.com"
+    ]
+  },
+  {
+    "nombre": "Mozambique Festoon",
+    "llegadas": [
+      {
+        "lugar": "Maputo",
+        "pais": "MZ",
+        "lat": -25.9692,
+        "lon": 32.5732
+      },
+      {
+        "lugar": "Xai-Xai",
+        "pais": "MZ",
+        "lat": -25.0519,
+        "lon": 33.6442
+      },
+      {
+        "lugar": "Inhambane",
+        "pais": "MZ",
+        "lat": -23.865,
+        "lon": 35.3833
+      },
+      {
+        "lugar": "Vilanculos",
+        "pais": "MZ",
+        "lat": -22.0,
+        "lon": 35.3167
+      },
+      {
+        "lugar": "Beira",
+        "pais": "MZ",
+        "lat": -19.8436,
+        "lon": 34.8389
+      },
+      {
+        "lugar": "Quelimane",
+        "pais": "MZ",
+        "lat": -17.8786,
+        "lon": 36.8883
+      },
+      {
+        "lugar": "Ilha de Moçambique",
+        "pais": "MZ",
+        "lat": -15.0342,
+        "lon": 40.7358
+      },
+      {
+        "lugar": "Nacala",
+        "pais": "MZ",
+        "lat": -14.5428,
+        "lon": 40.6728
+      },
+      {
+        "lugar": "Pemba",
+        "pais": "MZ",
+        "lat": -12.9739,
+        "lon": 40.5178
+      }
+    ],
+    "anio": 2006,
+    "km": 1000,
+    "duenos": [
+      "Tmcel"
+    ],
+    "fuentes": [
+      "https://www.tmcel.mz",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Darwin-Jakarta-Singapore Cable (DJSC)",
+    "llegadas": [
+      {
+        "lugar": "Port Hedland",
+        "pais": "AU",
+        "lat": -20.3106,
+        "lon": 118.6011
+      },
+      {
+        "lugar": "Darwin",
+        "pais": "AU",
+        "lat": -12.4634,
+        "lon": 130.8456
+      },
+      {
+        "lugar": "Flying Fish Cove",
+        "pais": "CX",
+        "lat": -10.4286,
+        "lon": 105.6791
+      },
+      {
+        "lugar": "Anyer",
+        "pais": "ID",
+        "lat": -6.0714,
+        "lon": 105.8878
+      },
+      {
+        "lugar": "Changi",
+        "pais": "SG",
+        "lat": 1.3891,
+        "lon": 103.987
+      }
+    ],
+    "anio": 2023,
+    "km": 7700,
+    "duenos": [
+      "Vocus"
+    ],
+    "fuentes": [
+      "https://www.vocus.com.au",
+      "https://www.submarinenetworks.com"
+    ]
+  },
+  {
+    "nombre": "Lanka Bell Submarine Cable",
+    "llegadas": [
+      {
+        "lugar": "Mount Lavinia",
+        "pais": "LK",
+        "lat": 6.8306,
+        "lon": 79.8633
+      }
+    ],
+    "anio": 2006,
+    "km": 280,
+    "duenos": [
+      "Lanka Bell"
+    ],
+    "fuentes": [
+      "https://www.lankabell.com",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Aden-Djibouti",
+    "llegadas": [
+      {
+        "lugar": "Djibouti",
+        "pais": "DJ",
+        "lat": 11.588,
+        "lon": 43.145
+      },
+      {
+        "lugar": "Aden",
+        "pais": "YE",
+        "lat": 12.7855,
+        "lon": 45.0187
+      }
+    ],
+    "anio": 1995,
+    "km": 269,
+    "duenos": [
+      "Djibouti Telecom",
+      "TeleYemen"
+    ],
+    "fuentes": [
+      "https://www.djiboutitelecom.dj",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Pishgaman Oman Iran (POI)",
+    "llegadas": [
+      {
+        "lugar": "Jask",
+        "pais": "IR",
+        "lat": 25.6439,
+        "lon": 57.7744
+      },
+      {
+        "lugar": "Khasab",
+        "pais": "OM",
+        "lat": 26.1799,
+        "lon": 56.2477
+      }
+    ],
+    "anio": 2012,
+    "km": 130,
+    "duenos": [
+      "Pishgaman Kavir",
+      "Omantel"
+    ],
+    "fuentes": [
+      "https://www.omantel.om",
+      "https://www.submarinenetworks.com"
+    ]
+  }
+]

@@ -1,0 +1,714 @@
+[
+  {
+    "nombre": "JAKABARE (Java-Kalimantan-Batam-Singapore)",
+    "llegadas": [
+      {
+        "lugar": "Tanjung Pakis, Karawang",
+        "pais": "ID",
+        "lat": -5.975,
+        "lon": 107.125
+      },
+      {
+        "lugar": "Sungai Kakap, Pontianak",
+        "pais": "ID",
+        "lat": -0.056,
+        "lon": 109.183
+      },
+      {
+        "lugar": "Tanjung Bemban, Batam",
+        "pais": "ID",
+        "lat": 1.158,
+        "lon": 104.122
+      },
+      {
+        "lugar": "Changi",
+        "pais": "SG",
+        "lat": 1.389,
+        "lon": 103.987
+      }
+    ],
+    "anio": 2009,
+    "km": 1330,
+    "duenos": [
+      "Indosat Ooredoo Hutchison"
+    ],
+    "fuentes": [
+      "https://ioh.co.id",
+      "https://www.nec.com",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Jakarta-Bangka-Bintan-Batam-Singapore (B2JS)",
+    "llegadas": [
+      {
+        "lugar": "Ancol, Jakarta",
+        "pais": "ID",
+        "lat": -6.122,
+        "lon": 106.845
+      },
+      {
+        "lugar": "Sungailiat, Bangka",
+        "pais": "ID",
+        "lat": -1.856,
+        "lon": 106.119
+      },
+      {
+        "lugar": "Tanjung Bemban, Batam",
+        "pais": "ID",
+        "lat": 1.158,
+        "lon": 104.122
+      },
+      {
+        "lugar": "Lagoi, Bintan",
+        "pais": "ID",
+        "lat": 1.176,
+        "lon": 104.354
+      },
+      {
+        "lugar": "Tuas",
+        "pais": "SG",
+        "lat": 1.329,
+        "lon": 103.636
+      }
+    ],
+    "anio": 2012,
+    "km": 1070,
+    "duenos": [
+      "Moratelindo"
+    ],
+    "fuentes": [
+      "https://www.moratelindo.co.id",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "JaKa2LaDeMa (Java-Kalimantan-Sulawesi-Denpasar-Makassar)",
+    "llegadas": [
+      {
+        "lugar": "Banjarmasin",
+        "pais": "ID",
+        "lat": -3.319,
+        "lon": 114.591
+      },
+      {
+        "lugar": "Kotabaru",
+        "pais": "ID",
+        "lat": -3.238,
+        "lon": 116.225
+      },
+      {
+        "lugar": "Makassar",
+        "pais": "ID",
+        "lat": -5.148,
+        "lon": 119.432
+      },
+      {
+        "lugar": "Gresik",
+        "pais": "ID",
+        "lat": -7.155,
+        "lon": 112.656
+      },
+      {
+        "lugar": "Padangbai, Bali",
+        "pais": "ID",
+        "lat": -8.532,
+        "lon": 115.509
+      }
+    ],
+    "anio": 2010,
+    "km": 1800,
+    "duenos": [
+      "Telkom Indonesia"
+    ],
+    "fuentes": [
+      "https://www.telkom.co.id",
+      "https://www.nec.com",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Mataram-Kupang Cable System (MKCS)",
+    "llegadas": [
+      {
+        "lugar": "Mataram, Lombok",
+        "pais": "ID",
+        "lat": -8.583,
+        "lon": 116.116
+      },
+      {
+        "lugar": "Pringgabaya, Lombok",
+        "pais": "ID",
+        "lat": -8.541,
+        "lon": 116.634
+      },
+      {
+        "lugar": "Sumbawa Besar",
+        "pais": "ID",
+        "lat": -8.493,
+        "lon": 117.42
+      },
+      {
+        "lugar": "Bima",
+        "pais": "ID",
+        "lat": -8.46,
+        "lon": 118.727
+      },
+      {
+        "lugar": "Waingapu, Sumba",
+        "pais": "ID",
+        "lat": -9.656,
+        "lon": 120.264
+      },
+      {
+        "lugar": "Kupang",
+        "pais": "ID",
+        "lat": -10.177,
+        "lon": 123.607
+      }
+    ],
+    "anio": 2011,
+    "km": 1045,
+    "duenos": [
+      "Telkom Indonesia"
+    ],
+    "fuentes": [
+      "https://www.telkom.co.id",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "SMPCS Packet-1",
+    "llegadas": [
+      {
+        "lugar": "Manado",
+        "pais": "ID",
+        "lat": 1.475,
+        "lon": 124.842
+      },
+      {
+        "lugar": "Ternate",
+        "pais": "ID",
+        "lat": 0.789,
+        "lon": 127.382
+      },
+      {
+        "lugar": "Labuha",
+        "pais": "ID",
+        "lat": -0.633,
+        "lon": 127.485
+      },
+      {
+        "lugar": "Sorong",
+        "pais": "ID",
+        "lat": -0.876,
+        "lon": 131.255
+      },
+      {
+        "lugar": "Manokwari",
+        "pais": "ID",
+        "lat": -0.861,
+        "lon": 134.062
+      },
+      {
+        "lugar": "Biak",
+        "pais": "ID",
+        "lat": -1.18,
+        "lon": 136.082
+      },
+      {
+        "lugar": "Sarmi",
+        "pais": "ID",
+        "lat": -1.868,
+        "lon": 138.753
+      },
+      {
+        "lugar": "Jayapura",
+        "pais": "ID",
+        "lat": -2.533,
+        "lon": 140.718
+      }
+    ],
+    "anio": 2015,
+    "km": 3172,
+    "duenos": [
+      "Telkom Indonesia"
+    ],
+    "fuentes": [
+      "https://www.telkom.co.id",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Jayabaya (Jakarta-Surabaya)",
+    "llegadas": [
+      {
+        "lugar": "Ancol, Jakarta",
+        "pais": "ID",
+        "lat": -6.122,
+        "lon": 106.845
+      },
+      {
+        "lugar": "Cirebon",
+        "pais": "ID",
+        "lat": -6.706,
+        "lon": 108.557
+      },
+      {
+        "lugar": "Semarang",
+        "pais": "ID",
+        "lat": -6.953,
+        "lon": 110.421
+      },
+      {
+        "lugar": "Surabaya",
+        "pais": "ID",
+        "lat": -7.199,
+        "lon": 112.738
+      }
+    ],
+    "anio": 2018,
+    "km": 826,
+    "duenos": [
+      "Moratelindo"
+    ],
+    "fuentes": [
+      "https://www.moratelindo.co.id",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Converge Domestic Submarine Cable Network (CDSCN)",
+    "llegadas": [
+      {
+        "lugar": "Batangas City",
+        "pais": "PH",
+        "lat": 13.756,
+        "lon": 121.058
+      },
+      {
+        "lugar": "Roxas City",
+        "pais": "PH",
+        "lat": 11.585,
+        "lon": 122.751
+      },
+      {
+        "lugar": "Bacolod",
+        "pais": "PH",
+        "lat": 10.677,
+        "lon": 122.951
+      },
+      {
+        "lugar": "Talisay, Cebu",
+        "pais": "PH",
+        "lat": 10.245,
+        "lon": 123.849
+      },
+      {
+        "lugar": "Tagbilaran, Bohol",
+        "pais": "PH",
+        "lat": 9.648,
+        "lon": 123.855
+      },
+      {
+        "lugar": "Ormoc, Leyte",
+        "pais": "PH",
+        "lat": 11.006,
+        "lon": 124.607
+      },
+      {
+        "lugar": "Cagayan de Oro",
+        "pais": "PH",
+        "lat": 8.481,
+        "lon": 124.647
+      }
+    ],
+    "anio": 2021,
+    "km": 1800,
+    "duenos": [
+      "Converge ICT Solutions"
+    ],
+    "fuentes": [
+      "https://www.convergeict.com",
+      "https://www.submarinenetworks.com"
+    ]
+  },
+  {
+    "nombre": "Maldives Sri Lanka Cable (MSC)",
+    "llegadas": [
+      {
+        "lugar": "Hulhumalé",
+        "pais": "MV",
+        "lat": 4.212,
+        "lon": 73.541
+      },
+      {
+        "lugar": "Mount Lavinia",
+        "pais": "LK",
+        "lat": 6.83,
+        "lon": 79.863
+      }
+    ],
+    "anio": 2021,
+    "km": 840,
+    "duenos": [
+      "Ooredoo Maldives",
+      "Dhiraagu",
+      "Dialog Axiata"
+    ],
+    "fuentes": [
+      "https://www.dhiraagu.com.mv",
+      "https://www.ooredoo.mv",
+      "https://www.dialog.lk",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "WARF Submarine Cable",
+    "llegadas": [
+      {
+        "lugar": "Thiruvananthapuram",
+        "pais": "IN",
+        "lat": 8.487,
+        "lon": 76.952
+      },
+      {
+        "lugar": "Kulhudhuffushi",
+        "pais": "MV",
+        "lat": 6.622,
+        "lon": 73.07
+      },
+      {
+        "lugar": "Hulhumalé",
+        "pais": "MV",
+        "lat": 4.212,
+        "lon": 73.541
+      }
+    ],
+    "anio": 2007,
+    "km": 1850,
+    "duenos": [
+      "Ooredoo Maldives",
+      "Global Cloud Xchange (GCX)",
+      "Focus Infocom"
+    ],
+    "fuentes": [
+      "https://www.ooredoo.mv",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Dhiraagu Submarine Cable Network",
+    "llegadas": [
+      {
+        "lugar": "Kulhudhuffushi",
+        "pais": "MV",
+        "lat": 6.622,
+        "lon": 73.07
+      },
+      {
+        "lugar": "Eydhafushi",
+        "pais": "MV",
+        "lat": 5.103,
+        "lon": 73.07
+      },
+      {
+        "lugar": "Hulhumalé",
+        "pais": "MV",
+        "lat": 4.212,
+        "lon": 73.541
+      },
+      {
+        "lugar": "Dhangethi",
+        "pais": "MV",
+        "lat": 3.606,
+        "lon": 72.955
+      },
+      {
+        "lugar": "Gan",
+        "pais": "MV",
+        "lat": 1.916,
+        "lon": 73.543
+      },
+      {
+        "lugar": "Gadhdhoo",
+        "pais": "MV",
+        "lat": 0.289,
+        "lon": 73.456
+      },
+      {
+        "lugar": "Fuvahmulah",
+        "pais": "MV",
+        "lat": -0.298,
+        "lon": 73.424
+      },
+      {
+        "lugar": "Hithadhoo",
+        "pais": "MV",
+        "lat": -0.606,
+        "lon": 73.089
+      }
+    ],
+    "anio": 2012,
+    "km": 1253,
+    "duenos": [
+      "Dhiraagu"
+    ],
+    "fuentes": [
+      "https://www.dhiraagu.com.mv",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Ooredoo Maldives Nationwide Submarine Cable",
+    "llegadas": [
+      {
+        "lugar": "Kulhudhuffushi",
+        "pais": "MV",
+        "lat": 6.622,
+        "lon": 73.07
+      },
+      {
+        "lugar": "Eydhafushi",
+        "pais": "MV",
+        "lat": 5.103,
+        "lon": 73.07
+      },
+      {
+        "lugar": "Hulhumalé",
+        "pais": "MV",
+        "lat": 4.212,
+        "lon": 73.541
+      },
+      {
+        "lugar": "Muli",
+        "pais": "MV",
+        "lat": 2.918,
+        "lon": 73.581
+      },
+      {
+        "lugar": "Thinadhoo",
+        "pais": "MV",
+        "lat": 0.531,
+        "lon": 72.997
+      },
+      {
+        "lugar": "Hithadhoo",
+        "pais": "MV",
+        "lat": -0.606,
+        "lon": 73.089
+      }
+    ],
+    "anio": 2017,
+    "km": 1200,
+    "duenos": [
+      "Ooredoo Maldives"
+    ],
+    "fuentes": [
+      "https://www.ooredoo.mv",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Okinawa Cellular Cable",
+    "llegadas": [
+      {
+        "lugar": "Minamikyushu, Kagoshima",
+        "pais": "JP",
+        "lat": 31.258,
+        "lon": 130.435
+      },
+      {
+        "lugar": "Nago, Okinawa",
+        "pais": "JP",
+        "lat": 26.591,
+        "lon": 127.977
+      }
+    ],
+    "anio": 2020,
+    "km": 760,
+    "duenos": [
+      "KDDI",
+      "Okinawa Cellular Telephone"
+    ],
+    "fuentes": [
+      "https://www.kddi.com",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Saudi Arabia-Sudan-2 (SAS-2)",
+    "llegadas": [
+      {
+        "lugar": "Jeddah",
+        "pais": "SA",
+        "lat": 21.485,
+        "lon": 39.192
+      },
+      {
+        "lugar": "Port Sudan",
+        "pais": "SD",
+        "lat": 19.615,
+        "lon": 37.216
+      }
+    ],
+    "anio": 2011,
+    "km": 331,
+    "duenos": [
+      "stc",
+      "Sudatel"
+    ],
+    "fuentes": [
+      "https://www.stc.com.sa",
+      "https://www.sudatel.sd",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Qatar-U.A.E. Submarine Cable System",
+    "llegadas": [
+      {
+        "lugar": "Doha",
+        "pais": "QA",
+        "lat": 25.285,
+        "lon": 51.531
+      },
+      {
+        "lugar": "Halul Island",
+        "pais": "QA",
+        "lat": 25.674,
+        "lon": 52.411
+      },
+      {
+        "lugar": "Das Island",
+        "pais": "AE",
+        "lat": 25.151,
+        "lon": 52.874
+      },
+      {
+        "lugar": "Abu Dhabi",
+        "pais": "AE",
+        "lat": 24.453,
+        "lon": 54.377
+      }
+    ],
+    "anio": 2004,
+    "km": 400,
+    "duenos": [
+      "Ooredoo",
+      "e& (Etisalat)"
+    ],
+    "fuentes": [
+      "https://www.ooredoo.qa",
+      "https://www.eand.com",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Kuwait-Iran",
+    "llegadas": [
+      {
+        "lugar": "Kuwait City",
+        "pais": "KW",
+        "lat": 29.375,
+        "lon": 47.977
+      },
+      {
+        "lugar": "Ganaveh",
+        "pais": "IR",
+        "lat": 29.579,
+        "lon": 50.517
+      }
+    ],
+    "anio": 1998,
+    "km": 315,
+    "duenos": [
+      "Ministry of Communications (Kuwait)",
+      "Telecommunication Infrastructure Company (TIC)"
+    ],
+    "fuentes": [
+      "https://www.tic.ir",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "U.A.E.-Iran",
+    "llegadas": [
+      {
+        "lugar": "Fujairah",
+        "pais": "AE",
+        "lat": 25.128,
+        "lon": 56.326
+      },
+      {
+        "lugar": "Jask",
+        "pais": "IR",
+        "lat": 25.643,
+        "lon": 57.773
+      }
+    ],
+    "anio": 1992,
+    "km": 170,
+    "duenos": [
+      "e& (Etisalat)",
+      "Telecommunication Infrastructure Company (TIC)"
+    ],
+    "fuentes": [
+      "https://www.tic.ir",
+      "https://www.eand.com",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Pishgaman Oman Iran (POI)",
+    "llegadas": [
+      {
+        "lugar": "Jask",
+        "pais": "IR",
+        "lat": 25.643,
+        "lon": 57.773
+      },
+      {
+        "lugar": "Barka",
+        "pais": "OM",
+        "lat": 23.708,
+        "lon": 57.886
+      }
+    ],
+    "anio": 2012,
+    "km": 200,
+    "duenos": [
+      "Pishgaman Kavir"
+    ],
+    "fuentes": [
+      "https://www.pishgaman.net",
+      "https://www.submarinecablemap.com"
+    ]
+  },
+  {
+    "nombre": "Turcyos-1",
+    "llegadas": [
+      {
+        "lugar": "Mersin",
+        "pais": "TR",
+        "lat": 36.795,
+        "lon": 34.618
+      },
+      {
+        "lugar": "Kyrenia",
+        "pais": "CY",
+        "lat": 35.341,
+        "lon": 33.319
+      }
+    ],
+    "anio": 1993,
+    "km": 110,
+    "duenos": [
+      "Türk Telekom"
+    ],
+    "fuentes": [
+      "https://www.turktelekom.com.tr",
+      "https://www.submarinecablemap.com"
+    ]
+  }
+]

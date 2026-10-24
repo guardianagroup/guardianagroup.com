@@ -1,0 +1,27 @@
+[
+  {
+    "nombre": "Okinawa Cellular Cable",
+    "llegadas": [
+      {
+        "lugar": "Hioki",
+        "pais": "JP",
+        "lat": 31.634,
+        "lon": 130.403
+      },
+      {
+        "lugar": "Nago",
+        "pais": "JP",
+        "lat": 26.591,
+        "lon": 127.977
+      }
+    ],
+    "anio": 2020,
+    "km": 760,
+    "duenos": [
+      "Okinawa Cellular Telephone Company"
+    ],
+    "fuentes": [
+      "https://okinawa-cellular.jp/"
+    ]
+  }
+]

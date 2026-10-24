@@ -1,0 +1,518 @@
+[
+  {
+    "nombre": "Scylla",
+    "llegadas": [
+      {
+        "lugar": "Lowestoft",
+        "pais": "GB",
+        "lat": 52.4752,
+        "lon": 1.7501
+      },
+      {
+        "lugar": "IJmuiden",
+        "pais": "NL",
+        "lat": 52.4584,
+        "lon": 4.6108
+      }
+    ],
+    "anio": 2021,
+    "km": 205,
+    "duenos": [
+      "euNetworks"
+    ],
+    "fuentes": [
+      "https://eunetworks.com"
+    ]
+  },
+  {
+    "nombre": "Circe South",
+    "llegadas": [
+      {
+        "lugar": "Pevensey Bay",
+        "pais": "GB",
+        "lat": 50.8164,
+        "lon": 0.3442
+      },
+      {
+        "lugar": "Cayeux-sur-Mer",
+        "pais": "FR",
+        "lat": 50.1811,
+        "lon": 1.4944
+      }
+    ],
+    "anio": 1999,
+    "km": 122,
+    "duenos": [
+      "Zayo"
+    ],
+    "fuentes": [
+      "https://www.zayo.com"
+    ]
+  },
+  {
+    "nombre": "Eastern Light Sweden-Finland II",
+    "llegadas": [
+      {
+        "lugar": "Stockholm",
+        "pais": "SE",
+        "lat": 59.3293,
+        "lon": 18.0686
+      },
+      {
+        "lugar": "Mariehamn",
+        "pais": "FI",
+        "lat": 60.0973,
+        "lon": 19.9348
+      },
+      {
+        "lugar": "Hanko",
+        "pais": "FI",
+        "lat": 59.8264,
+        "lon": 22.9681
+      },
+      {
+        "lugar": "Bromarv",
+        "pais": "FI",
+        "lat": 60.0411,
+        "lon": 23.0333
+      },
+      {
+        "lugar": "Helsinki",
+        "pais": "FI",
+        "lat": 60.1699,
+        "lon": 24.9384
+      }
+    ],
+    "anio": 2022,
+    "km": 450,
+    "duenos": [
+      "GlobalConnect"
+    ],
+    "fuentes": [
+      "https://www.globalconnect.se"
+    ]
+  },
+  {
+    "nombre": "Denmark-Germany 2",
+    "llegadas": [
+      {
+        "lugar": "Gedser",
+        "pais": "DK",
+        "lat": 54.5761,
+        "lon": 11.9303
+      },
+      {
+        "lugar": "Warnemünde",
+        "pais": "DE",
+        "lat": 54.1772,
+        "lon": 12.0831
+      }
+    ],
+    "anio": 1995,
+    "km": 47,
+    "duenos": [
+      "Deutsche Telekom",
+      "TDC"
+    ],
+    "fuentes": [
+      "https://www.telekom.com"
+    ]
+  },
+  {
+    "nombre": "Denmark-Norway 6 (DN-6)",
+    "llegadas": [
+      {
+        "lugar": "Hjørring",
+        "pais": "DK",
+        "lat": 57.4592,
+        "lon": 9.9822
+      },
+      {
+        "lugar": "Kristiansand",
+        "pais": "NO",
+        "lat": 58.1467,
+        "lon": 7.9956
+      }
+    ],
+    "anio": 1993,
+    "km": 132,
+    "duenos": [
+      "Telenor",
+      "TDC"
+    ],
+    "fuentes": [
+      "https://www.telenor.com"
+    ]
+  },
+  {
+    "nombre": "Denmark-Sweden 16 (DS-16)",
+    "llegadas": [
+      {
+        "lugar": "Helsingør",
+        "pais": "DK",
+        "lat": 56.0361,
+        "lon": 12.6136
+      },
+      {
+        "lugar": "Helsingborg",
+        "pais": "SE",
+        "lat": 56.0465,
+        "lon": 12.6945
+      }
+    ],
+    "anio": 1991,
+    "km": 6,
+    "duenos": [
+      "Telia",
+      "TDC"
+    ],
+    "fuentes": [
+      "https://www.teliacompany.com"
+    ]
+  },
+  {
+    "nombre": "Denmark-Sweden 18 (DS-18)",
+    "llegadas": [
+      {
+        "lugar": "Frederikshavn",
+        "pais": "DK",
+        "lat": 57.4407,
+        "lon": 10.5366
+      },
+      {
+        "lugar": "Göteborg",
+        "pais": "SE",
+        "lat": 57.7089,
+        "lon": 11.9746
+      }
+    ],
+    "anio": 1996,
+    "km": 100,
+    "duenos": [
+      "Telia",
+      "TDC"
+    ],
+    "fuentes": [
+      "https://www.teliacompany.com"
+    ]
+  },
+  {
+    "nombre": "Pencan-8",
+    "llegadas": [
+      {
+        "lugar": "Conil de la Frontera",
+        "pais": "ES",
+        "lat": 36.2783,
+        "lon": -6.0884
+      },
+      {
+        "lugar": "Candelaria",
+        "pais": "ES",
+        "lat": 28.3544,
+        "lon": -16.3712
+      },
+      {
+        "lugar": "Sardina del Norte",
+        "pais": "ES",
+        "lat": 28.1524,
+        "lon": -15.6961
+      }
+    ],
+    "anio": 2011,
+    "km": 1400,
+    "duenos": [
+      "Telefónica"
+    ],
+    "fuentes": [
+      "https://www.telefonica.com"
+    ]
+  },
+  {
+    "nombre": "Pencan-7",
+    "llegadas": [
+      {
+        "lugar": "Mazagón",
+        "pais": "ES",
+        "lat": 37.1361,
+        "lon": -6.8283
+      },
+      {
+        "lugar": "Las Palmas de Gran Canaria",
+        "pais": "ES",
+        "lat": 28.1235,
+        "lon": -15.4363
+      }
+    ],
+    "anio": 2002,
+    "km": 1397,
+    "duenos": [
+      "Telefónica"
+    ],
+    "fuentes": [
+      "https://www.telefonica.com"
+    ]
+  },
+  {
+    "nombre": "Pencan-6",
+    "llegadas": [
+      {
+        "lugar": "Conil de la Frontera",
+        "pais": "ES",
+        "lat": 36.2783,
+        "lon": -6.0884
+      },
+      {
+        "lugar": "El Médano",
+        "pais": "ES",
+        "lat": 28.0461,
+        "lon": -16.5364
+      },
+      {
+        "lugar": "Las Palmas de Gran Canaria",
+        "pais": "ES",
+        "lat": 28.1235,
+        "lon": -15.4363
+      }
+    ],
+    "anio": 1999,
+    "km": 2018,
+    "duenos": [
+      "Telefónica"
+    ],
+    "fuentes": [
+      "https://www.telefonica.com"
+    ]
+  },
+  {
+    "nombre": "PENBAL-5",
+    "llegadas": [
+      {
+        "lugar": "Valencia",
+        "pais": "ES",
+        "lat": 39.4699,
+        "lon": -0.3763
+      },
+      {
+        "lugar": "Palma de Mallorca",
+        "pais": "ES",
+        "lat": 39.5696,
+        "lon": 2.6502
+      }
+    ],
+    "anio": 1994,
+    "km": 319,
+    "duenos": [
+      "Telefónica"
+    ],
+    "fuentes": [
+      "https://www.telefonica.com"
+    ]
+  },
+  {
+    "nombre": "CAM Ring",
+    "llegadas": [
+      {
+        "lugar": "Carcavelos",
+        "pais": "PT",
+        "lat": 38.6791,
+        "lon": -9.3364
+      },
+      {
+        "lugar": "Ponta Delgada",
+        "pais": "PT",
+        "lat": 37.7412,
+        "lon": -25.6756
+      },
+      {
+        "lugar": "Funchal",
+        "pais": "PT",
+        "lat": 32.6496,
+        "lon": -16.9084
+      },
+      {
+        "lugar": "Sesimbra",
+        "pais": "PT",
+        "lat": 38.4442,
+        "lon": -9.1014
+      }
+    ],
+    "anio": 1999,
+    "km": 3695,
+    "duenos": [
+      "Altice Portugal"
+    ],
+    "fuentes": [
+      "https://www.altice.pt"
+    ]
+  },
+  {
+    "nombre": "Melita 1",
+    "llegadas": [
+      {
+        "lugar": "Baħar iċ-Ċagħaq",
+        "pais": "MT",
+        "lat": 35.9383,
+        "lon": 14.4533
+      },
+      {
+        "lugar": "Pozzallo",
+        "pais": "IT",
+        "lat": 36.7303,
+        "lon": 14.8492
+      }
+    ],
+    "anio": 2009,
+    "km": 100,
+    "duenos": [
+      "Melita"
+    ],
+    "fuentes": [
+      "https://www.melita.com"
+    ]
+  },
+  {
+    "nombre": "Italy-Greece 1 (IG-1)",
+    "llegadas": [
+      {
+        "lugar": "Otranto",
+        "pais": "IT",
+        "lat": 40.1444,
+        "lon": 18.4914
+      },
+      {
+        "lugar": "Corfú",
+        "pais": "GR",
+        "lat": 39.6243,
+        "lon": 19.9217
+      }
+    ],
+    "anio": 1995,
+    "km": 151,
+    "duenos": [
+      "OTE",
+      "Telecom Italia Sparkle"
+    ],
+    "fuentes": [
+      "https://www.tisparkle.com"
+    ]
+  },
+  {
+    "nombre": "Silphium",
+    "llegadas": [
+      {
+        "lugar": "Chania",
+        "pais": "GR",
+        "lat": 35.5138,
+        "lon": 24.018
+      },
+      {
+        "lugar": "Derna",
+        "pais": "LY",
+        "lat": 32.767,
+        "lon": 22.6367
+      }
+    ],
+    "anio": 2012,
+    "km": 425,
+    "duenos": [
+      "Libyan International Telecommunication Company (LITC)"
+    ],
+    "fuentes": [
+      "https://www.litc.ly"
+    ]
+  },
+  {
+    "nombre": "Aphrodite 2",
+    "llegadas": [
+      {
+        "lugar": "Chania",
+        "pais": "GR",
+        "lat": 35.5138,
+        "lon": 24.018
+      },
+      {
+        "lugar": "Yeroskipou",
+        "pais": "CY",
+        "lat": 34.7601,
+        "lon": 32.4572
+      }
+    ],
+    "anio": 1994,
+    "km": 867,
+    "duenos": [
+      "CYTA",
+      "OTE"
+    ],
+    "fuentes": [
+      "https://www.cyta.com.cy"
+    ]
+  },
+  {
+    "nombre": "Turcyos-1",
+    "llegadas": [
+      {
+        "lugar": "Kyrenia",
+        "pais": "CY",
+        "lat": 35.3414,
+        "lon": 33.3197
+      },
+      {
+        "lugar": "Mersin",
+        "pais": "TR",
+        "lat": 36.8121,
+        "lon": 34.6415
+      }
+    ],
+    "anio": 1993,
+    "km": 105,
+    "duenos": [
+      "Türk Telekom"
+    ],
+    "fuentes": [
+      "https://www.turktelekom.com.tr"
+    ]
+  },
+  {
+    "nombre": "BT Highlands and Islands Submarine Cable System",
+    "llegadas": [
+      {
+        "lugar": "Keiss",
+        "pais": "GB",
+        "lat": 58.5322,
+        "lon": -3.1181
+      },
+      {
+        "lugar": "Kirkwall",
+        "pais": "GB",
+        "lat": 58.981,
+        "lon": -2.96
+      },
+      {
+        "lugar": "Lerwick",
+        "pais": "GB",
+        "lat": 60.155,
+        "lon": -1.145
+      },
+      {
+        "lugar": "Ullapool",
+        "pais": "GB",
+        "lat": 57.895,
+        "lon": -5.161
+      },
+      {
+        "lugar": "Stornoway",
+        "pais": "GB",
+        "lat": 58.209,
+        "lon": -6.388
+      }
+    ],
+    "anio": 2014,
+    "km": 400,
+    "duenos": [
+      "BT"
+    ],
+    "fuentes": [
+      "https://www.bt.com"
+    ]
+  }
+]
