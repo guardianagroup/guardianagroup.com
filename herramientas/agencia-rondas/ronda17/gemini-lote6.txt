@@ -1,0 +1,239 @@
+[
+{
+"nombre": "National Fibre Optic Backbone - Corredor Norte y Noroeste",
+"operador": "KTRN",
+"pais": "RW",
+"ciudades": ["Kabale", "Byumba", "Kigali", "Ruhengeri", "Gisenyi", "Goma"],
+"estado": "en servicio","fuente": "RURA / KT Rwanda Networks (KTRN) / ITU Interactive Transmission Map"
+},
+{
+"nombre": "National Fibre Optic Backbone - Corredor Sur y Suroeste",
+"operador": "KTRN",
+"pais": "RW",
+"ciudades": ["Kigali", "Gitarama", "Ruhango", "Nyanza", "Butare", "Gikongoro", "Cyangugu", "Bukavu"],
+"estado": "en servicio","fuente": "RURA / KT Rwanda Networks (KTRN) / ITU Interactive Transmission Map"
+},
+{
+"nombre": "National Fibre Optic Backbone - Corredor Este y Noreste",
+"operador": "KTRN",
+"pais": "RW",
+"ciudades": ["Kigali", "Rwamagana", "Kayonza", "Kibungo", "Rusumo"],
+"estado": "en servicio",
+"fuente": "RURA / KT Rwanda Networks (KTRN) / World Bank Regional Communications Infrastructure Program (RCIP)"
+},
+{
+"nombre": "National Fibre Optic Backbone - Ramal Kagitumba",
+"operador": "KTRN",
+"pais": "RW",
+"ciudades": ["Kayonza", "Gatsibo", "Nyagatare"],
+"estado": "en servicio",
+"fuente": "RURA / KT Rwanda Networks (KTRN)"
+},
+{
+"nombre": "Liquid East Africa Fibre Ring - Tramo Ruanda",
+"operador": "Liquid",
+"pais": "RW",
+"ciudades": ["Kabale", "Byumba", "Kigali", "Gitarama", "Butare", "Ngozi"],
+"estado": "en servicio",
+"fuente": "Liquid Intelligent Technologies Network Map"
+},
+{
+"nombre": "MTL National Fibre Backbone",
+"operador": "MTL",
+"pais": "MW","ciudades": ["Mzuzu", "Kasungu", "Lilongwe", "Dedza", "Ntcheu", "Balaka", "Zomba", "Blantyre", "Mulanje"],
+"estado": "en servicio",
+"fuente": "Malawi Telecommunications Limited (MTL) / MACRA / World Bank Digital Malawi Project"
+},
+{
+"nombre": "ESCOM Optical Fibre Backbone (OPGW)","operador": "ESCOM",
+"pais": "MW","ciudades": ["Karonga", "Mzuzu", "Kasungu", "Salima", "Lilongwe", "Zomba", "Blantyre", "Tete"],
+"estado": "en servicio",
+"fuente": "Electricity Supply Corporation of Malawi (ESCOM) / World Bank Digital Malawi Project"
+},
+{
+"nombre": "SimbaNET National & Cross-Border Fibre Backbone","operador": "SimbaNET",
+"pais": "MW","ciudades": ["Mbeya", "Karonga", "Mzuzu", "Kasungu", "Lilongwe", "Mchinji", "Chipata"],
+"estado": "en servicio",
+"fuente": "World Bank Public Private Partnership Commission - Digital Malawi Project (DMP)"
+},
+{
+"nombre": "Airtel Malawi National Fibre Backbone",
+"operador": "Airtel",
+"pais": "MW","ciudades": ["Salima", "Lilongwe", "Dedza", "Ntcheu", "Balaka", "Blantyre", "Mangochi"],
+"estado": "en servicio",
+"fuente": "MACRA / Airtel Malawi Network Reports"
+},
+{
+"nombre": "TNM Cross-Border & National Fibre Route","operador": "TNM",
+"pais": "MW","ciudades": ["Chipata", "Mchinji", "Lilongwe", "Blantyre", "Mulanje", "Milange"],
+"estado": "en servicio","fuente": "Telekom Networks Malawi (TNM) / MACRA"
+},
+{
+"nombre": "ETL National Fibre Backbone - Corredor Norte y Sur",
+"operador": "Econet",
+"pais": "LS","ciudades": ["Butha-Buthe", "Leribe", "Maputsoe", "Teyateyaneng", "Maseru", "Mafeteng", "Mohale's Hoek", "Quthing"],
+"estado": "en servicio","fuente": "Lesotho Communications Authority (LCA) / ITU Interactive Transmission Map"
+},
+{
+"nombre": "LEC Optical Ground Wire Backbone (OPGW)",
+"operador": "LEC",
+"pais": "LS","ciudades": ["Ladybrand", "Maseru", "Roma", "Thaba-Tseka", "Qacha's Nek"],
+"estado": "en servicio","fuente": "Lesotho Electricity Company Communications (LECC) / AfDB LEMOFI ESIA Report"
+},
+{
+"nombre": "EPTC National Fibre Optic Backbone - Ruta Oeste-Sur","operador": "EPTC",
+"pais": "SZ","ciudades": ["Ermelo", "Mbabane", "Lobamba", "Manzini", "Nhlangano", "Lavumisa"],
+"estado": "en servicio","fuente": "Eswatini Posts and Telecommunications Corporation (EPTC) / ESCCOM / World Bank Digital Economy Diagnostic"
+},
+{
+"nombre": "EPTC National Fibre Optic Backbone - Ruta Norte-Este","operador": "EPTC",
+"pais": "SZ","ciudades": ["Piggs Peak", "Mbabane", "Manzini", "Siteki", "Big Bend", "Maputo"],
+"estado": "en servicio","fuente": "Eswatini Posts and Telecommunications Corporation (EPTC) / ESCCOM UASF"
+},
+{
+"nombre": "Red Centroamericana de Telecomunicaciones (REDCA / SIEPAC) - Tramo Guatemala","operador": "REDCA",
+"pais": "GT",
+"ciudades": ["Tapachula", "Coatepeque", "Quetzaltenango", "Sololá", "Chimaltenango", "Escuintla", "Moyuta", "Ahuachapán"],
+"estado": "en servicio","fuente": "Red Centroamericana de Fibras Ópticas (REDCA) / EPR / Banco Interamericano de Desarrollo (BID)"
+},
+{
+"nombre": "Ufinet Guatemala Backbone - Ruta Pacífico y Atlántico",
+"operador": "Ufinet",
+"pais": "GT",
+"ciudades": ["Ciudad Hidalgo", "Mazatenango", "Escuintla", "Guatemala City", "Zacapa", "Puerto Barrios"],
+"estado": "en servicio",
+"fuente": "Ufinet Network Map / Superintendencia de Telecomunicaciones (SIT)"
+},
+{
+"nombre": "Claro Guatemala Red Troncal Nacional",
+"operador": "Claro",
+"pais": "GT",
+"ciudades": ["Quetzaltenango", "Chimaltenango", "Guatemala City", "El Progreso", "Zacapa", "Puerto Barrios"],
+"estado": "en servicio",
+"fuente": "Superintendencia de Telecomunicaciones (SIT) / Claro Guatemala"
+},
+{
+"nombre": "Tigo Guatemala Red Troncal Interurbana",
+"operador": "Tigo",
+"pais": "GT",
+"ciudades": ["Tapachula", "Retalhuleu", "Mazatenango", "Escuintla", "Guatemala City", "Jutiapa", "Santa Ana"],
+"estado": "en servicio",
+"fuente": "Millicom (Tigo) / Superintendencia de Telecomunicaciones (SIT)"
+},
+{
+"nombre": "Red Centroamericana de Telecomunicaciones (REDCA / SIEPAC) - Tramo El Salvador","operador": "REDCA",
+"pais": "SV","ciudades": ["Moyuta", "Ahuachapán", "Nejapa", "San Vicente", "San Miguel", "La Unión", "Nacaome"],
+"estado": "en servicio","fuente": "Red Centroamericana de Fibras Ópticas (REDCA) / Ente Operador Regional (EOR)"
+},
+{
+"nombre": "Ufinet El Salvador Red Troncal",
+"operador": "Ufinet",
+"pais": "SV","ciudades": ["Ahuachapán", "Santa Ana", "San Salvador", "Cojutepeque", "San Vicente", "Usulután", "San Miguel", "La Unión"],
+"estado": "en servicio",
+"fuente": "Ufinet Network Map / SIGET"
+},
+{
+"nombre": "Claro El Salvador Red Troncal Nacional",
+"operador": "Claro",
+"pais": "SV",
+"ciudades": ["Santa Ana", "Sonsonate", "Santa Tecla", "San Salvador", "Zacatecoluca", "San Miguel", "La Unión"],
+"estado": "en servicio","fuente": "SIGET / Claro El Salvador"
+},
+{
+"nombre": "Red Centroamericana de Telecomunicaciones (REDCA / SIEPAC) - Tramo Honduras","operador": "REDCA",
+"pais": "HN",
+"ciudades": ["San Miguel", "Nacaome", "San Lorenzo", "Tegucigalpa", "Choluteca", "Somoto"],
+"estado": "en servicio","fuente": "Red Centroamericana de Fibras Ópticas (REDCA) / ENEE / Ente Operador Regional (EOR)"
+},
+{
+"nombre": "Hondutel Red Troncal Nacional - Corredor Central y Norte",
+"operador": "Hondutel",
+"pais": "HN",
+"ciudades": ["Choluteca", "San Lorenzo", "Tegucigalpa", "Comayagua", "Siguatepeque", "San Pedro Sula", "Puerto Cortés"],
+"estado": "en servicio",
+"fuente": "Hondutel / CONATEL / Banco Mundial"
+},
+{
+"nombre": "Hondutel Red Troncal Nacional - Corredor Atlántico",
+"operador": "Hondutel",
+"pais": "HN",
+"ciudades": ["San Pedro Sula", "El Progreso", "Tela", "La Ceiba", "Tocoa"],
+"estado": "en servicio",
+"fuente": "Hondutel / CONATEL"
+},
+{
+"nombre": "Tigo (Navega) Red Interurbana de Fibra Óptica",
+"operador": "Tigo",
+"pais": "HN",
+"ciudades": ["Puerto Cortés", "Choloma", "San Pedro Sula", "Villanueva", "Siguatepeque", "Comayagua", "Tegucigalpa", "San Lorenzo"],
+"estado": "en servicio",
+"fuente": "Tigo Business (Navega) / CONATEL"
+},
+{
+"nombre": "Red Centroamericana de Telecomunicaciones (REDCA / SIEPAC) - Tramo Costa Rica","operador": "REDCA",
+"pais": "CR",
+"ciudades": ["Rivas", "Liberia", "Cañas", "Puntarenas", "Alajuela", "San José", "Cartago", "San Isidro", "Golfito", "David"],
+"estado": "en servicio","fuente": "Red Centroamericana de Fibras Ópticas (REDCA) / Grupo ICE / Proyecto Mesoamérica"
+},
+{
+"nombre": "ICE Red Nacional de Transporte de Fibra Óptica - Corredor Frontera a Frontera",
+"operador": "ICE",
+"pais": "CR",
+"ciudades": ["Liberia", "Bagaces", "Cañas", "Esparza", "Alajuela", "Heredia", "San José", "Cartago", "Buenos Aires", "Neily"],
+"estado": "en servicio",
+"fuente": "Grupo ICE Informes Financieros y de Infraestructura / SUTEL"
+},
+{
+"nombre": "ICE Red Nacional de Transporte de Fibra Óptica - Corredor Interoceánico",
+"operador": "ICE",
+"pais": "CR",
+"ciudades": ["Limón", "Siquirres", "Turrialba", "Cartago", "San José", "Puntarenas", "Quepos"],
+"estado": "en servicio",
+"fuente": "Grupo ICE / SUTEL"
+},
+{
+"nombre": "Ufinet Costa Rica Red Troncal",
+"operador": "Ufinet",
+"pais": "CR",
+"ciudades": ["Liberia", "Puntarenas", "Alajuela", "San José", "Cartago", "Limón"],
+"estado": "en servicio",
+"fuente": "Ufinet Network Map / SUTEL"
+},
+{
+"nombre": "Red Centroamericana de Telecomunicaciones (REDCA / SIEPAC) - Tramo Panamá","operador": "REDCA",
+"pais": "PA",
+"ciudades": ["Golfito", "David", "Santiago", "Aguadulce", "Penonomé", "La Chorrera", "Panama City"],
+"estado": "en servicio","fuente": "Red Centroamericana de Fibras Ópticas (REDCA) / ETESA"
+},
+{
+"nombre": "ETESA Red Troncal de Fibra Óptica (OPGW)",
+"operador": "ETESA",
+"pais": "PA",
+"ciudades": ["Changuinola", "David", "Santiago", "Penonomé", "La Chorrera", "Panama City", "Colón"],
+"estado": "en servicio","fuente": "Empresa de Transmisión Eléctrica S.A. (ETESA) / ASEP"
+},
+{
+"nombre": "Ufinet Panamá Red Troncal Nacional e Interoceánica",
+"operador": "Ufinet",
+"pais": "PA",
+"ciudades": ["David", "Santiago", "Chitré", "Aguadulce", "Penonomé", "La Chorrera", "Panama City", "Colón"],
+"estado": "en servicio",
+"fuente": "Ufinet Network Map / ASEP"
+},
+{
+"nombre": "C&W (+Móvil) Red Troncal Nacional",
+"operador": "+Móvil",
+"pais": "PA",
+"ciudades": ["Colón", "Panama City", "La Chorrera", "Penonomé", "Aguadulce", "Santiago", "David"],
+"estado": "en servicio",
+"fuente": "Cable & Wireless Panamá (+Móvil) / ASEP"
+},
+{
+"nombre": "Tigo Panamá Red Troncal de Fibra Óptica",
+"operador": "Tigo",
+"pais": "PA",
+"ciudades": ["Colón", "Panama City", "La Chorrera", "Penonomé", "Chitré", "Las Tablas", "Santiago", "David"],
+"estado": "en servicio",
+"fuente": "Tigo Panamá (Millicom) / ASEP"
+}
+]

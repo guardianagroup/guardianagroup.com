@@ -1,0 +1,230 @@
+[
+{
+"nombre": "Sierra Leone National Fiber Optic Backbone - Northern Corridor","operador": "Leonecom","pais": "SL",
+"ciudades": [
+"Freetown","Lunsar","Port Loko","Kambia","Pamelap"
+],
+"estado": "en servicio","fuente": "Leonecom Coverage Map (leonecom.sl), Ministry of Communication, Technology and Innovation (Sierra Leone National Broadband Strategy 2023-2028) y World Bank WARCIP"},
+{
+"nombre": "Sierra Leone National Fiber Optic Backbone - Southern and Eastern Corridor","operador": "Leonecom",
+"pais": "SL",
+"ciudades": [
+"Freetown",
+"Moyamba","Bo","Kenema","Zimmi",
+"Bo Waterside"
+],
+"estado": "en servicio","fuente": "Leonecom Coverage Map (leonecom.sl), Ministry of Communication, Technology and Innovation (Sierra Leone National Broadband Strategy 2023-2028) y World Bank WARCIP"
+},
+{
+"nombre": "Sierra Leone National Fiber Optic Backbone - Central and Kono Ring",
+"operador": "Leonecom",
+"pais": "SL",
+"ciudades": [
+"Freetown","Lunsar","Makeni",
+"Magburaka",
+"Koidu",
+"Kailahun","Kenema","Bo"
+],
+"estado": "en servicio","fuente": "Leonecom Coverage Map (leonecom.sl) y Ministry of Communication, Technology and Innovation (Sierra Leone National Broadband Strategy 2023-2028)"
+},
+{
+"nombre": "Sierra Leone National Fiber Optic Backbone - Northern Spur",
+"operador": "Leonecom",
+"pais": "SL",
+"ciudades": [
+"Makeni",
+"Binkolo",
+"Kabala"
+],
+"estado": "en servicio","fuente": "Leonecom (leonecom.sl) y National Communications Authority (NatCA)"
+},
+{
+"nombre": "CLSG Regional Transmission Line OPGW - Sierra Leone Segment","operador": "TRANSCO CLSG",
+"pais": "SL",
+"ciudades": [
+"Zimmi","Kenema",
+"Bumbuna","Makeni",
+"Kamakwie"
+],
+"estado": "en servicio","fuente": "TRANSCO CLSG (transcoclsg.org), African Development Bank (AfDB) y World Bank WAPP-CLSG Project Reports"
+},
+{
+"nombre": "Liberia Open-Access National Fiber Backbone (Monrovia - Côte d'Ivoire Border)","operador": "CSquared",
+"pais": "LR",
+"ciudades": [
+"Monrovia",
+"Kakata",
+"Totota",
+"Gbarnga","Ganta",
+"Sanniquellie",
+"Loguatuo",
+"Danane"
+],
+"estado": "en servicio","fuente": "CSquared Liberia, Orange Liberia, Liberia Telecommunications Authority (LTA) y USAID"
+},
+{
+"nombre": "CLSG Regional Transmission Line OPGW - Liberia Segment","operador": "TRANSCO CLSG",
+"pais": "LR",
+"ciudades": [
+"Bo Waterside",
+"Tubmanburg","Monrovia",
+"Buchanan","Ganta",
+"Yekepa",
+"Man"
+],"estado": "en servicio","fuente": "TRANSCO CLSG (transcoclsg.org), Liberia Electricity Corporation (LEC) y World Bank"
+},
+{
+"nombre": "ECOWAN / National Broadband Network - South Bank Trunk","operador": "GAMTEL",
+"pais": "GM",
+"ciudades": [
+"Banjul",
+"Serekunda","Brikama",
+"Bwiam",
+"Soma",
+"Janjanbureh",
+"Basse Santa Su",
+"Fatoto"
+],"estado": "en servicio","fuente": "GAMTEL, Public Utilities Regulatory Authority (PURA), Ministry of Communications and Digital Economy (The Gambia National Broadband Policy) y National Audit Office"
+},
+{
+"nombre": "ECOWAN / National Broadband Network - North Bank Trunk","operador": "GAMTEL",
+"pais": "GM",
+"ciudades": [
+"Barra",
+"Kerewan","Farafenni",
+"Kaur",
+"Janjanbureh",
+"Basse Santa Su"
+],"estado": "en servicio","fuente": "GAMTEL, Public Utilities Regulatory Authority (PURA), ECOWAS (ECOWAN) y National Audit Office (Performance Audit Report on GAMTEL)"
+},
+{
+"nombre": "Red Nacional de Fibra Óptica (RNFO) - Troncal Central Continental","operador": "GITGE",
+"pais": "GQ",
+"ciudades": [
+"Bata",
+"Niefang","Evinayong","Bicurga",
+"Ciudad de la Paz","Mongomo","Ebebiyin"
+],"estado": "en servicio","fuente": "GITGE (gitge.com) y World Bank (Equatorial Guinea Digital Economy Diagnostic, Report P179634)"
+},
+{
+"nombre": "Red Nacional de Fibra Óptica (RNFO) - Anillo Norte Continental","operador": "GITGE",
+"pais": "GQ",
+"ciudades": [
+"Bata",
+"Niefang",
+"Micomeseng","Ebebiyin","Mongomo",
+"Anisok",
+"Niefang"
+],"estado": "en servicio","fuente": "GITGE (gitge.com), ORTEL y World Bank (Equatorial Guinea Digital Economy Diagnostic)"},
+{
+"nombre": "Red Nacional de Fibra Óptica (RNFO) - Anillo Sur Continental","operador": "GITGE",
+"pais": "GQ",
+"ciudades": [
+"Bata",
+"Mbini",
+"Cogo",
+"Acurenam","Evinayong",
+"Nsork","Mongomo"
+],"estado": "en servicio","fuente": "GITGE (gitge.com), ORTEL y African Development Bank (AfDB)"
+},
+{
+"nombre": "Central African Backbone (CAB-RCA) - Corridor Bangui - Cameroon",
+"operador": "ACDI",
+"pais": "CF",
+"ciudades": [
+"Bangui",
+"Boali",
+"Bossembele",
+"Yaloke",
+"Baoro","Berberati","Gamboula","Kentzou"
+],"estado": "en servicio","fuente": "Ministère de l'Économie Numérique, des Postes et des Télécommunications (RCA), ARCEP RCA, African Development Bank (AfDB) y World Bank (CAB Project)"
+},
+{
+"nombre": "Central African Backbone (CAB-RCA) - Corridor Berbérati - Congo",
+"operador": "ACDI",
+"pais": "CF",
+"ciudades": [
+"Berberati",
+"Nola",
+"Salo","Bomassa",
+"Pokola"
+],"estado": "en servicio",
+"fuente": "Ministère de l'Économie Numérique, des Postes et des Télécommunications (RCA), African Development Bank (AfDB) y European Union"
+},
+{
+"nombre": "Djibouti - Ethiopia Southern Terrestrial Corridor (Road & Railway OPGW Ring)","operador": "Djibouti Telecom",
+"pais": "DJ",
+"ciudades": [
+"Djibouti",
+"Arta",
+"Ali Sabieh",
+"Dewele",
+"Dire Dawa"
+],"estado": "en servicio","fuente": "Djibouti Telecom (international.djiboutitelecom.dj), Ethio Telecom y World Bank (Missing Broadband Links in the Horn of Africa Region)"
+},
+{
+"nombre": "Djibouti - Ethiopia Western Terrestrial Corridor (Galafi Route)","operador": "Djibouti Telecom",
+"pais": "DJ",
+"ciudades": [
+"Djibouti",
+"Arta",
+"Dikhil",
+"Galafi",
+"Semera"
+],"estado": "en servicio","fuente": "Djibouti Telecom (international.djiboutitelecom.dj), ITU Interactive Transmission Map y World Bank (Missing Broadband Links in the Horn of Africa Region)"
+},
+{
+"nombre": "Djibouti Northern Terrestrial Fiber Route","operador": "Djibouti Telecom",
+"pais": "DJ",
+"ciudades": [
+"Djibouti",
+"Arta",
+"Tadjourah",
+"Obock"
+],"estado": "en servicio","fuente": "Djibouti Telecom, ITU Interactive Transmission Map y World Bank (Missing Broadband Links in the Horn of Africa Region)"
+},
+{
+"nombre": "Somaliland Terrestrial Fiber Optic Backbone - Western Corridor",
+"operador": "Somcable",
+"pais": "SO",
+"ciudades": [
+"Loyada",
+"Lawyacado",
+"Borama",
+"Gebiley","Hargeisa",
+"Tog Wajaale",
+"Jijiga"
+],"estado": "en servicio","fuente": "Somcable, Telesom y World Bank (Missing Broadband Links in the Horn of Africa Region)"
+},
+{
+"nombre": "Somaliland Terrestrial Fiber Optic Backbone - Berbera - Eastern Corridor",
+"operador": "Somcable",
+"pais": "SO",
+"ciudades": [
+"Berbera","Hargeisa",
+"Burao",
+"Las Anod"
+],"estado": "en servicio","fuente": "Somcable, Telesom y World Bank (Missing Broadband Links in the Horn of Africa Region)"
+},
+{
+"nombre": "Puntland North-South Highway Terrestrial Fiber Backbone",
+"operador": "Golis",
+"pais": "SO",
+"ciudades": [
+"Bosaso",
+"Qardho","Garowe",
+"Galkayo"
+],"estado": "en servicio","fuente": "Golis Telecom Somalia, National Communications Authority (NCA) y World Bank (Missing Broadband Links in the Horn of Africa Region)"
+},
+{
+"nombre": "South Sudan - Uganda Cross-Border Fiber Backbone (Juba - Nimule)",
+"operador": "Liquid",
+"pais": "SS",
+"ciudades": [
+"Juba",
+"Nesitu",
+"Kerepi","Nimule",
+"Elegu"
+],"estado": "en servicio","fuente": "Liquid Intelligent Technologies (liquid.tech), National Communication Authority (NCA South Sudan) y World Bank (Missing Broadband Links in the Horn of Africa Region)"
+}
+]
