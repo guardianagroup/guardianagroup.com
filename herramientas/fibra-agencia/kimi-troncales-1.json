@@ -1,0 +1,89 @@
+[
+  {
+    "nombre": "Red nacional de fibra óptica terrestre",
+    "operador": "ETECSA",
+    "pais": "CU",
+    "ciudades": [
+      "Pinar del Rio",
+      "Havana",
+      "Matanzas",
+      "Santa Clara",
+      "Ciego de Avila",
+      "Camaguey",
+      "Holguin",
+      "Santiago de Cuba"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: ETECSA no publica el trazado; sigue el eje de la autopista nacional y la línea férrea central, conectando las capitales de provincia de oeste a este"
+  },
+  {
+    "nombre": "Backbone nacional de fibra óptica",
+    "operador": "Claro Dominicana (América Móvil)",
+    "pais": "DO",
+    "ciudades": [
+      "Santo Domingo",
+      "Bonao",
+      "La Vega",
+      "Santiago de los Caballeros",
+      "Puerto Plata"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: sigue la Autopista Duarte y las carreteras principales; Claro publica cobertura de fibra en Santo Domingo, Santiago, Punta Cana y Puerto Plata pero no el trazado exacto"
+  },
+  {
+    "nombre": "Backbone nacional de fibra óptica",
+    "operador": "Natcom",
+    "pais": "HT",
+    "ciudades": [
+      "Port-au-Prince",
+      "Saint-Marc",
+      "Gonaives",
+      "Cap-Haitien"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: Natcom reporta más de 6.000 km de fibra pero no el trazado; la columna vertebral sigue la Route Nationale 1 hacia el norte con ramales hacia Les Cayes y el este"
+  },
+  {
+    "nombre": "National fibre backbone",
+    "operador": "FLOW (Liberty Global / C&W Communications)",
+    "pais": "JM",
+    "ciudades": [
+      "Kingston",
+      "Spanish Town",
+      "May Pen",
+      "Ocho Rios",
+      "Montego Bay"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: FLOW publica cobertura nacional desde Kingston, Montego Bay y Ocho Rios, pero no la ruta exacta; el trazado sigue la A1 (costa norte) y la A2 (vía Spanish Town-May Pen)"
+  },
+  {
+    "nombre": "National fibre backbone (Diginet)",
+    "operador": "Belize Telemedia (BTL/Digi)",
+    "pais": "BZ",
+    "ciudades": [
+      "Belize City",
+      "Belmopan",
+      "San Ignacio",
+      "Benque Viejo del Carmen"
+    ],
+    "estado": "en servicio",
+    "fuente": "publicado en Telecompaper: capacidad continua de fibra de Belize City a Punta Gorda vía OPGW y cable subterráneo; ramales hacia Belmopan, San Ignacio y Benque Viejo confirmados en notas de prensa de BTL"
+  },
+  {
+    "nombre": "National fibre-optic network (Kwangmyong/backbone)",
+    "operador": "Korea Post and Telecommunications (KPT, bajo el Ministerio de Correos y Telecomunicaciones)",
+    "pais": "KP",
+    "ciudades": [
+      "Sinuiju",
+      "Pyongyang",
+      "Nampo",
+      "Wonsan",
+      "Hamhung",
+      "Chongjin",
+      "Rason (Rajin)"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: reportes históricos confirman fibra Pyongyang-Hamhung (1995), Pyongyang-Sinuiju (1998) y Pyongyang-Nampo (2000); el tramo hacia Chongjin y Rason es inferido por la línea férrea Pyongra y la carretera AH6/Nacional 7 junto a la costa del Mar de Japón"
+  }
+]

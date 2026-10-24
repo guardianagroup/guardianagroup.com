@@ -1,0 +1,72 @@
+[
+{
+"nombre": "Rwanda National Fiber Optic Backbone",
+"operador": "Korea Telecom Rwanda Networks (KtRN)",
+"pais": "RW",
+"ciudades": [
+"Gisenyi","Musanze","Kigali","Muhanga","Butare",
+"Cyangugu"
+],
+"estado": "en servicio",
+"fuente": "aproximado: sigue las carreteras nacionales principales RN4 y RN1 conectando las capitales distritales cubiertas por KtRN"
+},
+{
+"nombre": "Lesotho National Fiber Optic Backbone","operador": "Econet Telecom Lesotho (ETL)",
+"pais": "LS",
+"ciudades": [
+"Mokhotlong",
+"Butha-Buthe",
+"Hlotse",
+"Maputsoe",
+"Teyateyaneng",
+"Maseru","Mafeteng","Mohale's Hoek",
+"Quthing",
+"Qacha's Nek"
+],
+"estado": "en servicio",
+"fuente": "aproximado: sigue el corredor vial principal norte-sur y sureste (carreteras A1, A2 y A4) y la red de transmisión eléctrica de LEC"
+},
+{
+"nombre": "Timor-Leste National Fiber Optic Backbone",
+"operador": "Timor Telecom",
+"pais": "TL",
+"ciudades": [
+"Maliana",
+"Maubara",
+"Likisá",
+"Dili",
+"Baukau",
+"Lospalos"
+],
+"estado": "en servicio",
+"fuente": "aproximado: sigue la carretera costera principal del norte (A01/A03) desde la frontera occidental hasta el extremo oriental"
+},
+{
+"nombre": "Unified National Networks Fiber Backbone",
+"operador": "Unified National Networks (UNN)",
+"pais": "BN",
+"ciudades": [
+"Kuala Belait",
+"Liang","Telisai","Tutong",
+"Sengkurong","Bandar Seri Begawan",
+"Mentiri",
+"Serasa"
+],
+"estado": "en servicio",
+"fuente": "aproximado: sigue la autopista costera principal (Seria-Tutong-Muara Highway) y las estaciones de amarre de cable de UNN"
+},
+{
+"nombre": "Kosovo National Fiber Optic Backbone",
+"operador": "IPKO Telecommunications / Telekomi i Kosovës",
+"pais": "XK",
+"ciudades": [
+"Mitrovicë",
+"Pristina",
+"Ferizaj","Suva Reka","Prizren","Gjakovë",
+"Deçan",
+"Pejë"
+],
+"estado": "en servicio",
+"fuente": "aproximado: sigue las autopistas principales M2, R7 y M9-1 y las líneas de transmisión eléctrica de KOSTT"
+}
+]
