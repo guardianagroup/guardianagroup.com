@@ -2170,9 +2170,9 @@
   function abreFichaCapa(b) {
     clearTimeout(fichaCapaT);
     if (!conRaton.matches || document.body.classList.contains('m2') || document.body.classList.contains('dentro')) return;
-    // with a layer's class panel open below the buttons the card would land on top of it (owner, 24 Oct 2026, 12:34:
-    // «se me solapa una pantalla con la otra»): the panel already says the same, so no card then
-    if (document.querySelector('.capa-vista:not([hidden]), #sat-vista:not([hidden])')) return;
+    // the class panels below the buttons step aside while the card is open, so the two never overlap (owner,
+    // 24 Oct 2026, 12:34: «se me solapa una pantalla con la otra»); orbita.css, body.con-ficha-capa
+    document.body.classList.add('con-ficha-capa');
     llenaFichaCapa(b.dataset.capa); fichaCapa.hidden = false; colocaFichaCapa(b);
     if (fichaCapaDe && fichaCapaDe !== b) fichaCapaDe.removeAttribute('aria-describedby');
     fichaCapaDe = b; b.setAttribute('aria-describedby', 'capa-ficha');
@@ -2180,7 +2180,7 @@
   }
   function cierraFichaCapa(ya) {
     clearTimeout(fichaCapaT);
-    const fin = () => { if (!fichaCapa) return; fichaCapa.classList.remove('ver'); fichaCapa.hidden = true; if (fichaCapaDe) fichaCapaDe.removeAttribute('aria-describedby'); fichaCapaDe = null; };
+    const fin = () => { document.body.classList.remove('con-ficha-capa'); if (!fichaCapa) return; fichaCapa.classList.remove('ver'); fichaCapa.hidden = true; if (fichaCapaDe) fichaCapaDe.removeAttribute('aria-describedby'); fichaCapaDe = null; };
     if (ya) fin(); else fichaCapaT = setTimeout(fin, 90);
   }
   // the figures arrive when a layer finishes loading: an open card follows them

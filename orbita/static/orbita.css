@@ -1027,3 +1027,6 @@ body.dentro .izq .conocer { display: none; }
   body.con-conexion #altura, body.con-conexion #zoom { opacity: 0; pointer-events: none; transition: opacity .2s; }
   body.con-ficha #dato { opacity: 0; pointer-events: none; transition: opacity .2s; }
 }
+
+/* while a layer button's card is open, the class panels below step aside so the two never overlap (owner, 24 Oct 2026, 12:34) */
+body.con-ficha-capa .sat-vista { opacity: 0 !important; pointer-events: none !important; transition: opacity .12s ease; }
