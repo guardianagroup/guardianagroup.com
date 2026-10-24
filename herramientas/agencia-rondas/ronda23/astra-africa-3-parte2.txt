@@ -1,0 +1,43 @@
+ siguiendo los corredores MR3 y MR8 y el acceso a Mhlumeni. Goba es la primera localidad del lado mozambiqueño; no se afirma que el cable atraviese todos los centros urbanos indicados."
+  },
+  {
+    "nombre": "Troncal Addis Ababa–Djibouti",
+    "operador": "Ethio telecom / Djibouti Telecom",
+    "pais": "ET",
+    "ciudades": ["Addis Ababa", "Adama", "Awash", "Dire Dawa", "Dewele", "Guelile"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión de fibra terrestre Etiopía–Djibouti y backbone de Ethio telecom; secuencia probable por el corredor oriental hacia Dire Dawa y Dewele. Guelile es la primera localidad del lado de Djibouti. Las ciudades intermedias representan el corredor, no un trazado de cable publicado."
+  },
+  {
+    "nombre": "Troncal meridional Addis Ababa–Moyale",
+    "operador": "Ethio telecom",
+    "pais": "ET",
+    "ciudades": ["Addis Ababa", "Adama", "Shashamene", "Hawassa", "Dilla", "Yabelo", "Moyale"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor meridional del backbone de fibra de Ethio telecom hacia Moyale; secuencia urbana estimada siguiendo los principales corredores viarios. Se representa únicamente el tramo etíope, sin prolongarlo por una interconexión internacional cuyo trazado no se especifica aquí."
+  },
+  {
+    "nombre": "Troncal occidental Addis Ababa–Jimma",
+    "operador": "Ethio telecom",
+    "pais": "ET",
+    "ciudades": ["Addis Ababa", "Welkite", "Jimma"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de fibra de Ethio telecom hacia el sudoeste; secuencia probable por el corredor viario Addis Ababa–Welkite–Jimma. No corresponde a una canalización exacta publicada."
+  },
+  {
+    "nombre": "Backbone nacional Libreville–Franceville",
+    "operador": "Société de Patrimoine des Infrastructures Numériques (SPIN) / Axione",
+    "pais": "GA",
+    "ciudades": ["Libreville", "Ntoum", "Ndjole", "Booue", "Lastoursville", "Moanda", "Franceville"],
+    "estado": "en servicio",
+    "fuente": "publicado en la documentación del Banco Mundial del proyecto Central African Backbone, fase 4, Gabón: backbone terrestre desplegado por el corredor del ferrocarril Transgabonais. Aproximado: secuencia de ciudades principales a lo largo del corredor ferroviario; no implica que el cable entre en cada centro urbano."
+  },
+  {
+    "nombre": "Interconexión terrestre Gabón–Congo",
+    "operador": "SPIN / Axione / Congo Telecom",
+    "pais": "GA",
+    "ciudades": ["Franceville", "Lekoni", "Okoyo"],
+    "estado": "en servicio",
+    "fuente": "publicado en la documentación del Banco Mundial de los proyectos Central African Backbone de Gabón y la República del Congo: interconexión terrestre transfronteriza operativa. Aproximado: corredor Franceville–Lekoni–frontera congoleña–Okoyo; Okoyo es la primera ciudad principal del lado congoleño, no necesariamente la primera localidad menor inmediatamente después de la frontera."
+  }
+]
