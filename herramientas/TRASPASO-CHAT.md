@@ -65,11 +65,11 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
   - Esas tres respuestas **todavía no han pasado por el proceso ni están en `main`**. Es lo primero que hay que hacer.
   - Faltan África 4–8, Asia, Europa, América, Oceanía y la Antártida. La pregunta está en `ronda23/pregunta.txt`.
   - A Astra le quedan unos 7,5 US$ de saldo.
-- **Kimi** (kimi.ai): la cuenta gratuita se satura en la hora punta de China. Hay 15 preguntas preparadas en `herramientas/agencia-rondas/kimi-pendientes/`:
-  - `q-A1` a `q-A3`: trazados aproximados de los países sin datos;
-  - `q-B1` a `q-B5`: troncales en servicio;
-  - `q-C-<región>`: cables submarinos que faltan, por región.
-  - Ya hay 2 respuestas suyas, en `herramientas/fibra-agencia/kimi-*`.
+- **Kimi** (kimi.ai): la cuenta gratuita se satura en la hora punta de China. Sus preguntas están en `herramientas/agencia-rondas/kimi-pendientes/`. Quedan 13 por hacer:
+  - `q-A3`: trazados aproximados de los países sin datos. La respuesta va a `herramientas/fibra-agencia/kimi-troncales-3.json`.
+  - `q-B1` a `q-B5`: troncales en servicio. Las respuestas van a `kimi-troncales-4.json` hasta `-8.json`.
+  - `q-C-<región>` (siete regiones): cables submarinos que faltan. Las respuestas van a `herramientas/cables-agencia/kimi-faltan-<región>.json`.
+  - `q-A1` y `q-A2` ya están respondidas: `kimi-troncales-1.json` y `-2.json`.
   - `save.py` comprueba el hash del texto copiado y lo guarda como JSON.
 - **Gemini:** le falta la tanda 9 (KP, TD, NI y CV). Su límite se renueva el 24 de octubre a las 12:47.
 - **Grok:** le faltan las tandas 8 y 9. Su límite semanal se renueva el 27 de octubre.
