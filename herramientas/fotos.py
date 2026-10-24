@@ -183,5 +183,47 @@ def main():
     }, open(os.path.join(DATOS, 'fotos-candidatas.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
 
+def copiar():
+    """The photos chosen in the review (herramientas/agencia-rondas/fotos/revision-*.json: real photos of that very element,
+    no people, no illustrations or maps) copied to guardianagroup.com, so no visit asks Wikimedia for anything:
+    orbita/static/fotos/<tipo>-<id>.jpg (640 px wide at most, JPEG quality 82) and orbita/datos/fotos.json with author,
+    licence and source page for the cards' credit and for terminos.html (section 6)."""
+    import glob
+    import io
+    from PIL import Image
+    cand = json.load(open(os.path.join(DATOS, 'fotos-candidatas.json'), encoding='utf-8'))['fotos']
+    por = {(c['tipo'], c['archivo']): c for c in cand}
+    elegidas = []
+    for r in sorted(glob.glob(os.path.join(RAIZ, 'herramientas', 'agencia-rondas', 'fotos', 'revision-*.json'))):
+        elegidas += json.load(open(r, encoding='utf-8')).get('aceptadas', [])
+    carpeta = os.path.join(RAIZ, 'orbita', 'static', 'fotos')
+    os.makedirs(carpeta, exist_ok=True)
+    out = {}
+    for e in elegidas:
+        c = por.get((e['tipo'], e['archivo']))
+        if not c or not c.get('miniatura'):
+            print('sin candidata:', e['nombre']); continue
+        clave = e['tipo'] + '-' + re.sub(r'[^a-z0-9]+', '-', pliega(str(c['id'])).lower()).strip('-')
+        try:
+            req = urllib.request.Request(c['miniatura'], headers={'User-Agent': UA})
+            with urllib.request.urlopen(req, timeout=120) as r:
+                im = Image.open(io.BytesIO(r.read())).convert('RGB')
+        except Exception as ex:
+            print('no se pudo bajar', e['nombre'], ex); continue
+        if im.width > 640:
+            im = im.resize((640, round(im.height * 640 / im.width)), Image.LANCZOS)
+        im.save(os.path.join(carpeta, clave + '.jpg'), 'JPEG', quality=82, optimize=True, progressive=True)
+        autor = re.sub(r'^(Creator|User|Usuario):', '', c.get('autor') or '').strip()[:120]
+        out[clave] = {'tipo': e['tipo'], 'id': c['id'], 'nombre': c['nombre'], 'archivo': clave + '.jpg', 'ancho': im.width, 'alto': im.height,
+                      'autor': autor, 'licencia': c.get('licencia', ''), 'url_licencia': c.get('url_licencia', ''), 'pagina': c.get('pagina', '')}
+        time.sleep(1)
+    json.dump({'nota': 'Fotos de las fichas de Órbita: copias en guardianagroup.com de fotos de Wikimedia Commons con licencia libre, '
+                       'revisadas una a una (herramientas/agencia-rondas/fotos/). Crédito en la ficha y en terminos.html (sección 6).',
+               'generado': time.strftime('%Y-%m-%dT%H:%MZ', time.gmtime()), 'fotos': out},
+              open(os.path.join(DATOS, 'fotos.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    print('copiadas', len(out), 'de', len(elegidas))
+
+
 if __name__ == '__main__':
-    main()
+    import sys
+    copiar() if 'copiar' in sys.argv[1:] else main()

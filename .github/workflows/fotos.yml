@@ -5,6 +5,11 @@ name: Fotos candidatas de Órbita
 
 on:
   workflow_dispatch:
+    inputs:
+      modo:
+        description: 'buscar (candidatas) o copiar (las elegidas en la revisión, a orbita/static/fotos)'
+        required: false
+        default: buscar
 
 permissions:
   contents: write
@@ -21,14 +26,22 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Fotos de Wikidata y Wikimedia Commons
+        if: github.event.inputs.modo != 'copiar'
         run: python3 herramientas/fotos.py
+
+      - name: Copiar las fotos elegidas a guardianagroup.com
+        if: github.event.inputs.modo == 'copiar'
+        run: |
+          pip install --quiet pillow
+          python3 herramientas/fotos.py copiar
 
       - name: Guardar si ha cambiado
         run: |
           git config user.name "GUARDIANA datos"
           git config user.email "datos@guardianagroup.com"
+          git add orbita/datos/fotos-candidatas.json orbita/datos/fotos.json orbita/static/fotos 2>/dev/null || true
           git add orbita/datos/fotos-candidatas.json
           if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
-          git commit -m "Órbita: fotos candidatas de Wikimedia Commons para las fichas ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git commit -m "Órbita: fotos de las fichas, ${{ github.event.inputs.modo || 'buscar' }} ($(date -u +%Y-%m-%dT%H:%MZ))"
           git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
           git push
