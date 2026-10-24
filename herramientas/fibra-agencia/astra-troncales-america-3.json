@@ -1,0 +1,106 @@
+[
+  {
+    "nombre": "Corredor central y nororiental México–Laredo",
+    "operador": "Telmex",
+    "pais": "MX",
+    "ciudades": ["Mexico City", "Queretaro", "San Luis Potosi", "Matehuala", "Saltillo", "Monterrey", "Nuevo Laredo", "Laredo"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre operativa de Telmex, descrita en los informes de América Móvil; secuencia urbana probable siguiendo los corredores de las carreteras 57 y 85. No es un trazado físico publicado tramo por tramo."
+  },
+  {
+    "nombre": "Corredor occidental y del Pacífico",
+    "operador": "Telmex",
+    "pais": "MX",
+    "ciudades": ["Mexico City", "Toluca", "Morelia", "Guadalajara", "Tepic", "Mazatlan", "Culiacan", "Los Mochis", "Navojoa", "Ciudad Obregon", "Guaymas", "Hermosillo"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de Telmex, documentada en los informes de América Móvil; itinerario probable por el corredor México–Guadalajara y las carreteras 15/15D del Pacífico. Las ciudades no representan una canalización continua verificada."
+  },
+  {
+    "nombre": "Corredor México–Golfo–península de Yucatán",
+    "operador": "Telmex",
+    "pais": "MX",
+    "ciudades": ["Mexico City", "Puebla", "Orizaba", "Cordoba", "Veracruz", "Coatzacoalcos", "Villahermosa", "Escarcega", "Campeche", "Merida", "Cancun"],
+    "estado": "en servicio",
+    "fuente": "aproximado: infraestructura troncal nacional operativa de Telmex, descrita por América Móvil; secuencia probable por los corredores carreteros del Golfo y la península de Yucatán. No implica que todo el tráfico siga esta única ruta."
+  },
+  {
+    "nombre": "Corredor internacional noroccidental Managua–Honduras",
+    "operador": "Claro Nicaragua / Claro Honduras",
+    "pais": "NI",
+    "ciudades": ["Managua", "Leon", "Chinandega", "Somotillo", "Choluteca"],
+    "estado": "en servicio",
+    "fuente": "aproximado: redes terrestres operativas de Claro en Nicaragua y Honduras, documentadas como parte de la infraestructura regional de América Móvil; recorrido probable por las carreteras Managua–León–Chinandega y el cruce de El Guasaule. Choluteca es la primera ciudad principal hondureña incluida."
+  },
+  {
+    "nombre": "Corredor internacional meridional Managua–Costa Rica",
+    "operador": "Claro Nicaragua / Claro Costa Rica",
+    "pais": "NI",
+    "ciudades": ["Managua", "Masaya", "Nandaime", "Rivas", "Peñas Blancas", "La Cruz"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red regional terrestre operativa de Claro/América Móvil; secuencia probable por los corredores Managua–Masaya y la carretera Panamericana hacia Peñas Blancas. La canalización exacta y los desvíos locales no están confirmados."
+  },
+  {
+    "nombre": "Troncal interurbana del Pacífico Panamá–David",
+    "operador": "Cable & Wireless Panamá",
+    "pais": "PA",
+    "ciudades": ["Panama City", "La Chorrera", "Penonome", "Aguadulce", "Santiago", "David"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra operativa de Cable & Wireless Panamá, descrita por el operador y Liberty Latin America; recorrido interurbano probable siguiendo la carretera Panamericana. Se excluyen las conexiones submarinas."
+  },
+  {
+    "nombre": "Troncal oriental Asunción–Ciudad del Este–Brasil",
+    "operador": "COPACO",
+    "pais": "PY",
+    "ciudades": ["Asuncion", "San Lorenzo", "Caacupe", "Coronel Oviedo", "Caaguazu", "Ciudad del Este", "Foz do Iguacu"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de transporte de fibra de COPACO y salida internacional por Ciudad del Este, descritas en documentación institucional del operador; secuencia urbana probable por la ruta PY02 y el cruce hacia Foz do Iguaçu."
+  },
+  {
+    "nombre": "Troncal meridional Asunción–Encarnación–Argentina",
+    "operador": "COPACO",
+    "pais": "PY",
+    "ciudades": ["Asuncion", "San Lorenzo", "Ita", "Paraguari", "Quiindy", "Caapucu", "San Juan Bautista", "San Ignacio", "Coronel Bogado", "Encarnacion", "Posadas"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal de COPACO y salida internacional por Encarnación, documentadas por el operador; recorrido probable siguiendo la ruta PY01 y el puente internacional hacia Posadas. No se dispone aquí de una polilínea pública de la fibra."
+  },
+  {
+    "nombre": "Troncal costera norte",
+    "operador": "Movistar Perú",
+    "pais": "PE",
+    "ciudades": ["Lima", "Chancay", "Huacho", "Barranca", "Huarmey", "Casma", "Chimbote", "Trujillo", "Chepen", "Chiclayo", "Piura", "Sullana", "Tumbes"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de transporte terrestre de Movistar, recogida en documentación sectorial del MTC y OSIPTEL; ciudades ordenadas siguiendo el corredor de la Panamericana Norte. No se afirma que la fibra atraviese el centro de cada ciudad."
+  },
+  {
+    "nombre": "Troncal costera sur",
+    "operador": "Movistar Perú",
+    "pais": "PE",
+    "ciudades": ["Lima", "San Vicente de Canete", "Chincha Alta", "Pisco", "Ica", "Nazca", "Camana", "Arequipa", "Moquegua", "Tacna"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de transporte terrestre operativa de Movistar, documentada por el MTC y OSIPTEL; secuencia probable por la Panamericana Sur y el corredor de acceso a Arequipa. El paso exacto por Arequipa y sus derivaciones requiere cartografía del operador."
+  },
+  {
+    "nombre": "Corredor terrestre septentrional y occidental",
+    "operador": "Liberty Puerto Rico",
+    "pais": "PR",
+    "ciudades": ["San Juan", "Bayamon", "Arecibo", "Aguadilla", "Mayaguez"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red insular de fibra operativa de Liberty Business Puerto Rico; secuencia urbana probable por los corredores PR-22 y PR-2. El recorrido supera 100 km y no incluye infraestructura submarina; la canalización exacta no se presenta como publicada."
+  },
+  {
+    "nombre": "Corredor terrestre central y meridional",
+    "operador": "Liberty Puerto Rico",
+    "pais": "PR",
+    "ciudades": ["San Juan", "Caguas", "Cayey", "Ponce", "Yauco", "Mayaguez"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red insular de fibra operativa de Liberty Business Puerto Rico; itinerario probable siguiendo PR-52 y PR-2 para enlazar los principales nodos del centro y sur. Es un corredor de más de 100 km, no un trazado físico verificado tramo por tramo."
+  },
+  {
+    "nombre": "Corredor terrestre este–centro–suroeste de Trinidad",
+    "operador": "Telecommunications Services of Trinidad and Tobago (TSTT)",
+    "pais": "TT",
+    "ciudades": ["Arima", "Tunapuna", "Chaguanas", "Couva", "San Fernando", "La Brea", "Point Fortin"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de fibra operativo de TSTT, descrito en sus informes corporativos; secuencia probable por los corredores Churchill–Roosevelt, Uriah Butler, Solomon Hochoy y Southern Main Road. El corredor completo supera 100 km; no se incluye Tobago ni ningún enlace submarino o radioeléctrico."
+  }
+]
