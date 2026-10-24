@@ -819,7 +819,8 @@
   "borde de internet más cercano": "가장 가까운 인터넷 엣지",
   "E": "E",
   "S": "S",
-  "O": "W"
+  "O": "W",
+  "Pulsa para verla en el planeta": "클릭하면 행성에 표시됩니다"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

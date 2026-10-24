@@ -1177,8 +1177,10 @@
       meter('puntos', m ? num(m.datos) + ' ' + T('centros de datos') + ' · ' + T('Datos verificados') + ' · ' + T('cobertura parcial') : PT && PT.error ? T('No se pudieron cargar los puntos.') : T('Cargando puntos…'));
     }
     el.textContent = partes.join('   ·   ');
-    // 21 Oct 2026 (owner): no text under the planet; the same facts live in each button's tooltip
-    for (const [k, txt] of Object.entries(porCapa)) { const b = document.querySelector(`#capas [data-capa="${k}"]`); if (b) b.title = txt; }
+    // 21 Oct 2026 (owner): no text under the planet; the same facts live under the pointer on each button. 23 Oct 2026,
+    // 23:32 (owner): not the browser's long tooltip but a designed square card (fichaCapa, below), so no title here
+    for (const k of Object.keys(porCapa)) { const b = document.querySelector(`#capas [data-capa="${k}"]`); if (b) b.removeAttribute('title'); }
+    try { refrescaFichaCapa(); } catch (_) {}
     el.hidden = true;
     document.body.classList.toggle('ver-sat', estado.sat);
     if (estado.sat) el.title = T('Satélites bajos a su altura real; los de órbita media y geoestacionaria, en los anillos exteriores (distancia no a escala). Su brillo sigue al Sol de ahora: más tenues los que están en la sombra de la Tierra. Pase el ratón por uno para ver su próxima vuelta.');
@@ -2029,13 +2031,116 @@
     if (!on) { muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; }
     pintaNota(); pintaVista(); pintaClases();
   }
+  // ---------- the card under the pointer on the four layer buttons ----------
+  // 23 Oct 2026, 23:32 (owner, with a photo of the browser's long tooltip): «quiero que salga un cuadrado bien diseñado,
+  // y los cuatro tienen que ser más o menos el mismo tamaño». One card, the same 300 × 300 px for the four: the layer,
+  // its figure, what it is, its classes as a legend and «Datos verificados». Only with a mouse (a touch screen has the
+  // class cards); it never takes the pointer, so the button under it keeps working.
+  const FRASE_CAPA = {
+    sub: 'Los cables submarinos por donde viajan los datos entre continentes',
+    fibra: 'Las grandes redes de fibra que llevan internet por tierra, de las llegadas de cables al interior',
+    puntos: 'Los centros de datos donde se guarda y se sirve internet',
+    sat: 'Los satélites que llevan datos, en tiempo real',
+  };
+  const NOMBRE_CAPA = { sub: 'Cables submarinos', fibra: 'Cables por tierra', puntos: 'Centros de datos', sat: 'Satélites' };
+  let fichaCapa = null, fichaCapaDe = null, fichaCapaT = 0;
+  function datosFichaCapa(k) {
+    const f = { titulo: T(NOMBRE_CAPA[k]), frase: T(FRASE_CAPA[k]) + '.', cifra: '', unidad: '', filas: [], pie: T('Datos verificados'), encendida: !!estado[k] };
+    if (k === 'sub') {
+      const c = capas.sub;
+      if (c && c.d) { f.cifra = num(c.nombres); f.unidad = T('cables submarinos con nombre'); }
+      const R = { gigante: '> 100', grande: '20–100', regional: '< 20', sinDato: '' };
+      f.leyenda = [T('Capacidad'), 'Tbit/s'];
+      for (const q of PRINCIPALES.sub) f.filas.push({ col: SUB_COL[q], n: T(TEXTOS_CLASES.sub.clases[q][0]), v: R[q] });
+      f.pie += ' · ' + T('puede faltar alguno');
+    } else if (k === 'fibra') {
+      if (FT && FT.d && FT.d.medida) { f.cifra = num(FT.d.medida.km) + ' km'; f.unidad = T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países'); }
+      const R = { principal: '≥ ' + num(800), largo: num(400) + '–' + num(800), nacional: num(150) + '–' + num(400), regional: '< ' + num(150) };
+      const C = { principal: 3, largo: 2, nacional: 1, regional: 0 };
+      f.leyenda = [T('Longitud'), 'km'];
+      for (const q of PRINCIPALES.fibra) f.filas.push({ col: FIBRA_COL[C[q]], n: T(TEXTOS_CLASES.fibra.clases[q][0]), v: R[q] });
+      f.pie += ' · ' + T('trazados aproximados de redes reales');
+    } else if (k === 'puntos') {
+      const m = PT && PT.d && PT.d.medida;
+      if (m) { f.cifra = num(m.datos); f.unidad = T('centros de datos'); }
+      f.leyenda = [T('Puntos de red'), ''];
+      for (const q of ['datos', 'pequenos', 'intercambio', 'estaciones']) { const n = PT && PT.p ? cuentaClase('puntos', q) : 0; f.filas.push({ col: q === 'datos' ? BLANCO : ACERO, punto: true, n: T(TEXTOS_CLASES.puntos.clases[q][0]), v: n ? num(n) : '' }); }
+      f.pie += ' · ' + T('cobertura parcial');
+    } else if (k === 'sat') {
+      if (S && S.N) { f.cifra = num(S.N); f.unidad = T('satélites de datos'); }
+      const R = { geo: num(35786), media: num(2000) + '–' + num(30000), baja: '< ' + num(2000) };
+      const N = { geo: 'Órbita geoestacionaria', media: 'Órbita media', baja: 'Órbita baja' };
+      f.leyenda = [T('Altura'), 'km'];
+      for (const q of ['geo', 'media', 'baja']) f.filas.push({ col: ACERO, punto: true, n: T(N[q]), v: R[q] });
+      const fecha = S && S.d ? ((S.d.grupos || []).filter((g) => g.n && g.descargado).map((g) => g.descargado).sort()[0] || S.d.descargado) : null;
+      f.pie += (fecha ? ', ' + haceTxt(hace(fecha)) : '') + ' · ' + T('posición calculada ahora');
+    }
+    return f;
+  }
+  function llenaFichaCapa(k) {
+    if (!fichaCapa) { fichaCapa = document.createElement('div'); fichaCapa.id = 'capa-ficha'; fichaCapa.className = 'capa-ficha'; fichaCapa.setAttribute('role', 'tooltip'); fichaCapa.hidden = true; document.body.appendChild(fichaCapa); }
+    const f = datosFichaCapa(k), el = fichaCapa;
+    const mk = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+    el.dataset.capa = k; el.replaceChildren();
+    const cab = mk('div', 'cf-cab'); cab.append(mk('span', 'cf-estado' + (f.encendida ? ' on' : '')), mk('span', 'cf-tit', f.titulo)); el.append(cab);
+    // with its figure, the figure says what it is; before the layer has loaded, what it is, in large type (the four
+    // cards keep the same height either way)
+    if (f.cifra) { const ci = mk('div', 'cf-cifra'); ci.append(mk('b', null, f.cifra), mk('span', null, f.unidad)); el.append(ci); }
+    else el.append(mk('p', 'cf-frase grande', f.frase));
+    const ul = mk('ul', 'cf-filas');
+    if (f.leyenda) { const li = mk('li', 'cf-ley'); li.append(mk('s'), mk('span', null, f.leyenda[0]), mk('em', null, f.leyenda[1])); ul.append(li); }
+    for (const r of f.filas) { const li = mk('li'), s = mk('s', r.punto ? 'punto' : ''); s.style.setProperty('--c', r.col); li.append(s, mk('span', null, r.n), mk('em', null, r.v || '')); ul.append(li); }
+    el.append(ul);
+    // (no «click here» line: the button's own switch says whether the layer is on; the dot in the corner repeats it)
+    const pie = mk('p', 'cf-pie'); pie.append(mk('i'), mk('span', null, f.pie)); el.append(pie);
+  }
+  function colocaFichaCapa(b) {
+    const el = fichaCapa, r = b.getBoundingClientRect(), W = el.offsetWidth, H = el.offsetHeight, M = 12;
+    const x = Math.max(M, Math.min(innerWidth - W - M, r.left + r.width / 2 - W / 2));
+    let y = r.bottom + 12, arriba = false;
+    if (y + H > innerHeight - M && r.top - 12 - H >= M) { y = r.top - 12 - H; arriba = true; }
+    el.style.left = Math.round(x) + 'px'; el.style.top = Math.round(y) + 'px';
+    el.style.setProperty('--flecha', Math.round(Math.max(18, Math.min(W - 18, r.left + r.width / 2 - x))) + 'px');
+    el.classList.toggle('arriba', arriba);
+  }
+  const conRaton = matchMedia('(hover: hover) and (pointer: fine)');
+  function abreFichaCapa(b) {
+    clearTimeout(fichaCapaT);
+    if (!conRaton.matches || document.body.classList.contains('m2') || document.body.classList.contains('dentro')) return;
+    llenaFichaCapa(b.dataset.capa); fichaCapa.hidden = false; colocaFichaCapa(b);
+    if (fichaCapaDe && fichaCapaDe !== b) fichaCapaDe.removeAttribute('aria-describedby');
+    fichaCapaDe = b; b.setAttribute('aria-describedby', 'capa-ficha');
+    requestAnimationFrame(() => { if (fichaCapaDe === b) fichaCapa.classList.add('ver'); });
+  }
+  function cierraFichaCapa(ya) {
+    clearTimeout(fichaCapaT);
+    const fin = () => { if (!fichaCapa) return; fichaCapa.classList.remove('ver'); fichaCapa.hidden = true; if (fichaCapaDe) fichaCapaDe.removeAttribute('aria-describedby'); fichaCapaDe = null; };
+    if (ya) fin(); else fichaCapaT = setTimeout(fin, 90);
+  }
+  // the figures arrive when a layer finishes loading: an open card follows them
+  function refrescaFichaCapa() { if (fichaCapa && fichaCapaDe && !fichaCapa.hidden) { llenaFichaCapa(fichaCapaDe.dataset.capa); colocaFichaCapa(fichaCapaDe); fichaCapa.classList.add('ver'); } }
+  function enganchaFichasCapa() {
+    document.querySelectorAll('#capas [data-capa]').forEach((b) => {
+      b.removeAttribute('title');
+      let espera = 0;
+      b.addEventListener('pointerenter', (e) => { if (e.pointerType !== 'mouse') return; clearTimeout(espera); espera = setTimeout(() => abreFichaCapa(b), fichaCapaDe ? 0 : 220); });
+      b.addEventListener('pointerleave', () => { clearTimeout(espera); cierraFichaCapa(); });
+      b.addEventListener('focus', () => { try { if (b.matches(':focus-visible')) abreFichaCapa(b); } catch (_) {} });
+      b.addEventListener('blur', () => cierraFichaCapa(true));
+      b.addEventListener('click', () => { clearTimeout(espera); cierraFichaCapa(true); });
+    });
+    addEventListener('keydown', (e) => { if (e.key === 'Escape') cierraFichaCapa(true); });
+    addEventListener('resize', () => cierraFichaCapa(true));
+    addEventListener('guardiana-idioma', refrescaFichaCapa);
+  }
+
   async function arranca() {
     // the land layer only appears when there is land data to show
     // (asked to the small index, so the page never requests a file that is not there)
     let ind = null; try { const r = await fetch('datos/indice.json', { cache: 'no-cache' }); if (r.ok) ind = await r.json(); } catch (_) {}
     for (const k of ['puntos']) if (!ind || !ind.capas || !ind.capas[k]) { const b = document.querySelector(`#capas [data-capa="${k}"]`); if (b) b.remove(); estado[k] = false; }
     estado.tierra = false; // land fibre left out (owner, 21 Oct 2026): OpenStreetMap knows too little of it
-    enganchaVista(); enganchaClases();
+    enganchaVista(); enganchaClases(); enganchaFichasCapa();
     document.querySelectorAll('#capas [data-capa]').forEach((b) => b.addEventListener('click', () => pon(b.dataset.capa, b.getAttribute('aria-pressed') !== 'true')));
     for (const k of ['sub', 'fibra', 'puntos', 'sat']) if (estado[k]) pon(k, true);
     for (const k of Object.keys(PLEGADO)) PLEGADO[k] = true; estado.satPlegado = estado.satPlegado || false; pintaClases(); // on arrival no class card covers the planet: they open from the buttons

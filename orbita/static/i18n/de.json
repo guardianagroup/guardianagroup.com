@@ -819,7 +819,8 @@
   "borde de internet más cercano": "nächster Rand des Internets",
   "E": "O",
   "S": "S",
-  "O": "W"
+  "O": "W",
+  "Pulsa para verla en el planeta": "Klicken, um sie auf dem Planeten zu sehen"
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

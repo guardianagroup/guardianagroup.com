@@ -819,7 +819,8 @@
   "borde de internet más cercano": "最寄りのインターネットのエッジ",
   "E": "E",
   "S": "S",
-  "O": "W"
+  "O": "W",
+  "Pulsa para verla en el planeta": "クリックすると惑星上に表示されます"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",
