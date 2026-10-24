@@ -4,10 +4,10 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 
 ## Estado al cerrar la cuenta (24 Oct 2026, 10:05, al 96 % de uso)
 
-**Ramas:** `main` (la web en vivo) va en 232fcda. `web-idiomas` tiene además este documento, las preguntas de Kimi y las respuestas de Astra de África 1–3, que todavía no están en `main`.
+**Ramas:** `main` (la web en vivo) y `web-idiomas` están al día. `web-idiomas` tiene además este documento y las preguntas de Kimi.
 
 **En vivo en guardianagroup.com/orbita/**
-- **Cables por tierra:** 168 países y 1.295.144 km, en `orbita/datos/fibra-tierra.json`. Al empezar la noche eran 93 países.
+- **Cables por tierra:** 168 países y 1.295.161 km, en `orbita/datos/fibra-tierra.json`. Al empezar la noche eran 93 países.
   - 277 tramos salen de la agencia, confirmados al menos por dos voces de siete: Astra 6, ChatGPT («Alta» e «Investigación avanzada»), Gemini, Grok, Kimi y Claude comprobando fuentes oficiales. El resto viene de OpenStreetMap y AfTerFibre.
   - En los países sin fuentes abiertas valen los tramos aproximados. El dueño, a las 9:00: «Lo más aproximado posible ok».
   - Siria, Yemen y Palestina entran con redes «en servicio parcial».
@@ -62,8 +62,8 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 **Lo que quedó a medias**
 - **Revisión de Astra 6 por continentes** (ronda 23). Orden del dueño a las 9:30: que Astra haga todos los países que faltan y revise los que ya hay, por continentes, con la Antártida y las zonas difíciles.
   - Hecho: África 1–3, en `herramientas/fibra-agencia/astra-troncales-africa-1.json` a `-3.json`, con el texto bruto en `ronda23/`.
-  - Esas tres respuestas **todavía no han pasado por el proceso ni están en `main`**. Es lo primero que hay que hacer.
-  - Faltan África 4–8, Asia, Europa, América, Oceanía y la Antártida. La pregunta está en `ronda23/pregunta.txt`.
+  - Esas tres ya están procesadas y publicadas.
+  - Las tandas, en orden, están en `ronda23/tandas.md`, y la pregunta en `ronda23/pregunta.txt`. Mira qué `astra-troncales-<tanda>.json` existen ya y sigue por la primera que falte. Las tandas procesadas se apuntan al final del §11.
   - A Astra le quedan unos 7,5 US$ de saldo.
 - **Kimi** (kimi.ai): la cuenta gratuita se satura en la hora punta de China. Sus preguntas están en `herramientas/agencia-rondas/kimi-pendientes/`. Quedan 13 por hacer:
   - `q-A3`: trazados aproximados de los países sin datos. La respuesta va a `herramientas/fibra-agencia/kimi-troncales-3.json`.
@@ -116,7 +116,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
    - Las voces de la agencia (ChatGPT, Gemini, Grok, Kimi y Astra 6, en platform.cheaperinference.com) se usan desde el **navegador integrado** de esa app, con las sesiones del dueño.
    - Si alguna sesión no está abierta, pídele al dueño que la abra. Tú nunca escribes contraseñas ni claves.
 3. **Lectura:** este documento entero; después, `herramientas/TRASPASO.md` y `herramientas/agencia-rondas/qa/revision-orbita-2026-10-24.md`.
-4. **Primera tarea:** pasa África 1–3 de Astra por el proceso de los cables por tierra y publícalo.
+4. **Primera tarea:** si hay respuestas `herramientas/fibra-agencia/astra-troncales-*.json` que no figuren como procesadas al final del §11, pásalas por el proceso de los cables por tierra y publícalo.
 5. **Sigue la ronda 23 de Astra** con los continentes que faltan, en tandas pequeñas.
    - Astra corta a 4.096 tokens, contando el razonamiento.
    - El Playground no guarda la conversación: si una respuesta se corta, pregunta solo por los países que faltaron.
@@ -508,6 +508,9 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 - *Ya no vale (al cerrar, el dueño estaba despierto); solo si lo vuelve a pedir:* al terminar el mapa, el dueño había pedido (23:49) **poner su ordenador en hibernación**. Hay permiso de clic sobre el escritorio de Windows («Explorador de archivos», nivel «click»): Inicio, después el botón de apagado y después «Hibernar». Si «Hibernar» no aparece en el menú, avísale; no cambies la configuración de energía.
 
 **24 Oct 2026, 10:05 — hecho y publicado (cierre de esta cuenta, al 96 %)**
-- **Cables por tierra:** de 128 a **168 países** y 1.295.144 km, con 277 tramos de la agencia. Entraron más respuestas de la agencia y la investigación profunda de ChatGPT (ronda 22).
+- **Cables por tierra:** de 128 a **168 países** y 1.295.144 km (1.295.161 tras África 1–3), con 277 tramos de la agencia. Entraron más respuestas de la agencia y la investigación profunda de ChatGPT (ronda 22).
 - **Cables submarinos:** de 480 a **518 cables enteros** y 1.473 llegadas con su pueblo.
 - **Lo pendiente** está al principio de este documento, en «Lo que quedó a medias» y «Primeros pasos de la cuenta nueva».
+
+**Ronda 23 de Astra, tandas procesadas y publicadas**
+- 10:25 · África 1–3: 168 países, 1.295.161 km, 277 tramos de la agencia.
