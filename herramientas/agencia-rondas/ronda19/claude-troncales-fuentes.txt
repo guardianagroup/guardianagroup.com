@@ -1,0 +1,16 @@
+Ronda 19 · voz «claude» · troncales terrestres de fibra · fuentes consultadas por país (24 oct 2026)
+Solo fuentes oficiales o primarias. Sin submarinecablemap, TeleGeography ni PeeringDB.
+
+== Grupo 1 → fibra-agencia/claude-troncales-1.json ==
+BH  NO CONFIRMADO. batelco.com/?p=24097 (BGN: 1.400 km sobre la red GCCIA, sin ciudades ni fecha de servicio);
+    gccia.com.sa/gcciagrid/our-existing-network/ (Bahrein se une a la red por cable submarino de 50 km; no menciona fibra).
+    El enlace terrestre stc Bahrain–center3 por la calzada solo está anunciado.
+BN  NO CONFIRMADO. unn.com.bn y unn.com.bn/fibre-network: «más de 5.000 km de fibra», sin rutas ni enlaces transfronterizos.
+BZ  NO CONFIRMADO. livedigi.com/about/our-history: «más de 2.000 km de fibra desplegados» (2019), sin rutas.
+CR  1 ruta. eprsiepac.com/linea-siepac/ (EPR): tramos SIEPAC Cañas–Parrita–Palmar Norte–Río Claro en servicio (2012–2014), OPGW de 36 fibras.
+CU  NO CONFIRMADO. mincom.gob.cu (printpdf/6058, print/5659): solo el cable submarino ARIMAO y fibra urbana; ninguna fuente oficial con la troncal nacional.
+DO  NO CONFIRMADO. Solo prensa (dplnews, elcaribe) sobre la red OPGW de ETED (1.500 km, nodos en ejecución) sin rutas; presidencia.gob.do no se pudo leer.
+FJ  1 ruta. telecom.com.fj (2 mar 2026): fibra terrestre subterránea de 102 km Savusavu–Seaqaqa–Labasa activada.
+    fiji.gov.fj (discurso del ministro): fases Labasa–Seaqaqa y Seaqaqa–Savusavu. La presentación de Fiji ante la OACI no se pudo abrir.
+GQ  3 rutas. gitge.com/?p=508 (GITGE): la Red Troncal Nacional conecta 19 ciudades y enumera los nodos continentales en orden;
+    gitge.com/wp-content/uploads/2020/07/PRESENTACION-6.pdf: fibra terrestre en 19 ciudades. El informe anual 2024 es un PDF escaneado y no se pudo leer.
