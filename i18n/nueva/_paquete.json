@@ -5,7 +5,7 @@
    "¿Sabes",
    "a",
    "dónde",
-   "van",
+   "viajan",
    "tus",
    "datos",
    "y"
@@ -23,15 +23,15 @@
    "where",
    "your",
    "data",
-   "goes",
+   "travels",
    "and"
   ],
   "g": "who buys it?",
   "sep": " ",
   "br": 6
  },
- "title_es": "GUARDIANA · ¿Sabes a dónde van tus datos y quién los compra?",
- "title_en": "GUARDIANA · Do you know where your data goes and who buys it?",
+ "title_es": "GUARDIANA · ¿Sabes a dónde viajan tus datos y quién los compra?",
+ "title_en": "GUARDIANA · Do you know where your data travels and who buys it?",
  "meta_es": "Mientras carga una página, tus datos salen a subasta. Mira gratis qué ve de ti cualquier web y a quién habla cada página, sin instalar nada. Código abierto.",
  "meta_en": "While a page loads, your data goes up for auction. See for free what any website sees about you and who each page talks to, with nothing to install. Open source.",
  "trozos": [
