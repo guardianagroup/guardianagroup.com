@@ -1,0 +1,445 @@
+2Africa
+AAE-1
+Aarhus-Kalundborg
+ADRIA-1
+Africa Coast to Europe (ACE)
+Africa-1
+AIRRAQ
+AKORN (Alaska-Oregon Network)
+Al Khaleej
+Alaska United East (AU-East)
+Alaska United West (AU-West)
+ALBA-1
+ALPAL-2
+ALVAL / ORVAL
+America Europe Connect-1 (AEC-1 / AEConnect)
+American Samoa-Hawaii Cable (ASH)
+Americas-1
+Americas-II
+AMERICAS2-D
+AMERICAS2-L
+AMITIE
+AMX-1
+Anjana
+ANTILLAS I
+Antillas-1
+Antillas-2
+Apollo
+Apollo North
+Apollo South
+APRICOT
+Aqualink
+ARCOS-1
+ARIANE 2
+ARIMAO
+ARSINOE
+ARTEMIS
+Asia Direct Cable (ADC)
+Asia Pacific Cable Network 2 (APCN-2)
+Asia Pacific Gateway (APG)
+Asia Submarine-cable Express (ASE)
+Asia-America Gateway (AAG)
+ATHENA
+ATISA
+Atlantic Crossing 1 (AC1)
+Atlantis-2
+Atlas Offshore
+Aurora
+Australia-Japan Cable (AJC)
+Australia-Papua New Guinea Cable 2 (APNG-2)
+Australia-Singapore Cable (ASC)
+Avassa
+B3JS (MIC-2)
+Balalink
+Ballen-Røsnæs
+Baltic Sea Submarine Cable
+Baltica
+Balticconnector (cable de telecomunicaciones Finlandia–Estonia, Elisa)
+Baltika (Kingisepp - Kaliningrad)
+BARMAR
+Bass Strait-1
+Bass Strait-2
+Basslink Telecoms
+Batam-Dumai-Melaka (BDM)
+Batam-Sarawak Internet Cable System (BaSICS)
+Batam-Singapore Cable System (BSCS)
+Bay of Bengal Gateway (BBG)
+BCS East
+BCS East-West Interlink
+BCS North
+BERYTAR
+Bharat Lanka Cable System
+Bicentenario
+Bifrost
+Black Sea Fiber-Optic Cable System (BSFOCS)
+Blue-Raman
+BlueMed
+Botnia
+BRUSA
+BT-IoS1
+BT-Manx NI
+BT-Mt 1
+BtoBE-HK
+C-Lion 1
+CADMOS
+CALVI-ST-FLORENT
+CanaLink
+CANTAT 3
+Caribbean-Bermuda U.S. (CBUS)
+Caucasus Cable System
+Cayman-Jamaica Fiber System (CJFS)
+CC4
+CC5
+Ceiba-1
+Ceiba-2
+CeltixConnect-1
+Chennai-Andaman and Nicobar Islands Cable (CANI)
+Chorus Maraetai-Woodside Bay cable
+Circe North
+CNS FIBRE OPTIC
+Colombia-Florida Subsea Fiber (CFX-1)
+Columbus-III
+Concerto
+Concerto 1E
+Concerto 1N
+Concerto 1S
+Cook Strait Fibre Cable
+Coral Sea Cable System (CS2)
+CORSAR
+CORSE
+CORSICA HD
+CrossChannel Fibre
+Curie
+DANICE
+Denmark-Germany 1
+Denmark-Russia 1
+Dhiraagu-SLT
+Didon
+DIDON2
+Djibouti Africa Region Express 1
+Dumai-Melaka Cable System (DMCS)
+Dunant
+EAC-D
+East Asia Crossing (EAC, integrado en EAC-C2C)
+East Micronesia Cable System (EMCS)
+Eastern Africa Submarine System (EASSy)
+Eastern Caribbean
+Eastern Caribbean Fiber System (ECFS)
+Eastern Light Sweden-Finland I
+ECFS 1C
+ECFS 2
+ECFS 4/5
+ECFS 6.3
+ECFS 7
+Echo
+EllaLink
+Ellekilde Hage-Viken
+Emerald Bridge
+Epic Malta-Sicily Cable System (EMSCS)
+Equiano
+ESAT 1
+ESAT 2
+EURAFRICA E1
+Europe India Gateway (EIG)
+EXA Express (anteriormente Hibernia Express / GTT Express)
+EXA North (anteriormente Hibernia Atlantic North / GTT North)
+EXA South (anteriormente Hibernia Atlantic South / GTT South)
+F-ALGER 4
+F-LYBIE
+FALCON
+Farice
+FARICE-1
+Farland North
+FASTER
+Fehmarn Belt
+Fiber Optic Gulf (FOG)
+Fibra Óptica Austral (FOA), Troncal Submarina Austral
+Fibralink
+Finland Estonia Connection (FEC)
+Finland Estonia Connection 1 (FEC-1)
+Finland-Estonia 2 (EESF-2)
+Finland-Estonia 3 (EESF-3)
+Firmina
+Flag Atlantic Interlink
+Flag Atlantic North
+Flag Atlantic South
+FLAG Atlantic-1 (FA-1)
+FLAG Europe-Asia
+FLAG North Asia Loop (FNAL/RNAL)
+Flores-Corvo Cable System
+FLY-LION3
+GCI Southeast Alaska
+Gemini Bermuda
+Georgia-Russia
+GLO-1 (Globacom-1)
+Global Caribbean Network (GCN)
+GlobeNet
+GO-1
+Gondwana-1
+Gondwana-2
+Grace Hopper
+Great Belt 1
+Great Belt 2
+Greenland Connect
+Greenland Connect North
+GTMO-1
+GTMO-PR
+Guam-Philippines Cable System (G-P)
+Gulf Bridge International Cable System (GBICS)
+Gulf2Africa (G2A)
+H2H Express
+Hainan to Hong Kong Express (H2HE)
+Hannibal
+HANTRU-1
+HAVFRUE / America Europe Connect-2 (AEC-2)
+Havhingsten / CeltixConnect-2 (CC-2)
+HAVSIL Fiber Cable System
+Hawaii Inter-Island Cable System (HICS)
+Hawaiki Cable
+HAWK
+Hibernia 'A'
+Hibernia 'C'
+Hibernia 'D'
+HKA
+Hokkaido-Sakhalin Cable System (HSCS)
+Honotua
+Hou-Sælvig
+Hugo
+HYERES FESTOON 1
+HYERES FESTOON 2
+HYERES FESTOON 3
+HYERES FESTOON 4
+I2i
+IMEWE
+India-Asia-Xpress (IAX)
+India-Europe-Xpress (IEX)
+INDIGO-Central
+INDIGO-West
+Indonesia Global Gateway (IGG)
+INGRID
+Interchange Cable Network 1 (ICN1)
+IONIAN
+IRIS
+Italy-Albania
+ITUR
+Janna
+Japan Information Highway (JIH)
+Japan-U.S. Cable Network
+Jersey-Guernsey 4
+JGA North
+JGA South
+JONAH
+Junior
+JUNO
+JUPITER
+KAFOS
+Kamchatka-Sakhalin-Magadan
+Kanawa
+KetchCan1
+KIMONAS
+Kingisepp-Kaliningrad
+Kinmen-Xiamen
+Kochi-Lakshadweep Islands Submarine Cable (KLI)
+Kodiak-Kenai Fiber Link
+Korea-Japan Cable Network (KJCN)
+Kumul Submarine Cable Network (KSCN)
+Lanis 1
+Lanis-2
+Latvia-Sweden 1 (LV-SE 1)
+LEV
+Liberty
+LION
+LION2
+Longyearbyen - Ny Ålesund
+Lynn Canal Fiber
+MainOne
+Malaysia India Singapore Transit (MIST)
+Malaysia-Cambodia-Thailand (MCT)
+Malbec
+Manatua (One Polynesia Cable)
+MAREA
+Marika
+Maroc Telecom West Africa
+MARS (Mauritius-Rodrigues)
+Matrix Cable System (MCS)
+MAYA-1
+Medcable
+Medex
+MedNautilus
+Medusa
+Medusa - ViaTunisia
+MENA Submarine Cable System
+METISS
+Mid-Atlantic Crossing (MAC)
+MINERVA
+Mistral
+Monet
+Moratelindo International Cable-1 (MIC-1)
+N0R5KE Viking
+Natitua
+NCSCS (Nigeria-Cameroon Submarine Cable System)
+Nelson-Levin
+New Cross Pacific (NCP)
+New T&T Domestic Cable 2001
+NO-UK
+NORFEST
+Norsea Coms
+North-West Cable System (NWCS)
+Northern Lights
+NorthStar
+Nuvem
+OLERON
+Oman Australia Cable (OAC)
+Oman Emirates Gateway (OEG)
+Oman-Iran Cable System (OMRAN)
+ORVAL
+OTEGlobe Kokkini-Bari
+Pacific Caribbean Cable System (PCCS)
+Pacific Crossing-1 (PC-1)
+Pacific Light Cable Network (PLCN)
+Palapa Ring East
+Palapa Ring Middle
+Palapa Ring West
+PAN EUROPEAN CROSSING (PEC)
+Pan-American (PAN-AM)
+Pan-American Crossing (PAC)
+Pangea North
+Pangea North UK/Denmark
+Paniolo
+PEACE Cable
+Pencan-9
+Petropavlovsk-Kamchatsky-Anadyr
+Philippine Domestic Submarine Cable Network (PDSCN)
+Picot-1
+Picot-2
+PIPE Pacific Cable-1 (PPC-1)
+Prat
+Quintillion Subsea Cable Network
+Rampion Wind Farm Communications Cable
+REMBRANDT 1
+RIOJA 3
+Rockabill
+RUPPIONE - PROPRIANO
+Russia-Japan Cable Network (RJCN)
+S1.4
+S5
+S5A
+SAFE
+Sakhalin-Kuril Islands
+Samoa-American Samoa Cable (SAS)
+SAT-3/WASC
+Saudi Arabia-Sudan-1 (SAS-1)
+Saudi Vision Cable (SVC)
+Scandinavian Ring North
+Scandinavian Ring South
+SCOTLAND-N.IRELAND 1
+Scotland-Northern Ireland 2
+SEA Cable Exchange-1 (SeaX-1)
+SEA ME WE-H
+SEA ME WE2
+SEA-H2X
+SEA-ME-WE 3
+SEA-ME-WE 4
+SEA-ME-WE 5
+SEA-ME-WE 6
+Seabras-1
+SEACOM
+Seychelles East Africa System (SEAS)
+SHARE
+SHEFA-2
+SHEFA-2 Seg 7-1
+SHEFA-2 Seg 7-3
+Sint Maarten Puerto Rico Network One (SMPR-1)
+SIRIUS North
+Sirius South
+SJC2-HK
+Skagen Fiber West
+Skagenfiber
+SKR1M
+Sleipnir-Grane FOC
+SMPCS Packet-2
+Solas
+Solomon Islands Domestic Network (SIDN)
+South America-1 (SAm-1)
+South American Crossing (SAC) / Latin American Nautilus (LAN)
+South Atlantic Cable System (SACS)
+South Atlantic Inter Link (SAIL)
+Southeast Asia-Japan Cable
+Southeast Asia-Japan Cable 2 (SJC2)
+Southeast Asia-United States (SEA-US)
+Southern Caribbean Fiber (SCF)
+Southern Cross Cable Network (SCCN)
+Southern Cross NEXT
+Spark Nelson - Levin inter-island cable
+Suriname-Guyana Submarine Cable System (SG-SCS)
+Svalbard Undersea Cable System
+Swansea/Brean
+Sweden-Estonia (EE-S1)
+Sweden-Latvia
+TAGIDE
+Taino-Carib
+Taino-Carib-1
+Taiwan Strait Express-1 (TSE-1)
+Taiwan-Philippines-U.S. (TPU)
+Tamares North
+TAMPNET (BU4-BU5)
+TAMPNET 3
+Tampnet North Sea
+Tangerine
+Tannat
+Tasman Global Access (TGA)
+TAT 12
+TAT11F4
+TAT12 Interlink
+TAT13
+TAT9F5
+Tata Atlantic North
+Tata Atlantic South
+Tata North Europe
+Tata TGN-Gulf
+Tata TGN-Pacific
+Tata TGN-Western Europe
+Tata Western Europe UK-Portugal
+Tata Western Europe UK-Spain
+TE North (Telecom Egypt North)
+TEAMS (The East African Marine System)
+Telstra Bass Strait 1 Fibre Cable
+Telstra Bass Strait 2 Fibre Cable
+Telstra Endeavour
+Tetouan–Estepona
+TGN-Atlantic
+TGN-Intra Asia (TGN-IA)
+TGN-Tata Indicom Cable (TIC)
+TGN-Western Europe
+Thailand-Indonesia-Singapore (TIS)
+TKO Express
+Tonga Cable System
+Tonga Domestic Cable Extension (TDCE)
+Topaz
+Trans-Pacific Express (TPE)
+Transworld-1 (TW1)
+Trapani-Kelibia 2 (KELTRA-2)
+Tui-Samoa
+Turcyos-2
+UGARIT
+UK-CH.ISLANDS 8
+UK-Channel Islands 7
+UK-FR4
+UK-France 3
+UK-Germany 6
+UK-Ireland Crossing 1
+UK-Ireland Crossing 2
+UK-Netherlands 14
+Ultra Express Link
+Ulysses 1
+Ulysses 2
+UMO (SIGMAR)
+Unisur
+Unisur 2.0
+Unitirreno
+Unity
+Vector Waiheke Island Submarine Cable
+West Africa Cable System (WACS)
+X-Link
+Yellow
+Zeus
