@@ -1,0 +1,82 @@
+[
+  {
+    "nombre": "Troncal Freetown–Bo–Kenema",
+    "operador": "Sierra Leone Cable Limited (SALCAB) / Sierra Leone Telecommunications Company (SIERRATEL)",
+    "pais": "SL",
+    "ciudades": ["Freetown", "Waterloo", "Masiaka", "Bo", "Kenema"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra desplegada mediante el programa WARCIP del Banco Mundial; secuencia intermedia inferida del corredor viario Freetown–Masiaka–Bo–Kenema, no de un plano público del cable."
+  },
+  {
+    "nombre": "Troncal de Somalilandia Borama–Hargeisa–Berbera–Burao",
+    "operador": "Somcable",
+    "pais": "SO",
+    "ciudades": ["Borama", "Hargeisa", "Berbera", "Burao"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red terrestre comercial de Somcable en Somalilandia, cuya entrada en servicio y cobertura fueron anunciadas por Somcable y su proveedor de transporte óptico Ekinops; orden inferido de los corredores viarios entre las ciudades servidas."
+  },
+  {
+    "nombre": "Troncal Cape Town–Bloemfontein–Johannesburg",
+    "operador": "Openserve",
+    "pais": "ZA",
+    "ciudades": ["Cape Town", "Paarl", "Worcester", "Laingsburg", "Beaufort West", "Richmond", "Colesberg", "Bloemfontein", "Kroonstad", "Johannesburg"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte óptico de Openserve, descrita en la documentación corporativa de Telkom/Openserve; itinerario probable por el corredor N1. Las ciudades intermedias no constituyen un trazado del cable publicado por el operador."
+  },
+  {
+    "nombre": "Troncal Johannesburg–Durban",
+    "operador": "Openserve",
+    "pais": "ZA",
+    "ciudades": ["Johannesburg", "Heidelberg", "Villiers", "Harrismith", "Estcourt", "Pietermaritzburg", "Durban"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de larga distancia de la red óptica operativa de Openserve entre Gauteng y KwaZulu-Natal; ciudades ordenadas siguiendo el corredor N3, sin atribuir precisión cartográfica al tendido."
+  },
+  {
+    "nombre": "Troncal Johannesburg–Polokwane–Beitbridge",
+    "operador": "Openserve / TelOne",
+    "pais": "ZA",
+    "ciudades": ["Johannesburg", "Pretoria", "Bela-Bela", "Mokopane", "Polokwane", "Louis Trichardt", "Musina", "Beitbridge"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de transporte de Openserve hacia Limpopo y enlace internacional de TelOne por Beitbridge; recorrido probable por el corredor N1. Beitbridge es la primera ciudad incluida en Zimbabwe."
+  },
+  {
+    "nombre": "Troncal internacional Juba–Nimule–Elegu",
+    "operador": "Liquid Intelligent Technologies",
+    "pais": "SS",
+    "ciudades": ["Juba", "Nimule", "Elegu"],
+    "estado": "en servicio",
+    "fuente": "publicado en el anuncio de Liquid Telecom de febrero de 2020 sobre la puesta en servicio de su enlace terrestre de fibra entre Juba y Uganda; aproximado: secuencia por el corredor Juba–Nimule, con Elegu como primera localidad del lado ugandés."
+  },
+  {
+    "nombre": "Troncal oriental Port Sudan–Atbara",
+    "operador": "Sudatel",
+    "pais": "SD",
+    "ciudades": ["Port Sudan", "Sinkat", "Haiya", "Atbara"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor oriental de la red nacional de fibra de Sudatel, descrita en su documentación de infraestructura mayorista; ciudades intermedias inferidas del eje viario y ferroviario Port Sudan–Haiya–Atbara. La información pública no permite garantizar disponibilidad continua durante la guerra."
+  },
+  {
+    "nombre": "Troncal central Dar es Salaam–Dodoma–Mwanza",
+    "operador": "Tanzania Telecommunications Corporation (TTCL), red NICTBB",
+    "pais": "TZ",
+    "ciudades": ["Dar es Salaam", "Chalinze", "Morogoro", "Dodoma", "Singida", "Nzega", "Shinyanga", "Mwanza"],
+    "estado": "en servicio",
+    "fuente": "aproximado: topología pública de la National ICT Broadband Backbone (NICTBB), operada por TTCL; secuencia de ciudades inferida de los corredores terrestres que enlazan sus nodos centrales y del noroeste."
+  },
+  {
+    "nombre": "Troncal norte Dar es Salaam–Moshi–Arusha",
+    "operador": "Tanzania Telecommunications Corporation (TTCL), red NICTBB",
+    "pais": "TZ",
+    "ciudades": ["Dar es Salaam", "Chalinze", "Segera", "Korogwe", "Same", "Moshi", "Arusha"],
+    "estado": "en servicio",
+    "fuente": "aproximado: nodos y enlaces septentrionales de la red operativa NICTBB publicados por TTCL; recorrido intermedio probable por los corredores viarios Chalinze–Segera–Moshi–Arusha."
+  },
+  {
+    "nombre": "Troncal suroeste Dar es Salaam–Mbeya–Tunduma–Nakonde",
+    "operador": "Tanzania Telecommunications Corporation (TTCL), red NICTBB / Zamtel",
+    "pais": "TZ",
+    "ciudades": ["Dar es Salaam", "Chalinze", "Morogoro", "Mikumi", "Iringa", "Makambako", "Mbeya", "Tunduma", "Nakonde"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor suroccidental operativo de NICTBB y punto de interconexión terrestre con Zambia en Tunduma–Nakonde, recogidos en la información de conectividad internacional de TTCL; ciudades intermedias inferidas del corredor de la carretera Tanzam. Nakonde es la primera ciudad del lado zambiano."
+  }
+]
