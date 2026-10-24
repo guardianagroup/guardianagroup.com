@@ -359,6 +359,63 @@
 ]
 },
 {
+"n": "ATU national fiber backbone",
+"o": "ATU",
+"cc": "AL",
+"l": [
+[
+19.51,
+42.07
+],
+[
+20.42,
+42.08
+]
+]
+},
+{
+"n": "ATU national fiber backbone",
+"o": "ATU",
+"cc": "AL",
+"l": [
+[
+19.51,
+42.07
+],
+[
+19.82,
+41.33
+],
+[
+19.45,
+41.32
+]
+]
+},
+{
+"n": "ATU national fiber backbone",
+"o": "ATU",
+"cc": "AL",
+"l": [
+[
+19.82,
+41.33
+],
+[
+20.08,
+41.11
+],
+[
+20.65,
+40.9
+],
+[
+20.78,
+40.62
+]
+]
+},
+{
 "n": "CNT Red Troncal Nacional de Fibra Óptica",
 "o": "CNT (Corporación Nacional de Telecomunicaciones)",
 "cc": "EC",
@@ -394,6 +451,41 @@
 [
 -79.0,
 -2.9
+]
+]
+},
+{
+"n": "Backbone nacional – Eje Cotonou–Parakou–Malanville",
+"o": "SBIN",
+"cc": "BJ",
+"l": [
+[
+2.42,
+6.37
+],
+[
+2.07,
+7.18
+],
+[
+2.18,
+7.75
+],
+[
+2.49,
+8.03
+],
+[
+2.63,
+9.34
+],
+[
+2.94,
+11.13
+],
+[
+3.38,
+11.87
 ]
 ]
 },
@@ -460,6 +552,21 @@
 [
 78.46,
 17.38
+]
+]
+},
+{
+"n": "Backbone ATU – Corredor central y oriental",
+"o": "ATU",
+"cc": "AL",
+"l": [
+[
+19.45,
+41.32
+],
+[
+20.08,
+41.11
 ]
 ]
 },
@@ -556,6 +663,33 @@
 [
 -49.27,
 -25.43
+]
+]
+},
+{
+"n": "CSquared Liberia — troncal nacional hacia Nimba",
+"o": "CSquared",
+"cc": "LR",
+"l": [
+[
+-10.8,
+6.3
+],
+[
+-10.35,
+6.53
+],
+[
+-9.47,
+7.0
+],
+[
+-8.98,
+7.24
+],
+[
+-8.71,
+7.36
 ]
 ]
 },
@@ -668,6 +802,29 @@
 ]
 },
 {
+"n": "Troncal Dhaka–Chattogram",
+"o": "BTCL",
+"cc": "BD",
+"l": [
+[
+90.41,
+23.71
+],
+[
+91.19,
+23.46
+],
+[
+91.4,
+23.01
+],
+[
+91.83,
+22.34
+]
+]
+},
+{
 "n": "ENTEL — Red Nacional DWDM, eje central",
 "o": "ENTEL Bolivia",
 "cc": "BO",
@@ -691,6 +848,44 @@
 ]
 },
 {
+"n": "Backbone ATU – Corredor septentrional",
+"o": "ATU",
+"cc": "AL",
+"l": [
+[
+19.82,
+41.33
+],
+[
+20.42,
+42.08
+]
+]
+},
+{
+"n": "Red nacional Leonecom — corredor central y sudoriental",
+"o": "Leonecom",
+"cc": "SL",
+"l": [
+[
+-13.24,
+8.49
+],
+[
+-12.21,
+8.47
+],
+[
+-11.74,
+7.96
+],
+[
+-11.19,
+7.88
+]
+]
+},
+{
 "n": "Rede Ipê",
 "o": "RNP (Rede Nacional de Ensino e Pesquisa)",
 "cc": "BR",
@@ -710,6 +905,29 @@
 [
 -43.18,
 -22.91
+]
+]
+},
+{
+"n": "Somcable terrestrial backbone Djibouti-Hargeisa-Berbera-Burao",
+"o": "Somcable",
+"cc": "SO",
+"l": [
+[
+43.18,
+9.94
+],
+[
+44.06,
+9.56
+],
+[
+45.01,
+10.44
+],
+[
+45.53,
+9.52
 ]
 ]
 },
@@ -763,6 +981,101 @@
 [
 -100.39,
 20.59
+]
+]
+},
+{
+"n": "Corredor DWDM norte-sur de Mobicom Networks",
+"o": "Mobicom Networks",
+"cc": "MN",
+"l": [
+[
+110.12,
+44.88
+],
+[
+106.88,
+47.91
+],
+[
+105.92,
+49.49
+]
+]
+},
+{
+"n": "ElCat - troncal norte-sur oriental",
+"o": "ElCat",
+"cc": "KG",
+"l": [
+[
+74.59,
+42.87
+],
+[
+76.19,
+42.46
+],
+[
+76.0,
+41.43
+]
+]
+},
+{
+"n": "Corredor óptico internacional Moscú–Varsovia vía Bielorrusia",
+"o": "Beltelecom / RETN",
+"cc": "BY",
+"l": [
+[
+27.57,
+53.9
+],
+[
+23.72,
+52.11
+],
+[
+21.01,
+52.23
+]
+]
+},
+{
+"n": "Red nacional Leonecom — corredor Freetown–frontera de Guinea",
+"o": "Leonecom",
+"cc": "SL",
+"l": [
+[
+-13.24,
+8.49
+],
+[
+-13.07,
+8.34
+],
+[
+-12.79,
+8.77
+]
+]
+},
+{
+"n": "ECOWAN — troncal de la orilla sur",
+"o": "Gamtel",
+"cc": "GM",
+"l": [
+[
+-16.58,
+13.45
+],
+[
+-16.68,
+13.44
+],
+[
+-16.65,
+13.27
 ]
 ]
 },
@@ -824,6 +1137,21 @@
 ]
 },
 {
+"n": "Troncal Bishkek–Osh",
+"o": "Kyrgyztelecom",
+"cc": "KG",
+"l": [
+[
+74.59,
+42.87
+],
+[
+72.8,
+40.53
+]
+]
+},
+{
 "n": "CNT EP — Red Troncal del Pacífico",
 "o": "Corporación Nacional de Telecomunicaciones (CNT EP)",
 "cc": "EC",
@@ -835,6 +1163,36 @@
 [
 -79.96,
 -3.26
+]
+]
+},
+{
+"n": "Red nacional OPGW Thimphu–Phuentsholing",
+"o": "GovTech Bhutan / BPC",
+"cc": "BT",
+"l": [
+[
+89.64,
+27.47
+],
+[
+89.39,
+26.85
+]
+]
+},
+{
+"n": "Tajiktelecom - corredor internacional Dushanbe-Khorog hacia China",
+"o": "Tajiktelecom",
+"cc": "TJ",
+"l": [
+[
+68.78,
+38.54
+],
+[
+71.55,
+37.49
 ]
 ]
 },

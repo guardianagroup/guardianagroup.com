@@ -24,6 +24,8 @@ SALIDA = os.path.join(AQUI, 'fuentes', 'fibra-agencia.json')
 
 # Spanish / local names the voices use → the GeoNames name (folded). Only what the answers actually needed.
 ALIAS = {
+    'hargeisa': 'hargeysa', 'gomel': 'homyel', 'grodno': 'hrodna', 'darkhan': 'darhan', 'khorog': 'khorugh',  # round 17
+    'phuentsholing': 'phuntsholing', 'sainshand': 'saynshand',
     'moscu': 'moscow', 'sanpetersburgo': 'saintpetersburg', 'nizhninovgorod': 'nizhniynovgorod', 'nizhnynovgorod': 'nizhniynovgorod',
     'ekaterimburgo': 'yekaterinburg', 'ekaterinburgo': 'yekaterinburg', 'ekaterinburg': 'yekaterinburg', 'yekaterimburgo': 'yekaterinburg',
     'vladivostok': 'vladivostok', 'jabarovsk': 'khabarovsk', 'novosibirsk': 'novosibirsk', 'omsk': 'omsk', 'krasnoyarsk': 'krasnoyarsk',
@@ -82,6 +84,20 @@ def ciudades():
     return idx, idx_div
 
 
+def fuera(nombre, previo, idx):
+    """A town across the border (routes that reach the first city on the other side: Minsk–Warsaw, Hanoi–Vientiane):
+    the same name in another country, only when it is less than 800 km from the route's previous town."""
+    if not previo: return None
+    mejor, dm = None, 800.0
+    for k in {pliega(nombre), pliega(re.split(r'[(/,]', nombre)[0])}:
+        k = ALIAS.get(k, k)
+        for (c, n), q in idx.items():
+            if n != k: continue
+            d = km(previo, q)
+            if d < dm: mejor, dm = q, d
+    return mejor
+
+
 def situa(nombre, cc, idx, idx_div):
     base = re.split(r'[(/,]', nombre)[0]
     for k in (pliega(nombre), pliega(base)):
@@ -127,6 +143,7 @@ def main():
             pts, nom, sin = [], [], []
             for c in r.get('ciudades') or []:
                 p = situa(c, cc, idx, idx_div)
+                if p is None: p = fuera(c, pts[-1] if pts else None, idx)
                 if p is None: sin.append(c); continue
                 if pts and p == pts[-1]: continue
                 pts.append(p); nom.append(c)
