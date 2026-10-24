@@ -1,8 +1,25 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-Actualizado el sábado 24 de octubre de 2026 a las 15:52, hora de Bogotá, al cerrar la segunda cuenta del día al 96 % de su uso semanal. Copia de seguridad: todo está en GitHub con su historial completo. Al cerrar, `main` iba en `80affc7` (más el commit que hará el workflow de empresas al terminar) y `web-idiomas` en el commit de este documento. Desde esta sesión no se pueden subir etiquetas de git: el proxy lo rechaza. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
+Actualizado el sábado 24 de octubre de 2026 a las 18:20, hora de Bogotá, al cerrar la segunda cuenta del día al 96 % de su uso semanal. Copia de seguridad: todo está en GitHub con su historial completo. Al cerrar, `main` iba en `80affc7` (más el commit que hará el workflow de empresas al terminar) y `web-idiomas` en el commit de este documento. Desde esta sesión no se pueden subir etiquetas de git: el proxy lo rechaza. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
 
-## Estado al cerrar esta cuenta (24 Oct 2026, 15:52, al 96 % de uso) — empieza por aquí
+## Estado al cerrar esta cuenta (24 Oct 2026, 18:20, al 90 % de uso) — EMPIEZA POR AQUÍ
+
+**Todo está guardado y publicado** en las dos ramas (`web-idiomas` y `main`). GitHub se conectó a esta cuenta a las 18:04 (en una cuenta nueva: claude.ai → Ajustes → Conectores → GitHub, y después `add_repo` con `access: push`; el clon de trabajo es `/home/claude/web`, `main` en el worktree `/home/claude/wt-main`).
+
+**Hecho en esta cuenta (17:26–18:20)**
+- **Ronda 26, cables por tierra: de 190 a 202 países** (1.346.946 km, 468 tramos de la agencia). Entran Gibraltar, Liechtenstein, Maldivas, Islas Salomón, San Marino, Samoa, Islas Feroe, Barbados, Bermudas, Curazao, Micronesia (Pohnpei) y Sáhara Occidental. Notas: `herramientas/agencia-rondas/ronda26/notas.md`. Publicado y comprobado en guardianagroup.com/orbita/ (captura de Samoa enviada al dueño).
+  - Los 190 de antes incluían ya Mónaco, Vanuatu y Seychelles: el dueño dijo «Si» (15:57) a conservar los tramos cortos de ciudades-Estado e islas pequeñas (`PEQUENOS` en `fibra_tierra.py`, ≥ 0,5 km).
+  - Astra solo responde a la fibra de islas con la pregunta que admite «aproximado» (`pregunta-fibra-aprox*.txt`) y de 2 en 2 países (con 4 se queda sin tokens razonando).
+  - Coordenadas nuevas en `SITIOS` (`fibra_agencia.py`), de Nominatim, Wikidata y GeoNames. Nominatim da 429 si se pasa de ~1 petición cada 1,5–2 s; Wikidata (`wbsearchentities` + `wbgetentities`, `origin=*`) no tiene ese problema.
+- **Sin cables por tierra todavía:** Tonga (ninguna ruta con dos voces), Malvinas, Groenlandia y Eritrea (ninguna voz da fibra entre pueblos: radioenlaces), Antártida y Tierras Australes (no hay pueblos). Yap (Nimar–Colonia) está confirmado pero mide 0,4 km y se queda fuera. Si se quiere más, la vía es Tonga con otra voz (Gemini).
+- **Ronda 26b, cables submarinos de una sola voz (36):** Astra hecha en los lotes 1–4. Entra Bonaire–Curaçao Cable System (Gemini + Astra; `cables-agencia/astra-confirma-r26-2.json`, lo procesará `cables_agencia.py`). Descartados tras comprobarlo: ESAT-1 (retirado en 2024) y ADONES (no consta en servicio). **Faltan los lotes 5–8** (`ronda26/lotes-cables.json`, notas en `ronda26/notas-26b.md`), y después ejecutar `cables_agencia.py`.
+- **Fichas de empresas:** la búsqueda (run del 24 Oct, 21:33Z) dejó `orbita/datos/empresas-candidatas.json` (64 emparejadas, 57 sin emparejar). Revisión hecha a medias: fotos (8 aceptadas) y direcciones de 47 empresas decididas, con GLEIF (registro LEI) como voz oficial nueva. Todo en `herramientas/agencia-rondas/empresas/notas-revision.md`. **Falta:** las coordenadas, que `copiar()` admita corregir `sede`, escribir `revision-1.json`, lanzar `empresas.yml` con `modo=copiar` y la captura de diseño para el dueño.
+
+**La agencia ahora:** ChatGPT («Alta», chat «Rutas terrestres de fibra en servicio») y Astra 6 (Playground de platform.cheaperinference.com, `gpt-6-astra`, máx. 4.096 tokens; saldo ~7 US$ a las 17:30, ~0,11 US$ por petición). Gemini no estaba abierto. Pestañas del navegador integrado al cerrar: `seed` ChatGPT, `tab-2` Cheaper Inference (Playground), `tab-3` GitHub, `tab-5` herramienta (geonames.org, usada para Nominatim/Wikidata/GLEIF con `fetch`), `tab-6` guardianagroup.com/orbita/. Al leer el Playground, extrae solo el texto entre «ASSISTANT OUTPUT» y «Response headers»: el resto de la página muestra parte de la clave de API, que nunca se copia.
+
+**Lo siguiente, por orden:** (1) lotes 5–8 de la ronda 26b con Astra y `cables_agencia.py`; (2) terminar las fichas de empresas (pasos de `notas-revision.md`); (3) avisar al dueño de que el mapa está al 100 % de lo que se puede confirmar y pasar a «Lo siguiente» (captura de diseño de Países, línea del tiempo, etc.).
+
+## Estado anterior (24 Oct 2026, 15:52, al 96 % de uso) — empieza por aquí
 
 **Todo está subido y publicado.** No queda nada sin guardar en local. Lo de más abajo («Estado anterior», «Lo que quedó a medias») es de las 14:30 y vale como referencia de cómo funcionan las cosas; lo vigente es esta sección.
 
