@@ -934,7 +934,10 @@
     return capas.sub.vis;
   }
   // what the pointer touches: a soft halo and a brighter, wider core in the line's own colour
-  function resalta(cx, p, G, lineas, rgb) { pintaLineas(cx, p, G, lineas, `rgba(${rgb},.22)`, 7); pintaColas(cx, p, G, lineas, rgb, 0.22, 7); opaco(cx, () => { pintaLineas(cx, p, G, lineas, `rgba(${rgb},1)`, 2.3); pintaColas(cx, p, G, lineas, rgb, 1, 2.3); }); }
+  // 23 Oct 2026: the grey of «capacidad no publicada» lit at full strength read as white; it lights a darker,
+  // slightly blue grey instead, so it is still grey under the pointer
+  const GRIS_RESALTE = '136,146,162';
+  function resalta(cx, p, G, lineas, rgb) { if (rgb === FIBRA_COL[0]) rgb = GRIS_RESALTE; pintaLineas(cx, p, G, lineas, `rgba(${rgb},.22)`, 7); pintaColas(cx, p, G, lineas, rgb, 0.22, 7); opaco(cx, () => { pintaLineas(cx, p, G, lineas, `rgba(${rgb},1)`, 2.3); pintaColas(cx, p, G, lineas, rgb, 1, 2.3); }); }
   // paint something without the additive glow (so a blue stays blue), then go back to how the layer was painting
   function opaco(cx, f) { const g = cx.globalCompositeOperation; cx.globalCompositeOperation = 'source-over'; f(); cx.globalCompositeOperation = g; }
   function pintaLineas(cx, p, G, lineas, color, ancho) {
