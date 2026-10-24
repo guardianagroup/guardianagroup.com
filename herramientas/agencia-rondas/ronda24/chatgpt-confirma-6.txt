@@ -1,0 +1,138 @@
+[
+{
+"nombre": "Pencan-6",
+"llegadas": [
+{
+"lugar": "Sardina de Galdar",
+"pais": "ES",
+"lat": 28.1519,
+"lon": -15.6961
+},
+{
+"lugar": "El Medano",
+"pais": "ES",
+"lat": 28.0462,
+"lon": -16.5363
+},
+{
+"lugar": "Conil de la Frontera",
+"pais": "ES",
+"lat": 36.2772,
+"lon": -6.0885
+}
+],
+"anio": 1999,
+"km": 1854,
+"duenos": [
+"Telefonica"
+],
+"fuentes": [
+"https://blog.cnmc.es/2017/09/05/que-cables-submarinos-conectan-el-territorio-espanol-enganchados-a-los-cables-submarinos-ii/",
+"https://www.cnmc.es/sites/default/files/1531078_8.pdf",
+"https://www.miteco.gob.es/content/dam/miteco/es/costas/temas/proteccion-medio-marino/II_Analisis_Presiones_Canarias_tcm30-130933.pdf"
+]
+},
+{
+"nombre": "BT Highlands and Islands Submarine Cable System",
+"llegadas": [
+{"lugar": "Achnaba", "pais": "GB", "lat": 56.0194, "lon": -5.3658},
+{"lugar": "Aikerness Bay", "pais": "GB", "lat": 59.118, "lon": -3.0951},
+{"lugar": "Ardbeg Point", "pais": "GB", "lat": 55.8586, "lon": -5.0636},
+{"lugar": "Ardgour", "pais": "GB", "lat": 56.7216, "lon": -5.2337},
+{"lugar": "Ardmair", "pais": "GB", "lat": 57.9341, "lon": -5.1962},
+{"lugar": "Ardnacross", "pais": "GB", "lat": 55.4765, "lon": -5.5334},
+{"lugar": "Ardneil Bay", "pais": "GB", "lat": 55.693, "lon": -4.8894},
+{"lugar": "Ardvasar", "pais": "GB", "lat": 57.0594, "lon": -5.9065},
+{"lugar": "Ardyne Point", "pais": "GB", "lat": 55.8694, "lon": -5.02},
+{"lugar": "Balla", "pais": "GB", "lat": 57.0815, "lon": -7.3122},
+{"lugar": "Bay of Tuquoy", "pais": "GB", "lat": 59.2798, "lon": -2.9395},
+{"lugar": "Blackwaterfoot", "pais": "GB", "lat": 55.502, "lon": -5.3321},
+{"lugar": "Branahuie Bay", "pais": "GB", "lat": 58.2091, "lon": -6.3108},
+{"lugar": "Calgary", "pais": "GB", "lat": 56.5821, "lon": -6.2724},
+{"lugar": "Coilleag", "pais": "GB", "lat": 57.0736, "lon": -7.3022},
+{"lugar": "Corran", "pais": "GB", "lat": 56.7225, "lon": -5.2454},
+{"lugar": "Corrie", "pais": "GB", "lat": 55.6437, "lon": -5.1414},
+{"lugar": "Craighouse", "pais": "GB", "lat": 55.8337, "lon": -5.9538},
+{"lugar": "Down Craig", "pais": "GB", "lat": 55.7802, "lon": -4.9005},
+{"lugar": "Duart Bay", "pais": "GB", "lat": 56.4558, "lon": -5.6694},
+{"lugar": "Dunvegan", "pais": "GB", "lat": 57.4363, "lon": -6.5817},
+{"lugar": "Feolin Ferry", "pais": "GB", "lat": 55.8468, "lon": -6.0899},
+{"lugar": "Ganavan Bay", "pais": "GB", "lat": 56.4378, "lon": -5.4758},
+{"lugar": "Glenbarr", "pais": "GB", "lat": 55.5655, "lon": -5.6976},
+{"lugar": "Holmar", "pais": "GB", "lat": 57.3667, "lon": -7.2741},
+{"lugar": "Kilchatten Bay", "pais": "GB", "lat": 55.7518, "lon": -5.0281},
+{"lugar": "Kilchoan Ferry", "pais": "GB", "lat": 56.6886, "lon": -6.094},
+{"lugar": "Lagavulin", "pais": "GB", "lat": 55.6361, "lon": -6.1254},
+{"lugar": "Largs", "pais": "GB", "lat": 55.7933, "lon": -4.8673},
+{"lugar": "Leverburgh", "pais": "GB", "lat": 57.7694, "lon": -7.0084},
+{"lugar": "Lochmaddy", "pais": "GB", "lat": 57.6037, "lon": -7.1633},
+{"lugar": "Ludag", "pais": "GB", "lat": 57.1055, "lon": -7.3281},
+{"lugar": "Mallaig", "pais": "GB", "lat": 57.0085, "lon": -5.8204},
+{"lugar": "North Bay", "pais": "GB", "lat": 57.0253, "lon": -7.4495},
+{"lugar": "Ormsary", "pais": "GB", "lat": 55.8917, "lon": -5.6146},
+{"lugar": "Otter Ferry", "pais": "GB", "lat": 56.0083, "lon": -5.3212},
+{"lugar": "Port Askaig", "pais": "GB", "lat": 55.8477, "lon": -6.1063},
+{"lugar": "Portachur Point", "pais": "GB", "lat": 55.7428, "lon": -4.9439},
+{"lugar": "Scarinish", "pais": "GB", "lat": 56.5038, "lon": -6.8085},
+{"lugar": "Tobermory", "pais": "GB", "lat": 56.6218, "lon": -6.0703}
+],
+"anio": 2014,
+"km": 402,
+"duenos": [
+"BT Group"
+],
+"fuentes": [
+"https://www.gov.scot/publications/pilot-pentland-firth-orkney-waters-marine-spatial-plan/pages/7/",
+"https://assets.publishing.service.gov.uk/media/5a7b86b3e5274a7202e17bb2/0199.pdf",
+"https://consult.gov.scot/marine-scotland/pfowmarinespatialplan/supporting_documents/PFOW%20MSP%20Consultation%20Draft.pdf"
+]
+},
+{
+"nombre": "TGN-Eurasia (TGN-EA)",
+"llegadas": [
+{"lugar": "Mumbai", "pais": "IN", "lat": 19.0761, "lon": 72.8759},
+{"lugar": "Djibouti City", "pais": "DJ", "lat": 11.5947, "lon": 43.148},
+{"lugar": "Jeddah", "pais": "SA", "lat": 21.4813, "lon": 39.1828},
+{"lugar": "Zafarana", "pais": "EG", "lat": 29.1167, "lon": 32.6499},
+{"lugar": "Abu Talat", "pais": "EG", "lat": 31.0718, "lon": 29.7025},
+{"lugar": "Marseille", "pais": "FR", "lat": 43.2932, "lon": 5.3726}
+],
+"anio": 2012,
+"km": 9280,
+"duenos": [
+"Tata Communications",
+"SEACOM",
+"Telecom Egypt"
+],
+"fuentes": [
+"https://www.tatacommunications.com/press-release/tata-communications-completes-worlds-first-wholly-owned-cable-network-ring-around-world",
+"https://www.sec.gov/Archives/edgar/data/1116134/000119312512357485/d359387d20f.htm",
+"https://documents1.worldbank.org/curated/en/099450206282323160/pdf/IDU00f2d51f40fd4a04e630b0b60d27b1a4f548b.pdf"
+]
+},
+{
+"nombre": "Ooredoo Maldives Domestic Submarine Cable (OMDSC)",
+"llegadas": [
+{"lugar": "Velidhoo", "pais": "MV", "lat": 5.6622, "lon": 73.2751},
+{"lugar": "Dhuvaafaru", "pais": "MV", "lat": 5.6293, "lon": 73.0414},
+{"lugar": "Eydhafushi", "pais": "MV", "lat": 5.1032, "lon": 73.0708},
+{"lugar": "Hulhumale", "pais": "MV", "lat": 4.2119, "lon": 73.5402},
+{"lugar": "Maafushi", "pais": "MV", "lat": 3.9409, "lon": 73.4895},
+{"lugar": "Dhangethi", "pais": "MV", "lat": 3.6081, "lon": 72.9556},
+{"lugar": "Maamigili", "pais": "MV", "lat": 3.4729, "lon": 72.8363},
+{"lugar": "Kudahuvadhoo", "pais": "MV", "lat": 2.6709, "lon": 72.8933}
+],
+"anio": 2024,
+"km": 286,
+"duenos": [
+"Ooredoo Maldives PLC",
+"Dhiraagu PLC"
+],
+"fuentes": [
+"https://www.ooredoo.mv/static/ooredoo_maldives1/pdf/20221012-press-release-establishment-of-a-domestic-submarine-cable.pdf",
+"https://www.dhiraagu.com.mv/about-us/investor-relations/announcements-disclosures/domestic-submarine-cable-system-expansion-project",
+"https://informinvestor.cmda.gov.mv/storage/uploads/QEoAaEo9/9bhckwzj.pdf",
+"https://informinvestor.cmda.gov.mv/storage/uploads/1VYxVroP/tdrzakv7.pdf"
+]
+}
+]
