@@ -1,0 +1,38 @@
+[
+  {
+    "nombre": "SIEPAC / REDCA (OPGW de 36 fibras) – Guate Norte–Panaluya–El Florido",
+    "operador": "REDCA",
+    "pais": "GT",
+    "ciudades": [
+      "Guatemala City",
+      "Zacapa",
+      "Chiquimula"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://eprsiepac.com/linea-siepac/ — EPR (Empresa Propietaria de la Red), tabla de la Línea SIEPAC: Guate Norte–Panaluya (109,91 km) y Panaluya–El Florido (73,46 km), en servicio desde el 26-ago-2012, con cable de guarda OPGW de 36 hilos de fibra óptica. Pueblos en lugar de subestaciones: Guatemala City = subestación Guate Norte (EPR: 14°40′ N, 90°27′ O); Zacapa = subestación Panaluya (EPR: 15°02′ N, 89°36′ O, junto a Río Hondo, a unos 10 km de Zacapa); Chiquimula = el extremo El Florido, paso fronterizo con Honduras en Camotán, departamento de Chiquimula (a unos 35 km de la ciudad). EPR no publica puntos intermedios. https://asep.gob.pa/wp-content/uploads/telecomunicaciones/presentaciones_uit/Jueves%2010%20de%20septiembre/13_jueves_pozo_proyectos_regionales_interconexion.pdf — presentación de REDCA (sept. 2015, publicada por la ASEP de Panamá): «Brindamos una red regional terrestre de F.O. en OPGW», con punto de presencia en «Guate Este, Guatemala» (Guatemala City)."
+  },
+  {
+    "nombre": "SIEPAC / REDCA (OPGW de 36 fibras) – Aguacapa–frontera de El Salvador–Ahuachapán",
+    "operador": "REDCA",
+    "pais": "GT",
+    "ciudades": [
+      "Guanagazapa",
+      "Ahuachapán"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://eprsiepac.com/linea-siepac/ — EPR, tabla de la Línea SIEPAC: Aguacapa–Frontera El Salvador (99,49 km) y, ya en El Salvador, Frontera Guatemala–Ahuachapán (18,97 km), ambos en servicio desde el 22-ene-2012, con OPGW de 36 fibras. Pueblos en lugar de subestaciones: Guanagazapa (Escuintla, en GeoNames cities500) = subestación Aguacapa (EPR: 14°11′ N, 90°36′ O, a unos 6 km); Ahuachapán = subestación Ahuachapán (EPR: 13°55′ N, 89°49′ O), primera ciudad al otro lado de la frontera. EPR no publica puntos intermedios."
+  },
+  {
+    "nombre": "SIEPAC / REDCA (OPGW de 36 fibras) – Panamá 1–Veladero–frontera de Costa Rica–Río Claro",
+    "operador": "REDCA",
+    "pais": "PA",
+    "ciudades": [
+      "Panama City",
+      "Veladero",
+      "David",
+      "Golfito"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://eprsiepac.com/linea-siepac/ — EPR, tabla de la Línea SIEPAC: Frontera Costa Rica–Veladero (150,2 km) y, en Costa Rica, Río Claro–Frontera Panamá (22,63 km), ambos en servicio desde el 31-dic-2010, con OPGW de 36 fibras. https://asep.gob.pa/wp-content/uploads/telecomunicaciones/presentaciones_uit/Jueves%2010%20de%20septiembre/13_jueves_pozo_proyectos_regionales_interconexion.pdf — presentación de REDCA (sept. 2015, publicada por la ASEP): «Brindamos una red regional terrestre de F.O. en OPGW», con punto de presencia en la subestación «Panamá1, Panamá». Pueblos en lugar de subestaciones: Panama City = subestación Panamá 1; Veladero = subestación Veladero (Chiriquí; EPR: 8°15′ N, 81°39′ O); David = la recta Veladero–Río Claro pasa a unos 7 km de David y la línea solo es un 6 % más larga que esa recta; Golfito = subestación Río Claro (EPR: 8°41′ N, 83°04′ O), en el cantón de Golfito (Costa Rica), a unos 10 km. Ni EPR ni REDCA publican puntos intermedios entre Veladero y Panamá 1."
+  }
+]
