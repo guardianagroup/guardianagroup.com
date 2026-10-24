@@ -155,7 +155,10 @@ def main():
         voz = os.path.basename(f).split('-')[0].lower()
         for r in json.load(open(f, encoding='utf-8')):
             cc = (r.get('pais') or '').upper()[:2]
-            if (r.get('estado') or 'en servicio').lower().strip() not in ('en servicio', 'operativo', 'in service'): continue
+            # «en servicio parcial» or «en servicio; expansión en desarrollo» still is fibre in service (owner, 24 Oct 2026, 09:00:
+            # «lo más aproximado posible»); «no verificado» or planned is not
+            est = (r.get('estado') or 'en servicio').lower().strip()
+            if not est.startswith(('en servicio', 'operativo', 'in service')) or 'no verificad' in est: continue
             pts, nom, sin = [], [], []
             for c in r.get('ciudades') or []:
                 p = situa(c, cc, idx, idx_div)
