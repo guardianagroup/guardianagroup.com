@@ -80,6 +80,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
   - Sus respuestas van a `herramientas/cables-agencia/astra-confirma-<n>.json`. Mira cuáles existen y sigue por el primer lote que falte.
   - Después, el proceso de los cables submarinos.
   - Los 2 que propuso Astra necesitan otra voz.
+  - **Ronda 24b, en marcha a las 13:15:** ChatGPT confirma los 67 cables de una sola voz que no propuso él, en 9 lotes (`ronda24/lotes-chatgpt.json`). Las respuestas van a `herramientas/cables-agencia/chatgpt-confirma-<n>.json`. Mira cuáles existen, procesa los que no estén publicados y sigue por el primer lote que falte. Los 64 que propuso ChatGPT necesitan otra voz, por ejemplo Gemini con un modelo potente o Kimi.
 
 **Lo siguiente que pidió el dueño, por tramos**
 
