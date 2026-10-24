@@ -1623,6 +1623,76 @@
 ]
 },
 {
+"n": "NICTBB Central-Western Corridor",
+"o": "TTCL / National ICT Broadband Backbone",
+"cc": "TZ",
+"l": [
+[
+39.27,
+-6.82
+],
+[
+38.35,
+-6.64
+],
+[
+37.66,
+-6.82
+],
+[
+35.74,
+-6.17
+],
+[
+34.74,
+-4.82
+],
+[
+33.18,
+-4.22
+],
+[
+33.42,
+-3.66
+],
+[
+32.9,
+-2.52
+]
+]
+},
+{
+"n": "NICTBB Southern Corridor",
+"o": "TTCL / National ICT Broadband Backbone",
+"cc": "TZ",
+"l": [
+[
+37.66,
+-6.82
+],
+[
+36.98,
+-7.4
+],
+[
+35.7,
+-7.77
+],
+[
+34.833,
+-8.85
+],
+[
+33.45,
+-8.9
+],
+[
+32.77,
+-9.3
+]
+]
+},
+{
 "n": "TE North-South Red Sea Terrestrial Corridor",
 "o": "Telecom Egypt",
 "cc": "EG",
@@ -2140,6 +2210,41 @@
 [
 -70.65,
 -33.46
+]
+]
+},
+{
+"n": "Dorsale Côtière Nord-Sud (Bizerte - Tunis - Sfax - Frontière Libyenne)",
+"o": "Tunisie Telecom",
+"cc": "TN",
+"l": [
+[
+10.17,
+36.82
+],
+[
+10.62,
+36.4
+],
+[
+10.381,
+36.135
+],
+[
+10.64,
+35.83
+],
+[
+10.58,
+35.73
+],
+[
+10.72,
+35.3
+],
+[
+10.76,
+34.74
 ]
 ]
 },
@@ -2751,6 +2856,68 @@
 ]
 },
 {
+"n": "Uganda NBI Eastern Corridor",
+"o": "NITA-U",
+"cc": "UG",
+"l": [
+[
+32.58,
+0.32
+],
+[
+32.76,
+0.35
+],
+[
+33.2,
+0.44
+],
+[
+33.47,
+0.61
+],
+[
+34.18,
+0.69
+],
+[
+34.18,
+1.08
+]
+]
+},
+{
+"n": "Uganda NBI South-Western Corridor",
+"o": "NITA-U",
+"cc": "UG",
+"l": [
+[
+32.58,
+0.32
+],
+[
+31.73,
+-0.33
+],
+[
+31.16,
+-0.4
+],
+[
+30.65,
+-0.6
+],
+[
+30.26,
+-0.88
+],
+[
+29.99,
+-1.25
+]
+]
+},
+{
 "n": "ENTEL dorsal oeste–este Desaguadero–Puerto Quijarro",
 "o": "ENTEL Bolivia",
 "cc": "BO",
@@ -3058,37 +3225,6 @@
 ]
 },
 {
-"n": "Tunisie Telecom national backbone Tunis-Sousse-Sfax",
-"o": "Tunisie Telecom",
-"cc": "TN",
-"l": [
-[
-10.17,
-36.82
-],
-[
-10.62,
-36.4
-],
-[
-10.381,
-36.135
-],
-[
-10.64,
-35.83
-],
-[
-10.72,
-35.3
-],
-[
-10.76,
-34.74
-]
-]
-},
-{
 "n": "STE National Transmission Backbone",
 "o": "Syrian Telecommunications Establishment",
 "cc": "SY",
@@ -3301,6 +3437,33 @@
 [
 31.198,
 -27.112
+]
+]
+},
+{
+"n": "Troncal del noroeste Tunis–Jendouba",
+"o": "Tunisie Telecom",
+"cc": "TN",
+"l": [
+[
+10.17,
+36.82
+],
+[
+9.61,
+36.65
+],
+[
+9.18,
+36.73
+],
+[
+8.97,
+36.607
+],
+[
+8.78,
+36.5
 ]
 ]
 },
@@ -3635,6 +3798,40 @@
 ]
 },
 {
+"n": "Somaliland Terrestrial Fiber Optic Backbone - Berbera - Eastern Corridor",
+"o": "Somcable",
+"cc": "SO",
+"l": [
+[
+45.01,
+10.44
+],
+[
+44.06,
+9.56
+]
+]
+},
+{
+"n": "Somaliland Terrestrial Fiber Optic Backbone - Berbera - Eastern Corridor",
+"o": "Somcable",
+"cc": "SO",
+"l": [
+[
+45.01,
+10.44
+],
+[
+45.53,
+9.52
+],
+[
+47.36,
+8.477
+]
+]
+},
+{
 "n": "EPTC National Fibre Optic Backbone - Ruta Norte-Este",
 "o": "EPTC",
 "cc": "SZ",
@@ -3831,6 +4028,40 @@
 ]
 },
 {
+"n": "Troncal de Somalilandia Borama–Hargeisa–Berbera–Burao",
+"o": "Somcable",
+"cc": "SO",
+"l": [
+[
+43.18,
+9.94
+],
+[
+44.06,
+9.56
+]
+]
+},
+{
+"n": "Troncal litoral Tunis–Gabès",
+"o": "Tunisie Telecom",
+"cc": "TN",
+"l": [
+[
+10.76,
+34.74
+],
+[
+10.07,
+34.299
+],
+[
+10.1,
+33.88
+]
+]
+},
+{
 "n": "National Transmission Network – Highlands Terrestrial Fibre Backbone",
 "o": "PNG DataCo",
 "cc": "PG",
@@ -3869,29 +4100,6 @@
 [
 124.4,
 40.1
-]
-]
-},
-{
-"n": "SomCable western Somaliland terrestrial backbone",
-"o": "SomCable",
-"cc": "SO",
-"l": [
-[
-43.18,
-9.94
-],
-[
-43.62,
-9.7
-],
-[
-44.06,
-9.56
-],
-[
-45.01,
-10.44
 ]
 ]
 },
@@ -4359,25 +4567,6 @@
 ]
 },
 {
-"n": "Somaliland Terrestrial Fiber Optic Backbone - Berbera - Eastern Corridor",
-"o": "Somcable",
-"cc": "SO",
-"l": [
-[
-44.06,
-9.56
-],
-[
-45.53,
-9.52
-],
-[
-47.36,
-8.477
-]
-]
-},
-{
 "n": "EPTC National Fibre Optic Backbone - Ruta Oeste-Sur",
 "o": "EPTC",
 "cc": "SZ",
@@ -4393,21 +4582,6 @@
 [
 31.892,
 -27.31
-]
-]
-},
-{
-"n": "Somcable terrestrial backbone Djibouti-Hargeisa-Berbera-Burao",
-"o": "Somcable",
-"cc": "SO",
-"l": [
-[
-45.01,
-10.44
-],
-[
-45.53,
-9.52
 ]
 ]
 },
@@ -5353,6 +5527,53 @@
 {
 "n": "",
 "o": "",
+"cc": "ZW",
+"l": [
+[
+32.67,
+-18.97
+],
+[
+32.13,
+-18.53
+],
+[
+31.55,
+-18.19
+],
+[
+31.05,
+-17.83
+],
+[
+30.7,
+-17.88
+],
+[
+30.14,
+-18.13
+],
+[
+29.92,
+-18.33
+],
+[
+29.81,
+-18.93
+],
+[
+29.82,
+-19.45
+],
+[
+28.58,
+-20.15
+]
+]
+},
+{
+"n": "",
+"o": "",
 "cc": "EC",
 "l": [
 [
@@ -5596,6 +5817,41 @@
 [
 81.12,
 6.12
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "ZA",
+"l": [
+[
+28.04,
+-26.2
+],
+[
+28.36,
+-26.5
+],
+[
+28.6,
+-27.03
+],
+[
+29.13,
+-28.27
+],
+[
+29.87,
+-29.01
+],
+[
+30.39,
+-29.62
+],
+[
+31.03,
+-29.86
 ]
 ]
 },
@@ -6452,6 +6708,25 @@
 {
 "n": "",
 "o": "",
+"cc": "ZA",
+"l": [
+[
+28.04,
+-26.2
+],
+[
+27.23,
+-27.65
+],
+[
+26.21,
+-29.12
+]
+]
+},
+{
+"n": "",
+"o": "",
 "cc": "CO",
 "l": [
 [
@@ -6688,6 +6963,21 @@
 [
 -5.95,
 6.13
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "ZW",
+"l": [
+[
+31.05,
+-17.83
+],
+[
+30.83,
+-20.06
 ]
 ]
 },

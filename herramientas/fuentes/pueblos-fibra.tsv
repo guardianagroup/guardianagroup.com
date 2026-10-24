@@ -1518,20 +1518,34 @@ villahermosa	MX	17.98625	-92.93928	353577	Villahermosa
 zacatecas	MX	22.76843	-102.58141	129011	Zacatecas
 cyberjaya	MY	2.92281	101.65718	79200	Cyberjaya
 johorbahru	MY	1.4655	103.7578	858118	Johor Bahru
+beira	MZ	-19.84361	34.83889	687764	Beira
+chimoio	MZ	-19.11639	33.48333	422046	Chimoio
+dondo	MZ	-19.60944	34.74306	82260	Dondo
+manhica	MZ	-25.40222	32.80722	65240	Manhiça
+manica	MZ	-18.93444	32.87556	41961	Manica
+maputo	MZ	-25.96553	32.58322	1254837	Maputo
+marracuene	MZ	-25.73694	32.67639	13051	Marracuene
+maxixe	MZ	-23.85972	35.34722	126408	Maxixe
+vilanculos	MZ	-22.0	35.31667	43183	Vilankulo
+xaixai	MZ	-25.05194	33.64417	154356	Xai-Xai
+arandis	NA	-22.41749	14.97385	6127	Arandis
 aranos	NA	-24.14126	19.11754	4365	Aranos
 aus	NA	-26.66557	16.26109	1263	Aus
 gobabis	NA	-22.45338	18.97159	22639	Gobabis
 grootfontein	NA	-19.57328	18.1003	24099	Grootfontein
 kamanjab	NA	-19.62882	14.8452	2127	Kamanjab
+karasburg	NA	-28.01658	18.74797	6054	Karasburg
 karibib	NA	-21.93554	15.85654	6898	Karibib
 keetmanshoop	NA	-26.57654	18.13359	23049	Keetmanshoop
 maltahohe	NA	-24.83923	16.9859	2819	Maltahöhe
 mariental	NA	-24.62705	17.96471	14789	Mariental
+noordoewer	NA	-28.71817	17.62147	2401	Noordoewer
 okahandja	NA	-21.98141	16.9029	26832	Okahandja
 omaruru	NA	-21.42403	15.94611	11547	Omaruru
 omitara	NA	-22.28979	18.00847	833	Omitara
 omuthiya	NA	-18.36463	16.58146	5000	Omuthiya
 ondangwa	NA	-17.90824	15.98037	27049	Ondangwa
+ongwediva	NA	-17.77198	15.76564	24012	Ongwediva
 oshakati	NA	-17.78833	15.70436	43309	Oshakati
 oshivelo	NA	-18.61972	17.16743	2287	Oshivelo
 otavi	NA	-19.63805	17.33986	6213	Otavi
@@ -1542,7 +1556,10 @@ outjo	NA	-20.10691	16.15415	10009	Outjo
 rehoboth	NA	-23.317	17.09	34185	Rehoboth
 ruacana	NA	-17.42817	14.41504	3537	Ruacana
 stampriet	NA	-24.34494	18.40464	2307	Stampriet
+swakopmund	NA	-22.67842	14.52663	53009	Swakopmund
 tsumeb	NA	-19.24842	17.71345	22845	Tsumeb
+usakos	NA	-22.00219	15.58601	9147	Usakos
+walvisbay	NA	-22.9575	14.50528	73598	Walvis Bay
 windhoek	NA	-22.55941	17.08323	386219	Windhoek
 witvlei	NA	-22.41039	18.49359	2095	Witvlei
 boulouparis	NC	-21.86226	166.05122	2146	Bouloupari
@@ -1563,6 +1580,33 @@ poum	NC	-20.23333	164.01667	1405	Poum
 poya	NC	-21.35	165.15	2617	Poya
 touho	NC	-20.79094	165.24987	2283	Touho
 voh	NC	-20.96667	164.7	2272	Voh
+birninkonni	NE	13.79599	5.25026	85494	Birni N Konni
+dogondoutchi	NE	13.6403	4.02649	50037	Dogondoutchi
+dosso	NE	13.049	3.1937	79406	Dosso
+gaya	NE	11.88435	3.44919	61533	Gaya
+madaoua	NE	14.073	5.96	37858	Madaoua
+maradi	NE	13.5	7.10174	361702	Maradi
+niamey	NE	13.51366	2.1098	1323691	Niamey
+tessaoua	NE	13.75737	7.9874	58750	Tessaoua
+zinder	NE	13.80716	8.9881	318874	Zinder
+abuja	NG	9.05785	7.49508	2690000	Abuja
+asaba	NG	6.19824	6.73187	73374	Asaba
+awka	NG	6.21269	7.07199	167738	Awka
+benincity	NG	6.33815	5.62575	1782000	Benin City
+bida	NG	9.08044	6.0099	400000	Bida
+enugu	NG	6.44132	7.49883	950000	Enugu
+ibadan	NG	7.37756	3.90591	3649000	Ibadan
+ilorin	NG	8.49664	4.54214	1080000	Ilorin
+jebba	NG	9.11972	4.8236	21488	Jebba
+kaduna	NG	10.52641	7.43879	1850000	Kaduna
+kano	NG	12.00012	8.51672	4910000	Kano
+lagos	NG	6.45407	3.39467	15388000	Lagos
+mokwa	NG	9.29482	5.05412	21128	Mokwa
+ogbomoso	NG	8.13373	4.24014	433030	Ogbomoso
+onitsha	NG	6.14978	6.78569	1553000	Onitsha
+ore	NG	6.74716	4.8761	13905	Ore
+sagamu	NG	6.8485	3.64633	214558	Shagamu
+zaria	NG	11.11128	7.7227	980000	Zaria
 bilwi	NI	14.03507	-83.38882	33635	Puerto Cabezas
 ciudadsandino	NI	12.15889	-86.34417	50000	Ciudad Sandino
 siuna	NI	13.73321	-84.77725	16056	Siuna
@@ -1834,6 +1878,9 @@ tabuk	SA	28.3998	36.57151	667000	Tabuk
 taif	SA	21.27028	40.41583	688693	Ta’if
 thuwal	SA	22.28272	39.11245	26957	Thuwal
 yanbu	SA	24.08954	38.0618	200161	Yanbu
+atbara	SD	17.70217	33.98638	112021	Atbara
+portsudan	SD	19.61745	37.21644	489725	Port Sudan
+sinkat	SD	18.8405	36.8351	35617	Sinkat
 kiruna	SE	67.85572	20.22513	17037	Kiruna
 lulea	SE	65.58415	22.15465	77832	Luleå
 stockholm	SE	59.32938	18.06871	1515017	Stockholm
@@ -1872,6 +1919,21 @@ pujehun	SL	7.35806	-11.72083	7926	Pujehun
 segbwema	SL	7.99471	-10.9502	16532	Segbwema
 waterloo	SL	8.3389	-13.07091	55000	Waterloo
 zimmi	SL	7.31356	-11.30818	4796	Zimmi
+dakar	SN	14.6937	-17.44406	2646503	Dakar
+diourbel	SN	14.64792	-16.24363	157554	Diourbel
+kaffrine	SN	14.10594	-15.5508	57307	Kaffrine
+kaolack	SN	14.15197	-16.07259	298904	Kaolack
+kidira	SN	14.45668	-12.21659	13551	Kidira
+koungheul	SN	13.98333	-14.8	31149	Koungheul
+louga	SN	15.61867	-16.22436	113365	Louga
+matam	SN	15.65587	-13.25544	27695	Matam
+ndioum	SN	16.51293	-14.64706	20270	Ndioum
+ourossogui	SN	15.60588	-13.3223	27222	Ouro Sogui
+richardtoll	SN	16.4625	-15.70083	73147	Richard-Toll
+saintlouis	SN	16.01793	-16.48962	254171	Saint-Louis
+tambacounda	SN	13.77073	-13.66734	149071	Tambacounda
+thies	SN	14.78944	-16.92602	317763	Thiès
+tivaouane	SN	14.95186	-16.8152	102658	Tivaouane
 berbera	SO	10.43959	45.01432	242344	Berbera
 borama	SO	9.93611	43.18278	597842	Borama
 bosaso	SO	11.28421	49.18158	74287	Bosaso
@@ -2105,12 +2167,20 @@ taipei	TW	25.05306	121.52639	7871900	Taipei
 taitung	TW	22.75991	121.14457	103260	Taitung
 taoyuan	TW	24.99368	121.29696	475798	Taoyuan
 yilan	TW	24.757	121.753	94188	Yilan
+arusha	TZ	-3.36667	36.68333	617631	Arusha
+chalinze	TZ	-6.63784	38.35396	34335	Chalinze
 daressalaam	TZ	-6.82349	39.26951	5383728	Dar es Salaam
 dodoma	TZ	-6.17221	35.73947	765179	Dodoma
 iringa	TZ	-7.76667	35.7	202490	Iringa
+korogwe	TZ	-5.15	38.48333	62032	Korogwe
+makambako	TZ	-8.85	34.83333	116232	Makumbako
 mbeya	TZ	-8.9	33.45	541603	Mbeya
+mikumi	TZ	-7.40409	36.98309	20000	Mikumi
 morogoro	TZ	-6.82102	37.66122	471409	Morogoro
+moshi	TZ	-3.35	37.33333	221733	Moshi
 mwanza	TZ	-2.51667	32.9	1104521	Mwanza
+nzega	TZ	-4.21667	33.18333	125193	Nzega
+same	TZ	-4.06667	37.73333	34322	Same
 shinyanga	TZ	-3.66393	33.42118	139727	Shinyanga
 singida	TZ	-4.81629	34.74358	232459	Singida
 tunduma	TZ	-9.3	32.76667	219309	Tunduma
@@ -2273,10 +2343,28 @@ tarim	YE	16.05694	48.99889	0	Tarim
 yarim	YE	14.29804	44.37795	33050	Yarīm
 zabid	YE	14.1951	43.31518	52590	Zabīd
 zinjibar	YE	13.12871	45.38073	19879	Zinjibār
+beaufortwest	ZA	-32.35671	22.58295	44737	Beaufort West
+belabela	ZA	-24.88333	28.28333	90210	Bela Bela
 bloemfontein	ZA	-29.12107	26.214	556637	Bloemfontein
 capetown	ZA	-33.92584	18.42322	4772846	Cape Town
+colesberg	ZA	-30.71999	25.09718	12423	Colesberg
 durban	ZA	-29.8579	31.0292	3338026	Durban
+estcourt	ZA	-29.01269	29.86619	26444	Estcourt
+harrismith	ZA	-28.27276	29.12946	33390	Harrismith
+heidelberg	ZA	-26.50476	28.35921	85858	Heidelberg
 johannesburg	ZA	-26.20227	28.04363	9418183	Johannesburg
+kroonstad	ZA	-27.65036	27.23488	117152	Kroonstad
+laingsburg	ZA	-33.19495	20.85872	6789	Laingsburg
+louistrichardt	ZA	-23.04385	29.90319	86854	Louis Trichardt
+mokopane	ZA	-24.19436	29.00974	101090	Mokopane
+musina	ZA	-22.34881	30.04074	51132	Musina
+paarl	ZA	-33.73378	18.97523	236910	Paarl
+pietermaritzburg	ZA	-29.61679	30.39278	839327	Pietermaritzburg
+polokwane	ZA	-23.90449	29.46885	272461	Polokwane
+pretoria	ZA	-25.74486	28.18783	2112693	Pretoria
+richmond	ZA	-29.87196	30.27235	32445	Richmond
+villiers	ZA	-27.03026	28.60061	20745	Villiers
+worcester	ZA	-33.64651	19.44852	127597	Worcester
 beitbridge	ZW	-22.21667	30.0	58574	Beitbridge
 bulawayo	ZW	-20.15	28.58333	665952	Bulawayo
 harare	ZW	-17.82772	31.05337	1542813	Harare
