@@ -1,0 +1,322 @@
+[
+{
+"nombre": "National North-South Backbone (Route 13 Corridor)",
+"operador": "Lao Telecom",
+"pais": "LA",
+"ciudades": ["Mohan", "Boten", "Muang Xay", "Luang Prabang", "Vang Vieng", "Vientiane", "Pakxan", "Thakhek", "Savannakhet", "Pakse", "Stung Treng"],
+"estado": "en servicio",
+"fuente": "ITU Interactive Transmission Map / Ministry of Technology and Communications (MTC) Laos / GMS Information Superhighway"
+},
+{
+"nombre": "Unitel National Terrestrial Backbone & Cross-Border Network",
+"operador": "Unitel",
+"pais": "LA",
+"ciudades": ["Boten", "Luang Namtha", "Muang Xay", "Luang Prabang", "Vang Vieng", "Vientiane", "Nong Khai", "Pakxan", "Thakhek", "Savannakhet", "Pakse", "Attapeu", "Kon Tum"],
+"estado": "en servicio",
+"fuente": "Star Telecom (Unitel) Network Infrastructure Report / ITU Asia-Pacific Transmission Map"
+},
+{
+"nombre": "Greater Mekong Subregion East-West Economic Corridor (Route 9)",
+"operador": "ETL",
+"pais": "LA",
+"ciudades": ["Mukdahan", "Savannakhet", "Muang Phin", "Sepon", "Dansavan", "Lao Bao"],
+"estado": "en servicio",
+"fuente": "UNESCAP Asian Information Superhighway / Enterprise of Telecommunications Lao (ETL)"
+},
+{
+"nombre": "Northern Economic Corridor Fiber Route (Route 3)",
+"operador": "ETL",
+"pais": "LA",
+"ciudades": ["Mohan", "Boten", "Luang Namtha", "Vieng Phoukha", "Huay Xai", "Chiang Khong"],
+"estado": "en servicio",
+"fuente": "ITU Interactive Transmission Map / ADB Greater Mekong Subregion ICT Study"
+},
+{
+"nombre": "EDL National OPGW Transmission Backbone",
+"operador": "EDL",
+"pais": "LA",
+"ciudades": ["Luang Prabang", "Vang Vieng", "Vientiane", "Pakxan", "Thakhek", "Savannakhet", "Pakse"],
+"estado": "en servicio",
+"fuente": "Electricité du Laos (EDL) Grid & OPGW Reports / World Bank Southeast Asia Energy & ICT Integration"
+},
+{
+"nombre": "Trans-Mongolian Railway North-South Backbone (TEA Corridor)",
+"operador": "InfoCon",
+"pais": "MN",
+"ciudades": ["Naushki", "Sukhbaatar", "Darkhan", "Ulaanbaatar", "Choir", "Sainshand", "Zamyn-Uud", "Erenhot"],
+"estado": "en servicio",
+"fuente": "Information Communications Network LLC (InfoCon) / Communications Regulatory Commission of Mongolia (CRC) / ITU"
+},
+{
+"nombre": "Western Regional Fiber Optic Backbone",
+"operador": "InfoCon",
+"pais": "MN",
+"ciudades": ["Ulaanbaatar", "Arvaikheer", "Bayankhongor", "Altai", "Khovd", "Ulgii", "Tashanta"],
+"estado": "en servicio",
+"fuente": "Communications Regulatory Commission of Mongolia (CRC) / InfoCon Network Map"
+},
+{
+"nombre": "Northern & Khuvsgul Fiber Backbone",
+"operador": "InfoCon",
+"pais": "MN",
+"ciudades": ["Darkhan", "Erdenet", "Bulgan", "Murun"],
+"estado": "en servicio",
+"fuente": "InfoCon Official Backbone Topology / UNESCAP Mongolia Broadband Infrastructure Study"
+},
+{
+"nombre": "Eastern Steppe Fiber Optic Backbone",
+"operador": "InfoCon",
+"pais": "MN",
+"ciudades": ["Ulaanbaatar", "Bagakhangai", "Undurkhaan", "Baruun-Urt", "Choibalsan"],
+"estado": "en servicio",
+"fuente": "InfoCon / Communications Regulatory Commission of Mongolia (CRC)"
+},
+{
+"nombre": "MobiCom North-South & Southern Gobi Backbone",
+"operador": "MobiCom",
+"pais": "MN",
+"ciudades": ["Sukhbaatar", "Darkhan", "Ulaanbaatar", "Mandalgovi", "Dalanzadgad", "Zamyn-Uud", "Erenhot"],
+"estado": "en servicio",
+"fuente": "MobiCom Corporation (Mobinet) Infrastructure Disclosures / ADB & UNESCAP ICT Reports"
+},
+{
+"nombre": "UBTZ Railway Fiber Optic Network",
+"operador": "UBTZ",
+"pais": "MN",
+"ciudades": ["Naushki", "Sukhbaatar", "Darkhan", "Erdenet", "Ulaanbaatar", "Choir", "Sainshand", "Zamyn-Uud", "Erenhot"],
+"estado": "en servicio",
+"fuente": "Ulaanbaatar Railway (UBTZ) / Trans-Eurasian Information Superhighway (TASIM/TEA) Reports"
+},
+{
+"nombre": "National East-West OPGW & Underground Fiber Backbone",
+"operador": "BPC",
+"pais": "BT",
+"ciudades": ["Paro", "Thimphu", "Punakha", "Wangdue Phodrang", "Trongsa", "Jakar", "Mongar", "Trashigang"],
+"estado": "en servicio",
+"fuente": "Bhutan Power Corporation (BPC) / GovTech Bhutan / BICMA Annual Reports"
+},
+{
+"nombre": "Western International Gateway Route (Thimphu - Phuentsholing)",
+"operador": "Bhutan Telecom",
+"pais": "BT",
+"ciudades": ["Paro", "Thimphu", "Chukha", "Phuentsholing", "Jaigaon"],
+"estado": "en servicio",
+"fuente": "Bhutan Telecom Limited (BTL) / ITU Interactive Transmission Map / World Bank South Asia Regional Connectivity"
+},
+{
+"nombre": "Central International Gateway Route (Trongsa - Gelephu)",
+"operador": "Bhutan Telecom",
+"pais": "BT",
+"ciudades": ["Trongsa", "Zhemgang", "Gelephu", "Bongaigaon"],
+"estado": "en servicio",
+"fuente": "BICMA (Bhutan InfoComm and Media Authority) / UNESCAP South Asia Subregional Fiber Study"
+},
+{
+"nombre": "Eastern International Gateway Route (Trashigang - Samdrup Jongkhar)",
+"operador": "BPC",
+"pais": "BT",
+"ciudades": ["Trashigang", "Pemagatshel", "Samdrup Jongkhar", "Guwahati"],
+"estado": "en servicio",
+"fuente": "Ministry of Information and Communications (MoIC) Bhutan / ITU Transmission Map"
+},
+{
+"nombre": "Brunei Coastal & Trans-Borneo Terrestrial Fiber Backbone",
+"operador": "UNN",
+"pais": "BN",
+"ciudades": ["Miri", "Kuala Belait", "Seria", "Tutong", "Bandar Seri Begawan", "Muara", "Limbang", "Bangar", "Lawas"],
+"estado": "en servicio",
+"fuente": "Unified National Networks (UNN) Brunei / AITI Regulatory Reports / ITU ASEAN Terrestrial Map"
+},
+{
+"nombre": "Northern Coastal National Backbone",
+"operador": "Telemor",
+"pais": "TL",
+"ciudades": ["Atambua", "Batugade", "Liquica", "Dili", "Manatuto", "Baucau", "Lospalos"],
+"estado": "en servicio",
+"fuente": "Telemor (Viettel Timor-Leste) / Autoridade Nacional de Comunicações (ANC) / World Bank Timor-Leste Digital Assessment"
+},
+{
+"nombre": "Central-South Terrestrial Fiber Backbone",
+"operador": "Telemor",
+"pais": "TL",
+"ciudades": ["Dili", "Aileu", "Ainaro", "Same", "Suai"],
+"estado": "en servicio",
+"fuente": "Autoridade Nacional de Comunicações (ANC) / Viettel Global Infrastructure Reports"
+},
+{
+"nombre": "Timor Telecom National Inter-District Backbone",
+"operador": "Timor Telecom",
+"pais": "TL",
+"ciudades": ["Atambua", "Batugade", "Maliana", "Liquica", "Dili", "Baucau", "Viqueque"],
+"estado": "en servicio",
+"fuente": "Timor Telecom Annual Reports / ITU Asia-Pacific Transmission Map"
+},
+{
+"nombre": "UAE Western & Northern Emirates Coastal Backbone (E11 Corridor)",
+"operador": "e&",
+"pais": "AE",
+"ciudades": ["Al Batha", "Ghuwaifat", "Ruwais", "Abu Dhabi", "Dubai", "Sharjah", "Ajman", "Umm Al Quwain", "Ras Al Khaimah"],
+"estado": "en servicio",
+"fuente": "e& (Etisalat) / TDRA UAE / ITU Arab Region Transmission Map"
+},
+{
+"nombre": "UAE Eastern Coast & Oman Interconnect Backbone",
+"operador": "e&",
+"pais": "AE",
+"ciudades": ["Dubai", "Sharjah", "Al Dhaid", "Fujairah", "Khor Fakkan", "Kalba", "Sohar"],
+"estado": "en servicio",
+"fuente": "e& (Etisalat) Wholesale Documentation / ITU Interactive Transmission Map"
+},
+{
+"nombre": "Abu Dhabi - Al Ain - Oman Terrestrial Corridor",
+"operador": "du",
+"pais": "AE",
+"ciudades": ["Abu Dhabi", "Al Ain", "Al Buraimi"],
+"estado": "en servicio",
+"fuente": "Emirates Integrated Telecommunications Company (du) / TDRA UAE"
+},
+{
+"nombre": "Al Batinah Coastal Backbone & UAE Link",
+"operador": "Omantel",
+"pais": "OM",
+"ciudades": ["Muscat", "Seeb", "Barka", "Suwaiq", "Saham", "Sohar", "Shinas", "Fujairah"],
+"estado": "en servicio",
+"fuente": "Omantel Wholesale Network Map / TRA Oman / ITU Interactive Transmission Map"
+},
+{
+"nombre": "Oman North-South Interior National Backbone (Route 31)",
+"operador": "Omantel",
+"pais": "OM",
+"ciudades": ["Muscat", "Bidbid", "Nizwa", "Adam", "Haima", "Thumrait", "Salalah"],
+"estado": "en servicio",
+"fuente": "Omantel Annual & Wholesale Reports / TRA Oman / ITU Arab Regional Map"
+},
+{
+"nombre": "Ooredoo Oman National Fiber Backbone",
+"operador": "Ooredoo",
+"pais": "OM",
+"ciudades": ["Sohar", "Barka", "Muscat", "Nizwa", "Haima", "Salalah"],
+"estado": "en servicio",
+"fuente": "Ooredoo Oman (Nawras) Network Infrastructure Documentation / TRA Oman"
+},
+{
+"nombre": "Al Sharqiyah & Coastal South Backbone",
+"operador": "Omantel",
+"pais": "OM",
+"ciudades": ["Muscat", "Ibra", "Sur", "Duqm", "Salalah"],
+"estado": "en servicio",
+"fuente": "Omantel / Oman Broadband Company / ITU Interactive Transmission Map"
+},
+{
+"nombre": "Al Dhahirah Cross-Border Terrestrial Link",
+"operador": "Omantel",
+"pais": "OM",
+"ciudades": ["Nizwa", "Bahla", "Ibri", "Al Buraimi", "Al Ain"],
+"estado": "en servicio",
+"fuente": "ITU Arab Region Transmission Map / Omantel Wholesale"
+},
+{
+"nombre": "Dhofar Western Cross-Border Link (Oman - Yemen)",
+"operador": "Omantel",
+"pais": "OM",
+"ciudades": ["Salalah", "Mughsayl", "Sarfait", "Hawf", "Al Ghaydah"],
+"estado": "en servicio",
+"fuente": "ITU Arab Region Transmission Map / ESCWA Regional Broadband Study"
+},
+{
+"nombre": "Jordan North-South National Backbone (JADI /RCN Corridor)",
+"operador": "Orange Jordan",
+"pais": "JO",
+"ciudades": ["Daraa", "Ramtha", "Irbid", "Mafraq", "Zarqa", "Amman", "Madaba", "Al Karak", "At Tafilah", "Ma'an", "Aqaba", "Haql"],
+"estado": "en servicio",
+"fuente": "Orange Jordan Wholesale / Telecommunications Regulatory Commission (TRC) Jordan / ITU"
+},
+{
+"nombre": "NEPCO OPGW & National Broadband Network (NBN) North-South Trunk",
+"operador": "NEPCO",
+"pais": "JO",
+"ciudades": ["Irbid", "Mafraq", "Zarqa", "Amman", "Al Karak", "Ma'an", "Aqaba"],
+"estado": "en servicio",
+"fuente": "National Electric Power Company (NEPCO) / Ministry of Digital Economy and Entrepreneurship (MoDEE) Jordan"
+},
+{
+"nombre": "Eastern Desert International Corridor (Iraq & Saudi Links)",
+"operador": "Zain Jordan",
+"pais": "JO",
+"ciudades": ["Amman", "Zarqa", "Azraq", "Safawi", "Ruwaished", "Trebil"],
+"estado": "en servicio",
+"fuente": "TRC Jordan / ITU Interactive Transmission Map / ESCWA Mashreq Connectivity Report"
+},
+{
+"nombre": "Amman - Saudi Arabia (Al Omari) Terrestrial Fiber Link",
+"operador": "Orange Jordan",
+"pais": "JO",
+"ciudades": ["Amman", "Zarqa", "Azraq", "Al Qurayyat"],
+"estado": "en servicio",
+"fuente": "Orange Jordan / JADI Cable System Documentation / ITU"
+},
+{
+"nombre": "Syria North-South M5 National Backbone (JADI / RCN Segment)",
+"operador": "Syrian Telecom",
+"pais": "SY",
+"ciudades": ["Gaziantep", "Azaz", "Aleppo", "Maarrat al-Numan", "Hama", "Homs", "An Nabk", "Damascus", "Daraa", "Ramtha"],
+"estado": "en servicio",
+"fuente": "Syrian Telecommunications Establishment (STE) / ITU Arab Regional Transmission Map / ESCWA"
+},
+{
+"nombre": "Mediterranean Coastal & Northern Backbone",
+"operador": "Syrian Telecom",
+"pais": "SY",
+"ciudades": ["Tripoli", "Tartus", "Baniyas", "Jableh", "Latakia", "Jisr ash-Shughur", "Idlib", "Aleppo"],
+"estado": "en servicio",
+"fuente": "Syrian Telecommunications Establishment (STE) / ITU Interactive Transmission Map"
+},
+{
+"nombre": "Euphrates Valley Eastern Corridor",
+"operador": "Syrian Telecom",
+"pais": "SY",
+"ciudades": ["Aleppo", "Al-Thawrah", "Raqqa", "Deir ez-Zor", "Mayadin", "Al-Bukamal", "Al-Qaim"],
+"estado": "en servicio",
+"fuente": "ITU Arab Regional Transmission Map / UN ESCWA Infrastructure Reports"
+},
+{
+"nombre": "Central Desert & Jazira Backbone",
+"operador": "Syrian Telecom",
+"pais": "SY",
+"ciudades": ["Damascus", "Adra", "Palmyra", "Deir ez-Zor", "Al-Hasakah", "Qamishli"],
+"estado": "en servicio",
+"fuente": "Syrian Telecommunications Establishment (STE) / ITU Transmission Map"
+},
+{
+"nombre": "Western Highlands North-South National Backbone",
+"operador": "PTC",
+"pais": "YE",
+"ciudades": ["Dhahran Al Janoub", "Saada", "Amran", "Sanaa", "Dhamar", "Yarim", "Ibb", "Taiz", "Lahij", "Aden"],
+"estado": "en servicio",
+"fuente": "Public Telecommunication Corporation (PTC) Yemen / ITU Arab Regional Transmission Map"
+},
+{
+"nombre": "Tihamah Red Sea Coastal Fiber Route",
+"operador": "PTC",
+"pais": "YE",
+"ciudades": ["Jizan", "Harad", "Abs", "Al Hudaydah", "Bayt al-Faqih", "Zabid", "Mocha", "Aden"],
+"estado": "en servicio",
+"fuente": "Ministry of Telecommunications and Information Technology (MTIT) Yemen / ITU Transmission Map"
+},
+{
+"nombre": "Southern Coastal & Oman Cross-Border Backbone",
+"operador": "PTC",
+"pais": "YE",
+"ciudades": ["Aden", "Zinjibar", "Shuqrah", "Ahwar", "Al Mukalla", "Ash Shihr", "Sayhut", "Qishn", "Al Ghaydah", "Hawf", "Salalah"],
+"estado": "en servicio",
+"fuente": "TeleYemen / PTC / ITU Interactive Transmission Map / World Bank Yemen ICT Study"
+},
+{
+"nombre": "Central Interior & Hadhramaut Backbone",
+"operador": "PTC",
+"pais": "YE",
+"ciudades": ["Sanaa", "Marib", "Ataq", "Seiyun", "Tarim", "Al Mukalla"],
+"estado": "en servicio",
+"fuente": "Public Telecommunication Corporation (PTC) / ITU Arab Regional Transmission Map"
+}
+]

@@ -1,0 +1,622 @@
+[
+  {
+    "nombre": "Kuwait-Iraq Northern Terrestrial Fiber Trunk",
+    "operador": "MOC Kuwait",
+    "pais": "KW",
+    "ciudades": [
+      "Kuwait City",
+      "Al Jahrah",
+      "Abdali",
+      "Safwan",
+      "Basrah"
+    ],
+    "estado": "en servicio",
+    "fuente": "ITU Interactive Transmission Map / Ministry of Communications (MOC) Kuwait & CITRA"
+  },
+  {
+    "nombre": "Kuwait-Saudi Arabia Southern Coastal Trunk",
+    "operador": "MOC Kuwait",
+    "pais": "KW",
+    "ciudades": [
+      "Kuwait City",
+      "Al Farwaniyah",
+      "Al Ahmadi",
+      "Al Wafrah",
+      "An Nuwaysib",
+      "Khafji"
+    ],
+    "estado": "en servicio",
+    "fuente": "ITU Interactive Transmission Map / CITRA Kuwait"
+  },
+  {
+    "nombre": "Kuwait-Saudi Arabia Western Terrestrial Link (Salmi Route)",
+    "operador": "Zain",
+    "pais": "KW",
+    "ciudades": [
+      "Kuwait City",
+      "Al Jahrah",
+      "As Salmi",
+      "Ar Ruqi",
+      "Hafar Al-Batin"
+    ],
+    "estado": "en servicio",
+    "fuente": "ITU Interactive Transmission Map / GCC Interconnection & Zain Network Reports"
+  },
+  {
+    "nombre": "Qatar National North-South Backbone & Saudi Interconnect",
+    "operador": "Ooredoo",
+    "pais": "QA",
+    "ciudades": [
+      "Ar Ru'ays",
+      "Al Khor",
+      "Lusail",
+      "Doha",
+      "Al Wakrah",
+      "Mesaieed",
+      "Abu Samra",
+      "Salwa"
+    ],
+    "estado": "en servicio",
+    "fuente": "Ooredoo Qatar Reference Interconnection Offer / Communications Regulatory Authority (CRA) Qatar"
+  },
+  {
+    "nombre": "Qatar East-West Terrestrial Fiber Trunk",
+    "operador": "Ooredoo",
+    "pais": "QA",
+    "ciudades": [
+      "Doha",
+      "Ar Rayyan",
+      "Ash Shahaniyah",
+      "Dukhan"
+    ],
+    "estado": "en servicio",
+    "fuente": "ITU Interactive Transmission Map / CRA Qatar"
+  },
+  {
+    "nombre": "Vodafone Qatar National Fiber Backbone",
+    "operador": "Vodafone",
+    "pais": "QA",
+    "ciudades": [
+      "Al Khor",
+      "Lusail",
+      "Doha",
+      "Ar Rayyan",
+      "Al Wakrah",
+      "Mesaieed",
+      "Abu Samra"
+    ],
+    "estado": "en servicio",
+    "fuente": "Vodafone Qatar Annual Report / CRA Qatar"
+  },
+  {
+    "nombre": "Lebanon Coastal Fiber Optic Backbone",
+    "operador": "Ogero",
+    "pais": "LB",
+    "ciudades": [
+      "Tripoli",
+      "Batroun",
+      "Byblos",
+      "Jounieh",
+      "Beirut",
+      "Sidon",
+      "Tyre",
+      "An Naqurah"
+    ],
+    "estado": "en servicio",
+    "fuente": "Ogero / Ministry of Telecommunications Lebanon National Fiber Optic Network Map"
+  },
+  {
+    "nombre": "Beirut-Bekaa-Damascus Terrestrial Trunk",
+    "operador": "Ogero",
+    "pais": "LB",
+    "ciudades": [
+      "Beirut",
+      "Baabda",
+      "Aley",
+      "Bhamdoun",
+      "Chtaura",
+      "Zahle",
+      "Anjar",
+      "Damascus"
+    ],
+    "estado": "en servicio",
+    "fuente": "ITU Arab Region Transmission Map / Ogero Telecom"
+  },
+  {
+    "nombre": "Bekaa Valley Northern Backbone (Zahle-Homs Route)",
+    "operador": "Ogero",
+    "pais": "LB",
+    "ciudades": [
+      "Chtaura",
+      "Zahle",
+      "Rayak",
+      "Baalbek",
+      "Al Labwah",
+      "Al Qaa",
+      "Homs"
+    ],
+    "estado": "en servicio",
+    "fuente": "ITU Interactive Transmission Map / Ministry of Telecommunications Lebanon"
+  },
+  {
+    "nombre": "West Bank North-South Core Fiber Backbone",
+    "operador": "Paltel",
+    "pais": "PS",
+    "ciudades": [
+      "Jenin",
+      "Tulkarm",
+      "Qalqilyah",
+      "Nablus",
+      "Salfit",
+      "Ramallah",
+      "Jericho",
+      "Bethlehem",
+      "Hebron",
+      "Adh Dhahiriyah"
+    ],
+    "estado": "en servicio",
+    "fuente": "Paltel Group Annual Report / Ministry of Telecom and Information Technology (MTIT) Palestine & World Bank"
+  },
+  {
+    "nombre": "Bahrain-Saudi Arabia Terrestrial Fiber Interconnect (King Fahd Causeway)",
+    "operador": "Batelco",
+    "pais": "BH",
+    "ciudades": [
+      "Al Muharraq",
+      "Manama",
+      "Madinat Hamad",
+      "Ar Rifa'",
+      "Al Jasra",
+      "Al Khobar",
+      "Dammam"
+    ],
+    "estado": "en servicio",
+    "fuente": "Batelco (Beyon) / Telecommunications Regulatory Authority (TRA) Bahrain & ITU Transmission Map"
+  },
+  {
+    "nombre": "Azerbaijan East-West Backbone (Digital Silk Way / Georgia Transit)",
+    "operador": "AzerTelecom",
+    "pais": "AZ",
+    "ciudades": [
+      "Baku",
+      "Sumqayit",
+      "Haciqabul",
+      "Kurdamir",
+      "Ujar",
+      "Yevlakh",
+      "Ganja",
+      "Shamkir",
+      "Tovuz",
+      "Agstafa",
+      "Qazakh",
+      "Rustavi"
+    ],
+    "estado": "en servicio",
+    "fuente": "AzerTelecom Backbone Network Map / ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Azerbaijan North-South Backbone (Northern Corridor to Russia)",
+    "operador": "Delta Telecom",
+    "pais": "AZ",
+    "ciudades": [
+      "Baku",
+      "Sumqayit",
+      "Siazan",
+      "Shabran",
+      "Quba",
+      "Khachmaz",
+      "Qusar",
+      "Samur",
+      "Derbent"
+    ],
+    "estado": "en servicio",
+    "fuente": "Delta Telecom Regional Backbone Map / Ministry of Digital Development and Transport of Azerbaijan"
+  },
+  {
+    "nombre": "Azerbaijan Southern Backbone (Baku-Astara-Iran Corridor)",
+    "operador": "Aztelekom",
+    "pais": "AZ",
+    "ciudades": [
+      "Baku",
+      "Haciqabul",
+      "Shirvan",
+      "Salyan",
+      "Bilasuvar",
+      "Jalilabad",
+      "Masally",
+      "Lankaran",
+      "Astara",
+      "Astara (Iran)"
+    ],
+    "estado": "en servicio",
+    "fuente": "Aztelekom / Delta Telecom & ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Azerbaijan North-Western Foothills Backbone (Baku-Balakan-Georgia)",
+    "operador": "Aztelekom",
+    "pais": "AZ",
+    "ciudades": [
+      "Baku",
+      "Gobustan",
+      "Shamakhi",
+      "Ismayilli",
+      "Qabala",
+      "Oghuz",
+      "Sheki",
+      "Qakh",
+      "Zaqatala",
+      "Balakan",
+      "Lagodekhi"
+    ],
+    "estado": "en servicio",
+    "fuente": "Aztelekom / Delta Telecom Regional Network Topology"
+  },
+  {
+    "nombre": "Baku-Tbilisi-Ceyhan (BTC) Pipeline Fiber Optic Network (Azerbaijan Segment)",
+    "operador": "SOCAR",
+    "pais": "AZ",
+    "ciudades": [
+      "Baku",
+      "Haciqabul",
+      "Kurdamir",
+      "Yevlakh",
+      "Goranboy",
+      "Ganja",
+      "Shamkir",
+      "Tovuz",
+      "Qazakh",
+      "Gardabani"
+    ],
+    "estado": "en servicio",
+    "fuente": "BP / SOCAR BTC Pipeline Technical Documentation & UNESCAP"
+  },
+  {
+    "nombre": "Armenia North-South Transit Backbone (Georgia-Iran Corridor)",
+    "operador": "Ucom",
+    "pais": "AM",
+    "ciudades": [
+      "Marneuli",
+      "Ayrum",
+      "Alaverdi",
+      "Vanadzor",
+      "Spitak",
+      "Ashtarak",
+      "Yerevan",
+      "Artashat",
+      "Ararat",
+      "Yeghegnadzor",
+      "Vayk",
+      "Sisian",
+      "Goris",
+      "Kapan",
+      "Meghri",
+      "Agarak",
+      "Tabriz"
+    ],
+    "estado": "en servicio",
+    "fuente": "Ucom Terrestrial Backbone Map / Public Services Regulatory Commission (PSRC) Armenia & ITU"
+  },
+  {
+    "nombre": "GNC-Alfa North-South Optical Transit Trunk",
+    "operador": "Rostelecom Armenia",
+    "pais": "AM",
+    "ciudades": [
+      "Tbilisi",
+      "Bagratashen",
+      "Ijevan",
+      "Dilijan",
+      "Sevan",
+      "Hrazdan",
+      "Abovyan",
+      "Yerevan",
+      "Artashat",
+      "Yeghegnadzor",
+      "Goris",
+      "Kapan",
+      "Meghri",
+      "Jolfa"
+    ],
+    "estado": "en servicio",
+    "fuente": "GNC-Alfa (Rostelecom Armenia) Network Map / PSRC Armenia"
+  },
+  {
+    "nombre": "Armenia North-Western Backbone (Yerevan-Gyumri-Georgia Route)",
+    "operador": "Telecom Armenia",
+    "pais": "AM",
+    "ciudades": [
+      "Yerevan",
+      "Vagharshapat",
+      "Armavir",
+      "Talin",
+      "Maralik",
+      "Gyumri",
+      "Ashotsk",
+      "Bavra",
+      "Ninotsminda"
+    ],
+    "estado": "en servicio",
+    "fuente": "Telecom Armenia (TEAM) Reference Offer / ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Armenia North-Eastern Backbone (Yerevan-Sevan-Tavush-Georgia Route)",
+    "operador": "Telecom Armenia",
+    "pais": "AM",
+    "ciudades": [
+      "Yerevan",
+      "Abovyan",
+      "Charentsavan",
+      "Hrazdan",
+      "Sevan",
+      "Dilijan",
+      "Ijevan",
+      "Noyemberyan",
+      "Bagratashen",
+      "Marneuli"
+    ],
+    "estado": "en servicio",
+    "fuente": "Telecom Armenia / World Bank E-Society and Innovation for Competitiveness Project"
+  },
+  {
+    "nombre": "Trans-Asia-Europe (TAE) Kyrgyz National North-South Backbone",
+    "operador": "Kyrgyztelecom",
+    "pais": "KG",
+    "ciudades": [
+      "Korday",
+      "Bishkek",
+      "Kant",
+      "Kara-Balta",
+      "Toktogul",
+      "Karaköl",
+      "Tash-Kumyr",
+      "Kochkor-Ata",
+      "Jalal-Abad",
+      "Uzgen",
+      "Osh",
+      "Andijan"
+    ],
+    "estado": "en servicio",
+    "fuente": "Kyrgyztelecom Backbone Map / UNESCAP Asia-Pacific Information Superhighway & ITU"
+  },
+  {
+    "nombre": "Issyk-Kul Fiber Optic Ring",
+    "operador": "Kyrgyztelecom",
+    "pais": "KG",
+    "ciudades": [
+      "Bishkek",
+      "Tokmok",
+      "Kemin",
+      "Balykchy",
+      "Cholpon-Ata",
+      "Tüp",
+      "Karakol",
+      "Kyzyl-Suu",
+      "Bokonbayevo",
+      "Balykchy"
+    ],
+    "estado": "en servicio",
+    "fuente": "Kyrgyztelecom / World Bank Digital CASA Kyrgyz Republic Project"
+  },
+  {
+    "nombre": "Bishkek-Naryn-Torugart (China Interconnect) Backbone",
+    "operador": "ElCat",
+    "pais": "KG",
+    "ciudades": [
+      "Bishkek",
+      "Tokmok",
+      "Kemin",
+      "Balykchy",
+      "Kochkor",
+      "Naryn",
+      "At-Bashi",
+      "Kashgar"
+    ],
+    "estado": "en servicio",
+    "fuente": "ElCat Network Map / ITU Interactive Transmission Map & UNESCAP"
+  },
+  {
+    "nombre": "Southern Kyrgyz Transit Trunk (Osh-Irkeshtam-China & Tajikistan Link)",
+    "operador": "ElCat",
+    "pais": "KG",
+    "ciudades": [
+      "Osh",
+      "Gulcha",
+      "Sary-Tash",
+      "Irkeshtam",
+      "Kashgar"
+    ],
+    "estado": "en servicio",
+    "fuente": "ElCat / State Communications Agency (SCA) Kyrgyz Republic"
+  },
+  {
+    "nombre": "Batken Southern Fergana Backbone (Osh-Isfana-Khujand Route)",
+    "operador": "Kyrgyztelecom",
+    "pais": "KG",
+    "ciudades": [
+      "Osh",
+      "Nookat",
+      "Kyzyl-Kiya",
+      "Kadamjay",
+      "Batken",
+      "Razzakov",
+      "Khujand"
+    ],
+    "estado": "en servicio",
+    "fuente": "Kyrgyztelecom / World Bank Digital CASA Kyrgyz Republic"
+  },
+  {
+    "nombre": "Tajikistan North-South National Fiber Backbone",
+    "operador": "Tajiktelecom",
+    "pais": "TJ",
+    "ciudades": [
+      "Bekobod",
+      "Buston",
+      "Khujand",
+      "Istaravshan",
+      "Shahriston",
+      "Ayni",
+      "Varzob",
+      "Dushanbe"
+    ],
+    "estado": "en servicio",
+    "fuente": "Tajiktelecom / Communications Service under the Government of Tajikistan & ITU"
+  },
+  {
+    "nombre": "Tajikistan Southern Backbone (Dushanbe-Bokhtar-Uzbekistan/Afghanistan Link)",
+    "operador": "Tajiktelecom",
+    "pais": "TJ",
+    "ciudades": [
+      "Dushanbe",
+      "Yovon",
+      "Bokhtar",
+      "Balkh",
+      "Dusti",
+      "Panji Poyon",
+      "Kunduz"
+    ],
+    "estado": "en servicio",
+    "fuente": "Tajiktelecom / World Bank Digital CASA Tajikistan & UNESCAP"
+  },
+  {
+    "nombre": "Pamir Highway Eastern Backbone (Dushanbe-Kulob-Khorugh-China Link)",
+    "operador": "Tajiktelecom",
+    "pais": "TJ",
+    "ciudades": [
+      "Dushanbe",
+      "Vahdat",
+      "Norak",
+      "Danghara",
+      "Kulob",
+      "Qal'ai Khumb",
+      "Rushon",
+      "Khorugh",
+      "Murghab",
+      "Tashkurgan"
+    ],
+    "estado": "en servicio",
+    "fuente": "ITU Interactive Transmission Map / UNESCAP & CAREC Digital Corridor"
+  },
+  {
+    "nombre": "Dushanbe-Tursunzoda-Uzbekistan Western Trunk",
+    "operador": "Tajiktelecom",
+    "pais": "TJ",
+    "ciudades": [
+      "Dushanbe",
+      "Hisor",
+      "Shahrinav",
+      "Tursunzoda",
+      "Denov"
+    ],
+    "estado": "en servicio",
+    "fuente": "Tajiktelecom / ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "South-West Khatlon Backbone (Bokhtar-Shahritus-Termez Route)",
+    "operador": "Tajiktelecom",
+    "pais": "TJ",
+    "ciudades": [
+      "Dushanbe",
+      "Bokhtar",
+      "Qabodiyon",
+      "Shahritus",
+      "Termez"
+    ],
+    "estado": "en servicio",
+    "fuente": "ITU Interactive Transmission Map / UNESCAP Asia-Pacific Information Superhighway"
+  },
+  {
+    "nombre": "Trans-Asia-Europe (TAE) Turkmenistan East-West Main Trunk",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": [
+      "Qorako'l",
+      "Farap",
+      "Türkmenabat",
+      "Bayramaly",
+      "Mary",
+      "Tejen",
+      "Kaka",
+      "Anau",
+      "Ashgabat",
+      "Gökdepe",
+      "Bäherden",
+      "Serdar",
+      "Bereket",
+      "Balkanabat",
+      "Türkmenbaşy"
+    ],
+    "estado": "en servicio",
+    "fuente": "Turkmentelecom / Türkmenaragatnaşyk Agency & ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Turkmenistan Northern Karakum Backbone (Ashgabat-Dashoguz-Uzbekistan)",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": [
+      "Ashgabat",
+      "Derweze",
+      "Daşoguz",
+      "Köneürgenç",
+      "Xo'jayli"
+    ],
+    "estado": "en servicio",
+    "fuente": "Turkmentelecom / ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Mary-Serhetabat-Herat Cross-Border Fiber Trunk",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": [
+      "Mary",
+      "Ýolöten",
+      "Tagtabazar",
+      "Serhetabat",
+      "Torghundi",
+      "Herat"
+    ],
+    "estado": "en servicio",
+    "fuente": "Türkmenaragatnaşyk Agency / World Bank Afghanistan-Turkmenistan Fiber Optic Interconnect"
+  },
+  {
+    "nombre": "Turkmenistan South-Western Caspian Corridor (Bereket-Etrek-Iran)",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": [
+      "Balkanabat",
+      "Bereket",
+      "Etrek",
+      "Gorgan"
+    ],
+    "estado": "en servicio",
+    "fuente": "Türkmenaragatnaşyk Agency / North-South Railway & Fiber Corridor Documentation"
+  },
+  {
+    "nombre": "Amu Darya Eastern Trunk (Türkmenabat-Kerki-Imamnazar-Afghanistan)",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": [
+      "Türkmenabat",
+      "Saýat",
+      "Halaç",
+      "Kerki",
+      "Imamnazar",
+      "Aqina"
+    ],
+    "estado": "en servicio",
+    "fuente": "Türkmenaragatnaşyk Agency / ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Ashgabat-Bajgiran & Tejen-Sarahs TAE Iran Branches",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": [
+      "Ashgabat",
+      "Anau",
+      "Kaka",
+      "Tejen",
+      "Sarahs",
+      "Sarakhs"
+    ],
+    "estado": "en servicio",
+    "fuente": "ITU Interactive Transmission Map / TAE Fiber Optic System Documentation"
+  }
+]

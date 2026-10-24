@@ -1,0 +1,737 @@
+[
+  {
+    "nombre": "Trans-European Transit Backbone West-East (Brest - Minsk - Russian Border)",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": [
+      "Terespol",
+      "Brest",
+      "Kobryn",
+      "Baranovichi",
+      "Stowbtsy",
+      "Minsk",
+      "Barysaw",
+      "Orsha",
+      "Smolensk"
+    ],
+    "estado": "en servicio",
+    "fuente": "Beltelecom / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "National Backbone North-South (Vitebsk - Gomel)",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": [
+      "Vitebsk",
+      "Orsha",
+      "Shklow",
+      "Mogilev",
+      "Bykhaw",
+      "Rahachow",
+      "Zhlobin",
+      "Gomel",
+      "Chernihiv"
+    ],
+    "estado": "en servicio",
+    "fuente": "Beltelecom / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Central-Southeast Trunk (Minsk - Gomel)",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": [
+      "Minsk",
+      "Maryina Horka",
+      "Asipovichy",
+      "Babruysk",
+      "Zhlobin",
+      "Rechytsa",
+      "Gomel"
+    ],
+    "estado": "en servicio",
+    "fuente": "Beltelecom / Ministry of Communications and Informatization of Belarus"
+  },
+  {
+    "nombre": "Northwest International Corridor (Minsk - Vilnius)",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": [
+      "Minsk",
+      "Maladzyechna",
+      "Smarhon",
+      "Ashmyany",
+      "Vilnius"
+    ],
+    "estado": "en servicio",
+    "fuente": "Beltelecom / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Western Trunk (Minsk - Grodno - Poland Border)",
+    "operador": "beCloud",
+    "pais": "BY",
+    "ciudades": [
+      "Minsk",
+      "Valozhyn",
+      "Iwye",
+      "Lida",
+      "Shchuchyn",
+      "Grodno",
+      "Bialystok"
+    ],
+    "estado": "en servicio",
+    "fuente": "beCloud Republican Unitary Telecommunication Enterprise"
+  },
+  {
+    "nombre": "Northern Trunk (Minsk - Vitebsk - Daugavpils)",
+    "operador": "A1 Belarus",
+    "pais": "BY",
+    "ciudades": [
+      "Minsk",
+      "Lahoysk",
+      "Biahoml",
+      "Lepel",
+      "Beshankovichy",
+      "Vitebsk",
+      "Polotsk",
+      "Verhnedvinsk",
+      "Daugavpils"
+    ],
+    "estado": "en servicio",
+    "fuente": "A1 Belarus / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Southern Polesia Corridor (Brest - Gomel)",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": [
+      "Brest",
+      "Kobryn",
+      "Drahichyn",
+      "Pinsk",
+      "Luninets",
+      "Zhitkovichi",
+      "Kalinkavichy",
+      "Mazyr",
+      "Rechytsa",
+      "Gomel"
+    ],
+    "estado": "en servicio",
+    "fuente": "Beltelecom / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "North-South Coastal Backbone (Montenegro Border - Sarande)",
+    "operador": "One Albania",
+    "pais": "AL",
+    "ciudades": [
+      "Podgorica",
+      "Shkoder",
+      "Lezhe",
+      "Milot",
+      "Tirana",
+      "Durres",
+      "Kavaje",
+      "Lushnje",
+      "Fier",
+      "Vlore",
+      "Himarë",
+      "Sarande"
+    ],
+    "estado": "en servicio",
+    "fuente": "AKEP (Electronic and Postal Communications Authority) / One Albania"
+  },
+  {
+    "nombre": "Central-Southeast Corridor (Tirana - Korce - Greece Border)",
+    "operador": "One Albania",
+    "pais": "AL",
+    "ciudades": [
+      "Tirana",
+      "Elbasan",
+      "Librazhd",
+      "Prrenjas",
+      "Pogradec",
+      "Korce",
+      "Bilisht",
+      "Kastoria"
+    ],
+    "estado": "en servicio",
+    "fuente": "AKEP / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Northeast Highway Corridor (Durres - Kukes - Kosovo Border)",
+    "operador": "Vodafone Albania",
+    "pais": "AL",
+    "ciudades": [
+      "Durres",
+      "Tirana",
+      "Milot",
+      "Rreshen",
+      "Kukes",
+      "Prizren"
+    ],
+    "estado": "en servicio",
+    "fuente": "AKEP / Vodafone Albania"
+  },
+  {
+    "nombre": "400kV/220kV OPGW National Transmission Grid North-South",
+    "operador": "OST",
+    "pais": "AL",
+    "ciudades": [
+      "Podgorica",
+      "Shkoder",
+      "Vau i Dejes",
+      "Burrel",
+      "Tirana",
+      "Elbasan",
+      "Fier",
+      "Zemblak",
+      "Kardia"
+    ],
+    "estado": "en servicio",
+    "fuente": "OST (Operatori i Sistemit te Transmetimit) / ENTSO-E"
+  },
+  {
+    "nombre": "Corridor Vc North-South Trunk (Croatia Border - Sarajevo - Croatia Border)",
+    "operador": "BH Telecom",
+    "pais": "BA",
+    "ciudades": [
+      "Slavonski Brod",
+      "Brod",
+      "Derventa",
+      "Doboj",
+      "Maglaj",
+      "Zepce",
+      "Zenica",
+      "Kakanj",
+      "Visoko",
+      "Sarajevo",
+      "Konjic",
+      "Jablanica",
+      "Mostar",
+      "Capljina",
+      "Metkovic"
+    ],
+    "estado": "en servicio",
+    "fuente": "BH Telecom / RAK (Communications Regulatory Agency of BiH)"
+  },
+  {
+    "nombre": "Northern Posavina-Krajina Trunk (Croatia Border - Banja Luka - Serbia Border)",
+    "operador": "m:tel",
+    "pais": "BA",
+    "ciudades": [
+      "Novi Grad",
+      "Prijedor",
+      "Banja Luka",
+      "Prnjavor",
+      "Derventa",
+      "Modrica",
+      "Brcko",
+      "Bijeljina",
+      "Sabac"
+    ],
+    "estado": "en servicio",
+    "fuente": "m:tel (Telekom Srpske) / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Central-Adriatic Corridor (Banja Luka - Mostar - Neum)",
+    "operador": "HT Eronet",
+    "pais": "BA",
+    "ciudades": [
+      "Banja Luka",
+      "Mrkonjic Grad",
+      "Jajce",
+      "Donji Vakuf",
+      "Bugojno",
+      "Kupres",
+      "Livno",
+      "Tomislavgrad",
+      "Posusje",
+      "Siroki Brijeg",
+      "Mostar",
+      "Stolac",
+      "Neum"
+    ],
+    "estado": "en servicio",
+    "fuente": "HT Eronet / RAK BiH"
+  },
+  {
+    "nombre": "OPGW High Voltage Transmission Backbone",
+    "operador": "Elektroprenos BiH",
+    "pais": "BA",
+    "ciudades": [
+      "Banja Luka",
+      "Jajce",
+      "Travnik",
+      "Zenica",
+      "Sarajevo",
+      "Tuzla",
+      "Ugljevik",
+      "Bijeljina"
+    ],
+    "estado": "en servicio",
+    "fuente": "Elektroprenos BiH / NOSBiH"
+  },
+  {
+    "nombre": "North-South Transit Route (Mitrovica - Pristina - Skopje)",
+    "operador": "Telekomi i Kosoves",
+    "pais": "XK",
+    "ciudades": [
+      "Raska",
+      "Leposavic",
+      "Mitrovica",
+      "Vushtrri",
+      "Pristina",
+      "Lipjan",
+      "Ferizaj",
+      "Kacanik",
+      "Hani i Elezit",
+      "Skopje"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARKEP (Regulatory Authority of Electronic and Postal Communications)"
+  },
+  {
+    "nombre": "West-East Trunk (Peja - Pristina - Gjilan)",
+    "operador": "IPKO",
+    "pais": "XK",
+    "ciudades": [
+      "Peja",
+      "Klina",
+      "Drenas",
+      "Fushe Kosove",
+      "Pristina",
+      "Gjilan",
+      "Bujanovac"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARKEP / IPKO Telecommunications"
+  },
+  {
+    "nombre": "OPGW 400kV/220kV Interconnector Route (Mitrovica - Prizren - Albania Border)",
+    "operador": "KOSTT",
+    "pais": "XK",
+    "ciudades": [
+      "Mitrovica",
+      "Obiliq",
+      "Pristina",
+      "Ferizaj",
+      "Suhareka",
+      "Prizren",
+      "Kukes"
+    ],
+    "estado": "en servicio",
+    "fuente": "KOSTT (Transmission, System and Market Operator of Kosovo)"
+  },
+  {
+    "nombre": "Dorsale Côtière Nord-Sud (Bizerte - Tunis - Sfax - Frontière Libyenne)",
+    "operador": "Tunisie Telecom",
+    "pais": "TN",
+    "ciudades": [
+      "Bizerte",
+      "Tunis",
+      "Hammamet",
+      "Enfidha",
+      "Sousse",
+      "El Jem",
+      "Sfax",
+      "Skhira",
+      "Gabes",
+      "Mareth",
+      "Medenine",
+      "Ben Gardane",
+      "Zuwara"
+    ],
+    "estado": "en servicio",
+    "fuente": "Tunisie Telecom / INTT / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Artère Nord-Ouest (Tunis - Ghardimaou - Frontière Algérienne)",
+    "operador": "Tunisie Telecom",
+    "pais": "TN",
+    "ciudades": [
+      "Tunis",
+      "Medjez el Bab",
+      "Beja",
+      "Bou Salem",
+      "Jendouba",
+      "Ghardimaou",
+      "Souk Ahras"
+    ],
+    "estado": "en servicio",
+    "fuente": "Tunisie Telecom / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Axe Centre-Sud-Ouest (Tunis - Kairouan - Gafsa - Tozeur - Algérie)",
+    "operador": "Tunisie Telecom",
+    "pais": "TN",
+    "ciudades": [
+      "Tunis",
+      "Zaghouan",
+      "Kairouan",
+      "Sidi Bouzid",
+      "Gafsa",
+      "Metlaoui",
+      "Tozeur",
+      "Nefta",
+      "El Oued"
+    ],
+    "estado": "en servicio",
+    "fuente": "Tunisie Telecom / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Backbone National Fibre Optique Nord-Sud",
+    "operador": "Ooredoo Tunisia",
+    "pais": "TN",
+    "ciudades": [
+      "Tunis",
+      "Nabeul",
+      "Sousse",
+      "Monastir",
+      "Mahdia",
+      "Sfax",
+      "Gabes",
+      "Medenine",
+      "Zarzis",
+      "Houmt Souk"
+    ],
+    "estado": "en servicio",
+    "fuente": "Ooredoo Tunisia / INTT"
+  },
+  {
+    "nombre": "Réseau OPGW Haute Tension Centre-Ouest",
+    "operador": "STEG",
+    "pais": "TN",
+    "ciudades": [
+      "Sousse",
+      "Kairouan",
+      "Sbeitla",
+      "Kasserine",
+      "Feriana",
+      "Gafsa",
+      "Tebessa"
+    ],
+    "estado": "en servicio",
+    "fuente": "STEG (Société Tunisienne de l'Électricité et du Gaz) / Banque Mondiale"
+  },
+  {
+    "nombre": "Axe Central Nord-Sud (Abidjan - Bouaké - Frontière Burkina Faso)",
+    "operador": "Orange Côte d'Ivoire",
+    "pais": "CI",
+    "ciudades": [
+      "Abidjan",
+      "Agboville",
+      "Dimbokro",
+      "Yamoussoukro",
+      "Tiebissou",
+      "Bouake",
+      "Katiola",
+      "Tafiré",
+      "Ferkessedougou",
+      "Ouangolodougou",
+      "Niangoloko"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARTCI / Orange Côte d'Ivoire / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Axe Nord-Mali (Abidjan - Korhogo - Frontière Mali)",
+    "operador": "Orange Côte d'Ivoire",
+    "pais": "CI",
+    "ciudades": [
+      "Abidjan",
+      "Yamoussoukro",
+      "Bouake",
+      "Ferkessedougou",
+      "Korhogo",
+      "Boundiali",
+      "Tengrela",
+      "Sikasso"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARTCI / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Réseau National Haut Débit (RNHD) - Boucle Est",
+    "operador": "ANSUT",
+    "pais": "CI",
+    "ciudades": [
+      "Abidjan",
+      "Adzope",
+      "Akoupe",
+      "Abengourou",
+      "Agnibilekrou",
+      "Tanda",
+      "Bondoukou",
+      "Bouna"
+    ],
+    "estado": "en servicio",
+    "fuente": "ANSUT (Agence Nationale du Service Universel des Télécommunications) / Ministère de l'Économie Numérique"
+  },
+  {
+    "nombre": "Réseau National Haut Débit (RNHD) - Boucle Ouest",
+    "operador": "ANSUT",
+    "pais": "CI",
+    "ciudades": [
+      "Abidjan",
+      "Dabou",
+      "Divo",
+      "Gagnoa",
+      "Issia",
+      "Daloa",
+      "Duekoue",
+      "Man",
+      "Danane",
+      "Nzerekore"
+    ],
+    "estado": "en servicio",
+    "fuente": "ANSUT / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Backbone Côtier Ouest (Abidjan - San-Pédro - Tabou)",
+    "operador": "MTN Côte d'Ivoire",
+    "pais": "CI",
+    "ciudades": [
+      "Abidjan",
+      "Jacqueville",
+      "Grand-Lahou",
+      "Fresco",
+      "Sassandra",
+      "San-Pedro",
+      "Grand-Bereby",
+      "Tabou"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARTCI / MTN Côte d'Ivoire"
+  },
+  {
+    "nombre": "Dorsale Ouest-Est (Frontière Côte d'Ivoire - Ouagadougou - Frontière Niger)",
+    "operador": "Onatel",
+    "pais": "BF",
+    "ciudades": [
+      "Ouangolodougou",
+      "Niangoloko",
+      "Banfora",
+      "Bobo-Dioulasso",
+      "Hounde",
+      "Boromo",
+      "Koudougou",
+      "Ouagadougou",
+      "Zorgho",
+      "Koupela",
+      "Fada N'gourma",
+      "Kantchari",
+      "Makalondi",
+      "Niamey"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARCEP Burkina Faso / Onatel (Moov Africa) / ITU"
+  },
+  {
+    "nombre": "Axe Nord-Sud (Ouagadougou - Pô - Frontière Ghana)",
+    "operador": "Onatel",
+    "pais": "BF",
+    "ciudades": [
+      "Ouagadougou",
+      "Kombissiri",
+      "Manga",
+      "Po",
+      "Navrongo"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARCEP Burkina Faso / PRICAO (Banque Mondiale)"
+  },
+  {
+    "nombre": "Axe Sud-Est (Ouagadougou - Bittou - Frontière Togo)",
+    "operador": "Backbone National (ANPTIC)",
+    "pais": "BF",
+    "ciudades": [
+      "Ouagadougou",
+      "Zorgho",
+      "Koupela",
+      "Tenkodogo",
+      "Bittou",
+      "Cinkasse",
+      "Dapaong"
+    ],
+    "estado": "en servicio",
+    "fuente": "ANPTIC / Ministère de la Transition Digitale du Burkina Faso"
+  },
+  {
+    "nombre": "Axe Nord (Ouagadougou - Ouahigouya - Frontière Mali)",
+    "operador": "Onatel",
+    "pais": "BF",
+    "ciudades": [
+      "Ouagadougou",
+      "Bousse",
+      "Yako",
+      "Gourcy",
+      "Ouahigouya",
+      "Titao",
+      "Koro"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARCEP Burkina Faso / Onatel"
+  },
+  {
+    "nombre": "Interconnexion OPGW Bobo-Dioulasso - Ouagadougou - Bolgatanga",
+    "operador": "SONABEL",
+    "pais": "BF",
+    "ciudades": [
+      "Bobo-Dioulasso",
+      "Pa",
+      "Koudougou",
+      "Ouagadougou",
+      "Zabre",
+      "Bolgatanga"
+    ],
+    "estado": "en servicio",
+    "fuente": "SONABEL / WAPP (West African Power Pool)"
+  },
+  {
+    "nombre": "Dorsale Nationale Nord-Sud (Cotonou - Parakou - Malanville - Niger)",
+    "operador": "SBIN",
+    "pais": "BJ",
+    "ciudades": [
+      "Cotonou",
+      "Abomey-Calavi",
+      "Allada",
+      "Bohicon",
+      "Dassa-Zoume",
+      "Save",
+      "Tchaourou",
+      "Parakou",
+      "Bembereke",
+      "Kandi",
+      "Malanville",
+      "Gaya"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARCEP Bénin / SBIN (ex-Bénin Télécoms Infrastructures)"
+  },
+  {
+    "nombre": "Branche Nord-Ouest (Parakou - Natitingou - Porga - Burkina Faso)",
+    "operador": "SBIN",
+    "pais": "BJ",
+    "ciudades": [
+      "Parakou",
+      "Djougou",
+      "Natitingou",
+      "Tanguieta",
+      "Porga",
+      "Fada N'gourma"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARCEP Bénin / Projet de Développement des Infrastructures de Télécommunications du Bénin"
+  },
+  {
+    "nombre": "Axe Côtier Transfrontalier (Togo - Cotonou - Nigeria)",
+    "operador": "SBIN",
+    "pais": "BJ",
+    "ciudades": [
+      "Lome",
+      "Grand-Popo",
+      "Come",
+      "Ouidah",
+      "Cotonou",
+      "Porto-Novo",
+      "Igolo",
+      "Lagos"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARCEP Bénin / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Réseau OPGW Haute Tension Côtier et Nord",
+    "operador": "CEB",
+    "pais": "BJ",
+    "ciudades": [
+      "Lome",
+      "Momé-Hagou",
+      "Sakete",
+      "Porto-Novo",
+      "Bohicon",
+      "Onigbolo",
+      "Parakou"
+    ],
+    "estado": "en servicio",
+    "fuente": "CEB (Communauté Électrique du Bénin) / WAPP"
+  },
+  {
+    "nombre": "Backbone National - Axe Conakry - Kankan - Frontière Mali",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Conakry",
+      "Coyah",
+      "Kindia",
+      "Mamou",
+      "Dabola",
+      "Kouroussa",
+      "Kankan",
+      "Siguiri",
+      "Kourémalé",
+      "Bamako"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinée / SOGEB (Société de Gestion et d'Exploitation du Backbone National)"
+  },
+  {
+    "nombre": "Backbone National - Axe Guinée Forestière (Mamou - Nzérékoré - Côte d'Ivoire)",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Mamou",
+      "Faranah",
+      "Kissidougou",
+      "Gueckedou",
+      "Macenta",
+      "Nzerekore",
+      "Lola",
+      "Danane"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinée / SOGEB / ITU Terrestrial Transmission Map"
+  },
+  {
+    "nombre": "Backbone National - Axe Fouta Djallon (Mamou - Labé - Koundara - Sénégal)",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Mamou",
+      "Dalaba",
+      "Pita",
+      "Labe",
+      "Gaoual",
+      "Koundara",
+      "Tambacounda"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinée / SOGEB"
+  },
+  {
+    "nombre": "Backbone National - Axe Littoral Nord (Conakry - Boké - Kamsar)",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Conakry",
+      "Dubreka",
+      "Boffa",
+      "Boke",
+      "Kamsar"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinée / SOGEB"
+  },
+  {
+    "nombre": "Boucle Est Haute Guinée (Kankan - Beyla - Nzérékoré)",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Kankan",
+      "Kerouane",
+      "Beyla",
+      "Nzerekore"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinée / SOGEB"
+  }
+]
