@@ -1,8 +1,8 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al cerrar la cuenta anterior al 96 % de su uso semanal. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
+Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al cerrar la cuenta anterior al 97 % de su uso semanal. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
 
-## Estado al cerrar la cuenta (24 Oct 2026, 10:05, al 96 % de uso)
+## Estado al cerrar la cuenta (24 Oct 2026, 12:00, al 97 % de uso)
 
 **Ramas:** `main` (la web en vivo) y `web-idiomas` están al día. `web-idiomas` tiene además este documento y las preguntas de Kimi.
 
@@ -75,7 +75,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 - **Gemini:** le falta la tanda 9 (KP, TD, NI y CV). Su límite se renueva el 24 de octubre a las 12:47.
 - **Grok:** le faltan las tandas 8 y 9. Su límite semanal se renueva el 27 de octubre.
 - **Cables submarinos que solo nombra una voz:** 131. Son 64 de ChatGPT, 55 de Gemini, 9 de Claude, 2 de Astra y 1 de Grok; `cables_agencia.py` los lista con «solo lo nombra».
-  - **Ronda 24, en marcha a las 11:55:** Astra 6 confirma los 129 que no propuso ella, en 17 lotes de 8 (`herramientas/agencia-rondas/ronda24/lotes.json` y `pregunta.txt`).
+  - **Ronda 24, parada a las 12:00 al 97 % de uso (no llegó a terminar ningún lote):** Astra 6 confirma los 129 que no propuso ella, en 17 lotes de 8 (`herramientas/agencia-rondas/ronda24/lotes.json` y `pregunta.txt`). Las respuestas guardadas aún no han pasado por el proceso.
   - Sus respuestas van a `herramientas/cables-agencia/astra-confirma-<n>.json`. Mira cuáles existen y sigue por el primer lote que falte.
   - Después, el proceso de los cables submarinos.
   - Los 2 que propuso Astra necesitan otra voz.
@@ -391,7 +391,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 - **Grok:** tiene límite semanal, hasta el 27 de octubre.
 - **Kimi** (kimi.ai): cuenta gratuita, que se satura en la hora punta de China.
 - **Astra 6** (`gpt-6-astra`, en platform.cheaperinference.com → Playground)
-  - Le quedan unos 3,58 US$ (24 oct, 11:45). Cada petición cuesta unos 0,11 US$. El saldo de la barra lateral solo se actualiza al recargar. El dueño quiere usarla «para todo lo que se pueda» y para lo más difícil.
+  - Le quedaban unos 3,58 US$ a las 11:45, antes de la ronda 24. Cada petición cuesta unos 0,11 US$. El saldo de la barra lateral solo se actualiza al recargar. El dueño quiere usarla «para todo lo que se pueda» y para lo más difícil.
   - Corta en 4.096 tokens contando el razonamiento: pídele 4 o 5 países por petición, porque con 7 se cortó casi la mitad de las veces.
 - Kimi y Cheaper Inference pueden guardar datos en China: dales solo información del producto.
 - **Claude** cuenta como una voz cuando comprueba contra textos oficiales.
