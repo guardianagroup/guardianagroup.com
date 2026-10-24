@@ -95,3 +95,10 @@ details>summary:hover::after{color:#9CC3E4}
 .rx2-lista a.tuya:hover{border-color:#9CC3E4}
 .asia .ctas a.s:hover{background:#101A26;color:#C9DFF2;border-color:#C9DFF2}
 .gran-descarga a.otro:hover{color:#C9DFF2!important;text-decoration:underline!important;text-underline-offset:4px}
+/* 23 Oct 2026 · la letra de la portada en toda la web (el fundador, 20 Oct: «toda la web con la letra de la portada»;
+   agencia, ronda 13: Instrument Serif en los títulos y Hanken Grotesk en el texto, los botones y la navegación).
+   Cada página conserva sus tamaños: la serifa, más fina, se agranda en proporción (font-size-adjust).
+   Solo en alfabeto latino: las páginas en japonés, coreano, chino, tailandés o vietnamita conservan su letra. */
+@font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/InstrumentSerif-Regular.woff) format('woff')}
+@font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url(/fonts/InstrumentSerif-Italic.woff) format('woff')}
+:is(:lang(es),:lang(en),:lang(pt),:lang(id)) main :is(h1,h2){font-family:'Instrument Serif',Georgia,'Times New Roman',serif!important;font-weight:400!important;letter-spacing:-.004em!important;font-size-adjust:ex-height .62;line-height:1.14!important}
