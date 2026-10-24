@@ -7,8 +7,8 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
 **Ramas:** `main` (la web en vivo) y `web-idiomas` están al día. `web-idiomas` tiene además este documento y las preguntas de Kimi.
 
 **En vivo en guardianagroup.com/orbita/**
-- **Cables por tierra:** 169 países y 1.345.645 km, en `orbita/datos/fibra-tierra.json`. Al empezar la noche eran 93 países.
-  - 420 tramos salen de la agencia, confirmados al menos por dos voces de siete: Astra 6, ChatGPT («Alta» e «Investigación avanzada»), Gemini, Grok, Kimi y Claude comprobando fuentes oficiales. El resto viene de OpenStreetMap y AfTerFibre.
+- **Cables por tierra:** 169 países y 1.345.669 km, en `orbita/datos/fibra-tierra.json`. Al empezar la noche eran 93 países.
+  - 421 tramos salen de la agencia, confirmados al menos por dos voces de siete: Astra 6, ChatGPT («Alta» e «Investigación avanzada»), Gemini, Grok, Kimi y Claude comprobando fuentes oficiales. El resto viene de OpenStreetMap y AfTerFibre.
   - En los países sin fuentes abiertas valen los tramos aproximados. El dueño, a las 9:00: «Lo más aproximado posible ok».
   - Siria, Yemen y Palestina entran con redes «en servicio parcial».
   - Corea del Norte se queda en el mapa. El dueño, a las 8:02: «Añádela si».
@@ -539,3 +539,4 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
 - 11:40 · Europa 6: 168 países, 1.343.773 km, 416 tramos de la agencia.
 - 11:41 · Oceanía 1: 169 países, 1.345.645 km, 420 tramos de la agencia.
 - 12:25 · Ronda 24, lotes 1–2: cables de la agencia aceptados: 352 · tramos: 1058; lugares-capas: 521 grupos.
+- 12:44 · Gemini, tanda 9: 169 países, 1.345.669 km, 421 tramos de la agencia.
