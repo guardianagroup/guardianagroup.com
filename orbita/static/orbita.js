@@ -260,7 +260,7 @@
   // ---------- Geometry shared with the CSS (--u) ----------
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
   // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
-  const ZOOM = { z: 1, zt: 1, MAX: 80000 }; // 22 Oct 2026, 13:50 (owner): «hasta 500 metros del suelo» — 40 000 km / 80 000 = 0,5 km nominal; before: ×20 («despacito, suave»)
+  const ZOOM = { z: 1, zt: 1, MAX: 8000 }; // 24 Oct 2026, 13:51 (owner): «hasta 5 kilómetros» — 40 000 km / 8 000 = 5 km nominal (closer in, the cables were lost); before: 500 m (80 000), and ×20 at first
   const LIMPIO_DESDE = 4; // from here the planet is drawn flat: black water, grey land, data in white // 22 Oct 2026 (owner): «sube más el zoom aún» // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
