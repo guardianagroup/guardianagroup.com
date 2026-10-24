@@ -1,0 +1,57 @@
+[
+  {
+    "nombre": "AU-Aleutian",
+    "llegadas": [
+      {
+        "lugar": "Kodiak",
+        "pais": "US",
+        "lat": 57.79,
+        "lon": -152.40722
+      },
+      {
+        "lugar": "Larsen Bay",
+        "pais": "US",
+        "lat": 57.53722,
+        "lon": -153.97861
+      },
+      {
+        "lugar": "Chignik",
+        "pais": "US",
+        "lat": 56.29528,
+        "lon": -158.40222
+      },
+      {
+        "lugar": "Sand Point",
+        "pais": "US",
+        "lat": 55.33972,
+        "lon": -160.49722
+      },
+      {
+        "lugar": "King Cove",
+        "pais": "US",
+        "lat": 55.06167,
+        "lon": -162.31028
+      },
+      {
+        "lugar": "Akutan",
+        "pais": "US",
+        "lat": 54.13361,
+        "lon": -165.77639
+      },
+      {
+        "lugar": "Unalaska",
+        "pais": "US",
+        "lat": 53.87361,
+        "lon": -166.53667
+      }
+    ],
+    "anio": 2022,
+    "km": 1280,
+    "duenos": [
+      "GCI"
+    ],
+    "fuentes": [
+      "https://www.gci.com/aleutians"
+    ]
+  }
+]
