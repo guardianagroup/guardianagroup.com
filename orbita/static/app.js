@@ -41,7 +41,7 @@
     const velo = document.createElement('div'); velo.className = 'app-velo';
     const h = document.createElement('section'); h.className = 'app-hoja'; h.setAttribute('role', 'dialog'); h.setAttribute('aria-modal', 'true'); h.setAttribute('aria-labelledby', 'app-t');
     const pasos = guia
-      ? '<ol><li>' + T('Toca «Compartir»') + ' ' + SVG_COMPARTIR + ' ' + T('en la barra del navegador.') + '</li><li>' + T('Elige «Añadir a pantalla de inicio».') + '</li></ol>'
+      ? '<ol><li>' + T('Toca «Compartir»') + ' ' + SVG_COMPARTIR + ' ' + T('en la barra del navegador.') + '</li><li>' + T('Elige «Agregar a inicio» o «Añadir a pantalla de inicio».') + '</li></ol>'
       : '';
     h.innerHTML = '<div class="cab"><img src="/icon-192.png" alt=""><h2 id="app-t"></h2></div><p class="tx"></p>' + pasos + '<div class="bt"><button type="button" class="no"></button><button type="button" class="si"></button></div>';
     h.querySelector('h2').textContent = T('GUARDIANA en tu pantalla de inicio');
