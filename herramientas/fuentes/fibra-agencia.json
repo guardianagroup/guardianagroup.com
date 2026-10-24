@@ -1875,6 +1875,41 @@
 ]
 },
 {
+"n": "Corredor óptico internacional Moscú–Varsovia vía Bielorrusia",
+"o": "Beltelecom / RETN",
+"cc": "BY",
+"l": [
+[
+30.54,
+56.34
+],
+[
+27.57,
+53.9
+],
+[
+26.74,
+53.48
+],
+[
+26.01,
+53.13
+],
+[
+24.36,
+52.21
+],
+[
+23.72,
+52.11
+],
+[
+21.01,
+52.23
+]
+]
+},
+{
 "n": "Backbone SOGEB – Conakry–Kankan",
 "o": "SOGEB",
 "cc": "GN",
@@ -2475,37 +2510,6 @@
 [
 69.62,
 40.28
-]
-]
-},
-{
-"n": "Corredor óptico internacional Moscú–Varsovia vía Bielorrusia",
-"o": "Beltelecom / RETN",
-"cc": "BY",
-"l": [
-[
-27.57,
-53.9
-],
-[
-26.74,
-53.48
-],
-[
-26.01,
-53.13
-],
-[
-24.36,
-52.21
-],
-[
-23.72,
-52.11
-],
-[
-21.01,
-52.23
 ]
 ]
 },
@@ -4612,6 +4616,21 @@
 ]
 },
 {
+"n": "RETN-Beltelecom Belarus transit route",
+"o": "RETN / Beltelecom",
+"cc": "BY",
+"l": [
+[
+37.62,
+55.75
+],
+[
+30.54,
+56.34
+]
+]
+},
+{
 "n": "TEA (Transit Europe-Asia)",
 "o": "Rostelecom",
 "cc": "RU",
@@ -5003,6 +5022,21 @@
 [
 -58.31,
 6.01
+]
+]
+},
+{
+"n": "SIEPAC / REDCA (OPGW de 36 fibras) – Panamá 1–Veladero–frontera de Costa Rica–Río Claro",
+"o": "REDCA",
+"cc": "PA",
+"l": [
+[
+-82.43,
+8.43
+],
+[
+-83.113,
+8.603
 ]
 ]
 },
