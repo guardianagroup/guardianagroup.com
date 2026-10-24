@@ -39,6 +39,21 @@ def lee_ciudades():
             out.append((n, cc, float(la), float(lo)))
     return out
 
+def lee_pueblos():
+    """The towns less than 25 km from the end of a cable (pueblos_cables.py, GeoNames cities500): [(name, country, lat, lon)], [population]."""
+    ruta = os.path.join(RAIZ, 'static', 'tierra', 'pueblos-cables.tsv')
+    out, pob = [], []
+    if not os.path.exists(ruta):
+        return out, pob
+    with open(ruta, encoding='utf-8') as f:
+        for l in f:
+            if not l.strip() or l.startswith('#'):
+                continue
+            n, cc, la, lo, p = l.rstrip('\n').split('\t')
+            n = re.sub(r'^(.*\D)\s+\d{1,2}$', r'\1', n)
+            out.append((n, cc, float(la), float(lo))); pob.append(int(p or 0))
+    return out, pob
+
 def km(la1, lo1, la2, lo2):
     p1, p2 = math.radians(la1), math.radians(la2)
     dp, dl = p2 - p1, math.radians(lo2 - lo1)
@@ -63,6 +78,17 @@ class Rejilla:
                     if d < dm:
                         mejor, dm = k, d
         return mejor
+    def todas(self, la, lo, max_km):
+        out = []
+        r = 1 + int(max_km / 111) + 1
+        for i in range(-r, r + 1):
+            for j in range(-r, r + 1):
+                for k in self.c.get((int(math.floor(la)) + i, (int(math.floor(lo)) + j + 180) % 360 - 180), ()):
+                    n, cc, la2, lo2 = self.ciudades[k]
+                    d = km(la, lo, la2, lo2)
+                    if d <= max_km:
+                        out.append((d, k))
+        return sorted(out)
 
 def base_cable(n):
     b = (n or '').strip()
@@ -75,6 +101,22 @@ def base_cable(n):
 def main():
     ciudades = lee_ciudades()
     rj = Rejilla(ciudades)
+    pueblos, pob = lee_pueblos()
+    rp = Rejilla(pueblos) if pueblos else None
+    def lugar_cable(la, lo):
+        """The town where a cable reaches land (owner, 23 Oct 2026, 23:39: «todo cable que… empiece o termine en un
+        pueblo, tiene que aparecer el nombre»): the nearest place of the towns list within 20 km, unless a city of
+        50,000 people or more is almost as near (a cable that lands in a city's suburb takes the city's name); without
+        a town, the nearest city of 15,000 people within 80 km, as before."""
+        if rp:
+            cand = rp.todas(la, lo, 20)
+            if cand:
+                d0 = cand[0][0]
+                grandes = [x for x in cand if pob[x[1]] >= 50000 and x[0] <= max(6.0, 1.5 * d0)]
+                k = (grandes[0] if grandes else cand[0])[1]
+                return [pueblos[k][0], pueblos[k][1]]
+        k = rj.cercana(la, lo, 80)
+        return [ciudades[k][0], ciudades[k][1]] if k is not None else ['', '']
     pts = json.load(open(os.path.join(RAIZ, 'datos', 'puntos.json'), encoding='utf-8'))
     c = pts['campos']; il, ia, it, io = c.index('lon'), c.index('lat'), c.index('tipo'), c.index('operador')
     grupos = collections.OrderedDict()
@@ -111,11 +153,7 @@ def main():
         a, b = s['l'][0], s['l'][-1]
         if s.get('src') == 'agencia':  # the agency names the landing itself (cables_agencia.py)
             extremos.append([s['de'][0], s['de'][1], s['a'][0], s['a'][1]]); continue
-        ka, kb = rj.cercana(a[1], a[0], 80), rj.cercana(b[1], b[0], 80)
-        fila = []
-        for k in (ka, kb):
-            fila += [ciudades[k][0], ciudades[k][1]] if k is not None else ['', '']
-        extremos.append(fila)
+        extremos.append(lugar_cable(a[1], a[0]) + lugar_cable(b[1], b[0]))
     # whole cables
     # 22 Oct 2026: one cable, one group — the agency's key (cables_agencia.clave: aliases, accents, generic words) joins
     # «ACE» (OpenStreetMap) with «Africa Coast to Europe (ACE)» (agency), «Sam-1» with «South America-1 (SAm-1)»…
@@ -176,14 +214,14 @@ def main():
     nombreDe = lambda g: g['nombres'].most_common(1)[0][0] if len(g['k0']) <= 1 else (g['nombreAg'] or max(g['nombres'], key=lambda n: (len(n), g['nombres'][n])))
     grupos_out = [[nombreDe(g), [[c, cc, round(lo, 2), round(la, 2)] for (c, cc), (lo, la) in sorted(g['lugares'].items(), key=lambda x: x[1][0])], info(g)] for g in grupos_c]
     out = {
-        'fuente': 'Centros de datos y cables: OpenStreetMap (ODbL); cables que faltan en OpenStreetMap, reconstruidos por la agencia GUARDIANA de fuentes públicas (trazado aproximado). Ciudades: GeoNames cities15000 (CC BY 4.0).',
+        'fuente': 'Centros de datos y cables: OpenStreetMap (ODbL); cables que faltan en OpenStreetMap, reconstruidos por la agencia GUARDIANA de fuentes públicas (trazado aproximado). Ciudades: GeoNames cities15000 (CC BY 4.0)' + ('; pueblos donde llegan los cables: GeoNames cities500 (CC BY 4.0).' if pueblos else '.'),
         'generado_desde': {'puntos': pts.get('descargado'), 'cables': cab.get('descargado')},
         'centros': centros,
         'de': de,
         'cables': extremos,
         'grupos': grupos_out,
         'g': g_de,
-        'llegadas': [[round(g['lo'], 3), round(g['la'], 3)] + list((lambda k: [ciudades[k][0], ciudades[k][1]] if k is not None else ['', ''])(rj.cercana(g['la'], g['lo'], 80))) + [g['seg']] for g in llegadas.values()],
+        'llegadas': [[round(g['lo'], 3), round(g['la'], 3)] + lugar_cable(g['la'], g['lo']) + [g['seg']] for g in llegadas.values()],
     }
     with open(os.path.join(RAIZ, 'datos', 'lugares-capas.json'), 'w', encoding='utf-8') as f:
         json.dump(out, f, ensure_ascii=False, separators=(',', ':'))
