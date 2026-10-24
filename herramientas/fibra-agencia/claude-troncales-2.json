@@ -12,12 +12,12 @@
     "fuente": "https://eprsiepac.com/linea-siepac/ — Empresa Propietaria de la Red (EPR), tabla de la Línea SIEPAC (cable de guarda OPGW con 36 hilos de fibra óptica): tramos Guate Norte–Panaluya (109,91 km) y Panaluya–El Florido (73,46 km), en servicio desde el 26-ago-2012. La subestación Guate Norte está en el área de la Ciudad de Guatemala."
   },
   {
-    "nombre": "SIEPAC (OPGW de 36 fibras) – tramo Honduras El Florido–San Buenaventura",
+    "nombre": "SIEPAC (OPGW de 36 fibras) – tramo Honduras San Buenaventura–El Florido",
     "operador": "EPR / REDCA",
     "pais": "HN",
     "ciudades": [
-      "El Florido",
-      "San Buenaventura"
+      "San Buenaventura",
+      "El Florido"
     ],
     "estado": "en servicio",
     "fuente": "https://eprsiepac.com/linea-siepac/ — Empresa Propietaria de la Red (EPR), tabla de la Línea SIEPAC (cable de guarda OPGW con 36 hilos de fibra óptica): tramo El Florido–San Buenaventura (141 km), en servicio desde el 19-mar-2012."

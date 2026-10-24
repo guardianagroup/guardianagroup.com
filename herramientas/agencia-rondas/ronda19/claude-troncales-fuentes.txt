@@ -30,3 +30,18 @@ JM  NO CONFIRMADO. Solo prensa (Jamaica Observer, 23 ago 2024: el gerente de Flo
 KP  NO CONFIRMADO. Ninguna fuente oficial o primaria con rutas (solo análisis de terceros).
 KW  NO CONFIRMADO. stc.com.sa (hard patched transit: «seven border connections», sin países ni rutas); nada oficial de Kuwait.
 LB  NO CONFIRMADO. ogero.gov.lb y prensa: solo FTTx y anuncios, sin troncal con rutas.
+
+== Grupo 3 → fibra-agencia/claude-troncales-3.json ==
+LS  NO CONFIRMADO. Banco Mundial, Lesotho Digital Economy Diagnostic (2020): LECC tiene ~600 km de fibra OPGW tendida (Vodacom la usa por IRU),
+    pero el texto no nombra ciudades y los mapas del anexo 4 son imágenes que no se pudieron leer.
+NI  2 rutas. enatrel.gob.ni/toda-nicaragua-interconectada-a-finales-de-2019/ (línea Siuna–Rosita–Bilwi, >200 km, con OPGW);
+    enatrel.gob.ni/wp-content/uploads/2024/04/boletin-142.pdf (enero 2022: «reciente entrada en operación»);
+    eprsiepac.com/linea-siepac/ (Ticuantepe–frontera–Cañas, 2011). El tramo frontera de Honduras–Sandino no se incluye (Sandino es una subestación de ubicación dudosa).
+NP  NO CONFIRMADO. eng.yidaiyilu.gov.cn (portal oficial chino, Xinhua): enlace Nepal Telecom–China Telecom por el paso Rasuwagadhi–Kerung en operación comercial
+    desde el 12-ene-2018, pero sin la ruta nacional; NTA/Nepal Telecom solo en prensa (Himalayan Times: 1.600 km sin rutas); SANOG (WorldLink, no oficial).
+PA  1 ruta. eprsiepac.com/linea-siepac/ (Río Claro–frontera–Veladero, en servicio desde 31-dic-2010).
+PG  2 rutas. pngdataco.com (comunicados de sept. y oct. 2026): fibra terrestre Madang–Yonki restablecida el 21-sep-2026; fibra terrestre Tari–Hagen restablecida el 2-oct-2026.
+PS  NO CONFIRMADO. Nada oficial con rutas (Paltel solo informes de sostenibilidad sin trazado).
+QA  NO CONFIRMADO. Solo prensa sobre Ooredoo (inversión en rutas internacionales), sin troncal nacional con rutas.
+RW  NO CONFIRMADO. Informe WSIS+10 de Rwanda en la UIT (2.500–5.003 km, 30 distritos y 11 pasos fronterizos, sin nombres; el mapa de BSC es una imagen);
+    itu.int/hub 2020 (sin rutas); za.liquid.tech (14 jun 2024: fibra de Liquid en Kigali, Rubavu, Musanze, Nyamata, Huye, Muhanga, Rusizi, sin trazado).

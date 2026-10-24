@@ -1,0 +1,58 @@
+[
+  {
+    "nombre": "Línea de interconexión Siuna–Rosita–Bilwi (138 kV) con OPGW",
+    "operador": "ENATREL",
+    "pais": "NI",
+    "ciudades": [
+      "Siuna",
+      "Rosita",
+      "Bilwi"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.enatrel.gob.ni/toda-nicaragua-interconectada-a-finales-de-2019/ — ENATREL: la línea de más de 200 km a 138 kV «unirá Siuna, Rosita y Bilwi» con «cable de guarda OPGW, es decir fibra óptica para el transporte de datos». https://www.enatrel.gob.ni/wp-content/uploads/2024/04/boletin-142.pdf — ENATREL, Boletín 142 (enero 2022): «reciente entrada en operación de la Línea de Interconexión Siuna-Rosita-Bilwi»."
+  },
+  {
+    "nombre": "SIEPAC (OPGW de 36 fibras) – tramo Nicaragua Ticuantepe–frontera–Cañas",
+    "operador": "EPR / REDCA",
+    "pais": "NI",
+    "ciudades": [
+      "Ticuantepe",
+      "Cañas"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://eprsiepac.com/linea-siepac/ — Empresa Propietaria de la Red (EPR), tabla de la Línea SIEPAC (cable de guarda OPGW con 36 hilos de fibra óptica): tramos Ticuantepe–frontera de Costa Rica (125,98 km, 23-nov-2011) y frontera de Nicaragua–Cañas (129,68 km, 23-nov-2011). Cañas es la primera subestación en Costa Rica."
+  },
+  {
+    "nombre": "SIEPAC (OPGW de 36 fibras) – tramo Panamá Veladero–frontera–Río Claro",
+    "operador": "EPR / REDCA",
+    "pais": "PA",
+    "ciudades": [
+      "Veladero",
+      "Río Claro"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://eprsiepac.com/linea-siepac/ — Empresa Propietaria de la Red (EPR), tabla de la Línea SIEPAC (cable de guarda OPGW con 36 hilos de fibra óptica): tramos frontera de Costa Rica–Veladero (150,2 km) y Río Claro–frontera de Panamá (22,63 km), ambos en servicio desde el 31-dic-2010. Río Claro es la última subestación en Costa Rica."
+  },
+  {
+    "nombre": "National Transmission Network – corredor de fibra terrestre Madang–Yonki",
+    "operador": "PNG DataCo",
+    "pais": "PG",
+    "ciudades": [
+      "Madang",
+      "Yonki"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.pngdataco.com/network-outages-restoration-update-and-international-service-degradation/ — PNG DataCo (sept. 2026): «terrestrial fibre optic cable along the Madang–Yonki corridor», cortado por vandalismo el 19-sep-2026 (afectó a Lae, Yonki y las Tierras Altas) y restablecido el 21-sep-2026."
+  },
+  {
+    "nombre": "National Transmission Network – fibra terrestre Tari–Hagen",
+    "operador": "PNG DataCo",
+    "pais": "PG",
+    "ciudades": [
+      "Tari",
+      "Mount Hagen"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.pngdataco.com/network-outages-and-restoration-update/ — PNG DataCo (oct. 2026): «Tari Terrestrial Fibre Cable Break», sabotaje en la ruta de fibra Tari–Hagen, restablecida a las 10:30 del 2-oct-2026."
+  }
+]
