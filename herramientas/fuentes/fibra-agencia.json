@@ -296,6 +296,69 @@
 ]
 },
 {
+"n": "NOFBI Northern Corridor",
+"o": "ICT Authority / Government of Kenya",
+"cc": "KE",
+"l": [
+[
+39.66,
+-4.05
+],
+[
+39.47,
+-3.86
+],
+[
+38.56,
+-3.4
+],
+[
+38.167,
+-2.69
+],
+[
+37.966,
+-2.409
+],
+[
+37.47,
+-2.08
+],
+[
+36.98,
+-1.46
+],
+[
+36.82,
+-1.28
+],
+[
+36.43,
+-0.71
+],
+[
+36.07,
+-0.31
+],
+[
+35.27,
+0.52
+],
+[
+34.77,
+0.6
+],
+[
+34.56,
+0.56
+],
+[
+34.28,
+0.64
+]
+]
+},
+{
 "n": "National Optical Fiber Backbone - East-West Highway",
 "o": "Nepal Telecom",
 "cc": "NP",
@@ -1077,6 +1140,49 @@
 ]
 },
 {
+"n": "Lesotho National Fiber Optic Backbone",
+"o": "Econet Telecom Lesotho (ETL)",
+"cc": "LS",
+"l": [
+[
+29.068,
+-29.289
+],
+[
+28.25,
+-28.77
+],
+[
+28.05,
+-28.87
+],
+[
+27.9,
+-28.89
+],
+[
+27.75,
+-29.15
+],
+[
+27.48,
+-29.32
+],
+[
+27.24,
+-29.82
+],
+[
+27.48,
+-30.15
+],
+[
+27.7,
+-30.4
+]
+]
+},
+{
 "n": "East-West Mahendra Highway Optical Fiber Backbone",
 "o": "Nepal Telecom",
 "cc": "NP",
@@ -1342,45 +1448,6 @@
 ]
 },
 {
-"n": "Red troncal terrestre de Econet Telecom Lesotho",
-"o": "Econet Telecom Lesotho",
-"cc": "LS",
-"l": [
-[
-27.7,
--30.4
-],
-[
-27.48,
--30.15
-],
-[
-27.24,
--29.82
-],
-[
-27.48,
--29.32
-],
-[
-27.75,
--29.15
-],
-[
-27.9,
--28.89
-],
-[
-28.05,
--28.87
-],
-[
-28.25,
--28.77
-]
-]
-},
-{
 "n": "Red troncal nacional de fibra óptica de UNN",
 "o": "Unified National Networks (UNN)",
 "cc": "BN",
@@ -1618,6 +1685,45 @@
 ]
 },
 {
+"n": "Backbone National - Axe Conakry - Kankan - Frontière Mali",
+"o": "SOGEB",
+"cc": "GN",
+"l": [
+[
+-13.68,
+9.54
+],
+[
+-13.38,
+9.71
+],
+[
+-12.87,
+10.06
+],
+[
+-12.09,
+10.38
+],
+[
+-11.11,
+10.74
+],
+[
+-9.88,
+10.65
+],
+[
+-9.31,
+10.39
+],
+[
+-9.17,
+11.42
+]
+]
+},
+{
 "n": "Viti Levu Terrestrial Fiber Optic Ring (Queens Road & Kings Road)",
 "o": "Telecom Fiji",
 "cc": "FJ",
@@ -1840,6 +1946,64 @@
 ]
 },
 {
+"n": "Backbone nacional Conakry–Labe",
+"o": "Société de Gestion et d’Exploitation du Backbone National (SOGEB)",
+"cc": "GN",
+"l": [
+[
+-12.09,
+10.38
+],
+[
+-12.25,
+10.692
+],
+[
+-12.39,
+11.06
+],
+[
+-12.28,
+11.32
+]
+]
+},
+{
+"n": "Windhoek–Oshakati",
+"o": "Telecom Namibia",
+"cc": "NA",
+"l": [
+[
+16.65,
+-20.46
+],
+[
+17.34,
+-19.638
+],
+[
+18.1,
+-19.57
+],
+[
+17.71,
+-19.25
+],
+[
+17.167,
+-18.62
+],
+[
+16.581,
+-18.365
+],
+[
+15.98,
+-17.91
+]
+]
+},
+{
 "n": "Kyrgyztelecom - troncal norte de Issyk-Kul",
 "o": "Kyrgyztelecom",
 "cc": "KG",
@@ -1906,41 +2070,6 @@
 [
 21.01,
 52.23
-]
-]
-},
-{
-"n": "Backbone SOGEB – Conakry–Kankan",
-"o": "SOGEB",
-"cc": "GN",
-"l": [
-[
--13.68,
-9.54
-],
-[
--13.38,
-9.71
-],
-[
--12.87,
-10.06
-],
-[
--12.09,
-10.38
-],
-[
--11.11,
-10.74
-],
-[
--9.88,
-10.65
-],
-[
--9.31,
-10.39
 ]
 ]
 },
@@ -3318,21 +3447,6 @@
 ]
 },
 {
-"n": "Backbone SOGEB – Mamou–Siguiri",
-"o": "SOGEB",
-"cc": "GN",
-"l": [
-[
--9.31,
-10.39
-],
-[
--9.17,
-11.42
-]
-]
-},
-{
 "n": "CSquared Liberia — troncal nacional hacia Nimba",
 "o": "CSquared",
 "cc": "LR",
@@ -3694,6 +3808,29 @@
 ]
 },
 {
+"n": "Kigali–Rusizi por Huye",
+"o": "Broadband Systems Corporation (BSC)",
+"cc": "RW",
+"l": [
+[
+30.06,
+-1.95
+],
+[
+29.71,
+-2.02
+],
+[
+29.79,
+-2.22
+],
+[
+29.75,
+-2.35
+]
+]
+},
+{
 "n": "National Transmission Network – Highlands Terrestrial Fibre Backbone",
 "o": "PNG DataCo",
 "cc": "PG",
@@ -3851,29 +3988,6 @@
 ]
 },
 {
-"n": "Backbone SOGEB – Labe–Mamou",
-"o": "SOGEB",
-"cc": "GN",
-"l": [
-[
--12.28,
-11.32
-],
-[
--12.39,
-11.06
-],
-[
--12.25,
-10.692
-],
-[
--12.09,
-10.38
-]
-]
-},
-{
 "n": "Red nacional Leonecom — corredor Freetown–frontera de Guinea",
 "o": "Leonecom",
 "cc": "SL",
@@ -4004,6 +4118,29 @@
 [
 31.25,
 30.06
+]
+]
+},
+{
+"n": "Telecom Namibia Southern Backbone Ring",
+"o": "Telecom Namibia",
+"cc": "NA",
+"l": [
+[
+18.13,
+-26.58
+],
+[
+17.965,
+-24.627
+],
+[
+17.09,
+-23.32
+],
+[
+17.08,
+-22.56
 ]
 ]
 },
@@ -4601,6 +4738,44 @@
 ]
 },
 {
+"n": "Telecom Namibia Omaheke Ring",
+"o": "Telecom Namibia",
+"cc": "NA",
+"l": [
+[
+15.857,
+-21.936
+],
+[
+16.9,
+-21.98
+],
+[
+17.08,
+-22.56
+]
+]
+},
+{
+"n": "Telecom Namibia Kunene Ring",
+"o": "Telecom Namibia",
+"cc": "NA",
+"l": [
+[
+15.98,
+-17.91
+],
+[
+15.77,
+-17.77
+],
+[
+15.7,
+-17.79
+]
+]
+},
+{
 "n": "BTCL Dhaka–Chattogram trunk",
 "o": "Bangladesh Telecommunications Company Limited (BTCL)",
 "cc": "BD",
@@ -4665,36 +4840,6 @@
 [
 46.72,
 24.69
-]
-]
-},
-{
-"n": "Rwanda National Fiber Optic Backbone",
-"o": "Korea Telecom Rwanda Networks (KtRN)",
-"cc": "RW",
-"l": [
-[
-30.06,
--1.95
-],
-[
-29.71,
--2.02
-]
-]
-},
-{
-"n": "Lesotho National Fiber Optic Backbone",
-"o": "Econet Telecom Lesotho (ETL)",
-"cc": "LS",
-"l": [
-[
-29.068,
--29.289
-],
-[
-28.25,
--28.77
 ]
 ]
 },
@@ -4842,6 +4987,21 @@
 [
 12.67,
 -4.2
+]
+]
+},
+{
+"n": "Troncal Kumasi–Tamale–Bolgatanga",
+"o": "Telecel Ghana, anteriormente Vodafone Ghana",
+"cc": "GH",
+"l": [
+[
+-0.84,
+9.4
+],
+[
+-0.85,
+10.79
 ]
 ]
 },
@@ -5477,40 +5637,6 @@
 {
 "n": "",
 "o": "",
-"cc": "MW",
-"l": [
-[
-33.93,
--9.93
-],
-[
-33.86,
--11.02
-],
-[
-34.02,
--11.47
-]
-]
-},
-{
-"n": "",
-"o": "",
-"cc": "MW",
-"l": [
-[
-33.79,
--13.97
-],
-[
-32.88,
--13.8
-]
-]
-},
-{
-"n": "",
-"o": "",
 "cc": "BR",
 "l": [
 [
@@ -5590,6 +5716,25 @@
 [
 20.867,
 42.883
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "MW",
+"l": [
+[
+34.02,
+-11.47
+],
+[
+33.86,
+-11.02
+],
+[
+33.93,
+-9.93
 ]
 ]
 },
@@ -5769,6 +5914,21 @@
 [
 127.0,
 -8.52
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "MW",
+"l": [
+[
+33.79,
+-13.97
+],
+[
+32.88,
+-13.8
 ]
 ]
 },
@@ -6277,6 +6437,21 @@
 {
 "n": "",
 "o": "",
+"cc": "RW",
+"l": [
+[
+29.75,
+-2.35
+],
+[
+28.907,
+-2.485
+]
+]
+},
+{
+"n": "",
+"o": "",
 "cc": "CO",
 "l": [
 [
@@ -6588,21 +6763,6 @@
 [
 -10.05,
 5.88
-]
-]
-},
-{
-"n": "",
-"o": "",
-"cc": "RW",
-"l": [
-[
-29.79,
--2.22
-],
-[
-29.75,
--2.35
 ]
 ]
 },

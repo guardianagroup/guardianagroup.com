@@ -810,8 +810,15 @@ bawku	GH	11.05926	-0.24249	76459	Bawku
 bolgatanga	GH	10.78556	-0.85139	81958	Bolgatanga
 ho	GH	6.60084	0.4713	130701	Ho
 hohoe	GH	6.60084	0.4713	130701	Ho
+kintampo	GH	8.05627	-1.73058	53711	Kintampo
+konongo	GH	6.61667	-1.21667	43585	Konongo
+kumasi	GH	6.68848	-1.62443	2544530	Kumasi
+nkawkaw	GH	6.54584	-0.76264	47968	Nkawkaw
 nkwanta	GH	7.17487	-2.09961	17000	Duayaw-Nkwanta
+nsawam	GH	5.80893	-0.35026	48885	Nsawam
+suhum	GH	6.04089	-0.45004	50610	Suhum
 tamale	GH	9.40079	-0.8393	464316	Tamale
+techiman	GH	7.59054	-1.93947	84074	Techiman
 yendi	GH	9.44272	-0.00991	64676	Yendi
 banjul	GM	13.45274	-16.57803	37274	Banjul
 bansang	GM	13.43333	-14.65	9528	Bansang
@@ -897,10 +904,12 @@ zacapa	GT	14.96867	-89.52732	60424	Zacapa
 bafata	GW	12.16583	-14.66167	33502	Bafatá
 bambadinca	GW	12.02342	-14.86119	7620	Bambadinca
 bissau	GW	11.86357	-15.59767	439704	Bissau
+bula	GW	12.10389	-15.70806	10213	Bula
 contuboel	GW	12.39081	-14.57139	4871	Contuboel
 gabu	GW	12.28	-14.22222	49371	Gabú
 mansoa	GW	12.07333	-15.31889	9422	Mansôa
 safim	GW	11.95	-15.65	3193	Safim
+saodomingos	GW	12.40194	-16.20056	6004	São Domingos
 corriverton	GY	5.933	-57.14939	11488	Corriverton
 georgetown	GY	6.80448	-58.15527	235017	Georgetown
 linden	GY	6.00815	-58.30724	44690	Linden
@@ -1110,11 +1119,26 @@ zarqa	JO	32.07275	36.08796	792665	Zarqa
 nagoya	JP	35.18147	136.90641	2332176	Nagoya
 osaka	JP	34.69379	135.50107	2753862	Osaka
 tokyo	JP	35.6895	139.69171	9733276	Tokyo
+athiriver	KE	-1.4563	36.97826	81302	Athi River
+bungoma	KE	0.5635	34.56055	68031	Bungoma
 eldoret	KE	0.52036	35.26993	475716	Eldoret
+emali	KE	-2.08033	37.47202	18325	Emali
+embu	KE	-0.53987	37.45743	64979	Embu
+isiolo	KE	0.35462	37.58218	78650	Isiolo
+kibwezi	KE	-2.40935	37.96631	8143	Kibwezi
 malaba	KE	0.63513	34.28165	15581	Malaba
+mariakani	KE	-3.86261	39.47458	31715	Mariakani
+marsabit	KE	2.33468	37.99086	36289	Marsabit
+meru	KE	0.04626	37.65587	80191	Meru
 mombasa	KE	-4.05466	39.66359	1208333	Mombasa
+moyale	KE	3.52661	39.0561	47850	Moyale
+mtitoandei	KE	-2.68987	38.16687	5626	Mtito Andei
 nairobi	KE	-1.28333	36.81667	4397073	Nairobi
+naivasha	KE	-0.71383	36.43261	198444	Naivasha
 nakuru	KE	-0.30719	36.07225	570674	Nakuru
+thika	KE	-1.03326	37.06933	251407	Thika
+voi	KE	-3.39605	38.55609	53353	Voi
+webuye	KE	0.6004	34.77119	42642	Webuye
 alabuka	KG	41.4105	71.48628	15426	Ala-Buka
 atbashi	KG	41.16951	75.80099	14655	At-Bashi
 balykchy	KG	42.46017	76.18709	42875	Balykchy
@@ -1296,7 +1320,45 @@ vilnius	LT	54.68916	25.2798	542366	Vilnius
 daugavpils	LV	55.88333	26.53333	78126	Daugavpils
 riga	LV	56.946	24.10589	742572	Riga
 ventspils	LV	57.39485	21.56121	32723	Ventspils
+alkhums	LY	32.64861	14.26191	201943	Al Khums
+misratah	LY	32.37535	15.09254	355657	Misratah
+tripoli	LY	32.88743	13.18733	1302947	Tripoli
+zliten	LY	32.46739	14.56874	203790	Zliten
+agadir	MA	30.42018	-9.59815	698310	Agadir
+casablanca	MA	33.58831	-7.61138	3665954	Casablanca
+chichaoua	MA	31.54351	-8.76275	30432	Chichaoua
+fes	MA	34.03313	-5.00028	1191905	Fes
+kenitra	MA	34.26101	-6.5802	470949	Kenitra
+khemisset	MA	33.82404	-6.06627	143640	Khemisset
+larache	MA	35.19321	-6.15572	136505	Larache
+marrakesh	MA	31.63416	-7.99994	995871	Marrakesh
+meknes	MA	33.89352	-5.54727	568295	Meknes
+oujda	MA	34.68139	-1.90858	539711	Oujda
+rabat	MA	34.01325	-6.83255	1655753	Rabat
+settat	MA	33.00103	-7.61662	155333	Settat
+tangier	MA	35.76727	-5.79975	1035141	Tangier
+taourirt	MA	34.40731	-2.89732	112908	Taourirt
+taza	MA	34.21	-4.01	162110	Taza
 chisinau	MD	47.00902	28.85938	635994	Chisinau
+ambalavao	MG	-21.83333	46.93333	45784	Ambalavao
+ambositra	MG	-20.53034	47.24344	43504	Ambositra
+ankazobe	MG	-18.31667	47.11667	28430	Ankazobe
+antananarivo	MG	-18.91368	47.53613	1349501	Antananarivo
+antsirabe	MG	-19.86586	47.03333	260907	Antsirabe
+brickaville	MG	-17.35	49.03333	25311	Vohibinany
+fianarantsoa	MG	-21.45267	47.08569	203105	Fianarantsoa
+ihosy	MG	-22.40293	46.12576	41892	Ihosy
+maevatanana	MG	-16.95	46.83333	27459	Maevatanana
+mahajanga	MG	-15.71667	46.31667	260556	Mahajanga
+moramanga	MG	-18.94948	48.23007	60456	Moramanga
+sakaraha	MG	-22.9	44.53333	21826	Sakaraha
+toamasina	MG	-18.1492	49.40234	345107	Toamasina
+toliara	MG	-23.35	43.66667	178725	Toliara
+bamako	ML	12.60915	-7.97522	4227569	Bamako
+bougouni	ML	11.41769	-7.48323	90234	Bougouni
+fana	ML	12.7787	-6.9564	56809	Fana
+segou	ML	13.44032	-6.25947	205787	Ségou
+sikasso	ML	11.31755	-5.66654	349324	Sikasso
 ann	MM	19.79537	94.04791	119714	Ann
 bago	MM	17.33521	96.48135	244376	Bago
 chauk	MM	20.89921	94.81784	90870	Chauk
@@ -1357,6 +1419,14 @@ sukhbaatar	MN	50.23139	106.20778	22741	Sühbaatar
 ulaanbaatar	MN	47.90771	106.88324	844818	Ulan Bator
 undurkhaan	MN	47.31944	110.65556	22741	Undurkhaan
 zuunkharaa	MN	48.63333	106.73333	0	Dzüünkharaa
+aioun	MR	16.6614	-9.6149	28174	Ayoun El Atrous
+aleg	MR	17.05314	-13.91312	19183	Aleg
+boutilimit	MR	17.54584	-14.69777	27170	Boutilimitt
+kiffa	MR	16.62073	-11.40208	62051	Kiffa
+nema	MR	16.61702	-7.25649	60000	Néma
+nouadhibou	MR	20.94188	-17.03842	146048	Nouadhibou
+nouakchott	MR	18.08581	-15.9785	1184530	Nouakchott
+rosso	MR	16.51378	-15.80503	15870	Rosso
 attard	MT	35.88967	14.4425	11377	Attard
 birkirkara	MT	35.89706	14.46115	24356	Birkirkara
 birzebbuga	MT	35.82546	14.52685	12915	Birżebbuġa
