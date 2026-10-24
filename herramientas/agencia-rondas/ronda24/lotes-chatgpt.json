@@ -1,0 +1,90 @@
+{
+ "nota": "Ronda 24b (24 Oct 2026): cables de una sola voz que no propuso ChatGPT (Gemini, Claude, Grok o Astra), para que ChatGPT confirme cuáles existen y están en servicio. Misma pregunta que la ronda 24 (pregunta.txt). Lotes de 8.",
+ "lotes": [
+  [
+   "Palau Cable (PW)",
+   "Yap Cable (FM)",
+   "Alaska United (AU-East y AU-West) (US)",
+   "Tampnet (North Sea) (NO, GB)",
+   "Baltic Highway (C-Lion1) (FI, DE)",
+   "Balticconnector FOC (FI, EE)",
+   "EESF-3 (Estonia-Finland) (FI, EE)",
+   "Denmark-Poland 2 (Baltica) (PL, DK, SE)"
+  ],
+  [
+   "ESAT-1 (IE, GB)",
+   "Pan-European Crossing (PEC) (GB, NL, BE)",
+   "Channel Islands (UK–Channel Islands 8, HUGO, Guernsey–Jersey) (GG, JE, GB, FR)",
+   "Eastern Light (SE, FI)",
+   "Libya Fiber Optic Network (LFON) (LY)",
+   "GLO-2 (Globacom-2) (NG)",
+   "Angola Domestic Network System (ADONES) (AO)",
+   "Comoros Domestic Submarine Cable System (KM)"
+  ],
+  [
+   "Cabo Verde Telecom Domestic Submarine Cable Network (CV)",
+   "Bahamas Domestic Submarine Network (BDSNi) (BS, HT)",
+   "Bonaire-Curaçao Cable System (CW, BQ)",
+   "Sistema Cable Submarino Nacional (SCSN) (VE)",
+   "Pichilingue-Topolobampo (MX)",
+   "Mazatlán-La Paz (MX)",
+   "Cabo San Lucas-Mazatlán (MX)",
+   "AU-Aleutians (US)"
+  ],
+  [
+   "TERRA SW (US)",
+   "HaidaLink (CA)",
+   "Connected Coast (CA)",
+   "Réseau Phoebus (CA)",
+   "Puerto Montt-Puerto Chacabuco (CL)",
+   "Jakarta-Bangka-Bintan-Batam-Singapore (B2JS) (ID, SG)",
+   "JaKa2LaDeMa (Java-Kalimantan-Sulawesi-Denpasar-Makassar) (ID)",
+   "Mataram-Kupang Cable System (MKCS) (ID)"
+  ],
+  [
+   "SMPCS Packet-1 (ID)",
+   "Converge Domestic Submarine Cable Network (CDSCN) (PH)",
+   "WARF Submarine Cable (IN, MV)",
+   "Ooredoo Maldives Nationwide Submarine Cable (MV)",
+   "Eastern Light Sweden-Finland II (SE, FI)",
+   "Denmark-Germany 2 (DK, DE)",
+   "Denmark-Norway 6 (DN-6) (DK, NO)",
+   "Denmark-Sweden 16 (DS-16) (DK, SE)"
+  ],
+  [
+   "Denmark-Sweden 18 (DS-18) (DK, SE)",
+   "Pencan-6 (ES)",
+   "PENBAL-5 (ES)",
+   "Aphrodite 2 (GR, CY)",
+   "BT Highlands and Islands Submarine Cable System (GB)",
+   "TGN-Eurasia (TGN-EA) (IN, OM, SA, EG)",
+   "Ooredoo Maldives Domestic Submarine Cable (OMDSC) (MV)",
+   "Mozambique Festoon (MZ)"
+  ],
+  [
+   "Lanka Bell Submarine Cable (LK)",
+   "Aquilink (NZ)",
+   "AT&T GOKI (GU, JP)",
+   "Blue Sky Submarine Cable System (BSSCS) (NZ)",
+   "Digicel Marianas Cable System (GU, MP)",
+   "Fiji Domestic Savusavu-Taveuni (FJ)",
+   "Hawaiki Nui 1 (NZ, AU)",
+   "Marianas-Guam Cable (GU, MP)"
+  ],
+  [
+   "Oahu-Kauai (OK) (US)",
+   "Palau Cable 1 (PC1) / Belau Submarine Cable (PW, FM, GU)",
+   "PNG LNG (PG)",
+   "Sabr (AU)",
+   "Savaii-Upolu Cable (WS)",
+   "SunCable / Groote-Bickerton-Mainland (AU)",
+   "Sydney-Melbourne-Adelaide-Perth (SMAP) - Kangaroo Island Segment (AU)",
+   "Trans-Cook Strait Cable (Aquatronics) (NZ)"
+  ],
+  [
+   "Vanuatu-Fiji / Tui-Samoa Extension to Vanua Levu (FJ)",
+   "Viti Levu-Vanua Levu (Fiji Domestic) (FJ)",
+   "North Sea Connect (NSC) (GB, DK)"
+  ]
+ ]
+}
