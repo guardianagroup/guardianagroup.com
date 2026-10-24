@@ -1,0 +1,114 @@
+[
+  {
+    "nombre": "Troncal norte occidental: Algiers–Oran",
+    "operador": "Algérie Télécom",
+    "pais": "DZ",
+    "ciudades": ["Algiers", "Blida", "Khemis Miliana", "Chlef", "Relizane", "Oran"],
+    "estado": "en servicio",
+    "fuente": "aproximado: secuencia urbana del corredor norte occidental de la red nacional de fibra de Algérie Télécom, representada en ITU Broadband Maps; trazado probable siguiendo los corredores de la N4 y la autopista A1, no un plano publicado del cable."
+  },
+  {
+    "nombre": "Troncal norte oriental: Algiers–Annaba",
+    "operador": "Algérie Télécom",
+    "pais": "DZ",
+    "ciudades": ["Algiers", "Bouira", "Bordj Bou Arreridj", "Setif", "Constantine", "Skikda", "Annaba"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor norte oriental de la red nacional de Algérie Télécom, recogida en ITU Broadband Maps; ciudades intermedias inferidas de los corredores viarios que enlazan sus principales nodos."
+  },
+  {
+    "nombre": "Troncal del Sáhara central: Ghardaia–Tamanrasset",
+    "operador": "Algérie Télécom",
+    "pais": "DZ",
+    "ciudades": ["Ghardaia", "El Golea", "In Salah", "Tamanrasset"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje doméstico operativo de fibra hacia Tamanrasset descrito por Algérie Télécom y Algeria Press Service; secuencia probable siguiendo la carretera transahariana N1. No se presupone continuidad internacional."
+  },
+  {
+    "nombre": "Troncal oriental: Luanda–Malanje",
+    "operador": "Unitel",
+    "pais": "AO",
+    "ciudades": ["Luanda", "Catete", "Ndalatando", "Lucala", "Malanje"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor terrestre de la red nacional de fibra de Unitel; secuencia inferida del eje viario Luanda–Ndalatando–Malanje. Unitel publica el alcance de su backbone, pero no un itinerario urbano exhaustivo."
+  },
+  {
+    "nombre": "Troncal centro-sur: Luanda–Lubango",
+    "operador": "Unitel",
+    "pais": "AO",
+    "ciudades": ["Luanda", "Sumbe", "Lobito", "Benguela", "Lubango"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje de la red terrestre nacional de Unitel, siguiendo los corredores EN100 y Benguela–Lubango; ciudades principales, no trazado detallado publicado. No corresponde al sistema submarino ADONES."
+  },
+  {
+    "nombre": "Troncal norte-sur: Cotonou–Malanville",
+    "operador": "Société Béninoise d’Infrastructures Numériques (SBIN)",
+    "pais": "BJ",
+    "ciudades": ["Cotonou", "Allada", "Bohicon", "Dassa-Zoume", "Save", "Parakou", "N'Dali", "Kandi", "Malanville"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional operativo descrito en la documentación del PDI2T y de la SBIN; secuencia probable por la RNIE2. Se representa únicamente el tramo doméstico, sin afirmar un cruce fronterizo concreto."
+  },
+  {
+    "nombre": "Troncal centro-noroeste: Bohicon–Natitingou",
+    "operador": "Société Béninoise d’Infrastructures Numériques (SBIN)",
+    "pais": "BJ",
+    "ciudades": ["Bohicon", "Dassa-Zoume", "Savalou", "Bante", "Bassila", "Djougou", "Natitingou"],
+    "estado": "en servicio",
+    "fuente": "aproximado: rama noroccidental del backbone nacional ampliado mediante el PDI2T y explotado por la SBIN; ciudades inferidas siguiendo los corredores RNIE2 y RNIE3, no un plano de tendido publicado."
+  },
+  {
+    "nombre": "Troncal oriental: Gaborone–Francistown",
+    "operador": "Botswana Fibre Networks (BoFiNet)",
+    "pais": "BW",
+    "ciudades": ["Gaborone", "Mochudi", "Mahalapye", "Palapye", "Tonota", "Francistown"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje oriental operativo del backbone publicado por BoFiNet en sus mapas de red e informes anuales; secuencia urbana inferida del corredor A1."
+  },
+  {
+    "nombre": "Troncal nororiental: Francistown–Kasane",
+    "operador": "Botswana Fibre Networks (BoFiNet)",
+    "pais": "BW",
+    "ciudades": ["Francistown", "Nata", "Pandamatenga", "Kasane"],
+    "estado": "en servicio",
+    "fuente": "aproximado: enlaces Francistown–Nata y Nata–Kasane de la red operativa de BoFiNet; el despliegue Nata–Kasane está documentado por el operador. Secuencia probable siguiendo las carreteras A3 y A33."
+  },
+  {
+    "nombre": "Troncal Trans-Kalahari hacia Namibia",
+    "operador": "Botswana Fibre Networks (BoFiNet) / Telecom Namibia",
+    "pais": "BW",
+    "ciudades": ["Gaborone", "Kanye", "Jwaneng", "Sekoma", "Kang", "Ghanzi", "Mamuno", "Buitepos"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor occidental e interconexión con Namibia representados en la red de BoFiNet; secuencia probable siguiendo la Trans-Kalahari. Buitepos es la primera localidad incluida del lado namibio."
+  },
+  {
+    "nombre": "Troncal occidental: Ouagadougou–Niangoloko",
+    "operador": "ONATEL / Moov Africa Burkina Faso",
+    "pais": "BF",
+    "ciudades": ["Ouagadougou", "Sabou", "Boromo", "Hounde", "Bobo-Dioulasso", "Banfora", "Niangoloko"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor occidental de fibra de ONATEL, recogido en la cartografía de redes terrestres de ITU Broadband Maps; ciudades inferidas siguiendo las carreteras N1 y N7. Se representa el tramo doméstico."
+  },
+  {
+    "nombre": "Troncal sudoriental: Ouagadougou–Bitou",
+    "operador": "ONATEL / Moov Africa Burkina Faso",
+    "pais": "BF",
+    "ciudades": ["Ouagadougou", "Koupela", "Tenkodogo", "Bitou"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor sudoriental del backbone de ONATEL representado en ITU Broadband Maps; secuencia probable siguiendo las carreteras N4 y N16. Se limita al tramo doméstico y no presupone el itinerario del cruce internacional."
+  },
+  {
+    "nombre": "Troncal septentrional y salida a Tanzania",
+    "operador": "Burundi Backbone System (BBS) / Tanzania Telecommunications Corporation (TTCL)",
+    "pais": "BI",
+    "ciudades": ["Bujumbura", "Bugarama", "Kayanza", "Ngozi", "Muyinga", "Kobero", "Kabanga"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone operativo de BBS e interconexión con Tanzania por Kobero, documentados por BBS y el programa RCIP del Banco Mundial; secuencia intermedia inferida de los corredores viarios del norte. Kabanga es la primera localidad incluida en Tanzania."
+  },
+  {
+    "nombre": "Troncal meridional: Bujumbura–Gitega",
+    "operador": "Burundi Backbone System (BBS)",
+    "pais": "BI",
+    "ciudades": ["Bujumbura", "Rumonge", "Nyanza-Lac", "Makamba", "Rutana", "Gitega"],
+    "estado": "en servicio",
+    "fuente": "aproximado: rama meridional del backbone nacional operativo de BBS, documentado en el programa RCIP del Banco Mundial; secuencia probable por el corredor del lago y las conexiones entre las capitales provinciales meridionales, no un plano detallado del cable."
+  }
+]
