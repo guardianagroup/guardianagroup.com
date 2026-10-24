@@ -1,0 +1,120 @@
+[
+  {
+    "nombre": "Troncal norte Montevideo–Rivera–Brasil",
+    "operador": "Antel (tramo uruguayo)",
+    "pais": "UY",
+    "ciudades": ["Montevideo", "Canelones", "Florida", "Durazno", "Paso de los Toros", "Tacuarembo", "Rivera", "Santana do Livramento"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de Antel e interconexión con Brasil por Rivera; secuencia intermedia inferida del corredor de la Ruta 5, no de un plano público del cable."
+  },
+  {
+    "nombre": "Troncal del litoral Montevideo–Salto–Argentina",
+    "operador": "Antel (tramo uruguayo)",
+    "pais": "UY",
+    "ciudades": ["Montevideo", "San Jose de Mayo", "Trinidad", "Young", "Paysandu", "Salto", "Concordia"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal de Antel en el litoral e interconexión terrestre por Salto Grande; recorrido intermedio inferido principalmente de las rutas 1 y 3. El cruce internacional utiliza el entorno de la represa, no un enlace directo entre los centros urbanos."
+  },
+  {
+    "nombre": "Troncal centro-occidental Caracas–Maracaibo",
+    "operador": "CANTV",
+    "pais": "VE",
+    "ciudades": ["Caracas", "Maracay", "Valencia", "San Felipe", "Barquisimeto", "Carora", "Ciudad Ojeda", "Cabimas", "Maracaibo"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la red nacional de transporte óptico de CANTV; ciudades intermedias inferidas de la Autopista Regional del Centro y de los corredores terrestres hacia Lara y la costa oriental del lago de Maracaibo. No representa un levantamiento exacto del cable."
+  },
+  {
+    "nombre": "Troncal oriental Caracas–Cumana",
+    "operador": "CANTV",
+    "pais": "VE",
+    "ciudades": ["Caracas", "Guarenas", "Guatire", "Caucagua", "El Guapo", "Clarines", "Barcelona", "Puerto La Cruz", "Cumana"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor oriental de la red de transporte óptico de CANTV; secuencia inferida de la conexión entre sus principales nodos y del eje vial Caracas–Barcelona–Cumana. Trazado físico detallado no publicado."
+  },
+  {
+    "nombre": "Troncal norte Belize City–México",
+    "operador": "Digi / Belize Telemedia Limited (tramo beliceño)",
+    "pais": "BZ",
+    "ciudades": ["Belize City", "Orange Walk", "Corozal", "Chetumal"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone terrestre de Belize Telemedia y salida internacional hacia México; recorrido intermedio inferido del corredor Philip Goldson Highway y del paso fronterizo hacia Chetumal."
+  },
+  {
+    "nombre": "Troncal occidental Belize City–San Ignacio",
+    "operador": "Digi / Belize Telemedia Limited",
+    "pais": "BZ",
+    "ciudades": ["Belize City", "Belmopan", "San Ignacio", "Benque Viejo del Carmen"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal óptica nacional de Belize Telemedia; corredor de más de 100 km inferido de George Price Highway y de los nodos urbanos del oeste. No se presupone aquí una continuación internacional."
+  },
+  {
+    "nombre": "Troncal costera Georgetown–Corriverton",
+    "operador": "GTT / One Communications",
+    "pais": "GY",
+    "ciudades": ["Georgetown", "Mahaica", "Mahaicony", "Fort Wellington", "New Amsterdam", "Rose Hall", "Corriverton"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone óptico costero de GTT, actualmente One Communications; secuencia inferida de los corredores East Coast Demerara, West Coast Berbice y Corentyne. No incluye la antigua fibra Georgetown–Lethem ni presupone un cruce hacia Surinam."
+  },
+  {
+    "nombre": "Troncal occidental Paramaribo–Nieuw Nickerie",
+    "operador": "Telesur",
+    "pais": "SR",
+    "ciudades": ["Paramaribo", "Totness", "Nieuw Nickerie"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red terrestre interurbana de Telesur en la franja costera occidental; recorrido inferido del corredor East-West Link y de los nodos de Coronie y Nickerie. Se excluyen los cables submarinos conectados a esta red."
+  },
+  {
+    "nombre": "Troncal oriental Paramaribo–Albina",
+    "operador": "Telesur",
+    "pais": "SR",
+    "ciudades": ["Paramaribo", "Meerzorg", "Moengo", "Albina"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor óptico terrestre oriental de Telesur; secuencia inferida del East-West Link a través de Commewijne y Marowijne. No se presupone una conexión de fibra transfronteriza con Saint-Laurent-du-Maroni."
+  },
+  {
+    "nombre": "Corredor de la costa este New York City–Atlanta",
+    "operador": "Lumen",
+    "pais": "US",
+    "ciudades": ["New York City", "Newark", "Philadelphia", "Baltimore", "Washington", "Richmond", "Raleigh", "Charlotte", "Atlanta"],
+    "estado": "en servicio",
+    "fuente": "aproximado: mapas de red de larga distancia de Lumen, incluidos los activos históricos de Level 3; selección ordenada de nodos principales del corredor oriental. Las conexiones urbanas son de fibra terrestre, pero los mapas comerciales no publican todos los pasos del cable."
+  },
+  {
+    "nombre": "Corredor del Pacífico Seattle–Los Angeles",
+    "operador": "Lumen",
+    "pais": "US",
+    "ciudades": ["Seattle", "Tacoma", "Portland", "Eugene", "Medford", "Redding", "Sacramento", "Stockton", "Fresno", "Bakersfield", "Los Angeles"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red interurbana occidental de Lumen; secuencia inferida de sus corredores de fibra y de los ejes I-5 y del Central Valley. Se representa la alternativa terrestre interior, no cables submarinos ni un trazado único publicado a escala de calle."
+  },
+  {
+    "nombre": "Corredor central Chicago–Denver",
+    "operador": "Lumen",
+    "pais": "US",
+    "ciudades": ["Chicago", "Davenport", "Des Moines", "Omaha", "Lincoln", "North Platte", "Denver"],
+    "estado": "en servicio",
+    "fuente": "aproximado: mapas de la red interurbana de Lumen/Level 3; recorrido probable por los corredores ferroviarios y viarios del eje Chicago–Omaha–Denver, aproximadamente paralelo a I-80 y, hacia Denver, I-76. Ciudades intermedias inferidas."
+  },
+  {
+    "nombre": "Corredor oriental Toronto–Quebec",
+    "operador": "Bell Canada",
+    "pais": "CA",
+    "ciudades": ["Toronto", "Belleville", "Kingston", "Brockville", "Cornwall", "Montreal", "Trois-Rivieres", "Quebec"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone terrestre de Bell Canada en Ontario y Quebec; secuencia inferida de los corredores ferroviarios y de las autopistas 401 y 40. Representa el eje directo del San Lorenzo, sin el ramal por Ottawa."
+  },
+  {
+    "nombre": "Corredor transcanadiense Winnipeg–Toronto",
+    "operador": "Bell Canada",
+    "pais": "CA",
+    "ciudades": ["Winnipeg", "Kenora", "Dryden", "Thunder Bay", "Wawa", "Sault Ste. Marie", "Sudbury", "Toronto"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de Bell Canada entre Manitoba y Ontario; recorrido probable por los corredores ferroviarios y de la Trans-Canada Highway al norte y al este del lago Superior. Se excluyen alternativas lacustres y radioenlaces."
+  },
+  {
+    "nombre": "Corredor occidental Vancouver–Calgary",
+    "operador": "TELUS",
+    "pais": "CA",
+    "ciudades": ["Vancouver", "Abbotsford", "Hope", "Merritt", "Kamloops", "Revelstoke", "Golden", "Banff", "Canmore", "Calgary"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone óptico interprovincial de TELUS; secuencia inferida de los corredores Coquihalla y Trans-Canada Highway y de los principales nodos del sur de
