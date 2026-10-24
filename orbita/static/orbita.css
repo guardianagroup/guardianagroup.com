@@ -865,7 +865,7 @@ body.en-espejo #estado { opacity: .35; }
   .espejo-hud .cifras { padding: 7px 0; gap: 6px; } .espejo-hud .cifras b { font-size: 20px; } .espejo-hud .cifras span { font-size: 8.5px; }
   .espejo-hud .sitios { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -12px; padding: 0 12px; }
   .espejo-hud .sitios::-webkit-scrollbar { display: none; }
-  .espejo-lista { top: auto; bottom: 0; right: 0; left: 0; width: 100%; max-width: none; max-height: 70vh; border-radius: 16px 16px 0 0; }
+  .espejo-lista { top: auto; bottom: 0; right: 0; left: 0; width: auto; box-sizing: border-box; max-width: none; max-height: 70vh; border-radius: 16px 16px 0 0; } /* 24 Oct 2026 (QA): width:auto, not 100% plus the padding (it came out 30 px wider than the screen) */
 }
 @media (max-width: 760px) {
   .espejo-modo { bottom: calc(66px + env(safe-area-inset-bottom, 0px)); }
