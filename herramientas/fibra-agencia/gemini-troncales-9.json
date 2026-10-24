@@ -1,0 +1,283 @@
+[
+  {
+    "nombre": "Red Troncal Nacional - Corredor Norte (Ruta 5)",
+    "operador": "Antel",
+    "pais": "UY",
+    "ciudades": [
+      "Montevideo",
+      "Las Piedras",
+      "Canelones",
+      "Florida",
+      "Durazno",
+      "Paso de los Toros",
+      "Tacuarembo",
+      "Rivera",
+      "Sant'Ana do Livramento"
+    ],
+    "estado": "en servicio",
+    "fuente": "Administración Nacional de Telecomunicaciones (Antel) / Unidad Reguladora de Servicios de Comunicaciones (URSEC) / UIT Interactive Transmission Map"
+  },
+  {
+    "nombre": "Red Troncal Nacional - Corredor Litoral (Rutas 1 y 3)",
+    "operador": "Antel",
+    "pais": "UY",
+    "ciudades": [
+      "Montevideo",
+      "Libertad",
+      "San Jose de Mayo",
+      "Trinidad",
+      "Young",
+      "Paysandu",
+      "Salto",
+      "Bella Union",
+      "Artigas",
+      "Quarai"
+    ],
+    "estado": "en servicio",
+    "fuente": "Administración Nacional de Telecomunicaciones (Antel) / URSEC / UIT Interactive Transmission Map"
+  },
+  {
+    "nombre": "Red Troncal Nacional - Corredor Suroeste (Rutas 1, 2 y 21)",
+    "operador": "Antel",
+    "pais": "UY",
+    "ciudades": [
+      "Montevideo",
+      "Libertad",
+      "Rosario",
+      "Colonia del Sacramento",
+      "Carmelo",
+      "Nueva Palmira",
+      "Dolores",
+      "Mercedes",
+      "Fray Bentos",
+      "Gualeguaychu"
+    ],
+    "estado": "en servicio",
+    "fuente": "Administración Nacional de Telecomunicaciones (Antel) / URSEC / UIT Interactive Transmission Map"
+  },
+  {
+    "nombre": "Red Troncal Nacional - Corredor Este y Costa Atlántica (Rutas 8 y 9)",
+    "operador": "Antel",
+    "pais": "UY",
+    "ciudades": [
+      "Montevideo",
+      "Pando",
+      "Maldonado",
+      "San Carlos",
+      "Rocha",
+      "Castillos",
+      "Chuy",
+      "Chui"
+    ],
+    "estado": "en servicio",
+    "fuente": "Administración Nacional de Telecomunicaciones (Antel) / URSEC / UIT Interactive Transmission Map"
+  },
+  {
+    "nombre": "Red Troncal Nacional - Corredor Noreste (Ruta 8)",
+    "operador": "Antel",
+    "pais": "UY",
+    "ciudades": [
+      "Montevideo",
+      "Pando",
+      "Minas",
+      "Jose Pedro Varela",
+      "Treinta y Tres",
+      "Melo",
+      "Rio Branco",
+      "Jaguarao"
+    ],
+    "estado": "en servicio",
+    "fuente": "Administración Nacional de Telecomunicaciones (Antel) / URSEC / UIT Interactive Transmission Map"
+  },
+  {
+    "nombre": "Red de Fibra Óptica OPGW - Sistema Interconectado Nacional (Eje Norte 500 kV)",
+    "operador": "UTE",
+    "pais": "UY",
+    "ciudades": [
+      "Montevideo",
+      "Paso de los Toros",
+      "Tacuarembo",
+      "Rivera",
+      "Melo"
+    ],
+    "estado": "en servicio",
+    "fuente": "Administración Nacional de Usinas y Trasmisiones Eléctricas (UTE) - Mapa de la Red de Trasmisión y Telecomunicaciones"
+  },
+  {
+    "nombre": "Red de Fibra Óptica OPGW - Sistema Interconectado Nacional (Eje Litoral 500 kV)",
+    "operador": "UTE",
+    "pais": "UY",
+    "ciudades": [
+      "Montevideo",
+      "San Jose de Mayo",
+      "Mercedes",
+      "Young",
+      "Paysandu",
+      "Salto",
+      "Concordia"
+    ],
+    "estado": "en servicio",
+    "fuente": "Administración Nacional de Usinas y Trasmisiones Eléctricas (UTE) - Mapa de la Red de Trasmisión y Telecomunicaciones"
+  },
+  {
+    "nombre": "Anillo Binacional Río de la Plata - Corredor Uruguay",
+    "operador": "Silica Networks",
+    "pais": "UY",
+    "ciudades": [
+      "Buenos Aires",
+      "Colonia del Sacramento",
+      "San Jose de Mayo",
+      "Montevideo",
+      "Maldonado"
+    ],
+    "estado": "en servicio",
+    "fuente": "Silica Networks (Grupo Datco) - Mapa de Red Cono Sur"
+  },
+  {
+    "nombre": "Red Troncal InterNexa Cono Sur - Tramo Uruguay",
+    "operador": "InterNexa",
+    "pais": "UY",
+    "ciudades": [
+      "Montevideo",
+      "San Jose de Mayo",
+      "Mercedes",
+      "Paysandu",
+      "Salto",
+      "Concordia"
+    ],
+    "estado": "en servicio",
+    "fuente": "InterNexa - Cobertura de Red de Fibra Óptica en Latinoamérica"
+  },
+  {
+    "nombre": "Red Académica Uruguaya (RAU)",
+    "operador": "SeCIU",
+    "pais": "UY",
+    "ciudades": [
+      "Montevideo",
+      "Maldonado",
+      "Rocha",
+      "Treinta y Tres",
+      "Tacuarembo",
+      "Rivera",
+      "Paysandu",
+      "Salto"
+    ],
+    "estado": "en servicio",
+    "fuente": "Servicio Central de Informática Universitaria (SeCIU - Udelar) / RedCLARA"
+  },
+  {
+    "nombre": "National Transmission Network (NTN) - Highlands Highway & Ramu OPGW Corridor",
+    "operador": "PNG DataCo",
+    "pais": "PG",
+    "ciudades": [
+      "Madang",
+      "Lae",
+      "Kainantu",
+      "Goroka",
+      "Kundiawa",
+      "Mount Hagen",
+      "Mendi",
+      "Tari"
+    ],
+    "estado": "en servicio",
+    "fuente": "PNG DataCo Limited / Department of Information and Communications Technology (PNG Telecommunications Blueprint) / NICTA"
+  },
+  {
+    "nombre": "PNG LNG Pipeline Terrestrial Fiber Optic Cable Route",
+    "operador": "PNG DataCo",
+    "pais": "PG",
+    "ciudades": [
+      "Tari",
+      "Mendi",
+      "Kikori",
+      "Port Moresby"
+    ],
+    "estado": "en servicio",
+    "fuente": "PNG DataCo Limited / ExxonMobil PNG LNG / World Bank Rural Communications Project"
+  },
+  {
+    "nombre": "Viti Levu Terrestrial Fiber Optic Ring (Queens Road & Kings Road)",
+    "operador": "Telecom Fiji",
+    "pais": "FJ",
+    "ciudades": [
+      "Suva",
+      "Navua",
+      "Sigatoka",
+      "Nadi",
+      "Lautoka",
+      "Ba",
+      "Tavua",
+      "Rakiraki",
+      "Korovou",
+      "Nausori",
+      "Suva"
+    ],
+    "estado": "en servicio",
+    "fuente": "Telecom Fiji Pte Limited (TFL) / Telecommunications Authority of Fiji (TAF) / Government of Fiji Post-Disaster Needs Assessment"
+  },
+  {
+    "nombre": "Vanua Levu Cross-Island Terrestrial Fiber Backbone",
+    "operador": "Telecom Fiji",
+    "pais": "FJ",
+    "ciudades": [
+      "Savusavu",
+      "Labasa"
+    ],
+    "estado": "en servicio",
+    "fuente": "Telecom Fiji Pte Limited (TFL) / Government of Fiji Post-Disaster Needs Assessment"
+  },
+  {
+    "nombre": "Viti Levu 132 kV Transmission Grid OPGW Fiber Network",
+    "operador": "EFL",
+    "pais": "FJ",
+    "ciudades": [
+      "Suva",
+      "Sigatoka",
+      "Nadi",
+      "Lautoka",
+      "Ba",
+      "Tavua",
+      "Rakiraki"
+    ],
+    "estado": "en servicio",
+    "fuente": "Energy Fiji Limited (EFL) Annual Reports / ITU-T Technical Report on Telecommunications and Disaster Mitigation"
+  },
+  {
+    "nombre": "Réseau Faisceau et Fibre Optique Grande Terre - Axe Ouest (RT1)",
+    "operador": "OPT-NC",
+    "pais": "NC",
+    "ciudades": [
+      "Noumea",
+      "Dumbéa",
+      "Païta",
+      "Boulouparis",
+      "La Foa",
+      "Bourail",
+      "Poya",
+      "Pouembout",
+      "Koné",
+      "Voh",
+      "Kaala-Gomen",
+      "Koumac",
+      "Poum"
+    ],
+    "estado": "en servicio",
+    "fuente": "Office des Postes et Télécommunications de Nouvelle-Calédonie (OPT-NC) - Schéma Directeur des Télécommunications"
+  },
+  {
+    "nombre": "Réseau Fibre Optique Grande Terre - Axe Est et Transversales (RT2 / RT3)",
+    "operador": "OPT-NC",
+    "pais": "NC",
+    "ciudades": [
+      "Bourail",
+      "Houaïlou",
+      "Ponérihouen",
+      "Poindimié",
+      "Touho",
+      "Hienghène",
+      "Koné"
+    ],
+    "estado": "en servicio",
+    "fuente": "Office des Postes et Télécommunications de Nouvelle-Calédonie (OPT-NC) / Gouvernement de la Nouvelle-Calédonie"
+  }
+]

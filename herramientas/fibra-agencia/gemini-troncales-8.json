@@ -1,0 +1,671 @@
+[
+  {
+    "nombre": "Troncal Norte-Oeste e Interconexión México-Guatemala",
+    "operador": "Digi (BTL)",
+    "pais": "BZ",
+    "ciudades": [
+      "Chetumal",
+      "Corozal",
+      "Orange Walk",
+      "Belize City",
+      "Belmopan",
+      "San Ignacio",
+      "Benque Viejo del Carmen",
+      "Melchor de Mencos"
+    ],
+    "estado": "en servicio",
+    "fuente": "Belize Telemedia Limited (BTL), Public Utilities Commission (PUC) e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Troncal Sur (Southern Highway Fiber Route)",
+    "operador": "Digi (BTL)",
+    "pais": "BZ",
+    "ciudades": [
+      "Belmopan",
+      "Dangriga",
+      "Independence",
+      "Punta Gorda"
+    ],
+    "estado": "en servicio",
+    "fuente": "Belize Telemedia Limited (BTL) e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Red Troncal Norte-Oeste",
+    "operador": "Centaur",
+    "pais": "BZ",
+    "ciudades": [
+      "Corozal",
+      "Orange Walk",
+      "Belize City",
+      "Belmopan",
+      "San Ignacio",
+      "Benque Viejo del Carmen"
+    ],
+    "estado": "en servicio",
+    "fuente": "Centaur Communications y Public Utilities Commission (PUC)"
+  },
+  {
+    "nombre": "Red Troncal Nacional de Fibra Óptica",
+    "operador": "ETECSA",
+    "pais": "CU",
+    "ciudades": [
+      "Pinar del Rio",
+      "Artemisa",
+      "Havana",
+      "Matanzas",
+      "Cienfuegos",
+      "Santa Clara",
+      "Sancti Spiritus",
+      "Ciego de Avila",
+      "Camaguey",
+      "Las Tunas",
+      "Holguin",
+      "Bayamo",
+      "Santiago de Cuba",
+      "Guantanamo",
+      "Baracoa"
+    ],
+    "estado": "en servicio",
+    "fuente": "ETECSA, Ministerio de Comunicaciones de Cuba (MINCOM) e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Red OPGW del Sistema Electroenergético Nacional (220 kV)",
+    "operador": "UNE",
+    "pais": "CU",
+    "ciudades": [
+      "Havana",
+      "Matanzas",
+      "Cienfuegos",
+      "Santa Clara",
+      "Ciego de Avila",
+      "Camaguey",
+      "Las Tunas",
+      "Holguin",
+      "Santiago de Cuba"
+    ],
+    "estado": "en servicio",
+    "fuente": "Unión Eléctrica (UNE), MINCOM e informes de infraestructura de la UIT"
+  },
+  {
+    "nombre": "Red Nacional de Fibra Óptica OPGW - Troncal Norte (Cibao)",
+    "operador": "ETED",
+    "pais": "DO",
+    "ciudades": [
+      "Santo Domingo",
+      "Bonao",
+      "La Vega",
+      "Santiago de los Caballeros",
+      "Mao",
+      "Monte Cristi",
+      "Dajabon",
+      "Ouanaminthe"
+    ],
+    "estado": "en servicio",
+    "fuente": "Empresa de Transmisión Eléctrica Dominicana (ETED) e INDOTEL"
+  },
+  {
+    "nombre": "Red Nacional de Fibra Óptica OPGW - Troncal Sur",
+    "operador": "ETED",
+    "pais": "DO",
+    "ciudades": [
+      "Santo Domingo",
+      "San Cristobal",
+      "Bani",
+      "Azua",
+      "San Juan de la Maguana",
+      "Comendador"
+    ],
+    "estado": "en servicio",
+    "fuente": "Empresa de Transmisión Eléctrica Dominicana (ETED) e INDOTEL"
+  },
+  {
+    "nombre": "Red Nacional de Fibra Óptica OPGW - Ramal Suroeste",
+    "operador": "ETED",
+    "pais": "DO",
+    "ciudades": [
+      "Azua",
+      "Barahona",
+      "Pedernales"
+    ],
+    "estado": "en servicio",
+    "fuente": "Empresa de Transmisión Eléctrica Dominicana (ETED) e INDOTEL"
+  },
+  {
+    "nombre": "Red Nacional de Fibra Óptica OPGW - Troncal Este",
+    "operador": "ETED",
+    "pais": "DO",
+    "ciudades": [
+      "Santo Domingo",
+      "San Pedro de Macoris",
+      "La Romana",
+      "Higuey",
+      "Punta Cana"
+    ],
+    "estado": "en servicio",
+    "fuente": "Empresa de Transmisión Eléctrica Dominicana (ETED) e INDOTEL"
+  },
+  {
+    "nombre": "Troncal Norte e Interconexión Fronteriza con Haití",
+    "operador": "Claro",
+    "pais": "DO",
+    "ciudades": [
+      "Santo Domingo",
+      "Bonao",
+      "La Vega",
+      "Moca",
+      "Santiago de los Caballeros",
+      "Puerto Plata",
+      "Monte Cristi",
+      "Dajabon",
+      "Ouanaminthe"
+    ],
+    "estado": "en servicio",
+    "fuente": "Claro Dominicana, INDOTEL e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Troncal Sur e Interconexión Jimaní-Malpasse",
+    "operador": "Claro",
+    "pais": "DO",
+    "ciudades": [
+      "Santo Domingo",
+      "San Cristobal",
+      "Bani",
+      "Azua",
+      "Barahona",
+      "Jimani",
+      "Port-au-Prince"
+    ],
+    "estado": "en servicio",
+    "fuente": "Claro Dominicana, INDOTEL y estudios del Banco Interamericano de Desarrollo (BID)"
+  },
+  {
+    "nombre": "Troncal Este",
+    "operador": "Claro",
+    "pais": "DO",
+    "ciudades": [
+      "Santo Domingo",
+      "San Pedro de Macoris",
+      "La Romana",
+      "Higuey",
+      "Punta Cana"
+    ],
+    "estado": "en servicio",
+    "fuente": "Claro Dominicana e INDOTEL"
+  },
+  {
+    "nombre": "Red Dorsal Nacional Norte-Este-Sur",
+    "operador": "Altice",
+    "pais": "DO",
+    "ciudades": [
+      "Punta Cana",
+      "Higuey",
+      "La Romana",
+      "San Pedro de Macoris",
+      "Santo Domingo",
+      "Bonao",
+      "La Vega",
+      "Santiago de los Caballeros",
+      "Puerto Plata",
+      "Dajabon"
+    ],
+    "estado": "en servicio",
+    "fuente": "Altice Dominicana e INDOTEL"
+  },
+  {
+    "nombre": "Dorsal Nationale Nord (RN1) e Interconexión con República Dominicana",
+    "operador": "Natcom",
+    "pais": "HT",
+    "ciudades": [
+      "Port-au-Prince",
+      "Cabaret",
+      "Saint-Marc",
+      "Gonaives",
+      "Cap-Haitien",
+      "Fort-Liberte",
+      "Ouanaminthe",
+      "Dajabon"
+    ],
+    "estado": "en servicio",
+    "fuente": "Natcom, CONATEL e informes del Banco Mundial / UIT"
+  },
+  {
+    "nombre": "Dorsal Nationale Sud (RN2)",
+    "operador": "Natcom",
+    "pais": "HT",
+    "ciudades": [
+      "Port-au-Prince",
+      "Leogane",
+      "Petit-Goave",
+      "Miragoane",
+      "Aquin",
+      "Les Cayes",
+      "Jeremie"
+    ],
+    "estado": "en servicio",
+    "fuente": "Natcom, CONATEL e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Dorsal Plateau Central e Interconexión Belladère-Comendador",
+    "operador": "Natcom",
+    "pais": "HT",
+    "ciudades": [
+      "Port-au-Prince",
+      "Croix-des-Bouquets",
+      "Mirebalais",
+      "Hinche",
+      "Cap-Haitien"
+    ],
+    "estado": "en servicio",
+    "fuente": "Natcom y CONATEL"
+  },
+  {
+    "nombre": "Troncal Norte-Sur de Fibra Óptica",
+    "operador": "Digicel",
+    "pais": "HT",
+    "ciudades": [
+      "Les Cayes",
+      "Miragoane",
+      "Leogane",
+      "Port-au-Prince",
+      "Saint-Marc",
+      "Gonaives",
+      "Cap-Haitien",
+      "Ouanaminthe",
+      "Dajabon"
+    ],
+    "estado": "en servicio",
+    "fuente": "Digicel Haiti, CONATEL y estudios de conectividad del BID"
+  },
+  {
+    "nombre": "Anillo Troncal Costero Norte (Northern Coastal Fiber Ring)",
+    "operador": "Flow",
+    "pais": "JM",
+    "ciudades": [
+      "Kingston",
+      "Port Antonio",
+      "Annotto Bay",
+      "Port Maria",
+      "Ocho Rios",
+      "Falmouth",
+      "Montego Bay",
+      "Lucea",
+      "Negril"
+    ],
+    "estado": "en servicio",
+    "fuente": "Flow Jamaica (Cable & Wireless), Office of Utilities Regulation (OUR) e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Anillo Troncal Sur (Southern Fiber Ring)",
+    "operador": "Flow",
+    "pais": "JM",
+    "ciudades": [
+      "Kingston",
+      "Spanish Town",
+      "May Pen",
+      "Mandeville",
+      "Black River",
+      "Savanna-la-Mar",
+      "Negril",
+      "Montego Bay"
+    ],
+    "estado": "en servicio",
+    "fuente": "Flow Jamaica (Cable & Wireless), Office of Utilities Regulation (OUR) e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Anillo Nacional de Fibra Óptica",
+    "operador": "Digicel",
+    "pais": "JM",
+    "ciudades": [
+      "Kingston",
+      "Spanish Town",
+      "May Pen",
+      "Mandeville",
+      "Savanna-la-Mar",
+      "Montego Bay",
+      "Ocho Rios",
+      "Kingston"
+    ],
+    "estado": "en servicio",
+    "fuente": "Digicel Jamaica y Office of Utilities Regulation (OUR)"
+  },
+  {
+    "nombre": "Red OPGW de Transmisión Eléctrica Nacional",
+    "operador": "JPS",
+    "pais": "JM",
+    "ciudades": [
+      "Kingston",
+      "Spanish Town",
+      "May Pen",
+      "Mandeville",
+      "Montego Bay",
+      "Ocho Rios",
+      "Kingston"
+    ],
+    "estado": "en servicio",
+    "fuente": "Jamaica Public Service (JPS) y Office of Utilities Regulation (OUR)"
+  },
+  {
+    "nombre": "Anillo Troncal de Fibra Óptica de Puerto Rico",
+    "operador": "Claro",
+    "pais": "PR",
+    "ciudades": [
+      "San Juan",
+      "Bayamon",
+      "Arecibo",
+      "Aguadilla",
+      "Mayaguez",
+      "Ponce",
+      "Salinas",
+      "Guayama",
+      "Humacao",
+      "Fajardo",
+      "Carolina",
+      "San Juan"
+    ],
+    "estado": "en servicio",
+    "fuente": "Claro Puerto Rico, Negociado de Telecomunicaciones de Puerto Rico (NETPR) y FCC"
+  },
+  {
+    "nombre": "Troncal Central (Corredor PR-52)",
+    "operador": "Claro",
+    "pais": "PR",
+    "ciudades": [
+      "San Juan",
+      "Caguas",
+      "Cayey",
+      "Salinas",
+      "Ponce"
+    ],
+    "estado": "en servicio",
+    "fuente": "Claro Puerto Rico y Negociado de Telecomunicaciones de Puerto Rico (NETPR)"
+  },
+  {
+    "nombre": "Anillo Insular de Fibra Óptica",
+    "operador": "Liberty",
+    "pais": "PR",
+    "ciudades": [
+      "San Juan",
+      "Arecibo",
+      "Aguadilla",
+      "Mayaguez",
+      "Ponce",
+      "Caguas",
+      "Humacao",
+      "Fajardo",
+      "San Juan"
+    ],
+    "estado": "en servicio",
+    "fuente": "Liberty Puerto Rico, NETPR y FCC"
+  },
+  {
+    "nombre": "Red OPGW sobre el Sistema de Transmisión Eléctrica",
+    "operador": "PREPA Networks",
+    "pais": "PR",
+    "ciudades": [
+      "San Juan",
+      "Arecibo",
+      "Aguadilla",
+      "Mayaguez",
+      "Ponce",
+      "Guayama",
+      "Humacao",
+      "Fajardo",
+      "San Juan"
+    ],
+    "estado": "en servicio",
+    "fuente": "PREPA.Net (Autoridad de Energía Eléctrica / LUMA) y NETPR"
+  },
+  {
+    "nombre": "Anillo Troncal Terrestre de Trinidad",
+    "operador": "TSTT",
+    "pais": "TT",
+    "ciudades": [
+      "Port of Spain",
+      "Tunapuna",
+      "Arima",
+      "Sangre Grande",
+      "Rio Claro",
+      "Princes Town",
+      "San Fernando",
+      "Point Fortin",
+      "Couva",
+      "Chaguanas",
+      "Port of Spain"
+    ],
+    "estado": "en servicio",
+    "fuente": "TSTT, Telecommunications Authority of Trinidad and Tobago (TATT) e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Anillo Nacional de Fibra Óptica",
+    "operador": "Flow",
+    "pais": "TT",
+    "ciudades": [
+      "Port of Spain",
+      "Arima",
+      "Sangre Grande",
+      "Rio Claro",
+      "San Fernando",
+      "Couva",
+      "Chaguanas",
+      "Port of Spain"
+    ],
+    "estado": "en servicio",
+    "fuente": "Flow Trinidad (Columbus Communications) y TATT"
+  },
+  {
+    "nombre": "Troncal Costera y Corredor Georgetown-Linden",
+    "operador": "One Communications (GTT)",
+    "pais": "GY",
+    "ciudades": [
+      "Parika",
+      "Vreed-en-Hoop",
+      "Georgetown",
+      "Mahaica",
+      "Rosignol",
+      "New Amsterdam",
+      "Rose Hall",
+      "Corriverton"
+    ],
+    "estado": "en servicio",
+    "fuente": "One Communications (GTT), Telecommunications Agency Guyana e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Troncal Demerara-Linden",
+    "operador": "One Communications (GTT)",
+    "pais": "GY",
+    "ciudades": [
+      "Georgetown",
+      "Timehri",
+      "Linden"
+    ],
+    "estado": "en servicio",
+    "fuente": "One Communications (GTT) y Telecommunications Agency Guyana"
+  },
+  {
+    "nombre": "Red Troncal Costera y Ramal Linden",
+    "operador": "ENet",
+    "pais": "GY",
+    "ciudades": [
+      "Parika",
+      "Vreed-en-Hoop",
+      "Georgetown",
+      "Timehri",
+      "Linden"
+    ],
+    "estado": "en servicio",
+    "fuente": "ENet (E-Networks) y Telecommunications Agency Guyana"
+  },
+  {
+    "nombre": "Troncal Costera Este-Oeste (Oost-Westverbinding)",
+    "operador": "Telesur",
+    "pais": "SR",
+    "ciudades": [
+      "Nieuw Nickerie",
+      "Wageningen",
+      "Totness",
+      "Boskamp",
+      "Groningen",
+      "Paramaribo",
+      "Meerzorg",
+      "Moengo",
+      "Albina",
+      "Saint-Laurent-du-Maroni"
+    ],
+    "estado": "en servicio",
+    "fuente": "Telesur, Telecommunicatie Autoriteit Suriname (TAS), IIRSA/COSIPLAN e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Troncal Sur (Corredor Afobaka)",
+    "operador": "Telesur",
+    "pais": "SR",
+    "ciudades": [
+      "Paramaribo",
+      "Paranam",
+      "Onverwacht",
+      "Brownsweg",
+      "Brokopondo"
+    ],
+    "estado": "en servicio",
+    "fuente": "Telesur, Telecommunicatie Autoriteit Suriname (TAS) e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Troncal Este (Ruta PY02) e Interconexión con Brasil",
+    "operador": "COPACO",
+    "pais": "PY",
+    "ciudades": [
+      "Asuncion",
+      "San Lorenzo",
+      "Caacupe",
+      "Coronel Oviedo",
+      "Caaguazu",
+      "Ciudad del Este",
+      "Foz do Iguacu"
+    ],
+    "estado": "en servicio",
+    "fuente": "COPACO, CONATEL, MITIC e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Troncal Sur (Ruta PY01) e Interconexión con Argentina",
+    "operador": "COPACO",
+    "pais": "PY",
+    "ciudades": [
+      "Asuncion",
+      "Paraguari",
+      "San Juan Bautista",
+      "San Ignacio",
+      "Encarnacion",
+      "Posadas"
+    ],
+    "estado": "en servicio",
+    "fuente": "COPACO, CONATEL e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Troncal Norte e Interconexión Ponta Porã (Brasil)",
+    "operador": "COPACO",
+    "pais": "PY",
+    "ciudades": [
+      "Asuncion",
+      "San Estanislao",
+      "Santa Rosa del Aguaray",
+      "Concepcion",
+      "Horqueta",
+      "Pedro Juan Caballero",
+      "Ponta Pora"
+    ],
+    "estado": "en servicio",
+    "fuente": "COPACO, CONATEL e ITU Interactive Transmission Map"
+  },
+  {
+    "nombre": "Troncal Transchaco (Ruta PY09) e Interconexión con Bolivia",
+    "operador": "COPACO",
+    "pais": "PY",
+    "ciudades": [
+      "Asuncion",
+      "Villa Hayes",
+      "Pozo Colorado",
+      "Filadelfia",
+      "Loma Plata",
+      "Mariscal Estigarribia",
+      "Villamontes"
+    ],
+    "estado": "en servicio",
+    "fuente": "COPACO, CONATEL, CAF y estudios de conectividad de la UIT"
+  },
+  {
+    "nombre": "Red OPGW 500 kV / 220 kV Este (Itaipú - Villa Hayes - Asunción)",
+    "operador": "ANDE",
+    "pais": "PY",
+    "ciudades": [
+      "Hernandarias",
+      "Ciudad del Este",
+      "Coronel Oviedo",
+      "Caacupe",
+      "Villa Hayes",
+      "Asuncion"
+    ],
+    "estado": "en servicio",
+    "fuente": "ANDE, MITIC (Red Nacional de Fibra Óptica - RNFO) y CONATEL"
+  },
+  {
+    "nombre": "Red OPGW 500 kV / 220 kV Sur (Yacyretá - Ayolas - Asunción)",
+    "operador": "ANDE",
+    "pais": "PY",
+    "ciudades": [
+      "Encarnacion",
+      "Ayolas",
+      "San Patricio",
+      "Guarambare",
+      "Villa Hayes",
+      "Asuncion"
+    ],
+    "estado": "en servicio",
+    "fuente": "ANDE, MITIC (Red Nacional de Fibra Óptica - RNFO) y CONATEL"
+  },
+  {
+    "nombre": "Red OPGW 220 kV Troncal Norte",
+    "operador": "ANDE",
+    "pais": "PY",
+    "ciudades": [
+      "Coronel Oviedo",
+      "San Estanislao",
+      "Santa Rosa del Aguaray",
+      "Concepcion",
+      "Pedro Juan Caballero"
+    ],
+    "estado": "en servicio",
+    "fuente": "ANDE y MITIC (Red Nacional de Fibra Óptica - RNFO)"
+  },
+  {
+    "nombre": "Anillo Troncal Centro-Este-Sur",
+    "operador": "Tigo",
+    "pais": "PY",
+    "ciudades": [
+      "Asuncion",
+      "Coronel Oviedo",
+      "Ciudad del Este",
+      "Santa Rita",
+      "Encarnacion",
+      "San Ignacio",
+      "Paraguari",
+      "Asuncion"
+    ],
+    "estado": "en servicio",
+    "fuente": "Tigo Paraguay (Millicom), CONATEL e informes del BID / CAF"
+  },
+  {
+    "nombre": "Corredor Troncal Asunción - Ciudad del Este - Encarnación",
+    "operador": "Claro",
+    "pais": "PY",
+    "ciudades": [
+      "Posadas",
+      "Encarnacion",
+      "Paraguari",
+      "Asuncion",
+      "Coronel Oviedo",
+      "Ciudad del Este",
+      "Foz do Iguacu"
+    ],
+    "estado": "en servicio",
+    "fuente": "Claro Paraguay y CONATEL"
+  }
+]

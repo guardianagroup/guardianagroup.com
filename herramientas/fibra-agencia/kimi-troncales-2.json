@@ -1,0 +1,124 @@
+[
+  {
+    "nombre": "National Optical Fiber Backbone - East-West Highway",
+    "operador": "Nepal Telecom",
+    "pais": "NP",
+    "ciudades": [
+      "Kakarbhitta",
+      "Bhadrapur",
+      "Biratnagar",
+      "Janakpur",
+      "Bharatpur",
+      "Hetauda",
+      "Kathmandu",
+      "Pokhara",
+      "Butwal",
+      "Bhairahawa",
+      "Nepalgunj",
+      "Dhangadhi",
+      "Mahendranagar"
+    ],
+    "estado": "en servicio",
+    "fuente": "publicado en ESCAP, Broadband Infrastructure in South and West Asia: troncal por la carretera Mahendra/East-West entre Bhadrapur y Nepalgunj, con ampliación hacia Kakarbhitta y Mahendranagar; aproximado: continuidad urbana por dicha carretera y enlaces OPGW entre Hetauda, Kathmandu, Pokhara y Butwal"
+  },
+  {
+    "nombre": "STE National Transmission Backbone",
+    "operador": "Syrian Telecommunications Establishment",
+    "pais": "SY",
+    "ciudades": [
+      "Aleppo",
+      "Hama",
+      "Homs",
+      "Damascus",
+      "Daraa"
+    ],
+    "estado": "en servicio parcial",
+    "fuente": "publicado en JICA, Syria Telecommunications Master Plan: principales centrales de larga distancia en Aleppo, Hama, Homs y Damascus, con conexión hacia Daraa; aproximado: sigue la autopista M5 entre Aleppo y Damascus y su prolongación a Daraa"
+  },
+  {
+    "nombre": "PTC National Fiber Backbone",
+    "operador": "Public Telecommunications Corporation",
+    "pais": "YE",
+    "ciudades": [
+      "Al Mukalla",
+      "Aden",
+      "Ta'izz",
+      "Dhamar",
+      "Sanaa",
+      "Sa'dah"
+    ],
+    "estado": "en servicio parcial",
+    "fuente": "publicado en World Bank, Pre-feasibility Study for International Broadband Connectivity in Yemen: troncal nacional de PTC y red terrestre extensa hacia las fronteras; aproximado: sigue la carretera costera Aden-Al Mukalla y la carretera principal Aden-Ta'izz-Sanaa-Sa'dah, con tramos dañados o divididos por el conflicto"
+  },
+  {
+    "nombre": "Ogero National Fiber Backbone",
+    "operador": "Ogero",
+    "pais": "LB",
+    "ciudades": [
+      "Tyre",
+      "Sidon",
+      "Beirut",
+      "Byblos",
+      "Tripoli"
+    ],
+    "estado": "en servicio",
+    "fuente": "publicado en Ogero y el Ministerio de Telecomunicaciones: Ogero es propietaria de la red nacional FTTX y despliega en Beirut, el Sur y el Norte; aproximado: sigue la carretera costera Tyre-Sidon-Beirut-Tripoli"
+  },
+  {
+    "nombre": "Paltel National Fiber Backbone",
+    "operador": "Palestine Telecommunications Company",
+    "pais": "PS",
+    "ciudades": [
+      "Jenin",
+      "Nablus",
+      "Ramallah",
+      "Jerusalem",
+      "Bethlehem",
+      "Hebron"
+    ],
+    "estado": "en servicio parcial",
+    "fuente": "publicado en World Bank, The Telecommunication Sector in the Palestinian Territories: Paltel instaló unos 260 km de fibra entre ciudades de Cisjordania y 140 km en Gaza; aproximado: sigue el corredor norte-sur de Cisjordania; Gaza se interconecta con Cisjordania a través de territorio israelí"
+  },
+  {
+    "nombre": "Kuwait National Fixed Telecommunications Network",
+    "operador": "Ministry of Communications",
+    "pais": "KW",
+    "ciudades": [
+      "Al Jahra",
+      "Kuwait City",
+      "Hawalli",
+      "Salmiya",
+      "Al Ahmadi"
+    ],
+    "estado": "en servicio; expansión nacional en desarrollo",
+    "fuente": "publicado en Oxford Business Group: el Ministerio posee y opera la red fija y una red de fibra gubernamental de 240 km; KAPP seleccionó a Beyon en 2026 para una nueva red nacional; aproximado: corredor urbano principal y carreteras anulares del área metropolitana"
+  },
+  {
+    "nombre": "Qatar National Broadband Network",
+    "operador": "Q.NBN",
+    "pais": "QA",
+    "ciudades": [
+      "Dukhan",
+      "Al Rayyan",
+      "Doha",
+      "Lusail",
+      "Al Khor"
+    ],
+    "estado": "en servicio",
+    "fuente": "publicado en ictQATAR y Q.NBN: red nacional mayorista de fibra con cobertura en las principales regiones; aproximado: sigue la Dukhan Highway hacia Doha y Al Rayyan, y después las carreteras principales hacia Lusail y Al Khor"
+  },
+  {
+    "nombre": "Bahrain National Broadband Network",
+    "operador": "Bahrain Network",
+    "pais": "BH",
+    "ciudades": [
+      "Al Muharraq",
+      "Manama",
+      "Isa Town",
+      "Riffa",
+      "Hamad Town"
+    ],
+    "estado": "en servicio",
+    "fuente": "publicado en el Ministerio de Transporte de Bahréin y BNET: BNET es el propietario y operador único de la red nacional de banda ancha; aproximado: sigue los enlaces intermunicipales, la carretera principal de la isla y el corredor metropolitano Manama-Riffa-Hamad Town"
+  }
+]
