@@ -36,9 +36,11 @@ burrel	AL	41.61028	20.00889	7928	Burrel
 durres	AL	41.32355	19.45469	195920	Durrës
 elbasan	AL	41.11138	20.08224	100903	Elbasan
 fier	AL	40.7251	19.55823	56297	Fier
+fushekruje	AL	41.47833	19.71778	17877	Fushë-Krujë
 gjirokaster	AL	40.07583	20.13889	23437	Gjirokastër
 himare	AL	40.10167	19.74472	4596	Himarë
 kavaje	AL	41.18556	19.55694	30012	Kavajë
+koplik	AL	42.21361	19.43639	4078	Koplik
 korce	AL	40.61861	20.78083	58259	Korçë
 kukes	AL	42.07694	20.42194	36125	Kukës
 lezhe	AL	41.78361	19.64361	18695	Lezhë
@@ -49,6 +51,7 @@ pogradec	AL	40.9025	20.6525	46070	Pogradec
 prrenjas	AL	41.07306	20.54889	5847	Përrenjas
 reps	AL	41.86611	20.02583	900	Reps
 rreshen	AL	41.7675	19.87556	6773	Rrëshen
+rrogozhine	AL	41.07639	19.66528	7049	Rrogozhinë
 sarande	AL	39.87534	20.00477	22613	Sarandë
 shkoder	AL	42.06828	19.51258	95553	Shkodër
 tepelene	AL	40.29583	20.01917	11955	Tepelenë
@@ -134,10 +137,22 @@ ushuaia	AR	-54.81084	-68.31591	56825	Ushuaia
 villamaria	AR	-32.40751	-63.24016	92453	Villa María
 villamercedes	AR	-33.67571	-65.45783	96781	Villa Mercedes
 zarate	AR	-34.09584	-59.02423	99061	Zárate
+amstetten	AT	48.1229	14.87206	15559	Amstetten
+bludenz	AT	47.15476	9.82255	15102	Bludenz
+bregenz	AT	47.50311	9.7471	29806	Bregenz
+bruckandermur	AT	47.406	15.258	9093	Bruck an der Mur
+dornbirn	AT	47.41427	9.74195	49278	Dornbirn
+feldkirch	AT	47.23645	9.59734	33420	Feldkirch
+graz	AT	47.06733	15.44197	303270	Graz
 innsbruck	AT	47.26266	11.39454	132493	Innsbruck
+landeck	AT	47.13988	10.56593	7725	Landeck
 linz	AT	48.30639	14.28611	204846	Linz
+muerzzuschlag	AT	47.6066	15.67226	5975	Mürzzuschlag
 salzburg	AT	47.79941	13.04399	157245	Salzburg
+sanktpoelten	AT	48.20762	15.63725	21911	Sankt Pölten
 vienna	AT	48.20849	16.37208	1691468	Vienna
+wels	AT	48.16667	14.03333	16857	Wels
+wienerneustadt	AT	47.80485	16.23196	44820	Wiener Neustadt
 adelaide	AU	-34.92866	138.59863	1469163	Adelaide
 brisbane	AU	-27.46794	153.02809	2780063	Brisbane
 darwin	AU	-12.46113	130.84185	139902	Darwin
@@ -203,6 +218,7 @@ donjivakuf	BA	44.14361	17.4	7955	Donji Vakuf
 jablanica	BA	43.66028	17.76167	6209	Jablanica
 jajce	BA	44.34203	17.27059	9763	Jajce
 kakanj	BA	44.13311	18.12292	12406	Kakanj
+kladanj	BA	44.22669	18.69274	6783	Kladanj
 konjic	BA	43.65126	17.96082	15950	Konjic
 kupres	BA	43.99273	17.27639	0	Kupres
 livno	BA	43.82695	17.00746	11748	Livno
@@ -212,6 +228,7 @@ mostar	BA	43.34333	17.80806	104518	Mostar
 mrkonjicgrad	BA	44.41729	17.08288	14737	Mrkonjić Grad
 neum	BA	42.92333	17.61556	4200	Neum
 novigrad	BA	45.04643	16.37782	8920	Novi Grad
+olovo	BA	44.1277	18.58065	3305	Olovo
 posusje	BA	43.47281	17.32621	6267	Posušje
 prijedor	BA	44.97991	16.71401	36347	Prijedor
 prnjavor	BA	44.87021	17.66256	7099	Prnjavor
@@ -225,6 +242,7 @@ ugljevik	BA	44.67771	19.03384	3452	Ugljevik
 visoko	BA	43.98889	18.17806	17890	Visoko
 zenica	BA	44.20169	17.90397	164423	Zenica
 zepce	BA	44.42667	18.03778	8502	Žepče
+zivinice	BA	44.44929	18.64978	13641	Živinice
 barisal	BD	22.70497	90.37013	202242	Barishal
 bhairabbazar	BD	24.0524	90.9764	105457	Bhairab Bāzār
 bheramara	BD	24.02452	88.99234	38159	Bherāmāra
@@ -257,10 +275,18 @@ sirajganj	BD	24.45771	89.70802	127481	Sirajganj
 sylhet	BD	24.89904	91.87198	237000	Sylhet
 tangail	BD	24.24984	89.91655	180144	Tangail
 tongi	BD	23.89154	90.40232	337579	Tungi
+antwerp	BE	51.22047	4.40026	529247	Antwerp
+arlon	BE	49.68333	5.81667	26179	Arlon
 bruges	BE	51.20892	3.22424	118509	Brugge
 brussels	BE	50.85045	4.34878	1019022	Brussels
 ghent	BE	51.05	3.71667	265086	Gent
+leuven	BE	50.87959	4.70093	101032	Leuven
 liege	BE	50.63373	5.56749	195278	Liège
+mechelen	BE	51.02574	4.47762	77530	Mechelen
+namur	BE	50.4669	4.86746	110939	Namur
+ostend	BE	51.21551	2.927	69011	Ostend
+verviers	BE	50.58907	5.86241	52824	Verviers
+wavre	BE	50.71717	4.60138	34305	Wavre
 banfora	BF	10.64064	-4.75285	117452	Banfora
 bitou	BF	11.25806	-0.30611	31210	Bittou
 bittou	BF	11.25806	-0.30611	31210	Bittou
@@ -287,10 +313,21 @@ tougan	BF	13.07237	-3.06939	26347	Tougan
 yako	BF	12.9591	-2.26075	38679	Yako
 zabre	BF	11.1825	-0.63222	21726	Zabré
 zorgho	BF	12.24922	-0.61527	35398	Zorgo
+blagoevgrad	BG	42.01457	23.09804	67810	Blagoevgrad
+botevgrad	BG	42.90799	23.79274	20909	Botevgrad
 burgas	BG	42.50651	27.46886	210646	Burgas
+dupnitsa	BG	42.26478	23.11723	34764	Dupnitsa
+pazardzhik	BG	42.19934	24.33318	55220	Pazardzhik
+pernik	BG	42.59671	23.03318	82467	Pernik
 plovdiv	BG	42.15387	24.75001	329489	Plovdiv
+sandanski	BG	41.56667	23.28333	28510	Sandanski
+shumen	BG	43.27064	26.92286	72342	Shumen
+sliven	BG	42.68607	26.32558	83740	Sliven
 sofia	BG	42.69751	23.32415	1152556	Sofia
 starazagora	BG	42.43205	25.64262	121582	Stara Zagora
+targovishte	BG	43.2512	26.57215	34793	Targovishte
+varna	BG	43.21912	27.91024	318737	Varna
+velikotarnovo	BG	43.08124	25.62904	59166	Veliko Tŭrnovo
 almuharraq	BH	26.25722	50.61194	176583	Al Muharraq
 arrifa	BH	26.13	50.555	115495	Ar Rifā‘
 hamadtown	BH	26.11528	50.50694	133550	Madīnat Ḩamad
@@ -447,6 +484,7 @@ tonota	BW	-21.44236	27.46153	23296	Tonota
 ashmyany	BY	54.41815	25.93734	16804	Oshmyany
 asipovichy	BY	53.30588	28.62872	28745	Osipovichi
 babruysk	BY	53.14676	29.20548	205502	Bobruysk
+baranavichy	BY	53.13255	26.00775	170039	Baranovichi
 baranovichi	BY	53.13255	26.00775	170039	Baranovichi
 barysaw	BY	54.2279	28.505	133700	Barysaw
 beshankovichy	BY	55.04335	29.45738	6819	Beshenkovichi
@@ -455,6 +493,7 @@ bykhaw	BY	53.52131	30.23078	16296	Bykhov
 drahichyn	BY	52.1874	25.1597	14659	Drogichin
 homyel	BY	52.4345	30.9754	501193	Homyel'
 hrodna	BY	53.6758	23.82887	363718	Hrodna
+ivatsevichy	BY	52.70793	25.33509	22189	Ivatsevichi
 iwye	BY	53.93173	25.7763	6906	Iwye
 kalinkavichy	BY	52.1323	29.3257	36656	Kalinkovichi
 kobryn	BY	52.21173	24.3563	52235	Kobryn
@@ -1084,10 +1123,23 @@ tegucigalpa	HN	14.0818	-87.20681	850848	Tegucigalpa
 tela	HN	15.77425	-87.46731	29325	Tela
 tocoa	HN	15.68333	-86.0	111972	Tocoa
 villanueva	HN	15.31476	-87.99383	31571	Villanueva
+akovo	HR	45.30833	18.41056	16875	Đakovo
+delnice	HR	45.40083	14.79972	3861	Delnice
 dubrovnik	HR	42.64125	18.10909	26922	Dubrovnik
+gospic	HR	44.54611	15.37472	6362	Gospić
+karlovac	HR	45.49167	15.55	41869	Karlovac
+kutina	HR	45.475	16.78194	12012	Kutina
+novagradiska	HR	45.255	17.38306	9820	Nova Gradiška
+novska	HR	45.34056	16.97694	5922	Novska
+osijek	HR	45.55066	18.6942	75535	Osijek
+pazin	HR	45.23917	13.93945	3981	Pazin
 pula	HR	44.86833	13.84806	52220	Pula
+rijeka	HR	45.32673	14.44241	107964	Rijeka
+sibenik	HR	43.73429	15.8942	31115	Šibenik
+slavonskibrod	HR	45.16158	18.0163	45005	Slavonski Brod
 split	HR	43.50891	16.43915	149830	Split
 vukovar	HR	45.35161	19.00225	22255	Vukovar
+zadar	HR	44.11578	15.22514	67309	Zadar
 zagreb	HR	45.81444	15.97798	663592	Zagreb
 aquin	HT	18.27974	-73.39433	5246	Aquin
 cabaret	HT	18.73582	-72.41929	3951	Cabaret
