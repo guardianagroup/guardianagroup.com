@@ -658,6 +658,7 @@ arta	DJ	11.52639	42.85194	17477	Arta
 dikhil	DJ	11.10454	42.36971	32801	Dikhil
 djibouti	DJ	11.58901	43.14503	626512	Djibouti
 galafi	DJ	11.71583	41.83611	1849	Gâlâfi
+guelile	DJ	11.09456	42.64849	885	Guelile
 obock	DJ	11.96693	43.28835	15429	Obock
 tadjourah	DJ	11.78778	42.88222	19533	Tadjoura
 aalborg	DK	57.048	9.9187	142937	Aalborg
@@ -740,6 +741,7 @@ benisuef	EG	29.07441	31.09785	273151	Banī Suwayf
 cairo	EG	30.06263	31.24967	9606916	Cairo
 damanhur	EG	31.03408	30.46823	318207	Damanhur
 hurghada	EG	27.25738	33.81291	207132	Hurghada
+ismailia	EG	30.60427	32.27225	429465	Ismailia
 luxor	EG	25.69893	32.6421	422407	Luxor
 marsaalam	EG	25.06305	34.89005	10000	Marsa Alam
 minya	EG	28.09193	30.75813	283605	Minya
@@ -762,6 +764,16 @@ madrid	ES	40.4165	-3.70256	3255944	Madrid
 murcia	ES	37.98704	-1.13004	471982	Murcia
 valencia	ES	39.47391	-0.37966	824340	Valencia
 zaragoza	ES	41.65606	-0.87734	686986	Zaragoza
+adama	ET	8.55	39.26667	456900	Nazrēt
+addisababa	ET	9.02497	38.74689	3860000	Addis Ababa
+awash	ET	8.99364	40.16637	36500	Āwash
+dewele	ET	11.03472	42.63139	3357	Dewelē
+dilla	ET	6.41667	38.31667	158800	Dīla
+diredawa	ET	9.59306	41.86611	343000	Dire Dawa
+hawassa	ET	7.06205	38.47635	422200	Awasa
+jimma	ET	7.67344	36.83441	250900	Jimma
+welkite	ET	8.28333	37.78333	77500	Welk’īt’ē
+yabelo	ET	4.88333	38.08333	36300	Yabēlo
 helsinki	FI	60.16952	24.93545	658864	Helsinki
 oulu	FI	65.01236	25.46816	216066	Oulu
 tampere	FI	61.49911	23.78712	260646	Tampere
@@ -783,6 +795,14 @@ paris	FR	48.85341	2.3488	2138551	Paris
 reims	FR	49.26526	4.02853	196565	Reims
 strasbourg	FR	48.58392	7.74553	274845	Strasbourg
 toulouse	FR	43.60426	1.44367	511684	Toulouse
+booue	GA	-0.09207	11.93846	7259	Booué
+franceville	GA	-1.63333	13.58357	132895	Franceville
+lastoursville	GA	-0.81742	12.70818	14411	Lastoursville
+lekoni	GA	-1.58431	14.25905	8810	Lékoni
+libreville	GA	0.39241	9.45356	846090	Libreville
+moanda	GA	-1.56652	13.1987	71099	Moanda
+ndjole	GA	-0.17827	10.76488	8265	Ndjolé
+ntoum	GA	0.39051	9.76096	62445	Ntoum
 london	GB	51.50853	-0.12574	8961989	London
 manchester	GB	53.48095	-2.23743	568996	Manchester
 accra	GH	5.55602	-0.1969	1963264	Accra
