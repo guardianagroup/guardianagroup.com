@@ -145,6 +145,21 @@
   const pasoPropio = (id) => !!(history.state && history.state.puerta && (!id || history.state.puerta === id) && !history.state.llegada);
   const quitaAncla = () => { if (history.state && history.state.puerta) { try { history.replaceState(null, '', location.pathname + location.search); } catch (_) {} } };
   const marco = $('marco');
+  // 24 Oct 2026 (QA): the door's frame always REPLACES its page. Loading it again added a step to the browser's history,
+  // so the second time ZERO was opened its «‹ Órbita» (history.back) only took that step and left a white screen, and
+  // the browser's back needed an extra press to leave Órbita.
+  function cargaMarco(url) {
+    const u = new URL(url, location.href).href;
+    marco.dataset.pagina = u;
+    try { if (marco.contentWindow) { marco.contentWindow.location.replace(u); return; } } catch (_) {}
+    marco.src = url;
+  }
+  function vaciaMarco() {
+    if (!marco.dataset.pagina) return;
+    delete marco.dataset.pagina;
+    try { if (marco.contentWindow) { marco.contentWindow.location.replace('about:blank'); return; } } catch (_) {}
+    marco.removeAttribute('src');
+  }
   function abre(i, apila = true) {
     elige(i);
     const p = PUERTAS[sel];
@@ -167,14 +182,14 @@
       if (window.GuardianaSecciones) window.GuardianaSecciones.cierra();
       $('plantilla').hidden = true; $('sin-pagina').hidden = true;
       marco.hidden = false; marco.title = p.n;
-      if (!marco.src || !marco.src.includes(p.pagina.split('?')[0])) marco.src = p.pagina;
+      if (!marco.dataset.pagina || !marco.dataset.pagina.includes(p.pagina.split('?')[0])) cargaMarco(p.pagina);
       if (apila) history.pushState({ puerta: p.id }, '', '#' + p.id);
       setTimeout(() => { try { marco.focus(); marco.contentWindow.focus(); } catch (_) {} }, 600);
       return;
     }
     // a door with its own show uses the common section (orbita-secciones.js)
     if (!p.desarrollo && window.GuardianaSecciones && window.GuardianaSecciones.abre(p.id)) {
-      marco.hidden = true; marco.removeAttribute('src'); $('sin-pagina').hidden = true;
+      marco.hidden = true; vaciaMarco(); $('sin-pagina').hidden = true;
       if (apila) history.pushState({ puerta: p.id }, '', '#' + p.id);
       setTimeout(() => { if (dentro) $('volver').focus(); }, 900);
       return;
@@ -185,9 +200,9 @@
     $('sin-pagina').hidden = real;
     if (real) {
       marco.title = p.n;
-      marco.src = p.url + (p.url.includes('?') ? '&' : '?') + 'orbita=1';
+      cargaMarco(p.url + (p.url.includes('?') ? '&' : '?') + 'orbita=1');
     } else {
-      marco.removeAttribute('src');
+      vaciaMarco();
       $('sp-k').textContent = p.estado || (p.desarrollo ? 'EN CONSTRUCCIÓN' : p.s.toUpperCase());
       $('sp-k').classList.toggle('desarrollo', !!p.desarrollo);
       $('sp-t').textContent = p.n;
@@ -203,7 +218,7 @@
     document.body.classList.remove('dentro', 'pantalla');
     $('volver').hidden = true;
     $('donde').hidden = true;
-    setTimeout(() => { if (!dentro) { marco.removeAttribute('src'); if (window.GuardianaSecciones) window.GuardianaSecciones.cierra(); } }, 800);
+    setTimeout(() => { if (!dentro) { vaciaMarco(); if (window.GuardianaSecciones) window.GuardianaSecciones.cierra(); } }, 800);
     setTimeout(() => { const b = PUERTAS[sel].el.querySelector('button'); if (!dentro && b) b.focus({ preventScroll: true }); }, 700);
   }
   const atras = () => { if (pasoPropio()) history.back(); else { quitaAncla(); cierra(); } };
@@ -851,7 +866,7 @@ void main(){
           estela(v.ruta, Math.max(0, v.tc - 0.28 * (1 - e)), v.tc, ROJO, 2.4, 0.95 * (1 - e));
           const q = pantalla(sobre(v.ruta, v.tc));
           if (q.ve) {
-            const r1 = 6 + 34 * Math.min(1, e * 2.2), r2 = 4 + 60 * e;
+            const r1 = Math.max(0, 6 + 34 * Math.min(1, e * 2.2)), r2 = Math.max(0, 4 + 60 * e);
             cx2.strokeStyle = `rgba(${ROJO},${(0.9 * (1 - Math.min(1, e * 2.2))).toFixed(3)})`; cx2.lineWidth = 2;
             cx2.beginPath(); cx2.arc(q.x, q.y, r1, 0, 7); cx2.stroke();
             cx2.strokeStyle = `rgba(${ROJO},${(0.35 * (1 - e)).toFixed(3)})`; cx2.lineWidth = 1;
@@ -885,7 +900,7 @@ void main(){
     // the computer: at its country, said to be approximate
     const qc = pantalla(origen() || [0, 0, 1]);
     if (qc.ve && qc.z > 0) {
-      const f = (t % 2.4) / 2.4;
+      const f = (((t % 2.4) + 2.4) % 2.4) / 2.4; // 24 Oct 2026 (QA): never negative, even on the first frame of a slow load
       cx2.strokeStyle = `rgba(${ACERO},${(0.7 * (1 - f)).toFixed(3)})`; cx2.lineWidth = 1.2;
       cx2.beginPath(); cx2.arc(qc.x, qc.y, 4 + 16 * f, 0, 7); cx2.stroke();
       cabeza(qc, ACERO, 1.8);
@@ -1220,13 +1235,19 @@ void main(){
     // What «En vivo» measured or was told in this browser, offered for confirmation first.
     let previo = null;
     try { previo = JSON.parse(localStorage.getItem('guardiana_pd_lugar') || 'null'); } catch (_) {}
-    setTimeout(() => {
-      if (!caja.hidden || dentro) return;
+    // 24 Oct 2026 (QA): never over what the visitor came to see (Radiografías, Mi conexión, the journey, its report, the
+    // mirror): the question waits until that is closed, and gives up after a minute
+    const ocupado = () => dentro || /\b(con-conexion|viaje|con-informe|en-espejo)\b/.test(document.body.className) || !!document.querySelector('.radio-panel:not([hidden])');
+    let intentos = 0;
+    const pregunta = () => {
+      if (!caja.hidden || LUGAR) return;
+      if (ocupado()) { if (++intentos < 15) setTimeout(pregunta, 4000); return; }
       if (previo && previo.ciudad && previo.cc && Number.isFinite(previo.lat) && (previo.fuente === 'manual' || (Number.isFinite(previo.precision) && previo.precision <= PRECISION_CIUDAD))) {
         const [ciudad, region] = String(previo.ciudad).split(', ');
         abreLugar('hallado', { c: { ciudad, region: region || '', pais: previo.cc, lat: previo.lat, lon: previo.lon, fuente: previo.fuente === 'manual' ? 'manual' : 'sistema', precision: previo.fuente === 'manual' ? null : previo.precision } });
       } else abreLugar('inicio');
-    }, 3600);
+    };
+    setTimeout(pregunta, 3600);
   })();
 
   // ---------- The loop ----------

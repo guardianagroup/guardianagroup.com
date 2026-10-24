@@ -1208,7 +1208,7 @@
     }
     if (estado.sub) {
       const c = capas.sub;
-      meter('sub', c && c.d ? num(c.nombres) + ' ' + T('cables submarinos con nombre') + (CAP && Object.keys(CAP.cables).length ? ' · ' + T('color por capacidad: dorado y grueso con halo, más de 100 Tbit/s; lavanda, de 20 a 100 Tbit/s; verde agua, menos de 20 Tbit/s; gris, capacidad no publicada') : '') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
+      meter('sub', c && c.d ? num(cuentaCables(() => true) || c.nombres) + ' ' + T('cables submarinos con nombre') + (CAP && Object.keys(CAP.cables).length ? ' · ' + T('color por capacidad: dorado y grueso con halo, más de 100 Tbit/s; lavanda, de 20 a 100 Tbit/s; verde agua, menos de 20 Tbit/s; gris, capacidad no publicada') : '') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
     }
     if (estado.fibra) {
       meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + T('por niveles: de lejos solo las troncales principales; las nacionales y las regionales aparecen al acercarse') + ' · ' + T('Datos verificados') : FT && FT.error ? T('No se pudieron cargar los cables por tierra.') : T('Cargando los cables por tierra…'));
@@ -1342,7 +1342,8 @@
     sp.append(pie);
     f.classList.add('sat'); f.hidden = false;
     const G = P().geo, w = f.offsetWidth || 320, h = f.offsetHeight || 260;
-    f.style.left = (x + 16 + w > G.W - 8 ? x - 16 - w : x + 16) + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, y - 40)) + 'px';
+    // 24 Oct 2026 (QA): on a narrow screen the card never leaves the screen (it went to x ≈ −300 on a phone)
+    f.style.left = Math.max(8, Math.min(G.W - w - 8, x + 16 + w > G.W - 8 ? x - 16 - w : x + 16)) + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, y - 40)) + 'px';
   }
   let centroMarcado = -1, cableMarcado = -1, llegadaMarcada = -1, puntoMarcado = -1, pendiente = null;
   function buscaEstacion(x, y) {
@@ -1455,7 +1456,7 @@
         if (q.y > y + 20 && y - h - 16 >= 70) top = y - h - 16; else if (q.y < y - 20) top = y + 16;
       }
     }
-    f.style.left = left + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, top)) + 'px';
+    f.style.left = Math.max(8, Math.min(G.W - w - 8, left)) + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, top)) + 'px';
   };
   // ---------- where a data centre's cables come from (owner, 22 Oct 2026: «al pasar por el centro de datos, que
   // aparezca el cable que le viene, y al quitarme desaparece: que se vea de forma visual de dónde viene») ----------
@@ -2004,9 +2005,17 @@
   };
 
   const PLEGADO = { sub: true, fibra: true, puntos: true }; // the cards open on the button's click, one at a time; on arrival none is open
+  // 24 Oct 2026 (QA: «506 named cables… one class (861) is larger than the total»): the figures count whole cables
+  // (a named cable is one, however many pieces the map draws it with), never the pieces
+  function cuentaCables(filtro) {
+    if (!capas.sub || !capas.sub.lineas || !capas.sub.d) return 0;
+    const vistos = new Set(), cab = capas.sub.d.cables;
+    capas.sub.lineas.forEach((l, i) => { if (!filtro(l, i)) return; const g = grupoDe(i); if (g >= 0) vistos.add('g' + g); else if (cab[i] && cab[i].n) vistos.add('n' + cab[i].n); });
+    return vistos.size;
+  }
   function cuentaClase(k, c) {
     try {
-      if (k === 'sub') { if (!capas.sub || !capas.sub.lineas || !CAP) return 0; if (c === 'previstos') return PREV ? PREV.length : 0; if (c === 'aprox') return capas.sub.aprox ? capas.sub.aprox.length : 0; let n = 0; capas.sub.lineas.forEach((l, i) => { if (claseSub(i) === c) n++; }); return n; }
+      if (k === 'sub') { if (!capas.sub || !capas.sub.lineas || !CAP) return 0; if (c === 'previstos') return PREV ? PREV.length : 0; if (c === 'aprox') return cuentaCables((l) => l.aprox); return cuentaCables((l, i) => claseSub(i) === c); }
       if (k === 'fibra') { if (!FT || !FT.lineas) return 0; preparaNiveles(); return FT.lineas.filter((l) => claseFibra(l) === c).length; }
       if (k === 'puntos') { if (c === 'estaciones') return EST ? EST.length : 0; if (!PT || !PT.p) return 0; if (c === 'intercambio') return PT.ix ? PT.ix.length : 0; if (c === 'pequenos') return PT.p.filter((q) => q.t === 'datos' && !esGrande(q)).length; if (c === 'datos') return PT.p.filter((q) => q.t === 'datos' && esGrande(q)).length; return PT.p.filter((q) => q.t === c).length; }
     } catch (_) {}
@@ -2093,7 +2102,7 @@
     const f = { titulo: T(NOMBRE_CAPA[k]), frase: T(FRASE_CAPA[k]) + '.', cifra: '', unidad: '', filas: [], pie: T('Datos verificados'), encendida: !!estado[k] };
     if (k === 'sub') {
       const c = capas.sub;
-      if (c && c.d) { f.cifra = num(c.nombres); f.unidad = T('cables submarinos con nombre'); }
+      if (c && c.d) { f.cifra = num(cuentaCables(() => true) || c.nombres); f.unidad = T('cables submarinos con nombre'); }
       const R = { gigante: '> 100', grande: '20–100', regional: '< 20', sinDato: '' };
       f.leyenda = [T('Capacidad'), 'Tbit/s'];
       for (const q of PRINCIPALES.sub) f.filas.push({ col: SUB_COL[q], n: T(TEXTOS_CLASES.sub.clases[q][0]), v: R[q] });
