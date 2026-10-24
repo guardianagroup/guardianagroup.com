@@ -1,0 +1,228 @@
+[
+{
+"nombre": "Palau Cable",
+"llegadas": [
+{
+"lugar": "Ngeremlengui",
+"pais": "PW",
+"lat": 7.5317,
+"lon": 134.5609
+}
+],
+"anio": 2017,
+"km": 207,
+"duenos": [
+"Belau Submarine Cable Corporation"
+],
+"fuentes": [
+"https://belaucable.com/about",
+"https://belaucable.com/news/2017/6/5/pre-lay-shore-end-is-landed-at-ngeremlengui",
+"https://www.bluedot-network.org/case-studies/BDN-60EAYD-DQ3V"
+]
+},
+{
+"nombre": "Yap Cable",
+"llegadas": [
+{
+"lugar": "Magachgil",
+"pais": "FM",
+"lat": 9.4439,
+"lon": 138.0656
+}
+],
+"anio": 2018,
+"km": 262,
+"duenos": [
+"FSMT Cable Corporation"
+],
+"fuentes": [
+"https://fsmcable.com/states/yap/",
+"https://documents1.worldbank.org/curated/en/564961450803502424/pdf/Restructuring-Paper-P130592-12Jan16.pdf",
+"https://tci.gov.fm/documents/communications/fsm_palau_fiber/essa_2nd_updated/main_body.pdf"
+]
+},
+{
+"nombre": "Alaska United (AU-East y AU-West)",
+"llegadas": [
+{
+"lugar": "Whittier",
+"pais": "US",
+"lat": 60.7729,
+"lon": -148.6847
+},
+{
+"lugar": "Valdez",
+"pais": "US",
+"lat": 61.1304,
+"lon": -146.3533
+},
+{
+"lugar": "Juneau",
+"pais": "US",
+"lat": 58.2995,
+"lon": -134.4069
+},
+{
+"lugar": "Lynnwood",
+"pais": "US",
+"lat": 47.824,
+"lon": -122.3159
+},
+{
+"lugar": "Seward",
+"pais": "US",
+"lat": 60.1122,
+"lon": -149.4431
+},
+{
+"lugar": "Ketchikan",
+"pais": "US",
+"lat": 55.3421,
+"lon": -131.6478
+},
+{
+"lugar": "Warrenton",
+"pais": "US",
+"lat": 46.1651,
+"lon": -123.9239
+}
+],
+"anio": 1999,
+"km": 6236,
+"duenos": [
+"GCI Communication Corp."
+],
+"fuentes": [
+"https://www.gci.com/business/support/b/business-alaska-united-support",
+"https://docs.fcc.gov/public/attachments/DA-25-175A1_Rcd.pdf"
+]
+},
+{
+"nombre": "Tampnet (North Sea)",
+"llegadas": [
+{
+"lugar": "Kårstø",
+"pais": "NO",
+"lat": 59.277,
+"lon": 5.519
+},
+{
+"lugar": "Lowestoft",
+"pais": "GB",
+"lat": 52.4759,
+"lon": 1.7517
+}
+],
+"anio": 1998,
+"km": 900,
+"duenos": [
+"Tampnet AS"
+],
+"fuentes": [
+"https://www.tampnet.com/hubfs/Tampnet_Suboptic2023_CG-05_%20Sustainability%20of%20subsea%20optic%20fibre%20cables.pdf?hsLang=en",
+"https://www.tampnet.com/hubfs/Accelerating%20delivery%20of%20a%20complex%20festoon%20system%20along%20the%20southern%20coastline%20of%20Norway.pdf?hsLang=en"
+]
+},
+{
+"nombre": "Baltic Highway (C-Lion1)",
+"llegadas": [
+{
+"lugar": "Helsinki",
+"pais": "FI",
+"lat": 60.1711,
+"lon": 24.9325
+},
+{
+"lugar": "Hanko",
+"pais": "FI",
+"lat": 59.8232,
+"lon": 22.9682
+},
+{
+"lugar": "Rostock",
+"pais": "DE",
+"lat": 54.0789,
+"lon": 12.1324
+}
+],
+"anio": 2016,
+"km": 1173,
+"duenos": [
+"Cinia Oy"
+],
+"fuentes": [
+"https://www.cinia.fi/yritys/verkkohankkeet/c-lion1",
+"https://www.cinia.fi/en/news/disturbance-in-cinias-c-lion1-submarine-cable-has-been-repaired"
+]
+},
+{
+"nombre": "EESF-3 (Estonia-Finland)",
+"llegadas": [
+{
+"lugar": "Helsinki",
+"pais": "FI",
+"lat": 60.1711,
+"lon": 24.9325
+},
+{
+"lugar": "Meremõisa",
+"pais": "EE",
+"lat": 59.4008,
+"lon": 24.2766
+}
+],
+"anio": 1994,
+"km": 104,
+"duenos": [
+"Arelion",
+"Telia Eesti"
+],
+"fuentes": [
+"https://www.ria.ee/en/cyberspace-2025-year-fraud",
+"https://ria.ee/sites/default/files/documents/2026-02/Cyber-security-in-Estonia-2026.pdf"
+]
+},
+{
+"nombre": "Denmark-Poland 2 (Baltica)",
+"llegadas": [
+{
+"lugar": "Kołobrzeg",
+"pais": "PL",
+"lat": 54.1723,
+"lon": 15.5749
+},
+{
+"lugar": "Pedersker",
+"pais": "DK",
+"lat": 55.0309,
+"lon": 14.9922
+},
+{
+"lugar": "Ystad",
+"pais": "SE",
+"lat": 55.4313,
+"lon": 13.8283
+},
+{
+"lugar": "Gedser",
+"pais": "DK",
+"lat": 54.5763,
+"lon": 11.929
+}
+],
+"anio": 1997,
+"km": 437,
+"duenos": [
+"Arelion",
+"Orange Polska",
+"Slovak Telekom",
+"TDC Group",
+"Telenor",
+"Ukrtelecom"
+],
+"fuentes": [
+"https://www.umgdy.gov.pl/wp-content/uploads/2015/04/inz-msp-study.pdf",
+"https://www.scotlandsuperfast.com/media/svnna5et/sft-subsea-connectivity-feasibility-study.pdf"
+]
+}
+]
