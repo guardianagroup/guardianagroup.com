@@ -92,6 +92,17 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
    - la **ficha de país** ampliada.
 3. **Comparativa de los 11 diarios** (la portada dice «Abrimos once diarios digitales»): con su metodología, el derecho de respuesta de cada diario antes de publicar y un paquete de prensa.
 4. **Programar la ficha de país y la línea del tiempo**, y después el **mapa de calidad** (Measurement Lab).
+5. **Fotos en las fichas** (dueño, 24 de octubre, 12:53: «Cuando toquemos centro de datos, quiero que en la información te aparezca una foto, si es que la hay. Y en los cables, en los satélites también, todo lo que podamos tener foto»). La foto sale en la ficha de cada centro de datos, cable (estación de llegada o barco cablero), satélite y, si se puede, base o estación terrestre. Solo cuando haya una foto real del elemento; si no la hay, la ficha queda como está.
+   - **Fuentes posibles:**
+     - Wikimedia Commons y Wikidata: la imagen P18 de cada elemento, buscando los satélites por su número NORAD (P377) y los cables y los centros por nombre y coordenadas;
+     - NASA y ESA para satélites, de dominio público o con licencia abierta;
+     - fotos que publiquen los propios operadores con licencia que permita reutilizarlas.
+     Nada de submarinecablemap.com, TeleGeography ni PeeringDB.
+   - **Comprobación:** la foto tiene que ser de ese elemento concreto. Hay que cruzarla por su identificador o su nombre y ubicación, con la regla de las dos voces cuando haya dudas.
+   - **Privacidad, por coherencia con GUARDIANA:** copiar las miniaturas a `guardianagroup.com`, con su licencia, en vez de enlazarlas a Wikimedia u otros sitios. Así ninguna visita avisa a terceros.
+   - **Licencias:** cada foto lleva autor y licencia en `terminos.html` (sección 6), y en la ficha un crédito pequeño.
+   - **Cómo hacerlo:** un workflow de GitHub busca las fotos, porque desde la consola no hay acceso a esas webs. Guarda un `orbita/datos/fotos.json` (id del elemento, archivo, autor, licencia y enlace a la fuente) y las miniaturas comprimidas en `orbita/static/fotos/`. Las fichas de `capas.js` las muestran con carga diferida.
+   - **Antes de programar:** captura del diseño de la ficha con foto, para que el dueño la apruebe.
 
 **Lo que el dueño encargó a Astra 6** (todo en `herramientas/agencia-rondas/`)
 - **Ronda 20**
