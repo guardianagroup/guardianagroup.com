@@ -1,0 +1,54 @@
+[
+  {
+    "nombre": "North-South DWDM Backbone",
+    "operador": "Mobicom Networks",
+    "pais": "MN",
+    "ciudades": [
+      "Zamyn-Uud",
+      "Sainshand",
+      "Choir",
+      "Ulaanbaatar",
+      "Darkhan",
+      "Sukhbaatar",
+      "Altanbulag"
+    ],
+    "estado": "en servicio",
+    "fuente": "Mobicom Networks website (en.mobicomnetworks.mn/service-2)"
+  },
+  {
+    "nombre": "Railway Fiber Backbone (ERMC/Central Corridor)",
+    "operador": "Gemnet",
+    "pais": "MN",
+    "ciudades": [
+      "Zamyn-Uud",
+      "Sainshand",
+      "Ulaanbaatar",
+      "Sukhbaatar"
+    ],
+    "estado": "en servicio",
+    "fuente": "Gemnet website (gemnet.mn)"
+  },
+  {
+    "nombre": "Thimphu-Phuentsholing OPGW National Fiber",
+    "operador": "BPC",
+    "pais": "BT",
+    "ciudades": [
+      "Thimphu",
+      "Phuentsholing",
+      "Jaigaon"
+    ],
+    "estado": "en servicio",
+    "fuente": "UNESCAP ICT co-deployment report on Bhutan; BPC data"
+  },
+  {
+    "nombre": "Thimphu-Gelephu OPGW National Fiber",
+    "operador": "BPC",
+    "pais": "BT",
+    "ciudades": [
+      "Thimphu",
+      "Gelephu"
+    ],
+    "estado": "en servicio",
+    "fuente": "UNESCAP ICT co-deployment report on Bhutan; BPC transmission data"
+  }
+]

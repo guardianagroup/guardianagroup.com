@@ -1,0 +1,111 @@
+[
+  {
+    "nombre": "Troncal norte Puerto Plata–Santiago–Santo Domingo",
+    "operador": "Claro",
+    "pais": "DO",
+    "ciudades": [
+      "Puerto Plata",
+      "Santiago de los Caballeros",
+      "Santo Domingo"
+    ],
+    "estado": "en servicio",
+    "fuente": "Claro Dominicana, historia de su red de fibra óptica interprovincial: https://www.claro.com.do/institucional/ ; A4AI, Estudio de caso: República Dominicana (2015), apartado 4.3, que identifica expresamente el corredor Puerto Plata–Santiago–Santo Domingo: https://a4ai.org/wp-content/uploads/2015/04/Estudio-de-Caso_Republica-Dominicana.pdf"
+  },
+  {
+    "nombre": "Enlace de fibra óptica Puerto Plata–Navarrete–NAP del Caribe",
+    "operador": "ETED",
+    "pais": "DO",
+    "ciudades": [
+      "Puerto Plata",
+      "Villa Bisonó",
+      "Santo Domingo"
+    ],
+    "estado": "en servicio",
+    "fuente": "A4AI, Estudio de caso: República Dominicana (2015), apartado 4.3, con información de INDOTEL sobre el enlace de 48 fibras de ETED desde Puerto Plata hasta Navarrete (Villa Bisonó) y el NAP del Caribe: https://a4ai.org/wp-content/uploads/2015/04/Estudio-de-Caso_Republica-Dominicana.pdf"
+  },
+  {
+    "nombre": "Enlace NAP del Caribe–Bávaro",
+    "operador": "CPEM",
+    "pais": "DO",
+    "ciudades": [
+      "Santo Domingo",
+      "Bávaro"
+    ],
+    "estado": "en servicio",
+    "fuente": "A4AI, Estudio de caso: República Dominicana (2015), apartado 4.3, que documenta aproximadamente 240 km de fibra óptica entre el NAP del Caribe y la estación eléctrica de CPEM en Bávaro: https://a4ai.org/wp-content/uploads/2015/04/Estudio-de-Caso_Republica-Dominicana.pdf"
+  },
+  {
+    "nombre": "Dorsal nacional norte de Natcom",
+    "operador": "Natcom",
+    "pais": "HT",
+    "ciudades": [
+      "Port-au-Prince",
+      "Saint-Marc",
+      "Gonaïves",
+      "Cap-Haïtien"
+    ],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Haití, Ministère de la Planification et de la Coopération Externe, Plan stratégique de développement d’Haïti (2012), programa 1.7, que identifica expresamente el itinerario de la red de Natcom: https://www.haitidocs.org/doc/mpce-2012-haiti-strategic-development-plan-2?lang=fr ; UIT, Telecommunications networks and infrastructures resilience assessment in Haiti (2024), que documenta la infraestructura troncal y sus vulnerabilidades: https://www.itu.int/dms_pub/itu-d/opb/ldc/D-LDC-ICTLDC-2024-01-PDF-E.pdf"
+  },
+  {
+    "nombre": "Dorsal nacional sur de Natcom",
+    "operador": "Natcom",
+    "pais": "HT",
+    "ciudades": [
+      "Port-au-Prince",
+      "Miragoâne",
+      "Les Cayes"
+    ],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Haití, Ministère de la Planification et de la Coopération Externe, Plan stratégique de développement d’Haïti (2012), programa 1.7, que describe la conexión Port-au-Prince–Les Cayes vía Miragoâne: https://www.haitidocs.org/doc/mpce-2012-haiti-strategic-development-plan-2?lang=fr ; CONATEL Haití, informe sobre daños a la fibra de Natcom en la carretera nacional 2: https://www.conatel.gouv.ht/node/273"
+  },
+  {
+    "nombre": "Troncal Georgetown–Linden",
+    "operador": "E-Networks",
+    "pais": "GY",
+    "ciudades": [
+      "Georgetown",
+      "Kuru Kururu",
+      "Linden"
+    ],
+    "estado": "en servicio",
+    "fuente": "E-Networks, comunicado del 9 de mayo de 2022 sobre la puesta en servicio de la fibra Georgetown–Linden por la carretera Soesdyke–Linden y la expansión a Kuru Kururu, reproducido en News Room: https://newsroom.gy/2022/05/09/e-networks-now-operates-guyanas-largest-fiber-optic-backbone/ ; operador, confirmación de la cobertura de su backbone en Linden: https://enetworks.gy/2022/11/15/enetworks-fiber-upgrades.html"
+  },
+  {
+    "nombre": "Troncal de Berbice",
+    "operador": "E-Networks",
+    "pais": "GY",
+    "ciudades": [
+      "Georgetown",
+      "New Amsterdam",
+      "Corriverton"
+    ],
+    "estado": "en servicio",
+    "fuente": "E-Networks, comunicado del 15 de noviembre de 2022, que confirma una red troncal de fibra activa con servicio en Georgetown, New Amsterdam y Corriverton: https://enetworks.gy/2022/11/15/enetworks-fiber-upgrades.html"
+  },
+  {
+    "nombre": "Red troncal Este de ANDE",
+    "operador": "ANDE",
+    "pais": "PY",
+    "ciudades": [
+      "Asunción",
+      "Coronel Oviedo",
+      "Ciudad del Este"
+    ],
+    "estado": "en servicio",
+    "fuente": "ANDE, Plan Maestro 2016–2025, Dirección de Telemática, apartado 5.3.1.1 «Red Troncal», que describe expresamente la interconexión entre Sede Central, Coronel Oviedo y Ciudad del Este: https://www.ande.gov.py/documentos/plan_maestro/PM_2016_2025_Gen_Trans_Distrib_Telematica.pdf ; ANDE, Memoria Anual 2018, proyecto de red de fibra óptica: https://www.ande.gov.py/documentos_contables/651/memoria_anual_2018.pdf"
+  },
+  {
+    "nombre": "Corredor interurbano de fibra óptica San Pedro–Pedro Juan Caballero",
+    "operador": "Ufinet",
+    "pais": "PY",
+    "ciudades": [
+      "Puerto Antequera",
+      "San Pedro de Ycuamandiyú",
+      "Santa Rosa del Aguaray",
+      "Pedro Juan Caballero"
+    ],
+    "estado": "en servicio",
+    "fuente": "CONATEL Paraguay, Registro Nacional de Servicios de Telecomunicaciones, Servicios de Acceso a Internet y Transmisión de Datos (5 de agosto de 2024), páginas 6–7, registro de UFINET PARAGUAY S.A.; enumera expresamente los tres tramos interurbanos consecutivos entre Puerto Antequera, San Pedro del Ycuamandiyú, Santa Rosa del Aguaray y Pedro Juan Caballero: https://www.conatel.gov.py/conatel/wp-content/uploads/2024/08/rnst_internet-tx-datos_5_agosto_2024.pdf"
+  }
+]

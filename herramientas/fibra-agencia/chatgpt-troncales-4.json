@@ -1,0 +1,156 @@
+[
+  {
+    "nombre": "Corredor internacional Vientiane–Nam Phao–Cau Treo",
+    "operador": "LANIC",
+    "pais": "LA",
+    "ciudades": [
+      "Vientiane",
+      "Nam Phao",
+      "Cau Treo"
+    ],
+    "estado": "en servicio",
+    "fuente": "Lao National Internet Center, presentación International Internet Gateway, TEIN3 Laos Proceedings, 2012, diapositiva 16. https://www.tein3.net/Documents/TEIN3_Laos_Proceedings.pdf"
+  },
+  {
+    "nombre": "Corredor internacional Savannakhet–Dansavanh–Lao Bao",
+    "operador": "LANIC",
+    "pais": "LA",
+    "ciudades": [
+      "Savannakhet",
+      "Dansavanh",
+      "Lao Bao"
+    ],
+    "estado": "en servicio",
+    "fuente": "Lao National Internet Center, International Internet Gateway, TEIN3 Laos Proceedings, 2012, diapositiva 16. https://www.tein3.net/Documents/TEIN3_Laos_Proceedings.pdf"
+  },
+  {
+    "nombre": "Red troncal DWDM norte-sur de Gemnet",
+    "operador": "Gemnet",
+    "pais": "MN",
+    "ciudades": [
+      "Sukhbaatar",
+      "Darkhan",
+      "Zuunkharaa",
+      "Ulaanbaatar",
+      "Bagakhangai",
+      "Choir",
+      "Airag",
+      "Sainshand",
+      "Zamyn-Uud"
+    ],
+    "estado": "en servicio",
+    "fuente": "Gemnet, Intercity Channel Rental Service y Company Introduction. Red de fibra de 1.118–1.199 km siguiendo el corredor ferroviario norte-sur; la página enumera los nodos de transmisión. https://www.gemnet.mn/intercity-channel-rental-service/ ; https://www.gemnet.mn/company-introduction/"
+  },
+  {
+    "nombre": "Ramal ferroviario de fibra Darkhan–Erdenet",
+    "operador": "Gemnet",
+    "pais": "MN",
+    "ciudades": [
+      "Darkhan",
+      "Erdenet"
+    ],
+    "estado": "en servicio",
+    "fuente": "Gemnet, Intercity Channel Rental Service. Identifica expresamente el enlace de fibra entre Darkhan y Erdenet, dentro de su red de transmisión interurbana. https://www.gemnet.mn/intercity-channel-rental-service/"
+  },
+  {
+    "nombre": "Corredor DWDM norte-sur de Mobicom Networks",
+    "operador": "Mobicom Networks",
+    "pais": "MN",
+    "ciudades": [
+      "Zamyn-Uud",
+      "Sainshand",
+      "Choir",
+      "Ulaanbaatar",
+      "Darkhan",
+      "Sukhbaatar",
+      "Altanbulag"
+    ],
+    "estado": "en servicio",
+    "fuente": "Mobicom Networks, Transmission Lease Service. El operador publica expresamente la secuencia del corredor DWDM con protección 1+1, desde la frontera china hasta la frontera rusa. https://en.mobicomnetworks.mn/service-2"
+  },
+  {
+    "nombre": "Red nacional OPGW Thimphu–Phuentsholing",
+    "operador": "GovTech Bhutan / BPC",
+    "pais": "BT",
+    "ciudades": [
+      "Thimphu",
+      "Simtokha",
+      "Khasadrapchu",
+      "Tsimasham",
+      "Gedu",
+      "Pasakha",
+      "Phuentsholing"
+    ],
+    "estado": "en servicio",
+    "fuente": "Bhutan InfoComm and Media Authority (BICMA), Enhancement of Cable TV in Bhutan, sección 4.2, tabla de enlaces OPGW, página 19, 2014. Publica la secuencia completa de localidades. Titularidad pública y mantenimiento por Bhutan Power Corporation, confirmados en el informe de fiabilidad de GovTech 2024. https://www.bicma.gov.bt/data/reports/other-reports/Enhancement_of_Cable_TV.pdf"
+  },
+  {
+    "nombre": "Red OPGW Thimphu–Paro–Haa",
+    "operador": "GovTech Bhutan / BPC",
+    "pais": "BT",
+    "ciudades": [
+      "Thimphu",
+      "Paro",
+      "Haa"
+    ],
+    "estado": "en servicio",
+    "fuente": "BICMA, Enhancement of Cable TV in Bhutan, sección 4.2, página 19, 2014. Identifica el enlace OPGW Thimphu–Paro y su prolongación hasta Haa sobre líneas eléctricas. https://www.bicma.gov.bt/data/reports/other-reports/Enhancement_of_Cable_TV.pdf"
+  },
+  {
+    "nombre": "Red óptica OTN Dubai–Abu Dhabi–Al Sila",
+    "operador": "du",
+    "pais": "AE",
+    "ciudades": [
+      "Dubai",
+      "Abu Dhabi",
+      "Al Sila"
+    ],
+    "estado": "en servicio",
+    "fuente": "du, comunicado oficial del 24 de julio de 2011 sobre la primera fase completada de su Optical Transport Network, que identifica Dubai, Abu Dhabi y Al Sila. La documentación corporativa de 2025 confirma la continuidad de los enlaces terrestres internacionales por Sila. https://www.du.ae/about/media-centre/newsdetail/du-launches-first-phase-of-its-Optical-Transport-Network"
+  },
+  {
+    "nombre": "Corredor óptico Dubai–Al Ain–Al Buraimi",
+    "operador": "du",
+    "pais": "AE",
+    "ciudades": [
+      "Dubai",
+      "Al Ain",
+      "Al Buraimi"
+    ],
+    "estado": "en servicio",
+    "fuente": "du, comunicado oficial sobre la Optical Transport Network, 24 de julio de 2011: confirma la conexión Dubai–Al Ain y la interconexión terrestre con Omantel por Al Buraimi. https://www.du.ae/about/media-centre/newsdetail/du-launches-first-phase-of-its-Optical-Transport-Network"
+  },
+  {
+    "nombre": "Corredor terrestre Fujairah–Sila",
+    "operador": "Etisalat",
+    "pais": "AE",
+    "ciudades": [
+      "Fujairah",
+      "Al Sila"
+    ],
+    "estado": "en servicio",
+    "fuente": "Etisalat, Connectivity Map 2021, sección de rutas terrestres. Identifica expresamente Fujairah–Sila como conectividad terrestre. https://www.etisalat.ae/content/dam/dx_eitsalat_ae/en/system/wst/assets/docs/carrier/data-services/connectivity-map-2021.pdf"
+  },
+  {
+    "nombre": "Red troncal de fibra Muscat–Salalah",
+    "operador": "Omantel",
+    "pais": "OM",
+    "ciudades": [
+      "Muscat",
+      "Salalah"
+    ],
+    "estado": "en servicio",
+    "fuente": "Ciena y Omantel, comunicado sobre el backbone óptico de Omantel para servicios de nube e inteligencia artificial, 2025. Identifica la interconexión de las estaciones de cables y centros de datos MC1 en Muscat y SN1 en Salalah mediante la infraestructura de fibra de Omantel. https://www.ciena.com/about/newsroom/press-releases/omantel-and-ciena-collaborate-to-serve-the-digital-backbone-of-omans-ai-and-cloud-economy"
+  },
+  {
+    "nombre": "National Broadband Network – corredor Amman–Aqaba",
+    "operador": "NBN Jordan",
+    "pais": "JO",
+    "ciudades": [
+      "Amman",
+      "Aqaba"
+    ],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Broadband Networks in the Middle East and North Africa, 2014, capítulo de Jordania: confirma que la infraestructura propia de fibra de la NBN sigue la carretera Amman–Aqaba y entró en servicio a finales de 2010. Ministerio de Economía Digital y Emprendimiento de Jordania, National Broadband Network Program, actualizado en octubre de 2026. https://openknowledge.worldbank.org/bitstream/10986/16680/1/9781464801129.pdf ; https://www.modee.gov.jo/En/Pages/National_Broadband_Network_Program"
+  }
+]

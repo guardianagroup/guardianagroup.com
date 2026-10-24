@@ -1,0 +1,19 @@
+[
+  {
+    "nombre": "Troncal ferroviaria Rusia–Mongolia–China",
+    "operador": "Railcom",
+    "pais": "MN",
+    "ciudades": [
+      "Naushki",
+      "Sukhbaatar",
+      "Darkhan",
+      "Ulaanbaatar",
+      "Choir",
+      "Sainshand",
+      "Zamyn-Uud",
+      "Erenhot"
+    ],
+    "estado": "en servicio",
+    "fuente": "Railcom, división de telecomunicaciones de Ulaanbaatar Railway: descripción y mapa de su red troncal ferroviaria de fibra óptica y conexiones internacionales, https://railcom.mn/."
+  }
+]

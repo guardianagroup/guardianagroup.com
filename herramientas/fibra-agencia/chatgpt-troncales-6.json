@@ -1,0 +1,342 @@
+[
+  {
+    "nombre": "Corredor óptico internacional Moscú–Varsovia vía Bielorrusia",
+    "operador": "Beltelecom / RETN",
+    "pais": "BY",
+    "ciudades": [
+      "Velikiye Luki",
+      "Minsk",
+      "Brest",
+      "Warsaw"
+    ],
+    "estado": "en servicio",
+    "fuente": "RETN, 6 de noviembre de 2019, RETN and Beltelecom completed a new transit route across Belarus. https://retn.net/news-events/retn-and-beltelecom-completed-a-new-transit-route-across-belarus"
+  },
+  {
+    "nombre": "Backbone ATU – Corredor central y oriental",
+    "operador": "ATU",
+    "pais": "AL",
+    "ciudades": [
+      "Durres",
+      "Tirana",
+      "Elbasan",
+      "Pogradec",
+      "Korce"
+    ],
+    "estado": "en servicio",
+    "fuente": "Albanian Telecommunications Union, Our Network y Current Status, mapa de tramos operativos. https://atu.al/network-map.html ; https://atu.al/current-status.html"
+  },
+  {
+    "nombre": "Backbone ATU – Corredor septentrional",
+    "operador": "ATU",
+    "pais": "AL",
+    "ciudades": [
+      "Tirana",
+      "Shkoder",
+      "Reps",
+      "Kukes"
+    ],
+    "estado": "en servicio",
+    "fuente": "Albanian Telecommunications Union, Our Network y Current Status, mapa de tramos operativos. https://atu.al/network-map.html ; https://atu.al/current-status.html"
+  },
+  {
+    "nombre": "Backbone ATU – Corredor occidental",
+    "operador": "ATU",
+    "pais": "AL",
+    "ciudades": [
+      "Durres",
+      "Tirana",
+      "Elbasan"
+    ],
+    "estado": "en servicio",
+    "fuente": "Albanian Telecommunications Union, Our Network y Current Status, mapa de infraestructura óptica operativa. https://atu.al/network-map.html ; https://atu.al/current-status.html"
+  },
+  {
+    "nombre": "Anillo óptico Sarajevo–Zenica–Tuzla",
+    "operador": "BH Telecom",
+    "pais": "BA",
+    "ciudades": [
+      "Sarajevo",
+      "Zenica",
+      "Tuzla"
+    ],
+    "estado": "en servicio",
+    "fuente": "BH Telecom, Monograph 2005, p. 183, Construction of the Informatics Transmission Backbone; identifica expresamente un sistema de transmisión sobre cable óptico Sarajevo–Zenica–Tuzla–Sarajevo. https://bhtel.ba/uploads/dokumenti/Monografija_BH_Telecom_2005.pdf"
+  },
+  {
+    "nombre": "Backbone Sarajevo–Konjic–Jablanica–Mostar",
+    "operador": "BH Telecom",
+    "pais": "BA",
+    "ciudades": [
+      "Sarajevo",
+      "Konjic",
+      "Jablanica",
+      "Mostar"
+    ],
+    "estado": "en servicio",
+    "fuente": "BH Telecom, Monograph 2005, p. 183, sistema Sarajevo–Konjic–Mostar; BH Telecom, 7 de octubre de 2024, confirmación de rehabilitación de los enlaces ópticos Konjic–Jablanica–Mostar. https://bhtel.ba/uploads/dokumenti/Monografija_BH_Telecom_2005.pdf ; https://www.bhtelecom.ba/drustvena-odgovornost/2024/10/bh-telecom-uspostavio-rad-22-baznih-stanica-na-poplavama-pogodjenim-podrucjima/"
+  },
+  {
+    "nombre": "Backbone público G-Cloud – Corredor norte y oeste",
+    "operador": "BFS",
+    "pais": "BF",
+    "ciudades": [
+      "Ouagadougou",
+      "Yako",
+      "Ouahigouya",
+      "Tougan",
+      "Dedougou",
+      "Ouarkoye",
+      "Bobo-Dioulasso"
+    ],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Transición Digital de Burkina Faso, 28 de julio de 2020, descripción expresa de la ruta interurbana de 650 km; ministerio, 10 de marzo de 2023, puesta en explotación comercial del backbone nacional por Bridge Fiber Solutions. https://www.mdenp.gov.bf/details?tx_news_pi1%5Bnews%5D=124&tx_news_pi1%5Bcontroller%5D=News&tx_news_pi1%5Baction%5D=detail ; https://www.bfs.bf/notre-reseau/"
+  },
+  {
+    "nombre": "Backbone nacional – Eje Cotonou–Parakou–Malanville",
+    "operador": "SBIN",
+    "pais": "BJ",
+    "ciudades": [
+      "Cotonou",
+      "Parakou",
+      "Malanville"
+    ],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Project Appraisal Document 53138-BJ, p. 22, identificación expresa de la ruta de fibra Cotonou–Parakou–Malanville; ARCEP Benín, catálogo de interconexión de SBIN aprobado en 2021, p. 13, capacidad terrestre comercial Cotonou–Malanville, 769 km. https://documents1.worldbank.org/curated/en/403831468003939738/pdf/531380PAD0P113101Official0Use0Only1.pdf ; https://arcep.bj/wp-content/uploads/2021/03/DECISION-2021-035-PORTANT-APPROBATION-DU-CATALOGUE-DE-SBIN-1.pdf"
+  },
+  {
+    "nombre": "Backbone nacional – Ramal Parakou–Porga",
+    "operador": "SBIN",
+    "pais": "BJ",
+    "ciudades": [
+      "Parakou",
+      "Porga"
+    ],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Project Appraisal Document 53138-BJ, p. 22, enlace de fibra Parakou–Porga; ARCEP Benín, catálogo de interconexión SBIN de 2021, p. 13, capacidad comercial Cotonou–Porga, 775 km. https://documents1.worldbank.org/curated/en/403831468003939738/pdf/531380PAD0P113101Official0Use0Only1.pdf ; https://arcep.bj/wp-content/uploads/2021/03/DECISION-2021-035-PORTANT-APPROBATION-DU-CATALOGUE-DE-SBIN-1.pdf"
+  },
+  {
+    "nombre": "Backbone nacional – Salida occidental hacia Togo",
+    "operador": "SBIN",
+    "pais": "BJ",
+    "ciudades": [
+      "Cotonou",
+      "Hilacondji"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARCEP Benín, catálogo de interconexión de SBIN aprobado en 2021, p. 13, oferta de capacidad terrestre Cotonou–Hilacondji, frontera de Togo, 122 km. https://arcep.bj/wp-content/uploads/2021/03/DECISION-2021-035-PORTANT-APPROBATION-DU-CATALOGUE-DE-SBIN-1.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Conakry–Boke",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Conakry",
+      "Boke"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo Orange Conakry Kipe–Boké sobre la infraestructura nacional SOGEB. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Conakry–Mamou",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Conakry",
+      "Mamou"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlaces operativos Conakry P-Center–Mamou y Conakry Kipe–Mamou. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Conakry–Labe",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Conakry",
+      "Labe"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo Orange Conakry Prima–Labé. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Conakry–Kankan",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Conakry",
+      "Kankan"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo Orange Conakry Prima–Kankan. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Kankan–Siguiri–Doko",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Kankan",
+      "Siguiri",
+      "Doko"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo Orange Kankan–Doko via Siguiri. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Labe–Siguiri–Doko",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Labe",
+      "Siguiri",
+      "Doko"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo Orange Labé–Doko via Siguiri. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Conakry–Nzerekore",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Conakry",
+      "Nzerekore"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo Orange Prima–Nzérékoré. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Conakry–Kamsar",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Conakry",
+      "Kamsar"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo Orange Kipe–Kamsar, corroborado por VDC y LeaderNet. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Conakry–Kindia",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Conakry",
+      "Kindia"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo Orange Prima–Kindia. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Conakry–Pita–Telimele",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Conakry",
+      "Pita",
+      "Telimele"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo Orange Kipe–Télimélé via Pita. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Mamou–Dinguiraye",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Mamou",
+      "Dinguiraye"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo Orange Mamou EDG–Dinguiraye. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Kankan–Beyla",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Kankan",
+      "Beyla"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo Orange Kankan–Beyla. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Dubreka–Boke",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Dubreka",
+      "Boke"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo MTN Dubréka–Boké. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Dubreka–Kolaboui–Kamsar",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Dubreka",
+      "Kolaboui",
+      "Kamsar"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo MTN Dubréka–Kamsar via Kolaboui. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Labe–Mamou",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Labe",
+      "Mamou"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo MTN Labé–Mamou. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Mamou–Kankan",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Mamou",
+      "Kankan"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo MTN Mamou Ville–Kankan. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Mamou–Nzerekore",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Mamou",
+      "Nzerekore"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo MTN Mamou Ville–Nzérékoré. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Mamou–Siguiri",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Mamou",
+      "Siguiri"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo MTN Mamou Ville–Siguiri. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  },
+  {
+    "nombre": "Backbone SOGEB – Mamou–Faranah",
+    "operador": "SOGEB",
+    "pais": "GN",
+    "ciudades": [
+      "Mamou",
+      "Faranah"
+    ],
+    "estado": "en servicio",
+    "fuente": "ARPT Guinea, Rapport d'activités 2023, cuadro 28, p. 40, enlace operativo MTN Mamou Ville–Faranah. https://www.arpt.gov.gn/wp-content/uploads/2024/12/ARPT_RapportAnnuel_2023_VFINAL.pdf"
+  }
+]

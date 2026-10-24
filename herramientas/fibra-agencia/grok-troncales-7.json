@@ -1,0 +1,121 @@
+[
+  {
+    "nombre": "Ashgabat–Kuchan international trunk",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": [
+      "Ashgabat",
+      "Kuchan"
+    ],
+    "estado": "en servicio",
+    "fuente": "Turkmenaragatnashyk / Turkmentelecom official statements, tmdomain.com and orient.tm (2024)"
+  },
+  {
+    "nombre": "Turkmenabat–Alat international trunk",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": [
+      "Turkmenabat",
+      "Alat"
+    ],
+    "estado": "en servicio",
+    "fuente": "Turkmenaragatnashyk / Turkmentelecom official statements, tmdomain.com and orient.tm (2024)"
+  },
+  {
+    "nombre": "Dashoguz–Gurlen international trunk",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": [
+      "Dashoguz",
+      "Gurlen"
+    ],
+    "estado": "en servicio",
+    "fuente": "Turkmenaragatnashyk / Turkmentelecom official statements, tmdomain.com and orient.tm (2024)"
+  },
+  {
+    "nombre": "Garabogaz–Kendirli international trunk",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": [
+      "Garabogaz",
+      "Kendirli"
+    ],
+    "estado": "en servicio",
+    "fuente": "Turkmenaragatnashyk / Turkmentelecom official statements, tmdomain.com and orient.tm (2024)"
+  },
+  {
+    "nombre": "Kerki–Akina international trunk",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": [
+      "Kerki",
+      "Akina"
+    ],
+    "estado": "en servicio",
+    "fuente": "Turkmenaragatnashyk / Turkmentelecom official statements, tmdomain.com and orient.tm (2024)"
+  },
+  {
+    "nombre": "Serhetabat–Herat international trunk",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": [
+      "Serhetabat",
+      "Herat"
+    ],
+    "estado": "en servicio",
+    "fuente": "Turkmenaragatnashyk / Turkmentelecom official statements, tmdomain.com and orient.tm (2024)"
+  },
+  {
+    "nombre": "Bishkek–Osh–Batken backbone",
+    "operador": "Fiber Links",
+    "pais": "KG",
+    "ciudades": [
+      "Bishkek",
+      "Jalal-Abad",
+      "Osh",
+      "Batken"
+    ],
+    "estado": "en servicio",
+    "fuente": "Fiber Links official site (fiberlinks.kg), network description and technical specs"
+  },
+  {
+    "nombre": "Digital CASA national backbone",
+    "operador": "Kyrgyztelecom",
+    "pais": "KG",
+    "ciudades": [
+      "Bishkek",
+      "Osh",
+      "Jalal-Abad",
+      "Karakol",
+      "Naryn",
+      "Talas"
+    ],
+    "estado": "en servicio",
+    "fuente": "Kyrgyztelecom / Digital CASA project reports, open data and company statements (2025)"
+  },
+  {
+    "nombre": "Dushanbe–Khorog–Kulma backbone",
+    "operador": "Tajiktelecom",
+    "pais": "TJ",
+    "ciudades": [
+      "Dushanbe",
+      "Khorog",
+      "Kulma"
+    ],
+    "estado": "en servicio",
+    "fuente": "Communications Service of Tajikistan and Tajiktelecom official updates (cs.gov.tj, Khovar, Avesta 2025–2026); section to Khorog operational"
+  },
+  {
+    "nombre": "OVIO national fiber backbone",
+    "operador": "OVIO",
+    "pais": "AM",
+    "ciudades": [
+      "Yerevan",
+      "Gyumri",
+      "Vanadzor",
+      "Hrazdan"
+    ],
+    "estado": "en servicio",
+    "fuente": "OVIO official site (ovio.am), network description (3000 km fiber, border connections to Georgia and Iran)"
+  }
+]

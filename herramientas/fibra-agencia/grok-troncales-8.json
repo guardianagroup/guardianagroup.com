@@ -1,0 +1,89 @@
+[
+  {
+    "nombre": "RETN-Beltelecom Central Way transit route",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": [
+      "Moscow",
+      "Velikiye Luki",
+      "Minsk",
+      "Brest",
+      "Warsaw",
+      "Frankfurt"
+    ],
+    "estado": "en servicio",
+    "fuente": "RETN announcement 2019 (retn.net) in cooperation with Beltelecom"
+  },
+  {
+    "nombre": "Beltelecom national backbone Minsk-oblast centers",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": [
+      "Minsk",
+      "Brest",
+      "Vitebsk",
+      "Gomel",
+      "Grodno",
+      "Mogilev"
+    ],
+    "estado": "en servicio",
+    "fuente": "Beltelecom primary/transport network page (beltelecom.by)"
+  },
+  {
+    "nombre": "GTS Warsaw-Minsk DWDM",
+    "operador": "Beltelecom",
+    "pais": "BY",
+    "ciudades": [
+      "Warsaw",
+      "Minsk"
+    ],
+    "estado": "en servicio",
+    "fuente": "Light Reading / GTS announcement 2012 with Beltelecom"
+  },
+  {
+    "nombre": "ATU national fiber backbone",
+    "operador": "ATU",
+    "pais": "AL",
+    "ciudades": [
+      "Shkoder",
+      "Kukes",
+      "Tirana",
+      "Durres",
+      "Elbasan",
+      "Pogradec",
+      "Korce",
+      "Fier",
+      "Vlore",
+      "Tepelene",
+      "Gjirokaster"
+    ],
+    "estado": "en servicio",
+    "fuente": "ATU network page and brochure (atu.al) listing PoPs and 750 km highway fiber"
+  },
+  {
+    "nombre": "RNHD pilot corridor",
+    "operador": "ANSUT",
+    "pais": "CI",
+    "ciudades": [
+      "Abidjan",
+      "Yamoussoukro",
+      "Daloa",
+      "Bouake",
+      "Korhogo"
+    ],
+    "estado": "en servicio",
+    "fuente": "ANSUT / government announcements on National Broadband Network (RNHD) activation 2025"
+  },
+  {
+    "nombre": "Tunisie Telecom national backbone Tunis-Sousse-Sfax",
+    "operador": "Tunisie Telecom",
+    "pais": "TN",
+    "ciudades": [
+      "Tunis",
+      "Sousse",
+      "Sfax"
+    ],
+    "estado": "en servicio",
+    "fuente": "Historical Tunisie Telecom announcements on national backbone extension along highways (2010 reports) and ongoing national fiber deployment reports"
+  }
+]
