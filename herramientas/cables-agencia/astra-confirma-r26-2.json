@@ -1,0 +1,29 @@
+[
+ {
+  "nombre": "Bonaire-Curaçao Cable System",
+  "llegadas": [
+   {
+    "lugar": "Kralendijk",
+    "pais": "BQ",
+    "lat": 12.15,
+    "lon": -68.2667
+   },
+   {
+    "lugar": "Willemstad",
+    "pais": "CW",
+    "lat": 12.1084,
+    "lon": -68.9335
+   }
+  ],
+  "anio": 2016,
+  "km": 113,
+  "duenos": [
+   "Telbo",
+   "United Telecommunication Services (UTS)"
+  ],
+  "fuentes": [
+   "TELBO, operador participante del sistema BCCS: https://www.telbo.com/",
+   "Huawei Marine Networks, proveedor del sistema, actualmente HMN Technologies: https://www.hmntech.com/"
+  ]
+ }
+]

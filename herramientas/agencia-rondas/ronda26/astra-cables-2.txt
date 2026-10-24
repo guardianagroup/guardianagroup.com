@@ -1,0 +1,90 @@
+[
+  {
+    "nombre": "Angola Domestic Network System (ADONES)",
+    "llegadas": [
+      {
+        "lugar": "Cabinda",
+        "pais": "AO",
+        "lat": -5.55,
+        "lon": 12.2
+      },
+      {
+        "lugar": "Soyo",
+        "pais": "AO",
+        "lat": -6.1349,
+        "lon": 12.3689
+      },
+      {
+        "lugar": "Nzeto",
+        "pais": "AO",
+        "lat": -7.2312,
+        "lon": 12.8666
+      },
+      {
+        "lugar": "Ambriz",
+        "pais": "AO",
+        "lat": -7.8578,
+        "lon": 13.1251
+      },
+      {
+        "lugar": "Cacuaco",
+        "pais": "AO",
+        "lat": -8.7748,
+        "lon": 13.3665
+      },
+      {
+        "lugar": "Porto Amboim",
+        "pais": "AO",
+        "lat": -10.7183,
+        "lon": 13.75
+      },
+      {
+        "lugar": "Benguela",
+        "pais": "AO",
+        "lat": -12.5763,
+        "lon": 13.4055
+      },
+      {
+        "lugar": "Namibe",
+        "pais": "AO",
+        "lat": -15.1961,
+        "lon": 12.1522
+      }
+    ],
+    "anio": 2008,
+    "km": 1650,
+    "duenos": [
+      "Angola Telecom"
+    ],
+    "fuentes": [
+      "Angola Telecom, operador de ADONES: https://www.angolatelecom.ao/"
+    ]
+  },
+  {
+    "nombre": "Bonaire-Curaçao Cable System",
+    "llegadas": [
+      {
+        "lugar": "Kralendijk",
+        "pais": "BQ",
+        "lat": 12.15,
+        "lon": -68.2667
+      },
+      {
+        "lugar": "Willemstad",
+        "pais": "CW",
+        "lat": 12.1084,
+        "lon": -68.9335
+      }
+    ],
+    "anio": 2016,
+    "km": 113,
+    "duenos": [
+      "Telbo",
+      "United Telecommunication Services (UTS)"
+    ],
+    "fuentes": [
+      "TELBO, operador participante del sistema BCCS: https://www.telbo.com/",
+      "Huawei Marine Networks, proveedor del sistema, actualmente HMN Technologies: https://www.hmntech.com/"
+    ]
+  }
+]

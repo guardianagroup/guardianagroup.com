@@ -1,0 +1,84 @@
+[
+ {
+  "nombre": "Red troncal de fibra óptica Laayoune – Boujdour – Dakhla",
+  "operador": "Maroc Telecom",
+  "pais": "EH",
+  "ciudades": [
+   "Laayoune",
+   "Boujdour",
+   "Dakhla"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://frontal.iam.ma/Lists/Publication/Attachments/19/Rapport-Developpement-durable.pdf (aproximado)"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica Flow Barbados – corredor occidental",
+  "operador": "Flow Barbados",
+  "pais": "BB",
+  "ciudades": [
+   "Bridgetown",
+   "Holetown",
+   "Speightstown"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.cwc.com/past-present/what-we-do/entertainment.html (aproximado)"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica Flow Barbados – corredor meridional",
+  "operador": "Flow Barbados",
+  "pais": "BB",
+  "ciudades": [
+   "Bridgetown",
+   "Hastings",
+   "Worthing",
+   "Oistins"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.cwc.com/past-present/what-we-do/entertainment.html (aproximado)"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica Digicel Bermuda – corredor oriental",
+  "operador": "Digicel Bermuda / Bermuda Telephone Company",
+  "pais": "BM",
+  "ciudades": [
+   "Hamilton",
+   "Flatts Village",
+   "St. George's"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.digicelgroup.com/bm/en/campaign/fibre-upgrade-bermuda (aproximado)"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica Digicel Bermuda – corredor occidental",
+  "operador": "Digicel Bermuda / Bermuda Telephone Company",
+  "pais": "BM",
+  "ciudades": [
+   "Hamilton",
+   "Somerset Village"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.digicelgroup.com/bm/en/campaign/fibre-upgrade-bermuda (aproximado)"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica Flow / UTS – Willemstad y Sint Michiel",
+  "operador": "Flow / UTS",
+  "pais": "CW",
+  "ciudades": [
+   "Willemstad",
+   "Sint Michiel"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.uts.cw/notifications/temporary-interruption-july-18-2018 (aproximado)"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica FSMTC – Pohnpei",
+  "operador": "FSM Telecommunications Corporation",
+  "pais": "FM",
+  "ciudades": [
+   "Kolonia",
+   "Palikir"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://tra.fm/market-entry-and-information-2/ (aproximado)"
+ }
+]

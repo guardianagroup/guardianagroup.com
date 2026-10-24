@@ -1,0 +1,27 @@
+[
+  {
+    "nombre": "ESAT-1",
+    "llegadas": [
+      {
+        "lugar": "Kilmore Quay",
+        "pais": "IE",
+        "lat": 52.174,
+        "lon": -6.587
+      },
+      {
+        "lugar": "Sennen Cove",
+        "pais": "GB",
+        "lat": 50.077,
+        "lon": -5.702
+      }
+    ],
+    "anio": 1997,
+    "km": 260,
+    "duenos": [
+      "BT"
+    ],
+    "fuentes": [
+      "BT Ireland (operador): https://www.btireland.com/. No he podido comprobar en tiempo real su continuidad en servicio a fecha de hoy."
+    ]
+  }
+]
