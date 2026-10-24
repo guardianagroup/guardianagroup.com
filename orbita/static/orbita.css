@@ -26,7 +26,7 @@ body.mano #tierra, body.mano #rutas { cursor: pointer; }
 #escena { opacity: 0; transform: scale(.94); transition: opacity 1.6s cubic-bezier(.2,.7,.2,1), transform 2.4s cubic-bezier(.2,.7,.2,1); }
 .listo #escena { opacity: 1; transform: none; }
 
-.geo { position: fixed; left: 50%; top: 50%; pointer-events: none; border-radius: 50%; transform: translate(-50%, -50%); }
+.geo { position: fixed; left: 50%; top: var(--cy, 50%); pointer-events: none; border-radius: 50%; transform: translate(-50%, -50%); } /* --cy: the planet's centre on a phone (orbita.js, centroAlto) */
 #anillo { width: calc(var(--anillo) * 2); height: calc(var(--anillo) * 2); }
 #anillo circle { fill: none; stroke: rgba(156,195,228,.26); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.2s cubic-bezier(.6,0,.2,1) .6s; }
 .listo #anillo circle { stroke-dashoffset: 0; }
@@ -37,7 +37,7 @@ body.mano #tierra, body.mano #rutas { cursor: pointer; }
 @keyframes pulso { 0% { border-color: rgba(224,122,108,.55); transform: translate(-50%,-50%) scale(.985); } 100% { border-color: rgba(224,122,108,0); transform: translate(-50%,-50%) scale(1.09); } }
 .cruz { position: fixed; background: rgba(156,195,228,.07); pointer-events: none; }
 .cruz.v { left: 50%; top: 5vh; bottom: 5vh; width: 1px; }
-.cruz.h { top: 50%; left: 5vw; right: 5vw; height: 1px; }
+.cruz.h { top: var(--cy, 50%); left: 5vw; right: 5vw; height: 1px; }
 
 /* The nine doors */
 #puertas { position: fixed; inset: 0; pointer-events: none; }
@@ -466,6 +466,26 @@ body.dentro .sat-fase { opacity: 0; pointer-events: none; }
 .conexion button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 body.dentro .conexion { opacity: 0; pointer-events: none; }
 @media (max-width: 760px) { .conexion { top: auto; bottom: 0; right: 0; left: 0; width: 100%; max-width: none; max-height: 70vh; border-radius: 16px 16px 0 0; } }
+/* «Mi conexión» on a phone (owner, 23 Oct 2026, 18:58: «en la parte izquierda se come el lateral… no se ve la información»;
+   «tiene que volver a haber botón de volver atrás»). One column (each label over its value), nothing wider than the
+   screen, a «Volver» at the start of the title, and the sheet stops under the header's buttons: the layer bar steps
+   aside while it is open, so nothing shows through. */
+.conexion .volver-m { display: none; }
+@media (max-width: 760px) {
+  .conexion { left: 0; right: 0; width: auto; box-sizing: border-box; overflow-x: hidden; padding: 12px 16px calc(14px + env(safe-area-inset-bottom, 0px)); gap: 4px; } /* width 100% + padding made it 34 px wider than the screen */
+  .conexion .titulo { gap: 10px; flex-wrap: wrap; padding: 2px 0 10px; }
+  .conexion .titulo > span { flex: 1; min-width: 0; }
+  html .conexion .titulo .cerrar { display: none; } /* «Volver» takes its place on a phone */
+  .conexion .volver-m { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px 8px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--fg); font: 500 13px/1 var(--texto); letter-spacing: 0; text-transform: none; background: rgba(156,195,228,.06); }
+  .conexion .volver-m:active { background: rgba(156,195,228,.14); }
+  .conexion .volver-m:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .conexion .sat-dl, .conexion .rutas .sat-dl { grid-template-columns: minmax(0, 1fr); row-gap: 1px; }
+  .conexion .sat-dl dt { padding-top: 6px; }
+  .conexion .sat-dl dd { overflow-wrap: anywhere; font-size: 13px; }
+  .conexion h3 { font-size: 14px; margin-bottom: 2px; }
+  .conexion .nota { font-size: 12px; }
+  html body.con-conexion #capas, html body.con-conexion .capa-vista, html body.con-conexion #sat-vista, html body.con-conexion #sat-fase, html body.con-conexion #capa-nota { opacity: 0 !important; pointer-events: none !important; transition: opacity .25s; } /* above «solo-tu» (.25) */
+}
 /* while «Mi conexión» is open the planet is empty of everything that is not the visitor's: the layer buttons rest */
 body.solo-tu #capas, body.solo-tu #sat-vista, body.solo-tu #sat-fase, body.solo-tu #capa-nota, body.solo-tu #directo { opacity: .25 !important; pointer-events: none; }
 /* the small list of data centres under a crowded spot (22 Oct 2026) */
@@ -605,6 +625,16 @@ body.viaje.viaje-fin .altura { opacity: 1 !important; transition-delay: 0s; }
 .informe .pie { margin: 0; font: 400 10.5px/1.5 var(--mono); color: #8A95A2; }
 @media (max-width: 1000px) { .informe .dos { grid-template-columns: 1fr; } .informe .cab .t { font-size: 28px; } }
 #viaje.final .abajo { display: none; }
+/* the journey on a phone (owner, 23 Oct 2026, 18:59: he could not find it there): the same show, sized for a small screen */
+@media (max-width: 760px) {
+  #viaje .arriba { left: calc(16px + env(safe-area-inset-left, 0px)); right: 16px; top: calc(14px + env(safe-area-inset-top, 0px)); }
+  #viaje .centro, #viaje .fin { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); padding: 0 16px; }
+  #viaje .cifras { gap: 28px; }
+  #viaje .cifras b { font-size: 34px; }
+  #viaje .fin .t { font-size: 22px; }
+  #viaje .abajo { right: 0; left: 0; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); justify-content: center; }
+  #viaje::before { height: 240px; }
+}
 @media print {
   body.imprime-informe > *:not(#informe) { display: none !important; }
   body.imprime-informe { background: #06080C; }

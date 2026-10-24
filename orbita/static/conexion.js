@@ -231,7 +231,9 @@
   function pinta() {
     if (!panel) return;
     const cuerpo = panel.querySelector('.cuerpo'); cuerpo.textContent = '';
-    if (enPC() && window.OrbitaViaje) cuerpo.append(seccionViaje());
+    // 23 Oct 2026, 18:59 (owner: «no veo por ningún lado eso de ver el viaje de mis datos en 3D», on his phone): on every
+    // screen now, not only on a computer; the journey's own screen adapts to a phone (orbita.css, #viaje)
+    if (window.OrbitaViaje) cuerpo.append(seccionViaje());
     const f = filasLocales();
     cuerpo.append(seccion(T('Ahora mismo'), f.ahora, T('Medido en este navegador, sin consultar a nadie.')));
     const sf = filasFuera();
@@ -375,8 +377,23 @@
       datos,
     };
   }
-  function abre(si) {
+  // 23 Oct 2026, 18:58 (owner, phone: «tiene que volver a haber botón de volver atrás»): opening the panel adds a step to
+  // the history, so the phone's own back (button or gesture) closes it instead of leaving the site; «Volver» does the same.
+  const enHistoria = () => !!(history.state && history.state.conexion);
+  function cierraConVolver() { if (enHistoria()) history.back(); else { abre(false); if (location.hash === '#mi-conexion') history.replaceState(history.state, '', location.pathname + location.search); } }
+  // on a phone the panel is a sheet from the bottom up to just under the header's buttons (the layer bar hides meanwhile)
+  function altoHoja() {
+    if (!panel) return;
+    if (innerWidth > 760) { panel.style.removeProperty('max-height'); return; }
+    const d = document.querySelector('header .derecha'), b = d ? d.getBoundingClientRect().bottom : 0;
+    panel.style.maxHeight = Math.max(260, Math.round(innerHeight - b - 12)) + 'px';
+  }
+  function abre(si, porHistoria) {
+    // closed from elsewhere (another panel, the journey): the step stays in the history, but without the panel
+    if (!si && abierto && !porHistoria && enHistoria()) { const st = Object.assign({}, history.state); delete st.conexion; history.replaceState(st, '', location.pathname + location.search); }
+    if (si && !abierto && !enHistoria()) { const st = Object.assign({}, history.state, { conexion: 1 }); if (location.hash === '#mi-conexion') history.replaceState(st, ''); else history.pushState(st, '', '#mi-conexion'); }
     abierto = si; panel.hidden = !si; boton.setAttribute('aria-pressed', si ? 'true' : 'false');
+    document.body.classList.toggle('con-conexion', si); altoHoja();
     guarda(si ? 'ver' : 'no');
     if (window.OrbitaCapas && window.OrbitaCapas.soloTu) window.OrbitaCapas.soloTu(si, pintaMio);
     if (si) { preparaRed(); pinta(); if (ping == null) latencia().then((ms) => { ping = ms; if (abierto) pinta(); }); }
@@ -392,10 +409,13 @@
     // «Descargar» (owner, 23 Oct 2026, 15:50): what the panel shows, as a report or as data, made in this browser
     if (window.GuardianaDescargas) { const titulo = panel.querySelector('.titulo'); titulo.insertBefore(window.GuardianaDescargas.boton(documento), titulo.querySelector('.cerrar')); }
     boton.addEventListener('click', () => abre(!abierto));
-    panel.querySelector('.cerrar').addEventListener('click', () => abre(false));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && abierto && !document.body.classList.contains('viaje') && !document.body.classList.contains('con-informe')) abre(false); }, true); // capture: runs before the journey's own Escape, while it is still on
+    panel.querySelector('.cerrar').addEventListener('click', cierraConVolver);
+    { const v = document.createElement('button'); v.type = 'button'; v.className = 'volver-m'; v.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg><span></span>'; v.querySelector('span').textContent = T('Volver'); v.addEventListener('click', cierraConVolver); panel.querySelector('.titulo').prepend(v); }
+    addEventListener('popstate', () => { if (abierto && !enHistoria()) abre(false, true); else if (!abierto && enHistoria()) abre(true, true); });
+    addEventListener('resize', () => { if (abierto) altoHoja(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && abierto && !document.body.classList.contains('viaje') && !document.body.classList.contains('con-informe')) cierraConVolver(); }, true); // capture: runs before the journey's own Escape, while it is still on
     window.addEventListener('online', () => abierto && pinta()); window.addEventListener('offline', () => abierto && pinta());
-    window.addEventListener('guardiana-idioma', () => { boton.querySelector('span').textContent = T('Ver mi conexión'); panel.querySelector('.titulo > span').textContent = T('Mi conexión'); { const x = panel.querySelector('.cerrar'); x.setAttribute('aria-label', T('Cerrar')); x.title = T('Cerrar'); } panel.querySelector('.pie').textContent = T('Son tus datos y de nadie más. Nada se guarda fuera de este equipo.'); if (abierto) pinta(); });
+    window.addEventListener('guardiana-idioma', () => { boton.querySelector('span').textContent = T('Ver mi conexión'); panel.querySelector('.titulo > span:not(:empty)').textContent = T('Mi conexión'); panel.querySelector('.volver-m span').textContent = T('Volver'); { const x = panel.querySelector('.cerrar'); x.setAttribute('aria-label', T('Cerrar')); x.title = T('Cerrar'); } panel.querySelector('.pie').textContent = T('Son tus datos y de nadie más. Nada se guarda fuera de este equipo.'); if (abierto) pinta(); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', monta); else monta();
   window.OrbitaConexion = { abre, ruta, medirRutas: mideRutas, trayecto, porSatelite, get datos() { return { local: filasLocales(), fuera: fuera, ping, rutas, rutaReal }; } };

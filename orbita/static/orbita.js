@@ -240,6 +240,32 @@
   const LIMPIO_DESDE = 4; // from here the planet is drawn flat: black water, grey land, data in white // 22 Oct 2026 (owner): «sube más el zoom aún» // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
+  // 23 Oct 2026, 18:55 (owner, on his phone: «el planeta está muy arriba, tiene que quedar justo en el medio; busca la
+  // simetría perfecta»). On a phone the header (brand, buttons and the layer bar) fills the top and the doors the bottom
+  // line, so the middle of the screen is not the middle of the free space: the planet goes to the centre of the band
+  // between the layer bar and the doors, with the same air above and below. Measured, not guessed; everywhere else
+  // (tablets and computers, doors at the side) it stays in the middle of the window.
+  function centroAlto() {
+    const sinBanda = () => { RAIZ.style.removeProperty('--cy'); return H / 2; };
+    if (W > 760 || !document.body.classList.contains('dock')) return sinBanda();
+    const capas = $('capas'), rc = capas && capas.getBoundingClientRect();
+    if (!rc || rc.height < 1) return sinBanda();
+    let abajo = H;
+    for (const b of document.querySelectorAll('#puertas .puerta button')) {
+      const r = b.getBoundingClientRect(); if (r.height < 1 || r.top < H / 2) continue;
+      abajo = Math.min(abajo, r.top + (parseFloat(getComputedStyle(b).paddingTop) || 0)); // the dot and the name, not the padding
+    }
+    const arriba = rc.bottom;
+    if (abajo - arriba < 120) return sinBanda();
+    const cy = Math.round((arriba + abajo) / 2);
+    RAIZ.style.setProperty('--cy', cy + 'px');
+    return cy;
+  }
+  // the band changes when the header wraps differently (another language, a city chosen, the fonts arriving)
+  function recentra() { if (W && H) CY = centroAlto(); }
+  if (window.ResizeObserver) { const ro = new ResizeObserver(() => recentra()); for (const id of ['capas', 'puertas']) { const e = $(id); if (e) ro.observe(e); } }
+  addEventListener('guardiana-idioma', () => setTimeout(recentra, 0));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(recentra);
   function mide() {
     W = innerWidth; H = innerHeight;
     // 22 Oct 2026 (owner: «máxima calidad, 4K»): the screen's own resolution, up to a 4K budget of pixels
@@ -256,7 +282,7 @@
     else U = Math.max(3, Math.min(H / 100, W * 0.0062, (W / 2 - 40 - 290 - 24 - 130) / 26.4, (H / 2 - 150) / 41));
     RAIZ.style.setProperty('--u', U.toFixed(3) + 'px');
     // 20 Oct 2026 (owner): a bigger planet; the doors' ring stays at 41 units, so ZERO keeps its air above.
-    CX = W / 2; CY = H / 2; R0 = U * 34; R = R0 * ZOOM.z;
+    CX = W / 2; CY = centroAlto(); R0 = U * 34; R = R0 * ZOOM.z;
     for (const c of [cvE, cvT, cvR]) { c.width = Math.round(W * DPR); c.height = Math.round(H * DPR); }
     cx2.setTransform(DPR, 0, 0, DPR, 0, 0);
     pintaEstrellas();
