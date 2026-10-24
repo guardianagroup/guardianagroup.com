@@ -1,6 +1,44 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-Actualizado el sábado 24 de octubre de 2026 a las 07:05, hora de Bogotá. Escrito al cerrar la cuenta anterior, al 92 % de su uso semanal. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
+Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al cerrar la cuenta anterior al 96 % de su uso semanal. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
+
+## Estado al cerrar la cuenta (24 Oct 2026, 10:05, al 96 % de uso)
+
+**En vivo en guardianagroup.com (ramas `main` y `web-idiomas` al día)**
+- **Cables por tierra:** 168 países, 1.295.144 km. Hay 277 tramos de la agencia confirmados por dos voces de siete: Astra 6, ChatGPT («Alta» e investigación profunda), Gemini, Grok, Kimi y Claude con fuentes oficiales.
+  - En los países sin fuentes abiertas se aceptan tramos aproximados (dueño: «lo más aproximado posible»).
+  - Siria, Yemen y Palestina entran «en servicio parcial».
+  - Corea del Norte se mantiene, lo pidió el dueño.
+  - Fuera: Eritrea (usa radioenlaces), Guinea-Bisáu (red en licitación) e islas y territorios muy pequeños.
+- **Cables submarinos:** 518 cables enteros y 1.473 llegadas con su pueblo (GeoNames cities500).
+- **Reglas de `herramientas/fibra_agencia.py`:**
+  - acepta operadores distintos;
+  - acepta ciudades de frontera a menos de 800 km;
+  - aplica tramos aproximados en los países de `APROX`;
+  - da por buenas las redes «en servicio parcial».
+- **Reglas de `cables_agencia.py`:** los cables cortos dentro de un país conservan sus dos llegadas, y los pueblos de frontera valen si dos voces los sitúan.
+- **Antártida:** la investigación profunda confirma que no hay fibra entre bases ni llega ningún cable. Las bases van por satélite. Hay que ponerlo así en su ficha (pendiente).
+
+**Lo que quedó a medias**
+- **Astra 6, revisión por continentes** (ronda 23): hecha África 1–3; se paró al 96 %. Pregunta en `herramientas/agencia-rondas/ronda23/pregunta.txt` y tandas en la ronda 23. Faltan África 4–8, Asia, América, Europa y Oceanía. El saldo de Astra es de unos 7,5 US$.
+- **Kimi:** saturado para cuentas gratuitas en la hora punta de China. Las 13 preguntas pendientes están en la ronda 17 y la 18; ver `kimi-*` en `fibra-agencia` y `cables-agencia`. Reintentar fuera de esa hora.
+- **Gemini:** le falta el lote 9 (KP, TD, NI, CV), con límite de uso hasta las 12:47 del 24 de octubre.
+- **Grok:** le faltan los lotes 8 y 9, desde el 27 de octubre.
+- **Cables submarinos:** 107 propuestos por una sola voz que no tienen fuente oficial (`ronda19/cables-por-confirmar.json` y `claude-cables-fuentes.txt`).
+- **Proceso después de cada respuesta:**
+  1. Publica las respuestas en `main`.
+  2. Lanza `gh workflow run pueblos-cables.yml --ref main`.
+  3. Trae `herramientas/fuentes/pueblos-fibra.tsv` y `orbita/datos/lugares-capas.json`.
+  4. Ejecuta `fibra_agencia.py` y `fibra_tierra.py --sin-ofds`, o `cables_agencia.py` y `lugares_capas.py`.
+  5. Publica en las dos ramas.
+
+**Lo siguiente que pidió el dueño (después de cerrar los países)**
+1. **Captura para que el dueño apruebe** antes de programar:
+   - el botón «Países», con las vistas Velocidad (Measurement Lab), Conectividad (Banco Mundial) y Cortes;
+   - la **línea del tiempo**, con **foto y vídeo** para compartir.
+2. **Comparativa de los 11 diarios** con su metodología y paquete de prensa. Antes de publicar, darles a los diarios su derecho de respuesta.
+3. **Ficha de país** con datos de conectividad.
+- Las ideas y estrategias de Astra 6 (navegador, cuántica, comunicaciones, ZERO, buscador, hardware, sin descarga, campaña viral, Órbita) están en `herramientas/agencia-rondas/ronda20/` y `ronda21/`.
 
 ## Primeros pasos de la cuenta nueva (24 Oct 2026, 07:05)
 
