@@ -23,6 +23,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 12:00, hora de Bogotá, al ce
   - No llega ningún cable submarino en servicio. Nueva Zelanda–McMurdo y Chile–isla Rey Jorge son proyectos o estudios.
   - Las bases salen a internet por satélite: Starlink en McMurdo y Rothera; ANARESAT y Starlink en Casey, Davis y Mawson; TDRSS, DSCS e Iridium en el Polo Sur.
   - Sobre la fibra entre bases, Astra no lo confirma ni lo descarta: hay redes locales, como la de IceCube en el Polo Sur. En la ficha no hay que decir que no existe.
+  - Las fichas de país solo salen al pulsar el nombre del país, y los nombres solo se ven con el planeta gris («limpio»). La Antártida está entre los centros de país de `orbita.js` (constante `P`), así que su ficha se abre igual que las demás. En local no se pudo probar, porque la clase `limpio` la pone la propia página.
   - Ya está en su ficha (`orbita/datos/paises.json`, «AQ», con «Datos verificados»), solo con lo que dicen las dos voces: ningún cable submarino y salida por satélite, con Starlink en McMurdo y ANARESAT en las bases australianas.
 
 **Cómo deciden los generadores (cambios de esta noche)**
