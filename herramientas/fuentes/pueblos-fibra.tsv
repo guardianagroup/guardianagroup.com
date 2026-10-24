@@ -1229,8 +1229,15 @@ petitgoave	HT	18.43117	-72.86521	117504	Tigwav
 portauprince	HT	18.54349	-72.33881	1234742	Port-au-Prince
 saintmarc	HT	19.11136	-72.70078	266642	Saint-Marc
 budapest	HU	47.49835	19.04045	1741041	Budapest
+csorna	HU	47.61155	17.25012	10825	Csorna
+gyor	HU	47.68333	17.63512	129301	Győr
 kecskemet	HU	46.90618	19.69128	109847	Kecskemét
+kiskunfelegyhaza	HU	46.71213	19.84458	31720	Kiskunfélegyháza
+nagykanizsa	HU	46.45347	16.99104	47349	Nagykanizsa
+siofok	HU	46.90413	18.058	23028	Siófok
+sopron	HU	47.68501	16.59049	62246	Sopron
 szeged	HU	46.253	20.14824	160766	Szeged
+szekesfehervar	HU	47.18995	18.41034	101600	Székesfehérvár
 bandaaceh	ID	5.54167	95.33333	267962	Banda Aceh
 bandarlampung	ID	-5.42917	105.26111	1166066	Bandar Lampung
 bandung	ID	-6.92222	107.60694	2528163	Bandung
@@ -1277,8 +1284,18 @@ tentena	ID	-1.7562	120.648	0	Tentena
 tuban	ID	-6.8976	112.0649	76242	Tuban
 wates	ID	-7.85722	110.15694	0	Wates
 yogyakarta	ID	-7.80139	110.36472	375699	Yogyakarta
+athlone	IE	53.42278	-7.93722	22869	Athlone
+ballinasloe	IE	53.3275	-8.21944	6662	Ballinasloe
+cashel	IE	52.51583	-7.88556	4422	Cashel
 cork	IE	51.89797	-8.47061	224004	Cork
+drogheda	IE	53.71889	-6.34778	44135	Drogheda
 dublin	IE	53.33306	-6.24889	1024027	Dublin
+dundalk	IE	54.0	-6.41667	43112	Dundalk
+fermoy	IE	52.13583	-8.27583	6585	Fermoy
+galway	IE	53.27245	-9.05095	85910	Galway
+kinnegad	IE	53.45222	-7.09972	2662	Kinnegad
+naas	IE	53.21583	-6.66694	20713	Naas
+portlaoise	IE	53.03441	-7.29979	23494	Portlaoise
 beersheba	IL	31.25181	34.7913	186600	Beersheba
 dimona	IL	31.07079	35.03269	36192	Dimona
 eilat	IL	29.55805	34.94821	52299	Eilat
@@ -1402,12 +1419,30 @@ tehran	IR	35.69439	51.42151	7153309	Tehran
 yazd	IR	31.89722	54.3675	477905	Yazd
 zanjan	IR	36.67642	48.49628	357471	Zanjan
 akureyri	IS	65.68353	-18.0878	19219	Akureyri
+blonduos	IS	65.65932	-20.28083	895	Blönduós
+borgarnes	IS	64.53834	-21.92064	1875	Borgarnes
+egilsstair	IS	65.26687	-14.39485	2572	Egilsstaðir
+hella	IS	63.8348	-20.40084	865	Hella
+hofn	IS	64.25388	-15.21212	1690	Höfn
+hvolsvollur	IS	63.75069	-20.22454	1108	Hvolsvöllur
 reykjavik	IS	64.13548	-21.89541	118918	Reykjavík
+selfoss	IS	63.93311	-20.99712	9000	Selfoss
+vik	IS	63.41944	-19.00972	750	Vík í Mýrdal
 bologna	IT	44.49381	11.33875	394843	Bologna
+brescia	IT	45.53558	10.21472	200423	Brescia
+cosenza	IT	39.2989	16.25307	63852	Cosenza
 florence	IT	43.77925	11.24626	367150	Florence
+lameziaterme	IT	38.96255	16.30938	70501	Lamezia Terme
 milan	IT	45.46427	9.18951	1371498	Milan
 naples	IT	40.85216	14.26811	909048	Naples
+padua	IT	45.40797	11.88586	203725	Padua
+reggiocalabria	IT	38.11047	15.66129	182455	Reggio Calabria
 rome	IT	41.89193	12.51133	2318895	Rome
+salerno	IT	40.67545	14.79328	125797	Salerno
+trieste	IT	45.64953	13.77678	204338	Trieste
+turin	IT	45.07049	7.68682	847287	Turin
+venice	IT	45.43713	12.33265	51298	Venice
+verona	IT	45.43854	10.9938	258031	Verona
 annottobay	JM	18.2717	-76.76523	5504	Annotto Bay
 blackriver	JM	18.02636	-77.84873	4229	Black River
 discoverybay	JM	18.45873	-77.39997	8257	Discovery Bay
@@ -1672,11 +1707,30 @@ quthing	LS	-30.40001	27.70027	33910	Quthing
 roma	LS	-29.44667	27.70806	14259	Roma
 teyateyaneng	LS	-29.14719	27.74895	27272	Teyateyaneng
 thabatseka	LS	-29.52204	28.6084	16765	Thaba-Tseka
+elektrenai	LT	54.78544	24.66302	13501	Elektrėnai
 kaunas	LT	54.90156	23.90909	289380	Kaunas
 klaipeda	LT	55.7068	21.13912	172292	Klaipėda
+panevezys	LT	55.73186	24.35983	85885	Panevėžys
+radviliskis	LT	55.81667	23.53333	16344	Radviliskis
+siauliai	LT	55.93333	23.31667	99462	Šiauliai
+ukmerge	LT	55.25	24.75	20154	Ukmerge
+vievis	LT	54.77258	24.81129	4521	Vievis
 vilnius	LT	54.68916	25.2798	542366	Vilnius
 daugavpils	LV	55.88333	26.53333	78126	Daugavpils
+grobina	LV	56.53521	21.16782	3674	Grobiņa
+jekabpils	LV	56.49903	25.85735	21014	Jēkabpils
+koknese	LV	56.65163	25.43637	2906	Koknese
+lielvarde	LV	56.72066	24.80743	5873	Lielvārde
+liepaja	LV	56.50474	21.01085	67421	Liepāja
+livani	LV	56.35431	26.17579	6790	Līvāni
+ogre	LV	56.8162	24.61401	22767	Ogre
 riga	LV	56.946	24.10589	742572	Riga
+salaspils	LV	56.86014	24.36544	17826	Salaspils
+saldus	LV	56.66363	22.48807	9553	Saldus
+skrunda	LV	56.67749	22.01649	1767	Skrunda
+strenci	LV	57.62574	25.68535	973	Strenči
+valka	LV	57.7752	26.01013	4615	Valka
+valmiera	LV	57.54108	25.42751	22812	Valmiera
 ventspils	LV	57.39485	21.56121	32723	Ventspils
 alkhums	LY	32.64861	14.26191	201943	Al Khums
 misratah	LY	32.37535	15.09254	355657	Misratah
