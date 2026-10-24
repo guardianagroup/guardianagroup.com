@@ -1,0 +1,241 @@
+[
+  {
+    "nombre": "Cabo Verde Telecom Domestic Submarine Cable Network",
+    "llegadas": [
+      {
+        "lugar": "Praia",
+        "pais": "CV",
+        "lat": 14.923,
+        "lon": -23.5212
+      },
+      {
+        "lugar": "Murdeira",
+        "pais": "CV",
+        "lat": 16.6771,
+        "lon": -22.9353
+      },
+      {
+        "lugar": "Sal Rei",
+        "pais": "CV",
+        "lat": 16.1772,
+        "lon": -22.919
+      },
+      {
+        "lugar": "Tarrafal de Sao Nicolau",
+        "pais": "CV",
+        "lat": 16.5659,
+        "lon": -24.3572
+      },
+      {
+        "lugar": "Sao Pedro",
+        "pais": "CV",
+        "lat": 16.8234,
+        "lon": -25.0608
+      },
+      {
+        "lugar": "Porto Novo",
+        "pais": "CV",
+        "lat": 17.0192,
+        "lon": -25.0594
+      },
+      {
+        "lugar": "Tarrafal de Santiago",
+        "pais": "CV",
+        "lat": 15.2768,
+        "lon": -23.7511
+      },
+      {
+        "lugar": "Nova Sintra",
+        "pais": "CV",
+        "lat": 14.873,
+        "lon": -24.6954
+      },
+      {
+        "lugar": "Sao Filipe",
+        "pais": "CV",
+        "lat": 14.8971,
+        "lon": -24.5009
+      },
+      {
+        "lugar": "Vila do Maio",
+        "pais": "CV",
+        "lat": 15.1384,
+        "lon": -23.2098
+      }
+    ],
+    "anio": 1997,
+    "km": 0,
+    "duenos": [
+      "Cabo Verde Telecom S.A."
+    ],
+    "fuentes": [
+      "https://www.eib.org/en/press/all/2024-319-global-gateway-l-equipe-europe-renforce-son-soutien-au-secteur-numerique-aux-infrastructures-portuaires-et-aux-energies-renouvelables-de-cabo-verde",
+      "https://www.eib.org/en/projects/all/20220836",
+      "https://www.eib.org/files/procurement/non-eu-notices/20220836TENDERINVCN-CSII4DESIGNSUPPLYANDINSTALLATIONOFSIXSEGMENTSOFCABOVERDETELECOMSSUBMARINEINTERISLAND.pdf"
+    ]
+  },
+  {
+    "nombre": "Bahamas Domestic Submarine Network (BDSNi)",
+    "llegadas": [
+      {
+        "lugar": "Nassau",
+        "pais": "BS",
+        "lat": 25.067,
+        "lon": -77.3403
+      },
+      {
+        "lugar": "Fresh Creek",
+        "pais": "BS",
+        "lat": 24.6898,
+        "lon": -77.8446
+      },
+      {
+        "lugar": "Sandy Point",
+        "pais": "BS",
+        "lat": 26.0252,
+        "lon": -77.3995
+      },
+      {
+        "lugar": "Hawksbill",
+        "pais": "BS",
+        "lat": 26.5169,
+        "lon": -78.7368
+      },
+      {
+        "lugar": "Governors Harbour",
+        "pais": "BS",
+        "lat": 25.1961,
+        "lon": -76.2406
+      },
+      {
+        "lugar": "Rock Sound",
+        "pais": "BS",
+        "lat": 24.425,
+        "lon": -76.5744
+      },
+      {
+        "lugar": "Cat Island",
+        "pais": "BS",
+        "lat": 24.4033,
+        "lon": -75.5259
+      },
+      {
+        "lugar": "George Town",
+        "pais": "BS",
+        "lat": 23.5166,
+        "lon": -75.788
+      },
+      {
+        "lugar": "Port Nelson",
+        "pais": "BS",
+        "lat": 23.6521,
+        "lon": -74.8405
+      },
+      {
+        "lugar": "Clarence Town",
+        "pais": "BS",
+        "lat": 23.0983,
+        "lon": -74.9662
+      },
+      {
+        "lugar": "Duncan Town",
+        "pais": "BS",
+        "lat": 22.1833,
+        "lon": -75.7335
+      },
+      {
+        "lugar": "Cockburn Town",
+        "pais": "BS",
+        "lat": 24.0525,
+        "lon": -74.5302
+      },
+      {
+        "lugar": "Mayaguana",
+        "pais": "BS",
+        "lat": 22.4016,
+        "lon": -73.0641
+      },
+      {
+        "lugar": "Matthew Town",
+        "pais": "BS",
+        "lat": 20.9505,
+        "lon": -73.6831
+      },
+      {
+        "lugar": "Port-au-Prince",
+        "pais": "HT",
+        "lat": 18.5427,
+        "lon": -72.3431
+      }
+    ],
+    "anio": 2006,
+    "km": 2735,
+    "duenos": [
+      "Bahamas Telecommunications Company (BTC)"
+    ],
+    "fuentes": [
+      "https://www.btcbahamas.com/business/modules/custom/btc_utilities/templates/btc-timeline//",
+      "https://publications.iadb.org/publications/english/document/Assessment-of-the-Effects-and-Impacts-caused-by-Hurricane-Irma-The-Bahamas-2017.pdf",
+      "https://www.internetsociety.org/wp-content/uploads/2017/08/ISOC_Small_Island_Developing_States-201706015.pdf"
+    ]
+  },
+  {
+    "nombre": "AU-Aleutians",
+    "llegadas": [
+      {
+        "lugar": "Kodiak",
+        "pais": "US",
+        "lat": 57.79,
+        "lon": -152.4072
+      },
+      {
+        "lugar": "Larsen Bay",
+        "pais": "US",
+        "lat": 57.5389,
+        "lon": -153.9844
+      },
+      {
+        "lugar": "Chignik",
+        "pais": "US",
+        "lat": 56.2953,
+        "lon": -158.4047
+      },
+      {
+        "lugar": "Sand Point",
+        "pais": "US",
+        "lat": 55.3366,
+        "lon": -160.4961
+      },
+      {
+        "lugar": "King Cove",
+        "pais": "US",
+        "lat": 55.0617,
+        "lon": -162.3103
+      },
+      {
+        "lugar": "Akutan",
+        "pais": "US",
+        "lat": 54.1356,
+        "lon": -165.7731
+      },
+      {
+        "lugar": "Unalaska",
+        "pais": "US",
+        "lat": 53.8736,
+        "lon": -166.5367
+      }
+    ],
+    "anio": 2022,
+    "km": 1288,
+    "duenos": [
+      "GCI Communication Corp.",
+      "Unicom, Inc."
+    ],
+    "fuentes": [
+      "https://www.gci.com/about/digital-divide/aleutian-fiber-project",
+      "https://news.gci.com/news-releases/subsea-fiber-arrives-in-unalaska-for-gcis-au-aleutians-fiber-project",
+      "https://news.gci.com/news-releases/chignik-bay-residents-now-have-access-to-gcis-2-5-gig-consumer-internet-speeds",
+      "https://news.gci.com/news-releases/intrepid-crew-completes-major-milestone-for-gcis-au-aleutians-fiber-project"
+    ]
+  }
+]
