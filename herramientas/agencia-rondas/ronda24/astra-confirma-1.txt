@@ -1,0 +1,44 @@
+[
+  {
+    "nombre": "Almería-Melilla (ALME)",
+    "llegadas": [
+      {
+        "lugar": "Almería",
+        "pais": "ES",
+        "lat": 36.83814,
+        "lon": -2.45974
+      },
+      {
+        "lugar": "Melilla",
+        "pais": "ES",
+        "lat": 35.29369,
+        "lon": -2.93833
+      }
+    ],
+    "anio": 2011,
+    "km": 200,
+    "duenos": ["Telefónica"],
+    "fuentes": ["https://www.telefonica.com/"]
+  },
+  {
+    "nombre": "Roquetas-Melilla (CAM)",
+    "llegadas": [
+      {
+        "lugar": "Roquetas de Mar",
+        "pais": "ES",
+        "lat": 36.76419,
+        "lon": -2.61475
+      },
+      {
+        "lugar": "Melilla",
+        "pais": "ES",
+        "lat": 35.29369,
+        "lon": -2.93833
+      }
+    ],
+    "anio": 1995,
+    "km": 200,
+    "duenos": ["Telefónica"],
+    "fuentes": ["https://www.telefonica.com/"]
+  }
+]
