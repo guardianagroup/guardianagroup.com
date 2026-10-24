@@ -85,6 +85,15 @@ vanadzor	AM	40.8074	44.49704	78100	Vanadzor
 vayk	AM	39.69026	45.46919	5453	Vayk
 yeghegnadzor	AM	39.7644	45.33268	7300	Yeghegnadzor
 yerevan	AM	40.17765	44.5126	1144700	Yerevan
+benguela	AO	-12.57674	13.40268	555124	Benguela
+catete	AO	-9.10567	13.68816	0	Catete
+lobito	AO	-12.3644	13.53601	393079	Lobito
+luanda	AO	-8.83682	13.23432	2776168	Luanda
+lubango	AO	-14.91717	13.4925	600751	Lubango
+lucala	AO	-9.27268	15.25206	19422	Lucala
+malanje	AO	-9.54015	16.34096	455000	Malanje
+ndalatando	AO	-9.29782	14.91162	161584	N'dalatando
+sumbe	AO	-11.20605	13.84371	205832	Sumbe
 bahiablanca	AR	-38.7176	-62.26545	299101	Bahía Blanca
 buenosaires	AR	-34.61315	-58.37723	2891082	Buenos Aires
 catamarca	AR	-28.46957	-65.78524	159139	Catamarca
@@ -114,6 +123,20 @@ santafe	AR	-31.64881	-60.70868	391164	Santa Fe
 tolhuin	AR	-54.51083	-67.1955	3000	Tolhuin
 trelew	AR	-43.24895	-65.30505	97915	Trelew
 ushuaia	AR	-54.81084	-68.31591	56825	Ushuaia
+innsbruck	AT	47.26266	11.39454	132493	Innsbruck
+linz	AT	48.30639	14.28611	204846	Linz
+salzburg	AT	47.79941	13.04399	157245	Salzburg
+vienna	AT	48.20849	16.37208	1691468	Vienna
+adelaide	AU	-34.92866	138.59863	1469163	Adelaide
+brisbane	AU	-27.46794	153.02809	2780063	Brisbane
+darwin	AU	-12.46113	130.84185	139902	Darwin
+geraldton	AU	-28.77897	114.61459	38595	Geraldton
+meekatharra	AU	-26.59524	118.49393	675	Meekatharra
+melbourne	AU	-37.814	144.96332	5435590	Melbourne
+newman	AU	-23.35644	119.73553	12316	Newman
+perth	AU	-31.95224	115.8614	2384371	Perth
+porthedland	AU	-20.31215	118.61059	15298	Port Hedland
+sydney	AU	-33.86785	151.20732	5638830	Sydney
 aghstafa	AZ	41.11889	45.45389	12200	Aghstafa
 agstafa	AZ	41.11889	45.45389	12200	Aghstafa
 astara	AZ	38.45598	48.87498	15190	Astara
@@ -216,7 +239,12 @@ sirajganj	BD	24.45771	89.70802	127481	Sirajganj
 sylhet	BD	24.89904	91.87198	237000	Sylhet
 tangail	BD	24.24984	89.91655	180144	Tangail
 tongi	BD	23.89154	90.40232	337579	Tungi
+bruges	BE	51.20892	3.22424	118509	Brugge
+brussels	BE	50.85045	4.34878	1019022	Brussels
+ghent	BE	51.05	3.71667	265086	Gent
+liege	BE	50.63373	5.56749	195278	Liège
 banfora	BF	10.64064	-4.75285	117452	Banfora
+bitou	BF	11.25806	-0.30611	31210	Bittou
 bittou	BF	11.25806	-0.30611	31210	Bittou
 bobodioulasso	BF	11.18064	-4.29489	904920	Bobo-Dioulasso
 boromo	BF	11.74542	-2.93006	20193	Boromo
@@ -234,12 +262,17 @@ ouagadougou	BF	12.36566	-1.53388	2415266	Ouagadougou
 ouahigouya	BF	13.5769	-2.41786	124587	Ouahigouya
 pa	BF	12.66667	-3.95	15170	Pa
 po	BF	11.16972	-1.145	28079	Pô
+sabou	BF	12.06667	-2.23333	15060	Sabou
 tenkodogo	BF	11.78442	-0.37184	61936	Tenkodogo
 titao	BF	13.76667	-2.06667	48241	Titao
 tougan	BF	13.07237	-3.06939	26347	Tougan
 yako	BF	12.9591	-2.26075	38679	Yako
 zabre	BF	11.1825	-0.63222	21726	Zabré
 zorgho	BF	12.24922	-0.61527	35398	Zorgo
+burgas	BG	42.50651	27.46886	210646	Burgas
+plovdiv	BG	42.15387	24.75001	329489	Plovdiv
+sofia	BG	42.69751	23.32415	1152556	Sofia
+starazagora	BG	42.43205	25.64262	121582	Stara Zagora
 almuharraq	BH	26.25722	50.61194	176583	Al Muharraq
 arrifa	BH	26.13	50.555	115495	Ar Rifā‘
 hamadtown	BH	26.11528	50.50694	133550	Madīnat Ḩamad
@@ -252,8 +285,19 @@ muharraq	BH	26.25722	50.61194	176583	Al Muharraq
 riffa	BH	26.13	50.555	115495	Ar Rifā‘
 sitrah	BH	26.15472	50.62056	72601	Sitrah
 zallaq	BH	26.0475	50.48639	9095	Az Zallāq
+bujumbura	BI	-3.38193	29.36142	769317	Bujumbura
+gitega	BI	-3.42708	29.92463	64904	Gitega
+kayanza	BI	-2.9221	29.6293	33682	Kayanza
+kirundo	BI	-2.5845	30.0959	15511	Kirundo
+makamba	BI	-4.1348	29.804	14539	Makamba
+muyinga	BI	-2.8451	30.3414	14869	Muyinga
+ngozi	BI	-2.9075	29.8306	61716	Ngozi
+rumonge	BI	-3.9736	29.4386	55599	Rumonge
+rutana	BI	-3.9279	29.992	9075	Rutana
 abomeycalavi	BJ	6.44852	2.35566	385755	Abomey-Calavi
 allada	BJ	6.66547	2.15138	23287	Allada
+bante	BJ	8.41221	1.88969	17682	Banté
+bassila	BJ	9.00814	1.6654	46569	Bassila
 bembereke	BJ	10.22827	2.66335	31176	Bembèrèkè
 bohicon	BJ	7.17826	2.0667	93744	Bohicon
 come	BJ	6.40764	1.88198	42586	Comé
@@ -264,10 +308,12 @@ grandpopo	BJ	6.28036	1.82251	9847	Grand-Popo
 kandi	BJ	11.13417	2.93861	56043	Kandi
 malanville	BJ	11.86819	3.38327	64639	Malanville
 natitingou	BJ	10.30416	1.37962	53284	Natitingou
+ndali	BJ	9.8636	2.72094	23264	Ndali
 ouidah	BJ	6.36307	2.08506	47616	Ouidah
 parakou	BJ	9.33716	2.63031	255478	Parakou
 portonovo	BJ	6.49646	2.60359	264320	Porto-Novo
 sakete	BJ	6.73618	2.65866	43541	Sakété
+savalou	BJ	7.92807	1.97558	38162	Savalou
 save	BJ	8.03424	2.4866	31444	Savé
 tanguieta	BJ	10.62118	1.26651	27094	Tanguiéta
 tchaourou	BJ	8.88649	2.59753	43862	Tchaourou
@@ -351,6 +397,20 @@ trongsa	BT	27.5026	90.50716	2805	Trongsa
 tsimasham	BT	27.0989	89.53604	2855	Tsimasham
 wangduephodrang	BT	27.48615	89.89915	8954	Wangdue Phodrang
 zhemgang	BT	27.21689	90.65793	852	Shemgang
+francistown	BW	-21.17	27.50778	103417	Francistown
+gaborone	BW	-24.65451	25.90859	246325	Gaborone
+ghanzi	BW	-21.69785	21.64581	19012	Ghanzi
+jwaneng	BW	-24.60167	24.72806	18784	Jwaneng
+kang	BW	-23.67518	22.78762	6764	Kang
+kanye	BW	-24.96675	25.33273	48028	Kanye
+kasane	BW	-17.80165	25.16024	9143	Kasane
+mahalapye	BW	-23.10407	26.81421	48431	Mahalapye
+maun	BW	-19.98333	23.41667	85350	Maun
+mochudi	BW	-24.41667	26.15	50321	Mochudi
+nata	BW	-20.21667	26.18333	7779	Nata
+palapye	BW	-22.54605	27.12507	52636	Palapye
+pandamatenga	BW	-18.52779	25.62698	1685	Pandamatenga
+tonota	BW	-21.44236	27.46153	23296	Tonota
 ashmyany	BY	54.41815	25.93734	16804	Oshmyany
 asipovichy	BY	53.30588	28.62872	28745	Osipovichi
 babruysk	BY	53.14676	29.20548	205502	Bobruysk
@@ -395,23 +455,54 @@ independence	BZ	16.5344	-88.41878	4878	Independence and Mango Creek
 orangewalk	BZ	18.08124	-88.56328	15298	Orange Walk
 puntagorda	BZ	16.09835	-88.8097	5406	Punta Gorda
 sanignacio	BZ	17.1588	-89.0696	21229	San Ignacio
+boma	CD	-5.85098	13.05364	297009	Boma
+kasangulu	CD	-4.5833	15.16554	45400	Kasangulu
+kimpese	CD	-5.5615	14.43159	79539	Kimpese
+kinshasa	CD	-4.32758	15.31357	16000000	Kinshasa
+kolwezi	CD	-10.71484	25.46674	790248	Kolwezi
+likasi	CD	-10.98303	26.7384	635768	Likasi
+lubumbashi	CD	-11.66089	27.47938	2221925	Lubumbashi
+matadi	CD	-5.83861	13.46306	425662	Matadi
+mbanzangungu	CD	-5.25837	14.85838	142773	Mbanza-Ngungu
+muanda	CD	-5.92753	12.37148	128804	Moanda
+baboua	CF	5.79565	14.82799	33739	Baboua
 bangui	CF	4.36122	18.55496	812407	Bangui
 baoro	CF	5.66667	15.96667	18089	Baoro
 bayanga	CF	2.90496	16.26028	8920	Bayanga
 berberati	CF	4.26116	15.79216	103713	Berbérati
 boali	CF	4.80048	18.12747	18090	Boali
 bossembele	CF	5.26667	17.65	17203	Bossembélé
+bouar	CF	5.93404	15.59599	71680	Bouar
 carnot	CF	4.94273	15.87735	129032	Carnot
 gamboula	CF	4.11775	15.13926	13048	Gamboula
 nola	CF	3.52494	16.04583	31923	Nola
 yaloke	CF	5.31953	17.10114	21710	Yaloké
+brazzaville	CG	-4.26613	15.28318	1982000	Brazzaville
+dolisie	CG	-4.19834	12.66664	121000	Dolisie
+gamboma	CG	-1.87639	15.86444	26718	Gamboma
+kinkala	CG	-4.35859	14.76465	12411	Kinkala
+madingou	CG	-4.15361	13.55	1153	Madingou
+makoua	CG	0.00694	15.63333	20550	Makoua
+mindouli	CG	3.10278	18.51111	20985	Mindouli
+nkayi	CG	-4.18396	13.2859	103000	Nkayi
+ouesso	CG	1.61361	16.05167	40667	Ouesso
+owando	CG	-0.48193	15.89988	35698	Owando
+oyo	CG	-1.165	15.97	20630	Oyo
+pointenoire	CG	-4.77609	11.86352	1032000	Pointe-Noire
+bern	CH	46.94809	7.44744	121631	Bern
+geneva	CH	46.20222	6.14569	201741	Geneva
+lausanne	CH	46.516	6.63282	139111	Lausanne
+stgallen	CH	47.42391	9.37477	75833	Sankt Gallen
+zurich	CH	47.36667	8.55	415367	Zürich
 abengourou	CI	6.72972	-3.49639	130810	Abengourou
 abidjan	CI	5.35444	-4.00167	6321017	Abidjan
+aboisso	CI	5.46779	-3.20711	59225	Aboisso
 adzope	CI	6.10694	-3.86194	76122	Adzopé
 agboville	CI	5.92801	-4.21319	81770	Agboville
 agnibilekrou	CI	7.13113	-3.20415	63015	Agnibilékrou
 akoupe	CI	6.38423	-3.88759	35970	Akoupé
 bondoukou	CI	8.0402	-2.80003	141568	Bondoukou
+bonoua	CI	5.27247	-3.59625	49434	Bonoua
 bouake	CI	7.69385	-5.03031	832371	Bouaké
 bouna	CI	9.26927	-2.9951	24312	Bouna
 boundiali	CI	9.52167	-6.48694	51803	Boundiali
@@ -424,6 +515,7 @@ duekoue	CI	6.74202	-7.34918	117023	Duekoué
 ferkessedougou	CI	9.5928	-5.19449	72476	Ferkessédougou
 fresco	CI	5.08226	-5.56938	0	Fresco
 gagnoa	CI	6.13193	-5.9506	277044	Gagnoa
+grandbassam	CI	5.2118	-3.73884	96797	Grand-Bassam
 grandbereby	CI	4.65098	-6.9237	12104	Grand Berebi
 grandlahou	CI	5.13825	-5.02123	36906	Grand-Lahou
 issia	CI	6.49224	-6.58558	68263	Issia
@@ -431,14 +523,19 @@ jacqueville	CI	5.20515	-4.4146	14383	Jacqueville
 katiola	CI	8.13728	-5.10095	59641	Katiola
 korhogo	CI	9.45803	-5.62961	440926	Korhogo
 man	CI	7.41251	-7.55383	241969	Man
+ndouci	CI	5.86383	-4.7609	35145	Ndouci
+niakaramandougou	CI	8.65759	-5.29109	21793	Niakaramandougou
+noe	CI	5.29388	-2.78478	12199	Noé
 ouangolodougou	CI	9.96837	-5.14882	49248	Ouangolodougou
 sanpedro	CI	4.74851	-6.6363	390654	San-Pédro
 sassandra	CI	4.95384	-6.08531	34492	Sassandra
+soubre	CI	5.78377	-6.59388	131181	Soubré
 tabou	CI	4.42295	-7.3528	29469	Tabou
 tafire	CI	9.06883	-5.16404	22284	Tafiré
 tanda	CI	7.80335	-3.16832	35854	Tanda
 tengrela	CI	10.48115	-6.40694	52271	Tengréla
 tiebissou	CI	7.15772	-5.2248	24412	Tiébissou
+toumodi	CI	6.55799	-5.01769	55986	Toumodi
 yamoussoukro	CI	6.82055	-5.27674	275686	Yamoussoukro
 antofagasta	CL	-23.65094	-70.39752	401096	Antofagasta
 arica	CL	-18.47552	-70.30058	241653	Arica
@@ -463,12 +560,32 @@ temuco	CL	-38.73628	-72.59738	238129	Temuco
 valdivia	CL	-39.81422	-73.24589	133419	Valdivia
 vallenar	CL	-28.57617	-70.75938	44895	Vallenar
 valparaiso	CL	-33.036	-71.62963	282448	Valparaíso
+abongmbang	CM	3.98333	13.18333	24433	Abong Mbang
+bafang	CM	5.15705	10.1771	54505	Bafang
+bafoussam	CM	5.47775	10.41759	373268	Bafoussam
+bamenda	CM	5.9597	10.14597	420445	Bamenda
+bertoua	CM	4.57728	13.68459	137993	Bertoua
+douala	CM	4.04827	9.70428	1338082	Douala
+edea	CM	3.8	10.13333	103861	Edéa
+garoua	CM	9.30143	13.39771	34957	Garoua
+garouaboulai	CM	5.88333	14.55	46615	Garoua Boulaï
+kousseri	CM	12.07689	15.03063	139024	Kousséri
+maroua	CM	10.59095	14.31593	314122	Maroua
+mbouda	CM	5.62611	10.25421	71867	Mbouda
+meiganga	CM	6.51667	14.3	59426	Meïganga
+ngaoundere	CM	7.32765	13.58472	238196	Ngaoundéré
+nkongsamba	CM	4.9547	9.9404	162309	Nkongsamba
+yaounde	CM	3.86667	11.51667	1299369	Yaoundé
+guangzhou	CN	23.11667	113.25	18676605	Guangzhou
+shanghai	CN	31.22222	121.45806	24874500	Shanghai
 armenia	CO	4.53656	-75.67263	304314	Armenia
 barranquilla	CO	10.96854	-74.78132	1206319	Barranquilla
 bogota	CO	4.60971	-74.08175	7674366	Bogotá
 bucaramanga	CO	7.125	-73.11895	581130	Bucaramanga
 cali	CO	3.43054	-76.5199	2392877	Cali
 cartagena	CO	10.39817	-75.49328	914552	Cartagena
+cucuta	CO	7.90745	-72.5049	777106	Cúcuta
+granada	CO	3.54625	-73.70687	68876	Granada
 ibague	CO	4.43573	-75.20289	529635	Ibagué
 ipiales	CO	0.82501	-77.63966	77729	Ipiales
 manizales	CO	5.0668	-75.50684	434403	Manizales
@@ -479,6 +596,7 @@ pasto	CO	1.21456	-77.27846	392930	Pasto
 pereira	CO	4.81428	-75.69488	467269	Pereira
 popayan	CO	2.43823	-76.61316	318059	Popayán
 riohacha	CO	11.54444	-72.90722	188014	Riohacha
+sanjosedelguaviare	CO	2.56799	-72.63972	52815	San José del Guaviare
 santamarta	CO	11.23855	-74.19427	499192	Santa Marta
 sincelejo	CO	9.3045	-75.3905	277773	Sincelejo
 tunja	CO	5.54481	-73.35756	172548	Tunja
@@ -512,7 +630,10 @@ holguin	CU	20.88722	-76.26306	319102	Holguín
 lastunas	CU	20.96135	-76.95192	203684	Las Tunas
 matanzas	CU	23.04388	-81.58284	146733	Matanzas
 pinardelrio	CU	22.41649	-83.69657	186990	Pinar del Río
+placetas	CU	22.31377	-79.65384	55408	Placetas
+sancristobal	CU	22.71658	-83.05647	59579	San Cristobal
 sanctispiritus	CU	21.93429	-79.4398	127069	Sancti Spíritus
+sanjosedelaslajas	CU	22.96121	-82.15151	54847	San José de las Lajas
 santaclara	CU	22.40711	-79.96581	250512	Santa Clara
 santiagodecuba	CU	20.02287	-75.82171	555865	Santiago de Cuba
 assomada	CV	15.1	-23.68333	21297	Assomada
@@ -528,6 +649,10 @@ santamaria	CV	16.59796	-22.90509	8400	Santa Maria
 saodomingos	CV	15.02438	-23.5625	2960	São Domingos
 saofilipe	CV	14.8961	-24.49556	10097	São Filipe
 tarrafal	CV	15.27881	-23.75192	13483	Tarrafal
+brno	CZ	49.19522	16.60796	404296	Brno
+prague	CZ	50.08804	14.42076	1165581	Prague
+frankfurtammain	DE	50.11552	8.68417	650000	Frankfurt am Main
+hamburg	DE	53.55073	9.99302	1973896	Hamburg
 alisabieh	DJ	11.15583	42.7125	50006	Ali Sabih
 arta	DJ	11.52639	42.85194	17477	Arta
 dikhil	DJ	11.10454	42.36971	32801	Dikhil
@@ -535,6 +660,8 @@ djibouti	DJ	11.58901	43.14503	626512	Djibouti
 galafi	DJ	11.71583	41.83611	1849	Gâlâfi
 obock	DJ	11.96693	43.28835	15429	Obock
 tadjourah	DJ	11.78778	42.88222	19533	Tadjoura
+aalborg	DK	57.048	9.9187	142937	Aalborg
+aarhus	DK	56.15674	10.21076	285273	Århus
 azua	DO	18.45319	-70.7349	59139	Azua
 bani	DO	18.27971	-70.33181	66709	Baní
 barahona	DO	18.20861	-71.10068	77160	Santa Cruz de Barahona
@@ -557,6 +684,23 @@ sanjuandelamaguana	DO	18.8064	-71.22626	72950	San Juan de la Maguana
 sanpedrodemacoris	DO	18.4539	-69.30864	217899	San Pedro de Macorís
 santiagodeloscaballeros	DO	19.45036	-70.69085	1200000	Santiago de los Caballeros
 villabisono	DO	19.56378	-70.87582	33137	Villa Bisonó
+algiers	DZ	36.73225	3.08746	2364230	Algiers
+annaba	DZ	36.9	7.76667	342703	Annaba
+blida	DZ	36.47004	2.8277	331779	Blida
+bordjbouarreridj	DZ	36.07389	4.76139	158812	Bordj Bou Arreridj
+bouira	DZ	36.37489	3.902	68545	Bouïra
+chlef	DZ	36.16525	1.33452	178616	Chlef
+constantine	DZ	36.365	6.61472	448028	Constantine
+elgolea	DZ	30.57556	2.88417	57344	El Menia
+ghardaia	DZ	32.49094	3.67347	142913	Ghardaïa
+inguezzam	DZ	19.57361	5.76806	7045	In Guezzam
+insalah	DZ	27.19678	2.47913	32518	In Salah
+khemismiliana	DZ	36.26104	2.22015	80512	Khemis Miliana
+oran	DZ	35.69906	-0.63588	803329	Oran
+relizane	DZ	35.73734	0.55599	123255	Relizane
+setif	DZ	36.19112	5.41373	252127	Sétif
+skikda	DZ	36.87617	6.90921	182903	Skikda
+tamanrasset	DZ	22.785	5.52278	81752	Tamanghasset
 ambato	EC	-1.24908	-78.61675	387309	Ambato
 azogues	EC	-2.73982	-78.84561	34877	Azogues
 cuenca	EC	-2.8953	-78.9963	636996	Cuenca
@@ -565,16 +709,19 @@ guayaquil	EC	-2.19616	-79.88621	2723665	Guayaquil
 huaquillas	EC	-3.47523	-80.23084	39757	Huaquillas
 ibarra	EC	0.34881	-78.12462	221149	Ibarra
 jipijapa	EC	-1.34841	-80.57913	35901	Jipijapa
+laconcordia	EC	0.00801	-79.39462	0	La Concordia
 latacunga	EC	-0.93424	-78.6152	205624	Latacunga
 loja	EC	-3.99313	-79.20422	274112	Loja
 macas	EC	-2.30741	-78.12026	23687	Macas
 machala	EC	-3.25886	-79.95876	289141	Machala
 manta	EC	-0.94937	-80.73137	264281	Manta
 nuevaloja	EC	0.086	-76.89528	24211	Nueva Loja
+pomasqui	EC	-0.0542	-78.45382	28724	Pomasqui
 portoviejo	EC	-1.05764	-80.45145	321800	Portoviejo
 puertofranciscodeorellana	EC	-0.44967	-76.99724	48144	Puerto Francisco de Orellana
 puyo	EC	-1.49156	-78.00337	24881	Puyo
 quevedo	EC	-1.02881	-79.46264	213842	Quevedo
+quininde	EC	0.32779	-79.47407	42121	Rosa Zarate
 quito	EC	-0.22985	-78.52495	2781641	Quito
 riobamba	EC	-1.66506	-78.65887	264048	Riobamba
 salinas	EC	-2.21452	-80.95151	43862	Salinas
@@ -582,6 +729,8 @@ santodomingodeloscolorados	EC	-0.25368	-79.17628	458580	Santo Domingo de los Col
 tena	EC	-0.9961	-77.81315	17172	Tena
 tulcan	EC	0.8124	-77.71709	86498	Tulcán
 zamora	EC	-4.06446	-78.95123	15276	Zamora
+tallinn	EE	59.43696	24.75353	394024	Tallinn
+tartu	EE	58.38062	26.72509	91407	Tartu
 alexandria	EG	31.20176	29.91582	5263542	Alexandria
 almansurah	EG	31.03637	31.38069	621953	Al Mansurah
 aswan	EG	24.09082	32.89942	379774	Aswān
@@ -607,6 +756,15 @@ zagazig	EG	30.58768	31.502	430445	Zagazig
 asmara	ER	15.33805	38.93184	563930	Asmara
 massawa	ER	15.60811	39.47455	23100	Massawa
 mendefera	ER	14.88722	38.81528	17781	Mendefera
+alicante	ES	38.34517	-0.48149	348901	Alicante
+barcelona	ES	41.38879	2.15899	1686208	Barcelona
+madrid	ES	40.4165	-3.70256	3255944	Madrid
+murcia	ES	37.98704	-1.13004	471982	Murcia
+valencia	ES	39.47391	-0.37966	824340	Valencia
+zaragoza	ES	41.65606	-0.87734	686986	Zaragoza
+helsinki	FI	60.16952	24.93545	658864	Helsinki
+oulu	FI	65.01236	25.46816	216066	Oulu
+tampere	FI	61.49911	23.78712	260646	Tampere
 ba	FJ	-17.5343	177.67407	14596	Ba
 labasa	FJ	-16.4332	179.36451	27949	Labasa
 lautoka	FJ	-17.61686	177.45049	52500	Lautoka
@@ -616,6 +774,25 @@ savusavu	FJ	-16.77942	179.33564	6833	Savusavu
 sigatoka	FJ	-18.14307	177.50691	17622	Sigatoka
 suva	FJ	-18.13683	178.42531	77366	Suva
 tavua	FJ	-17.44221	177.86221	8810	Tavua
+bordeaux	FR	44.84124	-0.58046	265328	Bordeaux
+lyon	FR	45.74906	4.84789	520774	Lyon
+marseille	FR	43.29695	5.38107	877215	Marseille
+montpellier	FR	43.61093	3.87635	248252	Montpellier
+nancy	FR	48.68439	6.18496	105058	Nancy
+paris	FR	48.85341	2.3488	2138551	Paris
+reims	FR	49.26526	4.02853	196565	Reims
+strasbourg	FR	48.58392	7.74553	274845	Strasbourg
+toulouse	FR	43.60426	1.44367	511684	Toulouse
+london	GB	51.50853	-0.12574	8961989	London
+manchester	GB	53.48095	-2.23743	568996	Manchester
+accra	GH	5.55602	-0.1969	1963264	Accra
+bawku	GH	11.05926	-0.24249	76459	Bawku
+bolgatanga	GH	10.78556	-0.85139	81958	Bolgatanga
+ho	GH	6.60084	0.4713	130701	Ho
+hohoe	GH	6.60084	0.4713	130701	Ho
+nkwanta	GH	7.17487	-2.09961	17000	Duayaw-Nkwanta
+tamale	GH	9.40079	-0.8393	464316	Tamale
+yendi	GH	9.44272	-0.00991	64676	Yendi
 banjul	GM	13.45274	-16.57803	37274	Banjul
 bansang	GM	13.43333	-14.65	9528	Bansang
 barra	GM	13.48278	-16.54556	6020	Barra
@@ -676,6 +853,8 @@ micomeseng	GQ	2.13609	10.61322	5813	Mikomeseng
 mongomo	GQ	1.62742	11.31346	6393	Mongomo
 nkue	GQ	2.01643	10.47066	1683	Ncue
 nsork	GQ	1.12985	11.26603	3769	Nsok
+athens	GR	37.98376	23.72784	664046	Athens
+thessaloniki	GR	40.64072	22.93493	317778	Thessaloníki
 chimaltenango	GT	14.65881	-90.8216	96985	Chimaltenango
 chiquimula	GT	14.8009	-89.54641	111505	Chiquimula
 coatepeque	GT	14.70413	-91.86426	105415	Coatepeque
@@ -727,6 +906,11 @@ tegucigalpa	HN	14.0818	-87.20681	850848	Tegucigalpa
 tela	HN	15.77425	-87.46731	29325	Tela
 tocoa	HN	15.68333	-86.0	111972	Tocoa
 villanueva	HN	15.31476	-87.99383	31571	Villanueva
+dubrovnik	HR	42.64125	18.10909	26922	Dubrovnik
+pula	HR	44.86833	13.84806	52220	Pula
+split	HR	43.50891	16.43915	149830	Split
+vukovar	HR	45.35161	19.00225	22255	Vukovar
+zagreb	HR	45.81444	15.97798	663592	Zagreb
 aquin	HT	18.27974	-73.39433	5246	Aquin
 cabaret	HT	18.73582	-72.41929	3951	Cabaret
 caphaitien	HT	19.75938	-72.19815	134815	Cap-Haïtien
@@ -743,6 +927,9 @@ ouanaminthe	HT	19.54934	-71.72475	10118	Ouanaminthe
 petitgoave	HT	18.43117	-72.86521	117504	Tigwav
 portauprince	HT	18.54349	-72.33881	1234742	Port-au-Prince
 saintmarc	HT	19.11136	-72.70078	266642	Saint-Marc
+budapest	HU	47.49835	19.04045	1741041	Budapest
+kecskemet	HU	46.90618	19.69128	109847	Kecskemét
+szeged	HU	46.253	20.14824	160766	Szeged
 bandaaceh	ID	5.54167	95.33333	267962	Banda Aceh
 bandarlampung	ID	-5.42917	105.26111	1166066	Bandar Lampung
 bandung	ID	-6.92222	107.60694	2528163	Bandung
@@ -780,6 +967,10 @@ tegal	ID	-6.8694	109.1402	297173	Tegal
 tentena	ID	-1.7562	120.648	0	Tentena
 wates	ID	-7.85722	110.15694	0	Wates
 yogyakarta	ID	-7.80139	110.36472	375699	Yogyakarta
+cork	IE	51.89797	-8.47061	224004	Cork
+dublin	IE	53.33306	-6.24889	1024027	Dublin
+eilat	IL	29.55805	34.94821	52299	Eilat
+metula	IL	33.27929	35.5787	1615	Metula
 agra	IN	27.18333	78.01667	1430055	Agra
 ahmedabad	IN	23.02579	72.58727	6357693	Ahmedabad
 asansol	IN	23.68333	86.98333	504271	Āsansol
@@ -861,6 +1052,13 @@ tabriz	IR	38.08	46.2919	1424641	Tabriz
 tehran	IR	35.69439	51.42151	7153309	Tehran
 yazd	IR	31.89722	54.3675	477905	Yazd
 zanjan	IR	36.67642	48.49628	357471	Zanjan
+akureyri	IS	65.68353	-18.0878	19219	Akureyri
+reykjavik	IS	64.13548	-21.89541	118918	Reykjavík
+bologna	IT	44.49381	11.33875	394843	Bologna
+florence	IT	43.77925	11.24626	367150	Florence
+milan	IT	45.46427	9.18951	1371498	Milan
+naples	IT	40.85216	14.26811	909048	Naples
+rome	IT	41.89193	12.51133	2318895	Rome
 annottobay	JM	18.2717	-76.76523	5504	Annotto Bay
 blackriver	JM	18.02636	-77.84873	4229	Black River
 falmouth	JM	18.49358	-77.65587	7779	Falmouth
@@ -889,6 +1087,14 @@ mafraq	JO	32.34289	36.20804	57118	Mafraq
 ramtha	JO	32.55873	36.00816	155693	Ar Ramthā
 ruwaished	JO	32.5041	38.2011	9805	Ruwaished
 zarqa	JO	32.07275	36.08796	792665	Zarqa
+nagoya	JP	35.18147	136.90641	2332176	Nagoya
+osaka	JP	34.69379	135.50107	2753862	Osaka
+tokyo	JP	35.6895	139.69171	9733276	Tokyo
+eldoret	KE	0.52036	35.26993	475716	Eldoret
+malaba	KE	0.63513	34.28165	15581	Malaba
+mombasa	KE	-4.05466	39.66359	1208333	Mombasa
+nairobi	KE	-1.28333	36.81667	4397073	Nairobi
+nakuru	KE	-0.30719	36.07225	570674	Nakuru
 alabuka	KG	41.4105	71.48628	15426	Ala-Buka
 atbashi	KG	41.16951	75.80099	14655	At-Bashi
 balykchy	KG	42.46017	76.18709	42875	Balykchy
@@ -949,6 +1155,13 @@ rason	KP	42.25559	130.28308	66224	Rajin
 sariwon	KP	38.50722	125.75583	310100	Sariwŏn-si
 sinuiju	KP	40.10056	124.39806	288112	Sinŭiju
 wonsan	KP	39.15278	127.44361	329207	Wŏnsan
+busan	KR	35.10168	129.03004	3285147	Busan
+daegu	KR	35.87102	128.60121	2365523	Daegu
+daejeon	KR	36.35022	127.3848	1441203	Daejeon
+gwangju	KR	35.15472	126.91556	1401235	Gwangju
+jeonju	KR	35.82483	127.14796	638421	Jeonju
+seoul	KR	37.566	126.9784	10349312	Seoul
+suwon	KR	37.27818	127.03164	1234582	Suwon
 abdali	KW	30.04219	47.72205	6835	Mazāri‘ al ‘Abdalī
 alahmadi	KW	29.07694	48.08389	637411	Al Aḩmadī
 alfahahil	KW	29.0825	48.13028	68290	Al Faḩāḩīl
@@ -1057,6 +1270,13 @@ quthing	LS	-30.40001	27.70027	33910	Quthing
 roma	LS	-29.44667	27.70806	14259	Roma
 teyateyaneng	LS	-29.14719	27.74895	27272	Teyateyaneng
 thabatseka	LS	-29.52204	28.6084	16765	Thaba-Tseka
+kaunas	LT	54.90156	23.90909	289380	Kaunas
+klaipeda	LT	55.7068	21.13912	172292	Klaipėda
+vilnius	LT	54.68916	25.2798	542366	Vilnius
+daugavpils	LV	55.88333	26.53333	78126	Daugavpils
+riga	LV	56.946	24.10589	742572	Riga
+ventspils	LV	57.39485	21.56121	32723	Ventspils
+chisinau	MD	47.00902	28.85938	635994	Chisinau
 ann	MM	19.79537	94.04791	119714	Ann
 bago	MM	17.33521	96.48135	244376	Bago
 chauk	MM	20.89921	94.81784	90870	Chauk
@@ -1206,6 +1426,35 @@ tuxtlagutierrez	MX	16.75357	-93.11578	604147	Tuxtla
 veracruz	MX	19.18095	-96.1429	428323	Veracruz
 villahermosa	MX	17.98625	-92.93928	353577	Villahermosa
 zacatecas	MX	22.76843	-102.58141	129011	Zacatecas
+cyberjaya	MY	2.92281	101.65718	79200	Cyberjaya
+johorbahru	MY	1.4655	103.7578	858118	Johor Bahru
+aranos	NA	-24.14126	19.11754	4365	Aranos
+aus	NA	-26.66557	16.26109	1263	Aus
+gobabis	NA	-22.45338	18.97159	22639	Gobabis
+grootfontein	NA	-19.57328	18.1003	24099	Grootfontein
+kamanjab	NA	-19.62882	14.8452	2127	Kamanjab
+karibib	NA	-21.93554	15.85654	6898	Karibib
+keetmanshoop	NA	-26.57654	18.13359	23049	Keetmanshoop
+maltahohe	NA	-24.83923	16.9859	2819	Maltahöhe
+mariental	NA	-24.62705	17.96471	14789	Mariental
+okahandja	NA	-21.98141	16.9029	26832	Okahandja
+omaruru	NA	-21.42403	15.94611	11547	Omaruru
+omitara	NA	-22.28979	18.00847	833	Omitara
+omuthiya	NA	-18.36463	16.58146	5000	Omuthiya
+ondangwa	NA	-17.90824	15.98037	27049	Ondangwa
+oshakati	NA	-17.78833	15.70436	43309	Oshakati
+oshivelo	NA	-18.61972	17.16743	2287	Oshivelo
+otavi	NA	-19.63805	17.33986	6213	Otavi
+otjinene	NA	-21.13889	18.7836	2491	Otjinene
+otjiwarongo	NA	-20.46369	16.64772	33481	Otjiwarongo
+outapi	NA	-17.50375	14.98383	7629	Outapi
+outjo	NA	-20.10691	16.15415	10009	Outjo
+rehoboth	NA	-23.317	17.09	34185	Rehoboth
+ruacana	NA	-17.42817	14.41504	3537	Ruacana
+stampriet	NA	-24.34494	18.40464	2307	Stampriet
+tsumeb	NA	-19.24842	17.71345	22845	Tsumeb
+windhoek	NA	-22.55941	17.08323	386219	Windhoek
+witvlei	NA	-22.41039	18.49359	2095	Witvlei
 boulouparis	NC	-21.86226	166.05122	2146	Bouloupari
 bourail	NC	-21.5669	165.49736	5531	Bourail
 dumbea	NC	-22.15757	166.4572	19346	Dumbéa
@@ -1225,8 +1474,12 @@ poya	NC	-21.35	165.15	2617	Poya
 touho	NC	-20.79094	165.24987	2283	Touho
 voh	NC	-20.96667	164.7	2272	Voh
 bilwi	NI	14.03507	-83.38882	33635	Puerto Cabezas
+ciudadsandino	NI	12.15889	-86.34417	50000	Ciudad Sandino
 siuna	NI	13.73321	-84.77725	16056	Siuna
 ticuantepe	NI	12.02263	-86.20493	13209	Ticuantepe
+rotterdam	NL	51.9225	4.47917	868135	Rotterdam
+oslo	NO	59.91273	10.74609	1082575	Oslo
+trondheim	NO	63.43049	10.39506	216518	Trondheim
 bhadrapur	NP	26.54404	88.09436	19523	Bhadrapur
 bhairahawa	NP	27.5	83.45	63367	Siddharthanagar
 bharatpur	NP	27.68027	84.43647	369377	Bharatpur
@@ -1245,6 +1498,14 @@ nepalgunj	NP	28.05	81.61667	166258	Nepalgunj
 pokhara	NP	28.26689	83.96851	600051	Pokhara
 siddharthanagar	NP	27.5	83.45	63367	Siddharthanagar
 tansen	NP	27.86655	83.54587	23693	Tānsen
+auckland	NZ	-36.84853	174.76349	1547200	Auckland
+christchurch	NZ	-43.53333	172.63333	419200	Christchurch
+dunedin	NZ	-45.87416	170.50361	132800	Dunedin
+hamilton	NZ	-37.78333	175.28333	192100	Hamilton
+invercargill	NZ	-46.4	168.35	58000	Invercargill
+mangawhai	NZ	-36.11667	174.56667	1370	Mangawhai
+palmerstonnorth	NZ	-40.35636	175.61113	90500	Palmerston North
+wellington	NZ	-41.28664	174.77557	381900	Wellington
 adam	OM	22.37934	57.52718	17283	Adam
 alburaimi	OM	24.25088	55.79312	73670	Al Buraymī
 bahla	OM	22.97886	57.3047	54338	Bahlā’
@@ -1343,6 +1604,8 @@ tarlac	PH	15.48017	120.59794	401892	Tarlac City
 tayabas	PH	14.0259	121.5929	115318	Tayabas
 tuguegarao	PH	17.61577	121.72285	167297	Tuguegarao
 vigan	PH	17.57472	120.38694	48545	Vigan
+poznan	PL	52.40692	16.92993	536151	Poznań
+warsaw	PL	52.22977	21.01178	1702139	Warsaw
 aguadilla	PR	18.42745	-67.15407	16073	Aguadilla
 arecibo	PR	18.47245	-66.71573	87754	Arecibo
 bayamon	PR	18.39856	-66.15572	203499	Bayamón
@@ -1375,6 +1638,9 @@ rafah	PS	31.29722	34.24357	126305	Rafaḩ
 ramallah	PS	31.89964	35.20422	43880	Ramallah
 salfit	PS	32.08371	35.18079	11000	Salfīt
 tulkarm	PS	32.31156	35.0269	44169	Ţūlkarm
+coimbra	PT	40.20686	-8.41996	140796	Coimbra
+lisbon	PT	38.72509	-9.1498	517802	Lisbon
+porto	PT	41.1485	-8.61097	252687	Porto
 asuncion	PY	-25.28646	-57.647	1482200	Asunción
 ayolas	PY	-27.38421	-56.83953	12061	Ayolas
 caacupe	PY	-25.38575	-57.14217	56864	Caacupé
@@ -1409,6 +1675,11 @@ lusail	QA	25.4175	51.5075	198600	Lusail
 madinatashshamal	QA	26.12933	51.2009	5267	Madīnat ash Shamāl
 mesaieed	QA	24.99226	51.55067	5769	Musay‘īd
 ummsalalmuhammad	QA	25.41524	51.40647	29391	Umm Şalāl Muḩammad
+bucharest	RO	44.43225	26.10626	1877155	Bucharest
+drobetaturnuseverin	RO	44.62693	22.65288	79865	Drobeta-Turnu Severin
+iasi	RO	47.16667	27.6	378954	Iaşi
+belgrade	RS	44.80401	20.46513	1273651	Belgrade
+nis	RS	43.32472	21.90333	250000	Niš
 chelyabinsk	RU	55.1611	61.42877	1202371	Chelyabinsk
 chita	RU	52.04311	113.49171	349005	Chita
 irkutsk	RU	52.29566	104.29076	623869	Irkutsk
@@ -1473,6 +1744,20 @@ tabuk	SA	28.3998	36.57151	667000	Tabuk
 taif	SA	21.27028	40.41583	688693	Ta’if
 thuwal	SA	22.28272	39.11245	26957	Thuwal
 yanbu	SA	24.08954	38.0618	200161	Yanbu
+kiruna	SE	67.85572	20.22513	17037	Kiruna
+lulea	SE	65.58415	22.15465	77832	Luleå
+stockholm	SE	59.32938	18.06871	1515017	Stockholm
+sundsvall	SE	62.39129	17.3063	57606	Sundsvall
+umea	SE	63.82842	20.25972	130224	Umeå
+celje	SI	46.23092	15.26044	38059	Celje
+ljubljana	SI	46.05108	14.50513	272220	Ljubljana
+maribor	SI	46.55583	15.64593	96209	Maribor
+bratislava	SK	48.14816	17.10674	423737	Bratislava
+kosice	SK	48.71441	21.25802	225044	Košice
+poprad	SK	49.06144	20.29798	49091	Poprad
+trencin	SK	48.89452	18.04436	58278	Trenčín
+trnava	SK	48.37773	17.58603	62806	Trnava
+zilina	SK	49.22315	18.73941	81219	Žilina
 binkolo	SL	8.95225	-11.98029	13867	Binkolo
 bo	SL	7.96472	-11.73833	233684	Bo
 bumbuna	SL	9.04466	-11.74576	3222	Bumbuna
@@ -1566,13 +1851,20 @@ ngwenya	SZ	-26.2279	31.03926	842	Ngwenya
 nhlangano	SZ	-27.11222	31.19833	9016	Nhlangano
 piggspeak	SZ	-25.96082	31.24666	5750	Piggs Peak
 siteki	SZ	-26.4525	31.94722	6152	Siteki
+abeche	TD	13.82916	20.8324	139983	Abéché
 adre	TD	13.46648	22.19875	21950	Adré
+bitkine	TD	11.9801	18.2138	41871	Bitkine
+bokoro	TD	12.37813	17.05876	26095	Bokoro
 bongor	TD	10.28088	15.37425	63699	Bongor
 doba	TD	8.66389	16.85324	70942	Doba
 guelendeng	TD	10.91762	15.55011	23320	Guelendeng
 kelo	TD	9.30859	15.80658	82677	Kelo
+mangalme	TD	12.3546	19.6139	15939	Mangalmé
+massaguet	TD	12.47554	15.43647	28401	Massaguet
+mongo	TD	12.18514	18.6884	53768	Mongo
 moundou	TD	8.57437	16.07722	196124	Moundou
 ndjamena	TD	12.10672	15.0444	1359526	N'Djamena
+oumhadjer	TD	13.2954	19.6966	37941	Umm Hājar
 bangkok	TH	13.75398	100.50144	5104476	Bangkok
 chiangmai	TH	18.79038	98.98468	127240	Chiang Mai
 chiangrai	TH	19.90858	99.8325	78756	Chiang Rai
@@ -1692,6 +1984,8 @@ tozeur	TN	33.91968	8.13352	37370	Tozeur
 tunis	TN	36.81897	10.16579	693210	Tunis
 zaghouan	TN	36.40291	10.14292	20798	Zaghouan
 zarzis	TN	33.50398	11.11215	79316	Zarzis
+ankara	TR	39.91987	32.85427	3517182	Ankara
+istanbul	TR	41.01384	28.94966	15701602	Istanbul
 arima	TT	10.63737	-61.28228	35000	Arima
 chaguanas	TT	10.51667	-61.41667	67433	Chaguanas
 couva	TT	10.42248	-61.46748	5178	Couva
@@ -1721,7 +2015,29 @@ taipei	TW	25.05306	121.52639	7871900	Taipei
 taitung	TW	22.75991	121.14457	103260	Taitung
 taoyuan	TW	24.99368	121.29696	475798	Taoyuan
 yilan	TW	24.757	121.753	94188	Yilan
+daressalaam	TZ	-6.82349	39.26951	5383728	Dar es Salaam
+dodoma	TZ	-6.17221	35.73947	765179	Dodoma
+iringa	TZ	-7.76667	35.7	202490	Iringa
+mbeya	TZ	-8.9	33.45	541603	Mbeya
+morogoro	TZ	-6.82102	37.66122	471409	Morogoro
+mwanza	TZ	-2.51667	32.9	1104521	Mwanza
+shinyanga	TZ	-3.66393	33.42118	139727	Shinyanga
+singida	TZ	-4.81629	34.74358	232459	Singida
+tunduma	TZ	-9.3	32.76667	219309	Tunduma
+lutsk	UA	50.75784	25.35024	215986	Lutsk
+monastyryshche	UA	48.99494	29.80992	8647	Monastyryshche
+arua	UG	3.02013	30.91105	72400	Arua
+busia	UG	0.46588	34.09221	64900	Busia
+gulu	UG	2.77457	32.29899	177400	Gulu
+jinja	UG	0.43902	33.20317	93061	Jinja
+kabale	UG	-1.24857	29.98993	53200	Kabale
+kampala	UG	0.31628	32.58219	1680600	Kampala
+luwero	UG	0.84917	32.47306	49100	Luwero
+masaka	UG	-0.33379	31.73409	116600	Masaka
+mbale	UG	1.08209	34.17503	111300	Mbale
+mbarara	UG	-0.60467	30.64851	221300	Mbarara
 artigas	UY	-30.40431	-56.46926	43897	Artigas
+atlantida	UY	-34.7719	-55.7584	5562	Atlántida
 bellaunion	UY	-30.25966	-57.59919	12200	Bella Unión
 canelones	UY	-34.52381	-56.28215	24185	Canelones
 carmelo	UY	-34.00023	-58.28402	18041	Carmelo
@@ -1867,3 +2183,14 @@ tarim	YE	16.05694	48.99889	0	Tarim
 yarim	YE	14.29804	44.37795	33050	Yarīm
 zabid	YE	14.1951	43.31518	52590	Zabīd
 zinjibar	YE	13.12871	45.38073	19879	Zinjibār
+bloemfontein	ZA	-29.12107	26.214	556637	Bloemfontein
+capetown	ZA	-33.92584	18.42322	4772846	Cape Town
+durban	ZA	-29.8579	31.0292	3338026	Durban
+johannesburg	ZA	-26.20227	28.04363	9418183	Johannesburg
+beitbridge	ZW	-22.21667	30.0	58574	Beitbridge
+bulawayo	ZW	-20.15	28.58333	665952	Bulawayo
+harare	ZW	-17.82772	31.05337	1542813	Harare
+masvingo	ZW	-20.06373	30.82766	90286	Masvingo
+mutare	ZW	-18.9707	32.67086	224802	Mutare
+plumtree	ZW	-20.48333	27.81667	14460	Plumtree
+victoriafalls	ZW	-17.93285	25.83066	35215	Victoria Falls
