@@ -498,6 +498,7 @@ out tags geom;'''
         if t.get('power') or 'power' in (t.get('seamark:cable_submarine:category') or '').lower():
             continue
         n = t.get('name') or t.get('name:en') or t.get('seamark:name') or ''
+        n = re.sub(r'\bSouh\b', 'South', n)  # a typo in OpenStreetMap («Souh America-1»; 23 Oct 2026)
         if any(x in n.lower() for x in ('telegraph', 'telégrafo', 'telegrafo', '1865', '1866', '1858')):
             continue
         # 22 Oct 2026 (owner, with a friend: «en el medio de Alemania aparecen cables submarinos»): OpenStreetMap
