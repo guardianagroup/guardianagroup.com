@@ -772,6 +772,7 @@ aarhus	DK	56.15674	10.21076	285273	Århus
 azua	DO	18.45319	-70.7349	59139	Azua
 bani	DO	18.27971	-70.33181	66709	Baní
 barahona	DO	18.20861	-71.10068	77160	Santa Cruz de Barahona
+bocachica	DO	18.45	-69.6	46300	Boca Chica
 bonao	DO	18.94154	-70.41111	73269	Bonao
 comendador	DO	18.87755	-71.70321	12070	Comendador
 dajabon	DO	19.54811	-71.70821	16398	Dajabón
@@ -810,6 +811,8 @@ skikda	DZ	36.87617	6.90921	182903	Skikda
 tamanrasset	DZ	22.785	5.52278	81752	Tamanghasset
 ambato	EC	-1.24908	-78.61675	387309	Ambato
 azogues	EC	-2.73982	-78.84561	34877	Azogues
+babahoyo	EC	-1.80493	-79.52492	76279	Babahoyo
+cayambe	EC	0.04103	-78.14636	26582	Cayambe
 cuenca	EC	-2.8953	-78.9963	636996	Cuenca
 esmeraldas	EC	0.9592	-79.65397	218727	Esmeraldas
 guayaquil	EC	-2.19616	-79.88621	2723665	Guayaquil
@@ -823,6 +826,7 @@ macas	EC	-2.30741	-78.12026	23687	Macas
 machala	EC	-3.25886	-79.95876	289141	Machala
 manta	EC	-0.94937	-80.73137	264281	Manta
 nuevaloja	EC	0.086	-76.89528	24211	Nueva Loja
+otavalo	EC	0.23457	-78.26248	32330	Otavalo
 pomasqui	EC	-0.0542	-78.45382	28724	Pomasqui
 portoviejo	EC	-1.05764	-80.45145	321800	Portoviejo
 puertofranciscodeorellana	EC	-0.44967	-76.99724	48144	Puerto Francisco de Orellana
@@ -1001,6 +1005,7 @@ chiquimula	GT	14.8009	-89.54641	111505	Chiquimula
 coatepeque	GT	14.70413	-91.86426	105415	Coatepeque
 elprogreso	GT	14.85442	-90.06991	24831	Guastatoya
 escuintla	GT	14.30097	-90.78816	156313	Escuintla
+gualan	GT	15.11952	-89.35721	19354	Gualán
 guanagazapa	GT	14.22598	-90.64332	2842	Guanagazapa
 guastatoya	GT	14.85442	-90.06991	24831	Guastatoya
 guatemalacity	GT	14.64072	-90.51327	994938	Guatemala City
@@ -1011,6 +1016,7 @@ moyuta	GT	14.03861	-90.08083	8145	Moyuta
 puertobarrios	GT	15.72724	-88.59787	100593	Puerto Barrios
 quetzaltenango	GT	14.84462	-91.52316	180706	Quetzaltenango
 retalhuleu	GT	14.53575	-91.67848	90505	Retalhuleu
+riohondo	GT	15.04505	-89.58523	5997	Río Hondo
 sanarate	GT	14.78828	-90.19876	15843	Sanarate
 santaana	GT	16.80582	-89.82708	9523	Santa Ana
 solola	GT	14.7707	-91.18344	45373	Sololá
@@ -1044,6 +1050,7 @@ saba	HN	15.46667	-86.25	33879	Sabá
 sanbuenaventura	HN	15.0243	-87.99447	1452	San Buenaventura
 sanlorenzo	HN	13.42417	-87.44722	22289	San Lorenzo
 sanpedrosula	HN	15.50585	-88.02588	801259	San Pedro Sula
+santacruzdeyojoa	HN	14.98086	-87.89091	97848	Santa Cruz de Yojoa
 siguatepeque	HN	14.59691	-87.83102	127468	Siguatepeque
 tegucigalpa	HN	14.0818	-87.20681	850848	Tegucigalpa
 tela	HN	15.77425	-87.46731	29325	Tela
@@ -1252,17 +1259,21 @@ naples	IT	40.85216	14.26811	909048	Naples
 rome	IT	41.89193	12.51133	2318895	Rome
 annottobay	JM	18.2717	-76.76523	5504	Annotto Bay
 blackriver	JM	18.02636	-77.84873	4229	Black River
+discoverybay	JM	18.45873	-77.39997	8257	Discovery Bay
 falmouth	JM	18.49358	-77.65587	7779	Falmouth
 kingston	JM	17.99702	-76.79358	937700	Kingston
+linstead	JM	18.13683	-77.03171	20660	Linstead
 lucea	JM	18.45095	-78.17356	7377	Lucea
 mandeville	JM	18.04168	-77.50714	47115	Mandeville
 maypen	JM	17.96454	-77.24515	44755	May Pen
+moneague	JM	18.27556	-77.11177	3319	Moneague
 montegobay	JM	18.47116	-77.91883	82867	Montego Bay
 morantbay	JM	17.88145	-76.40927	9368	Morant Bay
 negril	JM	18.26844	-78.3481	13779	Negril
 ochorios	JM	18.4076	-77.10312	26503	Ocho Rios
 portantonio	JM	18.17889	-76.45215	14400	Port Antonio
 portmaria	JM	18.36849	-76.88946	7906	Port Maria
+runawaybay	JM	18.45962	-77.3357	12358	Runaway Bay
 saintannsbay	JM	18.43581	-77.20098	13671	Saint Ann’s Bay
 savannalamar	JM	18.21895	-78.1332	16553	Savanna-la-Mar
 spanishtown	JM	17.99107	-76.95742	145018	Spanish Town
@@ -2200,6 +2211,7 @@ ahuachapan	SV	13.92403	-89.84344	34102	Ahuachapán
 chalchuapa	SV	13.98667	-89.68111	32282	Chalchuapa
 cojutepeque	SV	13.71971	-88.93309	48411	Cojutepeque
 launion	SV	13.33915	-87.84328	26807	La Unión
+metapan	SV	14.33333	-89.45	19143	Metapán
 sanmiguel	SV	13.48261	-88.18211	247126	San Miguel
 sansalvador	SV	13.68935	-89.18718	525990	San Salvador
 santaana	SV	13.98827	-89.55685	176661	Santa Ana
