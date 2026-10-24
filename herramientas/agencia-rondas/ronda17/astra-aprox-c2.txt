@@ -1,0 +1,42 @@
+[
+  {
+    "nombre": "Red troncal de GO — corredor de la isla de Malta",
+    "operador": "GO plc",
+    "pais": "MT",
+    "ciudades": ["Mellieha", "Mosta", "Birkirkara", "Valletta", "Paola", "Marsaxlokk"],
+    "estado": "en servicio",
+    "fuente": "aproximado: secuencia geográfica probable por corredores viarios y urbanos de la isla principal; no es un itinerario de fibra confirmado ni representa todas las ramificaciones. Se excluyen Gozo y los enlaces submarinos."
+  },
+  {
+    "nombre": "Red troncal de Mauritius Telecom — corredor de la isla de Mauricio",
+    "operador": "Mauritius Telecom",
+    "pais": "MU",
+    "ciudades": ["Grand Baie", "Pamplemousses", "Port Louis", "Beau Bassin-Rose Hill", "Quatre Bornes", "Curepipe", "Mahebourg"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor norte-sur siguiendo el eje urbano principal y los corredores de las autopistas M2 y M1, con prolongación hacia Mahebourg. El orden es geográfico, no un trazado técnico confirmado; se excluyen Rodrigues y los enlaces submarinos."
+  },
+  {
+    "nombre": "Posible corredor troncal de Orange Bissau",
+    "operador": "Orange Bissau",
+    "pais": "GW",
+    "ciudades": ["Bissau", "Safim", "Mansoa", "Bambadinca", "Bafata", "Gabu"],
+    "estado": "continuidad terrestre en fibra no verificada",
+    "fuente": "aproximado: corredor probable por las carreteras que comunican la capital con las principales ciudades del interior. No se dispone aquí de confirmación de que Orange opere una troncal continua de fibra por toda esta secuencia; algunos enlaces podrían utilizar otras tecnologías."
+  },
+  {
+    "nombre": "Posible corredor troncal de EriTel",
+    "operador": "Eritrea Telecommunication Services Corporation (EriTel)",
+    "pais": "ER",
+    "ciudades": ["Massawa", "Ghinda", "Asmara", "Mendefera"],
+    "estado": "continuidad terrestre en fibra no verificada",
+    "fuente": "aproximado: sigue el corredor viario Massawa–Ghinda–Asmara y su prolongación hacia Mendefera. Es una inferencia geográfica, no una ruta publicada confirmada; no se afirma que todos los tramos estén desplegados en fibra."
+  },
+  {
+    "nombre": "Red troncal de Cabo Verde Telecom — corredor terrestre de Santiago",
+    "operador": "Cabo Verde Telecom",
+    "pais": "CV",
+    "ciudades": ["Praia", "Sao Domingos", "Assomada", "Tarrafal"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor terrestre probable por la carretera principal de Santiago, de Praia a Tarrafal pasando por Sao Domingos y Assomada; itinerario exacto no confirmado. La red nacional conecta distintas islas mediante cables submarinos, por lo que esta lista representa únicamente un corredor terrestre insular."
+  }
+]

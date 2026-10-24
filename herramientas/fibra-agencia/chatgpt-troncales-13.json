@@ -1,0 +1,98 @@
+[
+  {
+    "nombre": "GO TrueFibre - Malta eje norte",
+    "operador": "GO",
+    "pais": "MT",
+    "ciudades": ["Valletta", "Floriana", "Hamrun", "Birkirkara", "Mosta", "St. Paul's Bay", "Mellieha"],
+    "estado": "en servicio",
+    "fuente": "GO, 8 mayo 2025, confirma cobertura de fibra en todas las localidades de Malta y Gozo: https://www.go.com.mt/news/go-declares-malta-a-true-fibre-island/ ; aproximado: corredor urbano central y carreteras principales hacia el norte; itinerario físico no publicado."
+  },
+  {
+    "nombre": "GO TrueFibre - Malta eje sur",
+    "operador": "GO",
+    "pais": "MT",
+    "ciudades": ["Valletta", "Paola", "Zabbar", "Zejtun", "Marsaxlokk", "Birzebbuga"],
+    "estado": "en servicio",
+    "fuente": "GO, cobertura nacional FTTH completada en 2025: https://www.go.com.mt/news/go-declares-malta-a-true-fibre-island/ ; aproximado: corredor de las carreteras principales del sureste; no representa un trazado de cable verificado."
+  },
+  {
+    "nombre": "GO TrueFibre - Malta eje oeste",
+    "operador": "GO",
+    "pais": "MT",
+    "ciudades": ["Sliema", "Gzira", "Msida", "Birkirkara", "Attard", "Rabat", "Dingli"],
+    "estado": "en servicio",
+    "fuente": "GO confirma despliegue en Sliema, Gzira, Msida y Birkirkara: https://www.businesstoday.com.mt/people/people/1529/interview__ayrton_caruana_gos_truefibre_project_a_driver_in_maltas_digital_pillar ; aproximado: continuidad por la red viaria del centro y oeste de Malta."
+  },
+  {
+    "nombre": "GO TrueFibre - Gozo",
+    "operador": "GO",
+    "pais": "MT",
+    "ciudades": ["Ghajnsielem", "Xewkija", "Victoria", "Zebbug"],
+    "estado": "en servicio",
+    "fuente": "GO, cobertura FTTH de Gozo confirmada en mayo de 2025: https://www.go.com.mt/news/go-declares-malta-a-true-fibre-island/ ; aproximado: carreteras principales de Gozo desde el sureste hacia el centro y norte. No incluye el tramo submarino entre Malta y Gozo."
+  },
+  {
+    "nombre": "CEB FiberNET - Troncal central norte-sur",
+    "operador": "CEB FiberNET",
+    "pais": "MU",
+    "ciudades": ["Grand Baie", "Triolet", "Pamplemousses", "Port Louis", "Beau Bassin", "Rose Hill", "Quatre Bornes", "Vacoas", "Curepipe", "Rose Belle", "Mahebourg"],
+    "estado": "en servicio",
+    "fuente": "CEB FiberNET confirma más de 300 km de red troncal óptica mediante OPGW sobre líneas eléctricas: https://fibernet.ceb.mu/our-network/ ; JICA, mapa de fibra nacional de Mauricio, 2022: https://openjicareport.jica.go.jp/pdf/12369021.pdf ; aproximado: corredor norte-sur siguiendo subestaciones eléctricas, líneas de transmisión y principales ejes viarios."
+  },
+  {
+    "nombre": "CEB FiberNET - Troncal central y oriental",
+    "operador": "CEB FiberNET",
+    "pais": "MU",
+    "ciudades": ["Port Louis", "Moka", "Quartier Militaire", "Centre de Flacq", "Mahebourg"],
+    "estado": "en servicio",
+    "fuente": "CEB FiberNET confirma red nacional de fibra conectada a subestaciones: https://fibernet.ceb.mu/about-us/ ; aproximado: corredor este y sureste siguiendo la infraestructura eléctrica y las carreteras principales. La secuencia exacta de nodos no está publicada."
+  },
+  {
+    "nombre": "Orange Bissau - Enlace terrestre hacia Senegal",
+    "operador": "Orange Bissau",
+    "pais": "GW",
+    "ciudades": ["Bissau", "Mansoa", "Bambadinca", "Bafata", "Contuboel"],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Guinea-Bissau Digital Economy Country Assessment, documenta expresamente un enlace terrestre de fibra óptica entre Bissau y Contuboel, conectado a Sonatel en Senegal: https://documents1.worldbank.org/curated/en/099745006262216743/pdf/P177016084979202b08dd501a5690c82506.pdf ; aproximado: ciudades intermedias inferidas por el corredor viario; solo los extremos del enlace están documentados. Guinea-Bissau todavía no dispone de una troncal nacional de fibra plenamente desplegada."
+  },
+  {
+    "nombre": "CV Telecom - Santiago eje central",
+    "operador": "CV Telecom",
+    "pais": "CV",
+    "ciudades": ["Praia", "Sao Domingos", "Assomada", "Tarrafal"],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Finanzas de Cabo Verde, estrategia de infraestructuras, confirma modernización de los backbones nacionales y de la red intraisla de Santiago: https://www.mf.gov.cv/-/vis%C3%A3o-de-desenvolvimento-da-rede-e-infraestruturas-de-comunica%C3%A7%C3%B5es-de-cabo-verde-e-seu-alinhamento-com-a-estrat%C3%A9gia-do-pa%C3%ADs-para-o-setor-1 ; aproximado: eje principal Praia-Assomada-Tarrafal por las carreteras interiores."
+  },
+  {
+    "nombre": "CV Telecom - Santiago eje oriental",
+    "operador": "CV Telecom",
+    "pais": "CV",
+    "ciudades": ["Praia", "Sao Domingos", "Pedra Badejo", "Calheta de Sao Miguel", "Tarrafal"],
+    "estado": "en servicio",
+    "fuente": "Protel documenta proyectos de fibra óptica intraisla en Santiago y tramos próximos a São Domingos: https://protel.cv/?page_id=16 ; aproximado: corredor de carreteras de la costa oriental de Santiago. No está verificado que todos los tramos constituyan una ruta óptica continua."
+  },
+  {
+    "nombre": "CV Telecom - Sal",
+    "operador": "CV Telecom",
+    "pais": "CV",
+    "ciudades": ["Espargos", "Santa Maria"],
+    "estado": "en servicio",
+    "fuente": "Ministerio de Finanzas de Cabo Verde confirma expansión de infraestructura de fibra en Espargos y Santa Maria: https://www.mf.gov.cv/-/vis%C3%A3o-de-desenvolvimento-da-rede-e-infraestruturas-de-comunica%C3%A7%C3%B5es-de-cabo-verde-e-seu-alinhamento-com-a-estrat%C3%A9gia-do-pa%C3%ADs-para-o-setor-1 ; aproximado: corredor de la carretera principal norte-sur de Sal."
+  },
+  {
+    "nombre": "CV Telecom - Santo Antao",
+    "operador": "CV Telecom",
+    "pais": "CV",
+    "ciudades": ["Porto Novo", "Ribeira Grande", "Ponta do Sol"],
+    "estado": "en servicio",
+    "fuente": "UIT, mapa de conectividad de fibra de Cabo Verde, octubre de 2024: https://www.itu.int/itu-d/sites/connect2recover/wp-content/uploads/sites/31/2024/10/NETPCV_28102024_Telecommunications_ICT-Sector.pdf ; aproximado: corredor viario entre Porto Novo, Ribeira Grande y Ponta do Sol. No se ha verificado públicamente la continuidad física de fibra entre las tres localidades."
+  },
+  {
+    "nombre": "CV Telecom - Fogo",
+    "operador": "CV Telecom",
+    "pais": "CV",
+    "ciudades": ["Sao Filipe", "Mosteiros"],
+    "estado": "en servicio",
+    "fuente": "UIT, documentación histórica de la red nacional de fibra de Cabo Verde, con nodos identificados en Sao Filipe y Mosteiros: https://www.itu.int/itudoc/telecom/tlcw03/nat_rep.pdf ; aproximado: corredor terrestre por la red viaria de Fogo. La conexión óptica directa entre ambos núcleos no está confirmada."
+  }
+]
