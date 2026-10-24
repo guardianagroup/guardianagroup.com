@@ -14,3 +14,19 @@ FJ  1 ruta. telecom.com.fj (2 mar 2026): fibra terrestre subterránea de 102 km 
     fiji.gov.fj (discurso del ministro): fases Labasa–Seaqaqa y Seaqaqa–Savusavu. La presentación de Fiji ante la OACI no se pudo abrir.
 GQ  3 rutas. gitge.com/?p=508 (GITGE): la Red Troncal Nacional conecta 19 ciudades y enumera los nodos continentales en orden;
     gitge.com/wp-content/uploads/2020/07/PRESENTACION-6.pdf: fibra terrestre en 19 ciudades. El informe anual 2024 es un PDF escaneado y no se pudo leer.
+
+== Grupo 2 → fibra-agencia/claude-troncales-2.json ==
+GT  1 ruta. eprsiepac.com/linea-siepac/ (EPR): Guate Norte–Panaluya–El Florido en servicio desde 26-ago-2012, OPGW de 36 fibras.
+    (El tramo Aguacapa–frontera de El Salvador no se incluye: Aguacapa es una central, no una ciudad.)
+GY  2 rutas. enetworks.gy/blog/page/3/ (fibra «from Georgetown to Linden», OnFiber en Linden);
+    enetworks.gy/2022/11/15/enetworks-fiber-upgrades.html (backbone con servicio en Georgetown, Linden, Anna Regina, Corriverton, New Amsterdam;
+    el orden de la ruta costera es geográfico, la fuente no da trazado).
+HN  4 rutas. eprsiepac.com/linea-siepac/ (El Florido–San Buenaventura, 141 km, 19-mar-2012);
+    Informe final PNUD–HONDUTEL, marzo 2013, ap. 4.1.1 (copia en orientacionuniversitaria.weebly.com): rutas terminadas y en uso
+    Puerto Cortés–SPS–Tegucigalpa–Nacaome–El Amatillo, Nacaome–Choluteca, La Ceiba–Saba–Tocoa.
+HT  NO CONFIRMADO. UIT 2024, D-LDC-ICTLDC-2024-01 (solo totales: Natcom 5.056 km, Digicel 1.642 km, Access Haiti 2.400 km; sin rutas);
+    conatel.gouv.ht/node/273 (robots lo impide) y el plan estratégico MPCE 2012 (PDF no accesible) no se pudieron leer.
+JM  NO CONFIRMADO. Solo prensa (Jamaica Observer, 23 ago 2024: el gerente de Flow habla de su «transmission backbone between May Pen and St. James»), sin fuente oficial.
+KP  NO CONFIRMADO. Ninguna fuente oficial o primaria con rutas (solo análisis de terceros).
+KW  NO CONFIRMADO. stc.com.sa (hard patched transit: «seven border connections», sin países ni rutas); nada oficial de Kuwait.
+LB  NO CONFIRMADO. ogero.gov.lb y prensa: solo FTTx y anuncios, sin troncal con rutas.
