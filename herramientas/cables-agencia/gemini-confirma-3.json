@@ -1,0 +1,482 @@
+[
+ {
+  "nombre": "Eastern Arctic Undersea Fibre Optic Network - EAUFON 1",
+  "llegadas": [
+   {
+    "lugar": "Chisasibi",
+    "pais": "CA",
+    "lat": 53.789,
+    "lon": -78.896
+   },
+   {
+    "lugar": "Inukjuak",
+    "pais": "CA",
+    "lat": 58.453,
+    "lon": -78.103
+   },
+   {
+    "lugar": "Kuujjuarapik",
+    "pais": "CA",
+    "lat": 55.277,
+    "lon": -77.759
+   },
+   {
+    "lugar": "Puvirnituq",
+    "pais": "CA",
+    "lat": 60.037,
+    "lon": -77.269
+   },
+   {
+    "lugar": "Umiujaq",
+    "pais": "CA",
+    "lat": 56.552,
+    "lon": -76.547
+   }
+  ],
+  "anio": 2022,
+  "km": 1175,
+  "duenos": [
+   "Tamaani Internet",
+   "Kativik Regional Government (KRG)"
+  ],
+  "fuentes": [
+   "https://www.krg.ca/",
+   "https://www.tamaani.ca/"
+  ]
+ },
+ {
+  "nombre": "Eastern Arctic Undersea Fibre Optic Network - EAUFON 2",
+  "llegadas": [
+   {
+    "lugar": "Akulivik",
+    "pais": "CA",
+    "lat": 60.819,
+    "lon": -78.149
+   },
+   {
+    "lugar": "Deception",
+    "pais": "CA",
+    "lat": 62.117,
+    "lon": -74.633
+   },
+   {
+    "lugar": "Ivujivik",
+    "pais": "CA",
+    "lat": 62.417,
+    "lon": -77.91
+   },
+   {
+    "lugar": "Kangiqsujuaq",
+    "pais": "CA",
+    "lat": 61.597,
+    "lon": -71.955
+   },
+   {
+    "lugar": "Puvirnituq",
+    "pais": "CA",
+    "lat": 60.037,
+    "lon": -77.269
+   },
+   {
+    "lugar": "Salluit",
+    "pais": "CA",
+    "lat": 62.202,
+    "lon": -75.639
+   }
+  ],
+  "anio": 2024,
+  "km": 675,
+  "duenos": [
+   "Tamaani Internet",
+   "Kativik Regional Government (KRG)"
+  ],
+  "fuentes": [
+   "https://www.krg.ca/",
+   "https://www.tamaani.ca/"
+  ]
+ },
+ {
+  "nombre": "Jakarta-Surabaya Cable System (JAYABAYA)",
+  "llegadas": [
+   {
+    "lugar": "Banyu Urip",
+    "pais": "ID",
+    "lat": -6.983,
+    "lon": 112.5
+   },
+   {
+    "lugar": "Cirebon",
+    "pais": "ID",
+    "lat": -6.706,
+    "lon": 108.557
+   },
+   {
+    "lugar": "Kendal",
+    "pais": "ID",
+    "lat": -6.927,
+    "lon": 110.204
+   },
+   {
+    "lugar": "Tanjung Pakis",
+    "pais": "ID",
+    "lat": -5.973,
+    "lon": 107.125
+   }
+  ],
+  "anio": 2018,
+  "km": 888,
+  "duenos": [
+   "Triasmitra",
+   "Moratelindo"
+  ],
+  "fuentes": [
+   "https://triasmitra.com/",
+   "https://www.moratelindo.co.id/"
+  ]
+ },
+ {
+  "nombre": "Medan-Dumai Cable System (DAMAI)",
+  "llegadas": [
+   {
+    "lugar": "Dumai",
+    "pais": "ID",
+    "lat": 1.667,
+    "lon": 101.443
+   },
+   {
+    "lugar": "Panipahan",
+    "pais": "ID",
+    "lat": 2.463,
+    "lon": 100.383
+   },
+   {
+    "lugar": "Pantai Cermin",
+    "pais": "ID",
+    "lat": 3.639,
+    "lon": 98.983
+   }
+  ],
+  "anio": 2019,
+  "km": 572,
+  "duenos": [
+   "Triasmitra",
+   "Moratelindo"
+  ],
+  "fuentes": [
+   "https://triasmitra.com/",
+   "https://www.moratelindo.co.id/"
+  ]
+ },
+ {
+  "nombre": "Patara-2",
+  "llegadas": [
+   {
+    "lugar": "Manokwari",
+    "pais": "ID",
+    "lat": -0.862,
+    "lon": 134.062
+   },
+   {
+    "lugar": "Supiori",
+    "pais": "ID",
+    "lat": -0.739,
+    "lon": 135.601
+   },
+   {
+    "lugar": "Waisai",
+    "pais": "ID",
+    "lat": -0.429,
+    "lon": 130.823
+   }
+  ],
+  "anio": 2023,
+  "km": 1200,
+  "duenos": [
+   "Telin"
+  ],
+  "fuentes": [
+   "https://www.telin.net/"
+  ]
+ },
+ {
+  "nombre": "BALOK (Bali-Lombok)",
+  "llegadas": [
+   {
+    "lugar": "Senggigi",
+    "pais": "ID",
+    "lat": -8.491,
+    "lon": 116.044
+   },
+   {
+    "lugar": "Seraya",
+    "pais": "ID",
+    "lat": -8.417,
+    "lon": 115.667
+   }
+  ],
+  "anio": 2016,
+  "km": 50,
+  "duenos": [
+   "XL Axiata"
+  ],
+  "fuentes": [
+   "https://www.xlaxiata.co.id/"
+  ]
+ },
+ {
+  "nombre": "Besut-Perhentian Islands",
+  "llegadas": [
+   {
+    "lugar": "Kampung Raja",
+    "pais": "MY",
+    "lat": 5.796,
+    "lon": 102.565
+   },
+   {
+    "lugar": "Pulau Perhentian Besar",
+    "pais": "MY",
+    "lat": 5.902,
+    "lon": 102.752
+   },
+   {
+    "lugar": "Pulau Perhentian Kecil",
+    "pais": "MY",
+    "lat": 5.914,
+    "lon": 102.722
+   }
+  ],
+  "anio": 2019,
+  "km": 21,
+  "duenos": [
+   "Telekom Malaysia"
+  ],
+  "fuentes": [
+   "https://www.tm.com.my/"
+  ]
+ },
+ {
+  "nombre": "Lumut-Pangkor Island",
+  "llegadas": [
+   {
+    "lugar": "Lumut",
+    "pais": "MY",
+    "lat": 4.232,
+    "lon": 100.63
+   },
+   {
+    "lugar": "Pantai Teluk Baharu",
+    "pais": "MY",
+    "lat": 4.193,
+    "lon": 100.58
+   }
+  ],
+  "anio": 2018,
+  "km": 4,
+  "duenos": [
+   "Telekom Malaysia"
+  ],
+  "fuentes": [
+   "https://www.tm.com.my/"
+  ]
+ },
+ {
+  "nombre": "Rompin-Tioman Island",
+  "llegadas": [
+   {
+    "lugar": "Kampung Tekek",
+    "pais": "MY",
+    "lat": 2.816,
+    "lon": 104.158
+   },
+   {
+    "lugar": "Kuala Rompin",
+    "pais": "MY",
+    "lat": 2.806,
+    "lon": 103.486
+   }
+  ],
+  "anio": 2018,
+  "km": 75,
+  "duenos": [
+   "Telekom Malaysia"
+  ],
+  "fuentes": [
+   "https://www.tm.com.my/"
+  ]
+ },
+ {
+  "nombre": "Taiwan-Matsu No. 4",
+  "llegadas": [
+   {
+    "lugar": "Dongyin",
+    "pais": "TW",
+    "lat": 26.367,
+    "lon": 120.483
+   },
+   {
+    "lugar": "Nangan",
+    "pais": "TW",
+    "lat": 26.15,
+    "lon": 119.933
+   },
+   {
+    "lugar": "Tanshui",
+    "pais": "TW",
+    "lat": 25.17,
+    "lon": 121.441
+   },
+   {
+    "lugar": "Xiju",
+    "pais": "TW",
+    "lat": 25.974,
+    "lon": 119.939
+   }
+  ],
+  "anio": 2026,
+  "km": 300,
+  "duenos": [
+   "Chunghwa Telecom"
+  ],
+  "fuentes": [
+   "https://www.cht.com.tw/",
+   "https://moda.gov.tw/"
+  ]
+ },
+ {
+  "nombre": "Jeju-Mainland 2",
+  "llegadas": [
+   {
+    "lugar": "Goheung",
+    "pais": "KR",
+    "lat": 34.611,
+    "lon": 127.285
+   },
+   {
+    "lugar": "Goseong-ri",
+    "pais": "KR",
+    "lat": 33.447,
+    "lon": 126.911
+   }
+  ],
+  "anio": 1996,
+  "km": 191,
+  "duenos": [
+   "KT"
+  ],
+  "fuentes": [
+   "https://corp.kt.com/"
+  ]
+ },
+ {
+  "nombre": "Jeju-Mainland 3",
+  "llegadas": [
+   {
+    "lugar": "Goseong-ri",
+    "pais": "KR",
+    "lat": 33.447,
+    "lon": 126.911
+   },
+   {
+    "lugar": "Mijo-myeon",
+    "pais": "KR",
+    "lat": 34.712,
+    "lon": 128.046
+   }
+  ],
+  "anio": 2000,
+  "km": 236,
+  "duenos": [
+   "KT"
+  ],
+  "fuentes": [
+   "https://corp.kt.com/"
+  ]
+ },
+ {
+  "nombre": "Jeju-Udo",
+  "llegadas": [
+   {
+    "lugar": "Goseong-ri",
+    "pais": "KR",
+    "lat": 33.447,
+    "lon": 126.911
+   },
+   {
+    "lugar": "Udo",
+    "pais": "KR",
+    "lat": 33.504,
+    "lon": 126.954
+   }
+  ],
+  "anio": 2023,
+  "km": 3,
+  "duenos": [
+   "KCTV Jeju Broadcasting",
+   "KT",
+   "LG Uplus",
+   "SK Telecom (SKT)"
+  ],
+  "fuentes": [
+   "https://corp.kt.com/",
+   "https://www.sktelecom.com/",
+   "https://www.lguplus.com/"
+  ]
+ },
+ {
+  "nombre": "Ulleung-Mainland 2",
+  "llegadas": [
+   {
+    "lugar": "Hosan-ri",
+    "pais": "KR",
+    "lat": 37.171,
+    "lon": 129.342
+   },
+   {
+    "lugar": "Ulleung",
+    "pais": "KR",
+    "lat": 37.484,
+    "lon": 130.906
+   }
+  ],
+  "anio": 2016,
+  "km": 164,
+  "duenos": [
+   "KT"
+  ],
+  "fuentes": [
+   "https://corp.kt.com/"
+  ]
+ },
+ {
+  "nombre": "Guam Okinawa Kyushu Incheon (GOKI)",
+  "llegadas": [
+   {
+    "lugar": "Kitakyushu",
+    "pais": "JP",
+    "lat": 33.883,
+    "lon": 130.883
+   },
+   {
+    "lugar": "Naha",
+    "pais": "JP",
+    "lat": 26.212,
+    "lon": 127.681
+   },
+   {
+    "lugar": "Tumon Bay",
+    "pais": "GU",
+    "lat": 13.512,
+    "lon": 144.805
+   }
+  ],
+  "anio": 2013,
+  "km": 4244,
+  "duenos": [
+   "AT&T"
+  ],
+  "fuentes": [
+   "https://www.att.com/",
+   "https://www.fcc.gov/"
+  ]
+ }
+]

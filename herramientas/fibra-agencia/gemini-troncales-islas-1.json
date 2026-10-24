@@ -1,0 +1,138 @@
+[
+ {
+  "nombre": "WARCIP Guinea-Bissau ACE Terrestrial Backhaul Link",
+  "operador": "Sociedade de Cabo da Guiné-Bissau (SCGB)",
+  "pais": "GW",
+  "ciudades": [
+   "Suro",
+   "Bissauzinho",
+   "Ilondé",
+   "Bissalanca",
+   "Bissau",
+   "Antula"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://arn.gw/site24/wp-content/uploads/2024/08/P155876-WARCIP-EIES-WARCIP-RAPPORT-FINAL_CORRIGE-03072019.pdf"
+ },
+ {
+  "nombre": "OMVG Interconnection OPGW Terrestrial Backbone (Guinea-Bissau Section)",
+  "operador": "Organisation pour la Mise en Valeur du fleuve Gambie (OMVG)",
+  "pais": "GW",
+  "ciudades": [
+   "Saltinho",
+   "Bambadinca",
+   "Mansôa",
+   "Bissau"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://documents1.worldbank.org/curated/en/099122424093584384/pdf/P146830-5a16834b-61b7-4e73-bff5-ee895259ff33.pdf"
+ },
+ {
+  "nombre": "CST National Terrestrial Fiber Optic Network",
+  "operador": "Companhia Santomense de Telecomunicações (CST)",
+  "pais": "ST",
+  "ciudades": [
+   "Neves",
+   "Guadalupe",
+   "São Tomé",
+   "Trindade",
+   "Santana",
+   "São João dos Angolares"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://cst.st/PT/sobre-nos/onde-estamos"
+ },
+ {
+  "nombre": "SEAS Submarine Cable Terrestrial Backhaul (Beau Vallon - Victoria)",
+  "operador": "Seychelles Cable Systems Company (SCS) / Cable & Wireless Seychelles",
+  "pais": "SC",
+  "ciudades": [
+   "Beau Vallon",
+   "Victoria"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.eib.org/files/pipeline/20080549_esia1_en.pdf"
+ },
+ {
+  "nombre": "CWS Mahé Island Terrestrial Fiber Optic Backbone",
+  "operador": "Cable & Wireless Seychelles (CWS)",
+  "pais": "SC",
+  "ciudades": [
+   "Beau Vallon",
+   "Victoria",
+   "Anse Royale"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://cws-beauvallon-customer-services-centre.koek.sc/de"
+ },
+ {
+  "nombre": "Grande Comore (Ngazidja) National Terrestrial Fiber Optic Backbone",
+  "operador": "Comores Télécom",
+  "pais": "KM",
+  "ciudades": [
+   "Mitsamiouli",
+   "Hahaya",
+   "Voidjou",
+   "Moroni",
+   "Iconi",
+   "Mvouni",
+   "Mkazi",
+   "Mitsoudjé",
+   "Mavingouni",
+   "Foumbouni",
+   "Chindini"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://comorestelecom.km/portail/pg/apropos/4"
+ },
+ {
+  "nombre": "FLY-LION3 Terrestrial Backhaul Link (Itsandra - Moroni)",
+  "operador": "Comores Télécom / Comores Câbles",
+  "pais": "KM",
+  "ciudades": [
+   "Itsandra",
+   "Moroni"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://documents1.worldbank.org/curated/en/440951530170950884/pdf/EIES-DU-PROJET-D-ATTERRISSEMENT-DU-CABLE-FLY-LION-3-FINAL.pdf"
+ },
+ {
+  "nombre": "Guadalcanal Highway Underground Fiber Optic Network",
+  "operador": "Our Telekom (Solomon Telekom Company Limited)",
+  "pais": "SB",
+  "ciudades": [
+   "White River",
+   "Point Cruz",
+   "Honiara",
+   "Ranadi",
+   "Henderson"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.ourtelekom.com.sb/dial-333-before-you-dig/"
+ },
+ {
+  "nombre": "ICN1 Terrestrial Backhaul & Efate Fiber Network",
+  "operador": "Interchange Limited (ICL) / Vodafone Vanuatu",
+  "pais": "VU",
+  "ciudades": [
+   "Blacksands",
+   "Port Vila"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://interchange.vu/"
+ },
+ {
+  "nombre": "Grand Bahama Terrestrial Fiber Optic Backbone",
+  "operador": "Bahamas Telecommunications Company (BTC) / Cable Bahamas",
+  "pais": "BS",
+  "ciudades": [
+   "West End",
+   "Eight Mile Rock",
+   "Hawksbill",
+   "Freeport",
+   "Lucaya"
+  ],
+  "estado": "en servicio",
+  "fuente": "https://www.bahamaslocal.com/newsitem/228927/BTC_Focused_on_Restoration_Priority_Areas_include_Marsh_Harbour_Eight_Mile_Rock_and_Freeport.html"
+ }
+]
