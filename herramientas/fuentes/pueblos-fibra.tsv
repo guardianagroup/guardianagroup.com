@@ -242,8 +242,16 @@ zabre	BF	11.1825	-0.63222	21726	Zabré
 zorgho	BF	12.24922	-0.61527	35398	Zorgo
 almuharraq	BH	26.25722	50.61194	176583	Al Muharraq
 arrifa	BH	26.13	50.555	115495	Ar Rifā‘
+hamadtown	BH	26.11528	50.50694	133550	Madīnat Ḩamad
+isatown	BH	26.17361	50.54778	38090	Madīnat ‘Īsá
+jidhafs	BH	26.21861	50.54778	66588	Jidd Ḩafş
 madinathamad	BH	26.11528	50.50694	133550	Madīnat Ḩamad
+madinatisa	BH	26.17361	50.54778	38090	Madīnat ‘Īsá
 manama	BH	26.22787	50.58565	147074	Manama
+muharraq	BH	26.25722	50.61194	176583	Al Muharraq
+riffa	BH	26.13	50.555	115495	Ar Rifā‘
+sitrah	BH	26.15472	50.62056	72601	Sitrah
+zallaq	BH	26.0475	50.48639	9095	Az Zallāq
 abomeycalavi	BJ	6.44852	2.35566	385755	Abomey-Calavi
 allada	BJ	6.66547	2.15138	23287	Allada
 bembereke	BJ	10.22827	2.66335	31176	Bembèrèkè
@@ -376,7 +384,9 @@ zhlobin	BY	52.8926	30.024	76304	Zhlobin
 belizecity	BZ	17.49952	-88.19756	65222	Belize City
 belmopan	BZ	17.25376	-88.76401	13381	Belmopan
 corozal	BZ	18.39375	-88.38849	9815	Corozal
+dangriga	BZ	16.9697	-88.23313	9927	Dangriga
 orangewalk	BZ	18.08124	-88.56328	15298	Orange Walk
+puntagorda	BZ	16.09835	-88.8097	5406	Punta Gorda
 sanignacio	BZ	17.1588	-89.0696	21229	San Ignacio
 bangui	CF	4.36122	18.55496	812407	Bangui
 baoro	CF	5.66667	15.96667	18089	Baoro
@@ -468,6 +478,8 @@ tunja	CO	5.54481	-73.35756	172548	Tunja
 villavicencio	CO	4.13238	-73.62564	321717	Villavicencio
 canas	CR	10.43105	-85.09825	20306	Cañas
 parrita	CR	9.52166	-84.32289	3734	Parrita
+artemisa	CU	22.81366	-82.75814	68073	Artemisa
+bayamo	CU	20.37368	-76.64272	192632	Bayamo
 camaguey	CU	21.38083	-77.91694	347562	Camagüey
 ciegodeavila	CU	21.8422	-78.76034	142027	Ciego de Ávila
 guantanamo	CU	20.14444	-75.20917	272801	Guantánamo
@@ -483,7 +495,15 @@ alisabieh	DJ	11.15583	42.7125	50006	Ali Sabih
 dikhil	DJ	11.10454	42.36971	32801	Dikhil
 djibouti	DJ	11.58901	43.14503	626512	Djibouti
 galafi	DJ	11.71583	41.83611	1849	Gâlâfi
+bonao	DO	18.94154	-70.41111	73269	Bonao
+higuey	DO	18.61501	-68.70798	123787	Salvaleón de Higüey
+laromana	DO	18.42332	-68.96635	208437	La Romana
+lavega	DO	19.22031	-70.53101	102426	La Vega
+montecristi	DO	19.84799	-71.64604	17001	San Fernando de Monte Cristi
 puertoplata	DO	19.79344	-70.6884	146000	Puerto Plata
+puntacana	DO	18.58182	-68.40431	100023	Punta Cana
+salvaleondehiguey	DO	18.61501	-68.70798	123787	Salvaleón de Higüey
+sanpedrodemacoris	DO	18.4539	-69.30864	217899	San Pedro de Macorís
 santiagodeloscaballeros	DO	19.45036	-70.69085	1200000	Santiago de los Caballeros
 villabisono	DO	19.56378	-70.87582	33137	Villa Bisonó
 ambato	EC	-1.24908	-78.61675	387309	Ambato
@@ -615,8 +635,11 @@ tegucigalpa	HN	14.0818	-87.20681	850848	Tegucigalpa
 tocoa	HN	15.68333	-86.0	111972	Tocoa
 caphaitien	HT	19.75938	-72.19815	134815	Cap-Haïtien
 gonaives	HT	19.44755	-72.68928	84961	Gonaïves
+jeremie	HT	18.65	-74.11667	97503	Jérémie
+leogane	HT	18.5111	-72.63343	134190	Léogâne
 lescayes	HT	18.19199	-73.74948	125799	Les Cayes
 miragoane	HT	18.44599	-73.08957	89202	Miragoâne
+petitgoave	HT	18.43117	-72.86521	117504	Tigwav
 portauprince	HT	18.54349	-72.33881	1234742	Port-au-Prince
 saintmarc	HT	19.11136	-72.70078	266642	Saint-Marc
 bandaaceh	ID	5.54167	95.33333	267962	Banda Aceh
@@ -737,8 +760,16 @@ tabriz	IR	38.08	46.2919	1424641	Tabriz
 tehran	IR	35.69439	51.42151	7153309	Tehran
 yazd	IR	31.89722	54.3675	477905	Yazd
 zanjan	IR	36.67642	48.49628	357471	Zanjan
+falmouth	JM	18.49358	-77.65587	7779	Falmouth
+kingston	JM	17.99702	-76.79358	937700	Kingston
 maypen	JM	17.96454	-77.24515	44755	May Pen
 montegobay	JM	18.47116	-77.91883	82867	Montego Bay
+morantbay	JM	17.88145	-76.40927	9368	Morant Bay
+negril	JM	18.26844	-78.3481	13779	Negril
+ochorios	JM	18.4076	-77.10312	26503	Ocho Rios
+portantonio	JM	18.17889	-76.45215	14400	Port Antonio
+saintannsbay	JM	18.43581	-77.20098	13671	Saint Ann’s Bay
+spanishtown	JM	17.99107	-76.95742	145018	Spanish Town
 alkarak	JO	31.18248	35.69999	22581	Qīr Moāv
 amman	JO	31.95522	35.94503	1275857	Amman
 aqaba	JO	29.52667	35.00778	95048	Aqaba
@@ -798,16 +829,27 @@ sisophon	KH	13.58588	102.97369	23218	Sisophon
 stungtreng	KH	13.52586	105.9683	25000	Stung Treng
 svayrieng	KH	11.08785	105.79935	23956	Svay Rieng
 takeo	KH	10.99081	104.78498	843931	Takeo
+anju	KP	39.61778	125.66472	50196	Anju
 chongjin	KP	41.79556	129.77583	327000	Chongjin
+chongju	KP	39.69252	125.21355	29065	Chŏngju-si
 hamhung	KP	39.91833	127.53639	559056	Hamhŭng
+kaesong	KP	37.97083	126.55444	338155	Kaesŏng
+pyongsong	KP	39.24639	125.87194	100000	P’yŏngsŏng
 pyongyang	KP	39.03385	125.75432	3222000	Pyongyang
 rajin	KP	42.25559	130.28308	66224	Rajin
+rason	KP	42.25559	130.28308	66224	Rajin
+sariwon	KP	38.50722	125.75583	310100	Sariwŏn-si
 sinuiju	KP	40.10056	124.39806	288112	Sinŭiju
+wonsan	KP	39.15278	127.44361	329207	Wŏnsan
 abdali	KW	30.04219	47.72205	6835	Mazāri‘ al ‘Abdalī
 alahmadi	KW	29.07694	48.08389	637411	Al Aḩmadī
+alfahahil	KW	29.0825	48.13028	68290	Al Faḩāḩīl
 alfarwaniyah	KW	29.2775	47.95861	86525	Al Farwānīyah
+aljahra	KW	29.3375	47.65806	24281	Al Jahrā’
 aljahrah	KW	29.3375	47.65806	24281	Al Jahrā’
 alwafrah	KW	28.63917	47.93056	10017	Al Wafrah
+fahaheel	KW	29.0825	48.13028	68290	Al Faḩāḩīl
+hawalli	KW	29.33278	48.02861	164212	Ḩawallī
 kuwaitcity	KW	29.367	47.97429	60064	Kuwait City
 aktau	KZ	43.66105	51.17392	147443	Aktau
 aktobe	KZ	50.27969	57.20718	500757	Aktobe
@@ -851,7 +893,9 @@ batroun	LB	34.25528	35.65806	10852	Batroûn
 beirut	LB	33.89332	35.50157	1916100	Beirut
 bhamdoun	LB	33.80861	35.65972	5000	Bhamdoûn el Mhatta
 byblos	LB	34.12111	35.64806	20784	Byblos
+halba	LB	34.54278	36.07972	4500	Halba
 jounieh	LB	33.98083	35.61778	96315	Jounieh
+nabatieh	LB	33.37889	35.48389	120000	Nabatîyé et Tahta
 sidon	LB	33.55751	35.37148	163554	Sidon
 tripoli	LB	34.43352	35.84415	229398	Tripoli
 tyre	LB	33.27333	35.19389	135204	Tyre
@@ -1018,11 +1062,14 @@ biratnagar	NP	26.45505	87.27007	244750	Biratnagar
 birgunj	NP	27.01736	84.88047	268273	Birgañj
 butwal	NP	27.69121	83.45251	195054	Butwāl
 dhangadhi	NP	28.70159	80.58991	204788	Dhangaḍhi̇̄
+dharan	NP	26.81436	87.27972	173096	Dharān
 hetauda	NP	27.42839	85.03219	195951	Hetauda
 itahari	NP	26.66371	87.27403	47984	Īṭahari̇̄
+janakpur	NP	26.72882	85.92628	195438	Janakpur
 kathmandu	NP	27.70169	85.3206	1442271	Kathmandu
 lahan	NP	26.72022	86.48258	102955	Lahān
 mahendranagar	NP	28.96399	80.17715	88381	Bhimdatta
+nepalgunj	NP	28.05	81.61667	166258	Nepalgunj
 pokhara	NP	28.26689	83.96851	600051	Pokhara
 siddharthanagar	NP	27.5	83.45	63367	Siddharthanagar
 tansen	NP	27.86655	83.54587	23693	Tānsen
@@ -1112,11 +1159,15 @@ tayabas	PH	14.0259	121.5929	115318	Tayabas
 tuguegarao	PH	17.61577	121.72285	167297	Tuguegarao
 vigan	PH	17.57472	120.38694	48545	Vigan
 bethlehem	PS	31.70487	35.20376	29019	Bethlehem
+deirelbalah	PS	31.41834	34.34933	59504	Dayr al Balaḩ
+gaza	PS	31.50161	34.46672	410000	Gaza
 hebron	PS	31.52935	35.0938	160470	Hebron
 jenin	PS	32.45943	35.30086	34730	Janīn
 jericho	PS	31.86667	35.45	19783	Jericho
+khanyunis	PS	31.34018	34.30627	173183	Khān Yūnis
 nablus	PS	32.22111	35.25444	130326	Nablus
 qalqilyah	PS	32.18966	34.97063	43212	Qalqīlyah
+rafah	PS	31.29722	34.24357	126305	Rafaḩ
 ramallah	PS	31.89964	35.20422	43880	Ramallah
 salfit	PS	32.08371	35.18079	11000	Salfīt
 tulkarm	PS	32.31156	35.0269	44169	Ţūlkarm
@@ -1137,7 +1188,9 @@ ashshahaniyah	QA	25.37088	51.22264	8380	Ash Shīḩānīyah
 doha	QA	25.28545	51.53096	344939	Doha
 dukhan	QA	25.42485	50.78227	7250	Dukhān
 lusail	QA	25.4175	51.5075	198600	Lusail
+madinatashshamal	QA	26.12933	51.2009	5267	Madīnat ash Shamāl
 mesaieed	QA	24.99226	51.55067	5769	Musay‘īd
+ummsalalmuhammad	QA	25.41524	51.40647	29391	Umm Şalāl Muḩammad
 chelyabinsk	RU	55.1611	61.42877	1202371	Chelyabinsk
 chita	RU	52.04311	113.49171	349005	Chita
 irkutsk	RU	52.29566	104.29076	623869	Irkutsk
@@ -1236,11 +1289,14 @@ zacatecoluca	SV	13.50872	-88.87017	39613	Zacatecoluca
 albukamal	SY	34.45226	40.91854	57572	Ālbū Kamāl
 aleppo	SY	36.20124	37.16117	2098210	Aleppo
 alhasakah	SY	36.50237	40.74772	422445	Al Ḩasakah
+alqamishli	SY	37.05215	41.23142	184231	Al Qāmishlī
 annabk	SY	34.02403	36.72848	49372	An Nabk
+arraqqah	SY	35.95283	39.00788	531952	Ar Raqqah
 azaz	SY	36.58742	37.04661	66138	I‘zāz
 baniyas	SY	35.18188	35.94871	39066	Bāniyās
 damascus	SY	33.5102	36.29128	1569394	Damascus
 daraa	SY	32.61889	36.10213	97969	Dar‘ā
+dayrazzawr	SY	35.33588	40.14084	271800	Deir ez-Zor
 deirezzor	SY	35.33588	40.14084	271800	Deir ez-Zor
 hama	SY	35.13179	36.75783	460602	Ḩamāh
 homs	SY	34.72405	36.72559	775404	Homs
@@ -1494,9 +1550,11 @@ marib	YE	15.46253	45.32581	16794	Ma'rib
 mocha	YE	13.31814	43.24991	16794	Mocha
 qishn	YE	15.42409	51.67836	0	Qishn
 saada	YE	16.94021	43.76393	51870	Sa'dah
+sadah	YE	16.94021	43.76393	51870	Sa'dah
 sanaa	YE	15.35452	44.20646	1937451	Sanaa
 sayhut	YE	15.21056	51.24556	0	Sayḩūt
 taiz	YE	13.57952	44.02091	940600	Taiz
+taizz	YE	13.57952	44.02091	940600	Taiz
 tarim	YE	16.05694	48.99889	0	Tarim
 yarim	YE	14.29804	44.37795	33050	Yarīm
 zabid	YE	14.1951	43.31518	52590	Zabīd
