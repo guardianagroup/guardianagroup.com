@@ -1,0 +1,34 @@
+[
+  {
+    "nombre": "Troncal Este–Oeste por la carretera Mahendra",
+    "operador": "Nepal Telecom",
+    "pais": "NP",
+    "ciudades": ["Birtamod", "Itahari", "Lahan", "Bardibas", "Hetauda", "Bharatpur", "Butwal", "Lamahi", "Kohalpur", "Attariya", "Mahendranagar"],
+    "estado": "en servicio",
+    "fuente": "Nepal Telecom, informes anuales: red troncal óptica Este–Oeste existente; aproximado: secuencia de ciudades principales siguiendo la carretera Mahendra, no un trazado del cable publicado ciudad por ciudad. No corresponde al proyecto de fibra de la Mid-Hill Highway."
+  },
+  {
+    "nombre": "Kathmandu–Birgunj–Raxaul: salida terrestre hacia India",
+    "operador": "Nepal Telecom; interconexión con operadores indios",
+    "pais": "NP",
+    "ciudades": ["Kathmandu", "Bharatpur", "Hetauda", "Birgunj", "Raxaul"],
+    "estado": "en servicio",
+    "fuente": "Nepal Telecom, informes anuales: conectividad óptica internacional por Birgunj; aproximado: recorrido interior por los corredores de las carreteras Prithvi y Mahendra hasta Hetauda y después hacia Birgunj. La secuencia interior es una reconstrucción probable, no el itinerario publicado de un circuito concreto."
+  },
+  {
+    "nombre": "Kathmandu–Rasuwagadhi–Gyirong: salida terrestre hacia China",
+    "operador": "Nepal Telecom / China Telecom",
+    "pais": "NP",
+    "ciudades": ["Kathmandu", "Bidur", "Dhunche", "Gyirong"],
+    "estado": "en servicio",
+    "fuente": "Reuters, 12 de enero de 2018: entrada en servicio del enlace óptico Nepal–China por Rasuwagadhi; aproximado: ciudades intermedias siguiendo el corredor viario de acceso a Rasuwagadhi y continuación hasta Gyirong, primera localidad urbana del lado chino. La publicación acredita la puesta en servicio, no la disponibilidad instantánea."
+  },
+  {
+    "nombre": "Pyongyang–Sinuiju–Dandong: salida terrestre hacia China",
+    "operador": "China Unicom / red norcoreana de telecomunicaciones",
+    "pais": "KP",
+    "ciudades": ["Pyongyang", "Anju", "Chongju", "Sinuiju", "Dandong"],
+    "estado": "en servicio",
+    "fuente": "Reuters, 2 de octubre de 2017: conexión internacional norcoreana existente mediante China Unicom; aproximado: corredor terrestre Pyongyang–Sinuiju–Dandong, siguiendo el eje principal de carretera y ferrocarril. Anju y Chongju son pasos probables; no hay un trazado público suficientemente detallado para confirmarlos como nodos del cable."
+  }
+]

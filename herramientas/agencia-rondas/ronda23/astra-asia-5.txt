@@ -1,0 +1,114 @@
+[
+  {
+    "nombre": "Muscat–Salalah, eje interior",
+    "operador": "Omantel",
+    "pais": "OM",
+    "ciudades": ["Muscat", "Nizwa", "Adam", "Hayma", "Thumrait", "Salalah"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Omantel descrita en su documentación corporativa; secuencia inferida del corredor interior de las carreteras 15 y 31. El trazado físico completo no es público."
+  },
+  {
+    "nombre": "Muscat–Al Ain, conexión terrestre con Emiratos Árabes Unidos",
+    "operador": "Omantel / e& UAE",
+    "pais": "OM",
+    "ciudades": ["Muscat", "Barka", "Sohar", "Al Buraymi", "Al Ain"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexiones terrestres internacionales descritas por Omantel Wholesale; recorrido probable por Al Batinah y el corredor Sohar–Al Buraymi. Al Ain es la primera ciudad incluida del lado emiratí; no se publica el recorrido completo de los conductos."
+  },
+  {
+    "nombre": "Karachi–Islamabad, eje troncal del Indo",
+    "operador": "PTCL",
+    "pais": "PK",
+    "ciudades": ["Karachi", "Hyderabad", "Sukkur", "Multan", "Lahore", "Gujranwala", "Gujrat", "Jhelum", "Rawalpindi", "Islamabad"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de PTCL, documentada en sus informes corporativos y servicios de transporte; ciudades ordenadas según el corredor del Indo y la Grand Trunk Road. Representa un eje troncal, no un cable único cuyo trazado íntegro esté publicado."
+  },
+  {
+    "nombre": "Rawalpindi–Tashkurgan, fibra Pakistán–China",
+    "operador": "Special Communications Organization / China Telecom",
+    "pais": "PK",
+    "ciudades": ["Rawalpindi", "Mansehra", "Besham", "Chilas", "Gilgit", "Sost", "Tashkurgan"],
+    "estado": "en servicio",
+    "fuente": "publicado en las comunicaciones de SCO sobre el Pakistan–China Optical Fiber Cable, inaugurado en 2018; aproximado: localidades intermedias ordenadas siguiendo el corredor de la Karakoram Highway y el cruce de Khunjerab. Tashkurgan es la primera ciudad principal del lado chino."
+  },
+  {
+    "nombre": "Jenin–Hebron, eje norte–sur de Cisjordania",
+    "operador": "Paltel",
+    "pais": "PS",
+    "ciudades": ["Jenin", "Nablus", "Ramallah", "Bethlehem", "Hebron"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red fija de fibra de Cisjordania descrita en los informes de Paltel Group; secuencia probable del eje troncal que enlaza las principales ciudades del norte y del sur. No se publica el itinerario físico completo entre Ramallah y Bethlehem. No incluye infraestructura de Gaza."
+  },
+  {
+    "nombre": "Manila–Baguio, troncal del norte de Luzón",
+    "operador": "PLDT",
+    "pais": "PH",
+    "ciudades": ["Manila", "Angeles City", "Tarlac City", "Urdaneta", "Baguio"],
+    "estado": "en servicio",
+    "fuente": "aproximado: Domestic Fiber Optic Network de PLDT, descrita en sus informes anuales; secuencia inferida de los corredores terrestres de Luzón central y del acceso a Baguio. Se excluyen enlaces submarinos."
+  },
+  {
+    "nombre": "Manila–Legazpi, troncal del sur de Luzón",
+    "operador": "PLDT",
+    "pais": "PH",
+    "ciudades": ["Manila", "Calamba", "San Pablo", "Lucena", "Naga", "Legazpi"],
+    "estado": "en servicio",
+    "fuente": "aproximado: Domestic Fiber Optic Network de PLDT; recorrido probable por los corredores viarios de Luzón meridional y Bicol, principalmente la Pan-Philippine Highway. El trazado exacto de los conductos no es público; todo el eje indicado es terrestre."
+  },
+  {
+    "nombre": "Davao–Cagayan de Oro, eje oriental de Mindanao",
+    "operador": "PLDT",
+    "pais": "PH",
+    "ciudades": ["Davao", "Tagum", "San Francisco", "Bayugan", "Butuan", "Gingoog", "Cagayan de Oro"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal de fibra de PLDT en Mindanao, documentada dentro de su Domestic Fiber Optic Network; secuencia inferida del corredor Davao–Agusan y de la carretera costera Butuan–Cagayan de Oro. San Francisco corresponde a Agusan del Sur."
+  },
+  {
+    "nombre": "Doha–Ar Ruways, eje norte de Qatar",
+    "operador": "Ooredoo Qatar",
+    "pais": "QA",
+    "ciudades": ["Doha", "Al Khor", "Madinat ash Shamal", "Ar Ruways"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de Ooredoo Qatar descrita en su documentación corporativa; eje probable por los corredores de Al Khor y Al Shamal Road hasta el extremo norte del país, con recorrido superior a 100 km. No se publica una cartografía completa de la troncal."
+  },
+  {
+    "nombre": "Jeddah–Riyadh, eje transversal occidental–central",
+    "operador": "stc",
+    "pais": "SA",
+    "ciudades": ["Jeddah", "Mecca", "Taif", "Al Quwayiyah", "Riyadh"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte óptico de stc, descrita en sus informes anuales y oferta mayorista; secuencia inferida del corredor de la carretera 40. No implica que todos los cables paralelos entren en cada centro urbano."
+  },
+  {
+    "nombre": "Riyadh–Dammam, eje central–oriental",
+    "operador": "stc",
+    "pais": "SA",
+    "ciudades": ["Riyadh", "Dammam", "Khobar"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte óptico de stc; recorrido probable por el corredor Riyadh–Dammam de la carretera 40 y su continuación metropolitana hasta Khobar. El itinerario físico detallado no es público."
+  },
+  {
+    "nombre": "Jeddah–Tabuk, eje noroccidental",
+    "operador": "stc",
+    "pais": "SA",
+    "ciudades": ["Jeddah", "Medina", "Khaybar", "Tayma", "Tabuk"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de stc descrita en su documentación corporativa; secuencia probable por las carreteras 15 y 375. Se limita a la infraestructura doméstica saudí y no presupone continuidad operativa hacia Siria."
+  },
+  {
+    "nombre": "Seoul–Busan, eje Gyeongbu",
+    "operador": "KT",
+    "pais": "KR",
+    "ciudades": ["Seoul", "Suwon", "Cheonan", "Daejeon", "Gimcheon", "Gumi", "Daegu", "Miryang", "Busan"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte óptico de KT, descrita en su documentación corporativa; ciudades ordenadas según el corredor ferroviario Gyeongbu, uno de los principales ejes terrestres de telecomunicaciones. No se afirma que la fibra siga íntegramente la vía férrea."
+  },
+  {
+    "nombre": "Seoul–Mokpo, eje Honam",
+    "operador": "KT",
+    "pais": "KR",
+    "ciudades": ["Seoul", "Suwon", "Cheonan", "Daejeon", "Iksan", "Gwangju", "Naju", "Mokpo"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte óptico de KT; secuencia inferida de los corredores terrestres Gyeongbu y Honam hacia el sudoeste. La infraestructura de transporte está operativa, pero el trazado completo de cada cable no se publica."
+  }
+]
