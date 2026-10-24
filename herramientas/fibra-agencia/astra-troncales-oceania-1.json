@@ -1,0 +1,74 @@
+[
+  {
+    "nombre": "Dorsal Sydney–Canberra–Melbourne",
+    "operador": "Telstra",
+    "pais": "AU",
+    "ciudades": ["Sydney", "Goulburn", "Canberra", "Albury", "Wodonga", "Wangaratta", "Seymour", "Melbourne"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red interurbana terrestre de Telstra; secuencia urbana probable por los corredores Hume Highway, Federal Highway y Barton Highway. No representa un trazado detallado publicado por el operador."
+  },
+  {
+    "nombre": "Dorsal costera Sydney–Brisbane",
+    "operador": "Telstra",
+    "pais": "AU",
+    "ciudades": ["Sydney", "Newcastle", "Taree", "Port Macquarie", "Coffs Harbour", "Grafton", "Ballina", "Gold Coast", "Brisbane"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red interurbana terrestre de Telstra; ciudades ordenadas según el corredor costero de Pacific Highway. La posición exacta de la fibra y sus entradas en cada núcleo urbano no están confirmadas."
+  },
+  {
+    "nombre": "Dorsal terrestre Adelaide–Perth, corredor meridional",
+    "operador": "Telstra",
+    "pais": "AU",
+    "ciudades": ["Adelaide", "Port Augusta", "Ceduna", "Eucla", "Norseman", "Coolgardie", "Northam", "Perth"],
+    "estado": "en servicio",
+    "fuente": "aproximado: enlace interurbano terrestre de Telstra entre South Australia y Western Australia; secuencia probable por Eyre Highway y Great Eastern Highway. Se identifica el corredor meridional, no la alternativa ferroviaria transaustraliana."
+  },
+  {
+    "nombre": "Dorsal de North Island, Auckland–Wellington",
+    "operador": "Spark",
+    "pais": "NZ",
+    "ciudades": ["Auckland", "Hamilton", "Cambridge", "Tokoroa", "Taupo", "Turangi", "Waiouru", "Taihape", "Bulls", "Levin", "Paraparaumu", "Porirua", "Wellington"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red óptica nacional de Spark; secuencia urbana probable por el corredor central de State Highway 1. No debe interpretarse como una relación publicada de todos los nodos ópticos."
+  },
+  {
+    "nombre": "Dorsal oriental de South Island, Picton–Christchurch",
+    "operador": "Spark",
+    "pais": "NZ",
+    "ciudades": ["Picton", "Blenheim", "Kaikoura", "Cheviot", "Waipara", "Christchurch"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red interurbana de Spark y corredor de telecomunicaciones de la costa oriental, reconstruido después del terremoto de Kaikoura de 2016; secuencia probable siguiendo State Highway 1 y Main North Line. Se excluye el cruce submarino de Cook Strait."
+  },
+  {
+    "nombre": "Dorsal meridional de South Island, Christchurch–Invercargill",
+    "operador": "Spark",
+    "pais": "NZ",
+    "ciudades": ["Christchurch", "Ashburton", "Timaru", "Oamaru", "Dunedin", "Balclutha", "Gore", "Mataura", "Invercargill"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red óptica interurbana de Spark; secuencia probable por los corredores de State Highway 1 y Main South Line. El trazado de detalle no está publicado."
+  },
+  {
+    "nombre": "Dorsal terrestre de las Highlands, Lae–Mount Hagen",
+    "operador": "PNG DataCo",
+    "pais": "PG",
+    "ciudades": ["Lae", "Nadzab", "Yonki", "Kainantu", "Goroka", "Kundiawa", "Minj", "Mount Hagen"],
+    "estado": "en servicio",
+    "fuente": "aproximado: PNG DataCo, National Transmission Network, componente terrestre de las Highlands; ciudades ordenadas según Highlands Highway y los corredores eléctricos de PNG Power utilizados para transportar fibra. La secuencia urbana es inferida, no un inventario publicado de estaciones."
+  },
+  {
+    "nombre": "Dorsal meridional de Viti Levu, Suva–Lautoka",
+    "operador": "Telecom Fiji",
+    "pais": "FJ",
+    "ciudades": ["Suva", "Navua", "Sigatoka", "Nadi", "Lautoka"],
+    "estado": "en servicio",
+    "fuente": "aproximado: infraestructura troncal de fibra de Telecom Fiji en Viti Levu; secuencia urbana probable por Queens Road. Se incluye únicamente el corredor terrestre meridional, no conexiones interinsulares."
+  },
+  {
+    "nombre": "Dorsal occidental de Grande Terre, Noumea–Koumac",
+    "operador": "OPT-NC",
+    "pais": "NC",
+    "ciudades": ["Noumea", "Paita", "Bouloupari", "La Foa", "Bourail", "Poya", "Pouembout", "Kone", "Voh", "Kaala-Gomen", "Koumac"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de transporte terrestre de fibra de OPT-NC en Grande Terre; secuencia urbana probable siguiendo Route Territoriale 1. Se excluyen las rutas submarinas de Gondwana y Picot."
+  }
+]
