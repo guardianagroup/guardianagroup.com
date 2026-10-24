@@ -1,0 +1,86 @@
+[
+{
+"nombre": "Palau Cable 1 (PC1) / Belau Submarine Cable",
+"llegadas": [
+{
+"lugar": "Ngeremlengui",
+"pais": "PW",
+"lat": 7.5317,
+"lon": 134.5609
+},
+{
+"lugar": "Piti",
+"pais": "GU",
+"lat": 13.4626,
+"lon": 144.6933
+}
+],
+"anio": 2017,
+"km": 207,
+"duenos": [
+"Belau Submarine Cable Corporation"
+],
+"fuentes": [
+"https://belaucable.com/about",
+"https://www.nec.com/en/press/201712/global_20171208_01.html",
+"https://www.adb.org/projects/46382-001/main",
+"https://www.palauopa.org/pdf/single-audits/FY%202024/2024-BSCC-Audit-Report-Final.pdf"
+]
+},
+{
+"nombre": "PNG LNG",
+"llegadas": [
+{
+"lugar": "Kikori",
+"pais": "PG",
+"lat": -7.4135,
+"lon": 144.2402
+},
+{
+"lugar": "Port Moresby",
+"pais": "PG",
+"lat": -9.4796,
+"lon": 147.1885
+}
+],
+"anio": 2014,
+"km": 400,
+"duenos": [
+"Telikom Papua New Guinea"
+],
+"fuentes": [
+"https://www.itu.int/en/ITU-D/Regional-Presence/AsiaPacific/SiteAssets/Pages/Events/2017/Submarine%20Cable/submarine-cables-for-Pacific-Islands-Countries/PNG%20Undersea%20Cable%20Presentation.pdf",
+"https://www.pnglng.com/media/PNG-LNG-Media/Files/Environment/Environment%20and%20Social%20reports/Q4-2013-ESR-Full.pdf",
+"https://www.pnglng.com/media/PNG-LNG-Media/Files/Environment/Resettlement%20Action%20Plans/Omati_river_right_of_Way_communal_resouce_plan.pdf",
+"https://www.pmnec.gov.pg/parliamentary-statement-by-prime-minister-hon-james-marape-mp-on-five-years-of-governments-achievement-2019-2024/"
+]
+},
+{
+"nombre": "Savaii-Upolu Cable",
+"llegadas": [
+{
+"lugar": "Tuasivi",
+"pais": "WS",
+"lat": -13.6689,
+"lon": -172.1782
+},
+{
+"lugar": "Vaivase Tai",
+"pais": "WS",
+"lat": -13.8458,
+"lon": -171.7488
+}
+],
+"anio": 2018,
+"km": 0,
+"duenos": [
+"Samoa Submarine Cable Company Limited"
+],
+"fuentes": [
+"https://www.ssccsamoa.com/wp-content/uploads/2024/12/SSCC-RIO-2025_v1.1-pcf.pdf",
+"https://www.regulator.gov.ws/images/ORDERS/Telecom/2023/ORDER_OF_THE_REGULATOR__SSCC_RIO_2023.pdf",
+"https://www.ssccsamoa.com/samoa-submarine-cable-company-joins-southern-cross-next-sx-next/",
+"https://mcit.gov.ws/wp-content/uploads/2024/02/ENG_MCIT-ANNUAL-REPORT-2019-2020.pdf"
+]
+}
+]
