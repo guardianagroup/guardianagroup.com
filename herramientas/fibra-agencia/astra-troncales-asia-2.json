@@ -1,0 +1,260 @@
+[
+  {
+    "nombre": "Corredor Phnom Penh–Poipet–Tailandia",
+    "operador": "Telecom Cambodia",
+    "pais": "KH",
+    "ciudades": [
+      "Phnom Penh",
+      "Kampong Chhnang",
+      "Pursat",
+      "Battambang",
+      "Sisophon",
+      "Poipet",
+      "Aranyaprathet"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la red troncal de Telecom Cambodia y de la interconexión terrestre del Greater Mekong Subregion; secuencia urbana estimada siguiendo las carreteras nacionales 5 y 6 hasta Poipet. La documentación del proyecto GMS Telecommunications Backbone Network del Asian Development Bank describe la infraestructura, pero no publica el trazado urbano completo."
+  },
+  {
+    "nombre": "Corredor Phnom Penh–Sihanoukville",
+    "operador": "Telecom Cambodia",
+    "pais": "KH",
+    "ciudades": [
+      "Phnom Penh",
+      "Kampong Speu",
+      "Sihanoukville"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: tramo terrestre de la red troncal de Telecom Cambodia desarrollada mediante el Greater Mekong Telecommunication Backbone Network Project, documentado por JICA; recorrido probable por el corredor de la carretera nacional 4. Las ciudades indican el corredor, no una canalización publicada."
+  },
+  {
+    "nombre": "Corredor Beijing–Shanghai",
+    "operador": "China Telecom",
+    "pais": "CN",
+    "ciudades": [
+      "Beijing",
+      "Tianjin",
+      "Cangzhou",
+      "Dezhou",
+      "Jinan",
+      "Tai'an",
+      "Xuzhou",
+      "Bengbu",
+      "Nanjing",
+      "Zhenjiang",
+      "Changzhou",
+      "Wuxi",
+      "Suzhou",
+      "Shanghai"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de larga distancia de la red óptica nacional operativa de China Telecom; secuencia probable por los ejes ferroviarios y viarios Beijing–Shanghai. Los mapas comerciales de la red nacional identifican los grandes nodos, pero no permiten verificar cada paso urbano ni distinguir todas las variantes paralelas."
+  },
+  {
+    "nombre": "Corredor Beijing–Guangzhou",
+    "operador": "China Telecom",
+    "pais": "CN",
+    "ciudades": [
+      "Beijing",
+      "Baoding",
+      "Shijiazhuang",
+      "Handan",
+      "Anyang",
+      "Xinxiang",
+      "Zhengzhou",
+      "Xinyang",
+      "Wuhan",
+      "Yueyang",
+      "Changsha",
+      "Hengyang",
+      "Chenzhou",
+      "Shaoguan",
+      "Guangzhou"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor norte–sur de la red óptica nacional operativa de China Telecom; ciudades ordenadas según el eje ferroviario Beijing–Guangzhou y corredores viarios asociados. No constituye un inventario publicado de estaciones de un único cable."
+  },
+  {
+    "nombre": "Corredor Shanghai–Chengdu",
+    "operador": "China Telecom",
+    "pais": "CN",
+    "ciudades": [
+      "Shanghai",
+      "Suzhou",
+      "Wuxi",
+      "Changzhou",
+      "Nanjing",
+      "Hefei",
+      "Lu'an",
+      "Wuhan",
+      "Jingmen",
+      "Yichang",
+      "Enshi",
+      "Chongqing",
+      "Suining",
+      "Chengdu"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor este–oeste entre nodos de la red óptica nacional operativa de China Telecom; recorrido urbano probable siguiendo el eje G42 y sus corredores de transporte. El itinerario físico completo de una fibra concreta no está publicado."
+  },
+  {
+    "nombre": "Corredor Nicosia–Limassol–Paphos",
+    "operador": "Cyta",
+    "pais": "CY",
+    "ciudades": [
+      "Nicosia",
+      "Limassol",
+      "Paphos"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor terrestre de más de 100 km de la red óptica nacional en servicio de Cyta, descrita en sus informes anuales; secuencia probable por los ejes A1 y A6. No incluye enlaces submarinos y no representa un trazado de conductos publicado."
+  },
+  {
+    "nombre": "Troncal Poti–Tbilisi",
+    "operador": "Caucasus Online",
+    "pais": "GE",
+    "ciudades": [
+      "Poti",
+      "Senaki",
+      "Samtredia",
+      "Kutaisi",
+      "Zestaponi",
+      "Khashuri",
+      "Gori",
+      "Tbilisi"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: Caucasus Online publica la existencia de su conexión terrestre entre Poti y Tbilisi, asociada a su red regional de transporte. Las ciudades intermedias se estiman por el corredor viario y ferroviario este–oeste; se excluye el segmento submarino del Black Sea Fiber Optic Cable."
+  },
+  {
+    "nombre": "Corredor Delhi–Mumbai",
+    "operador": "RailTel",
+    "pais": "IN",
+    "ciudades": [
+      "Delhi",
+      "Mathura",
+      "Bharatpur",
+      "Sawai Madhopur",
+      "Kota",
+      "Ratlam",
+      "Vadodara",
+      "Surat",
+      "Vapi",
+      "Mumbai"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal óptica operativa de RailTel sobre derechos de vía de Indian Railways, documentada en sus mapas de red e informes anuales; secuencia estimada por el corredor ferroviario Delhi–Mathura–Kota–Ratlam–Mumbai. No es una lista publicada de todos los puntos de empalme."
+  },
+  {
+    "nombre": "Corredor Delhi–Kolkata",
+    "operador": "RailTel",
+    "pais": "IN",
+    "ciudades": [
+      "Delhi",
+      "Ghaziabad",
+      "Aligarh",
+      "Tundla",
+      "Etawah",
+      "Kanpur",
+      "Prayagraj",
+      "Mughal Sarai",
+      "Gaya",
+      "Dhanbad",
+      "Asansol",
+      "Bardhaman",
+      "Howrah",
+      "Kolkata"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la red óptica en servicio de RailTel sobre la infraestructura ferroviaria nacional; secuencia probable por la línea Delhi–Howrah y la variante Grand Chord. RailTel publica cobertura y nodos, pero no el recorrido detallado de cada cable."
+  },
+  {
+    "nombre": "Corredor Mumbai–Chennai",
+    "operador": "RailTel",
+    "pais": "IN",
+    "ciudades": [
+      "Mumbai",
+      "Kalyan",
+      "Pune",
+      "Solapur",
+      "Kalaburagi",
+      "Wadi",
+      "Raichur",
+      "Guntakal",
+      "Gooty",
+      "Kadapa",
+      "Renigunta",
+      "Arakkonam",
+      "Chennai"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor terrestre de la red óptica operativa de RailTel; ciudades ordenadas siguiendo la ruta ferroviaria Mumbai–Pune–Wadi–Guntakal–Chennai. Base documental: mapas de red e informes anuales de RailTel; el itinerario exacto del cable no está publicado."
+  },
+  {
+    "nombre": "Corredor terrestre del norte de Java",
+    "operador": "Telkom Indonesia",
+    "pais": "ID",
+    "ciudades": [
+      "Jakarta",
+      "Cikampek",
+      "Cirebon",
+      "Tegal",
+      "Pekalongan",
+      "Semarang",
+      "Kudus",
+      "Rembang",
+      "Tuban",
+      "Lamongan",
+      "Surabaya"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor terrestre de la red troncal óptica de Telkom Indonesia en Java, cuya operación se describe en sus informes anuales; secuencia probable por el eje vial y ferroviario de la costa norte. No incluye cables submarinos ni supone que todas las variantes de la red sigan este mismo itinerario."
+  },
+  {
+    "nombre": "Corredor Medan–Pekanbaru",
+    "operador": "Telkom Indonesia",
+    "pais": "ID",
+    "ciudades": [
+      "Medan",
+      "Lubuk Pakam",
+      "Tebing Tinggi",
+      "Kisaran",
+      "Rantauprapat",
+      "Duri",
+      "Pekanbaru"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la red troncal terrestre operativa de Telkom Indonesia en Sumatra; ciudades estimadas siguiendo el eje oriental de la carretera trans-Sumatra. Los informes anuales de Telkom documentan la red de transporte, no la alineación completa de sus cables."
+  },
+  {
+    "nombre": "Corredor Tehran–Isfahan–Shiraz",
+    "operador": "Telecommunication Infrastructure Company",
+    "pais": "IR",
+    "ciudades": [
+      "Tehran",
+      "Qom",
+      "Kashan",
+      "Isfahan",
+      "Shahreza",
+      "Abadeh",
+      "Shiraz"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor norte–sur de la red nacional de transporte óptico operada por Telecommunication Infrastructure Company; secuencia urbana probable por las carreteras principales Tehran–Qom–Isfahan–Shiraz. La información pública de la red nacional no permite verificar la canalización exacta."
+  },
+  {
+    "nombre": "Corredor Tehran–Tabriz",
+    "operador": "Telecommunication Infrastructure Company",
+    "pais": "IR",
+    "ciudades": [
+      "Tehran",
+      "Karaj",
+      "Qazvin",
+      "Zanjan",
+      "Mianeh",
+      "Tabriz"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor noroccidental de la red nacional de transporte óptico en servicio de Telecommunication Infrastructure Company; recorrido probable por los ejes viarios y ferroviarios Tehran–Qazvin–Zanjan–Tabriz. No se añade una prolongación internacional cuyo itinerario físico no pueda identificarse."
+  }
+]
