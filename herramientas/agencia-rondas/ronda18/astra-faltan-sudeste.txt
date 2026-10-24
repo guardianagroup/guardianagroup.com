@@ -1,0 +1,66 @@
+[
+  {
+    "nombre": "Batam-Rengit Cable System (BRCS)",
+    "llegadas": [
+      {
+        "lugar": "Batam",
+        "pais": "ID",
+        "lat": 1.13,
+        "lon": 104.05
+      },
+      {
+        "lugar": "Rengit",
+        "pais": "MY",
+        "lat": 1.679,
+        "lon": 103.154
+      }
+    ],
+    "anio": 2007,
+    "km": 64,
+    "duenos": [
+      "Telkom Indonesia",
+      "Telekom Malaysia"
+    ],
+    "fuentes": [
+      "https://www.telin.net/",
+      "https://www.tm.com.my/"
+    ]
+  },
+  {
+    "nombre": "JAKABARE",
+    "llegadas": [
+      {
+        "lugar": "Tanjung Pakis",
+        "pais": "ID",
+        "lat": -5.975,
+        "lon": 107.121
+      },
+      {
+        "lugar": "Sungai Kakap",
+        "pais": "ID",
+        "lat": -0.056,
+        "lon": 109.169
+      },
+      {
+        "lugar": "Tanjung Bemban",
+        "pais": "ID",
+        "lat": 1.196,
+        "lon": 104.128
+      },
+      {
+        "lugar": "Changi",
+        "pais": "SG",
+        "lat": 1.389,
+        "lon": 103.987
+      }
+    ],
+    "anio": 2009,
+    "km": 1300,
+    "duenos": [
+      "Indosat Ooredoo Hutchison"
+    ],
+    "fuentes": [
+      "https://ioh.co.id/"
+    ]
+  }
+]

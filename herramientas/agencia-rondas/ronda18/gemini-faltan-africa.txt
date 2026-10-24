@@ -1,0 +1,507 @@
+[
+{
+"nombre": "Loukkos",
+"llegadas": [
+{
+"lugar": "Asilah",
+"pais": "MA",
+"lat": 35.4653,
+"lon": -6.0342
+},
+{
+"lugar": "Rota",
+"pais": "ES",
+"lat": 36.6236,
+"lon": -6.36
+}
+],
+"anio": 2012,
+"km": 187,
+"duenos": [
+"Maroc Telecom"
+],
+"fuentes": [
+"https://www.iam.ma",
+"https://www.anrt.ma",
+"https://www.submarinecablemap.com/submarine-cable/loukkos"
+]
+},
+{
+"nombre": "Silphium",
+"llegadas": [
+{
+"lugar": "Derna",
+"pais": "LY",
+"lat": 32.7636,
+"lon": 22.6392
+},
+{
+"lugar": "Chania",
+"pais": "GR",
+"lat": 35.5138,
+"lon": 24.018
+}
+],
+"anio": 2012,
+"km": 425,
+"duenos": [
+"Libya International Telecommunications Company (LITC)",
+"LPTIC"
+],
+"fuentes": [
+"https://lptic.ly",
+"https://www.submarinecablemap.com/submarine-cable/silphium"
+]
+},
+{
+"nombre": "Libya Fiber Optic Network (LFON)",
+"llegadas": [
+{
+"lugar": "Zawia",
+"pais": "LY",
+"lat": 32.7571,
+"lon": 12.7276
+},
+{
+"lugar": "Tripoli",
+"pais": "LY",
+"lat": 32.8872,
+"lon": 13.1913
+},
+{
+"lugar": "Al Khums",
+"pais": "LY",
+"lat": 32.6486,
+"lon": 14.2619
+},
+{
+"lugar": "Zliten",
+"pais": "LY",
+"lat": 32.4674,
+"lon": 14.5687
+},
+{
+"lugar": "Misurata",
+"pais": "LY",
+"lat": 32.3754,
+"lon": 15.0925
+},
+{
+"lugar": "Sirte",
+"pais": "LY",
+"lat": 31.2089,
+"lon": 16.5887
+},
+{
+"lugar": "Ras Lanuf",
+"pais": "LY",
+"lat": 30.5,
+"lon": 18.5333
+},
+{
+"lugar": "Brega",
+"pais": "LY",
+"lat": 30.4062,
+"lon": 19.5739
+},
+{
+"lugar": "Benghazi",
+"pais": "LY",
+"lat": 32.1194,
+"lon": 20.0868
+},
+{
+"lugar": "Tolmeita",
+"pais": "LY",
+"lat": 32.7153,
+"lon": 20.9503
+},
+{
+"lugar": "Derna",
+"pais": "LY",
+"lat": 32.7636,
+"lon": 22.6392
+},
+{
+"lugar": "Tobruk",
+"pais": "LY",
+"lat": 32.0836,
+"lon": 23.9764
+}
+],
+"anio": 2010,
+"km": 1750,
+"duenos": [
+"LPTIC",
+"Hatif Libya"
+],
+"fuentes": [
+"https://lptic.ly",
+"https://www.submarinecablemap.com/submarine-cable/libya-fiber-optic-network-lfon"
+]
+},
+{
+"nombre": "Saudi Arabia-Sudan-2 (SAS-2)",
+"llegadas": [
+{
+"lugar": "Port Sudan",
+"pais": "SD",
+"lat": 19.6158,
+"lon": 37.2164
+},
+{
+"lugar": "Jeddah",
+"pais": "SA",
+"lat": 21.4858,
+"lon": 39.1925
+}
+],
+"anio": 2011,
+"km": 329,
+"duenos": [
+"stc",
+"Sudatel"
+],
+"fuentes": [
+"https://www.sudatel.sd",
+"https://www.stc.com.sa",
+"https://www.submarinecablemap.com/submarine-cable/saudi-arabia-sudan-2-sas-2"
+]
+},
+{
+"nombre": "T3",
+"llegadas": [
+{
+"lugar": "Baie Jacotet",
+"pais": "MU",
+"lat": -20.4733,
+"lon": 57.4856
+},
+{
+"lugar": "Amanzimtoti",
+"pais": "ZA",
+"lat": -30.0544,
+"lon": 30.8872
+}
+],
+"anio": 2023,
+"km": 3200,
+"duenos": [
+"Mauritius Telecom",
+"Telkom South Africa"
+],
+"fuentes": [
+"https://www.telecom.mu",
+"https://www.subcom.com"
+]
+},
+{
+"nombre": "GLO-2 (Globacom-2)",
+"llegadas": [
+{
+"lugar": "Lagos",
+"pais": "NG",
+"lat": 6.4541,
+"lon": 3.3947
+},
+{
+"lugar": "Escravos",
+"pais": "NG",
+"lat": 5.5847,
+"lon": 5.18
+},
+{
+"lugar": "Forcados",
+"pais": "NG",
+"lat": 5.3614,
+"lon": 5.3497
+},
+{
+"lugar": "Bonny",
+"pais": "NG",
+"lat": 4.4516,
+"lon": 7.1707
+},
+{
+"lugar": "Kwa Ibo",
+"pais": "NG",
+"lat": 4.5422,
+"lon": 7.9897
+}
+],
+"anio": 2020,
+"km": 850,
+"duenos": [
+"Globacom"
+],
+"fuentes": [
+"https://www.gloworld.com",
+"https://www.ncc.gov.ng",
+"https://www.submarinecablemap.com/submarine-cable/glo-2"
+]
+},
+{
+"nombre": "UltramarGE",
+"llegadas": [
+{
+"lugar": "Bata",
+"pais": "GQ",
+"lat": 1.8639,
+"lon": 9.7658
+},
+{
+"lugar": "San Antonio de Palé (Annobón)",
+"pais": "GQ",
+"lat": -1.4067,
+"lon": 5.6322
+}
+],
+"anio": 2019,
+"km": 675,
+"duenos": [
+"GITGE (Gestor de Infraestructuras de Telecomunicaciones de Guinea Ecuatorial)"
+],
+"fuentes": [
+"https://www.gitge.com",
+"https://www.submarinecablemap.com/submarine-cable/ultramarge"
+]
+},
+{
+"nombre": "Angola Domestic Network System (ADONES)",
+"llegadas": [
+{
+"lugar": "Cabinda",
+"pais": "AO",
+"lat": -5.55,
+"lon": 12.2
+},
+{
+"lugar": "Soyo",
+"pais": "AO",
+"lat": -6.1349,
+"lon": 12.3689
+},
+{
+"lugar": "Luanda",
+"pais": "AO",
+"lat": -8.839,
+"lon": 13.2894
+},
+{
+"lugar": "Porto Amboim",
+"pais": "AO",
+"lat": -10.7325,
+"lon": 13.7678
+},
+{
+"lugar": "Benguela",
+"pais": "AO",
+"lat": -12.5763,
+"lon": 13.4055
+},
+{
+"lugar": "Namibe",
+"pais": "AO",
+"lat": -15.1961,
+"lon": 12.1522
+}
+],
+"anio": 2008,
+"km": 1656,
+"duenos": [
+"Angola Telecom"
+],
+"fuentes": [
+"https://www.angolatelecom.ao",
+"https://www.submarinecablemap.com/submarine-cable/angola-domestic-network-system-adones"
+]
+},
+{
+"nombre": "Comoros Domestic Submarine Cable System",
+"llegadas": [
+{
+"lugar": "Moroni",
+"pais": "KM",
+"lat": -11.7022,
+"lon": 43.2551
+},
+{
+"lugar": "Fomboni",
+"pais": "KM",
+"lat": -12.28,
+"lon": 43.7425
+},
+{
+"lugar": "Mutsamudu",
+"pais": "KM",
+"lat": -12.1667,
+"lon": 44.3994
+}
+],
+"anio": 2010,
+"km": 285,
+"duenos": [
+"Comores Telecom"
+],
+"fuentes": [
+"https://www.comorestelecom.km",
+"https://www.submarinecablemap.com/submarine-cable/comoros-domestic-submarine-cable-system"
+]
+},
+{
+"nombre": "Cabo Verde Telecom Domestic Submarine Cable Network",
+"llegadas": [
+{
+"lugar": "Praia",
+"pais": "CV",
+"lat": 14.933,
+"lon": -23.5133
+},
+{
+"lugar": "Tarrafal",
+"pais": "CV",
+"lat": 15.2789,
+"lon": -23.7519
+},
+{
+"lugar": "Vila do Maio",
+"pais": "CV",
+"lat": 15.1381,
+"lon": -23.2117
+},
+{
+"lugar": "Sal Rei",
+"pais": "CV",
+"lat": 16.1761,
+"lon": -22.9172
+},
+{
+"lugar": "Santa Maria",
+"pais": "CV",
+"lat": 16.598,
+"lon": -22.9051
+},
+{
+"lugar": "Tarrafal de São Nicolau",
+"pais": "CV",
+"lat": 16.5661,
+"lon": -24.3572
+},
+{
+"lugar": "Mindelo",
+"pais": "CV",
+"lat": 16.8901,
+"lon": -24.9804
+},
+{
+"lugar": "Porto Novo",
+"pais": "CV",
+"lat": 17.0197,
+"lon": -25.0647
+},
+{
+"lugar": "São Filipe",
+"pais": "CV",
+"lat": 14.8961,
+"lon": -24.4956
+},
+{
+"lugar": "Furna",
+"pais": "CV",
+"lat": 14.8869,
+"lon": -24.68
+}
+],
+"anio": 2001,
+"km": 964,
+"duenos": [
+"CVTelecom"
+],
+"fuentes": [
+"https://www.cvtelecom.cv",
+"https://www.arme.cv",
+"https://www.submarinecablemap.com/submarine-cable/cabo-verde-telecom-domestic-submarine-cable-network"
+]
+},
+{
+"nombre": "Aden-Djibouti",
+"llegadas": [
+{
+"lugar": "Djibouti",
+"pais": "DJ",
+"lat": 11.588,
+"lon": 43.1456
+},
+{
+"lugar": "Aden",
+"pais": "YE",
+"lat": 12.7855,
+"lon": 45.0187
+}
+],
+"anio": 1995,
+"km": 269,
+"duenos": [
+"Djibouti Telecom",
+"TeleYemen"
+],
+"fuentes": [
+"https://www.djiboutitelecom.dj",
+"https://www.submarinecablemap.com/submarine-cable/aden-djibouti"
+]
+},
+{
+"nombre": "Taba-Aqaba",
+"llegadas": [
+{
+"lugar": "Taba",
+"pais": "EG",
+"lat": 29.4925,
+"lon": 34.8969
+},
+{
+"lugar": "Aqaba",
+"pais": "JO",
+"lat": 29.5319,
+"lon": 35.0061
+}
+],
+"anio": 1998,
+"km": 13,
+"duenos": [
+"Telecom Egypt",
+"Orange Jordan"
+],
+"fuentes": [
+"https://www.te.eg",
+"https://www.submarinecablemap.com/submarine-cable/taba-aqaba"
+]
+},
+{
+"nombre": "Aletar",
+"llegadas": [
+{
+"lugar": "Alexandria",
+"pais": "EG",
+"lat": 31.2001,
+"lon": 29.9187
+},
+{
+"lugar": "Tartous",
+"pais": "SY",
+"lat": 34.889,
+"lon": 35.8866
+}
+],
+"anio": 1997,
+"km": 787,
+"duenos": [
+"Telecom Egypt",
+"Syrian Telecommunications Establishment (STE)"
+],
+"fuentes": [
+"https://www.te.eg",
+"https://www.submarinecablemap.com/submarine-cable/aletar"
+]
+}
+]

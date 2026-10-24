@@ -1,0 +1,864 @@
+[
+  {
+    "nombre": "Deep Blue One",
+    "llegadas": [
+      {
+        "lugar": "Chaguaramas",
+        "pais": "TT",
+        "lat": 10.6808,
+        "lon": -61.6492
+      },
+      {
+        "lugar": "Rockly Bay",
+        "pais": "TT",
+        "lat": 11.1825,
+        "lon": -60.7353
+      },
+      {
+        "lugar": "Georgetown",
+        "pais": "GY",
+        "lat": 6.8013,
+        "lon": -58.1551
+      },
+      {
+        "lugar": "Paramaribo",
+        "pais": "SR",
+        "lat": 5.852,
+        "lon": -55.2038
+      },
+      {
+        "lugar": "Cayenne",
+        "pais": "GF",
+        "lat": 4.8858,
+        "lon": -52.2756
+      }
+    ],
+    "anio": 2024,
+    "km": 1900,
+    "duenos": [
+      "Digicel"
+    ],
+    "fuentes": [
+      "https://www.digicelgroup.com",
+      "https://www.submarinecablemap.com/submarine-cable/deep-blue-one"
+    ]
+  },
+  {
+    "nombre": "East-West",
+    "llegadas": [
+      {
+        "lugar": "Nanny Cay",
+        "pais": "VG",
+        "lat": 18.3992,
+        "lon": -64.6339
+      },
+      {
+        "lugar": "Santo Domingo",
+        "pais": "DO",
+        "lat": 18.4339,
+        "lon": -69.6267
+      },
+      {
+        "lugar": "Bull Bay",
+        "pais": "JM",
+        "lat": 17.9431,
+        "lon": -76.6661
+      }
+    ],
+    "anio": 2011,
+    "km": 1100,
+    "duenos": [
+      "Liberty Latin America"
+    ],
+    "fuentes": [
+      "https://cwnetworks.com",
+      "https://www.submarinecablemap.com/submarine-cable/east-west"
+    ]
+  },
+  {
+    "nombre": "Bahamas Internet Cable System (BICS)",
+    "llegadas": [
+      {
+        "lugar": "Boca Raton",
+        "pais": "US",
+        "lat": 26.3587,
+        "lon": -80.0831
+      },
+      {
+        "lugar": "Hawksbill",
+        "pais": "BS",
+        "lat": 26.5197,
+        "lon": -78.7369
+      },
+      {
+        "lugar": "Riding Point",
+        "pais": "BS",
+        "lat": 26.7167,
+        "lon": -78.2
+      },
+      {
+        "lugar": "Crown Haven",
+        "pais": "BS",
+        "lat": 26.9061,
+        "lon": -77.8286
+      },
+      {
+        "lugar": "Sandy Point",
+        "pais": "BS",
+        "lat": 26.0167,
+        "lon": -77.3997
+      },
+      {
+        "lugar": "Current",
+        "pais": "BS",
+        "lat": 25.4333,
+        "lon": -76.7833
+      },
+      {
+        "lugar": "Nassau",
+        "pais": "BS",
+        "lat": 25.0443,
+        "lon": -77.3504
+      }
+    ],
+    "anio": 2001,
+    "km": 1100,
+    "duenos": [
+      "Cable Bahamas"
+    ],
+    "fuentes": [
+      "https://www.cablebahamas.com",
+      "https://www.submarinecablemap.com/submarine-cable/bahamas-internet-cable-system-bics"
+    ]
+  },
+  {
+    "nombre": "Bahamas Domestic Submarine Network (BDSNi)",
+    "llegadas": [
+      {
+        "lugar": "Eight Mile Rock",
+        "pais": "BS",
+        "lat": 26.5408,
+        "lon": -78.8117
+      },
+      {
+        "lugar": "Marsh Harbour",
+        "pais": "BS",
+        "lat": 26.5412,
+        "lon": -77.0636
+      },
+      {
+        "lugar": "Nassau",
+        "pais": "BS",
+        "lat": 25.0443,
+        "lon": -77.3504
+      },
+      {
+        "lugar": "Fresh Creek",
+        "pais": "BS",
+        "lat": 24.7,
+        "lon": -77.7667
+      },
+      {
+        "lugar": "Tarpum Bay",
+        "pais": "BS",
+        "lat": 24.9833,
+        "lon": -76.1667
+      },
+      {
+        "lugar": "George Town",
+        "pais": "BS",
+        "lat": 23.5167,
+        "lon": -75.7833
+      },
+      {
+        "lugar": "Clarence Town",
+        "pais": "BS",
+        "lat": 23.1,
+        "lon": -74.9833
+      },
+      {
+        "lugar": "Cockburn Town",
+        "pais": "BS",
+        "lat": 24.0531,
+        "lon": -74.5311
+      },
+      {
+        "lugar": "Matthew Town",
+        "pais": "BS",
+        "lat": 20.9497,
+        "lon": -73.6736
+      },
+      {
+        "lugar": "Port-au-Prince",
+        "pais": "HT",
+        "lat": 18.5944,
+        "lon": -72.3074
+      }
+    ],
+    "anio": 2006,
+    "km": 3500,
+    "duenos": [
+      "BTC (Bahamas Telecommunications Company)"
+    ],
+    "fuentes": [
+      "https://www.btcbahamas.com",
+      "https://www.submarinecablemap.com/submarine-cable/bahamas-domestic-submarine-network-bdsni"
+    ]
+  },
+  {
+    "nombre": "Bahamas-2",
+    "llegadas": [
+      {
+        "lugar": "Vero Beach",
+        "pais": "US",
+        "lat": 27.6386,
+        "lon": -80.3973
+      },
+      {
+        "lugar": "Eight Mile Rock",
+        "pais": "BS",
+        "lat": 26.5408,
+        "lon": -78.8117
+      },
+      {
+        "lugar": "Nassau",
+        "pais": "BS",
+        "lat": 25.0443,
+        "lon": -77.3504
+      }
+    ],
+    "anio": 1997,
+    "km": 470,
+    "duenos": [
+      "AT&T",
+      "BTC (Bahamas Telecommunications Company)",
+      "Verizon"
+    ],
+    "fuentes": [
+      "https://www.btcbahamas.com",
+      "https://www.submarinecablemap.com/submarine-cable/bahamas-2"
+    ]
+  },
+  {
+    "nombre": "San Andrés Isla - Tolú (SAI-Tolú)",
+    "llegadas": [
+      {
+        "lugar": "Tolú",
+        "pais": "CO",
+        "lat": 9.5244,
+        "lon": -75.5819
+      },
+      {
+        "lugar": "San Andrés",
+        "pais": "CO",
+        "lat": 12.5847,
+        "lon": -81.7006
+      }
+    ],
+    "anio": 2010,
+    "km": 812,
+    "duenos": [
+      "Ministerio de Tecnologías de la Información y las Comunicaciones (MinTIC)",
+      "InterNexa"
+    ],
+    "fuentes": [
+      "https://www.mintic.gov.co",
+      "https://www.internexa.com"
+    ]
+  },
+  {
+    "nombre": "Alonso de Ojeda",
+    "llegadas": [
+      {
+        "lugar": "Baby Beach",
+        "pais": "AW",
+        "lat": 12.4189,
+        "lon": -69.8822
+      },
+      {
+        "lugar": "Willemstad",
+        "pais": "CW",
+        "lat": 12.1084,
+        "lon": -68.9335
+      }
+    ],
+    "anio": 1999,
+    "km": 128,
+    "duenos": [
+      "SETAR",
+      "Liberty Latin America"
+    ],
+    "fuentes": [
+      "https://www.setar.aw",
+      "https://www.submarinecablemap.com/submarine-cable/alonso-de-ojeda"
+    ]
+  },
+  {
+    "nombre": "Bonaire-Curaçao Cable System",
+    "llegadas": [
+      {
+        "lugar": "Willemstad",
+        "pais": "CW",
+        "lat": 12.1084,
+        "lon": -68.9335
+      },
+      {
+        "lugar": "Kralendijk",
+        "pais": "BQ",
+        "lat": 12.1443,
+        "lon": -68.2655
+      }
+    ],
+    "anio": 2009,
+    "km": 81,
+    "duenos": [
+      "Liberty Latin America",
+      "Flamingo TV"
+    ],
+    "fuentes": [
+      "https://www.discoverflow.co",
+      "https://www.acm.nl"
+    ]
+  },
+  {
+    "nombre": "Saba, Statia Cable System (SSCS)",
+    "llegadas": [
+      {
+        "lugar": "Great Bay (Philipsburg)",
+        "pais": "SX",
+        "lat": 18.0256,
+        "lon": -63.0492
+      },
+      {
+        "lugar": "Anse des Cayes",
+        "pais": "BL",
+        "lat": 17.9069,
+        "lon": -62.8428
+      },
+      {
+        "lugar": "Flat Point",
+        "pais": "BQ",
+        "lat": 17.6433,
+        "lon": -63.2208
+      },
+      {
+        "lugar": "Gallows Bay (Oranjestad)",
+        "pais": "BQ",
+        "lat": 17.4775,
+        "lon": -62.9844
+      },
+      {
+        "lugar": "Basseterre",
+        "pais": "KN",
+        "lat": 17.2948,
+        "lon": -62.7261
+      }
+    ],
+    "anio": 2013,
+    "km": 250,
+    "duenos": [
+      "Saba Statia Cable System B.V."
+    ],
+    "fuentes": [
+      "https://www.sscs-bv.com",
+      "https://www.submarinecablemap.com/submarine-cable/saba-statia-cable-system-sscs"
+    ]
+  },
+  {
+    "nombre": "Sistema Cable Submarino Nacional (SCSN)",
+    "llegadas": [
+      {
+        "lugar": "Maracaibo",
+        "pais": "VE",
+        "lat": 10.6427,
+        "lon": -71.6125
+      },
+      {
+        "lugar": "Punto Fijo",
+        "pais": "VE",
+        "lat": 11.6915,
+        "lon": -70.1996
+      },
+      {
+        "lugar": "Puerto Cabello",
+        "pais": "VE",
+        "lat": 10.4731,
+        "lon": -68.0125
+      },
+      {
+        "lugar": "Camurí",
+        "pais": "VE",
+        "lat": 10.6167,
+        "lon": -66.7167
+      },
+      {
+        "lugar": "Higuerote",
+        "pais": "VE",
+        "lat": 10.4853,
+        "lon": -66.1017
+      },
+      {
+        "lugar": "Puerto La Cruz",
+        "pais": "VE",
+        "lat": 10.2136,
+        "lon": -64.6328
+      },
+      {
+        "lugar": "Cumaná",
+        "pais": "VE",
+        "lat": 10.4539,
+        "lon": -64.1825
+      },
+      {
+        "lugar": "Porlamar",
+        "pais": "VE",
+        "lat": 10.9577,
+        "lon": -63.8697
+      },
+      {
+        "lugar": "Carúpano",
+        "pais": "VE",
+        "lat": 10.6678,
+        "lon": -63.2583
+      }
+    ],
+    "anio": 1998,
+    "km": 1350,
+    "duenos": [
+      "CANTV"
+    ],
+    "fuentes": [
+      "https://www.cantv.com.ve",
+      "http://www.conatel.gob.ve"
+    ]
+  },
+  {
+    "nombre": "Pichilingue-Topolobampo",
+    "llegadas": [
+      {
+        "lugar": "Pichilingue (La Paz)",
+        "pais": "MX",
+        "lat": 24.2694,
+        "lon": -110.3264
+      },
+      {
+        "lugar": "Topolobampo",
+        "pais": "MX",
+        "lat": 25.6008,
+        "lon": -109.0522
+      }
+    ],
+    "anio": 2006,
+    "km": 255,
+    "duenos": [
+      "Telmex"
+    ],
+    "fuentes": [
+      "https://www.telmex.com",
+      "https://www.ift.org.mx"
+    ]
+  },
+  {
+    "nombre": "Mazatlán-La Paz",
+    "llegadas": [
+      {
+        "lugar": "Mazatlán",
+        "pais": "MX",
+        "lat": 23.2494,
+        "lon": -106.4111
+      },
+      {
+        "lugar": "La Paz",
+        "pais": "MX",
+        "lat": 24.1426,
+        "lon": -110.3128
+      }
+    ],
+    "anio": 2019,
+    "km": 420,
+    "duenos": [
+      "Megacable"
+    ],
+    "fuentes": [
+      "https://www.megacable.com.mx",
+      "https://www.submarinecablemap.com/submarine-cable/mazatlan-la-paz"
+    ]
+  },
+  {
+    "nombre": "Cabo San Lucas-Mazatlán",
+    "llegadas": [
+      {
+        "lugar": "Cabo San Lucas",
+        "pais": "MX",
+        "lat": 22.8905,
+        "lon": -109.9167
+      },
+      {
+        "lugar": "Mazatlán",
+        "pais": "MX",
+        "lat": 23.2494,
+        "lon": -106.4111
+      }
+    ],
+    "anio": 1995,
+    "km": 400,
+    "duenos": [
+      "Telmex"
+    ],
+    "fuentes": [
+      "https://www.telmex.com",
+      "https://www.ift.org.mx"
+    ]
+  },
+  {
+    "nombre": "Hawaiian Islands Fiber Network (HIFN)",
+    "llegadas": [
+      {
+        "lugar": "Lihue (Kauai)",
+        "pais": "US",
+        "lat": 21.9742,
+        "lon": -159.3656
+      },
+      {
+        "lugar": "Makaha (Oahu)",
+        "pais": "US",
+        "lat": 21.4692,
+        "lon": -158.2175
+      },
+      {
+        "lugar": "Waimanalo (Oahu)",
+        "pais": "US",
+        "lat": 21.3386,
+        "lon": -157.7003
+      },
+      {
+        "lugar": "Kaunakakai (Molokai)",
+        "pais": "US",
+        "lat": 21.0931,
+        "lon": -157.0228
+      },
+      {
+        "lugar": "Manele Bay (Lanai)",
+        "pais": "US",
+        "lat": 20.7422,
+        "lon": -156.8894
+      },
+      {
+        "lugar": "Mokulele (Maui)",
+        "pais": "US",
+        "lat": 20.785,
+        "lon": -156.465
+      },
+      {
+        "lugar": "Kawaihae (Hawaii)",
+        "pais": "US",
+        "lat": 20.0389,
+        "lon": -155.8294
+      }
+    ],
+    "anio": 1997,
+    "km": 850,
+    "duenos": [
+      "Hawaiian Telcom",
+      "Sandwich Isles Communications"
+    ],
+    "fuentes": [
+      "https://www.hawaiiantel.com",
+      "https://www.fcc.gov"
+    ]
+  },
+  {
+    "nombre": "AU-Aleutians",
+    "llegadas": [
+      {
+        "lugar": "Kodiak",
+        "pais": "US",
+        "lat": 57.79,
+        "lon": -152.4072
+      },
+      {
+        "lugar": "Chignik",
+        "pais": "US",
+        "lat": 56.2953,
+        "lon": -158.4022
+      },
+      {
+        "lugar": "Perryville",
+        "pais": "US",
+        "lat": 55.9122,
+        "lon": -159.1436
+      },
+      {
+        "lugar": "Sand Point",
+        "pais": "US",
+        "lat": 55.3367,
+        "lon": -160.4933
+      },
+      {
+        "lugar": "King Cove",
+        "pais": "US",
+        "lat": 55.0628,
+        "lon": -162.3094
+      },
+      {
+        "lugar": "Cold Bay",
+        "pais": "US",
+        "lat": 55.2053,
+        "lon": -162.7156
+      },
+      {
+        "lugar": "Akutan",
+        "pais": "US",
+        "lat": 54.1356,
+        "lon": -165.7731
+      },
+      {
+        "lugar": "Unalaska (Dutch Harbor)",
+        "pais": "US",
+        "lat": 53.8736,
+        "lon": -166.5367
+      }
+    ],
+    "anio": 2022,
+    "km": 1380,
+    "duenos": [
+      "GCI Communication Corp."
+    ],
+    "fuentes": [
+      "https://www.gci.com",
+      "https://www.submarinecablemap.com/submarine-cable/au-aleutians"
+    ]
+  },
+  {
+    "nombre": "SEALink",
+    "llegadas": [
+      {
+        "lugar": "Lena Point (Juneau)",
+        "pais": "US",
+        "lat": 58.3897,
+        "lon": -134.7478
+      },
+      {
+        "lugar": "Petersburg",
+        "pais": "US",
+        "lat": 56.8125,
+        "lon": -132.9556
+      },
+      {
+        "lugar": "Coffman Cove",
+        "pais": "US",
+        "lat": 56.0142,
+        "lon": -132.8278
+      }
+    ],
+    "anio": 2019,
+    "km": 345,
+    "duenos": [
+      "Alaska Power & Telephone (AP&T)"
+    ],
+    "fuentes": [
+      "https://www.aptalaska.com",
+      "https://www.submarinecablemap.com/submarine-cable/sealink"
+    ]
+  },
+  {
+    "nombre": "TERRA SW",
+    "llegadas": [
+      {
+        "lugar": "Homer",
+        "pais": "US",
+        "lat": 59.6425,
+        "lon": -151.5483
+      },
+      {
+        "lugar": "Williamsport",
+        "pais": "US",
+        "lat": 59.6908,
+        "lon": -153.6264
+      }
+    ],
+    "anio": 2012,
+    "km": 135,
+    "duenos": [
+      "GCI Communication Corp."
+    ],
+    "fuentes": [
+      "https://www.gci.com",
+      "https://www.submarinecablemap.com/submarine-cable/terra-sw"
+    ]
+  },
+  {
+    "nombre": "HaidaLink",
+    "llegadas": [
+      {
+        "lugar": "Prince Rupert",
+        "pais": "CA",
+        "lat": 53.4939,
+        "lon": -130.6358
+      },
+      {
+        "lugar": "Tlell",
+        "pais": "CA",
+        "lat": 53.5625,
+        "lon": -131.9306
+      }
+    ],
+    "anio": 2016,
+    "km": 100,
+    "duenos": [
+      "CityWest"
+    ],
+    "fuentes": [
+      "https://www.citywest.ca",
+      "https://www.submarinecablemap.com/submarine-cable/haidalink"
+    ]
+  },
+  {
+    "nombre": "Connected Coast",
+    "llegadas": [
+      {
+        "lugar": "Prince Rupert",
+        "pais": "CA",
+        "lat": 54.315,
+        "lon": -130.3208
+      },
+      {
+        "lugar": "Masset",
+        "pais": "CA",
+        "lat": 54.0117,
+        "lon": -132.1467
+      },
+      {
+        "lugar": "Bella Bella",
+        "pais": "CA",
+        "lat": 52.1608,
+        "lon": -128.1456
+      },
+      {
+        "lugar": "Campbell River",
+        "pais": "CA",
+        "lat": 50.0244,
+        "lon": -125.2475
+      },
+      {
+        "lugar": "Nanaimo",
+        "pais": "CA",
+        "lat": 49.1659,
+        "lon": -123.9401
+      },
+      {
+        "lugar": "Richmond (Vancouver)",
+        "pais": "CA",
+        "lat": 49.1666,
+        "lon": -123.1336
+      }
+    ],
+    "anio": 2024,
+    "km": 3400,
+    "duenos": [
+      "CityWest",
+      "Strathcona Regional District"
+    ],
+    "fuentes": [
+      "https://connectedcoast.ca",
+      "https://www.citywest.ca"
+    ]
+  },
+  {
+    "nombre": "Réseau Phoebus",
+    "llegadas": [
+      {
+        "lugar": "L'Anse-à-Valleau (Gaspé)",
+        "pais": "CA",
+        "lat": 49.0833,
+        "lon": -64.55
+      },
+      {
+        "lugar": "L'Étang-du-Nord (Îles-de-la-Madeleine)",
+        "pais": "CA",
+        "lat": 47.3667,
+        "lon": -61.95
+      }
+    ],
+    "anio": 2019,
+    "km": 390,
+    "duenos": [
+      "Bell Canada",
+      "Télébec"
+    ],
+    "fuentes": [
+      "https://www.bce.ca",
+      "https://www.telebec.com"
+    ]
+  },
+  {
+    "nombre": "Crosslake Fibre",
+    "llegadas": [
+      {
+        "lugar": "Toronto",
+        "pais": "CA",
+        "lat": 43.6532,
+        "lon": -79.3832
+      },
+      {
+        "lugar": "Olcott",
+        "pais": "US",
+        "lat": 43.3381,
+        "lon": -78.7161
+      }
+    ],
+    "anio": 2019,
+    "km": 60,
+    "duenos": [
+      "Crosslake Fibre"
+    ],
+    "fuentes": [
+      "https://www.crosslakefibre.ca",
+      "https://www.submarinecablemap.com/submarine-cable/crosslake-fibre"
+    ]
+  },
+  {
+    "nombre": "Puerto Montt-Puerto Chacabuco",
+    "llegadas": [
+      {
+        "lugar": "Puerto Montt",
+        "pais": "CL",
+        "lat": -41.4689,
+        "lon": -72.9411
+      },
+      {
+        "lugar": "Quellón",
+        "pais": "CL",
+        "lat": -43.1167,
+        "lon": -73.6167
+      },
+      {
+        "lugar": "Melinka",
+        "pais": "CL",
+        "lat": -43.8975,
+        "lon": -73.7458
+      },
+      {
+        "lugar": "Puerto Cisnes",
+        "pais": "CL",
+        "lat": -44.7281,
+        "lon": -72.6819
+      },
+      {
+        "lugar": "Puerto Chacabuco",
+        "pais": "CL",
+        "lat": -45.4667,
+        "lon": -72.8167
+      }
+    ],
+    "anio": 2015,
+    "km": 750,
+    "duenos": [
+      "Grupo Gtd"
+    ],
+    "fuentes": [
+      "https://www.gtd.cl",
+      "https://www.subtel.gob.cl"
+    ]
+  }
+]

@@ -1,0 +1,607 @@
+[
+  {
+    "nombre": "Aquilink",
+    "llegadas": [
+      {
+        "lugar": "Oneroa",
+        "pais": "NZ",
+        "lat": -36.782,
+        "lon": 175.008
+      },
+      {
+        "lugar": "Maraetai",
+        "pais": "NZ",
+        "lat": -36.8807,
+        "lon": 175.0419
+      }
+    ],
+    "anio": 2005,
+    "km": 7,
+    "duenos": [
+      "Spark New Zealand"
+    ],
+    "fuentes": [
+      "https://www.spark.co.nz",
+      "https://www.submarinecablemap.com/submarine-cable/aquilink"
+    ]
+  },
+  {
+    "nombre": "AT&T GOKI",
+    "llegadas": [
+      {
+        "lugar": "Tanguisson Point",
+        "pais": "GU",
+        "lat": 13.5492,
+        "lon": 144.8091
+      },
+      {
+        "lugar": "Chinen",
+        "pais": "JP",
+        "lat": 26.1583,
+        "lon": 127.8266
+      }
+    ],
+    "anio": 2013,
+    "km": 4177,
+    "duenos": [
+      "AT&T"
+    ],
+    "fuentes": [
+      "https://www.fcc.gov",
+      "https://www.submarinecablemap.com/submarine-cable/att-goki"
+    ]
+  },
+  {
+    "nombre": "Blue Sky Submarine Cable System (BSSCS)",
+    "llegadas": [
+      {
+        "lugar": "Kawhia",
+        "pais": "NZ",
+        "lat": -38.0667,
+        "lon": 174.8167
+      },
+      {
+        "lugar": "Taharoa",
+        "pais": "NZ",
+        "lat": -38.1667,
+        "lon": 174.7
+      }
+    ],
+    "anio": 2002,
+    "km": 17,
+    "duenos": [
+      "Taharoa Ironsands"
+    ],
+    "fuentes": [
+      "https://www.linz.govt.nz",
+      "https://www.submarinecablemap.com/submarine-cable/blue-sky-submarine-cable-system-bsscs"
+    ]
+  },
+  {
+    "nombre": "Chuuk-Pohnpei Cable",
+    "llegadas": [
+      {
+        "lugar": "Weno",
+        "pais": "FM",
+        "lat": 7.4508,
+        "lon": 151.8569
+      },
+      {
+        "lugar": "Kolonia",
+        "pais": "FM",
+        "lat": 6.9639,
+        "lon": 158.2083
+      }
+    ],
+    "anio": 2019,
+    "km": 790,
+    "duenos": [
+      "FSM Telecommunications Cable Corporation (FSMTCC)"
+    ],
+    "fuentes": [
+      "https://www.worldbank.org",
+      "https://www.submarinecablemap.com/submarine-cable/chuuk-pohnpei-cable"
+    ]
+  },
+  {
+    "nombre": "Digicel Marianas Cable System",
+    "llegadas": [
+      {
+        "lugar": "Tanguisson Point",
+        "pais": "GU",
+        "lat": 13.5492,
+        "lon": 144.8091
+      },
+      {
+        "lugar": "Rota",
+        "pais": "MP",
+        "lat": 14.1394,
+        "lon": 145.1436
+      },
+      {
+        "lugar": "Tinian",
+        "pais": "MP",
+        "lat": 14.9669,
+        "lon": 145.6214
+      },
+      {
+        "lugar": "Saipan",
+        "pais": "MP",
+        "lat": 15.1778,
+        "lon": 145.7508
+      }
+    ],
+    "anio": 2017,
+    "km": 284,
+    "duenos": [
+      "IT&E"
+    ],
+    "fuentes": [
+      "https://www.itehq.net",
+      "https://www.submarinecablemap.com/submarine-cable/atisa"
+    ]
+  },
+  {
+    "nombre": "Endeavour",
+    "llegadas": [
+      {
+        "lugar": "Sydney",
+        "pais": "AU",
+        "lat": -33.8688,
+        "lon": 151.2093
+      },
+      {
+        "lugar": "Keawaula",
+        "pais": "US",
+        "lat": 21.5471,
+        "lon": -158.2415
+      }
+    ],
+    "anio": 2008,
+    "km": 9125,
+    "duenos": [
+      "Telstra"
+    ],
+    "fuentes": [
+      "https://www.telstra.com.au"
+    ]
+  },
+  {
+    "nombre": "Fiji Domestic Savusavu-Taveuni",
+    "llegadas": [
+      {
+        "lugar": "Savusavu",
+        "pais": "FJ",
+        "lat": -16.7794,
+        "lon": 179.3364
+      },
+      {
+        "lugar": "Waiyevo",
+        "pais": "FJ",
+        "lat": -16.7908,
+        "lon": -179.9881
+      }
+    ],
+    "anio": 2018,
+    "km": 81,
+    "duenos": [
+      "Fiji International Telecommunications Limited (FINTEL)",
+      "Telecom Fiji"
+    ],
+    "fuentes": [
+      "https://www.telecomfiji.com.fj",
+      "https://www.fintel.com.fj"
+    ]
+  },
+  {
+    "nombre": "Groote Eylandt Cable",
+    "llegadas": [
+      {
+        "lugar": "Alyangula",
+        "pais": "AU",
+        "lat": -13.8529,
+        "lon": 136.4206
+      },
+      {
+        "lugar": "Numbulwar",
+        "pais": "AU",
+        "lat": -14.2747,
+        "lon": 135.7364
+      }
+    ],
+    "anio": 2021,
+    "km": 100,
+    "duenos": [
+      "Telstra"
+    ],
+    "fuentes": [
+      "https://www.telstra.com.au",
+      "https://nt.gov.au"
+    ]
+  },
+  {
+    "nombre": "Hawaiki Nui 1",
+    "llegadas": [
+      {
+        "lugar": "Whangarei",
+        "pais": "NZ",
+        "lat": -35.7275,
+        "lon": 174.3166
+      },
+      {
+        "lugar": "Sydney",
+        "pais": "AU",
+        "lat": -33.8688,
+        "lon": 151.2093
+      }
+    ],
+    "anio": 2018,
+    "km": 2200,
+    "duenos": [
+      "BW Digital"
+    ],
+    "fuentes": [
+      "https://www.bw-digital.com"
+    ]
+  },
+  {
+    "nombre": "Marianas-Guam Cable",
+    "llegadas": [
+      {
+        "lugar": "Tanguisson Point",
+        "pais": "GU",
+        "lat": 13.5492,
+        "lon": 144.8091
+      },
+      {
+        "lugar": "Rota",
+        "pais": "MP",
+        "lat": 14.15,
+        "lon": 145.2
+      },
+      {
+        "lugar": "Tinian",
+        "pais": "MP",
+        "lat": 15.0,
+        "lon": 145.6333
+      },
+      {
+        "lugar": "Saipan",
+        "pais": "MP",
+        "lat": 15.1833,
+        "lon": 145.75
+      }
+    ],
+    "anio": 1997,
+    "km": 258,
+    "duenos": [
+      "IT&E"
+    ],
+    "fuentes": [
+      "https://www.itehq.net",
+      "https://www.fcc.gov"
+    ]
+  },
+  {
+    "nombre": "Natitua Sud",
+    "llegadas": [
+      {
+        "lugar": "Toahotu",
+        "pais": "PF",
+        "lat": -17.8189,
+        "lon": -149.3039
+      },
+      {
+        "lugar": "Mourai (Rurutu)",
+        "pais": "PF",
+        "lat": -22.4533,
+        "lon": -151.3414
+      },
+      {
+        "lugar": "Mataura (Tubuai)",
+        "pais": "PF",
+        "lat": -23.3472,
+        "lon": -149.4772
+      }
+    ],
+    "anio": 2023,
+    "km": 820,
+    "duenos": [
+      "OPT French Polynesia"
+    ],
+    "fuentes": [
+      "https://www.opt.pf",
+      "https://www.submarinecablemap.com/submarine-cable/natitua-sud"
+    ]
+  },
+  {
+    "nombre": "Oahu-Kauai (OK)",
+    "llegadas": [
+      {
+        "lugar": "Makaha",
+        "pais": "US",
+        "lat": 21.4692,
+        "lon": -158.2175
+      },
+      {
+        "lugar": "Lihue",
+        "pais": "US",
+        "lat": 21.9811,
+        "lon": -159.3711
+      }
+    ],
+    "anio": 1994,
+    "km": 170,
+    "duenos": [
+      "Hawaiian Telcom"
+    ],
+    "fuentes": [
+      "https://www.hawaiiantel.com"
+    ]
+  },
+  {
+    "nombre": "Palau Cable 1 (PC1) / Belau Submarine Cable",
+    "llegadas": [
+      {
+        "lugar": "Ngeremlengui",
+        "pais": "PW",
+        "lat": 7.525,
+        "lon": 134.5583
+      },
+      {
+        "lugar": "Colonia (Yap)",
+        "pais": "FM",
+        "lat": 9.5167,
+        "lon": 138.1333
+      },
+      {
+        "lugar": "Piti",
+        "pais": "GU",
+        "lat": 13.4644,
+        "lon": 144.6933
+      }
+    ],
+    "anio": 2017,
+    "km": 1350,
+    "duenos": [
+      "Belau Submarine Cable Corporation (BSCC)",
+      "FSM Telecommunications Cable Corporation (FSMTCC)"
+    ],
+    "fuentes": [
+      "https://www.belaucable.com",
+      "https://www.adb.org"
+    ]
+  },
+  {
+    "nombre": "PNG LNG",
+    "llegadas": [
+      {
+        "lugar": "Port Moresby",
+        "pais": "PG",
+        "lat": -9.4438,
+        "lon": 147.1803
+      },
+      {
+        "lugar": "Omati River",
+        "pais": "PG",
+        "lat": -7.75,
+        "lon": 144.1833
+      }
+    ],
+    "anio": 2013,
+    "km": 400,
+    "duenos": [
+      "ExxonMobil"
+    ],
+    "fuentes": [
+      "https://www.pnglng.com",
+      "https://www.submarinecablemap.com/submarine-cable/png-lng"
+    ]
+  },
+  {
+    "nombre": "Sabr",
+    "llegadas": [
+      {
+        "lugar": "Darwin",
+        "pais": "AU",
+        "lat": -12.4634,
+        "lon": 130.8456
+      },
+      {
+        "lugar": "Wurrumiyanga (Bathurst Island)",
+        "pais": "AU",
+        "lat": -11.7631,
+        "lon": 130.6303
+      }
+    ],
+    "anio": 2018,
+    "km": 92,
+    "duenos": [
+      "Vocus"
+    ],
+    "fuentes": [
+      "https://www.vocus.com.au",
+      "https://nt.gov.au"
+    ]
+  },
+  {
+    "nombre": "Savaii-Upolu Cable",
+    "llegadas": [
+      {
+        "lugar": "Mulifanua (Upolu)",
+        "pais": "WS",
+        "lat": -13.8294,
+        "lon": -172.0361
+      },
+      {
+        "lugar": "Salelologa (Savai'i)",
+        "pais": "WS",
+        "lat": -13.7397,
+        "lon": -172.2189
+      }
+    ],
+    "anio": 2018,
+    "km": 25,
+    "duenos": [
+      "Samoa Submarine Cable Company (SSCC)"
+    ],
+    "fuentes": [
+      "https://www.sscc.ws"
+    ]
+  },
+  {
+    "nombre": "SunCable / Groote-Bickerton-Mainland",
+    "llegadas": [
+      {
+        "lugar": "Umbakumba",
+        "pais": "AU",
+        "lat": -13.8542,
+        "lon": 136.8153
+      },
+      {
+        "lugar": "Milyakburra",
+        "pais": "AU",
+        "lat": -13.7825,
+        "lon": 136.2089
+      }
+    ],
+    "anio": 2021,
+    "km": 42,
+    "duenos": [
+      "Telstra"
+    ],
+    "fuentes": [
+      "https://www.telstra.com.au"
+    ]
+  },
+  {
+    "nombre": "Sydney-Melbourne-Adelaide-Perth (SMAP) - Kangaroo Island Segment",
+    "llegadas": [
+      {
+        "lugar": "Fishery Beach",
+        "pais": "AU",
+        "lat": -35.63,
+        "lon": 138.11
+      },
+      {
+        "lugar": "Cuttlefish Bay (Kangaroo Island)",
+        "pais": "AU",
+        "lat": -35.75,
+        "lon": 138.01
+      }
+    ],
+    "anio": 2018,
+    "km": 15,
+    "duenos": [
+      "Telstra"
+    ],
+    "fuentes": [
+      "https://www.telstra.com.au",
+      "https://www.acma.gov.au"
+    ]
+  },
+  {
+    "nombre": "Trans-Cook Strait Cable (Aquatronics)",
+    "llegadas": [
+      {
+        "lugar": "Oteranga Bay",
+        "pais": "NZ",
+        "lat": -41.2958,
+        "lon": 174.6219
+      },
+      {
+        "lugar": "Fighting Bay",
+        "pais": "NZ",
+        "lat": -41.3197,
+        "lon": 174.2058
+      }
+    ],
+    "anio": 1995,
+    "km": 40,
+    "duenos": [
+      "Transpower New Zealand",
+      "Spark New Zealand"
+    ],
+    "fuentes": [
+      "https://www.transpower.co.nz",
+      "https://www.linz.govt.nz"
+    ]
+  },
+  {
+    "nombre": "Trans-Cook Strait Cable (Project Aqua / Vodafone)",
+    "llegadas": [
+      {
+        "lugar": "Lyall Bay",
+        "pais": "NZ",
+        "lat": -41.3322,
+        "lon": 174.795
+      },
+      {
+        "lugar": "Blind River",
+        "pais": "NZ",
+        "lat": -41.6667,
+        "lon": 174.1167
+      }
+    ],
+    "anio": 2001,
+    "km": 68,
+    "duenos": [
+      "One New Zealand (formerly Vodafone NZ)"
+    ],
+    "fuentes": [
+      "https://one.nz",
+      "https://www.linz.govt.nz"
+    ]
+  },
+  {
+    "nombre": "Vanuatu-Fiji / Tui-Samoa Extension to Vanua Levu",
+    "llegadas": [
+      {
+        "lugar": "Suva",
+        "pais": "FJ",
+        "lat": -18.1416,
+        "lon": 178.4419
+      },
+      {
+        "lugar": "Savusavu",
+        "pais": "FJ",
+        "lat": -16.7794,
+        "lon": 179.3364
+      }
+    ],
+    "anio": 2018,
+    "km": 220,
+    "duenos": [
+      "Fiji International Telecommunications Limited (FINTEL)"
+    ],
+    "fuentes": [
+      "https://www.fintel.com.fj",
+      "https://www.sscc.ws"
+    ]
+  },
+  {
+    "nombre": "Viti Levu-Vanua Levu (Fiji Domestic)",
+    "llegadas": [
+      {
+        "lugar": "Vatuwaqa (Suva)",
+        "pais": "FJ",
+        "lat": -18.1333,
+        "lon": 178.45
+      },
+      {
+        "lugar": "Savusavu",
+        "pais": "FJ",
+        "lat": -16.7794,
+        "lon": 179.3364
+      }
+    ],
+    "anio": 2007,
+    "km": 240,
+    "duenos": [
+      "Telecom Fiji"
+    ],
+    "fuentes": [
+      "https://www.telecomfiji.com.fj"
+    ]
+  }
+]
