@@ -126,7 +126,7 @@
   // satélite y el satélite la lleve a otro continente» — shown as an EXAMPLE, never as the visitor's measured route.
   const LENTO = 22, DESP_MIN = 1800, DESP_MAX = 7500; // slow motion: each pulse takes its real round trip × 22 (1.8 to 7.5 s)
   const durDe = (n) => Math.max(DESP_MIN, Math.min(DESP_MAX, n.ms * LENTO));
-  const corto = (n) => n.nombre.replace(/ \(.*\)/, '');
+  const corto = (n) => T(n.nombre.replace(/ \(.*\)/, '')); // the place in the page's language (idioma.js has the 33 metros)
   // a pulse of light: a trail that fades behind a bright head
   function pulso(cx, pts, f, N, fuerte) {
     const cab = Math.round(Math.max(0, Math.min(1, f)) * N);
@@ -392,7 +392,7 @@
     const ms = r.nubes.map((n) => n.ms), lejos = r.nubes.slice().sort((a, b) => b.km - a.km)[0];
     h.querySelector('.fin .t').textContent = T('Así viajan tus datos');
     const parpadeo = r.nubes.filter((n) => n.ms <= 150).length;
-    h.querySelector('.fin .d').textContent = num(r.nubes.length) + ' ' + T('destinos medidos') + ' · ' + T('de') + ' ' + num(Math.min(...ms)) + ' ' + T('a') + ' ' + num(Math.max(...ms)) + ' ms · ' + T('el más lejano') + ': ' + lejos.nombre + ', ' + num(Math.round(lejos.km)) + ' km' + (parpadeo ? ' · ' + T('en lo que dura un parpadeo (unos 150 ms) tus datos van y vuelven de') + ' ' + num(parpadeo) + ' ' + T('de ellos') : '');
+    h.querySelector('.fin .d').textContent = num(r.nubes.length) + ' ' + T('destinos medidos') + ' · ' + T('de') + ' ' + num(Math.min(...ms)) + ' ' + T('a') + ' ' + num(Math.max(...ms)) + ' ms · ' + T('el más lejano') + ': ' + T(lejos.nombre) + ', ' + num(Math.round(lejos.km)) + ' km' + (parpadeo ? ' · ' + T('en lo que dura un parpadeo (unos 150 ms) tus datos van y vuelven de') + ' ' + num(parpadeo) + ' ' + T('de ellos') : '');
     h.querySelector('.fin').hidden = false;
   }
 
@@ -527,7 +527,7 @@
   function rapidosPorContinente(r) { const m = new Map(); for (const n of r.nubes) { const k = contKey(n.region); if (!m.has(k) || m.get(k).ms > n.ms) m.set(k, n); } return [...m.values()]; }
   const razon = (n) => (n.minimo > 0 ? n.ms / n.minimo : null);
   // what the card under the pointer says of one destination (the same values as the table)
-  const fichaDe = (n) => ({ t: n.nombre, l: [continente(n.region) + ' · ' + n.ms + ' ms', num(Math.round(n.km)) + ' km ' + T('en línea recta') + ' · ' + T('mínimo') + ' ' + num(Math.round(n.minimo)) + ' ms' + (razon(n) ? ' · ×' + num(razon(n), 1) : '')] });
+  const fichaDe = (n) => ({ t: T(n.nombre), l: [continente(n.region) + ' · ' + n.ms + ' ms', num(Math.round(n.km)) + ' km ' + T('en línea recta') + ' · ' + T('mínimo') + ' ' + num(Math.round(n.minimo)) + ' ms' + (razon(n) ? ' · ×' + num(razon(n), 1) : '')] });
 
   // ---------- 1. the globe: the real Earth, both faces ----------
   // The day texture of the planet (the site's own, already in the browser's cache) as pixels, at three sizes: each
