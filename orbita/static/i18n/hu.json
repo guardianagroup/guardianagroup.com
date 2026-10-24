@@ -819,7 +819,8 @@
   "borde de internet más cercano": "az internet legközelebbi pereme",
   "E": "E",
   "S": "S",
-  "O": "W"
+  "O": "W",
+  "Pulsa para verla en el planeta": "Kattintson, és megjelenik a bolygón"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

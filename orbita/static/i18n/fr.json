@@ -819,7 +819,8 @@
   "borde de internet más cercano": "périphérie d'Internet la plus proche",
   "E": "E",
   "S": "S",
-  "O": "O"
+  "O": "O",
+  "Pulsa para verla en el planeta": "Cliquez pour l’afficher sur la planète"
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

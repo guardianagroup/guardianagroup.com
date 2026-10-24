@@ -819,7 +819,8 @@
   "borde de internet más cercano": "närmaste kant av internet",
   "E": "Ö",
   "S": "S",
-  "O": "V"
+  "O": "V",
+  "Pulsa para verla en el planeta": "Klicka för att se det på planeten"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

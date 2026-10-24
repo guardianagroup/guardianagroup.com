@@ -819,7 +819,8 @@
   "borde de internet más cercano": "最近的網路邊緣",
   "E": "E",
   "S": "S",
-  "O": "W"
+  "O": "W",
+  "Pulsa para verla en el planeta": "點擊即可在星球上查看"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",
