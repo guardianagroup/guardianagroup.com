@@ -1,0 +1,58 @@
+[
+  {
+    "nombre": "Pristina–Prizren–Kukes",
+    "operador": "IPKO",
+    "pais": "XK",
+    "ciudades": ["Pristina", "Prizren", "Kukes"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la red troncal de IPKO hacia Albania; secuencia probable por las carreteras R7 y A1, cruzando por Vermice–Morine. Kukes es la primera ciudad al otro lado de la frontera. El trazado físico exacto del cable no está publicado."
+  },
+  {
+    "nombre": "Peja–Pristina–Skopje",
+    "operador": "IPKO",
+    "pais": "XK",
+    "ciudades": ["Peja", "Pristina", "Ferizaj", "Kacanik", "Hani i Elezit", "Skopje"],
+    "estado": "en servicio",
+    "fuente": "aproximado: itinerario sobre la red troncal nacional de IPKO y su conexión terrestre con Macedonia del Norte; corredores probables N9 y N2, con cruce Hani i Elezit–Blace. No representa un trazado de cable publicado."
+  },
+  {
+    "nombre": "Riga–Liepaja",
+    "operador": "Tet",
+    "pais": "LV",
+    "ciudades": ["Riga", "Saldus", "Skrunda", "Grobina", "Liepaja"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje occidental de la red interurbana de fibra de Tet; ciudades ordenadas según el corredor A9. La secuencia intermedia y la coincidencia del cable con la carretera no están publicadas con detalle."
+  },
+  {
+    "nombre": "Riga–Daugavpils",
+    "operador": "Tet",
+    "pais": "LV",
+    "ciudades": ["Riga", "Salaspils", "Ogre", "Lielvarde", "Koknese", "Jekabpils", "Livani", "Daugavpils"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje sudoriental de la red interurbana de fibra de Tet; secuencia probable por el corredor del Daugava y la carretera A6. No se afirma que el cable atraviese el centro de todas las ciudades."
+  },
+  {
+    "nombre": "Riga–Valmiera–Valka",
+    "operador": "Tet",
+    "pais": "LV",
+    "ciudades": ["Riga", "Valmiera", "Strenci", "Valka"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje nororiental de la red interurbana de fibra de Tet, siguiendo principalmente el corredor A3. Se representa únicamente el tramo letón; el trazado físico entre nodos no está publicado con detalle."
+  },
+  {
+    "nombre": "Vilnius–Kaunas–Klaipeda",
+    "operador": "Telia Lietuva",
+    "pais": "LT",
+    "ciudades": ["Vilnius", "Vievis", "Elektrenai", "Kaunas", "Klaipeda"],
+    "estado": "en servicio",
+    "fuente": "aproximado: principal eje este–oeste de la red troncal de Telia Lietuva; corredor probable de la autopista A1. Se indican los nodos urbanos principales y no todos los puntos intermedios; el recorrido exacto del cable no está publicado."
+  },
+  {
+    "nombre": "Vilnius–Panevezys–Siauliai",
+    "operador": "Telia Lietuva",
+    "pais": "LT",
+    "ciudades": ["Vilnius", "Ukmerge", "Panevezys", "Radviliskis", "Siauliai"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje septentrional de la red troncal de Telia Lietuva; secuencia probable por los corredores A2 y A9. Las ciudades son nodos urbanos de referencia, no una relación publicada de cámaras o estaciones del cable."
+  }
+]
