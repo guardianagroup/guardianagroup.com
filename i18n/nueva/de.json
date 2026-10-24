@@ -1,6 +1,6 @@
 {
  "dir": "ltr",
- "title": "GUARDIANA · Wissen Sie, wohin Ihre Daten gehen und wer sie kauft?",
+ "title": "GUARDIANA · Wissen Sie, wohin Ihre Daten reisen und wer sie kauft?",
  "meta": "Während eine Seite lädt, werden Ihre Daten versteigert. Erfahren Sie kostenlos, was jede Website von Ihnen sieht und mit wem jede Seite spricht, ohne etwas zu installieren. Open Source.",
  "titular": {
   "w": [
@@ -9,7 +9,7 @@
    "wohin",
    "Ihre",
    "Daten",
-   "gehen",
+   "reisen",
    "und"
   ],
   "g": "wer sie kauft?",
@@ -79,7 +79,7 @@
   "Con ella se podía seguir a una persona hasta un centro de salud o un templo.": "Damit ließ sich ein Mensch bis zu einer Klinik oder einem Gotteshaus verfolgen.",
   "Entre las etiquetas con las que te clasifican puede haber": "Zu den Etiketten, mit denen man Sie einordnet, können",
   "salud, religión o política.": "Gesundheit, Religion oder Politik gehören.",
-  "Tú pones los datos. Otros cobran.": "Die Daten liefern Sie. Das Geld kassieren andere.",
+  "Tú pones los datos. Otros comercian con ellos.": "Die Daten liefern Sie. Handel damit treiben andere.",
   "¿Quién los compra?": "Wer kauft sie?",
   "Anunciantes": "Werbetreibende",
   "Pujan por ponerte su anuncio delante.": "Bieten darum, Ihnen ihre Anzeige vorzusetzen.",
@@ -89,7 +89,7 @@
   "Compran, mezclan y revenden perfiles de personas.": "Kaufen Personenprofile, verknüpfen sie und verkaufen sie weiter.",
   "Datos verificados": "Geprüfte Daten",
   "02 · Lo hemos medido": "02 · Wir haben es gemessen",
-  "Abrimos once diarios. Tu navegador habló con": "Wir öffneten elf Online-Zeitungen. Ihr Browser sprach mit",
+  "Abrimos once diarios digitales. Tu navegador habló con": "Wir öffneten elf Online-Zeitungen. Ihr Browser sprach mit",
   "100 empresas": "100 Unternehmen",
   "de 16 países.": "aus 16 Ländern.",
   "Solo en la portada de Marca contamos 22 empresas de publicidad.": "Allein auf der Startseite von Marca zählten wir 22 Werbeunternehmen.",
@@ -142,7 +142,7 @@
   "Funcional": "Funktional",
   "Ilustración": "Illustration",
   "05 · Órbita": "05 · Orbit",
-  "El mapa de por dónde viaja internet.": "Die Karte der Wege, die das Internet nimmt.",
+  "La infraestructura de internet, en un solo mapa.": "Die Infrastruktur des Internets auf einer Karte.",
   "Cables submarinos, fibra en tierra, centros de datos y satélites, en un planeta que puedes girar.": "Seekabel, Glasfaser an Land, Rechenzentren und Satelliten – auf einem Planeten, den Sie drehen können.",
   "Explorar Órbita": "Orbit erkunden",
   "Arrástralo para girarlo · cables reales · señales ilustrativas": "Zum Drehen ziehen · echte Kabel · Signale zur Veranschaulichung",

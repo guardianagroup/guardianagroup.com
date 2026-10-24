@@ -1,6 +1,6 @@
 {
  "dir": "ltr",
- "title": "GUARDIANA · Do you know where your data goes and who buys it?",
+ "title": "GUARDIANA · Do you know where your data travels and who buys it?",
  "meta": "While a page loads, your data goes up for auction. See for free what any website sees about you and who each page talks to, with nothing to install. Open source.",
  "titular": {
   "w": [
@@ -10,7 +10,7 @@
    "where",
    "your",
    "data",
-   "goes",
+   "travels",
    "and"
   ],
   "g": "who buys it?",
@@ -80,7 +80,7 @@
   "Con ella se podía seguir a una persona hasta un centro de salud o un templo.": "With it, a person could be followed to a health clinic or a place of worship.",
   "Entre las etiquetas con las que te clasifican puede haber": "The labels used to sort you can include",
   "salud, religión o política.": "health, religion or politics.",
-  "Tú pones los datos. Otros cobran.": "You provide the data. Others get paid.",
+  "Tú pones los datos. Otros comercian con ellos.": "You provide the data. Others trade in it.",
   "¿Quién los compra?": "Who buys it?",
   "Anunciantes": "Advertisers",
   "Pujan por ponerte su anuncio delante.": "They bid to put their ad in front of you.",
@@ -90,7 +90,7 @@
   "Compran, mezclan y revenden perfiles de personas.": "They buy, combine and resell profiles of people.",
   "Datos verificados": "Verified data",
   "02 · Lo hemos medido": "02 · We measured it",
-  "Abrimos once diarios. Tu navegador habló con": "We opened eleven newspapers. Your browser talked to",
+  "Abrimos once diarios digitales. Tu navegador habló con": "We opened eleven online newspapers. Your browser talked to",
   "100 empresas": "100 companies",
   "de 16 países.": "from 16 countries.",
   "Solo en la portada de Marca contamos 22 empresas de publicidad.": "On Marca's front page alone, we counted 22 advertising companies.",
@@ -143,7 +143,7 @@
   "Funcional": "Functional",
   "Ilustración": "Illustration",
   "05 · Órbita": "05 · Orbit",
-  "El mapa de por dónde viaja internet.": "The map of where the internet travels.",
+  "La infraestructura de internet, en un solo mapa.": "The internet’s infrastructure, on a single map.",
   "Cables submarinos, fibra en tierra, centros de datos y satélites, en un planeta que puedes girar.": "Submarine cables, land fibre, data centres and satellites, on a planet you can turn.",
   "Explorar Órbita": "Explore Orbit",
   "Arrástralo para girarlo · cables reales · señales ilustrativas": "Drag to turn it · real cables · illustrative signals",

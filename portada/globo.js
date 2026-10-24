@@ -4,7 +4,11 @@
    finger or the mouse turns it. On it, the submarine cables and land fibre of Órbita's map (real, simplified for this
    page), light running along them, the geostationary belt with its satellites (they turn with the Earth, as they do),
    a few low satellites, and now and then a signal from Colombia up to the satellite over 72°W and down in another
-   country. The light, the satellites and the hop are illustrations, not traffic: the page says so beside the planet.
+   country. 23 Oct 2026, 21:30 (owner: «solo sale un satélite… añade dos o tres o cuatro más en diferentes zonas, que
+   todos interactúen con datos de abajo»; 21:32: «en el móvil y en la tablet, los tres por igual»): every satellite of
+   the belt is drawn as one and links two places under it now and then, and the low ones pass data down as they fly
+   over, the same on every screen. The light, the satellites and the hops are illustrations, not traffic: the page
+   says so beside the planet, and the places linked are not named.
    Without WebGL 2 the picture stays as it is. With «reduce motion» nothing moves by itself; a drag still turns it. */
 (() => {
   'use strict';
@@ -26,6 +30,19 @@
   const imagenes = {};
   const cargaImagen = (url) => imagenes[url] || (imagenes[url] = new Promise((ok, mal) => { const im = new Image(); im.decoding = 'async'; im.onload = () => ok(im); im.onerror = mal; im.src = url; }));
 
+  // places under the belt that its satellites link (well-known cities; illustration, never named on screen)
+  const LUGAR = { mx: [-99.13, 19.43], la: [-118.24, 34.05], li: [-77.04, -12.05], sf: [-122.42, 37.77], hn: [-157.86, 21.31],
+    hu: [-95.37, 29.76], sp: [-46.63, -23.55], lb: [-9.14, 38.72], dk: [-17.45, 14.69], re: [-34.88, -8.05], ba: [-58.38, -34.60],
+    lu: [13.23, -8.84], lg: [3.38, 6.52], md: [-3.70, 40.42], jo: [28.04, -26.20], nb: [36.82, -1.29], ro: [12.50, 41.90],
+    ki: [15.27, -4.44], ca: [31.24, 30.04], bo: [72.88, 19.08], du: [55.27, 25.20], ka: [67.01, 24.86], cb: [79.86, 6.93],
+    sg: [103.82, 1.35], sy: [151.21, -33.87], ja: [106.85, -6.20], sh: [121.47, 31.23], pe: [115.86, -31.95], bk: [100.50, 13.75],
+    tk: [139.69, 35.69], dw: [130.84, -12.46], ak: [174.76, -36.85], ma: [120.98, 14.60], pp: [-149.57, -17.53], fj: [178.44, -18.14] };
+  // the belt: one satellite every 45° of longitude (the one over 72°W carries the hop from Colombia); each of the others
+  // links pairs of places within its view at the height it is drawn (1.7 radii, not to scale)
+  const GEO = [-72, -27, 18, 63, 108, 153, -162, -117];
+  const ENLACES = [[-27, [['sp', 'lb'], ['re', 'dk'], ['ba', 're']]], [18, [['lg', 'ro'], ['jo', 'ki'], ['nb', 'ca']]],
+    [63, [['du', 'nb'], ['bo', 'cb'], ['ka', 'du']]], [108, [['sg', 'sh'], ['ja', 'pe'], ['bk', 'ma']]], [153, [['tk', 'sy'], ['ak', 'ma'], ['dw', 'tk']]],
+    [-162, [['hn', 'pp'], ['fj', 'hn']]], [-117, [['mx', 'la'], ['li', 'mx'], ['sf', 'hu']]]];
   // a track for the light: a line resampled every ~0.7° along great circles (or a straight segment in space)
   const pista = (pts) => { const s = [0]; for (let i = 1; i < pts.length; i++) { const a = pts[i - 1], b = pts[i]; s.push(s[i - 1] + Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2])); } return { p: pts, s, L: s[s.length - 1] }; };
   const curva = (l, h) => { const out = [];
@@ -151,9 +168,14 @@ void main(){
       if (dn === undefined) { try { dn = new Intl.DisplayNames([lang], { type: 'region' }); } catch (e) { dn = null; } DN.set(lang, dn); }
       let n = cc; try { n = dn ? dn.of(cc) : cc; } catch (e) {} return n.toLocaleUpperCase(lang); };
     let salto = { d: 0, t0: 2.5 };
-    const GEO = [-72, -25, 20, 64, 110, 157, -150, -115];
-    const LEO = [{ i: 53, o: -40, f: 0.4, w: 2 * Math.PI / 66 }, { i: 97, o: -105, f: 2.4, w: 2 * Math.PI / 78 }, { i: 70, o: 10, f: 4.1, w: 2 * Math.PI / 60 }].slice(0, MOVIL ? 2 : 3);
-    const leo = (s, t) => { const th = s.f + s.w * t, ci = Math.cos(s.i * D), si = Math.sin(s.i * D), co = Math.cos(s.o * D), so = Math.sin(s.o * D), c = Math.cos(th), sn = Math.sin(th), r = 1.09;
+    // 22:03 (owner: «los satélites… todos en la misma línea y a la misma altura. Deben ser combinados… más cerca, más
+    // lejos»): besides the belt, low satellites at different heights and inclinations (drawn 1.06–1.16 radii out) and
+    // navigation satellites in medium orbit (drawn about 1.38 out, inclined 55°, slower); all sped up: illustration
+    const LEO = [{ r: 1.07, i: 53, o: -40, f: 0.4, w: 2 * Math.PI / 64 }, { r: 1.13, i: 97, o: -105, f: 2.4, w: 2 * Math.PI / 80 },
+      { r: 1.09, i: 70, o: 10, f: 4.1, w: 2 * Math.PI / 60 }, { r: 1.16, i: 43, o: 150, f: 1.3, w: 2 * Math.PI / 76 }, { r: 1.10, i: 30, o: -150, f: 5.2, w: 2 * Math.PI / 68 }];
+    const MEO = [{ r: 1.36, i: 55, o: -60, f: 0.9, w: 2 * Math.PI / 150 }, { r: 1.40, i: 55, o: 60, f: 3.0, w: 2 * Math.PI / 165 },
+      { r: 1.38, i: 56, o: 180, f: 5.0, w: 2 * Math.PI / 158 }, { r: 1.36, i: 55, o: -120, f: 2.2, w: 2 * Math.PI / 150 }];
+    const leo = (s, t) => { const th = s.f + s.w * t, ci = Math.cos(s.i * D), si = Math.sin(s.i * D), co = Math.cos(s.o * D), so = Math.sin(s.o * D), c = Math.cos(th), sn = Math.sin(th), r = s.r || 1.09;
       return [r * (co * c - so * ci * sn), r * (so * c + co * ci * sn), r * si * sn]; };
     const etiqueta = (txt, p, alfa, lado) => { if (!o.etiquetas || alfa <= 0.01 || W < 560) return; ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = alfa;
       ctx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; ctx.fillStyle = '#C9D7E6'; ctx.textAlign = lado < 0 ? 'right' : 'left'; ctx.textBaseline = 'middle';
@@ -161,6 +183,63 @@ void main(){
     const onda = (p, q, rgb, alfa, tam) => { if (q <= 0 || q >= 1) return; ctx.globalAlpha = alfa * (1 - q) * (1 - q); ctx.strokeStyle = 'rgb(' + rgb + ')'; ctx.lineWidth = 1.2;
       ctx.beginPath(); ctx.arc(p[0], p[1], tam * (0.3 + q * 2.2), 0, 6.2832); ctx.stroke(); };
     const haz = (t, u, alfa) => { if (alfa <= 0.01) return; const a = pr(t.p[0]), b = pr(punto(t, u)); ctx.globalAlpha = alfa; ctx.strokeStyle = 'rgb(' + AZUL + ')'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); };
+    // ---------- the other satellites at work ----------
+    const CLARO = '214,232,248', anchoLuz = MOVIL ? 1.25 : 1.5;
+    const anchoSat = (k, min) => Math.max(min, R * 0.147 * k); // the satellite's width on screen; the one over 72°W is 1
+    // a satellite on screen; «r» is its drawn distance from the centre, so its depth makes it bigger and brighter when near
+    const enProfundidad = (q, r) => { const zn = Math.max(-1, Math.min(1, q[3] / r)); return [1 + 0.24 * zn, zn]; };
+    const dibujaSat = (q, ancho, alfa) => { const sp = sprite(), e = ancho / sp.w; ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = alfa;
+      ctx.drawImage(sp.c, q[0] - sp.ax * e, q[1] - sp.ay * e, sp.w * e, sp.h * e); ctx.globalCompositeOperation = 'lighter'; };
+    const destello = (s, q, k) => { if (q >= 1) return; const rr = 26 * Math.max(0.7, R / 300) * k, g = ctx.createRadialGradient(s[0], s[1], 0, s[0], s[1], rr);
+      g.addColorStop(0, 'rgba(255,255,255,' + (0.85 * (1 - q)).toFixed(3) + ')'); g.addColorStop(1, 'rgba(156,195,228,0)'); ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(s[0], s[1], rr, 0, 6.2832); ctx.fill(); };
+    // a straight light between two screen points that move (a low satellite and the ground), its head at f
+    const rayo = (a, b, f, alfa) => { const hx = a[0] + (b[0] - a[0]) * f, hy = a[1] + (b[1] - a[1]) * f, f0 = Math.max(0, f - 0.5), tx = a[0] + (b[0] - a[0]) * f0, ty = a[1] + (b[1] - a[1]) * f0;
+      const g = ctx.createLinearGradient(tx, ty, hx, hy); g.addColorStop(0, 'rgba(' + CLARO + ',0)'); g.addColorStop(1, 'rgba(' + CLARO + ',' + alfa + ')');
+      ctx.globalAlpha = 1; ctx.strokeStyle = g; ctx.lineWidth = anchoLuz; ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(hx, hy); ctx.stroke();
+      const r = anchoLuz * 3.2, h = ctx.createRadialGradient(hx, hy, 0, hx, hy, r); h.addColorStop(0, 'rgba(255,255,255,' + alfa + ')'); h.addColorStop(1, 'rgba(' + CLARO + ',0)'); ctx.fillStyle = h; ctx.beginPath(); ctx.arc(hx, hy, r, 0, 6.2832); ctx.fill(); };
+    const suelo = (q) => { const m = Math.hypot(q[0], q[1], q[2]) || 1; return [q[0] / m * 1.004, q[1] / m * 1.004, q[2] / m * 1.004]; };
+    // the belt's links: up from one place, a flash, down to another; each satellite at its own pace
+    const relevos = ENLACES.map(([g, pares], k) => ({ S: v3(g, 0, 1.7), pares: pares.map(([a, b]) => { const A = v3(LUGAR[a][0], LUGAR[a][1], 1.004), B = v3(LUGAR[b][0], LUGAR[b][1], 1.004), S = v3(g, 0, 1.7); return { A, B, sube: recta(A, S), baja: recta(S, B) }; }),
+      par: k % pares.length, t0: 1.6 + k * 0.85 + Math.random() * 2.4, va: false }));
+    // the low ones: up from the ground just behind, down just ahead, as they fly over
+    const bajos = LEO.map((s, k) => ({ s, t0: 2.4 + k * 1.6 + Math.random() * 2, A: null, B: null }));
+    // the medium ones send their signal down to the ground under them (navigation signals go one way)
+    const medios = MEO.map((s, k) => ({ s, t0: 3.2 + k * 1.9 + Math.random() * 2, B: null }));
+    function trabajan() {
+      for (const r of relevos) { const dt0 = reloj - r.t0; if (dt0 < 0) continue;
+        const p = r.pares[r.par], s = pr(r.S);
+        if (!r.va) { const a = pr(p.A), b = pr(p.B); // only when the satellite and both places face you
+          if (!s[2] || s[3] < 0.1 || a[3] < 0.15 || b[3] < 0.15) { r.par = (r.par + 1) % r.pares.length; r.t0 = reloj + 0.9 + Math.random() * 1.2; continue; }
+          r.va = true; }
+        const T1 = 1.0, T2 = 1.25, T3 = 2.25, FIN = 3.6;
+        if (dt0 < T1) { const u = p.sube.L * dt0 / T1; haz(p.sube, u, 0.16); cometa(p.sube, u, 0.2, CLARO, anchoLuz, 0.85, 1); }
+        else if (dt0 < T3 + 0.3) haz(p.sube, p.sube.L, 0.16 * Math.max(0, 1 - (dt0 - T1) / 1.6));
+        if (dt0 >= T1 - 0.05 && dt0 < T2 + 0.45) destello(s, Math.min(1, (dt0 - T1 + 0.05) / 0.7), 0.62);
+        if (dt0 >= T2 && dt0 < T3) { const u = p.baja.L * (dt0 - T2) / (T3 - T2); haz(p.baja, u, 0.16); cometa(p.baja, u, 0.2, CLARO, anchoLuz, 0.85, 1); }
+        else if (dt0 >= T3) { haz(p.baja, p.baja.L, 0.16 * Math.max(0, 1 - (dt0 - T3) / 1.4)); onda(pr(p.B), (dt0 - T3) / 1.2, CLARO, 0.8, 5); }
+        if (dt0 > FIN) { r.va = false; r.par = (r.par + 1) % r.pares.length; r.t0 = reloj + 2.0 + Math.random() * 3.2; }
+      }
+      for (const b of bajos) { const dt0 = reloj - b.t0; if (dt0 < 0) continue;
+        const P = pr(leo(b.s, reloj));
+        if (!b.A) { const A = suelo(leo(b.s, reloj - 1.1)), B = suelo(leo(b.s, reloj + 1.6)), a = pr(A), c = pr(B);
+          if (!P[2] || P[3] < 0.2 || a[3] < 0.2 || c[3] < 0.2) { b.t0 = reloj + 0.8; continue; }
+          b.A = A; b.B = B; }
+        const a = pr(b.A), c = pr(b.B), T1 = 0.55, T2 = 0.75, T3 = 1.3, FIN = 2.5;
+        if (dt0 < T1) rayo(a, P, dt0 / T1, 0.85);
+        if (dt0 >= T1 - 0.05 && dt0 < T2 + 0.3) destello(P, Math.min(1, (dt0 - T1 + 0.05) / 0.5), 0.34);
+        if (dt0 >= T2 && dt0 < T3) rayo(P, c, (dt0 - T2) / (T3 - T2), 0.85);
+        if (dt0 >= T3) onda(c, (dt0 - T3) / 1.0, CLARO, 0.75, 4);
+        if (dt0 > FIN) { b.A = b.B = null; b.t0 = reloj + 2.6 + Math.random() * 3; }
+      }
+      for (const m of medios) { const dt0 = reloj - m.t0; if (dt0 < 0) continue;
+        const P = pr(leo(m.s, reloj));
+        if (!m.B) { const B = suelo(leo(m.s, reloj)), c = pr(B); if (!P[2] || P[3] < 0.15 || c[3] < 0.25) { m.t0 = reloj + 1; continue; } m.B = B; }
+        const c = pr(m.B), T1 = 0.9, FIN = 2.4;
+        if (dt0 < 0.5) destello(P, dt0 / 0.5, 0.4);
+        if (dt0 < T1) rayo(P, c, dt0 / T1, 0.8); else onda(c, (dt0 - T1) / 1.4, CLARO, 0.7, 7);
+        if (dt0 > FIN) { m.B = null; m.t0 = reloj + 3.2 + Math.random() * 3.5; }
+      }
+    }
 
     // ---------- one frame ----------
     const anillo = (cerca) => { // the geostationary belt, 1.7 radii (not to scale), dashed; the far half behind the planet is hidden
@@ -190,19 +269,18 @@ void main(){
         if (u > t.L + l.cola) { activos.splice(j, 1); lanza(a.tipo, 0.6 + Math.random() * 2.2); continue; }
         cometa(t, u, l.cola, l.rgb, l.ancho, 0.95 * Math.min(1, u / 0.06, (t.L + l.cola - u) / 0.06), a.sentido); }
       ctx.globalCompositeOperation = 'source-over'; anillo(true); ctx.globalCompositeOperation = 'lighter';
-      // geostationary satellites: fixed over the equator, so they turn with the Earth
-      const sp = sprite();
+      // geostationary satellites: fixed over the equator, so they turn with the Earth; the one over 72°W, bigger
       for (const g of GEO) { const q = pr(v3(g, 0, 1.7)); if (!q[2]) continue;
         if (g === -72) { const gl0 = ctx.createRadialGradient(q[0], q[1], 0, q[0], q[1], 34 * R / 470 * 1.6); gl0.addColorStop(0, 'rgba(156,195,228,.22)'); gl0.addColorStop(1, 'rgba(156,195,228,0)'); ctx.globalAlpha = 1; ctx.fillStyle = gl0; ctx.beginPath(); ctx.arc(q[0], q[1], 34 * R / 470 * 1.6, 0, 6.2832); ctx.fill();
-          const e = (R / 470) * 1.0 / (sp.k / 3) * 0.5; ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 0.95; ctx.drawImage(sp.c, q[0] - sp.ax * e, q[1] - sp.ay * e, sp.w * e, sp.h * e); ctx.globalCompositeOperation = 'lighter';
-          onda(q, (reloj * 0.42) % 1, AZUL, 0.45, 7); }
-        else { ctx.globalAlpha = q[3] >= 0 ? 0.9 : 0.45; ctx.fillStyle = '#DCEBFA'; const z = MOVIL ? 2.2 : 2.6; ctx.fillRect(q[0] - z / 2, q[1] - z / 2, z, z); } }
+          dibujaSat(q, anchoSat(1, 22), 0.95); onda(q, (reloj * 0.42) % 1, AZUL, 0.45, 7); }
+        else { const [k, zn] = enProfundidad(q, 1.7); dibujaSat(q, anchoSat(0.7, 19) * k, zn >= 0 ? 0.92 : 0.42); } }
       // low satellites passing (orbits drawn 1.09 radii out and sped up: illustration)
-      if (!RM) for (const s of LEO) { let prev = null;
-        for (let i = 10; i >= 0; i--) { const q = pr(leo(s, reloj - i * 0.16)); if (!q[2]) { prev = null; continue; }
+      for (const [lista, kAncho, minAncho, paso] of [[MEO, 0.56, 16, 0.5], [LEO, 0.45, 14, 0.16]]) for (const s of lista) { let prev = null;
+        if (!RM) for (let i = 10; i >= 0; i--) { const q = pr(leo(s, reloj - i * paso)); if (!q[2]) { prev = null; continue; }
           if (prev) { const f = 1 - i / 10; ctx.globalAlpha = 0.5 * f * f; ctx.strokeStyle = 'rgb(' + AZUL + ')'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); }
           prev = q; }
-        const q = pr(leo(s, reloj)); if (q[2]) { ctx.globalAlpha = 0.95; ctx.fillStyle = '#DCEBFA'; const z = MOVIL ? 2.2 : 2.6; ctx.fillRect(q[0] - z / 2, q[1] - z / 2, z, z); } }
+        const q = pr(leo(s, reloj)); if (q[2]) { const [k, zn] = enProfundidad(q, s.r); dibujaSat(q, anchoSat(kAncho, minAncho) * k, zn >= 0 ? 0.95 : 0.4); } }
+      if (!RM) trabajan();
       // Cartagena, breathing, and the hop when Colombia faces you
       if (o.salto) {
         const c = pr(CTG), vis = c[3] > 0.2;

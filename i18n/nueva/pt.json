@@ -1,6 +1,6 @@
 {
  "dir": "ltr",
- "title": "GUARDIANA · Você sabe para onde vão seus dados e quem os compra?",
+ "title": "GUARDIANA · Você sabe para onde viajam seus dados e quem os compra?",
  "meta": "Enquanto uma página carrega, seus dados vão a leilão. Veja de graça o que qualquer site vê de você e com quem cada página fala, sem instalar nada. Código aberto.",
  "titular": {
   "w": [
@@ -8,7 +8,7 @@
    "sabe",
    "para",
    "onde",
-   "vão",
+   "viajam",
    "seus",
    "dados",
    "e"
@@ -80,7 +80,7 @@
   "Con ella se podía seguir a una persona hasta un centro de salud o un templo.": "Com ela, era possível seguir uma pessoa até uma clínica ou um templo.",
   "Entre las etiquetas con las que te clasifican puede haber": "Entre os rótulos usados para classificar você, pode haver",
   "salud, religión o política.": "saúde, religião ou política.",
-  "Tú pones los datos. Otros cobran.": "Você entra com os dados. Outros faturam.",
+  "Tú pones los datos. Otros comercian con ellos.": "Você entra com os dados. Outros fazem comércio com eles.",
   "¿Quién los compra?": "Quem os compra?",
   "Anunciantes": "Anunciantes",
   "Pujan por ponerte su anuncio delante.": "Dão lances para colocar o anúncio deles na sua frente.",
@@ -90,7 +90,7 @@
   "Compran, mezclan y revenden perfiles de personas.": "Compram, combinam e revendem perfis de pessoas.",
   "Datos verificados": "Dados verificados",
   "02 · Lo hemos medido": "02 · Medimos",
-  "Abrimos once diarios. Tu navegador habló con": "Abrimos onze jornais. Seu navegador falou com",
+  "Abrimos once diarios digitales. Tu navegador habló con": "Abrimos onze jornais digitais. Seu navegador falou com",
   "100 empresas": "100 empresas",
   "de 16 países.": "de 16 países.",
   "Solo en la portada de Marca contamos 22 empresas de publicidad.": "Só na página inicial do Marca contamos 22 empresas de publicidade.",
@@ -143,7 +143,7 @@
   "Funcional": "Funcional",
   "Ilustración": "Ilustração",
   "05 · Órbita": "05 · Órbita",
-  "El mapa de por dónde viaja internet.": "O mapa dos caminhos da internet.",
+  "La infraestructura de internet, en un solo mapa.": "A infraestrutura da internet, em um só mapa.",
   "Cables submarinos, fibra en tierra, centros de datos y satélites, en un planeta que puedes girar.": "Cabos submarinos, fibra terrestre, centros de dados e satélites, em um planeta que você pode girar.",
   "Explorar Órbita": "Explorar Órbita",
   "Arrástralo para girarlo · cables reales · señales ilustrativas": "Arraste para girá-lo · cabos reais · sinais ilustrativos",
