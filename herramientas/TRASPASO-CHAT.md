@@ -19,7 +19,11 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 - **Cables submarinos:** 518 cables enteros y 1.473 llegadas, cada una con el nombre de su pueblo (GeoNames cities500). Al empezar la noche eran 445.
   - `orbita/datos/cables-agencia.json` guarda los 349 cables de la agencia.
   - Hay 107 cables que solo nombra una voz y que ninguna fuente oficial confirma. No se muestran, a propósito; están en `herramientas/agencia-rondas/ronda19/`.
-- **Antártida:** la investigación profunda de ChatGPT confirma que no hay fibra entre bases ni llega ningún cable submarino. Las bases se conectan por satélite (Starlink en McMurdo, ANARESAT). Falta escribirlo en su ficha.
+- **Antártida:** dos voces coinciden: la investigación profunda de ChatGPT y Astra 6 (`ronda23/astra-antartida.txt`).
+  - No llega ningún cable submarino en servicio. Nueva Zelanda–McMurdo y Chile–isla Rey Jorge son proyectos o estudios.
+  - Las bases salen a internet por satélite: Starlink en McMurdo y Rothera; ANARESAT y Starlink en Casey, Davis y Mawson; TDRSS, DSCS e Iridium en el Polo Sur.
+  - Sobre la fibra entre bases, Astra no lo confirma ni lo descarta: hay redes locales, como la de IceCube en el Polo Sur. En la ficha no hay que decir que no existe.
+  - Falta escribirlo en su ficha.
 
 **Cómo deciden los generadores (cambios de esta noche)**
 - **`herramientas/fibra_agencia.py`** lee `herramientas/fibra-agencia/<voz>-troncales-*.json`; la voz es el prefijo del nombre. Un tramo entra por uno de tres niveles:
@@ -60,11 +64,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 4. Publica `cables.json`, `cables-agencia.json`, `lugares-capas.json` y la carpeta `herramientas/cables-agencia` en las dos ramas.
 
 **Lo que quedó a medias**
-- **Revisión de Astra 6 por continentes** (ronda 23). Orden del dueño a las 9:30: que Astra haga todos los países que faltan y revise los que ya hay, por continentes, con la Antártida y las zonas difíciles.
-  - Hecho: África 1–3, en `herramientas/fibra-agencia/astra-troncales-africa-1.json` a `-3.json`, con el texto bruto en `ronda23/`.
-  - Esas tres ya están procesadas y publicadas.
-  - Las tandas, en orden, están en `ronda23/tandas.md`, y la pregunta en `ronda23/pregunta.txt`. Mira qué `astra-troncales-<tanda>.json` existen ya y sigue por la primera que falte. Las tandas procesadas se apuntan al final del §11.
-  - A Astra le quedan unos 7,5 US$ de saldo.
+- **Revisión de Astra 6 por continentes (ronda 23): terminada** el 24 de octubre a las 11:41. Todas las tandas de `ronda23/tandas.md` están procesadas y publicadas (registro al final del §11). Resultado: 169 países (entró Nueva Caledonia), 1.345.645 km y 420 tramos de la agencia.
 - **Kimi** (kimi.ai): la cuenta gratuita se satura en la hora punta de China. Sus preguntas están en `herramientas/agencia-rondas/kimi-pendientes/`. Quedan 13 por hacer:
   - `q-A3`: trazados aproximados de los países sin datos. La respuesta va a `herramientas/fibra-agencia/kimi-troncales-3.json`.
   - `q-B1` a `q-B5`: troncales en servicio. Las respuestas van a `kimi-troncales-4.json` hasta `-8.json`.
@@ -74,7 +74,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 - **Gemini:** le falta la tanda 9 (KP, TD, NI y CV). Su límite se renueva el 24 de octubre a las 12:47.
 - **Grok:** le faltan las tandas 8 y 9. Su límite semanal se renueva el 27 de octubre.
 - **Cables submarinos sin confirmar:** los 107 de una sola voz (`ronda19/cables-por-confirmar.json` y `claude-cables-fuentes.txt`). Cada uno entra solo en cuanto otra voz lo nombre, al volver a ejecutar `cables_agencia.py` y `lugares_capas.py`.
-- **Ficha de la Antártida:** escribir que no tiene fibra ni cables y que se conecta por satélite.
+- **Ficha de la Antártida:** escribir que no llega ningún cable y que sale a internet por satélite, sin afirmar que no hay fibra entre bases.
 
 **Lo siguiente que pidió el dueño, por tramos**
 
@@ -117,7 +117,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
    - Si alguna sesión no está abierta, pídele al dueño que la abra. Tú nunca escribes contraseñas ni claves.
 3. **Lectura:** este documento entero; después, `herramientas/TRASPASO.md` y `herramientas/agencia-rondas/qa/revision-orbita-2026-10-24.md`.
 4. **Primera tarea:** si hay respuestas `herramientas/fibra-agencia/astra-troncales-*.json` que no figuren como procesadas al final del §11, pásalas por el proceso de los cables por tierra y publícalo.
-5. **Sigue la ronda 23 de Astra** con los continentes que faltan, en tandas pequeñas.
+5. **La ronda 23 de Astra está terminada.** Si vuelves a preguntarle algo, hazlo en tandas pequeñas.
    - Astra corta a 4.096 tokens, contando el razonamiento.
    - El Playground no guarda la conversación: si una respuesta se corta, pregunta solo por los países que faltaron.
 6. **Las demás voces**, y después de cada respuesta, el proceso de arriba:
