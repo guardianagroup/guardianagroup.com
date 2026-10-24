@@ -1863,6 +1863,41 @@
 ]
 },
 {
+"n": "Kuwait National Fixed Telecommunications Network",
+"o": "Ministry of Communications",
+"cc": "KW",
+"l": [
+[
+47.66,
+29.34
+],
+[
+47.97,
+29.37
+],
+[
+48.03,
+29.33
+],
+[
+48.08,
+29.33
+],
+[
+47.96,
+29.28
+],
+[
+48.13,
+29.08
+],
+[
+48.08,
+29.08
+]
+]
+},
+{
 "n": "Red troncal nacional de fibra óptica de Flow",
 "o": "Flow / Cable & Wireless Jamaica",
 "cc": "JM",
@@ -2596,6 +2631,68 @@
 ]
 },
 {
+"n": "STE National Transmission Backbone",
+"o": "Syrian Telecommunications Establishment",
+"cc": "SY",
+"l": [
+[
+37.16,
+36.2
+],
+[
+36.63,
+35.93
+],
+[
+36.758,
+35.132
+],
+[
+36.73,
+34.72
+],
+[
+36.29,
+33.51
+],
+[
+36.102,
+32.619
+]
+]
+},
+{
+"n": "PTC National Fiber Backbone",
+"o": "Public Telecommunications Corporation",
+"cc": "YE",
+"l": [
+[
+49.124,
+14.542
+],
+[
+45.38,
+13.13
+],
+[
+45.04,
+12.78
+],
+[
+44.021,
+13.58
+],
+[
+44.18,
+13.97
+],
+[
+44.41,
+14.54
+]
+]
+},
+{
 "n": "Red troncal nacional de telecomunicaciones por fibra óptica",
 "o": "Korea Posts and Telecommunications Corporation (KPTC)",
 "cc": "KP",
@@ -3098,6 +3195,33 @@
 [
 -65.42,
 -24.81
+]
+]
+},
+{
+"n": "Paltel National Fiber Backbone",
+"o": "Palestine Telecommunications Company",
+"cc": "PS",
+"l": [
+[
+35.301,
+32.459
+],
+[
+35.03,
+32.31
+],
+[
+35.25,
+32.22
+],
+[
+34.97,
+32.19
+],
+[
+35.2,
+31.9
 ]
 ]
 },
@@ -3981,17 +4105,21 @@
 ]
 },
 {
-"n": "Red troncal fija nacional de Kuwait — corredor metropolitano",
-"o": "Ministry of Communications",
-"cc": "KW",
+"n": "PTC National Fiber Backbone",
+"o": "Public Telecommunications Corporation",
+"cc": "YE",
 "l": [
 [
-47.97,
-29.37
+44.21,
+15.35
 ],
 [
-48.03,
-29.33
+43.94,
+15.66
+],
+[
+43.76,
+16.94
 ]
 ]
 },
@@ -4202,6 +4330,21 @@
 [
 -69.25,
 -51.63
+]
+]
+},
+{
+"n": "Red Troncal Nacional de Fibra Óptica de Palestina",
+"o": "Palestine Telecommunications Company (Paltel)",
+"cc": "PS",
+"l": [
+[
+35.2,
+31.7
+],
+[
+35.09,
+31.53
 ]
 ]
 },
@@ -5774,6 +5917,21 @@
 [
 89.38,
 26.85
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "YE",
+"l": [
+[
+44.21,
+15.35
+],
+[
+44.41,
+14.54
 ]
 ]
 },
