@@ -1,29 +1,28 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-Actualizado el sábado 24 de octubre de 2026 a las 15:45, hora de Bogotá, al cerrar la segunda cuenta del día al 86 % de su uso semanal. Copia de seguridad: todo está en GitHub con su historial completo. Al cerrar, `main` iba en `6487cd6` (más el commit que hará el workflow de empresas al terminar) y `web-idiomas` en el commit de este documento. Desde esta sesión no se pueden subir etiquetas de git: el proxy lo rechaza. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
+Actualizado el sábado 24 de octubre de 2026 a las 15:52, hora de Bogotá, al cerrar la segunda cuenta del día al 96 % de su uso semanal. Copia de seguridad: todo está en GitHub con su historial completo. Al cerrar, `main` iba en `80affc7` (más el commit que hará el workflow de empresas al terminar) y `web-idiomas` en el commit de este documento. Desde esta sesión no se pueden subir etiquetas de git: el proxy lo rechaza. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
 
-## Estado al cerrar esta cuenta (24 Oct 2026, 15:45, al 86 % de uso) — empieza por aquí
+## Estado al cerrar esta cuenta (24 Oct 2026, 15:52, al 96 % de uso) — empieza por aquí
 
 **Todo está subido y publicado.** No queda nada sin guardar en local. Lo de más abajo («Estado anterior», «Lo que quedó a medias») es de las 14:30 y vale como referencia de cómo funcionan las cosas; lo vigente es esta sección.
 
 **Hecho y publicado en esta cuenta (14:20–15:45)**
 - **Ronda 24c:** Gemini confirma 59 de los 61 cables de una sola voz → **435 cables submarinos de la agencia**.
 - **Fotos en las fichas de Órbita:** 29 fotos revisadas una a una, con crédito en la ficha y en `terminos.html` §6. El dueño aprobó el diseño (14:46).
-- **Rondas 25 y 25b, cables por tierra:** **181 países**, 1.346.147 km, 437 tramos de la agencia.
+- **Rondas 25, 25b y 25c, cables por tierra:** **187 países**, 1.346.245 km, 445 tramos de la agencia.
   - Ronda 25: entran Guinea-Bisáu, Santo Tomé y Comoras.
   - Ronda 25b: entran Andorra, Macao, Guam, Islas Vírgenes de EE. UU., Islas Caimán, Guadalupe, Martinica, Reunión y Guayana Francesa.
+  - Ronda 25c (confirmación cruzada, 15:45–15:50): ChatGPT confirma 8 rutas de Gemini (`chatgpt-troncales-territorios-2.json`) y Gemini una de ChatGPT (`gemini-troncales-territorios-2.json`). Entran Hong Kong, Singapur, Aruba, Mayotte, Polinesia Francesa y Bahamas.
 - **Fichas de empresas (punto 6 de «Lo siguiente»):** la herramienta está hecha y su primera búsqueda estaba en marcha al cerrar (ver abajo).
 
 **Lo que falta para el mapa «al 100 %»**
 - **Sin cables por tierra todavía:**
-  - Hong Kong, Singapur, Mónaco, Aruba, Curazao, Polinesia Francesa, Samoa, Mayotte y Tonga: en la ronda 25b, ChatGPT y Gemini dan tramos distintos. ChatGPT no respondió Mayotte ni Tonga.
-  - Vanuatu, Bahamas e Islas Salomón: lo mismo, en la ronda 25.
-  - Seychelles: su tramo mide menos de 5 km, y `fibra_tierra.py` quita las líneas de menos de 5 km. A Mónaco le pasará lo mismo: cualquier tramo suyo mide menos de 5 km; pregúntale al dueño si se hace una excepción para las ciudades-Estado.
+  - Curazao, Samoa, Tonga e Islas Salomón: ninguna voz confirma la ruta de la otra.
+  - Mónaco (3,1 km) y Vanuatu (3,4 km): sus tramos sí están confirmados por dos voces, pero `fibra_tierra.py` quita las líneas de menos de 5 km. Lo mismo pasa con Seychelles. **Pregunta hecha al dueño (15:45), sin respuesta todavía:** ¿se hace una excepción para las ciudades-Estado y las islas pequeñas? Si dice que sí, baja el límite para esos países en `fibra_tierra.py` (línea `if k < 5:`).
   - Eritrea: usa radioenlaces, no fibra.
   - Sáhara Occidental y otros territorios pequeños.
-- **Siguiente paso: una ronda de confirmación cruzada.** Pídele a ChatGPT que confirme o corrija, ciudad por ciudad, las rutas de Gemini, y a Gemini las de ChatGPT, con las mismas listas de ciudades para que casen. Las respuestas están en `herramientas/fibra-agencia/gemini-troncales-territorios-1.json`, `chatgpt-troncales-territorios-1.json` y los `*-troncales-islas-1.json` (Vanuatu, Bahamas e Islas Salomón). Después, el proceso de los cables por tierra de más abajo.
-- **Pueblos sin situar** (solo hacen falta si una ruta llega a casar): Chai Wan (HK); Ayer Rajah, Tai Seng, Tuas y Downtown Core (SG); Fontvieille, La Condamine y Larvotto (MC); Havensight y Red Hook (VI); Seven Mile Beach y South Sound (KY); Blue Bay, Boka Sami y Nieuwpoort (CW); Papenoo y Taravao (PF); Fagali'i, Faleolo y Aleipata (WS).
-  - Se añaden a `SITIOS` en `fibra_agencia.py` con las coordenadas de Nominatim (OpenStreetMap), pedidas con `fetch` desde la pestaña de Wikimedia Commons del navegador integrado.
+- **Siguiente paso:** Gemini se quedó en el modelo Flash-Lite (su límite del modelo potente se renueva a las 17:47 del 24 de octubre) y solo confirmó Mónaco. Después de las 17:47, pídele con el modelo potente que confirme las rutas de ChatGPT de Curazao (Blue Bay–Boka Sami) y Samoa (Fagali'i–Apia), y pide a ChatGPT y a Gemini rutas nuevas de Tonga e Islas Salomón. Las respuestas anteriores están en `herramientas/fibra-agencia/*-troncales-territorios-*.json` y `*-troncales-islas-1.json`. Después, el proceso de los cables por tierra de más abajo.
+- **Pueblos sin situar:** solo Fox Town (BS), Havensight y Red Hook (VI). Los demás de esta ronda ya están en `SITIOS` (`fibra_agencia.py`), con coordenadas de OpenStreetMap: Nominatim y Overpass, pedidos con `fetch` desde la pestaña de Wikimedia Commons del navegador integrado.
 - **Cables submarinos:** quedan 36 que nombra una sola voz (lista «solo lo nombra» de `cables_agencia.py`). Necesitan una segunda voz.
 
 **En marcha al cerrar: fichas de empresas con su sede**
@@ -665,3 +664,4 @@ Actualizado el sábado 24 de octubre de 2026 a las 15:45, hora de Bogotá, al ce
 - **Ronda 25b terminada:** ChatGPT (21 rutas) y Gemini (18) con los territorios y las ciudades-Estado (`fibra-agencia/chatgpt-troncales-territorios-1.json` y `gemini-troncales-territorios-1.json`). Con dos voces entran 9: AD, MO, GU, VI, KY, GP, MQ, RE y GF → **181 países**, 1.346.147 km y 437 tramos de la agencia (commit `6487cd6` en `main`). Piti, Asan y Grove Place, situados con Nominatim, están en `SITIOS`.
 - **Fichas de empresas:** `herramientas/empresas.py` y `.github/workflows/empresas.yml` están publicados (commit `b1fe782` en `main`). El run `40129919220` (modo `buscar`) estaba en marcha al cerrar.
 - **Repositorio del programa:** `guardianagroup/guardiana` está clonado solo para leer (sus fichas y el registro de corredores de California).
+- **15:50 · Ronda 25c publicada:** **187 países**, 1.346.245 km y 445 tramos de la agencia (commit `80affc7` en `main`). Al cerrar, el workflow de empresas (run `40129919220`) seguía así: «in_progress ».
