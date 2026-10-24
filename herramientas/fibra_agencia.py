@@ -63,6 +63,19 @@ SITIOS = {
     ('BS', 'crossingrocks'): (-77.197, 26.124), ('BS', 'eightmilerock'): (-78.806, 26.541),
     # round 25b (territories), from OpenStreetMap (Nominatim): villages of Guam and a quarter of Saint Croix
     ('GU', 'piti'): (144.693, 13.461), ('GU', 'asan'): (144.718, 13.469), ('VI', 'groveplace'): (-64.821, 17.726),
+    # round 25c (cross confirmation of the territories), from OpenStreetMap (Nominatim and Overpass)
+    ('HK', 'chaiwan'): (114.238, 22.266),
+    ('SG', 'ayerrajah'): (103.759, 1.312), ('SG', 'taiseng'): (103.888, 1.344), ('SG', 'tuas'): (103.632, 1.278),
+    ('SG', 'downtowncore'): (103.856, 1.287),
+    ('MC', 'fontvieille'): (7.418, 43.728), ('MC', 'lacondamine'): (7.422, 43.734), ('MC', 'larvotto'): (7.434, 43.747),
+    ('CW', 'bluebay'): (-68.981, 12.139), ('CW', 'bokasami'): (-68.998, 12.146), ('CW', 'nieuwpoort'): (-68.830, 12.052),
+    ('AW', 'savaneta'): (-69.950, 12.453),
+    ('PF', 'papenoo'): (-149.430, -17.530), ('PF', 'taravao'): (-149.314, -17.726),
+    ('WS', 'fagalii'): (-171.737, -13.844), ('WS', 'faleolo'): (-172.019, -13.827), ('WS', 'aleipata'): (-171.467, -14.018),
+    ('SB', 'whiteriver'): (159.922, -9.425), ('SB', 'pointcruz'): (159.958, -9.426), ('SB', 'ranadi'): (160.001, -9.428),
+    ('SB', 'henderson'): (160.050, -9.429),
+    ('BS', 'hawksbill'): (-78.735, 26.511),
+    ('KY', 'sevenmilebeach'): (-81.381, 19.339), ('KY', 'southsound'): (-81.357, 19.271),
 }
 
 PARECIDO = 1.35  # the other voice's path between two cities may be this much longer than the straight line (+ 60 km)
