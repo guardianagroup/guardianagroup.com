@@ -584,8 +584,42 @@ meiganga	CM	6.51667	14.3	59426	Meïganga
 ngaoundere	CM	7.32765	13.58472	238196	Ngaoundéré
 nkongsamba	CM	4.9547	9.9404	162309	Nkongsamba
 yaounde	CM	3.86667	11.51667	1299369	Yaoundé
+anyang	CN	36.096	114.38278	1146839	Anyang
+baoding	CN	38.87288	115.46246	2739887	Baoding
+beijing	CN	39.9075	116.39723	18960744	Beijing
+bengbu	CN	32.94083	117.36083	972784	Bengbu
+cangzhou	CN	38.31124	116.85334	527681	Cangzhou
+changsha	CN	28.19874	112.97087	3093980	Changsha
+changzhou	CN	31.77359	119.95401	3290918	Changzhou
+chengdu	CN	30.66667	104.06667	20937757	Chengdu
+chenzhou	CN	25.8	113.03333	822534	Chenzhou
+chongqing	CN	29.56026	106.55771	22000000	Chongqing
+dezhou	CN	37.44661	116.36706	679535	Dezhou
+enshi	CN	30.3	109.48333	279185	Enshi
 guangzhou	CN	23.11667	113.25	18676605	Guangzhou
+handan	CN	36.60999	114.48764	1358318	Handan
+hefei	CN	31.86389	117.28083	9465881	Hefei
+hengyang	CN	26.88946	112.61888	1075516	Hengyang
+jinan	CN	36.66833	116.99722	8352574	Jinan
+jingmen	CN	31.03361	112.20472	632954	Jingmen
+luan	CN	31.73561	116.51688	1644344	Lu’an
+nanjing	CN	32.06167	118.77778	9314685	Nanjing
 shanghai	CN	31.22222	121.45806	24874500	Shanghai
+shaoguan	CN	24.8	113.58333	1028460	Shaoguan
+shijiazhuang	CN	38.04139	114.47861	5758403	Shijiazhuang
+suining	CN	30.50802	105.57332	656760	Suining
+suzhou	CN	31.30408	120.59538	6715559	Suzhou
+taian	CN	36.18528	117.12	1735425	Tai’an
+tianjin	CN	39.14222	117.17667	13866009	Tianjin
+wuhan	CN	30.58333	114.26667	13739000	Wuhan
+wuxi	CN	31.56887	120.28857	4396835	Wuxi
+xinxiang	CN	35.19033	113.80151	1047088	Xinxiang
+xinyang	CN	32.12278	114.06556	1416800	Xinyang
+xuzhou	CN	34.20442	117.28386	1253991	Xuzhou
+yichang	CN	30.71444	111.28472	1350150	Yichang
+yueyang	CN	29.37455	113.09481	991465	Yueyang
+zhengzhou	CN	34.75778	113.64861	6650532	Zhengzhou
+zhenjiang	CN	32.21086	119.45508	950516	Zhenjiang
 armenia	CO	4.53656	-75.67263	304314	Armenia
 barranquilla	CO	10.96854	-74.78132	1206319	Barranquilla
 bogota	CO	4.60971	-74.08175	7674366	Bogotá
@@ -657,6 +691,9 @@ santamaria	CV	16.59796	-22.90509	8400	Santa Maria
 saodomingos	CV	15.02438	-23.5625	2960	São Domingos
 saofilipe	CV	14.8961	-24.49556	10097	São Filipe
 tarrafal	CV	15.27881	-23.75192	13483	Tarrafal
+limassol	CY	34.68406	33.03794	154000	Limassol
+nicosia	CY	35.17284	33.35397	200452	Nicosia
+paphos	CY	34.77679	32.42451	35961	Paphos
 brno	CZ	49.19522	16.60796	404296	Brno
 prague	CZ	50.08804	14.42076	1165581	Prague
 frankfurtammain	DE	50.11552	8.68417	650000	Frankfurt am Main
@@ -813,6 +850,14 @@ ndjole	GA	-0.17827	10.76488	8265	Ndjolé
 ntoum	GA	0.39051	9.76096	62445	Ntoum
 london	GB	51.50853	-0.12574	8961989	London
 manchester	GB	53.48095	-2.23743	568996	Manchester
+gori	GE	41.98532	44.1129	41933	Gori
+khashuri	GE	41.99733	43.59905	23949	Khashuri
+kutaisi	GE	42.26791	42.69459	135201	Kutaisi
+poti	GE	42.14272	41.67384	41175	Poti
+samtredia	GE	42.1537	42.33517	21063	Samtredia
+senaki	GE	42.27077	42.06334	14991	Senaki
+tbilisi	GE	41.69143	44.83412	1049498	Tbilisi
+zestaponi	GE	42.10752	43.03291	20183	Zestaponi
 accra	GH	5.55602	-0.1969	1963264	Accra
 bawku	GH	11.05926	-0.24249	76459	Bawku
 bolgatanga	GH	10.78556	-0.85139	81958	Bolgatanga
@@ -975,18 +1020,23 @@ bogor	ID	-6.59444	106.78917	1078351	Bogor
 bojonegoro	ID	-7.1502	111.8817	86568	Bojonegoro
 bungku	ID	-2.5471	121.972	25477	Bungku
 cepu	ID	-7.1475	111.5906	55055	Cepu
+cikampek	ID	-6.41972	107.45583	127173	Cikampek
 cilegon	ID	-6.0144	106.0542	470378	Cilegon
 cirebon	ID	-6.7063	108.557	344851	Cirebon
 denpasar	ID	-8.65	115.21667	670210	Denpasar
 dumai	ID	1.66711	101.44316	349389	Dumai
+duri	ID	1.27607	101.19457	0	Duri
 indramayu	ID	-6.32639	108.32	123263	Indramayu
 jakarta	ID	-6.21462	106.84513	8540121	Jakarta
 jambi	ID	-1.6	103.61667	635101	Jambi City
 jombang	ID	-7.54595	112.23307	126465	Jombang
 karawang	ID	-6.30525	107.3197	307880	Karawang
 kendari	ID	-3.9778	122.51507	351085	Kendari
+kisaran	ID	2.9845	99.6158	141915	Kisaran
+kudus	ID	-6.8048	110.8405	92156	Kudus
 labuhanmaringgai	ID	-5.35074	105.80993	0	Labuhanmaringgai
 lamongan	ID	-7.11667	112.41667	59224	Lamongan
+lubukpakam	ID	3.5592	98.8733	0	Lubuk Pakam
 madiun	ID	-7.6298	111.5239	202544	Madiun
 medan	ID	3.58333	98.66667	2486283	Medan
 mojokerto	ID	-7.4664	112.4338	141785	Mojokerto
@@ -996,52 +1046,90 @@ palembang	ID	-2.91673	104.7458	1801367	Palembang
 pekalongan	ID	-6.8886	109.6753	324564	Pekalongan
 pekanbaru	ID	0.51667	101.44167	1167599	Pekanbaru
 probolinggo	ID	-7.7543	113.2159	243746	Probolinggo
+rantauprapat	ID	2.1	99.83333	103009	Rantauprapat
+rembang	ID	-6.7036	111.3416	44030	Rembangan
 semarang	ID	-6.99306	110.42083	1694740	Semarang
 subang	ID	-6.57	107.75667	137234	Subang
 surabaya	ID	-7.24917	112.75083	3018022	Surabaya
 surakarta	ID	-7.55611	110.83167	526870	Surakarta
+tebingtinggi	ID	3.3285	99.1625	117530	Tebingtinggi
 tegal	ID	-6.8694	109.1402	297173	Tegal
 tentena	ID	-1.7562	120.648	0	Tentena
+tuban	ID	-6.8976	112.0649	76242	Tuban
 wates	ID	-7.85722	110.15694	0	Wates
 yogyakarta	ID	-7.80139	110.36472	375699	Yogyakarta
 cork	IE	51.89797	-8.47061	224004	Cork
 dublin	IE	53.33306	-6.24889	1024027	Dublin
+beersheba	IL	31.25181	34.7913	186600	Beersheba
+dimona	IL	31.07079	35.03269	36192	Dimona
 eilat	IL	29.55805	34.94821	52299	Eilat
+hadera	IL	32.44192	34.9039	97335	Hadera
+haifa	IL	32.81303	34.99928	285316	Haifa
+jerusalem	IL	31.76904	35.21633	971800	Jerusalem
 metula	IL	33.27929	35.5787	1615	Metula
+netanya	IL	32.33294	34.85917	228204	Netanya
+telaviv	IL	32.08088	34.78057	432892	Tel Aviv
 agra	IN	27.18333	78.01667	1430055	Agra
 ahmedabad	IN	23.02579	72.58727	6357693	Ahmedabad
+aligarh	IN	27.88145	78.07464	753207	Alīgarh
+arakkonam	IN	13.08449	79.67053	79080	Arakkonam
 asansol	IN	23.68333	86.98333	504271	Āsansol
 auraiya	IN	26.46517	79.50918	70508	Auraiya
+bardhaman	IN	23.25572	87.85691	301725	Barddhamān
 bengaluru	IN	12.97194	77.59369	8495492	Bengaluru
+bharatpur	IN	27.21731	77.49009	252838	Bharatpur
 bhopal	IN	23.25469	77.40289	1798218	Bhopal
 bhubaneswar	IN	20.27241	85.83385	885363	Bhubaneswar
 chandigarh	IN	30.73629	76.7884	970602	Chandigarh
 chennai	IN	13.08784	80.27847	4681087	Chennai
 delhi	IN	28.65195	77.23149	11034555	Delhi
+dhanbad	IN	23.79759	86.42992	1196214	Dhanbad
+etawah	IN	26.77615	79.02133	257448	Etāwah
 gandhinagar	IN	23.21667	72.68333	292797	Gandhinagar
+gaya	IN	24.79686	85.00385	474093	Gaya
+ghaziabad	IN	28.66535	77.43915	1199191	Ghāziābād
+gooty	IN	15.11836	77.63776	48658	Gooty
+guntakal	IN	15.17112	77.36244	126270	Guntakal
 guwahati	IN	26.1844	91.7458	962334	Guwahati
+howrah	IN	22.57688	88.31857	1027672	Howrah
 hyderabad	IN	17.38405	78.45636	6993262	Hyderabad
 jaipur	IN	26.91962	75.78781	3046163	Jaipur
 jhabua	IN	22.76772	74.59087	35753	Jhābua
+kadapa	IN	14.47995	78.82346	344893	Kadapa
+kalaburagi	IN	17.33583	76.83757	543147	Kalaburagi
+kalyan	IN	19.2437	73.13554	1262255	Kalyān
 kanpur	IN	26.46523	80.34975	2823249	Kanpur
 kolkata	IN	22.56263	88.36304	4631392	Kolkata
+kota	IN	25.18254	75.83907	1001694	Kota
 lucknow	IN	26.83928	80.92313	2472011	Lucknow
 madurai	IN	9.919	78.11953	1465625	Madurai
+mathura	IN	27.5035	77.67215	330511	Mathura
+mughalsarai	IN	25.28307	83.11968	109650	Pandit Deen Dayal Upadhyaya Nagar
 mumbai	IN	19.07283	72.88261	12691836	Mumbai
 nagpur	IN	21.14631	79.08491	2405665	Nagpur
 newdelhi	IN	28.65195	77.23149	11034555	Delhi
 patna	IN	25.59408	85.13563	1684297	Patna
 prayagraj	IN	25.44478	81.84322	1073438	Prayagraj
 pune	IN	18.51957	73.85535	3124458	Pune
+raichur	IN	16.20546	77.35567	234073	Rāichūr
+ratlam	IN	23.33033	75.04032	264914	Ratlām
+renigunta	IN	13.65143	79.51256	26031	Renigunta
+sawaimadhopur	IN	26.02301	76.34408	121106	Sawai Madhopur
 shillong	IN	25.56892	91.88313	143229	Shillong
+solapur	IN	17.67152	75.91044	997281	Sholapur
 srinagar	IN	34.08565	74.80555	1206419	Srinagar
 surat	IN	21.19594	72.83023	4591246	Surat
 thiruvananthapuram	IN	8.4855	76.94924	788271	Thiruvananthapuram
+tundla	IN	27.2146	78.23683	50939	Tūndla
 vadodara	IN	22.29941	73.20812	1822221	Vadodara
+vapi	IN	20.37175	72.90493	163630	Vapi
 varanasi	IN	25.31668	83.01041	1164404	Varanasi
 visakhapatnam	IN	17.73308	83.31622	1728128	Rasapūdipalem
+wadi	IN	21.15313	79.0076	54048	Wāri
+addiwaniyah	IQ	31.99289	44.92552	318801	Al Diwaniyah
 alfaw	IQ	29.97421	48.47309	104569	Al Fāw
 amarah	IQ	31.83561	47.14483	323302	Al ‘Amārah
+assamawah	IQ	31.33198	45.2944	152890	As Samawah
 baghdad	IQ	33.34058	44.40088	7216000	Baghdad
 baiji	IQ	34.92915	43.48878	173677	Bayjī
 baqubah	IQ	33.75403	44.60518	152550	Baqubah
@@ -1064,6 +1152,7 @@ samawah	IQ	31.33198	45.2944	152890	As Samawah
 tikrit	IQ	34.61581	43.67861	42477	Tikrīt
 ummqasr	IQ	30.0362	47.91951	107620	Umm Qaşr
 zakho	IQ	37.14871	42.68591	95052	Zaxo
+abadeh	IR	28.83168	53.17276	59116	Ābādeh
 ahvaz	IR	31.31901	48.6842	841145	Ahvaz
 andimeshk	IR	32.4615	48.35368	135116	Andīmeshk
 arak	IR	34.09493	49.69809	503647	Arāk
@@ -1072,17 +1161,21 @@ bazargan	IR	39.3915	44.3875	9979	Bāzargān
 chabahar	IR	25.2919	60.643	47287	Chabahar
 hamadan	IR	34.79922	48.51456	528256	Hamadān
 isfahan	IR	32.65246	51.67462	1547164	Isfahan
+karaj	IR	35.83266	50.99155	1448075	Karaj
+kashan	IR	33.98237	51.42769	304487	Kashan
 kerman	IR	30.28321	57.07879	577514	Kerman
 kermanshah	IR	34.31417	47.065	621100	Kermanshah
 khorramabad	IR	33.48778	48.35583	329825	Khorramabad
 khorramshahr	IR	30.44079	48.18428	330606	Khorramshahr
 mashhad	IR	36.29807	59.60567	2307177	Mashhad
+mianeh	IR	37.421	47.715	106291	Mīāneh
 qazvin	IR	36.26877	50.0041	333635	Qazvin
 qom	IR	34.6401	50.8764	900000	Qom
 rasht	IR	37.27611	49.58862	594590	Rasht
 sabzevar	IR	36.2126	57.68191	243700	Sabzevar
 sarakhs	IR	36.5449	61.1577	46499	Sarakhs
 semnan	IR	35.57691	53.39205	124826	Semnan
+shahreza	IR	32.00877	51.86407	134952	Shahreẕā
 shahrud	IR	36.41819	54.97628	165000	Shahrud
 shiraz	IR	29.61031	52.53113	1249942	Shiraz
 tabriz	IR	38.08	46.2919	1424641	Tabriz
@@ -1113,6 +1206,7 @@ saintannsbay	JM	18.43581	-77.20098	13671	Saint Ann’s Bay
 savannalamar	JM	18.21895	-78.1332	16553	Savanna-la-Mar
 spanishtown	JM	17.99107	-76.95742	145018	Spanish Town
 alkarak	JO	31.18248	35.69999	22581	Qīr Moāv
+alqatranah	JO	31.25083	36.04932	7070	Al Qaţrānah
 amman	JO	31.95522	35.94503	1275857	Amman
 aqaba	JO	29.52667	35.00778	95048	Aqaba
 attafilah	JO	30.83752	35.60442	25429	Aţ Ţafīlah
@@ -1124,9 +1218,29 @@ mafraq	JO	32.34289	36.20804	57118	Mafraq
 ramtha	JO	32.55873	36.00816	155693	Ar Ramthā
 ruwaished	JO	32.5041	38.2011	9805	Ruwaished
 zarqa	JO	32.07275	36.08796	792665	Zarqa
+aomori	JP	40.81667	140.73333	298394	Aomori
+fukushima	JP	37.75	140.46667	294237	Fukushima
+fukuyama	JP	34.48333	133.36667	468812	Fukuyama
+hamamatsu	JP	34.7	137.73333	791707	Hamamatsu
+himeji	JP	34.81667	134.7	530495	Himeji
+hiroshima	JP	34.4	132.45	1200754	Hiroshima
+ichinoseki	JP	38.91667	141.13333	114476	Ichinoseki
+iwakuni	JP	34.16297	132.22	129125	Iwakuni
+kobe	JP	34.6913	135.183	1525152	Kobe
+koriyama	JP	37.4	140.38333	327692	Kōriyama
+kyoto	JP	35.02107	135.75385	1463723	Kyoto
+morioka	JP	39.7	141.15	290700	Morioka
 nagoya	JP	35.18147	136.90641	2332176	Nagoya
+okayama	JP	34.65	133.93333	724691	Okayama
 osaka	JP	34.69379	135.50107	2753862	Osaka
+sendai	JP	38.26667	140.86667	1096704	Sendai
+shimonoseki	JP	33.95548	130.93713	265684	Shimonoseki
+shizuoka	JP	34.98333	138.38333	693389	Shizuoka
+shunan	JP	34.08053	131.82564	149632	Shūnan
 tokyo	JP	35.6895	139.69171	9733276	Tokyo
+toyohashi	JP	34.76667	137.38333	377453	Toyohashi
+utsunomiya	JP	36.56667	139.88333	518757	Utsunomiya
+yokohama	JP	35.43333	139.65	3777491	Yokohama
 athiriver	KE	-1.4563	36.97826	81302	Athi River
 bungoma	KE	0.5635	34.56055	68031	Bungoma
 eldoret	KE	0.52036	35.26993	475716	Eldoret
@@ -1227,13 +1341,17 @@ kuwaitcity	KW	29.367	47.97429	60064	Kuwait City
 aktau	KZ	43.66105	51.17392	147443	Aktau
 aktobe	KZ	50.27969	57.20718	500757	Aktobe
 almaty	KZ	43.25249	76.9115	1977011	Almaty
+aralsk	KZ	46.80174	61.66312	33017	Aral
 astana	KZ	51.1801	71.44598	1544142	Astana
 atyrau	KZ	47.1048	51.88427	290700	Atyrau
 balqash	KZ	46.84546	74.98213	81364	Balqash
+beyneu	KZ	45.31667	55.2	14245	Beyneu
 dostyk	KZ	45.25332	82.48044	2930	Druzhba
+kandyagash	KZ	49.46917	57.41865	28196	Kandyagash
 karagandy	KZ	49.80187	73.10211	497777	Karagandy
 kokshetau	KZ	53.28414	69.39364	150649	Kokshetau
 kostanay	KZ	53.21435	63.62463	210000	Kostanay
+kulsary	KZ	46.95307	54.01978	51216	Qulsary
 kyzylorda	KZ	44.85278	65.50917	354800	Kyzylorda
 oral	KZ	51.24601	51.42558	330000	Oral
 pavlodar	KZ	52.27601	76.96881	329002	Pavlodar
@@ -1243,6 +1361,7 @@ shu	KZ	43.60507	73.76221	39785	Shu
 shymkent	KZ	42.30988	69.60042	1200000	Shymkent
 taldykorgan	KZ	45.01556	78.37389	116558	Taldykorgan
 taraz	KZ	42.89799	71.37334	358153	Taraz
+turkestan	KZ	43.29458	68.25685	227098	Turkistan
 ustkamenogorsk	KZ	49.97143	82.60586	319067	Ust-Kamenogorsk
 attapeu	LA	14.81071	106.83184	4297	Attapeu
 boten	LA	21.17642	101.66563	1525	Ban Botèn
