@@ -972,11 +972,24 @@ zagazig	EG	30.58768	31.502	430445	Zagazig
 asmara	ER	15.33805	38.93184	563930	Asmara
 massawa	ER	15.60811	39.47455	23100	Massawa
 mendefera	ER	14.88722	38.81528	17781	Mendefera
+alacant	ES	38.34517	-0.48149	348901	Alicante
 alicante	ES	38.34517	-0.48149	348901	Alicante
 barcelona	ES	41.38879	2.15899	1686208	Barcelona
+calatayud	ES	41.35353	-1.64318	20035	Calatayud
+castellodelaplana	ES	39.98567	-0.04935	183711	Castelló de la Plana
+ciudadreal	ES	38.98626	-3.92907	74743	Ciudad Real
+cordoba	ES	37.89155	-4.77275	325708	Córdoba
+elche	ES	38.26218	-0.70107	234765	Elche
+guadalajara	ES	40.62862	-3.16185	93470	Guadalajara
+lleida	ES	41.61674	0.62218	140797	Lleida
 madrid	ES	40.4165	-3.70256	3255944	Madrid
 murcia	ES	37.98704	-1.13004	471982	Murcia
+orihuela	ES	38.08483	-0.94401	101321	Orihuela
+puertollano	ES	38.68712	-4.10734	51842	Puertollano
+sevilla	ES	37.38283	-5.97317	686741	Sevilla
+tarragona	ES	41.11905	1.24544	141542	Tarragona
 valencia	ES	39.47391	-0.37966	824340	Valencia
+xativa	ES	38.99042	-0.51852	29386	Xàtiva
 zaragoza	ES	41.65606	-0.87734	686986	Zaragoza
 adama	ET	8.55	39.26667	456900	Nazrēt
 addisababa	ET	9.02497	38.74689	3860000	Addis Ababa
@@ -2314,9 +2327,22 @@ rafah	PS	31.29722	34.24357	126305	Rafaḩ
 ramallah	PS	31.89964	35.20422	43880	Ramallah
 salfit	PS	32.08371	35.18079	11000	Salfīt
 tulkarm	PS	32.31156	35.0269	44169	Ţūlkarm
+abrantes	PT	39.46667	-8.2	13646	Abrantes
+alcacerdosal	PT	38.37326	-8.51444	9198	Alcácer do Sal
+aveiro	PT	40.64575	-8.64643	80880	Aveiro
+castelobranco	PT	39.82364	-7.49101	33479	Castelo Branco
 coimbra	PT	40.20686	-8.41996	140796	Coimbra
+covilha	PT	40.28106	-7.50504	17610	Covilhã
+entroncamento	PT	39.46667	-8.46667	19887	Entroncamento
+faro	PT	37.01869	-7.92716	70347	Faro
+grandola	PT	38.17718	-8.56675	10737	Grândola
+guarda	PT	40.53754	-7.26631	40126	Guarda
 lisbon	PT	38.72509	-9.1498	517802	Lisbon
+pombal	PT	39.91674	-8.62847	17355	Pombal
 porto	PT	41.1485	-8.61097	252687	Porto
+santarem	PT	39.23379	-8.68617	29385	Santarém
+setubal	PT	38.5244	-8.8882	118166	Setúbal
+tunes	PT	37.16592	-8.25919	6837	Tunes
 asuncion	PY	-25.28646	-57.647	1482200	Asunción
 ayolas	PY	-27.38421	-56.83953	12061	Ayolas
 caacupe	PY	-25.38575	-57.14217	56864	Caacupé
@@ -2355,35 +2381,81 @@ lusail	QA	25.4175	51.5075	198600	Lusail
 madinatashshamal	QA	26.12933	51.2009	5267	Madīnat ash Shamāl
 mesaieed	QA	24.99226	51.55067	5769	Musay‘īd
 ummsalalmuhammad	QA	25.41524	51.40647	29391	Umm Şalāl Muḩammad
+brasov	RO	45.64861	25.60613	253200	Braşov
 bucharest	RO	44.43225	26.10626	1877155	Bucharest
+cernavoda	RO	44.33957	28.03273	18502	Cernavodă
+clujnapoca	RO	46.76667	23.6	286598	Cluj-Napoca
+constanta	RO	44.18073	28.63432	317832	Constanţa
+deva	RO	45.88333	22.9	67802	Deva
 drobetaturnuseverin	RO	44.62693	22.65288	79865	Drobeta-Turnu Severin
+fetesti	RO	44.38333	27.83333	32866	Feteşti
 iasi	RO	47.16667	27.6	378954	Iaşi
+lugoj	RO	45.68861	21.90306	43243	Lugoj
+oradea	RO	47.0458	21.91833	183105	Oradea
+pitesti	RO	44.85	24.86667	141275	Piteşti
+ploiesti	RO	44.95	26.01667	180540	Ploieşti
+ramnicuvalcea	RO	45.1	24.36667	93151	Râmnicu Vâlcea
+sebes	RO	45.95646	23.571	27246	Sebeş
+sibiu	RO	45.8	24.15	134309	Sibiu
+sighisoara	RO	46.22141	24.79279	34537	Sighișoara
+targumures	RO	46.54245	24.55747	212752	Târgu Mureş
+timisoara	RO	45.75372	21.22571	250849	Timişoara
+turda	RO	46.56667	23.78333	43319	Turda
+belapalanka	RS	43.21833	22.31111	0	Bela Palanka
 belgrade	RS	44.80401	20.46513	1273651	Belgrade
+dimitrovgrad	RS	43.01417	22.77556	0	Dimitrovgrad
+jagodina	RS	43.97713	21.26121	35589	Jagodina
+leskovac	RS	42.99806	21.94611	94758	Leskovac
 nis	RS	43.32472	21.90333	250000	Niš
+novisad	RS	45.25167	19.83694	215400	Novi Sad
+paracin	RS	43.86083	21.40778	6000	Paraćin
+pirot	RS	43.15306	22.58611	40678	Pirot
+smederevo	RS	44.66436	20.92763	62000	Smederevo
+subotica	RS	46.1	19.66667	100000	Subotica
+velikaplana	RS	44.33389	21.07676	0	Velika Plana
+vranje	RS	42.55139	21.90028	56199	Vranje
+belogorsk	RU	50.91239	128.51238	67911	Belogorsk
+birobidzhan	RU	48.793	132.92033	73623	Birobidzhan
 chelyabinsk	RU	55.1611	61.42877	1202371	Chelyabinsk
 chita	RU	52.04311	113.49171	349005	Chita
 irkutsk	RU	52.29566	104.29076	623869	Irkutsk
+kamenskshakhtinskiy	RU	48.31779	40.25948	75814	Kamensk-Shakhtinsky
+kashira	RU	54.84763	38.18214	40084	Kashira
 kazan	RU	55.78874	49.12214	1243500	Kazan
 khabarovsk	RU	48.46204	135.0971	618150	Khabarovsk
 khantymansiysk	RU	61.00187	69.02728	101466	Khanty-Mansiysk
+kirov	RU	58.59809	49.65783	507155	Kirov
 krasnoyarsk	RU	56.03742	92.93136	1090811	Krasnoyarsk
 kyakhta	RU	50.34956	106.451	18431	Kyakhta
+millerovo	RU	48.92523	40.39982	38527	Millerovo
 moscow	RU	55.75204	37.61781	10381222	Moscow
 nizhniynovgorod	RU	56.32867	44.00205	1259013	Nizhniy Novgorod
 novosibirsk	RU	55.02259	82.93175	1612833	Novosibirsk
 novyyurengoy	RU	66.08333	76.63333	94212	Novyy Urengoy
 noyabrsk	RU	63.19309	75.43728	110000	Noyabrsk
 omsk	RU	54.99244	73.36859	1172070	Omsk
+perm	RU	58.01046	56.25017	982419	Perm
+rostovnadonu	RU	47.21997	39.70769	1130305	Rostov-on-Don
 saintpetersburg	RU	59.93863	30.31413	5351935	Saint Petersburg
 salekhard	RU	66.53373	66.60955	49214	Salekhard
 samara	RU	53.20767	50.13553	1163399	Samara
+skovorodino	RU	53.98367	123.94014	10007	Skovorodino
 surgut	RU	61.25757	73.41775	300367	Surgut
+tayshet	RU	55.93276	97.98964	37766	Tayshet
 torzhok	RU	57.0436	34.96221	48546	Torzhok
+tver	RU	56.85836	35.90057	420065	Tver
 tyumen	RU	57.15222	65.52722	768358	Tyumen
 ufa	RU	54.74306	55.96779	1120547	Ufa
 ulanude	RU	51.82648	107.59979	360278	Ulan-Ude
+ussuriysk	RU	43.80467	131.95734	157068	Ussuriysk
+valday	RU	57.97729	33.25153	18549	Valday
+velikiynovgorod	RU	58.52131	31.27104	222868	Velikiy Novgorod
+vladimir	RU	43.10562	131.87353	604901	Vladivostok
 vladivostok	RU	43.10562	131.87353	604901	Vladivostok
+voronezh	RU	51.66833	39.19204	1047549	Voronezh
+vyshniyvolochek	RU	57.5888	34.56854	53800	Vyshniy Volochëk
 yekaterinburg	RU	56.85733	60.61529	1495066	Yekaterinburg
+yelets	RU	52.61435	38.50935	115688	Yelets
 butare	RW	-2.59667	29.73944	62823	Butare
 byumba	RW	-1.5763	30.0675	43134	Byumba
 cyangugu	RW	-2.4846	28.9075	43866	Cyangugu
@@ -2434,15 +2506,30 @@ lulea	SE	65.58415	22.15465	77832	Luleå
 stockholm	SE	59.32938	18.06871	1515017	Stockholm
 sundsvall	SE	62.39129	17.3063	57606	Sundsvall
 umea	SE	63.82842	20.25972	130224	Umeå
+brezice	SI	45.90726	15.59319	6843	Brežice
 celje	SI	46.23092	15.26044	38059	Celje
+grosuplje	SI	45.95579	14.65891	7098	Grosuplje
+koper	SI	45.5482	13.72963	25753	Koper
 ljubljana	SI	46.05108	14.50513	272220	Ljubljana
 maribor	SI	46.55583	15.64593	96209	Maribor
+novomesto	SI	45.80397	15.16886	24446	Novo Mesto
+postojna	SI	45.77435	14.21528	9605	Postojna
+slovenskabistrica	SI	46.39309	15.57347	7454	Slovenska Bistrica
+trebnje	SI	45.90424	15.02238	3477	Trebnje
+banskabystrica	SK	48.73947	19.14932	74590	Banská Bystrica
 bratislava	SK	48.14816	17.10674	423737	Bratislava
 kosice	SK	48.71441	21.25802	225044	Košice
+liptovskymikulas	SK	49.08061	19.62218	30162	Liptovský Mikuláš
+nitra	SK	48.30763	18.08453	86329	Nitra
 poprad	SK	49.06144	20.29798	49091	Poprad
+povazskabystrica	SK	49.12153	18.42169	37483	Považská Bystrica
+presov	SK	48.99923	21.2355	82927	Prešov
+ruzomberok	SK	49.0748	19.30751	26671	Ružomberok
 trencin	SK	48.89452	18.04436	58278	Trenčín
 trnava	SK	48.37773	17.58603	62806	Trnava
+ziarnadhronom	SK	48.59184	18.84958	16955	Žiar nad Hronom
 zilina	SK	49.22315	18.73941	81219	Žilina
+zvolen	SK	48.57442	19.15324	39844	Zvolen
 binkolo	SL	8.95225	-11.98029	13867	Binkolo
 bo	SL	7.96472	-11.73833	233684	Bo
 bumbuna	SL	9.04466	-11.74576	3222	Bumbuna
