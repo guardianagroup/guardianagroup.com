@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-idiomas="es,en">
+<html lang="es" data-idiomas="es,en,pt,pt-pt,fr,it,ro,de,nl,sv,da,nb,fi,is,pl,cs,sk,uk,ru,bg,hr,el,tr,hu,id,ms,fil,zh,zh-tw,ja,ko,vi,hi,bn,ta,te,ur,ar,fa,he,th,sw">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -48,6 +48,7 @@
 <style>
 @font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/InstrumentSerif-Regular.woff) format('woff')}
 @font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url(/fonts/InstrumentSerif-Italic.woff) format('woff')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 600;font-display:swap;src:url(/fonts/Inter-var.woff) format('woff')}
 @font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/HankenGrotesk-var.woff) format('woff')}
 @font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
@@ -92,7 +93,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:560px){.marca small{display:none}}
 .conocer{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#8A95A2;padding-bottom:3px;border-bottom:1px solid #3A4656;transition:color .2s,border-color .2s;white-space:nowrap}
 .conocer:hover{color:var(--ink);border-color:var(--ink-2)}
-.acciones{margin-left:auto;display:flex;align-items:center;gap:10px}
+.acciones{margin-inline-start:auto;display:flex;align-items:center;gap:10px}
 .pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border:1px solid var(--hair);border-radius:999px;font-size:14px;color:var(--ink);background:rgba(6,8,12,.4);transition:border-color .2s,background .2s,color .2s;white-space:nowrap}
 .pill:hover{border-color:var(--ink-3)}
 .pill.idioma{font-family:var(--mono);font-size:12px;color:var(--ink-2);padding:0 13px;cursor:pointer;gap:7px}
@@ -111,6 +112,46 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 :lang(ko) :is(h1,h2,h3,.frase,.sello){word-break:keep-all;overflow-wrap:anywhere}
 :is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja)) :is(h1,h2,h3,.frase,.sello){word-break:normal;line-break:strict}
 [dir="rtl"] .cta span,[dir="rtl"] .btn span{transform:scaleX(-1)}
+[dir="rtl"] .cta:hover span{transform:scaleX(-1) translateX(3px)}
+/* type for each script, as on the old page: the visitor's own system fonts, nothing extra to download. Instrument Serif
+   and Hanken Grotesk only draw Latin letters (Hanken lacks the Romanian ș ț and Vietnamese), so those readers get a
+   face that has every letter of the word instead of a word drawn in two fonts; the wordmark stays in Hanken. */
+.marca{font-family:'Hanken Grotesk',system-ui,sans-serif}
+:lang(ru),:lang(uk),:lang(bg),:lang(el){--display:'Times New Roman',Times,'Liberation Serif',serif;--body:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+:lang(vi){--display:'Times New Roman',Times,'Liberation Serif',serif;--body:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif}
+:lang(ro){--body:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif}
+:lang(zh-Hans){--display:'Songti SC','STSong','Noto Serif SC','Noto Serif CJK SC','Source Han Serif SC','SimSun',serif;--body:'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans SC','Noto Sans CJK SC',system-ui,sans-serif}
+:lang(zh-Hant){--display:'Songti TC','Noto Serif TC','Noto Serif CJK TC','Source Han Serif TC','PMingLiU',serif;--body:'PingFang TC','Microsoft JhengHei','Noto Sans TC','Noto Sans CJK TC',system-ui,sans-serif}
+:lang(ja){--display:'Hiragino Mincho ProN','Yu Mincho','YuMincho','Noto Serif JP','Noto Serif CJK JP','Source Han Serif JP',serif;--body:'Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic UI','Meiryo','Noto Sans JP','Noto Sans CJK JP',system-ui,sans-serif}
+:lang(ko){--display:'AppleMyungjo','Nanum Myeongjo','Noto Serif KR','Noto Serif CJK KR','Batang',serif;--body:'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans CJK KR',system-ui,sans-serif}
+:lang(hi){--display:'Kohinoor Devanagari','Noto Serif Devanagari','Nirmala UI','Mangal',serif;--body:'Kohinoor Devanagari','Nirmala UI','Noto Sans Devanagari',system-ui,sans-serif}
+:lang(bn){--display:'Kohinoor Bangla','Noto Serif Bengali','Nirmala UI','Vrinda',serif;--body:'Kohinoor Bangla','Nirmala UI','Noto Sans Bengali',system-ui,sans-serif}
+:lang(ta){--display:'Tamil Sangam MN','Noto Serif Tamil','Nirmala UI','Latha',serif;--body:'Tamil Sangam MN','Nirmala UI','Noto Sans Tamil',system-ui,sans-serif}
+:lang(te){--display:'Telugu Sangam MN','Noto Serif Telugu','Nirmala UI','Gautami',serif;--body:'Telugu Sangam MN','Nirmala UI','Noto Sans Telugu',system-ui,sans-serif}
+:lang(th){--display:'Thonburi','Noto Serif Thai','Leelawadee UI','Tahoma',serif;--body:'Thonburi','Leelawadee UI','Noto Sans Thai',system-ui,sans-serif}
+:lang(ar),:lang(fa){--display:'Noto Naskh Arabic','Al Nile','Geeza Pro','Sakkal Majalla','Times New Roman',serif;--body:'SF Arabic','Geeza Pro','Segoe UI','Noto Sans Arabic','Tahoma',system-ui,sans-serif;--mono:'SF Arabic','Geeza Pro','Segoe UI','Noto Sans Arabic',ui-monospace,monospace}
+:lang(ur){--display:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq','Urdu Typesetting','Noto Naskh Arabic','Geeza Pro',serif;--body:'Noto Nastaliq Urdu','Jameel Noori Nastaleeq','Urdu Typesetting','Noto Naskh Arabic','Geeza Pro','Segoe UI',system-ui,sans-serif;--mono:'Noto Nastaliq Urdu','Urdu Typesetting','Noto Naskh Arabic','Segoe UI',ui-monospace,monospace}
+:lang(he){--display:'New Peninim MT','Noto Serif Hebrew','David','Times New Roman',serif;--body:'SF Hebrew','Arial Hebrew','Segoe UI','Noto Sans Hebrew',system-ui,sans-serif}
+/* scripts without italics: the coloured end of a title stays upright */
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko),:lang(hi),:lang(bn),:lang(th),:lang(ar),:lang(fa),:lang(ur),:lang(he),:lang(ta),:lang(te)) :is(em,i,.g-light,.sello){font-style:normal!important}
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko)) :is(h1,h2,h3,.frase,.sello){line-height:1.22;letter-spacing:0}
+@supports (word-break:auto-phrase){:lang(ja) :is(h1,h2,h3,.frase,.sello){word-break:auto-phrase}}
+/* full-width scripts: a «ch» is half a character there, so measures set in ch are given in em */
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko)) .lead{max-width:30em}
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko)) .frase{max-width:12em}
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko)) .frase.media{max-width:15em}
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko)) :is(.cifras .nota){max-width:30em}
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko)) .kn{max-width:17em}
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko)) .medida .nota{max-width:38em}
+:is(:lang(zh-Hans),:lang(zh-Hant),:lang(ja),:lang(ko)) .gratis .sello{max-width:13em}
+/* Arabic script joins its letters: any letter-spacing would break the words apart; Hebrew has no capitals to space */
+:is(:lang(ar),:lang(fa),:lang(ur),:lang(he)) *{letter-spacing:0!important}
+:is(:lang(ar),:lang(fa)) :is(h1,h2,h3,.frase,.sello){line-height:1.35}
+:is(:lang(hi),:lang(bn),:lang(th),:lang(ta),:lang(te)) :is(h1,h2,h3,.frase,.sello){letter-spacing:0}
+/* right-to-left pages: the layout mirrors, but the illustrations keep their own order and addresses read left to right */
+[dir="rtl"] .ficha dd{direction:ltr;text-align:left}
+[dir="rtl"] .ventana li.corta .barrita::after{transform-origin:right}
+[dir="rtl"] .mini{right:auto;left:max(22px,env(safe-area-inset-left,0px))}
 .pill.prim{background:var(--steel);border-color:var(--steel);color:var(--void);font-weight:600}
 .pill.prim:hover{background:var(--steel-2);border-color:var(--steel-2)}
 .top .c-radio{display:none}
@@ -143,6 +184,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,min(5.2vw,8.2svh),78px);line-height:1.02;letter-spacing:-.012em}
 .w{display:inline-block;opacity:0;transform:translateY(18px);filter:blur(10px);animation:word 1.1s cubic-bezier(.2,.7,.1,1) forwards}
 @keyframes word{to{opacity:1;transform:none;filter:none}}
+/* a long coloured ending (Japanese, Korean, Tamil, Telugu…) wraps like text instead of moving to the next line as one block */
+.w.g-light.larga{display:inline;transform:none;filter:none;animation-name:aparece}
 .w.g-light{font-style:italic;padding:0 .08em .06em;margin:0 -.08em -.06em}
 .sub{margin-top:18px;font-size:clamp(17px,1.4vw,20px);color:var(--ink-2);opacity:0;animation:aparece 1s 1.55s forwards}
 .entradas{margin-top:26px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;opacity:0;animation:aparece 1s 1.8s forwards}
@@ -169,6 +212,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .rotulo{font-size:9px;letter-spacing:.1em;left:55.6%;top:9%}
   .rotulo span.solo-movil{display:block}
   .rotulo span.no-movil{display:none}
+  .rotulo{white-space:normal;max-width:38vw}
+  :is(:lang(ta),:lang(te)) .hero h1{font-size:clamp(29px,8.4vw,36px);line-height:1.22}
   .entradas{flex-direction:column;align-items:stretch;width:100%;max-width:420px;gap:8px}
   .cta{order:0;min-height:56px;font-size:17px;margin-bottom:6px}
   .puerta{justify-content:space-between;min-height:56px;border-radius:16px;padding:0 18px}
@@ -238,15 +283,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ficha{position:absolute;left:5%;top:50%;transform:translateY(-50%);width:45%;padding:16px 16px 13px;border:1px solid var(--hair-2);border-radius:16px;background:rgba(6,8,12,.94);z-index:1;box-shadow:0 20px 50px rgba(0,0,0,.45)}
 .ficha .fk{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
 .ficha dl{margin-top:11px;display:grid;gap:7px}
-.ficha dl div{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:12.5px;border-bottom:1px dashed rgba(42,52,66,.8);padding-bottom:6px;min-width:0}
+.ficha dl div{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 10px;font-size:12.5px;border-bottom:1px dashed rgba(42,52,66,.8);padding-bottom:6px;min-width:0}
 .ficha dt{color:var(--ink-3);flex:none}
-.ficha dd{color:var(--ink);font-family:var(--mono);font-size:11.5px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.ficha dd{margin-inline-start:auto;color:var(--ink);font-family:var(--mono);font-size:11.5px;text-align:end;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .ficha .fn{margin-top:10px;font-size:11px;line-height:1.45;color:var(--ink-3)}
 .postores{position:absolute;right:5%;top:6%;bottom:9%;width:35%;display:flex;flex-direction:column;justify-content:space-between;z-index:1}
 .postores li{display:flex;align-items:center;gap:9px;height:30px;padding:0 11px;border:1px solid var(--hair);border-radius:999px;background:rgba(6,8,12,.94);font-size:12px;transition:border-color .35s,background .35s}
 .postores i{width:8px;height:8px;border-radius:50%;background:var(--hair-2);flex:none;transition:background .3s,box-shadow .3s}
 .postores .pn{color:var(--ink-2);white-space:nowrap}
-.postores .pe{margin-left:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--ink-4);text-transform:uppercase;white-space:nowrap}
+.postores .pe{margin-inline-start:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--ink-4);text-transform:uppercase;white-space:nowrap}
 .postores li.rec i{background:var(--steel);box-shadow:0 0 10px rgba(156,195,228,.7)}
 .postores li.rec .pe{color:var(--steel)}
 .postores li.puja i{background:var(--amber);box-shadow:0 0 10px rgba(240,199,127,.8)}
@@ -277,7 +322,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .cifras .nota{grid-column:1/-1;margin-top:14px;font-size:15px;line-height:1.55;color:var(--ink-3);max-width:54ch;margin-inline:auto}
 .quien{margin-top:clamp(100px,12vw,170px);text-align:center}
 .quien h3{font-family:var(--display);font-weight:400;font-size:clamp(36px,4.2vw,62px);line-height:1.04}
-.tres{margin-top:38px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;text-align:left}
+.tres{margin-top:38px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;text-align:start}
 .tres li{padding:24px 24px 26px;border:1px solid var(--hair);border-radius:18px;background:var(--card)}
 .tres .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
 .tres p:not(.k){margin-top:12px;font-size:17px;line-height:1.5;color:var(--ink-2)}
@@ -306,7 +351,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .pt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
 .barras{margin-top:18px;display:grid;gap:13px}
 .barras li{display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr) 92px;align-items:center;gap:18px}
-.barras .pn{font-size:15px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barras .pn{font-size:15px;line-height:1.25;color:var(--ink-2);overflow-wrap:break-word;min-width:0}
 .barras .pista{height:12px;border-radius:6px;background:rgba(30,38,49,.6);overflow:hidden;display:flex}
 .barras .pista i{display:block;height:100%;width:0;transition:width 1s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
 .barras .q{background:var(--steel)}
@@ -322,7 +367,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .medida .nota{margin-top:30px;font-size:14px;line-height:1.6;color:var(--ink-3);max-width:72ch}
 
 /* ---------- 03 · X-rays ---------- */
-.tarjetas{margin-top:42px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;text-align:left}
+.tarjetas{margin-top:42px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;text-align:start}
 .tarjetas li{padding:24px;border:1px solid var(--hair);border-radius:18px;background:var(--card);display:flex;flex-direction:column;gap:8px}
 .tarjetas .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--steel);text-transform:uppercase}
 .tarjetas b{font-size:18px;font-weight:600}
@@ -340,7 +385,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ventana li:last-child{border-bottom:0}
 .ventana .barrita{height:8px;border-radius:4px;background:var(--hair-2);flex:1;position:relative;overflow:hidden}
 .ventana .cat{width:118px;color:var(--ink-2)}
-.ventana .st{width:88px;text-align:right;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--steel)}
+.ventana .st{width:88px;text-align:end;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--steel)}
 .ventana li.corta .st{color:var(--coral)}
 .ventana li.corta .barrita::after{content:"";position:absolute;inset:0;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.2,.7,.2,1) var(--d)}
 .ventana.visto li.corta .barrita::after{transform:scaleX(1)}
@@ -651,7 +696,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   window.__t = (es) => { const v = J && J.t[norm(es)]; return v != null ? v : es; };
   const titular = () => { if (!J) { h1.innerHTML = h1es; return; } h1.textContent = ''; const sep = J.titular.sep != null ? J.titular.sep : ' '; let d = 0.3;
     J.titular.w.forEach((w, i) => { const s = document.createElement('span'); s.className = 'w'; s.style.animationDelay = d.toFixed(2) + 's'; d += 0.12; s.textContent = w; h1.append(s); if (J.titular.br === i) h1.append(document.createElement('br')); if (sep) h1.append(document.createTextNode(sep)); });
-    const g = document.createElement('span'); g.className = 'w g-light'; g.style.animationDelay = (d + 0.04).toFixed(2) + 's'; g.textContent = J.titular.g; h1.append(g); };
+    const g = document.createElement('span'); g.className = 'w g-light' + ([...J.titular.g].length > 14 ? ' larga' : ''); g.style.animationDelay = (d + 0.04).toFixed(2) + 's'; g.textContent = J.titular.g; h1.append(g); };
   function aplica(l, j, primera) {
     J = j; HTML.lang = TAG[l] || 'es'; HTML.dir = (j && j.dir) || 'ltr';
     const pegado = /^(zh|ja)/.test(l);
