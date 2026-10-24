@@ -604,9 +604,12 @@ def cppa():
     return out
 
 
+OSM_HASTA = [0.0]  # OpenStreetMap is asked only for this long in all (Overpass can be slow): the other voices never wait for it
+
+
 def osm(n, d):
     """an office or building with the company's name next to its headquarters, with its address (OpenStreetMap, ODbL)"""
-    if not d.get('lonlat'):
+    if not d.get('lonlat') or (OSM_HASTA[0] and time.time() > OSM_HASTA[0]):
         return
     nom = sin_sufijo(d.get('etiqueta') or n)
     if len(pliega(nom)) < 3:
@@ -618,7 +621,7 @@ def osm(n, d):
     q = ('[out:json][timeout:45];(nwr["name"~"%s",i]["office"](around:%d,%f,%f);nwr["name"~"%s",i]["building"](around:%d,%f,%f););'
          'out tags center 12;' % (rx, r, la, lo, rx, r, la, lo))
     try:
-        j = pide('https://overpass-api.de/api/interpreter', urllib.parse.urlencode({'data': q}).encode(), intentos=2, espera=60)
+        j = pide('https://overpass-api.de/api/interpreter', urllib.parse.urlencode({'data': q}).encode(), intentos=1, espera=40)
     except Exception as ex:
         print('OSM: error', n, ex); return
     for el in (j.get('elements') or [])[:12]:
@@ -717,9 +720,13 @@ def buscar():
         todas[n] = d
         time.sleep(0.3)
     print('emparejadas', len(todas), 'de', len(lista), '· sin emparejar:', ', '.join(sin))
-    sedes_y_nombres(todas, cache)
-    ocupantes(todas)
+    for paso in (lambda: sedes_y_nombres(todas, cache), lambda: ocupantes(todas)):
+        try:
+            paso()
+        except Exception as ex:  # one source failing must not lose the rest
+            print('error en un paso:', ex)
     reg = cppa()
+    OSM_HASTA[0] = time.time() + 20 * 60
     for n, d in todas.items():
         if d.get('_cik'):
             sec(d); time.sleep(0.3)
@@ -736,14 +743,20 @@ def buscar():
                        (x['texto'] == s['texto'] or acuerdan(x, s, d.get('sede', '')))), None)
             if ll:
                 d['lonlat_dir'] = ll
-    commons(todas)
-    licencias(todas)
+    for paso in (lambda: commons(todas), lambda: licencias(todas)):
+        try:
+            paso()
+        except Exception as ex:
+            print('error en un paso:', ex)
     k = 0
     for n in sorted(todas):
         for f in todas[n]['fotos']:
             k += 1
             f['n'] = k
-    hojas(todas)
+    try:
+        hojas(todas)
+    except Exception as ex:
+        print('error en las hojas:', ex)
     for d in todas.values():
         for x in [c for c in d if c.startswith('_')]:
             d.pop(x)
