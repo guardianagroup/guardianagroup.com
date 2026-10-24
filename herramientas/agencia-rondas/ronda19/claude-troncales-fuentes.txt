@@ -70,3 +70,34 @@ GW  NO CONFIRMADO. La troncal nacional de fibra está en licitación (diseño y 
 SZ  NO CONFIRMADO. Solo planes de despliegue (Ecofin, TCS+), sin fuente oficial con rutas.
 ER, TT, CV, MU, MT, BS  No investigados a fondo: islas o países muy pequeños sin rutas terrestres de más de ~100 km
     documentadas, o sin fuentes oficiales accesibles (EriTel).
+
+== Grupo 5 → fibra-agencia/claude-troncales-5.json (11 países aún sin troncal en el mapa; pueblos de GeoNames en lugar de subestaciones) ==
+GT  2 rutas. eprsiepac.com/linea-siepac/ (EPR, tabla y coordenadas de las subestaciones): Guate Norte–Panaluya (109,91 km)–El Florido (73,46 km),
+    26-ago-2012; Aguacapa–frontera de El Salvador (99,49 km) + frontera–Ahuachapán (18,97 km), 22-ene-2012; OPGW de 36 fibras.
+    Pueblos por subestaciones: Guate Norte → Guatemala City; Panaluya → Zacapa (~10 km; Río Hondo está más cerca pero el mapa aún no lo sitúa);
+    El Florido (paso fronterizo en Camotán) → Chiquimula (~35 km); Aguacapa → Guanagazapa (~6 km; GeoNames cities500, 2.842 hab.,
+    lo situará el flujo de pueblos_fibra.py); Ahuachapán (SV).
+    asep.gob.pa, presentación de REDCA (sept. 2015): «Brindamos una red regional terrestre de F.O. en OPGW»; PoP en Guate Este y Panamá1.
+    Ufinet, Claro y Tigo: nada oficial con rutas (agn.gt solo trata del cable submarino del Pacífico).
+PA  1 ruta. eprsiepac.com/linea-siepac/ (frontera de Costa Rica–Veladero 150,2 km y Río Claro–frontera 22,63 km, 31-dic-2010);
+    asep.gob.pa, presentación de REDCA (sept. 2015): PoP en la subestación «Panamá1, Panamá» (Panama City).
+    Pueblos: Panamá 1 → Panama City; Veladero (en GeoNames); David (a ~7 km de la recta Veladero–Río Claro; la línea es solo un 6 % más larga);
+    Río Claro → Golfito (CR, ~10 km; Ciudad Neily está a ~15 km y el mapa no la sitúa).
+    La fibra OPGW de ETESA (900 km Panamá–Colón–Chiriquí–Bocas del Toro, 2015) solo aparece en prensa (telesemana, citando a La Prensa): no incluida.
+PR  NO CONFIRMADO. Solo prensa (dplnews, metro.pr, newsismybusiness) sobre la fibra de PREPA Networks/PrepaNet, sin rutas;
+    www2.ntia.gov critical_hub_fs_0.pdf: Critical Hub construyó microondas (más de 180 millas) y un cable submarino, no fibra terrestre;
+    energy.gov CX-035776: sustitución de fibra en las regiones oeste y sur de Puerto Rico, sin trazado; docs.pr.gov (BEAD, vol. 1): nada sobre troncales.
+TT  NO CONFIRMADO. tstt.co.tt/company-overview: solo «deploying both wireless and fiber optic networks»; nada en tatt.org.tt; el resto es prensa.
+SR  NO CONFIRMADO. telesur.sr/zakelijk/oil-gas/ (red de fibra «countrywide», sin rutas); Telesur, boletín Fiber Vibes n.º 7 (ene. 2018):
+    240 armarios MSAN «van Albina tot en met Nieuw Nickerie» y fibra colgada en postes de EBS, obras en curso; no describe ninguna troncal entre ciudades.
+SZ  NO CONFIRMADO. uasf.esccom.org.sz (Backbone Network): EPTC opera la troncal nacional, con rutas «North, West and South» hacia Sudáfrica y una
+    ruta al este hacia Maputo por la fibra de las líneas de MOTRACO, sin nombrar ciudades ni fechas de servicio (el mapa es una imagen);
+    Banco Mundial, Eswatini Digital Economy Assessment (2022): la troncal existe y aún tiene mucho cobre, sin rutas.
+MT  NO CONFIRMADO. Búsqueda: solo FTTH de GO («true fibre island»); Malta mide ~27 km, no caben rutas terrestres de larga distancia.
+MU  NO CONFIRMADO. telecom.mu (perfil de la empresa): nada sobre la troncal; ninguna fuente oficial con rutas.
+GW  NO CONFIRMADO. Banco Mundial, ISR del WARCIP (P155876, jun. 2022): troncal corta Suro–Antula casi terminada y troncal nacional en licitación;
+    pe-omvg.org/node/6: línea OMVG de 225 kV con 36 pares de fibra, 218 km en Guinea-Bisáu; ISR del proyecto OMVG (P146830, abr. 2025):
+    1.677 km de fibra construidos, sin decir que se use para telecomunicaciones. Ninguna ruta de fibra en servicio confirmada.
+ER  NO CONFIRMADO. tresor.economie.gouv.fr (DG Trésor, 2 jun. 2022): la red entre ciudades es de microondas; Eritel tendría fibra solo en Asmara
+    y Massawa; Banco Mundial, Missing Broadband Links in the Horn of Africa: ninguna ruta de fibra en Eritrea.
+CV  NO CONFIRMADO. Búsqueda: solo cables submarinos entre islas y EllaLink; ninguna fuente oficial con una ruta terrestre de más de ~100 km.
