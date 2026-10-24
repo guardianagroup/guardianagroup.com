@@ -1,0 +1,669 @@
+[
+ {
+  "nombre": "Hawaii Island Fibre Network (HIFN)",
+  "llegadas": [
+   {
+    "lugar": "Kaunakakai",
+    "pais": "US",
+    "lat": 21.093,
+    "lon": -157.023
+   },
+   {
+    "lugar": "Kawaihae",
+    "pais": "US",
+    "lat": 20.037,
+    "lon": -155.829
+   },
+   {
+    "lugar": "Kihei",
+    "pais": "US",
+    "lat": 20.764,
+    "lon": -156.445
+   },
+   {
+    "lugar": "Koko Head",
+    "pais": "US",
+    "lat": 21.266,
+    "lon": -157.703
+   },
+   {
+    "lugar": "Lihue",
+    "pais": "US",
+    "lat": 21.981,
+    "lon": -159.371
+   },
+   {
+    "lugar": "Makaha",
+    "pais": "US",
+    "lat": 21.469,
+    "lon": -158.218
+   },
+   {
+    "lugar": "Manele Bay",
+    "pais": "US",
+    "lat": 20.742,
+    "lon": -156.889
+   }
+  ],
+  "anio": 1997,
+  "km": 529,
+  "duenos": [
+   "Hawaiian Telcom",
+   "TW Telecom"
+  ],
+  "fuentes": [
+   "https://www.hawaiiantel.com/",
+   "https://www.fcc.gov/"
+  ]
+ },
+ {
+  "nombre": "Farewell-Change-Fogo Subsea Cable",
+  "llegadas": [
+   {
+    "lugar": "Farewell",
+    "pais": "CA",
+    "lat": 49.556,
+    "lon": -54.479
+   },
+   {
+    "lugar": "Fogo Island",
+    "pais": "CA",
+    "lat": 49.667,
+    "lon": -54.167
+   },
+   {
+    "lugar": "Stag Harbour",
+    "pais": "CA",
+    "lat": 49.567,
+    "lon": -54.283
+   }
+  ],
+  "anio": 2025,
+  "km": 16,
+  "duenos": [
+   "Bell Canada"
+  ],
+  "fuentes": [
+   "https://www.bell.ca/"
+  ]
+ },
+ {
+  "nombre": "Grand Bahama Bimini Submarine Cable",
+  "llegadas": [
+   {
+    "lugar": "Alice Town",
+    "pais": "BS",
+    "lat": 25.727,
+    "lon": -79.293
+   },
+   {
+    "lugar": "Eight Mile Rock",
+    "pais": "BS",
+    "lat": 26.54,
+    "lon": -78.803
+   }
+  ],
+  "anio": 2005,
+  "km": 117,
+  "duenos": [
+   "Bahamas Telecommunications Company"
+  ],
+  "fuentes": [
+   "https://www.btcbahamas.com/"
+  ]
+ },
+ {
+  "nombre": "Guadeloupe Câble des Îles du Sud (GCIS)",
+  "llegadas": [
+   {
+    "lugar": "Beausejour",
+    "pais": "GP",
+    "lat": 16.304,
+    "lon": -61.074
+   },
+   {
+    "lugar": "Capesterre-Belle-Eau",
+    "pais": "GP",
+    "lat": 16.044,
+    "lon": -61.564
+   },
+   {
+    "lugar": "Saint-François",
+    "pais": "GP",
+    "lat": 16.253,
+    "lon": -61.274
+   },
+   {
+    "lugar": "Saint-Louis",
+    "pais": "GP",
+    "lat": 15.954,
+    "lon": -61.32
+   },
+   {
+    "lugar": "Terre-de-Haut",
+    "pais": "GP",
+    "lat": 15.867,
+    "lon": -61.581
+   }
+  ],
+  "anio": 2020,
+  "km": 118,
+  "duenos": [
+   "Regional Council of Guadeloupe"
+  ],
+  "fuentes": [
+   "https://www.regionguadeloupe.fr/"
+  ]
+ },
+ {
+  "nombre": "Caribbean Regional Communications Infrastructure Program (CARCIP)",
+  "llegadas": [
+   {
+    "lugar": "Carriacou",
+    "pais": "GD",
+    "lat": 12.483,
+    "lon": -61.456
+   },
+   {
+    "lugar": "Conference",
+    "pais": "GD",
+    "lat": 12.164,
+    "lon": -61.609
+   },
+   {
+    "lugar": "Bequia",
+    "pais": "VC",
+    "lat": 13.009,
+    "lon": -61.234
+   },
+   {
+    "lugar": "Canouan",
+    "pais": "VC",
+    "lat": 12.717,
+    "lon": -61.333
+   },
+   {
+    "lugar": "Chateaubelair",
+    "pais": "VC",
+    "lat": 13.289,
+    "lon": -61.24
+   },
+   {
+    "lugar": "Kingstown",
+    "pais": "VC",
+    "lat": 13.159,
+    "lon": -61.225
+   },
+   {
+    "lugar": "Mustique",
+    "pais": "VC",
+    "lat": 12.883,
+    "lon": -61.183
+   },
+   {
+    "lugar": "Owia",
+    "pais": "VC",
+    "lat": 13.374,
+    "lon": -61.144
+   },
+   {
+    "lugar": "Union Island",
+    "pais": "VC",
+    "lat": 12.597,
+    "lon": -61.433
+   }
+  ],
+  "anio": 2019,
+  "km": 225,
+  "duenos": [
+   "Digicel"
+  ],
+  "fuentes": [
+   "https://www.digicelgroup.com/"
+  ]
+ },
+ {
+  "nombre": "Gulf of California Cable",
+  "llegadas": [
+   {
+    "lugar": "La Paz",
+    "pais": "MX",
+    "lat": 24.143,
+    "lon": -110.313
+   },
+   {
+    "lugar": "Topolobampo",
+    "pais": "MX",
+    "lat": 25.601,
+    "lon": -109.052
+   }
+  ],
+  "anio": 2019,
+  "km": 250,
+  "duenos": [
+   "Megacable"
+  ],
+  "fuentes": [
+   "https://www.megacable.com.mx/"
+  ]
+ },
+ {
+  "nombre": "Gulf of Mexico Fiber Optic Network",
+  "llegadas": [
+   {
+    "lugar": "Freeport",
+    "pais": "US",
+    "lat": 28.954,
+    "lon": -95.36
+   },
+   {
+    "lugar": "Pascagoula",
+    "pais": "US",
+    "lat": 30.366,
+    "lon": -88.556
+   }
+  ],
+  "anio": 2008,
+  "km": 1200,
+  "duenos": [
+   "Tampnet"
+  ],
+  "fuentes": [
+   "https://www.tampnet.com/"
+  ]
+ },
+ {
+  "nombre": "Lázaro Cárdenas-Manzanillo Santiago Submarine Cable System (LCMSSCS)",
+  "llegadas": [
+   {
+    "lugar": "Ciudad Lázaro Cárdenas",
+    "pais": "MX",
+    "lat": 17.959,
+    "lon": -102.199
+   },
+   {
+    "lugar": "Ixtapa-Zihuatanejo",
+    "pais": "MX",
+    "lat": 17.642,
+    "lon": -101.552
+   },
+   {
+    "lugar": "Manzanillo",
+    "pais": "MX",
+    "lat": 19.052,
+    "lon": -104.316
+   }
+  ],
+  "anio": 2013,
+  "km": 322,
+  "duenos": [
+   "Telmex"
+  ],
+  "fuentes": [
+   "https://telmex.com/"
+  ]
+ },
+ {
+  "nombre": "Colombian Festoon",
+  "llegadas": [
+   {
+    "lugar": "Cartagena",
+    "pais": "CO",
+    "lat": 10.4,
+    "lon": -75.514
+   },
+   {
+    "lugar": "Parque Isla de Salamanca",
+    "pais": "CO",
+    "lat": 10.975,
+    "lon": -74.517
+   },
+   {
+    "lugar": "Puerto Colombia",
+    "pais": "CO",
+    "lat": 10.988,
+    "lon": -74.955
+   },
+   {
+    "lugar": "Santa Marta",
+    "pais": "CO",
+    "lat": 11.241,
+    "lon": -74.199
+   },
+   {
+    "lugar": "Tolu",
+    "pais": "CO",
+    "lat": 9.529,
+    "lon": -75.582
+   }
+  ],
+  "anio": 1997,
+  "km": 400,
+  "duenos": [
+   "Colombia Telecomunicaciones"
+  ],
+  "fuentes": [
+   "https://www.movistar.co/",
+   "https://www.crcom.gov.co/"
+  ]
+ },
+ {
+  "nombre": "Fibra Óptica al Pacífico",
+  "llegadas": [
+   {
+    "lugar": "Ilo",
+    "pais": "PE",
+    "lat": -17.639,
+    "lon": -71.338
+   },
+   {
+    "lugar": "Lurin",
+    "pais": "PE",
+    "lat": -12.274,
+    "lon": -76.869
+   }
+  ],
+  "anio": 2020,
+  "km": 1180,
+  "duenos": [
+   "Entel Bolivia"
+  ],
+  "fuentes": [
+   "https://www.entel.bo/"
+  ]
+ },
+ {
+  "nombre": "FOS Quellón-Chacabuco",
+  "llegadas": [
+   {
+    "lugar": "Puerto Chacabuco",
+    "pais": "CL",
+    "lat": -45.467,
+    "lon": -72.817
+   },
+   {
+    "lugar": "Quellon",
+    "pais": "CL",
+    "lat": -43.117,
+    "lon": -73.617
+   }
+  ],
+  "anio": 2015,
+  "km": 350,
+  "duenos": [
+   "Grupo Gtd"
+  ],
+  "fuentes": [
+   "https://www.gtd.cl/"
+  ]
+ },
+ {
+  "nombre": "ARSAT Submarine Fiber Optic Cable",
+  "llegadas": [
+   {
+    "lugar": "Cabo Espiritu Santo",
+    "pais": "AR",
+    "lat": -52.667,
+    "lon": -68.6
+   },
+   {
+    "lugar": "Punta Dungeness",
+    "pais": "AR",
+    "lat": -52.395,
+    "lon": -68.431
+   }
+  ],
+  "anio": 2012,
+  "km": 40,
+  "duenos": [
+   "ARSAT"
+  ],
+  "fuentes": [
+   "https://www.arsat.com.ar/"
+  ]
+ },
+ {
+  "nombre": "Brazilian Festoon",
+  "llegadas": [
+   {
+    "lugar": "Aracajú",
+    "pais": "BR",
+    "lat": -10.911,
+    "lon": -37.072
+   },
+   {
+    "lugar": "Atafona",
+    "pais": "BR",
+    "lat": -21.625,
+    "lon": -41.011
+   },
+   {
+    "lugar": "Ilhéus",
+    "pais": "BR",
+    "lat": -14.789,
+    "lon": -39.049
+   },
+   {
+    "lugar": "João Pessoa",
+    "pais": "BR",
+    "lat": -7.115,
+    "lon": -34.863
+   },
+   {
+    "lugar": "Macaé",
+    "pais": "BR",
+    "lat": -22.371,
+    "lon": -41.787
+   },
+   {
+    "lugar": "Maceió",
+    "pais": "BR",
+    "lat": -9.666,
+    "lon": -35.735
+   },
+   {
+    "lugar": "Natal",
+    "pais": "BR",
+    "lat": -5.795,
+    "lon": -35.209
+   },
+   {
+    "lugar": "Porto Seguro",
+    "pais": "BR",
+    "lat": -16.45,
+    "lon": -39.065
+   },
+   {
+    "lugar": "Recife",
+    "pais": "BR",
+    "lat": -8.054,
+    "lon": -34.881
+   },
+   {
+    "lugar": "Rio de Janeiro",
+    "pais": "BR",
+    "lat": -22.903,
+    "lon": -43.208
+   },
+   {
+    "lugar": "Salvador",
+    "pais": "BR",
+    "lat": -12.971,
+    "lon": -38.511
+   },
+   {
+    "lugar": "São Mateus",
+    "pais": "BR",
+    "lat": -18.716,
+    "lon": -39.859
+   },
+   {
+    "lugar": "Sitio",
+    "pais": "BR",
+    "lat": -12.55,
+    "lon": -38.033
+   },
+   {
+    "lugar": "Vitória",
+    "pais": "BR",
+    "lat": -20.319,
+    "lon": -40.338
+   }
+  ],
+  "anio": 1996,
+  "km": 2552,
+  "duenos": [
+   "Embratel"
+  ],
+  "fuentes": [
+   "https://www.embratel.com.br/"
+  ]
+ },
+ {
+  "nombre": "Venezuelan Festoon",
+  "llegadas": [
+   {
+    "lugar": "Cabimas",
+    "pais": "VE",
+    "lat": 10.396,
+    "lon": -71.451
+   },
+   {
+    "lugar": "Camuri",
+    "pais": "VE",
+    "lat": 10.607,
+    "lon": -66.878
+   },
+   {
+    "lugar": "Carúpano",
+    "pais": "VE",
+    "lat": 10.667,
+    "lon": -63.251
+   },
+   {
+    "lugar": "Chichiriviche",
+    "pais": "VE",
+    "lat": 10.929,
+    "lon": -68.284
+   },
+   {
+    "lugar": "Coro",
+    "pais": "VE",
+    "lat": 11.403,
+    "lon": -69.678
+   },
+   {
+    "lugar": "Cumaná",
+    "pais": "VE",
+    "lat": 10.454,
+    "lon": -64.182
+   },
+   {
+    "lugar": "Higuerote",
+    "pais": "VE",
+    "lat": 10.48,
+    "lon": -66.098
+   },
+   {
+    "lugar": "Maracaibo",
+    "pais": "VE",
+    "lat": 10.688,
+    "lon": -71.598
+   },
+   {
+    "lugar": "Porlamar",
+    "pais": "VE",
+    "lat": 10.955,
+    "lon": -63.848
+   },
+   {
+    "lugar": "Puerto Cabello",
+    "pais": "VE",
+    "lat": 10.478,
+    "lon": -68.01
+   },
+   {
+    "lugar": "Puerto La Cruz",
+    "pais": "VE",
+    "lat": 10.203,
+    "lon": -64.645
+   },
+   {
+    "lugar": "Punto Fijo",
+    "pais": "VE",
+    "lat": 11.709,
+    "lon": -70.204
+   }
+  ],
+  "anio": 1998,
+  "km": 1200,
+  "duenos": [
+   "CANTV"
+  ],
+  "fuentes": [
+   "https://www.cantv.com.ve/"
+  ]
+ },
+ {
+  "nombre": "Bodø-Røst Cable",
+  "llegadas": [
+   {
+    "lugar": "Bodø",
+    "pais": "NO",
+    "lat": 67.28,
+    "lon": 14.405
+   },
+   {
+    "lugar": "Røst",
+    "pais": "NO",
+    "lat": 67.522,
+    "lon": 12.115
+   }
+  ],
+  "anio": 2016,
+  "km": 109,
+  "duenos": [
+   "Telenor"
+  ],
+  "fuentes": [
+   "https://www.telenor.no/"
+  ]
+ },
+ {
+  "nombre": "Tverrlinken",
+  "llegadas": [
+   {
+    "lugar": "Hemnesberget",
+    "pais": "NO",
+    "lat": 66.224,
+    "lon": 13.624
+   },
+   {
+    "lugar": "Mo i Rana",
+    "pais": "NO",
+    "lat": 66.314,
+    "lon": 14.142
+   },
+   {
+    "lugar": "Nesna",
+    "pais": "NO",
+    "lat": 66.198,
+    "lon": 13.018
+   },
+   {
+    "lugar": "Utskarpen",
+    "pais": "NO",
+    "lat": 66.293,
+    "lon": 13.564
+   }
+  ],
+  "anio": 2010,
+  "km": 80,
+  "duenos": [
+   "KystTele"
+  ],
+  "fuentes": [
+   "https://www.kysttele.no/"
+  ]
+ }
+]
