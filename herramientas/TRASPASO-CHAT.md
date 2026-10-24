@@ -7,8 +7,8 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 **Ramas:** `main` (la web en vivo) y `web-idiomas` están al día. `web-idiomas` tiene además este documento y las preguntas de Kimi.
 
 **En vivo en guardianagroup.com/orbita/**
-- **Cables por tierra:** 168 países y 1.295.161 km, en `orbita/datos/fibra-tierra.json`. Al empezar la noche eran 93 países.
-  - 277 tramos salen de la agencia, confirmados al menos por dos voces de siete: Astra 6, ChatGPT («Alta» e «Investigación avanzada»), Gemini, Grok, Kimi y Claude comprobando fuentes oficiales. El resto viene de OpenStreetMap y AfTerFibre.
+- **Cables por tierra:** 168 países y 1.296.013 km, en `orbita/datos/fibra-tierra.json`. Al empezar la noche eran 93 países.
+  - 279 tramos salen de la agencia, confirmados al menos por dos voces de siete: Astra 6, ChatGPT («Alta» e «Investigación avanzada»), Gemini, Grok, Kimi y Claude comprobando fuentes oficiales. El resto viene de OpenStreetMap y AfTerFibre.
   - En los países sin fuentes abiertas valen los tramos aproximados. El dueño, a las 9:00: «Lo más aproximado posible ok».
   - Siria, Yemen y Palestina entran con redes «en servicio parcial».
   - Corea del Norte se queda en el mapa. El dueño, a las 8:02: «Añádela si».
@@ -27,7 +27,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
   - `ok2`: dos voces con operadores distintos; se dibuja sin nombre ni operador;
   - `ok3`: solo en los países de `APROX` (BH, BN, BZ, CU, DO, HT, JM, KP, KW, LB, LS, NP, PS, QA, RW, SY, TL, XK, YE, SR, TT, PR, GW, SZ, ER, CV, MU, MT, BS, GT, PA, SS), si el camino mide como mucho 2,5 veces la recta más 150 km. Se dibuja en recta y sin nombre.
 - **Más reglas de `fibra_agencia.py`**
-  - Las ciudades del otro lado de la frontera se buscan a menos de 800 km de la ciudad anterior de la ruta (función `fuera`).
+  - Las ciudades del otro lado de la frontera se buscan a menos de 800 km de la ciudad anterior de la ruta, o de la siguiente si la ruta empieza al otro lado (función `fuera`).
   - Los nombres se buscan en `ALIAS`, en `SITIOS` (coordenadas puestas a mano, como Nimule, en Sudán del Sur) y en `herramientas/fuentes/pueblos-fibra.tsv`.
   - Solo entran los estados que empiezan por «en servicio», «operativo» o «in service» y no dicen «no verificad».
 - **`herramientas/cables_agencia.py`**
@@ -514,3 +514,4 @@ Actualizado el sábado 24 de octubre de 2026 a las 10:05, hora de Bogotá, al ce
 
 **Ronda 23 de Astra, tandas procesadas y publicadas**
 - 10:25 · África 1–3: 168 países, 1.295.161 km, 277 tramos de la agencia.
+- 10:35 · Arreglo en `fibra_agencia.py` para la ciudad de frontera que abre una ruta: 279 tramos, 1.296.013 km.
