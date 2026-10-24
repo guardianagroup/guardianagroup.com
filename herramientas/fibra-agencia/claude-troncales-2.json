@@ -1,0 +1,86 @@
+[
+  {
+    "nombre": "SIEPAC (OPGW de 36 fibras) – tramo Guatemala Guate Norte–Panaluya–El Florido",
+    "operador": "EPR / REDCA",
+    "pais": "GT",
+    "ciudades": [
+      "Guatemala City",
+      "Panaluya",
+      "El Florido"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://eprsiepac.com/linea-siepac/ — Empresa Propietaria de la Red (EPR), tabla de la Línea SIEPAC (cable de guarda OPGW con 36 hilos de fibra óptica): tramos Guate Norte–Panaluya (109,91 km) y Panaluya–El Florido (73,46 km), en servicio desde el 26-ago-2012. La subestación Guate Norte está en el área de la Ciudad de Guatemala."
+  },
+  {
+    "nombre": "SIEPAC (OPGW de 36 fibras) – tramo Honduras San Buenaventura–El Florido",
+    "operador": "EPR / REDCA",
+    "pais": "HN",
+    "ciudades": [
+      "San Buenaventura",
+      "El Florido"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://eprsiepac.com/linea-siepac/ — Empresa Propietaria de la Red (EPR), tabla de la Línea SIEPAC (cable de guarda OPGW con 36 hilos de fibra óptica): tramo El Florido–San Buenaventura (141 km), en servicio desde el 19-mar-2012."
+  },
+  {
+    "nombre": "Red de transporte por fibra óptica de HONDUTEL – Puerto Cortés–San Pedro Sula–Tegucigalpa–Nacaome–El Amatillo",
+    "operador": "Hondutel",
+    "pais": "HN",
+    "ciudades": [
+      "Puerto Cortes",
+      "San Pedro Sula",
+      "Tegucigalpa",
+      "Nacaome",
+      "El Amatillo"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://orientacionuniversitaria.weebly.com/uploads/4/0/0/1/40018067/informe_final_pnud-hondutel.pdf — PNUD Honduras, Informe Final del proyecto de apoyo a HONDUTEL 2002–2012 (marzo de 2013), apartado 4.1.1 «Modernización de la Red de Transporte por Fibra Óptica a Nivel Nacional» (copia del informe del PNUD alojada en ese sitio): rutas terminadas y en uso Puerto Cortés–San Pedro Sula (53 km), San Pedro Sula–Tegucigalpa (270,33 km), Tegucigalpa–Nacaome (102,29 km) y Nacaome–El Amatillo (60 km)."
+  },
+  {
+    "nombre": "Red de transporte por fibra óptica de HONDUTEL – Tegucigalpa–Nacaome–Choluteca",
+    "operador": "Hondutel",
+    "pais": "HN",
+    "ciudades": [
+      "Tegucigalpa",
+      "Nacaome",
+      "Choluteca"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://orientacionuniversitaria.weebly.com/uploads/4/0/0/1/40018067/informe_final_pnud-hondutel.pdf — PNUD Honduras, Informe Final del proyecto de apoyo a HONDUTEL 2002–2012 (marzo de 2013), apartado 4.1.1 «Modernización de la Red de Transporte por Fibra Óptica a Nivel Nacional» (copia del informe del PNUD alojada en ese sitio): rutas terminadas y en uso Tegucigalpa–Nacaome (102,29 km) y Nacaome–Choluteca (36,43 km)."
+  },
+  {
+    "nombre": "Red de transporte por fibra óptica de HONDUTEL – Bajo Aguán La Ceiba–Saba–Tocoa",
+    "operador": "Hondutel",
+    "pais": "HN",
+    "ciudades": [
+      "La Ceiba",
+      "Saba",
+      "Tocoa"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://orientacionuniversitaria.weebly.com/uploads/4/0/0/1/40018067/informe_final_pnud-hondutel.pdf — PNUD Honduras, Informe Final del proyecto de apoyo a HONDUTEL 2002–2012 (marzo de 2013), apartado 4.1.1 «Modernización de la Red de Transporte por Fibra Óptica a Nivel Nacional» (copia del informe del PNUD alojada en ese sitio): rutas añadidas por adenda, terminadas y en uso: La Ceiba–Saba (92 km) y Saba–Tocoa (10 km), red del Bajo Aguán."
+  },
+  {
+    "nombre": "Backbone de fibra de E-Networks – Georgetown–Linden",
+    "operador": "E-Networks",
+    "pais": "GY",
+    "ciudades": [
+      "Georgetown",
+      "Linden"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.enetworks.gy/blog/page/3/ — E-Networks, «E-Networks launches 4G, 5G and OnFiber internet services in Linden»: tendido de cable de fibra óptica «from Georgetown to Linden» y lanzamiento de OnFiber en Linden. https://enetworks.gy/2022/11/15/enetworks-fiber-upgrades.html — servicios de fibra disponibles en su backbone en Georgetown y Linden, entre otras."
+  },
+  {
+    "nombre": "Backbone de fibra de E-Networks – costa este Georgetown–New Amsterdam–Corriverton",
+    "operador": "E-Networks",
+    "pais": "GY",
+    "ciudades": [
+      "Georgetown",
+      "New Amsterdam",
+      "Corriverton"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://enetworks.gy/2022/11/15/enetworks-fiber-upgrades.html — E-Networks, 15 nov 2022: servicios de fibra disponibles «across E-Networks' fiber backbone, which is the largest in Guyana», en Georgetown, Linden, Anna Regina, Corriverton y New Amsterdam. La fuente no da el trazado: el orden es el de la carretera costera, la única que une esas tres ciudades."
+  }
+]

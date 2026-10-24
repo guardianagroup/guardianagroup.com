@@ -1,0 +1,69 @@
+[
+  {
+    "nombre": "SIEPAC (OPGW de 36 fibras) – tramo Costa Rica Cañas–Parrita–Palmar Norte–Río Claro",
+    "operador": "EPR / REDCA",
+    "pais": "CR",
+    "ciudades": [
+      "Cañas",
+      "Parrita",
+      "Palmar Norte",
+      "Río Claro"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://eprsiepac.com/linea-siepac/ — Empresa Propietaria de la Red (EPR), tabla de la Línea SIEPAC: tramos Cañas–Parrita (159,24 km, 22-ago-2012), Parrita–Palmar Norte (130,56 km, 01-oct-2014) y Palmar Norte–Río Claro (50,7 km, 31-ago-2012) en servicio; la línea lleva cable de guarda OPGW con 36 hilos de fibra óptica."
+  },
+  {
+    "nombre": "Fibra terrestre subterránea Savusavu–Seaqaqa–Labasa (Vanua Levu)",
+    "operador": "Telecom Fiji",
+    "pais": "FJ",
+    "ciudades": [
+      "Savusavu",
+      "Seaqaqa",
+      "Labasa"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.telecom.com.fj/telecom-fiji-knowledge/telecom-fiji-wins-infrastructure-initiative-of-the-year-at-asian-telecom-awards-2026/ — Telecom Fiji, 2 mar 2026: enlace de fibra terrestre subterránea de 102 km Savusavu–Seaqaqa–Labasa, terminado antes de plazo y ya activado (resultados «within six months of activation»)."
+  },
+  {
+    "nombre": "Red Troncal Nacional (RNFO) – corredor Bata–Niefang–Mikomeseng–Ebebiyin",
+    "operador": "GITGE",
+    "pais": "GQ",
+    "ciudades": [
+      "Bata",
+      "Machinda",
+      "Niefang",
+      "Nkimi",
+      "Nkue",
+      "Micomeseng",
+      "Bidjabidjan",
+      "Ebebiyin"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://gitge.com/?p=508 — GITGE, «National Fiber Optic Network»: la Red Troncal Nacional conecta 19 ciudades; en la Región Continental enumera, en este orden, Bata, Bachinda, Niefang, Nkimi, Nkue, Micomeseng, Bidjabijan, Ebibeyin (luego Ayene, Anisoc, Mongomeyen, Mongomo, Oyala, Evinayong, Bicurga). https://gitge.com/wp-content/uploads/2020/07/PRESENTACION-6.pdf — GITGE: la fibra terrestre ya llega a 19 ciudades. El orden es el de la lista de nodos de GITGE, que sigue la carretera."
+  },
+  {
+    "nombre": "Red Troncal Nacional (RNFO) – nodos Ayene–Añisoc–Mongomeyen–Mongomo",
+    "operador": "GITGE",
+    "pais": "GQ",
+    "ciudades": [
+      "Ayene",
+      "Anisoc",
+      "Mongomeyen",
+      "Mongomo"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://gitge.com/?p=508 — GITGE, «National Fiber Optic Network»: la Red Troncal Nacional (19 ciudades) incluye, enumerados en este orden, los nodos continentales Ayene, Anisoc, Mongomeyen y Mongomo. El orden es el de la lista de GITGE."
+  },
+  {
+    "nombre": "Red Troncal Nacional (RNFO) – nodos Oyala–Evinayong–Bicurga",
+    "operador": "GITGE",
+    "pais": "GQ",
+    "ciudades": [
+      "Ciudad de la Paz",
+      "Evinayong",
+      "Bicurga"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://gitge.com/?p=508 — GITGE, «National Fiber Optic Network»: la Red Troncal Nacional (19 ciudades) incluye, enumerados en este orden, los nodos continentales Oyala (Ciudad de la Paz), Evinayong y Bicurga. El orden es el de la lista de GITGE."
+  }
+]
