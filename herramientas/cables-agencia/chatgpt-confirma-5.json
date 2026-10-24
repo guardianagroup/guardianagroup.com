@@ -1,0 +1,288 @@
+[
+  {
+    "nombre": "SMPCS Packet-1",
+    "llegadas": [
+      {
+        "lugar": "Ambon",
+        "pais": "ID",
+        "lat": -3.6554,
+        "lon": 128.1907
+      },
+      {
+        "lugar": "Bandaneria",
+        "pais": "ID",
+        "lat": -4.5202,
+        "lon": 129.8721
+      },
+      {
+        "lugar": "Fakfak",
+        "pais": "ID",
+        "lat": -3.0978,
+        "lon": 133.0194
+      },
+      {
+        "lugar": "Kendari",
+        "pais": "ID",
+        "lat": -3.9984,
+        "lon": 122.513
+      },
+      {
+        "lugar": "Labuha",
+        "pais": "ID",
+        "lat": -0.6268,
+        "lon": 127.4805
+      },
+      {
+        "lugar": "Manado",
+        "pais": "ID",
+        "lat": 1.4908,
+        "lon": 124.8396
+      },
+      {
+        "lugar": "Masohi",
+        "pais": "ID",
+        "lat": -3.2978,
+        "lon": 128.9553
+      },
+      {
+        "lugar": "Namlea",
+        "pais": "ID",
+        "lat": -3.2334,
+        "lon": 127.0858
+      },
+      {
+        "lugar": "Sanana",
+        "pais": "ID",
+        "lat": -2.2014,
+        "lon": 125.937
+      },
+      {
+        "lugar": "Sofifi",
+        "pais": "ID",
+        "lat": 0.735,
+        "lon": 127.5614
+      },
+      {
+        "lugar": "Sorong",
+        "pais": "ID",
+        "lat": -0.8821,
+        "lon": 131.2954
+      },
+      {
+        "lugar": "Ternate",
+        "pais": "ID",
+        "lat": 0.7958,
+        "lon": 127.3613
+      }
+    ],
+    "anio": 2015,
+    "km": 3156,
+    "duenos": [
+      "PT Telkom Indonesia (Persero) Tbk"
+    ],
+    "fuentes": [
+      "https://www.telkom.co.id/sites/berita/id_ID/news/jaringan-smpcs-hadirkan-layanan-digital-berkualitas-bagi-masyarakat-papua-676",
+      "https://www.telkom.co.id/minio/show/data/lampiran/1576314493362_Laporan%20Keberlanjutan%202015.pdf",
+      "https://www.telkom.co.id/sites/berita/id_ID/news/layanan-telkomgroup-di-jayapura-kembali-normal-1355"
+    ]
+  },
+  {
+    "nombre": "Converge Domestic Submarine Cable Network (CDSCN)",
+    "llegadas": [
+      {
+        "lugar": "Baclayon",
+        "pais": "PH",
+        "lat": 9.6226,
+        "lon": 123.9135
+      },
+      {
+        "lugar": "Bacong",
+        "pais": "PH",
+        "lat": 9.2463,
+        "lon": 123.295
+      },
+      {
+        "lugar": "Bogo",
+        "pais": "PH",
+        "lat": 11.0459,
+        "lon": 124.0077
+      },
+      {
+        "lugar": "Boracay",
+        "pais": "PH",
+        "lat": 11.9492,
+        "lon": 121.9448
+      },
+      {
+        "lugar": "Buenavista",
+        "pais": "PH",
+        "lat": 8.9689,
+        "lon": 125.4207
+      },
+      {
+        "lugar": "Cagayan de Oro",
+        "pais": "PH",
+        "lat": 8.4542,
+        "lon": 124.6319
+      },
+      {
+        "lugar": "Coron",
+        "pais": "PH",
+        "lat": 12.005,
+        "lon": 120.2007
+      },
+      {
+        "lugar": "Leganes",
+        "pais": "PH",
+        "lat": 10.7866,
+        "lon": 122.5894
+      },
+      {
+        "lugar": "Masbate City",
+        "pais": "PH",
+        "lat": 12.3667,
+        "lon": 123.6167
+      },
+      {
+        "lugar": "Milagros",
+        "pais": "PH",
+        "lat": 12.2181,
+        "lon": 123.5091
+      },
+      {
+        "lugar": "Naga",
+        "pais": "PH",
+        "lat": 10.2382,
+        "lon": 123.6914
+      },
+      {
+        "lugar": "Ormoc",
+        "pais": "PH",
+        "lat": 11.0069,
+        "lon": 124.6128
+      },
+      {
+        "lugar": "Pasacao",
+        "pais": "PH",
+        "lat": 13.5478,
+        "lon": 122.9507
+      },
+      {
+        "lugar": "Roxas City",
+        "pais": "PH",
+        "lat": 11.5833,
+        "lon": 122.75
+      },
+      {
+        "lugar": "Roxas",
+        "pais": "PH",
+        "lat": 12.5864,
+        "lon": 121.5277
+      },
+      {
+        "lugar": "San Carlos",
+        "pais": "PH",
+        "lat": 10.4837,
+        "lon": 123.4129
+      },
+      {
+        "lugar": "San Juan",
+        "pais": "PH",
+        "lat": 13.8099,
+        "lon": 121.4489
+      },
+      {
+        "lugar": "San Remigio",
+        "pais": "PH",
+        "lat": 11.0833,
+        "lon": 123.9363
+      },
+      {
+        "lugar": "Tagbilaran",
+        "pais": "PH",
+        "lat": 9.6754,
+        "lon": 123.8782
+      },
+      {
+        "lugar": "Talisay City",
+        "pais": "PH",
+        "lat": 10.7394,
+        "lon": 122.9678
+      },
+      {
+        "lugar": "Taytay",
+        "pais": "PH",
+        "lat": 10.8196,
+        "lon": 119.5004
+      },
+      {
+        "lugar": "Toledo",
+        "pais": "PH",
+        "lat": 10.3763,
+        "lon": 123.6353
+      }
+    ],
+    "anio": 2021,
+    "km": 1800,
+    "duenos": [
+      "Converge ICT Solutions Inc."
+    ],
+    "fuentes": [
+      "https://corporate.convergeict.com/corporate-profile",
+      "https://content.convergeict.com/assets/4793a09d-6cf4-4d31-90e6-206d1d3f58a6/%28FOR%20PUBLIC%29%20CNVRG%20-%20DEFINITIVE%20INFORMATION%20STATEMENT%20-%204.25.25_compressed.pdf",
+      "https://r6.emb.gov.ph/wp-content/uploads/2022/06/PDSCN-Project-R6-Segment-8_EIS.pdf"
+    ]
+  },
+  {
+    "nombre": "Ooredoo Maldives Nationwide Submarine Cable",
+    "llegadas": [
+      {
+        "lugar": "Kulhudhufushi",
+        "pais": "MV",
+        "lat": 6.6224,
+        "lon": 73.0714
+      },
+      {
+        "lugar": "Eydhafushi",
+        "pais": "MV",
+        "lat": 5.1032,
+        "lon": 73.0708
+      },
+      {
+        "lugar": "Hulhumale",
+        "pais": "MV",
+        "lat": 4.2119,
+        "lon": 73.5402
+      },
+      {
+        "lugar": "Kolhufushi",
+        "pais": "MV",
+        "lat": 2.7768,
+        "lon": 73.4246
+      },
+      {
+        "lugar": "Thinadhoo",
+        "pais": "MV",
+        "lat": 0.5311,
+        "lon": 72.9977
+      },
+      {
+        "lugar": "Hithadhoo",
+        "pais": "MV",
+        "lat": -0.606,
+        "lon": 73.0892
+      }
+    ],
+    "anio": 2016,
+    "km": 1200,
+    "duenos": [
+      "Ooredoo Maldives PLC"
+    ],
+    "fuentes": [
+      "https://www.ooredoo.com/en/media/news_view/ooredoos-nationwide-submarine-cable-paves-the-way-to-4g-network-across-maldives/",
+      "https://www.huawei.com/en/news/2016/12/Ooredoo-Huawei-Submarine-Cable-Maldives",
+      "https://www.ooredoo.com/en/media/news_view/ooredoos-commitment-to-digital-maldives/",
+      "https://saruna.mnu.edu.mv/server/api/core/bitstreams/4c0d8801-b920-45e0-8c42-46d1aa02dc42/content"
+    ]
+  }
+]
