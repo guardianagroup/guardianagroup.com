@@ -1,0 +1,57 @@
+[
+  {
+    "nombre": "Red Troncal Nacional y de Interconexión Norte",
+    "operador": "ENATREL",
+    "pais": "NI",
+    "ciudades": [
+      "Managua",
+      "Tipitapa",
+      "Sebaco",
+      "Matagalpa",
+      "Esteli",
+      "Somoto"
+    ],
+    "estado": "en servicio",
+    "fuente": "Empresa Nacional de Transmisión Eléctrica (ENATREL), Plan de Expansión del SNT"
+  },
+  {
+    "nombre": "Red Troncal Sur e Interconexión Regional",
+    "operador": "ENATREL",
+    "pais": "NI",
+    "ciudades": [
+      "Managua",
+      "Masaya",
+      "Granada",
+      "Rivas",
+      "San Juan del Sur"
+    ],
+    "estado": "en servicio",
+    "fuente": "Empresa Nacional de Transmisión Eléctrica (ENATREL), Plan Indicativo de Expansión"
+  },
+  {
+    "nombre": "Red Troncal Trans-Sudán",
+    "operador": "Safitel Chad",
+    "pais": "TD",
+    "ciudades": [
+      "Ndjamena",
+      "Abeche",
+      "Adre"
+    ],
+    "estado": "en servicio",
+    "fuente": "Safitel Chad Official Network Backbone & World Bank Reports"
+  },
+  {
+    "nombre": "Red Troncal Meridional y Trans-Camerún",
+    "operador": "Safitel Chad",
+    "pais": "TD",
+    "ciudades": [
+      "Ndjamena",
+      "Kelo",
+      "Moundou",
+      "Doba",
+      "Sarh"
+    ],
+    "estado": "en servicio",
+    "fuente": "Safitel Chad Official Network Backbone & World Bank Reports"
+  }
+]
