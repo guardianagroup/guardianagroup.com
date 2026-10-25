@@ -9,7 +9,7 @@ other languages (alternateNamesV2): this keeps, for every place on the map, its 
 Each place of lugares-capas.json (landings, data-centre cities and the landings listed for each cable) is matched to its
 GeoNames record by name, country and position (the nearest one under 0.3°). For each language: the name GeoNames marks
 as preferred, else a short name, else the first one, never a colloquial or historic one; in the languages written in
-Latin letters only a preferred or short name (the GeoNames name already reads there).
+Latin letters, in towns under 100,000 people, only a preferred or short name (the GeoNames name already reads there).
 
 Output: orbita/datos/lugares-idioma/<language>.json  {"n": {"Name|CC": "name in that language", …}}, only the names
 that differ. The page loads only its own language.
@@ -54,12 +54,13 @@ def main():
     quiero = lugares()
     print('lugares en el mapa:', len(quiero))
     nombres = collections.defaultdict(list)  # (name, cc) → [(gid, lon, lat)]
+    pob = {}  # gid → population
     for linea in open(sys.argv[1], encoding='utf-8'):
         p = linea.rstrip('\n').split('\t')
         if len(p) < 9: continue
         k = (p[1], p[8])
         if k in quiero:
-            try: nombres[k].append((p[0], float(p[5]), float(p[4])))
+            try: nombres[k].append((p[0], float(p[5]), float(p[4]))); pob[p[0]] = int(p[14] or 0) if len(p) > 14 and p[14].isdigit() else 0
             except ValueError: pass
     gid_de = {}
     for k, (lo, la) in quiero.items():
@@ -84,9 +85,10 @@ def main():
         for k, g in gid_de.items():
             for c in cods:
                 v = alt.get(g, {}).get(c)
-                # in a language written in Latin letters the GeoNames name already reads, so only a name GeoNames marks as
-                # preferred or short replaces it (not an old exonym: «Bolduque» for 's-Hertogenbosch, «Abenrá» for Aabenraa)
-                if v and lang in LATINAS: v = [x for x in v if x[0] < 2]
+                # in a language written in Latin letters the GeoNames name already reads, so in a small town only a name
+                # GeoNames marks as preferred or short replaces it (not an old exonym: «Abenrá» for Aabenraa); a city of
+                # 100,000 or more keeps its usual name in that language (Londres, Múnich, Colonia)
+                if v and lang in LATINAS and pob.get(g, 0) < 100000: v = [x for x in v if x[0] < 2]
                 if v:
                     nombre = min(v)[2]
                     if nombre != k[0]: n[k[0] + '|' + k[1]] = nombre
