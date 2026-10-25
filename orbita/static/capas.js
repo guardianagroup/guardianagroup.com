@@ -483,7 +483,7 @@
     if (!LUG.ordenLl) LUG.ordenLl = LUG.llegadas.map((_, i) => i).sort((a, b) => (LUG.llegadas[b].seg || []).length - (LUG.llegadas[a].seg || []).length);
     const al0 = Math.max(0, Math.min(1, (DESDE - ancho) / (DESDE - LLENO)));
     const max = G.W <= 760 ? 22 : 56, SEP = 6, M = 6;
-    const ocupadas = PAIS_CAJAS.map((b) => [b[0], b[1], b[0] + b[2], b[1] + b[3]]);
+    const ocupadas = PAIS_CAJAS.concat(EST_CAJAS).map((b) => [b[0], b[1], b[0] + b[2], b[1] + b[3]]); // nor on a base's or station's name
     const choca = (b) => ocupadas.some((o) => b[0] < o[2] + SEP && b[2] > o[0] - SEP && b[1] < o[3] + SEP && b[3] > o[1] - SEP);
     cx.save(); cx.globalCompositeOperation = 'source-over'; cx.textBaseline = 'middle'; cx.lineJoin = 'round';
     cx.font = '500 11px "Hanken Grotesk", system-ui, sans-serif';
@@ -539,7 +539,9 @@
       cx.fillStyle = `rgba(${BLANCO},.95)`; cx.beginPath(); cx.arc(x, y, 1.4, 0, 7); cx.fill();
       if (z >= (plat ? 8 : 1.8) && q.n) {
         const txt = q.n.split(' (')[0].split(' / ')[0], w = Math.ceil(cx.measureText(txt).width), lx = Math.round(x + 8), ly = Math.round(y);
-        if (!ocupado.some((o) => Math.abs(x - o[0]) < (w + o[2]) / 2 + 12 && Math.abs(y - o[1]) < 13)) { ocupado.push([x + 8 + w / 2, y, w]); EST_CAJAS.push([x + 4, y - 8, w + 8, 16, iq]); conHalo(cx, txt, lx, ly, 0.9); }
+        // 25 Oct 2026 (revisión punto por punto: «Fairbanks» over another name): label centre against label centre, and never on a country's name
+        const cxl = x + 8 + w / 2, enPais = PAIS_CAJAS.some((b) => x + 4 < b[0] + b[2] && x + 12 + w > b[0] && y - 8 < b[1] + b[3] && y + 8 > b[1]);
+        if (!enPais && !ocupado.some((o) => Math.abs(cxl - o[0]) < (w + o[2]) / 2 + 10 && Math.abs(y - o[1]) < 14)) { ocupado.push([cxl, y, w]); EST_CAJAS.push([x + 4, y - 8, w + 8, 16, iq]); conHalo(cx, txt, lx, ly, 0.9); }
       }
     }
     cx.restore();
@@ -894,7 +896,7 @@
   // ---------- drawing ----------
   function pinta(t) {
     const p = P(); if (!p) return;
-    const cx = p.ctx, G = p.geo; EXTREMOS_VISTOS = null; CAMPO = campo(p, G);
+    const cx = p.ctx, G = p.geo; EXTREMOS_VISTOS = null; CAMPO = campo(p, G); EST_CAJAS = []; // a frame without stations leaves no old name boxes behind
     pintaFronteras(cx, p, G); if (soloTu && document.body.classList.contains('viaje')) PAIS_CAJAS = []; else pintaPaises(cx, p, G); // the journey wants a clean planet
     // «Mi conexión» (owner, 22 Oct 2026): while the visitor looks at their own data the planet shows only that —
     // no cables, no satellites, nothing that is not theirs — so there is no doubt about what is whose.
@@ -2406,7 +2408,7 @@
   }
   let soloTu = false, soloTuPinta = null;
   function ponSoloTu(on, dibuja) { soloTu = !!on; soloTuPinta = on ? dibuja || null : null; document.body.classList.toggle('solo-tu', soloTu); if (soloTu) { cierraLista(); muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; } pintaNota(); pintaVista(); }
-  window.OrbitaCapas = { abreFicha: (m, x, y) => abrePanel(m, x, y), pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get cajasPaises() { return LLEG_CAJAS.length ? PAIS_CAJAS.concat(LLEG_CAJAS) : PAIS_CAJAS; }, /* and the names of the towns where cables land */ get nombresLlegadas() { return LLEG_NOMBRES; }, /* the country names' boxes, so the cities (ciudades.js) never land on them */ get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; },
+  window.OrbitaCapas = { abreFicha: (m, x, y) => abrePanel(m, x, y), pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get cajasPaises() { return LLEG_CAJAS.length || EST_CAJAS.length ? PAIS_CAJAS.concat(LLEG_CAJAS, EST_CAJAS) : PAIS_CAJAS; }, /* and the bases' and stations' names */ /* and the names of the towns where cables land */ get nombresLlegadas() { return LLEG_NOMBRES; }, /* the country names' boxes, so the cities (ciudades.js) never land on them */ get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; },
     // the map's network as lines of unit vectors, for the routes that travel along it (red.js)
     get red() { return { sub: capas.sub && capas.sub.lineas, tierra: capas.tierra && capas.tierra.lineas, fibra: FT && FT.lineas }; },
     // the submarine pieces joined at load time and the ends left fading out into the sea (uneCables), for the automated checks
