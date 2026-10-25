@@ -829,7 +829,14 @@
   "Cable que llega": "یہاں پہنچنے والی کیبل",
   "La plataforma": "پلیٹ فارم",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "یہاں آپٹیکل فائبر کی ایک زیرِ سمندر کیبل ختم ہوتی ہے۔ بحیرۂ شمال کے پلیٹ فارم اسی طرح خشکی سے جڑے ہیں: پیداوار کا ڈیٹا، رابطے اور وہاں کام کرنے والوں کا انٹرنیٹ اسی کیبل سے گزرتا ہے۔",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "آرکٹک اور انٹارکٹکا کے اڈے، سیٹلائٹس کے زمینی اسٹیشن اور وہ تیل کے پلیٹ فارم جہاں کوئی کیبل ختم ہوتی ہے۔"
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "آرکٹک اور انٹارکٹکا کے اڈے، سیٹلائٹس کے زمینی اسٹیشن اور وہ تیل کے پلیٹ فارم جہاں کوئی کیبل ختم ہوتی ہے۔",
+  "Radioenlaces": "ریڈیو لنکس",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "ٹاور سے ٹاور تک مائیکرو ویو کی کڑیاں: جہاں قصبوں کے درمیان فائبر نہیں، اور اسٹاک ایکسچینج کے تیز راستے۔",
+  "Radioenlace de microondas": "مائیکرو ویو ریڈیو لنک",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "یہاں انٹرنیٹ ہوا کے ذریعے جاتا ہے: ٹاور سے ٹاور، مائیکرو ویو سے، ہمیشہ سیدھی نظر میں۔ یہ وہاں استعمال ہوتا ہے جہاں فائبر بچھانا فائدہ مند یا ممکن نہیں، جیسے برف، صحرا یا جزیروں کے درمیان سمندر۔ ہر ٹاور کا مقام عوامی نہیں: لکیر ان قصبوں کو ملاتی ہے جن کا ذکر ذرائع میں ہے۔",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "مائیکرو ویو ریڈیو لنکس، نقطہ دار، جہاں فائبر نہیں",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "یہاں دو منڈیوں کے درمیان اسٹاک ایکسچینج کے آرڈر چلتے ہیں۔ ہوا کے ذریعے سگنل فائبر سے پہلے پہنچتا ہے، کیونکہ شیشے کے اندر روشنی سست چلتی ہے، اور اسٹاک ایکسچینج میں سیکنڈ کا ہر دس لاکھواں حصہ اہم ہے۔ لکیر دونوں سروں کو ملاتی ہے: ٹاور نہیں دکھائے گئے۔",
+  "Latencia publicada": "شائع شدہ تاخیر"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

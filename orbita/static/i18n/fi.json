@@ -829,7 +829,14 @@
   "Cable que llega": "Tänne tuleva kaapeli",
   "La plataforma": "Lautta",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Tähän päättyy valokuituinen merikaapeli. Näin Pohjanmeren lautat on yhdistetty mantereeseen: kaapelia pitkin kulkevat tuotannon tiedot, viestintä ja aluksella työskentelevien internet.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Arktiksen ja Antarktiksen tukikohdat, satelliittien maa-asemat ja öljynporauslautat, joihin kaapeli päättyy."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Arktiksen ja Antarktiksen tukikohdat, satelliittien maa-asemat ja öljynporauslautat, joihin kaapeli päättyy.",
+  "Radioenlaces": "Radiolinkit",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Mikroaaltoketjuja mastosta mastoon: siellä, missä paikkakuntien välillä ei ole kuitua, ja pörssin nopeat reitit.",
+  "Radioenlace de microondas": "Mikroaaltolinkki",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Täällä internet kulkee ilmassa: mastosta mastoon mikroaalloilla, aina näköyhteydellä. Sitä käytetään siellä, missä kuidun vetäminen ei kannata tai ei ole mahdollista, kuten jäällä, aavikolla tai saarten välisellä merellä. Mastojen sijainnit eivät ole julkisia: viiva yhdistää lähteiden mainitsemat paikkakunnat.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "mikroaaltolinkit, pisteviivalla, missä kuitua ei ole",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Täällä pörssitoimeksiannot kulkevat kahden markkinan välillä. Ilmassa signaali ehtii perille nopeammin kuin kuidussa, koska valo kulkee lasissa hitaammin, ja pörssissä jokainen sekunnin miljoonasosa ratkaisee. Viiva yhdistää kaksi päätä: mastoja ei piirretä.",
+  "Latencia publicada": "Julkaistu viive"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

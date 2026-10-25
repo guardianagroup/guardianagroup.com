@@ -829,7 +829,14 @@
   "Cable que llega": "Kabel yang tiba di sini",
   "La plataforma": "Pelantar",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Di sini berakhirnya sebuah kabel dasar laut gentian optik. Beginilah pelantar di Laut Utara disambungkan ke darat: data pengeluaran, komunikasi dan internet bagi mereka yang bekerja di atasnya melalui kabel ini.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Pangkalan Artik dan Antartika, stesen bumi satelit dan pelantar minyak tempat sebuah kabel berakhir."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Pangkalan Artik dan Antartika, stesen bumi satelit dan pelantar minyak tempat sebuah kabel berakhir.",
+  "Radioenlaces": "Pautan radio",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Rantaian gelombang mikro dari menara ke menara: di tempat tiada gentian optik antara pekan, dan laluan pantas bursa saham.",
+  "Radioenlace de microondas": "Pautan radio gelombang mikro",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Di sini internet bergerak melalui udara: dari menara ke menara, dengan gelombang mikro, sentiasa dalam garis penglihatan. Ia digunakan di tempat yang tidak berbaloi atau tidak mungkin dipasang gentian optik, seperti ais, gurun atau laut antara pulau. Kedudukan setiap menara tidak didedahkan: garisan menghubungkan pekan yang disebut sumber.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "pautan radio gelombang mikro, bertitik, di tempat tiada gentian optik",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Di sini pesanan bursa bergerak antara dua pasaran. Melalui udara isyarat tiba lebih awal daripada melalui gentian optik, kerana cahaya bergerak lebih perlahan di dalam kaca, dan di bursa setiap sepersejuta saat penting. Garisan menghubungkan kedua-dua hujung: menara tidak dilukis.",
+  "Latencia publicada": "Kependaman yang diterbitkan"
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

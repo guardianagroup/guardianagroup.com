@@ -829,7 +829,14 @@
   "Cable que llega": "کابلی که به اینجا می‌رسد",
   "La plataforma": "سکو",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "اینجا یک کابل زیردریایی فیبر نوری به پایان می‌رسد. سکوهای دریای شمال این‌گونه به خشکی وصل‌اند: داده‌های تولید، ارتباطات و اینترنت کسانی که روی سکو کار می‌کنند از این کابل می‌گذرد.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "پایگاه‌های قطب شمال و جنوبگان، ایستگاه‌های زمینی ماهواره و سکوهای نفتی که کابلی در آن‌ها به پایان می‌رسد."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "پایگاه‌های قطب شمال و جنوبگان، ایستگاه‌های زمینی ماهواره و سکوهای نفتی که کابلی در آن‌ها به پایان می‌رسد.",
+  "Radioenlaces": "رادیولینک‌ها",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "زنجیره‌های مایکروویو از دکلی به دکل دیگر: جایی که میان شهرها فیبر نیست، و مسیرهای سریع بورس.",
+  "Radioenlace de microondas": "رادیولینک مایکروویو",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "اینجا اینترنت از راه هوا می‌رود: از دکلی به دکل دیگر، با مایکروویو، همیشه در خط دید. جایی به کار می‌رود که کشیدن فیبر به‌صرفه یا ممکن نیست، مثل یخ، بیابان یا دریای میان جزیره‌ها. جای هر دکل عمومی نیست: خط، شهرهایی را که منابع نام برده‌اند به هم وصل می‌کند.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "رادیولینک‌های مایکروویو، نقطه‌چین، جایی که فیبر نیست",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "اینجا سفارش‌های بورس میان دو بازار جابه‌جا می‌شود. از راه هوا سیگنال زودتر از فیبر می‌رسد، چون نور درون شیشه کندتر حرکت می‌کند، و در بورس هر یک‌میلیونیم ثانیه مهم است. خط دو سر را به هم وصل می‌کند: دکل‌ها رسم نشده‌اند.",
+  "Latencia publicada": "تأخیر منتشرشده"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

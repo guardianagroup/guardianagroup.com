@@ -829,7 +829,14 @@
   "Cable que llega": "यहाँ पहुँचने वाली केबल",
   "La plataforma": "प्लेटफ़ॉर्म",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "यहाँ ऑप्टिकल फ़ाइबर की एक समुद्री केबल खत्म होती है। उत्तरी सागर के प्लेटफ़ॉर्म इसी तरह ज़मीन से जुड़ते हैं: उत्पादन के आँकड़े, संचार और प्लेटफ़ॉर्म पर काम करने वालों का इंटरनेट इसी केबल से गुज़रता है।",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "आर्कटिक और अंटार्कटिका के बेस, उपग्रहों के ज़मीनी स्टेशन और वे तेल प्लेटफ़ॉर्म जहाँ कोई केबल खत्म होती है।"
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "आर्कटिक और अंटार्कटिका के बेस, उपग्रहों के ज़मीनी स्टेशन और वे तेल प्लेटफ़ॉर्म जहाँ कोई केबल खत्म होती है।",
+  "Radioenlaces": "रेडियो लिंक",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "टावर से टावर तक माइक्रोवेव की कड़ियाँ: जहाँ कस्बों के बीच फ़ाइबर नहीं है, और शेयर बाज़ार के तेज़ रास्ते।",
+  "Radioenlace de microondas": "माइक्रोवेव रेडियो लिंक",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "यहाँ इंटरनेट हवा से जाता है: टावर से टावर, माइक्रोवेव से, हमेशा सीधी दृष्टि में। इसका उपयोग वहाँ होता है जहाँ फ़ाइबर बिछाना फ़ायदेमंद या संभव नहीं, जैसे बर्फ़, रेगिस्तान या द्वीपों के बीच का समुद्र। हर टावर की स्थिति सार्वजनिक नहीं है: रेखा स्रोतों में बताए गए कस्बों को जोड़ती है।",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "माइक्रोवेव रेडियो लिंक, बिंदीदार, जहाँ फ़ाइबर नहीं है",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "यहाँ दो बाज़ारों के बीच शेयर बाज़ार के ऑर्डर चलते हैं। हवा से सिग्नल फ़ाइबर से पहले पहुँचता है, क्योंकि काँच के भीतर प्रकाश धीमा चलता है, और शेयर बाज़ार में सेकंड का हर दस लाखवाँ हिस्सा मायने रखता है। रेखा दोनों सिरों को जोड़ती है: टावर नहीं दिखाए गए हैं।",
+  "Latencia publicada": "प्रकाशित विलंब"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

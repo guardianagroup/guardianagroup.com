@@ -829,7 +829,14 @@
   "Cable que llega": "הכבל שמגיע לכאן",
   "La plataforma": "האסדה",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "כאן מסתיים כבל תת־ימי של סיבים אופטיים. כך מחוברות אסדות הים הצפוני ליבשה: נתוני ההפקה, התקשורת והאינטרנט של העובדים על האסדה עוברים בכבל.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "בסיסים באזור הארקטי ובאנטארקטיקה, תחנות קרקע של לוויינים ואסדות נפט שבהן מסתיים כבל."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "בסיסים באזור הארקטי ובאנטארקטיקה, תחנות קרקע של לוויינים ואסדות נפט שבהן מסתיים כבל.",
+  "Radioenlaces": "קישורי רדיו",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "שרשראות מיקרוגל מתורן לתורן: במקומות שאין בהם סיב בין היישובים, והנתיבים המהירים של הבורסה.",
+  "Radioenlace de microondas": "קישור רדיו במיקרוגל",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "כאן האינטרנט עובר באוויר: מתורן לתורן, במיקרוגל, תמיד בקו ראייה. משתמשים בו היכן שהנחת סיב אינה משתלמת או אינה אפשרית, כמו על קרח, במדבר או בים שבין איים. מיקומו של כל תורן אינו פומבי: הקו מחבר את היישובים שהמקורות מזכירים.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "קישורי רדיו במיקרוגל, מנוקדים, היכן שאין סיב",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "כאן עוברות פקודות בורסה בין שני שווקים. דרך האוויר האות מגיע מהר יותר מאשר דרך סיב, כי האור נע לאט יותר בתוך זכוכית, ובבורסה כל מיליונית שנייה חשובה. הקו מחבר את שני הקצוות: התורנים אינם משורטטים.",
+  "Latencia publicada": "השהיה שפורסמה"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

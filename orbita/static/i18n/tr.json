@@ -829,7 +829,14 @@
   "Cable que llega": "Buraya gelen kablo",
   "La plataforma": "Platform",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Burada fiber optik bir denizaltı kablosu sona eriyor. Kuzey Denizi platformları karaya böyle bağlanır: üretim verileri, iletişim ve gemide çalışanların interneti bu kablodan geçer.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Arktik ve Antarktika üsleri, uydu yer istasyonları ve bir kablonun sona erdiği petrol platformları."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Arktik ve Antarktika üsleri, uydu yer istasyonları ve bir kablonun sona erdiği petrol platformları.",
+  "Radioenlaces": "Radyolink hatları",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Kuleden kuleye mikrodalga zincirleri: kasabalar arasında fiber olmayan yerlerde ve borsanın hızlı rotalarında.",
+  "Radioenlace de microondas": "Mikrodalga radyolink",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Burada internet havadan gider: kuleden kuleye, mikrodalgayla, her zaman görüş hattında. Fiber döşemenin kârlı ya da mümkün olmadığı yerlerde kullanılır; buz, çöl ya da adalar arasındaki deniz gibi. Her kulenin konumu kamuya açık değildir: çizgi, kaynakların andığı yerleşimleri birleştirir.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "mikrodalga radyolinkler, noktalı, fiber olmayan yerlerde",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Burada iki piyasa arasında borsa emirleri gider. Havadan giden sinyal fiberden daha erken ulaşır, çünkü ışık camın içinde daha yavaş ilerler ve borsada saniyenin her milyonda biri önemlidir. Çizgi iki ucu birleştirir: kuleler çizilmez.",
+  "Latencia publicada": "Yayımlanan gecikme"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

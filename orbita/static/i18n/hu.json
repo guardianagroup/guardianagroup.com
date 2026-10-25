@@ -829,7 +829,14 @@
   "Cable que llega": "Ide érkező kábel",
   "La plataforma": "A platform",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Itt ér véget egy optikai szálas tenger alatti kábel. Így kapcsolódnak a szárazföldhöz az Északi-tenger platformjai: a kábelen halad a termelés adatforgalma, a kommunikáció és a fedélzeten dolgozók internete.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Sarkvidéki és antarktiszi bázisok, műholdas földi állomások és olajfúró platformok, ahol egy kábel véget ér."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Sarkvidéki és antarktiszi bázisok, műholdas földi állomások és olajfúró platformok, ahol egy kábel véget ér.",
+  "Radioenlaces": "Mikrohullámú összeköttetések",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Mikrohullámú láncok toronytól toronyig: ahol a települések között nincs optikai szál, és a tőzsde gyors útvonalai.",
+  "Radioenlace de microondas": "Mikrohullámú összeköttetés",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Itt az internet a levegőben halad: toronytól toronyig, mikrohullámon, mindig rálátással. Ott használják, ahol az optika nem éri meg vagy nem lehetséges, például jégen, sivatagban vagy a szigetek közötti tengeren. Az egyes tornyok helye nem nyilvános: a vonal a forrásokban megnevezett településeket köti össze.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "mikrohullámú összeköttetések, pontozva, ahol nincs optika",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Itt tőzsdei megbízások haladnak két piac között. A levegőben a jel hamarabb ér célba, mint optikai szálon, mert a fény az üvegben lassabban halad, a tőzsdén pedig minden milliomod másodperc számít. A vonal a két végpontot köti össze: a tornyok nincsenek berajzolva.",
+  "Latencia publicada": "Közzétett késleltetés"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

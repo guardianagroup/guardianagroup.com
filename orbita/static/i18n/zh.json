@@ -829,7 +829,14 @@
   "Cable que llega": "到达此处的海缆",
   "La plataforma": "平台",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "一条海底光缆在这里终止。北海的平台就是这样与陆地相连的：生产数据、通信以及平台上工作人员的上网都经由这条光缆。",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "北极和南极的考察站、卫星地面站，以及有海缆终止的石油平台。"
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "北极和南极的考察站、卫星地面站，以及有海缆终止的石油平台。",
+  "Radioenlaces": "微波中继",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "从一座铁塔到另一座铁塔的微波链路：用于城镇之间没有光纤的地方，以及证券交易的高速线路。",
+  "Radioenlace de microondas": "微波中继链路",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "在这里，互联网通过空中传输：从一座铁塔到另一座铁塔，借助微波，始终保持视距。它用于铺设光纤不划算或不可能的地方，例如冰原、沙漠或岛屿之间的海面。每座铁塔的位置并未公开：线条连接的是资料中提到的城镇。",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "微波中继链路，以虚点表示，用于没有光纤的地方",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "这里传递的是两个市场之间的证券交易指令。信号在空气中比在光纤中更快到达，因为光在玻璃中传播得更慢，而在证券交易中，每一微秒都很重要。线条连接两端，不画出铁塔。",
+  "Latencia publicada": "公布的延迟"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",
