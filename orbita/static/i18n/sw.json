@@ -829,7 +829,14 @@
   "Cable que llega": "Kebo inayofika hapa",
   "La plataforma": "Jukwaa",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Hapa inaishia kebo ya baharini ya nyuzi za macho. Hivi ndivyo majukwaa ya Bahari ya Kaskazini yanavyounganishwa na nchi kavu: data za uzalishaji, mawasiliano na intaneti ya wanaofanya kazi humo hupita kwenye kebo hii.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Vituo vya Aktiki na Antaktika, vituo vya ardhini vya setilaiti na majukwaa ya mafuta ambako kebo inaishia."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Vituo vya Aktiki na Antaktika, vituo vya ardhini vya setilaiti na majukwaa ya mafuta ambako kebo inaishia.",
+  "Radioenlaces": "Viungo vya redio",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Minyororo ya mawimbi madogo kutoka mnara hadi mnara: mahali pasipo na fiber kati ya miji, na njia za haraka za soko la hisa.",
+  "Radioenlace de microondas": "Kiungo cha redio cha mawimbi madogo",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Hapa intaneti husafiri hewani: kutoka mnara hadi mnara, kwa mawimbi madogo, kila mara kwa kuonana moja kwa moja. Hutumika pale ambapo kuweka fiber hakulipi au hakuwezekani, kama kwenye barafu, jangwani au baharini kati ya visiwa. Mahali pa kila mnara si pa umma: mstari unaunganisha miji inayotajwa na vyanzo.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "viungo vya redio vya mawimbi madogo, vya nukta, mahali pasipo na fiber",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Hapa maagizo ya soko la hisa husafiri kati ya masoko mawili. Kupitia hewani ishara hufika mapema kuliko kupitia fiber, kwa sababu mwanga husafiri polepole zaidi ndani ya kioo, na katika soko la hisa kila sehemu ya milioni ya sekunde ni muhimu. Mstari unaunganisha ncha mbili: minara haijachorwa.",
+  "Latencia publicada": "Ucheleweshaji uliochapishwa"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

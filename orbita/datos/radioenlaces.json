@@ -1,0 +1,466 @@
+{
+"fuente": {
+"n": "Agencia GUARDIANA (dos voces)",
+"lic": "GUARDIANA",
+"url": "",
+"fecha": "2026-10-25",
+"nota": "Cadenas troncales de radioenlaces de microondas que dos voces de la agencia confirman por separado, entre localidades: trazado aproximado, la posición de cada torre no es pública."
+},
+"lineas": [
+{
+"n": "Troncal occidental de microondas Asmara-Teseney",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+38.45,
+15.78
+],
+[
+38.271,
+15.703
+],
+[
+37.883,
+15.548
+],
+[
+37.59,
+15.11
+],
+[
+37.081,
+15.184
+],
+[
+36.66,
+15.109
+]
+]
+},
+{
+"n": "Red troncal de microondas de Groenlandia Meridional",
+"o": "Tusass",
+"cc": "GL",
+"l": [
+[
+-46.051,
+60.913
+],
+[
+-45.517,
+61.155
+],
+[
+-45.424,
+61.156
+],
+[
+-45.569,
+60.463
+],
+[
+-45.241,
+60.142
+]
+]
+},
+{
+"n": "Red troncal de microondas de Disko y Groenlandia Noroccidental",
+"o": "Tusass",
+"cc": "GL",
+"l": [
+[
+-51.192,
+68.819
+],
+[
+-51.099,
+69.22
+],
+[
+-51.943,
+70.011
+],
+[
+-52.125,
+70.674
+],
+[
+-54.025,
+71.739
+],
+[
+-56.149,
+72.784
+]
+]
+},
+{
+"n": "Troncal costera de microondas Massawa-Assab",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+39.47,
+15.61
+],
+[
+39.622,
+15.263
+],
+[
+40.959,
+14.69
+],
+[
+41.694,
+13.931
+],
+[
+42.74,
+13.01
+]
+]
+},
+{
+"n": "Troncal suroriental de microondas Asmara-Adi Keyh",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+38.93,
+15.34
+],
+[
+39.047,
+15.07
+],
+[
+39.189,
+15.053
+],
+[
+39.377,
+14.844
+]
+]
+},
+{
+"n": "Troncal Costera del Mar Rojo (Asmara - Massawa - Assab)",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+38.93,
+15.34
+],
+[
+39.064,
+15.334
+],
+[
+39.091,
+15.445
+],
+[
+39.47,
+15.61
+]
+]
+},
+{
+"n": "Ramal septentrional de microondas Keren-Nakfa",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+38.45,
+15.78
+],
+[
+38.69,
+16.19
+],
+[
+38.477,
+16.666
+]
+]
+},
+{
+"n": "Troncal de microondas del Norte (Disko - Upernavik)",
+"o": "Tusass A/S (antes TELE-POST / TELE Greenland)",
+"cc": "GL",
+"l": [
+[
+-56.149,
+72.784
+],
+[
+-56.656,
+73.682
+],
+[
+-57.22,
+74.579
+]
+]
+},
+{
+"n": "Cadena de Microondas de respaldo Tongatapu - Ha'apai - Vava'u",
+"o": "Digicel Tonga / Tonga Communications Corporation (TCC)",
+"cc": "TO",
+"l": [
+[
+-175.2,
+-21.14
+],
+[
+-174.957,
+-21.363
+],
+[
+-174.354,
+-19.815
+]
+]
+},
+{
+"n": "Red troncal de microondas de Groenlandia Meridional",
+"o": "Tusass",
+"cc": "GL",
+"l": [
+[
+-46.036,
+60.718
+],
+[
+-46.051,
+60.913
+]
+]
+},
+{
+"n": "Ramal de microondas de la isla Disko",
+"o": "Tusass",
+"cc": "GL",
+"l": [
+[
+-52.864,
+68.709
+],
+[
+-52.319,
+67.771
+],
+[
+-51.816,
+66.832
+],
+[
+-51.35,
+65.892
+],
+[
+-50.917,
+64.95
+],
+[
+-50.514,
+64.006
+],
+[
+-50.136,
+63.062
+],
+[
+-49.783,
+62.117
+]
+]
+},
+{
+"n": "Troncal meridional de microondas Asmara-Adi Quala",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+38.82,
+14.89
+],
+[
+38.834,
+14.634
+]
+]
+},
+{
+"n": "Troncal de microondas Stanley-Mount Pleasant",
+"o": "Sure South Atlantic",
+"cc": "FK",
+"l": [
+[
+-57.86,
+-51.69
+],
+[
+-58.45,
+-51.82
+]
+]
+},
+{
+"n": "Troncal regional de microondas Tarawa-Abaiang-Marakei",
+"o": "Vodafone Kiribati (ATHKL)",
+"cc": "KI",
+"l": [
+[
+172.955,
+1.609
+],
+[
+173.263,
+2.052
+]
+]
+},
+{
+"n": "Radioenlace troncal meridional Peleliu-Angaur",
+"o": "Palau National Communications Corporation (PNCC)",
+"cc": "PW",
+"l": [
+[
+134.256,
+7.042
+],
+[
+134.132,
+6.903
+]
+]
+},
+{
+"n": "McKay Brothers — Troncal Aurora-Mahwah",
+"o": "McKay Brothers / Jefferson Microwave LLC",
+"cc": "US",
+"l": [
+[
+-88.239,
+41.795
+],
+[
+-86.949,
+41.803
+],
+[
+-85.659,
+41.796
+],
+[
+-84.369,
+41.774
+],
+[
+-83.08,
+41.739
+],
+[
+-81.794,
+41.689
+],
+[
+-80.509,
+41.624
+],
+[
+-79.227,
+41.546
+],
+[
+-77.949,
+41.453
+],
+[
+-76.675,
+41.346
+],
+[
+-75.405,
+41.225
+],
+[
+-74.14,
+41.09
+]
+],
+"dato": "3,986 ms de ida Aurora-Mahwah, publicados por Quincy Data el 12 de mayo de 2016."
+},
+{
+"n": "McKay Brothers International — Troncal Slough-Fráncfort",
+"o": "McKay Brothers International / Quincy Data",
+"cc": "GB",
+"l": [
+[
+-0.6,
+51.51
+],
+[
+0.983,
+51.33
+],
+[
+2.553,
+51.129
+],
+[
+4.109,
+50.907
+],
+[
+5.65,
+50.665
+],
+[
+7.173,
+50.402
+],
+[
+8.68,
+50.12
+]
+],
+"dato": "4,64 ms de ida y vuelta entre Slough-LD4 y Frankfurt-FR2, publicados por McKay Brothers el 10 de marzo de 2015 (2,320 ms de ida previstos para datos Eurex)."
+},
+{
+"n": "",
+"o": "",
+"cc": "GL",
+"l": [
+[
+-45.241,
+60.142
+],
+[
+-46.036,
+60.718
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "KI",
+"l": [
+[
+172.921,
+1.358
+],
+[
+173.04,
+0.938
+]
+]
+}
+]
+}

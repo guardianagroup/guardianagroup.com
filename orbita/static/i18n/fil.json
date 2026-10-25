@@ -829,7 +829,14 @@
   "Cable que llega": "Kable na dumarating dito",
   "La plataforma": "Ang platform",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Dito nagtatapos ang isang submarine cable na fiber optic. Ganito nakakonekta sa lupa ang mga platform sa North Sea: dumaraan sa kable ang datos ng produksyon, ang komunikasyon at ang internet ng mga nagtatrabaho sa platform.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Mga base sa Arctic at Antarctica, mga ground station ng satellite at mga oil platform kung saan nagtatapos ang isang kable."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Mga base sa Arctic at Antarctica, mga ground station ng satellite at mga oil platform kung saan nagtatapos ang isang kable.",
+  "Radioenlaces": "Mga radio link",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Mga kadena ng microwave mula tore hanggang tore: kung saan walang fiber sa pagitan ng mga bayan, at ang mabibilis na ruta ng stock market.",
+  "Radioenlace de microondas": "Microwave radio link",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Dito, dumaraan sa hangin ang internet: mula tore hanggang tore, sa microwave, laging magkatanaw. Ginagamit ito kung saan hindi sulit o hindi posible ang fiber, gaya ng yelo, disyerto o dagat sa pagitan ng mga isla. Hindi pampubliko ang lokasyon ng bawat tore: pinagdudugtong ng linya ang mga bayang binabanggit ng mga pinagmulan.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "mga microwave radio link, may tuldok, kung saan walang fiber",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Dito dumaraan ang mga order ng stock market sa pagitan ng dalawang merkado. Sa hangin, mas maagang dumarating ang signal kaysa sa fiber, dahil mas mabagal ang liwanag sa loob ng salamin, at sa stock market mahalaga ang bawat milyong bahagi ng segundo. Pinagdudugtong ng linya ang dalawang dulo: hindi iginuhit ang mga tore.",
+  "Latencia publicada": "Inilathalang latency"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

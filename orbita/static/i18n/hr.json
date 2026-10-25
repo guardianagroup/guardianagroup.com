@@ -829,7 +829,14 @@
   "Cable que llega": "Kabel koji ovamo stiže",
   "La plataforma": "Platforma",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Ovdje završava podmorski kabel od optičkih vlakana. Tako su platforme u Sjevernome moru povezane s kopnom: kabelom prolaze podaci o proizvodnji, komunikacije i internet za one koji rade na platformi.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Baze na Arktiku i Antarktici, zemaljske postaje za satelite i naftne platforme na kojima završava kabel."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Baze na Arktiku i Antarktici, zemaljske postaje za satelite i naftne platforme na kojima završava kabel.",
+  "Radioenlaces": "Radiorelejne veze",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Mikrovalni lanci od tornja do tornja: gdje između naselja nema optike, i brze rute burze.",
+  "Radioenlace de microondas": "Mikrovalna radiorelejna veza",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Ovdje internet putuje zrakom: od tornja do tornja, mikrovalovima, uvijek u liniji vidljivosti. Koristi se gdje se optika ne isplati ili nije moguća, kao na ledu, u pustinji ili na moru između otoka. Položaj svakog tornja nije javan: crta spaja naselja koja navode izvori.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "mikrovalne radiorelejne veze, točkasto, gdje nema optike",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Ovuda putuju burzovni nalozi između dvaju tržišta. Zrakom signal stiže prije nego optikom, jer se svjetlost u staklu kreće sporije, a na burzi se broji svaki milijunti dio sekunde. Crta spaja dva kraja: tornjevi nisu ucrtani.",
+  "Latencia publicada": "Objavljena latencija"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

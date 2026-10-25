@@ -829,7 +829,14 @@
   "Cable que llega": "Kabel, který sem vede",
   "La plataforma": "Plošina",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Zde končí podmořský kabel z optických vláken. Takto jsou plošiny v Severním moři spojeny s pevninou: kabelem procházejí data o těžbě, komunikace i internet pro ty, kdo na plošině pracují.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Základny v Arktidě a Antarktidě, pozemní stanice družic a ropné plošiny, kde končí kabel."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Základny v Arktidě a Antarktidě, pozemní stanice družic a ropné plošiny, kde končí kabel.",
+  "Radioenlaces": "Radioreléové spoje",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Mikrovlnné řetězce od stožáru ke stožáru: tam, kde mezi obcemi nevede optické vlákno, a rychlé trasy burzy.",
+  "Radioenlace de microondas": "Mikrovlnný radioreléový spoj",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Tady internet putuje vzduchem: od stožáru ke stožáru, mikrovlnami, vždy na přímou viditelnost. Používá se tam, kde se optika nevyplatí nebo není možná, například na ledu, v poušti nebo nad mořem mezi ostrovy. Poloha jednotlivých stožárů není veřejná: čára spojuje obce, které uvádějí zdroje.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "mikrovlnné radioreléové spoje, tečkovaně, kde není optika",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Tudy putují burzovní příkazy mezi dvěma trhy. Vzduchem dorazí signál dřív než optikou, protože světlo se ve skle šíří pomaleji, a na burze se počítá každá miliontina sekundy. Čára spojuje oba konce: stožáry nejsou zakresleny.",
+  "Latencia publicada": "Zveřejněná latence"
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

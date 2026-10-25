@@ -829,7 +829,14 @@
   "Cable que llega": "Cabo que chega",
   "La plataforma": "A plataforma",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Aqui termina um cabo submarino de fibra ótica. É assim que as plataformas do mar do Norte se ligam a terra: pelo cabo passam os dados da produção, as comunicações e a internet de quem trabalha a bordo.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Bases do Ártico e da Antártida, estações terrestres de satélites e plataformas petrolíferas onde termina um cabo."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Bases do Ártico e da Antártida, estações terrestres de satélites e plataformas petrolíferas onde termina um cabo.",
+  "Radioenlaces": "Feixes hertzianos",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Cadeias de micro-ondas de torre em torre: onde não há fibra entre as localidades, e as rotas rápidas da bolsa.",
+  "Radioenlace de microondas": "Feixe hertziano de micro-ondas",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Aqui a internet viaja pelo ar: de torre em torre, por micro-ondas, sempre em linha de vista. Usa-se onde instalar fibra não compensa ou não é possível, como no gelo, no deserto ou no mar entre ilhas. A posição de cada torre não é pública: a linha une as localidades que as fontes nomeiam.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "feixes hertzianos de micro-ondas, pontilhados, onde não há fibra",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Por aqui viajam as ordens de bolsa entre dois mercados. Pelo ar o sinal chega antes do que pela fibra, porque a luz anda mais devagar dentro do vidro, e na bolsa cada milionésimo de segundo conta. A linha une os dois extremos: as torres não são desenhadas.",
+  "Latencia publicada": "Latência publicada"
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

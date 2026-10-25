@@ -829,7 +829,14 @@
   "Cable que llega": "Câble qui arrive",
   "La plataforma": "La plateforme",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Ici se termine un câble sous-marin à fibre optique. C’est ainsi que les plateformes de la mer du Nord sont reliées à la terre : les données de production, les communications et l’internet de ceux qui travaillent à bord passent par ce câble.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Bases de l’Arctique et de l’Antarctique, stations terrestres de satellites et plateformes pétrolières où se termine un câble."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Bases de l’Arctique et de l’Antarctique, stations terrestres de satellites et plateformes pétrolières où se termine un câble.",
+  "Radioenlaces": "Faisceaux hertziens",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Chaînes de micro-ondes de pylône en pylône : là où aucune fibre ne relie les localités, et les routes rapides de la Bourse.",
+  "Radioenlace de microondas": "Faisceau hertzien",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Ici, internet passe par les airs : de pylône en pylône, par micro-ondes, toujours en visibilité directe. On l’utilise là où poser de la fibre n’est pas rentable ou pas possible, comme sur la glace, dans le désert ou en mer entre des îles. La position de chaque pylône n’est pas publique : la ligne relie les localités que citent les sources.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "faisceaux hertziens, en pointillés, là où il n’y a pas de fibre",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Ici circulent les ordres de Bourse entre deux marchés. Par les airs, le signal arrive plus tôt que par la fibre, car la lumière va moins vite dans le verre, et en Bourse chaque millionième de seconde compte. La ligne relie les deux extrémités : les pylônes ne sont pas dessinés.",
+  "Latencia publicada": "Latence publiée"
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

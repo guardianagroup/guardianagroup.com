@@ -829,7 +829,14 @@
   "Cable que llega": "이곳에 닿는 케이블",
   "La plataforma": "플랫폼",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "광섬유 해저 케이블이 여기서 끝납니다. 북해의 플랫폼은 이렇게 육지와 연결됩니다. 생산 데이터, 통신, 그리고 플랫폼에서 일하는 사람들의 인터넷이 이 케이블을 통해 오갑니다.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "북극과 남극의 기지, 위성 지상국, 그리고 케이블이 끝나는 석유 플랫폼."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "북극과 남극의 기지, 위성 지상국, 그리고 케이블이 끝나는 석유 플랫폼.",
+  "Radioenlaces": "무선 중계",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "철탑에서 철탑으로 이어지는 마이크로파 중계망: 마을 사이에 광섬유가 없는 곳과 증권 거래의 고속 경로.",
+  "Radioenlace de microondas": "마이크로파 무선 중계",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "이곳에서는 인터넷이 공중으로 전달됩니다. 철탑에서 철탑으로, 마이크로파로, 항상 가시거리 안에서. 얼음 위나 사막, 섬 사이 바다처럼 광섬유를 까는 것이 수지가 맞지 않거나 불가능한 곳에서 쓰입니다. 각 철탑의 위치는 공개되지 않으며, 선은 자료에 나오는 마을을 이은 것입니다.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "마이크로파 무선 중계(점선, 광섬유가 없는 곳)",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "이곳에서는 두 시장 사이에 증권 거래 주문이 오갑니다. 빛은 유리 안에서 더 느리게 움직이기 때문에 공중을 지나는 신호가 광섬유보다 먼저 도착하고, 증권 거래에서는 100만분의 1초가 중요합니다. 선은 양 끝을 이은 것이며 철탑은 그리지 않았습니다.",
+  "Latencia publicada": "공개된 지연 시간"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

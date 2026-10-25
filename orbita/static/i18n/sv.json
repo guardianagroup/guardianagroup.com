@@ -829,7 +829,14 @@
   "Cable que llega": "Kabel som når hit",
   "La plataforma": "Plattformen",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Här slutar en undervattenskabel av optisk fiber. Så är plattformarna i Nordsjön anslutna till land: produktionsdata, kommunikation och internet för dem som arbetar ombord går genom kabeln.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Baser i Arktis och Antarktis, markstationer för satelliter och oljeplattformar där en kabel slutar."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Baser i Arktis och Antarktis, markstationer för satelliter och oljeplattformar där en kabel slutar.",
+  "Radioenlaces": "Radiolänkar",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Mikrovågskedjor från mast till mast: där ingen fiber går mellan orterna, och börsens snabba rutter.",
+  "Radioenlace de microondas": "Mikrovågslänk",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Här färdas internet genom luften: från mast till mast, med mikrovågor, alltid med fri sikt. Det används där fiber inte lönar sig eller inte går att dra, som på is, i öken eller över havet mellan öar. Varje masts läge är inte offentligt: linjen förbinder de orter som källorna nämner.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "mikrovågslänkar, prickade, där det inte finns fiber",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Här färdas börsorder mellan två marknader. Genom luften kommer signalen fram tidigare än genom fiber, eftersom ljuset går långsammare i glas, och på börsen räknas varje miljondels sekund. Linjen förbinder de två ändarna: masterna ritas inte ut.",
+  "Latencia publicada": "Publicerad latens"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

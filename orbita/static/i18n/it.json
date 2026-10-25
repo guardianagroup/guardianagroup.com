@@ -829,7 +829,14 @@
   "Cable que llega": "Cavo che arriva",
   "La plataforma": "La piattaforma",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Qui termina un cavo sottomarino in fibra ottica. È così che le piattaforme del Mare del Nord sono collegate alla terraferma: dal cavo passano i dati della produzione, le comunicazioni e l’internet di chi lavora a bordo.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Basi dell’Artico e dell’Antartide, stazioni di terra per i satelliti e piattaforme petrolifere dove termina un cavo."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Basi dell’Artico e dell’Antartide, stazioni di terra per i satelliti e piattaforme petrolifere dove termina un cavo.",
+  "Radioenlaces": "Ponti radio",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Catene di microonde da torre a torre: dove nessuna fibra collega i centri abitati, e le rotte veloci della Borsa.",
+  "Radioenlace de microondas": "Ponte radio a microonde",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Qui internet viaggia nell’aria: da torre a torre, a microonde, sempre in linea di vista. Si usa dove posare la fibra non conviene o non è possibile, come sul ghiaccio, nel deserto o sul mare tra le isole. La posizione di ogni torre non è pubblica: la linea unisce i centri che citano le fonti.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "ponti radio a microonde, punteggiati, dove non c’è fibra",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Qui viaggiano gli ordini di Borsa tra due mercati. Nell’aria il segnale arriva prima che nella fibra, perché la luce va più piano dentro il vetro, e in Borsa conta ogni milionesimo di secondo. La linea unisce i due estremi: le torri non sono disegnate.",
+  "Latencia publicada": "Latenza pubblicata"
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

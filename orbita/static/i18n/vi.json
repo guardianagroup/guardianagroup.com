@@ -829,7 +829,14 @@
   "Cable que llega": "Cáp đến nơi này",
   "La plataforma": "Giàn khoan",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Một tuyến cáp quang biển kết thúc tại đây. Các giàn khoan ở Biển Bắc nối vào đất liền theo cách này: dữ liệu sản xuất, liên lạc và internet của những người làm việc trên giàn đều đi qua tuyến cáp.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Các trạm ở Bắc Cực và Nam Cực, trạm mặt đất của vệ tinh và các giàn khoan dầu nơi một tuyến cáp kết thúc."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Các trạm ở Bắc Cực và Nam Cực, trạm mặt đất của vệ tinh và các giàn khoan dầu nơi một tuyến cáp kết thúc.",
+  "Radioenlaces": "Vi ba chuyển tiếp",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Chuỗi vi ba từ trạm này sang trạm khác: ở nơi không có cáp quang giữa các thị trấn, và các tuyến nhanh của sàn chứng khoán.",
+  "Radioenlace de microondas": "Tuyến vi ba",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Ở đây internet đi qua không khí: từ trạm này sang trạm khác, bằng vi ba, luôn trong tầm nhìn thẳng. Nó được dùng ở nơi kéo cáp quang không có lợi hoặc không thể, như trên băng, sa mạc hay biển giữa các đảo. Vị trí từng trạm không được công bố: đường kẻ nối các thị trấn mà nguồn nêu tên.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "tuyến vi ba, nét chấm, ở nơi không có cáp quang",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Tại đây, lệnh chứng khoán đi giữa hai thị trường. Qua không khí, tín hiệu đến sớm hơn qua cáp quang, vì ánh sáng đi chậm hơn trong thủy tinh, và trên sàn chứng khoán từng phần triệu giây đều quan trọng. Đường kẻ nối hai đầu: không vẽ các trạm.",
+  "Latencia publicada": "Độ trễ đã công bố"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

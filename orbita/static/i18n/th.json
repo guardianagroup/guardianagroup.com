@@ -829,7 +829,14 @@
   "Cable que llega": "สายเคเบิลที่มาถึงที่นี่",
   "La plataforma": "แท่น",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "สายเคเบิลใยแก้วนำแสงใต้ทะเลสิ้นสุดที่นี่ แท่นในทะเลเหนือเชื่อมต่อกับฝั่งด้วยวิธีนี้ ข้อมูลการผลิต การสื่อสาร และอินเทอร์เน็ตของผู้ที่ทำงานบนแท่นล้วนผ่านสายเคเบิลนี้",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "ฐานในอาร์กติกและแอนตาร์กติกา สถานีภาคพื้นดินของดาวเทียม และแท่นขุดเจาะน้ำมันที่มีสายเคเบิลสิ้นสุด"
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "ฐานในอาร์กติกและแอนตาร์กติกา สถานีภาคพื้นดินของดาวเทียม และแท่นขุดเจาะน้ำมันที่มีสายเคเบิลสิ้นสุด",
+  "Radioenlaces": "ลิงก์วิทยุ",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "สายโซ่ไมโครเวฟจากเสาสู่เสา: ในที่ที่ไม่มีไฟเบอร์เชื่อมระหว่างเมือง และเส้นทางความเร็วสูงของตลาดหลักทรัพย์",
+  "Radioenlace de microondas": "ลิงก์วิทยุไมโครเวฟ",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "ที่นี่อินเทอร์เน็ตเดินทางผ่านอากาศ จากเสาสู่เสาด้วยไมโครเวฟ และต้องมองเห็นกันเสมอ ใช้ในที่ที่วางไฟเบอร์ไม่คุ้มหรือทำไม่ได้ เช่น บนน้ำแข็ง ในทะเลทราย หรือบนทะเลระหว่างเกาะ ตำแหน่งของแต่ละเสาไม่ได้เปิดเผย เส้นนี้เชื่อมเมืองที่แหล่งข้อมูลระบุ",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "ลิงก์วิทยุไมโครเวฟ เส้นประจุด ในที่ที่ไม่มีไฟเบอร์",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "ที่นี่คำสั่งซื้อขายหลักทรัพย์เดินทางระหว่างสองตลาด สัญญาณผ่านอากาศไปถึงเร็วกว่าผ่านไฟเบอร์ เพราะแสงเดินทางช้าลงในแก้ว และในตลาดหลักทรัพย์ทุกหนึ่งในล้านวินาทีมีความหมาย เส้นนี้เชื่อมปลายทั้งสอง ไม่ได้วาดเสา",
+  "Latencia publicada": "ค่าหน่วงเวลาที่เผยแพร่"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

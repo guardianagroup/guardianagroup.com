@@ -829,7 +829,14 @@
   "Cable que llega": "Кабел, който стига дотук",
   "La plataforma": "Платформата",
   "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Тук завършва подводен оптичен кабел. Така платформите в Северно море са свързани със сушата: по кабела минават данните за добива, връзката и интернетът на работещите на борда.",
-  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Бази в Арктика и Антарктида, наземни станции за спътници и нефтени платформи, където завършва кабел."
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Бази в Арктика и Антарктида, наземни станции за спътници и нефтени платформи, където завършва кабел.",
+  "Radioenlaces": "Радиорелейни връзки",
+  "Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.": "Микровълнови вериги от кула до кула: където между селищата няма оптично влакно, и бързите маршрути на борсата.",
+  "Radioenlace de microondas": "Микровълнова радиорелейна връзка",
+  "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Тук интернетът минава по въздуха: от кула до кула, с микровълни, винаги в пряка видимост. Използва се там, където полагането на оптика не си струва или е невъзможно, като на лед, в пустиня или над морето между острови. Местоположението на всяка кула не е публично: линията свързва селищата, които назовават източниците.",
+  "radioenlaces de microondas, punteados, donde no hay fibra": "микровълнови радиорелейни връзки, пунктирани, където няма оптика",
+  "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Тук между два пазара пътуват борсови поръчки. По въздуха сигналът пристига по-бързо, отколкото по оптика, защото светлината се движи по-бавно в стъклото, а на борсата всяка милионна от секундата има значение. Линията свързва двата края: кулите не са начертани.",
+  "Latencia publicada": "Публикувано закъснение"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",
