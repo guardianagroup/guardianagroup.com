@@ -836,7 +836,9 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Qui internet viaggia nell’aria: da torre a torre, a microonde, sempre in linea di vista. Si usa dove posare la fibra non conviene o non è possibile, come sul ghiaccio, nel deserto o sul mare tra le isole. La posizione di ogni torre non è pubblica: la linea unisce i centri che citano le fonti.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "ponti radio a microonde, punteggiati, dove non c’è fibra",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Qui viaggiano gli ordini di Borsa tra due mercati. Nell’aria il segnale arriva prima che nella fibra, perché la luce va più piano dentro il vetro, e in Borsa conta ogni milionesimo di secondo. La linea unisce i due estremi: le torri non sono disegnate.",
-  "Latencia publicada": "Latenza pubblicata"
+  "Latencia publicada": "Latenza pubblicata",
+  "Polo Sur": "Polo sud",
+  "Gran Muralla": "Stazione grande muraglia"
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

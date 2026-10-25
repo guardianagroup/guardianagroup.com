@@ -836,7 +836,9 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "在這裡，網際網路透過空中傳輸：從一座鐵塔到另一座鐵塔，藉由微波，始終保持視距。它用於鋪設光纖不划算或不可能的地方，例如冰原、沙漠或島嶼之間的海面。每座鐵塔的位置並未公開：線條連接的是資料中提到的城鎮。",
   "radioenlaces de microondas, punteados, donde no hay fibra": "微波中繼鏈路，以虛點表示，用於沒有光纖的地方",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "這裡傳遞的是兩個市場之間的證券交易指令。訊號在空氣中比在光纖中更快抵達，因為光在玻璃中傳播得更慢，而在證券交易中，每一微秒都很重要。線條連接兩端，不畫出鐵塔。",
-  "Latencia publicada": "公布的延遲"
+  "Latencia publicada": "公布的延遲",
+  "Polo Sur": "南極點",
+  "Gran Muralla": "中國南極長城站"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

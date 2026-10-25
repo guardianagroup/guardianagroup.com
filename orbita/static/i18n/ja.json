@@ -836,7 +836,9 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "ここではインターネットが空中を伝わります。鉄塔から鉄塔へ、マイクロ波で、常に見通しのきく範囲で。氷原や砂漠、島と島の間の海など、光ファイバーを敷くのが割に合わない、または不可能な場所で使われます。各鉄塔の位置は公開されていません。線は資料に名前のある町を結んだものです。",
   "radioenlaces de microondas, punteados, donde no hay fibra": "マイクロ波無線中継（点線、光ファイバーのない場所）",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "ここでは2つの市場の間で証券取引の注文が行き交います。光はガラスの中ではより遅く進むため、空中を通る信号は光ファイバーより早く届きます。取引では100万分の1秒が重要です。線は両端を結んだもので、鉄塔は描いていません。",
-  "Latencia publicada": "公表された遅延"
+  "Latencia publicada": "公表された遅延",
+  "Polo Sur": "南極点",
+  "Gran Muralla": "長城基地"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

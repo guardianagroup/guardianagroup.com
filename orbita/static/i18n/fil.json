@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Dito, dumaraan sa hangin ang internet: mula tore hanggang tore, sa microwave, laging magkatanaw. Ginagamit ito kung saan hindi sulit o hindi posible ang fiber, gaya ng yelo, disyerto o dagat sa pagitan ng mga isla. Hindi pampubliko ang lokasyon ng bawat tore: pinagdudugtong ng linya ang mga bayang binabanggit ng mga pinagmulan.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "mga microwave radio link, may tuldok, kung saan walang fiber",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Dito dumaraan ang mga order ng stock market sa pagitan ng dalawang merkado. Sa hangin, mas maagang dumarating ang signal kaysa sa fiber, dahil mas mabagal ang liwanag sa loob ng salamin, at sa stock market mahalaga ang bawat milyong bahagi ng segundo. Pinagdudugtong ng linya ang dalawang dulo: hindi iginuhit ang mga tore.",
-  "Latencia publicada": "Inilathalang latency"
+  "Latencia publicada": "Inilathalang latency",
+  "Polo Sur": "Polong Timog"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

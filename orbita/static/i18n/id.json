@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Di sini internet berjalan lewat udara: dari menara ke menara, dengan gelombang mikro, selalu dalam jarak pandang. Ini dipakai di tempat yang tidak menguntungkan atau tidak mungkin dipasangi serat optik, seperti es, gurun, atau laut di antara pulau. Posisi tiap menara tidak dipublikasikan: garisnya menghubungkan kota yang disebut sumber.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "tautan radio gelombang mikro, bertitik, di tempat tanpa serat optik",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Di sini order bursa melintas di antara dua pasar. Lewat udara sinyal tiba lebih cepat daripada lewat serat optik, karena cahaya bergerak lebih lambat di dalam kaca, dan di bursa setiap sepersejuta detik berarti. Garisnya menghubungkan kedua ujung: menaranya tidak digambar.",
-  "Latencia publicada": "Latensi yang dipublikasikan"
+  "Latencia publicada": "Latensi yang dipublikasikan",
+  "Polo Sur": "Kutub Selatan"
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

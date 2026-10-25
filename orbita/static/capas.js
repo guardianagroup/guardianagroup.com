@@ -559,7 +559,7 @@
       cx.stroke();
       cx.fillStyle = `rgba(${BLANCO},.95)`; cx.beginPath(); cx.arc(x, y, 1.4, 0, 7); cx.fill();
       if (z >= (plat ? 8 : 1.8) && q.n) {
-        const txt = q.n.split(' (')[0].split(' / ')[0], w = Math.ceil(cx.measureText(txt).width), lx = Math.round(x + 8), ly = Math.round(y);
+        const txt = T(q.n.split(' (')[0].split(' / ')[0]), w = Math.ceil(cx.measureText(txt).width), lx = Math.round(x + 8), ly = Math.round(y); // «Polo Sur», «Gran Muralla» in the page's language
         // 25 Oct 2026 (revisión punto por punto: «Fairbanks» over another name): label centre against label centre, and never on a country's name
         const cxl = x + 8 + w / 2, enPais = PAIS_CAJAS.some((b) => x + 4 < b[0] + b[2] && x + 12 + w > b[0] && y - 8 < b[1] + b[3] && y + 8 > b[1]);
         if (!enPais && !ocupado.some((o) => Math.abs(cxl - o[0]) < (w + o[2]) / 2 + 10 && Math.abs(y - o[1]) < 14)) { ocupado.push([cxl, y, w]); EST_CAJAS.push([x + 4, y - 8, w + 8, 16, iq]); conHalo(cx, txt, lx, ly, 0.9); }
@@ -1500,6 +1500,8 @@
     for (let i = 0; i < EST.length; i++) { if (z < 3 && EST[i].x && EST[i].x.clase === 'plataforma') continue; const v = p.aVista(EST[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
     return mejor;
   }
+  // the station's own name in the page's language where it is a common noun («Polo Sur (Amundsen-Scott)» → «South Pole (Amundsen-Scott)»)
+  const nombreEstacion = (n) => { const k = n.indexOf(' ('); return k > 0 ? T(n.slice(0, k)) + n.slice(k) : T(n); };
   function fichaEstacion(i, x, y) {
     const q = EST[i], X = q.x || {}, filas = [];
     // an oil or gas platform where a submarine cable ends (owner, 24 Oct 2026, 21:08–21:09: «que aparezca el nombre de la
@@ -1519,7 +1521,7 @@
     if (X.nota) filas.push([T('Datos'), X.nota]);
     if (plat && X.fuente) filas.push([T('Fuente'), X.fuente.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')]);
     if (plat) {
-      abreModelo(modelo(tipo, q.n, filas, T('Datos verificados'), {
+      abreModelo(modelo(tipo, nombreEstacion(q.n), filas, T('Datos verificados'), {
         foto: fotoDe('estacion', q.n),
         resumen: [T('Tipo'), T('Operador'), T('Cable que llega')],
         para: T('Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.'),
@@ -1527,7 +1529,7 @@
       }), x, y);
       return;
     }
-    abreModelo(modelo(tipo, q.n || T('Estación'), filas, T('Datos verificados'), {
+    abreModelo(modelo(tipo, q.n ? nombreEstacion(q.n) : T('Estación'), filas, T('Datos verificados'), {
       foto: fotoDe('estacion', q.n),
       resumen: [T('Tipo'), T('Operador'), T('Cómo se conecta'), T('Desde')],
       para: base ? T('Desde aquí no hay cable: todo lo que entra y sale va por satélite, con la capacidad y los retrasos que eso impone. Es el internet más caro y escaso del planeta.') : T('Por aquí bajan a tierra las imágenes y medidas de los satélites que luego ves en los mapas del tiempo, en la navegación y en las noticias.'),

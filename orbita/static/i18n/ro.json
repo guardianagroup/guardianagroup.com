@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Aici internetul călătorește prin aer: din turn în turn, prin microunde, mereu în linie de vedere. Se folosește acolo unde fibra nu merită sau nu e posibilă, cum ar fi pe gheață, în deșert sau pe mare între insule. Poziția fiecărui turn nu este publică: linia unește localitățile pe care le numesc sursele.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "radiolegături prin microunde, punctate, acolo unde nu există fibră",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Pe aici circulă ordinele de bursă între două piețe. Prin aer semnalul ajunge mai repede decât prin fibră, pentru că lumina merge mai încet în sticlă, iar la bursă contează fiecare milionime de secundă. Linia unește cele două capete: turnurile nu sunt desenate.",
-  "Latencia publicada": "Latența publicată"
+  "Latencia publicada": "Latența publicată",
+  "Polo Sur": "Polul Sud"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "இங்கே இணையம் காற்றின் வழியே செல்கிறது: கோபுரத்திலிருந்து கோபுரத்திற்கு, நுண்ணலையால், எப்போதும் நேர்ப்பார்வையில். ஃபைபர் போடுவது லாபமில்லாத அல்லது இயலாத இடங்களில், பனி, பாலைவனம், தீவுகளுக்கு இடையிலான கடல் போன்றவற்றில் இது பயன்படுகிறது. ஒவ்வொரு கோபுரத்தின் இடமும் பொதுவில் இல்லை: கோடு, ஆதாரங்கள் குறிப்பிடும் ஊர்களை இணைக்கிறது.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "நுண்ணலை வானொலி இணைப்புகள், புள்ளிக்கோடாக, ஃபைபர் இல்லாத இடங்களில்",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "இங்கே இரண்டு சந்தைகளுக்கு இடையே பங்குச் சந்தை உத்தரவுகள் செல்கின்றன. கண்ணாடிக்குள் ஒளி மெதுவாகச் செல்வதால், காற்றின் வழியே சமிக்ஞை ஃபைபரை விட முன்னதாகச் சேர்கிறது; பங்குச் சந்தையில் ஒவ்வொரு மில்லியனில் ஒரு வினாடியும் முக்கியம். கோடு இரு முனைகளையும் இணைக்கிறது: கோபுரங்கள் வரையப்படவில்லை.",
-  "Latencia publicada": "வெளியிடப்பட்ட தாமதம்"
+  "Latencia publicada": "வெளியிடப்பட்ட தாமதம்",
+  "Polo Sur": "தென் துருவம்"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

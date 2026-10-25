@@ -836,7 +836,9 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Здесь интернет передаётся по воздуху: от вышки к вышке, микроволнами, всегда в прямой видимости. Его используют там, где прокладывать оптоволокно невыгодно или невозможно: на льду, в пустыне или над морем между островами. Расположение каждой вышки не публикуется: линия соединяет населённые пункты, названные в источниках.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "микроволновые радиорелейные линии, пунктиром, где нет оптоволокна",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Здесь между двумя рынками идут биржевые заявки. По воздуху сигнал приходит раньше, чем по оптоволокну, потому что свет в стекле движется медленнее, а на бирже важна каждая миллионная доля секунды. Линия соединяет два конца: вышки не показаны.",
-  "Latencia publicada": "Опубликованная задержка"
+  "Latencia publicada": "Опубликованная задержка",
+  "Polo Sur": "Южный полюс",
+  "Gran Muralla": "Чанчэн"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

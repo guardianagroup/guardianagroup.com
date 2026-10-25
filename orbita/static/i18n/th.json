@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "ที่นี่อินเทอร์เน็ตเดินทางผ่านอากาศ จากเสาสู่เสาด้วยไมโครเวฟ และต้องมองเห็นกันเสมอ ใช้ในที่ที่วางไฟเบอร์ไม่คุ้มหรือทำไม่ได้ เช่น บนน้ำแข็ง ในทะเลทราย หรือบนทะเลระหว่างเกาะ ตำแหน่งของแต่ละเสาไม่ได้เปิดเผย เส้นนี้เชื่อมเมืองที่แหล่งข้อมูลระบุ",
   "radioenlaces de microondas, punteados, donde no hay fibra": "ลิงก์วิทยุไมโครเวฟ เส้นประจุด ในที่ที่ไม่มีไฟเบอร์",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "ที่นี่คำสั่งซื้อขายหลักทรัพย์เดินทางระหว่างสองตลาด สัญญาณผ่านอากาศไปถึงเร็วกว่าผ่านไฟเบอร์ เพราะแสงเดินทางช้าลงในแก้ว และในตลาดหลักทรัพย์ทุกหนึ่งในล้านวินาทีมีความหมาย เส้นนี้เชื่อมปลายทั้งสอง ไม่ได้วาดเสา",
-  "Latencia publicada": "ค่าหน่วงเวลาที่เผยแพร่"
+  "Latencia publicada": "ค่าหน่วงเวลาที่เผยแพร่",
+  "Polo Sur": "ขั้วโลกใต้"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",
