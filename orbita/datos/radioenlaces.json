@@ -8,6 +8,59 @@
 },
 "lineas": [
 {
+"n": "Red troncal de microondas de Groenlandia Meridional",
+"o": "Tusass",
+"cc": "GL",
+"l": [
+[
+-46.051,
+60.913
+],
+[
+-45.241,
+60.142
+]
+]
+},
+{
+"n": "Red troncal de microondas de Groenlandia Meridional",
+"o": "Tusass",
+"cc": "GL",
+"l": [
+[
+-46.051,
+60.913
+],
+[
+-46.036,
+60.718
+]
+]
+},
+{
+"n": "Red troncal de microondas de Disko y Groenlandia Noroccidental",
+"o": "Tusass",
+"cc": "GL",
+"l": [
+[
+-51.192,
+68.819
+],
+[
+-51.099,
+69.22
+],
+[
+-52.125,
+70.674
+],
+[
+-56.149,
+72.784
+]
+]
+},
+{
 "n": "Troncal occidental de microondas Asmara-Teseney",
 "o": "EriTel",
 "cc": "ER",
@@ -21,13 +74,108 @@
 15.78
 ],
 [
+37.883,
+15.548
+],
+[
 37.59,
 15.11
 ]
 ]
 },
 {
-"n": "Troncal Costera del Mar Rojo (Asmara - Massawa - Assab)",
+"n": "Troncal suroriental de microondas Asmara-Adi Keyh",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+38.93,
+15.34
+],
+[
+39.047,
+15.07
+],
+[
+39.377,
+14.844
+]
+]
+},
+{
+"n": "Troncal costera de microondas Massawa-Assab",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+39.47,
+15.61
+],
+[
+41.694,
+13.931
+],
+[
+42.74,
+13.01
+]
+]
+},
+{
+"n": "Troncal interinsular de microondas Tongatapu-Vava'u",
+"o": "Digicel Tonga",
+"cc": "TO",
+"l": [
+[
+-175.2,
+-21.14
+],
+[
+-174.354,
+-19.815
+],
+[
+-173.984,
+-18.651
+]
+]
+},
+{
+"n": "Troncal Suroeste (Asmara - Mendefera - Barentu)",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+38.93,
+15.34
+],
+[
+38.833,
+15.097
+],
+[
+38.82,
+14.89
+]
+]
+},
+{
+"n": "Ramal de microondas de la isla Disko",
+"o": "Tusass",
+"cc": "GL",
+"l": [
+[
+-52.864,
+68.709
+],
+[
+-49.783,
+62.117
+]
+]
+},
+{
+"n": "Troncal de microondas Asmara-Massawa",
 "o": "EriTel",
 "cc": "ER",
 "l": [
@@ -38,25 +186,6 @@
 [
 39.47,
 15.61
-],
-[
-42.74,
-13.01
-]
-]
-},
-{
-"n": "Troncal meridional de microondas Asmara-Adi Quala",
-"o": "EriTel",
-"cc": "ER",
-"l": [
-[
-38.93,
-15.34
-],
-[
-38.82,
-14.89
 ]
 ]
 },
