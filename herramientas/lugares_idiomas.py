@@ -8,7 +8,8 @@ other languages (alternateNamesV2): this keeps, for every place on the map, its 
 
 Each place of lugares-capas.json (landings, data-centre cities and the landings listed for each cable) is matched to its
 GeoNames record by name, country and position (the nearest one under 0.3°). For each language: the name GeoNames marks
-as preferred, else a short name, else the first one, never a colloquial or historic one.
+as preferred, else a short name, else the first one, never a colloquial or historic one; in the languages written in
+Latin letters only a preferred or short name (the GeoNames name already reads there).
 
 Output: orbita/datos/lugares-idioma/<language>.json  {"n": {"Name|CC": "name in that language", …}}, only the names
 that differ. The page loads only its own language.
@@ -30,6 +31,10 @@ IDIOMAS = {
     'sv': ['sv'], 'sw': ['sw'], 'ta': ['ta'], 'te': ['te'], 'th': ['th'], 'tr': ['tr'], 'uk': ['uk'], 'ur': ['ur'],
     'vi': ['vi'], 'zh': ['zh-CN', 'zh-Hans', 'zh'], 'zh-tw': ['zh-TW', 'zh-Hant', 'zh-HK', 'zh'],
 }
+
+
+LATINAS = {'es', 'en', 'pt', 'pt-pt', 'fr', 'de', 'it', 'nl', 'sv', 'da', 'nb', 'fi', 'is', 'pl', 'tr', 'id', 'vi', 'cs', 'ro', 'hu',
+           'sk', 'hr', 'ms', 'fil', 'sw'}
 
 
 def lugares():
@@ -79,6 +84,9 @@ def main():
         for k, g in gid_de.items():
             for c in cods:
                 v = alt.get(g, {}).get(c)
+                # in a language written in Latin letters the GeoNames name already reads, so only a name GeoNames marks as
+                # preferred or short replaces it (not an old exonym: «Bolduque» for 's-Hertogenbosch, «Abenrá» for Aabenraa)
+                if v and lang in LATINAS: v = [x for x in v if x[0] < 2]
                 if v:
                     nombre = min(v)[2]
                     if nombre != k[0]: n[k[0] + '|' + k[1]] = nombre
