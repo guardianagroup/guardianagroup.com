@@ -132,6 +132,33 @@ SITIOS = {
     ('VC', 'mesopotamia'): (-61.167, 13.167),
     ('AG', 'fiveislandsvillage'): (-61.884, 17.118), ('DM', 'canefield'): (-61.389, 15.338), ('DM', 'coulibistrie'): (-61.451, 15.460),
     ('DM', 'loubiere'): (-61.373, 15.275), ('LC', 'choc'): (-60.978, 14.030), ('LC', 'rodneybay'): (-60.953, 14.075),
+    # round 28b (24 Oct 2026): villages, parishes and quarters from Nominatim (OpenStreetMap); a parish without a village of
+    # its name sits at the parish's centre
+    ('TC', 'grancebay'): (-72.179, 21.795), ('TC', 'gracebay'): (-72.179, 21.795), ('TC', 'leewardpalms'): (-72.155, 21.810),
+    ('TC', 'leeward'): (-72.155, 21.810), ('TC', 'thompsoncove'): (-72.250, 21.787), ('TC', 'longbay'): (-72.161, 21.779),
+    ('TC', 'backsalina'): (-71.141, 21.458),
+    ('VG', 'seacowsbay'): (-64.633, 18.408), ('VG', 'westend'): (-64.703, 18.388), ('VG', 'eastend'): (-64.557, 18.441),
+    ('VG', 'parhamtown'): (-64.571, 18.439), ('VG', 'carrotbay'): (-64.672, 18.410), ('VG', 'savannahbay'): (-64.420, 18.463),
+    ('VG', 'southsound'): (-64.390, 18.483),
+    ('AS', 'laulii'): (-170.654, -14.286), ('AS', 'poloa'): (-170.832, -14.319), ('AS', 'tula'): (-170.566, -14.253),
+    ('MP', 'susupe'): (145.710, 15.158), ('MP', 'chalankanoa'): (145.717, 15.138), ('MP', 'sanantonio'): (145.695, 15.128),
+    ('MP', 'puertorico'): (145.735, 15.225), ('MP', 'tanapag'): (145.757, 15.242), ('MP', 'sinapalo'): (145.231, 14.167),
+    ('MP', 'oleai'): (145.714, 15.174), ('MP', 'sanroque'): (145.773, 15.248), ('MP', 'capitolhill'): (145.752, 15.211),
+    ('MP', 'kagman'): (145.775, 15.172), ('MP', 'marpoheights'): (145.638, 14.980),
+    ('CK', 'aroa'): (-159.816, -21.254), ('CK', 'rutaki'): (-159.811, -21.255), ('CK', 'arorangi'): (-159.826, -21.228),
+    ('CK', 'nikao'): (-159.812, -21.208), ('CK', 'ngatangiia'): (-159.730, -21.243), ('CK', 'muri'): (-159.733, -21.255),
+    ('CK', 'titikaveka'): (-159.754, -21.271),
+    ('WF', 'vele'): (-178.077, -14.312), ('WF', 'kolia'): (-178.097, -14.308), ('WF', 'vailala'): (-176.202, -13.222),
+    ('WF', 'akaaka'): (-176.171, -13.275), ('WF', 'nuku'): (-178.163, -14.291), ('WF', 'vaisei'): (-178.170, -14.276),
+    ('GG', 'vale'): (-2.523, 49.496), ('GG', 'cobo'): (-2.589, 49.478), ('GG', 'vazon'): (-2.609, 49.468),
+    ('GG', 'stmartin'): (-2.556, 49.437), ('GG', 'stpierreduboi'): (-2.641, 49.440), ('GG', 'stpierredubois'): (-2.641, 49.440),
+    ('JE', 'stlawrence'): (-2.142, 49.215), ('JE', 'stpeter'): (-2.184, 49.213), ('JE', 'staubin'): (-2.171, 49.187),
+    ('JE', 'stbrelade'): (-2.200, 49.193), ('JE', 'stclement'): (-2.056, 49.174), ('JE', 'grouville'): (-2.052, 49.184),
+    ('JE', 'stmartin'): (-2.052, 49.218), ('JE', 'gorey'): (-2.032, 49.199),
+    ('IM', 'unionmills'): (-4.523, 54.170), ('IM', 'glenvine'): (-4.553, 54.177), ('IM', 'stjohns'): (-4.637, 54.199),
+    ('IM', 'portstmary'): (-4.739, 54.077),
+    ('SJ', 'nybyen'): (15.588, 78.201), ('SJ', 'hotellneset'): (15.488, 78.249), ('SJ', 'adventdalen'): (15.895, 78.197),
+    ('PM', 'savoyard'): (-56.240, 46.764), ('PM', 'langlade'): (-56.318, 46.848),
 }
 
 PARECIDO = 1.35  # the other voice's path between two cities may be this much longer than the straight line (+ 60 km)

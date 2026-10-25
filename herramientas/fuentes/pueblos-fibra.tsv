@@ -166,6 +166,14 @@ ushuaia	AR	-54.81084	-68.31591	56825	Ushuaia
 villamaria	AR	-32.40751	-63.24016	92453	Villa María
 villamercedes	AR	-33.67571	-65.45783	96781	Villa Mercedes
 zarate	AR	-34.09584	-59.02423	99061	Zárate
+aua	AS	-14.27032	-170.66528	2124	Aūa
+fagatogo	AS	-14.2825	-170.69	1868	Fagatogo
+leone	AS	-14.34389	-170.785	4050	Leone
+nuuuli	AS	-14.31583	-170.6975	5000	Nu‘uuli
+pagopago	AS	-14.27806	-170.7025	11500	Pago Pago
+tafuna	AS	-14.33583	-170.72	7988	Tāfuna
+utulei	AS	-14.28694	-170.68306	683	Utulei
+vaitogi	AS	-14.35259	-170.73796	1436	Vaitogi
 amstetten	AT	48.1229	14.87206	15559	Amstetten
 bludenz	AT	47.15476	9.82255	15102	Bludenz
 bregenz	AT	47.50311	9.7471	29806	Bregenz
@@ -215,6 +223,16 @@ oranjestad	AW	12.52398	-70.02703	29998	Oranjestad
 paradera	AW	12.5351	-70.00688	13834	Paradera
 sannicolas	AW	12.43624	-69.90713	14175	San Nicolas
 savaneta	AW	12.45026	-69.93811	11955	Savaneta
+eckero	AX	60.21249	19.61442	959	Eckerö
+godby	AX	60.22995	19.9881	1369	Godby
+hammarland	AX	60.21667	19.75	1395	Hammarland
+jomala	AX	60.14902	19.951	3662	Jomala
+lemland	AX	60.07178	20.08472	1829	Lemland
+lumparland	AX	60.11695	20.25819	335	Lumparland
+mariehamn	AX	60.09726	19.93481	10682	Mariehamn
+saltvik	AX	60.28333	20.05	1691	Saltvik
+sund	AX	60.25	20.11667	1016	Sund
+vardo	AX	60.25	20.38333	411	Vårdö
 aghstafa	AZ	41.11889	45.45389	12200	Aghstafa
 agstafa	AZ	41.11889	45.45389	12200	Aghstafa
 agsu	AZ	40.57028	48.40087	22300	Aghsu
@@ -719,6 +737,8 @@ tengrela	CI	10.48115	-6.40694	52271	Tengréla
 tiebissou	CI	7.15772	-5.2248	24412	Tiébissou
 toumodi	CI	6.55799	-5.01769	55986	Toumodi
 yamoussoukro	CI	6.82055	-5.27674	275686	Yamoussoukro
+avarua	CK	-21.2075	-159.77546	13373	Avarua
+matavera	CK	-21.22444	-159.73333	1018	Matavera
 antofagasta	CL	-23.65094	-70.39752	401096	Antofagasta
 arica	CL	-18.47552	-70.30058	241653	Arica
 casablanca	CL	-33.31712	-71.40311	24537	Casablanca
@@ -1227,6 +1247,10 @@ kourou	GF	5.16281	-52.64265	24029	Kourou
 macouria	GF	4.91216	-52.37432	8773	Macouria
 matoury	GF	4.84921	-52.32355	26350	Matoury
 remiremontjoly	GF	4.91667	-52.26667	19029	Rémire-Montjoly
+castel	GG	49.46757	-2.60015	0	Castel
+saintpeterport	GG	49.45981	-2.53527	16488	Saint Peter Port
+saintsampson	GG	49.48389	-2.52333	8966	Saint Sampson
+torteval	GG	49.43333	-2.65	0	Torteval
 accra	GH	5.55602	-0.1969	1963264	Accra
 bawku	GH	11.05926	-0.24249	76459	Bawku
 bolgatanga	GH	10.78556	-0.85139	81958	Bolgatanga
@@ -1502,6 +1526,17 @@ jerusalem	IL	31.76904	35.21633	971800	Jerusalem
 metula	IL	33.27929	35.5787	1615	Metula
 netanya	IL	32.33294	34.85917	228204	Netanya
 telaviv	IL	32.08088	34.78057	432892	Tel Aviv
+ballasalla	IM	54.0959	-4.62962	0	Ballasalla
+castletown	IM	54.07445	-4.65365	3100	Castletown
+crosby	IM	54.18333	-4.56667	0	Crosby
+douglas	IM	54.15	-4.48333	26218	Douglas
+kirkmichael	IM	54.28562	-4.58748	0	Kirkmichael
+laxey	IM	54.23017	-4.39985	1768	Laxey
+onchan	IM	54.17329	-4.45324	0	Onchan
+peel	IM	54.22209	-4.69099	5374	Peel
+porterin	IM	54.08487	-4.75099	3530	Port Erin
+portsaintmary	IM	54.07405	-4.73858	0	Port Saint Mary
+ramsey	IM	54.32273	-4.38526	7845	Ramsey
 agra	IN	27.18333	78.01667	1430055	Agra
 ahmedabad	IN	23.02579	72.58727	6357693	Ahmedabad
 aligarh	IN	27.88145	78.07464	753207	Alīgarh
@@ -1640,6 +1675,8 @@ trieste	IT	45.64953	13.77678	204338	Trieste
 turin	IT	45.07049	7.68682	847287	Turin
 venice	IT	45.43713	12.33265	51298	Venice
 verona	IT	45.43854	10.9938	258031	Verona
+sainthelier	JE	49.18804	-2.10491	28000	Saint Helier
+trinity	JE	49.23408	-2.09272	3355	Trinity
 annottobay	JM	18.2717	-76.76523	5504	Annotto Bay
 blackriver	JM	18.02636	-77.84873	4229	Black River
 discoverybay	JM	18.45873	-77.39997	8257	Discovery Bay
@@ -2112,6 +2149,9 @@ coloane	MO	22.11806	113.55194	36384	Luhuan
 cotai	MO	22.14082	113.5631	300	Cotai
 macau	MO	22.20056	113.54611	649335	Macau
 taipa	MO	22.15583	113.55694	112051	Taipa
+garapan	MP	15.21107	145.72038	3096	Garapan
+sanjose	MP	14.96823	145.61998	15000	San Jose Village
+songsong	MP	14.13972	145.14111	593	Songsong
 fortdefrance	MQ	14.60365	-61.07418	89995	Fort-de-France
 latrinite	MQ	14.73807	-60.96319	15040	La Trinité
 lelamentin	MQ	14.61341	-60.99964	40581	Le Lamentin
@@ -2586,6 +2626,8 @@ tczew	PL	54.09242	18.77787	60133	Tczew
 torun	PL	53.01375	18.59814	196935	Toruń
 warsaw	PL	52.22977	21.01178	1702139	Warsaw
 wocawek	PL	52.64817	19.0678	120339	Włocławek
+miquelon	PM	47.0975	-56.38139	1141	Miquelon
+saintpierre	PM	46.77914	-56.1773	6200	Saint-Pierre
 aguadilla	PR	18.42745	-67.15407	16073	Aguadilla
 arecibo	PR	18.47245	-66.71573	87754	Arecibo
 bayamon	PR	18.39856	-66.15572	203499	Bayamón
@@ -2844,6 +2886,7 @@ novomesto	SI	45.80397	15.16886	24446	Novo Mesto
 postojna	SI	45.77435	14.21528	9605	Postojna
 slovenskabistrica	SI	46.39309	15.57347	7454	Slovenska Bistrica
 trebnje	SI	45.90424	15.02238	3477	Trebnje
+longyearbyen	SJ	78.22334	15.64689	2368	Longyearbyen
 banskabystrica	SK	48.73947	19.14932	74590	Banská Bystrica
 bratislava	SK	48.14816	17.10674	423737	Bratislava
 kosice	SK	48.71441	21.25802	225044	Košice
@@ -2982,6 +3025,9 @@ ngwenya	SZ	-26.2279	31.03926	842	Ngwenya
 nhlangano	SZ	-27.11222	31.19833	9016	Nhlangano
 piggspeak	SZ	-25.96082	31.24666	5750	Piggs Peak
 siteki	SZ	-26.4525	31.94722	6152	Siteki
+bluehills	TC	21.80658	-72.27659	1156	Blue Hills Settlements
+cockburntown	TC	21.46122	-71.14188	3720	Cockburn Town
+thebight	TC	21.7796	-72.20421	2288	The Bight Settlements
 abeche	TD	13.82916	20.8324	139983	Abéché
 adre	TD	13.46648	22.19875	21950	Adré
 bitkine	TD	11.9801	18.2138	41871	Bitkine
@@ -3342,6 +3388,8 @@ maracay	VE	10.24972	-67.59475	464700	Maracay
 puertolacruz	VE	10.21382	-64.6328	370000	Puerto La Cruz
 sanfelipe	VE	10.3401	-68.74297	206270	San Felipe
 valencia	VE	10.16153	-68.00044	1619470	Valencia
+roadtown	VG	18.42693	-64.62079	8449	Road Town
+spanishtown	VG	18.4481	-64.43474	3800	Spanish Town
 charlotteamalie	VI	18.3419	-64.9307	20000	Charlotte Amalie
 christiansted	VI	17.74681	-64.70557	1866	Christiansted
 cruzbay	VI	18.33134	-64.79375	2743	Cruz Bay
@@ -3389,6 +3437,11 @@ tuyhoa	VN	13.09546	109.32094	155921	Tuy Hòa
 vinh	VN	18.67337	105.69232	790000	Vinh
 vinhlong	VN	10.25369	105.9722	137870	Vĩnh Long
 portvila	VU	-17.73648	168.31366	35901	Port-Vila
+falaleu	WF	-13.29266	-176.18328	626	Falaleu
+halalo	WF	-13.3454	-176.21464	563	Halalo
+leava	WF	-14.29333	-178.15833	480	Leava
+matautu	WF	-13.28163	-176.17453	1200	Mata-Utu
+utufua	WF	-13.34261	-176.19435	622	Utufua
 apia	WS	-13.83333	-171.76666	40407	Apia
 leulumoega	WS	-13.82297	-171.96127	1458	Leulumoega
 lufilufi	WS	-13.87449	-171.59857	1074	Lufilufi
