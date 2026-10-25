@@ -16,7 +16,8 @@
   'use strict';
   const P = () => window.OrbitaPlaneta;
   const RAD = Math.PI / 180, KM_RADIO = 6371;
-  const ACENTO = '156,195,228', BLANCO = '244,246,248', FONDO = '6,8,12';
+  // 25 Oct 2026 (agency round 31, both voices): the cities' dot in a quiet grey, so it never reads as a data centre (blue)
+  const ACENTO = '176,186,198', BLANCO = '244,246,248', FONDO = '6,8,12';
   let D = null, pedido = false;
 
   // the levels, by how many kilometres of the Earth the screen's width covers
