@@ -22,7 +22,7 @@ FUERA = {'PPLX', 'PPLH', 'PPLQ', 'PPLW', 'PPLCH'}
 
 def buscados():
     out = set()
-    for f in glob.glob(os.path.join(AQUI, 'fibra-agencia', '*.json')):
+    for f in glob.glob(os.path.join(AQUI, 'fibra-agencia', '*.json')) + glob.glob(os.path.join(AQUI, 'radio-agencia', '*.json')):  # round 27: the radio chains' towns too
         try:
             datos = json.load(open(f, encoding='utf-8'))
         except ValueError:

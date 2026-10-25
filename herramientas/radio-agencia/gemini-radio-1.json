@@ -1,0 +1,221 @@
+[
+ {
+  "nombre": "Troncal de microondas del Norte (Disko - Upernavik)",
+  "operador": "Tusass A/S (antes TELE-POST / TELE Greenland)",
+  "pais": "GL",
+  "ciudades": [
+   "Aasiaat",
+   "Qeqertarsuaq",
+   "Qasigiannguit",
+   "Ilulissat",
+   "Saqqaq",
+   "Uummannaq",
+   "Upernavik",
+   "Kullorsuaq"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en informes anuales e históricos de Tusass (TELE-POST) / aproximado: secuencia exacta de saltos intermedios entre montañas costeras basada en la cobertura de la cadena de radio (radiokæde) desde el extremo del cable submarino en Aasiaat hasta Kullorsuaq"
+ },
+ {
+  "nombre": "Ramal de microondas Sisimiut - Kangerlussuaq",
+  "operador": "Tusass A/S",
+  "pais": "GL",
+  "ciudades": [
+   "Sisimiut",
+   "Kangerlussuaq"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en documentación de red de Tusass (enlace troncal terrestre desde la estación costera de Sisimiut hacia el interior)"
+ },
+ {
+  "nombre": "Troncal de microondas del Sur (Qaqortoq - Nanortalik y fiordos)",
+  "operador": "Tusass A/S",
+  "pais": "GL",
+  "ciudades": [
+   "Qaqortoq",
+   "Narsaq",
+   "Qassiarsuk",
+   "Narsarsuaq",
+   "Alluitsup Paa",
+   "Nanortalik",
+   "Aappilattoq"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en informes de infraestructura de Tusass (TELE-POST) / aproximado: orden de derivación de los enlaces entre Narsarsuaq y el extremo sur en Nanortalik/Aappilattoq"
+ },
+ {
+  "nombre": "Troncal Nacional Oeste (Asmara - Tessenei)",
+  "operador": "EriTel (Eritrean Telecommunications Services Corporation)",
+  "pais": "ER",
+  "ciudades": [
+   "Asmara",
+   "Adi Tekelezan",
+   "Keren",
+   "Hagaz",
+   "Agordat",
+   "Barentu",
+   "Haykota",
+   "Tessenei"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: ruta troncal siguiendo el corredor vial principal y las centrales regionales de conmutación y transmisión de EriTel hacia Gash-Barka"
+ },
+ {
+  "nombre": "Troncal Norte (Keren - Nakfa)",
+  "operador": "EriTel",
+  "pais": "ER",
+  "ciudades": [
+   "Keren",
+   "Afabet",
+   "Nakfa"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: basado en el despliegue de la red troncal regional de EriTel en la región de Anseba y Norte del Mar Rojo"
+ },
+ {
+  "nombre": "Troncal Sur - Central (Asmara - Senafe)",
+  "operador": "EriTel",
+  "pais": "ER",
+  "ciudades": [
+   "Asmara",
+   "Dekemhare",
+   "Segheneyti",
+   "Adi Keyh",
+   "Senafe"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: ruta troncal por la meseta central hacia la frontera sur según los nodos principales de EriTel en Debub"
+ },
+ {
+  "nombre": "Troncal Suroeste (Asmara - Mendefera - Barentu)",
+  "operador": "EriTel",
+  "pais": "ER",
+  "ciudades": [
+   "Asmara",
+   "Himberti",
+   "Mendefera",
+   "Adi Quala",
+   "Mai Dima",
+   "Barentu"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: basado en la distribución de estaciones base y centrales de EriTel en la región de Debub"
+ },
+ {
+  "nombre": "Troncal Costera del Mar Rojo (Asmara - Massawa - Assab)",
+  "operador": "EriTel",
+  "pais": "ER",
+  "ciudades": [
+   "Asmara",
+   "Ghinda",
+   "Massawa",
+   "Foro",
+   "Tio",
+   "Edd",
+   "Assab"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: enlace de radio entre las principales localidades costeras de EriTel (excluyendo el tramo urbano de fibra en Asmara-Massawa cuando aplica respaldo de radio y continuando por microondas hacia Dankalia)"
+ },
+ {
+  "nombre": "Troncal Este-Oeste y Red Camp (Stanley - MPC - West Falkland)",
+  "operador": "Sure South Atlantic Ltd / BFBS",
+  "pais": "FK",
+  "ciudades": [
+   "Stanley",
+   "Mount Pleasant",
+   "Goose Green",
+   "Port Howard",
+   "Fox Bay"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en OpenFalklands y reportes regulatorios de las Islas Malvinas / aproximado: la cadena cruza mediante repetidoras de cumbre (Sapper Hill, Mount Kent, Mount Maria, Mount Alice) uniendo Stanley y Mount Pleasant con los asentamientos de East y West Falkland"
+ },
+ {
+  "nombre": "Enlace Interinsular Tongatapu - 'Eua",
+  "operador": "Tonga Communications Corporation (TCC) / Digicel Tonga",
+  "pais": "TO",
+  "ciudades": [
+   "Nuku'alofa",
+   "'Ohonua"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en reportes de conectividad de Tonga y evaluaciones de la UIT/Banco Mundial sobre enlaces de microondas a la vista entre Tongatapu y 'Eua"
+ },
+ {
+  "nombre": "Cadena de Microondas de respaldo Tongatapu - Ha'apai - Vava'u",
+  "operador": "Digicel Tonga / Tonga Communications Corporation (TCC)",
+  "pais": "TO",
+  "ciudades": [
+   "Nuku'alofa",
+   "Pangai",
+   "Neiafu"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en reportes de telecomunicaciones tras los cortes del cable submarino doméstico (2022-2024) / aproximado: utiliza islas intermedias del grupo Ha'apai y Kotu/Kao como repetidoras entre Tongatapu, Pangai (Lifuka) y Neiafu (Vava'u)"
+ },
+ {
+  "nombre": "Troncal de las Islas Gilbert Centrales (Tarawa - Abaiang - Marakei - Maiana)",
+  "operador": "ATHKL (Amalgamated Telecom Holdings Kiribati Ltd) / TSKL",
+  "pais": "KI",
+  "ciudades": [
+   "Bairiki",
+   "Betio",
+   "Buariki",
+   "Taburao",
+   "Rawannawi",
+   "Tebwangetua"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en documentos del Proyecto de Conectividad de Kiribati (Banco Mundial) y UNCTAD (enlaces de microondas entre Tarawa Sur, Tarawa Norte, Abaiang, Marakei y Maiana)"
+ },
+ {
+  "nombre": "Enlace Inter-atolón Majuro - Arno",
+  "operador": "Marshall Islands National Telecommunications Authority (NTA)",
+  "pais": "MH",
+  "ciudades": [
+   "Delap-Uliga-Djarrit",
+   "Laura",
+   "Ine",
+   "Arno"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en informes de infraestructura del Pacífico (Banco Mundial / NTA) sobre cobertura por radioenlace desde Majuro hacia el atolón vecino de Arno"
+ },
+ {
+  "nombre": "Enlace de Microondas del Atolón de Kwajalein (Kwajalein - Ebeye)",
+  "operador": "Marshall Islands National Telecommunications Authority (NTA)",
+  "pais": "MH",
+  "ciudades": [
+   "Kwajalein",
+   "Ebeye"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: enlace de radio de corta distancia a la vista entre el punto de aterrizaje en Kwajalein y el centro poblado de Ebeye operado por NTA"
+ },
+ {
+  "nombre": "Troncal Sur de Palaos (Koror - Peleliu - Angaur)",
+  "operador": "Palau National Communications Corporation (PNCC)",
+  "pais": "PW",
+  "ciudades": [
+   "Koror",
+   "Kloulklubed",
+   "Ngeremasch"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en reportes de JICA y el Plan Estratégico de Palaos (conectividad por microondas digital desde Koror hacia los estados del sur en Peleliu y Angaur)"
+ },
+ {
+  "nombre": "Troncal Norte de Palaos (Babeldaob - Kayangel)",
+  "operador": "Palau National Communications Corporation (PNCC)",
+  "pais": "PW",
+  "ciudades": [
+   "Koror",
+   "Ngerulmud",
+   "Ollei",
+   "Kayangel"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en reportes de JICA y PNCC (enlace de microondas desde el norte de Babeldaob hacia el atolón de Kayangel)"
+ }
+]

@@ -1,0 +1,286 @@
+[
+ {
+  "nombre": "Red troncal de microondas de Groenlandia Meridional",
+  "operador": "Tusass",
+  "pais": "GL",
+  "ciudades": [
+   "Narsaq Kujalleq",
+   "Nanortalik",
+   "Qaqortoq",
+   "Narsaq",
+   "Paamiut",
+   "Nuuk"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: corredor meridional de la red de radioenlaces de Tusass. El operador confirma una red troncal de microondas desde el extremo sur de Groenlandia hasta Upernavik, con más de 50 repetidoras en montañas. El orden de las localidades es geográfico; no representa todos los saltos físicos ni confirma que cada población sea una estación de tránsito. Tusass, entrevista de 2023: https://totaltele.com/tusass-connecting-greenlands-remote-communities/ ; Ericsson Microwave Outlook: https://www.ericsson.com/en/reports-and-papers/microwave-outlook/articles/when-long-haul-makes-a-difference"
+ },
+ {
+  "nombre": "Red troncal de microondas de Groenlandia Central",
+  "operador": "Tusass",
+  "pais": "GL",
+  "ciudades": [
+   "Nuuk",
+   "Maniitsoq",
+   "Sisimiut",
+   "Kangaatsiaq",
+   "Aasiaat"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: corredor de radioenlaces de la costa occidental. Tusass confirma una troncal de microondas paralela a parte de su infraestructura submarina y ramales hacia poblaciones. No está publicado el recorrido exacto por cada localidad. Fuente: https://totaltele.com/tusass-connecting-greenlands-remote-communities/ ; https://trap.gl/en/samfund-og-erhverv/infrastruktur/"
+ },
+ {
+  "nombre": "Red troncal de microondas de Disko y Groenlandia Noroccidental",
+  "operador": "Tusass",
+  "pais": "GL",
+  "ciudades": [
+   "Aasiaat",
+   "Qasigiannguit",
+   "Ilulissat",
+   "Uummannaq",
+   "Upernavik"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: corredor occidental y septentrional de la red Tusass, con estaciones repetidoras intermedias en montañas. La red principal y su prolongación hacia Upernavik están documentadas, pero no se confirma que todos los núcleos indicados estén situados sobre una única cadena física sin ramificaciones. Fuentes: https://trap.gl/en/samfund-og-erhverv/infrastruktur/ ; https://totaltele.com/tusass-connecting-greenlands-remote-communities/"
+ },
+ {
+  "nombre": "Ramal de microondas de la isla Disko",
+  "operador": "Tusass",
+  "pais": "GL",
+  "ciudades": [
+   "Aasiaat",
+   "Qeqertarsuaq"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: ramal regional de la infraestructura de radioenlaces que abastece las poblaciones de Disko Bay. Tusass confirma ramales desde su red troncal y el uso de radioenlaces en la región. No se dispone de una relación pública de saltos que confirme una conexión física directa Aasiaat-Qeqertarsuaq. Fuentes: https://trap.gl/en/samfund-og-erhverv/infrastruktur/ ; https://totaltele.com/tusass-connecting-greenlands-remote-communities/"
+ },
+ {
+  "nombre": "Extensión septentrional de microondas de Upernavik",
+  "operador": "Tusass",
+  "pais": "GL",
+  "ciudades": [
+   "Upernavik",
+   "Tasiusaq",
+   "Nuussuaq",
+   "Kullorsuaq"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: cadena regional hacia los asentamientos septentrionales de Upernavik, con posibles ramificaciones y repetidoras no pobladas. Tusass declara que su red de radioenlaces y sus ramales alcanzan Kullorsuaq. No se publica la secuencia física exacta de las estaciones. Fuente: https://totaltele.com/tusass-connecting-greenlands-remote-communities/ ; https://trap.gl/en/samfund-og-erhverv/infrastruktur/"
+ },
+ {
+  "nombre": "Radioenlaces regionales de Ammassalik",
+  "operador": "Tusass",
+  "pais": "GL",
+  "ciudades": [
+   "Tasiilaq",
+   "Kuummiut",
+   "Sermiligaaq"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: ramales regionales desde Tasiilaq hacia los asentamientos próximos. Trap Greenland documenta expresamente pequeños radioenlaces desde Tasiilaq hacia sus poblaciones dependientes. La continuidad de los nodos indicados no está confirmada como una cadena única. Fuente: https://trap.gl/en/samfund-og-erhverv/infrastruktur/ ; localidades: https://eastgreenland.com/maps/"
+ },
+ {
+  "nombre": "Radioenlace regional Tasiilaq-Kulusuk",
+  "operador": "Tusass",
+  "pais": "GL",
+  "ciudades": [
+   "Tasiilaq",
+   "Kulusuk"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: conexión regional de radioenlace dentro del distrito de Ammassalik. La existencia de radioenlaces desde Tasiilaq a los asentamientos está documentada, sin identificar públicamente la secuencia exacta de torres para Kulusuk. Fuente: https://trap.gl/en/samfund-og-erhverv/infrastruktur/ ; https://eastgreenland.com/maps/"
+ },
+ {
+  "nombre": "Radioenlace regional de Qaanaaq",
+  "operador": "Tusass",
+  "pais": "GL",
+  "ciudades": [
+   "Qaanaaq",
+   "Siorapaluk"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: ramal de radioenlace desde el centro de comunicaciones de Qaanaaq hacia asentamientos próximos. La fuente confirma pequeños radioenlaces regionales desde Qaanaaq, pero no identifica individualmente el trazado hasta Siorapaluk. Fuente: https://trap.gl/en/samfund-og-erhverv/infrastruktur/"
+ },
+ {
+  "nombre": "Troncal de microondas Asmara-Massawa",
+  "operador": "EriTel",
+  "pais": "ER",
+  "ciudades": [
+   "Asmara",
+   "Nefasit",
+   "Ghinda",
+   "Massawa"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: corredor montañoso Asmara-Nefasit-Ghinda-Massawa. EriTel confirma una red nacional de transmisión mediante radioenlaces de microondas de alta capacidad que conecta las principales ciudades. Ghinda figura expresamente en su zona de servicio de Massawa. Los saltos exactos por Nefasit y Ghinda no están documentados. Fuentes: https://eritel.com.er/contents.php?id=1029 ; https://eritel.com.er/contents.php?id=1018"
+ },
+ {
+  "nombre": "Troncal occidental de microondas Asmara-Teseney",
+  "operador": "EriTel",
+  "pais": "ER",
+  "ciudades": [
+   "Asmara",
+   "Elabered",
+   "Keren",
+   "Hagaz",
+   "Agordat",
+   "Barentu",
+   "Haikota",
+   "Teseney"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: corredor occidental de telecomunicaciones de EriTel. El Ministerio de Información de Eritrea identifica los ejes Asmara-Keren, Asmara-Barentu y Barentu-Teseney y confirma el sistema PDH/SDH de microondas. EriTel incluye Elabered y Hagaz en el área de Keren, Agordat en la de Barentu y Haikota en la de Teseney. No se conoce la secuencia exacta de torres. Fuentes: https://shabait.com/2015/09/21/eri-tel-working-up-to-the-promises-of-the-information-technology/ ; https://eritel.com.er/contents.php?id=1018"
+ },
+ {
+  "nombre": "Troncal meridional de microondas Asmara-Adi Quala",
+  "operador": "EriTel",
+  "pais": "ER",
+  "ciudades": [
+   "Asmara",
+   "Debarwa",
+   "Mendefera",
+   "Adi Quala"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: corredor meridional Asmara-Mendefera-Adi Quala. EriTel identifica Mendefera como centro de servicio y Debaruwa y Adiquala como poblaciones atendidas, dentro de su red nacional de microondas. Los emplazamientos y saltos exactos no están publicados. Fuentes: https://eritel.com.er/contents.php?id=1029 ; https://eritel.com.er/contents.php?id=1018"
+ },
+ {
+  "nombre": "Troncal suroriental de microondas Asmara-Adi Keyh",
+  "operador": "EriTel",
+  "pais": "ER",
+  "ciudades": [
+   "Asmara",
+   "Dekemhare",
+   "Adi Keyh"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: corredor Asmara-Dekemhare-Adi Keyh. EriTel confirma su red nacional de microondas y el servicio de telecomunicaciones en Dekemhare y Adikeih. La relación precisa entre las torres no está publicada. Fuentes: https://eritel.com.er/contents.php?id=1029 ; https://eritel.com.er/contents.php?id=1018"
+ },
+ {
+  "nombre": "Troncal costera de microondas Massawa-Assab",
+  "operador": "EriTel",
+  "pais": "ER",
+  "ciudades": [
+   "Massawa",
+   "Gelaelo",
+   "Tio",
+   "Assab"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: corredor costero del mar Rojo. EriTel identifica Gelaelo dentro del área de Massawa y Tio dentro del área de Assab, y confirma un sistema nacional de microondas que alcanza las principales ciudades. No hay un trazado público suficiente para asegurar que todos los puntos formen una única cadena costera continua; podrían existir otros recorridos y estaciones intermedias. Fuentes: https://eritel.com.er/contents.php?id=1018 ; https://eritel.com.er/contents.php?id=1029 ; https://shabait.com/2015/09/21/eri-tel-working-up-to-the-promises-of-the-information-technology/"
+ },
+ {
+  "nombre": "Ramal septentrional de microondas Keren-Nakfa",
+  "operador": "EriTel",
+  "pais": "ER",
+  "ciudades": [
+   "Keren",
+   "Afabet",
+   "Nakfa"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: conexión septentrional de la red de EriTel. Afabet y Nakfa figuran en la misma área oficial de servicio de EriTel, y la operadora declara cobertura de las principales localidades mediante microondas. La ruta física Keren-Afabet-Nakfa es una aproximación geográfica, no un trazado publicado. Fuentes: https://eritel.com.er/contents.php?id=1018 ; https://eritel.com.er/contents.php?id=1029"
+ },
+ {
+  "nombre": "Troncal de microondas Stanley-Mount Pleasant",
+  "operador": "Sure South Atlantic",
+  "pais": "FK",
+  "ciudades": [
+   "Stanley",
+   "Mount Pleasant"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: OpenFalklands documenta radioenlaces punto a punto de alta capacidad que conectan Stanley, el complejo Mount Pleasant y determinados asentamientos de Camp. No identifica todos los repetidores físicos del trayecto. Sure confirma servicios de telecomunicaciones en Stanley y Mount Pleasant. Fuentes: https://www.openfalklands.com/beyond-the-towers-starlink-and-the-future-of-camp-connectivity/ ; https://www.sure.co.fk/about-us/company-information/"
+ },
+ {
+  "nombre": "Troncal interinsular de microondas Tongatapu-Ha'apai",
+  "operador": "Digicel Tonga",
+  "pais": "TO",
+  "ciudades": [
+   "Nuku'alofa",
+   "Angaha",
+   "Pangai"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: cadena de transporte entre Tongatapu, 'Eua y Ha'apai. El sistema Digicel-Aviat utiliza una repetidora en la isla volcánica deshabitada de Kao, omitida de la lista de localidades. No está confirmado que Angaha sea un nodo de tránsito físico. Aviat confirma la puesta en servicio en 2016; Digicel documentó posteriormente la modernización de sus enlaces. Fuentes: https://www.prnewswire.com/news-releases/digicel-selects-aviat-networks-transmission-solution-300366183.html ; https://www.digicelpacific.com/news/super-fast-internet-in-vavau"
+ },
+ {
+  "nombre": "Troncal interinsular de microondas Tongatapu-Vava'u",
+  "operador": "Digicel Tonga",
+  "pais": "TO",
+  "ciudades": [
+   "Nuku'alofa",
+   "Angaha",
+   "Neiafu"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: conexión de microondas Tongatapu-Vava'u mediante repetidoras interinsulares, incluida la estación de Kao. El sistema cuenta con saltos de hasta 189 km. Angaha representa el área de 'Eua y no está confirmada como estación de tránsito. Digicel confirmó la modernización de la troncal de microondas hacia Vava'u el 23 de marzo de 2023. Fuentes: https://www.digicelpacific.com/news/super-fast-internet-in-vavau ; https://www.prnewswire.com/news-releases/digicel-selects-aviat-networks-transmission-solution-300366183.html"
+ },
+ {
+  "nombre": "Radioenlace regional Tongatapu-'Eua",
+  "operador": "Digicel Tonga",
+  "pais": "TO",
+  "ciudades": [
+   "Nuku'alofa",
+   "Angaha"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: conexión regional de radioenlace entre Tongatapu y 'Eua. Digicel mantiene operaciones en ambos territorios y el sistema de microondas interinsular utiliza estaciones elevadas de 'Eua. No se confirma la posición exacta del terminal respecto a Angaha. Fuentes: https://www.digicelpacific.com/mobile/to/stores ; https://www.prnewswire.com/news-releases/digicel-selects-aviat-networks-transmission-solution-300366183.html"
+ },
+ {
+  "nombre": "Troncal regional de microondas Tarawa-Abaiang-Marakei",
+  "operador": "Vodafone Kiribati (ATHKL)",
+  "pais": "KI",
+  "ciudades": [
+   "Buariki",
+   "Takarano",
+   "Taburao",
+   "Rawanawi"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: cadena regional desde North Tarawa hacia Abaiang y Marakei. El Banco Mundial documenta expresamente radioenlaces que conectan North Tarawa, Abaiang y Marakei. Vodafone Kiribati confirma estaciones activas en las tres islas y el regulador CCK documenta cobertura en Buariki, Takarano, Taburao y Rawanawi. La secuencia de terminales es aproximada y no demuestra que los cuatro núcleos sean repetidores consecutivos. Fuentes: https://documents1.worldbank.org/curated/en/393371617257505753/pdf/Part-4-Spatial-Development-Policy-Options.pdf ; https://vodafone.com.ki/Services/Network ; https://cck.ki/mobile-coverage"
+ },
+ {
+  "nombre": "Radioenlace regional Tarawa-Maiana",
+  "operador": "Vodafone Kiribati (ATHKL)",
+  "pais": "KI",
+  "ciudades": [
+   "Betio",
+   "Tebwangetua"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: enlace entre Tarawa y Maiana, donde Tebwangetua es una localidad documentada con cobertura móvil. El Banco Mundial identifica conexiones regionales por microondas hacia Maiana y Vodafone mantiene cobertura en ambas islas. No hay identificación pública suficiente de los terminales concretos ni de posibles repetidoras intermedias. Fuentes: https://documents1.worldbank.org/curated/en/393371617257505753/pdf/Part-4-Spatial-Development-Policy-Options.pdf ; https://vodafone.com.ki/Services/Network ; https://cck.ki/mobile-coverage"
+ },
+ {
+  "nombre": "Troncal de microondas de Kiritimati",
+  "operador": "Vodafone Kiribati (ATHKL)",
+  "pais": "KI",
+  "ciudades": [
+   "London",
+   "Banana"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: el Banco Asiático de Desarrollo documenta dos torres de telecomunicaciones en London y Banana conectadas mediante microondas para prestar servicios en Kiritimati. Vodafone Kiribati mantiene ambas localidades en su lista de estaciones y el regulador confirma cobertura. La documentación pública de la topología es anterior a las inspecciones de cobertura y no constituye una verificación independiente de cada equipo en 2026. Fuentes: https://ewsdata.rightsindevelopment.org/files/documents/01/ADB-50348-001_v7FU52j.pdf ; https://vodafone.com.ki/Services/Network ; https://cck.ki/mobile-coverage"
+ },
+ {
+  "nombre": "Radioenlace troncal septentrional Babeldaob-Kayangel",
+  "operador": "Palau National Communications Corporation (PNCC)",
+  "pais": "PW",
+  "ciudades": [
+   "Ollei",
+   "Orukei"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: enlace interinsular entre el extremo norte de Babeldaob y Kayangel. PNCC documentó equipos de microondas para conectar Kayangel a la red nacional y su director general confirmó en 2025 que Kayangel continuaba conectada mediante microondas. Ollei y Orukei representan las localidades próximas a ambos extremos; sus ubicaciones como terminales concretos no están verificadas. Fuentes: https://slidepptx.com/telecommunications-in-the-republic-of-palau-palau-national-communications-corpor_59fa02a01723ddeea6abf2e4.html ; https://www.guambusinessmagazine.com/connecting-pacific-rewiring-digital-future"
+ },
+ {
+  "nombre": "Radioenlace troncal meridional Peleliu-Angaur",
+  "operador": "Palau National Communications Corporation (PNCC)",
+  "pais": "PW",
+  "ciudades": [
+   "Kloulklubed",
+   "Ngeremasch"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: enlace de microondas entre Peleliu y Angaur. PNCC documenta que Angaur está conectada por radioenlace digital a la red nacional y su director general confirmó en 2025 que Angaur continúa conectada mediante microondas. Kloulklubed y Ngeremasch son las localidades representativas de ambos extremos; no se han publicado las coordenadas de las torres. Fuentes: https://slidepptx.com/telecommunications-in-the-republic-of-palau-palau-national-communications-corpor_59fa02a01723ddeea6abf2e4.html ; https://www.guambusinessmagazine.com/connecting-pacific-rewiring-digital-future"
+ }
+]
