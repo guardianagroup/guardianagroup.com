@@ -1098,7 +1098,16 @@ dakhla	EH	23.68477	-15.95798	106277	Dakhla
 daoura	EH	27.46175	-12.99412	1108	Daoura
 elargoub	EH	23.60882	-15.86726	5020	El Aargub
 laayoune	EH	27.1418	-13.18797	196331	Laayoune
+adikeyh	ER	14.84444	39.37722	13061	Adi Keyh
+afabet	ER	16.18834	38.68729	35673	Af’abet
+agordat	ER	15.54798	37.88291	8857	Ak’ordat
 asmara	ER	15.33805	38.93184	563930	Asmara
+assab	ER	13.00917	42.73944	21300	Assab
+barentu	ER	15.10582	37.59067	15891	Barentu
+debarwa	ER	15.09683	38.83331	4902	Dbarwa
+dekemhare	ER	15.07	39.0475	10959	Dek’emhāre
+edd	ER	13.93088	41.6938	11259	Edd
+keren	ER	15.77792	38.45107	74800	Keren
 massawa	ER	15.60811	39.47455	23100	Massawa
 mendefera	ER	14.88722	38.81528	17781	Mendefera
 alacant	ES	38.34517	-0.48149	348901	Alicante
@@ -1155,6 +1164,7 @@ savusavu	FJ	-16.77942	179.33564	6833	Savusavu
 sigatoka	FJ	-18.14307	177.50691	17622	Sigatoka
 suva	FJ	-18.13683	178.42531	77366	Suva
 tavua	FJ	-17.44221	177.86221	8810	Tavua
+stanley	FK	-51.69382	-57.85701	2213	Stanley
 colonia	FM	9.51638	138.12167	7371	Colonia
 kolonia	FM	6.964	158.2062	6074	Kolonia
 palikir	FM	6.92477	158.16109	6942	Palikir
@@ -1268,6 +1278,23 @@ techiman	GH	7.59054	-1.93947	84074	Techiman
 yendi	GH	9.44272	-0.00991	64676	Yendi
 catalanbay	GI	36.13961	-5.34163	526	Catalan Bay
 gibraltar	GI	36.14474	-5.35257	26544	Gibraltar
+aasiaat	GL	68.70869	-52.86366	3005	Aasiaat
+ilulissat	GL	69.21981	-51.09861	4413	Ilulissat
+kangaatsiaq	GL	68.30648	-53.46405	520	Kangaatsiaq
+kangerlussuaq	GL	67.00876	-50.68937	508	Kangerlussuaq
+maniitsoq	GL	65.41506	-52.89822	2534	Maniitsoq
+nanortalik	GL	60.14169	-45.24069	1185	Nanortalik
+narsaq	GL	60.91298	-46.05055	1346	Narsaq
+nuuk	GL	64.18347	-51.72157	14798	Nuuk
+paamiut	GL	61.99402	-49.66776	1308	Paamiut
+qaanaaq	GL	77.46666	-69.23155	646	Qaanaaq
+qaqortoq	GL	60.71839	-46.03561	3224	Qaqortoq
+qasigiannguit	GL	68.81926	-51.19221	1081	Qasigiannguit
+qeqertarsuaq	GL	62.11667	-49.78333	986	Qeqertarsuaq
+sisimiut	GL	66.93946	-53.6735	5227	Sisimiut
+tasiilaq	GL	65.61451	-37.63676	1985	Tasiilaq
+upernavik	GL	72.78358	-56.14933	1129	Upernavik
+uummannaq	GL	70.67442	-52.12545	1407	Uummannaq
 banjul	GM	13.45274	-16.57803	37274	Banjul
 bansang	GM	13.43333	-14.65	9528	Bansang
 barra	GM	13.48278	-16.54556	6020	Barra
@@ -1800,6 +1827,10 @@ sisophon	KH	13.58588	102.97369	23218	Sisophon
 stungtreng	KH	13.52586	105.9683	25000	Stung Treng
 svayrieng	KH	11.08785	105.79935	23956	Svay Rieng
 takeo	KH	10.99081	104.78498	843931	Takeo
+bairiki	KI	1.32924	172.97522	2766	Bairiki Village
+banana	KI	1.96865	-157.39361	1209	Banana
+betio	KI	1.35797	172.92105	12509	Betio Village
+london	KI	1.98487	-157.47502	1829	London Village
 chindini	KM	-11.92328	43.49109	1471	Chindini
 foumbouni	KM	-11.86537	43.49529	3386	Foumbouni
 itsandra	KM	-11.67638	43.26466	2684	Itsandra
@@ -2070,6 +2101,9 @@ moramanga	MG	-18.94948	48.23007	60456	Moramanga
 sakaraha	MG	-22.9	44.53333	21826	Sakaraha
 toamasina	MG	-18.1492	49.40234	345107	Toamasina
 toliara	MG	-23.35	43.66667	178725	Toliara
+arno	MH	7.06691	171.55413	2068	Arno
+delapuligadjarrit	MH	7.087	171.377	20301	Dalap-Uliga-Dorrit
+laura	MH	7.14654	171.03704	1547	Laura
 demirkapija	MK	41.40633	22.24305	4451	Demir Kapija
 gevgelija	MK	41.14289	22.50108	20664	Gevgelija
 gostivar	MK	41.79627	20.90799	50974	Gostivar
@@ -2676,6 +2710,10 @@ porto	PT	41.1485	-8.61097	252687	Porto
 santarem	PT	39.23379	-8.68617	29385	Santarém
 setubal	PT	38.5244	-8.8882	118166	Setúbal
 tunes	PT	37.16592	-8.25919	6837	Tunes
+kayangel	PW	8.08228	134.71725	188	Kayangel
+kloulklubed	PW	7.04192	134.25561	702	Kloulklubed
+koror	PW	7.33978	134.47326	14000	Koror
+ngerulmud	PW	7.50077	134.6238	0	Ngerulmud
 asuncion	PY	-25.28646	-57.647	1482200	Asunción
 ayolas	PY	-27.38421	-56.83953	12061	Ayolas
 caacupe	PY	-25.38575	-57.14217	56864	Caacupé
@@ -3178,7 +3216,10 @@ zaghouan	TN	36.40291	10.14292	20798	Zaghouan
 zarzis	TN	33.50398	11.11215	79316	Zarzis
 fuaamotu	TO	-21.26403	-175.13902	1675	Fua'amotu
 kolovai	TO	-21.10101	-175.33766	555	Kolovai
+neiafu	TO	-18.65144	-173.98354	3825	Neiafu
 nukualofa	TO	-21.13683	-175.20114	22400	Nuku‘alofa
+ohonua	TO	-21.34135	-174.95656	1466	'Ohonua
+pangai	TO	-19.81468	-174.35423	1738	Pangai
 vaini	TO	-21.19292	-175.17678	3295	Vainī
 adana	TR	36.98615	35.32531	1816750	Adana
 adapazari	TR	40.78056	30.40333	286787	Adapazarı
