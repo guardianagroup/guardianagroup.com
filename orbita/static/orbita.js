@@ -683,6 +683,16 @@ void main(){
         t.im.src = TIERRA + 'tierra-16k/' + k + '.png';
         return t;
       };
+      // 25 Oct 2026 (owner: «sí» to a sharp coast): close in, the 16K mask (2.4 km pixels) shows the coast in steps;
+      // there the mask is drawn from the coast of Natural Earth 10m in vectors (static/tierra/costa, tiles of 10°,
+      // built by herramientas/costa_vector.py), at the resolution of the screen
+      G.costa = { indice: null, pedido: false, lista: new Map(), mal: false };
+      G.teselaC = (k) => {
+        let t = G.costa.lista.get(k); if (t) return t;
+        t = { ok: false, mal: false, r: null }; G.costa.lista.set(k, t);
+        fetch(TIERRA + 'costa/' + k + '.json').then((r) => r.json()).then((j) => { t.r = j.r; t.ok = true; G.zona.caja = null; }).catch(() => { t.mal = true; });
+        return t;
+      };
     } catch (e) { G = null; }
   }
   // the window of the planet on screen, in lon/lat, from the screen's corners and edges (clamped to the disc)
@@ -752,6 +762,38 @@ void main(){
         const t = G.teselaT(((c % 8) + 8) % 8, f); if (!t.ok) { conT = false; continue; }
         const x = (c * 45 - 180 - caja.lonMin) * ppd * esc, y = (caja.latMax - (90 - f * 45)) * ppd * esc, lado = 45 * ppd * esc;
         g3.drawImage(t.im, x, y, lado, lado);
+      }
+      // close in: the same mask from the coast in vectors, sharp at the screen's resolution
+      const ppdPantalla = 2 * Math.PI * R * DPR / 360;
+      const C = G.costa;
+      if (conT && C && !C.mal && ppdPantalla > 60) {
+        if (!C.indice && !C.pedido) { C.pedido = true; fetch(TIERRA + 'costa/indice.json').then((r) => r.json()).then((j) => { C.indice = new Set(j.teselas); G.zona.caja = null; }).catch(() => { C.mal = true; }); }
+        if (C.indice) {
+          const k0 = Math.floor((caja.lonMin + 180) / 10), k1 = Math.floor((caja.lonMax + 180 - 1e-6) / 10);
+          const r0 = Math.max(0, Math.floor((90 - caja.latMax) / 10)), r1 = Math.min(17, Math.floor((90 - caja.latMin - 1e-6) / 10));
+          const ts = [];
+          for (let c = k0; c <= k1; c++) for (let f = r0; f <= r1; f++) { const cc = ((c % 36) + 36) % 36, k = cc + '_' + f; if (C.indice.has(k)) ts.push([c, f, G.teselaC(k)]); }
+          if (ts.length <= 16 && ts.every((x) => x[2].ok || x[2].mal)) {
+            const dlc = caja.lonMax - caja.lonMin, dbc = caja.latMax - caja.latMin;
+            const esc2 = Math.min(1, 4096 / (Math.max(dlc, dbc) * ppdPantalla));
+            LT.width = Math.max(1, Math.round(dlc * ppdPantalla * esc2)); LT.height = Math.max(1, Math.round(dbc * ppdPantalla * esc2));
+            const sx = LT.width / dlc, sy = LT.height / dbc;
+            g3.fillStyle = '#000'; g3.fillRect(0, 0, LT.width, LT.height); g3.fillStyle = '#fff';
+            for (const [c, f, t] of ts) {
+              if (!t.ok) continue;
+              const x0 = c * 10 - 180, y1 = 90 - f * 10;
+              g3.beginPath();
+              for (const a of t.r) {
+                let ix = a[0], iy = a[1];
+                g3.moveTo((x0 + ix / 1e4 - caja.lonMin) * sx, (caja.latMax - (y1 - iy / 1e4)) * sy);
+                for (let i = 2; i < a.length; i += 2) { ix += a[i]; iy += a[i + 1]; g3.lineTo((x0 + ix / 1e4 - caja.lonMin) * sx, (caja.latMax - (y1 - iy / 1e4)) * sy); }
+                g3.closePath();
+              }
+              g3.fill('nonzero');
+            }
+            window.__orbitaCosta = { teselas: ts.length, w: LT.width, h: LT.height };
+          }
+        }
       }
       if (conT) {
         if (!G.zonaT.tex) G.zonaT.tex = gl.createTexture();
