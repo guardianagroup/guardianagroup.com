@@ -175,7 +175,25 @@ OSM_PRIORIDAD = {'tampnet', 'tampnet3', 'tampnetnorthsea', 'norseacoms', 'norsea
 EXTIENDE = {
     '臺金二號海纜': ((118.917, 24.418), (120.505, 24.258), 'Taiwán–Kinmen 2 llega a Taichung (puerto), según las dos voces (MODA y el condado de Kinmen)'),
     'UK-Ireland Crossing 2': ((-6.104, 52.305), (-6.358, 52.398), 'llega a Ballinesker (Curracloe, Wexford), según las dos voces (informe SEA8 del Reino Unido)'),
+    # FEA is in service (ChatGPT: GCX 2024; Claude: DCD 2025, «offers capacity on… FEA»; Gemini said retired): the Aqaba
+    # branch joins the Red Sea trunk Suez–Jeddah, whose nearest point on the map is (34.8, 27.105)
+    'FLAG Europe-Asia': ((34.335, 27.442), (34.8, 27.105), 'el ramal de Aqaba se une a la troncal del mar Rojo (Suez–Yeda), según ChatGPT y Claude'),
 }
+# 25 Oct 2026 (round 30): cables both voices place but neither OpenStreetMap nor the agency draws whole. APRICOT runs
+# between Japan, Taiwan and Guam (ChatGPT: Meta, Oct 2025; Claude: telecoms.com, «now running between Japan, Taiwan and
+# Guam»; Philippines, Indonesia and Singapore «to come later»). OpenStreetMap has only the Taiwan branch (S6, Toucheng to
+# its branching unit); the trunk from that unit to Minamiboso (Japan) and to Agat (Guam), the landings both ChatGPT and
+# Gemini name, is drawn as an approximate sea trace.
+ANADE = [
+    {'n': 'APRICOT', 'o': 'Meta, Google, NTT, Chunghwa Telecom, PLDT y Telin', 'puntos': [(126.459, 21.674), (139.95, 34.95)],
+     'de': ['unidad de ramificación (Taiwán)', 'TW'], 'a': ['Minamiboso', 'JP'],
+     'info': {'anio': 2025, 'km': 12000, 'duenos': ['Meta', 'Google', 'NTT', 'Chunghwa Telecom', 'PLDT', 'Telin'],
+              'fuentes': ['https://www.telecoms.com/fibre/meta-finally-finishes-bifrost-and-prepares-to-light-an-asian-candle',
+                          'https://engineering.fb.com/2025/10/05/connectivity/introducing-the-candle-subsea-cable-updates-to-our-asia-pacific-connectivity-projects/'],
+              'miembros': ['chatgpt', 'claude', 'gemini'], 'nota': 'En servicio entre Japón, Taiwán y Guam; Filipinas, Indonesia y Singapur, más adelante.'}},
+    {'n': 'APRICOT', 'o': 'Meta, Google, NTT, Chunghwa Telecom, PLDT y Telin', 'puntos': [(126.459, 21.674), (144.66, 13.39)],
+     'de': ['unidad de ramificación (Taiwán)', 'TW'], 'a': ['Agat', 'GU'], 'info': None},
+]
 # unnamed pieces that end in open sea and that neither voice identifies as a telecom cable (Sirri), or that repeat the
 # start of a cable the agency already draws (Tonga Cable, Nuku'alofa–Suva): by one of their ends
 SIN_NOMBRE_FUERA = {(54.626, 25.748): 'cable sin nombre de Sirri (Irán): ninguna voz lo identifica',
@@ -760,7 +778,14 @@ def main():
         print('piezas de OpenStreetMap que deja de dibujar porque la agencia tiene el cable entero:', len(piezas), '·',
               ', '.join(sorted({s_.get('n') for s_ in piezas})))
     osm = [s_ for s_ in osm if not (s_.get('n') and ck(s_) in claves_agencia)]
-    cab['cables'] = osm + tramos_todos
+    extra = []
+    for x in ANADE:
+        linea = densa(fina.corrige([list(q) for q in x['puntos']], x['n']))
+        info = x['info'] or ANADE[0]['info']
+        info = dict(info, kmMapa=round(sum(km(p[1], p[0], q[1], q[0]) for p, q in zip(linea, linea[1:]))))
+        extra.append({'n': x['n'], 'o': x['o'], 'l': linea, 'src': 'agencia', 'aprox': 1, 'por': 'mar', 'de': x['de'], 'a': x['a'], 'info': info})
+    if extra: print('tramos añadidos (ronda 30):', len(extra), '·', ', '.join(sorted({e['n'] for e in extra})))
+    cab['cables'] = osm + tramos_todos + extra
     cab['agencia'] = {'cables': len(salida), 'tramos': len(tramos_todos)}
     with open(os.path.join(RAIZ, 'datos', 'cables.json'), 'w', encoding='utf-8') as f:
         json.dump(cab, f, ensure_ascii=False, separators=(',', ':'))
