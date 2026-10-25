@@ -911,7 +911,7 @@
     'Un reproductor de vídeo de otra empresa, con sus propias cookies.': ['A video player from another company, with its own cookies.', 'Um player de vídeo de outra empresa, com seus próprios cookies.'],
     'Una ventana de chat de otra empresa que se carga aunque no la uses.': ['Another company\'s chat window that loads even if you never use it.', 'Uma janela de chat de outra empresa que carrega mesmo que você não a use.'],
     'Identificador de cookie': ['Cookie identifier', 'Identificador de cookie'], 'Web que visitas': ['Site you visit', 'Site que você visita'],
-    'Ubicación aproximada': ['Approximate location', 'Localização aproximada'], 'Identificador del dispositivo': ['Device identifier', 'Identificador do dispositivo'],
+    'Ubicación aproximada': ['Approximate location', 'Localização aproximada'], 'en la ciudad; la dirección exacta del edificio aún no está confirmada': ['in the city; the building\'s exact address is not confirmed yet', 'na cidade; o endereço exato do prédio ainda não está confirmado'], 'a menos de 2 km; la dirección exacta del edificio aún no está confirmada': ['within 2 km; the building\'s exact address is not confirmed yet', 'a menos de 2 km; o endereço exato do prédio ainda não está confirmado'], 'Identificador del dispositivo': ['Device identifier', 'Identificador do dispositivo'],
     'Tiempo en la página': ['Time on the page', 'Tempo na página'], 'Pantalla y navegador': ['Screen and browser', 'Tela e navegador'],
     'Perfil de intereses': ['Interest profile', 'Perfil de interesses'], 'Correo cifrado': ['Hashed email', 'E-mail cifrado'],
     'Clics y desplazamiento': ['Clicks and scrolling', 'Cliques e rolagem'], 'Web de procedencia': ['Referring site', 'Site de origem'],

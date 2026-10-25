@@ -32,7 +32,7 @@ concurrency:
 jobs:
   datos:
     runs-on: ubuntu-latest
-    timeout-minutes: 55
+    timeout-minutes: 95
     steps:
       - uses: actions/checkout@v4
 
@@ -76,13 +76,13 @@ jobs:
       # AfTerFibre (CC BY 4.0), the OFDS public data and OpenStreetMap, joined in one file
       - name: Fibra troncal por tierra (a mano o al cambiar la herramienta; GitHub no admite «%» en las expresiones)
         if: github.event_name != 'schedule'
-        timeout-minutes: 10
+        timeout-minutes: 20
         continue-on-error: true
         run: pip install --quiet pillow && python3 herramientas/fibra_tierra.py --sin-ofds
 
       # 22 Oct 2026 (owner, plan B): the cables OpenStreetMap lacks, rebuilt by the agency from public sources
       - name: Cables reconstruidos por la agencia
-        timeout-minutes: 10
+        timeout-minutes: 30
         continue-on-error: true
         run: pip install --quiet pillow && python3 herramientas/cables_agencia.py
 

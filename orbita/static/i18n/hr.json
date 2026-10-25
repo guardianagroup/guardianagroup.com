@@ -923,7 +923,9 @@
   "En preparación": "U pripremi",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Što bilo koja stranica vidi o tebi i s kim razgovara svaka stranica, nacrtano na planetu.",
   "Sin GUARDIANA": "Bez GUARDIANA",
-  "Con y sin GUARDIANA": "S GUARDIANA i bez nje"
+  "Con y sin GUARDIANA": "S GUARDIANA i bez nje",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "u gradu; točna adresa zgrade još nije potvrđena",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "unutar 2 km; točna adresa zgrade još nije potvrđena"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

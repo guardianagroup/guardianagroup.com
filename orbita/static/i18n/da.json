@@ -924,7 +924,9 @@
   "En preparación": "Under forberedelse",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Hvad ethvert websted ser af dig, og hvem hver side taler med, tegnet på planeten.",
   "Sin GUARDIANA": "Uden GUARDIANA",
-  "Con y sin GUARDIANA": "Med og uden GUARDIANA"
+  "Con y sin GUARDIANA": "Med og uden GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "i byen; bygningens præcise adresse er endnu ikke bekræftet",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "inden for 2 km; bygningens præcise adresse er endnu ikke bekræftet"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

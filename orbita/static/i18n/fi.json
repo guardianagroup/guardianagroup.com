@@ -924,7 +924,9 @@
   "En preparación": "Valmisteilla",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Mitä mikä tahansa sivusto näkee sinusta ja kenelle kukin sivu puhuu, piirrettynä planeetalle.",
   "Sin GUARDIANA": "Ilman GUARDIANAa",
-  "Con y sin GUARDIANA": "GUARDIANAn kanssa ja ilman"
+  "Con y sin GUARDIANA": "GUARDIANAn kanssa ja ilman",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "kaupungissa; rakennuksen tarkkaa osoitetta ei ole vielä vahvistettu",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "alle 2 km:n päässä; rakennuksen tarkkaa osoitetta ei ole vielä vahvistettu"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

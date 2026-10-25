@@ -925,7 +925,9 @@
   "En preparación": "Hazırlanıyor",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Herhangi bir sitenin senden ne gördüğü ve her sayfanın kiminle konuştuğu, gezegene çizilmiş halde.",
   "Sin GUARDIANA": "GUARDIANA olmadan",
-  "Con y sin GUARDIANA": "GUARDIANA ile ve olmadan"
+  "Con y sin GUARDIANA": "GUARDIANA ile ve olmadan",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "şehirde; binanın tam adresi henüz doğrulanmadı",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 km içinde; binanın tam adresi henüz doğrulanmadı"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

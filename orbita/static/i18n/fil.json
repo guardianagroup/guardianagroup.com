@@ -924,7 +924,9 @@
   "En preparación": "Inihahanda",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Ang nakikita ng kahit anong website tungkol sa iyo at kung kanino nakikipag-usap ang bawat pahina, iginuhit sa planeta.",
   "Sin GUARDIANA": "Walang GUARDIANA",
-  "Con y sin GUARDIANA": "May at walang GUARDIANA"
+  "Con y sin GUARDIANA": "May at walang GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "sa lungsod; hindi pa kumpirmado ang eksaktong address ng gusali",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "sa loob ng 2 km; hindi pa kumpirmado ang eksaktong address ng gusali"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

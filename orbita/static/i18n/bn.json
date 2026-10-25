@@ -924,7 +924,9 @@
   "En preparación": "প্রস্তুতি চলছে",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "যেকোনো ওয়েবসাইট আপনার কী দেখে এবং প্রতিটি পাতা কার সঙ্গে কথা বলে, গ্রহের ওপর আঁকা।",
   "Sin GUARDIANA": "GUARDIANA ছাড়া",
-  "Con y sin GUARDIANA": "GUARDIANA সহ ও ছাড়া"
+  "Con y sin GUARDIANA": "GUARDIANA সহ ও ছাড়া",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "শহরের মধ্যে; ভবনের সঠিক ঠিকানা এখনও নিশ্চিত নয়",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "২ কিমির মধ্যে; ভবনের সঠিক ঠিকানা এখনও নিশ্চিত নয়"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

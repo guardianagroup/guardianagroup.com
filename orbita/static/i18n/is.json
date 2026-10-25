@@ -924,7 +924,9 @@
   "En preparación": "Í undirbúningi",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Það sem hvaða vefur sem er sér af þér og við hvern hver síða talar, teiknað á plánetuna.",
   "Sin GUARDIANA": "Án GUARDIANA",
-  "Con y sin GUARDIANA": "Með og án GUARDIANA"
+  "Con y sin GUARDIANA": "Með og án GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "í borginni; nákvæmt heimilisfang byggingarinnar hefur ekki enn verið staðfest",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "innan við 2 km; nákvæmt heimilisfang byggingarinnar hefur ekki enn verið staðfest"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

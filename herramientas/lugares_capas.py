@@ -60,31 +60,72 @@ def km(la1, lo1, la2, lo2):
     a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
     return 6371.0 * 2 * math.asin(min(1.0, math.sqrt(a)))
 
+class Paises:
+    """25 Oct 2026 (revisión completa: a data centre of Potsdam, New York, filed under «Cornwall, Canada»; REFSA's nodes in
+    Formosa, Argentina, under «Pilar, Paraguay»; a Newfoundland landing under «Saint-Pierre»): the countries around a
+    point, from Natural Earth's 1:10m countries rasterised at 0.05° (herramientas/fuentes/paises-ne10m.png, built by
+    revisa_puntos.py's Paises). The nearest city is then taken from the point's own country. Without the file (or Pillow)
+    every country is allowed, as before."""
+    # Natural Earth draws these inside the country they belong to; «-99» is a place with no ISO code
+    DENTRO = {'GP': 'FR', 'MQ': 'FR', 'GF': 'FR', 'RE': 'FR', 'YT': 'FR', 'SJ': 'NO', 'BV': 'NO', 'BQ': 'NL', 'CX': 'AU',
+              'CC': 'AU', 'UM': 'US', 'TK': 'NZ', 'IC': 'ES', 'EA': 'ES', 'XK': 'RS'}
+
+    def __init__(self):
+        self.px = None
+        try:
+            from PIL import Image
+            Image.MAX_IMAGE_PIXELS = None
+            aqui = os.path.dirname(os.path.abspath(__file__))
+            m = json.load(open(os.path.join(aqui, 'fuentes', 'paises-ne10m.json'), encoding='utf-8'))
+            im = Image.open(os.path.join(aqui, 'fuentes', 'paises-ne10m.png'))
+            self.paso, self.cc, self.W, self.H, self.px = m['paso'], m['cc'], im.size[0], im.size[1], im.load()
+        except Exception as e:
+            print('sin mapa de países, la ciudad más cercana puede quedar al otro lado de la frontera:', e)
+
+    def en(self, la, lo, r=1):
+        if self.px is None: return set()
+        x, y = int((lo + 180) / self.paso), int((90 - la) / self.paso)
+        s = set()
+        for dx in range(-r, r + 1):
+            for dy in range(-r, r + 1):
+                v = self.px[(x + dx) % self.W, min(self.H - 1, max(0, y + dy))]
+                if v: s.add(self.cc[v])
+        return s
+
+    def vale(self, cc, s):
+        return not s or '-99' in s or cc in s or self.DENTRO.get(cc) in s
+
+
 class Rejilla:
-    """Cities in 1-degree cells, for a quick nearest search."""
-    def __init__(self, ciudades):
+    """Cities in 1-degree cells, for a quick nearest search; «pais», when given, keeps only the cities of those countries."""
+    def __init__(self, ciudades, paises=None):
         self.c = collections.defaultdict(list)
         for i, (n, cc, la, lo) in enumerate(ciudades):
             self.c[(int(math.floor(la)), int(math.floor(lo)))].append(i)
         self.ciudades = ciudades
-    def cercana(self, la, lo, max_km):
+        self.paises = paises
+    def cercana(self, la, lo, max_km, pais=None):
         mejor, dm = None, max_km
         r = 1 + int(max_km / 111) + 1
         for i in range(-r, r + 1):
             for j in range(-r, r + 1):
                 for k in self.c.get((int(math.floor(la)) + i, (int(math.floor(lo)) + j + 180) % 360 - 180), ()):
                     n, cc, la2, lo2 = self.ciudades[k]
+                    if pais and not self.paises.vale(cc, pais):
+                        continue
                     d = km(la, lo, la2, lo2)
                     if d < dm:
                         mejor, dm = k, d
         return mejor
-    def todas(self, la, lo, max_km):
+    def todas(self, la, lo, max_km, pais=None):
         out = []
         r = 1 + int(max_km / 111) + 1
         for i in range(-r, r + 1):
             for j in range(-r, r + 1):
                 for k in self.c.get((int(math.floor(la)) + i, (int(math.floor(lo)) + j + 180) % 360 - 180), ()):
                     n, cc, la2, lo2 = self.ciudades[k]
+                    if pais and not self.paises.vale(cc, pais):
+                        continue
                     d = km(la, lo, la2, lo2)
                     if d <= max_km:
                         out.append((d, k))
@@ -100,31 +141,43 @@ def base_cable(n):
 
 def main():
     ciudades = lee_ciudades()
-    rj = Rejilla(ciudades)
+    paises = Paises()
+    rj = Rejilla(ciudades, paises)
     pueblos, pob = lee_pueblos()
-    rp = Rejilla(pueblos) if pueblos else None
+    rp = Rejilla(pueblos, paises) if pueblos else None
     def lugar_cable(la, lo):
         """The town where a cable reaches land (owner, 23 Oct 2026, 23:39: «todo cable que… empiece o termine en un
         pueblo, tiene que aparecer el nombre»): the nearest place of the towns list within 20 km, unless a city of
         50,000 people or more is almost as near (a cable that lands in a city's suburb takes the city's name); without
-        a town, the nearest city of 15,000 people within 80 km, as before."""
+        a town, the nearest city of 15,000 people within 80 km, as before. 25 Oct 2026: only places of the country the
+        landing is in (or, for a landing just offshore, of the countries within about 10 km)."""
+        pais = paises.en(la, lo, 2)
         if rp:
-            cand = rp.todas(la, lo, 20)
+            cand = rp.todas(la, lo, 20, pais)
             if cand:
                 d0 = cand[0][0]
                 grandes = [x for x in cand if pob[x[1]] >= 50000 and x[0] <= max(6.0, 1.5 * d0)]
                 k = (grandes[0] if grandes else cand[0])[1]
                 return [pueblos[k][0], pueblos[k][1]]
-        k = rj.cercana(la, lo, 80)
+        k = rj.cercana(la, lo, 80, pais)
         return [ciudades[k][0], ciudades[k][1]] if k is not None else ['', '']
     pts = json.load(open(os.path.join(RAIZ, 'datos', 'puntos.json'), encoding='utf-8'))
     c = pts['campos']; il, ia, it, io = c.index('lon'), c.index('lat'), c.index('tipo'), c.index('operador')
+    # 25 Oct 2026: the agency's data centres (puntos-extra.json) join the cities too, after OpenStreetMap's and in the
+    # same order the page adds them (capas.js, cargaPuntos), so «de» also gives their city
+    lista = [p for p in pts['puntos'] if p[it] == 'datos']
+    try:
+        ex = json.load(open(os.path.join(RAIZ, 'datos', 'puntos-extra.json'), encoding='utf-8'))
+        for f in ex.get('puntos', []):
+            if f.get('tipo') == 'datos' and isinstance(f.get('lon'), (int, float)) and isinstance(f.get('lat'), (int, float)):
+                q = [None] * len(c); q[il], q[ia], q[it], q[io] = f['lon'], f['lat'], 'datos', f.get('operador') or ''
+                lista.append(q)
+    except (OSError, ValueError):
+        pass
     grupos = collections.OrderedDict()
     claves = []
-    for p in pts['puntos']:
-        if p[it] != 'datos':
-            continue
-        k = rj.cercana(p[ia], p[il], 50)
+    for p in lista:
+        k = rj.cercana(p[ia], p[il], 50, paises.en(p[ia], p[il], 1))
         clave = ('c', k) if k is not None else ('p', round(p[il], 2), round(p[ia], 2))
         claves.append(clave)
         g = grupos.setdefault(clave, {'lon': 0.0, 'lat': 0.0, 'n': 0, 'ops': collections.Counter()})
@@ -145,11 +198,16 @@ def main():
     extremos = []
     llegadas = collections.OrderedDict()
     for idx, s in enumerate(cab['cables']):
-        for (lo, la) in (s['l'][0], s['l'][-1]):
+        for j, (lo, la) in enumerate((s['l'][0], s['l'][-1])):
             k = (round(lo / 0.05), round(la / 0.05))
             g = llegadas.setdefault(k, {'lo': lo, 'la': la, 'seg': []})
             if idx not in g['seg']:
                 g['seg'].append(idx)
+            # 25 Oct 2026 (revisión completa: the St. Pierre and Miquelon cable's landing at Lamaline, Newfoundland, was
+            # named «Saint-Pierre»): a landing of a cable the agency rebuilt takes the name the agency gives it
+            e = s.get('de') if j == 0 else s.get('a')
+            if s.get('src') == 'agencia' and e and e[0] and 'ag' not in g:
+                g['ag'] = [re.split(r',\s*', e[0])[0], e[1]]
         a, b = s['l'][0], s['l'][-1]
         if s.get('src') == 'agencia':  # the agency names the landing itself (cables_agencia.py)
             extremos.append([s['de'][0], s['de'][1], s['a'][0], s['a'][1]]); continue
@@ -221,7 +279,7 @@ def main():
         'cables': extremos,
         'grupos': grupos_out,
         'g': g_de,
-        'llegadas': [[round(g['lo'], 3), round(g['la'], 3)] + lugar_cable(g['la'], g['lo']) + [g['seg']] for g in llegadas.values()],
+        'llegadas': [[round(g['lo'], 3), round(g['la'], 3)] + (g.get('ag') or lugar_cable(g['la'], g['lo'])) + [g['seg']] for g in llegadas.values()],
     }
     with open(os.path.join(RAIZ, 'datos', 'lugares-capas.json'), 'w', encoding='utf-8') as f:
         json.dump(out, f, ensure_ascii=False, separators=(',', ':'))

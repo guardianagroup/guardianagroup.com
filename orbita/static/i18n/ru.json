@@ -925,7 +925,9 @@
   "En preparación": "Готовится",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Что видит о тебе любой сайт и с кем говорит каждая страница — нарисовано на планете.",
   "Sin GUARDIANA": "Без GUARDIANA",
-  "Con y sin GUARDIANA": "С GUARDIANA и без"
+  "Con y sin GUARDIANA": "С GUARDIANA и без",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "в городе; точный адрес здания пока не подтверждён",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "в пределах 2 км; точный адрес здания пока не подтверждён"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

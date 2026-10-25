@@ -335,6 +335,8 @@ class Fina:
     when the sea way round is reasonable (otherwise it is a real crossing by land, as at Suez, Panama or Guatemala, and is
     kept), and a route that ends inland is cut where it reaches the coast."""
     P = 0.025
+    CANALES = {'Suez': [(32.32, 31.32), (32.30, 31.00), (32.28, 30.60), (32.35, 30.30), (32.55, 29.95), (32.57, 29.85)],
+               'Panamá': [(-79.95, 9.55), (-79.92, 9.30), (-79.85, 9.15), (-79.68, 9.02), (-79.55, 8.90), (-79.45, 8.70)]}
 
     def __init__(self, agua):
         from PIL import Image
@@ -342,15 +344,30 @@ class Fina:
         im = Image.open(os.path.join(AQUI, 'fuentes', 'tierra-ne10m.png')).convert('L')
         self.W, self.H = im.size
         self.m = bytearray(im.tobytes())  # 255 land, 0 water
-        for linea in agua.PASOS.values():  # the same passages the tracing opens (Suez, the Turkish straits, Panama, Aqaba)
+        # the canals, narrower than a pixel: only these two, one pixel wide. 25 Oct 2026 (revisión completa): the coarse
+        # tracer's passages (agua.PASOS) were opened here three pixels wide too, and their Gulf of Suez and Dardanelles
+        # lines, drawn for a 20 km grid, run a few km off the water, so SEA-ME-WE 5 cut across the Sinai's coast and
+        # MedNautilus across Gallipoli; the gulfs are open water at this scale and the straits come from pasos-finos.json
+        for nombre, linea in self.CANALES.items():
             for (lo1, la1), (lo2, la2) in zip(linea, linea[1:]):
                 x1, y1 = self.px(lo1, la1); x2, y2 = self.px(lo2, la2)
                 n = max(abs(x2 - x1), abs(y2 - y1), 1)
                 for j in range(n + 1):
                     x = round(x1 + (x2 - x1) * j / n); y = round(y1 + (y2 - y1) * j / n)
-                    for dx in (-1, 0, 1):
-                        for dy in (-1, 0, 1):
-                            if 0 <= y + dy < self.H: self.m[(y + dy) * self.W + ((x + dx) % self.W)] = 0
+                    self.m[y * self.W + (x % self.W)] = 0
+        # 25 Oct 2026: the fjords, inlets and estuaries that close at this scale (Narvik, Port Alberni, Douala), traced on
+        # a ten times finer grid by pasos_finos.py, are opened one pixel wide, so no isthmus is cut
+        try:
+            finos = json.load(open(os.path.join(AQUI, 'fuentes', 'pasos-finos.json'), encoding='utf-8'))['pasos']
+        except (OSError, ValueError, KeyError):
+            finos = {}
+        for linea in finos.values():
+            for (lo1, la1), (lo2, la2) in zip(linea, linea[1:]):
+                x1, y1 = self.px(lo1, la1); x2, y2 = self.px(lo2, la2)
+                n = max(abs(x2 - x1), abs(y2 - y1), 1)
+                for j in range(n + 1):
+                    x = round(x1 + (x2 - x1) * j / n); y = round(y1 + (y2 - y1) * j / n)
+                    self.m[y * self.W + (x % self.W)] = 0
         self.cambios = collections.Counter()
 
     def px(self, lo, la):
@@ -410,7 +427,37 @@ class Fina:
         pts = simplifica(pts, 0.45)
         return [[round(px * self.P - 180, 4), round(90 - py * self.P, 4)] for px, py in pts]
 
-    def corrige(self, linea, nombre=''):
+    def fino(self, linea, nombre='', insiste=True):
+        """25 Oct 2026 (revisión completa): two passes. The first works on the coarse route, with long hops; on the
+        second, with a point every 150 km, the stretches the first could not take round (SIDN across Santa Isabel,
+        Telstra Endeavour across New Caledonia, Topaz) are short and local, and are traced again by sea. «insiste»: a
+        hop the agency traced by sea (not one of the real crossings by land, Suez, Panama, Guatemala, England, which are
+        drawn straight and passed with insiste=False) may take a longer way round, as Echo round Sulawesi's north arm."""
+        # 25 Oct 2026: a route across the antimeridian (Telstra Endeavour, Southern Cross NEXT, Tui-Samoa) is corrected
+        # on each side of it; the cut points stay where they are
+        partes, cruza = [[list(linea[0])]], False
+        for p, q in zip(linea, linea[1:]):
+            if abs(q[0] - p[0]) > 180:
+                lo_q = q[0] + (360 if q[0] < p[0] else -360)
+                borde = 180.0 if p[0] > 0 else -180.0
+                f = (borde - p[0]) / (lo_q - p[0]) if lo_q != p[0] else 0.5
+                la = round(p[1] + (q[1] - p[1]) * f, 4)
+                partes[-1].append([borde - math.copysign(0.0001, borde), la])
+                partes.append([[-borde + math.copysign(0.0001, borde), la], list(q)]); cruza = True
+            else:
+                partes[-1].append(list(q))
+        if not cruza:
+            return densa(self.corrige(densa(self.corrige(linea, nombre, insiste)), nombre, insiste))
+        out = []
+        for k, parte in enumerate(partes):
+            fijos = (k > 0, k < len(partes) - 1)
+            if len(parte) >= 2:
+                parte = densa(self.corrige(densa(self.corrige(parte, nombre, insiste, fijos)), nombre, insiste, fijos))
+            out += parte
+        return out
+
+    def corrige(self, linea, nombre='', insiste=False, fijos=(False, False)):
+        """«fijos»: the ends that must stay where they are (a cut at the antimeridian, not a landing)"""
         if len(linea) < 2: return linea
         m = self.muestras(linea)
         total = m[-1][2]
@@ -421,8 +468,8 @@ class Fina:
             return None
         i0 = primera_agua(m); i1 = primera_agua(m[::-1])
         if i0 is None or i1 is None: return linea  # all over land on this grid (a tiny island or a lake): leave it
-        ini = m[i0] if m[i0][2] > 3 else m[0]
-        fin = m[len(m) - 1 - i1] if total - m[len(m) - 1 - i1][2] > 3 else m[-1]
+        ini = m[i0] if m[i0][2] > 3 and not fijos[0] else m[0]
+        fin = m[len(m) - 1 - i1] if total - m[len(m) - 1 - i1][2] > 3 and not fijos[1] else m[-1]
         if ini is not m[0]: self.cambios['extremo en la costa'] += 1
         if fin is not m[-1]: self.cambios['extremo en la costa'] += 1
         m = [s for s in m if ini[2] <= s[2] <= fin[2]]
@@ -437,7 +484,7 @@ class Fina:
             return None
         for lado in (0, -1):
             e = m[lado]
-            if not e[3]:
+            if not e[3] and not fijos[0 if lado == 0 else 1]:
                 c = costa(e[0], e[1])
                 if c and km(e[1], e[0], c[1], c[0]) > 3:
                     q = (c[0], c[1], e[2], True)
@@ -455,33 +502,86 @@ class Fina:
             k += 1
         grupos = []
         for r in runs:
-            if grupos and m[r[0]][2] - m[grupos[-1][1]][2] < 150: grupos[-1][1] = r[1]
-            else: grupos.append(list(r))
-        out, ultimo = [], 0
-        for a0, b0 in grupos:
-            if sum(1 for q in m[a0:b0] if q[3]) * 1.5 < 5: continue
-            # water points about 40 km before and after the group
+            if grupos and m[r[0]][2] - m[grupos[-1][1]][2] < 150: grupos[-1][1] = r[1]; grupos[-1][2].append(list(r))
+            else: grupos.append([r[0], r[1], [list(r)]])
+
+        def anclas(a0, b0, ultimo):
+            # water points about 40 km before and after the group. 25 Oct 2026 (revisión completa: 2Africa Dar es Salaam
+            # → Mombasa across Zanzibar and Pemba, SAT-3 Lagos → Douala across the Niger delta): when the group starts
+            # less than 40 km from a landing, the landing itself is on land, so the nearest water point is taken instead
+            # of giving the group up
             a = a0
             while a > ultimo and (m[a][3] or m[a0][2] - m[a][2] < 40): a -= 1
+            if m[a][3]: a = next((j for j in range(a0 - 1, ultimo - 1, -1) if not m[j][3]), a)
             b = b0
             while b < len(m) - 1 and (m[b][3] or m[b][2] - m[b0][2] < 40): b += 1
-            if m[a][3] or m[b][3]: continue
-            recto = km(m[a][1], m[a][0], m[b][1], m[b][0])
-            hecho = None
-            for margen in (max(120, 0.5 * recto), max(300, 1.0 * recto)):
-                r = self.astar((m[a][0], m[a][1]), (m[b][0], m[b][1]), margen)
+            if m[b][3]: b = next((j for j in range(b0, len(m)) if not m[j][3]), b)
+            return a, b
+
+        def por_mar(A, B, antes):
+            recto = km(A[1], A[0], B[1], B[0])
+            pasos = [(max(120, 0.5 * recto), 3 * recto + 150), (max(300, 1.0 * recto), 3 * recto + 150)]
+            if insiste: pasos.append((max(700, 2.0 * recto), 5 * recto + 300))
+            for margen, tope in pasos:
+                r = self.astar(A, B, margen)
                 if not r: continue
                 largo = sum(km(p[1], p[0], q[1], q[0]) for p, q in zip(r, r[1:]))
                 # kept only when it really has less land than the stretch it replaces (in narrow fjords the simplified
                 # path can cut corners)
-                antes = sum(1.5 for q in m[a:b + 1] if q[3])
-                if largo <= 3 * recto + 150 and sum(1.5 for q in self.muestras(r) if q[3]) < antes: hecho = r
-                break
-            if hecho:
-                out += [[round(q[0], 4), round(q[1], 4)] for q in m[ultimo:a]] + hecho
+                if largo <= tope and sum(1.5 for q in self.muestras(r) if q[3]) < antes: return r
+                if not insiste: return None
+            return None
+
+        def cerca_abierta(lo, la, otro):
+            """25 Oct 2026: a landing up an estuary or behind a bar (Douala on the Wouri, Mombasa's creeks) is water closed
+            off at this scale, so the sea way is traced to the open water nearest to it (within 30 km) and the last few
+            km run straight in, as the cable does"""
+            out = []
+            for r_km in (6, 14, 22, 30):  # the two of each ring that are nearest to the other end
+                d = r_km / 111.0; anillo = []
+                for k in range(0, 360, 15):
+                    t = math.radians(k); lo2 = lo + d * math.cos(t) / max(0.2, math.cos(math.radians(la))); la2 = la + d * math.sin(t)
+                    if not self.tierra(lo2, la2): anillo.append((km(la2, lo2, otro[1], otro[0]), (lo2, la2)))
+                out += [p for _, p in sorted(anillo)[:2]]
+            return out
+
+        def intenta(a0, b0, ultimo):
+            a, b = anclas(a0, b0, ultimo)
+            if m[a][3] or m[b][3]: return None
+            antes = sum(1.5 for q in m[a:b + 1] if q[3])
+            A, B = (m[a][0], m[a][1]), (m[b][0], m[b][1])
+            r = por_mar(A, B, antes)
+            if r: return a, b, r
+            # the group runs into a landing (within 30 km of an end): try the open water next to it instead
+            if m[-1][2] - m[b][2] <= 30 and not fijos[1]:
+                for B2 in cerca_abierta(m[-1][0], m[-1][1], A):
+                    r = por_mar(A, B2, antes)
+                    if r: return a, len(m) - 1, r + [[round(m[-1][0], 4), round(m[-1][1], 4)]]
+            if m[a][2] <= 30 and ultimo == 0 and not fijos[0]:
+                for A2 in cerca_abierta(m[0][0], m[0][1], B):
+                    r = por_mar(A2, B, antes)
+                    if r: return 0, b, [[round(m[0][0], 4), round(m[0][1], 4)]] + r
+            return None
+
+        out, ultimo = [], 0
+        for a0, b0, sub in grupos:
+            if sum(1 for q in m[a0:b0] if q[3]) * 1.5 < 5: continue
+            hechos = []
+            h = intenta(a0, b0, ultimo)
+            if h: hechos = [h]
+            elif len(sub) > 1:
+                # the whole group has no way round (one of its stretches is a real crossing, or ends at a closed landing):
+                # each stretch on its own
+                u = ultimo
+                for x0, y0 in sub:
+                    if sum(1 for q in m[x0:y0] if q[3]) * 1.5 < 5: continue
+                    h = intenta(x0, y0, u)
+                    if h: hechos.append(h); u = h[1] + 1
+            for a, b, r in hechos:
+                out += [[round(q[0], 4), round(q[1], 4)] for q in m[ultimo:a]] + r
                 ultimo = b + 1
                 self.cambios['rodea tierra por mar'] += 1
-            else:
+            if not hechos:
                 self.cambios['paso por tierra que se queda (real o sin mar alrededor)'] += 1
         out += [[round(q[0], 4), round(q[1], 4)] for q in m[ultimo:]]
         out = [list(p) for p in simplifica([tuple(p) for p in out], 0.01)]
@@ -607,6 +707,18 @@ def num(v):
 
 def main():
     ciudades = lee_ciudades(); rj = Rejilla(ciudades)
+    # 25 Oct 2026 (revisión completa): the towns by name, to check where the voices put each landing
+    # only towns of fewer than 100,000 people are a precise enough reference: a cable that «lands in» Singapore, Sydney or
+    # Jakarta comes ashore at a beach 15–50 km from the city's centre, and the voices' point there is kept
+    pueblo = {}
+    try:
+        for l in open(os.path.join(AQUI, 'fuentes', 'pueblos-fibra.tsv'), encoding='utf-8'):
+            if l.startswith('#'): continue
+            p = l.rstrip('\n').split('\t')
+            if len(p) >= 5 and p[4].isdigit(): pueblo.setdefault((p[1], p[0]), (float(p[2]), float(p[3]), int(p[4])))
+    except OSError:
+        pass
+    llevadas = []
     agua = Agua()
     fina = Fina(agua)
     conf = confirmados()
@@ -626,7 +738,7 @@ def main():
         suelto, destino, por = x
         for fin in (-1, 0):
             if cerca(s['l'][fin], suelto):
-                tramo = densa(fina.corrige([list(suelto), list(destino)], s['n']))
+                tramo = fina.fino([list(suelto), list(destino)], s['n'])
                 s['l'] = s['l'] + tramo[1:] if fin == -1 else tramo[::-1][:-1] + s['l']
                 s['ext'] = por
                 print('extremo suelto llevado a tierra:', s['n'], '·', por)
@@ -685,6 +797,15 @@ def main():
         for g in grupos:
             if len(g['m']) < 2 and k not in conf: continue
             la = sum(p[0] for p in g['pts']) / len(g['pts']); lo = sum(p[1] for p in g['pts']) / len(g['pts'])
+            # 25 Oct 2026 (revisión completa): when the voices' point is more than 15 km from the town they name (El
+            # Médano put in the sea east of Tenerife, Torquay at Geelong, Nyborg in Odense Fjord), the landing goes to the
+            # town itself (GeoNames); the tracer then ends the cable at its coast
+            for x in g['lugares']:
+                t = pueblo.get((g['cc'], re.sub(r'[^a-z0-9]', '', unicodedata.normalize('NFKD', re.split(r'[(/,]', x or '')[0]).encode('ascii', 'ignore').decode().lower())))
+                if t and t[2] < 100000 and 15 < km(la, lo, t[0], t[1]) < 90:
+                    llevadas.append('%s (%s): %.0f km' % (x, g['cc'], km(la, lo, t[0], t[1]))); la, lo = t[0], t[1]
+                    break
+                if t: break
             c = rj.cercana(la, lo, 120)
             # a border town (Taba by Eilat, Vanimo by Jayapura) is kept when two members put it in its own country
             if c is not None and ciudades[c][1] != g['cc'] and len(g['m']) < 2:
@@ -762,8 +883,7 @@ def main():
                 if tierra_en(agua, recta)[1] <= 400: linea, por = recta, 'tierra'
                 else:
                     sin_trazar.append('%s (%s) → %s (%s)' % (A['lugar'], A['cc'], B['lugar'], B['cc'])); continue
-            if not any(abs(q[0] - p[0]) > 180 for p, q in zip(linea, linea[1:])):  # not across the antimeridian
-                linea = densa(fina.corrige(linea, nombre))
+            linea = fina.fino(linea, nombre, por != 'tierra')  # across the antimeridian too, each side on its own (25 Oct 2026)
             tramos.append({'n': nombre, 'l': linea, 'src': 'agencia', 'aprox': 1, 'por': por, 'de': [A['lugar'], A['cc']], 'a': [B['lugar'], B['cc']]})
         if sin_trazar: descartes.append((k, 'tramos sin trazar (cruzarían cientos de km de tierra): ' + '; '.join(sin_trazar)))
         if not tramos: continue
@@ -798,7 +918,7 @@ def main():
     osm = [s_ for s_ in osm if not (s_.get('n') and ck(s_) in claves_agencia)]
     extra = []
     for x in ANADE:
-        linea = densa(fina.corrige([list(q) for q in x['puntos']], x['n']))
+        linea = fina.fino([list(q) for q in x['puntos']], x['n'])
         info = x['info'] or ANADE[0]['info']
         info = dict(info, kmMapa=round(sum(km(p[1], p[0], q[1], q[0]) for p, q in zip(linea, linea[1:]))))
         extra.append({'n': x['n'], 'o': x['o'], 'l': linea, 'src': 'agencia', 'aprox': 1, 'por': 'mar', 'de': x['de'], 'a': x['a'], 'info': info})
@@ -809,6 +929,7 @@ def main():
         json.dump(cab, f, ensure_ascii=False, separators=(',', ':'))
     print('cables de la agencia aceptados:', len(salida), '· tramos:', len(tramos_todos))
     print('trazado con la costa fina (Natural Earth 10m):', dict(fina.cambios))
+    print('llegadas llevadas al pueblo que nombran (las voces las ponían a más de 15 km):', len(llevadas), '·', '; '.join(llevadas[:40]))
     for c in salida: print('  ', c['nombre'], '·', ' → '.join(L['lugar'] + ' (' + L['cc'] + ')' for L in c['llegadas']), '·', c['info']['anio'], c['info']['km'] or ('~%d km mapa' % c['info']['kmMapa']), '·', ', '.join(c['info']['miembros']))
     if descartes:
         print('descartado:')
