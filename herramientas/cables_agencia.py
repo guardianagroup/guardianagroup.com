@@ -163,6 +163,11 @@ RETIRADOS = {'tat9f5': 'TAT-9, retirado en 2004', 'tat11f4': 'TAT-11, retirado e
              'cantat3': 'CANTAT-3, fuera de servicio normal desde 2010 (solo plataformas petrolíferas)',
              'seamewe2': 'SEA-ME-WE 2, dado de baja'}
 
+# 24 Oct 2026, 21:10 (owner: «los cables que terminan en plataformas petrolíferas… que aparezca el nombre de la plataforma»):
+# the offshore networks of the North Sea are kept as OpenStreetMap draws them, platform by platform; the agency's
+# simplified versions of them (Kårstø–Lowestoft, Aberdeen–Stavanger) are not drawn on top
+OSM_PRIORIDAD = {'tampnet', 'tampnet3', 'tampnetnorthsea', 'norseacoms', 'norseacom1', 'sleipnirgranefoc', 'cns'}
+
 # the name shown for a cable that goes by several names (ALIAS), when the most common answer is not its real name
 NOMBRE = {'tmx5': 'TMX5', 'amerigovespucci': 'Amerigo Vespucci', 'gulfofcalifornia': 'Gulf of California Cable',
           'cookstraittelecommunications': 'Cook Strait Telecommunications Cable',
@@ -581,6 +586,8 @@ def main():
     for k, respuestas in por_cable.items():
         if k in RETIRADOS:
             descartes.append((k, 'retirado: ' + RETIRADOS[k])); continue
+        if k in OSM_PRIORIDAD:
+            descartes.append((k, 'OpenStreetMap lo dibuja con sus plataformas')); continue
         miembros = {m for m, _ in respuestas}
         if len(miembros) < 2 and k not in conf:
             descartes.append((k, 'solo lo nombra ' + ', '.join(miembros))); continue
