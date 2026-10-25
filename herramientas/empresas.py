@@ -786,6 +786,12 @@ def copiar():
                                'fundada', 'matriz', 'sector', 'empleados', 'bolsa') if c.get(k)}
         if not e.get('web') and c.get('web_wd'):
             e['web'] = c['web_wd']
+        # 24 Oct 2026: the review can correct what Wikidata says (33Across, Magnite and Taboola have moved their sede);
+        # null removes the field
+        for k in ('sede', 'sede_pais', 'cc'):
+            if k in r:
+                if r[k]: e[k] = r[k]
+                else: e.pop(k, None)
         d = r.get('direccion')
         if d:
             e['direccion'] = {k: d[k] for k in ('texto', 'voces', 'fuente', 'oficial') if d.get(k)}

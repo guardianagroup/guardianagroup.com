@@ -1,4 +1,6 @@
-# Revisión de las fichas de empresas (24 Oct 2026, 18:00–18:20) — A MEDIAS, sin `revision-1.json` todavía
+# Revisión de las fichas de empresas (24 Oct 2026, 18:00–18:20; terminada a las 20:15 en la cuenta nueva)
+
+**20:15:** `revision-1.json` escrito con `decisiones.py` (45 empresas, 8 fotos, 45 direcciones con coordenadas). Coordenadas en `coordenadas.json`: Nominatim (1 petición cada 2,2 s) o la voz OSM/SIRENE cuando coincide con la dirección decidida. Media.net va al punto de Dubai Internet City (Nominatim no tiene Aurora Tower). Paramount queda fuera hasta corregir su emparejamiento. `copiar()` ya admite `sede`, `sede_pais` y `cc` en la revisión.
 
 Candidatas: `orbita/datos/empresas-candidatas.json` (64 emparejadas, 57 sin emparejar; run del 24 Oct 21:33Z).
 

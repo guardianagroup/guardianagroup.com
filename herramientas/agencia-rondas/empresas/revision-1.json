@@ -1,0 +1,683 @@
+{
+ "nota": "Revisión 1 de las fichas de empresas (24 Oct 2026). Fotos: solo el edificio real de la sede, sin personas ni logotipos. Dirección: registro oficial (SEC, SIRENE, GLEIF, CPPA, Companies House) o dos voces.",
+ "empresas": {
+  "33Across": {
+   "direccion": {
+    "texto": "228 Park Avenue South PMB 74008, New York, NY 10003, EE. UU.",
+    "voces": [
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.98867,
+    40.73778
+   ],
+   "sede": "Nueva York",
+   "sede_pais": "US"
+  },
+  "Adobe": {
+   "foto": "Adobe HQ.JPG",
+   "que_foto": "Sede de Adobe en San José (California)",
+   "direccion": {
+    "texto": "345 Park Avenue, San José, CA 95110, EE. UU.",
+    "voces": [
+     "sec",
+     "wikidata",
+     "osm"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000796343",
+    "oficial": true
+   },
+   "lonlat": [
+    -121.89437,
+    37.33076
+   ]
+  },
+  "Amazon": {
+   "direccion": {
+    "texto": "410 Terry Avenue North, Seattle, WA 98109, EE. UU.",
+    "voces": [
+     "sec",
+     "wikidata"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001018724",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.3365,
+    47.6223
+   ]
+  },
+  "Amplitude": {
+   "direccion": {
+    "texto": "201 Third Street, Suite 200, San Francisco, CA 94103, EE. UU.",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/984500EZ87C703978858",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.39987,
+    37.78507
+   ]
+  },
+  "Automattic": {
+   "direccion": {
+    "texto": "60 29th Street #343, San Francisco, CA 94110, EE. UU.",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/254900SC9UVUIZP1CH08",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.42156,
+    37.74413
+   ]
+  },
+  "Brightcove": {
+   "direccion": {
+    "texto": "281 Summer Street, Boston, MA 02210, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001313275",
+    "oficial": true
+   },
+   "lonlat": [
+    -71.0503,
+    42.34988
+   ]
+  },
+  "Chartbeat": {
+   "direccion": {
+    "texto": "826 Broadway, 6th Floor, New York, NY 10003, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001499932",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.99098,
+    40.73332
+   ]
+  },
+  "Cloudflare": {
+   "direccion": {
+    "texto": "101 Townsend Street, San Francisco, CA 94107, EE. UU.",
+    "voces": [
+     "sec",
+     "osm"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001477333",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.39061,
+    37.78034
+   ]
+  },
+  "Comscore": {
+   "direccion": {
+    "texto": "11950 Democracy Drive, Suite 600, Reston, VA 20190, EE. UU.",
+    "voces": [
+     "sec",
+     "cppa"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001158172",
+    "oficial": true
+   },
+   "lonlat": [
+    -77.3595,
+    38.95804
+   ]
+  },
+  "Contentsquare": {
+   "direccion": {
+    "texto": "7 rue de Madrid, 75008 París, Francia",
+    "voces": [
+     "sirene"
+    ],
+    "fuente": "https://annuaire-entreprises.data.gouv.fr/entreprise/503916033",
+    "oficial": true
+   },
+   "lonlat": [
+    2.32113,
+    48.87837
+   ]
+  },
+  "Criteo": {
+   "direccion": {
+    "texto": "32 rue Blanche, 75009 París, Francia",
+    "voces": [
+     "sirene",
+     "wikidata",
+     "osm"
+    ],
+    "fuente": "https://annuaire-entreprises.data.gouv.fr/entreprise/484786249",
+    "oficial": true
+   },
+   "lonlat": [
+    2.33196,
+    48.87917
+   ]
+  },
+  "Equativ": {
+   "direccion": {
+    "texto": "44-48 rue de Châteaudun, 75009 París, Francia",
+    "voces": [
+     "sirene"
+    ],
+    "fuente": "https://annuaire-entreprises.data.gouv.fr/entreprise/487613481",
+    "oficial": true
+   },
+   "lonlat": [
+    2.33463,
+    48.87634
+   ]
+  },
+  "Fox Corporation": {
+   "foto": "1211 Avenue of the Americas.jpg",
+   "que_foto": "Sede de Fox Corporation, 1211 Avenue of the Americas (Nueva York)",
+   "direccion": {
+    "texto": "1211 Avenue of the Americas, New York, NY 10036, EE. UU.",
+    "voces": [
+     "gleif",
+     "wikidata"
+    ],
+    "fuente": "https://search.gleif.org/#/record/549300DDU6FDRBIELS05",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.98238,
+    40.75867
+   ]
+  },
+  "Google": {
+   "direccion": {
+    "texto": "1600 Amphitheatre Parkway, Mountain View, CA 94043, EE. UU.",
+    "voces": [
+     "sec",
+     "wikidata"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001824723",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.08558,
+    37.42249
+   ]
+  },
+  "HubSpot": {
+   "direccion": {
+    "texto": "2 Canal Park, Cambridge, MA 02141, EE. UU.",
+    "voces": [
+     "sec",
+     "osm"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001404655",
+    "oficial": true
+   },
+   "lonlat": [
+    -71.07632,
+    42.3701
+   ]
+  },
+  "Ipsos": {
+   "direccion": {
+    "texto": "35 rue du Val de Marne, 75013 París, Francia",
+    "voces": [
+     "sirene",
+     "wikidata"
+    ],
+    "fuente": "https://annuaire-entreprises.data.gouv.fr/entreprise/304555634",
+    "oficial": true
+   },
+   "lonlat": [
+    2.34557,
+    48.81598
+   ]
+  },
+  "LiveRamp": {
+   "direccion": {
+    "texto": "225 Bush Street, 17th Floor, San Francisco, CA 94104, EE. UU.",
+    "voces": [
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.4013,
+    37.7908
+   ]
+  },
+  "Magnite": {
+   "direccion": {
+    "texto": "1250 Broadway, 9th Floor, New York, NY, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001595974",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.98785,
+    40.74767
+   ],
+   "sede": "Nueva York",
+   "sede_pais": "US"
+  },
+  "Media.net": {
+   "direccion": {
+    "texto": "2701 Aurora Towers, Dubai Internet City, Dubái, Emiratos Árabes Unidos",
+    "voces": [
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    55.1739,
+    25.10217
+   ],
+   "sede": "Dubái",
+   "sede_pais": "AE",
+   "cc": "AE"
+  },
+  "Meta": {
+   "foto": "Facebook Offices Menlo Park California (34183281176).jpg",
+   "que_foto": "Campus de la sede de Meta en Menlo Park (California)",
+   "direccion": {
+    "texto": "1 Meta Way, Menlo Park, CA 94025, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001326801",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.14837,
+    37.48467
+   ]
+  },
+  "Microsoft": {
+   "foto": "Aerial Microsoft West Campus August 2009.jpg",
+   "que_foto": "Campus de la sede de Microsoft en Redmond (Washington)",
+   "direccion": {
+    "texto": "One Microsoft Way, Redmond, WA 98052, EE. UU.",
+    "voces": [
+     "sec",
+     "wikidata"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000789019",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.12675,
+    47.64116
+   ]
+  },
+  "Nielsen": {
+   "direccion": {
+    "texto": "675 Avenue of the Americas, New York, NY 10010, EE. UU.",
+    "voces": [
+     "sec",
+     "cppa"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001492633",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.99383,
+    40.74188
+   ]
+  },
+  "OpenX": {
+   "direccion": {
+    "texto": "35 N. Lake Avenue, Suite 240, Pasadena, CA 91101, EE. UU.",
+    "voces": [
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    -118.13281,
+    34.14681
+   ]
+  },
+  "Oracle": {
+   "direccion": {
+    "texto": "2300 Oracle Way, Austin, TX 78741, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001341439",
+    "oficial": true
+   },
+   "lonlat": [
+    -97.72183,
+    30.2435
+   ],
+   "sede": "Austin",
+   "sede_pais": "US"
+  },
+  "Outbrain": {
+   "direccion": {
+    "texto": "111 West 19th Street, New York, NY 10011, EE. UU.",
+    "voces": [
+     "sec",
+     "cppa"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001454938",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.99541,
+    40.74089
+   ]
+  },
+  "PRISA": {
+   "foto": "Edificio en Gran Vía 32 Madrid.png",
+   "que_foto": "Gran Vía 32 (Madrid), domicilio social de PRISA",
+   "direccion": {
+    "texto": "Gran Vía 32, 28013 Madrid, España (domicilio social)",
+    "voces": [
+     "gleif",
+     "wikidata"
+    ],
+    "fuente": "https://search.gleif.org/#/record/959800U3NGPXSCQHQW54",
+    "oficial": true
+   },
+   "lonlat": [
+    -3.70382,
+    40.42045
+   ]
+  },
+  "Prensa Ibérica": {
+   "direccion": {
+    "texto": "Av. de la Gran Via de l'Hospitalet 163-167, 08908 L'Hospitalet de Llobregat, España",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/959800LZ8UVL4ZQMG292",
+    "oficial": true
+   },
+   "lonlat": [
+    2.11823,
+    41.35089
+   ]
+  },
+  "Qualtrics": {
+   "foto": "Qualtrics headquarters (29230813277).jpg",
+   "que_foto": "Sede de Qualtrics en Provo (Utah)",
+   "direccion": {
+    "texto": "333 West River Park Drive, Provo, UT 84604, EE. UU.",
+    "voces": [
+     "sec",
+     "osm"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001747748",
+    "oficial": true
+   },
+   "lonlat": [
+    -111.66371,
+    40.30293
+   ]
+  },
+  "Quantcast": {
+   "direccion": {
+    "texto": "201 Third Street, Second Floor, San Francisco, CA 94103, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001393806",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.39987,
+    37.78507
+   ]
+  },
+  "RTB House": {
+   "direccion": {
+    "texto": "ul. Złota 61/101, 00-819 Varsovia, Polonia",
+    "voces": [
+     "gleif",
+     "wikidata"
+    ],
+    "fuente": "https://search.gleif.org/#/record/984500F644Z2FD680C94",
+    "oficial": true
+   },
+   "lonlat": [
+    20.9993,
+    52.22969
+   ]
+  },
+  "Salesforce": {
+   "foto": "Salesforce Tower 2020.jpg",
+   "que_foto": "Salesforce Tower, sede de Salesforce en San Francisco",
+   "direccion": {
+    "texto": "Salesforce Tower, 415 Mission Street, 3rd Floor, San Francisco, CA 94105, EE. UU.",
+    "voces": [
+     "sec",
+     "wikidata"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001108524",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.39693,
+    37.78977
+   ]
+  },
+  "Seedtag": {
+   "direccion": {
+    "texto": "Calle del Marqués de Valdeiglesias 6, 28004 Madrid, España",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/959800WQLK1D7CYTM157",
+    "oficial": true
+   },
+   "lonlat": [
+    -3.69707,
+    40.41961
+   ]
+  },
+  "Seznam.cz": {
+   "direccion": {
+    "texto": "Radlická 3294/10, 150 00 Praga 5, Chequia",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/3157008DY7NRFD22D743",
+    "oficial": true
+   },
+   "lonlat": [
+    14.40093,
+    50.07108
+   ]
+  },
+  "Shopify": {
+   "direccion": {
+    "texto": "151 O'Connor Street, Ground Floor, Ottawa, ON K2P 2L8, Canadá",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001594805",
+    "oficial": true
+   },
+   "lonlat": [
+    -75.69705,
+    45.41999
+   ]
+  },
+  "Sky": {
+   "foto": "Aerial view of Sky campus in 2011.jpg",
+   "que_foto": "Campus de Sky en Isleworth (Londres)",
+   "direccion": {
+    "texto": "Grant Way, Isleworth, Middlesex TW7 5QD, Reino Unido",
+    "voces": [
+     "companies_house",
+     "wikidata"
+    ],
+    "fuente": "https://find-and-update.company-information.service.gov.uk/company/02906991",
+    "oficial": true
+   },
+   "lonlat": [
+    -0.32756,
+    51.48936
+   ]
+  },
+  "Snap": {
+   "direccion": {
+    "texto": "3000 31st Street, Santa Monica, CA 90405, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001564408",
+    "oficial": true
+   },
+   "lonlat": [
+    -118.45158,
+    34.01948
+   ]
+  },
+  "Sovrn": {
+   "direccion": {
+    "texto": "1600 Pearl Street, Suite 200, Boulder, CO 80302, EE. UU.",
+    "voces": [
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    -105.27413,
+    40.01881
+   ]
+  },
+  "Taboola": {
+   "direccion": {
+    "texto": "16 Madison Square West, 7th Floor, New York, NY 10010, EE. UU.",
+    "voces": [
+     "sec",
+     "cppa"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001840502",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.98933,
+    40.74281
+   ]
+  },
+  "Teads": {
+   "direccion": {
+    "texto": "111 West 19th Street, New York, NY 10011, EE. UU.",
+    "voces": [
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.99541,
+    40.74089
+   ]
+  },
+  "Tealium": {
+   "direccion": {
+    "texto": "9605 Scranton Road, San Diego, CA 92121, EE. UU.",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/25490022SLQK4828KO50",
+    "oficial": true
+   },
+   "lonlat": [
+    -117.20268,
+    32.89548
+   ]
+  },
+  "The Trade Desk": {
+   "direccion": {
+    "texto": "42 N. Chestnut Street, Ventura, CA 93001, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001671933",
+    "oficial": true
+   },
+   "lonlat": [
+    -119.2913,
+    34.28142
+   ]
+  },
+  "The Walt Disney Company": {
+   "direccion": {
+    "texto": "500 South Buena Vista Street, Burbank, CA 91521, EE. UU.",
+    "voces": [
+     "sec",
+     "wikidata"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001744489",
+    "oficial": true
+   },
+   "lonlat": [
+    -118.3265,
+    34.15513
+   ]
+  },
+  "TripleLift": {
+   "direccion": {
+    "texto": "53 West 23rd Street, 12th Floor, New York, NY, EE. UU.",
+    "voces": [
+     "wikidata",
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.99158,
+    40.74263
+   ]
+  },
+  "Unidad Editorial": {
+   "direccion": {
+    "texto": "Avenida de San Luis 25, 28033 Madrid, España",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/959800PSK3FFF8EYX760",
+    "oficial": true
+   },
+   "lonlat": [
+    -3.65679,
+    40.47107
+   ]
+  },
+  "Zeta Global": {
+   "direccion": {
+    "texto": "3 Park Avenue, 33rd Floor, New York, NY 10016, EE. UU.",
+    "voces": [
+     "sec",
+     "cppa"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001851003",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.981,
+    40.74648
+   ]
+  }
+ }
+}
