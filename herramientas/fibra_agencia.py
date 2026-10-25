@@ -120,6 +120,9 @@ SITIOS = {
     ('BL', 'flamands'): (-62.857, 17.919),
     ('BQ', 'hato'): (-68.292, 12.180), ('BQ', 'noordsalina'): (-68.274, 12.177), ('BQ', 'terakora'): (-68.263, 12.139),
     ('BQ', 'windwardside'): (-63.232, 17.629), ('BQ', 'zionshill'): (-63.229, 17.639),
+    # 25 Oct 2026 (revisión punto por punto): Saint Johns (Saba) was placed in St. John's, Antigua, and Forest (Guernsey) in
+    # Forest, Brussels, by the cross-border search; both from OpenStreetMap (Nominatim)
+    ('BQ', 'stjohns'): (-63.244, 17.621), ('GG', 'forest'): (-2.593, 49.431),
     ('GD', 'grandanse'): (-61.757, 12.024),
     ('KN', 'bath'): (-62.626, 17.130), ('KN', 'frigatebay'): (-62.689, 17.279), ('KN', 'cockleshellbay'): (-62.634, 17.227),
     ('KN', 'tabernacle'): (-62.774, 17.388), ('KN', 'mannings'): (-62.548, 17.165),
@@ -180,6 +183,7 @@ SITIOS = {
     ('MH', 'ine'): (171.698, 6.985), ('MH', 'kwajalein'): (167.735, 8.720), ('MH', 'ebeye'): (167.737, 8.784),
 }
 
+POR_TIERRA = True  # radio_agencia.py turns it off: a microwave hop does cross the sea
 PARECIDO = 1.35  # the other voice's path between two cities may be this much longer than the straight line (+ 60 km)
 
 
@@ -218,10 +222,17 @@ def ciudades():
     return idx, idx_div
 
 
-def fuera(nombre, previo, idx):
+# islands with no land border: a town of theirs that is not found is never looked for in another country
+ISLAS = {'GG', 'JE', 'IM', 'BQ', 'AW', 'CW', 'KY', 'VG', 'VI', 'AI', 'MS', 'KN', 'AG', 'DM', 'LC', 'VC', 'GD', 'BB', 'TT', 'BM',
+         'TC', 'BS', 'FO', 'MT', 'MV', 'MU', 'SC', 'KM', 'CV', 'ST', 'PM', 'FK', 'SH', 'AX', 'YT', 'RE', 'GP', 'MQ', 'IS', 'JM',
+         'CK', 'NU', 'TO', 'WS', 'AS', 'FJ', 'PF', 'NC', 'WF', 'TV', 'KI', 'NR', 'MH', 'FM', 'PW', 'GU', 'MP'}  # not Bahrain or Singapore: bridges to Saudi Arabia and Malaysia carry fibre
+
+
+def fuera(nombre, previo, idx, cc=''):
     """A town across the border (routes that reach the first city on the other side: Minsk–Warsaw, Hanoi–Vientiane):
-    the same name in another country, only when it is less than 800 km from the route's previous town."""
-    if not previo: return None
+    the same name in another country, only when it is less than 800 km from the route's previous town, and never for
+    an island with no land border (Forest, Guernsey, is not Forest, Brussels)."""
+    if not previo or cc in ISLAS: return None
     mejor, dm = None, 800.0
     for k in {pliega(nombre), pliega(re.split(r'[(/,]', nombre)[0])}:
         k = ALIAS.get(k, k)
@@ -271,6 +282,80 @@ def mismo_operador(a, b):
     return bool(pal(a) & pal(b))
 
 
+class Tierra:
+    """25 Oct 2026 (revisión punto por punto: Chennai–Visakhapatnam, Aktau–Atyrau or Cebu–Cagayan drawn straight across
+    the sea): a stretch between two towns that crosses more than 25 km of open sea follows the land instead, on the
+    Natural Earth 10m land mask (herramientas/fuentes/tierra-ne10m.png, 0.025° a pixel), when a way over land exists that
+    is at most 1.8 times the straight line. The trace stays approximate (the exact route is not public), but it no
+    longer runs over water. A stretch with no way over land (between islands) keeps its straight line."""
+    PASO = 0.025
+
+    def __init__(self):
+        from PIL import Image
+        Image.MAX_IMAGE_PIXELS = None
+        im = Image.open(os.path.join(AQUI, 'fuentes', 'tierra-ne10m.png')).convert('1')
+        self.W, self.H = im.size; self.px = im.load(); self.hechos = 0
+
+    def es(self, x, y): return self.px[x % self.W, min(self.H - 1, max(0, y))] > 0
+    def pix(self, p): return int((p[0] + 180) / self.PASO), int((90 - p[1]) / self.PASO)
+    def geo(self, x, y): return (round(-180 + (x + 0.5) * self.PASO, 3), round(90 - (y + 0.5) * self.PASO, 3))
+
+    def mar(self, A, B):
+        """the longest run of open sea (km) on the straight line A–B"""
+        d = km(A, B); n = max(2, int(d / 1.5)); run = peor = 0.0
+        for i in range(n):
+            f = (i + 0.5) / n; x, y = self.pix((A[0] + (B[0] - A[0]) * f, A[1] + (B[1] - A[1]) * f))
+            if self.es(x, y): run = 0.0
+            else: run += d / n; peor = max(peor, run)
+        return peor
+
+    def ruta(self, A, B):
+        import heapq
+        (ax, ay), (bx, by) = self.pix(A), self.pix(B)
+        m = 40 + int(max(abs(ax - bx), abs(ay - by)) * 0.3)
+        x0, x1, y0, y1 = min(ax, bx) - m, max(ax, bx) + m, min(ay, by) - m, max(ay, by) + m
+        recta = math.hypot(ax - bx, ay - by); tope = recta * 1.8 + 8
+        dist, de, h = {(ax, ay): 0.0}, {}, [(recta, 0.0, (ax, ay))]
+        while h:
+            _, g, (x, y) = heapq.heappop(h)
+            if (x, y) == (bx, by): break
+            if g > dist.get((x, y), 1e18) or g > tope: continue
+            for dx in (-1, 0, 1):
+                for dy in (-1, 0, 1):
+                    if not dx and not dy: continue
+                    nx, ny = x + dx, y + dy
+                    if not (x0 <= nx <= x1 and y0 <= ny <= y1): continue
+                    if (nx, ny) != (bx, by) and not self.es(nx, ny): continue
+                    ng = g + (1.4142 if dx and dy else 1.0)
+                    if ng < dist.get((nx, ny), 1e18):
+                        dist[(nx, ny)] = ng; de[(nx, ny)] = (x, y); heapq.heappush(h, (ng + math.hypot(nx - bx, ny - by), ng, (nx, ny)))
+        if (bx, by) not in de: return None
+        cam, q = [], (bx, by)
+        while q != (ax, ay): cam.append(q); q = de[q]
+        cam = [self.geo(*q) for q in reversed(cam[1:])]
+        return simplifica([A] + cam + [B], 0.04)
+
+    def corrige(self, l):
+        out = [l[0]]
+        for A, B in zip(l, l[1:]):
+            r = self.ruta(A, B) if self.mar(A, B) > 25 else None
+            if r: out.extend(r[1:]); self.hechos += 1
+            else: out.append(B)
+        return out
+
+
+def simplifica(pts, tol):
+    if len(pts) < 3: return pts
+    a, b = pts[0], pts[-1]; dx, dy = b[0] - a[0], b[1] - a[1]; n = math.hypot(dx, dy)
+    dmax, idx = 0.0, 0
+    for i in range(1, len(pts) - 1):
+        q = pts[i]
+        d = abs(dx * (a[1] - q[1]) - (a[0] - q[0]) * dy) / n if n else math.hypot(q[0] - a[0], q[1] - a[1])
+        if d > dmax: dmax, idx = d, i
+    if dmax > tol: return simplifica(pts[:idx + 1], tol)[:-1] + simplifica(pts[idx:], tol)
+    return [a, b]
+
+
 def camino(pts, i, j):
     if i > j: i, j = j, i
     return sum(km(pts[k], pts[k + 1]) for k in range(i, j))
@@ -295,7 +380,7 @@ def main():
                 if res[i] is not None: continue
                 ref = next((res[j] for j in range(i - 1, -1, -1) if res[j] is not None), None)
                 if ref is None: ref = next((res[j] for j in range(i + 1, len(res)) if res[j] is not None), None)
-                res[i] = fuera(c, ref, idx)
+                res[i] = fuera(c, ref, idx, cc)
             pts, nom, sin = [], [], []
             for c, p in zip(nombres, res):
                 if p is None: sin.append(c); continue
@@ -367,6 +452,13 @@ def main():
             x = {'n': c['n'], 'o': c['o'], 'cc': c['cc'], 'l': [[round(p[0], 3), round(p[1], 3)] for p in t]}
             hechos.append({'cc': c['cc'], 'l': t}); lineas.append(x)
 
+    try:
+        if not POR_TIERRA: raise ImportError('radioenlaces: el aire cruza el mar')
+        tierra = Tierra()
+        for x in lineas: x['l'] = [[round(p[0], 3), round(p[1], 3)] for p in tierra.corrige([tuple(p) for p in x['l']])]
+        print('tramos llevados por tierra en vez de cruzar el mar:', tierra.hechos)
+    except (ImportError, OSError) as e:
+        print('sin máscara de tierra, los tramos quedan en línea recta:', e)
     tot = sum(sum(km(p, q) for p, q in zip(x['l'], x['l'][1:])) for x in lineas)
     os.makedirs(os.path.dirname(SALIDA), exist_ok=True)
     with open(SALIDA, 'w', encoding='utf-8') as f:

@@ -26,6 +26,8 @@ F.SALIDA = os.path.join(os.path.dirname(AQUI), 'orbita', 'datos', 'radioenlaces.
 F.APROX = set(F.APROX) | {'GL', 'ER', 'FK', 'TO', 'KI', 'TV', 'MH', 'NR', 'PW', 'US', 'GB', 'DE', 'BE', 'NL', 'FR'}
 # the CME data centre is in Aurora, Illinois (not Aurora, Colorado, the larger namesake)
 F.SITIOS[('US', 'aurora')] = (-88.239, 41.795)
+# a microwave hop between islands does cross the sea: no land routing (fibra_agencia.Tierra)
+F.POR_TIERRA = False
 
 
 def gran_circulo(a, b, paso=100):
