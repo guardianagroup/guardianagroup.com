@@ -1,0 +1,65 @@
+[
+  {
+    "nombre": "Lanka Bell Submarine Cable",
+    "llegadas": [
+      {
+        "lugar": "Mount Lavinia",
+        "pais": "LK",
+        "lat": 6.8397,
+        "lon": 79.8648
+      }
+    ],
+    "anio": 2008,
+    "km": null,
+    "duenos": [
+      "Lanka Bell"
+    ],
+    "fuentes": [
+      "Lanka Bell, información corporativa sobre su conexión a FLAG y su estación de aterrizaje: https://www.lankabell.com/",
+      "Melstacorp, informes anuales y descripción del negocio de telecomunicaciones de Lanka Bell: https://melstacorp.com/"
+    ]
+  },
+  {
+    "nombre": "Mazatlán-La Paz",
+    "llegadas": [
+      {
+        "lugar": "Mazatlán",
+        "pais": "MX",
+        "lat": 23.2329,
+        "lon": -106.4062
+      },
+      {
+        "lugar": "La Paz",
+        "pais": "MX",
+        "lat": 24.1423,
+        "lon": -110.3128
+      }
+    ],
+    "anio": null,
+    "km": null,
+    "duenos": [
+      "Telmex"
+    ],
+    "fuentes": [
+      "Telmex, documentación corporativa sobre su infraestructura nacional: https://telmex.com/",
+      "América Móvil, informes anuales y descripción de la red mexicana: https://www.americamovil.com/"
+    ]
+  },
+  {
+    "nombre": "Mozambique Festoon",
+    "llegadas": [
+      {
+        "lugar": "Maputo",
+        "pais": "MZ",
+        "lat": -25.9655,
+        "lon": 32.5832
+      },
+      {
+        "lugar": "Vilanculos",
+        "pais": "MZ",
+        "lat": -21.9958,
+        "lon": 35.3167
+      },
+      {
+        "lugar": "Beira",
+        "pais": "MZ

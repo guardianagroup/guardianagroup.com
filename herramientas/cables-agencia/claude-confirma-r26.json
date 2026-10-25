@@ -1,0 +1,27 @@
+[
+ {
+  "nombre": "TMX5",
+  "llegadas": [
+   {
+    "lugar": "San José del Cabo",
+    "pais": "MX",
+    "lat": 23.0592,
+    "lon": -109.6976
+   },
+   {
+    "lugar": "Mazatlán",
+    "pais": "MX",
+    "lat": 23.2329,
+    "lon": -106.4062
+   }
+  ],
+  "anio": 2025,
+  "km": 383,
+  "duenos": [
+   "Telmex"
+  ],
+  "fuentes": [
+   "Telmex, comunicado «TELMEX pone en operación el Cable Submarino de San José del Cabo a Mazatlán» (23-9-2025): https://telmex.com/web/acerca-de-telmex/w/telmex-pone-en-opercion-el-cable-submarino-de-san-jose-del-cabo-a-mazatlan"
+  ]
+ }
+]

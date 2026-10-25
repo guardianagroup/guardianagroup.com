@@ -35,6 +35,7 @@ from lugares_capas import lee_ciudades, Rejilla, km, base_cable  # noqa: E402
 ALIAS = {  # the same cable under different names (lower case, letters and digits only)
     'australtroncalaustral': 'austral',  # «Fibra Óptica Austral (FOA), Troncal Submarina Austral» = «Fibra Óptica Austral (troncal submarina)»
     'mauritiusandrodrigues': 'mars', 'mauritiusandrodriguessubmarinecablesystem': 'mars',  # 22 Oct 2026: MARS under its long name
+    'cabosanlucasmazatlan': 'tmx5', 'tmx5': 'tmx5',  # 24 Oct 2026 (ronda 26b): Gemini's «Cabo San Lucas-Mazatlán» is Telmex's TMX5 (San José del Cabo–Mazatlán, in service 23-9-2025)
     'sat3wasc': 'sat3', 'sat3wascsafe': 'sat3', 'southatlantic3': 'sat3',
     'seacomtatatgneurasia': 'seacom', 'seacomafricancablesystem': 'seacom',
     'asiaafricaeurope1aae1': 'aae1', 'asiaafricaeurope1': 'aae1',
