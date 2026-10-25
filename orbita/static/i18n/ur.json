@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "سیارے پر دیکھنے کے لیے کلک کریں",
   "De compañías con 5 centros de datos o más en el mapa.": "ان کمپنیوں کے جن کے نقشے پر 5 یا زیادہ ڈیٹا سینٹرز ہیں۔",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "ان کمپنیوں کے جن کے نقشے پر 1 سے 4 ڈیٹا سینٹرز ہیں، یا جن کا آپریٹر معلوم نہیں۔"
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "ان کمپنیوں کے جن کے نقشے پر 1 سے 4 ڈیٹا سینٹرز ہیں، یا جن کا آپریٹر معلوم نہیں۔",
+  "Plataforma petrolífera": "تیل کا پلیٹ فارم",
+  "Plataforma de gas": "گیس کا پلیٹ فارم",
+  "Campo": "فیلڈ",
+  "Cable que llega": "یہاں پہنچنے والی کیبل",
+  "La plataforma": "پلیٹ فارم",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "یہاں آپٹیکل فائبر کی ایک زیرِ سمندر کیبل ختم ہوتی ہے۔ بحیرۂ شمال کے پلیٹ فارم اسی طرح خشکی سے جڑے ہیں: پیداوار کا ڈیٹا، رابطے اور وہاں کام کرنے والوں کا انٹرنیٹ اسی کیبل سے گزرتا ہے۔",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "آرکٹک اور انٹارکٹکا کے اڈے، سیٹلائٹس کے زمینی اسٹیشن اور وہ تیل کے پلیٹ فارم جہاں کوئی کیبل ختم ہوتی ہے۔"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

@@ -38,6 +38,28 @@ qalat	AF	32.10575	66.90833	12191	Qalāt
 sarobi	AF	34.58962	69.76005	0	Sarōbī
 sheberghan	AF	36.66757	65.7529	55641	Shibirghān
 spinboldak	AF	31.00575	66.40001	0	Spīn Bōldak
+allsaints	AG	17.06671	-61.79303	2526	All Saints
+bolans	AG	17.06565	-61.87466	1657	Bolands
+cedargrove	AG	17.16225	-61.8178	789	Cedar Grove
+englishharbour	AG	17.01637	-61.7674	778	English Harbour Town
+falmouth	AG	17.02741	-61.78136	619	Falmouth
+jollyharbour	AG	17.06622	-61.88646	855	Jolly Harbour
+liberta	AG	17.04141	-61.79052	2560	Liberta
+oldroad	AG	17.01682	-61.83579	623	Old Road
+parham	AG	17.09682	-61.77046	969	Parham
+piggotts	AG	17.11667	-61.8	1878	Piggotts
+saintjohns	AG	17.12096	-61.84329	51737	Saint John’s
+stjohns	AG	17.12096	-61.84329	51737	Saint John’s
+willikies	AG	17.08684	-61.7093	1270	Willikies
+blowingpoint	AI	18.17648	-63.09375	942	Blowing Point Village
+islandharbour	AI	18.25601	-63.0102	0	Island Harbour
+northside	AI	18.22919	-63.04401	0	North Side
+sandyground	AI	18.20118	-63.08998	274	Sandy Ground Village
+southhillvillage	AI	18.19201	-63.08779	0	South Hill Village
+stoneyground	AI	18.22026	-63.04607	0	Stoney Ground
+thefarrington	AI	18.215	-63.02238	0	Farrington
+thequarter	AI	18.20799	-63.04178	0	The Quarter
+thevalley	AI	18.21704	-63.05783	2035	The Valley
 bilisht	AL	40.6275	20.99	7287	Bilisht
 burrel	AL	41.61028	20.00889	7928	Burrel
 durres	AL	41.32355	19.45469	195920	Durrës
@@ -273,6 +295,11 @@ visoko	BA	43.98889	18.17806	17890	Visoko
 zenica	BA	44.20169	17.90397	164423	Zenica
 zepce	BA	44.42667	18.03778	8502	Žepče
 zivinice	BA	44.44929	18.64978	13641	Živinice
+bridgetown	BB	13.10732	-59.62021	98511	Bridgetown
+hastings	BB	13.07513	-59.59688	1500	Hastings
+holetown	BB	13.18672	-59.63808	1350	Holetown
+oistins	BB	13.07067	-59.54637	2285	Oistins
+speightstown	BB	13.25072	-59.64396	3634	Speightstown
 barisal	BD	22.70497	90.37013	202242	Barishal
 bhairabbazar	BD	24.0524	90.9764	105457	Bhairab Bāzār
 bheramara	BD	24.02452	88.99234	38159	Bherāmāra
@@ -402,6 +429,8 @@ savalou	BJ	7.92807	1.97558	38162	Savalou
 save	BJ	8.03424	2.4866	31444	Savé
 tanguieta	BJ	10.62118	1.26651	27094	Tanguiéta
 tchaourou	BJ	8.88649	2.59753	43862	Tchaourou
+gustavia	BL	17.89618	-62.84978	5988	Gustavia
+hamilton	BM	32.2949	-64.78303	902	Hamilton
 bandarseribegawan	BN	4.89035	114.94006	64409	Bandar Seri Begawan
 bangar	BN	4.70861	115.07167	3970	Bangar
 kualabelait	BN	4.58361	114.2312	31178	Kuala Belait
@@ -429,6 +458,13 @@ tarija	BO	-21.53549	-64.72956	159269	Tarija
 trinidad	BO	-14.83223	-64.90335	84259	Trinidad
 villamontes	BO	-21.26235	-63.46903	39800	Villamontes
 yacuiba	BO	-22.01643	-63.67753	82803	Yacuiba
+belnem	BQ	12.12329	-68.28739	881	Belnem
+goldenrock	BQ	17.49142	-62.98119	823	Golden Rock
+kralendijk	BQ	12.15	-68.26667	10620	Kralendijk
+nikiboko	BQ	12.14444	-68.26121	3475	Dorp Nikiboko
+oranjestad	BQ	17.48303	-62.9864	1097	Oranjestad
+rincon	BQ	12.23762	-68.33059	1875	Dorp Rincon
+thebottom	BQ	17.62652	-63.24971	488	The Bottom
 aracaju	BR	-10.91111	-37.07167	664908	Aracaju
 araraquara	BR	-21.79444	-48.17556	168468	Araraquara
 belem	BR	-1.45583	-48.50444	1499641	Belém
@@ -865,6 +901,7 @@ santamaria	CV	16.59796	-22.90509	8400	Santa Maria
 saodomingos	CV	15.02438	-23.5625	2960	São Domingos
 saofilipe	CV	14.8961	-24.49556	10097	São Filipe
 tarrafal	CV	15.27881	-23.75192	13483	Tarrafal
+sintmichiel	CW	12.15	-68.98333	5138	Sint Michiel Liber
 soto	CW	12.27749	-69.1125	2233	Dorp Soto
 westpunt	CW	12.37047	-69.15405	783	Sabana Westpunt
 willemstad	CW	12.12246	-68.88641	125000	Willemstad
@@ -916,6 +953,21 @@ kolding	DK	55.4904	9.47216	61638	Kolding
 padborg	DK	54.82657	9.36247	4263	Padborg
 randers	DK	56.4607	10.03639	62802	Randers
 vejle	DK	55.70927	9.5357	60231	Vejle
+berekua	DM	15.23333	-61.31667	2608	Berekua
+calibishie	DM	15.59297	-61.34901	1020	Calibishie
+castlecomfort	DM	15.28439	-61.37049	790	Castle Comfort
+colihaut	DM	15.48478	-61.46215	890	Colihaut
+mahaut	DM	15.36357	-61.39701	2369	Mahaut
+marigot	DM	15.53743	-61.282	2669	Marigot
+massacre	DM	15.34685	-61.3916	1552	Massacre
+pointemichel	DM	15.25976	-61.37452	1202	Pointe Michel
+pontcasse	DM	15.36667	-61.35	702	Pont Cassé
+portsmouth	DM	15.58288	-61.45592	3633	Portsmouth
+roseau	DM	15.30174	-61.38808	16571	Roseau
+saintjoseph	DM	15.4061	-61.42374	2184	Saint Joseph
+soufriere	DM	15.23374	-61.35881	1416	Soufrière
+wesley	DM	15.56667	-61.31667	1933	Wesley
+woodfordhill	DM	15.58093	-61.33149	1063	Woodford Hill
 azua	DO	18.45319	-70.7349	59139	Azua
 bani	DO	18.27971	-70.33181	66709	Baní
 barahona	DO	18.20861	-71.10068	77160	Santa Cruz de Barahona
@@ -1020,6 +1072,12 @@ suez	EG	29.97371	32.52627	699541	Suez
 tanta	EG	30.78847	31.00192	576648	Tanta
 zafarana	EG	29.11007	32.66012	46993	Zaafarana
 zagazig	EG	30.58768	31.502	430445	Zagazig
+birgandouz	EH	21.60336	-16.45018	4625	Bir Ganduz
+boujdour	EH	26.13073	-14.48513	42651	Boujdour
+dakhla	EH	23.68477	-15.95798	106277	Dakhla
+daoura	EH	27.46175	-12.99412	1108	Daoura
+elargoub	EH	23.60882	-15.86726	5020	El Aargub
+laayoune	EH	27.1418	-13.18797	196331	Laayoune
 asmara	ER	15.33805	38.93184	563930	Asmara
 massawa	ER	15.60811	39.47455	23100	Massawa
 mendefera	ER	14.88722	38.81528	17781	Mendefera
@@ -1077,6 +1135,26 @@ savusavu	FJ	-16.77942	179.33564	6833	Savusavu
 sigatoka	FJ	-18.14307	177.50691	17622	Sigatoka
 suva	FJ	-18.13683	178.42531	77366	Suva
 tavua	FJ	-17.44221	177.86221	8810	Tavua
+colonia	FM	9.51638	138.12167	7371	Colonia
+kolonia	FM	6.964	158.2062	6074	Kolonia
+palikir	FM	6.92477	158.16109	6942	Palikir
+hov	FO	61.50684	-6.75993	149	Hov
+hoyvik	FO	62.03407	-6.78127	4712	Hoyvík
+kollafjrur	FO	62.11167	-6.91067	830	Kollafjørður
+leirvik	FO	62.20992	-6.69284	1048	Leirvík
+mivagur	FO	62.05111	-7.19389	1040	Miðvágur
+norragta	FO	62.20071	-6.74191	668	Norðragøta
+porkeri	FO	61.48135	-6.74497	396	Porkeri
+runavik	FO	62.10892	-6.72123	591	Runavík
+saltangara	FO	62.11647	-6.71797	1116	Saltangará
+sandavagur	FO	62.05372	-7.14982	779	Sandavágur
+srvagur	FO	62.07203	-7.30749	1148	Sørvágur
+strendur	FO	62.10729	-6.75721	970	Strendur
+toftir	FO	62.0928	-6.73475	964	Toftir
+torshavn	FO	62.00973	-6.77164	13200	Tórshavn
+trongisvagur	FO	61.56262	-6.84793	533	Trongisvágur
+tvroyri	FO	61.55557	-6.81109	862	Tvøroyri
+vagur	FO	61.47324	-6.81185	1333	Vágur
 avignon	FR	43.94834	4.80892	89769	Avignon
 bordeaux	FR	44.84124	-0.58046	265328	Bordeaux
 dijon	FR	47.31344	5.01391	159941	Dijon
@@ -1127,6 +1205,15 @@ stokeontrent	GB	53.00415	-2.18538	258366	Stoke-on-Trent
 swindon	GB	51.55797	-1.78116	201669	Swindon
 taunton	GB	51.01494	-3.10293	64621	Taunton
 york	GB	53.95763	-1.08271	156135	York
+gouyave	GD	12.16462	-61.72965	3378	Gouyave
+grandroy	GD	12.1322	-61.74537	2400	Grand Roy
+grenville	GD	12.12278	-61.62498	2476	Grenville
+saintdavids	GD	12.04903	-61.66875	1321	Saint David’s
+saintgeorges	GD	12.05288	-61.75226	7500	Saint George's
+sauteurs	GD	12.21833	-61.63917	1320	Sauteurs
+stgeorges	GD	12.05288	-61.75226	7500	Saint George's
+tivoli	GD	12.17268	-61.61641	700	Tivoli
+victoria	GD	12.19021	-61.70677	2256	Victoria
 gori	GE	41.98532	44.1129	41933	Gori
 khashuri	GE	41.99733	43.59905	23949	Khashuri
 kutaisi	GE	42.26791	42.69459	135201	Kutaisi
@@ -1155,6 +1242,8 @@ suhum	GH	6.04089	-0.45004	50610	Suhum
 tamale	GH	9.40079	-0.8393	464316	Tamale
 techiman	GH	7.59054	-1.93947	84074	Techiman
 yendi	GH	9.44272	-0.00991	64676	Yendi
+catalanbay	GI	36.13961	-5.34163	526	Catalan Bay
+gibraltar	GI	36.14474	-5.35257	26544	Gibraltar
 banjul	GM	13.45274	-16.57803	37274	Banjul
 bansang	GM	13.43333	-14.65	9528	Bansang
 barra	GM	13.48278	-16.54556	6020	Barra
@@ -1682,6 +1771,22 @@ mitsamiouli	KM	-11.38472	43.28444	4811	Mitsamiouli
 mitsoudje	KM	-11.81209	43.28043	3129	Mitsoudjé
 moroni	KM	-11.70216	43.25506	74749	Moroni
 mvouni	KM	-11.71965	43.2752	4791	Mvouni
+basseterre	KN	17.2955	-62.72499	12920	Basseterre
+cayon	KN	17.35	-62.73333	788	Cayon
+charlestown	KN	17.13333	-62.61667	1538	Charlestown
+cottonground	KN	17.16667	-62.61667	381	Cotton Ground
+dieppebaytown	KN	17.41473	-62.8139	592	Dieppe Bay Town
+figtree	KN	17.12623	-62.60265	2922	Fig Tree
+marketshop	KN	17.13218	-62.57267	2568	Market Shop
+middleisland	KN	17.3259	-62.81055	2332	Middle Island
+monkeyhill	KN	17.32327	-62.72914	592	Monkey Hill
+newcastle	KN	17.2	-62.58333	493	Newcastle
+nicolatown	KN	17.37956	-62.75318	2059	Nicola Town
+oldroadtown	KN	17.32215	-62.80337	1647	Old Road Town
+sadlers	KN	17.40454	-62.79296	1205	Sadlers
+saintpauls	KN	17.40605	-62.83562	2460	Saint Paul’s
+sandypointtown	KN	17.35908	-62.84858	3140	Sandy Point Town
+trinity	KN	17.30037	-62.77584	1692	Trinity
 anju	KP	39.61778	125.66472	50196	Anju
 chongjin	KP	41.79556	129.77583	327000	Chongjin
 chongju	KP	39.69252	125.21355	29065	Chŏngju-si
@@ -1779,6 +1884,30 @@ sidon	LB	33.55751	35.37148	163554	Sidon
 tripoli	LB	34.43352	35.84415	229398	Tripoli
 tyre	LB	33.27333	35.19389	135204	Tyre
 zahle	LB	33.84675	35.90203	78145	Zahlé
+anselaraye	LC	13.94619	-61.03879	1256	Anse La Raye
+bexon	LC	13.95256	-60.97782	1049	Bexon
+bisee	LC	14.02429	-60.97445	12980	Bisee
+canaries	LC	13.90224	-61.06459	1862	Canaries
+castries	LC	13.9957	-61.00614	20000	Castries
+choiseul	LC	13.77273	-61.04931	6098	Choiseul
+dennery	LC	13.91409	-60.89132	12589	Dennery
+grosislet	LC	14.06667	-60.95	25210	Gros Islet
+laborie	LC	13.75	-60.98333	6701	Laborie
+micoud	LC	13.81667	-60.9	3406	Micoud
+praslin	LC	13.87545	-60.89717	1906	Praslin
+soufriere	LC	13.85616	-61.0566	2918	Soufrière
+vieuxfort	LC	13.71667	-60.95	4574	Vieux Fort
+balzers	LI	47.06661	9.50355	4628	Balzers
+bendern	LI	47.21199	9.50678	1664	Bendern
+eschen	LI	47.21071	9.52223	4459	Eschen
+gamprin	LI	47.22038	9.50935	1663	Gamprin
+mauren	LI	47.21805	9.5442	4404	Mauren
+nendeln	LI	47.19846	9.543	1407	Nendeln
+ruggell	LI	47.23799	9.5254	2295	Ruggell
+schaan	LI	47.16498	9.50867	5998	Schaan
+triesen	LI	47.10752	9.52815	5230	Triesen
+triesenberg	LI	47.11815	9.54197	2643	Triesenberg
+vaduz	LI	47.14151	9.52154	5197	Vaduz
 ambalangoda	LK	6.2355	80.0538	56783	Ambalangoda
 ampara	LK	7.29754	81.68202	43720	Ampara
 anuradhapura	LK	8.31223	80.41306	60943	Anuradhapura
@@ -1885,6 +2014,11 @@ bijelopolje	ME	43.03834	19.74758	15400	Bijelo Polje
 kolasin	ME	42.82229	19.51653	2989	Kolašin
 mojkovac	ME	42.96044	19.5833	4120	Mojkovac
 podgorica	ME	42.44124	19.26309	236852	Podgorica
+concordia	MF	18.06489	-63.07794	6102	Concordia
+grandcase	MF	18.10476	-63.05358	6333	Grand-Case
+marigot	MF	18.06819	-63.08302	5700	Marigot
+quartierdorleans	MF	18.06912	-63.03542	3385	Quartier d’Orléans
+sandyground	MF	18.05851	-63.09944	3493	Sandy Ground
 ambalavao	MG	-21.83333	46.93333	45784	Ambalavao
 ambositra	MG	-20.53034	47.24344	43504	Ambositra
 ankazobe	MG	-18.31667	47.11667	28430	Ankazobe
@@ -1992,6 +2126,8 @@ nema	MR	16.61702	-7.25649	60000	Néma
 nouadhibou	MR	20.94188	-17.03842	146048	Nouadhibou
 nouakchott	MR	18.08581	-15.9785	1184530	Nouakchott
 rosso	MR	16.51378	-15.80503	15870	Rosso
+brades	MS	16.79183	-62.21058	1000	Brades
+saintpeters	MS	16.7727	-62.21729	0	Saint Peters
 attard	MT	35.88967	14.4425	11377	Attard
 birkirkara	MT	35.89706	14.46115	24356	Birkirkara
 birzebbuga	MT	35.82546	14.52685	12915	Birżebbuġa
@@ -2028,6 +2164,10 @@ quatrebornes	MU	-20.26381	57.4791	77308	Quatre Bornes
 rosebelle	MU	-20.40028	57.59667	12619	Rose Belle
 triolet	MU	-20.0576	57.55025	24361	Triolet
 vacoas	MU	-20.29806	57.47833	115289	Vacoas
+fonadhoo	MV	1.83243	73.50257	1773	Fonadhoo
+hithadhoo	MV	-0.6	73.08333	9927	Hithadhoo
+hulhumale	MV	4.21169	73.54008	5000	Hulhumale
+male	MV	4.17521	73.50916	103693	Male
 balaka	MW	-14.97928	34.95575	40950	Balaka
 blantyre	MW	-15.78499	35.00854	902588	Blantyre
 chitipa	MW	-9.70237	33.26969	20011	Chitipa
@@ -2742,6 +2882,13 @@ pujehun	SL	7.35806	-11.72083	7926	Pujehun
 segbwema	SL	7.99471	-10.9502	16532	Segbwema
 waterloo	SL	8.3389	-13.07091	55000	Waterloo
 zimmi	SL	7.31356	-11.30818	4796	Zimmi
+acquaviva	SM	43.94593	12.4185	1530	Acquaviva
+borgomaggiore	SM	43.94193	12.44738	6424	Borgo Maggiore
+dogana	SM	43.98034	12.49051	7000	Dogana
+domagnano	SM	43.94961	12.46828	3161	Domagnano
+falciano	SM	43.98333	12.5	1000	Falciano
+sanmarino	SM	43.93667	12.44639	4500	San Marino
+serravalle	SM	43.96897	12.48167	9258	Serravalle
 dakar	SN	14.6937	-17.44406	2646503	Dakar
 diourbel	SN	14.64792	-16.24363	157554	Diourbel
 kaffrine	SN	14.10594	-15.5508	57307	Kaffrine
@@ -2798,6 +2945,9 @@ sanvicente	SV	13.64114	-88.78459	41504	San Vicente
 sonsonate	SV	13.71726	-89.72304	59468	Sonsonate
 usulutan	SV	13.34467	-88.43994	51910	Usulután
 zacatecoluca	SV	13.50872	-88.87017	39613	Zacatecoluca
+colebay	SX	18.04048	-63.08397	6000	Koolbaai
+culdesac	SX	18.04852	-63.06513	8467	Cul de Sac
+philipsburg	SX	18.026	-63.04582	1400	Philipsburg
 albukamal	SY	34.45226	40.91854	57572	Ālbū Kamāl
 aleppo	SY	36.20124	37.16117	2098210	Aleppo
 alhasakah	SY	36.50237	40.74772	422445	Al Ḩasakah
@@ -3169,6 +3319,13 @@ samarkand	UZ	39.65456	66.96445	595200	Samarkand
 tashkent	UZ	41.26465	69.21627	1978028	Tashkent
 termez	UZ	37.22417	67.27833	182800	Tirmiz
 urgench	UZ	41.55177	60.63143	145000	Urganch
+barrouallie	VC	13.23676	-61.27275	1000	Barrouallie
+biabou	VC	13.1943	-61.13904	1050	Biabou
+calliaqua	VC	13.12867	-61.19178	24205	Calliaqua
+chateaubelair	VC	13.29069	-61.24043	735	Chateaubelair
+georgetown	VC	13.28054	-61.1185	1680	Georgetown
+kingstown	VC	13.15527	-61.22742	24518	Kingstown
+layou	VC	13.20175	-61.27014	140	Layou
 barcelona	VE	10.1384	-64.68769	815141	Barcelona
 barquisimeto	VE	10.0647	-69.35703	1240714	Barquisimeto
 cabimas	VE	10.39907	-71.45206	351736	Cabimas
@@ -3233,8 +3390,12 @@ vinh	VN	18.67337	105.69232	790000	Vinh
 vinhlong	VN	10.25369	105.9722	137870	Vĩnh Long
 portvila	VU	-17.73648	168.31366	35901	Port-Vila
 apia	WS	-13.83333	-171.76666	40407	Apia
+leulumoega	WS	-13.82297	-171.96127	1458	Leulumoega
 lufilufi	WS	-13.87449	-171.59857	1074	Lufilufi
 mulifanua	WS	-13.83183	-172.03602	4508	Mulifanua
+sapapalii	WS	-13.68726	-172.1918	877	Sapapali’i
+satapuala	WS	-13.83535	-171.97963	1963	Satapuala
+vaitele	WS	-13.82933	-171.80604	7972	Vaitele
 decan	XK	42.54018	20.28793	50500	Deçan
 drenas	XK	42.62833	20.89389	58579	Glogovac
 ferizaj	XK	42.37056	21.15528	59504	Ferizaj

@@ -822,7 +822,14 @@
   "O": "V",
   "Pulsa para verla en el planeta": "Faceți clic pentru a o vedea pe planetă",
   "De compañías con 5 centros de datos o más en el mapa.": "Ale companiilor cu 5 sau mai multe centre de date pe hartă.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Ale companiilor cu 1–4 centre de date pe hartă sau fără operator cunoscut."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Ale companiilor cu 1–4 centre de date pe hartă sau fără operator cunoscut.",
+  "Plataforma petrolífera": "Platformă petrolieră",
+  "Plataforma de gas": "Platformă de gaze",
+  "Campo": "Zăcământ",
+  "Cable que llega": "Cablul care ajunge aici",
+  "La plataforma": "Platforma",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Aici se termină un cablu submarin din fibră optică. Așa sunt legate de țărm platformele din Marea Nordului: prin cablu trec datele de producție, comunicațiile și internetul celor care lucrează la bord.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Baze din Arctica și Antarctica, stații terestre pentru sateliți și platforme petroliere unde se termină un cablu."
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

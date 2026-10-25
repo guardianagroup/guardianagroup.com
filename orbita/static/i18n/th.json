@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "คลิกเพื่อดูบนดาวเคราะห์",
   "De compañías con 5 centros de datos o más en el mapa.": "ของบริษัทที่มีศูนย์ข้อมูลบนแผนที่ตั้งแต่ 5 แห่งขึ้นไป",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "ของบริษัทที่มีศูนย์ข้อมูลบนแผนที่ 1 ถึง 4 แห่ง หรือไม่ทราบผู้ให้บริการ"
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "ของบริษัทที่มีศูนย์ข้อมูลบนแผนที่ 1 ถึง 4 แห่ง หรือไม่ทราบผู้ให้บริการ",
+  "Plataforma petrolífera": "แท่นขุดเจาะน้ำมัน",
+  "Plataforma de gas": "แท่นผลิตก๊าซ",
+  "Campo": "แหล่ง",
+  "Cable que llega": "สายเคเบิลที่มาถึงที่นี่",
+  "La plataforma": "แท่น",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "สายเคเบิลใยแก้วนำแสงใต้ทะเลสิ้นสุดที่นี่ แท่นในทะเลเหนือเชื่อมต่อกับฝั่งด้วยวิธีนี้ ข้อมูลการผลิต การสื่อสาร และอินเทอร์เน็ตของผู้ที่ทำงานบนแท่นล้วนผ่านสายเคเบิลนี้",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "ฐานในอาร์กติกและแอนตาร์กติกา สถานีภาคพื้นดินของดาวเทียม และแท่นขุดเจาะน้ำมันที่มีสายเคเบิลสิ้นสุด"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

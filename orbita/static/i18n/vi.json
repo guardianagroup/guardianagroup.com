@@ -822,7 +822,14 @@
   "O": "T",
   "Pulsa para verla en el planeta": "Nhấp để xem trên hành tinh",
   "De compañías con 5 centros de datos o más en el mapa.": "Của các công ty có từ 5 trung tâm dữ liệu trở lên trên bản đồ.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Của các công ty có từ 1 đến 4 trung tâm dữ liệu trên bản đồ, hoặc không rõ nhà vận hành."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Của các công ty có từ 1 đến 4 trung tâm dữ liệu trên bản đồ, hoặc không rõ nhà vận hành.",
+  "Plataforma petrolífera": "Giàn khoan dầu",
+  "Plataforma de gas": "Giàn khí",
+  "Campo": "Mỏ",
+  "Cable que llega": "Cáp đến nơi này",
+  "La plataforma": "Giàn khoan",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Một tuyến cáp quang biển kết thúc tại đây. Các giàn khoan ở Biển Bắc nối vào đất liền theo cách này: dữ liệu sản xuất, liên lạc và internet của những người làm việc trên giàn đều đi qua tuyến cáp.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Các trạm ở Bắc Cực và Nam Cực, trạm mặt đất của vệ tinh và các giàn khoan dầu nơi một tuyến cáp kết thúc."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

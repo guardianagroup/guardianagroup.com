@@ -822,7 +822,14 @@
   "O": "K",
   "Pulsa para verla en el planeta": "I-click para makita ito sa planeta",
   "De compañías con 5 centros de datos o más en el mapa.": "Mula sa mga kumpanyang may 5 o higit pang data center sa mapa.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Mula sa mga kumpanyang may 1 hanggang 4 na data center sa mapa, o walang kilalang operator."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Mula sa mga kumpanyang may 1 hanggang 4 na data center sa mapa, o walang kilalang operator.",
+  "Plataforma petrolífera": "Oil platform",
+  "Plataforma de gas": "Gas platform",
+  "Campo": "Field",
+  "Cable que llega": "Kable na dumarating dito",
+  "La plataforma": "Ang platform",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Dito nagtatapos ang isang submarine cable na fiber optic. Ganito nakakonekta sa lupa ang mga platform sa North Sea: dumaraan sa kable ang datos ng produksyon, ang komunikasyon at ang internet ng mga nagtatrabaho sa platform.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Mga base sa Arctic at Antarctica, mga ground station ng satellite at mga oil platform kung saan nagtatapos ang isang kable."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

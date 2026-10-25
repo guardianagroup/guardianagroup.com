@@ -1,0 +1,291 @@
+[
+ {
+  "nombre": "Troncal de Providenciales (Leeward Highway)",
+  "operador": "Flow (Cable & Wireless) / Digicel",
+  "pais": "TC",
+  "ciudades": [
+   "Blue Hills",
+   "The Bight",
+   "Grace Bay",
+   "Long Bay Hills"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: trazado siguiendo la carretera principal Leeward Highway y la red de acceso y transporte óptico declarada por Flow en Providenciales"
+ },
+ {
+  "nombre": "Enlace Terrestre Grand Turk",
+  "operador": "Flow (Cable & Wireless)",
+  "pais": "TC",
+  "ciudades": [
+   "Cockburn Town",
+   "Back Salina",
+   "Over Back"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: red urbana e interurbana de fibra en servicio en Grand Turk declarada en mapas de cobertura de Flow"
+ },
+ {
+  "nombre": "Troncal de Tórtola (Submarine Landing Backhaul)",
+  "operador": "Flow BVI / CCT BVI",
+  "pais": "VG",
+  "ciudades": [
+   "Carrot Bay",
+   "Sea Cows Bay",
+   "Road Town",
+   "Parham Town",
+   "East End"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: enlace terrestre entre las estaciones de amarre de cables submarinos (Carrot Bay / Parham Town) y la capital Road Town a través de Blackburn Highway y Ridge Road"
+ },
+ {
+  "nombre": "Dorsal de Virgin Gorda",
+  "operador": "Flow BVI / CCT BVI",
+  "pais": "VG",
+  "ciudades": [
+   "Spanish Town",
+   "South Sound"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: red terrestre a lo largo de Lee Road uniendo el núcleo principal de Spanish Town con los desarrollos del este"
+ },
+ {
+  "nombre": "Anillo y Troncal Costera de Tutuila (BLAST)",
+  "operador": "ASTCA (American Samoa Telecommunications Authority)",
+  "pais": "AS",
+  "ciudades": [
+   "Poloa",
+   "Leone",
+   "Tafuna",
+   "Nu'uuli",
+   "Fagatogo",
+   "Pago Pago",
+   "Tula"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en informes del proyecto gubernamental BLAST (Broadband Linking American Samoa Territory) de ASTCA siguiendo la Route 001"
+ },
+ {
+  "nombre": "Troncal Occidental de Saipán (Beach Road / Chalan Pale Arnold)",
+  "operador": "IT&E / Docomo Pacific",
+  "pais": "MP",
+  "ciudades": [
+   "San Antonio",
+   "Chalan Kanoa",
+   "Susupe",
+   "Oleai",
+   "Garapan",
+   "Tanapag",
+   "San Roque"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: red troncal enterrada a lo largo de Chalan Pale Arnold (Route 30) conectando el amarre de cable en Susupe/Chalan Kanoa con Garapan y el norte"
+ },
+ {
+  "nombre": "Enlace Transversal Capitol Hill (Saipán)",
+  "operador": "IT&E / Docomo Pacific",
+  "pais": "MP",
+  "ciudades": [
+   "Garapan",
+   "Capitol Hill",
+   "Kagman"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: derivación troncal por Isa Drive (Route 31) hacia la sede gubernamental en Capitol Hill y el área residencial de Kagman"
+ },
+ {
+  "nombre": "Enlace Terrestre de Tinian",
+  "operador": "IT&E / Docomo Pacific",
+  "pais": "MP",
+  "ciudades": [
+   "San Jose",
+   "Marpo Heights"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: red local de distribución óptica siguiendo Broadway Road en la isla de Tinian"
+ },
+ {
+  "nombre": "Enlace Terrestre de Rota",
+  "operador": "IT&E / Docomo Pacific",
+  "pais": "MP",
+  "ciudades": [
+   "Songsong",
+   "Sinapalo"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: trazado a lo largo de la carretera principal entre el puerto/pueblo de Songsong y la meseta de Sinapalo (aeropuerto)"
+ },
+ {
+  "nombre": "Anillo Perimetral de Rarotonga (Ara Tapu)",
+  "operador": "Vodafone Cook Islands / Avaroa Cables Limited",
+  "pais": "CK",
+  "ciudades": [
+   "Rutaki",
+   "Arorangi",
+   "Nikao",
+   "Avarua",
+   "Matavera",
+   "Ngatangiia",
+   "Muri",
+   "Titikaveka",
+   "Rutaki"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en informes de despliegue de Avaroa Cables (estación de Rutaki) y Vodafone Cook Islands a lo largo del anillo vial costero Ara Tapu"
+ },
+ {
+  "nombre": "Dorsal Terrestre de Uvéa (Wallis)",
+  "operador": "SPT (Service des Postes et Télécommunications)",
+  "pais": "WF",
+  "ciudades": [
+   "Vailala",
+   "Hihifo",
+   "Mata-Utu",
+   "Aka'aka",
+   "utufua",
+   "Mu'a",
+   "Halalo"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: red terrestre desplegada por el SPT-WF a lo largo de la Route Territoriale 1 (RT1) desde la estación del cable Tui-Samoa en Mata-Utu hacia los distritos de Hihifo y Mu'a"
+ },
+ {
+  "nombre": "Enlace Terrestre de Futuna (Sigave)",
+  "operador": "SPT (Service des Postes et Télécommunications)",
+  "pais": "WF",
+  "ciudades": [
+   "Leava",
+   "Nuku",
+   "Vaisei",
+   "Vele"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: trazado costero por la Route Territoriale 1 en la isla de Futuna conectando la capital administrativa Leava con el aeródromo de Vele"
+ },
+ {
+  "nombre": "Troncal Central y Oriental de Fasta Åland (Landsväg 1 y 2)",
+  "operador": "Ålcom / Mariehamns Telefon / Ålands Telefonandelslag",
+  "pais": "AX",
+  "ciudades": [
+   "Eckerö",
+   "Hammarland",
+   "Jomala",
+   "Mariehamn",
+   "Lemland",
+   "Lumparland"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: red de cooperativas telefónicas locales y Ålcom siguiendo las carreteras principales Huvudväg 1 y Huvudväg 3 desde los puntos de amarre en Eckerö y Lumparland pasando por Mariehamn"
+ },
+ {
+  "nombre": "Troncal Norte de Fasta Åland (Landsväg 2 y 4)",
+  "operador": "Ålcom / Ålands Telefonandelslag",
+  "pais": "AX",
+  "ciudades": [
+   "Mariehamn",
+   "Jomala",
+   "Godby",
+   "Saltvik",
+   "Sund",
+   "Vårdö"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: red troncal terrestre a través del nudo central de Godby siguiendo Huvudväg 2 y Huvudväg 4"
+ },
+ {
+  "nombre": "Anillo Interparroquial de Guernsey",
+  "operador": "Sure Guernsey",
+  "pais": "GG",
+  "ciudades": [
+   "Saint Sampson",
+   "Vale",
+   "Cobo",
+   "Saint Pierre du Bois",
+   "Torteval",
+   "Forest",
+   "Saint Martin",
+   "Saint Peter Port",
+   "Saint Sampson"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en documentos del programa de despliegue de fibra universal de Sure Guernsey y el gobierno de Guernsey conectando las centrales parroquiales y las estaciones de amarre en Saint Sampson, Saints Bay y L'Ancresse"
+ },
+ {
+  "nombre": "Red Troncal Integral de Jersey (Gigabit Jersey)",
+  "operador": "JT (Jersey Telecom)",
+  "pais": "JE",
+  "ciudades": [
+   "Saint Ouen",
+   "Saint Peter",
+   "Saint Brelade",
+   "Saint Aubin",
+   "Saint Lawrence",
+   "Saint Helier",
+   "Saint Clement",
+   "Grouville",
+   "Gorey",
+   "Saint Martin",
+   "Trinity"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en informes corporativos de JT Group (primera jurisdicción 100% fibra punto a punto en 2018), uniendo todas las parroquias y estaciones de cable submarino con Saint Helier"
+ },
+ {
+  "nombre": "Anillo Troncal de la Isla de Man (National Broadband Plan)",
+  "operador": "Manx Telecom / Sure Isle of Man",
+  "pais": "IM",
+  "ciudades": [
+   "Port Erin",
+   "Port Saint Mary",
+   "Castletown",
+   "Ballasalla",
+   "Douglas",
+   "Onchan",
+   "Laxey",
+   "Ramsey",
+   "Kirk Michael",
+   "Peel",
+   "Saint John's",
+   "Crosby",
+   "Glen Vine",
+   "Douglas"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en documentos del National Broadband Plan (Department for Enterprise IoM) y mapas de infraestructura de Manx Telecom a lo largo de las carreteras A1, A2, A3 y A5"
+ },
+ {
+  "nombre": "Red Terrestre de la Isla de Saint-Pierre",
+  "operador": "SPM Telecom",
+  "pais": "PM",
+  "ciudades": [
+   "Saint-Pierre",
+   "Savoyard"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en comunicados de despliegue FTTH de SPM Telecom y la Collectivité Territoriale en la isla de Saint-Pierre"
+ },
+ {
+  "nombre": "Enlace Terrestre Miquelon - Langlade",
+  "operador": "SPM Telecom",
+  "pais": "PM",
+  "ciudades": [
+   "Miquelon",
+   "Langlade"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: enlace terrestre enterrado a lo largo de la carretera del istmo de La Dune conectando el pueblo de Miquelon con el núcleo de Langlade"
+ },
+ {
+  "nombre": "Troncal Científica y Urbana de Longyearbyen - Adventdalen",
+  "operador": "Telenor Svalbard",
+  "pais": "SJ",
+  "ciudades": [
+   "Hotellneset",
+   "Longyearbyen",
+   "Nybyen",
+   "Adventdalen"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en informes técnicos de Telenor Svalbard, SvalSat y EISCAT: fibra terrestre desde el amarre del cable en Hotellneset y la estación satelital de Platåberget, cruzando Longyearbyen y Nybyen hasta las instalaciones de investigación en Adventdalen"
+ }
+]

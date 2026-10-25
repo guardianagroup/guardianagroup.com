@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "Napsauta nähdäksesi sen planeetalla",
   "De compañías con 5 centros de datos o más en el mapa.": "Yhtiöiltä, joilla on kartalla vähintään 5 datakeskusta.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Yhtiöiltä, joilla on kartalla 1–4 datakeskusta, tai joiden operaattoria ei tunneta."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Yhtiöiltä, joilla on kartalla 1–4 datakeskusta, tai joiden operaattoria ei tunneta.",
+  "Plataforma petrolífera": "Öljynporauslautta",
+  "Plataforma de gas": "Kaasulautta",
+  "Campo": "Kenttä",
+  "Cable que llega": "Tänne tuleva kaapeli",
+  "La plataforma": "Lautta",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Tähän päättyy valokuituinen merikaapeli. Näin Pohjanmeren lautat on yhdistetty mantereeseen: kaapelia pitkin kulkevat tuotannon tiedot, viestintä ja aluksella työskentelevien internet.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Arktiksen ja Antarktiksen tukikohdat, satelliittien maa-asemat ja öljynporauslautat, joihin kaapeli päättyy."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

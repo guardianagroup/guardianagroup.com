@@ -822,7 +822,14 @@
   "O": "Зх",
   "Pulsa para verla en el planeta": "Натисніть, щоб побачити її на планеті",
   "De compañías con 5 centros de datos o más en el mapa.": "Компаній, що мають на мапі 5 або більше центрів обробки даних.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Компаній, що мають на мапі від 1 до 4 центрів обробки даних, або без відомого оператора."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Компаній, що мають на мапі від 1 до 4 центрів обробки даних, або без відомого оператора.",
+  "Plataforma petrolífera": "Нафтова платформа",
+  "Plataforma de gas": "Газова платформа",
+  "Campo": "Родовище",
+  "Cable que llega": "Кабель, що сюди приходить",
+  "La plataforma": "Платформа",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Тут закінчується підводний оптоволоконний кабель. Так платформи Північного моря з’єднані з берегом: кабелем передаються дані видобутку, зв’язок та інтернет для тих, хто працює на борту.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Бази в Арктиці й Антарктиді, наземні станції супутників і нафтові платформи, де закінчується кабель."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

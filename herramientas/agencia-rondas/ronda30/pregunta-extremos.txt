@@ -1,0 +1,9 @@
+Eres analista de cables submarinos. Usa el máximo razonamiento. En nuestro mapa, estos cables (dibujados según OpenStreetMap) tienen un extremo que se queda en mar abierto. Para cada uno, dinos: si está EN SERVICIO hoy (o retirado, o en construcción), y dónde llega a tierra ese extremo: la localidad de llegada (como en GeoNames u OpenStreetMap), el país (código ISO de 2 letras) y, si la hay, la estación de amarre. Si ese extremo es una unidad de ramificación (branching unit) en el mar, di con qué otro cable o tramo se une y dónde llega a tierra ese otro tramo. Cita la fuente pública (operador, regulador, nota de prensa, Wikipedia…). No uses submarinecablemap.com, TeleGeography ni PeeringDB. No inventes: si no lo sabes, pon null.
+1. «APRICOT», segmento S6 de Chunghwa Telecom: sale de Toucheng (Taiwán) y acaba en el mar en 21.674 N, 126.459 E.
+2. «臺金二號海纜» (Taiwán–Kinmen n.º 2, Chunghwa Telecom): sale de Kinmen (24.426 N, 118.456 E) y acaba en el mar en 24.418 N, 118.917 E.
+3. «FLAG Europe-Asia», ramal que sale de Aqaba (Jordania, 29.536 N, 34.991 E) y acaba en el mar en 27.442 N, 34.335 E (mar Rojo, al sur del Sinaí).
+4. «UK-Ireland Crossing 2» (Global Crossing): sale de la costa de Gran Bretaña (51.144 N, 4.687 O) y acaba en el mar en 52.305 N, 6.104 O, frente a la costa de Irlanda.
+5. «Baltic Sea Submarine Cable» (CITIC Telecom, 2000): un tramo acaba en el mar en 59.794 N, 19.655 E (al suroeste de Åland) y va hasta 59.784 N, 21.36 E.
+6. Un cable sin nombre que llega a la isla de Sirri (Irán, 25.892 N, 54.546 E) y acaba en el mar en 25.748 N, 54.626 E.
+7. Un cable sin nombre en Tonga, de 20.968 S, 175.297 O hasta el mar en 20.961 S, 175.605 O.
+Responde SOLO con un array JSON válido, sin texto antes ni después: [{"n": 1, "cable": "...", "estado": "en servicio / retirado / en construcción / desconocido", "llega_a": "localidad o null", "pais": "XX o null", "estacion": "... o null", "une_con": "... o null", "fuente": "..."}]

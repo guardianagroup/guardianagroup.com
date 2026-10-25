@@ -1,6 +1,6 @@
 {
  "nota": "Fotos de las fichas de Órbita: copias en guardianagroup.com de fotos de Wikimedia Commons con licencia libre, revisadas una a una (herramientas/agencia-rondas/fotos/). Crédito en la ficha y en terminos.html (sección 6).",
- "generado": "2026-10-24T19:43Z",
+ "generado": "2026-10-25T03:35Z",
  "fotos": {
   "satelite-45027": {
    "tipo": "satelite",
@@ -349,6 +349,90 @@
    "licencia": "CC BY-SA 3.0",
    "url_licencia": "https://creativecommons.org/licenses/by-sa/3.0",
    "pagina": "https://commons.wikimedia.org/wiki/File:Longyearbyen_Plataaberget_IMG_3014.jpg"
+  },
+  "estacion-trolla": {
+   "tipo": "estacion",
+   "id": "Troll A",
+   "nombre": "Troll A",
+   "archivo": "estacion-trolla.jpg",
+   "ancho": 640,
+   "alto": 480,
+   "autor": "Swinsto101",
+   "licencia": "CC BY-SA 3.0",
+   "url_licencia": "https://creativecommons.org/licenses/by-sa/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Troll_A_Platform.jpg"
+  },
+  "estacion-oseberga": {
+   "tipo": "estacion",
+   "id": "Oseberg A",
+   "nombre": "Oseberg A",
+   "archivo": "estacion-oseberga.jpg",
+   "ancho": 640,
+   "alto": 480,
+   "autor": "Richard Child",
+   "licencia": "CC BY 2.0",
+   "url_licencia": "https://creativecommons.org/licenses/by/2.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Oseberg_A_-_Waves_I.jpg"
+  },
+  "estacion-sleipnera": {
+   "tipo": "estacion",
+   "id": "Sleipner A",
+   "nombre": "Sleipner A",
+   "archivo": "estacion-sleipnera.jpg",
+   "ancho": 640,
+   "alto": 429,
+   "autor": "Bair175",
+   "licencia": "CC BY-SA 3.0",
+   "url_licencia": "https://creativecommons.org/licenses/by-sa/3.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Sleipner_oil_field.jpg"
+  },
+  "estacion-johansverdrup": {
+   "tipo": "estacion",
+   "id": "Johan Sverdrup",
+   "nombre": "Johan Sverdrup",
+   "archivo": "estacion-johansverdrup.jpg",
+   "ancho": 640,
+   "alto": 341,
+   "autor": "Znuddel",
+   "licencia": "CC BY-SA 4.0",
+   "url_licencia": "https://creativecommons.org/licenses/by-sa/4.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Johan_Sverdrup_ULQ.jpg"
+  },
+  "estacion-edvardgrieg": {
+   "tipo": "estacion",
+   "id": "Edvard Grieg",
+   "nombre": "Edvard Grieg",
+   "archivo": "estacion-edvardgrieg.jpg",
+   "ancho": 640,
+   "alto": 420,
+   "autor": "Norsk olje og gass",
+   "licencia": "CC BY-SA 2.0",
+   "url_licencia": "https://creativecommons.org/licenses/by-sa/2.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Edvard_Grieg,_Nordsj%C3%B8en_(28527647586).jpg"
+  },
+  "estacion-valhall": {
+   "tipo": "estacion",
+   "id": "Valhall",
+   "nombre": "Valhall",
+   "archivo": "estacion-valhall.jpg",
+   "ancho": 640,
+   "alto": 510,
+   "autor": "Knudsens Fotosenter",
+   "licencia": "CC BY 4.0",
+   "url_licencia": "https://creativecommons.org/licenses/by/4.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Valhall_A_oljeplatform.jpg"
+  },
+  "estacion-ula": {
+   "tipo": "estacion",
+   "id": "Ula",
+   "nombre": "Ula",
+   "archivo": "estacion-ula.jpg",
+   "ancho": 640,
+   "alto": 479,
+   "autor": "tom jervis",
+   "licencia": "CC BY 2.0",
+   "url_licencia": "https://creativecommons.org/licenses/by/2.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Ula_Platform.jpg"
   }
  }
 }

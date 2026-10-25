@@ -822,7 +822,14 @@
   "O": "B",
   "Pulsa para verla en el planeta": "Klik untuk melihatnya pada planet",
   "De compañías con 5 centros de datos o más en el mapa.": "Daripada syarikat dengan 5 pusat data atau lebih pada peta.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Daripada syarikat dengan 1 hingga 4 pusat data pada peta, atau tanpa pengendali yang diketahui."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Daripada syarikat dengan 1 hingga 4 pusat data pada peta, atau tanpa pengendali yang diketahui.",
+  "Plataforma petrolífera": "Pelantar minyak",
+  "Plataforma de gas": "Pelantar gas",
+  "Campo": "Medan",
+  "Cable que llega": "Kabel yang tiba di sini",
+  "La plataforma": "Pelantar",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Di sini berakhirnya sebuah kabel dasar laut gentian optik. Beginilah pelantar di Laut Utara disambungkan ke darat: data pengeluaran, komunikasi dan internet bagi mereka yang bekerja di atasnya melalui kabel ini.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Pangkalan Artik dan Antartika, stesen bumi satelit dan pelantar minyak tempat sebuah kabel berakhir."
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

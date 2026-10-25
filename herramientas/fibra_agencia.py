@@ -112,6 +112,26 @@ SITIOS = {
     # Western Sahara's towns on the N1 (Wikidata); Tah is the first town across the northern line, in Tarfaya province
     ('EH', 'daoura'): (-12.991, 27.464), ('EH', 'elargoub'): (-15.858, 23.611), ('EH', 'birgandouz'): (-16.469, 21.616),
     ('EH', 'guerguerat'): (-16.959, 21.426), ('EH', 'tah'): (-12.956, 27.672),
+    # round 28a (24 Oct 2026): Caribbean villages and quarters from Nominatim (OpenStreetMap), not in GeoNames cities500
+    ('BL', 'public'): (-62.851, 17.905), ('BL', 'corossol'): (-62.856, 17.909), ('BL', 'colombier'): (-62.867, 17.918),
+    ('BL', 'lorient'): (-62.827, 17.906), ('BL', 'camaruche'): (-62.818, 17.908), ('BL', 'vitet'): (-62.813, 17.904),
+    ('BL', 'marigot'): (-62.810, 17.909), ('BL', 'grandculdesac'): (-62.802, 17.907), ('BL', 'petitculdesac'): (-62.792, 17.906),
+    ('BL', 'toiny'): (-62.797, 17.899), ('BL', 'saintjean'): (-62.837, 17.902), ('BL', 'ansedescayes'): (-62.847, 17.911),
+    ('BL', 'flamands'): (-62.857, 17.919),
+    ('BQ', 'hato'): (-68.292, 12.180), ('BQ', 'noordsalina'): (-68.274, 12.177), ('BQ', 'terakora'): (-68.263, 12.139),
+    ('BQ', 'windwardside'): (-63.232, 17.629), ('BQ', 'zionshill'): (-63.229, 17.639),
+    ('GD', 'grandanse'): (-61.757, 12.024),
+    ('KN', 'bath'): (-62.626, 17.130), ('KN', 'frigatebay'): (-62.689, 17.279), ('KN', 'cockleshellbay'): (-62.634, 17.227),
+    ('KN', 'tabernacle'): (-62.774, 17.388), ('KN', 'mannings'): (-62.548, 17.165),
+    ('MF', 'baieorientale'): (-63.026, 18.088), ('MF', 'friarsbay'): (-63.076, 18.092), ('MF', 'bellevue'): (-63.087, 18.059),
+    ('MS', 'littlebay'): (-62.204, 16.798), ('MS', 'woodlands'): (-62.219, 16.762), ('MS', 'davyhill'): (-62.205, 16.795),
+    ('MS', 'geralds'): (-62.194, 16.795), ('MS', 'salem'): (-62.220, 16.751),
+    ('SX', 'simpsonbay'): (-63.097, 18.040), ('SX', 'pointblanche'): (-63.036, 18.019), ('SX', 'mahoreef'): (-63.124, 18.047),
+    ('SX', 'maho'): (-63.124, 18.047), ('SX', 'lowlands'): (-63.129, 18.050), ('SX', 'culdesac'): (-63.064, 18.033),
+    ('VC', 'arnosvale'): (-61.214, 13.142), ('VC', 'owia'): (-61.144, 13.376), ('VC', 'troumaca'): (-61.257, 13.282),
+    ('VC', 'mesopotamia'): (-61.167, 13.167),
+    ('AG', 'fiveislandsvillage'): (-61.884, 17.118), ('DM', 'canefield'): (-61.389, 15.338), ('DM', 'coulibistrie'): (-61.451, 15.460),
+    ('DM', 'loubiere'): (-61.373, 15.275), ('LC', 'choc'): (-60.978, 14.030), ('LC', 'rodneybay'): (-60.953, 14.075),
 }
 
 PARECIDO = 1.35  # the other voice's path between two cities may be this much longer than the straight line (+ 60 km)
@@ -173,7 +193,12 @@ APROX = {'BH', 'BN', 'BZ', 'CU', 'DO', 'HT', 'JM', 'KP', 'KW', 'LB', 'LS', 'NP',
 
 def situa(nombre, cc, idx, idx_div):
     base = re.split(r'[(/,]', nombre)[0]
+    # «Saint George's» and «St. George's» are the same town (round 28, 24 Oct 2026): the short form is tried first
+    claves = []
     for k in (pliega(nombre), pliega(base)):
+        for v in (re.sub(r'^saint', 'st', k), k):
+            if v not in claves: claves.append(v)
+    for k in claves:
         k = ALIAS.get(k, k)
         if (cc, k) in SITIOS: return SITIOS[(cc, k)]
         for t in (idx, idx_div):

@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "Bofya ili kuiona kwenye sayari",
   "De compañías con 5 centros de datos o más en el mapa.": "Vya kampuni zenye vituo vya data 5 au zaidi kwenye ramani.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Vya kampuni zenye vituo vya data 1 hadi 4 kwenye ramani, au visivyo na mwendeshaji anayejulikana."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Vya kampuni zenye vituo vya data 1 hadi 4 kwenye ramani, au visivyo na mwendeshaji anayejulikana.",
+  "Plataforma petrolífera": "Jukwaa la mafuta",
+  "Plataforma de gas": "Jukwaa la gesi",
+  "Campo": "Uwanja",
+  "Cable que llega": "Kebo inayofika hapa",
+  "La plataforma": "Jukwaa",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Hapa inaishia kebo ya baharini ya nyuzi za macho. Hivi ndivyo majukwaa ya Bahari ya Kaskazini yanavyounganishwa na nchi kavu: data za uzalishaji, mawasiliano na intaneti ya wanaofanya kazi humo hupita kwenye kebo hii.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Vituo vya Aktiki na Antaktika, vituo vya ardhini vya setilaiti na majukwaa ya mafuta ambako kebo inaishia."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",
