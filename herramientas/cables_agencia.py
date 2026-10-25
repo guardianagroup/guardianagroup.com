@@ -186,13 +186,13 @@ EXTIENDE = {
 # Gemini name, is drawn as an approximate sea trace.
 ANADE = [
     {'n': 'APRICOT', 'o': 'Meta, Google, NTT, Chunghwa Telecom, PLDT y Telin', 'puntos': [(126.459, 21.674), (139.95, 34.95)],
-     'de': ['unidad de ramificación (Taiwán)', 'TW'], 'a': ['Minamiboso', 'JP'],
+     'de': ['', ''], 'a': ['Minamiboso', 'JP'],
      'info': {'anio': 2025, 'km': 12000, 'duenos': ['Meta', 'Google', 'NTT', 'Chunghwa Telecom', 'PLDT', 'Telin'],
               'fuentes': ['https://www.telecoms.com/fibre/meta-finally-finishes-bifrost-and-prepares-to-light-an-asian-candle',
                           'https://engineering.fb.com/2025/10/05/connectivity/introducing-the-candle-subsea-cable-updates-to-our-asia-pacific-connectivity-projects/'],
               'miembros': ['chatgpt', 'claude', 'gemini'], 'nota': 'En servicio entre Japón, Taiwán y Guam; Filipinas, Indonesia y Singapur, más adelante.'}},
     {'n': 'APRICOT', 'o': 'Meta, Google, NTT, Chunghwa Telecom, PLDT y Telin', 'puntos': [(126.459, 21.674), (144.66, 13.39)],
-     'de': ['unidad de ramificación (Taiwán)', 'TW'], 'a': ['Agat', 'GU'], 'info': None},
+     'de': ['', ''], 'a': ['Agat', 'GU'], 'info': None},
 ]
 # unnamed pieces that end in open sea and that neither voice identifies as a telecom cable (Sirri), or that repeat the
 # start of a cable the agency already draws (Tonga Cable, Nuku'alofa–Suva): by one of their ends
