@@ -2,7 +2,7 @@
 """Round 27: the radio-link texts in every language of Órbita (orbita/static/i18n/<code>.json) and in idioma.js (en, pt)."""
 import json, os, sys
 
-K = ['Radioenlaces', 'Cadenas de microondas de torre en torre, donde no hay fibra entre pueblos.', 'Radioenlace de microondas',
+K = ['Radioenlaces', 'Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.', 'Radioenlace de microondas',
      'Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.',
      'radioenlaces de microondas, punteados, donde no hay fibra']
 T = {

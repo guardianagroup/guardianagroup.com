@@ -616,8 +616,11 @@
     if (l.cc) filas.push([T('País'), paisNombre(l.cc)]);
     if (l.o) filas.push([T('Operador'), l.o]);
     if (r.km) filas.push([T('Longitud en el mapa'), num(r.km) + ' km']);
-    if (l.dato) filas.push([T('Datos'), l.dato]);
-    const para = T('Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.');
+    if (l.dato) filas.push([l.cc === 'US' || l.cc === 'GB' ? T('Latencia publicada') : T('Datos'), l.dato]);
+    // the stock-exchange routes (Chicago–New Jersey, London–Frankfurt) are there for another reason: speed
+    const bolsa = l.cc === 'US' || l.cc === 'GB';
+    const para = bolsa ? T('Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.')
+      : T('Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.');
     if (clicActual) { abreModelo(modelo(T('Radioenlace de microondas'), tit, filas, T('Trazado aproximado') + ' · ' + T('Datos verificados'), { resumen: [T('Tipo'), T('País'), T('Operador'), T('Longitud en el mapa')], para }), x, y); return; }
     const f = ficha(); if (!f) return; f.classList.remove('sat');
     f.querySelector('b').textContent = tit;
@@ -2186,7 +2189,7 @@
     // 22 Oct 2026, 22:02 (owner): «palabras para que sean entendibles, todo»
     // 23 Oct 2026, 09:17 (owner: «busca las palabras más apropiadas, entendibles y profesionales»): agency round with ChatGPT and Grok
     sub: { titulo: 'Cables submarinos', clases: { gigante: ['Autopistas entre continentes', 'Los cables más potentes: más de 100 Tbit/s.'], grande: ['Grandes rutas', 'Entre 20 y 100 Tbit/s: unen países y regiones.'], regional: ['Cables regionales', 'Menos de 20 Tbit/s: unen islas y países vecinos.'], sinDato: ['Capacidad no publicada', 'Cables en funcionamiento cuya capacidad no han publicado sus propietarios.'], aprox: ['Trazado aproximado', 'Sabemos dónde llega, pero no su recorrido exacto. Línea discontinua.'], previstos: ['Cables en proyecto', 'Anunciados o en construcción; aún no transportan datos. Línea discontinua.'] } },
-    fibra: { titulo: 'Cables por tierra', /* owner, 23 Oct 2026, 22:55: «Cables por tierra, mejor» */ clases: { principal: ['Grandes troncales', 'Rutas de 800 km o más, o compartidas por varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'] , radio: ['Radioenlaces', 'Cadenas de microondas de torre en torre, donde no hay fibra entre pueblos.']} },
+    fibra: { titulo: 'Cables por tierra', /* owner, 23 Oct 2026, 22:55: «Cables por tierra, mejor» */ clases: { principal: ['Grandes troncales', 'Rutas de 800 km o más, o compartidas por varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'] , radio: ['Radioenlaces', 'Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.']} },
     puntos: { titulo: 'Puntos de red', clases: { datos: ['Grandes operadores', 'De compañías con 5 centros de datos o más en el mapa.'], pequenos: ['Otros centros de datos', 'De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.'], intercambio: ['Puntos de intercambio', 'Donde las redes de distintas compañías se conectan entre sí.'], estaciones: ['Bases y antenas', 'Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.'] } },
   };
 

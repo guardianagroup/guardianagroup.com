@@ -1217,6 +1217,7 @@ carlisle	GB	54.8951	-2.9382	78470	Carlisle
 coventry	GB	52.40656	-1.51217	345324	Coventry
 darlington	GB	54.52429	-1.55039	92363	Darlington
 doncaster	GB	53.52285	-1.13116	113566	Doncaster
+dover	GB	51.12598	1.31257	41709	Dover
 durham	GB	54.77676	-1.57566	47785	Durham
 edinburgh	GB	55.95206	-3.19648	514990	Edinburgh
 exeter	GB	50.7236	-3.52751	130709	Exeter
@@ -3327,6 +3328,7 @@ tororo	UG	0.69299	34.18085	48500	Tororo
 akron	US	41.08144	-81.51901	197542	Akron
 atlanta	US	33.749	-84.38798	510823	Atlanta
 aurora	US	39.72943	-104.83192	359407	Aurora
+bainbridge	US	47.62621	-122.52124	23840	Bainbridge Island
 bakersfield	US	35.37329	-119.01871	373640	Bakersfield
 baltimore	US	39.29038	-76.61219	585708	Baltimore
 bellefonte	US	40.91339	-77.77833	6248	Bellefonte
@@ -3341,19 +3343,24 @@ chicago	US	41.85003	-87.65005	2664452	Chicago
 clarion	US	41.21479	-79.38532	6089	Clarion
 clearfield	US	41.11078	-112.02605	30653	Clearfield
 columbiacity	US	47.56399	-122.2754	19000	Columbia City
+cresco	US	41.15398	-75.28046	4240	Cresco
 crownpoint	US	41.41698	-87.36531	28879	Crown Point
 davenport	US	41.52364	-90.57764	102582	Davenport
 defiance	US	41.28449	-84.35578	16776	Defiance
 denver	US	39.73915	-104.9847	729019	Denver
 desmoines	US	41.60054	-93.60911	214133	Des Moines
 dubois	US	41.11923	-78.76003	7597	DuBois
+edon	US	41.55644	-84.76885	818	Edon
+emlenton	US	41.17728	-79.70783	600	Emlenton
 eugene	US	44.05207	-123.08675	176654	Eugene
 findlay	US	41.04422	-83.64993	41149	Findlay
+flanders	US	40.90343	-72.61759	4472	Flanders
 fortwayne	US	41.1306	-85.12886	260326	Fort Wayne
 fostoria	US	41.157	-83.41687	13167	Fostoria
 fremont	US	37.54827	-121.98857	232206	Fremont
 fresno	US	36.74773	-119.77237	542107	Fresno
 gary	US	41.59337	-87.34643	77156	Gary
+greenville	US	35.61266	-77.36635	90597	Greenville
 grovecity	US	39.88145	-83.09296	39388	Grove City
 hammond	US	41.58337	-87.50004	77614	Hammond
 hazleton	US	40.95842	-75.97465	24825	Hazleton
@@ -3366,31 +3373,41 @@ lima	US	40.74255	-84.10523	37873	Lima
 lincoln	US	40.8	-96.66696	294757	Lincoln
 lockhaven	US	41.13701	-77.44693	9604	Lock Haven
 lodi	US	38.1302	-121.27245	64596	Lodi
+lorain	US	41.45282	-82.18237	63647	Lorain
 losangeles	US	34.05223	-118.24368	3820914	Los Angeles
 mahwah	US	41.08871	-74.14376	24062	Mahwah
 mansfield	US	32.56319	-97.14168	64274	Mansfield
 medford	US	42.32652	-122.87559	79805	Medford
 mercer	US	40.61312	-80.56285	2498	Chester
 merrillville	US	41.48281	-87.33281	35224	Merrillville
+middlebury	US	41.52787	-73.12761	6974	Middlebury
 mifflinburg	US	40.91758	-77.04775	3520	Mifflinburg
 netcong	US	40.89899	-74.70655	3253	Netcong
 newark	US	40.73566	-74.17237	281944	Newark
+newbury	US	40.11727	-84.35384	2625	Covington
+newcarlisle	US	39.93617	-84.02549	5693	New Carlisle
 newlondon	US	41.35565	-72.09952	27179	New London
 newyorkcity	US	40.71427	-74.00597	8804190	New York City
 northplatte	US	41.12389	-100.76542	24194	North Platte
 norwalk	US	33.90224	-118.08173	107140	Norwalk
+oilcity	US	41.43395	-79.70644	10137	Oil City
 omaha	US	41.25626	-95.94043	486051	Omaha
 ottawa	US	41.34559	-88.84258	18342	Ottawa
 paulding	US	41.13811	-84.58051	3488	Paulding
 philadelphia	US	39.95238	-75.16362	1573916	Philadelphia
 plymouth	US	45.01052	-93.45551	75907	Plymouth
+portclinton	US	42.18169	-87.80034	29743	Highland Park
 portland	US	45.52345	-122.67621	652503	Portland
 punxsutawney	US	40.94368	-78.97087	5861	Punxsutawney
 raleigh	US	35.7721	-78.63861	482295	Raleigh
 ravenna	US	41.15756	-81.24205	11619	Ravenna
 redding	US	40.58654	-122.39168	91582	Redding
+renovo	US	41.32646	-77.75082	1229	Renovo
 richmond	US	37.55376	-77.46026	226610	Richmond
+ridgway	US	41.42034	-78.72864	3896	Ridgway
+ringwood	US	41.11343	-74.24543	12448	Ringwood
 rochester	US	43.15478	-77.61556	209802	Rochester
+rollingprairie	US	41.67088	-86.61585	582	Rolling Prairie
 sacramento	US	38.58157	-121.4944	524943	Sacramento
 seattle	US	47.60621	-122.33207	780995	Seattle
 secaucus	US	40.78955	-74.05653	19104	Secaucus
@@ -3404,10 +3421,13 @@ tacoma	US	47.25288	-122.44429	222906	Tacoma
 tannersville	US	41.04009	-75.30574	2784	Tannersville
 tiffin	US	41.1145	-83.17797	17687	Tiffin
 valparaiso	US	41.47309	-87.06114	32626	Valparaiso
+wanaque	US	41.03815	-74.29404	11848	Wanaque
 wanatah	US	41.4306	-86.89836	1024	Wanatah
 warren	US	42.49044	-83.01304	134056	Warren
 warsaw	US	41.2381	-85.85305	14472	Warsaw
 washington	US	38.89511	-77.03637	689545	Washington
+waterville	US	33.81696	-118.03729	49290	Cypress
+wauseon	US	41.54922	-84.14161	7316	Wauseon
 wilkesbarre	US	41.24591	-75.88131	40780	Wilkes-Barre
 youngstown	US	41.09978	-80.64952	64628	Youngstown
 artigas	UY	-30.40431	-56.46926	43897	Artigas

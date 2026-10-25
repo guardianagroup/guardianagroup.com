@@ -87,6 +87,10 @@
 70.674
 ],
 [
+-54.025,
+71.739
+],
+[
 -56.149,
 72.784
 ]
@@ -120,34 +124,6 @@
 ]
 },
 {
-"n": "Jump Trading — Corredor de microondas Basildon-Ramsgate-Houtem-Fráncfort",
-"o": "Jump Trading LLC",
-"cc": "GB",
-"l": [
-[
-0.46,
-51.57
-],
-[
-1.42,
-51.34
-],
-[
-4.6,
-50.72
-],
-[
-5.57,
-50.63
-],
-[
-8.68,
-50.12
-]
-],
-"dato": "Sin latencia publicada para Jump Trading Basildon-Fráncfort."
-},
-{
 "n": "Troncal suroriental de microondas Asmara-Adi Keyh",
 "o": "EriTel",
 "cc": "ER",
@@ -169,30 +145,6 @@
 14.844
 ]
 ]
-},
-{
-"n": "New Line Networks — Troncal Aurora-Mahwah",
-"o": "New Line Networks LLC (Jump Trading / Virtu Financial)",
-"cc": "US",
-"l": [
-[
--75.88,
-41.25
-],
-[
--74.06,
-40.79
-],
-[
--74.23,
-40.58
-],
-[
--74.14,
-41.09
-]
-],
-"dato": "3,93209 ms de ida Aurora-Mahwah, estimación geométrica publicada en ACM IMC 2020."
 },
 {
 "n": "Troncal Costera del Mar Rojo (Asmara - Massawa - Assab)",
@@ -246,6 +198,10 @@
 72.784
 ],
 [
+-56.656,
+73.682
+],
+[
 -57.22,
 74.579
 ]
@@ -293,6 +249,30 @@
 [
 -52.864,
 68.709
+],
+[
+-52.319,
+67.771
+],
+[
+-51.816,
+66.832
+],
+[
+-51.35,
+65.892
+],
+[
+-50.917,
+64.95
+],
+[
+-50.514,
+64.006
+],
+[
+-50.136,
+63.062
 ],
 [
 -49.783,
@@ -361,58 +341,96 @@
 ]
 },
 {
-"n": "",
-"o": "",
+"n": "McKay Brothers — Troncal Aurora-Mahwah",
+"o": "McKay Brothers / Jefferson Microwave LLC",
 "cc": "US",
 "l": [
 [
--75.97,
-40.96
+-88.239,
+41.795
 ],
 [
--75.195,
-40.987
+-86.949,
+41.803
 ],
 [
--74.659,
-40.933
+-85.659,
+41.796
 ],
 [
--74.06,
-40.79
+-84.369,
+41.774
+],
+[
+-83.08,
+41.739
+],
+[
+-81.794,
+41.689
+],
+[
+-80.509,
+41.624
+],
+[
+-79.227,
+41.546
+],
+[
+-77.949,
+41.453
+],
+[
+-76.675,
+41.346
+],
+[
+-75.405,
+41.225
+],
+[
+-74.14,
+41.09
 ]
-]
+],
+"dato": "3,986 ms de ida Aurora-Mahwah, publicados por Quincy Data el 12 de mayo de 2016."
 },
 {
-"n": "",
-"o": "",
-"cc": "US",
+"n": "McKay Brothers International — Troncal Slough-Fráncfort",
+"o": "McKay Brothers International / Quincy Data",
+"cc": "GB",
 "l": [
 [
--104.83,
-39.73
+-0.6,
+51.51
 ],
 [
--87.65,
-41.85
+0.983,
+51.33
 ],
 [
--87.5,
-41.58
+2.553,
+51.129
 ],
 [
--86.898,
-41.431
+4.109,
+50.907
 ],
 [
--85.853,
-41.238
+5.65,
+50.665
 ],
 [
--85.13,
-41.13
+7.173,
+50.402
+],
+[
+8.68,
+50.12
 ]
-]
+],
+"dato": "4,64 ms de ida y vuelta entre Slough-LD4 y Frankfurt-FR2, publicados por McKay Brothers el 10 de marzo de 2015 (2,320 ms de ida previstos para datos Eurex)."
 },
 {
 "n": "",
@@ -441,51 +459,6 @@
 [
 173.04,
 0.938
-]
-]
-},
-{
-"n": "",
-"o": "",
-"cc": "US",
-"l": [
-[
--104.83,
-39.73
-],
-[
--74.23,
-40.58
-]
-]
-},
-{
-"n": "",
-"o": "",
-"cc": "US",
-"l": [
-[
--104.83,
-39.73
-],
-[
--74.14,
-41.09
-]
-]
-},
-{
-"n": "",
-"o": "",
-"cc": "US",
-"l": [
-[
--104.83,
-39.73
-],
-[
--74.06,
-40.79
 ]
 ]
 }
