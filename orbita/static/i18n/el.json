@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Εδώ το διαδίκτυο ταξιδεύει από τον αέρα: από πύργο σε πύργο, με μικροκύματα, πάντα σε οπτική επαφή. Χρησιμοποιείται όπου η οπτική ίνα δεν συμφέρει ή δεν γίνεται, όπως στον πάγο, στην έρημο ή στη θάλασσα ανάμεσα σε νησιά. Η θέση κάθε πύργου δεν είναι δημόσια: η γραμμή ενώνει τους οικισμούς που αναφέρουν οι πηγές.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "μικροκυματικές ζεύξεις, με τελείες, όπου δεν υπάρχει οπτική ίνα",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Εδώ ταξιδεύουν εντολές χρηματιστηρίου ανάμεσα σε δύο αγορές. Από τον αέρα το σήμα φτάνει νωρίτερα απ’ ό,τι από οπτική ίνα, γιατί το φως κινείται πιο αργά μέσα στο γυαλί, και στο χρηματιστήριο μετράει κάθε εκατομμυριοστό του δευτερολέπτου. Η γραμμή ενώνει τα δύο άκρα: οι πύργοι δεν σχεδιάζονται.",
-  "Latencia publicada": "Δημοσιευμένη καθυστέρηση"
+  "Latencia publicada": "Δημοσιευμένη καθυστέρηση",
+  "Polo Sur": "Νότιος Πόλος"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

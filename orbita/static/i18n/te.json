@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "ఇక్కడ ఇంటర్నెట్ గాలి ద్వారా వెళ్తుంది: టవర్ నుంచి టవర్‌కు, మైక్రోవేవ్‌తో, ఎప్పుడూ నేరుగా కనిపించే దూరంలో. ఫైబర్ వేయడం లాభం లేని లేదా సాధ్యం కాని చోట, మంచు, ఎడారి లేదా దీవుల మధ్య సముద్రం వంటి చోట దీన్ని వాడతారు. ప్రతి టవర్ స్థానం బహిరంగం కాదు: గీత ఆధారాలు పేర్కొన్న పట్టణాలను కలుపుతుంది.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "మైక్రోవేవ్ రేడియో లింకులు, చుక్కల గీతతో, ఫైబర్ లేని చోట",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "ఇక్కడ రెండు మార్కెట్ల మధ్య స్టాక్ మార్కెట్ ఆర్డర్లు ప్రయాణిస్తాయి. గాజులో కాంతి నెమ్మదిగా ప్రయాణిస్తుంది కాబట్టి, గాలి ద్వారా సంకేతం ఫైబర్ కంటే ముందుగా చేరుతుంది; స్టాక్ మార్కెట్‌లో ప్రతి మిలియన్‌వ వంతు సెకను ముఖ్యమే. గీత రెండు చివరలను కలుపుతుంది: టవర్లు గీయలేదు.",
-  "Latencia publicada": "ప్రచురించిన ఆలస్యం"
+  "Latencia publicada": "ప్రచురించిన ఆలస్యం",
+  "Polo Sur": "దక్షిణ దృవం"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

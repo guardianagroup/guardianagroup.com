@@ -836,7 +836,9 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "هنا ينتقل الإنترنت عبر الهواء: من برج إلى برج، بالموجات الميكروية، دائمًا على خط البصر. يُستخدم حيث لا يجدي مدّ الألياف أو يتعذّر، كالجليد أو الصحراء أو البحر بين الجزر. موقع كل برج غير منشور: الخط يصل البلدات التي تذكرها المصادر.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "وصلات لاسلكية بالموجات الميكروية، منقّطة، حيث لا توجد ألياف",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "هنا تنتقل أوامر البورصة بين سوقين. عبر الهواء تصل الإشارة أسرع منها عبر الألياف، لأن الضوء يسير أبطأ داخل الزجاج، وفي البورصة كل جزء من مليون من الثانية مهم. الخط يصل الطرفين: الأبراج غير مرسومة.",
-  "Latencia publicada": "زمن الاستجابة المنشور"
+  "Latencia publicada": "زمن الاستجابة المنشور",
+  "Polo Sur": "القطب الجنوبي",
+  "Gran Muralla": "محطة السور العظيم"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

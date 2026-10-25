@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "כאן האינטרנט עובר באוויר: מתורן לתורן, במיקרוגל, תמיד בקו ראייה. משתמשים בו היכן שהנחת סיב אינה משתלמת או אינה אפשרית, כמו על קרח, במדבר או בים שבין איים. מיקומו של כל תורן אינו פומבי: הקו מחבר את היישובים שהמקורות מזכירים.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "קישורי רדיו במיקרוגל, מנוקדים, היכן שאין סיב",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "כאן עוברות פקודות בורסה בין שני שווקים. דרך האוויר האות מגיע מהר יותר מאשר דרך סיב, כי האור נע לאט יותר בתוך זכוכית, ובבורסה כל מיליונית שנייה חשובה. הקו מחבר את שני הקצוות: התורנים אינם משורטטים.",
-  "Latencia publicada": "השהיה שפורסמה"
+  "Latencia publicada": "השהיה שפורסמה",
+  "Polo Sur": "הקוטב הדרומי"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

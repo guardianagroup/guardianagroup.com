@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Hér fer internetið um loftið: frá mastri til masturs, með örbylgjum, alltaf í sjónlínu. Það er notað þar sem ljósleiðari borgar sig ekki eða er ekki mögulegur, eins og á ís, í eyðimörk eða yfir haf milli eyja. Staðsetning hvers masturs er ekki opinber: línan tengir byggðirnar sem heimildirnar nefna.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "örbylgjusambönd, punktalína, þar sem enginn ljósleiðari er",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Hér fara pantanir á verðbréfamarkaði milli tveggja markaða. Um loftið berst merkið fyrr en um ljósleiðara, því ljósið fer hægar í gleri, og í kauphöllinni skiptir hver milljónasti hluti úr sekúndu máli. Línan tengir endana tvo: möstrin eru ekki teiknuð.",
-  "Latencia publicada": "Birt töf"
+  "Latencia publicada": "Birt töf",
+  "Polo Sur": "Suðurheimskautið"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

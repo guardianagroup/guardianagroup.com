@@ -836,7 +836,9 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Ở đây internet đi qua không khí: từ trạm này sang trạm khác, bằng vi ba, luôn trong tầm nhìn thẳng. Nó được dùng ở nơi kéo cáp quang không có lợi hoặc không thể, như trên băng, sa mạc hay biển giữa các đảo. Vị trí từng trạm không được công bố: đường kẻ nối các thị trấn mà nguồn nêu tên.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "tuyến vi ba, nét chấm, ở nơi không có cáp quang",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Tại đây, lệnh chứng khoán đi giữa hai thị trường. Qua không khí, tín hiệu đến sớm hơn qua cáp quang, vì ánh sáng đi chậm hơn trong thủy tinh, và trên sàn chứng khoán từng phần triệu giây đều quan trọng. Đường kẻ nối hai đầu: không vẽ các trạm.",
-  "Latencia publicada": "Độ trễ đã công bố"
+  "Latencia publicada": "Độ trễ đã công bố",
+  "Polo Sur": "Nam Cực",
+  "Gran Muralla": "Trạm Trường Thành"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

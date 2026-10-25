@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Her rejser internettet gennem luften: fra mast til mast, med mikrobølger, altid med frit udsyn. Det bruges, hvor fiber ikke kan betale sig eller ikke er muligt, som på is, i ørken eller over havet mellem øer. Den enkelte masts placering er ikke offentlig: linjen forbinder de byer, kilderne nævner.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "mikrobølgeforbindelser, prikkede, hvor der ikke er fiber",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Her rejser børsordrer mellem to markeder. Gennem luften når signalet frem før end gennem fiber, fordi lyset bevæger sig langsommere i glas, og på børsen tæller hver milliontedel af et sekund. Linjen forbinder de to ender: masterne er ikke tegnet.",
-  "Latencia publicada": "Offentliggjort latens"
+  "Latencia publicada": "Offentliggjort latens",
+  "Polo Sur": "Sydpolen"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Täällä internet kulkee ilmassa: mastosta mastoon mikroaalloilla, aina näköyhteydellä. Sitä käytetään siellä, missä kuidun vetäminen ei kannata tai ei ole mahdollista, kuten jäällä, aavikolla tai saarten välisellä merellä. Mastojen sijainnit eivät ole julkisia: viiva yhdistää lähteiden mainitsemat paikkakunnat.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "mikroaaltolinkit, pisteviivalla, missä kuitua ei ole",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Täällä pörssitoimeksiannot kulkevat kahden markkinan välillä. Ilmassa signaali ehtii perille nopeammin kuin kuidussa, koska valo kulkee lasissa hitaammin, ja pörssissä jokainen sekunnin miljoonasosa ratkaisee. Viiva yhdistää kaksi päätä: mastoja ei piirretä.",
-  "Latencia publicada": "Julkaistu viive"
+  "Latencia publicada": "Julkaistu viive",
+  "Polo Sur": "Etelänapa"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

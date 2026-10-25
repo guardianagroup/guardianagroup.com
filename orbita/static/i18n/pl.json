@@ -836,7 +836,9 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Tu internet biegnie powietrzem: od masztu do masztu, mikrofalami, zawsze w linii wzroku. Stosuje się je tam, gdzie światłowód się nie opłaca lub jest niemożliwy, jak na lodzie, na pustyni czy nad morzem między wyspami. Położenie poszczególnych masztów nie jest publiczne: linia łączy miejscowości wymienione w źródłach.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "radiolinie mikrofalowe, kropkowane, tam gdzie nie ma światłowodu",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Tędy biegną zlecenia giełdowe między dwoma rynkami. Powietrzem sygnał dociera szybciej niż światłowodem, bo światło w szkle porusza się wolniej, a na giełdzie liczy się każda milionowa część sekundy. Linia łączy oba końce: maszty nie są rysowane.",
-  "Latencia publicada": "Opublikowane opóźnienie"
+  "Latencia publicada": "Opublikowane opóźnienie",
+  "Polo Sur": "Biegun południowy",
+  "Gran Muralla": "Wielki Mur"
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

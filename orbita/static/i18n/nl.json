@@ -836,7 +836,9 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Hier reist het internet door de lucht: van mast naar mast, via microgolven, altijd in zichtlijn. Het wordt gebruikt waar glasvezel niet loont of niet kan, zoals op ijs, in de woestijn of over zee tussen eilanden. De ligging van elke mast is niet openbaar: de lijn verbindt de plaatsen die de bronnen noemen.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "microgolfstraalverbindingen, gestippeld, waar geen glasvezel is",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Hier reizen beursorders tussen twee markten. Door de lucht komt het signaal eerder aan dan door glasvezel, omdat licht in glas trager gaat, en op de beurs telt elke miljoenste seconde. De lijn verbindt de twee uiteinden: de masten worden niet getekend.",
-  "Latencia publicada": "Gepubliceerde latentie"
+  "Latencia publicada": "Gepubliceerde latentie",
+  "Polo Sur": "Zuidpool",
+  "Gran Muralla": "Great Wall"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

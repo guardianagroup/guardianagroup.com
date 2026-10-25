@@ -836,7 +836,9 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "Ici, internet passe par les airs : de pylône en pylône, par micro-ondes, toujours en visibilité directe. On l’utilise là où poser de la fibre n’est pas rentable ou pas possible, comme sur la glace, dans le désert ou en mer entre des îles. La position de chaque pylône n’est pas publique : la ligne relie les localités que citent les sources.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "faisceaux hertziens, en pointillés, là où il n’y a pas de fibre",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "Ici circulent les ordres de Bourse entre deux marchés. Par les airs, le signal arrive plus tôt que par la fibre, car la lumière va moins vite dans le verre, et en Bourse chaque millionième de seconde compte. La ligne relie les deux extrémités : les pylônes ne sont pas dessinés.",
-  "Latencia publicada": "Latence publiée"
+  "Latencia publicada": "Latence publiée",
+  "Polo Sur": "Pôle Sud",
+  "Gran Muralla": "Grande Muraille"
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

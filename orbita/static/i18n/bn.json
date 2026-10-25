@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "এখানে ইন্টারনেট বাতাসের মধ্য দিয়ে চলে: টাওয়ার থেকে টাওয়ারে, মাইক্রোওয়েভে, সবসময় সরাসরি দৃষ্টিসীমায়। যেখানে ফাইবার বসানো লাভজনক বা সম্ভব নয়, যেমন বরফ, মরুভূমি বা দ্বীপের মাঝের সমুদ্র, সেখানে এটি ব্যবহার হয়। প্রতিটি টাওয়ারের অবস্থান প্রকাশ্য নয়: রেখাটি সূত্রে উল্লেখিত শহরগুলোকে যুক্ত করে।",
   "radioenlaces de microondas, punteados, donde no hay fibra": "মাইক্রোওয়েভ রেডিও লিংক, বিন্দুযুক্ত, যেখানে ফাইবার নেই",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "এখানে দুই বাজারের মধ্যে শেয়ারবাজারের অর্ডার চলাচল করে। বাতাসে সংকেত ফাইবারের চেয়ে আগে পৌঁছায়, কারণ কাচের ভেতরে আলো ধীরে চলে, আর শেয়ারবাজারে সেকেন্ডের প্রতিটি দশ লক্ষ ভাগের এক ভাগ গুরুত্বপূর্ণ। রেখাটি দুই প্রান্তকে যুক্ত করে: টাওয়ারগুলো আঁকা হয়নি।",
-  "Latencia publicada": "প্রকাশিত বিলম্ব"
+  "Latencia publicada": "প্রকাশিত বিলম্ব",
+  "Polo Sur": "দক্ষিণ মেরু"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

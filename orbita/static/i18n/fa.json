@@ -836,7 +836,8 @@
   "Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.": "اینجا اینترنت از راه هوا می‌رود: از دکلی به دکل دیگر، با مایکروویو، همیشه در خط دید. جایی به کار می‌رود که کشیدن فیبر به‌صرفه یا ممکن نیست، مثل یخ، بیابان یا دریای میان جزیره‌ها. جای هر دکل عمومی نیست: خط، شهرهایی را که منابع نام برده‌اند به هم وصل می‌کند.",
   "radioenlaces de microondas, punteados, donde no hay fibra": "رادیولینک‌های مایکروویو، نقطه‌چین، جایی که فیبر نیست",
   "Por aquí viajan las órdenes de bolsa entre dos mercados. Por el aire la señal llega antes que por la fibra, porque la luz va más despacio dentro del vidrio, y en la bolsa cada millonésima de segundo cuenta. La línea une los dos extremos: las torres no se dibujan.": "اینجا سفارش‌های بورس میان دو بازار جابه‌جا می‌شود. از راه هوا سیگنال زودتر از فیبر می‌رسد، چون نور درون شیشه کندتر حرکت می‌کند، و در بورس هر یک‌میلیونیم ثانیه مهم است. خط دو سر را به هم وصل می‌کند: دکل‌ها رسم نشده‌اند.",
-  "Latencia publicada": "تأخیر منتشرشده"
+  "Latencia publicada": "تأخیر منتشرشده",
+  "Polo Sur": "قطب جنوب"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",
