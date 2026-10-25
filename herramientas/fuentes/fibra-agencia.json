@@ -2255,45 +2255,6 @@
 ]
 },
 {
-"n": "Eje occidental del valle del Rin",
-"o": "Liechtensteinische Kraftwerke (LKW)",
-"cc": "LI",
-"l": [
-[
-9.506,
-47.069
-],
-[
-9.527,
-47.107
-],
-[
-9.52,
-47.14
-],
-[
-9.51,
-47.166
-],
-[
-9.543,
-47.197
-],
-[
-9.523,
-47.213
-],
-[
-9.51,
-47.219
-],
-[
-9.526,
-47.24
-]
-]
-},
-{
 "n": "TSTT - Troncal nacional de Trinidad",
 "o": "TSTT",
 "cc": "TT",
@@ -2512,6 +2473,84 @@
 [
 135.5,
 34.69
+]
+]
+},
+{
+"n": "Red terrestre de fibra óptica Digicel – corredor occidental de Dominica",
+"o": "Digicel Dominica",
+"cc": "DM",
+"l": [
+[
+-61.39,
+15.3
+],
+[
+-61.389,
+15.338
+],
+[
+-61.392,
+15.347
+],
+[
+-61.397,
+15.364
+],
+[
+-61.424,
+15.406
+],
+[
+-61.451,
+15.46
+],
+[
+-61.462,
+15.485
+],
+[
+-61.456,
+15.583
+]
+]
+},
+{
+"n": "Red troncal de fibra óptica LKW – corredor sur-norte",
+"o": "Liechtensteinische Kraftwerke (LKW)",
+"cc": "LI",
+"l": [
+[
+9.506,
+47.069
+],
+[
+9.527,
+47.107
+],
+[
+9.52,
+47.14
+],
+[
+9.51,
+47.166
+],
+[
+9.543,
+47.197
+],
+[
+9.523,
+47.213
+],
+[
+9.51,
+47.219
+],
+[
+9.526,
+47.24
 ]
 ]
 },
@@ -4491,6 +4530,37 @@
 ]
 },
 {
+"n": "Red troncal terrestre Fibre Island – corredor occidental de Jersey",
+"o": "JT",
+"cc": "JE",
+"l": [
+[
+-2.1,
+49.19
+],
+[
+-2.142,
+49.215
+],
+[
+-2.171,
+49.187
+],
+[
+-2.2,
+49.193
+],
+[
+-2.184,
+49.213
+],
+[
+2.33,
+48.91
+]
+]
+},
+{
 "n": "Red troncal terrestre de fibra óptica de Honiara",
 "o": "Our Telekom",
 "cc": "SB",
@@ -4741,6 +4811,68 @@
 [
 -66.11,
 18.47
+]
+]
+},
+{
+"n": "Troncal Central y Oriental de Fasta Åland (Landsväg 1 y 2)",
+"o": "Ålcom / Mariehamns Telefon / Ålands Telefonandelslag",
+"cc": "AX",
+"l": [
+[
+19.614,
+60.212
+],
+[
+19.75,
+60.217
+],
+[
+19.951,
+60.149
+],
+[
+19.93,
+60.1
+],
+[
+20.085,
+60.072
+],
+[
+20.258,
+60.117
+]
+]
+},
+{
+"n": "Anillo Troncal de la Isla de Man (National Broadband Plan)",
+"o": "Manx Telecom / Sure Isle of Man",
+"cc": "IM",
+"l": [
+[
+-4.654,
+54.074
+],
+[
+-4.63,
+54.096
+],
+[
+-4.48,
+54.15
+],
+[
+-4.453,
+54.173
+],
+[
+-4.4,
+54.23
+],
+[
+-4.385,
+54.323
 ]
 ]
 },
@@ -5594,6 +5726,141 @@
 ]
 },
 {
+"n": "Red terrestre de fibra óptica inet – corredor central y meridional de Antigua",
+"o": "APUA inet",
+"cc": "AG",
+"l": [
+[
+-61.843,
+17.121
+],
+[
+-61.793,
+17.067
+],
+[
+-61.791,
+17.041
+],
+[
+-61.781,
+17.027
+],
+[
+-61.767,
+17.016
+]
+]
+},
+{
+"n": "Red terrestre FTTH Digicel – corredor Castries y Gros Islet",
+"o": "Digicel Saint Lucia",
+"cc": "LC",
+"l": [
+[
+-61.01,
+14.0
+],
+[
+-60.974,
+14.024
+],
+[
+-60.978,
+14.03
+],
+[
+-60.953,
+14.075
+],
+[
+-60.95,
+14.07
+]
+]
+},
+{
+"n": "Red troncal terrestre CARCIP – corredor occidental de Saint Vincent",
+"o": "Digicel SVG / Gobierno de Saint Vincent y las Granadinas",
+"cc": "VC",
+"l": [
+[
+-61.23,
+13.16
+],
+[
+-61.27,
+13.202
+],
+[
+-61.273,
+13.237
+],
+[
+-61.257,
+13.282
+],
+[
+-61.24,
+13.291
+]
+]
+},
+{
+"n": "Red terrestre de fibra óptica IT&E – corredor meridional de Saipan",
+"o": "IT&E",
+"cc": "MP",
+"l": [
+[
+145.72,
+15.211
+],
+[
+145.714,
+15.174
+],
+[
+145.71,
+15.158
+],
+[
+145.717,
+15.138
+],
+[
+145.695,
+15.128
+]
+]
+},
+{
+"n": "Red troncal terrestre Fibre Island – corredor oriental de Jersey",
+"o": "JT",
+"cc": "JE",
+"l": [
+[
+-2.1,
+49.19
+],
+[
+-2.056,
+49.174
+],
+[
+-2.052,
+49.184
+],
+[
+-2.032,
+49.199
+],
+[
+-2.052,
+49.218
+]
+]
+},
+{
 "n": "Monaco Telecom – Réseau national de fibre optique",
 "o": "Monaco Telecom",
 "cc": "MC",
@@ -5774,6 +6041,87 @@
 [
 31.13,
 -26.32
+]
+]
+},
+{
+"n": "Red Troncal FTTH de San Bartolomé",
+"o": "St-Barth Digital (Collectivité de Saint-Barthélemy) / Dauphin Telecom / Orange",
+"cc": "BL",
+"l": [
+[
+-62.827,
+17.906
+],
+[
+-62.818,
+17.908
+],
+[
+-62.813,
+17.904
+],
+[
+-62.81,
+17.909
+],
+[
+-62.802,
+17.907
+]
+]
+},
+{
+"n": "Dorsal Norte-Centro de Bonaire (Kralendijk - Rincon)",
+"o": "Telbo / Flamingo TV",
+"cc": "BQ",
+"l": [
+[
+-68.287,
+12.123
+],
+[
+-68.27,
+12.15
+],
+[
+-68.292,
+12.18
+],
+[
+-68.274,
+12.177
+],
+[
+-68.331,
+12.238
+]
+]
+},
+{
+"n": "Anillo y Troncal Costera de Tutuila (BLAST)",
+"o": "ASTCA (American Samoa Telecommunications Authority)",
+"cc": "AS",
+"l": [
+[
+-170.785,
+-14.344
+],
+[
+-170.72,
+-14.336
+],
+[
+-170.697,
+-14.316
+],
+[
+-170.683,
+-14.287
+],
+[
+-170.69,
+-14.283
 ]
 ]
 },
@@ -6466,6 +6814,52 @@
 ]
 },
 {
+"n": "Red terrestre de fibra óptica Telem – Philipsburg y Simpson Bay",
+"o": "Telem Group",
+"cc": "SX",
+"l": [
+[
+-63.05,
+18.03
+],
+[
+-63.064,
+18.033
+],
+[
+-63.084,
+18.04
+],
+[
+-63.097,
+18.04
+]
+]
+},
+{
+"n": "Red terrestre de fibra óptica Manx Telecom – corredor occidental",
+"o": "Manx Telecom",
+"cc": "IM",
+"l": [
+[
+-4.553,
+54.177
+],
+[
+-4.567,
+54.183
+],
+[
+-4.637,
+54.199
+],
+[
+-4.691,
+54.222
+]
+]
+},
+{
 "n": "Red terrestre de fibra óptica NET – Kollafjørður y Tórshavn",
 "o": "NET / Føroya Tele",
 "cc": "FO",
@@ -6863,6 +7257,52 @@
 [
 -83.333,
 9.173
+]
+]
+},
+{
+"n": "Dorsal Norte y Transfronteriza Este de San Martín (Marigot - Grand-Case - Philipsburg)",
+"o": "SAS Tintamarre / Dauphin Telecom / Orange Caraïbe / THD Tel",
+"cc": "MF",
+"l": [
+[
+-63.054,
+18.105
+],
+[
+-63.065,
+18.049
+],
+[
+-63.026,
+18.088
+],
+[
+-63.035,
+18.069
+]
+]
+},
+{
+"n": "Anillo Interparroquial de Guernsey",
+"o": "Sure Guernsey",
+"cc": "GG",
+"l": [
+[
+4.33,
+50.82
+],
+[
+-2.556,
+49.437
+],
+[
+-2.54,
+49.46
+],
+[
+-2.523,
+49.484
 ]
 ]
 },
@@ -7542,6 +7982,97 @@
 ]
 },
 {
+"n": "Red terrestre de fibra óptica de Saba – Windwardside, St. John's y The Bottom",
+"o": "Satel",
+"cc": "BQ",
+"l": [
+[
+-63.232,
+17.629
+],
+[
+-61.843,
+17.121
+],
+[
+-63.25,
+17.627
+]
+]
+},
+{
+"n": "Red terrestre de fibra óptica CARCIP – corredor occidental de Grenada",
+"o": "CARCIP / Digicel Grenada",
+"cc": "GD",
+"l": [
+[
+-61.752,
+12.053
+],
+[
+-61.745,
+12.132
+],
+[
+-61.73,
+12.165
+]
+]
+},
+{
+"n": "Red terrestre de fibra óptica Orange – corredor oriental de Saint-Martin",
+"o": "Orange Caraïbe",
+"cc": "MF",
+"l": [
+[
+-63.08,
+18.07
+],
+[
+-63.076,
+18.092
+],
+[
+-63.054,
+18.105
+]
+]
+},
+{
+"n": "Red terrestre FTTH Flow – corredor central y oriental de Providenciales",
+"o": "Flow Turks and Caicos",
+"cc": "TC",
+"l": [
+[
+-72.277,
+21.807
+],
+[
+-72.204,
+21.78
+],
+[
+-72.179,
+21.795
+]
+]
+},
+{
+"n": "Red terrestre de fibra óptica Ålcom – Mariehamn y Godby",
+"o": "Ålcom",
+"cc": "AX",
+"l": [
+[
+19.951,
+60.149
+],
+[
+19.988,
+60.23
+]
+]
+},
+{
 "n": "Red troncal de fibra óptica LKW – ramal de Triesenberg",
 "o": "Liechtensteinische Kraftwerke (LKW)",
 "cc": "LI",
@@ -7644,6 +8175,44 @@
 [
 -83.51,
 10.1
+]
+]
+},
+{
+"n": "Troncal Occidental de Saipán (Beach Road / Chalan Pale Arnold)",
+"o": "IT&E / Docomo Pacific",
+"cc": "MP",
+"l": [
+[
+145.72,
+15.211
+],
+[
+145.735,
+15.225
+],
+[
+145.757,
+15.242
+]
+]
+},
+{
+"n": "Anillo Troncal de la Isla de Man (National Broadband Plan)",
+"o": "Manx Telecom / Sure Isle of Man",
+"cc": "IM",
+"l": [
+[
+-4.553,
+54.177
+],
+[
+-4.523,
+54.17
+],
+[
+-4.48,
+54.15
 ]
 ]
 },
@@ -8128,6 +8697,66 @@
 [
 43.26,
 -11.7
+]
+]
+},
+{
+"n": "Red troncal terrestre CARCIP – corredor oriental de Saint Vincent",
+"o": "Digicel SVG / Gobierno de Saint Vincent y las Granadinas",
+"cc": "VC",
+"l": [
+[
+-61.139,
+13.194
+],
+[
+-61.118,
+13.281
+]
+]
+},
+{
+"n": "Red terrestre de fibra óptica de Rota",
+"o": "IT&E",
+"cc": "MP",
+"l": [
+[
+145.141,
+14.14
+],
+[
+145.231,
+14.167
+]
+]
+},
+{
+"n": "Red terrestre Guernsey Fibre – corredor septentrional",
+"o": "Sure Guernsey",
+"cc": "GG",
+"l": [
+[
+-2.523,
+49.484
+],
+[
+-2.523,
+49.496
+]
+]
+},
+{
+"n": "Red terrestre FTTH de Longyearbyen y Nybyen",
+"o": "Telenor Svalbard",
+"cc": "SJ",
+"l": [
+[
+15.65,
+78.22
+],
+[
+15.588,
+78.201
 ]
 ]
 },
@@ -11294,6 +11923,25 @@
 {
 "n": "",
 "o": "",
+"cc": "VG",
+"l": [
+[
+-64.62,
+18.43
+],
+[
+-64.571,
+18.439
+],
+[
+-64.557,
+18.441
+]
+]
+},
+{
+"n": "",
+"o": "",
 "cc": "GF",
 "l": [
 [
@@ -11736,6 +12384,21 @@
 [
 90.488,
 26.868
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "VG",
+"l": [
+[
+-64.62,
+18.43
+],
+[
+-64.633,
+18.408
 ]
 ]
 },

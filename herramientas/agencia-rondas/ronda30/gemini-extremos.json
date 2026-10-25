@@ -1,0 +1,72 @@
+[
+ {
+  "n": 1,
+  "cable": "APRICOT (segmento S6)",
+  "estado": "en construcción",
+  "llega_a": "Minamiboso (Chiba, JP) al norte y Tuas (SG) al sur (con ramales a Baler y Davao en PH, Agat en GU, y Batam y Tanjung Pakis en ID)",
+  "pais": "JP",
+  "estacion": "Minamiboso CLS (JP) / Tuas CLS (SG)",
+  "une_con": "Unidad de ramificación (BU) en 21.674 N, 126.459 E que se une al tronco principal (Main Trunk) del sistema APRICOT (Minamiboso, JP – Tuas, SG)",
+  "fuente": "Aviso a los navegantes n.º 123 (2025) de la Oficina Meteorológica y Oceanográfica de la Marina de la República de China (Taiwán) / NTT / PLDT / Submarine Networks"
+ },
+ {
+  "n": 2,
+  "cable": "臺金二號海纜 (Taiwan–Kinmen No. 2 / TK-2)",
+  "estado": "en servicio",
+  "llega_a": "Taichung",
+  "pais": "TW",
+  "estacion": null,
+  "une_con": null,
+  "fuente": "Gobierno del Condado de Kinmen (kinmen.gov.tw) / Ministerio de Asuntos Digitales de Taiwán (MODA) / Chunghwa Telecom"
+ },
+ {
+  "n": 3,
+  "cable": "FLAG Europe-Asia (FEA)",
+  "estado": "retirado",
+  "llega_a": "Suez (EG) hacia el norte y Jeddah (SA) hacia el sur",
+  "pais": "EG",
+  "estacion": "Suez CLS (EG) / Jeddah CLS (SA)",
+  "une_con": "Unidad de ramificación (BU) en el mar Rojo (27.442 N, 34.335 E) que se une al tronco principal del Mar Rojo de FLAG Europe-Asia entre Suez (Egipto) y Jeddah (Arabia Saudita)",
+  "fuente": "Wikipedia (Fibre-optic Link Around the Globe) / Global Cloud Xchange (GCX) / Submarine Networks"
+ },
+ {
+  "n": 4,
+  "cable": "UK-Ireland Crossing 2 (Pan-European Crossing / PEC)",
+  "estado": "en servicio",
+  "llega_a": "Ballinesker",
+  "pais": "IE",
+  "estacion": "Ballinesker Cable Landing Station",
+  "une_con": null,
+  "fuente": "UK Department of Trade and Industry (SEA 8 Technical Report) / US SEC Filings (Global Crossing / Level 3 / PEC Ireland Limited, Folio WX34694F)"
+ },
+ {
+  "n": 5,
+  "cable": "Baltic Sea Submarine Cable",
+  "estado": "en servicio",
+  "llega_a": "Stockholm",
+  "pais": "SE",
+  "estacion": null,
+  "une_con": "Continúa hacia el oeste hasta tocar tierra en el área de Estocolmo (SE) y hacia el este/sureste por el mar de Arquipiélago y golfo de Finlandia hasta Helsinki (FI) y Tallinn (EE)",
+  "fuente": "Cambridge University Press (Submarine Cables) / Universidad de Jyväskylä (JYX) / OpenStreetMap"
+ },
+ {
+  "n": 6,
+  "cable": "Cable submarino Isla de Sirri – Complejo petrolífero Nasr (Sirri)",
+  "estado": "desconocido",
+  "llega_a": null,
+  "pais": "IR",
+  "estacion": "Complejo de plataformas marinas Nasr (Sirri)",
+  "une_con": "Termina en la plataforma marina del campo petrolífero Nasr (en mar abierto, sin llegar a tierra firme en ese extremo)",
+  "fuente": "Iranian Offshore Oil Company (IOOC) / Darya Fan Qeshm (SADAF Co.) / Corte Internacional de Justicia (Oil Platforms Case)"
+ },
+ {
+  "n": 7,
+  "cable": "Tonga Cable System (Tonga-Fiji) / Tonga Domestic Cable Extension (TDCE)",
+  "estado": "en servicio",
+  "llega_a": "Sopu (Nuku'alofa)",
+  "pais": "TO",
+  "estacion": "Nuku'alofa Cable Landing Station (Sopu)",
+  "une_con": "Continúa hacia el este hasta la estación de amarre de Sopu (Nuku'alofa, TO), y desde el extremo oeste (20.961 S, 175.605 O) va hacia Suva (FJ) en el Tonga Cable System o hacia Pangai (Ha'apai) y Neiafu (Vava'u) en el TDCE",
+  "fuente": "Tonga Cable Limited (TCL) / Banco Asiático de Desarrollo (ADB) / Banco Mundial / Wikipedia"
+ }
+]
