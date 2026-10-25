@@ -321,9 +321,9 @@ speightstown	BB	13.25072	-59.64396	3634	Speightstown
 barisal	BD	22.70497	90.37013	202242	Barishal
 bhairabbazar	BD	24.0524	90.9764	105457	Bhairab Bāzār
 bheramara	BD	24.02452	88.99234	38159	Bherāmāra
-bogra	BD	24.85098	89.37108	210000	Bogra
-bogura	BD	24.85098	89.37108	210000	Bogra
-brahmanbaria	BD	23.97464	91.11228	264326	Brāhmanbāria
+bogra	BD	24.85098	89.37108	421858	Bogura
+bogura	BD	24.85098	89.37108	421858	Bogura
+brahmanbaria	BD	23.97464	91.11228	279485	Brāhmanbāria
 chattogram	BD	22.3384	91.83168	3920222	Chattogram
 chittagong	BD	22.3384	91.83168	3920222	Chattogram
 comilla	BD	23.46186	91.18503	634654	Comilla
@@ -1209,6 +1209,7 @@ libreville	GA	0.39241	9.45356	846090	Libreville
 moanda	GA	-1.56652	13.1987	71099	Moanda
 ndjole	GA	-0.17827	10.76488	8265	Ndjolé
 ntoum	GA	0.39051	9.76096	62445	Ntoum
+basildon	GB	51.56844	0.45782	144859	Basildon
 berwickupontweed	GB	55.76868	-2.00537	12043	Berwick-Upon-Tweed
 birmingham	GB	52.48142	-1.89983	1157603	Birmingham
 bristol	GB	51.45523	-2.59665	479024	Bristol
@@ -1229,11 +1230,14 @@ newcastleupontyne	GB	54.97328	-1.61396	300125	Newcastle upon Tyne
 peterborough	GB	52.57364	-0.24777	163379	Peterborough
 plymouth	GB	50.37153	-4.14305	260203	Plymouth
 preston	GB	53.76282	-2.70452	313332	Preston
+ramsgate	GB	51.33568	1.41797	42027	Ramsgate
 reading	GB	51.45625	-0.97113	318014	Reading
+slough	GB	51.50949	-0.59541	164793	Slough
 stevenage	GB	51.90224	-0.20256	91774	Stevenage
 stokeontrent	GB	53.00415	-2.18538	258366	Stoke-on-Trent
 swindon	GB	51.55797	-1.78116	201669	Swindon
 taunton	GB	51.01494	-3.10293	64621	Taunton
+wrotham	GB	51.30856	0.30899	1921	Wrotham
 york	GB	53.95763	-1.08271	156135	York
 gouyave	GD	12.16462	-61.72965	3378	Gouyave
 grandroy	GD	12.1322	-61.74537	2400	Grand Roy
@@ -3320,33 +3324,92 @@ mbarara	UG	-0.60467	30.64851	221300	Mbarara
 mukono	UG	0.35333	32.75528	191300	Mukono
 ntungamo	UG	-0.87944	30.26417	20900	Ntungamo
 tororo	UG	0.69299	34.18085	48500	Tororo
+akron	US	41.08144	-81.51901	197542	Akron
 atlanta	US	33.749	-84.38798	510823	Atlanta
+aurora	US	39.72943	-104.83192	359407	Aurora
 bakersfield	US	35.37329	-119.01871	373640	Bakersfield
 baltimore	US	39.29038	-76.61219	585708	Baltimore
+bellefonte	US	40.91339	-77.77833	6248	Bellefonte
+berwick	US	41.05453	-76.23327	10223	Berwick
+bloomsburg	US	41.0037	-76.45495	14585	Bloomsburg
+bowlinggreen	US	36.99032	-86.4436	63616	Bowling Green
+brookville	US	39.83672	-84.41134	5900	Brookville
+canton	US	42.30865	-83.48216	86825	Canton
+carteret	US	40.57733	-74.2282	24170	Carteret
 charlotte	US	35.22709	-80.84313	911311	Charlotte
 chicago	US	41.85003	-87.65005	2664452	Chicago
+clarion	US	41.21479	-79.38532	6089	Clarion
+clearfield	US	41.11078	-112.02605	30653	Clearfield
+columbiacity	US	47.56399	-122.2754	19000	Columbia City
+crownpoint	US	41.41698	-87.36531	28879	Crown Point
 davenport	US	41.52364	-90.57764	102582	Davenport
+defiance	US	41.28449	-84.35578	16776	Defiance
 denver	US	39.73915	-104.9847	729019	Denver
 desmoines	US	41.60054	-93.60911	214133	Des Moines
+dubois	US	41.11923	-78.76003	7597	DuBois
 eugene	US	44.05207	-123.08675	176654	Eugene
+findlay	US	41.04422	-83.64993	41149	Findlay
+fortwayne	US	41.1306	-85.12886	260326	Fort Wayne
+fostoria	US	41.157	-83.41687	13167	Fostoria
+fremont	US	37.54827	-121.98857	232206	Fremont
 fresno	US	36.74773	-119.77237	542107	Fresno
+gary	US	41.59337	-87.34643	77156	Gary
+grovecity	US	39.88145	-83.09296	39388	Grove City
+hammond	US	41.58337	-87.50004	77614	Hammond
+hazleton	US	40.95842	-75.97465	24825	Hazleton
+hermitage	US	36.19617	-86.6225	37814	Hermitage
+hopatcong	US	40.93288	-74.65933	14510	Hopatcong
+kent	US	47.38093	-122.23484	126952	Kent
+laporte	US	29.66578	-95.01937	35148	La Porte
+lewisburg	US	35.44924	-86.78889	11480	Lewisburg
+lima	US	40.74255	-84.10523	37873	Lima
 lincoln	US	40.8	-96.66696	294757	Lincoln
+lockhaven	US	41.13701	-77.44693	9604	Lock Haven
+lodi	US	38.1302	-121.27245	64596	Lodi
 losangeles	US	34.05223	-118.24368	3820914	Los Angeles
+mahwah	US	41.08871	-74.14376	24062	Mahwah
+mansfield	US	32.56319	-97.14168	64274	Mansfield
 medford	US	42.32652	-122.87559	79805	Medford
+mercer	US	40.61312	-80.56285	2498	Chester
+merrillville	US	41.48281	-87.33281	35224	Merrillville
+mifflinburg	US	40.91758	-77.04775	3520	Mifflinburg
+netcong	US	40.89899	-74.70655	3253	Netcong
 newark	US	40.73566	-74.17237	281944	Newark
+newlondon	US	41.35565	-72.09952	27179	New London
 newyorkcity	US	40.71427	-74.00597	8804190	New York City
 northplatte	US	41.12389	-100.76542	24194	North Platte
+norwalk	US	33.90224	-118.08173	107140	Norwalk
 omaha	US	41.25626	-95.94043	486051	Omaha
+ottawa	US	41.34559	-88.84258	18342	Ottawa
+paulding	US	41.13811	-84.58051	3488	Paulding
 philadelphia	US	39.95238	-75.16362	1573916	Philadelphia
+plymouth	US	45.01052	-93.45551	75907	Plymouth
 portland	US	45.52345	-122.67621	652503	Portland
+punxsutawney	US	40.94368	-78.97087	5861	Punxsutawney
 raleigh	US	35.7721	-78.63861	482295	Raleigh
+ravenna	US	41.15756	-81.24205	11619	Ravenna
 redding	US	40.58654	-122.39168	91582	Redding
 richmond	US	37.55376	-77.46026	226610	Richmond
+rochester	US	43.15478	-77.61556	209802	Rochester
 sacramento	US	38.58157	-121.4944	524943	Sacramento
 seattle	US	47.60621	-122.33207	780995	Seattle
+secaucus	US	40.78955	-74.05653	19104	Secaucus
+slipperyrock	US	41.06395	-80.05645	3613	Slippery Rock
+snowshoe	US	41.03089	-77.94945	776	Snow Shoe
+statecollege	US	40.79339	-77.86	42161	State College
 stockton	US	37.9577	-121.29078	305658	Stockton
+streetsboro	US	41.23922	-81.34594	16312	Streetsboro
+stroudsburg	US	40.98676	-75.19462	5444	Stroudsburg
 tacoma	US	47.25288	-122.44429	222906	Tacoma
+tannersville	US	41.04009	-75.30574	2784	Tannersville
+tiffin	US	41.1145	-83.17797	17687	Tiffin
+valparaiso	US	41.47309	-87.06114	32626	Valparaiso
+wanatah	US	41.4306	-86.89836	1024	Wanatah
+warren	US	42.49044	-83.01304	134056	Warren
+warsaw	US	41.2381	-85.85305	14472	Warsaw
 washington	US	38.89511	-77.03637	689545	Washington
+wilkesbarre	US	41.24591	-75.88131	40780	Wilkes-Barre
+youngstown	US	41.09978	-80.64952	64628	Youngstown
 artigas	UY	-30.40431	-56.46926	43897	Artigas
 atlantida	UY	-34.7719	-55.7584	5562	Atlántida
 bellaunion	UY	-30.25966	-57.59919	12200	Bella Unión
