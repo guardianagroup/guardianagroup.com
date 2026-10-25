@@ -200,7 +200,7 @@ def copiar():
     os.makedirs(carpeta, exist_ok=True)
     out = {}
     for e in elegidas:
-        c = por.get((e['tipo'], e['archivo']))
+        c = por.get((e['tipo'], e['archivo'])) or (e if e.get('miniatura') else None)  # a review may carry its own candidate (found by hand)
         if not c or not c.get('miniatura'):
             print('sin candidata:', e['nombre']); continue
         clave = e['tipo'] + '-' + re.sub(r'[^a-z0-9]+', '-', pliega(str(c['id'])).lower()).strip('-')

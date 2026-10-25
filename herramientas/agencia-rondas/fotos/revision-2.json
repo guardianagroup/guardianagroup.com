@@ -1,0 +1,121 @@
+{
+ "nota": "Revisión 2 (24 Oct 2026, 22:40): fotos de las plataformas petrolíferas donde termina un cable (ronda 29). Buscadas a mano en Wikimedia Commons desde el navegador y vistas una a una: solo fotos reales de esa plataforma en el mar, sin personas. Grane (solo fotos lejanas, la plataforma no se distingue), Inspirer (Yme) y Draupner S quedan sin foto.",
+ "aceptadas": [
+  {
+   "tipo": "estacion",
+   "id": "Troll A",
+   "nombre": "Troll A",
+   "archivo": "Troll A Platform.jpg",
+   "autor": "Swinsto101",
+   "licencia": "CC BY-SA 3.0",
+   "url_licencia": "https://creativecommons.org/licenses/by-sa/3.0",
+   "miniatura": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Troll_A_Platform.jpg/960px-Troll_A_Platform.jpg",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Troll_A_Platform.jpg",
+   "motivo": "la plataforma Troll A en el mar (foto desde el sureste, 2008)"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Oseberg A",
+   "nombre": "Oseberg A",
+   "archivo": "Oseberg A - Waves I.jpg",
+   "autor": "Richard Child",
+   "licencia": "CC BY 2.0",
+   "url_licencia": "https://creativecommons.org/licenses/by/2.0",
+   "miniatura": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Oseberg_A_-_Waves_I.jpg/960px-Oseberg_A_-_Waves_I.jpg",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Oseberg_A_-_Waves_I.jpg",
+   "motivo": "la plataforma Oseberg A (Condeep) con oleaje, 2006"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Sleipner A",
+   "nombre": "Sleipner A",
+   "archivo": "Sleipner oil field.jpg",
+   "autor": "Bair175",
+   "licencia": "CC BY-SA 3.0",
+   "url_licencia": "https://creativecommons.org/licenses/by-sa/3.0",
+   "miniatura": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Sleipner_oil_field.jpg/960px-Sleipner_oil_field.jpg",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Sleipner_oil_field.jpg",
+   "motivo": "las plataformas de Sleipner en el mar, 2004"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Johan Sverdrup",
+   "nombre": "Johan Sverdrup",
+   "archivo": "Johan Sverdrup ULQ.jpg",
+   "autor": "Znuddel",
+   "licencia": "CC BY-SA 4.0",
+   "url_licencia": "https://creativecommons.org/licenses/by-sa/4.0",
+   "miniatura": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Johan_Sverdrup_ULQ.jpg",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Johan_Sverdrup_ULQ.jpg",
+   "motivo": "la plataforma de alojamiento del centro del campo, instalada en el mar (2021)"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Edvard Grieg",
+   "nombre": "Edvard Grieg",
+   "archivo": "Edvard Grieg, Nordsjøen (28527647586).jpg",
+   "autor": "Norsk olje og gass",
+   "licencia": "CC BY-SA 2.0",
+   "url_licencia": "https://creativecommons.org/licenses/by-sa/2.0",
+   "miniatura": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Edvard_Grieg%2C_Nordsj%C3%B8en_%2828527647586%29.jpg/960px-Edvard_Grieg%2C_Nordsj%C3%B8en_%2828527647586%29.jpg",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Edvard_Grieg,_Nordsj%C3%B8en_(28527647586).jpg",
+   "motivo": "la plataforma Edvard Grieg en el mar, 2016"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Valhall",
+   "nombre": "Valhall",
+   "archivo": "Valhall A oljeplatform.jpg",
+   "autor": "Knudsens Fotosenter",
+   "licencia": "CC BY 4.0",
+   "url_licencia": "https://creativecommons.org/licenses/by/4.0",
+   "miniatura": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Valhall_A_oljeplatform.jpg/960px-Valhall_A_oljeplatform.jpg",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Valhall_A_oljeplatform.jpg",
+   "motivo": "el complejo Valhall A en el mar (foto de los años 80 o 90)"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Ula",
+   "nombre": "Ula",
+   "archivo": "Ula Platform.jpg",
+   "autor": "tom jervis",
+   "licencia": "CC BY 2.0",
+   "url_licencia": "https://creativecommons.org/licenses/by/2.0",
+   "miniatura": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Ula_Platform.jpg/960px-Ula_Platform.jpg",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Ula_Platform.jpg",
+   "motivo": "las plataformas de Ula en el mar, 2007"
+  }
+ ],
+ "descartadas": [
+  {
+   "tipo": "estacion",
+   "nombre": "Grane",
+   "archivo": "Grane, Nordsjøen (27944593723).jpg",
+   "motivo": "la plataforma sale diminuta en el horizonte"
+  },
+  {
+   "tipo": "estacion",
+   "nombre": "Johan Sverdrup",
+   "archivo": "Johan Sverdrup P2 16-2 Equinor - Haugesund, Norway 2021-08-05.jpg",
+   "motivo": "en el astillero, no en el campo"
+  },
+  {
+   "tipo": "estacion",
+   "nombre": "Valhall",
+   "archivo": "VALHALL-A QP 1.jpg",
+   "motivo": "en el desguace (2019)"
+  },
+  {
+   "tipo": "estacion",
+   "nombre": "Sleipner A",
+   "archivo": "Sleipner (2).jpg",
+   "motivo": "es un barco que se llama igual"
+  },
+  {
+   "tipo": "estacion",
+   "nombre": "Inspirer (campo Yme)",
+   "archivo": "Mighty Servant 1 - IMO 8130875 with Yme platform (5005417571).jpg",
+   "motivo": "es la plataforma anterior de Yme, retirada; no la Inspirer"
+  }
+ ]
+}
