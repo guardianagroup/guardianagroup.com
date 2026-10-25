@@ -29,7 +29,9 @@ Actualizado el sábado 24 de octubre de 2026 a las 21:25, hora de Bogotá, al ce
 - Ficha de empresa: falta llevarla a Radiografías, ZERO y sus PDF.
 - Se estimaron 8–10 horas con la agencia.
 
-**Lo siguiente, por orden:** (1) plataformas petrolíferas; (2) ronda 28 (islas); (3) radioenlaces (ronda 27, captura antes de programar); (4) los 6 extremos sueltos; (5) ficha de empresa en Radiografías, ZERO y PDF; (6) «Lo siguiente» de siempre: captura de diseño de Países, línea del tiempo, comparativa de los 11 diarios, Measurement Lab, términos nuevos, páginas antiguas del programa, idiomas de Órbita y los ⬜ de la revisión de Órbita.
+**Aviso del dueño (21:22), pendiente:** «el nombre del país está como que no se ve muy bien. Sin embargo, las ciudades se ven en alta calidad». Los nombres de país (mapa gris) los pinta `capas.js` (bloque de las cajas de países, hacia la línea 760: `cx.font = '600 10px "IBM Plex Mono"…'`, `fillStyle` gris translúcido y sin halo), mientras que las ciudades (`ciudades.js`) usan 12 px de la letra de texto, blanco y con halo (`conHalo`). Arreglo propuesto: el mismo tratamiento que las ciudades (tamaño 11–12 px, más opacidad, halo oscuro, posición redondeada al píxel) sin perder su estilo de mayúsculas espaciadas. Enséñale captura antes y después.
+
+**Lo siguiente, por orden:** (0) los nombres de país (aviso de las 21:22); (1) plataformas petrolíferas; (2) ronda 28 (islas); (3) radioenlaces (ronda 27, captura antes de programar); (4) los 6 extremos sueltos; (5) ficha de empresa en Radiografías, ZERO y PDF; (6) «Lo siguiente» de siempre: captura de diseño de Países, línea del tiempo, comparativa de los 11 diarios, Measurement Lab, términos nuevos, páginas antiguas del programa, idiomas de Órbita y los ⬜ de la revisión de Órbita.
 
 **Esperando una orden del dueño:** publicar la portada nueva («publícala») y activar para todos el móvil, la tablet y la app.
 
