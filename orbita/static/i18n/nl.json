@@ -820,7 +820,9 @@
   "E": "O",
   "S": "Z",
   "O": "W",
-  "Pulsa para verla en el planeta": "Klik om het op de planeet te zien"
+  "Pulsa para verla en el planeta": "Klik om het op de planeet te zien",
+  "De compañías con 5 centros de datos o más en el mapa.": "Van bedrijven met 5 of meer datacenters op de kaart.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Van bedrijven met 1 tot 4 datacenters op de kaart, of zonder bekende exploitant."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

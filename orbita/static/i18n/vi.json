@@ -820,7 +820,9 @@
   "E": "Đ",
   "S": "N",
   "O": "T",
-  "Pulsa para verla en el planeta": "Nhấp để xem trên hành tinh"
+  "Pulsa para verla en el planeta": "Nhấp để xem trên hành tinh",
+  "De compañías con 5 centros de datos o más en el mapa.": "Của các công ty có từ 5 trung tâm dữ liệu trở lên trên bản đồ.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Của các công ty có từ 1 đến 4 trung tâm dữ liệu trên bản đồ, hoặc không rõ nhà vận hành."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

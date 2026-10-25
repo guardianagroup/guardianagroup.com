@@ -820,7 +820,9 @@
   "E": "Сх",
   "S": "Пд",
   "O": "Зх",
-  "Pulsa para verla en el planeta": "Натисніть, щоб побачити її на планеті"
+  "Pulsa para verla en el planeta": "Натисніть, щоб побачити її на планеті",
+  "De compañías con 5 centros de datos o más en el mapa.": "Компаній, що мають на мапі 5 або більше центрів обробки даних.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Компаній, що мають на мапі від 1 до 4 центрів обробки даних, або без відомого оператора."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

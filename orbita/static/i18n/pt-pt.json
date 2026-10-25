@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "O",
-  "Pulsa para verla en el planeta": "Clique para a ver no planeta"
+  "Pulsa para verla en el planeta": "Clique para a ver no planeta",
+  "De compañías con 5 centros de datos o más en el mapa.": "De empresas com 5 ou mais centros de dados no mapa.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "De empresas com 1 a 4 centros de dados no mapa, ou sem operador conhecido."
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

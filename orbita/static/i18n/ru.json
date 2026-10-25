@@ -820,7 +820,9 @@
   "E": "В",
   "S": "Ю",
   "O": "З",
-  "Pulsa para verla en el planeta": "Нажмите, чтобы увидеть её на планете"
+  "Pulsa para verla en el planeta": "Нажмите, чтобы увидеть её на планете",
+  "De compañías con 5 centros de datos o más en el mapa.": "Компаний, у которых на карте 5 или больше центров обработки данных.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Компаний, у которых на карте от 1 до 4 центров обработки данных, или без известного оператора."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

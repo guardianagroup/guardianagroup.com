@@ -820,7 +820,9 @@
   "E": "Ø",
   "S": "S",
   "O": "V",
-  "Pulsa para verla en el planeta": "Klikk for å se det på planeten"
+  "Pulsa para verla en el planeta": "Klikk for å se det på planeten",
+  "De compañías con 5 centros de datos o más en el mapa.": "Fra selskaper med 5 eller flere datasentre på kartet.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Fra selskaper med 1 til 4 datasentre på kartet, eller uten kjent operatør."
  },
  "p": {
   "intento": "Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

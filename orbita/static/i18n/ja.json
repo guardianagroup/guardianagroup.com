@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "クリックすると惑星上に表示されます"
+  "Pulsa para verla en el planeta": "クリックすると惑星上に表示されます",
+  "De compañías con 5 centros de datos o más en el mapa.": "地図上にデータセンターが5か所以上ある企業のもの。",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "地図上にデータセンターが1〜4か所の企業のもの、または事業者が不明なもの。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

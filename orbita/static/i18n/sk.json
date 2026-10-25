@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "Kliknite a uvidíte ju na planéte"
+  "Pulsa para verla en el planeta": "Kliknite a uvidíte ju na planéte",
+  "De compañías con 5 centros de datos o más en el mapa.": "Firiem, ktoré majú na mape 5 a viac dátových centier.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Firiem, ktoré majú na mape 1 až 4 dátové centrá, alebo bez známeho prevádzkovateľa."
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

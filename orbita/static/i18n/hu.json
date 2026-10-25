@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "Kattintson, és megjelenik a bolygón"
+  "Pulsa para verla en el planeta": "Kattintson, és megjelenik a bolygón",
+  "De compañías con 5 centros de datos o más en el mapa.": "Olyan cégektől, amelyeknek legalább 5 adatközpontja van a térképen.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Olyan cégektől, amelyeknek 1–4 adatközpontja van a térképen, illetve ismeretlen üzemeltetőtől."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

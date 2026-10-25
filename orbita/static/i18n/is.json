@@ -820,7 +820,9 @@
   "E": "A",
   "S": "S",
   "O": "V",
-  "Pulsa para verla en el planeta": "Smelltu til að sjá það á hnettinum"
+  "Pulsa para verla en el planeta": "Smelltu til að sjá það á hnettinum",
+  "De compañías con 5 centros de datos o más en el mapa.": "Frá fyrirtækjum með 5 eða fleiri gagnaver á kortinu.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Frá fyrirtækjum með 1 til 4 gagnaver á kortinu, eða án þekkts rekstraraðila."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

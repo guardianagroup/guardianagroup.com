@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "سیارے پر دیکھنے کے لیے کلک کریں"
+  "Pulsa para verla en el planeta": "سیارے پر دیکھنے کے لیے کلک کریں",
+  "De compañías con 5 centros de datos o más en el mapa.": "ان کمپنیوں کے جن کے نقشے پر 5 یا زیادہ ڈیٹا سینٹرز ہیں۔",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "ان کمپنیوں کے جن کے نقشے پر 1 سے 4 ڈیٹا سینٹرز ہیں، یا جن کا آپریٹر معلوم نہیں۔"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",
