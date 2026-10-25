@@ -36,6 +36,15 @@ ALIAS = {  # the same cable under different names (lower case, letters and digit
     'australtroncalaustral': 'austral',  # «Fibra Óptica Austral (FOA), Troncal Submarina Austral» = «Fibra Óptica Austral (troncal submarina)»
     'mauritiusandrodrigues': 'mars', 'mauritiusandrodriguessubmarinecablesystem': 'mars',  # 22 Oct 2026: MARS under its long name
     'cabosanlucasmazatlan': 'tmx5', 'tmx5': 'tmx5',  # 24 Oct 2026 (ronda 26b): Gemini's «Cabo San Lucas-Mazatlán» is Telmex's TMX5 (San José del Cabo–Mazatlán, in service 23-9-2025)
+    'cogim1': 'cogim', 'cogim2': 'cogim', 'cogim': 'cogim',  # 25 Oct 2026 (ronda 32): COGIM 1 and 2 share both landings (RICEIM; BAPE 2004), drawn as one line
+    # 25 Oct 2026 (ronda 32, owner: «revisado punto por punto»): segments of two names lying on the same two landings, the
+    # same cable drawn twice (same owner and year); the agency's name joins the other one, or OpenStreetMap's when it has it
+    'libya': 'lfon', 'easternarcticeaufon1': 'easternarctic', 'easternarcticeaufon2': 'easternarctic',
+    'nationwideooredoomaldives': 'ooredoomaldivesnationwide', 'attgoki': 'guamokinawakyushuincheon',
+    'medusaviatunisia': 'medusa', 'orval': 'alval',
+    'bassstrait1': 'telstrabassstrait1', 'bassstrait2': 'telstrabassstrait2', 'h2he': 'h2hexpress', 'skagen': 'skagenwest',
+    'finlandestoniaconnection1': 'finlandestoniaconnection', 'emeraldbridge': 'celtixconnect1', 'nelsonlevin': 'sparknelsonlevininterisland',
+    'sabr': 'tiwiislands', 'tiwiislands': 'tiwiislands',  # 25 Oct 2026 (ronda 32): Gemini's «Sabr» (Darwin–Wurrumiyanga) is Vocus's Tiwi Islands spur, commissioned by 2020 (NT Government)
     # 24 Oct 2026, 20:20 (owner: «Chequéalo todo»): the same cable under two names was drawn twice; same landings, year and owner
     'aualeutian': 'alaskaunitedaleutians', 'aualeutians': 'alaskaunitedaleutians',
     'easternlightswedenfinlandi': 'easternlight',  # 25 Oct 2026: «Eastern Light Sweden-Finland I» is the same system as «Eastern Light» (Stockholm–Helsinki)
@@ -85,7 +94,7 @@ ALIAS = {  # the same cable under different names (lower case, letters and digit
     'southeastasiajapancable2': 'sjc2', 'asiasubmarinecableexpress': 'ase', 'asiasubmarinecableexpresscahayamalaysia': 'ase',
     'eastasiacrossing': 'eacc2c', 'eastasiacrossingeacintegradoeneacc2c': 'eacc2c', 'citytocitycablesystem': 'eacc2c', 'citytocitycablesystemc2cintegradoeneacc2c': 'eacc2c', 'c2c': 'eacc2c', 'eac': 'eacc2c',
     'tgnintraasia': 'tgnia', 'flagnorthasialoop': 'fnal', 'flagnorthasialoopreachnorthasialoop': 'fnal', 'fnalrnal': 'fnal',
-    'taiwanstraitexpress1': 'tse1', 'hainantohongkongexpress': 'h2he', 'southeastasiahainanhongkongexpress': 'seah2x',
+    'taiwanstraitexpress1': 'tse1', 'hainantohongkongexpress': 'h2hexpress', 'southeastasiahainanhongkongexpress': 'seah2x',
     'malaysiaindiasingaporetransit': 'mist', 'indiaasiaxpress': 'iax', 'koreajapancablenetwork': 'kjcn', 'malaysiacambodiathailand': 'mct',
     'indonesiaglobalgateway': 'igg', 'matrixcablesystem': 'matrix', 'thailandindonesiasingapore': 'tis', 'bayofbengalgateway': 'bbg',
     'i2icablenetwork': 'i2i', 'tgntataindicomcable': 'tic', 'tgntataindicom': 'tic', 'southeastasiaunitedstates': 'seaus',
@@ -178,6 +187,10 @@ EXTIENDE = {
     # FEA is in service (ChatGPT: GCX 2024; Claude: DCD 2025, «offers capacity on… FEA»; Gemini said retired): the Aqaba
     # branch joins the Red Sea trunk Suez–Jeddah, whose nearest point on the map is (34.8, 27.105)
     'FLAG Europe-Asia': ((34.335, 27.442), (34.8, 27.105), 'el ramal de Aqaba se une a la troncal del mar Rojo (Suez–Yeda), según ChatGPT y Claude'),
+    # 25 Oct 2026 (round 32, owner: «el 100 % del mapa»): both voices of round 30 put the western end of the northern branch
+    # in Stockholm (Gemini: «continúa hacia el oeste hasta tocar tierra en el área de Estocolmo»; ChatGPT: «compatible con el
+    # corredor occidental… entre Stockholm y Helsinki», no exact station public), so it ends in the city, approximate trace
+    'Baltic Sea Submarine Cable': ((19.655, 59.794), (18.07, 59.33), 'llega a Estocolmo, según las dos voces (Gemini y ChatGPT); trazado aproximado: la estación exacta no es pública'),
 }
 # 25 Oct 2026 (round 30): cables both voices place but neither OpenStreetMap nor the agency draws whole. APRICOT runs
 # between Japan, Taiwan and Guam (ChatGPT: Meta, Oct 2025; Claude: telecoms.com, «now running between Japan, Taiwan and
@@ -200,7 +213,10 @@ SIN_NOMBRE_FUERA = {(54.626, 25.748): 'cable sin nombre de Sirri (Irán): ningun
                     (-175.605, -20.961): 'tramo sin nombre de Tonga: es el principio de Tonga Cable, ya dibujado entero'}
 
 # the name shown for a cable that goes by several names (ALIAS), when the most common answer is not its real name
-NOMBRE = {'tmx5': 'TMX5', 'amerigovespucci': 'Amerigo Vespucci', 'gulfofcalifornia': 'Gulf of California Cable',
+NOMBRE = {'tmx5': 'TMX5', 'tiwiislands': 'Tiwi Islands Cable (Vocus)', 'cogim': 'COGIM 1 y 2 (Gaspésie–Îles-de-la-Madeleine)',
+          'lfon': 'Libyan Fiber Optic Network (LFON)', 'easternarctic': 'Eastern Arctic Undersea Fibre Optic Network (EAUFON)',
+          'ooredoomaldivesnationwide': 'Nationwide Submarine Cable Ooredoo Maldives (NaSCOM)',
+          'guamokinawakyushuincheon': 'Guam Okinawa Kyushu Incheon (GOKI)', 'medusa': 'Medusa', 'alval': 'ORVAL / ALVAL', 'amerigovespucci': 'Amerigo Vespucci', 'gulfofcalifornia': 'Gulf of California Cable',
           'cookstraittelecommunications': 'Cook Strait Telecommunications Cable',
           'alaskaunitedaleutians': 'Alaska United Aleutians (AU-Aleutians)', 'avassa': 'Avassa',
           'jayabaya': 'Jakarta-Surabaya Cable System (JAYABAYA)', 'doscontinentesi': 'Dos Continentes I y II',
@@ -676,7 +692,9 @@ def main():
             w = agua.cerca_agua(lo, la, 8)  # some water within ~8 px (160 km): the mask's coast is soft and narrow gulfs are missing
             if w is None:
                 descartes.append((k, 'llegada %s (%s) no está junto al mar' % (g['lugares'][0], g['cc']))); continue
-            llegadas.append({'lugar': collections.Counter(x for x in g['lugares'] if x).most_common(1)[0][0] if any(g['lugares']) else '', 'cc': g['cc'], 'lat': round(la, 3), 'lon': round(lo, 3), 'px': (w[1], w[2])})
+            # 25 Oct 2026 (ronda 32): on a tie, a short place name wins over a long description («L'Anse-à-Beaufils, playa junto al rompeolas…»)
+            cuenta = collections.Counter(x for x in g['lugares'] if x); orden = {x: i for i, x in reversed(list(enumerate(g['lugares'])))}
+            llegadas.append({'lugar': min(cuenta, key=lambda x: (-cuenta[x], len(x) > 40, orden[x])) if cuenta else '', 'cc': g['cc'], 'lat': round(la, 3), 'lon': round(lo, 3), 'px': (w[1], w[2])})
         if len(llegadas) < 2:
             descartes.append((k, 'menos de dos llegadas confirmadas')); continue
         # the order along the cable: the longest answer's order, as given by its member

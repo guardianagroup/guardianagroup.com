@@ -1,0 +1,82 @@
+[
+ {
+  "nombre": "Tiwi Islands Cable",
+  "llegadas": [
+   {
+    "lugar": "Mindil Beach, Darwin",
+    "pais": "AU",
+    "lat": -12.444,
+    "lon": 130.832
+   },
+   {
+    "lugar": "Wurrumiyanga (Bathurst Island)",
+    "pais": "AU",
+    "lat": -11.763,
+    "lon": 130.63
+   }
+  ],
+  "anio": 2020,
+  "km": 60,
+  "duenos": [
+   "Vocus"
+  ],
+  "fuentes": [
+   "Gobierno del Territorio del Norte, Digital Territory: «Install and commission a fibre optic cable connection to the Tiwi Islands» (actualización de 2020: instalado y en servicio): https://digitalterritory.nt.gov.au/digital-government/action-plans/action-items/install-and-commission-a-fibre-optic-cable-connection-to-the-tiwi-islands",
+   "iTWire, «Vocus to build cable link from Darwin to Tiwi Islands» (estación de Vocus en Mindil Beach, Darwin, y estación de Wurrumiyanga; ramal de 60 km desde el North West Cable System): https://itwire.com/business-technology/vocus-to-build-cable-link-from-darwin-to-tiwi-islands"
+  ]
+ },
+ {
+  "nombre": "COGIM 1",
+  "llegadas": [
+   {
+    "lugar": "Anse-à-Bourgot, Îles-de-la-Madeleine",
+    "pais": "CA",
+    "lat": 47.383,
+    "lon": -61.956
+   },
+   {
+    "lugar": "L'Anse-à-Beaufils, Percé",
+    "pais": "CA",
+    "lat": 48.472,
+    "lon": -64.309
+   }
+  ],
+  "anio": 2005,
+  "km": 220,
+  "duenos": [
+   "RICEIM"
+  ],
+  "fuentes": [
+   "BAPE, «Projet de câbles sous-marins de fibres optiques» (avis, 2004): dos cables entre el rompeolas del puerto de l'Anse-à-Beaufils (Gaspésie) y l'Anse-à-Bourgot (Îles-de-la-Madeleine), promotor RICEIM: https://archives.bape.gouv.qc.ca/sections/mandats/cables_optiques/documents/AV3-cables.pdf",
+   "RICEIM, «Travaux d'entretien préventif aux extrémités côtières des COGIMS» (28-5-2024): COGIM 1 y COGIM 2 llevan internet, móvil y teléfono entre las islas y el continente, unos 220 km, explotados por dos operadores privados: https://www.ilesdelamadeleine.com/2024/05/28/travaux-dentretien-preventif-aux-extremites-cotieres-des-cogims/",
+   "Hydro-Québec, plano del trazado del cable de las Îles-de-la-Madeleine (27-10-2021): marca el «câble de télécommunications (COGIM)» existente: https://www.hydroquebec.com/data/projets/iles-de-la-madeleine/pdf/7288_hq_055_trace_211027.pdf"
+  ]
+ },
+ {
+  "nombre": "COGIM 2",
+  "llegadas": [
+   {
+    "lugar": "Anse-à-Bourgot, Îles-de-la-Madeleine",
+    "pais": "CA",
+    "lat": 47.383,
+    "lon": -61.956
+   },
+   {
+    "lugar": "L'Anse-à-Beaufils, Percé",
+    "pais": "CA",
+    "lat": 48.472,
+    "lon": -64.309
+   }
+  ],
+  "anio": 2005,
+  "km": 220,
+  "duenos": [
+   "RICEIM"
+  ],
+  "fuentes": [
+   "BAPE, «Projet de câbles sous-marins de fibres optiques» (avis, 2004): dos cables entre el rompeolas del puerto de l'Anse-à-Beaufils (Gaspésie) y l'Anse-à-Bourgot (Îles-de-la-Madeleine), promotor RICEIM: https://archives.bape.gouv.qc.ca/sections/mandats/cables_optiques/documents/AV3-cables.pdf",
+   "RICEIM, «Travaux d'entretien préventif aux extrémités côtières des COGIMS» (28-5-2024): COGIM 1 y COGIM 2 llevan internet, móvil y teléfono entre las islas y el continente, unos 220 km, explotados por dos operadores privados: https://www.ilesdelamadeleine.com/2024/05/28/travaux-dentretien-preventif-aux-extremites-cotieres-des-cogims/",
+   "Hydro-Québec, plano del trazado del cable de las Îles-de-la-Madeleine (27-10-2021): marca el «câble de télécommunications (COGIM)» existente: https://www.hydroquebec.com/data/projets/iles-de-la-madeleine/pdf/7288_hq_055_trace_211027.pdf"
+  ]
+ }
+]
