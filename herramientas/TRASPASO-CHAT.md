@@ -842,3 +842,9 @@ Encargo vigente del dueño (15:16 y 15:31): agencia (ChatGPT «Alta», Gemini Ar
 - «publícala» para la portada nueva.
 - Abrir los 42 idiomas solo cuando lo diga el dueño.
 - Propuesta: costa vectorial al acercar.
+
+**25 Oct 2026, 16:30– — cuenta nueva (Claude Opus 5.5, sesión enlazada al ordenador del dueño)**
+- Clon en `/home/claude/guardianagroup.com`; worktrees `web-idiomas` en `/home/claude/web` y `main` en `/home/claude/wt-main`. Push funciona sin `add_repo`.
+- **Publicado (`main` ee092a3, `web-idiomas` e9cbea7):** los 7 puntos guardados sin publicar de las 16:25: trazado fino de `cables_agencia.py` (75 tramos con tierra, casi todos pasos reales; 0 extremos en el mar; 41 llegadas llevadas a su pueblo), `pasos_finos.py` + `fuentes/pasos-finos.json`, `lugares_capas.py` (ciudad por país, `paises-ne10m`), `fibra_tierra.py` (sin saltos por el mar), `datos-orbita.yml` (límites 95/20/30 min), ficha de centro de datos (`capas.js?v=20261026i`, `idioma.js?v=20261026g`; las dos frases de «Ubicación aproximada» también en los 39 `i18n/*.json`) y `revisa_puntos.py`. Lanzado `datos-orbita.yml` (run 40237052269) para rehacer `fibra-tierra.json`: traerlo a `web-idiomas` al terminar.
+- Revisado: el «Dhiraagu Data Centre» (73.273, 5.663) está en una isla de Noonu (Maldivas) según Nominatim; no es un error.
+- **Ronda 35:** ChatGPT lotes 4 y 5 guardados (`chatgpt-4/5.json`), lote 6 enviado en el mismo chat. Astra no hace falta (Gemini + ChatGPT cubren los 6 lotes). Nominatim en el navegador: `geo-res-3a6.json` (ChatGPT lote 3 + Gemini lotes 3–6), `geo-res-4c.json`; `geo-5c.json` en curso con `window.geoCola(url)` en la pestaña de Nominatim (lee la cola publicada en `raw.githubusercontent.com` por commit). Al final: `decide.py` y `aplica.py` **una sola vez**.
