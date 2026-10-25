@@ -36,6 +36,8 @@ ALIAS = {  # the same cable under different names (lower case, letters and digit
     'australtroncalaustral': 'austral',  # «Fibra Óptica Austral (FOA), Troncal Submarina Austral» = «Fibra Óptica Austral (troncal submarina)»
     'mauritiusandrodrigues': 'mars', 'mauritiusandrodriguessubmarinecablesystem': 'mars',  # 22 Oct 2026: MARS under its long name
     'cabosanlucasmazatlan': 'tmx5', 'tmx5': 'tmx5',  # 24 Oct 2026 (ronda 26b): Gemini's «Cabo San Lucas-Mazatlán» is Telmex's TMX5 (San José del Cabo–Mazatlán, in service 23-9-2025)
+    'cogim1': 'cogim', 'cogim2': 'cogim', 'cogim': 'cogim',  # 25 Oct 2026 (ronda 32): COGIM 1 and 2 share both landings (RICEIM; BAPE 2004), drawn as one line
+    'sabr': 'tiwiislands', 'tiwiislands': 'tiwiislands',  # 25 Oct 2026 (ronda 32): Gemini's «Sabr» (Darwin–Wurrumiyanga) is Vocus's Tiwi Islands spur, commissioned by 2020 (NT Government)
     # 24 Oct 2026, 20:20 (owner: «Chequéalo todo»): the same cable under two names was drawn twice; same landings, year and owner
     'aualeutian': 'alaskaunitedaleutians', 'aualeutians': 'alaskaunitedaleutians',
     'easternlightswedenfinlandi': 'easternlight',  # 25 Oct 2026: «Eastern Light Sweden-Finland I» is the same system as «Eastern Light» (Stockholm–Helsinki)
@@ -200,7 +202,7 @@ SIN_NOMBRE_FUERA = {(54.626, 25.748): 'cable sin nombre de Sirri (Irán): ningun
                     (-175.605, -20.961): 'tramo sin nombre de Tonga: es el principio de Tonga Cable, ya dibujado entero'}
 
 # the name shown for a cable that goes by several names (ALIAS), when the most common answer is not its real name
-NOMBRE = {'tmx5': 'TMX5', 'amerigovespucci': 'Amerigo Vespucci', 'gulfofcalifornia': 'Gulf of California Cable',
+NOMBRE = {'tmx5': 'TMX5', 'tiwiislands': 'Tiwi Islands Cable (Vocus)', 'cogim': 'COGIM 1 y 2 (Gaspésie–Îles-de-la-Madeleine)', 'amerigovespucci': 'Amerigo Vespucci', 'gulfofcalifornia': 'Gulf of California Cable',
           'cookstraittelecommunications': 'Cook Strait Telecommunications Cable',
           'alaskaunitedaleutians': 'Alaska United Aleutians (AU-Aleutians)', 'avassa': 'Avassa',
           'jayabaya': 'Jakarta-Surabaya Cable System (JAYABAYA)', 'doscontinentesi': 'Dos Continentes I y II',
@@ -676,7 +678,9 @@ def main():
             w = agua.cerca_agua(lo, la, 8)  # some water within ~8 px (160 km): the mask's coast is soft and narrow gulfs are missing
             if w is None:
                 descartes.append((k, 'llegada %s (%s) no está junto al mar' % (g['lugares'][0], g['cc']))); continue
-            llegadas.append({'lugar': collections.Counter(x for x in g['lugares'] if x).most_common(1)[0][0] if any(g['lugares']) else '', 'cc': g['cc'], 'lat': round(la, 3), 'lon': round(lo, 3), 'px': (w[1], w[2])})
+            # 25 Oct 2026 (ronda 32): on a tie, a short place name wins over a long description («L'Anse-à-Beaufils, playa junto al rompeolas…»)
+            cuenta = collections.Counter(x for x in g['lugares'] if x); orden = {x: i for i, x in reversed(list(enumerate(g['lugares'])))}
+            llegadas.append({'lugar': min(cuenta, key=lambda x: (-cuenta[x], len(x) > 40, orden[x])) if cuenta else '', 'cc': g['cc'], 'lat': round(la, 3), 'lon': round(lo, 3), 'px': (w[1], w[2])})
         if len(llegadas) < 2:
             descartes.append((k, 'menos de dos llegadas confirmadas')); continue
         # the order along the cable: the longest answer's order, as given by its member
