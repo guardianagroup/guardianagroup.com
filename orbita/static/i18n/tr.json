@@ -927,7 +927,11 @@
   "Sin GUARDIANA": "GUARDIANA olmadan",
   "Con y sin GUARDIANA": "GUARDIANA ile ve olmadan",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "şehirde; binanın tam adresi henüz doğrulanmadı",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 km içinde; binanın tam adresi henüz doğrulanmadı"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 km içinde; binanın tam adresi henüz doğrulanmadı",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Sade harita: gri kara ve koyu deniz, fotoğraf olmadan",
+  "Volver al mapa en color": "Renkli haritaya dön",
+  "Color": "Renkli",
+  "Limpio": "Sade"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

@@ -926,7 +926,11 @@
   "Sin GUARDIANA": "GUARDIANA کے بغیر",
   "Con y sin GUARDIANA": "GUARDIANA کے ساتھ اور بغیر",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "شہر میں؛ عمارت کا درست پتا ابھی تصدیق شدہ نہیں",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 کلومیٹر کے اندر؛ عمارت کا درست پتا ابھی تصدیق شدہ نہیں"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 کلومیٹر کے اندر؛ عمارت کا درست پتا ابھی تصدیق شدہ نہیں",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "سادہ نقشہ: سرمئی خشکی اور گہرا سمندر، تصویر کے بغیر",
+  "Volver al mapa en color": "رنگین نقشے پر واپس جائیں",
+  "Color": "رنگین",
+  "Limpio": "سادہ"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

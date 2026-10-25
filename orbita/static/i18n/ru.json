@@ -927,7 +927,11 @@
   "Sin GUARDIANA": "Без GUARDIANA",
   "Con y sin GUARDIANA": "С GUARDIANA и без",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "в городе; точный адрес здания пока не подтверждён",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "в пределах 2 км; точный адрес здания пока не подтверждён"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "в пределах 2 км; точный адрес здания пока не подтверждён",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Простая карта: серая суша и тёмное море, без снимка",
+  "Volver al mapa en color": "Вернуться к цветной карте",
+  "Color": "Цвет",
+  "Limpio": "Простая"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

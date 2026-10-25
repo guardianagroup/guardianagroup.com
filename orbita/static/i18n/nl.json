@@ -927,7 +927,11 @@
   "Sin GUARDIANA": "Zonder GUARDIANA",
   "Con y sin GUARDIANA": "Met en zonder GUARDIANA",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "in de stad; het exacte adres van het gebouw is nog niet bevestigd",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "binnen 2 km; het exacte adres van het gebouw is nog niet bevestigd"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "binnen 2 km; het exacte adres van het gebouw is nog niet bevestigd",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Sobere kaart: grijs land en donkere zee, zonder de foto",
+  "Volver al mapa en color": "Terug naar de kaart in kleur",
+  "Color": "Kleur",
+  "Limpio": "Sober"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

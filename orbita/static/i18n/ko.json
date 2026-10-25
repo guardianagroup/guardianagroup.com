@@ -927,7 +927,11 @@
   "Sin GUARDIANA": "GUARDIANA 미사용",
   "Con y sin GUARDIANA": "GUARDIANA 사용 및 미사용",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "도시 안. 건물의 정확한 주소는 아직 확인되지 않았습니다",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2km 이내. 건물의 정확한 주소는 아직 확인되지 않았습니다"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2km 이내. 건물의 정확한 주소는 아직 확인되지 않았습니다",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "단순한 지도: 회색 육지와 어두운 바다, 사진 없이",
+  "Volver al mapa en color": "컬러 지도로 돌아가기",
+  "Color": "컬러",
+  "Limpio": "단순"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

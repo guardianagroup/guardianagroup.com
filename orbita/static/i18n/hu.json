@@ -926,7 +926,11 @@
   "Sin GUARDIANA": "GUARDIANA nélkül",
   "Con y sin GUARDIANA": "GUARDIANA-val és nélküle",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "a városban; az épület pontos címe még nincs megerősítve",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 km-en belül; az épület pontos címe még nincs megerősítve"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 km-en belül; az épület pontos címe még nincs megerősítve",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Sima térkép: szürke szárazföld és sötét tenger, fénykép nélkül",
+  "Volver al mapa en color": "Vissza a színes térképhez",
+  "Color": "Szín",
+  "Limpio": "Sima"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

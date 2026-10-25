@@ -927,7 +927,11 @@
   "Sin GUARDIANA": "Sem a GUARDIANA",
   "Con y sin GUARDIANA": "Com e sem a GUARDIANA",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "na cidade; a morada exata do edifício ainda não está confirmada",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "a menos de 2 km; a morada exata do edifício ainda não está confirmada"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "a menos de 2 km; a morada exata do edifício ainda não está confirmada",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Mapa simples: terra cinzenta e mar escuro, sem a fotografia",
+  "Volver al mapa en color": "Voltar ao mapa a cores",
+  "Color": "Cor",
+  "Limpio": "Simples"
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

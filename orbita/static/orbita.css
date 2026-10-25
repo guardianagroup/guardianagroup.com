@@ -350,6 +350,9 @@ body.dock .puerta.aparte .et { color: #96A1AD; }
 .zoom .nivel { font: 500 11px/1 var(--mono); color: #8A95A2; letter-spacing: .04em; padding: 6px 0; min-width: 34px; text-align: center; }
 .zoom .base { margin-top: 8px; }
 .zoom .base[hidden] { display: none; }
+.zoom .mapa { margin-top: 14px; } /* ronda 36 (25 Oct 2026): «Mapa en color» / «Mapa limpio» */
+.zoom .mapa[aria-pressed="true"] { border-color: rgba(156,195,228,.5); color: var(--accent); }
+.zoom .mapa-t { font: 500 9px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: #8A95A2; padding-top: 2px; }
 body.dentro .zoom { opacity: 0; pointer-events: none; transition: opacity .45s; }
 /* closer in: the ring and the cross step back so the planet reads on its own */
 body.cerca #anillo, body.cerca #anillo2, body.cerca .cruz, body.cerca #pulso { opacity: 0 !important; transition: opacity .4s; }

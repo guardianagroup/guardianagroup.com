@@ -926,7 +926,11 @@
   "Sin GUARDIANA": "Walang GUARDIANA",
   "Con y sin GUARDIANA": "May at walang GUARDIANA",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "sa lungsod; hindi pa kumpirmado ang eksaktong address ng gusali",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "sa loob ng 2 km; hindi pa kumpirmado ang eksaktong address ng gusali"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "sa loob ng 2 km; hindi pa kumpirmado ang eksaktong address ng gusali",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Payak na mapa: kulay-abong lupa at madilim na dagat, walang larawan",
+  "Volver al mapa en color": "Bumalik sa mapang may kulay",
+  "Color": "Kulay",
+  "Limpio": "Payak"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

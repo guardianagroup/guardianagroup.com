@@ -926,7 +926,11 @@
   "Sin GUARDIANA": "Bez GUARDIANA",
   "Con y sin GUARDIANA": "S GUARDIANA aj bez nej",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "v meste; presná adresa budovy zatiaľ nie je potvrdená",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "do 2 km; presná adresa budovy zatiaľ nie je potvrdená"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "do 2 km; presná adresa budovy zatiaľ nie je potvrdená",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Čistá mapa: sivá pevnina a tmavé more, bez fotografie",
+  "Volver al mapa en color": "Späť na farebnú mapu",
+  "Color": "Farba",
+  "Limpio": "Čistá"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

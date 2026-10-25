@@ -926,7 +926,11 @@
   "Sin GUARDIANA": "GUARDIANA இல்லாமல்",
   "Con y sin GUARDIANA": "GUARDIANA உடனும் இல்லாமலும்",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "நகரத்தில்; கட்டடத்தின் சரியான முகவரி இன்னும் உறுதிசெய்யப்படவில்லை",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 கி.மீ.க்குள்; கட்டடத்தின் சரியான முகவரி இன்னும் உறுதிசெய்யப்படவில்லை"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 கி.மீ.க்குள்; கட்டடத்தின் சரியான முகவரி இன்னும் உறுதிசெய்யப்படவில்லை",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "எளிய வரைபடம்: சாம்பல் நிற நிலம், அடர் நிறக் கடல், புகைப்படம் இல்லாமல்",
+  "Volver al mapa en color": "வண்ண வரைபடத்துக்குத் திரும்பு",
+  "Color": "வண்ணம்",
+  "Limpio": "எளிய"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

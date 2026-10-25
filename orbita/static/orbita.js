@@ -261,7 +261,11 @@
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
   // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
   const ZOOM = { z: 1, zt: 1, MAX: 8000 }; // 24 Oct 2026, 13:51 (owner): «hasta 5 kilómetros» — 40 000 km / 8 000 = 5 km nominal (closer in, the cables were lost); before: 500 m (80 000), and ×20 at first
-  const LIMPIO_DESDE = 4; // from here the planet is drawn flat: black water, grey land, data in white // 22 Oct 2026 (owner): «sube más el zoom aún» // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
+  // ronda 36 (25 Oct 2026, owner: «adelante», agency: ChatGPT + Gemini): «Mapa en color» by default (the photo up to ×18,
+  // then faint photo land over a deep blue sea, the colour fading out by ×150); the button «Mapa limpio» brings back the
+  // grey from ×4, remembered in this browser (?mapa=limpio / ?mapa=color force one)
+  let MAPA_LIMPIO = /[?&]mapa=limpio/.test(location.search) || (!/[?&]mapa=color/.test(location.search) && (() => { try { return localStorage.getItem('guardiana-orbita-mapa') === 'limpio'; } catch (_) { return false; } })());
+  const limpioDesde = () => (MAPA_LIMPIO ? 4 : 18); // from here the planet is drawn flat: black water, grey land, data in white // 22 Oct 2026 (owner): «sube más el zoom aún» // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
   // 23 Oct 2026, 18:55 (owner, on his phone: «el planeta está muy arriba, tiene que quedar justo en el medio; busca la
@@ -372,6 +376,7 @@
   // 20 Oct 2026: the planet's layers (cables, satellites) live in static/capas.js and draw through this.
   window.OrbitaPlaneta = {
     aVista, pantalla, vec, ctx: cx2,
+    get mapaLimpio() { return MAPA_LIMPIO; }, mapa: (limpio) => ponMapa(limpio),
     get lienzos() { return { estrellas: cvE, tierra: cvT, rutas: cvR }; }, // for the journey recorder
     get vista() { return { lon: vista.lon, lat: vista.lat }; },
     get geo() { return { W, H, CX, CY, R, R0, U, DPR }; },
@@ -509,6 +514,7 @@
   if (zControl) zControl.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     const k = b.dataset.z;
+    if (k === 'mapa') { ponMapa(!MAPA_LIMPIO); return; }
     acerca(k === 'mas' ? ZOOM.zt * 1.25 : k === 'menos' ? ZOOM.zt / 1.25 : 1, k === 'mas' ? CX : null, CY); // geometric steps: the same feel at ×1 and at ×12
   });
   addEventListener('keydown', (e) => {
@@ -518,6 +524,21 @@
     else if (e.key === '-') acerca(ZOOM.zt / 1.25);
   });
   pintaZoom();
+  // the «Mapa limpio» button under the zoom (ronda 36)
+  function pintaMapa() {
+    const b = zControl && zControl.querySelector('[data-z="mapa"]'); if (!b) return;
+    b.setAttribute('aria-pressed', String(MAPA_LIMPIO));
+    const t = MAPA_LIMPIO ? T('Volver al mapa en color') : T('Mapa limpio: tierra gris y mar oscuro, sin la foto');
+    b.title = t; b.setAttribute('aria-label', t);
+    const e = zControl.querySelector('.mapa-t'); if (e) e.textContent = MAPA_LIMPIO ? T('Limpio') : T('Color');
+  }
+  function ponMapa(limpio) {
+    MAPA_LIMPIO = !!limpio;
+    try { localStorage.setItem('guardiana-orbita-mapa', MAPA_LIMPIO ? 'limpio' : 'color'); } catch (_) {}
+    pintaMapa();
+  }
+  pintaMapa();
+  addEventListener('guardiana-idioma', pintaMapa);
   function mira(pais, punto) {
     const c = punto || centros[pais]; if (!c) return;
     meta = { lon: c.lon, lat: Math.max(-45, Math.min(45, c.lat)) };
@@ -552,7 +573,7 @@
     const MIP = !!(EXT.der && EXT.lod);
     const fs = `${MIP ? '#extension GL_OES_standard_derivatives : enable\n#extension GL_EXT_shader_texture_lod : enable\n#define MIP 1\n' : ''}precision highp float;
 uniform vec2 uC;uniform float uR;uniform mat3 uM;uniform vec3 uL;uniform float uT,uNubOn,uAten,uLimpio;
-uniform sampler2D uDia,uLuz,uNub,uAgua,uZona,uZonaT;uniform vec4 uZonaBox;uniform float uZonaOn,uZonaTOn;uniform float uSiempreDia;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
+uniform sampler2D uDia,uLuz,uNub,uAgua,uZona,uZonaT;uniform vec4 uZonaBox;uniform float uZonaOn,uZonaTOn,uColorN,uColorK;uniform float uSiempreDia;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
 const float PI=3.14159265;
 #ifdef MIP
 vec4 tx(sampler2D s,vec2 uv,vec2 gx,vec2 gy){return texture2DGradEXT(s,uv,gx,gy);}
@@ -585,7 +606,10 @@ void main(){
   // 22 Oct 2026 (owner): from a certain zoom the planet goes «limpio»: no lights, no colours, black water and
   // grey land told apart sharply (the coast comes from the day map itself, 16K when loaded), so the data read white.
   if(uLimpio>0.){float lum=dot(dia,vec3(.3,.59,.11));float mar=(dia.b>max(dia.r,dia.g)*1.08&&lum<.5)?1.:0.;mar=max(mar,step(.85,agua)*step(lum,.35));if(tierraF>=0.)mar=1.-smoothstep(.3,.7,tierraF);
-   vec3 cl=mix(vec3(.165,.19,.225),vec3(.03,.045,.07),mar);cl=mix(cl,cl*1.35,fr*.5);c=mix(c,cl,uLimpio);}
+   vec3 cl=mix(vec3(.165,.19,.225),vec3(.03,.045,.07),mar);
+   // ronda 36 (25 Oct 2026): close in, the land keeps the photo's colour, faint (−35 % saturation, 45 % over the grey),
+   // and the sea is one deep blue; the coast comes from the vectors (tierraF), sharp at any zoom
+   if(uColorN>.5){float lu=dot(dia,vec3(.3,.59,.11));vec3 ti=mix(dia,vec3(lu),.35)*.8;vec3 ti2=mix(vec3(.15,.17,.205),ti,.45*uColorK);cl=mix(ti2,vec3(.043,.082,.125),mar);}cl=mix(cl,cl*1.35,fr*.5);c=mix(c,cl,uLimpio);}
   for(int i=0;i<${ONDAS};i++){vec4 o=uO[i];if(o.w>0.&&o.w<1.){
    float d=acos(clamp(dot(w,o.xyz),-1.,1.));float rd=.02+o.w*.32;float f=1.-o.w;
    float ring=exp(-pow((d-rd)/(.008+.01*o.w),2.))*f*f;float core=exp(-d*d/.0008)*f*f*f;
@@ -604,7 +628,7 @@ void main(){
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const la = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la, 2, gl.FLOAT, false, 0, 0);
-      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uLimpio', 'uSiempreDia', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaT', 'uZonaBox', 'uZonaOn', 'uZonaTOn', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
+      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uLimpio', 'uSiempreDia', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaT', 'uZonaBox', 'uZonaOn', 'uZonaTOn', 'uColorN', 'uColorK', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
       G = { pr, u, tex: {}, nubOn: 0 };
       // mipmaps + anisotropic filtering on a freshly loaded map (all are powers of two); if the card refuses, plain linear
       const mipea = () => {
@@ -844,7 +868,7 @@ void main(){
     gl.uniform3f(u.uL, L[0], L[1], L[2]); gl.uniform1f(u.uSiempreDia, SIEMPRE_DIA ? 1 : 0);
     gl.uniform1f(u.uT, t); gl.uniform1f(u.uNubOn, G.nubOn); gl.uniform1f(u.uAten, aten);
     // «mapa limpio» from ×4 (owner, 22 Oct 2026): eased in over a third of a second, body.limpio tells the layers
-    { const quiere = ZOOM.z >= LIMPIO_DESDE ? 1 : 0, ahora = performance.now(), dtl = Math.min(0.05, (ahora - (G.limpioT || ahora)) / 1000); G.limpioT = ahora; if (G.limpio == null) G.limpio = quiere; G.limpio += (quiere - G.limpio) * Math.min(1, dtl * 7); if (Math.abs(G.limpio - quiere) < 0.01) G.limpio = quiere; gl.uniform1f(u.uLimpio, G.limpio); if ((G.limpio > 0.5) !== document.body.classList.contains('limpio')) document.body.classList.toggle('limpio', G.limpio > 0.5); }
+    { const quiere = ZOOM.z >= limpioDesde() ? 1 : 0, ahora = performance.now(), dtl = Math.min(0.05, (ahora - (G.limpioT || ahora)) / 1000); G.limpioT = ahora; if (G.limpio == null) G.limpio = quiere; G.limpio += (quiere - G.limpio) * Math.min(1, dtl * 7); if (Math.abs(G.limpio - quiere) < 0.01) G.limpio = quiere; gl.uniform1f(u.uLimpio, G.limpio); gl.uniform1f(u.uColorN, MAPA_LIMPIO ? 0 : 1); gl.uniform1f(u.uColorK, Math.max(0, Math.min(1, Math.log(150 / ZOOM.z) / Math.log(150 / 60)))); if ((G.limpio > 0.5) !== document.body.classList.contains('limpio')) document.body.classList.toggle('limpio', G.limpio > 0.5); }
     const o = new Float32Array(ONDAS * 4), k = new Float32Array(ONDAS);
     ondas.slice(-ONDAS).forEach((x, i) => { const edad = (t - x.t0) / (x.corte ? 2.6 : 1.8); o.set([...x.w, edad], i * 4); k[i] = x.corte ? 1 : 0; });
     gl.uniform4fv(u.uO, o); gl.uniform1fv(u.uOk, k);
