@@ -927,7 +927,11 @@
   "Sin GUARDIANA": "不使用 GUARDIANA",
   "Con y sin GUARDIANA": "使用与不使用 GUARDIANA",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "在该城市；建筑的确切地址尚未确认",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 公里以内；建筑的确切地址尚未确认"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 公里以内；建筑的确切地址尚未确认",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "简洁地图：灰色陆地和深色海洋，不显示照片",
+  "Volver al mapa en color": "回到彩色地图",
+  "Color": "彩色",
+  "Limpio": "简洁"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

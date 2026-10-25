@@ -926,7 +926,11 @@
   "Sin GUARDIANA": "ไม่มี GUARDIANA",
   "Con y sin GUARDIANA": "มีและไม่มี GUARDIANA",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "ในเมือง ที่อยู่ที่แน่นอนของอาคารยังไม่ได้รับการยืนยัน",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "ภายในรัศมี 2 กม. ที่อยู่ที่แน่นอนของอาคารยังไม่ได้รับการยืนยัน"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "ภายในรัศมี 2 กม. ที่อยู่ที่แน่นอนของอาคารยังไม่ได้รับการยืนยัน",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "แผนที่แบบเรียบ: แผ่นดินสีเทาและทะเลสีเข้ม ไม่มีภาพถ่าย",
+  "Volver al mapa en color": "กลับไปที่แผนที่สี",
+  "Color": "สี",
+  "Limpio": "เรียบ"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

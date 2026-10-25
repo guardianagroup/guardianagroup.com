@@ -926,7 +926,11 @@
   "Sin GUARDIANA": "Uden GUARDIANA",
   "Con y sin GUARDIANA": "Med og uden GUARDIANA",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "i byen; bygningens præcise adresse er endnu ikke bekræftet",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "inden for 2 km; bygningens præcise adresse er endnu ikke bekræftet"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "inden for 2 km; bygningens præcise adresse er endnu ikke bekræftet",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Enkelt kort: grå land og mørkt hav, uden fotoet",
+  "Volver al mapa en color": "Tilbage til kortet i farver",
+  "Color": "Farve",
+  "Limpio": "Enkel"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

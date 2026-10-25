@@ -926,7 +926,11 @@
   "Sin GUARDIANA": "Tanpa GUARDIANA",
   "Con y sin GUARDIANA": "Dengan dan tanpa GUARDIANA",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "di bandar ini; alamat tepat bangunan belum disahkan",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "dalam lingkungan 2 km; alamat tepat bangunan belum disahkan"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "dalam lingkungan 2 km; alamat tepat bangunan belum disahkan",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Peta ringkas: daratan kelabu dan laut gelap, tanpa foto",
+  "Volver al mapa en color": "Kembali ke peta berwarna",
+  "Color": "Warna",
+  "Limpio": "Ringkas"
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

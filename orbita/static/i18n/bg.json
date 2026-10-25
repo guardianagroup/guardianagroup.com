@@ -926,7 +926,11 @@
   "Sin GUARDIANA": "Без GUARDIANA",
   "Con y sin GUARDIANA": "Със и без GUARDIANA",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "в града; точният адрес на сградата още не е потвърден",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "на по-малко от 2 km; точният адрес на сградата още не е потвърден"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "на по-малко от 2 km; точният адрес на сградата още не е потвърден",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Опростена карта: сива суша и тъмно море, без снимката",
+  "Volver al mapa en color": "Обратно към цветната карта",
+  "Color": "Цвят",
+  "Limpio": "Проста"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

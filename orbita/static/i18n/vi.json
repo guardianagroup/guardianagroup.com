@@ -927,7 +927,11 @@
   "Sin GUARDIANA": "Không có GUARDIANA",
   "Con y sin GUARDIANA": "Có và không có GUARDIANA",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "trong thành phố; địa chỉ chính xác của tòa nhà chưa được xác nhận",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "trong vòng 2 km; địa chỉ chính xác của tòa nhà chưa được xác nhận"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "trong vòng 2 km; địa chỉ chính xác của tòa nhà chưa được xác nhận",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Bản đồ đơn giản: đất liền màu xám và biển tối, không có ảnh",
+  "Volver al mapa en color": "Quay lại bản đồ màu",
+  "Color": "Màu",
+  "Limpio": "Đơn giản"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

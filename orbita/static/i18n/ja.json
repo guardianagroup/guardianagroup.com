@@ -927,7 +927,11 @@
   "Sin GUARDIANA": "GUARDIANA なし",
   "Con y sin GUARDIANA": "GUARDIANA あり・なし",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "市内。建物の正確な住所はまだ確認されていません",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 km以内。建物の正確な住所はまだ確認されていません"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 km以内。建物の正確な住所はまだ確認されていません",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "シンプルな地図：灰色の陸地と暗い海、写真なし",
+  "Volver al mapa en color": "カラーの地図に戻る",
+  "Color": "カラー",
+  "Limpio": "シンプル"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

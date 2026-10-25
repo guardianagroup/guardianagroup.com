@@ -926,7 +926,11 @@
   "Sin GUARDIANA": "Fără GUARDIANA",
   "Con y sin GUARDIANA": "Cu și fără GUARDIANA",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "în oraș; adresa exactă a clădirii nu este încă confirmată",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "la mai puțin de 2 km; adresa exactă a clădirii nu este încă confirmată"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "la mai puțin de 2 km; adresa exactă a clădirii nu este încă confirmată",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Hartă simplă: uscat gri și mare întunecată, fără fotografie",
+  "Volver al mapa en color": "Înapoi la harta color",
+  "Color": "Culoare",
+  "Limpio": "Simplă"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

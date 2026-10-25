@@ -926,7 +926,11 @@
   "Sin GUARDIANA": "Bila GUARDIANA",
   "Con y sin GUARDIANA": "Ukiwa na GUARDIANA na bila GUARDIANA",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "ndani ya jiji; anwani kamili ya jengo bado haijathibitishwa",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "ndani ya kilomita 2; anwani kamili ya jengo bado haijathibitishwa"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "ndani ya kilomita 2; anwani kamili ya jengo bado haijathibitishwa",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Ramani rahisi: nchi kavu ya kijivu na bahari yenye giza, bila picha",
+  "Volver al mapa en color": "Rudi kwenye ramani ya rangi",
+  "Color": "Rangi",
+  "Limpio": "Rahisi"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

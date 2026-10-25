@@ -926,7 +926,11 @@
   "Sin GUARDIANA": "GUARDIANA లేకుండా",
   "Con y sin GUARDIANA": "GUARDIANAతో మరియు లేకుండా",
   "en la ciudad; la dirección exacta del edificio aún no está confirmada": "నగరంలో; భవనం యొక్క ఖచ్చితమైన చిరునామా ఇంకా ధృవీకరించబడలేదు",
-  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 కి.మీ. లోపల; భవనం యొక్క ఖచ్చితమైన చిరునామా ఇంకా ధృవీకరించబడలేదు"
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 కి.మీ. లోపల; భవనం యొక్క ఖచ్చితమైన చిరునామా ఇంకా ధృవీకరించబడలేదు",
+  "Mapa limpio: tierra gris y mar oscuro, sin la foto": "సాధారణ మ్యాప్: బూడిద రంగు భూమి, ముదురు సముద్రం, ఫోటో లేకుండా",
+  "Volver al mapa en color": "రంగుల మ్యాప్‌కు తిరిగి వెళ్లండి",
+  "Color": "రంగు",
+  "Limpio": "సాధారణ"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",
