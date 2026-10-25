@@ -753,26 +753,38 @@
   }
 
   // ---------- countries: a name at each centroid once the borders show, and a card on hover (owner, 22 Oct 2026, 14:35) ----------
-  let PAIS_CAJAS = [], PAISES = null;
+  let PAIS_CAJAS = [], PAISES = null, letraPais = null;
+  const ANCHO_PAIS = new Map(); // the width of each name, measured once (again when the letter finishes loading)
+  try { document.fonts.addEventListener('loadingdone', () => ANCHO_PAIS.clear()); } catch (_) {}
+  const fuentePais = () => letraPais || (letraPais = '600 11px ' + ((getComputedStyle(document.documentElement).getPropertyValue('--texto') || '').trim() || '"Hanken Grotesk", system-ui, sans-serif'));
   async function cargaPaises() { if (PAISES || cargando.paises) return; cargando.paises = true; try { PAISES = (await cargaJSON('datos/paises.json')).paises || {}; } catch (_) { PAISES = {}; } cargando.paises = false; }
   function pintaPaises(cx, p, G) {
     PAIS_CAJAS = [];
     const z = G.R / (G.R0 || G.R); if (z < 2.2 || z > 400 || !p.centros) return;
     const L = esLimpio(), ocupado = [];
     if (!L) return; // 22 Oct 2026, 21:54 (owner): no country names while the planet is in colour; they come with the grey, «limpio» planet
-    cx.save(); cx.globalCompositeOperation = 'source-over';
-    cx.font = '600 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textAlign = 'center'; cx.textBaseline = 'middle';
-    const al = Math.min(0.62, 0.22 + 0.08 * z);
+    // owner, 24 Oct 2026, 21:22: «el nombre del país… no se ve muy bien. Sin embargo, las ciudades se ven en alta
+    // calidad»: the cities' treatment (ciudades.js: the interface's letter, white over a dark halo, whole pixels), and
+    // the spaced capitals they had, so a country never reads as a city
+    cx.save(); cx.globalCompositeOperation = 'source-over'; cx.lineJoin = 'round';
+    cx.font = fuentePais(); cx.textAlign = 'left'; cx.textBaseline = 'middle'; if ('letterSpacing' in cx) cx.letterSpacing = '0.9px';
+    const al = Math.min(1, (z - 2.2) / 0.6); // a soft entrance instead of popping in at ×2.2
     for (const cc of Object.keys(p.centros)) {
       const c = p.centros[cc], v = p.aVista(p.vec(c.lon, c.lat)); if (v[2] <= 0.3) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1]; if (x < -60 || x > G.W + 60 || y < -20 || y > G.H + 20) continue;
-      const txt = paisNombre(cc).toUpperCase(), w = 6.6 * txt.length + 6;
-      const choca = (yy) => ocupado.some((o) => Math.abs(x - o[0]) < (w + o[2]) / 2 + 3 && Math.abs(yy - o[1]) < 14);
-      let yy = y; if (choca(yy)) { yy = y + 14; if (choca(yy)) { yy = y - 14; if (choca(yy)) continue; } } // a small nudge before giving up (Chequia next to Alemania)
+      const txt = paisNombre(cc).toUpperCase();
+      let w = ANCHO_PAIS.get(txt); if (w == null) { w = Math.ceil(cx.measureText(txt).width); ANCHO_PAIS.set(txt, w); }
+      const choca = (yy) => ocupado.some((o) => Math.abs(x - o[0]) < (w + o[2]) / 2 + 8 && Math.abs(yy - o[1]) < 15);
+      let yy = y; if (choca(yy)) { yy = y + 15; if (choca(yy)) { yy = y - 15; if (choca(yy)) continue; } } // a small nudge before giving up (Chequia next to Alemania)
       ocupado.push([x, yy, w]);
-      cx.fillStyle = `rgba(${L ? BLANCO : ACERO},${al * (cc === paisMarcado ? 1.5 : 1)})`; cx.fillText(txt, x, yy);
-      PAIS_CAJAS.push([x - w / 2, yy - 8, w, 16, cc]);
+      const lx = Math.round(x - w / 2), ly = Math.round(yy), k = al * Math.min(1, (v[2] - 0.3) / 0.15), on = cc === paisMarcado;
+      if (k > 0.02) {
+        cx.lineWidth = 3.4; cx.strokeStyle = `rgba(6,8,12,${(0.85 * k).toFixed(2)})`; cx.strokeText(txt, lx, ly);
+        cx.fillStyle = `rgba(${BLANCO},${((on ? 1 : 0.8) * k).toFixed(2)})`; cx.fillText(txt, lx, ly);
+      }
+      PAIS_CAJAS.push([lx - 3, ly - 9, w + 6, 18, cc]);
     }
+    if ('letterSpacing' in cx) cx.letterSpacing = '0px';
     cx.restore();
   }
   let paisMarcado = null;
