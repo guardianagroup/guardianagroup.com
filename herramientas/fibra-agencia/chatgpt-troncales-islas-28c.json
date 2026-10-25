@@ -1,0 +1,111 @@
+[
+ {
+  "nombre": "Dorsal Principal de Anguila (Oeste - The Valley - Este)",
+  "operador": "Flow (Cable & Wireless)",
+  "pais": "AI",
+  "ciudades": [
+   "South Hill Village",
+   "Sandy Ground",
+   "North Side",
+   "The Valley",
+   "Stoney Ground",
+   "The Quarter",
+   "The Farrington",
+   "Island Harbour"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: Flow confirma que dispone de fibra óptica terrestre en una parte significativa de Anguila, principalmente en el oeste, y de una red troncal subterránea que atraviesa la isla de este a oeste. Las localidades se ordenan según el corredor viario probable; no se ha publicado la secuencia exacta de nodos. https://theanguillian.com/2019/04/flow-manager-our-services-have-improved-after-irma/"
+ },
+ {
+  "nombre": "Anillo Circunvalar de San Cristóbal (St. Kitts Island Main Road)",
+  "operador": "The Cable",
+  "pais": "KN",
+  "ciudades": [
+   "Basseterre",
+   "Trinity",
+   "Old Road Town",
+   "Middle Island",
+   "Sandy Point Town",
+   "Saint Paul's",
+   "Dieppe Bay Town",
+   "Sadlers",
+   "Tabernacle",
+   "Nicola Town",
+   "Cayon",
+   "Monkey Hill",
+   "Basseterre"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: The Cable confirma expresamente que dispone de un anillo completo de fibra óptica alrededor de la isla, con infraestructura aérea y subterránea. La secuencia sigue la carretera principal circunvalar; no representa un plano certificado de los nodos. https://www.thecable.net/business/"
+ },
+ {
+  "nombre": "Anillo Principal de Nieves (Charlestown - Newcastle)",
+  "operador": "Nevis Island Administration / The Cable",
+  "pais": "KN",
+  "ciudades": [
+   "Charlestown",
+   "Cotton Ground",
+   "Newcastle",
+   "Mannings",
+   "Market Shop",
+   "Fig Tree",
+   "Charlestown"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: la administración de Nevis confirma el despliegue de fibra óptica por toda la isla para conectar su sistema de videovigilancia, siguiendo principalmente la carretera insular. En 2025, The Cable acordó utilizar la red troncal de fibra de la administración. La secuencia de localidades sigue la carretera circunvalar, pero no está publicada como trazado técnico exacto. https://www.winnmediaskn.com/the-cable-expands-to-nevis-through-strategic-partnership-with-nevis-island-administration/"
+ },
+ {
+  "nombre": "Dorsal Terrestre de Montserrat (Bunkum Bay - Brades - Salem)",
+  "operador": "Digicel Montserrat / Flow Montserrat",
+  "pais": "MS",
+  "ciudades": [
+   "Woodlands",
+   "Saint Peter's",
+   "Brades"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: el Gobierno de Montserrat confirma redes comerciales de fibra óptica terrestre desplegadas por Digicel y Flow en la isla. Se conserva únicamente el corredor geográfico Woodlands – Saint Peter's – Brades. No se dispone de un plano público que confirme el trazado físico exacto. https://www.gov.ms/fttp/"
+ },
+ {
+  "nombre": "Anillo Perimetral de Rarotonga (Ara Tapu)",
+  "operador": "Vodafone Cook Islands",
+  "pais": "CK",
+  "ciudades": [
+   "Rutaki",
+   "Arorangi",
+   "Nikao",
+   "Avarua",
+   "Matavera",
+   "Ngatangiia",
+   "Muri",
+   "Titikaveka",
+   "Rutaki"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: el informe anual de Amalgamated Telecom Holdings de 2023 confirma expresamente un anillo troncal terrestre de fibra óptica Cisco MPLS de 10 Gbit/s en Rarotonga, con nodos GPON en Avarua y Aroa. El itinerario propuesto sigue la carretera perimetral Ara Tapu; los puntos intermedios y su orden son geográficos, no nodos certificados por el operador. https://www.ath.com.fj/wp-content/uploads/2023/12/ATH-2023-Annual-Report-FINAL-As-of-17-11-23.pdf"
+ },
+ {
+  "nombre": "Dorsal Terrestre de Uvéa (Wallis)",
+  "operador": "SPT (Service des Postes et Télécommunications)",
+  "pais": "WF",
+  "ciudades": [
+   "Hihifo",
+   "Mata-Utu",
+   "Aka'aka"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: el SPT confirma el despliegue terrestre de fibra óptica y la terminación de las obras civiles para unir los ejes norte y sur. El informe oficial de ejecución de la estrategia digital de 2023 registra conexiones de fibra activas en Hihifo y en el distrito central. El recorrido propuesto sigue el corredor viario entre el norte y Mata-Utu, prolongado hacia Aka'aka; la continuidad física exacta no está publicada. https://www.spt.wf/"
+ },
+ {
+  "nombre": "Enlace Terrestre de Futuna (Sigave)",
+  "operador": "SPT (Service des Postes et Télécommunications)",
+  "pais": "WF",
+  "ciudades": [
+   "Leava",
+   "Nuku",
+   "Vaisei"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: el SPT confirma el despliegue de fibra terrestre en Sigave y el informe oficial de 2023 registra abonados FTTH activos en ese distrito. Se conserva el tramo geográfico de Sigave siguiendo la carretera costera; no se ha publicado una identificación individual de todos los puntos de paso. https://www.spt.wf/"
+ }
+]
