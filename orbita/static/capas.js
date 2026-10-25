@@ -1995,7 +1995,7 @@
     const L = P() && P().lugar;
     // owner, 22 Oct 2026: «quiero datos sobre ese centro de datos que estoy viendo», not the distance from the visitor
     if (X.web) filas.push([T('Web'), dominio(X.web)]);
-    const titulo = q.n && q.n !== q.o ? q.n : (q.o ? q.o + ' · ' + T('centro de datos') : T('Centro de datos sin nombre'));
+    const nn = nombreCentro(q), titulo = nn && nn !== q.o ? nn : (q.o ? q.o + ' · ' + T('centro de datos') : T('Centro de datos sin nombre'));
     const fuentes = T('Datos verificados');
     const nube = q.o && /amazon|aws|google|microsoft|azure|meta|facebook|apple|oracle|alibaba|cloudflare|ovh|equinix|digital realty|telefónica|telefonica|orange|vodafone|claro|movistar/i.test(q.o);
     abreModelo(modelo(T('Centro de datos'), titulo, filas.length ? filas : [[T('Datos'), T('Sin más datos públicos sobre este edificio')]], fuentes, {
@@ -2093,6 +2093,8 @@
     for (let i = 0; i < PT.p.length; i++) { const v = p.aVista(PT.p[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 <= r * r) out.push([d2, i]); }
     return out.sort((a, b) => a[0] - b[0]).map((a) => a[1]);
   }
+  // 25 Oct 2026: OpenStreetMap names some buildings with just a letter or a number («A», «B», «2»); alone they say nothing
+  const nombreCentro = (q) => (q.n && q.n.trim().length <= 2 ? (q.o ? q.o + ' · ' : T('Centro de datos') + ' ') + q.n.trim() : q.n);
   function cierraLista() { if (lista) { lista.remove(); lista = null; } }
   function abreLista(idx, x, y) {
     cierraLista(); const f = ficha(); if (f) f.hidden = true;
@@ -2103,7 +2105,7 @@
     const ul = document.createElement('div'); ul.className = 'filas';
     for (const i of idx.slice(0, 40)) {
       const q = PT.p[i], b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'option');
-      b.innerHTML = '<b></b><span></span>'; b.querySelector('b').textContent = q.n || q.o || T('Centro de datos sin nombre'); b.querySelector('span').textContent = q.n && q.o && q.o !== q.n ? q.o : '';
+      b.innerHTML = '<b></b><span></span>'; b.querySelector('b').textContent = nombreCentro(q) || q.o || T('Centro de datos sin nombre'); b.querySelector('span').textContent = q.n && q.n.trim().length > 2 && q.o && q.o !== q.n ? q.o : '';
       b.addEventListener('mouseenter', () => { puntoMarcado = i; }); // the dot lights up on the planet while you look at the row
       b.addEventListener('click', (e) => { e.stopPropagation(); const r = b.getBoundingClientRect(); cierraLista(); cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; puntoMarcado = i; clicActual = true; fichaLugar('punto', i, r.right + 8, r.top); fichaFija = true; });
       ul.appendChild(b);
