@@ -1,0 +1,92 @@
+[
+ {
+  "nombre": "Red terrestre FTTH Digicel – The Valley y Blowing Point",
+  "operador": "Digicel Anguilla",
+  "pais": "AI",
+  "ciudades": [
+   "The Valley",
+   "Blowing Point"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: The Anguillian Newspaper (confirmación del despliegue de la red FTTH de Digicel en toda Anguila con centro operativo en The Valley) y trazado terrestre directo por Jeremiah Gumbs Highway hacia Blowing Point"
+ },
+ {
+  "nombre": "Red terrestre FTTH Digicel – sector de Charlestown en Nevis",
+  "operador": "Digicel St. Kitts & Nevis",
+  "pais": "KN",
+  "ciudades": [
+   "Charlestown",
+   "Bath"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: VON Radio Nevis (confirmación del lanzamiento oficial y operación de la red de fibra óptica de Digicel en la isla de Nevis) siguiendo el corredor principal Island Main Road entre Charlestown y el sector contiguo de Bath"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica The Cable – sureste de Saint Kitts",
+  "operador": "The Cable",
+  "pais": "KN",
+  "ciudades": [
+   "Basseterre",
+   "Frigate Bay",
+   "Cockleshell Bay"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: St. Kitts and Nevis Information Service (SKNIS) y NTRC (puesta en servicio de red de fibra óptica de The Cable hasta Cockleshell Bay en la península sureste en julio de 2025) conectando con su red troncal desde Basseterre vía Frigate Bay por Kennedy Simmonds Highway"
+ },
+ {
+  "nombre": "Red terrestre FTTH Digicel – norte de Montserrat",
+  "operador": "Digicel Montserrat",
+  "pais": "MS",
+  "ciudades": [
+   "Little Bay",
+   "Brades",
+   "St. John's"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: Government of Montserrat DITES (Project Lightspeed) y Discover Montserrat (despliegue FTTH en servicio con Digicel en el norte de la isla) a lo largo de la carretera principal entre Little Bay, Brades y St. John's"
+ },
+ {
+  "nombre": "Red troncal terrestre de fibra óptica de Rarotonga – Aroa y Avarua",
+  "operador": "Vodafone Cook Islands",
+  "pais": "CK",
+  "ciudades": [
+   "Aroa",
+   "Avarua"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: Vodafone Cook Islands (despliegue activo de red de fibra óptica subterránea en Rarotonga con sede central en Avarua) siguiendo el anillo costero principal Ara Tapu entre Aroa y Avarua"
+ },
+ {
+  "nombre": "Enlace terrestre entre el punto de llegada de Rutaki y la estación de Aroa",
+  "operador": "Avaroa Cables Limited",
+  "pais": "CK",
+  "ciudades": [
+   "Rutaki",
+   "Aroa"
+  ],
+  "estado": "en servicio",
+  "fuente": "Avaroa Cables Limited (confirmación oficial del punto de amarre terrestre en Rutaki Village y enlace terrestre hasta la estación de aterrizaje de cables de Aroa en Rarotonga)"
+ },
+ {
+  "nombre": "Red terrestre FTTH de Futuna – Vele y Kolia",
+  "operador": "Service des Postes et Télécommunications de Wallis-et-Futuna",
+  "pais": "WF",
+  "ciudades": [
+   "Vele",
+   "Kolia"
+  ],
+  "estado": "en servicio",
+  "fuente": "Service des Postes et Télécommunications de Wallis-et-Futuna (spt.wf) e informes anuales del IEOM (confirmación de obra civil terminada y despliegue FTTH activo del SPT en los sectores de Vele y Kolia en Futuna)"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica de Wallis – distrito central",
+  "operador": "Service des Postes et Télécommunications de Wallis-et-Futuna",
+  "pais": "WF",
+  "ciudades": [
+   "Mata-Utu",
+   "Falaleu"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: Service des Postes et Télécommunications de Wallis-et-Futuna (spt.wf, confirmación de fibra óptica activa en el Distrito Central Hahake con sede en Mata-Utu) siguiendo la vía principal hacia la localidad contigua de Falaleu"
+ }
+]

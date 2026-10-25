@@ -8,6 +8,61 @@
 },
 "lineas": [
 {
+"n": "Anillo Circunvalar de San Cristóbal (St. Kitts Island Main Road)",
+"o": "The Cable",
+"cc": "KN",
+"l": [
+[
+-62.72,
+17.3
+],
+[
+-62.776,
+17.3
+],
+[
+-62.803,
+17.322
+],
+[
+-62.811,
+17.326
+],
+[
+-62.849,
+17.359
+],
+[
+-62.836,
+17.406
+],
+[
+-62.814,
+17.415
+],
+[
+-62.793,
+17.405
+],
+[
+-62.774,
+17.388
+],
+[
+-62.753,
+17.38
+],
+[
+-62.733,
+17.35
+],
+[
+-62.729,
+17.323
+]
+]
+},
+{
 "n": "North-South National Highway 1A Optical Fiber Backbone",
 "o": "VNPT",
 "cc": "VN",
@@ -474,6 +529,45 @@
 [
 -66.11,
 18.47
+]
+]
+},
+{
+"n": "Anillo Perimetral de Rarotonga (Ara Tapu)",
+"o": "Vodafone Cook Islands",
+"cc": "CK",
+"l": [
+[
+-159.811,
+-21.255
+],
+[
+-159.826,
+-21.228
+],
+[
+-159.812,
+-21.208
+],
+[
+-159.78,
+-21.21
+],
+[
+-159.733,
+-21.224
+],
+[
+-159.73,
+-21.243
+],
+[
+-159.733,
+-21.255
+],
+[
+-159.754,
+-21.271
 ]
 ]
 },
@@ -1041,6 +1135,37 @@
 [
 65.21,
 37.84
+]
+]
+},
+{
+"n": "Anillo Principal de Nieves (Charlestown - Newcastle)",
+"o": "Nevis Island Administration / The Cable",
+"cc": "KN",
+"l": [
+[
+-62.617,
+17.133
+],
+[
+-62.617,
+17.167
+],
+[
+-62.583,
+17.2
+],
+[
+-62.548,
+17.165
+],
+[
+-62.573,
+17.132
+],
+[
+-62.603,
+17.126
 ]
 ]
 },
@@ -2512,6 +2637,45 @@
 [
 -61.456,
 15.583
+]
+]
+},
+{
+"n": "Dorsal Principal de Anguila (Oeste - The Valley - Este)",
+"o": "Flow (Cable & Wireless)",
+"cc": "AI",
+"l": [
+[
+-63.088,
+18.192
+],
+[
+-63.09,
+18.201
+],
+[
+-63.044,
+18.229
+],
+[
+-63.06,
+18.22
+],
+[
+-63.046,
+18.22
+],
+[
+-63.042,
+18.208
+],
+[
+-63.022,
+18.215
+],
+[
+-63.01,
+18.256
 ]
 ]
 },
@@ -8020,6 +8184,25 @@
 ]
 },
 {
+"n": "Red terrestre de fibra óptica The Cable – sureste de Saint Kitts",
+"o": "The Cable",
+"cc": "KN",
+"l": [
+[
+-62.72,
+17.3
+],
+[
+-62.689,
+17.279
+],
+[
+-62.634,
+17.227
+]
+]
+},
+{
 "n": "Red terrestre de fibra óptica Orange – corredor oriental de Saint-Martin",
 "o": "Orange Caraïbe",
 "cc": "MF",
@@ -8035,6 +8218,25 @@
 [
 -63.054,
 18.105
+]
+]
+},
+{
+"n": "Red terrestre FTTH Digicel – norte de Montserrat",
+"o": "Digicel Montserrat",
+"cc": "MS",
+"l": [
+[
+-62.204,
+16.798
+],
+[
+-62.21,
+16.79
+],
+[
+-61.843,
+17.121
 ]
 ]
 },
@@ -8069,6 +8271,63 @@
 [
 19.988,
 60.23
+]
+]
+},
+{
+"n": "Dorsal Terrestre de Montserrat (Bunkum Bay - Brades - Salem)",
+"o": "Digicel Montserrat / Flow Montserrat",
+"cc": "MS",
+"l": [
+[
+-62.219,
+16.762
+],
+[
+-62.217,
+16.773
+],
+[
+-62.21,
+16.79
+]
+]
+},
+{
+"n": "Dorsal Terrestre de Uvéa (Wallis)",
+"o": "SPT (Service des Postes et Télécommunications)",
+"cc": "WF",
+"l": [
+[
+-176.199,
+-13.24
+],
+[
+-176.17,
+-13.28
+],
+[
+-176.171,
+-13.275
+]
+]
+},
+{
+"n": "Enlace Terrestre de Futuna (Sigave)",
+"o": "SPT (Service des Postes et Télécommunications)",
+"cc": "WF",
+"l": [
+[
+-178.158,
+-14.293
+],
+[
+-178.163,
+-14.291
+],
+[
+-178.17,
+-14.276
 ]
 ]
 },
@@ -8701,6 +8960,36 @@
 ]
 },
 {
+"n": "Red terrestre FTTH Digicel – The Valley y Blowing Point",
+"o": "Digicel Anguilla",
+"cc": "AI",
+"l": [
+[
+-63.06,
+18.22
+],
+[
+-63.094,
+18.176
+]
+]
+},
+{
+"n": "Red terrestre FTTH Digicel – sector de Charlestown en Nevis",
+"o": "Digicel St. Kitts & Nevis",
+"cc": "KN",
+"l": [
+[
+-62.617,
+17.133
+],
+[
+-62.626,
+17.13
+]
+]
+},
+{
 "n": "Red troncal terrestre CARCIP – corredor oriental de Saint Vincent",
 "o": "Digicel SVG / Gobierno de Saint Vincent y las Granadinas",
 "cc": "VC",
@@ -8727,6 +9016,66 @@
 [
 145.231,
 14.167
+]
+]
+},
+{
+"n": "Red troncal terrestre de fibra óptica de Rarotonga – Aroa y Avarua",
+"o": "Vodafone Cook Islands",
+"cc": "CK",
+"l": [
+[
+-159.816,
+-21.254
+],
+[
+-159.78,
+-21.21
+]
+]
+},
+{
+"n": "Enlace terrestre entre el punto de llegada de Rutaki y la estación de Aroa",
+"o": "Avaroa Cables Limited",
+"cc": "CK",
+"l": [
+[
+-159.811,
+-21.255
+],
+[
+-159.816,
+-21.254
+]
+]
+},
+{
+"n": "Red terrestre FTTH de Futuna – Vele y Kolia",
+"o": "Service des Postes et Télécommunications de Wallis-et-Futuna",
+"cc": "WF",
+"l": [
+[
+-178.077,
+-14.312
+],
+[
+-178.097,
+-14.308
+]
+]
+},
+{
+"n": "Red terrestre de fibra óptica de Wallis – distrito central",
+"o": "Service des Postes et Télécommunications de Wallis-et-Futuna",
+"cc": "WF",
+"l": [
+[
+-176.17,
+-13.28
+],
+[
+-176.183,
+-13.293
 ]
 ]
 },

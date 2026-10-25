@@ -210,10 +210,16 @@ def copiar():
                 im = Image.open(io.BytesIO(r.read())).convert('RGB')
         except Exception as ex:
             print('no se pudo bajar', e['nombre'], ex); continue
+        # a review may ask for a crop of the original, in its pixels [x0, y0, x1, y1] (Grane: the platform is small on the
+        # horizon); the credit then says so, as the licences ask for changes to be indicated
+        recorte = e.get('recorte')
+        if recorte:
+            im = im.crop(tuple(int(v) for v in recorte))
         if im.width > 640:
             im = im.resize((640, round(im.height * 640 / im.width)), Image.LANCZOS)
         im.save(os.path.join(carpeta, clave + '.jpg'), 'JPEG', quality=82, optimize=True, progressive=True)
         autor = re.sub(r'^(Creator|User|Usuario):', '', c.get('autor') or '').strip()[:120]
+        if recorte: autor += ' (recorte)'
         out[clave] = {'tipo': e['tipo'], 'id': c['id'], 'nombre': c['nombre'], 'archivo': clave + '.jpg', 'ancho': im.width, 'alto': im.height,
                       'autor': autor, 'licencia': c.get('licencia', ''), 'url_licencia': c.get('url_licencia', ''), 'pagina': c.get('pagina', '')}
         time.sleep(1)

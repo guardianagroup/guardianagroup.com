@@ -159,6 +159,7 @@ SITIOS = {
     ('IM', 'portstmary'): (-4.739, 54.077),
     ('SJ', 'nybyen'): (15.588, 78.201), ('SJ', 'hotellneset'): (15.488, 78.249), ('SJ', 'adventdalen'): (15.895, 78.197),
     ('PM', 'savoyard'): (-56.240, 46.764), ('PM', 'langlade'): (-56.318, 46.848),
+    ('WF', 'hihifo'): (-176.199, -13.240),  # Nominatim gives Hihifo's airfield, in the district's centre
 }
 
 PARECIDO = 1.35  # the other voice's path between two cities may be this much longer than the straight line (+ 60 km)
