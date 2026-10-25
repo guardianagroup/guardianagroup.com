@@ -588,6 +588,7 @@ out tags center;''')
     else:
         print('Sin la segunda consulta de centros de datos (edificios).', file=sys.stderr)
     out, extra, vistos, cuenta = [], [], set(), {'aterrizaje': 0, 'datos': 0, 'intercambio': 0}
+    mismos = {}
     for e in d.get('elements', []):
         t = e.get('tags', {})
         c = e.get('center') or ({'lat': e['lat'], 'lon': e['lon']} if 'lat' in e else None)
@@ -596,10 +597,15 @@ out tags center;''')
         tipo = 'aterrizaje' if t.get('telecom') == 'cable_landing_station' else 'intercambio' if t.get('telecom') == 'internet_exchange' else 'datos'
         # the same building can be a node (telecom=data_center) and an outline (building=data_center): one entry
         nombre = (t.get('name') or t.get('name:en') or '').strip().lower()
-        claves = [(tipo, round(c['lon'], 3), round(c['lat'], 3))] + ([(tipo, nombre, round(c['lon'], 2), round(c['lat'], 2))] if nombre else [])
+        claves = [(tipo, round(c['lon'], 3), round(c['lat'], 3))]
         if any(k in vistos for k in claves):
             continue
+        # 25 Oct 2026 (revisa_puntos: 79 buildings of one campus, same name, less than 1 km apart, split by the 0.01°
+        # grid): one point per name within 1 km
+        if nombre and any(km((c['lon'], c['lat']), q) < 1 for q in mismos.get((tipo, nombre), ())):
+            continue
         vistos.update(claves); cuenta[tipo] += 1
+        if nombre: mismos.setdefault((tipo, nombre), []).append((c['lon'], c['lat']))
         out.append([round(c['lon'], 3), round(c['lat'], 3), tipo, t.get('name') or t.get('name:en') or '', t.get('operator', '')])
         # 22 Oct 2026 (owner: «de los centros de datos, quiero saberlo todo: dueño, año, tecnologías…»): every tag
         # OpenStreetMap has that says something real about the building, kept as written there
