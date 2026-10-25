@@ -52,7 +52,9 @@ def main():
         for q in osm:
             if q[2] != 'datos': continue
             b = pliega(q[3])
-            if len(a) >= 6 and len(b) >= 6 and (a in b or b in a) and km((p['lon'], p['lat']), (q[0], q[1])) < 1.5:
+            # the same building only when one name ends with the other («SUNeVision MEGA Gateway» / «MEGA Gateway»); «Telehouse
+            # North Two» is not «Telehouse North», nor «Equinix TY8» a point called just «Equinix»
+            if len(a) >= 6 and len(b) >= 6 and (a.endswith(b) or b.endswith(a)) and km((p['lon'], p['lat']), (q[0], q[1])) < 1.5:
                 fuera.append((i, p['nombre'], q[3])); break
     for i, a, b in sorted(fuera, reverse=True):
         del P[i]

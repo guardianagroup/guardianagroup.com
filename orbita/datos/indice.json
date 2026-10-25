@@ -24,9 +24,14 @@
    "relations": "0",
    "total": "2430"
   },
-  "way[\"telecom\"=\"line\"];": "sin respuesta: the JSON object must be str, bytes or bytearray, not NoneType",
+  "way[\"telecom\"=\"line\"];": {
+   "nodes": "0",
+   "ways": "4096",
+   "relations": "0",
+   "total": "4096"
+  },
   "relation[\"route\"=\"fiber\"];": "sin respuesta: the JSON object must be str, bytes or bytearray, not NoneType",
   "relation[\"type\"=\"route\"][\"route\"=\"fibre\"];": "sin respuesta: the JSON object must be str, bytes or bytearray, not NoneType"
  },
- "medida_tierra_fecha": "2026-10-25T19:53:32Z"
+ "medida_tierra_fecha": "2026-10-25T22:07:41Z"
 }

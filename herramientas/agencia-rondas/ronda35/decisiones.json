@@ -875,6 +875,90 @@
 "precision": "direccion-edificio",
 "acuerdo_km": 0.0
 },
+"226": {
+"nombre": "Rogers Capital Data Center",
+"lat": -20.16541,
+"lon": 57.49878,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.58
+},
+"231": {
+"nombre": "AIMS KL2 Bangunan AIMS",
+"lat": 3.14953,
+"lon": 101.70539,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.1
+},
+"234": {
+"nombre": "Equinix KL1",
+"lat": 2.90283,
+"lon": 101.6536,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.63
+},
+"241": {
+"nombre": "Rack Centre LGS 1",
+"lat": 6.6039,
+"lon": 3.36873,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.37
+},
+"244": {
+"nombre": "CDC Silverdale",
+"lat": -36.61527,
+"lon": 174.66394,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.07
+},
+"245": {
+"nombre": "Datacom Abel",
+"lat": -41.29586,
+"lon": 174.7733,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.1
+},
+"246": {
+"nombre": "Datacom Gloucester",
+"lat": -43.53001,
+"lon": 172.64364,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.27
+},
 "260": {
 "nombre": "Atman WAW-2",
 "lat": 52.18575,
@@ -886,5 +970,173 @@
 "dir": "ul. Konstruktorska 5, 02-673 Warszawa, Polonia",
 "precision": "direccion-coordenadas",
 "acuerdo_km": 0.1
+},
+"261": {
+"nombre": "Equinix WA1",
+"lat": 52.22761,
+"lon": 21.00426,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Aleje Jerozolimskie 65/79, 00-697 Warszawa, Polonia",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"265": {
+"nombre": "M247 Bucharest DC1",
+"lat": 44.47859,
+"lon": 26.11782,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Șoseaua Fabrica de Glucoză 11B, planta 1, Sector 2, 020331 București, Rumanía",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"266": {
+"nombre": "M247 Bucharest DC2",
+"lat": 44.47859,
+"lon": 26.11782,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.4
+},
+"267": {
+"nombre": "NXDATA-1",
+"lat": 44.48159,
+"lon": 26.12069,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Bulevardul Dimitrie Pompeiu 8, edificio FEPER, planta 3, Sector 2, 020337 București, Rumanía",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"277": {
+"nombre": "Equinix SG1",
+"lat": 1.29513,
+"lon": 103.78981,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "20 Ayer Rajah Crescent, Singapore 139964",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"278": {
+"nombre": "NTT Serangoon Data Center",
+"lat": 1.37608,
+"lon": 103.87494,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.78
+},
+"283": {
+"nombre": "AIMS Bangkok",
+"lat": 13.72496,
+"lon": 100.53899,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.14
+},
+"292": {
+"nombre": "Chief Telecom LY IDC",
+"lat": 25.07807,
+"lon": 121.5774,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.1
+},
+"299": {
+"nombre": "CoreSite DE1",
+"lat": 39.74566,
+"lon": -104.99541,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.0
+},
+"303": {
+"nombre": "Equinix AT1",
+"lat": 33.75855,
+"lon": -84.3877,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "180 Peachtree Street NW, plantas 2, 3 y 6, Atlanta, GA 30303, Estados Unidos",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"306": {
+"nombre": "Equinix LA1",
+"lat": 34.04733,
+"lon": -118.25754,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.0
+},
+"307": {
+"nombre": "Equinix LA3",
+"lat": 33.92634,
+"lon": -118.39406,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.2
+},
+"308": {
+"nombre": "Equinix LA4",
+"lat": 33.922,
+"lon": -118.38312,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.04
+},
+"317": {
+"nombre": "Paratus Zambia Data Centre",
+"lat": -15.41413,
+"lon": 28.2973,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.28
 }
 }
