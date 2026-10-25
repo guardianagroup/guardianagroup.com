@@ -1,0 +1,44 @@
+# The names of states, provinces and cities in each of the page's languages (owner, 25 Oct 2026, 14:12: «si la persona lo tiene
+# puesto en ruso, tiene que verlo todo en ruso. Cada idioma con su mapa»). Natural Earth (public domain) carries 26
+# languages; Wikidata (CC0) the rest. herramientas/nombres_idiomas.py writes orbita/datos/regiones/<language>.json
+# and orbita/datos/ciudades-idioma/<language>.json. (The towns where cables land: pueblos-cables.yml, from GeoNames.)
+# By hand, and on the first day of each month (new Wikidata labels).
+name: Nombres de regiones y ciudades por idioma
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 6 1 * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: datos-orbita
+  cancel-in-progress: false
+
+jobs:
+  regiones:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Natural Earth (dominio público), estados, provincias y ciudades 1:10m
+        run: |
+          git clone -q --depth 1 --filter=blob:none --sparse https://github.com/nvkelso/natural-earth-vector.git /tmp/ne
+          git -C /tmp/ne sparse-checkout set --no-cone /geojson/ne_10m_admin_1_label_points.geojson /geojson/ne_10m_admin_1_states_provinces.geojson /geojson/ne_10m_populated_places.geojson
+          ls -la /tmp/ne/geojson
+
+      - name: Nombres en cada idioma (Natural Earth y Wikidata)
+        run: python3 herramientas/nombres_idiomas.py /tmp/ne/geojson --wikidata
+
+      - name: Guardar si ha cambiado
+        run: |
+          git config user.name "GUARDIANA datos"
+          git config user.email "datos@guardianagroup.com"
+          git add orbita/datos/regiones orbita/datos/ciudades-idioma
+          if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
+          git commit -m "Órbita: nombres de regiones y ciudades por idioma, de Natural Earth y Wikidata ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+          git push

@@ -42,16 +42,32 @@
       const r = await fetch('datos/ciudades.json?v=20261023a'); if (!r.ok) throw new Error(r.status);
       const j = await r.json(), C = j.campos, i = (k) => C.indexOf(k);
       const iLon = i('lon'), iLat = i('lat'), iPob = i('poblacion'), iCap = i('capital'), iNom = i('nombre'), iEs = i('es'), iEn = i('en'), iPt = i('pt');
-      const lista = j.c.map((c) => {
+      const lista = j.c.map((c, ic) => {
         const a = c[iLat] * RAD, b = c[iLon] * RAD, ca = Math.cos(a);
         const pob = c[iPob] || 0, cap = !!c[iCap];
-        return { w: [ca * Math.sin(b), Math.sin(a), ca * Math.cos(b)], pob, cap, u: umbral(pob, cap), n: { local: c[iNom], es: c[iEs] || c[iNom], en: c[iEn] || c[iNom], pt: c[iPt] || c[iNom] } };
+        return { i: ic, w: [ca * Math.sin(b), Math.sin(a), ca * Math.cos(b)], pob, cap, u: umbral(pob, cap), n: { local: c[iNom], es: c[iEs] || c[iNom], en: c[iEn] || c[iNom], pt: c[iPt] || c[iNom] } };
       });
       D = { lista, fuente: j.fuente, fecha: j.fecha };
     } catch (_) { D = null; pedido = false; }
   }
 
-  const idioma = () => { const l = (document.documentElement.lang || 'es').slice(0, 2); return l === 'en' || l === 'pt' ? l : 'es'; };
+  // 25 Oct 2026 (owner, 14:12: «si la persona lo tiene puesto en ruso, tiene que verlo todo en ruso. Cada idioma con su
+  // mapa»): Spanish, English and Portuguese come in ciudades.json; every other language of the page has its own file,
+  // datos/ciudades-idioma/<language>.json (Natural Earth and Wikidata, herramientas/nombres_idiomas.py), in the same
+  // order, loaded the first time the cities show in that language. Until it arrives, and where it has no name, English.
+  const idioma = () => (window.GuardianaIdioma && window.GuardianaIdioma.lang) || (document.documentElement.lang || 'es').slice(0, 2);
+  let NI = null, pidiendo = null;
+  function cargaIdioma(l) {
+    if (pidiendo === l) return; pidiendo = l;
+    fetch('datos/ciudades-idioma/' + l + '.json').then((r) => (r.ok ? r.json() : { n: [] })).catch(() => ({ n: [] }))
+      .then((d) => { if (pidiendo === l) NI = { l, n: d.n || [] }; });
+  }
+  const nombreDe = (c, l) => {
+    if (l === 'es' || l === 'en' || l === 'pt') return c.n[l];
+    if (l === 'pt-pt') return c.n.pt;
+    if (!NI || NI.l !== l) { cargaIdioma(l); return c.n.en; }
+    return NI.n[c.i] || c.n.en;
+  };
   const movil = () => (P() && P().geo.W <= 760);
   let fuente = null;
   const letra = () => fuente || (fuente = (getComputedStyle(document.documentElement).getPropertyValue('--texto') || '').trim() || '"Hanken Grotesk", system-ui, sans-serif');
@@ -83,7 +99,7 @@
       // a soft entrance as the screen narrows past its level, and towards the edge of the planet
       const alfa = Math.min(1, (c.u * 1.15 - ancho) / (c.u * 0.15)) * Math.min(1, (v[2] - 0.08) / 0.12);
       if (alfa <= 0.02) continue;
-      const nombre = c.n[lang] || c.n.local; if (!nombre) continue;
+      const nombre = nombreDe(c, lang) || c.n.local; if (!nombre) continue;
       // a town already named as a cable landing (capas.js) is not named twice
       if (llegadas && llegadas.some((q) => Math.abs(q[0] - x) < 160 && Math.abs(q[1] - y) < 90 && (q[2] === nombre || q[2] === c.n.local))) continue;
       cx.font = (c.cap ? '600 ' : '500 ') + '12px ' + letra();
