@@ -1,0 +1,264 @@
+[
+ {
+  "nombre": "McKay Brothers — Troncal Aurora-Secaucus",
+  "operador": "McKay Brothers / Jefferson Microwave LLC",
+  "pais": "US",
+  "ciudades": [
+   "Aurora",
+   "Rolling Prairie",
+   "Edon",
+   "Wauseon",
+   "Lorain",
+   "Bainbridge",
+   "Emlenton",
+   "Rebersburg",
+   "Hazleton",
+   "Wanaque",
+   "Secaucus"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: McKay Brothers confirma su red de microondas Illinois-Nueva Jersey (mckay-brothers.com/coverage; fcc.report/company/jefferson-microwave-llc; Bhattacherjee et al., ACM IMC 2020). Aproximado: selección ordenada de localidades del corredor con licencias FCC activas en septiembre de 2026.",
+  "dato": "4,015 ms de ida entre Aurora y Secaucus-NY2, publicados por Quincy Data el 12 de mayo de 2016 (medición histórica)."
+ },
+ {
+  "nombre": "McKay Brothers — Troncal Aurora-Carteret",
+  "operador": "McKay Brothers / Jefferson Microwave LLC",
+  "pais": "US",
+  "ciudades": [
+   "Aurora",
+   "Rolling Prairie",
+   "Edon",
+   "Wauseon",
+   "Lorain",
+   "Bainbridge",
+   "Emlenton",
+   "Rebersburg",
+   "Hazleton",
+   "Wanaque",
+   "Carteret"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: McKay Brothers y Quincy Data confirman la conexión Aurora-Carteret; licencias FCC de Jefferson Microwave. Aproximado: localidades intermedias seleccionadas de emplazamientos licenciados.",
+  "dato": "3,982 ms de ida Aurora-Carteret, publicados el 12 de mayo de 2016 (Quincy Data)."
+ },
+ {
+  "nombre": "McKay Brothers — Troncal Aurora-Mahwah",
+  "operador": "McKay Brothers / Jefferson Microwave LLC",
+  "pais": "US",
+  "ciudades": [
+   "Aurora",
+   "Rolling Prairie",
+   "Edon",
+   "Wauseon",
+   "Lorain",
+   "Bainbridge",
+   "Emlenton",
+   "Rebersburg",
+   "Hazleton",
+   "Wanaque",
+   "Mahwah"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: McKay Brothers (cobertura de Aurora y Mahwah) y Quincy Data. Aproximado: corredor reconstruido con localidades de las licencias de Jefferson Microwave.",
+  "dato": "3,986 ms de ida Aurora-Mahwah, publicados por Quincy Data el 12 de mayo de 2016."
+ },
+ {
+  "nombre": "New Line Networks — Troncal Aurora-Secaucus",
+  "operador": "New Line Networks LLC (Jump Trading / Virtu Financial)",
+  "pais": "US",
+  "ciudades": [
+   "Aurora",
+   "New Carlisle",
+   "Middlebury",
+   "Edon",
+   "Port Clinton",
+   "Newbury",
+   "Gustavus",
+   "Oil City",
+   "Ridgway",
+   "Driftwood",
+   "Renovo",
+   "Waterville",
+   "Wilkes-Barre",
+   "Cresco",
+   "Ringwood",
+   "Secaucus"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: newlinenet.com; fcc.report/company/new-line-networks-llc (licencias de septiembre de 2026); Bhattacherjee et al., ACM IMC 2020. Aproximado: orden de emplazamientos seleccionados.",
+  "dato": "3,96171 ms de ida entre CME Aurora y Equinix NY4 Secaucus, estimación geométrica de Bhattacherjee et al. (1 de abril de 2020); 25 torres en el camino mínimo."
+ },
+ {
+  "nombre": "New Line Networks — Troncal Aurora-Carteret",
+  "operador": "New Line Networks LLC (Jump Trading / Virtu Financial)",
+  "pais": "US",
+  "ciudades": [
+   "Aurora",
+   "New Carlisle",
+   "Middlebury",
+   "Edon",
+   "Port Clinton",
+   "Newbury",
+   "Gustavus",
+   "Oil City",
+   "Ridgway",
+   "Driftwood",
+   "Renovo",
+   "Waterville",
+   "Wilkes-Barre",
+   "Cresco",
+   "Carteret"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: ACM IMC 2020 reconstruye la conexión CME-NASDAQ de New Line Networks; licencias FCC de 2026. Aproximado.",
+  "dato": "3,92728 ms de ida Aurora-Carteret, estimación geométrica de 2020."
+ },
+ {
+  "nombre": "New Line Networks — Troncal Aurora-Mahwah",
+  "operador": "New Line Networks LLC (Jump Trading / Virtu Financial)",
+  "pais": "US",
+  "ciudades": [
+   "Aurora",
+   "New Carlisle",
+   "Middlebury",
+   "Edon",
+   "Port Clinton",
+   "Newbury",
+   "Gustavus",
+   "Oil City",
+   "Ridgway",
+   "Driftwood",
+   "Renovo",
+   "Waterville",
+   "Wilkes-Barre",
+   "Cresco",
+   "Ringwood",
+   "Mahwah"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: ACM IMC 2020 (CME Aurora–NYSE Mahwah) y licencias FCC activas de 2026, incluida Ringwood. Aproximado.",
+  "dato": "3,93209 ms de ida Aurora-Mahwah, estimación geométrica publicada en ACM IMC 2020."
+ },
+ {
+  "nombre": "Webline Holdings — Troncal Aurora-Carteret",
+  "operador": "Webline Holdings LLC (vinculada históricamente a DRW Holdings)",
+  "pais": "US",
+  "ciudades": [
+   "Aurora",
+   "Fort Wayne",
+   "Newbury",
+   "Greenville",
+   "Plymtonville",
+   "Logan Mills",
+   "Flanders",
+   "Carteret"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: fcc.report/company/webline-holdings-llc; ACM IMC 2020. Aproximado: selección longitudinal de localidades licenciadas.",
+  "dato": "3,92805 ms de ida Aurora-Carteret, estimación geométrica de ACM IMC 2020."
+ },
+ {
+  "nombre": "Anova Financial Networks — Troncal Aurora-Nueva Jersey",
+  "operador": "Anova Financial Networks",
+  "pais": "US",
+  "ciudades": [
+   "Aurora",
+   "Carteret"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: anovafn.com/wireless; anovafn.com (11-2-2025). Aproximado: solo origen y destino regional.",
+  "dato": "Sin latencia publicada para Aurora-Carteret."
+ },
+ {
+  "nombre": "ICE Global Network — CME Chicago-Nueva Jersey, destino Mahwah",
+  "operador": "ICE Global Network (Intercontinental Exchange)",
+  "pais": "US",
+  "ciudades": [
+   "Aurora",
+   "Mahwah"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: ice.com (servicio inalámbrico Chicago–New Jersey Metro). Aproximado: sin torres publicadas.",
+  "dato": "Sin cifra pública verificable de latencia."
+ },
+ {
+  "nombre": "ICE Global Network — CME Chicago-Nueva Jersey, destino Secaucus",
+  "operador": "ICE Global Network (Intercontinental Exchange)",
+  "pais": "US",
+  "ciudades": [
+   "Aurora",
+   "Secaucus"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: ice.com. Aproximado.",
+  "dato": "Sin latencia publicada."
+ },
+ {
+  "nombre": "ICE Global Network — CME Chicago-Nueva Jersey, destino Carteret",
+  "operador": "ICE Global Network (Intercontinental Exchange)",
+  "pais": "US",
+  "ciudades": [
+   "Aurora",
+   "Carteret"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: ice.com. Aproximado.",
+  "dato": "Sin latencia publicada."
+ },
+ {
+  "nombre": "McKay Brothers International — Troncal Basildon-Fráncfort",
+  "operador": "McKay Brothers International / Quincy Data",
+  "pais": "GB",
+  "ciudades": [
+   "Basildon",
+   "Dover",
+   "Dunkerque",
+   "Frankfurt am Main"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: McKay Brothers (prnewswire, 22-1-2015; mckay-brothers.com/coverage); Laumonier, «HFT in my backyard» (2014); Ars Technica (2016). Aproximado: Dover (Swingate) y Dunkerque, localidades del corredor por el canal de la Mancha.",
+  "dato": "4,192 ms entre Fráncfort y Basildon, publicados por McKay Brothers el 22 de enero de 2015; Quincy Data: 2,195 ms de ida para datos Eurex en Basildon (septiembre de 2014)."
+ },
+ {
+  "nombre": "McKay Brothers International — Troncal Slough-Fráncfort",
+  "operador": "McKay Brothers International / Quincy Data",
+  "pais": "GB",
+  "ciudades": [
+   "Slough",
+   "Dover",
+   "Dunkerque",
+   "Frankfurt am Main"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: McKay Brothers (prnewswire, 10-3-2015: Equinix LD4 Slough – FR2 Fráncfort); Laumonier (2014). Aproximado.",
+  "dato": "4,64 ms de ida y vuelta entre Slough-LD4 y Frankfurt-FR2, publicados por McKay Brothers el 10 de marzo de 2015 (2,320 ms de ida previstos para datos Eurex)."
+ },
+ {
+  "nombre": "Jump Trading — Corredor de microondas Slough-Dover-Houtem-Fráncfort",
+  "operador": "Jump Trading LLC",
+  "pais": "GB",
+  "ciudades": [
+   "Slough",
+   "Dover",
+   "Houtem",
+   "Frankfurt am Main"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: Laumonier, «HFT in my backyard» (2014), enlace Houtem–Swingate; VRT NWS (10-8-2020); top.vlaanderen (2025). Aproximado: repetidoras intermedias no publicadas.",
+  "dato": "Enlace Houtem–Swingate de unos 87,8 km (Laumonier, 2014). Torre de Houtem de unos 244 m, comprada por Jump Trading en 2013."
+ },
+ {
+  "nombre": "Jump Trading — Corredor de microondas Basildon-Ramsgate-Houtem-Fráncfort",
+  "operador": "Jump Trading LLC",
+  "pais": "GB",
+  "ciudades": [
+   "Basildon",
+   "Ramsgate",
+   "Houtem",
+   "Frankfurt am Main"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado: Laumonier (ramal Houtem–Ramsgate hacia Basildon); VRT NWS (2020); top.vlaanderen; Universidad de Bristol (2023). Aproximado.",
+  "dato": "Sin latencia publicada para Jump Trading Basildon-Fráncfort."
+ }
+]

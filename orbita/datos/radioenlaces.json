@@ -120,6 +120,34 @@
 ]
 },
 {
+"n": "Jump Trading — Corredor de microondas Basildon-Ramsgate-Houtem-Fráncfort",
+"o": "Jump Trading LLC",
+"cc": "GB",
+"l": [
+[
+0.46,
+51.57
+],
+[
+1.42,
+51.34
+],
+[
+4.6,
+50.72
+],
+[
+5.57,
+50.63
+],
+[
+8.68,
+50.12
+]
+],
+"dato": "Sin latencia publicada para Jump Trading Basildon-Fráncfort."
+},
+{
 "n": "Troncal suroriental de microondas Asmara-Adi Keyh",
 "o": "EriTel",
 "cc": "ER",
@@ -141,6 +169,30 @@
 14.844
 ]
 ]
+},
+{
+"n": "New Line Networks — Troncal Aurora-Mahwah",
+"o": "New Line Networks LLC (Jump Trading / Virtu Financial)",
+"cc": "US",
+"l": [
+[
+-75.88,
+41.25
+],
+[
+-74.06,
+40.79
+],
+[
+-74.23,
+40.58
+],
+[
+-74.14,
+41.09
+]
+],
+"dato": "3,93209 ms de ida Aurora-Mahwah, estimación geométrica publicada en ACM IMC 2020."
 },
 {
 "n": "Troncal Costera del Mar Rojo (Asmara - Massawa - Assab)",
@@ -311,6 +363,60 @@
 {
 "n": "",
 "o": "",
+"cc": "US",
+"l": [
+[
+-75.97,
+40.96
+],
+[
+-75.195,
+40.987
+],
+[
+-74.659,
+40.933
+],
+[
+-74.06,
+40.79
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "US",
+"l": [
+[
+-104.83,
+39.73
+],
+[
+-87.65,
+41.85
+],
+[
+-87.5,
+41.58
+],
+[
+-86.898,
+41.431
+],
+[
+-85.853,
+41.238
+],
+[
+-85.13,
+41.13
+]
+]
+},
+{
+"n": "",
+"o": "",
 "cc": "GL",
 "l": [
 [
@@ -335,6 +441,51 @@
 [
 173.04,
 0.938
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "US",
+"l": [
+[
+-104.83,
+39.73
+],
+[
+-74.23,
+40.58
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "US",
+"l": [
+[
+-104.83,
+39.73
+],
+[
+-74.14,
+41.09
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "US",
+"l": [
+[
+-104.83,
+39.73
+],
+[
+-74.06,
+40.79
 ]
 ]
 }
