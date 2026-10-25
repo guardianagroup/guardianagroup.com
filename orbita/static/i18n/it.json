@@ -822,7 +822,14 @@
   "O": "O",
   "Pulsa para verla en el planeta": "Clicca per vederlo sul pianeta",
   "De compañías con 5 centros de datos o más en el mapa.": "Di aziende con 5 o più data center sulla mappa.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Di aziende con da 1 a 4 data center sulla mappa, o senza operatore noto."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Di aziende con da 1 a 4 data center sulla mappa, o senza operatore noto.",
+  "Plataforma petrolífera": "Piattaforma petrolifera",
+  "Plataforma de gas": "Piattaforma del gas",
+  "Campo": "Giacimento",
+  "Cable que llega": "Cavo che arriva",
+  "La plataforma": "La piattaforma",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Qui termina un cavo sottomarino in fibra ottica. È così che le piattaforme del Mare del Nord sono collegate alla terraferma: dal cavo passano i dati della produzione, le comunicazioni e l’internet di chi lavora a bordo.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Basi dell’Artico e dell’Antartide, stazioni di terra per i satelliti e piattaforme petrolifere dove termina un cavo."
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

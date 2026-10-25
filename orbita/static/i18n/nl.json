@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "Klik om het op de planeet te zien",
   "De compañías con 5 centros de datos o más en el mapa.": "Van bedrijven met 5 of meer datacenters op de kaart.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Van bedrijven met 1 tot 4 datacenters op de kaart, of zonder bekende exploitant."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Van bedrijven met 1 tot 4 datacenters op de kaart, of zonder bekende exploitant.",
+  "Plataforma petrolífera": "Olieplatform",
+  "Plataforma de gas": "Gasplatform",
+  "Campo": "Veld",
+  "Cable que llega": "Kabel die hier aankomt",
+  "La plataforma": "Het platform",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Hier eindigt een onderzeese glasvezelkabel. Zo zijn de platforms in de Noordzee met het land verbonden: productiegegevens, communicatie en het internet van wie aan boord werkt, gaan allemaal door de kabel.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Bases in het Noordpool- en Zuidpoolgebied, grondstations voor satellieten en olieplatforms waar een kabel eindigt."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

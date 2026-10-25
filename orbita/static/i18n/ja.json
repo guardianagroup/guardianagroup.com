@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "クリックすると惑星上に表示されます",
   "De compañías con 5 centros de datos o más en el mapa.": "地図上にデータセンターが5か所以上ある企業のもの。",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "地図上にデータセンターが1〜4か所の企業のもの、または事業者が不明なもの。"
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "地図上にデータセンターが1〜4か所の企業のもの、または事業者が不明なもの。",
+  "Plataforma petrolífera": "石油プラットフォーム",
+  "Plataforma de gas": "ガスプラットフォーム",
+  "Campo": "油ガス田",
+  "Cable que llega": "ここに届く海底ケーブル",
+  "La plataforma": "プラットフォーム",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "ここで光ファイバーの海底ケーブルが終わります。北海のプラットフォームはこうして陸とつながっています。生産データ、通信、そして船上で働く人たちのインターネットがこのケーブルを通ります。",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "北極と南極の基地、衛星の地上局、そしてケーブルが終わる石油プラットフォーム。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

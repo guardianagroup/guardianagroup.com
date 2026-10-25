@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "ग्रह पर देखने के लिए क्लिक करें",
   "De compañías con 5 centros de datos o más en el mapa.": "उन कंपनियों के, जिनके नक्शे पर 5 या अधिक डेटा सेंटर हैं।",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "उन कंपनियों के, जिनके नक्शे पर 1 से 4 डेटा सेंटर हैं, या जिनका ऑपरेटर ज्ञात नहीं है।"
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "उन कंपनियों के, जिनके नक्शे पर 1 से 4 डेटा सेंटर हैं, या जिनका ऑपरेटर ज्ञात नहीं है।",
+  "Plataforma petrolífera": "तेल प्लेटफ़ॉर्म",
+  "Plataforma de gas": "गैस प्लेटफ़ॉर्म",
+  "Campo": "क्षेत्र",
+  "Cable que llega": "यहाँ पहुँचने वाली केबल",
+  "La plataforma": "प्लेटफ़ॉर्म",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "यहाँ ऑप्टिकल फ़ाइबर की एक समुद्री केबल खत्म होती है। उत्तरी सागर के प्लेटफ़ॉर्म इसी तरह ज़मीन से जुड़ते हैं: उत्पादन के आँकड़े, संचार और प्लेटफ़ॉर्म पर काम करने वालों का इंटरनेट इसी केबल से गुज़रता है।",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "आर्कटिक और अंटार्कटिका के बेस, उपग्रहों के ज़मीनी स्टेशन और वे तेल प्लेटफ़ॉर्म जहाँ कोई केबल खत्म होती है।"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

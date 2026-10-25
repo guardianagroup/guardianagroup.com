@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "கோளில் காண கிளிக் செய்யவும்",
   "De compañías con 5 centros de datos o más en el mapa.": "வரைபடத்தில் 5 அல்லது அதற்கு மேற்பட்ட டேட்டா சென்டர்கள் உள்ள நிறுவனங்களுடையவை.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "வரைபடத்தில் 1 முதல் 4 டேட்டா சென்டர்கள் உள்ள நிறுவனங்களுடையவை, அல்லது இயக்குநர் தெரியாதவை."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "வரைபடத்தில் 1 முதல் 4 டேட்டா சென்டர்கள் உள்ள நிறுவனங்களுடையவை, அல்லது இயக்குநர் தெரியாதவை.",
+  "Plataforma petrolífera": "எண்ணெய் தளம்",
+  "Plataforma de gas": "எரிவாயு தளம்",
+  "Campo": "வயல்",
+  "Cable que llega": "இங்கு வந்து சேரும் கேபிள்",
+  "La plataforma": "தளம்",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "ஆப்டிக்கல் ஃபைபர் கடலடி கேபிள் ஒன்று இங்கே முடிகிறது. வடகடலின் தளங்கள் இப்படித்தான் நிலத்துடன் இணைக்கப்படுகின்றன: உற்பத்தித் தரவு, தகவல்தொடர்பு, தளத்தில் பணிபுரிவோரின் இணையம் எல்லாம் இந்த கேபிள் வழியே செல்கின்றன.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "ஆர்க்டிக், அண்டார்டிகா தளங்கள், செயற்கைக்கோள் தரை நிலையங்கள், கேபிள் முடியும் எண்ணெய் தளங்கள்."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

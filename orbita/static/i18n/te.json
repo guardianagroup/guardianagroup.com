@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "గ్రహంపై చూడటానికి క్లిక్ చేయండి",
   "De compañías con 5 centros de datos o más en el mapa.": "మ్యాప్‌లో 5 లేదా అంతకంటే ఎక్కువ డేటా సెంటర్లు ఉన్న కంపెనీలవి.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "మ్యాప్‌లో 1 నుంచి 4 డేటా సెంటర్లు ఉన్న కంపెనీలవి, లేదా ఆపరేటర్ తెలియనివి."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "మ్యాప్‌లో 1 నుంచి 4 డేటా సెంటర్లు ఉన్న కంపెనీలవి, లేదా ఆపరేటర్ తెలియనివి.",
+  "Plataforma petrolífera": "చమురు ప్లాట్‌ఫారమ్",
+  "Plataforma de gas": "గ్యాస్ ప్లాట్‌ఫారమ్",
+  "Campo": "క్షేత్రం",
+  "Cable que llega": "ఇక్కడికి వచ్చే కేబుల్",
+  "La plataforma": "ప్లాట్‌ఫారమ్",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "ఇక్కడ ఆప్టికల్ ఫైబర్ సముద్రగర్భ కేబుల్ ముగుస్తుంది. ఉత్తర సముద్రంలోని ప్లాట్‌ఫారమ్‌లు ఇలాగే భూమితో అనుసంధానమవుతాయి: ఉత్పత్తి డేటా, సమాచార ప్రసారం, అక్కడ పనిచేసేవారి ఇంటర్నెట్ అన్నీ ఈ కేబుల్ ద్వారానే వెళ్తాయి.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "ఆర్కిటిక్, అంటార్కిటికా స్థావరాలు, ఉపగ్రహ భూకేంద్రాలు, కేబుల్ ముగిసే చమురు ప్లాట్‌ఫారమ్‌లు."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

@@ -822,7 +822,14 @@
   "O": "Z",
   "Pulsa para verla en el planeta": "Kliknite da je vidite na planetu",
   "De compañías con 5 centros de datos o más en el mapa.": "Tvrtki s 5 ili više podatkovnih centara na karti.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Tvrtki s 1 do 4 podatkovna centra na karti ili bez poznatog operatera."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Tvrtki s 1 do 4 podatkovna centra na karti ili bez poznatog operatera.",
+  "Plataforma petrolífera": "Naftna platforma",
+  "Plataforma de gas": "Plinska platforma",
+  "Campo": "Polje",
+  "Cable que llega": "Kabel koji ovamo stiže",
+  "La plataforma": "Platforma",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Ovdje završava podmorski kabel od optičkih vlakana. Tako su platforme u Sjevernome moru povezane s kopnom: kabelom prolaze podaci o proizvodnji, komunikacije i internet za one koji rade na platformi.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Baze na Arktiku i Antarktici, zemaljske postaje za satelite i naftne platforme na kojima završava kabel."
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

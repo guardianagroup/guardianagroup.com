@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "Klikněte a uvidíte ji na planetě",
   "De compañías con 5 centros de datos o más en el mapa.": "Firem, které mají na mapě 5 a více datových center.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Firem, které mají na mapě 1 až 4 datová centra, nebo bez známého provozovatele."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Firem, které mají na mapě 1 až 4 datová centra, nebo bez známého provozovatele.",
+  "Plataforma petrolífera": "Ropná plošina",
+  "Plataforma de gas": "Plynová plošina",
+  "Campo": "Ložisko",
+  "Cable que llega": "Kabel, který sem vede",
+  "La plataforma": "Plošina",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Zde končí podmořský kabel z optických vláken. Takto jsou plošiny v Severním moři spojeny s pevninou: kabelem procházejí data o těžbě, komunikace i internet pro ty, kdo na plošině pracují.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Základny v Arktidě a Antarktidě, pozemní stanice družic a ropné plošiny, kde končí kabel."
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

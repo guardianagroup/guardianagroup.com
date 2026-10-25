@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "انقر لعرضها على الكوكب",
   "De compañías con 5 centros de datos o más en el mapa.": "لشركات لديها 5 مراكز بيانات أو أكثر على الخريطة.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "لشركات لديها من 1 إلى 4 مراكز بيانات على الخريطة، أو بلا مشغّل معروف."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "لشركات لديها من 1 إلى 4 مراكز بيانات على الخريطة، أو بلا مشغّل معروف.",
+  "Plataforma petrolífera": "منصة نفطية",
+  "Plataforma de gas": "منصة غاز",
+  "Campo": "الحقل",
+  "Cable que llega": "الكابل الذي يصل إليها",
+  "La plataforma": "المنصة",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "هنا ينتهي كابل بحري من الألياف الضوئية. هكذا ترتبط منصات بحر الشمال باليابسة: تمر عبر الكابل بيانات الإنتاج والاتصالات والإنترنت للعاملين على متنها.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "قواعد القطب الشمالي والقارة القطبية الجنوبية، ومحطات الأقمار الصناعية الأرضية، والمنصات النفطية التي ينتهي عندها كابل."
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "לחצו כדי להציג אותה על הכוכב",
   "De compañías con 5 centros de datos o más en el mapa.": "של חברות עם 5 מרכזי נתונים או יותר במפה.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "של חברות עם 1 עד 4 מרכזי נתונים במפה, או ללא מפעיל ידוע."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "של חברות עם 1 עד 4 מרכזי נתונים במפה, או ללא מפעיל ידוע.",
+  "Plataforma petrolífera": "אסדת נפט",
+  "Plataforma de gas": "אסדת גז",
+  "Campo": "שדה",
+  "Cable que llega": "הכבל שמגיע לכאן",
+  "La plataforma": "האסדה",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "כאן מסתיים כבל תת־ימי של סיבים אופטיים. כך מחוברות אסדות הים הצפוני ליבשה: נתוני ההפקה, התקשורת והאינטרנט של העובדים על האסדה עוברים בכבל.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "בסיסים באזור הארקטי ובאנטארקטיקה, תחנות קרקע של לוויינים ואסדות נפט שבהן מסתיים כבל."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

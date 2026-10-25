@@ -822,7 +822,14 @@
   "O": "V",
   "Pulsa para verla en el planeta": "Klicka för att se det på planeten",
   "De compañías con 5 centros de datos o más en el mapa.": "Från företag med 5 eller fler datacenter på kartan.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Från företag med 1 till 4 datacenter på kartan, eller utan känd operatör."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Från företag med 1 till 4 datacenter på kartan, eller utan känd operatör.",
+  "Plataforma petrolífera": "Oljeplattform",
+  "Plataforma de gas": "Gasplattform",
+  "Campo": "Fält",
+  "Cable que llega": "Kabel som når hit",
+  "La plataforma": "Plattformen",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Här slutar en undervattenskabel av optisk fiber. Så är plattformarna i Nordsjön anslutna till land: produktionsdata, kommunikation och internet för dem som arbetar ombord går genom kabeln.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Baser i Arktis och Antarktis, markstationer för satelliter och oljeplattformar där en kabel slutar."
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

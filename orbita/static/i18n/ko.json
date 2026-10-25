@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "클릭하면 행성에 표시됩니다",
   "De compañías con 5 centros de datos o más en el mapa.": "지도에 데이터 센터가 5곳 이상인 기업의 것.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "지도에 데이터 센터가 1~4곳인 기업의 것, 또는 운영사를 알 수 없는 것."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "지도에 데이터 센터가 1~4곳인 기업의 것, 또는 운영사를 알 수 없는 것.",
+  "Plataforma petrolífera": "석유 플랫폼",
+  "Plataforma de gas": "가스 플랫폼",
+  "Campo": "유전",
+  "Cable que llega": "이곳에 닿는 케이블",
+  "La plataforma": "플랫폼",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "광섬유 해저 케이블이 여기서 끝납니다. 북해의 플랫폼은 이렇게 육지와 연결됩니다. 생산 데이터, 통신, 그리고 플랫폼에서 일하는 사람들의 인터넷이 이 케이블을 통해 오갑니다.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "북극과 남극의 기지, 위성 지상국, 그리고 케이블이 끝나는 석유 플랫폼."
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "点击即可在星球上查看",
   "De compañías con 5 centros de datos o más en el mapa.": "来自地图上有 5 个及以上数据中心的公司。",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "来自地图上有 1 至 4 个数据中心的公司，或运营商不详。"
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "来自地图上有 1 至 4 个数据中心的公司，或运营商不详。",
+  "Plataforma petrolífera": "石油平台",
+  "Plataforma de gas": "天然气平台",
+  "Campo": "油气田",
+  "Cable que llega": "到达此处的海缆",
+  "La plataforma": "平台",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "一条海底光缆在这里终止。北海的平台就是这样与陆地相连的：生产数据、通信以及平台上工作人员的上网都经由这条光缆。",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "北极和南极的考察站、卫星地面站，以及有海缆终止的石油平台。"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "برای دیدن آن روی سیاره کلیک کنید",
   "De compañías con 5 centros de datos o más en el mapa.": "متعلق به شرکت‌هایی با ۵ مرکز داده یا بیشتر روی نقشه.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "متعلق به شرکت‌هایی با ۱ تا ۴ مرکز داده روی نقشه، یا بدون اپراتور شناخته‌شده."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "متعلق به شرکت‌هایی با ۱ تا ۴ مرکز داده روی نقشه، یا بدون اپراتور شناخته‌شده.",
+  "Plataforma petrolífera": "سکوی نفتی",
+  "Plataforma de gas": "سکوی گازی",
+  "Campo": "میدان",
+  "Cable que llega": "کابلی که به اینجا می‌رسد",
+  "La plataforma": "سکو",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "اینجا یک کابل زیردریایی فیبر نوری به پایان می‌رسد. سکوهای دریای شمال این‌گونه به خشکی وصل‌اند: داده‌های تولید، ارتباطات و اینترنت کسانی که روی سکو کار می‌کنند از این کابل می‌گذرد.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "پایگاه‌های قطب شمال و جنوبگان، ایستگاه‌های زمینی ماهواره و سکوهای نفتی که کابلی در آن‌ها به پایان می‌رسد."
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

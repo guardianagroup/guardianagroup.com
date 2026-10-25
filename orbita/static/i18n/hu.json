@@ -822,7 +822,14 @@
   "O": "W",
   "Pulsa para verla en el planeta": "Kattintson, és megjelenik a bolygón",
   "De compañías con 5 centros de datos o más en el mapa.": "Olyan cégektől, amelyeknek legalább 5 adatközpontja van a térképen.",
-  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Olyan cégektől, amelyeknek 1–4 adatközpontja van a térképen, illetve ismeretlen üzemeltetőtől."
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Olyan cégektől, amelyeknek 1–4 adatközpontja van a térképen, illetve ismeretlen üzemeltetőtől.",
+  "Plataforma petrolífera": "Olajfúró platform",
+  "Plataforma de gas": "Gázplatform",
+  "Campo": "Mező",
+  "Cable que llega": "Ide érkező kábel",
+  "La plataforma": "A platform",
+  "Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.": "Itt ér véget egy optikai szálas tenger alatti kábel. Így kapcsolódnak a szárazföldhöz az Északi-tenger platformjai: a kábelen halad a termelés adatforgalma, a kommunikáció és a fedélzeten dolgozók internete.",
+  "Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.": "Sarkvidéki és antarktiszi bázisok, műholdas földi állomások és olajfúró platformok, ahol egy kábel véget ér."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

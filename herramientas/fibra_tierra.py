@@ -50,7 +50,8 @@ PAISES = {
 
 # city-states and small islands: their land lines may be shorter than 5 km
 PEQUENOS = {'MC', 'VU', 'SC', 'SM', 'VA', 'LI', 'GI', 'MO', 'MV', 'NR', 'TV', 'MH', 'PW', 'KN', 'AG', 'DM', 'LC', 'VC', 'GD', 'BB',
-            'BM', 'AI', 'VG', 'TC', 'MS', 'SX', 'MF', 'BL', 'KI', 'TO', 'WS', 'CK', 'NU', 'TK', 'WF', 'FM'}
+            'BM', 'AI', 'VG', 'TC', 'MS', 'SX', 'MF', 'BL', 'KI', 'TO', 'WS', 'CK', 'NU', 'TK', 'WF', 'FM',
+            'AX', 'AS', 'BQ', 'GG', 'IM', 'JE', 'MP', 'PM', 'SJ'}  # round 28 (24 Oct 2026)
 
 def km(a, b):
     la1, lo1, la2, lo2 = map(math.radians, (a[1], a[0], b[1], b[0]))

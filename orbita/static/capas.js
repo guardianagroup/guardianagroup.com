@@ -342,7 +342,7 @@
   async function cargaNotas() { if (NOTAS || cargando.notas) return; cargando.notas = true; try { const n = await cargaJSON('datos/cables-notas.json'); NOTAS = (n.cables || []).map((q) => ({ ...q, clave: norm(q.clave) })); } catch (_) { NOTAS = []; } cargando.notas = false; }
   async function cargaEstaciones() {
     if (EST || cargando.est) return; cargando.est = true;
-    try { const e2 = await cargaJSON('datos/puntos-extra.json'); EST = []; for (const f of (e2.puntos || [])) { if (f.tipo !== 'estacion' || !Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; EST.push({ w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: { nota: f.nota || '', enlace: f.enlace || '', clase: f.clase || '', programa: f.programa || '', desde: f.desde || '', gente: f.gente || '', telemetria: f.telemetria || '', antenas: f.antenas || '', cambios: f.cambios || '', local: f.local || '', fuente: f.fuente || '' }, lon: f.lon, lat: f.lat, extra: true }); } } catch (_) { EST = []; }
+    try { const e2 = await cargaJSON('datos/puntos-extra.json'); EST = []; for (const f of (e2.puntos || [])) { if (f.tipo !== 'estacion' || !Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; EST.push({ w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: { nota: f.nota || '', enlace: f.enlace || '', clase: f.clase || '', programa: f.programa || '', desde: f.desde || '', gente: f.gente || '', telemetria: f.telemetria || '', antenas: f.antenas || '', cambios: f.cambios || '', local: f.local || '', fuente: f.fuente || '', gas: !!f.gas }, lon: f.lon, lat: f.lat, extra: true }); } } catch (_) { EST = []; }
     cargando.est = false;
   }
   async function cargaPuntos() {
@@ -513,15 +513,26 @@
     if (!CLASES.puntos.estaciones) return;
     if (!EST || !EST.length) return;
     const z = G.R / (G.R0 || G.R), L = esLimpio();
-    cx.lineWidth = 1.1; cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle';
+    cx.save(); cx.globalCompositeOperation = 'source-over'; cx.lineJoin = 'round';
+    cx.font = '500 11px "Hanken Grotesk", system-ui, sans-serif'; cx.textBaseline = 'middle';
     const ocupado = [];
     for (let iq = 0; iq < EST.length; iq++) {
-      const q = EST[iq], v = p.aVista(q.w); if (v[2] <= 0.05) continue;
+      const q = EST[iq], plat = q.x && q.x.clase === 'plataforma';
+      // the oil and gas platforms where a cable ends (owner, 24 Oct 2026, 21:08): a small square, from about a region on
+      // screen (ten of them in the North Sea would be a smudge with the whole planet in view), the name when close
+      if (plat && z < 3) continue;
+      const v = p.aVista(q.w); if (v[2] <= 0.05) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
-      cx.strokeStyle = `rgba(${BLANCO},${L ? 0.9 : 0.75})`; cx.beginPath(); cx.arc(x, y, 4.2, 0, 7); cx.stroke();
+      cx.lineWidth = 1.1; cx.strokeStyle = `rgba(${BLANCO},${L ? 0.9 : 0.75})`; cx.beginPath();
+      if (plat) cx.rect(Math.round(x) - 3.5, Math.round(y) - 3.5, 7, 7); else cx.arc(x, y, 4.2, 0, 7);
+      cx.stroke();
       cx.fillStyle = `rgba(${BLANCO},.95)`; cx.beginPath(); cx.arc(x, y, 1.4, 0, 7); cx.fill();
-      if (z >= 1.8 && q.n) { const txt = q.n.split(' (')[0].split(' / ')[0], w = 6.2 * txt.length; if (!ocupado.some((o) => Math.abs(x - o[0]) < (w + o[2]) / 2 + 12 && Math.abs(y - o[1]) < 13)) { ocupado.push([x + 8 + w / 2, y, w]); EST_CAJAS.push([x + 4, y - 8, w + 8, 16, iq]); cx.fillStyle = `rgba(${BLANCO},.85)`; cx.fillText(txt, x + 8, y); } }
+      if (z >= (plat ? 8 : 1.8) && q.n) {
+        const txt = q.n.split(' (')[0].split(' / ')[0], w = Math.ceil(cx.measureText(txt).width), lx = Math.round(x + 8), ly = Math.round(y);
+        if (!ocupado.some((o) => Math.abs(x - o[0]) < (w + o[2]) / 2 + 12 && Math.abs(y - o[1]) < 13)) { ocupado.push([x + 8 + w / 2, y, w]); EST_CAJAS.push([x + 4, y - 8, w + 8, 16, iq]); conHalo(cx, txt, lx, ly, 0.9); }
+      }
     }
+    cx.restore();
   }
   function pintaCiudades(cx, p, G) {
     if (!LUG || !LUG.centros) return;
@@ -1379,24 +1390,38 @@
   function buscaEstacion(x, y) {
     if (!(estado.puntos || estado.sub) || !EST || !CLASES.puntos.estaciones) return -1;
     for (const b of EST_CAJAS) if (x >= b[0] && x <= b[0] + b[2] && y >= b[1] && y <= b[1] + b[3]) return b[4]; // its name
-    const p = P(), G = p.geo; let mejor = -1, dm = 8 * 8;
-    for (let i = 0; i < EST.length; i++) { const v = p.aVista(EST[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
+    const p = P(), G = p.geo, z = G.R / (G.R0 || G.R); let mejor = -1, dm = 8 * 8;
+    for (let i = 0; i < EST.length; i++) { if (z < 3 && EST[i].x && EST[i].x.clase === 'plataforma') continue; const v = p.aVista(EST[i].w); if (v[2] <= 0.05) continue; const dx = G.CX + G.R * v[0] - x, dy = G.CY - G.R * v[1] - y, d2 = dx * dx + dy * dy; if (d2 < dm) { dm = d2; mejor = i; } }
     return mejor;
   }
   function fichaEstacion(i, x, y) {
     const q = EST[i], X = q.x || {}, filas = [];
-    if (X.clase) filas.push([T('Tipo'), X.clase === 'base' ? T('Base antártica') : T('Estación terrena de satélites')]);
+    // an oil or gas platform where a submarine cable ends (owner, 24 Oct 2026, 21:08–21:09: «que aparezca el nombre de la
+    // plataforma petrolífera y la información… con foto»); what two voices confirm, in herramientas/agencia-rondas/ronda29
+    const plat = X.clase === 'plataforma', base = X.clase === 'base';
+    const tipo = plat ? (X.gas ? T('Plataforma de gas') : T('Plataforma petrolífera')) : base ? T('Base antártica') : T('Estación terrena de satélites');
+    if (X.clase) filas.push([T('Tipo'), tipo]);
     if (q.o) filas.push([T('Operador'), /^[A-Z]{2}$/.test(q.o) ? paisNombre(q.o) + (X.programa ? ' · ' + X.programa : '') : q.o]);
+    if (plat && X.programa) filas.push([T('Campo'), X.programa]);
     if (X.desde) filas.push([T('Desde'), String(X.desde)]);
     if (X.gente) filas.push([T('Personal'), X.gente]);
-    if (X.enlace) filas.push([T('Cómo se conecta'), X.enlace]);
+    if (X.enlace) filas.push([plat ? T('Cable que llega') : T('Cómo se conecta'), X.enlace]);
     if (X.telemetria) filas.push([T('Por dónde salen los datos'), X.telemetria]);
     if (X.antenas) filas.push([T('Antenas'), X.antenas]);
     if (X.local) filas.push([T('Enlaces locales'), X.local]);
     if (X.cambios) filas.push([T('Novedades'), X.cambios]);
     if (X.nota) filas.push([T('Datos'), X.nota]);
-    const base = X.clase === 'base';
-    abreModelo(modelo(base ? T('Base antártica') : T('Estación terrena de satélites'), q.n || T('Estación'), filas, T('Datos verificados'), {
+    if (plat && X.fuente) filas.push([T('Fuente'), X.fuente.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')]);
+    if (plat) {
+      abreModelo(modelo(tipo, q.n, filas, T('Datos verificados'), {
+        foto: fotoDe('estacion', q.n),
+        resumen: [T('Tipo'), T('Operador'), T('Cable que llega')],
+        para: T('Aquí termina un cable submarino de fibra óptica. Así se conectan a tierra las plataformas del mar del Norte: por el cable pasan los datos de la producción, las comunicaciones y el internet de quienes trabajan a bordo.'),
+        secciones: [{ t: T('La plataforma'), claves: [T('Campo'), T('Desde'), T('Datos')], abierta: true }, { t: T('Fuente'), claves: [T('Fuente')] }],
+      }), x, y);
+      return;
+    }
+    abreModelo(modelo(tipo, q.n || T('Estación'), filas, T('Datos verificados'), {
       foto: fotoDe('estacion', q.n),
       resumen: [T('Tipo'), T('Operador'), T('Cómo se conecta'), T('Desde')],
       para: base ? T('Desde aquí no hay cable: todo lo que entra y sale va por satélite, con la capacidad y los retrasos que eso impone. Es el internet más caro y escaso del planeta.') : T('Por aquí bajan a tierra las imágenes y medidas de los satélites que luego ves en los mapas del tiempo, en la navegación y en las noticias.'),
@@ -2104,7 +2129,7 @@
     // 23 Oct 2026, 09:17 (owner: «busca las palabras más apropiadas, entendibles y profesionales»): agency round with ChatGPT and Grok
     sub: { titulo: 'Cables submarinos', clases: { gigante: ['Autopistas entre continentes', 'Los cables más potentes: más de 100 Tbit/s.'], grande: ['Grandes rutas', 'Entre 20 y 100 Tbit/s: unen países y regiones.'], regional: ['Cables regionales', 'Menos de 20 Tbit/s: unen islas y países vecinos.'], sinDato: ['Capacidad no publicada', 'Cables en funcionamiento cuya capacidad no han publicado sus propietarios.'], aprox: ['Trazado aproximado', 'Sabemos dónde llega, pero no su recorrido exacto. Línea discontinua.'], previstos: ['Cables en proyecto', 'Anunciados o en construcción; aún no transportan datos. Línea discontinua.'] } },
     fibra: { titulo: 'Cables por tierra', /* owner, 23 Oct 2026, 22:55: «Cables por tierra, mejor» */ clases: { principal: ['Grandes troncales', 'Rutas de 800 km o más, o compartidas por varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'] } },
-    puntos: { titulo: 'Puntos de red', clases: { datos: ['Grandes operadores', 'De compañías con 5 centros de datos o más en el mapa.'], pequenos: ['Otros centros de datos', 'De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.'], intercambio: ['Puntos de intercambio', 'Donde las redes de distintas compañías se conectan entre sí.'], estaciones: ['Bases y antenas', 'Bases del Ártico y la Antártida, y estaciones terrestres de satélites.'] } },
+    puntos: { titulo: 'Puntos de red', clases: { datos: ['Grandes operadores', 'De compañías con 5 centros de datos o más en el mapa.'], pequenos: ['Otros centros de datos', 'De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.'], intercambio: ['Puntos de intercambio', 'Donde las redes de distintas compañías se conectan entre sí.'], estaciones: ['Bases y antenas', 'Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.'] } },
   };
 
   const PLEGADO = { sub: true, fibra: true, puntos: true }; // the cards open on the button's click, one at a time; on arrival none is open
