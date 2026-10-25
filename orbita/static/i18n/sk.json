@@ -924,7 +924,9 @@
   "En preparación": "V príprave",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Čo o tebe vidí ktorýkoľvek web a s kým hovorí každá stránka, zakreslené na planéte.",
   "Sin GUARDIANA": "Bez GUARDIANA",
-  "Con y sin GUARDIANA": "S GUARDIANA aj bez nej"
+  "Con y sin GUARDIANA": "S GUARDIANA aj bez nej",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "v meste; presná adresa budovy zatiaľ nie je potvrdená",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "do 2 km; presná adresa budovy zatiaľ nie je potvrdená"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

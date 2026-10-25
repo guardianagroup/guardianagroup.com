@@ -925,7 +925,9 @@
   "En preparación": "准备中",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "任何网站看到的你，以及每个页面在和谁通信，都画在星球上。",
   "Sin GUARDIANA": "不使用 GUARDIANA",
-  "Con y sin GUARDIANA": "使用与不使用 GUARDIANA"
+  "Con y sin GUARDIANA": "使用与不使用 GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "在该城市；建筑的确切地址尚未确认",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 公里以内；建筑的确切地址尚未确认"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

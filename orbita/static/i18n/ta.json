@@ -924,7 +924,9 @@
   "En preparación": "தயாராகிறது",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "எந்த இணையதளமும் உங்களைப் பற்றி என்ன பார்க்கிறது, ஒவ்வொரு பக்கமும் யாருடன் பேசுகிறது என்பதைக் கோளின் மீது வரைந்து காட்டுகிறோம்.",
   "Sin GUARDIANA": "GUARDIANA இல்லாமல்",
-  "Con y sin GUARDIANA": "GUARDIANA உடனும் இல்லாமலும்"
+  "Con y sin GUARDIANA": "GUARDIANA உடனும் இல்லாமலும்",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "நகரத்தில்; கட்டடத்தின் சரியான முகவரி இன்னும் உறுதிசெய்யப்படவில்லை",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 கி.மீ.க்குள்; கட்டடத்தின் சரியான முகவரி இன்னும் உறுதிசெய்யப்படவில்லை"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

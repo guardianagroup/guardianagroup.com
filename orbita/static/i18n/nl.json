@@ -925,7 +925,9 @@
   "En preparación": "In voorbereiding",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Wat elke website van je ziet en met wie elke pagina praat, getekend op de planeet.",
   "Sin GUARDIANA": "Zonder GUARDIANA",
-  "Con y sin GUARDIANA": "Met en zonder GUARDIANA"
+  "Con y sin GUARDIANA": "Met en zonder GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "in de stad; het exacte adres van het gebouw is nog niet bevestigd",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "binnen 2 km; het exacte adres van het gebouw is nog niet bevestigd"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

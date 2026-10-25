@@ -924,7 +924,9 @@
   "En preparación": "בהכנה",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "מה שכל אתר רואה עליך ועם מי כל עמוד מדבר, משורטט על כוכב הלכת.",
   "Sin GUARDIANA": "בלי GUARDIANA",
-  "Con y sin GUARDIANA": "עם GUARDIANA ובלעדיה"
+  "Con y sin GUARDIANA": "עם GUARDIANA ובלעדיה",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "בעיר; הכתובת המדויקת של הבניין עדיין לא אומתה",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "בטווח של פחות מ־2 ק״מ; הכתובת המדויקת של הבניין עדיין לא אומתה"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

@@ -924,7 +924,9 @@
   "En preparación": "Előkészületben",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Amit bármelyik weboldal lát rólad, és hogy az egyes oldalak kivel beszélnek, a bolygóra rajzolva.",
   "Sin GUARDIANA": "GUARDIANA nélkül",
-  "Con y sin GUARDIANA": "GUARDIANA-val és nélküle"
+  "Con y sin GUARDIANA": "GUARDIANA-val és nélküle",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "a városban; az épület pontos címe még nincs megerősítve",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 km-en belül; az épület pontos címe még nincs megerősítve"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

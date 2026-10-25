@@ -925,7 +925,9 @@
   "En preparación": "Under förberedelse",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Vad vilken webbplats som helst ser av dig och vem varje sida pratar med, ritat på planeten.",
   "Sin GUARDIANA": "Utan GUARDIANA",
-  "Con y sin GUARDIANA": "Med och utan GUARDIANA"
+  "Con y sin GUARDIANA": "Med och utan GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "i staden; byggnadens exakta adress är ännu inte bekräftad",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "inom 2 km; byggnadens exakta adress är ännu inte bekräftad"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

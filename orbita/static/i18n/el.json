@@ -924,7 +924,9 @@
   "En preparación": "Σε προετοιμασία",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Τι βλέπει για σένα οποιοσδήποτε ιστότοπος και με ποιον μιλά κάθε σελίδα, σχεδιασμένο στον πλανήτη.",
   "Sin GUARDIANA": "Χωρίς το GUARDIANA",
-  "Con y sin GUARDIANA": "Με και χωρίς το GUARDIANA"
+  "Con y sin GUARDIANA": "Με και χωρίς το GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "στην πόλη· η ακριβής διεύθυνση του κτιρίου δεν έχει επιβεβαιωθεί ακόμη",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "σε απόσταση έως 2 km· η ακριβής διεύθυνση του κτιρίου δεν έχει επιβεβαιωθεί ακόμη"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

@@ -925,7 +925,9 @@
   "En preparación": "En préparation",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Ce que n’importe quel site voit de toi et à qui parle chaque page, dessiné sur la planète.",
   "Sin GUARDIANA": "Sans GUARDIANA",
-  "Con y sin GUARDIANA": "Avec et sans GUARDIANA"
+  "Con y sin GUARDIANA": "Avec et sans GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "dans la ville ; l’adresse exacte du bâtiment n’est pas encore confirmée",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "à moins de 2 km ; l’adresse exacte du bâtiment n’est pas encore confirmée"
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

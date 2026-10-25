@@ -924,7 +924,9 @@
   "En preparación": "În pregătire",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Ce vede despre tine orice site și cu cine vorbește fiecare pagină, desenat pe planetă.",
   "Sin GUARDIANA": "Fără GUARDIANA",
-  "Con y sin GUARDIANA": "Cu și fără GUARDIANA"
+  "Con y sin GUARDIANA": "Cu și fără GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "în oraș; adresa exactă a clădirii nu este încă confirmată",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "la mai puțin de 2 km; adresa exactă a clădirii nu este încă confirmată"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

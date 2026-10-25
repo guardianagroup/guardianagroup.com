@@ -925,7 +925,9 @@
   "En preparación": "Đang chuẩn bị",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Những gì bất kỳ trang web nào thấy về bạn và mỗi trang nói chuyện với ai, được vẽ trên hành tinh.",
   "Sin GUARDIANA": "Không có GUARDIANA",
-  "Con y sin GUARDIANA": "Có và không có GUARDIANA"
+  "Con y sin GUARDIANA": "Có và không có GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "trong thành phố; địa chỉ chính xác của tòa nhà chưa được xác nhận",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "trong vòng 2 km; địa chỉ chính xác của tòa nhà chưa được xác nhận"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

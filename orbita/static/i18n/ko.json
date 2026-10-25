@@ -925,7 +925,9 @@
   "En preparación": "준비 중",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "어떤 웹사이트든 나에 대해 보는 것과 각 페이지가 누구와 통신하는지를 행성 위에 그렸습니다.",
   "Sin GUARDIANA": "GUARDIANA 미사용",
-  "Con y sin GUARDIANA": "GUARDIANA 사용 및 미사용"
+  "Con y sin GUARDIANA": "GUARDIANA 사용 및 미사용",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "도시 안. 건물의 정확한 주소는 아직 확인되지 않았습니다",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2km 이내. 건물의 정확한 주소는 아직 확인되지 않았습니다"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

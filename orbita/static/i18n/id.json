@@ -924,7 +924,9 @@
   "En preparación": "Sedang disiapkan",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Apa yang dilihat situs web mana pun tentang Anda dan dengan siapa setiap halaman berbicara, digambar di planet.",
   "Sin GUARDIANA": "Tanpa GUARDIANA",
-  "Con y sin GUARDIANA": "Dengan dan tanpa GUARDIANA"
+  "Con y sin GUARDIANA": "Dengan dan tanpa GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "di kota ini; alamat persis gedungnya belum dikonfirmasi",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "dalam radius 2 km; alamat persis gedungnya belum dikonfirmasi"
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

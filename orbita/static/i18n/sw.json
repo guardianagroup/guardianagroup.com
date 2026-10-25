@@ -924,7 +924,9 @@
   "En preparación": "Inaandaliwa",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "Kile ambacho tovuti yoyote inakiona kukuhusu na kila ukurasa unazungumza na nani, kimechorwa kwenye sayari.",
   "Sin GUARDIANA": "Bila GUARDIANA",
-  "Con y sin GUARDIANA": "Ukiwa na GUARDIANA na bila GUARDIANA"
+  "Con y sin GUARDIANA": "Ukiwa na GUARDIANA na bila GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "ndani ya jiji; anwani kamili ya jengo bado haijathibitishwa",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "ndani ya kilomita 2; anwani kamili ya jengo bado haijathibitishwa"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

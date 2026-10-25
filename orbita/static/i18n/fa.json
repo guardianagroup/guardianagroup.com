@@ -924,7 +924,9 @@
   "En preparación": "در دست آماده‌سازی",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "آنچه هر وبگاهی از تو می‌بیند و هر صفحه با چه کسی حرف می‌زند، روی سیاره کشیده شده.",
   "Sin GUARDIANA": "بدون GUARDIANA",
-  "Con y sin GUARDIANA": "با GUARDIANA و بدون آن"
+  "Con y sin GUARDIANA": "با GUARDIANA و بدون آن",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "در شهر؛ نشانی دقیق ساختمان هنوز تأیید نشده است",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "در فاصلهٔ کمتر از ۲ کیلومتر؛ نشانی دقیق ساختمان هنوز تأیید نشده است"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

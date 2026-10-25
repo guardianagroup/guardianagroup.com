@@ -925,7 +925,9 @@
   "En preparación": "قيد الإعداد",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "ما يراه عنك أي موقع ومع من تتحدث كل صفحة، مرسومًا على الكوكب.",
   "Sin GUARDIANA": "بدون GUARDIANA",
-  "Con y sin GUARDIANA": "مع GUARDIANA وبدونها"
+  "Con y sin GUARDIANA": "مع GUARDIANA وبدونها",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "في المدينة؛ لم يتأكد بعد العنوان الدقيق للمبنى",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "على بُعد أقل من 2 كم؛ لم يتأكد بعد العنوان الدقيق للمبنى"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

@@ -924,7 +924,9 @@
   "En preparación": "กำลังเตรียม",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "สิ่งที่เว็บไซต์ใดก็ได้เห็นเกี่ยวกับคุณ และแต่ละหน้าคุยกับใคร วาดไว้บนดาวเคราะห์",
   "Sin GUARDIANA": "ไม่มี GUARDIANA",
-  "Con y sin GUARDIANA": "มีและไม่มี GUARDIANA"
+  "Con y sin GUARDIANA": "มีและไม่มี GUARDIANA",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "ในเมือง ที่อยู่ที่แน่นอนของอาคารยังไม่ได้รับการยืนยัน",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "ภายในรัศมี 2 กม. ที่อยู่ที่แน่นอนของอาคารยังไม่ได้รับการยืนยัน"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

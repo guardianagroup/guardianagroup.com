@@ -924,7 +924,9 @@
   "En preparación": "तैयारी में",
   "Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.": "कोई भी वेबसाइट आपके बारे में क्या देखती है और हर पेज किससे बात करता है, ग्रह पर दिखाया गया।",
   "Sin GUARDIANA": "GUARDIANA के बिना",
-  "Con y sin GUARDIANA": "GUARDIANA के साथ और बिना"
+  "Con y sin GUARDIANA": "GUARDIANA के साथ और बिना",
+  "en la ciudad; la dirección exacta del edificio aún no está confirmada": "शहर में; इमारत का सटीक पता अभी पुष्ट नहीं है",
+  "a menos de 2 km; la dirección exacta del edificio aún no está confirmada": "2 किमी के भीतर; इमारत का सटीक पता अभी पुष्ट नहीं है"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",
