@@ -1,0 +1,4 @@
+[
+  {"nombre": "Red terrestre de Majuro: Djarrit–Laura", "operador": "Marshall Islands National Telecommunications Authority (NTA)", "pais": "MH", "ciudades": ["Djarrit", "Uliga", "Delap", "Rairok", "Ajeltake", "Woja", "Laura"], "estado": "en servicio", "fuente": "aproximado: información de NTA sobre su red de fibra terrestre en Majuro (https://www.ntamar.net/). La secuencia de localidades corresponde al corredor de la carretera principal del atolón; no representa un trazado de canalizaciones publicado por el operador."},
+  {"nombre": "Red terrestre de Saint-Pierre: Saint-Pierre–Savoyard", "operador": "SPM Telecom", "pais": "PM", "ciudades": ["Saint-Pierre", "Savoyard"], "estado": "en servicio", "fuente": "aproximado: red fija y de transporte de SPM Telecom en la isla de Saint-Pierre (https://www.spmtelecom.com/); recorrido probable hacia Savoyard siguiendo el corredor viario. No se dispone de un itinerario público detallado de la fibra entre ambas localidades."}
+]

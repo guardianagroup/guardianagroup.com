@@ -1,0 +1,18 @@
+[
+  {
+    "nombre": "Troncal terrestre de Fongafale",
+    "operador": "Tuvalu Telecommunications Corporation (TTC)",
+    "pais": "TV",
+    "ciudades": ["Vaiaku", "Alapi", "Senala", "Fakaifou"],
+    "estado": "en servicio",
+    "fuente": "aproximado: documentación del Banco Mundial del Tuvalu Telecommunications and ICT Development Project sobre la infraestructura terrestre existente de TTC en Funafuti. La secuencia de localidades se infiere de su distribución en Fongafale y del corredor viario que las comunica; no constituye un trazado de fibra publicado ni corresponde al cable submarino proyectado."
+  },
+  {
+    "nombre": "Corredor terrestre del suroeste de Nauru",
+    "operador": "Gobierno de Nauru — Department of Information and Communications Technology",
+    "pais": "NR",
+    "ciudades": ["Yaren", "Boe", "Aiwo"],
+    "estado": "en servicio",
+    "fuente": "aproximado: documentación del Banco Asiático de Desarrollo del Improving Internet Connectivity for Micronesia Project sobre la red gubernamental de fibra existente en Nauru. Se infiere este recorrido por el corredor viario costero entre las localidades; no se presenta como una alineación publicada del cable ni como parte del futuro enlace submarino."
+  }
+]

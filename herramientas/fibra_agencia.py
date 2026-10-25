@@ -181,6 +181,19 @@ SITIOS = {
     ('PW', 'ollei'): (134.614, 7.719), ('PW', 'orukei'): (134.718, 8.083), ('PW', 'ngeremasch'): (134.132, 6.903),
     ('PW', 'kayangel'): (134.719, 8.082),
     ('MH', 'ine'): (171.698, 6.985), ('MH', 'kwajalein'): (167.735, 8.720), ('MH', 'ebeye'): (167.737, 8.784),
+    # round 34 (25 Oct 2026): the villages of Fongafale (Tuvalu), Nauru's districts and Majuro's islets, from Nominatim
+    # (OpenStreetMap); Djarrit is also called Rita, Te Kavatoetoe also Kavatoetoe; Teone is placed at its church
+    ('TV', 'vaiaku'): (179.195, -8.525), ('TV', 'alapi'): (179.195, -8.523), ('TV', 'senala'): (179.198, -8.517),
+    ('TV', 'fakaifou'): (179.201, -8.517), ('TV', 'teone'): (179.197, -8.506), ('TV', 'tekavatoetoe'): (179.188, -8.533),
+    ('TV', 'kavatoetoe'): (179.188, -8.533),
+    ('NR', 'boe'): (166.916, -0.542), ('NR', 'aiwo'): (166.913, -0.533), ('NR', 'denigomodu'): (166.917, -0.524),
+    ('NR', 'nibok'): (166.921, -0.517), ('NR', 'uaboe'): (166.925, -0.513), ('NR', 'baiti'): (166.933, -0.515),
+    ('NR', 'buada'): (166.926, -0.534), ('NR', 'meneng'): (166.940, -0.545), ('NR', 'anibare'): (166.951, -0.531),
+    ('NR', 'ijuw'): (166.952, -0.519), ('NR', 'anabar'): (166.951, -0.514), ('NR', 'anetan'): (166.944, -0.511),
+    ('NR', 'ewa'): (166.938, -0.512),
+    ('MH', 'djarrit'): (171.363, 7.123), ('MH', 'rita'): (171.363, 7.123), ('MH', 'uliga'): (171.376, 7.105),
+    ('MH', 'delap'): (171.383, 7.091), ('MH', 'rairok'): (171.322, 7.076), ('MH', 'ajeltake'): (171.171, 7.075),
+    ('MH', 'woja'): (171.099, 7.101),
 }
 
 POR_TIERRA = True  # radio_agencia.py turns it off: a microwave hop does cross the sea
