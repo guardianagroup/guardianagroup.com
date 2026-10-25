@@ -1,0 +1,58 @@
+Ronda 35 de la agencia GUARDIANA (mapa Órbita). Necesito la DIRECCIÓN EXACTA de cada centro de datos de la lista: calle y número (o polígono/parque empresarial), código postal, ciudad y país, y sus coordenadas (latitud, longitud) con 4 decimales si las conoces. Usa fuentes públicas (web del operador, registros públicos, notas de prensa, OpenStreetMap); no uses PeeringDB, TeleGeography ni submarinecablemap. No inventes: si no sabes la dirección, escribe null. Si el centro ya no existe o no está en esa ciudad, dilo en «nota».
+Responde SOLO con un bloque JSON: una lista de objetos {"id": n, "direccion": "…", "lat": 0.0, "lon": 0.0, "fuente": "…", "nota": "…"}.
+
+Lista (id · nombre · operador · ciudad, país):
+109 · Claro Triara Bogotá · Claro Colombia · Bogotá, CO
+110 · Claro Triara MegaCenter Medellín · Claro Colombia · Medellín, CO
+111 · Equinix BG1 · Equinix · Bogotá, CO
+112 · Equinix BG2 · Equinix · Bogotá, CO
+113 · GTD El Poblado · GTD · Medellín, CO
+114 · ICE Kosmös Hub Sabana · Grupo ICE · San José, CR
+115 · Cyta Aglandjia Data Center · Cyta · Nicosia, -99
+116 · Cyta Amathus Data Center · Cyta · Limasol, -99
+117 · Aruba CZ1 · Aruba · Ktiš, CZ
+118 · MasterDC Brno · MasterDC · Brno, CZ
+119 · CyrusOne FRA2 · CyrusOne · Frankfurt, DE
+120 · Equinix MU3 · Equinix · Múnich, DE
+121 · Equinix MU4 · Equinix · Aschheim, DE
+122 · NTT Frankfurt 3 · NTT Global Data Centers · Rüsselsheim am Main, DE
+123 · NTT Frankfurt 4 · NTT Global Data Centers · Hattersheim am Main, DE
+124 · Djibouti Data Centre · Wingu Africa · Yibuti, DJ
+125 · atNorth DEN01 · atNorth · Copenhagen, DK
+126 · Digital Realty CPH3 · Digital Realty · Ballerup, DK
+127 · eBS WebServices Sidi Abdellah · eBS WebServices · Argel, DZ
+128 · Cirion QUI2 · Cirion Technologies · Quito, EC
+129 · Telconet Cloud Center I · Telconet Latam · Guayaquil, EC
+130 · Telconet Cloud Center II · Telconet Latam · Quito, EC
+131 · Telconet Cloud Center III · Telconet Latam · Guayaquil, EC
+132 · WaveCom Endla Data Center · WaveCom · Tallin, EE
+133 · Raya Data Center 6th of October · Raya Data Center · Ciudad 6 de Octubre, EG
+134 · Raya Data Center Cairo · Raya Data Center · El Cairo, EG
+135 · Digital Realty BCN1 · Digital Realty · Badalona, ES
+136 · Digital Realty MAD1 · Digital Realty · Madrid, ES
+137 · Digital Realty MAD3 · Digital Realty · Madrid, ES
+138 · Equinix BA1 · Equinix · Barcelona, ES
+139 · Equinix MD1 · Equinix · Madrid, ES
+140 · Equinix MD2 · Equinix · Madrid, ES
+141 · Nabiax Alcalá · Nabiax · Alcalá de Henares, ES
+142 · Nabiax Julián Camarillo · Nabiax · Madrid, ES
+143 · Nabiax Terrassa · Nabiax · Terrassa, ES
+144 · Templus MAL01 · Templus · Málaga, ES
+145 · Templus SEV01 · Templus · Sevilla, ES
+146 · Templus VAL01 · Templus · Paterna, ES
+147 · Raxio ET1 · Raxio Data Centres · Adís Abeba, ET
+148 · Wingu Ethiopia Data Centre · Wingu Africa · Adís Abeba, ET
+149 · atNorth FIN01 · atNorth · Helsinki, FI
+150 · atNorth FIN02 · atNorth · Espoo, FI
+151 · ETIX Lille #3 · ETIX Everywhere · Anzin, FR
+152 · ETIX Lyon #1 · ETIX Everywhere · Lyon, FR
+153 · Equinix MA3 · Equinix · Mánchester, GB
+154 · Pulsant NW-1 · Pulsant · Mánchester, GB
+155 · Pulsant WM-1 · Pulsant · Birmingham, GB
+156 · Telehouse North Two · Telehouse · London, GB
+157 · Templus LEE01 · Templus · Leeds, GB
+158 · PAIX Accra ACC-1 · PAIX Data Centres · Acra, GH
+159 · Digital Realty ATH2 · Digital Realty · Koropí, GR
+160 · LANCOM Balkan Gate · LANCOM · Salónica, GR
+161 · AirTrunk HKG1 · AirTrunk · Hong Kong, HK
+162 · Equinix HK1 · Equinix · Hong Kong, HK

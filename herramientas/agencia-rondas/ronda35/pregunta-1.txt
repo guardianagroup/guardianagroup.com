@@ -1,0 +1,58 @@
+Ronda 35 de la agencia GUARDIANA (mapa Órbita). Necesito la DIRECCIÓN EXACTA de cada centro de datos de la lista: calle y número (o polígono/parque empresarial), código postal, ciudad y país, y sus coordenadas (latitud, longitud) con 4 decimales si las conoces. Usa fuentes públicas (web del operador, registros públicos, notas de prensa, OpenStreetMap). No inventes: si no sabes la dirección, escribe null. Si el centro ya no existe o no está en esa ciudad, dilo en «nota».
+Responde SOLO con un bloque JSON: una lista de objetos {"id": n, "direccion": "…", "lat": 0.0, "lon": 0.0, "fuente": "…", "nota": "…"}.
+
+Lista (id · nombre · operador · ciudad, país):
+1 · datamena Dubai · du / datamena · Dubái, AE
+2 · Khazna AUH6 · Khazna Data Centers · Abu Dabi, AE
+3 · AngoNAP I · Angola Cables · Luanda, AO
+4 · Raxio AO1 · Raxio Data Centres · Luanda, AO
+5 · NTT Vienna 1 · NTT Global Data Centers · Wien, AT
+6 · Equinix AE1 · Equinix · Adelaida, AU
+7 · Equinix BR1 · Equinix · Brisbane, AU
+8 · Equinix PE1 · Equinix · Perth, AU
+9 · NEXTDC M2 · NEXTDC · Tullamarine, AU
+10 · NEXTDC P1 · NEXTDC · Perth, AU
+11 · National Data Center Dhaka · Bangladesh Computer Council · Daca, BD
+12 · ETIX Liège · ETIX Everywhere · Lieja, BE
+13 · LCL Brussels-South · LCL · Huizingen, BE
+14 · Seeweb Sofia Data Center · Seeweb · Sofía, BG
+15 · Telepoint 2 · Digital Realty · Sofía, BG
+16 · Batelco White Space Data Centre · Batelco / Beyon · Askar, BH
+17 · UNN Data Centre · Unified National Networks · Bandar Seri Begawan, BN
+18 · Ascenty Campinas 1 · Ascenty / Digital Realty · Campinas, BR
+19 · Ascenty Hortolândia 1 · Ascenty / Digital Realty · Hortolândia, BR
+20 · Ascenty Hortolândia 2 · Ascenty / Digital Realty · Hortolândia, BR
+21 · Ascenty Hortolândia 3 · Ascenty / Digital Realty · Hortolândia, BR
+22 · Ascenty Hortolândia 4 · Ascenty / Digital Realty · Hortolândia, BR
+23 · Ascenty Hortolândia 5 · Ascenty / Digital Realty · Hortolândia, BR
+24 · Ascenty Jundiaí 1 · Ascenty / Digital Realty · Jundiaí, BR
+25 · Ascenty Jundiaí 2 · Ascenty / Digital Realty · Jundiaí, BR
+26 · Ascenty Rio de Janeiro 1 · Ascenty / Digital Realty · Río de Janeiro, BR
+27 · Ascenty Rio de Janeiro 2 · Ascenty / Digital Realty · Río de Janeiro, BR
+28 · Ascenty Sumaré 1 · Ascenty / Digital Realty · Sumaré, BR
+29 · Ascenty Sumaré 2 · Ascenty / Digital Realty · Sumaré, BR
+30 · Ascenty Vinhedo 1 · Ascenty / Digital Realty · Vinhedo, BR
+31 · Ascenty Vinhedo 2 · Ascenty / Digital Realty · Vinhedo, BR
+32 · Cirion CUR1 · Cirion Technologies · Curitiba, BR
+33 · Cirion RIO1 · Cirion Technologies · Río de Janeiro, BR
+34 · Cirion SAO1 · Cirion Technologies · São Paulo, BR
+35 · Elea BSB1 · Elea Data Centers · Brasilia, BR
+36 · Elea BSB2 · Elea Data Centers · Brasilia, BR
+37 · Elea CTA1 · Elea Data Centers · Curitiba, BR
+38 · Elea POA1 · Elea Data Centers · Porto Alegre, BR
+39 · Elea POA2 · Elea Data Centers · Porto Alegre, BR
+40 · Elea RJO1 · Elea Data Centers · Río de Janeiro, BR
+41 · Elea SPO1 · Elea Data Centers · São Paulo, BR
+42 · Elea SPO3 · Elea Data Centers · Barueri, BR
+43 · Equinix RJ1 · Equinix · Río de Janeiro, BR
+44 · Equinix RJ3 · Equinix · Río de Janeiro, BR
+45 · Equinix SP1 · Equinix · São Paulo, BR
+46 · Equinix SP2 · Equinix · Barueri, BR
+47 · Equinix SP3 · Equinix · Santana de Parnaíba, BR
+48 · Equinix SP5x · Equinix · Santana de Parnaíba, BR
+49 · HostDime São Paulo · HostDime · São Paulo, BR
+50 · ODATA SP03 · ODATA · Barueri, BR
+51 · Scala SGRUSP02 · Scala Data Centers · São Paulo, BR
+52 · Scala SGRUTB01 · Scala Data Centers · Barueri, BR
+53 · Scala SGRUTB03 · Scala Data Centers · Barueri, BR
+54 · Scala SGRUTB04 · Scala Data Centers · Barueri, BR

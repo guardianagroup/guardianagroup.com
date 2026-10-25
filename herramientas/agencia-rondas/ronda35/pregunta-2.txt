@@ -1,0 +1,58 @@
+Ronda 35 de la agencia GUARDIANA (mapa Órbita). Necesito la DIRECCIÓN EXACTA de cada centro de datos de la lista: calle y número (o polígono/parque empresarial), código postal, ciudad y país, y sus coordenadas (latitud, longitud) con 4 decimales si las conoces. Usa fuentes públicas (web del operador, registros públicos, notas de prensa, OpenStreetMap); no uses PeeringDB, TeleGeography ni submarinecablemap. No inventes: si no sabes la dirección, escribe null. Si el centro ya no existe o no está en esa ciudad, dilo en «nota».
+Responde SOLO con un bloque JSON: una lista de objetos {"id": n, "direccion": "…", "lat": 0.0, "lon": 0.0, "fuente": "…", "nota": "…"}.
+
+Lista (id · nombre · operador · ciudad, país):
+55 · Scala SGRUTB05 · Scala Data Centers · Barueri, BR
+56 · Scala SGRUTB06 · Scala Data Centers · Barueri, BR
+57 · Scala SGRUTB08 · Scala Data Centers · Barueri, BR
+58 · Scala SGRUTB12 · Scala Data Centers · Barueri, BR
+59 · Scala SPOAPA01 · Scala Data Centers · Porto Alegre, BR
+60 · Scala SVCPCP01 · Scala Data Centers · Campinas, BR
+61 · Cologix MTL1 · Cologix · Montreal, CA
+62 · Cologix MTL11 · Cologix · Montreal, CA
+63 · Cologix MTL3 · Cologix · Montreal, CA
+64 · Cologix MTL4 · Cologix · Montreal, CA
+65 · Cologix TOR2 · Cologix · Toronto, CA
+66 · Cologix TOR3 · Cologix · Toronto, CA
+67 · Digital Realty ZUR2 · Digital Realty · Glattbrugg, CH
+68 · Equinix ZH2 · Equinix · Zurich, CH
+69 · Equinix ZH4 · Equinix · Zurich, CH
+70 · Ascenty Santiago 1 · Ascenty / Digital Realty · Santiago, CL
+71 · Ascenty Santiago 2 · Ascenty / Digital Realty · Quilicura, CL
+72 · Ascenty Santiago 3 · Ascenty / Digital Realty · Quilicura, CL
+73 · Cirion SAN1 · Cirion Technologies · Santiago, CL
+74 · Cirion SAN2 · Cirion Technologies · Santiago, CL
+75 · Equinix ST1 · Equinix · Santiago, CL
+76 · Equinix ST2 · Equinix · Santiago, CL
+77 · Equinix ST4 · Equinix · Santiago, CL
+78 · GTD Holanda · GTD · Santiago, CL
+79 · GTD Huérfanos · GTD · Santiago, CL
+80 · GTD Lídice I · GTD · Santiago, CL
+81 · GTD Lídice II · GTD · Santiago, CL
+82 · GTD Moneda · GTD · Santiago, CL
+83 · GTD Panamericana · GTD · Santiago, CL
+84 · Nabiax Paine · Nabiax · Paine, CL
+85 · SONDA Data Center Santiago · SONDA · Santiago, CL
+86 · China Mobile Guizhou Data Center · China Mobile · Gui'an, CN
+87 · China Telecom Guizhou Information Park · China Telecom · Guiyang, CN
+88 · China Unicom Gui'an Cloud Computing Base · China Unicom · Guiyang, CN
+89 · Chindata Cunrui Campus · Chindata Group · Huailai, CN
+90 · Chindata Donghuayuan Campus · Chindata Group · Huailai, CN
+91 · Chindata Guanting Lake Campus · Chindata Group · Xuanhua, CN
+92 · Chindata Sangyuan Campus · Chindata Group · Xuanhua, CN
+93 · Equinix SH1 · Equinix · Shanghái, CN
+94 · Equinix SH2 · Equinix · Shanghái, CN
+95 · Equinix SH3 · Equinix · Shanghái, CN
+96 · Equinix SH6 · Equinix · Shanghái, CN
+97 · GDS Beijing 1 · GDS · Pekín, CN
+98 · GDS Beijing 2 · GDS · Pekín, CN
+99 · GDS Beijing 3 · GDS · Pekín, CN
+100 · GDS Guangzhou 1 · GDS · Cantón, CN
+101 · GDS Langfang 8 · GDS · Langfang, CN
+102 · GDS Shanghai 1 · GDS · Shanghái, CN
+103 · GDS Shanghai 2 · GDS · Shanghái, CN
+104 · GDS Shanghai 3 · GDS · Shanghái, CN
+105 · GDS Shanghai 4 · GDS · Shanghái, CN
+106 · GDS Shanghai 6 · GDS · Shanghái, CN
+107 · Huawei Cloud Gui'an Data Center · Huawei Cloud · Gui'an, CN
+108 · Cirion BOG2 · Cirion Technologies · Bogotá, CO
