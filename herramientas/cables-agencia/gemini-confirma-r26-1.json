@@ -1,0 +1,49 @@
+[
+ {
+  "nombre": "Sorsogon-Samar Submarine Fiber Optical Interconnection Project (SSSFOIP)",
+  "llegadas": [
+   {
+    "lugar": "Santa Magdalena",
+    "pais": "PH",
+    "lat": 12.648,
+    "lon": 124.106
+   },
+   {
+    "lugar": "Allen",
+    "pais": "PH",
+    "lat": 12.5,
+    "lon": 124.2833
+   }
+  ],
+  "anio": 2019,
+  "km": 21,
+  "duenos": [
+   "National Grid Corporation of the Philippines (NGCP)"
+  ],
+  "fuentes": [
+   "Huawei Technologies / HMN Tech (https://www.huawei.com/en/news/2018/3/huawei-marine-phaseii-philippines-grid-project)",
+   "SB Submarine Systems (SBSS) Corporate Presentation (https://www.sbss.com/uploads/SBSS%202021%20Corporate%20Presentation.pdf)",
+   "SubTel Forum Submarine Cable Almanac Issue 47 (https://issuu.com/subtelforum/docs/almanac_issue_47)"
+  ]
+ },
+ {
+  "nombre": "Tuvalu Vaka Cable (VAKA)",
+  "llegadas": [
+   {
+    "lugar": "Funafuti",
+    "pais": "TV",
+    "lat": -8.5243,
+    "lon": 179.1942
+   }
+  ],
+  "anio": 2025,
+  "km": 668,
+  "duenos": [
+   "Tuvalu Telecommunications Corporation (TTC)"
+  ],
+  "fuentes": [
+   "Australian Infrastructure Financing Facility for the Pacific - AIFFP (https://www.aiffp.gov.au/news/australia-and-tuvalu-celebrate-milestone-connection-vaka-cable)",
+   "Australian Infrastructure Financing Facility for the Pacific - Project Profile (https://www.aiffp.gov.au/investments/investment-list/tuvalu-vaka-cable)"
+  ]
+ }
+]

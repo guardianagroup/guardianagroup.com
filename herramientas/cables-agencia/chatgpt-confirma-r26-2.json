@@ -1,0 +1,82 @@
+[
+ {
+  "nombre": "PENBAL-5",
+  "llegadas": [
+   {
+    "lugar": "Gavà",
+    "pais": "ES",
+    "lat": 41.304,
+    "lon": 2.0013
+   },
+   {
+    "lugar": "Ses Covetes",
+    "pais": "ES",
+    "lat": 39.3545,
+    "lon": 2.971
+   }
+  ],
+  "anio": 1995,
+  "km": 309,
+  "duenos": [
+   "Telefónica"
+  ],
+  "fuentes": [
+   "https://www.octsi.es/images/documentos/2025/CNMC-2025-08-informe-conectividad-archipielagos.pdf",
+   "https://www.defensa.gob.es/documents/2073105/2077224/Espa%C3%B1a%2Ben%2Bla%2Bred%2Bglobal%2Bde%2Bcables%2Bsubmarinos.pdf/7413b33e-ace1-6e96-9122-3a7d2d17c638?t=1716963357658"
+  ]
+ },
+ {
+  "nombre": "Pichilingue-Topolobampo",
+  "llegadas": [
+   {
+    "lugar": "La Paz",
+    "pais": "MX",
+    "lat": 24.149,
+    "lon": -110.3237
+   },
+   {
+    "lugar": "Topolobampo",
+    "pais": "MX",
+    "lat": 25.6014,
+    "lon": -109.0543
+   }
+  ],
+  "anio": 2020,
+  "km": 250,
+  "duenos": [
+   "Megacable"
+  ],
+  "fuentes": [
+   "https://www.ipn.mx/assets/files/coriyp/docs/inicio/telecom/edo-arte-ret.pdf",
+   "https://www.afh.com.mx/estudios-representativos-de-transporte.html",
+   "https://colectivopericu.news/2022/06/02/gracias-al-cable-submarino-mejores-telecomunicaciones-en-bcs/"
+  ]
+ },
+ {
+  "nombre": "Trans-Cook Strait Cable (Aquatronics)",
+  "llegadas": [
+   {
+    "lugar": "Oteranga Bay",
+    "pais": "NZ",
+    "lat": -41.2991,
+    "lon": 174.6256
+   },
+   {
+    "lugar": "Fighting Bay",
+    "pais": "NZ",
+    "lat": -41.3205,
+    "lon": 174.202
+   }
+  ],
+  "anio": 2020,
+  "km": 0,
+  "duenos": [
+   "Transpower New Zealand"
+  ],
+  "fuentes": [
+   "https://www.transpower.co.nz/news/submarine-telecommunications-cable-deployment-and-removal-successful",
+   "https://www.transpower.co.nz/news/new-telecommunications-cable-cook-strait",
+   "https://www.transpower.co.nz/cook-strait-cable-protection-zone-cpz"
+  ]
+ }
+]
