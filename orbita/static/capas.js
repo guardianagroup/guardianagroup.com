@@ -22,6 +22,9 @@
   // data centres in a colour of their own, so they stand out from the white lines and the grey land when zoomed in (owner,
   // 24 Oct 2026, 14:04: «que se distinga más»); not red or coral, which the palette keeps for outages
   const AZUL_CENTRO = '77,166,255';
+  // the microwave radio chains of the countries with no land fibre (round 27, owner 24 Oct 2026, 18:43): dotted, in a cool
+  // near-white of their own, so they never read as fibre (which is solid and coloured by rank)
+  const RADIO_COL = '214,226,240';
   const FIBRA_ALFA = window.__FIBRA_ALFA || { 3: 1, 2: 1.12, 1: 1.35, 0: 1.6 };
   // 23 Oct 2026 (owner: «los cables submarinos también los vamos a clasificar por color… vamos a mantener el diseño, unos son
   // más gruesos, otros menos, pero también van a ir por colores»; «para que no haya tanto colorín, van a ser los mismos
@@ -44,7 +47,7 @@
   // class of a layer cannot be switched off: the layer is switched off instead). Not remembered between visits.
   const CLASES = {
     sub: { gigante: true, grande: true, regional: true, sinDato: true, aprox: true, previstos: true },
-    fibra: { principal: true, largo: true, nacional: true, regional: true }, // 23 Oct 2026, 18:45 (owner): «En construcción» out — its 8 routes could not be seen anywhere
+    fibra: { principal: true, largo: true, nacional: true, regional: true, radio: true }, // 23 Oct 2026, 18:45 (owner): «En construcción» out — its 8 routes could not be seen anywhere
     puntos: { datos: true, pequenos: true, intercambio: true, estaciones: true }, // 22 Oct 2026, 22:42 (owner: «es un semáforo»): every class is «on = shown», no inverted filters
   };
   const PRINCIPALES = { sub: ['gigante', 'grande', 'regional', 'sinDato'], fibra: ['principal', 'largo', 'nacional', 'regional'], puntos: ['datos', 'intercambio', 'estaciones'] };
@@ -569,6 +572,57 @@
       FT = { d, lineas: d.lineas.map((x) => { const w = x.l.map(([lon, lat]) => P().vec(lon, lat).map((c) => c * 1.002)); const acc = [0]; for (let j = 1; j < w.length; j++) { const a = w[j - 1], b = w[j]; acc.push(acc[j - 1] + Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]) / 1.002); } return { x, w, acc, L: acc[acc.length - 1], fase: Math.random() }; }) };
     } catch (e) { FT = { error: true }; }
     cargando.ft = false; pintaNota();
+    cargaRadio();
+  }
+  // ---------- radio chains (round 27): microwave from tower to tower where no fibre runs between the towns (Greenland,
+  // Eritrea, the Falklands, the Pacific). Two voices name each stretch; the towers' positions are not public, so the
+  // line joins the towns the sources name, dotted, and its card says so. In the «Cables por tierra» card, class «Radioenlaces». ----------
+  let RD = null;
+  async function cargaRadio() {
+    if (RD || cargando.rd) return; cargando.rd = true;
+    try {
+      const d = await cargaJSON('datos/radioenlaces.json');
+      RD = { d, lineas: (d.lineas || []).map((x) => { const w = x.l.map(([lon, lat]) => P().vec(lon, lat).map((c) => c * 1.002)); let km = 0; for (let j = 1; j < x.l.length; j++) { const [a, b] = [x.l[j - 1], x.l[j]], la1 = a[1] * RAD, la2 = b[1] * RAD; km += 6371 * Math.acos(Math.min(1, Math.sin(la1) * Math.sin(la2) + Math.cos(la1) * Math.cos(la2) * Math.cos((b[0] - a[0]) * RAD))); } return { x, w, km: Math.round(km) }; }) };
+    } catch (_) { RD = { lineas: [] }; }
+    cargando.rd = false; pintaNota();
+  }
+  let radioMarcado = -1;
+  function pintaRadio(cx, p, G) {
+    if (!RD || !RD.lineas || !RD.lineas.length || !CLASES.fibra.radio) return;
+    const z = G.R / (G.R0 || G.R), fz = z <= 200 ? 1 : Math.max(0, 1 - (z - 200) / 400); if (fz <= 0) return;
+    const g = cx.globalCompositeOperation; cx.globalCompositeOperation = 'source-over';
+    cx.save(); cx.lineCap = 'round'; cx.lineWidth = Math.min(2.6, 1.5 + 0.12 * z); cx.setLineDash([0.1, Math.min(7, 3.6 + 0.4 * z)]);
+    cx.strokeStyle = `rgba(${RADIO_COL},${(0.92 * fz).toFixed(2)})`; cx.beginPath();
+    for (const l of RD.lineas) trazoW(cx, p, G, l.w, 0, l.w.length - 1);
+    cx.stroke(); cx.restore(); cx.globalCompositeOperation = g;
+    if (radioMarcado >= 0 && RD.lineas[radioMarcado]) { cx.save(); cx.setLineDash([0.1, 5]); cx.lineCap = 'round'; resalta(cx, p, G, [RD.lineas[radioMarcado]], RADIO_COL); cx.restore(); }
+  }
+  function buscaRadio(x, y) {
+    if (!estado.fibra || !CLASES.fibra.radio || !RD || !RD.lineas) return -1;
+    const p = P(), G = p.geo; let mejor = -1, dm = 7 * 7;
+    RD.lineas.forEach((l, i) => {
+      let ax = 0, ay = 0, prev = false;
+      for (const w of l.w) {
+        const v = p.aVista(w), bx = G.CX + G.R * v[0], by = G.CY - G.R * v[1], ve = v[2] > 0.02;
+        if (ve && prev) { const vx = bx - ax, vy = by - ay, L2 = vx * vx + vy * vy || 1, t = Math.max(0, Math.min(1, ((x - ax) * vx + (y - ay) * vy) / L2)); const qx = ax + vx * t - x, qy = ay + vy * t - y, d2 = qx * qx + qy * qy; if (d2 < dm) { dm = d2; mejor = i; } }
+        ax = bx; ay = by; prev = ve;
+      }
+    });
+    return mejor;
+  }
+  function fichaRadio(i, x, y) {
+    const r = RD.lineas[i], l = r.x, tit = l.n || T('Radioenlace de microondas');
+    const filas = [[T('Tipo'), T('Radioenlace de microondas')]];
+    if (l.cc) filas.push([T('País'), paisNombre(l.cc)]);
+    if (l.o) filas.push([T('Operador'), l.o]);
+    if (r.km) filas.push([T('Longitud en el mapa'), num(r.km) + ' km']);
+    if (l.dato) filas.push([T('Datos'), l.dato]);
+    const para = T('Aquí internet viaja por el aire: de torre en torre, por microondas, siempre a la vista. Se usa donde tender fibra no compensa o no es posible, como el hielo, el desierto o el mar entre islas. La posición de cada torre no es pública: la línea une los pueblos que nombran las fuentes.');
+    if (clicActual) { abreModelo(modelo(T('Radioenlace de microondas'), tit, filas, T('Trazado aproximado') + ' · ' + T('Datos verificados'), { resumen: [T('Tipo'), T('País'), T('Operador'), T('Longitud en el mapa')], para }), x, y); return; }
+    const f = ficha(); if (!f) return; f.classList.remove('sat');
+    f.querySelector('b').textContent = tit;
+    f.querySelector('span').textContent = filas.map((q) => q[0] + ': ' + q[1]).join('\n') + '\n' + T('Trazado aproximado') + ' · ' + T('Datos verificados');
+    f.hidden = false; colocaFicha(x, y);
   }
   // Land fibre by levels (owner, 22 Oct 2026: «mucha carga en el planeta… para que no haya tanto ruido»): from afar
   // only the long corridors, one per corridor (operators sharing a route are drawn once), and the rest as you zoom in.
@@ -838,6 +892,7 @@
     cx.globalCompositeOperation = 'lighter';
     if (estado.tierra && capas.tierra && capas.tierra.lineas) pintaLineas(cx, p, G, capas.tierra.lineas, `rgba(${ACERO},.30)`, 0.7);
     if (estado.fibra && FT && FT.lineas) { pintaFibra(cx, p, G); pintaLuz(cx, p, G, fibraVisible(G.R / (G.R0 || G.R)), t); }
+    if (estado.fibra) pintaRadio(cx, p, G);
     if (estado.sub && capas.sub && capas.sub.lineas) {
       // OpenStreetMap's cables as drawn; the ones the agency rebuilt from public sources (cables_agencia.py) are
       // an approximate sea trace, so they go dashed and a touch lighter (owner: «rotulado trazado aproximado»)
@@ -1246,7 +1301,7 @@
       meter('sub', c && c.d ? num(cuentaCables(() => true) || c.nombres) + ' ' + T('cables submarinos con nombre') + (CAP && Object.keys(CAP.cables).length ? ' · ' + T('color por capacidad: dorado y grueso con halo, más de 100 Tbit/s; lavanda, de 20 a 100 Tbit/s; verde agua, menos de 20 Tbit/s; gris, capacidad no publicada') : '') + ' · ' + T('Datos verificados') + ' · ' + T('puede faltar alguno') + ' · ' + T('la luz viaja en los dos sentidos a la vez, a cámara lenta: cruza el Atlántico en unos 30 ms') : c && c.error ? T('No se pudieron cargar los cables.') : T('Cargando cables…'));
     }
     if (estado.fibra) {
-      meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + T('por niveles: de lejos solo las troncales principales; las nacionales y las regionales aparecen al acercarse') + ' · ' + T('Datos verificados') : FT && FT.error ? T('No se pudieron cargar los cables por tierra.') : T('Cargando los cables por tierra…'));
+      meter('fibra', FT && FT.d ? num(FT.d.medida.km) + ' km ' + T('de fibra troncal por tierra en') + ' ' + num(FT.d.medida.paises.length) + ' ' + T('países') + ' · ' + T('trazados aproximados de redes reales') + ' · ' + T('por niveles: de lejos solo las troncales principales; las nacionales y las regionales aparecen al acercarse') + (RD && RD.lineas && RD.lineas.length ? ' · ' + num(RD.lineas.length) + ' ' + T('radioenlaces de microondas, punteados, donde no hay fibra') : '') + ' · ' + T('Datos verificados') : FT && FT.error ? T('No se pudieron cargar los cables por tierra.') : T('Cargando los cables por tierra…'));
     }
     if (estado.tierra) {
       const c = capas.tierra;
@@ -2040,8 +2095,11 @@
     if (k >= 0) { fibraMarcada = -1; if (k !== cableMarcado || clic) { cableMarcado = k; fichaLugar('cable', k, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
     if (cableMarcado >= 0) cableMarcado = -1;
     const ft = buscaFibra(x, y);
-    if (ft >= 0) { if (ft !== fibraMarcada || clic) { fibraMarcada = ft; fichaFibra(ft, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
+    if (ft >= 0) { radioMarcado = -1; if (ft !== fibraMarcada || clic) { fibraMarcada = ft; fichaFibra(ft, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
     fibraMarcada = -1;
+    const rd = buscaRadio(x, y);
+    if (rd >= 0) { if (rd !== radioMarcado || clic) { radioMarcado = rd; fichaRadio(rd, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
+    radioMarcado = -1;
     const f = ficha(); if (f && !f.hidden) f.hidden = true;
     if (clic && panelModelo) cierraPanel(); // a click on nothing closes the full card
   }
@@ -2128,7 +2186,7 @@
     // 22 Oct 2026, 22:02 (owner): «palabras para que sean entendibles, todo»
     // 23 Oct 2026, 09:17 (owner: «busca las palabras más apropiadas, entendibles y profesionales»): agency round with ChatGPT and Grok
     sub: { titulo: 'Cables submarinos', clases: { gigante: ['Autopistas entre continentes', 'Los cables más potentes: más de 100 Tbit/s.'], grande: ['Grandes rutas', 'Entre 20 y 100 Tbit/s: unen países y regiones.'], regional: ['Cables regionales', 'Menos de 20 Tbit/s: unen islas y países vecinos.'], sinDato: ['Capacidad no publicada', 'Cables en funcionamiento cuya capacidad no han publicado sus propietarios.'], aprox: ['Trazado aproximado', 'Sabemos dónde llega, pero no su recorrido exacto. Línea discontinua.'], previstos: ['Cables en proyecto', 'Anunciados o en construcción; aún no transportan datos. Línea discontinua.'] } },
-    fibra: { titulo: 'Cables por tierra', /* owner, 23 Oct 2026, 22:55: «Cables por tierra, mejor» */ clases: { principal: ['Grandes troncales', 'Rutas de 800 km o más, o compartidas por varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'] } },
+    fibra: { titulo: 'Cables por tierra', /* owner, 23 Oct 2026, 22:55: «Cables por tierra, mejor» */ clases: { principal: ['Grandes troncales', 'Rutas de 800 km o más, o compartidas por varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'] , radio: ['Radioenlaces', 'Cadenas de microondas de torre en torre, donde no hay fibra entre pueblos.']} },
     puntos: { titulo: 'Puntos de red', clases: { datos: ['Grandes operadores', 'De compañías con 5 centros de datos o más en el mapa.'], pequenos: ['Otros centros de datos', 'De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.'], intercambio: ['Puntos de intercambio', 'Donde las redes de distintas compañías se conectan entre sí.'], estaciones: ['Bases y antenas', 'Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.'] } },
   };
 
@@ -2144,7 +2202,7 @@
   function cuentaClase(k, c) {
     try {
       if (k === 'sub') { if (!capas.sub || !capas.sub.lineas || !CAP) return 0; if (c === 'previstos') return PREV ? PREV.length : 0; if (c === 'aprox') return cuentaCables((l) => l.aprox); return cuentaCables((l, i) => claseSub(i) === c); }
-      if (k === 'fibra') { if (!FT || !FT.lineas) return 0; preparaNiveles(); return FT.lineas.filter((l) => claseFibra(l) === c).length; }
+      if (k === 'fibra') { if (c === 'radio') return RD && RD.lineas ? RD.lineas.length : 0; if (!FT || !FT.lineas) return 0; preparaNiveles(); return FT.lineas.filter((l) => claseFibra(l) === c).length; }
       if (k === 'puntos') { if (c === 'estaciones') return EST ? EST.length : 0; if (!PT || !PT.p) return 0; if (c === 'intercambio') return PT.ix ? PT.ix.length : 0; if (c === 'pequenos') return PT.p.filter((q) => q.t === 'datos' && !esGrande(q)).length; if (c === 'datos') return PT.p.filter((q) => q.t === 'datos' && esGrande(q)).length; return PT.p.filter((q) => q.t === c).length; }
     } catch (_) {}
     return 0;
@@ -2165,7 +2223,7 @@
         bt.innerHTML = '<i aria-hidden="true"></i><span class="n"></span><span class="d"></span>';
         bt.querySelector('.n').append(T(n), ' ', Object.assign(document.createElement('b'), {})); bt.querySelector('.d').textContent = T(d); bt.title = T(d); // 22 Oct 2026, 22:09 (owner): the card lists classes only; the explanation shows under the pointer
         // 23 Oct 2026 (owner: «los de tierra los vamos a segmentar por colores»): each land-fibre class shows its colour, as in a map legend
-        if (k === 'fibra') { const m = document.createElement('s'); m.className = 'muestra'; m.setAttribute('aria-hidden', 'true'); m.style.setProperty('--c', FIBRA_COL[{ principal: 3, largo: 2, nacional: 1, regional: 0 }[c]]); bt.querySelector('.n').prepend(m); }
+        if (k === 'fibra') { const m = document.createElement('s'); m.className = 'muestra' + (c === 'radio' ? ' punto' : ''); m.setAttribute('aria-hidden', 'true'); m.style.setProperty('--c', c === 'radio' ? RADIO_COL : FIBRA_COL[{ principal: 3, largo: 2, nacional: 1, regional: 0 }[c]]); bt.querySelector('.n').prepend(m); }
         // 23 Oct 2026 (owner: «los cables submarinos también… van a ir por colores»): the same colours by capacity; the
         // approximate and planned routes show their dashes (each one is drawn in the colour of its capacity)
         if (k === 'sub') { const m = document.createElement('s'); m.className = 'muestra' + (c === 'aprox' ? ' raya' : c === 'previstos' ? ' punto' : ''); m.setAttribute('aria-hidden', 'true'); m.style.setProperty('--c', SUB_COL[c] || BLANCO); bt.querySelector('.n').prepend(m); }

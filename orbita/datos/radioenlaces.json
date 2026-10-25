@@ -8,17 +8,33 @@
 },
 "lineas": [
 {
-"n": "Red troncal de microondas de Groenlandia Meridional",
-"o": "Tusass",
-"cc": "GL",
+"n": "Troncal occidental de microondas Asmara-Teseney",
+"o": "EriTel",
+"cc": "ER",
 "l": [
 [
--46.051,
-60.913
+38.45,
+15.78
 ],
 [
--45.241,
-60.142
+38.271,
+15.703
+],
+[
+37.883,
+15.548
+],
+[
+37.59,
+15.11
+],
+[
+37.081,
+15.184
+],
+[
+36.66,
+15.109
 ]
 ]
 },
@@ -32,8 +48,20 @@
 60.913
 ],
 [
--46.036,
-60.718
+-45.517,
+61.155
+],
+[
+-45.424,
+61.156
+],
+[
+-45.569,
+60.463
+],
+[
+-45.241,
+60.142
 ]
 ]
 },
@@ -51,6 +79,10 @@
 69.22
 ],
 [
+-51.943,
+70.011
+],
+[
 -52.125,
 70.674
 ],
@@ -61,25 +93,29 @@
 ]
 },
 {
-"n": "Troncal occidental de microondas Asmara-Teseney",
+"n": "Troncal costera de microondas Massawa-Assab",
 "o": "EriTel",
 "cc": "ER",
 "l": [
 [
-38.93,
-15.34
+39.47,
+15.61
 ],
 [
-38.45,
-15.78
+39.622,
+15.263
 ],
 [
-37.883,
-15.548
+40.959,
+14.69
 ],
 [
-37.59,
-15.11
+41.694,
+13.931
+],
+[
+42.74,
+13.01
 ]
 ]
 },
@@ -97,51 +133,17 @@
 15.07
 ],
 [
+39.189,
+15.053
+],
+[
 39.377,
 14.844
 ]
 ]
 },
 {
-"n": "Troncal costera de microondas Massawa-Assab",
-"o": "EriTel",
-"cc": "ER",
-"l": [
-[
-39.47,
-15.61
-],
-[
-41.694,
-13.931
-],
-[
-42.74,
-13.01
-]
-]
-},
-{
-"n": "Troncal interinsular de microondas Tongatapu-Vava'u",
-"o": "Digicel Tonga",
-"cc": "TO",
-"l": [
-[
--175.2,
--21.14
-],
-[
--174.354,
--19.815
-],
-[
--173.984,
--18.651
-]
-]
-},
-{
-"n": "Troncal Suroeste (Asmara - Mendefera - Barentu)",
+"n": "Troncal Costera del Mar Rojo (Asmara - Massawa - Assab)",
 "o": "EriTel",
 "cc": "ER",
 "l": [
@@ -150,38 +152,12 @@
 15.34
 ],
 [
-38.833,
-15.097
+39.064,
+15.334
 ],
 [
-38.82,
-14.89
-]
-]
-},
-{
-"n": "Ramal de microondas de la isla Disko",
-"o": "Tusass",
-"cc": "GL",
-"l": [
-[
--52.864,
-68.709
-],
-[
--49.783,
-62.117
-]
-]
-},
-{
-"n": "Troncal de microondas Asmara-Massawa",
-"o": "EriTel",
-"cc": "ER",
-"l": [
-[
-38.93,
-15.34
+39.091,
+15.445
 ],
 [
 39.47,
@@ -201,6 +177,164 @@
 [
 38.69,
 16.19
+],
+[
+38.477,
+16.666
+]
+]
+},
+{
+"n": "Troncal de microondas del Norte (Disko - Upernavik)",
+"o": "Tusass A/S (antes TELE-POST / TELE Greenland)",
+"cc": "GL",
+"l": [
+[
+-56.149,
+72.784
+],
+[
+-57.22,
+74.579
+]
+]
+},
+{
+"n": "Cadena de Microondas de respaldo Tongatapu - Ha'apai - Vava'u",
+"o": "Digicel Tonga / Tonga Communications Corporation (TCC)",
+"cc": "TO",
+"l": [
+[
+-175.2,
+-21.14
+],
+[
+-174.957,
+-21.363
+],
+[
+-174.354,
+-19.815
+]
+]
+},
+{
+"n": "Red troncal de microondas de Groenlandia Meridional",
+"o": "Tusass",
+"cc": "GL",
+"l": [
+[
+-46.036,
+60.718
+],
+[
+-46.051,
+60.913
+]
+]
+},
+{
+"n": "Ramal de microondas de la isla Disko",
+"o": "Tusass",
+"cc": "GL",
+"l": [
+[
+-52.864,
+68.709
+],
+[
+-49.783,
+62.117
+]
+]
+},
+{
+"n": "Troncal meridional de microondas Asmara-Adi Quala",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+38.82,
+14.89
+],
+[
+38.834,
+14.634
+]
+]
+},
+{
+"n": "Troncal de microondas Stanley-Mount Pleasant",
+"o": "Sure South Atlantic",
+"cc": "FK",
+"l": [
+[
+-57.86,
+-51.69
+],
+[
+-58.45,
+-51.82
+]
+]
+},
+{
+"n": "Troncal regional de microondas Tarawa-Abaiang-Marakei",
+"o": "Vodafone Kiribati (ATHKL)",
+"cc": "KI",
+"l": [
+[
+172.955,
+1.609
+],
+[
+173.263,
+2.052
+]
+]
+},
+{
+"n": "Radioenlace troncal meridional Peleliu-Angaur",
+"o": "Palau National Communications Corporation (PNCC)",
+"cc": "PW",
+"l": [
+[
+134.256,
+7.042
+],
+[
+134.132,
+6.903
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "GL",
+"l": [
+[
+-45.241,
+60.142
+],
+[
+-46.036,
+60.718
+]
+]
+},
+{
+"n": "",
+"o": "",
+"cc": "KI",
+"l": [
+[
+172.921,
+1.358
+],
+[
+173.04,
+0.938
 ]
 ]
 }
