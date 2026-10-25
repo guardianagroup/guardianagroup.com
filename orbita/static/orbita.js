@@ -552,7 +552,7 @@
     const MIP = !!(EXT.der && EXT.lod);
     const fs = `${MIP ? '#extension GL_OES_standard_derivatives : enable\n#extension GL_EXT_shader_texture_lod : enable\n#define MIP 1\n' : ''}precision highp float;
 uniform vec2 uC;uniform float uR;uniform mat3 uM;uniform vec3 uL;uniform float uT,uNubOn,uAten,uLimpio;
-uniform sampler2D uDia,uLuz,uNub,uAgua,uZona;uniform vec4 uZonaBox;uniform float uZonaOn;uniform float uSiempreDia;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
+uniform sampler2D uDia,uLuz,uNub,uAgua,uZona,uZonaT;uniform vec4 uZonaBox;uniform float uZonaOn,uZonaTOn;uniform float uSiempreDia;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
 const float PI=3.14159265;
 #ifdef MIP
 vec4 tx(sampler2D s,vec2 uv,vec2 gx,vec2 gy){return texture2DGradEXT(s,uv,gx,gy);}
@@ -570,7 +570,8 @@ void main(){
 #endif
  if(r<1.){
   vec3 dia=tx(uDia,uv,gx,gy).rgb;float agua=tx(uAgua,uv,gx,gy).r;
-  if(uZonaOn>.5){float ux=uv.x;if(ux<uZonaBox.x)ux+=1.;vec2 q=(vec2(ux,uv.y)-uZonaBox.xy)/(uZonaBox.zw-uZonaBox.xy);if(q.x>0.&&q.x<1.&&q.y>0.&&q.y<1.)dia=texture2D(uZona,q).rgb;}
+  float tierraF=-1.;
+  if(uZonaOn>.5){float ux=uv.x;if(ux<uZonaBox.x)ux+=1.;vec2 q=(vec2(ux,uv.y)-uZonaBox.xy)/(uZonaBox.zw-uZonaBox.xy);if(q.x>0.&&q.x<1.&&q.y>0.&&q.y<1.){dia=texture2D(uZona,q).rgb;if(uZonaTOn>.5)tierraF=texture2D(uZonaT,q).r;}}
   float nub=tx(uNub,vec2(fract(uv.x-uT*.0016),uv.y),gx,gy).r*uNubOn;nub=smoothstep(.12,.9,nub);
   vec3 luz=tx(uLuz,uv,gx,gy).rgb;
   float lam=dot(n,uL);float dl=smoothstep(-.22,.42,lam);
@@ -583,7 +584,7 @@ void main(){
   float fr=pow(1.-n.z,2.4);c=mix(c,atm*(.18+.8*max(lam+.35,0.)),fr*.6);
   // 22 Oct 2026 (owner): from a certain zoom the planet goes «limpio»: no lights, no colours, black water and
   // grey land told apart sharply (the coast comes from the day map itself, 16K when loaded), so the data read white.
-  if(uLimpio>0.){float lum=dot(dia,vec3(.3,.59,.11));float mar=(dia.b>max(dia.r,dia.g)*1.08&&lum<.5)?1.:0.;mar=max(mar,step(.85,agua)*step(lum,.35));
+  if(uLimpio>0.){float lum=dot(dia,vec3(.3,.59,.11));float mar=(dia.b>max(dia.r,dia.g)*1.08&&lum<.5)?1.:0.;mar=max(mar,step(.85,agua)*step(lum,.35));if(tierraF>=0.)mar=1.-smoothstep(.3,.7,tierraF);
    vec3 cl=mix(vec3(.165,.19,.225),vec3(.03,.045,.07),mar);cl=mix(cl,cl*1.35,fr*.5);c=mix(c,cl,uLimpio);}
   for(int i=0;i<${ONDAS};i++){vec4 o=uO[i];if(o.w>0.&&o.w<1.){
    float d=acos(clamp(dot(w,o.xyz),-1.,1.));float rd=.02+o.w*.32;float f=1.-o.w;
@@ -603,7 +604,7 @@ void main(){
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const la = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la, 2, gl.FLOAT, false, 0, 0);
-      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uLimpio', 'uSiempreDia', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaBox', 'uZonaOn', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
+      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uLimpio', 'uSiempreDia', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaT', 'uZonaBox', 'uZonaOn', 'uZonaTOn', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
       G = { pr, u, tex: {}, nubOn: 0 };
       // mipmaps + anisotropic filtering on a freshly loaded map (all are powers of two); if the card refuses, plain linear
       const mipea = () => {
@@ -656,6 +657,10 @@ void main(){
       // Only the tiles under the part of the planet on screen are fetched, composed into one «zone» texture
       // (up to 4096 px a side) that the shader uses inside its window; outside it, the 8K map goes on. Computers only.
       gl.uniform1f(u.uZonaOn, 0); gl.uniform1i(u.uZona, 4);
+      // 24 Oct 2026, 20:30 (owner, on the island of Lewis missing from the grey map): the grey planet tells land from sea
+      // by the colour of the photo, and dark peat bogs read as sea; inside the zone it now uses the coast of Natural Earth
+      // 10m, cut in the same 32 tiles (static/tierra/tierra-16k, public domain; built by herramientas/tierra_16k.py)
+      gl.uniform1f(u.uZonaTOn, 0); gl.uniform1i(u.uZonaT, 5);
       G.zona = { on: false, tex: null, caja: null, lista: new Map(), falta: false, pendiente: 0, ultimo: 0, lienzo: null, z: 0 };
       G.zonaMax = Math.min(4096, gl.getParameter(gl.MAX_TEXTURE_SIZE));
       G.zonaPuede = !matchMedia('(pointer: coarse)').matches && G.zonaMax >= 4096;
@@ -666,6 +671,16 @@ void main(){
         t.im.onload = () => { t.ok = true; G.zona.pendiente = 0; };
         t.im.onerror = () => { t.mal = true; if (c === 0 && f === 0) G.zona.falta = true; G.zona.pendiente = 0; };
         t.im.src = TIERRA + 'dia-16k/' + k + '.jpg';
+        return t;
+      };
+      G.zonaT = { lista: new Map(), tex: null, lienzo: null, mal: false };
+      G.teselaT = (c, f) => {
+        const k = c + '_' + f; let t = G.zonaT.lista.get(k);
+        if (t) return t;
+        t = { im: new Image(), ok: false, mal: false }; G.zonaT.lista.set(k, t);
+        t.im.onload = () => { t.ok = true; G.zona.pendiente = 0; };
+        t.im.onerror = () => { t.mal = true; G.zonaT.mal = true; G.zona.pendiente = 0; };
+        t.im.src = TIERRA + 'tierra-16k/' + k + '.png';
         return t;
       };
     } catch (e) { G = null; }
@@ -708,6 +723,7 @@ void main(){
     if ((c1 - c0 + 1) * (f1 - f0 + 1) > 12) { Z.ultimo = now; return; } // half the planet: the 8K map serves it better than a tiny zone
     const falta = [];
     for (let c = c0; c <= c1; c++) for (let f = f0; f <= f1; f++) { const t = G.tesela(((c % 8) + 8) % 8, f); if (!t.ok && !t.mal) falta.push(t); }
+    if (G.zonaT && !G.zonaT.mal) for (let c = c0; c <= c1; c++) for (let f = f0; f <= f1; f++) { const t = G.teselaT(((c % 8) + 8) % 8, f); if (!t.ok && !t.mal) falta.push(t); }
     if (falta.length) { Z.pendiente = now; return; }
     if (!Z.lienzo) Z.lienzo = document.createElement('canvas');
     const L = Z.lienzo, g2 = L.getContext('2d');
@@ -724,6 +740,29 @@ void main(){
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, L);
     if (gl.getError() !== gl.NO_ERROR) { G.zonaPuede = false; gl.uniform1f(G.u.uZonaOn, 0); return; }
+    // the coast for the grey map, in the same window (unit 5); without it the colour of the photo decides, as before
+    let conT = false;
+    if (G.zonaT && !G.zonaT.mal) {
+      if (!G.zonaT.lienzo) G.zonaT.lienzo = document.createElement('canvas');
+      const LT = G.zonaT.lienzo, g3 = LT.getContext('2d');
+      LT.width = L.width; LT.height = L.height; g3.fillStyle = '#000'; g3.fillRect(0, 0, LT.width, LT.height);
+      g3.imageSmoothingEnabled = true; g3.imageSmoothingQuality = 'high';
+      conT = true;
+      for (let c = c0; c <= c1; c++) for (let f = f0; f <= f1; f++) {
+        const t = G.teselaT(((c % 8) + 8) % 8, f); if (!t.ok) { conT = false; continue; }
+        const x = (c * 45 - 180 - caja.lonMin) * ppd * esc, y = (caja.latMax - (90 - f * 45)) * ppd * esc, lado = 45 * ppd * esc;
+        g3.drawImage(t.im, x, y, lado, lado);
+      }
+      if (conT) {
+        if (!G.zonaT.tex) G.zonaT.tex = gl.createTexture();
+        gl.activeTexture(gl.TEXTURE5); gl.bindTexture(gl.TEXTURE_2D, G.zonaT.tex);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, gl.LUMINANCE, gl.UNSIGNED_BYTE, LT);
+        if (gl.getError() !== gl.NO_ERROR) conT = false;
+      }
+    }
+    gl.uniform1f(G.u.uZonaTOn, conT ? 1 : 0);
     // the window in the shader's uv (u from 180° W, v from the north pole), unwrapped across the date line
     let u0 = (caja.lonMin + 180) / 360, u1 = (caja.lonMax + 180) / 360; const v0 = (90 - caja.latMax) / 180, v1 = (90 - caja.latMin) / 180;
     if (u0 < 0) { u0 += 1; u1 += 1; } // the shader adds a turn to u when it falls left of the box

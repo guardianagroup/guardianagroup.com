@@ -1,0 +1,1343 @@
+{
+ "nota": "Fichas de empresas (dueño, 24 Oct 2026): sede, dirección y foto del edificio, revisadas una a una (herramientas/agencia-rondas/empresas/). La dirección sale de un registro oficial o la confirman dos voces; las fotos son copias en guardianagroup.com de Wikimedia Commons con licencia libre, con su crédito.",
+ "generado": "2026-10-25T01:10Z",
+ "empresas": {
+  "33Across": {
+   "cc": "US",
+   "slug": "33across",
+   "web": "https://www.33across.com/",
+   "wikidata": "Q85738240",
+   "wikipedia": "https://en.wikipedia.org/wiki/33Across",
+   "sede": "Nueva York",
+   "sede_pais": "US",
+   "fundada": 2007,
+   "direccion": {
+    "texto": "228 Park Avenue South PMB 74008, New York, NY 10003, EE. UU.",
+    "voces": [
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.98867,
+    40.73778
+   ]
+  },
+  "Adobe": {
+   "cc": "US",
+   "slug": "adobe",
+   "web": "https://www.adobe.com/",
+   "wikidata": "Q11463",
+   "wikipedia": "https://es.wikipedia.org/wiki/Adobe_%28empresa%29",
+   "nombre_oficial": "Adobe Inc.",
+   "sede": "San José",
+   "sede_pais": "US",
+   "fundada": 1982,
+   "sector": [
+    "industria del software",
+    "tecnologías de la información y la comunicación"
+   ],
+   "empleados": {
+    "n": 25988,
+    "anio": 2021
+   },
+   "bolsa": [
+    "Nasdaq: ADBE",
+    "London Stock Exchange: ABS"
+   ],
+   "direccion": {
+    "texto": "345 Park Avenue, San José, CA 95110, EE. UU.",
+    "voces": [
+     "sec",
+     "wikidata",
+     "osm"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000796343",
+    "oficial": true
+   },
+   "lonlat": [
+    -121.89437,
+    37.33076
+   ],
+   "foto": {
+    "archivo": "empresa-adobe.jpg",
+    "ancho": 640,
+    "alto": 480,
+    "autor": "The original uploader was Gentgeen at English Wikipedia.",
+    "licencia": "CC BY-SA 3.0",
+    "url_licencia": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Adobe_HQ.JPG",
+    "que": "Sede de Adobe en San José (California)"
+   }
+  },
+  "Amazon": {
+   "cc": "US",
+   "slug": "amazon",
+   "web": "https://www.aboutamazon.com/",
+   "wikidata": "Q3884",
+   "wikipedia": "https://es.wikipedia.org/wiki/Amazon",
+   "nombre_oficial": "Amazon.com, Inc.",
+   "sede": "Seattle",
+   "sede_pais": "US",
+   "fundada": 1994,
+   "sector": [
+    "minorista",
+    "alojamiento web"
+   ],
+   "empleados": {
+    "n": 1500000,
+    "anio": 2023
+   },
+   "bolsa": [
+    "Nasdaq: AMZN"
+   ],
+   "direccion": {
+    "texto": "410 Terry Avenue North, Seattle, WA 98109, EE. UU.",
+    "voces": [
+     "sec",
+     "wikidata"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001018724",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.3365,
+    47.6223
+   ]
+  },
+  "Amplitude": {
+   "cc": "US",
+   "wikidata": "Q81969219",
+   "wikipedia": "https://en.wikipedia.org/wiki/Amplitude%2C_Inc.",
+   "web": "https://amplitude.com/",
+   "direccion": {
+    "texto": "201 Third Street, Suite 200, San Francisco, CA 94103, EE. UU.",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/984500EZ87C703978858",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.39987,
+    37.78507
+   ]
+  },
+  "Automattic": {
+   "cc": "US",
+   "slug": "automattic",
+   "web": "https://automattic.com/",
+   "wikidata": "Q2872634",
+   "wikipedia": "https://es.wikipedia.org/wiki/Automattic",
+   "sede": "San Francisco",
+   "sede_pais": "US",
+   "fundada": 2005,
+   "sector": [
+    "Internet"
+   ],
+   "empleados": {
+    "n": 940
+   },
+   "direccion": {
+    "texto": "60 29th Street #343, San Francisco, CA 94110, EE. UU.",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/254900SC9UVUIZP1CH08",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.42156,
+    37.74413
+   ]
+  },
+  "Brightcove": {
+   "cc": "US",
+   "wikidata": "Q4967514",
+   "wikipedia": "https://en.wikipedia.org/wiki/Brightcove",
+   "sede": "Boston",
+   "sede_pais": "US",
+   "fundada": 2004,
+   "bolsa": [
+    "Nasdaq: BCOV"
+   ],
+   "direccion": {
+    "texto": "281 Summer Street, Boston, MA 02210, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001313275",
+    "oficial": true
+   },
+   "lonlat": [
+    -71.0503,
+    42.34988
+   ]
+  },
+  "Chartbeat": {
+   "cc": "US",
+   "wikidata": "Q22907179",
+   "wikipedia": "https://en.wikipedia.org/wiki/Chartbeat",
+   "sede": "Nueva York",
+   "sede_pais": "US",
+   "fundada": 2009,
+   "web": "https://chartbeat.com/",
+   "direccion": {
+    "texto": "826 Broadway, 6th Floor, New York, NY 10003, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001499932",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.99098,
+    40.73332
+   ]
+  },
+  "Cloudflare": {
+   "cc": "US",
+   "slug": "cloudflare",
+   "web": "https://www.cloudflare.com/",
+   "wikidata": "Q4778915",
+   "wikipedia": "https://es.wikipedia.org/wiki/Cloudflare",
+   "nombre_oficial": "Cloudflare, Inc",
+   "sede": "San Francisco",
+   "sede_pais": "US",
+   "fundada": 2009,
+   "sector": [
+    "tecnologías de la información y la comunicación",
+    "Software Publishers"
+   ],
+   "empleados": {
+    "n": 3217,
+    "anio": 2022
+   },
+   "bolsa": [
+    "New York Stock Exchange: NET"
+   ],
+   "direccion": {
+    "texto": "101 Townsend Street, San Francisco, CA 94107, EE. UU.",
+    "voces": [
+     "sec",
+     "osm"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001477333",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.39061,
+    37.78034
+   ]
+  },
+  "Comscore": {
+   "cc": "US",
+   "slug": "comscore",
+   "web": "https://www.comscore.com/",
+   "wikidata": "Q734779",
+   "wikipedia": "https://es.wikipedia.org/wiki/ComScore",
+   "sede": "Reston",
+   "sede_pais": "US",
+   "fundada": 1999,
+   "sector": [
+    "Internet",
+    "mercadotecnia"
+   ],
+   "bolsa": [
+    "Nasdaq: SCOR"
+   ],
+   "direccion": {
+    "texto": "11950 Democracy Drive, Suite 600, Reston, VA 20190, EE. UU.",
+    "voces": [
+     "sec",
+     "cppa"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001158172",
+    "oficial": true
+   },
+   "lonlat": [
+    -77.3595,
+    38.95804
+   ]
+  },
+  "Contentsquare": {
+   "cc": "FR",
+   "slug": "contentsquare",
+   "web": "https://contentsquare.com/",
+   "wikidata": "Q86676634",
+   "wikipedia": "https://es.wikipedia.org/wiki/ContentSquare",
+   "nombre_oficial": "CONTENT SQUARE",
+   "sede": "VIII Distrito de París",
+   "sede_pais": "FR",
+   "fundada": 2008,
+   "sector": [
+    "publishing of application software"
+   ],
+   "direccion": {
+    "texto": "7 rue de Madrid, 75008 París, Francia",
+    "voces": [
+     "sirene"
+    ],
+    "fuente": "https://annuaire-entreprises.data.gouv.fr/entreprise/503916033",
+    "oficial": true
+   },
+   "lonlat": [
+    2.32113,
+    48.87837
+   ]
+  },
+  "Criteo": {
+   "cc": "FR",
+   "slug": "criteo",
+   "web": "https://www.criteo.com/",
+   "wikidata": "Q2814507",
+   "wikipedia": "https://en.wikipedia.org/wiki/Criteo",
+   "nombre_oficial": "CRITEO",
+   "sede": "París",
+   "sede_pais": "FR",
+   "fundada": 2005,
+   "sector": [
+    "IT systems and software consulting"
+   ],
+   "bolsa": [
+    "Nasdaq: CRTO"
+   ],
+   "direccion": {
+    "texto": "32 rue Blanche, 75009 París, Francia",
+    "voces": [
+     "sirene",
+     "wikidata",
+     "osm"
+    ],
+    "fuente": "https://annuaire-entreprises.data.gouv.fr/entreprise/484786249",
+    "oficial": true
+   },
+   "lonlat": [
+    2.33196,
+    48.87917
+   ]
+  },
+  "Equativ": {
+   "cc": "FR",
+   "slug": "equativ",
+   "web": "https://equativ.com/",
+   "wikidata": "Q120967874",
+   "nombre_oficial": "Equativ",
+   "sede": "París",
+   "sede_pais": "FR",
+   "fundada": 2005,
+   "empleados": {
+    "n": 406,
+    "anio": 2021
+   },
+   "direccion": {
+    "texto": "44-48 rue de Châteaudun, 75009 París, Francia",
+    "voces": [
+     "sirene"
+    ],
+    "fuente": "https://annuaire-entreprises.data.gouv.fr/entreprise/487613481",
+    "oficial": true
+   },
+   "lonlat": [
+    2.33463,
+    48.87634
+   ]
+  },
+  "Fox Corporation": {
+   "cc": "US",
+   "wikidata": "Q166419",
+   "wikipedia": "https://es.wikipedia.org/wiki/Fox_Broadcasting_Company",
+   "sede": "Manhattan",
+   "sede_pais": "US",
+   "edificio": "1211 Avenue of the Americas",
+   "fundada": 1986,
+   "matriz": "Fox Corporation",
+   "web": "https://fox.com",
+   "direccion": {
+    "texto": "1211 Avenue of the Americas, New York, NY 10036, EE. UU.",
+    "voces": [
+     "gleif",
+     "wikidata"
+    ],
+    "fuente": "https://search.gleif.org/#/record/549300DDU6FDRBIELS05",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.98238,
+    40.75867
+   ],
+   "foto": {
+    "archivo": "empresa-foxcorporation.jpg",
+    "ancho": 640,
+    "alto": 877,
+    "autor": "Coolcaesar at English Wikipedia",
+    "licencia": "CC BY-SA 3.0",
+    "url_licencia": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "pagina": "https://commons.wikimedia.org/wiki/File:1211_Avenue_of_the_Americas.jpg",
+    "que": "Sede de Fox Corporation, 1211 Avenue of the Americas (Nueva York)"
+   }
+  },
+  "Google": {
+   "cc": "US",
+   "slug": "google",
+   "web": "https://about.google/",
+   "wikidata": "Q95",
+   "wikipedia": "https://es.wikipedia.org/wiki/Google",
+   "nombre_oficial": "Google LLC",
+   "sede": "Mountain View",
+   "sede_pais": "US",
+   "fundada": 1998,
+   "matriz": "Alphabet Inc.",
+   "sector": [
+    "industria de internet",
+    "industria del software"
+   ],
+   "empleados": {
+    "n": 187000,
+    "anio": 2022
+   },
+   "direccion": {
+    "texto": "1600 Amphitheatre Parkway, Mountain View, CA 94043, EE. UU.",
+    "voces": [
+     "sec",
+     "wikidata"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001824723",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.08558,
+    37.42249
+   ]
+  },
+  "HubSpot": {
+   "cc": "US",
+   "slug": "hubspot",
+   "web": "https://www.hubspot.com/",
+   "wikidata": "Q5926631",
+   "wikipedia": "https://es.wikipedia.org/wiki/HubSpot",
+   "sede": "Cambridge",
+   "sede_pais": "US",
+   "fundada": 2006,
+   "sector": [
+    "industria del software",
+    "software como servicio"
+   ],
+   "empleados": {
+    "n": 8246,
+    "anio": 2024
+   },
+   "bolsa": [
+    "New York Stock Exchange: HUBS"
+   ],
+   "direccion": {
+    "texto": "2 Canal Park, Cambridge, MA 02141, EE. UU.",
+    "voces": [
+     "sec",
+     "osm"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001404655",
+    "oficial": true
+   },
+   "lonlat": [
+    -71.07632,
+    42.3701
+   ]
+  },
+  "Ipsos": {
+   "cc": "FR",
+   "wikidata": "Q1672300",
+   "wikipedia": "https://es.wikipedia.org/wiki/Ipsos",
+   "nombre_oficial": "IPSOS",
+   "sede": "París",
+   "sede_pais": "FR",
+   "fundada": 1975,
+   "sector": [
+    "investigación de mercados",
+    "activities of head offices"
+   ],
+   "bolsa": [
+    "Euronext Paris: IPS"
+   ],
+   "web": "https://www.ipsos.com/",
+   "direccion": {
+    "texto": "35 rue du Val de Marne, 75013 París, Francia",
+    "voces": [
+     "sirene",
+     "wikidata"
+    ],
+    "fuente": "https://annuaire-entreprises.data.gouv.fr/entreprise/304555634",
+    "oficial": true
+   },
+   "lonlat": [
+    2.34557,
+    48.81598
+   ]
+  },
+  "LiveRamp": {
+   "cc": "US",
+   "slug": "liveramp",
+   "web": "https://liveramp.com/",
+   "wikidata": "Q125352505",
+   "wikipedia": "https://en.wikipedia.org/wiki/LiveRamp",
+   "sede": "San Francisco",
+   "sede_pais": "US",
+   "fundada": 2011,
+   "bolsa": [
+    "New York Stock Exchange: RAMP"
+   ],
+   "direccion": {
+    "texto": "225 Bush Street, 17th Floor, San Francisco, CA 94104, EE. UU.",
+    "voces": [
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.4013,
+    37.7908
+   ]
+  },
+  "Magnite": {
+   "cc": "US",
+   "slug": "magnite",
+   "web": "https://www.magnite.com/",
+   "wikidata": "Q4411116",
+   "wikipedia": "https://es.wikipedia.org/wiki/Magnite",
+   "nombre_oficial": "Magnite",
+   "sede": "Nueva York",
+   "sede_pais": "US",
+   "fundada": 2007,
+   "sector": [
+    "industria publicitaria"
+   ],
+   "bolsa": [
+    "New York Stock Exchange: RUBI"
+   ],
+   "direccion": {
+    "texto": "1250 Broadway, 9th Floor, New York, NY, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001595974",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.98785,
+    40.74767
+   ]
+  },
+  "Media.net": {
+   "slug": "media-net",
+   "web": "https://www.media.net/",
+   "wikidata": "Q24885109",
+   "wikipedia": "https://en.wikipedia.org/wiki/Media.net",
+   "sede": "Dubái",
+   "sede_pais": "AE",
+   "fundada": 2010,
+   "cc": "AE",
+   "direccion": {
+    "texto": "2701 Aurora Towers, Dubai Internet City, Dubái, Emiratos Árabes Unidos",
+    "voces": [
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    55.1739,
+    25.10217
+   ]
+  },
+  "Meta": {
+   "cc": "US",
+   "slug": "meta",
+   "web": "https://www.meta.com/",
+   "wikidata": "Q380",
+   "wikipedia": "https://es.wikipedia.org/wiki/Meta_Platforms",
+   "nombre_oficial": "Meta Platforms, Inc.",
+   "sede": "Menlo Park",
+   "sede_pais": "US",
+   "fundada": 2004,
+   "sector": [
+    "tecnologías de la información y la comunicación"
+   ],
+   "empleados": {
+    "n": 58604,
+    "anio": 2020
+   },
+   "bolsa": [
+    "Nasdaq: META"
+   ],
+   "direccion": {
+    "texto": "1 Meta Way, Menlo Park, CA 94025, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001326801",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.14837,
+    37.48467
+   ],
+   "foto": {
+    "archivo": "empresa-meta.jpg",
+    "ancho": 640,
+    "alto": 343,
+    "autor": "Anthony Quintano from Honolulu, HI, United States",
+    "licencia": "CC BY 2.0",
+    "url_licencia": "https://creativecommons.org/licenses/by/2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Facebook_Offices_Menlo_Park_California_(34183281176).jpg",
+    "que": "Campus de la sede de Meta en Menlo Park (California)"
+   }
+  },
+  "Microsoft": {
+   "cc": "US",
+   "slug": "microsoft",
+   "web": "https://www.microsoft.com/",
+   "wikidata": "Q2283",
+   "wikipedia": "https://es.wikipedia.org/wiki/Microsoft",
+   "nombre_oficial": "Microsoft Corporation",
+   "sede": "Redmond",
+   "sede_pais": "US",
+   "fundada": 1975,
+   "sector": [
+    "industria tecnológica",
+    "industria del software"
+   ],
+   "empleados": {
+    "n": 228000,
+    "anio": 2024
+   },
+   "bolsa": [
+    "Nasdaq: MSFT",
+    "Hong Kong Stock Exchange: 4338"
+   ],
+   "direccion": {
+    "texto": "One Microsoft Way, Redmond, WA 98052, EE. UU.",
+    "voces": [
+     "sec",
+     "wikidata"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000789019",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.12675,
+    47.64116
+   ],
+   "foto": {
+    "archivo": "empresa-microsoft.jpg",
+    "ancho": 640,
+    "alto": 427,
+    "autor": "Jelson25",
+    "licencia": "Public domain",
+    "url_licencia": "",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Aerial_Microsoft_West_Campus_August_2009.jpg",
+    "que": "Campus de la sede de Microsoft en Redmond (Washington)"
+   }
+  },
+  "Nielsen": {
+   "cc": "US",
+   "slug": "nielsen",
+   "web": "https://www.nielsen.com/",
+   "wikidata": "Q540891",
+   "wikipedia": "https://es.wikipedia.org/wiki/Nielsen_Holdings",
+   "sede": "Nueva York",
+   "sede_pais": "US",
+   "fundada": 1994,
+   "sector": [
+    "industria de la información"
+   ],
+   "bolsa": [
+    "New York Stock Exchange: NLSN"
+   ],
+   "direccion": {
+    "texto": "675 Avenue of the Americas, New York, NY 10010, EE. UU.",
+    "voces": [
+     "sec",
+     "cppa"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001492633",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.99383,
+    40.74188
+   ]
+  },
+  "OpenX": {
+   "cc": "US",
+   "slug": "openx",
+   "web": "https://www.openx.com/",
+   "wikidata": "Q7095918",
+   "wikipedia": "https://en.wikipedia.org/wiki/OpenX_Technologies",
+   "sede": "Pasadena",
+   "sede_pais": "US",
+   "fundada": 2008,
+   "sector": [
+    "publicidad en Internet"
+   ],
+   "direccion": {
+    "texto": "35 N. Lake Avenue, Suite 240, Pasadena, CA 91101, EE. UU.",
+    "voces": [
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    -118.13281,
+    34.14681
+   ]
+  },
+  "Oracle": {
+   "cc": "US",
+   "slug": "oracle",
+   "web": "https://www.oracle.com/",
+   "wikidata": "Q19900",
+   "wikipedia": "https://es.wikipedia.org/wiki/Oracle_Corporation",
+   "sede": "Austin",
+   "sede_pais": "US",
+   "fundada": 1977,
+   "sector": [
+    "consultoría tecnológica",
+    "desarrollo de software"
+   ],
+   "empleados": {
+    "n": 162000,
+    "anio": 2025
+   },
+   "bolsa": [
+    "New York Stock Exchange: ORCL"
+   ],
+   "direccion": {
+    "texto": "2300 Oracle Way, Austin, TX 78741, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001341439",
+    "oficial": true
+   },
+   "lonlat": [
+    -97.72183,
+    30.2435
+   ]
+  },
+  "Outbrain": {
+   "slug": "outbrain",
+   "web": "https://www.outbrain.com/",
+   "wikidata": "Q17051632",
+   "wikipedia": "https://en.wikipedia.org/wiki/Outbrain",
+   "sede": "Nueva York",
+   "sede_pais": "US",
+   "fundada": 2006,
+   "sector": [
+    "mercadotecnia"
+   ],
+   "direccion": {
+    "texto": "111 West 19th Street, New York, NY 10011, EE. UU.",
+    "voces": [
+     "sec",
+     "cppa"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001454938",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.99541,
+    40.74089
+   ]
+  },
+  "PRISA": {
+   "cc": "ES",
+   "wikidata": "Q1466106",
+   "wikipedia": "https://es.wikipedia.org/wiki/Prisa",
+   "nombre_oficial": "Promotora de Informaciones, S.A.",
+   "sede": "Madrid",
+   "sede_pais": "ES",
+   "fundada": 1972,
+   "sector": [
+    "medio de comunicación de masas"
+   ],
+   "web": "https://www.prisa.com/",
+   "direccion": {
+    "texto": "Gran Vía 32, 28013 Madrid, España (domicilio social)",
+    "voces": [
+     "gleif",
+     "wikidata"
+    ],
+    "fuente": "https://search.gleif.org/#/record/959800U3NGPXSCQHQW54",
+    "oficial": true
+   },
+   "lonlat": [
+    -3.70382,
+    40.42045
+   ],
+   "foto": {
+    "archivo": "empresa-prisa.jpg",
+    "ancho": 600,
+    "alto": 350,
+    "autor": "Wntc2015",
+    "licencia": "CC BY-SA 4.0",
+    "url_licencia": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Edificio_en_Gran_V%C3%ADa_32_Madrid.png",
+    "que": "Gran Vía 32 (Madrid), domicilio social de PRISA"
+   }
+  },
+  "Prensa Ibérica": {
+   "cc": "ES",
+   "wikidata": "Q6426448",
+   "wikipedia": "https://es.wikipedia.org/wiki/Prensa_Ib%C3%A9rica",
+   "sede": "Barcelona",
+   "sede_pais": "ES",
+   "fundada": 1978,
+   "sector": [
+    "medio de comunicación de masas"
+   ],
+   "web": "https://www.prensaiberica.es/",
+   "direccion": {
+    "texto": "Av. de la Gran Via de l'Hospitalet 163-167, 08908 L'Hospitalet de Llobregat, España",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/959800LZ8UVL4ZQMG292",
+    "oficial": true
+   },
+   "lonlat": [
+    2.11823,
+    41.35089
+   ]
+  },
+  "Qualtrics": {
+   "cc": "US",
+   "wikidata": "Q7268803",
+   "wikipedia": "https://en.wikipedia.org/wiki/Qualtrics",
+   "sede": "Provo",
+   "sede_pais": "US",
+   "fundada": 2002,
+   "bolsa": [
+    "Nasdaq: XM"
+   ],
+   "web": "https://www.qualtrics.com/",
+   "direccion": {
+    "texto": "333 West River Park Drive, Provo, UT 84604, EE. UU.",
+    "voces": [
+     "sec",
+     "osm"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001747748",
+    "oficial": true
+   },
+   "lonlat": [
+    -111.66371,
+    40.30293
+   ],
+   "foto": {
+    "archivo": "empresa-qualtrics.jpg",
+    "ancho": 640,
+    "alto": 361,
+    "autor": "Ben P L from Provo, USA",
+    "licencia": "CC BY-SA 2.0",
+    "url_licencia": "https://creativecommons.org/licenses/by-sa/2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Qualtrics_headquarters_(29230813277).jpg",
+    "que": "Sede de Qualtrics en Provo (Utah)"
+   }
+  },
+  "Quantcast": {
+   "cc": "US",
+   "slug": "quantcast",
+   "web": "https://www.quantcast.com/",
+   "wikidata": "Q4047758",
+   "wikipedia": "https://en.wikipedia.org/wiki/Quantcast",
+   "sede": "San Francisco",
+   "sede_pais": "US",
+   "fundada": 2006,
+   "empleados": {
+    "n": 150
+   },
+   "direccion": {
+    "texto": "201 Third Street, Second Floor, San Francisco, CA 94103, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001393806",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.39987,
+    37.78507
+   ]
+  },
+  "RTB House": {
+   "cc": "PL",
+   "wikidata": "Q24963107",
+   "wikipedia": "https://es.wikipedia.org/wiki/RTB_House",
+   "nombre_oficial": "RTB House S.A.",
+   "sede": "Varsovia",
+   "sede_pais": "PL",
+   "fundada": 2012,
+   "sector": [
+    "publicidad en Internet",
+    "programmatic advertising"
+   ],
+   "empleados": {
+    "n": 1605,
+    "anio": 2026
+   },
+   "web": "https://www.rtbhouse.com/",
+   "direccion": {
+    "texto": "ul. Złota 61/101, 00-819 Varsovia, Polonia",
+    "voces": [
+     "gleif",
+     "wikidata"
+    ],
+    "fuente": "https://search.gleif.org/#/record/984500F644Z2FD680C94",
+    "oficial": true
+   },
+   "lonlat": [
+    20.9993,
+    52.22969
+   ]
+  },
+  "Salesforce": {
+   "cc": "US",
+   "slug": "salesforce",
+   "web": "https://www.salesforce.com/",
+   "wikidata": "Q941127",
+   "wikipedia": "https://es.wikipedia.org/wiki/Salesforce",
+   "sede": "San Francisco",
+   "sede_pais": "US",
+   "edificio": "Salesforce Tower",
+   "fundada": 1999,
+   "sector": [
+    "computación en la nube",
+    "industria del software"
+   ],
+   "empleados": {
+    "n": 35000,
+    "anio": 2019
+   },
+   "bolsa": [
+    "New York Stock Exchange: CRM"
+   ],
+   "direccion": {
+    "texto": "Salesforce Tower, 415 Mission Street, 3rd Floor, San Francisco, CA 94105, EE. UU.",
+    "voces": [
+     "sec",
+     "wikidata"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001108524",
+    "oficial": true
+   },
+   "lonlat": [
+    -122.39693,
+    37.78977
+   ],
+   "foto": {
+    "archivo": "empresa-salesforce.jpg",
+    "ancho": 640,
+    "alto": 853,
+    "autor": "Saggittarius A",
+    "licencia": "CC BY-SA 4.0",
+    "url_licencia": "https://creativecommons.org/licenses/by-sa/4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Salesforce_Tower_2020.jpg",
+    "que": "Salesforce Tower, sede de Salesforce en San Francisco"
+   }
+  },
+  "Seedtag": {
+   "cc": "ES",
+   "wikidata": "Q140865485",
+   "sede": "Madrid",
+   "sede_pais": "ES",
+   "fundada": 2014,
+   "web": "https://www.seedtag.com",
+   "direccion": {
+    "texto": "Calle del Marqués de Valdeiglesias 6, 28004 Madrid, España",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/959800WQLK1D7CYTM157",
+    "oficial": true
+   },
+   "lonlat": [
+    -3.69707,
+    40.41961
+   ]
+  },
+  "Seznam.cz": {
+   "cc": "CZ",
+   "slug": "seznam-cz",
+   "web": "https://www.seznam.cz/",
+   "wikidata": "Q3490485",
+   "wikipedia": "https://en.wikipedia.org/wiki/Seznam.cz",
+   "nombre_oficial": "Seznam.cz, a.s.",
+   "sede": "República Checa",
+   "sede_pais": "CZ",
+   "edificio": "Praga",
+   "fundada": 1996,
+   "matriz": "Helifreak Limited",
+   "sector": [
+    "industria de internet",
+    "mercadotecnia"
+   ],
+   "empleados": {
+    "n": 1531,
+    "anio": 2020
+   },
+   "direccion": {
+    "texto": "Radlická 3294/10, 150 00 Praga 5, Chequia",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/3157008DY7NRFD22D743",
+    "oficial": true
+   },
+   "lonlat": [
+    14.40093,
+    50.07108
+   ]
+  },
+  "Shopify": {
+   "cc": "CA",
+   "slug": "shopify",
+   "web": "https://www.shopify.com/",
+   "wikidata": "Q7501150",
+   "wikipedia": "https://es.wikipedia.org/wiki/Shopify",
+   "sede": "Ottawa",
+   "sede_pais": "CA",
+   "fundada": 2006,
+   "sector": [
+    "comercio electrónico"
+   ],
+   "empleados": {
+    "n": 8300,
+    "anio": 2023
+   },
+   "bolsa": [
+    "Toronto Stock Exchange: SHOP",
+    "New York Stock Exchange: SHOP"
+   ],
+   "direccion": {
+    "texto": "151 O'Connor Street, Ground Floor, Ottawa, ON K2P 2L8, Canadá",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001594805",
+    "oficial": true
+   },
+   "lonlat": [
+    -75.69705,
+    45.41999
+   ]
+  },
+  "Sky": {
+   "cc": "GB",
+   "wikidata": "Q918390",
+   "wikipedia": "https://es.wikipedia.org/wiki/Sky_%28empresa%29",
+   "nombre_oficial": "Sky Group Limited",
+   "sede": "Isleworth",
+   "sede_pais": "GB",
+   "fundada": 1990,
+   "matriz": "Comcast",
+   "sector": [
+    "industria mediática"
+   ],
+   "web": "https://www.skygroup.sky/",
+   "direccion": {
+    "texto": "Grant Way, Isleworth, Middlesex TW7 5QD, Reino Unido",
+    "voces": [
+     "companies_house",
+     "wikidata"
+    ],
+    "fuente": "https://find-and-update.company-information.service.gov.uk/company/02906991",
+    "oficial": true
+   },
+   "lonlat": [
+    -0.32756,
+    51.48936
+   ],
+   "foto": {
+    "archivo": "empresa-sky.jpg",
+    "ancho": 640,
+    "alto": 425,
+    "autor": "Photo: Andreas Praefcke",
+    "licencia": "Public domain",
+    "url_licencia": "",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Sky_campus_in_2011.jpg",
+    "que": "Campus de Sky en Isleworth (Londres)"
+   }
+  },
+  "Snap": {
+   "cc": "US",
+   "slug": "snap",
+   "web": "https://www.snap.com/",
+   "wikidata": "Q27022329",
+   "wikipedia": "https://es.wikipedia.org/wiki/Snap_Inc.",
+   "nombre_oficial": "Snap Inc.",
+   "sede": "Santa Mónica",
+   "sede_pais": "US",
+   "fundada": 2011,
+   "sector": [
+    "fotografía",
+    "tecnología"
+   ],
+   "bolsa": [
+    "New York Stock Exchange: SNAP"
+   ],
+   "direccion": {
+    "texto": "3000 31st Street, Santa Monica, CA 90405, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001564408",
+    "oficial": true
+   },
+   "lonlat": [
+    -118.45158,
+    34.01948
+   ]
+  },
+  "Sovrn": {
+   "cc": "US",
+   "slug": "sovrn",
+   "web": "https://www.sovrn.com/",
+   "wikidata": "Q22908948",
+   "wikipedia": "https://en.wikipedia.org/wiki/Sovrn_Holdings",
+   "sede": "Boulder",
+   "sede_pais": "US",
+   "sector": [
+    "Adtech"
+   ],
+   "direccion": {
+    "texto": "1600 Pearl Street, Suite 200, Boulder, CO 80302, EE. UU.",
+    "voces": [
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    -105.27413,
+    40.01881
+   ]
+  },
+  "Taboola": {
+   "cc": "US",
+   "slug": "taboola",
+   "web": "https://www.taboola.com/",
+   "wikidata": "Q18154756",
+   "wikipedia": "https://es.wikipedia.org/wiki/Taboola",
+   "sede": "Nueva York",
+   "sede_pais": "US",
+   "fundada": 2007,
+   "sector": [
+    "industria del software",
+    "industria publicitaria"
+   ],
+   "bolsa": [
+    "Nasdaq: TBLA"
+   ],
+   "direccion": {
+    "texto": "16 Madison Square West, 7th Floor, New York, NY 10010, EE. UU.",
+    "voces": [
+     "sec",
+     "cppa"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001840502",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.98933,
+    40.74281
+   ]
+  },
+  "Teads": {
+   "cc": "US",
+   "slug": "teads",
+   "web": "https://www.teads.com/",
+   "wikidata": "Q28872999",
+   "sede": "Nueva York",
+   "sede_pais": "US",
+   "fundada": 2005,
+   "direccion": {
+    "texto": "111 West 19th Street, New York, NY 10011, EE. UU.",
+    "voces": [
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.99541,
+    40.74089
+   ]
+  },
+  "Tealium": {
+   "cc": "US",
+   "wikidata": "Q18636415",
+   "wikipedia": "https://en.wikipedia.org/wiki/Tealium",
+   "sede": "San Diego",
+   "sede_pais": "US",
+   "fundada": 2008,
+   "web": "http://www.tealium.com",
+   "direccion": {
+    "texto": "9605 Scranton Road, San Diego, CA 92121, EE. UU.",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/25490022SLQK4828KO50",
+    "oficial": true
+   },
+   "lonlat": [
+    -117.20268,
+    32.89548
+   ]
+  },
+  "The Trade Desk": {
+   "cc": "US",
+   "slug": "the-trade-desk",
+   "web": "https://www.thetradedesk.com/",
+   "wikidata": "Q60744565",
+   "wikipedia": "https://en.wikipedia.org/wiki/The_Trade_Desk",
+   "sede": "Ventura",
+   "sede_pais": "US",
+   "fundada": 2009,
+   "sector": [
+    "publicidad en Internet"
+   ],
+   "bolsa": [
+    "Nasdaq: TTD"
+   ],
+   "direccion": {
+    "texto": "42 N. Chestnut Street, Ventura, CA 93001, EE. UU.",
+    "voces": [
+     "sec"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001671933",
+    "oficial": true
+   },
+   "lonlat": [
+    -119.2913,
+    34.28142
+   ]
+  },
+  "The Walt Disney Company": {
+   "cc": "US",
+   "wikidata": "Q7414",
+   "wikipedia": "https://es.wikipedia.org/wiki/The_Walt_Disney_Company",
+   "nombre_oficial": "The Walt Disney Company",
+   "sede": "Burbank",
+   "sede_pais": "US",
+   "fundada": 1923,
+   "sector": [
+    "industria mediática",
+    "industria turística"
+   ],
+   "empleados": {
+    "n": 223000,
+    "anio": 2019
+   },
+   "bolsa": [
+    "New York Stock Exchange: DIS"
+   ],
+   "web": "https://thewaltdisneycompany.com/",
+   "direccion": {
+    "texto": "500 South Buena Vista Street, Burbank, CA 91521, EE. UU.",
+    "voces": [
+     "sec",
+     "wikidata"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001744489",
+    "oficial": true
+   },
+   "lonlat": [
+    -118.3265,
+    34.15513
+   ]
+  },
+  "TripleLift": {
+   "cc": "US",
+   "slug": "triplelift",
+   "web": "https://triplelift.com/",
+   "wikidata": "Q141737098",
+   "sede": "Nueva York",
+   "sede_pais": "US",
+   "fundada": 2012,
+   "sector": [
+    "publicidad en Internet",
+    "publicidad nativa"
+   ],
+   "direccion": {
+    "texto": "53 West 23rd Street, 12th Floor, New York, NY, EE. UU.",
+    "voces": [
+     "wikidata",
+     "cppa"
+    ],
+    "fuente": "https://cppa.ca.gov/data_broker_registry/",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.99158,
+    40.74263
+   ]
+  },
+  "Unidad Editorial": {
+   "cc": "ES",
+   "wikidata": "Q2056424",
+   "wikipedia": "https://es.wikipedia.org/wiki/Unidad_Editorial",
+   "sede": "España",
+   "sede_pais": "ES",
+   "fundada": 2007,
+   "matriz": "RCS MediaGroup",
+   "sector": [
+    "medio de comunicación de masas"
+   ],
+   "web": "http://www.unidadeditorial.com/",
+   "direccion": {
+    "texto": "Avenida de San Luis 25, 28033 Madrid, España",
+    "voces": [
+     "gleif"
+    ],
+    "fuente": "https://search.gleif.org/#/record/959800PSK3FFF8EYX760",
+    "oficial": true
+   },
+   "lonlat": [
+    -3.65679,
+    40.47107
+   ]
+  },
+  "Zeta Global": {
+   "cc": "US",
+   "wikidata": "Q8069710",
+   "wikipedia": "https://en.wikipedia.org/wiki/Zeta_Global",
+   "nombre_oficial": "Zeta Global",
+   "sede": "Nueva York",
+   "sede_pais": "US",
+   "fundada": 2008,
+   "sector": [
+    "business software industry"
+   ],
+   "bolsa": [
+    "New York Stock Exchange: ZETA"
+   ],
+   "web": "https://zetaglobal.com/",
+   "direccion": {
+    "texto": "3 Park Avenue, 33rd Floor, New York, NY 10016, EE. UU.",
+    "voces": [
+     "sec",
+     "cppa"
+    ],
+    "fuente": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001851003",
+    "oficial": true
+   },
+   "lonlat": [
+    -73.981,
+    40.74648
+   ]
+  }
+ }
+}

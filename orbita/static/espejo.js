@@ -32,6 +32,43 @@
   // a small, stable number from a text: each company keeps its place in the fan and the rhythm of its pulses
   const semilla = (s) => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return ((h >>> 0) % 10000) / 10000; };
 
+  // ---------- the company cards (owner, 24 Oct 2026: headquarters, address and photo; design approved at 20:27) ----------
+  let EMP = null;  // datos/empresas.json: name → { sede, direccion, lonlat, foto, fundada, … }
+  function cargaEmpresas() {
+    if (!cargaEmpresas.p) cargaEmpresas.p = fetch('datos/empresas.json', { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).then((j) => (EMP = (j && j.empresas) || {})).catch(() => (EMP = {}));
+    return cargaEmpresas.p;
+  }
+  const VOZ = { sec: 'registro oficial de la SEC (EE. UU.)', sirene: 'registro oficial SIRENE (Francia)', gleif: 'registro mundial de entidades jurídicas (LEI)', cppa: 'registro de corredores de datos de California', companies_house: 'Companies House, registro oficial del Reino Unido', wikidata: 'Wikidata', osm: 'OpenStreetMap' };
+  const OFICIAL = new Set(['sec', 'sirene', 'gleif', 'cppa', 'companies_house']);
+  const mayus = (t) => t ? t.charAt(0).toUpperCase() + t.slice(1) : t;
+  function deDonde(d) {
+    const v = (d && d.voces) || [], of = v.filter((x) => OFICIAL.has(x)), otras = v.filter((x) => !OFICIAL.has(x));
+    const y = (l) => l.length > 1 ? l.slice(0, -1).join(', ') + ' ' + T('y') + ' ' + l[l.length - 1] : (l[0] || '');
+    if (of.length) return mayus(y(of.map((x) => T(VOZ[x] || x)))) + (otras.length ? '; ' + T('coincide con') + ' ' + y(otras.map((x) => T(VOZ[x] || x))) : '');
+    return T('Coinciden') + ' ' + y(otras.map((x) => T(VOZ[x] || x)));
+  }
+  function fichaEmpresa(e) {
+    const d = EMP && EMP[e.nombre]; if (!d) return null;
+    const of = d.nombre_oficial || '', titulo = of && of.toLowerCase() !== e.nombre.toLowerCase() && of !== of.toUpperCase() ? of : e.nombre;
+    const donde = [d.sede, d.sede_pais ? paisNombre(d.sede_pais) : ''].filter(Boolean).join(', ');
+    const que = [...(e.cats || [])].map((c) => T(CATS[c] || c)).join(' · ');
+    const emp = d.empleados && d.empleados.n ? num(d.empleados.n) + (d.empleados.anio ? ' (' + d.empleados.anio + ')' : '') : '';
+    const resumen = [
+      [T('Dirección'), d.direccion ? d.direccion.texto : ''],
+      [T('De dónde sale'), d.direccion ? deDonde(d.direccion) : ''],
+      [T('Fundada'), d.fundada ? String(d.fundada) : ''],
+      [T('Empleados'), emp],
+      [T('Bolsa'), (d.bolsa || []).join(' · ')],
+    ];
+    const ll = d.lonlat;
+    return { empresa: true, tipo: T('Empresa · Sede'), titulo, sub: [que, donde].filter(Boolean).join(' · '), resumen, secciones: [], foto: d.foto || null,
+             mapa: ll ? { lon: ll[0], lat: ll[1] } : null, ir: ll ? { lon: ll[0], lat: ll[1], z: 400 } : null, pie: T('Datos verificados') };
+  }
+  function abreEmpresa(e, x, y) {
+    const m = fichaEmpresa(e), C = window.OrbitaCapas;
+    if (m && C && C.abreFicha) C.abreFicha(m, x, y);
+  }
+
   function carga() {
     if (!carga.p) carga.p = fetch('datos/espejo.json', { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((j) => (D = j)).catch((e) => { carga.p = null; throw e; });
     return carga.p;
@@ -366,7 +403,7 @@
     lista.querySelector('.cerrar').addEventListener('click', () => muestraLista(false));
     return lista;
   }
-  function muestraLista(si) { montaLista(); lista.hidden = !si; if (si) pintaLista(); }
+  function muestraLista(si) { montaLista(); lista.hidden = !si; if (si) { pintaLista(); if (!EMP) cargaEmpresas().then(pintaLista); } }
   function pintaLista() {
     if (!lista || lista.hidden || !E) return;
     const cuerpo = lista.querySelector('.cuerpo'); cuerpo.textContent = '';
@@ -384,6 +421,11 @@
         if (E.modo === 'con') { const x = document.createElement('em'); x.textContent = cortada ? 'Cortada' : e.corta ? 'Cortada en parte' : 'Se queda'; x.className = cortada ? 'corte' : e.corta ? 'parte' : 'queda'; cats.append(x); }
         li.append(cats);
         const d = document.createElement('small'); d.textContent = e.dominios.join(' · '); d.setAttribute('translate', 'no'); li.append(d);
+        if (EMP && EMP[e.nombre]) {
+          li.classList.add('con-ficha'); li.tabIndex = 0; li.setAttribute('role', 'button'); li.title = T('Ver la ficha de la empresa');
+          li.addEventListener('click', (ev) => { ev.stopPropagation(); abreEmpresa(e, ev.clientX, ev.clientY); });
+          li.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); const r = li.getBoundingClientRect(); abreEmpresa(e, r.left, r.top); } });
+        }
         ul.append(li);
       });
       g.append(ul); cuerpo.append(g);

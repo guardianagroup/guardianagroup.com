@@ -51,32 +51,5 @@
    "https://www.afh.com.mx/estudios-representativos-de-transporte.html",
    "https://colectivopericu.news/2022/06/02/gracias-al-cable-submarino-mejores-telecomunicaciones-en-bcs/"
   ]
- },
- {
-  "nombre": "Trans-Cook Strait Cable (Aquatronics)",
-  "llegadas": [
-   {
-    "lugar": "Oteranga Bay",
-    "pais": "NZ",
-    "lat": -41.2991,
-    "lon": 174.6256
-   },
-   {
-    "lugar": "Fighting Bay",
-    "pais": "NZ",
-    "lat": -41.3205,
-    "lon": 174.202
-   }
-  ],
-  "anio": 2020,
-  "km": 0,
-  "duenos": [
-   "Transpower New Zealand"
-  ],
-  "fuentes": [
-   "https://www.transpower.co.nz/news/submarine-telecommunications-cable-deployment-and-removal-successful",
-   "https://www.transpower.co.nz/news/new-telecommunications-cable-cook-strait",
-   "https://www.transpower.co.nz/cook-strait-cable-protection-zone-cpz"
-  ]
  }
 ]
