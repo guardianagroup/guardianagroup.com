@@ -1,0 +1,62 @@
+[
+ {
+  "problema": "Los trazados aproximados y los cables previstos utilizan el mismo discontinuo. Se confunde una infraestructura operativa cuya ruta es estimada con otra que todavía no existe.",
+  "propuesta": "Reservar línea continua para infraestructura en servicio con trazado conocido, guiones largos para infraestructura en servicio con recorrido aproximado y puntos cortos para proyectos. Mostrar los proyectos únicamente al activar «Previstos», desactivado por defecto. Incluir estas tres convenciones en la leyenda.",
+  "prioridad": "alta",
+  "por_que": "Distinguir la existencia real de una infraestructura de la precisión de su trazado es fundamental para que el mapa resulte fiable."
+ },
+ {
+  "problema": "El mismo dorado, lavanda, verde agua y gris significa capacidad en cables submarinos, pero jerarquía o longitud en fibra terrestre. Además, el gris representa capacidad desconocida en el mar y enlaces cortos en tierra.",
+  "propuesta": "Conservar los cuatro colores actuales, pero añadir dos leyendas independientes: «Submarinos · capacidad en Tbit/s» y «Terrestres · jerarquía de red». Diferenciar visualmente las familias con un trazo submarino más grueso y ligeramente luminoso frente al terrestre fino y sin halo permanente. Añadir un símbolo «?» al consultar cables sin capacidad publicada.",
+  "prioridad": "alta",
+  "por_que": "Evita que dos colores idénticos se interpreten como magnitudes equivalentes cuando representan datos diferentes."
+ },
+ {
+  "problema": "Centros de datos, puntos de intercambio y ciudades utilizan tonos azules próximos. En concentraciones urbanas y sobre el mapa gris pueden confundirse.",
+  "propuesta": "Mantener centros de datos como anillos concéntricos azules rgb(77,166,255). Convertir los IXP en pequeños rombos rellenos azul acero rgb(156,195,228). Representar las ciudades mediante puntos sólidos discretos rgb(190,205,220), sin anillo. Mantener etiquetas blancas y hacer que la forma identifique la categoría incluso sin distinguir el color.",
+  "prioridad": "alta",
+  "por_que": "La combinación de forma y color diferencia tres elementos que frecuentemente comparten las mismas coordenadas."
+ },
+ {
+  "problema": "Las llegadas de cables, las bases polares y las estaciones terrestres de satélites comparten el anillo blanco con punto central. El usuario no puede reconocer qué infraestructura está viendo sin abrirla.",
+  "propuesta": "Conservar el anillo blanco para las llegadas de cables. Utilizar triángulo blanco para estaciones terrestres de satélites, hexágono blanco para bases polares y mantener el cuadrado blanco para plataformas petrolíferas. Dar a cada símbolo un tamaño mínimo visible y mostrar su categoría en la leyenda.",
+  "prioridad": "alta",
+  "por_que": "Cuatro siluetas diferentes permiten reconocer inmediatamente infraestructuras distintas sin introducir más colores."
+ },
+ {
+  "problema": "El lavanda rgb(196,170,245) y el gris rgb(176,178,190) pueden resultar visualmente próximos cuando los trazos son muy finos. Las luces nocturnas de la Tierra también compiten con el dorado y el verde agua.",
+  "propuesta": "Mantener la paleta, pero añadir un contorno oscuro de 1 píxel a los cables en el modo NASA, reforzar ligeramente el contraste de los trazos finos y establecer un grosor mínimo visible de aproximadamente 1,5 píxeles CSS. En el mapa limpio, evitar halos permanentes en cables pequeños. Ofrecer un ajuste «Alto contraste» que aumente grosores y separación tonal sin sustituir el diseño original.",
+  "prioridad": "alta",
+  "por_que": "Mejora la lectura en pantallas pequeñas, monitores de bajo contraste y distintas condiciones visuales sin alterar la identidad cromática."
+ },
+ {
+  "problema": "Aunque rojo y coral están reservados para cortes, las personas con daltonismo rojo-verde pueden tener dificultades para distinguir ciertas señales verdes de las alertas rojas, especialmente en líneas pequeñas y animadas.",
+  "propuesta": "Conservar rojo y coral exclusivamente para incidencias, pero acompañar cada corte de un aspa «×» o símbolo de interrupción, un pequeño destello inicial y una etiqueta textual «CORTADO». Mostrar el tramo afectado mediante una discontinuidad visual o una marca transversal, sin depender únicamente del cambio de color. Evitar parpadeos repetitivos.",
+  "prioridad": "alta",
+  "por_que": "Un corte debe ser reconocible por su forma y estado, no solo por su color, y claramente distinto de un cable operativo."
+ },
+ {
+  "problema": "La iluminación al pasar el ratón funciona bien en escritorio, pero no existe hover en pantallas táctiles y los usuarios que navegan con teclado pueden quedarse sin una indicación equivalente.",
+  "propuesta": "Mantener el resaltado en el color propio de cada elemento. Añadir selección por toque o clic, foco visible mediante el mismo color más un contorno de alto contraste, y una ficha persistente hasta cerrar o seleccionar otro elemento. Permitir recorrer los elementos mediante una lista accesible con teclado, acompañada de nombres y tipos interpretables por lectores de pantalla. Usar áreas táctiles de al menos 24 × 24 píxeles CSS, preferiblemente 44 × 44.",
+  "prioridad": "alta",
+  "por_que": "Extiende la interacción existente a móviles, teclado y tecnologías de asistencia sin cambiar su estética."
+ },
+ {
+  "problema": "En ciudades con muchos centros de datos, IXP, llegadas de cables y etiquetas, los símbolos pueden superponerse. El tamaño creciente de los anillos de centros de datos puede ocultar elementos próximos.",
+  "propuesta": "Escalar los anillos de centros de datos mediante una función sublineal, por ejemplo radio proporcional a la raíz cuadrada del número de centros, estableciendo un radio máximo. Agrupar puntos coincidentes a escalas lejanas y desplegarlos al acercarse o seleccionarlos. Priorizar etiquetas por nivel de zoom y evitar colisiones entre nombres de ciudades, países e infraestructuras.",
+  "prioridad": "media",
+  "por_que": "Reduce la saturación visual sin eliminar información ni penalizar a las ciudades con redes especialmente densas."
+ },
+ {
+  "problema": "Las luces que recorren los cables, los satélites y los efectos de incidencias producen varios movimientos simultáneos. Pueden distraer, dificultar el seguimiento de rutas y afectar a personas sensibles al movimiento.",
+  "propuesta": "Mantener las animaciones como parte de la identidad de Órbita, pero añadir un selector «Movimiento: normal / reducido / detenido» y respetar automáticamente prefers-reduced-motion. En movimiento reducido, sustituir luces viajeras por líneas estáticas y transiciones suaves. Reducir automáticamente la densidad de partículas cuando se activan simultáneamente varias capas.",
+  "prioridad": "media",
+  "por_que": "Preserva el atractivo del globo animado y permite una exploración más cómoda y accesible."
+ },
+ {
+  "problema": "El cambio entre el planeta fotográfico de la NASA y el mapa gris limpio, aproximadamente a cuatro aumentos, puede desorientar al usuario y alterar bruscamente la percepción de los colores.",
+  "propuesta": "Sustituir el cambio instantáneo por una transición cruzada de aproximadamente 400–600 milisegundos, conservando posición, orientación y escala. Mostrar discretamente «Vista Tierra» o «Vista infraestructura» durante el cambio y ofrecer un selector manual para fijar cualquiera de las dos vistas. Con movimiento reducido, realizar el cambio sin animación.",
+  "prioridad": "baja",
+  "por_que": "Hace más natural la transición entre dos modos visuales que ya funcionan y evita que el usuario pierda su referencia espacial."
+ }
+]

@@ -160,6 +160,24 @@ SITIOS = {
     ('SJ', 'nybyen'): (15.588, 78.201), ('SJ', 'hotellneset'): (15.488, 78.249), ('SJ', 'adventdalen'): (15.895, 78.197),
     ('PM', 'savoyard'): (-56.240, 46.764), ('PM', 'langlade'): (-56.318, 46.848),
     ('WF', 'hihifo'): (-176.199, -13.240),  # Nominatim gives Hihifo's airfield, in the district's centre
+    # round 27 (25 Oct 2026): the towns of the radio chains (radio_agencia.py), from Nominatim (OpenStreetMap)
+    ('GL', 'kulusuk'): (-37.187, 65.576), ('GL', 'siorapaluk'): (-70.633, 77.785), ('GL', 'saqqaq'): (-51.943, 70.011),
+    ('GL', 'kullorsuaq'): (-57.220, 74.579), ('GL', 'qassiarsuk'): (-45.517, 61.155), ('GL', 'narsarsuaq'): (-45.424, 61.156),
+    ('GL', 'alluitsuppaa'): (-45.569, 60.463), ('GL', 'aappilattoq'): (-44.285, 60.151),
+    ('ER', 'nefasit'): (39.064, 15.334), ('ER', 'ghinda'): (39.091, 15.445), ('ER', 'elabered'): (38.628, 15.709),
+    ('ER', 'hagaz'): (38.271, 15.703), ('ER', 'haykota'): (37.081, 15.184), ('ER', 'haikota'): (37.081, 15.184),
+    ('ER', 'tessenei'): (36.660, 15.109), ('ER', 'teseney'): (36.660, 15.109), ('ER', 'adiquala'): (38.834, 14.634),
+    ('ER', 'tio'): (40.959, 14.690), ('ER', 'nakfa'): (38.477, 16.666), ('ER', 'aditekelezan'): (38.778, 15.565),
+    ('ER', 'segheneyti'): (39.189, 15.053), ('ER', 'senafe'): (39.424, 14.702), ('ER', 'himberti'): (38.736, 15.255),
+    ('ER', 'himbirti'): (38.736, 15.255), ('ER', 'foro'): (39.622, 15.263),
+    ('FK', 'mountpleasant'): (-58.450, -51.820), ('FK', 'goosegreen'): (-58.973, -51.828), ('FK', 'porthoward'): (-59.521, -51.611),
+    ('FK', 'foxbay'): (-60.071, -51.956),
+    ('TO', 'angaha'): (-174.957, -21.363), ('TO', 'ohonua'): (-174.956, -21.341),
+    ('KI', 'buariki'): (172.955, 1.609), ('KI', 'rawannawi'): (173.263, 2.052), ('KI', 'rawanawi'): (173.263, 2.052),
+    ('KI', 'tebwangetua'): (173.040, 0.938),
+    ('PW', 'ollei'): (134.614, 7.719), ('PW', 'orukei'): (134.718, 8.083), ('PW', 'ngeremasch'): (134.132, 6.903),
+    ('PW', 'kayangel'): (134.719, 8.082),
+    ('MH', 'ine'): (171.698, 6.985), ('MH', 'kwajalein'): (167.735, 8.720), ('MH', 'ebeye'): (167.737, 8.784),
 }
 
 PARECIDO = 1.35  # the other voice's path between two cities may be this much longer than the straight line (+ 60 km)

@@ -1,0 +1,17 @@
+Eres diseñadora de visualización de datos y cartografía (accesibilidad incluida). Revisa la paleta y el diseño de este mapa interactivo y dinos qué se confunde, qué conviene diferenciar y qué mejorarías. El dueño cree que está bastante bien: no propongas rehacerlo, sino ajustes concretos.
+
+El mapa: «Órbita» (guardianagroup.com/orbita/), un globo 3D oscuro de la infraestructura de internet.
+- Fondo: negro con estrellas. El planeta se ve en color (imagen de la NASA, con luces nocturnas) y, al acercarse (unas 4 veces), pasa a un mapa «limpio»: tierra gris oscuro, mar casi negro, fronteras en blanco translúcido.
+- Cables submarinos: color por capacidad, los mismos colores que la fibra por tierra: dorado cobrizo rgb(200,136,88) los gigantes (100 Tbit/s o más, más gruesos y con halo), lavanda rgb(196,170,245) los grandes (20–100 Tbit/s), verde agua rgb(112,222,200) los regionales (menos de 20), gris rgb(176,178,190) sin dato de capacidad. Discontinuos los de trazado aproximado y los previstos. Luces que recorren los cables («datos que van y vienen»).
+- Cables por tierra (otra capa): dorado las grandes troncales, lavanda las rutas largas, verde agua las rutas entre ciudades, gris los enlaces cortos; son más finos que los submarinos.
+- Donde llega un cable a tierra: punto blanco con anillo, y el nombre del pueblo en blanco con halo oscuro.
+- Centros de datos: anillos azules rgb(77,166,255); el anillo crece con el número de centros de la ciudad. «Grandes operadores» (compañías con 5 o más) y «otros».
+- Puntos de intercambio de internet: azul acero claro rgb(156,195,228).
+- Bases polares y estaciones de satélites: anillo blanco con punto. Plataformas petrolíferas donde acaba un cable: cuadradito blanco.
+- Satélites: puntos en tres órbitas (baja, media, geoestacionaria), que se encienden por capas.
+- Ciudades: punto azul claro y nombre blanco con halo. Países: nombre en mayúsculas espaciadas, blanco con halo.
+- Rojo y coral se reservan para los cortes de internet.
+- Al pasar el ratón, un elemento se ilumina en su propio color, más brillante y ancho (nunca en blanco).
+
+Responde SOLO con un array JSON válido, de 5 a 10 propuestas ordenadas de más a menos importante, sin texto antes ni después:
+[{"problema": "qué se confunde o se ve mal, y para quién (por ejemplo, daltonismo rojo-verde, móvil, mapa gris)", "propuesta": "el cambio concreto (colores en rgb si cambias alguno)", "prioridad": "alta / media / baja", "por_que": "una frase"}]
