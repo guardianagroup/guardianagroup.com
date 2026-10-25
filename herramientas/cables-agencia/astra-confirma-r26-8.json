@@ -1,0 +1,28 @@
+[
+ {
+  "nombre": "WARF Submarine Cable",
+  "llegadas": [
+   {
+    "lugar": "Thiruvananthapuram",
+    "pais": "IN",
+    "lat": 8.4855,
+    "lon": 76.94924
+   },
+   {
+    "lugar": "Hulhumale",
+    "pais": "MV",
+    "lat": 4.21169,
+    "lon": 73.54008
+   }
+  ],
+  "anio": 2007,
+  "km": null,
+  "duenos": [
+   "WARF Telecom International Pvt Ltd"
+  ],
+  "fuentes": [
+   "Ooredoo Maldives Plc, Annual Report 2024, información sobre WARF Telecom International Pvt Ltd.",
+   "WARF Telecom International Pvt Ltd, operador del sistema."
+  ]
+ }
+]

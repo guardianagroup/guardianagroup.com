@@ -1,0 +1,28 @@
+[
+  {
+    "nombre": "Puerto Montt-Puerto Chacabuco",
+    "llegadas": [
+      {
+        "lugar": "Puerto Montt",
+        "pais": "CL",
+        "lat": -41.4693,
+        "lon": -72.9424
+      },
+      {
+        "lugar": "Puerto Chacabuco",
+        "pais": "CL",
+        "lat": -45.4667,
+        "lon": -72.8167
+      }
+    ],
+    "anio": 2007,
+    "km": 400,
+    "duenos": [
+      "Telefónica del Sur (Grupo Gtd)"
+    ],
+    "fuentes": [
+      "Telefónica del Sur, información corporativa y de infraestructura: https://www.telsur.cl/",
+      "Grupo Gtd, información de su red de telecomunicaciones: https://www.gtd.cl/"
+    ]
+  }
+]

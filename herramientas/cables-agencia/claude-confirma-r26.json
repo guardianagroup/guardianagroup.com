@@ -1,0 +1,53 @@
+[
+ {
+  "nombre": "TMX5",
+  "llegadas": [
+   {
+    "lugar": "San José del Cabo",
+    "pais": "MX",
+    "lat": 23.0592,
+    "lon": -109.6976
+   },
+   {
+    "lugar": "Mazatlán",
+    "pais": "MX",
+    "lat": 23.2329,
+    "lon": -106.4062
+   }
+  ],
+  "anio": 2025,
+  "km": 383,
+  "duenos": [
+   "Telmex"
+  ],
+  "fuentes": [
+   "Telmex, comunicado «TELMEX pone en operación el Cable Submarino de San José del Cabo a Mazatlán» (23-9-2025): https://telmex.com/web/acerca-de-telmex/w/telmex-pone-en-opercion-el-cable-submarino-de-san-jose-del-cabo-a-mazatlan"
+  ]
+ },
+ {
+  "nombre": "PENBAL-5",
+  "llegadas": [
+   {
+    "lugar": "Gavà",
+    "pais": "ES",
+    "lat": 41.2733,
+    "lon": 2.0094
+   },
+   {
+    "lugar": "Ses Covetes",
+    "pais": "ES",
+    "lat": 39.3647,
+    "lon": 2.9744
+   }
+  ],
+  "anio": 1995,
+  "km": null,
+  "duenos": [
+   "Telefónica"
+  ],
+  "fuentes": [
+   "Ministerio de Defensa (IEEE), «España en la red global de cables submarinos»: PENBAL-5, Gavà–Ses Covetes, 1995",
+   "CNMC, informe de conectividad de los archipiélagos (2025): PENBAL-5 de Telefónica, en servicio desde 1995, operativo en junio de 2024"
+  ]
+ }
+]

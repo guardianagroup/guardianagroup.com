@@ -571,7 +571,7 @@
   //   0 · regional: the rest — from ×6
   const claveCorredor = (l) => { const a = l.x.l[0], b = l.x.l[l.x.l.length - 1]; const k = (q) => Math.round(q[0] * 2) + ',' + Math.round(q[1] * 2); const ka = k(a), kb = k(b); return ka < kb ? ka + '|' + kb : kb + '|' + ka; };
   function preparaNiveles() {
-    if (FT.corr) return;
+    if (!FT || !FT.lineas || FT.corr) return; // 24 Oct 2026 (QA): before the land cables have loaded
     FT.corr = new Map(); // corridor → the companies that run a line along it (one company drawing it twice counts once)
     for (const l of FT.lineas) { l.corr = claveCorredor(l); if (!FT.corr.has(l.corr)) FT.corr.set(l.corr, new Set()); FT.corr.get(l.corr).add(l.x.o || l.x.n || ''); }
     for (const l of FT.lineas) { const km = l.x.km || 0, c = FT.corr.get(l.corr).size || 1; l.nivel = km >= 800 || (c >= 4 && km >= 250) ? 3 : km >= 400 || (c >= 3 && km >= 150) ? 2 : km >= 150 ? 1 : 0; }
@@ -580,6 +580,7 @@
   // how much of a level shows at this zoom: 0 hidden, 1 fully there
   const fundidoNivel = (n, z) => n === 3 ? 1 : n === 2 ? aparece((z - 1.5) / 0.6) : n === 1 ? aparece((z - 2.6) / 1.0) : aparece((z - 6) / 2);
   function fibraVisible(z) {
+    if (!FT || !FT.lineas) return [];
     preparaNiveles();
     const paso = Math.round(z * 20) / 20 + '|' + claveClases('fibra'); // recomputed only when the zoom moves a notch or a class changes
     if (FT.vis && FT.vis.paso === paso) return FT.vis.lineas;
@@ -1600,7 +1601,7 @@
   function panel() {
     let p = $('ficha-panel'); if (p) return p;
     p = document.createElement('aside'); p.id = 'ficha-panel'; p.className = 'ficha-panel'; p.hidden = true; p.setAttribute('aria-label', T('Ficha'));
-    p.innerHTML = '<div class="asa" aria-hidden="true"></div><div class="cab"><span class="tipo"></span><span class="botones"><button type="button" class="atras" hidden>‹</button><button type="button" class="cerrar" aria-label="' + T('Cerrar') + '">×</button></span></div><figure class="foto" hidden><img alt="" decoding="async"><figcaption></figcaption></figure><h2 class="tit"></h2><p class="sub"></p><dl class="sat-dl resumen"></dl><div class="secs"></div><div class="acciones"><button type="button" class="copiar">' + T('Copiar ficha') + '</button><button type="button" class="pdf">' + T('Guardar PDF') + '</button></div><p class="pie"></p>';
+    p.innerHTML = '<div class="asa" aria-hidden="true"></div><div class="cab"><span class="tipo"></span><span class="botones"><button type="button" class="atras" hidden>‹</button><button type="button" class="cerrar" aria-label="' + T('Cerrar') + '">×</button></span></div><figure class="foto" hidden><img alt="" decoding="async"><figcaption></figcaption></figure><h2 class="tit"></h2><p class="sub"></p><dl class="sat-dl resumen"></dl><div class="secs"></div><figure class="foto mapa" hidden><canvas width="804" height="280" aria-hidden="true"></canvas></figure><div class="acciones"><button type="button" class="ir" hidden>' + T('Verla en Órbita') + '</button><button type="button" class="copiar">' + T('Copiar ficha') + '</button><button type="button" class="pdf">' + T('Guardar PDF') + '</button></div><p class="pie"></p>';
     document.body.append(p);
     p.querySelector('.cerrar').addEventListener('click', cierraPanel);
     p.querySelector('.asa').addEventListener('click', () => p.classList.toggle('alta'));
@@ -1677,6 +1678,13 @@
       secs.append(d);
     });
     pintaFoto(p.querySelector('.foto'), m.foto, m.titulo);
+    // 24 Oct 2026 (company card, approved by the owner at 20:27): a small map of where it is, and a button that flies the
+    // planet there; the other cards do not use them
+    p.classList.toggle('empresa', !!m.empresa);
+    const fm = p.querySelector('figure.mapa');
+    if (fm) { fm.hidden = !m.mapa; if (m.mapa) miniMapa(fm.querySelector('canvas'), m.mapa.lon, m.mapa.lat); }
+    const bi = p.querySelector('.ir');
+    if (bi) { bi.hidden = !m.ir; bi.onclick = m.ir ? () => { cierraPanel(); const ES = window.OrbitaEspejo; if (ES && ES.activo) ES.cierra(); const PL = window.OrbitaPlaneta; if (PL && PL.ir) PL.ir(m.ir.lon, m.ir.lat, m.ir.z || 400); } : null; }
     p.querySelector('.pie').textContent = m.pie || ''; p.querySelector('.atras').hidden = historial.length < 2;
     p.hidden = false; p.scrollTop = 0; p.classList.remove('alta');
     // On a computer the full card opens where the pointer is, whole, never cut by the edges; if there is no room
@@ -1724,7 +1732,35 @@
   const pliegaF = (s) => String(s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
   const pideFotos = () => cargaFotos || (cargaFotos = cargaJSON('datos/fotos.json').then((d) => { FOTOS = d.fotos || {}; return FOTOS; }).catch(() => { FOTOS = {}; return FOTOS; }));
   const fotoDe = (tipo, id) => (FOTOS && id != null ? FOTOS[tipo + '-' + pliegaF(id)] || null : null);
-  const creditoFoto = (fo) => T('Foto') + ': ' + (fo.autor || T('autor sin nombre')) + ' · ' + (fo.licencia || '') + ' · Wikimedia Commons';
+  // the author as Commons gives it, tidied («The original uploader was X at English Wikipedia.» → «X (Wikipedia en inglés)»)
+  const ACENTO_RGB = '156,195,228';
+  const autorLimpio = (a) => {
+    let t = String(a || '').trim().replace(/^The original uploader was\s+/i, '').replace(/^(Photo|Foto|Photograph):\s*/i, '').replace(/^User:?\s+/i, '');
+    t = t.replace(/\s+at\s+English Wikipedia\.?$/i, ' (' + T('Wikipedia en inglés') + ')').replace(/\.$/, '');
+    return t.length > 70 ? t.slice(0, 68).trim() + '…' : t;
+  };
+  const creditoFoto = (fo) => T('Foto') + ': ' + (autorLimpio(fo.autor) || T('autor sin nombre')) + ' · ' + (fo.licencia || '') + ' · Wikimedia Commons';
+  // a small map around a point, cut from the planet's own 16K map (static/tierra/dia-16k), with a ring on the point
+  const MINI = new Map();
+  const teselaMini = (k) => {
+    let t = MINI.get(k);
+    if (!t) { t = new Promise((ok) => { const im = new Image(); im.decoding = 'async'; im.onload = () => ok(im); im.onerror = () => ok(null); im.src = (document.documentElement.dataset.tierra || '/static/tierra/') + 'dia-16k/' + k + '.jpg'; }); MINI.set(k, t); }
+    return t;
+  };
+  async function miniMapa(cv, lon, lat) {
+    if (!cv) return;
+    const W = cv.width, H = cv.height, ppd = 16384 / 360, esc = 2, marca = lon + ',' + lat;
+    const cx = (lon + 180) * ppd, cy = (90 - lat) * ppd, sw = W / esc, sh = H / esc, x0 = cx - sw / 2, y0 = cy - sh / 2;
+    const g = cv.getContext('2d'); g.fillStyle = '#0B0F15'; g.fillRect(0, 0, W, H); cv.dataset.para = marca;
+    const teselas = [];
+    for (let c = Math.floor(x0 / 2048); c <= Math.floor((x0 + sw) / 2048); c++) for (let f = Math.max(0, Math.floor(y0 / 2048)); f <= Math.min(3, Math.floor((y0 + sh) / 2048)); f++) teselas.push([c, f]);
+    const ims = await Promise.all(teselas.map(([c, f]) => teselaMini((((c % 8) + 8) % 8) + '_' + f)));
+    if (cv.dataset.para !== marca) return; // another card was opened meanwhile
+    g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high';
+    teselas.forEach(([c, f], i) => { if (ims[i]) g.drawImage(ims[i], (c * 2048 - x0) * esc, (f * 2048 - y0) * esc, 2048 * esc, 2048 * esc); });
+    g.strokeStyle = 'rgb(' + ACENTO_RGB + ')'; g.fillStyle = 'rgb(' + ACENTO_RGB + ')'; g.lineWidth = 3;
+    g.beginPath(); g.arc(W / 2, H / 2, 20, 0, 2 * Math.PI); g.stroke(); g.beginPath(); g.arc(W / 2, H / 2, 6, 0, 2 * Math.PI); g.fill();
+  }
   function pintaFoto(fig, fo, titulo) {
     if (!fig) return;
     if (!fo) { fig.hidden = true; fig.querySelector('img').removeAttribute('src'); return; }
@@ -2262,7 +2298,7 @@
   }
   let soloTu = false, soloTuPinta = null;
   function ponSoloTu(on, dibuja) { soloTu = !!on; soloTuPinta = on ? dibuja || null : null; document.body.classList.toggle('solo-tu', soloTu); if (soloTu) { cierraLista(); muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; } pintaNota(); pintaVista(); }
-  window.OrbitaCapas = { pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get cajasPaises() { return LLEG_CAJAS.length ? PAIS_CAJAS.concat(LLEG_CAJAS) : PAIS_CAJAS; }, /* and the names of the towns where cables land */ get nombresLlegadas() { return LLEG_NOMBRES; }, /* the country names' boxes, so the cities (ciudades.js) never land on them */ get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; },
+  window.OrbitaCapas = { abreFicha: (m, x, y) => abrePanel(m, x, y), pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get cajasPaises() { return LLEG_CAJAS.length ? PAIS_CAJAS.concat(LLEG_CAJAS) : PAIS_CAJAS; }, /* and the names of the towns where cables land */ get nombresLlegadas() { return LLEG_NOMBRES; }, /* the country names' boxes, so the cities (ciudades.js) never land on them */ get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; },
     // the map's network as lines of unit vectors, for the routes that travel along it (red.js)
     get red() { return { sub: capas.sub && capas.sub.lineas, tierra: capas.tierra && capas.tierra.lineas, fibra: FT && FT.lineas }; },
     // the submarine pieces joined at load time and the ends left fading out into the sea (uneCables), for the automated checks

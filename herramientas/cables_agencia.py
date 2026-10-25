@@ -35,6 +35,22 @@ from lugares_capas import lee_ciudades, Rejilla, km, base_cable  # noqa: E402
 ALIAS = {  # the same cable under different names (lower case, letters and digits only)
     'australtroncalaustral': 'austral',  # «Fibra Óptica Austral (FOA), Troncal Submarina Austral» = «Fibra Óptica Austral (troncal submarina)»
     'mauritiusandrodrigues': 'mars', 'mauritiusandrodriguessubmarinecablesystem': 'mars',  # 22 Oct 2026: MARS under its long name
+    'cabosanlucasmazatlan': 'tmx5', 'tmx5': 'tmx5',  # 24 Oct 2026 (ronda 26b): Gemini's «Cabo San Lucas-Mazatlán» is Telmex's TMX5 (San José del Cabo–Mazatlán, in service 23-9-2025)
+    # 24 Oct 2026, 20:20 (owner: «Chequéalo todo»): the same cable under two names was drawn twice; same landings, year and owner
+    'aualeutian': 'alaskaunitedaleutians', 'aualeutians': 'alaskaunitedaleutians',
+    'marianasguamcable': 'marianaguam', 'marianasguam': 'marianaguam',
+    'tatatgnwesterneurope': 'tgnwesterneurope',
+    'hawaiiislandfibrenetworkhifn': 'hawaiianislands',
+    'jakartasurabayacablesystemjayabaya': 'jayabaya', 'jakartasurabaya': 'jayabaya',
+    'doscontinentesiii': 'doscontinentesi',
+    'pichilinguetopolobampo': 'gulfofcalifornia',  # Megacable's La Paz–Topolobampo (2019)
+    'transcookstraitcableaquatronics': 'cookstraittelecommunications', 'transcookstrait': 'cookstraittelecommunications',  # Transpower, Oteranga Bay–Fighting Bay
+    'comorosdomesticsubmarinecablesystem': 'avassa', 'comoros': 'avassa',  # the Comoros domestic cable is Avassa (Comores Câbles)
+    # ACM (the Dutch regulator) counts two Bonaire–Curaçao cables, Jerry Newton and Amerigo Vespucci (part Telbo); a third
+    # «Bonaire-Curaçao Cable System» (Telbo) is not listed apart, so it joins Amerigo Vespucci instead of drawing a third line
+    'bonairecuracaocablesystem': 'amerigovespucci', 'bonairecuracao': 'amerigovespucci',
+    'baltichighwayclion1': 'clion1', 'baltichighway': 'clion1',  # Cinia's C-Lion1 (Helsinki–Rostock), «Baltic Highway» in one answer
+    'denmarkpoland2baltica': 'baltica', 'denmarkpoland2': 'baltica',
     'sat3wasc': 'sat3', 'sat3wascsafe': 'sat3', 'southatlantic3': 'sat3',
     'seacomtatatgneurasia': 'seacom', 'seacomafricancablesystem': 'seacom',
     'asiaafricaeurope1aae1': 'aae1', 'asiaafricaeurope1': 'aae1',
@@ -99,6 +115,62 @@ ALIAS = {  # the same cable under different names (lower case, letters and digit
 }
 
 # words that say what the thing is, not which one it is: «KetchCan1» and «KetchCan1 Submarine Fiber Cable System» are the same cable
+# 24 Oct 2026, 20:40: OpenStreetMap names some cables by segment («ECFS 6.3», «Flag Atlantic South», «Hibernia 'D'»); these
+# are the agency cables they belong to, so that the same cable is not drawn twice (one OSM piece ending in the sea)
+OSM_ES = {'americas2d': 'americas2', 'americas2l': 'americas2',
+          'ecfs1c': 'ecfs', 'ecfs2': 'ecfs', 'ecfs45': 'ecfs', 'ecfs63': 'ecfs', 'ecfs7': 'ecfs',
+          'hiberniaa': 'exanorth', 'hiberniac': 'exanorth', 'hiberniad': 'exasouth',  # Hibernia Atlantic is today EXA North and South
+          'flagatlanticnorth': 'fa1', 'flagatlanticsouth': 'fa1', 'flagatlanticinterlink': 'fa1',
+          'tataatlanticnorth': 'tgnatlantic', 'tataatlanticsouth': 'tgnatlantic',
+          'tatawesterneuropeukportugal': 'tgnwesterneurope', 'tatawesterneuropeukspain': 'tgnwesterneurope',
+          'farice': 'farice1', 'easternlightswedenfinlandi': 'easternlight', 'eacd': 'eacc2c', 'sjc2hk': 'sjc2'}
+
+
+def sueltos(osm, fina, lejos=15, junto=8):
+    """indices of OpenStreetMap segments with an end in open sea: over water on the fine coast, more than «lejos» km from
+    land, and no other OSM segment end within «junto» km (the next piece or a branching unit). Such a segment is a cable
+    traced only in part in the open data (owner, 24 Oct 2026, 20:28: «terminan ahí, como en el mar»)."""
+    celdas = collections.defaultdict(list)
+    for i, s_ in enumerate(osm):
+        for e in (s_['l'][0], s_['l'][-1]): celdas[(int(e[0] * 10), int(e[1] * 10))].append((i, e))
+    def vecino(i, e):
+        cx, cy = int(e[0] * 10), int(e[1] * 10)
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                for j, f in celdas[(cx + dx, cy + dy)]:
+                    if (j != i or f is not e) and km(e[1], e[0], f[1], f[0]) < junto: return True
+        return False
+    def lejos_de_tierra(lo, la):
+        for r in range(1, int(lejos / (111 * fina.P)) + 2):
+            d = r * fina.P
+            for k in range(0, 360, 15):
+                a = math.radians(k)
+                if fina.tierra(lo + d * math.cos(a) / max(0.2, math.cos(math.radians(la))), la + d * math.sin(a)): return False
+        return True
+    out = set()
+    for i, s_ in enumerate(osm):
+        for e in (s_['l'][0], s_['l'][-1]):
+            if not fina.tierra(*e) and not vecino(i, e) and lejos_de_tierra(*e):
+                out.add(i); break
+    return out
+
+
+# 24 Oct 2026, 20:45 (owner: «revisión completa de todo el planeta»): cables that are no longer in service and were still
+# drawn (from OpenStreetMap pieces without an end date, or an agency answer). Source: Wikipedia, «Transatlantic
+# communications cable» and «List of international submarine communications cables» (24 Oct 2026).
+RETIRADOS = {'tat9f5': 'TAT-9, retirado en 2004', 'tat11f4': 'TAT-11, retirado en 2003', 'tat12': 'TAT-12/13, retirado en 2008',
+             'tat13': 'TAT-12/13, retirado en 2008', 'tat12interlink': 'TAT-12/13, retirado en 2008', 'tat14': 'TAT-14, retirado en 2020',
+             'cantat3': 'CANTAT-3, fuera de servicio normal desde 2010 (solo plataformas petrolíferas)',
+             'seamewe2': 'SEA-ME-WE 2, dado de baja'}
+
+# the name shown for a cable that goes by several names (ALIAS), when the most common answer is not its real name
+NOMBRE = {'tmx5': 'TMX5', 'amerigovespucci': 'Amerigo Vespucci', 'gulfofcalifornia': 'Gulf of California Cable',
+          'cookstraittelecommunications': 'Cook Strait Telecommunications Cable',
+          'alaskaunitedaleutians': 'Alaska United Aleutians (AU-Aleutians)', 'avassa': 'Avassa',
+          'jayabaya': 'Jakarta-Surabaya Cable System (JAYABAYA)', 'doscontinentesi': 'Dos Continentes I y II',
+          'marianaguam': 'Mariana-Guam Cable', 'tgnwesterneurope': 'TGN-Western Europe',
+          'hawaiianislands': 'Hawaiian Islands Fiber Network (HIFN)'}
+
 GENERICAS = re.compile(r'\b(?:submarine|submarino|submarina|subsea|undersea|cable|cables|system|sistema|fiber|fibre|fibra|optic|optica|óptica|project|proyecto|network|domestic|doméstico|domestica|secciones|operativas|slt)\b', re.I)
 # 22 Oct 2026: accents folded first («ÍRIS» and «IRIS» are one cable)
 compacta = lambda x: re.sub(r'[^a-z0-9]', '', unicodedata.normalize('NFKD', x or '').encode('ascii', 'ignore').decode().lower())
@@ -203,6 +275,187 @@ class Agua:
         while p[-1] != start: p.append(prev[p[-1]])
         return p[::-1]
 
+class Fina:
+    """24 Oct 2026, 20:20 (owner, on H2HE drawn from Zhuhai across Lantau: «Chequéalo todo»): the 20 km mask lets a
+    traced route cut across islands, deltas and peninsulas, and a landing given as an inland city pulls the line inland.
+    After tracing, each route is checked on Natural Earth 10m land (public domain, rasterised at 0.025°, about 2.7 km:
+    herramientas/fuentes/tierra-ne10m.png): a stretch over land inside the route is traced again by sea on this finer grid
+    when the sea way round is reasonable (otherwise it is a real crossing by land, as at Suez, Panama or Guatemala, and is
+    kept), and a route that ends inland is cut where it reaches the coast."""
+    P = 0.025
+
+    def __init__(self, agua):
+        from PIL import Image
+        Image.MAX_IMAGE_PIXELS = None  # our own 14400×7200 mask
+        im = Image.open(os.path.join(AQUI, 'fuentes', 'tierra-ne10m.png')).convert('L')
+        self.W, self.H = im.size
+        self.m = bytearray(im.tobytes())  # 255 land, 0 water
+        for linea in agua.PASOS.values():  # the same passages the tracing opens (Suez, the Turkish straits, Panama, Aqaba)
+            for (lo1, la1), (lo2, la2) in zip(linea, linea[1:]):
+                x1, y1 = self.px(lo1, la1); x2, y2 = self.px(lo2, la2)
+                n = max(abs(x2 - x1), abs(y2 - y1), 1)
+                for j in range(n + 1):
+                    x = round(x1 + (x2 - x1) * j / n); y = round(y1 + (y2 - y1) * j / n)
+                    for dx in (-1, 0, 1):
+                        for dy in (-1, 0, 1):
+                            if 0 <= y + dy < self.H: self.m[(y + dy) * self.W + ((x + dx) % self.W)] = 0
+        self.cambios = collections.Counter()
+
+    def px(self, lo, la):
+        return int(((lo + 180) % 360) / self.P) % self.W, min(self.H - 1, max(0, int((90 - la) / self.P)))
+
+    def tierra(self, lo, la):
+        x, y = self.px(lo, la)
+        return self.m[y * self.W + x] > 127
+
+    def muestras(self, linea, paso=1.5):
+        """[(lon, lat, km from the start, over land)] every «paso» km along the line (straight in lon/lat per hop)"""
+        out, pos = [], 0.0
+        for (lo1, la1), (lo2, la2) in zip(linea, linea[1:]):
+            if lo2 - lo1 > 180: lo2 -= 360
+            elif lo1 - lo2 > 180: lo2 += 360
+            d = km(la1, lo1, la2, lo2); n = max(1, int(d / paso))
+            for j in range(n):
+                f = j / n; lo = lo1 + (lo2 - lo1) * f; la = la1 + (la2 - la1) * f
+                lo = ((lo + 180) % 360) - 180
+                out.append((lo, la, pos + d * f, self.tierra(lo, la)))
+            pos += d
+        lo, la = linea[-1]
+        out.append((lo, la, pos, self.tierra(lo, la)))
+        return out
+
+    def astar(self, a, b, margen_km=120):
+        """the shortest way by water between two water points on the fine grid, inside their box plus a margin"""
+        (x1, y1), (x2, y2) = self.px(*a), self.px(*b)
+        if abs(x2 - x1) > self.W / 2: return None  # across the antimeridian: not worth it
+        mg = int(margen_km / (111 * self.P)) + 4
+        X0, X1 = max(0, min(x1, x2) - mg), min(self.W - 1, max(x1, x2) + mg)
+        Y0, Y1 = max(0, min(y1, y2) - mg), min(self.H - 1, max(y1, y2) + mg)
+        if (X1 - X0 + 1) * (Y1 - Y0 + 1) > 1500000: return None
+        ancho = X1 - X0 + 1
+        agua = lambda x, y: self.m[y * self.W + x] < 128
+        if not agua(x1, y1) or not agua(x2, y2): return None
+        inicio, fin = (y1 - Y0) * ancho + (x1 - X0), (y2 - Y0) * ancho + (x2 - X0)
+        h = lambda i: (lambda dx, dy: max(dx, dy) + 0.4142 * min(dx, dy))(abs(i % ancho + X0 - x2), abs(i // ancho + Y0 - y2))
+        g = {inicio: 0.0}; de = {inicio: None}; cola = [(h(inicio), inicio)]; vistos = set()
+        while cola:
+            _, i = heapq.heappop(cola)
+            if i == fin: break
+            if i in vistos: continue
+            vistos.add(i)
+            x, y = i % ancho + X0, i // ancho + Y0
+            for dx, dy, c in ((1, 0, 1), (-1, 0, 1), (0, 1, 1), (0, -1, 1), (1, 1, 1.4142), (1, -1, 1.4142), (-1, 1, 1.4142), (-1, -1, 1.4142)):
+                nx, ny = x + dx, y + dy
+                if X0 <= nx <= X1 and Y0 <= ny <= Y1 and agua(nx, ny):
+                    j = (ny - Y0) * ancho + (nx - X0); ng = g[i] + c
+                    if ng < g.get(j, 1e18):
+                        g[j] = ng; de[j] = i; heapq.heappush(cola, (ng + h(j), j))
+        if fin not in de: return None
+        pts, i = [], fin
+        while i is not None:
+            pts.append((i % ancho + X0 + 0.5, i // ancho + Y0 + 0.5)); i = de[i]
+        pts.reverse()
+        pts = simplifica(pts, 0.45)
+        return [[round(px * self.P - 180, 4), round(90 - py * self.P, 4)] for px, py in pts]
+
+    def corrige(self, linea, nombre=''):
+        if len(linea) < 2: return linea
+        m = self.muestras(linea)
+        total = m[-1][2]
+        # 1. the ends: a route that runs inland at either end stops where it reaches the coast
+        def primera_agua(seq):
+            for i, s in enumerate(seq):
+                if not s[3]: return i
+            return None
+        i0 = primera_agua(m); i1 = primera_agua(m[::-1])
+        if i0 is None or i1 is None: return linea  # all over land on this grid (a tiny island or a lake): leave it
+        ini = m[i0] if m[i0][2] > 3 else m[0]
+        fin = m[len(m) - 1 - i1] if total - m[len(m) - 1 - i1][2] > 3 else m[-1]
+        if ini is not m[0]: self.cambios['extremo en la costa'] += 1
+        if fin is not m[-1]: self.cambios['extremo en la costa'] += 1
+        m = [s for s in m if ini[2] <= s[2] <= fin[2]]
+        if len(m) < 2: return linea
+        # an end left out at sea (a landing placed offshore) reaches the nearest coast, if there is one within 40 km
+        def costa(lo, la):
+            for r in range(1, int(40 / (111 * self.P)) + 2):
+                d = r * self.P
+                for k in range(0, 360, 10):
+                    a = math.radians(k); lo2 = lo + d * math.cos(a) / max(0.2, math.cos(math.radians(la))); la2 = la + d * math.sin(a)
+                    if self.tierra(lo2, la2): return (lo2, la2)
+            return None
+        for lado in (0, -1):
+            e = m[lado]
+            if not e[3]:
+                c = costa(e[0], e[1])
+                if c and km(e[1], e[0], c[1], c[0]) > 3:
+                    q = (c[0], c[1], e[2], True)
+                    if lado == 0: m.insert(0, q)
+                    else: m.append(q)
+                    self.cambios['extremo en el mar llevado a la costa'] += 1
+        # 2. stretches over land inside the route, grouped when they are close (a string of islands, a bay): each group
+        # is traced again by sea between water points before and after it, when the way round is reasonable
+        runs, k = [], 1
+        while k < len(m):
+            if m[k][3]:
+                a = k
+                while k < len(m) and m[k][3]: k += 1
+                if m[min(k, len(m) - 1)][2] - m[a][2] >= 3 and k < len(m): runs.append([a, k])
+            k += 1
+        grupos = []
+        for r in runs:
+            if grupos and m[r[0]][2] - m[grupos[-1][1]][2] < 150: grupos[-1][1] = r[1]
+            else: grupos.append(list(r))
+        out, ultimo = [], 0
+        for a0, b0 in grupos:
+            if sum(1 for q in m[a0:b0] if q[3]) * 1.5 < 5: continue
+            # water points about 40 km before and after the group
+            a = a0
+            while a > ultimo and (m[a][3] or m[a0][2] - m[a][2] < 40): a -= 1
+            b = b0
+            while b < len(m) - 1 and (m[b][3] or m[b][2] - m[b0][2] < 40): b += 1
+            if m[a][3] or m[b][3]: continue
+            recto = km(m[a][1], m[a][0], m[b][1], m[b][0])
+            hecho = None
+            for margen in (max(120, 0.5 * recto), max(300, 1.0 * recto)):
+                r = self.astar((m[a][0], m[a][1]), (m[b][0], m[b][1]), margen)
+                if not r: continue
+                largo = sum(km(p[1], p[0], q[1], q[0]) for p, q in zip(r, r[1:]))
+                # kept only when it really has less land than the stretch it replaces (in narrow fjords the simplified
+                # path can cut corners)
+                antes = sum(1.5 for q in m[a:b + 1] if q[3])
+                if largo <= 3 * recto + 150 and sum(1.5 for q in self.muestras(r) if q[3]) < antes: hecho = r
+                break
+            if hecho:
+                out += [[round(q[0], 4), round(q[1], 4)] for q in m[ultimo:a]] + hecho
+                ultimo = b + 1
+                self.cambios['rodea tierra por mar'] += 1
+            else:
+                self.cambios['paso por tierra que se queda (real o sin mar alrededor)'] += 1
+        out += [[round(q[0], 4), round(q[1], 4)] for q in m[ultimo:]]
+        out = [list(p) for p in simplifica([tuple(p) for p in out], 0.01)]
+        # 3. still over land inside (the coarse route took a way that is closed at this scale, the Kanmon Strait or Cook
+        # Inlet): the whole hop is traced again by sea on the fine grid, if that way is reasonable
+        def dentro(l):
+            mm = self.muestras(l); t = mm[-1][2]
+            return sum(1.5 for x in mm if x[3] and 3 < x[2] < t - 3)
+        resto = dentro(out)
+        if resto > 10:
+            a, b = out[0], out[-1]
+            recto = km(a[1], a[0], b[1], b[0])
+            for margen in (max(150, 0.35 * recto), max(300, 0.8 * recto)):  # a wider box when the way round is long (south of Kyushu)
+                r = self.astar((a[0], a[1]), (b[0], b[1]), margen)
+                if not r: continue
+                largo = sum(km(p[1], p[0], q[1], q[0]) for p, q in zip(r, r[1:]))
+                if largo > 2.5 * recto + 250: break
+                r = [list(a)] + r[1:-1] + [list(b)]
+                if dentro(r) < resto:
+                    self.cambios['tramo entero trazado de nuevo por mar'] += 1
+                    return r
+                break
+            self.cambios['sigue pisando tierra'] += 1
+        return out
+
+
 def tierra_en(agua, linea, bordes=40):
     """(longest stretch over land inside the line, total km over land) for a lon/lat line, following the great circle
     between its points every ~10 km. The first and last «bordes» km are the landing itself and do not count."""
@@ -303,10 +556,14 @@ def num(v):
 def main():
     ciudades = lee_ciudades(); rj = Rejilla(ciudades)
     agua = Agua()
+    fina = Fina(agua)
     conf = confirmados()
     por_cable = carga()
     cab = json.load(open(os.path.join(RAIZ, 'datos', 'cables.json'), encoding='utf-8'))
     osm = [s for s in cab['cables'] if s.get('src') != 'agencia']
+    fuera = [s for s in osm if clave(s.get('n') or '') in RETIRADOS]
+    if fuera: print('tramos de cables retirados que dejan de dibujarse:', len(fuera), '·', ', '.join(sorted({s.get('n') for s in fuera})))
+    osm = [s for s in osm if clave(s.get('n') or '') not in RETIRADOS]
     # what OpenStreetMap already has, by whole cable: how many distinct landings (ends near a city)
     osm_llegadas = collections.defaultdict(set)
     for s in osm:
@@ -315,12 +572,19 @@ def main():
         for lo, la in (s['l'][0], s['l'][-1]):
             c = rj.cercana(la, lo, 80)
             if c is not None: osm_llegadas[k].add(c)
+    # OSM cables traced only in part (an end in open sea): the agency's whole cable is drawn instead, even if OSM has
+    # half of its landings
+    i_sueltos = sueltos(osm, fina)
+    claves_sueltas = {OSM_ES.get(clave(osm[i].get('n') or ''), clave(osm[i].get('n') or '')) for i in i_sueltos if osm[i].get('n')}
+    print('tramos de OpenStreetMap que acaban en mar abierto:', len(i_sueltos), '· con nombre:', sum(1 for i in i_sueltos if osm[i].get('n')))
     salida, descartes = [], []
     for k, respuestas in por_cable.items():
+        if k in RETIRADOS:
+            descartes.append((k, 'retirado: ' + RETIRADOS[k])); continue
         miembros = {m for m, _ in respuestas}
         if len(miembros) < 2 and k not in conf:
             descartes.append((k, 'solo lo nombra ' + ', '.join(miembros))); continue
-        nombre = collections.Counter(c['nombre'].strip() for _, c in respuestas).most_common(1)[0][0]
+        nombre = NOMBRE.get(k) or collections.Counter(c['nombre'].strip() for _, c in respuestas).most_common(1)[0][0]
         # landings: cluster by country + 120 km
         grupos = []
         for m, c in respuestas:
@@ -337,6 +601,18 @@ def main():
                     g['m'].add(m); g['pts'].append((la, lo)); g['lugares'].append(L.get('lugar') or '')
                 else:
                     grupos.append({'cc': cc, 'lat': la, 'lon': lo, 'm': {m}, 'pts': [(la, lo)], 'lugares': [L.get('lugar') or ''], 'orden': len(grupos)})
+        # 24 Oct 2026: a cable joined from two names (ALIAS) can bring the same landing twice from one member, a few km
+        # apart («La Paz» and «La Paz, Baja California Sur»); two groups with the same place name within 30 km are one
+        base = lambda t: re.sub(r'[^a-z]', '', unicodedata.normalize('NFKD', re.split(r'[,(]', t or '')[0]).encode('ascii', 'ignore').decode().lower())
+        i = 0
+        while i < len(grupos):
+            j = i + 1
+            while j < len(grupos):
+                g, h = grupos[i], grupos[j]
+                if g['cc'] == h['cc'] and km(g['lat'], g['lon'], h['lat'], h['lon']) < 30 and {base(x) for x in g['lugares'] if x} & {base(x) for x in h['lugares'] if x}:
+                    g['m'] |= h['m']; g['pts'] += h['pts']; g['lugares'] += h['lugares']; del grupos[j]
+                else: j += 1
+            i += 1
         llegadas = []
         for g in grupos:
             if len(g['m']) < 2 and k not in conf: continue
@@ -359,7 +635,7 @@ def main():
                 if la is not None and lo is not None and (M.get('pais') or '').upper() == L['cc'] and km(la, lo, L['lat'], L['lon']) < 120: return i
             return 999
         llegadas.sort(key=pos)
-        if len(osm_llegadas.get(k, ())) >= max(2, len(llegadas) / 2):
+        if k not in claves_sueltas and len(osm_llegadas.get(k, ())) >= max(2, len(llegadas) / 2):
             descartes.append((k, 'OpenStreetMap ya lo tiene con %d llegadas' % len(osm_llegadas[k]))); continue
         # year, km, owners: only where the members agree
         anios = [int(c['anio']) for _, c in respuestas if num(c.get('anio'))]
@@ -416,6 +692,8 @@ def main():
                 if tierra_en(agua, recta)[1] <= 400: linea, por = recta, 'tierra'
                 else:
                     sin_trazar.append('%s (%s) → %s (%s)' % (A['lugar'], A['cc'], B['lugar'], B['cc'])); continue
+            if not any(abs(q[0] - p[0]) > 180 for p, q in zip(linea, linea[1:])):  # not across the antimeridian
+                linea = densa(fina.corrige(linea, nombre))
             tramos.append({'n': nombre, 'l': linea, 'src': 'agencia', 'aprox': 1, 'por': por, 'de': [A['lugar'], A['cc']], 'a': [B['lugar'], B['cc']]})
         if sin_trazar: descartes.append((k, 'tramos sin trazar (cruzarían cientos de km de tierra): ' + '; '.join(sin_trazar)))
         if not tramos: continue
@@ -433,11 +711,27 @@ def main():
            'cables': salida, 'tramos': tramos_todos}
     with open(os.path.join(RAIZ, 'datos', 'cables-agencia.json'), 'w', encoding='utf-8') as f:
         json.dump(out, f, ensure_ascii=False, separators=(',', ':'))
+    # 24 Oct 2026, 20:30 (owner, on Havfrue fading out in the Atlantic north of Scotland): when the agency draws a whole
+    # cable that OpenStreetMap has only in pieces (fewer than half its landings), the pieces go: the same cable was drawn
+    # twice and the OSM piece ended in the middle of the sea
+    claves_agencia = {c['clave'] for c in salida}
+    ck = lambda s_: OSM_ES.get(clave(s_.get('n') or ''), clave(s_.get('n') or ''))
+    sin_nombre = [osm[i] for i in i_sueltos if not osm[i].get('n')]
+    if sin_nombre:
+        print('tramos sin nombre que acaban en mar abierto y dejan de dibujarse:', len(sin_nombre))
+    ids_fuera = {id(x) for x in sin_nombre}
+    osm = [s_ for s_ in osm if id(s_) not in ids_fuera]
+    piezas = [s_ for s_ in osm if s_.get('n') and ck(s_) in claves_agencia]
+    if piezas:
+        print('piezas de OpenStreetMap que deja de dibujar porque la agencia tiene el cable entero:', len(piezas), '·',
+              ', '.join(sorted({s_.get('n') for s_ in piezas})))
+    osm = [s_ for s_ in osm if not (s_.get('n') and ck(s_) in claves_agencia)]
     cab['cables'] = osm + tramos_todos
     cab['agencia'] = {'cables': len(salida), 'tramos': len(tramos_todos)}
     with open(os.path.join(RAIZ, 'datos', 'cables.json'), 'w', encoding='utf-8') as f:
         json.dump(cab, f, ensure_ascii=False, separators=(',', ':'))
     print('cables de la agencia aceptados:', len(salida), '· tramos:', len(tramos_todos))
+    print('trazado con la costa fina (Natural Earth 10m):', dict(fina.cambios))
     for c in salida: print('  ', c['nombre'], '·', ' → '.join(L['lugar'] + ' (' + L['cc'] + ')' for L in c['llegadas']), '·', c['info']['anio'], c['info']['km'] or ('~%d km mapa' % c['info']['kmMapa']), '·', ', '.join(c['info']['miembros']))
     if descartes:
         print('descartado:')

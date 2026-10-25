@@ -1,0 +1,3 @@
+Natural Earth 10m (tierra y islas menores), dominio público: https://www.naturalearthdata.com/
+Rasterizado a 16384 × 8192 (0,022° por píxel) y partido en teselas de 2048 × 2048 (8 × 4, 45° cada una), como dia-16k. Blanco = tierra.
+Lo usa el mapa gris («limpio») de Órbita para separar tierra y mar.
