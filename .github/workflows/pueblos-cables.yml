@@ -20,7 +20,7 @@ concurrency:
 jobs:
   pueblos:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -29,18 +29,23 @@ jobs:
           curl -sSfL --retry 3 -o /tmp/cities500.zip https://download.geonames.org/export/dump/cities500.zip
           unzip -o -q /tmp/cities500.zip -d /tmp/geonames
           wc -l /tmp/geonames/cities500.txt
+          # 25 Oct 2026 (owner: «cada idioma con su mapa»): each place's names in other languages (CC BY 4.0)
+          curl -sSfL --retry 3 -o /tmp/alternateNamesV2.zip https://download.geonames.org/export/dump/alternateNamesV2.zip
+          unzip -o -q /tmp/alternateNamesV2.zip alternateNamesV2.txt -d /tmp/geonames
+          ls -la /tmp/geonames
 
       - name: Pueblos junto a los cables y nombre de cada llegada
         run: |
           python3 herramientas/pueblos_cables.py /tmp/geonames/cities500.txt
           python3 herramientas/lugares_capas.py
           python3 herramientas/pueblos_fibra.py /tmp/geonames/cities500.txt
+          python3 herramientas/lugares_idiomas.py /tmp/geonames/cities500.txt /tmp/geonames/alternateNamesV2.txt
 
       - name: Guardar si ha cambiado
         run: |
           git config user.name "GUARDIANA datos"
           git config user.email "datos@guardianagroup.com"
-          git add orbita/static/tierra/pueblos-cables.tsv orbita/datos/lugares-capas.json herramientas/fuentes/pueblos-fibra.tsv
+          git add orbita/static/tierra/pueblos-cables.tsv orbita/datos/lugares-capas.json herramientas/fuentes/pueblos-fibra.tsv orbita/datos/lugares-idioma
           if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
           git commit -m "Órbita: pueblos donde llegan los cables, de GeoNames cities500 ($(date -u +%Y-%m-%dT%H:%MZ))"
           git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true

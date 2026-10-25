@@ -130,6 +130,27 @@
     LUG.orden = LUG.centros.map((_, i) => i).sort((a, b) => LUG.centros[b].n - LUG.centros[a].n); // the biggest cities get their label first
     return LUG;
   }).catch(() => { LUG = { error: true }; return LUG; }));
+  // 25 Oct 2026 (owner, 14:12: «si la persona lo tiene puesto en ruso, tiene que verlo todo en ruso»): the names of these
+  // places in the page's language, from GeoNames' own names in other languages (datos/lugares-idioma/<language>.json,
+  // herramientas/lugares_idiomas.py). They are swapped in place, keeping the GeoNames names aside, so every label and
+  // card reads them already translated; until the file arrives, the GeoNames name.
+  let LUGI = null, LUGI_pide = null;
+  function lugaresEnIdioma() {
+    if (!LUG || LUG.error || !LUG.centros) return;
+    const l = (window.GuardianaIdioma && window.GuardianaIdioma.lang) || 'es';
+    if (LUG.lang === l) return;
+    if (!LUGI || LUGI.l !== l) {
+      if (LUGI_pide !== l) { LUGI_pide = l; cargaJSON('datos/lugares-idioma/' + l + '.json').catch(() => ({ n: {} })).then((d) => { if (LUGI_pide === l) LUGI = { l, n: (d && d.n) || {} }; }); }
+      return;
+    }
+    if (!LUG.orig) LUG.orig = { cen: LUG.centros.map((c) => c.ciudad), lle: LUG.llegadas.map((x) => x.ciudad), gru: LUG.grupos.map((g) => g[1].map((q) => q[0])), cab: (LUG.cables || []).map((e) => (e ? [e[0], e[2]] : null)) };
+    const D = LUGI.n, O = LUG.orig, tr = (n, cc) => (n && D[n + '|' + cc]) || n;
+    LUG.centros.forEach((c, i) => { c.ciudad = tr(O.cen[i], c.cc); });
+    LUG.llegadas.forEach((x, i) => { x.ciudad = tr(O.lle[i], x.cc); });
+    LUG.grupos.forEach((g, i) => g[1].forEach((q, j) => { q[0] = tr(O.gru[i][j], q[1]); }));
+    (LUG.cables || []).forEach((e, i) => { if (e && O.cab[i]) { e[0] = tr(O.cab[i][0], e[1]); e[2] = tr(O.cab[i][1], e[3]); } });
+    LUG.lang = l;
+  }
   const paisNombre = (cc) => { if (!cc) return ''; try { const l = (window.GuardianaIdioma && window.GuardianaIdioma.lang) || 'es'; return new Intl.DisplayNames([l], { type: 'region' }).of(cc) || cc; } catch (_) { return cc; } };
 
   // ---------- one cable, many pieces; and the ends where the open data stop (23 Oct 2026) ----------
@@ -801,6 +822,17 @@
     } catch (e) { FR = { error: true }; }
     cargando.fronteras = false;
   }
+  // the region names in the page's language (owner, 25 Oct 2026, 14:12: «si la persona lo tiene puesto en ruso, tiene que
+  // verlo todo en ruso»): datos/regiones/<language>.json, from Natural Earth and Wikidata (herramientas/regiones_idiomas.py),
+  // in the order of fronteras.json; null where its own name is already right. Loaded when the names first show, again
+  // when the language changes.
+  let REG = null; const REG_ANCHO = new Map();
+  const idiomaMapa = () => (window.GuardianaIdioma && window.GuardianaIdioma.lang) || 'es';
+  async function cargaRegiones(l) {
+    if (cargando.regiones) return; cargando.regiones = true;
+    try { const d = await cargaJSON('datos/regiones/' + l + '.json'); REG = { l, n: d.n || [] }; } catch (e) { REG = { l, n: [] }; }
+    REG_ANCHO.clear(); cargando.regiones = false;
+  }
   function pintaFronteras(cx, p, G) {
     const z = G.R / (G.R0 || G.R);
     if (z < 1.5) return;
@@ -814,11 +846,15 @@
       // region names: on the clean map only when very close, so they never fight the data-centre cities
       if (z >= (L ? 12 : 4)) {
         const ocupado = []; cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textAlign = 'center'; cx.textBaseline = 'middle';
-        for (const q of FR.nombres) {
+        const lg = idiomaMapa(); if (!REG || REG.l !== lg) cargaRegiones(lg);
+        const RN = REG && REG.l === lg ? REG.n : null;
+        for (let iq = 0; iq < FR.nombres.length; iq++) {
+          const q = FR.nombres[iq];
           if (q.r > (L ? (z >= 14 ? 6 : 3) : z >= 7 ? 9 : z >= 5.5 ? 6 : 3)) continue;
           const v = p.aVista(q.w); if (v[2] <= 0.4) continue;
           const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1]; if (x < -40 || x > G.W + 40 || y < -20 || y > G.H + 20) continue;
-          const txt = q.n.toUpperCase(), w = 6.2 * txt.length;
+          const txt = ((RN && RN[iq]) || q.n).toLocaleUpperCase(lg);
+          let w = REG_ANCHO.get(txt); if (w === undefined) { w = Math.ceil(cx.measureText(txt).width); REG_ANCHO.set(txt, w); } // measured: Cyrillic, Arabic or Chinese are not 6 px a letter
           if (ocupado.some((o) => Math.abs(x - o[0]) < (w + o[2]) / 2 + 10 && Math.abs(y - o[1]) < 14)) continue;
           ocupado.push([x, y, w]);
           cx.fillStyle = `rgba(${BLANCO},${Math.min(0.5, 0.2 + 0.05 * z)})`; cx.fillText(txt, x, y);
@@ -832,7 +868,7 @@
   // ---------- countries: a name at each centroid once the borders show, and a card on hover (owner, 22 Oct 2026, 14:35) ----------
   let PAIS_CAJAS = [], PAISES = null, letraPais = null;
   const ANCHO_PAIS = new Map(); // the width of each name, measured once (again when the letter finishes loading)
-  try { document.fonts.addEventListener('loadingdone', () => ANCHO_PAIS.clear()); } catch (_) {}
+  try { document.fonts.addEventListener('loadingdone', () => { ANCHO_PAIS.clear(); REG_ANCHO.clear(); }); } catch (_) {}
   const fuentePais = () => letraPais || (letraPais = '600 11px ' + ((getComputedStyle(document.documentElement).getPropertyValue('--texto') || '').trim() || '"Hanken Grotesk", system-ui, sans-serif'));
   async function cargaPaises() { if (PAISES || cargando.paises) return; cargando.paises = true; try { PAISES = (await cargaJSON('datos/paises.json')).paises || {}; } catch (_) { PAISES = {}; } cargando.paises = false; }
   function pintaPaises(cx, p, G) {
@@ -896,7 +932,7 @@
   // ---------- drawing ----------
   function pinta(t) {
     const p = P(); if (!p) return;
-    const cx = p.ctx, G = p.geo; EXTREMOS_VISTOS = null; CAMPO = campo(p, G); EST_CAJAS = []; // a frame without stations leaves no old name boxes behind
+    const cx = p.ctx, G = p.geo; EXTREMOS_VISTOS = null; CAMPO = campo(p, G); EST_CAJAS = []; lugaresEnIdioma(); // a frame without stations leaves no old name boxes behind
     pintaFronteras(cx, p, G); if (soloTu && document.body.classList.contains('viaje')) PAIS_CAJAS = []; else pintaPaises(cx, p, G); // the journey wants a clean planet
     // «Mi conexión» (owner, 22 Oct 2026): while the visitor looks at their own data the planet shows only that —
     // no cables, no satellites, nothing that is not theirs — so there is no doubt about what is whose.
