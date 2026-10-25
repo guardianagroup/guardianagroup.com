@@ -25,6 +25,9 @@
   // the microwave radio chains of the countries with no land fibre (round 27, owner 24 Oct 2026, 18:43): dotted, in a cool
   // near-white of their own, so they never read as fibre (which is solid and coloured by rank)
   const RADIO_COL = '214,226,240';
+  // 25 Oct 2026 (agency round 31, both voices; owner: «publica lo que veas conveniente»): whoever asks their system for
+  // less motion gets the lights that run along the cables and the swaying dashes still; satellites keep their real orbit
+  const QUIETO = (() => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) { return false; } })();
   const FIBRA_ALFA = window.__FIBRA_ALFA || { 3: 1, 2: 1.12, 1: 1.35, 0: 1.6 };
   // 23 Oct 2026 (owner: «los cables submarinos también los vamos a clasificar por color… vamos a mantener el diseño, unos son
   // más gruesos, otros menos, pero también van a ir por colores»; «para que no haya tanto colorín, van a ser los mismos
@@ -527,7 +530,11 @@
       const v = p.aVista(q.w); if (v[2] <= 0.05) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
       cx.lineWidth = 1.1; cx.strokeStyle = `rgba(${BLANCO},${L ? 0.9 : 0.75})`; cx.beginPath();
-      if (plat) cx.rect(Math.round(x) - 3.5, Math.round(y) - 3.5, 7, 7); else cx.arc(x, y, 4.2, 0, 7);
+      // each kind its own outline (agency round 31, both voices: «que no compartan el anillo de las llegadas de cables»):
+      // a square the platforms, a hexagon the polar bases, a triangle the satellite ground stations
+      if (plat) cx.rect(Math.round(x) - 3.5, Math.round(y) - 3.5, 7, 7);
+      else if (q.x && q.x.clase === 'base') { for (let k = 0; k < 6; k++) { const a = Math.PI / 6 + k * Math.PI / 3; cx[k ? 'lineTo' : 'moveTo'](x + 4.6 * Math.cos(a), y + 4.6 * Math.sin(a)); } cx.closePath(); }
+      else { cx.moveTo(x, y - 5); cx.lineTo(x + 4.6, y + 3.2); cx.lineTo(x - 4.6, y + 3.2); cx.closePath(); }
       cx.stroke();
       cx.fillStyle = `rgba(${BLANCO},.95)`; cx.beginPath(); cx.arc(x, y, 1.4, 0, 7); cx.fill();
       if (z >= (plat ? 8 : 1.8) && q.n) {
@@ -925,8 +932,10 @@
       // 23 Oct 2026, 08:16 (owner): «una línea fina discontinua… que va y viene, así la pantalla está viva». The planned
       // cables (short dashes) and the approximate routes (longer ones) breathe: their dashes slide gently back and forth.
       // Each in the colour of its capacity when it is known, grey otherwise.
-      const vaiven = (fase) => 9 * Math.sin((t || 0) / 1100 + fase);
-      if (CS.previstos && PREV && PREV.length) { cx.save(); cx.setLineDash([4, 5]); cx.lineDashOffset = vaiven(0); for (const k of ['sinDato', 'regional', 'grande', 'gigante']) { const ls = PREV.filter((q) => (q.clase || (q.clase = clasePrev(q.c))) === k); if (ls.length) traza(ls, SUB_COL[k], 0.6, 1.1); } cx.restore(); }
+      const vaiven = (fase) => QUIETO ? 0 : 9 * Math.sin((t || 0) / 1100 + fase);
+      // planned cables in dots of their capacity colour, as the legend shows them; the approximate routes of cables in
+      // service keep their long dashes (agency round 31, both voices: «que no se confunda lo aproximado con lo que aún no existe»)
+      if (CS.previstos && PREV && PREV.length) { cx.save(); cx.lineCap = 'round'; cx.setLineDash([0.1, 4.4]); cx.lineDashOffset = vaiven(0); for (const k of ['sinDato', 'regional', 'grande', 'gigante']) { const ls = PREV.filter((q) => (q.clase || (q.clase = clasePrev(q.c))) === k); if (ls.length) traza(ls, SUB_COL[k], 0.7, 1.6); } cx.restore(); }
       if (CS.aprox && capas.sub.aprox.length) {
         cx.setLineDash([7, 5]); cx.lineDashOffset = vaiven(1.7);
         const todas = sinPotencia();
@@ -944,7 +953,7 @@
       // what the pointer touches lights up in its own colour: the whole cable (every piece joined to the one touched), the
       // planned cable, or every cable of a landing
       if (cableMarcado >= 0) for (const j of cadenaDe(cableMarcado)) { const l = capas.sub.lineas[j]; if (l) resalta(cx, p, G, [l], colorSub(j)); }
-      if (previstoMarcado >= 0 && PREV && PREV[previstoMarcado]) { const q = PREV[previstoMarcado]; cx.save(); cx.setLineDash([3, 5]); resalta(cx, p, G, [q], SUB_COL[q.clase || (q.clase = clasePrev(q.c))]); cx.restore(); } // the planned cable under the pointer lights up like the real ones (owner, 22 Oct 2026, 17:57)
+      if (previstoMarcado >= 0 && PREV && PREV[previstoMarcado]) { const q = PREV[previstoMarcado]; cx.save(); cx.lineCap = 'round'; cx.setLineDash([0.1, 5]); resalta(cx, p, G, [q], SUB_COL[q.clase || (q.clase = clasePrev(q.c))]); cx.restore(); } // the planned cable under the pointer lights up like the real ones (owner, 22 Oct 2026, 17:57)
       if (llegadaMarcada >= 0 && LUG && LUG.llegadas) for (const j of LUG.llegadas[llegadaMarcada].seg) { const l = capas.sub.lineas[j]; if (l) resalta(cx, p, G, [l], colorSub(j)); }
       pintaLlegadas(cx, p, G);
       pintaNombresLlegadas(cx, p, G);
@@ -964,6 +973,7 @@
     return [A[0] + (B[0] - A[0]) * f, A[1] + (B[1] - A[1]) * f, A[2] + (B[2] - A[2]) * f];
   }
   function pintaLuz(cx, p, G, lineas, t) {
+    if (QUIETO) return;
     const cola = [0, 0.012, 0.024], alfa = [0.95, 0.42, 0.16], tam = [1.7, 1.4, 1.1];
     for (let c = 0; c < 3; c++) {
       cx.fillStyle = c ? `rgba(${ACERO},${alfa[c]})` : `rgba(${BLANCO},${alfa[c]})`;
