@@ -3966,6 +3966,41 @@
 ]
 },
 {
+"n": "Red troncal de fibra óptica del atolón de Majuro (Rita - Laura)",
+"o": "National Telecommunications Authority (NTA)",
+"cc": "MH",
+"l": [
+[
+171.363,
+7.123
+],
+[
+171.376,
+7.105
+],
+[
+171.383,
+7.091
+],
+[
+171.322,
+7.076
+],
+[
+171.171,
+7.075
+],
+[
+171.099,
+7.101
+],
+[
+171.037,
+7.147
+]
+]
+},
+{
 "n": "National Optical Fiber Backbone Ring",
 "o": "Afghan Telecom",
 "cc": "AF",
@@ -4892,6 +4927,37 @@
 [
 160.05,
 -9.429
+]
+]
+},
+{
+"n": "Red terrestre FTTP de Funafuti (Fongafale)",
+"o": "Tuvalu Telecommunications Corporation (TTC)",
+"cc": "TV",
+"l": [
+[
+179.197,
+-8.506
+],
+[
+179.201,
+-8.517
+],
+[
+179.198,
+-8.517
+],
+[
+179.195,
+-8.523
+],
+[
+179.195,
+-8.525
+],
+[
+179.188,
+-8.533
 ]
 ]
 },
@@ -7250,6 +7316,29 @@
 ]
 },
 {
+"n": "Dorsal gubernamental de fibra óptica de Nauru (sector occidental)",
+"o": "CENPAC Corporation / Departamento de ICT de Nauru",
+"cc": "NR",
+"l": [
+[
+166.93,
+-0.55
+],
+[
+166.916,
+-0.542
+],
+[
+166.913,
+-0.533
+],
+[
+166.917,
+-0.524
+]
+]
+},
+{
 "n": "GTA Terrestrial Fiber Network – Piti–Tamuning",
 "o": "GTA",
 "cc": "GU",
@@ -8954,6 +9043,21 @@
 [
 -171.77,
 -13.83
+]
+]
+},
+{
+"n": "Red terrestre de Saint-Pierre: Saint-Pierre–Savoyard",
+"o": "SPM Telecom",
+"cc": "PM",
+"l": [
+[
+-56.18,
+46.78
+],
+[
+-56.24,
+46.764
 ]
 ]
 },
