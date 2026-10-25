@@ -1,6 +1,6 @@
 {
  "nota": "Fotos de las fichas de Órbita: copias en guardianagroup.com de fotos de Wikimedia Commons con licencia libre, revisadas una a una (herramientas/agencia-rondas/fotos/). Crédito en la ficha y en terminos.html (sección 6).",
- "generado": "2026-10-25T03:35Z",
+ "generado": "2026-10-25T04:03Z",
  "fotos": {
   "satelite-45027": {
    "tipo": "satelite",
@@ -433,6 +433,18 @@
    "licencia": "CC BY 2.0",
    "url_licencia": "https://creativecommons.org/licenses/by/2.0",
    "pagina": "https://commons.wikimedia.org/wiki/File:Ula_Platform.jpg"
+  },
+  "estacion-grane": {
+   "tipo": "estacion",
+   "id": "Grane",
+   "nombre": "Grane",
+   "archivo": "estacion-grane.jpg",
+   "ancho": 640,
+   "alto": 360,
+   "autor": "Norsk olje og gass (recorte)",
+   "licencia": "CC BY-SA 2.0",
+   "url_licencia": "https://creativecommons.org/licenses/by-sa/2.0",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Grane,_Nordsj%C3%B8en_(27944593723).jpg"
   }
  }
 }
