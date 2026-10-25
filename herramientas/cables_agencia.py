@@ -38,6 +38,7 @@ ALIAS = {  # the same cable under different names (lower case, letters and digit
     'cabosanlucasmazatlan': 'tmx5', 'tmx5': 'tmx5',  # 24 Oct 2026 (ronda 26b): Gemini's «Cabo San Lucas-Mazatlán» is Telmex's TMX5 (San José del Cabo–Mazatlán, in service 23-9-2025)
     # 24 Oct 2026, 20:20 (owner: «Chequéalo todo»): the same cable under two names was drawn twice; same landings, year and owner
     'aualeutian': 'alaskaunitedaleutians', 'aualeutians': 'alaskaunitedaleutians',
+    'easternlightswedenfinlandi': 'easternlight',  # 25 Oct 2026: «Eastern Light Sweden-Finland I» is the same system as «Eastern Light» (Stockholm–Helsinki)
     'marianasguamcable': 'marianaguam', 'marianasguam': 'marianaguam',
     'tatatgnwesterneurope': 'tgnwesterneurope',
     'hawaiiislandfibrenetworkhifn': 'hawaiianislands',
@@ -167,6 +168,18 @@ RETIRADOS = {'tat9f5': 'TAT-9, retirado en 2004', 'tat11f4': 'TAT-11, retirado e
 # the offshore networks of the North Sea are kept as OpenStreetMap draws them, platform by platform; the agency's
 # simplified versions of them (Kårstø–Lowestoft, Aberdeen–Stavanger) are not drawn on top
 OSM_PRIORIDAD = {'tampnet', 'tampnet3', 'tampnetnorthsea', 'norseacoms', 'norseacom1', 'sleipnirgranefoc', 'cns'}
+
+# 25 Oct 2026 (round 30: «los extremos sueltos»; two voices, agencia-rondas/ronda30/{chatgpt,gemini}-extremos.json):
+# OpenStreetMap pieces whose loose end both voices place on land go on to that landing (the added stretch follows the sea
+# with the fine coast; its exact route is not public); by the piece's name: (loose end, landing, why)
+EXTIENDE = {
+    '臺金二號海纜': ((118.917, 24.418), (120.505, 24.258), 'Taiwán–Kinmen 2 llega a Taichung (puerto), según las dos voces (MODA y el condado de Kinmen)'),
+    'UK-Ireland Crossing 2': ((-6.104, 52.305), (-6.358, 52.398), 'llega a Ballinesker (Curracloe, Wexford), según las dos voces (informe SEA8 del Reino Unido)'),
+}
+# unnamed pieces that end in open sea and that neither voice identifies as a telecom cable (Sirri), or that repeat the
+# start of a cable the agency already draws (Tonga Cable, Nuku'alofa–Suva): by one of their ends
+SIN_NOMBRE_FUERA = {(54.626, 25.748): 'cable sin nombre de Sirri (Irán): ninguna voz lo identifica',
+                    (-175.605, -20.961): 'tramo sin nombre de Tonga: es el principio de Tonga Cable, ya dibujado entero'}
 
 # the name shown for a cable that goes by several names (ALIAS), when the most common answer is not its real name
 NOMBRE = {'tmx5': 'TMX5', 'amerigovespucci': 'Amerigo Vespucci', 'gulfofcalifornia': 'Gulf of California Cable',
@@ -569,6 +582,20 @@ def main():
     fuera = [s for s in osm if clave(s.get('n') or '') in RETIRADOS]
     if fuera: print('tramos de cables retirados que dejan de dibujarse:', len(fuera), '·', ', '.join(sorted({s.get('n') for s in fuera})))
     osm = [s for s in osm if clave(s.get('n') or '') not in RETIRADOS]
+    cerca = lambda e, q: abs(e[0] - q[0]) < 0.01 and abs(e[1] - q[1]) < 0.01
+    quitar = [s for s in osm if not s.get('n') and any(cerca(e, q) for e in (s['l'][0], s['l'][-1]) for q in SIN_NOMBRE_FUERA)]
+    if quitar: print('tramos sin nombre que dejan de dibujarse (ronda 30):', len(quitar))
+    osm = [s for s in osm if not any(s is q for q in quitar)]
+    for s in osm:
+        x = EXTIENDE.get(s.get('n') or '')
+        if not x: continue
+        suelto, destino, por = x
+        for fin in (-1, 0):
+            if cerca(s['l'][fin], suelto):
+                tramo = densa(fina.corrige([list(suelto), list(destino)], s['n']))
+                s['l'] = s['l'] + tramo[1:] if fin == -1 else tramo[::-1][:-1] + s['l']
+                s['ext'] = por
+                print('extremo suelto llevado a tierra:', s['n'], '·', por)
     # what OpenStreetMap already has, by whole cable: how many distinct landings (ends near a city)
     osm_llegadas = collections.defaultdict(set)
     for s in osm:

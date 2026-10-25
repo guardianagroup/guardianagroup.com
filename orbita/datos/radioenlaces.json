@@ -1,0 +1,79 @@
+{
+"fuente": {
+"n": "Agencia GUARDIANA (dos voces)",
+"lic": "GUARDIANA",
+"url": "",
+"fecha": "2026-10-25",
+"nota": "Cadenas troncales de radioenlaces de microondas que dos voces de la agencia confirman por separado, entre localidades: trazado aproximado, la posición de cada torre no es pública."
+},
+"lineas": [
+{
+"n": "Troncal occidental de microondas Asmara-Teseney",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+38.93,
+15.34
+],
+[
+38.45,
+15.78
+],
+[
+37.59,
+15.11
+]
+]
+},
+{
+"n": "Troncal Costera del Mar Rojo (Asmara - Massawa - Assab)",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+38.93,
+15.34
+],
+[
+39.47,
+15.61
+],
+[
+42.74,
+13.01
+]
+]
+},
+{
+"n": "Troncal meridional de microondas Asmara-Adi Quala",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+38.93,
+15.34
+],
+[
+38.82,
+14.89
+]
+]
+},
+{
+"n": "Ramal septentrional de microondas Keren-Nakfa",
+"o": "EriTel",
+"cc": "ER",
+"l": [
+[
+38.45,
+15.78
+],
+[
+38.69,
+16.19
+]
+]
+}
+]
+}

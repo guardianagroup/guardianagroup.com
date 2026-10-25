@@ -1,0 +1,56 @@
+[
+ {
+  "problema": "En personas con daltonismo rojo-verde (deuteranopía y protanopía) y tritanopía, el lavanda rgb(196,170,245), el verde agua rgb(112,222,200) y el gris sin dato rgb(176,178,190) convergen en luminosidades muy similares (entre L* 71 y L* 83) y tonos azulados/grisáceos casi indistinguibles sobre el fondo oscuro.",
+  "propuesta": "Escalonar la luminosidad entre categorías para que no dependan solo del matiz: subir el dorado gigante a un ámbar más luminoso rgb(235,168,84), oscurecer y saturar el lavanda a rgb(158,122,228), mantener el verde agua en rgb(96,214,194) y bajar el gris 'sin dato' a un gris pizarra apagado rgb(110,116,130).",
+  "prioridad": "alta",
+  "por_que": "Garantiza que la jerarquía de capacidad se lea por brillo incluso sin distinguir matices de color y evita que los cables sin datos parezcan rutas principales."
+ },
+ {
+  "problema": "En la vista global de la NASA con luces nocturnas encendidas, las troncales terrestres en dorado cobrizo rgb(200,136,88) y su halo se mimetizan con el resplandor amarillo-anaranjado de las áreas metropolitanas para cualquier usuario.",
+  "propuesta": "Atenuar la opacidad de la textura de luces nocturnas al 35 % y desaturarla ligeramente hacia un tono cálido pálido cuando las capas de cables estén activas, además de añadir un filete (casing) oscuro de 1 px rgb(15,18,24) bajo las troncales terrestres.",
+  "prioridad": "alta",
+  "por_que": "Separa la capa de datos del mapa base sin renunciar al atractivo visual del globo nocturno en la vista inicial."
+ },
+ {
+  "problema": "En grandes hubs urbanos se superponen tres elementos azules en el mismo punto geográfico: centros de datos rgb(77,166,255), puntos de intercambio (IXP) rgb(156,195,228) y puntos de ciudades (azul claro), haciendo imposible distinguirlos en pantallas pequeñas o con baja agudeza visual.",
+  "propuesta": "Diferenciar por geometría y tono: mantener los centros de datos como anillos en azul vivo rgb(56,152,255), cambiar los IXP a rombos (diamantes) en turquesa claro rgb(120,220,235) con borde oscuro, y pasar el punto de ciudad a un gris cálido discreto rgb(145,150,162).",
+  "prioridad": "alta",
+  "por_que": "En cartografía densa, la forma geométrica discrimina mejor que pequeñas variaciones dentro de la misma familia azul."
+ },
+ {
+  "problema": "Para usuarios con deuteranopía o protanopía, los cortes de internet en rojo o coral pueden confundirse con las grandes troncales en dorado cobrizo rgb(200,136,88), especialmente cuando estas brillan con halo.",
+  "propuesta": "Fijar el color de alerta de corte en un rojo carmesí-magenta de alta visibilidad rgb(255,68,102) acompañado de un anillo exterior pulsante o un icono de aspa/interrupción.",
+  "prioridad": "alta",
+  "por_que": "Desplaza el rojo hacia el espectro magenta para evitar el eje de confusión con el ámbar/cobrizo y añade redundancia visual a las alertas críticas."
+ },
+ {
+  "problema": "Los puntos de amarre submarino y las bases polares o estaciones terrenas de satélite usan exactamente el mismo símbolo (anillo blanco con punto central), lo que genera ambigüedad en zonas costeras de latitudes altas (como Noruega, Alaska o el sur de Chile/Argentina).",
+  "propuesta": "Mantener el anillo blanco con punto para los amarres de cable submarino y cambiar las estaciones de satélites y bases polares a un triángulo inscrito o mira reticulada (anillo con cuatro muescas) en blanco marfil rgb(235,240,255).",
+  "prioridad": "media",
+  "por_que": "Evita que dos infraestructuras de naturaleza distinta compartan exactamente la misma codificación gráfica."
+ },
+ {
+  "problema": "Usar el mismo trazo discontinuo para dos conceptos distintos ('trazado aproximado' de un cable activo y 'cable previsto/futuro') confunde la incertidumbre geográfica con el estado operativo del cable.",
+  "propuesta": "Reservar la línea de guiones largos (con luces de tráfico activas) para los cables en servicio de trazado aproximado, y usar línea punteada fina al 55 % de opacidad (sin luces de tráfico en movimiento) para los cables previstos.",
+  "prioridad": "media",
+  "por_que": "Desacopla visualmente la falta de precisión cartográfica de la inexistencia física actual de la infraestructura."
+ },
+ {
+  "problema": "Los cables submarinos y terrestres comparten la misma paleta de cuatro colores pero sus categorías significan cosas distintas (Tbit/s en mar vs. jerarquía funcional en tierra), y al tocar la costa solo se diferencian por un ligero cambio de grosor difícil de apreciar en móvil.",
+  "propuesta": "Unificar la leyenda en una matriz bivariada clara (Mar / Tierra) y aplicar a los cables terrestres un borde exterior oscuro (casing) de 1 px sobre el continente gris para acentuar el cambio de medio al cruzar la línea de costa.",
+  "prioridad": "media",
+  "por_que": "Ayuda al ojo a entender dónde termina el tramo húmedo y empieza el terrestre sin alterar la paleta general del mapa."
+ },
+ {
+  "problema": "Las luces animadas ('datos que van y vienen'), sumadas al fondo de estrellas y a tres capas de satélites en órbita, generan ruido visual y fatiga en personas con sensibilidad al movimiento o trastornos vestibulares.",
+  "propuesta": "Respetar la preferencia del sistema 'prefers-reduced-motion' desactivando el movimiento automático de pulsos por defecto cuando esté activa, añadir un botón visible de pausa de animación y bajar el brillo de las estrellas de fondo a un máximo de rgb(90,95,110).",
+  "prioridad": "media",
+  "por_que": "Cumple con el criterio de accesibilidad WCAG 2.3.3 y evita que las estrellas del espacio compitan con la constelación de satélites."
+ },
+ {
+  "problema": "El hover que solo ilumina y engrosa el elemento en su propio color funciona bien en cables aislados, pero en cruces densos (como el estrecho de Luzón, el canal de la Mancha o el mar Rojo) no separa suficientemente el cable activo de sus vecinos del mismo color.",
+  "propuesta": "Al hacer hover o tap en móvil, mantener el aumento de brillo y grosor del elemento seleccionado, pero añadirle una sombra paralela negra de 3 px y atenuar temporalmente el resto de cables no seleccionados al 40 % de opacidad.",
+  "prioridad": "baja",
+  "por_que": "Aumenta drásticamente el contraste figura-fondo en haces de cables superpuestos sin romper la regla de diseño de no usar blanco en el hover."
+ }
+]
