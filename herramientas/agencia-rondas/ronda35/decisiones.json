@@ -1,0 +1,1142 @@
+{
+"5": {
+"nombre": "NTT Vienna 1",
+"lat": 48.15984,
+"lon": 16.33699,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Computerstraße 4, 1100 Wien, Austria",
+"precision": "direccion-calle",
+"acuerdo_km": 0.0
+},
+"9": {
+"nombre": "NEXTDC M2",
+"lat": -37.70887,
+"lon": 144.87545,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "75 Sharps Road, Tullamarine VIC 3043, Melbourne, Australia",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"10": {
+"nombre": "NEXTDC P1",
+"lat": -31.86622,
+"lon": 115.89788,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "4 Millrose Drive, Malaga WA 6090, Perth, Australia",
+"precision": "direccion-calle",
+"acuerdo_km": 0.0
+},
+"13": {
+"nombre": "LCL Brussels-South",
+"lat": 50.75511,
+"lon": 4.26324,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.49
+},
+"19": {
+"nombre": "Ascenty Hortolândia 1",
+"lat": -22.89455,
+"lon": -47.1805,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.42
+},
+"20": {
+"nombre": "Ascenty Hortolândia 2",
+"lat": -22.89436,
+"lon": -47.17956,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.57
+},
+"21": {
+"nombre": "Ascenty Hortolândia 3",
+"lat": -22.89461,
+"lon": -47.17972,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.59
+},
+"22": {
+"nombre": "Ascenty Hortolândia 4",
+"lat": -22.89486,
+"lon": -47.17996,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.63
+},
+"23": {
+"nombre": "Ascenty Hortolândia 5",
+"lat": -22.89511,
+"lon": -47.18022,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.67
+},
+"28": {
+"nombre": "Ascenty Sumaré 1",
+"lat": -22.81719,
+"lon": -47.20303,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.02
+},
+"29": {
+"nombre": "Ascenty Sumaré 2",
+"lat": -22.81719,
+"lon": -47.20303,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.02
+},
+"34": {
+"nombre": "Cirion SAO1",
+"lat": -23.5948,
+"lon": -46.84998,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Avenida Eid Mansur 666, Parque São George, 06708-070 Cotia, São Paulo, Brasil",
+"precision": "direccion-calle",
+"acuerdo_km": 0.36
+},
+"37": {
+"nombre": "Elea CTA1",
+"lat": -25.4252,
+"lon": -49.2805,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.03
+},
+"42": {
+"nombre": "Elea SPO3",
+"lat": -23.50176,
+"lon": -46.84136,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.21
+},
+"46": {
+"nombre": "Equinix SP2",
+"lat": -23.50289,
+"lon": -46.82897,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.34
+},
+"48": {
+"nombre": "Equinix SP5x",
+"lat": -23.48084,
+"lon": -46.83343,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.44
+},
+"50": {
+"nombre": "ODATA SP03",
+"lat": -23.49829,
+"lon": -46.82981,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.29
+},
+"52": {
+"nombre": "Scala SGRUTB01",
+"lat": -23.49462,
+"lon": -46.82432,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.49
+},
+"53": {
+"nombre": "Scala SGRUTB03",
+"lat": -23.49431,
+"lon": -46.82563,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.47
+},
+"54": {
+"nombre": "Scala SGRUTB04",
+"lat": -23.49805,
+"lon": -46.81804,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.0
+},
+"55": {
+"nombre": "Scala SGRUTB05",
+"lat": -23.49813,
+"lon": -46.818,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.36
+},
+"59": {
+"nombre": "Scala SPOAPA01",
+"lat": -30.00079,
+"lon": -51.19947,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.91
+},
+"61": {
+"nombre": "Cologix MTL1",
+"lat": 45.50258,
+"lon": -73.56714,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "625 Boulevard René-Lévesque Ouest, H3B 1R2 Montréal, Québec, Canada",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"63": {
+"nombre": "Cologix MTL3",
+"lat": 45.49713,
+"lon": -73.57029,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "1250 Boulevard René-Lévesque Ouest, H3B 4W8 Montréal, Québec, Canada",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.03
+},
+"65": {
+"nombre": "Cologix TOR2",
+"lat": 43.64168,
+"lon": -79.41221,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "905 King Street West, M6K 3G9 Toronto, Ontario, Canada",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"67": {
+"nombre": "Digital Realty ZUR2",
+"lat": 47.43349,
+"lon": 8.55674,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.85
+},
+"68": {
+"nombre": "Equinix ZH2",
+"lat": 47.38793,
+"lon": 8.52017,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Josefstrasse 225, 8005 Zürich, Switzerland",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"69": {
+"nombre": "Equinix ZH4",
+"lat": 47.38793,
+"lon": 8.52017,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Josefstrasse 225, 8005 Zürich, Switzerland",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"70": {
+"nombre": "Ascenty Santiago 1",
+"lat": -33.33513,
+"lon": -70.71256,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.32
+},
+"71": {
+"nombre": "Ascenty Santiago 2",
+"lat": -33.3415,
+"lon": -70.70821,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.86
+},
+"72": {
+"nombre": "Ascenty Santiago 3",
+"lat": -33.3415,
+"lon": -70.70821,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.86
+},
+"78": {
+"nombre": "GTD Holanda",
+"lat": -33.41993,
+"lon": -70.60416,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.04
+},
+"79": {
+"nombre": "GTD Huérfanos",
+"lat": -33.43952,
+"lon": -70.65177,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.23
+},
+"80": {
+"nombre": "GTD Lídice I",
+"lat": -33.43992,
+"lon": -70.64652,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.16
+},
+"81": {
+"nombre": "GTD Lídice II",
+"lat": -33.44002,
+"lon": -70.64657,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.17
+},
+"82": {
+"nombre": "GTD Moneda",
+"lat": -33.44208,
+"lon": -70.64949,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Moneda 920, Santiago, Región Metropolitana, Chile",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.03
+},
+"95": {
+"nombre": "Equinix SH3",
+"lat": 31.25159,
+"lon": 121.61553,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.46
+},
+"100": {
+"nombre": "GDS Guangzhou 1",
+"lat": 23.16446,
+"lon": 113.45555,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.16
+},
+"102": {
+"nombre": "GDS Shanghai 1",
+"lat": 31.32555,
+"lon": 121.60043,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.16
+},
+"103": {
+"nombre": "GDS Shanghai 2",
+"lat": 31.32575,
+"lon": 121.60068,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.13
+},
+"104": {
+"nombre": "GDS Shanghai 3",
+"lat": 31.32595,
+"lon": 121.60093,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.09
+},
+"110": {
+"nombre": "Claro Triara MegaCenter Medellín",
+"lat": 6.21874,
+"lon": -75.57271,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.64
+},
+"114": {
+"nombre": "ICE Kosmös Hub Sabana",
+"lat": 9.94067,
+"lon": -84.10089,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.33
+},
+"118": {
+"nombre": "MasterDC Brno",
+"lat": 49.19682,
+"lon": 16.61877,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.33
+},
+"120": {
+"nombre": "Equinix MU3",
+"lat": 48.14268,
+"lon": 11.55599,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Seidlstraße 3, 80335 München, Germany",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"123": {
+"nombre": "NTT Frankfurt 4",
+"lat": 50.06201,
+"lon": 8.48403,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Voltastraße 15, 65795 Hattersheim am Main, Germany",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"124": {
+"nombre": "Djibouti Data Centre",
+"lat": 11.56561,
+"lon": 43.16468,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.19
+},
+"126": {
+"nombre": "Digital Realty CPH3",
+"lat": 55.72766,
+"lon": 12.38021,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.17
+},
+"132": {
+"nombre": "WaveCom Endla Data Center",
+"lat": 59.42937,
+"lon": 24.73144,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Endla 16, 10142 Tallinn, Estonia",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"135": {
+"nombre": "Digital Realty BCN1",
+"lat": 41.42998,
+"lon": 2.23263,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.73
+},
+"136": {
+"nombre": "Digital Realty MAD1",
+"lat": 40.4395,
+"lon": -3.62142,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Calle de Albasanz, 71, 28037 Madrid, España",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"137": {
+"nombre": "Digital Realty MAD3",
+"lat": 40.43425,
+"lon": -3.62418,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.39
+},
+"138": {
+"nombre": "Equinix BA1",
+"lat": 41.34975,
+"lon": 2.13878,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Carrer de l'Acer, 30-32, 08038 Barcelona, España",
+"precision": "direccion-calle",
+"acuerdo_km": 0.09
+},
+"141": {
+"nombre": "Nabiax Alcalá",
+"lat": 40.51897,
+"lon": -3.34173,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.46
+},
+"142": {
+"nombre": "Nabiax Julián Camarillo",
+"lat": 40.43797,
+"lon": -3.62891,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.91
+},
+"146": {
+"nombre": "Templus VAL01",
+"lat": 39.55406,
+"lon": -0.46734,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.43
+},
+"151": {
+"nombre": "ETIX Lille #3",
+"lat": 50.37844,
+"lon": 3.52203,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.17
+},
+"153": {
+"nombre": "Equinix MA3",
+"lat": 53.48421,
+"lon": -2.27275,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Joule House, 76 Trafford Wharf Road, Trafford Park, M17 1HE Manchester, United Kingdom",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"156": {
+"nombre": "Telehouse North Two",
+"lat": 51.51173,
+"lon": -0.00187,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "14 Coriander Avenue, E14 2AA London, United Kingdom",
+"precision": "direccion-calle",
+"acuerdo_km": 0.0
+},
+"160": {
+"nombre": "LANCOM Balkan Gate",
+"lat": 40.6517,
+"lon": 22.87,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.34
+},
+"172": {
+"nombre": "NeuCentrIX Batam Center",
+"lat": 1.1378,
+"lon": 104.02562,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Jl. Laksamana Bintan, Baloi Permai, Batam Center, Batam, Kepulauan Riau, Indonesia",
+"precision": "direccion-calle",
+"acuerdo_km": 0.36
+},
+"189": {
+"nombre": "atNorth ICE03",
+"lat": 65.67632,
+"lon": -18.13984,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Hlíðarvellir 1, 603 Akureyri, Islandia",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"190": {
+"nombre": "Aruba IT3 Global Cloud Data Center",
+"lat": 45.7088,
+"lon": 9.58951,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Via San Clemente 53, 24036 Ponte San Pietro, Bergamo, Italia",
+"precision": "direccion-calle",
+"acuerdo_km": 0.26
+},
+"191": {
+"nombre": "Equinix ML2",
+"lat": 45.44868,
+"lon": 9.14729,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Via Savona 125, 20144 Milano, Italia",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"196": {
+"nombre": "Equinix TY4",
+"lat": 35.68767,
+"lon": 139.76581,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.07
+},
+"197": {
+"nombre": "Equinix TY8",
+"lat": 35.62221,
+"lon": 139.74781,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.19
+},
+"202": {
+"nombre": "PAIX Nairobi NBO-1",
+"lat": -1.30001,
+"lon": 36.81322,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Britam Tower, Hospital Road, Upper Hill, Nairobi, Kenia",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"206": {
+"nombre": "Equinix SL4",
+"lat": 37.60326,
+"lon": 126.89227,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "69 Hyangdong-ro, Deogyang-gu, 10545 Goyang-si, Gyeonggi-do, Corea del Sur",
+"precision": "direccion-calle",
+"acuerdo_km": 0.46
+},
+"207": {
+"nombre": "KT Mokdong IDC",
+"lat": 37.52906,
+"lon": 126.87021,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.1
+},
+"208": {
+"nombre": "LG CNS Busan Global Cloud Data Center",
+"lat": 35.13841,
+"lon": 128.85982,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "153 Mieumsandan-ro, Gangseo-gu, Busan, Corea del Sur",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"209": {
+"nombre": "LG U+ Pyeongchon IDC",
+"lat": 37.39848,
+"lon": 126.96755,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "29 Simin-daero 327beon-gil, Dongan-gu, Anyang-si, Gyeonggi-do, Corea del Sur",
+"precision": "direccion-calle",
+"acuerdo_km": 0.12
+},
+"211": {
+"nombre": "Kazteleport Khan Tengri",
+"lat": 43.24444,
+"lon": 76.95675,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Dostyk Avenue 39, Medeu District, Almaty, Kazakhstan",
+"precision": "direccion-calle",
+"acuerdo_km": 0.0
+},
+"212": {
+"nombre": "Kazteleport Okzhetpes",
+"lat": 51.13414,
+"lon": 71.41295,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Kabanbay Batyr Avenue 17, Yesil District, Astana, Kazakhstan",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"226": {
+"nombre": "Rogers Capital Data Center",
+"lat": -20.16541,
+"lon": 57.49878,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.58
+},
+"231": {
+"nombre": "AIMS KL2 Bangunan AIMS",
+"lat": 3.14953,
+"lon": 101.70539,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.1
+},
+"234": {
+"nombre": "Equinix KL1",
+"lat": 2.90283,
+"lon": 101.6536,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.63
+},
+"241": {
+"nombre": "Rack Centre LGS 1",
+"lat": 6.6039,
+"lon": 3.36873,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.37
+},
+"244": {
+"nombre": "CDC Silverdale",
+"lat": -36.61527,
+"lon": 174.66394,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.07
+},
+"245": {
+"nombre": "Datacom Abel",
+"lat": -41.29586,
+"lon": 174.7733,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.1
+},
+"246": {
+"nombre": "Datacom Gloucester",
+"lat": -43.53001,
+"lon": 172.64364,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.27
+},
+"260": {
+"nombre": "Atman WAW-2",
+"lat": 52.18575,
+"lon": 20.99665,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "ul. Konstruktorska 5, 02-673 Warszawa, Polonia",
+"precision": "direccion-coordenadas",
+"acuerdo_km": 0.1
+},
+"261": {
+"nombre": "Equinix WA1",
+"lat": 52.22761,
+"lon": 21.00426,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Aleje Jerozolimskie 65/79, 00-697 Warszawa, Polonia",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"265": {
+"nombre": "M247 Bucharest DC1",
+"lat": 44.47859,
+"lon": 26.11782,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Șoseaua Fabrica de Glucoză 11B, planta 1, Sector 2, 020331 București, Rumanía",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"266": {
+"nombre": "M247 Bucharest DC2",
+"lat": 44.47859,
+"lon": 26.11782,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.4
+},
+"267": {
+"nombre": "NXDATA-1",
+"lat": 44.48159,
+"lon": 26.12069,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Bulevardul Dimitrie Pompeiu 8, edificio FEPER, planta 3, Sector 2, 020337 București, Rumanía",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"277": {
+"nombre": "Equinix SG1",
+"lat": 1.29513,
+"lon": 103.78981,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "20 Ayer Rajah Crescent, Singapore 139964",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"278": {
+"nombre": "NTT Serangoon Data Center",
+"lat": 1.37608,
+"lon": 103.87494,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.78
+},
+"283": {
+"nombre": "AIMS Bangkok",
+"lat": 13.72496,
+"lon": 100.53899,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.14
+},
+"292": {
+"nombre": "Chief Telecom LY IDC",
+"lat": 25.07807,
+"lon": 121.5774,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.1
+},
+"299": {
+"nombre": "CoreSite DE1",
+"lat": 39.74566,
+"lon": -104.99541,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.0
+},
+"303": {
+"nombre": "Equinix AT1",
+"lat": 33.75855,
+"lon": -84.3877,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "180 Peachtree Street NW, plantas 2, 3 y 6, Atlanta, GA 30303, Estados Unidos",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"306": {
+"nombre": "Equinix LA1",
+"lat": 34.04733,
+"lon": -118.25754,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.0
+},
+"307": {
+"nombre": "Equinix LA3",
+"lat": 33.92634,
+"lon": -118.39406,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.2
+},
+"308": {
+"nombre": "Equinix LA4",
+"lat": 33.922,
+"lon": -118.38312,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.04
+},
+"317": {
+"nombre": "Paratus Zambia Data Centre",
+"lat": -15.41413,
+"lon": 28.2973,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.28
+}
+}

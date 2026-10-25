@@ -1,0 +1,104 @@
+{
+"1": {
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "International Media Production Zone (IMPZ), Dubai Production City, parcela P.B.001, Sheikh Mohammed Bin Zayed Road, Dubái, Emiratos Árabes Unidos",
+"por": "calle",
+"coords": [
+[
+25.0336,
+55.1912
+]
+],
+"nombre": "datamena Dubai"
+},
+"5": {
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Computerstraße 4, 1100 Wien, Austria",
+"por": "calle",
+"coords": [
+[
+48.1633,
+16.3924
+]
+],
+"nombre": "NTT Vienna 1"
+},
+"9": {
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "75 Sharps Road, Tullamarine VIC 3043, Melbourne, Australia",
+"por": "calle",
+"coords": [
+[
+-37.6974,
+144.8672
+]
+],
+"nombre": "NEXTDC M2"
+},
+"10": {
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "4 Millrose Drive, Malaga WA 6090, Perth, Australia",
+"por": "calle",
+"coords": [
+[
+-31.8644,
+115.8959
+],
+[
+-31.8596,
+115.8942
+]
+],
+"nombre": "NEXTDC P1"
+},
+"19": {
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Estrada Municipal Sabina Baptista de Camargo, 350 - Jardim São Bento, Hortolândia - SP, 13187-244, Brazil",
+"por": "coordenadas",
+"coords": [
+[
+-22.896,
+-47.1792
+],
+[
+-22.8931,
+-47.1818
+]
+],
+"nombre": "Ascenty Hortolândia 1"
+},
+"34": {
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Avenida Eid Mansur 666, Parque São George, 06708-070 Cotia, São Paulo, Brasil",
+"por": "calle",
+"coords": [
+[
+-23.5979,
+-46.8488
+],
+[
+-23.5936,
+-46.8488
+]
+],
+"nombre": "Cirion SAO1"
+}
+}

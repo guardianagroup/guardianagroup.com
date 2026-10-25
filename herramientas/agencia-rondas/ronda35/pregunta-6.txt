@@ -11,8 +11,8 @@ Lista (id · nombre · operador · ciudad, país):
 277 · Equinix SG1 · Equinix · Singapur, SG
 278 · NTT Serangoon Data Center · NTT Global Data Centers · Singapur, SG
 279 · RVO Ljubljana Data Center · RVO · Liubliana, SI
-280 · SITEL POP1 · SITEL · Bratislava, AT
-281 · SITEL POP2 · SITEL · Bratislava, AT
+280 · SITEL POP1 · SITEL · Bratislava, SK
+281 · SITEL POP2 · SITEL · Bratislava, SK
 282 · SITEL POPKE · SITEL · Košice, SK
 283 · AIMS Bangkok · AIMS Data Centre · Bangkok, TH
 284 · NTT Bangkok Data Center · NTT Global Data Centers · Bangkok, TH

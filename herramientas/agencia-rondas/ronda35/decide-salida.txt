@@ -1,0 +1,96 @@
+con dos voces o más: 318 · situados con acuerdo: 95
+  5 NTT Vienna 1 | direccion-calle 0.0 km | Computerstraße 4, 1100 Wien, Austria
+  9 NEXTDC M2 | direccion-edificio 0.0 km | 75 Sharps Road, Tullamarine VIC 3043, Melbourne, Australia
+  10 NEXTDC P1 | direccion-calle 0.0 km | 4 Millrose Drive, Malaga WA 6090, Perth, Australia
+  13 LCL Brussels-South | zona 0.49 km | 
+  19 Ascenty Hortolândia 1 | zona 0.42 km | 
+  20 Ascenty Hortolândia 2 | zona 0.57 km | 
+  21 Ascenty Hortolândia 3 | zona 0.59 km | 
+  22 Ascenty Hortolândia 4 | zona 0.63 km | 
+  23 Ascenty Hortolândia 5 | zona 0.67 km | 
+  28 Ascenty Sumaré 1 | zona 1.02 km | 
+  29 Ascenty Sumaré 2 | zona 1.02 km | 
+  34 Cirion SAO1 | direccion-calle 0.36 km | Avenida Eid Mansur 666, Parque São George, 06708-070 Cotia, São Paulo,
+  37 Elea CTA1 | zona 0.03 km | 
+  42 Elea SPO3 | zona 1.21 km | 
+  46 Equinix SP2 | zona 0.34 km | 
+  48 Equinix SP5x | zona 1.44 km | 
+  50 ODATA SP03 | zona 1.29 km | 
+  52 Scala SGRUTB01 | zona 1.49 km | 
+  53 Scala SGRUTB03 | zona 1.47 km | 
+  54 Scala SGRUTB04 | zona 0.0 km | 
+  55 Scala SGRUTB05 | zona 0.36 km | 
+  59 Scala SPOAPA01 | zona 0.91 km | 
+  61 Cologix MTL1 | direccion-edificio 0.0 km | 625 Boulevard René-Lévesque Ouest, H3B 1R2 Montréal, Québec, Canada
+  63 Cologix MTL3 | direccion-edificio 0.03 km | 1250 Boulevard René-Lévesque Ouest, H3B 4W8 Montréal, Québec, Canada
+  65 Cologix TOR2 | direccion-edificio 0.0 km | 905 King Street West, M6K 3G9 Toronto, Ontario, Canada
+  67 Digital Realty ZUR2 | zona 0.85 km | 
+  68 Equinix ZH2 | direccion-edificio 0.0 km | Josefstrasse 225, 8005 Zürich, Switzerland
+  69 Equinix ZH4 | direccion-edificio 0.0 km | Josefstrasse 225, 8005 Zürich, Switzerland
+  70 Ascenty Santiago 1 | zona 1.32 km | 
+  71 Ascenty Santiago 2 | zona 0.86 km | 
+  72 Ascenty Santiago 3 | zona 0.86 km | 
+  78 GTD Holanda | zona 0.04 km | 
+  79 GTD Huérfanos | zona 0.23 km | 
+  80 GTD Lídice I | zona 1.16 km | 
+  81 GTD Lídice II | zona 1.17 km | 
+  82 GTD Moneda | direccion-edificio 0.03 km | Moneda 920, Santiago, Región Metropolitana, Chile
+  95 Equinix SH3 | zona 0.46 km | 
+  100 GDS Guangzhou 1 | zona 1.16 km | 
+  102 GDS Shanghai 1 | zona 1.16 km | 
+  103 GDS Shanghai 2 | zona 1.13 km | 
+  104 GDS Shanghai 3 | zona 1.09 km | 
+  110 Claro Triara MegaCenter Medellín | zona 0.64 km | 
+  114 ICE Kosmös Hub Sabana | zona 0.33 km | 
+  118 MasterDC Brno | zona 1.33 km | 
+  120 Equinix MU3 | direccion-edificio 0.0 km | Seidlstraße 3, 80335 München, Germany
+  123 NTT Frankfurt 4 | direccion-edificio 0.0 km | Voltastraße 15, 65795 Hattersheim am Main, Germany
+  124 Djibouti Data Centre | zona 1.19 km | 
+  126 Digital Realty CPH3 | zona 0.17 km | 
+  132 WaveCom Endla Data Center | direccion-edificio 0.0 km | Endla 16, 10142 Tallinn, Estonia
+  135 Digital Realty BCN1 | zona 0.73 km | 
+  136 Digital Realty MAD1 | direccion-edificio 0.0 km | Calle de Albasanz, 71, 28037 Madrid, España
+  137 Digital Realty MAD3 | zona 0.39 km | 
+  138 Equinix BA1 | direccion-calle 0.09 km | Carrer de l'Acer, 30-32, 08038 Barcelona, España
+  141 Nabiax Alcalá | zona 0.46 km | 
+  142 Nabiax Julián Camarillo | zona 0.91 km | 
+  146 Templus VAL01 | zona 0.43 km | 
+  151 ETIX Lille #3 | zona 0.17 km | 
+  153 Equinix MA3 | direccion-edificio 0.0 km | Joule House, 76 Trafford Wharf Road, Trafford Park, M17 1HE Manchester
+  156 Telehouse North Two | direccion-calle 0.0 km | 14 Coriander Avenue, E14 2AA London, United Kingdom
+  160 LANCOM Balkan Gate | zona 0.34 km | 
+  172 NeuCentrIX Batam Center | direccion-calle 0.36 km | Jl. Laksamana Bintan, Baloi Permai, Batam Center, Batam, Kepulauan Ria
+  189 atNorth ICE03 | direccion-edificio 0.0 km | Hlíðarvellir 1, 603 Akureyri, Islandia
+  190 Aruba IT3 Global Cloud Data Center | direccion-calle 0.26 km | Via San Clemente 53, 24036 Ponte San Pietro, Bergamo, Italia
+  191 Equinix ML2 | direccion-edificio 0.0 km | Via Savona 125, 20144 Milano, Italia
+  196 Equinix TY4 | zona 0.07 km | 
+  197 Equinix TY8 | zona 0.19 km | 
+  202 PAIX Nairobi NBO-1 | direccion-edificio 0.0 km | Britam Tower, Hospital Road, Upper Hill, Nairobi, Kenia
+  206 Equinix SL4 | direccion-calle 0.46 km | 69 Hyangdong-ro, Deogyang-gu, 10545 Goyang-si, Gyeonggi-do, Corea del 
+  207 KT Mokdong IDC | zona 1.1 km | 
+  208 LG CNS Busan Global Cloud Data Center | direccion-edificio 0.0 km | 153 Mieumsandan-ro, Gangseo-gu, Busan, Corea del Sur
+  209 LG U+ Pyeongchon IDC | direccion-calle 0.12 km | 29 Simin-daero 327beon-gil, Dongan-gu, Anyang-si, Gyeonggi-do, Corea d
+  211 Kazteleport Khan Tengri | direccion-calle 0.0 km | Dostyk Avenue 39, Medeu District, Almaty, Kazakhstan
+  212 Kazteleport Okzhetpes | direccion-edificio 0.0 km | Kabanbay Batyr Avenue 17, Yesil District, Astana, Kazakhstan
+  226 Rogers Capital Data Center | zona 0.58 km | 
+  231 AIMS KL2 Bangunan AIMS | zona 0.1 km | 
+  234 Equinix KL1 | zona 0.63 km | 
+  241 Rack Centre LGS 1 | zona 1.37 km | 
+  244 CDC Silverdale | zona 0.07 km | 
+  245 Datacom Abel | zona 0.1 km | 
+  246 Datacom Gloucester | zona 0.27 km | 
+  260 Atman WAW-2 | direccion-coordenadas 0.1 km | ul. Konstruktorska 5, 02-673 Warszawa, Polonia
+  261 Equinix WA1 | direccion-edificio 0.0 km | Aleje Jerozolimskie 65/79, 00-697 Warszawa, Polonia
+  265 M247 Bucharest DC1 | direccion-edificio 0.0 km | Șoseaua Fabrica de Glucoză 11B, planta 1, Sector 2, 020331 București, 
+  266 M247 Bucharest DC2 | zona 0.4 km | 
+  267 NXDATA-1 | direccion-edificio 0.0 km | Bulevardul Dimitrie Pompeiu 8, edificio FEPER, planta 3, Sector 2, 020
+  277 Equinix SG1 | direccion-edificio 0.0 km | 20 Ayer Rajah Crescent, Singapore 139964
+  278 NTT Serangoon Data Center | zona 0.78 km | 
+  283 AIMS Bangkok | zona 1.14 km | 
+  292 Chief Telecom LY IDC | zona 1.1 km | 
+  299 CoreSite DE1 | zona 0.0 km | 
+  303 Equinix AT1 | direccion-edificio 0.0 km | 180 Peachtree Street NW, plantas 2, 3 y 6, Atlanta, GA 30303, Estados 
+  306 Equinix LA1 | zona 0.0 km | 
+  307 Equinix LA3 | zona 1.2 km | 
+  308 Equinix LA4 | zona 1.04 km | 
+  317 Paratus Zambia Data Centre | zona 1.28 km | 

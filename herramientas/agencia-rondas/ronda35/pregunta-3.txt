@@ -8,8 +8,8 @@ Lista (id · nombre · operador · ciudad, país):
 112 · Equinix BG2 · Equinix · Bogotá, CO
 113 · GTD El Poblado · GTD · Medellín, CO
 114 · ICE Kosmös Hub Sabana · Grupo ICE · San José, CR
-115 · Cyta Aglandjia Data Center · Cyta · Nicosia, -99
-116 · Cyta Amathus Data Center · Cyta · Limasol, -99
+115 · Cyta Aglandjia Data Center · Cyta · Nicosia, CY
+116 · Cyta Amathus Data Center · Cyta · Limasol, CY
 117 · Aruba CZ1 · Aruba · Ktiš, CZ
 118 · MasterDC Brno · MasterDC · Brno, CZ
 119 · CyrusOne FRA2 · CyrusOne · Frankfurt, DE
