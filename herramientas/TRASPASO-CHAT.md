@@ -776,3 +776,69 @@ Actualizado el sábado 24 de octubre de 2026 a las 21:25, hora de Bogotá, al ce
 - **Ronda 33 · frases de la interfaz en los idiomas no abiertos** (dueño, 14:45: «si»). 87 frases que faltaban en los 39 archivos `orbita/static/i18n/*.json` (lista y versión inglesa en `agencia-rondas/ronda33/por-traducir-en.json`; traducciones en `lote1..5.py`; `aplica.py` las valida y añade —cambiar en él la ruta `S` a esa carpeta—). **Hechos 25 idiomas:** de, fr, it, nl, pt-pt, sv, da, nb, fi, is, pl, cs, sk, hr, hu, ro, bg, ru, uk, el, tr, ar, fa, he, ur. **Faltan 14:** hi, bn, ta, te, zh, zh-tw, ja, ko, id, ms, vi, th, fil, sw (mismo formato: lista de 87 en el orden de `por-traducir-en.json`; «GUARDIANA», `{n}`, `{m}`, X, Y, «Tbit/s», «SHA-256» y «OpenStreetMap» intactos). Después, subir `idioma.js?v=` en `orbita/index.html` (va en `20261026e`) para que se recarguen.
 - **Siguen fuera del mapa por falta de dos voces o de fuente:** San Pedro y Miquelón (fibra), Tuvalu, Nauru, los cables de una sola voz (notas de la ronda 32). Cero extremos sueltos.
 - **Pendiente:** hibernar el ordenador del dueño cuando el mapa esté al 100 % (lo pidió); la lista de siempre (Radiografías, ZERO, Países, términos, páginas viejas); orden en espera de publicar la portada nueva («publícala»); abrir los 42 idiomas solo cuando el dueño lo diga (`data-idiomas="todos"`). Posible propuesta al dueño: la costa se ve pixelada a partir de ×40 (máscara raster de 16k); una costa vectorial de Natural Earth al acercar lo arreglaría.
+
+**25 Oct 2026, 16:25 — cierre de esta cuenta (dueño, 16:20: «guarda todo y deja un resumen para pasárselo a otra cuenta»). EMPIEZA POR AQUÍ.**
+
+Encargo vigente del dueño (15:16 y 15:31): agencia (ChatGPT «Alta», Gemini Argon, Astra en Cheaper Inference + Claude), **mapa al 100 % y «ningún error» en todas las capas: cables submarinos, cables por tierra, centros de datos, satélites, todo**.
+
+**Publicado en las dos ramas en esta cuenta**
+- **Ronda 34:** Tuvalu, Nauru, Islas Marshall (Majuro, Rita–Laura) y San Pedro y Miquelón (Saint-Pierre–Savoyard) con dos voces. Las respuestas están en `fibra-agencia/*-r34*.json` y los pueblos, en `SITIOS` (Nominatim). `fibra-tierra.json` ya tiene **229 países**. ADONES ya no sale. `main` 39bc113 y los datos del workflow b75a199.
+- **Ronda 33 terminada:** las 87 frases, en los 39 idiomas no abiertos.
+- `pueblos_fibra.py` también busca en GeoNames los sitios donde llegan los cables de la agencia. Está en `main` y ya corrió: `pueblos-fibra.tsv`, con 759 pueblos más.
+
+**Guardado en `web-idiomas`, SIN publicar en `main` (falta probar y publicar)**
+1. **`cables_agencia.py`**, el trazado fino de los cables de la agencia:
+   - `Fina.fino()` hace dos pasadas.
+   - Si la ruta cruza el antimeridiano, corrige cada lado por separado (Telstra Endeavour, SCX NEXT, Tui-Samoa).
+   - `insiste`: un salto por mar puede rodear más.
+   - Cuando la ruta corta tierra junto a una llegada, se ancla al agua más cercana.
+   - Si un grupo de tramos falla entero, se reintenta tramo a tramo.
+   - Las llegadas dentro de una ría o un estuario (Douala, Mombasa) se alcanzan por el agua abierta más cercana (`cerca_abierta`).
+   - Los pasos gruesos de `agua.PASOS` ya no se abren en la máscara fina: cortaban el Sinaí y Galípoli. Solo se abren los canales de Suez y Panamá (`Fina.CANALES`, de un píxel de ancho) y los de `fuentes/pasos-finos.json`.
+   - Una llegada cuyo punto queda a más de 15 km del pueblo que nombra se lleva a ese pueblo. Solo se hace con pueblos de menos de 100.000 habitantes (población de `pueblos-fibra.tsv`): El Médano, Torquay, Nyborg…
+   - Resultado, medido con `revisa_tierra.py`: los tramos que pisan tierra **bajan de 135 a 73**. Los que quedan son, en su mayoría, pasos reales por tierra: Suez, Panamá, Guatemala, Kra, Inglaterra, Oahu, Mauricio. Hay además islotes de `ne_10m_minor_islands`, que la máscara fina no tiene. Siguen 0 extremos en el mar.
+   - **Cómo publicarlo:**
+     - En el clon: `python3 herramientas/cables_agencia.py`. Tarda unos 9 min. Antes he dejado `cables.json` y `cables-agencia.json` como estaban.
+     - Mira la línea «llegadas llevadas…» y comprueba que no mueve ciudades grandes.
+     - `python3 herramientas/revisa_tierra.py <carpeta geojson>` y `revisa_extremos.py`.
+     - `python3 herramientas/lugares_capas.py`.
+     - Publica `cables.json`, `cables-agencia.json` y `lugares-capas.json` y el código en las dos ramas, y manda una captura al dueño.
+2. **`herramientas/pasos_finos.py`** y **`fuentes/pasos-finos.json`**: 72 rías y fiordos que se cierran a 2,7 km (Narvik, Port Alberni, Juneau, Douala…) y 4 estrechos (Bósforo, Dardanelos, Kanmon, Mesina), trazados sobre Natural Earth a 0,0025°. Hace falta la carpeta `scratchpad/nev/geojson` (sparse clone de natural-earth-vector, con `ne_10m_land`, `minor_islands` y `admin_0_countries`).
+3. **`lugares_capas.py`:**
+   - La ciudad de cada centro de datos y de cada llegada sale del país del punto. Usa `fuentes/paises-ne10m.png/.json`, un raster de países de Natural Earth a 0,05°. Arregla Clarkson (Potsdam, NY) dentro de «Cornwall, Canadá», REFSA (Formosa, AR) dentro de «Pilar, Paraguay» y Lamaline (Terranova) dentro de «Saint-Pierre».
+   - Las llegadas de cables de la agencia usan el nombre que da la agencia.
+   - Los centros de datos de `puntos-extra.json` entran en «centros» y «de», con el mismo orden que `capas.js`, así que su ficha ya muestra «Dónde».
+4. **`fibra_tierra.py`:** un salto de la capa de tierra que cruza más de 12 km de mar va por tierra si hay camino de hasta 1,8 veces la recta (`fibra_agencia.Tierra`). Si no lo hay y cruza más de 25 km, se corta: es un tramo submarino. Se probó sobre los datos publicados: de 75 saltos, 56 van por tierra y 19 se cortan, en 4 s. Hay 206 líneas con mar (Vocus atraviesa la Gran Bahía Australiana, Londres–Ámsterdam…). Solo corre en el workflow, porque descarga fuentes.
+5. **`.github/workflows/datos-orbita.yml`:** límites de tiempo del job 95 min, fibra 20 y cables 30. El paso de cables se cortaba a los 10 min, y por eso `cables.json` publicado no tenía la corrección fina.
+6. **`capas.js` + `idioma.js` (ficha de centro de datos):**
+   - La nota ya no sale dos veces.
+   - Se quita el «(Ciudad)» del final de las notas.
+   - Filas nuevas «Dirección» y «Ubicación aproximada». Con `aprox` 1: «en la ciudad…»; con `aprox` 2: «a menos de 2 km…». Los textos ya están en `D` (en/pt); en `i18n/*.json` faltan.
+   - Al publicar, sube las versiones `capas.js?v=` e `idioma.js?v=` en `orbita/index.html`.
+7. **`revisa_puntos.py`**, revisión de puntos y satélites. Resultado:
+   - Satélites: sin errores (12.940; 1 Starlink cayendo, es real).
+   - Puntos en el mar: 6 bases antárticas sobre hielo o islotes, que están bien, y el Dhiraagu Data Centre (73.273, 5.663), por revisar.
+   - 79 duplicados de OpenStreetMap con el mismo nombre a menos de 1 km (edificios de un campus).
+   - 65 sitios con varios centros apilados en el mismo punto: los de la agencia, en el centro de la ciudad.
+
+**Ronda 35 — direcciones de los 318 centros de datos de la agencia que estaban en el centro de la ciudad (a medias)**
+- Archivos en `agencia-rondas/ronda35/`: `lista.json` (con `i` = índice en `puntos-extra.json`), `pregunta-1..6.txt`, `compara.py`, `prepara_geo.py`, `decide.py` y `aplica.py`.
+- **Respuestas guardadas:**
+  - Gemini: `gemini-1..6.json` (todas).
+  - ChatGPT: `chatgpt-1..3.json`. El lote 4 estaba pensando en el chat «Direcciones centros datos» (`/c/6ade697c-f898-83e9-b59b-50d93bb3d811`). Faltan los lotes 5 y 6.
+  - Astra: lote 5 lanzado en el Playground con formato compacto `[[id, dirección, lat, lon, fuente]]`. Guárdalo como `astra-5.json`.
+  - Geocodificación con Nominatim (en el navegador, la pestaña de Nominatim lee `geo-N.json` publicado en guardianagroup.com con `window.geoLote(n)`): `geo-res-1.json` y `geo-res-2.json`. El lote 3 iba por 65/106.
+- **Regla:**
+  - Dos voces a menos de 1,5 km (dirección situada con Nominatim o coordenadas dadas), y una de ellas con una fuente que no sea PeeringDB, TeleGeography ni submarinecablemap.
+  - Misma calle y mismo número → `direccion`. Si no → `aprox` 2. Sin acuerdo → `aprox` 1.
+  - Lotes 1–2: 41 situados (10 con dirección).
+- **Al terminar:**
+  1. `python3 decide.py && python3 aplica.py`, **una sola vez**: borra los duplicados de OpenStreetMap y cambia los índices.
+  2. Publica `puntos-extra.json` y lanza `pueblos-cables.yml` para rehacer `lugares-capas.json`.
+
+**Pendiente después**
+- Hibernar el ordenador del dueño al 100 %. Pídeselo antes.
+- La lista de siempre.
+- «publícala» para la portada nueva.
+- Abrir los 42 idiomas solo cuando lo diga el dueño.
+- Propuesta: costa vectorial al acercar.

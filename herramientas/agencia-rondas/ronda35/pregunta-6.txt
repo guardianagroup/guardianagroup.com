@@ -1,0 +1,52 @@
+Ronda 35 de la agencia GUARDIANA (mapa Órbita). Necesito la DIRECCIÓN EXACTA de cada centro de datos de la lista: calle y número (o polígono/parque empresarial), código postal, ciudad y país, y sus coordenadas (latitud, longitud) con 4 decimales si las conoces. Usa fuentes públicas (web del operador, registros públicos, notas de prensa, OpenStreetMap); no uses PeeringDB, TeleGeography ni submarinecablemap. No inventes: si no sabes la dirección, escribe null. Si el centro ya no existe o no está en esa ciudad, dilo en «nota».
+Responde SOLO con un bloque JSON: una lista de objetos {"id": n, "direccion": "…", "lat": 0.0, "lon": 0.0, "fuente": "…", "nota": "…"}.
+
+Lista (id · nombre · operador · ciudad, país):
+271 · center3 Dammam Data Center · center3 / stc · Dammam, SA
+272 · center3 DC2 Jeddah · center3 / stc · Yeda, SA
+273 · center3 DC3 Riyadh · center3 / stc · Riad, SA
+274 · atNorth SWE01 · atNorth · Stockholm, SE
+275 · Digital Realty STO6 · Digital Realty · Estocolmo, SE
+276 · Equinix SK1 · Equinix · Stockholm, SE
+277 · Equinix SG1 · Equinix · Singapur, SG
+278 · NTT Serangoon Data Center · NTT Global Data Centers · Singapur, SG
+279 · RVO Ljubljana Data Center · RVO · Liubliana, SI
+280 · SITEL POP1 · SITEL · Bratislava, SK
+281 · SITEL POP2 · SITEL · Bratislava, SK
+282 · SITEL POPKE · SITEL · Košice, SK
+283 · AIMS Bangkok · AIMS Data Centre · Bangkok, TH
+284 · NTT Bangkok Data Center · NTT Global Data Centers · Bangkok, TH
+285 · Telehouse Bangkok · KDDI / Telehouse · Bangkok, TH
+286 · DataXion Tunis · DataXion · Túnez, TN
+287 · Radore Data Center · Radore · Estambul, TR
+288 · Turkcell İzmir Data Center · Turkcell · Esmirna, TR
+289 · Turkcell Temelli Data Center · Turkcell · Ankara, TR
+290 · Chief Telecom HD IDC · Chief Telecom · Taipéi, TW
+291 · Chief Telecom LY2 AI Data Center · Chief Telecom · Taipéi, TW
+292 · Chief Telecom LY IDC · Chief Telecom · Taipéi, TW
+293 · Tanzania National Data Centre · TTCL · Dar es Salaam, TZ
+294 · De Novo DC-1 · De Novo · Kiev, UA
+295 · De Novo DC-5 · De Novo · Kiev, UA
+296 · Aligned PHX-01 · Aligned Data Centers · Phoenix, US
+297 · Aligned PHX-02 · Aligned Data Centers · Phoenix, US
+298 · Aligned PHX-03 · Aligned Data Centers · Phoenix, US
+299 · CoreSite DE1 · CoreSite · Denver, US
+300 · CoreSite DE2 · CoreSite · Denver, US
+301 · CoreSite LA3 · CoreSite · Los Ángeles, US
+302 · Digital Realty DFW36 · Digital Realty · Dallas, US
+303 · Equinix AT1 · Equinix · Atlanta, US
+304 · Equinix AT4 · Equinix · Atlanta, US
+305 · Equinix DA4 · Equinix · Dallas, US
+306 · Equinix LA1 · Equinix · Los Ángeles, US
+307 · Equinix LA3 · Equinix · El Segundo, US
+308 · Equinix LA4 · Equinix · El Segundo, US
+309 · QTS Miami 1 · QTS Data Centers · Miami, US
+310 · Switch The Keep Campus · Switch · Atlanta, US
+311 · East Telecom YA DC · East Telecom · Taskent, UZ
+312 · UZTELECOM Data Processing and Storage Center · UZTELECOM · Taskent, UZ
+313 · CMC Tan Thuan Data Center · CMC Telecom · Ciudad Ho Chi Minh, VN
+314 · Africa Data Centres CPT1 · Africa Data Centres · Ciudad del Cabo, ZA
+315 · Teraco CT1 · Teraco / Digital Realty · Ciudad del Cabo, ZA
+316 · Teraco DB1 · Teraco / Digital Realty · Durban, ZA
+317 · Paratus Zambia Data Centre · Paratus Zambia · Lusaka, ZM
+318 · Liquid Intelligent Technologies Harare Data Centre · Liquid Intelligent Technologies · Harare, ZW

@@ -1,0 +1,494 @@
+{
+"5": {
+"nombre": "NTT Vienna 1",
+"lat": 48.15984,
+"lon": 16.33699,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Computerstraße 4, 1100 Wien, Austria",
+"precision": "direccion-calle",
+"acuerdo_km": 0.0
+},
+"9": {
+"nombre": "NEXTDC M2",
+"lat": -37.70887,
+"lon": 144.87545,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "75 Sharps Road, Tullamarine VIC 3043, Melbourne, Australia",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"10": {
+"nombre": "NEXTDC P1",
+"lat": -31.86622,
+"lon": 115.89788,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "4 Millrose Drive, Malaga WA 6090, Perth, Australia",
+"precision": "direccion-calle",
+"acuerdo_km": 0.0
+},
+"13": {
+"nombre": "LCL Brussels-South",
+"lat": 50.75511,
+"lon": 4.26324,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.49
+},
+"19": {
+"nombre": "Ascenty Hortolândia 1",
+"lat": -22.89455,
+"lon": -47.1805,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.42
+},
+"20": {
+"nombre": "Ascenty Hortolândia 2",
+"lat": -22.89436,
+"lon": -47.17956,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.57
+},
+"21": {
+"nombre": "Ascenty Hortolândia 3",
+"lat": -22.89461,
+"lon": -47.17972,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.59
+},
+"22": {
+"nombre": "Ascenty Hortolândia 4",
+"lat": -22.89486,
+"lon": -47.17996,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.63
+},
+"23": {
+"nombre": "Ascenty Hortolândia 5",
+"lat": -22.89511,
+"lon": -47.18022,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.67
+},
+"28": {
+"nombre": "Ascenty Sumaré 1",
+"lat": -22.81719,
+"lon": -47.20303,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.02
+},
+"29": {
+"nombre": "Ascenty Sumaré 2",
+"lat": -22.81719,
+"lon": -47.20303,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.02
+},
+"34": {
+"nombre": "Cirion SAO1",
+"lat": -23.5948,
+"lon": -46.84998,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Avenida Eid Mansur 666, Parque São George, 06708-070 Cotia, São Paulo, Brasil",
+"precision": "direccion-calle",
+"acuerdo_km": 0.36
+},
+"37": {
+"nombre": "Elea CTA1",
+"lat": -25.4252,
+"lon": -49.2805,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.03
+},
+"42": {
+"nombre": "Elea SPO3",
+"lat": -23.50176,
+"lon": -46.84136,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.21
+},
+"46": {
+"nombre": "Equinix SP2",
+"lat": -23.50289,
+"lon": -46.82897,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.34
+},
+"48": {
+"nombre": "Equinix SP5x",
+"lat": -23.48084,
+"lon": -46.83343,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.44
+},
+"50": {
+"nombre": "ODATA SP03",
+"lat": -23.49829,
+"lon": -46.82981,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.29
+},
+"52": {
+"nombre": "Scala SGRUTB01",
+"lat": -23.49462,
+"lon": -46.82432,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.49
+},
+"53": {
+"nombre": "Scala SGRUTB03",
+"lat": -23.49431,
+"lon": -46.82563,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.47
+},
+"54": {
+"nombre": "Scala SGRUTB04",
+"lat": -23.49805,
+"lon": -46.81804,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.0
+},
+"55": {
+"nombre": "Scala SGRUTB05",
+"lat": -23.49813,
+"lon": -46.818,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.36
+},
+"59": {
+"nombre": "Scala SPOAPA01",
+"lat": -30.00079,
+"lon": -51.19947,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.91
+},
+"61": {
+"nombre": "Cologix MTL1",
+"lat": 45.50258,
+"lon": -73.56714,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "625 Boulevard René-Lévesque Ouest, H3B 1R2 Montréal, Québec, Canada",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"63": {
+"nombre": "Cologix MTL3",
+"lat": 45.49713,
+"lon": -73.57029,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "1250 Boulevard René-Lévesque Ouest, H3B 4W8 Montréal, Québec, Canada",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.03
+},
+"65": {
+"nombre": "Cologix TOR2",
+"lat": 43.64168,
+"lon": -79.41221,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "905 King Street West, M6K 3G9 Toronto, Ontario, Canada",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"67": {
+"nombre": "Digital Realty ZUR2",
+"lat": 47.43349,
+"lon": 8.55674,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.85
+},
+"68": {
+"nombre": "Equinix ZH2",
+"lat": 47.38793,
+"lon": 8.52017,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Josefstrasse 225, 8005 Zürich, Switzerland",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"69": {
+"nombre": "Equinix ZH4",
+"lat": 47.38793,
+"lon": 8.52017,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Josefstrasse 225, 8005 Zürich, Switzerland",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.0
+},
+"70": {
+"nombre": "Ascenty Santiago 1",
+"lat": -33.33513,
+"lon": -70.71256,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.32
+},
+"71": {
+"nombre": "Ascenty Santiago 2",
+"lat": -33.3415,
+"lon": -70.70821,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.86
+},
+"72": {
+"nombre": "Ascenty Santiago 3",
+"lat": -33.3415,
+"lon": -70.70821,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.86
+},
+"78": {
+"nombre": "GTD Holanda",
+"lat": -33.41993,
+"lon": -70.60416,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.04
+},
+"79": {
+"nombre": "GTD Huérfanos",
+"lat": -33.43952,
+"lon": -70.65177,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.23
+},
+"80": {
+"nombre": "GTD Lídice I",
+"lat": -33.43992,
+"lon": -70.64652,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.16
+},
+"81": {
+"nombre": "GTD Lídice II",
+"lat": -33.44002,
+"lon": -70.64657,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.17
+},
+"82": {
+"nombre": "GTD Moneda",
+"lat": -33.44208,
+"lon": -70.64949,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "Moneda 920, Santiago, Región Metropolitana, Chile",
+"precision": "direccion-edificio",
+"acuerdo_km": 0.03
+},
+"95": {
+"nombre": "Equinix SH3",
+"lat": 31.25159,
+"lon": 121.61553,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 0.46
+},
+"100": {
+"nombre": "GDS Guangzhou 1",
+"lat": 23.16446,
+"lon": 113.45555,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.16
+},
+"102": {
+"nombre": "GDS Shanghai 1",
+"lat": 31.32555,
+"lon": 121.60043,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.16
+},
+"103": {
+"nombre": "GDS Shanghai 2",
+"lat": 31.32575,
+"lon": 121.60068,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.13
+},
+"104": {
+"nombre": "GDS Shanghai 3",
+"lat": 31.32595,
+"lon": 121.60093,
+"voces": [
+"chatgpt",
+"gemini"
+],
+"dir": "",
+"precision": "zona",
+"acuerdo_km": 1.09
+}
+}

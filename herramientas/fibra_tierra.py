@@ -361,6 +361,42 @@ def main():
     # «Undersea» (Gabon) and TDM's Caia–Beira–Maputo festoon (Mozambique, damaged according to RTI). A line of the land
     # layer that runs more than half its length over the sea (Natural Earth 10m land) is not land fibre: it is left out.
     al_mar = mar_de()
+    # 25 Oct 2026 (revisión completa, «No puede haber ningún error»): a hop of a land line that runs more than 12 km over
+    # open sea (a Topology Zoo link drawn as a chord across the Great Australian Bight, London–Amsterdam over the North Sea)
+    # follows the land instead when there is a way over land at most 1.8 times as long (fibra_agencia.Tierra, Natural Earth
+    # 10m); when there is none and the sea stretch is longer than 25 km it is a submarine stretch, not land fibre, and the
+    # line is cut there. The agency's own lines
+    # already went through this in fibra_agencia.py, and the small islands keep their short hops.
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from fibra_agencia import Tierra
+        tierra = Tierra()
+    except Exception as e:
+        tierra = None; print('sin máscara de tierra para los saltos por mar:', e)
+    agencia_f = len(fuentes) - 1 if os.path.exists(pa) else -1
+    por_tierra = cortadas = 0
+    trozos = []
+    for x in lineas:
+        if tierra is None or x['f'] == agencia_f or x['cc'] in PEQUENOS or x['e'] in ('plan', 'metro'):
+            trozos.append(x); continue
+        l = simplifica(x['l'])
+        actual, partes = [l[0]], []
+        for A, B in zip(l, l[1:]):
+            A, B = tuple(A[:2]), tuple(B[:2])
+            m = tierra.mar(A, B)
+            r = tierra.ruta(A, B) if m > 12 else None
+            if r:
+                actual.extend([list(p) for p in r[1:]]); por_tierra += 1
+            elif m > 25:  # no way over land: a submarine stretch (between 12 and 25 km it may be a bridge, Øresund or the Great Belt)
+                if len(actual) >= 2: partes.append(actual)
+                actual = [list(B)]; cortadas += 1
+            else:
+                actual.append(list(B))
+        if len(actual) >= 2: partes.append(actual)
+        for p in partes:
+            y = dict(x); y['l'] = p; trozos.append(y)
+    lineas = trozos
+    print('saltos de la capa de tierra que cruzaban el mar: %d llevados por tierra, %d cortados (son tramos submarinos)' % (por_tierra, cortadas))
     salida, tot, paises, por_f = [], 0.0, set(), {}
     for x in lineas:
         if x['e'] in ('plan', 'metro'):

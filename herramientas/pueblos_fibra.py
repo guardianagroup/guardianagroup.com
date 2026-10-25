@@ -33,6 +33,19 @@ def buscados():
                 for k in {pliega(c), pliega(re.split(r'[(/,]', c)[0])}:
                     if k:
                         out.add((cc, ALIAS.get(k, k)))
+    # 25 Oct 2026 (revisión completa: Atlantis-2 drawn to the sea east of Tenerife for «El Médano», SMAP to Geelong for
+    # «Torquay»): the places where the agency's submarine cables land, so cables_agencia.py can check the voices'
+    # coordinates against the real town
+    for f in glob.glob(os.path.join(AQUI, 'cables-agencia', '*.json')):
+        try:
+            datos = json.load(open(f, encoding='utf-8'))
+        except ValueError:
+            continue
+        for c in datos if isinstance(datos, list) else []:
+            for L in (c.get('llegadas') or []) if isinstance(c, dict) else []:
+                cc = (L.get('pais') or '').upper()[:2]
+                k = pliega(re.split(r'[(/,]', L.get('lugar') or '')[0])
+                if cc and k: out.add((cc, k))
     return out
 
 def main(ruta):

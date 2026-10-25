@@ -1,0 +1,58 @@
+Ronda 35 de la agencia GUARDIANA (mapa Órbita). Necesito la DIRECCIÓN EXACTA de cada centro de datos de la lista: calle y número (o polígono/parque empresarial), código postal, ciudad y país, y sus coordenadas (latitud, longitud) con 4 decimales si las conoces. Usa fuentes públicas (web del operador, registros públicos, notas de prensa, OpenStreetMap); no uses PeeringDB, TeleGeography ni submarinecablemap. No inventes: si no sabes la dirección, escribe null. Si el centro ya no existe o no está en esa ciudad, dilo en «nota».
+Responde SOLO con un bloque JSON: una lista de objetos {"id": n, "direccion": "…", "lat": 0.0, "lon": 0.0, "fuente": "…", "nota": "…"}.
+
+Lista (id · nombre · operador · ciudad, país):
+217 · EU North Vilnius LT DC2 · Delska · Vilna, LT
+218 · EU North Vilnius LT DC3 · Delska · Vilna, LT
+219 · LuxConnect DC2 · LuxConnect · Diekirch, LU
+220 · Tet Dattum · Tet · Riga, LV
+221 · N+ONE CMN Campus · N+ONE Datacenters · Nouaceur, MA
+222 · Moldtelecom Data City · Moldtelecom · Chisináu, MD
+223 · Mobicom Geographic Backup Data Center · Mobicom · Ulán Bator, MN
+224 · National Data Center of Mongolia · National Data Center of Mongolia · Ulán Bator, MN
+225 · GO Birkirkara Data Centre · GO · Birkirkara, MT
+226 · Rogers Capital Data Center · Rogers Capital Technology Services · Port Louis, MU
+227 · Equinix MX1 · Equinix · El Marqués, MX
+228 · Equinix MX2 · Equinix · El Marqués, MX
+229 · Equinix MX3x · Equinix · Querétaro, MX
+230 · Triara Querétaro · Telmex / Triara · Querétaro, MX
+231 · AIMS KL2 Bangunan AIMS · AIMS Data Centre · Kuala Lumpur, MY
+232 · AirTrunk JHB1 · AirTrunk · Johor Bahru, MY
+233 · Equinix JH1 · Equinix · Johor Bahru, MY
+234 · Equinix KL1 · Equinix · Putrajaya, MY
+235 · Raxio MZ1 · Raxio Data Centres · Maputo, MZ
+236 · Africa Data Centres LOS1 · Africa Data Centres · Lagos, NG
+237 · Equinix LG1 · Equinix · Lagos, NG
+238 · Equinix LG2 · Equinix · Lagos, NG
+239 · Galaxy Backbone Abuja Data Centre · Galaxy Backbone · Abuya, NG
+240 · OADC Lagos · Open Access Data Centres · Lagos, NG
+241 · Rack Centre LGS 1 · Rack Centre · Lagos, NG
+242 · Green Mountain SVG-Rennesøy · Green Mountain · Rennesøy, NO
+243 · Green Mountain TEL-Rjukan · Green Mountain · Rjukan, NO
+244 · CDC Silverdale · CDC Data Centres · Silverdale, NZ
+245 · Datacom Abel · Datacom · Wellington, NZ
+246 · Datacom Gloucester · Datacom · Christchurch, NZ
+247 · Datamount Al Bandar · Datamount · Mascate, OM
+248 · Datamount Jabal Al Akhdar · Datamount · Jabal Al Akhdar, OM
+249 · Equinix MC1 · Equinix · Barka, OM
+250 · Equinix SN1 · Equinix · Salalah, OM
+251 · Equinix LM1 · Equinix · Lima, PE
+252 · PNG DataCo Port Moresby Data Centre · PNG DataCo · Port Moresby, PG
+253 · Equinix MN1 · Equinix · Manila, PH
+254 · Equinix MN2 · Equinix · Manila, PH
+255 · VITRO Makati 2 · VITRO / ePLDT · Pásay, PH
+256 · VITRO Sta. Rosa · VITRO / ePLDT · Santa Rosa, PH
+257 · Cybernet Karachi Data Center · Cybernet · Karachi, PK
+258 · PTCL Commercial Data Center Karachi · PTCL · Karachi, PK
+259 · Atman KTW-1 · Atman · Katowice, PL
+260 · Atman WAW-2 · Atman · Warszawa, PL
+261 · Equinix WA1 · Equinix · Warszawa, PL
+262 · Digital Realty LIS1 · Digital Realty · Carnaxide, PT
+263 · MEEZA M-VAULT 1 · MEEZA · Doha, QA
+264 · MEEZA M-VAULT 2 · MEEZA · Doha, QA
+265 · M247 Bucharest DC1 · M247 · Bucarest, RO
+266 · M247 Bucharest DC2 · M247 · Bucarest, RO
+267 · NXDATA-1 · NXDATA · Bucarest, RO
+268 · NXDATA-2 · NXDATA · Bucarest, RO
+269 · State Data Center Kragujevac · Data Cloud Technology · Kragujevac, RS
+270 · Rwanda National Data Centre · AOS · Kigali, RW

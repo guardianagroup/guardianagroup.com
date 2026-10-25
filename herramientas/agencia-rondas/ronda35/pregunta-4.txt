@@ -1,0 +1,58 @@
+Ronda 35 de la agencia GUARDIANA (mapa Órbita). Necesito la DIRECCIÓN EXACTA de cada centro de datos de la lista: calle y número (o polígono/parque empresarial), código postal, ciudad y país, y sus coordenadas (latitud, longitud) con 4 decimales si las conoces. Usa fuentes públicas (web del operador, registros públicos, notas de prensa, OpenStreetMap); no uses PeeringDB, TeleGeography ni submarinecablemap. No inventes: si no sabes la dirección, escribe null. Si el centro ya no existe o no está en esa ciudad, dilo en «nota».
+Responde SOLO con un bloque JSON: una lista de objetos {"id": n, "direccion": "…", "lat": 0.0, "lon": 0.0, "fuente": "…", "nota": "…"}.
+
+Lista (id · nombre · operador · ciudad, país):
+163 · Equinix HK2 · Equinix · Hong Kong, HK
+164 · Equinix HK3 · Equinix · Hong Kong, HK
+165 · Equinix HK4 · Equinix · Hong Kong, HK
+166 · Equinix HK5 · Equinix · Hong Kong, HK
+167 · SUNeVision MEGA Gateway · SUNeVision / iAdvantage · Hong Kong, HK
+168 · SUNeVision MEGA-i · SUNeVision / iAdvantage · Hong Kong, HK
+169 · SUNeVision MEGA Plus · SUNeVision / iAdvantage · Hong Kong, HK
+170 · SUNeVision MEGA Two · SUNeVision / iAdvantage · Hong Kong, HK
+171 · DCI Indonesia JK1 · DCI Indonesia · Cibitung, ID
+172 · NeuCentrIX Batam Center · Telkom Indonesia / neuCentrIX · Batam, ID
+173 · NeuCentrIX Gubeng · Telkom Indonesia / neuCentrIX · Surabaya, ID
+174 · MedOne PT1 · MedOne · Petah Tikva, IL
+175 · MedOne RM1 · MedOne · Ramla, IL
+176 · MedOne TC1 · MedOne · Haifa, IL
+177 · MedOne TC2 · MedOne · Tirat Carmel, IL
+178 · Equinix CN1 · Equinix · Chennai, IN
+179 · Equinix MB1 · Equinix · Bombay, IN
+180 · Equinix MB2 · Equinix · Bombay, IN
+181 · Equinix MB3 · Equinix · Bombay, IN
+182 · Equinix MB4 · Equinix · Bombay, IN
+183 · NTT Chennai 1 · NTT Global Data Centers · Chennai, IN
+184 · NTT Chennai 2 · NTT Global Data Centers · Chennai, IN
+185 · NTT Mumbai 5 · NTT Global Data Centers · Bombay, IN
+186 · NTT Mumbai 6 · NTT Global Data Centers · Bombay, IN
+187 · NTT Navi Mumbai 1A · NTT Global Data Centers · Bombay, IN
+188 · NTT Noida 1 · NTT Global Data Centers · Noida, IN
+189 · atNorth ICE03 · atNorth · Akureyri, IS
+190 · Aruba IT3 Global Cloud Data Center · Aruba · Ponte San Pietro, IT
+191 · Equinix ML2 · Equinix · Milano, IT
+192 · Open Hub Med · Open Hub Med · Carini, IT
+193 · Equinix OS1 · Equinix · Osaka, JP
+194 · Equinix OS3 · Equinix · Osaka, JP
+195 · Equinix TY2 · Equinix · Tokio, JP
+196 · Equinix TY4 · Equinix · Tokio, JP
+197 · Equinix TY8 · Equinix · Tokio, JP
+198 · SAKURA Ishikari Data Center · SAKURA internet · Ishikari, JP
+199 · Telehouse Tokyo Tama 3 · KDDI / Telehouse · Tama, JP
+200 · Africa Data Centres NBO1 · Africa Data Centres · Nairobi, KE
+201 · iXAfrica NBOX1.1 · iXAfrica Data Centres · Nairobi, KE
+202 · PAIX Nairobi NBO-1 · PAIX Data Centres · Nairobi, KE
+203 · ElCat Bishkek · ElCat · Biskek, KG
+204 · MekongNet Data Center · MekongNet · Nom Pen, KH
+205 · Equinix SL1 · Equinix · Seúl, KR
+206 · Equinix SL4 · Equinix · Seúl, KR
+207 · KT Mokdong IDC · KT Cloud · Seúl, KR
+208 · LG CNS Busan Global Cloud Data Center · LG CNS · Busan, KR
+209 · LG U+ Pyeongchon IDC · LG U+ · Anyang, KR
+210 · Ooredoo Kuwait Data Center · Ooredoo Kuwait · Ciudad de Kuwait, KW
+211 · Kazteleport Khan Tengri · Kazteleport · Almaty, KZ
+212 · Kazteleport Okzhetpes · Kazteleport · Astaná, KZ
+213 · Kazteleport Sairam · Kazteleport · Almaty, KZ
+214 · Kazteleport Talgar · Kazteleport · Almaty, KZ
+215 · Dialog Piliyandala Data Centre · Dialog Axiata · Piliyandala, LK
+216 · EU North Vilnius LT DC1 · Delska · Vilna, LT

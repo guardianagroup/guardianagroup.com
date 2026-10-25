@@ -386,7 +386,7 @@
       });
       // hand-verified additions (datos/puntos-extra.json, with their sources): exchange points, polar stations…
       // OpenStreetMap does not know; they survive the automatic data updates
-      try { const e2 = await cargaJSON('datos/puntos-extra.json'); for (const f of (e2.puntos || [])) { if (!Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; const q = { w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: (f.nota || f.enlace || f.clase) ? { nota: f.nota || '', enlace: f.enlace || '', clase: f.clase || '', programa: f.programa || '', desde: f.desde || '', gente: f.gente || '', telemetria: f.telemetria || '', antenas: f.antenas || '' } : null, lon: f.lon, lat: f.lat, extra: true }; if (f.tipo === 'datos') PT.p.push(q); else if (f.tipo === 'intercambio') PT.ix.push(q); } } catch (_) {}
+      try { const e2 = await cargaJSON('datos/puntos-extra.json'); for (const f of (e2.puntos || [])) { if (!Number.isFinite(f.lon) || !Number.isFinite(f.lat)) continue; const q = { w: P().vec(f.lon, f.lat).map((x) => x * 1.002), t: f.tipo, n: f.nombre || '', o: f.operador || '', x: (f.nota || f.enlace || f.clase || f.aprox || f.desde) ? { nota: f.nota || '', enlace: f.enlace || '', clase: f.clase || '', programa: f.programa || '', desde: f.desde || '', gente: f.gente || '', telemetria: f.telemetria || '', antenas: f.antenas || '', aprox: f.aprox || 0, dir: f.direccion || '' } : null, lon: f.lon, lat: f.lat, extra: true }; if (f.tipo === 'datos') PT.p.push(q); else if (f.tipo === 'intercambio') PT.ix.push(q); } } catch (_) {}
       // how many data centres each operator has on the map
       PT.porOp = new Map(); for (const q of PT.p) if (q.o) PT.porOp.set(q.o, (PT.porOp.get(q.o) || 0) + 1);
       lugares();
@@ -1957,7 +1957,13 @@
       filas.push([T('Operador'), op]);
       const n = PT.porOp.get(q.o) || 0; if (n > 1) filas.push([T('Del mismo operador'), num(n) + ' ' + T('centros de datos en el mapa')]);
     }
-    if (X.nota) filas.push([T('Datos'), X.nota]); // a hand-verified point carries its own note
+    // a hand-verified point carries its own note; the «(city)» at its end goes, since «Dónde» says it (25 Oct 2026: it
+    // was shown twice, as «Datos» and «Nota»)
+    const nota = (X.nota || '').replace(/\s*\([^()]*\)\s*$/, '').trim();
+    if (nota) filas.push([T('Datos'), nota]);
+    if (X.dir) filas.push([T('Dirección'), X.dir]);
+    // 25 Oct 2026 (ronda 35): 1, only the city is known; 2, two voices put the building in the same area, less than 2 km apart
+    if (X.aprox) filas.push([T('Ubicación aproximada'), X.aprox === 2 ? T('a menos de 2 km; la dirección exacta del edificio aún no está confirmada') : T('en la ciudad; la dirección exacta del edificio aún no está confirmada')]);
     const duenos = X.dueno || (W.duenos && W.duenos.join(', '));
     if (duenos && duenos !== q.o) filas.push([T('Dueño'), duenos]);
     const desde = X.desde || W.desde; if (desde) filas.push([T('En servicio desde'), String(desde).slice(0, 4)]);
@@ -1989,7 +1995,6 @@
     const L = P() && P().lugar;
     // owner, 22 Oct 2026: «quiero datos sobre ese centro de datos que estoy viendo», not the distance from the visitor
     if (X.web) filas.push([T('Web'), dominio(X.web)]);
-    if (X.nota) filas.push([T('Nota'), X.nota]);
     const titulo = q.n && q.n !== q.o ? q.n : (q.o ? q.o + ' · ' + T('centro de datos') : T('Centro de datos sin nombre'));
     const fuentes = T('Datos verificados');
     const nube = q.o && /amazon|aws|google|microsoft|azure|meta|facebook|apple|oracle|alibaba|cloudflare|ovh|equinix|digital realty|telefónica|telefonica|orange|vodafone|claro|movistar/i.test(q.o);
@@ -1997,7 +2002,7 @@
       foto: fotoDe('centro', X.w),
       resumen: [T('Operador'), T('Dónde'), T('En servicio desde'), T('Desde el mar')],
       para: T('Aquí viven servicios de internet: cada vez que abres una web o guardas algo «en la nube», tus datos pasan por sitios como este.') + (nube ? ' ' + T('Si usas servicios de') + ' ' + q.o + ', ' + T('parte de tus datos puede estar guardada en edificios así.') : ''),
-      secciones: [{ t: T('Cómo llega internet aquí'), claves: [T('Desde el mar'), T('Cables que llegan ahí'), T('Por tierra'), T('Intercambio de internet')], abierta: true }, { t: T('El edificio'), claves: [T('Operador'), T('Del mismo operador'), T('Dueño'), T('En servicio desde'), T('Superficie'), T('Potencia'), T('Plantas'), T('Altura del edificio'), 'Tier', 'PUE', T('Conexión'), T('Dónde'), T('Web')] }, { t: T('Notas'), claves: [T('Datos'), T('Nota')] }],
+      secciones: [{ t: T('Cómo llega internet aquí'), claves: [T('Desde el mar'), T('Cables que llegan ahí'), T('Por tierra'), T('Intercambio de internet')], abierta: true }, { t: T('El edificio'), claves: [T('Operador'), T('Del mismo operador'), T('Dueño'), T('En servicio desde'), T('Superficie'), T('Potencia'), T('Plantas'), T('Altura del edificio'), 'Tier', 'PUE', T('Conexión'), T('Dónde'), T('Dirección'), T('Ubicación aproximada'), T('Web')] }, { t: T('Notas'), claves: [T('Datos'), T('Nota')] }],
     }), x, y);
   }
   function fichaLugar(tipo, i, x, y) {
