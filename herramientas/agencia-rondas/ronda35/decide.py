@@ -11,7 +11,7 @@ Escribe decisiones.json: {id: {nombre, lat, lon, voces, dir, precision}}.
 import glob, json, math, os, re
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-from compara import limpia, km, misma_calle  # noqa: E402
+from compara import limpia, km, misma_calle, calle  # noqa: E402
 
 
 def main():
@@ -46,7 +46,7 @@ def main():
         dirs = sorted([A, B], key=lambda r: (limpia(r['fuente']), len(r['dir'] or '')), reverse=True)
         # the address is shown only when both voices give the same one; otherwise both put the building in the same
         # area (less than 1.5 km apart) and the point is marked as approximate, within 2 km
-        igual = misma_calle(A['dir'], B['dir'])
+        igual = misma_calle(A['dir'], B['dir']) and calle(A['dir'])[2] == calle(B['dir'])[2]  # the same street and the same number
         out[i] = {'nombre': lista[i - 1]['nombre'], 'lat': round(la, 5), 'lon': round(lo, 5), 'voces': [va, vb],
                   'dir': dirs[0]['dir'] if igual else '', 'precision': ('direccion-' + prec) if igual else 'zona', 'acuerdo_km': round(d, 2)}
     json.dump(out, open(os.path.join(AQUI, 'decisiones.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
