@@ -91,6 +91,25 @@ def lineas_de(geom):
     return []
 
 
+def curva(l, paso=100):
+    """25 Oct 2026 (revisión punto por punto): the long straight hops (the Topology Zoo's links between cities, up to
+    3,000 km) follow the great circle, a point every «paso» km, so the planet never draws them as a chord through the Earth
+    nor drops one whose end has turned out of view"""
+    out = [l[0]]
+    for a, b in zip(l, l[1:]):
+        la1, lo1, la2, lo2 = map(math.radians, (a[1], a[0], b[1], b[0]))
+        d = 2 * math.asin(min(1, math.sqrt(math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2)))
+        n = int(d * 6371 // paso)
+        for i in range(1, n):
+            f = i / n; A, B = math.sin((1 - f) * d) / math.sin(d), math.sin(f * d) / math.sin(d)
+            x = A * math.cos(la1) * math.cos(lo1) + B * math.cos(la2) * math.cos(lo2)
+            y = A * math.cos(la1) * math.sin(lo1) + B * math.cos(la2) * math.sin(lo2)
+            z = A * math.sin(la1) + B * math.sin(la2)
+            out.append([math.degrees(math.atan2(y, x)), math.degrees(math.atan2(z, math.hypot(x, y)))])
+        out.append(b)
+    return out
+
+
 def redondea(l):
     out = []
     for p in l:
@@ -349,7 +368,7 @@ def main():
         if al_mar and x['f'] in (0, 1) and al_mar(x['l']) > 0.5:
             print('  fuera de la capa de tierra (más de la mitad en el mar):', x['n'], x['cc'])
             continue
-        l = redondea(simplifica(x['l']))
+        l = redondea(curva(simplifica(x['l'])))
         if len(l) < 2:
             continue
         k = largo(x['l'])
