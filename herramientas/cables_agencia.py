@@ -470,6 +470,12 @@ class Fina:
         if i0 is None or i1 is None: return linea  # all over land on this grid (a tiny island or a lake): leave it
         ini = m[i0] if m[i0][2] > 3 and not fijos[0] else m[0]
         fin = m[len(m) - 1 - i1] if total - m[len(m) - 1 - i1][2] > 3 and not fijos[1] else m[-1]
+        # 25 Oct 2026 (revisión de puntos: KAFOS Varna → Mangalia stopped at Cape Kaliakra, 48 km short, and took
+        # Mangalia's name in Bulgaria): when the land at an end is long, the route does not reach a landing inland, it cuts
+        # across a cape to a coastal one; that end is kept and reached later by sea (see «lejanos» below)
+        lejanos = [None, None]
+        if ini is not m[0] and ini[2] - m[0][2] > 20: lejanos[0] = ((ini[0], ini[1]), (m[0][0], m[0][1]))
+        if fin is not m[-1] and total - fin[2] > 20: lejanos[1] = ((fin[0], fin[1]), (m[-1][0], m[-1][1]))
         if ini is not m[0]: self.cambios['extremo en la costa'] += 1
         if fin is not m[-1]: self.cambios['extremo en la costa'] += 1
         m = [s for s in m if ini[2] <= s[2] <= fin[2]]
@@ -584,6 +590,20 @@ class Fina:
             if not hechos:
                 self.cambios['paso por tierra que se queda (real o sin mar alrededor)'] += 1
         out += [[round(q[0], 4), round(q[1], 4)] for q in m[ultimo:]]
+        for lado in (0, 1):
+            if not lejanos[lado] or not out: continue
+            W, L = lejanos[lado]
+            r = None
+            # only to a landing on the coast (open water within 14 km): a city name inland (downtown Los Angeles) stays
+            # cut at the coast, as before
+            for B2 in [q for q in cerca_abierta(L[0], L[1], W) if km(L[1], L[0], q[1], q[0]) <= 15]:
+                r = por_mar(W, B2, 1e9)
+                if r: break
+            if not r: continue
+            tramo = [[round(q[0], 4), round(q[1], 4)] for q in r] + [[round(L[0], 4), round(L[1], 4)]]
+            if lado == 1: out = out + tramo[1:]
+            else: out = tramo[::-1][:-1] + out
+            self.cambios['extremo lejano alcanzado por mar'] += 1
         out = [list(p) for p in simplifica([tuple(p) for p in out], 0.01)]
         # 3. still over land inside (the coarse route took a way that is closed at this scale, the Kanmon Strait or Cook
         # Inlet): the whole hop is traced again by sea on the fine grid, if that way is reasonable
