@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "點擊即可在星球上查看"
+  "Pulsa para verla en el planeta": "點擊即可在星球上查看",
+  "De compañías con 5 centros de datos o más en el mapa.": "來自地圖上有 5 個以上資料中心的公司。",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "來自地圖上有 1 至 4 個資料中心的公司，或營運商不詳。"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

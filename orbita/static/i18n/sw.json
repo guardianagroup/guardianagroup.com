@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "Bofya ili kuiona kwenye sayari"
+  "Pulsa para verla en el planeta": "Bofya ili kuiona kwenye sayari",
+  "De compañías con 5 centros de datos o más en el mapa.": "Vya kampuni zenye vituo vya data 5 au zaidi kwenye ramani.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Vya kampuni zenye vituo vya data 1 hadi 4 kwenye ramani, au visivyo na mwendeshaji anayejulikana."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

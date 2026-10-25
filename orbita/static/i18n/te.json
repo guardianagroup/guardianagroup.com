@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "గ్రహంపై చూడటానికి క్లిక్ చేయండి"
+  "Pulsa para verla en el planeta": "గ్రహంపై చూడటానికి క్లిక్ చేయండి",
+  "De compañías con 5 centros de datos o más en el mapa.": "మ్యాప్‌లో 5 లేదా అంతకంటే ఎక్కువ డేటా సెంటర్లు ఉన్న కంపెనీలవి.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "మ్యాప్‌లో 1 నుంచి 4 డేటా సెంటర్లు ఉన్న కంపెనీలవి, లేదా ఆపరేటర్ తెలియనివి."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

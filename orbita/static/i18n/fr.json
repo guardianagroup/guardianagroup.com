@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "O",
-  "Pulsa para verla en el planeta": "Cliquez pour l’afficher sur la planète"
+  "Pulsa para verla en el planeta": "Cliquez pour l’afficher sur la planète",
+  "De compañías con 5 centros de datos o más en el mapa.": "D’entreprises ayant 5 centres de données ou plus sur la carte.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "D’entreprises ayant de 1 à 4 centres de données sur la carte, ou sans opérateur connu."
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

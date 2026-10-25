@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "Gezegende görmek için tıklayın"
+  "Pulsa para verla en el planeta": "Gezegende görmek için tıklayın",
+  "De compañías con 5 centros de datos o más en el mapa.": "Haritada 5 veya daha fazla veri merkezi olan şirketlerden.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Haritada 1 ile 4 arası veri merkezi olan şirketlerden ya da işletmecisi bilinmeyenler."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "برای دیدن آن روی سیاره کلیک کنید"
+  "Pulsa para verla en el planeta": "برای دیدن آن روی سیاره کلیک کنید",
+  "De compañías con 5 centros de datos o más en el mapa.": "متعلق به شرکت‌هایی با ۵ مرکز داده یا بیشتر روی نقشه.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "متعلق به شرکت‌هایی با ۱ تا ۴ مرکز داده روی نقشه، یا بدون اپراتور شناخته‌شده."
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

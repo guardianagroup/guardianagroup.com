@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "انقر لعرضها على الكوكب"
+  "Pulsa para verla en el planeta": "انقر لعرضها على الكوكب",
+  "De compañías con 5 centros de datos o más en el mapa.": "لشركات لديها 5 مراكز بيانات أو أكثر على الخريطة.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "لشركات لديها من 1 إلى 4 مراكز بيانات على الخريطة، أو بلا مشغّل معروف."
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

@@ -413,6 +413,8 @@
     'Rutas en construcción. Línea discontinua.': ['Routes under construction. Dashed line.', 'Rotas em construção. Linha tracejada.'],
     'Centros de datos de compañías con cinco o más en el mapa.': ['Data centres of companies with five or more on the map.', 'Centros de dados de empresas com cinco ou mais no mapa.'],
     'De compañías con menos de cinco en el mapa, o sin operador identificado.': ['From companies with fewer than five on the map, or with no identified operator.', 'De empresas com menos de cinco no mapa, ou sem operador identificado.'],
+    'De compañías con 5 centros de datos o más en el mapa.': ['From companies with 5 or more data centres on the map.', 'De empresas com 5 ou mais centros de dados no mapa.'],
+    'De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.': ['From companies with 1 to 4 data centres on the map, or with no known operator.', 'De empresas com 1 a 4 centros de dados no mapa, ou sem operador conhecido.'],
     'Bases del Ártico y la Antártida, y estaciones terrestres de satélites.': ['Arctic and Antarctic bases, and satellite ground stations.', 'Bases do Ártico e da Antártida, e estações terrestres de satélites.'],
     'A 35.786 km; parecen inmóviles sobre la Tierra: televisión e internet por satélite.': ['At 35,786 km; they seem still above the Earth: television and satellite internet.', 'A 35.786 km; parecem imóveis sobre a Terra: televisão e internet por satélite.'],
     'Centros de grandes compañías': ['Large companies’ centres', 'Centros de grandes empresas'],

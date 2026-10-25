@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "கோளில் காண கிளிக் செய்யவும்"
+  "Pulsa para verla en el planeta": "கோளில் காண கிளிக் செய்யவும்",
+  "De compañías con 5 centros de datos o más en el mapa.": "வரைபடத்தில் 5 அல்லது அதற்கு மேற்பட்ட டேட்டா சென்டர்கள் உள்ள நிறுவனங்களுடையவை.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "வரைபடத்தில் 1 முதல் 4 டேட்டா சென்டர்கள் உள்ள நிறுவனங்களுடையவை, அல்லது இயக்குநர் தெரியாதவை."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

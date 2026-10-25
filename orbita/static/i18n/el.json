@@ -820,7 +820,9 @@
   "E": "Α",
   "S": "Ν",
   "O": "Δ",
-  "Pulsa para verla en el planeta": "Κάντε κλικ για να τη δείτε στον πλανήτη"
+  "Pulsa para verla en el planeta": "Κάντε κλικ για να τη δείτε στον πλανήτη",
+  "De compañías con 5 centros de datos o más en el mapa.": "Εταιρειών με 5 ή περισσότερα κέντρα δεδομένων στον χάρτη.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Εταιρειών με 1 έως 4 κέντρα δεδομένων στον χάρτη ή χωρίς γνωστό διαχειριστή."
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

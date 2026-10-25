@@ -820,7 +820,9 @@
   "E": "S",
   "S": "T",
   "O": "K",
-  "Pulsa para verla en el planeta": "I-click para makita ito sa planeta"
+  "Pulsa para verla en el planeta": "I-click para makita ito sa planeta",
+  "De compañías con 5 centros de datos o más en el mapa.": "Mula sa mga kumpanyang may 5 o higit pang data center sa mapa.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Mula sa mga kumpanyang may 1 hanggang 4 na data center sa mapa, o walang kilalang operator."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "คลิกเพื่อดูบนดาวเคราะห์"
+  "Pulsa para verla en el planeta": "คลิกเพื่อดูบนดาวเคราะห์",
+  "De compañías con 5 centros de datos o más en el mapa.": "ของบริษัทที่มีศูนย์ข้อมูลบนแผนที่ตั้งแต่ 5 แห่งขึ้นไป",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "ของบริษัทที่มีศูนย์ข้อมูลบนแผนที่ 1 ถึง 4 แห่ง หรือไม่ทราบผู้ให้บริการ"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

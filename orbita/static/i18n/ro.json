@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "V",
-  "Pulsa para verla en el planeta": "Faceți clic pentru a o vedea pe planetă"
+  "Pulsa para verla en el planeta": "Faceți clic pentru a o vedea pe planetă",
+  "De compañías con 5 centros de datos o más en el mapa.": "Ale companiilor cu 5 sau mai multe centre de date pe hartă.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Ale companiilor cu 1–4 centre de date pe hartă sau fără operator cunoscut."
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

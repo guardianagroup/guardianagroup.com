@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "Napsauta nähdäksesi sen planeetalla"
+  "Pulsa para verla en el planeta": "Napsauta nähdäksesi sen planeetalla",
+  "De compañías con 5 centros de datos o más en el mapa.": "Yhtiöiltä, joilla on kartalla vähintään 5 datakeskusta.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Yhtiöiltä, joilla on kartalla 1–4 datakeskusta, tai joiden operaattoria ei tunneta."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

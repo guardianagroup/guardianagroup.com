@@ -820,7 +820,9 @@
   "E": "E",
   "S": "S",
   "O": "W",
-  "Pulsa para verla en el planeta": "গ্রহে দেখতে ক্লিক করুন"
+  "Pulsa para verla en el planeta": "গ্রহে দেখতে ক্লিক করুন",
+  "De compañías con 5 centros de datos o más en el mapa.": "মানচিত্রে ৫টি বা তার বেশি ডেটা সেন্টার থাকা কোম্পানির।",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "মানচিত্রে ১ থেকে ৪টি ডেটা সেন্টার থাকা কোম্পানির, অথবা অপারেটর জানা নেই এমন।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

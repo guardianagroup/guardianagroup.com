@@ -820,7 +820,9 @@
   "E": "T",
   "S": "S",
   "O": "B",
-  "Pulsa para verla en el planeta": "Klik untuk melihatnya pada planet"
+  "Pulsa para verla en el planeta": "Klik untuk melihatnya pada planet",
+  "De compañías con 5 centros de datos o más en el mapa.": "Daripada syarikat dengan 5 pusat data atau lebih pada peta.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Daripada syarikat dengan 1 hingga 4 pusat data pada peta, atau tanpa pengendali yang diketahui."
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

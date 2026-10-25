@@ -820,7 +820,9 @@
   "E": "I",
   "S": "J",
   "O": "Z",
-  "Pulsa para verla en el planeta": "Kliknite da je vidite na planetu"
+  "Pulsa para verla en el planeta": "Kliknite da je vidite na planetu",
+  "De compañías con 5 centros de datos o más en el mapa.": "Tvrtki s 5 ili više podatkovnih centara na karti.",
+  "De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.": "Tvrtki s 1 do 4 podatkovna centra na karti ili bez poznatog operatera."
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",
