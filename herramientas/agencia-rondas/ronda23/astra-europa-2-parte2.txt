@@ -1,0 +1,74 @@
+[
+  {
+    "nombre": "Eje París–Lyon–Marsella",
+    "operador": "Orange",
+    "pais": "FR",
+    "ciudades": ["Paris", "Dijon", "Lyon", "Valence", "Avignon", "Marseille"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de Orange; ciudades intermedias inferidas según los principales nodos regionales y el corredor del Ródano. La secuencia física completa no está publicada."
+  },
+  {
+    "nombre": "Eje París–Burdeos",
+    "operador": "Orange",
+    "pais": "FR",
+    "ciudades": ["Paris", "Orleans", "Tours", "Poitiers", "Bordeaux"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de Orange; secuencia interurbana probable por los corredores A10 y ferroviario París–Burdeos, no un trazado físico confirmado ciudad por ciudad."
+  },
+  {
+    "nombre": "Eje París–Estrasburgo",
+    "operador": "Orange",
+    "pais": "FR",
+    "ciudades": ["Paris", "Reims", "Metz", "Strasbourg"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de Orange; secuencia probable de nodos del este de Francia siguiendo el corredor A4. No se dispone de un itinerario físico público completo."
+  },
+  {
+    "nombre": "Eje Fráncfort–Colonia–Düsseldorf",
+    "operador": "Deutsche Telekom",
+    "pais": "DE",
+    "ciudades": ["Frankfurt am Main", "Limburg an der Lahn", "Cologne", "Dusseldorf"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de Deutsche Telekom; secuencia probable entre los nodos de Rin-Meno y Renania siguiendo los corredores A3 y ferroviarios. El paso intermedio por Limburg an der Lahn es inferido."
+  },
+  {
+    "nombre": "Eje Fráncfort–Hannover–Hamburgo",
+    "operador": "Deutsche Telekom",
+    "pais": "DE",
+    "ciudades": ["Frankfurt am Main", "Kassel", "Gottingen", "Hannover", "Hamburg"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de Deutsche Telekom; ciudades intermedias inferidas siguiendo los corredores terrestres A5–A7 y Hannover–Hamburgo. No representa una canalización publicada de extremo a extremo."
+  },
+  {
+    "nombre": "Eje Fráncfort–Leipzig–Berlín",
+    "operador": "Deutsche Telekom",
+    "pais": "DE",
+    "ciudades": ["Frankfurt am Main", "Fulda", "Erfurt", "Leipzig", "Berlin"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de Deutsche Telekom; secuencia probable por los corredores A66–A7–A4 y Leipzig–Berlín. Las ciudades intermedias son una reconstrucción geográfica, no un itinerario físico publicado."
+  },
+  {
+    "nombre": "Eje Atenas–Tesalónica",
+    "operador": "OTE / COSMOTE",
+    "pais": "GR",
+    "ciudades": ["Athens", "Thebes", "Lamia", "Larissa", "Katerini", "Thessaloniki"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de OTE; secuencia probable por el corredor terrestre A1 y los principales nodos de Grecia central y Tesalia. El trazado detallado entre nodos no está publicado."
+  },
+  {
+    "nombre": "Eje Atenas–Corinto–Patras",
+    "operador": "OTE / COSMOTE",
+    "pais": "GR",
+    "ciudades": ["Athens", "Elefsina", "Corinth", "Aigio", "Patras"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de OTE; secuencia probable por el corredor terrestre A8 y la costa norte del Peloponeso. No se incluye ningún cruce submarino del golfo de Corinto."
+  },
+  {
+    "nombre": "Eje Tesalónica–Tracia",
+    "operador": "OTE / COSMOTE",
+    "pais": "GR",
+    "ciudades": ["Thessaloniki", "Kavala", "Xanthi", "Komotini", "Alexandroupoli"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de OTE en Macedonia oriental y Tracia; secuencia probable de nodos siguiendo el corredor terrestre de Egnatia Odos/A2. La canalización exacta no está publicada."
+  }
+]

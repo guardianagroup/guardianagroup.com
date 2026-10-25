@@ -1,0 +1,112 @@
+[
+  {
+    "nombre": "Project Horizon",
+    "operador": "Vocus",
+    "pais": "AU",
+    "ciudades": [
+      "Perth",
+      "Geraldton",
+      "Meekatharra",
+      "Newman",
+      "Port Hedland"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.vocus.com.au/about-vocus/our-network/australia/horizon-cable — Vocus describe una red terrestre de fibra de 2.000 km de Perth a Port Hedland vía Geraldton, Meekatharra y Newman; https://www.vocus.com.au/news/vocus-lights-up-horizon — Vocus confirmó que Horizon quedó iluminada extremo a extremo en junio de 2026."
+  },
+  {
+    "nombre": "Vocus Sydney–Melbourne backbone",
+    "operador": "Vocus",
+    "pais": "AU",
+    "ciudades": [
+      "Sydney",
+      "Melbourne"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.vocus.com.au/about-vocus/our-network/australia — Vocus documenta su actual backbone nacional de fibra que conecta las capitales continentales; la historia corporativa de Vocus sitúa Melbourne–Sydney entre las rutas construidas en la fase inicial de 2001–2003."
+  },
+  {
+    "nombre": "Vocus Melbourne–Adelaide backbone",
+    "operador": "Vocus",
+    "pais": "AU",
+    "ciudades": [
+      "Melbourne",
+      "Adelaide"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.vocus.com.au/about-vocus/our-network/australia — Vocus documenta su actual backbone nacional de fibra que conecta las capitales continentales; la historia corporativa de Vocus sitúa Melbourne–Adelaide entre las rutas construidas en la fase inicial de 2001–2003."
+  },
+  {
+    "nombre": "Terabit Territory Darwin–Adelaide",
+    "operador": "Vocus",
+    "pais": "AU",
+    "ciudades": [
+      "Darwin",
+      "Adelaide"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.vocus.com.au/news/darwins-first-international-data-connection-goes-live — Vocus identifica expresamente su Terabit Territory intercapital fibre backbone de Darwin a Adelaide y Brisbane y señala que fue ampliado con 25 veces más capacidad en 2021."
+  },
+  {
+    "nombre": "Terabit Territory Darwin–Brisbane",
+    "operador": "Vocus",
+    "pais": "AU",
+    "ciudades": [
+      "Darwin",
+      "Brisbane"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.vocus.com.au/news/darwins-first-international-data-connection-goes-live — Vocus identifica expresamente su Terabit Territory intercapital fibre backbone de Darwin a Adelaide y Brisbane y señala que fue ampliado con 25 veces más capacidad en 2021."
+  },
+  {
+    "nombre": "REANNZ South Island backbone",
+    "operador": "REANNZ (sobre servicios ópticos comerciales; One NZ es socio de conectividad nacional desde 2023)",
+    "pais": "NZ",
+    "ciudades": [
+      "Invercargill",
+      "Dunedin",
+      "Christchurch"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.reannz.co.nz/assets/Uploads/Annual-Reports/REANNZ-Annual-Report-311025-DIGI.pdf — El informe anual 2025 muestra el backbone nacional de 100 Gbps en South Island y confirma que la red sigue plenamente operativa; informes anteriores de REANNZ documentan que el backbone nacional se extiende desde Invercargill y que el eje principal de South Island desde Dunedin fue actualizado a 100 Gbps."
+  },
+  {
+    "nombre": "REANNZ North Island backbone",
+    "operador": "REANNZ (sobre servicios ópticos comerciales; One NZ es socio de conectividad nacional desde 2023)",
+    "pais": "NZ",
+    "ciudades": [
+      "Wellington",
+      "Palmerston North",
+      "Hamilton",
+      "Auckland",
+      "Mangawhai"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.reannz.co.nz/assets/Uploads/Annual-Reports/REANNZ-Annual-Report-311025-DIGI.pdf — El mapa oficial 2025 muestra el backbone nacional de 100 Gbps a través de North Island hacia Auckland/Northland; REANNZ había documentado en 2019 ambos ejes de North Island a 100 Gbps y una segunda conexión Hamilton–Wellington. El mapa advierte que las líneas son indicativas."
+  },
+  {
+    "nombre": "Savusavu–Labasa Fibre Project",
+    "operador": "Telecom Fiji",
+    "pais": "FJ",
+    "ciudades": [
+      "Savusavu",
+      "Seaqaqa",
+      "Labasa"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.telecom.com.fj/telecom-fiji-knowledge/telecom-fiji-completes-savusavu-to-labasa-fibre-project-strengthening-connectivity-in-the-north/ — Telecom Fiji confirmó en marzo de 2025 la finalización del enlace terrestre subterráneo de 102 km Savusavu–Seaqaqa–Labasa; https://www.telecom.com.fj/telecom-fiji-knowledge/telecom-fiji-wins-infrastructure-initiative-of-the-year-at-asian-telecom-awards-2026/ — en 2026 lo describe como backbone permanente y operativo del norte de Fiji."
+  },
+  {
+    "nombre": "Queen's Road fibre corridor",
+    "operador": "Telecom Fiji",
+    "pais": "FJ",
+    "ciudades": [
+      "Suva",
+      "Navua",
+      "Sigatoka",
+      "Nadi",
+      "Lautoka"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.telecom.com.fj/telecom-fiji-knowledge/telecom-fiji-rolls-out-fiber-to-the-home-ftth-and-expands-fiber-network-coverage-throughout-fiji/ — Telecom Fiji indicó en 2018 que su red óptica existente superaba 1.500 km y cubría principalmente el corredor de Queen's Road; la secuencia de ciudades corresponde al corredor principal Suva–Lautoka."
+  }
+]

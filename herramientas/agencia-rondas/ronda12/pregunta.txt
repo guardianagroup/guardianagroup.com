@@ -1,0 +1,19 @@
+Ronda 12 de la agencia GUARDIANA: la portada nueva (dirección «Centrada», elegida por el dueño). Necesito tu mejor propuesta, breve y concreta.
+
+LO QUE YA ESTÁ DECIDIDO (no cambiar)
+- Titular: «¿Sabes a dónde van tus datos y quién los compra?». «quién los compra?» va con un degradado de azul a dorado.
+- Subtítulo: «Navega en ZERO. Mira tu radiografía.»
+- Colores: fondo #06080C, azul #9CC3E4, blanco #F4F6F8, rojo #E07A6C para lo que se corta, dorado #F0C77F para el dinero. Letras: Instrument Serif en titulares, Hanken Grotesk en el texto, IBM Plex Mono en etiquetas. Las palabras aparecen una a una saliendo de un desenfoque (se mantiene).
+- Arriba, el planeta con los cables reales del mapa y un satélite geoestacionario encima («no a escala»).
+- Tres puertas: Radiografías (gratis), ZERO (demostración), Comunicaciones (en construcción). Botón principal: «Ver mi radiografía gratis».
+- Medición real del 23 de octubre de 2026, 11 diarios deportivos y de noticias, medidos desde Colombia. Sin GUARDIANA: 172 dominios de otras empresas, 100 empresas, 16 países. Con GUARDIANA: 89 dominios cortados, 83 se quedan, 12 países. Empresas: 65 cortadas del todo, 7 en parte, 28 se quedan.
+- 7 días gratis para todos, sin tarjeta y sin darnos nombre ni correo. El precio aún no está decidido (se muestra «Próximamente»). Código abierto AGPL-3.0. Todavía no hay clientes de pago.
+- Debe verse perfecta en ordenador, tablet y teléfono; en el teléfono, más sencilla.
+- Reglas: nada inventado; ninguna cifra sin fuente oficial o sin dos voces que la confirmen; nunca prometer protección absoluta; nunca presentar los arcos como la ruta real de los datos de nadie; ninguna marca real de terceros en el diseño; en pantalla solo «Datos verificados» (las fuentes van en la página de términos).
+
+TRES ENCARGOS DEL DUEÑO
+1. LA SUBASTA (obligatorio). Una sección que cuente que tus datos van a subasta: al abrir una página puede empezar una subasta en tiempo real, y muchas empresas reciben datos tuyos para pujar; y que hay empresas (brókers de datos) que compran datos de personas y los revenden. Quiero las frases más afiladas posibles, pero todas verdaderas y comprobables. Dame el título de la sección, de 3 a 5 frases cortas y una idea visual (por ejemplo, una subasta animada) que no invente cifras.
+2. EL PLANETA CON MOVIMIENTO. El dueño no quiere una imagen fija: pulsos de luz que recorren algunas troncales terrestres y cables entre países, algunos satélites que aparecen, y una señal que sube desde Colombia al satélite y baja en otro país. Detalles mínimos. ¿Qué animarías exactamente y cuánto? ¿Cómo lo harías ligero en el teléfono? ¿Qué rótulo pondrías para ser honestos (ilustración, no a escala)?
+3. QUE QUIERAN PAGAR. La web tiene que ser espectacular para que la gente quiera la suscripción. Con todo lo anterior, dame el orden de las secciones de la portada (8 como máximo), con el titular de cada una, y qué haría que alguien active los 7 días gratis. Todavía sin precio.
+
+Responde en español, en 450 palabras como máximo, con listas numeradas. Al final, enumera los datos que habría que verificar en fuentes oficiales antes de publicarlos.

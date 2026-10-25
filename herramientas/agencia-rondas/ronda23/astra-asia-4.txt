@@ -1,0 +1,106 @@
+[
+  {
+    "nombre": "Eje Vientiane–norte de Laos–China",
+    "operador": "Lao Telecom / China Telecom",
+    "pais": "LA",
+    "ciudades": ["Vientiane", "Vang Vieng", "Luang Prabang", "Muang Xay", "Boten", "Mohan"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión terrestre Laos–China y red nacional representadas en ITU Broadband Maps; secuencia de ciudades inferida del corredor de las carreteras 13 y 13N hacia Boten. No representa un levantamiento del cable."
+  },
+  {
+    "nombre": "Eje troncal Vientiane–Pakse",
+    "operador": "Enterprise of Telecommunications Lao (ETL)",
+    "pais": "LA",
+    "ciudades": ["Vientiane", "Paksan", "Thakhek", "Savannakhet", "Pakse"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de ETL documentada en ITU Broadband Maps; recorrido interurbano inferido del corredor de la carretera 13 hacia el sur y sus accesos a las ciudades principales."
+  },
+  {
+    "nombre": "Troncal costera septentrional Beirut–Akkar",
+    "operador": "Ogero",
+    "pais": "LB",
+    "ciudades": ["Beirut", "Jounieh", "Byblos", "Batroun", "Tripoli", "Halba"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de fibra de Ogero; secuencia inferida del corredor costero Beirut–Tripoli y su prolongación hacia Halba, superior a 100 km. Estado correspondiente a la red documentada, sin comprobación operativa en tiempo real."
+  },
+  {
+    "nombre": "Troncal occidental de Malasia peninsular–Singapur",
+    "operador": "Telekom Malaysia (TM)",
+    "pais": "MY",
+    "ciudades": ["Butterworth", "Ipoh", "Kuala Lumpur", "Seremban", "Johor Bahru", "Singapore"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre e interconexiones internacionales de TM, descritas en su documentación de infraestructura y en ITU Broadband Maps; ciudades ordenadas según el corredor occidental de la península. El cruce a Singapur corresponde a conexiones terrestres por los pasos del estrecho, no a un cable submarino de larga distancia."
+  },
+  {
+    "nombre": "Troncal Kuala Lumpur–costa oriental",
+    "operador": "Telekom Malaysia (TM)",
+    "pais": "MY",
+    "ciudades": ["Kuala Lumpur", "Bentong", "Kuantan", "Kuala Terengganu", "Kota Bharu"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red terrestre nacional de TM representada en ITU Broadband Maps; trazado probable por el corredor Kuala Lumpur–Karak–Kuantan y las carreteras de la costa oriental. Se excluyen los enlaces submarinos paralelos."
+  },
+  {
+    "nombre": "Troncal terrestre de Sarawak",
+    "operador": "SACOFA",
+    "pais": "MY",
+    "ciudades": ["Kuching", "Serian", "Sri Aman", "Betong", "Sarikei", "Sibu", "Bintulu", "Miri"],
+    "estado": "en servicio",
+    "fuente": "aproximado: SACOFA publica la existencia de su red troncal terrestre de fibra en Sarawak; secuencia inferida del corredor de la carretera Pan Borneo y sus ramales urbanos. No corresponde al sistema submarino de SACOFA."
+  },
+  {
+    "nombre": "Tránsito ferroviario Rusia–Mongolia–China",
+    "operador": "Railcom / Ulaanbaatar Railway",
+    "pais": "MN",
+    "ciudades": ["Naushki", "Sukhbaatar", "Darkhan", "Ulaanbaatar", "Choir", "Sainshand", "Zamyn-Uud", "Erenhot"],
+    "estado": "en servicio",
+    "fuente": "publicado en la documentación de Railcom sobre su red de fibra y servicios de tránsito internacional; aproximado: ciudades intermedias ordenadas siguiendo el ferrocarril transmongol. Naushki y Erenhot son los extremos inmediatos en Rusia y China."
+  },
+  {
+    "nombre": "Troncal occidental de Mongolia",
+    "operador": "Information Communication Network LLC (Netcom)",
+    "pais": "MN",
+    "ciudades": ["Ulaanbaatar", "Arvaikheer", "Bayankhongor", "Altai", "Khovd"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de Information Communication Network LLC, publicada en sus mapas de cobertura y en ITU Broadband Maps; secuencia inferida del corredor vial meridional que enlaza las capitales provinciales occidentales."
+  },
+  {
+    "nombre": "Troncal central Yangon–Mandalay",
+    "operador": "Myanma Posts and Telecommunications (MPT)",
+    "pais": "MM",
+    "ciudades": ["Yangon", "Bago", "Taungoo", "Nay Pyi Taw", "Yamethin", "Meiktila", "Mandalay"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal óptica de MPT documentada en estudios de telecomunicaciones de JICA sobre Myanmar; ciudades ordenadas según el corredor central de carretera y ferrocarril. Estado basado en la red documentada, sin verificación en tiempo real de interrupciones relacionadas con el conflicto."
+  },
+  {
+    "nombre": "Troncal Este–Oeste por la carretera Mahendra",
+    "operador": "Nepal Telecom",
+    "pais": "NP",
+    "ciudades": ["Birtamod", "Itahari", "Lahan", "Bardibas", "Hetauda", "Bharatpur", "Butwal", "Lamahi", "Kohalpur", "Attariya", "Mahendranagar"],
+    "estado": "en servicio",
+    "fuente": "Nepal Telecom, informes anuales: red troncal óptica Este–Oeste existente; aproximado: secuencia de ciudades principales siguiendo la carretera Mahendra, no un trazado del cable publicado ciudad por ciudad. No corresponde al proyecto de fibra de la Mid-Hill Highway."
+  },
+  {
+    "nombre": "Kathmandu–Birgunj–Raxaul: salida terrestre hacia India",
+    "operador": "Nepal Telecom; interconexión con operadores indios",
+    "pais": "NP",
+    "ciudades": ["Kathmandu", "Bharatpur", "Hetauda", "Birgunj", "Raxaul"],
+    "estado": "en servicio",
+    "fuente": "Nepal Telecom, informes anuales: conectividad óptica internacional por Birgunj; aproximado: recorrido interior por los corredores de las carreteras Prithvi y Mahendra hasta Hetauda y después hacia Birgunj. La secuencia interior es una reconstrucción probable, no el itinerario publicado de un circuito concreto."
+  },
+  {
+    "nombre": "Kathmandu–Rasuwagadhi–Gyirong: salida terrestre hacia China",
+    "operador": "Nepal Telecom / China Telecom",
+    "pais": "NP",
+    "ciudades": ["Kathmandu", "Bidur", "Dhunche", "Gyirong"],
+    "estado": "en servicio",
+    "fuente": "Reuters, 12 de enero de 2018: entrada en servicio del enlace óptico Nepal–China por Rasuwagadhi; aproximado: ciudades intermedias siguiendo el corredor viario de acceso a Rasuwagadhi y continuación hasta Gyirong, primera localidad urbana del lado chino. La publicación acredita la puesta en servicio, no la disponibilidad instantánea."
+  },
+  {
+    "nombre": "Pyongyang–Sinuiju–Dandong: salida terrestre hacia China",
+    "operador": "China Unicom / red norcoreana de telecomunicaciones",
+    "pais": "KP",
+    "ciudades": ["Pyongyang", "Anju", "Chongju", "Sinuiju", "Dandong"],
+    "estado": "en servicio",
+    "fuente": "Reuters, 2 de octubre de 2017: conexión internacional norcoreana existente mediante China Unicom; aproximado: corredor terrestre Pyongyang–Sinuiju–Dandong, siguiendo el eje principal de carretera y ferrocarril. Anju y Chongju son pasos probables; no hay un trazado público suficientemente detallado para confirmarlos como nodos del cable."
+  }
+]

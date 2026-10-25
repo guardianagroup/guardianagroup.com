@@ -1,0 +1,34 @@
+[
+  {
+    "nombre": "Troncal terrestre Norte–Sur, principales nodos",
+    "operador": "VNPT",
+    "pais": "VN",
+    "ciudades": ["Hanoi", "Da Nang", "Ho Chi Minh City"],
+    "estado": "en servicio",
+    "fuente": "CESPAP/ESCAP (ONU), informe «An In-Depth Study of Broadband Infrastructure in the ASEAN Region», apartado sobre Vietnam e infraestructura troncal de VNPT. Estado operativo referido al informe."
+  },
+  {
+    "nombre": "Troncal Dhaka–Chattogram",
+    "operador": "BTCL",
+    "pais": "BD",
+    "ciudades": ["Dhaka", "Cumilla", "Feni", "Chattogram"],
+    "estado": "en servicio",
+    "fuente": "CESPAP/ESCAP (ONU), informe «An In-Depth Study of Broadband Infrastructure in South and West Asia», apartado sobre Bangladesh y red terrestre de BTCL. Estado operativo referido al informe."
+  },
+  {
+    "nombre": "Enlace terrestre Chattogram–Cox's Bazar",
+    "operador": "BTCL",
+    "pais": "BD",
+    "ciudades": ["Chattogram", "Cox's Bazar"],
+    "estado": "en servicio",
+    "fuente": "CESPAP/ESCAP (ONU), informe «An In-Depth Study of Broadband Infrastructure in South and West Asia», apartado sobre Bangladesh: conexión terrestre con la estación de amarre de Cox's Bazar. Estado operativo referido al informe."
+  },
+  {
+    "nombre": "Troncal Yangon–Mandalay, principales nodos",
+    "operador": "MPT",
+    "pais": "MM",
+    "ciudades": ["Yangon", "Bago", "Taungoo", "Nay Pyi Taw", "Mandalay"],
+    "estado": "en servicio",
+    "fuente": "CESPAP/ESCAP (ONU), informe «An In-Depth Study of Broadband Infrastructure in the ASEAN Region», apartado sobre Myanmar y red troncal terrestre de MPT. Estado operativo referido al informe; no constituye verificación independiente de que todos los tramos sigan operativos en la actualidad."
+  }
+]

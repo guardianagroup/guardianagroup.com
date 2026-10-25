@@ -1,0 +1,106 @@
+[
+  {
+    "nombre": "Djibouti–Ali Sabieh–frontera etíope",
+    "operador": "Djibouti Telecom / Ethio telecom",
+    "pais": "DJ",
+    "ciudades": ["Djibouti", "Ali Sabieh", "Guelile", "Dewele"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión terrestre Djibouti–Etiopía por Dewele, descrita por Djibouti Telecom y Ethio telecom; secuencia urbana estimada por el corredor meridional. Dewele es la primera localidad del lado etíope."
+  },
+  {
+    "nombre": "Corredor mediterráneo–Cairo–Suez",
+    "operador": "Telecom Egypt",
+    "pais": "EG",
+    "ciudades": ["Alexandria", "Damanhur", "Tanta", "Banha", "Cairo", "Suez"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional y corredores terrestres Mediterranean–Red Sea de Telecom Egypt; ciudades intermedias estimadas siguiendo los corredores viarios del delta y Cairo–Suez. No representa el trazado exacto de una canalización publicada."
+  },
+  {
+    "nombre": "Troncal del valle del Nilo",
+    "operador": "Telecom Egypt",
+    "pais": "EG",
+    "ciudades": ["Cairo", "Beni Suef", "Minya", "Asyut", "Sohag", "Qena", "Luxor", "Aswan"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de Telecom Egypt que atiende el Alto Egipto; secuencia estimada por el corredor ferroviario y viario del valle del Nilo, sin afirmar una margen del río ni una canalización concreta."
+  },
+  {
+    "nombre": "Cairo–Ismailia–Port Said",
+    "operador": "Telecom Egypt",
+    "pais": "EG",
+    "ciudades": ["Cairo", "Ismailia", "Port Said"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red terrestre de Telecom Egypt hacia las ciudades del canal de Suez; secuencia estimada por las carreteras Cairo–Ismailia e Ismailia–Port Said."
+  },
+  {
+    "nombre": "Troncal continental Bata–Mongomo",
+    "operador": "GITGE",
+    "pais": "GQ",
+    "ciudades": ["Bata", "Niefang", "Mongomo"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional terrestre de fibra óptica continental de GITGE; se indican ciudades principales del corredor oeste–este, no todos los pasos intermedios ni el trazado exacto."
+  },
+  {
+    "nombre": "Troncal continental Bata–Ebebiyin",
+    "operador": "GITGE",
+    "pais": "GQ",
+    "ciudades": ["Bata", "Niefang", "Nkue", "Ebebiyin"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red terrestre continental de GITGE; secuencia probable siguiendo el corredor de carreteras Bata–Niefang–Nkue–Ebebiyin. Comparte el tramo occidental con otras rutas del backbone."
+  },
+  {
+    "nombre": "Troncal occidental y meridional de Eswatini",
+    "operador": "Eswatini Posts and Telecommunications Corporation (EPTC)",
+    "pais": "SZ",
+    "ciudades": ["Mbabane", "Manzini", "Nhlangano"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de fibra de EPTC; secuencia de ciudades principales estimada por los corredores MR3, MR9 y MR11. El recorrido completo supera 100 km."
+  },
+  {
+    "nombre": "Troncal oriental e interconexión con Mozambique",
+    "operador": "EPTC / Tmcel",
+    "pais": "SZ",
+    "ciudades": ["Mbabane", "Manzini", "Siteki", "Mhlumeni", "Goba"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone de EPTC e interconexión terrestre con Mozambique por Mhlumeni–Goba; ciudades intermedias estimadas siguiendo los corredores MR3 y MR8 y el acceso a Mhlumeni. Goba es la primera localidad del lado mozambiqueño; no se afirma que el cable atraviese todos los centros urbanos indicados."
+  },
+  {
+    "nombre": "Troncal Addis Ababa–Djibouti",
+    "operador": "Ethio telecom / Djibouti Telecom",
+    "pais": "ET",
+    "ciudades": ["Addis Ababa", "Adama", "Awash", "Dire Dawa", "Dewele", "Guelile"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión de fibra terrestre Etiopía–Djibouti y backbone de Ethio telecom; secuencia probable por el corredor oriental hacia Dire Dawa y Dewele. Guelile es la primera localidad del lado de Djibouti. Las ciudades intermedias representan el corredor, no un trazado de cable publicado."
+  },
+  {
+    "nombre": "Troncal meridional Addis Ababa–Moyale",
+    "operador": "Ethio telecom",
+    "pais": "ET",
+    "ciudades": ["Addis Ababa", "Adama", "Shashamene", "Hawassa", "Dilla", "Yabelo", "Moyale"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor meridional del backbone de fibra de Ethio telecom hacia Moyale; secuencia urbana estimada siguiendo los principales corredores viarios. Se representa únicamente el tramo etíope, sin prolongarlo por una interconexión internacional cuyo trazado no se especifica aquí."
+  },
+  {
+    "nombre": "Troncal occidental Addis Ababa–Jimma",
+    "operador": "Ethio telecom",
+    "pais": "ET",
+    "ciudades": ["Addis Ababa", "Welkite", "Jimma"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de fibra de Ethio telecom hacia el sudoeste; secuencia probable por el corredor viario Addis Ababa–Welkite–Jimma. No corresponde a una canalización exacta publicada."
+  },
+  {
+    "nombre": "Backbone nacional Libreville–Franceville",
+    "operador": "Société de Patrimoine des Infrastructures Numériques (SPIN) / Axione",
+    "pais": "GA",
+    "ciudades": ["Libreville", "Ntoum", "Ndjole", "Booue", "Lastoursville", "Moanda", "Franceville"],
+    "estado": "en servicio",
+    "fuente": "publicado en la documentación del Banco Mundial del proyecto Central African Backbone, fase 4, Gabón: backbone terrestre desplegado por el corredor del ferrocarril Transgabonais. Aproximado: secuencia de ciudades principales a lo largo del corredor ferroviario; no implica que el cable entre en cada centro urbano."
+  },
+  {
+    "nombre": "Interconexión terrestre Gabón–Congo",
+    "operador": "SPIN / Axione / Congo Telecom",
+    "pais": "GA",
+    "ciudades": ["Franceville", "Lekoni", "Okoyo"],
+    "estado": "en servicio",
+    "fuente": "publicado en la documentación del Banco Mundial de los proyectos Central African Backbone de Gabón y la República del Congo: interconexión terrestre transfronteriza operativa. Aproximado: corredor Franceville–Lekoni–frontera congoleña–Okoyo; Okoyo es la primera ciudad principal del lado congoleño, no necesariamente la primera localidad menor inmediatamente después de la frontera."
+  }
+]

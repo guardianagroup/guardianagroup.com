@@ -1,0 +1,98 @@
+[
+  {
+    "nombre": "Kabul–Jalalabad–Peshawar",
+    "operador": "Afghan Telecom / PTCL",
+    "pais": "AF",
+    "ciudades": ["Kabul", "Jalalabad", "Torkham", "Peshawar"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor oriental de la red nacional de fibra de Afghan Telecom y su interconexión terrestre con PTCL en Torkham; secuencia urbana inferida siguiendo la carretera Kabul–Jalalabad y el paso de Khyber, no un trazado de conductos publicado."
+  },
+  {
+    "nombre": "Kabul–Kandahar–Chaman",
+    "operador": "Afghan Telecom / PTCL",
+    "pais": "AF",
+    "ciudades": ["Kabul", "Ghazni", "Qalat", "Kandahar", "Spin Boldak", "Chaman"],
+    "estado": "en servicio",
+    "fuente": "aproximado: tramo meridional de la red troncal de Afghan Telecom e interconexión con Pakistán por Spin Boldak–Chaman; ciudades intermedias inferidas del corredor de la carretera Kabul–Kandahar y su ramal fronterizo."
+  },
+  {
+    "nombre": "Yerevan–Vanadzor–Tbilisi",
+    "operador": "GNC-Alfa / operadores de tránsito georgianos",
+    "pais": "AM",
+    "ciudades": ["Yerevan", "Ashtarak", "Spitak", "Vanadzor", "Alaverdi", "Bagratashen", "Sadakhlo", "Marneuli", "Tbilisi"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal e interconexiones con Georgia descritas por GNC-Alfa; secuencia probable por los corredores M3, M6 y Bagratashen–Sadakhlo. La cartografía comercial no publica el recorrido completo de los conductos."
+  },
+  {
+    "nombre": "Yerevan–Meghri–frontera iraní",
+    "operador": "GNC-Alfa / Telecommunications Infrastructure Company",
+    "pais": "AM",
+    "ciudades": ["Yerevan", "Artashat", "Yeghegnadzor", "Vayk", "Goris", "Kapan", "Meghri", "Agarak", "Norduz"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la red de GNC-Alfa hacia su interconexión con Irán; localidades intermedias inferidas del eje viario meridional armenio y del cruce Agarak–Norduz, no de planos públicos de obra."
+  },
+  {
+    "nombre": "Baku–Ganja–Georgia",
+    "operador": "Delta Telecom / AzerTelecom",
+    "pais": "AZ",
+    "ciudades": ["Baku", "Shamakhi", "Agsu", "Yevlakh", "Ganja", "Gazakh", "Rustavi", "Tbilisi"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor occidental de las redes nacionales y enlaces terrestres con Georgia publicados por Delta Telecom y AzerTelecom; secuencia probable por los ejes Baku–Shamakhi–Yevlakh y Ganja–Gazakh. Los operadores mantienen infraestructuras distintas y no publican todos sus itinerarios urbanos."
+  },
+  {
+    "nombre": "Baku–Astara–Irán",
+    "operador": "Delta Telecom / Telecommunications Infrastructure Company",
+    "pais": "AZ",
+    "ciudades": ["Baku", "Alat", "Salyan", "Jalilabad", "Masally", "Lankaran", "Astara", "Astara"],
+    "estado": "en servicio",
+    "fuente": "aproximado: tramo azerbaiyano hacia Irán del sistema terrestre Europe Persia Express Gateway, descrito por sus operadores; ciudades inferidas del corredor costero meridional. Las dos entradas Astara corresponden, respectivamente, a la ciudad azerbaiyana y a la iraní."
+  },
+  {
+    "nombre": "Manama–Al Khobar–Riyadh",
+    "operador": "Batelco / stc",
+    "pais": "BH",
+    "ciudades": ["Manama", "Al Khobar", "Riyadh"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión terrestre Bahrain–Saudi Arabia por infraestructura de telecomunicaciones del King Fahd Causeway y continuación por la troncal saudí hacia Riyadh; referencias de conectividad internacional de Batelco y stc. Supera 100 km como corredor internacional completo, no dentro de Bahrain; el cruce discurre sobre la calzada, no por un cable submarino."
+  },
+  {
+    "nombre": "Dhaka–Chattogram–Cox's Bazar",
+    "operador": "Bangladesh Telecommunications Company Limited",
+    "pais": "BD",
+    "ciudades": ["Dhaka", "Narayanganj", "Cumilla", "Feni", "Chattogram", "Chakaria", "Cox's Bazar"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje de larga distancia de la red óptica nacional de BTCL y conexión terrestre con Cox's Bazar; secuencia urbana inferida del corredor de las carreteras N1. No incluye ningún tramo submarino."
+  },
+  {
+    "nombre": "Dhaka–Bogura–Rangpur",
+    "operador": "Bangladesh Telecommunications Company Limited / Fiber@Home",
+    "pais": "BD",
+    "ciudades": ["Dhaka", "Gazipur", "Tangail", "Sirajganj", "Bogura", "Rangpur"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor noroccidental representado en las redes nacionales de BTCL y Fiber@Home; ciudades ordenadas siguiendo el eje N4–Jamuna Bridge–N5. Representa un corredor troncal, no un único cable compartido por ambos operadores."
+  },
+  {
+    "nombre": "Dhaka–Jashore–Benapole–India",
+    "operador": "Fiber@Home / operadores ITC de Bangladesh",
+    "pais": "BD",
+    "ciudades": ["Dhaka", "Faridpur", "Magura", "Jashore", "Benapole", "Bangaon"],
+    "estado": "en servicio",
+    "fuente": "aproximado: redes nacionales NTTN y enlaces International Terrestrial Cable operativos por Benapole–Petrapole, documentados por BTRC y los operadores; secuencia urbana probable por el corredor suroccidental. Bangaon es la primera ciudad india indicada, después del puesto fronterizo de Petrapole."
+  },
+  {
+    "nombre": "Thimphu–Phuntsholing–Siliguri",
+    "operador": "Bhutan Telecom / Bhutan Power Corporation / operadores indios",
+    "pais": "BT",
+    "ciudades": ["Thimphu", "Chhukha", "Gedu", "Phuntsholing", "Jaigaon", "Hasimara", "Siliguri"],
+    "estado": "en servicio",
+    "fuente": "aproximado: salida internacional por Phuntsholing y red nacional sobre fibra de Bhutan Power Corporation, descritas por Bhutan Telecom y el regulador BICMA; localidades intermedias inferidas del corredor eléctrico y viario Thimphu–Phuntsholing y de su continuación india."
+  },
+  {
+    "nombre": "Muara–Bandar Seri Begawan–Kuala Belait",
+    "operador": "Unified National Networks",
+    "pais": "BN",
+    "ciudades": ["Muara", "Bandar Seri Begawan", "Tutong", "Seria", "Kuala Belait"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor occidental de la infraestructura fija nacional operada por UNN, que integra la antigua red de TelBru; secuencia probable por las carreteras principales entre Brunei-Muara, Tutong y Belait. El corredor completo supera 100 km; no se dispone de un trazado público detallado de los conductos."
+  }
+]

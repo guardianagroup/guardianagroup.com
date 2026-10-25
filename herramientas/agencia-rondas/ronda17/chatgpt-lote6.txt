@@ -1,0 +1,226 @@
+[
+  {
+    "nombre": "National Fibre Optic Backbone – Corredor Norte-Oeste",
+    "operador": "BSC",
+    "pais": "RW",
+    "ciudades": ["Kigali", "Rulindo", "Musanze", "Nyabihu", "Rubavu"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Rwanda, informe WSIS+10 presentado a la UIT, página 13, mapa National Backbone Fibre-Optic Network, fuente BSC. https://www.itu.int/net/wsis/review/inc/docs/rcreports/wsis10_country_reporting-rwa.pdf"
+  },
+  {
+    "nombre": "National Fibre Optic Backbone – Anillo Occidental",
+    "operador": "BSC",
+    "pais": "RW",
+    "ciudades": ["Rubavu", "Rutsiro", "Karongi", "Muhanga", "Kigali"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Rwanda, informe WSIS+10 a la UIT, página 13, mapa de la red nacional de fibra de BSC. https://www.itu.int/net/wsis/review/inc/docs/rcreports/wsis10_country_reporting-rwa.pdf"
+  },
+  {
+    "nombre": "National Fibre Optic Backbone – Corredor Sur",
+    "operador": "BSC",
+    "pais": "RW",
+    "ciudades": ["Kigali", "Muhanga", "Ruhango", "Nyanza", "Huye"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Rwanda, informe WSIS+10 a la UIT, página 13, mapa National Backbone Fibre-Optic Network. https://www.itu.int/net/wsis/review/inc/docs/rcreports/wsis10_country_reporting-rwa.pdf"
+  },
+  {
+    "nombre": "National Fibre Optic Backbone – Anillo Suroccidental",
+    "operador": "BSC",
+    "pais": "RW",
+    "ciudades": ["Karongi", "Nyamasheke", "Rusizi", "Nyamagabe", "Huye"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Rwanda, informe WSIS+10 a la UIT, página 13, mapa de la red troncal nacional, trazado occidental y meridional. https://www.itu.int/net/wsis/review/inc/docs/rcreports/wsis10_country_reporting-rwa.pdf"
+  },
+  {
+    "nombre": "National Fibre Optic Backbone – Corredor Oriental",
+    "operador": "BSC",
+    "pais": "RW",
+    "ciudades": ["Kigali", "Rwamagana", "Kayonza", "Ngoma", "Kirehe"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Rwanda, informe WSIS+10 a la UIT, página 13, mapa National Backbone Fibre-Optic Network. https://www.itu.int/net/wsis/review/inc/docs/rcreports/wsis10_country_reporting-rwa.pdf"
+  },
+  {
+    "nombre": "National Fibre Optic Backbone – Corredor Nororiental",
+    "operador": "BSC",
+    "pais": "RW",
+    "ciudades": ["Kigali", "Rwamagana", "Kayonza", "Gatsibo", "Nyagatare"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Rwanda, informe WSIS+10 a la UIT, página 13, mapa nacional de BSC, enlaces orientales y nororientales. https://www.itu.int/net/wsis/review/inc/docs/rcreports/wsis10_country_reporting-rwa.pdf"
+  },
+  {
+    "nombre": "MTL National Fibre Network – Enlace Norte con Tanzania",
+    "operador": "MTL",
+    "pais": "MW",
+    "ciudades": ["Songwe", "Karonga", "Rumphi", "Mzuzu"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Malawi y Banco Mundial, Digital Malawi Project, Environmental and Social Management Framework, febrero de 2017, página PDF 132, declaración del representante de Malawi Telecommunications Limited sobre el trazado de su red existente. https://documents1.worldbank.org/curated/en/188571490348483306/pdf/SFG3185-V1-EA-P160533-Box402897B-PUBLIC-Disclosed-3-22-2017.pdf"
+  },
+  {
+    "nombre": "MTL National Fibre Network – Anillo Norte Oriental",
+    "operador": "MTL",
+    "pais": "MW",
+    "ciudades": ["Mzuzu", "Nkhata Bay", "Nkhotakota", "Lilongwe"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Malawi y Banco Mundial, Digital Malawi Project, Environmental and Social Management Framework, febrero de 2017, página PDF 132; recorrido del anillo norte declarado por MTL. https://documents1.worldbank.org/curated/en/188571490348483306/pdf/SFG3185-V1-EA-P160533-Box402897B-PUBLIC-Disclosed-3-22-2017.pdf"
+  },
+  {
+    "nombre": "MTL National Fibre Network – Anillo Norte Occidental",
+    "operador": "MTL",
+    "pais": "MW",
+    "ciudades": ["Lilongwe", "Kasungu", "Mzimba", "Mzuzu"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Malawi y Banco Mundial, Digital Malawi Project, Environmental and Social Management Framework, febrero de 2017, página PDF 132; retorno occidental del anillo norte descrito por MTL. https://documents1.worldbank.org/curated/en/188571490348483306/pdf/SFG3185-V1-EA-P160533-Box402897B-PUBLIC-Disclosed-3-22-2017.pdf"
+  },
+  {
+    "nombre": "MTL National Fibre Network – Anillo Sur Occidental",
+    "operador": "MTL",
+    "pais": "MW",
+    "ciudades": ["Lilongwe", "Dedza", "Ntcheu", "Blantyre"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Malawi y Banco Mundial, Digital Malawi Project, Environmental and Social Management Framework, febrero de 2017, página PDF 132; recorrido del anillo sur declarado por MTL. https://documents1.worldbank.org/curated/en/188571490348483306/pdf/SFG3185-V1-EA-P160533-Box402897B-PUBLIC-Disclosed-3-22-2017.pdf"
+  },
+  {
+    "nombre": "MTL National Fibre Network – Anillo Sur Oriental",
+    "operador": "MTL",
+    "pais": "MW",
+    "ciudades": ["Blantyre", "Zomba", "Mangochi", "Salima", "Lilongwe"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Malawi y Banco Mundial, Digital Malawi Project, Environmental and Social Management Framework, febrero de 2017, página PDF 132; retorno oriental del anillo sur descrito por MTL. https://documents1.worldbank.org/curated/en/188571490348483306/pdf/SFG3185-V1-EA-P160533-Box402897B-PUBLIC-Disclosed-3-22-2017.pdf"
+  },
+  {
+    "nombre": "MTL National Fibre Network – Salida hacia Mozambique",
+    "operador": "MTL",
+    "pais": "MW",
+    "ciudades": ["Ntcheu", "Blantyre", "Mwanza"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Malawi y Banco Mundial, Digital Malawi Project, Environmental and Social Management Framework, febrero de 2017, página PDF 132; tramo Ntcheu–Blantyre y salida internacional por Mwanza identificados por MTL. https://documents1.worldbank.org/curated/en/188571490348483306/pdf/SFG3185-V1-EA-P160533-Box402897B-PUBLIC-Disclosed-3-22-2017.pdf"
+  },
+  {
+    "nombre": "RCIP Malawi – Corredor Nacional Norte",
+    "operador": "RCIP Malawi",
+    "pais": "MW",
+    "ciudades": ["Songwe", "Karonga", "Rumphi", "Mzimba", "Nkhata Bay", "Nkhotakota", "Salima", "Lilongwe"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Malawi y Banco Mundial, Digital Malawi Project, Environmental and Social Management Framework, febrero de 2017, página PDF 152, descripción del proyecto RCIP Malawi completado y secuencia expresa de localidades del tendido óptico fronterizo hasta Lilongwe. https://documents1.worldbank.org/curated/en/188571490348483306/pdf/SFG3185-V1-EA-P160533-Box402897B-PUBLIC-Disclosed-3-22-2017.pdf"
+  },
+  {
+    "nombre": "RCIP Malawi – Enlace Redundante hacia Zambia",
+    "operador": "RCIP Malawi",
+    "pais": "MW",
+    "ciudades": ["Lilongwe", "Mchinji"],
+    "estado": "en servicio",
+    "fuente": "Gobierno de Malawi y Banco Mundial, Digital Malawi Project, Environmental and Social Management Framework, febrero de 2017, página PDF 152; ramal redundante existente desde Virtual Landing Point de Lilongwe hasta la frontera con Zambia en Mchinji. https://documents1.worldbank.org/curated/en/188571490348483306/pdf/SFG3185-V1-EA-P160533-Box402897B-PUBLIC-Disclosed-3-22-2017.pdf"
+  },
+  {
+    "nombre": "ETL Backbone – Corredor Septentrional",
+    "operador": "ETL",
+    "pais": "LS",
+    "ciudades": ["Maseru", "Berea", "Leribe", "Butha-Buthe", "Mokhotlong"],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Lesotho Digital Economy Diagnostic, febrero de 2020, anexo 4, página PDF 81, mapa ETL backbone network. https://documents1.worldbank.org/curated/en/196401591179805910/pdf/Lesotho-Digital-Economy-Diagnostic.pdf"
+  },
+  {
+    "nombre": "ETL Backbone – Corredor Meridional",
+    "operador": "ETL",
+    "pais": "LS",
+    "ciudades": ["Maseru", "Mafeteng", "Mohale's Hoek"],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Lesotho Digital Economy Diagnostic, febrero de 2020, anexo 4, página PDF 81, mapa ETL backbone network, trazado occidental hacia el sur del país. https://documents1.worldbank.org/curated/en/196401591179805910/pdf/Lesotho-Digital-Economy-Diagnostic.pdf"
+  },
+  {
+    "nombre": "LECC OPGW Backbone – Corredor Septentrional",
+    "operador": "LECC",
+    "pais": "LS",
+    "ciudades": ["Maseru", "Berea", "Leribe", "Butha-Buthe", "Mokhotlong"],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Lesotho Digital Economy Diagnostic, febrero de 2020, anexo 4, página PDF 81, mapa ECC backbone network, correspondiente a la red eléctrica de fibra óptica LECC. https://documents1.worldbank.org/curated/en/196401591179805910/pdf/Lesotho-Digital-Economy-Diagnostic.pdf"
+  },
+  {
+    "nombre": "LECC OPGW Backbone – Corredor Meridional",
+    "operador": "LECC",
+    "pais": "LS",
+    "ciudades": ["Maseru", "Mafeteng", "Mohale's Hoek"],
+    "estado": "en servicio",
+    "fuente": "Banco Mundial, Lesotho Digital Economy Diagnostic, febrero de 2020, anexo 4, página PDF 81, mapa ECC backbone network, trazado sur de la red eléctrica. https://documents1.worldbank.org/curated/en/196401591179805910/pdf/Lesotho-Digital-Economy-Diagnostic.pdf"
+  },
+  {
+    "nombre": "SIEPAC / REDCA – Corredor Guatemala Norte y Frontera con Honduras",
+    "operador": "REDCA",
+    "pais": "GT",
+    "ciudades": ["Guatemala City", "Panaluya", "El Florido"],
+    "estado": "en servicio",
+    "fuente": "Empresa Propietaria de la Red (EPR), Línea SIEPAC, tabla de líneas inauguradas en 2012: Guate Norte–Panaluya, 109,91 km, y Panaluya–El Florido, 73,46 km. La subestación Guate Norte está en el área de Guatemala City. La infraestructura dispone de cable OPGW de 36 fibras. https://eprsiepac.com/linea-siepac/"
+  },
+  {
+    "nombre": "HONDUTEL – Troncal Puerto Cortés–Tegucigalpa–El Amatillo",
+    "operador": "Hondutel",
+    "pais": "HN",
+    "ciudades": ["Puerto Cortes", "San Pedro Sula", "Tegucigalpa", "Nacaome", "El Amatillo"],
+    "estado": "en servicio",
+    "fuente": "PNUD y HONDUTEL, Informe Final del Proyecto Apoyo a la Gestión, Expansión y Modernización de HONDUTEL 2002–2012, marzo de 2013, página PDF 30, detalle de tramos de fibra instalados de 53, 270,33, 102,29 y 60 km respectivamente. https://orientacionuniversitaria.weebly.com/uploads/4/0/0/1/40018067/informe_final_pnud-hondutel.pdf"
+  },
+  {
+    "nombre": "HONDUTEL – Ramal Tegucigalpa–Choluteca",
+    "operador": "Hondutel",
+    "pais": "HN",
+    "ciudades": ["Tegucigalpa", "Nacaome", "Choluteca"],
+    "estado": "en servicio",
+    "fuente": "PNUD y HONDUTEL, Informe Final del Proyecto Apoyo a la Gestión, Expansión y Modernización de HONDUTEL 2002–2012, marzo de 2013, página PDF 30: Tegucigalpa–Nacaome 102,29 km y Nacaome–Choluteca 36,43 km. https://orientacionuniversitaria.weebly.com/uploads/4/0/0/1/40018067/informe_final_pnud-hondutel.pdf"
+  },
+  {
+    "nombre": "HONDUTEL – Troncal Bajo Aguán",
+    "operador": "Hondutel",
+    "pais": "HN",
+    "ciudades": ["La Ceiba", "Saba", "Tocoa"],
+    "estado": "en servicio",
+    "fuente": "PNUD y HONDUTEL, Informe Final del Proyecto Apoyo a la Gestión, Expansión y Modernización de HONDUTEL 2002–2012, marzo de 2013, página PDF 30: red Bajo Aguán, 92 km entre La Ceiba y Saba más 10 km entre Saba y Tocoa. https://orientacionuniversitaria.weebly.com/uploads/4/0/0/1/40018067/informe_final_pnud-hondutel.pdf"
+  },
+  {
+    "nombre": "SIEPAC / REDCA – Corredor El Florido–San Buenaventura",
+    "operador": "REDCA",
+    "pais": "HN",
+    "ciudades": ["El Florido", "San Buenaventura"],
+    "estado": "en servicio",
+    "fuente": "Empresa Propietaria de la Red (EPR), Línea SIEPAC, tabla de infraestructura existente: El Florido–San Buenaventura, 141 km, en servicio desde el 19 de marzo de 2012; instalación de cable óptico OPGW de 36 fibras. https://eprsiepac.com/linea-siepac/"
+  },
+  {
+    "nombre": "Telemóvil / Tigo – Troncal Panamericana San Salvador–San Miguel",
+    "operador": "Tigo",
+    "pais": "SV",
+    "ciudades": ["San Salvador", "Cojutepeque", "San Vicente", "San Miguel"],
+    "estado": "en servicio",
+    "fuente": "JICA y SIGET, Estudio de Factibilidad del Establecimiento de la Plataforma de e-Gobierno en El Salvador, diciembre de 2006, figura 3.1, página PDF 52, mapa Red de Fibra Óptica de Telemóvil, ruta verde San Salvador–San Miguel (Panamericana). Documento histórico de la infraestructura, posteriormente operada bajo la marca Tigo. https://openjicareport.jica.go.jp/pdf/11838877_01.pdf"
+  },
+  {
+    "nombre": "Telemóvil / Tigo – Troncal San Salvador–Sonsonate–Santa Ana",
+    "operador": "Tigo",
+    "pais": "SV",
+    "ciudades": ["San Salvador", "Sonsonate", "Santa Ana"],
+    "estado": "en servicio",
+    "fuente": "JICA y SIGET, Estudio de Factibilidad del Establecimiento de la Plataforma de e-Gobierno en El Salvador, diciembre de 2006, figura 3.1, página PDF 52, mapa Red de Fibra Óptica de Telemóvil, ruta azul San Salvador–Sonsonate–Santa Ana. https://openjicareport.jica.go.jp/pdf/11838877_01.pdf"
+  },
+  {
+    "nombre": "Telemóvil / Tigo – Corredor Internacional Occidental y Oriental",
+    "operador": "Tigo",
+    "pais": "SV",
+    "ciudades": ["Chalchuapa", "Santa Ana", "San Salvador", "Zacatecoluca", "Usulutan", "San Miguel", "La Union"],
+    "estado": "en servicio",
+    "fuente": "JICA y SIGET, Estudio de Factibilidad del Establecimiento de la Plataforma de e-Gobierno en El Salvador, diciembre de 2006, figura 3.1, página PDF 52, mapa Red de Fibra Óptica de Telemóvil, ruta internacional representada en rojo. Es una referencia histórica del trazado, no una comprobación independiente de cada tramo en 2026. https://openjicareport.jica.go.jp/pdf/11838877_01.pdf"
+  },
+  {
+    "nombre": "SIEPAC / REDCA – Troncal Costa Rica",
+    "operador": "REDCA",
+    "pais": "CR",
+    "ciudades": ["Cañas", "Parrita", "Palmar Norte", "Rio Claro"],
+    "estado": "en servicio",
+    "fuente": "Empresa Propietaria de la Red (EPR), Línea SIEPAC, tramos operativos Cañas–Parrita (159,24 km), Parrita–Palmar Norte (130,56 km) y Palmar Norte–Río Claro (50,7 km), con cable OPGW de 36 fibras. https://eprsiepac.com/linea-siepac/"
+  },
+  {
+    "nombre": "SIEPAC / REDCA – Enlace Costa Rica–Panamá",
+    "operador": "REDCA",
+    "pais": "PA",
+    "ciudades": ["Rio Claro", "Veladero"],
+    "estado": "en servicio",
+    "fuente": "Empresa Propietaria de la Red (EPR), Línea SIEPAC, enlace Río Claro–frontera de Panamá y frontera de Costa Rica–Veladero, de 22,63 y 150,2 km respectivamente. Entrada en servicio del tramo panameño: 31 de diciembre de 2010. Veladero corresponde a la localidad del distrito de Tolé, Chiriquí. https://eprsiepac.com/linea-siepac/"
+  }
+]

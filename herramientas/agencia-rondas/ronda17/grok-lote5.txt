@@ -1,0 +1,58 @@
+[
+  {
+    "nombre": "National Fibre Backbone (Leonecom / SALCAB Phase I-II)",
+    "operador": "Leonecom",
+    "pais": "SL",
+    "ciudades": ["Freetown", "Waterloo", "Masiaka", "Port Loko", "Kambia", "Gbalamuya", "Pamelap"],
+    "estado": "en servicio",
+    "fuente": "Leonecom.sl footprint / National Broadband Strategy (MoCTI) / ITU QoS workshop 2025 / interconnection agreement with SOGEB"
+  },
+  {
+    "nombre": "National Fibre Backbone Freetown-Bo-Kenema-Liberia border",
+    "operador": "Leonecom",
+    "pais": "SL",
+    "ciudades": ["Freetown", "Mile 91", "Taiama", "Bo", "Kenema", "Zimmi", "Gendema"],
+    "estado": "en servicio",
+    "fuente": "Leonecom.sl Points of Coverage / National Broadband Strategy (MoCTI 2024) / SALCAB/Huawei handover reports"
+  },
+  {
+    "nombre": "CSquared open-access national backbone Monrovia-Côte d'Ivoire border",
+    "operador": "CSquared",
+    "pais": "LR",
+    "ciudades": ["Monrovia", "Kakata", "Gbarnga", "Ganta", "Sanniquellie", "Loguatuo"],
+    "estado": "en servicio",
+    "fuente": "CSquared announcements / LTA briefings / USAID ProICT report / Telecompaper and Verity News (350 km completed 2024, cross-border interconnection)"
+  },
+  {
+    "nombre": "ECOWAN / National Broadband Network (NBN)",
+    "operador": "Gamtel",
+    "pais": "GM",
+    "ciudades": ["Banjul", "Serekunda", "Brikama", "Basse Santa Su"],
+    "estado": "en servicio",
+    "fuente": "Gamtel / World Broadband Association case study / World Bank Digital Economy Diagnostic (1367 km backbone, ECOWAN rings + NBN 2015-2019)"
+  },
+  {
+    "nombre": "Central African Backbone (CAB) CAR component",
+    "operador": "SOCATEL / MTN (commercialisation)",
+    "pais": "CF",
+    "ciudades": ["Bangui", "Boali", "Bossembélé", "Yaloké", "Baoro", "Carnot", "Berberati", "Gamboula"],
+    "estado": "en servicio",
+    "fuente": "AfDB project completion / inauguration reports 2023 (935 km, interconnection Cameroon via Gamboula and Congo)"
+  },
+  {
+    "nombre": "Somcable terrestrial backbone Djibouti-Hargeisa-Berbera-Burao",
+    "operador": "Somcable",
+    "pais": "SO",
+    "ciudades": ["Djibouti", "Borama", "Hargeisa", "Berbera", "Burao"],
+    "estado": "en servicio",
+    "fuente": "Somcable about/deployment stages (Djibouti-Hargeisa 2011, Hargeisa-Berbera 2014, Berbera-Burao 2017) / World Bank Horn of Africa reports / operator site"
+  },
+  {
+    "nombre": "Djibouti Telecom terrestrial link to Ethiopia (existing corridor)",
+    "operador": "Djibouti Telecom",
+    "pais": "DJ",
+    "ciudades": ["Djibouti", "Galafi", "Dire Dawa"],
+    "estado": "en servicio",
+    "fuente": "Published regional connectivity descriptions (Ethio Telecom / Czech Embassy Addis / industry reports on primary Addis-Dire Dawa-Djibouti route); Horizon Fiber is additional planned capacity"
+  }
+]

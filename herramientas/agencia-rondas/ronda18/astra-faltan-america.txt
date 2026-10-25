@@ -1,0 +1,30 @@
+[
+  {
+    "nombre": "Bahamas-2",
+    "llegadas": [
+      {
+        "lugar": "Vero Beach, Florida",
+        "pais": "US",
+        "lat": 27.6386,
+        "lon": -80.3973
+      },
+      {
+        "lugar": "Nassau",
+        "pais": "BS",
+        "lat": 25.0743,
+        "lon": -77.3504
+      }
+    ],
+    "anio": 1997,
+    "km": 470,
+    "duenos": [
+      "AT&T",
+      "Bahamas Telecommunications Company",
+      "Verizon"
+    ],
+    "fuentes": [
+      "https://www.btcbahamas.com/",
+      "https://www.fcc.gov/general/submarine-cable-landing-licenses"
+    ]
+  }
+]

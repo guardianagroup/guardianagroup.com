@@ -1,0 +1,11 @@
+Ronda 11. El fundador elige C: el planeta arriba y, al bajar, la presentación con texto, en la misma página (y /orbita/ sigue como acceso directo a la experiencia completa). Ahora queremos propuestas de DISEÑO. Dame DOS propuestas distintas entre sí, cada una con un nombre, y para cada una:
+1. La estructura de arriba abajo: las secciones en orden, con el H1 y los H2 exactos en español.
+2. La primera pantalla en ordenador y en móvil: dónde va el planeta, el titular, la frase, las tres puertas (Radiografías, ZERO, Comunicaciones) y los botones.
+3. El paso del planeta al texto: cómo se invita a bajar, qué hace el planeta al bajar (se encoge, se queda fijo de fondo, se apaga…) y cómo se evita que la rueda haga zoom en vez de bajar.
+4. Cada sección de texto: qué cuenta (Radiografías, ZERO, Comunicaciones, GUARDIANA OS en preparación, código abierto AGPL-3.0 y auditable, 7 días gratis y después de pago; el precio aún no está decidido: deja el hueco) con una frase de ejemplo.
+5. Las llamadas a la acción y dónde van.
+6. La confianza (código abierto, auditoría propia, «Datos verificados»), sin inventar cifras, clientes ni testimonios.
+7. El estilo visual: tipografía, color (fondo #06080C, acento #9CC3E4, texto #F4F6F8 y #E07A6C solo para lo que se corta), ritmo, animaciones y «movimiento reducido».
+8. SEO: título, meta descripción y datos estructurados.
+9. El fundador quiere que, al abrir la portada, se vea un satélite ARRIBA del planeta (no abajo), porque es más visual. ¿Cómo lo colocarías sin engañar? (Los satélites geoestacionarios están sobre el ecuador; en Órbita se dibujan más cerca y se indica «no a escala».)
+Reglas: nada inventado en pantalla, ninguna marca real de terceros, nunca «protección absoluta», y facilísimo de entender («Navega en ZERO. Mira tu radiografía»). Responde en español.

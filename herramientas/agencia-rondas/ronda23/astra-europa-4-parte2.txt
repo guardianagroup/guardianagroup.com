@@ -1,0 +1,50 @@
+[
+  {
+    "nombre": "Oslo–Trondheim",
+    "operador": "Telenor",
+    "pais": "NO",
+    "ciudades": ["Oslo", "Hamar", "Lillehammer", "Dombås", "Oppdal", "Trondheim"],
+    "estado": "en servicio",
+    "fuente": "aproximado: conexión troncal terrestre de la red nacional de Telenor; secuencia urbana estimada siguiendo el corredor de la E6 y del ferrocarril de Dovre. No corresponde a un itinerario de cable publicado."
+  },
+  {
+    "nombre": "Oslo–Bergen",
+    "operador": "Telenor",
+    "pais": "NO",
+    "ciudades": ["Oslo", "Hønefoss", "Fagernes", "Lærdalsøyri", "Voss", "Bergen"],
+    "estado": "en servicio",
+    "fuente": "aproximado: conexión troncal terrestre de la red nacional de Telenor; secuencia urbana estimada por el corredor de la E16. La localización exacta del cable y sus posibles variantes no está publicada."
+  },
+  {
+    "nombre": "Oslo–frontera sueca",
+    "operador": "GlobalConnect",
+    "pais": "NO",
+    "ciudades": ["Oslo", "Moss", "Sarpsborg", "Halden", "Strömstad"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión terrestre Noruega–Suecia de la red nórdica de GlobalConnect; secuencia urbana estimada siguiendo el corredor de la E6 y el cruce de Svinesund. Strömstad es la primera ciudad sueca indicada; no se afirma que el cable atraviese todos los centros urbanos."
+  },
+  {
+    "nombre": "Warsaw–Poznań–frontera alemana",
+    "operador": "Orange Polska",
+    "pais": "PL",
+    "ciudades": ["Warsaw", "Sochaczew", "Łowicz", "Kutno", "Konin", "Poznań", "Nowy Tomyśl", "Świebodzin", "Słubice", "Frankfurt (Oder)"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor troncal este–oeste de la red de Orange Polska, con interconexión hacia Alemania; secuencia urbana estimada por los corredores ferroviarios y viarios Warsaw–Poznań–Frankfurt (Oder). No es un trazado de cable publicado."
+  },
+  {
+    "nombre": "Warsaw–Katowice",
+    "operador": "Orange Polska",
+    "pais": "PL",
+    "ciudades": ["Warsaw", "Łódź", "Piotrków Trybunalski", "Częstochowa", "Katowice"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor troncal de la red nacional de Orange Polska entre la capital, Łódź y la conurbación de Silesia; secuencia urbana estimada siguiendo los principales corredores ferroviarios y las carreteras A2/A1. No es un itinerario físico publicado."
+  },
+  {
+    "nombre": "Gdańsk–Warsaw",
+    "operador": "Orange Polska",
+    "pais": "PL",
+    "ciudades": ["Gdańsk", "Tczew", "Grudziądz", "Toruń", "Włocławek", "Płock", "Warsaw"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor troncal norte–centro de la red nacional de Orange Polska; secuencia urbana estimada por los corredores del bajo Vístula, la A1 y las carreteras hacia Płock y Warsaw. La sucesión exacta de localidades del cable no está publicada."
+  }
+]

@@ -1,0 +1,74 @@
+[
+{
+"nombre": "AT&T GOKI",
+"llegadas": [
+{
+"lugar": "Tumon Bay",
+"pais": "GU",
+"lat": 13.5136,
+"lon": 144.8006
+},
+{
+"lugar": "Naha",
+"pais": "JP",
+"lat": 26.2124,
+"lon": 127.6806
+},
+{
+"lugar": "Kitakyushu",
+"pais": "JP",
+"lat": 33.8393,
+"lon": 131.032
+}
+],
+"anio": 2013,
+"km": 4244,
+"duenos": [
+"AT&T"
+],
+"fuentes": [
+"https://docs.fcc.gov/public/attachments/DOC-305765A1.pdf",
+"https://www.itu.int/dms_pub/itu-d/opb/pref/D-PREF-BB.GDI_AP-2018-PDF-E.pdf",
+"https://k-kcs.co.jp/english/company/history.html"
+]
+},
+{
+"nombre": "Marianas-Guam Cable",
+"llegadas": [
+{
+"lugar": "Tanguisson Point",
+"pais": "GU",
+"lat": 13.5436,
+"lon": 144.8124
+},
+{
+"lugar": "Rota",
+"pais": "MP",
+"lat": 14.1518,
+"lon": 145.2125
+},
+{
+"lugar": "Tinian",
+"pais": "MP",
+"lat": 15.0111,
+"lon": 145.6375
+},
+{
+"lugar": "Saipan",
+"pais": "MP",
+"lat": 15.1777,
+"lon": 145.7509
+}
+],
+"anio": 1997,
+"km": 268,
+"duenos": [
+"PTI Pacifica, Inc. (IT&E)"
+],
+"fuentes": [
+"https://docs.fcc.gov/public/attachments/DA-97-522A1.pdf",
+"https://docs.fcc.gov/public/attachments/DA-17-192A1.pdf",
+"https://www.itu.int/dms_pub/itu-d/opb/pref/D-PREF-BB.GDI_AP-2018-PDF-E.pdf"
+]
+}
+]

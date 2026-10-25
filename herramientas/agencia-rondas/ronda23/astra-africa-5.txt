@@ -1,0 +1,114 @@
+[
+  {
+    "nombre": "Coastal backbone: Tripoli–Misratah",
+    "operador": "Hatif Libya",
+    "pais": "LY",
+    "ciudades": ["Tripoli", "Al Khums", "Zliten", "Misratah"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor occidental de la red nacional de fibra de Hatif Libya, sobre el eje de la carretera costera; las ciudades indican el recorrido probable, no un trazado de cable publicado. No se presupone continuidad operativa hacia Sirte o Benghazi."
+  },
+  {
+    "nombre": "Eastern backbone: Antananarivo–Toamasina",
+    "operador": "Telma Madagascar / Axian Telecom",
+    "pais": "MG",
+    "ciudades": ["Antananarivo", "Moramanga", "Brickaville", "Toamasina"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de Telma descrito por Telma y Axian Telecom; secuencia urbana inferida del corredor RN2 entre Antananarivo y Toamasina, no de planos detallados del cable."
+  },
+  {
+    "nombre": "Southern backbone: Antananarivo–Toliara",
+    "operador": "Telma Madagascar / Axian Telecom",
+    "pais": "MG",
+    "ciudades": ["Antananarivo", "Antsirabe", "Ambositra", "Fianarantsoa", "Ambalavao", "Ihosy", "Sakaraha", "Toliara"],
+    "estado": "en servicio",
+    "fuente": "aproximado: extensión meridional del backbone nacional de Telma; orden de ciudades inferido del corredor RN7. La infraestructura de fibra está en explotación, pero esta secuencia no constituye un trazado publicado del cable."
+  },
+  {
+    "nombre": "Northwestern backbone: Antananarivo–Mahajanga",
+    "operador": "Telma Madagascar / Axian Telecom",
+    "pais": "MG",
+    "ciudades": ["Antananarivo", "Ankazobe", "Maevatanana", "Mahajanga"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de Telma hacia Mahajanga; itinerario probable por las carreteras RN4 y RN7 en el acceso a Antananarivo. No se dispone aquí de cartografía pública del tendido a escala de calle."
+  },
+  {
+    "nombre": "Southern backbone: Blantyre–Lilongwe",
+    "operador": "Malawi Telecommunications Limited",
+    "pais": "MW",
+    "ciudades": ["Blantyre", "Ntcheu", "Dedza", "Lilongwe"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de Malawi Telecommunications Limited; recorrido probable por los corredores M1 y de acceso a Blantyre. Las ciudades intermedias se infieren de esos corredores, no de un plano del cable."
+  },
+  {
+    "nombre": "Northern backbone: Lilongwe–Karonga",
+    "operador": "Malawi Telecommunications Limited",
+    "pais": "MW",
+    "ciudades": ["Lilongwe", "Kasungu", "Mzuzu", "Karonga"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone de fibra norte-sur de Malawi Telecommunications Limited; secuencia de ciudades basada en el corredor M1 y los centros urbanos atendidos. No se prolonga hasta Tanzania porque no se fija aquí el trazado del cruce fronterizo."
+  },
+  {
+    "nombre": "Southern backbone: Bamako–Sikasso",
+    "operador": "SOTELMA / Moov Africa Malitel",
+    "pais": "ML",
+    "ciudades": ["Bamako", "Bougouni", "Sikasso"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red interurbana de fibra de SOTELMA, actualmente Moov Africa Malitel; recorrido probable por la RN7. Se representa el tramo nacional operativo, sin atribuirle un cruce internacional concreto."
+  },
+  {
+    "nombre": "Central backbone: Bamako–Segou",
+    "operador": "SOTELMA / Moov Africa Malitel",
+    "pais": "ML",
+    "ciudades": ["Bamako", "Fana", "Segou"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje Bamako–Segou de la red nacional de fibra de SOTELMA; ciudades ordenadas según el corredor RN6. No se incluyen prolongaciones hacia el norte cuya continuidad operativa no puede establecerse con la misma confianza."
+  },
+  {
+    "nombre": "Coastal backbone: Nouakchott–Nouadhibou",
+    "operador": "Mauritel / Moov Mauritel",
+    "pais": "MR",
+    "ciudades": ["Nouakchott", "Nouadhibou"],
+    "estado": "en servicio",
+    "fuente": "aproximado: enlace terrestre de fibra Nouakchott–Nouadhibou de Mauritel; corredor probable de la carretera costera N2. No se añaden localidades intermedias sin identificación suficientemente segura."
+  },
+  {
+    "nombre": "Eastern backbone: Nouakchott–Nema",
+    "operador": "Mauritel / Moov Mauritel",
+    "pais": "MR",
+    "ciudades": ["Nouakchott", "Boutilimit", "Aleg", "Kiffa", "Aioun", "Nema"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje oriental de fibra de Mauritel hacia Nema; secuencia inferida del corredor de la Route de l'Espoir, N3. El orden urbano es una aproximación del tendido, no cartografía de obra."
+  },
+  {
+    "nombre": "Southern backbone: Nouakchott–Rosso",
+    "operador": "Mauritel / Moov Mauritel",
+    "pais": "MR",
+    "ciudades": ["Nouakchott", "Rosso"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor terrestre de fibra de Mauritel entre Nouakchott y Rosso, siguiendo probablemente la N2. Se limita al tramo mauritano y no se presupone un recorrido concreto al otro lado del río Senegal."
+  },
+  {
+    "nombre": "Atlantic–southern backbone: Rabat–Agadir",
+    "operador": "Maroc Telecom",
+    "pais": "MA",
+    "ciudades": ["Rabat", "Casablanca", "Settat", "Marrakesh", "Chichaoua", "Agadir"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de Maroc Telecom, cuya explotación se describe en sus informes anuales; itinerario urbano probable por los corredores de las autopistas A1 y A3. No es una transcripción de planos del cable."
+  },
+  {
+    "nombre": "Northern backbone: Rabat–Tangier",
+    "operador": "Maroc Telecom",
+    "pais": "MA",
+    "ciudades": ["Rabat", "Kenitra", "Larache", "Tangier"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de Maroc Telecom hacia el norte; secuencia urbana inferida del corredor atlántico A1/N1. No se incluye ninguna prolongación submarina hacia España."
+  },
+  {
+    "nombre": "Eastern backbone: Rabat–Oujda",
+    "operador": "Maroc Telecom",
+    "pais": "MA",
+    "ciudades": ["Rabat", "Khemisset", "Meknes", "Fes", "Taza", "Taourirt", "Oujda"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje oriental de la red troncal nacional de fibra de Maroc Telecom; ciudades ordenadas según el corredor A2/N6. El trazado entre ciudades se infiere de ese corredor y no de documentación pública de ingeniería."
+  }
+]

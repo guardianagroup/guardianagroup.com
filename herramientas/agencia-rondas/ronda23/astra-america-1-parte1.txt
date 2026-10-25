@@ -1,0 +1,100 @@
+[
+  {
+    "nombre": "Buenos Aires–Rosario–Córdoba",
+    "operador": "ARSAT",
+    "pais": "AR",
+    "ciudades": ["Buenos Aires", "Zárate", "San Nicolás de los Arroyos", "Rosario", "Villa María", "Córdoba"],
+    "estado": "en servicio",
+    "fuente": "aproximado: mapa de la Red Federal de Fibra Óptica de ARSAT; secuencia de ciudades inferida del corredor de la RN 9, no de un plano detallado del cable."
+  },
+  {
+    "nombre": "Buenos Aires–Bahía Blanca–Neuquén",
+    "operador": "ARSAT",
+    "pais": "AR",
+    "ciudades": ["Buenos Aires", "Las Flores", "Azul", "Bahía Blanca", "Río Colorado", "Choele Choel", "General Roca", "Cipolletti", "Neuquén"],
+    "estado": "en servicio",
+    "fuente": "aproximado: mapa de la Red Federal de Fibra Óptica de ARSAT; itinerario probable por los corredores de las RN 3 y RN 22."
+  },
+  {
+    "nombre": "Córdoba–San Luis–Mendoza",
+    "operador": "ARSAT",
+    "pais": "AR",
+    "ciudades": ["Córdoba", "Río Cuarto", "Villa Mercedes", "San Luis", "San Martín", "Mendoza"],
+    "estado": "en servicio",
+    "fuente": "aproximado: mapa de la Red Federal de Fibra Óptica de ARSAT; secuencia probable por los corredores de las RN 36, RN 8 y RN 7."
+  },
+  {
+    "nombre": "Eje central La Paz–Cochabamba–Santa Cruz",
+    "operador": "ENTEL Bolivia",
+    "pais": "BO",
+    "ciudades": ["La Paz", "El Alto", "Oruro", "Cochabamba", "Villa Tunari", "Montero", "Santa Cruz de la Sierra"],
+    "estado": "en servicio",
+    "fuente": "aproximado: memorias institucionales de ENTEL sobre su red troncal nacional de fibra óptica; itinerario inferido de los corredores carreteros del eje central."
+  },
+  {
+    "nombre": "Oruro–Potosí–Sucre",
+    "operador": "ENTEL Bolivia",
+    "pais": "BO",
+    "ciudades": ["Oruro", "Challapata", "Potosí", "Sucre"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra óptica descrita en las memorias de ENTEL; secuencia probable por las carreteras 1 y 5."
+  },
+  {
+    "nombre": "Santa Cruz–Camiri–Yacuiba",
+    "operador": "ENTEL Bolivia",
+    "pais": "BO",
+    "ciudades": ["Santa Cruz de la Sierra", "Cabezas", "Camiri", "Villamontes", "Yacuiba"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de ENTEL; ciudades ordenadas según el corredor de la carretera 9 hacia el Chaco y Yacuiba."
+  },
+  {
+    "nombre": "São Paulo–Rio de Janeiro",
+    "operador": "V.tal",
+    "pais": "BR",
+    "ciudades": ["São Paulo", "São José dos Campos", "Taubaté", "Resende", "Volta Redonda", "Rio de Janeiro"],
+    "estado": "en servicio",
+    "fuente": "aproximado: mapa de cobertura de la red nacional de V.tal; trazado probable por el corredor terrestre de la BR-116, Rodovia Presidente Dutra."
+  },
+  {
+    "nombre": "São Paulo–Triângulo Mineiro–Brasília",
+    "operador": "V.tal",
+    "pais": "BR",
+    "ciudades": ["São Paulo", "Campinas", "Ribeirão Preto", "Uberaba", "Uberlândia", "Catalão", "Cristalina", "Brasília"],
+    "estado": "en servicio",
+    "fuente": "aproximado: mapa de la red nacional de V.tal; secuencia inferida de los corredores de las carreteras SP-330 y BR-050 hacia Brasília."
+  },
+  {
+    "nombre": "São Paulo–Curitiba–Porto Alegre",
+    "operador": "V.tal",
+    "pais": "BR",
+    "ciudades": ["São Paulo", "Curitiba", "Joinville", "Itajaí", "Florianópolis", "Tubarão", "Criciúma", "Osório", "Porto Alegre"],
+    "estado": "en servicio",
+    "fuente": "aproximado: mapa de la red nacional de V.tal; corredor terrestre probable por las BR-116, BR-376, BR-101 y BR-290, con acceso a los nodos metropolitanos indicados."
+  },
+  {
+    "nombre": "Troncal norte Santiago–Antofagasta",
+    "operador": "Entel Chile",
+    "pais": "CL",
+    "ciudades": ["Santiago", "Los Vilos", "Coquimbo", "La Serena", "Vallenar", "Copiapó", "Antofagasta"],
+    "estado": "en servicio",
+    "fuente": "aproximado: información corporativa de Entel sobre su red nacional de transporte de fibra óptica; corredor longitudinal terrestre de la Ruta 5 y accesos a las ciudades, no cable submarino."
+  },
+  {
+    "nombre": "Troncal sur Santiago–Puerto Montt",
+    "operador": "Entel Chile",
+    "pais": "CL",
+    "ciudades": ["Santiago", "Rancagua", "San Fernando", "Curicó", "Talca", "Linares", "Chillán", "Los Ángeles", "Temuco", "Osorno", "Puerto Montt"],
+    "estado": "en servicio",
+    "fuente": "aproximado: información corporativa de Entel sobre su red nacional de transporte; secuencia de ciudades del corredor terrestre de la Ruta 5."
+  },
+  {
+    "nombre": "Santiago–Valparaíso",
+    "operador": "Entel Chile",
+    "pais": "CL",
+    "ciudades": ["Santiago", "Curacaví", "Casablanca", "Valparaíso"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red interurbana de fibra óptica de Entel; itinerario probable por la Ruta 68, de aproximadamente 120 km entre extremos."
+  },
+  {
+    "nombre": "Bogotá–Ibagué–Cali",
+    "

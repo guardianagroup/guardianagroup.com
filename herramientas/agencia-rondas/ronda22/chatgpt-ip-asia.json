@@ -1,0 +1,208 @@
+[
+  {
+    "nombre": "BTCL Dhaka–Chattogram trunk",
+    "operador": "Bangladesh Telecommunications Company Limited (BTCL)",
+    "pais": "BD",
+    "ciudades": [
+      "Dhaka",
+      "Chattogram"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://xn--j5b5azb0a2a4bbb.xn--54b7fta0cc/uploads/other/pdf_20221130_193645.pdf — BTCL declara una red de transmisión redundante y fiable desde Dhaka hacia los 64 distritos, incluidos los divisional headquarters como Chattogram; la fuente no publica los nodos físicos intermedios."
+  },
+  {
+    "nombre": "BTCL Dhaka–Sylhet trunk",
+    "operador": "Bangladesh Telecommunications Company Limited (BTCL)",
+    "pais": "BD",
+    "ciudades": [
+      "Dhaka",
+      "Sylhet"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://xn--j5b5azb0a2a4bbb.xn--54b7fta0cc/uploads/other/pdf_20221130_193645.pdf — BTCL declara su red de transmisión redundante desde Dhaka hacia todos los distritos y cita Sylhet entre los principales divisional headquarters; no se añaden ciudades intermedias que la fuente no especifica."
+  },
+  {
+    "nombre": "Thimphu–Phuntsholing redundant optical link",
+    "operador": "GovTech/Bhutan telecommunications network over Bhutan Power Corporation dark fibre",
+    "pais": "BT",
+    "ciudades": [
+      "Thimphu",
+      "Phuntsholing"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.unescap.org/sites/default/files/ICT%20Co-Deployment%20with%20the%20Electricity%20Infrastructure%2C%20The%20Case%20of%20Bhutan.pdf — ESCAP documenta un enlace redundante STM-16 de fibra óptica entre Thimphu y Phuentsholing construido utilizando fibra oscura de Bhutan Power Corporation."
+  },
+  {
+    "nombre": "Thimphu–Gelephu redundant optical link",
+    "operador": "GovTech/Bhutan telecommunications network over Bhutan Power Corporation dark fibre",
+    "pais": "BT",
+    "ciudades": [
+      "Thimphu",
+      "Gelephu"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.unescap.org/sites/default/files/ICT%20Co-Deployment%20with%20the%20Electricity%20Infrastructure%2C%20The%20Case%20of%20Bhutan.pdf — ESCAP dice que se construyó otro enlace redundante STM-16 de fibra óptica entre Thimphu y Gelephu utilizando fibra oscura de BPC."
+  },
+  {
+    "nombre": "China Telecom Shanghai–Guangzhou G.654.E terrestrial backbone",
+    "operador": "China Telecom",
+    "pais": "CN",
+    "ciudades": [
+      "Shanghai",
+      "Guangzhou"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.chinatelecom-h.com/ — el informe corporativo de sostenibilidad/CSR de China Telecom citado en el informe documenta la primera red troncal terrestre completa con fibra G.654.E que conecta Shanghai y Guangzhou; la fuente citada no enumera los emplazamientos intermedios."
+  },
+  {
+    "nombre": "NTT Tokyo–Nagoya–Osaka long-haul optical corridor",
+    "operador": "NTT",
+    "pais": "JP",
+    "ciudades": [
+      "Tokyo",
+      "Nagoya",
+      "Osaka"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://group.ntt/en/newsrelease/ — documentación técnica oficial de NTT de 2025 usa explícitamente el corredor Tokyo–Nagoya–Osaka al describir los sistemas WDM ópticos de larga distancia existentes y la evolución del backbone."
+  },
+  {
+    "nombre": "Kazakhtelecom Almaty–Astana core link",
+    "operador": "Kazakhtelecom",
+    "pais": "KZ",
+    "ciudades": [
+      "Almaty",
+      "Astana"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://telecom.kz/media/upload/49/2018/07/19/5f4240bf4e2aeeb1d7a5e53321bed7da.pdf — Kazakhtelecom identifica Almaty, Astana y Aktobe como sus tres nodos principales de backbone interconectados por canales de hasta 6x100 Gb/s; https://ar2024.telecom.kz/en/innovation-and-new-technologies.html confirma ampliación y modernización actual de los canales DWDM del backbone."
+  },
+  {
+    "nombre": "Kazakhtelecom Astana–Aktobe core link",
+    "operador": "Kazakhtelecom",
+    "pais": "KZ",
+    "ciudades": [
+      "Astana",
+      "Aktobe"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://telecom.kz/media/upload/49/2018/07/19/5f4240bf4e2aeeb1d7a5e53321bed7da.pdf — la documentación corporativa identifica Astana, Almaty y Aktobe como los tres nodos principales del backbone de datos; https://ar2024.telecom.kz/en/innovation-and-new-technologies.html confirma que el backbone y sus canales DWDM continuaban modernizándose en 2024."
+  },
+  {
+    "nombre": "VSTN Malaysia Cyberjaya–Johor Bahru terrestrial segment",
+    "operador": "VNPT / VSTN",
+    "pais": "MY",
+    "ciudades": [
+      "Cyberjaya",
+      "Johor Bahru"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://en.vietnamplus.vn/ — el anuncio oficial de lanzamiento de VSTN en 2025 describe una ruta terrestre internacional de aproximadamente 3,900 km y enumera como puntos de la ruta los IDC de Cyberjaya y Johor Bahru antes de Singapore."
+  },
+  {
+    "nombre": "East-West Highway optical fibre Lamahi–Kohalpur",
+    "operador": "Nepal Telecom",
+    "pais": "NP",
+    "ciudades": [
+      "Lamahi",
+      "Kohalpur"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://cms.ntc.net.np/storage/media/ognk6MK9oU9K6Syx5WTaBz42pKEt6V5Hf68eDpJi.pdf — Nepal Telecom Annual Report 2007 dice explícitamente que la red óptica del East-West Highway se extendió de Lamahi a Kohalpur con una distancia de ruta de 110 km."
+  },
+  {
+    "nombre": "DICT National Fiber Backbone Phase One",
+    "operador": "Department of Information and Communications Technology (DICT)",
+    "pais": "PH",
+    "ciudades": [
+      "Laoag",
+      "Quezon City"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://cms-cdn.e.gov.ph/DICT/pdf/LATEST%20PUBLICATION%20NDCP_bda86f60-7dd4-4cf9-be58-c25275508074.pdf — el National Digital Connectivity Plan dice que NFB Phase One, lanzado en abril de 2024, se extiende 1,245 km desde Laoag hasta Quezon City y activa 28 nodos; en 2026 DICT adjudicó su operación y mantenimiento."
+  },
+  {
+    "nombre": "KOREN Seoul–Busan mainland backbone corridor",
+    "operador": "KOREN",
+    "pais": "KR",
+    "ciudades": [
+      "Seoul",
+      "Suwon",
+      "Daejeon",
+      "Daegu",
+      "Busan"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.koren.kr/ — la documentación oficial de KOREN identifica su backbone de alta velocidad y los nodos Seoul, Suwon, Pangyo, Daejeon, Daegu y Busan entre las diez ciudades conectadas; la lista aquí conserva los principales nodos urbanos del corredor continental y no incluye Jeju."
+  },
+  {
+    "nombre": "KOREN Daejeon–Gwangju mainland backbone corridor",
+    "operador": "KOREN",
+    "pais": "KR",
+    "ciudades": [
+      "Daejeon",
+      "Jeonju",
+      "Gwangju"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.koren.kr/ — la topología/nodos publicados por KOREN incluyen Daejeon, Jeonju y Gwangju dentro del backbone nacional de alta velocidad."
+  },
+  {
+    "nombre": "TWAREN north-south core backbone",
+    "operador": "National Center for High-performance Computing (NCHC) / TWAREN",
+    "pais": "TW",
+    "ciudades": [
+      "Taipei",
+      "Hsinchu",
+      "Taichung",
+      "Tainan"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.nchc.org.tw/ — NCHC documenta un backbone TWAREN de 400 Gb/s que interconecta los cuatro core nodes Taipei, Hsinchu, Taichung y Tainan; TWAREN empezó a operar en 2004 y ha sido actualizado posteriormente."
+  },
+  {
+    "nombre": "Bezeq national north-south fibre corridor",
+    "operador": "Bezeq",
+    "pais": "IL",
+    "ciudades": [
+      "Metula",
+      "Eilat"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://ir.bezeq.co.il/news-releases/news-release-details/bezeq-launches-fiber-optic-plan/ — Bezeq describe su red avanzada de fibra como una red que cubre el país desde Metula en el norte hasta Eilat en el sur, por las fronteras y el interior; solo se consignan los terminales expresamente publicados."
+  },
+  {
+    "nombre": "Omantel Muscat–Salalah fibre backbone",
+    "operador": "Omantel",
+    "pais": "OM",
+    "ciudades": [
+      "Muscat",
+      "Salalah"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.ciena.com/about/newsroom/press-releases/ — la comunicación oficial Ciena/Omantel de 2025 señala que la huella de fibra de Omantel interconecta landing stations y data centres, incluidos MC1 Muscat y Equinix SN1 Salalah, creando un backbone resiliente a través de Oman."
+  },
+  {
+    "nombre": "Türk Telekom Istanbul–Ankara DWDM corridor",
+    "operador": "Türk Telekom",
+    "pais": "TR",
+    "ciudades": [
+      "Istanbul",
+      "Ankara"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.nokia.com/newsroom/ — la comunicación técnica oficial de Nokia y Türk Telekom citada en el informe documenta el corredor Istanbul–Ankara sobre la red DWDM en vivo de Türk Telekom durante pruebas ópticas de larga distancia."
+  },
+  {
+    "nombre": "e& UAE Abu Dhabi–Dubai–Fujairah terrestrial backbone",
+    "operador": "e& UAE / Etisalat",
+    "pais": "AE",
+    "ciudades": [
+      "Abu Dhabi",
+      "Dubai",
+      "Fujairah"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.etisalat.ae/en/footer/about-us/media-centre.html — e& documenta una red óptica nacional end-to-end basada en OXC/DWDM; su mapa oficial de conectividad citado en el informe sitúa Abu Dhabi, Dubai y Fujairah como puntos principales del backbone terrestre. No se cuentan aquí los sistemas submarinos que aterrizan en Fujairah."
+  }
+]

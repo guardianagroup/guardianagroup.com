@@ -1,0 +1,56 @@
+[
+  {
+    "nombre": "Douala–Yaounde–frontera con la República Centroafricana",
+    "operador": "CAMTEL",
+    "pais": "CM",
+    "ciudades": ["Douala", "Edea", "Yaounde", "Ayos", "Abong Mbang", "Bertoua", "Garoua Boulai", "Beloko"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de CAMTEL e interconexión con la red CAB de la República Centroafricana. Secuencia urbana inferida por los corredores N3 y N10; no representa un trazado de ingeniería publicado."
+  },
+  {
+    "nombre": "Bertoua–norte de Camerún–N'Djamena",
+    "operador": "CAMTEL / SOTEL Tchad",
+    "pais": "CM",
+    "ciudades": ["Bertoua", "Garoua Boulai", "Meiganga", "Ngaoundere", "Garoua", "Maroua", "Kousseri", "N'Djamena"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone septentrional de CAMTEL e interconexión terrestre Camerún–Chad; ciudades ordenadas siguiendo el corredor de la N1 y el cruce Kousseri–N'Djamena. La alineación exacta de la fibra no está publicada."
+  },
+  {
+    "nombre": "Douala–Bafoussam–Bamenda",
+    "operador": "CAMTEL",
+    "pais": "CM",
+    "ciudades": ["Douala", "Nkongsamba", "Bafang", "Bafoussam", "Mbouda", "Bamenda"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor occidental del backbone nacional de CAMTEL; secuencia inferida por las carreteras N5 y N6 entre sus principales localidades de cobertura."
+  },
+  {
+    "nombre": "Bangui–Bouar–interconexión con Camerún",
+    "operador": "Red nacional CAB / Orange Centrafrique",
+    "pais": "CF",
+    "ciudades": ["Bangui", "Boali", "Bossembele", "Yaloke", "Bossemptele", "Baoro", "Bouar", "Baboua", "Beloko", "Garoua Boulai"],
+    "estado": "en servicio",
+    "fuente": "aproximado: proyecto CAB-Centrafrique del Banco Africano de Desarrollo y puesta en servicio comercial de la conexión por fibra con Camerún anunciada en 2023. Ciudades intermedias inferidas por el corredor vial Bangui–Bouar–Beloko."
+  },
+  {
+    "nombre": "N'Djamena–Moundou–Doba",
+    "operador": "SOTEL Tchad",
+    "pais": "TD",
+    "ciudades": ["N'Djamena", "Guelendeng", "Bongor", "Kelo", "Moundou", "Doba"],
+    "estado": "en servicio",
+    "fuente": "aproximado: troncal terrestre meridional N'Djamena–Doba de SOTEL Tchad, conectada al sistema de fibra del corredor petrolero Chad–Camerún. Secuencia urbana inferida por las carreteras que enlazan las localidades indicadas."
+  },
+  {
+    "nombre": "Pointe-Noire–Brazzaville",
+    "operador": "Congo Telecom",
+    "pais": "CG",
+    "ciudades": ["Pointe-Noire", "Dolisie", "Nkayi", "Madingou", "Mindouli", "Kinkala", "Brazzaville"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje meridional del backbone nacional de Congo Telecom; ciudades ordenadas según los corredores ferroviario Congo–Ocean y vial N1. El cable puede separarse de ambos corredores en determinados tramos."
+  },
+  {
+    "nombre": "Brazzaville–Ouesso",
+    "operador": "Congo Telecom",
+    "pais": "CG",
+    "ciudades": ["Brazzaville", "Gamboma", "Oyo", "Owando", "Makoua", "Ouesso"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje septentrional en explotación del backbone nacional de Congo Telecom; sec

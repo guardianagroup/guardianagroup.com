@@ -1,0 +1,1262 @@
+[
+{
+"nombre": "North-South National Highway 1A Optical Fiber Backbone",
+"operador": "VNPT",
+"pais": "VN",
+"ciudades": [
+"Pingxiang",
+"Lang Son",
+"Bac Giang",
+"Bac Ninh",
+"Hanoi",
+"Phu Ly",
+"Ninh Binh",
+"Thanh Hoa",
+"Vinh",
+"Ha Tinh",
+"Dong Hoi",
+"Dong Ha",
+"Hue",
+"Da Nang",
+"Tam Ky",
+"Quang Ngai",
+"Quy Nhon",
+"Tuy Hoa",
+"Nha Trang",
+"Phan Rang-Thap Cham",
+"Phan Thiet",
+"Bien Hoa",
+"Ho Chi Minh City",
+"Tan An",
+"My Tho",
+"Vinh Long",
+"Can Tho",
+"Soc Trang",
+"Bac Lieu",
+"Ca Mau"
+],
+"estado": "en servicio",
+"fuente": "VNPT Infrastructure Maps / ITU Asia-Pacific Information Superhighway (APIS) Country Report Vietnam"
+},
+{
+"nombre": "Ho Chi Minh Highway Western Backbone",
+"operador": "VNPT",
+"pais": "VN",
+"ciudades": [
+"Hanoi",
+"Hoa Binh",
+"Thanh Hoa",
+"Vinh",
+"Dong Ha",
+"Da Nang",
+"Kon Tum",
+"Pleiku",
+"Buon Ma Thuot",
+"Gia Nghia",
+"Dong Xoai",
+"Ho Chi Minh City"
+],
+"estado": "en servicio",
+"fuente": "VNPT / Ministry of Information and Communications (MIC) Vietnam Master Plan"
+},
+{
+"nombre": "GMS East-West Economic Corridor Fiber Link",
+"operador": "VNPT",
+"pais": "VN",
+"ciudades": [
+"Da Nang",
+"Hue",
+"Dong Ha",
+"Lao Bao",
+"Savannakhet"
+],
+"estado": "en servicio",
+"fuente": "Asian Development Bank (ADB) Greater Mekong Subregion Information Superhighway Network Report"
+},
+{
+"nombre": "Viettel North-South Terrestrial Backbone & Cambodia Cross-Border Link",
+"operador": "Viettel",
+"pais": "VN",
+"ciudades": [
+"Hanoi",
+"Ninh Binh",
+"Thanh Hoa",
+"Vinh",
+"Dong Hoi",
+"Hue",
+"Da Nang",
+"Quy Nhon",
+"Nha Trang",
+"Phan Thiet",
+"Ho Chi Minh City",
+"Tay Ninh",
+"Bavet"
+],
+"estado": "en servicio",
+"fuente": "Viettel Group Network Infrastructure Documentation / UNESCAP APIS Studies"
+},
+{
+"nombre": "Viettel Central Vietnam-Laos Cross-Border Link",
+"operador": "Viettel",
+"pais": "VN",
+"ciudades": [
+"Vinh",
+"Ha Tinh",
+"Lak Sao"
+],
+"estado": "en servicio",
+"fuente": "Viettel Global / ITU Terrestrial Transmission Map"
+},
+{
+"nombre": "FPT North-South Fiber Backbone",
+"operador": "FPT Telecom",
+"pais": "VN",
+"ciudades": [
+"Hanoi",
+"Thanh Hoa",
+"Vinh",
+"Hue",
+"Da Nang",
+"Quy Nhon",
+"Nha Trang",
+"Da Lat",
+"Ho Chi Minh City",
+"Can Tho"
+],
+"estado": "en servicio",
+"fuente": "FPT Telecom Corporate Annual Report & Infrastructure Prospectus"
+},
+{
+"nombre": "500kV North-South Extra-High Voltage OPGW Transmission Line",
+"operador": "EVN",
+"pais": "VN",
+"ciudades": [
+"Hoa Binh",
+"Hanoi",
+"Ninh Binh",
+"Ha Tinh",
+"Da Nang",
+"Pleiku",
+"Gia Nghia",
+"Ho Chi Minh City"
+],
+"estado": "en servicio",
+"fuente": "Vietnam Electricity (EVN) / National Power Transmission Corporation (EVNNPT) Grid Reports"
+},
+{
+"nombre": "VinaREN National Academic Backbone",
+"operador": "VinaREN",
+"pais": "VN",
+"ciudades": [
+"Hanoi",
+"Hue",
+"Da Nang",
+"Nha Trang",
+"Ho Chi Minh City",
+"Can Tho"
+],
+"estado": "en servicio",
+"fuente": "National Agency for Science and Technology Information (NASATI) / TEIN Cooperation Center"
+},
+{
+"nombre": "South-East Submarine Cable Backhaul Backbone (Dhaka-Cox's Bazar)",
+"operador": "BTCL",
+"pais": "BD",
+"ciudades": [
+"Dhaka",
+"Comilla",
+"Feni",
+"Chittagong",
+"Cox's Bazar"
+],
+"estado": "en servicio",
+"fuente": "Bangladesh Telecommunications Company Limited (BTCL) / BTRC Annual Report"
+},
+{
+"nombre": "South-West Submarine Cable Backhaul Backbone (Dhaka-Kuakata)",
+"operador": "BTCL",
+"pais": "BD",
+"ciudades": [
+"Dhaka",
+"Faridpur",
+"Barisal",
+"Patuakhali",
+"Kuakata"
+],
+"estado": "en servicio",
+"fuente": "BTCL SEA-ME-WE-5 Backhaul Project Documentation"
+},
+{
+"nombre": "Dhaka-Benapole-India Cross-Border Terrestrial Link",
+"operador": "BTCL",
+"pais": "BD",
+"ciudades": [
+"Dhaka",
+"Faridpur",
+"Jessore",
+"Benapole",
+"Bangaon"
+],
+"estado": "en servicio",
+"fuente": "BTRC / UNESCAP Study on Subregional Terrestrial Connectivity in South Asia"
+},
+{
+"nombre": "North-West Corridor Backbone (Dhaka-Rangpur-Panchagarh)",
+"operador": "BTCL",
+"pais": "BD",
+"ciudades": [
+"Dhaka",
+"Tangail",
+"Sirajganj",
+"Bogra",
+"Rangpur",
+"Saidpur",
+"Panchagarh",
+"Jalpaiguri"
+],
+"estado": "en servicio",
+"fuente": "BTCL Optical Fiber Network Topology / ITU Broadband Maps"
+},
+{
+"nombre": "North-East Corridor Backbone (Dhaka-Sylhet)",
+"operador": "BTCL",
+"pais": "BD",
+"ciudades": [
+"Dhaka",
+"Narsingdi",
+"Bhairab Bazar",
+"Brahmanbaria",
+"Habiganj",
+"Maulvibazar",
+"Sylhet"
+],
+"estado": "en servicio",
+"fuente": "BTCL Network Division Publications"
+},
+{
+"nombre": "Bangladesh Railway Optical Fiber Network (Eastern Corridor)",
+"operador": "Grameenphone",
+"pais": "BD",
+"ciudades": [
+"Dhaka",
+"Tongi",
+"Bhairab Bazar",
+"Brahmanbaria",
+"Comilla",
+"Feni",
+"Chittagong"
+],
+"estado": "en servicio",
+"fuente": "Bangladesh Railway / BTRC NTTN and Operator Fiber Lease Reports"
+},
+{
+"nombre": "NTTN National Terrestrial Backbone (North-South)",
+"operador": "Fiber@Home",
+"pais": "BD",
+"ciudades": [
+"Rangpur",
+"Bogra",
+"Sirajganj",
+"Tangail",
+"Dhaka",
+"Comilla",
+"Chittagong",
+"Cox's Bazar"
+],
+"estado": "en servicio",
+"fuente": "Fiber@Home Ltd. Network Map / BTRC NTTN License Reports"
+},
+{
+"nombre": "NTTN National Terrestrial & Cross-Border Backbone",
+"operador": "Summit Communications",
+"pais": "BD",
+"ciudades": [
+"Cox's Bazar",
+"Chittagong",
+"Feni",
+"Comilla",
+"Dhaka",
+"Faridpur",
+"Jessore",
+"Benapole",
+"Bangaon"
+],
+"estado": "en servicio",
+"fuente": "Summit Communications Ltd. Coverage Map / World Bank Regional Connectivity Project"
+},
+{
+"nombre": "National Grid OPGW Cross-Border HVDC Link (Dhaka-Bheramara-Baharampur)",
+"operador": "PGCB",
+"pais": "BD",
+"ciudades": [
+"Dhaka",
+"Manikganj",
+"Ishurdi",
+"Bheramara",
+"Baharampur"
+],
+"estado": "en servicio",
+"fuente": "Power Grid Company of Bangladesh (PGCB) Optical Fiber Commercialization Reports"
+},
+{
+"nombre": "BdREN National Research and Education Optical Backbone",
+"operador": "BdREN",
+"pais": "BD",
+"ciudades": [
+"Rajshahi",
+"Bogra",
+"Tangail",
+"Dhaka",
+"Mymensingh",
+"Sylhet",
+"Comilla",
+"Chittagong"
+],
+"estado": "en servicio",
+"fuente": "University Grants Commission (UGC) Bangladesh / World Bank HEQEP BdREN Report"
+},
+{
+"nombre": "Yangon-Mandalay Central North-South Backbone",
+"operador": "MPT",
+"pais": "MM",
+"ciudades": [
+"Yangon",
+"Bago",
+"Pyu",
+"Taungoo",
+"Pyinmana",
+"Nay Pyi Taw",
+"Meiktila",
+"Mandalay"
+],
+"estado": "en servicio",
+"fuente": "Myanma Posts and Telecommunications (MPT) / UNESCAP APIS Myanmar Report"
+},
+{
+"nombre": "Mandalay-Muse-China Cross-Border Terrestrial Link",
+"operador": "MPT",
+"pais": "MM",
+"ciudades": [
+"Mandalay",
+"Pyin Oo Lwin",
+"Kyaukme",
+"Hsipaw",
+"Lashio",
+"Muse",
+"Ruili"
+],
+"estado": "en servicio",
+"fuente": "MPT / ADB Greater Mekong Subregion Information Superhighway Documentation"
+},
+{
+"nombre": "Yangon-Myawaddy-Thailand GMS East-West Cross-Border Link",
+"operador": "MPT",
+"pais": "MM",
+"ciudades": [
+"Yangon",
+"Bago",
+"Kyaikto",
+"Thaton",
+"Mawlamyine",
+"Kawkareik",
+"Myawaddy",
+"Mae Sot"
+],
+"estado": "en servicio",
+"fuente": "MPT / ITU and ADB GMS Telecommunications Backbone Studies"
+},
+{
+"nombre": "Ayeyarwady Western Valley Fiber Backbone",
+"operador": "MPT",
+"pais": "MM",
+"ciudades": [
+"Yangon",
+"Pyay",
+"Taungdwingyi",
+"Magway",
+"Yenangyaung",
+"Chauk",
+"Nyaung-U",
+"Myingyan",
+"Mandalay"
+],
+"estado": "en servicio",
+"fuente": "Ministry of Transport and Communications (MOTC) Myanmar / JICA Urgent Development Study"
+},
+{
+"nombre": "Mandalay-Myitkyina Northern Backbone",
+"operador": "MPT",
+"pais": "MM",
+"ciudades": [
+"Mandalay",
+"Shwebo",
+"Kawlin",
+"Mogaung",
+"Myitkyina"
+],
+"estado": "en servicio",
+"fuente": "MOTC Myanmar / ITU Asia-Pacific Transmission Map"
+},
+{
+"nombre": "Mandalay-Tamu-India Cross-Border Terrestrial Link",
+"operador": "MPT",
+"pais": "MM",
+"ciudades": [
+"Mandalay",
+"Monywa",
+"Kalewa",
+"Kalay",
+"Tamu",
+"Moreh"
+],
+"estado": "en servicio",
+"fuente": "MPT / UNESCAP ASEAN-India Terrestrial Fiber Optic Connectivity Report"
+},
+{
+"nombre": "Southern Tanintharyi Coastal Backbone",
+"operador": "MPT",
+"pais": "MM",
+"ciudades": [
+"Mawlamyine",
+"Ye",
+"Dawei",
+"Myeik",
+"Kawthoung",
+"Ranong"
+],
+"estado": "en servicio",
+"fuente": "MOTC Myanmar / ITU Terrestrial Transmission Map"
+},
+{
+"nombre": "Mandalay-Tachileik-Thailand Eastern Backbone",
+"operador": "Mytel",
+"pais": "MM",
+"ciudades": [
+"Mandalay",
+"Meiktila",
+"Taunggyi",
+"Loilem",
+"Kengtung",
+"Tachileik",
+"Mae Sai"
+],
+"estado": "en servicio",
+"fuente": "Mytel (Telecom International Myanmar) / Viettel Global Infrastructure Reports"
+},
+{
+"nombre": "Ooredoo North-South Expressway Backbone",
+"operador": "Ooredoo",
+"pais": "MM",
+"ciudades": [
+"Yangon",
+"Bago",
+"Taungoo",
+"Nay Pyi Taw",
+"Meiktila",
+"Mandalay"
+],
+"estado": "en servicio",
+"fuente": "Ooredoo Myanmar Network Deployment Reports / World Bank Telecom Sector Reform Study"
+},
+{
+"nombre": "South-East Asia Crude Oil & Gas Pipeline Optical Fiber Cable",
+"operador": "CNPC-MOGE",
+"pais": "MM",
+"ciudades": [
+"Kyaukpyu",
+"Ann",
+"Magway",
+"Yenangyaung",
+"Kyaukpadaung",
+"Mandalay",
+"Pyin Oo Lwin",
+"Hsipaw",
+"Lashio",
+"Muse",
+"Ruili"
+],
+"estado": "en servicio",
+"fuente": "Myanma Oil and Gas Enterprise (MOGE) / SEAOP-SEAGP Pipeline Infrastructure Documentation"
+},
+{
+"nombre": "Trans-Asia-Europe (TAE) Uzbekistan Backbone Segment",
+"operador": "Uztelecom",
+"pais": "UZ",
+"ciudades": [
+"Shymkent",
+"Tashkent",
+"Guliston",
+"Jizzakh",
+"Samarkand",
+"Navoiy",
+"Bukhara",
+"Alat",
+"Turkmenabat"
+],
+"estado": "en servicio",
+"fuente": "Uzbektelecom JSC / UNESCAP Trans-Eurasian Information Super Highway (TASIM) & APIS Report"
+},
+{
+"nombre": "Fergana Valley Ring & Kyrgyzstan Cross-Border Backbone",
+"operador": "Uztelecom",
+"pais": "UZ",
+"ciudades": [
+"Tashkent",
+"Angren",
+"Kokand",
+"Margilan",
+"Fergana",
+"Andijan",
+"Osh"
+],
+"estado": "en servicio",
+"fuente": "Uzbektelecom JSC / Ministry of Digital Technologies of Uzbekistan"
+},
+{
+"nombre": "Western Karakalpakstan-Kazakhstan Cross-Border Backbone",
+"operador": "Uztelecom",
+"pais": "UZ",
+"ciudades": [
+"Bukhara",
+"Gazli",
+"Urgench",
+"Nukus",
+"Kungrad",
+"Beyneu"
+],
+"estado": "en servicio",
+"fuente": "Uzbektelecom JSC / World Bank Digital Central Asia and South Asia (Digital CASA) Report"
+},
+{
+"nombre": "Southern Surkhandarya-Afghanistan Cross-Border Backbone",
+"operador": "Uztelecom",
+"pais": "UZ",
+"ciudades": [
+"Samarkand",
+"Qarshi",
+"G'uzor",
+"Boysun",
+"Denov",
+"Termez",
+"Hairatan"
+],
+"estado": "en servicio",
+"fuente": "Uzbektelecom JSC / ADB CAREC Corridors Connectivity Report"
+},
+{
+"nombre": "Uzbekistan-Tajikistan Cross-Border Link (Denov-Tursunzoda)",
+"operador": "Uztelecom",
+"pais": "UZ",
+"ciudades": [
+"Termez",
+"Denov",
+"Uzun",
+"Tursunzoda"
+],
+"estado": "en servicio",
+"fuente": "Uzbektelecom JSC / ITU Central Asia Terrestrial Transmission Map"
+},
+{
+"nombre": "Uzbekistan Railways Electrified Line Fiber Backbone",
+"operador": "O'zbekiston Temir Yo'llari",
+"pais": "UZ",
+"ciudades": [
+"Tashkent",
+"Guliston",
+"Jizzakh",
+"Samarkand",
+"Navoiy",
+"Bukhara",
+"Qarshi"
+],
+"estado": "en servicio",
+"fuente": "JSC Uzbekistan Railways / ADB Railway Electrification and Signaling Reports"
+},
+{
+"nombre": "UzSciNet National Academic and Research Network",
+"operador": "UzSciNet",
+"pais": "UZ",
+"ciudades": [
+"Tashkent",
+"Guliston",
+"Jizzakh",
+"Samarkand",
+"Bukhara",
+"Urgench",
+"Nukus"
+],
+"estado": "en servicio",
+"fuente": "Academy of Sciences of Uzbekistan / CAREN Project (European Commission / GEANT)"
+},
+{
+"nombre": "Tigris Eastern Corridor National Backbone (Baghdad-Basra)",
+"operador": "ITPC",
+"pais": "IQ",
+"ciudades": [
+"Baghdad",
+"Kut",
+"Amarah",
+"Basra",
+"Safwan",
+"Abdali"
+],
+"estado": "en servicio",
+"fuente": "Iraqi Telecommunications and Post Company (ITPC) / Ministry of Communications Iraq"
+},
+{
+"nombre": "Euphrates Central-South National Backbone (Baghdad-Basra)",
+"operador": "ITPC",
+"pais": "IQ",
+"ciudades": [
+"Baghdad",
+"Hillah",
+"Diwaniyah",
+"Samawah",
+"Nasiriyah",
+"Basra",
+"Umm Qasr"
+],
+"estado": "en servicio",
+"fuente": "ITPC / World Bank Iraq Transport and Telecom Sector Reconstruction Reports"
+},
+{
+"nombre": "Northern Tigris Corridor Backbone (Baghdad-Mosul-Turkey)",
+"operador": "ITPC",
+"pais": "IQ",
+"ciudades": [
+"Baghdad",
+"Samarra",
+"Tikrit",
+"Baiji",
+"Mosul",
+"Zakho",
+"Silopi"
+],
+"estado": "en servicio",
+"fuente": "Ministry of Communications Iraq / ITU Arab Region Terrestrial Transmission Map"
+},
+{
+"nombre": "Baghdad-Diyala-Iran Cross-Border Link",
+"operador": "ITPC",
+"pais": "IQ",
+"ciudades": [
+"Baghdad",
+"Baqubah",
+"Miqdadiyah",
+"Khanaqin",
+"Qasr-e Shirin"
+],
+"estado": "en servicio",
+"fuente": "ITPC / Ministry of Communications Cross-Border Gateways Documentation"
+},
+{
+"nombre": "Western Anbar-Jordan Cross-Border Terrestrial Backbone",
+"operador": "ITPC",
+"pais": "IQ",
+"ciudades": [
+"Baghdad",
+"Fallujah",
+"Ramadi",
+"Hit",
+"Rutbah",
+"Ruwaished"
+],
+"estado": "en servicio",
+"fuente": "ITPC / ESCWA Regional Broadband Backbone Studies"
+},
+{
+"nombre": "Iraq Silk Route Transit Corridor (North-South Private-Public Backbone)",
+"operador": "Symphony-Earthlink",
+"pais": "IQ",
+"ciudades": [
+"Silopi",
+"Zakho",
+"Dohuk",
+"Erbil",
+"Kirkuk",
+"Baghdad",
+"Hillah",
+"Samawah",
+"Basra",
+"Umm Qasr"
+],
+"estado": "en servicio",
+"fuente": "Symphony-Earthlink / IQ Networks / CMC (Communications and Media Commission) Reports"
+},
+{
+"nombre": "400kV National Grid OPGW Backbone",
+"operador": "Ministry of Electricity Iraq",
+"pais": "IQ",
+"ciudades": [
+"Mosul",
+"Baiji",
+"Baghdad",
+"Kut",
+"Nasiriyah",
+"Basra"
+],
+"estado": "en servicio",
+"fuente": "Ministry of Electricity Iraq / JICA & World Bank Electricity Grid Rehabilitation Reports"
+},
+{
+"nombre": "National Optical Fiber Ring - Northern & Eastern Leg (Kabul-Hairatan)",
+"operador": "Afghan Telecom",
+"pais": "AF",
+"ciudades": [
+"Kabul",
+"Charikar",
+"Pol-e Khomri",
+"Aybak",
+"Mazar-i-Sharif",
+"Hairatan",
+"Termez"
+],
+"estado": "en servicio",
+"fuente": "Afghan Telecom (AfTel) / Ministry of Communications and IT (MCIT) / World Bank Digital CASA"
+},
+{
+"nombre": "National Optical Fiber Ring - Southern & Western Leg (Kabul-Kandahar-Herat-Mazar-i-Sharif)",
+"operador": "Afghan Telecom",
+"pais": "AF",
+"ciudades": [
+"Kabul",
+"Maydanshahr",
+"Ghazni",
+"Qalat",
+"Kandahar",
+"Lashkargah",
+"Farah",
+"Herat",
+"Qala i Naw",
+"Maymana",
+"Sheberghan",
+"Mazar-i-Sharif"
+],
+"estado": "en servicio",
+"fuente": "MCIT Afghanistan / ATRA (Afghanistan Telecom Regulatory Authority) / UNESCAP APIS Report"
+},
+{
+"nombre": "Kabul-Torkham-Pakistan Eastern Cross-Border Link",
+"operador": "Afghan Telecom",
+"pais": "AF",
+"ciudades": [
+"Kabul",
+"Sarobi",
+"Jalalabad",
+"Torkham",
+"Landi Kotal"
+],
+"estado": "en servicio",
+"fuente": "Afghan Telecom / MCIT Fiber Optic Network Map"
+},
+{
+"nombre": "Kandahar-Spin Boldak-Pakistan Southern Cross-Border Link",
+"operador": "Afghan Telecom",
+"pais": "AF",
+"ciudades": [
+"Kandahar",
+"Spin Boldak",
+"Chaman"
+],
+"estado": "en servicio",
+"fuente": "Afghan Telecom / ATRA Annual Telecommunications Report"
+},
+{
+"nombre": "Herat-Islam Qala-Iran Western Cross-Border Link",
+"operador": "Afghan Telecom",
+"pais": "AF",
+"ciudades": [
+"Herat",
+"Islam Qala",
+"Taybad"
+],
+"estado": "en servicio",
+"fuente": "Afghan Telecom / UNESCAP South and South-West Asia Connectivity Study"
+},
+{
+"nombre": "Herat-Torghundi-Turkmenistan North-Western Cross-Border Link",
+"operador": "Afghan Telecom",
+"pais": "AF",
+"ciudades": [
+"Herat",
+"Torghundi",
+"Serhetabat"
+],
+"estado": "en servicio",
+"fuente": "MCIT Afghanistan / ADB CAREC Regional Infrastructure Reports"
+},
+{
+"nombre": "Pol-e Khomri-Kunduz-Tajikistan North-Eastern Cross-Border Link",
+"operador": "Afghan Telecom",
+"pais": "AF",
+"ciudades": [
+"Pol-e Khomri",
+"Baghlan",
+"Kunduz",
+"Sher Khan Bandar",
+"Panji Poyon"
+],
+"estado": "en servicio",
+"fuente": "Afghan Telecom / World Bank Afghanistan ICT Sector Development Project"
+},
+{
+"nombre": "North-East 220kV Power Transmission OPGW Corridor",
+"operador": "DABS",
+"pais": "AF",
+"ciudades": [
+"Termez",
+"Hairatan",
+"Mazar-i-Sharif",
+"Pol-e Khomri",
+"Charikar",
+"Kabul"
+],
+"estado": "en servicio",
+"fuente": "Da Afghanistan Breshna Sherkat (DABS) / ADB Energy Supply Investment Program"
+},
+{
+"nombre": "Western Coastal Trunk Fiber Optic Backbone",
+"operador": "Chunghwa Telecom",
+"pais": "TW",
+"ciudades": [
+"Keelung",
+"Taipei",
+"Banqiao",
+"Taoyuan",
+"Hsinchu",
+"Miaoli",
+"Taichung",
+"Changhua",
+"Douliu",
+"Chiayi",
+"Tainan",
+"Kaohsiung",
+"Pingtung",
+"Hengchun"
+],
+"estado": "en servicio",
+"fuente": "Chunghwa Telecom (CHT) Annual Report / National Communications Commission (NCC) Taiwan"
+},
+{
+"nombre": "Eastern Coastal Trunk Fiber Optic Backbone",
+"operador": "Chunghwa Telecom",
+"pais": "TW",
+"ciudades": [
+"Taipei",
+"Yilan",
+"Hualien",
+"Taitung",
+"Pingtung",
+"Kaohsiung"
+],
+"estado": "en servicio",
+"fuente": "Chunghwa Telecom (CHT) / NCC Taiwan Telecommunications Infrastructure Statistics"
+},
+{
+"nombre": "TFN West Coast Railway & Highway Backbone",
+"operador": "Taiwan Mobile",
+"pais": "TW",
+"ciudades": [
+"Keelung",
+"Taipei",
+"Taoyuan",
+"Hsinchu",
+"Miaoli",
+"Taichung",
+"Changhua",
+"Chiayi",
+"Tainan",
+"Kaohsiung"
+],
+"estado": "en servicio",
+"fuente": "Taiwan Fixed Network (Taiwan Mobile) / NCC Fixed Network Operator Disclosures"
+},
+{
+"nombre": "NCIC Island-Wide Optical Fiber Backbone",
+"operador": "Far EasTone",
+"pais": "TW",
+"ciudades": [
+"Taipei",
+"Banqiao",
+"Taoyuan",
+"Hsinchu",
+"Taichung",
+"Changhua",
+"Chiayi",
+"Tainan",
+"Kaohsiung"
+],
+"estado": "en servicio",
+"fuente": "New Century InfoComm Tech (Far EasTone) Corporate Filings / NCC Taiwan"
+},
+{
+"nombre": "345kV North-South Extra-High Voltage Grid OPGW Trunk",
+"operador": "Taipower",
+"pais": "TW",
+"ciudades": [
+"Taipei",
+"Taoyuan",
+"Hsinchu",
+"Taichung",
+"Nantou",
+"Chiayi",
+"Tainan",
+"Kaohsiung"
+],
+"estado": "en servicio",
+"fuente": "Taiwan Power Company (Taipower) Transmission System Reports"
+},
+{
+"nombre": "TWAREN National Research and Education Optical Ring",
+"operador": "TWAREN",
+"pais": "TW",
+"ciudades": [
+"Taipei",
+"Taoyuan",
+"Hsinchu",
+"Taichung",
+"Chiayi",
+"Tainan",
+"Kaohsiung",
+"Taitung",
+"Hualien",
+"Yilan",
+"Taipei"
+],
+"estado": "en servicio",
+"fuente": "National Center for High-performance Computing (NCHC) Taiwan"
+},
+{
+"nombre": "National Backbone Network (NBN) - Northern A9 Corridor",
+"operador": "SLT",
+"pais": "LK",
+"ciudades": [
+"Colombo",
+"Gampaha",
+"Kegalle",
+"Kandy",
+"Matale",
+"Dambulla",
+"Anuradhapura",
+"Vavuniya",
+"Kilinochchi",
+"Jaffna"
+],
+"estado": "en servicio",
+"fuente": "Sri Lanka Telecom (SLT) / TRCSL (Telecommunications Regulatory Commission of Sri Lanka)"
+},
+{
+"nombre": "National Backbone Network (NBN) - Southern Coastal Corridor",
+"operador": "SLT",
+"pais": "LK",
+"ciudades": [
+"Colombo",
+"Kalutara",
+"Ambalangoda",
+"Galle",
+"Matara",
+"Tangalle",
+"Hambantota"
+],
+"estado": "en servicio",
+"fuente": "Sri Lanka Telecom (SLT) Annual Report / ITU Asia-Pacific Transmission Map"
+},
+{
+"nombre": "National Backbone Network (NBN) - Eastern Corridor",
+"operador": "SLT",
+"pais": "LK",
+"ciudades": [
+"Colombo",
+"Negombo",
+"Kurunegala",
+"Dambulla",
+"Habarana",
+"Polonnaruwa",
+"Batticaloa",
+"Kalmunai",
+"Ampara"
+],
+"estado": "en servicio",
+"fuente": "Sri Lanka Telecom (SLT) NBN Project Documentation / TRCSL"
+},
+{
+"nombre": "National Backbone Network (NBN) - Central-Uva Corridor",
+"operador": "SLT",
+"pais": "LK",
+"ciudades": [
+"Colombo",
+"Ratnapura",
+"Balangoda",
+"Bandarawela",
+"Badulla",
+"Monaragala",
+"Ampara"
+],
+"estado": "en servicio",
+"fuente": "Sri Lanka Telecom (SLT) Infrastructure Map"
+},
+{
+"nombre": "North-Western Coastal Optical Backbone",
+"operador": "SLT",
+"pais": "LK",
+"ciudades": [
+"Colombo",
+"Negombo",
+"Chilaw",
+"Puttalam",
+"Mannar",
+"Vavuniya"
+],
+"estado": "en servicio",
+"fuente": "Sri Lanka Telecom (SLT) / UNESCAP South Asia Connectivity Report"
+},
+{
+"nombre": "Dialog National Optical Fiber Backbone",
+"operador": "Dialog",
+"pais": "LK",
+"ciudades": [
+"Jaffna",
+"Vavuniya",
+"Anuradhapura",
+"Dambulla",
+"Kurunegala",
+"Kandy",
+"Colombo",
+"Kalutara",
+"Galle",
+"Matara",
+"Hambantota"
+],
+"estado": "en servicio",
+"fuente": "Dialog Axiata PLC Annual Report / TRCSL Transmission License Filings"
+},
+{
+"nombre": "CEB 220kV/132kV National Grid OPGW Network",
+"operador": "CEB",
+"pais": "LK",
+"ciudades": [
+"Colombo",
+"Kurunegala",
+"Habarana",
+"Anuradhapura",
+"Vavuniya",
+"Kilinochchi",
+"Jaffna"
+],
+"estado": "en servicio",
+"fuente": "Ceylon Electricity Board (CEB) Long Term Generation & Transmission Expansion Plan"
+},
+{
+"nombre": "LEARN Academic and Research Fiber Network",
+"operador": "LEARN",
+"pais": "LK",
+"ciudades": [
+"Jaffna",
+"Anuradhapura",
+"Kurunegala",
+"Kandy",
+"Colombo",
+"Galle",
+"Matara"
+],
+"estado": "en servicio",
+"fuente": "Lanka Education and Research Network (LEARN) Topology Map"
+},
+{
+"nombre": "East-West Mahendra Highway Optical Fiber Backbone",
+"operador": "Nepal Telecom",
+"pais": "NP",
+"ciudades": [
+"Bhadrapur",
+"Birtamod",
+"Itahari",
+"Lahan",
+"Bardibas",
+"Hetauda",
+"Bharatpur",
+"Butwal",
+"Kohalpur",
+"Dhangadhi",
+"Mahendranagar",
+"Banbasa"
+],
+"estado": "en servicio",
+"fuente": "Nepal Telecom (NDCL) / Nepal Telecommunications Authority (NTA) MIS Reports"
+},
+{
+"nombre": "Kathmandu-Birgunj-India Cross-Border Terrestrial Link",
+"operador": "Nepal Telecom",
+"pais": "NP",
+"ciudades": [
+"Kathmandu",
+"Hetauda",
+"Birgunj",
+"Raxaul"
+],
+"estado": "en servicio",
+"fuente": "Nepal Telecom / UNESCAP APIS Nepal Country Study"
+},
+{
+"nombre": "Kathmandu-Rasuwagadhi-China Cross-Border Terrestrial Link",
+"operador": "Nepal Telecom",
+"pais": "NP",
+"ciudades": [
+"Kathmandu",
+"Bidur",
+"Dhunche",
+"Gyirong"
+],
+"estado": "en servicio",
+"fuente": "Nepal Telecom / NTA Cross-Border Optical Fiber Gateway Documentation"
+},
+{
+"nombre": "Kathmandu-Pokhara-Butwal-India Siddhartha Corridor",
+"operador": "Nepal Telecom",
+"pais": "NP",
+"ciudades": [
+"Kathmandu",
+"Bharatpur",
+"Pokhara",
+"Tansen",
+"Butwal",
+"Siddharthanagar",
+"Nautanwa"
+],
+"estado": "en servicio",
+"fuente": "Nepal Telecom / ITU South Asia Terrestrial Transmission Map"
+},
+{
+"nombre": "Ncell East-West & Kathmandu Valley Optical Backbone",
+"operador": "Ncell",
+"pais": "NP",
+"ciudades": [
+"Biratnagar",
+"Itahari",
+"Lahan",
+"Bardibas",
+"Hetauda",
+"Bharatpur",
+"Kathmandu",
+"Pokhara",
+"Butwal",
+"Kohalpur",
+"Dhangadhi"
+],
+"estado": "en servicio",
+"fuente": "Ncell Axiata Ltd. / Nepal Telecommunications Authority (NTA) Infrastructure Reports"
+},
+{
+"nombre": "NEA East-West 132kV/400kV National Grid OPGW & India Interconnector",
+"operador": "NEA",
+"pais": "NP",
+"ciudades": [
+"Itahari",
+"Lahan",
+"Dhalkebar",
+"Hetauda",
+"Bharatpur",
+"Butwal",
+"Kohalpur",
+"Dhangadhi",
+"Mahendranagar"
+],
+"estado": "en servicio",
+"fuente": "Nepal Electricity Authority (NEA) Transmission Directorate Annual Report"
+},
+{
+"nombre": "National Road 5 North-West GMS Backbone (Phnom Penh-Poipet-Thailand)",
+"operador": "Telecom Cambodia",
+"pais": "KH",
+"ciudades": [
+"Phnom Penh",
+"Kampong Chhnang",
+"Pursat",
+"Battambang",
+"Sisophon",
+"Poipet",
+"Aranyaprathet"
+],
+"estado": "en servicio",
+"fuente": "Telecom Cambodia (TC) / Ministry of Posts and Telecommunications (MPTC) / ADB GMS Report"
+},
+{
+"nombre": "National Road 6 & Road 7 Northern-Eastern Backbone (to Laos)",
+"operador": "Telecom Cambodia",
+"pais": "KH",
+"ciudades": [
+"Sisophon",
+"Siem Reap",
+"Kampong Thom",
+"Kampong Cham",
+"Kratié",
+"Stung Treng",
+"Pakse"
+],
+"estado": "en servicio",
+"fuente": "Telecom Cambodia / JICA & ADB Greater Mekong Subregion Backbone Project"
+},
+{
+"nombre": "National Road 1 South-East Cross-Border Link (to Vietnam)",
+"operador": "Telecom Cambodia",
+"pais": "KH",
+"ciudades": [
+"Phnom Penh",
+"Prey Veng",
+"Svay Rieng",
+"Bavet",
+"Tay Ninh"
+],
+"estado": "en servicio",
+"fuente": "Telecom Cambodia / ITU ASEAN Terrestrial Transmission Map"
+},
+{
+"nombre": "CFOCN National Road 4 & Southern Coastal Backbone",
+"operador": "CFOCN",
+"pais": "KH",
+"ciudades": [
+"Phnom Penh",
+"Kampong Speu",
+"Sihanoukville",
+"Kampot",
+"Kep",
+"Ha Tien"
+],
+"estado": "en servicio",
+"fuente": "Cambodia Fiber Optic Communication Network (CFOCN) / MPTC Cambodia"
+},
+{
+"nombre": "Metfone National Ring & Cross-Border Backbone",
+"operador": "Metfone",
+"pais": "KH",
+"ciudades": [
+"Aranyaprathet",
+"Poipet",
+"Sisophon",
+"Battambang",
+"Pursat",
+"Kampong Chhnang",
+"Phnom Penh",
+"Svay Rieng",
+"Bavet",
+"Tay Ninh"
+],
+"estado": "en servicio",
+"fuente": "Metfone (Viettel Cambodia) / Telecommunication Regulator of Cambodia (TRC)"
+},
+{
+"nombre": "EDC 230kV National Grid OPGW Network",
+"operador": "EDC",
+"pais": "KH",
+"ciudades": [
+"Battambang",
+"Pursat",
+"Kampong Chhnang",
+"Phnom Penh",
+"Takeo",
+"Kampot",
+"Sihanoukville"
+],
+"estado": "en servicio",
+"fuente": "Electricité du Cambodge (EDC) Annual Report / ADB Power Transmission Reports"
+}
+]

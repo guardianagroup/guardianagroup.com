@@ -1,0 +1,104 @@
+[
+  {
+    "nombre": "Red troncal nacional de fibra óptica de ETECSA",
+    "operador": "Empresa de Telecomunicaciones de Cuba (ETECSA)",
+    "pais": "CU",
+    "ciudades": [
+      "Pinar del Rio",
+      "Artemisa",
+      "Havana",
+      "Matanzas",
+      "Santa Clara",
+      "Sancti Spiritus",
+      "Ciego de Avila",
+      "Camaguey",
+      "Las Tunas",
+      "Holguin",
+      "Bayamo",
+      "Santiago de Cuba",
+      "Guantanamo"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor occidental-oriental probable, siguiendo la Autopista Nacional, la Carretera Central y los accesos a las capitales provinciales. La lista es un esquema geográfico, no un itinerario de cable verificado; omite ramales y rutas redundantes."
+  },
+  {
+    "nombre": "Red troncal nacional de fibra óptica de Claro",
+    "operador": "Claro Dominicana (Compañía Dominicana de Teléfonos)",
+    "pais": "DO",
+    "ciudades": [
+      "Puerto Plata",
+      "Santiago de los Caballeros",
+      "La Vega",
+      "Bonao",
+      "Santo Domingo",
+      "San Pedro de Macoris",
+      "La Romana",
+      "Higuey",
+      "Punta Cana"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor norte-centro-este probable por los accesos Puerto Plata–Santiago, la Autopista Duarte, la Autovía del Este y los corredores hacia Higuey y Punta Cana. No representa toda la red ni confirma que cada tramo siga exactamente esas carreteras."
+  },
+  {
+    "nombre": "Red troncal nacional de fibra óptica de Natcom",
+    "operador": "Natcom",
+    "pais": "HT",
+    "ciudades": [
+      "Cap-Haitien",
+      "Gonaives",
+      "Saint-Marc",
+      "Port-au-Prince",
+      "Leogane",
+      "Petit-Goave",
+      "Miragoane",
+      "Les Cayes"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor norte-sur y suroeste probable por la Route Nationale 1 hasta Port-au-Prince y la Route Nationale 2 hacia Les Cayes. No es un trazado de cable verificado ni una confirmación de disponibilidad actual de todos los tramos."
+  },
+  {
+    "nombre": "Red troncal nacional de fibra óptica de Flow",
+    "operador": "Flow / Cable & Wireless Jamaica",
+    "pais": "JM",
+    "ciudades": [
+      "Montego Bay",
+      "Falmouth",
+      "Saint Ann's Bay",
+      "Ocho Rios",
+      "Spanish Town",
+      "Kingston"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor probable por la carretera costera septentrional y una conexión norte-sur hacia Spanish Town y Kingston. La secuencia resume un eje principal plausible; no verifica el paso del cable por la autopista norte-sur ni representa los demás corredores y anillos de la red."
+  },
+  {
+    "nombre": "Red troncal nacional de fibra óptica de Digi",
+    "operador": "Belize Telemedia Limited (Digi)",
+    "pais": "BZ",
+    "ciudades": [
+      "Corozal",
+      "Orange Walk",
+      "Belize City",
+      "Belmopan",
+      "Dangriga",
+      "Punta Gorda"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor norte-sur probable por la Philip Goldson Highway, la George Price Highway, la Hummingbird Highway y la Southern Highway. Los accesos a algunas ciudades pueden ser ramales; se omite el corredor occidental hacia San Ignacio. No es un itinerario de cable verificado."
+  },
+  {
+    "nombre": "Red troncal nacional de telecomunicaciones por fibra óptica",
+    "operador": "Korea Posts and Telecommunications Corporation (KPTC)",
+    "pais": "KP",
+    "ciudades": [
+      "Sinuiju",
+      "Chongju",
+      "Anju",
+      "Pyongyang",
+      "Sariwon",
+      "Kaesong"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado, con baja confianza: eje occidental probable según la distribución de ciudades y los corredores viarios y ferroviarios Sinuiju–Pyongyang–Kaesong. La existencia de una red nacional de fibra está documentada públicamente, pero esta secuencia es una inferencia geográfica, no un trazado publicado; no se verifica el estado de cada tramo y se omiten los ramales orientales."
+  }
+]

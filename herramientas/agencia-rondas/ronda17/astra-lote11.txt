@@ -1,0 +1,66 @@
+[
+  {
+    "nombre": "Red troncal nacional de Nepal Telecom — corredor este-oeste",
+    "operador": "Nepal Telecom",
+    "pais": "NP",
+    "ciudades": ["Kakarbhitta", "Birtamod", "Damak", "Itahari", "Lahan", "Bardibas", "Hetauda", "Bharatpur", "Butwal", "Lamahi", "Kohalpur", "Attariya", "Mahendranagar"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la East-West Highway o Mahendra Highway, utilizado por infraestructura troncal de telecomunicaciones. La secuencia representa el eje principal probable, no un trazado físico verificado; omite ramales, incluido el de Kathmandu."
+  },
+  {
+    "nombre": "Red troncal nacional de Syrian Telecom — corredor norte-sur",
+    "operador": "Syrian Telecom",
+    "pais": "SY",
+    "ciudades": ["Daraa", "Damascus", "Homs", "Hama", "Aleppo"],
+    "estado": "operatividad actual no verificada",
+    "fuente": "aproximado: eje urbano nacional siguiendo el corredor de la carretera M5. No se ha verificado el recorrido físico de la fibra ni la continuidad operativa entre todos los tramos; se omiten los ramales costeros y orientales."
+  },
+  {
+    "nombre": "Red troncal nacional de Yemen — corredor occidental",
+    "operador": "Public Telecommunications Corporation (PTC / YemenNet), con gestión territorial fragmentada",
+    "pais": "YE",
+    "ciudades": ["Aden", "Lahij", "Taiz", "Ibb", "Dhamar", "Sanaa", "Amran", "Sadah"],
+    "estado": "operatividad actual no verificada",
+    "fuente": "aproximado: corredor probable por las carreteras que conectan Aden con las ciudades de las tierras altas occidentales. Representa un eje de la red histórica, no una conexión continua actualmente confirmada; la guerra y la fragmentación administrativa impiden asumir servicio extremo a extremo."
+  },
+  {
+    "nombre": "Red troncal nacional del Líbano — corredor costero",
+    "operador": "Ogero / Ministry of Telecommunications",
+    "pais": "LB",
+    "ciudades": ["Tyre", "Sidon", "Beirut", "Jounieh", "Byblos", "Tripoli"],
+    "estado": "en servicio; continuidad actual no verificada",
+    "fuente": "aproximado: eje costero probable siguiendo las principales carreteras entre el sur, Beirut y el norte. No es un trazado físico verificado y omite anillos metropolitanos y ramales interiores."
+  },
+  {
+    "nombre": "Red troncal de Paltel — corredor de Cisjordania",
+    "operador": "Paltel",
+    "pais": "PS",
+    "ciudades": ["Jenin", "Nablus", "Ramallah", "Bethlehem", "Hebron"],
+    "estado": "en servicio en Cisjordania; continuidad actual no verificada",
+    "fuente": "aproximado: orden geográfico del corredor troncal probable entre las principales ciudades de Cisjordania, apoyado en corredores viales regionales; no confirma enlaces físicos directos entre cada par consecutivo. Gaza no se incluye porque constituye un ámbito separado y no debe suponerse una conexión terrestre nacional continua."
+  },
+  {
+    "nombre": "Red troncal fija nacional de Kuwait — corredor metropolitano",
+    "operador": "Ministry of Communications",
+    "pais": "KW",
+    "ciudades": ["Al Jahra", "Kuwait City", "Hawalli", "Salmiya", "Fahaheel"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor probable desde Al Jahra hacia la capital y las áreas urbanas costeras del sureste, siguiendo las principales autopistas urbanas. La red dispone de ramificaciones; esta secuencia no representa un único cable ni todos sus anillos."
+  },
+  {
+    "nombre": "Red troncal nacional de Ooredoo Qatar — corredor norte-sur",
+    "operador": "Ooredoo Qatar",
+    "pais": "QA",
+    "ciudades": ["Madinat ash Shamal", "Al Khor", "Umm Salal Muhammad", "Doha", "Al Wakrah", "Mesaieed"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor probable entre los principales núcleos del norte, Doha y el sureste, utilizando los corredores de Al Shamal Road, los accesos a Al Khor y las carreteras hacia Al Wakrah y Mesaieed. No se ha verificado una ruta física única que atraviese todas estas ciudades."
+  },
+  {
+    "nombre": "Red nacional de fibra de Bahréin — corredor urbano principal",
+    "operador": "BNET",
+    "pais": "BH",
+    "ciudades": ["Muharraq", "Manama", "Isa Town", "Riffa", "Hamad Town", "Zallaq"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor probable desde Muharraq, mediante las conexiones viarias entre islas, hacia Manama y los núcleos del centro y suroeste. BNET opera la red fija nacional mayorista; la secuencia es una simplificación geográfica, no el trazado publicado de un único enlace troncal."
+  }
+]

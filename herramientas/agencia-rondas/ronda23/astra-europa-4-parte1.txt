@@ -1,0 +1,96 @@
+[
+  {
+    "nombre": "Luxembourg–Brussels",
+    "operador": "POST Luxembourg / TERALINK",
+    "pais": "LU",
+    "ciudades": ["Luxembourg", "Arlon", "Namur", "Brussels"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red internacional operativa TERALINK de POST Luxembourg (post.lu); ciudades intermedias inferidas del corredor terrestre E25/E411. No representa un trazado físico publicado."
+  },
+  {
+    "nombre": "Luxembourg–Frankfurt",
+    "operador": "POST Luxembourg / TERALINK",
+    "pais": "LU",
+    "ciudades": ["Luxembourg", "Trier", "Koblenz", "Frankfurt am Main"],
+    "estado": "en servicio",
+    "fuente": "aproximado: conectividad internacional operativa TERALINK de POST Luxembourg (post.lu); secuencia probable por los corredores ferroviarios del Moselle y del Rhine. El itinerario intermedio exacto no está confirmado."
+  },
+  {
+    "nombre": "Chisinau–Balti",
+    "operador": "Moldtelecom",
+    "pais": "MD",
+    "ciudades": ["Chisinau", "Orhei", "Balti"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra óptica de Moldtelecom (moldtelecom.md); secuencia inferida del corredor principal Chisinau–Orhei–Balti, superior a 100 km. No se dispone del trazado físico detallado."
+  },
+  {
+    "nombre": "Chisinau–Cahul",
+    "operador": "Moldtelecom",
+    "pais": "MD",
+    "ciudades": ["Chisinau", "Hincesti", "Leova", "Cantemir", "Cahul"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional operativa de Moldtelecom (moldtelecom.md); itinerario probable hacia el suroeste siguiendo los corredores de las carreteras R3 y R34. Ciudades intermedias inferidas, no trazado publicado."
+  },
+  {
+    "nombre": "Bar–Podgorica–Bijelo Polje",
+    "operador": "Crnogorski Telekom",
+    "pais": "ME",
+    "ciudades": ["Bar", "Podgorica", "Kolasin", "Mojkovac", "Bijelo Polje"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte óptico de Crnogorski Telekom (telekom.me) e información sectorial de EKIP (ekip.me); secuencia inferida del corredor ferroviario Bar–Belgrade y del corredor vial Podgorica–Bijelo Polje."
+  },
+  {
+    "nombre": "Amsterdam–Maastricht",
+    "operador": "Eurofiber",
+    "pais": "NL",
+    "ciudades": ["Amsterdam", "Utrecht", "'s-Hertogenbosch", "Eindhoven", "Weert", "Sittard", "Maastricht"],
+    "estado": "en servicio",
+    "fuente": "aproximado: mapa de la red operativa de Eurofiber (eurofiber.com); selección de un corredor troncal norte–sur y secuencia probable junto a la A2. El mapa comercial no identifica el recorrido exacto de cada cable."
+  },
+  {
+    "nombre": "Amsterdam–Rotterdam–Antwerp",
+    "operador": "Eurofiber",
+    "pais": "NL",
+    "ciudades": ["Amsterdam", "Leiden", "The Hague", "Delft", "Rotterdam", "Dordrecht", "Breda", "Antwerp"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra operativa de Eurofiber en Países Bajos y Bélgica (eurofiber.com); secuencia inferida de los corredores A4, A13 y A16/E19. Antwerp es la primera ciudad belga principal del itinerario."
+  },
+  {
+    "nombre": "Amsterdam–Groningen",
+    "operador": "Eurofiber",
+    "pais": "NL",
+    "ciudades": ["Amsterdam", "Amersfoort", "Zwolle", "Meppel", "Assen", "Groningen"],
+    "estado": "en servicio",
+    "fuente": "aproximado: mapa de red de Eurofiber (eurofiber.com); corredor terrestre probable A1/A28 entre sus áreas de presencia. La secuencia no implica que exista un único cable con todas esas cabeceras."
+  },
+  {
+    "nombre": "Skopje–Gevgelija",
+    "operador": "Makedonski Telekom",
+    "pais": "MK",
+    "ciudades": ["Skopje", "Veles", "Negotino", "Demir Kapija", "Gevgelija"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte óptico de Makedonski Telekom (telekom.mk); secuencia probable por el corredor X, siguiendo la A1/E75 y el ferrocarril del valle del Vardar. Trazado físico detallado no publicado."
+  },
+  {
+    "nombre": "Skopje–Ohrid",
+    "operador": "Makedonski Telekom",
+    "pais": "MK",
+    "ciudades": ["Skopje", "Tetovo", "Gostivar", "Kicevo", "Ohrid"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal operativa de Makedonski Telekom (telekom.mk); itinerario inferido del corredor occidental A2/E65 y sus accesos a las ciudades principales."
+  },
+  {
+    "nombre": "Oslo–Trondheim por el interior",
+    "operador": "GlobalConnect",
+    "pais": "NO",
+    "ciudades": ["Oslo", "Hamar", "Lillehammer", "Otta", "Dombas", "Oppdal", "Trondheim"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red terrestre nacional de GlobalConnect (globalconnect.no); secuencia probable por los corredores E6 y ferroviario de Dovre. Se selecciona el corredor interior, no las alternativas costeras submarinas."
+  },
+  {
+    "nombre": "Oslo–Gothenburg",
+    "operador": "GlobalConnect",
+    "pais": "NO",
+    "ciudades": ["Oslo", "Moss", "Sarpsborg", "Halden", "Stromstad", "Uddevalla", "Gothenburg"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red transfronteriza operativa de GlobalConnect en Nor

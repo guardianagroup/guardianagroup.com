@@ -1,0 +1,103 @@
+Ronda 19 · voz «claude» · troncales terrestres de fibra · fuentes consultadas por país (24 oct 2026)
+Solo fuentes oficiales o primarias. Sin submarinecablemap, TeleGeography ni PeeringDB.
+
+== Grupo 1 → fibra-agencia/claude-troncales-1.json ==
+BH  NO CONFIRMADO. batelco.com/?p=24097 (BGN: 1.400 km sobre la red GCCIA, sin ciudades ni fecha de servicio);
+    gccia.com.sa/gcciagrid/our-existing-network/ (Bahrein se une a la red por cable submarino de 50 km; no menciona fibra).
+    El enlace terrestre stc Bahrain–center3 por la calzada solo está anunciado.
+BN  NO CONFIRMADO. unn.com.bn y unn.com.bn/fibre-network: «más de 5.000 km de fibra», sin rutas ni enlaces transfronterizos.
+BZ  NO CONFIRMADO. livedigi.com/about/our-history: «más de 2.000 km de fibra desplegados» (2019), sin rutas.
+CR  1 ruta. eprsiepac.com/linea-siepac/ (EPR): tramos SIEPAC Cañas–Parrita–Palmar Norte–Río Claro en servicio (2012–2014), OPGW de 36 fibras.
+CU  NO CONFIRMADO. mincom.gob.cu (printpdf/6058, print/5659): solo el cable submarino ARIMAO y fibra urbana; ninguna fuente oficial con la troncal nacional.
+DO  NO CONFIRMADO. Solo prensa (dplnews, elcaribe) sobre la red OPGW de ETED (1.500 km, nodos en ejecución) sin rutas; presidencia.gob.do no se pudo leer.
+FJ  1 ruta. telecom.com.fj (2 mar 2026): fibra terrestre subterránea de 102 km Savusavu–Seaqaqa–Labasa activada.
+    fiji.gov.fj (discurso del ministro): fases Labasa–Seaqaqa y Seaqaqa–Savusavu. La presentación de Fiji ante la OACI no se pudo abrir.
+GQ  3 rutas. gitge.com/?p=508 (GITGE): la Red Troncal Nacional conecta 19 ciudades y enumera los nodos continentales en orden;
+    gitge.com/wp-content/uploads/2020/07/PRESENTACION-6.pdf: fibra terrestre en 19 ciudades. El informe anual 2024 es un PDF escaneado y no se pudo leer.
+
+== Grupo 2 → fibra-agencia/claude-troncales-2.json ==
+GT  1 ruta. eprsiepac.com/linea-siepac/ (EPR): Guate Norte–Panaluya–El Florido en servicio desde 26-ago-2012, OPGW de 36 fibras.
+    (El tramo Aguacapa–frontera de El Salvador no se incluye: Aguacapa es una central, no una ciudad.)
+GY  2 rutas. enetworks.gy/blog/page/3/ (fibra «from Georgetown to Linden», OnFiber en Linden);
+    enetworks.gy/2022/11/15/enetworks-fiber-upgrades.html (backbone con servicio en Georgetown, Linden, Anna Regina, Corriverton, New Amsterdam;
+    el orden de la ruta costera es geográfico, la fuente no da trazado).
+HN  4 rutas. eprsiepac.com/linea-siepac/ (El Florido–San Buenaventura, 141 km, 19-mar-2012);
+    Informe final PNUD–HONDUTEL, marzo 2013, ap. 4.1.1 (copia en orientacionuniversitaria.weebly.com): rutas terminadas y en uso
+    Puerto Cortés–SPS–Tegucigalpa–Nacaome–El Amatillo, Nacaome–Choluteca, La Ceiba–Saba–Tocoa.
+HT  NO CONFIRMADO. UIT 2024, D-LDC-ICTLDC-2024-01 (solo totales: Natcom 5.056 km, Digicel 1.642 km, Access Haiti 2.400 km; sin rutas);
+    conatel.gouv.ht/node/273 (robots lo impide) y el plan estratégico MPCE 2012 (PDF no accesible) no se pudieron leer.
+JM  NO CONFIRMADO. Solo prensa (Jamaica Observer, 23 ago 2024: el gerente de Flow habla de su «transmission backbone between May Pen and St. James»), sin fuente oficial.
+KP  NO CONFIRMADO. Ninguna fuente oficial o primaria con rutas (solo análisis de terceros).
+KW  NO CONFIRMADO. stc.com.sa (hard patched transit: «seven border connections», sin países ni rutas); nada oficial de Kuwait.
+LB  NO CONFIRMADO. ogero.gov.lb y prensa: solo FTTx y anuncios, sin troncal con rutas.
+
+== Grupo 3 → fibra-agencia/claude-troncales-3.json ==
+LS  NO CONFIRMADO. Banco Mundial, Lesotho Digital Economy Diagnostic (2020): LECC tiene ~600 km de fibra OPGW tendida (Vodacom la usa por IRU),
+    pero el texto no nombra ciudades y los mapas del anexo 4 son imágenes que no se pudieron leer.
+NI  2 rutas. enatrel.gob.ni/toda-nicaragua-interconectada-a-finales-de-2019/ (línea Siuna–Rosita–Bilwi, >200 km, con OPGW);
+    enatrel.gob.ni/wp-content/uploads/2024/04/boletin-142.pdf (enero 2022: «reciente entrada en operación»);
+    eprsiepac.com/linea-siepac/ (Ticuantepe–frontera–Cañas, 2011). El tramo frontera de Honduras–Sandino no se incluye (Sandino es una subestación de ubicación dudosa).
+NP  NO CONFIRMADO. eng.yidaiyilu.gov.cn (portal oficial chino, Xinhua): enlace Nepal Telecom–China Telecom por el paso Rasuwagadhi–Kerung en operación comercial
+    desde el 12-ene-2018, pero sin la ruta nacional; NTA/Nepal Telecom solo en prensa (Himalayan Times: 1.600 km sin rutas); SANOG (WorldLink, no oficial).
+PA  1 ruta. eprsiepac.com/linea-siepac/ (Río Claro–frontera–Veladero, en servicio desde 31-dic-2010).
+PG  2 rutas. pngdataco.com (comunicados de sept. y oct. 2026): fibra terrestre Madang–Yonki restablecida el 21-sep-2026; fibra terrestre Tari–Hagen restablecida el 2-oct-2026.
+PS  NO CONFIRMADO. Nada oficial con rutas (Paltel solo informes de sostenibilidad sin trazado).
+QA  NO CONFIRMADO. Solo prensa sobre Ooredoo (inversión en rutas internacionales), sin troncal nacional con rutas.
+RW  NO CONFIRMADO. Informe WSIS+10 de Rwanda en la UIT (2.500–5.003 km, 30 distritos y 11 pasos fronterizos, sin nombres; el mapa de BSC es una imagen);
+    itu.int/hub 2020 (sin rutas); za.liquid.tech (14 jun 2024: fibra de Liquid en Kigali, Rubavu, Musanze, Nyamata, Huye, Muhanga, Rusizi, sin trazado).
+
+== Grupo 4 → fibra-agencia/claude-troncales-4.json ==
+SS  2 rutas. za.liquid.tech/the-first-to-bring-fibre-to-south-sudan/ (200 km frontera de Uganda–Nimule–Juba, primera fase enero 2020);
+    Banco Mundial, South Sudan Digital Economy Assessment 2023 (P17636100…pdf): rutas operativas de Liquid y de Muya Fiber por el mismo corredor.
+SV  1 ruta. eprsiepac.com/linea-siepac/ (Ahuachapán–Nejapa, 29-feb-2012). El estudio JICA de 2006 sobre la red de Telemóvil no se pudo leer
+    (el capítulo 3 con el mapa no está en el texto del PDF).
+SY  NO CONFIRMADO. Solo prensa (Enab Baladi, SilkLink anunciado); nada oficial con rutas.
+TD  3 rutas. Banco Mundial, Chad Digital Economy Diagnostic (thedocs.worldbank.org/…/Chad-country-diagnostic.pdf), tabla 6 y figura 7:
+    dorsal sur N'Djamena–Guelendeng–Bongor–Kelo–Moundou–M'Baikoro–Kagpal (610 km, uso nacional), ramal M'Baikoro–Doba (76 km),
+    N'Djamena–Adré (Sudachad, 1.142 km, 2019). (Daboua–N'Djamena y Doba–Sarh–Abéché solo previstos: excluidos.)
+TL  NO CONFIRMADO. en.tatoli.tl (20 nov 2023): pasarela de SACOM TL en Batugade lanzada, sin ruta ni estado de servicio.
+TW  2 rutas. twaren.net/NetworkInfra/Intro/index.php (TWAREN/NCHC: 4 nodos troncales unidos por fibra propia; Yilan y Hualien cierran el anillo
+    con Taipei y Tainan); glif.is 2009 (NCHC, mismos nodos).
+UY  1 ruta. ute.com.uy Memoria Anual 2021 p. 33 (fibra en líneas de 150 kV Bonete–Young–Paysandú–Salto terminada).
+    El Tomo 2022 de UTE (Tacuarembó–Rivera) no se pudo leer (error del servidor); ANTEL solo en prensa.
+XK  NO CONFIRMADO. energy-community.org PLIMA EL06: interconexión de 400 kV de KOSTT con Albania solo prevista (2030), sin OPGW mencionado.
+YE  NO CONFIRMADO. Banco Mundial P179887 (2023): PTC tiene un «extensive fiber backbone» hasta las fronteras de Omán y Arabia Saudí, sin rutas.
+
+== Países opcionales (sin archivo: ninguna ruta confirmada) ==
+SR  NO CONFIRMADO. telesur.sr/zakelijk/oil-gas/: red de fibra «expansive» y FTTH nacional, sin rutas; solo el cable submarino SG-SCS.
+PR  NO CONFIRMADO. Solo prensa (newsismybusiness, dplnews) sobre PREPA Networks/PrepaNet; un EA de la NTIA (INTECO, 2010) es un proyecto, no una ruta en servicio.
+GW  NO CONFIRMADO. La troncal nacional de fibra está en licitación (diseño y construcción), no en servicio.
+SZ  NO CONFIRMADO. Solo planes de despliegue (Ecofin, TCS+), sin fuente oficial con rutas.
+ER, TT, CV, MU, MT, BS  No investigados a fondo: islas o países muy pequeños sin rutas terrestres de más de ~100 km
+    documentadas, o sin fuentes oficiales accesibles (EriTel).
+
+== Grupo 5 → fibra-agencia/claude-troncales-5.json (11 países aún sin troncal en el mapa; pueblos de GeoNames en lugar de subestaciones) ==
+GT  2 rutas. eprsiepac.com/linea-siepac/ (EPR, tabla y coordenadas de las subestaciones): Guate Norte–Panaluya (109,91 km)–El Florido (73,46 km),
+    26-ago-2012; Aguacapa–frontera de El Salvador (99,49 km) + frontera–Ahuachapán (18,97 km), 22-ene-2012; OPGW de 36 fibras.
+    Pueblos por subestaciones: Guate Norte → Guatemala City; Panaluya → Zacapa (~10 km; Río Hondo está más cerca pero el mapa aún no lo sitúa);
+    El Florido (paso fronterizo en Camotán) → Chiquimula (~35 km); Aguacapa → Guanagazapa (~6 km; GeoNames cities500, 2.842 hab.,
+    lo situará el flujo de pueblos_fibra.py); Ahuachapán (SV).
+    asep.gob.pa, presentación de REDCA (sept. 2015): «Brindamos una red regional terrestre de F.O. en OPGW»; PoP en Guate Este y Panamá1.
+    Ufinet, Claro y Tigo: nada oficial con rutas (agn.gt solo trata del cable submarino del Pacífico).
+PA  1 ruta. eprsiepac.com/linea-siepac/ (frontera de Costa Rica–Veladero 150,2 km y Río Claro–frontera 22,63 km, 31-dic-2010);
+    asep.gob.pa, presentación de REDCA (sept. 2015): PoP en la subestación «Panamá1, Panamá» (Panama City).
+    Pueblos: Panamá 1 → Panama City; Veladero (en GeoNames); David (a ~7 km de la recta Veladero–Río Claro; la línea es solo un 6 % más larga);
+    Río Claro → Golfito (CR, ~10 km; Ciudad Neily está a ~15 km y el mapa no la sitúa).
+    La fibra OPGW de ETESA (900 km Panamá–Colón–Chiriquí–Bocas del Toro, 2015) solo aparece en prensa (telesemana, citando a La Prensa): no incluida.
+PR  NO CONFIRMADO. Solo prensa (dplnews, metro.pr, newsismybusiness) sobre la fibra de PREPA Networks/PrepaNet, sin rutas;
+    www2.ntia.gov critical_hub_fs_0.pdf: Critical Hub construyó microondas (más de 180 millas) y un cable submarino, no fibra terrestre;
+    energy.gov CX-035776: sustitución de fibra en las regiones oeste y sur de Puerto Rico, sin trazado; docs.pr.gov (BEAD, vol. 1): nada sobre troncales.
+TT  NO CONFIRMADO. tstt.co.tt/company-overview: solo «deploying both wireless and fiber optic networks»; nada en tatt.org.tt; el resto es prensa.
+SR  NO CONFIRMADO. telesur.sr/zakelijk/oil-gas/ (red de fibra «countrywide», sin rutas); Telesur, boletín Fiber Vibes n.º 7 (ene. 2018):
+    240 armarios MSAN «van Albina tot en met Nieuw Nickerie» y fibra colgada en postes de EBS, obras en curso; no describe ninguna troncal entre ciudades.
+SZ  NO CONFIRMADO. uasf.esccom.org.sz (Backbone Network): EPTC opera la troncal nacional, con rutas «North, West and South» hacia Sudáfrica y una
+    ruta al este hacia Maputo por la fibra de las líneas de MOTRACO, sin nombrar ciudades ni fechas de servicio (el mapa es una imagen);
+    Banco Mundial, Eswatini Digital Economy Assessment (2022): la troncal existe y aún tiene mucho cobre, sin rutas.
+MT  NO CONFIRMADO. Búsqueda: solo FTTH de GO («true fibre island»); Malta mide ~27 km, no caben rutas terrestres de larga distancia.
+MU  NO CONFIRMADO. telecom.mu (perfil de la empresa): nada sobre la troncal; ninguna fuente oficial con rutas.
+GW  NO CONFIRMADO. Banco Mundial, ISR del WARCIP (P155876, jun. 2022): troncal corta Suro–Antula casi terminada y troncal nacional en licitación;
+    pe-omvg.org/node/6: línea OMVG de 225 kV con 36 pares de fibra, 218 km en Guinea-Bisáu; ISR del proyecto OMVG (P146830, abr. 2025):
+    1.677 km de fibra construidos, sin decir que se use para telecomunicaciones. Ninguna ruta de fibra en servicio confirmada.
+ER  NO CONFIRMADO. tresor.economie.gouv.fr (DG Trésor, 2 jun. 2022): la red entre ciudades es de microondas; Eritel tendría fibra solo en Asmara
+    y Massawa; Banco Mundial, Missing Broadband Links in the Horn of Africa: ninguna ruta de fibra en Eritrea.
+CV  NO CONFIRMADO. Búsqueda: solo cables submarinos entre islas y EllaLink; ninguna fuente oficial con una ruta terrestre de más de ~100 km.

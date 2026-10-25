@@ -1,0 +1,65 @@
+[
+{
+"nombre": "Eastern Arctic Undersea Fibre Optic Network (EAUFON)",
+"llegadas": [
+{
+"lugar": "Chisasibi",
+"pais": "CA",
+"lat": 53.6644,
+"lon": -78.7925
+},
+{
+"lugar": "Kuujjuarapik",
+"pais": "CA",
+"lat": 55.2769,
+"lon": -77.7586
+},
+{
+"lugar": "Umiujaq",
+"pais": "CA",
+"lat": 56.5519,
+"lon": -76.5481
+},
+{
+"lugar": "Inukjuak",
+"pais": "CA",
+"lat": 58.4533,
+"lon": -78.1025
+},
+{
+"lugar": "Puvirnituq",
+"pais": "CA",
+"lat": 60.0372,
+"lon": -77.2692
+},
+{
+"lugar": "Akulivik",
+"pais": "CA",
+"lat": 60.8167,
+"lon": -78.1883
+},
+{
+"lugar": "Ivujivik",
+"pais": "CA",
+"lat": 62.4172,
+"lon": -77.9111
+},
+{
+"lugar": "Salluit",
+"pais": "CA",
+"lat": 62.2036,
+"lon": -75.6425
+}
+],
+"anio": 2022,
+"km": 2100,
+"duenos": [
+"Kativik Regional Government (KRG)"
+],
+"fuentes": [
+"https://www.krg.ca",
+"https://tamaani.ca",
+"https://www.submarinecablemap.com/submarine-cable/eastern-arctic-undersea-fibre-optic-network-eaufon"
+]
+}
+]

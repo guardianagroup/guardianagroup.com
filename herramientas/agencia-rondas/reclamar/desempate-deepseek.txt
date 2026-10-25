@@ -1,0 +1,15 @@
+Eres una voz de la agencia de GUARDIANA (un servicio de privacidad). Otras dos voces ya respondieron y discrepan en estos puntos; tu respuesta desempata. No tienes búsqueda web: responde con lo que sabes y, si no estás seguro, pon «no_se». Razona lo mínimo, unas líneas por pregunta. Responde SOLO un JSON: {"corte": "AAAA-MM", "respuestas": [{"id": 1, "respuesta": "si|no|no_se", "nota": "una frase"}]}.
+1. Argentina, Ley 25.326, art. 27: ¿el titular puede pedir en cualquier momento el retiro o bloqueo de su nombre de bases de datos con fines de publicidad?
+2. Argentina, Ley 25.326, art. 14: ¿el acceso exige «intimación fehaciente» y el responsable tiene 10 días corridos para responder?
+3. Argentina: ¿un correo electrónico simple basta como intimación fehaciente para ejercer el acceso?
+4. Argentina, Decreto 1558/2001 (reglamentación del art. 5 de la Ley 25.326): ¿el consentimiento puede revocarse?
+5. Chile, Ley 19.628 (texto vigente antes de la Ley 21.719), art. 16: ¿si el responsable no se pronuncia en 2 días hábiles, el titular puede recurrir al juez civil?
+6. Chile, Ley 19.628, art. 3: ¿la persona puede oponerse a que sus datos se usen para publicidad, investigación de mercado o encuestas de opinión?
+7. Chile, Ley 19.628, art. 4: ¿la autorización para tratar datos puede revocarse, por escrito y sin efecto retroactivo?
+8. Uruguay, Ley 19.670 (2018), art. 37: ¿amplió el ámbito de la Ley 18.331 a responsables no establecidos en Uruguay que ofrecen bienes o servicios a habitantes de Uruguay o analizan su comportamiento?
+9. Uruguay, Ley 18.331, art. 21: ¿en bases de datos con fines de publicidad, el titular puede pedir el retiro o bloqueo de sus datos?
+10. Ecuador, Ley Orgánica de Protección de Datos Personales de 2021: ¿reconoce expresamente el derecho a revocar el consentimiento? Di el artículo en la nota.
+11. Perú, Ley 29733: ¿el titular puede revocar su consentimiento en cualquier momento? Di el artículo en la nota.
+12. Colombia, Ley 1581 de 2012, art. 8.e: ¿el titular puede revocar la autorización y pedir la supresión, salvo que tenga un deber legal o contractual de permanecer en la base?
+13. Brasil, LGPD art. 3: ¿se aplica a empresas extranjeras que ofrecen bienes o servicios a personas en Brasil o tratan datos recogidos en Brasil?
+14. California, CCPA §1798.130: ¿una empresa que opera solo en línea y tiene relación directa con el consumidor puede ofrecer solo un correo electrónico como método para las solicitudes de saber, borrar o corregir, mientras que las demás deben ofrecer al menos dos métodos, incluido un teléfono gratuito?

@@ -1,0 +1,456 @@
+[
+{
+"nombre": "RISING 8 (tramo Jakarta-Batam en servicio)",
+"llegadas": [
+{"lugar": "Tanjung Pakis", "pais": "ID", "lat": -5.9813, "lon": 107.1209},
+{"lugar": "Tanjung Bemban, Batam", "pais": "ID", "lat": 1.1732, "lon": 104.1331}
+],
+"anio": 2026,
+"km": 1054,
+"duenos": ["PT Ketrosden Triasmitra", "MoraRepublic"],
+"fuentes": [
+"https://www.morarepublic.co.id/our-company/news/rising-8-submarine-cable-system-commissioned-strengthening-indonesia-digital-connectivity",
+"https://www.submarinenetworks.com/en/systems/intra-asia/rising-8"
+]
+},
+{
+"nombre": "JAKABARE",
+"llegadas": [
+{"lugar": "Tanjung Pakis", "pais": "ID", "lat": -5.9813, "lon": 107.1209},
+{"lugar": "Sungai Kakap", "pais": "ID", "lat": -0.0671, "lon": 109.1832},
+{"lugar": "Tanjung Bemban, Batam", "pais": "ID", "lat": 1.1732, "lon": 104.1331},
+{"lugar": "Changi", "pais": "SG", "lat": 1.389, "lon": 103.987}
+],
+"anio": 2009,
+"km": 1330,
+"duenos": ["Indosat Ooredoo Hutchison"],
+"fuentes": [
+"https://www.sec.gov/Archives/edgar/data/929700/000092970008000028/deployjakabare.htm"
+]
+},
+{
+"nombre": "Jakarta-Surabaya Cable System (JAYABAYA)",
+"llegadas": [
+{"lugar": "Tanjung Pakis", "pais": "ID", "lat": -5.9813, "lon": 107.1209},
+{"lugar": "Cirebon", "pais": "ID", "lat": -6.7167, "lon": 108.5667},
+{"lugar": "Kendal", "pais": "ID", "lat": -7.0265, "lon": 110.1879},
+{"lugar": "Banyu Urip, Surabaya", "pais": "ID", "lat": -7.2719, "lon": 112.7197}
+],
+"anio": 2018,
+"km": 881,
+"duenos": ["PT Ketrosden Triasmitra"],
+"fuentes": [
+"https://triasmitra.com/services/developer",
+"https://triasmitra.com/index.php/news-updates/news/sistem-komunikasi-kabel-laut-jakarta-surabaya-triasmitra-resmi-beroperasi"
+]
+},
+{
+"nombre": "Medan-Dumai Cable System (DAMAI)",
+"llegadas": [
+{"lugar": "Medan", "pais": "ID", "lat": 3.7521, "lon": 98.6761},
+{"lugar": "Panipahan", "pais": "ID", "lat": 2.4524, "lon": 100.3133},
+{"lugar": "Dumai", "pais": "ID", "lat": 1.6656, "lon": 101.4476}
+],
+"anio": 2020,
+"km": 572,
+"duenos": ["PT Ketrosden Triasmitra"],
+"fuentes": [
+"https://triasmitra.com/services/developer",
+"https://triasmitra.com/about/company-overview"
+]
+},
+{
+"nombre": "Biznet Nusantara Cable System-1 (BNCS-1), segmento Anyer-Kalianda",
+"llegadas": [
+{"lugar": "Anyer, Serang", "pais": "ID", "lat": -6.0737, "lon": 105.8839},
+{"lugar": "Kalianda", "pais": "ID", "lat": -5.7693, "lon": 105.5849}
+],
+"anio": 2024,
+"km": 62,
+"duenos": ["Biznet", "PT Supra Primatama Nusantara"],
+"fuentes": [
+"https://www.biznetnetworks.com/wp-content/uploads/2025/07/Biznet-Nusantara-Cable-System.pdf"
+]
+},
+{
+"nombre": "Biznet Nusantara Cable System-1 (BNCS-1), segmento Sungsang-Muntok",
+"llegadas": [
+{"lugar": "Sungsang, Banyuasin", "pais": "ID", "lat": -2.2953, "lon": 104.8745},
+{"lugar": "Muntok, Bangka Barat", "pais": "ID", "lat": -2.0652, "lon": 105.1643}
+],
+"anio": 2024,
+"km": 44,
+"duenos": ["Biznet", "PT Supra Primatama Nusantara"],
+"fuentes": [
+"https://www.biznetnetworks.com/wp-content/uploads/2025/07/Biznet-Nusantara-Cable-System.pdf"
+]
+},
+{
+"nombre": "Patara-2",
+"llegadas": [
+{"lugar": "Waisai", "pais": "ID", "lat": -0.3834, "lon": 130.8576},
+{"lugar": "Manokwari", "pais": "ID", "lat": -0.8615, "lon": 134.062},
+{"lugar": "Supiori", "pais": "ID", "lat": -0.7295, "lon": 135.6385}
+],
+"anio": 2023,
+"km": 1200,
+"duenos": ["Telkom Indonesia"],
+"fuentes": [
+"https://aro.telkom.co.id/sites/berita/id_ID/news/sinergi-telkomgroup-dan-pemerintah-demi-wujudkan-infrastruktur-skkl-berkualitas-1597",
+"https://geocables.com/cable/patara-2"
+]
+},
+{
+"nombre": "Batam-Rengit Cable System (BRCS)",
+"llegadas": [
+{"lugar": "Tanjung Pinggir, Batam", "pais": "ID", "lat": 1.0668, "lon": 104.0166},
+{"lugar": "Rengit", "pais": "MY", "lat": 1.6771, "lon": 103.1477}
+],
+"anio": 2007,
+"km": 64,
+"duenos": ["XL Axiata"],
+"fuentes": [
+"https://staticxl.ext.xlaxiata.co.id/s3fs-public/media/documents/3_XL_AR2007_EN.pdf",
+"https://inet.detik.com/telecommunication/d-851313/punya-kabel-laut-xl-masih-harapkan-sli"
+]
+},
+{
+"nombre": "BALOK (Bali-Lombok)",
+"llegadas": [
+{"lugar": "Seraya, Bali", "pais": "ID", "lat": -8.3863, "lon": 115.7467},
+{"lugar": "Senggigi, Lombok", "pais": "ID", "lat": -8.4855, "lon": 116.0473}
+],
+"anio": 2016,
+"km": 60,
+"duenos": ["XL Axiata"],
+"fuentes": [
+"https://pktl.menlhk.go.id/assets/img/publication/BukuDatadanInformasiTahun2016.pdf",
+"https://www.submarinecablemap.com/submarine-cable/balok"
+]
+},
+{
+"nombre": "East-West Submarine Cable System (EWSCS)",
+"llegadas": [
+{"lugar": "Mersing", "pais": "MY", "lat": 2.2955, "lon": 103.8499},
+{"lugar": "Terempa", "pais": "ID", "lat": 3.2071, "lon": 106.2111},
+{"lugar": "Penarik", "pais": "ID", "lat": 3.6668, "lon": 108.2902},
+{"lugar": "Kuching", "pais": "MY", "lat": 1.5202, "lon": 110.3537}
+],
+"anio": 2004,
+"km": 950,
+"duenos": ["SACOFA"],
+"fuentes": [
+"https://www.sacofa.com.my/services",
+"https://geocables.com/cable/east-west-submarine-cable-system"
+]
+},
+{
+"nombre": "Labuan-Brunei Cable System (LBC)",
+"llegadas": [
+{"lugar": "Kiamsam, Labuan", "pais": "MY", "lat": 5.2553, "lon": 115.1689},
+{"lugar": "Tungku", "pais": "BN", "lat": 4.9264, "lon": 114.8858}
+],
+"anio": 2021,
+"km": 52,
+"duenos": ["Common Tower Technologies Sdn Bhd"],
+"fuentes": [
+"https://cttsb.com.my/labuan-brunei-cable-system/",
+"https://cttsb.com.my/company-overview/achievements/"
+]
+},
+{
+"nombre": "Besut-Perhentian Islands",
+"llegadas": [
+{"lugar": "Kampung Raja, Besut", "pais": "MY", "lat": 5.7916, "lon": 102.5717},
+{"lugar": "Pulau Perhentian Kecil", "pais": "MY", "lat": 5.9066, "lon": 102.7229},
+{"lugar": "Pulau Perhentian Besar", "pais": "MY", "lat": 5.9029, "lon": 102.7547}
+],
+"anio": 2018,
+"km": 21,
+"duenos": ["Telekom Malaysia"],
+"fuentes": [
+"https://www.mcmc.gov.my/skmmgovmy/media/General/pdf/Industry-Performance-Report-2018.pdf",
+"https://geocables.com/cable/besut-perhentian-islands"
+]
+},
+{
+"nombre": "Lumut-Pangkor Island",
+"llegadas": [
+{"lugar": "Lumut", "pais": "MY", "lat": 4.2285, "lon": 100.6292},
+{"lugar": "Pantai Teluk Baharu, Pulau Pangkor", "pais": "MY", "lat": 4.193, "lon": 100.5796}
+],
+"anio": 2018,
+"km": 4,
+"duenos": ["Telekom Malaysia"],
+"fuentes": [
+"https://www.mcmc.gov.my/skmmgovmy/media/General/pdf/Industry-Performance-Report-2018.pdf",
+"https://geocables.com/cable/lumut-pangkor-island"
+]
+},
+{
+"nombre": "Rompin-Tioman Island",
+"llegadas": [
+{"lugar": "Kuala Rompin", "pais": "MY", "lat": 2.8003, "lon": 103.4915},
+{"lugar": "Kampung Tekek, Pulau Tioman", "pais": "MY", "lat": 2.8164, "lon": 104.157}
+],
+"anio": 2018,
+"km": 75,
+"duenos": ["Telekom Malaysia"],
+"fuentes": [
+"https://www.mcmc.gov.my/skmmgovmy/media/General/pdf/Industry-Performance-Report-2018.pdf",
+"https://geocables.com/cable/rompin-tioman-island"
+]
+},
+{
+"nombre": "Okinawa Cellular Cable",
+"llegadas": [
+{"lugar": "Nago, Okinawa", "pais": "JP", "lat": 26.5915, "lon": 127.9773},
+{"lugar": "Hioki, Kagoshima", "pais": "JP", "lat": 31.6346, "lon": 130.4029}
+],
+"anio": 2020,
+"km": 780,
+"duenos": ["Okinawa Cellular Telephone Company"],
+"fuentes": [
+"https://corp.okinawa-cellular.jp/about-us/sdgs/action01/",
+"https://news.kddi.com/kddi/corporate/newsrelease/2020/03/31/4352.html"
+]
+},
+{
+"nombre": "Ogasawara Cable Network",
+"llegadas": [
+{"lugar": "Hachijojima", "pais": "JP", "lat": 33.1123, "lon": 139.7968},
+{"lugar": "Chichijima", "pais": "JP", "lat": 27.0665, "lon": 142.2041},
+{"lugar": "Hahajima", "pais": "JP", "lat": 26.6509, "lon": 142.1599}
+],
+"anio": 2011,
+"km": 1038,
+"duenos": ["Gobierno Metropolitano de Tokio"],
+"fuentes": [
+"https://www.digitalservice.metro.tokyo.lg.jp/business/tokyo-data-highway/island",
+"https://geocables.com/cable/ogasawara-cable-network"
+]
+},
+{
+"nombre": "YUI-1 (Okinawa-Ishigaki)",
+"llegadas": [
+{"lugar": "Naha, Okinawa", "pais": "JP", "lat": 26.2124, "lon": 127.6806},
+{"lugar": "Shiraho, Ishigaki", "pais": "JP", "lat": 24.3884, "lon": 124.2451}
+],
+"anio": 2023,
+"km": 460,
+"duenos": ["Okinawa Cellular Telephone Company", "NTT West", "SoftBank"],
+"fuentes": [
+"https://okinawa-cellular.jp/common/uploads/A3_sustainabilityreport2023_240214_ENG.pdf",
+"https://geocables.com/cable/yui"
+]
+},
+{
+"nombre": "YUI-2 (Kume-Miyako)",
+"llegadas": [
+{"lugar": "Nakadomari, Kumejima", "pais": "JP", "lat": 26.3488, "lon": 126.7474},
+{"lugar": "Hirara, Miyakojima", "pais": "JP", "lat": 24.7946, "lon": 125.3013}
+],
+"anio": 2023,
+"km": 260,
+"duenos": ["Okinawa Cellular Telephone Company", "NTT West", "SoftBank"],
+"fuentes": [
+"https://okinawa-cellular.jp/common/uploads/A3_sustainabilityreport2023_240214_ENG.pdf",
+"https://geocables.com/cable/yui"
+]
+},
+{
+"nombre": "Taiwan-Matsu No. 4",
+"llegadas": [
+{"lugar": "Bali, Nueva Taipéi", "pais": "TW", "lat": 25.15, "lon": 121.3832},
+{"lugar": "Dongyin", "pais": "TW", "lat": 26.3673, "lon": 120.493},
+{"lugar": "Nangan", "pais": "TW", "lat": 26.1552, "lon": 119.9344},
+{"lugar": "Xiju", "pais": "TW", "lat": 25.9731, "lon": 119.9391}
+],
+"anio": 2026,
+"km": 294,
+"duenos": ["Chunghwa Telecom"],
+"fuentes": [
+"https://web.moda.gov.tw/en/press/press-releases/20658",
+"https://www.cht.com.tw/zh-tw/home/cht/messages/2026/0918-1100"
+]
+},
+{
+"nombre": "Palawan-Iloilo Cable System",
+"llegadas": [
+{"lugar": "San Jose de Buenavista, Antique", "pais": "PH", "lat": 10.7488, "lon": 121.9413},
+{"lugar": "Taytay, Palawan", "pais": "PH", "lat": 10.8196, "lon": 119.5004}
+],
+"anio": 2014,
+"km": 300,
+"duenos": ["PLDT"],
+"fuentes": [
+"https://www.philstar.com/business/2014/01/27/1283294/pldt-completes-p861-m-submarine-cable-palawan/amp/",
+"https://geocables.com/cable/palawan-iloilo-cable-system"
+]
+},
+{
+"nombre": "Jeju-Mainland 2",
+"llegadas": [
+{"lugar": "Goheung", "pais": "KR", "lat": 34.6094, "lon": 127.286},
+{"lugar": "Goseong-ri, Jeju", "pais": "KR", "lat": 33.4416, "lon": 126.9093}
+],
+"anio": 1996,
+"km": 191,
+"duenos": ["KT"],
+"fuentes": [
+"https://biz.chosun.com/site/data/html_dir/1996/12/19/1996121970137.html",
+"https://geocables.com/cable/jeju-mainland-2"
+]
+},
+{
+"nombre": "Jeju-Mainland 3",
+"llegadas": [
+{"lugar": "Mijo-myeon, Namhae", "pais": "KR", "lat": 34.7284, "lon": 128.0274},
+{"lugar": "Goseong-ri, Jeju", "pais": "KR", "lat": 33.4416, "lon": 126.9093}
+],
+"anio": 2000,
+"km": 236,
+"duenos": ["KT"],
+"fuentes": [
+"https://lsmarinesolution.co.kr/eng/History",
+"https://geocables.com/cable/jeju-mainland-3"
+]
+},
+{
+"nombre": "Jeju-Udo",
+"llegadas": [
+{"lugar": "Goseong-ri, Jeju", "pais": "KR", "lat": 33.4416, "lon": 126.9093},
+{"lugar": "Udo", "pais": "KR", "lat": 33.5053, "lon": 126.9558}
+],
+"anio": 2023,
+"km": 3,
+"duenos": ["SK Telecom", "KT", "LG Uplus", "KCTV Jeju Broadcasting"],
+"fuentes": [
+"https://news.sktelecom.com/200215",
+"https://www.investkorea.org/jj-en/bbs/i-1497/detail.do?ntt_sn=491371"
+]
+},
+{
+"nombre": "Ulleung-Mainland 2",
+"llegadas": [
+{"lugar": "Hosan-ri", "pais": "KR", "lat": 37.1751, "lon": 129.3387},
+{"lugar": "Ulleung", "pais": "KR", "lat": 37.4893, "lon": 130.8933}
+],
+"anio": 2016,
+"km": 164,
+"duenos": ["KT"],
+"fuentes": [
+"https://lsmarinesolution.co.kr/eng/Performance120152016",
+"https://lsmarinesolution.co.kr/eng/History"
+]
+},
+{
+"nombre": "Guam Okinawa Kyushu Incheon (GOKI)",
+"llegadas": [
+{"lugar": "Tumon Bay, Guam", "pais": "GU", "lat": 13.5136, "lon": 144.8006},
+{"lugar": "Naha, Okinawa", "pais": "JP", "lat": 26.2124, "lon": 127.6806},
+{"lugar": "Kitakyushu", "pais": "JP", "lat": 33.8393, "lon": 131.032}
+],
+"anio": 2013,
+"km": 4244,
+"duenos": ["AT&T"],
+"fuentes": [
+"https://xtera.com/experience/",
+"https://geocables.com/cable/guam-okinawa-kyushu-incheon-goki"
+]
+},
+{
+"nombre": "Nationwide Submarine Cable Ooredoo Maldives (NaSCOM)",
+"llegadas": [
+{"lugar": "Kulhudhufushi", "pais": "MV", "lat": 6.6224, "lon": 73.0714},
+{"lugar": "Eydhafushi", "pais": "MV", "lat": 5.1032, "lon": 73.0708},
+{"lugar": "Hulhumalé", "pais": "MV", "lat": 4.2119, "lon": 73.5402},
+{"lugar": "Kolhufushi", "pais": "MV", "lat": 2.7768, "lon": 73.4246},
+{"lugar": "Thinadhoo", "pais": "MV", "lat": 0.5311, "lon": 72.9977},
+{"lugar": "Hithadhoo", "pais": "MV", "lat": -0.606, "lon": 73.0892}
+],
+"anio": 2016,
+"km": 1136,
+"duenos": ["Ooredoo Maldives"],
+"fuentes": [
+"https://www.ooredoo.com/en/media/news_view/ooredoos-nationwide-submarine-cable-paves-the-way-to-4g-network-across-maldives/",
+"https://www.huawei.com/en/news/2016/12/Ooredoo-Huawei-Submarine-Cable-Maldives"
+]
+},
+{
+"nombre": "Dhiraagu Domestic Submarine Cable Network",
+"llegadas": [
+{"lugar": "Kulhudhufushi", "pais": "MV", "lat": 6.6224, "lon": 73.0714},
+{"lugar": "Eydhafushi", "pais": "MV", "lat": 5.1032, "lon": 73.0708},
+{"lugar": "Hulhumalé", "pais": "MV", "lat": 4.2119, "lon": 73.5402},
+{"lugar": "Dhangethi", "pais": "MV", "lat": 3.6081, "lon": 72.9556},
+{"lugar": "Gan, Laamu", "pais": "MV", "lat": 1.9184, "lon": 73.5447},
+{"lugar": "Gahdhoo", "pais": "MV", "lat": 0.2888, "lon": 73.4555},
+{"lugar": "Fuvahmulah", "pais": "MV", "lat": -0.2983, "lon": 73.4269},
+{"lugar": "Hithadhoo", "pais": "MV", "lat": -0.606, "lon": 73.0892}
+],
+"anio": 2012,
+"km": 1253,
+"duenos": ["Dhiraagu"],
+"fuentes": [
+"https://www.dhiraagu.com.mv/about-us/corporate-information/milestones-and-achievements",
+"https://www.unescap.org/sites/default/files/Broadband%20Infrastructure%20in%20South%20and%20West%20Asia%20%28draft%29_0.pdf"
+]
+},
+{
+"nombre": "Maldives Sri Lanka Cable (MSC)",
+"llegadas": [
+{"lugar": "Hulhumalé", "pais": "MV", "lat": 4.2119, "lon": 73.5402},
+{"lugar": "Mount Lavinia", "pais": "LK", "lat": 6.8332, "lon": 79.8668}
+],
+"anio": 2021,
+"km": 840,
+"duenos": ["Dhiraagu", "Ooredoo Maldives", "Dialog Axiata"],
+"fuentes": [
+"https://www.dhiraagu.com.mv/about-us/investor-relations/announcements-disclosures/dhiraagu-has-joined-a-multi-party-agreement-to-connect-the-maldives-to-sri-lanka-through-a-second-fiber-optic-submarine-cable",
+"https://www.submarinenetworks.com/en/systems/intra-asia/msc"
+]
+},
+{
+"nombre": "Sorsogon-Samar Submarine Fiber Optical Interconnection Project (SSSFOIP)",
+"llegadas": [
+{"lugar": "Santa Magdalena, Sorsogon", "pais": "PH", "lat": 12.6453, "lon": 124.1071},
+{"lugar": "Allen, Northern Samar", "pais": "PH", "lat": 12.5014, "lon": 124.2823}
+],
+"anio": 2019,
+"km": 21,
+"duenos": ["National Grid Corporation of the Philippines"],
+"fuentes": [
+"https://www.sbss.com/uploads/SBSS%202021%20Corporate%20Presentation.pdf",
+"https://geocables.com/cable/sorsogon-samar-submarine-fiber-optical-interconnection-project-sssfoip"
+]
+},
+{
+"nombre": "Tanjung Pandan-Sungai Kakap",
+"llegadas": [
+{"lugar": "Tanjung Pandan, Belitung", "pais": "ID", "lat": -2.7674, "lon": 107.6629},
+{"lugar": "Sungai Kakap, Kalimantan Occidental", "pais": "ID", "lat": -0.0671, "lon": 109.1832}
+],
+"anio": 2019,
+"km": 348,
+"duenos": ["Moratelindo"],
+"fuentes": [
+"https://www.moratelindo.co.id/download/public-announcement/11.%20080719%20-%20LRPD%20Obligasi%20per%20300619%20%28English%29.pdf",
+"https://geocables.com/cable/tanjung-pandan-sungai-kakap"
+]
+},
+{
+"nombre": "Jalapati",
+"llegadas": [
+{"lugar": "Muncar, Java Oriental", "pais": "ID", "lat": -8.448, "lon": 114.3104},
+{"lugar": "Candikusuma, Bali", "pais": "ID", "lat": -8.2946, "lon": 114.5272}
+],
+"anio": 2023,
+"km": 45,
+"duenos": ["PT Communication Cable Systems Indonesia (CCSI)"],
+"fuentes": [
+"https://www.ccsi.co.id/wp-content/uploads/2025/03/AR-CCSI-2024-_-FINAL-Small.pdf",
+"https://geocables.com/cable/jalapati"
+]
+}
+]

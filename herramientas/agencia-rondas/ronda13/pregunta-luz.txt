@@ -1,0 +1,14 @@
+Ronda 13 · Pregunta de diseño (GUARDIANA, web de privacidad; fondo casi negro #06080C, títulos en Instrument Serif, texto en Hanken Grotesk).
+
+Al hacer scroll, los títulos y las frases grandes tienen un efecto. Hay dos opciones:
+(A) El texto ya se ve, pero oscurecido (13 % de luz), y se ilumina palabra a palabra cuando llega al 78 % de la pantalla; las últimas palabras brillan un instante. Es lo que hay hoy en la portada nueva y en «Conocer GUARDIANA».
+(B) El texto aparece desde la nada (de invisible a visible, con un pequeño desplazamiento hacia arriba) cuando entra en la pantalla.
+
+El fundador quiere toda la web con la letra de la portada y con este efecto, y pregunta cuál es mejor.
+
+Responde, como agencia de primer nivel:
+1. A, B o una mezcla, y por qué, en 5 puntos como máximo: que se lea bien en el móvil, que se sienta premium, que no canse, que quien lee rápido no tenga que esperar, accesibilidad (movimiento reducido, lectores de pantalla) y rendimiento.
+2. En qué páginas sí y en cuáles no: portada, «Conocer», «El negocio de tus datos», las fichas de cada empresa de publicidad, privacidad, términos, contacto y la app Órbita.
+3. Para los textos largos (párrafos), ¿también el efecto o solo en títulos?
+
+Respuesta corta y concreta, por favor.

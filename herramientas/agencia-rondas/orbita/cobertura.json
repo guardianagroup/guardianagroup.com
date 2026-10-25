@@ -1,0 +1,1757 @@
+[
+ {
+  "cc": "AD",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "AE",
+  "cables": 14,
+  "centros_datos": 8,
+  "intercambio": 2,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "AF",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "AL",
+  "cables": 2,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "AM",
+  "cables": 0,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "AO",
+  "cables": 4,
+  "centros_datos": 3,
+  "intercambio": 1,
+  "fibra_lineas": 16,
+  "fibra_km": 10792,
+  "sin_mar": false
+ },
+ {
+  "cc": "AR",
+  "cables": 9,
+  "centros_datos": 18,
+  "intercambio": 3,
+  "fibra_lineas": 2,
+  "fibra_km": 2053,
+  "sin_mar": false
+ },
+ {
+  "cc": "AT",
+  "cables": 0,
+  "centros_datos": 11,
+  "intercambio": 1,
+  "fibra_lineas": 19,
+  "fibra_km": 2824,
+  "sin_mar": true
+ },
+ {
+  "cc": "AU",
+  "cables": 22,
+  "centros_datos": 61,
+  "intercambio": 5,
+  "fibra_lineas": 36,
+  "fibra_km": 25302,
+  "sin_mar": false
+ },
+ {
+  "cc": "AW",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "AZ",
+  "cables": 0,
+  "centros_datos": 3,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "BA",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "BB",
+  "cables": 3,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "BD",
+  "cables": 2,
+  "centros_datos": 3,
+  "intercambio": 2,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "BE",
+  "cables": 7,
+  "centros_datos": 22,
+  "intercambio": 1,
+  "fibra_lineas": 34,
+  "fibra_km": 1704,
+  "sin_mar": false
+ },
+ {
+  "cc": "BF",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "BG",
+  "cables": 3,
+  "centros_datos": 3,
+  "intercambio": 1,
+  "fibra_lineas": 27,
+  "fibra_km": 3766,
+  "sin_mar": false
+ },
+ {
+  "cc": "BH",
+  "cables": 5,
+  "centros_datos": 5,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "BJ",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "BM",
+  "cables": 4,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "BN",
+  "cables": 2,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "BO",
+  "cables": 0,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 2,
+  "fibra_km": 999,
+  "sin_mar": true
+ },
+ {
+  "cc": "BR",
+  "cables": 16,
+  "centros_datos": 80,
+  "intercambio": 13,
+  "fibra_lineas": 43,
+  "fibra_km": 33768,
+  "sin_mar": false
+ },
+ {
+  "cc": "BS",
+  "cables": 1,
+  "centros_datos": 4,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "BT",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "BW",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 4,
+  "fibra_km": 3913,
+  "sin_mar": true
+ },
+ {
+  "cc": "BY",
+  "cables": 0,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "BZ",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "CA",
+  "cables": 6,
+  "centros_datos": 53,
+  "intercambio": 3,
+  "fibra_lineas": 47,
+  "fibra_km": 33714,
+  "sin_mar": false
+ },
+ {
+  "cc": "CD",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 1,
+  "fibra_km": 493,
+  "sin_mar": false
+ },
+ {
+  "cc": "CF",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "CG",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 2,
+  "fibra_lineas": 3,
+  "fibra_km": 1530,
+  "sin_mar": false
+ },
+ {
+  "cc": "CH",
+  "cables": 0,
+  "centros_datos": 27,
+  "intercambio": 5,
+  "fibra_lineas": 78,
+  "fibra_km": 5501,
+  "sin_mar": true
+ },
+ {
+  "cc": "CI",
+  "cables": 6,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "CL",
+  "cables": 7,
+  "centros_datos": 30,
+  "intercambio": 2,
+  "fibra_lineas": 10,
+  "fibra_km": 5953,
+  "sin_mar": false
+ },
+ {
+  "cc": "CM",
+  "cables": 6,
+  "centros_datos": 0,
+  "intercambio": 2,
+  "fibra_lineas": 1,
+  "fibra_km": 951,
+  "sin_mar": false
+ },
+ {
+  "cc": "CN",
+  "cables": 13,
+  "centros_datos": 89,
+  "intercambio": 4,
+  "fibra_lineas": 110,
+  "fibra_km": 90084,
+  "sin_mar": false
+ },
+ {
+  "cc": "CO",
+  "cables": 8,
+  "centros_datos": 17,
+  "intercambio": 4,
+  "fibra_lineas": 7,
+  "fibra_km": 2378,
+  "sin_mar": false
+ },
+ {
+  "cc": "CR",
+  "cables": 2,
+  "centros_datos": 9,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "CU",
+  "cables": 3,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "CW",
+  "cables": 2,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "CY",
+  "cables": 14,
+  "centros_datos": 2,
+  "intercambio": 2,
+  "fibra_lineas": 1,
+  "fibra_km": 63,
+  "sin_mar": false
+ },
+ {
+  "cc": "CZ",
+  "cables": 0,
+  "centros_datos": 18,
+  "intercambio": 2,
+  "fibra_lineas": 205,
+  "fibra_km": 9065,
+  "sin_mar": true
+ },
+ {
+  "cc": "DE",
+  "cables": 6,
+  "centros_datos": 131,
+  "intercambio": 10,
+  "fibra_lineas": 190,
+  "fibra_km": 23482,
+  "sin_mar": false
+ },
+ {
+  "cc": "DJ",
+  "cables": 13,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "DK",
+  "cables": 22,
+  "centros_datos": 14,
+  "intercambio": 0,
+  "fibra_lineas": 12,
+  "fibra_km": 661,
+  "sin_mar": false
+ },
+ {
+  "cc": "DO",
+  "cables": 5,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "DZ",
+  "cables": 8,
+  "centros_datos": 2,
+  "intercambio": 0,
+  "fibra_lineas": 24,
+  "fibra_km": 9556,
+  "sin_mar": false
+ },
+ {
+  "cc": "EC",
+  "cables": 5,
+  "centros_datos": 8,
+  "intercambio": 2,
+  "fibra_lineas": 2,
+  "fibra_km": 570,
+  "sin_mar": false
+ },
+ {
+  "cc": "EE",
+  "cables": 8,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 7,
+  "fibra_km": 475,
+  "sin_mar": false
+ },
+ {
+  "cc": "EG",
+  "cables": 16,
+  "centros_datos": 3,
+  "intercambio": 1,
+  "fibra_lineas": 1,
+  "fibra_km": 190,
+  "sin_mar": false
+ },
+ {
+  "cc": "ER",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "ES",
+  "cables": 20,
+  "centros_datos": 38,
+  "intercambio": 2,
+  "fibra_lineas": 43,
+  "fibra_km": 12134,
+  "sin_mar": false
+ },
+ {
+  "cc": "ET",
+  "cables": 0,
+  "centros_datos": 3,
+  "intercambio": 1,
+  "fibra_lineas": 21,
+  "fibra_km": 8099,
+  "sin_mar": true
+ },
+ {
+  "cc": "FI",
+  "cables": 12,
+  "centros_datos": 19,
+  "intercambio": 2,
+  "fibra_lineas": 26,
+  "fibra_km": 2731,
+  "sin_mar": false
+ },
+ {
+  "cc": "FJ",
+  "cables": 6,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "FM",
+  "cables": 3,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "FO",
+  "cables": 5,
+  "centros_datos": 1,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "FR",
+  "cables": 58,
+  "centros_datos": 168,
+  "intercambio": 6,
+  "fibra_lineas": 138,
+  "fibra_km": 20126,
+  "sin_mar": false
+ },
+ {
+  "cc": "GA",
+  "cables": 3,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 3,
+  "fibra_km": 1234,
+  "sin_mar": false
+ },
+ {
+  "cc": "GB",
+  "cables": 76,
+  "centros_datos": 146,
+  "intercambio": 2,
+  "fibra_lineas": 87,
+  "fibra_km": 10226,
+  "sin_mar": false
+ },
+ {
+  "cc": "GE",
+  "cables": 2,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 7,
+  "fibra_km": 357,
+  "sin_mar": false
+ },
+ {
+  "cc": "GH",
+  "cables": 6,
+  "centros_datos": 3,
+  "intercambio": 1,
+  "fibra_lineas": 7,
+  "fibra_km": 2084,
+  "sin_mar": false
+ },
+ {
+  "cc": "GI",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "GL",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "GM",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "GN",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "GP",
+  "cables": 4,
+  "centros_datos": 1,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "GQ",
+  "cables": 3,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "GR",
+  "cables": 13,
+  "centros_datos": 8,
+  "intercambio": 1,
+  "fibra_lineas": 53,
+  "fibra_km": 5376,
+  "sin_mar": false
+ },
+ {
+  "cc": "GT",
+  "cables": 4,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "GW",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "GY",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "HK",
+  "cables": 23,
+  "centros_datos": 16,
+  "intercambio": 3,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "HN",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 2,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "HR",
+  "cables": 1,
+  "centros_datos": 7,
+  "intercambio": 4,
+  "fibra_lineas": 27,
+  "fibra_km": 1800,
+  "sin_mar": false
+ },
+ {
+  "cc": "HT",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "HU",
+  "cables": 0,
+  "centros_datos": 15,
+  "intercambio": 3,
+  "fibra_lineas": 88,
+  "fibra_km": 6773,
+  "sin_mar": true
+ },
+ {
+  "cc": "ID",
+  "cables": 21,
+  "centros_datos": 18,
+  "intercambio": 3,
+  "fibra_lineas": 27,
+  "fibra_km": 2066,
+  "sin_mar": false
+ },
+ {
+  "cc": "IE",
+  "cables": 17,
+  "centros_datos": 12,
+  "intercambio": 1,
+  "fibra_lineas": 14,
+  "fibra_km": 1355,
+  "sin_mar": false
+ },
+ {
+  "cc": "IL",
+  "cables": 4,
+  "centros_datos": 9,
+  "intercambio": 1,
+  "fibra_lineas": 4,
+  "fibra_km": 307,
+  "sin_mar": false
+ },
+ {
+  "cc": "IN",
+  "cables": 21,
+  "centros_datos": 66,
+  "intercambio": 6,
+  "fibra_lineas": 21,
+  "fibra_km": 15646,
+  "sin_mar": false
+ },
+ {
+  "cc": "IQ",
+  "cables": 2,
+  "centros_datos": 4,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "IR",
+  "cables": 2,
+  "centros_datos": 15,
+  "intercambio": 1,
+  "fibra_lineas": 1,
+  "fibra_km": 1162,
+  "sin_mar": false
+ },
+ {
+  "cc": "IS",
+  "cables": 4,
+  "centros_datos": 4,
+  "intercambio": 1,
+  "fibra_lineas": 3,
+  "fibra_km": 824,
+  "sin_mar": false
+ },
+ {
+  "cc": "IT",
+  "cables": 28,
+  "centros_datos": 42,
+  "intercambio": 6,
+  "fibra_lineas": 83,
+  "fibra_km": 12737,
+  "sin_mar": false
+ },
+ {
+  "cc": "JM",
+  "cables": 4,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "JO",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "JP",
+  "cables": 25,
+  "centros_datos": 62,
+  "intercambio": 3,
+  "fibra_lineas": 61,
+  "fibra_km": 10595,
+  "sin_mar": false
+ },
+ {
+  "cc": "KE",
+  "cables": 8,
+  "centros_datos": 4,
+  "intercambio": 1,
+  "fibra_lineas": 12,
+  "fibra_km": 3556,
+  "sin_mar": false
+ },
+ {
+  "cc": "KG",
+  "cables": 0,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "KH",
+  "cables": 2,
+  "centros_datos": 1,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "KM",
+  "cables": 3,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "KR",
+  "cables": 8,
+  "centros_datos": 15,
+  "intercambio": 1,
+  "fibra_lineas": 11,
+  "fibra_km": 1204,
+  "sin_mar": false
+ },
+ {
+  "cc": "KW",
+  "cables": 3,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "KY",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "KZ",
+  "cables": 0,
+  "centros_datos": 9,
+  "intercambio": 0,
+  "fibra_lineas": 3,
+  "fibra_km": 5744,
+  "sin_mar": true
+ },
+ {
+  "cc": "LA",
+  "cables": 0,
+  "centros_datos": 1,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "LB",
+  "cables": 3,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "LI",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "LK",
+  "cables": 7,
+  "centros_datos": 3,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "LR",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "LS",
+  "cables": 0,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "LT",
+  "cables": 2,
+  "centros_datos": 7,
+  "intercambio": 1,
+  "fibra_lineas": 39,
+  "fibra_km": 3013,
+  "sin_mar": false
+ },
+ {
+  "cc": "LU",
+  "cables": 0,
+  "centros_datos": 3,
+  "intercambio": 1,
+  "fibra_lineas": 5,
+  "fibra_km": 89,
+  "sin_mar": true
+ },
+ {
+  "cc": "LV",
+  "cables": 3,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 67,
+  "fibra_km": 3592,
+  "sin_mar": false
+ },
+ {
+  "cc": "LY",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 6,
+  "fibra_km": 5716,
+  "sin_mar": false
+ },
+ {
+  "cc": "MA",
+  "cables": 7,
+  "centros_datos": 4,
+  "intercambio": 2,
+  "fibra_lineas": 9,
+  "fibra_km": 5696,
+  "sin_mar": false
+ },
+ {
+  "cc": "MC",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "MD",
+  "cables": 0,
+  "centros_datos": 2,
+  "intercambio": 2,
+  "fibra_lineas": 2,
+  "fibra_km": 241,
+  "sin_mar": true
+ },
+ {
+  "cc": "ME",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 5,
+  "fibra_km": 259,
+  "sin_mar": false
+ },
+ {
+  "cc": "MG",
+  "cables": 3,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 6,
+  "fibra_km": 5892,
+  "sin_mar": false
+ },
+ {
+  "cc": "MK",
+  "cables": 0,
+  "centros_datos": 3,
+  "intercambio": 1,
+  "fibra_lineas": 2,
+  "fibra_km": 177,
+  "sin_mar": true
+ },
+ {
+  "cc": "ML",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 2,
+  "fibra_km": 1649,
+  "sin_mar": true
+ },
+ {
+  "cc": "MM",
+  "cables": 3,
+  "centros_datos": 0,
+  "intercambio": 2,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "MN",
+  "cables": 0,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "MO",
+  "cables": 1,
+  "centros_datos": 1,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "MQ",
+  "cables": 8,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "MR",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 3,
+  "fibra_km": 2238,
+  "sin_mar": false
+ },
+ {
+  "cc": "MT",
+  "cables": 2,
+  "centros_datos": 1,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "MU",
+  "cables": 3,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "MV",
+  "cables": 3,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "MW",
+  "cables": 0,
+  "centros_datos": 2,
+  "intercambio": 2,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "MX",
+  "cables": 4,
+  "centros_datos": 28,
+  "intercambio": 1,
+  "fibra_lineas": 68,
+  "fibra_km": 7736,
+  "sin_mar": false
+ },
+ {
+  "cc": "MY",
+  "cables": 19,
+  "centros_datos": 13,
+  "intercambio": 2,
+  "fibra_lineas": 14,
+  "fibra_km": 2457,
+  "sin_mar": false
+ },
+ {
+  "cc": "MZ",
+  "cables": 3,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 4,
+  "fibra_km": 4166,
+  "sin_mar": false
+ },
+ {
+  "cc": "NA",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 8,
+  "fibra_km": 7934,
+  "sin_mar": false
+ },
+ {
+  "cc": "NC",
+  "cables": 4,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "NE",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 4,
+  "fibra_km": 2884,
+  "sin_mar": true
+ },
+ {
+  "cc": "NG",
+  "cables": 8,
+  "centros_datos": 6,
+  "intercambio": 3,
+  "fibra_lineas": 8,
+  "fibra_km": 4759,
+  "sin_mar": false
+ },
+ {
+  "cc": "NL",
+  "cables": 12,
+  "centros_datos": 46,
+  "intercambio": 4,
+  "fibra_lineas": 85,
+  "fibra_km": 2875,
+  "sin_mar": false
+ },
+ {
+  "cc": "NO",
+  "cables": 10,
+  "centros_datos": 7,
+  "intercambio": 2,
+  "fibra_lineas": 53,
+  "fibra_km": 8259,
+  "sin_mar": false
+ },
+ {
+  "cc": "NP",
+  "cables": 0,
+  "centros_datos": 1,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "NZ",
+  "cables": 10,
+  "centros_datos": 11,
+  "intercambio": 3,
+  "fibra_lineas": 12,
+  "fibra_km": 1840,
+  "sin_mar": false
+ },
+ {
+  "cc": "OM",
+  "cables": 13,
+  "centros_datos": 4,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "PA",
+  "cables": 7,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "PE",
+  "cables": 4,
+  "centros_datos": 8,
+  "intercambio": 1,
+  "fibra_lineas": 2,
+  "fibra_km": 1646,
+  "sin_mar": false
+ },
+ {
+  "cc": "PF",
+  "cables": 3,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "PG",
+  "cables": 4,
+  "centros_datos": 3,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "PH",
+  "cables": 15,
+  "centros_datos": 22,
+  "intercambio": 1,
+  "fibra_lineas": 1,
+  "fibra_km": 417,
+  "sin_mar": false
+ },
+ {
+  "cc": "PK",
+  "cables": 9,
+  "centros_datos": 7,
+  "intercambio": 1,
+  "fibra_lineas": 5,
+  "fibra_km": 1681,
+  "sin_mar": false
+ },
+ {
+  "cc": "PL",
+  "cables": 1,
+  "centros_datos": 25,
+  "intercambio": 2,
+  "fibra_lineas": 96,
+  "fibra_km": 10163,
+  "sin_mar": false
+ },
+ {
+  "cc": "PR",
+  "cables": 18,
+  "centros_datos": 2,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "PS",
+  "cables": 0,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "PT",
+  "cables": 16,
+  "centros_datos": 13,
+  "intercambio": 3,
+  "fibra_lineas": 24,
+  "fibra_km": 2955,
+  "sin_mar": false
+ },
+ {
+  "cc": "PY",
+  "cables": 0,
+  "centros_datos": 3,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "QA",
+  "cables": 6,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "RE",
+  "cables": 3,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "RO",
+  "cables": 1,
+  "centros_datos": 10,
+  "intercambio": 1,
+  "fibra_lineas": 84,
+  "fibra_km": 10631,
+  "sin_mar": false
+ },
+ {
+  "cc": "RS",
+  "cables": 0,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 24,
+  "fibra_km": 1408,
+  "sin_mar": true
+ },
+ {
+  "cc": "RU",
+  "cables": 12,
+  "centros_datos": 45,
+  "intercambio": 2,
+  "fibra_lineas": 4,
+  "fibra_km": 10249,
+  "sin_mar": false
+ },
+ {
+  "cc": "RW",
+  "cables": 0,
+  "centros_datos": 2,
+  "intercambio": 2,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "SA",
+  "cables": 14,
+  "centros_datos": 4,
+  "intercambio": 2,
+  "fibra_lineas": 1,
+  "fibra_km": 410,
+  "sin_mar": false
+ },
+ {
+  "cc": "SB",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "SC",
+  "cables": 3,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "SD",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 7,
+  "fibra_km": 5325,
+  "sin_mar": false
+ },
+ {
+  "cc": "SE",
+  "cables": 10,
+  "centros_datos": 24,
+  "intercambio": 4,
+  "fibra_lineas": 23,
+  "fibra_km": 3229,
+  "sin_mar": false
+ },
+ {
+  "cc": "SG",
+  "cables": 30,
+  "centros_datos": 24,
+  "intercambio": 2,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "SI",
+  "cables": 0,
+  "centros_datos": 3,
+  "intercambio": 1,
+  "fibra_lineas": 43,
+  "fibra_km": 1343,
+  "sin_mar": false
+ },
+ {
+  "cc": "SK",
+  "cables": 0,
+  "centros_datos": 7,
+  "intercambio": 1,
+  "fibra_lineas": 70,
+  "fibra_km": 4382,
+  "sin_mar": true
+ },
+ {
+  "cc": "SL",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "SM",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "SN",
+  "cables": 6,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 5,
+  "fibra_km": 1843,
+  "sin_mar": false
+ },
+ {
+  "cc": "SO",
+  "cables": 5,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "SR",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "SS",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "ST",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "SV",
+  "cables": 0,
+  "centros_datos": 2,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "SY",
+  "cables": 2,
+  "centros_datos": 1,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "SZ",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "TG",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 2,
+  "fibra_km": 904,
+  "sin_mar": false
+ },
+ {
+  "cc": "TH",
+  "cables": 13,
+  "centros_datos": 8,
+  "intercambio": 2,
+  "fibra_lineas": 2,
+  "fibra_km": 1414,
+  "sin_mar": false
+ },
+ {
+  "cc": "TJ",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "TL",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "TM",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "TN",
+  "cables": 8,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "TO",
+  "cables": 2,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "TR",
+  "cables": 7,
+  "centros_datos": 14,
+  "intercambio": 1,
+  "fibra_lineas": 74,
+  "fibra_km": 29090,
+  "sin_mar": false
+ },
+ {
+  "cc": "TT",
+  "cables": 4,
+  "centros_datos": 1,
+  "intercambio": 2,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "TW",
+  "cables": 15,
+  "centros_datos": 9,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "TZ",
+  "cables": 4,
+  "centros_datos": 3,
+  "intercambio": 6,
+  "fibra_lineas": 8,
+  "fibra_km": 4016,
+  "sin_mar": false
+ },
+ {
+  "cc": "UA",
+  "cables": 2,
+  "centros_datos": 7,
+  "intercambio": 9,
+  "fibra_lineas": 24,
+  "fibra_km": 6116,
+  "sin_mar": false
+ },
+ {
+  "cc": "UG",
+  "cables": 0,
+  "centros_datos": 2,
+  "intercambio": 1,
+  "fibra_lineas": 10,
+  "fibra_km": 2983,
+  "sin_mar": true
+ },
+ {
+  "cc": "US",
+  "cables": 72,
+  "centros_datos": 451,
+  "intercambio": 15,
+  "fibra_lineas": 1923,
+  "fibra_km": 474725,
+  "sin_mar": false
+ },
+ {
+  "cc": "UY",
+  "cables": 5,
+  "centros_datos": 2,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "UZ",
+  "cables": 0,
+  "centros_datos": 3,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "VE",
+  "cables": 4,
+  "centros_datos": 7,
+  "intercambio": 3,
+  "fibra_lineas": 1,
+  "fibra_km": 913,
+  "sin_mar": false
+ },
+ {
+  "cc": "VN",
+  "cables": 6,
+  "centros_datos": 9,
+  "intercambio": 2,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "VU",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 1,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "WS",
+  "cables": 3,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "XK",
+  "cables": 0,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": true
+ },
+ {
+  "cc": "YE",
+  "cables": 1,
+  "centros_datos": 0,
+  "intercambio": 0,
+  "fibra_lineas": 0,
+  "fibra_km": 0,
+  "sin_mar": false
+ },
+ {
+  "cc": "ZA",
+  "cables": 8,
+  "centros_datos": 17,
+  "intercambio": 3,
+  "fibra_lineas": 354,
+  "fibra_km": 36351,
+  "sin_mar": false
+ },
+ {
+  "cc": "ZM",
+  "cables": 0,
+  "centros_datos": 1,
+  "intercambio": 2,
+  "fibra_lineas": 9,
+  "fibra_km": 5973,
+  "sin_mar": true
+ },
+ {
+  "cc": "ZW",
+  "cables": 0,
+  "centros_datos": 1,
+  "intercambio": 1,
+  "fibra_lineas": 6,
+  "fibra_km": 2622,
+  "sin_mar": true
+ }
+]

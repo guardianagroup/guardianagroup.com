@@ -1,0 +1,509 @@
+[
+  {
+    "nombre": "Trans-Saharan Fibre Backbone - Algeria southbound spine",
+    "operador": "Algérie Télécom / Government of Algeria",
+    "pais": "DZ",
+    "ciudades": [
+      "Algiers",
+      "Ghardaia",
+      "In Salah",
+      "Tamanrasset",
+      "In Guezzam"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.itu.int/en/ITU-D/Technology/Pages/InteractiveTransmissionMaps_EndValidation.aspx ; la UIT documenta redes terrestres argelinas; el Ministerio argelino de telecomunicaciones documentó como completada la dorsal transahariana de aproximadamente 2,548 km entre Algiers e In Guezzam y posteriormente se puso en servicio la interconexión con Niger."
+  },
+  {
+    "nombre": "Telecom Egypt Alexandria-Cairo-Suez terrestrial crossing",
+    "operador": "Telecom Egypt",
+    "pais": "EG",
+    "ciudades": [
+      "Alexandria",
+      "Cairo",
+      "Suez"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://bbmaps.itu.int/bbmaps/ ; https://www.itu.int/en/ITU-D/Technology/Pages/InteractiveTransmissionMaps_EndValidation.aspx ; Telecom Egypt mantiene una infraestructura nacional de rutas terrestres diversificadas y la UIT valida la red TE Data/Telecom Egypt."
+  },
+  {
+    "nombre": "Telecom Egypt Port Said-Cairo-Suez terrestrial crossing",
+    "operador": "Telecom Egypt",
+    "pais": "EG",
+    "ciudades": [
+      "Port Said",
+      "Cairo",
+      "Suez"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://bbmaps.itu.int/bbmaps/ ; https://www.itu.int/en/ITU-D/Technology/Pages/InteractiveTransmissionMaps_EndValidation.aspx ; Telecom Egypt declara múltiples rutas terrestres diversificadas entre sus puntos de llegada y el interior, y la UIT valida su red terrestre."
+  },
+  {
+    "nombre": "Chad Southern Backbone",
+    "operador": "Sotel Tchad",
+    "pais": "TD",
+    "ciudades": [
+      "N'Djamena",
+      "Guelendeng",
+      "Bongor",
+      "Kelo",
+      "Moundou",
+      "M'Baikoro",
+      "Kagpal",
+      "M'Béré"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf ; el diagnóstico digital del Banco Mundial clasifica N'Djamena-M'Béré, 870 km, como 'In service', gestionada por Sotel Tchad y completada en 2011, y enumera los nodos intermedios del tramo sur."
+  },
+  {
+    "nombre": "Chad Eastern Backbone",
+    "operador": "Sudachad",
+    "pais": "TD",
+    "ciudades": [
+      "N'Djamena",
+      "Abéché",
+      "Adré"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Chad-country-diagnostic.pdf ; el Banco Mundial clasifica N'Djamena-Adré, 1,142 km, como 'In service', completada en 2019 y gestionada por Sudachad."
+  },
+  {
+    "nombre": "Benin north-south national backbone",
+    "operador": "State backbone / SBIN, legacy Benin Telecom infrastructure",
+    "pais": "BJ",
+    "ciudades": [
+      "Cotonou",
+      "Bohicon",
+      "Dassa-Zoumé",
+      "Parakou",
+      "Kandi",
+      "Malanville"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://bbmaps.itu.int/bbmaps/ ; https://www.itu.int/en/ITU-D/Technology/Pages/InteractiveTransmissionMaps_EndValidation.aspx ; la UIT valida Benin Telecom y su informe State of Broadband in Africa 2025 describe una dorsal nacional activa de aproximadamente 2,550 km que conecta 50 municipios."
+  },
+  {
+    "nombre": "ECOWAN North Bank / Banjul-Basse corridor",
+    "operador": "Gamtel / ECOWAN",
+    "pais": "GM",
+    "ciudades": [
+      "Banjul",
+      "Barra",
+      "Farafenni",
+      "Basse Santa Su"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://documents1.worldbank.org/curated/en/674601544534500678/pdf/Main-Report.pdf ; el Banco Mundial describe ECOWAN y la red nacional de Gambia, incluida la fibra de Banjul a Basse; documentación posterior del Banco Mundial registra operadores utilizando ECOWAN en 2024."
+  },
+  {
+    "nombre": "ECOWAN South Bank / Banjul-Fatoto corridor",
+    "operador": "Gamtel / ECOWAN",
+    "pais": "GM",
+    "ciudades": [
+      "Banjul",
+      "Brikama",
+      "Soma",
+      "Bansang",
+      "Fatoto"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://documents1.worldbank.org/curated/en/674601544534500678/pdf/Main-Report.pdf ; el Banco Mundial describe el despliegue ECOWAN de aproximadamente 817 km, con cobertura longitudinal hasta el extremo oriental del país; la red registra uso mayorista posterior."
+  },
+  {
+    "nombre": "Eastern Corridor Fiber Optic Backbone",
+    "operador": "NITA / Government of Ghana",
+    "pais": "GH",
+    "ciudades": [
+      "Accra",
+      "Ho",
+      "Hohoe",
+      "Nkwanta",
+      "Yendi",
+      "Tamale",
+      "Bolgatanga",
+      "Bawku"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://moc.gov.gh/eastern-corridor-fiber-optic-backbone/ ; el Ministerio de Comunicaciones de Ghana describe el Eastern Corridor Fiber Optic Backbone; documentación oficial del Gobierno/Banco Mundial registra unos 1,100 km, 10 secciones y 11 nodos DWDM entre Accra y Bawku."
+  },
+  {
+    "nombre": "Sierra Leone backbone to Liberia border",
+    "operador": "Leonecom / National Fibre Backbone Network",
+    "pais": "SL",
+    "ciudades": [
+      "Freetown",
+      "Bo",
+      "Kenema",
+      "Zimmi"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.itu.int/en/ITU-T/Workshops-and-Seminars/qos/20250701/Documents/3-%20NFB.pdf ; Leonecom presentó ante la UIT en 2025 una red nacional de aproximadamente 1,630 km que alcanza las fronteras de Liberia y Guinea; el Banco Mundial documenta el enlace Freetown-Zimmi como parte del backbone nacional."
+  },
+  {
+    "nombre": "Sierra Leone backbone to Guinea border",
+    "operador": "Leonecom / National Fibre Backbone Network",
+    "pais": "SL",
+    "ciudades": [
+      "Freetown",
+      "Makeni",
+      "Kambia",
+      "Gbalamuya"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.itu.int/en/ITU-T/Workshops-and-Seminars/qos/20250701/Documents/3-%20NFB.pdf ; Leonecom informa a la UIT de aproximadamente 1,630 km de fibra subterránea y cobertura de más del 85% de los distritos; el backbone nacional llega a la frontera de Guinea."
+  },
+  {
+    "nombre": "CAB-CAR national backbone",
+    "operador": "Government of the Central African Republic / CAB-CAR",
+    "pais": "CF",
+    "ciudades": [
+      "Bangui",
+      "Baoro",
+      "Carnot",
+      "Berbérati"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.afdb.org/en/news-and-events/multimedia/video/success-story-arrival-fiber-optics-brings-central-african-republic-digital-age-82978 ; https://etradeforall.org/news/young-people-central-african-republic-can-now-enter-digital-professions-thanks-fibre-optic ; el proyecto CAB-CAR terminó en septiembre de 2023 e instaló la primera dorsal nacional, de alrededor de 900 km; el trazado principal conecta Bangui y Berbérati vía Baoro y Carnot."
+  },
+  {
+    "nombre": "Projet de Couverture Nationale - Pointe-Noire to Ouesso",
+    "operador": "Congo Telecom",
+    "pais": "CG",
+    "ciudades": [
+      "Pointe-Noire",
+      "Dolisie",
+      "Brazzaville",
+      "Oyo",
+      "Ouesso"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://documents1.worldbank.org/curated/en/099630005112275398/pdf/P175592002d4590208e3c034a9c0a165ad.pdf ; el Banco Mundial describe el PCN como unos 3,000 km de backbone de fibra que conecta Pointe-Noire, Dolisie, Brazzaville, Oyo y Ouesso, operado y comercializado por Congo Telecom."
+  },
+  {
+    "nombre": "Burundi Backbone System north-eastern spine",
+    "operador": "Burundi Backbone System",
+    "pais": "BI",
+    "ciudades": [
+      "Bujumbura",
+      "Kayanza",
+      "Ngozi",
+      "Kirundo",
+      "Kobero"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://documents1.worldbank.org/curated/en/674601544534500678/pdf/Main-Report.pdf ; el Banco Mundial describe BBS como un backbone de fibra de aproximadamente 1,250 km que conecta las 17 provincias y dispone de puntos fronterizos hacia Rwanda y Tanzania."
+  },
+  {
+    "nombre": "Burundi Backbone System southern spine",
+    "operador": "Burundi Backbone System",
+    "pais": "BI",
+    "ciudades": [
+      "Bujumbura",
+      "Rumonge",
+      "Makamba",
+      "Mugina"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://documents1.worldbank.org/curated/en/674601544534500678/pdf/Main-Report.pdf ; el Banco Mundial documenta BBS como red mayorista open-access de 1,250 km, con cobertura nacional y salida terrestre hacia Tanzania."
+  },
+  {
+    "nombre": "NOFBI Northern Corridor",
+    "operador": "ICT Authority / Government of Kenya",
+    "pais": "KE",
+    "ciudades": [
+      "Mombasa",
+      "Nairobi",
+      "Nakuru",
+      "Eldoret",
+      "Malaba"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.oagkenya.go.ke/wp-content/uploads/2022/08/Implementation-of-National-Optic-Fibre-Backbone-Infrastructure-Project.pdf ; la Auditoría General de Kenya documenta la implementación de NOFBI como red pública nacional; el corredor Mombasa-Nairobi-Uganda es el principal eje terrestre nacional."
+  },
+  {
+    "nombre": "Rwanda national backbone south-western spine",
+    "operador": "Government of Rwanda / RISA",
+    "pais": "RW",
+    "ciudades": [
+      "Kigali",
+      "Muhanga",
+      "Huye",
+      "Rusizi"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.risa.gov.rw/index.php?eID=dumpFile&f=65375&t=f&token=3539531ff978f107e3ab03cc5ceaac74b1e0b713 ; RISA documenta el despliegue de aproximadamente 6,000 km de backbone nacional de fibra financiado públicamente."
+  },
+  {
+    "nombre": "Rwanda national backbone north-western spine",
+    "operador": "Government of Rwanda / RISA",
+    "pais": "RW",
+    "ciudades": [
+      "Kigali",
+      "Musanze",
+      "Rubavu"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.risa.gov.rw/index.php?eID=dumpFile&f=65375&t=f&token=3539531ff978f107e3ab03cc5ceaac74b1e0b713 ; RISA confirma una red troncal nacional de aproximadamente 6,000 km con cobertura nacional."
+  },
+  {
+    "nombre": "Golis Puntland fibre backbone",
+    "operador": "Golis Telecom",
+    "pais": "SO",
+    "ciudades": [
+      "Bosaso",
+      "Garowe",
+      "Galkayo"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://documents1.worldbank.org/curated/en/099500006282221939/pdf/P1775040e575fc036094170aca16ab29e5f.pdf ; el Banco Mundial dice que partes de Puntland, específicamente Bosaso, Garowe y Galkayo, cuentan con backbone terrestre de fibra gestionado por Golis, mientras otras regiones siguen dependiendo de microondas o satélite."
+  },
+  {
+    "nombre": "Somcable Somaliland backbone",
+    "operador": "Somcable",
+    "pais": "SO",
+    "ciudades": [
+      "Berbera",
+      "Hargeisa",
+      "Borama"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://documents1.worldbank.org/curated/en/099500006282221939/pdf/P1775040e575fc036094170aca16ab29e5f.pdf ; el Banco Mundial describe Somaliland como una región con un backbone terrestre de fibra relativamente bien desarrollado gestionado por Somcable."
+  },
+  {
+    "nombre": "South Sudan Juba-Uganda terrestrial fibre route",
+    "operador": "South Sudan-Uganda international fibre corridor",
+    "pais": "SS",
+    "ciudades": [
+      "Juba",
+      "Nimule"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://documents1.worldbank.org/curated/en/099450206282323160/pdf/IDU00f2d51f40fd4a04e630b0b60d27b1a4f548b.pdf ; el Banco Mundial afirma que South Sudan carece de un backbone doméstico operacional y depende de la ruta de fibra desde Juba hacia Uganda; Nimule es el nodo fronterizo del corredor."
+  },
+  {
+    "nombre": "NICTBB Central-Western Corridor",
+    "operador": "TTCL / National ICT Broadband Backbone",
+    "pais": "TZ",
+    "ciudades": [
+      "Dar es Salaam",
+      "Morogoro",
+      "Dodoma",
+      "Singida",
+      "Shinyanga",
+      "Mwanza"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.ttcl.co.tz/ ; TTCL continúa explotando y promocionando en 2026 el Mkongo wa Taifa, el National ICT Broadband Backbone; este corredor forma parte de la dorsal nacional desplegada por fases."
+  },
+  {
+    "nombre": "NICTBB Southern Corridor",
+    "operador": "TTCL / National ICT Broadband Backbone",
+    "pais": "TZ",
+    "ciudades": [
+      "Dar es Salaam",
+      "Morogoro",
+      "Iringa",
+      "Mbeya",
+      "Tunduma"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.ttcl.co.tz/ ; TTCL confirma en 2026 la explotación del backbone nacional Mkongo wa Taifa, del que el eje Dar es Salaam-Mbeya-Tunduma es una ruta troncal terrestre."
+  },
+  {
+    "nombre": "Uganda NBI Eastern Corridor",
+    "operador": "NITA-U",
+    "pais": "UG",
+    "ciudades": [
+      "Kampala",
+      "Jinja",
+      "Mbale",
+      "Busia"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://ict.go.ug/site/documents/ministerial-policy-statement-mps-20252026.pdf ; el Ministerio de ICT de Uganda mantiene y supervisa los activos de la National Backbone Infrastructure en 2025/26 y separa la red existente de los 6,000 km adicionales planificados."
+  },
+  {
+    "nombre": "Uganda NBI South-Western Corridor",
+    "operador": "NITA-U",
+    "pais": "UG",
+    "ciudades": [
+      "Kampala",
+      "Masaka",
+      "Mbarara",
+      "Kabale"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://ict.go.ug/site/documents/ministerial-policy-statement-mps-20252026.pdf ; la National Backbone Infrastructure es una red operativa cuyos activos, subsistemas y capacidad siguen bajo mantenimiento y gestión pública."
+  },
+  {
+    "nombre": "Uganda NBI Northern-West Nile Corridor",
+    "operador": "NITA-U",
+    "pais": "UG",
+    "ciudades": [
+      "Kampala",
+      "Luwero",
+      "Gulu",
+      "Arua"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://ict.go.ug/site/documents/ministerial-policy-statement-mps-20252026.pdf ; el presupuesto ministerial 2025/26 confirma la operación, mantenimiento y extensión de la National Backbone Infrastructure."
+  },
+  {
+    "nombre": "BoFiNet North-East Corridor",
+    "operador": "BoFiNet",
+    "pais": "BW",
+    "ciudades": [
+      "Gaborone",
+      "Palapye",
+      "Francistown",
+      "Nata",
+      "Kasane"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.bofinet.co.bw/ ; BoFiNet mantiene actualmente la red nacional mayorista y su mapa de cobertura de fibra; los activos nacionales de backbone fueron transferidos desde BTC a BoFiNet."
+  },
+  {
+    "nombre": "BoFiNet Western-North-West Corridor",
+    "operador": "BoFiNet",
+    "pais": "BW",
+    "ciudades": [
+      "Gaborone",
+      "Kang",
+      "Ghanzi",
+      "Maun"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.bofinet.co.bw/ ; la cobertura actual de BoFiNet muestra la extensión nacional del backbone de fibra, incluida la ruta hacia el oeste y Maun."
+  },
+  {
+    "nombre": "Telecom Namibia Omaheke Ring",
+    "operador": "Telecom Namibia",
+    "pais": "NA",
+    "ciudades": [
+      "Windhoek",
+      "Omitara",
+      "Witvlei",
+      "Gobabis",
+      "Buitepos",
+      "Otjinene",
+      "Grootfontein",
+      "Otavi",
+      "Otjiwarongo",
+      "Omaruru",
+      "Karibib",
+      "Okahandja",
+      "Windhoek"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.telecom.na/downloads/reports/2008-09/Network-Operations.pdf ; Telecom Namibia enumera esta secuencia como Omaheke SDH/fibre ring; https://www.telecom.na/downloads/reports/2022-2023/Annual-Report-2022-23.pdf confirma que la red digital nacional continúa operativa y supera 13,000 route-km."
+  },
+  {
+    "nombre": "Telecom Namibia Kunene Ring",
+    "operador": "Telecom Namibia",
+    "pais": "NA",
+    "ciudades": [
+      "Otjiwarongo",
+      "Otavi",
+      "Grootfontein",
+      "Tsumeb",
+      "Oshivelo",
+      "Omuthiya",
+      "Ondangwa",
+      "Oshakati",
+      "Outapi",
+      "Ruacana",
+      "Kamanjab",
+      "Outjo",
+      "Otjiwarongo"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.telecom.na/downloads/reports/2008-09/Network-Operations.pdf ; Telecom Namibia describe expresamente la Kunene ring y sus nodos; el informe 2022/23 confirma la continuidad de la red nacional de más de 13,000 route-km."
+  },
+  {
+    "nombre": "Telecom Namibia Southern Backbone Ring",
+    "operador": "Telecom Namibia",
+    "pais": "NA",
+    "ciudades": [
+      "Windhoek",
+      "Gobabis",
+      "Aranos",
+      "Stampriet",
+      "Maltahöhe",
+      "Aus",
+      "Keetmanshoop",
+      "Mariental",
+      "Rehoboth",
+      "Windhoek"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.telecom.na/downloads/reports/2008-09/Network-Operations.pdf ; Telecom Namibia describe el Southern backbone ring y sus nodos y upgrades de fibra; https://www.telecom.na/downloads/reports/2022-2023/Annual-Report-2022-23.pdf confirma la red nacional actual."
+  },
+  {
+    "nombre": "Broadband Infraco Johannesburg-Cape Town backbone",
+    "operador": "Broadband Infraco",
+    "pais": "ZA",
+    "ciudades": [
+      "Johannesburg",
+      "Bloemfontein",
+      "Cape Town"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.gov.za/news/statement-chairperson-infrastructure-development-cluster-and-minister-transport-mr-sibusiso-0 ; el Gobierno de South Africa informó que Broadband Infraco disponía de aproximadamente 12,250 km de fibra nacional, posteriormente citada como una red de larga distancia de alrededor de 13,600 km que conecta los principales centros."
+  },
+  {
+    "nombre": "Broadband Infraco Johannesburg-Durban backbone",
+    "operador": "Broadband Infraco",
+    "pais": "ZA",
+    "ciudades": [
+      "Johannesburg",
+      "Durban"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.gov.za/news/statement-chairperson-infrastructure-development-cluster-and-minister-transport-mr-sibusiso-0 ; Broadband Infraco opera una red nacional de fibra de larga distancia; documentos de política del Gobierno identifican Johannesburg, Cape Town y Durban como los principales corredores de larga distancia."
+  },
+  {
+    "nombre": "TelOne Bulawayo-Beitbridge backbone",
+    "operador": "TelOne",
+    "pais": "ZW",
+    "ciudades": [
+      "Bulawayo",
+      "Beitbridge"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.telone.co.zw/Content/Uploads/Reports/d4b8d95a-9f4f-4c6a-85ad-5b91910b4528.pdf ; TelOne declara que completó el Bulawayo-Beitbridge optic fibre backbone link en 2017; https://www.telone.co.zw/Content/Uploads/reports/e1e27f22-035d-40e6-88bb-f825b25bc66a.pdf documenta posteriores upgrades de capacidad del backbone."
+  },
+  {
+    "nombre": "TelOne Harare-Masvingo backbone",
+    "operador": "TelOne",
+    "pais": "ZW",
+    "ciudades": [
+      "Harare",
+      "Masvingo"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.telone.co.zw/Content/Uploads/Reports/d4b8d95a-9f4f-4c6a-85ad-5b91910b4528.pdf ; TelOne declara completado en 2017 el Harare-Masvingo backbone optic fibre link."
+  },
+  {
+    "nombre": "TelOne Mutare-Harare-Bulawayo-Plumtree backbone",
+    "operador": "TelOne",
+    "pais": "ZW",
+    "ciudades": [
+      "Mutare",
+      "Harare",
+      "Bulawayo",
+      "Plumtree"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.telone.co.zw/Content/Uploads/Reports/d4b8d95a-9f4f-4c6a-85ad-5b91910b4528.pdf ; TelOne documenta el upgrade de nodos del corredor Mutare-Harare-Bulawayo-Plumtree; https://www.telone.co.zw/Content/Uploads/reports/e1e27f22-035d-40e6-88bb-f825b25bc66a.pdf documenta financiación específica de los proyectos de fibra Mutare-Harare y Harare-Bulawayo."
+  },
+  {
+    "nombre": "TelOne Bulawayo-Victoria Falls backbone",
+    "operador": "TelOne",
+    "pais": "ZW",
+    "ciudades": [
+      "Bulawayo",
+      "Victoria Falls"
+    ],
+    "estado": "en servicio",
+    "fuente": "https://www.telone.co.zw/Content/Uploads/Reports/d4b8d95a-9f4f-4c6a-85ad-5b91910b4528.pdf ; TelOne enumera el Bulawayo-Victoria Falls backbone link entre las rutas nacionales actualizadas durante su programa de modernización."
+  }
+]

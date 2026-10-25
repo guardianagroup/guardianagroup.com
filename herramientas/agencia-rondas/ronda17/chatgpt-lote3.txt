@@ -1,0 +1,186 @@
+[
+  {
+    "nombre": "AzerTelecom - troncal norte hacia Rusia",
+    "operador": "AzerTelecom",
+    "pais": "AZ",
+    "ciudades": ["Baku", "Siyazan", "Quba", "Qusar"],
+    "estado": "en servicio",
+    "fuente": "ONU-ESCAP, An In-Depth Study on the Broadband Infrastructure in North and Central Asia, sección Domestic Network Connectivity in Azerbaijan, 2014: https://www.unescap.org/sites/default/files/Broadband%20Infrastructure%20in%20North%20and%20Central%20Asia%20FINAL%20_English_0.pdf ; AzerTelecom, Local Network: https://www.azertelecom.az/en/local-network"
+  },
+  {
+    "nombre": "AzerTelecom - troncal noroeste y ramal de Balakan",
+    "operador": "AzerTelecom",
+    "pais": "AZ",
+    "ciudades": ["Baku", "Shamakhi", "Goychay", "Mingachevir", "Balakan"],
+    "estado": "en servicio",
+    "fuente": "ONU-ESCAP, An In-Depth Study on the Broadband Infrastructure in North and Central Asia, sección Domestic Network Connectivity in Azerbaijan, ruta noroeste por la M4 y extensión a Balakan, 2014: https://www.unescap.org/sites/default/files/Broadband%20Infrastructure%20in%20North%20and%20Central%20Asia%20FINAL%20_English_0.pdf ; AzerTelecom, Local Network: https://www.azertelecom.az/en/local-network"
+  },
+  {
+    "nombre": "AzerTelecom - troncal occidental hacia Georgia",
+    "operador": "AzerTelecom",
+    "pais": "AZ",
+    "ciudades": ["Alat", "Kurdamir", "Yevlakh", "Goranboy", "Ganja", "Tovuz", "Aghstafa", "Qazax"],
+    "estado": "en servicio",
+    "fuente": "ONU-ESCAP, An In-Depth Study on the Broadband Infrastructure in North and Central Asia, sección Domestic Network Connectivity in Azerbaijan, ruta occidental por la M2, 2014: https://www.unescap.org/sites/default/files/Broadband%20Infrastructure%20in%20North%20and%20Central%20Asia%20FINAL%20_English_0.pdf ; AzerTelecom, Local Network: https://www.azertelecom.az/en/local-network"
+  },
+  {
+    "nombre": "AzerTelecom - troncal suroeste",
+    "operador": "AzerTelecom",
+    "pais": "AZ",
+    "ciudades": ["Alat", "Sabirabad", "Beylagan", "Horadiz"],
+    "estado": "en servicio",
+    "fuente": "ONU-ESCAP, An In-Depth Study on the Broadband Infrastructure in North and Central Asia, sección Domestic Network Connectivity in Azerbaijan, ruta suroeste por la M6, 2014: https://www.unescap.org/sites/default/files/Broadband%20Infrastructure%20in%20North%20and%20Central%20Asia%20FINAL%20_English_0.pdf ; AzerTelecom, Local Network: https://www.azertelecom.az/en/local-network"
+  },
+  {
+    "nombre": "AzerTelecom - troncal sur hacia Irán",
+    "operador": "AzerTelecom",
+    "pais": "AZ",
+    "ciudades": ["Alat", "Salyan", "Bilasuvar", "Masalli", "Lankaran", "Astara"],
+    "estado": "en servicio",
+    "fuente": "ONU-ESCAP, An In-Depth Study on the Broadband Infrastructure in North and Central Asia, sección Domestic Network Connectivity in Azerbaijan, ruta meridional por la M3, 2014: https://www.unescap.org/sites/default/files/Broadband%20Infrastructure%20in%20North%20and%20Central%20Asia%20FINAL%20_English_0.pdf ; AzerTelecom, Local Network: https://www.azertelecom.az/en/local-network"
+  },
+  {
+    "nombre": "Trans-Armenian Optical System - anillo norte",
+    "operador": "Telecom Armenia",
+    "pais": "AM",
+    "ciudades": ["Yerevan", "Armavir", "Gyumri", "Vanadzor", "Sevan", "Yerevan"],
+    "estado": "en servicio",
+    "fuente": "OpenNet Initiative, Armenia, nota 26, 17 de noviembre de 2010. Identifica expresamente la secuencia del anillo óptico TAOS, entonces propiedad de ArmenTel, antecesora de Telecom Armenia: https://opennet.net/research/profiles/armenia"
+  },
+  {
+    "nombre": "Trans-Armenian Optical System - troncal sur hacia Irán",
+    "operador": "Telecom Armenia",
+    "pais": "AM",
+    "ciudades": ["Yerevan", "Meghri"],
+    "estado": "en servicio",
+    "fuente": "OpenNet Initiative, Armenia, nota 26, 17 de noviembre de 2010. Documenta la prolongación meridional del sistema TAOS desde Yerevan hasta Meghri: https://opennet.net/research/profiles/armenia"
+  },
+  {
+    "nombre": "Kyrgyztelecom - troncal norte de Issyk-Kul",
+    "operador": "Kyrgyztelecom",
+    "pais": "KG",
+    "ciudades": ["Bishkek", "Tokmok", "Kemin", "Balykchy", "Cholpon-Ata", "Karakol"],
+    "estado": "en servicio",
+    "fuente": "Internet Society, Tajikistan Internet Exchange Point Environment Assessment, junio de 2017, anexo, página 34, mapa de JSC Kyrgyztelecom; la línea naranja identifica las rutas de fibra óptica existentes: https://www.internetsociety.org/wp-content/uploads/2017/08/ISOC-Tajikistan-IXP-assessment.pdf"
+  },
+  {
+    "nombre": "Kyrgyztelecom - troncal sur de Issyk-Kul",
+    "operador": "Kyrgyztelecom",
+    "pais": "KG",
+    "ciudades": ["Balykchy", "Bokonbayevo", "Karakol"],
+    "estado": "en servicio",
+    "fuente": "Internet Society, Tajikistan Internet Exchange Point Environment Assessment, junio de 2017, anexo, página 34, mapa de JSC Kyrgyztelecom; ruta naranja existente por la ribera meridional de Issyk-Kul: https://www.internetsociety.org/wp-content/uploads/2017/08/ISOC-Tajikistan-IXP-assessment.pdf"
+  },
+  {
+    "nombre": "ElCat - troncal norte-sur occidental",
+    "operador": "ElCat",
+    "pais": "KG",
+    "ciudades": ["Bishkek", "Kara-Balta", "Osh"],
+    "estado": "en servicio",
+    "fuente": "ElCat, About Us, hitos de 2014, 2018 y 2019. La operadora identifica expresamente la línea Bishkek-Kara-Balta-Osh y sus ampliaciones de capacidad: https://elcat.kg/en/about/"
+  },
+  {
+    "nombre": "ElCat - troncal norte-sur oriental",
+    "operador": "ElCat",
+    "pais": "KG",
+    "ciudades": ["Bishkek", "Naryn", "Osh"],
+    "estado": "en servicio",
+    "fuente": "ElCat, About Us, hito de 2019. La operadora identifica expresamente la línea Bishkek-Naryn-Osh y su ampliación a 260 Gbps: https://elcat.kg/en/about/"
+  },
+  {
+    "nombre": "ElCat - troncal Osh-Sary-Tash",
+    "operador": "ElCat",
+    "pais": "KG",
+    "ciudades": ["Osh", "Sary-Tash"],
+    "estado": "en servicio",
+    "fuente": "ElCat, About Us, hito de 2015, puesta en operación de las líneas de fibra óptica Osh-Sary-Tash y Osh-Batken: https://elcat.kg/en/about/"
+  },
+  {
+    "nombre": "ElCat - troncal Osh-Batken",
+    "operador": "ElCat",
+    "pais": "KG",
+    "ciudades": ["Osh", "Batken"],
+    "estado": "en servicio",
+    "fuente": "ElCat, About Us, hito de 2015, puesta en operación de las líneas de fibra óptica Osh-Sary-Tash y Osh-Batken: https://elcat.kg/en/about/"
+  },
+  {
+    "nombre": "ElCat - troncal Bishkek-Talas",
+    "operador": "ElCat",
+    "pais": "KG",
+    "ciudades": ["Bishkek", "Talas"],
+    "estado": "en servicio",
+    "fuente": "ElCat, About Us, hito de 2017, finalización de la construcción de fibra óptica en el corredor Bishkek-Talas: https://elcat.kg/en/about/"
+  },
+  {
+    "nombre": "ElCat - troncal de respaldo sur de Issyk-Kul",
+    "operador": "ElCat",
+    "pais": "KG",
+    "ciudades": ["Balykchy", "Karakol"],
+    "estado": "en servicio",
+    "fuente": "ElCat, About Us, hitos de 2018 y 2019. Documenta la construcción y puesta en funcionamiento de la línea óptica de respaldo por la ribera sur del lago Issyk-Kul: https://elcat.kg/en/about/"
+  },
+  {
+    "nombre": "ElCat - troncal de Aksy y Ala-Buka",
+    "operador": "ElCat",
+    "pais": "KG",
+    "ciudades": ["Tash-Kumyr", "Kerben", "Ala-Buka", "Terek-Sai"],
+    "estado": "en servicio",
+    "fuente": "ElCat, About Us, hito de 2019. La operadora publica la secuencia Tash-Kumyr-Kerben (Aksy)-Ala-Buka-Terek-Sai y una longitud de 170 km: https://elcat.kg/en/about/"
+  },
+  {
+    "nombre": "Alpha Telecom - troncal Bishkek-Chaldovar",
+    "operador": "Alpha Telecom",
+    "pais": "KG",
+    "ciudades": ["Bishkek", "Chaldovar"],
+    "estado": "en servicio",
+    "fuente": "Agencia Estatal de Comunicaciones de la República Kirguisa, Informe anual de 2014, página 52. Registra como terminada la construcción de la línea troncal de fibra óptica Bishkek-Chaldovar de 150 km: https://nas.gov.kg/media/dynamic_pages/otchet_2014.pdf"
+  },
+  {
+    "nombre": "Tajiktelecom - troncal Dushanbe-Khujand",
+    "operador": "Tajiktelecom",
+    "pais": "TJ",
+    "ciudades": ["Dushanbe", "Khujand"],
+    "estado": "en servicio",
+    "fuente": "Internet Society, Tajikistan Internet Exchange Point Environment Assessment, junio de 2017, apartado 3.2, página 19. Documenta la red troncal de Tajiktelecom y la prestación de circuitos sobre la ruta Dushanbe-Khujand: https://www.internetsociety.org/wp-content/uploads/2017/08/ISOC-Tajikistan-IXP-assessment.pdf"
+  },
+  {
+    "nombre": "Tajiktelecom - corredor internacional Dushanbe-Khorog hacia China",
+    "operador": "Tajiktelecom",
+    "pais": "TJ",
+    "ciudades": ["Dushanbe", "Khorog"],
+    "estado": "en servicio",
+    "fuente": "Tajiktelecom y China Mobile International, inauguración del corredor digital Dushanbe-Khorog-Kulma-Karasu-Beijing el 17 de octubre de 2026, comunicada por el Servicio de Comunicaciones del Gobierno de Tayikistán. Se omiten Kulma y Karasu del array porque son puntos fronterizos, no ciudades: https://catalog.tj/en/news/tadzhikistan-kitaj-cifrovoj-koridor-1-tbit"
+  },
+  {
+    "nombre": "Turkmentelecom - anillo troncal nacional DWDM",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": ["Ashgabat", "Mary", "Turkmenabat", "Dashoguz", "Ashgabat"],
+    "estado": "en servicio",
+    "fuente": "Agencia Estatal de Noticias de Turkmenistán, conferencia Türkmentel-2020, 24 de noviembre de 2020. Publica expresamente el sistema circular Ashgabat-Mary-Turkmenabat-Dashoguz-Ashgabat: https://turkmenistan.gov.tm/index.php/en/post/15421/international-conference-on-digital-economy-and-innovative-technologies-turkmentel-2020"
+  },
+  {
+    "nombre": "Turkmentelecom - troncal radial oeste-este DWDM",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": ["Garabogaz", "Turkmenbashi", "Ashgabat", "Mary", "Turkmenabat", "Kerki"],
+    "estado": "en servicio",
+    "fuente": "Agencia Estatal de Noticias de Turkmenistán, conferencia Türkmentel-2020, 24 de noviembre de 2020. Publica expresamente la secuencia Garabogaz-Turkmenbashy-Ashgabat-Mary-Turkmenabat-Kerky-Ymamnazar; se excluye el último punto fronterizo de la lista de ciudades: https://turkmenistan.gov.tm/index.php/en/post/15421/international-conference-on-digital-economy-and-innovative-technologies-turkmentel-2020"
+  },
+  {
+    "nombre": "Turkmentelecom - interconexión terrestre Ashgabat-Quchan con Irán",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": ["Ashgabat", "Quchan"],
+    "estado": "en servicio",
+    "fuente": "Agencia Türkmenaragatnaşyk, relación de ocho conexiones internacionales de fibra óptica operativas, difundida el 18 de julio de 2024. Identifica expresamente Ashgabat-Kuchan (Irán): https://www.tmdomain.com.tm/en/news/618"
+  },
+  {
+    "nombre": "Turkmentelecom - interconexión terrestre Serhetabat-Herat con Afganistán",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": ["Serhetabat", "Herat"],
+    "estado": "en servicio",
+    "fuente": "Agencia Türkmenaragatnaşyk, relación de ocho conexiones internacionales de fibra óptica operativas, 18 de julio de 2024. Confirma dos interconexiones en la ruta Serhetabat-Herat: https://www.tmdomain.com.tm/en/news/618"
+  }
+]

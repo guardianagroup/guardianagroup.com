@@ -1,0 +1,74 @@
+[
+  {
+    "nombre": "Troncal Bogotá–Medellín–costa Caribe",
+    "operador": "Claro Colombia",
+    "pais": "CO",
+    "ciudades": ["Bogota", "Villeta", "Guaduas", "Honda", "Puerto Triunfo", "Marinilla", "Medellin", "Yarumal", "Caucasia", "Sincelejo", "Cartagena", "Barranquilla"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la red nacional de fibra de Claro Colombia entre Bogotá, Medellín y la costa Caribe. Secuencia intermedia inferida siguiendo las carreteras Bogotá–Medellín y Medellín–Cartagena–Barranquilla; no representa un trazado físico publicado y verificado ciudad por ciudad."
+  },
+  {
+    "nombre": "Troncal Bogotá–Cali",
+    "operador": "Claro Colombia",
+    "pais": "CO",
+    "ciudades": ["Bogota", "Fusagasuga", "Melgar", "Girardot", "Ibague", "Cajamarca", "Armenia", "Buga", "Palmira", "Cali"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de transporte óptico de la red nacional de Claro Colombia hacia el suroccidente. Ciudades intermedias inferidas por los corredores viales de Girardot, La Línea y el valle del Cauca; la fibra puede bordear los cascos urbanos."
+  },
+  {
+    "nombre": "Troncal Bogotá–Bucaramanga–Cúcuta",
+    "operador": "Claro Colombia",
+    "pais": "CO",
+    "ciudades": ["Bogota", "Zipaquira", "Ubate", "Chiquinquira", "Barbosa", "Socorro", "San Gil", "Bucaramanga", "Pamplona", "Cucuta"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor nororiental de la red nacional de fibra de Claro Colombia. Orden urbano inferido por la carretera Bogotá–Bucaramanga y el corredor Bucaramanga–Pamplona–Cúcuta; no es una relación publicada de nodos consecutivos."
+  },
+  {
+    "nombre": "Troncal del Valle Central–Guanacaste",
+    "operador": "Instituto Costarricense de Electricidad (ICE)",
+    "pais": "CR",
+    "ciudades": ["San Jose", "Alajuela", "San Ramon", "Esparza", "Canas", "Liberia"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la red nacional de transporte óptico del ICE entre el Valle Central y Guanacaste. Secuencia inferida siguiendo la carretera Interamericana y los corredores eléctricos regionales; no se afirma que cada casco urbano esté atravesado por el mismo cable."
+  },
+  {
+    "nombre": "Troncal San José–Limón",
+    "operador": "Instituto Costarricense de Electricidad (ICE)",
+    "pais": "CR",
+    "ciudades": ["San Jose", "Guapiles", "Guacimo", "Siquirres", "Matina", "Limon"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor caribeño de la red de fibra del ICE, siguiendo principalmente el eje de la carretera 32. Ciudades intermedias inferidas; el detalle del tendido y sus posibles variantes por infraestructura eléctrica no se presenta como publicado."
+  },
+  {
+    "nombre": "Troncal del Valle Central–Zona Sur",
+    "operador": "Instituto Costarricense de Electricidad (ICE)",
+    "pais": "CR",
+    "ciudades": ["San Jose", "Cartago", "San Isidro de El General", "Buenos Aires", "Palmar Norte", "Rio Claro", "Ciudad Neily"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor meridional de la red nacional de fibra del ICE. Secuencia urbana probable por la carretera Interamericana Sur y corredores eléctricos próximos; no corresponde a un inventario público de empalmes o estaciones ópticas."
+  },
+  {
+    "nombre": "Troncal occidental La Habana–Pinar del Río",
+    "operador": "ETECSA",
+    "pais": "CU",
+    "ciudades": ["Havana", "Artemisa", "San Cristobal", "Los Palacios", "Consolacion del Sur", "Pinar del Rio"],
+    "estado": "en servicio",
+    "fuente": "aproximado: tramo occidental de la red nacional de fibra óptica de ETECSA. Orden de ciudades inferido por el corredor terrestre Habana–Pinar del Río, con la autopista y la Carretera Central como referencias; el cable puede pasar fuera de los centros urbanos."
+  },
+  {
+    "nombre": "Troncal central La Habana–Camagüey",
+    "operador": "ETECSA",
+    "pais": "CU",
+    "ciudades": ["Havana", "Matanzas", "Colon", "Santa Clara", "Sancti Spiritus", "Ciego de Avila", "Camaguey"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor central de la red nacional de fibra óptica de ETECSA que enlaza las principales cabeceras provinciales. Secuencia probable por la Carretera Central y corredores terrestres paralelos; no es un trazado publicado y verificado del cable."
+  },
+  {
+    "nombre": "Troncal oriental Camagüey–Santiago de Cuba–Guantánamo",
+    "operador": "ETECSA",
+    "pais": "CU",
+    "ciudades": ["Camaguey", "Las Tunas", "Bayamo", "Contramaestre", "Palma Soriano", "Santiago de Cuba", "Guantanamo"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor oriental meridional de la red nacional de fibra óptica de ETECSA. Ciudades ordenadas según la Carretera Central hasta Santiago de Cuba y la conexión terrestre hacia Guantánamo; recorrido intermedio inferido, no relación publicada de nodos consecutivos."
+  }
+]

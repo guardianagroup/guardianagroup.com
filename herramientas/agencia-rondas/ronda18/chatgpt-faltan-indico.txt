@@ -1,0 +1,482 @@
+[
+  {
+    "nombre": "Aden-Djibouti",
+    "llegadas": [
+      {
+        "lugar": "Djibouti",
+        "pais": "DJ",
+        "lat": 11.5947,
+        "lon": 43.148
+      },
+      {
+        "lugar": "Aden",
+        "pais": "YE",
+        "lat": 12.8007,
+        "lon": 45.0335
+      }
+    ],
+    "anio": 1994,
+    "km": 269,
+    "duenos": [
+      "Djibouti Telecom",
+      "TeleYemen"
+    ],
+    "fuentes": [
+      "https://international.djiboutitelecom.dj/aden-djibouti/",
+      "https://www.submarinecablemap.com/submarine-cable/aden-djibouti"
+    ]
+  },
+  {
+    "nombre": "T3",
+    "llegadas": [
+      {
+        "lugar": "Amanzimtoti",
+        "pais": "ZA",
+        "lat": -30.0577,
+        "lon": 30.8804
+      },
+      {
+        "lugar": "Baie Jacotet",
+        "pais": "MU",
+        "lat": -20.474,
+        "lon": 57.4854
+      }
+    ],
+    "anio": 2023,
+    "km": 3200,
+    "duenos": [
+      "Mauritius Telecom",
+      "Liquid Intelligent Technologies"
+    ],
+    "fuentes": [
+      "https://www.telecom.mu/annual-report/pdfs/CEO-review.pdf",
+      "https://www.telecom.mu/mediacentre/pdf/press-release-rp.pdf",
+      "https://geocables.com/cable/t3"
+    ]
+  },
+  {
+    "nombre": "Maldives Sri Lanka Cable (MSC)",
+    "llegadas": [
+      {
+        "lugar": "Hulhumale",
+        "pais": "MV",
+        "lat": 4.2119,
+        "lon": 73.5402
+      },
+      {
+        "lugar": "Mount Lavinia",
+        "pais": "LK",
+        "lat": 6.8332,
+        "lon": 79.8668
+      }
+    ],
+    "anio": 2021,
+    "km": 840,
+    "duenos": [
+      "Dhiraagu",
+      "Dialog Axiata",
+      "Ooredoo Maldives"
+    ],
+    "fuentes": [
+      "https://dialog.lk/news/dialog-axiata-connects-srilanka-and-maldives-with-high-speed-submarine-cable?language=ta",
+      "https://geocables.com/cable/maldives-sri-lanka-cable-msc"
+    ]
+  },
+  {
+    "nombre": "Dhiraagu Cable Network",
+    "llegadas": [
+      {
+        "lugar": "Kulhudhufushi",
+        "pais": "MV",
+        "lat": 6.6224,
+        "lon": 73.0714
+      },
+      {
+        "lugar": "Eydhafushi",
+        "pais": "MV",
+        "lat": 5.1032,
+        "lon": 73.0708
+      },
+      {
+        "lugar": "Hulhumale",
+        "pais": "MV",
+        "lat": 4.2119,
+        "lon": 73.5402
+      },
+      {
+        "lugar": "Dhangethi",
+        "pais": "MV",
+        "lat": 3.6081,
+        "lon": 72.9556
+      },
+      {
+        "lugar": "Gan",
+        "pais": "MV",
+        "lat": 1.9184,
+        "lon": 73.5447
+      },
+      {
+        "lugar": "Gahdhoo",
+        "pais": "MV",
+        "lat": 0.2888,
+        "lon": 73.4555
+      },
+      {
+        "lugar": "Fuvahmulah",
+        "pais": "MV",
+        "lat": -0.2983,
+        "lon": 73.4269
+      },
+      {
+        "lugar": "Hithadhoo",
+        "pais": "MV",
+        "lat": -0.606,
+        "lon": 73.0892
+      }
+    ],
+    "anio": 2012,
+    "km": 1253,
+    "duenos": [
+      "Dhiraagu"
+    ],
+    "fuentes": [
+      "https://www.dhiraagu.com.mv/about-us/investor-relations/announcements-disclosures/domestic-submarine-cable-system-expansion-project",
+      "https://geocables.com/cable/dhiraagu-cable-network"
+    ]
+  },
+  {
+    "nombre": "Nationwide Submarine Cable Ooredoo Maldives (NaSCOM)",
+    "llegadas": [
+      {
+        "lugar": "Kulhudhufushi",
+        "pais": "MV",
+        "lat": 6.6224,
+        "lon": 73.0714
+      },
+      {
+        "lugar": "Eydhafushi",
+        "pais": "MV",
+        "lat": 5.1032,
+        "lon": 73.0708
+      },
+      {
+        "lugar": "Hulhumale",
+        "pais": "MV",
+        "lat": 4.2119,
+        "lon": 73.5402
+      },
+      {
+        "lugar": "Kolhufushi",
+        "pais": "MV",
+        "lat": 2.7768,
+        "lon": 73.4246
+      },
+      {
+        "lugar": "Thinadhoo",
+        "pais": "MV",
+        "lat": 0.5311,
+        "lon": 72.9977
+      },
+      {
+        "lugar": "Hithadhoo",
+        "pais": "MV",
+        "lat": -0.606,
+        "lon": 73.0892
+      }
+    ],
+    "anio": 2016,
+    "km": 1136,
+    "duenos": [
+      "Ooredoo Maldives"
+    ],
+    "fuentes": [
+      "https://www.ooredoo.com/en/media/news_view/ooredoos-nationwide-submarine-cable-paves-the-way-to-4g-network-across-maldives/",
+      "https://www.huawei.com/en/news/2016/12/Ooredoo-Huawei-Submarine-Cable-Maldives",
+      "https://geocables.com/cable/nationwide-submarine-cable-ooredoo-maldives-nascom"
+    ]
+  },
+  {
+    "nombre": "Domestic Submarine Cable of Maldives (DSCoM)",
+    "llegadas": [
+      {
+        "lugar": "Velidhoo",
+        "pais": "MV",
+        "lat": 5.6622,
+        "lon": 73.2751
+      },
+      {
+        "lugar": "Dhuvaafaru",
+        "pais": "MV",
+        "lat": 5.6293,
+        "lon": 73.0414
+      },
+      {
+        "lugar": "Eydhafushi",
+        "pais": "MV",
+        "lat": 5.1032,
+        "lon": 73.0708
+      },
+      {
+        "lugar": "Hulhumale",
+        "pais": "MV",
+        "lat": 4.2119,
+        "lon": 73.5402
+      },
+      {
+        "lugar": "Maafushi",
+        "pais": "MV",
+        "lat": 3.9409,
+        "lon": 73.4895
+      },
+      {
+        "lugar": "Dhangethi",
+        "pais": "MV",
+        "lat": 3.6081,
+        "lon": 72.9556
+      },
+      {
+        "lugar": "Maamigili",
+        "pais": "MV",
+        "lat": 3.4729,
+        "lon": 72.8363
+      },
+      {
+        "lugar": "Kudahuvadhoo",
+        "pais": "MV",
+        "lat": 2.6709,
+        "lon": 72.8933
+      }
+    ],
+    "anio": 2024,
+    "km": 286,
+    "duenos": [
+      "Dhiraagu",
+      "Ooredoo Maldives"
+    ],
+    "fuentes": [
+      "https://www.dhiraagu.com.mv/about-us/investor-relations/announcements-disclosures/domestic-submarine-cable-system-expansion-project",
+      "https://www.ooredoo.mv/static/ooredoo_maldives1/pdf/20221012-press-release-establishment-of-a-domestic-submarine-cable.pdf",
+      "https://geocables.com/cable/domestic-submarine-cable-of-maldives-dscom"
+    ]
+  },
+  {
+    "nombre": "Pishgaman Oman Iran (POI) Network",
+    "llegadas": [
+      {
+        "lugar": "Chabahar",
+        "pais": "IR",
+        "lat": 25.2982,
+        "lon": 60.6296
+      },
+      {
+        "lugar": "Jask",
+        "pais": "IR",
+        "lat": 25.6812,
+        "lon": 57.7974
+      },
+      {
+        "lugar": "Barka",
+        "pais": "OM",
+        "lat": 23.6787,
+        "lon": 57.8861
+      }
+    ],
+    "anio": 2012,
+    "km": 400,
+    "duenos": [
+      "Pishgaman Kavir Asia"
+    ],
+    "fuentes": [
+      "https://poiconnections.com/pishgaman-oamn-iran-poi-network/",
+      "https://pishgamankavirasia.ir/en/",
+      "https://geocables.com/cable/pishgaman-oman-iran-poi-network"
+    ]
+  },
+  {
+    "nombre": "UAE-Iran",
+    "llegadas": [
+      {
+        "lugar": "Fujairah",
+        "pais": "AE",
+        "lat": 25.1217,
+        "lon": 56.3337
+      },
+      {
+        "lugar": "Jask",
+        "pais": "IR",
+        "lat": 25.6812,
+        "lon": 57.7974
+      }
+    ],
+    "anio": 1992,
+    "km": 170,
+    "duenos": [
+      "e&",
+      "Telecommunication Infrastructure Company of Iran"
+    ],
+    "fuentes": [
+      "https://geocables.com/cable/uae-iran",
+      "https://www.submarinecablemap.com/submarine-cable/uae-iran"
+    ]
+  },
+  {
+    "nombre": "Kuwait-Iran",
+    "llegadas": [
+      {
+        "lugar": "Kuwait City",
+        "pais": "KW",
+        "lat": 29.374,
+        "lon": 47.9747
+      },
+      {
+        "lugar": "Soroosh Platform",
+        "pais": "IR",
+        "lat": 29.0725,
+        "lon": 49.4781
+      },
+      {
+        "lugar": "Khark Island",
+        "pais": "IR",
+        "lat": 29.2458,
+        "lon": 50.3121
+      },
+      {
+        "lugar": "Ganaveh",
+        "pais": "IR",
+        "lat": 29.5708,
+        "lon": 50.5211
+      }
+    ],
+    "anio": 2005,
+    "km": 380,
+    "duenos": [
+      "Kuwait Ministry of Communications",
+      "Telecommunication Infrastructure Company of Iran"
+    ],
+    "fuentes": [
+      "https://geocables.com/cable/kuwait-iran",
+      "https://www.submarinecablemap.com/submarine-cable/kuwait-iran"
+    ]
+  },
+  {
+    "nombre": "Qatar-U.A.E. Submarine Cable System",
+    "llegadas": [
+      {
+        "lugar": "Abu Dhabi",
+        "pais": "AE",
+        "lat": 24.4438,
+        "lon": 54.4189
+      },
+      {
+        "lugar": "Das Island",
+        "pais": "AE",
+        "lat": 25.1526,
+        "lon": 52.866
+      },
+      {
+        "lugar": "Halul Island",
+        "pais": "QA",
+        "lat": 25.6686,
+        "lon": 52.4203
+      },
+      {
+        "lugar": "Doha",
+        "pais": "QA",
+        "lat": 25.2943,
+        "lon": 51.5194
+      }
+    ],
+    "anio": 2004,
+    "km": 100,
+    "duenos": [
+      "Ooredoo",
+      "e&"
+    ],
+    "fuentes": [
+      "https://www.cra.gov.qa/-/media/System/C/0/A/7/C0A7C6E7E59A5C8A9AEBB836F1F663E3/2024-05-20-Consolidated-CRA-ROA-for-SCLS-Consultation-Document-published.ashx",
+      "https://gulfnews.com/business/e-marine-finishes-laying-uae-qatar-cable-1.120845",
+      "https://geocables.com/cable/qatar-u-a-e-submarine-cable-system"
+    ]
+  },
+  {
+    "nombre": "Coral Bridge",
+    "llegadas": [
+      {
+        "lugar": "Taba",
+        "pais": "EG",
+        "lat": 29.4926,
+        "lon": 34.8949
+      },
+      {
+        "lugar": "Aqaba",
+        "pais": "JO",
+        "lat": 29.581,
+        "lon": 35.0051
+      }
+    ],
+    "anio": 2025,
+    "km": 15,
+    "duenos": [
+      "Telecom Egypt",
+      "NaiTel"
+    ],
+    "fuentes": [
+      "https://www.te.eg/en/about-te/press-releases",
+      "https://www.lse.co.uk/rns/coral-bridge-subsea-cable-lands-in-egy-jod-l5rlkscvqc0xarh.html",
+      "https://www.submarinenetworks.com/en/systems/asia-europe-africa/coral-bridge"
+    ]
+  },
+  {
+    "nombre": "Taba-Aqaba",
+    "llegadas": [
+      {
+        "lugar": "Taba",
+        "pais": "EG",
+        "lat": 29.4926,
+        "lon": 34.8949
+      },
+      {
+        "lugar": "Aqaba",
+        "pais": "JO",
+        "lat": 29.581,
+        "lon": 35.0051
+      }
+    ],
+    "anio": 1998,
+    "km": 13,
+    "duenos": [
+      "National Electric Power Company of Jordan"
+    ],
+    "fuentes": [
+      "https://www.submarinecablemap.com/submarine-cable/taba-aqaba",
+      "https://geocables.com/cable/taba-aqaba"
+    ]
+  },
+  {
+    "nombre": "Padang-Tua Pejat",
+    "llegadas": [
+      {
+        "lugar": "Padang",
+        "pais": "ID",
+        "lat": -0.9439,
+        "lon": 100.3617
+      },
+      {
+        "lugar": "Tua Pejat",
+        "pais": "ID",
+        "lat": -2.0282,
+        "lon": 99.589
+      }
+    ],
+    "anio": 2019,
+    "km": 170,
+    "duenos": [
+      "Telkom Indonesia"
+    ],
+    "fuentes": [
+      "https://diskominfo.mentawaikab.go.id/2024/08/tawarkan-rencana-pengembangan.html",
+      "https://geocables.com/cable/padang-tua-pejat",
+      "https://sumbar.antaranews.com/berita/518745/telkomsel-kembangkan-jaringan-di-dua-pulau-mentawai"
+    ]
+  }
+]

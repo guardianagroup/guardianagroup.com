@@ -1,0 +1,32 @@
+[
+  {
+    "nombre": "Backbone nacional norte-sur e interconexión con Níger",
+    "operador": "SBIN / Niger Telecoms",
+    "pais": "BJ",
+    "ciudades": [
+      "Cotonou",
+      "Bohicon",
+      "Dassa-Zoume",
+      "Save",
+      "Parakou",
+      "Kandi",
+      "Malanville",
+      "Gaya"
+    ],
+    "estado": "en servicio",
+    "fuente": "UIT, ITU Broadband Maps, cartografía de transmisión terrestre de Benín y Níger; infraestructura histórica de Bénin Télécoms y Sonitel, actualmente SBIN y Niger Telecoms: https://bbmaps.itu.int/bbmaps/"
+  },
+  {
+    "nombre": "Troncal Ouagadougou–Bobo-Dioulasso–Niangoloko",
+    "operador": "Moov Africa",
+    "pais": "BF",
+    "ciudades": [
+      "Ouagadougou",
+      "Bobo-Dioulasso",
+      "Banfora",
+      "Niangoloko"
+    ],
+    "estado": "en servicio",
+    "fuente": "UIT, ITU Broadband Maps, cartografía de transmisión terrestre de Burkina Faso, red de ONATEL, actualmente Moov Africa Burkina Faso: https://bbmaps.itu.int/bbmaps/"
+  }
+]

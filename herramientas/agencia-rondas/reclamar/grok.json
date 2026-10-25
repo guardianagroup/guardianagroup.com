@@ -1,0 +1,233 @@
+{"jurisdicciones": [
+  {
+    "pais": "Colombia",
+    "ley": "Ley Estatutaria 1581 de 2012 (por la cual se dictan disposiciones generales para la protección de datos personales)",
+    "entrada_en_vigor": "18 de octubre de 2012 (publicación en Diario Oficial 48.587); vigente",
+    "derechos": [
+      {"derecho": "acceso (conocer)", "articulo": "8.a y 14"},
+      {"derecho": "rectificación (actualizar/rectificar)", "articulo": "8.a y 15"},
+      {"derecho": "supresión", "articulo": "8.e y 15"},
+      {"derecho": "oposición", "articulo": null},
+      {"derecho": "portabilidad", "articulo": null},
+      {"derecho": "revocar consentimiento", "articulo": "8.e"}
+    ],
+    "plazo": {"dias": 10, "tipo": "hábiles", "prorroga": "hasta 5 días hábiles adicionales para consultas (art. 14); 15 días hábiles + hasta 8 para reclamos (art. 15)", "articulo": "14 y 15"},
+    "autoridad": {"nombre": "Superintendencia de Industria y Comercio (SIC)", "web": "https://www.sic.gov.co"},
+    "requisitos": "Identificación del titular, dirección/contacto, descripción de los hechos o derecho ejercido, y documentos que se quieran hacer valer (art. 15 para reclamos); consulta por medio habilitado que permita prueba (art. 14).",
+    "correo_valido": true,
+    "gratuito": true,
+    "empresas_extranjeras": "Aplica a tratamiento efectuado en territorio colombiano o cuando al responsable/encargado no establecido en territorio nacional le sea aplicable la legislación colombiana en virtud de normas y tratados internacionales (art. 2).",
+    "fuente": "https://www.suin-juriscol.gov.co/viewDocument.asp?ruta=Leyes/1684507",
+    "dudas": "No existe derecho de portabilidad explícito. Oposición no está enumerada de forma autónoma (se canaliza vía revocatoria/supresión). Plazos distintos según se trate de consulta (acceso) o reclamo (rectificación/supresión). Aplicación extraterritorial es limitada y ha sido discutida en casos concretos ante la SIC."
+  },
+  {
+    "pais": "España",
+    "ley": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD)",
+    "entrada_en_vigor": "RGPD: 25 de mayo de 2018; LOPDGDD: 7 de diciembre de 2018; vigentes",
+    "derechos": [
+      {"derecho": "acceso", "articulo": "15 RGPD"},
+      {"derecho": "rectificación", "articulo": "16 RGPD"},
+      {"derecho": "supresión", "articulo": "17 RGPD"},
+      {"derecho": "oposición", "articulo": "21 RGPD"},
+      {"derecho": "portabilidad", "articulo": "20 RGPD"},
+      {"derecho": "revocar consentimiento", "articulo": "7.3 RGPD"}
+    ],
+    "plazo": {"dias": 30, "tipo": "naturales", "prorroga": "hasta 2 meses adicionales por complejidad o número de solicitudes, informando dentro del primer mes (art. 12.3 RGPD)", "articulo": "12.3 RGPD"},
+    "autoridad": {"nombre": "Agencia Española de Protección de Datos (AEPD)", "web": "https://www.aepd.es"},
+    "requisitos": "Identificación del interesado y descripción del derecho; medios accesibles (incluye electrónicos). El responsable debe facilitar el ejercicio.",
+    "correo_valido": true,
+    "gratuito": true,
+    "empresas_extranjeras": "Sí, si el responsable no establecido en la UE ofrece bienes o servicios a interesados en la UE o controla su comportamiento (art. 3 RGPD).",
+    "fuente": "https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673 y https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679",
+    "dudas": "Plazo se computa en meses calendario (fecha a fecha). Puede haber tasa razonable si la solicitud es manifiestamente infundada o excesiva (art. 12.5 RGPD)."
+  },
+  {
+    "pais": "México",
+    "ley": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), publicada en el Diario Oficial de la Federación el 20 de marzo de 2025 (abroga la de 2010)",
+    "entrada_en_vigor": "21 de marzo de 2025; vigente (última reforma conocida 14 de noviembre de 2025)",
+    "derechos": [
+      {"derecho": "acceso", "articulo": "22"},
+      {"derecho": "rectificación", "articulo": "23"},
+      {"derecho": "supresión (cancelación)", "articulo": "24"},
+      {"derecho": "oposición", "articulo": "26"},
+      {"derecho": "portabilidad", "articulo": null},
+      {"derecho": "revocar consentimiento", "articulo": null}
+    ],
+    "plazo": {"dias": 20, "tipo": "hábiles", "prorroga": "una sola vez por periodo igual, justificada; +15 días hábiles adicionales para hacer efectiva la determinación si procede (art. 31)", "articulo": "31"},
+    "autoridad": {"nombre": "Secretaría Anticorrupción y Buen Gobierno (SABG)", "web": null},
+    "requisitos": "Nombre del titular y domicilio u otro medio para notificaciones; documentos que acrediten identidad (o de representante); descripción clara y precisa de los datos y del derecho ARCO que se ejerce; cualquier elemento que facilite la localización (art. 28).",
+    "correo_valido": true,
+    "gratuito": true,
+    "empresas_extranjeras": "Aplica a particulares (personas físicas o morales privadas) que traten datos personales; alcance extraterritorial no detallado de forma explícita en las fuentes consultadas.",
+    "fuente": "https://www.dof.gob.mx (publicación 20/03/2025) y textos consolidados de la Cámara de Diputados",
+    "dudas": "No hay derecho de portabilidad equivalente al RGPD. Web oficial de la SABG para quejas no confirmada con precisión en esta verificación (INAI ya no es la autoridad). Gratuito salvo costos de reproducción, envío o copia (art. 34). Numeración de artículos distinta a la ley de 2010."
+  },
+  {
+    "pais": "Argentina",
+    "ley": "Ley 25.326 de Protección de los Datos Personales",
+    "entrada_en_vigor": "2000; vigente (proyectos de reforma han perdido estado parlamentario; no hay ley nueva en vigor a octubre 2026)",
+    "derechos": [
+      {"derecho": "acceso", "articulo": "14"},
+      {"derecho": "rectificación", "articulo": "16"},
+      {"derecho": "supresión", "articulo": "16"},
+      {"derecho": "oposición", "articulo": null},
+      {"derecho": "portabilidad", "articulo": null},
+      {"derecho": "revocar consentimiento", "articulo": null}
+    ],
+    "plazo": {"dias": 10, "tipo": "naturales", "prorroga": "no especificada para acceso; 5 días hábiles para rectificación/supresión/actualización (art. 16)", "articulo": "14 y 16"},
+    "autoridad": {"nombre": "Agencia de Acceso a la Información Pública (AAIP)", "web": "https://www.argentina.gob.ar/aaip"},
+    "requisitos": "Acreditación de identidad; precisando datos de identificación y contacto, y el derecho que se desea ejercer.",
+    "correo_valido": true,
+    "gratuito": true,
+    "empresas_extranjeras": "Aplica a bancos de datos públicos o privados destinados a proveer informes; alcance extraterritorial limitado (principalmente territorial).",
+    "fuente": "https://www.argentina.gob.ar/normativa/nacional/norma-64790/actualizacion",
+    "dudas": "Derecho de acceso gratuito a intervalos no inferiores a 6 meses (salvo interés legítimo). No hay portabilidad ni oposición autónomas en la ley vigente. Proyectos de actualización existen pero no han sido sancionados a octubre 2026."
+  },
+  {
+    "pais": "Chile",
+    "ley": "Ley 19.628 sobre Protección de la Vida Privada (vigente a octubre 2026); Ley 21.719 (publicada 13 diciembre 2024) que la modifica/sustituye en aspectos clave",
+    "entrada_en_vigor": "Ley 19.628: 1999 (vigente hasta 30 noviembre 2026 según versión BCN); Ley 21.719 entra en vigor el 1 de diciembre de 2026 (hay proyecto de postergación a 2027 aprobado en general en comisión del Senado a octubre 2026, pero no es ley aún)",
+    "derechos": [
+      {"derecho": "acceso/información", "articulo": "12 (Ley 19.628 vigente)"},
+      {"derecho": "rectificación/modificación", "articulo": "12"},
+      {"derecho": "supresión/cancelación", "articulo": "12 y 6"},
+      {"derecho": "oposición", "articulo": null},
+      {"derecho": "portabilidad", "articulo": null},
+      {"derecho": "revocar consentimiento", "articulo": null}
+    ],
+    "plazo": {"dias": null, "tipo": null, "prorroga": "En Ley 19.628 vigente el ejercicio es principalmente judicial o con plazos cortos/no unificados para respuesta del responsable; bajo Ley 21.719 (desde 1 dic 2026): 30 días corridos, prorrogables una vez por otros 30", "articulo": "12 (vigente); art. correspondiente en 21.719"},
+    "autoridad": {"nombre": "No hay autoridad dedicada bajo Ley 19.628 (control vía tribunales, SERNAC, etc.); Agencia de Protección de Datos Personales (creada por Ley 21.719, operativa con la entrada en vigor)", "web": null},
+    "requisitos": "Solicitud al responsable del banco de datos con individualización; información, modificación o eliminación gratuitas (art. 12 Ley 19.628).",
+    "correo_valido": true,
+    "gratuito": true,
+    "empresas_extranjeras": "Ámbito principalmente territorial bajo Ley 19.628; la Ley 21.719 amplía principios modernos pero entrada futura.",
+    "fuente": "https://www.bcn.cl/leychile/navegar?idNorma=141599 (Ley 19.628) y https://www.bcn.cl/leychile (Ley 21.719)",
+    "dudas": "A octubre 2026 rige Ley 19.628 (derechos más limitados: información, modificación, cancelación, bloqueo; sin autoridad autónoma fuerte). Ley 21.719 introduce derechos ARCOP completos (acceso, rectificación, supresión, oposición, portabilidad, bloqueo) y Agencia, pero entra en vigor el 1 dic 2026 salvo que el proyecto de postergación se apruebe y publique antes. Plazo y autoridad de la ley vigente son menos precisos."
+  },
+  {
+    "pais": "Perú",
+    "ley": "Ley 29733, Ley de Protección de Datos Personales; Reglamento aprobado por Decreto Supremo 016-2024-JUS",
+    "entrada_en_vigor": "Ley 29733: 2011; Reglamento DS 016-2024-JUS: publicado 30 noviembre 2024, vigente desde aproximadamente 31 marzo 2025 (120 días)",
+    "derechos": [
+      {"derecho": "acceso", "articulo": "Ley 29733 y art. 69 Reglamento"},
+      {"derecho": "rectificación", "articulo": "Ley 29733 y Reglamento"},
+      {"derecho": "supresión/cancelación", "articulo": "Ley 29733 y Reglamento"},
+      {"derecho": "oposición", "articulo": "Ley 29733 y Reglamento"},
+      {"derecho": "portabilidad", "articulo": "Reglamento (desde 6 meses después de su vigencia)"},
+      {"derecho": "revocar consentimiento", "articulo": null}
+    ],
+    "plazo": {"dias": 20, "tipo": "hábiles", "prorroga": "ampliable una vez por plazo igual justificado (salvo información); acceso 20 días, rectificación/cancelación/oposición 10 días desde el día siguiente a la solicitud (art. 69 Reglamento)", "articulo": "69 Reglamento"},
+    "autoridad": {"nombre": "Autoridad Nacional de Protección de Datos Personales (ANPD)", "web": "https://www.gob.pe/anpd"},
+    "requisitos": "Solicitud escrita o por medio habilitado; acreditación de identidad y descripción del derecho.",
+    "correo_valido": true,
+    "gratuito": true,
+    "empresas_extranjeras": "Aplica a tratamiento de datos de personas naturales en el país; el Reglamento incorpora criterios más amplios.",
+    "fuente": "https://www.gob.pe/institucion/anpd y texto del DS 016-2024-JUS en El Peruano",
+    "dudas": "Plazos exactos según derecho (información 8, acceso 20, otros 10 días hábiles). Portabilidad añadida por el Reglamento 2024."
+  },
+  {
+    "pais": "Ecuador",
+    "ley": "Ley Orgánica de Protección de Datos Personales (LOPDP), publicada en Registro Oficial Suplemento 459 de 26 de mayo de 2021; Reglamento General (Decreto Ejecutivo 904, 2023)",
+    "entrada_en_vigor": "26 de mayo de 2021 (medidas correctivas y régimen sancionatorio desde 26 mayo 2023); vigente",
+    "derechos": [
+      {"derecho": "acceso", "articulo": "13"},
+      {"derecho": "rectificación", "articulo": "14"},
+      {"derecho": "supresión/eliminación", "articulo": "15"},
+      {"derecho": "oposición", "articulo": "16"},
+      {"derecho": "portabilidad", "articulo": "17"},
+      {"derecho": "revocar consentimiento", "articulo": null}
+    ],
+    "plazo": {"dias": 15, "tipo": null, "prorroga": "no especificada; la ley no precisa si son hábiles o naturales", "articulo": "13, 14, 15, 16, 17"},
+    "autoridad": {"nombre": "Superintendencia de Protección de Datos Personales (SPDP)", "web": "https://www.spdp.gob.ec"},
+    "requisitos": "Demostrar titularidad o representación; descripción clara del derecho y lo solicitado; documentos de identidad. Preferentemente por canales informáticos.",
+    "correo_valido": true,
+    "gratuito": true,
+    "empresas_extranjeras": "Aplica a responsables/encargados que traten datos de titulares en Ecuador o ofrezcan servicios dirigidos a ellos (ámbito territorial y de efectos).",
+    "fuente": "Texto de la LOPDP en fuentes oficiales y https://www.spdp.gob.ec",
+    "dudas": "La ley no especifica si los 15 días son hábiles o naturales (práctica prudente: naturales). Portabilidad requiere normativa de la autoridad para su ejercicio pleno."
+  },
+  {
+    "pais": "Uruguay",
+    "ley": "Ley 18.331 de Protección de Datos Personales y Acción de Habeas Data (11 de agosto de 2008)",
+    "entrada_en_vigor": "2008; vigente",
+    "derechos": [
+      {"derecho": "acceso", "articulo": "14"},
+      {"derecho": "rectificación", "articulo": "15"},
+      {"derecho": "supresión", "articulo": "15"},
+      {"derecho": "oposición", "articulo": null},
+      {"derecho": "portabilidad", "articulo": null},
+      {"derecho": "revocar consentimiento", "articulo": null}
+    ],
+    "plazo": {"dias": 5, "tipo": "hábiles", "prorroga": "no especificada", "articulo": "14 y 15"},
+    "autoridad": {"nombre": "Unidad Reguladora y de Control de Datos Personales (URCDP)", "web": "https://www.gub.uy/unidad-reguladora-control-datos-personales"},
+    "requisitos": "Acreditación de identidad; formulario o solicitud escrita indicando el derecho (acceso, rectificación, actualización, inclusión o supresión).",
+    "correo_valido": true,
+    "gratuito": true,
+    "empresas_extranjeras": "Aplica a datos personales registrados en cualquier soporte susceptibles de tratamiento por responsables en Uruguay; alcance principalmente territorial.",
+    "fuente": "https://www.impo.com.uy/bases/leyes/18331-2008 y https://www.gub.uy/unidad-reguladora-control-datos-personales",
+    "dudas": "Acceso gratuito a intervalos de 6 meses (salvo interés legítimo). No hay portabilidad explícita. Oposición no es un derecho autónomo principal."
+  },
+  {
+    "pais": "Brasil",
+    "ley": "Lei 13.709/2018 (Lei Geral de Proteção de Dados Pessoais - LGPD)",
+    "entrada_en_vigor": "2018 (plena aplicación desde 2020/2021); vigente",
+    "derechos": [
+      {"derecho": "acceso", "articulo": "18.II y 19"},
+      {"derecho": "rectificación", "articulo": "18.III"},
+      {"derecho": "supresión/eliminação", "articulo": "18.IV y VI"},
+      {"derecho": "oposición", "articulo": "18 §2"},
+      {"derecho": "portabilidad", "articulo": "18.V"},
+      {"derecho": "revocar consentimiento", "articulo": "18.IX"}
+    ],
+    "plazo": {"dias": 15, "tipo": "naturales", "prorroga": "para confirmación de existencia o acceso: inmediato (formato simplificado) o hasta 15 días (declaración completa, art. 19); otros derechos según reglamento de la ANPD", "articulo": "19"},
+    "autoridad": {"nombre": "Autoridade Nacional de Proteção de Dados (ANPD)", "web": "https://www.gov.br/anpd/pt-br"},
+    "requisitos": "Requerimento expresso del titular o representante; identificación y descripción del derecho.",
+    "correo_valido": true,
+    "gratuito": true,
+    "empresas_extranjeras": "Sí, si el tratamiento tiene por objetivo la oferta de bienes o servicios a personas en Brasil o se refiere a datos de personas en Brasil (art. 3).",
+    "fuente": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm y https://www.gov.br/anpd",
+    "dudas": "Portabilidad y algunos plazos detallados dependen de reglamentación de la ANPD. Agentes de pequeño porte pueden tener plazos en doble."
+  },
+  {
+    "pais": "Estados Unidos (California)",
+    "ley": "California Consumer Privacy Act (CCPA) as amended by the California Privacy Rights Act (CPRA), California Civil Code §§ 1798.100 et seq.",
+    "entrada_en_vigor": "CCPA 2020; CPRA 2023; vigentes (algunas expansiones de deletion rights y requisitos online entran en vigor 1 enero 2027 bajo SB 923 y otras leyes de 2026)",
+    "derechos": [
+      {"derecho": "acceso (right to know)", "articulo": "1798.100 y 1798.110"},
+      {"derecho": "rectificación (correct)", "articulo": "1798.106"},
+      {"derecho": "supresión (delete)", "articulo": "1798.105"},
+      {"derecho": "oposición (opt-out of sale/sharing)", "articulo": "1798.120"},
+      {"derecho": "portabilidad", "articulo": "formato portable en acceso (1798.130)"},
+      {"derecho": "revocar consentimiento / limit sensitive", "articulo": "opt-out y limit use of sensitive PI"}
+    ],
+    "plazo": {"dias": 45, "tipo": "naturales", "prorroga": "una extensión de hasta 45 días adicionales si se notifica dentro del primer periodo (total 90); opt-out de sale/sharing: 15 días hábiles", "articulo": "1798.130"},
+    "autoridad": {"nombre": "California Privacy Protection Agency (CPPA) y California Attorney General", "web": "https://cppa.ca.gov/ y https://oag.ca.gov/privacy/ccpa"},
+    "requisitos": "Solicitud verificable (verifiable consumer request); al menos dos métodos (incluyendo email o formulario para negocios online); identificación razonable.",
+    "correo_valido": true,
+    "gratuito": true,
+    "empresas_extranjeras": "Sí, si el negocio hace business in California, determina los propósitos y medios de tratamiento de información personal de consumidores de California, y cumple umbrales de ingresos, datos o ventas (ámbito extraterritorial para negocios que targeting California consumers).",
+    "fuente": "https://leginfo.legislature.ca.gov/faces/codes_displayexpandedbranch.xhtml?tocCode=CIV&division=3.&title=1.81.5.&part=4.&chapter=&article=",
+    "dudas": "Derechos de opt-out no requieren siempre solicitud formal con el mismo plazo. Expansiones de 2026 (SB 923) amplían deletion a datos de terceros a partir de 1 enero 2027. No hay derecho de oposición general idéntico al RGPD."
+  },
+  {
+    "pais": "Reino Unido",
+    "ley": "UK GDPR (retained EU law) y Data Protection Act 2018",
+    "entrada_en_vigor": "UK GDPR desde 2018 (ajustado post-Brexit); Data (Use and Access) Act 2025 introduce cambios en quejas desde junio 2026; vigentes",
+    "derechos": [
+      {"derecho": "acceso", "articulo": "15 UK GDPR"},
+      {"derecho": "rectificación", "articulo": "16"},
+      {"derecho": "supresión (erasure)", "articulo": "17"},
+      {"derecho": "oposición", "articulo": "21"},
+      {"derecho": "portabilidad", "articulo": "20"},
+      {"derecho": "revocar consentimiento", "articulo": "7.3"}
+    ],
+    "plazo": {"dias": 30, "tipo": "naturales", "prorroga": "hasta 2 meses adicionales por complejidad o número de solicitudes, informando dentro del primer mes", "articulo": "12 UK GDPR"},
+    "autoridad": {"nombre": "Information Commissioner's Office (ICO)", "web": "https://ico.org.uk"},
+    "requisitos": "Identificación del data subject y descripción clara del derecho; medios razonables (incluye electrónicos).",
+    "correo_valido": true,
+    "gratuito": true,
+    "empresas_extranjeras": "Sí, si el controller ofrece bienes o servicios a individuos en el UK o monitoriza su comportamiento (art. 3 UK GDPR).",
+    "fuente": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/ y https://www.legislation.gov.uk/ukpga/2018/12/contents",
+    "dudas": "Desde 19 junio 2026 hay deberes adicionales sobre manejo de quejas (acknowledgement en plazos cortos bajo Data Use and Access Act). Plazo es un mes calendario."
+  }
+]}

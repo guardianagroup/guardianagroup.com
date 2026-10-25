@@ -1,0 +1,154 @@
+[
+  {
+    "nombre": "Prague–Ostrava",
+    "operador": "ČD - Telematika",
+    "pais": "CZ",
+    "ciudades": ["Prague", "Kolin", "Pardubice", "Ceska Trebova", "Olomouc", "Prerov", "Hranice", "Ostrava"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra ferroviaria operativa de ČD - Telematika (cdt.cz); secuencia urbana inferida del corredor ferroviario Prague–Ceska Trebova–Ostrava, no de un trazado óptico detallado publicado."
+  },
+  {
+    "nombre": "Prague–Brno",
+    "operador": "ČD - Telematika",
+    "pais": "CZ",
+    "ciudades": ["Prague", "Kolin", "Pardubice", "Ceska Trebova", "Svitavy", "Blansko", "Brno"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra ferroviaria operativa de ČD - Telematika (cdt.cz); recorrido probable por el corredor ferroviario hacia Brno, compartiendo el tramo occidental con la ruta a Ostrava."
+  },
+  {
+    "nombre": "Prague–Pilsen–Cheb",
+    "operador": "ČD - Telematika",
+    "pais": "CZ",
+    "ciudades": ["Prague", "Beroun", "Rokycany", "Pilsen", "Stribro", "Marianske Lazne", "Cheb"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de fibra ferroviaria operativa de ČD - Telematika (cdt.cz); ciudades ordenadas según el corredor ferroviario occidental, sin atribuirles una traza óptica publicada."
+  },
+  {
+    "nombre": "Troncal terrestre de Jutlandia",
+    "operador": "TDC NET",
+    "pais": "DK",
+    "ciudades": ["Aalborg", "Randers", "Aarhus", "Horsens", "Vejle", "Kolding", "Aabenraa", "Padborg"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte óptico de TDC NET (tdcnet.com); secuencia probable por el eje E45 de Jutlandia. Se limita al tramo terrestre danés, sin incorporar cruces submarinos hacia las islas."
+  },
+  {
+    "nombre": "Tallinn–Tartu",
+    "operador": "Telia Eesti",
+    "pais": "EE",
+    "ciudades": ["Tallinn", "Paide", "Poltsamaa", "Tartu"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red óptica nacional operativa de Telia Eesti (telia.ee); ciudades intermedias inferidas del corredor de la carretera 2/E263, con acceso a Paide."
+  },
+  {
+    "nombre": "Tallinn–Narva",
+    "operador": "Telia Eesti",
+    "pais": "EE",
+    "ciudades": ["Tallinn", "Rakvere", "Kohtla-Jarve", "Johvi", "Narva"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red óptica nacional operativa de Telia Eesti (telia.ee); secuencia urbana inferida del corredor de la carretera 1/E20. No se presupone continuidad operativa a través de la frontera rusa."
+  },
+  {
+    "nombre": "Tallinn–Parnu",
+    "operador": "Telia Eesti",
+    "pais": "EE",
+    "ciudades": ["Tallinn", "Marjamaa", "Parnu"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red óptica nacional operativa de Telia Eesti (telia.ee); recorrido probable por el corredor de la carretera 4/E67, de más de 100 km."
+  },
+  {
+    "nombre": "Helsinki–Tampere–Oulu",
+    "operador": "Elisa",
+    "pais": "FI",
+    "ciudades": ["Helsinki", "Hameenlinna", "Tampere", "Seinajoki", "Kokkola", "Oulu"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de Elisa (elisa.fi); secuencia inferida del corredor ferroviario principal Helsinki–Tampere–Seinajoki–Oulu. No representa una traza de cable publicada."
+  },
+  {
+    "nombre": "Helsinki–Turku",
+    "operador": "Elisa",
+    "pais": "FI",
+    "ciudades": ["Helsinki", "Espoo", "Lohja", "Salo", "Turku"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de Elisa (elisa.fi); ciudades ordenadas según el corredor terrestre E18, de más de 100 km. No incluye conexiones submarinas desde Turku."
+  },
+  {
+    "nombre": "Helsinki–Kuopio–Oulu",
+    "operador": "Elisa",
+    "pais": "FI",
+    "ciudades": ["Helsinki", "Lahti", "Heinola", "Mikkeli", "Varkaus", "Kuopio", "Kajaani", "Oulu"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de Elisa (elisa.fi); recorrido oriental probable por los corredores de las carreteras 4, 5 y 22. La secuencia intermedia es inferida, no una traza óptica publicada."
+  },
+  {
+    "nombre": "Eje París–Lyon–Marsella",
+    "operador": "Orange",
+    "pais": "FR",
+    "ciudades": ["Paris", "Dijon", "Lyon", "Valence", "Avignon", "Marseille"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de Orange; ciudades intermedias inferidas según los principales nodos regionales y el corredor del Ródano. La secuencia física completa no está publicada."
+  },
+  {
+    "nombre": "Eje París–Burdeos",
+    "operador": "Orange",
+    "pais": "FR",
+    "ciudades": ["Paris", "Orleans", "Tours", "Poitiers", "Bordeaux"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de Orange; secuencia interurbana probable por los corredores A10 y ferroviario París–Burdeos, no un trazado físico confirmado ciudad por ciudad."
+  },
+  {
+    "nombre": "Eje París–Estrasburgo",
+    "operador": "Orange",
+    "pais": "FR",
+    "ciudades": ["Paris", "Reims", "Metz", "Strasbourg"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal terrestre de Orange; secuencia probable de nodos del este de Francia siguiendo el corredor A4. No se dispone de un itinerario físico público completo."
+  },
+  {
+    "nombre": "Eje Fráncfort–Colonia–Düsseldorf",
+    "operador": "Deutsche Telekom",
+    "pais": "DE",
+    "ciudades": ["Frankfurt am Main", "Limburg an der Lahn", "Cologne", "Dusseldorf"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de Deutsche Telekom; secuencia probable entre los nodos de Rin-Meno y Renania siguiendo los corredores A3 y ferroviarios. El paso intermedio por Limburg an der Lahn es inferido."
+  },
+  {
+    "nombre": "Eje Fráncfort–Hannover–Hamburgo",
+    "operador": "Deutsche Telekom",
+    "pais": "DE",
+    "ciudades": ["Frankfurt am Main", "Kassel", "Gottingen", "Hannover", "Hamburg"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de Deutsche Telekom; ciudades intermedias inferidas siguiendo los corredores terrestres A5–A7 y Hannover–Hamburgo. No representa una canalización publicada de extremo a extremo."
+  },
+  {
+    "nombre": "Eje Fráncfort–Leipzig–Berlín",
+    "operador": "Deutsche Telekom",
+    "pais": "DE",
+    "ciudades": ["Frankfurt am Main", "Fulda", "Erfurt", "Leipzig", "Berlin"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de Deutsche Telekom; secuencia probable por los corredores A66–A7–A4 y Leipzig–Berlín. Las ciudades intermedias son una reconstrucción geográfica, no un itinerario físico publicado."
+  },
+  {
+    "nombre": "Eje Atenas–Tesalónica",
+    "operador": "OTE / COSMOTE",
+    "pais": "GR",
+    "ciudades": ["Athens", "Thebes", "Lamia", "Larissa", "Katerini", "Thessaloniki"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de OTE; secuencia probable por el corredor terrestre A1 y los principales nodos de Grecia central y Tesalia. El trazado detallado entre nodos no está publicado."
+  },
+  {
+    "nombre": "Eje Atenas–Corinto–Patras",
+    "operador": "OTE / COSMOTE",
+    "pais": "GR",
+    "ciudades": ["Athens", "Elefsina", "Corinth", "Aigio", "Patras"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de OTE; secuencia probable por el corredor terrestre A8 y la costa norte del Peloponeso. No se incluye ningún cruce submarino del golfo de Corinto."
+  },
+  {
+    "nombre": "Eje Tesalónica–Tracia",
+    "operador": "OTE / COSMOTE",
+    "pais": "GR",
+    "ciudades": ["Thessaloniki", "Kavala", "Xanthi", "Komotini", "Alexandroupoli"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de OTE en Macedonia oriental y Tracia; secuencia probable de nodos siguiendo el corredor terrestre de Egnatia Odos/A2. La canalización exacta no está publicada."
+  }
+]

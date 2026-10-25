@@ -1,0 +1,177 @@
+[
+  {
+    "nombre": "Claro Guatemala - Troncal nacional oeste-este",
+    "operador": "Claro (Telgua)",
+    "pais": "GT",
+    "ciudades": [
+      "Tecun Uman",
+      "Coatepeque",
+      "Quetzaltenango",
+      "Chimaltenango",
+      "Guatemala City",
+      "Sanarate",
+      "Guastatoya",
+      "Zacapa",
+      "Morales",
+      "Puerto Barrios"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor occidental por CA-2 y CA-1, y oriental por CA-9; se infiere el trazado a partir de las principales ciudades, carreteras y nodos de Claro. No es una ruta física publicada. Operador: https://www.claro.com.gt/personas/"
+  },
+  {
+    "nombre": "Claro Guatemala - Troncal del Pacífico",
+    "operador": "Claro (Telgua)",
+    "pais": "GT",
+    "ciudades": [
+      "Tecun Uman",
+      "Coatepeque",
+      "Retalhuleu",
+      "Mazatenango",
+      "Escuintla",
+      "Guatemala City"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de la carretera CA-2 por la costa del Pacífico y conexión desde Escuintla hacia Guatemala City por CA-9. Trazado inferido, no verificado a nivel de fibra. https://www.claro.com.gt/personas/"
+  },
+  {
+    "nombre": "Cable & Wireless Panama - Troncal Interamericana",
+    "operador": "Cable & Wireless Panama (+Movil)",
+    "pais": "PA",
+    "ciudades": [
+      "Paso Canoas",
+      "David",
+      "Santiago",
+      "Aguadulce",
+      "Penonome",
+      "La Chorrera",
+      "Panama City"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: sigue el corredor de la carretera Panamericana desde la frontera con Costa Rica hasta Panama City. La cobertura del operador está publicada, pero esta secuencia no constituye un trazado óptico confirmado. https://www.masmovilpanama.com/cobertura-residencial ; https://terceroperador.asep.gob.pa/infraestructura-digital/"
+  },
+  {
+    "nombre": "Cable & Wireless Panama - Troncal Panama-Colon",
+    "operador": "Cable & Wireless Panama (+Movil)",
+    "pais": "PA",
+    "ciudades": [
+      "Panama City",
+      "Colon"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor terrestre Panama-Colon por autopista y vías de servicio. La presencia del operador en el corredor está documentada, pero no la alineación exacta de la fibra. https://capatec.org.pa/movil-amplia-la-cobertura-de-su-senal-en-la-autopista-panama-colon/"
+  },
+  {
+    "nombre": "Claro Puerto Rico - Troncal costera norte",
+    "operador": "Claro Puerto Rico",
+    "pais": "PR",
+    "ciudades": [
+      "Aguadilla",
+      "Isabela",
+      "Arecibo",
+      "Manati",
+      "Vega Baja",
+      "Bayamon",
+      "San Juan",
+      "Carolina",
+      "Rio Grande",
+      "Fajardo"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de las carreteras PR-2, PR-22 y PR-3 por la costa norte y noreste. Claro tiene cobertura nacional documentada, pero este orden de nodos representa una hipótesis geográfica, no su topología publicada. https://www.claropr.com/institucional/fibra-llega-ponce/"
+  },
+  {
+    "nombre": "Claro Puerto Rico - Troncal costera sur",
+    "operador": "Claro Puerto Rico",
+    "pais": "PR",
+    "ciudades": [
+      "Mayaguez",
+      "San German",
+      "Yauco",
+      "Ponce",
+      "Guayama",
+      "Humacao",
+      "Fajardo"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor meridional y oriental siguiendo principalmente PR-2 y PR-3, con conexiones entre centros urbanos. Claro confirma servicios de fibra en Ponce, no esta secuencia física de troncal. https://www.claropr.com/institucional/fibra-llega-ponce/"
+  },
+  {
+    "nombre": "TSTT - Troncal nacional de Trinidad",
+    "operador": "TSTT",
+    "pais": "TT",
+    "ciudades": [
+      "Point Fortin",
+      "San Fernando",
+      "Couva",
+      "Chaguanas",
+      "Port of Spain",
+      "San Juan",
+      "Tunapuna",
+      "Arima",
+      "Sangre Grande",
+      "Toco"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor vial occidental y central de Trinidad, seguido del corredor este-oeste metropolitano y el acceso a Toco. TSTT confirma su infraestructura nacional de fibra y el enlace terrestre de fibra hacia Toco, pero no publica esta secuencia completa. https://www.tstt.co.tt/company-overview ; https://www.tstt.co.tt/news/tstt-announces-enhanced-network-resilience-for-tobago."
+  },
+  {
+    "nombre": "TSTT - Troncal terrestre de Tobago",
+    "operador": "TSTT",
+    "pais": "TT",
+    "ciudades": [
+      "Crown Point",
+      "Scarborough",
+      "Roxborough",
+      "Speyside"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor terrestre desde el suroeste hasta el noreste de Tobago por las principales carreteras insulares. TSTT documenta la expansión de su red de fibra en Tobago, pero no este trazado exacto. Se excluye expresamente el tramo submarino entre Trinidad y Tobago. https://www.tstt.co.tt/news/tstt-announces-major-additional-fibre-investment-in-t%26t%2C-donates-ideahub-to-speyside-high-school"
+  },
+  {
+    "nombre": "Telesur - Troncal nacional costera este-oeste",
+    "operador": "Telesur",
+    "pais": "SR",
+    "ciudades": [
+      "Nieuw Nickerie",
+      "Totness",
+      "Groningen",
+      "Paramaribo",
+      "Meerzorg",
+      "Moengo",
+      "Albina"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: sigue el corredor vial East-West Link, con centros urbanos de Nickerie, Coronie, Saramacca, Paramaribo, Commewijne y Marowijne. El Gobierno de Suriname y Telesur documentan redes de fibra en esos distritos, pero no confirman cada segmento ni el orden físico de la troncal. https://www.telesur.sr/telesur-is-suriname-aan-het-verglazen/ ; https://gov.sr/regering-gaat-voor-betere-communicatie/"
+  },
+  {
+    "nombre": "EPTC - Troncal nacional norte-sur",
+    "operador": "Eswatini Posts and Telecommunications Corporation (EPTC)",
+    "pais": "SZ",
+    "ciudades": [
+      "Piggs Peak",
+      "Mbabane",
+      "Ezulwini",
+      "Matsapha",
+      "Manzini",
+      "Hlatikulu",
+      "Nhlangano",
+      "Lavumisa"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor norte-sur por las principales carreteras y áreas urbanas, con posibles apoyos en infraestructura eléctrica. El Banco Mundial documenta aproximadamente 985 km de red troncal de fibra de EPTC, pero no esta alineación ciudad por ciudad. https://thedocs.worldbank.org/en/doc/61714f214ed04bcd6e9623ad0e215897-0400012021/related/Digital-Economy-Diagnostic-Eswatini.pdf ; https://www.eptc.co.sz/"
+  },
+  {
+    "nombre": "EPTC - Troncal oriental",
+    "operador": "Eswatini Posts and Telecommunications Corporation (EPTC)",
+    "pais": "SZ",
+    "ciudades": [
+      "Manzini",
+      "Mpaka",
+      "Siteki",
+      "Big Bend",
+      "Lavumisa"
+    ],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor oriental desde Manzini hacia Siteki y el valle meridional, siguiendo carreteras principales y posibles corredores eléctricos. La existencia de la red nacional EPTC está documentada, pero la secuencia de nodos indicada es una inferencia geográfica. https://uasf.esccom.org.sz/programmes/connectivity-programmes/ ; https://www.eptc.co.sz/"
+  }
+]

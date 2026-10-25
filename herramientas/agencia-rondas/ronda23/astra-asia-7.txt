@@ -1,0 +1,98 @@
+[
+  {
+    "nombre": "Corredor occidental Ashgabat–Turkmenbashi",
+    "operador": "Turkmentelecom",
+    "pais": "TM",
+    "ciudades": ["Ashgabat", "Serdar", "Bereket", "Balkanabat", "Turkmenbashi"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Turkmentelecom, representada en los mapas de transmisión terrestre de la UIT; secuencia urbana estimada por el corredor viario y ferroviario occidental, sin confirmar el trazado físico entre ciudades."
+  },
+  {
+    "nombre": "Corredor Ashgabat–Mary–Turkmenabat–Uzbekistán",
+    "operador": "Turkmentelecom / Uzbektelecom",
+    "pais": "TM",
+    "ciudades": ["Ashgabat", "Tejen", "Mary", "Turkmenabat", "Farap", "Olot"],
+    "estado": "en servicio",
+    "fuente": "aproximado: troncal oriental de Turkmentelecom e interconexión terrestre con Uzbektelecom por Farap–Olot; ciudades intermedias estimadas por el corredor principal de transporte. Referencias de red: operadores y mapas de transmisión terrestre de la UIT."
+  },
+  {
+    "nombre": "Troncal costera Abu Dhabi–Dubai–Ras Al Khaimah",
+    "operador": "e& UAE",
+    "pais": "AE",
+    "ciudades": ["Abu Dhabi", "Dubai", "Sharjah", "Ajman", "Umm Al Quwain", "Ras Al Khaimah"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de Etisalat, actualmente e& UAE; secuencia estimada por el corredor costero E11. La documentación pública del operador describe la red, pero no permite identificar una única canalización continua para toda esta secuencia."
+  },
+  {
+    "nombre": "Corredor Abu Dhabi–Al Ain–Omán",
+    "operador": "e& UAE / Omantel",
+    "pais": "AE",
+    "ciudades": ["Abu Dhabi", "Al Ain", "Al Buraymi"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red interurbana de e& UAE e interconexión terrestre con Omantel por Al Ain–Al Buraymi; recorrido interior estimado por el corredor E22. Referencia: documentación de interconexión regional de los operadores."
+  },
+  {
+    "nombre": "Corredor Dubai–Fujairah",
+    "operador": "e& UAE",
+    "pais": "AE",
+    "ciudades": ["Dubai", "Sharjah", "Al Dhaid", "Masafi", "Fujairah"],
+    "estado": "en servicio",
+    "fuente": "aproximado: transporte terrestre de la red nacional de e& UAE hacia Fujairah; secuencia estimada por el corredor Sharjah–Al Dhaid–Masafi. No se incluyen los cables submarinos que llegan a Fujairah ni se presupone que todos sus circuitos utilicen este mismo recorrido."
+  },
+  {
+    "nombre": "Troncal central Tashkent–Samarkand–Bukhara",
+    "operador": "Uzbektelecom",
+    "pais": "UZ",
+    "ciudades": ["Tashkent", "Guliston", "Jizzakh", "Samarkand", "Navoiy", "Bukhara"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Uzbektelecom, recogida en los mapas de transmisión terrestre de la UIT; ciudades ordenadas según los corredores M39 y M37, sin atribuir una canalización exacta."
+  },
+  {
+    "nombre": "Troncal del valle de Fergana",
+    "operador": "Uzbektelecom",
+    "pais": "UZ",
+    "ciudades": ["Tashkent", "Angren", "Kokand", "Fergana", "Andijan"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red de transporte de Uzbektelecom hacia el valle de Fergana, con cruce terrestre del corredor de Kamchik; secuencia estimada por las carreteras A373 y las conexiones interurbanas del valle. Referencias: Uzbektelecom y mapas de transmisión terrestre de la UIT."
+  },
+  {
+    "nombre": "Troncal occidental Bukhara–Urgench–Nukus",
+    "operador": "Uzbektelecom",
+    "pais": "UZ",
+    "ciudades": ["Bukhara", "Gazli", "Urgench", "Nukus"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal occidental de Uzbektelecom hacia Khorezm y Karakalpakstan; secuencia estimada por el corredor A380 y sus accesos urbanos. Referencia de infraestructura: mapas de transmisión terrestre de la UIT."
+  },
+  {
+    "nombre": "Troncal terrestre norte–sur",
+    "operador": "VNPT",
+    "pais": "VN",
+    "ciudades": ["Hanoi", "Phu Ly", "Ninh Binh", "Thanh Hoa", "Vinh", "Ha Tinh", "Dong Hoi", "Dong Ha", "Hue", "Da Nang", "Tam Ky", "Quang Ngai", "Quy Nhon", "Tuy Hoa", "Nha Trang", "Phan Rang-Thap Cham", "Phan Thiet", "Bien Hoa", "Ho Chi Minh City"],
+    "estado": "en servicio",
+    "fuente": "aproximado: troncal óptica terrestre norte–sur de VNPT, descrita en la documentación de su red nacional; secuencia urbana estimada por el corredor de la carretera nacional QL1. No representa los sistemas submarinos ni todas las variantes redundantes."
+  },
+  {
+    "nombre": "Corredor Hanoi–Lang Son–China",
+    "operador": "VNPT / China Telecom",
+    "pais": "VN",
+    "ciudades": ["Hanoi", "Bac Ninh", "Bac Giang", "Lang Son", "Dong Dang", "Pingxiang"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión óptica terrestre Vietnam–China por el corredor Lang Son–Pingxiang, documentada en las redes internacionales de los operadores; ciudades intermedias estimadas por QL1 y el paso de Huu Nghi."
+  },
+  {
+    "nombre": "Corredor Ho Chi Minh City–Camboya",
+    "operador": "Viettel / Metfone",
+    "pais": "VN",
+    "ciudades": ["Ho Chi Minh City", "Cu Chi", "Trang Bang", "Go Dau", "Bavet", "Svay Rieng", "Neak Loeung", "Phnom Penh"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión terrestre de las redes Viettel y Metfone por Moc Bai–Bavet; recorrido estimado por QL22 en Vietnam y NR1 en Camboya. Se prolonga hasta Phnom Penh porque el tramo Ho Chi Minh City–Bavet, por sí solo, no supera claramente los 100 km."
+  },
+  {
+    "nombre": "Troncal Sana'a–Al Hudaydah",
+    "operador": "Public Telecommunications Corporation / YemenNet",
+    "pais": "YE",
+    "ciudades": ["Sanaa", "Manakhah", "Bajil", "Al Hudaydah"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor de fibra de la red nacional de PTC/YemenNet entre la capital y Al Hudaydah, identificado en cartografía de infraestructura de telecomunicaciones de Yemen; ciudades intermedias estimadas por la carretera principal. La clasificación corresponde al corredor operativo, no a segmentos históricos dañados; no implica comprobación en tiempo real de su disponibilidad."
+  }
+]

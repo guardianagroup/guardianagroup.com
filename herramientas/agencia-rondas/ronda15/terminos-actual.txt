@@ -1,0 +1,65 @@
+GUARDIANATus datos, bajo tu controlProductoRadiografíasCómo funcionaPlanesMultas
+ES
+
+IdiomasEnglishENEspañolESPortuguêsPT
+Solo la portada日本語JA한국어KO繁體中文ZHBahasa IndonesiaIDTiếng ViệtVIไทยTHActivar licenciaLicenciaDescargar
+TÉRMINOS DE USO Y REEMBOLSOS · 10 DE OCTUBRE DE 2026
+
+## Términos claros, reembolso sin preguntas.
+
+## 1. Qué es
+
+GUARDIANA es un programa de código abierto (licencia GPL‑3.0‑or‑later) para Windows y macOS que convierte tu PC en el guardián DNS de tu casa. Hay un solo plan, y cubre los dos programas, GUARDIANA y GUARDIANA ZERO: cada uno funciona entero durante 7 días de prueba, sin tarjeta y sin cuenta, y después hace falta una suscripción, mensual o anual, cancelable cuando quieras.
+
+Qué pasa si no te suscribes al terminar la prueba: GUARDIANA no se apaga. Pasa a GUARDIANA Gratis, para siempre, y sigue vigilando este equipo con el DNS como está: el globo en vivo, el DNS de cada programa con su país, empresa y categoría, tus cortes y su deshacer, y las últimas 24 horas de historial. Lo demás es Plus: el historial entero, hasta 5 equipos, alertas, cortes automáticos por categoría y listas, certificado y cartas de derechos, informes, Modo Hogar, comunicaciones cifradas y GUARDIANA ZERO. Si tenías encendido el Modo Hogar, los demás aparatos de la casa siguen recibiendo respuesta para que nadie se quede sin internet, pero Gratis no los mira ni los anota. Lo que ya tenía anotado se queda entero en tu disco y puedes exportarlo en CSV, JSON o PDF cuando quieras; no se borra nada ni pasados los años, y a nosotros nunca nos llega.
+
+Incluye GUARDIANA ZERO. La suscripción incluye también GUARDIANA ZERO, el navegador para Windows 10 y 11, que tiene sus propios 7 días de prueba, sin tarjeta y aparte de los de GUARDIANA: la misma clave sirve para los dos programas. Si su prueba termina sin suscripción, el navegador sigue abriendo páginas, pero sin su protección (no corta rastreadores, publicidad ni corredores de datos, no limpia las direcciones, no vigila tus datos marcados y no hace mandatos ni tachones).
+
+El código es abierto y seguirá siéndolo. Está publicado entero bajo GPL‑3.0: si sabes compilarlo, el programa es tuyo, gratis, sin límite de tiempo y sin pedirnos permiso. Lo que se paga aquí es el programa ya hecho —compilado, firmado, probado en Windows y macOS, con las listas renovadas en cada versión— y que conteste una persona.
+
+## 2. Lo que no promete
+
+GUARDIANA ve nombres de servicios. No ve el contenido, ni qué aplicación los pidió en un teléfono. Solo actúa en la Wi‑Fi de tu casa. No es un antivirus ni un control parental. Y no ve lo que esquiva el DNS, como una VPN o un DNS cifrado propio. No garantizamos «seguridad total» ni protección frente a nada en concreto. La lista completa de límites está en la web y en el propio programa. Usarlo es tu decisión y bajo tu responsabilidad, en los términos de la licencia GPL‑3.0.
+
+## 3. La compra y la licencia
+
+El pago se realiza a la pasarela de pago, que actúa como vendedor oficial, emite la factura y gestiona los impuestos. Recibirás una clave de licencia por correo. La clave es personal y vale para hasta 5 equipos: los tuyos, en tu casa o en varias. No se puede revender. La activación con clave hace una conexión a la pasarela. Después, el programa vuelve a comprobar la clave: una suscripción, a los 8 días de activarla y luego una vez por periodo de pago (al mes o al año); una licencia De por vida, a los 8 días y luego cada 30 días. Si una comprobación no se puede hacer (sin red, o la pasarela no contesta), la reintenta cada hora. Si la pasarela dice que la suscripción no está pagada, Plus se apaga (si después pagas, vuelve al escribir la clave otra vez). Y si una suscripción pasa 7 días sin poder comprobarse, contados desde el primer intento fallido, Plus también se apaga: GUARDIANA pasa a Gratis y sigue vigilando este equipo, igual que al terminar la prueba. El programa sigue intentándolo cada hora y, en cuanto una comprobación sale bien, Plus vuelve solo, sin escribir la clave. GUARDIANA ZERO sigue las mismas reglas con la misma clave: si su suscripción se apaga así, el navegador sigue abriendo páginas, pero sin su protección, hasta que una comprobación salga bien. La licencia De por vida no se apaga por no poder comprobarse (punto 3 bis). Cada conexión queda anotada en tu extracto. El precio depende del país de facturación que indiques al pagar; la pasarela puede rechazar el pago si ese país no cuadra con tu medio de pago. Plus al mes: 2,49 US$ en Latinoamérica (Colombia incluida), 4,49 € en Europa, 3,99 £ en el Reino Unido y 4,99 US$ en el resto del mundo. Plus al año, un 20 % menos: 23,90 US$, 43,10 €, 38,30 £ o 47,90 US$. Los precios ya incluyen los impuestos que correspondan. Los 7 días de prueba del programa no se cobran ni piden tarjeta; la suscripción se cobra al comprarla. Una suscripción se puede cancelar en cualquier momento y termina al final del periodo pagado; el precio de un periodo ya pagado no cambia. Cancelar la renovación no devuelve el periodo en curso, salvo lo que dice el punto 4 sobre los 30 días. Mensual y anual tienen exactamente las mismas funciones. Plus es una licencia de uso del programa: no es una participación en la empresa ni un producto financiero.
+
+Qué pasa con tu historial cuando termina la suscripción: todo vive en tu equipo y a nosotros no nos llega nada. No se borra nada, nunca, ni pasados los años: el programa deja de anotar, pero lo anotado se queda donde está. Puedes exportarlo en CSV, JSON o PDF desde la página del extracto, o borrarlo tú cuando quieras.
+
+## 3 bis. La licencia De por vida
+
+Hasta el 18 de octubre de 2026 se vendió como licencia Fundador. Quien la compró entonces es Fundador original: la licencia, su clave y todo lo que sigue quedan exactamente igual.
+
+Un solo pago, sin renovación, limitada a 1.000 licencias en todo el mundo. 49 US$ en el resto del mundo, 24,50 US$ en Latinoamérica (Colombia incluida), 44,10 € en Europa y 39,20 £ en el Reino Unido, con los impuestos que correspondan ya incluidos. Cuando se vendan las 1.000, se retira; no se amplían. Da acceso a todo lo que da Plus, sin cuota mensual ni anual.
+
+Qué significa «de por vida», dicho sin rodeos: mientras GUARDIANA exista como producto. No prometemos que el programa dure para siempre, porque no está en nuestra mano y decirlo sería mentir; prometemos que mientras exista, tú no vuelves a pagar. Si algún día dejáramos de publicarlo, el programa que tengas instalado seguirá funcionando en tu equipo —es de código abierto y no depende de ningún servidor nuestro— y lo diríamos en esta web con su fecha.
+
+Qué cubre y qué no: es personal, vale para hasta 5 equipos tuyos, y no se puede revender ni transferir. Incluye las versiones siguientes del programa, también la 2.0 y GUARDIANA 2 cuando salgan. No caduca por falta de conexión: el programa comprueba la clave a los 8 días de activarla y luego cada 30 días (si no puede, lo reintenta cada hora), pero no apaga Plus por no haber podido comprobarla, aunque el equipo pase meses apagado. Lo único que la termina es un reembolso: entonces la pasarela deja de darla por válida y el programa lo dice, con su fecha, en la página de Licencia. Los 30 días de reembolso sin preguntas del punto 4 valen igual para la licencia De por vida.
+
+## 4. Reembolsos
+
+Si en los 30 días siguientes a la compra GUARDIANA no te sirve, escribe a hola@guardianagroup.com con el correo de compra y te devolvemos el importe completo, sin preguntas. La devolución la procesa la pasarela por el mismo medio de pago. No hace falta pagar para probar: los 7 días de prueba no piden tarjeta.
+
+## 5. Soporte y actualizaciones
+
+Soporte por correo en español, inglés y portugués. Las actualizaciones nunca se instalan solas: las descargas tú de esta web cuando quieras. Las versiones siguientes del programa —incluidas la 2.0 (bloquear por programa, en Windows) y GUARDIANA 2, cuando salgan— están incluidas en Plus. No prometemos fechas: lo que hay publicado está en el registro público.
+
+## 6. Datos de Órbita y de las Radiografías
+
+Los datos del mundo que muestra Órbita (cables submarinos y terrestres, centros de datos, satélites, fronteras y mapa) se toman de fuentes públicas y verificables y se vuelven a comprobar antes de publicarse; cuando un dato es aproximado o puede faltar, la propia pantalla lo dice. Reconocimientos exigidos por sus licencias: cables, estaciones y centros de datos © colaboradores de OpenStreetMap (ODbL) y Wikidata (CC0); elementos orbitales de los satélites de CelesTrak, con posiciones calculadas en tu equipo; fronteras, nombres de regiones y las ciudades que aparecen al acercar el mapa, de Natural Earth (dominio público; «Made with Natural Earth»); nombres de ciudades junto a cables y centros de datos, de GeoNames (CC BY 4.0); imágenes de la Tierra de la NASA (dominio público); relieve del fondo marino y del terreno de ETOPO 2022, NOAA NCEI (dominio público); trazados de fibra por tierra de The Internet Topology Zoo (CC BY 4.0) y de otros registros públicos que se citan en el registro de datos del proyecto. Los datos sobre tu equipo se miden en tu equipo y no salen de él. El informe en PDF de «El viaje de tus datos» se compone también en tu equipo, con html2canvas (Niklas von Hertzen, licencia MIT). Los tipos de letra de Órbita (Instrument Serif, Schibsted Grotesk, Hanken Grotesk e IBM Plex Mono) se sirven desde este mismo sitio con su licencia SIL Open Font License 1.1. «Con / Sin GUARDIANA» muestra una medición propia: el 23 de octubre de 2026 se abrió desde Colombia la portada de once diarios deportivos y de noticias, en un navegador sin bloqueadores y aceptando las cookies cuando la web las pidió, y se anotó cada dominio de otra empresa con el que conectó el navegador; la empresa y el país de su sede se publican solo cuando al menos dos revisiones independientes coinciden, y los trayectos, por los cables y los satélites del mapa, son ilustrativos: llegan al país de esa sede y no indican por dónde viajó cada dato. «Con GUARDIANA» aplica a esa misma medición las reglas de GUARDIANA (se cortan la publicidad, el rastreo y la medición); no es una medición de tu equipo.
+
+## 6 bis. Fuentes de la portada
+
+Lo que cuenta la portada sobre la subasta de tus datos se ha comprobado, antes de publicarlo, en estos textos:
+- La subasta y lo que viaja en ella. Que lo que se sabe de ti (navegador, sistema, idioma, zona horaria, ubicación, pantalla, la página que lees y tus identificadores) se envía a muchas empresas a la vez, que solo una gana y que entre las categorías posibles hay salud, religión o política: Information Commissioner’s Office del Reino Unido, «Update report into adtech and real time bidding», 20 de junio de 2019, páginas 4, 12, 13, 16 y 20; y la especificación OpenRTB 2.3 de IAB (objetos Device, Site y User). «Tu ficha, ahora mismo» se calcula en tu navegador con esos mismos datos y no se envía a ningún sitio.
+- 376 y 747 veces al día. Irish Council for Civil Liberties, informe sobre la escala de las subastas en tiempo real en Estados Unidos y Europa, 16 de mayo de 2022: es una estimación, y en total da 178 billones de veces al año entre los dos.
+- Los brókers de datos. La definición del registro público de brókers de datos de California (California Privacy Protection Agency): empresas que reúnen datos de personas de varias fuentes y los venden aunque esas personas no hayan tratado con ellas.
+- La ubicación de cientos de millones de móviles. Comisión Federal de Comercio de Estados Unidos (FTC), nota del 4 de mayo de 2026 sobre el acuerdo con Kochava y su filial: según la demanda, vendían datos de ubicación de cientos de millones de móviles con los que se podía seguir a una persona, también en sus visitas a centros de salud y lugares de culto.
+- Los once diarios. Medición propia, descrita en el punto 6. Las 22 empresas de publicidad son las de la portada de Marca en esa medición.
+- El planeta de la portada. Los cables submarinos y la fibra por tierra son los de Órbita (punto 6). Las luces que los recorren, los satélites que cruzan y la señal que sube desde Colombia a un satélite geoestacionario y baja en otro país son ilustraciones: no muestran tráfico real ni el camino de los datos de nadie. Los satélites y su órbita no están a escala.
+
+## 7. Ley aplicable
+
+Estos términos se rigen por las leyes de Colombia, sin perjuicio de los derechos que te reconozca como consumidor la ley de tu país de residencia (en la Unión Europea, el Reino Unido o Brasil, entre otros). Responsable: GUARDIANA GROUP S.A.S., Torre Empresarial PRODEGI, Carrera 3 # 9-30, piso 18, Bocagrande, Cartagena de Indias, Colombia. Contacto: hola@guardianagroup.com.InicioInstalarPlanesGuíasRadiografíasEl negocio de tus datosPrivacidadTérminos y reembolsosPolítica de firma de códigoContactohola@guardianagroup.com SíguenosInstagramTikTokYouTubeFacebookXThreads
+GUARDIANA · guardianagroup.com · Torre Empresarial PRODEGI, piso 18, Bocagrande, Cartagena de Indias, Colombia · Esta página no usa cookies ni analíticas.Volver arriba ↑

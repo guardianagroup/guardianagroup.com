@@ -1,0 +1,5 @@
+Portada de GUARDIANA, un servicio de privacidad. Titular ya decidido: «¿Sabes a dónde van tus datos y quién los compra?». Hace falta una sección sobre la subasta de datos: al abrir una página puede empezar una subasta de anuncios en tiempo real en la que muchas empresas reciben datos de la persona para pujar; y existen brókers de datos que compran datos de personas y los revenden. Reglas: todo debe ser verdadero y comprobable, sin cifras inventadas, sin marcas reales y sin prometer protección absoluta.
+Responde directamente en español, en 180 palabras como máximo:
+1. Un título para la sección.
+2. Cinco frases muy afiladas y verdaderas.
+3. Qué dato de cada frase hay que verificar y en qué tipo de fuente oficial.

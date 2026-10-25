@@ -1,0 +1,62 @@
+[
+  {
+    "nombre": "Troncal occidental y septentrional Colombo–Jaffna",
+    "operador": "Sri Lanka Telecom (SLT-MOBITEL)",
+    "pais": "LK",
+    "ciudades": ["Colombo", "Kurunegala", "Dambulla", "Vavuniya", "Kilinochchi", "Jaffna"],
+    "estado": "en servicio",
+    "fuente": "aproximado: SLT-MOBITEL, informes anuales y descripción de su National Backbone Network; secuencia urbana inferida por los corredores A6 y A9, no publicada como itinerario completo de un único cable."
+  },
+  {
+    "nombre": "Troncal costera meridional Colombo–Hambantota",
+    "operador": "Sri Lanka Telecom (SLT-MOBITEL)",
+    "pais": "LK",
+    "ciudades": ["Colombo", "Kalutara", "Ambalangoda", "Galle", "Matara", "Hambantota"],
+    "estado": "en servicio",
+    "fuente": "aproximado: SLT-MOBITEL, información sobre su red troncal nacional de fibra; ciudades ordenadas siguiendo el corredor costero A2. El trazado preciso entre nodos no está publicado."
+  },
+  {
+    "nombre": "Troncal Colombo–Kandy",
+    "operador": "Sri Lanka Telecom (SLT-MOBITEL)",
+    "pais": "LK",
+    "ciudades": ["Colombo", "Kegalle", "Peradeniya", "Kandy"],
+    "estado": "en servicio",
+    "fuente": "aproximado: SLT-MOBITEL, descripción de la National Backbone Network; itinerario terrestre de más de 100 km inferido por el corredor A1."
+  },
+  {
+    "nombre": "Eje troncal Damascus–Aleppo",
+    "operador": "Syrian Telecom",
+    "pais": "SY",
+    "ciudades": ["Damascus", "An Nabk", "Homs", "Hama", "Aleppo"],
+    "estado": "en servicio",
+    "fuente": "aproximado: información de Syrian Telecom y comunicaciones de SANA sobre explotación y reparación de la red interurbana de fibra; secuencia inferida por el corredor M5. No representa una certificación de disponibilidad continua de todos los tramos."
+  },
+  {
+    "nombre": "Troncal Homs–costa mediterránea",
+    "operador": "Syrian Telecom",
+    "pais": "SY",
+    "ciudades": ["Homs", "Tartus", "Baniyas", "Latakia"],
+    "estado": "en servicio",
+    "fuente": "aproximado: información de Syrian Telecom sobre la red interurbana y sus enlaces con las gobernaciones costeras; recorrido inferido por los corredores Homs–Tartus y M1. No representa una certificación de disponibilidad continua de todos los tramos."
+  },
+  {
+    "nombre": "Troncal occidental Taipei–Kaohsiung",
+    "operador": "Chunghwa Telecom",
+    "pais": "TW",
+    "ciudades": ["Taipei", "Taoyuan City", "Hsinchu", "Taichung", "Chiayi City", "Tainan", "Kaohsiung"],
+    "estado": "en servicio",
+    "fuente": "aproximado: Chunghwa Telecom, informes anuales sobre su red óptica troncal nacional; secuencia de los principales nodos del corredor occidental, con trazado intermedio inferido por los ejes ferroviarios y viarios de la costa oeste."
+  },
+  {
+    "nombre": "Troncal oriental Taipei–Kaohsiung",
+    "operador": "Chunghwa Telecom",
+    "pais": "TW",
+    "ciudades": ["Taipei", "Yilan", "Hualien City", "Taitung City", "Pingtung", "Kaohsiung"],
+    "estado": "en servicio",
+    "fuente": "aproximado: Chunghwa Telecom, información de su red óptica nacional y conectividad de la costa oriental; recorrido terrestre inferido por los corredores de las carreteras 9 y 1. No se incluyen cables submarinos de respaldo."
+  },
+  {
+    "nombre": "Troncal Dushanbe–Khujand",
+    "operador": "Tajiktelecom",
+    "pais": "TJ",
+    "ciudades": ["Dushanbe", "Ayni", "

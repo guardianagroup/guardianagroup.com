@@ -1,0 +1,99 @@
+[
+  {
+    "nombre": "Troncal occidental Budapest–Győr–Sopron",
+    "operador": "Magyar Telekom",
+    "pais": "HU",
+    "ciudades": ["Budapest", "Győr", "Csorna", "Sopron"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de Magyar Telekom (telekom.hu); ciudades intermedias inferidas del corredor M1–M85. No representa un trazado físico publicado."
+  },
+  {
+    "nombre": "Troncal meridional Budapest–Szeged",
+    "operador": "Magyar Telekom",
+    "pais": "HU",
+    "ciudades": ["Budapest", "Kecskemét", "Kiskunfélegyháza", "Szeged"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de Magyar Telekom (telekom.hu); secuencia probable por el corredor de la M5, superior a 100 km."
+  },
+  {
+    "nombre": "Troncal suroccidental Budapest–Nagykanizsa",
+    "operador": "Magyar Telekom",
+    "pais": "HU",
+    "ciudades": ["Budapest", "Székesfehérvár", "Siófok", "Nagykanizsa"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de Magyar Telekom (telekom.hu); secuencia probable por el corredor de la M7. El detalle de paso por cada ciudad no está publicado."
+  },
+  {
+    "nombre": "Anillo nacional: tramo occidental Reykjavik–Akureyri",
+    "operador": "Míla",
+    "pais": "IS",
+    "ciudades": ["Reykjavik", "Borgarnes", "Blönduós", "Varmahlíð", "Akureyri"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de Míla (mila.is); secuencia inferida del corredor occidental y septentrional de la carretera 1."
+  },
+  {
+    "nombre": "Anillo nacional: tramo meridional Reykjavik–Höfn",
+    "operador": "Míla",
+    "pais": "IS",
+    "ciudades": ["Reykjavik", "Selfoss", "Hella", "Hvolsvöllur", "Vík", "Kirkjubæjarklaustur", "Höfn"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de Míla (mila.is); recorrido probable por el corredor meridional de la carretera 1, sin incluir conexiones submarinas."
+  },
+  {
+    "nombre": "Anillo nacional: tramo nororiental Akureyri–Egilsstaðir",
+    "operador": "Míla",
+    "pais": "IS",
+    "ciudades": ["Akureyri", "Reykjahlíð", "Egilsstaðir"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de fibra de Míla (mila.is); principales localidades del corredor terrestre nororiental de la carretera 1. No se presupone el uso de túneles viarios recientes."
+  },
+  {
+    "nombre": "Troncal Dublin–Cork",
+    "operador": "eir",
+    "pais": "IE",
+    "ciudades": ["Dublin", "Naas", "Portlaoise", "Cashel", "Fermoy", "Cork"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de eir Wholesale (eirwholesale.ie); ciudades ordenadas según el corredor N7/M7–N8/M8. La alineación exacta de la fibra no está publicada."
+  },
+  {
+    "nombre": "Troncal Dublin–Galway",
+    "operador": "eir",
+    "pais": "IE",
+    "ciudades": ["Dublin", "Kinnegad", "Athlone", "Ballinasloe", "Galway"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de transporte de eir Wholesale (eirwholesale.ie); recorrido probable por los corredores N4/M4 y N6/M6, superior a 100 km."
+  },
+  {
+    "nombre": "Troncal transfronteriza Dublin–Belfast",
+    "operador": "BT",
+    "pais": "IE",
+    "ciudades": ["Dublin", "Drogheda", "Dundalk", "Newry", "Belfast"],
+    "estado": "en servicio",
+    "fuente": "aproximado: conectividad terrestre entre las redes de BT Ireland y BT en Irlanda del Norte (btireland.com); secuencia probable por el corredor M1–A1. Newry es la primera ciudad incluida del Reino Unido."
+  },
+  {
+    "nombre": "Eje troncal Milan–Rome",
+    "operador": "Sparkle",
+    "pais": "IT",
+    "ciudades": ["Milan", "Bologna", "Florence", "Rome"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red italiana operativa de Sparkle y mapa de su red global (tisparkle.com); secuencia terrestre probable por el corredor de la A1. El mapa comercial no publica la alineación física completa."
+  },
+  {
+    "nombre": "Eje troncal septentrional Turin–Trieste",
+    "operador": "Sparkle",
+    "pais": "IT",
+    "ciudades": ["Turin", "Milan", "Brescia", "Verona", "Padua", "Venice", "Trieste"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red italiana de Sparkle (tisparkle.com); secuencia inferida del corredor terrestre de la A4. Venice se refiere al área continental de Mestre, no a un tramo submarino hacia el centro histórico."
+  },
+  {
+    "nombre": "Eje troncal meridional Rome–Reggio Calabria",
+    "operador": "Sparkle",
+    "pais": "IT",
+    "ciudades": ["Rome", "Naples", "Salerno", "Cosenza", "Lamezia Terme", "Reggio Calabria"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red italiana de Sparkle (tisparkle.com); secuencia probable por los corredores A1–A2 y sus accesos urbanos. Se limita al tramo continental y excluye el cruce submarino a Sicilia."
+  },
+  {
+    "nombre": "Interconexión terrestre Kosovo–Albania

@@ -1,0 +1,60 @@
+[
+  {
+    "nombre": "Troncal transcanadiense Vancouver–Montreal",
+    "operador": "Rogers Communications (red heredada de Shaw)",
+    "pais": "CA",
+    "ciudades": [
+      "Vancouver",
+      "Kamloops",
+      "Calgary",
+      "Medicine Hat",
+      "Swift Current",
+      "Moose Jaw",
+      "Regina",
+      "Brandon",
+      "Winnipeg",
+      "Kenora",
+      "Thunder Bay",
+      "Sudbury",
+      "Toronto",
+      "Montreal"
+    ],
+    "estado": "en servicio",
+    "fuente": "Rogers Communications y Shaw Communications, documentación corporativa sobre su red nacional de fibra; aproximado: secuencia de ciudades inferida del corredor ferroviario transcontinental de Canadian Pacific y de los principales nodos de la antigua red Shaw. No representa un trazado físico íntegramente publicado."
+  },
+  {
+    "nombre": "Corredor Ontario–Quebec: Windsor–Quebec",
+    "operador": "Bell Canada",
+    "pais": "CA",
+    "ciudades": [
+      "Windsor",
+      "London",
+      "Toronto",
+      "Kingston",
+      "Ottawa",
+      "Montreal",
+      "Quebec"
+    ],
+    "estado": "en servicio",
+    "fuente": "BCE/Bell Canada, informes anuales y documentación de su red troncal de fibra en Ontario y Quebec; aproximado: concatenación de enlaces troncales operativos entre estos centros, siguiendo los corredores de las carreteras 401, 416, 417 y 40. La secuencia por Ottawa es una alternativa al corredor directo Kingston–Montreal; no se afirma un único cable continuo."
+  },
+  {
+    "nombre": "Troncal occidental Vancouver–Calgary–Edmonton",
+    "operador": "TELUS",
+    "pais": "CA",
+    "ciudades": [
+      "Vancouver",
+      "Hope",
+      "Merritt",
+      "Kamloops",
+      "Revelstoke",
+      "Golden",
+      "Banff",
+      "Calgary",
+      "Red Deer",
+      "Edmonton"
+    ],
+    "estado": "en servicio",
+    "fuente": "TELUS, documentación corporativa de su red de fibra en British Columbia y Alberta; aproximado: enlaces entre los principales nodos occidentales, con ciudades intermedias inferidas de los corredores de las carreteras 5 y 1 hasta Calgary y de la carretera 2 hasta Edmonton. El paso exacto por cada ciudad intermedia no está confirmado mediante un trazado público completo."
+  }
+]

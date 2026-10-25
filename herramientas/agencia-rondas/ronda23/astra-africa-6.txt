@@ -1,0 +1,114 @@
+[
+  {
+    "nombre": "Maputo–Beira",
+    "operador": "Tmcel",
+    "pais": "MZ",
+    "ciudades": ["Maputo", "Marracuene", "Manhica", "Xai-Xai", "Maxixe", "Vilanculos", "Inchope", "Dondo", "Beira"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red troncal nacional de Tmcel, heredada de Telecomunicações de Moçambique; secuencia de ciudades inferida por los corredores EN1 y EN6. La documentación pública de la red no permite confirmar cada paso urbano ni el trazado físico completo."
+  },
+  {
+    "nombre": "Beira–Mutare",
+    "operador": "Tmcel / TelOne",
+    "pais": "MZ",
+    "ciudades": ["Beira", "Dondo", "Inchope", "Chimoio", "Manica", "Mutare"],
+    "estado": "en servicio",
+    "fuente": "aproximado: conexión terrestre operativa entre las redes de Tmcel y TelOne, utilizada para el acceso internacional de Zimbabwe por Mozambique; recorrido intermedio inferido por la EN6 y la carretera de Machipanda a Mutare."
+  },
+  {
+    "nombre": "Windhoek–Oshakati",
+    "operador": "Telecom Namibia",
+    "pais": "NA",
+    "ciudades": ["Windhoek", "Okahandja", "Otjiwarongo", "Otavi", "Tsumeb", "Ondangwa", "Ongwediva", "Oshakati"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra en servicio descrita por Telecom Namibia en sus informes corporativos; orden de ciudades inferido por los corredores B1 y C46. No representa un inventario publicado de empalmes."
+  },
+  {
+    "nombre": "Walvis Bay–Windhoek",
+    "operador": "Telecom Namibia",
+    "pais": "NA",
+    "ciudades": ["Walvis Bay", "Swakopmund", "Arandis", "Usakos", "Karibib", "Okahandja", "Windhoek"],
+    "estado": "en servicio",
+    "fuente": "aproximado: transporte terrestre de Telecom Namibia entre la costa y Windhoek, asociado a su red nacional y al acceso a WACS; ciudades intermedias inferidas por las carreteras B2 y B1. Se incluye únicamente el tramo terrestre."
+  },
+  {
+    "nombre": "Windhoek–frontera sudafricana",
+    "operador": "Telecom Namibia",
+    "pais": "NA",
+    "ciudades": ["Windhoek", "Rehoboth", "Mariental", "Keetmanshoop", "Karasburg", "Noordoewer", "Vioolsdrif"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor meridional e interconexión terrestre con Sudáfrica de la red de Telecom Namibia; secuencia inferida por las carreteras B1, B3 y el corredor de Noordoewer. Vioolsdrif es la primera localidad sudafricana incluida."
+  },
+  {
+    "nombre": "Niamey–Malanville",
+    "operador": "Niger Telecoms / red troncal de Benín",
+    "pais": "NE",
+    "ciudades": ["Niamey", "Dosso", "Gaya", "Malanville"],
+    "estado": "en servicio",
+    "fuente": "aproximado: interconexión de fibra Niger–Benín por Gaya–Malanville, documentada en los estudios de conectividad regional de la UIT y del Banco Mundial; ciudades intermedias inferidas por las carreteras Niamey–Dosso–Gaya. No se refiere a nuevas rutas proyectadas."
+  },
+  {
+    "nombre": "Niamey–Zinder",
+    "operador": "Niger Telecoms",
+    "pais": "NE",
+    "ciudades": ["Niamey", "Dosso", "Dogondoutchi", "Birnin Konni", "Madaoua", "Maradi", "Tessaoua", "Zinder"],
+    "estado": "en servicio",
+    "fuente": "aproximado: eje oriental de la red nacional de fibra de Niger Telecoms, heredada de SONITEL; recorrido urbano inferido por la RN1. Se limita al corredor hasta Zinder y no presupone continuidad operativa hacia Diffa."
+  },
+  {
+    "nombre": "Lagos–Abuja",
+    "operador": "MTN Nigeria",
+    "pais": "NG",
+    "ciudades": ["Lagos", "Ibadan", "Ogbomoso", "Ilorin", "Jebba", "Mokwa", "Bida", "Abuja"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra de larga distancia en servicio descrita en los informes anuales de MTN Nigeria; secuencia probable por los corredores viales Lagos–Ibadan–Ilorin y Jebba–Mokwa–Bida–Abuja. No es un trazado físico publicado por el operador."
+  },
+  {
+    "nombre": "Abuja–Kano",
+    "operador": "MTN Nigeria",
+    "pais": "NG",
+    "ciudades": ["Abuja", "Kaduna", "Zaria", "Kano"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor septentrional de la red nacional de fibra de MTN Nigeria, cuya operación está documentada en sus informes corporativos; ciudades ordenadas según el eje vial Abuja–Kaduna–Zaria–Kano."
+  },
+  {
+    "nombre": "Lagos–Enugu",
+    "operador": "Globacom",
+    "pais": "NG",
+    "ciudades": ["Lagos", "Sagamu", "Ore", "Benin City", "Asaba", "Onitsha", "Awka", "Enugu"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red terrestre nacional de Globacom y servicios de transporte Glo 1; secuencia probable por el corredor vial meridional Lagos–Benin City–Onitsha–Enugu. Se excluye el cable submarino Glo 1."
+  },
+  {
+    "nombre": "Kigali–Rusizi por Huye",
+    "operador": "Broadband Systems Corporation (BSC)",
+    "pais": "RW",
+    "ciudades": ["Kigali", "Muhanga", "Nyanza", "Huye", "Nyamagabe", "Rusizi"],
+    "estado": "en servicio",
+    "fuente": "aproximado: red nacional de fibra y servicios de backbone descritos por BSC y las autoridades TIC de Rwanda; secuencia inferida por el corredor vial meridional hacia Rusizi. No se afirma que todas las ciudades sean puntos de regeneración óptica."
+  },
+  {
+    "nombre": "Kigali–Rubavu",
+    "operador": "Broadband Systems Corporation (BSC)",
+    "pais": "RW",
+    "ciudades": ["Kigali", "Musanze", "Rubavu"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor noroccidental de la red nacional de fibra de Rwanda, operada comercialmente por BSC; recorrido inferido por la carretera Kigali–Musanze–Rubavu. Las fuentes públicas describen la red en servicio, pero no detallan toda su canalización."
+  },
+  {
+    "nombre": "Dakar–frontera de Mali",
+    "operador": "Sonatel / Orange",
+    "pais": "SN",
+    "ciudades": ["Dakar", "Thies", "Diourbel", "Kaolack", "Kaffrine", "Koungheul", "Tambacounda", "Kidira", "Diboli"],
+    "estado": "en servicio",
+    "fuente": "aproximado: backbone nacional de Sonatel e interconexión terrestre Senegal–Mali por Kidira, descritos en documentación corporativa del grupo Sonatel; ciudades intermedias inferidas por los corredores N3, N4 y N1. Diboli es la primera localidad de Mali incluida."
+  },
+  {
+    "nombre": "Dakar–Matam por el norte",
+    "operador": "Sonatel / Orange",
+    "pais": "SN",
+    "ciudades": ["Dakar", "Thies", "Tivaouane", "Louga", "Saint-Louis", "Richard Toll", "Ndioum", "Ourossogui", "Matam"],
+    "estado": "en servicio",
+    "fuente": "aproximado: corredor septentrional de la red nacional de fibra de Sonatel; secuencia probable por la N2 y el acceso a Matam. La existencia de la red operativa está documentada por Sonatel, pero esta secuencia urbana no constituye un trazado detallado publicado."
+  }
+]
