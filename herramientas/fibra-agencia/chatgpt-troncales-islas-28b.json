@@ -1,0 +1,342 @@
+[
+ {
+  "nombre": "Red terrestre FTTH Flow – corredor central y oriental de Providenciales",
+  "operador": "Flow Turks and Caicos",
+  "pais": "TC",
+  "ciudades": [
+   "Blue Hills",
+   "Glass Shack",
+   "Grace Bay",
+   "Leeward Palms"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: localidades con cobertura FTTH operativa confirmada por Flow, ordenadas según su posición geográfica; el trazado físico exacto no está publicado. https://magneticmediatv.com/2021/03/flow-on-schedule-to-deliver-enhanced-broadband-experience-to-customers/"
+ },
+ {
+  "nombre": "Red terrestre FTTH Flow – corredor meridional de Providenciales",
+  "operador": "Flow Turks and Caicos",
+  "pais": "TC",
+  "ciudades": [
+   "Thompson Cove",
+   "Glass Shack",
+   "Long Bay"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: conexión probable entre localidades con fibra FTTH en servicio, mediante los corredores viarios de Providenciales. https://magneticmediatv.com/2021/03/flow-on-schedule-to-deliver-enhanced-broadband-experience-to-customers/"
+ },
+ {
+  "nombre": "Red terrestre FTTH Digicel – corredor occidental de Tortola",
+  "operador": "Digicel British Virgin Islands",
+  "pais": "VG",
+  "ciudades": [
+   "Road Town",
+   "Sea Cows Bay",
+   "West End"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: recorrido por la carretera costera occidental; Digicel confirma una red FTTH operativa en Tortola, pero no publica su trazado entre estas localidades ni la cobertura exacta de cada una. https://www.digicelgroup.com/vg/en/legal/bvi-coverage-map"
+ },
+ {
+  "nombre": "Red terrestre FTTH Digicel – corredor oriental de Tortola",
+  "operador": "Digicel British Virgin Islands",
+  "pais": "VG",
+  "ciudades": [
+   "Road Town",
+   "East End"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: corredor terrestre por la carretera principal oriental de Tortola; la fuente confirma FTTH en la isla, no el enlace exacto. https://www.digicelgroup.com/vg/en/legal/bvi-coverage-map"
+ },
+ {
+  "nombre": "Red terrestre FTTH Digicel – Virgin Gorda",
+  "operador": "Digicel British Virgin Islands",
+  "pais": "VG",
+  "ciudades": [
+   "Spanish Town",
+   "Savannah Bay"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: posible interconexión terrestre por la carretera occidental de Virgin Gorda; el operador confirma FTTH en la isla, sin detallar los puntos de paso. https://www.digicelgroup.com/vg/en/legal/bvi-coverage-map"
+ },
+ {
+  "nombre": "Red terrestre BLAST – corredor occidental de Tutuila",
+  "operador": "American Samoa Telecommunications Authority (ASTCA)",
+  "pais": "AS",
+  "ciudades": [
+   "Fagatogo",
+   "Utulei",
+   "Nu'uuli",
+   "Tafuna",
+   "Leone"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: recorrido según las carreteras principales del oeste de Tutuila; ASTCA confirma que su red subterránea de fibra alcanza las localidades habitadas de Samoa Americana. https://www.astca.as/"
+ },
+ {
+  "nombre": "Red terrestre BLAST – corredor oriental de Tutuila",
+  "operador": "American Samoa Telecommunications Authority (ASTCA)",
+  "pais": "AS",
+  "ciudades": [
+   "Pago Pago",
+   "Aua",
+   "Lauli'i"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: recorrido siguiendo la carretera costera oriental; ASTCA confirma su red de fibra óptica subterránea operativa, pero no publica la secuencia precisa de nodos. https://www.astca.as/our-network/"
+ },
+ {
+  "nombre": "Red terrestre BLAST – Tafuna y Vaitogi",
+  "operador": "American Samoa Telecommunications Authority (ASTCA)",
+  "pais": "AS",
+  "ciudades": [
+   "Tafuna",
+   "Vaitogi"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: tramo terrestre por la red viaria del suroeste de Tutuila; cobertura general de fibra subterránea publicada por ASTCA. https://www.astca.as/broadband/"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica IT&E – corredor meridional de Saipan",
+  "operador": "IT&E",
+  "pais": "MP",
+  "ciudades": [
+   "Garapan",
+   "Susupe",
+   "Chalan Kanoa",
+   "San Antonio"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: corredor por las carreteras occidentales de Saipan; el Gobierno de las Islas Marianas del Norte documenta la red terrestre de fibra enterrada de los operadores IT&E y DOCOMO Pacific, sin atribuirles este trazado exacto. https://opd.gov.mp/library/reports/2018-cnmi-ssmp-update.pdf"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica IT&E – corredor septentrional de Saipan",
+  "operador": "IT&E",
+  "pais": "MP",
+  "ciudades": [
+   "Garapan",
+   "Puerto Rico",
+   "Tanapag"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: conexión probable por la carretera costera septentrional de Saipan; la documentación oficial acredita infraestructura terrestre de fibra, pero no identifica los nodos de este recorrido. https://opd.gov.mp/library/reports/2018-cnmi-ssmp-update.pdf"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica de Rota",
+  "operador": "IT&E",
+  "pais": "MP",
+  "ciudades": [
+   "Songsong",
+   "Sinapalo"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: recorrido por la carretera entre los dos principales núcleos de Rota; la documentación del Gobierno confirma fibra óptica terrestre en la isla, aunque no identifica la ruta ni su operador específico por tramo. https://opd.gov.mp/library/reports/2018-cnmi-ssmp-update.pdf"
+ },
+ {
+  "nombre": "Red troncal terrestre de fibra óptica de Rarotonga – Aroa y Avarua",
+  "operador": "Vodafone Cook Islands",
+  "pais": "CK",
+  "ciudades": [
+   "Aroa",
+   "Avarua"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en el informe anual del operador: anillo terrestre MPLS de fibra óptica de 10 Gbit/s en Rarotonga, con nodos GPON operativos en Aroa y Avarua; recorrido entre nodos aproximado. https://announcements.spx.com.fj/ftp/news/1112023105258ATH.PDF"
+ },
+ {
+  "nombre": "Enlace terrestre entre el punto de llegada de Rutaki y la estación de Aroa",
+  "operador": "Avaroa Cables Limited",
+  "pais": "CK",
+  "ciudades": [
+   "Rutaki",
+   "Aroa"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado por Avaroa Cables Limited: el cable llega por el paso de Rutaki y se conecta por tierra con la estación de llegada de Aroa; la alineación exacta del tramo terrestre no está detallada. https://avaroacable.com/news/cable-arrives-in-rarotonga"
+ },
+ {
+  "nombre": "Red terrestre FTTH de Futuna – Vele y Kolia",
+  "operador": "Service des Postes et Télécommunications de Wallis-et-Futuna",
+  "pais": "WF",
+  "ciudades": [
+   "Vele",
+   "Kolia"
+  ],
+  "estado": "en servicio",
+  "fuente": "publicado en el informe oficial de ejecución de la estrategia digital de 2022: 52 hogares conectados mediante fibra óptica en los pueblos de Vélé y Kolia; recorrido exacto aproximado. https://www.wallis-et-futuna.gouv.fr/contenu/telechargement/13107/108450/file/Rapport%20annuel%20d%27ex%C3%A9cution%20de%20la%20strat%C3%A9gie%20num%C3%A9rique%202022.pdf"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica de Wallis – distrito central",
+  "operador": "Service des Postes et Télécommunications de Wallis-et-Futuna",
+  "pais": "WF",
+  "ciudades": [
+   "Mata-Utu",
+   "Falaleu"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: tramo probable dentro del distrito central de Wallis; el Gobierno confirma conexiones de fibra óptica activas en ese distrito, pero no identifica públicamente este enlace entre pueblos. https://www.wallis-et-futuna.gouv.fr/contenu/telechargement/13107/108450/file/Rapport%20annuel%20d%27ex%C3%A9cution%20de%20la%20strat%C3%A9gie%20num%C3%A9rique%202022.pdf"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica Ålcom – Mariehamn y Godby",
+  "operador": "Ålcom",
+  "pais": "AX",
+  "ciudades": [
+   "Mariehamn",
+   "Jomala",
+   "Godby"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: corredor por la carretera principal entre Mariehamn y Godby; Ålcom confirma redes propias de fibra óptica en toda la parte continental de Åland. https://www.alcom.ax/privat/bredband/bestall-fiber"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica Ålcom – corredor occidental de Åland",
+  "operador": "Ålcom",
+  "pais": "AX",
+  "ciudades": [
+   "Mariehamn",
+   "Jomala",
+   "Hammarland",
+   "Eckerö"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: recorrido siguiendo la carretera principal hacia Eckerö; el operador confirma infraestructura propia de fibra terrestre en la isla principal, sin detallar esta secuencia de nodos. https://www.alcom.ax/privat/bredband/bestall-fiber"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica Ålcom – corredor sudoriental de Åland",
+  "operador": "Ålcom",
+  "pais": "AX",
+  "ciudades": [
+   "Mariehamn",
+   "Lemland",
+   "Lumparland"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: corredor viario sudoriental de la isla principal; Ålcom acredita una red terrestre propia de fibra óptica que cubre la Åland continental. https://www.alcom.ax/privat/bredband/bestall-fiber"
+ },
+ {
+  "nombre": "Red terrestre Guernsey Fibre – corredor septentrional",
+  "operador": "Sure Guernsey",
+  "pais": "GG",
+  "ciudades": [
+   "Saint Peter Port",
+   "Saint Sampson",
+   "Vale"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: interconexión probable por las carreteras del noreste de Guernsey; Sure confirma una red terrestre FTTP operativa con cobertura del 98 % de los inmuebles. https://www.sure.com/guernsey/latest-news/2025/the-time-is-now-to-switch-to-fibre/"
+ },
+ {
+  "nombre": "Red terrestre Guernsey Fibre – corredor occidental",
+  "operador": "Sure Guernsey",
+  "pais": "GG",
+  "ciudades": [
+   "Saint Peter Port",
+   "Castel",
+   "Cobo",
+   "Vazon"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: itinerario por el centro y oeste de la isla; Sure confirma disponibilidad comercial de fibra en Cobo y Vazon, además de su red insular de fibra activa. https://www.sure.com/press-centre/more-than-25-per-cent-homes-fibre-ready/"
+ },
+ {
+  "nombre": "Red terrestre Guernsey Fibre – corredor meridional",
+  "operador": "Sure Guernsey",
+  "pais": "GG",
+  "ciudades": [
+   "Saint Peter Port",
+   "Saint Martin",
+   "Forest"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: conexión según los corredores de carreteras del sur de Guernsey; Sure confirma una red terrestre de fibra en servicio en todas las parroquias, sin publicar su trazado físico completo. https://www.sure.com/press-centre/3000-guernsey-homes-now-have-access-to-fibre/"
+ },
+ {
+  "nombre": "Red troncal terrestre Fibre Island – corredor occidental de Jersey",
+  "operador": "JT",
+  "pais": "JE",
+  "ciudades": [
+   "Saint Helier",
+   "Saint Lawrence",
+   "Saint Peter",
+   "Saint Ouen"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: recorrido por las carreteras de la zona occidental; JT confirma que completó la red de fibra óptica hasta los inmuebles de Jersey en 2018, aunque no publica este trazado exacto. https://www.jtglobal.com/global/our-history/"
+ },
+ {
+  "nombre": "Red troncal terrestre Fibre Island – corredor suroccidental de Jersey",
+  "operador": "JT",
+  "pais": "JE",
+  "ciudades": [
+   "Saint Helier",
+   "Saint Aubin",
+   "Saint Brelade"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: conexión por el corredor viario de la costa suroccidental de Jersey; red FTTH insular en servicio confirmada por JT. https://www.jtglobal.com/global/2018-a-milestone-year-for-fibre-island/"
+ },
+ {
+  "nombre": "Red troncal terrestre Fibre Island – corredor oriental de Jersey",
+  "operador": "JT",
+  "pais": "JE",
+  "ciudades": [
+   "Saint Helier",
+   "Saint Clement",
+   "Grouville",
+   "Saint Martin"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: recorrido probable por los corredores viarios del este de Jersey; el operador confirma la cobertura insular de fibra óptica, pero no identifica este itinerario como una ruta física específica. https://www.jtglobal.com/global/our-history/"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica Manx Telecom – corredor nororiental",
+  "operador": "Manx Telecom",
+  "pais": "IM",
+  "ciudades": [
+   "Douglas",
+   "Onchan",
+   "Laxey",
+   "Ramsey"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: trazado probable por la carretera principal A2; Manx Telecom confirma fibra óptica operativa disponible para más del 90 % de hogares y empresas de la isla, sin publicar la geometría de este corredor. https://www.manxtelecom.com/news/press/2029-deadline-for-copper-network-switch-off-as-fibre-takes-over/"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica Manx Telecom – corredor occidental",
+  "operador": "Manx Telecom",
+  "pais": "IM",
+  "ciudades": [
+   "Douglas",
+   "Union Mills",
+   "Glen Vine",
+   "St John's",
+   "Peel"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: recorrido por la carretera A1 entre Douglas y Peel; Manx Telecom acredita una extensa red FTTP insular en servicio, pero no publica esta secuencia de nodos. https://www.manxtelecom.com/news/press/2029-deadline-for-copper-network-switch-off-as-fibre-takes-over/"
+ },
+ {
+  "nombre": "Red terrestre de fibra óptica Manx Telecom – corredor meridional",
+  "operador": "Manx Telecom",
+  "pais": "IM",
+  "ciudades": [
+   "Douglas",
+   "Ballasalla",
+   "Castletown",
+   "Port St Mary",
+   "Port Erin"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: recorrido por las principales carreteras del sur de la Isla de Man; el operador confirma el despliegue y funcionamiento de su red terrestre de fibra, sin precisar este itinerario completo. https://www.manxtelecom.com/news/press/2029-deadline-for-copper-network-switch-off-as-fibre-takes-over/"
+ },
+ {
+  "nombre": "Red terrestre FTTH de Longyearbyen y Nybyen",
+  "operador": "Telenor Svalbard",
+  "pais": "SJ",
+  "ciudades": [
+   "Longyearbyen",
+   "Nybyen"
+  ],
+  "estado": "en servicio",
+  "fuente": "aproximado: tramo por la carretera local entre el centro de Longyearbyen y el asentamiento de Nybyen; el Gobierno local confirma que todas las viviendas de Longyearbyen están conectadas a la red terrestre de fibra de Telenor, sin publicar el itinerario exacto por barrios. https://www.lokalstyre.no/tjenester/innbyggerinformasjon/ny-i-longyearbyen"
+ }
+]
