@@ -1,5 +1,5 @@
 {
- "nota": "Revisión 2 (24 Oct 2026, 22:40): fotos de las plataformas petrolíferas donde termina un cable (ronda 29). Buscadas a mano en Wikimedia Commons desde el navegador y vistas una a una: solo fotos reales de esa plataforma en el mar, sin personas. Grane (solo fotos lejanas, la plataforma no se distingue), Inspirer (Yme) y Draupner S quedan sin foto.",
+ "nota": "Revisión 2 (24 Oct 2026, 22:40): fotos de las plataformas petrolíferas donde termina un cable (ronda 29). Buscadas a mano en Wikimedia Commons desde el navegador y vistas una a una: solo fotos reales de esa plataforma en el mar, sin personas. Grane va con un recorte del original. Inspirer (Yme) y Draupner S quedan sin foto: ni Commons ni Flickr tienen una libre (Gemini lo buscó también en los bancos de Gassco, Equinor, Repsol y Sokkeldirektoratet: derechos reservados).",
  "aceptadas": [
   {
    "tipo": "estacion",
@@ -84,15 +84,27 @@
    "miniatura": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Ula_Platform.jpg/960px-Ula_Platform.jpg",
    "pagina": "https://commons.wikimedia.org/wiki/File:Ula_Platform.jpg",
    "motivo": "las plataformas de Ula en el mar, 2007"
+  },
+  {
+   "tipo": "estacion",
+   "id": "Grane",
+   "nombre": "Grane",
+   "archivo": "Grane, Nordsjøen (27944593723).jpg",
+   "autor": "Norsk olje og gass",
+   "licencia": "CC BY-SA 2.0",
+   "url_licencia": "https://creativecommons.org/licenses/by-sa/2.0",
+   "miniatura": "https://upload.wikimedia.org/wikipedia/commons/9/96/Grane%2C_Nordsj%C3%B8en_%2827944593723%29.jpg",
+   "pagina": "https://commons.wikimedia.org/wiki/File:Grane,_Nordsj%C3%B8en_(27944593723).jpg",
+   "recorte": [
+    4545,
+    2860,
+    5230,
+    3245
+   ],
+   "motivo": "la plataforma Grane en el mar (2016); recorte del original de 5456 px, donde sale pequeña en el horizonte"
   }
  ],
  "descartadas": [
-  {
-   "tipo": "estacion",
-   "nombre": "Grane",
-   "archivo": "Grane, Nordsjøen (27944593723).jpg",
-   "motivo": "la plataforma sale diminuta en el horizonte"
-  },
   {
    "tipo": "estacion",
    "nombre": "Johan Sverdrup",
