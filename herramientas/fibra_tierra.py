@@ -100,6 +100,28 @@ def redondea(l):
     return out
 
 
+def mar_de():
+    """the share of a line that lies over the sea, on herramientas/fuentes/tierra-ne10m.png (Natural Earth 10m land,
+    0.025° a pixel); None without Pillow or the mask"""
+    try:
+        from PIL import Image
+        Image.MAX_IMAGE_PIXELS = None
+        im = Image.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fuentes', 'tierra-ne10m.png')).convert('1')
+    except Exception:  # noqa: BLE001
+        return None
+    W, H = im.size; px = im.load()
+    def parte(l):
+        tot = mar = 0.0
+        for (x0, y0), (x1, y1) in zip(l, l[1:]):
+            d = math.hypot(x1 - x0, (y1 - y0)); n = max(2, int(d / 0.02))
+            for i in range(n):
+                f = (i + 0.5) / n; lo, la = x0 + (x1 - x0) * f, y0 + (y1 - y0) * f
+                tot += 1
+                if px[int((lo + 180) / 360 * W) % W, min(H - 1, max(0, int((90 - la) / 180 * H)))] == 0: mar += 1
+        return mar / tot if tot else 0.0
+    return parte
+
+
 def trae(nombre, dirfuentes):
     d = os.path.join(dirfuentes, nombre)
     if not os.path.isdir(d):
@@ -315,9 +337,17 @@ def main():
             for c in dag['lineas']:
                 lineas.append({'n': c['n'], 'o': c['o'], 'cc': c['cc'], 'e': 'ok', 'l': c['l'], 'f': len(fuentes) - 1})
 
+    # 25 Oct 2026 (revisión punto por punto): three AfTerFibre «backbones» are submarine cables drawn along the coast at
+    # sea — Project ADONES (Angola, 94 % over water; not in service, see agencia-rondas/ronda26), Libreville–Port Gentil
+    # «Undersea» (Gabon) and TDM's Caia–Beira–Maputo festoon (Mozambique, damaged according to RTI). A line of the land
+    # layer that runs more than half its length over the sea (Natural Earth 10m land) is not land fibre: it is left out.
+    al_mar = mar_de()
     salida, tot, paises, por_f = [], 0.0, set(), {}
     for x in lineas:
         if x['e'] in ('plan', 'metro'):
+            continue
+        if al_mar and x['f'] in (0, 1) and al_mar(x['l']) > 0.5:
+            print('  fuera de la capa de tierra (más de la mitad en el mar):', x['n'], x['cc'])
             continue
         l = redondea(simplifica(x['l']))
         if len(l) < 2:
