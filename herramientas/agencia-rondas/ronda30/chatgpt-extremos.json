@@ -1,0 +1,72 @@
+[
+ {
+  "n": 1,
+  "cable": "APRICOT",
+  "estado": "en servicio",
+  "llega_a": null,
+  "pais": null,
+  "estacion": null,
+  "une_con": "El segmento S6 de Chunghwa Telecom, desde Toucheng (Taiwán), termina en una unidad de ramificación submarina de la troncal APRICOT. La troncal operativa conecta Minamiboso (Japón, JP) y Agat (Guam, GU). El ramal de Taiwán tiene aproximadamente 632 km. Meta confirmó en octubre de 2025 que la conexión Japón-Taiwán-Guam ya estaba disponible comercialmente. No se ha confirmado públicamente la posición exacta de la unidad de ramificación.",
+  "fuente": "Meta, 5 de octubre de 2025: https://engineering.fb.com/2025/10/05/connectivity/introducing-the-candle-subsea-cable-updates-to-our-asia-pacific-connectivity-projects/ ; Información técnica de APRICOT: https://www.submarinenetworks.com/en/systems/intra-asia/apricot ; Aviso marítimo de Chunghwa Telecom citado en https://www.taiwannews.com.tw/news/6187747"
+ },
+ {
+  "n": 2,
+  "cable": "臺金二號海纜",
+  "estado": "en servicio",
+  "llega_a": "Taichung",
+  "pais": "TW",
+  "estacion": null,
+  "une_con": null,
+  "fuente": "Gobierno del condado de Kinmen y Chunghwa Telecom: https://www.kinmen.gov.tw/News_Content2.aspx?n=98E3CA7358C89100&s=8A93781C09C23751&sms=BF7D6D478B935644 ; El cable TK-2 conecta Taichung con Kinmen, tiene aproximadamente 230 km y entró en servicio en 2000. En 2022 se sustituyeron aproximadamente 47 km del extremo de Kinmen, cuyo amarre se identifica como Fengshang. El Ministerio de Asuntos Digitales de Taiwán lo mantiene en su inventario oficial de cables nacionales: https://web.moda.gov.tw/major-policies/subseacable/1747"
+ },
+ {
+  "n": 3,
+  "cable": "FLAG Europe-Asia",
+  "estado": "en servicio",
+  "llega_a": "Suez",
+  "pais": "EG",
+  "estacion": "Suez Cable Landing Station",
+  "une_con": "El ramal de Aqaba se integra en el sistema FLAG Europe-Asia (FEA) del mar Rojo, cuya ruta enlaza Suez (Egipto, EG) con Jeddah (Arabia Saudí, SA). La posición 27.442 N, 34.335 E es compatible con la conexión submarina del ramal de Aqaba a esa ruta. No se ha podido confirmar que esas coordenadas correspondan exactamente a la unidad de ramificación.",
+  "fuente": "Reliance Communications, descripción de la red FEA: https://www.rcom.co.in/infrastructure/our-global-network/ ; GCX, informe de sostenibilidad de 2024 con mapa de su red: https://gcxworld.com/wp-content/uploads/2025/08/FLAG-GCX-Sustainability-Report-2024_compressed.pdf ; GCX, comunicado de 2024 sobre la utilización de FEA para conectar Jordania: https://managedservices.gcxworld.com/wp-content/uploads/2024/05/Salam_GCX-2024-MOU-PRL_.pdf . Existe discrepancia entre fuentes secundarias sobre su posible retirada; no se ha localizado una confirmación oficial de retirada del ramal."
+ },
+ {
+  "n": 4,
+  "cable": "UK-Ireland Crossing 2",
+  "estado": "en servicio",
+  "llega_a": "Curracloe",
+  "pais": "IE",
+  "estacion": null,
+  "une_con": null,
+  "fuente": "Department of Trade and Industry del Reino Unido, informe SEA8, tabla de cables de telecomunicaciones: https://assets.publishing.service.gov.uk/media/5a7aee25e5274a319e77bb9a/SEA8_TechRep_OtherUsers.pdf ; Identifica expresamente UK Ireland Crossing 2, de Global Crossing, como Ballinsker–Crooklets Bay, activo. Ballinsker o Ballinesker Beach pertenece a Curracloe, condado de Wexford, según Wexford County Council: https://www.wexfordcoco.ie/curracloebeach ; Documentación ambiental posterior también identifica el cable como activo: https://www.bluegemwind.com/wp-content/uploads/2020/07/Appendix-U-Updated-Cable-Burial-Risk-Assessment.pdf"
+ },
+ {
+  "n": 5,
+  "cable": "Baltic Sea Submarine Cable",
+  "estado": "en servicio",
+  "llega_a": "Stockholm",
+  "pais": "SE",
+  "estacion": null,
+  "une_con": "El tramo situado entre 59.794 N, 19.655 E y 59.784 N, 21.360 E es compatible con el corredor occidental del Baltic Sea Submarine Cable entre Stockholm y Helsinki. El sistema también conecta Tallinn (Estonia, EE). No se ha confirmado que el extremo occidental indicado sea una unidad de ramificación ni se dispone de un trazado público suficientemente detallado para certificar la continuación exacta desde esas coordenadas.",
+  "fuente": "Cambridge University Press, Submarine Cables (2026), identifica el Baltic Sea Submarine Cable de CITIC Telecom International como conexión entre Stockholm, Helsinki y Tallinn: https://www.cambridge.org/core/elements/submarine-cables/0EB3AE7457630C821D923CDEED2FB4F8 ; El cable sufrió daños en diciembre de 2024, con referencias posteriores a la recuperación de los sistemas afectados. Su trazado exacto en el entorno de Åland no queda determinado por estas fuentes."
+ },
+ {
+  "n": 6,
+  "cable": "Cable sin nombre de la isla de Sirri",
+  "estado": "desconocido",
+  "llega_a": null,
+  "pais": null,
+  "estacion": null,
+  "une_con": null,
+  "fuente": "No se ha encontrado una fuente pública verificable de un operador o regulador que identifique el cable representado entre 25.892 N, 54.546 E y 25.748 N, 54.626 E, ni que confirme si es un cable de telecomunicaciones, eléctrico o una instalación submarina vinculada a los campos petrolíferos de Sirri. No es posible establecer su continuación ni su estado operativo con la documentación localizada."
+ },
+ {
+  "n": 7,
+  "cable": "Cable sin nombre de Tonga",
+  "estado": "en servicio",
+  "llega_a": "Suva",
+  "pais": "FJ",
+  "estacion": "FINTEL Cable Landing Station, Suva",
+  "une_con": "La orientación occidental del tramo indicado es compatible con Tonga Cable, el sistema internacional que conecta Tongatapu con Suva, Fiyi. Tonga Cable Limited confirma que su cable internacional termina en las instalaciones de FINTEL en Suva. No se ha verificado documentalmente que los dos puntos concretos de OpenStreetMap pertenezcan a ese sistema, por lo que la identificación del tramo es probable, no definitiva.",
+  "fuente": "Tonga Cable Limited, operador del sistema: https://www.tongacable.to/ ; El operador identifica expresamente el cable internacional hacia Fiyi y su terminación en FINTEL, Suva. Banco Asiático de Desarrollo, Tonga-Fiji Submarine Cable Project: https://www.adb.org/projects/44172-022/main ; Agencia Australiana de Asuntos Exteriores, infraestructura internacional y redundancia de Tonga: https://www.dfat.gov.au/geo/tonga/development-assistance/objective-2-strengthening-fiscal-stability-accountable-governance-and-economic-performance"
+ }
+]
