@@ -12,7 +12,10 @@ class WS extends EventEmitter {
     socket.on('data', (d) => this.lee(d));
     socket.on('close', () => { this.abierto = false; this.emit('close'); });
     socket.on('error', () => { this.abierto = false; this.emit('close'); });
+    socket.on('drain', () => this.emit('drain'));
   }
+  // bytes aún no entregados al sistema (si crece, el cliente va atrasado y no conviene mandarle cuadros viejos)
+  get atraso() { try { return this.s.writableLength || 0; } catch (_) { return 0; } }
 
   static acepta(req, socket) {
     const k = req.headers['sec-websocket-key'];

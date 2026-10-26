@@ -55,6 +55,7 @@ const hostDe = (u) => { try { return new URL(u).hostname; } catch (_) { return '
 const ahora = () => new Date().toISOString();
 const esLocal = (h) => h === '127.0.0.1' || h === 'localhost' || h === '::1';
 
+const ATRASO_MAX = 192 * 1024; // bytes en cola hacia la persona a partir de los cuales no se mandan cuadros atrasados
 const TIPO_ABP = { stylesheet: 'stylesheet', image: 'image', media: 'media', font: 'font', script: 'script', texttrack: 'other', xhr: 'xmlhttprequest', fetch: 'xmlhttprequest', eventsource: 'other', websocket: 'websocket', manifest: 'other', ping: 'ping', other: 'other' };
 const PROPOSITO = { publicidad: 'Publicidad', rastreo: 'Rastreador', malware: 'Web peligrosa', 'avisos-cookies': 'Aviso de cookies', 'red-local': 'Red local', excepciones: '', parametros: 'Seguimiento', 'otra-empresa': 'Otra empresa' };
 
@@ -93,6 +94,8 @@ class Sesion {
     this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.ultimos = [];
     this.descargas = new Map(); this.nDesc = 0;
     this.permitidas = new Set(); // dominios base o 'e:<empresa>' que la persona ha permitido en esta sesión
+    this.nCuadros = { enviados: 0, descartados: 0 }; this.cuadroPendiente = null;
+    ws.on('drain', () => { if (this.cuadroPendiente && this.ws.abierto && this.ws.atraso <= ATRASO_MAX) { const d = this.cuadroPendiente; this.cuadroPendiente = null; this.ws.send(Buffer.from(d, 'base64')); this.nCuadros.enviados++; } });
     this.nivel = process.env.ZERO_NIVEL_INICIAL || 'observar'; // 26 Oct 2026: por defecto se abre todo y la persona elige qué cortar
     VIVAS.add(this); this.ultimaMirada = Date.now();
     ws.on('message', (m, bin) => { if (bin) return; if (m.length > MAX_MENSAJE) { this.op('mensaje demasiado grande: descartado'); return; } this.mensaje(m).catch(() => {}); });
@@ -135,7 +138,11 @@ class Sesion {
     await this.ctx.addInitScript(SENSORES);
     await this.ctx.addInitScript(this.senuelos.initScript());
     this.op('señuelos plantados: texto escondido, cookie propia, almacén local, enlace oculto');
-    await this.ctx.route('**/*', (route, req) => this.filtra(route, req));
+    // 26 Oct 2026 (ronda 46): interceptar cada petición con Playwright apaga la caché de Chromium y mete a Node en el camino
+    // de todas las conexiones. En Observar (no se corta nada) solo se interceptan las navegaciones (webs peligrosas y limpieza
+    // de la dirección) por CDP Fetch, y el resto se observa por Network.requestWillBeSent sin tocarlo.
+    this.intercepta = false;
+    await this.ponIntercepcion(this.nivel !== 'observar');
     this.ctx.on('page', (p) => { if (this.esperadas > 0) { this.esperadas--; return; } this.suceso({ clase: 'popup', certeza: 'comprobado', texto: 'La web intentó abrir una ventana nueva. ZERO la cerró.', dominio: hostDe(p.url()) }); p.close().catch(() => {}); });
     await this.nuevaPestana();
     this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h, ultraDisponible: !!TOR_PROXY, ultra: !!(this.ultra && TOR_PROXY), nivel: this.nivel });
@@ -151,9 +158,18 @@ class Sesion {
     this.pestanas.push(p);
     try { await cdp.send('Network.setCookieControls', { enableThirdPartyCookieRestriction: true, disableThirdPartyCookieMetadata: true, disableThirdPartyCookieHeuristics: true }); this.cookiesBloqueadas = true; } catch (_) { this.cookiesBloqueadas = false; }
     if (this.nivel === 'maximo' || this.sellada) { try { await cdp.send('Emulation.setScriptExecutionDisabled', { value: true }); } catch (_) {} }
+    try { await cdp.send('Network.enable'); } catch (_) {}
+    try { p.frameId = (await cdp.send('Page.getFrameTree')).frameTree.frame.id; } catch (_) { p.frameId = null; }
+    cdp.on('Network.requestWillBeSent', (ev) => { if (!this.intercepta) this.observaRed(p, ev); });
+    cdp.on('Fetch.requestPaused', (ev) => { this.filtraDoc(p, ev); });
+    if (!this.intercepta) { try { await cdp.send('Fetch.enable', { patterns: [{ urlPattern: '*', resourceType: 'Document', requestStage: 'Request' }] }); } catch (_) {} }
     cdp.on('Page.screencastFrame', (f) => {
-      if (this.act === p && this.ws.abierto) this.ws.send(Buffer.from(f.data, 'base64'));
+      // 26 Oct 2026 (ronda 46): se confirma el cuadro a Chromium al instante y «el último cuadro gana»: si el enlace con la
+      // persona va atrasado, el cuadro se guarda y se manda solo el más reciente cuando el enlace se vacía; nunca el pasado.
       cdp.send('Page.screencastFrameAck', { sessionId: f.sessionId }).catch(() => {});
+      if (this.act !== p || !this.ws.abierto) return;
+      if (this.ws.atraso > ATRASO_MAX) { this.cuadroPendiente = f.data; this.nCuadros.descartados++; return; }
+      this.cuadroPendiente = null; this.ws.send(Buffer.from(f.data, 'base64')); this.nCuadros.enviados++;
     });
     this.enganchaPagina(p);
     this.op('pestaña ' + p.id + ' abierta');
@@ -202,10 +218,64 @@ class Sesion {
 
   async arrancaPantalla() {
     if (!this.act) return;
-    try { await this.cdp.send('Page.startScreencast', { format: 'jpeg', quality: 60, maxWidth: this.w, maxHeight: this.h, everyNthFrame: 1 }); this.act.pantalla = true; this.pantalla = true; } catch (_) {}
+    try { await this.cdp.send('Page.startScreencast', { format: 'jpeg', quality: 55, maxWidth: this.w, maxHeight: this.h, everyNthFrame: 1 }); this.act.pantalla = true; this.pantalla = true; } catch (_) {}
   }
 
   op(que) { this.operaciones.push([ahora(), que]); }
+
+  // Interceptación completa (Playwright, apaga la caché) solo cuando el nivel corta; en Observar, Fetch solo para navegaciones.
+  async ponIntercepcion(on) {
+    on = !!on;
+    if (on === this.intercepta) return;
+    this.intercepta = on;
+    if (on) {
+      for (const p of this.pestanas) { try { await p.cdp.send('Fetch.disable'); } catch (_) {} }
+      await this.ctx.route('**/*', (route, req) => this.filtra(route, req));
+    } else {
+      await this.ctx.unroute('**/*').catch(() => {});
+      for (const p of this.pestanas) { try { await p.cdp.send('Fetch.enable', { patterns: [{ urlPattern: '*', resourceType: 'Document', requestStage: 'Request' }] }); } catch (_) {} }
+    }
+    this.op(on ? 'interceptación completa' : 'solo observación (caché activa)');
+  }
+
+  // Navegación interceptada por CDP Fetch (Observar): pasa por el mismo filtro que Playwright, con un adaptador mínimo.
+  filtraDoc(p, ev) {
+    const cdp = p.cdp, id = ev.requestId, r = ev.request || {};
+    const hecho = { v: false };
+    const una = (fn) => { if (hecho.v) return Promise.resolve(); hecho.v = true; return fn().catch(() => {}); };
+    const route = {
+      continue: (o) => una(() => cdp.send('Fetch.continueRequest', { requestId: id, ...(o && o.url ? { url: o.url } : {}), ...(o && o.headers ? { headers: Object.entries(o.headers).map(([name, value]) => ({ name, value: String(value) })) } : {}) })),
+      abort: (razon) => una(() => cdp.send('Fetch.failRequest', { requestId: id, errorReason: razon === 'blockedbyclient' ? 'BlockedByClient' : 'Failed' })),
+      fulfill: (o) => una(() => cdp.send('Fetch.fulfillRequest', { requestId: id, responseCode: (o && o.status) || 200, responseHeaders: [{ name: 'content-type', value: (o && o.contentType) || 'text/html; charset=utf-8' }], body: Buffer.from(String((o && o.body) || ''), 'utf8').toString('base64') })),
+    };
+    const esPrincipal = !ev.frameId || ev.frameId === this.frameIdDe(p);
+    const req = {
+      url: () => r.url || '', postData: () => (r.hasPostData ? r.postData || null : null), headers: () => r.headers || {},
+      isNavigationRequest: () => true, resourceType: () => 'document',
+      frame: () => ({ page: () => p.page, _principal: esPrincipal }),
+    };
+    this.filtra(route, req);
+  }
+  frameIdDe(p) { return p.frameId || null; }
+
+  // Observación sin interceptar (Observar): cada petición se clasifica y se anota como vista; nada se detiene.
+  observaRed(p, ev) {
+    try {
+      const r = ev.request || {}; const url = r.url || '';
+      if (!/^https?:/.test(url)) return;
+      const tipoCdp = String(ev.type || 'Other').toLowerCase();
+      if (tipoCdp === 'document' && (!ev.frameId || ev.frameId === this.frameIdDe(p))) return; // la navegación principal ya pasa por filtraDoc
+      const tipo = tipoCdp === 'document' ? 'subdocument' : (TIPO_ABP[tipoCdp] || 'other');
+      const host = hostDe(url);
+      const st = p.stats;
+      const origen = hostDe(p.page.url()) || st.webActual || host;
+      const tercero = baseDominio(host) !== baseDominio(origen);
+      const fugas = this.senuelos.inspecciona({ url, postData: r.hasPostData ? r.postData || null : null, headers: r.headers || {}, tercero });
+      const d = cortes.decide({ url, tipo, origen, host, tercero });
+      if (fugas.length) fugas.forEach((f) => this.senuelo(f, host, url, tercero, false));
+      if (d.bloquear) this.corte(host, tipo, origen, tercero, d, st, 'visto');
+    } catch (_) {}
+  }
 
   tipoDe(req) {
     let f = null; try { f = req.frame(); } catch (_) {}
@@ -213,6 +283,7 @@ class Sesion {
       if (!f) return 'popup';
       let pg = null; try { pg = f.page(); } catch (_) {}
       if (!pg || !this.pestanaDe(pg)) return 'popup';
+      if (f._principal !== undefined) return f._principal ? 'document' : 'subdocument';
       return f === pg.mainFrame() ? 'document' : 'subdocument';
     }
     return TIPO_ABP[req.resourceType()] || 'other';
@@ -577,6 +648,7 @@ class Sesion {
   async ponNivel(n) {
     if (!['observar', 'normal', 'estricto', 'maximo'].includes(n)) return;
     const antes = this.nivel || 'normal'; this.nivel = n; this.op('nivel de protección: ' + n);
+    if (this.ctx) await this.ponIntercepcion(n !== 'observar');
     const sinJs = n === 'maximo';
     if (sinJs !== (antes === 'maximo')) { for (const p of this.pestanas) { try { await p.cdp.send('Emulation.setScriptExecutionDisabled', { value: sinJs }); } catch (_) {} } if (this.page.url() && this.page.url() !== 'about:blank') this.page.reload({ waitUntil: 'commit' }).catch(() => {}); }
     this.suceso({ clase: 'nivel', certeza: 'comprobado', dominio: this.webActual, texto: n === 'observar' ? 'Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.' : n === 'normal' ? 'Nivel normal: ZERO corta la publicidad y el rastreo de las listas públicas.' : n === 'estricto' ? 'Nivel estricto: además, ZERO corta toda conexión con otras empresas; solo pasa lo propio de la web.' : 'Nivel máximo: además, la web corre sin programas (JavaScript).' });
@@ -599,6 +671,7 @@ class Sesion {
   }
 
   async destruye(motivo) {
+    this.op('cuadros enviados ' + this.nCuadros.enviados + ', descartados por atraso ' + this.nCuadros.descartados);
     if (this.destruida) return;
     this.destruida = true;
     SESIONES.delete(this.senuelos.token); VIVAS.delete(this); clearInterval(this.vigilante);
