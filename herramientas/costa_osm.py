@@ -28,7 +28,7 @@ DATOS = os.path.join(RAIZ, 'orbita', 'datos')
 SALIDA = os.path.join(RAIZ, 'orbita', 'static', 'tierra', 'costa-osm')
 INFORME = os.path.join(RAIZ, 'herramientas', 'fuentes', 'llegadas-costa.json')
 Q = 100000        # enteros por grado (1,1 m)
-TOL = 0.00008     # grados (~9 m)
+TOL = 0.0001      # grados (~11 m: un píxel con el zoom máximo en una pantalla de 1440 × 900)
 
 
 def celda(lon, lat):
