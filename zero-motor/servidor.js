@@ -183,6 +183,9 @@ class Sesion {
     this.act = p;
     try { await p.page.setViewportSize({ width: this.w, height: this.h }); } catch (_) {}
     try { await p.page.bringToFront(); } catch (_) {}
+    // 26 Oct 2026 (dueño: «no sale el palito para escribir»): sin ventana real, la página no se cree enfocada y no pinta el
+    // cursor de texto; la emulación de foco hace que el campo pulsado muestre el cursor parpadeando.
+    try { await p.cdp.send('Emulation.setFocusEmulationEnabled', { enabled: true }); } catch (_) {}
     if (this.mirando) await this.arrancaPantalla();
     this.env(this.listaPestanas());
     this.env({ t: 'resumen', cortes: this.n.cortes, empresas: this.empresas.size, paises: this.paises.size, porque: this.porque, n: this.n, web: this.webActual, alerta: this.alerta });
