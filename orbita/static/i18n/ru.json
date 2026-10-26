@@ -1400,7 +1400,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Уровень наблюдать: ZERO пропускает всё (кроме опасных сайтов), обнаруживает и показывает вам; вы выбираете, что обрезать.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Эта поисковая система не пропустила запрос из ячейки. ZERO работает с сервера, и некоторые поисковики ограничивают такие соединения. Вы можете выбрать другой поисковик или ввести адрес сайта напрямую.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Поисковая система хочет убедиться, что вы человек. Пройдите проверку здесь и продолжайте; ячейка запомнит, что вы её прошли.",
-  "celda en": "ячейка в"
+  "celda en": "ячейка в",
+  "pide un captcha largo": "просит длинную капчу",
+  "pide un clic de verificación": "просит один клик проверки"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

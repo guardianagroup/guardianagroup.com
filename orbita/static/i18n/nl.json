@@ -1400,7 +1400,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Niveau observeren: ZERO laat alles door (behalve gevaarlijke sites), detecteert het en laat het je zien; jij kiest wat je afsnijdt.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Deze zoekmachine heeft de zoekopdracht vanuit de cel niet doorgelaten. ZERO surft vanaf een server en sommige zoekmachines beperken zulke verbindingen. Je kunt een andere zoekmachine kiezen of het adres van de site direct intypen.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "De zoekmachine wil controleren dat je een persoon bent. Los de controle hierbinnen op en ga verder; de cel onthoudt dat je erdoor bent.",
-  "celda en": "cel in"
+  "celda en": "cel in",
+  "pide un captcha largo": "vraagt een lange captcha",
+  "pide un clic de verificación": "vraagt één verificatieklik"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

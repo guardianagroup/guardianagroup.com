@@ -1399,7 +1399,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Úroveň pozorovať: ZERO prepustí všetko (okrem nebezpečných webov), odhalí to a ukáže vám; vy si vyberiete, čo odrezať.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Tento vyhľadávač neprepustil dopyt z bunky. ZERO prehliada zo servera a niektoré vyhľadávače takéto spojenia obmedzujú. Môžete zvoliť iný vyhľadávač alebo napísať adresu webu priamo.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Vyhľadávač chce overiť, že ste človek. Dokončite overenie tu a pokračujte; bunka si zapamätá, že ste ním prešli.",
-  "celda en": "bunka v"
+  "celda en": "bunka v",
+  "pide un captcha largo": "vyžaduje dlhú captchu",
+  "pide un clic de verificación": "vyžaduje jedno overovacie kliknutie"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

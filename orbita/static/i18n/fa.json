@@ -1399,7 +1399,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "سطح مشاهده: ZERO همه‌چیز را عبور می‌دهد (جز سایت‌های خطرناک)، تشخیص می‌دهد و به شما نشان می‌دهد؛ شما انتخاب می‌کنید چه چیزی قطع شود.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "این موتور جست‌وجو پرس‌وجو را از سلول عبور نداد. ZERO از یک سرور مرور می‌کند و برخی موتورها این اتصال‌ها را محدود می‌کنند. می‌توانید موتور دیگری انتخاب کنید یا نشانی سایت را مستقیم بنویسید.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "موتور جست‌وجو می‌خواهد مطمئن شود که شما یک انسان هستید. بررسی را همین‌جا انجام دهید و ادامه دهید؛ سلول به یاد خواهد داشت که آن را گذرانده‌اید.",
-  "celda en": "سلول در"
+  "celda en": "سلول در",
+  "pide un captcha largo": "کپچای طولانی می‌خواهد",
+  "pide un clic de verificación": "یک کلیک تأیید می‌خواهد"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

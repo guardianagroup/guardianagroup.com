@@ -1399,7 +1399,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Kiwango cha kutazama: ZERO inaruhusu kila kitu kupita (isipokuwa tovuti hatari), inagundua na kukuonyesha; wewe unachagua cha kukata.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Injini hii ya utafutaji haikuruhusu swali kutoka kwenye seli kupita. ZERO inavinjari kutoka kwa seva na baadhi ya injini za utafutaji huzuia miunganisho kama hiyo. Unaweza kuchagua injini nyingine au kuandika anwani ya tovuti moja kwa moja.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Injini ya utafutaji inataka kuhakikisha kuwa wewe ni mtu. Kamilisha uhakiki hapa na uendelee; seli itakumbuka kuwa umepita.",
-  "celda en": "seli huko"
+  "celda en": "seli huko",
+  "pide un captcha largo": "inaomba captcha ndefu",
+  "pide un clic de verificación": "inaomba mbofyo mmoja wa uthibitisho"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

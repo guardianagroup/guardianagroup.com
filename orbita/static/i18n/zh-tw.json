@@ -1400,7 +1400,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "觀察層級：ZERO 放行所有內容（危險網站除外），偵測並顯示給你；由你選擇切斷什麼。",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "該搜尋引擎沒有放行來自單元的查詢。ZERO 從伺服器瀏覽，部分搜尋引擎會限制此類連線。你可以選擇其他搜尋引擎，或直接輸入網站位址。",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "搜尋引擎想確認你是真人。請在這裡完成驗證並繼續；單元會記住你已通過。",
-  "celda en": "單元位於"
+  "celda en": "單元位於",
+  "pide un captcha largo": "要求通過較長的驗證碼",
+  "pide un clic de verificación": "要求點擊一次驗證"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

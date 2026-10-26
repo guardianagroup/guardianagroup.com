@@ -1400,7 +1400,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "관찰 수준: ZERO가 모두 통과시키고(위험한 사이트 제외) 감지하여 보여 줍니다. 무엇을 차단할지는 당신이 선택합니다.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "이 검색 엔진이 셀에서 보낸 검색을 통과시키지 않았습니다. ZERO는 서버에서 탐색하며 일부 검색 엔진은 그런 연결을 제한합니다. 다른 검색 엔진을 고르거나 사이트 주소를 직접 입력하세요.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "검색 엔진이 당신이 사람인지 확인하려 합니다. 여기서 확인을 마치고 계속하세요. 셀이 통과했음을 기억합니다.",
-  "celda en": "셀:"
+  "celda en": "셀:",
+  "pide un captcha largo": "긴 캡차를 요구함",
+  "pide un clic de verificación": "확인 클릭 한 번을 요구함"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

@@ -1400,7 +1400,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Mức quan sát: ZERO cho mọi thứ đi qua (trừ trang web nguy hiểm), phát hiện và cho bạn xem; bạn chọn cắt gì.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Công cụ tìm kiếm này không cho truy vấn từ ô đi qua. ZERO duyệt web từ một máy chủ và một số công cụ tìm kiếm hạn chế các kết nối như vậy. Bạn có thể chọn công cụ tìm kiếm khác hoặc gõ thẳng địa chỉ trang web.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Công cụ tìm kiếm muốn kiểm tra bạn là người thật. Hoàn thành kiểm tra ngay tại đây và tiếp tục; ô sẽ nhớ rằng bạn đã vượt qua.",
-  "celda en": "ô tại"
+  "celda en": "ô tại",
+  "pide un captcha largo": "yêu cầu captcha dài",
+  "pide un clic de verificación": "yêu cầu một cú nhấp xác minh"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

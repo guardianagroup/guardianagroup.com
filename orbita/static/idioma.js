@@ -1234,6 +1234,8 @@
     'Estricto': ['Strict', 'Estrito'],
     'Máximo': ['Maximum', 'Máximo'],
     // ZERO · nivel Observar, Permitir/Cortar y avisos de buscador (26 Oct 2026, ronda 45)
+    'pide un captcha largo': ['asks for a long captcha', 'pede um captcha longo'],
+    'pide un clic de verificación': ['asks for one verification click', 'pede um clique de verificação'],
     'celda en': ['cell in', 'célula em'],
     'Observar': ['Observe', 'Observar'],
     'observar': ['observe', 'observar'],

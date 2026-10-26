@@ -1400,7 +1400,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "مستوى المراقبة: يمرر ZERO كل شيء (إلا المواقع الخطرة)، ويكشفه ويعرضه لك؛ وأنت تختار ما تقطعه.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "لم يُمرر محرك البحث هذا الاستعلام من الخلية. يتصفح ZERO من خادم، وبعض محركات البحث تقيّد هذه الاتصالات. يمكنك اختيار محرك آخر أو كتابة عنوان الموقع مباشرة.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "يريد محرك البحث التحقق من أنك شخص. أكمل التحقق هنا وتابع؛ ستتذكر الخلية أنك اجتزته.",
-  "celda en": "الخلية في"
+  "celda en": "الخلية في",
+  "pide un captcha largo": "يطلب كابتشا طويلة",
+  "pide un clic de verificación": "يطلب نقرة تحقق واحدة"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",
