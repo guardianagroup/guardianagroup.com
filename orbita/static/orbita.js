@@ -573,7 +573,7 @@
     const MIP = !!(EXT.der && EXT.lod);
     const fs = `${MIP ? '#extension GL_OES_standard_derivatives : enable\n#extension GL_EXT_shader_texture_lod : enable\n#define MIP 1\n' : ''}precision highp float;
 uniform vec2 uC;uniform float uR;uniform mat3 uM;uniform vec3 uL;uniform float uT,uNubOn,uAten,uLimpio;
-uniform sampler2D uDia,uLuz,uNub,uAgua,uZona,uZonaT;uniform vec4 uZonaBox;uniform float uZonaOn,uZonaTOn,uColorN,uColorK;uniform float uSiempreDia;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
+uniform sampler2D uDia,uLuz,uNub,uAgua,uZona,uZonaT;uniform vec4 uZonaBox;uniform float uZonaOn,uZonaTOn,uColorN,uColorK,uDim;uniform float uSiempreDia;uniform vec4 uO[${ONDAS}];uniform float uOk[${ONDAS}];
 const float PI=3.14159265;
 #ifdef MIP
 vec4 tx(sampler2D s,vec2 uv,vec2 gx,vec2 gy){return texture2DGradEXT(s,uv,gx,gy);}
@@ -603,6 +603,7 @@ void main(){
   c+=luz*vec3(1.,.78,.48)*1.5*(1.-dl)*(1.-nub*.8);
   vec3 h=normalize(uL+vec3(0.,0.,1.));c+=vec3(.8,.9,1.)*pow(max(dot(n,h),0.),160.)*agua*(1.-nub)*.32;
   float fr=pow(1.-n.z,2.4);c=mix(c,atm*(.18+.8*max(lam+.35,0.)),fr*.6);
+  c*=1.-uDim; // 25 Oct 2026 (review): the photo a little darker from ×3 to ×18, so the interface and the names read over it
   // 22 Oct 2026 (owner): from a certain zoom the planet goes «limpio»: no lights, no colours, black water and
   // grey land told apart sharply (the coast comes from the day map itself, 16K when loaded), so the data read white.
   if(uLimpio>0.){float lum=dot(dia,vec3(.3,.59,.11));float mar=(dia.b>max(dia.r,dia.g)*1.08&&lum<.5)?1.:0.;mar=max(mar,step(.85,agua)*step(lum,.35));if(tierraF>=0.)mar=1.-smoothstep(.3,.7,tierraF);
@@ -628,7 +629,7 @@ void main(){
       const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
       const la = gl.getAttribLocation(pr, 'a'); gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la, 2, gl.FLOAT, false, 0, 0);
-      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uLimpio', 'uSiempreDia', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaT', 'uZonaBox', 'uZonaOn', 'uZonaTOn', 'uColorN', 'uColorK', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
+      const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uLimpio', 'uSiempreDia', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaT', 'uZonaBox', 'uZonaOn', 'uZonaTOn', 'uColorN', 'uColorK', 'uDim', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
       G = { pr, u, tex: {}, nubOn: 0 };
       // mipmaps + anisotropic filtering on a freshly loaded map (all are powers of two); if the card refuses, plain linear
       const mipea = () => {
@@ -905,7 +906,7 @@ void main(){
     gl.uniform3f(u.uL, L[0], L[1], L[2]); gl.uniform1f(u.uSiempreDia, SIEMPRE_DIA ? 1 : 0);
     gl.uniform1f(u.uT, t); gl.uniform1f(u.uNubOn, G.nubOn); gl.uniform1f(u.uAten, aten);
     // «mapa limpio» from ×4 (owner, 22 Oct 2026): eased in over a third of a second, body.limpio tells the layers
-    { const quiere = ZOOM.z >= limpioDesde() ? 1 : 0, ahora = performance.now(), dtl = Math.min(0.05, (ahora - (G.limpioT || ahora)) / 1000); G.limpioT = ahora; if (G.limpio == null) G.limpio = quiere; G.limpio += (quiere - G.limpio) * Math.min(1, dtl * 7); if (Math.abs(G.limpio - quiere) < 0.01) G.limpio = quiere; gl.uniform1f(u.uLimpio, G.limpio); gl.uniform1f(u.uColorN, MAPA_LIMPIO ? 0 : 1); gl.uniform1f(u.uColorK, Math.max(0, Math.min(1, Math.log(150 / ZOOM.z) / Math.log(150 / 60)))); if ((G.limpio > 0.5) !== document.body.classList.contains('limpio')) document.body.classList.toggle('limpio', G.limpio > 0.5); }
+    { const quiere = ZOOM.z >= limpioDesde() ? 1 : 0, ahora = performance.now(), dtl = Math.min(0.05, (ahora - (G.limpioT || ahora)) / 1000); G.limpioT = ahora; if (G.limpio == null) G.limpio = quiere; G.limpio += (quiere - G.limpio) * Math.min(1, dtl * 7); if (Math.abs(G.limpio - quiere) < 0.01) G.limpio = quiere; gl.uniform1f(u.uLimpio, G.limpio); gl.uniform1f(u.uColorN, MAPA_LIMPIO ? 0 : 1); gl.uniform1f(u.uDim, MAPA_LIMPIO ? 0 : 0.22 * Math.max(0, Math.min(1, (ZOOM.z - 3) / 12))); gl.uniform1f(u.uColorK, Math.max(0, Math.min(1, Math.log(150 / ZOOM.z) / Math.log(150 / 60)))); if ((G.limpio > 0.5) !== document.body.classList.contains('limpio')) document.body.classList.toggle('limpio', G.limpio > 0.5); if ((ZOOM.z >= 4) !== document.body.classList.contains('mapa-cerca')) document.body.classList.toggle('mapa-cerca', ZOOM.z >= 4); }
     const o = new Float32Array(ONDAS * 4), k = new Float32Array(ONDAS);
     ondas.slice(-ONDAS).forEach((x, i) => { const edad = (t - x.t0) / (x.corte ? 2.6 : 1.8); o.set([...x.w, edad], i * 4); k[i] = x.corte ? 1 : 0; });
     gl.uniform4fv(u.uO, o); gl.uniform1fv(u.uOk, k);
