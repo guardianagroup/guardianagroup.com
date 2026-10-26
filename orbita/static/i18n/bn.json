@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "নতুন ট্যাবে লিঙ্ক খুলুন",
   "Copiar la dirección del enlace": "লিঙ্কের ঠিকানা কপি করুন",
   "Copiar": "কপি করুন",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "এই সাইট সার্ভার থেকে আসা ব্রাউজারকে ঢুকতে দেয় না (নেটওয়ার্ক-ভিত্তিক অ্যান্টি-বট সুরক্ষা)। সেল থেকে এটি খোলা যায় না; আপনার সাধারণ ব্রাউজারে যায়।"
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "এই সাইট সার্ভার থেকে আসা ব্রাউজারকে ঢুকতে দেয় না (নেটওয়ার্ক-ভিত্তিক অ্যান্টি-বট সুরক্ষা)। সেল থেকে এটি খোলা যায় না; আপনার সাধারণ ব্রাউজারে যায়।",
+  "Lo que ZERO ve": "ZERO যা দেখে",
+  "Permitida": "অনুমোদিত",
+  "Vaciar esta web": "এই সাইট খালি করুন",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO GUARDIANA-কে কিছু পাঠায় না: সবকিছু আপনার ডিভাইসে দেখা ও সিদ্ধান্ত হয়।",
+  "Aún no hay conexiones de otras empresas en esta web.": "এই সাইটে এখনও অন্য কোম্পানির সঙ্গে কোনো সংযোগ নেই।",
+  "Preparando las listas…": "তালিকা প্রস্তুত হচ্ছে…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "সাইট অন্য কোম্পানির সঙ্গে যুক্ত হলে এখানে দেখবেন তারা কারা, কোন দেশের ও কী জন্য; এবং প্রতিটিকে কাটতে পারবেন।",
+  "Dejar pasar las conexiones de esta empresa": "এই কোম্পানির সংযোগ যেতে দিন",
+  "Cortar las conexiones de esta empresa en todas las webs": "সব সাইটে এই কোম্পানির সংযোগ কাটুন",
+  "Permiso pedido": "অনুমতি চাওয়া হয়েছে",
+  "Conexión directa (WebRTC)": "সরাসরি সংযোগ (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "সাইট একটি সরাসরি সংযোগ (WebRTC) খুলতে চেয়েছিল, যা আসল নেটওয়ার্ক ঠিকানা জানার সাধারণ উপায়।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "আপনি এই সেশনে {1}-এর সংযোগ আবার কাটছেন।",
   "mFallo": "সাইট {1} লোড হয়নি: {2}।",
   "opPermitida": "অনুমোদিত {1}",
-  "opCortarse": "আবার কাটা হয়েছে {1}"
+  "opCortarse": "আবার কাটা হয়েছে {1}",
+  "mVistoSimpleDe": "ZERO {2}[ ({3})] থেকে {1} দেখেছে।",
+  "mVistoSimpleHacia": "ZERO {2}-এর দিকে {1} দেখেছে।",
+  "mPermisoNav": "সাইট {1}-এ প্রবেশাধিকার চেয়েছে। ব্রাউজারের বার্তায় আপনি সিদ্ধান্ত নিন।",
+  "mHuellaLocal": "{1}-এর একটি প্রোগ্রাম {2} দেখেছে, যা আপনার ডিভাইস চেনার কাজে লাগে।",
+  "mCookieVista": "{1} অন্য কোম্পানির কুকি রাখার চেষ্টা করেছে যাতে আরও সাইটে আপনাকে চেনা যায়।",
+  "nCortadas": "{1} কাটা হয়েছে"
  }
 }

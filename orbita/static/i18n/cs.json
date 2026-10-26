@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "Otevřít odkaz na nové kartě",
   "Copiar la dirección del enlace": "Kopírovat adresu odkazu",
   "Copiar": "Kopírovat",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Tento web nepouští prohlížeče, které vycházejí ze serveru (síťová ochrana proti robotům). Z buňky ho nelze otevřít; ve vašem běžném prohlížeči ano."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Tento web nepouští prohlížeče, které vycházejí ze serveru (síťová ochrana proti robotům). Z buňky ho nelze otevřít; ve vašem běžném prohlížeči ano.",
+  "Lo que ZERO ve": "Co ZERO vidí",
+  "Permitida": "Povolena",
+  "Vaciar esta web": "Vyčistit tento web",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO nic neposílá GUARDIANĚ: vše se vidí a rozhoduje na vašem zařízení.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Na tomto webu zatím nejsou spojení s jinými firmami.",
+  "Preparando las listas…": "Připravují se seznamy…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Až se web spojí s jinými firmami, uvidíte zde, kdo jsou, z jaké země a proč; a budete moci každou odříznout.",
+  "Dejar pasar las conexiones de esta empresa": "Propustit spojení této firmy",
+  "Cortar las conexiones de esta empresa en todas las webs": "Odříznout spojení této firmy na všech webech",
+  "Permiso pedido": "Požadováno oprávnění",
+  "Conexión directa (WebRTC)": "Přímé spojení (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Web se pokusil otevřít přímé spojení (WebRTC), obvyklý způsob, jak zjistit skutečnou síťovou adresu."
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "Znovu odřezáváte spojení od {1} v této relaci.",
   "mFallo": "Web {1} se nenačetl: {2}.",
   "opPermitida": "povoleno {1}",
-  "opCortarse": "znovu odříznuto {1}"
+  "opCortarse": "znovu odříznuto {1}",
+  "mVistoSimpleDe": "ZERO vidělo {1}, od {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO vidělo {1} na {2}.",
+  "mPermisoNav": "Web požádal o přístup k {1}. Rozhodněte v dotazu prohlížeče.",
+  "mHuellaLocal": "Program z {1} se dotázal na {2}, údaj sloužící k rozpoznání vašeho zařízení.",
+  "mCookieVista": "{1} se pokusil uložit cookie jiné firmy, aby vás poznal na dalších webech.",
+  "nCortadas": "{1} odříznuto"
  }
 }

@@ -1406,7 +1406,19 @@
   "Abrir enlace en una pestaña nueva": "Öppna länk i ny flik",
   "Copiar la dirección del enlace": "Kopiera länkadress",
   "Copiar": "Kopiera",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Den här webbplatsen släpper inte in webbläsare som kommer från en server (nätverksbaserat botskydd). Den kan inte öppnas från cellen; i din vanliga webbläsare går det."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Den här webbplatsen släpper inte in webbläsare som kommer från en server (nätverksbaserat botskydd). Den kan inte öppnas från cellen; i din vanliga webbläsare går det.",
+  "Lo que ZERO ve": "Vad ZERO ser",
+  "Permitida": "Tillåten",
+  "Vaciar esta web": "Töm den här webbplatsen",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO skickar inget till GUARDIANA: allt ses och avgörs på din enhet.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Inga anslutningar till andra företag på den här webbplatsen ännu.",
+  "Preparando las listas…": "Förbereder listorna…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "När webbplatsen ansluter till andra företag ser du här vilka de är, från vilket land och varför; och du kan klippa var och en.",
+  "Dejar pasar las conexiones de esta empresa": "Släpp igenom detta företags anslutningar",
+  "Cortar las conexiones de esta empresa en todas las webs": "Klipp detta företags anslutningar på alla webbplatser",
+  "Permiso pedido": "Behörighet begärd",
+  "Conexión directa (WebRTC)": "Direktanslutning (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Webbplatsen försökte öppna en direktanslutning (WebRTC), det vanliga sättet att ta reda på den riktiga nätverksadressen."
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",
@@ -1501,6 +1513,12 @@
   "mPermisoOff": "Du klipper anslutningar från {1} igen i denna session.",
   "mFallo": "Sidan {1} laddades inte: {2}.",
   "opPermitida": "tillåten {1}",
-  "opCortarse": "klippt igen {1}"
+  "opCortarse": "klippt igen {1}",
+  "mVistoSimpleDe": "ZERO såg {1}, från {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO såg {1} till {2}.",
+  "mPermisoNav": "Webbplatsen bad om åtkomst till {1}. Du avgör i webbläsarens fråga.",
+  "mHuellaLocal": "Ett program från {1} frågade efter {2}, en uppgift som används för att känna igen din enhet.",
+  "mCookieVista": "{1} försökte sätta en cookie från ett annat företag för att känna igen dig på fler webbplatser.",
+  "nCortadas": "{1} klippta"
  }
 }

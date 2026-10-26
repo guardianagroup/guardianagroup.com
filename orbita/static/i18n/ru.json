@@ -1406,7 +1406,19 @@
   "Abrir enlace en una pestaña nueva": "Открыть ссылку в новой вкладке",
   "Copiar la dirección del enlace": "Копировать адрес ссылки",
   "Copiar": "Копировать",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Этот сайт не пускает браузеры, выходящие с сервера (сетевая защита от ботов). Из ячейки его не открыть; в вашем обычном браузере — да."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Этот сайт не пускает браузеры, выходящие с сервера (сетевая защита от ботов). Из ячейки его не открыть; в вашем обычном браузере — да.",
+  "Lo que ZERO ve": "Что видит ZERO",
+  "Permitida": "Разрешено",
+  "Vaciar esta web": "Очистить этот сайт",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO ничего не отправляет в GUARDIANA: всё видно и решается на вашем устройстве.",
+  "Aún no hay conexiones de otras empresas en esta web.": "На этом сайте пока нет соединений с другими компаниями.",
+  "Preparando las listas…": "Подготовка списков…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Когда сайт подключится к другим компаниям, здесь вы увидите, кто они, из какой страны и зачем; и сможете обрезать каждую.",
+  "Dejar pasar las conexiones de esta empresa": "Пропускать соединения этой компании",
+  "Cortar las conexiones de esta empresa en todas las webs": "Обрезать соединения этой компании на всех сайтах",
+  "Permiso pedido": "Запрошено разрешение",
+  "Conexión directa (WebRTC)": "Прямое соединение (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Сайт попытался открыть прямое соединение (WebRTC) — обычный способ узнать настоящий сетевой адрес."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",
@@ -1501,6 +1513,12 @@
   "mPermisoOff": "Вы снова обрезаете соединения от {1} в этой сессии.",
   "mFallo": "Сайт {1} не загрузился: {2}.",
   "opPermitida": "разрешено {1}",
-  "opCortarse": "снова обрезано {1}"
+  "opCortarse": "снова обрезано {1}",
+  "mVistoSimpleDe": "ZERO заметил {1} от {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO заметил {1} к {2}.",
+  "mPermisoNav": "Сайт запросил доступ к {1}. Решайте в запросе браузера.",
+  "mHuellaLocal": "Программа с {1} запросила {2} — данные, по которым узнают ваше устройство.",
+  "mCookieVista": "{1} попытался оставить cookie другой компании, чтобы узнавать вас на других сайтах.",
+  "nCortadas": "{1} обрезано"
  }
 }

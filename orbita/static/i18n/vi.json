@@ -1406,7 +1406,19 @@
   "Abrir enlace en una pestaña nueva": "Mở liên kết trong thẻ mới",
   "Copiar la dirección del enlace": "Sao chép địa chỉ liên kết",
   "Copiar": "Sao chép",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Trang này không cho các trình duyệt xuất phát từ máy chủ vào (chống bot theo mạng). Không mở được từ ô; trên trình duyệt thường ngày của bạn thì được."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Trang này không cho các trình duyệt xuất phát từ máy chủ vào (chống bot theo mạng). Không mở được từ ô; trên trình duyệt thường ngày của bạn thì được.",
+  "Lo que ZERO ve": "Những gì ZERO thấy",
+  "Permitida": "Đã cho phép",
+  "Vaciar esta web": "Xóa trang này",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO không gửi gì cho GUARDIANA: mọi thứ được xem và quyết định trên thiết bị của bạn.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Trang này chưa có kết nối tới công ty khác.",
+  "Preparando las listas…": "Đang chuẩn bị danh sách…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Khi trang kết nối tới các công ty khác, bạn sẽ thấy ở đây họ là ai, từ nước nào và để làm gì; và có thể cắt từng công ty.",
+  "Dejar pasar las conexiones de esta empresa": "Cho kết nối của công ty này đi qua",
+  "Cortar las conexiones de esta empresa en todas las webs": "Cắt kết nối của công ty này trên mọi trang",
+  "Permiso pedido": "Đã yêu cầu quyền",
+  "Conexión directa (WebRTC)": "Kết nối trực tiếp (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Trang đã cố mở kết nối trực tiếp (WebRTC), cách thường dùng để tìm ra địa chỉ mạng thật."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",
@@ -1501,6 +1513,12 @@
   "mPermisoOff": "Bạn cắt lại các kết nối của {1} trong phiên này.",
   "mFallo": "Trang web {1} không tải được: {2}.",
   "opPermitida": "đã cho phép {1}",
-  "opCortarse": "cắt lại {1}"
+  "opCortarse": "cắt lại {1}",
+  "mVistoSimpleDe": "ZERO đã thấy {1}, từ {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO đã thấy {1} tới {2}.",
+  "mPermisoNav": "Trang xin quyền truy cập {1}. Bạn quyết định trong lời nhắc của trình duyệt.",
+  "mHuellaLocal": "Một chương trình của {1} đã tra {2}, dữ liệu dùng để nhận ra thiết bị của bạn.",
+  "mCookieVista": "{1} đã cố đặt cookie của công ty khác để nhận ra bạn trên nhiều trang hơn.",
+  "nCortadas": "{1} đã cắt"
  }
 }

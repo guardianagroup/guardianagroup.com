@@ -1406,7 +1406,19 @@
   "Abrir enlace en una pestaña nueva": "Ouvrir le lien dans un nouvel onglet",
   "Copiar la dirección del enlace": "Copier l’adresse du lien",
   "Copiar": "Copier",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Ce site n’accepte pas les navigateurs qui sortent d’un serveur (protection anti-robot par réseau). Il ne peut pas s’ouvrir depuis la cellule ; dans votre navigateur habituel, oui."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Ce site n’accepte pas les navigateurs qui sortent d’un serveur (protection anti-robot par réseau). Il ne peut pas s’ouvrir depuis la cellule ; dans votre navigateur habituel, oui.",
+  "Lo que ZERO ve": "Ce que ZERO voit",
+  "Permitida": "Autorisée",
+  "Vaciar esta web": "Vider ce site",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO n’envoie rien à GUARDIANA : tout se voit et se décide sur votre appareil.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Pas encore de connexions vers d’autres entreprises sur ce site.",
+  "Preparando las listas…": "Préparation des listes…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Quand le site se connectera à d’autres entreprises, vous verrez ici qui elles sont, de quel pays et pour quoi ; et vous pourrez couper chacune.",
+  "Dejar pasar las conexiones de esta empresa": "Laisser passer les connexions de cette entreprise",
+  "Cortar las conexiones de esta empresa en todas las webs": "Couper les connexions de cette entreprise sur tous les sites",
+  "Permiso pedido": "Autorisation demandée",
+  "Conexión directa (WebRTC)": "Connexion directe (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Le site a tenté d’ouvrir une connexion directe (WebRTC), le moyen habituel de découvrir l’adresse réseau réelle."
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",
@@ -1501,6 +1513,12 @@
   "mPermisoOff": "Vous coupez à nouveau les connexions de {1} pendant cette session.",
   "mFallo": "Le site {1} ne s’est pas chargé : {2}.",
   "opPermitida": "autorisé {1}",
-  "opCortarse": "coupé à nouveau {1}"
+  "opCortarse": "coupé à nouveau {1}",
+  "mVistoSimpleDe": "ZERO a vu {1}, de {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO a vu {1} vers {2}.",
+  "mPermisoNav": "Le site a demandé l’accès à {1}. À vous de décider dans l’invite du navigateur.",
+  "mHuellaLocal": "Un programme de {1} a consulté {2}, une donnée qui sert à reconnaître votre appareil.",
+  "mCookieVista": "{1} a tenté de déposer un cookie d’une autre entreprise pour vous reconnaître sur d’autres sites.",
+  "nCortadas": "{1} coupées"
  }
 }

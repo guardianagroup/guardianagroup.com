@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "Buksan ang link sa bagong tab",
   "Copiar la dirección del enlace": "Kopyahin ang address ng link",
   "Copiar": "Kopyahin",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Hindi pinapapasok ng site na ito ang mga browser na galing sa server (anti-bot na proteksyon ayon sa network). Hindi ito mabubuksan mula sa cell; sa karaniwang browser mo, puwede."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Hindi pinapapasok ng site na ito ang mga browser na galing sa server (anti-bot na proteksyon ayon sa network). Hindi ito mabubuksan mula sa cell; sa karaniwang browser mo, puwede.",
+  "Lo que ZERO ve": "Ang nakikita ng ZERO",
+  "Permitida": "Pinayagan",
+  "Vaciar esta web": "Linisin ang site na ito",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "Walang ipinapadala ang ZERO sa GUARDIANA: lahat ay nakikita at pinagpapasyahan sa iyong device.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Wala pang koneksyon sa ibang kumpanya sa site na ito.",
+  "Preparando las listas…": "Inihahanda ang mga listahan…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Kapag kumonekta ang site sa ibang kumpanya, makikita mo rito kung sino sila, mula saang bansa at para saan; at maaari mong putulin ang bawat isa.",
+  "Dejar pasar las conexiones de esta empresa": "Padaanin ang mga koneksyon ng kumpanyang ito",
+  "Cortar las conexiones de esta empresa en todas las webs": "Putulin ang mga koneksyon ng kumpanyang ito sa lahat ng site",
+  "Permiso pedido": "Humingi ng pahintulot",
+  "Conexión directa (WebRTC)": "Direktang koneksyon (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Sinubukan ng site na magbukas ng direktang koneksyon (WebRTC), ang karaniwang paraan para malaman ang tunay na network address."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "Pinuputol mo muli ang mga koneksyon ng {1} sa session na ito.",
   "mFallo": "Hindi na-load ang site na {1}: {2}.",
   "opPermitida": "pinayagan {1}",
-  "opCortarse": "pinutol muli {1}"
+  "opCortarse": "pinutol muli {1}",
+  "mVistoSimpleDe": "Nakita ng ZERO ang {1}, mula sa {2}[ ({3})].",
+  "mVistoSimpleHacia": "Nakita ng ZERO ang {1} papunta sa {2}.",
+  "mPermisoNav": "Humingi ang site ng access sa {1}. Ikaw ang magpasya sa prompt ng browser.",
+  "mHuellaLocal": "May program mula sa {1} na kumonsulta sa {2}, datos na ginagamit para makilala ang iyong device.",
+  "mCookieVista": "Sinubukan ng {1} na maglagay ng cookie ng ibang kumpanya para makilala ka sa iba pang site.",
+  "nCortadas": "{1} pinutol"
  }
 }

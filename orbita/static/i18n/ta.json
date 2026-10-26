@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "இணைப்பைப் புதிய தாவலில் திறக்கவும்",
   "Copiar la dirección del enlace": "இணைப்பு முகவரியை நகலெடுக்கவும்",
   "Copiar": "நகலெடு",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "இந்தத் தளம் சேவையகத்திலிருந்து வரும் உலாவிகளை அனுமதிப்பதில்லை (பிணைய அடிப்படையிலான ரோபோ எதிர்ப்பு). செல்லிலிருந்து திறக்க முடியாது; உங்கள் வழக்கமான உலாவியில் முடியும்."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "இந்தத் தளம் சேவையகத்திலிருந்து வரும் உலாவிகளை அனுமதிப்பதில்லை (பிணைய அடிப்படையிலான ரோபோ எதிர்ப்பு). செல்லிலிருந்து திறக்க முடியாது; உங்கள் வழக்கமான உலாவியில் முடியும்.",
+  "Lo que ZERO ve": "ZERO என்ன பார்க்கிறது",
+  "Permitida": "அனுமதிக்கப்பட்டது",
+  "Vaciar esta web": "இந்தத் தளத்தை அழிக்கவும்",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO எதையும் GUARDIANA-க்கு அனுப்புவதில்லை: எல்லாம் உங்கள் சாதனத்தில் பார்க்கப்பட்டு முடிவு செய்யப்படுகிறது.",
+  "Aún no hay conexiones de otras empresas en esta web.": "இந்தத் தளத்தில் இன்னும் பிற நிறுவனங்களுடன் இணைப்புகள் இல்லை.",
+  "Preparando las listas…": "பட்டியல்களைத் தயாரிக்கிறது…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "தளம் பிற நிறுவனங்களுடன் இணையும்போது அவை யார், எந்த நாடு, எதற்காக என்பதை இங்கே பார்ப்பீர்கள்; ஒவ்வொன்றையும் துண்டிக்கலாம்.",
+  "Dejar pasar las conexiones de esta empresa": "இந்த நிறுவனத்தின் இணைப்புகளை அனுமதிக்கவும்",
+  "Cortar las conexiones de esta empresa en todas las webs": "எல்லா தளங்களிலும் இந்த நிறுவனத்தின் இணைப்புகளைத் துண்டிக்கவும்",
+  "Permiso pedido": "அனுமதி கோரப்பட்டது",
+  "Conexión directa (WebRTC)": "நேரடி இணைப்பு (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "உண்மையான பிணைய முகவரியை அறிய வழக்கமான வழியான நேரடி இணைப்பை (WebRTC) திறக்க தளம் முயன்றது."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "இந்த அமர்வில் {1} இன் இணைப்புகளை மீண்டும் துண்டிக்கிறீர்கள்.",
   "mFallo": "தளம் {1} ஏற்றப்படவில்லை: {2}.",
   "opPermitida": "அனுமதிக்கப்பட்டது {1}",
-  "opCortarse": "மீண்டும் துண்டிக்கப்பட்டது {1}"
+  "opCortarse": "மீண்டும் துண்டிக்கப்பட்டது {1}",
+  "mVistoSimpleDe": "ZERO {2}[ ({3})] இலிருந்து {1} ஐப் பார்த்தது.",
+  "mVistoSimpleHacia": "ZERO {2} நோக்கி {1} ஐப் பார்த்தது.",
+  "mPermisoNav": "தளம் {1} அணுகலைக் கேட்டது. உலாவியின் கோரிக்கையில் நீங்கள் முடிவு செய்யுங்கள்.",
+  "mHuellaLocal": "{1} இன் ஒரு நிரல் {2} ஐச் சரிபார்த்தது; இது உங்கள் சாதனத்தை அடையாளம் காணப் பயன்படும் தரவு.",
+  "mCookieVista": "{1} மற்ற தளங்களில் உங்களை அடையாளம் காண வேறு நிறுவனத்தின் குக்கீயை வைக்க முயன்றது.",
+  "nCortadas": "{1} துண்டிக்கப்பட்டன"
  }
 }

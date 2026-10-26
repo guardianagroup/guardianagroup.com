@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "Buka tautan di tab baru",
   "Copiar la dirección del enlace": "Salin alamat tautan",
   "Copiar": "Salin",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Situs ini tidak mengizinkan peramban yang keluar dari server (perlindungan anti-bot berdasarkan jaringan). Tidak bisa dibuka dari sel; di peramban biasa Anda bisa."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Situs ini tidak mengizinkan peramban yang keluar dari server (perlindungan anti-bot berdasarkan jaringan). Tidak bisa dibuka dari sel; di peramban biasa Anda bisa.",
+  "Lo que ZERO ve": "Yang dilihat ZERO",
+  "Permitida": "Diizinkan",
+  "Vaciar esta web": "Kosongkan situs ini",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO tidak mengirim apa pun ke GUARDIANA: semuanya dilihat dan diputuskan di perangkat Anda.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Belum ada koneksi ke perusahaan lain di situs ini.",
+  "Preparando las listas…": "Menyiapkan daftar…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Saat situs terhubung ke perusahaan lain, di sini Anda akan melihat siapa mereka, dari negara mana dan untuk apa; dan bisa memotong masing-masing.",
+  "Dejar pasar las conexiones de esta empresa": "Loloskan koneksi perusahaan ini",
+  "Cortar las conexiones de esta empresa en todas las webs": "Potong koneksi perusahaan ini di semua situs",
+  "Permiso pedido": "Izin diminta",
+  "Conexión directa (WebRTC)": "Koneksi langsung (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Situs mencoba membuka koneksi langsung (WebRTC), cara biasa untuk mengetahui alamat jaringan yang sebenarnya."
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "Anda memotong lagi koneksi dari {1} dalam sesi ini.",
   "mFallo": "Situs {1} tidak termuat: {2}.",
   "opPermitida": "diizinkan {1}",
-  "opCortarse": "dipotong lagi {1}"
+  "opCortarse": "dipotong lagi {1}",
+  "mVistoSimpleDe": "ZERO melihat {1}, dari {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO melihat {1} ke {2}.",
+  "mPermisoNav": "Situs meminta akses ke {1}. Anda yang memutuskan di permintaan peramban.",
+  "mHuellaLocal": "Sebuah program dari {1} memeriksa {2}, data yang dipakai untuk mengenali perangkat Anda.",
+  "mCookieVista": "{1} mencoba meletakkan cookie perusahaan lain untuk mengenali Anda di situs lain.",
+  "nCortadas": "{1} dipotong"
  }
 }

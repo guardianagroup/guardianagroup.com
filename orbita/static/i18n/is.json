@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "Opna tengil í nýjum flipa",
   "Copiar la dirección del enlace": "Afrita vistfang tengils",
   "Copiar": "Afrita",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Þessi vefur hleypir ekki inn vöfrum sem koma frá netþjóni (netbundin vörn gegn vélmennum). Ekki er hægt að opna hann úr hólfinu; í venjulega vafranum þínum er það hægt."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Þessi vefur hleypir ekki inn vöfrum sem koma frá netþjóni (netbundin vörn gegn vélmennum). Ekki er hægt að opna hann úr hólfinu; í venjulega vafranum þínum er það hægt.",
+  "Lo que ZERO ve": "Það sem ZERO sér",
+  "Permitida": "Leyft",
+  "Vaciar esta web": "Hreinsa þennan vef",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO sendir ekkert til GUARDIANA: allt er séð og ákveðið á tækinu þínu.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Engar tengingar við önnur fyrirtæki á þessum vef enn.",
+  "Preparando las listas…": "Undirbý lista…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Þegar vefurinn tengist öðrum fyrirtækjum sérðu hér hver þau eru, frá hvaða landi og til hvers; og getur klippt hvert þeirra.",
+  "Dejar pasar las conexiones de esta empresa": "Hleypa tengingum þessa fyrirtækis í gegn",
+  "Cortar las conexiones de esta empresa en todas las webs": "Klippa tengingar þessa fyrirtækis á öllum vefjum",
+  "Permiso pedido": "Beðið um heimild",
+  "Conexión directa (WebRTC)": "Bein tenging (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Vefurinn reyndi að opna beina tengingu (WebRTC), venjulega leiðin til að komast að raunverulegu netfangi."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "Þú klippir tengingar frá {1} aftur í þessari lotu.",
   "mFallo": "Síðan {1} hlóðst ekki: {2}.",
   "opPermitida": "leyft {1}",
-  "opCortarse": "klippt aftur {1}"
+  "opCortarse": "klippt aftur {1}",
+  "mVistoSimpleDe": "ZERO sá {1}, frá {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO sá {1} til {2}.",
+  "mPermisoNav": "Vefurinn bað um aðgang að {1}. Þú ákveður í vafraglugganum.",
+  "mHuellaLocal": "Forrit frá {1} spurðist fyrir um {2}, gögn sem notuð eru til að þekkja tækið þitt.",
+  "mCookieVista": "{1} reyndi að setja vafraköku frá öðru fyrirtæki til að þekkja þig á fleiri vefjum.",
+  "nCortadas": "{1} klippt"
  }
 }

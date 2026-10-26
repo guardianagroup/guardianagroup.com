@@ -68,7 +68,7 @@ function registra(st, host, tipo, origen, tercero, d, estado) {
   st.porque[prop] = (st.porque[prop] || 0) + 1;
   const que = QUE[tipo] || 'una conexión', quien = (e.empresa ? e.empresa + ' (' + host + ')' : host);
   suceso(st, { clase: 'corte', estado, certeza: 'comprobado', dominio: host, empresa: e.empresa, pais: e.pais, paisNombre: e.paisNombre, proposito: prop, tipo, tercero, regla: d.regla, lista: d.lista,
-    texto: (estado === 'cortado' ? 'Cortado ' : estado === 'permitido' ? 'Dejado pasar (lo permitiste) ' : 'Visto ') + que + (e.empresa ? ', de ' + quien : ' hacia ' + host) + '.' });
+    texto: (estado === 'cortado' ? 'ZERO ha cortado ' : estado === 'permitido' ? 'ZERO ha dejado pasar (lo permitiste) ' : nivel === 'observar' ? 'ZERO ha visto (y dejado pasar, nivel observar) ' : 'ZERO ha visto ') + que + (e.empresa ? ', de ' + quien : ' hacia ' + host) + '.' });
 }
 
 function clasificaPeticion(d) {
@@ -110,7 +110,7 @@ chrome.webRequest.onErrorOccurred.addListener((d) => {
     // el último suceso de ese host pasa de «visto» a «cortado»
     for (let i = st.sucesos.length - 1; i >= 0 && i > st.sucesos.length - 40; i--) {
       const s = st.sucesos[i];
-      if (s.clase === 'corte' && s.dominio === r.host && s.estado === 'visto') { s.estado = 'cortado'; s.texto = s.texto.replace(/^Visto /, 'Cortado '); st.n.vistos--; st.n.cortes++; const e = empresas.atribuye(r.host); const reg = st.empresas.get(claveDe(r.host, e)); if (reg) { reg.vistos--; reg.cortados++; } break; }
+      if (s.clase === 'corte' && s.dominio === r.host && s.estado === 'visto') { s.estado = 'cortado'; s.texto = s.texto.replace(/^ZERO ha visto (\(y dejado pasar, nivel observar\) )?/, 'ZERO ha cortado '); st.n.vistos--; st.n.cortes++; const e = empresas.atribuye(r.host); const reg = st.empresas.get(claveDe(r.host, e)); if (reg) { reg.vistos--; reg.cortados++; } break; }
     }
     avisaPanel();
   }
@@ -148,7 +148,7 @@ function sucesoSensor(tabId, s, origen) {
   if (s.clase === 'formulario') return suceso(st, { clase: 'formulario', certeza: 'comprobado', dominio, texto: 'Atención: este formulario enviaría lo que escribas sin cifrar.', detalle: { accion: s.accion } });
   if (s.clase === 'subasta') {
     st.n.subastas++;
-    if (s.fase === 'fin') { const n = new Set([...(s.pedidos || []), ...((s.pujas || []).map((p) => p.pujador))]).size; return suceso(st, { clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Esta página ha subastado tu atención: ' + n + (n === 1 ? ' empresa pujó' : ' empresas pujaron') + ' por ' + (s.unidades || 1) + (s.unidades === 1 ? ' hueco' : ' huecos') + ' de anuncio' + (s.ms != null ? ' en ' + s.ms + ' ms' : '') + '.', detalle: s }); }
+    if (s.fase === 'fin') { const n = new Set([...(s.pedidos || []), ...((s.pujas || []).map((p) => p.pujador))]).size; return suceso(st, { clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Esta página ha subastado tu atención: ' + n + (n === 1 ? ' empresa pujó' : ' empresas pujaron') + ' por ' + (s.unidades || 1) + (s.unidades === 1 ? ' hueco' : ' huecos') + ' de anuncio en ' + (s.ms != null ? s.ms + ' ms' : 'milisegundos') + '. Los precios son los que declara cada pujador.', detalle: s }); }
     if (s.fase === 'ganada') return suceso(st, { clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Ganó la puja ' + s.pujador + (s.cpm != null ? ' declarando ' + s.cpm + ' ' + (s.moneda || '') + ' por mil impresiones' : '') + '.', detalle: s });
     return suceso(st, { clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Hueco de anuncio servido por Google' + (s.vacio ? ' (vacío)' : '') + '.', detalle: s });
   }
@@ -201,7 +201,10 @@ chrome.runtime.onMessage.addListener((m, sender, responde) => {
   return true;
 });
 
-chrome.runtime.onInstalled.addListener(() => { chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => {}); prepara(); });
+// Chrome/Edge/Brave: el icono abre el panel lateral. Firefox: el panel es una barra lateral (sidebar_action) y el icono la abre.
+const panelLateral = () => { try { if (chrome.sidePanel && chrome.sidePanel.setPanelBehavior) chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => {}); } catch (_) {} };
+try { if (!chrome.sidePanel && chrome.action && chrome.sidebarAction) chrome.action.onClicked.addListener(() => { try { chrome.sidebarAction.toggle(); } catch (_) { chrome.sidebarAction.open().catch(() => {}); } }); } catch (_) {}
+chrome.runtime.onInstalled.addListener(() => { panelLateral(); prepara(); });
 chrome.runtime.onStartup.addListener(() => prepara());
-chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => {});
+panelLateral();
 prepara();
