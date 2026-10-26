@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "எளிய வரைபடம்: சாம்பல் நிற நிலம், அடர் நிறக் கடல், புகைப்படம் இல்லாமல்",
   "Volver al mapa en color": "வண்ண வரைபடத்துக்குத் திரும்பு",
   "Color": "வண்ணம்",
-  "Limpio": "எளிய"
+  "Limpio": "எளிய",
+  "Edificios": "கட்டடங்கள்",
+  "edificios": "கட்டடங்கள்",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "கட்டடங்கள் இந்த வளாகத்தில்; இதன் பெயர் திறந்த தரவில் இன்னும் பொதுவில் இல்லை",
+  "Campus de centros de datos sin nombre": "பெயரில்லாத தரவு மைய வளாகம்",
+  "clic para la lista": "பட்டியலுக்குக் கிளிக் செய்க"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

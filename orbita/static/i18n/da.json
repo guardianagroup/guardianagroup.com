@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Enkelt kort: grå land og mørkt hav, uden fotoet",
   "Volver al mapa en color": "Tilbage til kortet i farver",
   "Color": "Farve",
-  "Limpio": "Enkel"
+  "Limpio": "Enkel",
+  "Edificios": "Bygninger",
+  "edificios": "bygninger",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "bygninger på dette campus; navnet er endnu ikke offentligt i de åbne data",
+  "Campus de centros de datos sin nombre": "Datacentercampus uden navn",
+  "clic para la lista": "klik for listen"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

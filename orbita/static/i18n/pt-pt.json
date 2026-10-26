@@ -931,7 +931,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Mapa simples: terra cinzenta e mar escuro, sem a fotografia",
   "Volver al mapa en color": "Voltar ao mapa a cores",
   "Color": "Cor",
-  "Limpio": "Simples"
+  "Limpio": "Simples",
+  "Edificios": "Edifícios",
+  "edificios": "edifícios",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "edifícios neste campus; o nome ainda não é público nos dados abertos",
+  "Campus de centros de datos sin nombre": "Campus de centros de dados sem nome",
+  "clic para la lista": "clique para ver a lista"
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

@@ -575,6 +575,49 @@ def overpass(q):
     return None
 
 
+CAMPUS_KM = 0.6
+
+
+def junta_campus(salida):
+    """25 Oct 2026, 20:27 (owner, on Abilene: «me salen 39… toco y me dice centro de datos sin nombre y me aparece una
+    lista enorme»): OpenStreetMap maps some campuses building by building, with no name. Data centres with no name, of
+    the same operator (or none), less than 600 m from each other, become one point that says how many buildings it has
+    («edificios» in its extra)."""
+    P, X = salida['puntos'], salida['extra']
+    while len(X) < len(P): X.append(0)
+    idx = [i for i, p in enumerate(P) if p[2] == 'datos' and not (p[3] or '').strip() and not (X[i] or {}).get('w')]
+    padre = {i: i for i in idx}
+    def raiz(i):
+        while padre[i] != i:
+            padre[i] = padre[padre[i]]; i = padre[i]
+        return i
+    orden = sorted(idx, key=lambda i: P[i][1])
+    for a in range(len(orden)):
+        i = orden[a]
+        for b in range(a + 1, len(orden)):
+            j = orden[b]
+            if P[j][1] - P[i][1] > CAMPUS_KM / 111: break
+            if (P[i][4] or '') == (P[j][4] or '') and km((P[i][0], P[i][1]), (P[j][0], P[j][1])) <= CAMPUS_KM:
+                padre[raiz(i)] = raiz(j)
+    grupos = {}
+    for i in idx: grupos.setdefault(raiz(i), []).append(i)
+    fuera = set()
+    for g in grupos.values():
+        if len(g) < 2: continue
+        g.sort(); k = g[0]
+        P[k][0] = round(sum(P[i][0] for i in g) / len(g), 3); P[k][1] = round(sum(P[i][1] for i in g) / len(g), 3)
+        x = dict(X[k] or {})
+        for i in g[1:]:
+            for c, v in (X[i] or {}).items(): x.setdefault(c, v)
+        x['edificios'] = sum((X[i] or {}).get('edificios', 1) for i in g)
+        X[k] = x; fuera.update(g[1:])
+    salida['puntos'] = [p for i, p in enumerate(P) if i not in fuera]
+    salida['extra'] = [x for i, x in enumerate(X) if i not in fuera]
+    if isinstance(salida.get('medida'), dict) and 'datos' in salida['medida']:
+        salida['medida']['datos'] = sum(1 for p in salida['puntos'] if p[2] == 'datos')
+    print('campus juntados:', sum(1 for g in grupos.values() if len(g) >= 2), '· edificios quitados de la lista:', len(fuera))
+
+
 def puntos():
     """Where the internet touches the ground (owner, 20 Oct 2026): cable landing stations, data centres and
     internet exchange points mapped in OpenStreetMap. Partial coverage, said on screen."""
@@ -643,6 +686,7 @@ out tags center;''')
         'puntos': out,
         'extra': extra,
     }
+    junta_campus(salida)
     # what Wikidata (CC0) states about the buildings and about the companies that run them
     try:
         wd = wikidata_centros(sorted({x['w'] for x in extra if x and x.get('w')}), sorted({x['ow'] for x in extra if x and x.get('ow')}))

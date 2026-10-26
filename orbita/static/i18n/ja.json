@@ -931,7 +931,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "シンプルな地図：灰色の陸地と暗い海、写真なし",
   "Volver al mapa en color": "カラーの地図に戻る",
   "Color": "カラー",
-  "Limpio": "シンプル"
+  "Limpio": "シンプル",
+  "Edificios": "建物",
+  "edificios": "棟",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "棟（このキャンパス内）。名称はオープンデータでまだ公開されていません",
+  "Campus de centros de datos sin nombre": "名称不明のデータセンター群",
+  "clic para la lista": "クリックで一覧"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

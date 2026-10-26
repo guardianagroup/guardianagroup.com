@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "سادہ نقشہ: سرمئی خشکی اور گہرا سمندر، تصویر کے بغیر",
   "Volver al mapa en color": "رنگین نقشے پر واپس جائیں",
   "Color": "رنگین",
-  "Limpio": "سادہ"
+  "Limpio": "سادہ",
+  "Edificios": "عمارتیں",
+  "edificios": "عمارتیں",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "عمارتیں اس کیمپس میں؛ اس کا نام ابھی کھلے ڈیٹا میں عام نہیں",
+  "Campus de centros de datos sin nombre": "بے نام ڈیٹا سینٹر کیمپس",
+  "clic para la lista": "فہرست کے لیے کلک کریں"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

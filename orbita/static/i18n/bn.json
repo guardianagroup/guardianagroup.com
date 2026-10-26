@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "সরল মানচিত্র: ধূসর স্থলভাগ ও গাঢ় সমুদ্র, ছবি ছাড়া",
   "Volver al mapa en color": "রঙিন মানচিত্রে ফিরুন",
   "Color": "রঙিন",
-  "Limpio": "সরল"
+  "Limpio": "সরল",
+  "Edificios": "ভবন",
+  "edificios": "ভবন",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "ভবন এই ক্যাম্পাসে; এর নাম এখনও উন্মুক্ত ডেটায় প্রকাশিত নয়",
+  "Campus de centros de datos sin nombre": "নামহীন ডেটা সেন্টার ক্যাম্পাস",
+  "clic para la lista": "তালিকার জন্য ক্লিক করুন"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

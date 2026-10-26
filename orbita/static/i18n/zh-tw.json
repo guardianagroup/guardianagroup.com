@@ -931,7 +931,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "簡潔地圖：灰色陸地與深色海洋，不顯示照片",
   "Volver al mapa en color": "回到彩色地圖",
   "Color": "彩色",
-  "Limpio": "簡潔"
+  "Limpio": "簡潔",
+  "Edificios": "建築",
+  "edificios": "棟建築",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "棟建築位於此園區；其名稱尚未在開放資料中公開",
+  "Campus de centros de datos sin nombre": "未具名的資料中心園區",
+  "clic para la lista": "點擊查看清單"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

@@ -931,7 +931,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "단순한 지도: 회색 육지와 어두운 바다, 사진 없이",
   "Volver al mapa en color": "컬러 지도로 돌아가기",
   "Color": "컬러",
-  "Limpio": "단순"
+  "Limpio": "단순",
+  "Edificios": "건물",
+  "edificios": "개 건물",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "개 건물(이 캠퍼스). 이름은 아직 공개 데이터에 공개되지 않았습니다",
+  "Campus de centros de datos sin nombre": "이름 없는 데이터센터 캠퍼스",
+  "clic para la lista": "클릭하면 목록"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

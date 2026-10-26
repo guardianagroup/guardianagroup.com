@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Pelkistetty kartta: harmaa maa ja tumma meri, ilman valokuvaa",
   "Volver al mapa en color": "Takaisin värilliseen karttaan",
   "Color": "Väri",
-  "Limpio": "Pelkkä"
+  "Limpio": "Pelkkä",
+  "Edificios": "Rakennukset",
+  "edificios": "rakennusta",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "rakennusta tällä kampuksella; sen nimi ei ole vielä julkinen avoimessa datassa",
+  "Campus de centros de datos sin nombre": "Nimetön datakeskuskampus",
+  "clic para la lista": "napsauta nähdäksesi luettelon"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

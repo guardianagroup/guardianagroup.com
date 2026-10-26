@@ -931,7 +931,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Простая карта: серая суша и тёмное море, без снимка",
   "Volver al mapa en color": "Вернуться к цветной карте",
   "Color": "Цвет",
-  "Limpio": "Простая"
+  "Limpio": "Простая",
+  "Edificios": "Здания",
+  "edificios": "зданий",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "зданий в этом кампусе; его название пока не опубликовано в открытых данных",
+  "Campus de centros de datos sin nombre": "Кампус центров обработки данных без названия",
+  "clic para la lista": "нажмите, чтобы открыть список"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

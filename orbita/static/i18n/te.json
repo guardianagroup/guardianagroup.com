@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "సాధారణ మ్యాప్: బూడిద రంగు భూమి, ముదురు సముద్రం, ఫోటో లేకుండా",
   "Volver al mapa en color": "రంగుల మ్యాప్‌కు తిరిగి వెళ్లండి",
   "Color": "రంగు",
-  "Limpio": "సాధారణ"
+  "Limpio": "సాధారణ",
+  "Edificios": "భవనాలు",
+  "edificios": "భవనాలు",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "భవనాలు ఈ ప్రాంగణంలో; దీని పేరు ఓపెన్ డేటాలో ఇంకా బహిరంగం కాలేదు",
+  "Campus de centros de datos sin nombre": "పేరులేని డేటా సెంటర్ ప్రాంగణం",
+  "clic para la lista": "జాబితా కోసం క్లిక్ చేయండి"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

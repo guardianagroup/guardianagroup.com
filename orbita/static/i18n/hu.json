@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Sima térkép: szürke szárazföld és sötét tenger, fénykép nélkül",
   "Volver al mapa en color": "Vissza a színes térképhez",
   "Color": "Szín",
-  "Limpio": "Sima"
+  "Limpio": "Sima",
+  "Edificios": "Épületek",
+  "edificios": "épület",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "épület ezen a campuson; a neve még nem nyilvános a nyílt adatokban",
+  "Campus de centros de datos sin nombre": "Név nélküli adatközpont-campus",
+  "clic para la lista": "kattintson a listához"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

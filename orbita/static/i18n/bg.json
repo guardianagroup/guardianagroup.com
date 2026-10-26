@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Опростена карта: сива суша и тъмно море, без снимката",
   "Volver al mapa en color": "Обратно към цветната карта",
   "Color": "Цвят",
-  "Limpio": "Проста"
+  "Limpio": "Проста",
+  "Edificios": "Сгради",
+  "edificios": "сгради",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "сгради в този комплекс; името му все още не е публично в отворените данни",
+  "Campus de centros de datos sin nombre": "Комплекс от центрове за данни без име",
+  "clic para la lista": "щракнете за списъка"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

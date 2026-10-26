@@ -931,7 +931,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Schlichte Karte: graues Land und dunkles Meer, ohne das Foto",
   "Volver al mapa en color": "Zurück zur farbigen Karte",
   "Color": "Farbe",
-  "Limpio": "Schlicht"
+  "Limpio": "Schlicht",
+  "Edificios": "Gebäude",
+  "edificios": "Gebäude",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "Gebäude auf diesem Campus; sein Name ist in den offenen Daten noch nicht öffentlich",
+  "Campus de centros de datos sin nombre": "Rechenzentrums-Campus ohne Namen",
+  "clic para la lista": "Klick für die Liste"
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",
