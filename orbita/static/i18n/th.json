@@ -1401,7 +1401,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "เครื่องมือค้นหาต้องการตรวจสอบว่าคุณเป็นคน ทำการตรวจสอบที่นี่แล้วไปต่อ เซลล์จะจำไว้ว่าคุณผ่านแล้ว",
   "celda en": "เซลล์ที่",
   "pide un captcha largo": "ขอแคปช่าแบบยาว",
-  "pide un clic de verificación": "ขอคลิกยืนยันหนึ่งครั้ง"
+  "pide un clic de verificación": "ขอคลิกยืนยันหนึ่งครั้ง",
+  "Abrir enlace en una pestaña nueva": "เปิดลิงก์ในแท็บใหม่",
+  "Copiar la dirección del enlace": "คัดลอกที่อยู่ลิงก์",
+  "Copiar": "คัดลอก"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

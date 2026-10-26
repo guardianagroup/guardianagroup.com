@@ -1402,7 +1402,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "検索エンジンがあなたが人間であることを確認したがっています。ここで確認を済ませて続けてください。セルは通過したことを記憶します。",
   "celda en": "セル:",
   "pide un captcha largo": "長いCAPTCHAを求めます",
-  "pide un clic de verificación": "確認のクリックを1回求めます"
+  "pide un clic de verificación": "確認のクリックを1回求めます",
+  "Abrir enlace en una pestaña nueva": "リンクを新しいタブで開く",
+  "Copiar la dirección del enlace": "リンクのアドレスをコピー",
+  "Copiar": "コピー"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

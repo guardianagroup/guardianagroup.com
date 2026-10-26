@@ -222,5 +222,7 @@ module.exports = String.raw`(() => {
       return c;
     } catch (_) { return 'default'; }
   };
-  addEventListener('mousemove', (e) => { const c = cursorDe(e.target); if (c !== ultimoCursor) { ultimoCursor = c; avisa(JSON.stringify({ clase: 'cursor', cursor: c })); } }, { capture: true, passive: true });
+  let ultimoHref = '';
+  const hrefDe = (el) => { try { while (el && el.nodeType !== 1) el = el.parentNode; const a = el && el.closest && el.closest('a[href]'); const h = a ? String(a.href || '') : ''; return /^https?:/.test(h) ? h.slice(0, 500) : ''; } catch (_) { return ''; } };
+  addEventListener('mousemove', (e) => { const c = cursorDe(e.target), h = hrefDe(e.target); if (c !== ultimoCursor || h !== ultimoHref) { ultimoCursor = c; ultimoHref = h; avisa(JSON.stringify({ clase: 'cursor', cursor: c, href: h })); } }, { capture: true, passive: true });
 })();`;

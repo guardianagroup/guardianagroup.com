@@ -1402,7 +1402,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "搜索引擎想确认你是真人。请在这里完成验证并继续；单元会记住你已通过。",
   "celda en": "单元位于",
   "pide un captcha largo": "要求通过较长的验证码",
-  "pide un clic de verificación": "要求点击一次验证"
+  "pide un clic de verificación": "要求点击一次验证",
+  "Abrir enlace en una pestaña nueva": "在新标签页中打开链接",
+  "Copiar la dirección del enlace": "复制链接地址",
+  "Copiar": "复制"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

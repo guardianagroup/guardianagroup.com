@@ -1402,7 +1402,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Sökmotorn vill kontrollera att du är en person. Lös kontrollen här inne och fortsätt; cellen kommer ihåg att du klarade den.",
   "celda en": "cell i",
   "pide un captcha largo": "kräver en lång captcha",
-  "pide un clic de verificación": "kräver ett verifieringsklick"
+  "pide un clic de verificación": "kräver ett verifieringsklick",
+  "Abrir enlace en una pestaña nueva": "Öppna länk i ny flik",
+  "Copiar la dirección del enlace": "Kopiera länkadress",
+  "Copiar": "Kopiera"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

@@ -1401,7 +1401,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "সার্চ ইঞ্জিন যাচাই করতে চায় যে আপনি একজন মানুষ। যাচাইটি এখানেই সম্পন্ন করে এগিয়ে যান; সেল মনে রাখবে যে আপনি পাস করেছেন।",
   "celda en": "সেল",
   "pide un captcha largo": "দীর্ঘ ক্যাপচা চায়",
-  "pide un clic de verificación": "একটি যাচাই ক্লিক চায়"
+  "pide un clic de verificación": "একটি যাচাই ক্লিক চায়",
+  "Abrir enlace en una pestaña nueva": "নতুন ট্যাবে লিঙ্ক খুলুন",
+  "Copiar la dirección del enlace": "লিঙ্কের ঠিকানা কপি করুন",
+  "Copiar": "কপি করুন"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

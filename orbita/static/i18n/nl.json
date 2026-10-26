@@ -1402,7 +1402,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "De zoekmachine wil controleren dat je een persoon bent. Los de controle hierbinnen op en ga verder; de cel onthoudt dat je erdoor bent.",
   "celda en": "cel in",
   "pide un captcha largo": "vraagt een lange captcha",
-  "pide un clic de verificación": "vraagt één verificatieklik"
+  "pide un clic de verificación": "vraagt één verificatieklik",
+  "Abrir enlace en una pestaña nueva": "Link in nieuw tabblad openen",
+  "Copiar la dirección del enlace": "Linkadres kopiëren",
+  "Copiar": "Kopiëren"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

@@ -1401,7 +1401,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "நீங்கள் ஒரு மனிதர் என்பதைத் தேடுபொறி சரிபார்க்க விரும்புகிறது. சரிபார்ப்பை இங்கேயே முடித்துத் தொடரவும்; நீங்கள் கடந்தீர்கள் என்பதை செல் நினைவில் வைக்கும்.",
   "celda en": "செல்",
   "pide un captcha largo": "நீண்ட கேப்ட்சா கேட்கிறது",
-  "pide un clic de verificación": "ஒரு சரிபார்ப்பு கிளிக் கேட்கிறது"
+  "pide un clic de verificación": "ஒரு சரிபார்ப்பு கிளிக் கேட்கிறது",
+  "Abrir enlace en una pestaña nueva": "இணைப்பைப் புதிய தாவலில் திறக்கவும்",
+  "Copiar la dirección del enlace": "இணைப்பு முகவரியை நகலெடுக்கவும்",
+  "Copiar": "நகலெடு"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

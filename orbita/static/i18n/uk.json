@@ -1402,7 +1402,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Пошуковик хоче перевірити, що ви людина. Пройдіть перевірку тут і продовжуйте; комірка запам’ятає, що ви її пройшли.",
   "celda en": "комірка в",
   "pide un captcha largo": "просить довгу капчу",
-  "pide un clic de verificación": "просить один клік перевірки"
+  "pide un clic de verificación": "просить один клік перевірки",
+  "Abrir enlace en una pestaña nueva": "Відкрити посилання в новій вкладці",
+  "Copiar la dirección del enlace": "Копіювати адресу посилання",
+  "Copiar": "Копіювати"
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

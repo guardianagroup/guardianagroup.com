@@ -1401,7 +1401,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Vyhledávač chce ověřit, že jste člověk. Dokončete ověření zde a pokračujte; buňka si zapamatuje, že jste jím prošli.",
   "celda en": "buňka v",
   "pide un captcha largo": "vyžaduje dlouhou captchu",
-  "pide un clic de verificación": "vyžaduje jedno ověřovací kliknutí"
+  "pide un clic de verificación": "vyžaduje jedno ověřovací kliknutí",
+  "Abrir enlace en una pestaña nueva": "Otevřít odkaz na nové kartě",
+  "Copiar la dirección del enlace": "Kopírovat adresu odkazu",
+  "Copiar": "Kopírovat"
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

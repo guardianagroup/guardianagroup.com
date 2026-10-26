@@ -85,7 +85,8 @@
     if (m.t === 'resumen') { if (window.zeroResumen) window.zeroResumen(m); return; }
     if (m.t === 'nav') { M.host = m.host; M.urlActual = m.url; if (window.zeroNav) window.zeroNav(m); return; }
     if (m.t === 'titulo') { if (window.zeroTitulo) window.zeroTitulo(m.titulo); return; }
-    if (m.t === 'cursor') { cv.style.cursor = CURSORES.has(m.cursor) ? m.cursor : 'default'; return; }
+    if (m.t === 'cursor') { cv.style.cursor = CURSORES.has(m.cursor) ? m.cursor : 'default'; enlaceBajoCursor = m.href || ''; estadoEnlace.textContent = enlaceBajoCursor; estadoEnlace.hidden = !enlaceBajoCursor; return; }
+    if (m.t === 'portapapeles') { if (m.texto) navigator.clipboard.writeText(m.texto).catch(() => {}); return; }
     if (m.t === 'ia') { if (window.zeroIA) window.zeroIA(m); return; }
     if (m.t === 'ultra') { M.ultraDisponible = !!m.disponible; M.ultra = !!m.activo; if (window.zeroUltra) window.zeroUltra(m); return; }
     if (m.t === 'descarga') { if (window.zeroDescarga) window.zeroDescarga(m); return; }
@@ -105,10 +106,35 @@
   cv.addEventListener('mousemove', (e) => { const n = Date.now(); if (n - moviendo < 28) return; moviendo = n; const c = coords(e); env({ t: 'raton', tipo: 'move', x: c.x, y: c.y }); });
   cv.addEventListener('mousedown', (e) => { cv.focus(); e.preventDefault(); pulso(e); const c = coords(e); env({ t: 'raton', tipo: 'move', x: c.x, y: c.y }); env({ t: 'raton', tipo: 'down', x: c.x, y: c.y, boton: BOTON[e.button] || 'left', clicks: e.detail || 1 }); });
   cv.addEventListener('mouseup', (e) => { e.preventDefault(); const c = coords(e); env({ t: 'raton', tipo: 'up', x: c.x, y: c.y, boton: BOTON[e.button] || 'left', clicks: e.detail || 1 }); });
-  cv.addEventListener('contextmenu', (e) => e.preventDefault());
+  // Como en Chrome: la dirección del enlace bajo el cursor abajo a la izquierda, y un menú contextual propio de ZERO.
+  let enlaceBajoCursor = '';
+  const estadoEnlace = document.createElement('div'); estadoEnlace.className = 'zeroenlace'; estadoEnlace.hidden = true; web.append(estadoEnlace);
+  const menu = document.createElement('div'); menu.className = 'zeromenu'; menu.hidden = true; menu.setAttribute('role', 'menu'); web.append(menu);
+  const cierraMenu = () => { menu.hidden = true; };
+  const opcion = (txt, fn) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'menuitem'); b.textContent = txt; b.addEventListener('click', (ev) => { ev.stopPropagation(); cierraMenu(); fn(); }); return b; };
+  cv.addEventListener('contextmenu', (e) => {
+    e.preventDefault(); menu.textContent = '';
+    const c = coords(e); env({ t: 'raton', tipo: 'move', x: c.x, y: c.y });
+    const h = enlaceBajoCursor;
+    if (h) { menu.append(opcion('Abrir enlace en una pestaña nueva', () => M.pestana('nueva', null, h)), opcion('Copiar la dirección del enlace', () => navigator.clipboard.writeText(h).catch(() => {}))); }
+    menu.append(opcion('Copiar', () => env({ t: 'copiar' })), opcion('Atrás', M.atras), opcion('Adelante', M.adelante), opcion('Recargar', M.recargar));
+    const wr = web.getBoundingClientRect(); const k = web.offsetWidth / (wr.width || 1);
+    menu.style.left = Math.min((e.clientX - wr.left) * k, web.offsetWidth - 280) + 'px'; menu.style.top = Math.min((e.clientY - wr.top) * k, web.offsetHeight - 200) + 'px';
+    menu.hidden = false;
+  });
+  document.addEventListener('pointerdown', (e) => { if (!menu.hidden && !menu.contains(e.target)) cierraMenu(); }, true);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cierraMenu(); }, true);
   cv.addEventListener('wheel', (e) => { e.preventDefault(); const c = coords(e); env({ t: 'rueda', x: c.x, y: c.y, dx: e.deltaX, dy: e.deltaY }); }, { passive: false });
   const LOCALES = new Set(['Escape', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12']);
-  cv.addEventListener('keydown', (e) => { if (LOCALES.has(e.key) || e.key === 'Dead' || (e.ctrlKey && /^[lLtTwWnN]$/.test(e.key))) return; e.preventDefault(); e.stopPropagation(); env({ t: 'tecla', tipo: 'down', key: e.key }); }, true);
+  cv.addEventListener('keydown', (e) => {
+    if (LOCALES.has(e.key) || e.key === 'Dead' || (e.ctrlKey && /^[lLtTwWnN]$/.test(e.key))) return;
+    e.preventDefault(); e.stopPropagation();
+    const mod = e.ctrlKey || e.metaKey;
+    // Ctrl+C: lo seleccionado en la celda pasa al portapapeles de la persona; Ctrl+V: lo que tiene en su portapapeles entra en la celda.
+    if (mod && /^[cC]$/.test(e.key)) { env({ t: 'tecla', tipo: 'down', key: e.key }); env({ t: 'copiar' }); return; }
+    if (mod && /^[vV]$/.test(e.key)) { if (navigator.clipboard && navigator.clipboard.readText) navigator.clipboard.readText().then((s) => { if (s) env({ t: 'texto', s }); }).catch(() => {}); return; }
+    env({ t: 'tecla', tipo: 'down', key: e.key });
+  }, true);
   cv.addEventListener('keyup', (e) => { if (LOCALES.has(e.key) || e.key === 'Dead') return; e.preventDefault(); e.stopPropagation(); env({ t: 'tecla', tipo: 'up', key: e.key }); }, true);
   cv.addEventListener('paste', (e) => { const s = (e.clipboardData || window.clipboardData).getData('text'); if (s) { e.preventDefault(); env({ t: 'texto', s: String(s).slice(0, 20000) }); } });
   document.addEventListener('visibilitychange', () => env({ t: 'mira', si: !document.hidden }));
