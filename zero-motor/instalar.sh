@@ -43,7 +43,7 @@ fi
 paso "Paquetes del sistema"
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -q
-apt-get install -y -q curl git ca-certificates gnupg tor debian-keyring debian-archive-keyring apt-transport-https
+apt-get install -y -q curl git ca-certificates gnupg python3 tor debian-keyring debian-archive-keyring apt-transport-https
 
 paso "Node.js $NODE_MAYOR"
 if ! command -v node >/dev/null || [ "$(node -p 'process.versions.node.split(".")[0]')" -lt 20 ]; then
@@ -74,6 +74,45 @@ else
   sudo -u zero git -C "$DIR" sparse-checkout set zero-motor orbita/datos
 fi
 sudo -u zero git -C "$DIR" log -1 --format='  versión %h · %cd' --date=short
+
+paso "Listas de filtros (EasyList y uBlock Origin, desde sus repositorios)"
+LSRC="$BASE/listas-src"
+mkdir -p "$LSRC"; chown zero:zero "$LSRC"
+cat > "$BASE/actualizar-listas.sh" <<EOF
+#!/usr/bin/env bash
+# Reconstruye las listas de filtros de ZERO desde EasyList y uAssets y reinicia el motor si cambiaron.
+set -e
+for r in easylist/easylist uBlockOrigin/uAssets; do
+  n=\${r##*/}
+  if [ -d "$LSRC/\$n/.git" ]; then git -C "$LSRC/\$n" pull -q --ff-only || true
+  else git clone -q --depth 1 "https://github.com/\$r" "$LSRC/\$n"; fi
+done
+antes=\$(cat "$DIR"/zero-motor/listas/*.txt 2>/dev/null | sha256sum)
+python3 "$DIR/zero-motor/listas/construye_listas.py" "$LSRC"
+despues=\$(cat "$DIR"/zero-motor/listas/*.txt | sha256sum)
+[ "\$antes" != "\$despues" ] && [ -n "\${ZERO_REINICIA:-}" ] && systemctl restart zero-motor || true
+EOF
+chmod 755 "$BASE/actualizar-listas.sh"
+sudo -u zero bash "$BASE/actualizar-listas.sh"
+cat > /etc/systemd/system/zero-listas.service <<EOF
+[Unit]
+Description=GUARDIANA ZERO · actualización semanal de las listas de filtros
+[Service]
+Type=oneshot
+User=zero
+ExecStart=/usr/bin/bash $BASE/actualizar-listas.sh
+ExecStartPost=+/bin/systemctl restart zero-motor
+EOF
+cat > /etc/systemd/system/zero-listas.timer <<EOF
+[Unit]
+Description=GUARDIANA ZERO · listas de filtros cada semana
+[Timer]
+OnCalendar=Mon 05:10
+RandomizedDelaySec=1h
+Persistent=true
+[Install]
+WantedBy=timers.target
+EOF
 
 paso "Playwright $PLAYWRIGHT_VERSION y Chromium"
 cd "$DIR/zero-motor"
@@ -160,6 +199,7 @@ fi
 
 paso "Arrancando el motor"
 systemctl daemon-reload
+systemctl enable -q zero-listas.timer; systemctl start zero-listas.timer
 systemctl enable -q zero-motor
 systemctl restart zero-motor
 for i in $(seq 1 20); do
