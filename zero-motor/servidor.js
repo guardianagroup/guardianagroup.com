@@ -56,6 +56,7 @@ class Sesion {
     this.empresas = new Map(); this.paises = new Map(); this.porque = {}; this.cookiesVistas = new Set(); this.webActual = '';
     this.destruida = false; this.operaciones = [];
     this.senuelos = new Senuelos('http://127.0.0.1:' + PUERTO); SESIONES.set(this.senuelos.token, this);
+    this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.ultimos = [];
     ws.on('message', (m, bin) => { if (!bin) this.mensaje(m).catch(() => {}); });
     ws.on('close', () => this.destruye('conexión cerrada'));
   }
@@ -115,6 +116,7 @@ class Sesion {
 
   async filtra2(route, req) {
     if (this.destruida) return route.abort('aborted').catch(() => {});
+    if (this.sellada) return route.abort('blockedbyclient').catch(() => {}); // celda sellada: ninguna conexión sale
     const url = req.url();
     if (!/^https?:/.test(url)) return route.continue().catch(() => {});
     const host = hostDe(url);
@@ -156,8 +158,8 @@ class Sesion {
       this.corte(host, tipo, origen, tercero, d);
       return route.abort('blockedbyclient').catch(() => {});
     }
-    if (this.nivel && this.nivel !== 'normal' && tercero && !esLocal(host)) {
-      this.corte(host, tipo, origen, tercero, { regla: 'nivel ' + this.nivel + ': toda conexión con otra empresa', lista: null, proposito: 'otra-empresa' });
+    if (((this.nivel && this.nivel !== 'normal') || this.alerta >= 2) && tercero && !esLocal(host)) {
+      this.corte(host, tipo, origen, tercero, { regla: this.alerta >= 2 && !(this.nivel && this.nivel !== 'normal') ? 'alerta: toda conexión con otra empresa' : 'nivel ' + this.nivel + ': toda conexión con otra empresa', lista: null, proposito: 'otra-empresa' });
       return route.abort('blockedbyclient').catch(() => {});
     }
     const headers = { ...req.headers() };
@@ -258,7 +260,59 @@ class Sesion {
     const x = { t: 'suceso', id: this.sucesos.length + 1, hora: ahora(), ...s };
     this.sucesos.push(x);
     this.env(x);
-    this.env({ t: 'resumen', cortes: this.n.cortes, empresas: this.empresas.size, paises: this.paises.size, porque: this.porque, n: this.n, web: this.webActual });
+    this.env({ t: 'resumen', cortes: this.n.cortes, empresas: this.empresas.size, paises: this.paises.size, porque: this.porque, n: this.n, web: this.webActual, alerta: this.alerta });
+    if (x.clase !== 'alerta') this.vigila(x);
+  }
+
+  // Respuesta gradual (ronda 40, punto 11, las tres voces): cada suceso suma puntos en esta web; al pasar un umbral la celda
+  // sube de nivel: 0 en calma · 1 vigilando · 2 alerta (toda conexión con otras empresas cortada) · 3 sellada (sin red y
+  // sin programas; la persona decide) · 4 destruida (solo a petición de la persona). Los puntos se reinician al cambiar de web.
+  vigila(x) {
+    const PESO = { huella: 1, permiso: 1, webrtc: 1, popup: 1, dialogo: 1, descarga: 2, formulario: 2, redireccion: 1, certificado: 3, bloqueo: 4 };
+    let p = PESO[x.clase] || 0;
+    const d = x.detalle || {};
+    if (x.clase === 'huella' && this.motivos.filter((m) => m.clase === 'huella').length >= 3) p = 0; // la huella cuenta hasta 3
+    if (x.clase === 'señuelo') { // salida real hacia otra empresa: 2 por empresa (hasta 4); cortada: 1 (hasta 2); hacia la propia web: 0
+      const ya = this.motivos.filter((m) => m.clase === 'señuelo');
+      if (!d.tercero) p = 0;
+      else if (!d.cortada) p = ya.some((m) => m.dominio === x.dominio) ? 0 : (ya.filter((m) => m.puntos === 2).length >= 2 ? 0 : 2);
+      else p = ya.filter((m) => m.puntos === 1).length >= 2 ? 0 : 1;
+    }
+    if (!p) return;
+    this.puntos += p;
+    this.motivos.push({ clase: x.clase, puntos: p, hora: x.hora, dominio: x.dominio || null });
+    if (this.motivos.length > 60) this.motivos.shift();
+    // tormenta: muchos avisos en pocos segundos
+    const t = Date.now(); this.ultimos.push(t); this.ultimos = this.ultimos.filter((u) => t - u < 10000);
+    if (this.ultimos.length === 25) { this.puntos += 2; this.motivos.push({ clase: 'tormenta', puntos: 2, hora: ahora(), dominio: this.webActual }); }
+    // sellar en automático solo con una señal grave (web peligrosa, identidad no comprobada, descarga, tormenta) además de los puntos
+    const grave = this.motivos.some((m) => ['bloqueo', 'certificado', 'descarga', 'tormenta'].includes(m.clase));
+    const nivel = this.puntos >= 12 && grave ? 3 : this.puntos >= 6 ? 2 : this.puntos >= 2 ? 1 : 0;
+    if (nivel > this.alerta) this.ponAlerta(nivel, 'automático: ' + x.clase).catch(() => {});
+  }
+
+  async ponAlerta(nivel, motivo) {
+    if (this.destruida || nivel === this.alerta) return;
+    const NOMBRE = ['en calma', 'vigilando', 'alerta', 'sellada', 'destruida'];
+    const antes = this.alerta; this.alerta = nivel; this.op('alerta ' + NOMBRE[nivel] + ' (' + motivo + ')');
+    if (nivel >= 3 && !this.sellada) {
+      this.sellada = true;
+      try { await this.ctx.setOffline(true); } catch (_) {}
+      try { await this.cdp.send('Emulation.setScriptExecutionDisabled', { value: true }); } catch (_) {}
+    }
+    if (nivel < 3 && this.sellada) {
+      this.sellada = false;
+      try { await this.ctx.setOffline(false); } catch (_) {}
+      try { await this.cdp.send('Emulation.setScriptExecutionDisabled', { value: this.nivel === 'maximo' }); } catch (_) {}
+    }
+    const TEXTO = {
+      0: 'La celda vuelve a la calma.',
+      1: 'ZERO vigila esta web de cerca: ha visto varios intentos (huella, permisos o ventanas) que juntos merecen atención.',
+      2: 'Alerta en esta web: ZERO corta ahora toda conexión con otras empresas mientras dure la visita. La web sigue abierta.',
+      3: 'Celda sellada: ZERO ha cortado toda la red de la celda y ha parado sus programas. Lo que ves queda congelado; nada entra ni sale. Puedes reanudar o destruir la celda.',
+    };
+    this.suceso({ clase: 'alerta', certeza: 'comprobado', dominio: this.webActual, texto: TEXTO[nivel] || '', detalle: { nivel, nombre: NOMBRE[nivel], antes, motivo, puntos: this.puntos, motivos: this.motivos.slice(-12) } });
+    this.env({ t: 'alerta', nivel, nombre: NOMBRE[nivel], motivo, puntos: this.puntos, sellada: this.sellada });
   }
 
   nav(cargada) {
@@ -271,6 +325,8 @@ class Sesion {
 
   async ve(url) {
     if (!/^[a-z]+:\/\//i.test(url)) url = 'https://' + url;
+    if (this.sellada) return; // sellada: primero reanudar o destruir
+    this.puntos = 0; this.motivos = []; this.ultimos = []; if (this.alerta > 0 && this.alerta < 3) await this.ponAlerta(0, 'nueva web');
     // nueva web: nuevo contador «en esta web» (los totales de la sesión se conservan)
     this.n = { cortes: 0, limpiezas: 0, huella: 0, permisos: 0, cookies: 0, subastas: 0, bloqueos: 0 }; this.empresas = new Map(); this.paises = new Map(); this.porque = {}; this.cookiesVistas = new Set();
     this.env({ t: 'resumen', cortes: 0, empresas: 0, paises: 0, porque: {}, n: this.n, web: hostDe(url) });
@@ -291,6 +347,7 @@ class Sesion {
       if (o.t === 'hola') return await this.abre(o.w, o.h);
       if (!this.page || this.destruida) return;
       if (o.t === 'abrir') return await this.ve(String(o.url || '').trim());
+      if (this.sellada && (o.t === 'raton' || o.t === 'rueda' || o.t === 'tecla' || o.t === 'texto')) return; // sellada: la celda no recibe nada
       if (o.t === 'raton') {
         if (o.tipo === 'move') return await this.page.mouse.move(o.x, o.y);
         if (o.tipo === 'down') return await this.page.mouse.down({ button: o.boton || 'left', clickCount: o.clicks || 1 });
@@ -317,6 +374,7 @@ class Sesion {
       }
       if (o.t === 'modo') { if ('observatorio' in o) { this.observatorio = !!o.observatorio; this.op('modo observatorio ' + (this.observatorio ? 'activado' : 'desactivado')); } if (o.nivel) await this.ponNivel(o.nivel); return; }
       if (o.t === 'destruir') return await this.destruye('a petición de la persona');
+      if (o.t === 'alerta') { if (o.accion === 'sellar') return await this.ponAlerta(3, 'a petición de la persona'); if (o.accion === 'reanudar') { this.puntos = 0; this.motivos = []; return await this.ponAlerta(0, 'reanudada por la persona'); } return; }
     } catch (e) { /* una orden que falla no tumba la sesión */ }
   }
 
@@ -353,7 +411,7 @@ class Sesion {
     try { if (this.cdp) await this.cdp.send('Page.stopScreencast').catch(() => {}); } catch (_) {}
     try { if (this.ctx) await this.ctx.close(); this.op('celda cerrada: cookies, caché, almacenamiento y pestañas de la sesión eliminados con el contexto'); } catch (_) { this.op('celda cerrada con error'); }
     const acta = { sesion: this.id, version: VERSION, inicio: new Date(this.creada).toISOString(), fin: ahora(), motivo, duracion_s: Math.round((Date.now() - this.creada) / 1000), cierre_ms: Date.now() - t0,
-      operaciones: this.operaciones, sucesos: this.sucesos.length, cortes: this.sucesos.filter((s) => s.clase === 'corte').length, senuelos: this.senuelos.alertas.length,
+      operaciones: this.operaciones, sucesos: this.sucesos.length, cortes: this.sucesos.filter((s) => s.clase === 'corte').length, senuelos: this.senuelos.alertas.length, alerta_final: this.alerta,
       nota: 'Prototipo: el contexto de Chromium se destruye y con él todo su estado; en producción se destruye la microVM entera y se invalidan sus claves. Este comprobante lo sella el propio servidor: acredita lo que ZERO hizo, no sustituye una auditoría externa.' };
     acta.sello = crypto.createHmac('sha256', CLAVE_SESION).update(JSON.stringify(acta)).digest('hex').slice(0, 32);
     if (this.ws.abierto) { this.env({ t: 'acta', acta }); setTimeout(() => this.ws.cierra(), 200); }
