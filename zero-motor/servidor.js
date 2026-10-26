@@ -17,10 +17,12 @@ const { WS } = require('./ws');
 const { Cortes } = require('./cortes');
 const { Empresas, baseDominio } = require('./empresas');
 const SENSORES = require('./sensores');
+const { Senuelos } = require('./senuelos');
 
 const RAIZ = path.join(__dirname, '..');
 const PUERTO = +process.argv[2] || 8792;
 const MOCK = !!process.env.ZERO_MOCK;
+const SESIONES = new Map(); // token de señuelo → sesión (para el colector /s/<token>)
 const VERSION = 'prototipo 0.1 · 26 Oct 2026';
 const CLAVE_SESION = crypto.randomBytes(32); // efímera: con ella se sella el comprobante de cada sesión
 
@@ -53,6 +55,7 @@ class Sesion {
     this.sucesos = []; this.n = { cortes: 0, limpiezas: 0, huella: 0, permisos: 0, cookies: 0, subastas: 0, bloqueos: 0 };
     this.empresas = new Map(); this.paises = new Map(); this.porque = {}; this.cookiesVistas = new Set(); this.webActual = '';
     this.destruida = false; this.operaciones = [];
+    this.senuelos = new Senuelos('http://127.0.0.1:' + PUERTO); SESIONES.set(this.senuelos.token, this);
     ws.on('message', (m, bin) => { if (!bin) this.mensaje(m).catch(() => {}); });
     ws.on('close', () => this.destruye('conexión cerrada'));
   }
@@ -68,6 +71,8 @@ class Sesion {
     this.op('celda creada');
     await this.ctx.exposeBinding('__zeroSuceso', (src, json) => this.sucesoPagina(src, json));
     await this.ctx.addInitScript(SENSORES);
+    await this.ctx.addInitScript(this.senuelos.initScript());
+    this.op('señuelos plantados: texto escondido, cookie propia, almacén local, enlace oculto');
     await this.ctx.route('**/*', (route, req) => this.filtra(route, req));
     this.ctx.on('page', (p) => { if (this.page && p !== this.page) { this.suceso({ clase: 'popup', certeza: 'comprobado', texto: 'La web intentó abrir una ventana nueva. ZERO la cerró.', dominio: hostDe(p.url()) }); p.close().catch(() => {}); } });
     this.page = await this.ctx.newPage();
@@ -80,6 +85,7 @@ class Sesion {
     await this.arrancaPantalla();
     this.page.on('response', (r) => { this.respuestaNav(r); this.respuesta(r).catch(() => {}); });
     this.page.on('request', (r) => this.peticion(r));
+    this.page.on('websocket', (w) => { const host = hostDe(w.url()); w.on('framesent', (f) => { try { const h = this.senuelos.busca(typeof f.payload === 'string' ? f.payload : f.payload.toString('latin1')); h.forEach((tipo) => this.senuelo({ tipo, donde: 'trama de WebSocket' }, host, w.url(), baseDominio(host) !== baseDominio(this.webActual), false)); } catch (_) {} }); });
     this.page.on('download', (d) => this.descarga(d));
     this.page.on('dialog', (d) => { this.suceso({ clase: 'dialogo', certeza: 'comprobado', texto: 'La web intentó mostrar un aviso emergente. ZERO lo cerró.', dominio: hostDe(this.page.url()) }); d.dismiss().catch(() => {}); });
     this.page.on('framenavigated', (f) => { if (f === this.page.mainFrame()) this.nav(); });
@@ -117,6 +123,9 @@ class Sesion {
     const principal = tipo === 'document';
     const origen = principal ? host : hostDe(this.page.url()) || host;
     const tercero = baseDominio(host) !== baseDominio(origen);
+    let postData = null; try { postData = req.postData(); } catch (_) {}
+    const fugas = this.senuelos.inspecciona({ url, postData, headers: req.headers(), tercero });
+    if (fugas.length) { const dcheck = cortes.decide({ url, tipo, origen, host, tercero }); fugas.forEach((f) => this.senuelo(f, host, url, tercero, !!dcheck.bloquear || (this.nivel && this.nivel !== 'normal' && tercero && !esLocal(host)))); }
     if (principal) {
       this.webActual = host;
       // 1) web peligrosa conocida (listas de malware/phishing) → se detiene dentro de la celda
@@ -319,15 +328,32 @@ class Sesion {
     this.suceso({ clase: 'nivel', certeza: 'comprobado', dominio: this.webActual, texto: n === 'normal' ? 'Nivel normal: ZERO corta la publicidad y el rastreo de las listas públicas.' : n === 'estricto' ? 'Nivel estricto: además, ZERO corta toda conexión con otras empresas; solo pasa lo propio de la web.' : 'Nivel máximo: además, la web corre sin programas (JavaScript).' });
   }
 
+  // Una marca que solo existe en la celda ha salido (o ha intentado salir) hacia alguien. Se afirma solo lo visto.
+  senuelo(f, host, url, tercero, cortada) {
+    const clave = f.tipo + '|' + f.donde + '|' + host;
+    if (this.senuelos.alertas.some((a) => a.clave === clave)) return;
+    this.senuelos.apunta({ clave, tipo: f.tipo, donde: f.donde, host, url: String(url).slice(0, 300), tercero, cortada, hora: ahora() });
+    const e = empresas.atribuye(host);
+    const que = Senuelos.nombre(f.tipo);
+    const texto = f.tipo === 'enlace'
+      ? 'Alguien ha visitado el enlace oculto que ZERO puso como señuelo en la página (desde ' + host + '; ' + f.donde + '). Solo un programa que lea la página entera y siga sus enlaces llega a él: un indexador, un previsualizador o un rastreador.'
+      : tercero
+      ? 'Un dato que solo existe en tu celda (' + que + ', puesto por ZERO como señuelo) ' + (cortada ? 'iba a salir' : 'ha salido') + ' hacia ' + (e.empresa ? e.empresa + ' (' + host + ')' : host) + ' en ' + f.donde + '. Algo en esta web lo leyó y lo envió' + (cortada ? '; ZERO cortó esa conexión.' : '.')
+      : 'La propia web se ha enviado un dato que solo existe en tu celda (' + que + ', puesto por ZERO como señuelo) en ' + f.donde + ': copia el contenido de la página o sus cookies hacia sus servidores.';
+    this.n.senuelos = (this.n.senuelos || 0) + 1;
+    this.suceso({ clase: 'señuelo', certeza: 'comprobado', dominio: host, empresa: e.empresa || null, paisNombre: e.paisNombre || null, texto, detalle: { tipo: f.tipo, que, donde: f.donde, tercero, cortada, url: String(url).slice(0, 200) } });
+  }
+
   async destruye(motivo) {
     if (this.destruida) return;
     this.destruida = true;
+    SESIONES.delete(this.senuelos.token);
     const t0 = Date.now();
     this.op('cierre pedido: ' + motivo);
     try { if (this.cdp) await this.cdp.send('Page.stopScreencast').catch(() => {}); } catch (_) {}
     try { if (this.ctx) await this.ctx.close(); this.op('celda cerrada: cookies, caché, almacenamiento y pestañas de la sesión eliminados con el contexto'); } catch (_) { this.op('celda cerrada con error'); }
     const acta = { sesion: this.id, version: VERSION, inicio: new Date(this.creada).toISOString(), fin: ahora(), motivo, duracion_s: Math.round((Date.now() - this.creada) / 1000), cierre_ms: Date.now() - t0,
-      operaciones: this.operaciones, sucesos: this.sucesos.length, cortes: this.sucesos.filter((s) => s.clase === 'corte').length,
+      operaciones: this.operaciones, sucesos: this.sucesos.length, cortes: this.sucesos.filter((s) => s.clase === 'corte').length, senuelos: this.senuelos.alertas.length,
       nota: 'Prototipo: el contexto de Chromium se destruye y con él todo su estado; en producción se destruye la microVM entera y se invalidan sus claves. Este comprobante lo sella el propio servidor: acredita lo que ZERO hizo, no sustituye una auditoría externa.' };
     acta.sello = crypto.createHmac('sha256', CLAVE_SESION).update(JSON.stringify(acta)).digest('hex').slice(0, 32);
     if (this.ws.abierto) { this.env({ t: 'acta', acta }); setTimeout(() => this.ws.cierra(), 200); }
@@ -346,6 +372,12 @@ function empresaDe(pujador) {
 async function main() {
   navegador = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-unsafe-swiftshader', '--disable-background-networking', '--no-first-run', '--force-webrtc-ip-handling-policy=disable_non_proxied_udp', '--disable-features=MediaRouter,Translate,OptimizationHints', '--autoplay-policy=user-gesture-required'] });
   const srv = http.createServer((req, res) => {
+    const ms = req.url.match(/^\/s\/([0-9a-f]{12})(?:[/?#].*)?$/);
+    if (ms) {
+      const ses = SESIONES.get(ms[1]);
+      if (ses && !ses.destruida) ses.senuelo({ tipo: 'enlace', donde: 'visita al enlace oculto (' + (req.headers['user-agent'] || 'sin agente').slice(0, 80) + ')' }, req.socket.remoteAddress || '?', req.url, true, false);
+      res.writeHead(204); return res.end();
+    }
     if (req.url === '/salud') { res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ ok: true, version: VERSION, listas: nListas, mock: MOCK })); }
     res.writeHead(404); res.end();
   });

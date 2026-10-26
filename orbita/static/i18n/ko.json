@@ -1020,7 +1020,10 @@
   "Radiografiar la puja (modo observatorio)": "입찰 투시(관측 모드)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "경매는 당신의 신원 없이 셀에서 진행됩니다. 누가 얼마를 입찰했는지 볼 수 있고, 광고와 추적은 계속 차단됩니다. 입찰자에게는 GUARDIANA의 출구와 당신이 읽는 페이지가 전달됩니다.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "원격 셀을 봉인하고 내부의 모든 것과 함께 파기",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "사이트가 로드되면 사이트가 시도하는 것과 ZERO의 대응이 순서대로 여기에 표시됩니다."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "사이트가 로드되면 사이트가 시도하는 것과 ZERO의 대응이 순서대로 여기에 표시됩니다.",
+  "¿Han caído en los señuelos?": "미끼에 걸린 곳이 있나요?",
+  "Señuelo: un dato marcado ha salido": "미끼: 표시된 데이터가 외부로 나감",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO는 아무도 읽을 이유가 없는 표시된 데이터(숨은 텍스트, 사이트 자체 쿠키, 로컬 저장소, 숨은 링크)를 셀에 심어 둡니다. 그중 하나가 누군가에게 나가는 길에 다시 나타나면 증거와 함께 여기에 표시됩니다. 데모에는 미끼가 없습니다."
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

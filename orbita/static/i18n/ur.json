@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "بولی کا ایکسرے (رصدگاہ موڈ)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "نیلامی آپ کی شناخت کے بغیر سیل میں چلتی ہے: آپ دیکھتے ہیں کون کتنی بولی لگاتا ہے؛ اشتہار اور ٹریکنگ کٹے رہتے ہیں۔ بولی لگانے والوں کو GUARDIANA کا ایگزٹ اور وہ صفحہ ملتا ہے جو آپ پڑھ رہے ہیں۔",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "ریموٹ سیل کو سیل کریں اور اندر کی ہر چیز سمیت تباہ کریں",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "سائٹ لوڈ ہونے پر یہاں ترتیب سے ہر وہ چیز نظر آئے گی جو وہ آزماتی ہے اور ZERO کیا کرتا ہے۔"
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "سائٹ لوڈ ہونے پر یہاں ترتیب سے ہر وہ چیز نظر آئے گی جو وہ آزماتی ہے اور ZERO کیا کرتا ہے۔",
+  "¿Han caído en los señuelos?": "کیا کوئی جال میں پھنسا؟",
+  "Señuelo: un dato marcado ha salido": "جال: ایک نشان زدہ ڈیٹا باہر گیا",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO سیل میں ایسا نشان زدہ ڈیٹا رکھتا ہے جسے پڑھنے کی کسی کے پاس وجہ نہیں (چھپا متن، سائٹ کی اپنی کوکی، لوکل اسٹوریج، چھپا لنک)۔ اگر کوئی کسی کی طرف باہر جاتے ہوئے دوبارہ نظر آئے تو آپ اسے یہاں ثبوت کے ساتھ دیکھیں گے۔ ڈیمو میں کوئی جال نہیں ہے۔"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

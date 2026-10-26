@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "Ακτινογραφία της πλειοδοσίας (λειτουργία παρατηρητηρίου)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Η δημοπρασία τρέχει στο κελί χωρίς την ταυτότητά σου: βλέπεις ποιος πλειοδοτεί και πόσο· η διαφήμιση και η παρακολούθηση παραμένουν κομμένες. Οι πλειοδότες λαμβάνουν την έξοδο του GUARDIANA και τη σελίδα που διαβάζεις.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Σφράγισε το απομακρυσμένο κελί και κατέστρεψέ το με ό,τι περιέχει",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Όταν φορτώσει ο ιστότοπος, εδώ θα δεις με τη σειρά κάθε τι που επιχειρεί και τι κάνει το ZERO."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Όταν φορτώσει ο ιστότοπος, εδώ θα δεις με τη σειρά κάθε τι που επιχειρεί και τι κάνει το ZERO.",
+  "¿Han caído en los señuelos?": "Τσίμπησε κανείς το δόλωμα;",
+  "Señuelo: un dato marcado ha salido": "Δόλωμα: ένα επισημασμένο δεδομένο βγήκε έξω",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "Το ZERO τοποθετεί στο κελί επισημασμένα δεδομένα που κανείς δεν έχει λόγο να διαβάσει (κρυφό κείμενο, cookie του ιστότοπου, τοπική αποθήκευση, κρυφός σύνδεσμος). Αν κάποιο εμφανιστεί ξανά βγαίνοντας προς κάποιον, θα το δεις εδώ με την απόδειξη. Στην επίδειξη δεν υπάρχουν δολώματα."
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

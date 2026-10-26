@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "Rontgen penawaran (mode observatorium)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Lelang berjalan di sel tanpa identitasmu: kamu melihat siapa yang menawar dan berapa; iklan dan pelacakan tetap diputus. Penawar menerima titik keluar GUARDIANA dan halaman yang kamu baca.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Segel sel jarak jauh dan hancurkan beserta semua isinya",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Saat situs dimuat, di sini kamu akan melihat, secara berurutan, setiap hal yang dicobanya dan apa yang dilakukan ZERO."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Saat situs dimuat, di sini kamu akan melihat, secara berurutan, setiap hal yang dicobanya dan apa yang dilakukan ZERO.",
+  "¿Han caído en los señuelos?": "Ada yang termakan umpan?",
+  "Señuelo: un dato marcado ha salido": "Umpan: data bertanda keluar",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO menanam di sel data bertanda yang tidak ada alasan bagi siapa pun untuk membacanya (teks tersembunyi, cookie milik situs, penyimpanan lokal, tautan tersembunyi). Jika salah satunya muncul kembali saat keluar menuju seseorang, kamu akan melihatnya di sini beserta buktinya. Dalam demo tidak ada umpan."
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

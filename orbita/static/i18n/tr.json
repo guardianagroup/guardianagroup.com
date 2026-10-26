@@ -1020,7 +1020,10 @@
   "Radiografiar la puja (modo observatorio)": "Teklifi röntgenle (gözlemevi modu)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Açık artırma hücrede kimliğin olmadan yürür: kimin ne kadar teklif verdiğini görürsün; reklam ve izleme kesik kalır. Teklif verenlere GUARDIANA'nın çıkışı ve okuduğun sayfa ulaşır.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Uzak hücreyi mühürle ve içindeki her şeyle birlikte yok et",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Site yüklendiğinde, burada sırayla denediği her şeyi ve ZERO'nun ne yaptığını göreceksin."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Site yüklendiğinde, burada sırayla denediği her şeyi ve ZERO'nun ne yaptığını göreceksin.",
+  "¿Han caído en los señuelos?": "Yeme düşen oldu mu?",
+  "Señuelo: un dato marcado ha salido": "Yem: işaretli bir veri dışarı çıktı",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO hücreye kimsenin okumak için nedeni olmayan işaretli veriler yerleştirir (gizli metin, sitenin kendi çerezi, yerel depolama, gizli bağlantı). Biri birine doğru çıkarken yeniden görünürse, burada kanıtıyla görürsün. Demoda yem yoktur."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

@@ -1018,7 +1018,10 @@
   "Radiografiar la puja (modo observatorio)": "Rendgen licitacije (način promatranja)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Aukcija se odvija u ćeliji bez tvog identiteta: vidiš tko licitira i koliko; oglas i praćenje ostaju prekinuti. Licitantima stiže izlaz GUARDIANA-e i stranica koju čitaš.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Zapečati udaljenu ćeliju i uništi je sa svime unutra",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Kad se stranica učita, ovdje ćeš redom vidjeti sve što pokušava i što ZERO radi."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Kad se stranica učita, ovdje ćeš redom vidjeti sve što pokušava i što ZERO radi.",
+  "¿Han caído en los señuelos?": "Je li netko zagrizao mamac?",
+  "Señuelo: un dato marcado ha salido": "Mamac: označeni podatak je izašao",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO u ćeliju postavlja označene podatke koje nitko nema razloga čitati (skriveni tekst, vlastiti kolačić, lokalna pohrana, skriveni link). Ako se neki ponovno pojavi na putu prema nekome, vidjet ćeš ga ovdje s dokazom. U demonstraciji nema mamaca."
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

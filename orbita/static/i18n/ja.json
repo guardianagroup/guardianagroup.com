@@ -1020,7 +1020,10 @@
   "Radiografiar la puja (modo observatorio)": "入札をレントゲン（観測モード）",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "オークションはあなたの身元なしでセル内で実行されます。誰がいくら入札したかを確認でき、広告とトラッキングは遮断されたままです。入札者に届くのはGUARDIANAの出口とあなたが読んでいるページです。",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "リモートセルを封印し、中身ごと破棄する",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "サイトが読み込まれると、サイトが試みることとZEROの対応が順番にここに表示されます。"
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "サイトが読み込まれると、サイトが試みることとZEROの対応が順番にここに表示されます。",
+  "¿Han caído en los señuelos?": "誰かがおとりに引っかかった？",
+  "Señuelo: un dato marcado ha salido": "おとり：マークしたデータが外に出た",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZEROは、誰にも読む理由のないマーク付きデータ（隠しテキスト、サイト自身のCookie、ローカルストレージ、隠しリンク）をセルに仕込みます。いずれかが誰かへ送られる途中で再び現れたら、証拠とともにここに表示されます。デモにはおとりはありません。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

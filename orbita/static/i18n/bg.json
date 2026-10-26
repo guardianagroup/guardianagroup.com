@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "Рентген на наддаването (режим обсерватория)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Търгът тече в клетката без твоята самоличност: виждаш кой наддава и колко; рекламата и проследяването остават прекъснати. Наддаващите получават изхода на GUARDIANA и страницата, която четеш.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Запечатай отдалечената клетка и я унищожи с всичко вътре",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Когато сайтът се зареди, тук ще видиш по ред всяко нещо, което опитва, и какво прави ZERO."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Когато сайтът се зареди, тук ще видиш по ред всяко нещо, което опитва, и какво прави ZERO.",
+  "¿Han caído en los señuelos?": "Някой хвана ли се на примамката?",
+  "Señuelo: un dato marcado ha salido": "Примамка: маркирано данно излезе",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO поставя в клетката маркирани данни, които никой няма причина да чете (скрит текст, собствена бисквитка, локално хранилище, скрит линк). Ако някое се появи отново на път към някого, ще го видиш тук с доказателството. В демонстрацията няма примамки."
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

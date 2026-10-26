@@ -1020,7 +1020,10 @@
   "Radiografiar la puja (modo observatorio)": "Das Bieten durchleuchten (Observatoriumsmodus)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Die Auktion läuft in der Zelle ohne deine Identität: Du siehst, wer wie viel bietet; Anzeige und Tracking bleiben gekappt. Die Bieter erhalten den Ausgang von GUARDIANA und die Seite, die du liest.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Die entfernte Zelle versiegeln und mit allem darin zerstören",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Wenn die Website lädt, siehst du hier der Reihe nach alles, was sie versucht, und was ZERO tut."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Wenn die Website lädt, siehst du hier der Reihe nach alles, was sie versucht, und was ZERO tut.",
+  "¿Han caído en los señuelos?": "Ist jemand auf die Köder hereingefallen?",
+  "Señuelo: un dato marcado ha salido": "Köder: ein markiertes Datum ist hinausgegangen",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO legt in der Zelle markierte Daten aus, die niemand lesen müsste (versteckter Text, eigenes Cookie, lokaler Speicher, verborgener Link). Taucht eines davon auf dem Weg zu jemandem wieder auf, siehst du es hier mit dem Beleg. In der Demo gibt es keine Köder."
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

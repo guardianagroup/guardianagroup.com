@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "Røntgen af budgivningen (observatorietilstand)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Auktionen kører i cellen uden din identitet: du ser, hvem der byder og hvor meget; annoncen og sporingen forbliver afskåret. Byderne modtager GUARDIANAs udgang og den side, du læser.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Forsegl den fjerne celle, og ødelæg den med alt indeni",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Når webstedet indlæses, ser du her i rækkefølge alt, det forsøger, og hvad ZERO gør."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Når webstedet indlæses, ser du her i rækkefølge alt, det forsøger, og hvad ZERO gør.",
+  "¿Han caído en los señuelos?": "Har nogen bidt på krogen?",
+  "Señuelo: un dato marcado ha salido": "Lokkemad: en markeret oplysning er gået ud",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO planter markerede data i cellen, som ingen har grund til at læse (skjult tekst, webstedets egen cookie, lokalt lager, skjult link). Hvis en af dem dukker op på vej ud til nogen, ser du det her med beviset. Demoen har ingen lokkemad."
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

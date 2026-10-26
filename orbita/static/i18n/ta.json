@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "ஏலத்தை எக்ஸ்ரே செய் (கண்காணிப்பு முறை)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "ஏலம் உங்கள் அடையாளம் இல்லாமல் அறையில் நடக்கிறது: யார் எவ்வளவு ஏலம் கேட்கிறார்கள் என்பதைக் காண்பீர்கள்; விளம்பரமும் கண்காணிப்பும் துண்டிக்கப்பட்டே இருக்கும். ஏலதாரர்களுக்கு GUARDIANA-வின் வெளியேறும் புள்ளியும் நீங்கள் படிக்கும் பக்கமும் செல்லும்.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "தொலை அறையை முத்திரையிட்டு உள்ளே உள்ள அனைத்துடன் அழிக்கவும்",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "தளம் ஏற்றப்பட்டதும், அது முயற்சிக்கும் ஒவ்வொன்றையும் ZERO செய்வதையும் வரிசையாக இங்கே காண்பீர்கள்."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "தளம் ஏற்றப்பட்டதும், அது முயற்சிக்கும் ஒவ்வொன்றையும் ZERO செய்வதையும் வரிசையாக இங்கே காண்பீர்கள்.",
+  "¿Han caído en los señuelos?": "யாராவது தூண்டிலில் சிக்கினார்களா?",
+  "Señuelo: un dato marcado ha salido": "தூண்டில்: குறியிடப்பட்ட தரவு வெளியேறியது",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "யாரும் படிக்கக் காரணமில்லாத குறியிடப்பட்ட தரவுகளை (மறைந்த உரை, தளத்தின் சொந்த குக்கீ, உள்ளூர் சேமிப்பு, மறைந்த இணைப்பு) ZERO அறையில் வைக்கிறது. அவற்றில் ஒன்று யாரிடமாவது வெளியேறும்போது மீண்டும் தோன்றினால், ஆதாரத்துடன் இங்கே காண்பீர்கள். செயல்விளக்கத்தில் தூண்டில்கள் இல்லை."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

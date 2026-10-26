@@ -1020,7 +1020,10 @@
   "Radiografiar la puja (modo observatorio)": "透視競標（觀測模式）",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "競標在隔離區中進行，不帶你的身分：你能看到誰出價、出多少；廣告與追蹤仍被切斷。出價者只會收到 GUARDIANA 的出口與你正在閱讀的頁面。",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "封存遠端隔離區並連同其中所有內容一併銷毀",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "網站載入後，這裡會依序顯示它嘗試的每件事，以及 ZERO 的處理。"
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "網站載入後，這裡會依序顯示它嘗試的每件事，以及 ZERO 的處理。",
+  "¿Han caído en los señuelos?": "有誰上鉤了嗎？",
+  "Señuelo: un dato marcado ha salido": "誘餌：一筆標記資料已外流",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO 會在隔離區放入沒有人有理由去讀的標記資料（隱藏文字、網站自身 Cookie、本機儲存、隱藏連結）。若其中之一在送往某方的途中再次出現，你會在這裡看到它與證據。示範中沒有誘餌。"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

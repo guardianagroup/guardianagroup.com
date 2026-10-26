@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "Gegnumlýsa boðin (athugunarhamur)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Uppboðið fer fram í hólfinu án þíns auðkennis: þú sérð hver býður og hve mikið; auglýsingin og rakningin eru áfram lokuð. Bjóðendur fá útgang GUARDIANA og síðuna sem þú lest.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Innsigla fjarlæga hólfið og eyða því með öllu sem í því er",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Þegar vefsíðan hleðst sérðu hér í röð allt sem hún reynir og hvað ZERO gerir."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Þegar vefsíðan hleðst sérðu hér í röð allt sem hún reynir og hvað ZERO gerir.",
+  "¿Han caído en los señuelos?": "Beit einhver á agnið?",
+  "Señuelo: un dato marcado ha salido": "Agn: merkt gagn fór út",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO kemur fyrir í hólfinu merktum gögnum sem enginn hefur ástæðu til að lesa (falinn texti, vafrakaka síðunnar, staðbundin geymsla, falinn tengill). Ef eitt þeirra birtist aftur á leið út til einhvers sérðu það hér með sönnunargögnum. Í kynningunni eru engin agn."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

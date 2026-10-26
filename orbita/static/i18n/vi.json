@@ -1020,7 +1020,10 @@
   "Radiografiar la puja (modo observatorio)": "Chụp X-quang cuộc đấu giá (chế độ đài quan sát)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Cuộc đấu giá chạy trong ô mà không có danh tính của bạn: bạn thấy ai đấu giá và bao nhiêu; quảng cáo và theo dõi vẫn bị cắt. Người đấu giá nhận được điểm ra của GUARDIANA và trang bạn đang đọc.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Niêm phong ô từ xa và hủy nó cùng mọi thứ bên trong",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Khi trang tải xong, ở đây bạn sẽ thấy, theo thứ tự, mọi thứ nó thử và những gì ZERO làm."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Khi trang tải xong, ở đây bạn sẽ thấy, theo thứ tự, mọi thứ nó thử và những gì ZERO làm.",
+  "¿Han caído en los señuelos?": "Có ai mắc bẫy mồi nhử không?",
+  "Señuelo: un dato marcado ha salido": "Mồi nhử: một dữ liệu được đánh dấu đã lọt ra ngoài",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO đặt trong ô những dữ liệu được đánh dấu mà không ai có lý do để đọc (văn bản ẩn, cookie của chính trang, bộ nhớ cục bộ, liên kết ẩn). Nếu một trong số đó xuất hiện trở lại trên đường ra ngoài tới ai đó, bạn sẽ thấy ở đây cùng bằng chứng. Bản trình diễn không có mồi nhử."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

