@@ -519,13 +519,17 @@
   function pintaLlegadas(cx, p, G) {
     if (!LUG || !LUG.llegadas) return;
     const zl = G.R / (G.R0 || G.R), ka = Math.min(1, (zl - 4) / 4);
+    // 25 Oct 2026 (review): from afar the 2,000 landings piled up into white blobs on every coast (the Channel, Japan);
+    // below ×4 they are smaller and fainter, and one dot per few pixels is enough
+    const kl = Math.min(1, Math.max(0, (zl - 1) / 3)), rl = 1.1 + 0.7 * kl, al = 0.5 + 0.3 * kl, rejilla = zl < 4 ? new Set() : null;
     cx.globalCompositeOperation = 'source-over';
     for (let i = 0; i < LUG.llegadas.length; i++) {
       if (i !== llegadaMarcada && !veLlegada(LUG.llegadas[i])) continue;
       const v = p.aVista(LUG.llegadas[i].w); if (v[2] <= 0.05) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], on = i === llegadaMarcada;
-      cx.fillStyle = on ? `rgba(${BLANCO},1)` : `rgba(${BLANCO},.8)`;
-      cx.beginPath(); cx.arc(x, y, on ? 3.2 : 1.8, 0, 7); cx.fill();
+      if (rejilla && !on) { const kk = Math.round(x / 3) + ':' + Math.round(y / 3); if (rejilla.has(kk)) continue; rejilla.add(kk); }
+      cx.fillStyle = on ? `rgba(${BLANCO},1)` : `rgba(${BLANCO},${al.toFixed(2)})`;
+      cx.beginPath(); cx.arc(x, y, on ? 3.2 : rl, 0, 7); cx.fill();
       if (on) { cx.strokeStyle = `rgba(${BLANCO},.9)`; cx.lineWidth = 1; cx.beginPath(); cx.arc(x, y, 7, 0, 7); cx.stroke(); }
       else if (ka > 0) { cx.strokeStyle = `rgba(${BLANCO},${(0.5 * ka).toFixed(2)})`; cx.lineWidth = 0.9; cx.beginPath(); cx.arc(x, y, 4.5 + Math.min(2.5, (zl - 4) / 40), 0, 7); cx.stroke(); }
       if (EXTREMOS_VISTOS) EXTREMOS_VISTOS.add(Math.round(x / 2) + ':' + Math.round(y / 2));
@@ -1849,9 +1853,12 @@
     const fin = () => { if (ini && ini.mov) p.classList.remove('moviendo'); ini = null; };
     addEventListener('pointerup', fin); addEventListener('pointercancel', fin);
   }
+  // 25 Oct 2026, 21:34 (owner: «la X está escondida debajo del centro de datos»): the card never starts under the top bar,
+  // whatever its height (on a narrower window the layer buttons wrap onto a second row and covered the close button)
+  const bajoCabecera = () => { const h = document.querySelector('header'); const r = h && h.getBoundingClientRect(); return Math.max(74, r && r.height ? Math.round(r.bottom) + 8 : 74); };
   function encajaPanel() {
     const p = $('ficha-panel'); if (!p || p.hidden || !p.classList.contains('suelto')) return;
-    const M = 16, arriba = 74;
+    const M = 16, arriba = bajoCabecera();
     p.style.maxHeight = Math.max(160, innerHeight - arriba - M) + 'px';
     const h = p.offsetHeight; let top = parseFloat(p.style.top) || arriba;
     if (top + h > innerHeight - M) top = Math.max(arriba, innerHeight - M - h);
@@ -1894,8 +1901,9 @@
     // On a computer the full card opens where the pointer is, whole, never cut by the edges; if there is no room
     // beside the point it goes to the middle (owner, 22 Oct 2026, 18:07). On a phone it stays a bottom sheet.
     if (Number.isFinite(x) && Number.isFinite(y) && !esTactil() && innerWidth >= 760) {
-      p.classList.add('suelto'); p.style.left = '0px'; p.style.top = '0px'; p.style.maxHeight = Math.max(160, innerHeight - 74 - 16) + 'px';
-      const w = p.offsetWidth, h = p.offsetHeight, M = 16, arriba = 74;
+      const arriba = bajoCabecera();
+      p.classList.add('suelto'); p.style.left = '0px'; p.style.top = '0px'; p.style.maxHeight = Math.max(160, innerHeight - arriba - 16) + 'px';
+      const w = p.offsetWidth, h = p.offsetHeight, M = 16;
       let left = x + 18; if (left + w > innerWidth - M) left = x - w - 18; if (left < M) left = Math.max(M, Math.round((innerWidth - w) / 2));
       let top = y - 24; if (top + h > innerHeight - M) top = innerHeight - M - h; if (top < arriba) top = arriba;
       if (posUsuario) { const q = encaja(posUsuario.left, posUsuario.top, w, h); left = q.left; top = q.top; } // where the person put it
@@ -2472,7 +2480,7 @@
     for (const r of f.filas) { const li = mk('li'), s = mk('s', r.punto ? 'punto' : ''); s.style.setProperty('--c', r.col); li.append(s, mk('span', null, r.n), mk('em', null, r.v || '')); ul.append(li); }
     el.append(ul);
     // (no «click here» line: the button's own switch says whether the layer is on; the dot in the corner repeats it)
-    const pie = mk('p', 'cf-pie'); pie.append(mk('i'), mk('span', null, f.pie)); el.append(pie);
+    // 25 Oct 2026, 21:25 (owner): no footer («Datos verificados · puede faltar alguno…») on the four layer cards
   }
   function colocaFichaCapa(b) {
     const el = fichaCapa, r = b.getBoundingClientRect(), W = el.offsetWidth, H = el.offsetHeight, M = 12;
