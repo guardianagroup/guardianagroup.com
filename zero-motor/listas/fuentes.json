@@ -1,0 +1,117 @@
+{
+ "generado": "2026-10-26T05:03:19+00:00",
+ "listas": {
+  "easylist": {
+   "nombre": "EasyList",
+   "url": "https://github.com/easylist/easylist",
+   "licencia": "GPL-3.0 o CC BY-SA 3.0 (doble licencia)",
+   "licencia_url": "https://easylist.to/pages/licence.html",
+   "proposito": "publicidad",
+   "archivo": "easylist.txt",
+   "commit": "c215c6f4f296dd934a72a7c276a185517cfbb722",
+   "fecha_commit": "2026-10-26T18:01:44+13:00",
+   "reglas": 74510,
+   "origen": "easylist.template"
+  },
+  "easyprivacy": {
+   "nombre": "EasyPrivacy",
+   "url": "https://github.com/easylist/easylist",
+   "licencia": "GPL-3.0 o CC BY-SA 3.0 (doble licencia)",
+   "licencia_url": "https://easylist.to/pages/licence.html",
+   "proposito": "rastreo",
+   "archivo": "easyprivacy.txt",
+   "commit": "c215c6f4f296dd934a72a7c276a185517cfbb722",
+   "fecha_commit": "2026-10-26T18:01:44+13:00",
+   "reglas": 56408,
+   "origen": "easyprivacy.template"
+  },
+  "ubo-privacy": {
+   "nombre": "uBlock Origin · privacy",
+   "url": "https://github.com/uBlockOrigin/uAssets",
+   "licencia": "GPL-3.0",
+   "licencia_url": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+   "proposito": "rastreo",
+   "archivo": "ubo-privacy.txt",
+   "commit": "f24720d4ace7349199e949b96d9e2ea462b0e038",
+   "fecha_commit": "2026-10-26T10:20:01+07:00",
+   "reglas": 1780,
+   "origen": "filters/privacy.txt"
+  },
+  "ubo-badware": {
+   "nombre": "uBlock Origin · badware",
+   "url": "https://github.com/uBlockOrigin/uAssets",
+   "licencia": "GPL-3.0",
+   "licencia_url": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+   "proposito": "malware",
+   "archivo": "ubo-badware.txt",
+   "commit": "f24720d4ace7349199e949b96d9e2ea462b0e038",
+   "fecha_commit": "2026-10-26T10:20:01+07:00",
+   "reglas": 5003,
+   "origen": "filters/badware.txt"
+  },
+  "ubo-filters": {
+   "nombre": "uBlock Origin · filters",
+   "url": "https://github.com/uBlockOrigin/uAssets",
+   "licencia": "GPL-3.0",
+   "licencia_url": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+   "proposito": "publicidad",
+   "archivo": "ubo-filters.txt",
+   "commit": "f24720d4ace7349199e949b96d9e2ea462b0e038",
+   "fecha_commit": "2026-10-26T10:20:01+07:00",
+   "reglas": 6078,
+   "origen": "filters/filters.txt"
+  },
+  "ubo-unbreak": {
+   "nombre": "uBlock Origin · unbreak",
+   "url": "https://github.com/uBlockOrigin/uAssets",
+   "licencia": "GPL-3.0",
+   "licencia_url": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+   "proposito": "excepciones",
+   "archivo": "ubo-unbreak.txt",
+   "commit": "f24720d4ace7349199e949b96d9e2ea462b0e038",
+   "fecha_commit": "2026-10-26T10:20:01+07:00",
+   "reglas": 2571,
+   "origen": "filters/unbreak.txt"
+  },
+  "ubo-removeparam": {
+   "nombre": "uBlock Origin · privacy-removeparam",
+   "url": "https://github.com/uBlockOrigin/uAssets",
+   "licencia": "GPL-3.0",
+   "licencia_url": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+   "proposito": "parametros",
+   "archivo": "ubo-removeparam.txt",
+   "commit": "f24720d4ace7349199e949b96d9e2ea462b0e038",
+   "fecha_commit": "2026-10-26T10:20:01+07:00",
+   "reglas": 2713,
+   "origen": "filters/privacy-removeparam.txt"
+  },
+  "ubo-cookies": {
+   "nombre": "uBlock Origin · annoyances-cookies",
+   "url": "https://github.com/uBlockOrigin/uAssets",
+   "licencia": "GPL-3.0",
+   "licencia_url": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+   "proposito": "avisos-cookies",
+   "archivo": "ubo-cookies.txt",
+   "commit": "f24720d4ace7349199e949b96d9e2ea462b0e038",
+   "fecha_commit": "2026-10-26T10:20:01+07:00",
+   "reglas": 2405,
+   "origen": "filters/annoyances-cookies.txt"
+  },
+  "ubo-lan": {
+   "nombre": "uBlock Origin · lan-block",
+   "url": "https://github.com/uBlockOrigin/uAssets",
+   "licencia": "GPL-3.0",
+   "licencia_url": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+   "proposito": "red-local",
+   "archivo": "ubo-lan.txt",
+   "commit": "f24720d4ace7349199e949b96d9e2ea462b0e038",
+   "fecha_commit": "2026-10-26T10:20:01+07:00",
+   "reglas": 100,
+   "origen": "filters/lan-block.txt"
+  }
+ },
+ "excluidas": {
+  "DuckDuckGo Tracker Radar": "CC BY-NC-SA 4.0: sin uso comercial sin permiso de DuckDuckGo",
+  "Disconnect": "CC BY-NC-SA 4.0 (LICENSE del repositorio disconnect-tracking-protection)"
+ }
+}
