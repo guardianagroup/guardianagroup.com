@@ -1022,7 +1022,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "เมื่อเว็บไซต์โหลด คุณจะเห็นที่นี่ตามลำดับว่ามันพยายามทำอะไรและ ZERO ทำอะไร",
   "¿Han caído en los señuelos?": "มีใครติดกับดักไหม?",
   "Señuelo: un dato marcado ha salido": "เหยื่อล่อ: ข้อมูลที่ทำเครื่องหมายหลุดออกไป",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO วางข้อมูลที่ทำเครื่องหมายไว้ในเซลล์ซึ่งไม่มีใครมีเหตุผลที่จะอ่าน (ข้อความซ่อน คุกกี้ของเว็บไซต์เอง ที่เก็บข้อมูลในเครื่อง ลิงก์ซ่อน) หากรายการใดปรากฏอีกครั้งระหว่างถูกส่งออกไปหาใครบางคน คุณจะเห็นที่นี่พร้อมหลักฐาน ในเดโมไม่มีเหยื่อล่อ"
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO วางข้อมูลที่ทำเครื่องหมายไว้ในเซลล์ซึ่งไม่มีใครมีเหตุผลที่จะอ่าน (ข้อความซ่อน คุกกี้ของเว็บไซต์เอง ที่เก็บข้อมูลในเครื่อง ลิงก์ซ่อน) หากรายการใดปรากฏอีกครั้งระหว่างถูกส่งออกไปหาใครบางคน คุณจะเห็นที่นี่พร้อมหลักฐาน ในเดโมไม่มีเหยื่อล่อ",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "ในเดโม เซลล์ไม่เฝ้าระวัง: เมื่อเครื่องยนต์ทำงาน ZERO จะรวมทุกความพยายามของเว็บไซต์ (ลายนิ้วมือ สิทธิ์ หน้าต่าง การดาวน์โหลด เว็บไซต์อันตราย เหยื่อล่อ) และตอบสนองเป็นระดับ: เฝ้าระวัง ตัดบริษัทอื่น ผนึกโดยไม่มีเครือข่าย และหากคุณร้องขอ ทำลาย"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

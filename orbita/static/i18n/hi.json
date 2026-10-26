@@ -1022,7 +1022,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "साइट लोड होने पर यहाँ क्रम से हर वह चीज़ दिखेगी जो वह आज़माती है और ZERO क्या करता है।",
   "¿Han caído en los señuelos?": "क्या कोई चारे में फँसा?",
   "Señuelo: un dato marcado ha salido": "चारा: एक चिह्नित डेटा बाहर गया",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO सेल में ऐसा चिह्नित डेटा रखता है जिसे पढ़ने का किसी के पास कारण नहीं (छिपा टेक्स्ट, साइट की अपनी कुकी, लोकल स्टोरेज, छिपा लिंक)। अगर कोई किसी की ओर बाहर जाता दिखे, तो आप उसे यहाँ सबूत के साथ देखेंगे। डेमो में कोई चारा नहीं है।"
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO सेल में ऐसा चिह्नित डेटा रखता है जिसे पढ़ने का किसी के पास कारण नहीं (छिपा टेक्स्ट, साइट की अपनी कुकी, लोकल स्टोरेज, छिपा लिंक)। अगर कोई किसी की ओर बाहर जाता दिखे, तो आप उसे यहाँ सबूत के साथ देखेंगे। डेमो में कोई चारा नहीं है।",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "डेमो में सेल निगरानी नहीं करती: इंजन चालू होने पर ZERO साइट की हर कोशिश (फिंगरप्रिंट, अनुमतियाँ, विंडो, डाउनलोड, खतरनाक साइटें, चारे) जोड़ता है और स्तरों में जवाब देता है: निगरानी, दूसरी कंपनियों को काटना, बिना नेटवर्क सील करना और, अगर आप कहें, नष्ट करना।"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

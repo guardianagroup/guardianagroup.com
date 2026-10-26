@@ -1022,7 +1022,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "وقتی وب‌سایت بارگذاری شود، اینجا به ترتیب هر کاری که تلاش می‌کند و کاری که ZERO انجام می‌دهد را می‌بینی.",
   "¿Han caído en los señuelos?": "کسی طعمه را گرفته است؟",
   "Señuelo: un dato marcado ha salido": "طعمه: یک دادهٔ نشانه‌گذاری‌شده خارج شد",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO در سلول داده‌های نشانه‌گذاری‌شده‌ای می‌گذارد که هیچ‌کس دلیلی برای خواندنشان ندارد (متن پنهان، کوکی خود سایت، ذخیرهٔ محلی، پیوند پنهان). اگر یکی از آن‌ها در راه خروج به سوی کسی دوباره ظاهر شود، اینجا با شواهد خواهی دید. در نمایش طعمه‌ای نیست."
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO در سلول داده‌های نشانه‌گذاری‌شده‌ای می‌گذارد که هیچ‌کس دلیلی برای خواندنشان ندارد (متن پنهان، کوکی خود سایت، ذخیرهٔ محلی، پیوند پنهان). اگر یکی از آن‌ها در راه خروج به سوی کسی دوباره ظاهر شود، اینجا با شواهد خواهی دید. در نمایش طعمه‌ای نیست.",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "در نمایش، سلول نظارت نمی‌کند: با موتور روشن، ZERO هر تلاش وب‌سایت (اثر انگشت، مجوزها، پنجره‌ها، دانلودها، وب‌سایت‌های خطرناک، طعمه‌ها) را جمع می‌زند و در سطوح پاسخ می‌دهد: نظارت، قطع شرکت‌های دیگر، مهر کردن بدون شبکه و، اگر بخواهی، نابودی."
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

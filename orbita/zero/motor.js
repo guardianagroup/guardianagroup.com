@@ -53,8 +53,9 @@
     }
     if (m.t === 'suceso') { M.sucesos.push(m); if (window.zeroSuceso) window.zeroSuceso(m); return; }
     if (m.t === 'resumen') { if (window.zeroResumen) window.zeroResumen(m); return; }
-    if (m.t === 'nav') { if (window.zeroNav) window.zeroNav(m); return; }
+    if (m.t === 'nav') { M.host = m.host; M.urlActual = m.url; if (window.zeroNav) window.zeroNav(m); return; }
     if (m.t === 'titulo') { if (window.zeroTitulo) window.zeroTitulo(m.titulo); return; }
+    if (m.t === 'alerta') { M.alertaNivel = m.nivel; M.sellada = !!m.sellada; if (window.zeroAlerta) window.zeroAlerta(m); return; }
     if (m.t === 'acta') { M.acta = m.acta; abierto = false; ponEstado(''); if (window.zeroActa) window.zeroActa(m.acta); return; }
   }
 
@@ -82,7 +83,9 @@
     if (!texto) u = 'about:blank';
     else if (esDir(texto)) u = /^https?:\/\//i.test(texto) ? texto : (/^(localhost|127\.0\.0\.1)/i.test(texto) ? 'http://' : 'https://') + texto;
     else u = urlBuscador + encodeURIComponent(texto);
+    if (M.sellada) { ponEstado('Celda sellada: reanuda o destruye la celda antes de abrir otra web', 'mal'); if (window.zeroNav) window.zeroNav({ host: M.host, url: M.urlActual }); return; }
     stage.classList.add('real'); abierto = true; M.acta = null; ponEstado('Abriendo en la celda…');
+    try { const h = new URL(u).host; if (window.zeroNav) window.zeroNav({ host: h, url: u }); } catch (_) {}
     if (M.estado === 'lista' && ws && ws.readyState === 1) env({ t: 'abrir', url: u }); else { pendiente = u; conecta(); }
     setTimeout(() => cv.focus(), 50);
   };
@@ -90,6 +93,8 @@
   M.modo = (observatorio) => { M.observatorio = !!observatorio; env({ t: 'modo', observatorio: M.observatorio }); };
   M.nivel = (n) => { M.nivelActual = n; env({ t: 'modo', nivel: n }); };
   M.destruir = () => { ponEstado('Sellando y destruyendo la celda…'); env({ t: 'destruir' }); };
+  M.sellar = () => env({ t: 'alerta', accion: 'sellar' });
+  M.reanudar = () => env({ t: 'alerta', accion: 'reanudar' });
   M.enfoca = () => cv.focus();
   conecta();
 })();

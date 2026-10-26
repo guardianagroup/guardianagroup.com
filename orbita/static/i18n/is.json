@@ -1022,7 +1022,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Þegar vefsíðan hleðst sérðu hér í röð allt sem hún reynir og hvað ZERO gerir.",
   "¿Han caído en los señuelos?": "Beit einhver á agnið?",
   "Señuelo: un dato marcado ha salido": "Agn: merkt gagn fór út",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO kemur fyrir í hólfinu merktum gögnum sem enginn hefur ástæðu til að lesa (falinn texti, vafrakaka síðunnar, staðbundin geymsla, falinn tengill). Ef eitt þeirra birtist aftur á leið út til einhvers sérðu það hér með sönnunargögnum. Í kynningunni eru engin agn."
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO kemur fyrir í hólfinu merktum gögnum sem enginn hefur ástæðu til að lesa (falinn texti, vafrakaka síðunnar, staðbundin geymsla, falinn tengill). Ef eitt þeirra birtist aftur á leið út til einhvers sérðu það hér með sönnunargögnum. Í kynningunni eru engin agn.",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "Í kynningunni vaktar hólfið ekki: með vélina í gangi leggur ZERO saman hverja tilraun vefsíðunnar (fingrafar, heimildir, glugga, niðurhal, hættulegar vefsíður, agn) og bregst við í þrepum: vakta, loka á hin fyrirtækin, innsigla án nets og, ef þú biður um það, eyða."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

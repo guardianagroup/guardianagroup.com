@@ -1022,7 +1022,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "সাইট লোড হলে এখানে ক্রমানুসারে দেখবেন এটি কী চেষ্টা করে এবং ZERO কী করে।",
   "¿Han caído en los señuelos?": "কেউ কি ফাঁদে পড়েছে?",
   "Señuelo: un dato marcado ha salido": "ফাঁদ: একটি চিহ্নিত ডেটা বেরিয়ে গেছে",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO সেলে এমন চিহ্নিত ডেটা রাখে যা পড়ার কারও কারণ নেই (লুকানো টেক্সট, সাইটের নিজস্ব কুকি, লোকাল স্টোরেজ, লুকানো লিংক)। কোনোটি কারও কাছে বেরিয়ে গেলে এখানে প্রমাণসহ দেখবেন। ডেমোতে কোনো ফাঁদ নেই।"
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO সেলে এমন চিহ্নিত ডেটা রাখে যা পড়ার কারও কারণ নেই (লুকানো টেক্সট, সাইটের নিজস্ব কুকি, লোকাল স্টোরেজ, লুকানো লিংক)। কোনোটি কারও কাছে বেরিয়ে গেলে এখানে প্রমাণসহ দেখবেন। ডেমোতে কোনো ফাঁদ নেই।",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "ডেমোতে সেল নজরদারি করে না: ইঞ্জিন চালু থাকলে ZERO সাইটের প্রতিটি চেষ্টা (ফিঙ্গারপ্রিন্ট, অনুমতি, উইন্ডো, ডাউনলোড, বিপজ্জনক সাইট, ফাঁদ) যোগ করে এবং স্তর অনুযায়ী সাড়া দেয়: নজর রাখা, অন্য কোম্পানিগুলো কাটা, নেটওয়ার্ক ছাড়া সিল করা এবং আপনি চাইলে ধ্বংস করা।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

@@ -1022,7 +1022,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "సైట్ లోడ్ అయినప్పుడు, అది ప్రయత్నించే ప్రతి విషయం మరియు ZERO ఏమి చేస్తుందో ఇక్కడ క్రమంగా చూస్తారు.",
   "¿Han caído en los señuelos?": "ఎవరైనా ఎరకు చిక్కారా?",
   "Señuelo: un dato marcado ha salido": "ఎర: గుర్తించిన డేటా బయటకు వెళ్లింది",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ఎవరికీ చదవడానికి కారణం లేని గుర్తించిన డేటాను (దాచిన టెక్స్ట్, సైట్ స్వంత కుకీ, లోకల్ స్టోరేజ్, దాచిన లింక్) ZERO సెల్‌లో ఉంచుతుంది. వాటిలో ఒకటి ఎవరికైనా బయటకు వెళ్తూ మళ్లీ కనిపిస్తే, సాక్ష్యంతో ఇక్కడ చూస్తారు. డెమోలో ఎరలు లేవు."
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ఎవరికీ చదవడానికి కారణం లేని గుర్తించిన డేటాను (దాచిన టెక్స్ట్, సైట్ స్వంత కుకీ, లోకల్ స్టోరేజ్, దాచిన లింక్) ZERO సెల్‌లో ఉంచుతుంది. వాటిలో ఒకటి ఎవరికైనా బయటకు వెళ్తూ మళ్లీ కనిపిస్తే, సాక్ష్యంతో ఇక్కడ చూస్తారు. డెమోలో ఎరలు లేవు.",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "డెమోలో సెల్ కాపలా కాయదు: ఇంజిన్ నడుస్తుంటే, సైట్ యొక్క ప్రతి ప్రయత్నాన్ని (వేలిముద్ర, అనుమతులు, విండోలు, డౌన్‌లోడ్లు, ప్రమాదకర సైట్లు, ఎరలు) ZERO కూడి స్థాయిల వారీగా స్పందిస్తుంది: కాపలా, ఇతర సంస్థలను కత్తిరించడం, నెట్‌వర్క్ లేకుండా సీల్ చేయడం, మీరు కోరితే నాశనం చేయడం."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

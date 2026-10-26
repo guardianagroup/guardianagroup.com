@@ -1023,7 +1023,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "サイトが読み込まれると、サイトが試みることとZEROの対応が順番にここに表示されます。",
   "¿Han caído en los señuelos?": "誰かがおとりに引っかかった？",
   "Señuelo: un dato marcado ha salido": "おとり：マークしたデータが外に出た",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZEROは、誰にも読む理由のないマーク付きデータ（隠しテキスト、サイト自身のCookie、ローカルストレージ、隠しリンク）をセルに仕込みます。いずれかが誰かへ送られる途中で再び現れたら、証拠とともにここに表示されます。デモにはおとりはありません。"
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZEROは、誰にも読む理由のないマーク付きデータ（隠しテキスト、サイト自身のCookie、ローカルストレージ、隠しリンク）をセルに仕込みます。いずれかが誰かへ送られる途中で再び現れたら、証拠とともにここに表示されます。デモにはおとりはありません。",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "デモではセルは監視しません。エンジン稼働中、ZEROはサイトの各試み（フィンガープリント、権限、ウィンドウ、ダウンロード、危険なサイト、おとり）を積算し、段階的に対応します：監視、他社の遮断、ネットワークなしでの封印、そして求めがあれば破棄。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

@@ -1023,7 +1023,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "عند تحميل الموقع، سترى هنا بالترتيب كل ما يحاوله وما يفعله ZERO.",
   "¿Han caído en los señuelos?": "هل وقع أحد في الفخ؟",
   "Señuelo: un dato marcado ha salido": "طُعم: خرج بيان موسوم",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "يزرع ZERO في الخلية بيانات موسومة لا سبب لأحد لقراءتها (نص مخفي، ملف تعريف ارتباط خاص بالموقع، تخزين محلي، رابط مخفي). إذا ظهر أحدها خارجًا نحو جهة ما، ستراه هنا مع الدليل. لا توجد طعوم في العرض التوضيحي."
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "يزرع ZERO في الخلية بيانات موسومة لا سبب لأحد لقراءتها (نص مخفي، ملف تعريف ارتباط خاص بالموقع، تخزين محلي، رابط مخفي). إذا ظهر أحدها خارجًا نحو جهة ما، ستراه هنا مع الدليل. لا توجد طعوم في العرض التوضيحي.",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "في العرض التوضيحي لا تراقب الخلية: مع تشغيل المحرك، يجمع ZERO كل محاولة من الموقع (البصمة، الأذونات، النوافذ، التنزيلات، المواقع الخطرة، الطعوم) ويستجيب على مستويات: المراقبة، قطع الشركات الأخرى، ختم الخلية دون شبكة، وإذا طلبت ذلك، التدمير."
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",
