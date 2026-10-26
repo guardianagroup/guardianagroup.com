@@ -935,7 +935,13 @@
   "edificios": "इमारतें",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "इमारतें इस परिसर में; इसका नाम अभी खुले डेटा में सार्वजनिक नहीं है",
   "Campus de centros de datos sin nombre": "बिना नाम का डेटा सेंटर परिसर",
-  "clic para la lista": "सूची के लिए क्लिक करें"
+  "clic para la lista": "सूची के लिए क्लिक करें",
+  "Cable submarino cercano": "पास का समुद्री केबल",
+  "La llegada de cable submarino más cercana está en": "सबसे नज़दीकी समुद्री केबल लैंडिंग यहाँ है:",
+  "No implica que este centro use ese cable.": "इसका मतलब यह नहीं कि यह केंद्र उस केबल का उपयोग करता है।",
+  "Por dónde viajan los datos": "डेटा किस रास्ते जाता है",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "यह केंद्र अन्य नेटवर्कों से जुड़ा है, लेकिन इसके असली मार्ग सार्वजनिक नहीं हैं: नक्शा पास का बुनियादी ढाँचा दिखाता है, आपके डेटा का पुष्ट रास्ता नहीं।",
+  "Infraestructura cercana": "पास का बुनियादी ढाँचा"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

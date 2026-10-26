@@ -935,7 +935,13 @@
   "edificios": "budov",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "budov v tomto areáli; jeho názov zatiaľ nie je v otvorených dátach verejný",
   "Campus de centros de datos sin nombre": "Areál dátových centier bez názvu",
-  "clic para la lista": "kliknutím zobrazíte zoznam"
+  "clic para la lista": "kliknutím zobrazíte zoznam",
+  "Cable submarino cercano": "Podmorský kábel v blízkosti",
+  "La llegada de cable submarino más cercana está en": "Najbližšie pristátie podmorského kábla je v",
+  "No implica que este centro use ese cable.": "Neznamená to, že toto centrum ten kábel používa.",
+  "Por dónde viajan los datos": "Kadiaľ putujú dáta",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Toto centrum je pripojené k ďalším sieťam, ale jeho skutočné trasy nie sú verejné: mapa ukazuje blízku infraštruktúru, nie potvrdenú cestu vašich dát.",
+  "Infraestructura cercana": "Infraštruktúra v blízkosti"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

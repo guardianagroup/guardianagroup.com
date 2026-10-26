@@ -934,7 +934,13 @@
   "edificios": "zgrada",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "zgrada u ovom kompleksu; njegovo ime još nije javno u otvorenim podacima",
   "Campus de centros de datos sin nombre": "Kompleks podatkovnih centara bez imena",
-  "clic para la lista": "kliknite za popis"
+  "clic para la lista": "kliknite za popis",
+  "Cable submarino cercano": "Podmorski kabel u blizini",
+  "La llegada de cable submarino más cercana está en": "Najbliže pristajanje podmorskog kabela je u",
+  "No implica que este centro use ese cable.": "To ne znači da ovaj centar koristi taj kabel.",
+  "Por dónde viajan los datos": "Kuda putuju podaci",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Ovaj centar povezan je s drugim mrežama, ali njegove stvarne rute nisu javne: karta prikazuje obližnju infrastrukturu, a ne potvrđeni put vaših podataka.",
+  "Infraestructura cercana": "Infrastruktura u blizini"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

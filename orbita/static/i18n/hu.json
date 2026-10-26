@@ -935,7 +935,13 @@
   "edificios": "épület",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "épület ezen a campuson; a neve még nem nyilvános a nyílt adatokban",
   "Campus de centros de datos sin nombre": "Név nélküli adatközpont-campus",
-  "clic para la lista": "kattintson a listához"
+  "clic para la lista": "kattintson a listához",
+  "Cable submarino cercano": "Tengeralatti kábel a közelben",
+  "La llegada de cable submarino más cercana está en": "A legközelebbi tengeralatti kábel partraszállása:",
+  "No implica que este centro use ese cable.": "Ez nem jelenti azt, hogy ez a központ azt a kábelt használja.",
+  "Por dónde viajan los datos": "Merre utaznak az adatok",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Ez a központ más hálózatokhoz kapcsolódik, de valódi útvonalai nem nyilvánosak: a térkép a közeli infrastruktúrát mutatja, nem az adatai megerősített útját.",
+  "Infraestructura cercana": "Közeli infrastruktúra"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

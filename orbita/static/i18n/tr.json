@@ -936,7 +936,13 @@
   "edificios": "bina",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "bina bu kampüste; adı henüz açık verilerde kamuya açık değil",
   "Campus de centros de datos sin nombre": "Adsız veri merkezi kampüsü",
-  "clic para la lista": "liste için tıklayın"
+  "clic para la lista": "liste için tıklayın",
+  "Cable submarino cercano": "Yakındaki denizaltı kablosu",
+  "La llegada de cable submarino más cercana está en": "En yakın denizaltı kablosu karaya çıkış noktası:",
+  "No implica que este centro use ese cable.": "Bu, bu merkezin o kabloyu kullandığı anlamına gelmez.",
+  "Por dónde viajan los datos": "Veriler nereden geçer",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Bu merkez başka ağlara bağlıdır, ancak gerçek rotaları kamuya açık değildir: harita yakındaki altyapıyı gösterir, verilerinizin doğrulanmış yolunu değil.",
+  "Infraestructura cercana": "Yakındaki altyapı"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

@@ -935,7 +935,13 @@
   "edificios": "gusali",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "gusali sa campus na ito; hindi pa pampubliko ang pangalan nito sa bukas na datos",
   "Campus de centros de datos sin nombre": "Campus ng mga data center na walang pangalan",
-  "clic para la lista": "i-click para sa listahan"
+  "clic para la lista": "i-click para sa listahan",
+  "Cable submarino cercano": "Kalapit na submarine cable",
+  "La llegada de cable submarino más cercana está en": "Ang pinakamalapit na landing ng submarine cable ay nasa",
+  "No implica que este centro use ese cable.": "Hindi ito nangangahulugang ginagamit ng center na ito ang cable na iyon.",
+  "Por dónde viajan los datos": "Saan dumadaan ang datos",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Nakakonekta ang center na ito sa ibang network, pero hindi pampubliko ang tunay nitong mga ruta: ipinapakita ng mapa ang kalapit na imprastraktura, hindi ang kumpirmadong daan ng iyong datos.",
+  "Infraestructura cercana": "Kalapit na imprastraktura"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

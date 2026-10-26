@@ -935,7 +935,13 @@
   "edificios": "сгради",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "сгради в този комплекс; името му все още не е публично в отворените данни",
   "Campus de centros de datos sin nombre": "Комплекс от центрове за данни без име",
-  "clic para la lista": "щракнете за списъка"
+  "clic para la lista": "щракнете за списъка",
+  "Cable submarino cercano": "Подводен кабел наблизо",
+  "La llegada de cable submarino más cercana está en": "Най-близкото излизане на подводен кабел е в",
+  "No implica que este centro use ese cable.": "Това не означава, че този център използва този кабел.",
+  "Por dónde viajan los datos": "Откъде минават данните",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Този център е свързан с други мрежи, но реалните му маршрути не са публични: картата показва близката инфраструктура, а не потвърдения път на вашите данни.",
+  "Infraestructura cercana": "Инфраструктура наблизо"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

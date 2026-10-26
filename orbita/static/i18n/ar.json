@@ -936,7 +936,13 @@
   "edificios": "مبانٍ",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "مبانٍ في هذا المجمّع؛ اسمه ليس منشورًا بعد في البيانات المفتوحة",
   "Campus de centros de datos sin nombre": "مجمّع مراكز بيانات بلا اسم",
-  "clic para la lista": "انقر للقائمة"
+  "clic para la lista": "انقر للقائمة",
+  "Cable submarino cercano": "كابل بحري قريب",
+  "La llegada de cable submarino más cercana está en": "أقرب نقطة وصول لكابل بحري في",
+  "No implica que este centro use ese cable.": "لا يعني ذلك أن هذا المركز يستخدم ذلك الكابل.",
+  "Por dónde viajan los datos": "من أين تمرّ البيانات",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "يتصل هذا المركز بشبكات أخرى، لكن مساراته الحقيقية ليست علنية: تعرض الخريطة البنية التحتية القريبة، لا المسار المؤكد لبياناتك.",
+  "Infraestructura cercana": "البنية التحتية القريبة"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

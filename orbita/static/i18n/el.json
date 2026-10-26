@@ -935,7 +935,13 @@
   "edificios": "κτίρια",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "κτίρια σε αυτό το συγκρότημα· το όνομά του δεν είναι ακόμη δημόσιο στα ανοιχτά δεδομένα",
   "Campus de centros de datos sin nombre": "Συγκρότημα κέντρων δεδομένων χωρίς όνομα",
-  "clic para la lista": "κλικ για τη λίστα"
+  "clic para la lista": "κλικ για τη λίστα",
+  "Cable submarino cercano": "Υποβρύχιο καλώδιο κοντά",
+  "La llegada de cable submarino más cercana está en": "Η πλησιέστερη προσαιγιάλωση υποβρύχιου καλωδίου βρίσκεται σε",
+  "No implica que este centro use ese cable.": "Δεν σημαίνει ότι αυτό το κέντρο χρησιμοποιεί αυτό το καλώδιο.",
+  "Por dónde viajan los datos": "Από πού ταξιδεύουν τα δεδομένα",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Αυτό το κέντρο συνδέεται με άλλα δίκτυα, αλλά οι πραγματικές διαδρομές του δεν είναι δημόσιες: ο χάρτης δείχνει τις κοντινές υποδομές, όχι την επιβεβαιωμένη διαδρομή των δεδομένων σας.",
+  "Infraestructura cercana": "Κοντινές υποδομές"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

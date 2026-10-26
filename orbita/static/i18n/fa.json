@@ -935,7 +935,13 @@
   "edificios": "ساختمان",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "ساختمان در این مجموعه؛ نام آن هنوز در داده‌های باز عمومی نیست",
   "Campus de centros de datos sin nombre": "مجموعهٔ مراکز داده بدون نام",
-  "clic para la lista": "برای فهرست کلیک کنید"
+  "clic para la lista": "برای فهرست کلیک کنید",
+  "Cable submarino cercano": "کابل زیردریایی نزدیک",
+  "La llegada de cable submarino más cercana está en": "نزدیک‌ترین نقطهٔ فرود کابل زیردریایی در",
+  "No implica que este centro use ese cable.": "به این معنا نیست که این مرکز از آن کابل استفاده می‌کند.",
+  "Por dónde viajan los datos": "داده‌ها از کجا می‌گذرند",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "این مرکز به شبکه‌های دیگر متصل است، اما مسیرهای واقعی آن عمومی نیست: نقشه زیرساخت نزدیک را نشان می‌دهد، نه مسیر تأییدشدهٔ داده‌های شما را.",
+  "Infraestructura cercana": "زیرساخت نزدیک"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

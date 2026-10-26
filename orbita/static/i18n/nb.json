@@ -936,7 +936,13 @@
   "edificios": "bygninger",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "bygninger på dette området; navnet er ennå ikke offentlig i de åpne dataene",
   "Campus de centros de datos sin nombre": "Datasenterområde uten navn",
-  "clic para la lista": "klikk for listen"
+  "clic para la lista": "klikk for listen",
+  "Cable submarino cercano": "Sjøkabel i nærheten",
+  "La llegada de cable submarino más cercana está en": "Nærmeste ilandføring av sjøkabel er i",
+  "No implica que este centro use ese cable.": "Det betyr ikke at dette senteret bruker den kabelen.",
+  "Por dónde viajan los datos": "Hvor dataene reiser",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Dette senteret er koblet til andre nett, men de reelle rutene er ikke offentlige: kartet viser infrastrukturen i nærheten, ikke den bekreftede veien til dataene dine.",
+  "Infraestructura cercana": "Infrastruktur i nærheten"
  },
  "p": {
   "intento": "Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

@@ -936,7 +936,13 @@
   "edificios": "будівель",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "будівель у цьому кампусі; його назва ще не оприлюднена у відкритих даних",
   "Campus de centros de datos sin nombre": "Кампус центрів обробки даних без назви",
-  "clic para la lista": "натисніть, щоб відкрити список"
+  "clic para la lista": "натисніть, щоб відкрити список",
+  "Cable submarino cercano": "Підводний кабель поблизу",
+  "La llegada de cable submarino más cercana está en": "Найближчий вихід підводного кабелю на берег розташований у",
+  "No implica que este centro use ese cable.": "Це не означає, що цей центр використовує той кабель.",
+  "Por dónde viajan los datos": "Куди прямують дані",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Цей центр з’єднаний з іншими мережами, але його справжні маршрути не оприлюднені: мапа показує інфраструктуру поблизу, а не підтверджений шлях ваших даних.",
+  "Infraestructura cercana": "Інфраструктура поблизу"
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

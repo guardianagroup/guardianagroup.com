@@ -935,7 +935,13 @@
   "edificios": "อาคาร",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "อาคารในวิทยาเขตนี้ ชื่อยังไม่เปิดเผยในข้อมูลเปิด",
   "Campus de centros de datos sin nombre": "กลุ่มศูนย์ข้อมูลที่ไม่มีชื่อ",
-  "clic para la lista": "คลิกเพื่อดูรายการ"
+  "clic para la lista": "คลิกเพื่อดูรายการ",
+  "Cable submarino cercano": "สายเคเบิลใต้น้ำใกล้เคียง",
+  "La llegada de cable submarino más cercana está en": "จุดขึ้นฝั่งของสายเคเบิลใต้น้ำที่ใกล้ที่สุดอยู่ที่",
+  "No implica que este centro use ese cable.": "ไม่ได้หมายความว่าศูนย์นี้ใช้สายเคเบิลนั้น",
+  "Por dónde viajan los datos": "ข้อมูลเดินทางผ่านทางไหน",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "ศูนย์นี้เชื่อมต่อกับเครือข่ายอื่น แต่เส้นทางจริงไม่เปิดเผย แผนที่แสดงโครงสร้างพื้นฐานใกล้เคียง ไม่ใช่เส้นทางที่ยืนยันแล้วของข้อมูลของคุณ",
+  "Infraestructura cercana": "โครงสร้างพื้นฐานใกล้เคียง"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

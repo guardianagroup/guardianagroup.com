@@ -936,7 +936,13 @@
   "edificios": "Gebäude",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "Gebäude auf diesem Campus; sein Name ist in den offenen Daten noch nicht öffentlich",
   "Campus de centros de datos sin nombre": "Rechenzentrums-Campus ohne Namen",
-  "clic para la lista": "Klick für die Liste"
+  "clic para la lista": "Klick für die Liste",
+  "Cable submarino cercano": "Seekabel in der Nähe",
+  "La llegada de cable submarino más cercana está en": "Die nächste Seekabel-Anlandung liegt in",
+  "No implica que este centro use ese cable.": "Das bedeutet nicht, dass dieses Zentrum dieses Kabel nutzt.",
+  "Por dónde viajan los datos": "Wohin die Daten reisen",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Dieses Zentrum ist mit anderen Netzen verbunden, aber seine tatsächlichen Routen sind nicht öffentlich: Die Karte zeigt die Infrastruktur in der Nähe, nicht den bestätigten Weg Ihrer Daten.",
+  "Infraestructura cercana": "Infrastruktur in der Nähe"
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

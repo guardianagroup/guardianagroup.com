@@ -935,7 +935,13 @@
   "edificios": "מבנים",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "מבנים בקמפוס הזה; שמו עדיין אינו פומבי בנתונים הפתוחים",
   "Campus de centros de datos sin nombre": "קמפוס מרכזי נתונים ללא שם",
-  "clic para la lista": "לחצו לרשימה"
+  "clic para la lista": "לחצו לרשימה",
+  "Cable submarino cercano": "כבל תת־ימי קרוב",
+  "La llegada de cable submarino más cercana está en": "נקודת הנחיתה הקרובה ביותר של כבל תת־ימי נמצאת ב",
+  "No implica que este centro use ese cable.": "אין פירוש הדבר שמרכז זה משתמש בכבל הזה.",
+  "Por dónde viajan los datos": "מאיפה עוברים הנתונים",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "מרכז זה מחובר לרשתות אחרות, אך מסלוליו האמיתיים אינם פומביים: המפה מציגה את התשתית הקרובה, לא את הנתיב המאומת של הנתונים שלכם.",
+  "Infraestructura cercana": "תשתית קרובה"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",
