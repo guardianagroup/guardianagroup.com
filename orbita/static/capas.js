@@ -450,6 +450,23 @@
     }
     return pos;
   }
+  // 25 Oct 2026, 21:42 (owner: «los centros de datos así en color azul, así solo… no lo acabo de ver»): the mark as a small
+  // building — a rounded square with a dark edge (crisp over the photo and over the grey) and a lit window in the middle;
+  // the big operators a little larger. Chosen over the flat square and a white-edged version on the real map (Frankfurt,
+  // colour and grey).
+  function pintaEdificios(cx, arr) {
+    if (!arr.length) return;
+    const rr = (x, y, g, r) => { cx.moveTo(x - g + r, y - g); cx.arcTo(x + g, y - g, x + g, y + g, r); cx.arcTo(x + g, y + g, x - g, y + g, r); cx.arcTo(x - g, y + g, x - g, y - g, r); cx.arcTo(x - g, y - g, x + g, y - g, r); cx.closePath(); };
+    cx.save(); cx.lineJoin = 'round';
+    // the edge, under the body
+    cx.beginPath(); for (let i = 0; i < arr.length; i += 3) rr(arr[i], arr[i + 1], arr[i + 2] + 0.9, 1.6);
+    cx.fillStyle = 'rgba(6,8,12,.88)'; cx.fill();
+    cx.beginPath(); for (let i = 0; i < arr.length; i += 3) rr(arr[i], arr[i + 1], arr[i + 2], 1.1);
+    cx.fillStyle = `rgba(${AZUL_CENTRO},.96)`; cx.fill();
+    // the lit window
+    if (arr[2] >= 2.2) { cx.beginPath(); for (let i = 0; i < arr.length; i += 3) { const w = Math.max(0.7, arr[i + 2] * 0.34); cx.rect(arr[i] - w, arr[i + 1] - w, 2 * w, 2 * w); } cx.fillStyle = `rgba(${BLANCO},.95)`; cx.fill(); }
+    cx.restore();
+  }
   function pintaPuntos(cx, p, G) {
     const forma = { aterrizaje: 0, datos: 1, intercambio: 2 }, z = G.R / (G.R0 || G.R), L = esLimpio();
     ABANICO = posiciones(p, G); abanicoFrame = performance.now();
@@ -468,7 +485,7 @@
     // the spokes of the fans, under the marks
     if (z >= 60) { cx.save(); cx.globalCompositeOperation = 'source-over'; cx.strokeStyle = `rgba(${L ? BLANCO : ACERO},.35)`; cx.lineWidth = 0.8; cx.beginPath(); for (const [, q] of ABANICO) { if (q[2] || q[3]) { cx.moveTo(q[2], q[3]); cx.lineTo(q[0], q[1]); } } cx.stroke(); cx.restore(); }
     const sd = Math.max(1.5, Math.min(4, 1 + z * 0.22)); // data-centre squares grow a little with the zoom (owner: «que se separen bien»)
-    const anillo = Math.max(0, Math.min(1, (z - 1.5) / 1.5)), anillos = [], F = CAMPO || campo(p, G), fd = F.d, fc = F.cosP;
+    const edif = [], F = CAMPO || campo(p, G), fd = F.d, fc = F.cosP;
     for (let k = 0; k < 3; k++) {
       cx.beginPath();
       for (let qi = 0; qi < PT.p.length; qi++) {
@@ -476,18 +493,13 @@
         let x, y; const ab = k ? ABANICO.get(qi) : null;
         if (ab) { x = ab[0]; y = ab[1]; } else { if (k) continue; const w = q.w; if (!F.todo && w[0] * fd[0] + w[1] * fd[1] + w[2] * fd[2] < fc) continue; const v = p.aVista(w); if (v[2] <= 0.02) continue; x = G.CX + G.R * v[0]; y = G.CY - G.R * v[1]; }
         if (k === 0) { cx.moveTo(x, y - 2.6); cx.lineTo(x + 2.6, y); cx.lineTo(x, y + 2.6); cx.lineTo(x - 2.6, y); cx.closePath(); }
-        else if (k === 1) { cx.rect(x - sd, y - sd, 2 * sd, 2 * sd); if (anillo) anillos.push(x, y); }
+        else if (k === 1) edif.push(x, y, esGrande(q) ? sd * 1.2 : sd * 0.95);
         else { cx.moveTo(x + 2.8, y); cx.arc(x, y, 2.8, 0, 7); }
       }
       if (k === 2) { cx.strokeStyle = `rgba(${BLANCO},.85)`; cx.lineWidth = 1; cx.stroke(); }
       else { cx.fillStyle = k === 0 ? `rgba(${BLANCO},.9)` : `rgba(${AZUL_CENTRO},.95)`; cx.fill(); }
-      // 22 Oct 2026, 14:03 (owner): «alrededor un circulito, sutil, para que se identifique mejor» — a faint ring
-      // around each data-centre square once the zoom separates them (it fades in between ×1.5 and ×3)
-      if (k === 1 && anillo) {
-        const ra = sd * 2.3; cx.beginPath();
-        for (let i = 0; i < anillos.length; i += 2) { cx.moveTo(anillos[i] + ra, anillos[i + 1]); cx.arc(anillos[i], anillos[i + 1], ra, 0, 7); }
-        cx.strokeStyle = `rgba(${AZUL_CENTRO},${(0.5 * anillo).toFixed(2)})`; cx.lineWidth = 0.9; cx.stroke();
-      }
+      if (k === 1) pintaEdificios(cx, edif);
+      // (the faint ring of 22 Oct 2026 around each square went with the building mark of 25 Oct)
     }
   }
 
@@ -541,7 +553,7 @@
   // the landings, never other towns; they come in as the planet comes closer (from about a region on screen), the
   // landings with more cables first, never on top of each other nor of a country's name, and the cities of ciudades.js
   // give way to them (their boxes and names are shared through OrbitaCapas).
-  let LLEG_CAJAS = [], LLEG_NOMBRES = [];
+  let LLEG_CAJAS = [], LLEG_NOMBRES = [], CIU_NOMBRES = []; // 25 Oct 2026: «Dallas · 11» (a city with data centres) also stops ciudades.js from writing «Dallas» beside it
   const conHalo = (cx, txt, x, y, al) => { cx.lineWidth = 3.2; cx.strokeStyle = `rgba(6,8,12,${(0.85 * al).toFixed(2)})`; cx.strokeText(txt, x, y); cx.fillStyle = `rgba(${BLANCO},${(0.94 * al).toFixed(2)})`; cx.fillText(txt, x, y); };
   function pintaNombresLlegadas(cx, p, G) {
     LLEG_CAJAS = []; LLEG_NOMBRES = [];
@@ -565,6 +577,9 @@
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1];
       if (x < M || y < M || x > G.W - M || y > G.H - M) return;
       const txt = ll.ciudad, w = cx.measureText(txt).width;
+      // 25 Oct 2026 (review, the Gulf: «Ar Ruways» four times): several landings of one town say its name once,
+      // unless they are far apart on screen
+      if (!forzada && LLEG_NOMBRES.some((n) => n[2] === txt && Math.hypot(n[0] - x, n[1] - y) < 220)) return;
       const izq = x + 8 + w > G.W - M, lx = izq ? x - 8 - w : x + 8;
       const caja = izq ? [lx - 2, y - 8, x - 3, y + 8] : [x + 3, y - 8, lx + w + 2, y + 8];
       if (!forzada && choca(caja)) return;
@@ -621,7 +636,7 @@
     const z = G.R / (G.R0 || G.R);
     cx.lineWidth = 1;
     cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle';
-    const ocupado = []; // labels never sit on top of each other
+    const ocupado = []; CIU_NOMBRES = []; // labels never sit on top of each other
     const fl = FLOR && florCentro(p, G); // nothing of the cities over the flower of data centres
     for (const i of LUG.orden) {
       const c = LUG.centros[i]; if (c.n < 5) break;
@@ -633,7 +648,7 @@
       // owner, 22 Oct 2026: «en el mapa no me sale la ciudad»: the city's name by its ring as the zoom grows
       // (the biggest first; closer in, every city with data centres), never one label over another
       const conNombre = c.ciudad && v[2] > 0.3 && (z >= 4.5 || (z >= 3 && c.n >= 3) || (z >= 2 && c.n >= 10) || (z >= 1.8 && c.n >= 15));
-      if (conNombre) { const txt = c.ciudad + (c.n > 1 ? ' · ' + num(c.n) : ''), tx = x + r + 5, w = 6.3 * txt.length; if (!ocupado.some((o) => tx < o[0] + o[2] + 6 && tx + w + 6 > o[0] && Math.abs(y - o[1]) < 13)) { ocupado.push([tx, y, w]); cx.font = '500 10.5px "Hanken Grotesk", system-ui, sans-serif'; cx.fillStyle = 'rgba(6,8,12,.55)'; cx.fillText(txt, tx + 1, y + 1); cx.fillStyle = on ? `rgba(${BLANCO},1)` : `rgba(${BLANCO},.82)`; cx.fillText(txt, tx, y); } }
+      if (conNombre) { const txt = c.ciudad + (c.n > 1 ? ' · ' + num(c.n) : ''), tx = x + r + 5, w = 6.3 * txt.length; if (!ocupado.some((o) => tx < o[0] + o[2] + 6 && tx + w + 6 > o[0] && Math.abs(y - o[1]) < 13)) { ocupado.push([tx, y, w]); CIU_NOMBRES.push([x, y, c.ciudad]); cx.font = '500 10.5px "Hanken Grotesk", system-ui, sans-serif'; cx.fillStyle = 'rgba(6,8,12,.55)'; cx.fillText(txt, tx + 1, y + 1); cx.fillStyle = on ? `rgba(${BLANCO},1)` : `rgba(${BLANCO},.82)`; cx.fillText(txt, tx, y); } }
     }
     if (centroMarcado >= 0) { const c = LUG.centros[centroMarcado]; if (c && c.n < 5) { const v = p.aVista(c.w); if (v[2] > 0.05) { cx.strokeStyle = `rgba(${BLANCO},.95)`; cx.beginPath(); cx.arc(G.CX + G.R * v[0], G.CY - G.R * v[1], 6, 0, 7); cx.stroke(); } } }
   }
@@ -2541,7 +2556,7 @@
   }
   let soloTu = false, soloTuPinta = null;
   function ponSoloTu(on, dibuja) { soloTu = !!on; soloTuPinta = on ? dibuja || null : null; document.body.classList.toggle('solo-tu', soloTu); if (soloTu) { cierraLista(); muestra(-1); centroMarcado = cableMarcado = llegadaMarcada = puntoMarcado = fibraMarcada = -1; } pintaNota(); pintaVista(); }
-  window.OrbitaCapas = { abreFicha: (m, x, y) => abrePanel(m, x, y), pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get cajasPaises() { return LLEG_CAJAS.length || EST_CAJAS.length ? PAIS_CAJAS.concat(LLEG_CAJAS, EST_CAJAS) : PAIS_CAJAS; }, /* and the bases' and stations' names */ /* and the names of the towns where cables land */ get nombresLlegadas() { return LLEG_NOMBRES; }, /* the country names' boxes, so the cities (ciudades.js) never land on them */ get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; },
+  window.OrbitaCapas = { abreFicha: (m, x, y) => abrePanel(m, x, y), pinta, pon, soloTu: ponSoloTu, get enSoloTu() { return soloTu; }, get cajasPaises() { return LLEG_CAJAS.length || EST_CAJAS.length ? PAIS_CAJAS.concat(LLEG_CAJAS, EST_CAJAS) : PAIS_CAJAS; }, /* and the bases' and stations' names */ /* and the names of the towns where cables land */ get nombresLlegadas() { return CIU_NOMBRES.length ? LLEG_NOMBRES.concat(CIU_NOMBRES) : LLEG_NOMBRES; }, /* the country names' boxes, so the cities (ciudades.js) never land on them */ get estado() { return { ...estado }; }, get satelites() { return S && S.N ? S.N : 0; }, get lugares() { return LUG; }, get fibra() { return FT; },
     // the map's network as lines of unit vectors, for the routes that travel along it (red.js)
     get red() { return { sub: capas.sub && capas.sub.lineas, tierra: capas.tierra && capas.tierra.lineas, fibra: FT && FT.lineas }; },
     // the submarine pieces joined at load time and the ends left fading out into the sea (uneCables), for the automated checks
