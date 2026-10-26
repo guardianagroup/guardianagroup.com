@@ -618,8 +618,9 @@ function urlBusq(e){const hl=(document.documentElement.lang||'es').toLowerCase()
 // Ecosia/Perplexity/ChatGPT (verificación Cloudflare), Yahoo (en blanco), Yandex/Baidu/Sogou (captcha), Yahoo Japón (no sirve desde Europa),
 // You.com/Kagi (piden cuenta), MetaGer (no busca). Se vuelven a meter cuando funcionen. 16:07 (owner): «si solamente pide un captcha
 // y funciona bien, hazlo; y Brave también» → Google (reCAPTCHA de /sorry/) y Brave («Verificar») entran con el aviso honesto; lo resuelve la persona.
-// 16:16 (owner): «no pongas tantos buscadores» → cuatro: Bing (abre sin comprobación), Google y Brave (con comprobación), Qwant.
-const ORDEN=['Bing','Google','Brave Search','Qwant'].map(engOf);
+// 17:17 (owner): «todos los que no pidan nada y los que pidan como máximo un clic»: Bing, Qwant, Swisscows, Naver, Daum y Seznam
+// abren sin nada; Brave pide un clic («Verificar»). Google (captcha largo en la prueba del dueño) queda fuera de la lista de la celda.
+const ORDEN=['Bing','Brave Search','Qwant','Swisscows','Naver','Daum','Seznam'].map(engOf);
 const POR_DEFECTO='Bing';
 const guarda=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},lee=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
 let selected=lee('zeroBuscador',POR_DEFECTO);if(!ORDEN.some(e=>e[1]===selected)||selected==='Tor')selected=POR_DEFECTO;
