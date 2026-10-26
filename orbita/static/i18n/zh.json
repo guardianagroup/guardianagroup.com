@@ -1399,7 +1399,8 @@
   "La web no cargó": "网站未加载",
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "观察级别：ZERO 放行所有内容（危险网站除外），检测并展示给你；由你选择切断什么。",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "该搜索引擎没有放行来自单元的查询。ZERO 从服务器浏览，部分搜索引擎会限制此类连接。你可以选择其他搜索引擎，或直接输入网站地址。",
-  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "搜索引擎想确认你是真人。请在这里完成验证并继续；单元会记住你已通过。"
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "搜索引擎想确认你是真人。请在这里完成验证并继续；单元会记住你已通过。",
+  "celda en": "单元位于"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

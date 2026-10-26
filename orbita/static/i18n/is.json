@@ -1398,7 +1398,8 @@
   "La web no cargó": "Síðan hlóðst ekki",
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Stig fylgjast með: ZERO hleypir öllu í gegn (nema hættulegum síðum), greinir það og sýnir þér; þú velur hvað er klippt.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Þessi leitarvél hleypti fyrirspurninni ekki í gegn úr hólfinu. ZERO vafrar frá netþjóni og sumar leitarvélar takmarka slíkar tengingar. Þú getur valið aðra leitarvél eða slegið inn slóð síðunnar beint.",
-  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Leitarvélin vill staðfesta að þú sért manneskja. Leystu staðfestinguna hér inni og haltu áfram; hólfið man að þú stóðst hana."
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Leitarvélin vill staðfesta að þú sért manneskja. Leystu staðfestinguna hér inni og haltu áfram; hólfið man að þú stóðst hana.",
+  "celda en": "hólf í"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

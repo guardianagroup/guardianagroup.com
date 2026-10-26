@@ -1398,7 +1398,8 @@
   "La web no cargó": "Siden blev ikke indlæst",
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Niveau observer: ZERO lader alt passere (undtagen farlige websteder), opdager det og viser dig det; du vælger, hvad der klippes.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Denne søgemaskine lod ikke forespørgslen passere fra cellen. ZERO browser fra en server, og nogle søgemaskiner begrænser sådanne forbindelser. Du kan vælge en anden søgemaskine eller skrive webstedets adresse direkte.",
-  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Søgemaskinen vil tjekke, at du er en person. Løs tjekket herinde og fortsæt; cellen husker, at du bestod."
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Søgemaskinen vil tjekke, at du er en person. Løs tjekket herinde og fortsæt; cellen husker, at du bestod.",
+  "celda en": "celle i"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

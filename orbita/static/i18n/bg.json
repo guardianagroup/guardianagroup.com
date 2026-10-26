@@ -1398,7 +1398,8 @@
   "La web no cargó": "Сайтът не се зареди",
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Ниво наблюдавай: ZERO пропуска всичко (освен опасни сайтове), открива го и ти го показва; ти избираш какво да прекъснеш.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Тази търсачка не пропусна заявката от клетката. ZERO сърфира от сървър и някои търсачки ограничават такива връзки. Можеш да избереш друга търсачка или да напишеш адреса на сайта директно.",
-  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Търсачката иска да провери, че си човек. Реши проверката тук и продължи; клетката ще запомни, че си я минал."
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Търсачката иска да провери, че си човек. Реши проверката тук и продължи; клетката ще запомни, че си я минал.",
+  "celda en": "клетка в"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

@@ -1399,7 +1399,8 @@
   "La web no cargó": "Strona się nie wczytała",
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Poziom obserwuj: ZERO przepuszcza wszystko (poza niebezpiecznymi stronami), wykrywa to i pokazuje; ty wybierasz, co odciąć.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Ta wyszukiwarka nie przepuściła zapytania z komórki. ZERO przegląda z serwera, a niektóre wyszukiwarki ograniczają takie połączenia. Możesz wybrać inną wyszukiwarkę albo wpisać adres strony bezpośrednio.",
-  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Wyszukiwarka chce sprawdzić, czy jesteś osobą. Rozwiąż sprawdzenie tutaj i kontynuuj; komórka zapamięta, że je przeszedłeś."
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Wyszukiwarka chce sprawdzić, czy jesteś osobą. Rozwiąż sprawdzenie tutaj i kontynuuj; komórka zapamięta, że je przeszedłeś.",
+  "celda en": "komórka w"
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

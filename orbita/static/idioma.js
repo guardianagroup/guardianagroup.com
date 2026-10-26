@@ -1234,6 +1234,7 @@
     'Estricto': ['Strict', 'Estrito'],
     'Máximo': ['Maximum', 'Máximo'],
     // ZERO · nivel Observar, Permitir/Cortar y avisos de buscador (26 Oct 2026, ronda 45)
+    'celda en': ['cell in', 'célula em'],
     'Observar': ['Observe', 'Observar'],
     'observar': ['observe', 'observar'],
     'No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.': ['Cuts nothing (except dangerous sites): the site opens as it is, ZERO detects everything and you choose what to cut.', 'Não corta nada (exceto sites perigosos): o site abre tal como é, o ZERO deteta tudo e você escolhe o que cortar.'],

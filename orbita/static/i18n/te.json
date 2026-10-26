@@ -1398,7 +1398,8 @@
   "La web no cargó": "సైట్ లోడ్ కాలేదు",
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "గమనించు స్థాయి: ZERO అన్నిటినీ వెళ్లనిస్తుంది (ప్రమాదకర సైట్లు తప్ప), గుర్తించి మీకు చూపిస్తుంది; ఏమి కత్తిరించాలో మీరు ఎంచుకుంటారు.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "ఈ సెర్చ్ ఇంజిన్ సెల్ నుండి వచ్చిన ప్రశ్నను వెళ్లనివ్వలేదు. ZERO ఒక సర్వర్ నుండి బ్రౌజ్ చేస్తుంది, కొన్ని సెర్చ్ ఇంజిన్లు అలాంటి కనెక్షన్లను పరిమితం చేస్తాయి. మీరు మరో సెర్చ్ ఇంజిన్ ఎంచుకోవచ్చు లేదా సైట్ చిరునామాను నేరుగా రాయవచ్చు.",
-  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "మీరు ఒక వ్యక్తి అని సెర్చ్ ఇంజిన్ నిర్ధారించుకోవాలనుకుంటోంది. తనిఖీని ఇక్కడే పూర్తి చేసి కొనసాగండి; మీరు పాస్ అయ్యారని సెల్ గుర్తుంచుకుంటుంది."
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "మీరు ఒక వ్యక్తి అని సెర్చ్ ఇంజిన్ నిర్ధారించుకోవాలనుకుంటోంది. తనిఖీని ఇక్కడే పూర్తి చేసి కొనసాగండి; మీరు పాస్ అయ్యారని సెల్ గుర్తుంచుకుంటుంది.",
+  "celda en": "సెల్"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

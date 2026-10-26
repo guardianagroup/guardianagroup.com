@@ -10,14 +10,23 @@
   const M = (window.ZeroMotor = { activo: !!URL_MOTOR, url: URL_MOTOR, estado: 'apagado', lista: null, sucesos: [], observatorio: false });
   // Motor de GUARDIANA por defecto cuando la página se sirve desde guardianagroup.com: se usa solo si responde a /salud en
   // menos de tres segundos; si no, la página sigue siendo la demostración (y nada se guarda en el equipo). ?motor= vacío lo evita.
-  const POR_DEFECTO = /(^|\.)guardianagroup\.com$/i.test(location.hostname) ? 'wss://motor.guardianagroup.com' : '';
+  // 26 Oct 2026 (ronda 46): puede haber más de un motor (Europa y América). La página pregunta /salud a todos a la vez, mide
+  // cuánto tarda cada uno, y se queda con el que responde antes y tiene sitio; no cambia de motor a mitad de sesión.
+  const MOTORES = /(^|\.)guardianagroup\.com$/i.test(location.hostname) ? ['wss://motor.guardianagroup.com', 'wss://motor-am.guardianagroup.com'] : [];
+  M.motores = [];
   if (URL_MOTOR) arranca();
-  else if (POR_DEFECTO && P.get('motor') === null) {
-    const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 3000);
-    fetch(POR_DEFECTO.replace(/^wss:/, 'https:') + '/salud', { signal: ctl.signal, cache: 'no-store', credentials: 'omit' })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((j) => { clearTimeout(tm); if (j && j.ok && M.estado === 'apagado') { URL_MOTOR = POR_DEFECTO; M.activo = true; M.url = URL_MOTOR; arranca(); } })
-      .catch(() => {});
+  else if (MOTORES.length && P.get('motor') === null) {
+    const prueba = (u) => {
+      const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 3000); const t0 = performance.now();
+      return fetch(u.replace(/^wss:/, 'https:') + '/salud', { signal: ctl.signal, cache: 'no-store', credentials: 'omit' })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((j) => { clearTimeout(tm); const ms = Math.round(performance.now() - t0); const ok = !!(j && j.ok && (j.tope == null || j.celdas == null || j.celdas < j.tope)); M.motores.push({ url: u, ms, ok, celdas: j && j.celdas, region: j && j.region }); return ok ? { url: u, ms } : null; })
+        .catch(() => { clearTimeout(tm); M.motores.push({ url: u, ms: null, ok: false }); return null; });
+    };
+    Promise.all(MOTORES.map(prueba)).then((rs) => {
+      const vivos = rs.filter(Boolean).sort((a, b) => a.ms - b.ms);
+      if (vivos.length && M.estado === 'apagado') { URL_MOTOR = vivos[0].url; M.activo = true; M.url = URL_MOTOR; M.latencia = vivos[0].ms; arranca(); }
+    });
   }
 
   function arranca() {

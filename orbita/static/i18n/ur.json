@@ -1398,7 +1398,8 @@
   "La web no cargó": "سائٹ لوڈ نہیں ہوئی",
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "مشاہدہ سطح: ZERO سب کچھ گزرنے دیتا ہے (خطرناک سائٹس کے سوا)، پہچانتا ہے اور آپ کو دکھاتا ہے؛ آپ چنتے ہیں کہ کیا کاٹنا ہے۔",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "اس سرچ انجن نے سیل سے سوال گزرنے نہیں دیا۔ ZERO ایک سرور سے براؤز کرتا ہے اور کچھ سرچ انجن ایسے کنکشن محدود کرتے ہیں۔ آپ دوسرا سرچ انجن چن سکتے ہیں یا سائٹ کا پتہ براہِ راست لکھ سکتے ہیں۔",
-  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "سرچ انجن تصدیق کرنا چاہتا ہے کہ آپ ایک انسان ہیں۔ تصدیق یہیں مکمل کریں اور آگے بڑھیں؛ سیل یاد رکھے گا کہ آپ نے اسے پاس کیا۔"
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "سرچ انجن تصدیق کرنا چاہتا ہے کہ آپ ایک انسان ہیں۔ تصدیق یہیں مکمل کریں اور آگے بڑھیں؛ سیل یاد رکھے گا کہ آپ نے اسے پاس کیا۔",
+  "celda en": "سیل"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",
