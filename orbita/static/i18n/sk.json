@@ -1022,7 +1022,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Keď sa web načíta, uvidíš tu v poradí každú vec, o ktorú sa pokúsi, a čo ZERO urobí.",
   "¿Han caído en los señuelos?": "Chytil sa niekto na návnadu?",
   "Señuelo: un dato marcado ha salido": "Návnada: označený údaj odišiel",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO do bunky nasadzuje označené údaje, ktoré nikto nemá dôvod čítať (skrytý text, vlastná cookie, lokálne úložisko, skrytý odkaz). Ak sa niektorý objaví na ceste von k niekomu, uvidíš to tu s dôkazom. V ukážke návnady nie sú."
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO do bunky nasadzuje označené údaje, ktoré nikto nemá dôvod čítať (skrytý text, vlastná cookie, lokálne úložisko, skrytý odkaz). Ak sa niektorý objaví na ceste von k niekomu, uvidíš to tu s dôkazom. V ukážke návnady nie sú.",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "V ukážke bunka nestráži: s bežiacim motorom ZERO sčíta každý pokus webu (odtlačok, povolenia, okná, sťahovania, nebezpečné weby, návnady) a odpovedá po úrovniach: strážiť, odrezať ostatné firmy, zapečatiť bez siete a na tvoju žiadosť zničiť."
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

@@ -1022,7 +1022,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Når webstedet indlæses, ser du her i rækkefølge alt, det forsøger, og hvad ZERO gør.",
   "¿Han caído en los señuelos?": "Har nogen bidt på krogen?",
   "Señuelo: un dato marcado ha salido": "Lokkemad: en markeret oplysning er gået ud",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO planter markerede data i cellen, som ingen har grund til at læse (skjult tekst, webstedets egen cookie, lokalt lager, skjult link). Hvis en af dem dukker op på vej ud til nogen, ser du det her med beviset. Demoen har ingen lokkemad."
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO planter markerede data i cellen, som ingen har grund til at læse (skjult tekst, webstedets egen cookie, lokalt lager, skjult link). Hvis en af dem dukker op på vej ud til nogen, ser du det her med beviset. Demoen har ingen lokkemad.",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "I demoen overvåger cellen ikke: med motoren kørende lægger ZERO hvert forsøg fra webstedet sammen (fingeraftryk, tilladelser, vinduer, downloads, farlige websteder, lokkemad) og svarer i niveauer: overvåge, afskære de andre virksomheder, forsegle uden netværk og, hvis du beder om det, ødelægge."
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

@@ -1022,7 +1022,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "سائٹ لوڈ ہونے پر یہاں ترتیب سے ہر وہ چیز نظر آئے گی جو وہ آزماتی ہے اور ZERO کیا کرتا ہے۔",
   "¿Han caído en los señuelos?": "کیا کوئی جال میں پھنسا؟",
   "Señuelo: un dato marcado ha salido": "جال: ایک نشان زدہ ڈیٹا باہر گیا",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO سیل میں ایسا نشان زدہ ڈیٹا رکھتا ہے جسے پڑھنے کی کسی کے پاس وجہ نہیں (چھپا متن، سائٹ کی اپنی کوکی، لوکل اسٹوریج، چھپا لنک)۔ اگر کوئی کسی کی طرف باہر جاتے ہوئے دوبارہ نظر آئے تو آپ اسے یہاں ثبوت کے ساتھ دیکھیں گے۔ ڈیمو میں کوئی جال نہیں ہے۔"
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO سیل میں ایسا نشان زدہ ڈیٹا رکھتا ہے جسے پڑھنے کی کسی کے پاس وجہ نہیں (چھپا متن، سائٹ کی اپنی کوکی، لوکل اسٹوریج، چھپا لنک)۔ اگر کوئی کسی کی طرف باہر جاتے ہوئے دوبارہ نظر آئے تو آپ اسے یہاں ثبوت کے ساتھ دیکھیں گے۔ ڈیمو میں کوئی جال نہیں ہے۔",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "ڈیمو میں سیل نگرانی نہیں کرتا: انجن چلنے پر ZERO سائٹ کی ہر کوشش (فنگرپرنٹ، اجازتیں، ونڈوز، ڈاؤن لوڈز، خطرناک سائٹس، جال) کو جمع کرتا ہے اور درجوں میں جواب دیتا ہے: نگرانی، دوسری کمپنیوں کو کاٹنا، نیٹ ورک کے بغیر سیل کرنا اور، اگر آپ کہیں، تباہ کرنا۔"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

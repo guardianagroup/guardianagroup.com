@@ -1023,7 +1023,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Når nettstedet lastes, ser du her i rekkefølge alt det forsøker og hva ZERO gjør.",
   "¿Han caído en los señuelos?": "Har noen bitt på agnet?",
   "Señuelo: un dato marcado ha salido": "Agn: en merket opplysning gikk ut",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO planter markerte data i cellen som ingen har grunn til å lese (skjult tekst, nettstedets egen informasjonskapsel, lokal lagring, skjult lenke). Dukker en av dem opp på vei ut til noen, ser du det her med beviset. Demoen har ingen agn."
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO planter markerte data i cellen som ingen har grunn til å lese (skjult tekst, nettstedets egen informasjonskapsel, lokal lagring, skjult lenke). Dukker en av dem opp på vei ut til noen, ser du det her med beviset. Demoen har ingen agn.",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "I demoen overvåker ikke cellen: med motoren i gang legger ZERO sammen hvert forsøk fra nettstedet (fingeravtrykk, tillatelser, vinduer, nedlastinger, farlige nettsteder, agn) og svarer i nivåer: overvåke, kutte de andre selskapene, forsegle uten nett og, hvis du ber om det, ødelegge."
  },
  "p": {
   "intento": "Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

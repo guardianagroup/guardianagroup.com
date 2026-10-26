@@ -1023,7 +1023,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Site yüklendiğinde, burada sırayla denediği her şeyi ve ZERO'nun ne yaptığını göreceksin.",
   "¿Han caído en los señuelos?": "Yeme düşen oldu mu?",
   "Señuelo: un dato marcado ha salido": "Yem: işaretli bir veri dışarı çıktı",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO hücreye kimsenin okumak için nedeni olmayan işaretli veriler yerleştirir (gizli metin, sitenin kendi çerezi, yerel depolama, gizli bağlantı). Biri birine doğru çıkarken yeniden görünürse, burada kanıtıyla görürsün. Demoda yem yoktur."
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO hücreye kimsenin okumak için nedeni olmayan işaretli veriler yerleştirir (gizli metin, sitenin kendi çerezi, yerel depolama, gizli bağlantı). Biri birine doğru çıkarken yeniden görünürse, burada kanıtıyla görürsün. Demoda yem yoktur.",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "Demoda hücre gözetlemez: motor çalışırken ZERO sitenin her girişimini (parmak izi, izinler, pencereler, indirmeler, tehlikeli siteler, yemler) toplar ve kademeli yanıt verir: gözetle, diğer şirketleri kes, ağsız mühürle ve sen istersen yok et."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

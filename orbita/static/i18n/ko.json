@@ -1023,7 +1023,8 @@
   "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "사이트가 로드되면 사이트가 시도하는 것과 ZERO의 대응이 순서대로 여기에 표시됩니다.",
   "¿Han caído en los señuelos?": "미끼에 걸린 곳이 있나요?",
   "Señuelo: un dato marcado ha salido": "미끼: 표시된 데이터가 외부로 나감",
-  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO는 아무도 읽을 이유가 없는 표시된 데이터(숨은 텍스트, 사이트 자체 쿠키, 로컬 저장소, 숨은 링크)를 셀에 심어 둡니다. 그중 하나가 누군가에게 나가는 길에 다시 나타나면 증거와 함께 여기에 표시됩니다. 데모에는 미끼가 없습니다."
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO는 아무도 읽을 이유가 없는 표시된 데이터(숨은 텍스트, 사이트 자체 쿠키, 로컬 저장소, 숨은 링크)를 셀에 심어 둡니다. 그중 하나가 누군가에게 나가는 길에 다시 나타나면 증거와 함께 여기에 표시됩니다. 데모에는 미끼가 없습니다.",
+  "En la demostración la celda no vigila: con el motor en marcha, ZERO suma cada intento de la web (huella, permisos, ventanas, descargas, webs peligrosas, señuelos) y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red y, si tú lo pides, destruir.": "데모에서는 셀이 감시하지 않습니다. 엔진이 작동하면 ZERO는 사이트의 모든 시도(지문, 권한, 창, 다운로드, 위험한 사이트, 미끼)를 합산해 단계별로 대응합니다: 감시, 다른 기업 차단, 네트워크 없이 봉인, 그리고 요청 시 파기."
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",
