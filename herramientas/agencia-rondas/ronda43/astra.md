@@ -1,0 +1,14 @@
+# Ronda 43 · Astra (gpt-6-astra, Cheaper Inference Playground, 4.096 tokens) · 26 Oct 2026
+
+Dos tandas; en las dos el flujo se cortó pronto (≈2.000 y ≈4.500 caracteres). Se guarda lo recibido. Sin clave ni datos de cuenta.
+
+## Tanda 1 (hasta el corte)
+- PROBABLE — Respuesta para el dueño: «Podemos ayudar a documentar un posible tratamiento ilícito y a reclamar. En algunos países puede obtenerse una indemnización, una cantidad legalmente tasada o un acuerdo. Pero que una empresa gane dinero con datos no da, por sí solo, derecho a recibir un porcentaje de sus ingresos».
+- SEGURO — «sin consentimiento» y «sin base jurídica» no son sinónimos: muchas leyes permiten tratamientos con otras bases (RGPD arts. 6 y 9; para almacenar o acceder al terminal, art. 5.3 de la Directiva 2002/58/CE).
+- PROBABLE — Conclusión comparada: no identifica, entre los ordenamientos examinados, un derecho general vigente a repartir ingresos publicitarios con cada persona; no convertirlo en «no existe en ninguna ley del mundo».
+- Límite declarado: sin consulta jurídica en tiempo real; no presenta proyectos como ley vigente ni propuestas de acuerdo como dinero cobrado.
+
+## Tanda 2 (continuación, hasta el corte)
+- Figuras distintas: indemnización por daños (SEGURO; art. 82 RGPD; repara, no reparte); restitución/enriquecimiento injusto (PROBABLE; requisitos civiles nacionales; no basta que la empresa facture publicidad); daños estatutarios (SEGURO; cantidades o métodos especiales sin acreditar pérdida equivalente, pero con infracción probada); multa (SEGURO; art. 83; no es indemnización); acuerdo extrajudicial (SEGURO; no prueba un derecho general); reparto contractual (SEGURO; el pago nace del contrato, no de un «dividendo universal»).
+- Beneficios como medida de reparación: SEGURO China PIPL art. 69 (indemnización por el perjuicio de la persona o por el beneficio del responsable; si ambos son difíciles, el tribunal decide); SEGURO Países Bajos art. 6:104 Código Civil (el juez puede estimar el daño por el beneficio del acto ilícito, a petición del perjudicado); SEGURO Australia Privacy Act 1988, Schedule 2 (reforma 2024): entre los remedios, account of profits, solo para el ilícito de intromisión grave; PROBABLE España/Europa: enriquecimiento injusto subsidiario, con sus requisitos; PROBABLE para ZERO: un CPM observado no demuestra el beneficio neto obtenido con los datos de una persona.
+- RGPD: art. 82.1; tres elementos acumulativos; sin umbral mínimo; la infracción sola no basta. C-300/21 (4 may 2023), C-340/21 (14 dic 2023; temor fundado), C-456/22 Gemeinde Ummendorf (14 dic 2023; ni la escasa duración ni la limitada entidad excluyen el daño; hay que acreditar consecuencias), C-687/21 (25 ene 2024; temor hipotético no basta), C-741/21 (11 abr 2024; compensatoria, no punitiva) … (corte).
