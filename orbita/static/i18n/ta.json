@@ -1381,7 +1381,24 @@
   "no": "இல்லை",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "கோரிக்கையில் இருந்தவை: பக்கம், இடத்தின் அளவு, ஒப்புதலுடன் உங்களைப் பற்றிய தரவும் வெளியேறியது. விவரம் ஒவ்வொரு ஏலத்திலும்:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "கோரிக்கையில் இருந்தவை: பக்க முகவரி, இடத்தின் அளவு, ஒப்புதல்; பயனர் அடையாளங்காட்டிகள் இல்லை (அறையில் எதுவும் இல்லை).",
-  "Otra empresa": "மற்றொரு நிறுவனம்"
+  "Otra empresa": "மற்றொரு நிறுவனம்",
+  "Observar": "கவனி",
+  "observar": "கவனி",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "எதையும் துண்டிக்காது (ஆபத்தான தளங்கள் தவிர): தளம் அப்படியே திறக்கும், ZERO எல்லாவற்றையும் கண்டறியும், எதைத் துண்டிப்பது என்பதை நீங்கள் தேர்வு செய்கிறீர்கள்.",
+  "Vistas": "பார்த்தவை",
+  "conexiones vistas en esta web": "இந்தத் தளத்தில் பார்த்த இணைப்புகள்",
+  "VISTO": "பார்த்தது",
+  "Permitir": "அனுமதி",
+  "Cortar": "துண்டி",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "இந்த அமர்வில் இந்த நிறுவனத்தின் இணைப்புகளை அனுமதிக்கவும்",
+  "Volver a cortar las conexiones de esta empresa": "இந்த நிறுவனத்தின் இணைப்புகளை மீண்டும் துண்டிக்கவும்",
+  "Conexión vista (dejada pasar)": "இணைப்பு பார்க்கப்பட்டது (அனுமதிக்கப்பட்டது)",
+  "Conexión permitida por ti": "நீங்கள் அனுமதித்த இணைப்பு",
+  "Permiso de empresa": "நிறுவன அனுமதி",
+  "La web no cargó": "தளம் ஏற்றப்படவில்லை",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "கவனி நிலை: ZERO எல்லாவற்றையும் அனுமதிக்கும் (ஆபத்தான தளங்கள் தவிர), கண்டறிந்து உங்களுக்குக் காட்டும்; எதைத் துண்டிப்பது என்பதை நீங்கள் தேர்வு செய்கிறீர்கள்.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "இந்தத் தேடுபொறி செல்லிலிருந்து வந்த வினவலை அனுமதிக்கவில்லை. ZERO ஒரு சேவையகத்திலிருந்து உலாவுகிறது, சில தேடுபொறிகள் இத்தகைய இணைப்புகளைக் கட்டுப்படுத்துகின்றன. வேறு தேடுபொறியைத் தேர்வு செய்யலாம் அல்லது தளத்தின் முகவரியை நேரடியாக எழுதலாம்.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "நீங்கள் ஒரு மனிதர் என்பதைத் தேடுபொறி சரிபார்க்க விரும்புகிறது. சரிபார்ப்பை இங்கேயே முடித்துத் தொடரவும்; நீங்கள் கடந்தீர்கள் என்பதை செல் நினைவில் வைக்கும்."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "ஒரு ஏலதாரருக்கு {1}",
   "opPuerta": "AI வாயில்: {1}-க்கு பாதுகாக்கப்பட்ட அனுப்புதல் ({2} தரவு மாற்றப்பட்டது)",
   "huecoReal": "இடம் «{1}» ({2} × {3} பிக்சல்கள்)",
-  "huecoSolo": "இடம் «{1}»"
+  "huecoSolo": "இடம் «{1}»",
+  "mVistoDe": "ZERO {2}[ ({3})] இலிருந்து {1} ஐப் பார்த்தது (அனுமதித்தது, கவனி நிலை).",
+  "mVistoHacia": "ZERO {2} நோக்கி {1} ஐப் பார்த்தது (அனுமதித்தது, கவனி நிலை).",
+  "mPermitidoDe": "ZERO {2}[ ({3})] இலிருந்து {1} ஐ அனுமதித்தது (நீங்கள் அனுமதித்தீர்கள்).",
+  "mPermitidoHacia": "ZERO {2} நோக்கி {1} ஐ அனுமதித்தது (நீங்கள் அனுமதித்தீர்கள்).",
+  "mPermisoOn": "இந்த அமர்வில் {1} இன் இணைப்புகளை அனுமதித்தீர்கள்.",
+  "mPermisoOff": "இந்த அமர்வில் {1} இன் இணைப்புகளை மீண்டும் துண்டிக்கிறீர்கள்.",
+  "mFallo": "தளம் {1} ஏற்றப்படவில்லை: {2}.",
+  "opPermitida": "அனுமதிக்கப்பட்டது {1}",
+  "opCortarse": "மீண்டும் துண்டிக்கப்பட்டது {1}"
  }
 }

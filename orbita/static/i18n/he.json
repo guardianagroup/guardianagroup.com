@@ -1381,7 +1381,24 @@
   "no": "לא",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "מה הבקשה נשאה: מלבד הדף, גודל המשבצת וההסכמה, יצאו נתונים עליך. הפירוט, בכל מכרז:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "מה הבקשה נשאה: כתובת הדף, גודל המשבצת והסכמה; ללא מזהי משתמש (אין כאלה בתא).",
-  "Otra empresa": "חברה אחרת"
+  "Otra empresa": "חברה אחרת",
+  "Observar": "צפייה",
+  "observar": "צפייה",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "לא חותך דבר (למעט אתרים מסוכנים): האתר נפתח כמות שהוא, ZERO מזהה הכול ואתם בוחרים מה לחתוך.",
+  "Vistas": "נצפו",
+  "conexiones vistas en esta web": "חיבורים שנצפו באתר זה",
+  "VISTO": "נצפה",
+  "Permitir": "לאפשר",
+  "Cortar": "לחתוך",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "להעביר את החיבורים של חברה זו בסשן הזה",
+  "Volver a cortar las conexiones de esta empresa": "לחתוך שוב את החיבורים של חברה זו",
+  "Conexión vista (dejada pasar)": "חיבור נצפה (הועבר)",
+  "Conexión permitida por ti": "חיבור שאישרתם",
+  "Permiso de empresa": "הרשאת חברה",
+  "La web no cargó": "האתר לא נטען",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "רמת צפייה: ZERO מעביר הכול (למעט אתרים מסוכנים), מזהה ומראה לכם; אתם בוחרים מה לחתוך.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "מנוע החיפוש לא העביר את השאילתה מהתא. ZERO גולש משרת, וחלק ממנועי החיפוש מגבילים חיבורים כאלה. אפשר לבחור מנוע אחר או להקליד ישירות את כתובת האתר.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "מנוע החיפוש רוצה לוודא שאתם אדם. פתרו את האימות כאן והמשיכו; התא יזכור שעברתם אותו."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} לכל מציע",
   "opPuerta": "שער AI: שליחה מוגנת ל-{1} ({2} {2?נתון הוחלף|נתונים הוחלפו})",
   "huecoReal": "המשבצת «{1}» ({2} × {3} פיקסלים)",
-  "huecoSolo": "המשבצת «{1}»"
+  "huecoSolo": "המשבצת «{1}»",
+  "mVistoDe": "ZERO ראה (והעביר, רמת צפייה) {1} מ-{2}[ ({3})].",
+  "mVistoHacia": "ZERO ראה (והעביר, רמת צפייה) {1} אל {2}.",
+  "mPermitidoDe": "ZERO העביר (אישרתם) {1} מ-{2}[ ({3})].",
+  "mPermitidoHacia": "ZERO העביר (אישרתם) {1} אל {2}.",
+  "mPermisoOn": "אישרתם את החיבורים של {1} בסשן הזה.",
+  "mPermisoOff": "אתם חותכים שוב את החיבורים של {1} בסשן הזה.",
+  "mFallo": "האתר {1} לא נטען: {2}.",
+  "opPermitida": "אושר {1}",
+  "opCortarse": "נחתך שוב {1}"
  }
 }

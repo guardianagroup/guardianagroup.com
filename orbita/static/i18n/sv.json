@@ -1382,7 +1382,24 @@
   "no": "nej",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Vad begäran innehöll: utöver sidan, platsens storlek och samtycket gick det ut uppgifter om dig. Detaljerna i varje auktion:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Vad begäran innehöll: sidans adress, platsens storlek och samtycke; inga användaridentifierare (det finns inga i cellen).",
-  "Otra empresa": "Annat företag"
+  "Otra empresa": "Annat företag",
+  "Observar": "Observera",
+  "observar": "observera",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Klipper inget (utom farliga webbplatser): sidan öppnas som den är, ZERO upptäcker allt och du väljer vad som klipps.",
+  "Vistas": "Sedda",
+  "conexiones vistas en esta web": "anslutningar sedda på denna webbplats",
+  "VISTO": "SEDD",
+  "Permitir": "Tillåt",
+  "Cortar": "Klipp",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Släpp igenom detta företags anslutningar i denna session",
+  "Volver a cortar las conexiones de esta empresa": "Klipp detta företags anslutningar igen",
+  "Conexión vista (dejada pasar)": "Anslutning sedd (släppt igenom)",
+  "Conexión permitida por ti": "Anslutning som du tillåtit",
+  "Permiso de empresa": "Företagstillstånd",
+  "La web no cargó": "Sidan laddades inte",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Nivå observera: ZERO släpper igenom allt (utom farliga webbplatser), upptäcker det och visar det för dig; du väljer vad som klipps.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Den här sökmotorn släppte inte igenom frågan från cellen. ZERO surfar från en server och vissa sökmotorer begränsar sådana anslutningar. Du kan välja en annan sökmotor eller skriva webbplatsens adress direkt.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Sökmotorn vill kontrollera att du är en person. Lös kontrollen här inne och fortsätt; cellen kommer ihåg att du klarade den."
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",
@@ -1468,6 +1485,15 @@
   "porPujador": "{1} per budgivare",
   "opPuerta": "AI-port: skyddad sändning till {1} ({2} {2?ersatt uppgift|ersatta uppgifter})",
   "huecoReal": "platsen «{1}» ({2} × {3} pixlar)",
-  "huecoSolo": "platsen «{1}»"
+  "huecoSolo": "platsen «{1}»",
+  "mVistoDe": "ZERO såg (och släppte igenom, nivå observera) {1}, från {2}[ ({3})].",
+  "mVistoHacia": "ZERO såg (och släppte igenom, nivå observera) {1} till {2}.",
+  "mPermitidoDe": "ZERO släppte igenom (du tillät det) {1}, från {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO släppte igenom (du tillät det) {1} till {2}.",
+  "mPermisoOn": "Du tillät anslutningar från {1} i denna session.",
+  "mPermisoOff": "Du klipper anslutningar från {1} igen i denna session.",
+  "mFallo": "Sidan {1} laddades inte: {2}.",
+  "opPermitida": "tillåten {1}",
+  "opCortarse": "klippt igen {1}"
  }
 }

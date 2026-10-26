@@ -1381,7 +1381,24 @@
   "no": "కాదు",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "అభ్యర్థనలో ఉన్నవి: పేజీ, స్లాట్ పరిమాణం, సమ్మతితో పాటు మీ గురించిన డేటా కూడా బయటకు వెళ్లింది. వివరాలు ప్రతి వేలంలో:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "అభ్యర్థనలో ఉన్నవి: పేజీ చిరునామా, స్లాట్ పరిమాణం, సమ్మతి; వినియోగదారు ఐడెంటిఫైయర్లు లేవు (సెల్‌లో ఏవీ లేవు).",
-  "Otra empresa": "మరో కంపెనీ"
+  "Otra empresa": "మరో కంపెనీ",
+  "Observar": "గమనించు",
+  "observar": "గమనించు",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "ఏమీ కత్తిరించదు (ప్రమాదకర సైట్లు తప్ప): సైట్ ఉన్నదున్నట్టు తెరుచుకుంటుంది, ZERO అన్నీ గుర్తిస్తుంది, ఏమి కత్తిరించాలో మీరు ఎంచుకుంటారు.",
+  "Vistas": "చూసినవి",
+  "conexiones vistas en esta web": "ఈ సైట్‌లో చూసిన కనెక్షన్లు",
+  "VISTO": "చూశారు",
+  "Permitir": "అనుమతించు",
+  "Cortar": "కత్తిరించు",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "ఈ సెషన్‌లో ఈ కంపెనీ కనెక్షన్లను వెళ్లనివ్వండి",
+  "Volver a cortar las conexiones de esta empresa": "ఈ కంపెనీ కనెక్షన్లను మళ్లీ కత్తిరించండి",
+  "Conexión vista (dejada pasar)": "కనెక్షన్ చూశారు (వెళ్లనిచ్చారు)",
+  "Conexión permitida por ti": "మీరు అనుమతించిన కనెక్షన్",
+  "Permiso de empresa": "కంపెనీ అనుమతి",
+  "La web no cargó": "సైట్ లోడ్ కాలేదు",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "గమనించు స్థాయి: ZERO అన్నిటినీ వెళ్లనిస్తుంది (ప్రమాదకర సైట్లు తప్ప), గుర్తించి మీకు చూపిస్తుంది; ఏమి కత్తిరించాలో మీరు ఎంచుకుంటారు.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "ఈ సెర్చ్ ఇంజిన్ సెల్ నుండి వచ్చిన ప్రశ్నను వెళ్లనివ్వలేదు. ZERO ఒక సర్వర్ నుండి బ్రౌజ్ చేస్తుంది, కొన్ని సెర్చ్ ఇంజిన్లు అలాంటి కనెక్షన్లను పరిమితం చేస్తాయి. మీరు మరో సెర్చ్ ఇంజిన్ ఎంచుకోవచ్చు లేదా సైట్ చిరునామాను నేరుగా రాయవచ్చు.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "మీరు ఒక వ్యక్తి అని సెర్చ్ ఇంజిన్ నిర్ధారించుకోవాలనుకుంటోంది. తనిఖీని ఇక్కడే పూర్తి చేసి కొనసాగండి; మీరు పాస్ అయ్యారని సెల్ గుర్తుంచుకుంటుంది."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "ఒక్కో బిడ్డర్‌కు {1}",
   "opPuerta": "AI గేట్: {1}కి రక్షిత పంపకం ({2} డేటా భర్తీ చేయబడింది)",
   "huecoReal": "స్లాట్ «{1}» ({2} × {3} పిక్సెల్లు)",
-  "huecoSolo": "స్లాట్ «{1}»"
+  "huecoSolo": "స్లాట్ «{1}»",
+  "mVistoDe": "ZERO {2}[ ({3})] నుండి {1} చూసింది (వెళ్లనిచ్చింది, గమనించు స్థాయి).",
+  "mVistoHacia": "ZERO {2} వైపు {1} చూసింది (వెళ్లనిచ్చింది, గమనించు స్థాయి).",
+  "mPermitidoDe": "ZERO {2}[ ({3})] నుండి {1} వెళ్లనిచ్చింది (మీరు అనుమతించారు).",
+  "mPermitidoHacia": "ZERO {2} వైపు {1} వెళ్లనిచ్చింది (మీరు అనుమతించారు).",
+  "mPermisoOn": "ఈ సెషన్‌లో {1} కనెక్షన్లను అనుమతించారు.",
+  "mPermisoOff": "ఈ సెషన్‌లో {1} కనెక్షన్లను మళ్లీ కత్తిరిస్తున్నారు.",
+  "mFallo": "సైట్ {1} లోడ్ కాలేదు: {2}.",
+  "opPermitida": "అనుమతించబడింది {1}",
+  "opCortarse": "మళ్లీ కత్తిరించబడింది {1}"
  }
 }

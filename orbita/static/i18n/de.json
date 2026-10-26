@@ -1382,7 +1382,24 @@
   "no": "nein",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Was die Anfrage enthielt: Neben Seite, Platzgröße und Einwilligung gingen Daten über dich hinaus. Die Details in jeder Auktion:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Was die Anfrage enthielt: Seitenadresse, Platzgröße und Einwilligung; keine Nutzerkennungen (in der Zelle gibt es keine).",
-  "Otra empresa": "Anderes Unternehmen"
+  "Otra empresa": "Anderes Unternehmen",
+  "Observar": "Beobachten",
+  "observar": "beobachten",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Schneidet nichts ab (außer gefährliche Websites): die Website öffnet sich wie sie ist, ZERO erkennt alles und du wählst, was abgeschnitten wird.",
+  "Vistas": "Gesehen",
+  "conexiones vistas en esta web": "auf dieser Website gesehene Verbindungen",
+  "VISTO": "GESEHEN",
+  "Permitir": "Zulassen",
+  "Cortar": "Abschneiden",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Die Verbindungen dieses Unternehmens in dieser Sitzung durchlassen",
+  "Volver a cortar las conexiones de esta empresa": "Die Verbindungen dieses Unternehmens wieder abschneiden",
+  "Conexión vista (dejada pasar)": "Verbindung gesehen (durchgelassen)",
+  "Conexión permitida por ti": "Von dir zugelassene Verbindung",
+  "Permiso de empresa": "Unternehmensfreigabe",
+  "La web no cargó": "Die Website wurde nicht geladen",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Stufe Beobachten: ZERO lässt alles durch (außer gefährliche Websites), erkennt es und zeigt es dir; du wählst, was abgeschnitten wird.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Diese Suchmaschine hat die Anfrage aus der Zelle nicht durchgelassen. ZERO surft von einem Server aus, und manche Suchmaschinen schränken solche Verbindungen ein. Du kannst eine andere Suchmaschine wählen oder die Adresse der Website direkt eingeben.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Die Suchmaschine will prüfen, dass du eine Person bist. Löse die Prüfung hier drinnen und mach weiter; die Zelle merkt sich, dass du sie bestanden hast."
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",
@@ -1468,6 +1485,15 @@
   "porPujador": "{1} pro Bieter",
   "opPuerta": "KI-Tor: geschützter Versand an {1} ({2} {2?ersetztes Datum|ersetzte Daten})",
   "huecoReal": "den Platz «{1}» ({2} × {3} Pixel)",
-  "huecoSolo": "den Platz «{1}»"
+  "huecoSolo": "den Platz «{1}»",
+  "mVistoDe": "ZERO hat {1} von {2}[ ({3})] gesehen (und durchgelassen, Stufe Beobachten).",
+  "mVistoHacia": "ZERO hat {1} zu {2} gesehen (und durchgelassen, Stufe Beobachten).",
+  "mPermitidoDe": "ZERO hat {1} von {2}[ ({3})] durchgelassen (du hast es zugelassen).",
+  "mPermitidoHacia": "ZERO hat {1} zu {2} durchgelassen (du hast es zugelassen).",
+  "mPermisoOn": "Du hast die Verbindungen von {1} in dieser Sitzung zugelassen.",
+  "mPermisoOff": "Du schneidest die Verbindungen von {1} in dieser Sitzung wieder ab.",
+  "mFallo": "Die Website {1} wurde nicht geladen: {2}.",
+  "opPermitida": "zugelassen {1}",
+  "opCortarse": "wieder abgeschnitten {1}"
  }
 }

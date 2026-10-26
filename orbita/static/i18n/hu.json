@@ -1381,7 +1381,24 @@
   "no": "nem",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Mit vitt a kérés: az oldalon, a hely méretén és a hozzájáruláson kívül rólad szóló adatok is kimentek. A részletek minden aukciónál:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Mit vitt a kérés: az oldal címét, a hely méretét és a hozzájárulást; felhasználói azonosítók nélkül (a cellában nincs egy sem).",
-  "Otra empresa": "Másik cég"
+  "Otra empresa": "Másik cég",
+  "Observar": "Megfigyelés",
+  "observar": "megfigyelés",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Semmit sem vág el (a veszélyes oldalakat kivéve): az oldal úgy nyílik meg, ahogy van, a ZERO mindent észlel, és te választod ki, mit vágjon el.",
+  "Vistas": "Látott",
+  "conexiones vistas en esta web": "ezen az oldalon látott kapcsolat",
+  "VISTO": "LÁTVA",
+  "Permitir": "Engedélyez",
+  "Cortar": "Elvág",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Átengedi ennek a cégnek a kapcsolatait ebben a munkamenetben",
+  "Volver a cortar las conexiones de esta empresa": "Újra elvágja ennek a cégnek a kapcsolatait",
+  "Conexión vista (dejada pasar)": "Kapcsolat látva (átengedve)",
+  "Conexión permitida por ti": "Általad engedélyezett kapcsolat",
+  "Permiso de empresa": "Cégengedély",
+  "La web no cargó": "Az oldal nem töltődött be",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Megfigyelés szint: a ZERO mindent átenged (a veszélyes oldalakat kivéve), észleli és megmutatja neked; te választod ki, mit vágjon el.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Ez a kereső nem engedte át a lekérdezést a cellából. A ZERO egy szerverről böngészik, és egyes keresők korlátozzák az ilyen kapcsolatokat. Választhatsz másik keresőt, vagy közvetlenül beírhatod az oldal címét.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "A kereső ellenőrizni akarja, hogy ember vagy. Oldd meg az ellenőrzést itt bent, és folytasd; a cella megjegyzi, hogy átmentél rajta."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} licitálónként",
   "opPuerta": "MI-kapu: védett küldés ide: {1} ({2} helyettesített adat)",
   "huecoReal": "a(z) «{1}» hely ({2} × {3} képpont)",
-  "huecoSolo": "a(z) «{1}» hely"
+  "huecoSolo": "a(z) «{1}» hely",
+  "mVistoDe": "A ZERO látta (és átengedte, megfigyelés szint): {1}, innen: {2}[ ({3})].",
+  "mVistoHacia": "A ZERO látta (és átengedte, megfigyelés szint): {1} ide: {2}.",
+  "mPermitidoDe": "A ZERO átengedte (te engedélyezted): {1}, innen: {2}[ ({3})].",
+  "mPermitidoHacia": "A ZERO átengedte (te engedélyezted): {1} ide: {2}.",
+  "mPermisoOn": "Engedélyezted {1} kapcsolatait ebben a munkamenetben.",
+  "mPermisoOff": "Újra elvágod {1} kapcsolatait ebben a munkamenetben.",
+  "mFallo": "Az oldal ({1}) nem töltődött be: {2}.",
+  "opPermitida": "engedélyezve {1}",
+  "opCortarse": "újra elvágva {1}"
  }
 }

@@ -1381,7 +1381,24 @@
   "no": "ไม่",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "คำขอมีอะไรบ้าง: นอกจากหน้า ขนาดของพื้นที่ และความยินยอม ยังมีข้อมูลเกี่ยวกับคุณออกไปด้วย รายละเอียดอยู่ในแต่ละการประมูล:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "คำขอมีอะไรบ้าง: ที่อยู่ของหน้า ขนาดของพื้นที่ และความยินยอม ไม่มีตัวระบุผู้ใช้ (ในเซลล์ไม่มีเลย)",
-  "Otra empresa": "บริษัทอื่น"
+  "Otra empresa": "บริษัทอื่น",
+  "Observar": "สังเกต",
+  "observar": "สังเกต",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "ไม่ตัดอะไรเลย (ยกเว้นเว็บไซต์อันตราย): เว็บไซต์เปิดตามเดิม ZERO ตรวจจับทุกอย่าง และคุณเลือกว่าจะตัดอะไร",
+  "Vistas": "ที่พบ",
+  "conexiones vistas en esta web": "การเชื่อมต่อที่พบในเว็บไซต์นี้",
+  "VISTO": "พบแล้ว",
+  "Permitir": "อนุญาต",
+  "Cortar": "ตัด",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "ปล่อยการเชื่อมต่อของบริษัทนี้ผ่านในเซสชันนี้",
+  "Volver a cortar las conexiones de esta empresa": "ตัดการเชื่อมต่อของบริษัทนี้อีกครั้ง",
+  "Conexión vista (dejada pasar)": "พบการเชื่อมต่อ (ปล่อยผ่าน)",
+  "Conexión permitida por ti": "การเชื่อมต่อที่คุณอนุญาต",
+  "Permiso de empresa": "การอนุญาตของบริษัท",
+  "La web no cargó": "เว็บไซต์โหลดไม่สำเร็จ",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "ระดับสังเกต: ZERO ปล่อยทุกอย่างผ่าน (ยกเว้นเว็บไซต์อันตราย) ตรวจจับและแสดงให้คุณเห็น คุณเลือกว่าจะตัดอะไร",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "เครื่องมือค้นหานี้ไม่ปล่อยคำค้นจากเซลล์ผ่าน ZERO ท่องเว็บจากเซิร์ฟเวอร์ และเครื่องมือค้นหาบางตัวจำกัดการเชื่อมต่อแบบนี้ คุณเลือกเครื่องมือค้นหาอื่นหรือพิมพ์ที่อยู่เว็บไซต์โดยตรงได้",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "เครื่องมือค้นหาต้องการตรวจสอบว่าคุณเป็นคน ทำการตรวจสอบที่นี่แล้วไปต่อ เซลล์จะจำไว้ว่าคุณผ่านแล้ว"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} ต่อผู้ประมูล",
   "opPuerta": "ประตู AI: ส่งแบบป้องกันไปยัง {1} (แทนที่ข้อมูล {2} รายการ)",
   "huecoReal": "พื้นที่ «{1}» ({2} × {3} พิกเซล)",
-  "huecoSolo": "พื้นที่ «{1}»"
+  "huecoSolo": "พื้นที่ «{1}»",
+  "mVistoDe": "ZERO พบ{1}จาก {2}[ ({3})] (และปล่อยผ่าน ระดับสังเกต)",
+  "mVistoHacia": "ZERO พบ{1}ไปยัง {2} (และปล่อยผ่าน ระดับสังเกต)",
+  "mPermitidoDe": "ZERO ปล่อย{1}จาก {2}[ ({3})] ผ่าน (คุณอนุญาต)",
+  "mPermitidoHacia": "ZERO ปล่อย{1}ไปยัง {2} ผ่าน (คุณอนุญาต)",
+  "mPermisoOn": "คุณอนุญาตการเชื่อมต่อของ {1} ในเซสชันนี้",
+  "mPermisoOff": "คุณตัดการเชื่อมต่อของ {1} อีกครั้งในเซสชันนี้",
+  "mFallo": "เว็บไซต์ {1} โหลดไม่สำเร็จ: {2}",
+  "opPermitida": "อนุญาต {1}",
+  "opCortarse": "ตัดอีกครั้ง {1}"
  }
 }

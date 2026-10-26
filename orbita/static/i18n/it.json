@@ -1382,7 +1382,24 @@
   "no": "no",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Cosa portava la richiesta: oltre alla pagina, alla dimensione dello spazio e al consenso, sono usciti dati su di te. Il dettaglio, in ogni asta:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Cosa portava la richiesta: indirizzo della pagina, dimensione dello spazio e consenso; senza identificatori utente (nella cella non ce n'è nessuno).",
-  "Otra empresa": "Altra azienda"
+  "Otra empresa": "Altra azienda",
+  "Observar": "Osservare",
+  "observar": "osservare",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Non taglia nulla (tranne i siti pericolosi): il sito si apre così com’è, ZERO rileva tutto e tu scegli cosa tagliare.",
+  "Vistas": "Viste",
+  "conexiones vistas en esta web": "connessioni viste su questo sito",
+  "VISTO": "VISTA",
+  "Permitir": "Consenti",
+  "Cortar": "Taglia",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Lascia passare le connessioni di questa azienda in questa sessione",
+  "Volver a cortar las conexiones de esta empresa": "Taglia di nuovo le connessioni di questa azienda",
+  "Conexión vista (dejada pasar)": "Connessione vista (lasciata passare)",
+  "Conexión permitida por ti": "Connessione consentita da te",
+  "Permiso de empresa": "Permesso aziendale",
+  "La web no cargó": "Il sito non si è caricato",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Livello osservare: ZERO lascia passare tutto (tranne i siti pericolosi), lo rileva e te lo mostra; tu scegli cosa tagliare.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Questo motore di ricerca non ha lasciato passare la richiesta dalla cella. ZERO naviga da un server e alcuni motori limitano queste connessioni. Puoi scegliere un altro motore o scrivere direttamente l’indirizzo del sito.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Il motore di ricerca vuole verificare che tu sia una persona. Completa la verifica qui dentro e prosegui; la cella ricorderà che l’hai superata."
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",
@@ -1468,6 +1485,15 @@
   "porPujador": "{1} per offerente",
   "opPuerta": "porta IA: invio protetto a {1} ({2} {2?dato sostituito|dati sostituiti})",
   "huecoReal": "lo spazio «{1}» ({2} × {3} pixel)",
-  "huecoSolo": "lo spazio «{1}»"
+  "huecoSolo": "lo spazio «{1}»",
+  "mVistoDe": "ZERO ha visto (e lasciato passare, livello osservare) {1}, da {2}[ ({3})].",
+  "mVistoHacia": "ZERO ha visto (e lasciato passare, livello osservare) {1} verso {2}.",
+  "mPermitidoDe": "ZERO ha lasciato passare (lo hai consentito) {1}, da {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO ha lasciato passare (lo hai consentito) {1} verso {2}.",
+  "mPermisoOn": "Hai consentito le connessioni di {1} in questa sessione.",
+  "mPermisoOff": "Tagli di nuovo le connessioni di {1} in questa sessione.",
+  "mFallo": "Il sito {1} non si è caricato: {2}.",
+  "opPermitida": "consentita {1}",
+  "opCortarse": "tagliata di nuovo {1}"
  }
 }

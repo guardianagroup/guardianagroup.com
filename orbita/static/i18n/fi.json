@@ -1381,7 +1381,24 @@
   "no": "ei",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Mitä pyyntö sisälsi: sivun, paikan koon ja suostumuksen lisäksi lähti tietoja sinusta. Yksityiskohdat kussakin huutokaupassa:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Mitä pyyntö sisälsi: sivun osoite, paikan koko ja suostumus; ei käyttäjätunnisteita (solussa ei ole yhtään).",
-  "Otra empresa": "Toinen yritys"
+  "Otra empresa": "Toinen yritys",
+  "Observar": "Tarkkaile",
+  "observar": "tarkkaile",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Ei katkaise mitään (paitsi vaaralliset sivustot): sivusto avautuu sellaisenaan, ZERO havaitsee kaiken ja sinä valitset, mitä katkaistaan.",
+  "Vistas": "Nähdyt",
+  "conexiones vistas en esta web": "tällä sivustolla nähdyt yhteydet",
+  "VISTO": "NÄHTY",
+  "Permitir": "Salli",
+  "Cortar": "Katkaise",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Päästä tämän yrityksen yhteydet läpi tässä istunnossa",
+  "Volver a cortar las conexiones de esta empresa": "Katkaise tämän yrityksen yhteydet uudelleen",
+  "Conexión vista (dejada pasar)": "Yhteys nähty (päästetty läpi)",
+  "Conexión permitida por ti": "Sallimasi yhteys",
+  "Permiso de empresa": "Yrityksen lupa",
+  "La web no cargó": "Sivusto ei latautunut",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Taso tarkkaile: ZERO päästää kaiken läpi (paitsi vaaralliset sivustot), havaitsee sen ja näyttää sen sinulle; sinä valitset, mitä katkaistaan.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Tämä hakukone ei päästänyt hakua läpi solusta. ZERO selaa palvelimelta, ja jotkin hakukoneet rajoittavat tällaisia yhteyksiä. Voit valita toisen hakukoneen tai kirjoittaa sivuston osoitteen suoraan.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Hakukone haluaa tarkistaa, että olet ihminen. Tee tarkistus täällä ja jatka; solu muistaa, että läpäisit sen."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} tarjoajaa kohden",
   "opPuerta": "tekoälyportti: suojattu lähetys kohteeseen {1} ({2} {2?korvattu tieto|korvattua tietoa})",
   "huecoReal": "paikan «{1}» ({2} × {3} pikseliä)",
-  "huecoSolo": "paikan «{1}»"
+  "huecoSolo": "paikan «{1}»",
+  "mVistoDe": "ZERO näki (ja päästi läpi, taso tarkkaile) {1}, lähde {2}[ ({3})].",
+  "mVistoHacia": "ZERO näki (ja päästi läpi, taso tarkkaile) {1} kohteeseen {2}.",
+  "mPermitidoDe": "ZERO päästi läpi (sallit sen) {1}, lähde {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO päästi läpi (sallit sen) {1} kohteeseen {2}.",
+  "mPermisoOn": "Sallit yhteydet lähteestä {1} tässä istunnossa.",
+  "mPermisoOff": "Katkaiset yhteydet lähteestä {1} uudelleen tässä istunnossa.",
+  "mFallo": "Sivusto {1} ei latautunut: {2}.",
+  "opPermitida": "sallittu {1}",
+  "opCortarse": "katkaistu uudelleen {1}"
  }
 }

@@ -1381,7 +1381,24 @@
   "no": "tidak",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Yang dibawa permintaan: selain halaman, ukuran slot, dan persetujuan, data tentangmu ikut keluar. Detailnya, di setiap lelang:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Yang dibawa permintaan: alamat halaman, ukuran slot, dan persetujuan; tanpa pengenal pengguna (di sel tidak ada satu pun).",
-  "Otra empresa": "Perusahaan lain"
+  "Otra empresa": "Perusahaan lain",
+  "Observar": "Amati",
+  "observar": "amati",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Tidak memotong apa pun (kecuali situs berbahaya): situs terbuka apa adanya, ZERO mendeteksi semuanya, dan Anda memilih apa yang dipotong.",
+  "Vistas": "Terlihat",
+  "conexiones vistas en esta web": "koneksi terlihat di situs ini",
+  "VISTO": "TERLIHAT",
+  "Permitir": "Izinkan",
+  "Cortar": "Potong",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Loloskan koneksi perusahaan ini dalam sesi ini",
+  "Volver a cortar las conexiones de esta empresa": "Potong lagi koneksi perusahaan ini",
+  "Conexión vista (dejada pasar)": "Koneksi terlihat (diloloskan)",
+  "Conexión permitida por ti": "Koneksi yang Anda izinkan",
+  "Permiso de empresa": "Izin perusahaan",
+  "La web no cargó": "Situs tidak termuat",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Tingkat amati: ZERO meloloskan semuanya (kecuali situs berbahaya), mendeteksi dan menunjukkannya kepada Anda; Anda memilih apa yang dipotong.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Mesin pencari ini tidak meloloskan kueri dari sel. ZERO menjelajah dari server dan sebagian mesin pencari membatasi koneksi seperti itu. Anda bisa memilih mesin pencari lain atau mengetik alamat situs secara langsung.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Mesin pencari ingin memastikan Anda manusia. Selesaikan pemeriksaan di sini dan lanjutkan; sel akan mengingat bahwa Anda lolos."
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} per penawar",
   "opPuerta": "gerbang AI: kirim terlindungi ke {1} ({2} data diganti)",
   "huecoReal": "slot «{1}» ({2} × {3} piksel)",
-  "huecoSolo": "slot «{1}»"
+  "huecoSolo": "slot «{1}»",
+  "mVistoDe": "ZERO melihat (dan meloloskan, tingkat amati) {1}, dari {2}[ ({3})].",
+  "mVistoHacia": "ZERO melihat (dan meloloskan, tingkat amati) {1} ke {2}.",
+  "mPermitidoDe": "ZERO meloloskan (Anda mengizinkannya) {1}, dari {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO meloloskan (Anda mengizinkannya) {1} ke {2}.",
+  "mPermisoOn": "Anda mengizinkan koneksi dari {1} dalam sesi ini.",
+  "mPermisoOff": "Anda memotong lagi koneksi dari {1} dalam sesi ini.",
+  "mFallo": "Situs {1} tidak termuat: {2}.",
+  "opPermitida": "diizinkan {1}",
+  "opCortarse": "dipotong lagi {1}"
  }
 }

@@ -1381,7 +1381,24 @@
   "no": "nu",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Ce purta cererea: pe lângă pagină, dimensiunea spațiului și consimțământ, au ieșit date despre tine. Detaliul, în fiecare licitație:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Ce purta cererea: adresa paginii, dimensiunea spațiului și consimțământul; fără identificatori de utilizator (în celulă nu există niciunul).",
-  "Otra empresa": "Altă companie"
+  "Otra empresa": "Altă companie",
+  "Observar": "Observă",
+  "observar": "observă",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Nu taie nimic (cu excepția site-urilor periculoase): site-ul se deschide așa cum este, ZERO detectează totul și tu alegi ce să tai.",
+  "Vistas": "Văzute",
+  "conexiones vistas en esta web": "conexiuni văzute pe acest site",
+  "VISTO": "VĂZUT",
+  "Permitir": "Permite",
+  "Cortar": "Taie",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Lasă conexiunile acestei companii să treacă în această sesiune",
+  "Volver a cortar las conexiones de esta empresa": "Taie din nou conexiunile acestei companii",
+  "Conexión vista (dejada pasar)": "Conexiune văzută (lăsată să treacă)",
+  "Conexión permitida por ti": "Conexiune permisă de tine",
+  "Permiso de empresa": "Permisiune de companie",
+  "La web no cargó": "Site-ul nu s-a încărcat",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Nivel observă: ZERO lasă totul să treacă (mai puțin site-urile periculoase), detectează și îți arată; tu alegi ce să tai.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Acest motor de căutare nu a lăsat interogarea să treacă din celulă. ZERO navighează de pe un server și unele motoare restricționează astfel de conexiuni. Poți alege alt motor sau poți scrie direct adresa site-ului.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Motorul de căutare vrea să verifice că ești o persoană. Rezolvă verificarea aici și continuă; celula va ține minte că ai trecut-o."
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} per ofertant",
   "opPuerta": "poartă IA: trimitere protejată către {1} ({2} {2?dată înlocuită|date înlocuite})",
   "huecoReal": "spațiul «{1}» ({2} × {3} pixeli)",
-  "huecoSolo": "spațiul «{1}»"
+  "huecoSolo": "spațiul «{1}»",
+  "mVistoDe": "ZERO a văzut (și a lăsat să treacă, nivel observă) {1}, de la {2}[ ({3})].",
+  "mVistoHacia": "ZERO a văzut (și a lăsat să treacă, nivel observă) {1} către {2}.",
+  "mPermitidoDe": "ZERO a lăsat să treacă (ai permis) {1}, de la {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO a lăsat să treacă (ai permis) {1} către {2}.",
+  "mPermisoOn": "Ai permis conexiunile de la {1} în această sesiune.",
+  "mPermisoOff": "Tai din nou conexiunile de la {1} în această sesiune.",
+  "mFallo": "Site-ul {1} nu s-a încărcat: {2}.",
+  "opPermitida": "permisă {1}",
+  "opCortarse": "tăiată din nou {1}"
  }
 }

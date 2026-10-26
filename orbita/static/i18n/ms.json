@@ -1381,7 +1381,24 @@
   "no": "tidak",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Apa yang dibawa permintaan: selain halaman, saiz slot dan persetujuan, data tentang anda turut keluar. Butirannya, dalam setiap lelongan:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Apa yang dibawa permintaan: alamat halaman, saiz slot dan persetujuan; tiada pengecam pengguna (dalam sel tiada satu pun).",
-  "Otra empresa": "Syarikat lain"
+  "Otra empresa": "Syarikat lain",
+  "Observar": "Perhati",
+  "observar": "perhati",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Tidak memotong apa-apa (kecuali laman berbahaya): laman dibuka seadanya, ZERO mengesan semuanya, dan anda memilih apa yang dipotong.",
+  "Vistas": "Dilihat",
+  "conexiones vistas en esta web": "sambungan dilihat di laman ini",
+  "VISTO": "DILIHAT",
+  "Permitir": "Benarkan",
+  "Cortar": "Potong",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Lepaskan sambungan syarikat ini dalam sesi ini",
+  "Volver a cortar las conexiones de esta empresa": "Potong semula sambungan syarikat ini",
+  "Conexión vista (dejada pasar)": "Sambungan dilihat (dilepaskan)",
+  "Conexión permitida por ti": "Sambungan yang anda benarkan",
+  "Permiso de empresa": "Kebenaran syarikat",
+  "La web no cargó": "Laman tidak dimuatkan",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Tahap perhati: ZERO melepaskan semuanya (kecuali laman berbahaya), mengesan dan menunjukkannya kepada anda; anda memilih apa yang dipotong.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Enjin carian ini tidak melepaskan pertanyaan dari sel. ZERO melayari dari pelayan dan sesetengah enjin carian menyekat sambungan seperti itu. Anda boleh memilih enjin carian lain atau menaip alamat laman secara terus.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Enjin carian mahu memastikan anda seorang manusia. Selesaikan semakan di sini dan teruskan; sel akan ingat bahawa anda telah lulus."
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} setiap pembida",
   "opPuerta": "pintu AI: hantaran terlindung kepada {1} ({2} data digantikan)",
   "huecoReal": "slot «{1}» ({2} × {3} piksel)",
-  "huecoSolo": "slot «{1}»"
+  "huecoSolo": "slot «{1}»",
+  "mVistoDe": "ZERO melihat (dan melepaskan, tahap perhati) {1}, daripada {2}[ ({3})].",
+  "mVistoHacia": "ZERO melihat (dan melepaskan, tahap perhati) {1} ke {2}.",
+  "mPermitidoDe": "ZERO melepaskan (anda membenarkannya) {1}, daripada {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO melepaskan (anda membenarkannya) {1} ke {2}.",
+  "mPermisoOn": "Anda membenarkan sambungan daripada {1} dalam sesi ini.",
+  "mPermisoOff": "Anda memotong semula sambungan daripada {1} dalam sesi ini.",
+  "mFallo": "Laman {1} tidak dimuatkan: {2}.",
+  "opPermitida": "dibenarkan {1}",
+  "opCortarse": "dipotong semula {1}"
  }
 }

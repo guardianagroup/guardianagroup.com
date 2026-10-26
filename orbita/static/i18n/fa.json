@@ -1381,7 +1381,24 @@
   "no": "خیر",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "درخواست چه چیزی داشت: علاوه بر صفحه، اندازهٔ جایگاه و رضایت، داده‌هایی دربارهٔ شما خارج شد. جزئیات در هر مزایده:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "درخواست چه چیزی داشت: نشانی صفحه، اندازهٔ جایگاه و رضایت؛ بدون شناسهٔ کاربر (در سلول هیچ‌کدام نیست).",
-  "Otra empresa": "شرکت دیگر"
+  "Otra empresa": "شرکت دیگر",
+  "Observar": "مشاهده",
+  "observar": "مشاهده",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "هیچ‌چیز را قطع نمی‌کند (جز سایت‌های خطرناک): سایت همان‌طور که هست باز می‌شود، ZERO همه‌چیز را تشخیص می‌دهد و شما انتخاب می‌کنید چه چیزی قطع شود.",
+  "Vistas": "دیده‌شده",
+  "conexiones vistas en esta web": "اتصال دیده‌شده در این سایت",
+  "VISTO": "دیده شد",
+  "Permitir": "اجازه",
+  "Cortar": "قطع",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "عبور اتصال‌های این شرکت در این نشست",
+  "Volver a cortar las conexiones de esta empresa": "قطع دوبارهٔ اتصال‌های این شرکت",
+  "Conexión vista (dejada pasar)": "اتصال دیده شد (عبور داده شد)",
+  "Conexión permitida por ti": "اتصالی که شما اجازه دادید",
+  "Permiso de empresa": "اجازهٔ شرکت",
+  "La web no cargó": "سایت بارگذاری نشد",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "سطح مشاهده: ZERO همه‌چیز را عبور می‌دهد (جز سایت‌های خطرناک)، تشخیص می‌دهد و به شما نشان می‌دهد؛ شما انتخاب می‌کنید چه چیزی قطع شود.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "این موتور جست‌وجو پرس‌وجو را از سلول عبور نداد. ZERO از یک سرور مرور می‌کند و برخی موتورها این اتصال‌ها را محدود می‌کنند. می‌توانید موتور دیگری انتخاب کنید یا نشانی سایت را مستقیم بنویسید.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "موتور جست‌وجو می‌خواهد مطمئن شود که شما یک انسان هستید. بررسی را همین‌جا انجام دهید و ادامه دهید؛ سلول به یاد خواهد داشت که آن را گذرانده‌اید."
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} به ازای هر پیشنهاددهنده",
   "opPuerta": "دروازهٔ هوش مصنوعی: ارسال محافظت‌شده به {1} ({2} دادهٔ جایگزین‌شده)",
   "huecoReal": "جایگاه «{1}» ({2} × {3} پیکسل)",
-  "huecoSolo": "جایگاه «{1}»"
+  "huecoSolo": "جایگاه «{1}»",
+  "mVistoDe": "ZERO {1} را از {2}[ ({3})] دید (و عبور داد، سطح مشاهده).",
+  "mVistoHacia": "ZERO {1} را به {2} دید (و عبور داد، سطح مشاهده).",
+  "mPermitidoDe": "ZERO {1} را از {2}[ ({3})] عبور داد (شما اجازه دادید).",
+  "mPermitidoHacia": "ZERO {1} را به {2} عبور داد (شما اجازه دادید).",
+  "mPermisoOn": "در این نشست به اتصال‌های {1} اجازه دادید.",
+  "mPermisoOff": "در این نشست اتصال‌های {1} را دوباره قطع می‌کنید.",
+  "mFallo": "سایت {1} بارگذاری نشد: {2}.",
+  "opPermitida": "اجازه داده شد {1}",
+  "opCortarse": "دوباره قطع شد {1}"
  }
 }
