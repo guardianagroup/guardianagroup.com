@@ -234,6 +234,19 @@ if command -v ufw >/dev/null && ufw status | grep -q '^Status: active'; then
   ufw allow 80/tcp >/dev/null; ufw allow 443/tcp >/dev/null
 fi
 
+# 26 Oct 2026: la celda salía a internet por la IPv6 del servidor (Google la trataba peor que la IPv4 fija de Hetzner, y el
+# dominio del motor solo tiene registro A). Se apaga IPv6 en las interfaces de red (no en lo: ::1 sigue) para que todo salga
+# por la IPv4 fija. Para conservar IPv6: ZERO_IPV6=1 bash instalar.sh <dominio>.
+if [ -z "${ZERO_IPV6:-}" ]; then
+  paso "Salida a internet solo por la IPv4 fija"
+  SYSF=/etc/sysctl.d/90-zero-ipv4.conf
+  { echo "# ZERO: salir solo por IPv4 (ver zero-motor/instalar.sh)"; echo "net.ipv6.conf.default.disable_ipv6 = 1"
+    for i in /sys/class/net/*; do n=$(basename "$i"); [ "$n" = lo ] && continue; echo "net.ipv6.conf.$n.disable_ipv6 = 1"; done; } > "$SYSF"
+  sysctl -q -p "$SYSF" || true
+else
+  rm -f /etc/sysctl.d/90-zero-ipv4.conf
+fi
+
 paso "Arrancando el motor"
 systemctl daemon-reload
 systemctl enable -q zero-listas.timer; systemctl start zero-listas.timer
