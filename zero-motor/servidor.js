@@ -66,9 +66,10 @@ function paginaBloqueo(titulo, texto, detalle) {
 class Sesion {
   constructor(ws) {
     this.ws = ws; this.id = crypto.randomBytes(6).toString('hex'); this.creada = Date.now();
-    this.ctx = null; this.page = null; this.cdp = null; this.w = 1100; this.h = 760; this.mirando = true;
-    this.sucesos = []; this.n = { cortes: 0, limpiezas: 0, huella: 0, permisos: 0, cookies: 0, subastas: 0, bloqueos: 0 };
-    this.empresas = new Map(); this.paises = new Map(); this.porque = {}; this.cookiesVistas = new Set(); this.webActual = '';
+    this.ctx = null; this.w = 1100; this.h = 760; this.mirando = true;
+    // pestañas: cada una con su página, su sesión CDP y sus cuentas «en esta web»; this.act es la que se ve
+    this.pestanas = []; this.act = null; this.nPest = 0; this.esperadas = 0;
+    this.sucesos = [];
     this.destruida = false; this.operaciones = [];
     this.senuelos = new Senuelos('http://127.0.0.1:' + PUERTO); SESIONES.set(this.senuelos.token, this);
     this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.ultimos = [];
@@ -84,6 +85,20 @@ class Sesion {
 
   env(o) { this.ws.json(o); }
 
+  // las cuentas «en esta web» viven en la pestaña activa (las de otras pestañas, en la suya)
+  static statsNuevo() { return { n: { cortes: 0, limpiezas: 0, huella: 0, permisos: 0, cookies: 0, subastas: 0, bloqueos: 0 }, empresas: new Map(), paises: new Map(), porque: {}, cookiesVistas: new Set(), webActual: '' }; }
+  get page() { return this.act ? this.act.page : null; }
+  get cdp() { return this.act ? this.act.cdp : null; }
+  get n() { return (this.act || { stats: Sesion.statsNuevo() }).stats.n; } set n(v) { if (this.act) this.act.stats.n = v; }
+  get empresas() { return this.act ? this.act.stats.empresas : new Map(); } set empresas(v) { if (this.act) this.act.stats.empresas = v; }
+  get paises() { return this.act ? this.act.stats.paises : new Map(); } set paises(v) { if (this.act) this.act.stats.paises = v; }
+  get porque() { return this.act ? this.act.stats.porque : {}; } set porque(v) { if (this.act) this.act.stats.porque = v; }
+  get cookiesVistas() { return this.act ? this.act.stats.cookiesVistas : new Set(); } set cookiesVistas(v) { if (this.act) this.act.stats.cookiesVistas = v; }
+  get webActual() { return this.act ? this.act.stats.webActual : ''; } set webActual(v) { if (this.act) this.act.stats.webActual = v; }
+  pestanaDe(page) { return this.pestanas.find((p) => p.page === page) || null; }
+  pestanaDeReq(req) { try { const f = req.frame(); return f ? this.pestanaDe(f.page()) : null; } catch (_) { return null; } }
+  listaPestanas() { return { t: 'pestanas', activa: this.act ? this.act.id : null, lista: this.pestanas.map((p) => ({ id: p.id, titulo: p.titulo || '', url: p.url || '', host: hostDe(p.url || '') })) }; }
+
   async abre(w, h) {
     this.w = Math.max(320, Math.min(1920, w | 0 || 1100)); this.h = Math.max(240, Math.min(1200, h | 0 || 760));
     this.ctx = await navegador.newContext({
@@ -96,27 +111,68 @@ class Sesion {
     await this.ctx.addInitScript(this.senuelos.initScript());
     this.op('señuelos plantados: texto escondido, cookie propia, almacén local, enlace oculto');
     await this.ctx.route('**/*', (route, req) => this.filtra(route, req));
-    this.ctx.on('page', (p) => { if (this.page && p !== this.page) { this.suceso({ clase: 'popup', certeza: 'comprobado', texto: 'La web intentó abrir una ventana nueva. ZERO la cerró.', dominio: hostDe(p.url()) }); p.close().catch(() => {}); } });
-    this.page = await this.ctx.newPage();
-    this.cdp = await this.ctx.newCDPSession(this.page);
-    try { await this.cdp.send('Network.setCookieControls', { enableThirdPartyCookieRestriction: true, disableThirdPartyCookieMetadata: true, disableThirdPartyCookieHeuristics: true }); this.cookiesBloqueadas = true; } catch (_) { this.cookiesBloqueadas = false; }
-    this.cdp.on('Page.screencastFrame', (f) => {
-      if (this.ws.abierto) this.ws.send(Buffer.from(f.data, 'base64'));
-      this.cdp.send('Page.screencastFrameAck', { sessionId: f.sessionId }).catch(() => {});
-    });
-    await this.arrancaPantalla();
-    this.page.on('response', (r) => { this.respuestaNav(r); this.respuesta(r).catch(() => {}); });
-    this.page.on('request', (r) => this.peticion(r));
-    this.page.on('websocket', (w) => { const host = hostDe(w.url()); w.on('framesent', (f) => { try { const h = this.senuelos.busca(typeof f.payload === 'string' ? f.payload : f.payload.toString('latin1')); h.forEach((tipo) => this.senuelo({ tipo, donde: 'trama de WebSocket' }, host, w.url(), baseDominio(host) !== baseDominio(this.webActual), false)); } catch (_) {} }); });
-    this.page.on('download', (d) => this.descarga(d));
-    this.page.on('dialog', (d) => { this.suceso({ clase: 'dialogo', certeza: 'comprobado', texto: 'La web intentó mostrar un aviso emergente. ZERO lo cerró.', dominio: hostDe(this.page.url()) }); d.dismiss().catch(() => {}); });
-    this.page.on('framenavigated', (f) => { if (f === this.page.mainFrame()) this.nav(); });
-    this.page.on('load', () => this.nav(true));
+    this.ctx.on('page', (p) => { if (this.esperadas > 0) { this.esperadas--; return; } this.suceso({ clase: 'popup', certeza: 'comprobado', texto: 'La web intentó abrir una ventana nueva. ZERO la cerró.', dominio: hostDe(p.url()) }); p.close().catch(() => {}); });
+    await this.nuevaPestana();
     this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h });
   }
 
+  async nuevaPestana(url) {
+    if (this.destruida || !this.ctx) return null;
+    if (this.pestanas.length >= 8) { this.op('tope de pestañas (8)'); this.env(this.listaPestanas()); return null; }
+    this.esperadas++;
+    const page = await this.ctx.newPage();
+    const cdp = await this.ctx.newCDPSession(page);
+    const p = { id: ++this.nPest, page, cdp, url: '', titulo: '', stats: Sesion.statsNuevo(), pantalla: false };
+    this.pestanas.push(p);
+    try { await cdp.send('Network.setCookieControls', { enableThirdPartyCookieRestriction: true, disableThirdPartyCookieMetadata: true, disableThirdPartyCookieHeuristics: true }); this.cookiesBloqueadas = true; } catch (_) { this.cookiesBloqueadas = false; }
+    if (this.nivel === 'maximo' || this.sellada) { try { await cdp.send('Emulation.setScriptExecutionDisabled', { value: true }); } catch (_) {} }
+    cdp.on('Page.screencastFrame', (f) => {
+      if (this.act === p && this.ws.abierto) this.ws.send(Buffer.from(f.data, 'base64'));
+      cdp.send('Page.screencastFrameAck', { sessionId: f.sessionId }).catch(() => {});
+    });
+    this.enganchaPagina(p);
+    this.op('pestaña ' + p.id + ' abierta');
+    await this.activaPestana(p);
+    if (url) await this.ve(url);
+    return p;
+  }
+
+  enganchaPagina(p) {
+    const page = p.page;
+    page.on('response', (r) => { this.respuestaNav(r, p); this.respuesta(r, p).catch(() => {}); });
+    page.on('request', (r) => this.peticion(r));
+    page.on('websocket', (w) => { const host = hostDe(w.url()); w.on('framesent', (f) => { try { const h = this.senuelos.busca(typeof f.payload === 'string' ? f.payload : f.payload.toString('latin1')); h.forEach((tipo) => this.senuelo({ tipo, donde: 'trama de WebSocket' }, host, w.url(), baseDominio(host) !== baseDominio(p.stats.webActual), false)); } catch (_) {} }); });
+    page.on('download', (d) => this.descarga(d));
+    page.on('dialog', (d) => { this.suceso({ clase: 'dialogo', certeza: 'comprobado', texto: 'La web intentó mostrar un aviso emergente. ZERO lo cerró.', dominio: hostDe(page.url()) }); d.dismiss().catch(() => {}); });
+    page.on('framenavigated', (f) => { if (f === page.mainFrame()) { p.url = page.url(); if (this.act === p) this.nav(); else this.env(this.listaPestanas()); } });
+    page.on('load', () => { page.title().then((tt) => { p.titulo = tt; if (this.act === p) this.nav(true); this.env(this.listaPestanas()); }).catch(() => {}); });
+    page.on('close', () => { const i = this.pestanas.indexOf(p); if (i >= 0) this.pestanas.splice(i, 1); if (this.act === p && !this.destruida) { this.act = null; const q = this.pestanas[Math.max(0, i - 1)]; if (q) this.activaPestana(q).catch(() => {}); else this.nuevaPestana().catch(() => {}); } else this.env(this.listaPestanas()); });
+  }
+
+  async activaPestana(p) {
+    if (!p || this.destruida) return;
+    const antes = this.act;
+    if (antes && antes !== p && antes.pantalla) { antes.pantalla = false; await antes.cdp.send('Page.stopScreencast').catch(() => {}); }
+    this.act = p;
+    try { await p.page.setViewportSize({ width: this.w, height: this.h }); } catch (_) {}
+    try { await p.page.bringToFront(); } catch (_) {}
+    if (this.mirando) await this.arrancaPantalla();
+    this.env(this.listaPestanas());
+    this.env({ t: 'resumen', cortes: this.n.cortes, empresas: this.empresas.size, paises: this.paises.size, porque: this.porque, n: this.n, web: this.webActual, alerta: this.alerta });
+    this.env({ t: 'cortes', lista: [...this.empresas.values()] });
+    this.nav(true);
+  }
+
+  async cierraPestana(id) {
+    const p = this.pestanas.find((x) => x.id === id);
+    if (!p) return;
+    this.op('pestaña ' + id + ' cerrada');
+    await p.page.close().catch(() => {});
+  }
+
   async arrancaPantalla() {
-    try { await this.cdp.send('Page.startScreencast', { format: 'jpeg', quality: 72, maxWidth: this.w, maxHeight: this.h, everyNthFrame: 1 }); this.pantalla = true; } catch (_) {}
+    if (!this.act) return;
+    try { await this.cdp.send('Page.startScreencast', { format: 'jpeg', quality: 72, maxWidth: this.w, maxHeight: this.h, everyNthFrame: 1 }); this.act.pantalla = true; this.pantalla = true; } catch (_) {}
   }
 
   op(que) { this.operaciones.push([ahora(), que]); }
@@ -125,8 +181,9 @@ class Sesion {
     let f = null; try { f = req.frame(); } catch (_) {}
     if (req.isNavigationRequest()) {
       if (!f) return 'popup';
-      if (f === this.page.mainFrame()) return 'document';
-      return f.page() === this.page ? 'subdocument' : 'popup';
+      let pg = null; try { pg = f.page(); } catch (_) {}
+      if (!pg || !this.pestanaDe(pg)) return 'popup';
+      return f === pg.mainFrame() ? 'document' : 'subdocument';
     }
     return TIPO_ABP[req.resourceType()] || 'other';
   }
@@ -142,26 +199,32 @@ class Sesion {
     if (!/^https?:/.test(url)) return route.continue().catch(() => {});
     const host = hostDe(url);
     const tipo = this.tipoDe(req);
-    if (tipo === 'popup') return route.abort('blockedbyclient').catch(() => {}); // las ventanas nuevas no se abren en la celda
+    if (tipo === 'popup') { if (process.env.ZERO_DEBUG) console.log('popup abortado:', url.slice(0, 80)); return route.abort('blockedbyclient').catch(() => {}); } // las ventanas nuevas no se abren en la celda
     const principal = tipo === 'document';
-    const origen = principal ? host : hostDe(this.page.url()) || host;
+    const pest = this.pestanaDeReq(req) || this.act; const st = pest ? pest.stats : Sesion.statsNuevo();
+    const origen = principal ? host : hostDe(pest ? pest.page.url() : '') || host;
     const tercero = baseDominio(host) !== baseDominio(origen);
     let postData = null; try { postData = req.postData(); } catch (_) {}
     const fugas = this.senuelos.inspecciona({ url, postData, headers: req.headers(), tercero });
     if (fugas.length) { const dcheck = cortes.decide({ url, tipo, origen, host, tercero }); fugas.forEach((f) => this.senuelo(f, host, url, tercero, !!dcheck.bloquear || (this.nivel && this.nivel !== 'normal' && tercero && !esLocal(host)))); }
     if (principal) {
-      this.webActual = host;
+      if (st.webActual && baseDominio(st.webActual) !== baseDominio(host) && pest) {
+        // la pestaña cambia de web por un enlace: cuentas nuevas «en esta web» (las de la sesión se conservan en EN VIVO)
+        pest.stats = Sesion.statsNuevo(); st = pest.stats;
+        if (this.act === pest) { this.env({ t: 'resumen', cortes: 0, empresas: 0, paises: 0, porque: {}, n: st.n, web: host, alerta: this.alerta }); this.env({ t: 'cortes', lista: [] }); }
+      }
+      st.webActual = host;
       // 1) web peligrosa conocida (listas de malware/phishing) → se detiene dentro de la celda
       const d = cortes.decide({ url, tipo: 'document', origen, host, tercero: false });
       if (d.bloquear && d.proposito === 'malware') {
-        this.n.bloqueos++;
+        st.n.bloqueos++;
         this.suceso({ clase: 'bloqueo', certeza: 'comprobado', dominio: host, texto: 'Esta dirección figura en una lista pública de webs peligrosas. ZERO no la ha abierto.', detalle: { regla: d.regla, lista: d.lista } });
         return route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: paginaBloqueo('Esta web está en una lista de webs peligrosas', 'ZERO ha detenido la apertura antes de cargar nada. La dirección coincide con una regla de una lista pública de malware o fraude; la lista puede equivocarse, pero no merece la pena arriesgarse.', host + ' · regla ' + d.regla + ' · ' + (cortes.listas[d.lista] || {}).nombre) }).catch(() => {});
       }
       // 2) limpiar la dirección de identificadores de seguimiento
       const lim = cortes.limpiaUrl(url, origen);
       if (lim.quitados.length) {
-        this.n.limpiezas++;
+        st.n.limpiezas++;
         this.suceso({ clase: 'limpieza', certeza: 'comprobado', dominio: host, texto: 'ZERO ha quitado de este enlace ' + (lim.quitados.length === 1 ? 'un identificador de seguimiento' : lim.quitados.length + ' identificadores de seguimiento') + ' (' + lim.quitados.slice(0, 4).join(', ') + ').', detalle: { quitados: lim.quitados } });
         return route.continue({ url: lim.url }).catch(() => route.continue().catch(() => {}));
       }
@@ -176,11 +239,11 @@ class Sesion {
       return route.continue().catch(() => {});
     }
     if (d.bloquear) {
-      this.corte(host, tipo, origen, tercero, d);
+      this.corte(host, tipo, origen, tercero, d, st);
       return route.abort('blockedbyclient').catch(() => {});
     }
     if (((this.nivel && this.nivel !== 'normal') || this.alerta >= 2) && tercero && !esLocal(host)) {
-      this.corte(host, tipo, origen, tercero, { regla: this.alerta >= 2 && !(this.nivel && this.nivel !== 'normal') ? 'alerta: toda conexión con otra empresa' : 'nivel ' + this.nivel + ': toda conexión con otra empresa', lista: null, proposito: 'otra-empresa' });
+      this.corte(host, tipo, origen, tercero, { regla: this.alerta >= 2 && !(this.nivel && this.nivel !== 'normal') ? 'alerta: toda conexión con otra empresa' : 'nivel ' + this.nivel + ': toda conexión con otra empresa', lista: null, proposito: 'otra-empresa' }, st);
       return route.abort('blockedbyclient').catch(() => {});
     }
     const headers = { ...req.headers() };
@@ -199,15 +262,16 @@ class Sesion {
     return route.fulfill({ status: 200, contentType: 'application/json', body: '{}' }).catch(() => {});
   }
 
-  corte(host, tipo, origen, tercero, d) {
-    this.n.cortes++;
+  corte(host, tipo, origen, tercero, d, st) {
+    st = st || this.act.stats;
+    st.n.cortes++;
     const e = empresas.atribuye(host);
     const prop = PROPOSITO[d.proposito] || 'Rastreador';
-    this.porque[prop] = (this.porque[prop] || 0) + 1;
+    st.porque[prop] = (st.porque[prop] || 0) + 1;
     const clave = e.empresa || host;
-    const reg = this.empresas.get(clave) || { empresa: e.empresa, dominio: host, pais: e.pais, paisNombre: e.paisNombre, proposito: prop, n: 0, primera: ahora(), fuente: e.fuente, certeza: e.certeza };
-    reg.n++; reg.ultima = ahora(); this.empresas.set(clave, reg);
-    if (e.pais) this.paises.set(e.pais, (this.paises.get(e.pais) || 0) + 1);
+    const reg = st.empresas.get(clave) || { empresa: e.empresa, dominio: host, pais: e.pais, paisNombre: e.paisNombre, proposito: prop, n: 0, primera: ahora(), fuente: e.fuente, certeza: e.certeza };
+    reg.n++; reg.ultima = ahora(); st.empresas.set(clave, reg);
+    if (e.pais) st.paises.set(e.pais, (st.paises.get(e.pais) || 0) + 1);
     const quien = e.empresa ? e.empresa + (e.paisNombre ? ' (' + e.paisNombre + ')' : '') : host;
     const que = { Publicidad: 'una conexión publicitaria', Rastreador: 'una conexión con un rastreador conocido', 'Web peligrosa': 'una conexión con una web peligrosa conocida', 'Aviso de cookies': 'el aviso de cookies', 'Red local': 'una conexión hacia la red local', 'Otra empresa': 'una conexión con otra empresa' }[prop] || 'una conexión';
     this.suceso({ clase: 'corte', certeza: 'comprobado', dominio: host, empresa: e.empresa, pais: e.pais, paisNombre: e.paisNombre, proposito: prop, tipo, tercero,
@@ -217,18 +281,19 @@ class Sesion {
 
   sucesoPagina(src, json) {
     let s; try { s = JSON.parse(json); } catch (_) { return; }
-    const dominio = hostDe(s.origen || '') || this.webActual;
+    let st = this.act ? this.act.stats : Sesion.statsNuevo(); try { const pp = this.pestanaDe(src.page); if (pp) st = pp.stats; } catch (_) {}
+    const dominio = hostDe(s.origen || '') || st.webActual;
     if (s.clase === 'huella') {
-      this.n.huella++;
+      st.n.huella++;
       const via = { canvas: 'el lienzo gráfico (canvas)', webgl: 'la tarjeta gráfica (WebGL)', audio: 'el sistema de audio', fuentes: 'los tipos de letra instalados', plugins: 'los complementos del navegador' }[s.via] || s.via;
-      this.porque['Huella digital'] = (this.porque['Huella digital'] || 0) + 1;
+      st.porque['Huella digital'] = (st.porque['Huella digital'] || 0) + 1;
       return this.suceso({ clase: 'huella', certeza: 'probable', dominio, texto: 'Un programa de ' + dominio + ' ha consultado ' + via + ', un dato que sirve para reconocer un equipo. En ZERO ve la celda remota, no tu ordenador.', detalle: { via: s.via } });
     }
-    if (s.clase === 'permiso') { this.n.permisos++; return this.suceso({ clase: 'permiso', certeza: 'comprobado', dominio, texto: 'La web ha pedido acceso a ' + s.que + '. ZERO lo ha denegado: en la celda remota no hay nada tuyo.', detalle: { que: s.que } }); }
-    if (s.clase === 'webrtc') { this.n.permisos++; return this.suceso({ clase: 'webrtc', certeza: 'comprobado', dominio, texto: 'La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real. ZERO la mantiene desactivada.' }); }
+    if (s.clase === 'permiso') { st.n.permisos++; return this.suceso({ clase: 'permiso', certeza: 'comprobado', dominio, texto: 'La web ha pedido acceso a ' + s.que + '. ZERO lo ha denegado: en la celda remota no hay nada tuyo.', detalle: { que: s.que } }); }
+    if (s.clase === 'webrtc') { st.n.permisos++; return this.suceso({ clase: 'webrtc', certeza: 'comprobado', dominio, texto: 'La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real. ZERO la mantiene desactivada.' }); }
     if (s.clase === 'formulario') return this.suceso({ clase: 'formulario', certeza: 'comprobado', dominio, texto: s.detenido ? 'Este formulario enviaría tus datos sin cifrar. ZERO ha detenido el envío.' : 'Atención: este formulario enviaría lo que escribas sin cifrar.', detalle: { accion: s.accion, detenido: s.detenido } });
     if (s.clase === 'subasta') {
-      this.n.subastas++;
+      st.n.subastas++;
       if (s.fase === 'fin') {
         const pujas = (s.pujas || []).map((p) => ({ ...p, ...empresaDe(p.pujador) }));
         const n = new Set([...(s.pedidos || []), ...pujas.map((p) => p.pujador)]).size;
@@ -239,15 +304,16 @@ class Sesion {
     }
   }
 
-  async respuesta(r) {
+  async respuesta(r, p) {
+    const st = (p || this.act || { stats: Sesion.statsNuevo() }).stats;
     try {
-      const req = r.request(); const host = hostDe(r.url()); const origen = hostDe(this.page.url());
+      const req = r.request(); const host = hostDe(r.url()); const origen = hostDe((p || this.act).page.url());
       if (!origen || baseDominio(host) === baseDominio(origen)) return;
       const sc = (await r.allHeaders())['set-cookie'];
       if (!sc) return;
       const clave = baseDominio(host);
-      if (this.cookiesVistas.has(clave)) return;
-      this.cookiesVistas.add(clave); this.n.cookies++;
+      if (st.cookiesVistas.has(clave)) return;
+      st.cookiesVistas.add(clave); st.n.cookies++;
       const e = empresas.atribuye(host);
       this.suceso({ clase: 'cookie', certeza: this.cookiesBloqueadas ? 'comprobado' : 'probable', dominio: host, empresa: e.empresa, pais: e.pais, paisNombre: e.paisNombre,
         texto: (e.empresa ? e.empresa : host) + ' intentó dejar una cookie de otra empresa para reconocerte en más webs. ' + (this.cookiesBloqueadas ? 'ZERO la ha rechazado.' : 'ZERO la borra al cerrar la sesión.'), detalle: { tipo: req.resourceType() } });
@@ -256,10 +322,10 @@ class Sesion {
 
   peticion(req) { /* las cadenas de redirección se miran al llegar la respuesta final (respuestaNav) */ }
 
-  respuestaNav(r) {
+  respuestaNav(r, p) {
     try {
       const req = r.request();
-      if (!req.isNavigationRequest() || req.frame() !== this.page.mainFrame()) return;
+      if (!req.isNavigationRequest() || req.frame() !== (p || this.act).page.mainFrame()) return;
       const st = r.status(); if (st >= 300 && st < 400) return;
       const cadena = []; let q = req.redirectedFrom();
       while (q) { cadena.unshift(hostDe(q.url())); q = q.redirectedFrom(); }
@@ -319,12 +385,12 @@ class Sesion {
     if (nivel >= 3 && !this.sellada) {
       this.sellada = true;
       try { await this.ctx.setOffline(true); } catch (_) {}
-      try { await this.cdp.send('Emulation.setScriptExecutionDisabled', { value: true }); } catch (_) {}
+      for (const p of this.pestanas) { try { await p.cdp.send('Emulation.setScriptExecutionDisabled', { value: true }); } catch (_) {} }
     }
     if (nivel < 3 && this.sellada) {
       this.sellada = false;
       try { await this.ctx.setOffline(false); } catch (_) {}
-      try { await this.cdp.send('Emulation.setScriptExecutionDisabled', { value: this.nivel === 'maximo' }); } catch (_) {}
+      for (const p of this.pestanas) { try { await p.cdp.send('Emulation.setScriptExecutionDisabled', { value: this.nivel === 'maximo' }); } catch (_) {} }
     }
     const TEXTO = {
       0: 'La celda vuelve a la calma.',
@@ -338,13 +404,14 @@ class Sesion {
 
   nav(cargada) {
     try {
-      const u = this.page.url();
+      const u = this.page.url(); if (this.act) this.act.url = u;
       this.env({ t: 'nav', url: u, host: hostDe(u), segura: u.startsWith('https:'), titulo: cargada ? undefined : undefined, cargada: !!cargada });
       if (cargada) this.page.title().then((tt) => this.env({ t: 'titulo', titulo: tt })).catch(() => {});
     } catch (_) {}
   }
 
   async ve(url) {
+    if (process.env.ZERO_DEBUG) console.log('ve():', String(url).slice(0, 80), 'sellada', this.sellada, 'act', this.act && this.act.id);
     url = String(url || '').trim().slice(0, 4096);
     if (!/^[a-z]+:\/\//i.test(url)) url = 'https://' + url;
     if (!/^https?:\/\//i.test(url)) { this.op('dirección rechazada: solo http y https'); return; } // nada de file://, chrome://, javascript:…
@@ -357,6 +424,7 @@ class Sesion {
       await this.page.goto(url, { waitUntil: 'commit', timeout: 30000 });
     } catch (e) {
       const m = String(e.message || e);
+      if (process.env.ZERO_DEBUG) console.log('goto falló:', url.slice(0, 80), m.split('\n')[0]);
       const cert = /ERR_CERT|SSL|certificate/i.test(m);
       const motivo = /ERR_CERT_DATE_INVALID/.test(m) ? 'certificado caducado o con fecha no válida' : /ERR_CERT_COMMON_NAME_INVALID/.test(m) ? 'el certificado no coincide con el nombre de la web' : /ERR_CERT_AUTHORITY_INVALID/.test(m) ? 'el certificado no está firmado por una autoridad reconocida' : cert ? 'no se pudo verificar el certificado' : /ERR_NAME_NOT_RESOLVED/.test(m) ? 'la dirección no existe' : /ERR_CONNECTION|ERR_TIMED_OUT|ERR_INTERNET|ERR_TUNNEL|ERR_PROXY/.test(m) ? 'no se pudo conectar' : 'no se pudo abrir';
       if (cert) this.suceso({ clase: 'certificado', certeza: 'comprobado', dominio: hostDe(url), texto: 'No se ha podido comprobar la identidad cifrada de ' + hostDe(url) + ' (' + motivo + '). ZERO no ha abierto la conexión.', detalle: { error: m.split('\n')[0] } });
@@ -384,7 +452,7 @@ class Sesion {
       if (o.t === 'recargar') return this.page.reload({ waitUntil: 'commit' }).catch(() => {});
       if (o.t === 'tam') {
         this.w = Math.max(320, Math.min(1920, o.w | 0)); this.h = Math.max(240, Math.min(1200, o.h | 0));
-        await this.page.setViewportSize({ width: this.w, height: this.h });
+        for (const p of this.pestanas) await p.page.setViewportSize({ width: this.w, height: this.h }).catch(() => {});
         await this.cdp.send('Page.stopScreencast').catch(() => {});
         return await this.arrancaPantalla();
       }
@@ -397,6 +465,13 @@ class Sesion {
       }
       if (o.t === 'modo') { if ('observatorio' in o) { this.observatorio = !!o.observatorio; this.op('modo observatorio ' + (this.observatorio ? 'activado' : 'desactivado')); } if (o.nivel) await this.ponNivel(o.nivel); return; }
       if (o.t === 'destruir') return await this.destruye('a petición de la persona');
+      if (o.t === 'pestana') {
+        if (this.sellada) return;
+        if (o.accion === 'nueva') return await this.nuevaPestana(o.url ? String(o.url).slice(0, 4096) : '');
+        if (o.accion === 'cambiar') { const p = this.pestanas.find((x) => x.id === +o.id); if (p) await this.activaPestana(p); return; }
+        if (o.accion === 'cerrar') return await this.cierraPestana(+o.id);
+        return;
+      }
       if (o.t === 'ia') {
         // PUERTA IA, envío protegido: sustituir, mandar por la API oficial, restaurar; nunca por la web del proveedor
         const texto = String(o.texto || '').slice(0, 8000);
@@ -408,14 +483,14 @@ class Sesion {
         return this.env({ t: 'ia', id: o.id || null, enviado: r.enviado, respuesta: r.respuesta, error: r.error, simulacro: r.simulacro, proveedor: r.proveedor, modelo: r.modelo, sustituidos: r.sustituidos, ms: r.ms, ref: r.ref });
       }
       if (o.t === 'alerta') { if (o.accion === 'sellar') return await this.ponAlerta(3, 'a petición de la persona'); if (o.accion === 'reanudar') { this.puntos = 0; this.motivos = []; return await this.ponAlerta(0, 'reanudada por la persona'); } return; }
-    } catch (e) { /* una orden que falla no tumba la sesión */ }
+    } catch (e) { if (process.env.ZERO_DEBUG) console.log('mensaje', o && o.t, 'error:', e && e.message); /* una orden que falla no tumba la sesión */ }
   }
 
   async ponNivel(n) {
     if (!['normal', 'estricto', 'maximo'].includes(n)) return;
     const antes = this.nivel || 'normal'; this.nivel = n; this.op('nivel de protección: ' + n);
     const sinJs = n === 'maximo';
-    if (sinJs !== (antes === 'maximo')) { try { await this.cdp.send('Emulation.setScriptExecutionDisabled', { value: sinJs }); } catch (_) {} if (this.page.url() && this.page.url() !== 'about:blank') this.page.reload({ waitUntil: 'commit' }).catch(() => {}); }
+    if (sinJs !== (antes === 'maximo')) { for (const p of this.pestanas) { try { await p.cdp.send('Emulation.setScriptExecutionDisabled', { value: sinJs }); } catch (_) {} } if (this.page.url() && this.page.url() !== 'about:blank') this.page.reload({ waitUntil: 'commit' }).catch(() => {}); }
     this.suceso({ clase: 'nivel', certeza: 'comprobado', dominio: this.webActual, texto: n === 'normal' ? 'Nivel normal: ZERO corta la publicidad y el rastreo de las listas públicas.' : n === 'estricto' ? 'Nivel estricto: además, ZERO corta toda conexión con otras empresas; solo pasa lo propio de la web.' : 'Nivel máximo: además, la web corre sin programas (JavaScript).' });
   }
 
@@ -426,7 +501,7 @@ class Sesion {
     this.senuelos.apunta({ clave, tipo: f.tipo, donde: f.donde, host, url: String(url).slice(0, 300), tercero, cortada, hora: ahora() });
     const e = empresas.atribuye(host);
     const que = Senuelos.nombre(f.tipo);
-    const texto = f.tipo === 'enlace'
+    const texto = f.tipo === 'visita'
       ? 'Alguien ha visitado el enlace oculto que ZERO puso como señuelo en la página (desde ' + host + '; ' + f.donde + '). Solo un programa que lea la página entera y siga sus enlaces llega a él: un indexador, un previsualizador o un rastreador.'
       : tercero
       ? 'Un dato que solo existe en tu celda (' + que + ', puesto por ZERO como señuelo) ' + (cortada ? 'iba a salir' : 'ha salido') + ' hacia ' + (e.empresa ? e.empresa + ' (' + host + ')' : host) + ' en ' + f.donde + '. Algo en esta web lo leyó y lo envió' + (cortada ? '; ZERO cortó esa conexión.' : '.')
@@ -466,7 +541,7 @@ async function main() {
     const ms = req.url.match(/^\/s\/([0-9a-f]{12})(?:[/?#].*)?$/);
     if (ms) {
       const ses = SESIONES.get(ms[1]);
-      if (ses && !ses.destruida) ses.senuelo({ tipo: 'enlace', donde: 'visita al enlace oculto (' + (req.headers['user-agent'] || 'sin agente').slice(0, 80) + ')' }, req.socket.remoteAddress || '?', req.url, true, false);
+      if (ses && !ses.destruida) ses.senuelo({ tipo: 'visita', donde: 'visita al enlace oculto (' + (req.headers['user-agent'] || 'sin agente').slice(0, 80) + ')' }, req.socket.remoteAddress || '?', req.url, true, false);
       res.writeHead(204); return res.end();
     }
     if (req.url === '/salud') { res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ ok: true, version: VERSION, listas: nListas, mock: MOCK, celdas: VIVAS.size, tope: MAX_SESIONES })); }

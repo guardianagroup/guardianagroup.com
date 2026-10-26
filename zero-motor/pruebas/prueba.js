@@ -11,7 +11,7 @@ const OUT = process.argv[4] || path.join(__dirname, 'salida');
 fs.mkdirSync(OUT, { recursive: true });
 
 const espera = (ms) => new Promise((r) => setTimeout(r, ms));
-const ws = new WebSocket(WSURL);
+const ws = new WebSocket(WSURL, { headers: { origin: 'http://127.0.0.1:8791' } }); // el motor solo acepta orígenes de GUARDIANA (o locales en pruebas)
 ws.binaryType = 'arraybuffer';
 const sucesos = []; let resumen = null, cuadros = 0, ultimo = null, acta = null, lista = null;
 const env = (o) => ws.send(JSON.stringify(o));

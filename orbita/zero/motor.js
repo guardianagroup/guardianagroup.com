@@ -20,7 +20,7 @@
 
   let ws = null, abierto = false, pendiente = null, ultimoCuadro = 0, cuadros = 0, moviendo = 0;
   const env = (o) => { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); };
-  const tam = () => ({ w: Math.round(web.offsetWidth) || 1064, h: Math.round(web.offsetHeight) || 800 });
+  const tam = () => ({ w: Math.round(cv.offsetWidth || web.offsetWidth) || 1064, h: Math.round(cv.offsetHeight || web.offsetHeight) || 800 });
 
   function conecta() {
     if (ws && (ws.readyState === 0 || ws.readyState === 1)) return;
@@ -56,6 +56,8 @@
     if (m.t === 'nav') { M.host = m.host; M.urlActual = m.url; if (window.zeroNav) window.zeroNav(m); return; }
     if (m.t === 'titulo') { if (window.zeroTitulo) window.zeroTitulo(m.titulo); return; }
     if (m.t === 'ia') { if (window.zeroIA) window.zeroIA(m); return; }
+    if (m.t === 'pestanas') { M.pestanas = m; if (window.zeroPestanas) window.zeroPestanas(m); return; }
+    if (m.t === 'cortes') { if (window.zeroCortes) window.zeroCortes(m.lista || []); return; }
     if (m.t === 'alerta') { M.alertaNivel = m.nivel; M.sellada = !!m.sellada; if (window.zeroAlerta) window.zeroAlerta(m); return; }
     if (m.t === 'acta') { M.acta = m.acta; abierto = false; ponEstado(''); if (window.zeroActa) window.zeroActa(m.acta); return; }
   }
@@ -71,6 +73,7 @@
   const LOCALES = new Set(['Escape', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12']);
   cv.addEventListener('keydown', (e) => { if (LOCALES.has(e.key) || e.key === 'Dead' || (e.ctrlKey && /^[lLtTwWnN]$/.test(e.key))) return; e.preventDefault(); e.stopPropagation(); env({ t: 'tecla', tipo: 'down', key: e.key }); }, true);
   cv.addEventListener('keyup', (e) => { if (LOCALES.has(e.key) || e.key === 'Dead') return; e.preventDefault(); e.stopPropagation(); env({ t: 'tecla', tipo: 'up', key: e.key }); }, true);
+  cv.addEventListener('paste', (e) => { const s = (e.clipboardData || window.clipboardData).getData('text'); if (s) { e.preventDefault(); env({ t: 'texto', s: String(s).slice(0, 20000) }); } });
   document.addEventListener('visibilitychange', () => env({ t: 'mira', si: !document.hidden }));
   let tTam = 0;
   const avisaTam = () => { clearTimeout(tTam); tTam = setTimeout(() => { if (!abierto) return; const t = tam(); env({ t: 'tam', w: t.w, h: t.h }); }, 320); };
@@ -95,6 +98,7 @@
   M.nivel = (n) => { M.nivelActual = n; env({ t: 'modo', nivel: n }); };
   M.destruir = () => { ponEstado('Sellando y destruyendo la celda…'); env({ t: 'destruir' }); };
   M.ia = (o) => { if (M.estado !== 'lista' || !ws || ws.readyState !== 1) { conecta(); return false; } env({ t: 'ia', ...o }); return true; };
+  M.pestana = (accion, id, url) => env({ t: 'pestana', accion, id, url });
   M.sellar = () => env({ t: 'alerta', accion: 'sellar' });
   M.reanudar = () => env({ t: 'alerta', accion: 'reanudar' });
   M.enfoca = () => cv.focus();

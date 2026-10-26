@@ -11,7 +11,7 @@
 'use strict';
 const crypto = require('crypto');
 
-const TIPOS = { dom: 'texto escondido en la página', cookie: 'cookie propia de la web', almacen: 'dato del almacén local', enlace: 'enlace oculto', archivo: 'archivo trampa' };
+const TIPOS = { dom: 'texto escondido en la página', cookie: 'cookie propia de la web', almacen: 'dato del almacén local', enlace: 'enlace oculto', archivo: 'archivo trampa', visita: 'visita al enlace oculto' };
 
 class Senuelos {
   constructor(baseColector) {

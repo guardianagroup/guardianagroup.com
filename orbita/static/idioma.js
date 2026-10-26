@@ -1040,6 +1040,11 @@
     'Cortada en parte': ['Partly cut', 'Cortada em parte'],
     'Se queda': ['Stays', 'Fica'],
     // ZERO · NÚCLEO, nivel de protección y modo real (26 Oct 2026)
+    'Nueva pestaña': ['New tab', 'Nova aba'],
+    'Cerrar pestaña': ['Close tab', 'Fechar aba'],
+    'Pestañas': ['Tabs', 'Abas'],
+    'Adelante': ['Forward', 'Avançar'],
+    'Recargar': ['Reload', 'Recarregar'],
     'PUERTA IA: usa tu IA sin regalarle tus datos': ['PUERTA IA: use your AI without handing over your data', 'PUERTA IA: use sua IA sem entregar seus dados'],
     'Tu IA, con tus datos a salvo': ['Your AI, with your data safe', 'Sua IA, com seus dados a salvo'],
     'Modo': ['Mode', 'Modo'],
