@@ -34,7 +34,7 @@ const ahora = () => new Date().toISOString();
 const esLocal = (h) => h === '127.0.0.1' || h === 'localhost' || h === '::1';
 
 const TIPO_ABP = { stylesheet: 'stylesheet', image: 'image', media: 'media', font: 'font', script: 'script', texttrack: 'other', xhr: 'xmlhttprequest', fetch: 'xmlhttprequest', eventsource: 'other', websocket: 'websocket', manifest: 'other', ping: 'ping', other: 'other' };
-const PROPOSITO = { publicidad: 'Publicidad', rastreo: 'Rastreador', malware: 'Web peligrosa', 'avisos-cookies': 'Aviso de cookies', 'red-local': 'Red local', excepciones: '', parametros: 'Seguimiento' };
+const PROPOSITO = { publicidad: 'Publicidad', rastreo: 'Rastreador', malware: 'Web peligrosa', 'avisos-cookies': 'Aviso de cookies', 'red-local': 'Red local', excepciones: '', parametros: 'Seguimiento', 'otra-empresa': 'Otra empresa' };
 
 // Página que ve la persona dentro de la celda cuando ZERO detiene una web peligrosa o un certificado roto
 function paginaBloqueo(titulo, texto, detalle) {
@@ -147,6 +147,10 @@ class Sesion {
       this.corte(host, tipo, origen, tercero, d);
       return route.abort('blockedbyclient').catch(() => {});
     }
+    if (this.nivel && this.nivel !== 'normal' && tercero && !esLocal(host)) {
+      this.corte(host, tipo, origen, tercero, { regla: 'nivel ' + this.nivel + ': toda conexión con otra empresa', lista: null, proposito: 'otra-empresa' });
+      return route.abort('blockedbyclient').catch(() => {});
+    }
     const headers = { ...req.headers() };
     if (tercero && headers.referer) { try { headers.referer = new URL(headers.referer).origin + '/'; } catch (_) { delete headers.referer; } }
     if (MOCK && !esLocal(host)) return this.simula(route, req, tipo);
@@ -173,10 +177,10 @@ class Sesion {
     reg.n++; reg.ultima = ahora(); this.empresas.set(clave, reg);
     if (e.pais) this.paises.set(e.pais, (this.paises.get(e.pais) || 0) + 1);
     const quien = e.empresa ? e.empresa + (e.paisNombre ? ' (' + e.paisNombre + ')' : '') : host;
-    const que = { Publicidad: 'una conexión publicitaria', Rastreador: 'una conexión con un rastreador conocido', 'Web peligrosa': 'una conexión con una web peligrosa conocida', 'Aviso de cookies': 'el aviso de cookies', 'Red local': 'una conexión hacia la red local' }[prop] || 'una conexión';
+    const que = { Publicidad: 'una conexión publicitaria', Rastreador: 'una conexión con un rastreador conocido', 'Web peligrosa': 'una conexión con una web peligrosa conocida', 'Aviso de cookies': 'el aviso de cookies', 'Red local': 'una conexión hacia la red local', 'Otra empresa': 'una conexión con otra empresa (nivel ' + (this.nivel || 'estricto') + ')' }[prop] || 'una conexión';
     this.suceso({ clase: 'corte', certeza: 'comprobado', dominio: host, empresa: e.empresa, pais: e.pais, paisNombre: e.paisNombre, proposito: prop, tipo, tercero,
       texto: 'ZERO ha cortado ' + que + (e.empresa ? ' de ' + quien : ' (' + host + ')') + '.',
-      detalle: { regla: d.regla, lista: (cortes.listas[d.lista] || {}).nombre, listaClave: d.lista, fuenteEmpresa: e.fuente, categoria: e.categoria } });
+      detalle: { regla: d.regla, lista: d.lista ? (cortes.listas[d.lista] || {}).nombre : null, listaClave: d.lista, fuenteEmpresa: e.fuente, categoria: e.categoria } });
   }
 
   sucesoPagina(src, json) {
@@ -302,9 +306,17 @@ class Sesion {
         else if (this.mirando && !this.pantalla) { await this.arrancaPantalla(); this.op('pantalla despierta'); }
         return;
       }
-      if (o.t === 'modo') { this.observatorio = !!o.observatorio; this.op('modo observatorio ' + (this.observatorio ? 'activado' : 'desactivado')); return; }
+      if (o.t === 'modo') { if ('observatorio' in o) { this.observatorio = !!o.observatorio; this.op('modo observatorio ' + (this.observatorio ? 'activado' : 'desactivado')); } if (o.nivel) await this.ponNivel(o.nivel); return; }
       if (o.t === 'destruir') return await this.destruye('a petición de la persona');
     } catch (e) { /* una orden que falla no tumba la sesión */ }
+  }
+
+  async ponNivel(n) {
+    if (!['normal', 'estricto', 'maximo'].includes(n)) return;
+    const antes = this.nivel || 'normal'; this.nivel = n; this.op('nivel de protección: ' + n);
+    const sinJs = n === 'maximo';
+    if (sinJs !== (antes === 'maximo')) { try { await this.cdp.send('Emulation.setScriptExecutionDisabled', { value: sinJs }); } catch (_) {} if (this.page.url() && this.page.url() !== 'about:blank') this.page.reload({ waitUntil: 'commit' }).catch(() => {}); }
+    this.suceso({ clase: 'nivel', certeza: 'comprobado', dominio: this.webActual, texto: n === 'normal' ? 'Nivel normal: ZERO corta la publicidad y el rastreo de las listas públicas.' : n === 'estricto' ? 'Nivel estricto: además, ZERO corta toda conexión con otras empresas; solo pasa lo propio de la web.' : 'Nivel máximo: además, la web corre sin programas (JavaScript).' });
   }
 
   async destruye(motivo) {
