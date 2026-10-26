@@ -265,7 +265,8 @@
   // then faint photo land over a deep blue sea, the colour fading out by ×150); the button «Mapa limpio» brings back the
   // grey from ×4, remembered in this browser (?mapa=limpio / ?mapa=color force one)
   let MAPA_LIMPIO = /[?&]mapa=limpio/.test(location.search) || (!/[?&]mapa=color/.test(location.search) && (() => { try { return localStorage.getItem('guardiana-orbita-mapa') === 'limpio'; } catch (_) { return false; } })());
-  const limpioDesde = () => (MAPA_LIMPIO ? 4 : 18); // from here the planet is drawn flat: black water, grey land, data in white // 22 Oct 2026 (owner): «sube más el zoom aún» // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
+  // 25 Oct 2026, 21:22 (owner): «se tiene que diferenciar por completo»: «Mapa limpio» is the flat planet at every zoom, from ×1
+  const limpioDesde = () => (MAPA_LIMPIO ? 1 : 18); // from here the planet is drawn flat: black water, grey land, data in white // 22 Oct 2026 (owner): «sube más el zoom aún» // owner, 21–22 Oct 2026: «un toque más de zoom», ×2 → ×3 → ×5 → ×7 («un zoom o dos más, sin perder calidad»: the 16K tiles below)
   const cvE = $('estrellas'), cvT = $('tierra'), cvR = $('rutas');
   const cx2 = cvR.getContext('2d');
   // 23 Oct 2026, 18:55 (owner, on his phone: «el planeta está muy arriba, tiene que quedar justo en el medio; busca la
