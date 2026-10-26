@@ -260,7 +260,7 @@
   // ---------- Geometry shared with the CSS (--u) ----------
   let W = 0, H = 0, DPR = 1, U = 1, CX = 0, CY = 0, R = 1, R0 = 1;
   // 20 Oct 2026 (owner + agency): zoom only in, never below the base size; x2 at most.
-  const ZOOM = { z: 1, zt: 1, MAX: 8000 }; // 24 Oct 2026, 13:51 (owner): «hasta 5 kilómetros» — 40 000 km / 8 000 = 5 km nominal (closer in, the cables were lost); before: 500 m (80 000), and ×20 at first
+  const ZOOM = { z: 1, zt: 1, MAX: 2000 }; // 25 Oct 2026, 19:02 (owner): «quitar un poco de zoom», to about where he was (≈ 25 km) «o un poquito más»: 40 000 km / 2 000 = 20 km nominal // 24 Oct 2026, 13:51 (owner): «hasta 5 kilómetros» — 40 000 km / 8 000 = 5 km nominal (closer in, the cables were lost); before: 500 m (80 000), and ×20 at first
   // ronda 36 (25 Oct 2026, owner: «adelante», agency: ChatGPT + Gemini): «Mapa en color» by default (the photo up to ×18,
   // then faint photo land over a deep blue sea, the colour fading out by ×150); the button «Mapa limpio» brings back the
   // grey from ×4, remembered in this browser (?mapa=limpio / ?mapa=color force one)
@@ -498,7 +498,7 @@
     // 22 Oct 2026, 22:18 (owner: «tiene que ser preciso»): the double-clicked spot stays exactly under the pointer while the planet grows
     if (ZOOM.zt >= ZOOM.MAX - 1e-3) { ancla = null; acerca(1); return; }
     const q = geoDe(e.clientX, e.clientY);
-    const pasos = [2.5, 5, 10, 25, 80, 400, 2000, 10000, ZOOM.MAX]; // a clear step each time (owner, 21:52)
+    const pasos = [2.5, 5, 10, 25, 80, 400, ZOOM.MAX]; // a clear step each time (owner, 21:52)
     anclaEn(e.clientX, e.clientY);
     acerca(pasos.find((p) => ZOOM.zt < p - 1e-3) || ZOOM.MAX, e.clientX, e.clientY);
     meta = null; if (q) foco = q;
