@@ -123,7 +123,12 @@
   // ciudad hay varios centros de datos, que se vea claro». One small file: the city of each group of data centres and
   // the nearest city to both ends of every cable (OpenStreetMap + GeoNames). A name only when a real city is close.
   let LUG = null, cargaLug = null;
-  const lugares = () => cargaLug || (cargaLug = cargaJSON('datos/lugares-capas.json').then((d) => {
+  // 26 Oct 2026 (review): lugares-capas.json indexes the points of puntos.json by position; if a publication lands between
+  // the two downloads they no longer match (a Madrid centre said «Perth»). When the dates differ, the file is fetched again
+  // once, fresh from the server.
+  const lugares = () => cargaLug || (cargaLug = cargaJSON('datos/lugares-capas.json').then(async (d) => {
+    const fechaPt = PT && PT.d && PT.d.descargado, fechaLug = d.generado_desde && d.generado_desde.puntos;
+    if (fechaPt && fechaLug && fechaPt !== fechaLug) { try { const r = await fetch('datos/lugares-capas.json', { cache: 'reload' }); if (r.ok) { const d2 = await r.json(); if (d2.generado_desde && d2.generado_desde.puntos === fechaPt) d = d2; } } catch (_) {} }
     LUG = { d, centros: d.centros.map((c) => ({ w: P().vec(c[0], c[1]).map((x) => x * 1.002), ciudad: c[2], cc: c[3], n: c[4], ops: c[5] })), de: d.de || [], cables: d.cables, grupos: d.grupos || [], g: d.g || [],
       // only the ends that reach a real place: an end in the open sea is a joint between segments, not a landing
       llegadas: (d.llegadas || []).filter((l) => l[2]).map((l) => ({ w: P().vec(l[0], l[1]).map((x) => x * 1.003), ciudad: l[2], cc: l[3], seg: l[4] })) };
