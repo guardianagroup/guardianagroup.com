@@ -629,6 +629,7 @@ def nombra_campus(salida):
     P, X = salida['puntos'], salida['extra']
     puestos = 0
     for c in lista:
+        if any(p[2] == 'datos' and p[3] == c['nombre'] and km((c['lon'], c['lat']), (p[0], p[1])) < 1.5 for p in P): continue  # already named (idempotent)
         mejor, dm = None, 1.5
         for i, p in enumerate(P):
             if p[2] != 'datos' or (p[3] or '').strip(): continue
