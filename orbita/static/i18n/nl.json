@@ -931,7 +931,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Sobere kaart: grijs land en donkere zee, zonder de foto",
   "Volver al mapa en color": "Terug naar de kaart in kleur",
   "Color": "Kleur",
-  "Limpio": "Sober"
+  "Limpio": "Sober",
+  "Edificios": "Gebouwen",
+  "edificios": "gebouwen",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "gebouwen op deze campus; de naam is nog niet openbaar in de open data",
+  "Campus de centros de datos sin nombre": "Datacentercampus zonder naam",
+  "clic para la lista": "klik voor de lijst"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

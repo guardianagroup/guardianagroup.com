@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Peta polos: daratan abu-abu dan laut gelap, tanpa foto",
   "Volver al mapa en color": "Kembali ke peta berwarna",
   "Color": "Warna",
-  "Limpio": "Polos"
+  "Limpio": "Polos",
+  "Edificios": "Gedung",
+  "edificios": "gedung",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "gedung di kampus ini; namanya belum publik dalam data terbuka",
+  "Campus de centros de datos sin nombre": "Kampus pusat data tanpa nama",
+  "clic para la lista": "klik untuk daftarnya"
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

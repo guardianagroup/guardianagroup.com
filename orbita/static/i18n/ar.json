@@ -931,7 +931,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "خريطة بسيطة: يابسة رمادية وبحر داكن، بدون الصورة",
   "Volver al mapa en color": "العودة إلى الخريطة الملوّنة",
   "Color": "ألوان",
-  "Limpio": "بسيطة"
+  "Limpio": "بسيطة",
+  "Edificios": "المباني",
+  "edificios": "مبانٍ",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "مبانٍ في هذا المجمّع؛ اسمه ليس منشورًا بعد في البيانات المفتوحة",
+  "Campus de centros de datos sin nombre": "مجمّع مراكز بيانات بلا اسم",
+  "clic para la lista": "انقر للقائمة"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

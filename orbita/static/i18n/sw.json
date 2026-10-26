@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Ramani rahisi: nchi kavu ya kijivu na bahari yenye giza, bila picha",
   "Volver al mapa en color": "Rudi kwenye ramani ya rangi",
   "Color": "Rangi",
-  "Limpio": "Rahisi"
+  "Limpio": "Rahisi",
+  "Edificios": "Majengo",
+  "edificios": "majengo",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "majengo katika eneo hili; jina lake bado si la umma katika data huria",
+  "Campus de centros de datos sin nombre": "Eneo la vituo vya data lisilo na jina",
+  "clic para la lista": "bofya kwa orodha"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

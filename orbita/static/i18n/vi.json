@@ -931,7 +931,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Bản đồ đơn giản: đất liền màu xám và biển tối, không có ảnh",
   "Volver al mapa en color": "Quay lại bản đồ màu",
   "Color": "Màu",
-  "Limpio": "Đơn giản"
+  "Limpio": "Đơn giản",
+  "Edificios": "Tòa nhà",
+  "edificios": "tòa nhà",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "tòa nhà trong khu này; tên của khu chưa được công khai trong dữ liệu mở",
+  "Campus de centros de datos sin nombre": "Khu trung tâm dữ liệu chưa có tên",
+  "clic para la lista": "nhấp để xem danh sách"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

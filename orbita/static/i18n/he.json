@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "מפה נקייה: יבשה אפורה וים כהה, בלי התצלום",
   "Volver al mapa en color": "חזרה למפה הצבעונית",
   "Color": "צבע",
-  "Limpio": "נקייה"
+  "Limpio": "נקייה",
+  "Edificios": "מבנים",
+  "edificios": "מבנים",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "מבנים בקמפוס הזה; שמו עדיין אינו פומבי בנתונים הפתוחים",
+  "Campus de centros de datos sin nombre": "קמפוס מרכזי נתונים ללא שם",
+  "clic para la lista": "לחצו לרשימה"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

@@ -931,7 +931,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Sade harita: gri kara ve koyu deniz, fotoğraf olmadan",
   "Volver al mapa en color": "Renkli haritaya dön",
   "Color": "Renkli",
-  "Limpio": "Sade"
+  "Limpio": "Sade",
+  "Edificios": "Binalar",
+  "edificios": "bina",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "bina bu kampüste; adı henüz açık verilerde kamuya açık değil",
+  "Campus de centros de datos sin nombre": "Adsız veri merkezi kampüsü",
+  "clic para la lista": "liste için tıklayın"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

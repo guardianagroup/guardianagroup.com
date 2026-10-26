@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Hartă simplă: uscat gri și mare întunecată, fără fotografie",
   "Volver al mapa en color": "Înapoi la harta color",
   "Color": "Culoare",
-  "Limpio": "Simplă"
+  "Limpio": "Simplă",
+  "Edificios": "Clădiri",
+  "edificios": "clădiri",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "clădiri în acest campus; numele său nu este încă public în datele deschise",
+  "Campus de centros de datos sin nombre": "Campus de centre de date fără nume",
+  "clic para la lista": "clic pentru listă"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

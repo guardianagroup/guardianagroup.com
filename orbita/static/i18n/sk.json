@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Čistá mapa: sivá pevnina a tmavé more, bez fotografie",
   "Volver al mapa en color": "Späť na farebnú mapu",
   "Color": "Farba",
-  "Limpio": "Čistá"
+  "Limpio": "Čistá",
+  "Edificios": "Budovy",
+  "edificios": "budov",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "budov v tomto areáli; jeho názov zatiaľ nie je v otvorených dátach verejný",
+  "Campus de centros de datos sin nombre": "Areál dátových centier bez názvu",
+  "clic para la lista": "kliknutím zobrazíte zoznam"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

@@ -929,7 +929,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Čista karta: sivo kopno i tamno more, bez fotografije",
   "Volver al mapa en color": "Natrag na kartu u boji",
   "Color": "Boja",
-  "Limpio": "Čista"
+  "Limpio": "Čista",
+  "Edificios": "Zgrade",
+  "edificios": "zgrada",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "zgrada u ovom kompleksu; njegovo ime još nije javno u otvorenim podacima",
+  "Campus de centros de datos sin nombre": "Kompleks podatkovnih centara bez imena",
+  "clic para la lista": "kliknite za popis"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "نقشهٔ ساده: خشکی خاکستری و دریای تیره، بدون عکس",
   "Volver al mapa en color": "بازگشت به نقشهٔ رنگی",
   "Color": "رنگی",
-  "Limpio": "ساده"
+  "Limpio": "ساده",
+  "Edificios": "ساختمان‌ها",
+  "edificios": "ساختمان",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "ساختمان در این مجموعه؛ نام آن هنوز در داده‌های باز عمومی نیست",
+  "Campus de centros de datos sin nombre": "مجموعهٔ مراکز داده بدون نام",
+  "clic para la lista": "برای فهرست کلیک کنید"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

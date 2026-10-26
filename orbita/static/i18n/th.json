@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "แผนที่แบบเรียบ: แผ่นดินสีเทาและทะเลสีเข้ม ไม่มีภาพถ่าย",
   "Volver al mapa en color": "กลับไปที่แผนที่สี",
   "Color": "สี",
-  "Limpio": "เรียบ"
+  "Limpio": "เรียบ",
+  "Edificios": "อาคาร",
+  "edificios": "อาคาร",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "อาคารในวิทยาเขตนี้ ชื่อยังไม่เปิดเผยในข้อมูลเปิด",
+  "Campus de centros de datos sin nombre": "กลุ่มศูนย์ข้อมูลที่ไม่มีชื่อ",
+  "clic para la lista": "คลิกเพื่อดูรายการ"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

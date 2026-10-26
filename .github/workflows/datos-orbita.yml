@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       forzar:
-        description: 'Volver a descargar también los puntos (centros de datos) aunque no toque por fecha'
+        description: 'Volver a descargar también los cables y los puntos (centros de datos) aunque no toque por fecha'
         type: boolean
         default: false
   push:
@@ -59,7 +59,7 @@ jobs:
 
       - name: Satélites (CelesTrak) y cables (OpenStreetMap)
         timeout-minutes: 15
-        run: pip install --quiet pillow && python3 herramientas/datos_orbita.py satelites cables ${{ github.event_name == 'push' && 'forzar' || '' }}
+        run: pip install --quiet pillow && python3 herramientas/datos_orbita.py satelites cables ${{ (github.event_name == 'push' || inputs.forzar) && 'forzar' || '' }}
 
       # Each OpenStreetMap job on its own, with its own limit: if one is slow, the others are still saved.
       - name: Puntos de internet (OpenStreetMap, una vez por semana)

@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Einfalt kort: grátt land og dökkt haf, án ljósmyndarinnar",
   "Volver al mapa en color": "Aftur í kortið í lit",
   "Color": "Litur",
-  "Limpio": "Einfalt"
+  "Limpio": "Einfalt",
+  "Edificios": "Byggingar",
+  "edificios": "byggingar",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "byggingar á þessu svæði; nafn þess er enn ekki opinbert í opnum gögnum",
+  "Campus de centros de datos sin nombre": "Gagnaverssvæði án nafns",
+  "clic para la lista": "smelltu fyrir listann"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

@@ -397,6 +397,30 @@
   // still sit on top of each other open like a flower around the shared spot, each with its own thin spoke, so every
   // one can be pointed at and chosen (owner, 22 Oct 2026, 18:05: «siguen saliendo apiñados y no puedo elegir»).
   let ABANICO = null, abanicoFrame = -1;
+  // 25 Oct 2026, 20:28 (owner, on Richardson: «por mucho que amplíe, no logro verlo bien… cuando pase el ratón por ahí,
+  // deberían de abrirse con un círculo así grande, quedarse quieto mientras yo tengo el ratón ahí para yo poder elegir
+  // uno»): from ×8, the pointer over three or more data centres that crowd together opens them in rings around the spot,
+  // each with a thin line to where it really is; it stays while the pointer is inside, and goes when it leaves.
+  let FLOR = null; // { idx, set, w (the centre, on the planet), z, r (outer radius), lugar: Map(i → [dx, dy]) }
+  const FLOR_ZOOM = 8, FLOR_MAX = 60;
+  function abreFlor(idx) {
+    const p = P(), G = p.geo; if (!p || !idx.length) return;
+    let sx = 0, sy = 0, sz = 0; for (const i of idx) { const w = PT.p[i].w; sx += w[0]; sy += w[1]; sz += w[2]; }
+    const m = Math.hypot(sx, sy, sz) || 1, w = [sx / m * 1.002, sy / m * 1.002, sz / m * 1.002];
+    const v0 = p.aVista(w), cx0 = G.CX + G.R * v0[0], cy0 = G.CY - G.R * v0[1];
+    // nearest first by angle around the centre, so each one sits roughly on its own side
+    const lista = idx.slice(0, FLOR_MAX).map((i) => { const v = p.aVista(PT.p[i].w); return [i, Math.atan2((G.CY - G.R * v[1]) - cy0, (G.CX + G.R * v[0]) - cx0)]; }).sort((a, b) => a[1] - b[1]);
+    const lugar = new Map(); let r = 58, k = 0;
+    while (k < lista.length) {
+      const cabe = Math.max(6, Math.floor(2 * Math.PI * r / 22)), n = Math.min(cabe, lista.length - k);
+      const giro = (r / 58) * 0.37;
+      for (let j = 0; j < n; j++) { const a = giro + j * 2 * Math.PI / n; lugar.set(lista[k + j][0], [r * Math.cos(a), r * Math.sin(a)]); }
+      k += n; if (k < lista.length) r += 28;
+    }
+    FLOR = { idx: lista.map((x) => x[0]), set: new Set(lista.map((x) => x[0])), w, z: G.R / (G.R0 || G.R), r, lugar, mas: Math.max(0, idx.length - FLOR_MAX) };
+  }
+  function cierraFlor() { if (FLOR) { FLOR = null; } }
+  function florCentro(p, G) { if (!FLOR) return null; const v = p.aVista(FLOR.w); if (v[2] <= 0.05) return null; return [G.CX + G.R * v[0], G.CY - G.R * v[1]]; }
   function posiciones(p, G) {
     const z = G.R / (G.R0 || G.R), pos = new Map();
     if (!PT || !PT.p) return pos;
@@ -415,11 +439,32 @@
       const r = Math.min(30, 8 + 1.6 * g.length);
       g.forEach((i, j) => { const a = -Math.PI / 2 + j * 2 * Math.PI / g.length; pos.set(i, [cx0 + r * Math.cos(a), cy0 + r * Math.sin(a), cx0, cy0]); });
     }
+    if (FLOR) {
+      const c = florCentro(p, G);
+      if (!c || Math.abs(z / FLOR.z - 1) > 0.25) FLOR = null;
+      else {
+        // the others under the disc are hidden meanwhile, so the flower reads alone
+        for (const [i, q] of pos) if (!FLOR.set.has(i) && Math.hypot(q[0] - c[0], q[1] - c[1]) < FLOR.r + 18) pos.delete(i);
+        for (const [i, d] of FLOR.lugar) { const v = p.aVista(PT.p[i].w); pos.set(i, [c[0] + d[0], c[1] + d[1], G.CX + G.R * v[0], G.CY - G.R * v[1]]); }
+      }
+    }
     return pos;
   }
   function pintaPuntos(cx, p, G) {
     const forma = { aterrizaje: 0, datos: 1, intercambio: 2 }, z = G.R / (G.R0 || G.R), L = esLimpio();
     ABANICO = posiciones(p, G); abanicoFrame = performance.now();
+    const fc0 = FLOR && florCentro(p, G);
+    if (fc0) {
+      cx.save(); cx.globalCompositeOperation = 'source-over';
+      cx.fillStyle = 'rgba(6,8,12,.82)'; cx.strokeStyle = `rgba(${AZUL_CENTRO},.45)`; cx.lineWidth = 1;
+      cx.beginPath(); cx.arc(fc0[0], fc0[1], FLOR.r + 16, 0, 7); cx.fill(); cx.stroke();
+      cx.strokeStyle = `rgba(${AZUL_CENTRO},.28)`; cx.lineWidth = 0.7; cx.beginPath();
+      for (const i of FLOR.idx) { const q = ABANICO.get(i); if (q) { cx.moveTo(q[2], q[3]); cx.lineTo(q[0], q[1]); } }
+      cx.stroke();
+      cx.font = '500 10.5px "IBM Plex Mono", ui-monospace, monospace'; cx.textAlign = 'center'; cx.fillStyle = 'rgba(244,246,248,.8)';
+      cx.fillText(num(FLOR.idx.length + FLOR.mas) + ' ' + T('centros de datos') + (FLOR.mas ? ' · ' + T('clic para la lista') : ''), fc0[0], fc0[1] - FLOR.r - 24);
+      cx.restore();
+    }
     // the spokes of the fans, under the marks
     if (z >= 60) { cx.save(); cx.globalCompositeOperation = 'source-over'; cx.strokeStyle = `rgba(${L ? BLANCO : ACERO},.35)`; cx.lineWidth = 0.8; cx.beginPath(); for (const [, q] of ABANICO) { if (q[2] || q[3]) { cx.moveTo(q[2], q[3]); cx.lineTo(q[0], q[1]); } } cx.stroke(); cx.restore(); }
     const sd = Math.max(1.5, Math.min(4, 1 + z * 0.22)); // data-centre squares grow a little with the zoom (owner: «que se separen bien»)
@@ -573,10 +618,12 @@
     cx.lineWidth = 1;
     cx.font = '500 10px "IBM Plex Mono", ui-monospace, monospace'; cx.textBaseline = 'middle';
     const ocupado = []; // labels never sit on top of each other
+    const fl = FLOR && florCentro(p, G); // nothing of the cities over the flower of data centres
     for (const i of LUG.orden) {
       const c = LUG.centros[i]; if (c.n < 5) break;
       const v = p.aVista(c.w); if (v[2] <= 0.05) continue;
       const x = G.CX + G.R * v[0], y = G.CY - G.R * v[1], r = radioCiudad(c.n, z), on = i === centroMarcado;
+      if (fl && Math.hypot(x - fl[0], y - fl[1]) < FLOR.r + 90) continue;
       cx.strokeStyle = on ? `rgba(${BLANCO},.95)` : `rgba(${AZUL_CENTRO},${c.n >= 10 ? 0.75 : 0.5})`;
       cx.beginPath(); cx.arc(x, y, r, 0, 7); cx.stroke();
       // owner, 22 Oct 2026: «en el mapa no me sale la ciudad»: the city's name by its ring as the zoom grows
@@ -1621,6 +1668,15 @@
         if (q.y > y + 20 && y - h - 16 >= 70) top = y - h - 16; else if (q.y < y - 20) top = y + 16;
       }
     }
+    // the flower of data centres stays uncovered: the card goes beside the disc, on the side with room
+    const fl = FLOR && florCentro(P(), G);
+    if (fl) {
+      const R = FLOR.r + 18, cx1 = left + w / 2, cy1 = top + h / 2;
+      if (Math.abs(cx1 - fl[0]) < w / 2 + R && Math.abs(cy1 - fl[1]) < h / 2 + R) {
+        if (fl[0] + R + 12 + w <= G.W - 8) left = fl[0] + R + 12; else left = fl[0] - R - 12 - w;
+        top = Math.max(70, Math.min(G.H - h - 12, fl[1] - h / 2));
+      }
+    }
     f.style.left = Math.max(8, Math.min(G.W - w - 8, left)) + 'px'; f.style.top = Math.max(70, Math.min(G.H - h - 12, top)) + 'px';
   };
   // ---------- where a data centre's cables come from (owner, 22 Oct 2026: «al pasar por el centro de datos, que
@@ -1969,6 +2025,8 @@
     const desde = X.desde || W.desde; if (desde) filas.push([T('En servicio desde'), String(desde).slice(0, 4)]);
     if (W.m2) filas.push([T('Superficie'), num(W.m2) + ' m²']);
     if (W.mw) filas.push([T('Potencia'), num(W.mw) + ' MW']);
+    // 25 Oct 2026 (Abilene, 39 unnamed buildings): a campus OpenStreetMap maps building by building is one point
+    if (X.edificios > 1) filas.push([T('Edificios'), num(X.edificios) + ' ' + T('edificios en este campus; su nombre aún no es público en los datos abiertos')]);
     if (X.plantas) filas.push([T('Plantas'), X.plantas]);
     if (X.alto) filas.push([T('Altura del edificio'), X.alto + ' m']);
     if (X.tier) filas.push(['Tier', X.tier]);
@@ -1995,14 +2053,14 @@
     const L = P() && P().lugar;
     // owner, 22 Oct 2026: «quiero datos sobre ese centro de datos que estoy viendo», not the distance from the visitor
     if (X.web) filas.push([T('Web'), dominio(X.web)]);
-    const nn = nombreCentro(q), titulo = nn && nn !== q.o ? nn : (q.o ? q.o + ' · ' + T('centro de datos') : T('Centro de datos sin nombre'));
+    const nn = nombreCentro(q), titulo = nn && nn !== q.o ? nn : (q.o ? q.o + ' · ' + T('centro de datos') : X.edificios > 1 ? T('Campus de centros de datos sin nombre') : T('Centro de datos sin nombre'));
     const fuentes = T('Datos verificados');
     const nube = q.o && /amazon|aws|google|microsoft|azure|meta|facebook|apple|oracle|alibaba|cloudflare|ovh|equinix|digital realty|telefónica|telefonica|orange|vodafone|claro|movistar/i.test(q.o);
     abreModelo(modelo(T('Centro de datos'), titulo, filas.length ? filas : [[T('Datos'), T('Sin más datos públicos sobre este edificio')]], fuentes, {
       foto: fotoDe('centro', X.w),
-      resumen: [T('Operador'), T('Dónde'), T('En servicio desde'), T('Desde el mar')],
+      resumen: [T('Operador'), T('Edificios'), T('Dónde'), T('En servicio desde'), T('Desde el mar')],
       para: T('Aquí viven servicios de internet: cada vez que abres una web o guardas algo «en la nube», tus datos pasan por sitios como este.') + (nube ? ' ' + T('Si usas servicios de') + ' ' + q.o + ', ' + T('parte de tus datos puede estar guardada en edificios así.') : ''),
-      secciones: [{ t: T('Cómo llega internet aquí'), claves: [T('Desde el mar'), T('Cables que llegan ahí'), T('Por tierra'), T('Intercambio de internet')], abierta: true }, { t: T('El edificio'), claves: [T('Operador'), T('Del mismo operador'), T('Dueño'), T('En servicio desde'), T('Superficie'), T('Potencia'), T('Plantas'), T('Altura del edificio'), 'Tier', 'PUE', T('Conexión'), T('Dónde'), T('Dirección'), T('Ubicación aproximada'), T('Web')] }, { t: T('Notas'), claves: [T('Datos'), T('Nota')] }],
+      secciones: [{ t: T('Cómo llega internet aquí'), claves: [T('Desde el mar'), T('Cables que llegan ahí'), T('Por tierra'), T('Intercambio de internet')], abierta: true }, { t: T('El edificio'), claves: [T('Operador'), T('Edificios'), T('Del mismo operador'), T('Dueño'), T('En servicio desde'), T('Superficie'), T('Potencia'), T('Plantas'), T('Altura del edificio'), 'Tier', 'PUE', T('Conexión'), T('Dónde'), T('Dirección'), T('Ubicación aproximada'), T('Web')] }, { t: T('Notas'), claves: [T('Datos'), T('Nota')] }],
     }), x, y);
   }
   function fichaLugar(tipo, i, x, y) {
@@ -2105,7 +2163,7 @@
     const ul = document.createElement('div'); ul.className = 'filas';
     for (const i of idx.slice(0, 40)) {
       const q = PT.p[i], b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'option');
-      b.innerHTML = '<b></b><span></span>'; b.querySelector('b').textContent = nombreCentro(q) || q.o || T('Centro de datos sin nombre'); b.querySelector('span').textContent = q.n && q.n.trim().length > 2 && q.o && q.o !== q.n ? q.o : '';
+      b.innerHTML = '<b></b><span></span>'; b.querySelector('b').textContent = nombreCentro(q) || q.o || (q.x && q.x.edificios > 1 ? T('Campus de centros de datos sin nombre') : T('Centro de datos sin nombre')); b.querySelector('span').textContent = q.x && q.x.edificios > 1 ? num(q.x.edificios) + ' ' + T('edificios') : q.n && q.n.trim().length > 2 && q.o && q.o !== q.n ? q.o : '';
       b.addEventListener('mouseenter', () => { puntoMarcado = i; }); // the dot lights up on the planet while you look at the row
       b.addEventListener('click', (e) => { e.stopPropagation(); const r = b.getBoundingClientRect(); cierraLista(); cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; puntoMarcado = i; clicActual = true; fichaLugar('punto', i, r.right + 8, r.top); fichaFija = true; });
       ul.appendChild(b);
@@ -2123,6 +2181,21 @@
   function mira(x, y, clic) {
     if ((lista || fichaFija) && !clic) return; // the list is open, or a card was chosen from it: hovering changes nothing
     clicActual = !!clic;
+    // the flower of crowded data centres (see abreFlor): it stays while the pointer is inside it
+    if (FLOR) {
+      const p0 = P(), c = p0 && florCentro(p0, p0.geo);
+      if (!c || Math.hypot(x - c[0], y - c[1]) > FLOR.r + 22) { cierraFlor(); if (puntoMarcado >= 0 && !clic) { puntoMarcado = -1; muestra(-1); } }
+      else {
+        const q = buscaPunto(x, y);
+        if (q >= 0 && FLOR.set.has(q)) { cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = -1; if (q !== puntoMarcado || clic) { puntoMarcado = q; fichaLugar('punto', q, c[0] + FLOR.r + 24, y); } if (clic) fichaFija = true; return; }
+        if (clic && FLOR.mas) { const idx = FLOR.idx.concat(cercanos(c[0], c[1], 30).filter((i) => !FLOR.set.has(i))); cierraFlor(); abreLista(idx, x, y); return; }
+        if (!clic) return; // between two marks: the last card stays
+        cierraFlor();
+      }
+    } else if (!clic && estado.puntos && PT && PT.p && P() && P().geo.R / (P().geo.R0 || 1) >= FLOR_ZOOM) {
+      const cerca = cercanos(x, y, 16).filter((i) => vePunto(PT.p[i]));
+      if (cerca.length >= 3) { abreFlor(cercanos(x, y, 26).filter((i) => vePunto(PT.p[i]))); cableMarcado = llegadaMarcada = centroMarcado = fibraMarcada = puntoMarcado = -1; muestra(-1); return; }
+    }
     if (clic) {
       fichaFija = false;
       const z = P() ? P().geo.R / (P().geo.R0 || 1) : 1, cerca = cercanos(x, y, z >= 8 ? 14 : 22);

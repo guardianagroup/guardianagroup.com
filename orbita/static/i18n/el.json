@@ -930,7 +930,12 @@
   "Mapa limpio: tierra gris y mar oscuro, sin la foto": "Απλός χάρτης: γκρι ξηρά και σκούρα θάλασσα, χωρίς τη φωτογραφία",
   "Volver al mapa en color": "Επιστροφή στον έγχρωμο χάρτη",
   "Color": "Χρώμα",
-  "Limpio": "Απλός"
+  "Limpio": "Απλός",
+  "Edificios": "Κτίρια",
+  "edificios": "κτίρια",
+  "edificios en este campus; su nombre aún no es público en los datos abiertos": "κτίρια σε αυτό το συγκρότημα· το όνομά του δεν είναι ακόμη δημόσιο στα ανοιχτά δεδομένα",
+  "Campus de centros de datos sin nombre": "Συγκρότημα κέντρων δεδομένων χωρίς όνομα",
+  "clic para la lista": "κλικ για τη λίστα"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",
