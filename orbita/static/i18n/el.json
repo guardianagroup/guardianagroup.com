@@ -955,7 +955,9 @@
   "ÓRBITA": "ΟΡΜΠΙΤΑ",
   "Descubre por dónde viajan tus datos": "Ανακαλύψτε από πού περνούν τα δεδομένα σας",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Τρεις δρόμοι: εξερευνήστε τα καλώδια, τα κέντρα δεδομένων και τους δορυφόρους από τους οποίους περνά η ψηφιακή σας ζωή· μετρήστε τη δική σας σύνδεση· ή δείτε τι βλέπει για εσάς οποιοσδήποτε ιστότοπος.",
-  "Explorar el planeta": "Εξερευνήστε τον πλανήτη"
+  "Explorar el planeta": "Εξερευνήστε τον πλανήτη",
+  "Mapa": "Χάρτης",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "Δορυφορική φωτογραφία· με ζουμ, με δρόμους και ονόματα"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

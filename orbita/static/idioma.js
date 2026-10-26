@@ -755,6 +755,8 @@
     'Mapa limpio: tierra gris y mar oscuro, sin la foto': ['Plain map: grey land and dark sea, without the photo', 'Mapa limpo: terra cinza e mar escuro, sem a foto'],
     'Volver al mapa en color': ['Back to the colour map', 'Voltar ao mapa em cores'],
     'Color': ['Colour', 'Cor'],
+    'Mapa': ['Map', 'Mapa'],
+    'Foto de satélite; al acercar, con las carreteras y los nombres': ['Satellite photo; closer in, with roads and names', 'Foto de satélite; ao aproximar, com estradas e nomes'],
     'Limpio': ['Plain', 'Limpo'],
     'Cables de tierra': ['Land cables', 'Cabos terrestres'],
     'Satélites de datos': ['Data satellites', 'Satélites de dados'],

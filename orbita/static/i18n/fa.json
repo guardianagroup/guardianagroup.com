@@ -955,7 +955,9 @@
   "ÓRBITA": "اوربیتا",
   "Descubre por dónde viajan tus datos": "کشف کنید داده‌هایتان از کجا می‌گذرند",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "سه مسیر: کابل‌ها، مراکز داده و ماهواره‌هایی را که زندگی دیجیتال‌تان از آن‌ها می‌گذرد بگردید؛ اتصال خود را بسنجید؛ یا ببینید هر وب‌سایتی چه چیزی از شما می‌بیند.",
-  "Explorar el planeta": "کاوش سیاره"
+  "Explorar el planeta": "کاوش سیاره",
+  "Mapa": "نقشه",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "عکس ماهواره‌ای؛ با نزدیک شدن، همراه جاده‌ها و نام‌ها"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

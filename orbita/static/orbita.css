@@ -341,18 +341,22 @@ body.dock .puerta.aparte .et { color: #96A1AD; }
 }
 
 /* Zoom (20 Oct 2026): a thin rail on the right, mirroring the doors on the left. */
-.zoom { position: fixed; right: calc(40px + env(safe-area-inset-right, 0px)); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; z-index: 4; opacity: 0; transition: opacity .8s 1.6s; }
+.zoom { position: fixed; right: calc(40px + env(safe-area-inset-right, 0px)); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0; width: 72px; box-sizing: border-box; z-index: 4; opacity: 0; transition: opacity .8s 1.6s; }
 .listo .zoom { opacity: 1; }
 .zoom button { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 50%; background: rgba(12,17,24,.6); color: #C4CCD5; cursor: pointer; padding: 0; transition: border-color .2s, color .2s, opacity .2s; }
 .zoom button:hover:not(:disabled) { border-color: rgba(156,195,228,.5); color: var(--fg); }
 .zoom button:disabled { opacity: .3; cursor: default; }
 .zoom button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.zoom .nivel { font: 500 11px/1 var(--mono); color: #8A95A2; letter-spacing: .04em; padding: 6px 0; min-width: 34px; text-align: center; }
+.zoom .nivel { font: 500 11px/1 var(--mono); color: #8A95A2; letter-spacing: .04em; padding: 6px 0; width: 100%; text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .zoom .base { margin-top: 8px; }
 .zoom .base[hidden] { display: none; }
 .zoom .mapa { margin-top: 14px; } /* ronda 36 (25 Oct 2026): «Mapa en color» / «Mapa limpio» */
 .zoom .mapa[aria-pressed="true"] { border-color: rgba(156,195,228,.5); color: var(--accent); }
-.zoom .mapa-t { font: 500 9px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: #8A95A2; padding-top: 2px; }
+.zoom .mapa-t { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; padding-top: 3px; }
+.zoom .mapa-t .op { all: unset; cursor: pointer; box-sizing: border-box; width: 100%; text-align: center; font: 500 9px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: #6F7A86; padding: 4px 2px; border-radius: 999px; transition: color .2s, background .2s; }
+.zoom .mapa-t .op:hover { color: var(--fg); }
+.zoom .mapa-t .op[aria-pressed="true"] { color: var(--accent); background: rgba(156,195,228,.12); }
+.zoom .mapa-t .op:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 body.dentro .zoom { opacity: 0; pointer-events: none; transition: opacity .45s; }
 /* closer in: the ring and the cross step back so the planet reads on its own */
 body.cerca #anillo, body.cerca #anillo2, body.cerca .cruz, body.cerca #pulso { opacity: 0 !important; transition: opacity .4s; }
@@ -1058,5 +1062,5 @@ body.con-ficha-capa .sat-vista { opacity: 0 !important; pointer-events: none !im
 header::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(rgba(6,8,12,.86), rgba(6,8,12,.6) 62%, rgba(6,8,12,0)); opacity: 0; transition: opacity .45s; }
 body.mapa-cerca:not(.limpio) header::before { opacity: 1; }
 body.mapa-cerca:not(.limpio) .zoom { background: rgba(6,8,12,.55); border-radius: 26px; padding: 10px 6px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-body.mapa-cerca:not(.limpio) .zoom .nivel, body.mapa-cerca:not(.limpio) .zoom .mapa-t { color: #B9C2CC; }
+body.mapa-cerca:not(.limpio) .zoom .nivel, body.mapa-cerca:not(.limpio) .zoom .mapa-t .op { color: #B9C2CC; }
 .altura .k, .altura .barra b, .altura .barra i .vv { text-shadow: 0 0 7px rgba(6,8,12,1), 0 0 3px rgba(6,8,12,1), 0 1px 2px rgba(6,8,12,.9); }

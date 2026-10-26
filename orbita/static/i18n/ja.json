@@ -956,7 +956,9 @@
   "ÓRBITA": "オービタ",
   "Descubre por dónde viajan tus datos": "データがどこを通るかを知る",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "3つの入口：デジタル生活が通るケーブル・データセンター・衛星をめぐる、自分の接続を測る、あるいはウェブサイトがあなたの何を見ているかを確かめる。",
-  "Explorar el planeta": "地球を探索する"
+  "Explorar el planeta": "地球を探索する",
+  "Mapa": "地図",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "衛星写真。拡大すると道路と地名も表示"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

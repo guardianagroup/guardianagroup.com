@@ -955,7 +955,9 @@
   "ÓRBITA": "BRAUT",
   "Descubre por dónde viajan tus datos": "Uppgötvaðu hvert gögnin þín ferðast",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Þrjár leiðir: skoðaðu kaplana, gagnaverin og gervihnettina sem stafrænt líf þitt fer um; mældu eigin tengingu; eða sjáðu hvað hvaða vefsíða sem er sér um þig.",
-  "Explorar el planeta": "Kanna plánetuna"
+  "Explorar el planeta": "Kanna plánetuna",
+  "Mapa": "Kort",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "Gervihnattamynd; nær sést með vegum og nöfnum"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

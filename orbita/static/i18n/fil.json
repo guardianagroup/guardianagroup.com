@@ -955,7 +955,9 @@
   "ÓRBITA": "ORBIT",
   "Descubre por dónde viajan tus datos": "Tuklasin kung saan dumadaan ang iyong datos",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Tatlong daan: libutin ang mga cable, data center at satellite na dinadaanan ng iyong digital na buhay; sukatin ang sarili mong koneksiyon; o tingnan kung ano ang nakikita ng kahit anong website tungkol sa iyo.",
-  "Explorar el planeta": "Galugarin ang planeta"
+  "Explorar el planeta": "Galugarin ang planeta",
+  "Mapa": "Mapa",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "Larawang satellite; kapag nilapitan, may mga kalsada at pangalan"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

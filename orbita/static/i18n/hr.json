@@ -954,7 +954,9 @@
   "ÓRBITA": "ORBITA",
   "Descubre por dónde viajan tus datos": "Otkrijte kuda putuju vaši podaci",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Tri puta: prođite kabelima, podatkovnim centrima i satelitima kroz koje prolazi vaš digitalni život; izmjerite vlastitu vezu; ili pogledajte što o vama vidi bilo koja web-stranica.",
-  "Explorar el planeta": "Istražite planet"
+  "Explorar el planeta": "Istražite planet",
+  "Mapa": "Karta",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "Satelitska snimka; pri zumiranju, s cestama i imenima"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

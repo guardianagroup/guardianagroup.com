@@ -955,7 +955,9 @@
   "ÓRBITA": "ОРБИТА",
   "Descubre por dónde viajan tus datos": "Открийте откъде минават данните ви",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Три пътя: разгледайте кабелите, центровете за данни и спътниците, през които минава дигиталният ви живот; измерете собствената си връзка; или вижте какво вижда за вас всеки сайт.",
-  "Explorar el planeta": "Разгледайте планетата"
+  "Explorar el planeta": "Разгледайте планетата",
+  "Mapa": "Карта",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "Сателитна снимка; при приближаване — с пътищата и имената"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

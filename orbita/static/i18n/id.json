@@ -955,7 +955,9 @@
   "ÓRBITA": "ORBIT",
   "Descubre por dónde viajan tus datos": "Temukan ke mana data Anda berjalan",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Tiga jalan: jelajahi kabel, pusat data, dan satelit yang dilalui kehidupan digital Anda; ukur koneksi Anda sendiri; atau lihat apa yang dilihat situs web mana pun tentang Anda.",
-  "Explorar el planeta": "Jelajahi planet"
+  "Explorar el planeta": "Jelajahi planet",
+  "Mapa": "Peta",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "Foto satelit; saat diperbesar, dengan jalan dan nama"
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

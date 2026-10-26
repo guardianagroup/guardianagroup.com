@@ -955,7 +955,9 @@
   "ÓRBITA": "ஆர்பிட்",
   "Descubre por dónde viajan tus datos": "உங்கள் தரவு எங்கு செல்கிறது என்று அறியுங்கள்",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "மூன்று வழிகள்: உங்கள் டிஜிட்டல் வாழ்க்கை கடந்து செல்லும் கேபிள்கள், தரவு மையங்கள், செயற்கைக்கோள்களைச் சுற்றிப் பாருங்கள்; உங்கள் இணைப்பை அளவிடுங்கள்; அல்லது எந்த வலைத்தளமும் உங்களைப் பற்றி என்ன பார்க்கிறது என்று பாருங்கள்.",
-  "Explorar el planeta": "கிரகத்தை ஆராயுங்கள்"
+  "Explorar el planeta": "கிரகத்தை ஆராயுங்கள்",
+  "Mapa": "வரைபடம்",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "செயற்கைக்கோள் படம்; அருகில் சென்றால் சாலைகளும் பெயர்களும்"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

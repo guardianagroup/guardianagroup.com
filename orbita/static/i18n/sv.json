@@ -956,7 +956,9 @@
   "ÓRBITA": "ORBIT",
   "Descubre por dónde viajan tus datos": "Upptäck vart dina data färdas",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Tre vägar: utforska kablarna, datacentren och satelliterna som ditt digitala liv passerar; mät din egen anslutning; eller se vad vilken webbplats som helst ser om dig.",
-  "Explorar el planeta": "Utforska planeten"
+  "Explorar el planeta": "Utforska planeten",
+  "Mapa": "Karta",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "Satellitfoto; närmare med vägar och namn"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

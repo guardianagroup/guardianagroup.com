@@ -956,7 +956,9 @@
   "ÓRBITA": "ORBITA",
   "Descubre por dónde viajan tus datos": "Khám phá dữ liệu của bạn đi qua đâu",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Ba con đường: khám phá các tuyến cáp, trung tâm dữ liệu và vệ tinh mà đời sống số của bạn đi qua; đo kết nối của chính bạn; hoặc xem bất kỳ trang web nào thấy gì về bạn.",
-  "Explorar el planeta": "Khám phá hành tinh"
+  "Explorar el planeta": "Khám phá hành tinh",
+  "Mapa": "Bản đồ",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "Ảnh vệ tinh; khi phóng to có đường và tên"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

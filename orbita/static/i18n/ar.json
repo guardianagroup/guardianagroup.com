@@ -956,7 +956,9 @@
   "ÓRBITA": "أوربيتا",
   "Descubre por dónde viajan tus datos": "اكتشف أين تسافر بياناتك",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "ثلاثة مسارات: تجوّل بين الكابلات ومراكز البيانات والأقمار الصناعية التي تمرّ بها حياتك الرقمية؛ أو قِس اتصالك؛ أو انظر ما يراه أي موقع عنك.",
-  "Explorar el planeta": "استكشاف الكوكب"
+  "Explorar el planeta": "استكشاف الكوكب",
+  "Mapa": "خريطة",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "صورة بالأقمار الصناعية؛ عند التقريب، مع الطرق والأسماء"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

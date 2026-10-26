@@ -956,7 +956,9 @@
   "ÓRBITA": "오르비타",
   "Descubre por dónde viajan tus datos": "데이터가 어디로 지나가는지 알아보기",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "세 가지 길: 디지털 생활이 지나는 케이블·데이터센터·위성을 둘러보거나, 내 연결을 측정하거나, 웹사이트가 나에 대해 무엇을 보는지 확인하세요.",
-  "Explorar el planeta": "행성 탐색"
+  "Explorar el planeta": "행성 탐색",
+  "Mapa": "지도",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "위성 사진. 확대하면 도로와 지명 표시"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",
