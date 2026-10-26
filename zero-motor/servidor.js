@@ -618,7 +618,12 @@ async function main() {
       if (ses && !ses.destruida) ses.senuelo({ tipo: 'visita', donde: 'visita al enlace oculto (' + (req.headers['user-agent'] || 'sin agente').slice(0, 80) + ')' }, ip, req.url, true, false);
       res.writeHead(204); return res.end();
     }
-    if (req.url === '/salud') { res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ ok: true, version: VERSION, listas: nListas, mock: MOCK, celdas: VIVAS.size, tope: MAX_SESIONES })); }
+    if (req.url === '/salud') {
+      // la página de ZERO (otro origen) pregunta aquí antes de usar este motor: CORS solo para los orígenes permitidos
+      const cab = { 'content-type': 'application/json', 'cache-control': 'no-store' };
+      if (origenPermitido(req)) { cab['access-control-allow-origin'] = String(req.headers.origin).replace(/\/$/, ''); cab.vary = 'Origin'; }
+      res.writeHead(200, cab); return res.end(JSON.stringify({ ok: true, version: VERSION, listas: nListas, mock: MOCK, celdas: VIVAS.size, tope: MAX_SESIONES }));
+    }
     res.writeHead(404); res.end();
   });
   srv.on('upgrade', (req, socket) => {
