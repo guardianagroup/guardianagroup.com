@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "GUARDIANA ZERO",
+  "short_name": "ZERO",
+  "version": "0.1.0",
+  "description": "Ve quién se conecta desde cada web que visitas (empresas y países) y decide tú qué cortar. Nada sale de tu equipo.",
+  "minimum_chrome_version": "116",
+  "icons": { "16": "iconos/16.png", "32": "iconos/32.png", "48": "iconos/48.png", "128": "iconos/128.png" },
+  "action": { "default_title": "GUARDIANA ZERO", "default_icon": { "16": "iconos/16.png", "32": "iconos/32.png" } },
+  "side_panel": { "default_path": "panel.html" },
+  "background": { "service_worker": "fondo.js", "type": "module" },
+  "permissions": ["webRequest", "declarativeNetRequest", "sidePanel", "scripting", "storage", "tabs", "webNavigation"],
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    { "matches": ["http://*/*", "https://*/*"], "js": ["sensores.js"], "run_at": "document_start", "all_frames": true, "world": "MAIN" },
+    { "matches": ["http://*/*", "https://*/*"], "js": ["relevo.js"], "run_at": "document_start", "all_frames": true }
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      { "id": "normal", "enabled": false, "path": "reglas/normal.json" },
+      { "id": "malware", "enabled": true, "path": "reglas/malware.json" }
+    ]
+  },
+  "web_accessible_resources": []
+}
