@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GUARDIANA · ZERO</title>
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<header class="ph"><span>LO QUE ZERO VE</span><a class="marca" href="https://guardianagroup.com/orbita/zero/" target="_blank" rel="noopener">GUARDIANA</a></header>
+<section class="ficha" id="ficha">
+  <div class="fh"><small>EN ESTA WEB</small><span class="vivo" id="vivo">EN VIVO</span></div>
+  <h2 id="web">—</h2>
+  <div class="cifras">
+    <div><b id="total">0</b><small id="totaltxt">Vistas</small></div>
+    <div><b id="nemp">0</b><small>Empresas</small></div>
+    <div><b id="npais">0</b><small>Países</small></div>
+  </div>
+  <small class="sub">PARA QUÉ</small>
+  <div class="porque" id="porque"><span class="vacio">Aún no hay conexiones de otras empresas en esta web.</span></div>
+</section>
+<section class="nivel">
+  <h3>Nivel de protección</h3>
+  <p id="niveltxt">No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.</p>
+  <div class="niveles" id="niveles" role="radiogroup" aria-label="Nivel de protección">
+    <button type="button" role="radio" data-n="observar" aria-checked="true">Observar</button>
+    <button type="button" role="radio" data-n="normal" aria-checked="false">Normal</button>
+    <button type="button" role="radio" data-n="estricto" aria-checked="false">Estricto</button>
+  </div>
+</section>
+<nav class="pest" role="tablist" aria-label="Qué ver">
+  <button type="button" role="tab" id="tabemp" aria-selected="true" aria-controls="rows">POR EMPRESA <b id="qemp">0</b></button>
+  <button type="button" role="tab" id="tabvivo" aria-selected="false" aria-controls="vivos">EN VIVO <b id="qvivo">0</b></button>
+</nav>
+<section id="rows" role="tabpanel" aria-labelledby="tabemp"><p class="vacio">Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.</p></section>
+<section id="vivos" role="tabpanel" aria-labelledby="tabvivo" hidden><p class="vacio">Aquí verás, en orden, cada cosa que intenta la web y lo que hace ZERO.</p></section>
+<footer class="pie"><span>ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.</span><button type="button" id="limpiar">Vaciar esta web</button></footer>
+<script src="static/idioma.js"></script>
+<script src="panel.js"></script>
+</body>
+</html>
