@@ -31,7 +31,9 @@
 
   let ws = null, abierto = false, pendiente = null, ultimoCuadro = 0, cuadros = 0, moviendo = 0;
   const env = (o) => { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); };
-  const tam = () => ({ w: Math.round(cv.offsetWidth || web.offsetWidth) || 1064, h: Math.round(cv.offsetHeight || web.offsetHeight) || 800 });
+  // Tamaño de la celda = tamaño real en pantalla del hueco (por devicePixelRatio), no el del diseño sin escalar: así no se
+  // codifican píxeles que nadie ve (26 Oct 2026, ronda 46). Mínimo 360 de ancho para que las webs no se rompan.
+  const tam = () => { const r = (cv.getBoundingClientRect && cv.getBoundingClientRect()) || {}; const dpr = Math.min(1.25, window.devicePixelRatio || 1); const w = Math.round((r.width || cv.offsetWidth || web.offsetWidth) * (r.width ? dpr : 1)) || 1064; const h = Math.round((r.height || cv.offsetHeight || web.offsetHeight) * (r.height ? dpr : 1)) || 800; return { w: Math.max(360, Math.min(1920, w)), h: Math.max(240, Math.min(1200, h)) }; };
 
   // Idioma de la celda: el de la página (documentElement.lang) con la región del navegador de la persona si coincide (es + es-CO → es-CO).
   function idiomaCelda() {
@@ -102,8 +104,8 @@
   cv.addEventListener('paste', (e) => { const s = (e.clipboardData || window.clipboardData).getData('text'); if (s) { e.preventDefault(); env({ t: 'texto', s: String(s).slice(0, 20000) }); } });
   document.addEventListener('visibilitychange', () => env({ t: 'mira', si: !document.hidden }));
   let tTam = 0;
-  const avisaTam = () => { clearTimeout(tTam); tTam = setTimeout(() => { if (!abierto) return; const t = tam(); env({ t: 'tam', w: t.w, h: t.h }); }, 320); };
-  new ResizeObserver(avisaTam).observe(web);
+  const avisaTam = () => { clearTimeout(tTam); tTam = setTimeout(() => { if (!abierto) return; const t = tam(); env({ t: 'tam', w: t.w, h: t.h }); }, 420); };
+  new ResizeObserver(avisaTam).observe(web); addEventListener('resize', avisaTam, { passive: true });
 
   // ---- lo que la página de ZERO puede pedir ----
   const esDir = (v) => /^https?:\/\//i.test(v) || /^[^\s/]+\.[a-z]{2,}(\/\S*)?$/i.test(v) || /^(localhost|127\.0\.0\.1)(:\d+)?(\/.*)?$/i.test(v);
@@ -114,7 +116,7 @@
     else if (esDir(texto)) u = /^https?:\/\//i.test(texto) ? texto : (/^(localhost|127\.0\.0\.1)/i.test(texto) ? 'http://' : 'https://') + texto;
     else u = urlBuscador + encodeURIComponent(texto);
     if (M.sellada) { ponEstado('Celda sellada: reanuda o destruye la celda antes de abrir otra web', 'mal'); if (window.zeroNav) window.zeroNav({ host: M.host, url: M.urlActual }); return; }
-    stage.classList.add('real'); abierto = true; M.acta = null; ponEstado('Abriendo en la celda…');
+    stage.classList.add('real'); abierto = true; M.acta = null; ponEstado('Abriendo en la celda…'); avisaTam();
     try { const h = new URL(u).host; if (window.zeroNav) window.zeroNav({ host: h, url: u }); } catch (_) {}
     if (M.estado === 'lista' && ws && ws.readyState === 1) env({ t: 'abrir', url: u }); else { pendiente = u; conecta(); }
     setTimeout(() => cv.focus(), 50);
