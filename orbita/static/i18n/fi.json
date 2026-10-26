@@ -1398,7 +1398,8 @@
   "La web no cargó": "Sivusto ei latautunut",
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Taso tarkkaile: ZERO päästää kaiken läpi (paitsi vaaralliset sivustot), havaitsee sen ja näyttää sen sinulle; sinä valitset, mitä katkaistaan.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Tämä hakukone ei päästänyt hakua läpi solusta. ZERO selaa palvelimelta, ja jotkin hakukoneet rajoittavat tällaisia yhteyksiä. Voit valita toisen hakukoneen tai kirjoittaa sivuston osoitteen suoraan.",
-  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Hakukone haluaa tarkistaa, että olet ihminen. Tee tarkistus täällä ja jatka; solu muistaa, että läpäisit sen."
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Hakukone haluaa tarkistaa, että olet ihminen. Tee tarkistus täällä ja jatka; solu muistaa, että läpäisit sen.",
+  "celda en": "solu:"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

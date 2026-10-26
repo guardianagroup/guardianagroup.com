@@ -1398,7 +1398,8 @@
   "La web no cargó": "האתר לא נטען",
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "רמת צפייה: ZERO מעביר הכול (למעט אתרים מסוכנים), מזהה ומראה לכם; אתם בוחרים מה לחתוך.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "מנוע החיפוש לא העביר את השאילתה מהתא. ZERO גולש משרת, וחלק ממנועי החיפוש מגבילים חיבורים כאלה. אפשר לבחור מנוע אחר או להקליד ישירות את כתובת האתר.",
-  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "מנוע החיפוש רוצה לוודא שאתם אדם. פתרו את האימות כאן והמשיכו; התא יזכור שעברתם אותו."
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "מנוע החיפוש רוצה לוודא שאתם אדם. פתרו את האימות כאן והמשיכו; התא יזכור שעברתם אותו.",
+  "celda en": "תא ב"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

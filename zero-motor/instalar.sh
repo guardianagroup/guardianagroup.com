@@ -12,6 +12,8 @@
 set -euo pipefail
 
 DOMINIO="${1:-motor.guardianagroup.com}"
+REGION="${2:-${ZERO_REGION:-}}"
+if [ -z "$REGION" ]; then case "$DOMINIO" in motor.guardianagroup.com) REGION="Europa · Núremberg";; motor-am.guardianagroup.com) REGION="América · Miami";; esac; fi
 RAMA="${ZERO_RAMA:-main}"
 REPO="${ZERO_REPO:-https://github.com/guardianagroup/guardianagroup.com.git}"
 BASE=/opt/guardiana
@@ -159,15 +161,23 @@ sudo -u zero env PLAYWRIGHT_BROWSERS_PATH="$NAVEGADORES" npx --yes playwright in
 npx --yes playwright install-deps chromium >/dev/null
 
 paso "Configuración ($ENVF)"
+RAM_MB=$(awk '/MemTotal/ {print int($2/1024)}' /proc/meminfo 2>/dev/null || echo 4096)
+MAX_SES=$(( (RAM_MB - 700) / 600 )); [ "$MAX_SES" -lt 1 ] && MAX_SES=1; [ "$MAX_SES" -gt 8 ] && MAX_SES=8
+if [ -f "$ENVF" ] && [ -n "$REGION" ]; then
+  if grep -q '^ZERO_REGION=' "$ENVF"; then sed -i "s|^ZERO_REGION=.*|ZERO_REGION=$REGION|" "$ENVF"; else echo "ZERO_REGION=$REGION" >> "$ENVF"; fi
+fi
 if [ ! -f "$ENVF" ]; then
   cat > "$ENVF" <<EOF
 # ZERO · motor · configuración. Lo lee el servicio zero-motor (systemctl restart zero-motor tras cambiar algo).
 ZERO_PUBLICO=https://$DOMINIO
 ZERO_ORIGENES=https://guardianagroup.com,https://www.guardianagroup.com
-# Celdas vivas a la vez (cada una es un Chromium con hasta 8 pestañas; unos 300–600 MB cada una)
-ZERO_MAX_SESIONES=4
+# Celdas vivas a la vez (cada una es un Chromium con hasta 8 pestañas; unos 300–600 MB cada una); calculado por la RAM
+ZERO_MAX_SESIONES=$MAX_SES
 ZERO_MIN_SIN_MIRAR=30
 ZERO_MAX_HORAS=12
+# Dónde está este motor (lo enseña la página: «navegas desde…»). Ej.: Europa · Núremberg | América · Miami
+ZERO_REGION=$REGION
+
 # Ruta ULTRA (salida por Tor). Déjalo vacío para no ofrecer ULTRA.
 ZERO_TOR_PROXY=socks5://127.0.0.1:9050
 PLAYWRIGHT_BROWSERS_PATH=$NAVEGADORES

@@ -145,7 +145,7 @@ class Sesion {
     await this.ponIntercepcion(this.nivel !== 'observar');
     this.ctx.on('page', (p) => { if (this.esperadas > 0) { this.esperadas--; return; } this.suceso({ clase: 'popup', certeza: 'comprobado', texto: 'La web intentó abrir una ventana nueva. ZERO la cerró.', dominio: hostDe(p.url()) }); p.close().catch(() => {}); });
     await this.nuevaPestana();
-    this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h, ultraDisponible: !!TOR_PROXY, ultra: !!(this.ultra && TOR_PROXY), nivel: this.nivel });
+    this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h, ultraDisponible: !!TOR_PROXY, ultra: !!(this.ultra && TOR_PROXY), nivel: this.nivel, region: process.env.ZERO_REGION || '' });
   }
 
   async nuevaPestana(url) {
@@ -711,7 +711,7 @@ async function main() {
       // la página de ZERO (otro origen) pregunta aquí antes de usar este motor: CORS solo para los orígenes permitidos
       const cab = { 'content-type': 'application/json', 'cache-control': 'no-store' };
       if (origenPermitido(req)) { cab['access-control-allow-origin'] = String(req.headers.origin).replace(/\/$/, ''); cab.vary = 'Origin'; }
-      res.writeHead(200, cab); return res.end(JSON.stringify({ ok: true, version: VERSION, listas: nListas, mock: MOCK, celdas: VIVAS.size, tope: MAX_SESIONES }));
+      res.writeHead(200, cab); return res.end(JSON.stringify({ ok: true, version: VERSION, listas: nListas, mock: MOCK, celdas: VIVAS.size, tope: MAX_SESIONES, region: process.env.ZERO_REGION || '' }));
     }
     res.writeHead(404); res.end();
   });

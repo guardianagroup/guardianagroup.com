@@ -1397,7 +1397,8 @@
   "La web no cargó": "Stranica se nije učitala",
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Razina promatraj: ZERO propušta sve (osim opasnih stranica), otkriva i pokazuje ti; ti biraš što odrezati.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Ova tražilica nije propustila upit iz ćelije. ZERO pregledava s poslužitelja, a neke tražilice ograničavaju takve veze. Možeš odabrati drugu tražilicu ili izravno upisati adresu stranice.",
-  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Tražilica želi provjeriti da si osoba. Riješi provjeru ovdje i nastavi; ćelija će zapamtiti da si je prošao."
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Tražilica želi provjeriti da si osoba. Riješi provjeru ovdje i nastavi; ćelija će zapamtiti da si je prošao.",
+  "celda en": "ćelija u"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

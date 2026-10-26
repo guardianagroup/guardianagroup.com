@@ -1399,7 +1399,8 @@
   "La web no cargó": "サイトを読み込めませんでした",
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "観察レベル：ZEROはすべてを通し（危険なサイトを除く）、検知して表示します。何を遮断するかはあなたが選びます。",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "この検索エンジンはセルからの検索を通しませんでした。ZEROはサーバーから閲覧しており、一部の検索エンジンはそのような接続を制限します。別の検索エンジンを選ぶか、サイトのアドレスを直接入力してください。",
-  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "検索エンジンがあなたが人間であることを確認したがっています。ここで確認を済ませて続けてください。セルは通過したことを記憶します。"
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "検索エンジンがあなたが人間であることを確認したがっています。ここで確認を済ませて続けてください。セルは通過したことを記憶します。",
+  "celda en": "セル:"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",
