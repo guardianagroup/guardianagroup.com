@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "פתיחת הקישור בכרטיסייה חדשה",
   "Copiar la dirección del enlace": "העתקת כתובת הקישור",
   "Copiar": "העתקה",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "האתר הזה לא מכניס דפדפנים שיוצאים משרת (הגנה מפני בוטים לפי רשת). מהתא אי אפשר לפתוח אותו; בדפדפן הרגיל שלכם כן."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "האתר הזה לא מכניס דפדפנים שיוצאים משרת (הגנה מפני בוטים לפי רשת). מהתא אי אפשר לפתוח אותו; בדפדפן הרגיל שלכם כן.",
+  "Lo que ZERO ve": "מה ZERO רואה",
+  "Permitida": "מאושרת",
+  "Vaciar esta web": "לנקות אתר זה",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO לא שולח דבר ל-GUARDIANA: הכול נראה ומוחלט במכשיר שלכם.",
+  "Aún no hay conexiones de otras empresas en esta web.": "עדיין אין באתר זה חיבורים לחברות אחרות.",
+  "Preparando las listas…": "מכינים את הרשימות…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "כשהאתר יתחבר לחברות אחרות תראו כאן מי הן, מאיזו מדינה ולשם מה; ותוכלו לחתוך כל אחת.",
+  "Dejar pasar las conexiones de esta empresa": "להעביר את החיבורים של חברה זו",
+  "Cortar las conexiones de esta empresa en todas las webs": "לחתוך את החיבורים של חברה זו בכל האתרים",
+  "Permiso pedido": "התבקשה הרשאה",
+  "Conexión directa (WebRTC)": "חיבור ישיר (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "האתר ניסה לפתוח חיבור ישיר (WebRTC), הדרך המקובלת לגלות את כתובת הרשת האמיתית."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "אתם חותכים שוב את החיבורים של {1} בסשן הזה.",
   "mFallo": "האתר {1} לא נטען: {2}.",
   "opPermitida": "אושר {1}",
-  "opCortarse": "נחתך שוב {1}"
+  "opCortarse": "נחתך שוב {1}",
+  "mVistoSimpleDe": "ZERO ראה {1} מ-{2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO ראה {1} אל {2}.",
+  "mPermisoNav": "האתר ביקש גישה ל-{1}. אתם מחליטים בחלון הדפדפן.",
+  "mHuellaLocal": "תוכנית מ-{1} שאלה על {2}, נתון המשמש לזיהוי המכשיר שלכם.",
+  "mCookieVista": "{1} ניסה להשאיר עוגייה של חברה אחרת כדי לזהות אתכם באתרים נוספים.",
+  "nCortadas": "{1} נחתכו"
  }
 }

@@ -1404,7 +1404,19 @@
   "Abrir enlace en una pestaña nueva": "Otvori poveznicu u novoj kartici",
   "Copiar la dirección del enlace": "Kopiraj adresu poveznice",
   "Copiar": "Kopiraj",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Ova stranica ne pušta preglednike koji izlaze s poslužitelja (mrežna zaštita od robota). Iz ćelije se ne može otvoriti; u tvom uobičajenom pregledniku može."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Ova stranica ne pušta preglednike koji izlaze s poslužitelja (mrežna zaštita od robota). Iz ćelije se ne može otvoriti; u tvom uobičajenom pregledniku može.",
+  "Lo que ZERO ve": "Što ZERO vidi",
+  "Permitida": "Dopuštena",
+  "Vaciar esta web": "Očisti ovu stranicu",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO ništa ne šalje GUARDIANI: sve se vidi i odlučuje na tvom uređaju.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Na ovoj stranici još nema veza s drugim tvrtkama.",
+  "Preparando las listas…": "Pripremaju se popisi…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Kad se stranica poveže s drugim tvrtkama, ovdje ćeš vidjeti tko su, iz koje zemlje i zašto; i moći ćeš odrezati svaku.",
+  "Dejar pasar las conexiones de esta empresa": "Propusti veze ove tvrtke",
+  "Cortar las conexiones de esta empresa en todas las webs": "Odreži veze ove tvrtke na svim stranicama",
+  "Permiso pedido": "Zatraženo dopuštenje",
+  "Conexión directa (WebRTC)": "Izravna veza (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Stranica je pokušala otvoriti izravnu vezu (WebRTC), uobičajen način da se dozna prava mrežna adresa."
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",
@@ -1499,6 +1511,12 @@
   "mPermisoOff": "Ponovno režeš veze od {1} u ovoj sesiji.",
   "mFallo": "Stranica {1} se nije učitala: {2}.",
   "opPermitida": "dopušteno {1}",
-  "opCortarse": "ponovno odrezano {1}"
+  "opCortarse": "ponovno odrezano {1}",
+  "mVistoSimpleDe": "ZERO je vidio {1}, od {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO je vidio {1} prema {2}.",
+  "mPermisoNav": "Stranica je zatražila pristup: {1}. Ti odlučuješ u upitu preglednika.",
+  "mHuellaLocal": "Program s {1} provjerio je {2}, podatak koji služi za prepoznavanje tvog uređaja.",
+  "mCookieVista": "{1} je pokušao ostaviti kolačić druge tvrtke da te prepozna na više stranica.",
+  "nCortadas": "{1} odrezano"
  }
 }

@@ -206,6 +206,22 @@ def main():
         if f.endswith('.json'): shutil.copy(os.path.join(RAIZ, 'orbita', 'static', 'i18n', f), os.path.join(DIST, 'static', 'i18n', f))
     iconos()
     ver = json.load(open(os.path.join(SRC, 'manifest.json')))['version']
+    # Firefox: misma extensión con manifest adaptado (barra lateral, fondo como scripts, id de Gecko, declaración de datos)
+    FF = os.path.join(RAIZ, 'extension', 'dist', 'zero-firefox')
+    if os.path.exists(FF): shutil.rmtree(FF)
+    shutil.copytree(DIST, FF)
+    mf = json.load(open(os.path.join(SRC, 'manifest.json'), encoding='utf-8'))
+    mf.pop('side_panel', None); mf.pop('minimum_chrome_version', None)
+    mf['sidebar_action'] = {'default_panel': 'panel.html', 'default_title': 'GUARDIANA ZERO', 'default_icon': 'iconos/32.png', 'open_at_install': False}
+    mf['background'] = {'scripts': ['fondo.js'], 'type': 'module'}
+    mf['permissions'] = [p for p in mf['permissions'] if p != 'sidePanel']
+    mf['browser_specific_settings'] = {'gecko': {'id': 'zero@guardianagroup.com', 'strict_min_version': '128.0', 'data_collection_permissions': {'required': ['none']}}}
+    json.dump(mf, open(os.path.join(FF, 'manifest.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+    zf = os.path.join(RAIZ, 'extension', 'dist', f'guardiana-zero-firefox-{ver}.zip')
+    with zipfile.ZipFile(zf, 'w', zipfile.ZIP_DEFLATED) as z:
+        for raiz, _, fs in os.walk(FF):
+            for f in fs:
+                p = os.path.join(raiz, f); z.write(p, os.path.relpath(p, FF))
     zp = os.path.join(RAIZ, 'extension', 'dist', f'guardiana-zero-{ver}.zip')
     with zipfile.ZipFile(zp, 'w', zipfile.ZIP_DEFLATED) as z:
         for raiz, _, fs in os.walk(DIST):

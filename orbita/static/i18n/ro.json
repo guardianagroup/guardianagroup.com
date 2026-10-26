@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "Deschide linkul într-o filă nouă",
   "Copiar la dirección del enlace": "Copiază adresa linkului",
   "Copiar": "Copiază",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Acest site nu lasă să intre browserele care ies dintr-un server (protecție anti-robot pe rețea). Din celulă nu se poate deschide; în browserul tău obișnuit, da."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Acest site nu lasă să intre browserele care ies dintr-un server (protecție anti-robot pe rețea). Din celulă nu se poate deschide; în browserul tău obișnuit, da.",
+  "Lo que ZERO ve": "Ce vede ZERO",
+  "Permitida": "Permisă",
+  "Vaciar esta web": "Golește acest site",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO nu trimite nimic către GUARDIANA: totul se vede și se decide pe dispozitivul tău.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Încă nu există conexiuni cu alte companii pe acest site.",
+  "Preparando las listas…": "Se pregătesc listele…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Când site-ul se va conecta la alte companii, vei vedea aici cine sunt, din ce țară și pentru ce; și vei putea tăia fiecare.",
+  "Dejar pasar las conexiones de esta empresa": "Lasă conexiunile acestei companii să treacă",
+  "Cortar las conexiones de esta empresa en todas las webs": "Taie conexiunile acestei companii pe toate site-urile",
+  "Permiso pedido": "Permisiune cerută",
+  "Conexión directa (WebRTC)": "Conexiune directă (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Site-ul a încercat să deschidă o conexiune directă (WebRTC), calea obișnuită de a afla adresa de rețea reală."
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "Tai din nou conexiunile de la {1} în această sesiune.",
   "mFallo": "Site-ul {1} nu s-a încărcat: {2}.",
   "opPermitida": "permisă {1}",
-  "opCortarse": "tăiată din nou {1}"
+  "opCortarse": "tăiată din nou {1}",
+  "mVistoSimpleDe": "ZERO a văzut {1}, de la {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO a văzut {1} către {2}.",
+  "mPermisoNav": "Site-ul a cerut acces la {1}. Decizi tu în mesajul browserului.",
+  "mHuellaLocal": "Un program de la {1} a consultat {2}, o dată folosită pentru a-ți recunoaște dispozitivul.",
+  "mCookieVista": "{1} a încercat să lase un cookie al altei companii pentru a te recunoaște pe mai multe site-uri.",
+  "nCortadas": "{1} tăiate"
  }
 }

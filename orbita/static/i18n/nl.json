@@ -1406,7 +1406,19 @@
   "Abrir enlace en una pestaña nueva": "Link in nieuw tabblad openen",
   "Copiar la dirección del enlace": "Linkadres kopiëren",
   "Copiar": "Kopiëren",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Deze site laat geen browsers binnen die vanaf een server komen (netwerkbrede botbescherming). Vanuit de cel kan hij niet worden geopend; in je gewone browser wel."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Deze site laat geen browsers binnen die vanaf een server komen (netwerkbrede botbescherming). Vanuit de cel kan hij niet worden geopend; in je gewone browser wel.",
+  "Lo que ZERO ve": "Wat ZERO ziet",
+  "Permitida": "Toegestaan",
+  "Vaciar esta web": "Deze site wissen",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO stuurt niets naar GUARDIANA: alles wordt op je apparaat gezien en beslist.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Nog geen verbindingen met andere bedrijven op deze site.",
+  "Preparando las listas…": "Lijsten voorbereiden…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Wanneer de site verbinding maakt met andere bedrijven, zie je hier wie ze zijn, uit welk land en waarvoor; en kun je elk ervan afsnijden.",
+  "Dejar pasar las conexiones de esta empresa": "De verbindingen van dit bedrijf doorlaten",
+  "Cortar las conexiones de esta empresa en todas las webs": "De verbindingen van dit bedrijf op alle sites afsnijden",
+  "Permiso pedido": "Toestemming gevraagd",
+  "Conexión directa (WebRTC)": "Directe verbinding (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "De site probeerde een directe verbinding (WebRTC) te openen, de gebruikelijke manier om het echte netwerkadres te achterhalen."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",
@@ -1501,6 +1513,12 @@
   "mPermisoOff": "Je snijdt de verbindingen van {1} in deze sessie opnieuw af.",
   "mFallo": "De site {1} werd niet geladen: {2}.",
   "opPermitida": "toegestaan {1}",
-  "opCortarse": "opnieuw afgesneden {1}"
+  "opCortarse": "opnieuw afgesneden {1}",
+  "mVistoSimpleDe": "ZERO zag {1}, van {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO zag {1} naar {2}.",
+  "mPermisoNav": "De site vroeg toegang tot {1}. Jij beslist in de browsermelding.",
+  "mHuellaLocal": "Een programma van {1} raadpleegde {2}, een gegeven om je apparaat te herkennen.",
+  "mCookieVista": "{1} probeerde een cookie van een ander bedrijf te plaatsen om je op meer sites te herkennen.",
+  "nCortadas": "{1} afgesneden"
  }
 }

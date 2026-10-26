@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "Άνοιγμα συνδέσμου σε νέα καρτέλα",
   "Copiar la dirección del enlace": "Αντιγραφή διεύθυνσης συνδέσμου",
   "Copiar": "Αντιγραφή",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Αυτός ο ιστότοπος δεν δέχεται προγράμματα περιήγησης που βγαίνουν από διακομιστή (προστασία κατά των ρομπότ ανά δίκτυο). Δεν ανοίγει από το κελί· στον συνηθισμένο σου browser, ναι."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Αυτός ο ιστότοπος δεν δέχεται προγράμματα περιήγησης που βγαίνουν από διακομιστή (προστασία κατά των ρομπότ ανά δίκτυο). Δεν ανοίγει από το κελί· στον συνηθισμένο σου browser, ναι.",
+  "Lo que ZERO ve": "Τι βλέπει το ZERO",
+  "Permitida": "Επιτρέπεται",
+  "Vaciar esta web": "Καθαρισμός αυτού του ιστότοπου",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "Το ZERO δεν στέλνει τίποτα στην GUARDIANA: όλα φαίνονται και αποφασίζονται στη συσκευή σου.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Δεν υπάρχουν ακόμη συνδέσεις με άλλες εταιρείες σε αυτόν τον ιστότοπο.",
+  "Preparando las listas…": "Προετοιμασία λιστών…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Όταν ο ιστότοπος συνδεθεί με άλλες εταιρείες, θα δεις εδώ ποιες είναι, από ποια χώρα και για ποιο σκοπό· και θα μπορείς να κόψεις την καθεμία.",
+  "Dejar pasar las conexiones de esta empresa": "Άφησε τις συνδέσεις αυτής της εταιρείας να περάσουν",
+  "Cortar las conexiones de esta empresa en todas las webs": "Κόψε τις συνδέσεις αυτής της εταιρείας σε όλους τους ιστότοπους",
+  "Permiso pedido": "Ζητήθηκε άδεια",
+  "Conexión directa (WebRTC)": "Άμεση σύνδεση (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Ο ιστότοπος προσπάθησε να ανοίξει άμεση σύνδεση (WebRTC), τον συνηθισμένο τρόπο για να βρεθεί η πραγματική διεύθυνση δικτύου."
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "Κόβεις ξανά τις συνδέσεις από {1} σε αυτή τη συνεδρία.",
   "mFallo": "Ο ιστότοπος {1} δεν φορτώθηκε: {2}.",
   "opPermitida": "επιτράπηκε {1}",
-  "opCortarse": "κόπηκε ξανά {1}"
+  "opCortarse": "κόπηκε ξανά {1}",
+  "mVistoSimpleDe": "Το ZERO είδε {1}, από {2}[ ({3})].",
+  "mVistoSimpleHacia": "Το ZERO είδε {1} προς {2}.",
+  "mPermisoNav": "Ο ιστότοπος ζήτησε πρόσβαση σε {1}. Αποφασίζεις εσύ στο μήνυμα του προγράμματος περιήγησης.",
+  "mHuellaLocal": "Ένα πρόγραμμα από {1} ρώτησε για {2}, ένα δεδομένο που χρησιμεύει για την αναγνώριση της συσκευής σου.",
+  "mCookieVista": "Το {1} προσπάθησε να αφήσει cookie άλλης εταιρείας για να σε αναγνωρίζει σε περισσότερους ιστότοπους.",
+  "nCortadas": "{1} κομμένες"
  }
 }

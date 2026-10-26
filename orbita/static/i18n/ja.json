@@ -1406,7 +1406,19 @@
   "Abrir enlace en una pestaña nueva": "リンクを新しいタブで開く",
   "Copiar la dirección del enlace": "リンクのアドレスをコピー",
   "Copiar": "コピー",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "このサイトはサーバーから来るブラウザを受け付けません（ネットワーク単位のボット対策）。セルからは開けませんが、いつものブラウザでは開けます。"
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "このサイトはサーバーから来るブラウザを受け付けません（ネットワーク単位のボット対策）。セルからは開けませんが、いつものブラウザでは開けます。",
+  "Lo que ZERO ve": "ZEROが見ているもの",
+  "Permitida": "許可済み",
+  "Vaciar esta web": "このサイトをクリア",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZEROはGUARDIANAに何も送りません。すべてはあなたの端末で見て決めます。",
+  "Aún no hay conexiones de otras empresas en esta web.": "このサイトでは他社への接続はまだありません。",
+  "Preparando las listas…": "リストを準備中…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "サイトが他社に接続すると、相手が誰で、どの国で、何のためかをここに表示し、それぞれ遮断できます。",
+  "Dejar pasar las conexiones de esta empresa": "この企業の接続を通す",
+  "Cortar las conexiones de esta empresa en todas las webs": "この企業の接続をすべてのサイトで遮断する",
+  "Permiso pedido": "権限の要求",
+  "Conexión directa (WebRTC)": "直接接続（WebRTC）",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "サイトが直接接続（WebRTC）を開こうとしました。本当のネットワークアドレスを知る常套手段です。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",
@@ -1501,6 +1513,12 @@
   "mPermisoOff": "このセッションで{1}の接続を再び遮断します。",
   "mFallo": "サイト{1}を読み込めませんでした：{2}。",
   "opPermitida": "許可 {1}",
-  "opCortarse": "再遮断 {1}"
+  "opCortarse": "再遮断 {1}",
+  "mVistoSimpleDe": "ZEROは{2}[（{3}）]からの{1}を検知しました。",
+  "mVistoSimpleHacia": "ZEROは{2}への{1}を検知しました。",
+  "mPermisoNav": "サイトが{1}へのアクセスを求めました。ブラウザの確認で決めてください。",
+  "mHuellaLocal": "{1}のプログラムが{2}を照会しました。端末を識別するためのデータです。",
+  "mCookieVista": "{1}が他社のCookieを置いて、他のサイトでもあなたを識別しようとしました。",
+  "nCortadas": "{1}件遮断"
  }
 }

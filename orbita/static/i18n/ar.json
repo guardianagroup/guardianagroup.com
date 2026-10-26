@@ -1406,7 +1406,19 @@
   "Abrir enlace en una pestaña nueva": "فتح الرابط في علامة تبويب جديدة",
   "Copiar la dirección del enlace": "نسخ عنوان الرابط",
   "Copiar": "نسخ",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "هذا الموقع لا يسمح بدخول المتصفحات القادمة من خادم (حماية من الروبوتات بحسب الشبكة). لا يمكن فتحه من الخلية؛ في متصفحك المعتاد نعم."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "هذا الموقع لا يسمح بدخول المتصفحات القادمة من خادم (حماية من الروبوتات بحسب الشبكة). لا يمكن فتحه من الخلية؛ في متصفحك المعتاد نعم.",
+  "Lo que ZERO ve": "ما يراه ZERO",
+  "Permitida": "مسموح",
+  "Vaciar esta web": "مسح هذا الموقع",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "لا يرسل ZERO أي شيء إلى GUARDIANA: كل شيء يُرى ويُقرَّر على جهازك.",
+  "Aún no hay conexiones de otras empresas en esta web.": "لا توجد بعد اتصالات بشركات أخرى في هذا الموقع.",
+  "Preparando las listas…": "جارٍ تجهيز القوائم…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "عندما يتصل الموقع بشركات أخرى سترى هنا من هي ومن أي بلد ولماذا؛ ويمكنك قطع كل واحدة.",
+  "Dejar pasar las conexiones de esta empresa": "السماح باتصالات هذه الشركة",
+  "Cortar las conexiones de esta empresa en todas las webs": "قطع اتصالات هذه الشركة في كل المواقع",
+  "Permiso pedido": "طلب إذن",
+  "Conexión directa (WebRTC)": "اتصال مباشر (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "حاول الموقع فتح اتصال مباشر (WebRTC)، الطريقة المعتادة لمعرفة عنوان الشبكة الحقيقي."
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",
@@ -1501,6 +1513,12 @@
   "mPermisoOff": "تقطع اتصالات {1} من جديد في هذه الجلسة.",
   "mFallo": "لم يُحمَّل الموقع {1}: {2}.",
   "opPermitida": "مسموح {1}",
-  "opCortarse": "قُطع من جديد {1}"
+  "opCortarse": "قُطع من جديد {1}",
+  "mVistoSimpleDe": "رصد ZERO {1} من {2}[ ({3})].",
+  "mVistoSimpleHacia": "رصد ZERO {1} إلى {2}.",
+  "mPermisoNav": "طلب الموقع الوصول إلى {1}. أنت تقرر في تنبيه المتصفح.",
+  "mHuellaLocal": "استعلم برنامج من {1} عن {2}، وهو بيان يُستخدم للتعرف على جهازك.",
+  "mCookieVista": "حاول {1} وضع ملف تعريف ارتباط لشركة أخرى للتعرف عليك في مواقع أخرى.",
+  "nCortadas": "{1} مقطوعة"
  }
 }

@@ -1406,7 +1406,19 @@
   "Abrir enlace en una pestaña nueva": "在新分頁中開啟連結",
   "Copiar la dirección del enlace": "複製連結網址",
   "Copiar": "複製",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "該網站不允許來自伺服器的瀏覽器進入（按網路的反機器人保護）。無法從單元開啟；在你平常的瀏覽器裡可以。"
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "該網站不允許來自伺服器的瀏覽器進入（按網路的反機器人保護）。無法從單元開啟；在你平常的瀏覽器裡可以。",
+  "Lo que ZERO ve": "ZERO 看到了什麼",
+  "Permitida": "已允許",
+  "Vaciar esta web": "清空此網站",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO 不向 GUARDIANA 傳送任何內容：一切都在你的裝置上檢視與決定。",
+  "Aún no hay conexiones de otras empresas en esta web.": "此網站尚無與其他公司的連線。",
+  "Preparando las listas…": "正在準備清單…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "當網站連線其他公司時，這裡會顯示它們是誰、來自哪個國家、用於什麼；你可以逐一切斷。",
+  "Dejar pasar las conexiones de esta empresa": "放行該公司的連線",
+  "Cortar las conexiones de esta empresa en todas las webs": "在所有網站切斷該公司的連線",
+  "Permiso pedido": "要求了權限",
+  "Conexión directa (WebRTC)": "直接連線（WebRTC）",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "網站試圖開啟直接連線（WebRTC），這是取得真實網路位址的常見方式。"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",
@@ -1501,6 +1513,12 @@
   "mPermisoOff": "你在本次工作階段再次切斷了 {1} 的連線。",
   "mFallo": "網站 {1} 未載入：{2}。",
   "opPermitida": "已允許 {1}",
-  "opCortarse": "再次切斷 {1}"
+  "opCortarse": "再次切斷 {1}",
+  "mVistoSimpleDe": "ZERO 看到了來自 {2}[（{3}）] 的{1}。",
+  "mVistoSimpleHacia": "ZERO 看到了發往 {2} 的{1}。",
+  "mPermisoNav": "網站要求存取{1}。請在瀏覽器提示中決定。",
+  "mHuellaLocal": "來自 {1} 的程式查詢了{2}，這是用於辨識你裝置的資料。",
+  "mCookieVista": "{1} 試圖放置其他公司的 Cookie，以便在更多網站上辨識你。",
+  "nCortadas": "已切斷 {1} 個"
  }
 }

@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "Avaa linkki uudessa välilehdessä",
   "Copiar la dirección del enlace": "Kopioi linkin osoite",
   "Copiar": "Kopioi",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Tämä sivusto ei päästä sisään palvelimelta tulevia selaimia (verkkokohtainen bottisuojaus). Sitä ei voi avata solusta; tavallisessa selaimessasi voi."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Tämä sivusto ei päästä sisään palvelimelta tulevia selaimia (verkkokohtainen bottisuojaus). Sitä ei voi avata solusta; tavallisessa selaimessasi voi.",
+  "Lo que ZERO ve": "Mitä ZERO näkee",
+  "Permitida": "Sallittu",
+  "Vaciar esta web": "Tyhjennä tämä sivusto",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO ei lähetä mitään GUARDIANAlle: kaikki nähdään ja päätetään laitteellasi.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Tällä sivustolla ei ole vielä yhteyksiä muihin yrityksiin.",
+  "Preparando las listas…": "Valmistellaan listoja…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Kun sivusto ottaa yhteyttä muihin yrityksiin, näet täällä keitä ne ovat, mistä maasta ja mihin tarkoitukseen; ja voit katkaista jokaisen.",
+  "Dejar pasar las conexiones de esta empresa": "Päästä tämän yrityksen yhteydet läpi",
+  "Cortar las conexiones de esta empresa en todas las webs": "Katkaise tämän yrityksen yhteydet kaikilla sivustoilla",
+  "Permiso pedido": "Lupaa pyydetty",
+  "Conexión directa (WebRTC)": "Suora yhteys (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Sivusto yritti avata suoran yhteyden (WebRTC), tavallisen tavan selvittää todellinen verkko-osoite."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "Katkaiset yhteydet lähteestä {1} uudelleen tässä istunnossa.",
   "mFallo": "Sivusto {1} ei latautunut: {2}.",
   "opPermitida": "sallittu {1}",
-  "opCortarse": "katkaistu uudelleen {1}"
+  "opCortarse": "katkaistu uudelleen {1}",
+  "mVistoSimpleDe": "ZERO näki {1}, lähde {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO näki {1} kohteeseen {2}.",
+  "mPermisoNav": "Sivusto pyysi pääsyä kohteeseen {1}. Päätä selaimen kysymyksessä.",
+  "mHuellaLocal": "Ohjelma lähteestä {1} kysyi tietoa {2}, jota käytetään laitteesi tunnistamiseen.",
+  "mCookieVista": "{1} yritti asettaa toisen yrityksen evästeen tunnistaakseen sinut muillakin sivustoilla.",
+  "nCortadas": "{1} katkaistu"
  }
 }

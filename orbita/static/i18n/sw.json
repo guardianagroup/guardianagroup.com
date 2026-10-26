@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "Fungua kiungo kwenye kichupo kipya",
   "Copiar la dirección del enlace": "Nakili anwani ya kiungo",
   "Copiar": "Nakili",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Tovuti hii hairuhusu vivinjari vinavyotoka kwenye seva (ulinzi dhidi ya roboti kwa mtandao). Haiwezi kufunguliwa kutoka kwenye seli; kwenye kivinjari chako cha kawaida inawezekana."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Tovuti hii hairuhusu vivinjari vinavyotoka kwenye seva (ulinzi dhidi ya roboti kwa mtandao). Haiwezi kufunguliwa kutoka kwenye seli; kwenye kivinjari chako cha kawaida inawezekana.",
+  "Lo que ZERO ve": "Kile ZERO inaona",
+  "Permitida": "Imeruhusiwa",
+  "Vaciar esta web": "Futa tovuti hii",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO haitumi chochote kwa GUARDIANA: kila kitu kinaonekana na kuamuliwa kwenye kifaa chako.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Bado hakuna miunganisho na kampuni nyingine kwenye tovuti hii.",
+  "Preparando las listas…": "Inaandaa orodha…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Tovuti itakapounganishwa na kampuni nyingine, utaona hapa ni nani, kutoka nchi gani na kwa nini; na unaweza kukata kila moja.",
+  "Dejar pasar las conexiones de esta empresa": "Ruhusu miunganisho ya kampuni hii",
+  "Cortar las conexiones de esta empresa en todas las webs": "Kata miunganisho ya kampuni hii kwenye tovuti zote",
+  "Permiso pedido": "Ruhusa imeombwa",
+  "Conexión directa (WebRTC)": "Muunganisho wa moja kwa moja (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Tovuti ilijaribu kufungua muunganisho wa moja kwa moja (WebRTC), njia ya kawaida ya kujua anwani halisi ya mtandao."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "Unakata tena miunganisho ya {1} katika kipindi hiki.",
   "mFallo": "Tovuti {1} haikupakia: {2}.",
   "opPermitida": "imeruhusiwa {1}",
-  "opCortarse": "imekatwa tena {1}"
+  "opCortarse": "imekatwa tena {1}",
+  "mVistoSimpleDe": "ZERO imeona {1}, kutoka {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO imeona {1} kuelekea {2}.",
+  "mPermisoNav": "Tovuti imeomba ufikiaji wa {1}. Amua wewe kwenye arifa ya kivinjari.",
+  "mHuellaLocal": "Programu kutoka {1} imeuliza {2}, data inayotumika kutambua kifaa chako.",
+  "mCookieVista": "{1} ilijaribu kuweka kidakuzi cha kampuni nyingine ili kukutambua kwenye tovuti zaidi.",
+  "nCortadas": "{1} zimekatwa"
  }
 }

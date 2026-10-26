@@ -5,10 +5,10 @@
   const $ = (s) => document.querySelector(s);
   const NIVEL_TXT = {
     observar: 'No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.',
-    normal: 'Corta la publicidad y el rastreo de las listas públicas (EasyList, EasyPrivacy, uBlock Origin).',
-    estricto: 'Corta toda conexión con otras empresas salvo las que tú permitas. Algunas webs pueden fallar.',
+    normal: 'Corta la publicidad y el rastreo de las listas públicas; la web se ve entera.',
+    estricto: 'Además, nada de otras empresas: solo lo propio de la web. Alguna web puede verse incompleta.',
   };
-  const TITULO = { corte: 'Conexión', huella: 'Consulta de huella digital', permiso: 'Petición de permiso', webrtc: 'Conexión directa (WebRTC)', formulario: 'Formulario sin cifrar', subasta: 'Subasta de anuncios', cookie: 'Cookie de otra empresa' };
+  const TITULO = { corte: 'Conexión', huella: 'Consulta de huella digital', permiso: 'Permiso pedido', webrtc: 'Conexión directa (WebRTC)', formulario: 'Formulario sin cifrar', subasta: 'Subasta de anuncios', cookie: 'Cookie de otra empresa' };
   let tabId = null, nivel = 'observar', pestana = 'emp';
 
   async function pestanaActiva() { const [t] = await chrome.tabs.query({ active: true, lastFocusedWindow: true }); return t ? t.id : null; }
@@ -46,7 +46,7 @@
     }
     // en vivo
     const V = $('#vivos'); V.textContent = '';
-    if (!e.sucesos.length) { const p = document.createElement('p'); p.className = 'vacio'; p.textContent = 'Aquí verás, en orden, cada cosa que intenta la web y lo que hace ZERO.'; V.append(p); }
+    if (!e.sucesos.length) { const p = document.createElement('p'); p.className = 'vacio'; p.textContent = 'Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.'; V.append(p); }
     for (const s of [...e.sucesos].reverse()) {
       const d = document.createElement('div'); d.className = 'viv' + (s.estado === 'cortado' ? ' c' : (s.clase === 'huella' || s.clase === 'formulario' || s.clase === 'webrtc' ? ' a' : ''));
       const i = document.createElement('i'); const t = document.createElement('span'); t.textContent = s.texto; t.title = TITULO[s.clase] || s.clase; const tm = document.createElement('time'); tm.textContent = hora(s.hora);

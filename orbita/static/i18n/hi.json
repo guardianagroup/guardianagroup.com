@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "लिंक नए टैब में खोलें",
   "Copiar la dirección del enlace": "लिंक का पता कॉपी करें",
   "Copiar": "कॉपी करें",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "यह वेबसाइट सर्वर से निकलने वाले ब्राउज़रों को अंदर नहीं आने देती (नेटवर्क के अनुसार एंटी-बॉट सुरक्षा)। सेल से इसे नहीं खोला जा सकता; आपके सामान्य ब्राउज़र में हाँ।"
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "यह वेबसाइट सर्वर से निकलने वाले ब्राउज़रों को अंदर नहीं आने देती (नेटवर्क के अनुसार एंटी-बॉट सुरक्षा)। सेल से इसे नहीं खोला जा सकता; आपके सामान्य ब्राउज़र में हाँ।",
+  "Lo que ZERO ve": "ZERO क्या देखता है",
+  "Permitida": "अनुमत",
+  "Vaciar esta web": "यह साइट खाली करें",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO GUARDIANA को कुछ नहीं भेजता: सब कुछ आपके डिवाइस पर देखा और तय किया जाता है।",
+  "Aún no hay conexiones de otras empresas en esta web.": "इस साइट पर अभी दूसरी कंपनियों से कोई कनेक्शन नहीं है।",
+  "Preparando las listas…": "सूचियाँ तैयार हो रही हैं…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "जब साइट दूसरी कंपनियों से जुड़ेगी, यहाँ आप देखेंगे वे कौन हैं, किस देश से और किसलिए; और हर एक को काट सकेंगे।",
+  "Dejar pasar las conexiones de esta empresa": "इस कंपनी के कनेक्शन जाने दें",
+  "Cortar las conexiones de esta empresa en todas las webs": "इस कंपनी के कनेक्शन सभी साइटों पर काटें",
+  "Permiso pedido": "अनुमति माँगी गई",
+  "Conexión directa (WebRTC)": "सीधा कनेक्शन (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "साइट ने सीधा कनेक्शन (WebRTC) खोलने की कोशिश की, जो असली नेटवर्क पता जानने का आम तरीका है।"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "आप इस सत्र में {1} के कनेक्शन फिर से काट रहे हैं।",
   "mFallo": "साइट {1} लोड नहीं हुई: {2}।",
   "opPermitida": "अनुमत {1}",
-  "opCortarse": "फिर से काटा {1}"
+  "opCortarse": "फिर से काटा {1}",
+  "mVistoSimpleDe": "ZERO ने {2}[ ({3})] से {1} देखा।",
+  "mVistoSimpleHacia": "ZERO ने {2} की ओर {1} देखा।",
+  "mPermisoNav": "साइट ने {1} तक पहुँच माँगी। ब्राउज़र के संकेत में आप तय करें।",
+  "mHuellaLocal": "{1} के एक प्रोग्राम ने {2} देखा, जो आपके डिवाइस को पहचानने के काम आता है।",
+  "mCookieVista": "{1} ने दूसरी कंपनी की कुकी छोड़ने की कोशिश की ताकि आपको और साइटों पर पहचाने।",
+  "nCortadas": "{1} काटे गए"
  }
 }

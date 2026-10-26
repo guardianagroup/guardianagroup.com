@@ -1406,7 +1406,19 @@
   "Abrir enlace en una pestaña nueva": "Otwórz link w nowej karcie",
   "Copiar la dirección del enlace": "Kopiuj adres linku",
   "Copiar": "Kopiuj",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Ta strona nie wpuszcza przeglądarek wychodzących z serwera (ochrona antybotowa po sieci). Z komórki nie da się jej otworzyć; w twojej zwykłej przeglądarce tak."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Ta strona nie wpuszcza przeglądarek wychodzących z serwera (ochrona antybotowa po sieci). Z komórki nie da się jej otworzyć; w twojej zwykłej przeglądarce tak.",
+  "Lo que ZERO ve": "Co widzi ZERO",
+  "Permitida": "Dozwolona",
+  "Vaciar esta web": "Wyczyść tę stronę",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO nic nie wysyła do GUARDIANA: wszystko widzisz i decydujesz na swoim urządzeniu.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Na tej stronie nie ma jeszcze połączeń z innymi firmami.",
+  "Preparando las listas…": "Przygotowywanie list…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Gdy strona połączy się z innymi firmami, zobaczysz tu, kim są, z jakiego kraju i po co; i będziesz mógł odciąć każdą.",
+  "Dejar pasar las conexiones de esta empresa": "Przepuszczaj połączenia tej firmy",
+  "Cortar las conexiones de esta empresa en todas las webs": "Odcinaj połączenia tej firmy na wszystkich stronach",
+  "Permiso pedido": "Prośba o uprawnienie",
+  "Conexión directa (WebRTC)": "Połączenie bezpośrednie (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Strona próbowała otworzyć połączenie bezpośrednie (WebRTC), zwykły sposób poznania prawdziwego adresu sieciowego."
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",
@@ -1501,6 +1513,12 @@
   "mPermisoOff": "Ponownie odcinasz połączenia od {1} w tej sesji.",
   "mFallo": "Strona {1} się nie wczytała: {2}.",
   "opPermitida": "dozwolone {1}",
-  "opCortarse": "ponownie odcięte {1}"
+  "opCortarse": "ponownie odcięte {1}",
+  "mVistoSimpleDe": "ZERO widziało {1}, od {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO widziało {1} do {2}.",
+  "mPermisoNav": "Strona poprosiła o dostęp do {1}. Ty decydujesz w komunikacie przeglądarki.",
+  "mHuellaLocal": "Program z {1} sprawdził {2}, daną służącą do rozpoznania twojego urządzenia.",
+  "mCookieVista": "{1} próbowało zostawić ciasteczko innej firmy, by rozpoznać cię na innych stronach.",
+  "nCortadas": "{1} odcięte"
  }
 }

@@ -1406,7 +1406,19 @@
   "Abrir enlace en una pestaña nueva": "Bağlantıyı yeni sekmede aç",
   "Copiar la dirección del enlace": "Bağlantı adresini kopyala",
   "Copiar": "Kopyala",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Bu site bir sunucudan çıkan tarayıcıları içeri almıyor (ağ tabanlı bot koruması). Hücreden açılamaz; her zamanki tarayıcında açılır."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Bu site bir sunucudan çıkan tarayıcıları içeri almıyor (ağ tabanlı bot koruması). Hücreden açılamaz; her zamanki tarayıcında açılır.",
+  "Lo que ZERO ve": "ZERO ne görüyor",
+  "Permitida": "İzin verildi",
+  "Vaciar esta web": "Bu siteyi temizle",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO, GUARDIANA’ya hiçbir şey göndermez: her şey cihazında görülür ve kararlaştırılır.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Bu sitede henüz başka şirketlere bağlantı yok.",
+  "Preparando las listas…": "Listeler hazırlanıyor…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Site başka şirketlere bağlandığında burada kim olduklarını, hangi ülkeden ve ne için olduğunu görür, her birini kesebilirsin.",
+  "Dejar pasar las conexiones de esta empresa": "Bu şirketin bağlantılarına izin ver",
+  "Cortar las conexiones de esta empresa en todas las webs": "Bu şirketin bağlantılarını tüm sitelerde kes",
+  "Permiso pedido": "İzin istendi",
+  "Conexión directa (WebRTC)": "Doğrudan bağlantı (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Site, gerçek ağ adresini öğrenmenin olağan yolu olan doğrudan bir bağlantı (WebRTC) açmaya çalıştı."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",
@@ -1501,6 +1513,12 @@
   "mPermisoOff": "Bu oturumda {1} bağlantılarını yeniden kesiyorsun.",
   "mFallo": "{1} sitesi yüklenmedi: {2}.",
   "opPermitida": "izin verildi {1}",
-  "opCortarse": "yeniden kesildi {1}"
+  "opCortarse": "yeniden kesildi {1}",
+  "mVistoSimpleDe": "ZERO {2}[ ({3})] kaynaklı {1} gördü.",
+  "mVistoSimpleHacia": "ZERO {2} adresine {1} gördü.",
+  "mPermisoNav": "Site {1} erişimi istedi. Tarayıcı uyarısında sen karar ver.",
+  "mHuellaLocal": "{1} kaynaklı bir program, cihazını tanımaya yarayan {2} verisini sorguladı.",
+  "mCookieVista": "{1}, seni başka sitelerde tanımak için başka bir şirketin çerezini bırakmaya çalıştı.",
+  "nCortadas": "{1} kesildi"
  }
 }

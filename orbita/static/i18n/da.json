@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "Åbn link i ny fane",
   "Copiar la dirección del enlace": "Kopiér linkadresse",
   "Copiar": "Kopiér",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Dette websted lukker ikke browsere ind, der kommer fra en server (netværksbaseret botbeskyttelse). Det kan ikke åbnes fra cellen; i din sædvanlige browser kan det."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Dette websted lukker ikke browsere ind, der kommer fra en server (netværksbaseret botbeskyttelse). Det kan ikke åbnes fra cellen; i din sædvanlige browser kan det.",
+  "Lo que ZERO ve": "Hvad ZERO ser",
+  "Permitida": "Tilladt",
+  "Vaciar esta web": "Ryd dette websted",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO sender intet til GUARDIANA: alt ses og afgøres på din enhed.",
+  "Aún no hay conexiones de otras empresas en esta web.": "Ingen forbindelser til andre firmaer på dette websted endnu.",
+  "Preparando las listas…": "Forbereder listerne…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Når webstedet forbinder til andre firmaer, ser du her, hvem de er, fra hvilket land og hvorfor; og du kan klippe hver enkelt.",
+  "Dejar pasar las conexiones de esta empresa": "Lad dette firmas forbindelser passere",
+  "Cortar las conexiones de esta empresa en todas las webs": "Klip dette firmas forbindelser på alle websteder",
+  "Permiso pedido": "Tilladelse anmodet",
+  "Conexión directa (WebRTC)": "Direkte forbindelse (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Webstedet forsøgte at åbne en direkte forbindelse (WebRTC), den sædvanlige måde at finde den rigtige netværksadresse på."
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "Du klipper forbindelser fra {1} igen i denne session.",
   "mFallo": "Siden {1} blev ikke indlæst: {2}.",
   "opPermitida": "tilladt {1}",
-  "opCortarse": "klippet igen {1}"
+  "opCortarse": "klippet igen {1}",
+  "mVistoSimpleDe": "ZERO så {1}, fra {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO så {1} til {2}.",
+  "mPermisoNav": "Webstedet bad om adgang til {1}. Du afgør det i browserens prompt.",
+  "mHuellaLocal": "Et program fra {1} forespurgte {2}, en oplysning der bruges til at genkende din enhed.",
+  "mCookieVista": "{1} forsøgte at sætte en cookie fra et andet firma for at genkende dig på flere websteder.",
+  "nCortadas": "{1} klippet"
  }
 }

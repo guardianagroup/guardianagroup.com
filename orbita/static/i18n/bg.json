@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "Отваряне на връзката в нов раздел",
   "Copiar la dirección del enlace": "Копиране на адреса на връзката",
   "Copiar": "Копиране",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Този сайт не пуска браузъри, излизащи от сървър (мрежова защита срещу ботове). От клетката не може да се отвори; в обичайния ти браузър — да."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Този сайт не пуска браузъри, излизащи от сървър (мрежова защита срещу ботове). От клетката не може да се отвори; в обичайния ти браузър — да.",
+  "Lo que ZERO ve": "Какво вижда ZERO",
+  "Permitida": "Разрешена",
+  "Vaciar esta web": "Изчисти този сайт",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO не изпраща нищо на GUARDIANA: всичко се вижда и решава на твоето устройство.",
+  "Aún no hay conexiones de otras empresas en esta web.": "На този сайт още няма връзки с други компании.",
+  "Preparando las listas…": "Подготовка на списъците…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Когато сайтът се свърже с други компании, тук ще видиш кои са, от коя държава и за какво; и ще можеш да прекъснеш всяка.",
+  "Dejar pasar las conexiones de esta empresa": "Пропускай връзките на тази компания",
+  "Cortar las conexiones de esta empresa en todas las webs": "Прекъсни връзките на тази компания във всички сайтове",
+  "Permiso pedido": "Поискано разрешение",
+  "Conexión directa (WebRTC)": "Директна връзка (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Сайтът опита да отвори директна връзка (WebRTC), обичайният начин да се разбере истинският мрежов адрес."
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "Прекъсваш отново връзките от {1} в тази сесия.",
   "mFallo": "Сайтът {1} не се зареди: {2}.",
   "opPermitida": "разрешено {1}",
-  "opCortarse": "прекъснато отново {1}"
+  "opCortarse": "прекъснато отново {1}",
+  "mVistoSimpleDe": "ZERO видя {1}, от {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO видя {1} към {2}.",
+  "mPermisoNav": "Сайтът поиска достъп до {1}. Ти решаваш в подканата на браузъра.",
+  "mHuellaLocal": "Програма от {1} провери {2} — данни, използвани за разпознаване на устройството ти.",
+  "mCookieVista": "{1} опита да остави бисквитка на друга компания, за да те разпознава в повече сайтове.",
+  "nCortadas": "{1} прекъснати"
  }
 }

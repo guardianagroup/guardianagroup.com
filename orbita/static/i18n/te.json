@@ -1405,7 +1405,19 @@
   "Abrir enlace en una pestaña nueva": "లింక్‌ను కొత్త ట్యాబ్‌లో తెరవండి",
   "Copiar la dirección del enlace": "లింక్ చిరునామాను కాపీ చేయండి",
   "Copiar": "కాపీ చేయండి",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "ఈ సైట్ సర్వర్ నుండి వచ్చే బ్రౌజర్లను లోపలికి అనుమతించదు (నెట్‌వర్క్ ఆధారిత యాంటీ-బాట్ రక్షణ). సెల్ నుండి తెరవలేము; మీ మామూలు బ్రౌజర్‌లో తెరవవచ్చు."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "ఈ సైట్ సర్వర్ నుండి వచ్చే బ్రౌజర్లను లోపలికి అనుమతించదు (నెట్‌వర్క్ ఆధారిత యాంటీ-బాట్ రక్షణ). సెల్ నుండి తెరవలేము; మీ మామూలు బ్రౌజర్‌లో తెరవవచ్చు.",
+  "Lo que ZERO ve": "ZERO ఏమి చూస్తుంది",
+  "Permitida": "అనుమతించబడింది",
+  "Vaciar esta web": "ఈ సైట్‌ను ఖాళీ చేయండి",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO GUARDIANAకు ఏమీ పంపదు: అన్నీ మీ పరికరంలోనే చూడబడి నిర్ణయించబడతాయి.",
+  "Aún no hay conexiones de otras empresas en esta web.": "ఈ సైట్‌లో ఇంకా ఇతర కంపెనీలతో కనెక్షన్లు లేవు.",
+  "Preparando las listas…": "జాబితాలు సిద్ధమవుతున్నాయి…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "సైట్ ఇతర కంపెనీలకు కనెక్ట్ అయినప్పుడు అవి ఎవరు, ఏ దేశం, దేనికోసం అనేది ఇక్కడ చూస్తారు; ప్రతి దాన్నీ కత్తిరించవచ్చు.",
+  "Dejar pasar las conexiones de esta empresa": "ఈ కంపెనీ కనెక్షన్లను వెళ్లనివ్వండి",
+  "Cortar las conexiones de esta empresa en todas las webs": "అన్ని సైట్లలో ఈ కంపెనీ కనెక్షన్లను కత్తిరించండి",
+  "Permiso pedido": "అనుమతి అడిగారు",
+  "Conexión directa (WebRTC)": "ప్రత్యక్ష కనెక్షన్ (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "నిజమైన నెట్‌వర్క్ చిరునామా తెలుసుకునే సాధారణ మార్గమైన ప్రత్యక్ష కనెక్షన్ (WebRTC) తెరవడానికి సైట్ ప్రయత్నించింది."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",
@@ -1500,6 +1512,12 @@
   "mPermisoOff": "ఈ సెషన్‌లో {1} కనెక్షన్లను మళ్లీ కత్తిరిస్తున్నారు.",
   "mFallo": "సైట్ {1} లోడ్ కాలేదు: {2}.",
   "opPermitida": "అనుమతించబడింది {1}",
-  "opCortarse": "మళ్లీ కత్తిరించబడింది {1}"
+  "opCortarse": "మళ్లీ కత్తిరించబడింది {1}",
+  "mVistoSimpleDe": "ZERO {2}[ ({3})] నుండి {1} చూసింది.",
+  "mVistoSimpleHacia": "ZERO {2} వైపు {1} చూసింది.",
+  "mPermisoNav": "సైట్ {1}కు యాక్సెస్ అడిగింది. బ్రౌజర్ ప్రాంప్ట్‌లో మీరు నిర్ణయించండి.",
+  "mHuellaLocal": "{1} నుండి ఒక ప్రోగ్రామ్ {2}ను పరిశీలించింది; ఇది మీ పరికరాన్ని గుర్తించడానికి ఉపయోగపడే డేటా.",
+  "mCookieVista": "{1} మరిన్ని సైట్లలో మిమ్మల్ని గుర్తించడానికి వేరే కంపెనీ కుకీని ఉంచడానికి ప్రయత్నించింది.",
+  "nCortadas": "{1} కత్తిరించబడ్డాయి"
  }
 }

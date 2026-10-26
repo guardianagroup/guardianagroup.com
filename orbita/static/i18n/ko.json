@@ -1406,7 +1406,19 @@
   "Abrir enlace en una pestaña nueva": "새 탭에서 링크 열기",
   "Copiar la dirección del enlace": "링크 주소 복사",
   "Copiar": "복사",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "이 사이트는 서버에서 나오는 브라우저를 들이지 않습니다(네트워크 기반 봇 차단). 셀에서는 열 수 없고, 평소 쓰는 브라우저에서는 열립니다."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "이 사이트는 서버에서 나오는 브라우저를 들이지 않습니다(네트워크 기반 봇 차단). 셀에서는 열 수 없고, 평소 쓰는 브라우저에서는 열립니다.",
+  "Lo que ZERO ve": "ZERO가 보는 것",
+  "Permitida": "허용됨",
+  "Vaciar esta web": "이 사이트 비우기",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO는 GUARDIANA에 아무것도 보내지 않습니다. 모든 것은 당신의 기기에서 보고 결정합니다.",
+  "Aún no hay conexiones de otras empresas en esta web.": "이 사이트에는 아직 다른 회사와의 연결이 없습니다.",
+  "Preparando las listas…": "목록 준비 중…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "사이트가 다른 회사에 연결하면 누구인지, 어느 나라인지, 무엇을 위한 것인지 여기에서 보고 각각 차단할 수 있습니다.",
+  "Dejar pasar las conexiones de esta empresa": "이 회사의 연결 통과시키기",
+  "Cortar las conexiones de esta empresa en todas las webs": "모든 사이트에서 이 회사의 연결 차단하기",
+  "Permiso pedido": "권한 요청됨",
+  "Conexión directa (WebRTC)": "직접 연결(WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "사이트가 실제 네트워크 주소를 알아내는 흔한 방법인 직접 연결(WebRTC)을 열려고 했습니다."
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",
@@ -1501,6 +1513,12 @@
   "mPermisoOff": "이 세션에서 {1}의 연결을 다시 차단합니다.",
   "mFallo": "사이트 {1}이(가) 로드되지 않았습니다: {2}.",
   "opPermitida": "허용됨 {1}",
-  "opCortarse": "다시 차단됨 {1}"
+  "opCortarse": "다시 차단됨 {1}",
+  "mVistoSimpleDe": "ZERO가 {2}[({3})]의 {1}을(를) 감지했습니다.",
+  "mVistoSimpleHacia": "ZERO가 {2}(으)로 향하는 {1}을(를) 감지했습니다.",
+  "mPermisoNav": "사이트가 {1} 접근을 요청했습니다. 브라우저 알림에서 결정하세요.",
+  "mHuellaLocal": "{1}의 프로그램이 기기 식별에 쓰이는 {2}을(를) 조회했습니다.",
+  "mCookieVista": "{1}이(가) 다른 사이트에서도 당신을 알아보려고 타사 쿠키를 남기려 했습니다.",
+  "nCortadas": "{1}개 차단됨"
  }
 }

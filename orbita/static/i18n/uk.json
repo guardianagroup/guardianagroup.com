@@ -1406,7 +1406,19 @@
   "Abrir enlace en una pestaña nueva": "Відкрити посилання в новій вкладці",
   "Copiar la dirección del enlace": "Копіювати адресу посилання",
   "Copiar": "Копіювати",
-  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Цей сайт не пускає браузери, що виходять із сервера (мережевий захист від ботів). З комірки його не відкрити; у вашому звичному браузері — так."
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Цей сайт не пускає браузери, що виходять із сервера (мережевий захист від ботів). З комірки його не відкрити; у вашому звичному браузері — так.",
+  "Lo que ZERO ve": "Що бачить ZERO",
+  "Permitida": "Дозволено",
+  "Vaciar esta web": "Очистити цей сайт",
+  "ZERO no envía nada a GUARDIANA: todo se ve y se decide en tu equipo.": "ZERO нічого не надсилає до GUARDIANA: усе видно й вирішується на вашому пристрої.",
+  "Aún no hay conexiones de otras empresas en esta web.": "На цьому сайті ще немає з’єднань з іншими компаніями.",
+  "Preparando las listas…": "Підготовка списків…",
+  "Cuando la web se conecte con otras empresas, aquí verás quiénes son, de qué país y para qué; y podrás cortar a cada una.": "Коли сайт з’єднається з іншими компаніями, тут ви побачите, хто вони, з якої країни й навіщо; і зможете відрізати кожну.",
+  "Dejar pasar las conexiones de esta empresa": "Пропускати з’єднання цієї компанії",
+  "Cortar las conexiones de esta empresa en todas las webs": "Відрізати з’єднання цієї компанії на всіх сайтах",
+  "Permiso pedido": "Запитано дозвіл",
+  "Conexión directa (WebRTC)": "Пряме з’єднання (WebRTC)",
+  "La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real.": "Сайт спробував відкрити пряме з’єднання (WebRTC) — звичний спосіб дізнатися справжню мережеву адресу."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",
@@ -1501,6 +1513,12 @@
   "mPermisoOff": "Ви знову відрізаєте з’єднання від {1} у цій сесії.",
   "mFallo": "Сайт {1} не завантажився: {2}.",
   "opPermitida": "дозволено {1}",
-  "opCortarse": "знову відрізано {1}"
+  "opCortarse": "знову відрізано {1}",
+  "mVistoSimpleDe": "ZERO помітив {1} від {2}[ ({3})].",
+  "mVistoSimpleHacia": "ZERO помітив {1} до {2}.",
+  "mPermisoNav": "Сайт попросив доступ до {1}. Вирішуйте в запиті браузера.",
+  "mHuellaLocal": "Програма з {1} запитала {2} — дані, за якими впізнають ваш пристрій.",
+  "mCookieVista": "{1} спробував залишити cookie іншої компанії, щоб упізнавати вас на інших сайтах.",
+  "nCortadas": "{1} відрізано"
  }
 }
