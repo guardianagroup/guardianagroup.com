@@ -188,9 +188,9 @@ class Sesion {
     reg.n++; reg.ultima = ahora(); this.empresas.set(clave, reg);
     if (e.pais) this.paises.set(e.pais, (this.paises.get(e.pais) || 0) + 1);
     const quien = e.empresa ? e.empresa + (e.paisNombre ? ' (' + e.paisNombre + ')' : '') : host;
-    const que = { Publicidad: 'una conexión publicitaria', Rastreador: 'una conexión con un rastreador conocido', 'Web peligrosa': 'una conexión con una web peligrosa conocida', 'Aviso de cookies': 'el aviso de cookies', 'Red local': 'una conexión hacia la red local', 'Otra empresa': 'una conexión con otra empresa (nivel ' + (this.nivel || 'estricto') + ')' }[prop] || 'una conexión';
+    const que = { Publicidad: 'una conexión publicitaria', Rastreador: 'una conexión con un rastreador conocido', 'Web peligrosa': 'una conexión con una web peligrosa conocida', 'Aviso de cookies': 'el aviso de cookies', 'Red local': 'una conexión hacia la red local', 'Otra empresa': 'una conexión con otra empresa' }[prop] || 'una conexión';
     this.suceso({ clase: 'corte', certeza: 'comprobado', dominio: host, empresa: e.empresa, pais: e.pais, paisNombre: e.paisNombre, proposito: prop, tipo, tercero,
-      texto: 'ZERO ha cortado ' + que + (e.empresa ? ' de ' + quien : ' (' + host + ')') + '.',
+      texto: 'ZERO ha cortado ' + que + (e.empresa ? ', de ' + quien : ' hacia ' + host) + '.',
       detalle: { regla: d.regla, lista: d.lista ? (cortes.listas[d.lista] || {}).nombre : null, listaClave: d.lista, fuenteEmpresa: e.fuente, categoria: e.categoria } });
   }
 
