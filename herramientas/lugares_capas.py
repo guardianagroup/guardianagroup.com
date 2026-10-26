@@ -279,7 +279,7 @@ def main():
         'cables': extremos,
         'grupos': grupos_out,
         'g': g_de,
-        'llegadas': [[round(g['lo'], 3), round(g['la'], 3)] + (g.get('ag') or lugar_cable(g['la'], g['lo'])) + [g['seg']] for g in llegadas.values()],
+        'llegadas': [[round(g['lo'], 5), round(g['la'], 5)] + (g.get('ag') or lugar_cable(g['la'], g['lo'])) + [g['seg']] for g in llegadas.values()],
     }
     with open(os.path.join(RAIZ, 'datos', 'lugares-capas.json'), 'w', encoding='utf-8') as f:
         json.dump(out, f, ensure_ascii=False, separators=(',', ':'))

@@ -19,6 +19,7 @@ on:
       - 'herramientas/datos_orbita.py'
       - 'herramientas/fibra_tierra.py'
       - 'herramientas/lugares_capas.py'
+      - 'herramientas/llegadas_tierra.py'
       - 'herramientas/mapa_16k.py'
       - 'herramientas/relieve.py'
 
@@ -85,6 +86,13 @@ jobs:
         timeout-minutes: 30
         continue-on-error: true
         run: pip install --quiet pillow && python3 herramientas/cables_agencia.py
+
+      # 25 Oct 2026, 19:01 (owner: «los cables no llegan a tierra»): every end in the water within 8 km of the coast of
+      # OpenStreetMap (static/tierra/costa-osm) is taken to the shore, before the landings are named
+      - name: Cables hasta tierra (costa de OpenStreetMap)
+        timeout-minutes: 10
+        continue-on-error: true
+        run: python3 herramientas/llegadas_tierra.py
 
       - name: Ciudades de cables y centros de datos
         timeout-minutes: 10

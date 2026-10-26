@@ -711,6 +711,15 @@ void main(){
       // there the mask is drawn from the coast of Natural Earth 10m in vectors (static/tierra/costa, tiles of 10°,
       // built by herramientas/costa_vector.py), at the resolution of the screen
       G.costa = { indice: null, pedido: false, lista: new Map(), mal: false };
+      // 25 Oct 2026, 19:01 (owner: «los cables no llegan a tierra»): closer still, the coast of OpenStreetMap in 1° tiles
+      // around the cables, their landings and the data centres (static/tierra/costa-osm, ODbL; herramientas/costa_osm.py)
+      G.costaO = { indice: null, pedido: false, lista: new Map(), mal: false };
+      G.teselaO = (k) => {
+        let t = G.costaO.lista.get(k); if (t) return t;
+        t = { ok: false, mal: false, r: null }; G.costaO.lista.set(k, t);
+        fetch(TIERRA + 'costa-osm/' + k + '.json').then((r) => r.json()).then((j) => { t.r = j.r; t.ok = true; G.zona.caja = null; }).catch(() => { t.mal = true; });
+        return t;
+      };
       G.teselaC = (k) => {
         let t = G.costa.lista.get(k); if (t) return t;
         t = { ok: false, mal: false, r: null }; G.costa.lista.set(k, t);
@@ -815,7 +824,35 @@ void main(){
               }
               g3.fill('nonzero');
             }
-            window.__orbitaCosta = { teselas: ts.length, w: LT.width, h: LT.height };
+            // OpenStreetMap over Natural Earth, cell by cell, where it has been cut (a cell with no coast: all sea or all land)
+            const O = G.costaO; let nO = 0;
+            if (O && !O.mal && ppdPantalla > 700) {
+              if (!O.indice && !O.pedido) { O.pedido = true; fetch(TIERRA + 'costa-osm/indice.json').then((r) => r.json()).then((j) => { O.indice = { t: new Set(j.teselas), agua: new Set(j.agua || []), tierra: new Set(j.tierra || []) }; G.zona.caja = null; }).catch(() => { O.mal = true; }); }
+              const a0 = Math.floor(caja.lonMin), a1 = Math.floor(caja.lonMax - 1e-9), b0 = Math.max(0, Math.floor(90 - caja.latMax)), b1 = Math.min(179, Math.floor(90 - caja.latMin - 1e-9));
+              if (O.indice && (a1 - a0 + 1) * (b1 - b0 + 1) <= 36) {
+                const cel = [];
+                for (let a = a0; a <= a1; a++) for (let b = b0; b <= b1; b++) {
+                  const k = ((((a + 180) % 360) + 360) % 360) + '_' + b;
+                  const tipo = O.indice.t.has(k) ? 't' : O.indice.agua.has(k) ? 'a' : O.indice.tierra.has(k) ? 'l' : '';
+                  if (tipo) cel.push([a, b, tipo, tipo === 't' ? G.teselaO(k) : null]);
+                }
+                if (cel.every((x) => !x[3] || x[3].ok || x[3].mal)) for (const [a, b, tipo, t] of cel) {
+                  if (tipo === 't' && !t.ok) continue;
+                  const X = (a - caja.lonMin) * sx, Y = (caja.latMax - (90 - b)) * sy;
+                  g3.fillStyle = tipo === 'l' ? '#fff' : '#000'; g3.fillRect(X, Y, sx, sy);
+                  if (tipo !== 't') continue;
+                  g3.fillStyle = '#fff'; g3.beginPath();
+                  for (const r of t.r) {
+                    let ix = r[0], iy = r[1];
+                    g3.moveTo(X + ix / 1e5 * sx, Y + iy / 1e5 * sy);
+                    for (let i = 2; i < r.length; i += 2) { ix += r[i]; iy += r[i + 1]; g3.lineTo(X + ix / 1e5 * sx, Y + iy / 1e5 * sy); }
+                    g3.closePath();
+                  }
+                  g3.fill('nonzero'); nO++;
+                }
+              }
+            }
+            window.__orbitaCosta = { teselas: ts.length, osm: nO, w: LT.width, h: LT.height };
           }
         }
       }
