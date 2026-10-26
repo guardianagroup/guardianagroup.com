@@ -741,7 +741,7 @@ window.zeroInforme=k=>{const r=RANGOS.find(x=>x[0]===k)||RANGOS[3];informe(r[0],
 // 20 Oct 2026 (owner): «Corte máximo», the strongest cut. Normal: known trackers and ads. Maximum: everything
 // that does not belong to the site itself (third-party scripts, fonts, frames and cookies). Some sites may break,
 // and it says so. Remembered on this computer. In this design review it only changes the demo, which is labelled.
-const MAXK='zeroCorteMax',NIVK='zeroNivel';let nivel=lee(NIVK,lee(MAXK,false)?'estricto':'normal');if(!['normal','estricto','maximo'].includes(nivel))nivel='normal';let corteMax=nivel!=='normal';
+const MAXK='zeroCorteMax',NIVK='zeroNivel';let nivel='normal';try{localStorage.removeItem(NIVK);localStorage.removeItem(MAXK)}catch(e){}/* 26 Oct 2026: cada sesión empieza en Normal; Estricto y Máximo se eligen para la sesión y no se recuerdan (con uno guardado por error, «no abría casi nada») */let corteMax=nivel!=='normal';
 const extraMax=[
  {empresa:'Contenido de terceros · ejemplo',pais:'Estados Unidos',sede:'San Francisco',motivo:'Tercero',quien:'Código de otra empresa que la web carga sin que lo veas.',datos:['Dirección IP','Web que visitas'],dirs:['static.terceros-ejemplo.example']},
  {empresa:'Fuentes externas · ejemplo',pais:'Irlanda',sede:'Dublín',motivo:'Tercero',quien:'Sirve tipos de letra y, al hacerlo, ve tu dirección y la web que visitas.',datos:['Dirección IP','Web que visitas'],dirs:['fonts.fuentes-ejemplo.example']},
@@ -749,7 +749,7 @@ const extraMax=[
  {empresa:'Chat de soporte · ejemplo',pais:'Alemania',sede:'Múnich',motivo:'Tercero',quien:'Una ventana de chat de otra empresa que se carga aunque no la uses.',datos:['Identificador de visitante','Páginas que ves'],dirs:['widget.chat-ejemplo.example']}];
 const NIVEL_TXT={normal:'Corta la publicidad y el rastreo de las listas públicas; la web se ve entera.',estricto:'Además, nada de otras empresas: solo lo propio de la web. Alguna web puede verse incompleta.',maximo:'Además, la web corre sin programas (JavaScript): lo más seguro; muchas webs pierden funciones.'};
 function pintaMax(){corteMax=nivel!=='normal';$('#maxcorte').classList.toggle('on',corteMax);$('#maxtxt').textContent=NIVEL_TXT[nivel];$('#niveles').querySelectorAll('button').forEach(b=>b.setAttribute('aria-checked',String(b.dataset.n===nivel)));stage.classList.toggle('max',corteMax)}
-$('#niveles').addEventListener('click',e=>{const b=e.target.closest('button[data-n]');if(!b||b.dataset.n===nivel)return;nivel=b.dataset.n;guarda(NIVK,nivel);guarda(MAXK,corteMax=nivel!=='normal');pintaMax();pulse=Math.max(pulse,1.2);
+$('#niveles').addEventListener('click',e=>{const b=e.target.closest('button[data-n]');if(!b||b.dataset.n===nivel)return;nivel=b.dataset.n;corteMax=nivel!=='normal';pintaMax();pulse=Math.max(pulse,1.2);
   if(window.ZeroMotor&&ZeroMotor.activo)ZeroMotor.nivel(nivel);else if(corteMax&&opened){const g0=gen;[0,1].forEach(i=>setTimeout(()=>{if(opened&&gen===g0)record(extraMax[Math.random()*extraMax.length|0])},400+i*500))}});
 pintaMax();
 // ---------- The card (21 Oct 2026, owner): everything we know about one company, in the window at the top of the panel.
@@ -1210,4 +1210,4 @@ screenpass(PB,fa,bw,bh,scene);screenpass(PH,fb,bw,bh,ta,1/bw,0);screenpass(PH,fa
 gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.viewport(0,0,sw,sh);gl.disable(gl.BLEND);gl.useProgram(PF);bindQ(PF);tex(scene,0);tex(ta,1);gl.uniform1i(u(PF,'scene'),0);gl.uniform1i(u(PF,'bloom'),1);gl.uniform1f(u(PF,'T'),elapsed);gl.uniform1f(u(PF,'M'),morph);gl.uniform1f(u(PF,'Ry'),cine.Ry);gl.uniform1f(u(PF,'Hb'),cine.Hb);gl.uniform1f(u(PF,'Sw'),cine.Sw);gl.uniform1f(u(PF,'Sa'),cine.Sa);gl.uniform1f(u(PF,'Sq'),cine.Sq);gl.uniform1f(u(PF,'Co'),cine.Mm*(1-cine.Bm*(1-cine.Bk))*(1-morph));gl.uniform1f(u(PF,'Cr'),Math.max(.5,cine.Ga*cine.As*cine.Ap)*(cine.S0+(44-cine.S0)*morph)*.17);gl.uniform1f(u(PF,'Fl'),cine.fl);gl.uniform2f(u(PF,'Off'),OX,OY);gl.uniform2f(u(PF,'Sz'),W+2*OX,H+2*OY);gl.uniform2f(u(PF,'Lc'),cine.cx+(1260+OX-cine.cx)*morph,cine.cy+(PNY-cine.cy)*morph);gl.drawArrays(gl.TRIANGLE_STRIP,0,4)}
 requestAnimationFrame(tick);
 })();
-</script><script src="motor.js?v=20261026c"></script></body></html>
+</script><script src="motor.js?v=20261026d"></script></body></html>
