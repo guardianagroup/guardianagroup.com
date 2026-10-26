@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src blob:; connect-src 'self' https://motor.guardianagroup.com wss://motor.guardianagroup.com https://motor-am.guardianagroup.com wss://motor-am.guardianagroup.com http://127.0.0.1:* ws://127.0.0.1:* http://localhost:* ws://localhost:*; worker-src 'none'; frame-ancestors 'self'; form-action 'none'; base-uri 'none'">
+<meta name="theme-color" content="#06080C">
+<meta name="description" content="GUARDIANA Comunicaciones: chat, llamadas de voz y vídeo y archivos cifrados de extremo a extremo, desde el navegador. Nada se guarda en servidores.">
+<title>GUARDIANA · Comunicaciones</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="componentes.css?v=20261026a">
+<link rel="stylesheet" href="app.css?v=20261026a">
+</head>
+<body>
+<!-- GUARDIANA · Comunicaciones (26 Oct 2026). Esta página es solo la página: tras cargar, habla únicamente con el relé
+     de GUARDIANA (bytes que el relé no puede leer). Las claves nacen y viven en este navegador; la invitación viaja
+     tras «#», que el navegador nunca manda a ningún servidor. -->
+<header class="barra" id="barra">
+  <a class="marca" href="/orbita/" id="volver" aria-label="Volver a Órbita"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>GUARDIANA</span><b>Comunicaciones</b></a>
+  <span class="rele" id="rele" title="Relé de GUARDIANA"><i></i><span id="reletxt">Conectando con el relé…</span></span>
+  <div class="idiomas" role="group" aria-label="Idioma" translate="no"></div>
+</header>
+
+<main class="app" id="app">
+  <aside class="lista" id="lista">
+    <div class="yo" id="yo">
+      <span class="gc-avatar" id="yoavatar">·</span>
+      <div class="quien"><input class="nombre" id="yonombre" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Tu nombre (solo lo ve quien invites)" aria-label="Tu nombre"><small id="yohuella" translate="no" title="Huella de tu identidad (nace en este navegador)">…</small></div>
+    </div>
+    <div class="acciones">
+      <button type="button" class="boton principal" id="nueva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Nueva conversación</button>
+      <button type="button" class="boton" id="unir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg>Tengo una invitación</button>
+    </div>
+    <ul class="convs" id="convs" aria-label="Conversaciones"></ul>
+    <p class="vacio" id="sinconvs">Aún no hay conversaciones. Crea una invitación y mándasela a la otra persona por donde quieras: al abrirla, ya estaréis conectados.</p>
+    <footer class="pie">
+      <span>Cifrado de extremo a extremo en tu navegador. Nada se guarda en servidores.</span>
+      <a href="/terminos.html#comunicaciones" target="_blank" rel="noopener">Cómo funciona</a>
+    </footer>
+  </aside>
+
+  <section class="charla" id="charla">
+    <div class="portada" id="portada">
+      <div class="anillo" aria-hidden="true"></div>
+      <h1>Habla sin testigos</h1>
+      <p>Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo pasa bytes que no puede leer y no guarda nada. Al destruir una conversación, desaparece en los dos lados.</p>
+      <div class="pasos">
+        <div><b>1</b><span>Crea una invitación: un enlace o un código QR.</span></div>
+        <div><b>2</b><span>La otra persona lo abre en su navegador.</span></div>
+        <div><b>3</b><span>Comprobad juntos el número de seguridad y hablad.</span></div>
+      </div>
+      <p class="nota">Las dos personas tienen que estar con la página abierta para que los mensajes lleguen: no hay buzón en ningún servidor. Lo pendiente espera en tu equipo y sale cuando la otra persona entra.</p>
+    </div>
+
+    <div class="conv" id="conv" hidden>
+      <header class="gc-cabecera">
+        <button type="button" class="gc-atras" id="atras" aria-label="Volver a la lista"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <span class="gc-avatar" id="cavatar">·</span>
+        <div class="gc-quien"><span class="gc-nombre" id="cnombre">—</span><span class="gc-confianza" id="cconfianza">Esperando a la otra persona…</span></div>
+        <button type="button" class="gc-cab-boton" id="llamarvoz" aria-label="Llamada de voz" title="Llamada de voz" disabled><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></button>
+        <button type="button" class="gc-cab-boton" id="llamarvideo" aria-label="Videollamada" title="Videollamada" disabled><svg viewBox="0 0 24 24"><rect x="3" y="7" width="13" height="10" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></button>
+        <button type="button" class="gc-cab-boton gc-escudo-boton" id="escudo" aria-label="Seguridad de esta conversación" title="Seguridad"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></button>
+      </header>
+      <ul class="gc-mensajes" id="mensajes"></ul>
+      <div class="gc-enviando" id="enviando" hidden></div>
+      <div class="gc-compositor">
+        <button type="button" class="gc-redondo" id="adjuntar" aria-label="Enviar un archivo" title="Enviar un archivo (del tamaño que sea)"><svg viewBox="0 0 24 24"><path d="M21 12.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13.5 4.4a3.5 3.5 0 0 1 5 5L10 18a1.5 1.5 0 0 1-2.1-2.1L15.5 8.3"/></svg></button>
+        <textarea class="gc-campo" id="texto" rows="1" placeholder="Escribe un mensaje" aria-label="Mensaje" autocomplete="off"></textarea>
+        <button type="button" class="gc-redondo gc-principal" id="enviar" aria-label="Enviar"><svg viewBox="0 0 24 24"><path d="M4 12l16-7-7 16-2-7z"/></svg></button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Hoja: invitación -->
+<div class="gc-hoja" id="h-invita" role="dialog" aria-modal="true" aria-labelledby="h-invita-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-invita-t">Invitación<small>Vale para una persona</small></h2>
+    <p class="t">Manda este enlace por donde quieras (o enseña el código): al abrirlo en su navegador, la otra persona entra en esta conversación. Todo lo que hace falta viaja tras «#», que los navegadores no envían a ningún servidor.</p>
+    <div class="qr" id="qr" aria-label="Código QR de la invitación"></div>
+    <div class="enlace"><input class="campo" id="enlace" readonly aria-label="Enlace de invitación" translate="no"><button type="button" class="boton principal" id="copiar">Copiar</button></div>
+    <p class="t" id="invita-estado">Esperando a que la otra persona abra el enlace…</p>
+    <div class="fila"><button type="button" class="boton" id="invita-cerrar">Cerrar</button></div>
+  </div>
+</div>
+
+<!-- Hoja: tengo una invitación -->
+<div class="gc-hoja" id="h-unir" role="dialog" aria-modal="true" aria-labelledby="h-unir-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-unir-t">Tengo una invitación</h2>
+    <p class="t">Pega aquí el enlace que te han mandado. Si lo abriste directamente en este navegador, ya estás dentro.</p>
+    <input class="campo" id="unir-enlace" placeholder="https://guardianagroup.com/orbita/comunicaciones/#i=…" aria-label="Enlace de invitación" translate="no" spellcheck="false">
+    <p class="t alerta" id="unir-mal" hidden>Ese enlace no es una invitación de GUARDIANA.</p>
+    <div class="fila"><button type="button" class="boton" id="unir-cerrar">Cancelar</button><button type="button" class="boton principal" id="unir-ok">Entrar</button></div>
+  </div>
+</div>
+
+<!-- Hoja: seguridad -->
+<div class="gc-hoja" id="h-escudo" role="dialog" aria-modal="true" aria-labelledby="h-escudo-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-escudo-t">Seguridad<small id="escudo-con"></small></h2>
+    <ul class="gc-escudo" id="escudo-lista"></ul>
+    <h3 class="sub">Número de seguridad</h3>
+    <p class="t">Si los dos veis el mismo número (por teléfono o en persona), nadie se ha puesto en medio. Entonces marca «Verificada».</p>
+    <pre class="numero" id="numero" translate="no">—</pre>
+    <label class="interruptor"><input type="checkbox" id="verificada"><span>Verificada: he comprobado el número con la otra persona</span></label>
+    <h3 class="sub">Nombre que ves</h3>
+    <input class="campo" id="cnombre-edit" maxlength="40" aria-label="Nombre de la otra persona" placeholder="Nombre">
+    <div class="fila"><button type="button" class="boton" id="escudo-cerrar">Cerrar</button><button type="button" class="boton peligro" id="destruir">Destruir conversación</button></div>
+    <p class="t" id="destruir-nota" hidden>Se borra aquí y en el navegador de la otra persona (si está conectada ahora; si no, en cuanto entre). No se puede deshacer.</p>
+  </div>
+</div>
+
+<!-- Primera vez: nombre -->
+<div class="gc-hoja" id="h-nombre" role="dialog" aria-modal="true" aria-labelledby="h-nombre-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-nombre-t">Tu identidad</h2>
+    <p class="t">Acaba de nacer en este navegador: dos claves que no salen de aquí. Pon el nombre con el que te verá la gente a la que invites (puedes cambiarlo luego).</p>
+    <input class="campo" id="nombre-inicial" maxlength="40" autocomplete="off" aria-label="Tu nombre" placeholder="Tu nombre">
+    <div class="fila"><button type="button" class="boton principal" id="nombre-ok">Empezar</button></div>
+  </div>
+</div>
+
+<!-- Llamada -->
+<div class="gc-llamada" id="llamada" role="dialog" aria-modal="true" aria-label="Llamada">
+  <div class="gc-llamada-arriba"><span class="gc-llamada-cifrado"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Cifrada de extremo a extremo</span></span><span class="gc-llamada-estado" id="ll-calidad"></span></div>
+  <div class="videos" id="videos" hidden><video id="v-remoto" autoplay playsinline></video><video id="v-local" autoplay playsinline muted></video></div>
+  <div class="gc-llamada-centro" id="ll-centro">
+    <span class="gc-avatar-grande" id="ll-avatar">·</span>
+    <span class="gc-llamada-nombre" id="ll-nombre">—</span>
+    <span class="gc-llamada-tiempo" id="ll-tiempo">00:00</span>
+    <span class="gc-llamada-paso" id="ll-paso"></span>
+  </div>
+  <audio id="a-remoto" autoplay></audio>
+  <div class="gc-llamada-botones" id="ll-botones">
+    <div class="gc-llamada-boton"><button type="button" id="ll-silenciar" aria-pressed="false" aria-label="Silenciar"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><span>Silenciar</span></div>
+    <div class="gc-llamada-boton" id="ll-camara-caja"><button type="button" id="ll-camara" aria-pressed="false" aria-label="Cámara"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="13" height="10" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></button><span>Cámara</span></div>
+    <div class="gc-llamada-boton gc-colgar"><button type="button" id="ll-colgar" aria-label="Colgar"><svg viewBox="0 0 24 24"><path d="M3 12c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a9 9 0 0 0-7 0V13l-3 1.5z"/></svg></button><span>Colgar</span></div>
+  </div>
+  <div class="gc-llamada-botones gc-entrante" id="ll-entrante" hidden>
+    <div class="gc-llamada-boton gc-colgar"><button type="button" id="ll-rechazar" aria-label="Rechazar"><svg viewBox="0 0 24 24"><path d="M3 12c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a9 9 0 0 0-7 0V13l-3 1.5z"/></svg></button><span>Rechazar</span></div>
+    <div class="gc-llamada-boton gc-contestar"><button type="button" id="ll-contestar" aria-label="Contestar"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></button><span>Contestar</span></div>
+  </div>
+</div>
+
+<input type="file" id="archivo" multiple hidden>
+<div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
+
+<script src="/orbita/static/idioma.js?v=20261026x"></script>
+<script src="qrhaz.js?v=20261026a"></script>
+<script src="opus.js?v=20261026a"></script>
+<script src="cripto.js?v=20261026a"></script>
+<script src="rele.js?v=20261026a"></script>
+<script src="llamada.js?v=20261026a"></script>
+<script src="app.js?v=20261026a"></script>
+</body>
+</html>

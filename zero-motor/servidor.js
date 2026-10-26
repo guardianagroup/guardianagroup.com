@@ -20,6 +20,7 @@ const { Empresas, baseDominio } = require('./empresas');
 const SENSORES = require('./sensores');
 const { Senuelos } = require('./senuelos');
 const puerta = require('./puerta');
+const { Rele } = require('./comunicaciones');
 
 const RAIZ = path.join(__dirname, '..');
 const PUERTO = +process.argv[2] || 8792;
@@ -39,6 +40,8 @@ const MAX_HORAS = +process.env.ZERO_MAX_HORAS || 12; // vida máxima de una celd
 // Dirección pública del motor (detrás del proxy TLS): con ella se construye el enlace oculto del señuelo, que debe ser
 // alcanzable desde fuera para que una visita al enlace llegue al colector /s/<token>. Sin ella, el propio puerto local.
 const PUBLICO = String(process.env.ZERO_PUBLICO || '').replace(/\/$/, '') || ('http://127.0.0.1:' + PUERTO);
+// Comunicaciones (26 Oct 2026): el relé de chat, llamadas y archivos vive en este mismo proceso, en /com. No guarda nada.
+const RELE = new Rele({ turnHost: process.env.TURN_HOST || (() => { try { return new URL(PUBLICO).hostname; } catch (_) { return ''; } })(), turnSecreto: process.env.TURN_SECRETO || '', turnPuerto: +(process.env.TURN_PUERTO || 3478), region: process.env.ZERO_REGION || '' });
 const VIVAS = new Set();
 function origenPermitido(req) {
   const o = String(req.headers.origin || '').replace(/\/$/, '');
@@ -716,11 +719,17 @@ async function main() {
       // la página de ZERO (otro origen) pregunta aquí antes de usar este motor: CORS solo para los orígenes permitidos
       const cab = { 'content-type': 'application/json', 'cache-control': 'no-store' };
       if (origenPermitido(req)) { cab['access-control-allow-origin'] = String(req.headers.origin).replace(/\/$/, ''); cab.vary = 'Origin'; }
-      res.writeHead(200, cab); return res.end(JSON.stringify({ ok: true, version: VERSION, listas: nListas, mock: MOCK, celdas: VIVAS.size, tope: MAX_SESIONES, region: process.env.ZERO_REGION || '' }));
+      res.writeHead(200, cab); return res.end(JSON.stringify({ ok: true, version: VERSION, listas: nListas, mock: MOCK, celdas: VIVAS.size, tope: MAX_SESIONES, region: process.env.ZERO_REGION || '', com: RELE.estado() }));
     }
     res.writeHead(404); res.end();
   });
   srv.on('upgrade', (req, socket) => {
+    if (req.url.startsWith('/com')) {
+      if (!origenPermitido(req)) { console.log('relé: origen rechazado', req.headers.origin || '(ninguno)'); return socket.destroy(); }
+      const ws = WS.acepta(req, socket);
+      if (ws) RELE.acepta(ws);
+      return;
+    }
     if (!req.url.startsWith('/sesion')) return socket.destroy();
     if (!origenPermitido(req)) { console.log('sesión rechazada: origen', req.headers.origin || '(ninguno)'); return socket.destroy(); }
     if (VIVAS.size >= MAX_SESIONES) { console.log('sesión rechazada: tope de celdas (' + MAX_SESIONES + ')'); return socket.destroy(); }
