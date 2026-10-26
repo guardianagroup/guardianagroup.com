@@ -270,7 +270,7 @@
 .niveles button{all:unset;cursor:pointer;flex:1;text-align:center;padding:6px 4px;border-radius:999px;font:600 11px "Segoe UI",Inter,Arial,sans-serif;letter-spacing:.02em;color:#8da4b6;transition:background .2s,color .2s}
 .niveles button:hover{color:#F4F6F8}.niveles button[aria-checked=true]{background:rgba(156,195,228,.2);color:#F4F6F8;box-shadow:inset 0 0 0 1px rgba(156,195,228,.35)}
 .niveles button:focus-visible{outline:2px solid #9CC3E4;outline-offset:1px}
-.maxcorte.obs{border-top:1px solid rgba(156,195,228,.14)}.maxcorte.obs[hidden]{display:none}
+.maxcorte.obs{border-top:1px solid rgba(156,195,228,.14)}.maxcorte[hidden]{display:none}.acthead.pest{flex-shrink:0;min-height:36px}.panel:not(.nuc) .ficha{flex-shrink:1;min-height:210px}.panel>#rows,.panel>#subs,.panel>#vivo{min-height:140px!important}.maxcorte.obs{padding:9px 18px}.maxcorte.obs .mt small{font-size:11px;line-height:1.3}.maxcorte.obs[hidden]{display:none}
 #stage.real #cut{display:none}
 .acta{position:absolute;inset:0;z-index:4;display:flex;align-items:center;justify-content:center;background:rgba(6,8,12,.94);color:#F4F6F8;font:14px/1.55 "Segoe UI",Inter,Arial,sans-serif;animation:rowin .5s both}
 .acta>div{max-width:520px;padding:0 32px}.acta .k{font:11px Consolas,monospace;letter-spacing:.22em;color:#9CC3E4}.acta h2{font-size:24px;font-weight:600;margin:12px 0 8px}
@@ -605,11 +605,16 @@ const ENG=[
 ['INTELIGENCIA ARTIFICIAL','Perplexity','P','Respuestas con IA · Servicio externo','EE. UU.','https://www.perplexity.ai/search?q='],
 ['INTELIGENCIA ARTIFICIAL','You.com','Yo','Respuestas con IA · Servicio externo','EE. UU.','https://you.com/search?q='],
 ['INTELIGENCIA ARTIFICIAL','ChatGPT','C','Respuestas con IA · Servicio externo','EE. UU.','https://chatgpt.com/?q=']];
-const engOf=n=>ENG.find(e=>e[1]===n)||ENG.find(e=>e[1]==='Google');
+const engOf=n=>ENG.find(e=>e[1]===n)||ENG.find(e=>e[1]==='Bing');
 // 20 Oct 2026 (owner): one clean list to scroll, the most used first. No search box, no favourites, no group titles.
-const ORDEN=['Google','Bing','DuckDuckGo','Brave Search','Tor','Startpage','Ecosia','Qwant','Yahoo','Mojeek','Swisscows','MetaGer','Kagi','Perplexity','You.com','ChatGPT','Yandex','Baidu','Naver','Daum','Seznam','Yahoo Japón','Sogou'].map(engOf);
+// 26 Oct 2026 (owner): «pon solamente los buscadores que funcionen». Comprobado desde la celda real (Hetzner, 15:50 Bogotá): abren y buscan
+// Bing, Qwant, Swisscows, Naver, Daum y Seznam. Fuera por ahora: DuckDuckGo (418), Google (/sorry/), Startpage (bloqueado), Mojeek (403),
+// Ecosia/Perplexity/ChatGPT (verificación Cloudflare), Yahoo (en blanco), Yandex/Baidu/Sogou (captcha), Yahoo Japón (no sirve desde Europa),
+// You.com/Kagi (piden cuenta), MetaGer (no busca), Brave (pide pulsar «Verificar» cada vez). Se vuelven a meter cuando funcionen.
+const ORDEN=['Bing','Qwant','Swisscows','Naver','Daum','Seznam'].map(engOf);
+const POR_DEFECTO='Bing';
 const guarda=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},lee=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
-let selected=lee('zeroBuscador','Google');if(!ENG.some(e=>e[1]===selected)||selected==='Tor')selected='Google';
+let selected=lee('zeroBuscador',POR_DEFECTO);if(!ORDEN.some(e=>e[1]===selected)||selected==='Tor')selected=POR_DEFECTO;
 let act=-1;
 const menu=$('#menu');menu.setAttribute('role','dialog');
 menu.innerHTML='<div class="mlist" id="mlist" role="listbox" tabindex="-1" aria-label="Buscadores"></div>';
@@ -668,7 +673,7 @@ function zeroIA(m){$('#penviar').disabled=false;$('#pestado').textContent='';con
   const c=$('#pcomp');c.textContent='';const s1=document.createElement('span');s1.textContent='Comprobante';const s2=document.createElement('span');s2.textContent=m.proveedor||'';const n=(m.sustituidos||[]).length;const s3=document.createElement('span');s3.textContent=n+(n===1?' dato sustituido':' datos sustituidos');const s4=document.createElement('span');s4.textContent=(m.ms||0)+' ms';const cd=document.createElement('code');cd.textContent='P-'+(m.ref||'');c.append(s1,' · ',s2,' · ',s3,' · ',s4,' · ',cd);if(m.simulacro){const s5=document.createElement('span');s5.textContent='simulacro: sin clave de proveedor en el motor';c.append(' · ',s5)}}
 function ponUltra(on){ultra=on;stage.classList.toggle('ultra',on);$('#ultra').setAttribute('aria-pressed',String(on));if(window.ZeroMotor&&ZeroMotor.activo&&ZeroMotor.estado==='lista')ZeroMotor.ultraPon(on);
   if(on){if(selected!=='Tor'){antesUltra=selected;selected='Tor';pintaBoton()}panelUltra(true);clearTimeout(ponUltra.t);ponUltra.t=setTimeout(()=>panelUltra(false),9000)}
-  else{panelUltra(false);if(selected==='Tor'){selected=antesUltra||lee('zeroBuscador','Google');if(selected==='Tor'||!ENG.some(e=>e[1]===selected))selected='Google';pintaBoton()}antesUltra=null}
+  else{panelUltra(false);if(selected==='Tor'){selected=antesUltra||lee('zeroBuscador',POR_DEFECTO);if(selected==='Tor'||!ORDEN.some(e=>e[1]===selected))selected=POR_DEFECTO;pintaBoton()}antesUltra=null}
   const L=$('#lens');L.classList.remove('elegido');void L.offsetWidth;L.classList.add('elegido');pulse=Math.max(pulse,1.1)}
 $('#ultra').onclick=()=>ponUltra(!ultra);
 let webColor=!!lee('zeroWebColor',false);function pintaColor(){$('#webcolor').setAttribute('aria-checked',String(webColor));stage.classList.toggle('webcolor',webColor)}
@@ -927,7 +932,7 @@ function zeroTitulo(t){document.title=t?t+' · ZERO':'GUARDIANA · ZERO';avisaBu
 // 26 Oct 2026 (ronda 45): cuando un buscador no deja pasar la consulta desde la celda o pide comprobar que hay una persona, se dice qué pasa, sin culpar a nadie y sin prometer que se arregle solo
 const AVISO_BUSC={bloqueo:'Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.',comprobacion:'El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.'};
 let avisoBuscTipo=null;
-function avisaBuscador(url,titulo){const u=String(url||ultimaNav||(window.ZeroMotor&&ZeroMotor.urlActual)||''),tt=String(titulo||'');let tipo=null,host='';try{host=new URL(u).host.replace(/^www\./,'')}catch(e){}const esBusc=!!host&&ENG.some(e=>{try{const h=new URL(e[5]).host.replace(/^www\./,'');return host===h||host.endsWith('.'+h)}catch(x){return false}});if(/duckduckgo\.com\/static-pages\/home-error|\.onion\/static-pages\/home-error/.test(u))tipo='bloqueo';else if(/\/sorry\/|ipv4\.google\.com\/sorry/.test(u)||(esBusc&&(/^Captcha\b/i.test(tt)||/unusual traffic|tr[áa]fico inusual|captcha|verif/i.test(tt))))tipo='comprobacion';if(tipo===avisoBuscTipo)return;avisoBuscTipo=tipo;const a=$('#avisobusc');if(!tipo){a.hidden=true;return}$('#avisobusct').textContent=AVISO_BUSC[tipo];a.hidden=false}
+function avisaBuscador(url,titulo){const u=String(url||ultimaNav||(window.ZeroMotor&&ZeroMotor.urlActual)||''),tt=String(titulo||'');let tipo=null,host='';try{host=new URL(u).host.replace(/^www\./,'')}catch(e){}const esBusc=!!host&&ENG.some(e=>{try{const h=new URL(e[5]).host.replace(/^www\./,'');return host===h||host.endsWith('.'+h)}catch(x){return false}});if(/duckduckgo\.com\/static-pages\/home-error|\.onion\/static-pages\/home-error|cdn\.startpage\.com\/.*blocked\.html/.test(u)||(esBusc&&/^(403|Access Denied|Acceso denegado)\b/i.test(tt)))tipo='bloqueo';else if(/\/sorry\/|ipv4\.google\.com\/sorry/.test(u)||(esBusc&&(/^Captcha\b/i.test(tt)||/unusual traffic|tr[áa]fico inusual|captcha|verif/i.test(tt))))tipo='comprobacion';if(tipo===avisoBuscTipo)return;avisoBuscTipo=tipo;const a=$('#avisobusc');if(!tipo){a.hidden=true;return}$('#avisobusct').textContent=AVISO_BUSC[tipo];a.hidden=false}
 $('#avisobuscx').addEventListener('click',()=>{$('#avisobusc').hidden=true});
 function zeroUltra(m){if(!m.disponible){ultra=false;stage.classList.remove('ultra');$('#ultra').setAttribute('aria-pressed','false');$('#ultra').title='ULTRA no disponible en este motor (sin salida Tor)';panelUltra(false)}}
 function zeroPestanas(m){const T=$('#tabs');T.hidden=false;$('#webdemo').hidden=true;T.textContent='';(m.lista||[]).forEach(p=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.setAttribute('aria-selected',String(p.id===m.activa));b.dataset.id=p.id;const sp=document.createElement('span');sp.textContent=p.titulo||p.host||'Nueva pestaña';sp.setAttribute('translate','no');const x=document.createElement('i');x.textContent='×';x.setAttribute('aria-label','Cerrar pestaña');b.append(sp,x);b.onclick=e=>{if(e.target===x){ZeroMotor.pestana('cerrar',p.id)}else if(p.id!==m.activa)ZeroMotor.pestana('cambiar',p.id)};b.onauxclick=e=>{if(e.button===1){e.preventDefault();ZeroMotor.pestana('cerrar',p.id)}};T.append(b)});const n=document.createElement('button');n.type='button';n.className='tnueva';n.textContent='+';n.title='Nueva pestaña';n.setAttribute('aria-label','Nueva pestaña');n.onclick=()=>{ZeroMotor.pestana('nueva');setTimeout(()=>{input.value='';input.focus()},80)};T.append(n)}
