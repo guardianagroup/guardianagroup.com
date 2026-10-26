@@ -1,0 +1,8 @@
+  fallo 1/1 en https://overpass-api.de/api/interpreter: HTTP Error 504: Gateway Timeout
+  fallo 1/1 en https://overpass.kumi.systems/api/interpreter: HTTP Error 504: Gateway Timeout
+  fallo 1/1 en https://overpass.private.coffee/api/interpreter: HTTP Error 504: Gateway Timeout
+Sin la segunda consulta de centros de datos (edificios).
+campus juntados: 117 · edificios quitados de la lista: 367
+campus con operador (ronda 38): 13 de 14
+wikidata centros: 91 edificios, 58 empresas
+puntos: {'aterrizaje': 55, 'datos': 3851, 'intercambio': 24}
