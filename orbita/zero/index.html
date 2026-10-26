@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' wss://*.guardianagroup.com ws://127.0.0.1:* ws://localhost:*; media-src 'self' blob:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://motor.guardianagroup.com wss://*.guardianagroup.com ws://127.0.0.1:* ws://localhost:*; media-src 'self' blob:; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GUARDIANA · ZERO</title>
 <style>
@@ -1210,4 +1210,4 @@ screenpass(PB,fa,bw,bh,scene);screenpass(PH,fb,bw,bh,ta,1/bw,0);screenpass(PH,fa
 gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.viewport(0,0,sw,sh);gl.disable(gl.BLEND);gl.useProgram(PF);bindQ(PF);tex(scene,0);tex(ta,1);gl.uniform1i(u(PF,'scene'),0);gl.uniform1i(u(PF,'bloom'),1);gl.uniform1f(u(PF,'T'),elapsed);gl.uniform1f(u(PF,'M'),morph);gl.uniform1f(u(PF,'Ry'),cine.Ry);gl.uniform1f(u(PF,'Hb'),cine.Hb);gl.uniform1f(u(PF,'Sw'),cine.Sw);gl.uniform1f(u(PF,'Sa'),cine.Sa);gl.uniform1f(u(PF,'Sq'),cine.Sq);gl.uniform1f(u(PF,'Co'),cine.Mm*(1-cine.Bm*(1-cine.Bk))*(1-morph));gl.uniform1f(u(PF,'Cr'),Math.max(.5,cine.Ga*cine.As*cine.Ap)*(cine.S0+(44-cine.S0)*morph)*.17);gl.uniform1f(u(PF,'Fl'),cine.fl);gl.uniform2f(u(PF,'Off'),OX,OY);gl.uniform2f(u(PF,'Sz'),W+2*OX,H+2*OY);gl.uniform2f(u(PF,'Lc'),cine.cx+(1260+OX-cine.cx)*morph,cine.cy+(PNY-cine.cy)*morph);gl.drawArrays(gl.TRIANGLE_STRIP,0,4)}
 requestAnimationFrame(tick);
 })();
-</script><script src="motor.js?v=20261026b"></script></body></html>
+</script><script src="motor.js?v=20261026c"></script></body></html>
