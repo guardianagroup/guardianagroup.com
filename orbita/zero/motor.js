@@ -56,7 +56,8 @@
 
   function despacha(m) {
     if (m.t === 'lista') {
-      M.lista = m; M.estado = 'lista'; M.sesion = m.sesion; M.acta = null; M.ultraDisponible = !!m.ultraDisponible; M.ultra = !!m.ultra;
+      M.lista = m; M.estado = 'lista'; M.sesion = m.sesion; M.acta = null; M.ultraDisponible = !!m.ultraDisponible; M.ultra = !!m.ultra; M.nivelActual = m.nivel || M.nivelActual;
+      if (window.zeroLista) window.zeroLista(m);
       ponEstado('Celda lista · ' + Object.keys(m.listas || {}).length + ' listas · cookies de terceros ' + (m.cookiesBloqueadas ? 'bloqueadas' : 'efímeras'));
       if (pendiente) { env({ t: 'abrir', url: pendiente }); pendiente = null; }
       return;
@@ -110,6 +111,7 @@
   M.modo = (observatorio) => { M.observatorio = !!observatorio; env({ t: 'modo', observatorio: M.observatorio }); };
   M.ultraPon = (on) => env({ t: 'modo', ultra: !!on });
   M.nivel = (n) => { M.nivelActual = n; env({ t: 'modo', nivel: n }); };
+  M.permitir = (clave, on) => env({ t: 'permitir', clave, on: !!on });
   M.destruir = () => { ponEstado('Sellando y destruyendo la celda…'); env({ t: 'destruir' }); };
   M.ia = (o) => { if (M.estado !== 'lista' || !ws || ws.readyState !== 1) { conecta(); return false; } env({ t: 'ia', ...o }); return true; };
   M.pestana = (accion, id, url) => env({ t: 'pestana', accion, id, url });
