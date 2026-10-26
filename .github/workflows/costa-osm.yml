@@ -1,0 +1,47 @@
+# The coast of OpenStreetMap for Órbita's close zoom (owner, 25 Oct 2026, 19:01: «los cables no llegan a tierra. Hay que
+# ser más preciso»). land-polygons-split-4326 (osmdata.openstreetmap.de, ODbL) is downloaded here, cut in 1° tiles around
+# the cables, their landings and the data centres (herramientas/costa_osm.py), and saved on the branch «costa-osm» to be
+# checked before it goes to the site. By hand only.
+name: Costa de OpenStreetMap
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: costa-osm
+  cancel-in-progress: false
+
+jobs:
+  costa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Polígonos de tierra de OpenStreetMap (ODbL)
+        run: |
+          curl -sSfL --retry 3 -o /tmp/land.zip https://osmdata.openstreetmap.de/download/land-polygons-split-4326.zip
+          ls -la /tmp/land.zip
+          unzip -o -q /tmp/land.zip -d /tmp/land
+          ls -laR /tmp/land | head -20
+
+      - name: Teselas de 1° y medida de las llegadas
+        run: |
+          pip install --quiet pyshp shapely
+          SHP=$(dirname "$(find /tmp/land -name '*.shp' | head -1)")
+          python3 herramientas/costa_osm.py "$SHP"
+          du -sh orbita/static/tierra/costa-osm
+          ls orbita/static/tierra/costa-osm | wc -l
+          python3 -c "import json;d=json.load(open('herramientas/fuentes/llegadas-costa.json'));a=[p for p in d['llegadas'] if not p['tierra']];a.sort(key=lambda p:-(p['m'] or 0));print('\n'.join('%s %s %s %s m (%s)'%(p['de'],p['lugar'],p['cc'],p['m'],p.get('cable','')) for p in a[:60]))"
+
+      - name: Guardar en la rama costa-osm
+        run: |
+          git config user.name "GUARDIANA datos"
+          git config user.email "datos@guardianagroup.com"
+          git checkout -B costa-osm
+          git add orbita/static/tierra/costa-osm herramientas/fuentes/llegadas-costa.json
+          git commit -q -m "Órbita: costa de OpenStreetMap en teselas de 1° ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git push -f origin costa-osm
