@@ -620,8 +620,9 @@ function urlBusq(e){const hl=(document.documentElement.lang||'es').toLowerCase()
 // y funciona bien, hazlo; y Brave también» → Google (reCAPTCHA de /sorry/) y Brave («Verificar») entran con el aviso honesto; lo resuelve la persona.
 // 17:17 (owner): «todos los que no pidan nada y los que pidan como máximo un clic»: Bing, Qwant, Swisscows, Naver, Daum y Seznam
 // abren sin nada; Brave pide un clic («Verificar»). Google (captcha largo en la prueba del dueño) queda fuera de la lista de la celda.
-const ORDEN=['Bing','Brave Search','Qwant','Swisscows','Naver','Daum','Seznam'].map(engOf);
-const POR_DEFECTO='Bing';
+// 17:18 (owner): «publica también Google, no pasa nada. Google el primero, Brave el segundo».
+const ORDEN=['Google','Brave Search','Bing','Qwant','Swisscows','Naver','Daum','Seznam'].map(engOf);
+const POR_DEFECTO='Google';
 const guarda=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},lee=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
 let selected=lee('zeroBuscador',POR_DEFECTO);if(!ORDEN.some(e=>e[1]===selected)||selected==='Tor')selected=POR_DEFECTO;
 let act=-1;
