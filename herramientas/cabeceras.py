@@ -16,7 +16,7 @@ Uso: python3 herramientas/cabeceras.py [raíz del repo]   (idempotente: actualiz
 import os, re, sys
 
 RAIZ = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
-FUERA = ('v/', 'descargas/', 'node_modules/', '.git/', 'zero-motor/', 'herramientas/')
+FUERA = ('v/', 'descargas/', 'node_modules/', '.git/', 'zero-motor/', 'herramientas/', 'm/', 'e/')  # m/ y e/ (Comunicaciones) tienen su propia política con el relé wss://; no se tocan aquí
 
 # La política estándar de la web (ya estaba en 268 páginas): nada que no sea de la propia web, sin objetos, sin formularios.
 CSP_ESTANDAR = ("default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; "
