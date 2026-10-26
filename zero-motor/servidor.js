@@ -194,7 +194,7 @@ class Sesion {
 
   async arrancaPantalla() {
     if (!this.act) return;
-    try { await this.cdp.send('Page.startScreencast', { format: 'jpeg', quality: 72, maxWidth: this.w, maxHeight: this.h, everyNthFrame: 1 }); this.act.pantalla = true; this.pantalla = true; } catch (_) {}
+    try { await this.cdp.send('Page.startScreencast', { format: 'jpeg', quality: 60, maxWidth: this.w, maxHeight: this.h, everyNthFrame: 1 }); this.act.pantalla = true; this.pantalla = true; } catch (_) {}
   }
 
   op(que) { this.operaciones.push([ahora(), que]); }

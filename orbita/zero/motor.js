@@ -58,7 +58,6 @@
     if (m.t === 'lista') {
       M.lista = m; M.estado = 'lista'; M.sesion = m.sesion; M.acta = null; M.ultraDisponible = !!m.ultraDisponible; M.ultra = !!m.ultra;
       ponEstado('Celda lista · ' + Object.keys(m.listas || {}).length + ' listas · cookies de terceros ' + (m.cookiesBloqueadas ? 'bloqueadas' : 'efímeras'));
-      try { const n = localStorage.getItem('zeroNivel'); if (n && n !== '"normal"') env({ t: 'modo', nivel: JSON.parse(n) }); } catch (_) {}
       if (pendiente) { env({ t: 'abrir', url: pendiente }); pendiente = null; }
       return;
     }
