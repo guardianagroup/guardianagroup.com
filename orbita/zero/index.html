@@ -616,7 +616,8 @@ function urlBusq(e){const hl=(document.documentElement.lang||'es').toLowerCase()
 // Ecosia/Perplexity/ChatGPT (verificación Cloudflare), Yahoo (en blanco), Yandex/Baidu/Sogou (captcha), Yahoo Japón (no sirve desde Europa),
 // You.com/Kagi (piden cuenta), MetaGer (no busca). Se vuelven a meter cuando funcionen. 16:07 (owner): «si solamente pide un captcha
 // y funciona bien, hazlo; y Brave también» → Google (reCAPTCHA de /sorry/) y Brave («Verificar») entran con el aviso honesto; lo resuelve la persona.
-const ORDEN=['Bing','Google','Brave Search','Qwant','Swisscows','Naver','Daum','Seznam'].map(engOf);
+// 16:16 (owner): «no pongas tantos buscadores» → cuatro: Bing (abre sin comprobación), Google y Brave (con comprobación), Qwant.
+const ORDEN=['Bing','Google','Brave Search','Qwant'].map(engOf);
 const POR_DEFECTO='Bing';
 const guarda=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},lee=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
 let selected=lee('zeroBuscador',POR_DEFECTO);if(!ORDEN.some(e=>e[1]===selected)||selected==='Tor')selected=POR_DEFECTO;
@@ -1120,6 +1121,8 @@ function banda(m){if(!sonido||!ac())return;const t=actx.currentTime+.03;const o=
   if(m!=='marena'){swell(t+3.36+o,1.3,.34,220,1800,.7);tone(t+3.38+o,48,1.1,.6,'sine',30);}
   tone(t+6+o,1568,2.4,.10);tone(t+6+o,2349,1.8,.05);tone(t+6.02+o,3136,1.2,.03);}
 const dir=$('#director');
+// 26 Oct 2026: la barra de entradas de cine es una herramienta del dueño; en la web publicada solo con ?director=1 (o en local).
+if(!/[?&]director=1/.test(location.search)&&!/^(localhost|127\.0\.0\.1)$/.test(location.hostname))dir.style.display='none';
 function paintDirector(){dir.querySelectorAll('button[data-i]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.i===cineMode)))}
 function play(i){cineMode=i;try{localStorage.setItem('zeroEntrada2',String(i))}catch(e){}paintDirector();stage.classList.toggle('vivo',!!ENTRADAS[i].rest);if(reduced){endCine();return}if(opened)orbit();cineStart=performance.now();cineFixed=null;banda(ENTRADAS[i].id);stage.classList.add('intro');input.blur();direct(0)}
 ENTRADAS.forEach((e,i)=>{const b=document.createElement('button');b.type='button';b.dataset.i=i;b.textContent=e.n;b.onclick=()=>play(i);dir.append(b)});
