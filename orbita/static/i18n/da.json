@@ -942,7 +942,20 @@
   "Por dónde viajan los datos": "Hvor data rejser",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Dette center er forbundet med andre net, men dets reelle ruter er ikke offentlige: kortet viser infrastrukturen i nærheden, ikke dine datas bekræftede vej.",
   "Infraestructura cercana": "Infrastruktur i nærheden",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Operatør bekræftet af GUARDIANA-agenturet med to offentlige kilder"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Operatør bekræftet af GUARDIANA-agenturet med to offentlige kilder",
+  "Cómo lo sabemos": "Sådan ved vi det",
+  "Comprobado": "Kontrolleret",
+  "Siguiente paso": "Næste skridt",
+  "Qué ven de ti las webs": "Hvad websteder ser om dig",
+  "Ver la demostración de ZERO": "Se ZERO-demonstrationen",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Du har set, hvor dine data rejser. Se nu, hvad websteder ser om dig, og hvordan ZERO afbryder hver forbindelse.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Rekonstrueret af GUARDIANA-agenturet ud fra offentlige kilder, bekræftet af to stemmer",
+  "Agencia GUARDIANA, dos voces": "GUARDIANA-agenturet, to stemmer",
+  "edificios en este campus": "bygninger på dette campus",
+  "ÓRBITA": "ORBIT",
+  "Descubre por dónde viajan tus datos": "Opdag, hvor dine data rejser",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Tre veje: udforsk kablerne, datacentrene og satellitterne, dit digitale liv passerer igennem; mål din egen forbindelse; eller se, hvad ethvert websted ser om dig.",
+  "Explorar el planeta": "Udforsk planeten"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

@@ -943,7 +943,20 @@
   "Por dónde viajan los datos": "Dữ liệu đi qua đâu",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Trung tâm này kết nối với các mạng khác, nhưng tuyến đường thực không được công bố: bản đồ cho thấy hạ tầng ở gần, không phải đường đi đã xác nhận của dữ liệu của bạn.",
   "Infraestructura cercana": "Hạ tầng ở gần",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Đơn vị vận hành được cơ quan GUARDIANA xác nhận với hai nguồn công khai"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Đơn vị vận hành được cơ quan GUARDIANA xác nhận với hai nguồn công khai",
+  "Cómo lo sabemos": "Vì sao chúng tôi biết",
+  "Comprobado": "Đã kiểm tra ngày",
+  "Siguiente paso": "Bước tiếp theo",
+  "Qué ven de ti las webs": "Các trang web thấy gì về bạn",
+  "Ver la demostración de ZERO": "Xem bản trình diễn ZERO",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Bạn đã thấy dữ liệu của mình đi qua đâu. Giờ hãy xem các trang web thấy gì về bạn, và ZERO cắt từng kết nối như thế nào.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Được cơ quan GUARDIANA dựng lại từ các nguồn công khai, được hai tiếng nói xác nhận",
+  "Agencia GUARDIANA, dos voces": "Cơ quan GUARDIANA, hai tiếng nói",
+  "edificios en este campus": "tòa nhà trong khu này",
+  "ÓRBITA": "ORBITA",
+  "Descubre por dónde viajan tus datos": "Khám phá dữ liệu của bạn đi qua đâu",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Ba con đường: khám phá các tuyến cáp, trung tâm dữ liệu và vệ tinh mà đời sống số của bạn đi qua; đo kết nối của chính bạn; hoặc xem bất kỳ trang web nào thấy gì về bạn.",
+  "Explorar el planeta": "Khám phá hành tinh"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

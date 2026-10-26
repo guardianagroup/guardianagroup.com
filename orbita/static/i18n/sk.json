@@ -942,7 +942,20 @@
   "Por dónde viajan los datos": "Kadiaľ putujú dáta",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Toto centrum je pripojené k ďalším sieťam, ale jeho skutočné trasy nie sú verejné: mapa ukazuje blízku infraštruktúru, nie potvrdenú cestu vašich dát.",
   "Infraestructura cercana": "Infraštruktúra v blízkosti",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Prevádzkovateľ potvrdený agentúrou GUARDIANA z dvoch verejných zdrojov"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Prevádzkovateľ potvrdený agentúrou GUARDIANA z dvoch verejných zdrojov",
+  "Cómo lo sabemos": "Ako to vieme",
+  "Comprobado": "Overené",
+  "Siguiente paso": "Ďalší krok",
+  "Qué ven de ti las webs": "Čo o vás vidia weby",
+  "Ver la demostración de ZERO": "Pozrieť ukážku ZERO",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Videli ste, kadiaľ putujú vaše dáta. Teraz sa pozrite, čo o vás vidia weby a ako ZERO prerušuje každé spojenie.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Zrekonštruované agentúrou GUARDIANA z verejných zdrojov, potvrdené dvoma hlasmi",
+  "Agencia GUARDIANA, dos voces": "Agentúra GUARDIANA, dva hlasy",
+  "edificios en este campus": "budov v tomto areáli",
+  "ÓRBITA": "ORBITA",
+  "Descubre por dónde viajan tus datos": "Objavte, kadiaľ putujú vaše dáta",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Tri cesty: prejdite káble, dátové centrá a satelity, ktorými prechádza váš digitálny život; zmerajte vlastné pripojenie; alebo sa pozrite, čo o vás vidí ktorýkoľvek web.",
+  "Explorar el planeta": "Preskúmať planétu"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

@@ -943,7 +943,20 @@
   "Por dónde viajan los datos": "データはどこを通るか",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "このセンターは他のネットワークとつながっていますが、実際の経路は公開されていません。地図が示すのは近くのインフラであり、あなたのデータの確認済みの経路ではありません。",
   "Infraestructura cercana": "近くのインフラ",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "GUARDIANAエージェンシーが2つの公開情報源で運営者を確認"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "GUARDIANAエージェンシーが2つの公開情報源で運営者を確認",
+  "Cómo lo sabemos": "根拠",
+  "Comprobado": "確認日",
+  "Siguiente paso": "次のステップ",
+  "Qué ven de ti las webs": "ウェブサイトがあなたについて見ているもの",
+  "Ver la demostración de ZERO": "ZEROのデモを見る",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "データがどこを通るかを見ました。次は、ウェブサイトがあなたの何を見ているか、ZEROがどのように各接続を遮断するかを見てください。",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "GUARDIANAエージェンシーが公開情報源から再構成し、2つの声が確認",
+  "Agencia GUARDIANA, dos voces": "GUARDIANAエージェンシー、2つの声",
+  "edificios en este campus": "棟（このキャンパス内）",
+  "ÓRBITA": "オービタ",
+  "Descubre por dónde viajan tus datos": "データがどこを通るかを知る",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "3つの入口：デジタル生活が通るケーブル・データセンター・衛星をめぐる、自分の接続を測る、あるいはウェブサイトがあなたの何を見ているかを確かめる。",
+  "Explorar el planeta": "地球を探索する"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

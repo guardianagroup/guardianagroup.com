@@ -140,6 +140,26 @@
     "OpenStreetMap (zona industrial «Microsoft Bison Business Park Data Center»)",
     "https://baxtel.com/campus/microsoft-bison-business-park-campus"
    ]
+  },
+  {
+   "lat": 50.478,
+   "lon": 12.335,
+   "operador": "Hetzner",
+   "nombre": "Hetzner Datacenter-Park Falkenstein",
+   "fuentes": [
+    "https://www.hetzner.com/de/unternehmen/rechenzentrum/",
+    "OpenStreetMap (calle «Am Datacenter-Park», Falkenstein/Vogtland)"
+   ]
+  },
+  {
+   "lat": 32.5,
+   "lon": -99.784,
+   "operador": "Crusoe",
+   "nombre": "Crusoe Abilene (Lancium Clean Campus, Stargate)",
+   "fuentes": [
+    "https://datacenterdynamics.com/en/news/crusoe-begins-construction-on-second-phase-of-abilene-texas-data-center-campus-will-add-six-buildings",
+    "https://www.datacentermap.com/usa/texas/abilene/crusoe-abilene/"
+   ]
   }
  ]
 }

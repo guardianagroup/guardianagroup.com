@@ -124,6 +124,35 @@ def main():
         if j == 1: s['l'] = s['l'] + nuevo
         else: s['l'] = nuevo[::-1] + s['l']
         cuenta['alargados'] += 1; largos.append(m)
+    # 26 Oct 2026 (review at ×1600, Cartagena): the sea route's last waypoint sometimes sits past the landing, so the
+    # line came back on itself in a small «V». When the vertex before the end is within 3 km, the turn there is sharp and
+    # the straight line from the vertex before it to the end crosses only water, that waypoint goes.
+    zig = 0
+    for s in cs:
+        for lado in (0, 1):
+            l = s.get('l') or []
+            if len(l) < 3: break
+            idx = list(range(len(l))) if lado == 1 else list(range(len(l) - 1, -1, -1))  # from the far end towards this end
+            e = l[idx[-1]]
+            # the last vertex more than 100 m from the end (the shore point and the inland point stay)
+            j = None
+            for t in range(len(idx) - 2, 0, -1):
+                if m_entre(l[idx[t]], e) > 100: j = t; break
+            if j is None or j < 1: continue
+            q, r, sig = l[idx[j]], l[idx[j - 1]], l[idx[j + 1]]
+            if m_entre(q, e) > 3000 or m_entre(r, q) > 15000: continue
+            k = math.cos(math.radians(e[1]))
+            ax, ay = (q[0] - r[0]) * k, q[1] - r[1]; bx, by = (e[0] - q[0]) * k, e[1] - q[1]
+            na, nb = math.hypot(ax, ay) or 1e-12, math.hypot(bx, by) or 1e-12
+            if (ax * bx + ay * by) / (na * nb) > -0.3: continue  # not a sharp turn
+            d = m_entre(r, sig); n = max(2, int(d / 50)); agua = True
+            for i in range(1, n):
+                t = i / n; x, y = r[0] + (sig[0] - r[0]) * t, r[1] + (sig[1] - r[1]) * t
+                if m_entre((x, y), sig) > 40 and costa.conocida(x, y) and costa.en_tierra(x, y): agua = False; break
+            if not agua: continue
+            del l[idx[j]]
+            zig += 1
+    if zig: cuenta['zigzags quitados'] = zig
     largos.sort()
     print(cuenta, '· metros añadidos: mediana', round(largos[len(largos) // 2]) if largos else 0, '· máximo', round(largos[-1]) if largos else 0)
     if not prueba:

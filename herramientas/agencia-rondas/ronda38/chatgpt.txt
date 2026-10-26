@@ -29,3 +29,6 @@
 28 | Microsoft | Project Ginger East | GPUQuant | Sue Data Centers | seguro
 29 | Microsoft | Bison Business Park | Microsoft | Data Center Map | dudoso
 30 | no sé | | | | dudoso
+# Repesca
+9 | Hetzner Online GmbH | Datacenter-Park Falkenstein | Hetzner, informe oficial 2025 (p. 12) | OpenStreetMap vía Mapcarta | seguro
+2 | Crusoe (operador) / Lancium (promotor) | Stargate Abilene — Lancium Clean Campus | Lancium, ubicación oficial | Crusoe, confirmación oficial | seguro
