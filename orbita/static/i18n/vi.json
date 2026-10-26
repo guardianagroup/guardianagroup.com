@@ -1382,7 +1382,24 @@
   "no": "không",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Yêu cầu mang theo gì: ngoài trang, kích thước vị trí và đồng ý, dữ liệu về bạn cũng đã đi ra. Chi tiết trong từng cuộc đấu giá:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Yêu cầu mang theo gì: địa chỉ trang, kích thước vị trí và đồng ý; không có mã định danh người dùng (trong ô không có cái nào).",
-  "Otra empresa": "Công ty khác"
+  "Otra empresa": "Công ty khác",
+  "Observar": "Quan sát",
+  "observar": "quan sát",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Không cắt gì cả (trừ trang web nguy hiểm): trang web mở nguyên trạng, ZERO phát hiện mọi thứ và bạn chọn cắt gì.",
+  "Vistas": "Đã thấy",
+  "conexiones vistas en esta web": "kết nối đã thấy trên trang này",
+  "VISTO": "ĐÃ THẤY",
+  "Permitir": "Cho phép",
+  "Cortar": "Cắt",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Cho kết nối của công ty này đi qua trong phiên này",
+  "Volver a cortar las conexiones de esta empresa": "Cắt lại kết nối của công ty này",
+  "Conexión vista (dejada pasar)": "Kết nối đã thấy (cho qua)",
+  "Conexión permitida por ti": "Kết nối bạn đã cho phép",
+  "Permiso de empresa": "Quyền của công ty",
+  "La web no cargó": "Trang web không tải được",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Mức quan sát: ZERO cho mọi thứ đi qua (trừ trang web nguy hiểm), phát hiện và cho bạn xem; bạn chọn cắt gì.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Công cụ tìm kiếm này không cho truy vấn từ ô đi qua. ZERO duyệt web từ một máy chủ và một số công cụ tìm kiếm hạn chế các kết nối như vậy. Bạn có thể chọn công cụ tìm kiếm khác hoặc gõ thẳng địa chỉ trang web.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Công cụ tìm kiếm muốn kiểm tra bạn là người thật. Hoàn thành kiểm tra ngay tại đây và tiếp tục; ô sẽ nhớ rằng bạn đã vượt qua."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",
@@ -1468,6 +1485,15 @@
   "porPujador": "{1} mỗi bên đặt giá",
   "opPuerta": "cổng AI: gửi được bảo vệ tới {1} ({2} dữ liệu đã được thay)",
   "huecoReal": "vị trí «{1}» ({2} × {3} pixel)",
-  "huecoSolo": "vị trí «{1}»"
+  "huecoSolo": "vị trí «{1}»",
+  "mVistoDe": "ZERO đã thấy (và cho qua, mức quan sát) {1}, từ {2}[ ({3})].",
+  "mVistoHacia": "ZERO đã thấy (và cho qua, mức quan sát) {1} tới {2}.",
+  "mPermitidoDe": "ZERO đã cho qua (bạn đã cho phép) {1}, từ {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO đã cho qua (bạn đã cho phép) {1} tới {2}.",
+  "mPermisoOn": "Bạn đã cho phép các kết nối của {1} trong phiên này.",
+  "mPermisoOff": "Bạn cắt lại các kết nối của {1} trong phiên này.",
+  "mFallo": "Trang web {1} không tải được: {2}.",
+  "opPermitida": "đã cho phép {1}",
+  "opCortarse": "cắt lại {1}"
  }
 }

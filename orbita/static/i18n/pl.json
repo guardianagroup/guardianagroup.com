@@ -1382,7 +1382,24 @@
   "no": "nie",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Co niosło żądanie: oprócz strony, rozmiaru miejsca i zgody wyszły dane o tobie. Szczegóły w każdej aukcji:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Co niosło żądanie: adres strony, rozmiar miejsca i zgodę; bez identyfikatorów użytkownika (w komórce nie ma żadnych).",
-  "Otra empresa": "Inna firma"
+  "Otra empresa": "Inna firma",
+  "Observar": "Obserwuj",
+  "observar": "obserwuj",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Nic nie odcina (poza niebezpiecznymi stronami): strona otwiera się taka, jaka jest, ZERO wykrywa wszystko, a ty wybierasz, co odciąć.",
+  "Vistas": "Widziane",
+  "conexiones vistas en esta web": "połączeń widzianych na tej stronie",
+  "VISTO": "WIDZIANE",
+  "Permitir": "Zezwól",
+  "Cortar": "Odetnij",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Przepuszczaj połączenia tej firmy w tej sesji",
+  "Volver a cortar las conexiones de esta empresa": "Ponownie odcinaj połączenia tej firmy",
+  "Conexión vista (dejada pasar)": "Połączenie widziane (przepuszczone)",
+  "Conexión permitida por ti": "Połączenie dozwolone przez ciebie",
+  "Permiso de empresa": "Zgoda dla firmy",
+  "La web no cargó": "Strona się nie wczytała",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Poziom obserwuj: ZERO przepuszcza wszystko (poza niebezpiecznymi stronami), wykrywa to i pokazuje; ty wybierasz, co odciąć.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Ta wyszukiwarka nie przepuściła zapytania z komórki. ZERO przegląda z serwera, a niektóre wyszukiwarki ograniczają takie połączenia. Możesz wybrać inną wyszukiwarkę albo wpisać adres strony bezpośrednio.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Wyszukiwarka chce sprawdzić, czy jesteś osobą. Rozwiąż sprawdzenie tutaj i kontynuuj; komórka zapamięta, że je przeszedłeś."
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",
@@ -1468,6 +1485,15 @@
   "porPujador": "{1} na licytującego",
   "opPuerta": "brama SI: wysyłka chroniona do {1} ({2} {2?zastąpiona dana|zastąpionych danych})",
   "huecoReal": "miejsce «{1}» ({2} × {3} pikseli)",
-  "huecoSolo": "miejsce «{1}»"
+  "huecoSolo": "miejsce «{1}»",
+  "mVistoDe": "ZERO widziało (i przepuściło, poziom obserwuj) {1}, od {2}[ ({3})].",
+  "mVistoHacia": "ZERO widziało (i przepuściło, poziom obserwuj) {1} do {2}.",
+  "mPermitidoDe": "ZERO przepuściło (zezwoliłeś) {1}, od {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO przepuściło (zezwoliłeś) {1} do {2}.",
+  "mPermisoOn": "Zezwoliłeś na połączenia od {1} w tej sesji.",
+  "mPermisoOff": "Ponownie odcinasz połączenia od {1} w tej sesji.",
+  "mFallo": "Strona {1} się nie wczytała: {2}.",
+  "opPermitida": "dozwolone {1}",
+  "opCortarse": "ponownie odcięte {1}"
  }
 }

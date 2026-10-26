@@ -1382,7 +1382,24 @@
   "no": "아니요",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "요청에 담긴 것: 페이지, 자리 크기, 동의 외에 당신에 관한 데이터도 나갔습니다. 자세한 내용은 각 경매에서:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "요청에 담긴 것: 페이지 주소, 자리 크기, 동의. 사용자 식별자 없음 (셀에는 하나도 없음).",
-  "Otra empresa": "다른 회사"
+  "Otra empresa": "다른 회사",
+  "Observar": "관찰",
+  "observar": "관찰",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "아무것도 차단하지 않습니다(위험한 사이트 제외): 사이트가 그대로 열리고, ZERO가 모두 감지하며, 무엇을 차단할지는 당신이 선택합니다.",
+  "Vistas": "감지됨",
+  "conexiones vistas en esta web": "이 사이트에서 감지된 연결",
+  "VISTO": "감지됨",
+  "Permitir": "허용",
+  "Cortar": "차단",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "이 세션에서 이 회사의 연결을 통과시키기",
+  "Volver a cortar las conexiones de esta empresa": "이 회사의 연결을 다시 차단하기",
+  "Conexión vista (dejada pasar)": "연결 감지됨(통과)",
+  "Conexión permitida por ti": "당신이 허용한 연결",
+  "Permiso de empresa": "회사 허용",
+  "La web no cargó": "사이트가 로드되지 않음",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "관찰 수준: ZERO가 모두 통과시키고(위험한 사이트 제외) 감지하여 보여 줍니다. 무엇을 차단할지는 당신이 선택합니다.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "이 검색 엔진이 셀에서 보낸 검색을 통과시키지 않았습니다. ZERO는 서버에서 탐색하며 일부 검색 엔진은 그런 연결을 제한합니다. 다른 검색 엔진을 고르거나 사이트 주소를 직접 입력하세요.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "검색 엔진이 당신이 사람인지 확인하려 합니다. 여기서 확인을 마치고 계속하세요. 셀이 통과했음을 기억합니다."
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",
@@ -1468,6 +1485,15 @@
   "porPujador": "입찰자당 {1}",
   "opPuerta": "AI 게이트: {1}에 보호 전송 (데이터 {2}건 대체)",
   "huecoReal": "자리 «{1}» ({2} × {3} 픽셀)",
-  "huecoSolo": "자리 «{1}»"
+  "huecoSolo": "자리 «{1}»",
+  "mVistoDe": "ZERO가 {2}[({3})]의 {1}을(를) 감지했습니다(통과, 관찰 수준).",
+  "mVistoHacia": "ZERO가 {2}(으)로 향하는 {1}을(를) 감지했습니다(통과, 관찰 수준).",
+  "mPermitidoDe": "ZERO가 {2}[({3})]의 {1}을(를) 통과시켰습니다(당신이 허용).",
+  "mPermitidoHacia": "ZERO가 {2}(으)로 향하는 {1}을(를) 통과시켰습니다(당신이 허용).",
+  "mPermisoOn": "이 세션에서 {1}의 연결을 허용했습니다.",
+  "mPermisoOff": "이 세션에서 {1}의 연결을 다시 차단합니다.",
+  "mFallo": "사이트 {1}이(가) 로드되지 않았습니다: {2}.",
+  "opPermitida": "허용됨 {1}",
+  "opCortarse": "다시 차단됨 {1}"
  }
 }

@@ -1381,7 +1381,24 @@
   "no": "hapana",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Ombi lilibeba nini: mbali na ukurasa, ukubwa wa nafasi na idhini, data kukuhusu ilitoka. Maelezo, katika kila mnada:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Ombi lilibeba nini: anwani ya ukurasa, ukubwa wa nafasi na idhini; hakuna vitambulisho vya mtumiaji (kwenye seli hakuna chochote).",
-  "Otra empresa": "Kampuni nyingine"
+  "Otra empresa": "Kampuni nyingine",
+  "Observar": "Tazama",
+  "observar": "tazama",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Haikati chochote (isipokuwa tovuti hatari): tovuti inafunguka kama ilivyo, ZERO inagundua kila kitu, na wewe unachagua cha kukata.",
+  "Vistas": "Zilizoonekana",
+  "conexiones vistas en esta web": "miunganisho iliyoonekana kwenye tovuti hii",
+  "VISTO": "IMEONEKANA",
+  "Permitir": "Ruhusu",
+  "Cortar": "Kata",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Ruhusu miunganisho ya kampuni hii kupita katika kipindi hiki",
+  "Volver a cortar las conexiones de esta empresa": "Kata tena miunganisho ya kampuni hii",
+  "Conexión vista (dejada pasar)": "Muunganisho umeonekana (umeruhusiwa kupita)",
+  "Conexión permitida por ti": "Muunganisho ulioruhusu",
+  "Permiso de empresa": "Ruhusa ya kampuni",
+  "La web no cargó": "Tovuti haikupakia",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Kiwango cha kutazama: ZERO inaruhusu kila kitu kupita (isipokuwa tovuti hatari), inagundua na kukuonyesha; wewe unachagua cha kukata.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Injini hii ya utafutaji haikuruhusu swali kutoka kwenye seli kupita. ZERO inavinjari kutoka kwa seva na baadhi ya injini za utafutaji huzuia miunganisho kama hiyo. Unaweza kuchagua injini nyingine au kuandika anwani ya tovuti moja kwa moja.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Injini ya utafutaji inataka kuhakikisha kuwa wewe ni mtu. Kamilisha uhakiki hapa na uendelee; seli itakumbuka kuwa umepita."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} kwa kila mzabuni",
   "opPuerta": "lango la AI: utumaji uliolindwa kwa {1} (data {2} {2?imebadilishwa|zimebadilishwa})",
   "huecoReal": "nafasi «{1}» (pikseli {2} × {3})",
-  "huecoSolo": "nafasi «{1}»"
+  "huecoSolo": "nafasi «{1}»",
+  "mVistoDe": "ZERO imeona (na kuruhusu kupita, kiwango cha kutazama) {1}, kutoka {2}[ ({3})].",
+  "mVistoHacia": "ZERO imeona (na kuruhusu kupita, kiwango cha kutazama) {1} kuelekea {2}.",
+  "mPermitidoDe": "ZERO imeruhusu kupita (uliruhusu) {1}, kutoka {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO imeruhusu kupita (uliruhusu) {1} kuelekea {2}.",
+  "mPermisoOn": "Umeruhusu miunganisho ya {1} katika kipindi hiki.",
+  "mPermisoOff": "Unakata tena miunganisho ya {1} katika kipindi hiki.",
+  "mFallo": "Tovuti {1} haikupakia: {2}.",
+  "opPermitida": "imeruhusiwa {1}",
+  "opCortarse": "imekatwa tena {1}"
  }
 }

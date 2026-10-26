@@ -1381,7 +1381,24 @@
   "no": "όχι",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Τι μετέφερε το αίτημα: εκτός από τη σελίδα, το μέγεθος της θέσης και τη συγκατάθεση, βγήκαν δεδομένα για σένα. Οι λεπτομέρειες σε κάθε δημοπρασία:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Τι μετέφερε το αίτημα: διεύθυνση σελίδας, μέγεθος θέσης και συγκατάθεση· χωρίς αναγνωριστικά χρήστη (στο κελί δεν υπάρχει κανένα).",
-  "Otra empresa": "Άλλη εταιρεία"
+  "Otra empresa": "Άλλη εταιρεία",
+  "Observar": "Παρατήρηση",
+  "observar": "παρατήρηση",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Δεν κόβει τίποτα (εκτός από επικίνδυνους ιστότοπους): ο ιστότοπος ανοίγει όπως είναι, το ZERO ανιχνεύει τα πάντα και εσύ επιλέγεις τι θα κοπεί.",
+  "Vistas": "Είδε",
+  "conexiones vistas en esta web": "συνδέσεις που είδε σε αυτόν τον ιστότοπο",
+  "VISTO": "ΕΙΔΕ",
+  "Permitir": "Επίτρεψε",
+  "Cortar": "Κόψε",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Άφησε τις συνδέσεις αυτής της εταιρείας να περάσουν σε αυτή τη συνεδρία",
+  "Volver a cortar las conexiones de esta empresa": "Κόψε ξανά τις συνδέσεις αυτής της εταιρείας",
+  "Conexión vista (dejada pasar)": "Σύνδεση που είδε (πέρασε)",
+  "Conexión permitida por ti": "Σύνδεση που επέτρεψες εσύ",
+  "Permiso de empresa": "Άδεια εταιρείας",
+  "La web no cargó": "Ο ιστότοπος δεν φορτώθηκε",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Επίπεδο παρατήρησης: το ZERO αφήνει τα πάντα να περάσουν (εκτός από επικίνδυνους ιστότοπους), τα ανιχνεύει και σου τα δείχνει· εσύ επιλέγεις τι θα κοπεί.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Αυτή η μηχανή αναζήτησης δεν άφησε το ερώτημα να περάσει από το κελί. Το ZERO περιηγείται από διακομιστή και ορισμένες μηχανές περιορίζουν τέτοιες συνδέσεις. Μπορείς να διαλέξεις άλλη μηχανή ή να γράψεις απευθείας τη διεύθυνση του ιστότοπου.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Η μηχανή αναζήτησης θέλει να επιβεβαιώσει ότι είσαι άνθρωπος. Ολοκλήρωσε τον έλεγχο εδώ μέσα και συνέχισε· το κελί θα θυμάται ότι τον πέρασες."
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} ανά πλειοδότη",
   "opPuerta": "πύλη ΤΝ: προστατευμένη αποστολή σε {1} ({2} {2?δεδομένο αντικαταστάθηκε|δεδομένα αντικαταστάθηκαν})",
   "huecoReal": "τη θέση «{1}» ({2} × {3} εικονοστοιχεία)",
-  "huecoSolo": "τη θέση «{1}»"
+  "huecoSolo": "τη θέση «{1}»",
+  "mVistoDe": "Το ZERO είδε (και άφησε να περάσει, επίπεδο παρατήρησης) {1}, από {2}[ ({3})].",
+  "mVistoHacia": "Το ZERO είδε (και άφησε να περάσει, επίπεδο παρατήρησης) {1} προς {2}.",
+  "mPermitidoDe": "Το ZERO άφησε να περάσει (το επέτρεψες) {1}, από {2}[ ({3})].",
+  "mPermitidoHacia": "Το ZERO άφησε να περάσει (το επέτρεψες) {1} προς {2}.",
+  "mPermisoOn": "Επέτρεψες τις συνδέσεις από {1} σε αυτή τη συνεδρία.",
+  "mPermisoOff": "Κόβεις ξανά τις συνδέσεις από {1} σε αυτή τη συνεδρία.",
+  "mFallo": "Ο ιστότοπος {1} δεν φορτώθηκε: {2}.",
+  "opPermitida": "επιτράπηκε {1}",
+  "opCortarse": "κόπηκε ξανά {1}"
  }
 }

@@ -1381,7 +1381,24 @@
   "no": "nie",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Čo žiadosť niesla: okrem stránky, veľkosti miesta a súhlasu odišli údaje o tebe. Podrobnosti v každej aukcii:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Čo žiadosť niesla: adresu stránky, veľkosť miesta a súhlas; bez identifikátorov používateľa (v bunke žiadne nie sú).",
-  "Otra empresa": "Iná firma"
+  "Otra empresa": "Iná firma",
+  "Observar": "Pozorovať",
+  "observar": "pozorovať",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Nič neodreže (okrem nebezpečných webov): web sa otvorí taký, aký je, ZERO všetko odhalí a vy si vyberiete, čo odrezať.",
+  "Vistas": "Videné",
+  "conexiones vistas en esta web": "spojení videných na tomto webe",
+  "VISTO": "VIDENÉ",
+  "Permitir": "Povoliť",
+  "Cortar": "Odrezať",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Prepustiť spojenia tejto firmy v tejto relácii",
+  "Volver a cortar las conexiones de esta empresa": "Znova odrezať spojenia tejto firmy",
+  "Conexión vista (dejada pasar)": "Spojenie videné (prepustené)",
+  "Conexión permitida por ti": "Spojenie, ktoré ste povolili",
+  "Permiso de empresa": "Povolenie firmy",
+  "La web no cargó": "Web sa nenačítal",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Úroveň pozorovať: ZERO prepustí všetko (okrem nebezpečných webov), odhalí to a ukáže vám; vy si vyberiete, čo odrezať.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Tento vyhľadávač neprepustil dopyt z bunky. ZERO prehliada zo servera a niektoré vyhľadávače takéto spojenia obmedzujú. Môžete zvoliť iný vyhľadávač alebo napísať adresu webu priamo.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Vyhľadávač chce overiť, že ste človek. Dokončite overenie tu a pokračujte; bunka si zapamätá, že ste ním prešli."
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} na dražiteľa",
   "opPuerta": "AI brána: chránené odoslanie {1} ({2} {2?nahradený údaj|nahradených údajov})",
   "huecoReal": "miesto «{1}» ({2} × {3} pixelov)",
-  "huecoSolo": "miesto «{1}»"
+  "huecoSolo": "miesto «{1}»",
+  "mVistoDe": "ZERO videlo (a prepustilo, úroveň pozorovať) {1}, od {2}[ ({3})].",
+  "mVistoHacia": "ZERO videlo (a prepustilo, úroveň pozorovať) {1} na {2}.",
+  "mPermitidoDe": "ZERO prepustilo (povolili ste to) {1}, od {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO prepustilo (povolili ste to) {1} na {2}.",
+  "mPermisoOn": "Povolili ste spojenia od {1} v tejto relácii.",
+  "mPermisoOff": "Znova odrezávate spojenia od {1} v tejto relácii.",
+  "mFallo": "Web {1} sa nenačítal: {2}.",
+  "opPermitida": "povolené {1}",
+  "opCortarse": "znova odrezané {1}"
  }
 }

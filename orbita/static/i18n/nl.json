@@ -1382,7 +1382,24 @@
   "no": "nee",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Wat het verzoek meedroeg: naast de pagina, de plekgrootte en de toestemming gingen er gegevens over jou uit. De details in elke veiling:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Wat het verzoek meedroeg: pagina-adres, plekgrootte en toestemming; geen gebruikerskenmerken (in de cel zijn er geen).",
-  "Otra empresa": "Ander bedrijf"
+  "Otra empresa": "Ander bedrijf",
+  "Observar": "Observeren",
+  "observar": "observeren",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Snijdt niets af (behalve gevaarlijke sites): de site opent zoals hij is, ZERO detecteert alles en jij kiest wat je afsnijdt.",
+  "Vistas": "Gezien",
+  "conexiones vistas en esta web": "verbindingen gezien op deze site",
+  "VISTO": "GEZIEN",
+  "Permitir": "Toestaan",
+  "Cortar": "Afsnijden",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "De verbindingen van dit bedrijf in deze sessie doorlaten",
+  "Volver a cortar las conexiones de esta empresa": "De verbindingen van dit bedrijf opnieuw afsnijden",
+  "Conexión vista (dejada pasar)": "Verbinding gezien (doorgelaten)",
+  "Conexión permitida por ti": "Door jou toegestane verbinding",
+  "Permiso de empresa": "Bedrijfstoestemming",
+  "La web no cargó": "De site werd niet geladen",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Niveau observeren: ZERO laat alles door (behalve gevaarlijke sites), detecteert het en laat het je zien; jij kiest wat je afsnijdt.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Deze zoekmachine heeft de zoekopdracht vanuit de cel niet doorgelaten. ZERO surft vanaf een server en sommige zoekmachines beperken zulke verbindingen. Je kunt een andere zoekmachine kiezen of het adres van de site direct intypen.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "De zoekmachine wil controleren dat je een persoon bent. Los de controle hierbinnen op en ga verder; de cel onthoudt dat je erdoor bent."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",
@@ -1468,6 +1485,15 @@
   "porPujador": "{1} per bieder",
   "opPuerta": "AI-poort: beschermd verzenden naar {1} ({2} {2?vervangen gegeven|vervangen gegevens})",
   "huecoReal": "de plek «{1}» ({2} × {3} pixels)",
-  "huecoSolo": "de plek «{1}»"
+  "huecoSolo": "de plek «{1}»",
+  "mVistoDe": "ZERO zag (en liet door, niveau observeren) {1}, van {2}[ ({3})].",
+  "mVistoHacia": "ZERO zag (en liet door, niveau observeren) {1} naar {2}.",
+  "mPermitidoDe": "ZERO liet door (jij stond het toe) {1}, van {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO liet door (jij stond het toe) {1} naar {2}.",
+  "mPermisoOn": "Je hebt de verbindingen van {1} in deze sessie toegestaan.",
+  "mPermisoOff": "Je snijdt de verbindingen van {1} in deze sessie opnieuw af.",
+  "mFallo": "De site {1} werd niet geladen: {2}.",
+  "opPermitida": "toegestaan {1}",
+  "opCortarse": "opnieuw afgesneden {1}"
  }
 }

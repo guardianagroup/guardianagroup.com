@@ -1381,7 +1381,24 @@
   "no": "না",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "অনুরোধে যা ছিল: পৃষ্ঠা, স্লটের আকার ও সম্মতি ছাড়াও আপনার সম্পর্কে ডেটা বেরিয়েছে। বিস্তারিত প্রতিটি নিলামে:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "অনুরোধে যা ছিল: পৃষ্ঠার ঠিকানা, স্লটের আকার ও সম্মতি; ব্যবহারকারী শনাক্তকারী নেই (সেলে কোনোটি নেই)।",
-  "Otra empresa": "অন্য কোম্পানি"
+  "Otra empresa": "অন্য কোম্পানি",
+  "Observar": "পর্যবেক্ষণ",
+  "observar": "পর্যবেক্ষণ",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "কিছুই কাটে না (বিপজ্জনক সাইট ছাড়া): সাইট যেমন আছে তেমনই খোলে, ZERO সব শনাক্ত করে আর আপনি বেছে নেন কী কাটবেন।",
+  "Vistas": "দেখা হয়েছে",
+  "conexiones vistas en esta web": "এই সাইটে দেখা সংযোগ",
+  "VISTO": "দেখা হয়েছে",
+  "Permitir": "অনুমতি",
+  "Cortar": "কাটুন",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "এই সেশনে এই কোম্পানির সংযোগ যেতে দিন",
+  "Volver a cortar las conexiones de esta empresa": "এই কোম্পানির সংযোগ আবার কাটুন",
+  "Conexión vista (dejada pasar)": "সংযোগ দেখা হয়েছে (যেতে দেওয়া হয়েছে)",
+  "Conexión permitida por ti": "আপনার অনুমোদিত সংযোগ",
+  "Permiso de empresa": "কোম্পানির অনুমতি",
+  "La web no cargó": "সাইট লোড হয়নি",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "পর্যবেক্ষণ স্তর: ZERO সব যেতে দেয় (বিপজ্জনক সাইট ছাড়া), শনাক্ত করে আর আপনাকে দেখায়; আপনি বেছে নেন কী কাটবেন।",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "এই সার্চ ইঞ্জিন সেল থেকে অনুসন্ধানটি যেতে দেয়নি। ZERO একটি সার্ভার থেকে ব্রাউজ করে এবং কিছু সার্চ ইঞ্জিন এমন সংযোগ সীমিত করে। আপনি অন্য সার্চ ইঞ্জিন বেছে নিতে পারেন বা সাইটের ঠিকানা সরাসরি লিখতে পারেন।",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "সার্চ ইঞ্জিন যাচাই করতে চায় যে আপনি একজন মানুষ। যাচাইটি এখানেই সম্পন্ন করে এগিয়ে যান; সেল মনে রাখবে যে আপনি পাস করেছেন।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",
@@ -1467,6 +1484,15 @@
   "porPujador": "প্রতি দরদাতা {1}",
   "opPuerta": "AI গেট: {1}-এর কাছে সুরক্ষিত পাঠানো ({2}টি ডেটা প্রতিস্থাপিত)",
   "huecoReal": "স্লট «{1}» ({2} × {3} পিক্সেল)",
-  "huecoSolo": "স্লট «{1}»"
+  "huecoSolo": "স্লট «{1}»",
+  "mVistoDe": "ZERO {2}[ ({3})] থেকে {1} দেখেছে (এবং যেতে দিয়েছে, পর্যবেক্ষণ স্তর)।",
+  "mVistoHacia": "ZERO {2}-এর দিকে {1} দেখেছে (এবং যেতে দিয়েছে, পর্যবেক্ষণ স্তর)।",
+  "mPermitidoDe": "ZERO {2}[ ({3})] থেকে {1} যেতে দিয়েছে (আপনি অনুমতি দিয়েছেন)।",
+  "mPermitidoHacia": "ZERO {2}-এর দিকে {1} যেতে দিয়েছে (আপনি অনুমতি দিয়েছেন)।",
+  "mPermisoOn": "আপনি এই সেশনে {1}-এর সংযোগের অনুমতি দিয়েছেন।",
+  "mPermisoOff": "আপনি এই সেশনে {1}-এর সংযোগ আবার কাটছেন।",
+  "mFallo": "সাইট {1} লোড হয়নি: {2}।",
+  "opPermitida": "অনুমোদিত {1}",
+  "opCortarse": "আবার কাটা হয়েছে {1}"
  }
 }

@@ -38,7 +38,7 @@
   "Elegir ciudad": "Избор на град",
   "Elegir otra": "Избор на друг",
   "Cancelar": "Отказ",
-  "Cerrar": "Затваряне",
+  "Cerrar": "Затвори",
   "Medir de nuevo": "Ново измерване",
   "Olvidar": "Забрави",
   "Sí, es aquí": "Да, тук е",
@@ -1381,7 +1381,24 @@
   "no": "не",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Какво носеше заявката: освен страницата, размера на мястото и съгласието, излязоха данни за теб. Подробностите — във всеки търг:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Какво носеше заявката: адрес на страницата, размер на мястото и съгласие; без потребителски идентификатори (в клетката няма такива).",
-  "Otra empresa": "Друга компания"
+  "Otra empresa": "Друга компания",
+  "Observar": "Наблюдавай",
+  "observar": "наблюдавай",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Не прекъсва нищо (освен опасни сайтове): сайтът се отваря такъв, какъвто е, ZERO открива всичко и ти избираш какво да прекъснеш.",
+  "Vistas": "Видени",
+  "conexiones vistas en esta web": "връзки, видени на този сайт",
+  "VISTO": "ВИДЯНО",
+  "Permitir": "Разреши",
+  "Cortar": "Прекъсни",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Пропускай връзките на тази компания в тази сесия",
+  "Volver a cortar las conexiones de esta empresa": "Прекъсни отново връзките на тази компания",
+  "Conexión vista (dejada pasar)": "Връзка видяна (пропусната)",
+  "Conexión permitida por ti": "Връзка, разрешена от теб",
+  "Permiso de empresa": "Разрешение за компания",
+  "La web no cargó": "Сайтът не се зареди",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Ниво наблюдавай: ZERO пропуска всичко (освен опасни сайтове), открива го и ти го показва; ти избираш какво да прекъснеш.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Тази търсачка не пропусна заявката от клетката. ZERO сърфира от сървър и някои търсачки ограничават такива връзки. Можеш да избереш друга търсачка или да напишеш адреса на сайта директно.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Търсачката иска да провери, че си човек. Реши проверката тук и продължи; клетката ще запомни, че си я минал."
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} на наддаващ",
   "opPuerta": "портал ИИ: защитено изпращане до {1} ({2} {2?заменено данно|заменени данни})",
   "huecoReal": "мястото «{1}» ({2} × {3} пиксела)",
-  "huecoSolo": "мястото «{1}»"
+  "huecoSolo": "мястото «{1}»",
+  "mVistoDe": "ZERO видя (и пропусна, ниво наблюдавай) {1}, от {2}[ ({3})].",
+  "mVistoHacia": "ZERO видя (и пропусна, ниво наблюдавай) {1} към {2}.",
+  "mPermitidoDe": "ZERO пропусна (ти разреши) {1}, от {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO пропусна (ти разреши) {1} към {2}.",
+  "mPermisoOn": "Разреши връзките от {1} в тази сесия.",
+  "mPermisoOff": "Прекъсваш отново връзките от {1} в тази сесия.",
+  "mFallo": "Сайтът {1} не се зареди: {2}.",
+  "opPermitida": "разрешено {1}",
+  "opCortarse": "прекъснато отново {1}"
  }
 }

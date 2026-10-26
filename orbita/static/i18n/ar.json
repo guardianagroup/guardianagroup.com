@@ -1382,7 +1382,24 @@
   "no": "لا",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "ما حملته الطلبية: إضافةً إلى الصفحة وحجم الموضع والموافقة، خرجت بيانات عنك. التفاصيل في كل مزاد:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "ما حملته الطلبية: عنوان الصفحة وحجم الموضع والموافقة؛ دون معرّفات مستخدم (لا يوجد أي منها في الخلية).",
-  "Otra empresa": "شركة أخرى"
+  "Otra empresa": "شركة أخرى",
+  "Observar": "مراقبة",
+  "observar": "مراقبة",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "لا يقطع شيئًا (إلا المواقع الخطرة): يُفتح الموقع كما هو، ويكشف ZERO كل شيء وأنت تختار ما تقطعه.",
+  "Vistas": "مرصودة",
+  "conexiones vistas en esta web": "اتصالات مرصودة في هذا الموقع",
+  "VISTO": "مرصود",
+  "Permitir": "سماح",
+  "Cortar": "قطع",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "السماح باتصالات هذه الشركة في هذه الجلسة",
+  "Volver a cortar las conexiones de esta empresa": "قطع اتصالات هذه الشركة من جديد",
+  "Conexión vista (dejada pasar)": "اتصال مرصود (سُمح بمروره)",
+  "Conexión permitida por ti": "اتصال سمحت به أنت",
+  "Permiso de empresa": "إذن شركة",
+  "La web no cargó": "لم يُحمَّل الموقع",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "مستوى المراقبة: يمرر ZERO كل شيء (إلا المواقع الخطرة)، ويكشفه ويعرضه لك؛ وأنت تختار ما تقطعه.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "لم يُمرر محرك البحث هذا الاستعلام من الخلية. يتصفح ZERO من خادم، وبعض محركات البحث تقيّد هذه الاتصالات. يمكنك اختيار محرك آخر أو كتابة عنوان الموقع مباشرة.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "يريد محرك البحث التحقق من أنك شخص. أكمل التحقق هنا وتابع؛ ستتذكر الخلية أنك اجتزته."
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",
@@ -1468,6 +1485,15 @@
   "porPujador": "{1} لكل مزايد",
   "opPuerta": "بوابة الذكاء الاصطناعي: إرسال محمي إلى {1} ({2} {2?بيان مستبدل|بيانات مستبدلة})",
   "huecoReal": "الموضع «{1}» ({2} × {3} بكسل)",
-  "huecoSolo": "الموضع «{1}»"
+  "huecoSolo": "الموضع «{1}»",
+  "mVistoDe": "رصد ZERO (وسمح بمرور، مستوى المراقبة) {1} من {2}[ ({3})].",
+  "mVistoHacia": "رصد ZERO (وسمح بمرور، مستوى المراقبة) {1} إلى {2}.",
+  "mPermitidoDe": "سمح ZERO بمرور (أنت سمحت به) {1} من {2}[ ({3})].",
+  "mPermitidoHacia": "سمح ZERO بمرور (أنت سمحت به) {1} إلى {2}.",
+  "mPermisoOn": "سمحت باتصالات {1} في هذه الجلسة.",
+  "mPermisoOff": "تقطع اتصالات {1} من جديد في هذه الجلسة.",
+  "mFallo": "لم يُحمَّل الموقع {1}: {2}.",
+  "opPermitida": "مسموح {1}",
+  "opCortarse": "قُطع من جديد {1}"
  }
 }

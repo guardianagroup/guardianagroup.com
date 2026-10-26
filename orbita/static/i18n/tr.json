@@ -1382,7 +1382,24 @@
   "no": "hayır",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "İstek neler taşıyordu: sayfa, alan boyutu ve onayın yanı sıra senin hakkında veriler de çıktı. Ayrıntı her açık artırmada:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "İstek neler taşıyordu: sayfa adresi, alan boyutu ve onay; kullanıcı tanımlayıcısı yok (hücrede hiç yok).",
-  "Otra empresa": "Başka bir şirket"
+  "Otra empresa": "Başka bir şirket",
+  "Observar": "Gözlemle",
+  "observar": "gözlemle",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Hiçbir şeyi kesmez (tehlikeli siteler hariç): site olduğu gibi açılır, ZERO her şeyi tespit eder ve neyi keseceğini sen seçersin.",
+  "Vistas": "Görülen",
+  "conexiones vistas en esta web": "bu sitede görülen bağlantı",
+  "VISTO": "GÖRÜLDÜ",
+  "Permitir": "İzin ver",
+  "Cortar": "Kes",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Bu şirketin bağlantılarına bu oturumda izin ver",
+  "Volver a cortar las conexiones de esta empresa": "Bu şirketin bağlantılarını yeniden kes",
+  "Conexión vista (dejada pasar)": "Bağlantı görüldü (geçirildi)",
+  "Conexión permitida por ti": "Senin izin verdiğin bağlantı",
+  "Permiso de empresa": "Şirket izni",
+  "La web no cargó": "Site yüklenmedi",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Gözlemle seviyesi: ZERO her şeyi geçirir (tehlikeli siteler hariç), tespit eder ve sana gösterir; neyi keseceğini sen seçersin.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Bu arama motoru sorguyu hücreden geçirmedi. ZERO bir sunucudan gezinir ve bazı arama motorları bu bağlantıları kısıtlar. Başka bir arama motoru seçebilir ya da sitenin adresini doğrudan yazabilirsin.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Arama motoru bir insan olduğunu doğrulamak istiyor. Doğrulamayı burada çöz ve devam et; hücre geçtiğini hatırlayacak."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",
@@ -1468,6 +1485,15 @@
   "porPujador": "teklif veren başına {1}",
   "opPuerta": "yapay zekâ kapısı: {1} hedefine korumalı gönderim ({2} veri değiştirildi)",
   "huecoReal": "«{1}» alanı ({2} × {3} piksel)",
-  "huecoSolo": "«{1}» alanı"
+  "huecoSolo": "«{1}» alanı",
+  "mVistoDe": "ZERO {2}[ ({3})] kaynaklı {1} gördü (ve geçirdi, gözlemle seviyesi).",
+  "mVistoHacia": "ZERO {2} adresine {1} gördü (ve geçirdi, gözlemle seviyesi).",
+  "mPermitidoDe": "ZERO {2}[ ({3})] kaynaklı {1} geçirdi (sen izin verdin).",
+  "mPermitidoHacia": "ZERO {2} adresine {1} geçirdi (sen izin verdin).",
+  "mPermisoOn": "Bu oturumda {1} bağlantılarına izin verdin.",
+  "mPermisoOff": "Bu oturumda {1} bağlantılarını yeniden kesiyorsun.",
+  "mFallo": "{1} sitesi yüklenmedi: {2}.",
+  "opPermitida": "izin verildi {1}",
+  "opCortarse": "yeniden kesildi {1}"
  }
 }

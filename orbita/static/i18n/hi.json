@@ -1381,7 +1381,24 @@
   "no": "नहीं",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "अनुरोध में क्या था: पेज, स्लॉट के आकार और सहमति के अलावा आपके बारे में डेटा भी गया। विवरण हर नीलामी में:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "अनुरोध में क्या था: पेज का पता, स्लॉट का आकार और सहमति; उपयोगकर्ता पहचानकर्ता नहीं (सेल में कोई नहीं)।",
-  "Otra empresa": "दूसरी कंपनी"
+  "Otra empresa": "दूसरी कंपनी",
+  "Observar": "देखना",
+  "observar": "देखना",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "कुछ नहीं काटता (खतरनाक साइटों को छोड़कर): साइट जैसी है वैसी खुलती है, ZERO सब पहचानता है और आप चुनते हैं कि क्या काटना है।",
+  "Vistas": "देखे गए",
+  "conexiones vistas en esta web": "इस साइट पर देखे गए कनेक्शन",
+  "VISTO": "देखा गया",
+  "Permitir": "अनुमति दें",
+  "Cortar": "काटें",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "इस सत्र में इस कंपनी के कनेक्शन जाने दें",
+  "Volver a cortar las conexiones de esta empresa": "इस कंपनी के कनेक्शन फिर से काटें",
+  "Conexión vista (dejada pasar)": "कनेक्शन देखा गया (जाने दिया)",
+  "Conexión permitida por ti": "आपके द्वारा अनुमत कनेक्शन",
+  "Permiso de empresa": "कंपनी की अनुमति",
+  "La web no cargó": "साइट लोड नहीं हुई",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "देखना स्तर: ZERO सब कुछ जाने देता है (खतरनाक साइटों को छोड़कर), पहचानता है और आपको दिखाता है; आप चुनते हैं कि क्या काटना है।",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "इस सर्च इंजन ने सेल से क्वेरी जाने नहीं दी। ZERO एक सर्वर से ब्राउज़ करता है और कुछ सर्च इंजन ऐसे कनेक्शन सीमित करते हैं। आप दूसरा सर्च इंजन चुन सकते हैं या साइट का पता सीधे लिख सकते हैं।",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "सर्च इंजन जाँचना चाहता है कि आप एक व्यक्ति हैं। जाँच यहीं पूरी करें और आगे बढ़ें; सेल याद रखेगा कि आपने इसे पास किया।"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} प्रति बोलीदाता",
   "opPuerta": "AI गेट: {1} को सुरक्षित भेजना ({2} डेटा बदले गए)",
   "huecoReal": "स्लॉट «{1}» ({2} × {3} पिक्सेल)",
-  "huecoSolo": "स्लॉट «{1}»"
+  "huecoSolo": "स्लॉट «{1}»",
+  "mVistoDe": "ZERO ने {2}[ ({3})] से {1} देखा (और जाने दिया, देखना स्तर)।",
+  "mVistoHacia": "ZERO ने {2} की ओर {1} देखा (और जाने दिया, देखना स्तर)।",
+  "mPermitidoDe": "ZERO ने {2}[ ({3})] से {1} जाने दिया (आपने अनुमति दी)।",
+  "mPermitidoHacia": "ZERO ने {2} की ओर {1} जाने दिया (आपने अनुमति दी)।",
+  "mPermisoOn": "आपने इस सत्र में {1} के कनेक्शन की अनुमति दी।",
+  "mPermisoOff": "आप इस सत्र में {1} के कनेक्शन फिर से काट रहे हैं।",
+  "mFallo": "साइट {1} लोड नहीं हुई: {2}।",
+  "opPermitida": "अनुमत {1}",
+  "opCortarse": "फिर से काटा {1}"
  }
 }

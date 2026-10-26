@@ -1381,7 +1381,24 @@
   "no": "nej",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Hvad anmodningen indeholdt: ud over siden, pladsens størrelse og samtykket gik der data om dig ud. Detaljerne i hver auktion:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Hvad anmodningen indeholdt: sidens adresse, pladsens størrelse og samtykke; ingen bruger-id'er (der er ingen i cellen).",
-  "Otra empresa": "Anden virksomhed"
+  "Otra empresa": "Anden virksomhed",
+  "Observar": "Observer",
+  "observar": "observer",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Klipper intet (undtagen farlige websteder): siden åbner som den er, ZERO opdager alt, og du vælger, hvad der klippes.",
+  "Vistas": "Set",
+  "conexiones vistas en esta web": "forbindelser set på dette websted",
+  "VISTO": "SET",
+  "Permitir": "Tillad",
+  "Cortar": "Klip",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Lad dette firmas forbindelser passere i denne session",
+  "Volver a cortar las conexiones de esta empresa": "Klip dette firmas forbindelser igen",
+  "Conexión vista (dejada pasar)": "Forbindelse set (ladt passere)",
+  "Conexión permitida por ti": "Forbindelse, du har tilladt",
+  "Permiso de empresa": "Firmatilladelse",
+  "La web no cargó": "Siden blev ikke indlæst",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Niveau observer: ZERO lader alt passere (undtagen farlige websteder), opdager det og viser dig det; du vælger, hvad der klippes.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Denne søgemaskine lod ikke forespørgslen passere fra cellen. ZERO browser fra en server, og nogle søgemaskiner begrænser sådanne forbindelser. Du kan vælge en anden søgemaskine eller skrive webstedets adresse direkte.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Søgemaskinen vil tjekke, at du er en person. Løs tjekket herinde og fortsæt; cellen husker, at du bestod."
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",
@@ -1467,6 +1484,15 @@
   "porPujador": "{1} pr. budgiver",
   "opPuerta": "AI-port: beskyttet afsendelse til {1} ({2} {2?erstattet oplysning|erstattede oplysninger})",
   "huecoReal": "pladsen «{1}» ({2} × {3} pixel)",
-  "huecoSolo": "pladsen «{1}»"
+  "huecoSolo": "pladsen «{1}»",
+  "mVistoDe": "ZERO så (og lod passere, niveau observer) {1}, fra {2}[ ({3})].",
+  "mVistoHacia": "ZERO så (og lod passere, niveau observer) {1} til {2}.",
+  "mPermitidoDe": "ZERO lod passere (du tillod det) {1}, fra {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO lod passere (du tillod det) {1} til {2}.",
+  "mPermisoOn": "Du tillod forbindelser fra {1} i denne session.",
+  "mPermisoOff": "Du klipper forbindelser fra {1} igen i denne session.",
+  "mFallo": "Siden {1} blev ikke indlæst: {2}.",
+  "opPermitida": "tilladt {1}",
+  "opCortarse": "klippet igen {1}"
  }
 }

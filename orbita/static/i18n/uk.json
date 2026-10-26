@@ -1382,7 +1382,24 @@
   "no": "ні",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "Що несла заявка: крім сторінки, розміру місця та згоди пішли дані про вас. Подробиці в кожному аукціоні:",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "Що несла заявка: адресу сторінки, розмір місця та згоду; без ідентифікаторів користувача (у комірці їх немає).",
-  "Otra empresa": "Інша компанія"
+  "Otra empresa": "Інша компанія",
+  "Observar": "Спостерігати",
+  "observar": "спостерігати",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "Нічого не відрізає (крім небезпечних сайтів): сайт відкривається як є, ZERO все виявляє, а ви обираєте, що відрізати.",
+  "Vistas": "Помічено",
+  "conexiones vistas en esta web": "з’єднань помічено на цьому сайті",
+  "VISTO": "ПОМІЧЕНО",
+  "Permitir": "Дозволити",
+  "Cortar": "Відрізати",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "Пропускати з’єднання цієї компанії в цій сесії",
+  "Volver a cortar las conexiones de esta empresa": "Знову відрізати з’єднання цієї компанії",
+  "Conexión vista (dejada pasar)": "З’єднання помічено (пропущено)",
+  "Conexión permitida por ti": "З’єднання, дозволене вами",
+  "Permiso de empresa": "Дозвіл для компанії",
+  "La web no cargó": "Сайт не завантажився",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Рівень спостерігати: ZERO пропускає все (крім небезпечних сайтів), виявляє і показує вам; ви обираєте, що відрізати.",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Цей пошуковик не пропустив запит із комірки. ZERO працює із сервера, і деякі пошуковики обмежують такі з’єднання. Ви можете обрати інший пошуковик або ввести адресу сайту напряму.",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Пошуковик хоче перевірити, що ви людина. Пройдіть перевірку тут і продовжуйте; комірка запам’ятає, що ви її пройшли."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",
@@ -1468,6 +1485,15 @@
   "porPujador": "{1} на учасника",
   "opPuerta": "ШІ-шлюз: захищене надсилання {1} ({2} {2?запис замінено|записів замінено})",
   "huecoReal": "місце «{1}» ({2} × {3} пікселів)",
-  "huecoSolo": "місце «{1}»"
+  "huecoSolo": "місце «{1}»",
+  "mVistoDe": "ZERO помітив (і пропустив, рівень спостерігати) {1} від {2}[ ({3})].",
+  "mVistoHacia": "ZERO помітив (і пропустив, рівень спостерігати) {1} до {2}.",
+  "mPermitidoDe": "ZERO пропустив (ви дозволили) {1} від {2}[ ({3})].",
+  "mPermitidoHacia": "ZERO пропустив (ви дозволили) {1} до {2}.",
+  "mPermisoOn": "Ви дозволили з’єднання від {1} у цій сесії.",
+  "mPermisoOff": "Ви знову відрізаєте з’єднання від {1} у цій сесії.",
+  "mFallo": "Сайт {1} не завантажився: {2}.",
+  "opPermitida": "дозволено {1}",
+  "opCortarse": "знову відрізано {1}"
  }
 }

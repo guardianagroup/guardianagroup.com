@@ -1382,7 +1382,24 @@
   "no": "いいえ",
   "Qué llevaba la petición: además de la página, el tamaño del hueco y el consentimiento, salieron datos sobre ti. El detalle, en cada subasta:": "リクエストに含まれていたもの：ページ、枠のサイズ、同意に加えて、あなたに関するデータも送出されました。詳細は各オークションで：",
   "Qué llevaba la petición: dirección de la página, tamaño del hueco y consentimiento; sin identificadores de usuario (en la celda no hay ninguno).": "リクエストに含まれていたもの：ページのアドレス、枠のサイズ、同意。ユーザー識別子はなし（セル内には一つもありません）。",
-  "Otra empresa": "他社"
+  "Otra empresa": "他社",
+  "Observar": "観察",
+  "observar": "観察",
+  "No corta nada (salvo webs peligrosas): la web se abre tal cual, ZERO lo detecta todo y tú eliges qué cortar.": "何も遮断しません（危険なサイトを除く）：サイトはそのまま開き、ZEROがすべてを検知し、何を遮断するかはあなたが選びます。",
+  "Vistas": "検知",
+  "conexiones vistas en esta web": "このサイトで検知した接続",
+  "VISTO": "検知",
+  "Permitir": "許可",
+  "Cortar": "遮断",
+  "Dejar pasar las conexiones de esta empresa en esta sesión": "このセッションでこの企業の接続を通す",
+  "Volver a cortar las conexiones de esta empresa": "この企業の接続を再び遮断する",
+  "Conexión vista (dejada pasar)": "接続を検知（通過）",
+  "Conexión permitida por ti": "あなたが許可した接続",
+  "Permiso de empresa": "企業の許可",
+  "La web no cargó": "サイトを読み込めませんでした",
+  "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "観察レベル：ZEROはすべてを通し（危険なサイトを除く）、検知して表示します。何を遮断するかはあなたが選びます。",
+  "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "この検索エンジンはセルからの検索を通しませんでした。ZEROはサーバーから閲覧しており、一部の検索エンジンはそのような接続を制限します。別の検索エンジンを選ぶか、サイトのアドレスを直接入力してください。",
+  "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "検索エンジンがあなたが人間であることを確認したがっています。ここで確認を済ませて続けてください。セルは通過したことを記憶します。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",
@@ -1468,6 +1485,15 @@
   "porPujador": "入札者あたり{1}",
   "opPuerta": "AIゲート：{1}への保護送信（{2}件のデータを置換）",
   "huecoReal": "枠「{1}」（{2} × {3} ピクセル）",
-  "huecoSolo": "枠「{1}」"
+  "huecoSolo": "枠「{1}」",
+  "mVistoDe": "ZEROは{2}[（{3}）]からの{1}を検知しました（通過、観察レベル）。",
+  "mVistoHacia": "ZEROは{2}への{1}を検知しました（通過、観察レベル）。",
+  "mPermitidoDe": "ZEROは{2}[（{3}）]からの{1}を通しました（あなたが許可）。",
+  "mPermitidoHacia": "ZEROは{2}への{1}を通しました（あなたが許可）。",
+  "mPermisoOn": "このセッションで{1}の接続を許可しました。",
+  "mPermisoOff": "このセッションで{1}の接続を再び遮断します。",
+  "mFallo": "サイト{1}を読み込めませんでした：{2}。",
+  "opPermitida": "許可 {1}",
+  "opCortarse": "再遮断 {1}"
  }
 }
