@@ -161,6 +161,8 @@ class Sesion {
     const page = p.page;
     page.on('response', (r) => { this.respuestaNav(r, p); this.respuesta(r, p).catch(() => {}); });
     page.on('request', (r) => this.peticion(r));
+    // si la propia página (o un salto de ella) no llega a cargar, se dice el motivo real de Chromium en vez de dejar una pantalla de error muda
+    page.on('requestfailed', (r) => { try { if (!r.isNavigationRequest() || r.frame() !== page.mainFrame()) return; const e = (r.failure() || {}).errorText || 'error'; if (!/^https?:\/\//.test(r.url())) return; this.suceso({ clase: 'fallo', certeza: 'comprobado', dominio: hostDe(r.url()), texto: 'La web ' + hostDe(r.url()) + ' no llegó a cargar: ' + e + '.', detalle: { url: r.url().slice(0, 200), error: e, redirigida: !!r.redirectedFrom() } }); } catch (_) {} });
     page.on('websocket', (w) => { const host = hostDe(w.url()); w.on('framesent', (f) => { try { const h = this.senuelos.busca(typeof f.payload === 'string' ? f.payload : f.payload.toString('latin1')); h.forEach((tipo) => this.senuelo({ tipo, donde: 'trama de WebSocket' }, host, w.url(), baseDominio(host) !== baseDominio(p.stats.webActual), false)); } catch (_) {} }); });
     page.on('download', (d) => this.descarga(d));
     page.on('dialog', (d) => { this.suceso({ clase: 'dialogo', certeza: 'comprobado', texto: 'La web intentó mostrar un aviso emergente. ZERO lo cerró.', dominio: hostDe(page.url()) }); d.dismiss().catch(() => {}); });
