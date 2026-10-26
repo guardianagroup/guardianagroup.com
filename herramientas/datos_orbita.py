@@ -261,6 +261,21 @@ def km(a, b):
     return 2 * 6371 * math.asin(min(1, math.sqrt(h)))
 
 
+def simplifica_cerca(p, cerca_km=40, fino=0.0002, grueso=0.05):
+    """25 Oct 2026: the planet now opens to about 20 km of height (≈ 10 m a pixel), and Douglas-Peucker at 0.05° (5 km)
+    cut the last kilometres of a cable straight across bays and capes. The first and last 40 km keep their shape (20 m);
+    the open sea stays simple."""
+    if len(p) < 3:
+        return p
+    acc, i = 0.0, 0
+    while i < len(p) - 1 and acc < cerca_km:
+        acc += km(p[i], p[i + 1]); i += 1
+    acc, j = 0.0, len(p) - 1
+    while j > i and acc < cerca_km:
+        acc += km(p[j - 1], p[j]); j -= 1
+    return simplifica(p[:i + 1], fino) + simplifica(p[i:j + 1], grueso)[1:] + simplifica(p[j:], fino)[1:]
+
+
 def simplifica(p, tol):
     """Douglas-Peucker on lon/lat, in degrees: enough for a planet a few hundred pixels across."""
     if len(p) < 3:
@@ -488,7 +503,8 @@ out tags geom;'''
         g = e.get('geometry') or []
         if len(g) < 2:
             continue
-        p = [[round(x['lon'], 3), round(x['lat'], 3)] for x in g]
+        # 25 Oct 2026, 19:01 (owner, close in: «los cables no llegan a tierra»): 5 decimals (1 m), not 3 (110 m)
+        p = [[round(x['lon'], 5), round(x['lat'], 5)] for x in g]
         largo = sum(km(p[i], p[i + 1]) for i in range(len(p) - 1))
         t = e.get('tags', {})
         # only cables in service: nothing disused, abandoned, removed, historic or with an end date
@@ -519,7 +535,7 @@ out tags geom;'''
                 tramo.append(b)
         trozos.append(tramo)
         for tr in trozos:
-            s = simplifica(tr, 0.05)
+            s = simplifica_cerca(tr)
             if len(s) >= 2:
                 fila = {'n': n, 'o': t.get('operator', ''), 'l': s}
                 # owner, 22 Oct 2026: «el año de la construcción, los kilómetros… todos los datos que sepamos»
