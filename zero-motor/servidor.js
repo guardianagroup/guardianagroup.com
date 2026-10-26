@@ -120,10 +120,13 @@ class Sesion {
   pestanaDeReq(req) { try { const f = req.frame(); return f ? this.pestanaDe(f.page()) : null; } catch (_) { return null; } }
   listaPestanas() { return { t: 'pestanas', activa: this.act ? this.act.id : null, lista: this.pestanas.map((p) => ({ id: p.id, titulo: p.titulo || '', url: p.url || '', host: hostDe(p.url || '') })) }; }
 
-  async abre(w, h) {
+  async abre(w, h, idioma) {
     this.w = Math.max(320, Math.min(1920, w | 0 || 1100)); this.h = Math.max(240, Math.min(1200, h | 0 || 760));
+    // 26 Oct 2026: la celda habla el idioma de la persona (Accept-Language y navigator.language); antes siempre es-ES.
+    const loc = /^[a-z]{2,3}(-[A-Za-z]{2,4})?$/.test(String(idioma || '')) ? String(idioma) : 'es-ES';
+    this.idioma = loc;
     this.ctx = await navegador.newContext({
-      viewport: { width: this.w, height: this.h }, deviceScaleFactor: 1, locale: 'es-ES', timezoneId: 'UTC', permissions: [],
+      viewport: { width: this.w, height: this.h }, deviceScaleFactor: 1, locale: loc, timezoneId: 'UTC', permissions: [],
       acceptDownloads: true, serviceWorkers: 'block', extraHTTPHeaders: { 'Sec-GPC': '1', DNT: '1' }, colorScheme: 'light',
       ...(this.ultra && TOR_PROXY ? { proxy: { server: TOR_PROXY } } : {}),
     });
@@ -311,6 +314,7 @@ class Sesion {
     let s; try { s = JSON.parse(json); } catch (_) { return; }
     let st = this.act ? this.act.stats : Sesion.statsNuevo(); try { const pp = this.pestanaDe(src.page); if (pp) st = pp.stats; } catch (_) {}
     const dominio = hostDe(s.origen || '') || st.webActual;
+    if (s.clase === 'cursor') { try { if (this.act && this.pestanaDe(src.page) === this.act) this.env({ t: 'cursor', cursor: String(s.cursor || 'default').slice(0, 24) }); } catch (_) {} return; }
     if (s.clase === 'huella') {
       st.n.huella++;
       const via = { canvas: 'el lienzo gráfico (canvas)', webgl: 'la tarjeta gráfica (WebGL)', audio: 'el sistema de audio', fuentes: 'los tipos de letra instalados', plugins: 'los complementos del navegador' }[s.via] || s.via;
@@ -502,7 +506,7 @@ class Sesion {
   async mensaje(m) {
     let o; try { o = JSON.parse(m); } catch (_) { return; }
     try {
-      if (o.t === 'hola') return await this.abre(o.w, o.h);
+      if (o.t === 'hola') return await this.abre(o.w, o.h, o.idioma);
       if (!this.page || this.destruida) return;
       if (o.t === 'abrir') return await this.ve(String(o.url || '').trim());
       if (this.sellada && (o.t === 'raton' || o.t === 'rueda' || o.t === 'tecla' || o.t === 'texto')) return; // sellada: la celda no recibe nada

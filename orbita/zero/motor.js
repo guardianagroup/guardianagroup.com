@@ -33,12 +33,20 @@
   const env = (o) => { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); };
   const tam = () => ({ w: Math.round(cv.offsetWidth || web.offsetWidth) || 1064, h: Math.round(cv.offsetHeight || web.offsetHeight) || 800 });
 
+  // Idioma de la celda: el de la página (documentElement.lang) con la región del navegador de la persona si coincide (es + es-CO → es-CO).
+  function idiomaCelda() {
+    const hl = String(document.documentElement.lang || 'es').toLowerCase().slice(0, 2);
+    const nl = String(navigator.language || '');
+    if (nl.toLowerCase().slice(0, 2) === hl && /^[a-z]{2}-[A-Za-z]{2}$/.test(nl)) return nl;
+    const REG = { es: 'es-ES', en: 'en-US', pt: 'pt-BR', fr: 'fr-FR', de: 'de-DE', it: 'it-IT', ja: 'ja-JP', ko: 'ko-KR', zh: 'zh-CN', ar: 'ar-SA', ru: 'ru-RU', nl: 'nl-NL', pl: 'pl-PL', tr: 'tr-TR' };
+    return REG[hl] || hl;
+  }
   function conecta() {
     if (ws && (ws.readyState === 0 || ws.readyState === 1)) return;
     M.estado = 'conectando'; ponEstado('Conectando con la celda remota…');
     ws = new WebSocket(URL_MOTOR + (URL_MOTOR.includes('/sesion') ? '' : '/sesion'));
     ws.binaryType = 'blob';
-    ws.onopen = () => { const t = tam(); env({ t: 'hola', w: t.w, h: t.h }); };
+    ws.onopen = () => { const t = tam(); env({ t: 'hola', w: t.w, h: t.h, idioma: idiomaCelda() }); };
     ws.onmessage = (ev) => { if (typeof ev.data === 'string') despacha(JSON.parse(ev.data)); else cuadro(ev.data); };
     ws.onclose = () => { M.estado = 'cerrado'; abierto = false; if (!M.acta) ponEstado('Sin conexión con el motor', 'mal'); };
     ws.onerror = () => { M.estado = 'error'; ponEstado('No se pudo conectar con el motor en ' + URL_MOTOR, 'mal'); };
@@ -66,6 +74,7 @@
     if (m.t === 'resumen') { if (window.zeroResumen) window.zeroResumen(m); return; }
     if (m.t === 'nav') { M.host = m.host; M.urlActual = m.url; if (window.zeroNav) window.zeroNav(m); return; }
     if (m.t === 'titulo') { if (window.zeroTitulo) window.zeroTitulo(m.titulo); return; }
+    if (m.t === 'cursor') { cv.style.cursor = CURSORES.has(m.cursor) ? m.cursor : 'default'; return; }
     if (m.t === 'ia') { if (window.zeroIA) window.zeroIA(m); return; }
     if (m.t === 'ultra') { M.ultraDisponible = !!m.disponible; M.ultra = !!m.activo; if (window.zeroUltra) window.zeroUltra(m); return; }
     if (m.t === 'descarga') { if (window.zeroDescarga) window.zeroDescarga(m); return; }
@@ -79,8 +88,11 @@
   // ---- lo que el motor recibe de la persona ----
   const coords = (e) => { const r = cv.getBoundingClientRect(); return { x: Math.max(0, Math.min(cv.width, (e.clientX - r.left) * cv.width / (r.width || 1))), y: Math.max(0, Math.min(cv.height, (e.clientY - r.top) * cv.height / (r.height || 1))) }; };
   const BOTON = ['left', 'middle', 'right'];
+  // Cursor que pide la web (lo manda el sensor de la celda) y un pulso visible al pulsar, para que la mano responda al instante.
+  const CURSORES = new Set(['default', 'pointer', 'text', 'move', 'grab', 'grabbing', 'crosshair', 'not-allowed', 'wait', 'progress', 'help', 'col-resize', 'row-resize', 'ns-resize', 'ew-resize', 'nesw-resize', 'nwse-resize', 'n-resize', 's-resize', 'e-resize', 'w-resize', 'zoom-in', 'zoom-out', 'copy', 'alias', 'cell', 'vertical-text', 'all-scroll', 'context-menu']);
+  const pulso = (e) => { const wr = web.getBoundingClientRect(); const d = document.createElement('i'); d.className = 'zeropulso'; d.style.left = (e.clientX - wr.left) * (web.offsetWidth / (wr.width || 1)) + 'px'; d.style.top = (e.clientY - wr.top) * (web.offsetHeight / (wr.height || 1)) + 'px'; web.append(d); setTimeout(() => d.remove(), 420); };
   cv.addEventListener('mousemove', (e) => { const n = Date.now(); if (n - moviendo < 28) return; moviendo = n; const c = coords(e); env({ t: 'raton', tipo: 'move', x: c.x, y: c.y }); });
-  cv.addEventListener('mousedown', (e) => { cv.focus(); e.preventDefault(); const c = coords(e); env({ t: 'raton', tipo: 'move', x: c.x, y: c.y }); env({ t: 'raton', tipo: 'down', x: c.x, y: c.y, boton: BOTON[e.button] || 'left', clicks: e.detail || 1 }); });
+  cv.addEventListener('mousedown', (e) => { cv.focus(); e.preventDefault(); pulso(e); const c = coords(e); env({ t: 'raton', tipo: 'move', x: c.x, y: c.y }); env({ t: 'raton', tipo: 'down', x: c.x, y: c.y, boton: BOTON[e.button] || 'left', clicks: e.detail || 1 }); });
   cv.addEventListener('mouseup', (e) => { e.preventDefault(); const c = coords(e); env({ t: 'raton', tipo: 'up', x: c.x, y: c.y, boton: BOTON[e.button] || 'left', clicks: e.detail || 1 }); });
   cv.addEventListener('contextmenu', (e) => e.preventDefault());
   cv.addEventListener('wheel', (e) => { e.preventDefault(); const c = coords(e); env({ t: 'rueda', x: c.x, y: c.y, dx: e.deltaX, dy: e.deltaY }); }, { passive: false });
