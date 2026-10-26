@@ -1399,7 +1399,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Επίπεδο παρατήρησης: το ZERO αφήνει τα πάντα να περάσουν (εκτός από επικίνδυνους ιστότοπους), τα ανιχνεύει και σου τα δείχνει· εσύ επιλέγεις τι θα κοπεί.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Αυτή η μηχανή αναζήτησης δεν άφησε το ερώτημα να περάσει από το κελί. Το ZERO περιηγείται από διακομιστή και ορισμένες μηχανές περιορίζουν τέτοιες συνδέσεις. Μπορείς να διαλέξεις άλλη μηχανή ή να γράψεις απευθείας τη διεύθυνση του ιστότοπου.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Η μηχανή αναζήτησης θέλει να επιβεβαιώσει ότι είσαι άνθρωπος. Ολοκλήρωσε τον έλεγχο εδώ μέσα και συνέχισε· το κελί θα θυμάται ότι τον πέρασες.",
-  "celda en": "κελί σε"
+  "celda en": "κελί σε",
+  "pide un captcha largo": "ζητά μεγάλο captcha",
+  "pide un clic de verificación": "ζητά ένα κλικ επαλήθευσης"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

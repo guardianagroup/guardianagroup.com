@@ -1399,7 +1399,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Antas na obserbahan: pinapadaan ng ZERO ang lahat (maliban sa mapanganib na site), tinutukoy at ipinapakita sa iyo; ikaw ang pumipili kung ano ang puputulin.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Hindi pinadaan ng search engine na ito ang query mula sa cell. Nagba-browse ang ZERO mula sa isang server at nililimitahan ng ilang search engine ang gayong koneksyon. Maaari kang pumili ng ibang search engine o direktang i-type ang address ng site.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Gustong tiyakin ng search engine na tao ka. Kumpletuhin ang pagsusuri dito at magpatuloy; tatandaan ng cell na naipasa mo ito.",
-  "celda en": "cell sa"
+  "celda en": "cell sa",
+  "pide un captcha largo": "humihingi ng mahabang captcha",
+  "pide un clic de verificación": "humihingi ng isang click na beripikasyon"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

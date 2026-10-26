@@ -1400,7 +1400,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Gözlemle seviyesi: ZERO her şeyi geçirir (tehlikeli siteler hariç), tespit eder ve sana gösterir; neyi keseceğini sen seçersin.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Bu arama motoru sorguyu hücreden geçirmedi. ZERO bir sunucudan gezinir ve bazı arama motorları bu bağlantıları kısıtlar. Başka bir arama motoru seçebilir ya da sitenin adresini doğrudan yazabilirsin.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Arama motoru bir insan olduğunu doğrulamak istiyor. Doğrulamayı burada çöz ve devam et; hücre geçtiğini hatırlayacak.",
-  "celda en": "hücre:"
+  "celda en": "hücre:",
+  "pide un captcha largo": "uzun bir captcha ister",
+  "pide un clic de verificación": "bir doğrulama tıklaması ister"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

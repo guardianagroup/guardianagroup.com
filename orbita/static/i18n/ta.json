@@ -1399,7 +1399,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "கவனி நிலை: ZERO எல்லாவற்றையும் அனுமதிக்கும் (ஆபத்தான தளங்கள் தவிர), கண்டறிந்து உங்களுக்குக் காட்டும்; எதைத் துண்டிப்பது என்பதை நீங்கள் தேர்வு செய்கிறீர்கள்.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "இந்தத் தேடுபொறி செல்லிலிருந்து வந்த வினவலை அனுமதிக்கவில்லை. ZERO ஒரு சேவையகத்திலிருந்து உலாவுகிறது, சில தேடுபொறிகள் இத்தகைய இணைப்புகளைக் கட்டுப்படுத்துகின்றன. வேறு தேடுபொறியைத் தேர்வு செய்யலாம் அல்லது தளத்தின் முகவரியை நேரடியாக எழுதலாம்.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "நீங்கள் ஒரு மனிதர் என்பதைத் தேடுபொறி சரிபார்க்க விரும்புகிறது. சரிபார்ப்பை இங்கேயே முடித்துத் தொடரவும்; நீங்கள் கடந்தீர்கள் என்பதை செல் நினைவில் வைக்கும்.",
-  "celda en": "செல்"
+  "celda en": "செல்",
+  "pide un captcha largo": "நீண்ட கேப்ட்சா கேட்கிறது",
+  "pide un clic de verificación": "ஒரு சரிபார்ப்பு கிளிக் கேட்கிறது"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

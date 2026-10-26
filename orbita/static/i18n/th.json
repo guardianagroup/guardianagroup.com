@@ -1399,7 +1399,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "ระดับสังเกต: ZERO ปล่อยทุกอย่างผ่าน (ยกเว้นเว็บไซต์อันตราย) ตรวจจับและแสดงให้คุณเห็น คุณเลือกว่าจะตัดอะไร",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "เครื่องมือค้นหานี้ไม่ปล่อยคำค้นจากเซลล์ผ่าน ZERO ท่องเว็บจากเซิร์ฟเวอร์ และเครื่องมือค้นหาบางตัวจำกัดการเชื่อมต่อแบบนี้ คุณเลือกเครื่องมือค้นหาอื่นหรือพิมพ์ที่อยู่เว็บไซต์โดยตรงได้",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "เครื่องมือค้นหาต้องการตรวจสอบว่าคุณเป็นคน ทำการตรวจสอบที่นี่แล้วไปต่อ เซลล์จะจำไว้ว่าคุณผ่านแล้ว",
-  "celda en": "เซลล์ที่"
+  "celda en": "เซลล์ที่",
+  "pide un captcha largo": "ขอแคปช่าแบบยาว",
+  "pide un clic de verificación": "ขอคลิกยืนยันหนึ่งครั้ง"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

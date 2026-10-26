@@ -1400,7 +1400,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "Рівень спостерігати: ZERO пропускає все (крім небезпечних сайтів), виявляє і показує вам; ви обираєте, що відрізати.",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "Цей пошуковик не пропустив запит із комірки. ZERO працює із сервера, і деякі пошуковики обмежують такі з’єднання. Ви можете обрати інший пошуковик або ввести адресу сайту напряму.",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Пошуковик хоче перевірити, що ви людина. Пройдіть перевірку тут і продовжуйте; комірка запам’ятає, що ви її пройшли.",
-  "celda en": "комірка в"
+  "celda en": "комірка в",
+  "pide un captcha largo": "просить довгу капчу",
+  "pide un clic de verificación": "просить один клік перевірки"
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

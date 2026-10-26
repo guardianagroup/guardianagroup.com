@@ -1399,7 +1399,9 @@
   "Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.": "পর্যবেক্ষণ স্তর: ZERO সব যেতে দেয় (বিপজ্জনক সাইট ছাড়া), শনাক্ত করে আর আপনাকে দেখায়; আপনি বেছে নেন কী কাটবেন।",
   "Este buscador no ha dejado pasar la consulta desde la celda. ZERO navega desde un servidor y algunos buscadores restringen esas conexiones. Puedes elegir otro buscador o escribir la dirección de la web directamente.": "এই সার্চ ইঞ্জিন সেল থেকে অনুসন্ধানটি যেতে দেয়নি। ZERO একটি সার্ভার থেকে ব্রাউজ করে এবং কিছু সার্চ ইঞ্জিন এমন সংযোগ সীমিত করে। আপনি অন্য সার্চ ইঞ্জিন বেছে নিতে পারেন বা সাইটের ঠিকানা সরাসরি লিখতে পারেন।",
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "সার্চ ইঞ্জিন যাচাই করতে চায় যে আপনি একজন মানুষ। যাচাইটি এখানেই সম্পন্ন করে এগিয়ে যান; সেল মনে রাখবে যে আপনি পাস করেছেন।",
-  "celda en": "সেল"
+  "celda en": "সেল",
+  "pide un captcha largo": "দীর্ঘ ক্যাপচা চায়",
+  "pide un clic de verificación": "একটি যাচাই ক্লিক চায়"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",
