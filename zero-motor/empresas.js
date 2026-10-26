@@ -2,7 +2,8 @@
 // Solo fuentes propias o con licencia de uso comercial: la base de ESPEJO (orbita/datos/espejo.json: 172 dominios y
 // 100 empresas confirmadas por dos voces de la agencia), las fichas de empresa (orbita/datos/empresas.json: sede,
 // país, Wikidata) y, cuando se construya, dominios-wikidata.json (Wikidata, CC0). Si no hay dato: «empresa no
-// identificada». Nunca se completa por intuición (Astra, ronda 40).
+// identificada». Nunca se completa por intuición (Astra, ronda 40). Ronda 42 (26 Oct 2026): datos/dominios-agencia.json,
+// 107 dominios más (dos voces de tres + país de Wikidata).
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -32,6 +33,9 @@ class Empresas {
     if (fs.existsSync(f)) this.fichas = (JSON.parse(fs.readFileSync(f, 'utf8')).empresas) || {};
     const w = path.join(__dirname, 'datos', 'dominios-wikidata.json');
     this.wikidata = fs.existsSync(w) ? JSON.parse(fs.readFileSync(w, 'utf8')) : {};
+    // ronda 42 (26 Oct 2026): 107 dominios más, dos voces de la agencia + país de Wikidata
+    const a = path.join(__dirname, 'datos', 'dominios-agencia.json');
+    this.agencia = fs.existsSync(a) ? JSON.parse(fs.readFileSync(a, 'utf8')) : { dominios: {}, empresas: {}, detalle: {} };
   }
 
   /** { empresa, pais (código), paisNombre, categoria, fuente, certeza } o { empresa: null } */
@@ -44,6 +48,12 @@ class Empresas {
       if (x && x.empresa) {
         const cc = this.paisEmpresa[x.empresa] || (this.fichas[x.empresa] || {}).cc || null;
         return { empresa: x.empresa, pais: cc, paisNombre: PAISES[cc] || cc, categoria: x.categoria || null, fuente: 'agencia GUARDIANA, dos voces', certeza: 'comprobado', ficha: this.fichas[x.empresa] || null };
+      }
+      const ag = this.agencia.dominios[d];
+      if (ag && ag.empresa) {
+        const det = this.agencia.detalle[ag.empresa] || {};
+        const cc = this.agencia.empresas[ag.empresa] || det.cc || null;
+        return { empresa: ag.empresa, pais: cc, paisNombre: PAISES[cc] || cc, categoria: ag.categoria || null, fuente: det.pais_fuente === 'Wikidata (CC0)' ? 'agencia GUARDIANA, dos voces · país: Wikidata (CC0)' : 'agencia GUARDIANA, dos voces', certeza: 'comprobado', ficha: this.fichas[ag.empresa] || (det.sede ? { sede: det.sede, wikidata: det.wikidata } : null) };
       }
       const wd = this.wikidata[d];
       if (wd && wd.empresa) return { empresa: wd.empresa, pais: wd.pais || null, paisNombre: PAISES[wd.pais] || wd.pais, categoria: null, fuente: 'Wikidata (CC0)', certeza: 'comprobado', ficha: this.fichas[wd.empresa] || null };
