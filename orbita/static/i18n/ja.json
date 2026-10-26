@@ -936,7 +936,13 @@
   "edificios": "棟",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "棟（このキャンパス内）。名称はオープンデータでまだ公開されていません",
   "Campus de centros de datos sin nombre": "名称不明のデータセンター群",
-  "clic para la lista": "クリックで一覧"
+  "clic para la lista": "クリックで一覧",
+  "Cable submarino cercano": "近くの海底ケーブル",
+  "La llegada de cable submarino más cercana está en": "最も近い海底ケーブルの陸揚げ地点：",
+  "No implica que este centro use ese cable.": "このセンターがそのケーブルを使っているという意味ではありません。",
+  "Por dónde viajan los datos": "データはどこを通るか",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "このセンターは他のネットワークとつながっていますが、実際の経路は公開されていません。地図が示すのは近くのインフラであり、あなたのデータの確認済みの経路ではありません。",
+  "Infraestructura cercana": "近くのインフラ"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

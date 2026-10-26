@@ -935,7 +935,13 @@
   "edificios": "عمارتیں",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "عمارتیں اس کیمپس میں؛ اس کا نام ابھی کھلے ڈیٹا میں عام نہیں",
   "Campus de centros de datos sin nombre": "بے نام ڈیٹا سینٹر کیمپس",
-  "clic para la lista": "فہرست کے لیے کلک کریں"
+  "clic para la lista": "فہرست کے لیے کلک کریں",
+  "Cable submarino cercano": "قریبی زیرِ سمندر کیبل",
+  "La llegada de cable submarino más cercana está en": "زیرِ سمندر کیبل کی قریب ترین لینڈنگ یہاں ہے:",
+  "No implica que este centro use ese cable.": "اس کا مطلب یہ نہیں کہ یہ مرکز وہ کیبل استعمال کرتا ہے۔",
+  "Por dónde viajan los datos": "ڈیٹا کس راستے سے جاتا ہے",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "یہ مرکز دوسرے نیٹ ورکس سے جڑا ہے، لیکن اس کے اصل راستے عوامی نہیں: نقشہ قریبی انفراسٹرکچر دکھاتا ہے، آپ کے ڈیٹا کا تصدیق شدہ راستہ نہیں۔",
+  "Infraestructura cercana": "قریبی انفراسٹرکچر"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

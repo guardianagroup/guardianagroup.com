@@ -935,7 +935,13 @@
   "edificios": "byggingar",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "byggingar á þessu svæði; nafn þess er enn ekki opinbert í opnum gögnum",
   "Campus de centros de datos sin nombre": "Gagnaverssvæði án nafns",
-  "clic para la lista": "smelltu fyrir listann"
+  "clic para la lista": "smelltu fyrir listann",
+  "Cable submarino cercano": "Sæstrengur í nánd",
+  "La llegada de cable submarino más cercana está en": "Næsta landtaka sæstrengs er í",
+  "No implica que este centro use ese cable.": "Það þýðir ekki að þessi stöð noti þann streng.",
+  "Por dónde viajan los datos": "Hvaða leið gögnin fara",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Þessi stöð tengist öðrum netum, en raunverulegar leiðir hennar eru ekki opinberar: kortið sýnir innviði í nánd, ekki staðfesta leið gagnanna þinna.",
+  "Infraestructura cercana": "Innviðir í nánd"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

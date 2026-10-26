@@ -936,7 +936,13 @@
   "edificios": "gebouwen",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "gebouwen op deze campus; de naam is nog niet openbaar in de open data",
   "Campus de centros de datos sin nombre": "Datacentercampus zonder naam",
-  "clic para la lista": "klik voor de lijst"
+  "clic para la lista": "klik voor de lijst",
+  "Cable submarino cercano": "Zeekabel in de buurt",
+  "La llegada de cable submarino más cercana está en": "De dichtstbijzijnde aanlanding van een zeekabel is in",
+  "No implica que este centro use ese cable.": "Dat betekent niet dat dit centrum die kabel gebruikt.",
+  "Por dónde viajan los datos": "Waarlangs de data reizen",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Dit centrum is verbonden met andere netwerken, maar de echte routes zijn niet openbaar: de kaart toont de infrastructuur in de buurt, niet de bevestigde weg van uw data.",
+  "Infraestructura cercana": "Infrastructuur in de buurt"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

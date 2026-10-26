@@ -935,7 +935,13 @@
   "edificios": "clădiri",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "clădiri în acest campus; numele său nu este încă public în datele deschise",
   "Campus de centros de datos sin nombre": "Campus de centre de date fără nume",
-  "clic para la lista": "clic pentru listă"
+  "clic para la lista": "clic pentru listă",
+  "Cable submarino cercano": "Cablu submarin în apropiere",
+  "La llegada de cable submarino más cercana está en": "Cea mai apropiată acostare de cablu submarin este la",
+  "No implica que este centro use ese cable.": "Nu înseamnă că acest centru folosește acel cablu.",
+  "Por dónde viajan los datos": "Pe unde circulă datele",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Acest centru se conectează la alte rețele, dar rutele sale reale nu sunt publice: harta arată infrastructura din apropiere, nu traseul confirmat al datelor dvs.",
+  "Infraestructura cercana": "Infrastructură în apropiere"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

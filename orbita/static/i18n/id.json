@@ -935,7 +935,13 @@
   "edificios": "gedung",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "gedung di kampus ini; namanya belum publik dalam data terbuka",
   "Campus de centros de datos sin nombre": "Kampus pusat data tanpa nama",
-  "clic para la lista": "klik untuk daftarnya"
+  "clic para la lista": "klik untuk daftarnya",
+  "Cable submarino cercano": "Kabel bawah laut terdekat",
+  "La llegada de cable submarino más cercana está en": "Pendaratan kabel bawah laut terdekat ada di",
+  "No implica que este centro use ese cable.": "Ini tidak berarti pusat ini memakai kabel tersebut.",
+  "Por dónde viajan los datos": "Lewat mana data berjalan",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Pusat ini terhubung ke jaringan lain, tetapi rute sebenarnya tidak dipublikasikan: peta menampilkan infrastruktur terdekat, bukan jalur data Anda yang terkonfirmasi.",
+  "Infraestructura cercana": "Infrastruktur terdekat"
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

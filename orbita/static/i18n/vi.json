@@ -936,7 +936,13 @@
   "edificios": "tòa nhà",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "tòa nhà trong khu này; tên của khu chưa được công khai trong dữ liệu mở",
   "Campus de centros de datos sin nombre": "Khu trung tâm dữ liệu chưa có tên",
-  "clic para la lista": "nhấp để xem danh sách"
+  "clic para la lista": "nhấp để xem danh sách",
+  "Cable submarino cercano": "Cáp ngầm dưới biển ở gần",
+  "La llegada de cable submarino más cercana está en": "Điểm cập bờ cáp ngầm gần nhất ở",
+  "No implica que este centro use ese cable.": "Điều này không có nghĩa là trung tâm này dùng tuyến cáp đó.",
+  "Por dónde viajan los datos": "Dữ liệu đi qua đâu",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Trung tâm này kết nối với các mạng khác, nhưng tuyến đường thực không được công bố: bản đồ cho thấy hạ tầng ở gần, không phải đường đi đã xác nhận của dữ liệu của bạn.",
+  "Infraestructura cercana": "Hạ tầng ở gần"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

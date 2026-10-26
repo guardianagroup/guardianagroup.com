@@ -935,7 +935,13 @@
   "edificios": "majengo",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "majengo katika eneo hili; jina lake bado si la umma katika data huria",
   "Campus de centros de datos sin nombre": "Eneo la vituo vya data lisilo na jina",
-  "clic para la lista": "bofya kwa orodha"
+  "clic para la lista": "bofya kwa orodha",
+  "Cable submarino cercano": "Kebo ya baharini iliyo karibu",
+  "La llegada de cable submarino más cercana está en": "Mahali pa karibu zaidi ambapo kebo ya baharini inatua ni",
+  "No implica que este centro use ese cable.": "Haimaanishi kwamba kituo hiki kinatumia kebo hiyo.",
+  "Por dónde viajan los datos": "Data hupita wapi",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Kituo hiki kimeunganishwa na mitandao mingine, lakini njia zake halisi si za umma: ramani inaonyesha miundombinu iliyo karibu, si njia iliyothibitishwa ya data yako.",
+  "Infraestructura cercana": "Miundombinu iliyo karibu"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

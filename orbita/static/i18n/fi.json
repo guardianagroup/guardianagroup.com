@@ -935,7 +935,13 @@
   "edificios": "rakennusta",
   "edificios en este campus; su nombre aún no es público en los datos abiertos": "rakennusta tällä kampuksella; sen nimi ei ole vielä julkinen avoimessa datassa",
   "Campus de centros de datos sin nombre": "Nimetön datakeskuskampus",
-  "clic para la lista": "napsauta nähdäksesi luettelon"
+  "clic para la lista": "napsauta nähdäksesi luettelon",
+  "Cable submarino cercano": "Merikaapeli lähellä",
+  "La llegada de cable submarino más cercana está en": "Lähin merikaapelin rantautumispaikka on",
+  "No implica que este centro use ese cable.": "Se ei tarkoita, että tämä keskus käyttäisi sitä kaapelia.",
+  "Por dónde viajan los datos": "Mitä kautta data kulkee",
+  "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Tämä keskus on yhteydessä muihin verkkoihin, mutta sen todelliset reitit eivät ole julkisia: kartta näyttää lähellä olevan infrastruktuurin, ei datasi vahvistettua reittiä.",
+  "Infraestructura cercana": "Infrastruktuuri lähellä"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

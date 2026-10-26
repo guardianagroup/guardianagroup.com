@@ -2040,9 +2040,13 @@
       const L = LUG.llegadas[r.llegada], nombres = [];
       for (const k of L.seg) { const gi = grupoDe(k), nm = gi >= 0 ? LUG.grupos[gi][0] : ''; if (nm && !nombres.includes(nm)) nombres.push(nm); }
       // Owner, 22 Oct 2026: «tiene que ser un idioma comprensible para todos los clientes, fácil y a la vez profesional»
-      if (r.lejos) filas.push([T('Desde el mar'), T('De las llegadas de cables de esta zona aún no tenemos datos.')]);
-      else if (r.estacion) filas.push([T('Desde el mar'), T('La estación de cables submarinos más cercana es') + ' ' + (r.estacion.n || '') + (r.estacion.o ? ' (' + r.estacion.o + ')' : '') + ', ' + T('a') + ' ' + num(Math.round(r.km)) + ' km ' + T('de este centro de datos') + '.']);
-      else filas.push([T('Desde el mar'), r.km < 2 ? T('Los cables submarinos salen del mar aquí mismo, en') + ' ' + L.ciudad + '.' : T('El cable submarino más cercano sale del mar en') + ' ' + L.ciudad + ' (' + paisNombre(L.cc) + '), ' + T('a') + ' ' + num(Math.round(r.km)) + ' km ' + T('de este centro de datos') + '.']);
+      // 25 Oct 2026, ronda 37 (ChatGPT + Gemini: «la proximidad no implica conexión»): the nearest landing, in a straight
+      // line, and a plain line that this centre need not use that cable
+      const K = T('Cable submarino cercano');
+      if (r.lejos) filas.push([K, T('De las llegadas de cables de esta zona aún no tenemos datos.')]);
+      else if (r.estacion) filas.push([K, T('La estación de cables submarinos más cercana es') + ' ' + (r.estacion.n || '') + (r.estacion.o ? ' (' + r.estacion.o + ')' : '') + ', ' + T('a') + ' ' + num(Math.round(r.km)) + ' km ' + T('en línea recta') + '.']);
+      else filas.push([K, r.km < 2 ? T('Los cables submarinos salen del mar aquí mismo, en') + ' ' + L.ciudad + '.' : T('La llegada de cable submarino más cercana está en') + ' ' + L.ciudad + ' (' + paisNombre(L.cc) + '), ' + T('a') + ' ' + num(Math.round(r.km)) + ' km ' + T('en línea recta') + '. ' + T('No implica que este centro use ese cable.')]);
+      filas.push([T('Por dónde viajan los datos'), T('Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.')]);
       if (nombres.length && !r.estacion && !r.lejos) filas.push([T('Cables que llegan ahí'), nombres.slice(0, 4).join(' · ') + (nombres.length > 4 ? ' · +' + (nombres.length - 4) : '')]);
       if (r.km >= 2 && !r.lejos) filas.push([T('Por tierra'), r.via ? T('Desde esa llegada, unos') + ' ' + num(Math.round(r.kmRuta)) + ' km ' + T('por una red de fibra conocida') + (r.ops.length ? ' (' + r.ops.slice(0, 2).join(', ') + ')' : '') + '.' : T('La ruta exacta por tierra no es pública; en el mapa se dibuja en línea recta.')]);
     }
@@ -2058,9 +2062,9 @@
     const nube = q.o && /amazon|aws|google|microsoft|azure|meta|facebook|apple|oracle|alibaba|cloudflare|ovh|equinix|digital realty|telefónica|telefonica|orange|vodafone|claro|movistar/i.test(q.o);
     abreModelo(modelo(T('Centro de datos'), titulo, filas.length ? filas : [[T('Datos'), T('Sin más datos públicos sobre este edificio')]], fuentes, {
       foto: fotoDe('centro', X.w),
-      resumen: [T('Operador'), T('Edificios'), T('Dónde'), T('En servicio desde'), T('Desde el mar')],
+      resumen: [T('Operador'), T('Edificios'), T('Dónde'), T('En servicio desde'), T('Cable submarino cercano')],
       para: T('Aquí viven servicios de internet: cada vez que abres una web o guardas algo «en la nube», tus datos pasan por sitios como este.') + (nube ? ' ' + T('Si usas servicios de') + ' ' + q.o + ', ' + T('parte de tus datos puede estar guardada en edificios así.') : ''),
-      secciones: [{ t: T('Cómo llega internet aquí'), claves: [T('Desde el mar'), T('Cables que llegan ahí'), T('Por tierra'), T('Intercambio de internet')], abierta: true }, { t: T('El edificio'), claves: [T('Operador'), T('Edificios'), T('Del mismo operador'), T('Dueño'), T('En servicio desde'), T('Superficie'), T('Potencia'), T('Plantas'), T('Altura del edificio'), 'Tier', 'PUE', T('Conexión'), T('Dónde'), T('Dirección'), T('Ubicación aproximada'), T('Web')] }, { t: T('Notas'), claves: [T('Datos'), T('Nota')] }],
+      secciones: [{ t: T('Infraestructura cercana'), claves: [T('Cable submarino cercano'), T('Cables que llegan ahí'), T('Por tierra'), T('Intercambio de internet'), T('Por dónde viajan los datos')], abierta: true }, { t: T('El edificio'), claves: [T('Operador'), T('Edificios'), T('Del mismo operador'), T('Dueño'), T('En servicio desde'), T('Superficie'), T('Potencia'), T('Plantas'), T('Altura del edificio'), 'Tier', 'PUE', T('Conexión'), T('Dónde'), T('Dirección'), T('Ubicación aproximada'), T('Web')] }, { t: T('Notas'), claves: [T('Datos'), T('Nota')] }],
     }), x, y);
   }
   function fichaLugar(tipo, i, x, y) {
