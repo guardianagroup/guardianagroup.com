@@ -1401,7 +1401,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Leitarvélin vill staðfesta að þú sért manneskja. Leystu staðfestinguna hér inni og haltu áfram; hólfið man að þú stóðst hana.",
   "celda en": "hólf í",
   "pide un captcha largo": "krefst langs captcha",
-  "pide un clic de verificación": "krefst eins staðfestingarsmells"
+  "pide un clic de verificación": "krefst eins staðfestingarsmells",
+  "Abrir enlace en una pestaña nueva": "Opna tengil í nýjum flipa",
+  "Copiar la dirección del enlace": "Afrita vistfang tengils",
+  "Copiar": "Afrita"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

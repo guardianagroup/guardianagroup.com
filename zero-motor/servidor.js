@@ -388,7 +388,7 @@ class Sesion {
     let s; try { s = JSON.parse(json); } catch (_) { return; }
     let st = this.act ? this.act.stats : Sesion.statsNuevo(); try { const pp = this.pestanaDe(src.page); if (pp) st = pp.stats; } catch (_) {}
     const dominio = hostDe(s.origen || '') || st.webActual;
-    if (s.clase === 'cursor') { try { if (this.act && this.pestanaDe(src.page) === this.act) this.env({ t: 'cursor', cursor: String(s.cursor || 'default').slice(0, 24) }); } catch (_) {} return; }
+    if (s.clase === 'cursor') { try { if (this.act && this.pestanaDe(src.page) === this.act) this.env({ t: 'cursor', cursor: String(s.cursor || 'default').slice(0, 24), href: String(s.href || '').slice(0, 500) }); } catch (_) {} return; }
     if (s.clase === 'huella') {
       st.n.huella++;
       const via = { canvas: 'el lienzo gráfico (canvas)', webgl: 'la tarjeta gráfica (WebGL)', audio: 'el sistema de audio', fuentes: 'los tipos de letra instalados', plugins: 'los complementos del navegador' }[s.via] || s.via;
@@ -591,7 +591,9 @@ class Sesion {
       }
       if (o.t === 'rueda') { await this.page.mouse.move(o.x, o.y); return await this.page.mouse.wheel(o.dx || 0, o.dy || 0); }
       if (o.t === 'tecla') return await (o.tipo === 'down' ? this.page.keyboard.down(o.key) : this.page.keyboard.up(o.key));
-      if (o.t === 'texto') return await this.page.keyboard.insertText(String(o.s || ''));
+      if (o.t === 'texto') return await this.page.keyboard.insertText(String(o.s || '').slice(0, 20000));
+      // Copiar: el texto seleccionado en la celda viaja al portapapeles de la persona (solo cuando ella pulsa Ctrl+C o «Copiar»).
+      if (o.t === 'copiar') { let txt = ''; try { txt = await this.page.evaluate(() => String(window.getSelection ? window.getSelection() : '')); } catch (_) {} if (process.env.ZERO_DEBUG) console.log('copiar:', String(txt || '').length, 'caracteres'); this.env({ t: 'portapapeles', texto: String(txt || '').slice(0, 20000) }); return; }
       if (o.t === 'atras') return this.page.goBack({ waitUntil: 'commit' }).catch(() => {});
       if (o.t === 'adelante') return this.page.goForward({ waitUntil: 'commit' }).catch(() => {});
       if (o.t === 'recargar') return this.page.reload({ waitUntil: 'commit' }).catch(() => {});

@@ -1401,7 +1401,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Gustong tiyakin ng search engine na tao ka. Kumpletuhin ang pagsusuri dito at magpatuloy; tatandaan ng cell na naipasa mo ito.",
   "celda en": "cell sa",
   "pide un captcha largo": "humihingi ng mahabang captcha",
-  "pide un clic de verificación": "humihingi ng isang click na beripikasyon"
+  "pide un clic de verificación": "humihingi ng isang click na beripikasyon",
+  "Abrir enlace en una pestaña nueva": "Buksan ang link sa bagong tab",
+  "Copiar la dirección del enlace": "Kopyahin ang address ng link",
+  "Copiar": "Kopyahin"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

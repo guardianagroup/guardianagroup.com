@@ -1401,7 +1401,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Motorul de căutare vrea să verifice că ești o persoană. Rezolvă verificarea aici și continuă; celula va ține minte că ai trecut-o.",
   "celda en": "celulă în",
   "pide un captcha largo": "cere un captcha lung",
-  "pide un clic de verificación": "cere un clic de verificare"
+  "pide un clic de verificación": "cere un clic de verificare",
+  "Abrir enlace en una pestaña nueva": "Deschide linkul într-o filă nouă",
+  "Copiar la dirección del enlace": "Copiază adresa linkului",
+  "Copiar": "Copiază"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

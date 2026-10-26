@@ -1401,7 +1401,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "सर्च इंजन जाँचना चाहता है कि आप एक व्यक्ति हैं। जाँच यहीं पूरी करें और आगे बढ़ें; सेल याद रखेगा कि आपने इसे पास किया।",
   "celda en": "सेल",
   "pide un captcha largo": "लंबा कैप्चा मांगता है",
-  "pide un clic de verificación": "एक सत्यापन क्लिक मांगता है"
+  "pide un clic de verificación": "एक सत्यापन क्लिक मांगता है",
+  "Abrir enlace en una pestaña nueva": "लिंक नए टैब में खोलें",
+  "Copiar la dirección del enlace": "लिंक का पता कॉपी करें",
+  "Copiar": "कॉपी करें"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

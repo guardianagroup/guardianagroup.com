@@ -1402,7 +1402,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Поисковая система хочет убедиться, что вы человек. Пройдите проверку здесь и продолжайте; ячейка запомнит, что вы её прошли.",
   "celda en": "ячейка в",
   "pide un captcha largo": "просит длинную капчу",
-  "pide un clic de verificación": "просит один клик проверки"
+  "pide un clic de verificación": "просит один клик проверки",
+  "Abrir enlace en una pestaña nueva": "Открыть ссылку в новой вкладке",
+  "Copiar la dirección del enlace": "Копировать адрес ссылки",
+  "Copiar": "Копировать"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

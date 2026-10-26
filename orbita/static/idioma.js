@@ -1236,6 +1236,9 @@
     // ZERO · nivel Observar, Permitir/Cortar y avisos de buscador (26 Oct 2026, ronda 45)
     'pide un captcha largo': ['asks for a long captcha', 'pede um captcha longo'],
     'pide un clic de verificación': ['asks for one verification click', 'pede um clique de verificação'],
+    'Abrir enlace en una pestaña nueva': ['Open link in a new tab', 'Abrir link em uma nova aba'],
+    'Copiar la dirección del enlace': ['Copy link address', 'Copiar o endereço do link'],
+    'Copiar': ['Copy', 'Copiar'],
     'celda en': ['cell in', 'célula em'],
     'Observar': ['Observe', 'Observar'],
     'observar': ['observe', 'observar'],

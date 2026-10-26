@@ -1401,7 +1401,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Enjin carian mahu memastikan anda seorang manusia. Selesaikan semakan di sini dan teruskan; sel akan ingat bahawa anda telah lulus.",
   "celda en": "sel di",
   "pide un captcha largo": "meminta captcha panjang",
-  "pide un clic de verificación": "meminta satu klik pengesahan"
+  "pide un clic de verificación": "meminta satu klik pengesahan",
+  "Abrir enlace en una pestaña nueva": "Buka pautan dalam tab baharu",
+  "Copiar la dirección del enlace": "Salin alamat pautan",
+  "Copiar": "Salin"
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

@@ -1402,7 +1402,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Công cụ tìm kiếm muốn kiểm tra bạn là người thật. Hoàn thành kiểm tra ngay tại đây và tiếp tục; ô sẽ nhớ rằng bạn đã vượt qua.",
   "celda en": "ô tại",
   "pide un captcha largo": "yêu cầu captcha dài",
-  "pide un clic de verificación": "yêu cầu một cú nhấp xác minh"
+  "pide un clic de verificación": "yêu cầu một cú nhấp xác minh",
+  "Abrir enlace en una pestaña nueva": "Mở liên kết trong thẻ mới",
+  "Copiar la dirección del enlace": "Sao chép địa chỉ liên kết",
+  "Copiar": "Sao chép"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

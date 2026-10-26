@@ -1401,7 +1401,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Търсачката иска да провери, че си човек. Реши проверката тук и продължи; клетката ще запомни, че си я минал.",
   "celda en": "клетка в",
   "pide un captcha largo": "изисква дълга капча",
-  "pide un clic de verificación": "изисква едно кликване за проверка"
+  "pide un clic de verificación": "изисква едно кликване за проверка",
+  "Abrir enlace en una pestaña nueva": "Отваряне на връзката в нов раздел",
+  "Copiar la dirección del enlace": "Копиране на адреса на връзката",
+  "Copiar": "Копиране"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

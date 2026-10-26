@@ -1402,7 +1402,10 @@
   "El buscador quiere comprobar que eres una persona. Resuelve la comprobación aquí dentro y sigue; la celda recordará que la pasaste.": "Die Suchmaschine will prüfen, dass du eine Person bist. Löse die Prüfung hier drinnen und mach weiter; die Zelle merkt sich, dass du sie bestanden hast.",
   "celda en": "Zelle in",
   "pide un captcha largo": "verlangt ein langes Captcha",
-  "pide un clic de verificación": "verlangt einen Bestätigungsklick"
+  "pide un clic de verificación": "verlangt einen Bestätigungsklick",
+  "Abrir enlace en una pestaña nueva": "Link in neuem Tab öffnen",
+  "Copiar la dirección del enlace": "Linkadresse kopieren",
+  "Copiar": "Kopieren"
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",
