@@ -36,6 +36,9 @@ const TOR_PROXY = process.env.ZERO_TOR_PROXY || ''; // p. ej. socks5://127.0.0.1
 const MAX_MENSAJE = 64 * 1024;
 const MIN_SIN_MIRAR = +process.env.ZERO_MIN_SIN_MIRAR || 30; // minutos con la pantalla dormida antes de destruir la celda
 const MAX_HORAS = +process.env.ZERO_MAX_HORAS || 12; // vida máxima de una celda
+// Dirección pública del motor (detrás del proxy TLS): con ella se construye el enlace oculto del señuelo, que debe ser
+// alcanzable desde fuera para que una visita al enlace llegue al colector /s/<token>. Sin ella, el propio puerto local.
+const PUBLICO = String(process.env.ZERO_PUBLICO || '').replace(/\/$/, '') || ('http://127.0.0.1:' + PUERTO);
 const VIVAS = new Set();
 function origenPermitido(req) {
   const o = String(req.headers.origin || '').replace(/\/$/, '');
@@ -86,7 +89,7 @@ class Sesion {
     this.pestanas = []; this.act = null; this.nPest = 0; this.esperadas = 0;
     this.sucesos = [];
     this.destruida = false; this.operaciones = [];
-    this.senuelos = new Senuelos('http://127.0.0.1:' + PUERTO); SESIONES.set(this.senuelos.token, this);
+    this.senuelos = new Senuelos(PUBLICO); SESIONES.set(this.senuelos.token, this);
     this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.ultimos = [];
     this.descargas = new Map(); this.nDesc = 0;
     VIVAS.add(this); this.ultimaMirada = Date.now();
@@ -610,7 +613,9 @@ async function main() {
     const ms = req.url.match(/^\/s\/([0-9a-f]{12})(?:[/?#].*)?$/);
     if (ms) {
       const ses = SESIONES.get(ms[1]);
-      if (ses && !ses.destruida) ses.senuelo({ tipo: 'visita', donde: 'visita al enlace oculto (' + (req.headers['user-agent'] || 'sin agente').slice(0, 80) + ')' }, req.socket.remoteAddress || '?', req.url, true, false);
+      // el motor escucha solo en 127.0.0.1: quien llega es el proxy TLS, que pone la dirección real en X-Forwarded-For
+      const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress || '?';
+      if (ses && !ses.destruida) ses.senuelo({ tipo: 'visita', donde: 'visita al enlace oculto (' + (req.headers['user-agent'] || 'sin agente').slice(0, 80) + ')' }, ip, req.url, true, false);
       res.writeHead(204); return res.end();
     }
     if (req.url === '/salud') { res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ ok: true, version: VERSION, listas: nListas, mock: MOCK, celdas: VIVAS.size, tope: MAX_SESIONES })); }
