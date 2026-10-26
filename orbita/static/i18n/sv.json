@@ -943,7 +943,16 @@
   "Por dónde viajan los datos": "Vart data färdas",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Detta center är anslutet till andra nät, men dess verkliga rutter är inte offentliga: kartan visar infrastrukturen i närheten, inte dina datas bekräftade väg.",
   "Infraestructura cercana": "Infrastruktur i närheten",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Operatör bekräftad av GUARDIANA-byrån med två offentliga källor"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Operatör bekräftad av GUARDIANA-byrån med två offentliga källor",
+  "Cómo lo sabemos": "Så vet vi det",
+  "Comprobado": "Kontrollerat",
+  "Siguiente paso": "Nästa steg",
+  "Qué ven de ti las webs": "Vad webbplatser ser om dig",
+  "Ver la demostración de ZERO": "Se ZERO-demonstrationen",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Du har sett vart dina data färdas. Se nu vad webbplatser ser om dig och hur ZERO bryter varje anslutning.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Rekonstruerat av GUARDIANA-byrån från offentliga källor, bekräftat av två röster",
+  "Agencia GUARDIANA, dos voces": "GUARDIANA-byrån, två röster",
+  "edificios en este campus": "byggnader på detta campus"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

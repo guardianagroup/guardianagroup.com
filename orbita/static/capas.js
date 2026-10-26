@@ -1395,6 +1395,9 @@
   }
 
   // ---------- the line under the planet: what is shown, from where, how fresh ----------
+  // 25 Oct 2026 (agency round 39, two voices: «¿Cómo lo sabemos?»): the sources and the date of the data, as a date
+  const fechaIso = (iso) => { if (!iso) return ''; const t = Date.parse(iso); if (!Number.isFinite(t)) return ''; try { return new Date(t).toLocaleDateString((window.GuardianaIdioma && window.GuardianaIdioma.locale) || 'es-ES', { day: 'numeric', month: 'long', year: 'numeric' }); } catch (_) { return iso.slice(0, 10); } };
+  const dominios = (lista) => (lista || []).map((u) => { const m = String(u).match(/^https?:\/\/([^/]+)/); return m ? m[1].replace(/^www\./, '') : String(u); }).filter((x, i, a) => x && a.indexOf(x) === i).slice(0, 4).join(' · ');
   const hace = (iso) => { const m = Math.max(0, Math.round((Date.now() - Date.parse(iso)) / 60000)); return m < 60 ? m + ' min' : Math.round(m / 60) + ' h'; };
   const haceTxt = (x) => { const l = window.GuardianaIdioma && window.GuardianaIdioma.lang; return l === 'en' ? x + ' ago' : l === 'pt' ? 'há ' + x : 'hace ' + x; };
   const num = (n) => n.toLocaleString((window.GuardianaIdioma && window.GuardianaIdioma.locale) || 'es-ES');
@@ -2052,7 +2055,7 @@
     if (W.m2) filas.push([T('Superficie'), num(W.m2) + ' m²']);
     if (W.mw) filas.push([T('Potencia'), num(W.mw) + ' MW']);
     // 25 Oct 2026 (Abilene, 39 unnamed buildings): a campus OpenStreetMap maps building by building is one point
-    if (X.edificios > 1) filas.push([T('Edificios'), num(X.edificios) + ' ' + T('edificios en este campus; su nombre aún no es público en los datos abiertos')]);
+    if (X.edificios > 1) filas.push([T('Edificios'), num(X.edificios) + ' ' + T(q.n ? 'edificios en este campus' : 'edificios en este campus; su nombre aún no es público en los datos abiertos')]);
     if (X.plantas) filas.push([T('Plantas'), X.plantas]);
     if (X.alto) filas.push([T('Altura del edificio'), X.alto + ' m']);
     if (X.tier) filas.push(['Tier', X.tier]);
@@ -2083,6 +2086,8 @@
     const L = P() && P().lugar;
     // owner, 22 Oct 2026: «quiero datos sobre ese centro de datos que estoy viendo», not the distance from the visitor
     if (X.web) filas.push([T('Web'), dominio(X.web)]);
+    { const fu = X.fuentes && X.fuentes.length ? T('Agencia GUARDIANA, dos voces') + ' · ' + dominios(X.fuentes) + ' · OpenStreetMap (ODbL)' : q.extra ? T('Agencia GUARDIANA, dos voces') : 'OpenStreetMap (ODbL)' + (X.w || X.ow ? ' · Wikidata (CC0)' : '');
+      filas.push([T('Fuentes'), fu]); const fe = fechaIso(PT && PT.d && PT.d.descargado); if (fe && !q.extra) filas.push([T('Comprobado'), fe]); }
     const nn = nombreCentro(q), titulo = nn && nn !== q.o ? nn : (q.o ? q.o + ' · ' + T('centro de datos') : X.edificios > 1 ? T('Campus de centros de datos sin nombre') : T('Centro de datos sin nombre'));
     const fuentes = T('Datos verificados');
     const nube = q.o && /amazon|aws|google|microsoft|azure|meta|facebook|apple|oracle|alibaba|cloudflare|ovh|equinix|digital realty|telefónica|telefonica|orange|vodafone|claro|movistar/i.test(q.o);
@@ -2090,7 +2095,7 @@
       foto: fotoDe('centro', X.w),
       resumen: [T('Operador'), T('Edificios'), T('Dónde'), T('En servicio desde'), T('Cable submarino cercano')],
       para: T('Aquí viven servicios de internet: cada vez que abres una web o guardas algo «en la nube», tus datos pasan por sitios como este.') + (nube ? ' ' + T('Si usas servicios de') + ' ' + q.o + ', ' + T('parte de tus datos puede estar guardada en edificios así.') : ''),
-      secciones: [{ t: T('Infraestructura cercana'), claves: [T('Cable submarino cercano'), T('Cables que llegan ahí'), T('Por tierra'), T('Intercambio de internet'), T('Por dónde viajan los datos')], abierta: true }, { t: T('El edificio'), claves: [T('Operador'), T('Edificios'), T('Del mismo operador'), T('Dueño'), T('En servicio desde'), T('Superficie'), T('Potencia'), T('Plantas'), T('Altura del edificio'), 'Tier', 'PUE', T('Conexión'), T('Dónde'), T('Dirección'), T('Ubicación aproximada'), T('Web')] }, { t: T('Notas'), claves: [T('Datos'), T('Nota')] }],
+      secciones: [{ t: T('Infraestructura cercana'), claves: [T('Cable submarino cercano'), T('Cables que llegan ahí'), T('Por tierra'), T('Intercambio de internet'), T('Por dónde viajan los datos')], abierta: true }, { t: T('El edificio'), claves: [T('Operador'), T('Edificios'), T('Del mismo operador'), T('Dueño'), T('En servicio desde'), T('Superficie'), T('Potencia'), T('Plantas'), T('Altura del edificio'), 'Tier', 'PUE', T('Conexión'), T('Dónde'), T('Dirección'), T('Ubicación aproximada'), T('Web')] }, { t: T('Cómo lo sabemos'), claves: [T('Fuentes'), T('Comprobado')] }, { t: T('Notas'), claves: [T('Datos'), T('Nota')] }],
     }), x, y);
   }
   function fichaLugar(tipo, i, x, y) {
@@ -2157,13 +2162,15 @@
       if (clicActual) {
         for (const m of mas) { const j = m.indexOf(': '); if (j > 0 && j < 40) filas.push([m.slice(0, j), m.slice(j + 2)]); else filas.push(['', m]); }
         if (corto) filas.push([T('Trazado'), corto]);
+        { const fu = inf.aprox ? T('Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces') + (inf.fuentes && inf.fuentes.length ? ' · ' + dominios(inf.fuentes) : '') : 'OpenStreetMap (ODbL)' + (d.w ? ' · Wikidata (CC0)' : '');
+          filas.push([T('Fuentes'), fu]); const fe = fechaIso(capas.sub && capas.sub.d && capas.sub.d.descargado); if (fe) filas.push([T('Comprobado'), fe]); }
         const cp = capacidadDe(i), L = P() && P().lugar, miPais = L && P().pais;
         const toca = miPais ? sitios.find((q) => q[1] === miPais) : null;
         abreModelo(modelo(gr && gr[2] && gr[2].aprox ? T('Cable submarino') + ' · ' + T('trazado aproximado') : T('Cable submarino'), titulo, filas, T('Datos verificados'), {
           sub: lados.length >= 2 ? lados[0].replace(/ \(.*\)$/, '') + ' → ' + lados[lados.length - 1].replace(/ \(.*\)$/, '') : '',
           resumen: [T('Origen'), T('Destino'), T('En servicio desde'), T('Longitud'), T('Capacidad')],
           para: (lados.length >= 2 ? T('Une') + ' ' + lados[0] + ' ' + T('con') + ' ' + lados[lados.length - 1] + ' ' + T('por el fondo del mar.') + ' ' : '') + T('Cuando tus datos cruzan entre esos dos lados —un vídeo, un correo, una copia de seguridad— pueden ir por este cable o por otros paralelos; si uno se corta, el tráfico se reparte por los demás y lo notas como lentitud, no como apagón.') + (toca ? ' ' + T('Llega a tu país por') + ' ' + toca[0] + '.' : '') + (cp && cp.tbps >= 100 ? ' ' + T('Es una de las grandes autopistas: por él cabe el tráfico de decenas de millones de personas a la vez.') : ''),
-          secciones: [{ t: T('Recorrido y profundidad'), claves: [T('Paradas'), T('Trazado'), T('De punto a punto, en línea recta'), T('Profundidad del fondo bajo este tramo'), T('Longitud en el mapa')], abierta: true }, { t: T('Datos'), claves: [T('Dueños'), T('Operador'), T('Capacidad'), T('Longitud'), T('En servicio desde')] }, { t: T('Incidencias y estado'), claves: [T('Incidencias conocidas'), T('Estado')] }],
+          secciones: [{ t: T('Recorrido y profundidad'), claves: [T('Paradas'), T('Trazado'), T('De punto a punto, en línea recta'), T('Profundidad del fondo bajo este tramo'), T('Longitud en el mapa')], abierta: true }, { t: T('Datos'), claves: [T('Dueños'), T('Operador'), T('Capacidad'), T('Longitud'), T('En servicio desde')] }, { t: T('Cómo lo sabemos'), claves: [T('Fuentes'), T('Comprobado')] }, { t: T('Incidencias y estado'), claves: [T('Incidencias conocidas'), T('Estado')] }],
           color: colorSub(i),
         }), x, y);
         return;

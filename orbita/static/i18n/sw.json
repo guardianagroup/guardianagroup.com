@@ -942,7 +942,16 @@
   "Por dónde viajan los datos": "Data hupita wapi",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Kituo hiki kimeunganishwa na mitandao mingine, lakini njia zake halisi si za umma: ramani inaonyesha miundombinu iliyo karibu, si njia iliyothibitishwa ya data yako.",
   "Infraestructura cercana": "Miundombinu iliyo karibu",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Mwendeshaji amethibitishwa na wakala wa GUARDIANA kwa vyanzo viwili vya umma"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Mwendeshaji amethibitishwa na wakala wa GUARDIANA kwa vyanzo viwili vya umma",
+  "Cómo lo sabemos": "Tunajuaje",
+  "Comprobado": "Imehakikiwa",
+  "Siguiente paso": "Hatua inayofuata",
+  "Qué ven de ti las webs": "Tovuti zinaona nini kukuhusu",
+  "Ver la demostración de ZERO": "Tazama onyesho la ZERO",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Umeona data yako hupita wapi. Sasa tazama tovuti zinaona nini kukuhusu, na jinsi ZERO inavyokata kila muunganisho.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Imeundwa upya na wakala wa GUARDIANA kutoka vyanzo vya umma, imethibitishwa na sauti mbili",
+  "Agencia GUARDIANA, dos voces": "Wakala wa GUARDIANA, sauti mbili",
+  "edificios en este campus": "majengo katika eneo hili"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

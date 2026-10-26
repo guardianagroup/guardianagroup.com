@@ -942,7 +942,16 @@
   "Por dónde viajan los datos": "डेटा किस रास्ते जाता है",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "यह केंद्र अन्य नेटवर्कों से जुड़ा है, लेकिन इसके असली मार्ग सार्वजनिक नहीं हैं: नक्शा पास का बुनियादी ढाँचा दिखाता है, आपके डेटा का पुष्ट रास्ता नहीं।",
   "Infraestructura cercana": "पास का बुनियादी ढाँचा",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "GUARDIANA एजेंसी ने दो सार्वजनिक स्रोतों से ऑपरेटर की पुष्टि की"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "GUARDIANA एजेंसी ने दो सार्वजनिक स्रोतों से ऑपरेटर की पुष्टि की",
+  "Cómo lo sabemos": "हमें कैसे पता",
+  "Comprobado": "जाँच की तारीख",
+  "Siguiente paso": "अगला कदम",
+  "Qué ven de ti las webs": "वेबसाइटें आपके बारे में क्या देखती हैं",
+  "Ver la demostración de ZERO": "ZERO का डेमो देखें",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "आपने देखा कि आपका डेटा किस रास्ते जाता है। अब देखें कि वेबसाइटें आपके बारे में क्या देखती हैं, और ZERO हर कनेक्शन कैसे काटता है।",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "GUARDIANA एजेंसी ने सार्वजनिक स्रोतों से पुनर्निर्मित किया, दो आवाज़ों से पुष्ट",
+  "Agencia GUARDIANA, dos voces": "GUARDIANA एजेंसी, दो आवाज़ें",
+  "edificios en este campus": "इमारतें इस परिसर में"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

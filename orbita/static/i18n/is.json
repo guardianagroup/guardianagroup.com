@@ -942,7 +942,16 @@
   "Por dónde viajan los datos": "Hvaða leið gögnin fara",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Þessi stöð tengist öðrum netum, en raunverulegar leiðir hennar eru ekki opinberar: kortið sýnir innviði í nánd, ekki staðfesta leið gagnanna þinna.",
   "Infraestructura cercana": "Innviðir í nánd",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Rekstraraðili staðfestur af GUARDIANA-stofunni með tveimur opinberum heimildum"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Rekstraraðili staðfestur af GUARDIANA-stofunni með tveimur opinberum heimildum",
+  "Cómo lo sabemos": "Hvernig við vitum það",
+  "Comprobado": "Staðfest",
+  "Siguiente paso": "Næsta skref",
+  "Qué ven de ti las webs": "Hvað vefsíður sjá um þig",
+  "Ver la demostración de ZERO": "Sjá kynningu á ZERO",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Þú hefur séð hvert gögnin þín ferðast. Sjáðu nú hvað vefsíður sjá um þig og hvernig ZERO rýfur hverja tengingu.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Endurgert af GUARDIANA-stofunni úr opinberum heimildum, staðfest af tveimur röddum",
+  "Agencia GUARDIANA, dos voces": "GUARDIANA-stofan, tvær raddir",
+  "edificios en este campus": "byggingar á þessu svæði"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

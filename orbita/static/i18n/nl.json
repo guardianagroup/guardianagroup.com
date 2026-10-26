@@ -943,7 +943,16 @@
   "Por dónde viajan los datos": "Waarlangs de data reizen",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Dit centrum is verbonden met andere netwerken, maar de echte routes zijn niet openbaar: de kaart toont de infrastructuur in de buurt, niet de bevestigde weg van uw data.",
   "Infraestructura cercana": "Infrastructuur in de buurt",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Exploitant bevestigd door het GUARDIANA-agentschap met twee openbare bronnen"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Exploitant bevestigd door het GUARDIANA-agentschap met twee openbare bronnen",
+  "Cómo lo sabemos": "Hoe we het weten",
+  "Comprobado": "Gecontroleerd op",
+  "Siguiente paso": "Volgende stap",
+  "Qué ven de ti las webs": "Wat websites van u zien",
+  "Ver la demostración de ZERO": "Bekijk de ZERO-demonstratie",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "U hebt gezien waarlangs uw data reizen. Kijk nu wat websites van u zien en hoe ZERO elke verbinding verbreekt.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Gereconstrueerd door het GUARDIANA-agentschap uit openbare bronnen, bevestigd door twee stemmen",
+  "Agencia GUARDIANA, dos voces": "GUARDIANA-agentschap, twee stemmen",
+  "edificios en este campus": "gebouwen op deze campus"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

@@ -942,7 +942,16 @@
   "Por dónde viajan los datos": "Откъде минават данните",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Този център е свързан с други мрежи, но реалните му маршрути не са публични: картата показва близката инфраструктура, а не потвърдения път на вашите данни.",
   "Infraestructura cercana": "Инфраструктура наблизо",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Операторът е потвърден от агенцията GUARDIANA с два публични източника"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Операторът е потвърден от агенцията GUARDIANA с два публични източника",
+  "Cómo lo sabemos": "Как го знаем",
+  "Comprobado": "Проверено на",
+  "Siguiente paso": "Следваща стъпка",
+  "Qué ven de ti las webs": "Какво виждат сайтовете за вас",
+  "Ver la demostración de ZERO": "Вижте демонстрацията на ZERO",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Видяхте откъде минават данните ви. Сега вижте какво виждат сайтовете за вас и как ZERO прекъсва всяка връзка.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Възстановено от агенцията GUARDIANA по публични източници, потвърдено от два гласа",
+  "Agencia GUARDIANA, dos voces": "Агенция GUARDIANA, два гласа",
+  "edificios en este campus": "сгради в този комплекс"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

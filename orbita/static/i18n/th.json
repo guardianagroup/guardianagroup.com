@@ -942,7 +942,16 @@
   "Por dónde viajan los datos": "ข้อมูลเดินทางผ่านทางไหน",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "ศูนย์นี้เชื่อมต่อกับเครือข่ายอื่น แต่เส้นทางจริงไม่เปิดเผย แผนที่แสดงโครงสร้างพื้นฐานใกล้เคียง ไม่ใช่เส้นทางที่ยืนยันแล้วของข้อมูลของคุณ",
   "Infraestructura cercana": "โครงสร้างพื้นฐานใกล้เคียง",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "ผู้ดำเนินการได้รับการยืนยันจากเอเจนซี GUARDIANA ด้วยแหล่งข้อมูลสาธารณะสองแหล่ง"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "ผู้ดำเนินการได้รับการยืนยันจากเอเจนซี GUARDIANA ด้วยแหล่งข้อมูลสาธารณะสองแหล่ง",
+  "Cómo lo sabemos": "เรารู้ได้อย่างไร",
+  "Comprobado": "ตรวจสอบเมื่อ",
+  "Siguiente paso": "ขั้นตอนถัดไป",
+  "Qué ven de ti las webs": "เว็บไซต์เห็นอะไรเกี่ยวกับคุณ",
+  "Ver la demostración de ZERO": "ดูการสาธิต ZERO",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "คุณได้เห็นแล้วว่าข้อมูลของคุณเดินทางผ่านทางไหน ตอนนี้มาดูว่าเว็บไซต์เห็นอะไรเกี่ยวกับคุณ และ ZERO ตัดการเชื่อมต่อแต่ละรายการอย่างไร",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "สร้างขึ้นใหม่โดยเอเจนซี GUARDIANA จากแหล่งข้อมูลสาธารณะ ยืนยันโดยสองเสียง",
+  "Agencia GUARDIANA, dos voces": "เอเจนซี GUARDIANA สองเสียง",
+  "edificios en este campus": "อาคารในวิทยาเขตนี้"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

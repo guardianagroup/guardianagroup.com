@@ -942,7 +942,16 @@
   "Por dónde viajan los datos": "డేటా ఎటు వెళ్తుంది",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "ఈ కేంద్రం ఇతర నెట్‌వర్క్‌లకు అనుసంధానమై ఉంది, కానీ దాని అసలు మార్గాలు బహిరంగం కావు: మ్యాప్ సమీప మౌలిక సదుపాయాలను చూపుతుంది, మీ డేటా యొక్క ధృవీకరించిన మార్గాన్ని కాదు.",
   "Infraestructura cercana": "సమీప మౌలిక సదుపాయాలు",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "GUARDIANA ఏజెన్సీ రెండు బహిరంగ మూలాలతో ఆపరేటర్‌ను ధృవీకరించింది"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "GUARDIANA ఏజెన్సీ రెండు బహిరంగ మూలాలతో ఆపరేటర్‌ను ధృవీకరించింది",
+  "Cómo lo sabemos": "మాకు ఎలా తెలుసు",
+  "Comprobado": "తనిఖీ చేసినది",
+  "Siguiente paso": "తదుపరి దశ",
+  "Qué ven de ti las webs": "వెబ్‌సైట్లు మీ గురించి ఏమి చూస్తాయి",
+  "Ver la demostración de ZERO": "ZERO ప్రదర్శన చూడండి",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "మీ డేటా ఎటు వెళ్తుందో చూశారు. ఇప్పుడు వెబ్‌సైట్లు మీ గురించి ఏమి చూస్తాయో, ZERO ప్రతి కనెక్షన్‌ను ఎలా కత్తిరిస్తుందో చూడండి.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "GUARDIANA ఏజెన్సీ బహిరంగ మూలాల నుండి పునర్నిర్మించింది, రెండు స్వరాలు ధృవీకరించాయి",
+  "Agencia GUARDIANA, dos voces": "GUARDIANA ఏజెన్సీ, రెండు స్వరాలు",
+  "edificios en este campus": "భవనాలు ఈ ప్రాంగణంలో"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

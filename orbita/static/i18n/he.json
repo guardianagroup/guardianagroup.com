@@ -942,7 +942,16 @@
   "Por dónde viajan los datos": "מאיפה עוברים הנתונים",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "מרכז זה מחובר לרשתות אחרות, אך מסלוליו האמיתיים אינם פומביים: המפה מציגה את התשתית הקרובה, לא את הנתיב המאומת של הנתונים שלכם.",
   "Infraestructura cercana": "תשתית קרובה",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "המפעיל אושר על ידי סוכנות GUARDIANA בשני מקורות ציבוריים"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "המפעיל אושר על ידי סוכנות GUARDIANA בשני מקורות ציבוריים",
+  "Cómo lo sabemos": "איך אנחנו יודעים",
+  "Comprobado": "נבדק בתאריך",
+  "Siguiente paso": "השלב הבא",
+  "Qué ven de ti las webs": "מה אתרים רואים עליכם",
+  "Ver la demostración de ZERO": "צפו בהדגמה של ZERO",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "ראיתם לאן הנתונים שלכם נוסעים. עכשיו ראו מה אתרים רואים עליכם, ואיך ZERO חותך כל חיבור.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "שוחזר על ידי סוכנות GUARDIANA ממקורות ציבוריים, אושר בשני קולות",
+  "Agencia GUARDIANA, dos voces": "סוכנות GUARDIANA, שני קולות",
+  "edificios en este campus": "מבנים בקמפוס הזה"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

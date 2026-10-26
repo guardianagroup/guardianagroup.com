@@ -942,7 +942,16 @@
   "Por dónde viajan los datos": "Merre utaznak az adatok",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Ez a központ más hálózatokhoz kapcsolódik, de valódi útvonalai nem nyilvánosak: a térkép a közeli infrastruktúrát mutatja, nem az adatai megerősített útját.",
   "Infraestructura cercana": "Közeli infrastruktúra",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Az üzemeltetőt a GUARDIANA ügynökség két nyilvános forrással erősítette meg"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Az üzemeltetőt a GUARDIANA ügynökség két nyilvános forrással erősítette meg",
+  "Cómo lo sabemos": "Honnan tudjuk",
+  "Comprobado": "Ellenőrizve",
+  "Siguiente paso": "Következő lépés",
+  "Qué ven de ti las webs": "Mit látnak önről a webhelyek",
+  "Ver la demostración de ZERO": "A ZERO bemutatójának megtekintése",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Látta, merre utaznak az adatai. Most nézze meg, mit látnak önről a webhelyek, és hogyan szakítja meg a ZERO az egyes kapcsolatokat.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "A GUARDIANA ügynökség nyilvános forrásokból rekonstruálta, két hang erősítette meg",
+  "Agencia GUARDIANA, dos voces": "GUARDIANA ügynökség, két hang",
+  "edificios en este campus": "épület ezen a campuson"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

@@ -943,7 +943,16 @@
   "Por dónde viajan los datos": "Veriler nereden geçer",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Bu merkez başka ağlara bağlıdır, ancak gerçek rotaları kamuya açık değildir: harita yakındaki altyapıyı gösterir, verilerinizin doğrulanmış yolunu değil.",
   "Infraestructura cercana": "Yakındaki altyapı",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "İşletmeci, GUARDIANA ajansı tarafından iki kamuya açık kaynakla doğrulandı"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "İşletmeci, GUARDIANA ajansı tarafından iki kamuya açık kaynakla doğrulandı",
+  "Cómo lo sabemos": "Nereden biliyoruz",
+  "Comprobado": "Kontrol tarihi",
+  "Siguiente paso": "Sonraki adım",
+  "Qué ven de ti las webs": "Web siteleri sizin hakkınızda ne görüyor",
+  "Ver la demostración de ZERO": "ZERO gösterimini izleyin",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Verilerinizin nereden geçtiğini gördünüz. Şimdi web sitelerinin sizin hakkınızda ne gördüğünü ve ZERO’nun her bağlantıyı nasıl kestiğini görün.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "GUARDIANA ajansı tarafından kamuya açık kaynaklardan yeniden oluşturuldu, iki sesle doğrulandı",
+  "Agencia GUARDIANA, dos voces": "GUARDIANA ajansı, iki ses",
+  "edificios en este campus": "bina bu kampüste"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

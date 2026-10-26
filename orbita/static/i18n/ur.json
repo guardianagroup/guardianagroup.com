@@ -942,7 +942,16 @@
   "Por dónde viajan los datos": "ڈیٹا کس راستے سے جاتا ہے",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "یہ مرکز دوسرے نیٹ ورکس سے جڑا ہے، لیکن اس کے اصل راستے عوامی نہیں: نقشہ قریبی انفراسٹرکچر دکھاتا ہے، آپ کے ڈیٹا کا تصدیق شدہ راستہ نہیں۔",
   "Infraestructura cercana": "قریبی انفراسٹرکچر",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "آپریٹر کی تصدیق GUARDIANA ایجنسی نے دو عوامی ذرائع سے کی"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "آپریٹر کی تصدیق GUARDIANA ایجنسی نے دو عوامی ذرائع سے کی",
+  "Cómo lo sabemos": "ہمیں کیسے معلوم",
+  "Comprobado": "جانچ کی تاریخ",
+  "Siguiente paso": "اگلا قدم",
+  "Qué ven de ti las webs": "ویب سائٹس آپ کے بارے میں کیا دیکھتی ہیں",
+  "Ver la demostración de ZERO": "ZERO کا مظاہرہ دیکھیں",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "آپ نے دیکھا کہ آپ کا ڈیٹا کس راستے سے جاتا ہے۔ اب دیکھیں کہ ویب سائٹس آپ کے بارے میں کیا دیکھتی ہیں اور ZERO ہر کنکشن کیسے کاٹتا ہے۔",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "GUARDIANA ایجنسی نے عوامی ذرائع سے دوبارہ تشکیل دیا، دو آوازوں نے تصدیق کی",
+  "Agencia GUARDIANA, dos voces": "GUARDIANA ایجنسی، دو آوازیں",
+  "edificios en este campus": "عمارتیں اس کیمپس میں"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

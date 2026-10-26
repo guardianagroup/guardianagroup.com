@@ -942,7 +942,16 @@
   "Por dónde viajan los datos": "Pe unde circulă datele",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Acest centru se conectează la alte rețele, dar rutele sale reale nu sunt publice: harta arată infrastructura din apropiere, nu traseul confirmat al datelor dvs.",
   "Infraestructura cercana": "Infrastructură în apropiere",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Operator confirmat de agenția GUARDIANA cu două surse publice"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Operator confirmat de agenția GUARDIANA cu două surse publice",
+  "Cómo lo sabemos": "De unde știm",
+  "Comprobado": "Verificat la",
+  "Siguiente paso": "Pasul următor",
+  "Qué ven de ti las webs": "Ce văd site-urile despre tine",
+  "Ver la demostración de ZERO": "Vezi demonstrația ZERO",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Ai văzut pe unde circulă datele tale. Acum vezi ce văd site-urile despre tine și cum ZERO taie fiecare conexiune.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Reconstruit de agenția GUARDIANA din surse publice, confirmat de două voci",
+  "Agencia GUARDIANA, dos voces": "Agenția GUARDIANA, două voci",
+  "edificios en este campus": "clădiri în acest campus"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

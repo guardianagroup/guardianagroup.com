@@ -943,7 +943,16 @@
   "Por dónde viajan los datos": "من أين تمرّ البيانات",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "يتصل هذا المركز بشبكات أخرى، لكن مساراته الحقيقية ليست علنية: تعرض الخريطة البنية التحتية القريبة، لا المسار المؤكد لبياناتك.",
   "Infraestructura cercana": "البنية التحتية القريبة",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "المشغّل مؤكَّد من وكالة GUARDIANA بمصدرين عامّين"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "المشغّل مؤكَّد من وكالة GUARDIANA بمصدرين عامّين",
+  "Cómo lo sabemos": "كيف نعرف ذلك",
+  "Comprobado": "تم التحقق في",
+  "Siguiente paso": "الخطوة التالية",
+  "Qué ven de ti las webs": "ما تراه المواقع عنك",
+  "Ver la demostración de ZERO": "شاهد عرض ZERO",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "لقد رأيت أين تسافر بياناتك. الآن انظر ما تراه المواقع عنك، وكيف يقطع ZERO كل اتصال.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "أعادت وكالة GUARDIANA بناءه من مصادر عامة، وأكده صوتان",
+  "Agencia GUARDIANA, dos voces": "وكالة GUARDIANA، صوتان",
+  "edificios en este campus": "مبانٍ في هذا المجمّع"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

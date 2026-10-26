@@ -943,7 +943,16 @@
   "Por dónde viajan los datos": "数据经过哪里",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "此中心与其他网络相连，但实际路由并未公开：地图显示的是附近的基础设施，而非您数据的确认路径。",
   "Infraestructura cercana": "附近的基础设施",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "运营者由 GUARDIANA 机构以两个公开来源确认"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "运营者由 GUARDIANA 机构以两个公开来源确认",
+  "Cómo lo sabemos": "我们如何得知",
+  "Comprobado": "核对日期",
+  "Siguiente paso": "下一步",
+  "Qué ven de ti las webs": "网站看到你的什么",
+  "Ver la demostración de ZERO": "观看 ZERO 演示",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "你已看到数据经过哪里。现在看看网站看到你的什么，以及 ZERO 如何切断每个连接。",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "由 GUARDIANA 机构依公开来源重建，经两个声音确认",
+  "Agencia GUARDIANA, dos voces": "GUARDIANA 机构，两个声音",
+  "edificios en este campus": "栋建筑位于此园区"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

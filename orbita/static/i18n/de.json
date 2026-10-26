@@ -943,7 +943,16 @@
   "Por dónde viajan los datos": "Wohin die Daten reisen",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Dieses Zentrum ist mit anderen Netzen verbunden, aber seine tatsächlichen Routen sind nicht öffentlich: Die Karte zeigt die Infrastruktur in der Nähe, nicht den bestätigten Weg Ihrer Daten.",
   "Infraestructura cercana": "Infrastruktur in der Nähe",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Betreiber von der Agentur GUARDIANA mit zwei öffentlichen Quellen bestätigt"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Betreiber von der Agentur GUARDIANA mit zwei öffentlichen Quellen bestätigt",
+  "Cómo lo sabemos": "Woher wir das wissen",
+  "Comprobado": "Geprüft am",
+  "Siguiente paso": "Nächster Schritt",
+  "Qué ven de ti las webs": "Was Websites von Ihnen sehen",
+  "Ver la demostración de ZERO": "Die ZERO-Demonstration ansehen",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Sie haben gesehen, wohin Ihre Daten reisen. Sehen Sie jetzt, was Websites von Ihnen sehen und wie ZERO jede Verbindung kappt.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Von der Agentur GUARDIANA aus öffentlichen Quellen rekonstruiert, von zwei Stimmen bestätigt",
+  "Agencia GUARDIANA, dos voces": "Agentur GUARDIANA, zwei Stimmen",
+  "edificios en este campus": "Gebäude auf diesem Campus"
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

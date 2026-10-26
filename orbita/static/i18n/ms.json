@@ -942,7 +942,16 @@
   "Por dónde viajan los datos": "Ke mana data bergerak",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Pusat ini bersambung ke rangkaian lain, tetapi laluan sebenarnya tidak umum: peta menunjukkan infrastruktur berdekatan, bukan laluan data anda yang disahkan.",
   "Infraestructura cercana": "Infrastruktur berdekatan",
-  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Pengendali disahkan oleh agensi GUARDIANA dengan dua sumber awam"
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Pengendali disahkan oleh agensi GUARDIANA dengan dua sumber awam",
+  "Cómo lo sabemos": "Bagaimana kami tahu",
+  "Comprobado": "Disemak pada",
+  "Siguiente paso": "Langkah seterusnya",
+  "Qué ven de ti las webs": "Apa yang laman web lihat tentang anda",
+  "Ver la demostración de ZERO": "Lihat demonstrasi ZERO",
+  "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Anda telah melihat ke mana data anda bergerak. Kini lihat apa yang laman web lihat tentang anda, dan bagaimana ZERO memutuskan setiap sambungan.",
+  "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Dibina semula oleh agensi GUARDIANA daripada sumber awam, disahkan oleh dua suara",
+  "Agencia GUARDIANA, dos voces": "Agensi GUARDIANA, dua suara",
+  "edificios en este campus": "bangunan di kampus ini"
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",
