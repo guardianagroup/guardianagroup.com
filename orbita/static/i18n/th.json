@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "ขอคลิกยืนยันหนึ่งครั้ง",
   "Abrir enlace en una pestaña nueva": "เปิดลิงก์ในแท็บใหม่",
   "Copiar la dirección del enlace": "คัดลอกที่อยู่ลิงก์",
-  "Copiar": "คัดลอก"
+  "Copiar": "คัดลอก",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "เว็บไซต์นี้ไม่ให้เบราว์เซอร์ที่ออกจากเซิร์ฟเวอร์เข้า (การป้องกันบอตตามเครือข่าย) เปิดจากเซลล์ไม่ได้ แต่ในเบราว์เซอร์ปกติของคุณเปิดได้"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

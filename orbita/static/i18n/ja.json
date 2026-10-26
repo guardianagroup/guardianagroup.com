@@ -1405,7 +1405,8 @@
   "pide un clic de verificación": "確認のクリックを1回求めます",
   "Abrir enlace en una pestaña nueva": "リンクを新しいタブで開く",
   "Copiar la dirección del enlace": "リンクのアドレスをコピー",
-  "Copiar": "コピー"
+  "Copiar": "コピー",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "このサイトはサーバーから来るブラウザを受け付けません（ネットワーク単位のボット対策）。セルからは開けませんが、いつものブラウザでは開けます。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

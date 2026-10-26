@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "vaatii yhden vahvistusnapsautuksen",
   "Abrir enlace en una pestaña nueva": "Avaa linkki uudessa välilehdessä",
   "Copiar la dirección del enlace": "Kopioi linkin osoite",
-  "Copiar": "Kopioi"
+  "Copiar": "Kopioi",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Tämä sivusto ei päästä sisään palvelimelta tulevia selaimia (verkkokohtainen bottisuojaus). Sitä ei voi avata solusta; tavallisessa selaimessasi voi."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

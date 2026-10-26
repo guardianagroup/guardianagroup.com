@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "humihingi ng isang click na beripikasyon",
   "Abrir enlace en una pestaña nueva": "Buksan ang link sa bagong tab",
   "Copiar la dirección del enlace": "Kopyahin ang address ng link",
-  "Copiar": "Kopyahin"
+  "Copiar": "Kopyahin",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Hindi pinapapasok ng site na ito ang mga browser na galing sa server (anti-bot na proteksyon ayon sa network). Hindi ito mabubuksan mula sa cell; sa karaniwang browser mo, puwede."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

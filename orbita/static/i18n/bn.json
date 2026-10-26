@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "একটি যাচাই ক্লিক চায়",
   "Abrir enlace en una pestaña nueva": "নতুন ট্যাবে লিঙ্ক খুলুন",
   "Copiar la dirección del enlace": "লিঙ্কের ঠিকানা কপি করুন",
-  "Copiar": "কপি করুন"
+  "Copiar": "কপি করুন",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "এই সাইট সার্ভার থেকে আসা ব্রাউজারকে ঢুকতে দেয় না (নেটওয়ার্ক-ভিত্তিক অ্যান্টি-বট সুরক্ষা)। সেল থেকে এটি খোলা যায় না; আপনার সাধারণ ব্রাউজারে যায়।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

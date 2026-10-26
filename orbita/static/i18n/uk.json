@@ -1405,7 +1405,8 @@
   "pide un clic de verificación": "просить один клік перевірки",
   "Abrir enlace en una pestaña nueva": "Відкрити посилання в новій вкладці",
   "Copiar la dirección del enlace": "Копіювати адресу посилання",
-  "Copiar": "Копіювати"
+  "Copiar": "Копіювати",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Цей сайт не пускає браузери, що виходять із сервера (мережевий захист від ботів). З комірки його не відкрити; у вашому звичному браузері — так."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

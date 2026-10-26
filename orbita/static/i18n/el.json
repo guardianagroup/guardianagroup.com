@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "ζητά ένα κλικ επαλήθευσης",
   "Abrir enlace en una pestaña nueva": "Άνοιγμα συνδέσμου σε νέα καρτέλα",
   "Copiar la dirección del enlace": "Αντιγραφή διεύθυνσης συνδέσμου",
-  "Copiar": "Αντιγραφή"
+  "Copiar": "Αντιγραφή",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Αυτός ο ιστότοπος δεν δέχεται προγράμματα περιήγησης που βγαίνουν από διακομιστή (προστασία κατά των ρομπότ ανά δίκτυο). Δεν ανοίγει από το κελί· στον συνηθισμένο σου browser, ναι."
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

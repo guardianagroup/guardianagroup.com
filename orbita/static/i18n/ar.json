@@ -1405,7 +1405,8 @@
   "pide un clic de verificación": "يطلب نقرة تحقق واحدة",
   "Abrir enlace en una pestaña nueva": "فتح الرابط في علامة تبويب جديدة",
   "Copiar la dirección del enlace": "نسخ عنوان الرابط",
-  "Copiar": "نسخ"
+  "Copiar": "نسخ",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "هذا الموقع لا يسمح بدخول المتصفحات القادمة من خادم (حماية من الروبوتات بحسب الشبكة). لا يمكن فتحه من الخلية؛ في متصفحك المعتاد نعم."
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

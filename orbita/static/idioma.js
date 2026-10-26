@@ -1239,6 +1239,7 @@
     'Abrir enlace en una pestaña nueva': ['Open link in a new tab', 'Abrir link em uma nova aba'],
     'Copiar la dirección del enlace': ['Copy link address', 'Copiar o endereço do link'],
     'Copiar': ['Copy', 'Copiar'],
+    'Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.': ['This site does not let in browsers that come from a server (network anti-bot protection). It cannot be opened from the cell; it can in your usual browser.', 'Este site não deixa entrar navegadores que saem de um servidor (proteção antirrobô por rede). Não dá para abrir a partir da célula; no seu navegador de sempre, sim.'],
     'celda en': ['cell in', 'célula em'],
     'Observar': ['Observe', 'Observar'],
     'observar': ['observe', 'observar'],

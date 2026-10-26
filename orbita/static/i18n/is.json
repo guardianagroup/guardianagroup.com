@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "krefst eins staðfestingarsmells",
   "Abrir enlace en una pestaña nueva": "Opna tengil í nýjum flipa",
   "Copiar la dirección del enlace": "Afrita vistfang tengils",
-  "Copiar": "Afrita"
+  "Copiar": "Afrita",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Þessi vefur hleypir ekki inn vöfrum sem koma frá netþjóni (netbundin vörn gegn vélmennum). Ekki er hægt að opna hann úr hólfinu; í venjulega vafranum þínum er það hægt."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

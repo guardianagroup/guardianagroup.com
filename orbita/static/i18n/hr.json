@@ -1403,7 +1403,8 @@
   "pide un clic de verificación": "traži jedan klik za provjeru",
   "Abrir enlace en una pestaña nueva": "Otvori poveznicu u novoj kartici",
   "Copiar la dirección del enlace": "Kopiraj adresu poveznice",
-  "Copiar": "Kopiraj"
+  "Copiar": "Kopiraj",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Ova stranica ne pušta preglednike koji izlaze s poslužitelja (mrežna zaštita od robota). Iz ćelije se ne može otvoriti; u tvom uobičajenom pregledniku može."
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

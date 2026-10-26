@@ -434,6 +434,9 @@ class Sesion {
       if (!req.isNavigationRequest() || req.frame() !== (p || this.act).page.mainFrame()) return;
       const st = r.status(); if (st >= 300 && st < 400) return;
       { const pp = p || this.act; if (pp) { pp.respondio = { url: r.url(), ok: st >= 200 && st < 300 }; } } // la web real respondió (para «Estás en … comprobado»)
+      // 26 Oct 2026: muro antirrobot (as.com/PRISA, Cloudflare, DataDome…): la web rechaza a la celda por salir de un servidor.
+      // Se dice con honestidad en la página; no se reintenta ni se esquiva.
+      if ((st === 403 || st === 429 || st === 503) && (p || this.act) === this.act) this.env({ t: 'muro', host: hostDe(r.url()), estado: st });
       const cadena = []; let q = req.redirectedFrom();
       while (q) { cadena.unshift(hostDe(q.url())); q = q.redirectedFrom(); }
       if (cadena.length >= 2) {

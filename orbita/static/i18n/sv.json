@@ -1405,7 +1405,8 @@
   "pide un clic de verificación": "kräver ett verifieringsklick",
   "Abrir enlace en una pestaña nueva": "Öppna länk i ny flik",
   "Copiar la dirección del enlace": "Kopiera länkadress",
-  "Copiar": "Kopiera"
+  "Copiar": "Kopiera",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Den här webbplatsen släpper inte in webbläsare som kommer från en server (nätverksbaserat botskydd). Den kan inte öppnas från cellen; i din vanliga webbläsare går det."
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",
