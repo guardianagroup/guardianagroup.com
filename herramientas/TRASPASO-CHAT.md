@@ -885,3 +885,18 @@ Encargo vigente del dueño (15:16 y 15:31): agencia (ChatGPT «Alta», Gemini Ar
 - **Datos:** `datos-orbita.yml` con `forzar` vuelve a descargar también los cables. Run 40255832952 falló al guardar (conflicto con mis push a `main`); relanzado 40265090448 a las 03:38 UTC: **no hacer push a `main` hasta que termine**; después traer `cables.json`, `puntos.json` (comprobar `nombra_campus`), `lugares-capas.json` a `web-idiomas`.
 - **Idiomas:** solo es y en están abiertos (`ABIERTOS` en idioma.js; pt no). Para probar los demás en headless hay que inyectar `data-idiomas="todos"` en `<html>` (rev_idiomas.py con `page.route`). Comprobación automática: ninguna clave T() falta en los 39 json; sin «no verificado»; sin marcadores rotos.
 - Versiones: `orbita.js?v=20261026f`, `orbita.css?v=20261026d`, `capas.js?v=20261026p`, `idioma.js?v=20261026k`.
+
+**26 Oct 2026, 03:30–05:00 UTC (25 Oct, 22:30–00:00 Bogotá) · Ronda 39 aplicada, datos frescos, cierre de Órbita**
+- Dueño (22:42): «lo dejo en tus manos»; después de Órbita, **ZERO: diseño y motor interior del navegador**.
+- **Aplicado de la ronda 39** (consenso + dos voces), `main` 79ba587 y ee28245:
+  - «Cómo lo sabemos» (sección plegada) en la ficha completa de cables y centros: fuentes (OpenStreetMap ODbL, Wikidata CC0, agencia + dominios de sus fuentes) y «Comprobado» (fecha de descarga). `fechaIso`, `dominios` en capas.js.
+  - «Siguiente paso» al final de «Ver mi conexión»: botones a Radiografías y a la demo de ZERO (`conexion.js`, `OrbitaPuertas.abre`).
+  - «Empezar» abre una **bienvenida** («Descubre por dónde viajan tus datos», tres caminos: explorar, ver mi conexión, qué ven de ti las webs) en vez de saltar a Radiografías (`radiografias.js`, `.lugar.bienvenida`).
+  - Todo en los 42 idiomas (i18n/*.json + idioma.js).
+  - No hechos (una voz o alto esfuerzo): marco legal por país, cuellos de botella, dependencia exterior, alternativa sin WebGL, modo Explorar/Experto.
+- **Datos del 26 Oct** (run 40265090448, con `forzar`): cables de OpenStreetMap con 5 decimales y forma fina en los 40 km de cada extremo (32.828 vértices); puntos con campus juntados (3.851 centros); `llegadas_tierra.py` ahora también quita el «zigzag» del último punto de ruta en la llegada (32). Queda una «V» de 700 m en Cartagena (la recta cruza Bocagrande): no es error, es la ruta por mar a 2,4 km de malla.
+- **Ronda 38 cerrada:** 16 campus con operador (`fuentes/campus-operadores.json`; `nombra_campus` idempotente; el campus con nombre dice «N edificios en este campus»).
+- **Guardia:** si `lugares-capas.json` no casa con `puntos.json` (publicación entre las dos descargas: un centro de Madrid dijo «Perth»), se vuelve a pedir fresco.
+- Repaso de idiomas en headless con `data-idiomas="todos"` (rev_idiomas.py con `page.route`): ar (RTL), de, ja, ta, ru, zh, el, he, hi, fi, pt-pt sin errores de consola; las noticias y los «¿Sabías que…?» salen en inglés en los idiomas no abiertos (no hay traducción de noticias).
+- Versiones en la web: `orbita.js?v=20261026f`, `capas.js?v=20261026r`, `conexion.js?v=20261026a`, `radiografias.js?v=20261026a`, `idioma.js?v=20261026m`, `orbita.css?v=20261026d`.
+- **Pendiente:** hibernar el ordenador del dueño (pedírselo); ficha de empresa en Radiografías/ZERO/PDF; «publícala» para la portada nueva; abrir los 42 idiomas cuando lo diga el dueño; ZERO (diseño y motor).
