@@ -956,7 +956,9 @@
   "ÓRBITA": "ORBIT",
   "Descubre por dónde viajan tus datos": "Ontdek waarlangs uw data reizen",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Drie wegen: verken de kabels, datacenters en satellieten waar uw digitale leven doorheen gaat; meet uw eigen verbinding; of zie wat elke website van u ziet.",
-  "Explorar el planeta": "De planeet verkennen"
+  "Explorar el planeta": "De planeet verkennen",
+  "Mapa": "Kaart",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "Satellietfoto; dichterbij met wegen en namen"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

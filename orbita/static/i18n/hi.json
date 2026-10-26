@@ -955,7 +955,9 @@
   "ÓRBITA": "ऑर्बिट",
   "Descubre por dónde viajan tus datos": "जानें आपका डेटा किस रास्ते जाता है",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "तीन रास्ते: उन केबलों, डेटा सेंटरों और उपग्रहों को देखें जिनसे आपका डिजिटल जीवन गुज़रता है; अपना कनेक्शन मापें; या देखें कोई भी वेबसाइट आपके बारे में क्या देखती है।",
-  "Explorar el planeta": "ग्रह देखें"
+  "Explorar el planeta": "ग्रह देखें",
+  "Mapa": "मानचित्र",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "उपग्रह फ़ोटो; पास जाने पर सड़कें और नाम भी"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

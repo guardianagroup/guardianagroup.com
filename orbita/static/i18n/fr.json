@@ -956,7 +956,9 @@
   "ÓRBITA": "ORBITE",
   "Descubre por dónde viajan tus datos": "Découvrez par où passent vos données",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Trois chemins : parcourez les câbles, les centres de données et les satellites par lesquels passe votre vie numérique ; mesurez votre propre connexion ; ou voyez ce que n’importe quel site voit de vous.",
-  "Explorar el planeta": "Explorer la planète"
+  "Explorar el planeta": "Explorer la planète",
+  "Mapa": "Carte",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "Photo satellite ; en zoomant, avec les routes et les noms"
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

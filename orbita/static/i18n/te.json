@@ -955,7 +955,9 @@
   "ÓRBITA": "ఆర్బిట్",
   "Descubre por dónde viajan tus datos": "మీ డేటా ఎటు వెళ్తుందో తెలుసుకోండి",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "మూడు మార్గాలు: మీ డిజిటల్ జీవితం దాటి వెళ్ళే కేబుల్స్, డేటా సెంటర్లు, ఉపగ్రహాలను చూడండి; మీ కనెక్షన్‌ను కొలవండి; లేదా ఏ వెబ్‌సైట్ అయినా మీ గురించి ఏమి చూస్తుందో చూడండి.",
-  "Explorar el planeta": "గ్రహాన్ని అన్వేషించండి"
+  "Explorar el planeta": "గ్రహాన్ని అన్వేషించండి",
+  "Mapa": "పటం",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "ఉపగ్రహ చిత్రం; దగ్గరగా వెళ్తే రోడ్లు, పేర్లతో"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

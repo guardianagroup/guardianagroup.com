@@ -955,7 +955,9 @@
   "ÓRBITA": "אורביטה",
   "Descubre por dónde viajan tus datos": "גלו לאן הנתונים שלכם נוסעים",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "שלוש דרכים: סיירו בכבלים, במרכזי הנתונים ובלוויינים שדרכם עוברים חייכם הדיגיטליים; מדדו את החיבור שלכם; או ראו מה כל אתר רואה עליכם.",
-  "Explorar el planeta": "לחקור את כדור הארץ"
+  "Explorar el planeta": "לחקור את כדור הארץ",
+  "Mapa": "מפה",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "תצלום לוויין; בהתקרבות, עם כבישים ושמות"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

@@ -955,7 +955,9 @@
   "ÓRBITA": "ออร์บิตา",
   "Descubre por dónde viajan tus datos": "ค้นพบว่าข้อมูลของคุณเดินทางผ่านทางไหน",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "สามทาง: สำรวจสายเคเบิล ศูนย์ข้อมูล และดาวเทียมที่ชีวิตดิจิทัลของคุณผ่าน วัดการเชื่อมต่อของคุณเอง หรือดูว่าเว็บไซต์ใด ๆ เห็นอะไรเกี่ยวกับคุณ",
-  "Explorar el planeta": "สำรวจดาวเคราะห์"
+  "Explorar el planeta": "สำรวจดาวเคราะห์",
+  "Mapa": "แผนที่",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "ภาพถ่ายดาวเทียม เมื่อซูมเข้าจะมีถนนและชื่อ"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

@@ -514,6 +514,7 @@
   cvT.addEventListener('pointerup', sueltaDedo); cvT.addEventListener('pointercancel', sueltaDedo);
   if (zControl) zControl.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.m) { ponMapa(b.dataset.m === 'limpio'); return; }
     const k = b.dataset.z;
     if (k === 'mapa') { ponMapa(!MAPA_LIMPIO); return; }
     acerca(k === 'mas' ? ZOOM.zt * 1.25 : k === 'menos' ? ZOOM.zt / 1.25 : 1, k === 'mas' ? CX : null, CY); // geometric steps: the same feel at ×1 and at ×12
@@ -531,7 +532,8 @@
     b.setAttribute('aria-pressed', String(MAPA_LIMPIO));
     const t = MAPA_LIMPIO ? T('Volver al mapa en color') : T('Mapa limpio: tierra gris y mar oscuro, sin la foto');
     b.title = t; b.setAttribute('aria-label', t);
-    const e = zControl.querySelector('.mapa-t'); if (e) e.textContent = MAPA_LIMPIO ? T('Limpio') : T('Color');
+    // 26 Oct 2026 (dueño, 01:01: «Color / Limpio no lo entiende nadie»): las dos opciones a la vista, como en cualquier mapa
+    zControl.querySelectorAll('.mapa-t .op').forEach((o) => { const limpio = o.dataset.m === 'limpio'; o.setAttribute('aria-pressed', String(limpio === MAPA_LIMPIO)); o.textContent = limpio ? T('Mapa') : T('Satélite'); o.title = limpio ? T('Mapa limpio: tierra gris y mar oscuro, sin la foto') : T('Foto de satélite; al acercar, con las carreteras y los nombres') ; });
   }
   function ponMapa(limpio) {
     MAPA_LIMPIO = !!limpio;

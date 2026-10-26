@@ -956,7 +956,9 @@
   "ÓRBITA": "ORBITA",
   "Descubre por dónde viajan tus datos": "Verilerinizin nereden geçtiğini keşfedin",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Üç yol: dijital hayatınızın geçtiği kabloları, veri merkezlerini ve uyduları gezin; kendi bağlantınızı ölçün; ya da herhangi bir web sitesinin sizin hakkınızda ne gördüğünü görün.",
-  "Explorar el planeta": "Gezegeni keşfet"
+  "Explorar el planeta": "Gezegeni keşfet",
+  "Mapa": "Harita",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "Uydu fotoğrafı; yaklaşınca yollar ve adlarla"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

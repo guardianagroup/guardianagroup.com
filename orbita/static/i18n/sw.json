@@ -955,7 +955,9 @@
   "ÓRBITA": "ORBITA",
   "Descubre por dónde viajan tus datos": "Gundua data yako hupita wapi",
   "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Njia tatu: tembelea kebo, vituo vya data na setilaiti ambazo maisha yako ya kidijitali hupitia; pima muunganisho wako mwenyewe; au tazama tovuti yoyote inaona nini kukuhusu.",
-  "Explorar el planeta": "Chunguza sayari"
+  "Explorar el planeta": "Chunguza sayari",
+  "Mapa": "Ramani",
+  "Foto de satélite; al acercar, con las carreteras y los nombres": "Picha ya setilaiti; ukikaribia, na barabara na majina"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

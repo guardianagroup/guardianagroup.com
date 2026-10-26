@@ -2,6 +2,7 @@
 <html lang="es" data-tierra="static/tierra/" data-demo="1" data-cortes="0">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://speed.cloudflare.com https://ipinfo.io https://*.amazonaws.com; media-src 'self' blob:; worker-src 'self' blob:; frame-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="referrer" content="no-referrer">
@@ -10,7 +11,7 @@
 <title>GUARDIANA · Órbita</title>
 <link rel="stylesheet" href="static/diseno.css?v=20261025k">
 <link rel="preload" href="static/tierra/dia.jpg" as="image">
-<link rel="stylesheet" href="static/orbita.css?v=20261026d">
+<link rel="stylesheet" href="static/orbita.css?v=20261026e">
 <link rel="stylesheet" href="static/movil.css?v=20261025k">
 </head>
 <body class="dock">
@@ -96,8 +97,8 @@
   <span id="zoom-nivel" class="nivel">×1</span>
   <button type="button" data-z="menos" aria-label="Alejar"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3.5 8h9"/></svg></button>
   <button type="button" data-z="base" class="base" aria-label="Volver al tamaño base" hidden><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a5 5 0 1 0 1.5-3.6M3 2.5v2.4h2.4"/></svg></button>
-  <button type="button" data-z="mapa" class="mapa" aria-pressed="false" aria-label="Mapa limpio: tierra gris y mar oscuro, sin la foto" title="Mapa limpio: tierra gris y mar oscuro, sin la foto"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="M8 2.5a5.5 5.5 0 0 1 0 11z" fill="currentColor" stroke="none"/></svg></button>
-  <span class="mapa-t" aria-hidden="true">Color</span>
+  <button type="button" data-z="mapa" class="mapa" aria-pressed="false" aria-label="Satélite o mapa" title="Satélite o mapa"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="M8 2.5a5.5 5.5 0 0 1 0 11z" fill="currentColor" stroke="none"/></svg></button>
+  <div class="mapa-t" role="group" aria-label="Satélite o mapa"><button type="button" class="op" data-m="color" aria-pressed="true">Satélite</button><button type="button" class="op" data-m="limpio" aria-pressed="false">Mapa</button></div>
 </div>
 
 <section id="ficha" aria-live="polite">
@@ -186,10 +187,10 @@
   </div>
 </section>
 
-<script src="static/idioma.js?v=20261026m"></script>
+<script src="static/idioma.js?v=20261026n"></script>
 <script src="static/descargas.js?v=20261025k"></script>
 <script src="static/orbita-secciones.js?v=20261025k"></script>
-<script src="static/orbita.js?v=20261026f"></script>
+<script src="static/orbita.js?v=20261026g"></script>
 <script src="static/capas.js?v=20261026r"></script>
 <script src="static/ciudades.js?v=20261026b"></script>
 <script src="static/datos-curiosos.js?v=20261025k"></script>
