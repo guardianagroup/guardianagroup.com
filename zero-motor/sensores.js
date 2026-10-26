@@ -204,4 +204,23 @@ module.exports = String.raw`(() => {
   };
   vigila('pbjs', enganchaPrebid);
   vigila('googletag', enganchaGoogle);
+
+  // 26 Oct 2026 (dueño: «no aparecía la mano»): el cursor que pediría la web (mano en enlaces, barra en texto) se cuenta al
+  // motor cuando cambia, y la página lo pinta sobre la pantalla. Solo observación; no toca la web.
+  let ultimoCursor = '';
+  const cursorDe = (el) => {
+    try {
+      while (el && el.nodeType !== 1) el = el.parentNode;
+      if (!el) return 'default';
+      let c = getComputedStyle(el).cursor;
+      if (c === 'auto') {
+        const t = el.closest && el.closest('a[href],button,[role=button],input,textarea,select,summary,label,[contenteditable]');
+        if (!t) c = 'default';
+        else if (t.isContentEditable || (/^(input|textarea)$/i.test(t.tagName) && !/^(button|submit|reset|checkbox|radio|range|color|file|image)$/i.test(t.type || ''))) c = 'text';
+        else c = 'pointer';
+      }
+      return c;
+    } catch (_) { return 'default'; }
+  };
+  addEventListener('mousemove', (e) => { const c = cursorDe(e.target); if (c !== ultimoCursor) { ultimoCursor = c; avisa(JSON.stringify({ clase: 'cursor', cursor: c })); } }, { capture: true, passive: true });
 })();`;
