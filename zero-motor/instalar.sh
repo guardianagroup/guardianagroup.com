@@ -114,6 +114,43 @@ Persistent=true
 WantedBy=timers.target
 EOF
 
+paso "Actualización automática del motor (cada 15 min desde la rama $RAMA)"
+echo "$DOMINIO" > /etc/guardiana/dominio
+cat > "$BASE/actualizar-motor.sh" <<EOF
+#!/usr/bin/env bash
+# Trae la última versión del motor desde el repositorio; deja una marca si cambió (el servicio reinicia o reinstala).
+set -e
+cd "$DIR"
+antes=\$(git rev-parse HEAD)
+inst_antes=\$(sha256sum zero-motor/instalar.sh | cut -c1-16)
+git fetch -q --depth 1 origin "$RAMA"
+git checkout -q -f FETCH_HEAD
+despues=\$(git rev-parse HEAD)
+inst_despues=\$(sha256sum zero-motor/instalar.sh | cut -c1-16)
+rm -f "$BASE/.cambio" "$BASE/.reinstala"
+if [ "\$inst_antes" != "\$inst_despues" ]; then touch "$BASE/.reinstala"; echo "instalador nuevo: se reinstala"
+elif [ "\$antes" != "\$despues" ]; then touch "$BASE/.cambio"; echo "motor actualizado: \$antes → \$despues"; fi
+EOF
+chmod 755 "$BASE/actualizar-motor.sh"
+cat > /etc/systemd/system/zero-actualiza.service <<EOF
+[Unit]
+Description=GUARDIANA ZERO · actualización del motor desde el repositorio
+[Service]
+Type=oneshot
+User=zero
+ExecStart=/usr/bin/bash $BASE/actualizar-motor.sh
+ExecStartPost=+/bin/bash -c 'if [ -f $BASE/.reinstala ]; then rm -f $BASE/.reinstala; bash $DIR/zero-motor/instalar.sh "\$(cat /etc/guardiana/dominio)"; elif [ -f $BASE/.cambio ]; then rm -f $BASE/.cambio; systemctl restart zero-motor; fi'
+EOF
+cat > /etc/systemd/system/zero-actualiza.timer <<EOF
+[Unit]
+Description=GUARDIANA ZERO · comprobar el repositorio cada 15 minutos
+[Timer]
+OnBootSec=10min
+OnUnitActiveSec=15min
+[Install]
+WantedBy=timers.target
+EOF
+
 paso "Playwright $PLAYWRIGHT_VERSION y Chromium"
 cd "$DIR/zero-motor"
 [ -f package.json ] || sudo -u zero npm init -y >/dev/null
@@ -200,6 +237,7 @@ fi
 paso "Arrancando el motor"
 systemctl daemon-reload
 systemctl enable -q zero-listas.timer; systemctl start zero-listas.timer
+systemctl enable -q zero-actualiza.timer; systemctl start zero-actualiza.timer
 systemctl enable -q zero-motor
 systemctl restart zero-motor
 for i in $(seq 1 20); do
