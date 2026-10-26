@@ -1,0 +1,145 @@
+{
+ "nota": "Ronda 38 (25 Oct 2026): campus de OpenStreetMap sin nombre; operador confirmado por ChatGPT (razonamiento alto) y comprobado por Claude en la fuente oficial o en prensa (dos voces). Se aplica en datos_orbita.junta_campus al punto del campus a menos de 1,5 km.",
+ "campus": [
+  {
+   "lat": 36.683,
+   "lon": -78.376,
+   "operador": "Microsoft",
+   "nombre": "Microsoft Boydton Data Center",
+   "fuentes": [
+    "OpenStreetMap (zona industrial «Microsoft Boydton Data Center»)",
+    "https://www.datacenterdynamics.com/en/news/microsoft-is-once-again-expanding-its-virginia-campus/"
+   ]
+  },
+  {
+   "lat": 39.568,
+   "lon": -119.542,
+   "operador": "Apple",
+   "nombre": "Apple · Reno Technology Park",
+   "fuentes": [
+    "https://appleinsider.com/articles/12/06/26/apple_to_invest_1b_in_nevada_data_center_business_facilities.html",
+    "https://datacentermap.com/usa/nevada/reno/apple-sparks-data-center"
+   ]
+  },
+  {
+   "lat": 41.124,
+   "lon": -104.902,
+   "operador": "Microsoft",
+   "nombre": "Microsoft Cheyenne Data Center",
+   "fuentes": [
+    "OpenStreetMap (vía «Microsoft CYS Datacenter»)",
+    "https://baxtel.com/campus/microsoft-bison-business-park-campus"
+   ]
+  },
+  {
+   "lat": 48.649,
+   "lon": 2.226,
+   "operador": "Data4",
+   "nombre": "Data4 Paris-Saclay (Marcoussis)",
+   "fuentes": [
+    "https://www.datacenterdynamics.com/es/noticias/data4-anuncia-planes-para-su-tercer-campus-en-par%C3%ADs/",
+    "https://datacenterhawk.com/marketplace/providers/data4/3-route-de-marcoussis/building-1"
+   ]
+  },
+  {
+   "lat": 46.013,
+   "lon": -98.573,
+   "operador": "Applied Digital",
+   "nombre": "Applied Digital · Polaris Forge 1 (Ellendale)",
+   "fuentes": [
+    "https://www.datacenterdynamics.com/en/news/applied-digital-completes-first-data-center-building-at-north-dakota-campus/",
+    "https://www.datacentermap.com/usa/north-dakota/ellendale/applied-digital-eln-datacenter"
+   ]
+  },
+  {
+   "lat": 41.69,
+   "lon": -86.469,
+   "operador": "Amazon Web Services",
+   "nombre": "AWS New Carlisle (Project Rainier)",
+   "fuentes": [
+    "OpenStreetMap (zona «Project Ranier AWS Data Center»)",
+    "https://baxtel.com (AWS New Carlisle North)"
+   ]
+  },
+  {
+   "lat": 53.424,
+   "lon": 6.864,
+   "operador": "Google",
+   "nombre": "Google Eemshaven",
+   "fuentes": [
+    "https://google.co.in/about/datacenters/locations/eemshaven",
+    "https://www.datacenterdynamics.com/en/news/google-opens-600m-netherlands-data-center/"
+   ]
+  },
+  {
+   "lat": 32.595,
+   "lon": -90.095,
+   "operador": "Amazon Web Services",
+   "nombre": "AWS Canton (Madison County)",
+   "fuentes": [
+    "https://datacenterdynamics.com/en/news/aws-confirmed-as-company-behind-10bn-mississippi-data-center-development",
+    "https://onlinemadison.com/stories/lawmakers-approve-plan-for-10b-amazon-project,94028"
+   ]
+  },
+  {
+   "lat": 60.342,
+   "lon": 25.03,
+   "operador": "Hetzner",
+   "nombre": "Hetzner Helsinki Data Center Park (Tuusula)",
+   "fuentes": [
+    "https://www.businessfinland.fi/en/whats-new/cases/2021/hetzner-data-center-park-is-flourishing-in-tuusula",
+    "https://www.datacenterdynamics.com/en/news/german-infrastructure-provider-hetzner-is-expanding-into-finland/"
+   ]
+  },
+  {
+   "lat": 52.283,
+   "lon": 4.768,
+   "operador": "EdgeConneX",
+   "nombre": "EdgeConneX Amsterdam (Schiphol-Rijk)",
+   "fuentes": [
+    "https://www.datacentermap.com/the-netherlands/schiphol-rijk/edgeconnex-amsterdam-campus/",
+    "https://baxtel.com/data-center/edgeconnex-amsterdam"
+   ]
+  },
+  {
+   "lat": 50.464,
+   "lon": 3.864,
+   "operador": "Google",
+   "nombre": "Google Saint-Ghislain",
+   "fuentes": [
+    "https://www.google.com/about/datacenters/locations/st-ghislain/",
+    "OpenStreetMap (Parc d'activité Ghlin-Baudour Sud)"
+   ]
+  },
+  {
+   "lat": 50.062,
+   "lon": 8.486,
+   "operador": "NTT DATA",
+   "nombre": "NTT Frankfurt 4 (Hattersheim)",
+   "fuentes": [
+    "https://www.nttdata.com/en-ae/services/global-data-centers/global-locations/emea/frankfurt-data-centers/frankfurt-4-data-center",
+    "https://www.datacenterdynamics.com/en/news/ntts-e-shelter-opens-first-phase-frankfurt-4-data-center-campus/"
+   ]
+  },
+  {
+   "lat": 41.516,
+   "lon": -93.721,
+   "operador": "Microsoft",
+   "nombre": "Microsoft West Des Moines",
+   "fuentes": [
+    "https://baxtel.com (Microsoft West Des Moines)",
+    "GPUQuant / Sue Data Centers (ChatGPT, ronda 38)"
+   ]
+  },
+  {
+   "lat": 41.063,
+   "lon": -104.783,
+   "operador": "Microsoft",
+   "nombre": "Microsoft Bison Business Park Data Center",
+   "fuentes": [
+    "OpenStreetMap (zona industrial «Microsoft Bison Business Park Data Center»)",
+    "https://baxtel.com/campus/microsoft-bison-business-park-campus"
+   ]
+  }
+ ]
+}

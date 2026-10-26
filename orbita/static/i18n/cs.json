@@ -941,7 +941,8 @@
   "No implica que este centro use ese cable.": "Neznamená to, že toto centrum ten kabel používá.",
   "Por dónde viajan los datos": "Kudy data putují",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Toto centrum je připojeno k dalším sítím, ale jeho skutečné trasy nejsou veřejné: mapa ukazuje blízkou infrastrukturu, ne potvrzenou cestu vašich dat.",
-  "Infraestructura cercana": "Infrastruktura poblíž"
+  "Infraestructura cercana": "Infrastruktura poblíž",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Provozovatel potvrzen agenturou GUARDIANA ze dvou veřejných zdrojů"
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

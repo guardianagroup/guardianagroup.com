@@ -941,7 +941,8 @@
   "No implica que este centro use ese cable.": "இந்த மையம் அந்தக் கேபிளைப் பயன்படுத்துகிறது என்று இது குறிக்காது.",
   "Por dónde viajan los datos": "தரவு எங்கு செல்கிறது",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "இந்த மையம் பிற பிணையங்களுடன் இணைந்துள்ளது, ஆனால் அதன் உண்மையான பாதைகள் பொதுவில் இல்லை: வரைபடம் அருகிலுள்ள உள்கட்டமைப்பைக் காட்டுகிறது, உங்கள் தரவின் உறுதிப்படுத்தப்பட்ட பாதையை அல்ல.",
-  "Infraestructura cercana": "அருகிலுள்ள உள்கட்டமைப்பு"
+  "Infraestructura cercana": "அருகிலுள்ள உள்கட்டமைப்பு",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "GUARDIANA முகமை இரண்டு பொது ஆதாரங்களுடன் இயக்குநரை உறுதிப்படுத்தியது"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

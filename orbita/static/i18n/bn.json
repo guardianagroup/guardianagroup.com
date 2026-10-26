@@ -941,7 +941,8 @@
   "No implica que este centro use ese cable.": "এর মানে এই নয় যে এই কেন্দ্র ওই কেবল ব্যবহার করে।",
   "Por dónde viajan los datos": "ডেটা কোন পথে যায়",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "এই কেন্দ্র অন্য নেটওয়ার্কের সঙ্গে যুক্ত, কিন্তু এর প্রকৃত রুট প্রকাশ্য নয়: মানচিত্রে কাছের অবকাঠামো দেখানো হয়, আপনার ডেটার নিশ্চিত পথ নয়।",
-  "Infraestructura cercana": "কাছের অবকাঠামো"
+  "Infraestructura cercana": "কাছের অবকাঠামো",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "GUARDIANA এজেন্সি দুটি সর্বজনীন সূত্রে অপারেটর নিশ্চিত করেছে"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

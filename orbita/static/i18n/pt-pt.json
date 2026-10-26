@@ -942,7 +942,8 @@
   "No implica que este centro use ese cable.": "Não implica que este centro use esse cabo.",
   "Por dónde viajan los datos": "Por onde viajam os dados",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Este centro liga-se a outras redes, mas as suas rotas reais não são públicas: o mapa mostra a infraestrutura próxima, não o percurso confirmado dos seus dados.",
-  "Infraestructura cercana": "Infraestrutura próxima"
+  "Infraestructura cercana": "Infraestrutura próxima",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Operador confirmado pela agência GUARDIANA com duas fontes públicas"
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

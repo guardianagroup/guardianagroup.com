@@ -941,7 +941,8 @@
   "No implica que este centro use ese cable.": "Það þýðir ekki að þessi stöð noti þann streng.",
   "Por dónde viajan los datos": "Hvaða leið gögnin fara",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Þessi stöð tengist öðrum netum, en raunverulegar leiðir hennar eru ekki opinberar: kortið sýnir innviði í nánd, ekki staðfesta leið gagnanna þinna.",
-  "Infraestructura cercana": "Innviðir í nánd"
+  "Infraestructura cercana": "Innviðir í nánd",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Rekstraraðili staðfestur af GUARDIANA-stofunni með tveimur opinberum heimildum"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

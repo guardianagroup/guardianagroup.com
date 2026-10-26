@@ -941,7 +941,8 @@
   "No implica que este centro use ese cable.": "ఈ కేంద్రం ఆ కేబుల్‌ను వాడుతుందని దీని అర్థం కాదు.",
   "Por dónde viajan los datos": "డేటా ఎటు వెళ్తుంది",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "ఈ కేంద్రం ఇతర నెట్‌వర్క్‌లకు అనుసంధానమై ఉంది, కానీ దాని అసలు మార్గాలు బహిరంగం కావు: మ్యాప్ సమీప మౌలిక సదుపాయాలను చూపుతుంది, మీ డేటా యొక్క ధృవీకరించిన మార్గాన్ని కాదు.",
-  "Infraestructura cercana": "సమీప మౌలిక సదుపాయాలు"
+  "Infraestructura cercana": "సమీప మౌలిక సదుపాయాలు",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "GUARDIANA ఏజెన్సీ రెండు బహిరంగ మూలాలతో ఆపరేటర్‌ను ధృవీకరించింది"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

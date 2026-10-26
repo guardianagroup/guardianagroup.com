@@ -942,7 +942,8 @@
   "No implica que este centro use ese cable.": "Det betyr ikke at dette senteret bruker den kabelen.",
   "Por dónde viajan los datos": "Hvor dataene reiser",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Dette senteret er koblet til andre nett, men de reelle rutene er ikke offentlige: kartet viser infrastrukturen i nærheten, ikke den bekreftede veien til dataene dine.",
-  "Infraestructura cercana": "Infrastruktur i nærheten"
+  "Infraestructura cercana": "Infrastruktur i nærheten",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Operatør bekreftet av GUARDIANA-byrået med to offentlige kilder"
  },
  "p": {
   "intento": "Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

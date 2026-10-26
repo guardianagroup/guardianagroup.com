@@ -942,7 +942,8 @@
   "No implica que este centro use ese cable.": "이 센터가 그 케이블을 사용한다는 뜻은 아닙니다.",
   "Por dónde viajan los datos": "데이터는 어디로 지나가나",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "이 센터는 다른 네트워크와 연결되어 있지만 실제 경로는 공개되지 않았습니다. 지도는 가까운 인프라를 보여줄 뿐, 귀하의 데이터가 지나는 확인된 경로는 아닙니다.",
-  "Infraestructura cercana": "가까운 인프라"
+  "Infraestructura cercana": "가까운 인프라",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "GUARDIANA 에이전시가 두 개의 공개 출처로 운영사를 확인함"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

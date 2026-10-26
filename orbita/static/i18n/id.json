@@ -941,7 +941,8 @@
   "No implica que este centro use ese cable.": "Ini tidak berarti pusat ini memakai kabel tersebut.",
   "Por dónde viajan los datos": "Lewat mana data berjalan",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Pusat ini terhubung ke jaringan lain, tetapi rute sebenarnya tidak dipublikasikan: peta menampilkan infrastruktur terdekat, bukan jalur data Anda yang terkonfirmasi.",
-  "Infraestructura cercana": "Infrastruktur terdekat"
+  "Infraestructura cercana": "Infrastruktur terdekat",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Operator dikonfirmasi oleh agensi GUARDIANA dengan dua sumber publik"
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

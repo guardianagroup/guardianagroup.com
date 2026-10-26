@@ -1,0 +1,31 @@
+# ChatGPT (razonamiento alto), ronda 38 — N | operador | campus | fuente 1 | fuente 2 | seguro/dudoso
+1 | no sé | | | | dudoso
+2 | (sin fila en la respuesta)
+3 | no sé | | | | dudoso
+4 | Microsoft | Boydton Data Center | Mapcarta | Data Center Record | seguro
+5 | Apple | Reno Technology Park | Mapcarta | DataCenterData | seguro
+6 | Microsoft | Cheyenne Campus | Gobierno de Wyoming | Data Center Map | seguro
+7 | Amazon Web Services | Blanchardstown | StackPath | Data Centers Intel | dudoso
+8 | Bridge Data Centres | MY06 — Sedenak Tech Park | MIDA | Baxtel | seguro
+9 | no sé | | | | dudoso
+10 | Data4 | Paris-Saclay / Marcoussis | Data4 | BtMData | seguro
+11 | Applied Digital | Polaris Forge 1 — Ellendale | Baxtel | Jain | seguro
+12 | Amazon Web Services | Project Rainier — New Carlisle North | Baxtel | Cámara de Comercio de South Bend | seguro
+13 | no sé | | | | dudoso
+14 | no sé | | | | dudoso
+15 | Google | Eemshaven Data Center | Google | BtMData | seguro
+16 | no sé | | | | dudoso
+17 | Sabey Data Centers | Intergate.Quincy | Estado de Washington | Sue Data Centers | seguro
+18 | Microsoft | Quincy Data Center | Estado de Washington | Microsoft | seguro
+19 | no sé | | | | dudoso
+20 | Amazon Web Services | Canton Data Center / Project Atlas | Mapcarta | Mississippi Today | seguro
+21 | no sé | | | | dudoso
+22 | no sé | | | | dudoso
+23 | Princeton Digital Group | JH1 — Sedenak Tech Park | Princeton Digital Group | Baxtel | dudoso
+24 | Hetzner | Data Center Park Helsinki — Tuusula | Invest in Finland | Hetzner | seguro
+25 | EdgeConneX | Amsterdam Schiphol-Rijk — AMS03 | Gobierno neerlandés | OpenStreetMap vía GeoView | seguro
+26 | Google | Saint-Ghislain Data Center | Google | Mapcarta | dudoso
+27 | NTT DATA | Frankfurt 4 | NTT DATA | BtMData | seguro
+28 | Microsoft | Project Ginger East | GPUQuant | Sue Data Centers | seguro
+29 | Microsoft | Bison Business Park | Microsoft | Data Center Map | dudoso
+30 | no sé | | | | dudoso

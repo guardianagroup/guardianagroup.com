@@ -942,7 +942,8 @@
   "No implica que este centro use ese cable.": "Dat betekent niet dat dit centrum die kabel gebruikt.",
   "Por dónde viajan los datos": "Waarlangs de data reizen",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Dit centrum is verbonden met andere netwerken, maar de echte routes zijn niet openbaar: de kaart toont de infrastructuur in de buurt, niet de bevestigde weg van uw data.",
-  "Infraestructura cercana": "Infrastructuur in de buurt"
+  "Infraestructura cercana": "Infrastructuur in de buurt",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Exploitant bevestigd door het GUARDIANA-agentschap met twee openbare bronnen"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

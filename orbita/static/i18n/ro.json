@@ -941,7 +941,8 @@
   "No implica que este centro use ese cable.": "Nu înseamnă că acest centru folosește acel cablu.",
   "Por dónde viajan los datos": "Pe unde circulă datele",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Acest centru se conectează la alte rețele, dar rutele sale reale nu sunt publice: harta arată infrastructura din apropiere, nu traseul confirmat al datelor dvs.",
-  "Infraestructura cercana": "Infrastructură în apropiere"
+  "Infraestructura cercana": "Infrastructură în apropiere",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Operator confirmat de agenția GUARDIANA cu două surse publice"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",
