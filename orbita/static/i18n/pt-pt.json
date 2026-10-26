@@ -1020,7 +1020,10 @@
   "Radiografiar la puja (modo observatorio)": "Radiografar o leilão (modo observatório)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "O leilão corre na célula sem a tua identidade: vês quem licita e quanto; o anúncio e o rastreio continuam cortados. Aos licitantes chega a saída da GUARDIANA e a página que lês.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Selar a célula remota e destruí-la com tudo o que está lá dentro",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Quando o site carregar, aqui verás, por ordem, cada coisa que ele tenta e o que o ZERO faz."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Quando o site carregar, aqui verás, por ordem, cada coisa que ele tenta e o que o ZERO faz.",
+  "¿Han caído en los señuelos?": "Alguém caiu nas iscas?",
+  "Señuelo: un dato marcado ha salido": "Isca: um dado marcado saiu",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "O ZERO coloca na célula dados marcados que ninguém tem motivo para ler (texto escondido, cookie do próprio site, armazenamento local, ligação oculta). Se um deles reaparecer a sair para alguém, vê-lo-ás aqui com a prova. Na demonstração não há iscas."
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

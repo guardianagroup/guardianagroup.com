@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "I-x-ray ang bidding (observatory mode)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Tumatakbo ang auction sa cell nang wala ang iyong pagkakakilanlan: nakikita mo kung sino ang nag-bid at magkano; nananatiling putol ang ad at pagsubaybay. Natatanggap ng mga bidder ang labasan ng GUARDIANA at ang pahinang binabasa mo.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Selyuhan ang remote cell at sirain kasama ang lahat ng nasa loob",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Kapag nag-load ang site, makikita mo rito, sa pagkakasunod, ang bawat sinusubukan nito at ang ginagawa ng ZERO."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Kapag nag-load ang site, makikita mo rito, sa pagkakasunod, ang bawat sinusubukan nito at ang ginagawa ng ZERO.",
+  "¿Han caído en los señuelos?": "May nahuli ba sa pain?",
+  "Señuelo: un dato marcado ha salido": "Pain: lumabas ang isang minarkahang datos",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "Naglalagay ang ZERO sa cell ng mga minarkahang datos na walang dahilan ang sinuman para basahin (nakatagong teksto, sariling cookie ng site, lokal na imbakan, nakatagong link). Kung muling lumitaw ang isa papalabas patungo sa kung sino, makikita mo rito kasama ang ebidensya. Walang pain sa demo."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

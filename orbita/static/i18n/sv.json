@@ -1020,7 +1020,10 @@
   "Radiografiar la puja (modo observatorio)": "Röntga budgivningen (observatorieläge)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Auktionen körs i cellen utan din identitet: du ser vem som bjuder och hur mycket; annonsen och spårningen förblir avklippta. Budgivarna får GUARDIANAs utgång och sidan du läser.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Försegla den fjärrstyrda cellen och förstör den med allt inuti",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "När webbplatsen laddas ser du här i ordning allt den försöker och vad ZERO gör."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "När webbplatsen laddas ser du här i ordning allt den försöker och vad ZERO gör.",
+  "¿Han caído en los señuelos?": "Har någon nappat på betet?",
+  "Señuelo: un dato marcado ha salido": "Bete: en markerad uppgift gick ut",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO placerar markerade uppgifter i cellen som ingen har anledning att läsa (dold text, webbplatsens egen kaka, lokal lagring, dold länk). Om någon av dem dyker upp på väg ut till någon ser du det här med beviset. Demon har inga beten."
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

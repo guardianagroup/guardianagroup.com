@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "לצלם את המכרז (מצב מצפה)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "המכרז רץ בתא בלי הזהות שלך: אתה רואה מי מציע וכמה; הפרסומת והמעקב נשארים חתוכים. המציעים מקבלים את נקודת היציאה של GUARDIANA ואת הדף שאתה קורא.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "לחתום את התא המרוחק ולהשמיד אותו עם כל מה שבתוכו",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "כשהאתר ייטען, תראה כאן לפי הסדר כל דבר שהוא מנסה ומה ZERO עושה."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "כשהאתר ייטען, תראה כאן לפי הסדר כל דבר שהוא מנסה ומה ZERO עושה.",
+  "¿Han caído en los señuelos?": "מישהו נפל בפיתיון?",
+  "Señuelo: un dato marcado ha salido": "פיתיון: נתון מסומן יצא החוצה",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO שותל בתא נתונים מסומנים שלאף אחד אין סיבה לקרוא (טקסט מוסתר, עוגייה של האתר, אחסון מקומי, קישור מוסתר). אם אחד מהם יופיע שוב בדרכו החוצה למישהו, תראה זאת כאן עם הראיה. בהדגמה אין פיתיונות."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

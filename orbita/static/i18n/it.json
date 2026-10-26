@@ -1020,7 +1020,10 @@
   "Radiografiar la puja (modo observatorio)": "Radiografare l'asta (modalità osservatorio)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "L'asta si svolge nella cella senza la tua identità: vedi chi offre e quanto; l'annuncio e il tracciamento restano tagliati. Agli offerenti arrivano l'uscita di GUARDIANA e la pagina che leggi.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Sigillare la cella remota e distruggerla con tutto ciò che contiene",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Quando il sito si carica, qui vedrai, in ordine, ogni cosa che tenta e cosa fa ZERO."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Quando il sito si carica, qui vedrai, in ordine, ogni cosa che tenta e cosa fa ZERO.",
+  "¿Han caído en los señuelos?": "Qualcuno ha abboccato alle esche?",
+  "Señuelo: un dato marcado ha salido": "Esca: un dato marcato è uscito",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO colloca nella cella dati marcati che nessuno ha motivo di leggere (testo nascosto, cookie del sito, memoria locale, link nascosto). Se uno di essi riappare in uscita verso qualcuno, lo vedrai qui con la prova. Nella dimostrazione non ci sono esche."
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

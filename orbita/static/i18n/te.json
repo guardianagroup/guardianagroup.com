@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "వేలాన్ని ఎక్స్-రే చేయండి (అబ్జర్వేటరీ మోడ్)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "వేలం మీ గుర్తింపు లేకుండా సెల్‌లో జరుగుతుంది: ఎవరు ఎంత వేలం వేస్తారో చూస్తారు; ప్రకటన మరియు ట్రాకింగ్ కత్తిరించబడే ఉంటాయి. వేలందారులకు GUARDIANA నిష్క్రమణ మరియు మీరు చదివే పేజీ చేరుతాయి.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "రిమోట్ సెల్‌ను సీల్ చేసి లోపల ఉన్నదంతటితో నాశనం చేయండి",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "సైట్ లోడ్ అయినప్పుడు, అది ప్రయత్నించే ప్రతి విషయం మరియు ZERO ఏమి చేస్తుందో ఇక్కడ క్రమంగా చూస్తారు."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "సైట్ లోడ్ అయినప్పుడు, అది ప్రయత్నించే ప్రతి విషయం మరియు ZERO ఏమి చేస్తుందో ఇక్కడ క్రమంగా చూస్తారు.",
+  "¿Han caído en los señuelos?": "ఎవరైనా ఎరకు చిక్కారా?",
+  "Señuelo: un dato marcado ha salido": "ఎర: గుర్తించిన డేటా బయటకు వెళ్లింది",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ఎవరికీ చదవడానికి కారణం లేని గుర్తించిన డేటాను (దాచిన టెక్స్ట్, సైట్ స్వంత కుకీ, లోకల్ స్టోరేజ్, దాచిన లింక్) ZERO సెల్‌లో ఉంచుతుంది. వాటిలో ఒకటి ఎవరికైనా బయటకు వెళ్తూ మళ్లీ కనిపిస్తే, సాక్ష్యంతో ఇక్కడ చూస్తారు. డెమోలో ఎరలు లేవు."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

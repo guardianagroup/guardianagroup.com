@@ -1020,7 +1020,10 @@
   "Radiografiar la puja (modo observatorio)": "Просветить торги (режим обсерватории)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Аукцион идёт в ячейке без вашей личности: вы видите, кто и сколько предлагает; реклама и слежка остаются отрезанными. Участникам достаются выход GUARDIANA и страница, которую вы читаете.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Запечатать удалённую ячейку и уничтожить её со всем содержимым",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Когда сайт загрузится, здесь вы увидите по порядку всё, что он пытается сделать, и что делает ZERO."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Когда сайт загрузится, здесь вы увидите по порядку всё, что он пытается сделать, и что делает ZERO.",
+  "¿Han caído en los señuelos?": "Кто-нибудь клюнул на приманку?",
+  "Señuelo: un dato marcado ha salido": "Приманка: помеченные данные ушли наружу",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO размещает в ячейке помеченные данные, читать которые никому не нужно (скрытый текст, собственная cookie сайта, локальное хранилище, скрытая ссылка). Если одно из них снова появится на пути наружу к кому-то, вы увидите это здесь с доказательством. В демонстрации приманок нет."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

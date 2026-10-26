@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "เอกซเรย์การประมูล (โหมดหอสังเกตการณ์)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "การประมูลทำงานในเซลล์โดยไม่มีตัวตนของคุณ: คุณเห็นว่าใครประมูลและเท่าไร โฆษณาและการติดตามยังคงถูกตัด ผู้ประมูลจะได้รับจุดออกของ GUARDIANA และหน้าที่คุณกำลังอ่าน",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "ผนึกเซลล์ระยะไกลและทำลายพร้อมทุกอย่างภายใน",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "เมื่อเว็บไซต์โหลด คุณจะเห็นที่นี่ตามลำดับว่ามันพยายามทำอะไรและ ZERO ทำอะไร"
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "เมื่อเว็บไซต์โหลด คุณจะเห็นที่นี่ตามลำดับว่ามันพยายามทำอะไรและ ZERO ทำอะไร",
+  "¿Han caído en los señuelos?": "มีใครติดกับดักไหม?",
+  "Señuelo: un dato marcado ha salido": "เหยื่อล่อ: ข้อมูลที่ทำเครื่องหมายหลุดออกไป",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO วางข้อมูลที่ทำเครื่องหมายไว้ในเซลล์ซึ่งไม่มีใครมีเหตุผลที่จะอ่าน (ข้อความซ่อน คุกกี้ของเว็บไซต์เอง ที่เก็บข้อมูลในเครื่อง ลิงก์ซ่อน) หากรายการใดปรากฏอีกครั้งระหว่างถูกส่งออกไปหาใครบางคน คุณจะเห็นที่นี่พร้อมหลักฐาน ในเดโมไม่มีเหยื่อล่อ"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

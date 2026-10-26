@@ -1020,7 +1020,10 @@
   "Radiografiar la puja (modo observatorio)": "Prześwietl licytację (tryb obserwatorium)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Aukcja odbywa się w komórce bez twojej tożsamości: widzisz, kto licytuje i ile; reklama i śledzenie pozostają odcięte. Licytujący otrzymują wyjście GUARDIANA i stronę, którą czytasz.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Zapieczętuj zdalną komórkę i zniszcz ją ze wszystkim w środku",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Gdy witryna się załaduje, zobaczysz tu po kolei wszystko, czego próbuje, i co robi ZERO."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Gdy witryna się załaduje, zobaczysz tu po kolei wszystko, czego próbuje, i co robi ZERO.",
+  "¿Han caído en los señuelos?": "Czy ktoś połknął przynętę?",
+  "Señuelo: un dato marcado ha salido": "Przynęta: oznaczona dana wyszła",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO umieszcza w komórce oznaczone dane, których nikt nie ma powodu czytać (ukryty tekst, własny plik cookie witryny, pamięć lokalna, ukryty link). Jeśli któreś z nich pojawi się ponownie w drodze do kogoś, zobaczysz to tutaj wraz z dowodem. W demonstracji nie ma przynęt."
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "Piga eksirei zabuni (hali ya uangalizi)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Mnada unafanyika kwenye seli bila utambulisho wako: unaona nani anatoa zabuni na kiasi gani; tangazo na ufuatiliaji vinabaki vimekatwa. Wazabuni hupokea njia ya kutokea ya GUARDIANA na ukurasa unaosoma.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Funga seli ya mbali na uiharibu pamoja na vyote vilivyomo",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Tovuti ikipakia, hapa utaona kwa mpangilio kila kitu inachojaribu na kile ZERO inachofanya."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Tovuti ikipakia, hapa utaona kwa mpangilio kila kitu inachojaribu na kile ZERO inachofanya.",
+  "¿Han caído en los señuelos?": "Kuna aliyenasa chambo?",
+  "Señuelo: un dato marcado ha salido": "Chambo: data iliyowekwa alama imetoka",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO huweka kwenye seli data zilizowekwa alama ambazo hakuna mtu ana sababu ya kuzisoma (maandishi yaliyofichwa, kidakuzi cha tovuti yenyewe, hifadhi ya ndani, kiungo kilichofichwa). Ikiwa mojawapo itaonekana tena ikitoka kwenda kwa mtu, utaiona hapa pamoja na ushahidi. Katika onyesho hakuna chambo."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

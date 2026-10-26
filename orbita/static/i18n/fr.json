@@ -1020,7 +1020,10 @@
   "Radiografiar la puja (modo observatorio)": "Radiographier l'enchère (mode observatoire)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "L'enchère se déroule dans la cellule sans ton identité : tu vois qui enchérit et combien ; la publicité et le pistage restent coupés. Les enchérisseurs reçoivent la sortie de GUARDIANA et la page que tu lis.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Sceller la cellule distante et la détruire avec tout ce qu'elle contient",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Quand le site se charge, tu verras ici, dans l'ordre, chaque chose qu'il tente et ce que fait ZERO."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Quand le site se charge, tu verras ici, dans l'ordre, chaque chose qu'il tente et ce que fait ZERO.",
+  "¿Han caído en los señuelos?": "Quelqu'un a-t-il mordu aux leurres ?",
+  "Señuelo: un dato marcado ha salido": "Leurre : une donnée marquée est sortie",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO place dans la cellule des données marquées que personne n'a de raison de lire (texte caché, cookie propre au site, stockage local, lien caché). Si l'une d'elles réapparaît en sortant vers quelqu'un, tu le verras ici avec la preuve. La démonstration n'a pas de leurres."
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

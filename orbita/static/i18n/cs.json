@@ -1019,7 +1019,10 @@
   "Radiografiar la puja (modo observatorio)": "Prosvítit dražbu (režim observatoře)",
   "La subasta corre en la celda sin tu identidad: ves quién puja y cuánto; el anuncio y el seguimiento siguen cortados. A los pujadores les llega la salida de GUARDIANA y la página que lees.": "Dražba běží v buňce bez tvé identity: vidíš, kdo přihazuje a kolik; reklama i sledování zůstávají odříznuté. K dražitelům se dostane výstup GUARDIANA a stránka, kterou čteš.",
   "Sellar la celda remota y destruirla con todo lo que hay dentro": "Zapečetit vzdálenou buňku a zničit ji se vším uvnitř",
-  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Až se web načte, uvidíš tu v pořadí každou věc, o kterou se pokusí, a co ZERO udělá."
+  "Cuando la web cargue, aquí verás, en orden, cada cosa que intenta y lo que hace ZERO.": "Až se web načte, uvidíš tu v pořadí každou věc, o kterou se pokusí, a co ZERO udělá.",
+  "¿Han caído en los señuelos?": "Někdo se chytil na návnadu?",
+  "Señuelo: un dato marcado ha salido": "Návnada: označený údaj odešel",
+  "ZERO planta en la celda datos marcados que nadie tiene motivo para leer (texto escondido, cookie propia, almacén local, enlace oculto). Si uno reaparece saliendo hacia alguien, lo verás aquí con la evidencia. En la demostración no hay señuelos.": "ZERO do buňky nasazuje označená data, která nikdo nemá důvod číst (skrytý text, vlastní cookie, místní úložiště, skrytý odkaz). Pokud se některé objeví na cestě ven k někomu, uvidíš to tady s důkazem. V ukázce návnady nejsou."
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",
