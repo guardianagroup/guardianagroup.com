@@ -223,7 +223,7 @@ class Sesion {
     const tipo = this.tipoDe(req);
     if (tipo === 'popup') { if (process.env.ZERO_DEBUG) console.log('popup abortado:', url.slice(0, 80)); return route.abort('blockedbyclient').catch(() => {}); } // las ventanas nuevas no se abren en la celda
     const principal = tipo === 'document';
-    const pest = this.pestanaDeReq(req) || this.act; const st = pest ? pest.stats : Sesion.statsNuevo();
+    const pest = this.pestanaDeReq(req) || this.act; let st = pest ? pest.stats : Sesion.statsNuevo(); // let: se reasigna al cambiar de web (antes era const y la segunda web de cada pestaña fallaba con ERR_FAILED)
     const origen = principal ? host : hostDe(pest ? pest.page.url() : '') || host;
     const tercero = baseDominio(host) !== baseDominio(origen);
     let postData = null; try { postData = req.postData(); } catch (_) {}
