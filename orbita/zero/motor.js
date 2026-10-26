@@ -8,8 +8,19 @@
   let URL_MOTOR = P.get('motor');
   try { if (URL_MOTOR) localStorage.setItem('zeroMotor', URL_MOTOR); else if (P.get('motor') === '') localStorage.removeItem('zeroMotor'); else URL_MOTOR = localStorage.getItem('zeroMotor'); } catch (_) {}
   const M = (window.ZeroMotor = { activo: !!URL_MOTOR, url: URL_MOTOR, estado: 'apagado', lista: null, sucesos: [], observatorio: false });
-  if (!URL_MOTOR) return;
+  // Motor de GUARDIANA por defecto cuando la página se sirve desde guardianagroup.com: se usa solo si responde a /salud en
+  // menos de tres segundos; si no, la página sigue siendo la demostración (y nada se guarda en el equipo). ?motor= vacío lo evita.
+  const POR_DEFECTO = /(^|\.)guardianagroup\.com$/i.test(location.hostname) ? 'wss://motor.guardianagroup.com' : '';
+  if (URL_MOTOR) arranca();
+  else if (POR_DEFECTO && P.get('motor') === null) {
+    const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 3000);
+    fetch(POR_DEFECTO.replace(/^wss:/, 'https:') + '/salud', { signal: ctl.signal, cache: 'no-store', credentials: 'omit' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => { clearTimeout(tm); if (j && j.ok && M.estado === 'apagado') { URL_MOTOR = POR_DEFECTO; M.activo = true; M.url = URL_MOTOR; arranca(); } })
+      .catch(() => {});
+  }
 
+  function arranca() {
   const $ = (s) => document.querySelector(s);
   const stage = $('#stage'), web = $('#web');
   const cv = document.createElement('canvas'); cv.id = 'pantalla'; cv.tabIndex = 0; cv.setAttribute('aria-label', 'Web abierta en la celda remota de ZERO'); cv.width = 1064; cv.height = 800;
@@ -108,4 +119,5 @@
   M.reanudar = () => env({ t: 'alerta', accion: 'reanudar' });
   M.enfoca = () => cv.focus();
   conecta();
+  }
 })();
