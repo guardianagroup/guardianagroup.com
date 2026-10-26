@@ -1,0 +1,6 @@
+#cloud-config
+# GUARDIANA ZERO · motor: pega este texto en «Cloud config» (user data) al crear el servidor en Hetzner (Ubuntu 24.04).
+# El servidor se instala solo al arrancar (unos 5–8 minutos) y se mantiene actualizado desde el repositorio.
+# Registro de la instalación: /var/log/zero-instalacion.log
+runcmd:
+  - [bash, -c, "curl -fsSL https://raw.githubusercontent.com/guardianagroup/guardianagroup.com/main/zero-motor/instalar.sh | bash -s -- motor.guardianagroup.com > /var/log/zero-instalacion.log 2>&1"]
