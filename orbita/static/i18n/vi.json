@@ -952,7 +952,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Bạn đã thấy dữ liệu của mình đi qua đâu. Giờ hãy xem các trang web thấy gì về bạn, và ZERO cắt từng kết nối như thế nào.",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Được cơ quan GUARDIANA dựng lại từ các nguồn công khai, được hai tiếng nói xác nhận",
   "Agencia GUARDIANA, dos voces": "Cơ quan GUARDIANA, hai tiếng nói",
-  "edificios en este campus": "tòa nhà trong khu này"
+  "edificios en este campus": "tòa nhà trong khu này",
+  "ÓRBITA": "ORBITA",
+  "Descubre por dónde viajan tus datos": "Khám phá dữ liệu của bạn đi qua đâu",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Ba con đường: khám phá các tuyến cáp, trung tâm dữ liệu và vệ tinh mà đời sống số của bạn đi qua; đo kết nối của chính bạn; hoặc xem bất kỳ trang web nào thấy gì về bạn.",
+  "Explorar el planeta": "Khám phá hành tinh"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

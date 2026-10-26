@@ -951,7 +951,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Ai văzut pe unde circulă datele tale. Acum vezi ce văd site-urile despre tine și cum ZERO taie fiecare conexiune.",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Reconstruit de agenția GUARDIANA din surse publice, confirmat de două voci",
   "Agencia GUARDIANA, dos voces": "Agenția GUARDIANA, două voci",
-  "edificios en este campus": "clădiri în acest campus"
+  "edificios en este campus": "clădiri în acest campus",
+  "ÓRBITA": "ORBITA",
+  "Descubre por dónde viajan tus datos": "Descoperă pe unde circulă datele tale",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Trei căi: parcurge cablurile, centrele de date și sateliții prin care trece viața ta digitală; măsoară propria conexiune; sau vezi ce vede despre tine orice site.",
+  "Explorar el planeta": "Explorează planeta"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

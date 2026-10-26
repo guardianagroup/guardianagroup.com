@@ -951,7 +951,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "คุณได้เห็นแล้วว่าข้อมูลของคุณเดินทางผ่านทางไหน ตอนนี้มาดูว่าเว็บไซต์เห็นอะไรเกี่ยวกับคุณ และ ZERO ตัดการเชื่อมต่อแต่ละรายการอย่างไร",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "สร้างขึ้นใหม่โดยเอเจนซี GUARDIANA จากแหล่งข้อมูลสาธารณะ ยืนยันโดยสองเสียง",
   "Agencia GUARDIANA, dos voces": "เอเจนซี GUARDIANA สองเสียง",
-  "edificios en este campus": "อาคารในวิทยาเขตนี้"
+  "edificios en este campus": "อาคารในวิทยาเขตนี้",
+  "ÓRBITA": "ออร์บิตา",
+  "Descubre por dónde viajan tus datos": "ค้นพบว่าข้อมูลของคุณเดินทางผ่านทางไหน",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "สามทาง: สำรวจสายเคเบิล ศูนย์ข้อมูล และดาวเทียมที่ชีวิตดิจิทัลของคุณผ่าน วัดการเชื่อมต่อของคุณเอง หรือดูว่าเว็บไซต์ใด ๆ เห็นอะไรเกี่ยวกับคุณ",
+  "Explorar el planeta": "สำรวจดาวเคราะห์"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

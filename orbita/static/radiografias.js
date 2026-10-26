@@ -142,10 +142,32 @@
     boton = document.createElement('button'); boton.type = 'button'; boton.id = 'empezar'; boton.className = 'empezar'; boton.hidden = true;
     boton.setAttribute('aria-controls', 'radiografias');
     boton.innerHTML = '<span></span>' + FLECHA; boton.querySelector('span').textContent = T('Empezar');
-    boton.addEventListener('click', () => { empieza(); if (window.OrbitaPuertas) window.OrbitaPuertas.abre('radiografias'); else abre(); });
+    // 25 Oct 2026 (agency round 39, two voices: «una bienvenida que explique para qué sirve»): «Empezar» opens a short
+    // welcome with the three ways in, instead of jumping straight to Radiografías
+    boton.addEventListener('click', () => { bienvenida(); });
     document.body.append(boton);
     return boton;
   }
+  let bienv = null;
+  function cierraBienvenida() { if (bienv) { bienv.remove(); bienv = null; } }
+  function bienvenida() {
+    cierraBienvenida();
+    bienv = document.createElement('div'); bienv.className = 'lugar bienvenida'; bienv.setAttribute('role', 'dialog'); bienv.setAttribute('aria-modal', 'true');
+    const caja = document.createElement('div'); caja.className = 'lugar-caja';
+    const k = document.createElement('div'); k.className = 'k'; k.textContent = T('ÓRBITA');
+    const h = document.createElement('h2'); h.textContent = T('Descubre por dónde viajan tus datos');
+    const p = document.createElement('p'); p.textContent = T('Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.');
+    const acc = document.createElement('div'); acc.className = 'acciones';
+    const mk = (txt, cls, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; b.textContent = T(txt); b.addEventListener('click', () => { cierraBienvenida(); empieza(); fn(); }); acc.append(b); return b; };
+    const b1 = mk('Explorar el planeta', 'boton principal', () => {});
+    mk('Ver mi conexión', 'boton', () => { const c = document.getElementById('conexion-btn'); if (c) c.click(); });
+    mk('Qué ven de ti las webs', 'boton', () => { if (window.OrbitaPuertas) window.OrbitaPuertas.abre('radiografias'); else abre(); });
+    caja.append(k, h, p, acc); bienv.append(caja); document.body.append(bienv);
+    bienv.addEventListener('click', (e) => { if (e.target === bienv) { cierraBienvenida(); empieza(); } });
+    b1.focus();
+  }
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && bienv) { cierraBienvenida(); empieza(); } });
+  addEventListener('guardiana-idioma', () => { if (bienv) bienvenida(); });
   function colocaBoton() {
     if (!boton || boton.hidden) return true;
     const h = window.OrbitaHueco && window.OrbitaHueco(); if (!h) return true;

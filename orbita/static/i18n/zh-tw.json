@@ -952,7 +952,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "你已看到資料經過哪裡。現在看看網站看到你的什麼，以及 ZERO 如何切斷每個連線。",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "由 GUARDIANA 機構依公開來源重建，經兩個聲音確認",
   "Agencia GUARDIANA, dos voces": "GUARDIANA 機構，兩個聲音",
-  "edificios en este campus": "棟建築位於此園區"
+  "edificios en este campus": "棟建築位於此園區",
+  "ÓRBITA": "軌道",
+  "Descubre por dónde viajan tus datos": "發現你的資料經過哪裡",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "三條路：走訪你的數位生活所經過的電纜、資料中心與衛星；測量你自己的連線；或看看任何網站看到你的什麼。",
+  "Explorar el planeta": "探索地球"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

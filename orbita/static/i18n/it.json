@@ -952,7 +952,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Hai visto da dove passano i tuoi dati. Ora guarda cosa vedono di te i siti e come ZERO taglia ogni connessione.",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Ricostruito dall’agenzia GUARDIANA da fonti pubbliche, confermato da due voci",
   "Agencia GUARDIANA, dos voces": "Agenzia GUARDIANA, due voci",
-  "edificios en este campus": "edifici in questo campus"
+  "edificios en este campus": "edifici in questo campus",
+  "ÓRBITA": "ORBITA",
+  "Descubre por dónde viajan tus datos": "Scopri da dove passano i tuoi dati",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Tre strade: percorri i cavi, i data center e i satelliti attraverso cui passa la tua vita digitale; misura la tua connessione; o guarda cosa vede di te qualsiasi sito.",
+  "Explorar el planeta": "Esplora il pianeta"
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

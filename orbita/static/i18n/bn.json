@@ -951,7 +951,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "আপনার ডেটা কোন পথে যায় তা দেখেছেন। এবার দেখুন ওয়েবসাইটগুলো আপনার সম্পর্কে কী দেখে, আর ZERO কীভাবে প্রতিটি সংযোগ কাটে।",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "GUARDIANA এজেন্সি সর্বজনীন সূত্র থেকে পুনর্গঠন করেছে, দুটি কণ্ঠ নিশ্চিত করেছে",
   "Agencia GUARDIANA, dos voces": "GUARDIANA এজেন্সি, দুটি কণ্ঠ",
-  "edificios en este campus": "ভবন এই ক্যাম্পাসে"
+  "edificios en este campus": "ভবন এই ক্যাম্পাসে",
+  "ÓRBITA": "অরবিট",
+  "Descubre por dónde viajan tus datos": "আপনার ডেটা কোন পথে যায় তা আবিষ্কার করুন",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "তিনটি পথ: আপনার ডিজিটাল জীবন যে কেবল, ডেটা সেন্টার ও স্যাটেলাইটের মধ্য দিয়ে যায় তা ঘুরে দেখুন; নিজের সংযোগ মাপুন; অথবা দেখুন যেকোনো ওয়েবসাইট আপনার সম্পর্কে কী দেখে।",
+  "Explorar el planeta": "গ্রহ ঘুরে দেখুন"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

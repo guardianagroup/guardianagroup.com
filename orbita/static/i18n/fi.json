@@ -951,7 +951,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Näit, mitä kautta datasi kulkee. Katso nyt, mitä verkkosivut näkevät sinusta ja miten ZERO katkaisee jokaisen yhteyden.",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "GUARDIANA-toimiston julkisista lähteistä kokoama, kahden äänen vahvistama",
   "Agencia GUARDIANA, dos voces": "GUARDIANA-toimisto, kaksi ääntä",
-  "edificios en este campus": "rakennusta tällä kampuksella"
+  "edificios en este campus": "rakennusta tällä kampuksella",
+  "ÓRBITA": "ORBIT",
+  "Descubre por dónde viajan tus datos": "Katso, mitä kautta datasi kulkee",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Kolme reittiä: tutki kaapeleita, datakeskuksia ja satelliitteja, joiden kautta digitaalinen elämäsi kulkee; mittaa oma yhteytesi; tai katso, mitä mikä tahansa verkkosivu näkee sinusta.",
+  "Explorar el planeta": "Tutki planeettaa"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

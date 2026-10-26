@@ -952,7 +952,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "데이터가 어디로 지나가는지 보셨습니다. 이제 웹사이트가 나에 대해 무엇을 보는지, ZERO가 각 연결을 어떻게 차단하는지 확인해 보세요.",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "GUARDIANA 에이전시가 공개 출처로 재구성, 두 목소리로 확인",
   "Agencia GUARDIANA, dos voces": "GUARDIANA 에이전시, 두 목소리",
-  "edificios en este campus": "개 건물(이 캠퍼스)"
+  "edificios en este campus": "개 건물(이 캠퍼스)",
+  "ÓRBITA": "오르비타",
+  "Descubre por dónde viajan tus datos": "데이터가 어디로 지나가는지 알아보기",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "세 가지 길: 디지털 생활이 지나는 케이블·데이터센터·위성을 둘러보거나, 내 연결을 측정하거나, 웹사이트가 나에 대해 무엇을 보는지 확인하세요.",
+  "Explorar el planeta": "행성 탐색"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

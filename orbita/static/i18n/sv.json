@@ -952,7 +952,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Du har sett vart dina data färdas. Se nu vad webbplatser ser om dig och hur ZERO bryter varje anslutning.",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Rekonstruerat av GUARDIANA-byrån från offentliga källor, bekräftat av två röster",
   "Agencia GUARDIANA, dos voces": "GUARDIANA-byrån, två röster",
-  "edificios en este campus": "byggnader på detta campus"
+  "edificios en este campus": "byggnader på detta campus",
+  "ÓRBITA": "ORBIT",
+  "Descubre por dónde viajan tus datos": "Upptäck vart dina data färdas",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Tre vägar: utforska kablarna, datacentren och satelliterna som ditt digitala liv passerar; mät din egen anslutning; eller se vad vilken webbplats som helst ser om dig.",
+  "Explorar el planeta": "Utforska planeten"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

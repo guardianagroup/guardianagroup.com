@@ -951,7 +951,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Látta, merre utaznak az adatai. Most nézze meg, mit látnak önről a webhelyek, és hogyan szakítja meg a ZERO az egyes kapcsolatokat.",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "A GUARDIANA ügynökség nyilvános forrásokból rekonstruálta, két hang erősítette meg",
   "Agencia GUARDIANA, dos voces": "GUARDIANA ügynökség, két hang",
-  "edificios en este campus": "épület ezen a campuson"
+  "edificios en este campus": "épület ezen a campuson",
+  "ÓRBITA": "ORBITA",
+  "Descubre por dónde viajan tus datos": "Fedezze fel, merre utaznak az adatai",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Három út: járja be a kábeleket, adatközpontokat és műholdakat, amelyeken a digitális élete áthalad; mérje meg a saját kapcsolatát; vagy nézze meg, mit lát önről bármelyik webhely.",
+  "Explorar el planeta": "A bolygó felfedezése"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

@@ -952,7 +952,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "データがどこを通るかを見ました。次は、ウェブサイトがあなたの何を見ているか、ZEROがどのように各接続を遮断するかを見てください。",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "GUARDIANAエージェンシーが公開情報源から再構成し、2つの声が確認",
   "Agencia GUARDIANA, dos voces": "GUARDIANAエージェンシー、2つの声",
-  "edificios en este campus": "棟（このキャンパス内）"
+  "edificios en este campus": "棟（このキャンパス内）",
+  "ÓRBITA": "オービタ",
+  "Descubre por dónde viajan tus datos": "データがどこを通るかを知る",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "3つの入口：デジタル生活が通るケーブル・データセンター・衛星をめぐる、自分の接続を測る、あるいはウェブサイトがあなたの何を見ているかを確かめる。",
+  "Explorar el planeta": "地球を探索する"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

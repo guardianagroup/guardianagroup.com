@@ -950,7 +950,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Vidjeli ste kuda putuju vaši podaci. Sada pogledajte što web-stranice vide o vama i kako ZERO prekida svaku vezu.",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Rekonstruirala agencija GUARDIANA iz javnih izvora, potvrdila dva glasa",
   "Agencia GUARDIANA, dos voces": "Agencija GUARDIANA, dva glasa",
-  "edificios en este campus": "zgrada u ovom kompleksu"
+  "edificios en este campus": "zgrada u ovom kompleksu",
+  "ÓRBITA": "ORBITA",
+  "Descubre por dónde viajan tus datos": "Otkrijte kuda putuju vaši podaci",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Tri puta: prođite kabelima, podatkovnim centrima i satelitima kroz koje prolazi vaš digitalni život; izmjerite vlastitu vezu; ili pogledajte što o vama vidi bilo koja web-stranica.",
+  "Explorar el planeta": "Istražite planet"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

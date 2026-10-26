@@ -952,7 +952,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "لقد رأيت أين تسافر بياناتك. الآن انظر ما تراه المواقع عنك، وكيف يقطع ZERO كل اتصال.",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "أعادت وكالة GUARDIANA بناءه من مصادر عامة، وأكده صوتان",
   "Agencia GUARDIANA, dos voces": "وكالة GUARDIANA، صوتان",
-  "edificios en este campus": "مبانٍ في هذا المجمّع"
+  "edificios en este campus": "مبانٍ في هذا المجمّع",
+  "ÓRBITA": "أوربيتا",
+  "Descubre por dónde viajan tus datos": "اكتشف أين تسافر بياناتك",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "ثلاثة مسارات: تجوّل بين الكابلات ومراكز البيانات والأقمار الصناعية التي تمرّ بها حياتك الرقمية؛ أو قِس اتصالك؛ أو انظر ما يراه أي موقع عنك.",
+  "Explorar el planeta": "استكشاف الكوكب"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

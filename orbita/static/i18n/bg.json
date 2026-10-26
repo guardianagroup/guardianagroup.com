@@ -951,7 +951,11 @@
   "Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.": "Видяхте откъде минават данните ви. Сега вижте какво виждат сайтовете за вас и как ZERO прекъсва всяка връзка.",
   "Reconstruido por la agencia GUARDIANA de fuentes públicas, confirmado por dos voces": "Възстановено от агенцията GUARDIANA по публични източници, потвърдено от два гласа",
   "Agencia GUARDIANA, dos voces": "Агенция GUARDIANA, два гласа",
-  "edificios en este campus": "сгради в този комплекс"
+  "edificios en este campus": "сгради в този комплекс",
+  "ÓRBITA": "ОРБИТА",
+  "Descubre por dónde viajan tus datos": "Открийте откъде минават данните ви",
+  "Tres caminos: recorre los cables, los centros de datos y los satélites por los que pasa tu vida digital; mide tu propia conexión; o mira qué ve de ti cualquier web.": "Три пътя: разгледайте кабелите, центровете за данни и спътниците, през които минава дигиталният ви живот; измерете собствената си връзка; или вижте какво вижда за вас всеки сайт.",
+  "Explorar el planeta": "Разгледайте планетата"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",
