@@ -18,12 +18,7 @@
    "relations": "0",
    "total": "839"
   },
-  "way[\"telecom\"=\"line\"][\"operator\"];": {
-   "nodes": "0",
-   "ways": "2430",
-   "relations": "0",
-   "total": "2430"
-  },
+  "way[\"telecom\"=\"line\"][\"operator\"];": "sin respuesta: the JSON object must be str, bytes or bytearray, not NoneType",
   "way[\"telecom\"=\"line\"];": {
    "nodes": "0",
    "ways": "4096",
@@ -43,5 +38,5 @@
    "total": "0"
   }
  },
- "medida_tierra_fecha": "2026-10-26T01:24:50Z"
+ "medida_tierra_fecha": "2026-10-26T04:09:17Z"
 }
