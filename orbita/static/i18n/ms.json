@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "meminta satu klik pengesahan",
   "Abrir enlace en una pestaña nueva": "Buka pautan dalam tab baharu",
   "Copiar la dirección del enlace": "Salin alamat pautan",
-  "Copiar": "Salin"
+  "Copiar": "Salin",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Laman ini tidak membenarkan pelayar yang keluar dari pelayan (perlindungan anti-bot mengikut rangkaian). Tidak boleh dibuka dari sel; dalam pelayar biasa anda boleh."
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

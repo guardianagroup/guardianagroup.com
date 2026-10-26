@@ -1405,7 +1405,8 @@
   "pide un clic de verificación": "просит один клик проверки",
   "Abrir enlace en una pestaña nueva": "Открыть ссылку в новой вкладке",
   "Copiar la dirección del enlace": "Копировать адрес ссылки",
-  "Copiar": "Копировать"
+  "Copiar": "Копировать",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Этот сайт не пускает браузеры, выходящие с сервера (сетевая защита от ботов). Из ячейки его не открыть; в вашем обычном браузере — да."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

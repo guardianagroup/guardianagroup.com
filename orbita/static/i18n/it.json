@@ -1405,7 +1405,8 @@
   "pide un clic de verificación": "chiede un clic di verifica",
   "Abrir enlace en una pestaña nueva": "Apri il link in una nuova scheda",
   "Copiar la dirección del enlace": "Copia l’indirizzo del link",
-  "Copiar": "Copia"
+  "Copiar": "Copia",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Questo sito non lascia entrare i browser che escono da un server (protezione anti-bot per rete). Dalla cella non si può aprire; nel tuo browser di sempre sì."
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

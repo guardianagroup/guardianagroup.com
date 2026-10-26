@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "egy ellenőrző kattintást kér",
   "Abrir enlace en una pestaña nueva": "Link megnyitása új lapon",
   "Copiar la dirección del enlace": "Link címének másolása",
-  "Copiar": "Másolás"
+  "Copiar": "Másolás",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Ez az oldal nem enged be szerverről érkező böngészőket (hálózati botvédelem). A cellából nem nyitható meg; a megszokott böngésződben igen."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

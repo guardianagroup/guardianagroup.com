@@ -86,6 +86,7 @@
     if (m.t === 'nav') { M.host = m.host; M.urlActual = m.url; if (window.zeroNav) window.zeroNav(m); return; }
     if (m.t === 'titulo') { if (window.zeroTitulo) window.zeroTitulo(m.titulo); return; }
     if (m.t === 'cursor') { cv.style.cursor = CURSORES.has(m.cursor) ? m.cursor : 'default'; enlaceBajoCursor = m.href || ''; estadoEnlace.textContent = enlaceBajoCursor; estadoEnlace.hidden = !enlaceBajoCursor; return; }
+    if (m.t === 'muro') { if (window.zeroMuro) window.zeroMuro(m); return; }
     if (m.t === 'portapapeles') { if (m.texto) navigator.clipboard.writeText(m.texto).catch(() => {}); return; }
     if (m.t === 'ia') { if (window.zeroIA) window.zeroIA(m); return; }
     if (m.t === 'ultra') { M.ultraDisponible = !!m.disponible; M.ultra = !!m.activo; if (window.zeroUltra) window.zeroUltra(m); return; }

@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "ایک تصدیقی کلک مانگتا ہے",
   "Abrir enlace en una pestaña nueva": "لنک نئے ٹیب میں کھولیں",
   "Copiar la dirección del enlace": "لنک کا پتہ کاپی کریں",
-  "Copiar": "کاپی کریں"
+  "Copiar": "کاپی کریں",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "یہ ویب سائٹ ایسے براؤزرز کو اندر نہیں آنے دیتی جو کسی سرور سے نکلتے ہیں (نیٹ ورک کے لحاظ سے اینٹی روبوٹ تحفظ)۔ سیل سے اسے کھولا نہیں جا سکتا؛ آپ کے عام براؤزر میں ہاں۔"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "एक सत्यापन क्लिक मांगता है",
   "Abrir enlace en una pestaña nueva": "लिंक नए टैब में खोलें",
   "Copiar la dirección del enlace": "लिंक का पता कॉपी करें",
-  "Copiar": "कॉपी करें"
+  "Copiar": "कॉपी करें",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "यह वेबसाइट सर्वर से निकलने वाले ब्राउज़रों को अंदर नहीं आने देती (नेटवर्क के अनुसार एंटी-बॉट सुरक्षा)। सेल से इसे नहीं खोला जा सकता; आपके सामान्य ब्राउज़र में हाँ।"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

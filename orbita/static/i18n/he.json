@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "דורש לחיצת אימות אחת",
   "Abrir enlace en una pestaña nueva": "פתיחת הקישור בכרטיסייה חדשה",
   "Copiar la dirección del enlace": "העתקת כתובת הקישור",
-  "Copiar": "העתקה"
+  "Copiar": "העתקה",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "האתר הזה לא מכניס דפדפנים שיוצאים משרת (הגנה מפני בוטים לפי רשת). מהתא אי אפשר לפתוח אותו; בדפדפן הרגיל שלכם כן."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

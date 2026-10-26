@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "vyžaduje jedno overovacie kliknutie",
   "Abrir enlace en una pestaña nueva": "Otvoriť odkaz na novej karte",
   "Copiar la dirección del enlace": "Kopírovať adresu odkazu",
-  "Copiar": "Kopírovať"
+  "Copiar": "Kopírovať",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Tento web nepúšťa prehliadače, ktoré vychádzajú zo servera (sieťová ochrana proti robotom). Z bunky sa nedá otvoriť; vo vašom bežnom prehliadači áno."
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

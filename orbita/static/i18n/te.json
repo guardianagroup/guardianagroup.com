@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "ఒక ధృవీకరణ క్లిక్ అడుగుతుంది",
   "Abrir enlace en una pestaña nueva": "లింక్‌ను కొత్త ట్యాబ్‌లో తెరవండి",
   "Copiar la dirección del enlace": "లింక్ చిరునామాను కాపీ చేయండి",
-  "Copiar": "కాపీ చేయండి"
+  "Copiar": "కాపీ చేయండి",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "ఈ సైట్ సర్వర్ నుండి వచ్చే బ్రౌజర్లను లోపలికి అనుమతించదు (నెట్‌వర్క్ ఆధారిత యాంటీ-బాట్ రక్షణ). సెల్ నుండి తెరవలేము; మీ మామూలు బ్రౌజర్‌లో తెరవవచ్చు."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

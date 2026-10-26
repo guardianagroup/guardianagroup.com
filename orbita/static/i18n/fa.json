@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "یک کلیک تأیید می‌خواهد",
   "Abrir enlace en una pestaña nueva": "باز کردن پیوند در برگه جدید",
   "Copiar la dirección del enlace": "کپی نشانی پیوند",
-  "Copiar": "کپی"
+  "Copiar": "کپی",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "این سایت مرورگرهایی را که از یک سرور می‌آیند راه نمی‌دهد (حفاظت ضدربات بر اساس شبکه). از سلول نمی‌توان آن را باز کرد؛ در مرورگر همیشگی‌تان می‌شود."
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

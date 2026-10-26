@@ -1405,7 +1405,8 @@
   "pide un clic de verificación": "bir doğrulama tıklaması ister",
   "Abrir enlace en una pestaña nueva": "Bağlantıyı yeni sekmede aç",
   "Copiar la dirección del enlace": "Bağlantı adresini kopyala",
-  "Copiar": "Kopyala"
+  "Copiar": "Kopyala",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Bu site bir sunucudan çıkan tarayıcıları içeri almıyor (ağ tabanlı bot koruması). Hücreden açılamaz; her zamanki tarayıcında açılır."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

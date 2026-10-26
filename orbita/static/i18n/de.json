@@ -1405,7 +1405,8 @@
   "pide un clic de verificación": "verlangt einen Bestätigungsklick",
   "Abrir enlace en una pestaña nueva": "Link in neuem Tab öffnen",
   "Copiar la dirección del enlace": "Linkadresse kopieren",
-  "Copiar": "Kopieren"
+  "Copiar": "Kopieren",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Diese Website lässt keine Browser herein, die von einem Server kommen (netzbasierter Bot-Schutz). Aus der Zelle lässt sie sich nicht öffnen; in deinem gewohnten Browser schon."
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

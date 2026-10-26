@@ -1405,7 +1405,8 @@
   "pide un clic de verificación": "要求點擊一次驗證",
   "Abrir enlace en una pestaña nueva": "在新分頁中開啟連結",
   "Copiar la dirección del enlace": "複製連結網址",
-  "Copiar": "複製"
+  "Copiar": "複製",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "該網站不允許來自伺服器的瀏覽器進入（按網路的反機器人保護）。無法從單元開啟；在你平常的瀏覽器裡可以。"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "cere un clic de verificare",
   "Abrir enlace en una pestaña nueva": "Deschide linkul într-o filă nouă",
   "Copiar la dirección del enlace": "Copiază adresa linkului",
-  "Copiar": "Copiază"
+  "Copiar": "Copiază",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Acest site nu lasă să intre browserele care ies dintr-un server (protecție anti-robot pe rețea). Din celulă nu se poate deschide; în browserul tău obișnuit, da."
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

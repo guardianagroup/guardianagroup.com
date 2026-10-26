@@ -1404,7 +1404,8 @@
   "pide un clic de verificación": "inaomba mbofyo mmoja wa uthibitisho",
   "Abrir enlace en una pestaña nueva": "Fungua kiungo kwenye kichupo kipya",
   "Copiar la dirección del enlace": "Nakili anwani ya kiungo",
-  "Copiar": "Nakili"
+  "Copiar": "Nakili",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Tovuti hii hairuhusu vivinjari vinavyotoka kwenye seva (ulinzi dhidi ya roboti kwa mtandao). Haiwezi kufunguliwa kutoka kwenye seli; kwenye kivinjari chako cha kawaida inawezekana."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

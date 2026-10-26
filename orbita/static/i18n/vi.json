@@ -1405,7 +1405,8 @@
   "pide un clic de verificación": "yêu cầu một cú nhấp xác minh",
   "Abrir enlace en una pestaña nueva": "Mở liên kết trong thẻ mới",
   "Copiar la dirección del enlace": "Sao chép địa chỉ liên kết",
-  "Copiar": "Sao chép"
+  "Copiar": "Sao chép",
+  "Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.": "Trang này không cho các trình duyệt xuất phát từ máy chủ vào (chống bot theo mạng). Không mở được từ ô; trên trình duyệt thường ngày của bạn thì được."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",
