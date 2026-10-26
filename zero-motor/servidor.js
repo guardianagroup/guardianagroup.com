@@ -92,6 +92,8 @@ class Sesion {
     this.senuelos = new Senuelos(PUBLICO); SESIONES.set(this.senuelos.token, this);
     this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.ultimos = [];
     this.descargas = new Map(); this.nDesc = 0;
+    this.permitidas = new Set(); // dominios base o 'e:<empresa>' que la persona ha permitido en esta sesión
+    this.nivel = process.env.ZERO_NIVEL_INICIAL || 'observar'; // 26 Oct 2026: por defecto se abre todo y la persona elige qué cortar
     VIVAS.add(this); this.ultimaMirada = Date.now();
     ws.on('message', (m, bin) => { if (bin) return; if (m.length > MAX_MENSAJE) { this.op('mensaje demasiado grande: descartado'); return; } this.mensaje(m).catch(() => {}); });
     ws.on('close', () => this.destruye('conexión cerrada'));
@@ -133,7 +135,7 @@ class Sesion {
     await this.ctx.route('**/*', (route, req) => this.filtra(route, req));
     this.ctx.on('page', (p) => { if (this.esperadas > 0) { this.esperadas--; return; } this.suceso({ clase: 'popup', certeza: 'comprobado', texto: 'La web intentó abrir una ventana nueva. ZERO la cerró.', dominio: hostDe(p.url()) }); p.close().catch(() => {}); });
     await this.nuevaPestana();
-    this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h, ultraDisponible: !!TOR_PROXY, ultra: !!(this.ultra && TOR_PROXY) });
+    this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h, ultraDisponible: !!TOR_PROXY, ultra: !!(this.ultra && TOR_PROXY), nivel: this.nivel });
   }
 
   async nuevaPestana(url) {
@@ -260,11 +262,14 @@ class Sesion {
       if (MOCK && !esLocal(host)) return this.simula(route, req, tipo);
       return route.continue().catch(() => {});
     }
+    const permitida = this.permitidas.has(baseDominio(host)) || (empresas.atribuye(host).empresa && this.permitidas.has('e:' + empresas.atribuye(host).empresa));
     if (d.bloquear) {
+      if (this.nivel === 'observar' && d.proposito !== 'malware') { this.corte(host, tipo, origen, tercero, d, st, 'visto'); return route.continue().catch(() => {}); }
+      if (permitida && d.proposito !== 'malware') { this.corte(host, tipo, origen, tercero, d, st, 'permitido'); return route.continue().catch(() => {}); }
       this.corte(host, tipo, origen, tercero, d, st);
       return route.abort('blockedbyclient').catch(() => {});
     }
-    if (((this.nivel && this.nivel !== 'normal') || this.alerta >= 2) && tercero && !esLocal(host)) {
+    if (((this.nivel && this.nivel !== 'normal' && this.nivel !== 'observar') || this.alerta >= 2) && tercero && !esLocal(host) && !permitida) {
       this.corte(host, tipo, origen, tercero, { regla: this.alerta >= 2 && !(this.nivel && this.nivel !== 'normal') ? 'alerta: toda conexión con otra empresa' : 'nivel ' + this.nivel + ': toda conexión con otra empresa', lista: null, proposito: 'otra-empresa' }, st);
       return route.abort('blockedbyclient').catch(() => {});
     }
@@ -284,20 +289,21 @@ class Sesion {
     return route.fulfill({ status: 200, contentType: 'application/json', body: '{}' }).catch(() => {});
   }
 
-  corte(host, tipo, origen, tercero, d, st) {
+  corte(host, tipo, origen, tercero, d, st, estado) {
     st = st || this.act.stats;
-    st.n.cortes++;
+    estado = estado || 'cortado';
+    if (estado === 'cortado') st.n.cortes++; else st.n.vistos = (st.n.vistos || 0) + 1;
     const e = empresas.atribuye(host);
     const prop = PROPOSITO[d.proposito] || 'Rastreador';
     st.porque[prop] = (st.porque[prop] || 0) + 1;
     const clave = e.empresa || host;
     const reg = st.empresas.get(clave) || { empresa: e.empresa, dominio: host, pais: e.pais, paisNombre: e.paisNombre, proposito: prop, n: 0, primera: ahora(), fuente: e.fuente, certeza: e.certeza };
-    reg.n++; reg.ultima = ahora(); st.empresas.set(clave, reg);
+    reg.n++; reg.ultima = ahora(); if (estado !== 'cortado') reg.vistos = (reg.vistos || 0) + 1; else reg.cortados = (reg.cortados || 0) + 1; st.empresas.set(clave, reg);
     if (e.pais) st.paises.set(e.pais, (st.paises.get(e.pais) || 0) + 1);
     const quien = e.empresa ? e.empresa + (e.paisNombre ? ' (' + e.paisNombre + ')' : '') : host;
     const que = { Publicidad: 'una conexión publicitaria', Rastreador: 'una conexión con un rastreador conocido', 'Web peligrosa': 'una conexión con una web peligrosa conocida', 'Aviso de cookies': 'el aviso de cookies', 'Red local': 'una conexión hacia la red local', 'Otra empresa': 'una conexión con otra empresa' }[prop] || 'una conexión';
-    this.suceso({ clase: 'corte', certeza: 'comprobado', dominio: host, empresa: e.empresa, pais: e.pais, paisNombre: e.paisNombre, proposito: prop, tipo, tercero,
-      texto: 'ZERO ha cortado ' + que + (e.empresa ? ', de ' + quien : ' hacia ' + host) + '.',
+    this.suceso({ clase: 'corte', certeza: 'comprobado', dominio: host, empresa: e.empresa, pais: e.pais, paisNombre: e.paisNombre, proposito: prop, tipo, tercero, estado,
+      texto: (estado === 'cortado' ? 'ZERO ha cortado ' : estado === 'visto' ? 'ZERO ha visto (y dejado pasar, nivel observar) ' : 'ZERO ha dejado pasar (lo permitiste) ') + que + (e.empresa ? ', de ' + quien : ' hacia ' + host) + '.',
       detalle: { regla: d.regla, lista: d.lista ? (cortes.listas[d.lista] || {}).nombre : null, listaClave: d.lista, fuenteEmpresa: e.fuente, categoria: e.categoria } });
   }
 
@@ -537,6 +543,7 @@ class Sesion {
         return this.env({ t: 'ultra', disponible: true, activo: quiere });
       }
       if (o.t === 'modo') { if ('observatorio' in o) { this.observatorio = !!o.observatorio; this.op('modo observatorio ' + (this.observatorio ? 'activado' : 'desactivado')); } if (o.nivel) await this.ponNivel(o.nivel); return; }
+      if (o.t === 'permitir') { const k = String(o.clave || '').slice(0, 120); if (!k) return; if (o.on) this.permitidas.add(k); else this.permitidas.delete(k); this.op((o.on ? 'permitida ' : 'vuelve a cortarse ') + k); this.suceso({ clase: 'permiso-empresa', certeza: 'comprobado', dominio: this.webActual, texto: (o.on ? 'Has permitido las conexiones de ' : 'Vuelves a cortar las conexiones de ') + k.replace(/^e:/, '') + ' en esta sesión.', detalle: { clave: k, on: !!o.on } }); return; }
       if (o.t === 'destruir') return await this.destruye('a petición de la persona');
       if (o.t === 'descarga') { if (o.accion === 'traer') return await this.traeDescarga(+o.id); if (o.accion === 'descartar') return this.descartaDescarga(+o.id); return; }
       if (o.t === 'pestana') {
@@ -561,11 +568,11 @@ class Sesion {
   }
 
   async ponNivel(n) {
-    if (!['normal', 'estricto', 'maximo'].includes(n)) return;
+    if (!['observar', 'normal', 'estricto', 'maximo'].includes(n)) return;
     const antes = this.nivel || 'normal'; this.nivel = n; this.op('nivel de protección: ' + n);
     const sinJs = n === 'maximo';
     if (sinJs !== (antes === 'maximo')) { for (const p of this.pestanas) { try { await p.cdp.send('Emulation.setScriptExecutionDisabled', { value: sinJs }); } catch (_) {} } if (this.page.url() && this.page.url() !== 'about:blank') this.page.reload({ waitUntil: 'commit' }).catch(() => {}); }
-    this.suceso({ clase: 'nivel', certeza: 'comprobado', dominio: this.webActual, texto: n === 'normal' ? 'Nivel normal: ZERO corta la publicidad y el rastreo de las listas públicas.' : n === 'estricto' ? 'Nivel estricto: además, ZERO corta toda conexión con otras empresas; solo pasa lo propio de la web.' : 'Nivel máximo: además, la web corre sin programas (JavaScript).' });
+    this.suceso({ clase: 'nivel', certeza: 'comprobado', dominio: this.webActual, texto: n === 'observar' ? 'Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.' : n === 'normal' ? 'Nivel normal: ZERO corta la publicidad y el rastreo de las listas públicas.' : n === 'estricto' ? 'Nivel estricto: además, ZERO corta toda conexión con otras empresas; solo pasa lo propio de la web.' : 'Nivel máximo: además, la web corre sin programas (JavaScript).' });
   }
 
   // Una marca que solo existe en la celda ha salido (o ha intentado salir) hacia alguien. Se afirma solo lo visto.
