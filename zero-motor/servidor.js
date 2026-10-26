@@ -26,6 +26,20 @@ const MOCK = !!process.env.ZERO_MOCK;
 const SESIONES = new Map(); // token de señuelo → sesión (para el colector /s/<token>)
 const VERSION = 'prototipo 0.1 · 26 Oct 2026';
 const CLAVE_SESION = crypto.randomBytes(32); // efímera: con ella se sella el comprobante de cada sesión
+// Blindaje del motor (26 Oct 2026, ronda 40 punto 11): solo las páginas de GUARDIANA pueden abrir sesiones; hay un tope
+// de celdas vivas; una celda que nadie mira se cierra sola; ningún mensaje puede ser enorme; en la celda solo se abren
+// direcciones http(s).
+const ORIGENES = (process.env.ZERO_ORIGENES || 'https://guardianagroup.com,https://www.guardianagroup.com,http://127.0.0.1,http://localhost').split(',').map((x) => x.trim().replace(/\/$/, '')).filter(Boolean);
+const MAX_SESIONES = +process.env.ZERO_MAX_SESIONES || 8;
+const MAX_MENSAJE = 64 * 1024;
+const MIN_SIN_MIRAR = +process.env.ZERO_MIN_SIN_MIRAR || 30; // minutos con la pantalla dormida antes de destruir la celda
+const MAX_HORAS = +process.env.ZERO_MAX_HORAS || 12; // vida máxima de una celda
+const VIVAS = new Set();
+function origenPermitido(req) {
+  const o = String(req.headers.origin || '').replace(/\/$/, '');
+  if (!o) return false;
+  return ORIGENES.some((p) => o === p || (p.startsWith('http://127.0.0.1') && /^http:\/\/127\.0\.0\.1(:\d+)?$/.test(o)) || (p.startsWith('http://localhost') && /^http:\/\/localhost(:\d+)?$/.test(o)));
+}
 
 const cortes = new Cortes();
 const nListas = cortes.cargaCarpeta(path.join(__dirname, 'listas'));
@@ -58,8 +72,14 @@ class Sesion {
     this.destruida = false; this.operaciones = [];
     this.senuelos = new Senuelos('http://127.0.0.1:' + PUERTO); SESIONES.set(this.senuelos.token, this);
     this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.ultimos = [];
-    ws.on('message', (m, bin) => { if (!bin) this.mensaje(m).catch(() => {}); });
+    VIVAS.add(this); this.ultimaMirada = Date.now();
+    ws.on('message', (m, bin) => { if (bin) return; if (m.length > MAX_MENSAJE) { this.op('mensaje demasiado grande: descartado'); return; } this.mensaje(m).catch(() => {}); });
     ws.on('close', () => this.destruye('conexión cerrada'));
+    this.vigilante = setInterval(() => {
+      const t = Date.now();
+      if (!this.mirando && t - this.ultimaMirada > MIN_SIN_MIRAR * 60000) this.destruye('celda sin nadie mirando durante ' + MIN_SIN_MIRAR + ' min').catch(() => {});
+      else if (t - this.creada > MAX_HORAS * 3600000) this.destruye('vida máxima de la celda (' + MAX_HORAS + ' h)').catch(() => {});
+    }, 60000);
   }
 
   env(o) { this.ws.json(o); }
@@ -325,7 +345,9 @@ class Sesion {
   }
 
   async ve(url) {
+    url = String(url || '').trim().slice(0, 4096);
     if (!/^[a-z]+:\/\//i.test(url)) url = 'https://' + url;
+    if (!/^https?:\/\//i.test(url)) { this.op('dirección rechazada: solo http y https'); return; } // nada de file://, chrome://, javascript:…
     if (this.sellada) return; // sellada: primero reanudar o destruir
     this.puntos = 0; this.motivos = []; this.ultimos = []; if (this.alerta > 0 && this.alerta < 3) await this.ponAlerta(0, 'nueva web');
     // nueva web: nuevo contador «en esta web» (los totales de la sesión se conservan)
@@ -368,7 +390,7 @@ class Sesion {
       }
       if (o.t === 'mira') {
         // cuando nadie mira, la pantalla deja de transmitirse (uso de todo el mes sin gastar en vacío)
-        this.mirando = !!o.si;
+        this.mirando = !!o.si; this.ultimaMirada = Date.now();
         if (!this.mirando && this.pantalla) { this.pantalla = false; await this.cdp.send('Page.stopScreencast').catch(() => {}); this.op('pantalla dormida'); }
         else if (this.mirando && !this.pantalla) { await this.arrancaPantalla(); this.op('pantalla despierta'); }
         return;
@@ -416,7 +438,7 @@ class Sesion {
   async destruye(motivo) {
     if (this.destruida) return;
     this.destruida = true;
-    SESIONES.delete(this.senuelos.token);
+    SESIONES.delete(this.senuelos.token); VIVAS.delete(this); clearInterval(this.vigilante);
     const t0 = Date.now();
     this.op('cierre pedido: ' + motivo);
     try { if (this.cdp) await this.cdp.send('Page.stopScreencast').catch(() => {}); } catch (_) {}
@@ -447,11 +469,13 @@ async function main() {
       if (ses && !ses.destruida) ses.senuelo({ tipo: 'enlace', donde: 'visita al enlace oculto (' + (req.headers['user-agent'] || 'sin agente').slice(0, 80) + ')' }, req.socket.remoteAddress || '?', req.url, true, false);
       res.writeHead(204); return res.end();
     }
-    if (req.url === '/salud') { res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ ok: true, version: VERSION, listas: nListas, mock: MOCK })); }
+    if (req.url === '/salud') { res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ ok: true, version: VERSION, listas: nListas, mock: MOCK, celdas: VIVAS.size, tope: MAX_SESIONES })); }
     res.writeHead(404); res.end();
   });
   srv.on('upgrade', (req, socket) => {
     if (!req.url.startsWith('/sesion')) return socket.destroy();
+    if (!origenPermitido(req)) { console.log('sesión rechazada: origen', req.headers.origin || '(ninguno)'); return socket.destroy(); }
+    if (VIVAS.size >= MAX_SESIONES) { console.log('sesión rechazada: tope de celdas (' + MAX_SESIONES + ')'); return socket.destroy(); }
     const ws = WS.acepta(req, socket);
     if (ws) new Sesion(ws);
   });

@@ -32,6 +32,7 @@ class WS extends EventEmitter {
       let len = b1 & 0x7f, off = 2;
       if (len === 126) { if (this.buf.length < 4) return; len = this.buf.readUInt16BE(2); off = 4; }
       else if (len === 127) { if (this.buf.length < 10) return; len = Number(this.buf.readBigUInt64BE(2)); off = 10; }
+      if (len > 1048576) { this.cierra(); return; } // trama de más de 1 MB: nadie legítimo la manda
       if (this.buf.length < off + (mask ? 4 : 0) + len) return;
       let carga;
       if (mask) {
