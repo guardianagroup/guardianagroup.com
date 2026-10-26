@@ -667,6 +667,7 @@
     'Tipo': ['Type', 'Tipo'], 'Base antártica': ['Antarctic station', 'Base antártica'], 'Estación terrena de satélites': ['Satellite ground station', 'Estação terrena de satélites'],
     'En servicio desde': ['In service since', 'Em serviço desde'], 'Longitud': ['Length', 'Comprimento'], 'Longitud en el mapa': ['Length on the map', 'Comprimento no mapa'], 'Trazado aproximado por mar': ['Approximate sea route', 'Traçado aproximado pelo mar'], 'Datos verificados': ['Verified data', 'Dados verificados'], 'Fuentes': ['Sources', 'Fontes'], 'Dueños': ['Owners', 'Donos'],
     'Desde el mar': ['From the sea', 'Desde o mar'],
+    'Operador confirmado por la agencia GUARDIANA con dos fuentes públicas': ['Operator confirmed by the GUARDIANA agency with two public sources', 'Operador confirmado pela agência GUARDIANA com duas fontes públicas'],
     'Descargar': ['Download', 'Baixar'], 'Sede': ['Headquarters', 'Sede'], 'Red en el mapa': ['Network on the map', 'Rede no mapa'], 'Tu planeta': ['Your planet', 'Seu planeta'],
     'El color indica la capacidad: más de 100 Tbit/s, de 20 a 100, menos de 20 o no publicada.': ['The colour shows the capacity: over 100 Tbit/s, 20 to 100, under 20, or not published.', 'A cor indica a capacidade: mais de 100 Tbit/s, de 20 a 100, menos de 20 ou não publicada.'],
     'Escribe su nombre. La lista está en esta página: no se consulta nada en internet.': ['Type its name. The list is on this page: nothing is looked up on the internet.', 'Digite o nome. A lista está nesta página: nada é consultado na internet.'],

@@ -2042,7 +2042,7 @@
     // a hand-verified point carries its own note; the «(city)» at its end goes, since «Dónde» says it (25 Oct 2026: it
     // was shown twice, as «Datos» and «Nota»)
     const nota = (X.nota || '').replace(/\s*\([^()]*\)\s*$/, '').trim();
-    if (nota) filas.push([T('Datos'), nota]);
+    if (nota) filas.push([T('Datos'), T(nota)]); // a fixed note of ours (ronda 38) is translated; a free OpenStreetMap note stays as it is
     if (X.dir) filas.push([T('Dirección'), X.dir]);
     // 25 Oct 2026 (ronda 35): 1, only the city is known; 2, two voices put the building in the same area, less than 2 km apart
     if (X.aprox) filas.push([T('Ubicación aproximada'), X.aprox === 2 ? T('a menos de 2 km; la dirección exacta del edificio aún no está confirmada') : T('en la ciudad; la dirección exacta del edificio aún no está confirmada')]);

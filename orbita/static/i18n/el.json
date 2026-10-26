@@ -941,7 +941,8 @@
   "No implica que este centro use ese cable.": "Δεν σημαίνει ότι αυτό το κέντρο χρησιμοποιεί αυτό το καλώδιο.",
   "Por dónde viajan los datos": "Από πού ταξιδεύουν τα δεδομένα",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Αυτό το κέντρο συνδέεται με άλλα δίκτυα, αλλά οι πραγματικές διαδρομές του δεν είναι δημόσιες: ο χάρτης δείχνει τις κοντινές υποδομές, όχι την επιβεβαιωμένη διαδρομή των δεδομένων σας.",
-  "Infraestructura cercana": "Κοντινές υποδομές"
+  "Infraestructura cercana": "Κοντινές υποδομές",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Ο διαχειριστής επιβεβαιώθηκε από το πρακτορείο GUARDIANA με δύο δημόσιες πηγές"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

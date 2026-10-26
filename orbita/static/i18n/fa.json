@@ -941,7 +941,8 @@
   "No implica que este centro use ese cable.": "به این معنا نیست که این مرکز از آن کابل استفاده می‌کند.",
   "Por dónde viajan los datos": "داده‌ها از کجا می‌گذرند",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "این مرکز به شبکه‌های دیگر متصل است، اما مسیرهای واقعی آن عمومی نیست: نقشه زیرساخت نزدیک را نشان می‌دهد، نه مسیر تأییدشدهٔ داده‌های شما را.",
-  "Infraestructura cercana": "زیرساخت نزدیک"
+  "Infraestructura cercana": "زیرساخت نزدیک",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "اپراتور توسط آژانس GUARDIANA با دو منبع عمومی تأیید شده است"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

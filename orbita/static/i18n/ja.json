@@ -942,7 +942,8 @@
   "No implica que este centro use ese cable.": "このセンターがそのケーブルを使っているという意味ではありません。",
   "Por dónde viajan los datos": "データはどこを通るか",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "このセンターは他のネットワークとつながっていますが、実際の経路は公開されていません。地図が示すのは近くのインフラであり、あなたのデータの確認済みの経路ではありません。",
-  "Infraestructura cercana": "近くのインフラ"
+  "Infraestructura cercana": "近くのインフラ",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "GUARDIANAエージェンシーが2つの公開情報源で運営者を確認"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

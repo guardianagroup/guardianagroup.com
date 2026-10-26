@@ -616,6 +616,29 @@ def junta_campus(salida):
     if isinstance(salida.get('medida'), dict) and 'datos' in salida['medida']:
         salida['medida']['datos'] = sum(1 for p in salida['puntos'] if p[2] == 'datos')
     print('campus juntados:', sum(1 for g in grupos.values() if len(g) >= 2), '· edificios quitados de la lista:', len(fuera))
+    nombra_campus(salida)
+
+
+def nombra_campus(salida):
+    """25 Oct 2026 (ronda 38 de la agencia): the operator and name of a campus OpenStreetMap leaves unnamed, confirmed by
+    two voices (herramientas/fuentes/campus-operadores.json); applied to the nearest unnamed campus within 1.5 km."""
+    ruta = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fuentes', 'campus-operadores.json')
+    if not os.path.exists(ruta): return
+    try: lista = json.load(open(ruta, encoding='utf-8')).get('campus', [])
+    except (OSError, ValueError): return
+    P, X = salida['puntos'], salida['extra']
+    puestos = 0
+    for c in lista:
+        mejor, dm = None, 1.5
+        for i, p in enumerate(P):
+            if p[2] != 'datos' or (p[3] or '').strip(): continue
+            d = km((c['lon'], c['lat']), (p[0], p[1]))
+            if d < dm: mejor, dm = i, d
+        if mejor is None: continue
+        P[mejor][3] = c['nombre']; P[mejor][4] = c['operador']
+        x = dict(X[mejor] or {}); x['nota'] = x.get('nota') or 'Operador confirmado por la agencia GUARDIANA con dos fuentes públicas'; x['fuentes'] = c.get('fuentes', [])
+        X[mejor] = x; puestos += 1
+    print('campus con operador (ronda 38):', puestos, 'de', len(lista))
 
 
 def puntos():

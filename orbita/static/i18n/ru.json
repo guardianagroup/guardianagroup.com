@@ -942,7 +942,8 @@
   "No implica que este centro use ese cable.": "Это не означает, что этот центр использует тот кабель.",
   "Por dónde viajan los datos": "Где проходят данные",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Этот центр связан с другими сетями, но его реальные маршруты не публикуются: карта показывает инфраструктуру поблизости, а не подтверждённый путь ваших данных.",
-  "Infraestructura cercana": "Инфраструктура поблизости"
+  "Infraestructura cercana": "Инфраструктура поблизости",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Оператор подтверждён агентством GUARDIANA по двум открытым источникам"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

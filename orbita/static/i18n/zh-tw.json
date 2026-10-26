@@ -942,7 +942,8 @@
   "No implica que este centro use ese cable.": "這不代表此中心使用該電纜。",
   "Por dónde viajan los datos": "資料經過哪裡",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "此中心與其他網路相連，但實際路由並未公開：地圖顯示的是附近的基礎設施，而非您資料的確認路徑。",
-  "Infraestructura cercana": "附近的基礎設施"
+  "Infraestructura cercana": "附近的基礎設施",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "營運者由 GUARDIANA 機構以兩個公開來源確認"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

@@ -941,7 +941,8 @@
   "No implica que este centro use ese cable.": "אין פירוש הדבר שמרכז זה משתמש בכבל הזה.",
   "Por dónde viajan los datos": "מאיפה עוברים הנתונים",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "מרכז זה מחובר לרשתות אחרות, אך מסלוליו האמיתיים אינם פומביים: המפה מציגה את התשתית הקרובה, לא את הנתיב המאומת של הנתונים שלכם.",
-  "Infraestructura cercana": "תשתית קרובה"
+  "Infraestructura cercana": "תשתית קרובה",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "המפעיל אושר על ידי סוכנות GUARDIANA בשני מקורות ציבוריים"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

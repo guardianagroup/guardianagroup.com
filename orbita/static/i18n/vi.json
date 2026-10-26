@@ -942,7 +942,8 @@
   "No implica que este centro use ese cable.": "Điều này không có nghĩa là trung tâm này dùng tuyến cáp đó.",
   "Por dónde viajan los datos": "Dữ liệu đi qua đâu",
   "Este centro se conecta a otras redes, pero sus rutas reales no son públicas: el mapa enseña la infraestructura cercana, no el recorrido confirmado de tus datos.": "Trung tâm này kết nối với các mạng khác, nhưng tuyến đường thực không được công bố: bản đồ cho thấy hạ tầng ở gần, không phải đường đi đã xác nhận của dữ liệu của bạn.",
-  "Infraestructura cercana": "Hạ tầng ở gần"
+  "Infraestructura cercana": "Hạ tầng ở gần",
+  "Operador confirmado por la agencia GUARDIANA con dos fuentes públicas": "Đơn vị vận hành được cơ quan GUARDIANA xác nhận với hai nguồn công khai"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",
