@@ -55,6 +55,7 @@
     if (m.t === 'resumen') { if (window.zeroResumen) window.zeroResumen(m); return; }
     if (m.t === 'nav') { M.host = m.host; M.urlActual = m.url; if (window.zeroNav) window.zeroNav(m); return; }
     if (m.t === 'titulo') { if (window.zeroTitulo) window.zeroTitulo(m.titulo); return; }
+    if (m.t === 'ia') { if (window.zeroIA) window.zeroIA(m); return; }
     if (m.t === 'alerta') { M.alertaNivel = m.nivel; M.sellada = !!m.sellada; if (window.zeroAlerta) window.zeroAlerta(m); return; }
     if (m.t === 'acta') { M.acta = m.acta; abierto = false; ponEstado(''); if (window.zeroActa) window.zeroActa(m.acta); return; }
   }
@@ -93,6 +94,7 @@
   M.modo = (observatorio) => { M.observatorio = !!observatorio; env({ t: 'modo', observatorio: M.observatorio }); };
   M.nivel = (n) => { M.nivelActual = n; env({ t: 'modo', nivel: n }); };
   M.destruir = () => { ponEstado('Sellando y destruyendo la celda…'); env({ t: 'destruir' }); };
+  M.ia = (o) => { if (M.estado !== 'lista' || !ws || ws.readyState !== 1) { conecta(); return false; } env({ t: 'ia', ...o }); return true; };
   M.sellar = () => env({ t: 'alerta', accion: 'sellar' });
   M.reanudar = () => env({ t: 'alerta', accion: 'reanudar' });
   M.enfoca = () => cv.focus();
