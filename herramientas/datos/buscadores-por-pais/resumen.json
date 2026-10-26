@@ -1,0 +1,6270 @@
+{
+ "Afghanistan": {
+  "slug": "afghanistan",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 98.42,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 98.42
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 0.85
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.51
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.09
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.03
+   }
+  ]
+ },
+ "Aland Islands": {
+  "slug": "aland-islands",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 79.95,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 79.95
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 16.23
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 2.19
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.78
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.57
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.12
+   }
+  ]
+ },
+ "Albania": {
+  "slug": "albania",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.59,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.59
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.59
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.83
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.4
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.36
+   },
+   {
+    "buscador": "Seznam",
+    "porcentaje": 0.1
+   }
+  ]
+ },
+ "Algeria": {
+  "slug": "algeria",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 97.6,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 97.6
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.54
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.45
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.14
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.14
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "American Samoa": {
+  "slug": "american-samoa",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 82.65,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 82.65
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 8.58
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.91
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.93
+   },
+   {
+    "buscador": "CocCoc",
+    "porcentaje": 0.59
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.2
+   }
+  ]
+ },
+ "Andorra": {
+  "slug": "andorra",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.14,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.14
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.15
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.63
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.46
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.37
+   }
+  ]
+ },
+ "Angola": {
+  "slug": "angola",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.55,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.55
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.68
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.29
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.12
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.11
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.1
+   }
+  ]
+ },
+ "Anguilla": {
+  "slug": "anguilla",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 83.6,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 83.6
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 10.8
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 4.4
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.96
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.24
+   }
+  ]
+ },
+ "Antarctica": {
+  "slug": "antarctica",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 83.74,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 83.74
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 13.79
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.23
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.99
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.25
+   }
+  ]
+ },
+ "Antigua And Barbuda": {
+  "slug": "antigua-and-barbuda",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 86.05,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 86.05
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 12.12
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.24
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.29
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.23
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Argentina": {
+  "slug": "argentina",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.82,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.82
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.71
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.06
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.21
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.11
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.08
+   }
+  ]
+ },
+ "Armenia": {
+  "slug": "armenia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 90.58,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 90.58
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 7.3
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.34
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.45
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.03
+   }
+  ]
+ },
+ "Aruba": {
+  "slug": "aruba",
+  "periodo": "August 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.03,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.03
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.37
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.91
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.41
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 0.09
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.08
+   }
+  ]
+ },
+ "Australia": {
+  "slug": "australia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 87.9,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 87.9
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.17
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.54
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.92
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.21
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.19
+   }
+  ]
+ },
+ "Austria": {
+  "slug": "austria",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 80.84,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 80.84
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 10.93
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.69
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 2.38
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.77
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 1.1
+   }
+  ]
+ },
+ "Azerbaijan": {
+  "slug": "azerbaijan",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 97.37,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 97.37
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.81
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 0.67
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.01
+   }
+  ]
+ },
+ "Bahamas": {
+  "slug": "bahamas",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 85.76,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 85.76
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 12.42
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.29
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.42
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.05
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.03
+   }
+  ]
+ },
+ "Bahrain": {
+  "slug": "bahrain",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 97.1,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 97.1
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.23
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.38
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.15
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.02
+   }
+  ]
+ },
+ "Bangladesh": {
+  "slug": "bangladesh",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 98.04,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 98.04
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.3
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.19
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.18
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.02
+   }
+  ]
+ },
+ "Barbados": {
+  "slug": "barbados",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 87.3,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 87.3
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 10.44
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.47
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.51
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.19
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.07
+   }
+  ]
+ },
+ "Belarus": {
+  "slug": "belarus",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 58.98,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 58.98
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 38.54
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.24
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.03
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.1
+   },
+   {
+    "buscador": "Mail.ru",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Belgium": {
+  "slug": "belgium",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 87.88,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 87.88
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 8.61
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.18
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 1.07
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.76
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.33
+   }
+  ]
+ },
+ "Belize": {
+  "slug": "belize",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 77.19,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 77.19
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 10.11
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.41
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.77
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.36
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.09
+   }
+  ]
+ },
+ "Benin": {
+  "slug": "benin",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.11,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.11
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.16
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.25
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.16
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.14
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Bermuda": {
+  "slug": "bermuda",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 70.13,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 70.13
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 17.24
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.79
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 4.48
+   },
+   {
+    "buscador": "StartPage",
+    "porcentaje": 0.17
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.1
+   }
+  ]
+ },
+ "Bhutan": {
+  "slug": "bhutan",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.39,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.39
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.17
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.62
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.45
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.35
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.01
+   }
+  ]
+ },
+ "Bolivia": {
+  "slug": "bolivia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.43,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.43
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.19
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.39
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.36
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.34
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.22
+   }
+  ]
+ },
+ "Bosnia And Herzegovina": {
+  "slug": "bosnia-and-herzegovina",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.25,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.25
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.31
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.46
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.45
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.3
+   },
+   {
+    "buscador": "PrivacyWall",
+    "porcentaje": 0.09
+   }
+  ]
+ },
+ "Botswana": {
+  "slug": "botswana",
+  "periodo": "August 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.43,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.43
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.75
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.48
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.14
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.06
+   }
+  ]
+ },
+ "Brazil": {
+  "slug": "brazil",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 88.41,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 88.41
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.63
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.54
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.2
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.18
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.03
+   }
+  ]
+ },
+ "British Virgin Islands": {
+  "slug": "british-virgin-islands",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 94.43,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 94.43
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.6
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.33
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.4
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.17
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Brunei Darussalam": {
+  "slug": "brunei-darussalam",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 82.01,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 82.01
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 11.05
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.26
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.94
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.4
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.23
+   }
+  ]
+ },
+ "Bulgaria": {
+  "slug": "bulgaria",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.98,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.98
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.04
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.41
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.12
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.08
+   }
+  ]
+ },
+ "Burundi": {
+  "slug": "burundi",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.42,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.42
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.91
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.25
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.23
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.11
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Cambodia": {
+  "slug": "cambodia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.36,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.36
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 3.12
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.37
+   },
+   {
+    "buscador": "CocCoc",
+    "porcentaje": 0.29
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.25
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.23
+   }
+  ]
+ },
+ "Cameroon": {
+  "slug": "cameroon",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.14,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.14
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.84
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.54
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.21
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.14
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Canada": {
+  "slug": "canada",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 85.3,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 85.3
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 10.06
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.54
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.51
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.27
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.2
+   }
+  ]
+ },
+ "Cape Verde": {
+  "slug": "cape-verde",
+  "periodo": "August 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.79,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.79
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.6
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.57
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.4
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.19
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.18
+   }
+  ]
+ },
+ "Cayman Islands": {
+  "slug": "cayman-islands",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 84.17,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 84.17
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 13.23
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.21
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.1
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.12
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.12
+   }
+  ]
+ },
+ "Central African Republic": {
+  "slug": "central-african-republic",
+  "periodo": "July 2026",
+  "lider": "Google",
+  "porcentaje_lider": 94.78,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 94.78
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.66
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.81
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.56
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.08
+   },
+   {
+    "buscador": "PrivacyWall",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Chad": {
+  "slug": "chad",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 98.38,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 98.38
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.18
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.18
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.08
+   },
+   {
+    "buscador": "Haosou",
+    "porcentaje": 0.06
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Chile": {
+  "slug": "chile",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 90.23,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 90.23
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.28
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.7
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.34
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.17
+   }
+  ]
+ },
+ "China": {
+  "slug": "china",
+  "periodo": "September 2026",
+  "lider": "Baidu",
+  "porcentaje_lider": 46.65,
+  "buscadores": [
+   {
+    "buscador": "Baidu",
+    "porcentaje": 46.65
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 21.76
+   },
+   {
+    "buscador": "Yandex",
+    "porcentaje": 14.98
+   },
+   {
+    "buscador": "Haosou",
+    "porcentaje": 12.26
+   },
+   {
+    "buscador": "Sogou",
+    "porcentaje": 2.61
+   },
+   {
+    "buscador": "Google",
+    "porcentaje": 1.46
+   }
+  ]
+ },
+ "Colombia": {
+  "slug": "colombia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.3,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.3
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.74
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.51
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.17
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.14
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.11
+   }
+  ]
+ },
+ "Comoros": {
+  "slug": "comoros",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.09,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.09
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.93
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.51
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.18
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.11
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.07
+   }
+  ]
+ },
+ "Congo Republic Of The": {
+  "slug": "congo-republic-of-the",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.94,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.94
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.51
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.18
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.17
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.08
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Cook Islands": {
+  "slug": "cook-islands",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 94,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 94
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.89
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.44
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.44
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.21
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.01
+   }
+  ]
+ },
+ "Croatia": {
+  "slug": "croatia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 94.11,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 94.11
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.77
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.68
+   },
+   {
+    "buscador": "Seznam",
+    "porcentaje": 0.47
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.42
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.26
+   }
+  ]
+ },
+ "Cuba": {
+  "slug": "cuba",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.19,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.19
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.26
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.18
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.17
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.14
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.02
+   }
+  ]
+ },
+ "Cyprus": {
+  "slug": "cyprus",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.3,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.3
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 3.85
+   },
+   {
+    "buscador": "Yandex",
+    "porcentaje": 2.65
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.5
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.4
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.1
+   }
+  ]
+ },
+ "Czech Republic": {
+  "slug": "czech-republic",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 78.71,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 78.71
+   },
+   {
+    "buscador": "Seznam",
+    "porcentaje": 15.05
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.73
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.63
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.45
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.27
+   }
+  ]
+ },
+ "Denmark": {
+  "slug": "denmark",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 84.83,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 84.83
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.65
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.9
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.53
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.47
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.37
+   }
+  ]
+ },
+ "Djibouti": {
+  "slug": "djibouti",
+  "periodo": "August 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.84,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.84
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.76
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.62
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.37
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.22
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.06
+   }
+  ]
+ },
+ "Dominica": {
+  "slug": "dominica",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 86,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 86
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 11.76
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.6
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.31
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.19
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.08
+   }
+  ]
+ },
+ "Dominican Republic": {
+  "slug": "dominican-republic",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 86.35,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 86.35
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 11.54
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.22
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.4
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.17
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.17
+   }
+  ]
+ },
+ "Ecuador": {
+  "slug": "ecuador",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.14,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.14
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.88
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.39
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.23
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.22
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.1
+   }
+  ]
+ },
+ "Egypt": {
+  "slug": "egypt",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.41,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.41
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 2.52
+   },
+   {
+    "buscador": "Yandex",
+    "porcentaje": 0.52
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.34
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.12
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.03
+   }
+  ]
+ },
+ "El Salvador": {
+  "slug": "el-salvador",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 91.95,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 91.95
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.98
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.37
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.25
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.19
+   }
+  ]
+ },
+ "Equatorial Guinea": {
+  "slug": "equatorial-guinea",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 90.48,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 90.48
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.82
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.61
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.56
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.36
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.12
+   }
+  ]
+ },
+ "Eritrea": {
+  "slug": "eritrea",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 76.88,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 76.88
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 19.55
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.43
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.13
+   }
+  ]
+ },
+ "Estonia": {
+  "slug": "estonia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 85.97,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 85.97
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 8.73
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.72
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.03
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.23
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.17
+   }
+  ]
+ },
+ "Ethiopia": {
+  "slug": "ethiopia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.5,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.5
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.67
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.4
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.2
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.15
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Faroe Islands": {
+  "slug": "faroe-islands",
+  "periodo": "July 2026",
+  "lider": "Google",
+  "porcentaje_lider": 90.94,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 90.94
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.47
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.77
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.32
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.23
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.11
+   }
+  ]
+ },
+ "Fiji": {
+  "slug": "fiji",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 88.68,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 88.68
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.78
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.58
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.54
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.08
+   }
+  ]
+ },
+ "Finland": {
+  "slug": "finland",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 86.31,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 86.31
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.6
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 4.07
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.77
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.67
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.36
+   }
+  ]
+ },
+ "France": {
+  "slug": "france",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 88.16,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 88.16
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.47
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.75
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 1.34
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 0.86
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.84
+   }
+  ]
+ },
+ "French Guiana": {
+  "slug": "french-guiana",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 84.2,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 84.2
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 10.78
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.05
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 1.2
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.81
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 0.63
+   }
+  ]
+ },
+ "French Polynesia": {
+  "slug": "french-polynesia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 88.71,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 88.71
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.01
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.28
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 1.18
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.08
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 0.41
+   }
+  ]
+ },
+ "Gabon": {
+  "slug": "gabon",
+  "periodo": "August 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.49,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.49
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.83
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.32
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.11
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.11
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.07
+   }
+  ]
+ },
+ "Gambia": {
+  "slug": "gambia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.86,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.86
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.57
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.26
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.1
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.09
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.08
+   }
+  ]
+ },
+ "Georgia": {
+  "slug": "georgia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.44,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.44
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 5.55
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.24
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.55
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.15
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.03
+   }
+  ]
+ },
+ "Germany": {
+  "slug": "germany",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 87.84,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 87.84
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.49
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.71
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.56
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.07
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 1.03
+   }
+  ]
+ },
+ "Ghana": {
+  "slug": "ghana",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.79,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.79
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.82
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.21
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.08
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.04
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.02
+   }
+  ]
+ },
+ "Gibraltar": {
+  "slug": "gibraltar",
+  "periodo": "August 2026",
+  "lider": "Google",
+  "porcentaje_lider": 86.34,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 86.34
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.94
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.26
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 1.01
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.98
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.47
+   }
+  ]
+ },
+ "Greece": {
+  "slug": "greece",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.45,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.45
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.95
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.54
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.41
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.31
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.11
+   }
+  ]
+ },
+ "Greenland": {
+  "slug": "greenland",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 85.71,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 85.71
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 11.37
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.22
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.7
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.48
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.41
+   }
+  ]
+ },
+ "Grenada": {
+  "slug": "grenada",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 84.57,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 84.57
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 13.27
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.36
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.48
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.19
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.11
+   }
+  ]
+ },
+ "Guadeloupe": {
+  "slug": "guadeloupe",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 86.29,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 86.29
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.16
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.02
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.89
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.78
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 0.51
+   }
+  ]
+ },
+ "Guam": {
+  "slug": "guam",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 87.5,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 87.5
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 8.54
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.36
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.85
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.34
+   },
+   {
+    "buscador": "Naver",
+    "porcentaje": 0.24
+   }
+  ]
+ },
+ "Guatemala": {
+  "slug": "guatemala",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 94.01,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 94.01
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.22
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.3
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.17
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.15
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.11
+   }
+  ]
+ },
+ "Guernsey": {
+  "slug": "guernsey",
+  "periodo": "July 2026",
+  "lider": "Google",
+  "porcentaje_lider": 88.35,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 88.35
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.35
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.64
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.34
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.28
+   }
+  ]
+ },
+ "Guinea": {
+  "slug": "guinea",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.52,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.52
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.48
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.37
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.28
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.14
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.1
+   }
+  ]
+ },
+ "Guinea Bissau": {
+  "slug": "guinea-bissau",
+  "periodo": "July 2026",
+  "lider": "Google",
+  "porcentaje_lider": 94.42,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 94.42
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 2.65
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.06
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.53
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.15
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.09
+   }
+  ]
+ },
+ "Guyana": {
+  "slug": "guyana",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 86.92,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 86.92
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 10.91
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.32
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.31
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.23
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.15
+   }
+  ]
+ },
+ "Haiti": {
+  "slug": "haiti",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.26,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.26
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.23
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.33
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.1
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.02
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.02
+   }
+  ]
+ },
+ "Honduras": {
+  "slug": "honduras",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 86.54,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 86.54
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 11.45
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.99
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.41
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.29
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.25
+   }
+  ]
+ },
+ "Hong Kong": {
+  "slug": "hong-kong",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 90.44,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 90.44
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.96
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 3.64
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.19
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.38
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.16
+   }
+  ]
+ },
+ "Hungary": {
+  "slug": "hungary",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.1,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.1
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.6
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.47
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.38
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.1
+   }
+  ]
+ },
+ "Iceland": {
+  "slug": "iceland",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 83.61,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 83.61
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.22
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 3.97
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.63
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.62
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.61
+   }
+  ]
+ },
+ "India": {
+  "slug": "india",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.63,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.63
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.92
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.64
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.57
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.16
+   },
+   {
+    "buscador": "PrivacyWall",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Indonesia": {
+  "slug": "indonesia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.26,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.26
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.05
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 2.21
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.74
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.69
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.02
+   }
+  ]
+ },
+ "Iran": {
+  "slug": "iran",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 99.48,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 99.48
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 0.42
+   },
+   {
+    "buscador": "Yandex",
+    "porcentaje": 0.04
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.03
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.02
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0
+   }
+  ]
+ },
+ "Iraq": {
+  "slug": "iraq",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 99.69,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 99.69
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 0.16
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.05
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.01
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.01
+   }
+  ]
+ },
+ "Ireland": {
+  "slug": "ireland",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.47,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.47
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.21
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.88
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.79
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.34
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.13
+   }
+  ]
+ },
+ "Israel": {
+  "slug": "israel",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 98.38,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 98.38
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.13
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.32
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.09
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.01
+   }
+  ]
+ },
+ "Italy": {
+  "slug": "italy",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 87.31,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 87.31
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.97
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 5
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.69
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.44
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.42
+   }
+  ]
+ },
+ "Jamaica": {
+  "slug": "jamaica",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.56,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.56
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 8.47
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.2
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.43
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.18
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.08
+   }
+  ]
+ },
+ "Japan": {
+  "slug": "japan",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 59.27,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 59.27
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 31.41
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 7.61
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.72
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.4
+   },
+   {
+    "buscador": "CocCoc",
+    "porcentaje": 0.32
+   }
+  ]
+ },
+ "Jersey": {
+  "slug": "jersey",
+  "periodo": "July 2026",
+  "lider": "Google",
+  "porcentaje_lider": 90.44,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 90.44
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.27
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.25
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.61
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.3
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.12
+   }
+  ]
+ },
+ "Jordan": {
+  "slug": "jordan",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 97.68,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 97.68
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.59
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.27
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.25
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.1
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.08
+   }
+  ]
+ },
+ "Kazakhstan": {
+  "slug": "kazakhstan",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 68.15,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 68.15
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 29.72
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.46
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.21
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.2
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.08
+   }
+  ]
+ },
+ "Kenya": {
+  "slug": "kenya",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.87,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.87
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.59
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.27
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.15
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.08
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.02
+   }
+  ]
+ },
+ "Kiribati": {
+  "slug": "kiribati",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.94,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.94
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.13
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.39
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.32
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.18
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Kuwait": {
+  "slug": "kuwait",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 94.3,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 94.3
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.46
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.51
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.35
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.19
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.09
+   }
+  ]
+ },
+ "Kyrgyzstan": {
+  "slug": "kyrgyzstan",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 83.41,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 83.41
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 14.68
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.06
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.38
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.25
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.08
+   }
+  ]
+ },
+ "Lao": {
+  "slug": "lao",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 98.94,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 98.94
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 0.6
+   },
+   {
+    "buscador": "CocCoc",
+    "porcentaje": 0.12
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.1
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.06
+   }
+  ]
+ },
+ "Latvia": {
+  "slug": "latvia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 84.54,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 84.54
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 11.12
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.17
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.71
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.27
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.11
+   }
+  ]
+ },
+ "Lesotho": {
+  "slug": "lesotho",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.88,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.88
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.59
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.23
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.15
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.08
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.03
+   }
+  ]
+ },
+ "Liberia": {
+  "slug": "liberia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.62,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.62
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.89
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.22
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.12
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.06
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Libya": {
+  "slug": "libya",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 97.83,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 97.83
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 1.16
+   },
+   {
+    "buscador": "Yandex",
+    "porcentaje": 0.73
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.11
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.06
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.06
+   }
+  ]
+ },
+ "Liechtenstein": {
+  "slug": "liechtenstein",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 78.25,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 78.25
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 17.2
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 2.28
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.93
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.45
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.35
+   }
+  ]
+ },
+ "Lithuania": {
+  "slug": "lithuania",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 91.17,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 91.17
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 4.36
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.48
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.57
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.12
+   }
+  ]
+ },
+ "Luxembourg": {
+  "slug": "luxembourg",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 80.86,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 80.86
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 8.84
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 6.76
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.42
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.86
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.61
+   }
+  ]
+ },
+ "Macao": {
+  "slug": "macao",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 85.03,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 85.03
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.27
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 3.66
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 1.08
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.31
+   },
+   {
+    "buscador": "CocCoc",
+    "porcentaje": 0.19
+   }
+  ]
+ },
+ "Macedonia": {
+  "slug": "macedonia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.38,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.38
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.62
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.38
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.25
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.25
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Madagascar": {
+  "slug": "madagascar",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.51,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.51
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.63
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 0.19
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.14
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.12
+   }
+  ]
+ },
+ "Malawi": {
+  "slug": "malawi",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.07,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.07
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.39
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.27
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.08
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.06
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Malaysia": {
+  "slug": "malaysia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 91.27,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 91.27
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.62
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.94
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.68
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.36
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Maldives": {
+  "slug": "maldives",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.68,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.68
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.5
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.22
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.21
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.07
+   }
+  ]
+ },
+ "Mali": {
+  "slug": "mali",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.67,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.67
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.59
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.38
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.15
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.06
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.06
+   }
+  ]
+ },
+ "Malta": {
+  "slug": "malta",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.31,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.31
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 8.57
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.86
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.58
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.26
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.22
+   }
+  ]
+ },
+ "Martinique": {
+  "slug": "martinique",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 86.9,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 86.9
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.08
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.82
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.77
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.62
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 0.41
+   }
+  ]
+ },
+ "Mauritania": {
+  "slug": "mauritania",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 98.35,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 98.35
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.16
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.19
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.14
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.09
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Mauritius": {
+  "slug": "mauritius",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 90.37,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 90.37
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 8
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.56
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.31
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.27
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.17
+   }
+  ]
+ },
+ "Mayotte": {
+  "slug": "mayotte",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 83.47,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 83.47
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 10.01
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 3.14
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 1.73
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.6
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.49
+   }
+  ]
+ },
+ "Mexico": {
+  "slug": "mexico",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 88.08,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 88.08
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.43
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.78
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.28
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.16
+   }
+  ]
+ },
+ "Micronesia": {
+  "slug": "micronesia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 90.58,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 90.58
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.8
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.43
+   },
+   {
+    "buscador": "CocCoc",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Moldova": {
+  "slug": "moldova",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 90.64,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 90.64
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 6.57
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.7
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.55
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.36
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.11
+   }
+  ]
+ },
+ "Monaco": {
+  "slug": "monaco",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 84.97,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 84.97
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 10.42
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.43
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.13
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 0.94
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.7
+   }
+  ]
+ },
+ "Mongolia": {
+  "slug": "mongolia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 90.36,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 90.36
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.49
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.68
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.57
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.39
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.22
+   }
+  ]
+ },
+ "Montenegro": {
+  "slug": "montenegro",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.59,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.59
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.82
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.98
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.3
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.14
+   },
+   {
+    "buscador": "Seznam",
+    "porcentaje": 0.07
+   }
+  ]
+ },
+ "Montserrat": {
+  "slug": "montserrat",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 81.88,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 81.88
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 16.3
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.81
+   }
+  ]
+ },
+ "Morocco": {
+  "slug": "morocco",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.38,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.38
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.21
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.59
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.44
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.22
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Mozambique": {
+  "slug": "mozambique",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.98,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.98
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 8.77
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.63
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.31
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.1
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.06
+   }
+  ]
+ },
+ "Myanmar": {
+  "slug": "myanmar",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.64,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.64
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.46
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.44
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.1
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Namibia": {
+  "slug": "namibia",
+  "periodo": "August 2026",
+  "lider": "Google",
+  "porcentaje_lider": 90.85,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 90.85
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 8.28
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.36
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.15
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.12
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.11
+   }
+  ]
+ },
+ "Nauru": {
+  "slug": "nauru",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.62,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.62
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.24
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.68
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.46
+   }
+  ]
+ },
+ "Nepal": {
+  "slug": "nepal",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.78,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.78
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.19
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.57
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.3
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.12
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.02
+   }
+  ]
+ },
+ "Netherlands": {
+  "slug": "netherlands",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.14,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.14
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.57
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 2.57
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.53
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.48
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.54
+   }
+  ]
+ },
+ "New Caledonia": {
+  "slug": "new-caledonia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 86.53,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 86.53
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.51
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.45
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 1.01
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.58
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 0.56
+   }
+  ]
+ },
+ "New Zealand": {
+  "slug": "new-zealand",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.02,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.02
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.71
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.24
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.14
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.28
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.26
+   }
+  ]
+ },
+ "Nicaragua": {
+  "slug": "nicaragua",
+  "periodo": "August 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.3,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.3
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.11
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.67
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.55
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.2
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.11
+   }
+  ]
+ },
+ "Niger": {
+  "slug": "niger",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 97.58,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 97.58
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.95
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.2
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.1
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.09
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Nigeria": {
+  "slug": "nigeria",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 98.28,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 98.28
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.41
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.15
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.08
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.04
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.02
+   }
+  ]
+ },
+ "Niue": {
+  "slug": "niue",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 82.35,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 82.35
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 11.76
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 5.88
+   }
+  ]
+ },
+ "Norfolk Island": {
+  "slug": "norfolk-island",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 100,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 100
+   }
+  ]
+ },
+ "North Korea": {
+  "slug": "north-korea",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 100,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 100
+   }
+  ]
+ },
+ "Norway": {
+  "slug": "norway",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.13,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.13
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.38
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.46
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.31
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.25
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.27
+   }
+  ]
+ },
+ "Oman": {
+  "slug": "oman",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.13,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.13
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.48
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.17
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.12
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.08
+   }
+  ]
+ },
+ "Pakistan": {
+  "slug": "pakistan",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.1,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.1
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.75
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.75
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.26
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.12
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.01
+   }
+  ]
+ },
+ "Palau": {
+  "slug": "palau",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.41,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.41
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.48
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.47
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.16
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.16
+   }
+  ]
+ },
+ "Palestinian Territory": {
+  "slug": "palestinian-territory",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 98.25,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 98.25
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 1.19
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.23
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.2
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Panama": {
+  "slug": "panama",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 88.76,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 88.76
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.67
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.59
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.41
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.27
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.23
+   }
+  ]
+ },
+ "Papua New Guinea": {
+  "slug": "papua-new-guinea",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.49,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.49
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 8.98
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.67
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.3
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.3
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.14
+   }
+  ]
+ },
+ "Paraguay": {
+  "slug": "paraguay",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 91.65,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 91.65
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.21
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.32
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.31
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.26
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.21
+   }
+  ]
+ },
+ "Peru": {
+  "slug": "peru",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 91.87,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 91.87
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.65
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.84
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.22
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.21
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.17
+   }
+  ]
+ },
+ "Philippines": {
+  "slug": "philippines",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 90.81,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 90.81
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.19
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.36
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.25
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.18
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.11
+   }
+  ]
+ },
+ "Pitcairn Islands": {
+  "slug": "pitcairn-islands",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 75,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 75
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 25
+   }
+  ]
+ },
+ "Poland": {
+  "slug": "poland",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.56,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.56
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.38
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.44
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.79
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.51
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.18
+   }
+  ]
+ },
+ "Portugal": {
+  "slug": "portugal",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 87.34,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 87.34
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 10.18
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.88
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.83
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.39
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.24
+   }
+  ]
+ },
+ "Qatar": {
+  "slug": "qatar",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.38,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.38
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.14
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.57
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.56
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.21
+   },
+   {
+    "buscador": "CocCoc",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Reunion": {
+  "slug": "reunion",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 86.64,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 86.64
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 8.51
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.47
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 1.15
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 1.12
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.61
+   }
+  ]
+ },
+ "Romania": {
+  "slug": "romania",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.78,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.78
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 2.18
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.35
+   },
+   {
+    "buscador": "Yandex",
+    "porcentaje": 0.32
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.21
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.08
+   }
+  ]
+ },
+ "Russian Federation": {
+  "slug": "russian-federation",
+  "periodo": "September 2026",
+  "lider": "YANDEX",
+  "porcentaje_lider": 70.33,
+  "buscadores": [
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 70.33
+   },
+   {
+    "buscador": "Google",
+    "porcentaje": 28.12
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 0.74
+   },
+   {
+    "buscador": "Mail.ru",
+    "porcentaje": 0.46
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.21
+   },
+   {
+    "buscador": "Rambler",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Rwanda": {
+  "slug": "rwanda",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.26,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.26
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.65
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.7
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.17
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.1
+   },
+   {
+    "buscador": "StartPage",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Saint Helena": {
+  "slug": "saint-helena",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 84.62,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 84.62
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 14.1
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.28
+   }
+  ]
+ },
+ "Saint Lucia": {
+  "slug": "saint-lucia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.62,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.62
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 8.84
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.22
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.16
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.06
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Saint Pierre And Miquelon": {
+  "slug": "saint-pierre-and-miquelon",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 83.65,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 83.65
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.73
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 4.86
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.54
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 0.55
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.44
+   }
+  ]
+ },
+ "Samoa": {
+  "slug": "samoa",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 83.82,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 83.82
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 14.1
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.38
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.26
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.17
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.17
+   }
+  ]
+ },
+ "San Marino": {
+  "slug": "san-marino",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.34,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.34
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 4.48
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.05
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.54
+   },
+   {
+    "buscador": "Qwant",
+    "porcentaje": 0.34
+   },
+   {
+    "buscador": "Yandex",
+    "porcentaje": 0.21
+   }
+  ]
+ },
+ "Saudi Arabia": {
+  "slug": "saudi-arabia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 94.46,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 94.46
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 3.75
+   },
+   {
+    "buscador": "Yandex",
+    "porcentaje": 1.06
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.36
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.16
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.15
+   }
+  ]
+ },
+ "Senegal": {
+  "slug": "senegal",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.71,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.71
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.65
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.21
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.12
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.11
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.09
+   }
+  ]
+ },
+ "Serbia": {
+  "slug": "serbia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.51,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.51
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.26
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.57
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.35
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.23
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.03
+   }
+  ]
+ },
+ "Seychelles": {
+  "slug": "seychelles",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 83.6,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 83.6
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 10.22
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.14
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.93
+   },
+   {
+    "buscador": "Mail.ru",
+    "porcentaje": 0.37
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.37
+   }
+  ]
+ },
+ "Sierra Leone": {
+  "slug": "sierra-leone",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.63,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.63
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.03
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.15
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.09
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.06
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.01
+   }
+  ]
+ },
+ "Singapore": {
+  "slug": "singapore",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.16,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.16
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.53
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.08
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.97
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.77
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.19
+   }
+  ]
+ },
+ "Slovakia (Slovak Republic)": {
+  "slug": "slovakia-(slovak-republic)",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.37,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.37
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.37
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.42
+   },
+   {
+    "buscador": "Seznam",
+    "porcentaje": 0.31
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.25
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.11
+   }
+  ]
+ },
+ "Slovenia": {
+  "slug": "slovenia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 92.61,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 92.61
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 5.37
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.86
+   },
+   {
+    "buscador": "Yandex",
+    "porcentaje": 0.61
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.19
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.15
+   }
+  ]
+ },
+ "Solomon Islands": {
+  "slug": "solomon-islands",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 81.39,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 81.39
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 17.91
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.51
+   },
+   {
+    "buscador": "Haosou",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.03
+   },
+   {
+    "buscador": "Naver",
+    "porcentaje": 0.03
+   }
+  ]
+ },
+ "Somalia": {
+  "slug": "somalia",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.7,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.7
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 2.23
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.5
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.42
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.09
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.02
+   }
+  ]
+ },
+ "South Africa": {
+  "slug": "south-africa",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 91.75,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 91.75
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 7.36
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.31
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.28
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.18
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.09
+   }
+  ]
+ },
+ "South Korea": {
+  "slug": "south-korea",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 47.97,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 47.97
+   },
+   {
+    "buscador": "Naver",
+    "porcentaje": 43.06
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.83
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.72
+   },
+   {
+    "buscador": "CocCoc",
+    "porcentaje": 1.15
+   },
+   {
+    "buscador": "Daum",
+    "porcentaje": 0.73
+   }
+  ]
+ },
+ "Spain": {
+  "slug": "spain",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.81,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.81
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.49
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.92
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.39
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.19
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.11
+   }
+  ]
+ },
+ "Sri Lanka": {
+  "slug": "sri-lanka",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.7,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.7
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 4.88
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.95
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.22
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.16
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Sudan": {
+  "slug": "sudan",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 99.38,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 99.38
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 0.42
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.13
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.02
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.02
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.01
+   }
+  ]
+ },
+ "Suriname": {
+  "slug": "suriname",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 93.14,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 93.14
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 5.46
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.66
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.29
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.18
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.17
+   }
+  ]
+ },
+ "Swaziland": {
+  "slug": "swaziland",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 95.77,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 95.77
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.87
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.17
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.1
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.04
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.02
+   }
+  ]
+ },
+ "Sweden": {
+  "slug": "sweden",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 85.86,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 85.86
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 8.44
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 2.11
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.89
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.17
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.37
+   }
+  ]
+ },
+ "Switzerland": {
+  "slug": "switzerland",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 80.19,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 80.19
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 12.11
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.56
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 1.87
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.73
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 1.26
+   }
+  ]
+ },
+ "Syrian Arab Republic": {
+  "slug": "syrian-arab-republic",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 99.05,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 99.05
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.44
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 0.42
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.02
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.02
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.02
+   }
+  ]
+ },
+ "Taiwan": {
+  "slug": "taiwan",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 79.48,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 79.48
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 11.37
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 8.24
+   },
+   {
+    "buscador": "CocCoc",
+    "porcentaje": 0.43
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.24
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.12
+   }
+  ]
+ },
+ "Tajikistan": {
+  "slug": "tajikistan",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 85.02,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 85.02
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 13.81
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 0.66
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.31
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.11
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.04
+   }
+  ]
+ },
+ "Tanzania": {
+  "slug": "tanzania",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 96.57,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 96.57
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 3.06
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.16
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.09
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.07
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.03
+   }
+  ]
+ },
+ "Thailand": {
+  "slug": "thailand",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 99.37,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 99.37
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 0.53
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.04
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.03
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.01
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.01
+   }
+  ]
+ },
+ "Timor Leste": {
+  "slug": "timor-leste",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 91.97,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 91.97
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.73
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.69
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.29
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.23
+   },
+   {
+    "buscador": "Petal Search",
+    "porcentaje": 0.03
+   }
+  ]
+ },
+ "Togo": {
+  "slug": "togo",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 94.99,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 94.99
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 4.45
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 0.19
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.13
+   },
+   {
+    "buscador": "Yandex",
+    "porcentaje": 0.1
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.05
+   }
+  ]
+ },
+ "Tokelau": {
+  "slug": "tokelau",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 89.19,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 89.19
+   },
+   {
+    "buscador": "Bing",
+    "porcentaje": 8.11
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 2.7
+   }
+  ]
+ },
+ "Tonga": {
+  "slug": "tonga",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 81.22,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 81.22
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 16.46
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.66
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.43
+   },
+   {
+    "buscador": "Baidu",
+    "porcentaje": 0.24
+   }
+  ]
+ },
+ "United Kingdom": {
+  "slug": "united-kingdom",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 91.39,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 91.39
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 6.08
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 1.32
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 0.65
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.3
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.22
+   }
+  ]
+ },
+ "United States Of America": {
+  "slug": "united-states-of-america",
+  "periodo": "September 2026",
+  "lider": "Google",
+  "porcentaje_lider": 85.19,
+  "buscadores": [
+   {
+    "buscador": "Google",
+    "porcentaje": 85.19
+   },
+   {
+    "buscador": "bing",
+    "porcentaje": 9.89
+   },
+   {
+    "buscador": "Yahoo!",
+    "porcentaje": 2.64
+   },
+   {
+    "buscador": "DuckDuckGo",
+    "porcentaje": 1.75
+   },
+   {
+    "buscador": "YANDEX",
+    "porcentaje": 0.33
+   },
+   {
+    "buscador": "Ecosia",
+    "porcentaje": 0.12
+   }
+  ]
+ }
+}
