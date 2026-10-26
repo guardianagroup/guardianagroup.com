@@ -28,6 +28,9 @@ import json, math, os, re, collections
 
 RAIZ = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'orbita')
 
+ADM = []  # each city's region (GeoNames admin1), in the order of lee_ciudades
+
+
 def lee_ciudades():
     out = []
     with open(os.path.join(RAIZ, 'static', 'tierra', 'ciudades.tsv'), encoding='utf-8') as f:
@@ -37,6 +40,7 @@ def lee_ciudades():
             n, cc, adm, la, lo = l.rstrip('\n').split('\t')
             n = re.sub(r'^(.*\D)\s+\d{1,2}$', r'\1', n)  # «Marseille 02» (a district) is Marseille (23 Oct 2026)
             out.append((n, cc, float(la), float(lo)))
+            ADM.append(adm)
     return out
 
 def lee_pueblos():
@@ -104,6 +108,7 @@ class Rejilla:
             self.c[(int(math.floor(la)), int(math.floor(lo)))].append(i)
         self.ciudades = ciudades
         self.paises = paises
+        self.adm = None
     def cercana(self, la, lo, max_km, pais=None):
         mejor, dm = None, max_km
         r = 1 + int(max_km / 111) + 1
@@ -116,6 +121,22 @@ class Rejilla:
                     d = km(la, lo, la2, lo2)
                     if d < dm:
                         mejor, dm = k, d
+        return mejor
+    def ciudad(self, la, lo, max_km, pais=None):
+        """25 Oct 2026 (a Madrid data centre said «San Blas-Canillejas»): the city, not its district. GeoNames
+        cities15000 lists districts too; the nearest place gives way to a bigger one within 12 km when the district's
+        region is that city (San Blas-Canillejas, «Madrid») or its name starts with it («Amsterdam-Zuidoost»). A town
+        of its own (Alcobendas, Bellevue, Alpharetta) keeps its name."""
+        cand = self.todas(la, lo, min(max_km, 12), pais)
+        if not cand:
+            return self.cercana(la, lo, max_km, pais)
+        k0 = cand[0][1]; n0, cc0, adm0 = self.ciudades[k0][0], self.ciudades[k0][1], self.adm[k0] if self.adm else ''
+        mejor = k0
+        for d, k in cand:
+            if k >= mejor: continue
+            n = self.ciudades[k][0]
+            if self.ciudades[k][1] == cc0 and (n == adm0 or n0.startswith(n + '-') or n0.startswith(n + ' ')):
+                mejor = k  # the biggest of the matches (Zürich, not «Zürich (Kreis 10)»)
         return mejor
     def todas(self, la, lo, max_km, pais=None):
         out = []
@@ -142,7 +163,7 @@ def base_cable(n):
 def main():
     ciudades = lee_ciudades()
     paises = Paises()
-    rj = Rejilla(ciudades, paises)
+    rj = Rejilla(ciudades, paises); rj.adm = ADM
     pueblos, pob = lee_pueblos()
     rp = Rejilla(pueblos, paises) if pueblos else None
     def lugar_cable(la, lo):
@@ -177,7 +198,7 @@ def main():
     grupos = collections.OrderedDict()
     claves = []
     for p in lista:
-        k = rj.cercana(p[ia], p[il], 50, paises.en(p[ia], p[il], 1))
+        k = rj.ciudad(p[ia], p[il], 50, paises.en(p[ia], p[il], 1))
         clave = ('c', k) if k is not None else ('p', round(p[il], 2), round(p[ia], 2))
         claves.append(clave)
         g = grupos.setdefault(clave, {'lon': 0.0, 'lat': 0.0, 'n': 0, 'ops': collections.Counter()})

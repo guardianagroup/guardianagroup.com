@@ -859,7 +859,9 @@
   // Natural Earth, public domain (datos/fronteras.json, built by herramientas/fronteras.py): countries from ×1.5,
   // states and provinces from ×2.5, their names when close enough. Loaded once, the first time the zoom asks for it.
   let FR = null, PREV = null;
-  const esLimpio = () => document.body.classList.contains('limpio');
+  // 25 Oct 2026 (review, after the colour map): from ×4 the labels and lines take the «limpio» rules even over the photo (body.mapa-cerca)
+  const esLimpio = () => document.body.classList.contains('limpio') || document.body.classList.contains('mapa-cerca');
+  const conFoto = () => !document.body.classList.contains('limpio'); // the photo is under the data: names need a halo
   async function cargaFronteras() {
     if (FR || cargando.fronteras) return; cargando.fronteras = true;
     try {
@@ -904,6 +906,7 @@
           let w = REG_ANCHO.get(txt); if (w === undefined) { w = Math.ceil(cx.measureText(txt).width); REG_ANCHO.set(txt, w); } // measured: Cyrillic, Arabic or Chinese are not 6 px a letter
           if (ocupado.some((o) => Math.abs(x - o[0]) < (w + o[2]) / 2 + 10 && Math.abs(y - o[1]) < 14)) continue;
           ocupado.push([x, y, w]);
+          if (conFoto()) { cx.lineJoin = 'round'; cx.lineWidth = 3; cx.strokeStyle = 'rgba(6,8,12,.7)'; cx.strokeText(txt, x, y); }
           cx.fillStyle = `rgba(${BLANCO},${Math.min(0.5, 0.2 + 0.05 * z)})`; cx.fillText(txt, x, y);
         }
         cx.textAlign = 'start';
