@@ -3,6 +3,7 @@
 #
 # Deja el motor (zero-motor/servidor.js) corriendo como servicio en 127.0.0.1:8792, detrás de Caddy con certificado TLS
 # automático en https://<dominio> (WebSocket wss://<dominio>/sesion), con Tor para la ruta ULTRA y Chromium de Playwright.
+# Desde el 26 Oct 2026 también el relé de Comunicaciones (wss://<dominio>/com) y coturn (llamadas por el relé, puerto 3478).
 #
 # Uso (en la consola del servidor, como root):
 #   curl -fsSL https://raw.githubusercontent.com/guardianagroup/guardianagroup.com/main/zero-motor/instalar.sh | bash -s -- motor.guardianagroup.com
@@ -195,6 +196,69 @@ EOF
   echo "  creado (edítalo para poner las claves de PUERTA IA)"
 else
   echo "  ya existe: no se toca"
+fi
+
+# Comunicaciones (26 Oct 2026): el relé de chat/llamadas/archivos vive dentro del motor (wss://<dominio>/com) y las
+# llamadas pasan por coturn en este servidor para que ningún extremo vea la dirección del otro. Credenciales de vida
+# corta firmadas con TURN_SECRETO (en $ENVF, generado aquí una vez). Sin coturn, el relé sigue pero sin llamadas.
+paso "Comunicaciones: servicio de llamadas (coturn)"
+if grep -q '^TURN_SECRETO=' "$ENVF"; then
+  TURN_SECRETO=$(sed -n 's/^TURN_SECRETO=//p' "$ENVF" | head -1)
+else
+  TURN_SECRETO=$(openssl rand -hex 32)
+  printf '\n# Comunicaciones · llamadas por el relé (coturn): secreto compartido con /etc/turnserver.conf. No se enseña.\nTURN_SECRETO=%s\nTURN_HOST=%s\nTURN_PUERTO=3478\n' "$TURN_SECRETO" "$DOMINIO" >> "$ENVF"
+fi
+grep -q '^TURN_HOST=' "$ENVF" || echo "TURN_HOST=$DOMINIO" >> "$ENVF"
+if apt-get install -y -q coturn >/dev/null 2>&1; then
+  cat > /etc/turnserver.conf <<EOF
+# GUARDIANA · Comunicaciones · relé de llamadas. Generado por zero-motor/instalar.sh (se reescribe al reinstalar).
+listening-port=3478
+fingerprint
+use-auth-secret
+static-auth-secret=$TURN_SECRETO
+realm=$DOMINIO
+stale-nonce=600
+min-port=49160
+max-port=49999
+no-multicast-peers
+no-cli
+no-tlsv1
+no-tlsv1_1
+no-rfc5780
+no-stun-backward-compatibility
+response-origin-only-with-rfc5780
+user-quota=12
+total-quota=400
+max-bps=1500000
+# ningún registro de direcciones: el relé no guarda quién habla con quién
+log-file=/dev/null
+no-stdout-log
+simple-log
+# el relé solo lleva a direcciones públicas: nunca a redes internas ni a este servidor
+denied-peer-ip=0.0.0.0-0.255.255.255
+denied-peer-ip=10.0.0.0-10.255.255.255
+denied-peer-ip=100.64.0.0-100.127.255.255
+denied-peer-ip=127.0.0.0-127.255.255.255
+denied-peer-ip=169.254.0.0-169.254.255.255
+denied-peer-ip=172.16.0.0-172.31.255.255
+denied-peer-ip=192.0.0.0-192.0.0.255
+denied-peer-ip=192.168.0.0-192.168.255.255
+denied-peer-ip=198.18.0.0-198.19.255.255
+denied-peer-ip=::1
+denied-peer-ip=64:ff9b::-64:ff9b::ffff:ffff
+denied-peer-ip=fc00::-fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+denied-peer-ip=fe80::-febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+EOF
+  chmod 640 /etc/turnserver.conf; chown root:turnserver /etc/turnserver.conf 2>/dev/null || true
+  if [ -f /etc/default/coturn ]; then sed -i 's/^#\?TURNSERVER_ENABLED=.*/TURNSERVER_ENABLED=1/' /etc/default/coturn; grep -q '^TURNSERVER_ENABLED=1' /etc/default/coturn || echo 'TURNSERVER_ENABLED=1' >> /etc/default/coturn; fi
+  systemctl enable -q coturn 2>/dev/null || true
+  systemctl restart coturn || rojo "  coturn no arranca: journalctl -u coturn -n 30 (el relé sigue, sin llamadas)"
+  if command -v ufw >/dev/null && ufw status | grep -q '^Status: active'; then
+    ufw allow 3478/tcp >/dev/null; ufw allow 3478/udp >/dev/null; ufw allow 49160:49999/udp >/dev/null
+  fi
+  echo "  coturn en $DOMINIO:3478 (udp y tcp), relé 49160–49999/udp"
+else
+  rojo "  coturn no se pudo instalar: Comunicaciones funcionará sin llamadas"
 fi
 
 paso "Servicio systemd zero-motor"

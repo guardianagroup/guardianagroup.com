@@ -80,7 +80,9 @@
     // planet (static/radiografias.js), not a page.
     { id: 'radiografias', n: 'Radiografías', s: 'Lo que ven de ti', d: 'Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.', propia: true },
     { id: 'zero', n: 'ZERO', s: 'Navegador · demostración', d: 'El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.', pagina: 'zero/?orbita=1&entrada=0' },
-    { id: 'comunicaciones', n: 'Comunicaciones', s: 'En construcción', d: 'Chat, llamadas y archivos cifrados de extremo a extremo. Llegará cuando esté terminada y probada.', url: null, desarrollo: true },
+    // 26 Oct 2026 (owner: «haz comunicaciones enteras»): the door opens the web app itself, full page (calls need the
+    // microphone and the camera, and large files are written straight to disk: none of that belongs in a frame).
+    { id: 'comunicaciones', n: 'Comunicaciones', s: 'Habla sin testigos', d: 'Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.', enlace: 'comunicaciones/' },
     // 23 Oct 2026, 15:49 (owner: «dónde va el sistema operativo… y con qué palabra: donde tú lo veas»): GUARDIANA OS, a
     // download rather than a door into the web, sits apart under the three doors and says «En preparación» until a
     // first version runs (then «Próximamente»); it promises only what that version can do, and says what it will not.
@@ -163,6 +165,8 @@
   function abre(i, apila = true) {
     elige(i);
     const p = PUERTAS[sel];
+    // a door that is a page of its own (Comunicaciones): the browser goes there and «‹ GUARDIANA» brings it back
+    if (p.enlace) { const l = window.GuardianaIdioma && GuardianaIdioma.lang; location.href = p.enlace + (l && l !== 'es' ? '?lang=' + l : ''); return; }
     // a door with its own panel over the planet (Radiografías): the planet and its instruments stay
     if (p.propia && window.OrbitaRadiografias) {
       if (dentro) cierra();

@@ -1,0 +1,619 @@
+// GUARDIANA · Comunicaciones · la aplicación (26 Oct 2026). Identidad, invitaciones, sesiones, mensajes, archivos,
+// llamadas y la pantalla. Lo que se guarda (IndexedDB «guardiana-com») queda en este navegador y se cifra en reposo con
+// una clave que también vive aquí; «Destruir» lo borra en los dos lados. El relé nunca recibe nada legible.
+'use strict';
+(() => {
+  const C = window.GuardianaCripto, $ = (s) => document.querySelector(s), T = (s) => (window.GuardianaIdioma ? GuardianaIdioma.t(s) : s);
+  const LOC = () => (window.GuardianaIdioma && GuardianaIdioma.locale) || 'es';
+  const TROZO = 192 * 1024, VENTANA = 12;
+  const ORIGEN = location.origin + location.pathname.replace(/[^/]*$/, '');
+  const LOCAL = /^(127\.0\.0\.1|localhost)$/.test(location.hostname);
+
+  // ---------- almacén ----------
+  const BD = (() => {
+    let db = null;
+    const abre = () => new Promise((res, rej) => {
+      const r = indexedDB.open('guardiana-com', 1);
+      r.onupgradeneeded = () => {
+        const d = r.result;
+        d.createObjectStore('yo', { keyPath: 'id' });
+        d.createObjectStore('conv', { keyPath: 'id' });
+        d.createObjectStore('msg', { keyPath: 'id' }).createIndex('conv', 'conv');
+        d.createObjectStore('arch', { keyPath: 'id' }).createIndex('conv', 'conv');
+      };
+      r.onsuccess = () => { db = r.result; res(db); }; r.onerror = () => rej(r.error);
+    });
+    const tx = (st, modo, f) => new Promise((res, rej) => { const t = db.transaction(st, modo); const o = t.objectStore(st); const q = f(o); t.oncomplete = () => res(q && q.result); t.onerror = () => rej(t.error); t.onabort = () => rej(t.error); });
+    const pon = (st, v) => tx(st, 'readwrite', (o) => o.put(v));
+    const saca = (st, k) => tx(st, 'readonly', (o) => o.get(k));
+    const todos = (st) => tx(st, 'readonly', (o) => o.getAll());
+    const porConv = (st, c) => tx(st, 'readonly', (o) => o.index('conv').getAll(c));
+    const borra = (st, k) => tx(st, 'readwrite', (o) => o.delete(k));
+    const borraConv = async (st, c) => { const xs = await porConv(st, c); for (const x of xs) await borra(st, x.id); };
+    return { abre, pon, saca, todos, porConv, borra, borraConv };
+  })();
+
+  // ---------- estado ----------
+  let YO = null;            // { firma, acuerdo, firmaPub, acuerdoPub, nombre, reposo, huella }
+  const CONVS = new Map();  // sala → conv
+  let ACTUAL = null;        // sala abierta
+  let R = null, LL = null, LLAMADA = null; // LLAMADA: la conversación de la llamada en curso
+  const uuid = () => (crypto.randomUUID ? crypto.randomUUID() : C.hex(C.azar(16)));
+  const inicial = (n) => ((n || '').trim()[0] || '·').toUpperCase();
+
+  // cifrado en reposo (clave local no exportable; nonce aleatorio por registro)
+  async function guardaSellado(obj) { const iv = C.azar(12); const datos = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, YO.reposo, C.te.encode(JSON.stringify(obj)))); return { iv, datos }; }
+  async function leeSellado(r) { try { return JSON.parse(C.td.decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: r.iv }, YO.reposo, r.datos))); } catch (_) { return null; } }
+
+  // ---------- identidad ----------
+  async function cargaIdentidad() {
+    let y = await BD.saca('yo', 'yo');
+    if (!y) {
+      const id = await C.creaIdentidad();
+      const reposo = await crypto.subtle.generateKey({ name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+      y = { id: 'yo', firma: id.firma, acuerdo: id.acuerdo, firmaPub: id.firmaPub, acuerdoPub: id.acuerdoPub, nombre: '', reposo, creado: Date.now() };
+      await BD.pon('yo', y);
+      y.nueva = true;
+    }
+    YO = y; YO.huella = await C.huella(y.firmaPub, y.acuerdoPub);
+    $('#yonombre').value = YO.nombre || '';
+    $('#yoavatar').textContent = inicial(YO.nombre);
+    $('#yohuella').textContent = C.hex(YO.huella).slice(0, 32).replace(/(.{8})/g, '$1 ').trim();
+  }
+  async function guardaNombre(n) {
+    YO.nombre = String(n || '').trim().slice(0, 40);
+    try { const y = await BD.saca('yo', 'yo'); y.nombre = YO.nombre; await BD.pon('yo', y); } catch (e) { console.warn('nombre', e); }
+    $('#yoavatar').textContent = inicial(YO.nombre);
+    for (const c of CONVS.values()) if (c.sesion) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
+  }
+
+  // ---------- conversaciones ----------
+  async function yoId(sala) { return C.hex(await C.sha256(C.te.encode('GUARDIANA miembro\n' + sala + '\n' + C.hex(YO.huella)))).slice(0, 16); }
+  function convNueva(sala, semilla, rol) {
+    return { id: sala, semilla, rol, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0 };
+  }
+  const guardable = (c) => ({ id: c.id, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos });
+  const guardaConv = (c) => BD.pon('conv', guardable(c));
+  async function preparaConv(c) {
+    const d = await C.deSemilla(c.semilla);
+    c.presentacion = d.presentacion; c.yo = await yoId(c.id);
+    c.miembros = new Set(); c.sesion = null; c.sesiones = new Map(); c.ef = null; c.epoca = null; c.mensajes = []; c.cola = []; c.enviando = false; c.archivos = new Map();
+    c.suId = c.huella ? C.hex(await C.sha256(C.te.encode('GUARDIANA miembro\n' + c.id + '\n' + C.hex(c.huella)))).slice(0, 16) : null;
+    CONVS.set(c.id, c);
+    R.entra(c.id, c.yo);
+  }
+  async function cargaConvs() {
+    const xs = await BD.todos('conv');
+    for (const x of xs) await preparaConv(x);
+    pintaLista();
+  }
+  async function creaInvitacion() {
+    const semilla = C.nuevaSemilla();
+    const d = await C.deSemilla(semilla);
+    const c = convNueva(d.sala, semilla, 'invita');
+    await guardaConv(c); await preparaConv(c);
+    pintaLista(); abreConv(c.id); muestraInvitacion(c);
+  }
+  async function aceptaInvitacion(enlace) {
+    let semilla = null;
+    try { const m = String(enlace).match(/#i=([A-Za-z0-9_-]{43})/); if (m) semilla = C.deB64u(m[1]); } catch (_) {}
+    if (!semilla || semilla.length !== 32) return false;
+    const d = await C.deSemilla(semilla);
+    if (CONVS.has(d.sala)) { abreConv(d.sala); return true; }
+    const c = convNueva(d.sala, semilla, 'acepta');
+    await guardaConv(c); await preparaConv(c);
+    pintaLista(); abreConv(c.id);
+    return true;
+  }
+  function enlaceDe(c) { return ORIGEN + '#i=' + C.b64u(c.semilla); }
+
+  // ---------- presentación y sesión ----------
+  // Quién inicia: de las dos huellas, la menor. Quien inicia se presenta cuando llega o ve llegar; quien responde solo
+  // contesta a una presentación (con «resp» = la época a la que contesta) y deriva la sesión en ese momento; quien
+  // inicia deriva al recibir la respuesta a su época vigente. Así los dos usan el mismo par de efímeras.
+  const soyInicio = (c) => !c.huella || C.hex(YO.huella) < C.hex(c.huella);
+  // presentarse va por la misma cola que las tramas de la conversación: nunca dos efímeras a medio camino
+  const enCola = (c, f) => { c.proc = (c.proc || Promise.resolve()).then(f).catch((e) => console.warn(e)); return c.proc; };
+  const reintenta = (c, ms) => { clearTimeout(c.reintento); c.reintento = setTimeout(() => { if (!c.sesion && c.suId && c.miembros.has(c.suId) && R.abierto) enCola(c, () => presenta(c, null, true)); }, ms); };
+  async function presenta(c, resp, forzar) {
+    if (c.estado === 'destruida' || !R.abierto) return;
+    // una presentación espontánea en reacción a otra espontánea no se repite en ráfaga: si hace falta, el reintento la manda
+    if (!resp && !forzar && c.presentadoEn && Date.now() - c.presentadoEn < 1200) { reintenta(c, 1400); return; }
+    c.ef = await C.efimera(); c.epoca = C.azar(8);
+    // las últimas efímeras propias, por época: una respuesta a cualquiera de ellas vale para derivar sesión
+    c.efs = c.efs || new Map(); c.efs.set(C.hex(c.epoca), c.ef); for (const k of [...c.efs.keys()].slice(0, -4)) c.efs.delete(k);
+    const r = resp || new Uint8Array(8);
+    const datos = C.cat(C.te.encode(c.id), YO.firmaPub, YO.acuerdoPub, c.ef.pub, c.epoca, r);
+    const sig = await C.firma(YO, datos);
+    const j = { v: 1, firmaPub: C.b64u(YO.firmaPub), acuerdoPub: C.b64u(YO.acuerdoPub), ef: C.b64u(c.ef.pub), epoca: C.b64u(c.epoca), resp: resp ? C.b64u(resp) : '', nombre: YO.nombre, sig: C.b64u(sig) };
+    const iv = C.azar(12);
+    const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv, additionalData: new Uint8Array([1]) }, c.presentacion, C.te.encode(JSON.stringify(j))));
+    R.manda(c.id, c.suId || null, C.cat(new Uint8Array([1]), iv, ct));
+    c.presentadoEn = Date.now();
+    if (!resp) reintenta(c, 4000 + Math.random() * 1500);
+  }
+  async function recibePresentacion(c, de, b) {
+    if (b.length < 30) return;
+    let j;
+    try { j = JSON.parse(C.td.decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b.subarray(1, 13), additionalData: new Uint8Array([1]) }, c.presentacion, b.subarray(13)))); } catch (_) { return; }
+    try {
+      const firmaPub = C.deB64u(j.firmaPub), acuerdoPub = C.deB64u(j.acuerdoPub), ef = C.deB64u(j.ef), epoca = C.deB64u(j.epoca), sig = C.deB64u(j.sig), resp = j.resp ? C.deB64u(j.resp) : new Uint8Array(8);
+      if (firmaPub.length !== 65 || acuerdoPub.length !== 65 || ef.length !== 65 || epoca.length !== 8 || resp.length !== 8) return;
+      if (!(await C.verifica(firmaPub, sig, C.cat(C.te.encode(c.id), firmaPub, acuerdoPub, ef, epoca, resp)))) return;
+      const huella = await C.huella(firmaPub, acuerdoPub);
+      if (C.hex(huella) === C.hex(YO.huella)) return; // yo mismo desde otra pestaña
+      if (c.huella && C.hex(c.huella) !== C.hex(huella)) { R.manda(c.id, de, new Uint8Array([5])); return; } // la invitación ya es de otra persona
+      const nueva = !c.huella;
+      if (nueva) { c.firmaPub = firmaPub; c.acuerdoPub = acuerdoPub; c.huella = huella; c.estado = 'activa'; if (!c.nombre) c.nombre = String(j.nombre || '').slice(0, 40); }
+      else if (!c.nombre && j.nombre) c.nombre = String(j.nombre).slice(0, 40);
+      c.suId = de; c.miembros.add(de);
+      if (nueva || j.nombre !== c.nombreVisto) { c.nombreVisto = j.nombre; await guardaConv(c); }
+      const efMia = j.resp && c.efs ? c.efs.get(C.hex(resp)) : null;
+      const esResp = !!efMia;
+     
+      if (!soyInicio(c)) { await presenta(c, epoca); await derivaSesion(c, ef, c.ef); }
+      else if (esResp) await derivaSesion(c, ef, efMia);
+      else if (!j.resp) await presenta(c, null);
+      if (nueva) { await anotaSistema(c, 'Conversación establecida: cifrada de extremo a extremo. Comprobad el número de seguridad cuando podáis.'); cierraHoja('h-invita'); }
+      if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
+      pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
+    } catch (e) { console.warn('presentación', e); }
+  }
+  async function derivaSesion(c, suEf, efMia) {
+    if (!efMia || !suEf || !c.acuerdoPub) return;
+    const inicio = soyInicio(c);
+    const s = await C.sesion(YO, efMia, { ef: suEf, acuerdoPub: c.acuerdoPub }, c.id, inicio);
+    const a = C.hex(efMia.pub), b = C.hex(suEf);
+    const sid = C.hex((await C.sha256(C.deHex(a < b ? a + b : b + a))).subarray(0, 8));
+    const ses = { sid, envio: C.cadena(s.envio), recibo: C.cadena(s.recibo), desde: Date.now() };
+    c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento);
+    for (const k of [...c.sesiones.keys()].slice(0, -3)) c.sesiones.delete(k);
+    pintaCabecera(c); pintaLista();
+    if (YO.nombre) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
+    enviaCola(c);
+    if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c);
+  }
+
+  // ---------- mensajes ----------
+  async function sella(c, obj) {
+    const ses = c.sesion; if (!ses) return null;
+    const { n, clave } = await ses.envio.siguiente();
+    const cab = new Uint8Array(13); cab[0] = 2; cab.set(C.deHex(ses.sid), 1); new DataView(cab.buffer).setUint32(9, n);
+    const ct = await C.sella(clave, n, C.te.encode(JSON.stringify(obj)), cab);
+    return C.cat(cab, ct);
+  }
+  function enviaControl(c, obj) { if (!c.sesion || !R.abierto || !c.miembros.has(c.suId)) return false; sella(c, obj).then((b) => b && R.manda(c.id, c.suId, b)); return true; }
+  const enLinea = (c) => !!(c.suId && c.miembros.has(c.suId) && c.sesion && R.abierto);
+
+  async function enviaTexto(c, texto) {
+    const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'texto', texto };
+    await guardaMensaje(c, m); c.mensajes.push(m); c.cola.push(m);
+    pintaMensaje(c, m); actualizaUltimo(c, m);
+    enviaCola(c);
+  }
+  async function enviaCola(c) {
+    if (c.enviando) return; c.enviando = true;
+    try {
+      while (c.cola.length && enLinea(c)) {
+        const m = c.cola[0];
+        const carga = m.tipo === 'texto' ? { tipo: 'texto', id: m.id, t: m.t, texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos } : null;
+        if (!carga) { c.cola.shift(); continue; }
+        const b = await sella(c, carga); if (!b || !R.manda(c.id, c.suId, b)) break;
+        c.cola.shift(); m.estado = 'enviado'; await guardaMensaje(c, m); pintaEstado(m);
+        if (m.tipo === 'archivo') mandaArchivo(c, m);
+      }
+    } finally { c.enviando = false; }
+  }
+  async function recibeMensaje(c, de, b) {
+    if (b.length < 13 + 16) return;
+    const sid = C.hex(b.subarray(1, 9)), n = new DataView(b.buffer, b.byteOffset).getUint32(9);
+    const ses = c.sesiones.get(sid);
+    if (!ses) { R.manda(c.id, de, new Uint8Array([4])); return; } // no conozco esa sesión: que se presente otra vez
+    let j;
+    try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), b.subarray(0, 13)))); } catch (e) { console.warn('mensaje ilegible', e.message); return; }
+    if (c.suId !== de) return;
+    switch (j.tipo) {
+      case 'texto': {
+        if (c.mensajes.some((x) => x.id === j.id)) { enviaControl(c, { tipo: 'ack', ids: [j.id] }); return; }
+        const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'texto', texto: String(j.texto || '').slice(0, 20000) };
+        await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true);
+        enviaControl(c, { tipo: 'ack', ids: [m.id] });
+        if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c); else avisaSonido();
+        return;
+      }
+      case 'ack': case 'leido': {
+        const est = j.tipo === 'ack' ? 'entregado' : 'leido';
+        for (const id of j.ids || []) { const m = c.mensajes.find((x) => x.id === id && x.dir === 'mia'); if (m && (est === 'leido' || m.estado === 'enviado' || m.estado === 'pendiente')) { if (!(m.estado === 'leido')) { m.estado = est; await guardaMensaje(c, m); pintaEstado(m); } } }
+        return;
+      }
+      case 'nombre': { const n = String(j.nombre || '').trim().slice(0, 40); if (!c.nombreFijado && n && n !== c.nombre) { c.nombre = n; await guardaConv(c); pintaLista(); pintaCabecera(c); } return; }
+      case 'archivo': return recibeAnuncioArchivo(c, j);
+      case 'archivo-ack': { const a = c.archivos.get(j.id); if (a && a.envio) { a.ack = Math.max(a.ack, +j.hasta || 0); a.sigue && a.sigue(); } return; }
+      case 'archivo-listo': { const a = c.archivos.get(j.id); if (a && a.envio) { a.listo = true; a.sigue && a.sigue(); } return; }
+      case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); } if (a) c.archivos.delete(j.id); return; }
+      case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); if (m && m.estado !== 'recibido') { m.estado = 'fallo'; await guardaMensaje(c, m); pintaMensaje(c, m, true); } return; }
+      case 'llamada': { if (LL.ocupado && LLAMADA && LLAMADA !== c) { if (j.acto === 'oferta') enviaControl(c, { tipo: 'llamada', acto: 'ocupado', id: j.id }); return; } if (j.acto === 'oferta') { LLAMADA = c; abreConv(c.id); } return LL.recibe(j); }
+      case 'destruir': return destruyeLocal(c, true);
+      default: return;
+    }
+  }
+  async function guardaMensaje(c, m) {
+    const cuerpo = m.tipo === 'texto' ? { tipo: 'texto', texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', archivo: m.archivo } : { tipo: m.tipo, texto: m.texto, llamada: m.llamada };
+    const s = await guardaSellado(cuerpo);
+    await BD.pon('msg', { id: m.id, conv: c.id, t: m.t, dir: m.dir, estado: m.estado, iv: s.iv, datos: s.datos });
+  }
+  async function cargaMensajes(c) {
+    if (c.cargados) return;
+    const xs = (await BD.porConv('msg', c.id)).sort((a, b) => a.t - b.t);
+    c.mensajes = [];
+    for (const x of xs) { const cu = await leeSellado(x); if (!cu) continue; const m = { id: x.id, conv: c.id, t: x.t, dir: x.dir, estado: x.estado, tipo: cu.tipo, texto: cu.texto, archivo: cu.archivo, llamada: cu.llamada }; if (m.dir === 'mia' && m.estado === 'pendiente') c.cola.push(m); if (m.tipo === 'archivo' && m.dir === 'mia' && m.estado !== 'entregado' && m.estado !== 'leido' && m.archivo && (m.archivo.progreso || 0) < 1) { m.estado = 'fallo'; c.cola = c.cola.filter((q) => q !== m); } if (m.tipo === 'archivo' && m.dir === 'suya' && m.estado === 'recibiendo') m.estado = 'fallo'; c.mensajes.push(m); }
+    c.cargados = true;
+  }
+  async function anotaSistema(c, texto) {
+    const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'sistema', estado: 'ok', tipo: 'sistema', texto };
+    await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m);
+  }
+  async function actualizaUltimo(c, m, suyo) {
+    c.ultimo = m.t; c.ultimoTexto = await guardaSellado({ texto: m.tipo === 'texto' ? m.texto : m.tipo === 'archivo' ? '📎 ' + m.archivo.nombre : m.texto || '' });
+    if (suyo && !(ACTUAL === c.id && document.visibilityState === 'visible')) c.noLeidos = (c.noLeidos || 0) + 1;
+    await guardaConv(c); pintaLista();
+  }
+  async function marcaLeidos(c) {
+    const ids = c.mensajes.filter((m) => m.dir === 'suya' && m.estado === 'recibido').map((m) => m.id);
+    if (ids.length && enviaControl(c, { tipo: 'leido', ids })) { for (const m of c.mensajes) if (ids.includes(m.id)) { m.estado = 'leido'; await guardaMensaje(c, m); } }
+    if (c.noLeidos) { c.noLeidos = 0; await guardaConv(c); pintaLista(); }
+  }
+
+  // ---------- archivos ----------
+  // Cualquier archivo, del tamaño que sea: quien manda lo lee por trozos de 192 KB (nunca entero en memoria), cada trozo
+  // va sellado con AES-256-GCM bajo la clave del archivo y con su número en los datos asociados, así que un trozo
+  // falso o fuera de sitio no abre; el relé solo ve bytes. Quien recibe lo escribe directo al disco si el navegador
+  // lo permite (Chrome, Edge: «Guardar en…») o lo junta en memoria hasta MAX_MEMORIA (los demás). Quien manda espera a
+  // «archivo-listo» y luego avanza con ventana (acuses cada 4 trozos) sin pasarse del cupo del relé.
+  const MAX_MEMORIA = 300 * 1024 * 1024;
+  const conDisco = () => typeof window.showSaveFilePicker === 'function';
+  const fidDe = (id) => C.deHex(id.replace(/-/g, '').slice(0, 32).padEnd(32, '0'));
+  async function enviaArchivos(c, archivos) {
+    for (const f of archivos) {
+      if (!f || !f.size) continue;
+      const clave = C.azar(32), trozos = Math.ceil(f.size / TROZO) || 1;
+      const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'archivo', archivo: { nombre: (f.name || 'archivo').slice(0, 180), tam: f.size, mime: f.type || 'application/octet-stream', clave: C.b64u(clave), trozos, progreso: 0 } };
+      c.archivos.set(m.id, { envio: true, f, clave: await C.aes(clave), ack: 0, trozos, listo: false });
+      if (f.size <= MAX_MEMORIA && /^image\//.test(m.archivo.mime)) await BD.pon('arch', { id: m.id, conv: c.id, blob: f, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: f.size });
+      await guardaMensaje(c, m); c.mensajes.push(m); c.cola.push(m); pintaMensaje(c, m); actualizaUltimo(c, m);
+    }
+    enviaCola(c);
+  }
+  async function falla(c, m, texto) { m.estado = 'fallo'; await guardaMensaje(c, m); pintaMensaje(c, m, true); if (texto) aviso(texto); }
+  async function mandaArchivo(c, m) {
+    const a = c.archivos.get(m.id);
+    if (!a || !a.f) return falla(c, m, T('Ese archivo ya no está disponible para enviarlo: elígelo otra vez.'));
+    // espera «archivo-listo» (la otra persona ha elegido dónde guardarlo o lo recibe en memoria)
+    const t0 = Date.now();
+    while (!a.listo) { if (a.cancelado || c.estado === 'destruida') return; if (!enLinea(c) || Date.now() - t0 > 10 * 60 * 1000) return falla(c, m); await new Promise((r) => { a.sigue = r; setTimeout(r, 500); }); }
+    const fid = fidDe(m.id);
+    for (let i = 0; i < a.trozos; i++) {
+      if (a.cancelado || c.estado === 'destruida') return;
+      while (i - a.ack >= VENTANA || R.atraso > 3 * 1024 * 1024) { if (!enLinea(c)) return falla(c, m); await new Promise((r) => { a.sigue = r; setTimeout(r, 300); }); if (a.cancelado) return; }
+      let claro; try { claro = new Uint8Array(await a.f.slice(i * TROZO, (i + 1) * TROZO).arrayBuffer()); } catch (_) { return falla(c, m, T('No se pudo leer el archivo: ¿sigue en el mismo sitio?')); }
+      const cab = new Uint8Array(21); cab[0] = 3; cab.set(fid, 1); new DataView(cab.buffer).setUint32(17, i);
+      const ct = await C.sella(a.clave, i, claro, cab);
+      if (!R.manda(c.id, c.suId, C.cat(cab, ct))) return falla(c, m);
+      m.archivo.progreso = (i + 1) / a.trozos; pintaProgreso(m);
+    }
+  }
+  async function recibeAnuncioArchivo(c, j) {
+    if (c.mensajes.some((x) => x.id === j.id)) return;
+    const tam = +j.tam || 0, trozos = +j.trozos || 0;
+    if (!tam || trozos !== (Math.ceil(tam / TROZO) || 1) || !j.clave) { enviaControl(c, { tipo: 'archivo-cancel', id: j.id }); return; }
+    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibiendo', tipo: 'archivo', archivo: { nombre: String(j.nombre || 'archivo').slice(0, 180).replace(/[\\/:*?"<>|]/g, '_'), tam, mime: String(j.mime || 'application/octet-stream').slice(0, 100), trozos, progreso: 0, aDisco: tam > MAX_MEMORIA || (conDisco() && tam > 32 * 1024 * 1024) } };
+    const a = { envio: false, clave: await C.aes(C.deB64u(j.clave)), partes: null, escritor: null, siguiente: 0, tengo: 0, trozos, m, pendientes: new Map() };
+    c.archivos.set(m.id, a);
+    if (!m.archivo.aDisco) { a.partes = new Array(trozos); a.listo = true; }
+    else if (!conDisco()) { enviaControl(c, { tipo: 'archivo-cancel', id: m.id }); c.archivos.delete(m.id); m.estado = 'fallo'; m.archivo.motivo = T('Pasa de 300 MB y este navegador no puede escribirlo al disco según llega (Chrome o Edge sí).'); }
+    await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true);
+    if (a.listo) enviaControl(c, { tipo: 'archivo-listo', id: m.id });
+    else if (m.estado !== 'fallo') { avisaSonido(); if (ACTUAL !== c.id) aviso(T('Te están mandando un archivo grande: elige dónde guardarlo.')); }
+  }
+  // «Guardar en…» (archivos grandes): la persona elige el destino y, desde ahí, cada trozo se escribe según llega.
+  async function eligeDestino(c, m) {
+    const a = c.archivos.get(m.id); if (!a || a.listo) return;
+    try {
+      const h = await window.showSaveFilePicker({ suggestedName: m.archivo.nombre });
+      a.escritor = await h.createWritable(); a.listo = true; a.nombreDisco = h.name;
+      enviaControl(c, { tipo: 'archivo-listo', id: m.id });
+      m.archivo.enDisco = true; pintaMensaje(c, m, true);
+    } catch (_) { /* canceló el diálogo: el botón sigue ahí */ }
+  }
+  async function recibeTrozo(c, de, b) {
+    if (b.length < 21 + 16 || c.suId !== de) return;
+    const fid = C.hex(b.subarray(1, 17)), i = new DataView(b.buffer, b.byteOffset).getUint32(17);
+    const m = c.mensajes.find((x) => x.tipo === 'archivo' && x.dir === 'suya' && C.hex(fidDe(x.id)) === fid);
+    const a = m && c.archivos.get(m.id); if (!a || a.envio || !a.listo || i >= a.trozos) return;
+    let claro; try { claro = await C.abre(a.clave, i, b.subarray(21), b.subarray(0, 21)); } catch (_) { return; }
+    if (a.partes) { if (a.partes[i]) return; a.partes[i] = claro; a.tengo++; }
+    else {
+      // al disco, en orden: lo que llega adelantado espera en memoria (como mucho la ventana)
+      if (i < a.siguiente || a.pendientes.has(i)) return;
+      a.pendientes.set(i, claro);
+      while (a.pendientes.has(a.siguiente)) { const x = a.pendientes.get(a.siguiente); a.pendientes.delete(a.siguiente); try { await a.escritor.write(x); } catch (_) { c.archivos.delete(m.id); enviaControl(c, { tipo: 'archivo-cancel', id: m.id }); return falla(c, m, T('No se pudo escribir el archivo en el disco.')); } a.siguiente++; a.tengo++; }
+    }
+    m.archivo.progreso = a.tengo / a.trozos; pintaProgreso(m);
+    if (a.tengo % 4 === 0 || a.tengo === a.trozos) enviaControl(c, { tipo: 'archivo-ack', id: m.id, hasta: a.tengo });
+    if (a.tengo === a.trozos) {
+      c.archivos.delete(m.id);
+      let ok = true;
+      if (a.partes) { const blob = new Blob(a.partes, { type: m.archivo.mime }); ok = blob.size === m.archivo.tam; if (ok) await BD.pon('arch', { id: m.id, conv: c.id, blob, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: blob.size }); }
+      else { try { await a.escritor.close(); } catch (_) { ok = false; } }
+      m.estado = ok ? 'recibido' : 'fallo'; m.archivo.progreso = 1;
+      await guardaMensaje(c, m); pintaMensaje(c, m, true);
+      enviaControl(c, { tipo: 'archivo-fin', id: m.id, ok });
+      if (ok && !(ACTUAL === c.id && document.visibilityState === 'visible')) avisaSonido();
+    }
+  }
+  async function abreArchivo(m, guardar) {
+    const r = await BD.saca('arch', m.id); if (!r) return aviso(m.archivo.enDisco ? T('Ese archivo se guardó directamente en tu disco, en la carpeta que elegiste.') : T('Este archivo ya no está en este navegador.'));
+    const u = URL.createObjectURL(r.blob);
+    const a = document.createElement('a'); a.href = u; if (guardar) a.download = r.nombre; else { a.target = '_blank'; a.rel = 'noopener'; }
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 60000);
+  }
+
+  // ---------- destruir ----------
+  async function destruyeLocal(c, porElla, silencio) {
+    if (c.estado === 'destruida') return;
+    c.estado = 'destruida'; if (LL.ocupado && LLAMADA === c) LL.colgar();
+    R.sale(c.id); CONVS.delete(c.id);
+    await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await BD.borra('conv', c.id);
+    if (ACTUAL === c.id) { cierraConv(); }
+    pintaLista();
+    if (!silencio) aviso(porElla ? T('La otra persona ha destruido la conversación: se ha borrado también aquí.') : T('Conversación destruida en los dos lados.'));
+  }
+  // Destruir con la otra persona ausente: se borra todo aquí y queda una lápida (sin mensajes) que, en cuanto la otra
+  // persona entre, le manda «destruir» y desaparece.
+  async function destruye(c) {
+    if (enLinea(c)) { enviaControl(c, { tipo: 'destruir' }); await new Promise((r) => setTimeout(r, 250)); await destruyeLocal(c, false); return; }
+    if (!c.huella) { await destruyeLocal(c, false); return; }
+    c.estado = 'destruida_pendiente'; c.mensajes = []; c.cola = []; c.ultimoTexto = null; c.noLeidos = 0;
+    await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await guardaConv(c);
+    if (ACTUAL === c.id) cierraConv();
+    pintaLista(); aviso(T('Conversación destruida aquí; en el otro lado, en cuanto esa persona entre.'));
+  }
+
+  // ---------- relé ----------
+  function arrancaRele() {
+    R = GuardianaRele.crea();
+    const estadoRele = (txt, cls) => { const e = $('#rele'); e.className = 'rele ' + (cls || ''); $('#reletxt').textContent = txt; };
+    R.on('abierto', () => { estadoRele(T('Relé conectado'), 'si'); });
+    R.on('hola', ({ region, llamadas }) => { estadoRele(T('Relé') + (region ? ': ' + region : '') + (llamadas ? '' : ' · ' + T('sin llamadas')), 'si'); for (const c of CONVS.values()) pintaCabecera(c); });
+    R.on('cerrado', () => { estadoRele(T('Sin conexión con el relé: reintentando…'), 'no'); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; pintaCabecera(c); } pintaLista(); if (LL.ocupado) LL.colgar(); });
+    setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
+    R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presenta(c, null, true)); pintaCabecera(c); pintaLista(); });
+    R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) { c.sesion = null; enCola(c, () => presenta(c, null, true)); } pintaCabecera(c); pintaLista(); });
+    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; if (LL.ocupado && LLAMADA === c) LL.colgar(); } pintaCabecera(c); pintaLista(); });
+    R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Esta conversación se ha abierto en otra pestaña: sigue allí.')); });
+    // Las tramas de una conversación se procesan en orden (una detrás de otra): así un trozo de archivo nunca
+    // adelanta al anuncio del archivo, ni un mensaje a la presentación que abre su sesión.
+    R.on('trama', (sala, de, b) => {
+      const c = CONVS.get(sala); if (!c || !b.length) return;
+      c.proc = (c.proc || Promise.resolve()).then(async () => {
+        try {
+          if (b[0] === 1) await recibePresentacion(c, de, b);
+          else if (b[0] === 2) await recibeMensaje(c, de, b);
+          else if (b[0] === 3) await recibeTrozo(c, de, b);
+          else if (b[0] === 4) { if (c.suId === de) await presenta(c, null); }
+          else if (b[0] === 5) { if (!c.huella) { c.ocupada = true; pintaCabecera(c); $('#invita-estado').textContent = T('Esta invitación ya la usó otra persona.'); } }
+        } catch (e) { console.warn('trama', e); }
+      });
+    });
+    R.on('aviso', (m) => { if (m.t === 'lento') aviso(T('El relé está limitando la velocidad: el envío sigue más despacio.')); });
+  }
+
+  // ---------- pantalla: lista ----------
+  const hora = (t) => new Date(t).toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit' });
+  const fecha = (t) => { const d = new Date(t), h = new Date(); return d.toDateString() === h.toDateString() ? T('Hoy') : d.toLocaleDateString(LOC(), { weekday: 'long', day: 'numeric', month: 'long' }); };
+  const diaDe = (t) => new Date(t).toDateString();
+  async function pintaLista() {
+    const ul = $('#convs'); ul.textContent = '';
+    const xs = [...CONVS.values()].filter((c) => c.estado !== 'destruida_pendiente').sort((a, b) => (b.ultimo || 0) - (a.ultimo || 0));
+    $('#sinconvs').hidden = xs.length > 0;
+    for (const c of xs) {
+      const li = document.createElement('li'); li.dataset.id = c.id; li.setAttribute('aria-current', String(ACTUAL === c.id));
+      const av = document.createElement('span'); av.className = 'gc-avatar'; av.textContent = c.estado === 'invitacion' ? '✉' : inicial(c.nombre); const i = document.createElement('i'); if (enLinea(c) || (!c.suId && c.miembros.size)) i.className = 'si'; av.append(i);
+      const b = document.createElement('b'); b.textContent = c.estado === 'invitacion' ? T('Invitación') : (c.nombre || T('Sin nombre'));
+      const s = document.createElement('span'); s.className = 'u';
+      if (c.estado === 'invitacion') s.textContent = T('Esperando a que la abran…');
+      else { const u = c.ultimoTexto ? await leeSellado(c.ultimoTexto) : null; s.textContent = u && u.texto ? u.texto : T('Cifrada de extremo a extremo'); }
+      const tm = document.createElement('time'); tm.textContent = c.ultimo && c.estado !== 'invitacion' ? (diaDe(c.ultimo) === diaDe(Date.now()) ? hora(c.ultimo) : new Date(c.ultimo).toLocaleDateString(LOC(), { day: '2-digit', month: '2-digit' })) : '';
+      li.append(av, b, s, tm);
+      if (c.noLeidos) { const em = document.createElement('em'); em.textContent = String(c.noLeidos); li.append(em); }
+      li.addEventListener('click', () => abreConv(c.id));
+      ul.append(li);
+    }
+  }
+
+  // ---------- pantalla: conversación ----------
+  async function abreConv(id) {
+    const c = CONVS.get(id); if (!c) return;
+    ACTUAL = id; await cargaMensajes(c);
+    $('#portada').hidden = true; $('#conv').hidden = false; $('#app').classList.add('en-conv');
+    pintaCabecera(c); pintaTodos(c); pintaLista();
+    if (c.estado === 'invitacion' && c.rol === 'invita') muestraInvitacion(c);
+    marcaLeidos(c);
+    if (matchMedia('(min-width: 761px)').matches) $('#texto').focus();
+  }
+  function cierraConv() { ACTUAL = null; $('#conv').hidden = true; $('#portada').hidden = false; $('#app').classList.remove('en-conv'); pintaLista(); }
+  function pintaCabecera(c) {
+    if (ACTUAL !== c.id) return;
+    $('#cavatar').textContent = c.estado === 'invitacion' ? '✉' : inicial(c.nombre);
+    $('#cnombre').textContent = c.estado === 'invitacion' ? T('Invitación') : (c.nombre || T('Sin nombre'));
+    const conf = $('#cconfianza'); conf.classList.remove('gc-sin-verificar');
+    let txt;
+    if (c.ocupada && !c.huella) txt = T('Esta invitación ya la usó otra persona.');
+    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo el cifrado…') : T('Esperando a que la otra persona abra el enlace…');
+    else if (!R.abierto) txt = T('Sin conexión con el relé');
+    else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
+    else if (!c.sesion) txt = T('Estableciendo el cifrado…');
+    else txt = T('Cifrada de extremo a extremo') + ' · ' + (c.verificada ? T('verificada') : T('sin verificar'));
+    if (c.huella && !c.verificada) conf.classList.add('gc-sin-verificar');
+    conf.textContent = txt;
+    const puedeLlamar = enLinea(c) && (R.llamadas || LOCAL) && !LL.ocupado;
+    $('#llamarvoz').disabled = !puedeLlamar; $('#llamarvideo').disabled = !puedeLlamar;
+  }
+  function pintaTodos(c) {
+    const ul = $('#mensajes'); ul.textContent = ''; ul.dataset.dia = '';
+    for (const m of c.mensajes) pintaMensaje(c, m, false, true);
+    ul.scrollTop = ul.scrollHeight;
+  }
+  function pintaMensaje(c, m, reemplaza, sinScroll) {
+    if (ACTUAL !== c.id) return;
+    const ul = $('#mensajes');
+    const abajo = ul.scrollHeight - ul.scrollTop - ul.clientHeight < 80;
+    let li = ul.querySelector('[data-id="' + m.id + '"]');
+    if (li && !reemplaza) return;
+    if (!li) {
+      if (ul.dataset.dia !== diaDe(m.t)) { ul.dataset.dia = diaDe(m.t); const f = document.createElement('li'); f.className = 'gc-fecha'; f.textContent = fecha(m.t); ul.append(f); }
+      li = document.createElement('li'); li.dataset.id = m.id; ul.append(li);
+      const prev = li.previousElementSibling; if (prev && prev.dataset.dir === m.dir && m.dir !== 'sistema' && m.t - (+prev.dataset.t || 0) < 120000) li.classList.add('gc-sigue');
+    }
+    li.dataset.dir = m.dir; li.dataset.t = m.t; li.textContent = '';
+    if (m.tipo === 'llamada') { li.className = 'gc-centro'; const l = document.createElement('span'); l.className = 'gc-linea-llamada'; l.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>'; l.append(document.createTextNode(m.texto)); li.append(l); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
+    if (m.dir === 'sistema') { li.className = 'gc-nota-sistema'; li.textContent = T(m.texto); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
+    const bur = document.createElement('div'); bur.className = 'gc-burbuja ' + (m.dir === 'mia' ? 'gc-mia' : 'gc-suya') + (li.classList.contains('gc-sigue') ? ' gc-sigue' : '');
+    if (m.tipo === 'texto') { const s = document.createElement('span'); s.className = 'gc-texto'; s.append(...enlaza(m.texto)); bur.append(s); }
+    else if (m.tipo === 'archivo') bur.append(tarjetaArchivo(m));
+    const meta = document.createElement('span'); meta.className = 'gc-meta'; const tm = document.createElement('time'); tm.textContent = hora(m.t); meta.append(tm);
+    if (m.dir === 'mia') { const tk = document.createElement('span'); tk.className = 'gc-ticks'; meta.append(tk); }
+    bur.append(meta); li.append(bur); pintaEstado(m);
+    if (!sinScroll && (abajo || m.dir === 'mia')) ul.scrollTop = ul.scrollHeight;
+  }
+  const TICK1 = '<svg viewBox="0 0 16 11"><path d="M1 6l3.5 3.5L11 2"/></svg>', TICK2 = '<svg viewBox="0 0 16 11"><path d="M1 6l3.5 3.5L11 2M6 9.5L15 2"/></svg>';
+  function pintaEstado(m) {
+    const li = $('#mensajes [data-id="' + m.id + '"]'); if (!li) return;
+    const tk = li.querySelector('.gc-ticks'); if (!tk) return;
+    tk.classList.toggle('gc-pendiente', m.estado === 'pendiente');
+    tk.innerHTML = m.estado === 'pendiente' || m.estado === 'enviado' ? TICK1 : m.estado === 'fallo' ? '' : TICK2;
+    tk.style.opacity = m.estado === 'leido' ? '1' : '.6';
+    tk.title = m.estado === 'pendiente' ? T('Pendiente: saldrá cuando la otra persona entre') : m.estado === 'enviado' ? T('Enviado') : m.estado === 'entregado' ? T('Entregado') : m.estado === 'leido' ? T('Leído') : m.estado === 'fallo' ? T('No se pudo enviar') : '';
+    if (m.estado === 'fallo') { tk.textContent = '!'; tk.style.color = 'var(--alerta)'; }
+  }
+  function pintaProgreso(m) { const li = $('#mensajes [data-id="' + m.id + '"]'); if (!li) return; if (!li.querySelector('.gc-progreso')) { const c = CONVS.get(m.conv); if (c) pintaMensaje(c, m, true); return; } const i = li.querySelector('.gc-progreso i'); if (i) i.style.width = Math.round((m.archivo.progreso || 0) * 100) + '%'; const s = li.querySelector('.gc-archivo small'); if (s) s.textContent = tamano(m.archivo.tam) + (m.archivo.progreso < 1 ? ' · ' + Math.round(m.archivo.progreso * 100) + ' %' : ''); }
+  const tamano = (n) => n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(0) + ' KB' : (n / 1048576).toFixed(1) + ' MB';
+  function tarjetaArchivo(m) {
+    const d = document.createElement('div'); d.className = 'gc-archivo';
+    const ic = document.createElement('span'); ic.className = 'gc-archivo-icono'; ic.innerHTML = '<svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>';
+    const b = document.createElement('b'); b.textContent = m.archivo.nombre; b.setAttribute('translate', 'no');
+    const s = document.createElement('small');
+    const pr = m.archivo.progreso || 0;
+    s.textContent = tamano(m.archivo.tam) + (m.estado === 'fallo' ? ' · ' + (m.archivo.motivo || T('no se completó')) : pr < 1 && (m.estado === 'recibiendo' || m.estado === 'enviado') ? ' · ' + Math.round(pr * 100) + ' %' : m.estado === 'pendiente' ? ' · ' + T('pendiente') : m.archivo.enDisco ? ' · ' + T('guardado en tu disco') : '');
+    d.append(ic, b, s);
+    const enCurso = m.estado !== 'fallo' && pr < 1 && m.estado !== 'pendiente';
+    if (enCurso) { const p = document.createElement('span'); p.className = 'gc-progreso'; const i = document.createElement('i'); i.style.width = Math.round(pr * 100) + '%'; p.append(i); d.append(p); }
+    const fila = document.createElement('div'); fila.className = 'fila';
+    if (m.dir === 'suya' && m.estado === 'recibiendo' && m.archivo.aDisco && !m.archivo.enDisco) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton principal'; g.textContent = T('Guardar en…'); g.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) eligeDestino(c, m); }); fila.append(g); }
+    if ((m.dir === 'suya' && m.estado === 'recibido' && !m.archivo.enDisco) || (m.dir === 'mia' && /^image\//.test(m.archivo.mime))) {
+      if (/^image\//.test(m.archivo.mime) && m.archivo.tam < 24 * 1024 * 1024) { BD.saca('arch', m.id).then((r) => { if (!r) return; const img = document.createElement('img'); img.className = 'imagen'; img.alt = m.archivo.nombre; img.src = URL.createObjectURL(r.blob); img.style.gridColumn = '1 / -1'; img.addEventListener('click', () => abreArchivo(m, false)); d.prepend(img); }); }
+      if (m.dir === 'suya') { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton'; g.textContent = T('Guardar'); g.addEventListener('click', () => abreArchivo(m, true)); fila.append(g); }
+    }
+    if (fila.childNodes.length) d.append(fila);
+    return d;
+  }
+  function enlaza(texto) {
+    const out = []; const re = /https?:\/\/[^\s<>"']+/g; let i = 0, m;
+    while ((m = re.exec(texto))) { if (m.index > i) out.push(document.createTextNode(texto.slice(i, m.index))); const a = document.createElement('a'); a.href = m[0]; a.textContent = m[0]; a.target = '_blank'; a.rel = 'noopener noreferrer'; out.push(a); i = m.index + m[0].length; }
+    if (i < texto.length) out.push(document.createTextNode(texto.slice(i)));
+    return out;
+  }
+
+  // ---------- hojas ----------
+  const abreHoja = (id) => { $('#' + id).classList.add('gc-abierta'); };
+  const cierraHoja = (id) => { $('#' + id).classList.remove('gc-abierta'); };
+  function muestraInvitacion(c) {
+    const u = enlaceDe(c); $('#enlace').value = u; $('#qr').innerHTML = window.qrSvg ? qrSvg(u) : '';
+    $('#invita-estado').textContent = c.ocupada ? T('Esta invitación ya la usó otra persona.') : T('Esperando a que la otra persona abra el enlace…');
+    abreHoja('h-invita');
+  }
+  async function muestraEscudo(c) {
+    $('#escudo-con').textContent = c.nombre || '';
+    const ul = $('#escudo-lista'); ul.textContent = '';
+    const fila = (cls, b, s) => { const li = document.createElement('li'); li.className = cls; const i = document.createElement('i'); const bb = document.createElement('b'); bb.textContent = b; const ss = document.createElement('span'); ss.textContent = s; li.append(i, bb, ss); ul.append(li); };
+    fila(c.sesion ? 'gc-ok' : 'gc-info', T('Cifrado de extremo a extremo'), T('AES-256-GCM con una clave distinta por mensaje; la sesión se renueva cada vez que os encontráis (ECDH P-256 con firma ECDSA).'));
+    fila('gc-info', T('Relé'), (R.region ? R.region + ' · ' : '') + T('solo pasa bytes sellados y no guarda nada'));
+    fila(c.verificada ? 'gc-ok' : 'gc-aviso', c.verificada ? T('Identidad verificada') : T('Identidad sin verificar'), c.verificada ? T('Comprobasteis el número de seguridad.') : T('Hasta que comprobéis el número, confías en que el enlace llegó a la persona correcta.'));
+    fila('gc-info', T('Llamadas'), R.llamadas ? T('Por el relé, cifradas entre los dos navegadores; ninguno ve la dirección del otro.') : T('No disponibles en este relé ahora.'));
+    $('#numero').textContent = c.huella ? await C.numeroSeguridad(YO.huella, c.huella) : T('Aparecerá cuando la otra persona entre.');
+    $('#verificada').checked = !!c.verificada; $('#verificada').disabled = !c.huella;
+    $('#cnombre-edit').value = c.nombre || '';
+    $('#destruir-nota').hidden = true;
+    abreHoja('h-escudo');
+  }
+
+  // ---------- avisos ----------
+  let avisoT = null;
+  function aviso(txt) { const e = $('#aviso'); e.textContent = txt; e.hidden = false; clearTimeout(avisoT); avisoT = setTimeout(() => { e.hidden = true; }, 4200); }
+  let ctxAudio = null;
+  function avisaSonido() {
+    try { ctxAudio = ctxAudio || new (window.AudioContext || window.webkitAudioContext)(); const o = ctxAudio.createOscillator(), g = ctxAudio.createGain(); o.type = 'sine'; o.frequency.value = 880; g.gain.value = 0.0001; o.connect(g).connect(ctxAudio.destination); const t = ctxAudio.currentTime; g.gain.exponentialRampToValueAtTime(0.08, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.35); o.start(t); o.stop(t + 0.4); } catch (_) {}
+    if (document.title[0] !== '●') document.title = '● ' + document.title;
+  }
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { document.title = document.title.replace(/^● /, ''); const c = CONVS.get(ACTUAL); if (c) marcaLeidos(c); } });
+
+  // ---------- eventos ----------
+  function eventos() {
+    $('#nueva').addEventListener('click', creaInvitacion);
+    $('#unir').addEventListener('click', () => { $('#unir-mal').hidden = true; $('#unir-enlace').value = ''; abreHoja('h-unir'); setTimeout(() => $('#unir-enlace').focus(), 50); });
+    $('#unir-cerrar').addEventListener('click', () => cierraHoja('h-unir'));
+    $('#unir-ok').addEventListener('click', async () => { if (await aceptaInvitacion($('#unir-enlace').value)) cierraHoja('h-unir'); else $('#unir-mal').hidden = false; });
+    $('#unir-enlace').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#unir-ok').click(); });
+    $('#invita-cerrar').addEventListener('click', () => cierraHoja('h-invita'));
+    $('#copiar').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('#enlace').value); aviso(T('Enlace copiado')); } catch (_) { $('#enlace').select(); } });
+    $('#enlace').addEventListener('focus', (e) => e.target.select());
+    $('#escudo').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c) muestraEscudo(c); });
+    $('#escudo-cerrar').addEventListener('click', () => cierraHoja('h-escudo'));
+    $('#verificada').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); if (!c) return; c.verificada = e.target.checked; await guardaConv(c); pintaCabecera(c); muestraEscudo(c); });
+    $('#cnombre-edit').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); if (!c) return; c.nombre = e.target.value.trim().slice(0, 40); c.nombreFijado = true; await guardaConv(c); pintaCabecera(c); pintaLista(); });
+    $('#destruir').addEventListener('click', async (e) => { const c = CONVS.get(ACTUAL); if (!c) return; if ($('#destruir-nota').hidden) { $('#destruir-nota').hidden = false; e.currentTarget.textContent = T('Sí, destruir'); return; } cierraHoja('h-escudo'); e.currentTarget.textContent = T('Destruir conversación'); await destruye(c); });
+    $('#atras').addEventListener('click', cierraConv);
+    $('#yonombre').addEventListener('change', (e) => guardaNombre(e.target.value));
+    $('#nombre-ok').addEventListener('click', async () => { await guardaNombre($('#nombre-inicial').value || T('Yo')); $('#yonombre').value = YO.nombre; cierraHoja('h-nombre'); });
+    $('#nombre-inicial').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#nombre-ok').click(); });
+    const ta = $('#texto');
+    const ajusta = () => { ta.style.height = 'auto'; ta.style.height = Math.min(120, ta.scrollHeight) + 'px'; };
+    ta.addEventListener('input', ajusta);
+    const envia = async () => { const c = CONVS.get(ACTUAL); const t = ta.value.replace(/\s+$/, ''); if (!c || !t) return; ta.value = ''; ajusta(); await enviaTexto(c, t); ta.focus(); };
+    ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); envia(); } });
+    $('#enviar').addEventListener('click', envia);
+    $('#adjuntar').addEventListener('click', () => $('#archivo').click());
+    ta.addEventListener('paste', (e) => { const fs = [...((e.clipboardData && e.clipboardData.files) || [])]; const c = CONVS.get(ACTUAL); if (c && fs.length) { e.preventDefault(); enviaArchivos(c, fs.map((f, i) => (f.name && f.name !== 'image.png') ? f : new File([f], 'imagen-' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + (i ? '-' + i : '') + '.' + ((f.type || '').split('/')[1] || 'png'), { type: f.type }))); } });
+    $('#archivo').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); const fs = [...e.target.files]; e.target.value = ''; if (c && fs.length) enviaArchivos(c, fs); });
+    const zona = $('#conv');
+    zona.addEventListener('dragover', (e) => { e.preventDefault(); });
+    zona.addEventListener('drop', (e) => { e.preventDefault(); const c = CONVS.get(ACTUAL); const fs = [...(e.dataTransfer && e.dataTransfer.files) || []]; if (c && fs.length) enviaArchivos(c, fs); });
+    $('#llamarvoz').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c && enLinea(c)) { LLAMADA = c; LL.llamar(false); } });
+    $('#llamarvideo').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c && enLinea(c)) { LLAMADA = c; LL.llamar(true); } });
+    document.querySelectorAll('.gc-hoja').forEach((h) => h.addEventListener('click', (e) => { if (e.target === h && h.id !== 'h-nombre') h.classList.remove('gc-abierta'); }));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.gc-hoja.gc-abierta').forEach((h) => { if (h.id !== 'h-nombre') h.classList.remove('gc-abierta'); }); });
+    addEventListener('hashchange', () => { if (/#i=/.test(location.hash)) { aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); } });
+    addEventListener('guardiana-idioma', () => { pintaLista(); const c = CONVS.get(ACTUAL); if (c) pintaCabecera(c); });
+  }
+
+  // ---------- arranque ----------
+  async function arranca() {
+    if (!window.isSecureContext || !crypto.subtle || !window.indexedDB) { $('#portada').innerHTML = '<p>' + T('Este navegador no puede abrir Comunicaciones: hace falta una conexión segura (https) y un navegador actual.') + '</p>'; return; }
+    await BD.abre();
+    await cargaIdentidad();
+    arrancaRele();
+    LL = GuardianaLlamada.crea({
+      ice: () => R.ice, t: T, aviso,
+      manda: (m) => { const c = LLAMADA; if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
+      nombre: () => { const c = LLAMADA; return (c && c.nombre) || T('Sin nombre'); },
+      inicial: () => { const c = LLAMADA; return inicial(c && c.nombre); },
+      fin: async (info) => { const c = LLAMADA; LLAMADA = null; if (!c || c.estado === 'destruida') return; pintaCabecera(c); const dur = info.duracion ? Math.round(info.duracion / 1000) : 0; const txt = (info.video ? T('Videollamada') : T('Llamada')) + (dur ? ' · ' + String(Math.floor(dur / 60)).padStart(2, '0') + ':' + String(dur % 60).padStart(2, '0') : info.por === 'rechazada' || info.por === 'cancelada' ? ' · ' + T('sin respuesta') : info.por === 'ocupado' ? ' · ' + T('comunicando') : info.por === 'fallo' ? ' · ' + T('se cortó') : ''); const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'sistema', estado: 'ok', tipo: 'llamada', texto: txt }; await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m); },
+    });
+    eventos();
+    await cargaConvs();
+    if (/#i=/.test(location.hash)) { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
+    if (YO.nueva || !YO.nombre) { $('#nombre-inicial').value = YO.nombre || ''; abreHoja('h-nombre'); setTimeout(() => $('#nombre-inicial').focus(), 80); }
+  }
+  arranca().catch((e) => { console.error(e); aviso(T('Algo falló al arrancar: recarga la página.')); });
+  window.GuardianaCom = { get convs() { return CONVS; }, get yo() { return YO; }, get rele() { return R; }, abreConv, creaInvitacion, aceptaInvitacion };
+})();
