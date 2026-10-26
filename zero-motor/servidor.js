@@ -10,6 +10,7 @@
 //   ZERO_MOCK=1  → las conexiones permitidas a terceros se responden con un simulacro local (pruebas sin internet)
 'use strict';
 const http = require('http');
+const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { chromium } = require('playwright');
@@ -31,6 +32,7 @@ const CLAVE_SESION = crypto.randomBytes(32); // efímera: con ella se sella el c
 // direcciones http(s).
 const ORIGENES = (process.env.ZERO_ORIGENES || 'https://guardianagroup.com,https://www.guardianagroup.com,http://127.0.0.1,http://localhost').split(',').map((x) => x.trim().replace(/\/$/, '')).filter(Boolean);
 const MAX_SESIONES = +process.env.ZERO_MAX_SESIONES || 8;
+const TOR_PROXY = process.env.ZERO_TOR_PROXY || ''; // p. ej. socks5://127.0.0.1:9050 en el servidor con Tor; sin él, ULTRA no se ofrece
 const MAX_MENSAJE = 64 * 1024;
 const MIN_SIN_MIRAR = +process.env.ZERO_MIN_SIN_MIRAR || 30; // minutos con la pantalla dormida antes de destruir la celda
 const MAX_HORAS = +process.env.ZERO_MAX_HORAS || 12; // vida máxima de una celda
@@ -73,6 +75,7 @@ class Sesion {
     this.destruida = false; this.operaciones = [];
     this.senuelos = new Senuelos('http://127.0.0.1:' + PUERTO); SESIONES.set(this.senuelos.token, this);
     this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.ultimos = [];
+    this.descargas = new Map(); this.nDesc = 0;
     VIVAS.add(this); this.ultimaMirada = Date.now();
     ws.on('message', (m, bin) => { if (bin) return; if (m.length > MAX_MENSAJE) { this.op('mensaje demasiado grande: descartado'); return; } this.mensaje(m).catch(() => {}); });
     ws.on('close', () => this.destruye('conexión cerrada'));
@@ -104,8 +107,9 @@ class Sesion {
     this.ctx = await navegador.newContext({
       viewport: { width: this.w, height: this.h }, deviceScaleFactor: 1, locale: 'es-ES', timezoneId: 'UTC', permissions: [],
       acceptDownloads: true, serviceWorkers: 'block', extraHTTPHeaders: { 'Sec-GPC': '1', DNT: '1' }, colorScheme: 'light',
+      ...(this.ultra && TOR_PROXY ? { proxy: { server: TOR_PROXY } } : {}),
     });
-    this.op('celda creada');
+    this.op(this.ultra && TOR_PROXY ? 'celda creada con salida por Tor (ULTRA)' : 'celda creada');
     await this.ctx.exposeBinding('__zeroSuceso', (src, json) => this.sucesoPagina(src, json));
     await this.ctx.addInitScript(SENSORES);
     await this.ctx.addInitScript(this.senuelos.initScript());
@@ -113,7 +117,7 @@ class Sesion {
     await this.ctx.route('**/*', (route, req) => this.filtra(route, req));
     this.ctx.on('page', (p) => { if (this.esperadas > 0) { this.esperadas--; return; } this.suceso({ clase: 'popup', certeza: 'comprobado', texto: 'La web intentó abrir una ventana nueva. ZERO la cerró.', dominio: hostDe(p.url()) }); p.close().catch(() => {}); });
     await this.nuevaPestana();
-    this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h });
+    this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h, ultraDisponible: !!TOR_PROXY, ultra: !!(this.ultra && TOR_PROXY) });
   }
 
   async nuevaPestana(url) {
@@ -336,11 +340,48 @@ class Sesion {
     } catch (_) {}
   }
 
+  // Descargas en cuarentena (ronda 40, punto 11/fase 5): el archivo se guarda dentro de la celda, se inspecciona (tamaño,
+  // tipo por extensión, huella SHA-256, si la dirección está en las listas de webs peligrosas) y solo llega al equipo de
+  // la persona si ella lo pide después de ver la inspección. Nada se abre ni se ejecuta en la celda.
   async descarga(d) {
-    const nombre = d.suggestedFilename();
-    this.suceso({ clase: 'descarga', certeza: 'comprobado', dominio: hostDe(d.url()), texto: 'La web ha iniciado la descarga de «' + nombre + '». ZERO la ha retenido en la celda: no ha tocado tu ordenador.', detalle: { nombre } });
-    try { await d.cancel(); } catch (_) {}
-    this.op('descarga retenida y descartada: ' + nombre);
+    const nombre = String(d.suggestedFilename() || 'archivo').slice(0, 200), url = d.url(), host = hostDe(url);
+    const id = ++this.nDesc;
+    const ext = (nombre.includes('.') ? nombre.split('.').pop() : '').toLowerCase();
+    const EJEC = new Set(['exe', 'msi', 'bat', 'cmd', 'ps1', 'scr', 'com', 'pif', 'js', 'jse', 'vbs', 'vbe', 'wsf', 'hta', 'jar', 'dmg', 'pkg', 'app', 'sh', 'apk', 'lnk', 'reg', 'iso', 'msix', 'appx']);
+    const riesgo = EJEC.has(ext) ? 'programa' : /^(zip|rar|7z|gz|tgz|tar|bz2|xz)$/.test(ext) ? 'comprimido' : /^(pdf|docx?|xlsx?|pptx?|odt|ods|odp|rtf)$/.test(ext) ? 'documento' : /^(jpe?g|png|gif|webp|svg|heic|mp4|mp3|wav|webm)$/.test(ext) ? 'multimedia' : 'archivo';
+    const lista = cortes.decide({ url, tipo: 'other', origen: this.webActual || host, host, tercero: baseDominio(host) !== baseDominio(this.webActual || host) });
+    const malo = !!(lista.bloquear && lista.proposito === 'malware');
+    const reg = { id, nombre, url: url.slice(0, 300), host, bytes: 0, sha256: null, riesgo, malo, estado: 'descargando', hora: ahora(), ruta: null };
+    this.descargas.set(id, reg);
+    this.suceso({ clase: 'descarga', certeza: 'comprobado', dominio: host, texto: 'La web ha iniciado la descarga de «' + nombre + '». ZERO la ha retenido en la celda para inspeccionarla: no ha tocado tu ordenador.', detalle: { nombre, riesgo, malo } });
+    try {
+      const ruta = await d.path();
+      const st = fs.statSync(ruta); reg.bytes = st.size; reg.ruta = ruta;
+      if (st.size <= 25 * 1024 * 1024) { const h = crypto.createHash('sha256'); h.update(fs.readFileSync(ruta)); reg.sha256 = h.digest('hex'); reg.estado = 'retenida'; }
+      else { reg.estado = 'retenida (demasiado grande para traerla: más de 25 MB)'; }
+    } catch (e) { reg.estado = 'fallida'; }
+    this.op('descarga retenida: ' + nombre + ' (' + reg.bytes + ' bytes, ' + riesgo + (malo ? ', en lista de webs peligrosas' : '') + ')');
+    this.env({ t: 'descarga', ...reg, ruta: undefined });
+  }
+
+  async traeDescarga(id) {
+    const reg = this.descargas.get(id);
+    if (!reg || !reg.ruta || reg.estado !== 'retenida') return this.env({ t: 'archivo', id, error: 'no disponible' });
+    if (reg.malo) return this.env({ t: 'archivo', id, error: 'en lista de webs peligrosas: ZERO no la entrega' });
+    try {
+      const datos = fs.readFileSync(reg.ruta);
+      this.op('descarga entregada a petición de la persona: ' + reg.nombre);
+      this.suceso({ clase: 'descarga', certeza: 'comprobado', dominio: reg.host, texto: 'A petición tuya, ZERO te ha traído «' + reg.nombre + '» (' + reg.bytes + ' bytes, SHA-256 ' + (reg.sha256 || '').slice(0, 12) + '…). Ábrela solo si confías en quien la mandó.', detalle: { nombre: reg.nombre, sha256: reg.sha256, riesgo: reg.riesgo } });
+      this.env({ t: 'archivo', id, nombre: reg.nombre, bytes: reg.bytes, sha256: reg.sha256, b64: datos.toString('base64') });
+    } catch (e) { this.env({ t: 'archivo', id, error: 'no se pudo leer' }); }
+  }
+
+  descartaDescarga(id) {
+    const reg = this.descargas.get(id);
+    if (!reg) return;
+    try { if (reg.ruta) fs.unlinkSync(reg.ruta); } catch (_) {}
+    this.descargas.delete(id); this.op('descarga descartada: ' + reg.nombre);
+    this.env({ t: 'descarga', id, estado: 'descartada' });
   }
 
   suceso(s) {
@@ -463,8 +504,21 @@ class Sesion {
         else if (this.mirando && !this.pantalla) { await this.arrancaPantalla(); this.op('pantalla despierta'); }
         return;
       }
+      if (o.t === 'modo' && 'ultra' in o) {
+        // ULTRA: la celda entera sale por Tor. Hace falta una celda nueva (el proxy se fija al crearla): se cierra la actual.
+        const quiere = !!o.ultra;
+        if (!TOR_PROXY) { this.suceso({ clase: 'ultra', certeza: 'comprobado', dominio: this.webActual, texto: 'ULTRA no está disponible en este motor: no tiene salida por Tor configurada. ZERO sigue como hasta ahora.', detalle: { disponible: false } }); return this.env({ t: 'ultra', disponible: false, activo: false }); }
+        if (quiere === !!this.ultra) return;
+        this.ultra = quiere; this.op('ultra ' + (quiere ? 'activado' : 'desactivado') + ': celda nueva');
+        try { if (this.ctx) await this.ctx.close(); } catch (_) {}
+        this.pestanas = []; this.act = null; this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.descargas = new Map();
+        await this.abre(this.w, this.h);
+        this.suceso({ clase: 'ultra', certeza: 'comprobado', dominio: '', texto: quiere ? 'ULTRA activado: esta celda nueva sale a internet por la red Tor (tres repetidores). Las webs ven la salida de Tor, no la de GUARDIANA. Es más lento.' : 'ULTRA desactivado: celda nueva con la salida normal de GUARDIANA.', detalle: { disponible: true, activo: quiere } });
+        return this.env({ t: 'ultra', disponible: true, activo: quiere });
+      }
       if (o.t === 'modo') { if ('observatorio' in o) { this.observatorio = !!o.observatorio; this.op('modo observatorio ' + (this.observatorio ? 'activado' : 'desactivado')); } if (o.nivel) await this.ponNivel(o.nivel); return; }
       if (o.t === 'destruir') return await this.destruye('a petición de la persona');
+      if (o.t === 'descarga') { if (o.accion === 'traer') return await this.traeDescarga(+o.id); if (o.accion === 'descartar') return this.descartaDescarga(+o.id); return; }
       if (o.t === 'pestana') {
         if (this.sellada) return;
         if (o.accion === 'nueva') return await this.nuevaPestana(o.url ? String(o.url).slice(0, 4096) : '');
@@ -519,7 +573,7 @@ class Sesion {
     try { if (this.cdp) await this.cdp.send('Page.stopScreencast').catch(() => {}); } catch (_) {}
     try { if (this.ctx) await this.ctx.close(); this.op('celda cerrada: cookies, caché, almacenamiento y pestañas de la sesión eliminados con el contexto'); } catch (_) { this.op('celda cerrada con error'); }
     const acta = { sesion: this.id, version: VERSION, inicio: new Date(this.creada).toISOString(), fin: ahora(), motivo, duracion_s: Math.round((Date.now() - this.creada) / 1000), cierre_ms: Date.now() - t0,
-      operaciones: this.operaciones, sucesos: this.sucesos.length, cortes: this.sucesos.filter((s) => s.clase === 'corte').length, senuelos: this.senuelos.alertas.length, alerta_final: this.alerta,
+      operaciones: this.operaciones, sucesos: this.sucesos.length, cortes: this.sucesos.filter((s) => s.clase === 'corte').length, senuelos: this.senuelos.alertas.length, alerta_final: this.alerta, descargas_retenidas: this.descargas.size,
       nota: 'Prototipo: el contexto de Chromium se destruye y con él todo su estado; en producción se destruye la microVM entera y se invalidan sus claves. Este comprobante lo sella el propio servidor: acredita lo que ZERO hizo, no sustituye una auditoría externa.' };
     acta.sello = crypto.createHmac('sha256', CLAVE_SESION).update(JSON.stringify(acta)).digest('hex').slice(0, 32);
     if (this.ws.abierto) { this.env({ t: 'acta', acta }); setTimeout(() => this.ws.cierra(), 200); }

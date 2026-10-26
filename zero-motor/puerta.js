@@ -88,7 +88,7 @@ function restaura(texto, mapa) {
 // en la página). Sin clave o en modo de pruebas, un simulacro que devuelve el texto recibido (sirve para ver qué llegó).
 const PROVEEDORES = {
   openai: { nombre: 'ChatGPT (OpenAI)', url: 'https://api.openai.com/v1/chat/completions', clave: 'ZERO_OPENAI_KEY', modelo: 'gpt-4o-mini' },
-  gemini: { nombre: 'Gemini (Google)', url: null, clave: 'ZERO_GEMINI_KEY', modelo: 'gemini-2.0-flash' },
+  gemini: { nombre: 'Gemini (Google)', url: 'https://generativelanguage.googleapis.com/v1beta/models/', clave: 'ZERO_GEMINI_KEY', modelo: process.env.ZERO_GEMINI_MODEL || 'gemini-2.0-flash' },
   anthropic: { nombre: 'Claude (Anthropic)', url: 'https://api.anthropic.com/v1/messages', clave: 'ZERO_ANTHROPIC_KEY', modelo: 'claude-3-5-haiku-latest' },
   compatible: { nombre: 'API compatible con OpenAI', url: process.env.ZERO_COMPAT_URL || null, clave: 'ZERO_COMPAT_KEY', modelo: process.env.ZERO_COMPAT_MODEL || 'gpt-4o-mini' },
 };
@@ -102,7 +102,10 @@ async function envia(proveedor, mensajes, opciones) {
   const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 60000);
   try {
     let r, j, texto;
-    if (proveedor === 'anthropic') {
+    if (proveedor === 'gemini') {
+      r = await fetch(p.url + p.modelo + ':generateContent', { method: 'POST', signal: ctl.signal, headers: { 'content-type': 'application/json', 'x-goog-api-key': clave }, body: JSON.stringify({ system_instruction: { parts: [{ text: mensajes.filter((m) => m.role === 'system').map((m) => m.content).join('\n') }] }, contents: mensajes.filter((m) => m.role !== 'system').map((m) => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] })) }) });
+      j = await r.json(); texto = ((((j.candidates || [])[0] || {}).content || {}).parts || []).map((x) => x.text || '').join('');
+    } else if (proveedor === 'anthropic') {
       r = await fetch(p.url, { method: 'POST', signal: ctl.signal, headers: { 'content-type': 'application/json', 'x-api-key': clave, 'anthropic-version': '2023-06-01' }, body: JSON.stringify({ model: p.modelo, max_tokens: 1024, system: mensajes.filter((m) => m.role === 'system').map((m) => m.content).join('\n'), messages: mensajes.filter((m) => m.role !== 'system') }) });
       j = await r.json(); texto = (j.content || []).map((c) => c.text || '').join('');
     } else {

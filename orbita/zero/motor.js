@@ -45,7 +45,7 @@
 
   function despacha(m) {
     if (m.t === 'lista') {
-      M.lista = m; M.estado = 'lista'; M.sesion = m.sesion; M.acta = null;
+      M.lista = m; M.estado = 'lista'; M.sesion = m.sesion; M.acta = null; M.ultraDisponible = !!m.ultraDisponible; M.ultra = !!m.ultra;
       ponEstado('Celda lista · ' + Object.keys(m.listas || {}).length + ' listas · cookies de terceros ' + (m.cookiesBloqueadas ? 'bloqueadas' : 'efímeras'));
       try { const n = localStorage.getItem('zeroNivel'); if (n && n !== '"normal"') env({ t: 'modo', nivel: JSON.parse(n) }); } catch (_) {}
       if (pendiente) { env({ t: 'abrir', url: pendiente }); pendiente = null; }
@@ -56,6 +56,9 @@
     if (m.t === 'nav') { M.host = m.host; M.urlActual = m.url; if (window.zeroNav) window.zeroNav(m); return; }
     if (m.t === 'titulo') { if (window.zeroTitulo) window.zeroTitulo(m.titulo); return; }
     if (m.t === 'ia') { if (window.zeroIA) window.zeroIA(m); return; }
+    if (m.t === 'ultra') { M.ultraDisponible = !!m.disponible; M.ultra = !!m.activo; if (window.zeroUltra) window.zeroUltra(m); return; }
+    if (m.t === 'descarga') { if (window.zeroDescarga) window.zeroDescarga(m); return; }
+    if (m.t === 'archivo') { if (window.zeroArchivo) window.zeroArchivo(m); return; }
     if (m.t === 'pestanas') { M.pestanas = m; if (window.zeroPestanas) window.zeroPestanas(m); return; }
     if (m.t === 'cortes') { if (window.zeroCortes) window.zeroCortes(m.lista || []); return; }
     if (m.t === 'alerta') { M.alertaNivel = m.nivel; M.sellada = !!m.sellada; if (window.zeroAlerta) window.zeroAlerta(m); return; }
@@ -95,10 +98,12 @@
   };
   M.atras = () => env({ t: 'atras' }); M.adelante = () => env({ t: 'adelante' }); M.recargar = () => env({ t: 'recargar' });
   M.modo = (observatorio) => { M.observatorio = !!observatorio; env({ t: 'modo', observatorio: M.observatorio }); };
+  M.ultraPon = (on) => env({ t: 'modo', ultra: !!on });
   M.nivel = (n) => { M.nivelActual = n; env({ t: 'modo', nivel: n }); };
   M.destruir = () => { ponEstado('Sellando y destruyendo la celda…'); env({ t: 'destruir' }); };
   M.ia = (o) => { if (M.estado !== 'lista' || !ws || ws.readyState !== 1) { conecta(); return false; } env({ t: 'ia', ...o }); return true; };
   M.pestana = (accion, id, url) => env({ t: 'pestana', accion, id, url });
+  M.descarga = (accion, id) => env({ t: 'descarga', accion, id });
   M.sellar = () => env({ t: 'alerta', accion: 'sellar' });
   M.reanudar = () => env({ t: 'alerta', accion: 'reanudar' });
   M.enfoca = () => cv.focus();
