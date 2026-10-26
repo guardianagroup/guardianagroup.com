@@ -1,0 +1,1162 @@
+{
+ "nota": "Dominios atribuidos por la agencia GUARDIANA (ronda 42, 26 Oct 2026): entra solo lo que confirman al menos dos de tres voces (ChatGPT, Gemini, Astra). País de la sede: Wikidata (CC0, consulta del 26 Oct 2026 por la web oficial, P856 → P17/P297 y P159) cuando existe el ítem de la empresa; si no, el país en que coinciden dos voces. Sin país por ninguna vía, el dominio no entra (unpkg.com, popads.net, polyfill.io).",
+ "fecha": "2026-10-26",
+ "fuentes": [
+  "herramientas/agencia-rondas/ronda42/",
+  "Wikidata (CC0)"
+ ],
+ "dominios": {
+  "google-analytics.com": {
+   "empresa": "Google",
+   "categoria": "medición"
+  },
+  "googleadservices.com": {
+   "empresa": "Google",
+   "categoria": "publicidad"
+  },
+  "gstatic.com": {
+   "empresa": "Google",
+   "categoria": "funcional"
+  },
+  "ggpht.com": {
+   "empresa": "Google",
+   "categoria": "funcional"
+  },
+  "facebook.com": {
+   "empresa": "Meta",
+   "categoria": "funcional"
+  },
+  "fbcdn.net": {
+   "empresa": "Meta",
+   "categoria": "funcional"
+  },
+  "instagram.com": {
+   "empresa": "Meta",
+   "categoria": "funcional"
+  },
+  "criteo.net": {
+   "empresa": "Criteo",
+   "categoria": "publicidad"
+  },
+  "hotjar.io": {
+   "empresa": "Contentsquare",
+   "categoria": "medición"
+  },
+  "contentsquare.net": {
+   "empresa": "Contentsquare",
+   "categoria": "medición"
+  },
+  "contentsquare.com": {
+   "empresa": "Contentsquare",
+   "categoria": "medición"
+  },
+  "clarity.ms": {
+   "empresa": "Microsoft",
+   "categoria": "medición"
+  },
+  "bing.com": {
+   "empresa": "Microsoft",
+   "categoria": "funcional"
+  },
+  "bat.bing.com": {
+   "empresa": "Microsoft",
+   "categoria": "publicidad"
+  },
+  "linkedin.com": {
+   "empresa": "Microsoft",
+   "categoria": "funcional"
+  },
+  "licdn.com": {
+   "empresa": "Microsoft",
+   "categoria": "funcional"
+  },
+  "twitter.com": {
+   "empresa": "X",
+   "categoria": "funcional"
+  },
+  "t.co": {
+   "empresa": "X",
+   "categoria": "funcional"
+  },
+  "x.com": {
+   "empresa": "X",
+   "categoria": "funcional"
+  },
+  "outbrain.com": {
+   "empresa": "Outbrain",
+   "categoria": "publicidad"
+  },
+  "quantserve.com": {
+   "empresa": "Quantcast",
+   "categoria": "medición"
+  },
+  "quantcount.com": {
+   "empresa": "Quantcast",
+   "categoria": "medición"
+  },
+  "bidswitch.net": {
+   "empresa": "BidSwitch",
+   "categoria": "publicidad"
+  },
+  "rlcdn.com": {
+   "empresa": "LiveRamp",
+   "categoria": "publicidad"
+  },
+  "liveramp.com": {
+   "empresa": "LiveRamp",
+   "categoria": "publicidad"
+  },
+  "krxd.net": {
+   "empresa": "Salesforce",
+   "categoria": "publicidad"
+  },
+  "bluekai.com": {
+   "empresa": "Oracle",
+   "categoria": "publicidad"
+  },
+  "addthis.com": {
+   "empresa": "Oracle",
+   "categoria": "funcional"
+  },
+  "sharethis.com": {
+   "empresa": "ShareThis",
+   "categoria": "funcional"
+  },
+  "yandex.ru": {
+   "empresa": "Yandex",
+   "categoria": "funcional"
+  },
+  "mc.yandex.ru": {
+   "empresa": "Yandex",
+   "categoria": "medición"
+  },
+  "top-fwz1.mail.ru": {
+   "empresa": "VK",
+   "categoria": "medición"
+  },
+  "nr-data.net": {
+   "empresa": "New Relic",
+   "categoria": "medición"
+  },
+  "newrelic.com": {
+   "empresa": "New Relic",
+   "categoria": "medición"
+  },
+  "sentry.io": {
+   "empresa": "Sentry",
+   "categoria": "medición"
+  },
+  "mixpanel.com": {
+   "empresa": "Mixpanel",
+   "categoria": "medición"
+  },
+  "segment.io": {
+   "empresa": "Twilio",
+   "categoria": "medición"
+  },
+  "segment.com": {
+   "empresa": "Twilio",
+   "categoria": "medición"
+  },
+  "fullstory.com": {
+   "empresa": "Fullstory",
+   "categoria": "medición"
+  },
+  "mouseflow.com": {
+   "empresa": "Mouseflow",
+   "categoria": "medición"
+  },
+  "smartlook.com": {
+   "empresa": "Cisco",
+   "categoria": "medición"
+  },
+  "optimizely.com": {
+   "empresa": "Optimizely",
+   "categoria": "medición"
+  },
+  "onetrust.com": {
+   "empresa": "OneTrust",
+   "categoria": "consentimiento"
+  },
+  "cookielaw.org": {
+   "empresa": "OneTrust",
+   "categoria": "consentimiento"
+  },
+  "cookiebot.com": {
+   "empresa": "Usercentrics",
+   "categoria": "consentimiento"
+  },
+  "consensu.org": {
+   "empresa": "IAB Europe",
+   "categoria": "consentimiento"
+  },
+  "didomi.io": {
+   "empresa": "Didomi",
+   "categoria": "consentimiento"
+  },
+  "chartbeat.net": {
+   "empresa": "Chartbeat",
+   "categoria": "medición"
+  },
+  "improvedigital.com": {
+   "empresa": "Azerion",
+   "categoria": "publicidad"
+  },
+  "sovrn.com": {
+   "empresa": "Sovrn",
+   "categoria": "publicidad"
+  },
+  "33across.com": {
+   "empresa": "33Across",
+   "categoria": "publicidad"
+  },
+  "media.net": {
+   "empresa": "Media.net",
+   "categoria": "publicidad"
+  },
+  "yieldmo.com": {
+   "empresa": "Yieldmo",
+   "categoria": "publicidad"
+  },
+  "sharethrough.com": {
+   "empresa": "Sharethrough",
+   "categoria": "publicidad"
+  },
+  "cloudflareinsights.com": {
+   "empresa": "Cloudflare",
+   "categoria": "medición"
+  },
+  "analytics.tiktok.com": {
+   "empresa": "ByteDance",
+   "categoria": "publicidad"
+  },
+  "tiktok.com": {
+   "empresa": "ByteDance",
+   "categoria": "funcional"
+  },
+  "sc-static.net": {
+   "empresa": "Snap",
+   "categoria": "funcional"
+  },
+  "snapchat.com": {
+   "empresa": "Snap",
+   "categoria": "funcional"
+  },
+  "pinimg.com": {
+   "empresa": "Pinterest",
+   "categoria": "funcional"
+  },
+  "pinterest.com": {
+   "empresa": "Pinterest",
+   "categoria": "funcional"
+  },
+  "reddit.com": {
+   "empresa": "Reddit",
+   "categoria": "funcional"
+  },
+  "redditstatic.com": {
+   "empresa": "Reddit",
+   "categoria": "funcional"
+  },
+  "adform.com": {
+   "empresa": "Adform",
+   "categoria": "publicidad"
+  },
+  "hubspot.com": {
+   "empresa": "HubSpot",
+   "categoria": "funcional"
+  },
+  "hs-scripts.com": {
+   "empresa": "HubSpot",
+   "categoria": "medición"
+  },
+  "hsforms.net": {
+   "empresa": "HubSpot",
+   "categoria": "funcional"
+  },
+  "intercom.io": {
+   "empresa": "Intercom",
+   "categoria": "funcional"
+  },
+  "drift.com": {
+   "empresa": "Salesloft",
+   "categoria": "funcional"
+  },
+  "zendesk.com": {
+   "empresa": "Zendesk",
+   "categoria": "funcional"
+  },
+  "zopim.com": {
+   "empresa": "Zendesk",
+   "categoria": "funcional"
+  },
+  "tawk.to": {
+   "empresa": "tawk.to",
+   "categoria": "funcional"
+  },
+  "livechatinc.com": {
+   "empresa": "Text",
+   "categoria": "funcional"
+  },
+  "appsflyer.com": {
+   "empresa": "AppsFlyer",
+   "categoria": "medición"
+  },
+  "adjust.com": {
+   "empresa": "AppLovin",
+   "categoria": "medición"
+  },
+  "kochava.com": {
+   "empresa": "Kochava",
+   "categoria": "medición"
+  },
+  "singular.net": {
+   "empresa": "Singular",
+   "categoria": "medición"
+  },
+  "stripe.com": {
+   "empresa": "Stripe",
+   "categoria": "funcional"
+  },
+  "paypal.com": {
+   "empresa": "PayPal",
+   "categoria": "funcional"
+  },
+  "recaptcha.net": {
+   "empresa": "Google",
+   "categoria": "funcional"
+  },
+  "hcaptcha.com": {
+   "empresa": "Intuition Machines",
+   "categoria": "funcional"
+  },
+  "akamaihd.net": {
+   "empresa": "Akamai",
+   "categoria": "funcional"
+  },
+  "fastly.net": {
+   "empresa": "Fastly",
+   "categoria": "funcional"
+  },
+  "cdnjs.cloudflare.com": {
+   "empresa": "Cloudflare",
+   "categoria": "funcional"
+  },
+  "matomo.cloud": {
+   "empresa": "InnoCraft",
+   "categoria": "medición"
+  },
+  "piwik.pro": {
+   "empresa": "Piwik PRO",
+   "categoria": "medición"
+  },
+  "plausible.io": {
+   "empresa": "Plausible Insights",
+   "categoria": "medición"
+  },
+  "umami.is": {
+   "empresa": "Umami",
+   "categoria": "medición"
+  },
+  "statcounter.com": {
+   "empresa": "Statcounter",
+   "categoria": "medición"
+  },
+  "histats.com": {
+   "empresa": "Wisecode",
+   "categoria": "medición"
+  },
+  "clicky.com": {
+   "empresa": "Roxr Software",
+   "categoria": "medición"
+  },
+  "exoclick.com": {
+   "empresa": "ExoClick",
+   "categoria": "publicidad"
+  },
+  "trafficjunky.net": {
+   "empresa": "Aylo",
+   "categoria": "publicidad"
+  },
+  "propellerads.com": {
+   "empresa": "PropellerAds",
+   "categoria": "publicidad"
+  },
+  "adsterra.com": {
+   "empresa": "Adsterra",
+   "categoria": "publicidad"
+  },
+  "vk.com": {
+   "empresa": "VK",
+   "categoria": "funcional"
+  },
+  "ok.ru": {
+   "empresa": "VK",
+   "categoria": "funcional"
+  },
+  "rambler.ru": {
+   "empresa": "Rambler",
+   "categoria": "funcional"
+  },
+  "dzen.ru": {
+   "empresa": "VK",
+   "categoria": "funcional"
+  },
+  "baidu.com": {
+   "empresa": "Baidu",
+   "categoria": "funcional"
+  },
+  "cnzz.com": {
+   "empresa": "Alibaba",
+   "categoria": "medición"
+  },
+  "umeng.com": {
+   "empresa": "Alibaba",
+   "categoria": "medición"
+  },
+  "alibaba.com": {
+   "empresa": "Alibaba",
+   "categoria": "funcional"
+  },
+  "alicdn.com": {
+   "empresa": "Alibaba",
+   "categoria": "funcional"
+  },
+  "naver.com": {
+   "empresa": "Naver",
+   "categoria": "funcional"
+  },
+  "kakao.com": {
+   "empresa": "Kakao",
+   "categoria": "funcional"
+  },
+  "line.me": {
+   "empresa": "LY Corporation",
+   "categoria": "funcional"
+  }
+ },
+ "empresas": {
+  "Google": "US",
+  "Meta": "US",
+  "Criteo": "FR",
+  "Contentsquare": "FR",
+  "Microsoft": "US",
+  "X": "US",
+  "Outbrain": "US",
+  "Quantcast": "US",
+  "BidSwitch": "FR",
+  "LiveRamp": "US",
+  "Salesforce": "US",
+  "Oracle": "US",
+  "ShareThis": "US",
+  "Yandex": "RU",
+  "VK": "RU",
+  "New Relic": "US",
+  "Sentry": "US",
+  "Mixpanel": "US",
+  "Twilio": "US",
+  "Fullstory": "US",
+  "Mouseflow": "DK",
+  "Cisco": "US",
+  "Optimizely": "US",
+  "OneTrust": "US",
+  "Usercentrics": "DE",
+  "IAB Europe": "BE",
+  "Didomi": "FR",
+  "Chartbeat": "US",
+  "Azerion": "NL",
+  "Sovrn": "US",
+  "33Across": "US",
+  "Media.net": "AE",
+  "Yieldmo": "US",
+  "Sharethrough": "FR",
+  "Cloudflare": "US",
+  "ByteDance": "CN",
+  "Snap": "US",
+  "Pinterest": "US",
+  "Reddit": "US",
+  "Adform": "DK",
+  "HubSpot": "US",
+  "Intercom": "US",
+  "Salesloft": "US",
+  "Zendesk": "US",
+  "tawk.to": "US",
+  "Text": "PL",
+  "AppsFlyer": "IL",
+  "AppLovin": "US",
+  "Kochava": "US",
+  "Singular": "US",
+  "Stripe": "US",
+  "PayPal": "US",
+  "Intuition Machines": "US",
+  "Akamai": "US",
+  "Fastly": "US",
+  "InnoCraft": "NZ",
+  "Piwik PRO": "DK",
+  "Plausible Insights": "EE",
+  "Umami": "US",
+  "Statcounter": "IE",
+  "Wisecode": "IT",
+  "Roxr Software": "US",
+  "ExoClick": "ES",
+  "Aylo": "CA",
+  "PropellerAds": "CY",
+  "Adsterra": "CY",
+  "Rambler": "RU",
+  "Baidu": "CN",
+  "Alibaba": "CN",
+  "Naver": "KR",
+  "Kakao": "KR",
+  "LY Corporation": "JP"
+ },
+ "detalle": {
+  "Google": {
+   "cc": "US",
+   "web": "about.google",
+   "wikidata": "Q95",
+   "sede": "Mountain View",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Meta": {
+   "cc": "US",
+   "web": "meta.com",
+   "wikidata": "Q380",
+   "sede": "Menlo Park",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Criteo": {
+   "cc": "FR",
+   "web": "criteo.com",
+   "wikidata": "Q2814507",
+   "sede": "París",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Contentsquare": {
+   "cc": "FR",
+   "web": "contentsquare.com",
+   "wikidata": "Q86676634",
+   "sede": "París",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Microsoft": {
+   "cc": "US",
+   "web": "microsoft.com",
+   "wikidata": "Q2283",
+   "sede": "Redmond",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "X": {
+   "cc": "US",
+   "web": "x.com",
+   "wikidata": "Q918",
+   "sede": "Bastrop",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Outbrain": {
+   "cc": "US",
+   "web": "teads.com",
+   "wikidata": "Q28872999",
+   "sede": "Nueva York",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Quantcast": {
+   "cc": "US",
+   "web": "quantcast.com",
+   "wikidata": "Q4047758",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "BidSwitch": {
+   "cc": "FR",
+   "web": "criteo.com",
+   "wikidata": "Q2814507",
+   "sede": "París",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "LiveRamp": {
+   "cc": "US",
+   "web": "liveramp.com",
+   "wikidata": "Q125352505",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Salesforce": {
+   "cc": "US",
+   "web": "salesforce.com",
+   "wikidata": "Q941127",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Oracle": {
+   "cc": "US",
+   "web": "oracle.com",
+   "wikidata": "Q19900",
+   "sede": "Austin",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "ShareThis": {
+   "cc": "US",
+   "web": "predactiv.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Yandex": {
+   "cc": "RU",
+   "web": null,
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "VK": {
+   "cc": "RU",
+   "web": "vk.company",
+   "wikidata": "Q1885456",
+   "sede": "Moscú",
+   "voces": 2,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "New Relic": {
+   "cc": "US",
+   "web": "newrelic.com",
+   "wikidata": "Q7011152",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Sentry": {
+   "cc": "US",
+   "web": "sentry.io",
+   "wikidata": "Q140835305",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Mixpanel": {
+   "cc": "US",
+   "web": "mixpanel.com",
+   "wikidata": "Q25048114",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Twilio": {
+   "cc": "US",
+   "web": "twilio.com",
+   "wikidata": "Q7858039",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Fullstory": {
+   "cc": "US",
+   "web": "fullstory.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Mouseflow": {
+   "cc": "DK",
+   "web": "mouseflow.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Cisco": {
+   "cc": "US",
+   "web": "cisco.com",
+   "wikidata": "Q173395",
+   "sede": "San José",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Optimizely": {
+   "cc": "US",
+   "web": "optimizely.com",
+   "wikidata": "Q17073302",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "OneTrust": {
+   "cc": "US",
+   "web": "onetrust.com",
+   "wikidata": "Q96756948",
+   "sede": "Atlanta",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Usercentrics": {
+   "cc": "DE",
+   "web": "usercentrics.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "IAB Europe": {
+   "cc": "BE",
+   "web": "iabeurope.eu",
+   "wikidata": "Q131884317",
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Didomi": {
+   "cc": "FR",
+   "web": "didomi.io",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Chartbeat": {
+   "cc": "US",
+   "web": "chartbeat.com",
+   "wikidata": "Q22907179",
+   "sede": "Nueva York",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Azerion": {
+   "cc": "NL",
+   "web": "azerion.com",
+   "wikidata": "Q71060894",
+   "sede": "Schiphol-Rijk",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Sovrn": {
+   "cc": "US",
+   "web": "sovrn.com",
+   "wikidata": "Q22908948",
+   "sede": "Boulder",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "33Across": {
+   "cc": "US",
+   "web": "wealthstage.ai",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Media.net": {
+   "cc": "AE",
+   "web": "media.net",
+   "wikidata": "Q24885109",
+   "sede": "Dubái",
+   "voces": 2,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Yieldmo": {
+   "cc": "US",
+   "web": "yieldmo.com",
+   "wikidata": "Q19882033",
+   "sede": "Nueva York",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Sharethrough": {
+   "cc": "FR",
+   "web": "equativ.com",
+   "wikidata": "Q120967874",
+   "sede": "París",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Cloudflare": {
+   "cc": "US",
+   "web": "cloudflare.com",
+   "wikidata": "Q4778915",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "ByteDance": {
+   "cc": "CN",
+   "web": "bytedance.com",
+   "wikidata": "Q55606242",
+   "sede": "Pekín",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Snap": {
+   "cc": "US",
+   "web": "snap.com",
+   "wikidata": "Q27022329",
+   "sede": "Santa Mónica",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Pinterest": {
+   "cc": "US",
+   "web": "pinterest.com",
+   "wikidata": "Q255381",
+   "sede": "Palo Alto",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Reddit": {
+   "cc": "US",
+   "web": "reddit.com",
+   "wikidata": "Q1136",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Adform": {
+   "cc": "DK",
+   "web": "adform.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "HubSpot": {
+   "cc": "US",
+   "web": "hubspot.com",
+   "wikidata": "Q5926631",
+   "sede": "Cambridge",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Intercom": {
+   "cc": "US",
+   "web": "intercom.com",
+   "wikidata": "Q48965215",
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Salesloft": {
+   "cc": "US",
+   "web": "salesloft.com",
+   "wikidata": "Q7404299",
+   "sede": "Atlanta",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Zendesk": {
+   "cc": "US",
+   "web": "zendesk.com",
+   "wikidata": "Q15401349",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "tawk.to": {
+   "cc": "US",
+   "web": "tawk.to",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Text": {
+   "cc": "PL",
+   "web": "text.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "AppsFlyer": {
+   "cc": "IL",
+   "web": "appsflyer.com",
+   "wikidata": "Q20050673",
+   "sede": "Herzliya",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "AppLovin": {
+   "cc": "US",
+   "web": "applovin.com",
+   "wikidata": "Q27150212",
+   "sede": "Palo Alto",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Kochava": {
+   "cc": "US",
+   "web": "kochava.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Singular": {
+   "cc": "US",
+   "web": "singular.net",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Stripe": {
+   "cc": "US",
+   "web": "stripe.com",
+   "wikidata": "Q7624104",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "PayPal": {
+   "cc": "US",
+   "web": "paypal.com",
+   "wikidata": "Q483959",
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Intuition Machines": {
+   "cc": "US",
+   "web": "intuitionmachines.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Akamai": {
+   "cc": "US",
+   "web": "akamai.com",
+   "wikidata": "Q415598",
+   "sede": "Cambridge",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Fastly": {
+   "cc": "US",
+   "web": "fastly.com",
+   "wikidata": "Q34045622",
+   "sede": "San Francisco",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "InnoCraft": {
+   "cc": "NZ",
+   "web": "matomo.org",
+   "wikidata": "Q34162",
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Piwik PRO": {
+   "cc": "DK",
+   "web": "cookieinformation.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Plausible Insights": {
+   "cc": "EE",
+   "web": "plausible.io",
+   "wikidata": "Q140835153",
+   "sede": "Tartu",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Umami": {
+   "cc": "US",
+   "web": "umami.is",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Statcounter": {
+   "cc": "IE",
+   "web": "statcounter.com",
+   "wikidata": "Q3497284",
+   "sede": "Dublín",
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Wisecode": {
+   "cc": "IT",
+   "web": "histats.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Roxr Software": {
+   "cc": "US",
+   "web": "clicky.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "ExoClick": {
+   "cc": "ES",
+   "web": "exoclick.com",
+   "wikidata": "Q5420473",
+   "sede": null,
+   "voces": 3,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Aylo": {
+   "cc": "CA",
+   "web": "aylo.com",
+   "wikidata": "Q1250111",
+   "sede": null,
+   "voces": 2,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "PropellerAds": {
+   "cc": "CY",
+   "web": "propellerads.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 2,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "Adsterra": {
+   "cc": "CY",
+   "web": "adsterra.com",
+   "wikidata": "Q138857824",
+   "sede": "Limasol",
+   "voces": 2,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Rambler": {
+   "cc": "RU",
+   "web": "sberbank.ru",
+   "wikidata": "Q205012",
+   "sede": "Moscú",
+   "voces": 2,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Baidu": {
+   "cc": "CN",
+   "web": "baidu.com",
+   "wikidata": "Q14772",
+   "sede": "Pekín",
+   "voces": 2,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Alibaba": {
+   "cc": "CN",
+   "web": "alibabagroup.com",
+   "wikidata": "Q1359568",
+   "sede": "Hangzhou",
+   "voces": 2,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Naver": {
+   "cc": "KR",
+   "web": "naver.com",
+   "wikidata": "Q485639",
+   "sede": null,
+   "voces": 2,
+   "ronda": 42,
+   "pais_fuente": "Wikidata (CC0)"
+  },
+  "Kakao": {
+   "cc": "KR",
+   "web": "kakao.com",
+   "wikidata": null,
+   "sede": null,
+   "voces": 2,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  },
+  "LY Corporation": {
+   "cc": "JP",
+   "web": "lycorp.co.jp",
+   "wikidata": null,
+   "sede": null,
+   "voces": 2,
+   "ronda": 42,
+   "pais_fuente": "agencia, dos voces"
+  }
+ }
+}
