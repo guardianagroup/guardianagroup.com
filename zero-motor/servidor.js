@@ -65,6 +65,19 @@ function paginaBloqueo(titulo, texto, detalle) {
   .l{height:2px;width:56px;background:#E07A6C;margin:18px 0}</style><main><div class="k">ZERO · DETENIDO AQUÍ</div><h1>${esc(titulo)}</h1><div class="l"></div><p>${esc(texto)}</p><small>${esc(detalle)}</small></main></html>`;
 }
 
+// Poda lo que cuenta el sensor de la subasta antes de enseñarlo: solo banderas, números y nombres cortos (nunca valores
+// largos ni claves); profundidad, tamaño de listas y longitud de textos acotados.
+function poda(x, prof) {
+  prof = prof || 0;
+  if (x == null) return null;
+  if (typeof x === 'string') return x.slice(0, 80);
+  if (typeof x === 'number' || typeof x === 'boolean') return x;
+  if (prof >= 4) return null;
+  if (Array.isArray(x)) return x.slice(0, 20).map((y) => poda(y, prof + 1));
+  if (typeof x === 'object') { const o = {}; for (const [k, v] of Object.entries(x).slice(0, 40)) o[String(k).slice(0, 40)] = poda(v, prof + 1); return o; }
+  return null;
+}
+
 class Sesion {
   constructor(ws) {
     this.ws = ws; this.id = crypto.randomBytes(6).toString('hex'); this.creada = Date.now();
@@ -299,12 +312,12 @@ class Sesion {
     if (s.clase === 'subasta') {
       st.n.subastas++;
       if (s.fase === 'fin') {
-        const pujas = (s.pujas || []).map((p) => ({ ...p, ...empresaDe(p.pujador) }));
+        const pujas = (s.pujas || []).map((p) => ({ ...poda(p), ...empresaDe(p.pujador) }));
         const n = new Set([...(s.pedidos || []), ...pujas.map((p) => p.pujador)]).size;
-        return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Esta página ha subastado tu atención: ' + n + (n === 1 ? ' empresa pujó' : ' empresas pujaron') + ' por ' + (s.unidades || 1) + (s.unidades === 1 ? ' hueco' : ' huecos') + ' de anuncio en ' + (s.ms != null ? s.ms + ' ms' : 'milisegundos') + '. Los precios son los que declara cada pujador.', detalle: { id: s.id, ms: s.ms, unidades: s.unidades, pedidos: s.pedidos, pujas, sinPuja: s.sinPuja } });
+        return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Esta página ha subastado tu atención: ' + n + (n === 1 ? ' empresa pujó' : ' empresas pujaron') + ' por ' + (s.unidades || 1) + (s.unidades === 1 ? ' hueco' : ' huecos') + ' de anuncio en ' + (s.ms != null ? s.ms + ' ms' : 'milisegundos') + '. Los precios son los que declara cada pujador.', detalle: { id: s.id, ms: s.ms, limite: s.limite || null, unidades: s.unidades, pedidos: poda(s.pedidos), pujas, sinPuja: poda(s.sinPuja), tarde: poda(s.tarde), peticiones: poda(s.peticiones), config: poda(s.config), tcf: poda(s.tcf) } });
       }
-      if (s.fase === 'ganada') return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Ganó la puja ' + s.pujador + (s.cpm != null ? ' declarando ' + s.cpm + ' ' + (s.moneda || '') + ' por mil impresiones' : '') + (s.anunciante ? ' para el anunciante ' + s.anunciante : '') + '.', detalle: { ...s, ...empresaDe(s.pujador) } });
-      return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Hueco de anuncio servido por Google' + (s.vacio ? ' (vacío)' : '') + (s.anunciante ? ' · anunciante nº ' + s.anunciante : '') + '.', detalle: s });
+      if (s.fase === 'ganada') return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Ganó la puja ' + s.pujador + (s.cpm != null ? ' declarando ' + s.cpm + ' ' + (s.moneda || '') + ' por mil impresiones' : '') + (s.anunciante ? ' para el anunciante ' + s.anunciante : '') + '.', detalle: { ...poda(s), ...empresaDe(s.pujador) } });
+      return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Hueco de anuncio servido por Google' + (s.vacio ? ' (vacío)' : '') + (s.anunciante ? ' · anunciante nº ' + s.anunciante : '') + '.', detalle: poda(s) });
     }
   }
 
@@ -331,6 +344,7 @@ class Sesion {
       const req = r.request();
       if (!req.isNavigationRequest() || req.frame() !== (p || this.act).page.mainFrame()) return;
       const st = r.status(); if (st >= 300 && st < 400) return;
+      { const pp = p || this.act; if (pp) { pp.respondio = { url: r.url(), ok: st >= 200 && st < 300 }; } } // la web real respondió (para «Estás en … comprobado»)
       const cadena = []; let q = req.redirectedFrom();
       while (q) { cadena.unshift(hostDe(q.url())); q = q.redirectedFrom(); }
       if (cadena.length >= 2) {
@@ -446,7 +460,8 @@ class Sesion {
   nav(cargada) {
     try {
       const u = this.page.url(); if (this.act) this.act.url = u;
-      this.env({ t: 'nav', url: u, host: hostDe(u), segura: u.startsWith('https:'), titulo: cargada ? undefined : undefined, cargada: !!cargada });
+      const rs = this.act && this.act.respondio; const ok = !!(rs && rs.ok && hostDe(rs.url) === hostDe(u));
+      this.env({ t: 'nav', url: u, host: hostDe(u), segura: u.startsWith('https:'), cargada: !!cargada, ok });
       if (cargada) this.page.title().then((tt) => this.env({ t: 'titulo', titulo: tt })).catch(() => {});
     } catch (_) {}
   }

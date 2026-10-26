@@ -100,15 +100,88 @@ module.exports = String.raw`(() => {
       if (typeof p.onEvent !== 'function') return;
       const ev = (nombre, f) => { try { p.onEvent(nombre, f); } catch (_) {} };
       const subastas = {};
-      ev('auctionInit', (a) => { subastas[a.auctionId] = { inicio: Date.now(), unidades: (a.adUnitCodes || []).length, pujadores: new Set() }; });
-      ev('bidRequested', (b) => { const s = subastas[b.auctionId]; if (s) s.pujadores.add(b.bidderCode); });
+      const corto = (x, n) => (x == null ? null : String(x).slice(0, n || 60));
+      const lista = (xs, n) => (Array.isArray(xs) ? xs : []).slice(0, n || 12);
+      // Configuración de Prebid que afecta a la subasta: se lee una vez por subasta (sin claves ni valores privados).
+      const configura = () => {
+        try {
+          const c = (typeof p.getConfig === 'function' && p.getConfig()) || {};
+          const s2s = (Array.isArray(c.s2sConfig) ? c.s2sConfig : [c.s2sConfig]).filter(Boolean);
+          const sync = c.userSync || {};
+          const schain = (c.schain && c.schain.config && c.schain.config.nodes) || [];
+          const cm = c.consentManagement || {};
+          return {
+            version: corto(p.version, 20), limite: c.bidderTimeout || null, granularidad: typeof c.priceGranularity === 'string' ? c.priceGranularity : (c.priceGranularity ? 'personalizada' : null),
+            moneda: c.currency && c.currency.adServerCurrency || null, todasLasPujas: !!c.enableSendAllBids,
+            servidor: lista(s2s.flatMap((x) => x.bidders || []), 20).map((x) => corto(x, 30)), servidorHost: s2s.map((x) => { try { return new URL((x.endpoint && (x.endpoint.p1Consent || x.endpoint)) || '').hostname; } catch (_) { return null; } }).filter(Boolean).slice(0, 3),
+            sync: { pixel: !!sync.pixelEnabled, iframe: !!sync.iframeEnabled, porPujador: sync.syncsPerBidder != null ? sync.syncsPerBidder : null, espera: sync.syncDelay != null ? sync.syncDelay : null },
+            cadena: lista(schain, 10).map((n) => ({ asi: corto(n.asi, 40), sid: corto(n.sid, 40), hp: n.hp })),
+            cmp: corto((cm.gdpr && cm.gdpr.cmpApi) || cm.cmpApi, 20),
+            modulosId: lista(Object.keys((typeof p.getUserIds === 'function' && p.getUserIds()) || {}), 12).map((x) => corto(x, 30)),
+          };
+        } catch (_) { return null; }
+      };
+      // Consentimiento TCF (lo que la web dice que has consentido): fines y nº de proveedores con consentimiento.
+      const leeTcf = (s) => {
+        try {
+          if (typeof window.__tcfapi !== 'function') return;
+          window.__tcfapi('getTCData', 2, (d, ok) => {
+            if (!ok || !d) return;
+            const fines = Object.entries((d.purpose && d.purpose.consents) || {}).filter(([, v]) => v).map(([k]) => +k);
+            const vend = Object.values((d.vendor && d.vendor.consents) || {}).filter(Boolean).length;
+            s.tcf = { aplica: d.gdprApplies === true, cmp: d.cmpId || null, fines: fines.slice(0, 12), proveedores: vend, pais: corto(d.publisherCC, 4) };
+          });
+        } catch (_) {}
+      };
+      ev('auctionInit', (a) => { const s = { inicio: Date.now(), limite: a.timeout || null, unidades: (a.adUnitCodes || []).length, pujadores: new Set(), tarde: new Set(), config: configura() }; subastas[a.auctionId] = s; leeTcf(s); });
+      // Qué llevaba cada petición de puja (dueño, 26 Oct 2026: «qué información, el máximo que podamos saber»). Se lee del
+      // propio objeto de Prebid: dirección de la página y referente, tamaños y tipo del hueco, consentimiento, identificadores
+      // de usuario (módulos userId / eids), datos de primera parte (palabras clave, segmentos, año de nacimiento, género,
+      // categorías del sitio), idioma, ubicación y datos del navegador (ortb2), y si la petición salió por cliente o por servidor.
+      const llevaba = (b) => {
+        const o = b.ortb2 || {}; const ids = new Set(); const tams = new Set(); const tipos = new Set(); const params = new Set();
+        const ri = b.refererInfo || {}; const u = o.user || {}; const si = o.site || {}; const dv = o.device || {};
+        const pet = {
+          pagina: !!(ri.page || ri.topmostLocation || ri.referer || si.page), referente: !!(ri.ref || si.ref),
+          consent: !!((b.gdprConsent && b.gdprConsent.consentString) || b.uspConsent || (b.gppConsent && b.gppConsent.gppString)),
+          gdpr: b.gdprConsent ? b.gdprConsent.gdprApplies === true : null, usp: corto(b.uspConsent, 8), gpp: !!(b.gppConsent && b.gppConsent.gppString),
+          geo: !!(dv.geo || u.geo), coordenadas: !!((dv.geo && (dv.geo.lat != null)) || (u.geo && (u.geo.lat != null))),
+          navegador: !!(dv.ua || dv.sua), idioma: corto(dv.language || (si.content && si.content.language), 8),
+          palabrasSitio: !!(si.keywords || (si.content && si.content.keywords)), categoriasSitio: lista(si.cat || si.sectioncat || si.pagecat, 6).map((x) => corto(x, 20)),
+          palabrasUsuario: !!u.keywords, segmentos: lista(u.data, 8).map((d) => corto(d.name || (d.ext && d.ext.segtax), 30)).filter(Boolean), nSegmentos: lista(u.data, 50).reduce((n, d) => n + ((d.segment || []).length), 0),
+          nacimiento: u.yob != null, genero: !!u.gender,
+          via: b.src === 's2s' ? 'servidor' : 'cliente',
+        };
+        for (const e of ((u.ext && u.ext.eids) || [])) if (e && e.source) ids.add(e.source);
+        for (const bid of (b.bids || [])) {
+          for (const e of (bid.userIdAsEids || [])) if (e && e.source) ids.add(e.source);
+          for (const [k, v] of Object.entries(bid.userId || {})) if (v != null && v !== '' && !(typeof v === 'object' && !Object.keys(v).length)) ids.add(k);
+          const mt = bid.mediaTypes || {};
+          for (const k of Object.keys(mt)) tipos.add(k);
+          const sz = (mt.banner && mt.banner.sizes) || bid.sizes || [];
+          for (const t of sz) if (Array.isArray(t) && t.length === 2) tams.add(t.join('x'));
+          if (mt.video && mt.video.playerSize) for (const t of (Array.isArray(mt.video.playerSize[0]) ? mt.video.playerSize : [mt.video.playerSize])) if (Array.isArray(t) && t.length === 2) tams.add(t.join('x') + ' vídeo');
+          for (const [k, v] of Object.entries(bid.params || {})) if (['string', 'number', 'boolean'].includes(typeof v)) params.add(k + '=' + corto(v, 24));
+        }
+        pet.ids = [...ids].slice(0, 12); pet.tam = [...tams].slice(0, 8); pet.tipos = [...tipos].slice(0, 4); pet.cuenta = [...params].slice(0, 6);
+        return pet;
+      };
+      ev('bidRequested', (b) => { const s = subastas[b.auctionId]; if (s) { s.pujadores.add(b.bidderCode); try { (s.peticiones = s.peticiones || {})[b.bidderCode] = llevaba(b); } catch (_) {} } });
+      ev('bidTimeout', (xs) => { for (const x of (Array.isArray(xs) ? xs : [xs])) { const s = x && subastas[x.auctionId]; if (s) s.tarde.add(x.bidder || x.bidderCode); } });
+      const puja = (b) => {
+        const m = b.meta || {};
+        return { pujador: b.bidderCode || b.bidder, cpm: b.cpm, moneda: b.currency, original: b.originalCpm != null && b.originalCurrency && b.originalCurrency !== b.currency ? { cpm: b.originalCpm, moneda: b.originalCurrency } : null, neto: b.netRevenue === true ? true : b.netRevenue === false ? false : null,
+          ms: b.timeToRespond, tam: b.size, tipo: corto(b.mediaType, 10), unidad: b.adUnitCode, acuerdo: corto(b.dealId, 40), creatividad: corto(b.creativeId, 40), ttl: b.ttl || null, via: b.source === 's2s' ? 'servidor' : 'cliente',
+          anunciante: lista(m.advertiserDomains, 6).map((x) => corto(x, 60)).join(','), anuncianteNombre: corto(m.advertiserName, 60), marca: corto(m.brandName, 60), agencia: corto(m.agencyName, 60), red: corto(m.networkName, 60), categoria: corto(m.primaryCatId, 20), dcadena: m.dchain && Array.isArray(m.dchain.nodes) ? m.dchain.nodes.length : null,
+          tramo: b.adserverTargeting && corto(b.adserverTargeting.hb_pb, 12) };
+      };
       ev('auctionEnd', (a) => {
         const s = subastas[a.auctionId] || {};
-        const pujas = (a.bidsReceived || []).map((b) => ({ pujador: b.bidderCode || b.bidder, cpm: b.cpm, moneda: b.currency, ms: b.timeToRespond, tam: b.size, unidad: b.adUnitCode, anunciante: b.meta && (b.meta.advertiserDomains || []).join(',') }));
+        const pujas = (a.bidsReceived || []).map(puja);
         const sinPuja = (a.noBids || []).map((b) => b.bidderCode || b.bidder);
-        cuenta({ clase: 'subasta', fase: 'fin', id: a.auctionId, ms: s.inicio ? Date.now() - s.inicio : (a.auctionEnd && a.timestamp ? a.auctionEnd - a.timestamp : null), unidades: s.unidades || (a.adUnitCodes || []).length, pedidos: [...(s.pujadores || [])], pujas, sinPuja });
+        cuenta({ clase: 'subasta', fase: 'fin', id: a.auctionId, ms: s.inicio ? Date.now() - s.inicio : (a.auctionEnd && a.timestamp ? a.auctionEnd - a.timestamp : null), limite: s.limite || a.timeout || null, unidades: s.unidades || (a.adUnitCodes || []).length, pedidos: [...(s.pujadores || [])], pujas, sinPuja, tarde: [...(s.tarde || [])], peticiones: s.peticiones || {}, config: s.config || null, tcf: s.tcf || null });
       });
-      ev('bidWon', (b) => cuenta({ clase: 'subasta', fase: 'ganada', id: b.auctionId, pujador: b.bidderCode || b.bidder, cpm: b.cpm, moneda: b.currency, tam: b.size, unidad: b.adUnitCode, anunciante: b.meta && (b.meta.advertiserDomains || []).join(',') }));
+      ev('bidWon', (b) => { const x = puja(b); cuenta({ clase: 'subasta', fase: 'ganada', id: b.auctionId, ...x, objetivo: b.adserverTargeting ? { pujador: corto(b.adserverTargeting.hb_bidder, 30), tramo: corto(b.adserverTargeting.hb_pb, 12), tam: corto(b.adserverTargeting.hb_size, 12) } : null }); });
     };
     try {
       if (Array.isArray(p.que)) p.que.unshift(listo); else if (p.que && typeof p.que.push === 'function') p.que.push(listo); else p.que = [listo];
@@ -116,7 +189,10 @@ module.exports = String.raw`(() => {
   };
   const enganchaGoogle = (g) => {
     if (!g || g.__zero) return; g.__zero = true;
-    const listo = () => { try { g.pubads().addEventListener('slotRenderEnded', (e) => cuenta({ clase: 'subasta', fase: 'google', unidad: e.slot && e.slot.getAdUnitPath && e.slot.getAdUnitPath(), vacio: e.isEmpty, anunciante: e.advertiserId, campana: e.campaignId, linea: e.lineItemId, relleno: e.isBackfill, tam: Array.isArray(e.size) ? e.size.join('x') : e.size })); } catch (_) {} };
+    const listo = () => { try { g.pubads().addEventListener('slotRenderEnded', (e) => {
+      let hb = null; try { const m = e.slot && e.slot.getTargetingMap ? e.slot.getTargetingMap() : {}; if (m && (m.hb_bidder || m.hb_pb)) hb = { pujador: String((m.hb_bidder || [])[0] || '').slice(0, 30), tramo: String((m.hb_pb || [])[0] || '').slice(0, 12), tam: String((m.hb_size || [])[0] || '').slice(0, 12) }; } catch (_) {}
+      cuenta({ clase: 'subasta', fase: 'google', unidad: e.slot && e.slot.getAdUnitPath && e.slot.getAdUnitPath(), vacio: e.isEmpty, anunciante: e.advertiserId, campana: e.campaignId, linea: e.lineItemId, creatividad: e.creativeId || e.sourceAgnosticCreativeId || null, relleno: e.isBackfill, grupos: Array.isArray(e.yieldGroupIds) ? e.yieldGroupIds.length : null, empresas: Array.isArray(e.companyIds) ? e.companyIds.length : null, tam: Array.isArray(e.size) ? e.size.join('x') : e.size, objetivo: hb });
+    }); } catch (_) {} };
     try { if (Array.isArray(g.cmd)) g.cmd.unshift(listo); else if (g.cmd && typeof g.cmd.push === 'function') g.cmd.push(listo); else g.cmd = [listo]; } catch (_) {}
   };
   const vigila = (nombre, f) => {
