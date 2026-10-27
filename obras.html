@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#06080C">
+<title>GUARDIANA · En construcción</title>
+<link rel="icon" href="/favicon.ico">
+<!-- GUARDIANA · la web, en construcción (dueño, 27 Oct 2026, 09:29: «Pon toda la web que nadie la pueda utilizar, ponla en
+     construcción»). Todas las páginas vienen aquí con /obras.js. En el idioma del navegador, de los 42 de GUARDIANA. -->
+<style>
+  :root{color-scheme:dark}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#06080C;color:#F4F6F8}
+  body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;min-height:100%;padding:24px 16px;font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,'Noto Sans',sans-serif;text-align:center;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background:radial-gradient(60% 50% at 50% 40%,rgba(156,195,228,.10),transparent 70%);pointer-events:none}
+  canvas{width:min(44vh,380px);height:min(44vh,380px);display:block;position:relative}
+  .k{margin:8px 0 0;font:600 12px/1.4 'IBM Plex Mono',Consolas,monospace;letter-spacing:.34em;color:#9CC3E4;text-transform:uppercase;position:relative}
+  h1{margin:14px 0 0;font-weight:300;font-size:clamp(32px,5vw,54px);line-height:1.1;letter-spacing:-.01em;position:relative;text-wrap:balance}
+  p.t{margin:14px 0 0;max-width:560px;font-size:clamp(16px,1.6vw,19px);line-height:1.55;color:#c9d6e2;position:relative;text-wrap:balance}
+  footer{margin-top:40px;font-size:12.5px;color:#7f93a6;position:relative}
+  @media (prefers-reduced-motion:reduce){canvas{opacity:.9}}
+</style>
+</head>
+<body>
+<canvas id="red" aria-hidden="true"></canvas>
+<p class="k" translate="no">GUARDIANA</p>
+<h1 id="h">En construcción</h1>
+<p class="t" id="t">Estamos preparando la nueva GUARDIANA. Vuelve pronto.</p>
+<footer translate="no">GUARDIANA GROUP S.A.S.</footer>
+<script>
+(function () {
+  // los 42 idiomas de GUARDIANA: [título, frase]
+  var L = {
+    es: ['En construcción', 'Estamos preparando la nueva GUARDIANA. Vuelve pronto.'],
+    en: ['Under construction', 'We are preparing the new GUARDIANA. Come back soon.'],
+    pt: ['Em construção', 'Estamos preparando a nova GUARDIANA. Volte em breve.'],
+    'pt-pt': ['Em construção', 'Estamos a preparar a nova GUARDIANA. Volte em breve.'],
+    fr: ['En construction', 'Nous préparons la nouvelle GUARDIANA. Revenez bientôt.'],
+    de: ['Im Aufbau', 'Wir bereiten die neue GUARDIANA vor. Schau bald wieder vorbei.'],
+    it: ['In costruzione', 'Stiamo preparando la nuova GUARDIANA. Torna presto.'],
+    nl: ['In aanbouw', 'We bereiden de nieuwe GUARDIANA voor. Kom snel terug.'],
+    sv: ['Under uppbyggnad', 'Vi förbereder nya GUARDIANA. Välkommen tillbaka snart.'],
+    da: ['Under opbygning', 'Vi forbereder den nye GUARDIANA. Kom snart tilbage.'],
+    nb: ['Under arbeid', 'Vi forbereder nye GUARDIANA. Kom snart tilbake.'],
+    fi: ['Rakenteilla', 'Valmistelemme GUARDIANAn uutta versiota. Palaa pian.'],
+    is: ['Í smíðum', 'Við erum að undirbúa nýja GUARDIANA. Komdu aftur fljótlega.'],
+    pl: ['W budowie', 'Przygotowujemy nową wersję GUARDIANA. Wróć wkrótce.'],
+    uk: ['У розробці', 'Ми готуємо нову версію GUARDIANA. Повертайтеся незабаром.'],
+    ru: ['В разработке', 'Мы готовим новую версию GUARDIANA. Возвращайтесь скоро.'],
+    tr: ['Yapım aşamasında', "Yeni GUARDIANA'yı hazırlıyoruz. Yakında tekrar uğrayın."],
+    zh: ['建设中', '我们正在打造全新的 GUARDIANA，敬请期待。'],
+    'zh-tw': ['建置中', '我們正在打造全新的 GUARDIANA，敬請期待。'],
+    ja: ['準備中', '新しい GUARDIANA を準備しています。またお越しください。'],
+    ko: ['준비 중', '새로운 GUARDIANA를 준비하고 있습니다. 곧 다시 방문해 주세요.'],
+    hi: ['निर्माणाधीन', 'हम नया GUARDIANA तैयार कर रहे हैं। जल्द ही फिर आइए।'],
+    bn: ['নির্মাণাধীন', 'আমরা নতুন GUARDIANA প্রস্তুত করছি। শিগগিরই আবার আসুন।'],
+    id: ['Sedang dibangun', 'Kami sedang menyiapkan GUARDIANA yang baru. Kunjungi lagi segera.'],
+    vi: ['Đang xây dựng', 'Chúng tôi đang chuẩn bị GUARDIANA mới. Hãy quay lại sớm nhé.'],
+    th: ['อยู่ระหว่างการพัฒนา', 'เรากำลังเตรียม GUARDIANA โฉมใหม่ แวะกลับมาอีกครั้งเร็ว ๆ นี้'],
+    ar: ['قيد الإنشاء', 'نحن نجهّز النسخة الجديدة من GUARDIANA. عُد قريبًا.'],
+    fa: ['در دست ساخت', 'در حال آماده‌سازی GUARDIANA جدید هستیم. به‌زودی برگردید.'],
+    he: ['בבנייה', 'אנחנו מכינים את GUARDIANA החדשה. חזרו בקרוב.'],
+    ur: ['زیرِ تعمیر', 'ہم نیا GUARDIANA تیار کر رہے ہیں۔ جلد دوبارہ تشریف لائیں۔'],
+    cs: ['Ve výstavbě', 'Připravujeme novou verzi GUARDIANA. Vraťte se brzy.'],
+    ro: ['În construcție', 'Pregătim noua GUARDIANA. Revino curând.'],
+    hu: ['Fejlesztés alatt', 'Készül az új GUARDIANA. Nézz vissza hamarosan!'],
+    el: ['Υπό κατασκευή', 'Ετοιμάζουμε τη νέα GUARDIANA. Έλα ξανά σύντομα.'],
+    sk: ['Vo výstavbe', 'Pripravujeme novú verziu GUARDIANA. Vráťte sa čoskoro.'],
+    bg: ['В процес на изграждане', 'Подготвяме новата GUARDIANA. Заповядайте отново скоро.'],
+    hr: ['U izradi', 'Pripremamo novu verziju GUARDIANA. Vratite se uskoro.'],
+    ms: ['Dalam pembinaan', 'Kami sedang menyediakan GUARDIANA yang baharu. Sila kembali tidak lama lagi.'],
+    fil: ['Ginagawa pa', 'Inihahanda namin ang bagong GUARDIANA. Bumalik ka sa lalong madaling panahon.'],
+    sw: ['Inajengwa', 'Tunaandaa GUARDIANA mpya. Rudi hivi karibuni.'],
+    ta: ['கட்டுமானத்தில் உள்ளது', 'புதிய GUARDIANA-வை தயார் செய்து வருகிறோம். விரைவில் மீண்டும் வாருங்கள்.'],
+    te: ['నిర్మాణంలో ఉంది', 'కొత్త GUARDIANA ను సిద్ధం చేస్తున్నాం. త్వరలో మళ్లీ రండి.']
+  };
+  var RTL = { ar: 1, fa: 1, he: 1, ur: 1 }, HTML = { pt: 'pt-BR', 'pt-pt': 'pt-PT', zh: 'zh-Hans', 'zh-tw': 'zh-Hant' };
+  function elige() {
+    try { var q = new URLSearchParams(location.search).get('lang'); if (L[q]) return q; } catch (e) {}
+    try { var s = localStorage.getItem('guardiana-lang'); if (L[s]) return s; } catch (e) {}
+    var navs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en']);
+    for (var i = 0; i < navs.length; i++) {
+      var x = String(navs[i]).toLowerCase();
+      if (x.indexOf('zh') === 0) return /tw|hk|mo|hant/.test(x) ? 'zh-tw' : 'zh';
+      if (x === 'pt-pt') return 'pt-pt';
+      if (x === 'no' || x.indexOf('nn') === 0 || x.indexOf('no-') === 0) return 'nb';
+      if (x.indexOf('tl') === 0) return 'fil';
+      if (x.indexOf('iw') === 0) return 'he';
+      var c = x.split('-')[0]; if (L[c]) return c;
+    }
+    return 'en';
+  }
+  var l = elige(), d = L[l];
+  document.documentElement.lang = HTML[l] || l;
+  if (RTL[l]) document.documentElement.dir = 'rtl';
+  document.getElementById('h').textContent = d[0];
+  document.getElementById('t').textContent = d[1];
+  document.title = 'GUARDIANA · ' + d[0];
+
+  // la red neuronal de NÚCLEO, girando libre hacia cualquier lado
+  var lienzo = document.getElementById('red'), cx = lienzo.getContext && lienzo.getContext('2d');
+  if (!cx) return;
+  var reducir = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var N = 300, P = [], i, j;
+  for (i = 0; i < N; i++) { var y = 1 - (i + .5) * 2 / N, r = Math.sqrt(1 - y * y), a = i * 2.39996323, k = .86 + Math.random() * .2; P.push([Math.cos(a) * r * k, y * k, Math.sin(a) * r * k, Math.random() * Math.PI * 2]); }
+  var V = P.map(function (p, i) { return P.map(function (o, j) { return [j, (p[0] - o[0]) * (p[0] - o[0]) + (p[1] - o[1]) * (p[1] - o[1]) + (p[2] - o[2]) * (p[2] - o[2])]; }).filter(function (x) { return x[0] !== i; }).sort(function (a, b) { return a[1] - b[1]; }).slice(0, 3).map(function (x) { return x[0]; }); });
+  function azar() { var u = Math.random() * 2 - 1, a = Math.random() * Math.PI * 2, r = Math.sqrt(1 - u * u); return [r * Math.cos(a), u, r * Math.sin(a)]; }
+  function giro() { var e = azar(), v = .14 + Math.random() * .26; return [e[0] * v, e[1] * v, e[2] * v]; }
+  var e0 = azar(), a0 = Math.random() * Math.PI * 2, qo = [Math.cos(a0 / 2), e0[0] * Math.sin(a0 / 2), e0[1] * Math.sin(a0 / 2), e0[2] * Math.sin(a0 / 2)];
+  var w = giro(), wObj = giro(), cambio = 2 + Math.random() * 3, antes = null, t0 = performance.now(), W = 1, Hh = 1, dpr = 1;
+  function mide() { var b = lienzo.getBoundingClientRect(); dpr = Math.min(2, window.devicePixelRatio || 1); W = Math.max(1, b.width); Hh = Math.max(1, b.height); lienzo.width = W * dpr; lienzo.height = Hh * dpr; }
+  mide(); addEventListener('resize', mide);
+  function ease(x) { x = Math.min(1, Math.max(0, x)); return 1 - Math.pow(1 - x, 3); }
+  function cuadro(ahora) {
+    var t = (ahora - t0) / 1000, nace = reducir ? 1 : ease((t - .4) / 1.6), dt = antes == null ? 0 : Math.min(.05, (ahora - antes) / 1000);
+    antes = ahora;
+    if (!reducir && dt > 0) {
+      if (t > cambio) { wObj = giro(); cambio = t + 2.5 + Math.random() * 4.5; }
+      var kk = 1 - Math.exp(-dt * .7); for (i = 0; i < 3; i++) w[i] += (wObj[i] - w[i]) * kk;
+      var n = Math.hypot(w[0], w[1], w[2]), m = n * dt;
+      if (n > 1e-6) {
+        var sm = Math.sin(m / 2) / n, a1 = Math.cos(m / 2), b1 = w[0] * sm, c1 = w[1] * sm, d1 = w[2] * sm, a2 = qo[0], b2 = qo[1], c2 = qo[2], d2 = qo[3];
+        qo = [a1 * a2 - b1 * b2 - c1 * c2 - d1 * d2, a1 * b2 + b1 * a2 + c1 * d2 - d1 * c2, a1 * c2 - b1 * d2 + c1 * a2 + d1 * b2, a1 * d2 + b1 * c2 - c1 * b2 + d1 * a2];
+        var ln = Math.hypot(qo[0], qo[1], qo[2], qo[3]) || 1; qo = qo.map(function (x) { return x / ln; });
+      }
+    }
+    cx.setTransform(dpr, 0, 0, dpr, 0, 0); cx.clearRect(0, 0, W, Hh);
+    var R = Math.min(W, Hh) * .4 * (.04 + .96 * nace), qa = qo[0], qb = qo[1], qc = qo[2], qd = qo[3];
+    var m00 = 1 - 2 * (qc * qc + qd * qd), m01 = 2 * (qb * qc - qa * qd), m02 = 2 * (qb * qd + qa * qc), m10 = 2 * (qb * qc + qa * qd), m11 = 1 - 2 * (qb * qb + qd * qd), m12 = 2 * (qc * qd - qa * qb), m20 = 2 * (qb * qd - qa * qc), m21 = 2 * (qc * qd + qa * qb), m22 = 1 - 2 * (qb * qb + qc * qc);
+    if (nace < 1) { var g = cx.createRadialGradient(W / 2, Hh / 2, 0, W / 2, Hh / 2, 40 + 60 * nace); g.addColorStop(0, 'rgba(244,246,248,' + (.9 * (1 - nace * .7)) + ')'); g.addColorStop(.3, 'rgba(156,195,228,' + (.55 * (1 - nace * .5)) + ')'); g.addColorStop(1, 'rgba(156,195,228,0)'); cx.fillStyle = g; cx.fillRect(0, 0, W, Hh); }
+    var Q = P.map(function (p) { var x = m00 * p[0] + m01 * p[1] + m02 * p[2], y = m10 * p[0] + m11 * p[1] + m12 * p[2], z = m20 * p[0] + m21 * p[1] + m22 * p[2], pul = 1 + .04 * Math.sin(t * 1.7 + p[3]); return [W / 2 + x * R * pul, Hh / 2 + y * R * pul, z]; });
+    cx.lineWidth = 1;
+    var lin = Math.max(0, Math.min(1, (nace - .25) / .6));
+    if (lin > 0) for (i = 0; i < N; i++) for (j = 0; j < 3; j++) { var o = V[i][j]; if (o < i) continue; var A = Q[i], B = Q[o], zz = (A[2] + B[2]) / 2; cx.strokeStyle = 'rgba(156,195,228,' + ((.08 + .26 * (zz + 1) / 2) * lin) + ')'; cx.beginPath(); cx.moveTo(A[0], A[1]); cx.lineTo(B[0], B[1]); cx.stroke(); }
+    for (i = 0; i < N; i++) { var A2 = Q[i], f = (A2[2] + 1) / 2; cx.fillStyle = 'rgba(' + Math.round(210 + 34 * f) + ',' + Math.round(228 + 18 * f) + ',248,' + ((.25 + .7 * f) * Math.min(1, nace * 1.4)) + ')'; cx.beginPath(); cx.arc(A2[0], A2[1], .7 + 1.5 * f, 0, Math.PI * 2); cx.fill(); }
+    requestAnimationFrame(cuadro);
+  }
+  requestAnimationFrame(cuadro);
+})();
+</script>
+</body>
+</html>
