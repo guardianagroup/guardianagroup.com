@@ -1901,7 +1901,9 @@
   "complementos": "trình cắm",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "Bên trong ZERO, mỗi trang web mở trong một bong bóng trên một máy chủ của GUARDIANA: những gì các công ty này nhận được thuộc về bong bóng —mã định danh mới, địa chỉ của máy chủ—, không phải của thiết bị của bạn, và sẽ bị xóa khi bong bóng đóng lại.",
   "Radiografía": "X-quang",
-  "Burbuja en": "Bong bóng tại"
+  "Burbuja en": "Bong bóng tại",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "KẾT QUẢ GOOGLE · CÁC TRANG WEB CHÍNH",
+  "País de las webs": "Quốc gia của các trang web"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

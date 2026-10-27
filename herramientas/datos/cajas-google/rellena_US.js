@@ -1,0 +1,12 @@
+await new Promise(r=>setTimeout(r,2500));
+const set=(el,v)=>{const d=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');d.set.call(el,v);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))};
+const nom=[...document.querySelectorAll('input')].find(e=>e.labels&&e.labels[0]&&/Nombre del buscador/.test(e.labels[0].innerText));
+const sit=[...document.querySelectorAll('input')].find(e=>e.labels&&e.labels[0]&&/Introduce un sitio/.test(e.labels[0].innerText));
+const add=document.querySelector('button[aria-label="Add url patterns"]');
+nom.focus(); set(nom,"GUARDIANA United States");
+const L=["*.nytimes.com/*", "*.washingtonpost.com/*", "*.wsj.com/*", "*.cnn.com/*", "*.foxnews.com/*", "*.nbcnews.com/*", "*.cbsnews.com/*", "abcnews.go.com/*", "*.npr.org/*", "*.apnews.com/*", "*.reuters.com/*", "*.usatoday.com/*", "*.latimes.com/*", "*.politico.com/*", "*.univision.com/*", "*.telemundo.com/*", "*.espn.com/*", "*.cbssports.com/*", "*.nfl.com/*", "*.nba.com/*", "*.mlb.com/*", "*.weather.gov/*", "*.weather.com/*", "*.usa.gov/*", "*.irs.gov/*", "*.ssa.gov/*", "*.uscis.gov/*", "*.state.gov/*", "*.cdc.gov/*", "*.medicare.gov/*", "*.amazon.com/*", "*.walmart.com/*", "*.target.com/*", "*.bestbuy.com/*", "*.ebay.com/*", "*.homedepot.com/*", "*.zillow.com/*", "*.realtor.com/*", "*.indeed.com/*", "*.craigslist.org/*", "*.expedia.com/*", "*.tripadvisor.com/*", "*.wikipedia.org/*", "*.imdb.com/*", "*.youtube.com/*", "*.reddit.com/*", "*.facebook.com/*", "*.instagram.com/*", "*.x.com/*", "*.tiktok.com/*"];
+const tengo=()=>[...document.body.innerText.matchAll(/^([^\n]*\/\*)\nEliminar/gm)].map(m=>m[1]);
+for (let vuelta=0; vuelta<3; vuelta++) { const ya=tengo(); for (const s of L.filter(x=>!ya.includes(x))) { sit.focus(); set(sit,s); await new Promise(r=>setTimeout(r,200)); add.click(); await new Promise(r=>setTimeout(r,450)); } }
+const ss=document.querySelector('button[aria-label="Enable SafeSearch"]'); if (ss && ss.getAttribute('aria-checked')!=='true') ss.click();
+await new Promise(r=>setTimeout(r,600));
+JSON.stringify({nombre:nom.value, sitios:tengo().length, faltan:L.filter(x=>!tengo().includes(x)), safe:ss&&ss.getAttribute('aria-checked')})

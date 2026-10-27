@@ -1901,7 +1901,9 @@
   "complementos": "плагины",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "Внутри ZERO каждый сайт открывается в пузыре на сервере GUARDIANA: то, что получили эти компании, относится к пузырю — новые идентификаторы, адрес сервера, — а не к вашему устройству, и при закрытии пузыря всё это удаляется.",
   "Radiografía": "Рентген",
-  "Burbuja en": "Расположение пузыря:"
+  "Burbuja en": "Расположение пузыря:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "РЕЗУЛЬТАТЫ GOOGLE · ОСНОВНЫЕ САЙТЫ",
+  "País de las webs": "Страна сайтов"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

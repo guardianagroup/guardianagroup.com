@@ -1900,7 +1900,9 @@
   "complementos": "செருகுநிரல்கள்",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "ZERO-வுக்குள், ஒவ்வொரு தளமும் GUARDIANA சேவையகத்தில் உள்ள ஒரு குமிழியில் திறக்கப்படுகிறது: இந்த நிறுவனங்கள் பெற்றவை குமிழியுடையவை —புதிய அடையாளங்காட்டிகள், சேவையகத்தின் முகவரி—, உங்கள் சாதனத்தினுடையவை அல்ல; குமிழியை மூடும்போது அவை நீக்கப்படும்.",
   "Radiografía": "எக்ஸ்-ரே",
-  "Burbuja en": "குமிழி இருப்பிடம்:"
+  "Burbuja en": "குமிழி இருப்பிடம்:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Google முடிவுகள் · முக்கியத் தளங்கள்",
+  "País de las webs": "தளங்களின் நாடு"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

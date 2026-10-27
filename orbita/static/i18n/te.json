@@ -1900,7 +1900,9 @@
   "complementos": "ప్లగిన్‌లు",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "ZERO లోపల, ప్రతి సైట్ GUARDIANA సర్వర్‌లోని ఒక బబుల్‌లో తెరుచుకుంటుంది: ఈ కంపెనీలు అందుకున్నది బబుల్‌ది —కొత్త ఐడెంటిఫైయర్లు, సర్వర్ చిరునామా—, మీ పరికరానిది కాదు; బబుల్‌ను మూసివేసినప్పుడు అది తొలగించబడుతుంది.",
   "Radiografía": "ఎక్స్-రే",
-  "Burbuja en": "బబుల్ స్థానం:"
+  "Burbuja en": "బబుల్ స్థానం:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Google ఫలితాలు · ప్రధాన సైట్లు",
+  "País de las webs": "సైట్ల దేశం"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

@@ -1901,7 +1901,9 @@
   "complementos": "플러그인",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "ZERO 안에서는 각 사이트가 GUARDIANA 서버의 버블에서 열립니다. 이 회사들이 받은 것은 버블의 것—새 식별자, 서버 주소—이지, 내 기기의 것이 아니며, 버블을 닫으면 삭제됩니다.",
   "Radiografía": "엑스레이",
-  "Burbuja en": "버블:"
+  "Burbuja en": "버블:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Google 검색 결과 · 주요 사이트",
+  "País de las webs": "사이트 국가"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

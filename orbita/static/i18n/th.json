@@ -1900,7 +1900,9 @@
   "complementos": "ปลั๊กอิน",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "ภายใน ZERO แต่ละเว็บไซต์เปิดในบับเบิลบนเซิร์ฟเวอร์ของ GUARDIANA: สิ่งที่บริษัทเหล่านี้ได้รับเป็นของบับเบิล —ตัวระบุใหม่ ที่อยู่ของเซิร์ฟเวอร์— ไม่ใช่ของอุปกรณ์ของคุณ และจะถูกลบเมื่อปิดบับเบิล",
   "Radiografía": "เอกซเรย์",
-  "Burbuja en": "บับเบิลที่"
+  "Burbuja en": "บับเบิลที่",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "ผลการค้นหา Google · เว็บไซต์หลัก",
+  "País de las webs": "ประเทศของเว็บไซต์"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

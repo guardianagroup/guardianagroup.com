@@ -1,0 +1,12 @@
+await new Promise(r=>setTimeout(r,2500));
+const set=(el,v)=>{const d=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');d.set.call(el,v);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))};
+const nom=[...document.querySelectorAll('input')].find(e=>e.labels&&e.labels[0]&&/Nombre del buscador/.test(e.labels[0].innerText));
+const sit=[...document.querySelectorAll('input')].find(e=>e.labels&&e.labels[0]&&/Introduce un sitio/.test(e.labels[0].innerText));
+const add=document.querySelector('button[aria-label="Add url patterns"]');
+nom.focus(); set(nom,"GUARDIANA Chile");
+const L=["*.emol.com/*", "*.latercera.com/*", "*.biobiochile.cl/*", "*.cooperativa.cl/*", "*.t13.cl/*", "*.24horas.cl/*", "*.meganoticias.cl/*", "*.chvnoticias.cl/*", "*.elmostrador.cl/*", "*.theclinic.cl/*", "*.df.cl/*", "*.lacuarta.com/*", "*.adnradio.cl/*", "*.cnnchile.com/*", "*.lun.com/*", "*.redgol.cl/*", "*.alairelibre.cl/*", "*.meteochile.gob.cl/*", "*.chileatiende.gob.cl/*", "*.sii.cl/*", "*.registrocivil.cl/*", "*.minsal.cl/*", "*.mineduc.cl/*", "*.dt.gob.cl/*", "*.fonasa.cl/*", "*.bcn.cl/*", "*.mercadolibre.cl/*", "*.falabella.com/*", "*.paris.cl/*", "*.ripley.cl/*", "*.lider.cl/*", "*.jumbo.cl/*", "*.sodimac.cl/*", "*.pcfactory.cl/*", "*.portalinmobiliario.com/*", "*.yapo.cl/*", "*.toctoc.com/*", "*.laborum.cl/*", "*.trabajando.cl/*", "*.computrabajo.com/*", "*.latamairlines.com/*", "*.jetsmart.com/*", "*.turbus.cl/*", "*.wikipedia.org/*", "*.rae.es/*", "*.youtube.com/*", "*.facebook.com/*", "*.instagram.com/*", "*.tiktok.com/*", "*.x.com/*"];
+const tengo=()=>[...document.body.innerText.matchAll(/^([^\n]*\/\*)\nEliminar/gm)].map(m=>m[1]);
+for (let vuelta=0; vuelta<3; vuelta++) { const ya=tengo(); for (const s of L.filter(x=>!ya.includes(x))) { sit.focus(); set(sit,s); await new Promise(r=>setTimeout(r,200)); add.click(); await new Promise(r=>setTimeout(r,450)); } }
+const ss=document.querySelector('button[aria-label="Enable SafeSearch"]'); if (ss && ss.getAttribute('aria-checked')!=='true') ss.click();
+await new Promise(r=>setTimeout(r,600));
+JSON.stringify({nombre:nom.value, sitios:tengo().length, faltan:L.filter(x=>!tengo().includes(x)), safe:ss&&ss.getAttribute('aria-checked')})

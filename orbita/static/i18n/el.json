@@ -1900,7 +1900,9 @@
   "complementos": "πρόσθετα",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "Μέσα στο ZERO, κάθε ιστότοπος ανοίγει σε μια φούσκα σε έναν διακομιστή της GUARDIANA: ό,τι έλαβαν αυτές οι εταιρείες ανήκει στη φούσκα —νέα αναγνωριστικά, η διεύθυνση του διακομιστή—, όχι στη συσκευή σου, και διαγράφεται όταν αυτή κλείσει.",
   "Radiografía": "Ακτινογραφία",
-  "Burbuja en": "Φούσκα σε"
+  "Burbuja en": "Φούσκα σε",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "ΑΠΟΤΕΛΕΣΜΑΤΑ GOOGLE · ΚΥΡΙΟΙ ΙΣΤΟΤΟΠΟΙ",
+  "País de las webs": "Χώρα των ιστότοπων"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

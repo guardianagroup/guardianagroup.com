@@ -1900,7 +1900,9 @@
   "complementos": "programu-jalizi",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "Ndani ya ZERO, kila tovuti hufunguka ndani ya kiputo kwenye seva ya GUARDIANA: kile ambacho makampuni haya yalipokea ni cha kiputo —vitambulisho vipya, anwani ya seva—, si cha kifaa chako, na kiputo kikifungwa hufutwa.",
   "Radiografía": "Eksirei",
-  "Burbuja en": "Kiputo kiko"
+  "Burbuja en": "Kiputo kiko",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "MATOKEO YA GOOGLE · TOVUTI KUU",
+  "País de las webs": "Nchi ya tovuti"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

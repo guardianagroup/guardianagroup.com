@@ -1900,7 +1900,9 @@
   "complementos": "plugin",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "Di dalam ZERO, setiap situs dibuka di dalam gelembung di server GUARDIANA: apa yang diterima perusahaan-perusahaan ini adalah milik gelembung —pengenal baru, alamat server—, bukan milik perangkat Anda, dan akan dihapus saat gelembung ditutup.",
   "Radiografía": "Rontgen",
-  "Burbuja en": "Gelembung di"
+  "Burbuja en": "Gelembung di",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "HASIL GOOGLE · SITUS UTAMA",
+  "País de las webs": "Negara situs"
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

@@ -1900,7 +1900,9 @@
   "complementos": "bővítmények",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "A ZERO-n belül minden oldal egy buborékban nyílik meg a GUARDIANA egyik szerverén: amit ezek a cégek megkaptak, az a buboréké —új azonosítók, a szerver címe—, nem az eszközödé, és a buborék bezárásakor törlődik.",
   "Radiografía": "Röntgenkép",
-  "Burbuja en": "Buborék:"
+  "Burbuja en": "Buborék:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE-TALÁLATOK · VEZETŐ OLDALAK",
+  "País de las webs": "Az oldalak országa"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

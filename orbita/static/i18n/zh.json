@@ -1901,7 +1901,9 @@
   "complementos": "插件",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "在 ZERO 内，每个网站都在 GUARDIANA 服务器上的气泡中打开：这些公司收到的是气泡的数据——新的标识符、服务器的地址——而不是你设备的数据，气泡关闭后即被删除。",
   "Radiografía": "透视",
-  "Burbuja en": "气泡位于"
+  "Burbuja en": "气泡位于",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Google 搜索结果 · 主要网站",
+  "País de las webs": "网站所属国家"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

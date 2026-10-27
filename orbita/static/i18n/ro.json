@@ -1900,7 +1900,9 @@
   "complementos": "pluginuri",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "În ZERO, fiecare site se deschide într-o bulă pe un server GUARDIANA: ce au primit aceste companii ține de bulă —identificatori noi, adresa serverului—, nu de dispozitivul tău, și se șterge la închiderea ei.",
   "Radiografía": "Radiografie",
-  "Burbuja en": "Bulă în"
+  "Burbuja en": "Bulă în",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "REZULTATE GOOGLE · PRINCIPALELE SITE-URI",
+  "País de las webs": "Țara site-urilor"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

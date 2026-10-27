@@ -1900,7 +1900,9 @@
   "complementos": "mga plugin",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "Sa loob ng ZERO, bawat site ay bumubukas sa isang bubble sa isang server ng GUARDIANA: ang natanggap ng mga kumpanyang ito ay sa bubble —mga bagong identifier, ang address ng server—, hindi sa iyong device, at nabubura ito kapag isinara ang bubble.",
   "Radiografía": "X-Ray",
-  "Burbuja en": "Bubble sa"
+  "Burbuja en": "Bubble sa",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "MGA RESULTA NG GOOGLE · MGA PANGUNAHING SITE",
+  "País de las webs": "Bansa ng mga site"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

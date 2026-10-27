@@ -480,6 +480,9 @@
 #gcaja[hidden]{display:none}
 #gcaja .gcab{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px 11px 40px;border-bottom:1px solid #ebebeb;background:#fff;flex-shrink:0}
 #gcaja .gcab small{font:11px/1.4 Consolas,"SFMono-Regular",monospace;letter-spacing:.14em;color:#5f6368}
+#gcaja .gcab .gtit{margin-right:8px}
+#gpais{font:11px/1.2 Consolas,"SFMono-Regular",monospace;letter-spacing:.08em;text-transform:uppercase;color:#1a0dab;border:1px solid #dadce0;border-radius:999px;background:#fff;padding:2px 6px;cursor:pointer;vertical-align:baseline;max-width:200px}
+#gpais:focus-visible{outline:2px solid #1a73e8;outline-offset:1px}
 #gcaja .gcab small b{display:block;font:12px/1.45 Arial,"Segoe UI",sans-serif;letter-spacing:0;font-weight:400;color:#5f6368;margin-top:3px}
 #gtodo{display:flex;flex-direction:column;align-items:flex-end;gap:1px;border:1px solid #dadce0;background:#fff;border-radius:999px;padding:7px 16px;color:#1a0dab;font:14px/1.3 Arial,"Segoe UI",sans-serif;cursor:pointer;white-space:nowrap}
 #gtodo:hover{background:#f8f9fa}
@@ -683,7 +686,7 @@
 <div id="pill" role="group" aria-label="Web en grande"><button type="button" class="pc" id="vercortes" title="Ver los cortes en el panel"><span class="pn"><span id="pillnum">0</span>&nbsp;cortes en esta web</span><span class="pv">Ver panel<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg></span></button><button type="button" class="pb" id="reducir" title="Reducir y ver el panel (Esc)"><svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 6.5h-4v-4M2.5 9.5h4v4M9.5 6.5 14 2M6.5 9.5 2 14"/></svg>Reducir</button></div><div class="topReveal" id="topbar"><button type="button" id="restore">↙ RESTAURAR</button><span>PÁGINA DE DEMOSTRACIÓN · ZERO</span><button type="button" id="topcut">Cortes</button></div>
 <div class="marca" aria-hidden="true">ZERO</div><button type="button" id="volverZ" class="volverz" title="Volver" aria-label="Volver"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg><span>Órbita</span></button><button type="button" id="vermeZ" class="volverz vermez" title="Verme en Órbita" aria-label="Verme en Órbita"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12.5" r="1.2"/><path d="M5.2 9.7a4 4 0 0 1 5.6 0M2.6 7a7.6 7.6 0 0 1 10.8 0"/></svg><span>Verme en Órbita</span></button><div class="lb t"></div><div class="lb b"></div><div class="skip">CLIC O CUALQUIER TECLA PARA SALTAR</div>
 </main></div><article id="informe" aria-hidden="true"></article>
-<script src="../static/idioma.js?v=20261027w"></script>
+<script src="../static/idioma.js?v=20261027x"></script>
 <nav class="director" id="director" aria-label="Entradas de cine"><span>ENTRADA</span></nav>
 <script>
 (()=>{'use strict';
@@ -791,16 +794,33 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')panelUltra(false)});
 // Con Google elegido, la búsqueda la hace Google desde el navegador de la persona (sin captcha) dentro de un marco servido por el
 // motor (otro origen: el código de Google no corre en esta página). Al pulsar un resultado, la web se abre en la burbuja. «Buscar en
 // todo Google» abre google.com en la burbuja, como antes. ?google=caja la fuerza y ?google=burbuja la quita.
-const GCAJA_CX='0656a41f04a6c4172',GCAJA_DEFECTO=true; // probada en producción el 26 Oct 2026, 22:08 (AEMET abrió en la burbuja)
+// Una caja por país (dueño 27 Oct 2026: «sigue metiendo webs por países y sin bancos»): 50 webs principales, sin bancos,
+// Búsqueda Segura y región del país. El país sale de la zona horaria del navegador (o de su idioma) y la persona puede cambiarlo;
+// la elección se guarda solo en este navegador. Listas: herramientas/datos/cajas-google/listas.json.
+const GCAJAS={ES:'0656a41f04a6c4172',CO:'f6d509f2f81964477',MX:'b215ed7cb8b0d4473'},GCAJA_DEFECTO=true; // España probada en producción el 26 Oct 2026, 22:08 (AEMET abrió en la burbuja); Colombia y México creadas el 27 Oct, 08:17
+const GZONA={CO:/^America\/Bogota$/,MX:/^America\/(Mexico_City|Cancun|Merida|Monterrey|Matamoros|Chihuahua|Ciudad_Juarez|Ojinaga|Hermosillo|Mazatlan|Bahia_Banderas|Tijuana)$/,AR:/^America\/(Argentina\/.+|Buenos_Aires|Cordoba|Mendoza|Catamarca|Jujuy)$/,CL:/^(America\/(Santiago|Punta_Arenas)|Pacific\/Easter)$/,PE:/^America\/Lima$/,ES:/^(Europe\/Madrid|Atlantic\/Canary|Africa\/Ceuta)$/,US:/^(America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Detroit|Boise|Juneau|Sitka|Nome|Adak|Yakutat|Metlakatla|Menominee|Indiana\/.+|Kentucky\/.+|North_Dakota\/.+)|Pacific\/Honolulu)$/};
+function gpaisAuto(){let tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
+  for(const k in GZONA)if(GCAJAS[k]&&GZONA[k].test(tz))return k;
+  const ls=[].concat(navigator.languages||[],navigator.language||[]);
+  for(const l of ls){const m=/-([A-Za-z]{2})$/.exec(l);if(m&&GCAJAS[m[1].toUpperCase()])return m[1].toUpperCase()}
+  return /^en/i.test(ls[0]||'')&&GCAJAS.US?'US':'ES'}
+function gpais(){try{const v=localStorage.getItem('zeroPaisGoogle');if(v&&GCAJAS[v])return v}catch(e){}return gpaisAuto()}
+function pintaGpais(sel){if(!sel)return;let dn=null;try{dn=new Intl.DisplayNames([(window.GuardianaIdioma&&GuardianaIdioma.locale)||'es'],{type:'region'})}catch(e){}
+  const act=gpais(),ks=Object.keys(GCAJAS).map(k=>[k,dn?dn.of(k):k]).sort((x,y)=>x[1].localeCompare(y[1]));
+  sel.textContent='';for(const [k,n] of ks){const o=document.createElement('option');o.value=k;o.textContent=n;o.setAttribute('translate','no');if(k===act)o.selected=true;sel.append(o)}
+  sel.hidden=ks.length<2}
+addEventListener('guardiana-idioma',()=>pintaGpais(document.getElementById('gpais')));
 let gcaja=null;
 function gcajaActiva(){try{const v=new URLSearchParams(location.search).get('google');if(v==='caja')return true;if(v==='burbuja')return false}catch(e){}return GCAJA_DEFECTO}
 function gcajaOrigen(){try{return new URL(String((window.ZeroMotor&&ZeroMotor.url)||'').replace(/^ws/i,'http')).origin}catch(e){return''}}
 function ocultaGcaja(){if(gcaja)gcaja.w.hidden=true}
 function muestraGcaja(q){const org=gcajaOrigen();if(!org||org==='null')return false;
-  if(!gcaja||gcaja.org!==org){if(gcaja)gcaja.w.remove();const w=document.createElement('div');w.id='gcaja';w.innerHTML='<div class="gcab"><small>RESULTADOS DE GOOGLE · WEBS PRINCIPALES DE ESPAÑA<b>La búsqueda la hace Google desde tu navegador. Al abrir un resultado, la web se abre dentro de ZERO.</b></small><button type="button" id="gtodo">Buscar en todo Google<span>se abre en la burbuja · puede pedir «No soy un robot»</span></button></div><iframe title="Resultados de Google" referrerpolicy="strict-origin-when-cross-origin"></iframe>';$('#web').append(w);
+  if(!gcaja||gcaja.org!==org){if(gcaja)gcaja.w.remove();const w=document.createElement('div');w.id='gcaja';w.innerHTML='<div class="gcab"><small><span class="gtit">RESULTADOS DE GOOGLE · WEBS PRINCIPALES</span><select id="gpais" aria-label="País de las webs" title="País de las webs" translate="no"></select><b>La búsqueda la hace Google desde tu navegador. Al abrir un resultado, la web se abre dentro de ZERO.</b></small><button type="button" id="gtodo">Buscar en todo Google<span>se abre en la burbuja · puede pedir «No soy un robot»</span></button></div><iframe title="Resultados de Google" referrerpolicy="strict-origin-when-cross-origin"></iframe>';$('#web').append(w);
     const fr=w.querySelector('iframe');gcaja={w,fr,org,q:'',cargado:false};
     fr.onload=()=>{gcaja.cargado=true;if(gcaja.q)fr.contentWindow.postMessage({tipo:'buscar',q:gcaja.q},org)};
-    fr.src=org+'/google?cx='+GCAJA_CX;
+    const sel=w.querySelector('#gpais');pintaGpais(sel);
+    sel.onchange=()=>{const k=sel.value;if(!GCAJAS[k])return;try{localStorage.setItem('zeroPaisGoogle',k)}catch(e){}gcaja.cargado=false;gcaja.cx=GCAJAS[k];fr.src=org+'/google?cx='+gcaja.cx};
+    gcaja.cx=GCAJAS[gpais()];fr.src=org+'/google?cx='+gcaja.cx;
     w.querySelector('#gtodo').onclick=()=>{const v=gcaja.q;ocultaGcaja();enEngine=engOf('Google');pintaEstasEn('buscando');zeroResetReal();ZeroMotor.abre(v,urlBusq(engOf('Google')))}}
   const pt=$('#pantalla');gcaja.w.style.top=pt?getComputedStyle(pt).top:'0px';
   gcaja.q=q;gcaja.w.hidden=false;if(gcaja.cargado)gcaja.fr.contentWindow.postMessage({tipo:'buscar',q},gcaja.org);return true}

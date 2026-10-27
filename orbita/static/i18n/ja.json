@@ -1901,7 +1901,9 @@
   "complementos": "プラグイン",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "ZERO の中では、各サイトは GUARDIANA のサーバー上のバブルで開きます。これらの企業が受け取ったのはバブルのもの—新しい識別子、サーバーのアドレス—であり、あなたの端末のものではありません。バブルを閉じると削除されます。",
   "Radiografía": "レントゲン",
-  "Burbuja en": "バブル:"
+  "Burbuja en": "バブル:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Googleの検索結果 · 主要サイト",
+  "País de las webs": "サイトの国"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

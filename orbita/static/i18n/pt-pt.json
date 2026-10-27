@@ -1901,7 +1901,9 @@
   "complementos": "plug-ins",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "Dentro do ZERO, cada site abre numa bolha num servidor da GUARDIANA: o que estas empresas receberam é da bolha —identificadores novos, o endereço do servidor—, não do teu dispositivo, e apaga-se ao fechá-la.",
   "Radiografía": "Radiografia",
-  "Burbuja en": "Bolha:"
+  "Burbuja en": "Bolha:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "RESULTADOS DO GOOGLE · PRINCIPAIS SITES",
+  "País de las webs": "País dos sites"
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",
