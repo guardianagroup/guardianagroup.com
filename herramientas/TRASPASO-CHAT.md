@@ -1,6 +1,6 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-## Estado al 27 Oct 2026, 01:10 (Bogotá) — EMPIEZA POR AQUÍ
+## Estado al 27 Oct 2026, 01:50 (Bogotá) — EMPIEZA POR AQUÍ
 
 Resumen completo en el proyecto de claude.ai «guardiana group», documento `claude/ZERO_ESTADO_27OCT2026.md`. Lo esencial:
 
@@ -14,7 +14,7 @@ Resumen completo en el proyecto de claude.ai «guardiana group», documento `cla
   - PDF descargado directo, con el máximo de datos (`orbita/zero/pdf.js`, escritor propio).
   - Chrome real en el motor.
 - **Comunicaciones** (`orbita/comunicaciones/`): bloque «Para despachos, clínicas y empresas», de la ronda 51 (`agencia-rondas/ronda51/notas.md`).
-- **En marcha:** traducción de 168 textos y 17 plantillas a los 39 idiomas (`scratchpad/tr_r51/out/` → `orbita/static/i18n/*.json`).
+- **Idiomas:** 168 textos y 17 plantillas traducidos a los 39 idiomas restantes y publicados (01:45).
 - **Siguiente, por orden del dueño:**
   1. Pruebas por toda GUARDIANA, con calidad «modo agencia».
   2. Ronda de la agencia en «modo cliente que ha pagado».
