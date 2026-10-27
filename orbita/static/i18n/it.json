@@ -1668,7 +1668,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Modalità discreta: la chat appare sfocata finché non la tieni premuta e ciò che scrivi appare come numeri. Premi questo pulsante per vedere tutto normalmente.",
   "Modo discreto: lo que escribas se verá como números": "Modalità discreta: ciò che scrivi apparirà come numeri",
   "Código erróneo o caducado.": "Codice errato o scaduto.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Ricerche con Brave Search dentro Tor (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Ricerche con Brave Search dentro Tor.",
+  "por la red Tor": "attraverso la rete Tor"
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

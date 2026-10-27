@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "حالت محرمانه: چت تا وقتی آن را نگه ندارید تار دیده می‌شود و آنچه می‌نویسید به‌صورت عدد نمایش داده می‌شود. برای دیدن همه‌چیز به‌صورت عادی، آن را بزنید.",
   "Modo discreto: lo que escribas se verá como números": "حالت محرمانه: آنچه بنویسید به‌صورت عدد نمایش داده می‌شود",
   "Código erróneo o caducado.": "کد اشتباه است یا منقضی شده.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "جست‌وجو با Brave Search درون Tor ‏(.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "جست‌وجو با Brave Search درون Tor.",
+  "por la red Tor": "از طریق شبکهٔ Tor"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "தனியுரிமைப் பயன்முறை: நீங்கள் அழுத்திப் பிடிக்கும் வரை அரட்டை மங்கலாகத் தெரியும், நீங்கள் தட்டச்சு செய்வது எண்களாகத் தெரியும். அனைத்தையும் வழக்கம்போல் பார்க்க இந்தப் பொத்தானை அழுத்தவும்.",
   "Modo discreto: lo que escribas se verá como números": "தனியுரிமைப் பயன்முறை: நீங்கள் தட்டச்சு செய்வது எண்களாகத் தெரியும்",
   "Código erróneo o caducado.": "குறியீடு தவறானது அல்லது காலாவதியானது.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Tor-க்குள் Brave Search மூலம் தேடல்கள் (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Tor-க்குள் Brave Search மூலம் தேடல்கள்.",
+  "por la red Tor": "Tor வலையமைப்பு வழியாக"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

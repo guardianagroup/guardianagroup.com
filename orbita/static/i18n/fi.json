@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Huomaamaton tila: chatti näkyy sumeana, kunnes pidät sitä painettuna, ja kirjoittamasi teksti näkyy numeroina. Paina sitä nähdäksesi kaiken normaalisti.",
   "Modo discreto: lo que escribas se verá como números": "Huomaamaton tila: kirjoittamasi teksti näkyy numeroina",
   "Código erróneo o caducado.": "Väärä tai vanhentunut koodi.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Haut Brave Searchlla Torin sisällä (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Haut Brave Searchlla Torin sisällä.",
+  "por la red Tor": "Tor-verkon kautta"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

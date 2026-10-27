@@ -1668,7 +1668,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "وضع الخصوصية: تظهر الدردشة ضبابية حتى تضغط عليها مطوّلًا، ويظهر ما تكتبه كأرقام. اضغط عليه لعرض كل شيء بشكل عادي.",
   "Modo discreto: lo que escribas se verá como números": "وضع الخصوصية: سيظهر ما تكتبه كأرقام",
   "Código erróneo o caducado.": "رمز خاطئ أو منتهي الصلاحية.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "بحث عبر Brave Search داخل Tor ‏(.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "بحث عبر Brave Search داخل Tor.",
+  "por la red Tor": "عبر شبكة Tor"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

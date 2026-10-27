@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Mod discret: chatul apare încețoșat până când îl ții apăsat, iar ce scrii apare sub formă de cifre. Apasă acest buton pentru a vedea totul normal.",
   "Modo discreto: lo que escribas se verá como números": "Mod discret: ce scrii va apărea sub formă de cifre",
   "Código erróneo o caducado.": "Cod greșit sau expirat.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Căutări cu Brave Search în interiorul Tor (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Căutări cu Brave Search în interiorul Tor.",
+  "por la red Tor": "prin rețeaua Tor"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

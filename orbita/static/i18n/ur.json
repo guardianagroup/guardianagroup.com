@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "رازدارانہ موڈ: جب تک آپ چیٹ کو دبا کر نہ رکھیں وہ دھندلی دکھائی دیتی ہے، اور آپ جو لکھتے ہیں وہ نمبروں کی شکل میں دکھائی دیتا ہے۔ سب کچھ معمول کے مطابق دیکھنے کے لیے اسے دبائیں۔",
   "Modo discreto: lo que escribas se verá como números": "رازدارانہ موڈ: آپ جو لکھیں گے وہ نمبروں کی شکل میں دکھائی دے گا",
   "Código erróneo o caducado.": "کوڈ غلط ہے یا اس کی میعاد ختم ہو چکی ہے۔",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Tor کے اندر Brave Search سے تلاش (.onion)۔"
+  "Búsquedas con Brave Search dentro de Tor.": "Tor کے اندر Brave Search سے تلاش۔",
+  "por la red Tor": "Tor نیٹ ورک کے ذریعے"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

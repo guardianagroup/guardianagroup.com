@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Hali ya faragha: gumzo linaonekana kwa ukungu hadi ulishikilie, na unachoandika kinaonekana kama nambari. Bonyeza kitufe hiki ili kuona kila kitu kama kawaida.",
   "Modo discreto: lo que escribas se verá como números": "Hali ya faragha: utakachoandika kitaonekana kama nambari",
   "Código erróneo o caducado.": "Msimbo si sahihi au muda wake umeisha.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Utafutaji kwa Brave Search ndani ya Tor (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Utafutaji kwa Brave Search ndani ya Tor.",
+  "por la red Tor": "kupitia mtandao wa Tor"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

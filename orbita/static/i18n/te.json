@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "గోప్యతా మోడ్: మీరు నొక్కి పట్టుకునే వరకు చాట్ మసకగా కనిపిస్తుంది, మీరు టైప్ చేసేది సంఖ్యలుగా కనిపిస్తుంది. అన్నింటినీ మామూలుగా చూడటానికి ఈ బటన్‌ను నొక్కండి.",
   "Modo discreto: lo que escribas se verá como números": "గోప్యతా మోడ్: మీరు టైప్ చేసేది సంఖ్యలుగా కనిపిస్తుంది",
   "Código erróneo o caducado.": "కోడ్ తప్పు లేదా గడువు ముగిసింది.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Tor లోపల Brave Search‌తో శోధనలు (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Tor లోపల Brave Search‌తో శోధనలు.",
+  "por la red Tor": "Tor నెట్‌వర్క్ ద్వారా"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

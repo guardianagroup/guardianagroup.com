@@ -1668,7 +1668,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Chế độ kín đáo: cuộc trò chuyện bị làm mờ cho đến khi bạn nhấn giữ, và những gì bạn gõ hiển thị dưới dạng số. Nhấn nút này để xem mọi thứ như bình thường.",
   "Modo discreto: lo que escribas se verá como números": "Chế độ kín đáo: những gì bạn gõ sẽ hiển thị dưới dạng số",
   "Código erróneo o caducado.": "Mã sai hoặc đã hết hạn.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Tìm kiếm bằng Brave Search bên trong Tor (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Tìm kiếm bằng Brave Search bên trong Tor.",
+  "por la red Tor": "qua mạng Tor"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

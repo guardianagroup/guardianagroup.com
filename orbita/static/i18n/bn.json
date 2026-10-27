@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "গোপনীয় মোড: চেপে ধরে না রাখা পর্যন্ত চ্যাট ঝাপসা দেখায় এবং আপনি যা লেখেন তা সংখ্যা হিসেবে দেখায়। সবকিছু স্বাভাবিকভাবে দেখতে এটি চাপুন।",
   "Modo discreto: lo que escribas se verá como números": "গোপনীয় মোড: আপনি যা লিখবেন তা সংখ্যা হিসেবে দেখাবে",
   "Código erróneo o caducado.": "কোডটি ভুল বা মেয়াদোত্তীর্ণ।",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Tor-এর ভিতরে Brave Search দিয়ে খোঁজ (.onion)।"
+  "Búsquedas con Brave Search dentro de Tor.": "Tor-এর ভিতরে Brave Search দিয়ে খোঁজ।",
+  "por la red Tor": "Tor নেটওয়ার্ক দিয়ে"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

@@ -1668,7 +1668,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "엿보기 방지 모드: 길게 누르기 전까지 채팅이 흐리게 보이고, 입력하는 내용은 숫자로 보여요. 누르면 모두 원래대로 보여요.",
   "Modo discreto: lo que escribas se verá como números": "엿보기 방지 모드: 입력하는 내용이 숫자로 보여요",
   "Código erróneo o caducado.": "코드가 틀렸거나 만료되었어요.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Tor 내부 Brave Search(.onion)로 검색."
+  "Búsquedas con Brave Search dentro de Tor.": "Tor 내부 Brave Search로 검색.",
+  "por la red Tor": "Tor 네트워크를 통해"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

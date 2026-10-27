@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Diskret tilstand: chatten er sløret, indtil du holder den nede, og det, du skriver, vises som tal. Tryk på den for at se alt normalt.",
   "Modo discreto: lo que escribas se verá como números": "Diskret tilstand: det, du skriver, vises som tal",
   "Código erróneo o caducado.": "Forkert eller udløbet kode.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Søgninger med Brave Search inde i Tor (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Søgninger med Brave Search inde i Tor.",
+  "por la red Tor": "via Tor-netværket"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",
