@@ -316,3 +316,11 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .sc-b:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
 @media (min-width:1280px) and (min-height:700px){.sabias-com{position:fixed;right:24px;bottom:24px;z-index:5;width:360px;margin:0}}
 @media (prefers-reduced-motion:reduce){.sc-cifra,.sc-t{transition:none}}
+
+/* «Multas» (dueño, 27 Oct 2026, 14:02): arriba a la derecha, en rojo; abre su propia página (/orbita/multas/).
+   El «¿Sabías que…?» de esta pantalla se quita (sabias.js queda sin cargar). */
+.barra .multas-b{flex:none;display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px 0 12px;border-radius:999px;border:1px solid rgba(224,122,108,.55);background:rgba(224,122,108,.12);color:#F09A8E;font:600 13px/1 var(--texto);text-decoration:none;transition:background .15s,border-color .15s,color .15s,box-shadow .2s}
+.barra .multas-b::before{content:'';width:6px;height:6px;border-radius:50%;background:#E07A6C;box-shadow:0 0 8px rgba(224,122,108,.9)}
+.barra .multas-b:hover{background:rgba(224,122,108,.22);border-color:#E07A6C;color:#FFD0C9;box-shadow:0 10px 40px -18px rgba(224,122,108,.8)}
+.barra .multas-b:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+@media (max-width:420px){.barra .multas-b{padding:0 11px 0 10px}}
