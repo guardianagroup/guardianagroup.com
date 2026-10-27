@@ -2117,7 +2117,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "ZERO 브라우저는 내 기기에서 멀리 떨어진 곳에서 사이트를 열어요. 내 기기에는 이미지만 전달돼요. 위험은 줄어들지만, 모든 것을 막아 주는 도구는 없어요.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "ZERO 브라우저가 여기에 저장한 것(차단, 회사, 국가, 엑스레이)을 삭제할까요? 다른 사이트나 다른 기기의 내용은 삭제되지 않아요.",
   "¿Cómo funciona el navegador ZERO?": "ZERO 브라우저는 어떻게 작동하나요?",
-  "Navegador ZERO": "ZERO 브라우저"
+  "Navegador ZERO": "ZERO 브라우저",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "포스트 양자 보호 없는 세션이 일시 중지됨: 상대방이 이전 버전을 쓰고 있어요. 직접 수락해야만 계속돼요.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "상대방이 포스트 양자 보호가 없는 버전을 쓰고 있어요. 허락 없이는 계속하지 않아요.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "이 대화에서 포스트 양자 보호 없이 계속하는 데 동의했어요.",
+  "Ir al navegador ZERO": "ZERO 브라우저로 가기"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

@@ -2117,7 +2117,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "ZEROブラウザは、あなたの端末から離れた場所でサイトを開きます。あなたの端末には画像だけが届きます。リスクは減りますが、すべてから守れるツールはありません。",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "ZEROブラウザがここに保存したもの（遮断、企業、国、レントゲン）を削除しますか？ほかのサイトやほかの端末のものは何も削除されません。",
   "¿Cómo funciona el navegador ZERO?": "ZEROブラウザの仕組みは？",
-  "Navegador ZERO": "ZEROブラウザ"
+  "Navegador ZERO": "ZEROブラウザ",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "ポスト量子保護なしのセッションを一時停止しました：相手が以前のバージョンを使用しています。あなたが承認した場合にのみ続行します。",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "相手はポスト量子保護のないバージョンを使用しています。あなたの許可なしには続行しません。",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "この会話でポスト量子保護なしで続けることを承認しました。",
+  "Ir al navegador ZERO": "ZEROブラウザへ"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

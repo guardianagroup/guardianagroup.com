@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "Браузърът ZERO отваря сайта далеч от устройството ти: до устройството ти стигат само изображения. Това намалява рисковете, но никой инструмент не защитава от всичко.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Да изтрия ли това, което браузърът ZERO е запазил тук: прекъсвания, компании, държави и Рентгенови снимки? Това не изтрива нищо от други сайтове или от други устройства.",
   "¿Cómo funciona el navegador ZERO?": "Как работи браузърът ZERO?",
-  "Navegador ZERO": "Браузър ZERO"
+  "Navegador ZERO": "Браузър ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Сесия без постквантова защита е спряна: другият човек използва по-стара версия. Продължава само ако вие го приемете.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Другият човек използва версия без постквантова защита. Без вашето разрешение не продължавам.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Приехте да продължите без постквантова защита в този разговор.",
+  "Ir al navegador ZERO": "Към браузъра ZERO"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

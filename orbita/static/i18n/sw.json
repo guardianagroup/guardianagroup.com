@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "Kivinjari cha ZERO hufungua tovuti mbali na kifaa chako: kwenye kifaa chako hufika picha pekee. Hilo hupunguza hatari, lakini hakuna zana inayolinda dhidi ya kila kitu.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Nifute kile ambacho kivinjari cha ZERO kimehifadhi hapa: ukataji, kampuni, nchi na Eksirei? Hakifuti chochote kwenye tovuti nyingine wala vifaa vingine.",
   "¿Cómo funciona el navegador ZERO?": "Kivinjari cha ZERO hufanyaje kazi?",
-  "Navegador ZERO": "Kivinjari cha ZERO"
+  "Navegador ZERO": "Kivinjari cha ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Kipindi kisicho na ulinzi wa baada ya kwanta kimesimamishwa: mtu mwingine anatumia toleo la zamani. Kitaendelea tu ukikubali.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Mtu mwingine anatumia toleo lisilo na ulinzi wa baada ya kwanta. Sitaendelea bila ruhusa yako.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Umekubali kuendelea bila ulinzi wa baada ya kwanta katika mazungumzo haya.",
+  "Ir al navegador ZERO": "Nenda kwenye kivinjari cha ZERO"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

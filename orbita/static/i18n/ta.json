@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "ZERO உலாவி இணையதளத்தை உங்கள் சாதனத்திலிருந்து தொலைவில் திறக்கிறது: உங்கள் சாதனத்துக்குப் படங்கள் மட்டுமே வருகின்றன. இது ஆபத்துகளைக் குறைக்கிறது, ஆனால் எந்தக் கருவியும் எல்லாவற்றிலிருந்தும் பாதுகாப்பதில்லை.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "ZERO உலாவி இங்கே சேமித்தவற்றை நீக்கட்டுமா: தடுப்புகள், நிறுவனங்கள், நாடுகள், எக்ஸ்-ரேக்கள்? இது மற்ற இணையதளங்களிலிருந்தோ மற்ற சாதனங்களிலிருந்தோ எதையும் நீக்காது.",
   "¿Cómo funciona el navegador ZERO?": "ZERO உலாவி எப்படிச் செயல்படுகிறது?",
-  "Navegador ZERO": "ZERO உலாவி"
+  "Navegador ZERO": "ZERO உலாவி",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "போஸ்ட்-குவாண்டம் பாதுகாப்பு இல்லாத அமர்வு நிறுத்தப்பட்டது: மற்றவர் பழைய பதிப்பைப் பயன்படுத்துகிறார். நீங்கள் ஏற்றுக்கொண்டால் மட்டுமே தொடரும்.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "மற்றவர் போஸ்ட்-குவாண்டம் பாதுகாப்பு இல்லாத பதிப்பைப் பயன்படுத்துகிறார். உங்கள் அனுமதி இல்லாமல் தொடர மாட்டேன்.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "இந்த உரையாடலில் போஸ்ட்-குவாண்டம் பாதுகாப்பு இல்லாமல் தொடர நீங்கள் ஏற்றுக்கொண்டீர்கள்.",
+  "Ir al navegador ZERO": "ZERO உலாவிக்குச் செல்லுங்கள்"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

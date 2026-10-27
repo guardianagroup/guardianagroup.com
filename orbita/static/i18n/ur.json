@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "ZERO براؤزر ویب سائٹ کو آپ کی ڈیوائس سے دور کھولتا ہے: آپ کی ڈیوائس تک صرف تصویریں پہنچتی ہیں۔ اس سے خطرات کم ہوتے ہیں، لیکن کوئی بھی ٹول ہر چیز سے نہیں بچاتا۔",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "کیا میں وہ مٹا دوں جو ZERO براؤزر نے یہاں محفوظ کیا ہے: بلاک، کمپنیاں، ممالک اور ایکس رے؟ اس سے دوسری ویب سائٹوں یا دوسری ڈیوائسز سے کچھ نہیں مٹتا۔",
   "¿Cómo funciona el navegador ZERO?": "ZERO براؤزر کیسے کام کرتا ہے؟",
-  "Navegador ZERO": "ZERO براؤزر"
+  "Navegador ZERO": "ZERO براؤزر",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "پوسٹ کوانٹم تحفظ کے بغیر سیشن روک دیا گیا: دوسرا شخص پرانا نسخہ استعمال کر رہا ہے۔ یہ صرف اسی صورت میں جاری رہے گا جب آپ اسے قبول کریں۔",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "دوسرا شخص پوسٹ کوانٹم تحفظ کے بغیر والا نسخہ استعمال کر رہا ہے۔ آپ کی اجازت کے بغیر گفتگو آگے نہیں بڑھے گی۔",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "آپ نے اس گفتگو میں پوسٹ کوانٹم تحفظ کے بغیر جاری رکھنا قبول کر لیا ہے۔",
+  "Ir al navegador ZERO": "ZERO براؤزر پر جائیں"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

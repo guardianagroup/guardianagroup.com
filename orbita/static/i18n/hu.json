@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "A ZERO böngésző az eszközödtől távol nyitja meg az oldalt: az eszközödre csak képek jutnak el. Ez csökkenti a kockázatokat, de egyetlen megoldás sem véd meg mindentől.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Töröljem, amit a ZERO böngésző itt mentett: megszakítások, cégek, országok és Röntgenképek? Más oldalakról vagy más eszközökről semmit nem töröl.",
   "¿Cómo funciona el navegador ZERO?": "Hogyan működik a ZERO böngésző?",
-  "Navegador ZERO": "ZERO böngésző"
+  "Navegador ZERO": "ZERO böngésző",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Posztkvantum-védelem nélküli munkamenet leállítva: a másik fél régebbi verziót használ. Csak akkor folytatódik, ha te elfogadod.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "A másik fél posztkvantum-védelem nélküli verziót használ. Az engedélyed nélkül nem folytatom.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Elfogadtad, hogy ebben a beszélgetésben posztkvantum-védelem nélkül folytasd.",
+  "Ir al navegador ZERO": "Ugrás a ZERO böngészőhöz"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

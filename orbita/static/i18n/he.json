@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "דפדפן ZERO פותח את האתר רחוק מהמכשיר שלך: רק תמונות מגיעות למכשיר שלך. זה מקטין סיכונים, אבל אף כלי לא מגן מפני הכול.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "למחוק את מה שדפדפן ZERO שמר כאן: חיתוכים, חברות, מדינות וצילומי רנטגן? זה לא מוחק דבר מאתרים אחרים או ממכשירים אחרים.",
   "¿Cómo funciona el navegador ZERO?": "איך עובד דפדפן ZERO?",
-  "Navegador ZERO": "דפדפן ZERO"
+  "Navegador ZERO": "דפדפן ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "הפעלה בלי הגנה פוסט־קוונטית הושהתה: האדם השני משתמש בגרסה ישנה יותר. היא תימשך רק אם תאשרו.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "האדם השני משתמש בגרסה בלי הגנה פוסט־קוונטית. לא אמשיך בלי רשותכם.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "אישרתם להמשיך בלי הגנה פוסט־קוונטית בשיחה הזו.",
+  "Ir al navegador ZERO": "מעבר לדפדפן ZERO"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

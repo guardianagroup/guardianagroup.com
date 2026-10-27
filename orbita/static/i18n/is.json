@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "ZERO-vafrinn opnar vefsíðuna fjarri tækinu þínu: aðeins myndir berast í tækið þitt. Það dregur úr áhættu, en ekkert verkfæri ver gegn öllu.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Á ég að eyða því sem ZERO-vafrinn hefur vistað hér: lokunum, fyrirtækjum, löndum og Röntgenmyndum? Það eyðir engu af öðrum vefsíðum né öðrum tækjum.",
   "¿Cómo funciona el navegador ZERO?": "Hvernig virkar ZERO-vafrinn?",
-  "Navegador ZERO": "ZERO-vafrinn"
+  "Navegador ZERO": "ZERO-vafrinn",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Lota án eftirskammtavarnar sett í bið: hinn aðilinn notar eldri útgáfu. Hún heldur aðeins áfram ef þú samþykkir það.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Hinn aðilinn notar útgáfu án eftirskammtavarnar. Ég held ekki áfram án þíns leyfis.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Þú hefur samþykkt að halda áfram án eftirskammtavarnar í þessu samtali.",
+  "Ir al navegador ZERO": "Fara í ZERO-vafrann"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

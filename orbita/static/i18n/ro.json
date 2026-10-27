@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "Browserul ZERO deschide site-ul departe de dispozitivul tău: pe dispozitivul tău ajung doar imagini. Asta reduce riscurile, dar niciun instrument nu protejează de tot.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Șterg ce a salvat browserul ZERO aici: blocări, companii, țări și Radiografii? Nu șterge nimic de pe alte site-uri sau de pe alte dispozitive.",
   "¿Cómo funciona el navegador ZERO?": "Cum funcționează browserul ZERO?",
-  "Navegador ZERO": "Browserul ZERO"
+  "Navegador ZERO": "Browserul ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Sesiune fără protecție post-cuantică oprită: cealaltă persoană folosește o versiune mai veche. Continuă doar dacă accepți tu.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Cealaltă persoană folosește o versiune fără protecție post-cuantică. Nu continui fără permisiunea ta.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Ai acceptat să continui fără protecție post-cuantică în această conversație.",
+  "Ir al navegador ZERO": "Mergi la browserul ZERO"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

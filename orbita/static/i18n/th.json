@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "เบราว์เซอร์ ZERO เปิดเว็บไซต์ในที่ห่างไกลจากอุปกรณ์ของคุณ: มีเพียงภาพเท่านั้นที่มาถึงอุปกรณ์ของคุณ วิธีนี้ช่วยลดความเสี่ยง แต่ไม่มีเครื่องมือใดป้องกันได้ทุกอย่าง",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "จะให้ลบสิ่งที่เบราว์เซอร์ ZERO บันทึกไว้ที่นี่ไหม: การตัด บริษัท ประเทศ และเอกซเรย์? การลบนี้ไม่ลบอะไรจากเว็บไซต์อื่นหรืออุปกรณ์อื่น",
   "¿Cómo funciona el navegador ZERO?": "เบราว์เซอร์ ZERO ทำงานอย่างไร?",
-  "Navegador ZERO": "เบราว์เซอร์ ZERO"
+  "Navegador ZERO": "เบราว์เซอร์ ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "หยุดเซสชันที่ไม่มีการป้องกันหลังควอนตัมไว้แล้ว: อีกฝ่ายใช้เวอร์ชันเก่ากว่า จะดำเนินต่อก็ต่อเมื่อคุณยอมรับเท่านั้น",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "อีกฝ่ายใช้เวอร์ชันที่ไม่มีการป้องกันหลังควอนตัม จะไม่ดำเนินต่อหากไม่ได้รับอนุญาตจากคุณ",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "คุณยอมรับให้ดำเนินต่อโดยไม่มีการป้องกันหลังควอนตัมในการสนทนานี้แล้ว",
+  "Ir al navegador ZERO": "ไปที่เบราว์เซอร์ ZERO"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

@@ -2117,7 +2117,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "Przeglądarka ZERO otwiera stronę z dala od twojego urządzenia: do twojego urządzenia docierają tylko obrazy. To zmniejsza ryzyko, ale żadne narzędzie nie chroni przed wszystkim.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Usunąć to, co przeglądarka ZERO zapisała tutaj: cięcia, firmy, kraje i Prześwietlenia? Nie usuwa to niczego z innych stron ani z innych urządzeń.",
   "¿Cómo funciona el navegador ZERO?": "Jak działa przeglądarka ZERO?",
-  "Navegador ZERO": "Przeglądarka ZERO"
+  "Navegador ZERO": "Przeglądarka ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Sesja bez ochrony postkwantowej wstrzymana: druga osoba używa starszej wersji. Będzie kontynuowana tylko, jeśli to zaakceptujesz.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Druga osoba używa wersji bez ochrony postkwantowej. Bez twojej zgody nie kontynuuję.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Zaakceptowano kontynuowanie bez ochrony postkwantowej w tej rozmowie.",
+  "Ir al navegador ZERO": "Przejdź do przeglądarki ZERO"
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

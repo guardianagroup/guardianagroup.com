@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "ZERO బ్రౌజర్ వెబ్‌సైట్‌ను మీ పరికరానికి దూరంగా తెరుస్తుంది: మీ పరికరానికి చిత్రాలు మాత్రమే చేరుతాయి. దీనివల్ల ప్రమాదాలు తగ్గుతాయి, కానీ ఏ సాధనమూ అన్నింటి నుండి రక్షించదు.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "ZERO బ్రౌజర్ ఇక్కడ సేవ్ చేసినవాటిని తొలగించమంటారా: బ్లాక్‌లు, సంస్థలు, దేశాలు, ఎక్స్-రేలు? ఇది ఇతర వెబ్‌సైట్‌ల నుండి గానీ ఇతర పరికరాల నుండి గానీ ఏదీ తొలగించదు.",
   "¿Cómo funciona el navegador ZERO?": "ZERO బ్రౌజర్ ఎలా పనిచేస్తుంది?",
-  "Navegador ZERO": "ZERO బ్రౌజర్"
+  "Navegador ZERO": "ZERO బ్రౌజర్",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "పోస్ట్-క్వాంటమ్ రక్షణ లేని సెషన్ ఆపివేయబడింది: అవతలి వ్యక్తి పాత వెర్షన్ వాడుతున్నారు. మీరు అంగీకరిస్తేనే ఇది కొనసాగుతుంది.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "అవతలి వ్యక్తి పోస్ట్-క్వాంటమ్ రక్షణ లేని వెర్షన్ వాడుతున్నారు. మీ అనుమతి లేకుండా నేను కొనసాగను.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "ఈ సంభాషణలో పోస్ట్-క్వాంటమ్ రక్షణ లేకుండా కొనసాగడానికి మీరు అంగీకరించారు.",
+  "Ir al navegador ZERO": "ZERO బ్రౌజర్‌కు వెళ్లండి"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

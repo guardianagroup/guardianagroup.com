@@ -2117,7 +2117,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "ZERO tarayıcısı siteyi cihazından uzakta açar: cihazına yalnızca görüntüler ulaşır. Bu riskleri azaltır ama hiçbir araç her şeye karşı korumaz.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "ZERO tarayıcısının burada kaydettiklerini sileyim mi: kesintiler, şirketler, ülkeler ve Röntgenler? Başka sitelerden ya da başka cihazlardan hiçbir şey silinmez.",
   "¿Cómo funciona el navegador ZERO?": "ZERO tarayıcısı nasıl çalışır?",
-  "Navegador ZERO": "ZERO tarayıcısı"
+  "Navegador ZERO": "ZERO tarayıcısı",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Kuantum sonrası koruması olmayan oturum durduruldu: karşı taraf daha eski bir sürüm kullanıyor. Yalnızca siz kabul ederseniz devam eder.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Karşı taraf kuantum sonrası koruması olmayan bir sürüm kullanıyor. İzniniz olmadan devam etmiyorum.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Bu konuşmada kuantum sonrası koruma olmadan devam etmeyi kabul ettiniz.",
+  "Ir al navegador ZERO": "ZERO tarayıcısına git"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

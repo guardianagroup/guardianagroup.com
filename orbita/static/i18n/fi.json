@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "ZERO-selain avaa sivuston kaukana laitteestasi: laitteellesi tulee vain kuvia. Se vähentää riskejä, mutta mikään työkalu ei suojaa kaikelta.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Poistanko sen, mitä ZERO-selain on tallentanut tänne: estot, yritykset, maat ja Röntgenkuvat? Se ei poista mitään muilta sivustoilta eikä muista laitteista.",
   "¿Cómo funciona el navegador ZERO?": "Miten ZERO-selain toimii?",
-  "Navegador ZERO": "ZERO-selain"
+  "Navegador ZERO": "ZERO-selain",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Istunto ilman post-kvanttisuojausta keskeytetty: toinen henkilö käyttää vanhempaa versiota. Se jatkuu vain, jos hyväksyt sen.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Toinen henkilö käyttää versiota, jossa ei ole post-kvanttisuojausta. En jatka ilman lupaasi.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Hyväksyit jatkamisen ilman post-kvanttisuojausta tässä keskustelussa.",
+  "Ir al navegador ZERO": "Siirry ZERO-selaimeen"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "Peramban ZERO membuka situs jauh dari perangkat Anda: hanya gambar yang sampai ke perangkat Anda. Itu mengurangi risiko, tetapi tidak ada alat yang melindungi dari segalanya.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Hapus apa yang disimpan peramban ZERO di sini: pemutusan, perusahaan, negara, dan Rontgen? Ini tidak menghapus apa pun dari situs lain atau perangkat lain.",
   "¿Cómo funciona el navegador ZERO?": "Bagaimana cara kerja peramban ZERO?",
-  "Navegador ZERO": "Peramban ZERO"
+  "Navegador ZERO": "Peramban ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Sesi tanpa perlindungan pascakuantum dihentikan: lawan bicara menggunakan versi lama. Sesi hanya berlanjut jika Anda menyetujuinya.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Lawan bicara menggunakan versi tanpa perlindungan pascakuantum. Saya tidak akan melanjutkan tanpa izin Anda.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Anda telah setuju untuk melanjutkan tanpa perlindungan pascakuantum dalam percakapan ini.",
+  "Ir al navegador ZERO": "Buka peramban ZERO"
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",
