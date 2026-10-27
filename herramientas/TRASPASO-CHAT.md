@@ -991,3 +991,11 @@ Encargo vigente del dueño (15:16 y 15:31): agencia (ChatGPT «Alta», Gemini Ar
   - cajas de Colombia y demás países;
   - microVM por celda (coste);
   - cortafuegos por usuario.
+- **(22:10–22:45 Bogotá) Lista de buscadores solo con nombres, voz fuera, PRISA, muros y vigilancia.**
+  - **Lista de buscadores** (dueño 22:14): solo «Google», «Brave» y «Tor», sin sede ni avisos (`ETIQUETA_ENG`). **Voz** (22:15): botón `#mic` oculto y pista quitada (main `9028687f`).
+  - **Caja de Google:** sin tope publicado de búsquedas en la versión gratis. Diferencias con google.com explicadas al dueño: solo 50 webs, sin extras, orden algo distinto.
+  - **PRISA** (AS, El País…): su página de bloqueo es de tipo DataDome, sin «robot» en el título, con el texto «El acceso está restringido temporalmente… un robot se encuentra en la misma red (IP 168.119.225.147)». Con el sí del dueño se envió por su **formulario oficial de asistencia**, desde la página de bloqueo de El País, una petición de acceso para elpais.com, as.com y sus webs, contacto hola@guardianagroup.com («Su mensaje se ha enviado correctamente», ID 7a37da55-c960-48d5-e7e8-12c64744ca59).
+  - El motor ya reconoce los **muros por su texto** (`miraMuro`, en la página y sus marcos, solo si es corta) → suceso `muro` → aviso con «Abrir fuera de ZERO» (main `50ecee9c`).
+  - **39 idiomas** de los 15 textos nuevos, más el título del muro (main `7b2c4832`; se corrigen hu, que decía DuckDuckGo, y fi).
+  - **Panel «Vigilancia de la celda»** (main `a963592e`): mensaje `vigilancia` del motor con cuentas reales (local, onion, peligrosas, muros, señuelos fuera, cortados y propios, descargas, salida).
+  - **Acciones automáticas:** sella si se corta un recurso de una lista de malware o hay una descarga peligrosa. Ante una fuga de señuelo hacia un tercero, o una visita al enlace oculto, sella y **destruye a los 20 s** salvo «Reanudar» (cuenta atrás en el panel; probado en local con una web trampa: acta «fuga detectada: destrucción automática a los 20 s»). En **Observar** la fuga solo se avisa; se ha preguntado al dueño si también allí. Traducción de los 19 textos del panel en curso (agente → `scratchpad/zero_tr2/`).
