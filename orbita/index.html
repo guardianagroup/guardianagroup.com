@@ -11,7 +11,7 @@
 <title>GUARDIANA · Órbita</title>
 <link rel="stylesheet" href="static/diseno.css?v=20261025k">
 <link rel="preload" href="static/tierra/dia.jpg" as="image">
-<link rel="stylesheet" href="static/orbita.css?v=20261026e">
+<link rel="stylesheet" href="static/orbita.css?v=20261027b">
 <link rel="stylesheet" href="static/movil.css?v=20261025k">
 </head>
 <body class="dock">
@@ -93,10 +93,12 @@
 <nav id="puertas" aria-label="Secciones"></nav>
 <div id="altura" class="altura" aria-live="off" title="Altura aproximada desde la que se ve el planeta"><span class="k">Altura</span><div class="barra"><b>40.000 km</b><i><span class="vv"></span></i><b>20 km</b></div><span class="v">≈ 40.000 km</span></div>
 <div id="zoom" class="zoom" role="group" aria-label="Acercar el planeta">
+  <div class="zgrupo">
   <button type="button" data-z="mas" aria-label="Acercar"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 3.5v9M3.5 8h9"/></svg></button>
   <span id="zoom-nivel" class="nivel">×1</span>
   <button type="button" data-z="menos" aria-label="Alejar"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3.5 8h9"/></svg></button>
   <button type="button" data-z="base" class="base" aria-label="Volver al tamaño base" hidden><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a5 5 0 1 0 1.5-3.6M3 2.5v2.4h2.4"/></svg></button>
+  </div>
   <button type="button" data-z="mapa" class="mapa" aria-pressed="false" aria-label="Satélite o mapa" title="Satélite o mapa"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="M8 2.5a5.5 5.5 0 0 1 0 11z" fill="currentColor" stroke="none"/></svg></button>
   <div class="mapa-t" role="group" aria-label="Satélite o mapa"><button type="button" class="op" data-m="color" aria-pressed="true">Satélite</button><button type="button" class="op" data-m="limpio" aria-pressed="false">Mapa</button></div>
 </div>
