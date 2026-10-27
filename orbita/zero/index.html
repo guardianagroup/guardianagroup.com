@@ -702,10 +702,16 @@
 #stage.full .nucsec{display:none}
 .nucsec[hidden]{display:none!important} /* dueño 27 Oct, 08:28: NÚCLEO sale de la Radiografía; será el asistente de toda GUARDIANA */
 @media (prefers-reduced-motion:reduce){.nucorb i,.nlive::before{animation:none}}
+/* 27 Oct 2026, 13:28 (dueño): «en el navegador sigue apareciendo la red neuronal antigua, sustitúyela por la nueva».
+   Encima de la barra, la red de NÚCLEO (la misma de la portada y de Comunicaciones) en lugar del organismo de partículas;
+   ZERO aparece ya formado y el selector de entradas desaparece, porque las entradas eran ese organismo. */
+#redZ{position:absolute;left:580px;top:68px;width:280px;height:280px;pointer-events:none;opacity:0;transition:opacity .9s ease;z-index:2}
+#stage:not(.open):not(.intro) #redZ{opacity:1}
+#director{display:none!important}
 </style>
 </head>
 <body><div id="viewport"><main id="stage" aria-label="GUARDIANA ZERO"><script>/* 26 Oct 2026 (owner): «al entrar sale a la izquierda y luego se pone en el centro». Se coloca y escala antes del primer pintado, con el mismo cálculo que layout(). */(function(){var st=document.getElementById('stage'),W=1440,H=900,s=Math.min(innerWidth/W,innerHeight/H);st.style.transform='scale('+s+')';st.style.left=(innerWidth-W*s)/2+'px';st.style.top=(innerHeight-H*s)/2+'px';st.style.setProperty('--ox',Math.max(0,(innerWidth/s-W)/2).toFixed(2)+'px');st.style.setProperty('--oy',Math.max(0,(innerHeight/s-H)/2).toFixed(2)+'px')})()</script>
-<canvas id="world" aria-hidden="true"></canvas><div class="grain"></div><div class="floor"></div><div class="beam"></div><div class="flash"></div>
+<canvas id="world" aria-hidden="true"></canvas><canvas id="redZ" aria-hidden="true"></canvas><div class="grain"></div><div class="floor"></div><div class="beam"></div><div class="flash"></div>
 <header class="mast"><div class="brand">GUARDIANA <span> / ZERO</span></div></header>
 
 <div class="caption"><strong>LA WEB, VISTA DE OTRA MANERA</strong><small>Una presencia que responde a ti</small></div>
@@ -723,7 +729,7 @@
 <div id="pill" role="group" aria-label="Web en grande"><button type="button" class="pc" id="vercortes" title="Ver los cortes en el panel"><span class="pn"><span id="pillnum">0</span>&nbsp;cortes en esta web</span><span class="pv">Ver panel<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg></span></button><button type="button" class="pb" id="reducir" title="Reducir y ver el panel (Esc)"><svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 6.5h-4v-4M2.5 9.5h4v4M9.5 6.5 14 2M6.5 9.5 2 14"/></svg>Reducir</button></div><div class="topReveal" id="topbar"><button type="button" id="restore">↙ RESTAURAR</button><span>PÁGINA DE DEMOSTRACIÓN · ZERO</span><button type="button" id="topcut">Cortes</button></div>
 <div class="marca" aria-hidden="true">ZERO</div><button type="button" id="volverZ" class="volverz" title="Volver" aria-label="Volver"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg><span>Inicio</span></button><button type="button" id="vermeZ" class="volverz vermez" title="Verme en Órbita" aria-label="Verme en Órbita"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12.5" r="1.2"/><path d="M5.2 9.7a4 4 0 0 1 5.6 0M2.6 7a7.6 7.6 0 0 1 10.8 0"/></svg><span>Verme en Órbita</span></button><div class="lb t"></div><div class="lb b"></div><div class="skip">CLIC O CUALQUIER TECLA PARA SALTAR</div>
 </main></div><article id="informe" aria-hidden="true"></article>
-<script src="../static/idioma.js?v=20261027p9"></script>
+<script src="../static/idioma.js?v=20261027p10"></script>
 <nav class="director" id="director" aria-label="Entradas de cine"><span>ENTRADA</span></nav>
 <script>
 (()=>{'use strict';
@@ -1351,7 +1357,7 @@ const ENTRADAS=[{id:'mpunto',n:'Metamorfosis · punto',d:7.5,rest:META},{id:'mab
 const REST={Hd:0,As:1,Sp:0,Ap:1,Ir:0,S0:155,cx:720,cy:250,Hz:0,Ry:.35,Ga:1,Hb:0,fl:1,Mm:1,Mr:1,Cl:-2000,Df:1,Bm:0,Bk:0,Av:0,Sw:0,Sa:0,Sq:1,Cw:-1,Il:.4,An:0,Af:0,ex:720,ey:450,Re:200,Er:0,Eo:0,Ds:0,Du:0,Pv:0,Fa:-1};
 // 22 Oct 2026 (owner): «un poquito más arriba, más separación» from the bar: 240 → 208 (design units, bar top at 412)
 const ORG_Y=208;
-let conRed=true; // final: the network also stays above the bar (owner, 22 Oct 2026: the living presence over the bar)
+let conRed=false; // 27 Oct 2026, 13:28: above the bar now lives NÚCLEO's network (#redZ), not this particle organism
 const cine=Object.assign({},REST);
 let cineMode=0,cineStart=-1,cineFixed=null;
 const ss=(a,b,x)=>{x=Math.max(0,Math.min(1,(x-a)/(b-a)));return x*x*(3-2*x)};
@@ -1441,7 +1447,7 @@ window.zeroCine={play,red(x){conRed=!!x},at(i,t){cineMode=i;paintDirector();stag
 {let i=0;const q=/entrada=(\d)/.exec(location.search);try{const s=parseInt(localStorage.getItem('zeroEntrada2'),10);if(s>=0&&s<ENTRADAS.length)i=s}catch(e){}if(q&&+q[1]<ENTRADAS.length)i=+q[1];
 // 22 Oct 2026 (owner): opened from Órbita, ZERO appears already formed; the entrance (the organism folding into the
 // bar) read as a wrong screen turned on its side for a moment. Opened on its own, the entrance still plays.
-if(/[?&]orbita=1/.test(location.search)){cineMode=i;paintDirector();stage.classList.toggle('vivo',!!ENTRADAS[i].rest);endCine()}else play(i)}
+cineMode=i;paintDirector();stage.classList.toggle('vivo',!!ENTRADAS[i].rest);endCine()} // 27 Oct 2026: always formed (the entrance was the old organism)
 
 // NÁCAR: Pure WebGL 1, all geometry generated locally. No resources, libraries, or shader imports.
 const gl=canvas.getContext('webgl',{alpha:false,antialias:false,depth:false,powerPreference:'high-performance'});
@@ -1647,4 +1653,4 @@ function pintaBurbuja(){const R=$('#rburbuja');if(!R)return;R.innerHTML='<div cl
 vistaRadio('radio');pintaRadio();
 requestAnimationFrame(tick);
 })();
-</script><script src="pdf.js?v=20261027d"></script><script src="motor.js?v=20261027b"></script></body></html>
+</script><script src="pdf.js?v=20261027d"></script><script src="motor.js?v=20261027b"></script><script src="/orbita/static/red-nucleo.js?v=20261027b"></script><script>(function(){const c=document.getElementById('redZ'),st=document.getElementById('stage');if(!c||!st||!window.RedNucleo)return;let red=null;const pon=()=>{const ver=!st.classList.contains('open')&&!document.hidden;if(ver&&!red)red=RedNucleo(c,{nace:true});else if(!ver&&red){red.para();red=null}};new MutationObserver(pon).observe(st,{attributes:true,attributeFilter:['class']});document.addEventListener('visibilitychange',pon);pon()})();</script></body></html>
