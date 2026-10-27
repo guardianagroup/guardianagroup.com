@@ -113,7 +113,7 @@ class Sesion {
     this.permitidas = new Set(); // dominios base o 'e:<empresa>' que la persona ha permitido en esta sesión
     this.nCuadros = { enviados: 0, descartados: 0 }; this.cuadroPendiente = null;
     ws.on('drain', () => { if (this.cuadroPendiente && this.ws.abierto && this.ws.atraso <= ATRASO_MAX) { const d = this.cuadroPendiente; this.cuadroPendiente = null; this.ws.send(Buffer.from(d, 'base64')); this.nCuadros.enviados++; } });
-    this.nivel = process.env.ZERO_NIVEL_INICIAL || 'observar'; // 26 Oct 2026: por defecto se abre todo y la persona elige qué cortar
+    this.nivel = process.env.ZERO_NIVEL_INICIAL || 'normal'; // dueño (26 Oct 2026, 22:42): un solo modo, Normal; cada empresa se corta o se deja pasar con su interruptor // 26 Oct 2026: por defecto se abre todo y la persona elige qué cortar
     VIVAS.add(this); this.ultimaMirada = Date.now();
     ws.on('message', (m, bin) => { if (bin) return; if (m.length > MAX_MENSAJE) { this.op('mensaje demasiado grande: descartado'); return; } this.mensaje(m).catch(() => {}); });
     ws.on('close', () => this.destruye('conexión cerrada'));
