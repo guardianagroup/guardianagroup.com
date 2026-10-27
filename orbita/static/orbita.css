@@ -1064,3 +1064,23 @@ body.mapa-cerca:not(.limpio) header::before { opacity: 1; }
 body.mapa-cerca:not(.limpio) .zoom { background: rgba(6,8,12,.55); border-radius: 26px; padding: 10px 6px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 body.mapa-cerca:not(.limpio) .zoom .nivel, body.mapa-cerca:not(.limpio) .zoom .mapa-t .op { color: #B9C2CC; }
 .altura .k, .altura .barra b, .altura .barra i .vv { text-shadow: 0 0 7px rgba(6,8,12,1), 0 0 3px rgba(6,8,12,1), 0 1px 2px rgba(6,8,12,.9); }
+
+/* 26 Oct 2026, 20:49 (dueño: «la botonera muy pegada; hazla profesional»): el zoom es una sola pieza (+ · nivel · − · volver)
+   con separadores finos; «Satélite / Mapa» es un selector propio; las dos piezas van separadas y siempre por debajo de la
+   escala de altura, nunca encima. */
+.zoom { top: calc(max(124px, 50% - 300px) + 204px); transform: none; gap: 16px; padding: 0; width: 72px; }
+.zoom .zgrupo { display: flex; flex-direction: column; align-items: stretch; width: 44px; border: 1px solid var(--line); border-radius: 22px; background: rgba(12,17,24,.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 10px 28px rgba(0,0,0,.35); overflow: hidden; }
+.zoom .zgrupo button { width: 44px; height: 42px; border: 0; border-radius: 0; background: transparent; color: #C9D3DD; }
+.zoom .zgrupo button:hover:not(:disabled) { background: rgba(156,195,228,.10); color: var(--fg); border: 0; }
+.zoom .zgrupo button:focus-visible { outline-offset: -3px; }
+.zoom .zgrupo .nivel { padding: 8px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font: 500 11px/1 var(--mono); color: #B9C2CC; }
+.zoom .zgrupo .base { margin-top: 0; border-top: 1px solid var(--line); }
+.zoom .mapa { display: none; }
+.zoom .mapa-t { width: 72px; padding: 3px; gap: 3px; box-sizing: border-box; border: 1px solid var(--line); border-radius: 14px; background: rgba(12,17,24,.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 10px 28px rgba(0,0,0,.35); }
+.zoom .mapa-t .op { padding: 9px 0; border-radius: 10px; font: 600 9.5px/1 var(--mono); letter-spacing: .1em; color: #8A95A2; }
+.zoom .mapa-t .op:hover { color: var(--fg); background: rgba(156,195,228,.08); }
+.zoom .mapa-t .op[aria-pressed="true"] { color: var(--accent); background: rgba(156,195,228,.18); }
+body.mapa-cerca:not(.limpio) .zoom { background: none; padding: 0; backdrop-filter: none; -webkit-backdrop-filter: none; }
+@media (max-height: 700px) { .zoom { top: calc(max(124px, 50% - 300px) + 196px); gap: 10px; } .zoom .zgrupo button { height: 36px; } }
+/* En pantallas bajas la tarjeta «El mundo, ahora» se aparta a la izquierda de la botonera para no tocarla */
+@media (max-height: 860px) { #directo { right: calc(132px + env(safe-area-inset-right, 0px)); } }
