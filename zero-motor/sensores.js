@@ -214,6 +214,30 @@ module.exports = String.raw`(() => {
   };
   vigila('_pbjsGlobals', vigilaLista);
   vigila('googletag', enganchaGoogle);
+  // 27 Oct 2026 (dueño: «detectar el máximo»): la subasta de Amazon (apstag). El precio va cifrado: solo lo lee el
+  // servidor de anuncios; aquí se cuenta en qué huecos pujó y con qué tamaño.
+  const enganchaAmazon = (a) => {
+    if (!a || typeof a !== 'object' || a.__zeroA) return;
+    const envuelve = (f) => {
+      if (typeof f !== 'function' || f.__zero) return f;
+      const g = function (cfg, cb) {
+        const envuelto = function (bids) {
+          try {
+            const xs = (Array.isArray(bids) ? bids : []).slice(0, 20);
+            const con = xs.filter((b) => b && b.amznbid && !/^[0-2]$/.test(String(b.amznbid)));
+            cuenta({ clase: 'subasta', fase: 'amazon', id: 'amz-' + Date.now(), huecos: xs.length, pujas: con.map((b) => ({ pujador: 'amazon', unidad: String(b.slotID || '').slice(0, 80), tam: String(b.amznsz || b.size || '').slice(0, 20), cifrado: true })) });
+          } catch (_) {}
+          return typeof cb === 'function' ? cb.apply(this, arguments) : undefined;
+        };
+        return f.call(this, cfg, envuelto);
+      };
+      g.__zero = true; return g;
+    };
+    // fetchBids puede llegar después (el cargador la define más tarde): se vigila la propiedad
+    let actual = envuelve(a.fetchBids);
+    try { Object.defineProperty(a, 'fetchBids', { configurable: true, enumerable: true, get: () => actual, set: (v) => { actual = envuelve(v); } }); a.__zeroA = true; } catch (_) {}
+  };
+  vigila('apstag', enganchaAmazon);
 
   // 26 Oct 2026 (dueño: «no aparecía la mano»): el cursor que pediría la web (mano en enlaces, barra en texto) se cuenta al
   // motor cuando cambia, y la página lo pinta sobre la pantalla. Solo observación; no toca la web.

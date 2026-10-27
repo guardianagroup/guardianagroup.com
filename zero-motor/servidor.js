@@ -456,6 +456,10 @@ class Sesion {
         const n = new Set([...(s.pedidos || []), ...pujas.map((p) => p.pujador)]).size;
         return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Esta página ha subastado tu atención: ' + n + (n === 1 ? ' empresa pujó' : ' empresas pujaron') + ' por ' + (s.unidades || 1) + ((s.unidades || 1) === 1 ? ' hueco' : ' huecos') + ' de anuncio en ' + (s.ms != null ? s.ms + ' ms' : 'milisegundos') + '. Los precios son los que declara cada pujador.', detalle: { id: s.id, ms: s.ms, limite: s.limite || null, unidades: s.unidades, pedidos: poda(s.pedidos), pujas, sinPuja: poda(s.sinPuja), tarde: poda(s.tarde), peticiones: poda(s.peticiones), config: poda(s.config), tcf: poda(s.tcf) } });
       }
+      if (s.fase === 'amazon') {
+        const n = (s.pujas || []).length;
+        return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: n ? 'Amazon ha pujado por ' + n + (n === 1 ? ' hueco' : ' huecos') + ' de anuncio de esta página. Su precio va cifrado: solo lo lee el servidor de anuncios.' : 'Amazon ha recibido los datos de tu visita para pujar, pero no ha pujado.', detalle: { fase: 'amazon', huecos: s.huecos || 0, pujas: (s.pujas || []).map(poda) } });
+      }
       if (s.fase === 'ganada') return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Ganó la puja ' + s.pujador + (s.cpm != null ? ' declarando ' + s.cpm + ' ' + (s.moneda || '') + ' por mil impresiones' : '') + (s.anunciante ? ' para el anunciante ' + s.anunciante : '') + '.', detalle: { ...poda(s), ...empresaDe(s.pujador) } });
       return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Hueco de anuncio servido por Google' + (s.vacio ? ' (vacío)' : '') + (s.anunciante ? ' · anunciante nº ' + s.anunciante : '') + '.', detalle: poda(s) });
     }
