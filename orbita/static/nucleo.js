@@ -214,14 +214,24 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     'd-corte': '¿Qué es un corte?', borrar: 'Borrar mis datos de este navegador', privacidad: 'Privacidad', seguridad: '¿Es seguro?', vpn: '¿Es una VPN?', precio: 'Precio', cuenta: '¿Necesito una cuenta?', idioma: 'Idioma', contacto: 'Hablar con una persona',
   };
   const RAPIDAS = [['zero', 'Ir al navegador ZERO'], ['z-radio', 'Ver la Radiografía'], ['datos', 'Mis datos'], ['resumen', 'Resumen en PDF o vídeo'], ['planeta', 'Explorar el planeta'], ['com', 'Chat encriptado']];
+  // «¿Qué puedo pedir?» (dueño, 14:12: «más profesional»): por parejas del mismo tamaño, para que cada fila de tarjetas sea
+  // simétrica; «Hablar con una persona» queda al pie, con el correo, y Órbita gana «¿Qué es Órbita?», como las demás
   const GRUPOS = [
-    ['Navegar y buscar', ['z-web', 'z-buscar', 'z-tor', 'z-que']],
-    ['Radiografía e informes', ['z-radio', 'z-pdf', 'res-pdf', 'res-video']],
-    ['Mis datos', ['datos', 'd-corte', 'borrar']],
-    ['Órbita', ['p-sub', 'p-fibra', 'p-puntos', 'p-sat', 'p-pais', 'p-directo']],
-    ['Comunicaciones', ['c-crear', 'c-codigo', 'c-que']],
-    ['GUARDIANA', ['que-es-guardiana', 'privacidad', 'seguridad', 'vpn', 'precio', 'cuenta', 'idioma', 'contacto']],
+    ['Navegar y buscar', 'buscar', ['z-web', 'z-buscar', 'z-tor', 'z-que']],
+    ['Radiografía e informes', 'informe', ['z-radio', 'z-pdf', 'res-pdf', 'res-video']],
+    ['Mis datos', 'datos', ['datos', 'd-corte', 'borrar']],
+    ['Comunicaciones', 'chat', ['c-crear', 'c-codigo', 'c-que']],
+    ['Órbita', 'planeta', ['p-sub', 'p-fibra', 'p-puntos', 'p-sat', 'p-pais', 'p-directo', 'p-que']],
+    ['GUARDIANA', 'escudo', ['que-es-guardiana', 'privacidad', 'seguridad', 'vpn', 'precio', 'cuenta', 'idioma']],
   ];
+  const ICONOS = {
+    buscar: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4L20 20"/>',
+    informe: '<path d="M6.5 3h8l4 4v14h-12z"/><path d="M14.5 3v4h4M9.5 12h6M9.5 16h6"/>',
+    datos: '<circle cx="12" cy="8.5" r="3.8"/><path d="M4.8 20c1.3-3.6 4-5.3 7.2-5.3s5.9 1.7 7.2 5.3"/>',
+    chat: '<path d="M4 6.5A1.5 1.5 0 0 1 5.5 5h13A1.5 1.5 0 0 1 20 6.5v8a1.5 1.5 0 0 1-1.5 1.5H11l-4.5 3.5V16h-1A1.5 1.5 0 0 1 4 14.5z"/><path d="M10 10.5h4"/>',
+    planeta: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.5 3.5 5.3 3.5 8.5s-1.1 6-3.5 8.5c-2.4-2.5-3.5-5.3-3.5-8.5s1.1-6 3.5-8.5z"/>',
+    escudo: '<path d="M12 3l7 2.8v5.6c0 4.3-2.9 7.9-7 9.6-4.1-1.7-7-5.3-7-9.6V5.8z"/><path d="M9 12l2.1 2.1L15.2 10"/>',
+  };
   const CAPA_TXT = { 'p-sub': 'los cables submarinos', 'p-fibra': 'los cables terrestres', 'p-puntos': 'los centros de datos', 'p-sat': 'los satélites' };
   const nombrePais = (k) => { try { return new Intl.DisplayNames([loc()], { type: 'region' }).of(k); } catch (_) { return k; } };
   const corta = (s) => (s.length > 40 ? s.slice(0, 38) + '…' : s);
@@ -314,8 +324,8 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       + '<button type="button" class="nuc-op" data-n="zero"><i>ZERO</i><b>Navegar con NÚCLEO</b><small>Entra en cualquier web y mira quién intenta llevarse tus datos.</small></button>'
       + '<button type="button" class="nuc-op" data-n="planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.</small></button>'
       + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Chatea y envía archivos encriptados de PC a PC.</small></button>'
-      // dueño, 10:00: «añade uno más: pedir las cosas»; ronda 54 (ChatGPT y Astra): «Pídeselo a NÚCLEO»
-      + '<button type="button" class="nuc-op nuc-op-n" data-n="nucleo"><i translate="no">NÚCLEO</i><b>Pídeselo a NÚCLEO</b><small>Pídele que te lleve al navegador ZERO, que consulte tus datos o que prepare resúmenes en PDF o en vídeo.</small></button>'
+      // dueño, 10:00: «añade uno más: pedir las cosas»; ronda 54: «Pídeselo a NÚCLEO»; dueño, 14:08: «Habla con NÚCLEO»
+      + '<button type="button" class="nuc-op nuc-op-n" data-n="nucleo"><i translate="no">NÚCLEO</i><b>Habla con NÚCLEO</b><small>Pídele que te lleve al navegador ZERO, que consulte tus datos o que prepare resúmenes en PDF o en vídeo.</small></button>'
       + '</div>'
       // dueño, 12:23: la página del planeta es la portada de la web y su «Empezar» trae aquí; fuera «¿Qué es GUARDIANA?».
       // Arriba a la izquierda, «Volver» a esa portada (dueño, 10:53: «tienes que poder ir y volver»).
@@ -358,37 +368,49 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     s.className = 'nuc-sala vacia'; s.id = 'nuc-sala'; s.hidden = true; s.setAttribute('aria-label', 'NÚCLEO');
     // dueño, 11:00–11:01: fuera «Pídeselo a NÚCLEO» y el «NÚCLEO» de arriba; NÚCLEO no abre webs, te lleva al navegador ZERO
     s.innerHTML = '<header class="ns-cab"><button type="button" class="ns-boton" id="ns-inicio"><span aria-hidden="true">←</span> Inicio</button>'
-      + '<button type="button" class="ns-boton ns-ayuda" id="ns-ayuda" aria-expanded="false" aria-controls="ns-panel">¿Qué puedo pedir?</button></header>'
-      + '<div class="ns-panel" id="ns-panel" role="region" aria-label="Qué puedo pedir" hidden></div>'
+      // dueño, 14:12: «¿Qué puedo pedir?» «muy desordenado; más profesional»: ocupa el sitio de la conversación, con seis
+      // tarjetas iguales en dos columnas (emparejadas por tamaño: 4 y 4, 3 y 3, 7 y 7) y una fila por opción; abierto, el botón dice «Cerrar»
+      + '<button type="button" class="ns-boton ns-ayuda" id="ns-ayuda" aria-expanded="false" aria-controls="ns-panel"><span class="na-abre">¿Qué puedo pedir?</span>'
+      + '<span class="na-cierra"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Cerrar</span></button></header>'
+      + '<div class="ns-panel" id="ns-panel" role="region" aria-labelledby="np-t" hidden><div class="np-in"><div class="np-cab"><h2 id="np-t">¿Qué puedo pedir?</h2>'
+      + '<p>Elige una opción o escríbelo abajo, con tus palabras.</p></div><div class="np-grid"></div>'
+      + '<p class="ns-contacto"><a href="mailto:hola@guardianagroup.com" translate="no">hola@guardianagroup.com</a> · <span>Responde una persona.</span></p></div></div>'
       + '<div class="ns-cuerpo" id="ns-cuerpo"><div class="ns-col">'
       + '<div class="ns-hola"><canvas class="ns-red" aria-hidden="true"></canvas>'
       + '<p>Hola, soy NÚCLEO. Puedo llevarte al navegador ZERO, a Órbita o a Comunicaciones, enseñarte qué se ha cortado y preparar resúmenes en PDF o en vídeo. ¿Qué deseas hacer?</p></div>'
       + '<div class="ns-charla" id="ns-charla" aria-live="polite"></div></div></div>'
       + '<div class="ns-pie"><div class="ns-rapidas" id="ns-rapidas" role="group" aria-label="Acciones rápidas"></div>'
-      + '<form class="ns-form" id="ns-form" autocomplete="off"><input id="ns-q" type="text" maxlength="200" placeholder="Escribe qué quieres hacer…" aria-label="Pídeselo a NÚCLEO" enterkeyhint="send"><button type="submit">Enviar</button></form>'
+      + '<form class="ns-form" id="ns-form" autocomplete="off"><input id="ns-q" type="text" maxlength="200" placeholder="Escribe qué quieres hacer…" aria-label="Habla con NÚCLEO" enterkeyhint="send"><button type="submit">Enviar</button></form>'
       + '<p class="ns-nota">NÚCLEO entiende peticiones concretas y no guarda lo que le pides.</p></div>';
     document.body.append(s);
     const rap = s.querySelector('#ns-rapidas');
     for (const [id, l] of RAPIDAS) { const b = document.createElement('button'); b.type = 'button'; b.className = 'nuc-chip'; b.textContent = l; b.addEventListener('click', () => elige(id, b.textContent)); rap.append(b); }
-    const p = s.querySelector('#ns-panel');
-    for (const [g, ids] of GRUPOS) {
-      const sec = document.createElement('div'); sec.className = 'ns-grupo';
-      const h = document.createElement('h3'); h.textContent = g; sec.append(h);
-      const fila = document.createElement('div'); fila.className = 'ns-fila';
-      for (const id of ids) { const b = document.createElement('button'); b.type = 'button'; b.className = 'nuc-chip'; b.textContent = ETQ[id] || id; b.addEventListener('click', () => { panel(false); elige(id, b.textContent); }); fila.append(b); }
-      sec.append(fila); p.append(sec);
+    const p = s.querySelector('#ns-panel'), rejilla = p.querySelector('.np-grid');
+    for (const [g, ico, ids] of GRUPOS) {
+      const sec = document.createElement('section'); sec.className = 'np-grupo';
+      const h = document.createElement('h3'); h.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + ICONOS[ico] + '</svg>';
+      const ht = document.createElement('span'); ht.textContent = g; h.append(ht); sec.append(h);
+      const ul = document.createElement('ul'); ul.className = 'np-lista';
+      for (const id of ids) {
+        const li = document.createElement('li'), b = document.createElement('button'), t = document.createElement('span');
+        b.type = 'button'; b.className = 'np-op'; t.textContent = ETQ[id] || id; b.append(t);
+        b.addEventListener('click', () => { panel(false); elige(id, t.textContent); }); li.append(b); ul.append(li);
+      }
+      sec.append(ul); rejilla.append(sec);
     }
-    const cont = document.createElement('p'); cont.className = 'ns-contacto'; cont.innerHTML = '<a href="mailto:hola@guardianagroup.com" translate="no">hola@guardianagroup.com</a> · <span>Responde una persona.</span>'; p.append(cont);
     s.querySelector('#ns-inicio').addEventListener('click', () => { cierraSala(); muestraInicio(true); });
     s.querySelector('#ns-ayuda').addEventListener('click', () => panel(p.hidden));
-    s.querySelector('#ns-form').addEventListener('submit', (e) => { e.preventDefault(); const i = s.querySelector('#ns-q'); const f = i.value; i.value = ''; escribe(f); });
+    p.addEventListener('scroll', () => bordes(p), { passive: true });
+    s.querySelector('#ns-form').addEventListener('submit', (e) => { e.preventDefault(); const i = s.querySelector('#ns-q'); const f = i.value; i.value = ''; panel(false); escribe(f); });
     s.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!p.hidden) panel(false); else { cierraSala(); muestraInicio(true); } } });
     return s;
   }
+  // al desplazar el panel, sus bordes se funden: arriba si hay algo encima; abajo si queda más por ver
+  function bordes(p) { p.classList.toggle('np-sube', p.scrollTop > 2); p.classList.toggle('np-baja', p.scrollTop + p.clientHeight < p.scrollHeight - 2); }
   function panel(abre) {
     if (!sala) return; const p = sala.querySelector('#ns-panel'), b = sala.querySelector('#ns-ayuda');
-    p.hidden = !abre; b.setAttribute('aria-expanded', String(!!abre));
-    if (abre) { const x = p.querySelector('button'); if (x) x.focus({ preventScroll: true }); }
+    p.hidden = !abre; b.setAttribute('aria-expanded', String(!!abre)); sala.classList.toggle('con-panel', !!abre);
+    if (abre) { p.scrollTop = 0; bordes(p); const x = p.querySelector('.np-op'); if (x) x.focus({ preventScroll: true }); }
   }
   function abreSala() {
     if (!sala) sala = construyeSala();
