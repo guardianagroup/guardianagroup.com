@@ -1911,7 +1911,8 @@
   "Ahora": "Nu",
   "Esperando a que abras una web": "Wachten tot je een site opent",
   "Mirando todo lo que pasa en esta web": "Volgt alles wat er op deze site gebeurt",
-  "Pregúntale por tus datos en esta web": "Vraag naar je gegevens op deze site"
+  "Pregúntale por tus datos en esta web": "Vraag naar je gegevens op deze site",
+  "Cables terrestres": "Landkabels"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

@@ -1911,7 +1911,8 @@
   "Ahora": "Şimdi",
   "Esperando a que abras una web": "Bir site açman bekleniyor",
   "Mirando todo lo que pasa en esta web": "Bu sitede olan her şeyi izliyor",
-  "Pregúntale por tus datos en esta web": "Bu sitedeki verilerin hakkında ona sor"
+  "Pregúntale por tus datos en esta web": "Bu sitedeki verilerin hakkında ona sor",
+  "Cables terrestres": "Kara kabloları"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

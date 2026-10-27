@@ -1910,7 +1910,8 @@
   "Ahora": "Teraz",
   "Esperando a que abras una web": "Čaká sa, kým otvoríš web",
   "Mirando todo lo que pasa en esta web": "Sleduje všetko, čo sa deje na tomto webe",
-  "Pregúntale por tus datos en esta web": "Opýtaj sa ho na svoje údaje na tomto webe"
+  "Pregúntale por tus datos en esta web": "Opýtaj sa ho na svoje údaje na tomto webe",
+  "Cables terrestres": "Pozemné káble"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

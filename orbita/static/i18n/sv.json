@@ -1911,7 +1911,8 @@
   "Ahora": "Nu",
   "Esperando a que abras una web": "Väntar på att du öppnar en sida",
   "Mirando todo lo que pasa en esta web": "Håller koll på allt som händer på den här sidan",
-  "Pregúntale por tus datos en esta web": "Fråga om dina data på den här sidan"
+  "Pregúntale por tus datos en esta web": "Fråga om dina data på den här sidan",
+  "Cables terrestres": "Kablar på land"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

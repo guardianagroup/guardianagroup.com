@@ -111,7 +111,7 @@
   // ---------- la conversación guiada ----------
   const AYUDA = {
     zero: 'ZERO es el navegador de GUARDIANA: la web se abre en una burbuja aislada en un servidor de GUARDIANA y a tu equipo solo llegan imágenes. A la derecha, la Radiografía te enseña quién intenta conectarse, las subastas de tus datos y lo que puedes cortar.',
-    orbita: 'Órbita es el planeta de GUARDIANA: cables submarinos, cables por tierra, centros de datos y satélites, y cada corte en directo.',
+    orbita: 'Órbita es el planeta de GUARDIANA: cables submarinos, cables terrestres, centros de datos y satélites, y cada corte en directo.',
     com: 'Comunicaciones es el chat y el envío de archivos de GUARDIANA, cifrados de extremo a extremo entre dos equipos, con un código de 9 cifras. Yo no puedo leer tus mensajes ni tus archivos.',
     guardiana: 'GUARDIANA te enseña y te deja cortar lo que la web hace con tus datos: navegar en una burbuja con ZERO, ver la red del planeta en Órbita y hablar cifrado con Comunicaciones.',
     nucleo: 'Soy NÚCLEO, el asistente de GUARDIANA. Te llevo a cada parte y te explico lo que pasa con tus datos. Solo hablo de GUARDIANA, de la web y de tus datos.',
@@ -119,7 +119,7 @@
   const ETIQUETA = {
     zero: 'Navegar con NÚCLEO', planeta: 'Explorar el planeta', com: 'Comunicaciones', datos: 'Mis datos de hoy', guardiana: '¿Qué es GUARDIANA?',
     'z-web': 'Abrir una web', 'z-buscar': 'Buscar en internet', 'z-radio': 'Ver quién me sigue', 'z-pdf': 'Hacer el PDF', 'z-que': '¿Cómo funciona ZERO?',
-    'p-sub': 'Cables submarinos', 'p-fibra': 'Cables por tierra', 'p-puntos': 'Centros de datos', 'p-sat': 'Satélites', 'p-pais': 'Ir a un país', 'p-directo': 'Cortes en directo', 'p-que': '¿Qué es Órbita?',
+    'p-sub': 'Cables submarinos', 'p-fibra': 'Cables terrestres', 'p-puntos': 'Centros de datos', 'p-sat': 'Satélites', 'p-pais': 'Ir a un país', 'p-directo': 'Cortes en directo', 'p-que': '¿Qué es Órbita?',
     'c-crear': 'Crear una invitación', 'c-codigo': 'Tengo un código', 'c-que': '¿Cómo funciona?',
     'd-zero': 'Ver el detalle en ZERO', 'd-corte': '¿Qué es un corte?',
   };
@@ -133,7 +133,7 @@
     'z-que': { d: () => T(AYUDA.zero), o: ['z-web', 'z-radio', 'z-pdf'] },
     planeta: { x: [['Qué es', 'Un mapa de la Tierra con los caminos por los que viajan tus datos.'], ['Qué ves', 'Cables submarinos, cables terrestres, centros de datos y satélites.'], ['En directo', 'Cada vez que GUARDIANA corta algo, lo ves aparecer en el planeta.']], d: () => T('¿Qué quieres ver?'), o: ['p-sub', 'p-fibra', 'p-puntos', 'p-sat', 'p-pais', 'p-directo'] },
     'p-sub': { d: () => pon('Te llevo al planeta y enciendo {1}.', T('los cables submarinos')), a: () => alPlaneta('sub') },
-    'p-fibra': { d: () => pon('Te llevo al planeta y enciendo {1}.', T('los cables por tierra')), a: () => alPlaneta('fibra') },
+    'p-fibra': { d: () => pon('Te llevo al planeta y enciendo {1}.', T('los cables terrestres')), a: () => alPlaneta('fibra') },
     'p-puntos': { d: () => pon('Te llevo al planeta y enciendo {1}.', T('los centros de datos')), a: () => alPlaneta('puntos') },
     'p-sat': { d: () => pon('Te llevo al planeta y enciendo {1}.', T('los satélites')), a: () => alPlaneta('sat') },
     'p-pais': { d: () => T('¿Qué país? Escríbelo y te llevo.'), pide: 'pais' },
@@ -190,7 +190,7 @@
     if (sCom) return { nodo: 'com' };
     if (sZero) return { nodo: /quien me sigue|rastre|radiograf|tracker/.test(t) ? 'z-radio' : 'zero' };
     if (sPlan) {
-      if (capa && pais) return { texto: pon('Te llevo al planeta: {1} en {2}.', T({ 'p-sub': 'los cables submarinos', 'p-fibra': 'los cables por tierra', 'p-puntos': 'los centros de datos', 'p-sat': 'los satélites' }[capa]), nombrePais(pais)), a: () => alPlaneta(capa.slice(2), pais) };
+      if (capa && pais) return { texto: pon('Te llevo al planeta: {1} en {2}.', T({ 'p-sub': 'los cables submarinos', 'p-fibra': 'los cables terrestres', 'p-puntos': 'los centros de datos', 'p-sat': 'los satélites' }[capa]), nombrePais(pais)), a: () => alPlaneta(capa.slice(2), pais) };
       if (capa) return { nodo: capa };
       if (pais) return { texto: pon('Te llevo al planeta, a {1}.', nombrePais(pais)), a: () => alPlaneta(null, pais) };
       return { nodo: 'planeta' };
@@ -205,7 +205,7 @@
     d.className = 'nuc-ini'; d.id = 'nuc-ini'; d.setAttribute('aria-label', 'NÚCLEO, la entrada de GUARDIANA');
     d.innerHTML = '<canvas class="nuc-lienzo" aria-hidden="true"></canvas>'
       + '<p class="nuc-k nuc-paso" translate="no">NÚCLEO</p>'
-      + '<h1 class="nuc-paso" id="nuc-saludo">Control total de tus datos</h1>' // dueño, 09:42: «es mejor decir control total de tus datos»
+      + '<h1 class="nuc-paso" id="nuc-saludo">Toma el control de tus datos</h1>' // dueño, 09:42 y 09:49: «Toma el control de tus datos»
       + '<p class="nuc-sub nuc-paso" id="nuc-sub"><b>¿Qué deseas hacer?</b></p>'
       + '<div class="nuc-charla" id="nuc-charla" aria-live="polite"></div>'
       + '<div class="nuc-ops nuc-paso" id="nuc-ops" role="group" aria-label="Qué deseas hacer">'

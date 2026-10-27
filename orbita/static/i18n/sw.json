@@ -1910,7 +1910,8 @@
   "Ahora": "Sasa",
   "Esperando a que abras una web": "Inasubiri ufungue tovuti",
   "Mirando todo lo que pasa en esta web": "Inafuatilia kila kinachotokea kwenye tovuti hii",
-  "Pregúntale por tus datos en esta web": "Muulize kuhusu data zako kwenye tovuti hii"
+  "Pregúntale por tus datos en esta web": "Muulize kuhusu data zako kwenye tovuti hii",
+  "Cables terrestres": "Nyaya za nchi kavu"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

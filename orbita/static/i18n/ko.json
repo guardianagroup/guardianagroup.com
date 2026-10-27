@@ -1911,7 +1911,8 @@
   "Ahora": "현재",
   "Esperando a que abras una web": "사이트를 열 때까지 기다리는 중",
   "Mirando todo lo que pasa en esta web": "이 사이트에서 일어나는 모든 것을 지켜보는 중",
-  "Pregúntale por tus datos en esta web": "이 사이트의 내 데이터에 대해 물어보세요"
+  "Pregúntale por tus datos en esta web": "이 사이트의 내 데이터에 대해 물어보세요",
+  "Cables terrestres": "육상 케이블"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

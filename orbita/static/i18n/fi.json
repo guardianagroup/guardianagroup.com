@@ -1910,7 +1910,8 @@
   "Ahora": "Nyt",
   "Esperando a que abras una web": "Odotetaan, että avaat sivun",
   "Mirando todo lo que pasa en esta web": "Seuraa kaikkea, mitä tällä sivulla tapahtuu",
-  "Pregúntale por tus datos en esta web": "Kysy siltä tiedoistasi tällä sivulla"
+  "Pregúntale por tus datos en esta web": "Kysy siltä tiedoistasi tällä sivulla",
+  "Cables terrestres": "Maakaapelit"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

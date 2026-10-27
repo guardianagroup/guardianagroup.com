@@ -1910,7 +1910,8 @@
   "Ahora": "Núna",
   "Esperando a que abras una web": "Bíð eftir að þú opnir síðu",
   "Mirando todo lo que pasa en esta web": "Fylgist með öllu sem gerist á þessari síðu",
-  "Pregúntale por tus datos en esta web": "Spurðu um gögnin þín á þessari síðu"
+  "Pregúntale por tus datos en esta web": "Spurðu um gögnin þín á þessari síðu",
+  "Cables terrestres": "Landstrengir"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

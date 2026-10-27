@@ -1911,7 +1911,8 @@
   "Ahora": "此刻",
   "Esperando a que abras una web": "等待你打开一个网站",
   "Mirando todo lo que pasa en esta web": "正在关注此网站上发生的一切",
-  "Pregúntale por tus datos en esta web": "询问你在此网站上的数据"
+  "Pregúntale por tus datos en esta web": "询问你在此网站上的数据",
+  "Cables terrestres": "陆地线缆"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

@@ -1910,7 +1910,8 @@
   "Ahora": "இப்போது",
   "Esperando a que abras una web": "நீங்கள் ஒரு தளத்தைத் திறக்கக் காத்திருக்கிறது",
   "Mirando todo lo que pasa en esta web": "இந்தத் தளத்தில் நடப்பது அனைத்தையும் கவனிக்கிறது",
-  "Pregúntale por tus datos en esta web": "இந்தத் தளத்தில் உங்கள் தரவு பற்றிக் கேளுங்கள்"
+  "Pregúntale por tus datos en esta web": "இந்தத் தளத்தில் உங்கள் தரவு பற்றிக் கேளுங்கள்",
+  "Cables terrestres": "நிலவழிக் கேபிள்கள்"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

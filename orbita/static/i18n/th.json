@@ -1910,7 +1910,8 @@
   "Ahora": "ขณะนี้",
   "Esperando a que abras una web": "รอให้คุณเปิดเว็บ",
   "Mirando todo lo que pasa en esta web": "กำลังเฝ้าดูทุกสิ่งที่เกิดขึ้นในเว็บนี้",
-  "Pregúntale por tus datos en esta web": "ถามเกี่ยวกับข้อมูลของคุณในเว็บนี้"
+  "Pregúntale por tus datos en esta web": "ถามเกี่ยวกับข้อมูลของคุณในเว็บนี้",
+  "Cables terrestres": "สายเคเบิลภาคพื้นดิน"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

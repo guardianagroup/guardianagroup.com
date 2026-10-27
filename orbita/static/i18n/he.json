@@ -1910,7 +1910,8 @@
   "Ahora": "עכשיו",
   "Esperando a que abras una web": "ממתין שתפתח אתר",
   "Mirando todo lo que pasa en esta web": "צופה בכל מה שקורה באתר הזה",
-  "Pregúntale por tus datos en esta web": "שאל אותו על הנתונים שלך באתר הזה"
+  "Pregúntale por tus datos en esta web": "שאל אותו על הנתונים שלך באתר הזה",
+  "Cables terrestres": "כבלים יבשתיים"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

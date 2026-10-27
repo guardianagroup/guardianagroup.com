@@ -1910,7 +1910,8 @@
   "Ahora": "ఇప్పుడు",
   "Esperando a que abras una web": "మీరు ఒక సైట్ తెరిచే వరకు వేచి ఉంది",
   "Mirando todo lo que pasa en esta web": "ఈ సైట్‌లో జరిగే ప్రతిదాన్నీ గమనిస్తోంది",
-  "Pregúntale por tus datos en esta web": "ఈ సైట్‌లో మీ డేటా గురించి అడగండి"
+  "Pregúntale por tus datos en esta web": "ఈ సైట్‌లో మీ డేటా గురించి అడగండి",
+  "Cables terrestres": "భూమార్గ కేబుళ్లు"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

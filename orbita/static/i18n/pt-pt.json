@@ -1911,7 +1911,8 @@
   "Ahora": "Agora",
   "Esperando a que abras una web": "À espera de que abras um site",
   "Mirando todo lo que pasa en esta web": "A observar tudo o que se passa neste site",
-  "Pregúntale por tus datos en esta web": "Pergunta-lhe sobre os teus dados neste site"
+  "Pregúntale por tus datos en esta web": "Pergunta-lhe sobre os teus dados neste site",
+  "Cables terrestres": "Cabos terrestres"
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

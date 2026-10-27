@@ -1910,7 +1910,8 @@
   "Ahora": "اکنون",
   "Esperando a que abras una web": "در انتظار اینکه سایتی باز کنید",
   "Mirando todo lo que pasa en esta web": "همهٔ آنچه در این سایت رخ می‌دهد را زیر نظر دارد",
-  "Pregúntale por tus datos en esta web": "دربارهٔ داده‌هایتان در این سایت از او بپرسید"
+  "Pregúntale por tus datos en esta web": "دربارهٔ داده‌هایتان در این سایت از او بپرسید",
+  "Cables terrestres": "کابل‌های زمینی"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

@@ -1910,7 +1910,8 @@
   "Ahora": "Most",
   "Esperando a que abras una web": "Várakozás, hogy megnyiss egy oldalt",
   "Mirando todo lo que pasa en esta web": "Figyel mindent, ami ezen az oldalon történik",
-  "Pregúntale por tus datos en esta web": "Kérdezd az adataidról ezen az oldalon"
+  "Pregúntale por tus datos en esta web": "Kérdezd az adataidról ezen az oldalon",
+  "Cables terrestres": "Szárazföldi kábelek"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

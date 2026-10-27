@@ -1910,7 +1910,8 @@
   "Ahora": "अभी",
   "Esperando a que abras una web": "आपके कोई साइट खोलने का इंतज़ार है",
   "Mirando todo lo que pasa en esta web": "इस साइट पर होने वाली हर चीज़ पर नज़र रख रहा है",
-  "Pregúntale por tus datos en esta web": "इस साइट पर अपने डेटा के बारे में पूछें"
+  "Pregúntale por tus datos en esta web": "इस साइट पर अपने डेटा के बारे में पूछें",
+  "Cables terrestres": "ज़मीनी केबल"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",
