@@ -1,0 +1,26 @@
+Ronda 59 · GUARDIANA · Prueba gratis de 3 días y cobro: dónde va en la web, cómo saber quién ha pagado y cómo evitar trampas con VPN (27 Oct 2026). Máximo razonamiento.
+
+Eres parte de la agencia de GUARDIANA. Responde en español, concreto, en bloques cortos y numerados. No inventes cifras: si das un dato (conversión, ley, función de Dodo), pon la fuente oficial; si no lo sabes, dilo.
+
+**El producto hoy.** GUARDIANA (guardianagroup.com) es una suite de privacidad para personas no técnicas, en 42 idiomas (hoy abiertos español e inglés), de una empresa colombiana (GUARDIANA GROUP S.A.S.; hasta tener NIT no se cobra nada). La web es estática (GitHub Pages) y hoy no hay cuentas: todo se usa gratis y sin registro.
+- Portada (el planeta) → botón **«Empezar»** → **NÚCLEO**: la entrada. Asistente por reglas (sin IA generativa) que corre en el navegador. Cuatro tarjetas: **navegador ZERO**, **Órbita**, **Comunicaciones** y **«Habla con NÚCLEO»**; arriba a la derecha, **«Multas»** (página con las multas a grandes empresas por usar datos).
+- **ZERO**: navegador en la nube. Cada sesión es un Chromium aislado en un servidor nuestro y la persona recibe la imagen; corta rastreadores y enseña la **Radiografía** (quién intenta llevarse tus datos, las subastas de anuncios) y resúmenes en PDF o vídeo. **Es lo único que nos cuesta dinero por uso** (CPU y memoria por sesión).
+- **Órbita**: el planeta de internet (cables, centros de datos, satélites); estático. **Comunicaciones**: chat y archivos encriptados de un equipo a otro con un código de 9 cifras (un relé nuestro ve la IP y el volumen, no el contenido). **Multas** y **NÚCLEO**: estáticos.
+- **Cobro ya preparado con Dodo Payments** (merchant of record: cobra, factura e impuestos por país; checkout alojado, suscripciones, portal del cliente, webhooks, claves de licencia). Productos: «Plus» mensual 4,99 US$, anual 47,90 US$, «Fundador» 49 US$ pago único; impuestos incluidos; precio por país. Aún sin webhooks ni periodo de prueba configurados.
+- Una ronda anterior propuso: un servidor de cuentas pequeño (api.guardianagroup.com) con alta por correo + código de 6 cifras (sin contraseñas), checkout alojado de Dodo, webhooks firmados que anotan «vigente hasta», y la pasarela de ZERO que comprueba ese derecho al abrir cada sesión; prueba de 7 días sin tarjeta.
+
+**El pedido del dueño (hoy, 14:33–14:34):** «Al darle a Empezar ya aparece NÚCLEO y uno puede trabajar. ¿Cómo hacemos para regalar, por ejemplo, 3 días gratis y luego empezar a cobrar? ¿Cuáles serían los sitios concretos de la página web? ¿Cómo vamos a saber quién ha pagado y quién no después de los 3 días? ¿La gente que use VPN puede engañarnos? ¿Cómo lo solucionamos?»
+
+LO QUE TE PIDO:
+
+A) ESTRATEGIA. Qué queda gratis para siempre y qué es de pago (pensando en que solo ZERO nos cuesta por uso). Prueba de 3 días frente a 7 para este producto: ventajas e inconvenientes. Cuándo empieza a contar (¿al entrar en NÚCLEO o al abrir ZERO por primera vez?). ¿Con tarjeta desde el principio o sin tarjeta? Qué pasa al terminar (cobro automático o ZERO se pausa hasta que pague). Sin trucos oscuros: avisos claros y cancelar fácil.
+
+B) LOS SITIOS CONCRETOS DE LA WEB. Una lista, sitio por sitio, de dónde aparece la prueba o el pago y qué dice (frase corta en español), y dónde NO debe aparecer. Al menos: la portada y «Empezar»; la portada de NÚCLEO y sus cuatro tarjetas; la entrada a ZERO; dentro de ZERO (¿contador de días?); la pantalla de fin de prueba; NÚCLEO cuando preguntan el precio; Comunicaciones; Multas; una página de precios; el checkout; la página de «gracias»; dónde se gestiona o cancela la suscripción; términos y privacidad; avisos antes de que acabe la prueba (¿por correo?, ¿en pantalla?).
+
+C) ¿CÓMO SABEMOS QUIÉN HA PAGADO? El mecanismo completo y mínimo: cómo se identifica la persona sin contraseñas (correo + código, passkey, la clave de licencia de Dodo…) y qué pasa si cambia de navegador o de equipo; estados (en prueba, pagando, impago, cancelada, caducada) y quién los decide (webhooks de Dodo); cuándo comprueba ZERO el derecho (al abrir sesión, cada cierto tiempo); qué datos guardamos como mínimo y cuáles nunca.
+
+D) VPN Y TRAMPAS. ¿Puede alguien con VPN (o borrando el navegador, o con correos nuevos) repetir la prueba gratis sin fin? Qué señales sirven de verdad y cuáles no (IP, VPN, huella del navegador, correo verificado, correos desechables, alias con «+», tarjeta, la prevención de pruebas repetidas de Dodo, límites por red, prueba de trabajo en lugar de CAPTCHA…). Ojo: muchos de nuestros clientes usarán VPN por privacidad; bloquear las VPN iría contra el producto. Cómo hacer que la trampa no compense (recursos de la prueba, una sesión a la vez, sin ruta Tor en la prueba…). Qué abuso residual hay que aceptar.
+
+E) LEYES (solo el mapa, sin asesoría legal). Para una prueba gratis que pasa a suscripción: qué hay que mirar en la UE (desistimiento de 14 días y servicios digitales que empiezan ya), EE. UU. (FTC/ROSCA y California), Brasil y Colombia (derecho de retracto), con fuente oficial de cada punto.
+
+F) VEREDICTO. El recorrido en diez pasos desde «Empezar» hasta cliente que paga; qué construimos primero (mínimo viable) y qué después; y qué tiene que decidir el dueño.
