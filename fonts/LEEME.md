@@ -19,3 +19,5 @@ fuentes variables solo se ha acotado el grosor a lo que usa la web (Inter 400–
 400–500). No se han modificado los dibujos de las letras ni se ha cambiado el nombre de ninguna
 familia. Inter, JetBrains Mono e Instrument Serif salen del repositorio público de Google Fonts
 (github.com/google/fonts, carpeta `ofl/`), el 23 de octubre de 2026.
+
+**27 Oct 2026:** se añade IBM Plex Sans en grosor fino (300), `IBMPlexSans-300-latin.woff` y `IBMPlexSans-300-latin-ext.woff`, para los titulares de la base de diseño de NÚCLEO (`/guardiana.css`). Sale de la versión variable de IBM Plex Sans del repositorio público de Google Fonts (github.com/google/fonts, `ofl/ibmplexsans`, misma licencia OFL de IBM), fijada en grosor 300 y anchura normal, recortada a latín y latín ampliado y guardada en WOFF. No se han modificado los dibujos ni el nombre de la familia.

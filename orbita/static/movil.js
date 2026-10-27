@@ -154,7 +154,7 @@
   let verIdiomas = false;
   function pintaMas(h) {
     h.cuerpo.textContent = '';
-    const conocer = document.createElement('a'); conocer.className = 'm2-fila'; conocer.href = ($('conocer') && $('conocer').getAttribute('href')) || '/conocer.html';
+    const conocer = document.createElement('a'); conocer.className = 'm2-fila'; conocer.href = ($('conocer') && $('conocer').getAttribute('href')) || '/';
     conocer.innerHTML = '<span class="t">' + texto('Conocer GUARDIANA') + '</span><span class="fl" aria-hidden="true">›</span>';
     h.cuerpo.appendChild(conocer);
     const langs = [...document.querySelectorAll('header .idiomas .idioma-menu button[data-l], header .idiomas > button[data-l]')];
