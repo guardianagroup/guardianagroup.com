@@ -1151,6 +1151,8 @@
     'Pulsa para volver a cortar todo este grupo': ['Press to cut this whole group again', 'Toque para voltar a cortar todo este grupo'],
     'Pulsa para cortar todo este grupo': ['Press to cut this whole group', 'Toque para cortar todo este grupo'],
     'Pulsa para cortar esta empresa': ['Press to cut this company', 'Toque para cortar esta empresa'],
+    'Radiografía': ['X-ray', 'Radiografia'],
+    'Burbuja en': ['Bubble in', 'Bolha em'],
     'Radiografía de tu navegación': ['X-ray of your browsing', 'Radiografia da sua navegação'],
     'Empresas y qué se llevaron': ['Companies and what they took', 'Empresas e o que levaram'],
     'Cada empresa que contactó la web, de qué país es, para qué, cuántas veces y qué datos recibió o intentó recibir. Dentro de ZERO, esos datos son los de la burbuja, no los de tu equipo.': ['Every company the site contacted, its country, what for, how many times and what data it received or tried to receive. Inside ZERO, that data belongs to the bubble, not to your device.', 'Cada empresa que o site contactou, de que país é, para quê, quantas vezes e que dados recebeu ou tentou receber. Dentro do ZERO, esses dados são os da bolha, não os do seu equipamento.'],
