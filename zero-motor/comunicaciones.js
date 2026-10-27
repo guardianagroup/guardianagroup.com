@@ -24,6 +24,12 @@ const RAFAGA = 32 * 1024 * 1024;          // y de golpe
 const ATASCO = 16 * 1024 * 1024;          // bytes aún por entregar a un destinatario a partir de los cuales se le descarta la trama
 const SIN_VIDA_MS = 95 * 1000;            // la página hace ping cada 25 s
 const TURN_HORAS = 12;
+// Códigos de invitación (dueño, 26 Oct 19:59: «un número en pantalla y la otra persona lo pone»): 9 cifras, 10 minutos,
+// una sola vez. El relé guarda solo un «sobre» (el secreto de la conversación cerrado con una clave derivada del código
+// en el navegador de quien invita): el relé no puede abrirlo sin adivinar el código, y quien lo busca tiene pocos intentos.
+const CODIGO_MIN = 10;
+const BUSQUEDAS_MIN = 6;            // intentos de búsqueda por conexión y minuto
+const MAX_CODIGOS = 50000;
 
 const esHex = (s, n) => typeof s === 'string' && s.length === n && /^[0-9a-f]+$/.test(s);
 
@@ -37,6 +43,7 @@ class Rele {
     this.salas = new Map();       // id hex → Map(yo hex → cliente)
     this.conexiones = new Set();
     this.coturn = { activo: false, escucha: false, visto: null };
+    this.codigos = new Map();     // código → { sobre, sal, de (conexión), creado }
     if (this.turnHost && this.turnSecreto) { this.compruebaCoturn(); const t = setInterval(() => this.compruebaCoturn(), 60 * 1000); if (t.unref) t.unref(); }
     this.vigila = setInterval(() => this.barre(), 30 * 1000);
     if (this.vigila.unref) this.vigila.unref();
@@ -45,7 +52,7 @@ class Rele {
   // Hay llamadas solo si hay secreto y coturn está de verdad activo en este servidor (se comprueba cada minuto)
   get llamadas() { return !!(this.turnHost && this.turnSecreto && this.coturn.activo); }
 
-  estado() { return { salas: this.salas.size, conexiones: this.conexiones.size, llamadas: this.llamadas, coturn: this.coturn }; }
+  estado() { return { salas: this.salas.size, conexiones: this.conexiones.size, codigos: this.codigos.size, llamadas: this.llamadas, coturn: this.coturn }; }
 
   compruebaCoturn() {
     const { execFile } = require('child_process');
@@ -93,6 +100,9 @@ class Rele {
       case 'entra': return this.entra(c, m.sala, m.yo);
       case 'sale': return this.sale(c, m.sala, true);
       case 'ping': c.ws.json({ t: 'pong' }); return;
+      case 'invita': return this.invita(c, m);
+      case 'retira': { const r = this.codigos.get(String(m.codigo)); if (r && r.de === c) this.codigos.delete(String(m.codigo)); return; }
+      case 'busca': return this.busca(c, m);
       default: return;
     }
   }
@@ -116,6 +126,28 @@ class Rele {
     for (const [id, otro] of s) if (id !== yo && otro !== c) { try { otro.ws.json({ t: 'llega', sala, quien: yo }); } catch (_) {} }
   }
 
+  invita(c, m) {
+    const codigo = String(m.codigo || ''), sobre = String(m.sobre || ''), sal = String(m.sal || '');
+    if (!/^\d{9}$/.test(codigo) || !/^[A-Za-z0-9_-]{40,200}$/.test(sobre) || !/^[A-Za-z0-9_-]{16,64}$/.test(sal)) return c.ws.json({ t: 'invita', codigo, ok: false, por: 'formato' });
+    if (this.codigos.has(codigo)) return c.ws.json({ t: 'invita', codigo, ok: false, por: 'repetido' });
+    if (this.codigos.size >= MAX_CODIGOS) return c.ws.json({ t: 'invita', codigo, ok: false, por: 'relé lleno' });
+    let mios = 0; for (const r of this.codigos.values()) if (r.de === c) mios++;
+    if (mios >= 10) return c.ws.json({ t: 'invita', codigo, ok: false, por: 'demasiados códigos' });
+    this.codigos.set(codigo, { sobre, sal, de: c, creado: Date.now() });
+    c.ws.json({ t: 'invita', codigo, ok: true, caduca: Date.now() + CODIGO_MIN * 60 * 1000 });
+  }
+  busca(c, m) {
+    const codigo = String(m.codigo || '').replace(/\D/g, '');
+    const ahora = Date.now();
+    if (!c.busquedas || ahora - c.busquedas.desde > 60 * 1000) c.busquedas = { desde: ahora, n: 0 };
+    if (++c.busquedas.n > BUSQUEDAS_MIN) return c.ws.json({ t: 'busca', ok: false, por: 'demasiados intentos' });
+    const r = this.codigos.get(codigo);
+    if (!r || ahora - r.creado > CODIGO_MIN * 60 * 1000) { if (r) this.codigos.delete(codigo); return c.ws.json({ t: 'busca', ok: false, por: 'no vale' }); }
+    this.codigos.delete(codigo); // una sola vez: quien lo busca primero se lo lleva
+    c.ws.json({ t: 'busca', ok: true, sobre: r.sobre, sal: r.sal });
+    try { r.de.ws.json({ t: 'codigo-usado', codigo }); } catch (_) {}
+  }
+
   otros(sala, yo) { const s = this.salas.get(sala); return s ? [...s.keys()].filter((k) => k !== yo) : []; }
 
   sale(c, sala, avisa) {
@@ -134,6 +166,7 @@ class Rele {
     if (!this.conexiones.has(c)) return;
     this.conexiones.delete(c);
     for (const sala of [...c.salas]) this.sale(c, sala, false);
+    for (const [k, r] of this.codigos) if (r.de === c) this.codigos.delete(k); // sin la conexión de quien invita, el código no sirve
   }
 
   // Cupo de bytes por conexión (cubo de fichas): quien pasa del ritmo ve descartadas sus tramas y recibe «lento»
@@ -174,6 +207,7 @@ class Rele {
 
   barre() {
     const ahora = Date.now();
+    for (const [k, r] of this.codigos) if (ahora - r.creado > CODIGO_MIN * 60 * 1000) this.codigos.delete(k);
     for (const c of this.conexiones) if (ahora - c.vivo > SIN_VIDA_MS) { try { c.ws.cierra(); } catch (_) {} this.despide(c); }
   }
 }

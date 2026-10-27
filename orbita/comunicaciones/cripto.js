@@ -72,6 +72,14 @@
   }
   const nuevaSemilla = () => azar(32);
 
+  // ---- código de invitación (9 cifras): clave derivada con PBKDF2-SHA256 (300.000 vueltas) y sal aleatoria ----
+  async function claveDeCodigo(codigo, sal) {
+    const k = await sub.importKey('raw', te.encode('GUARDIANA código ' + codigo), 'PBKDF2', false, ['deriveBits']);
+    return aes(new Uint8Array(await sub.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt: u8(sal), iterations: 300000 }, k, 256)));
+  }
+  // 9 cifras totalmente aleatorias (crypto.getRandomValues), sin sesgo: solo se usan bytes < 250 (25 por cifra)
+  const nuevoCodigo = () => { let s = ''; while (s.length < 9) { for (const x of azar(16)) { if (x < 250 && s.length < 9) s += String(x % 10); } } return s; };
+
   // ---- sesión ----
   async function efimera() {
     const k = await sub.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, false, ['deriveBits']);
@@ -118,5 +126,5 @@
     };
   }
 
-  raiz.GuardianaCripto = { te, td, u8, cat, b64u, deB64u, hex, deHex, azar, sha256, hkdf, hmac, aes, sella, abre, nonce, creaIdentidad, huella, numeroSeguridad, firma, verifica, deSemilla, nuevaSemilla, efimera, sesion, cadena };
+  raiz.GuardianaCripto = { te, td, u8, cat, b64u, deB64u, hex, deHex, azar, sha256, hkdf, hmac, aes, sella, abre, nonce, creaIdentidad, huella, numeroSeguridad, firma, verifica, deSemilla, nuevaSemilla, efimera, sesion, cadena, claveDeCodigo, nuevoCodigo };
 })(typeof window !== 'undefined' ? window : globalThis);
