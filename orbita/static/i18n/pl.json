@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Wybierz jedną z tych opcji.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Dotknij opcji, a NÚCLEO poprowadzi cię krok po kroku.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO nie zapisuje tego, co wybierasz.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Możesz napisać na hola@guardianagroup.com: czyta to człowiek."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Możesz napisać na hola@guardianagroup.com: czyta to człowiek.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "Nie rozumiem. Spróbuj napisać to inaczej albo dotknij opcji."
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

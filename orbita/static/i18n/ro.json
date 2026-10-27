@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Alege una dintre aceste opțiuni.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Atinge o opțiune și NÚCLEO te ghidează pas cu pas.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO nu păstrează ce alegi.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Poți scrie la hola@guardianagroup.com: îl citește un om."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Poți scrie la hola@guardianagroup.com: îl citește un om.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "Nu am înțeles. Încearcă să scrii altfel sau atinge o opțiune."
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

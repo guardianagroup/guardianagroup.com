@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Hãy chọn một trong các lựa chọn này.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Chạm vào một lựa chọn và NÚCLEO sẽ hướng dẫn bạn từng bước.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO không lưu những gì bạn chọn.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Bạn có thể viết thư đến hola@guardianagroup.com: một người thật sẽ đọc."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Bạn có thể viết thư đến hola@guardianagroup.com: một người thật sẽ đọc.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "Tôi chưa hiểu. Hãy thử viết theo cách khác hoặc chạm vào một lựa chọn."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

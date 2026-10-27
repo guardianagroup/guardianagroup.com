@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "இந்த விருப்பங்களில் ஒன்றைத் தேர்ந்தெடுங்கள்.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "ஒரு விருப்பத்தைத் தட்டுங்கள், NÚCLEO உங்களைப் படிப்படியாக வழிநடத்தும்.",
   "NÚCLEO no guarda lo que eliges.": "நீங்கள் தேர்ந்தெடுப்பதை NÚCLEO சேமிப்பதில்லை.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "நீங்கள் hola@guardianagroup.com-க்கு எழுதலாம்: ஒரு நபர் அதைப் படிப்பார்."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "நீங்கள் hola@guardianagroup.com-க்கு எழுதலாம்: ஒரு நபர் அதைப் படிப்பார்.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "எனக்குப் புரியவில்லை. வேறு விதமாக எழுதிப் பாருங்கள் அல்லது ஒரு விருப்பத்தைத் தட்டுங்கள்."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

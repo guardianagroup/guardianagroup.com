@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "ఈ ఎంపికల్లో ఒకటి ఎంచుకోండి.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "ఒక ఎంపికను నొక్కండి, NÚCLEO మిమ్మల్ని అడుగడుగునా నడిపిస్తుంది.",
   "NÚCLEO no guarda lo que eliges.": "మీరు ఎంచుకునేది NÚCLEO సేవ్ చేయదు.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "మీరు hola@guardianagroup.comకు రాయవచ్చు: ఒక వ్యక్తి దాన్ని చదువుతారు."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "మీరు hola@guardianagroup.comకు రాయవచ్చు: ఒక వ్యక్తి దాన్ని చదువుతారు.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "నాకు అర్థం కాలేదు. వేరే విధంగా రాసి చూడండి లేదా ఒక ఎంపికను నొక్కండి."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

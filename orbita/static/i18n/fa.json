@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "یکی از این گزینه‌ها را انتخاب کنید.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "روی یک گزینه بزنید تا NÚCLEO قدم به قدم راهنمایی‌تان کند.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO آنچه را انتخاب می‌کنید نگه نمی‌دارد.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "می‌توانید به hola@guardianagroup.com بنویسید: یک انسان آن را می‌خواند."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "می‌توانید به hola@guardianagroup.com بنویسید: یک انسان آن را می‌خواند.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "متوجه نشدم. آن را طور دیگری بنویسید یا روی یک گزینه بزنید."
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

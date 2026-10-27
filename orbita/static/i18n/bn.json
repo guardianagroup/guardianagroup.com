@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "এই অপশনগুলোর একটি বেছে নিন।",
   "Toca una opción y NÚCLEO te guía paso a paso.": "একটি অপশনে ট্যাপ করুন, NÚCLEO আপনাকে ধাপে ধাপে পথ দেখাবে।",
   "NÚCLEO no guarda lo que eliges.": "আপনি যা বেছে নেন, NÚCLEO তা সংরক্ষণ করে না।",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "আপনি hola@guardianagroup.com-এ লিখতে পারেন: একজন মানুষ এটি পড়েন।"
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "আপনি hola@guardianagroup.com-এ লিখতে পারেন: একজন মানুষ এটি পড়েন।",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "আমি বুঝতে পারিনি। অন্যভাবে লিখে দেখুন বা একটি অপশনে ট্যাপ করুন।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

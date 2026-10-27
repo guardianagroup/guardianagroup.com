@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Pilih salah satu dari opsi ini.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Ketuk satu pilihan dan NÚCLEO memandu Anda langkah demi langkah.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO tidak menyimpan apa yang Anda pilih.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Anda bisa menulis ke hola@guardianagroup.com: seorang manusia membacanya."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Anda bisa menulis ke hola@guardianagroup.com: seorang manusia membacanya.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "Saya tidak mengerti. Coba tulis dengan cara lain atau ketuk satu pilihan."
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

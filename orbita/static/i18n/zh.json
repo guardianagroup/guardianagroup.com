@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "请从这些选项中选一个。",
   "Toca una opción y NÚCLEO te guía paso a paso.": "点一个选项，NÚCLEO 会一步步引导你。",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO 不会保存你的选择。",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "你可以写信到 hola@guardianagroup.com：由真人阅读。"
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "你可以写信到 hola@guardianagroup.com：由真人阅读。",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "我不太明白。请换个方式写，或点一个选项。"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

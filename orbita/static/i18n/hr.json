@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Odaberi jednu od ovih opcija.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Dodirni opciju i NÚCLEO te vodi korak po korak.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO ne sprema ono što odabereš.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Možeš pisati na hola@guardianagroup.com: čita ga osoba."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Možeš pisati na hola@guardianagroup.com: čita ga osoba.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "Ne razumijem. Pokušaj to napisati drugačije ili dodirni opciju."
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

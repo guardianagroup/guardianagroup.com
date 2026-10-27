@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Выберите один из этих вариантов.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Нажмите на вариант, и NÚCLEO проведёт вас шаг за шагом.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO не сохраняет то, что вы выбираете.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Вы можете написать на hola@guardianagroup.com: письмо читает человек."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Вы можете написать на hola@guardianagroup.com: письмо читает человек.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "Не удалось понять. Попробуйте написать по-другому или нажмите на вариант."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

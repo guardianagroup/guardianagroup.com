@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "다음 옵션 중 하나를 고르세요.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "옵션을 누르면 NÚCLEO가 한 단계씩 안내해요.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO는 선택한 내용을 저장하지 않아요.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "hola@guardianagroup.com으로 연락할 수 있어요. 사람이 직접 읽어요."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "hola@guardianagroup.com으로 연락할 수 있어요. 사람이 직접 읽어요.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "잘 이해하지 못했어요. 다르게 써 보거나 옵션을 눌러 주세요."
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

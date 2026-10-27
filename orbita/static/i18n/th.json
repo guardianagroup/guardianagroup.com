@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "เลือกหนึ่งในตัวเลือกเหล่านี้",
   "Toca una opción y NÚCLEO te guía paso a paso.": "แตะตัวเลือก แล้ว NÚCLEO จะพาคุณไปทีละขั้น",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO ไม่เก็บสิ่งที่คุณเลือก",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "คุณเขียนถึง hola@guardianagroup.com ได้: มีคนจริงอ่าน"
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "คุณเขียนถึง hola@guardianagroup.com ได้: มีคนจริงอ่าน",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "ฉันไม่เข้าใจ ลองเขียนแบบอื่น หรือแตะตัวเลือก"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",
