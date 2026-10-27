@@ -19,7 +19,6 @@ const { Cortes } = require('./cortes');
 const { Empresas, baseDominio } = require('./empresas');
 const SENSORES = require('./sensores');
 const { Senuelos } = require('./senuelos');
-const puerta = require('./puerta');
 const { Rele } = require('./comunicaciones');
 
 const RAIZ = path.join(__dirname, '..');
@@ -638,16 +637,6 @@ class Sesion {
         if (o.accion === 'cambiar') { const p = this.pestanas.find((x) => x.id === +o.id); if (p) await this.activaPestana(p); return; }
         if (o.accion === 'cerrar') return await this.cierraPestana(+o.id);
         return;
-      }
-      if (o.t === 'ia') {
-        // PUERTA IA, envío protegido: sustituir, mandar por la API oficial, restaurar; nunca por la web del proveedor
-        const texto = String(o.texto || '').slice(0, 8000);
-        if (!texto.trim()) return;
-        const r = await puerta.envioProtegido({ proveedor: String(o.proveedor || 'openai'), texto, misDatos: o.misDatos || {}, simulacro: MOCK });
-        const n = r.sustituidos.length;
-        this.op('puerta ia: envío protegido a ' + r.proveedor + ' (' + n + ' datos sustituidos)');
-        this.suceso({ clase: 'puerta', certeza: 'comprobado', dominio: this.webActual, texto: 'Envío protegido a ' + r.proveedor + ': ' + (n === 1 ? 'un dato personal sustituido' : n + ' datos personales sustituidos') + ' antes de salir de la celda' + (r.simulacro ? ' (simulacro: sin clave de proveedor)' : '') + '.', detalle: { proveedor: r.proveedor, modelo: r.modelo, sustituidos: r.sustituidos.map((x) => x.tipo), simulacro: r.simulacro, ms: r.ms, ref: r.ref, error: r.error } });
-        return this.env({ t: 'ia', id: o.id || null, enviado: r.enviado, respuesta: r.respuesta, error: r.error, simulacro: r.simulacro, proveedor: r.proveedor, modelo: r.modelo, sustituidos: r.sustituidos, ms: r.ms, ref: r.ref });
       }
       if (o.t === 'alerta') { if (o.accion === 'sellar') return await this.ponAlerta(3, 'a petición de la persona'); if (o.accion === 'reanudar') { this.puntos = 0; this.motivos = []; return await this.ponAlerta(0, 'reanudada por la persona'); } return; }
     } catch (e) { if (process.env.ZERO_DEBUG) console.log('mensaje', o && o.t, 'error:', e && e.message); /* una orden que falla no tumba la sesión */ }

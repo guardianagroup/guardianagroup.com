@@ -183,17 +183,9 @@ ZERO_REGION=$REGION
 ZERO_TOR_PROXY=socks5://127.0.0.1:9050
 PLAYWRIGHT_BROWSERS_PATH=$NAVEGADORES
 NODE_ENV=production
-# PUERTA IA · claves de proveedor (las pone el dueño; nunca se enseñan ni salen del servidor). Sin clave, ese proveedor no se ofrece.
-ZERO_OPENAI_KEY=
-ZERO_GEMINI_KEY=
-ZERO_ANTHROPIC_KEY=
-# Proveedor compatible con la API de OpenAI (p. ej., Cheaper Inference): dirección base, clave y modelo
-ZERO_COMPAT_URL=
-ZERO_COMPAT_KEY=
-ZERO_COMPAT_MODEL=
 EOF
   chmod 640 "$ENVF"; chown root:zero "$ENVF"
-  echo "  creado (edítalo para poner las claves de PUERTA IA)"
+  echo "  creado"
 else
   echo "  ya existe: no se toca"
 fi

@@ -88,7 +88,6 @@
     if (m.t === 'cursor') { cv.style.cursor = CURSORES.has(m.cursor) ? m.cursor : 'default'; enlaceBajoCursor = m.href || ''; estadoEnlace.textContent = enlaceBajoCursor; estadoEnlace.hidden = !enlaceBajoCursor; return; }
     if (m.t === 'muro') { if (window.zeroMuro) window.zeroMuro(m); return; }
     if (m.t === 'portapapeles') { if (m.texto) navigator.clipboard.writeText(m.texto).catch(() => {}); return; }
-    if (m.t === 'ia') { if (window.zeroIA) window.zeroIA(m); return; }
     if (m.t === 'ultra') { M.ultraDisponible = !!m.disponible; M.ultra = !!m.activo; if (window.zeroUltra) window.zeroUltra(m); return; }
     if (m.t === 'descarga') { if (window.zeroDescarga) window.zeroDescarga(m); return; }
     if (m.t === 'archivo') { if (window.zeroArchivo) window.zeroArchivo(m); return; }
@@ -163,7 +162,6 @@
   M.nivel = (n) => { M.nivelActual = n; env({ t: 'modo', nivel: n }); };
   M.permitir = (clave, on) => env({ t: 'permitir', clave, on: !!on });
   M.destruir = () => { ponEstado('Sellando y destruyendo la celda…'); env({ t: 'destruir' }); };
-  M.ia = (o) => { if (M.estado !== 'lista' || !ws || ws.readyState !== 1) { conecta(); return false; } env({ t: 'ia', ...o }); return true; };
   M.pestana = (accion, id, url) => env({ t: 'pestana', accion, id, url });
   M.descarga = (accion, id) => env({ t: 'descarga', accion, id });
   M.sellar = () => env({ t: 'alerta', accion: 'sellar' });
