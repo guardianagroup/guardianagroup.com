@@ -725,6 +725,9 @@
     // ronda 55: la persona acepta, a sabiendas, una sesión sin protección postcuántica (la otra persona tiene una versión anterior)
     const pqSi = $('#cpq-si');
     if (pqSi) pqSi.addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (!c || !c.clasicaPendiente) return; const p = c.clasicaPendiente; vigila(c, T('Has aceptado seguir sin protección postcuántica en esta sesión.'), 'info'); enCola(c, () => derivaSesion(c, p.suEf, p.efMia, null, true)); });
+    // dueño, 10:53: «todas las páginas tienen que tener un botón de volver a donde estás»: a NÚCLEO si se vino desde NÚCLEO,
+    // si no, al inicio (la portada)
+    try { const v = sessionStorage.getItem('guardiana-vuelta') === 'nucleo', a = $('#volver'); if (a) { a.href = v ? '/orbita/?nucleo=pide' : '/orbita/'; const sp = a.querySelector('span'); if (sp) sp.textContent = v ? 'Regresar a NÚCLEO' : 'Inicio'; a.setAttribute('aria-label', v ? 'Regresar a NÚCLEO' : 'Volver al inicio'); } } catch (_) {}
     // dueño, 10:20: arriba, la red neuronal de NÚCLEO (la misma firma que la portada)
     try { const l = $('.inicio .red-nucleo'); if (l && window.RedNucleo) window.RedNucleo(l, { nace: false }); } catch (_) {}
     // dueño, 10:10: la explicación, en un desplegable bajo los dos botones

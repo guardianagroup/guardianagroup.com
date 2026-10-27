@@ -107,7 +107,7 @@
   function descarga(datos, T) {
     T = T || ((s) => s);
     const d = documento();
-    d.texto(M, d.y + 9, 'GUARDIANA', 8.5, true, '#1d2733'); d.texto(M + ancho('GUARDIANA ', 8.5, true), d.y + 9, '/ ZERO', 8.5, false, '#7d8f9e');
+    d.texto(M, d.y + 9, 'GUARDIANA', 8.5, true, '#1d2733'); d.texto(M + ancho('GUARDIANA ', 8.5, true), d.y + 9, datos.marca || '/ ZERO', 8.5, false, '#7d8f9e'); // NÚCLEO usa '/ NÚCLEO' (27 Oct 2026)
     d.y += 30; d.texto(M, d.y, datos.titulo, 21, true, '#0f1720');
     d.y += 17; d.texto(M, d.y, ajusta(datos.subtitulo, 9, false, W - 2 * M), 9, false, '#5c6f7f');
     d.y += 18; d.raya(M, d.y, W - M, '#cfd9e2', 0.8);
