@@ -89,12 +89,36 @@
 .ns-boton:focus-visible,.ns-form button:focus-visible,.ns-enlace:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
 .ns-ayuda[aria-expanded="true"]{background:rgba(156,195,228,.18);border-color:#9CC3E4;color:#F4F6F8}
 .ns-marca{font:600 12px/1 'IBM Plex Mono',Consolas,monospace;letter-spacing:.32em;color:#9CC3E4}
-.ns-panel{position:absolute;z-index:4;top:64px;inset-inline-end:max(20px,calc((100vw - 1000px) / 2 + 20px));width:min(600px,calc(100vw - 32px));max-height:calc(100vh - 160px);overflow-y:auto;padding:16px 18px 14px;border-radius:18px;border:1px solid rgba(156,195,228,.3);background:#090E15;box-shadow:0 24px 70px -20px rgba(0,0,0,.9);scrollbar-width:thin;scrollbar-color:#3e5263 transparent}
-.ns-panel[hidden]{display:none}
-.ns-grupo+.ns-grupo{margin-top:14px}
-.ns-grupo h3{margin:0 0 8px;font:600 10.5px/1.3 'IBM Plex Mono',Consolas,monospace;letter-spacing:.18em;color:#9CC3E4;text-transform:uppercase}
-.ns-fila{display:flex;flex-wrap:wrap;gap:8px}
-.ns-contacto{margin:14px 0 0;padding-top:12px;border-top:1px solid rgba(156,195,228,.14);font-size:13px;color:#a9bccd}
+/* dueño, 14:12: «¿Qué puedo pedir?» «muy desordenado; más profesional»: deja de flotar sobre todo y ocupa el sitio de la
+   conversación, entre la cabecera y la caja (sin las acciones rápidas, que ya están dentro). Seis tarjetas iguales en dos
+   columnas, emparejadas por tamaño (4 y 4, 3 y 3, 7 y 7), y cada opción en su fila, alineada, con su flecha */
+.ns-ayuda .na-cierra{display:none;align-items:center;gap:7px}
+.ns-ayuda .na-cierra svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.ns-ayuda[aria-expanded="true"] .na-abre{display:none}.ns-ayuda[aria-expanded="true"] .na-cierra{display:inline-flex}
+.ns-panel{position:relative;z-index:2;flex:1 1 auto;min-height:0;overflow-y:auto;padding:4px 20px 28px;scrollbar-width:thin;scrollbar-color:#3e5263 transparent}
+.ns-panel[hidden],.nuc-sala.con-panel .ns-cuerpo,.nuc-sala.con-panel .ns-rapidas{display:none}
+.nuc-sala.con-panel .ns-form{margin-top:0}
+.np-in{width:min(880px,100%);margin:0 auto}
+.np-cab{text-align:center;padding:4px 0 24px}
+.np-cab h2{margin:0;font:300 clamp(24px,2.6vw,30px)/1.2 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:-.01em;color:#F4F6F8}
+.np-cab p{margin:8px 0 0;font-size:15px;line-height:1.5;color:#a9bccd}
+.np-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.np-grupo{display:flex;flex-direction:column;min-width:0;border:1px solid rgba(156,195,228,.16);border-radius:16px;background:linear-gradient(180deg,rgba(17,26,37,.72),rgba(9,14,21,.72))}
+.np-grupo h3{display:flex;align-items:center;gap:10px;margin:0;padding:15px 18px 13px;border-bottom:1px solid rgba(156,195,228,.12);font:600 12px/1.2 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#9CC3E4}
+.np-grupo h3 svg{flex:none;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.np-lista{list-style:none;margin:0;padding:6px}
+.np-op{appearance:none;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;min-height:42px;padding:9px 12px;border:0;border-radius:10px;background:transparent;color:#dbe9f4;font:500 15px/1.35 'IBM Plex Sans',system-ui,sans-serif;text-align:start;cursor:pointer;transition:background .15s,color .15s}
+.np-op::after{content:'';flex:none;width:7px;height:7px;margin-inline-end:3px;border-top:1.7px solid currentColor;border-right:1.7px solid currentColor;transform:rotate(45deg);opacity:.4;transition:opacity .15s,transform .15s}
+[dir="rtl"] .np-op::after{transform:rotate(-135deg)}
+.np-op:hover{background:rgba(156,195,228,.1);color:#F4F6F8}
+.np-op:hover::after{opacity:1;transform:translateX(2px) rotate(45deg)}
+[dir="rtl"] .np-op:hover::after{transform:translateX(-2px) rotate(-135deg)}
+.np-op:focus-visible{outline:2px solid #F4F6F8;outline-offset:-2px}
+.ns-contacto{margin:22px 0 0;text-align:center;font-size:13.5px;color:#a9bccd}
+@media (max-width:700px){.np-grid{grid-template-columns:1fr;gap:12px}}
+.ns-panel.np-sube{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 20px);mask-image:linear-gradient(to bottom,transparent,#000 20px)}
+.ns-panel.np-baja{-webkit-mask-image:linear-gradient(to top,transparent,#000 28px);mask-image:linear-gradient(to top,transparent,#000 28px)}
+.ns-panel.np-sube.np-baja{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 20px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to bottom,transparent,#000 20px,#000 calc(100% - 28px),transparent)}
 .ns-contacto a,.ns-enlace{color:#9CC3E4;text-underline-offset:3px}
 .ns-cuerpo{position:relative;z-index:1;flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:#3e5263 transparent}
 /* dueño, 10:53: «no tiene armonía ni simetría»: sin conversación, el cerebro y el saludo quedan en el centro, entre la cabecera
@@ -121,7 +145,7 @@
 .ns-nota{margin:10px 0 0;text-align:center;font-size:12px;color:#7f93a6}
 @media (max-width:640px){
   .ns-cab{padding:12px 12px}.ns-boton{height:36px;padding:0 12px;font-size:13px}.ns-marca{display:none}
-  .ns-panel{top:58px;inset-inline:12px;width:auto}
+  .ns-panel{padding:2px 12px 22px}.np-cab{padding:2px 0 18px}.np-cab p{font-size:14px}
   .ns-rapidas{display:flex;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}.ns-rapidas::-webkit-scrollbar{display:none}.ns-rapidas .nuc-chip{flex:none}
   .ns-charla .nuc-b{max-width:96%}.ns-hola p{font-size:15px}
 }
