@@ -1666,7 +1666,8 @@
   "Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.": "Jokainen viesti ja jokainen tiedoston osa todennetaan perille saapuessaan; tähän mennessä kaikki ovat läpäisseet varmennuksen.",
   "Modo discreto": "Huomaamaton tila",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Huomaamaton tila: chatti näkyy sumeana, kunnes pidät sitä painettuna, ja kirjoittamasi teksti näkyy numeroina. Paina sitä nähdäksesi kaiken normaalisti.",
-  "Modo discreto: lo que escribas se verá como números": "Huomaamaton tila: kirjoittamasi teksti näkyy numeroina"
+  "Modo discreto: lo que escribas se verá como números": "Huomaamaton tila: kirjoittamasi teksti näkyy numeroina",
+  "Código erróneo o caducado.": "Väärä tai vanhentunut koodi."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

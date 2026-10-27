@@ -1667,7 +1667,8 @@
   "Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.": "Her mesajın ve her dosya parçasının kimliği geldiğinde doğrulanır; şu ana kadar hepsi doğrulamayı geçti.",
   "Modo discreto": "Gizli mod",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Gizli mod: sohbet, basılı tutana kadar bulanık görünür ve yazdıklarınız rakam olarak görünür. Her şeyi normal görmek için bu düğmeye basın.",
-  "Modo discreto: lo que escribas se verá como números": "Gizli mod: yazdıklarınız rakam olarak görünecek"
+  "Modo discreto: lo que escribas se verá como números": "Gizli mod: yazdıklarınız rakam olarak görünecek",
+  "Código erróneo o caducado.": "Kod hatalı veya süresi dolmuş."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

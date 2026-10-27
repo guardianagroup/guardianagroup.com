@@ -1666,7 +1666,8 @@
   "Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.": "Minden üzenet és minden fájlrész hitelesítésen megy át érkezéskor; eddig mindegyik átment az ellenőrzésen.",
   "Modo discreto": "Diszkrét mód",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Diszkrét mód: a csevegés elmosódott, amíg lenyomva nem tartod, és amit írsz, számjegyekként jelenik meg. Nyomd meg ezt a gombot, hogy mindent normálisan láss.",
-  "Modo discreto: lo que escribas se verá como números": "Diszkrét mód: amit írsz, számjegyekként jelenik meg"
+  "Modo discreto: lo que escribas se verá como números": "Diszkrét mód: amit írsz, számjegyekként jelenik meg",
+  "Código erróneo o caducado.": "Hibás vagy lejárt kód."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

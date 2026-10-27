@@ -1667,7 +1667,8 @@
   "Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.": "Każda wiadomość i każdy fragment pliku są uwierzytelniane po dotarciu; jak dotąd wszystkie przeszły weryfikację.",
   "Modo discreto": "Tryb dyskretny",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Tryb dyskretny: czat jest rozmyty, dopóki go nie przytrzymasz, a to, co piszesz, wyświetla się jako cyfry. Naciśnij ten przycisk, aby widzieć wszystko normalnie.",
-  "Modo discreto: lo que escribas se verá como números": "Tryb dyskretny: to, co napiszesz, będzie wyświetlane jako cyfry"
+  "Modo discreto: lo que escribas se verá como números": "Tryb dyskretny: to, co napiszesz, będzie wyświetlane jako cyfry",
+  "Código erróneo o caducado.": "Błędny lub wygasły kod."
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

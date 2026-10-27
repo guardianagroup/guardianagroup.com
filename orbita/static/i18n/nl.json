@@ -1667,7 +1667,8 @@
   "Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.": "Elk bericht en elk bestandsdeel wordt bij aankomst geauthenticeerd; tot nu toe hebben ze allemaal de verificatie doorstaan.",
   "Modo discreto": "Discrete modus",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Discrete modus: de chat is wazig totdat je hem ingedrukt houdt, en wat je typt wordt als cijfers weergegeven. Tik erop om alles normaal te zien.",
-  "Modo discreto: lo que escribas se verá como números": "Discrete modus: wat je typt wordt als cijfers weergegeven"
+  "Modo discreto: lo que escribas se verá como números": "Discrete modus: wat je typt wordt als cijfers weergegeven",
+  "Código erróneo o caducado.": "Onjuiste of verlopen code."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",
