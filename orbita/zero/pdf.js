@@ -29,6 +29,14 @@
     while (a < b) { const m = (a + b + 1) >> 1; if (ancho(s.slice(0, m) + '…', tam, negrita) <= max) a = m; else b = m - 1; }
     return s.slice(0, a).trimEnd() + '…';
   };
+  // reparte un texto en líneas que caben en «max» puntos (por palabras); como mucho «tope» líneas
+  const parte = (s, tam, max, tope) => {
+    const ps = String(s == null ? '' : s).split(/\s+/).filter(Boolean); const out = []; let l = '';
+    for (const p of ps) { const t = l ? l + ' ' + p : p; if (ancho(t, tam, false) <= max) l = t; else { if (l) out.push(l); l = ancho(p, tam, false) <= max ? p : ajusta(p, tam, false, max); } }
+    if (l) out.push(l);
+    if (out.length > tope) { const r = out.slice(0, tope); r[tope - 1] = ajusta(r[tope - 1] + ' …', tam, false, max); return r; }
+    return out.length ? out : [''];
+  };
   const rgb = (hex) => { const n = parseInt(hex.slice(1), 16); return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255].map((x) => x.toFixed(3)).join(' '); };
   const n2 = (x) => (Math.round(x * 100) / 100).toString();
 
@@ -60,10 +68,14 @@
       d.y += ALTO + 1;
     };
     cabecera();
+    const LIN = 9.6;
     for (const f of filas) {
-      if (d.sitio(ALTO)) cabecera();
-      cols.forEach((c, i) => d.texto(c.der ? xs[i] + c.px - 4 : xs[i] + 4, d.y + 9.4, ajusta(f[i], TAM, false, c.px - 8), TAM, false, c.rojo ? '#c0503f' : '#1d2733', c.der));
-      d.y += ALTO; d.raya(M, d.y, M + util, '#e2e8ee', 0.4);
+      // columnas con «wrap»: el texto se reparte en varias líneas (hasta 6) en vez de cortarse
+      const lineas = cols.map((c, i) => (c.wrap ? parte(f[i], TAM, c.px - 8, 6) : [ajusta(f[i], TAM, false, c.px - 8)]));
+      const n = Math.max(1, ...lineas.map((l) => l.length)), alto = ALTO + (n - 1) * LIN;
+      if (d.sitio(alto)) cabecera();
+      cols.forEach((c, i) => lineas[i].forEach((t, k) => d.texto(c.der ? xs[i] + c.px - 4 : xs[i] + 4, d.y + 9.4 + k * LIN, t, TAM, false, c.rojo ? '#c0503f' : c.ambar && t ? '#9a6b12' : '#1d2733', c.der)));
+      d.y += alto; d.raya(M, d.y, M + util, '#e2e8ee', 0.4);
     }
   }
 
@@ -103,9 +115,12 @@
     datos.resumen.forEach(([n, et, rojo], i) => { const x = M + i * anchoR; d.texto(x, d.y + 30, String(n), 22, true, rojo ? '#c0503f' : '#0f1720'); d.texto(x, d.y + 44, ajusta(et, 8, false, anchoR - 8), 8, false, '#5c6f7f'); });
     d.y += 58;
     for (const s of datos.secciones) {
-      d.sitio(60); d.y += 16; d.texto(M, d.y, s.titulo, 12, true, '#0f1720'); d.y += 8;
-      tabla(d, s.cols, s.filas, T);
+      if (!s.filas || !s.filas.length) continue;
+      d.sitio(70); d.y += 16; d.texto(M, d.y, s.titulo, 12, true, '#0f1720'); d.y += 6;
+      if (s.nota) { for (const l of parte(s.nota, 8, W - 2 * M, 4)) { d.y += 10; d.texto(M, d.y, l, 8, false, '#5c6f7f'); } d.y += 4; }
+      d.y += 2; tabla(d, s.cols, s.filas, T);
     }
+    if (datos.final) { d.sitio(40); d.y += 16; for (const l of parte(datos.final, 8.5, W - 2 * M, 6)) { d.texto(M, d.y, l, 8.5, false, '#2f7a52'); d.y += 11; } }
     const blob = serializa(d.pags, (p, n) => {
       const ops = []; const yy = H - M + 10;
       ops.push(rgb('#cfd9e2') + ' RG 0.5 w ' + n2(M) + ' ' + n2(H - yy + 8) + ' m ' + n2(W - M) + ' ' + n2(H - yy + 8) + ' l S');
