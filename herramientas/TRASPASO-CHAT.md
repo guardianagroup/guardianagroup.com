@@ -1,6 +1,28 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-## Estado al 27 Oct 2026, 16:45 (Bogotá) — EMPIEZA POR AQUÍ
+## Estado al 27 Oct 2026, 17:05 (Bogotá) — EMPIEZA POR AQUÍ
+
+Lo de las 16:45 (abajo) sigue valiendo salvo lo que cambia aquí.
+
+- **Vuelve la caja de escribir en NÚCLEO** (dueño, 16:47: «dejamos hablar a quien ya sabe lo que quiere»; lo pedían las dos voces de la ronda 63). Publicado en las dos ramas.
+  - Va abajo, en `.ns-pie` (`#ns-form`/`#ns-q`), con la nota «NÚCLEO entiende peticiones concretas y no guarda lo que le pides».
+  - `escribe()`:
+    - lo que contesta a la pregunta abierta es como tocar su botón (queda marcado);
+    - lo demás va a su sitio del árbol, como desde «¿Qué puedo pedir?» (`grupoDe()` + `GRUPO_DE`);
+    - si duda, sale «¿Quisiste decir…?»;
+    - si no entiende, una línea lo dice («No te he entendido. Prueba a escribirlo de otra manera o toca una opción.», en 42 idiomas), la pregunta sigue y el texto se queda en la caja;
+    - «atrás» y «menú» escritos hacen lo mismo que sus botones; «gracias» y «adiós», solo una línea;
+    - lo que parece un dato (correo, número largo) sale como «…» en el camino.
+  - En el paso del país, la caja pide el país. El motor entiende «¿qué es la Radiografía?» (`r-que`, en `SECCIONES`).
+  - En el móvil, las seis tarjetas del menú son de una fila (icono y título) para que quepan junto a la caja (390 × 844 y 390 × 740 sí; 360 × 640 se desplaza).
+  - Pruebas: `guia2.js` (sección 10b, escribir).
+- **El dueño quiere más ideas de lo que haría pagar (16:57); le gusta ENTREGA.**
+  - Le di seis mías: aviso de filtraciones, correos de usar y tirar, revisión de privacidad de webs para empresas, modo familia, caja fuerte de documentos y un plan para profesionales.
+  - **Ronda 64 enviada** (ChatGPT, pestaña tab-11; Gemini, tab-1; `ronda64/pregunta.md`): diez ideas más, ENTREGA a fondo, las tres primeras y lo que no haríamos.
+  - **Ojo en ChatGPT:** en esa conversación hay bloques «Escritura» editables que también son `.ProseMirror`. El cuadro de escribir es el `.ProseMirror` que está dentro del `form`. Por error se escribió dentro del bloque de bienvenida de la ronda 63 y ya se dejó como estaba.
+- Versiones: `nucleo.js?v=20261027zb`, `nucleo.css?v=20261027w`, `nucleo-motor.js?v=20261027c`, `idioma.js?v=20261027p14`.
+
+## Estado al 27 Oct 2026, 16:45 (Bogotá)
 
 Lo de las 15:35 (abajo) sigue valiendo salvo lo que cambia aquí.
 
