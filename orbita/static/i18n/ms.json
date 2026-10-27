@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Sudah ada video yang sedang dibuat.",
   "No se ha podido grabar el vídeo.": "Video tidak dapat dirakam.",
   "Se ha cancelado el vídeo.": "Video telah dibatalkan.",
-  "Multas": "Denda"
+  "Multas": "Denda",
+  "Abrir": "Buka",
+  "Listo: aquí tienes el resumen en PDF.": "Siap: inilah ringkasan dalam PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Apabila anda memuat turunnya, ia disimpan dalam folder Muat Turun peranti anda.",
+  "Imprimir o guardar como PDF": "Cetak atau simpan sebagai PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "Dalam tetingkap cetak, pilih «Simpan sebagai PDF».",
+  "{1} páginas": "{1} halaman",
+  "{1} página": "{1} halaman"
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

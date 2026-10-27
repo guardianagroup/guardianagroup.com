@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "C’è già un video in preparazione.",
   "No se ha podido grabar el vídeo.": "Non è stato possibile registrare il video.",
   "Se ha cancelado el vídeo.": "Il video è stato annullato.",
-  "Multas": "Multe"
+  "Multas": "Multe",
+  "Abrir": "Apri",
+  "Listo: aquí tienes el resumen en PDF.": "Fatto: ecco il riepilogo in PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Quando lo scarichi, viene salvato nella cartella Download del tuo dispositivo.",
+  "Imprimir o guardar como PDF": "Stampa o salva come PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "Nella finestra di stampa, scegli «Salva come PDF».",
+  "{1} páginas": "{1} pagine",
+  "{1} página": "{1} pagina"
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

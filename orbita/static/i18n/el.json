@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Ήδη δημιουργείται ένα βίντεο.",
   "No se ha podido grabar el vídeo.": "Δεν ήταν δυνατή η καταγραφή του βίντεο.",
   "Se ha cancelado el vídeo.": "Το βίντεο ακυρώθηκε.",
-  "Multas": "Πρόστιμα"
+  "Multas": "Πρόστιμα",
+  "Abrir": "Άνοιγμα",
+  "Listo: aquí tienes el resumen en PDF.": "Έτοιμο: ορίστε η σύνοψη σε PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Όταν το κατεβάσεις, αποθηκεύεται στον φάκελο λήψεων της συσκευής σου.",
+  "Imprimir o guardar como PDF": "Εκτύπωση ή αποθήκευση ως PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "Στο παράθυρο εκτύπωσης, διάλεξε «Αποθήκευση ως PDF».",
+  "{1} páginas": "{1} σελίδες",
+  "{1} página": "{1} σελίδα"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

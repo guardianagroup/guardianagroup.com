@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Đang có một video được tạo.",
   "No se ha podido grabar el vídeo.": "Không thể ghi video.",
   "Se ha cancelado el vídeo.": "Đã hủy video.",
-  "Multas": "Tiền phạt"
+  "Multas": "Tiền phạt",
+  "Abrir": "Mở",
+  "Listo: aquí tienes el resumen en PDF.": "Xong: đây là bản tóm tắt dạng PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Khi tải xuống, tệp được lưu trong thư mục Tải xuống trên thiết bị của bạn.",
+  "Imprimir o guardar como PDF": "In hoặc lưu dưới dạng PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "Trong cửa sổ in, chọn «Lưu dưới dạng PDF».",
+  "{1} páginas": "{1} trang",
+  "{1} página": "{1} trang"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

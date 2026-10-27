@@ -121,12 +121,8 @@
       pie: 'GUARDIANA · NÚCLEO · ' + T('Resumen de mis datos'), archivo: 'GUARDIANA-resumen-' + d.periodo + '.pdf',
     };
   }
-  // el PDF de verdad; si el idioma no cabe en ese PDF, la ventana de imprimir con el mismo documento
-  function sacaResumen(doc) {
-    const todo = [doc.titulo, doc.subtitulo, doc.final, ...doc.resumen.map((x) => x[1]), ...doc.secciones.flatMap((x) => [x.titulo, x.nota || '', ...x.cols.map((c) => T(c.t)), ...x.filas.flat()])].join(' ');
-    if (window.ZeroPdf && window.ZeroPdf.cabe(todo)) { try { window.ZeroPdf.descarga(doc, T); return 'pdf'; } catch (e) { console.warn('PDF', e); } }
-    return imprimeResumen(doc) ? 'imprimir' : null;
-  }
+  // todo el texto del documento, para saber si el idioma cabe en el PDF de verdad (si no, la ventana de imprimir)
+  const textoDe = (doc) => [doc.titulo, doc.subtitulo, doc.final, ...doc.resumen.map((x) => x[1]), ...doc.secciones.flatMap((x) => [x.titulo, x.nota || '', ...x.cols.map((c) => T(c.t)), ...x.filas.flat()])].join(' ');
   function imprimeResumen(doc) {
     const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     const tabla = (x) => {
@@ -155,46 +151,86 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     return true;
   }
   const sinPeriodo = (periodo, formato) => ({ t: 'No hay nada registrado en ese periodo. Prueba con otro.', c: PERIODOS.filter(([p]) => p !== periodo).map(([p, l]) => ({ l, id: 'res-' + p, extra: { formato } })) });
+  // ---------- el resultado (PDF o vídeo): siempre la misma tarjeta, con su nombre, su periodo y sus botones ----------
+  // Dueño, 14:42: «cuando le das a PDF, a vídeo, cómo guardarlo, dónde aparece… todo en orden, milimétrico». El resultado
+  // aparece aquí, en la conversación; nada se descarga solo: «Descargar» lo guarda en la carpeta de descargas del equipo.
+  const URLS = new Set();
+  const ICO_RES = { pdf: '<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/>', video: '<rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="M10.5 9.6v4.8l4.2-2.4z"/>' };
+  const etiquetaPeriodo = (periodo) => { const x = PERIODOS.find(([p]) => p === periodo); return x ? T(x[1]) : ''; };
+  const metaDe = (periodo, ...xs) => [etiquetaPeriodo(periodo), ...xs].filter(Boolean).join(' · ');
+  function boton(texto, op) {
+    op = op || {};
+    const b = document.createElement(op.href ? 'a' : 'button'); b.className = 'nr-b' + (op.prim ? ' nr-prim' : ''); b.textContent = T(texto);
+    if (op.href) { b.href = op.href; if (op.archivo) b.download = op.archivo; if (op.nueva) { b.target = '_blank'; b.rel = 'noopener'; } } else b.type = 'button';
+    return b;
+  }
+  function tarjeta(tipo, periodo) {
+    const c = sala.querySelector('#ns-charla'), b = document.createElement('div');
+    b.className = 'nuc-b el nuc-res'; b.dataset.tipo = tipo;
+    b.innerHTML = '<span class="nq" translate="no">NÚCLEO</span><p class="nuc-bt"></p>'
+      + '<div class="nr-ficha"><span class="nr-ico"><svg viewBox="0 0 24 24" aria-hidden="true">' + ICO_RES[tipo] + '</svg></span><span class="nr-txt"><b></b><small></small></span></div>'
+      + '<div class="nr-cuerpo"></div><div class="nr-acc"></div><p class="nr-nota" hidden></p>';
+    b.querySelector('.nr-txt b').textContent = T('Resumen de mis datos');
+    b.querySelector('.nr-txt small').textContent = metaDe(periodo, tipo === 'pdf' ? 'PDF' : T('Vídeo'));
+    c.append(b); recorta(); sala.classList.remove('vacia'); baja(b);
+    return { b, txt: b.querySelector('.nuc-bt'), meta: b.querySelector('.nr-txt small'), cuerpo: b.querySelector('.nr-cuerpo'), acc: b.querySelector('.nr-acc'), nota: b.querySelector('.nr-nota') };
+  }
+  const notaDescarga = (k) => { k.nota.textContent = T('Al descargarlo, se guarda en la carpeta de descargas de tu equipo.'); k.nota.hidden = false; };
   async function resumenPdf(periodo) {
     let G; try { G = await moduloResumen(); } catch (_) { return { t: 'No he podido preparar el resumen. Inténtalo de nuevo.' }; }
     const d = G.datos(periodo, T, loc());
     if (!d) return sinPeriodo(periodo, 'pdf');
-    const r = sacaResumen(docResumen(d, G));
-    return r === 'pdf' ? { t: 'Te he descargado el resumen en PDF.' } : r ? { t: 'Preparo el resumen de tus datos en PDF: se abre la ventana de imprimir y eliges «Guardar como PDF».' } : { t: 'No he podido preparar el resumen. Inténtalo de nuevo.' };
+    const doc = docResumen(d, G);
+    if (window.ZeroPdf && ZeroPdf.crea && ZeroPdf.cabe(textoDe(doc))) {
+      try {
+        const { blob, paginas } = ZeroPdf.crea(doc, T), url = URL.createObjectURL(blob); URLS.add(url);
+        const k = tarjeta('pdf', periodo); k.b.dataset.url = url;
+        k.txt.textContent = T('Listo: aquí tienes el resumen en PDF.');
+        k.meta.textContent = metaDe(periodo, 'PDF', pon(paginas === 1 ? '{1} página' : '{1} páginas', fmt(paginas)));
+        k.acc.append(boton('Abrir', { href: url, nueva: true, prim: true }), boton('Descargar', { href: url, archivo: doc.archivo }));
+        notaDescarga(k); baja(k.b);
+        return null;
+      } catch (e) { console.warn('PDF', e); }
+    }
+    // el idioma no cabe en el PDF de verdad: el mismo documento, por la ventana de imprimir
+    const k = tarjeta('pdf', periodo);
+    k.txt.textContent = T('Listo: aquí tienes el resumen en PDF.');
+    const b = boton('Imprimir o guardar como PDF', { prim: true }); b.addEventListener('click', () => imprimeResumen(doc)); k.acc.append(b);
+    k.nota.textContent = T('En la ventana de imprimir, elige «Guardar como PDF».'); k.nota.hidden = false; baja(k.b);
+    return null;
   }
-  // el vídeo: se ve hacerse en la propia burbuja de NÚCLEO (unos 20 s) y queda para verlo y descargarlo
+  // el vídeo: se ve hacerse en su tarjeta (unos 20 s) y queda en ella para verlo y descargarlo; uno a la vez
   let grabando = null;
   async function resumenVideo(periodo) {
     let G; try { G = await moduloResumen(); } catch (_) { return { t: 'No he podido preparar el resumen. Inténtalo de nuevo.' }; }
-    if (grabando) return { t: 'Ya se está haciendo un vídeo.' };
+    if (grabando) { destaca(grabando.b); return null; }
     const d = G.datos(periodo, T, loc());
     if (!d) return sinPeriodo(periodo, 'video');
     if (!G.formato()) return { t: 'Este navegador no puede grabar vídeo.', c: [{ l: 'Resumen en PDF', id: 'res-' + periodo, extra: { formato: 'pdf' } }] };
-    const c = sala.querySelector('#ns-charla'), b = document.createElement('div');
-    b.className = 'nuc-b el nuc-video';
-    b.innerHTML = '<span class="nq" translate="no">NÚCLEO</span><p class="nuc-bt"></p><div class="nv-marco"><canvas class="nv-lienzo" width="1280" height="720" aria-hidden="true"></canvas>'
-      + '<div class="nv-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div></div><div class="ns-opciones"><button type="button" class="nuc-chip nv-cancela">Cancelar</button></div>';
-    const txt = b.querySelector('.nuc-bt'), marco = b.querySelector('.nv-marco'), barra = b.querySelector('.nv-barra'), ops = b.querySelector('.ns-opciones');
-    txt.textContent = T('Preparo el vídeo. Tarda unos 20 segundos.');
-    c.append(b); sala.classList.remove('vacia');
-    const cu = sala.querySelector('#ns-cuerpo'); requestAnimationFrame(() => { cu.scrollTop = cu.scrollHeight; });
-    const ab = new AbortController(); grabando = ab;
-    ops.querySelector('.nv-cancela').addEventListener('click', () => ab.abort());
+    const k = tarjeta('video', periodo);
+    k.txt.textContent = T('Preparo el vídeo. Tarda unos 20 segundos.');
+    k.cuerpo.innerHTML = '<div class="nv-marco"><canvas class="nv-lienzo" width="1280" height="720" aria-hidden="true"></canvas>'
+      + '<div class="nv-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div></div>';
+    const marco = k.cuerpo.querySelector('.nv-marco'), barra = k.cuerpo.querySelector('.nv-barra');
+    const cancela = boton('Cancelar'); k.acc.append(cancela);
+    const ab = new AbortController(); grabando = { ab, b: k.b, periodo };
+    cancela.addEventListener('click', () => ab.abort());
     try {
-      const r = await G.video(d, { T, loc: loc(), lienzo: b.querySelector('canvas'), signal: ab.signal, onProgreso: (x) => { const n = Math.round(x * 100); barra.firstChild.style.width = n + '%'; barra.setAttribute('aria-valuenow', String(n)); } });
-      const url = URL.createObjectURL(r.blob);
+      const r = await G.video(d, { T, loc: loc(), lienzo: k.cuerpo.querySelector('canvas'), signal: ab.signal, onProgreso: (x) => { const n = Math.round(x * 100); barra.firstChild.style.width = n + '%'; barra.setAttribute('aria-valuenow', String(n)); } });
+      const url = URL.createObjectURL(r.blob); URLS.add(url); k.b.dataset.url = url;
       const v = document.createElement('video'); v.className = 'nv-video'; v.controls = true; v.playsInline = true; v.preload = 'metadata'; v.src = url;
       // la portada del vídeo: el cuadro del título, no el primer cuadro (casi negro)
       try { const pc = document.createElement('canvas'); await G.cartel(d, 2.6, { T, loc: loc(), lienzo: pc }); v.poster = pc.toDataURL('image/jpeg', 0.86); } catch (_) {}
       marco.replaceChildren(v);
-      txt.textContent = T('Listo: aquí tienes el vídeo. También puedes descargarlo.');
-      const a = document.createElement('a'); a.className = 'nuc-chip nv-baja'; a.href = url; a.download = r.nombre; a.textContent = T('Descargar el vídeo');
-      ops.replaceChildren(a);
-      requestAnimationFrame(() => { cu.scrollTop = cu.scrollHeight; });
+      k.txt.textContent = T('Listo: aquí tienes el vídeo. También puedes descargarlo.');
+      const seg = Math.round(r.duracion || G.duracion || 0);
+      k.meta.textContent = metaDe(periodo, T('Vídeo'), seg ? pon('{1} s', fmt(seg)) : '');
+      k.acc.replaceChildren(boton('Descargar', { href: url, archivo: r.nombre, prim: true }));
+      notaDescarga(k); baja(k.b);
       return null;
     } catch (e) {
-      b.remove();
-      if (e && e.codigo === 'cancelado') return { t: 'Se ha cancelado el vídeo.' };
+      k.b.remove(); if (!sala.querySelector('#ns-charla').children.length) sala.classList.add('vacia');
+      if (e && e.codigo === 'cancelado') return limpiando ? null : { t: 'Se ha cancelado el vídeo.' };
       if (e && (e.codigo === 'sin-grabadora' || e.codigo === 'sin-formato')) return { t: 'Este navegador no puede grabar vídeo.', c: [{ l: 'Resumen en PDF', id: 'res-' + periodo, extra: { formato: 'pdf' } }] };
       return { t: 'No se ha podido grabar el vídeo.', c: [{ l: 'Resumen en PDF', id: 'res-' + periodo, extra: { formato: 'pdf' } }] };
     } finally { grabando = null; }
@@ -304,7 +340,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     if (!pedido.periodo) return { t: '¿De qué periodo quieres el resumen?', c: PERIODOS.map(([p, l]) => ({ l, id: 'res-' + p })), modo: 'res-periodo' };
     if (!pedido.formato) return { t: '¿En PDF o en vídeo?', c: [{ l: 'PDF', id: 'res-pdf', nt: true }, { l: 'Vídeo', id: 'res-video' }], modo: 'res-formato' };
     const { periodo, formato } = pedido; pedido = { periodo: null, formato: null };
-    return { luego: () => (formato === 'video' ? resumenVideo(periodo) : resumenPdf(periodo)) };
+    return { luego: () => (formato === 'video' ? resumenVideo(periodo) : resumenPdf(periodo)), formato, periodo };
   }
 
   // NÚCLEO tapa la pantalla entera (fondo opaco): mientras tanto el planeta de Órbita no se dibuja (menos batería y el vídeo
@@ -370,8 +406,9 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     s.innerHTML = '<header class="ns-cab"><button type="button" class="ns-boton" id="ns-inicio"><span aria-hidden="true">←</span> Inicio</button>'
       // dueño, 14:12: «¿Qué puedo pedir?» «muy desordenado; más profesional»: ocupa el sitio de la conversación, con seis
       // tarjetas iguales en dos columnas (emparejadas por tamaño: 4 y 4, 3 y 3, 7 y 7) y una fila por opción; abierto, el botón dice «Cerrar»
+      + '<div class="ns-der"><button type="button" class="ns-boton ns-nueva" id="ns-nueva" aria-label="Nueva conversación"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v3.8h3.8"/></svg><span class="nn-t">Nueva conversación</span></button>'
       + '<button type="button" class="ns-boton ns-ayuda" id="ns-ayuda" aria-expanded="false" aria-controls="ns-panel"><span class="na-abre">¿Qué puedo pedir?</span>'
-      + '<span class="na-cierra"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Cerrar</span></button></header>'
+      + '<span class="na-cierra"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Cerrar</span></button></div></header>'
       + '<div class="ns-panel" id="ns-panel" role="region" aria-labelledby="np-t" hidden><div class="np-in"><div class="np-cab"><h2 id="np-t">¿Qué puedo pedir?</h2>'
       + '<p>Elige una opción o escríbelo abajo, con tus palabras.</p></div><div class="np-grid"></div>'
       + '<p class="ns-contacto"><a href="mailto:hola@guardianagroup.com" translate="no">hola@guardianagroup.com</a> · <span>Responde una persona.</span></p></div></div>'
@@ -398,11 +435,12 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       }
       sec.append(ul); rejilla.append(sec);
     }
-    s.querySelector('#ns-inicio').addEventListener('click', () => { cierraSala(); muestraInicio(true); });
+    s.querySelector('#ns-inicio').addEventListener('click', alInicio);
+    s.querySelector('#ns-nueva').addEventListener('click', limpia);
     s.querySelector('#ns-ayuda').addEventListener('click', () => panel(p.hidden));
     p.addEventListener('scroll', () => bordes(p), { passive: true });
     s.querySelector('#ns-form').addEventListener('submit', (e) => { e.preventDefault(); const i = s.querySelector('#ns-q'); const f = i.value; i.value = ''; panel(false); escribe(f); });
-    s.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!p.hidden) panel(false); else { cierraSala(); muestraInicio(true); } } });
+    s.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!p.hidden) panel(false); else alInicio(); } });
     return s;
   }
   // al desplazar el panel, sus bordes se funden: arriba si hay algo encima; abajo si queda más por ver
@@ -412,8 +450,30 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     p.hidden = !abre; b.setAttribute('aria-expanded', String(!!abre)); sala.classList.toggle('con-panel', !!abre);
     if (abre) { p.scrollTop = 0; bordes(p); const x = p.querySelector('.np-op'); if (x) x.focus({ preventScroll: true }); }
   }
-  function abreSala() {
+  // dueño, 14:42: «quieres volver atrás…»: la sección de NÚCLEO tiene su paso en el historial (?nucleo=pide), así que la
+  // flecha de atrás del navegador vuelve a la portada de NÚCLEO en vez de salir de GUARDIANA; «Inicio» hace lo mismo
+  let apilada = false;
+  const enHistoria = () => !!(history.state && history.state.nucleo === 'sala');
+  function ponEnHistoria() {
+    if (enHistoria()) return;
+    try { const u = new URL(location.href); u.searchParams.set('nucleo', 'pide'); u.hash = ''; history.pushState(Object.assign({}, history.state || {}, { nucleo: 'sala' }), '', u.pathname + u.search); apilada = true; } catch (_) {}
+  }
+  function quitaDeHistoria() {
+    try { const u = new URL(location.href); if (!enHistoria() && !u.searchParams.has('nucleo')) return; u.searchParams.delete('nucleo'); const st = Object.assign({}, history.state || {}); delete st.nucleo; history.replaceState(st, '', u.pathname + u.search + u.hash); } catch (_) {}
+  }
+  function alInicio() {
+    if (apilada && enHistoria()) { history.back(); return; } // el «popstate» de abajo cierra la sección
+    cierraSala(); quitaDeHistoria(); muestraInicio(true);
+  }
+  addEventListener('popstate', () => {
+    if (document.body.classList.contains('dentro')) return; // una sección de Órbita abierta: la lleva orbita.js
+    if (enHistoria()) { if ((!sala || sala.hidden) && ini && !ini.hidden) abreSala(false); }
+    else if (sala && !sala.hidden) { apilada = false; cierraSala(); muestraInicio(true); }
+  });
+  function abreSala(apila) {
     if (!sala) sala = construyeSala();
+    if (!sala.hidden) return;
+    if (apila !== false && !PUERTA_EN_URL) ponEnHistoria();
     if (ini && !ini.hidden) ocultaInicio();
     sala.hidden = false; botonInicio(false); tapa();
     if (salaRed) salaRed.para(); salaRed = red(sala.querySelector('.ns-red'), { nace: false });
@@ -425,41 +485,50 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     if (salaRed) { salaRed.para(); salaRed = null; }
     if (!ini || ini.hidden) botonInicio(true);
   }
+  // ---------- la conversación, ordenada (dueño, 14:42: «el chat sigue multiplicando chat… desorden: ordénalo milimétrico»;
+  // 14:55: «ultra fácil de utilizar y entender», «todo muy bien estructurado») ----------
+  // 1. Solo la última pregunta tiene botones: en cuanto la persona hace algo, los de antes se van (su respuesta queda escrita).
+  // 2. Pedir otra vez lo que ya está preguntado no lo repite: se ilumina la pregunta abierta. Igual con un vídeo en marcha.
+  // 3. Ir a otro sitio con un clic (navegador ZERO, planeta, chat) no deja mensajes: se va directo; al volver, todo sigue igual.
+  // 4. El PDF y el vídeo salen en su tarjeta (arriba). 5. «Nueva conversación» lo deja como al entrar.
+  const charla = () => sala.querySelector('#ns-charla');
+  function baja(el) { const cu = sala.querySelector('#ns-cuerpo'); requestAnimationFrame(() => { if (!el || el === charla().lastElementChild) cu.scrollTop = cu.scrollHeight; else el.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }); }
+  function recorta() { const c = charla(); while (c.children.length > 40) { const x = c.firstElementChild; if (x.dataset.url) { URL.revokeObjectURL(x.dataset.url); URLS.delete(x.dataset.url); } x.remove(); } }
+  function cierraOpciones() { charla().querySelectorAll(':scope > .nuc-b.el > .ns-opciones').forEach((f) => f.remove()); }
+  function abierta() { const x = charla().lastElementChild; return x && x.classList.contains('el') && x.querySelector(':scope > .ns-opciones') ? x : null; }
+  function destaca(b) { if (!b) return; b.classList.remove('destaca'); void b.offsetWidth; b.classList.add('destaca'); baja(b); }
   function burbuja(quien, texto, op) {
     op = op || {};
-    const c = sala.querySelector('#ns-charla'); const p = document.createElement('div'); p.className = 'nuc-b ' + quien;
+    const c = charla(); const p = document.createElement('div'); p.className = 'nuc-b ' + quien;
     if (quien === 'el') { const k = document.createElement('span'); k.className = 'nq'; k.setAttribute('translate', 'no'); k.textContent = 'NÚCLEO'; p.append(k); }
     if (op.x && op.x.length) { const dl = document.createElement('dl'); dl.className = 'nuc-x'; for (const [k, v] of op.x) { const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k; dd.textContent = v; dl.append(dt, dd); } p.append(dl); }
     const tx = document.createElement('p'); tx.className = 'nuc-bt'; tx.textContent = texto; if (quien === 'tu') tx.setAttribute('translate', 'no'); p.append(tx);
     if (op.enlace) { const a = document.createElement('a'); a.href = op.enlace[0]; a.textContent = op.enlace[1]; a.className = 'ns-enlace'; a.setAttribute('translate', 'no'); p.append(a); }
     if (op.c && op.c.length) {
+      p.dataset.pregunta = texto;
       const f = document.createElement('div'); f.className = 'ns-opciones';
       for (const o of op.c) {
         const b = document.createElement('button'); b.type = 'button'; b.className = 'nuc-chip';
         if (typeof o === 'string') { b.textContent = ETQ[o] || o; b.addEventListener('click', () => elige(o, b.textContent)); }
-        else { b.textContent = o.l; if (o.nt) b.setAttribute('translate', 'no'); b.addEventListener('click', () => (o.id ? elige(o.id, b.textContent, o.extra) : (burbuja('tu', b.textContent), o.f()))); }
+        else { b.textContent = o.l; if (o.nt) b.setAttribute('translate', 'no'); b.addEventListener('click', () => (o.id ? elige(o.id, b.textContent, o.extra) : (cierraOpciones(), burbuja('tu', b.textContent), o.f()))); }
         f.append(b);
       }
       p.append(f);
     }
-    c.append(p); while (c.children.length > 40) c.firstChild.remove(); sala.classList.remove('vacia');
-    const cu = sala.querySelector('#ns-cuerpo'); requestAnimationFrame(() => { cu.scrollTop = cu.scrollHeight; });
+    c.append(p); recorta(); sala.classList.remove('vacia');
+    baja();
+    return p;
   }
   const ctx = () => ({ modo, pais: paisEn, hayWeb: hayWeb() });
-  function responde(r, frase) {
-    if (!r) return;
-    if (!sala || sala.hidden) abreSala();
+  // qué haría NÚCLEO con lo pedido (sin enseñarlo todavía)
+  function calcula(r, frase) {
+    if (r.quiza) return { t: '¿Quisiste decir…?', c: r.quiza };
+    if (r.nada) return { t: 'No he reconocido esa petición. Mira qué puedes pedirme o ve al navegador ZERO.', c: ['zero', { l: '¿Qué puedo pedir?', f: () => panel(true) }] };
+    return respuesta(r, frase) || { t: 'No he reconocido esa petición.', c: [{ l: '¿Qué puedo pedir?', f: () => panel(true) }] };
+  }
+  function ejecuta(o) {
     if (salaRed) salaRed.habla();
-    modo = null;
-    let o;
-    if (r.quiza) o = { t: '¿Quisiste decir…?', c: r.quiza };
-    else if (r.nada) o = { t: 'No he reconocido esa petición. Mira qué puedes pedirme o ve al navegador ZERO.', c: ['zero', { l: '¿Qué puedo pedir?', f: () => panel(true) }] };
-    else o = respuesta(r, frase);
-    // dueño, 10:53: «cuando la persona clica, no hace falta que digas ya te llevo y luego salte»: si la respuesta lleva a otro
-    // sitio, se va directamente; al volver, el botón dice «Regresar a NÚCLEO».
-    if (o && o.va && o.a) { ponVuelta('nucleo'); o.a(); return; }
-    if (o && o.luego) { o.luego().then((x) => { if (x) muestra(x); }, () => muestra({ t: 'No he podido preparar el resumen. Inténtalo de nuevo.' })); return; }
-    if (!o) o = { t: 'No he reconocido esa petición.', c: [{ l: '¿Qué puedo pedir?', f: () => panel(true) }] };
+    if (o.luego) { modo = null; o.luego().then((x) => { if (x) muestra(x); }, () => muestra({ t: 'No he podido preparar el resumen. Inténtalo de nuevo.' })); return; }
     muestra(o);
   }
   function muestra(o) {
@@ -467,15 +536,44 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     modo = o.modo || null;
     const i = sala.querySelector('#ns-q');
     if (i) i.placeholder = T(modo === 'web' ? 'Escribe la dirección, por ejemplo eltiempo.com' : modo === 'pais' ? 'Escribe el país' : modo === 'buscar' ? 'Escribe lo que quieres buscar' : 'Escribe qué quieres hacer…');
-    if (o.a) { if (o.va) setTimeout(o.a, 1100); else o.a(); }
+    if (o.a) o.a();
   }
-  function elige(id, etiqueta, extra) { burbuja('tu', etiqueta || T(ETQ[id] || id)); responde(Object.assign({ id }, extra || {})); }
+  const vaAOtroSitio = (o) => { cierraOpciones(); modo = null; ponVuelta('nucleo'); o.a(); };
+  // un botón (de una pregunta, de las acciones rápidas o de «¿Qué puedo pedir?»)
+  function elige(id, etiqueta, extra) {
+    if (!sala || sala.hidden) abreSala();
+    const o = calcula(Object.assign({ id }, extra || {}));
+    if (o.va && o.a) { vaAOtroSitio(o); return; }
+    if (o.luego && o.formato === 'video' && grabando) {
+      cierraOpciones();
+      if (o.periodo !== grabando.periodo) { burbuja('tu', etiqueta || T(ETQ[id] || id)); burbuja('el', T('Ya se está haciendo un vídeo.')); }
+      destaca(grabando.b); return;
+    }
+    const ab = abierta();
+    if (ab && !o.luego && o.c && ab.dataset.pregunta === T(o.t)) { destaca(ab); return; }
+    cierraOpciones(); burbuja('tu', etiqueta || T(ETQ[id] || id)); ejecuta(o);
+  }
+  // lo que se escribe en la caja
   function escribe(frase) {
     const f = String(frase || '').trim(); if (!f) return;
     if (!sala || sala.hidden) abreSala();
-    burbuja('tu', f);
+    cierraOpciones(); burbuja('tu', f);
     let r = null; try { r = window.NucleoMotor ? NucleoMotor.entiende(f, ctx()) : null; } catch (_) {}
-    responde(r || { nada: true }, f);
+    const o = calcula(r || { nada: true }, f);
+    // escrito, queda constancia en una línea («Abro el navegador ZERO.») y se va al momento
+    if (o.va && o.a) { burbuja('el', T(o.t)); vaAOtroSitio(o); return; }
+    if (o.luego && o.formato === 'video' && grabando) { burbuja('el', T('Ya se está haciendo un vídeo.')); destaca(grabando.b); return; }
+    ejecuta(o);
+  }
+  // «Nueva conversación»: todo como al entrar (el vídeo en marcha se cancela y los archivos hechos se sueltan)
+  let limpiando = false;
+  function limpia() {
+    limpiando = true; if (grabando) { try { grabando.ab.abort(); } catch (_) {} }
+    for (const u of URLS) URL.revokeObjectURL(u); URLS.clear();
+    charla().replaceChildren(); pedido = { periodo: null, formato: null }; modo = null;
+    sala.classList.add('vacia'); panel(false);
+    const i = sala.querySelector('#ns-q'); if (i) { i.value = ''; i.placeholder = T('Escribe qué quieres hacer…'); i.focus({ preventScroll: true }); }
+    setTimeout(() => { limpiando = false; }, 0);
   }
 
   // ---------- los países que conoce el planeta, en español, inglés, portugués y el idioma de la página ----------
@@ -522,7 +620,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
 
   // ---------- arranque: la primera vez en esta visita, con su nacimiento; al volver en la misma visita, al momento ----------
   let visto = false; try { visto = sessionStorage.getItem('guardiana-nucleo') === '1'; sessionStorage.setItem('guardiana-nucleo', '1'); } catch (_) {}
-  if (q.get('nucleo') === 'pide') abreSala();
+  if (q.get('nucleo') === 'pide') { try { history.replaceState(Object.assign({}, history.state || {}, { nucleo: 'sala' }), ''); } catch (_) {} abreSala(false); }
   else if (q.get('nucleo') === '0' || PUERTA_EN_URL) botonInicio(true);
   else muestraInicio(visto);
   window.GuardianaNucleo = { inicio: () => muestraInicio(true), sala: abreSala, pide: escribe };

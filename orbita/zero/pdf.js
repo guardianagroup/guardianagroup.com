@@ -105,7 +105,8 @@
   }
 
   // datos: {titulo, subtitulo, resumen:[[número, etiqueta, rojo?]…], secciones:[{titulo, cols, filas}], pie, archivo}; T traduce
-  function descarga(datos, T) {
+  // crea(): el PDF sin descargarlo ({ blob, paginas }); NÚCLEO lo enseña en una tarjeta con «Abrir» y «Descargar» (27 Oct 2026)
+  function crea(datos, T) {
     T = T || ((s) => s);
     const d = documento();
     d.texto(M, d.y + 9, 'GUARDIANA', 8.5, true, '#1d2733'); d.texto(M + ancho('GUARDIANA ', 8.5, true), d.y + 9, datos.marca || '/ ZERO', 8.5, false, '#7d8f9e'); // NÚCLEO usa '/ NÚCLEO' (27 Oct 2026)
@@ -130,6 +131,10 @@
       const pn = p + ' / ' + n; ops.push('BT /F1 7 Tf ' + rgb('#7d8f9e') + ' rg ' + n2(W - M - ancho(pn, 7)) + ' ' + n2(H - yy) + ' Td ' + lit(pn) + ' Tj ET');
       return ops;
     });
+    return { blob, paginas: d.pags.length };
+  }
+  function descarga(datos, T) {
+    const { blob } = crea(datos, T);
     const url = URL.createObjectURL(blob), a = document.createElement('a');
     a.href = url; a.download = datos.archivo || 'ZERO-informe.pdf'; a.rel = 'noopener'; a.style.display = 'none';
     document.body.append(a); a.click(); a.remove();
@@ -137,5 +142,5 @@
     return blob;
   }
 
-  window.ZeroPdf = { cabe, descarga };
+  window.ZeroPdf = { cabe, crea, descarga };
 })();

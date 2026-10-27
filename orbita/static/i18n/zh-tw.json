@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "已經在製作一部影片。",
   "No se ha podido grabar el vídeo.": "無法錄製影片。",
   "Se ha cancelado el vídeo.": "影片已取消。",
-  "Multas": "罰款"
+  "Multas": "罰款",
+  "Abrir": "開啟",
+  "Listo: aquí tienes el resumen en PDF.": "好了：這是 PDF 格式的摘要。",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "下載後，檔案會儲存在你裝置的「下載」資料夾中。",
+  "Imprimir o guardar como PDF": "列印或另存為 PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "在列印視窗中，選擇「另存為 PDF」。",
+  "{1} páginas": "{1} 頁",
+  "{1} página": "{1} 頁"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

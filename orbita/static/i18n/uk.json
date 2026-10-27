@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Відео вже створюється.",
   "No se ha podido grabar el vídeo.": "Не вдалося записати відео.",
   "Se ha cancelado el vídeo.": "Відео скасовано.",
-  "Multas": "Штрафи"
+  "Multas": "Штрафи",
+  "Abrir": "Відкрити",
+  "Listo: aquí tienes el resumen en PDF.": "Готово: ось зведення у PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Після завантаження файл зберігається в папці «Завантаження» на вашому пристрої.",
+  "Imprimir o guardar como PDF": "Друк або збереження як PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "У вікні друку виберіть «Зберегти як PDF».",
+  "{1} páginas": "{1} стор.",
+  "{1} página": "{1} стор."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

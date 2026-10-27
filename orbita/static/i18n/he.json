@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "וידאו כבר נמצא בהכנה.",
   "No se ha podido grabar el vídeo.": "לא ניתן היה להקליט את הווידאו.",
   "Se ha cancelado el vídeo.": "הווידאו בוטל.",
-  "Multas": "קנסות"
+  "Multas": "קנסות",
+  "Abrir": "פתח",
+  "Listo: aquí tienes el resumen en PDF.": "מוכן: הנה הסיכום בקובץ PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "כשתוריד אותו, הוא יישמר בתיקיית ההורדות במכשיר שלך.",
+  "Imprimir o guardar como PDF": "הדפס או שמור כ-PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "בחלון ההדפסה, בחר «שמירה כ-PDF».",
+  "{1} páginas": "{1} עמודים",
+  "{1} página": "עמוד אחד"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

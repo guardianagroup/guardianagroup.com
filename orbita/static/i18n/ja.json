@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "すでに動画を作成中です。",
   "No se ha podido grabar el vídeo.": "動画を録画できませんでした。",
   "Se ha cancelado el vídeo.": "動画をキャンセルしました。",
-  "Multas": "制裁金"
+  "Multas": "制裁金",
+  "Abrir": "開く",
+  "Listo: aquí tienes el resumen en PDF.": "できました。こちらがPDFの概要です。",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "ダウンロードすると、お使いの端末の「ダウンロード」フォルダに保存されます。",
+  "Imprimir o guardar como PDF": "印刷またはPDFとして保存",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "印刷画面で「PDFとして保存」を選んでください。",
+  "{1} páginas": "{1}ページ",
+  "{1} página": "{1}ページ"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

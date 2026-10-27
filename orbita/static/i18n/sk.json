@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Video sa už vytvára.",
   "No se ha podido grabar el vídeo.": "Video sa nepodarilo nahrať.",
   "Se ha cancelado el vídeo.": "Video bolo zrušené.",
-  "Multas": "Pokuty"
+  "Multas": "Pokuty",
+  "Abrir": "Otvoriť",
+  "Listo: aquí tienes el resumen en PDF.": "Hotovo: tu je zhrnutie v PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Keď si ho stiahneš, uloží sa do priečinka Stiahnuté súbory v tvojom zariadení.",
+  "Imprimir o guardar como PDF": "Vytlačiť alebo uložiť ako PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "V okne tlače vyber «Uložiť ako PDF».",
+  "{1} páginas": "{1} strán",
+  "{1} página": "{1} strana"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

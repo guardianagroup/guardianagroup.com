@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Video se već izrađuje.",
   "No se ha podido grabar el vídeo.": "Video nije bilo moguće snimiti.",
   "Se ha cancelado el vídeo.": "Video je otkazan.",
-  "Multas": "Kazne"
+  "Multas": "Kazne",
+  "Abrir": "Otvori",
+  "Listo: aquí tienes el resumen en PDF.": "Gotovo: evo sažetka u PDF-u.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Kad ga preuzmeš, sprema se u mapu Preuzimanja na tvom uređaju.",
+  "Imprimir o guardar como PDF": "Ispiši ili spremi kao PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "U prozoru za ispis odaberi «Spremi kao PDF».",
+  "{1} páginas": "{1} stranica",
+  "{1} página": "{1} stranica"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

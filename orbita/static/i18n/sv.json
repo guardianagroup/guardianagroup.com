@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "En video håller redan på att göras.",
   "No se ha podido grabar el vídeo.": "Videon kunde inte spelas in.",
   "Se ha cancelado el vídeo.": "Videon har avbrutits.",
-  "Multas": "Böter"
+  "Multas": "Böter",
+  "Abrir": "Öppna",
+  "Listo: aquí tienes el resumen en PDF.": "Klart: här är sammanfattningen som PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "När du laddar ner den sparas den i mappen Hämtade filer på din enhet.",
+  "Imprimir o guardar como PDF": "Skriv ut eller spara som PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "Välj «Spara som PDF» i utskriftsfönstret.",
+  "{1} páginas": "{1} sidor",
+  "{1} página": "{1} sida"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Er wordt al een video gemaakt.",
   "No se ha podido grabar el vídeo.": "De video kon niet worden opgenomen.",
   "Se ha cancelado el vídeo.": "De video is geannuleerd.",
-  "Multas": "Boetes"
+  "Multas": "Boetes",
+  "Abrir": "Openen",
+  "Listo: aquí tienes el resumen en PDF.": "Klaar: hier is de samenvatting als pdf.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Als je het downloadt, wordt het opgeslagen in de map Downloads van je apparaat.",
+  "Imprimir o guardar como PDF": "Afdrukken of opslaan als pdf",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "Kies in het afdrukvenster «Opslaan als pdf».",
+  "{1} páginas": "{1} pagina’s",
+  "{1} página": "{1} pagina"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

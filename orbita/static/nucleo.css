@@ -88,6 +88,10 @@
 .ns-boton:hover{background:rgba(156,195,228,.14);border-color:rgba(156,195,228,.55);color:#F4F6F8}
 .ns-boton:focus-visible,.ns-form button:focus-visible,.ns-enlace:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
 .ns-ayuda[aria-expanded="true"]{background:rgba(156,195,228,.18);border-color:#9CC3E4;color:#F4F6F8}
+.ns-der{display:flex;align-items:center;gap:8px}
+/* «Nueva conversación» (dueño, 14:42 y 14:55): solo cuando ya hay conversación; en el teléfono, solo el icono */
+.ns-nueva svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.nuc-sala.vacia .ns-nueva,.nuc-sala.con-panel .ns-nueva{display:none}
 .ns-marca{font:600 12px/1 'IBM Plex Mono',Consolas,monospace;letter-spacing:.32em;color:#9CC3E4}
 /* dueño, 14:12: «¿Qué puedo pedir?» «muy desordenado; más profesional»: deja de flotar sobre todo y ocupa el sitio de la
    conversación, entre la cabecera y la caja (sin las acciones rápidas, que ya están dentro). Seis tarjetas iguales en dos
@@ -170,7 +174,28 @@
 .nv-barra{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(156,195,228,.14)}
 .nv-barra i{display:block;height:100%;width:0;background:#9CC3E4;box-shadow:0 0 12px rgba(156,195,228,.6);transition:width .25s linear}
 a.nuc-chip{display:inline-flex;align-items:center;text-decoration:none}
-@media (max-width:640px){.ns-charla .nuc-b.nuc-video{width:96%}}
+@media (max-width:640px){.ns-charla .nuc-b.nuc-video,.ns-charla .nuc-b.nuc-res{width:96%}.ns-nueva .nn-t{display:none}.ns-nueva{padding:0 11px}}
+/* dueño, 14:42: el resultado, PDF o vídeo, siempre en la misma tarjeta: qué es, de qué periodo, y sus botones; nada se
+   descarga solo, y debajo se dice dónde se guarda */
+.ns-charla .nuc-b.nuc-res{box-sizing:border-box;width:min(560px,88%)}
+.nr-ficha{display:flex;align-items:center;gap:12px;margin-top:10px;padding:12px 14px;border:1px solid rgba(156,195,228,.2);border-radius:12px;background:rgba(6,8,12,.45)}
+.nr-ico{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:10px;background:rgba(156,195,228,.12);color:#9CC3E4}
+.nr-ico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.nr-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.nr-txt b{font-weight:600;font-size:15px;line-height:1.3;color:#F4F6F8}
+.nr-txt small{font-size:13px;line-height:1.35;color:#a9bccd}
+.nr-cuerpo:empty{display:none}
+.nr-acc{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.nr-b{appearance:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-width:112px;height:40px;padding:0 18px;border-radius:999px;border:1px solid rgba(156,195,228,.38);background:transparent;color:#dbe9f4;font:600 14px/1 'IBM Plex Sans',system-ui,sans-serif;text-decoration:none;cursor:pointer;transition:background .15s,border-color .15s,filter .15s}
+.nr-b:hover{background:rgba(156,195,228,.14);border-color:rgba(156,195,228,.6);color:#F4F6F8}
+.nr-b.nr-prim{background:#9CC3E4;border-color:#9CC3E4;color:#06080C}
+.nr-b.nr-prim:hover{filter:brightness(1.07);background:#9CC3E4;color:#06080C}
+.nr-b:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.nr-nota{margin:9px 0 0;font-size:12.5px;line-height:1.45;color:#7f93a6}
+/* lo que ya estaba preguntado (o el vídeo que se está haciendo) se ilumina en vez de repetirse */
+.nuc-b.destaca{animation:nucdestaca 1s ease}
+@keyframes nucdestaca{0%,100%{box-shadow:0 0 0 0 rgba(156,195,228,0)}35%{box-shadow:0 0 0 4px rgba(156,195,228,.38)}}
+@media (prefers-reduced-motion:reduce){.nuc-b.destaca{animation:none;outline:2px solid rgba(156,195,228,.5)}}
 @media (prefers-reduced-motion:reduce){.nv-barra i{transition:none}}
 /* Anchos con su relleno dentro: en el teléfono, la cabecera, la columna y la caja de escribir ya no se salen de la pantalla
    (se salían 24–32 px), y en el ordenador la caja de escribir mide lo mismo que los seis botones de encima */

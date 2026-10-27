@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "একটি ভিডিও ইতিমধ্যে তৈরি হচ্ছে।",
   "No se ha podido grabar el vídeo.": "ভিডিওটি রেকর্ড করা যায়নি।",
   "Se ha cancelado el vídeo.": "ভিডিওটি বাতিল করা হয়েছে।",
-  "Multas": "জরিমানা"
+  "Multas": "জরিমানা",
+  "Abrir": "খুলুন",
+  "Listo: aquí tienes el resumen en PDF.": "তৈরি: এই নিন PDF-এ সারাংশ।",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "ডাউনলোড করলে এটি আপনার ডিভাইসের ডাউনলোড ফোল্ডারে সংরক্ষিত হয়।",
+  "Imprimir o guardar como PDF": "প্রিন্ট করুন বা PDF হিসেবে সংরক্ষণ করুন",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "প্রিন্ট উইন্ডোতে «PDF হিসেবে সংরক্ষণ» বেছে নিন।",
+  "{1} páginas": "{1} পৃষ্ঠা",
+  "{1} página": "{1} পৃষ্ঠা"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

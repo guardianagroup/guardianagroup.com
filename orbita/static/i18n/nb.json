@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Det lages allerede en video.",
   "No se ha podido grabar el vídeo.": "Videoen kunne ikke tas opp.",
   "Se ha cancelado el vídeo.": "Videoen er avbrutt.",
-  "Multas": "Bøter"
+  "Multas": "Bøter",
+  "Abrir": "Åpne",
+  "Listo: aquí tienes el resumen en PDF.": "Ferdig: her er sammendraget som PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Når du laster det ned, lagres det i Nedlastinger-mappen på enheten din.",
+  "Imprimir o guardar como PDF": "Skriv ut eller lagre som PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "Velg «Lagre som PDF» i utskriftsvinduet.",
+  "{1} páginas": "{1} sider",
+  "{1} página": "{1} side"
  },
  "p": {
   "intento": "Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

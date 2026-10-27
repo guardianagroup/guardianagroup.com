@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Zaten bir video hazırlanıyor.",
   "No se ha podido grabar el vídeo.": "Video kaydedilemedi.",
   "Se ha cancelado el vídeo.": "Video iptal edildi.",
-  "Multas": "Cezalar"
+  "Multas": "Cezalar",
+  "Abrir": "Aç",
+  "Listo: aquí tienes el resumen en PDF.": "Hazır: işte PDF özeti.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "İndirdiğinde, cihazının İndirilenler klasörüne kaydedilir.",
+  "Imprimir o guardar como PDF": "Yazdır veya PDF olarak kaydet",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "Yazdırma penceresinde «PDF olarak kaydet»i seç.",
+  "{1} páginas": "{1} sayfa",
+  "{1} página": "{1} sayfa"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",
