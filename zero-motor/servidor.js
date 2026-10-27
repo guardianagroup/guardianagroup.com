@@ -659,6 +659,9 @@ class Sesion {
     let o; try { o = JSON.parse(m); } catch (_) { return; }
     try {
       if (o.t === 'hola') return await this.abre(o.w, o.h, o.idioma);
+      // 27 Oct 2026 (dueño: «Tor ULTRA tiene que permitir navegar»): lo que llega mientras la celda cambia a Tor o vuelve
+      // (abrir una web, pestañas, destruir…) espera a la celda nueva en vez de perderse. Ratón y teclado no esperan.
+      if (this.cambiaUltra && !['raton', 'rueda', 'tecla', 'texto'].includes(o.t)) while (this.cambiaUltra) await this.cambiaUltra;
       if (!this.page || this.destruida) return;
       if (o.t === 'abrir') return await this.ve(String(o.url || '').trim());
       if (this.sellada && (o.t === 'raton' || o.t === 'rueda' || o.t === 'tecla' || o.t === 'texto')) return; // sellada: la celda no recibe nada
@@ -692,13 +695,18 @@ class Sesion {
         // ULTRA: la celda entera sale por Tor. Hace falta una celda nueva (el proxy se fija al crearla): se cierra la actual.
         const quiere = !!o.ultra;
         if (!TOR_PROXY) { this.suceso({ clase: 'ultra', certeza: 'comprobado', dominio: this.webActual, texto: 'ULTRA no está disponible en este motor: no tiene salida por Tor configurada. ZERO sigue como hasta ahora.', detalle: { disponible: false } }); return this.env({ t: 'ultra', disponible: false, activo: false }); }
+        while (this.cambiaUltra) await this.cambiaUltra; // de uno en uno
         if (quiere === !!this.ultra) return;
-        this.ultra = quiere; this.op('ultra ' + (quiere ? 'activado' : 'desactivado') + ': celda nueva');
-        try { if (this.ctx) await this.ctx.close(); } catch (_) {}
-        this.pestanas = []; this.act = null; this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.descargas = new Map();
-        await this.abre(this.w, this.h);
-        this.suceso({ clase: 'ultra', certeza: 'comprobado', dominio: '', texto: quiere ? 'ULTRA activado: esta celda nueva sale a internet por la red Tor (tres repetidores). Las webs ven la salida de Tor, no la de GUARDIANA. Es más lento.' : 'ULTRA desactivado: celda nueva con la salida normal de GUARDIANA.', detalle: { disponible: true, activo: quiere } });
-        return this.env({ t: 'ultra', disponible: true, activo: quiere });
+        let listo; this.cambiaUltra = new Promise((r) => { listo = r; });
+        try {
+          this.ultra = quiere; this.op('ultra ' + (quiere ? 'activado' : 'desactivado') + ': celda nueva');
+          try { if (this.ctx) await this.ctx.close(); } catch (_) {}
+          this.pestanas = []; this.act = null; this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.descargas = new Map();
+          await this.abre(this.w, this.h, this.idioma); // con el idioma de la persona (antes volvía a es-ES)
+          this.suceso({ clase: 'ultra', certeza: 'comprobado', dominio: '', texto: quiere ? 'ULTRA activado: esta celda nueva sale a internet por la red Tor (tres repetidores). Las webs ven la salida de Tor, no la de GUARDIANA. Es más lento.' : 'ULTRA desactivado: celda nueva con la salida normal de GUARDIANA.', detalle: { disponible: true, activo: quiere } });
+          this.env({ t: 'ultra', disponible: true, activo: quiere });
+        } finally { this.cambiaUltra = null; listo(); }
+        return;
       }
       if (o.t === 'modo') { if ('observatorio' in o) { this.observatorio = !!o.observatorio; this.op('modo observatorio ' + (this.observatorio ? 'activado' : 'desactivado')); } if (o.nivel) await this.ponNivel(o.nivel); return; }
       if (o.t === 'permitir') { const k = String(o.clave || '').slice(0, 120); if (!k) return; if (o.on) this.permitidas.add(k); else this.permitidas.delete(k); this.op((o.on ? 'permitida ' : 'vuelve a cortarse ') + k); this.suceso({ clase: 'permiso-empresa', certeza: 'comprobado', dominio: this.webActual, texto: (o.on ? 'Has permitido las conexiones de ' : 'Vuelves a cortar las conexiones de ') + k.replace(/^e:/, '') + ' en esta sesión.', detalle: { clave: k, on: !!o.on } }); return; }
