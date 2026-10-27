@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "ZERO が確認済み：既知の危険なし",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "サイトが人間であることの確認を求めています。その間 ZERO が見張ります",
   "Lo que ZERO ha visto:": "ZERO が見たもの：",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "自己責任で入りました。ZERO は引き続き見張っています。"
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "自己責任で入りました。ZERO は引き続き見張っています。",
+  "Continuar en ZERO": "ZERO で続ける",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "閲覧はお使いの端末から隔離されたままですが、入力した内容はこのサイトに届きます。",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "重大なリスクがある場合、ZERO は入らせません。あなたの安全のためです。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "Verificat de ZERO: niciun pericol cunoscut",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Site-ul îți cere să confirmi că ești om; ZERO veghează între timp",
   "Lo que ZERO ha visto:": "Ce a văzut ZERO:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Ai intrat pe propria răspundere. ZERO veghează în continuare."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Ai intrat pe propria răspundere. ZERO veghează în continuare.",
+  "Continuar en ZERO": "Continuă în ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Navigarea rămâne izolată de dispozitivul tău, dar ce scrii va ajunge la acest site.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "În fața unui risc grav, ZERO nu te lasă să intri. Este pentru siguranța ta."
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

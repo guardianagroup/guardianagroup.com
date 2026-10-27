@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "Imekaguliwa na ZERO: hakuna hatari zinazojulikana",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Tovuti inakuomba uthibitishe kwamba wewe ni binadamu; ZERO inalinda wakati huo",
   "Lo que ZERO ha visto:": "Kile ambacho ZERO iliona:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Umeingia kwa jukumu lako. ZERO inaendelea kulinda."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Umeingia kwa jukumu lako. ZERO inaendelea kulinda.",
+  "Continuar en ZERO": "Endelea ndani ya ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Kuvinjari kunabaki kumetengwa na kifaa chako, lakini unachoandika kitafika kwenye tovuti hii.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Hatari ikiwa kubwa, ZERO haikuruhusu kuingia. Ni kwa usalama wako."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

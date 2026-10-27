@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "Ελέγχθηκε από το ZERO: κανένας γνωστός κίνδυνος",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Ο ιστότοπος ζητά να επιβεβαιώσεις ότι είσαι άνθρωπος· το ZERO επαγρυπνεί στο μεταξύ",
   "Lo que ZERO ha visto:": "Τι είδε το ZERO:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Μπήκες με δική σου ευθύνη. Το ZERO συνεχίζει να επαγρυπνεί."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Μπήκες με δική σου ευθύνη. Το ZERO συνεχίζει να επαγρυπνεί.",
+  "Continuar en ZERO": "Συνέχεια στο ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Η περιήγηση παραμένει απομονωμένη από τη συσκευή σου, αλλά ό,τι πληκτρολογήσεις θα φτάσει σε αυτόν τον ιστότοπο.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Όταν ο κίνδυνος είναι σοβαρός, το ZERO δεν σε αφήνει να μπεις. Είναι για την ασφάλειά σου."
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "Diperiksa ZERO: tidak ada bahaya yang dikenal",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Situs meminta kamu memastikan bahwa kamu manusia; ZERO berjaga sementara itu",
   "Lo que ZERO ha visto:": "Yang dilihat ZERO:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Kamu masuk atas tanggung jawabmu sendiri. ZERO terus berjaga."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Kamu masuk atas tanggung jawabmu sendiri. ZERO terus berjaga.",
+  "Continuar en ZERO": "Lanjutkan di ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Penjelajahan tetap terisolasi dari perangkatmu, tetapi apa yang kamu ketik akan sampai ke situs ini.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Jika risikonya serius, ZERO tidak mengizinkan masuk. Ini demi keamananmu."
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

@@ -175,7 +175,6 @@
     setTimeout(() => cv.focus(), 50);
   };
   M.chequeoSalir = () => env({ t: 'chequeo', accion: 'salir' });
-  M.chequeoEntrar = () => env({ t: 'chequeo', accion: 'entrar' }); // «Entrar bajo mi responsabilidad» en una web que ZERO detuvo
   M.atras = () => env({ t: 'atras' }); M.adelante = () => env({ t: 'adelante' }); M.recargar = () => env({ t: 'recargar' });
   M.modo = (observatorio) => { M.observatorio = !!observatorio; env({ t: 'modo', observatorio: M.observatorio }); };
   M.ultraPon = (on) => env({ t: 'modo', ultra: !!on });

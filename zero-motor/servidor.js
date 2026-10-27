@@ -26,7 +26,7 @@ const RAIZ = path.join(__dirname, '..');
 const PUERTO = +process.argv[2] || 8792;
 const MOCK = !!process.env.ZERO_MOCK;
 const SESIONES = new Map(); // token de señuelo → sesión (para el colector /s/<token>)
-const VERSION = 'prototipo 0.2 · 27 Oct 2026 (ZERO entra antes que tú)';
+const VERSION = 'prototipo 0.2 · 27 Oct 2026 (ZERO entra antes que tú; con riesgo grave no se entra)';
 const CLAVE_SESION = crypto.randomBytes(32); // efímera: con ella se sella el comprobante de cada sesión
 // Blindaje del motor (26 Oct 2026, ronda 40 punto 11): solo las páginas de GUARDIANA pueden abrir sesiones; hay un tope
 // de burbujas vivas; una burbuja que nadie mira se cierra sola; ningún mensaje puede ser enorme; en la burbuja solo se abren
@@ -143,9 +143,8 @@ class Sesion {
     this.nCuadros = { enviados: 0, descartados: 0 }; this.cuadroPendiente = null;
     this.chequeo = null; this.nCheq = 0; // «ZERO entra antes que tú»: la comprobación en curso (una a la vez, la de la pestaña que se ve)
     this.comprobadas = new Map(); // web → hora de su última comprobación limpia, solo en esta burbuja (nadie más la ve; se borra con ella)
-    // dueño (18:07): ZERO avisa y la persona decide. Webs en las que eligió «Entrar bajo mi responsabilidad» (solo en esta burbuja) y
-    // la última que ZERO detuvo (lista de webs peligrosas o certificado), para poder abrirla si lo pide
-    this.entraIgual = new Set(); this.ultimoBloqueo = null;
+    // dueño (18:40), con la agencia (ronda 67: ChatGPT y Astra): ante un riesgo grave (lista de webs peligrosas, certificado que no
+    // pasa, algo peligroso dentro, dirección interna) ZERO no deja entrar; no hay «entrar igualmente». Ante una señal, avisa y decide la persona.
     ws.on('drain', () => { if (this.cuadroPendiente && this.ws.abierto && this.ws.atraso <= ATRASO_MAX) { const d = this.cuadroPendiente; this.cuadroPendiente = null; this.ws.send(Buffer.from(d, 'base64')); this.nCuadros.enviados++; } });
     this.nivel = process.env.ZERO_NIVEL_INICIAL || 'normal'; // dueño (26 Oct 2026, 22:42): un solo modo, Normal; cada empresa se corta o se deja pasar con su interruptor // 26 Oct 2026: por defecto se abre todo y la persona elige qué cortar
     VIVAS.add(this); this.ultimaMirada = Date.now();
@@ -387,10 +386,8 @@ class Sesion {
       st.webActual = host;
       // 1) web peligrosa conocida (listas de malware/phishing) → se detiene dentro de la burbuja
       const d = cortes.decide({ url, tipo: 'document', origen, host, tercero: false });
-      if (d.bloquear && d.proposito === 'malware' && this.entraIgual.has(host)) {
-        this.suceso({ clase: 'riesgo', certeza: 'comprobado', dominio: host, texto: 'Has entrado bajo tu responsabilidad en una web que figura en una lista de webs peligrosas. Se abre dentro de la burbuja, lejos de tu equipo, y ZERO sigue cortando lo peligroso de otras webs.', detalle: { regla: d.regla, lista: d.lista } });
-      } else if (d.bloquear && d.proposito === 'malware') {
-        st.n.bloqueos++; this.ultimoBloqueo = { host, url: String(url).slice(0, 4096), tipo: 'lista' };
+      if (d.bloquear && d.proposito === 'malware') { // riesgo grave: no se abre, y no hay forma de «entrar igualmente»
+        st.n.bloqueos++;
         this.suceso({ clase: 'bloqueo', certeza: 'comprobado', dominio: host, texto: 'Esta dirección figura en una lista pública de webs peligrosas. ZERO no la ha abierto.', detalle: { regla: d.regla, lista: d.lista } });
         this.hitoChequeo(pest, 'listas', { peligrosa: true, lista: (cortes.listas[d.lista] || {}).nombre || null });
         return route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: paginaBloqueo('Esta web está en una lista de webs peligrosas', 'ZERO ha detenido la apertura antes de cargar nada. La dirección coincide con una regla de una lista pública de malware o fraude; la lista puede equivocarse, pero no merece la pena arriesgarse.', host + ' · regla ' + d.regla + ' · ' + (cortes.listas[d.lista] || {}).nombre) }).catch(() => {});
@@ -413,7 +410,6 @@ class Sesion {
       if (MOCK && !esLocal(host)) return this.simula(route, req, tipo);
       return route.continue().catch(() => {});
     }
-    if (d.bloquear && d.proposito === 'malware' && this.entraIgual.has(host)) return route.continue().catch(() => {}); // la web en la que la persona eligió entrar
     const permitida = this.permiso(host, d.bloquear ? PROPOSITO[d.proposito] || 'Rastreador' : 'Otra empresa');
     if (d.bloquear) {
       if (this.nivel === 'observar' && d.proposito !== 'malware') { this.corte(host, tipo, origen, tercero, d, st, 'visto'); return route.continue().catch(() => {}); }
@@ -702,8 +698,7 @@ class Sesion {
     try {
       const u = this.page.url(); if (this.act) this.act.url = u;
       const rs = this.act && this.act.respondio; const ok = !!(rs && rs.ok && hostDe(rs.url) === hostDe(u));
-      const sinCert = !!(this.act && this.act.ignoraCert && this.act.ignoraCert === hostDe(u)); // entró bajo su responsabilidad con un certificado que no pasa
-      this.env({ t: 'nav', url: u, host: hostDe(u), segura: u.startsWith('https:') && !sinCert, cargada: !!cargada, ok });
+      this.env({ t: 'nav', url: u, host: hostDe(u), segura: u.startsWith('https:'), cargada: !!cargada, ok });
       if (cargada) this.page.title().then((tt) => this.env({ t: 'titulo', titulo: tt })).catch(() => {});
     } catch (_) {}
   }
@@ -729,9 +724,8 @@ class Sesion {
       return c0;
     }
     if (c0) this.sueltaChequeo(c0, 'otra web', false); // otra apertura antes de terminar: la anterior se descarta sin enseñarla
-    if (p.ignoraCert && p.ignoraCert !== host) { p.ignoraCert = null; p.cdp.send('Security.setIgnoreCertificateErrors', { ignore: false }).catch(() => {}); } // el permiso de certificado era solo para aquella web
-    const riesgo = motivo === 'riesgo';
-    const c = { id: ++this.nCheq, p, host, url: String(url).slice(0, 300), motivo: motivo || 'abrir', t0: Date.now(), iSuc: this.sucesos.length, vig0: { ...this.vig }, saltos: [], hitos: {}, cuadro: null, listo: false, tope: null, doc: null, calma: null, fallo: null, rapida: riesgo || reciente(host), riesgo };
+    p.grave = null; // la pestaña va a otra web: lo grave de la anterior ya no está a la vista
+    const c = { id: ++this.nCheq, p, host, url: String(url).slice(0, 300), motivo: motivo || 'abrir', t0: Date.now(), iSuc: this.sucesos.length, vig0: { ...this.vig }, saltos: [], hitos: {}, cuadro: null, listo: false, tope: null, doc: null, calma: null, fallo: null, rapida: reciente(host) };
     this.chequeo = c;
     c.tope = setTimeout(() => this.cierraChequeo(c, 'tope'), CHEQUEO_TOPE_MS);
     // comprobada limpia hace poco en esta burbuja: se vuelve a comprobar, pero sin retener la imagen (la página no enseña la capa)
@@ -769,6 +763,7 @@ class Sesion {
     let r; try { r = this.resultadoChequeo(c, porque); } catch (e) { r = { resultado: 'limpia', motivos: [], hechos: {}, ms: Date.now() - c.t0, porque }; }
     if (r.resultado === 'limpia') { this.comprobadas.set(c.host, Date.now()); if (this.comprobadas.size > 300) this.comprobadas.delete(this.comprobadas.keys().next().value); }
     else this.comprobadas.delete(c.host);
+    if (c.p) c.p.grave = r.resultado === 'peligro'; // ante un riesgo grave no se entra: tampoco reanudando la burbuja con esta web delante
     this.env({ t: 'chequeo', fase: 'listo', id: c.id, host: c.host, rapida: !!c.rapida, ...r });
     this.op('ZERO entró antes: ' + c.host + ' → ' + r.resultado + (r.motivos.length ? ' (' + r.motivos.join(', ') + ')' : '') + ' en ' + r.ms + ' ms, por ' + porque);
     this.sueltaCuadro(c);
@@ -832,18 +827,17 @@ class Sesion {
       if (h.formulario) motivos.push('formulario');
       if (h.respondio && !h.cifrada && !esLocal(c.host)) motivos.push('sin-cifrar'); // en el propio equipo (pruebas) no viaja por ninguna red
       resultado = motivos.length ? 'aviso' : h.fallo ? 'fallo' : 'limpia';
-      if (resultado === 'limpia' && c.riesgo) resultado = 'riesgo'; // entró bajo su responsabilidad: no se dice «sin peligros conocidos»
     }
     return { resultado, motivos, hechos: h, ms: Date.now() - c.t0, porque };
   }
 
-  async ve(url, op) {
+  async ve(url) {
     if (process.env.ZERO_DEBUG) console.log('ve():', String(url).slice(0, 80), 'sellada', this.sellada, 'act', this.act && this.act.id);
     url = String(url || '').trim().slice(0, 4096);
     if (!/^[a-z]+:\/\//i.test(url)) url = 'https://' + url;
     if (!/^https?:\/\//i.test(url)) { this.op('dirección rechazada: solo http y https'); return; } // nada de file://, chrome://, javascript:…
     // ZERO entra antes que tú: desde aquí, la persona no ve la web hasta que ZERO la ha comprobado (con la burbuja sellada no se abre nada)
-    const cq = this.sellada ? null : this.empiezaChequeo(this.act, url, op && op.riesgo ? 'riesgo' : 'abrir');
+    const cq = this.sellada ? null : this.empiezaChequeo(this.act, url, 'abrir');
     const cierraLuego = () => { if (cq) setTimeout(() => this.cierraChequeo(cq, 'detenida'), 200); }; // tras pintar la página de ZERO
     { // ULTRA capado: .onion fuera de la lista, nunca; y sin ULTRA, ninguna (no hay salida por Tor)
       const h = hostDe(url).toLowerCase();
@@ -875,7 +869,6 @@ class Sesion {
       if (process.env.ZERO_DEBUG) console.log('goto falló:', url.slice(0, 80), m.split('\n')[0]);
       const cert = /ERR_CERT|SSL|certificate/i.test(m);
       const motivo = /ERR_CERT_DATE_INVALID/.test(m) ? 'certificado caducado o con fecha no válida' : /ERR_CERT_COMMON_NAME_INVALID/.test(m) ? 'el certificado no coincide con el nombre de la web' : /ERR_CERT_AUTHORITY_INVALID/.test(m) ? 'el certificado no está firmado por una autoridad reconocida' : cert ? 'no se pudo verificar el certificado' : /ERR_NAME_NOT_RESOLVED|ERR_SOCKS_CONNECTION_HOST_UNREACHABLE/.test(m) ? 'la dirección no existe' : /ERR_CONNECTION|ERR_TIMED_OUT|ERR_INTERNET|ERR_TUNNEL|ERR_PROXY|ERR_SOCKS/.test(m) ? 'no se pudo conectar' : 'no se pudo abrir';
-      if (cert) this.ultimoBloqueo = { host: hostDe(url), url, tipo: 'certificado' };
       if (cert) this.suceso({ clase: 'certificado', certeza: 'comprobado', dominio: hostDe(url), texto: 'No se ha podido comprobar la identidad cifrada de ' + hostDe(url) + ' (' + motivo + '). ZERO no ha abierto la conexión.', detalle: { error: m.split('\n')[0] } });
       else if (cq && !cq.listo) cq.fallo = motivo;
       if (cq && this.chequeo && this.chequeo !== cq) return; // la persona ya pidió otra web: no se pisa con el aviso de esta
@@ -897,17 +890,17 @@ class Sesion {
       // ZERO entra antes que tú: mientras se comprueba, la persona no ve la web, así que tampoco la toca
       if (this.chequeo && !this.chequeo.listo && !this.chequeo.rapida && this.chequeo.p === this.act && (o.t === 'raton' || o.t === 'rueda' || o.t === 'tecla' || o.t === 'texto')) return;
       if (o.t === 'chequeo') {
-        if (o.accion === 'entrar') { // «Entrar bajo mi responsabilidad» en la web que ZERO detuvo (lista o certificado); las internas, nunca
-          const b = this.ultimoBloqueo; this.ultimoBloqueo = null;
-          if (!b || this.sellada) return;
-          this.entraIgual.add(b.host);
-          this.op('la persona eligió entrar bajo su responsabilidad en ' + b.host + ' (' + b.tipo + ')');
-          if (b.tipo === 'certificado' && this.act) { try { await this.act.cdp.send('Security.setIgnoreCertificateErrors', { ignore: true }); this.act.ignoraCert = b.host; } catch (_) {} this.suceso({ clase: 'riesgo', certeza: 'comprobado', dominio: b.host, texto: 'Has entrado bajo tu responsabilidad en una web cuyo certificado no supera la comprobación: su identidad no está demostrada. Se abre dentro de la burbuja, lejos de tu equipo.', detalle: { tipo: 'certificado' } }); }
-          return await this.ve(b.url, { riesgo: true });
-        }
-        if (o.accion === 'salir') { // «No entrar» tras un aviso: vuelve a la web anterior o, si no la hay, fuera (portada de ZERO)
+        // ante un riesgo grave no se entra (dueño 18:40): una página antigua que aún pida «entrar» no abre nada
+        if (o.accion === 'entrar') { this.op('petición de entrar en una web detenida por riesgo grave: rechazada'); return; }
+        if (o.accion === 'salir') { // «Volver»: a la web anterior o, si no la hay, fuera (portada de ZERO)
           const antes = this.page.url();
-          this.op('la persona eligió no entrar en ' + hostDe(antes));
+          this.op('la persona eligió volver desde ' + hostDe(antes));
+          if (this.sellada) { // la web selló la burbuja: se sale de ella sin red (la burbuja sigue sellada hasta que la persona la reanude o la destruya)
+            if (this.act) this.act.grave = null;
+            await this.page.goto('about:blank').catch(() => {});
+            this.env({ t: 'chequeo', fase: 'fuera' });
+            return;
+          }
           await this.page.goBack({ waitUntil: 'commit', timeout: 8000 }).catch(() => null);
           const u = this.page.url();
           if (u === antes || !/^https?:/i.test(u)) { await this.page.goto('about:blank').catch(() => {}); this.env({ t: 'chequeo', fase: 'fuera' }); }
@@ -980,7 +973,10 @@ class Sesion {
         if (o.accion === 'cerrar') return await this.cierraPestana(+o.id);
         return;
       }
-      if (o.t === 'alerta') { if (o.accion === 'sellar') return await this.ponAlerta(3, 'a petición de la persona'); if (o.accion === 'reanudar') { if (this.autoDestruye) { clearTimeout(this.autoDestruye.t); this.autoDestruye = null; this.op('destrucción automática cancelada: la persona reanudó la burbuja'); } this.puntos = 0; this.motivos = []; return await this.ponAlerta(0, 'reanudada por la persona'); } return; }
+      if (o.t === 'alerta') { if (o.accion === 'sellar') return await this.ponAlerta(3, 'a petición de la persona'); if (o.accion === 'reanudar') { if (this.autoDestruye) { clearTimeout(this.autoDestruye.t); this.autoDestruye = null; this.op('destrucción automática cancelada: la persona reanudó la burbuja'); }
+        // ante un riesgo grave no se entra (dueño 18:40): si la web a la vista es la que ZERO detuvo, primero se sale de ella, sin red
+        const a = this.act; if (a && a.grave && a.page) { a.grave = null; await a.page.goto('about:blank').catch(() => {}); this.op('reanudar: antes se sale de la web con riesgo grave'); this.env({ t: 'chequeo', fase: 'fuera' }); }
+        this.puntos = 0; this.motivos = []; return await this.ponAlerta(0, 'reanudada por la persona'); } return; }
     } catch (e) { if (process.env.ZERO_DEBUG) console.log('mensaje', o && o.t, 'error:', e && e.message); /* una orden que falla no tumba la sesión */ }
   }
 

@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "A ZERO ellenőrizte: nincs ismert veszély",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Az oldal azt kéri, erősítsd meg, hogy ember vagy; a ZERO közben vigyáz",
   "Lo que ZERO ha visto:": "Amit a ZERO látott:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Saját felelősségre léptél be. A ZERO tovább vigyáz."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Saját felelősségre léptél be. A ZERO tovább vigyáz.",
+  "Continuar en ZERO": "Folytatás a ZERO-ban",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "A böngészés továbbra is el van különítve az eszközödtől, de amit beírsz, eljut ehhez a webhelyhez.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Komoly kockázat esetén a ZERO nem enged be. Ez a biztonságodat szolgálja."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

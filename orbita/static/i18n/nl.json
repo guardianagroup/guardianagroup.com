@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "Gecontroleerd door ZERO: geen bekende gevaren",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "De website vraagt je te bevestigen dat je een mens bent; ZERO houdt intussen de wacht",
   "Lo que ZERO ha visto:": "Wat ZERO zag:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Je bent op eigen risico naar binnen gegaan. ZERO blijft waken."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Je bent op eigen risico naar binnen gegaan. ZERO blijft waken.",
+  "Continuar en ZERO": "Verder in ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Het surfen blijft afgeschermd van je apparaat, maar wat je typt, komt bij deze website terecht.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Bij een ernstig risico laat ZERO je niet binnen. Dat is voor je veiligheid."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

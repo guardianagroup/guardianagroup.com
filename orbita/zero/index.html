@@ -298,7 +298,7 @@
 .cheq .cbot button.pri{background:#9CC3E4;color:#06080C;border-color:#9CC3E4}.cheq .cbot button:hover{border-color:#9CC3E4}.cheq .cbot button:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
 .cheqchip{position:absolute;left:50%;top:14px;z-index:5;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:rgba(6,8,12,.9);border:1px solid rgba(92,201,138,.35);color:#E8F3EC;font:12px 'IBM Plex Sans',"Segoe UI",system-ui,sans-serif;white-space:nowrap;max-width:92%;overflow:hidden;text-overflow:ellipsis;pointer-events:none;animation:rowin .3s both;transition:opacity .4s}
 .cheqchip:before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:#5CC98A;box-shadow:0 0 8px rgba(92,201,138,.7)}.cheqchip.va{opacity:0}
-.cheqchip.riesgo{border-color:rgba(240,199,127,.45);color:#F6E7C8}.cheqchip.riesgo:before{background:#F0C77F;box-shadow:0 0 8px rgba(240,199,127,.6)}
+.cheq .cres p.cnota{margin:12px 0 0;font-size:12.5px;line-height:1.45;color:#a9bccb}.cheq[data-r=peligro] .cres p.cnota{color:#F2B8AE}
 .cheq .cres .cvisto{margin:0 0 6px;font:11px Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;color:#9CC3E4}.cheqchip b{font:600 11px Consolas,monospace;color:#9CC3E4}
 @keyframes cheqgira{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.cheq li>i{animation:none}.cheq{transition:none}}
@@ -760,7 +760,7 @@
 <div id="pill" role="group" aria-label="Web en grande"><button type="button" class="pc" id="vercortes" title="Ver los cortes en el panel"><span class="pn"><span id="pillnum">0</span>&nbsp;cortes en esta web</span><span class="pv">Ver panel<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg></span></button><button type="button" class="pb" id="reducir" title="Reducir y ver el panel (Esc)"><svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 6.5h-4v-4M2.5 9.5h4v4M9.5 6.5 14 2M6.5 9.5 2 14"/></svg>Reducir</button></div><div class="topReveal" id="topbar"><button type="button" id="restore">↙ RESTAURAR</button><span>PÁGINA DE DEMOSTRACIÓN · ZERO</span><button type="button" id="topcut">Cortes</button></div>
 <div class="marca" aria-hidden="true">ZERO</div><button type="button" id="volverZ" class="volverz" title="Volver" aria-label="Volver"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg><span>Inicio</span></button><button type="button" id="vermeZ" class="volverz vermez" title="Verme en Órbita" aria-label="Verme en Órbita"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12.5" r="1.2"/><path d="M5.2 9.7a4 4 0 0 1 5.6 0M2.6 7a7.6 7.6 0 0 1 10.8 0"/></svg><span>Verme en Órbita</span></button><div class="lb t"></div><div class="lb b"></div><div class="skip">CLIC O CUALQUIER TECLA PARA SALTAR</div>
 </main></div><article id="informe" aria-hidden="true"></article>
-<script src="../static/idioma.js?v=20261027p15"></script>
+<script src="../static/idioma.js?v=20261027p16"></script>
 <nav class="director" id="director" aria-label="Entradas de cine"><span>ENTRADA</span></nav>
 <script>
 (()=>{'use strict';
@@ -1311,7 +1311,8 @@ function zeroActa(acta){$('#sellada').hidden=true;DESCARGAS.clear();$('#descarga
 /* ---- ZERO entra antes que tú (27 Oct 2026, dueño 17:25–17:39; ronda 67). Incorporado, sin interruptor: mientras el motor comprueba
    la web dentro de la burbuja, esta capa tapa la pantalla y cuenta los pasos reales que manda el motor. Al terminar: limpia → se entra
    en cuanto llega la imagen (con una nota breve arriba); aviso → decide la persona; peligro → se explica y se ve la página de ZERO que
-   la detuvo; fallo → la página de ZERO dice el motivo. Solo se dice lo que el motor ha comprobado. ---- */
+   la detuvo, sin forma de entrar (dueño 18:40, con la agencia: ante un riesgo grave ZERO no deja entrar); fallo → la página de ZERO
+   dice el motivo. Solo se dice lo que el motor ha comprobado. ---- */
 const CHEQ_PASOS=[['listas','Listas de webs peligrosas'],['conexion','Conexión encriptada y certificado'],['carga','Carga dentro de la burbuja'],['observa','Lo que intenta hacer la web']];
 const CHEQ_MOT={lista:'Figura en una lista pública de webs peligrosas. ZERO no la ha abierto.',certificado:'Su certificado de seguridad no supera la comprobación: puede ser una suplantación. ZERO no ha abierto la conexión.',interna:'Es una dirección interna o de la red Tor que ZERO no abre.','peligrosa-dentro':'La web intentó cargar algo de una web peligrosa. ZERO lo ha cortado y ha sellado la burbuja: nada entra ni sale.',sellada:'La burbuja está sellada: nada entra ni sale.',idn:'La dirección usa letras de otro alfabeto que se parecen a las nuestras: así se imitan webs conocidas.',descarga:'La web intentó descargar un archivo sin que lo pidieras. ZERO lo ha retenido en la burbuja: no ha llegado a tu equipo.',fuga:'Un dato señuelo de la burbuja ha salido hacia otra empresa: algo en esta web lee la página y la envía fuera.',formulario:'Un formulario de esta web enviaría tus datos sin encriptar.','sin-cifrar':'La conexión no va encriptada: lo que escribas viajaría a la vista.'};
 let CHEQ=null;
@@ -1342,7 +1343,6 @@ function zeroChequeo(m){
   if(!c.el){ // comprobación rápida: solo cuenta el final; si hay algo, entonces sí sale la capa
     if(m.fase!=='listo')return;
     if(m.resultado==='limpia'){cheqApunta(m.host,true);cheqQuita(true);cheqChip(0,'Comprobada por ZERO: sin peligros conocidos');return}
-    if(m.resultado==='riesgo'){cheqQuita(true);cheqChip(0,'Has entrado bajo tu responsabilidad. ZERO sigue vigilando.','riesgo');return}
     if(m.resultado==='fallo'){cheqQuita(true);return}
     c.el=cheqCapa(m.host)}
   if(m.fase==='salto'){c.el.querySelector('.host').textContent=m.host||'';return}
@@ -1368,12 +1368,15 @@ function zeroChequeo(m){
   if((m.motivos||[]).some(k=>CHEQ_MOT[k])){const v=document.createElement('p');v.className='cvisto';v.append(cheqTxt('Lo que ZERO ha visto:'));res.append(v)}
   (m.motivos||[]).forEach(k=>{if(!CHEQ_MOT[k])return;const p=document.createElement('p');p.append(cheqTxt(CHEQ_MOT[k]));if(k==='idn'&&h.idn){const b=document.createElement('b');b.textContent=h.idn;p.append(' ',b)}res.append(p)});
   if(mal||av){const bot=document.createElement('div');bot.className='cbot';const mk=(t,cls,fn)=>{const b=document.createElement('button');b.type='button';b.className=cls;b.textContent=t;b.onclick=fn;bot.append(b)};
-    // dueño (18:07): ZERO enumera lo que ha visto y la persona decide. Solo las direcciones internas no se abren nunca.
-    const mot=m.motivos||[],detenida=mot.includes('lista')||mot.includes('certificado'),sellada=mot.includes('peligrosa-dentro')||mot.includes('sellada');
-    if(mal&&mot.includes('interna'))mk('Entendido','pri',()=>cheqQuita());
-    else{mk('No entrar','pri',()=>{cheqQuita();if(window.ZeroMotor)ZeroMotor.chequeoSalir()});
-      mk('Entrar bajo mi responsabilidad','',()=>{cheqQuita();const Z=window.ZeroMotor;if(!Z)return;if(mal&&detenida)Z.chequeoEntrar();else if(mal&&sellada)Z.reanudar();Z.enfoca()})}
-    res.append(bot);res.hidden=false;clearTimeout(c.vigia);setTimeout(()=>{const b=bot.querySelector('button');if(b&&CHEQ===c)b.focus()},60);return}
+    // dueño (18:07 y 18:40), con la agencia (ronda 67: ChatGPT y Astra). Riesgo grave (lista de webs peligrosas, certificado que no
+    // pasa, algo peligroso dentro, dirección interna): ZERO no deja entrar, solo «Volver». Señal (dominio que imita, descarga,
+    // formulario o conexión sin encriptar): ZERO cuenta lo que ha visto y decide la persona.
+    const mot=m.motivos||[],nota=document.createElement('p'),volver=()=>{cheqQuita();if(window.ZeroMotor)ZeroMotor.chequeoSalir()};nota.className='cnota';
+    if(mal){nota.append(cheqTxt('Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.'));
+      if(mot.includes('interna'))mk('Entendido','pri',()=>cheqQuita());else mk('Volver','pri',volver)}
+    else{nota.append(cheqTxt('La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.'));
+      mk('Volver','pri',volver);mk('Continuar en ZERO','',()=>{cheqQuita();if(window.ZeroMotor)ZeroMotor.enfoca()})}
+    res.append(nota,bot);res.hidden=false;clearTimeout(c.vigia);setTimeout(()=>{const b=bot.querySelector('button');if(b&&CHEQ===c)b.focus()},60);return}
   // limpia o fallo: se entra en cuanto llega la imagen de la web ya comprobada (o enseguida, si la web no cambia)
   // ronda 67 (Astra): si venció el tope sin cargar, no se dice «sin peligros conocidos»: lo principal está comprobado y ZERO sigue vigilando
   c.salir=()=>{if(CHEQ!==c)return;cheqQuita();if(m.resultado==='limpia')cheqChip(m.ms,h.desafio?'La web pide confirmar que eres humano; ZERO vigila mientras pasas':h.lenta?'Sigue cargando; lo principal ya está comprobado':null)};c.espera=setTimeout(()=>c.salir&&c.salir(),450)}
@@ -1754,4 +1757,4 @@ function pintaBurbuja(){const R=$('#rburbuja');if(!R)return;R.innerHTML='<div cl
 vistaRadio('radio');pintaRadio();
 requestAnimationFrame(tick);
 })();
-</script><script src="pdf.js?v=20261027e"></script><script src="motor.js?v=20261027c"></script><script src="/orbita/static/red-nucleo.js?v=20261027b"></script><script>(function(){const c=document.getElementById('redZ'),st=document.getElementById('stage');if(!c||!st||!window.RedNucleo)return;let red=null;/* dueño, 27 Oct 2026, 14:36: «el cerebro, el mismo tamaño en toda la web»: en pantalla mide min(26vh, 240px), como en NÚCLEO y Comunicaciones; el escenario de ZERO se escala, así que se divide por su escala; centrado donde estaba (720, 208), sin pasar de 420 px de diseño y, si es grande, un poco más arriba, para que la esfera no toque la barra */const talla=()=>{const s=Math.min(innerWidth/1440,innerHeight/900)||1,obj=Math.min(innerHeight*.26,240),t=Math.round(Math.min(420,obj/s));c.style.width=c.style.height=t+'px';c.style.left=(720-t/2)+'px';c.style.top=(Math.min(208,395-t/2)-t/2)+'px'};talla();addEventListener('resize',talla,{passive:true});const pon=()=>{const ver=!st.classList.contains('open')&&!document.hidden;if(ver&&!red)red=RedNucleo(c,{nace:true});else if(!ver&&red){red.para();red=null}};new MutationObserver(pon).observe(st,{attributes:true,attributeFilter:['class']});document.addEventListener('visibilitychange',pon);pon()})();</script></body></html>
+</script><script src="pdf.js?v=20261027e"></script><script src="motor.js?v=20261027d"></script><script src="/orbita/static/red-nucleo.js?v=20261027b"></script><script>(function(){const c=document.getElementById('redZ'),st=document.getElementById('stage');if(!c||!st||!window.RedNucleo)return;let red=null;/* dueño, 27 Oct 2026, 14:36: «el cerebro, el mismo tamaño en toda la web»: en pantalla mide min(26vh, 240px), como en NÚCLEO y Comunicaciones; el escenario de ZERO se escala, así que se divide por su escala; centrado donde estaba (720, 208), sin pasar de 420 px de diseño y, si es grande, un poco más arriba, para que la esfera no toque la barra */const talla=()=>{const s=Math.min(innerWidth/1440,innerHeight/900)||1,obj=Math.min(innerHeight*.26,240),t=Math.round(Math.min(420,obj/s));c.style.width=c.style.height=t+'px';c.style.left=(720-t/2)+'px';c.style.top=(Math.min(208,395-t/2)-t/2)+'px'};talla();addEventListener('resize',talla,{passive:true});const pon=()=>{const ver=!st.classList.contains('open')&&!document.hidden;if(ver&&!red)red=RedNucleo(c,{nace:true});else if(!ver&&red){red.para();red=null}};new MutationObserver(pon).observe(st,{attributes:true,attributeFilter:['class']});document.addEventListener('visibilitychange',pon);pon()})();</script></body></html>

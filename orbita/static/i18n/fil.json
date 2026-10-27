@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "Nasuri ng ZERO: walang kilalang panganib",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Hinihiling ng site na kumpirmahin mong tao ka; nagbabantay ang ZERO habang ginagawa mo ito",
   "Lo que ZERO ha visto:": "Ang nakita ng ZERO:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Pumasok ka sa sarili mong pananagutan. Patuloy na nagbabantay ang ZERO."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Pumasok ka sa sarili mong pananagutan. Patuloy na nagbabantay ang ZERO.",
+  "Continuar en ZERO": "Magpatuloy sa ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Nananatiling hiwalay sa device mo ang pag-browse, pero ang ita-type mo ay makakarating sa website na ito.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Kapag seryoso ang panganib, hindi ka papapasukin ng ZERO. Para ito sa kaligtasan mo."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

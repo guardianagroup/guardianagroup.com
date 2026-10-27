@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "ZERO je provjerio: nema poznatih opasnosti",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Stranica traži da potvrdiš da si čovjek; ZERO u međuvremenu pazi",
   "Lo que ZERO ha visto:": "Što je ZERO vidio:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Ulaz na vlastitu odgovornost. ZERO i dalje pazi."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Ulaz na vlastitu odgovornost. ZERO i dalje pazi.",
+  "Continuar en ZERO": "Nastavi u ZERO-u",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Pregledavanje ostaje odvojeno od tvog uređaja, ali ono što upišeš stići će ovoj stranici.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Kod ozbiljnog rizika ZERO te ne pušta unutra. To je radi tvoje sigurnosti."
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

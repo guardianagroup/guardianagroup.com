@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "ZERO 확인 완료: 알려진 위험 없음",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "사이트가 사람인지 확인을 요청합니다. 그동안 ZERO가 지켜봅니다",
   "Lo que ZERO ha visto:": "ZERO가 본 것:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "당신의 책임으로 들어갔습니다. ZERO는 계속 지켜봅니다."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "당신의 책임으로 들어갔습니다. ZERO는 계속 지켜봅니다.",
+  "Continuar en ZERO": "ZERO에서 계속하기",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "브라우징은 계속 기기와 격리되지만, 입력한 내용은 이 웹사이트에 전달됩니다.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "위험이 심각하면 ZERO는 들어가지 못하게 합니다. 안전을 위해서입니다."
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

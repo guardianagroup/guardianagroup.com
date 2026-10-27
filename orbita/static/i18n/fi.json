@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "ZERO tarkisti: ei tunnettuja vaaroja",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Sivusto pyytää vahvistamaan, että olet ihminen; ZERO valvoo sillä välin",
   "Lo que ZERO ha visto:": "Mitä ZERO näki:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Menit sisään omalla vastuullasi. ZERO valvoo yhä."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Menit sisään omalla vastuullasi. ZERO valvoo yhä.",
+  "Continuar en ZERO": "Jatka ZEROssa",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Selaaminen pysyy eristettynä laitteestasi, mutta kirjoittamasi päätyy tälle sivustolle.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Kun riski on vakava, ZERO ei päästä sisään. Se on sinun turvallisuutesi vuoksi."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

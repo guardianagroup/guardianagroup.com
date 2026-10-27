@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "נבדק על ידי ZERO: אין סכנות ידועות",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "האתר מבקש לאשר שאתה אדם; ZERO שומר בינתיים",
   "Lo que ZERO ha visto:": "מה ש-ZERO ראה:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "נכנסת על אחריותך. ZERO ממשיך לשמור."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "נכנסת על אחריותך. ZERO ממשיך לשמור.",
+  "Continuar en ZERO": "להמשיך ב-ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "הגלישה נשארת מבודדת מהמכשיר שלך, אבל מה שיוקלד יגיע לאתר הזה.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "כשהסיכון חמור, ZERO לא מאפשר להיכנס. זה למען הביטחון שלך."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

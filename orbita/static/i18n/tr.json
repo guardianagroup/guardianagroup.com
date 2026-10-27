@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "ZERO kontrol etti: bilinen tehlike yok",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Site insan olduğunu doğrulamanı istiyor; ZERO bu arada nöbette",
   "Lo que ZERO ha visto:": "ZERO’nun gördükleri:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Sorumluluğu üstlenerek girdin. ZERO izlemeyi sürdürüyor."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Sorumluluğu üstlenerek girdin. ZERO izlemeyi sürdürüyor.",
+  "Continuar en ZERO": "ZERO'da devam et",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Gezinme cihazından yalıtılmış kalır, ama yazdıkların bu siteye ulaşır.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Ciddi bir risk olduğunda ZERO içeri girmene izin vermez. Bu, güvenliğin için."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

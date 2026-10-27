@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "Перевірено ZERO: відомих загроз немає",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Сайт просить підтвердити, що ви людина; ZERO тим часом пильнує",
   "Lo que ZERO ha visto:": "Що побачив ZERO:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Ви зайшли на власну відповідальність. ZERO і далі пильнує."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Ви зайшли на власну відповідальність. ZERO і далі пильнує.",
+  "Continuar en ZERO": "Продовжити в ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Перегляд і далі ізольований від вашого пристрою, але те, що ви введете, потрапить на цей сайт.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "За серйозного ризику ZERO не пускає всередину. Це для вашої безпеки."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",
