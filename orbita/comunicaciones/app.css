@@ -108,7 +108,9 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .caja .fila{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
 .enlace{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
 .qr{justify-self:center;width:220px;height:220px;padding:10px;background:#fff;border-radius:14px}
-.qr svg{width:100%;height:100%;display:block}
+.qr svg{width:100%;height:100%;display:block;stroke:none}
+.qr svg rect{fill:#fff;stroke:none}
+.qr svg path{fill:#000;stroke:none}
 .numero{margin:0;padding:12px 14px;border-radius:12px;background:var(--campo);border:1px solid var(--line);font:500 15px/1.7 var(--mono);letter-spacing:.06em;text-align:center;white-space:pre-wrap;user-select:text}
 .interruptor{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--muted);cursor:pointer}
 .interruptor input{width:18px;height:18px;accent-color:var(--accent)}
