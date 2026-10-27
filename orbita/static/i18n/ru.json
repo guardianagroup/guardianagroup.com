@@ -1903,7 +1903,15 @@
   "Radiografía": "Рентген",
   "Burbuja en": "Расположение пузыря:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "РЕЗУЛЬТАТЫ GOOGLE · ОСНОВНЫЕ САЙТЫ",
-  "País de las webs": "Страна сайтов"
+  "País de las webs": "Страна сайтов",
+  "Expandir": "Расширить",
+  "Expandir el panel hasta media pantalla": "Расширить панель до половины экрана",
+  "Volver al panel estrecho": "Вернуться к узкой панели",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Ассистент GUARDIANA · всегда следит за этим сайтом",
+  "Ahora": "Сейчас",
+  "Esperando a que abras una web": "Ждём, когда вы откроете сайт",
+  "Mirando todo lo que pasa en esta web": "Следит за всем, что происходит на этом сайте",
+  "Pregúntale por tus datos en esta web": "Спросите о своих данных на этом сайте"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

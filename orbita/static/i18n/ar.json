@@ -1903,7 +1903,15 @@
   "Radiografía": "الأشعة",
   "Burbuja en": "الفقاعة في",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "نتائج Google · أبرز المواقع",
-  "País de las webs": "دولة المواقع"
+  "País de las webs": "دولة المواقع",
+  "Expandir": "توسيع",
+  "Expandir el panel hasta media pantalla": "توسيع اللوحة إلى نصف الشاشة",
+  "Volver al panel estrecho": "العودة إلى اللوحة الضيقة",
+  "El asistente de GUARDIANA · siempre atento a esta web": "مساعد GUARDIANA · يراقب هذا الموقع دائمًا",
+  "Ahora": "الآن",
+  "Esperando a que abras una web": "في انتظار أن تفتح موقعًا",
+  "Mirando todo lo que pasa en esta web": "مراقبة كل ما يحدث في هذا الموقع",
+  "Pregúntale por tus datos en esta web": "اسأله عن بياناتك في هذا الموقع"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

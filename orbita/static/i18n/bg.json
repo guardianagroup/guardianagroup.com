@@ -1902,7 +1902,15 @@
   "Radiografía": "Рентгенова снимка",
   "Burbuja en": "Балон в",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "РЕЗУЛТАТИ ОТ GOOGLE · ОСНОВНИ САЙТОВЕ",
-  "País de las webs": "Държава на сайтовете"
+  "País de las webs": "Държава на сайтовете",
+  "Expandir": "Разширяване",
+  "Expandir el panel hasta media pantalla": "Разширяване на панела до половин екран",
+  "Volver al panel estrecho": "Връщане към тесния панел",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Асистентът на GUARDIANA · винаги следи този сайт",
+  "Ahora": "Сега",
+  "Esperando a que abras una web": "Изчакване да отвориш сайт",
+  "Mirando todo lo que pasa en esta web": "Наблюдава всичко, което се случва на този сайт",
+  "Pregúntale por tus datos en esta web": "Попитай го за данните си на този сайт"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

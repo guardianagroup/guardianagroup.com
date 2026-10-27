@@ -1903,7 +1903,15 @@
   "Radiografía": "X-quang",
   "Burbuja en": "Bong bóng tại",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "KẾT QUẢ GOOGLE · CÁC TRANG WEB CHÍNH",
-  "País de las webs": "Quốc gia của các trang web"
+  "País de las webs": "Quốc gia của các trang web",
+  "Expandir": "Mở rộng",
+  "Expandir el panel hasta media pantalla": "Mở rộng bảng ra nửa màn hình",
+  "Volver al panel estrecho": "Quay lại bảng hẹp",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Trợ lý của GUARDIANA · luôn dõi theo trang này",
+  "Ahora": "Hiện tại",
+  "Esperando a que abras una web": "Đang chờ bạn mở một trang",
+  "Mirando todo lo que pasa en esta web": "Đang theo dõi mọi thứ diễn ra trên trang này",
+  "Pregúntale por tus datos en esta web": "Hỏi về dữ liệu của bạn trên trang này"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

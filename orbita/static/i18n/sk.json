@@ -1902,7 +1902,15 @@
   "Radiografía": "Röntgen",
   "Burbuja en": "Umiestnenie bubliny:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "VÝSLEDKY GOOGLE · HLAVNÉ WEBY",
-  "País de las webs": "Krajina webov"
+  "País de las webs": "Krajina webov",
+  "Expandir": "Rozšíriť",
+  "Expandir el panel hasta media pantalla": "Rozšíriť panel na polovicu obrazovky",
+  "Volver al panel estrecho": "Späť na úzky panel",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Asistent GUARDIANA · vždy sleduje tento web",
+  "Ahora": "Teraz",
+  "Esperando a que abras una web": "Čaká sa, kým otvoríš web",
+  "Mirando todo lo que pasa en esta web": "Sleduje všetko, čo sa deje na tomto webe",
+  "Pregúntale por tus datos en esta web": "Opýtaj sa ho na svoje údaje na tomto webe"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

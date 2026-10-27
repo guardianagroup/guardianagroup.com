@@ -1903,7 +1903,15 @@
   "Radiografía": "透視",
   "Burbuja en": "氣泡位於",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Google 搜尋結果 · 主要網站",
-  "País de las webs": "網站所屬國家"
+  "País de las webs": "網站所屬國家",
+  "Expandir": "展開",
+  "Expandir el panel hasta media pantalla": "將面板展開至半個螢幕",
+  "Volver al panel estrecho": "返回窄面板",
+  "El asistente de GUARDIANA · siempre atento a esta web": "GUARDIANA 的助手 · 時刻關注此網站",
+  "Ahora": "此刻",
+  "Esperando a que abras una web": "等待你開啟一個網站",
+  "Mirando todo lo que pasa en esta web": "正在關注此網站上發生的一切",
+  "Pregúntale por tus datos en esta web": "詢問你在此網站上的資料"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

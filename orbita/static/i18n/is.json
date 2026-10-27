@@ -1902,7 +1902,15 @@
   "Radiografía": "Röntgenmynd",
   "Burbuja en": "Kúla:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE-NIÐURSTÖÐUR · HELSTU VEFSÍÐUR",
-  "País de las webs": "Land vefsíðnanna"
+  "País de las webs": "Land vefsíðnanna",
+  "Expandir": "Stækka",
+  "Expandir el panel hasta media pantalla": "Stækka spjaldið upp í hálfan skjáinn",
+  "Volver al panel estrecho": "Aftur í mjóa spjaldið",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Aðstoðarmaður GUARDIANA · fylgist alltaf með þessari síðu",
+  "Ahora": "Núna",
+  "Esperando a que abras una web": "Bíð eftir að þú opnir síðu",
+  "Mirando todo lo que pasa en esta web": "Fylgist með öllu sem gerist á þessari síðu",
+  "Pregúntale por tus datos en esta web": "Spurðu um gögnin þín á þessari síðu"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

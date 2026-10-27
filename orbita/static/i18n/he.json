@@ -1902,7 +1902,15 @@
   "Radiografía": "צילום רנטגן",
   "Burbuja en": "מיקום הבועה:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "תוצאות Google · האתרים המובילים",
-  "País de las webs": "מדינת האתרים"
+  "País de las webs": "מדינת האתרים",
+  "Expandir": "הרחבה",
+  "Expandir el panel hasta media pantalla": "הרחבת הלוח עד חצי מסך",
+  "Volver al panel estrecho": "חזרה ללוח הצר",
+  "El asistente de GUARDIANA · siempre atento a esta web": "העוזר של GUARDIANA · תמיד משגיח על האתר הזה",
+  "Ahora": "עכשיו",
+  "Esperando a que abras una web": "ממתין שתפתח אתר",
+  "Mirando todo lo que pasa en esta web": "צופה בכל מה שקורה באתר הזה",
+  "Pregúntale por tus datos en esta web": "שאל אותו על הנתונים שלך באתר הזה"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

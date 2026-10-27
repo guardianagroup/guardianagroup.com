@@ -1902,7 +1902,15 @@
   "Radiografía": "Ακτινογραφία",
   "Burbuja en": "Φούσκα σε",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "ΑΠΟΤΕΛΕΣΜΑΤΑ GOOGLE · ΚΥΡΙΟΙ ΙΣΤΟΤΟΠΟΙ",
-  "País de las webs": "Χώρα των ιστότοπων"
+  "País de las webs": "Χώρα των ιστότοπων",
+  "Expandir": "Μεγέθυνση",
+  "Expandir el panel hasta media pantalla": "Μεγέθυνση του πίνακα έως τη μισή οθόνη",
+  "Volver al panel estrecho": "Επιστροφή στον στενό πίνακα",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Ο βοηθός της GUARDIANA · παρακολουθεί πάντα αυτόν τον ιστότοπο",
+  "Ahora": "Τώρα",
+  "Esperando a que abras una web": "Αναμονή μέχρι να ανοίξεις έναν ιστότοπο",
+  "Mirando todo lo que pasa en esta web": "Παρακολουθεί ό,τι συμβαίνει σε αυτόν τον ιστότοπο",
+  "Pregúntale por tus datos en esta web": "Ρώτα για τα δεδομένα σου σε αυτόν τον ιστότοπο"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

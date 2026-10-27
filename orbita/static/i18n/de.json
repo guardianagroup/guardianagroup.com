@@ -1903,7 +1903,15 @@
   "Radiografía": "Röntgenbild",
   "Burbuja en": "Blase in",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE-ERGEBNISSE · WICHTIGSTE WEBSITES",
-  "País de las webs": "Land der Websites"
+  "País de las webs": "Land der Websites",
+  "Expandir": "Vergrößern",
+  "Expandir el panel hasta media pantalla": "Panel auf den halben Bildschirm vergrößern",
+  "Volver al panel estrecho": "Zurück zum schmalen Panel",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Der Assistent von GUARDIANA · behält diese Website immer im Blick",
+  "Ahora": "Jetzt",
+  "Esperando a que abras una web": "Warten, bis du eine Website öffnest",
+  "Mirando todo lo que pasa en esta web": "Beobachtet alles, was auf dieser Website passiert",
+  "Pregúntale por tus datos en esta web": "Frag nach deinen Daten auf dieser Website"
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

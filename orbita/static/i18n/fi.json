@@ -1902,7 +1902,15 @@
   "Radiografía": "Röntgenkuva",
   "Burbuja en": "Kupla:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE-TULOKSET · TÄRKEIMMÄT SIVUSTOT",
-  "País de las webs": "Sivustojen maa"
+  "País de las webs": "Sivustojen maa",
+  "Expandir": "Laajenna",
+  "Expandir el panel hasta media pantalla": "Laajenna paneeli puolen näytön levyiseksi",
+  "Volver al panel estrecho": "Takaisin kapeaan paneeliin",
+  "El asistente de GUARDIANA · siempre atento a esta web": "GUARDIANAn avustaja · valvoo aina tätä sivua",
+  "Ahora": "Nyt",
+  "Esperando a que abras una web": "Odotetaan, että avaat sivun",
+  "Mirando todo lo que pasa en esta web": "Seuraa kaikkea, mitä tällä sivulla tapahtuu",
+  "Pregúntale por tus datos en esta web": "Kysy siltä tiedoistasi tällä sivulla"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

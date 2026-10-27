@@ -1902,7 +1902,15 @@
   "Radiografía": "Røntgen",
   "Burbuja en": "Boble i",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE-RESULTATER · VIGTIGSTE WEBSTEDER",
-  "País de las webs": "Webstedernes land"
+  "País de las webs": "Webstedernes land",
+  "Expandir": "Udvid",
+  "Expandir el panel hasta media pantalla": "Udvid panelet til halvdelen af skærmen",
+  "Volver al panel estrecho": "Tilbage til det smalle panel",
+  "El asistente de GUARDIANA · siempre atento a esta web": "GUARDIANAs assistent · holder altid øje med denne side",
+  "Ahora": "Nu",
+  "Esperando a que abras una web": "Venter på, at du åbner en side",
+  "Mirando todo lo que pasa en esta web": "Holder øje med alt, hvad der sker på denne side",
+  "Pregúntale por tus datos en esta web": "Spørg om dine data på denne side"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

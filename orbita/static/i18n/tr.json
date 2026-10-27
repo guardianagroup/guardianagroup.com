@@ -1903,7 +1903,15 @@
   "Radiografía": "Röntgen",
   "Burbuja en": "Balon:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE SONUÇLARI · BAŞLICA SİTELER",
-  "País de las webs": "Sitelerin ülkesi"
+  "País de las webs": "Sitelerin ülkesi",
+  "Expandir": "Genişlet",
+  "Expandir el panel hasta media pantalla": "Paneli ekranın yarısına kadar genişlet",
+  "Volver al panel estrecho": "Dar panele dön",
+  "El asistente de GUARDIANA · siempre atento a esta web": "GUARDIANA'nın asistanı · bu siteyi her zaman izliyor",
+  "Ahora": "Şimdi",
+  "Esperando a que abras una web": "Bir site açman bekleniyor",
+  "Mirando todo lo que pasa en esta web": "Bu sitede olan her şeyi izliyor",
+  "Pregúntale por tus datos en esta web": "Bu sitedeki verilerin hakkında ona sor"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

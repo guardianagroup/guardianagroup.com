@@ -1903,7 +1903,15 @@
   "Radiografía": "엑스레이",
   "Burbuja en": "버블:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Google 검색 결과 · 주요 사이트",
-  "País de las webs": "사이트 국가"
+  "País de las webs": "사이트 국가",
+  "Expandir": "확대",
+  "Expandir el panel hasta media pantalla": "패널을 화면 절반까지 확대",
+  "Volver al panel estrecho": "좁은 패널로 돌아가기",
+  "El asistente de GUARDIANA · siempre atento a esta web": "GUARDIANA의 어시스턴트 · 언제나 이 사이트를 지켜봅니다",
+  "Ahora": "현재",
+  "Esperando a que abras una web": "사이트를 열 때까지 기다리는 중",
+  "Mirando todo lo que pasa en esta web": "이 사이트에서 일어나는 모든 것을 지켜보는 중",
+  "Pregúntale por tus datos en esta web": "이 사이트의 내 데이터에 대해 물어보세요"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

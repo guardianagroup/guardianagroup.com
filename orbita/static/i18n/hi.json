@@ -1902,7 +1902,15 @@
   "Radiografía": "एक्स-रे",
   "Burbuja en": "बबल का स्थान:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Google के नतीजे · प्रमुख साइटें",
-  "País de las webs": "साइटों का देश"
+  "País de las webs": "साइटों का देश",
+  "Expandir": "बड़ा करें",
+  "Expandir el panel hasta media pantalla": "पैनल को आधी स्क्रीन तक बड़ा करें",
+  "Volver al panel estrecho": "संकरे पैनल पर वापस जाएँ",
+  "El asistente de GUARDIANA · siempre atento a esta web": "GUARDIANA का सहायक · हमेशा इस साइट पर नज़र रखता है",
+  "Ahora": "अभी",
+  "Esperando a que abras una web": "आपके कोई साइट खोलने का इंतज़ार है",
+  "Mirando todo lo que pasa en esta web": "इस साइट पर होने वाली हर चीज़ पर नज़र रख रहा है",
+  "Pregúntale por tus datos en esta web": "इस साइट पर अपने डेटा के बारे में पूछें"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",
