@@ -858,6 +858,17 @@
     eventos();
     await cargaConvs();
     if (/#i=/.test(location.hash)) { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
+    // NÚCLEO guiado (ronda 63): «Tengo un código» llega con el campo del código abierto; «Crear una invitación», con la invitación
+    // hecha en cuanto hay conexión (si ya hay una conversación en marcha, no se toca: solo se señala el botón). Una sola vez.
+    try {
+      const paso = new URLSearchParams(location.search).get('paso');
+      if (paso === 'codigo' || paso === 'crear') {
+        history.replaceState(history.state, '', location.pathname + location.hash);
+        if (paso === 'codigo') $('#unir').click();
+        else if ([...CONVS.values()].some((c) => c.estado === 'activa')) $('#nueva').focus();
+        else { let n = 0; const espera = () => { if (R.abierto) $('#nueva').click(); else if (++n < 40) setTimeout(espera, 250); else $('#nueva').focus(); }; espera(); }
+      }
+    } catch (_) {}
   }
   arranca().catch((e) => { console.error(e); aviso(T('Algo falló al arrancar: recarga la página.')); });
   window.GuardianaCom = { get convs() { return CONVS; }, get yo() { return YO; }, get rele() { return R; }, abreConv, creaInvitacion, aceptaInvitacion };
