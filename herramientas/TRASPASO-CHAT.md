@@ -1,6 +1,31 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-## Estado al 27 Oct 2026, 12:00 (Bogotá) — EMPIEZA POR AQUÍ
+## Estado al 27 Oct 2026, 14:00 (Bogotá) — EMPIEZA POR AQUÍ
+
+Lo de las 12:00 (abajo) sigue valiendo salvo lo que cambia aquí.
+
+- **La portada de guardianagroup.com es la página del planeta** (dueño, 12:23): `index.html` = la antigua `conocer.html`, en las dos ramas. «Empezar» lleva a NÚCLEO (`/orbita/`). `conocer.html` solo redirige a `/` con su `?lang=` y su ancla. **La regla de no copiar `index.html` de web-idiomas a main ya no vale** (sí sigue para `instalar.html`, `en/`, `pt/` y `descargas/`).
+  - Maquetas sin marcas reales (`subastia.example`, `retargo.example`, `recomix.example`, `audimetrix.example`), como manda la regla.
+  - Diccionario `I.d` recortado a los 228 textos que usa; `_usadas.json` igual. Las 42 lenguas, completas (`herramientas/idiomas.py`).
+  - Las palabras de 1–3 letras van unidas a la siguiente con espacio duro (`pega()` en `aplica()`; dueño, 13:18) y los finales de color de los títulos van sin cursiva (la cursiva se recortaba con la luz; dueño, 13:21).
+- **Base de diseño de NÚCLEO en todo** (dueño, 11:07): `/guardiana.css` (IBM Plex Sans/Mono servidas desde `/fonts/`, tokens `--g-*`, `.g-btn`, `.g-chip`, `.g-tarjeta`). Órbita, ZERO, Comunicaciones y la portada la usan.
+- **NÚCLEO** (`orbita/static/nucleo.js`):
+  - **Resumen de tus datos por periodo** (dueño, 10:56): «La última web», «La última hora», «Las últimas 24 horas» y luego PDF o vídeo; si la frase lo dice («vídeo de la última hora»), no pregunta. Datos de `GuardianaResumen.datos()` (`orbita/static/resumen-video.js`, se carga solo al pedirlo). Vídeo de 21 s a 1280×720 que se ve hacerse en la burbuja, con «Descargar el vídeo». PDF con `orbita/zero/pdf.js` (cabecera con más aire, dueño 13:14).
+  - **«Multas» en rojo arriba a la derecha de la portada** (dueño, 13:30): `orbita/static/multas.js` + `orbita/datos/multas.json` (49 casos de `casos.html` en es/en/pt). Ronda 58 de la agencia buscando multas nuevas.
+  - **Fuera el botón «NÚCLEO» de abajo a la izquierda del planeta** (dueño, 13:28): en el planeta, el botón `#volver` de arriba a la izquierda dice «Inicio» (o «Regresar a NÚCLEO») y lleva a NÚCLEO.
+  - Mientras NÚCLEO tapa la pantalla, el planeta no se dibuja (`window.OrbitaTapada`).
+  - En el teléfono ya no se sale de la pantalla (box-sizing en `.ns-cab`, `.ns-col`, `.ns-form`…).
+- **Navegador ZERO:** encima de la barra, la red de NÚCLEO (`#redZ`, `RedNucleo`) en vez del organismo de partículas (dueño, 13:28); `conRed=false`, siempre formado y sin selector de entradas.
+- **Comunicaciones:** cabecera «‹ Inicio · COMUNICACIONES» y **«¿Sabías que…?» abajo a la derecha** (dueño, 13:24): `orbita/comunicaciones/sabias.js` + `orbita/datos/sabias-comunicaciones.json`, 11 datos de la ronda 57 con dos voces y dos fuentes cada uno.
+- **Agencia:** rondas 57 (notas) y 58 (pregunta) en `herramientas/agencia-rondas/`. Gemini con el modelo «Argon». Astra se queda sin tokens con preguntas largas: pedirle 3–4 cosas.
+- **Idiomas:** Órbita/NÚCLEO/Comunicaciones con 162 textos más en las 39 lenguas (ESPEJO traducido). En curso: 54 textos nuevos de NÚCLEO (`scratchpad/tr_r57/out/<código>.json` → `orbita/static/i18n/`). Las multas y los «¿Sabías que…?» de Comunicaciones están en es/en/pt; el resto ve inglés.
+- **Pendiente:**
+  1. Ronda 58 (multas nuevas): comprobar cada caso con su fuente oficial y añadirlo a `multas.json` en es/en/pt.
+  2. Fusionar la traducción de los 54 textos de NÚCLEO cuando termine.
+  3. Preguntar al dueño: el título de la cuarta tarjeta sigue siendo «Pídeselo a NÚCLEO»; ZERO solo en el teléfono se ve como un escritorio en pequeño.
+  4. Lo pendiente de las 12:00 (abajo).
+
+## Estado al 27 Oct 2026, 12:00 (Bogotá)
 
 Resumen en el proyecto de claude.ai «guardiana group», documento `claude/ZERO_ESTADO_27OCT2026.md` (puesto al día a esta hora).
 
