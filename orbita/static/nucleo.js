@@ -187,7 +187,7 @@
     const d = document.createElement('section');
     d.className = 'nuc-ini'; d.id = 'nuc-ini'; d.setAttribute('aria-label', 'NÚCLEO, la entrada de GUARDIANA');
     d.innerHTML = '<canvas class="nuc-lienzo" aria-hidden="true"></canvas>'
-      + '<p class="nuc-k nuc-paso">NÚCLEO · GUARDIANA</p>'
+      + '<p class="nuc-k nuc-paso" translate="no">NÚCLEO</p>'
       + '<h1 class="nuc-paso" id="nuc-saludo"></h1>'
       + '<p class="nuc-sub nuc-paso" id="nuc-sub">Bienvenido a esta experiencia de tus datos.<b>¿Qué deseas hacer?</b></p>'
       + '<div class="nuc-charla" id="nuc-charla" aria-live="polite"></div>'
