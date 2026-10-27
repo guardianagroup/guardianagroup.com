@@ -1668,7 +1668,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Непомітний режим: чат розмитий, доки ви його не утримуєте, а те, що ви пишете, відображається цифрами. Натисніть цю кнопку, щоб бачити все як зазвичай.",
   "Modo discreto: lo que escribas se verá como números": "Непомітний режим: те, що ви напишете, відображатиметься цифрами",
   "Código erróneo o caducado.": "Неправильний або прострочений код.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Пошук через Brave Search усередині Tor (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Пошук через Brave Search усередині Tor.",
+  "por la red Tor": "через мережу Tor"
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

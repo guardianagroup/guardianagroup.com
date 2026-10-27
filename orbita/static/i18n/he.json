@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "מצב דיסקרטי: הצ׳אט מטושטש עד שלוחצים עליו לחיצה ארוכה, ומה שמקלידים מוצג כמספרים. לחצו כדי לראות הכול כרגיל.",
   "Modo discreto: lo que escribas se verá como números": "מצב דיסקרטי: מה שתקלידו יוצג כמספרים",
   "Código erróneo o caducado.": "קוד שגוי או שפג תוקפו.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "חיפושים עם Brave Search בתוך Tor ‏(.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "חיפושים עם Brave Search בתוך Tor.",
+  "por la red Tor": "דרך רשת Tor"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

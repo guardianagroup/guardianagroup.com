@@ -1666,7 +1666,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Diskretni način: chat je zamućen dok ga ne držite pritisnutim, a ono što pišete prikazuje se kao brojevi. Pritisnite ovaj gumb za normalan prikaz svega.",
   "Modo discreto: lo que escribas se verá como números": "Diskretni način: ono što pišete prikazivat će se kao brojevi",
   "Código erróneo o caducado.": "Pogrešan ili istekao kod.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Pretraživanje Brave Searchom unutar Tora (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Pretraživanje Brave Searchom unutar Tora.",
+  "por la red Tor": "preko Tor mreže"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Diskrétní režim: chat je rozmazaný, dokud ho nepodržíte, a to, co píšete, se zobrazuje jako číslice. Klepnutím na toto tlačítko zobrazíte vše normálně.",
   "Modo discreto: lo que escribas se verá como números": "Diskrétní režim: to, co napíšete, se zobrazí jako číslice",
   "Código erróneo o caducado.": "Kód je chybný nebo vypršel.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Vyhledávání přes Brave Search uvnitř Toru (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Vyhledávání přes Brave Search uvnitř Toru.",
+  "por la red Tor": "přes síť Tor"
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

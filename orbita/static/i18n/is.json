@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Næðishamur: spjallið er óskýrt þar til þú heldur því inni og það sem þú skrifar birtist sem tölur. Ýttu á hnappinn til að sjá allt eðlilega.",
   "Modo discreto: lo que escribas se verá como números": "Næðishamur: það sem þú skrifar birtist sem tölur",
   "Código erróneo o caducado.": "Rangur eða útrunninn kóði.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Leitir með Brave Search innan Tor (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Leitir með Brave Search innan Tor.",
+  "por la red Tor": "um Tor-netið"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

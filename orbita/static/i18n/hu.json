@@ -1667,7 +1667,8 @@
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Diszkrét mód: a csevegés elmosódott, amíg lenyomva nem tartod, és amit írsz, számjegyekként jelenik meg. Nyomd meg ezt a gombot, hogy mindent normálisan láss.",
   "Modo discreto: lo que escribas se verá como números": "Diszkrét mód: amit írsz, számjegyekként jelenik meg",
   "Código erróneo o caducado.": "Hibás vagy lejárt kód.",
-  "Búsquedas con Brave Search dentro de Tor (.onion).": "Keresés a DuckDuckGóval a Toron belül (.onion)."
+  "Búsquedas con Brave Search dentro de Tor.": "Keresés a DuckDuckGóval a Toron belül.",
+  "por la red Tor": "a Tor-hálózaton át"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",
