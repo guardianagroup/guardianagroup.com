@@ -1,4 +1,5 @@
 // GUARDIANA · NÚCLEO (27 Oct 2026). La puerta de entrada de GUARDIANA y su guía en toda la web.
+// Dueño, 10:38: en el chat de NÚCLEO, «navegador ZERO» y no «ZERO» a secas, para que se entienda.
 // Dueño, 08:42: «pantalla negra y en el medio nace el navegador con el cerebro neuronal… ella te va derivando»; 09:03: «si
 // Núcleo está muy bien estructurado y va guiando al cliente, a lo mejor no hace falta la IA». Ronda 52 de la agencia.
 // 09:53: fuera la caja de escribir de la portada («el chat aquí dentro lo hace todo más pequeño»); 10:00: una cuarta tarjeta
@@ -56,9 +57,9 @@
     const d0 = new Date(); d0.setHours(0, 0, 0, 0);
     const hoy = REG.filter((r) => r.t >= +d0);
     const emp = new Set(hoy.map((r) => r.e).filter(Boolean)), pai = new Set(hoy.map((r) => r.p).filter((x) => x && x !== 'País no identificado'));
-    if (!hoy.length && !total) return T('Todavía no hay datos: en cuanto abras una web con ZERO y cortes algo, aquí te cuento qué empresas eran y de qué países. Se guarda solo en este navegador.');
+    if (!hoy.length && !total) return T('Todavía no hay datos: en cuanto abras una web con el navegador ZERO y cortes algo, aquí te cuento qué empresas eran y de qué países. Se guarda solo en este navegador.');
     let s = hoy.length ? pon('Hoy, en este equipo: cortes {1} · empresas {2} · países {3}.', fmt(hoy.length), fmt(emp.size), fmt(pai.size)) : T('Hoy todavía no se ha cortado nada en este equipo.');
-    if (total) s += ' ' + pon('Desde que usas ZERO, cortes en total: {1}.', fmt(total));
+    if (total) s += ' ' + pon('Desde que usas el navegador ZERO, cortes en total: {1}.', fmt(total));
     if (hoy.length) { const c = new Map(); hoy.forEach((r) => c.set(r.e, (c.get(r.e) || 0) + 1)); const top = [...c.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([e]) => e).filter(Boolean); if (top.length) s += ' ' + pon('Las que más lo han intentado: {1}.', top.join(', ')); }
     return s + ' ' + T('Se guarda solo en este navegador.');
   }
@@ -110,7 +111,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
   };
   const ETQ = {
     zero: 'Navegar con NÚCLEO', planeta: 'Explorar el planeta', com: 'Chat encriptado', datos: 'Mis datos', 'que-es-guardiana': '¿Qué es GUARDIANA?',
-    'z-web': 'Abrir una web', 'z-buscar': 'Buscar en internet', 'z-radio': 'Ver la Radiografía', 'z-pdf': 'PDF de la web abierta', resumen: 'Resumen de mis datos en PDF', 'z-que': '¿Cómo funciona ZERO?', 'z-tor': 'Navegar con Tor',
+    'z-web': 'Abrir una web', 'z-buscar': 'Buscar en internet', 'z-radio': 'Ver la Radiografía', 'z-pdf': 'PDF de la web abierta', resumen: 'Resumen de mis datos en PDF', 'z-que': '¿Cómo funciona el navegador ZERO?', 'z-tor': 'Navegar con Tor',
     'p-sub': 'Cables submarinos', 'p-fibra': 'Cables terrestres', 'p-puntos': 'Centros de datos', 'p-sat': 'Satélites', 'p-pais': 'Ir a un país', 'p-directo': 'Cortes en directo', 'p-que': '¿Qué es Órbita?',
     'c-crear': 'Crear una invitación', 'c-codigo': 'Tengo un código', 'c-que': 'Cómo funciona Comunicaciones',
     'd-corte': '¿Qué es un corte?', borrar: 'Borrar mis datos de este navegador', privacidad: 'Privacidad', seguridad: '¿Es seguro?', vpn: '¿Es una VPN?', precio: 'Precio', cuenta: '¿Necesito una cuenta?', idioma: 'Idioma', contacto: 'Hablar con una persona',
@@ -140,15 +141,15 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       case 'menu': case 'atras': return { t: 'Te llevo al inicio.', a: () => { cierraSala(); muestraInicio(true); }, va: true };
       case 'ayuda': return { t: 'Esto es lo que puedes pedirme. Pulsa una opción o escríbelo a tu manera.', a: () => panel(true) };
       case 'quien-eres': return { t: 'Soy NÚCLEO, la guía de GUARDIANA: entiendo peticiones concretas y te llevo a cada parte. No soy una IA generativa y no guardo lo que me pides.' };
-      case 'que-es-guardiana': return { x: [['ZERO', 'Navegar viendo quién intenta llevarse tus datos.'], ['Órbita', 'Ver por dónde viajan tus datos en el planeta.'], ['Comunicaciones', 'Hablar y enviar archivos encriptados con otra persona.']], t: '¿Por dónde empezamos?', c: ['zero', 'planeta', 'com'] };
-      case 'zero': return { t: 'Abro ZERO: escribe una dirección o lo que quieras buscar.', a: () => abreZero(), va: true };
-      case 'z-web': return r.web ? { t: pon('Abro {1} en ZERO, dentro de la burbuja.', r.web), a: () => abreZero(r.web), va: true } : { t: 'Escribe la dirección de la web, por ejemplo eltiempo.com, y la abro en ZERO.', modo: 'web' };
-      case 'z-buscar': return r.q ? { t: pon('Busco «{1}» con ZERO.', r.q), a: () => abreZero(r.q), va: true } : { t: '¿Qué quieres buscar?', modo: 'buscar' };
-      case 'z-radio': return hayWeb() ? { t: 'La Radiografía está a la derecha de ZERO: quién intenta conectarse, qué se ha cortado y quién puja por tus datos.', a: () => abreZero(), va: true } : { t: 'Para ver la Radiografía necesito una web abierta en ZERO. ¿Cuál abro?', modo: 'web' };
-      case 'z-pdf': return hayWeb() ? { t: 'Preparo el PDF con lo que ZERO ha visto en esta web.', a: pdfWeb, va: true } : { t: 'Para el PDF de una web necesito una web abierta en ZERO. ¿Cuál abro?', modo: 'web', c: ['resumen'] };
-      case 'resumen': return hayDatos() ? { t: 'Preparo el resumen de tus datos en PDF: se abre la ventana de imprimir y eliges «Guardar como PDF».', a: resumenPdf } : { t: 'Todavía no hay cortes registrados en este navegador. Abre una web con ZERO y vuelve a pedirme el resumen.', c: ['z-web'] };
+      case 'que-es-guardiana': return { x: [['Navegador ZERO', 'Navegar viendo quién intenta llevarse tus datos.'], ['Órbita', 'Ver por dónde viajan tus datos en el planeta.'], ['Comunicaciones', 'Hablar y enviar archivos encriptados con otra persona.']], t: '¿Por dónde empezamos?', c: ['zero', 'planeta', 'com'] };
+      case 'zero': return { t: 'Abro el navegador ZERO: escribe una dirección o lo que quieras buscar.', a: () => abreZero(), va: true };
+      case 'z-web': return r.web ? { t: pon('Abro {1} en el navegador ZERO, dentro de la burbuja.', r.web), a: () => abreZero(r.web), va: true } : { t: 'Escribe la dirección de la web, por ejemplo eltiempo.com, y la abro en el navegador ZERO.', modo: 'web' };
+      case 'z-buscar': return r.q ? { t: pon('Busco «{1}» con el navegador ZERO.', r.q), a: () => abreZero(r.q), va: true } : { t: '¿Qué quieres buscar?', modo: 'buscar' };
+      case 'z-radio': return hayWeb() ? { t: 'La Radiografía está a la derecha del navegador ZERO: quién intenta conectarse, qué se ha cortado y quién puja por tus datos.', a: () => abreZero(), va: true } : { t: 'Para ver la Radiografía necesito una web abierta en el navegador ZERO. ¿Cuál abro?', modo: 'web' };
+      case 'z-pdf': return hayWeb() ? { t: 'Preparo el PDF con lo que el navegador ZERO ha visto en esta web.', a: pdfWeb, va: true } : { t: 'Para el PDF de una web necesito una web abierta en el navegador ZERO. ¿Cuál abro?', modo: 'web', c: ['resumen'] };
+      case 'resumen': return hayDatos() ? { t: 'Preparo el resumen de tus datos en PDF: se abre la ventana de imprimir y eliges «Guardar como PDF».', a: resumenPdf } : { t: 'Todavía no hay cortes registrados en este navegador. Abre una web con el navegador ZERO y vuelve a pedirme el resumen.', c: ['z-web'] };
       case 'z-que': return { t: AYUDA.zero, c: ['z-web', 'z-radio'] };
-      case 'z-tor': return { t: 'Abro ZERO: en el selector del buscador, elige Tor. Con Tor se corta más.', a: () => abreZero(), va: true };
+      case 'z-tor': return { t: 'Abro el navegador ZERO: en el selector del buscador, elige Tor. Con Tor se corta más.', a: () => abreZero(), va: true };
       case 'planeta': return { t: 'Te llevo al planeta: cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.', a: () => alPlaneta(), va: true };
       case 'p-pais': return r.pais ? { t: pon('Te llevo al planeta, a {1}.', nombrePais(r.pais)), a: () => alPlaneta(null, r.pais), va: true } : { t: '¿Qué país? Escríbelo y te llevo.', modo: 'pais' };
       case 'p-directo': return { t: 'Te llevo al planeta: a la derecha, en EN DIRECTO, aparece cada corte.', a: () => alPlaneta(), va: true };
@@ -158,29 +159,29 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       case 'c-crear': return { t: 'Abro Comunicaciones: pulsa «Crear invitación» y dale el código a la otra persona.', a: irComunicaciones, va: true };
       case 'c-codigo': return { t: 'Abro Comunicaciones: pulsa «Tengo un código» y escribe las 9 cifras.', a: irComunicaciones, va: true };
       case 'c-que': return { t: AYUDA.com, c: ['c-crear', 'c-codigo'] };
-      case 'datos': return { x: [['Qué es', 'Lo que ZERO ha cortado mientras navegabas: qué empresas y de qué países.'], ['Dónde está', 'Solo en este navegador.']], t: misDatos(), c: hayDatos() ? ['resumen', 'borrar'] : ['z-web'] };
-      case 'd-corte': return { t: 'Un corte es una conexión de otra empresa que ZERO no deja pasar. En ZERO, por defecto, todo pasa y tú decides qué cortar; con Tor, ZERO corta más.', c: ['datos'] };
-      case 'borrar': return hayDatos() ? { t: '¿Borro lo que ZERO ha guardado en este navegador: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.', c: [{ l: 'Sí, borrar', id: 'borrar-si' }, { l: 'No', id: 'borrar-no' }], modo: 'confirma-borrar' } : { t: 'No hay nada que borrar: ZERO todavía no ha guardado cortes en este navegador.' };
+      case 'datos': return { x: [['Qué es', 'Lo que el navegador ZERO ha cortado mientras navegabas: qué empresas y de qué países.'], ['Dónde está', 'Solo en este navegador.']], t: misDatos(), c: hayDatos() ? ['resumen', 'borrar'] : ['z-web'] };
+      case 'd-corte': return { t: 'Un corte es una conexión de otra empresa que el navegador ZERO no deja pasar. Por defecto, todo pasa y tú decides qué cortar; con Tor, se corta más.', c: ['datos'] };
+      case 'borrar': return hayDatos() ? { t: '¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.', c: [{ l: 'Sí, borrar', id: 'borrar-si' }, { l: 'No', id: 'borrar-no' }], modo: 'confirma-borrar' } : { t: 'No hay nada que borrar: el navegador ZERO todavía no ha guardado cortes aquí.' };
       case 'borrar-si': borraDatos(); return { t: 'Hecho: he borrado «Mis datos» de este navegador.' };
       case 'borrar-no': return { t: 'De acuerdo, no borro nada.' };
-      case 'privacidad': return { t: 'NÚCLEO no guarda lo que le pides. Lo que ZERO corta («Mis datos») se guarda solo en este navegador, y puedes borrarlo cuando quieras.', c: ['datos', 'borrar'] };
-      case 'seguridad': return { t: 'ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.', c: ['z-que'] };
+      case 'privacidad': return { t: 'NÚCLEO no guarda lo que le pides. Lo que corta el navegador ZERO («Mis datos») se guarda solo en este navegador, y puedes borrarlo cuando quieras.', c: ['datos', 'borrar'] };
+      case 'seguridad': return { t: 'El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.', c: ['z-que'] };
       case 'vpn': return { t: 'ZERO no es una VPN: es un navegador aislado. La web se abre en un servidor de GUARDIANA y a tu equipo solo llegan imágenes.', c: ['zero'] };
       case 'precio': return { t: 'Hoy GUARDIANA no cobra nada.' };
       case 'idioma': return { t: 'Ahora GUARDIANA está en español e inglés; hay 40 idiomas más en preparación. ¿Cuál prefieres?', c: [{ l: 'Español', f: () => idioma('es'), nt: true }, { l: 'English', f: () => idioma('en'), nt: true }] };
-      case 'cuenta': return { t: 'No necesitas crear una cuenta para usar ZERO, Órbita ni Comunicaciones. ¿A cuál quieres entrar?', c: ['zero', 'planeta', 'com'] };
+      case 'cuenta': return { t: 'No necesitas crear una cuenta para usar el navegador ZERO, Órbita ni Comunicaciones. ¿A cuál quieres entrar?', c: ['zero', 'planeta', 'com'] };
       case 'contacto': return { t: 'Puedes escribir a hola@guardianagroup.com: lo lee una persona.', enlace: ['mailto:hola@guardianagroup.com', 'hola@guardianagroup.com'] };
       // lo delicado (rondas 53 y 54)
       case 'clave': return { t: 'No escribas contraseñas aquí: NÚCLEO no las necesita y no guarda lo que escribes.' };
       case 'banco': return { t: 'No compartas datos del banco ni de tarjetas aquí. Hoy GUARDIANA no cobra nada.' };
-      case 'hackear': return { t: 'No ayudo a entrar en cuentas, redes o equipos ajenos. Puedo ayudarte a navegar aislado con ZERO o a chatear encriptado.', c: ['zero', 'com'] };
-      case 'robada': return { t: 'Usa la recuperación oficial de ese servicio y cambia tus contraseñas desde su web. Si quieres, abro su web en ZERO.', c: ['z-web'] };
+      case 'hackear': return { t: 'No ayudo a entrar en cuentas, redes o equipos ajenos. Puedo ayudarte a navegar aislado con el navegador ZERO o a chatear encriptado.', c: ['zero', 'com'] };
+      case 'robada': return { t: 'Usa la recuperación oficial de ese servicio y cambia tus contraseñas desde su web. Si quieres, abro su web en el navegador ZERO.', c: ['z-web'] };
       case 'peligro': return { t: 'Si estás en peligro, llama ya a emergencias o a la policía de tu país. NÚCLEO no puede hacer esa llamada.' };
       case 'autolesion': return { t: 'Siento que estés pasando por esto. Si piensas en hacerte daño, llama ahora a emergencias o a una línea de ayuda de tu país; hablar con alguien ayuda.' };
-      case 'espian': return { t: 'No puedo revisar tu equipo. Con ZERO, las webs se abren fuera de tu equipo y en la Radiografía ves quién intenta seguirte.', c: ['z-que', 'z-web'] };
+      case 'espian': return { t: 'No puedo revisar tu equipo. Con el navegador ZERO, las webs se abren fuera de tu equipo y en la Radiografía ves quién intenta seguirte.', c: ['z-que', 'z-web'] };
       case 'insulto': return { t: 'Perdona si no te he entendido. Dime si quieres navegar, ver el planeta o chatear encriptado.', c: ['zero', 'planeta', 'com'] };
       case 'estafa': return { t: 'Entiendo tu desconfianza. Hoy GUARDIANA no cobra nada, no necesitas cuenta y NÚCLEO no guarda lo que le escribes.', c: ['privacidad', 'contacto'] };
-      case 'salud': return { t: 'No doy consejos de salud: un profesional sanitario puede orientarte. Si quieres, lo busco con ZERO.', c: frase ? [{ l: 'Buscar con ZERO', f: () => abreZero(frase) }] : [] };
+      case 'salud': return { t: 'No doy consejos de salud: un profesional sanitario puede orientarte. Si quieres, lo busco con el navegador ZERO.', c: frase ? [{ l: 'Buscar con el navegador ZERO', f: () => abreZero(frase) }] : [] };
       default: return null;
     }
   }
@@ -308,7 +309,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
     modo = null;
     let o;
     if (r.quiza) o = { t: '¿Quisiste decir…?', c: r.quiza };
-    else if (r.nada) o = { t: 'No he reconocido esa petición. Si quieres, lo busco con ZERO, o mira qué puedes pedirme.', c: [...(r.sensible || !frase ? [] : [{ l: pon('Buscar «{1}» con ZERO', corta(frase)), f: () => abreZero(frase) }]), { l: '¿Qué puedo pedir?', f: () => panel(true) }] };
+    else if (r.nada) o = { t: 'No he reconocido esa petición. Si quieres, lo busco con el navegador ZERO, o mira qué puedes pedirme.', c: [...(r.sensible || !frase ? [] : [{ l: pon('Buscar «{1}» con el navegador ZERO', corta(frase)), f: () => abreZero(frase) }]), { l: '¿Qué puedo pedir?', f: () => panel(true) }] };
     else o = respuesta(r, frase);
     if (!o) o = { t: 'No he reconocido esa petición.', c: [{ l: '¿Qué puedo pedir?', f: () => panel(true) }] };
     burbuja('el', T(o.t), o);
