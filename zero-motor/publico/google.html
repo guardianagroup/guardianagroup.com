@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GUARDIANA · Resultados de Google</title>
+<!-- GUARDIANA ZERO · caja oficial de Google (Programmable Search Element), 26 Oct 2026. Dueño: «que la gente pueda usar
+     Google sin ese captcha tan largo». La sirve el motor desde su propio dominio, dentro de un marco de la página de ZERO:
+     el código de Google corre aquí, separado de la página de ZERO, y la búsqueda sale del navegador de la persona (por eso no
+     hay captcha). Resultados y anuncios los pinta Google tal cual; ZERO solo hace que, al pulsar un resultado (no un anuncio),
+     la web se abra dentro de su celda. Términos: https://support.google.com/programmable-search/answer/1714300 -->
+<style>
+html,body{margin:0;background:#fff;color:#202124;font:14px/1.5 Arial,"Segoe UI",sans-serif}
+#res{max-width:760px;padding:4px 40px 48px}
+.gsc-control-cse{padding:0!important;border:0!important;background:transparent!important}
+.vacio{color:#5f6368;padding:24px 0}
+</style>
+</head>
+<body>
+<div id="res"><p class="vacio">Cargando la búsqueda de Google…</p></div>
+<script>
+(() => {
+  'use strict';
+  const P = new URLSearchParams(location.search);
+  const CX = /^[0-9a-z:_-]{6,40}$/i.test(P.get('cx') || '') ? P.get('cx') : '0656a41f04a6c4172';
+  const padreOk = (o) => /^https:\/\/(www\.)?guardianagroup\.com$/.test(o) || /^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(o);
+  let padre = null, listo = false, pendiente = null;
+  const manda = (m) => { if (padre) parent.postMessage(m, padre); };
+  const busca = (q) => {
+    if (!listo) { pendiente = q; return; }
+    const el = window.google && google.search && google.search.cse && google.search.cse.element.getElement('zero');
+    if (el) { el.execute(q); window.scrollTo(0, 0); }
+  };
+  window.addEventListener('message', (e) => {
+    if (e.source !== parent || !padreOk(e.origin)) return;
+    padre = e.origin;
+    const m = e.data || {};
+    if (m.tipo === 'buscar' && typeof m.q === 'string' && m.q.trim()) busca(m.q.trim().slice(0, 300));
+  });
+  // Al pulsar un resultado (no un anuncio), se avisa a ZERO para abrirlo en su celda y aquí no se navega.
+  document.addEventListener('click', (e) => {
+    const a = e.target && e.target.closest && e.target.closest('a[href]');
+    if (!a || !a.closest('.gsc-webResult, .gs-webResult, .gsc-result')) return;
+    if (a.closest('.gsc-adBlock, .gsc-adBlockVertical, .gsc-adBlockNoHeight, [id^="adBlock"]')) return;
+    const url = a.getAttribute('data-ctorig') || a.href;
+    if (!/^https?:\/\//i.test(url) || /^https?:\/\/([a-z0-9-]+\.)*google\.[a-z.]+\/(url|aclk)\b/i.test(url)) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    manda({ tipo: 'abrir', url });
+  }, true);
+  window.__gcse = {
+    parsetags: 'explicit',
+    initializationCallback: () => {
+      document.getElementById('res').textContent = '';
+      google.search.cse.element.render({ div: 'res', tag: 'searchresults-only', gname: 'zero', attributes: { linkTarget: '_self', enableHistory: false } });
+      listo = true;
+      manda({ tipo: 'listo' });
+      if (pendiente) { const q = pendiente; pendiente = null; busca(q); }
+    },
+  };
+  const s = document.createElement('script');
+  s.async = true; s.src = 'https://cse.google.com/cse.js?cx=' + encodeURIComponent(CX);
+  s.onerror = () => { document.getElementById('res').innerHTML = '<p class="vacio">No se pudo cargar la búsqueda de Google. Prueba «Buscar en todo Google».</p>'; manda({ tipo: 'error' }); };
+  document.head.append(s);
+})();
+</script>
+</body>
+</html>

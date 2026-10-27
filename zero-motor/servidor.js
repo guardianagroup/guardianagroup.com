@@ -741,6 +741,15 @@ async function main() {
       if (ses && !ses.destruida) ses.senuelo({ tipo: 'visita', donde: 'visita al enlace oculto (' + (req.headers['user-agent'] || 'sin agente').slice(0, 80) + ')' }, ip, req.url, true, false);
       res.writeHead(204); return res.end();
     }
+    if (/^\/google(\?|$)/.test(req.url)) {
+      // Caja oficial de Google (Programmable Search Element) para la página de ZERO, servida desde el dominio del motor para que
+      // el código de Google no corra en la página de ZERO. Solo se deja enmarcar desde las páginas de GUARDIANA.
+      let html = ''; try { html = fs.readFileSync(path.join(__dirname, 'publico', 'google.html'), 'utf8'); } catch (_) {}
+      if (!html) { res.writeHead(404); return res.end(); }
+      res.writeHead(200, { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-cache', 'x-content-type-options': 'nosniff',
+        'content-security-policy': "frame-ancestors https://guardianagroup.com https://www.guardianagroup.com http://127.0.0.1:* http://localhost:*" });
+      return res.end(html);
+    }
     if (req.url === '/salud') {
       // la página de ZERO (otro origen) pregunta aquí antes de usar este motor: CORS solo para los orígenes permitidos
       const cab = { 'content-type': 'application/json', 'cache-control': 'no-store' };
