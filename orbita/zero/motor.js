@@ -59,7 +59,7 @@
     ws.binaryType = 'blob';
     ws.onopen = () => { const t = tam(); env({ t: 'hola', w: t.w, h: t.h, idioma: idiomaCelda() }); };
     ws.onmessage = (ev) => { if (typeof ev.data === 'string') despacha(JSON.parse(ev.data)); else cuadro(ev.data); };
-    ws.onclose = () => { M.estado = 'cerrado'; abierto = false; if (!M.acta) ponEstado('Sin conexión con el motor', 'mal'); };
+    ws.onclose = () => { M.estado = 'cerrado'; abierto = false; fueraChequeo(); if (!M.acta) ponEstado('Sin conexión con el motor', 'mal'); };
     ws.onerror = () => { M.estado = 'error'; ponEstado('No se pudo conectar con el motor en ' + URL_MOTOR, 'mal'); };
   }
 
@@ -70,12 +70,22 @@
       ctx.drawImage(bm, 0, 0); bm.close();
       cuadros++; ultimoCuadro = Date.now();
       if (est.classList.contains('on') && !est.classList.contains('mal') && M.estado === 'lista') ponEstado('');
+      // ZERO entra antes que tú: tras la comprobación, la capa se quita cuando llega la imagen de la web ya comprobada
+      if (M.esperaCuadro) { M.esperaCuadro = false; if (window.zeroChequeoCuadro) window.zeroChequeoCuadro(); }
     } catch (_) {}
   }
 
   function despacha(m) {
+    if (m.t === 'chequeo') {
+      // ZERO entra antes que tú (27 Oct 2026; ronda 67): el motor comprueba la web antes de enseñarla; la página pinta los pasos
+      // (con «rapida», la web ya se comprobó limpia hace poco en esta burbuja: se vuelve a comprobar sin tapar la pantalla)
+      if (m.fase === 'empieza') { M.chequeando = !m.rapida; if (!m.rapida) limpiaPantalla(); }
+      else if (m.fase !== 'paso' && m.fase !== 'salto') { M.chequeando = false; M.esperaCuadro = m.fase === 'listo' && !m.rapida; }
+      M.chequeo = m; if (window.zeroChequeo) window.zeroChequeo(m);
+      return;
+    }
     if (m.t === 'lista') {
-      M.lista = m; M.estado = 'lista'; M.sesion = m.sesion; M.acta = null; M.ultraDisponible = !!m.ultraDisponible; M.ultra = !!m.ultra; M.nivelActual = m.nivel || M.nivelActual;
+      M.lista = m; M.estado = 'lista'; M.sesion = m.sesion; M.acta = null; M.ultraDisponible = !!m.ultraDisponible; M.ultra = !!m.ultra; M.nivelActual = m.nivel || M.nivelActual; M.conChequeo = !!m.chequeo;
       if (window.zeroLista) window.zeroLista(m);
       ponEstado('Burbuja lista · ' + Object.keys(m.listas || {}).length + ' listas · cookies de terceros ' + (m.cookiesBloqueadas ? 'bloqueadas' : 'efímeras'));
       if (pendiente) { env({ t: 'abrir', url: pendiente }); pendiente = null; }
@@ -95,8 +105,12 @@
     if (m.t === 'cortes') { if (window.zeroCortes) window.zeroCortes(m.lista || []); return; }
     if (m.t === 'alerta') { M.alertaNivel = m.nivel; M.sellada = !!m.sellada; if (window.zeroAlerta) window.zeroAlerta(m); return; }
     if (m.t === 'vigilancia') { M.vigilancia = m; if (window.zeroVigilancia) window.zeroVigilancia(m); return; }
-    if (m.t === 'acta') { M.acta = m.acta; abierto = false; ponEstado(''); if (window.zeroActa) window.zeroActa(m.acta); return; }
+    if (m.t === 'acta') { M.acta = m.acta; abierto = false; ponEstado(''); fueraChequeo(); if (window.zeroActa) window.zeroActa(m.acta); return; }
   }
+  // la capa de comprobación nunca se queda puesta si la burbuja se cierra o se pierde la conexión
+  function fueraChequeo() { if (M.chequeando || M.esperaCuadro) { M.chequeando = false; M.esperaCuadro = false; if (window.zeroChequeo) window.zeroChequeo({ t: 'chequeo', fase: 'cancelado', motivo: 'sin burbuja' }); } }
+  // al empezar a comprobar otra web, la pantalla de la anterior desaparece: al quitar la capa nunca se ve la web vieja
+  function limpiaPantalla() { try { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, cv.width, cv.height); } catch (_) {} }
 
   // ---- lo que el motor recibe de la persona ----
   const coords = (e) => { const r = cv.getBoundingClientRect(); return { x: Math.max(0, Math.min(cv.width, (e.clientX - r.left) * cv.width / (r.width || 1))), y: Math.max(0, Math.min(cv.height, (e.clientY - r.top) * cv.height / (r.height || 1))) }; };
@@ -130,6 +144,7 @@
   cv.addEventListener('keydown', (e) => {
     if (LOCALES.has(e.key) || e.key === 'Dead' || (e.ctrlKey && /^[lLtTwWnN]$/.test(e.key))) return;
     e.preventDefault(); e.stopPropagation();
+    if (M.chequeando) return; // ZERO entra antes que tú: mientras comprueba, la web no recibe teclas
     const mod = e.ctrlKey || e.metaKey;
     // Ctrl+C: lo seleccionado en la burbuja pasa al portapapeles de la persona; Ctrl+V: lo que tiene en su portapapeles entra en la burbuja.
     if (mod && /^[cC]$/.test(e.key)) { env({ t: 'tecla', tipo: 'down', key: e.key }); env({ t: 'copiar' }); return; }
@@ -152,11 +167,15 @@
     else if (esDir(texto)) u = /^https?:\/\//i.test(texto) ? texto : (/^(localhost|127\.0\.0\.1)/i.test(texto) ? 'http://' : 'https://') + texto;
     else u = urlBuscador + encodeURIComponent(texto);
     if (M.sellada) { ponEstado('Burbuja sellada: reanuda o destruye la burbuja antes de abrir otra web', 'mal'); if (window.zeroNav) window.zeroNav({ host: M.host, url: M.urlActual }); return; }
-    stage.classList.add('real'); abierto = true; M.acta = null; ponEstado('Abriendo en la burbuja…'); avisaTam();
+    stage.classList.add('real'); abierto = true; M.acta = null; ponEstado(M.conChequeo ? '' : 'Abriendo en la burbuja…'); avisaTam();
+    // ZERO entra antes que tú: la capa sale al instante (sin esperar al motor) cuando el motor la sabe hacer
+    if (M.conChequeo && /^https?:\/\//i.test(u) && window.zeroChequeo) { try { const h = new URL(u).hostname, t = M.limpias && M.limpias.get(h); if (!(t && Date.now() - t < 9 * 60000)) { M.chequeando = true; window.zeroChequeo({ t: 'chequeo', fase: 'local', host: h }); } } catch (_) {} }
     try { const h = new URL(u).host; if (window.zeroNav) window.zeroNav({ host: h, url: u }); } catch (_) {}
     if (M.estado === 'lista' && ws && ws.readyState === 1) env({ t: 'abrir', url: u }); else { pendiente = u; conecta(); }
     setTimeout(() => cv.focus(), 50);
   };
+  M.chequeoSalir = () => env({ t: 'chequeo', accion: 'salir' });
+  M.chequeoEntrar = () => env({ t: 'chequeo', accion: 'entrar' }); // «Entrar bajo mi responsabilidad» en una web que ZERO detuvo
   M.atras = () => env({ t: 'atras' }); M.adelante = () => env({ t: 'adelante' }); M.recargar = () => env({ t: 'recargar' });
   M.modo = (observatorio) => { M.observatorio = !!observatorio; env({ t: 'modo', observatorio: M.observatorio }); };
   M.ultraPon = (on) => env({ t: 'modo', ultra: !!on });

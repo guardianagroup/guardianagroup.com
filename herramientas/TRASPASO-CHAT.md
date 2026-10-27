@@ -1,6 +1,45 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-## Estado al 27 Oct 2026, 17:05 (Bogotá) — EMPIEZA POR AQUÍ
+## Estado al 27 Oct 2026, 18:40 (Bogotá) — EMPIEZA POR AQUÍ
+
+Lo de las 17:05 (abajo) sigue valiendo salvo lo que cambia aquí.
+
+**ZERO entra antes que tú** (dueño, 17:25–18:07). Va incorporado: siempre activo, para todos, sin interruptor y lo más rápido posible.
+
+- **Motor (`zero-motor/servidor.js`):**
+  - **Cuándo comprueba:** al abrir una web (`ve()`) o al pasar a otra web por enlace o salto. Mientras dura, retiene los cuadros de la pantalla (guarda solo el último) y no deja pasar ratón ni teclado.
+  - **Hitos reales que manda (`t:'chequeo'`):** `listas` (antes de conectar), `conexion` (cifrada, protocolo, emisor), `documento` y `carga`.
+  - **Cuándo suelta la imagen:** con `load` + 300 ms, `DOMContentLoaded` + 400 ms o el tope de 2,5 s. Ante un desafío antirrobot, al momento.
+  - **Resultado (`limpia`/`aviso`/`peligro`/`fallo`/`riesgo`):** con los hechos medidos. El punycode que imita letras (`imitaLetras`) es un aviso.
+  - **Webs limpias:** quedan apuntadas 10 min, solo en esa burbuja, y entonces no se retiene la imagen.
+  - **Sin cambiar de pantalla:** `Page.frameNavigated` vuelve a contar la carga cuando llega un documento nuevo, sin cortar las descargas.
+  - **«Entrar bajo mi responsabilidad»:**
+    - en una web de lista peligrosa, se deja pasar esa web y sus recursos; lo peligroso de otras webs sigue cortado;
+    - con un certificado que no pasa, se usa `Security.setIgnoreCertificateErrors` solo para esa web, y la barra la marca como no segura;
+    - las direcciones internas no se abren nunca.
+- **Página (`orbita/zero/index.html` + `motor.js`):**
+  - **Capa «Chequeando la web…»:** pasos en vivo y, al terminar, el resultado con «Lo que ZERO ha visto:».
+  - **Botones:** «No entrar» (el recomendado) y «Entrar bajo mi responsabilidad».
+  - **Nota al entrar:** si la web está limpia, «ZERO entró antes que tú: sin peligros conocidos · 0,4 s»; si se entró bajo responsabilidad, una nota ámbar.
+  - **Idiomas:** 55 frases en los 42 idiomas (`trad67*.py` en el scratchpad).
+- **Pruebas locales:**
+  - **Motor:** `pruebas/sitio.js` + `sitio2.js` (scratchpad `home/cheq`). Una web limpia tarda unos 330–400 ms; el diario, unos 550 ms; el tope, 2,5 s.
+  - **Página:** `ui.js`, `ui2.js` y `ui3.js` (de, ar, ja, ru).
+- **Agencia:**
+  - **65:** las dos voces.
+  - **66:** Gemini; ChatGPT, en el chat «Propuesta Control IA».
+  - **67:** Gemini; ChatGPT, en la pestaña 11.
+  - **68** (el viaje del archivo en Comunicaciones y elegir la ruta): Claude en `claude-rutas.md`; Gemini, en la pestaña 1; ChatGPT, en la pestaña 30.
+  - **69** (mapa de amenazas en Órbita): licencias en `claude-fuentes.md`; Gemini, en la pestaña 31; ChatGPT, en la pestaña 32.
+  - El dueño pidió sumar **Astra 6** (Cheaper Inference, pestaña 2) a las rondas 67–69, solo con información del producto.
+- **Licencias comprobadas (Claude, fuentes oficiales):**
+  - **URLhaus, ThreatFox y MalwareBazaar:** el uso comercial puede requerir suscripción de pago (Spamhaus). Gemini decía CC0: mal.
+  - **Se pueden usar en un producto de pago:** Phishing.Database (MIT), NoCoin (MIT), Spamhaus DROP y Google Web Risk (de pago).
+  - **Cloudflare Radar:** los datos de la API son CC BY-NC; los gráficos incrustables, CC BY 4.0.
+  - **HIBP:** desde 4,39 US$/mes con pago anual.
+  - **FBI IC3 2025:** el BEC suma 3.046.598.558 US$ en 24.768 denuncias (confirmado).
+
+## Estado al 27 Oct 2026, 17:05 (Bogotá)
 
 Lo de las 16:45 (abajo) sigue valiendo salvo lo que cambia aquí.
 
@@ -806,6 +845,15 @@ Actualizado el sábado 24 de octubre de 2026 a las 21:25, hora de Bogotá, al ce
 - Con el panel del navegador oculto, el navegador pausa `requestAnimationFrame` y el mapa en vivo no se mueve. Pide al dueño que muestre el panel.
 - Los servidores locales de pruebas se cortan a las 2 horas.
 - En las pruebas con Playwright, la ficha de cable se abre con `OrbitaPlaneta.ir(-46.565, 4.504, 8)` y un clic en (720, 450).
+- **27 Oct, 17:20: se copiaron a main 266 archivos que no tocaban** (`en/`, `pt/`, `descargas/`, `instalar.html`, `i18n/nueva/`…).
+  - Causa: la lista de archivos se sacó con `git diff` entre un commit de main y otro de web-idiomas.
+  - Se deshizo con un revert (11e85c52). El despliegue de ese commit se canceló, así que no llegó a la web.
+  - Regla: la lista sale **siempre** de `git show --name-only --format= <commit de web-idiomas>` (o de varios commits de web-idiomas, uno a uno), nunca de un diff entre ramas.
+- En el navegador integrado, una pestaña que no está delante no se pinta:
+  - scripts con esperas largas se cortan a los 45 s;
+  - tras recargar, ChatGPT no muestra la conversación.
+  - Para enviar a la agencia: poner la pestaña delante, hacerlo y volver a la de la web (tab-28).
+  - En ChatGPT, el cuadro de escribir es el `.ProseMirror` que está dentro del `form`.
 
 ## 11. Estado al cerrar (se actualiza al final de cada tanda)
 

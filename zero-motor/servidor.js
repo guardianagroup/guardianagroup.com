@@ -26,7 +26,7 @@ const RAIZ = path.join(__dirname, '..');
 const PUERTO = +process.argv[2] || 8792;
 const MOCK = !!process.env.ZERO_MOCK;
 const SESIONES = new Map(); // token de señuelo → sesión (para el colector /s/<token>)
-const VERSION = 'prototipo 0.1 · 26 Oct 2026';
+const VERSION = 'prototipo 0.2 · 27 Oct 2026 (ZERO entra antes que tú)';
 const CLAVE_SESION = crypto.randomBytes(32); // efímera: con ella se sella el comprobante de cada sesión
 // Blindaje del motor (26 Oct 2026, ronda 40 punto 11): solo las páginas de GUARDIANA pueden abrir sesiones; hay un tope
 // de burbujas vivas; una burbuja que nadie mira se cierra sola; ningún mensaje puede ser enorme; en la burbuja solo se abren
@@ -73,6 +73,33 @@ const TIPO_ABP = { stylesheet: 'stylesheet', image: 'image', media: 'media', fon
 const TOR_CORTA = { publicidad: 'publicidad', rastreo: 'rastreo', 'medición': 'rastreo', consentimiento: 'avisos-cookies' }; // con Tor, además de las listas
 const PROPOSITO = { publicidad: 'Publicidad', rastreo: 'Rastreador', malware: 'Web peligrosa', 'avisos-cookies': 'Aviso de cookies', 'red-local': 'Red local', excepciones: '', parametros: 'Seguimiento', 'otra-empresa': 'Otra empresa' };
 
+// «ZERO entra antes que tú» (27 Oct 2026, dueño, 17:25–17:39; ronda 67): ZERO entra primero en cada web, la comprueba dentro
+// de la burbuja y solo entonces la enseña; mientras, la persona ve «Chequeando la web…» con los pasos reales. Va incorporado:
+// siempre activo, para todos, sin interruptor. «Lo más rápido posible»: la comprobación corre mientras la web carga (nada de
+// esperas de adorno); se suelta la imagen al cargar la web y observarla un instante, o poco después del documento si la carga
+// completa se alarga, y nunca más tarde del tope.
+// Tiempos (ronda 67, Gemini: «domcontentloaded + 400 ms, tope de 2,5 s»; Nielsen: a partir de 1 s se nota la espera): las listas y el
+// certificado se comprueban antes de conectar y en el saludo TLS, así que al tope ya están; lo que se recorta es la observación.
+const CHEQUEO_CALMA_MS = +process.env.ZERO_CHEQUEO_CALMA || 300; // observación tras el evento load
+const CHEQUEO_DOC_MS = +process.env.ZERO_CHEQUEO_DOC || 400; // tras DOMContentLoaded, si load no llega antes
+const CHEQUEO_TOPE_MS = +process.env.ZERO_CHEQUEO_TOPE || 2500; // tope desde que se pide la web: después se ve cargar, vigilada
+const CHEQUEO_RECUERDA_MS = process.env.ZERO_CHEQUEO_RECUERDA != null ? +process.env.ZERO_CHEQUEO_RECUERDA : 10 * 60000; // una web comprobada limpia en esta burbuja no vuelve a retener la imagen en 10 min
+// Desafíos antirrobot (Cloudflare «Just a moment…», captchas): esperan a una persona, así que se suelta la imagen enseguida
+const RE_DESAFIO = /just a moment|un momento|attention required|checking your browser|verify(ing)? (that )?you are (a )?human|comprueba que eres humano|captcha|ddos-guard|access denied/i;
+// Dirección que imita a otra con letras de otro alfabeto (homógrafos, p. ej. «аррӏе.com» en cirílico): una etiqueta en punycode
+// que mezcla alfabetos, o que usa griego, cirílico, armenio o cheroqui bajo un dominio de letras latinas. Las letras latinas con
+// tilde (ñ, á, ü) no cuentan. Devuelve el nombre tal como se lee, o null.
+function imitaLetras(host) {
+  const h = String(host || '').toLowerCase();
+  if (!h.includes('xn--')) return null;
+  let uni = ''; try { uni = require('url').domainToUnicode(h); } catch (_) { return null; }
+  if (!uni) return null;
+  const et = uni.split('.'); const tld = et[et.length - 1] || '';
+  const otro = /[Ͱ-ϿЀ-ԯ԰-֏Ꭰ-᏿]/;
+  for (const e of et.slice(0, -1)) if (otro.test(e) && (/[a-z]/.test(e) || /^[a-z]+$/.test(tld))) return uni;
+  return null;
+}
+
 // Página que ve la persona dentro de la burbuja cuando ZERO detiene una web peligrosa o un certificado roto
 function paginaBloqueo(titulo, texto, detalle) {
   const esc = (s) => String(s || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -114,6 +141,11 @@ class Sesion {
     this.permitidas = new Set(); // dominios base, 'e:<empresa>' o 'p:<grupo>' (Publicidad, Rastreador…) que la persona ha permitido en esta sesión
     this.vetadas = new Set(); // empresas o dominios que la persona volvió a cortar a mano: mandan sobre un grupo permitido
     this.nCuadros = { enviados: 0, descartados: 0 }; this.cuadroPendiente = null;
+    this.chequeo = null; this.nCheq = 0; // «ZERO entra antes que tú»: la comprobación en curso (una a la vez, la de la pestaña que se ve)
+    this.comprobadas = new Map(); // web → hora de su última comprobación limpia, solo en esta burbuja (nadie más la ve; se borra con ella)
+    // dueño (18:07): ZERO avisa y la persona decide. Webs en las que eligió «Entrar bajo mi responsabilidad» (solo en esta burbuja) y
+    // la última que ZERO detuvo (lista de webs peligrosas o certificado), para poder abrirla si lo pide
+    this.entraIgual = new Set(); this.ultimoBloqueo = null;
     ws.on('drain', () => { if (this.cuadroPendiente && this.ws.abierto && this.ws.atraso <= ATRASO_MAX) { const d = this.cuadroPendiente; this.cuadroPendiente = null; this.ws.send(Buffer.from(d, 'base64')); this.nCuadros.enviados++; } });
     this.nivel = process.env.ZERO_NIVEL_INICIAL || 'normal'; // dueño (26 Oct 2026, 22:42): un solo modo, Normal; cada empresa se corta o se deja pasar con su interruptor // 26 Oct 2026: por defecto se abre todo y la persona elige qué cortar
     VIVAS.add(this); this.ultimaMirada = Date.now();
@@ -167,7 +199,7 @@ class Sesion {
     await this.ponIntercepcion(this.nivel !== 'observar');
     this.ctx.on('page', (p) => { if (this.esperadas > 0) { this.esperadas--; return; } this.suceso({ clase: 'popup', certeza: 'comprobado', texto: 'La web intentó abrir una ventana nueva. ZERO la cerró.', dominio: hostDe(p.url()) }); p.close().catch(() => {}); });
     await this.nuevaPestana();
-    this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h, ultraDisponible: !!TOR_PROXY, ultra: !!(this.ultra && TOR_PROXY), dejaPorDefecto: this.dejaPorDefecto(), nivel: this.nivel, region: process.env.ZERO_REGION || '' });
+    this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h, ultraDisponible: !!TOR_PROXY, ultra: !!(this.ultra && TOR_PROXY), dejaPorDefecto: this.dejaPorDefecto(), nivel: this.nivel, region: process.env.ZERO_REGION || '', chequeo: true });
     this.envVigilancia();
   }
 
@@ -182,6 +214,10 @@ class Sesion {
     try { await cdp.send('Network.setCookieControls', { enableThirdPartyCookieRestriction: true, disableThirdPartyCookieMetadata: true, disableThirdPartyCookieHeuristics: true }); this.cookiesBloqueadas = true; } catch (_) { this.cookiesBloqueadas = false; }
     if (this.nivel === 'maximo' || this.sellada) { try { await cdp.send('Emulation.setScriptExecutionDisabled', { value: true }); } catch (_) {} }
     try { await cdp.send('Network.enable'); } catch (_) {}
+    // ZERO entra antes que tú: un documento nuevo en la pestaña (no un cambio dentro de la misma página ni una descarga) vuelve a
+    // contar sus eventos de carga dentro de la comprobación en curso
+    try { await cdp.send('Page.enable'); } catch (_) {}
+    cdp.on('Page.frameNavigated', (ev) => { if (ev && ev.frame && !ev.frame.parentId) this.reiniciaCargaChequeo(p); });
     try { p.frameId = (await cdp.send('Page.getFrameTree')).frameTree.frame.id; } catch (_) { p.frameId = null; }
     cdp.on('Network.requestWillBeSent', (ev) => { if (!this.intercepta) this.observaRed(p, ev); });
     cdp.on('Fetch.requestPaused', (ev) => { this.filtraDoc(p, ev); });
@@ -191,6 +227,8 @@ class Sesion {
       // persona va atrasado, el cuadro se guarda y se manda solo el más reciente cuando el enlace se vacía; nunca el pasado.
       cdp.send('Page.screencastFrameAck', { sessionId: f.sessionId }).catch(() => {});
       if (this.act !== p || !this.ws.abierto) return;
+      // ZERO entra antes que tú: mientras se comprueba la web, la imagen no sale; se guarda solo el último cuadro
+      { const c = this.chequeo; if (c && c.p === p && !c.listo && !c.rapida) { c.cuadro = f.data; return; } }
       if (this.ws.atraso > ATRASO_MAX) { this.cuadroPendiente = f.data; this.nCuadros.descartados++; return; }
       this.cuadroPendiente = null; this.ws.send(Buffer.from(f.data, 'base64')); this.nCuadros.enviados++;
     });
@@ -211,12 +249,14 @@ class Sesion {
     page.on('download', (d) => this.descarga(d));
     page.on('dialog', (d) => { this.suceso({ clase: 'dialogo', certeza: 'comprobado', texto: 'La web intentó mostrar un aviso emergente. ZERO lo cerró.', dominio: hostDe(page.url()) }); d.dismiss().catch(() => {}); });
     page.on('framenavigated', (f) => { if (f === page.mainFrame()) { p.url = page.url(); if (this.act === p) this.nav(); else this.env(this.listaPestanas()); } });
-    page.on('load', () => { page.title().then((tt) => { p.titulo = tt; if (this.act === p) this.nav(true); this.env(this.listaPestanas()); }).catch(() => {}); this.miraMuro(page).catch(() => {}); });
-    page.on('close', () => { const i = this.pestanas.indexOf(p); if (i >= 0) this.pestanas.splice(i, 1); if (this.act === p && !this.destruida) { this.act = null; const q = this.pestanas[Math.max(0, i - 1)]; if (q) this.activaPestana(q).catch(() => {}); else this.nuevaPestana().catch(() => {}); } else this.env(this.listaPestanas()); });
+    page.on('domcontentloaded', () => this.hitoChequeo(p, 'documento'));
+    page.on('load', () => { this.hitoChequeo(p, 'carga'); page.title().then((tt) => { p.titulo = tt; if (this.act === p) this.nav(true); this.env(this.listaPestanas()); }).catch(() => {}); this.miraMuro(page).catch(() => {}); });
+    page.on('close', () => { { const c = this.chequeo; if (c && c.p === p) this.sueltaChequeo(c, 'pestaña cerrada', false); } const i = this.pestanas.indexOf(p); if (i >= 0) this.pestanas.splice(i, 1); if (this.act === p && !this.destruida) { this.act = null; const q = this.pestanas[Math.max(0, i - 1)]; if (q) this.activaPestana(q).catch(() => {}); else this.nuevaPestana().catch(() => {}); } else this.env(this.listaPestanas()); });
   }
 
   async activaPestana(p) {
     if (!p || this.destruida) return;
+    { const c = this.chequeo; if (c && c.p !== p) this.sueltaChequeo(c, 'otra pestaña', false); } // la comprobación es de la pestaña que se ve
     const antes = this.act;
     if (antes && antes !== p && antes.pantalla) { antes.pantalla = false; await antes.cdp.send('Page.stopScreencast').catch(() => {}); }
     this.act = p;
@@ -332,6 +372,13 @@ class Sesion {
     const fugas = this.senuelos.inspecciona({ url, postData, headers: req.headers(), tercero });
     if (fugas.length) { const dcheck = cortes.decide({ url, tipo, origen, host, tercero }); fugas.forEach((f) => this.senuelo(f, host, url, tercero, (!!dcheck.bloquear && (dcheck.proposito === 'malware' || !this.permiso(host, PROPOSITO[dcheck.proposito] || 'Rastreador'))) || (this.nivel && this.nivel !== 'normal' && tercero && !esLocal(host)))); }
     if (principal) {
+      // ZERO entra antes que tú: una web nueva en la pestaña que se ve (escrita en la barra o alcanzada por un enlace o un salto)
+      // se comprueba antes de enseñarla. Un documento nuevo dentro de la misma comprobación (saltos, redirecciones) la alarga.
+      if (pest && this.act === pest) {
+        const c = this.chequeo;
+        if (c && c.p === pest && !c.listo) { if (host !== c.host) this.empiezaChequeo(pest, url, 'salto'); }
+        else if (st.webActual && baseDominio(st.webActual) !== baseDominio(host)) this.empiezaChequeo(pest, url, 'enlace');
+      }
       if (st.webActual && baseDominio(st.webActual) !== baseDominio(host) && pest) {
         // la pestaña cambia de web por un enlace: cuentas nuevas «en esta web» (las de la sesión se conservan en EN VIVO)
         pest.stats = Sesion.statsNuevo(); st = pest.stats;
@@ -340,11 +387,15 @@ class Sesion {
       st.webActual = host;
       // 1) web peligrosa conocida (listas de malware/phishing) → se detiene dentro de la burbuja
       const d = cortes.decide({ url, tipo: 'document', origen, host, tercero: false });
-      if (d.bloquear && d.proposito === 'malware') {
-        st.n.bloqueos++;
+      if (d.bloquear && d.proposito === 'malware' && this.entraIgual.has(host)) {
+        this.suceso({ clase: 'riesgo', certeza: 'comprobado', dominio: host, texto: 'Has entrado bajo tu responsabilidad en una web que figura en una lista de webs peligrosas. Se abre dentro de la burbuja, lejos de tu equipo, y ZERO sigue cortando lo peligroso de otras webs.', detalle: { regla: d.regla, lista: d.lista } });
+      } else if (d.bloquear && d.proposito === 'malware') {
+        st.n.bloqueos++; this.ultimoBloqueo = { host, url: String(url).slice(0, 4096), tipo: 'lista' };
         this.suceso({ clase: 'bloqueo', certeza: 'comprobado', dominio: host, texto: 'Esta dirección figura en una lista pública de webs peligrosas. ZERO no la ha abierto.', detalle: { regla: d.regla, lista: d.lista } });
+        this.hitoChequeo(pest, 'listas', { peligrosa: true, lista: (cortes.listas[d.lista] || {}).nombre || null });
         return route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: paginaBloqueo('Esta web está en una lista de webs peligrosas', 'ZERO ha detenido la apertura antes de cargar nada. La dirección coincide con una regla de una lista pública de malware o fraude; la lista puede equivocarse, pero no merece la pena arriesgarse.', host + ' · regla ' + d.regla + ' · ' + (cortes.listas[d.lista] || {}).nombre) }).catch(() => {});
       }
+      this.hitoChequeo(pest, 'listas', { peligrosa: false });
       // 2) limpiar la dirección de identificadores de seguimiento
       const lim = cortes.limpiaUrl(url, origen);
       if (lim.quitados.length) {
@@ -362,6 +413,7 @@ class Sesion {
       if (MOCK && !esLocal(host)) return this.simula(route, req, tipo);
       return route.continue().catch(() => {});
     }
+    if (d.bloquear && d.proposito === 'malware' && this.entraIgual.has(host)) return route.continue().catch(() => {}); // la web en la que la persona eligió entrar
     const permitida = this.permiso(host, d.bloquear ? PROPOSITO[d.proposito] || 'Rastreador' : 'Otra empresa');
     if (d.bloquear) {
       if (this.nivel === 'observar' && d.proposito !== 'malware') { this.corte(host, tipo, origen, tercero, d, st, 'visto'); return route.continue().catch(() => {}); }
@@ -494,6 +546,10 @@ class Sesion {
       if ((st === 403 || st === 429 || st === 503) && (p || this.act) === this.act) this.env({ t: 'muro', host: hostDe(r.url()), estado: st });
       const cadena = []; let q = req.redirectedFrom();
       while (q) { cadena.unshift(hostDe(q.url())); q = q.redirectedFrom(); }
+      { // ZERO entra antes que tú: la web respondió; conexión cifrada o no, protocolo y quién firmó el certificado (lo que dice Chromium)
+        const pp = p || this.act; const c = this.chequeo;
+        if (c && c.p === pp && !c.listo) r.securityDetails().catch(() => null).then((sd) => this.hitoChequeo(pp, 'conexion', { cifrada: r.url().startsWith('https:'), estado: st, saltos: cadena.length, protocolo: (sd && sd.protocol) || null, emisor: (sd && sd.issuer) || null }));
+      }
       if (cadena.length >= 2) {
         const inter = [...new Set(cadena)];
         this.suceso({ clase: 'redireccion', certeza: 'comprobado', dominio: hostDe(req.url()), texto: 'Antes de llegar a ' + hostDe(req.url()) + ', el enlace dio ' + cadena.length + ' saltos (' + inter.join(' → ') + '). Algunos saltos así sirven para anotar tu clic.', detalle: { cadena } });
@@ -646,16 +702,149 @@ class Sesion {
     try {
       const u = this.page.url(); if (this.act) this.act.url = u;
       const rs = this.act && this.act.respondio; const ok = !!(rs && rs.ok && hostDe(rs.url) === hostDe(u));
-      this.env({ t: 'nav', url: u, host: hostDe(u), segura: u.startsWith('https:'), cargada: !!cargada, ok });
+      const sinCert = !!(this.act && this.act.ignoraCert && this.act.ignoraCert === hostDe(u)); // entró bajo su responsabilidad con un certificado que no pasa
+      this.env({ t: 'nav', url: u, host: hostDe(u), segura: u.startsWith('https:') && !sinCert, cargada: !!cargada, ok });
       if (cargada) this.page.title().then((tt) => this.env({ t: 'titulo', titulo: tt })).catch(() => {});
     } catch (_) {}
   }
 
-  async ve(url) {
+  // ---- «ZERO entra antes que tú» (27 Oct 2026, dueño; ronda 67) ----
+  // Una comprobación por apertura, en la pestaña que se ve. Hitos reales que se cuentan a la persona según ocurren: «listas» (la
+  // dirección pasó, o no, las listas de webs peligrosas antes de conectar), «conexion» (la web respondió: cifrada o no, protocolo y
+  // emisor del certificado), «documento» y «carga» (eventos de la página). Se cierra tras la carga y un instante de observación,
+  // poco después del documento si la carga completa se alarga, o al tope; entonces se manda el resultado con lo visto y se suelta
+  // la imagen. Solo se afirma lo que ZERO ha comprobado en esta burbuja.
+  empiezaChequeo(p, url, motivo) {
+    if (!p || this.destruida) return null;
+    const host = hostDe(url); if (!host) return null;
+    const c0 = this.chequeo;
+    const reciente = (h) => Date.now() - (this.comprobadas.get(h) || 0) < CHEQUEO_RECUERDA_MS;
+    if (c0 && c0.p === p && !c0.listo && motivo === 'salto') { // un salto dentro de la misma apertura: sigue la misma comprobación
+      if (host !== c0.host) {
+        c0.saltos.push(host); c0.host = host;
+        // el salto lleva a una web no comprobada: desde aquí se retiene la imagen (y la página enseña la capa)
+        if (c0.rapida && !reciente(host)) { c0.rapida = false; this.env({ t: 'chequeo', fase: 'empieza', id: c0.id, host, motivo: 'salto' }); }
+        else this.env({ t: 'chequeo', fase: 'salto', id: c0.id, host });
+      }
+      return c0;
+    }
+    if (c0) this.sueltaChequeo(c0, 'otra web', false); // otra apertura antes de terminar: la anterior se descarta sin enseñarla
+    if (p.ignoraCert && p.ignoraCert !== host) { p.ignoraCert = null; p.cdp.send('Security.setIgnoreCertificateErrors', { ignore: false }).catch(() => {}); } // el permiso de certificado era solo para aquella web
+    const riesgo = motivo === 'riesgo';
+    const c = { id: ++this.nCheq, p, host, url: String(url).slice(0, 300), motivo: motivo || 'abrir', t0: Date.now(), iSuc: this.sucesos.length, vig0: { ...this.vig }, saltos: [], hitos: {}, cuadro: null, listo: false, tope: null, doc: null, calma: null, fallo: null, rapida: riesgo || reciente(host), riesgo };
+    this.chequeo = c;
+    c.tope = setTimeout(() => this.cierraChequeo(c, 'tope'), CHEQUEO_TOPE_MS);
+    // comprobada limpia hace poco en esta burbuja: se vuelve a comprobar, pero sin retener la imagen (la página no enseña la capa)
+    this.env({ t: 'chequeo', fase: 'empieza', id: c.id, host, motivo: c.motivo, rapida: c.rapida });
+    return c;
+  }
+
+  hitoChequeo(p, hito, datos) {
+    const c = this.chequeo;
+    if (!c || c.listo || c.p !== p) return;
+    if (hito === 'conexion' && c.hitos.listas && c.hitos.listas.peligrosa) return; // lo que «responde» es la página de ZERO que la detuvo
+    const nuevo = !c.hitos[hito];
+    c.hitos[hito] = { ms: Date.now() - c.t0, ...(datos || {}) };
+    if (nuevo || hito === 'listas' || hito === 'conexion') this.env({ t: 'chequeo', fase: 'paso', id: c.id, paso: hito, ...(datos || {}) });
+    if (hito === 'carga') { clearTimeout(c.doc); clearTimeout(c.calma); c.calma = setTimeout(() => this.cierraChequeo(c, 'carga'), CHEQUEO_CALMA_MS); }
+    else if (hito === 'documento' && nuevo && !c.hitos.carga) {
+      clearTimeout(c.doc); c.doc = setTimeout(() => this.cierraChequeo(c, 'documento'), CHEQUEO_DOC_MS);
+      // un desafío antirrobot espera a una persona: se suelta ya y se dice
+      p.page.title().then((tt) => { if (RE_DESAFIO.test(String(tt || ''))) { c.desafio = true; this.cierraChequeo(c, 'desafío'); } }).catch(() => {});
+    }
+  }
+
+  // un documento nuevo dentro de la comprobación (salto, redirección por programa): sus eventos de carga vuelven a contar
+  reiniciaCargaChequeo(p) {
+    const c = this.chequeo;
+    if (!c || c.listo || c.p !== p) return;
+    clearTimeout(c.doc); clearTimeout(c.calma); c.doc = c.calma = null;
+    delete c.hitos.documento; delete c.hitos.carga;
+  }
+
+  cierraChequeo(c, porque) {
+    if (!c || c.listo || this.chequeo !== c) return;
+    c.listo = true; clearTimeout(c.tope); clearTimeout(c.doc); clearTimeout(c.calma);
+    this.chequeo = null;
+    let r; try { r = this.resultadoChequeo(c, porque); } catch (e) { r = { resultado: 'limpia', motivos: [], hechos: {}, ms: Date.now() - c.t0, porque }; }
+    if (r.resultado === 'limpia') { this.comprobadas.set(c.host, Date.now()); if (this.comprobadas.size > 300) this.comprobadas.delete(this.comprobadas.keys().next().value); }
+    else this.comprobadas.delete(c.host);
+    this.env({ t: 'chequeo', fase: 'listo', id: c.id, host: c.host, rapida: !!c.rapida, ...r });
+    this.op('ZERO entró antes: ' + c.host + ' → ' + r.resultado + (r.motivos.length ? ' (' + r.motivos.join(', ') + ')' : '') + ' en ' + r.ms + ' ms, por ' + porque);
+    this.sueltaCuadro(c);
+  }
+
+  // comprobación descartada sin resultado (otra web, otra pestaña, pestaña cerrada)
+  sueltaChequeo(c, porque, suelta) {
+    if (!c || c.listo) return;
+    c.listo = true; clearTimeout(c.tope); clearTimeout(c.doc); clearTimeout(c.calma);
+    if (this.chequeo === c) this.chequeo = null;
+    this.env({ t: 'chequeo', fase: 'cancelado', id: c.id, motivo: porque });
+    if (suelta !== false) this.sueltaCuadro(c); else c.cuadro = null;
+  }
+
+  // la imagen retenida sale ya; las siguientes, como siempre
+  sueltaCuadro(c) {
+    const d = c.cuadro; c.cuadro = null;
+    if (d && this.act === c.p && this.ws.abierto) { this.ws.send(Buffer.from(d, 'base64')); this.nCuadros.enviados++; }
+  }
+
+  resultadoChequeo(c, porque) {
+    const nuevos = this.sucesos.slice(c.iSuc);
+    const cuenta = (f) => nuevos.filter(f).length;
+    const det = (x) => x.detalle || {};
+    const st = (c.p && c.p.stats) || Sesion.statsNuevo();
+    const con = c.hitos.conexion || null;
+    const idn = imitaLetras(c.host);
+    const h = {
+      listas: Object.values(cortes.listas).filter((l) => l.proposito === 'malware').map((l) => l.nombre),
+      enLista: cuenta((x) => x.clase === 'bloqueo') > 0,
+      certificado: cuenta((x) => x.clase === 'certificado') > 0,
+      interna: cuenta((x) => x.clase === 'local' || x.clase === 'onion') > 0,
+      peligrosas: Math.max(0, this.vig.peligrosas - c.vig0.peligrosas - cuenta((x) => x.clase === 'bloqueo')), // dentro de la web (la propia web en lista no cuenta aquí)
+      respondio: !!con, cifrada: con ? !!con.cifrada : /^https:/i.test(c.url), estado: con ? con.estado : null, protocolo: con ? con.protocolo : null, emisor: con ? con.emisor : null,
+      saltos: Math.max(c.saltos.length, con && con.saltos ? con.saltos : 0),
+      descargas: cuenta((x) => x.clase === 'descarga' && !det(x).sha256),
+      descargaPeligrosa: cuenta((x) => x.clase === 'descarga' && !det(x).sha256 && det(x).malo) > 0,
+      ventanas: cuenta((x) => x.clase === 'popup'),
+      avisos: cuenta((x) => x.clase === 'dialogo'),
+      permisos: cuenta((x) => x.clase === 'permiso' || x.clase === 'webrtc'),
+      huella: cuenta((x) => x.clase === 'huella'),
+      formulario: cuenta((x) => x.clase === 'formulario'),
+      fugas: cuenta((x) => x.clase === 'señuelo' && (det(x).tipo === 'visita' || (det(x).tercero && !det(x).cortada))),
+      empresas: st.empresas.size, cortes: st.n.cortes || 0, limpiezas: st.n.limpiezas || 0,
+      idn: idn || null,
+      sellada: !!this.sellada,
+      fallo: c.fallo || (cuenta((x) => x.clase === 'fallo') > 0 && !con ? 'no cargó' : null),
+      cargada: !!c.hitos.carga, lenta: porque === 'tope' && !c.hitos.carga, desafio: !!c.desafio,
+    };
+    const motivos = [];
+    if (h.enLista) motivos.push('lista');
+    if (h.certificado) motivos.push('certificado');
+    if (h.interna) motivos.push('interna');
+    if (h.peligrosas > 0 || h.descargaPeligrosa) motivos.push('peligrosa-dentro');
+    if (h.sellada && !motivos.length) motivos.push('sellada');
+    let resultado = motivos.length ? 'peligro' : '';
+    if (!resultado) {
+      if (h.idn) motivos.push('idn');
+      if (h.descargas) motivos.push('descarga');
+      if (h.fugas) motivos.push('fuga');
+      if (h.formulario) motivos.push('formulario');
+      if (h.respondio && !h.cifrada && !esLocal(c.host)) motivos.push('sin-cifrar'); // en el propio equipo (pruebas) no viaja por ninguna red
+      resultado = motivos.length ? 'aviso' : h.fallo ? 'fallo' : 'limpia';
+      if (resultado === 'limpia' && c.riesgo) resultado = 'riesgo'; // entró bajo su responsabilidad: no se dice «sin peligros conocidos»
+    }
+    return { resultado, motivos, hechos: h, ms: Date.now() - c.t0, porque };
+  }
+
+  async ve(url, op) {
     if (process.env.ZERO_DEBUG) console.log('ve():', String(url).slice(0, 80), 'sellada', this.sellada, 'act', this.act && this.act.id);
     url = String(url || '').trim().slice(0, 4096);
     if (!/^[a-z]+:\/\//i.test(url)) url = 'https://' + url;
     if (!/^https?:\/\//i.test(url)) { this.op('dirección rechazada: solo http y https'); return; } // nada de file://, chrome://, javascript:…
+    // ZERO entra antes que tú: desde aquí, la persona no ve la web hasta que ZERO la ha comprobado (con la burbuja sellada no se abre nada)
+    const cq = this.sellada ? null : this.empiezaChequeo(this.act, url, op && op.riesgo ? 'riesgo' : 'abrir');
+    const cierraLuego = () => { if (cq) setTimeout(() => this.cierraChequeo(cq, 'detenida'), 200); }; // tras pintar la página de ZERO
     { // ULTRA capado: .onion fuera de la lista, nunca; y sin ULTRA, ninguna (no hay salida por Tor)
       const h = hostDe(url).toLowerCase();
       if (esOnion(h) && (onionVetada(h) || !(this.ultra && TOR_PROXY))) {
@@ -663,12 +852,14 @@ class Sesion {
         this.op('dirección .onion rechazada: ' + h);
         this.suceso({ clase: 'onion', certeza: 'comprobado', dominio: h, texto: vetada ? TXT_ONION : TXT_ONION_SIN_ULTRA });
         await this.page.setContent(paginaBloqueo(vetada ? 'Dirección .onion bloqueada' : 'Esta dirección solo se abre con Tor', vetada ? TXT_ONION : TXT_ONION_SIN_ULTRA, h)).catch(() => {});
+        cierraLuego();
         return;
       }
       if (this.filtro && !PERMITE_LOCAL && (ipProhibida(h) || nombreLocal(h))) {
         this.op('dirección interna rechazada: ' + h);
         this.suceso({ clase: 'local', certeza: 'comprobado', dominio: h, texto: TXT_LOCAL });
         await this.page.setContent(paginaBloqueo('Dirección interna bloqueada', TXT_LOCAL, h)).catch(() => {});
+        cierraLuego();
         return;
       }
     }
@@ -684,8 +875,12 @@ class Sesion {
       if (process.env.ZERO_DEBUG) console.log('goto falló:', url.slice(0, 80), m.split('\n')[0]);
       const cert = /ERR_CERT|SSL|certificate/i.test(m);
       const motivo = /ERR_CERT_DATE_INVALID/.test(m) ? 'certificado caducado o con fecha no válida' : /ERR_CERT_COMMON_NAME_INVALID/.test(m) ? 'el certificado no coincide con el nombre de la web' : /ERR_CERT_AUTHORITY_INVALID/.test(m) ? 'el certificado no está firmado por una autoridad reconocida' : cert ? 'no se pudo verificar el certificado' : /ERR_NAME_NOT_RESOLVED|ERR_SOCKS_CONNECTION_HOST_UNREACHABLE/.test(m) ? 'la dirección no existe' : /ERR_CONNECTION|ERR_TIMED_OUT|ERR_INTERNET|ERR_TUNNEL|ERR_PROXY|ERR_SOCKS/.test(m) ? 'no se pudo conectar' : 'no se pudo abrir';
+      if (cert) this.ultimoBloqueo = { host: hostDe(url), url, tipo: 'certificado' };
       if (cert) this.suceso({ clase: 'certificado', certeza: 'comprobado', dominio: hostDe(url), texto: 'No se ha podido comprobar la identidad cifrada de ' + hostDe(url) + ' (' + motivo + '). ZERO no ha abierto la conexión.', detalle: { error: m.split('\n')[0] } });
+      else if (cq && !cq.listo) cq.fallo = motivo;
+      if (cq && this.chequeo && this.chequeo !== cq) return; // la persona ya pidió otra web: no se pisa con el aviso de esta
       await this.page.setContent(paginaBloqueo(cert ? 'La identidad de esta web no se pudo comprobar' : 'No se pudo abrir esta web', cert ? 'Su certificado de seguridad no supera la comprobación: ' + motivo + '. Puede ser un fallo técnico de la web o una suplantación; ZERO no ha enviado ni recibido nada.' : 'Motivo: ' + motivo + '. ZERO no ha enviado nada.', hostDe(url) + ' · ' + m.split('\n')[0].slice(0, 120))).catch(() => {});
+      cierraLuego();
     }
   }
 
@@ -699,6 +894,26 @@ class Sesion {
       if (!this.page || this.destruida) return;
       if (o.t === 'abrir') return await this.ve(String(o.url || '').trim());
       if (this.sellada && (o.t === 'raton' || o.t === 'rueda' || o.t === 'tecla' || o.t === 'texto')) return; // sellada: la burbuja no recibe nada
+      // ZERO entra antes que tú: mientras se comprueba, la persona no ve la web, así que tampoco la toca
+      if (this.chequeo && !this.chequeo.listo && !this.chequeo.rapida && this.chequeo.p === this.act && (o.t === 'raton' || o.t === 'rueda' || o.t === 'tecla' || o.t === 'texto')) return;
+      if (o.t === 'chequeo') {
+        if (o.accion === 'entrar') { // «Entrar bajo mi responsabilidad» en la web que ZERO detuvo (lista o certificado); las internas, nunca
+          const b = this.ultimoBloqueo; this.ultimoBloqueo = null;
+          if (!b || this.sellada) return;
+          this.entraIgual.add(b.host);
+          this.op('la persona eligió entrar bajo su responsabilidad en ' + b.host + ' (' + b.tipo + ')');
+          if (b.tipo === 'certificado' && this.act) { try { await this.act.cdp.send('Security.setIgnoreCertificateErrors', { ignore: true }); this.act.ignoraCert = b.host; } catch (_) {} this.suceso({ clase: 'riesgo', certeza: 'comprobado', dominio: b.host, texto: 'Has entrado bajo tu responsabilidad en una web cuyo certificado no supera la comprobación: su identidad no está demostrada. Se abre dentro de la burbuja, lejos de tu equipo.', detalle: { tipo: 'certificado' } }); }
+          return await this.ve(b.url, { riesgo: true });
+        }
+        if (o.accion === 'salir') { // «No entrar» tras un aviso: vuelve a la web anterior o, si no la hay, fuera (portada de ZERO)
+          const antes = this.page.url();
+          this.op('la persona eligió no entrar en ' + hostDe(antes));
+          await this.page.goBack({ waitUntil: 'commit', timeout: 8000 }).catch(() => null);
+          const u = this.page.url();
+          if (u === antes || !/^https?:/i.test(u)) { await this.page.goto('about:blank').catch(() => {}); this.env({ t: 'chequeo', fase: 'fuera' }); }
+        }
+        return;
+      }
       if (o.t === 'raton') {
         if (o.tipo === 'move') return await this.page.mouse.move(o.x, o.y);
         if (o.tipo === 'down') return await this.page.mouse.down({ button: o.boton || 'left', clickCount: o.clicks || 1 });
@@ -825,6 +1040,7 @@ class Sesion {
     this.destruida = true;
     SESIONES.delete(this.senuelos.token); VIVAS.delete(this); clearInterval(this.vigilante);
     if (this.autoDestruye) { clearTimeout(this.autoDestruye.t); this.autoDestruye = null; }
+    if (this.chequeo) { const c = this.chequeo; c.listo = true; clearTimeout(c.tope); clearTimeout(c.doc); clearTimeout(c.calma); c.cuadro = null; this.chequeo = null; }
     const t0 = Date.now();
     this.op('cierre pedido: ' + motivo);
     try { if (this.cdp) await this.cdp.send('Page.stopScreencast').catch(() => {}); } catch (_) {}
