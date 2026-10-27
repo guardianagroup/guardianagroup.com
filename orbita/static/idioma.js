@@ -1861,7 +1861,7 @@
     "Navegar con NÚCLEO": ["Browse with NÚCLEO", "Navegar com NÚCLEO"],
     "Cables submarinos, por tierra, centros de datos, satélites y cortes en directo.": ["Undersea cables, land cables, data centres, satellites and live cuts.", "Cabos submarinos, terrestres, centros de dados, satélites e cortes ao vivo."],
     "Cables submarinos, por tierra, centros de datos y satélites.": ["Undersea cables, land cables, data centres and satellites.", "Cabos submarinos, terrestres, centros de dados e satélites."],
-    "Bienvenido a esta experiencia de tus datos": ["Welcome to this experience of your data", "Bem-vindo a esta experiência dos seus dados"],
+    "Control total de tus datos": ["Total control of your data", "Controle total dos seus dados"],
     'RESULTADOS DE GOOGLE · WEBS PRINCIPALES': ['GOOGLE RESULTS · MAIN WEBSITES', 'RESULTADOS DO GOOGLE · PRINCIPAIS SITES'],
     'País de las webs': ['Country of the websites', 'País dos sites'],
     'RESULTADOS DE GOOGLE · WEBS PRINCIPALES DE ESPAÑA': ['GOOGLE RESULTS · MAIN WEBSITES IN SPAIN', 'RESULTADOS DO GOOGLE · PRINCIPAIS SITES DE ESPANHA'],
