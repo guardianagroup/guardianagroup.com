@@ -1411,6 +1411,7 @@ void main(){
     const t = (now - t0) / 1000;
     impar = !impar;
     if (document.hidden) return;
+    if (window.OrbitaTapada) return; // NÚCLEO covers the whole screen: no need to draw the planet (27 Oct 2026)
     if (dentro && impar) return; // behind glass, half the frames are enough
     while (cola.length && cola[0].at <= now / 1000) lanza(cola.shift(), t);
     while (ondas.length && t - ondas[0].t0 > 3) ondas.shift();

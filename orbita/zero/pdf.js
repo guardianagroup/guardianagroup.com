@@ -61,8 +61,9 @@
   function tabla(d, cols, filas, T) {
     const util = W - 2 * M, total = cols.reduce((a, c) => a + c.w, 0), xs = []; let x = M;
     for (const c of cols) { xs.push(x); c.px = (c.w / total) * util; x += c.px; }
-    const TAM = 7.6, ALTO = 13.5;
+    const TAM = 7.6, ALTO = 13.5, conCab = cols.some((c) => c.t); // sin títulos de columna, la tabla va sin cabecera (NÚCLEO, «En cifras»)
     const cabecera = () => {
+      if (!conCab) return;
       d.caja(M, d.y, util, ALTO + 1, '#edf2f6');
       cols.forEach((c, i) => d.texto(c.der ? xs[i] + c.px - 4 : xs[i] + 4, d.y + 9.6, ajusta(T(c.t).toUpperCase(), 6.6, true, c.px - 8), 6.6, true, '#4d6274', c.der));
       d.y += ALTO + 1;
@@ -108,12 +109,13 @@
     T = T || ((s) => s);
     const d = documento();
     d.texto(M, d.y + 9, 'GUARDIANA', 8.5, true, '#1d2733'); d.texto(M + ancho('GUARDIANA ', 8.5, true), d.y + 9, datos.marca || '/ ZERO', 8.5, false, '#7d8f9e'); // NÚCLEO usa '/ NÚCLEO' (27 Oct 2026)
-    d.y += 30; d.texto(M, d.y, datos.titulo, 21, true, '#0f1720');
-    d.y += 17; d.texto(M, d.y, ajusta(datos.subtitulo, 9, false, W - 2 * M), 9, false, '#5c6f7f');
-    d.y += 18; d.raya(M, d.y, W - M, '#cfd9e2', 0.8);
+    // dueño, 27 Oct 2026, 13:14: «el título y las primeras frases, muy apiñadas; tiene que haber más espacio»
+    d.y += 42; d.texto(M, d.y, datos.titulo, 22, true, '#0f1720');
+    d.y += 25; d.texto(M, d.y, ajusta(datos.subtitulo, 9.5, false, W - 2 * M), 9.5, false, '#5c6f7f');
+    d.y += 24; d.raya(M, d.y, W - M, '#cfd9e2', 0.8);
     const anchoR = (W - 2 * M) / datos.resumen.length;
-    datos.resumen.forEach(([n, et, rojo], i) => { const x = M + i * anchoR; d.texto(x, d.y + 30, String(n), 22, true, rojo ? '#c0503f' : '#0f1720'); d.texto(x, d.y + 44, ajusta(et, 8, false, anchoR - 8), 8, false, '#5c6f7f'); });
-    d.y += 58;
+    datos.resumen.forEach(([n, et, rojo], i) => { const x = M + i * anchoR; d.texto(x, d.y + 38, String(n), 22, true, rojo ? '#c0503f' : '#0f1720'); d.texto(x, d.y + 54, ajusta(et, 8, false, anchoR - 8), 8, false, '#5c6f7f'); });
+    d.y += 70;
     for (const s of datos.secciones) {
       if (!s.filas || !s.filas.length) continue;
       d.sitio(70); d.y += 16; d.texto(M, d.y, s.titulo, 12, true, '#0f1720'); d.y += 6;

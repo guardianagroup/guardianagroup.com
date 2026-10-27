@@ -98,8 +98,21 @@
   ];
   const UMBRAL_ACTUA = 0.45, MARGEN = 0.05, UMBRAL_SUGIERE = 0.34;
   const delDominio = (t) => Object.keys(CL).some((id) => (CL[id] || []).some((k, i) => (CLRE[id][i] ? CLRE[id][i].test(t) : t.includes(k)))) || SECCIONES.some(([, re]) => re.test(t));
+  // el resumen de tus datos (dueño, 10:56): de qué periodo y en qué formato, si la frase lo dice
+  function periodoDe(t) {
+    if (/(ultima hora|ultimos 60 minutos|60 minutos|una hora|1 hora|last hour|past hour)/.test(t)) return 'hora';
+    if (/(24 horas|24 hrs|\b24 ?h\b|ultimo dia|un dia|de hoy|\bhoy\b|today|last day|past day|24 hours)/.test(t)) return '24h';
+    if (/(ultima web|ultima pagina|ultimo sitio|ultima visita|last website|last site|last page|last web)/.test(t)) return 'web';
+    return null;
+  }
+  const formatoDe = (t) => (/\b(pdf|documento|informe|archivo|document)\b/.test(t) ? 'pdf' : /\b(video|videos|clip|animacion|pelicula)\b/.test(t) ? 'video' : null);
   // ctx: { modo, pais(t) → ISO o null }
   function entiende(frase, ctx) {
+    const r = entiende0(frase, ctx);
+    if (r && r.id === 'resumen') { const t = limpia(hablado(String(frase || '').trim())); if (!r.periodo) r.periodo = periodoDe(t); if (!r.formato) r.formato = formatoDe(t); }
+    return r;
+  }
+  function entiende0(frase, ctx) {
     ctx = ctx || {};
     const crudo = String(frase || '').trim(); if (!crudo) return null;
     const h = hablado(crudo), t = limpia(h);
@@ -108,6 +121,8 @@
       if (/^(si|vale|ok|okey|de acuerdo|borra|borralo|borrar|yes|claro|dale|adelante)\b/.test(t)) return { id: 'borrar-si' };
       if (/^(no|nop|cancela|cancelar|mejor no|no gracias|nope)\b/.test(t)) return { id: 'borrar-no' };
     }
+    if (ctx.modo === 'res-periodo') { const p = periodoDe(t); if (p) return { id: 'res-' + p }; }
+    if (ctx.modo === 'res-formato') { const f = formatoDe(t); if (f) return { id: 'res-' + f }; }
     for (const [id, re] of DELICADAS) if (re.test(t)) return { id };
     if (/\d{13,19}/.test(crudo.replace(/[\s-]/g, ''))) return { id: 'banco' };
     const dom = dominio(h);
@@ -120,8 +135,15 @@
     if (FUERTES[0][1].test(t)) return { id: 'p-caidas' }; // «¿se ha caído internet en España?»: no es ir al país
     const pais = ctx.pais ? ctx.pais(t) : null;
     if (pais) { const capa = capaDe(t); return { id: capa || 'p-pais', pais }; }
+    // el resumen en vídeo: «vídeo» con un periodo o con «resumen» / «mis datos» (enviar un vídeo es Comunicaciones)
+    const per = periodoDe(t);
+    if (/\b(video|videos|clip)\b/.test(t) && !/\b(enviar|envio|mandar|pasar|compartir|subir|send|share|upload)\b/.test(t)
+      && (per || /(resumen|resume|mis datos|mis cortes|me han cortado|my data|summary|recap)/.test(t) || /\b(hazme|haz|hacer|crea|crear|genera|generar|prepara|preparar|make|create)( me)? (un |el |a )?video/.test(t))) return { id: 'resumen', formato: 'video', periodo: per };
     // «el pdf»: si hay una web abierta en ZERO, el de esa web; si no, el resumen de tus datos (y se dice el otro)
-    if (/\b(pdf|informe|reporte|report)\b/.test(t)) return { id: /(mis datos|mis cortes|me han cortado|my data|resumen)/.test(t) ? 'resumen' : (/(esta web|esta pagina|la web|la pagina|this page|this website|radiografia)/.test(t) || ctx.hayWeb) ? 'z-pdf' : 'resumen' };
+    if (/\b(pdf|informe|reporte|report)\b/.test(t)) {
+      if (per || /(mis datos|mis cortes|me han cortado|my data|resumen)/.test(t)) return { id: 'resumen', formato: 'pdf', periodo: per };
+      return (/(esta web|esta pagina|la web|la pagina|this page|this website|radiografia)/.test(t) || ctx.hayWeb) ? { id: 'z-pdf' } : { id: 'resumen', formato: 'pdf' };
+    }
     if (PREGUNTA.test(t)) { const s = SECCIONES.find(([, re]) => re.test(t)); if (s && !/\b(corte|cortes|vpn|tor)\b/.test(t)) return { id: s[0] }; }
     for (const [id, re] of FUERTES) if (re.test(t)) return { id };
     if (/^((ver|muestrame|ensename|quiero ver|los|las) )*(cables|cable|cables de internet)$/.test(t)) return { quiza: ['p-sub', 'p-fibra'] }; // «cables» a secas: ¿submarinos o terrestres?

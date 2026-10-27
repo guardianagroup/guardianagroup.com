@@ -138,3 +138,16 @@
 .nuc-volver:hover{background:rgba(156,195,228,.14);border-color:rgba(156,195,228,.55);color:#F4F6F8}
 .nuc-volver:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
 @media (max-width:560px){.nuc-volver{top:14px;inset-inline-start:14px;height:36px;padding:0 12px;font-size:13px}}
+
+/* El resumen en vídeo (dueño, 10:56): se ve hacerse dentro de la burbuja de NÚCLEO y queda para verlo y descargarlo */
+.ns-charla .nuc-b.nuc-video{box-sizing:border-box;width:min(560px,88%)}
+.nv-marco{position:relative;margin-top:10px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid rgba(156,195,228,.22);background:#06080C}
+.nv-marco canvas,.nv-marco video{display:block;width:100%;height:100%;object-fit:contain;background:#06080C}
+.nv-barra{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(156,195,228,.14)}
+.nv-barra i{display:block;height:100%;width:0;background:#9CC3E4;box-shadow:0 0 12px rgba(156,195,228,.6);transition:width .25s linear}
+a.nuc-chip{display:inline-flex;align-items:center;text-decoration:none}
+@media (max-width:640px){.ns-charla .nuc-b.nuc-video{width:96%}}
+@media (prefers-reduced-motion:reduce){.nv-barra i{transition:none}}
+/* Anchos con su relleno dentro: en el teléfono, la cabecera, la columna y la caja de escribir ya no se salen de la pantalla
+   (se salían 24–32 px), y en el ordenador la caja de escribir mide lo mismo que los seis botones de encima */
+.ns-cab,.ns-col,.ns-form,.ns-panel,.nuc-form,.nuc-charla{box-sizing:border-box}
