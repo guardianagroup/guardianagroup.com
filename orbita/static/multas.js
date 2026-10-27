@@ -16,7 +16,7 @@
   };
   function carga() {
     if (datos) return Promise.resolve(datos);
-    return fetch('/orbita/datos/multas.json?v=20261027b').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((j) => (datos = j));
+    return fetch('/orbita/datos/multas.json?v=20261027c').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((j) => (datos = j));
   }
   function pinta() {
     const l = lengua(), U = datos.ui[l] || datos.ui.en, C = datos.casos;
@@ -26,7 +26,7 @@
     const lista = C.filter((c) => filtro === 'todas' || c.cat === filtro).map((c) => {
       const est = c.estado ? `<span class="nm-est">${esc(de(c.estado, l))}</span>` : '';
       // sin importe (multa anulada o pendiente de recalcular): en su lugar, el estado
-      const cifra = c.cifra ? `<p class="nm-cifra">${esc(c.cifra)}</p>` : `<p class="nm-cifra nm-sin">${esc(c.estado ? de(c.estado, l) : '—')}</p>`;
+      const cifra = c.cifra ? `<p class="nm-cifra">${esc(de(c.cifra, l))}</p>` : `<p class="nm-cifra nm-sin">${esc(c.estado ? de(c.estado, l) : '—')}</p>`;
       return `<article class="nm-caso">${cifra}`
         + `<p class="nm-quien"><b>${esc(c.empresa)}</b><span>${esc(de(c.autoridad, l))} · ${esc(fecha(c))}</span>${est}</p>`
         + `<h3>${esc(de(c.titulo, l))}</h3><p class="nm-texto">${esc(de(c.texto, l))}</p>`
