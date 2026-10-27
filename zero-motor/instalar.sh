@@ -160,6 +160,8 @@ cd "$DIR/zero-motor"
 sudo -u zero npm install --no-audit --no-fund --save-exact "playwright@$PLAYWRIGHT_VERSION" >/dev/null
 sudo -u zero env PLAYWRIGHT_BROWSERS_PATH="$NAVEGADORES" npx --yes playwright install chromium >/dev/null
 npx --yes playwright install-deps chromium >/dev/null
+# 27 Oct 2026: Google Chrome para los vídeos (H.264/AAC; el Chromium libre no los reproduce). Si falla, el motor usa Chromium.
+if npx --yes playwright install chrome >/dev/null 2>&1; then echo "  Google Chrome instalado (vídeos H.264/AAC)"; else echo "  Aviso: no se pudo instalar Google Chrome; el motor seguirá con Chromium y algunos vídeos no se verán" >&2; fi
 
 paso "Configuración ($ENVF)"
 RAM_MB=$(awk '/MemTotal/ {print int($2/1024)}' /proc/meminfo 2>/dev/null || echo 4096)

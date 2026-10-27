@@ -3,7 +3,7 @@
 // Una sesión = un contexto de Chromium aislado controlado por Playwright (en producción, una microVM por sesión). El
 // cliente (orbita/zero/) recibe la pantalla por WebSocket (CDP Page.startScreencast, JPEG) y manda ratón y teclado.
 // Cada petición de la web pasa por el motor de cortes (cortes.js); los sensores (sensores.js) cuentan lo que la web
-// intenta dentro de la celda. Todo suceso se manda al cliente con su certeza (comprobado / probable / estimado) y, si
+// intenta dentro de la burbuja. Todo suceso se manda al cliente con su certeza (comprobado / probable / estimado) y, si
 // se conoce, la empresa y el país de su sede (empresas.js).
 //
 // Uso: node zero-motor/servidor.js [puerto=8792]
@@ -29,24 +29,24 @@ const SESIONES = new Map(); // token de señuelo → sesión (para el colector /
 const VERSION = 'prototipo 0.1 · 26 Oct 2026';
 const CLAVE_SESION = crypto.randomBytes(32); // efímera: con ella se sella el comprobante de cada sesión
 // Blindaje del motor (26 Oct 2026, ronda 40 punto 11): solo las páginas de GUARDIANA pueden abrir sesiones; hay un tope
-// de celdas vivas; una celda que nadie mira se cierra sola; ningún mensaje puede ser enorme; en la celda solo se abren
+// de burbujas vivas; una burbuja que nadie mira se cierra sola; ningún mensaje puede ser enorme; en la burbuja solo se abren
 // direcciones http(s).
 const ORIGENES = (process.env.ZERO_ORIGENES || 'https://guardianagroup.com,https://www.guardianagroup.com,http://127.0.0.1,http://localhost').split(',').map((x) => x.trim().replace(/\/$/, '')).filter(Boolean);
 const MAX_SESIONES = +process.env.ZERO_MAX_SESIONES || 8;
 const TOR_PROXY = process.env.ZERO_TOR_PROXY || ''; // p. ej. socks5://127.0.0.1:9050 en el servidor con Tor; sin él, ULTRA no se ofrece
-// Celda sellada hacia dentro y ULTRA capado (26 Oct 2026, dueño; ronda 50b): cada celda sale por su propio filtro SOCKS
+// Burbuja sellada hacia dentro y ULTRA capado (26 Oct 2026, dueño; ronda 50b): cada burbuja sale por su propio filtro SOCKS
 // (filtro-red.js). Ninguna web abierta en ZERO puede conectar con este servidor, con redes privadas ni con los metadatos del
 // proveedor; y con ULTRA, Tor solo sirve para la web normal: toda .onion fuera, salvo servicios oficiales verificados.
-// ZERO_FILTRO_RED=0 quita el filtro de las celdas normales (ULTRA lo lleva siempre). En pruebas locales (sin ZERO_PUBLICO,
+// ZERO_FILTRO_RED=0 quita el filtro de las burbujas normales (ULTRA lo lleva siempre). En pruebas locales (sin ZERO_PUBLICO,
 // o con ZERO_PERMITE_LOCAL=1) se deja llegar a 127.0.0.1 para los sitios de prueba.
 const FILTRO_RED = process.env.ZERO_FILTRO_RED !== '0';
 const PERMITE_LOCAL = process.env.ZERO_PERMITE_LOCAL === '1' || !process.env.ZERO_PUBLICO;
 const TXT_LOCAL = 'Conexión con una dirección interna bloqueada. Las webs abiertas en ZERO no pueden llegar a este servidor, a redes privadas ni a los datos internos del proveedor.';
-const TXT_ONION = 'Dirección .onion bloqueada. ULTRA navega solo por la web normal: ZERO no abre la parte oculta de Tor, salvo servicios oficiales verificados (como el buscador de Brave).';
-const TXT_ONION_SIN_ULTRA = 'Las direcciones .onion solo se abren con ULTRA activado, y solo las de servicios oficiales verificados (como el buscador de Brave).';
+const TXT_ONION = 'Dirección .onion bloqueada. Con Tor solo se navega por la web normal: ZERO no abre la parte oculta de Tor, salvo servicios oficiales verificados (como el buscador de Brave).';
+const TXT_ONION_SIN_ULTRA = 'Las direcciones .onion solo se abren con Tor, y solo las de servicios oficiales verificados (como el buscador de Brave).';
 const MAX_MENSAJE = 64 * 1024;
-const MIN_SIN_MIRAR = +process.env.ZERO_MIN_SIN_MIRAR || 30; // minutos con la pantalla dormida antes de destruir la celda
-const MAX_HORAS = +process.env.ZERO_MAX_HORAS || 12; // vida máxima de una celda
+const MIN_SIN_MIRAR = +process.env.ZERO_MIN_SIN_MIRAR || 30; // minutos con la pantalla dormida antes de destruir la burbuja
+const MAX_HORAS = +process.env.ZERO_MAX_HORAS || 12; // vida máxima de una burbuja
 // Dirección pública del motor (detrás del proxy TLS): con ella se construye el enlace oculto del señuelo, que debe ser
 // alcanzable desde fuera para que una visita al enlace llegue al colector /s/<token>. Sin ella, el propio puerto local.
 const PUBLICO = String(process.env.ZERO_PUBLICO || '').replace(/\/$/, '') || ('http://127.0.0.1:' + PUERTO);
@@ -70,9 +70,10 @@ const esLocal = (h) => h === '127.0.0.1' || h === 'localhost' || h === '::1';
 
 const ATRASO_MAX = 192 * 1024; // bytes en cola hacia la persona a partir de los cuales no se mandan cuadros atrasados
 const TIPO_ABP = { stylesheet: 'stylesheet', image: 'image', media: 'media', font: 'font', script: 'script', texttrack: 'other', xhr: 'xmlhttprequest', fetch: 'xmlhttprequest', eventsource: 'other', websocket: 'websocket', manifest: 'other', ping: 'ping', other: 'other' };
+const TOR_CORTA = { publicidad: 'publicidad', rastreo: 'rastreo', 'medición': 'rastreo', consentimiento: 'avisos-cookies' }; // con Tor, además de las listas
 const PROPOSITO = { publicidad: 'Publicidad', rastreo: 'Rastreador', malware: 'Web peligrosa', 'avisos-cookies': 'Aviso de cookies', 'red-local': 'Red local', excepciones: '', parametros: 'Seguimiento', 'otra-empresa': 'Otra empresa' };
 
-// Página que ve la persona dentro de la celda cuando ZERO detiene una web peligrosa o un certificado roto
+// Página que ve la persona dentro de la burbuja cuando ZERO detiene una web peligrosa o un certificado roto
 function paginaBloqueo(titulo, texto, detalle) {
   const esc = (s) => String(s || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   return `<!doctype html><html lang="es"><meta charset="utf-8"><title>ZERO</title><style>
@@ -106,11 +107,12 @@ class Sesion {
     this.senuelos = new Senuelos(PUBLICO); SESIONES.set(this.senuelos.token, this);
     this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.ultimos = [];
     this.descargas = new Map(); this.nDesc = 0;
-    // Vigilancia de la celda (26 Oct 2026, dueño: «que el cliente sienta con hechos que no hay malware ni intrusión; si la hay, se bloquea
+    // Vigilancia de la burbuja (26 Oct 2026, dueño: «que el cliente sienta con hechos que no hay malware ni intrusión; si la hay, se bloquea
     // y se borra todo»; ronda 50, punto G): solo cuentas reales de lo que ZERO ha visto y hecho en esta sesión.
     this.vig = { local: 0, onion: 0, peligrosas: 0, muros: 0, senFuera: 0, senCortados: 0, senPropios: 0, descargas: 0 };
     this.autoDestruye = null;
-    this.permitidas = new Set(); // dominios base o 'e:<empresa>' que la persona ha permitido en esta sesión
+    this.permitidas = new Set(); // dominios base, 'e:<empresa>' o 'p:<grupo>' (Publicidad, Rastreador…) que la persona ha permitido en esta sesión
+    this.vetadas = new Set(); // empresas o dominios que la persona volvió a cortar a mano: mandan sobre un grupo permitido
     this.nCuadros = { enviados: 0, descartados: 0 }; this.cuadroPendiente = null;
     ws.on('drain', () => { if (this.cuadroPendiente && this.ws.abierto && this.ws.atraso <= ATRASO_MAX) { const d = this.cuadroPendiente; this.cuadroPendiente = null; this.ws.send(Buffer.from(d, 'base64')); this.nCuadros.enviados++; } });
     this.nivel = process.env.ZERO_NIVEL_INICIAL || 'normal'; // dueño (26 Oct 2026, 22:42): un solo modo, Normal; cada empresa se corta o se deja pasar con su interruptor // 26 Oct 2026: por defecto se abre todo y la persona elige qué cortar
@@ -119,8 +121,8 @@ class Sesion {
     ws.on('close', () => this.destruye('conexión cerrada'));
     this.vigilante = setInterval(() => {
       const t = Date.now();
-      if (!this.mirando && t - this.ultimaMirada > MIN_SIN_MIRAR * 60000) this.destruye('celda sin nadie mirando durante ' + MIN_SIN_MIRAR + ' min').catch(() => {});
-      else if (t - this.creada > MAX_HORAS * 3600000) this.destruye('vida máxima de la celda (' + MAX_HORAS + ' h)').catch(() => {});
+      if (!this.mirando && t - this.ultimaMirada > MIN_SIN_MIRAR * 60000) this.destruye('burbuja sin nadie mirando durante ' + MIN_SIN_MIRAR + ' min').catch(() => {});
+      else if (t - this.creada > MAX_HORAS * 3600000) this.destruye('vida máxima de la burbuja (' + MAX_HORAS + ' h)').catch(() => {});
     }, 60000);
   }
 
@@ -142,7 +144,7 @@ class Sesion {
 
   async abre(w, h, idioma) {
     this.w = Math.max(320, Math.min(1920, w | 0 || 1100)); this.h = Math.max(240, Math.min(1200, h | 0 || 760));
-    // 26 Oct 2026: la celda habla el idioma de la persona (Accept-Language y navigator.language); antes siempre es-ES.
+    // 26 Oct 2026: la burbuja habla el idioma de la persona (Accept-Language y navigator.language); antes siempre es-ES.
     const loc = /^[a-z]{2,3}(-[A-Za-z]{2,4})?$/.test(String(idioma || '')) ? String(idioma) : 'es-ES';
     this.idioma = loc;
     if (this.filtro) { this.filtro.cierra(); this.filtro = null; }
@@ -153,7 +155,7 @@ class Sesion {
       acceptDownloads: true, serviceWorkers: 'block', extraHTTPHeaders: { 'Sec-GPC': '1', DNT: '1' }, colorScheme: 'light',
       ...(this.filtro ? { proxy: { server: this.filtro.url, bypass: '<-loopback>' } } : {}),
     });
-    this.op((tor ? 'celda creada con salida por Tor (ULTRA), solo web normal: .onion bloqueadas salvo servicios oficiales verificados' : 'celda creada') + (this.filtro && !PERMITE_LOCAL ? '; sin acceso a este servidor ni a redes privadas' : ''));
+    this.op((tor ? 'burbuja creada con salida por Tor, solo web normal: .onion bloqueadas salvo servicios oficiales verificados' : 'burbuja creada') + (this.filtro && !PERMITE_LOCAL ? '; sin acceso a este servidor ni a redes privadas' : ''));
     await this.ctx.exposeBinding('__zeroSuceso', (src, json) => this.sucesoPagina(src, json));
     await this.ctx.addInitScript(SENSORES);
     await this.ctx.addInitScript(this.senuelos.initScript());
@@ -165,7 +167,7 @@ class Sesion {
     await this.ponIntercepcion(this.nivel !== 'observar');
     this.ctx.on('page', (p) => { if (this.esperadas > 0) { this.esperadas--; return; } this.suceso({ clase: 'popup', certeza: 'comprobado', texto: 'La web intentó abrir una ventana nueva. ZERO la cerró.', dominio: hostDe(p.url()) }); p.close().catch(() => {}); });
     await this.nuevaPestana();
-    this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h, ultraDisponible: !!TOR_PROXY, ultra: !!(this.ultra && TOR_PROXY), nivel: this.nivel, region: process.env.ZERO_REGION || '' });
+    this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h, ultraDisponible: !!TOR_PROXY, ultra: !!(this.ultra && TOR_PROXY), dejaPorDefecto: this.dejaPorDefecto(), nivel: this.nivel, region: process.env.ZERO_REGION || '' });
     this.envVigilancia();
   }
 
@@ -316,19 +318,19 @@ class Sesion {
 
   async filtra2(route, req) {
     if (this.destruida) return route.abort('aborted').catch(() => {});
-    if (this.sellada) return route.abort('blockedbyclient').catch(() => {}); // celda sellada: ninguna conexión sale
+    if (this.sellada) return route.abort('blockedbyclient').catch(() => {}); // burbuja sellada: ninguna conexión sale
     const url = req.url();
     if (!/^https?:/.test(url)) return route.continue().catch(() => {});
     const host = hostDe(url);
     const tipo = this.tipoDe(req);
-    if (tipo === 'popup') { if (process.env.ZERO_DEBUG) console.log('popup abortado:', url.slice(0, 80)); return route.abort('blockedbyclient').catch(() => {}); } // las ventanas nuevas no se abren en la celda
+    if (tipo === 'popup') { if (process.env.ZERO_DEBUG) console.log('popup abortado:', url.slice(0, 80)); return route.abort('blockedbyclient').catch(() => {}); } // las ventanas nuevas no se abren en la burbuja
     const principal = tipo === 'document';
     const pest = this.pestanaDeReq(req) || this.act; let st = pest ? pest.stats : Sesion.statsNuevo(); // let: se reasigna al cambiar de web (antes era const y la segunda web de cada pestaña fallaba con ERR_FAILED)
     const origen = principal ? host : hostDe(pest ? pest.page.url() : '') || host;
     const tercero = baseDominio(host) !== baseDominio(origen);
     let postData = null; try { postData = req.postData(); } catch (_) {}
     const fugas = this.senuelos.inspecciona({ url, postData, headers: req.headers(), tercero });
-    if (fugas.length) { const dcheck = cortes.decide({ url, tipo, origen, host, tercero }); fugas.forEach((f) => this.senuelo(f, host, url, tercero, !!dcheck.bloquear || (this.nivel && this.nivel !== 'normal' && tercero && !esLocal(host)))); }
+    if (fugas.length) { const dcheck = cortes.decide({ url, tipo, origen, host, tercero }); fugas.forEach((f) => this.senuelo(f, host, url, tercero, (!!dcheck.bloquear && (dcheck.proposito === 'malware' || !this.permiso(host, PROPOSITO[dcheck.proposito] || 'Rastreador'))) || (this.nivel && this.nivel !== 'normal' && tercero && !esLocal(host)))); }
     if (principal) {
       if (st.webActual && baseDominio(st.webActual) !== baseDominio(host) && pest) {
         // la pestaña cambia de web por un enlace: cuentas nuevas «en esta web» (las de la sesión se conservan en EN VIVO)
@@ -336,7 +338,7 @@ class Sesion {
         if (this.act === pest) { this.env({ t: 'resumen', cortes: 0, empresas: 0, paises: 0, porque: {}, n: st.n, web: host, alerta: this.alerta }); this.env({ t: 'cortes', lista: [] }); }
       }
       st.webActual = host;
-      // 1) web peligrosa conocida (listas de malware/phishing) → se detiene dentro de la celda
+      // 1) web peligrosa conocida (listas de malware/phishing) → se detiene dentro de la burbuja
       const d = cortes.decide({ url, tipo: 'document', origen, host, tercero: false });
       if (d.bloquear && d.proposito === 'malware') {
         st.n.bloqueos++;
@@ -354,20 +356,33 @@ class Sesion {
     }
     const d = cortes.decide({ url, tipo, origen, host, tercero });
     if (d.bloquear && this.observatorio && tipo === 'script' && /prebid|\/gpt\.js|pbjs|apstag/i.test(url)) {
-      // modo observatorio: la librería de la subasta corre en la celda (sin cookies ni identidad) para poder leerla;
+      // modo observatorio: la librería de la subasta corre en la burbuja (sin cookies ni identidad) para poder leerla;
       // las pujas, los anuncios y el seguimiento siguen cortados
-      this.suceso({ clase: 'observatorio', certeza: 'comprobado', dominio: host, texto: 'Modo observatorio: ZERO deja correr el programa de la subasta en la celda, sin tu identidad, para enseñarte quién puja; los anuncios y el seguimiento siguen cortados.', detalle: { regla: d.regla } });
+      this.suceso({ clase: 'observatorio', certeza: 'comprobado', dominio: host, texto: 'Modo observatorio: ZERO deja correr el programa de la subasta en la burbuja, sin tu identidad, para enseñarte quién puja; los anuncios y el seguimiento siguen cortados.', detalle: { regla: d.regla } });
       if (MOCK && !esLocal(host)) return this.simula(route, req, tipo);
       return route.continue().catch(() => {});
     }
-    const permitida = this.permitidas.has(baseDominio(host)) || (empresas.atribuye(host).empresa && this.permitidas.has('e:' + empresas.atribuye(host).empresa));
+    const permitida = this.permiso(host, d.bloquear ? PROPOSITO[d.proposito] || 'Rastreador' : 'Otra empresa');
     if (d.bloquear) {
       if (this.nivel === 'observar' && d.proposito !== 'malware') { this.corte(host, tipo, origen, tercero, d, st, 'visto'); return route.continue().catch(() => {}); }
-      if (permitida && d.proposito !== 'malware') { this.corte(host, tipo, origen, tercero, d, st, 'permitido'); return route.continue().catch(() => {}); }
+      if (permitida && d.proposito !== 'malware') { this.corte(host, tipo, origen, tercero, d, st, permitida === 2 ? 'permitido' : 'visto'); return route.continue().catch(() => {}); }
       this.corte(host, tipo, origen, tercero, d, st);
       return route.abort('blockedbyclient').catch(() => {});
     }
-    if (((this.nivel && this.nivel !== 'normal' && this.nivel !== 'observar') || this.alerta >= 2) && tercero && !esLocal(host) && !permitida) {
+    // 27 Oct 2026 (dueño: «Tor tiene que cortar bastante más»): con Tor se cortan además las empresas de publicidad, rastreo,
+    // medición y avisos de cookies de la base de GUARDIANA aunque no estén en las listas, y los avisos (ping) a otras webs.
+    // Las de servicio (vídeo, imágenes, CDN) y las del propio grupo editorial no se tocan: la web sigue funcionando.
+    if (this.ultra && TOR_PROXY && tercero && !esLocal(host)) {
+      const cat = empresas.atribuye(host).categoria;
+      const prop = TOR_CORTA[cat] || (tipo === 'ping' ? 'rastreo' : null);
+      if (prop) {
+        const dd = { regla: 'Tor: ' + (cat ? 'empresa de ' + cat + ' (base de GUARDIANA)' : 'aviso (ping) a otra web'), lista: null, proposito: prop };
+        const pp = this.permiso(host, PROPOSITO[prop]); if (pp) { this.corte(host, tipo, origen, tercero, dd, st, pp === 2 ? 'permitido' : 'visto'); return route.continue().catch(() => {}); }
+        this.corte(host, tipo, origen, tercero, dd, st);
+        return route.abort('blockedbyclient').catch(() => {});
+      }
+    }
+    if (((this.nivel && this.nivel !== 'normal' && this.nivel !== 'observar') || (this.alerta >= 2 && !this.dejaPorDefecto())) && tercero && !esLocal(host) && permitida !== 2) {
       this.corte(host, tipo, origen, tercero, { regla: this.alerta >= 2 && !(this.nivel && this.nivel !== 'normal') ? 'alerta: toda conexión con otra empresa' : 'nivel ' + this.nivel + ': toda conexión con otra empresa', lista: null, proposito: 'otra-empresa' }, st);
       return route.abort('blockedbyclient').catch(() => {});
     }
@@ -387,6 +402,20 @@ class Sesion {
     return route.fulfill({ status: 200, contentType: 'application/json', body: '{}' }).catch(() => {});
   }
 
+  // 27 Oct 2026 (dueño): «al abrir la web, de forma predeterminada, que no se corte nada, para que se vean las subastas, todo; y
+  // cuando el cliente decide cortar, ahí empiezan los cortes». Con Google y Brave todo pasa (y se enseña) salvo las webs
+  // peligrosas; con Tor se corta por defecto. Lo que la persona decide manda: primero empresa o dominio, luego el grupo entero.
+  dejaPorDefecto() { return !(this.ultra && TOR_PROXY); }
+  // 0: se corta · 1: pasa por defecto · 2: pasa porque la persona lo permitió
+  permiso(host, grupo) {
+    const ks = [baseDominio(host)]; const emp = empresas.atribuye(host).empresa; if (emp) ks.push('e:' + emp);
+    if (ks.some((k) => this.vetadas.has(k))) return 0;
+    if (ks.some((k) => this.permitidas.has(k))) return 2;
+    if (grupo && this.vetadas.has('p:' + grupo)) return 0;
+    if (grupo && this.permitidas.has('p:' + grupo)) return 2;
+    return this.dejaPorDefecto() ? 1 : 0;
+  }
+
   corte(host, tipo, origen, tercero, d, st, estado) {
     st = st || this.act.stats;
     estado = estado || 'cortado';
@@ -402,7 +431,7 @@ class Sesion {
     const quien = e.empresa ? e.empresa + (e.paisNombre ? ' (' + e.paisNombre + ')' : '') : host;
     const que = { Publicidad: 'una conexión publicitaria', Rastreador: 'una conexión con un rastreador conocido', 'Web peligrosa': 'una conexión con una web peligrosa conocida', 'Aviso de cookies': 'el aviso de cookies', 'Red local': 'una conexión hacia la red local', 'Otra empresa': 'una conexión con otra empresa' }[prop] || 'una conexión';
     this.suceso({ clase: 'corte', certeza: 'comprobado', dominio: host, empresa: e.empresa, pais: e.pais, paisNombre: e.paisNombre, proposito: prop, tipo, tercero, estado,
-      texto: (estado === 'cortado' ? 'ZERO ha cortado ' : estado === 'visto' ? 'ZERO ha visto (y dejado pasar, nivel observar) ' : 'ZERO ha dejado pasar (lo permitiste) ') + que + (e.empresa ? ', de ' + quien : ' hacia ' + host) + '.',
+      texto: (estado === 'cortado' ? 'ZERO ha cortado ' : estado === 'visto' ? 'ZERO ha visto ' : 'ZERO ha dejado pasar (lo permitiste) ') + que + (e.empresa ? ', de ' + quien : ' hacia ' + host) + '.',
       detalle: { regla: d.regla, lista: d.lista ? (cortes.listas[d.lista] || {}).nombre : null, listaClave: d.lista, fuenteEmpresa: e.fuente, categoria: e.categoria } });
   }
 
@@ -415,9 +444,9 @@ class Sesion {
       st.n.huella++;
       const via = { canvas: 'el lienzo gráfico (canvas)', webgl: 'la tarjeta gráfica (WebGL)', audio: 'el sistema de audio', fuentes: 'los tipos de letra instalados', plugins: 'los complementos del navegador' }[s.via] || s.via;
       st.porque['Huella digital'] = (st.porque['Huella digital'] || 0) + 1;
-      return this.suceso({ clase: 'huella', certeza: 'probable', dominio, texto: 'Un programa de ' + dominio + ' ha consultado ' + via + ', un dato que sirve para reconocer un equipo. En ZERO ve la celda remota, no tu ordenador.', detalle: { via: s.via } });
+      return this.suceso({ clase: 'huella', certeza: 'probable', dominio, texto: 'Un programa de ' + dominio + ' ha consultado ' + via + ', un dato que sirve para reconocer un equipo. En ZERO ve la burbuja remota, no tu ordenador.', detalle: { via: s.via } });
     }
-    if (s.clase === 'permiso') { st.n.permisos++; return this.suceso({ clase: 'permiso', certeza: 'comprobado', dominio, texto: 'La web ha pedido acceso a ' + s.que + '. ZERO lo ha denegado: en la celda remota no hay nada tuyo.', detalle: { que: s.que } }); }
+    if (s.clase === 'permiso') { st.n.permisos++; return this.suceso({ clase: 'permiso', certeza: 'comprobado', dominio, texto: 'La web ha pedido acceso a ' + s.que + '. ZERO lo ha denegado: en la burbuja remota no hay nada tuyo.', detalle: { que: s.que } }); }
     if (s.clase === 'webrtc') { st.n.permisos++; return this.suceso({ clase: 'webrtc', certeza: 'comprobado', dominio, texto: 'La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real. ZERO la mantiene desactivada.' }); }
     if (s.clase === 'formulario') return this.suceso({ clase: 'formulario', certeza: 'comprobado', dominio, texto: s.detenido ? 'Este formulario enviaría tus datos sin cifrar. ZERO ha detenido el envío.' : 'Atención: este formulario enviaría lo que escribas sin cifrar.', detalle: { accion: s.accion, detenido: s.detenido } });
     if (s.clase === 'subasta') {
@@ -456,7 +485,7 @@ class Sesion {
       if (!req.isNavigationRequest() || req.frame() !== (p || this.act).page.mainFrame()) return;
       const st = r.status(); if (st >= 300 && st < 400) return;
       { const pp = p || this.act; if (pp) { pp.respondio = { url: r.url(), ok: st >= 200 && st < 300 }; } } // la web real respondió (para «Estás en … comprobado»)
-      // 26 Oct 2026: muro antirrobot (as.com/PRISA, Cloudflare, DataDome…): la web rechaza a la celda por salir de un servidor.
+      // 26 Oct 2026: muro antirrobot (as.com/PRISA, Cloudflare, DataDome…): la web rechaza a la burbuja por salir de un servidor.
       // Se dice con honestidad en la página; no se reintenta ni se esquiva.
       if ((st === 403 || st === 429 || st === 503) && (p || this.act) === this.act) this.env({ t: 'muro', host: hostDe(r.url()), estado: st });
       const cadena = []; let q = req.redirectedFrom();
@@ -468,9 +497,9 @@ class Sesion {
     } catch (_) {}
   }
 
-  // Descargas en cuarentena (ronda 40, punto 11/fase 5): el archivo se guarda dentro de la celda, se inspecciona (tamaño,
+  // Descargas en cuarentena (ronda 40, punto 11/fase 5): el archivo se guarda dentro de la burbuja, se inspecciona (tamaño,
   // tipo por extensión, huella SHA-256, si la dirección está en las listas de webs peligrosas) y solo llega al equipo de
-  // la persona si ella lo pide después de ver la inspección. Nada se abre ni se ejecuta en la celda.
+  // la persona si ella lo pide después de ver la inspección. Nada se abre ni se ejecuta en la burbuja.
   async descarga(d) {
     const nombre = String(d.suggestedFilename() || 'archivo').slice(0, 200), url = d.url(), host = hostDe(url);
     const id = ++this.nDesc;
@@ -481,7 +510,7 @@ class Sesion {
     const malo = !!(lista.bloquear && lista.proposito === 'malware');
     const reg = { id, nombre, url: url.slice(0, 300), host, bytes: 0, sha256: null, riesgo, malo, estado: 'descargando', hora: ahora(), ruta: null };
     this.descargas.set(id, reg);
-    this.suceso({ clase: 'descarga', certeza: 'comprobado', dominio: host, texto: 'La web ha iniciado la descarga de «' + nombre + '». ZERO la ha retenido en la celda para inspeccionarla: no ha tocado tu ordenador.', detalle: { nombre, riesgo, malo } });
+    this.suceso({ clase: 'descarga', certeza: 'comprobado', dominio: host, texto: 'La web ha iniciado la descarga de «' + nombre + '». ZERO la ha retenido en la burbuja para inspeccionarla: no ha tocado tu ordenador.', detalle: { nombre, riesgo, malo } });
     try {
       const ruta = await d.path();
       const st = fs.statSync(ruta); reg.bytes = st.size; reg.ruta = ruta;
@@ -545,18 +574,18 @@ class Sesion {
   // Señales fuertes (ronda 50 G, ChatGPT y Astra; Gemini): una web peligrosa conocida dentro de la página o en una descarga → sellar.
   autoSella(motivo) { if (!this.destruida && this.alerta < 3) this.ponAlerta(3, 'automático: ' + motivo).catch(() => {}); }
 
-  // Un señuelo que sale de la celda hacia otra empresa (o alguien que sigue el enlace oculto) es una fuga: se sella al momento y, si la
-  // persona no reanuda en 20 s, la celda se destruye y se borra todo. En Observar (la persona eligió no cortar nada) solo se avisa.
+  // Un señuelo que sale de la burbuja hacia otra empresa (o alguien que sigue el enlace oculto) es una fuga: se sella al momento y, si la
+  // persona no reanuda en 20 s, la burbuja se destruye y se borra todo. En Observar (la persona eligió no cortar nada) solo se avisa.
   fuga(x) {
-    if (this.destruida || (this.nivel || 'normal') === 'observar') return;
-    this.autoSella('un dato de la celda salió hacia ' + (x.empresa || x.dominio || 'otra empresa'));
+    if (this.destruida || (this.nivel || 'normal') === 'observar' || this.dejaPorDefecto()) return;
+    this.autoSella('un dato de la burbuja salió hacia ' + (x.empresa || x.dominio || 'otra empresa'));
     if (this.autoDestruye) return;
     const hasta = Date.now() + 20000;
     this.autoDestruye = { hasta, t: setTimeout(() => { const a = this.autoDestruye; this.autoDestruye = null; if (a && this.sellada && !this.destruida) this.destruye('fuga detectada: destrucción automática a los 20 s').catch(() => {}); }, 20000) };
-    this.op('fuga detectada: la celda se destruirá sola en 20 s salvo que la persona la reanude');
+    this.op('fuga detectada: la burbuja se destruirá sola en 20 s salvo que la persona la reanude');
   }
 
-  // Respuesta gradual (ronda 40, punto 11, las tres voces): cada suceso suma puntos en esta web; al pasar un umbral la celda
+  // Respuesta gradual (ronda 40, punto 11, las tres voces): cada suceso suma puntos en esta web; al pasar un umbral la burbuja
   // sube de nivel: 0 en calma · 1 vigilando · 2 alerta (toda conexión con otras empresas cortada) · 3 sellada (sin red y
   // sin programas; la persona decide) · 4 destruida (solo a petición de la persona). Los puntos se reinician al cambiar de web.
   vigila(x) {
@@ -579,7 +608,8 @@ class Sesion {
     if (this.ultimos.length === 25) { this.puntos += 2; this.motivos.push({ clase: 'tormenta', puntos: 2, hora: ahora(), dominio: this.webActual }); }
     // sellar en automático solo con una señal grave (web peligrosa, identidad no comprobada, descarga, tormenta) además de los puntos
     const grave = this.motivos.some((m) => ['bloqueo', 'certificado', 'descarga', 'tormenta'].includes(m.clase));
-    const nivel = this.puntos >= 12 && grave ? 3 : this.puntos >= 6 ? 2 : this.puntos >= 2 ? 1 : 0;
+    let nivel = this.puntos >= 12 && grave ? 3 : this.puntos >= 6 ? 2 : this.puntos >= 2 ? 1 : 0;
+    if (nivel >= 2 && this.dejaPorDefecto() && !this.motivos.some((m) => ['bloqueo', 'certificado'].includes(m.clase))) nivel = 1; // sin cortes por defecto: se vigila y se avisa
     if (nivel > this.alerta) this.ponAlerta(nivel, 'automático: ' + x.clase).catch(() => {});
   }
 
@@ -598,10 +628,10 @@ class Sesion {
       for (const p of this.pestanas) { try { await p.cdp.send('Emulation.setScriptExecutionDisabled', { value: this.nivel === 'maximo' }); } catch (_) {} }
     }
     const TEXTO = {
-      0: 'La celda vuelve a la calma.',
+      0: 'La burbuja vuelve a la calma.',
       1: 'ZERO vigila esta web de cerca: ha visto varios intentos (huella, permisos o ventanas) que juntos merecen atención.',
       2: 'Alerta en esta web: ZERO corta ahora toda conexión con otras empresas mientras dure la visita. La web sigue abierta.',
-      3: 'Celda sellada: ZERO ha cortado toda la red de la celda y ha parado sus programas. Lo que ves queda congelado; nada entra ni sale. Puedes reanudar o destruir la celda.',
+      3: 'Burbuja sellada: ZERO ha cortado toda la red de la burbuja y ha parado sus programas. Lo que ves queda congelado; nada entra ni sale. Puedes reanudar o destruir la burbuja.',
     };
     this.suceso({ clase: 'alerta', certeza: 'comprobado', dominio: this.webActual, texto: TEXTO[nivel] || '', detalle: { nivel, nombre: NOMBRE[nivel], antes, motivo, puntos: this.puntos, motivos: this.motivos.slice(-12) } });
     this.env({ t: 'alerta', nivel, nombre: NOMBRE[nivel], motivo, puntos: this.puntos, sellada: this.sellada });
@@ -628,7 +658,7 @@ class Sesion {
         const vetada = onionVetada(h);
         this.op('dirección .onion rechazada: ' + h);
         this.suceso({ clase: 'onion', certeza: 'comprobado', dominio: h, texto: vetada ? TXT_ONION : TXT_ONION_SIN_ULTRA });
-        await this.page.setContent(paginaBloqueo(vetada ? 'Dirección .onion bloqueada' : 'Esta dirección solo se abre con ULTRA', vetada ? TXT_ONION : TXT_ONION_SIN_ULTRA, h)).catch(() => {});
+        await this.page.setContent(paginaBloqueo(vetada ? 'Dirección .onion bloqueada' : 'Esta dirección solo se abre con Tor', vetada ? TXT_ONION : TXT_ONION_SIN_ULTRA, h)).catch(() => {});
         return;
       }
       if (this.filtro && !PERMITE_LOCAL && (ipProhibida(h) || nombreLocal(h))) {
@@ -659,12 +689,12 @@ class Sesion {
     let o; try { o = JSON.parse(m); } catch (_) { return; }
     try {
       if (o.t === 'hola') return await this.abre(o.w, o.h, o.idioma);
-      // 27 Oct 2026 (dueño: «Tor ULTRA tiene que permitir navegar»): lo que llega mientras la celda cambia a Tor o vuelve
-      // (abrir una web, pestañas, destruir…) espera a la celda nueva en vez de perderse. Ratón y teclado no esperan.
+      // 27 Oct 2026 (dueño: «Tor ULTRA tiene que permitir navegar»): lo que llega mientras la burbuja cambia a Tor o vuelve
+      // (abrir una web, pestañas, destruir…) espera a la burbuja nueva en vez de perderse. Ratón y teclado no esperan.
       if (this.cambiaUltra && !['raton', 'rueda', 'tecla', 'texto'].includes(o.t)) while (this.cambiaUltra) await this.cambiaUltra;
       if (!this.page || this.destruida) return;
       if (o.t === 'abrir') return await this.ve(String(o.url || '').trim());
-      if (this.sellada && (o.t === 'raton' || o.t === 'rueda' || o.t === 'tecla' || o.t === 'texto')) return; // sellada: la celda no recibe nada
+      if (this.sellada && (o.t === 'raton' || o.t === 'rueda' || o.t === 'tecla' || o.t === 'texto')) return; // sellada: la burbuja no recibe nada
       if (o.t === 'raton') {
         if (o.tipo === 'move') return await this.page.mouse.move(o.x, o.y);
         if (o.tipo === 'down') return await this.page.mouse.down({ button: o.boton || 'left', clickCount: o.clicks || 1 });
@@ -673,7 +703,7 @@ class Sesion {
       if (o.t === 'rueda') { await this.page.mouse.move(o.x, o.y); return await this.page.mouse.wheel(o.dx || 0, o.dy || 0); }
       if (o.t === 'tecla') return await (o.tipo === 'down' ? this.page.keyboard.down(o.key) : this.page.keyboard.up(o.key));
       if (o.t === 'texto') return await this.page.keyboard.insertText(String(o.s || '').slice(0, 20000));
-      // Copiar: el texto seleccionado en la celda viaja al portapapeles de la persona (solo cuando ella pulsa Ctrl+C o «Copiar»).
+      // Copiar: el texto seleccionado en la burbuja viaja al portapapeles de la persona (solo cuando ella pulsa Ctrl+C o «Copiar»).
       if (o.t === 'copiar') { let txt = ''; try { txt = await this.page.evaluate(() => String(window.getSelection ? window.getSelection() : '')); } catch (_) {} if (process.env.ZERO_DEBUG) console.log('copiar:', String(txt || '').length, 'caracteres'); this.env({ t: 'portapapeles', texto: String(txt || '').slice(0, 20000) }); return; }
       if (o.t === 'atras') return this.page.goBack({ waitUntil: 'commit' }).catch(() => {});
       if (o.t === 'adelante') return this.page.goForward({ waitUntil: 'commit' }).catch(() => {});
@@ -692,24 +722,36 @@ class Sesion {
         return;
       }
       if (o.t === 'modo' && 'ultra' in o) {
-        // ULTRA: la celda entera sale por Tor. Hace falta una celda nueva (el proxy se fija al crearla): se cierra la actual.
+        // ULTRA: la burbuja entera sale por Tor. Hace falta una burbuja nueva (el proxy se fija al crearla): se cierra la actual.
         const quiere = !!o.ultra;
-        if (!TOR_PROXY) { this.suceso({ clase: 'ultra', certeza: 'comprobado', dominio: this.webActual, texto: 'ULTRA no está disponible en este motor: no tiene salida por Tor configurada. ZERO sigue como hasta ahora.', detalle: { disponible: false } }); return this.env({ t: 'ultra', disponible: false, activo: false }); }
+        if (!TOR_PROXY) { this.suceso({ clase: 'ultra', certeza: 'comprobado', dominio: this.webActual, texto: 'Tor no está disponible en este motor: no tiene salida por Tor configurada. ZERO sigue como hasta ahora.', detalle: { disponible: false } }); return this.env({ t: 'ultra', disponible: false, activo: false }); }
         while (this.cambiaUltra) await this.cambiaUltra; // de uno en uno
         if (quiere === !!this.ultra) return;
         let listo; this.cambiaUltra = new Promise((r) => { listo = r; });
         try {
-          this.ultra = quiere; this.op('ultra ' + (quiere ? 'activado' : 'desactivado') + ': celda nueva');
+          this.ultra = quiere; this.op('Tor ' + (quiere ? 'activado' : 'desactivado') + ': burbuja nueva');
           try { if (this.ctx) await this.ctx.close(); } catch (_) {}
           this.pestanas = []; this.act = null; this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.descargas = new Map();
           await this.abre(this.w, this.h, this.idioma); // con el idioma de la persona (antes volvía a es-ES)
-          this.suceso({ clase: 'ultra', certeza: 'comprobado', dominio: '', texto: quiere ? 'ULTRA activado: esta celda nueva sale a internet por la red Tor (tres repetidores). Las webs ven la salida de Tor, no la de GUARDIANA. Es más lento.' : 'ULTRA desactivado: celda nueva con la salida normal de GUARDIANA.', detalle: { disponible: true, activo: quiere } });
+          this.suceso({ clase: 'ultra', certeza: 'comprobado', dominio: '', texto: quiere ? 'Tor activado: esta burbuja nueva sale a internet por la red Tor (tres repetidores). Las webs ven la salida de Tor, no la de GUARDIANA.' : 'Tor desactivado: burbuja nueva con la salida normal de GUARDIANA.', detalle: { disponible: true, activo: quiere } });
           this.env({ t: 'ultra', disponible: true, activo: quiere });
         } finally { this.cambiaUltra = null; listo(); }
         return;
       }
       if (o.t === 'modo') { if ('observatorio' in o) { this.observatorio = !!o.observatorio; this.op('modo observatorio ' + (this.observatorio ? 'activado' : 'desactivado')); } if (o.nivel) await this.ponNivel(o.nivel); return; }
-      if (o.t === 'permitir') { const k = String(o.clave || '').slice(0, 120); if (!k) return; if (o.on) this.permitidas.add(k); else this.permitidas.delete(k); this.op((o.on ? 'permitida ' : 'vuelve a cortarse ') + k); this.suceso({ clase: 'permiso-empresa', certeza: 'comprobado', dominio: this.webActual, texto: (o.on ? 'Has permitido las conexiones de ' : 'Vuelves a cortar las conexiones de ') + k.replace(/^e:/, '') + ' en esta sesión.', detalle: { clave: k, on: !!o.on } }); return; }
+      if (o.t === 'permitir') {
+        const k = String(o.clave || '').slice(0, 120); if (!k) return;
+        const grupo = k.startsWith('p:') ? k.slice(2) : '';
+        if (grupo) {
+          // un grupo entero (Publicidad, Rastreadores…): quita lo hecho a mano con sus empresas para que valga para todas
+          if (o.on) { this.permitidas.add(k); this.vetadas.delete(k); } else { this.permitidas.delete(k); this.vetadas.add(k); }
+          for (const x of (Array.isArray(o.limpia) ? o.limpia : []).slice(0, 500)) { const c = String(x).slice(0, 120); this.permitidas.delete(c); this.vetadas.delete(c); }
+        } else if (o.on) { this.permitidas.add(k); this.vetadas.delete(k); } else { this.permitidas.delete(k); this.vetadas.add(k); }
+        this.op((o.on ? 'permitida ' : 'vuelve a cortarse ') + k);
+        const nombre = grupo ? ({ Rastreador: 'Rastreadores', 'Aviso de cookies': 'Avisos de cookies', 'Otra empresa': 'Otras empresas', 'Web peligrosa': 'Webs peligrosas' }[grupo] || grupo) : '';
+        this.suceso({ clase: 'permiso-empresa', certeza: 'comprobado', dominio: this.webActual, texto: grupo ? (o.on ? 'Has permitido todo el grupo «' + nombre + '» en esta sesión.' : 'Has cortado todo el grupo «' + nombre + '» en esta sesión.') : (o.on ? 'Has permitido las conexiones de ' : 'Has cortado las conexiones de ') + k.replace(/^e:/, '') + ' en esta sesión.', detalle: { clave: k, on: !!o.on } });
+        return;
+      }
       if (o.t === 'destruir') return await this.destruye('a petición de la persona');
       if (o.t === 'descarga') { if (o.accion === 'traer') return await this.traeDescarga(+o.id); if (o.accion === 'descartar') return this.descartaDescarga(+o.id); return; }
       if (o.t === 'pestana') {
@@ -719,7 +761,7 @@ class Sesion {
         if (o.accion === 'cerrar') return await this.cierraPestana(+o.id);
         return;
       }
-      if (o.t === 'alerta') { if (o.accion === 'sellar') return await this.ponAlerta(3, 'a petición de la persona'); if (o.accion === 'reanudar') { if (this.autoDestruye) { clearTimeout(this.autoDestruye.t); this.autoDestruye = null; this.op('destrucción automática cancelada: la persona reanudó la celda'); } this.puntos = 0; this.motivos = []; return await this.ponAlerta(0, 'reanudada por la persona'); } return; }
+      if (o.t === 'alerta') { if (o.accion === 'sellar') return await this.ponAlerta(3, 'a petición de la persona'); if (o.accion === 'reanudar') { if (this.autoDestruye) { clearTimeout(this.autoDestruye.t); this.autoDestruye = null; this.op('destrucción automática cancelada: la persona reanudó la burbuja'); } this.puntos = 0; this.motivos = []; return await this.ponAlerta(0, 'reanudada por la persona'); } return; }
     } catch (e) { if (process.env.ZERO_DEBUG) console.log('mensaje', o && o.t, 'error:', e && e.message); /* una orden que falla no tumba la sesión */ }
   }
 
@@ -732,7 +774,7 @@ class Sesion {
     this.suceso({ clase: 'nivel', certeza: 'comprobado', dominio: this.webActual, texto: n === 'observar' ? 'Nivel observar: ZERO deja pasar todo (menos webs peligrosas), lo detecta y te lo enseña; tú eliges qué cortar.' : n === 'normal' ? 'Nivel normal: ZERO corta la publicidad y el rastreo de las listas públicas.' : n === 'estricto' ? 'Nivel estricto: además, ZERO corta toda conexión con otras empresas; solo pasa lo propio de la web.' : 'Nivel máximo: además, la web corre sin programas (JavaScript).' });
   }
 
-  // Una marca que solo existe en la celda ha salido (o ha intentado salir) hacia alguien. Se afirma solo lo visto.
+  // Una marca que solo existe en la burbuja ha salido (o ha intentado salir) hacia alguien. Se afirma solo lo visto.
   senuelo(f, host, url, tercero, cortada) {
     const clave = f.tipo + '|' + f.donde + '|' + host;
     if (this.senuelos.alertas.some((a) => a.clave === clave)) return;
@@ -742,15 +784,15 @@ class Sesion {
     const texto = f.tipo === 'visita'
       ? 'Alguien ha visitado el enlace oculto que ZERO puso como señuelo en la página (desde ' + host + '; ' + f.donde + '). Solo un programa que lea la página entera y siga sus enlaces llega a él: un indexador, un previsualizador o un rastreador.'
       : tercero
-      ? 'Un dato que solo existe en tu celda (' + que + ', puesto por ZERO como señuelo) ' + (cortada ? 'iba a salir' : 'ha salido') + ' hacia ' + (e.empresa ? e.empresa + ' (' + host + ')' : host) + ' en ' + f.donde + '. Algo en esta web lo leyó y lo envió' + (cortada ? '; ZERO cortó esa conexión.' : '.')
-      : 'La propia web se ha enviado un dato que solo existe en tu celda (' + que + ', puesto por ZERO como señuelo) en ' + f.donde + ': copia el contenido de la página o sus cookies hacia sus servidores.';
+      ? 'Un dato que solo existe en tu burbuja (' + que + ', puesto por ZERO como señuelo) ' + (cortada ? 'iba a salir' : 'ha salido') + ' hacia ' + (e.empresa ? e.empresa + ' (' + host + ')' : host) + ' en ' + f.donde + '. Algo en esta web lo leyó y lo envió' + (cortada ? '; ZERO cortó esa conexión.' : '.')
+      : 'La propia web se ha enviado un dato que solo existe en tu burbuja (' + que + ', puesto por ZERO como señuelo) en ' + f.donde + ': copia el contenido de la página o sus cookies hacia sus servidores.';
     this.n.senuelos = (this.n.senuelos || 0) + 1;
     this.suceso({ clase: 'señuelo', certeza: 'comprobado', dominio: host, empresa: e.empresa || null, paisNombre: e.paisNombre || null, texto, detalle: { tipo: f.tipo, que, donde: f.donde, tercero, cortada, url: String(url).slice(0, 200) } });
   }
 
   // Muros antirrobot por red (26 Oct 2026; p. ej. as.com: «El acceso está restringido temporalmente… un robot se encuentra en
   // la misma red»). El título no lo dice, así que se mira el texto de la página y de sus marcos, solo si es corta (las páginas de
-  // bloqueo lo son). Si lo es, se avisa a la persona: desde la celda no se puede entrar; en su navegador de siempre, sí.
+  // bloqueo lo son). Si lo es, se avisa a la persona: desde la burbuja no se puede entrar; en su navegador de siempre, sí.
   async miraMuro(page) {
     if (this.destruida || !page || page.isClosed()) return;
     const RE = /acceso est[áa] restringido|access (is )?(temporarily )?restricted|robot se encuentra en la misma red|a robot is on the same network|you have been blocked|has sido bloquead|ha sido bloquead|request (was )?blocked|access denied|acceso denegado|unusual traffic|tr[áa]fico inusual|verify (that )?you are (a )?human|comprueba que eres humano|are you a robot|eres un robot/i;
@@ -761,7 +803,7 @@ class Sesion {
         const host = hostDe(page.url());
         if (this.murosVistos && this.murosVistos.has(host)) return;
         (this.murosVistos = this.murosVistos || new Set()).add(host);
-        this.suceso({ clase: 'muro', certeza: 'comprobado', dominio: host, texto: 'Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.', detalle: { url: page.url().slice(0, 300) } });
+        this.suceso({ clase: 'muro', certeza: 'comprobado', dominio: host, texto: 'Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la burbuja no se puede abrir; en tu navegador de siempre sí.', detalle: { url: page.url().slice(0, 300) } });
         return;
       }
     }
@@ -782,7 +824,7 @@ class Sesion {
     const t0 = Date.now();
     this.op('cierre pedido: ' + motivo);
     try { if (this.cdp) await this.cdp.send('Page.stopScreencast').catch(() => {}); } catch (_) {}
-    try { if (this.ctx) await this.ctx.close(); this.op('celda cerrada: cookies, caché, almacenamiento y pestañas de la sesión eliminados con el contexto'); } catch (_) { this.op('celda cerrada con error'); }
+    try { if (this.ctx) await this.ctx.close(); this.op('burbuja cerrada: cookies, caché, almacenamiento y pestañas de la sesión eliminados con el contexto'); } catch (_) { this.op('burbuja cerrada con error'); }
     if (this.filtro) { this.filtro.cierra(); this.filtro = null; }
     const acta = { sesion: this.id, version: VERSION, inicio: new Date(this.creada).toISOString(), fin: ahora(), motivo, duracion_s: Math.round((Date.now() - this.creada) / 1000), cierre_ms: Date.now() - t0,
       operaciones: this.operaciones, sucesos: this.sucesos.length, cortes: this.sucesos.filter((s) => s.clase === 'corte').length, senuelos: this.senuelos.alertas.length, alerta_final: this.alerta, descargas_retenidas: this.descargas.size,
@@ -801,8 +843,20 @@ function empresaDe(pujador) {
   return { empresa: e.empresa, pais: e.pais, paisNombre: e.paisNombre };
 }
 
+// 27 Oct 2026 (dueño: un vídeo de Marca decía «navegador no compatible»): Google Chrome trae los códecs de vídeo H.264/AAC que
+// el Chromium libre de Playwright no tiene. instalar.sh lo instala; si no está o no arranca, el motor sigue con Chromium.
+// ZERO_CANAL=chromium obliga a usar Chromium.
+async function lanzaNavegador() {
+  const opciones = { args: ['--use-gl=swiftshader', '--enable-unsafe-swiftshader', '--disable-background-networking', '--no-first-run', '--force-webrtc-ip-handling-policy=disable_non_proxied_udp', '--disable-features=MediaRouter,Translate,OptimizationHints', '--autoplay-policy=user-gesture-required'] };
+  if (process.env.ZERO_CANAL !== 'chromium') {
+    try { const n = await chromium.launch({ ...opciones, channel: 'chrome' }); console.log('navegador: Google Chrome ' + n.version() + ' (con códecs de vídeo H.264/AAC)'); return n; }
+    catch (e) { console.log('navegador: Google Chrome no disponible (' + String((e && e.message) || e).split('\n')[0].slice(0, 140) + '); sigo con Chromium'); }
+  }
+  return chromium.launch(opciones);
+}
+
 async function main() {
-  navegador = await chromium.launch({ args: ['--use-gl=swiftshader', '--enable-unsafe-swiftshader', '--disable-background-networking', '--no-first-run', '--force-webrtc-ip-handling-policy=disable_non_proxied_udp', '--disable-features=MediaRouter,Translate,OptimizationHints', '--autoplay-policy=user-gesture-required'] });
+  navegador = await lanzaNavegador();
   const srv = http.createServer((req, res) => {
     const ms = req.url.match(/^\/s\/([0-9a-f]{12})(?:[/?#].*)?$/);
     if (ms) {
@@ -838,7 +892,7 @@ async function main() {
     }
     if (!req.url.startsWith('/sesion')) return socket.destroy();
     if (!origenPermitido(req)) { console.log('sesión rechazada: origen', req.headers.origin || '(ninguno)'); return socket.destroy(); }
-    if (VIVAS.size >= MAX_SESIONES) { console.log('sesión rechazada: tope de celdas (' + MAX_SESIONES + ')'); return socket.destroy(); }
+    if (VIVAS.size >= MAX_SESIONES) { console.log('sesión rechazada: tope de burbujas (' + MAX_SESIONES + ')'); return socket.destroy(); }
     const ws = WS.acepta(req, socket);
     if (ws) new Sesion(ws);
   });

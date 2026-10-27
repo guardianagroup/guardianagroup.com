@@ -1,5 +1,5 @@
 // ZERO · cliente del motor (26 Oct 2026, ronda 40).
-// Conecta la pantalla de ZERO con el motor (zero-motor/servidor.js): recibe la imagen de la web que corre en la celda
+// Conecta la pantalla de ZERO con el motor (zero-motor/servidor.js): recibe la imagen de la web que corre en la burbuja
 // remota, manda ratón y teclado, y alimenta el panel «Lo que ZERO corta» con sucesos reales. Si no hay motor
 // configurado (?motor=ws://… o la clave guardada), la página sigue siendo la demostración de siempre.
 (() => {
@@ -20,7 +20,7 @@
       const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 3000); const t0 = performance.now();
       return fetch(u.replace(/^wss:/, 'https:') + '/salud', { signal: ctl.signal, cache: 'no-store', credentials: 'omit' })
         .then((r) => (r.ok ? r.json() : null))
-        .then((j) => { clearTimeout(tm); const ms = Math.round(performance.now() - t0); const ok = !!(j && j.ok && (j.tope == null || j.celdas == null || j.celdas < j.tope)); M.motores.push({ url: u, ms, ok, celdas: j && j.celdas, region: j && j.region }); return ok ? { url: u, ms } : null; })
+        .then((j) => { clearTimeout(tm); const ms = Math.round(performance.now() - t0); const ok = !!(j && j.ok && (j.tope == null || j.celdas == null || j.celdas < j.tope)); M.motores.push({ url: u, ms, ok, burbujas: j && j.celdas, region: j && j.region }); return ok ? { url: u, ms } : null; })
         .catch(() => { clearTimeout(tm); M.motores.push({ url: u, ms: null, ok: false }); return null; });
     };
     Promise.all(MOTORES.map(prueba)).then((rs) => {
@@ -32,7 +32,7 @@
   function arranca() {
   const $ = (s) => document.querySelector(s);
   const stage = $('#stage'), web = $('#web');
-  const cv = document.createElement('canvas'); cv.id = 'pantalla'; cv.tabIndex = 0; cv.setAttribute('aria-label', 'Web abierta en la celda remota de ZERO'); cv.width = 1064; cv.height = 800;
+  const cv = document.createElement('canvas'); cv.id = 'pantalla'; cv.tabIndex = 0; cv.setAttribute('aria-label', 'Web abierta en la burbuja remota de ZERO'); cv.width = 1064; cv.height = 800;
   const ctx = cv.getContext('2d');
   const est = document.createElement('div'); est.className = 'estadomotor'; est.setAttribute('aria-live', 'polite');
   web.append(cv, est);
@@ -40,11 +40,11 @@
 
   let ws = null, abierto = false, pendiente = null, ultimoCuadro = 0, cuadros = 0, moviendo = 0;
   const env = (o) => { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); };
-  // Tamaño de la celda = tamaño real en pantalla del hueco (por devicePixelRatio), no el del diseño sin escalar: así no se
+  // Tamaño de la burbuja = tamaño real en pantalla del hueco (por devicePixelRatio), no el del diseño sin escalar: así no se
   // codifican píxeles que nadie ve (26 Oct 2026, ronda 46). Mínimo 360 de ancho para que las webs no se rompan.
   const tam = () => { const r = (cv.getBoundingClientRect && cv.getBoundingClientRect()) || {}; const dpr = Math.min(1.25, window.devicePixelRatio || 1); const w = Math.round((r.width || cv.offsetWidth || web.offsetWidth) * (r.width ? dpr : 1)) || 1064; const h = Math.round((r.height || cv.offsetHeight || web.offsetHeight) * (r.height ? dpr : 1)) || 800; return { w: Math.max(360, Math.min(1920, w)), h: Math.max(240, Math.min(1200, h)) }; };
 
-  // Idioma de la celda: el de la página (documentElement.lang) con la región del navegador de la persona si coincide (es + es-CO → es-CO).
+  // Idioma de la burbuja: el de la página (documentElement.lang) con la región del navegador de la persona si coincide (es + es-CO → es-CO).
   function idiomaCelda() {
     const hl = String(document.documentElement.lang || 'es').toLowerCase().slice(0, 2);
     const nl = String(navigator.language || '');
@@ -54,7 +54,7 @@
   }
   function conecta() {
     if (ws && (ws.readyState === 0 || ws.readyState === 1)) return;
-    M.estado = 'conectando'; ponEstado('Conectando con la celda remota…');
+    M.estado = 'conectando'; ponEstado('Conectando con la burbuja remota…');
     ws = new WebSocket(URL_MOTOR + (URL_MOTOR.includes('/sesion') ? '' : '/sesion'));
     ws.binaryType = 'blob';
     ws.onopen = () => { const t = tam(); env({ t: 'hola', w: t.w, h: t.h, idioma: idiomaCelda() }); };
@@ -77,7 +77,7 @@
     if (m.t === 'lista') {
       M.lista = m; M.estado = 'lista'; M.sesion = m.sesion; M.acta = null; M.ultraDisponible = !!m.ultraDisponible; M.ultra = !!m.ultra; M.nivelActual = m.nivel || M.nivelActual;
       if (window.zeroLista) window.zeroLista(m);
-      ponEstado('Celda lista · ' + Object.keys(m.listas || {}).length + ' listas · cookies de terceros ' + (m.cookiesBloqueadas ? 'bloqueadas' : 'efímeras'));
+      ponEstado('Burbuja lista · ' + Object.keys(m.listas || {}).length + ' listas · cookies de terceros ' + (m.cookiesBloqueadas ? 'bloqueadas' : 'efímeras'));
       if (pendiente) { env({ t: 'abrir', url: pendiente }); pendiente = null; }
       return;
     }
@@ -101,7 +101,7 @@
   // ---- lo que el motor recibe de la persona ----
   const coords = (e) => { const r = cv.getBoundingClientRect(); return { x: Math.max(0, Math.min(cv.width, (e.clientX - r.left) * cv.width / (r.width || 1))), y: Math.max(0, Math.min(cv.height, (e.clientY - r.top) * cv.height / (r.height || 1))) }; };
   const BOTON = ['left', 'middle', 'right'];
-  // Cursor que pide la web (lo manda el sensor de la celda) y un pulso visible al pulsar, para que la mano responda al instante.
+  // Cursor que pide la web (lo manda el sensor de la burbuja) y un pulso visible al pulsar, para que la mano responda al instante.
   const CURSORES = new Set(['default', 'pointer', 'text', 'move', 'grab', 'grabbing', 'crosshair', 'not-allowed', 'wait', 'progress', 'help', 'col-resize', 'row-resize', 'ns-resize', 'ew-resize', 'nesw-resize', 'nwse-resize', 'n-resize', 's-resize', 'e-resize', 'w-resize', 'zoom-in', 'zoom-out', 'copy', 'alias', 'cell', 'vertical-text', 'all-scroll', 'context-menu']);
   const pulso = (e) => { const wr = web.getBoundingClientRect(); const d = document.createElement('i'); d.className = 'zeropulso'; d.style.left = (e.clientX - wr.left) * (web.offsetWidth / (wr.width || 1)) + 'px'; d.style.top = (e.clientY - wr.top) * (web.offsetHeight / (wr.height || 1)) + 'px'; web.append(d); setTimeout(() => d.remove(), 420); };
   cv.addEventListener('mousemove', (e) => { const n = Date.now(); if (n - moviendo < 28) return; moviendo = n; const c = coords(e); env({ t: 'raton', tipo: 'move', x: c.x, y: c.y }); });
@@ -131,7 +131,7 @@
     if (LOCALES.has(e.key) || e.key === 'Dead' || (e.ctrlKey && /^[lLtTwWnN]$/.test(e.key))) return;
     e.preventDefault(); e.stopPropagation();
     const mod = e.ctrlKey || e.metaKey;
-    // Ctrl+C: lo seleccionado en la celda pasa al portapapeles de la persona; Ctrl+V: lo que tiene en su portapapeles entra en la celda.
+    // Ctrl+C: lo seleccionado en la burbuja pasa al portapapeles de la persona; Ctrl+V: lo que tiene en su portapapeles entra en la burbuja.
     if (mod && /^[cC]$/.test(e.key)) { env({ t: 'tecla', tipo: 'down', key: e.key }); env({ t: 'copiar' }); return; }
     if (mod && /^[vV]$/.test(e.key)) { if (navigator.clipboard && navigator.clipboard.readText) navigator.clipboard.readText().then((s) => { if (s) env({ t: 'texto', s }); }).catch(() => {}); return; }
     env({ t: 'tecla', tipo: 'down', key: e.key });
@@ -151,8 +151,8 @@
     if (!texto) u = 'about:blank';
     else if (esDir(texto)) u = /^https?:\/\//i.test(texto) ? texto : (/^(localhost|127\.0\.0\.1)/i.test(texto) ? 'http://' : 'https://') + texto;
     else u = urlBuscador + encodeURIComponent(texto);
-    if (M.sellada) { ponEstado('Celda sellada: reanuda o destruye la celda antes de abrir otra web', 'mal'); if (window.zeroNav) window.zeroNav({ host: M.host, url: M.urlActual }); return; }
-    stage.classList.add('real'); abierto = true; M.acta = null; ponEstado('Abriendo en la celda…'); avisaTam();
+    if (M.sellada) { ponEstado('Burbuja sellada: reanuda o destruye la burbuja antes de abrir otra web', 'mal'); if (window.zeroNav) window.zeroNav({ host: M.host, url: M.urlActual }); return; }
+    stage.classList.add('real'); abierto = true; M.acta = null; ponEstado('Abriendo en la burbuja…'); avisaTam();
     try { const h = new URL(u).host; if (window.zeroNav) window.zeroNav({ host: h, url: u }); } catch (_) {}
     if (M.estado === 'lista' && ws && ws.readyState === 1) env({ t: 'abrir', url: u }); else { pendiente = u; conecta(); }
     setTimeout(() => cv.focus(), 50);
@@ -161,8 +161,8 @@
   M.modo = (observatorio) => { M.observatorio = !!observatorio; env({ t: 'modo', observatorio: M.observatorio }); };
   M.ultraPon = (on) => env({ t: 'modo', ultra: !!on });
   M.nivel = (n) => { M.nivelActual = n; env({ t: 'modo', nivel: n }); };
-  M.permitir = (clave, on) => env({ t: 'permitir', clave, on: !!on });
-  M.destruir = () => { ponEstado('Sellando y destruyendo la celda…'); env({ t: 'destruir' }); };
+  M.permitir = (clave, on, limpia) => env({ t: 'permitir', clave, on: !!on, ...(Array.isArray(limpia) && limpia.length ? { limpia: limpia.slice(0, 500) } : {}) });
+  M.destruir = () => { ponEstado('Sellando y destruyendo la burbuja…'); env({ t: 'destruir' }); };
   M.pestana = (accion, id, url) => env({ t: 'pestana', accion, id, url });
   M.descarga = (accion, id) => env({ t: 'descarga', accion, id });
   M.sellar = () => env({ t: 'alerta', accion: 'sellar' });
