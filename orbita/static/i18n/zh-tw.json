@@ -2117,7 +2117,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "ZERO 瀏覽器在遠離你裝置的地方開啟網站：到達你裝置的只有影像。這能降低風險，但沒有任何工具能防範一切。",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "要刪除 ZERO 瀏覽器在這裡儲存的內容嗎：攔截、公司、國家和透視紀錄？這不會刪除其他網站或其他裝置上的任何內容。",
   "¿Cómo funciona el navegador ZERO?": "ZERO 瀏覽器如何運作？",
-  "Navegador ZERO": "ZERO 瀏覽器"
+  "Navegador ZERO": "ZERO 瀏覽器",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "無後量子保護的工作階段已暫停：對方使用的是舊版本。只有在你同意後才會繼續。",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "對方使用的是沒有後量子保護的版本。未經你的許可，我不會繼續。",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "你已同意在這段對話中不使用後量子保護繼續。",
+  "Ir al navegador ZERO": "前往 ZERO 瀏覽器"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "Binubuksan ng ZERO browser ang website nang malayo sa iyong device: mga larawan lang ang dumarating sa iyong device. Nakababawas ito ng panganib, pero walang tool na nagpoprotekta laban sa lahat.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Buburahin ko ba ang na-save dito ng ZERO browser: mga pagputol, kumpanya, bansa at X-Ray? Walang mabubura sa ibang website o sa ibang device.",
   "¿Cómo funciona el navegador ZERO?": "Paano gumagana ang ZERO browser?",
-  "Navegador ZERO": "ZERO browser"
+  "Navegador ZERO": "ZERO browser",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Itinigil ang session na walang post-quantum na proteksyon: mas lumang bersiyon ang gamit ng kausap mo. Magpapatuloy lang ito kung tatanggapin mo.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Bersiyong walang post-quantum na proteksyon ang gamit ng kausap mo. Hindi ako magpapatuloy nang walang pahintulot mo.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Tinanggap mong magpatuloy nang walang post-quantum na proteksyon sa usapang ito.",
+  "Ir al navegador ZERO": "Pumunta sa ZERO browser"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

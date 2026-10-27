@@ -2117,7 +2117,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "O navegador ZERO abre o site longe do teu dispositivo: ao teu dispositivo só chegam imagens. Isso reduz riscos, mas nenhuma ferramenta protege de tudo.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Apago o que o navegador ZERO guardou aqui: cortes, empresas, países e Radiografias? Não apaga nada de outros sites nem de outros dispositivos.",
   "¿Cómo funciona el navegador ZERO?": "Como funciona o navegador ZERO?",
-  "Navegador ZERO": "Navegador ZERO"
+  "Navegador ZERO": "Navegador ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Sessão sem proteção pós-quântica em pausa: a outra pessoa usa uma versão anterior. Só continua se tu aceitares.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "A outra pessoa usa uma versão sem proteção pós-quântica. Não continuo sem a tua permissão.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Aceitaste continuar sem proteção pós-quântica nesta conversa.",
+  "Ir al navegador ZERO": "Ir para o navegador ZERO"
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

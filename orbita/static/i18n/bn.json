@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "ZERO ব্রাউজার ওয়েবসাইটটি আপনার ডিভাইস থেকে দূরে খোলে: আপনার ডিভাইসে শুধু ছবি পৌঁছায়। এতে ঝুঁকি কমে, তবে কোনো টুলই সবকিছু থেকে রক্ষা করে না।",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "ZERO ব্রাউজার এখানে যা সংরক্ষণ করেছে তা কি মুছে দেব: ব্লক, কোম্পানি, দেশ আর এক্স-রে? এতে অন্য ওয়েবসাইট বা অন্য ডিভাইস থেকে কিছুই মোছে না।",
   "¿Cómo funciona el navegador ZERO?": "ZERO ব্রাউজার কীভাবে কাজ করে?",
-  "Navegador ZERO": "ZERO ব্রাউজার"
+  "Navegador ZERO": "ZERO ব্রাউজার",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "পোস্ট-কোয়ান্টাম সুরক্ষা ছাড়া সেশন থামানো হয়েছে: অন্য ব্যক্তি একটি পুরোনো সংস্করণ ব্যবহার করছেন। আপনি মেনে নিলে তবেই এটি চলবে।",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "অন্য ব্যক্তি পোস্ট-কোয়ান্টাম সুরক্ষা ছাড়া একটি সংস্করণ ব্যবহার করছেন। আপনার অনুমতি ছাড়া আমি এগোব না।",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "আপনি এই কথোপকথনে পোস্ট-কোয়ান্টাম সুরক্ষা ছাড়া চালিয়ে যেতে সম্মতি দিয়েছেন।",
+  "Ir al navegador ZERO": "ZERO ব্রাউজারে যান"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

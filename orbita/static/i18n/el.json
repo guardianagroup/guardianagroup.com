@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "Το πρόγραμμα περιήγησης ZERO ανοίγει τον ιστότοπο μακριά από τη συσκευή σου: στη συσκευή σου φτάνουν μόνο εικόνες. Αυτό μειώνει τους κινδύνους, αλλά κανένα εργαλείο δεν προστατεύει από όλα.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Να διαγράψω ό,τι έχει αποθηκεύσει εδώ το πρόγραμμα περιήγησης ZERO: αποκοπές, εταιρείες, χώρες και Ακτινογραφίες; Δεν διαγράφει τίποτα από άλλους ιστότοπους ή άλλες συσκευές.",
   "¿Cómo funciona el navegador ZERO?": "Πώς λειτουργεί το πρόγραμμα περιήγησης ZERO;",
-  "Navegador ZERO": "Πρόγραμμα περιήγησης ZERO"
+  "Navegador ZERO": "Πρόγραμμα περιήγησης ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Η συνεδρία χωρίς μετακβαντική προστασία τέθηκε σε παύση: το άλλο άτομο χρησιμοποιεί παλαιότερη έκδοση. Συνεχίζει μόνο αν το αποδεχτείτε.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Το άλλο άτομο χρησιμοποιεί έκδοση χωρίς μετακβαντική προστασία. Δεν συνεχίζω χωρίς την άδειά σας.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Αποδεχτήκατε να συνεχίσετε χωρίς μετακβαντική προστασία σε αυτή τη συνομιλία.",
+  "Ir al navegador ZERO": "Μετάβαση στο πρόγραμμα περιήγησης ZERO"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

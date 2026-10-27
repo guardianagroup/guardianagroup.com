@@ -2117,7 +2117,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "يفتح متصفح ZERO الموقع بعيدًا عن جهازك: لا يصل إلى جهازك إلا الصور. هذا يقلّل المخاطر، لكن لا توجد أداة تحمي من كل شيء.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "هل أحذف ما حفظه متصفح ZERO هنا: القطوع والشركات والدول والأشعة؟ لا يحذف ذلك شيئًا من مواقع أخرى ولا من أجهزة أخرى.",
   "¿Cómo funciona el navegador ZERO?": "كيف يعمل متصفح ZERO؟",
-  "Navegador ZERO": "متصفح ZERO"
+  "Navegador ZERO": "متصفح ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "أُوقفت الجلسة التي لا تتمتع بحماية ما بعد الكم: يستخدم الشخص الآخر نسخة أقدم. لن تستمر إلا إذا وافقت أنت.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "يستخدم الشخص الآخر نسخة بلا حماية ما بعد الكم. لن أتابع دون إذنك.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "وافقت على المتابعة دون حماية ما بعد الكم في هذه المحادثة.",
+  "Ir al navegador ZERO": "انتقل إلى متصفح ZERO"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

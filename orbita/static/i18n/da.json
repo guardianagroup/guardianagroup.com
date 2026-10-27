@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "ZERO-browseren åbner webstedet langt fra din enhed: kun billeder når frem til din enhed. Det mindsker risikoen, men intet værktøj beskytter mod alt.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Skal jeg slette det, ZERO-browseren har gemt her: blokeringer, virksomheder, lande og Røntgen? Det sletter intet fra andre websteder eller andre enheder.",
   "¿Cómo funciona el navegador ZERO?": "Hvordan fungerer ZERO-browseren?",
-  "Navegador ZERO": "ZERO-browseren"
+  "Navegador ZERO": "ZERO-browseren",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Session uden post-kvantebeskyttelse sat på pause: den anden person bruger en ældre version. Den fortsætter kun, hvis du accepterer det.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Den anden person bruger en version uden post-kvantebeskyttelse. Jeg fortsætter ikke uden din tilladelse.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Du har accepteret at fortsætte uden post-kvantebeskyttelse i denne samtale.",
+  "Ir al navegador ZERO": "Gå til ZERO-browseren"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

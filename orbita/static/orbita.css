@@ -1084,3 +1084,31 @@ body.mapa-cerca:not(.limpio) .zoom { background: none; padding: 0; backdrop-filt
 @media (max-height: 700px) { .zoom { top: calc(max(124px, 50% - 300px) + 196px); gap: 10px; } .zoom .zgrupo button { height: 36px; } }
 /* En pantallas bajas la tarjeta «El mundo, ahora» se aparta a la izquierda de la botonera para no tocarla */
 @media (max-height: 860px) { #directo { right: calc(132px + env(safe-area-inset-right, 0px)); } }
+
+/* 27 Oct 2026, 11:07 (dueño: «me gusta la base de NÚCLEO… los botones, el color, al pasar el cursor se iluminan las cosas…
+   a Órbita, a todo»). Las letras vienen de diseno.css (IBM Plex Sans); aquí, los controles del planeta con la forma y el
+   brillo de los botones de NÚCLEO, y la frase en la letra fina de NÚCLEO. */
+.lugar-btn { border-color: rgba(156,195,228,.28); background: rgba(10,14,20,.72); color: #dbe9f4; transition: background .15s, border-color .15s, color .15s; }
+.lugar-btn:hover, .lugar-btn:focus-visible { background: rgba(156,195,228,.14); border-color: rgba(156,195,228,.55); color: #F4F6F8; }
+.capas { border-color: rgba(156,195,228,.28); background: rgba(10,14,20,.72); }
+.capas button { color: #c9d6e2; }
+.capas button:hover { color: #F4F6F8; background: rgba(156,195,228,.12); }
+.capas button[aria-pressed="true"] { background: rgba(156,195,228,.18); color: #F4F6F8; }
+.idiomas .idioma-actual { border-color: rgba(156,195,228,.28); background: rgba(10,14,20,.72); transition: background .15s, border-color .15s; }
+.idiomas .idioma-actual:hover, .idiomas .idioma-actual[aria-expanded="true"] { border-color: rgba(156,195,228,.55); background: rgba(156,195,228,.14); }
+.zoom button { border-color: rgba(156,195,228,.28); background: rgba(10,14,20,.72); color: #dbe9f4; transition: background .15s, border-color .15s, color .15s; }
+.zoom button:hover:not(:disabled) { border-color: rgba(156,195,228,.55); background: rgba(156,195,228,.14); color: #F4F6F8; }
+.sat-vista { border-color: rgba(156,195,228,.28); background: rgba(9,14,21,.9); }
+.sat-vista .seg { border-color: rgba(156,195,228,.28); }
+.sat-vista .seg button:hover:not(:disabled), .sat-vista .orb button:hover { background: rgba(156,195,228,.12); color: #F4F6F8; }
+.dato { border-color: rgba(156,195,228,.22); background: rgba(12,18,26,.82); transition: border-color .2s, background .2s; }
+.dato:hover { border-color: rgba(156,195,228,.6); background: rgba(20,32,46,.9); }
+.nav-web:hover { background: rgba(156,195,228,.14); color: #F4F6F8; }
+.frase { font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-weight: 300; letter-spacing: -.015em; }
+:is(:lang(ru), :lang(uk), :lang(bg), :lang(el), :lang(vi), :lang(zh-Hans), :lang(zh-Hant), :lang(ja)) .frase { font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+.radio-panel .t { font-family: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-weight: 300; letter-spacing: -.015em; }
+@media (prefers-reduced-motion: reduce) { .lugar-btn, .zoom button, .dato { transition: none; } }
+/* con las letras de NÚCLEO (algo más anchas) la barra de capas cabe en el centro a 1440 px si se aprietan un poco los botones */
+.capas { gap: 2px; }
+.capas button { padding: 7px 12px 7px 9px; gap: 7px; }
+.lugar-btn { padding: 8px 11px; gap: 7px; }

@@ -2117,7 +2117,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "Trình duyệt ZERO mở trang web ở xa thiết bị của bạn: chỉ có hình ảnh đến thiết bị của bạn. Điều đó giảm rủi ro, nhưng không công cụ nào bảo vệ được mọi thứ.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Tôi xóa những gì trình duyệt ZERO đã lưu ở đây nhé: các lần chặn, công ty, quốc gia và X-quang? Việc này không xóa gì của trang web khác hay thiết bị khác.",
   "¿Cómo funciona el navegador ZERO?": "Trình duyệt ZERO hoạt động thế nào?",
-  "Navegador ZERO": "Trình duyệt ZERO"
+  "Navegador ZERO": "Trình duyệt ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Đã tạm dừng phiên không có bảo vệ hậu lượng tử: người kia đang dùng phiên bản cũ hơn. Phiên chỉ tiếp tục nếu bạn chấp nhận.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Người kia đang dùng phiên bản không có bảo vệ hậu lượng tử. Tôi sẽ không tiếp tục nếu không có sự cho phép của bạn.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Bạn đã chấp nhận tiếp tục mà không có bảo vệ hậu lượng tử trong cuộc trò chuyện này.",
+  "Ir al navegador ZERO": "Đến trình duyệt ZERO"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "Pelayar ZERO membuka laman jauh dari peranti anda: hanya imej sampai ke peranti anda. Itu mengurangkan risiko, tetapi tiada alat yang melindungi daripada segala-galanya.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Padam apa yang telah disimpan oleh pelayar ZERO di sini: pemotongan, syarikat, negara dan X-Ray? Ini tidak memadam apa-apa daripada laman lain atau peranti lain.",
   "¿Cómo funciona el navegador ZERO?": "Bagaimana pelayar ZERO berfungsi?",
-  "Navegador ZERO": "Pelayar ZERO"
+  "Navegador ZERO": "Pelayar ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Sesi tanpa perlindungan pasca-kuantum dihentikan: orang satu lagi menggunakan versi lama. Sesi hanya diteruskan jika anda menerimanya.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Orang satu lagi menggunakan versi tanpa perlindungan pasca-kuantum. Saya tidak akan meneruskan tanpa kebenaran anda.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Anda telah bersetuju untuk meneruskan tanpa perlindungan pasca-kuantum dalam perbualan ini.",
+  "Ir al navegador ZERO": "Pergi ke pelayar ZERO"
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

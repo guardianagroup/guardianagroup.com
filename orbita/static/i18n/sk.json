@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "Prehliadač ZERO otvára web ďaleko od tvojho zariadenia: do tvojho zariadenia prídu len obrázky. To znižuje riziká, ale žiadny nástroj neochráni pred všetkým.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Mám vymazať, čo prehliadač ZERO uložil tu: odstrihnutia, firmy, krajiny a Röntgeny? Nevymaže to nič z iných webov ani z iných zariadení.",
   "¿Cómo funciona el navegador ZERO?": "Ako funguje prehliadač ZERO?",
-  "Navegador ZERO": "Prehliadač ZERO"
+  "Navegador ZERO": "Prehliadač ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Relácia bez postkvantovej ochrany pozastavená: druhá osoba používa staršiu verziu. Pokračuje, len ak to prijmete.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Druhá osoba používa verziu bez postkvantovej ochrany. Bez vášho súhlasu nepokračujem.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Pokračovanie bez postkvantovej ochrany v tejto konverzácii bolo prijaté.",
+  "Ir al navegador ZERO": "Prejsť do prehliadača ZERO"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

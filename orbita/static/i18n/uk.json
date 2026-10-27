@@ -2117,7 +2117,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "Браузер ZERO відкриває сайт далеко від вашого пристрою: на ваш пристрій надходять лише зображення. Це зменшує ризики, але жоден інструмент не захищає від усього.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "Видалити те, що браузер ZERO зберіг тут: відсікання, компанії, країни та Рентген? Це нічого не видаляє з інших сайтів чи інших пристроїв.",
   "¿Cómo funciona el navegador ZERO?": "Як працює браузер ZERO?",
-  "Navegador ZERO": "Браузер ZERO"
+  "Navegador ZERO": "Браузер ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "Сеанс без постквантового захисту призупинено: інша людина використовує старішу версію. Він продовжиться, лише якщо ви погодитеся.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "Інша людина використовує версію без постквантового захисту. Без вашого дозволу я не продовжу.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "Ви погодилися продовжити без постквантового захисту в цій розмові.",
+  "Ir al navegador ZERO": "Перейти до браузера ZERO"
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

@@ -2116,7 +2116,11 @@
   "El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.": "مرورگر ZERO وب‌سایت را دور از دستگاه شما باز می‌کند: فقط تصاویر به دستگاه شما می‌رسد. این کار خطرها را کم می‌کند، اما هیچ ابزاری از همه‌چیز محافظت نمی‌کند.",
   "¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.": "آنچه مرورگر ZERO اینجا ذخیره کرده است پاک شود: قطع‌ها، شرکت‌ها، کشورها و پرتونگاری‌ها؟ این کار چیزی از وب‌سایت‌ها یا دستگاه‌های دیگر پاک نمی‌کند.",
   "¿Cómo funciona el navegador ZERO?": "مرورگر ZERO چطور کار می‌کند؟",
-  "Navegador ZERO": "مرورگر ZERO"
+  "Navegador ZERO": "مرورگر ZERO",
+  "Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.": "نشست بدون محافظت پساکوانتومی متوقف شد: طرف مقابل از نسخهٔ قدیمی‌تری استفاده می‌کند. فقط اگر شما بپذیرید ادامه می‌یابد.",
+  "La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.": "طرف مقابل از نسخه‌ای بدون محافظت پساکوانتومی استفاده می‌کند. بدون اجازهٔ شما ادامه نمی‌دهم.",
+  "Has aceptado seguir sin protección postcuántica en esta conversación.": "پذیرفته‌اید که این گفتگو بدون محافظت پساکوانتومی ادامه یابد.",
+  "Ir al navegador ZERO": "رفتن به مرورگر ZERO"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",
