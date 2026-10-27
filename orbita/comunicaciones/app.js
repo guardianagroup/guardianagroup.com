@@ -37,7 +37,7 @@
   let YO = null;            // { firma, acuerdo, firmaPub, acuerdoPub, nombre, reposo, huella }
   const CONVS = new Map();  // sala → conv
   let ACTUAL = null;        // sala abierta
-  let R = null, LL = null, LLAMADA = null; // LLAMADA: la conversación de la llamada en curso
+  let R = null;
   const uuid = () => (crypto.randomUUID ? crypto.randomUUID() : C.hex(C.azar(16)));
   const inicial = (n) => ((n || '').trim()[0] || '·').toUpperCase();
 
@@ -56,14 +56,10 @@
       y.nueva = true;
     }
     YO = y; YO.huella = await C.huella(y.firmaPub, y.acuerdoPub);
-    $('#yonombre').value = YO.nombre || '';
-    $('#yoavatar').textContent = inicial(YO.nombre);
-    $('#yohuella').textContent = C.hex(YO.huella).slice(0, 32).replace(/(.{8})/g, '$1 ').trim();
   }
   async function guardaNombre(n) {
     YO.nombre = String(n || '').trim().slice(0, 40);
     try { const y = await BD.saca('yo', 'yo'); y.nombre = YO.nombre; await BD.pon('yo', y); } catch (e) { console.warn('nombre', e); }
-    $('#yoavatar').textContent = inicial(YO.nombre);
     for (const c of CONVS.values()) if (c.sesion) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
   }
 
@@ -87,25 +83,61 @@
     for (const x of xs) await preparaConv(x);
     pintaLista();
   }
+  // Invitación por código (dueño, 26 Oct 20:00: «un número en pantalla, la otra persona lo pone; sencillísimo»). El secreto
+  // de la conversación (32 bytes) se cierra con una clave derivada del código (PBKDF2) y ese «sobre» se deja en el relé
+  // durante 10 minutos, una sola vez; el relé no puede abrirlo sin el código y limita los intentos de búsqueda.
   async function creaInvitacion() {
+    if (!R.abierto) { aviso(T('Sin conexión: espera un momento.')); return; }
+    for (const c of [...CONVS.values()]) await destruye(c, true);
     const semilla = C.nuevaSemilla();
     const d = await C.deSemilla(semilla);
     const c = convNueva(d.sala, semilla, 'invita');
     await guardaConv(c); await preparaConv(c);
-    pintaLista(); abreConv(c.id); muestraInvitacion(c);
+    pintaLista(); abreConv(c.id);
+    muestraInvitacion(c); await publicaCodigo(c);
   }
-  async function aceptaInvitacion(enlace) {
+  async function publicaCodigo(c) {
+    for (let intento = 0; intento < 3; intento++) {
+      const codigo = C.nuevoCodigo(), sal = C.azar(16), iv = C.azar(12);
+      const k = await C.claveDeCodigo(codigo, sal);
+      const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv, additionalData: C.te.encode('GUARDIANA sobre') }, k, c.semilla));
+      const r = await R.invita(codigo, C.b64u(C.cat(iv, ct)), C.b64u(sal));
+      if (r && r.ok) { c.codigo = codigo; c.codigoCaduca = r.caduca || (Date.now() + 10 * 60 * 1000); pintaCodigo(c); pintaLista(); return true; }
+      if (!r || r.por !== 'repetido') break;
+    }
+    c.codigo = null; pintaCodigo(c); aviso(T('No se pudo crear el código: inténtalo otra vez.')); return false;
+  }
+  const codigoBonito = (k) => k ? k.replace(/(\d{3})(?=\d)/g, '$1 ') : '··· ··· ···';
+  async function aceptaCodigo(texto) {
+    const codigo = String(texto || '').replace(/\D/g, '');
+    if (codigo.length !== 9) return 'formato';
+    const r = await R.busca(codigo);
+    if (!r || !r.ok) return (r && r.por) || 'no vale';
     let semilla = null;
-    try { const m = String(enlace).match(/#i=([A-Za-z0-9_-]{43})/); if (m) semilla = C.deB64u(m[1]); } catch (_) {}
-    if (!semilla || semilla.length !== 32) return false;
+    try {
+      const sobre = C.deB64u(r.sobre), sal = C.deB64u(r.sal);
+      const k = await C.claveDeCodigo(codigo, sal);
+      semilla = new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: sobre.subarray(0, 12), additionalData: C.te.encode('GUARDIANA sobre') }, k, sobre.subarray(12)));
+    } catch (_) { return 'no vale'; }
+    if (semilla.length !== 32) return 'no vale';
+    return (await aceptaSemilla(semilla)) ? 'ok' : 'no vale';
+  }
+  async function aceptaSemilla(semilla) {
     const d = await C.deSemilla(semilla);
     if (CONVS.has(d.sala)) { abreConv(d.sala); return true; }
+    for (const c of [...CONVS.values()]) await destruye(c, true);
     const c = convNueva(d.sala, semilla, 'acepta');
     await guardaConv(c); await preparaConv(c);
     pintaLista(); abreConv(c.id);
     return true;
   }
-  function enlaceDe(c) { return ORIGEN + '#i=' + C.b64u(c.semilla); }
+  // enlaces #i= antiguos (ya no se muestran, pero uno guardado sigue abriendo su conversación)
+  async function aceptaInvitacion(enlace) {
+    let semilla = null;
+    try { const m = String(enlace).match(/#i=([A-Za-z0-9_-]{43})/); if (m) semilla = C.deB64u(m[1]); } catch (_) {}
+    if (!semilla || semilla.length !== 32) return false;
+    return aceptaSemilla(semilla);
+  }
 
   // ---------- presentación y sesión ----------
   // Quién inicia: de las dos huellas, la menor. Quien inicia se presenta cuando llega o ve llegar; quien responde solo
@@ -142,7 +174,7 @@
       if (firmaPub.length !== 65 || acuerdoPub.length !== 65 || ef.length !== 65 || epoca.length !== 16 || (resp && resp.length !== 16)) return;
       const huella = await C.huella(firmaPub, acuerdoPub);
       if (C.hex(huella) === C.hex(YO.huella)) return; // yo mismo desde otra pestaña
-      if (c.huella && C.hex(c.huella) !== C.hex(huella)) { R.manda(c.id, de, new Uint8Array([5])); return; } // la invitación ya es de otra persona
+      if (c.huella && C.hex(c.huella) !== C.hex(huella)) { R.manda(c.id, de, new Uint8Array([5])); if (!c.intrusoAvisado) { c.intrusoAvisado = true; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Alguien con otra identidad intentó entrar en esta conversación: rechazado.'); pintaRadio(c); } return; } // la invitación ya es de otra persona
       // una época nunca se acepta dos veces (repetición)
       c.epocasVistas = c.epocasVistas || new Set(); const eh = C.hex(epoca); if (c.epocasVistas.has(eh)) return; c.epocasVistas.add(eh); if (c.epocasVistas.size > 64) c.epocasVistas.delete(c.epocasVistas.values().next().value);
       const efMia = resp && c.efs ? c.efs.get(C.hex(resp)) : null;
@@ -158,7 +190,7 @@
       if (!soyInicio(c)) { await presenta(c, { epoca, ef }); await derivaSesion(c, ef, c.ef); }
       else if (esResp) await derivaSesion(c, ef, efMia);
       else if (!resp) await presenta(c, null);
-      if (nueva) { await anotaSistema(c, 'Conversación establecida: cifrada de extremo a extremo. Comprobad el número de seguridad cuando podáis.'); cierraHoja('h-invita'); }
+      if (nueva) { if (c.codigo) R.retira(c.codigo); c.codigo = null; clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Conversación establecida: cifrada de extremo a extremo. Comprobad el número de seguridad cuando podáis.'); if (ACTUAL === c.id) abreConv(c.id); }
       if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
     } catch (e) { console.warn('presentación', e); }
@@ -214,14 +246,14 @@
     const ses = c.sesiones.get(sid);
     if (!ses) { R.manda(c.id, de, new Uint8Array([4])); return; } // no conozco esa sesión: que se presente otra vez
     let j;
-    try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), C.cat(b.subarray(0, 13), ses.hash)))); } catch (e) { console.warn('mensaje ilegible', e.message); return; }
+    try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), C.cat(b.subarray(0, 13), ses.hash)))); } catch (e) { if (!/repetido|saltados/.test(e.message)) { c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); pintaRadio(c); } return; }
     if (c.suId !== de) return;
     if (!ses.confirmada) { ses.confirmada = true; if (c.sesion === ses) pintaCabecera(c); } // la otra persona tiene la misma clave: sesión confirmada
     switch (j.tipo) {
       case 'texto': {
         if (c.mensajes.some((x) => x.id === j.id)) { enviaControl(c, { tipo: 'ack', ids: [j.id] }); return; }
         const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'texto', texto: String(j.texto || '').slice(0, 20000) };
-        await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true);
+        await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true); pintaRadio(c);
         enviaControl(c, { tipo: 'ack', ids: [m.id] });
         if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c); else avisaSonido();
         return;
@@ -237,8 +269,8 @@
       case 'archivo-ack': { const a = c.archivos.get(j.id); if (a && a.envio) { a.ack = Math.max(a.ack, +j.hasta || 0); a.sigue && a.sigue(); } return; }
       case 'archivo-listo': { const a = c.archivos.get(j.id); if (a && a.envio) { a.listo = true; a.sigue && a.sigue(); } return; }
       case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); } if (a) c.archivos.delete(j.id); return; }
-      case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); if (m && m.estado !== 'recibido') { m.estado = 'fallo'; await guardaMensaje(c, m); pintaMensaje(c, m, true); } return; }
-      case 'llamada': { if (LL.ocupado && LLAMADA && LLAMADA !== c) { if (j.acto === 'oferta') enviaControl(c, { tipo: 'llamada', acto: 'ocupado', id: j.id }); return; } if (j.acto === 'oferta') { LLAMADA = c; abreConv(c.id); } return LL.recibe(j); }
+      case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); } return; }
+      case 'llamada': return; // esta versión no tiene llamadas (dueño, 26 Oct 20:01)
       case 'destruir': return destruyeLocal(c, true);
       default: return;
     }
@@ -285,7 +317,7 @@
       const clave = C.azar(32), trozos = Math.ceil(f.size / TROZO) || 1;
       const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'archivo', archivo: { nombre: (f.name || 'archivo').slice(0, 180), tam: f.size, mime: f.type || 'application/octet-stream', clave: C.b64u(clave), trozos, progreso: 0 } };
       c.archivos.set(m.id, { envio: true, f, clave: await C.aes(clave), ack: 0, trozos, listo: false });
-      if (f.size <= MAX_MEMORIA && /^image\//.test(m.archivo.mime)) await BD.pon('arch', { id: m.id, conv: c.id, blob: f, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: f.size });
+      if (f.size <= MAX_MEMORIA && /^(image|audio)\//.test(m.archivo.mime)) await BD.pon('arch', { id: m.id, conv: c.id, blob: f, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: f.size });
       await guardaMensaje(c, m); c.mensajes.push(m); c.cola.push(m); pintaMensaje(c, m); actualizaUltimo(c, m);
     }
     enviaCola(c);
@@ -336,9 +368,9 @@
     const fid = C.hex(b.subarray(1, 17)), i = new DataView(b.buffer, b.byteOffset).getUint32(17);
     const m = c.mensajes.find((x) => x.tipo === 'archivo' && x.dir === 'suya' && C.hex(fidDe(x.id)) === fid);
     const a = m && c.archivos.get(m.id); if (!a || a.envio || !a.listo || i >= a.trozos) return;
-    let claro; try { claro = await C.abre(a.clave, i, b.subarray(21), b.subarray(0, 21)); } catch (_) { return; }
+    let claro; try { claro = await C.abre(a.clave, i, b.subarray(21), b.subarray(0, 21)); } catch (_) { return incidencia(c, m, a, 'Un trozo del archivo no superó la comprobación de integridad: envío cortado.'); }
     const esperado = i < a.trozos - 1 ? TROZO : m.archivo.tam - (a.trozos - 1) * TROZO;
-    if (claro.length !== esperado) return; // longitud que no cuadra con el anuncio: fuera
+    if (claro.length !== esperado) return incidencia(c, m, a, 'Un trozo del archivo no coincide con lo anunciado: envío cortado.');
     if (a.partes) { if (a.partes[i]) return; a.partes[i] = claro; a.tengo++; }
     else {
       // al disco, en orden: lo que llega adelantado espera en memoria (como mucho la ventana)
@@ -354,10 +386,18 @@
       if (a.partes) { const blob = new Blob(a.partes, { type: m.archivo.mime }); ok = blob.size === m.archivo.tam; if (ok) await BD.pon('arch', { id: m.id, conv: c.id, blob, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: blob.size }); }
       else { try { await a.escritor.close(); } catch (_) { ok = false; } }
       m.estado = ok ? 'recibido' : 'fallo'; m.archivo.progreso = 1;
-      await guardaMensaje(c, m); pintaMensaje(c, m, true);
+      await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c);
       enviaControl(c, { tipo: 'archivo-fin', id: m.id, ok });
       if (ok && !(ACTUAL === c.id && document.visibilityState === 'visible')) avisaSonido();
     }
+  }
+  // Manipulación detectada (ronda del dueño, 26 Oct 20:03): se corta el envío al instante, queda marcado en coral y anotado.
+  async function incidencia(c, m, a, texto) {
+    c.incidencias = (c.incidencias || 0) + 1;
+    if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(m.id); }
+    enviaControl(c, { tipo: 'archivo-cancel', id: m.id, por: 'integridad' });
+    m.estado = 'fallo'; m.archivo.motivo = T('cortado: datos alterados'); await guardaMensaje(c, m); pintaMensaje(c, m, true);
+    await anotaSistema(c, texto); aviso(T(texto)); pintaRadio(c);
   }
   async function abreArchivo(m, guardar) {
     const r = await BD.saca('arch', m.id); if (!r) return aviso(m.archivo.enDisco ? T('Ese archivo se guardó directamente en tu disco, en la carpeta que elegiste.') : T('Este archivo ya no está en este navegador.'));
@@ -369,35 +409,36 @@
   // ---------- destruir ----------
   async function destruyeLocal(c, porElla, silencio) {
     if (c.estado === 'destruida') return;
-    c.estado = 'destruida'; if (LL.ocupado && LLAMADA === c) LL.colgar();
+    c.estado = 'destruida';
     R.sale(c.id); CONVS.delete(c.id);
     await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await BD.borra('conv', c.id);
     if (ACTUAL === c.id) { cierraConv(); }
     pintaLista();
-    if (!silencio) aviso(porElla ? T('La otra persona ha destruido la conversación: se ha borrado también aquí.') : T('Conversación destruida aquí; la otra persona ha recibido la orden de borrado.'));
+    if (!silencio) aviso(porElla ? T('La otra persona ha terminado la conversación: se ha borrado también aquí.') : T('Conversación terminada y borrada; el otro equipo ha recibido la orden de borrado.'));
   }
   // Destruir con la otra persona ausente: se borra todo aquí y queda una lápida (sin mensajes) que, en cuanto la otra
   // persona entre, le manda «destruir» y desaparece.
-  async function destruye(c) {
-    if (enLinea(c)) { enviaControl(c, { tipo: 'destruir' }); await new Promise((r) => setTimeout(r, 250)); await destruyeLocal(c, false); return; }
-    if (!c.huella) { await destruyeLocal(c, false); return; }
+  async function destruye(c, silencio) {
+    if (c.codigo) R.retira(c.codigo);
+    if (enLinea(c)) { enviaControl(c, { tipo: 'destruir' }); await new Promise((r) => setTimeout(r, 250)); await destruyeLocal(c, false, silencio); return; }
+    if (!c.huella) { await destruyeLocal(c, false, true); return; }
     c.estado = 'destruida_pendiente'; c.mensajes = []; c.cola = []; c.ultimoTexto = null; c.noLeidos = 0;
     await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await guardaConv(c);
     if (ACTUAL === c.id) cierraConv();
-    pintaLista(); aviso(T('Conversación destruida aquí; en el otro lado, en cuanto esa persona entre.'));
+    pintaLista(); aviso(T('Conversación terminada y borrada aquí; en el otro equipo, en cuanto esa persona entre.'));
   }
 
   // ---------- relé ----------
   function arrancaRele() {
     R = GuardianaRele.crea();
     const estadoRele = (txt, cls) => { const e = $('#rele'); e.className = 'rele ' + (cls || ''); $('#reletxt').textContent = txt; };
-    R.on('abierto', () => { estadoRele(T('Relé conectado'), 'si'); });
-    R.on('hola', ({ region, llamadas }) => { estadoRele(T('Relé') + (region ? ': ' + region : '') + (llamadas ? '' : ' · ' + T('sin llamadas')), 'si'); for (const c of CONVS.values()) pintaCabecera(c); });
-    R.on('cerrado', () => { estadoRele(T('Sin conexión con el relé: reintentando…'), 'no'); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; pintaCabecera(c); } pintaLista(); if (LL.ocupado) LL.colgar(); });
+    R.on('abierto', () => { estadoRele(T('Conectado'), 'si'); });
+    R.on('hola', () => { estadoRele(T('Conectado'), 'si'); for (const c of CONVS.values()) pintaCabecera(c); });
+    R.on('cerrado', () => { estadoRele(T('Sin conexión: reintentando…'), 'no'); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; pintaCabecera(c); } pintaLista(); });
     setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
     R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presenta(c, null, true)); pintaCabecera(c); pintaLista(); });
     R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) { c.sesion = null; enCola(c, () => presenta(c, null, true)); } pintaCabecera(c); pintaLista(); });
-    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; if (LL.ocupado && LLAMADA === c) LL.colgar(); } pintaCabecera(c); pintaLista(); });
+    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; } pintaCabecera(c); pintaLista(); });
     R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Esta conversación se ha abierto en otra pestaña: sigue allí.')); });
     // Las tramas de una conversación se procesan en orden (una detrás de otra): así un trozo de archivo nunca
     // adelanta al anuncio del archivo, ni un mensaje a la presentación que abre su sesión.
@@ -420,52 +461,50 @@
   const hora = (t) => new Date(t).toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit' });
   const fecha = (t) => { const d = new Date(t), h = new Date(); return d.toDateString() === h.toDateString() ? T('Hoy') : d.toLocaleDateString(LOC(), { weekday: 'long', day: 'numeric', month: 'long' }); };
   const diaDe = (t) => new Date(t).toDateString();
+  // Sin lista ni historial (dueño, 26 Oct 20:04): una conversación a la vez. Si hay una, se muestra; si no, el inicio.
   async function pintaLista() {
-    const ul = $('#convs'); ul.textContent = '';
-    const xs = [...CONVS.values()].filter((c) => c.estado !== 'destruida_pendiente').sort((a, b) => (b.ultimo || 0) - (a.ultimo || 0));
-    $('#sinconvs').hidden = xs.length > 0;
-    for (const c of xs) {
-      const li = document.createElement('li'); li.dataset.id = c.id; li.setAttribute('aria-current', String(ACTUAL === c.id));
-      const av = document.createElement('span'); av.className = 'gc-avatar'; av.textContent = c.estado === 'invitacion' ? '✉' : inicial(c.nombre); const i = document.createElement('i'); if (enLinea(c) || (!c.suId && c.miembros.size)) i.className = 'si'; av.append(i);
-      const b = document.createElement('b'); b.textContent = c.estado === 'invitacion' ? T('Invitación') : (c.nombre || T('Sin nombre'));
-      const s = document.createElement('span'); s.className = 'u';
-      if (c.estado === 'invitacion') s.textContent = T('Esperando a que la abran…');
-      else { const u = c.ultimoTexto ? await leeSellado(c.ultimoTexto) : null; s.textContent = u && u.texto ? u.texto : T('Cifrada de extremo a extremo'); }
-      const tm = document.createElement('time'); tm.textContent = c.ultimo && c.estado !== 'invitacion' ? (diaDe(c.ultimo) === diaDe(Date.now()) ? hora(c.ultimo) : new Date(c.ultimo).toLocaleDateString(LOC(), { day: '2-digit', month: '2-digit' })) : '';
-      li.append(av, b, s, tm);
-      if (c.noLeidos) { const em = document.createElement('em'); em.textContent = String(c.noLeidos); li.append(em); }
-      li.addEventListener('click', () => abreConv(c.id));
-      ul.append(li);
-    }
+    const xs = [...CONVS.values()].filter((c) => c.estado !== 'destruida_pendiente' && c.estado !== 'destruida');
+    if (!xs.length) { if (ACTUAL) cierraConv(); return; }
+    if (!ACTUAL || !CONVS.has(ACTUAL)) abreConv(xs.sort((a, b) => (b.creado || 0) - (a.creado || 0))[0].id);
   }
+
 
   // ---------- pantalla: conversación ----------
   async function abreConv(id) {
     const c = CONVS.get(id); if (!c) return;
     ACTUAL = id; await cargaMensajes(c);
-    $('#portada').hidden = true; $('#conv').hidden = false; $('#app').classList.add('en-conv');
-    pintaCabecera(c); pintaTodos(c); pintaLista();
-    if (c.estado === 'invitacion' && c.rol === 'invita') muestraInvitacion(c);
+    const inv = c.estado === 'invitacion' && c.rol === 'invita' && !c.huella;
+    $('#inicio').hidden = !inv; $('#conv').hidden = inv; $('#app').classList.toggle('en-conv', !inv);
+    if (inv) { $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = true; $('#paso-codigo').hidden = false; }
+    pintaCabecera(c); pintaTodos(c); pintaRadio(c); pintaLista();
+    if (c.estado === 'invitacion' && c.rol === 'invita') { muestraInvitacion(c); if (!c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); }
     marcaLeidos(c);
     if (matchMedia('(min-width: 761px)').matches) $('#texto').focus();
   }
-  function cierraConv() { ACTUAL = null; $('#conv').hidden = true; $('#portada').hidden = false; $('#app').classList.remove('en-conv'); pintaLista(); }
+  function cierraConv() { ACTUAL = null; $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; }
   function pintaCabecera(c) {
     if (ACTUAL !== c.id) return;
-    $('#cavatar').textContent = c.estado === 'invitacion' ? '✉' : inicial(c.nombre);
-    $('#cnombre').textContent = c.estado === 'invitacion' ? T('Invitación') : (c.nombre || T('Sin nombre'));
+    $('#cnombre').textContent = T('Conversación cifrada');
     const conf = $('#cconfianza'); conf.classList.remove('gc-sin-verificar');
     let txt;
     if (c.ocupada && !c.huella) txt = T('Esta invitación ya la usó otra persona.');
-    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo el cifrado…') : T('Esperando a que la otra persona abra el enlace…');
+    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo el cifrado…') : T('Esperando a que la otra persona escriba el código…');
     else if (!R.abierto) txt = T('Sin conexión con el relé');
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
     else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo el cifrado…');
     else txt = T('Cifrada de extremo a extremo') + ' · ' + (c.verificada ? T('verificada') : T('sin verificar'));
     if (c.huella && !c.verificada) conf.classList.add('gc-sin-verificar');
     conf.textContent = txt;
-    const puedeLlamar = enLinea(c) && (R.llamadas || LOCAL) && !LL.ocupado;
-    $('#llamarvoz').disabled = !puedeLlamar; $('#llamarvideo').disabled = !puedeLlamar;
+  }
+  // «Radiografía» permanente (dueño, 26 Oct 20:03): solo lo verificable, en todo momento
+  function pintaRadio(c) {
+    if (ACTUAL !== c.id) return;
+    const r = $('#radio'); if (!c.huella) { r.hidden = true; return; }
+    const msgs = c.mensajes.filter((m) => m.tipo === 'texto').length, arch = c.mensajes.filter((m) => m.tipo === 'archivo' && (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido')).length, inc = c.incidencias || 0;
+    r.hidden = false; r.className = 'radio' + (inc ? ' mal' : '');
+    $('#radiotxt').textContent = inc
+      ? inc + ' ' + (inc === 1 ? T('incidencia') : T('incidencias')) + ' · ' + T('envío cortado y anotado') + ' · ' + T('lo demás, íntegro')
+      : T('Cifrado de extremo a extremo') + ' · ' + msgs + ' ' + (msgs === 1 ? T('mensaje') : T('mensajes')) + ' · ' + arch + ' ' + (arch === 1 ? T('archivo') : T('archivos')) + ' · ' + T('todo íntegro, nadie lo ha tocado') + (c.verificada ? ' · ' + T('identidad verificada') : '');
   }
   function pintaTodos(c) {
     const ul = $('#mensajes'); ul.textContent = ''; ul.dataset.dia = '';
@@ -494,13 +533,14 @@
     bur.append(meta); li.append(bur); pintaEstado(m);
     if (!sinScroll && (abajo || m.dir === 'mia')) ul.scrollTop = ul.scrollHeight;
   }
-  const TICK1 = '<svg viewBox="0 0 16 11"><path d="M1 6l3.5 3.5L11 2"/></svg>', TICK2 = '<svg viewBox="0 0 16 11"><path d="M1 6l3.5 3.5L11 2M6 9.5L15 2"/></svg>';
+  const TICK1 = '<svg viewBox="0 0 16 11"><path d="M1 6l3.5 3.5L11 2"/></svg>', TICK2 = '<svg viewBox="0 0 16 11"><path d="M1 6l3.5 3.5L11 2M6 9.5L15 2"/></svg>', RELOJ = '<svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.6"/><path d="M6 3.3V6l1.9 1.2"/></svg>';
   function pintaEstado(m) {
     const li = $('#mensajes [data-id="' + m.id + '"]'); if (!li) return;
     const tk = li.querySelector('.gc-ticks'); if (!tk) return;
     tk.classList.toggle('gc-pendiente', m.estado === 'pendiente');
-    tk.innerHTML = m.estado === 'pendiente' || m.estado === 'enviado' ? TICK1 : m.estado === 'fallo' ? '' : TICK2;
-    tk.style.opacity = m.estado === 'leido' ? '1' : '.6';
+    tk.innerHTML = m.estado === 'pendiente' ? RELOJ : m.estado === 'enviado' ? TICK1 : m.estado === 'fallo' ? '' : TICK2;
+    tk.style.color = m.estado === 'leido' ? 'var(--gc-acero)' : 'var(--gc-suave)';
+    tk.style.opacity = '1';
     tk.title = m.estado === 'pendiente' ? T('Pendiente: saldrá cuando la otra persona entre') : m.estado === 'enviado' ? T('Enviado') : m.estado === 'entregado' ? T('Entregado') : m.estado === 'leido' ? T('Leído') : m.estado === 'fallo' ? T('No se pudo enviar') : '';
     if (m.estado === 'fallo') { tk.textContent = '!'; tk.style.color = 'var(--alerta)'; }
   }
@@ -516,9 +556,12 @@
     d.append(ic, b, s);
     const enCurso = m.estado !== 'fallo' && pr < 1 && m.estado !== 'pendiente';
     if (enCurso) { const p = document.createElement('span'); p.className = 'gc-progreso'; const i = document.createElement('i'); i.style.width = Math.round(pr * 100) + '%'; p.append(i); d.append(p); }
+    if (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido') { const se = document.createElement('span'); se.className = 'sello'; se.textContent = '✓ ' + T('Íntegro y cifrado: llegó entero y nadie lo tocó por el camino'); d.append(se); }
+    else if (m.estado === 'fallo' && /alterados/.test(m.archivo.motivo || '')) { const se = document.createElement('span'); se.className = 'sello mal'; se.textContent = '✕ ' + T('Cortado: la comprobación de integridad falló'); d.append(se); }
     const fila = document.createElement('div'); fila.className = 'fila';
     if (m.dir === 'suya' && m.estado === 'recibiendo' && m.archivo.aDisco && !m.archivo.enDisco) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton principal'; g.textContent = T('Guardar en…'); g.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) eligeDestino(c, m); }); fila.append(g); }
-    if ((m.dir === 'suya' && m.estado === 'recibido' && !m.archivo.enDisco) || (m.dir === 'mia' && /^image\//.test(m.archivo.mime))) {
+    if ((m.dir === 'suya' && m.estado === 'recibido' && !m.archivo.enDisco) || (m.dir === 'mia' && /^(image|audio)\//.test(m.archivo.mime))) {
+      if (/^audio\//.test(m.archivo.mime)) { BD.saca('arch', m.id).then((r) => { if (!r) return; const au = document.createElement('audio'); au.controls = true; au.preload = 'metadata'; au.src = URL.createObjectURL(r.blob); au.style.gridColumn = '1 / -1'; d.prepend(au); }); }
       if (/^image\//.test(m.archivo.mime) && m.archivo.tam < 24 * 1024 * 1024) { BD.saca('arch', m.id).then((r) => { if (!r) return; const img = document.createElement('img'); img.className = 'imagen'; img.alt = m.archivo.nombre; img.src = URL.createObjectURL(r.blob); img.style.gridColumn = '1 / -1'; img.addEventListener('click', () => abreArchivo(m, false)); d.prepend(img); }); }
       if (m.dir === 'suya') { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton'; g.textContent = T('Guardar'); g.addEventListener('click', () => abreArchivo(m, true)); fila.append(g); }
     }
@@ -535,23 +578,26 @@
   // ---------- hojas ----------
   const abreHoja = (id) => { $('#' + id).classList.add('gc-abierta'); };
   const cierraHoja = (id) => { $('#' + id).classList.remove('gc-abierta'); };
+  function pintaCodigo(c) {
+    const e = $('#codigo'); e.textContent = codigoBonito(c.codigo); e.className = 'codigo' + (c.codigoUsado ? ' usado' : (c.codigo && Date.now() > c.codigoCaduca ? ' caducado' : ''));
+    const caducado = c.codigo && Date.now() > c.codigoCaduca;
+    $('#invita-estado').textContent = c.ocupada ? T('Esta invitación ya la usó otra persona.') : c.codigoUsado ? T('La otra persona ha escrito el código: conectando…') : caducado ? T('Este código ha caducado (10 minutos). Pide uno nuevo.') : c.codigo ? T('Esperando a que la otra persona escriba el código…') : T('Creando el código…');
+    $('#invita-nuevo').hidden = !(caducado && !c.huella);
+  }
   function muestraInvitacion(c) {
-    const u = enlaceDe(c); $('#enlace').value = u; $('#qr').innerHTML = window.qrSvg ? qrSvg(u) : '';
-    $('#invita-estado').textContent = c.ocupada ? T('Esta invitación ya la usó otra persona.') : T('Esperando a que la otra persona abra el enlace…');
-    abreHoja('h-invita');
+    pintaCodigo(c);
+    clearInterval(muestraInvitacion.reloj); muestraInvitacion.reloj = setInterval(() => { if ($('#paso-codigo').hidden) return clearInterval(muestraInvitacion.reloj); pintaCodigo(c); }, 5000);
   }
   async function muestraEscudo(c) {
-    $('#escudo-con').textContent = c.nombre || '';
     const ul = $('#escudo-lista'); ul.textContent = '';
     const fila = (cls, b, s) => { const li = document.createElement('li'); li.className = cls; const i = document.createElement('i'); const bb = document.createElement('b'); bb.textContent = b; const ss = document.createElement('span'); ss.textContent = s; li.append(i, bb, ss); ul.append(li); };
     fila(c.sesion ? 'gc-ok' : 'gc-info', T('Cifrado de extremo a extremo'), T('AES-256-GCM con una clave distinta por mensaje; la sesión se renueva cada vez que os encontráis (ECDH P-256 con firma ECDSA).'));
-    fila('gc-info', T('Relé'), (R.region ? R.region + ' · ' : '') + T('encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial'));
+    fila('gc-info', T('Servidor de GUARDIANA'), T('encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial'));
+    fila(c.incidencias ? 'gc-alerta' : 'gc-ok', T('Integridad'), c.incidencias ? (c.incidencias + ' ' + (c.incidencias === 1 ? T('incidencia') : T('incidencias')) + ': ' + T('envíos cortados al detectar datos alterados; quedan anotados en la conversación.')) : T('Cada mensaje y cada trozo de archivo se comprueba al llegar; hasta ahora, todo íntegro.'));
     fila(c.verificada ? 'gc-ok' : 'gc-aviso', c.verificada ? T('Identidad verificada') : T('Identidad sin verificar'), c.verificada ? T('Comprobasteis el número de seguridad.') : T('Hasta que comprobéis el número, confías en que el enlace llegó a la persona correcta.'));
-    fila('gc-info', T('Llamadas'), R.llamadas ? T('Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).') : T('No disponibles en este relé ahora.'));
     fila('gc-aviso', T('Límites'), T('No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.') + ' ' + T('Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.') + ' ' + T('Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.') + ' ' + T('Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.'));
     $('#numero').textContent = c.huella ? await C.numeroSeguridad(YO.huella, c.huella) : T('Aparecerá cuando la otra persona entre.');
     $('#verificada').checked = !!c.verificada; $('#verificada').disabled = !c.huella;
-    $('#cnombre-edit').value = c.nombre || '';
     $('#destruir-nota').hidden = true;
     abreHoja('h-escudo');
   }
@@ -569,59 +615,78 @@
   // ---------- eventos ----------
   function eventos() {
     $('#nueva').addEventListener('click', creaInvitacion);
-    $('#unir').addEventListener('click', () => { $('#unir-mal').hidden = true; $('#unir-enlace').value = ''; abreHoja('h-unir'); setTimeout(() => $('#unir-enlace').focus(), 50); });
-    $('#unir-cerrar').addEventListener('click', () => cierraHoja('h-unir'));
-    $('#unir-ok').addEventListener('click', async () => { if (await aceptaInvitacion($('#unir-enlace').value)) cierraHoja('h-unir'); else $('#unir-mal').hidden = false; });
-    $('#unir-enlace').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#unir-ok').click(); });
-    $('#invita-cerrar').addEventListener('click', () => cierraHoja('h-invita'));
-    $('#copiar').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('#enlace').value); aviso(T('Enlace copiado')); } catch (_) { $('#enlace').select(); } });
-    $('#enlace').addEventListener('focus', (e) => e.target.select());
+    $('#unir').addEventListener('click', () => { $('#unir-mal').hidden = true; $('#unir-espera').hidden = true; $('#unir-codigo').value = ''; $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = false; setTimeout(() => $('#unir-codigo').focus(), 50); });
+    $('#unir-cerrar').addEventListener('click', () => { $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; });
+    $('#unir-codigo').addEventListener('input', (e) => { const d = e.target.value.replace(/\D/g, '').slice(0, 9); e.target.value = d.replace(/(\d{3})(?=\d)/g, '$1 '); $('#unir-mal').hidden = true; if (d.length === 9) $('#unir-ok').click(); });
+    $('#unir-ok').addEventListener('click', async () => {
+      const b = $('#unir-ok'); if (b.disabled) return; b.disabled = true; $('#unir-mal').hidden = true; $('#unir-espera').hidden = false;
+      const r = await aceptaCodigo($('#unir-codigo').value);
+      b.disabled = false; $('#unir-espera').hidden = true;
+      if (r === 'ok') { $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; return; }
+      $('#unir-mal').textContent = r === 'demasiados intentos' ? T('Demasiados intentos: espera un minuto.') : r === 'sin relé' || r === 'sin respuesta' ? T('Sin conexión con el relé: espera un momento.') : T('Ese código no vale o ha caducado. Pídele uno nuevo a la otra persona.');
+      $('#unir-mal').hidden = false; $('#unir-codigo').focus(); $('#unir-codigo').select();
+    });
+    $('#unir-codigo').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#unir-ok').click(); });
+    $('#invita-cerrar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c && !c.huella) await destruye(c); else cierraConv(); });
+    $('#terminar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c) return; if (!confirm(T('¿Terminar la conversación? Se borra aquí y en el otro equipo.'))) return; await destruye(c); });
+    $('#invita-nuevo').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) { c.codigoUsado = false; await publicaCodigo(c); } });
+    R.on('codigo-usado', (codigo) => { for (const c of CONVS.values()) if (c.codigo === codigo) { c.codigoUsado = true; pintaCodigo(c); } });
+    R.on('abierto', () => { for (const c of CONVS.values()) if (c.estado === 'invitacion' && c.rol === 'invita' && !c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); });
     $('#escudo').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c) muestraEscudo(c); });
     $('#escudo-cerrar').addEventListener('click', () => cierraHoja('h-escudo'));
-    $('#verificada').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); if (!c) return; c.verificada = e.target.checked; await guardaConv(c); pintaCabecera(c); muestraEscudo(c); });
-    $('#cnombre-edit').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); if (!c) return; c.nombre = e.target.value.trim().slice(0, 40); c.nombreFijado = true; await guardaConv(c); pintaCabecera(c); pintaLista(); });
+    $('#verificada').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); if (!c) return; c.verificada = e.target.checked; await guardaConv(c); pintaCabecera(c); pintaRadio(c); muestraEscudo(c); });
     $('#destruir').addEventListener('click', async (e) => { const c = CONVS.get(ACTUAL); if (!c) return; if ($('#destruir-nota').hidden) { $('#destruir-nota').hidden = false; e.currentTarget.textContent = T('Sí, destruir'); return; } cierraHoja('h-escudo'); e.currentTarget.textContent = T('Destruir conversación'); await destruye(c); });
-    $('#atras').addEventListener('click', cierraConv);
-    $('#yonombre').addEventListener('change', (e) => guardaNombre(e.target.value));
-    $('#nombre-ok').addEventListener('click', async () => { await guardaNombre($('#nombre-inicial').value || T('Yo')); $('#yonombre').value = YO.nombre; cierraHoja('h-nombre'); });
-    $('#nombre-inicial').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#nombre-ok').click(); });
     const ta = $('#texto');
-    const ajusta = () => { ta.style.height = 'auto'; ta.style.height = Math.min(120, ta.scrollHeight) + 'px'; };
+    const ajusta = () => { ta.style.height = 'auto'; ta.style.height = Math.min(120, ta.scrollHeight) + 'px'; document.querySelector('.gc-compositor').classList.toggle('con-texto', !!ta.value.trim()); };
     ta.addEventListener('input', ajusta);
     const envia = async () => { const c = CONVS.get(ACTUAL); const t = ta.value.replace(/\s+$/, ''); if (!c || !t) return; ta.value = ''; ajusta(); await enviaTexto(c, t); ta.focus(); };
     ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); envia(); } });
     $('#enviar').addEventListener('click', envia);
     $('#adjuntar').addEventListener('click', () => $('#archivo').click());
+    // Notas de voz (dueño, 26 Oct 20:05): se graban aquí, se cifran y viajan como un archivo más; con la voz tal cual.
+    let grab = null;
+    const compositor = document.querySelector('.gc-compositor');
+    const paraGrabacion = (enviar) => {
+      if (!grab) return; const g = grab; grab = null; clearInterval(g.reloj);
+      g.enviar = enviar; try { g.rec.stop(); } catch (_) {} setTimeout(() => g.stream.getTracks().forEach((x) => x.stop()), 300);
+      compositor.classList.remove('grabando-ya'); $('#grabando').hidden = true; $('#grabar').setAttribute('aria-pressed', 'false');
+    };
+    $('#grabar').addEventListener('click', async () => {
+      const c = CONVS.get(ACTUAL); if (!c) return;
+      if (grab) return paraGrabacion(true);
+      if (!navigator.mediaDevices || !window.MediaRecorder) return aviso(T('Este navegador no puede grabar audio.'));
+      let stream; try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }); } catch (_) { return aviso(T('Sin permiso para el micrófono.')); }
+      const mime = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'].find((m) => MediaRecorder.isTypeSupported(m)) || '';
+      const rec = new MediaRecorder(stream, mime ? { mimeType: mime, audioBitsPerSecond: 64000 } : undefined);
+      const trozos = []; const t0 = Date.now();
+      rec.ondataavailable = (e) => { if (e.data && e.data.size) trozos.push(e.data); };
+      rec.onstop = () => { const g = este; if (!g.enviar || !trozos.length) return; const tipo = rec.mimeType || mime || 'audio/webm'; const ext = /mp4/.test(tipo) ? 'm4a' : /ogg/.test(tipo) ? 'ogg' : 'webm'; const dur = Math.round((Date.now() - t0) / 1000); const f = new File(trozos, T('Nota de voz') + ' ' + new Date().toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit' }).replace(':', '.') + ' (' + Math.floor(dur / 60) + ':' + String(dur % 60).padStart(2, '0') + ').' + ext, { type: tipo }); const cc = CONVS.get(ACTUAL) || c; if (cc) enviaArchivos(cc, [f]); };
+      const este = { rec, stream, enviar: false, reloj: null };
+      grab = este; rec.start(250);
+      compositor.classList.add('grabando-ya'); $('#grabando').hidden = false; $('#grabar').setAttribute('aria-pressed', 'true');
+      este.reloj = setInterval(() => { const s = Math.floor((Date.now() - t0) / 1000); $('#grabando-t').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); if (s >= 600) paraGrabacion(true); }, 250);
+    });
+    $('#grabar-cancelar').addEventListener('click', () => paraGrabacion(false));
     ta.addEventListener('paste', (e) => { const fs = [...((e.clipboardData && e.clipboardData.files) || [])]; const c = CONVS.get(ACTUAL); if (c && fs.length) { e.preventDefault(); enviaArchivos(c, fs.map((f, i) => (f.name && f.name !== 'image.png') ? f : new File([f], 'imagen-' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + (i ? '-' + i : '') + '.' + ((f.type || '').split('/')[1] || 'png'), { type: f.type }))); } });
     $('#archivo').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); const fs = [...e.target.files]; e.target.value = ''; if (c && fs.length) enviaArchivos(c, fs); });
     const zona = $('#conv');
     zona.addEventListener('dragover', (e) => { e.preventDefault(); });
     zona.addEventListener('drop', (e) => { e.preventDefault(); const c = CONVS.get(ACTUAL); const fs = [...(e.dataTransfer && e.dataTransfer.files) || []]; if (c && fs.length) enviaArchivos(c, fs); });
-    $('#llamarvoz').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c && enLinea(c)) { LLAMADA = c; LL.llamar(false); } });
-    $('#llamarvideo').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c && enLinea(c)) { LLAMADA = c; LL.llamar(true); } });
-    document.querySelectorAll('.gc-hoja').forEach((h) => h.addEventListener('click', (e) => { if (e.target === h && h.id !== 'h-nombre') h.classList.remove('gc-abierta'); }));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.gc-hoja.gc-abierta').forEach((h) => { if (h.id !== 'h-nombre') h.classList.remove('gc-abierta'); }); });
+    document.querySelectorAll('.gc-hoja').forEach((h) => h.addEventListener('click', (e) => { if (e.target === h) h.classList.remove('gc-abierta'); }));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.gc-hoja.gc-abierta').forEach((h) => h.classList.remove('gc-abierta')); });
     addEventListener('hashchange', () => { if (/#i=/.test(location.hash)) { aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); } });
     addEventListener('guardiana-idioma', () => { pintaLista(); const c = CONVS.get(ACTUAL); if (c) pintaCabecera(c); });
   }
 
   // ---------- arranque ----------
   async function arranca() {
-    if (!window.isSecureContext || !crypto.subtle || !window.indexedDB) { $('#portada').innerHTML = '<p>' + T('Este navegador no puede abrir Comunicaciones: hace falta una conexión segura (https) y un navegador actual.') + '</p>'; return; }
+    if (!window.isSecureContext || !crypto.subtle || !window.indexedDB) { $('#inicio').innerHTML = '<p>' + T('Este navegador no puede abrir Comunicaciones: hace falta una conexión segura (https) y un navegador actual.') + '</p>'; return; }
     await BD.abre();
     await cargaIdentidad();
     arrancaRele();
-    LL = GuardianaLlamada.crea({
-      ice: () => R.ice, t: T, aviso,
-      manda: (m) => { const c = LLAMADA; if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
-      nombre: () => { const c = LLAMADA; return (c && c.nombre) || T('Sin nombre'); },
-      inicial: () => { const c = LLAMADA; return inicial(c && c.nombre); },
-      fin: async (info) => { const c = LLAMADA; LLAMADA = null; if (!c || c.estado === 'destruida') return; pintaCabecera(c); const dur = info.duracion ? Math.round(info.duracion / 1000) : 0; const txt = (info.video ? T('Videollamada') : T('Llamada')) + (dur ? ' · ' + String(Math.floor(dur / 60)).padStart(2, '0') + ':' + String(dur % 60).padStart(2, '0') : info.por === 'rechazada' || info.por === 'cancelada' ? ' · ' + T('sin respuesta') : info.por === 'ocupado' ? ' · ' + T('comunicando') : info.por === 'fallo' ? ' · ' + T('se cortó') : ''); const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'sistema', estado: 'ok', tipo: 'llamada', texto: txt }; await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m); },
-    });
     eventos();
     await cargaConvs();
     if (/#i=/.test(location.hash)) { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
-    if (YO.nueva || !YO.nombre) { $('#nombre-inicial').value = YO.nombre || ''; abreHoja('h-nombre'); setTimeout(() => $('#nombre-inicial').focus(), 80); }
   }
   arranca().catch((e) => { console.error(e); aviso(T('Algo falló al arrancar: recarga la página.')); });
   window.GuardianaCom = { get convs() { return CONVS; }, get yo() { return YO; }, get rele() { return R; }, abreConv, creaInvitacion, aceptaInvitacion };
