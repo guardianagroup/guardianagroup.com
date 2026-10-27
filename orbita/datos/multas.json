@@ -1,0 +1,1412 @@
+{
+ "nota": "Multas, acuerdos y prohibiciones por usar datos personales (27 Oct 2026): los 49 casos de casos.html, con su autoridad, su fecha, la resolución o noticia y una copia en archive.org. NÚCLEO los enseña con el botón rojo «Multas» de su portada (dueño, 13:30). Ordenados del más reciente al más antiguo.",
+ "ui": {
+  "es": {
+   "k": "MULTAS",
+   "boton": "Multas",
+   "titulo": "Empresas multadas por usar tus datos.",
+   "intro": "Multas, acuerdos y prohibiciones reales, cada uno con su autoridad, su fecha y el enlace a la resolución o a la noticia, con una copia guardada en archive.org.",
+   "todas": "Todas",
+   "casos": "{1} casos",
+   "fuente": "Resolución o noticia",
+   "copia": "Copia guardada",
+   "volver": "Volver",
+   "mas": "Leer más",
+   "menos": "Leer menos"
+  },
+  "en": {
+   "k": "FINES",
+   "boton": "Fines",
+   "titulo": "Companies fined for using your data.",
+   "intro": "Real fines, settlements and bans, each with its authority, its date and the link to the decision or the news, with a copy saved on archive.org.",
+   "todas": "All",
+   "casos": "{1} cases",
+   "fuente": "Decision or news",
+   "copia": "Saved copy",
+   "volver": "Back",
+   "mas": "Read more",
+   "menos": "Read less"
+  },
+  "pt": {
+   "k": "MULTAS",
+   "boton": "Multas",
+   "titulo": "Empresas multadas por usar os seus dados.",
+   "intro": "Multas, acordos e proibições reais, cada um com a sua autoridade, a sua data e o link para a decisão ou a notícia, com uma cópia guardada no archive.org.",
+   "todas": "Todas",
+   "casos": "{1} casos",
+   "fuente": "Decisão ou notícia",
+   "copia": "Cópia guardada",
+   "volver": "Voltar",
+   "mas": "Ler mais",
+   "menos": "Ler menos"
+  }
+ },
+ "cats": [
+  {
+   "id": "meta",
+   "es": "Meta",
+   "en": "Meta",
+   "pt": "Meta"
+  },
+  {
+   "id": "google",
+   "es": "Google",
+   "en": "Google",
+   "pt": "Google"
+  },
+  {
+   "id": "amazon",
+   "es": "Amazon",
+   "en": "Amazon",
+   "pt": "Amazon"
+  },
+  {
+   "id": "microsoft",
+   "es": "Microsoft",
+   "en": "Microsoft",
+   "pt": "Microsoft"
+  },
+  {
+   "id": "apple",
+   "es": "Apple",
+   "en": "Apple",
+   "pt": "Apple"
+  },
+  {
+   "id": "tiktok",
+   "es": "TikTok",
+   "en": "TikTok",
+   "pt": "TikTok"
+  },
+  {
+   "id": "ia",
+   "es": "IA y reconocimiento facial",
+   "en": "AI and facial recognition",
+   "pt": "IA e reconhecimento facial"
+  },
+  {
+   "id": "antivirus",
+   "es": "Antivirus",
+   "en": "Antivirus",
+   "pt": "Antivírus"
+  },
+  {
+   "id": "venta",
+   "es": "Venta de datos",
+   "en": "Data for sale",
+   "pt": "Venda de dados"
+  },
+  {
+   "id": "operador",
+   "es": "Operadoras",
+   "en": "Phone companies",
+   "pt": "Operadoras"
+  },
+  {
+   "id": "tiendas",
+   "es": "Tiendas",
+   "en": "Shops",
+   "pt": "Lojas"
+  },
+  {
+   "id": "otras",
+   "es": "Otras empresas",
+   "en": "Other companies",
+   "pt": "Outras empresas"
+  }
+ ],
+ "casos": [
+  {
+   "cat": "google",
+   "cifra": "403 M€",
+   "empresa": "Google Ireland",
+   "anio": "2026",
+   "dia": "2026-09-21",
+   "autoridad": {
+    "es": "DPC (Irlanda)",
+    "en": "DPC (Ireland)",
+    "pt": "DPC (Irlanda)"
+   },
+   "titulo": {
+    "es": "Ubicación conservada demasiado tiempo y usada para anuncios",
+    "en": "Location data kept too long and used for ads",
+    "pt": "Localização guardada por tempo demais e usada em anúncios"
+   },
+   "texto": {
+    "es": "La DPC concluyó que entre mayo de 2018 y febrero de 2020 Google conservó datos de ubicación más tiempo del necesario y los usó para segmentar anuncios: el tratamiento fue ilícito en 'Precisión de la ubicación' y la conservación indebida en 'Actividad en la Web y en Aplicaciones' e 'Historial de ubicaciones'. También halló falta de transparencia en las tres funciones. La investigación de oficio se abrió el 4 de febrero de 2020.",
+    "en": "The DPC found that between May 2018 and February 2020 Google kept location data longer than necessary and used it to target ads: processing was unlawful in 'Location Accuracy' and retention was improper in 'Web & App Activity' and 'Location History'. It also found a lack of transparency in all three features. The own-initiative inquiry was opened on 4 February 2020.",
+    "pt": "A DPC concluiu que entre maio de 2018 e fevereiro de 2020 o Google guardou dados de localização por mais tempo que o necessário e os usou para segmentar anúncios: o tratamento foi ilícito em 'Precisão da localização' e a conservação indevida em 'Atividade na Web e de apps' e 'Histórico de localização'. Também constatou falta de transparência nas três funções. A investigação de ofício foi aberta em 4 de fevereiro de 2020."
+   },
+   "fuente": "https://euobserver.com/238683/irish-regulator-hits-google-with-e403m-gdpr-fine-over-invasive-location-tracking/",
+   "copia": "https://web.archive.org/web/2026/https://euobserver.com/238683/irish-regulator-hits-google-with-e403m-gdpr-fine-over-invasive-location-tracking/"
+  },
+  {
+   "cat": "tiktok",
+   "cifra": "153,7 M R$",
+   "empresa": "TikTok",
+   "anio": "2026",
+   "dia": "2026-08-25",
+   "autoridad": {
+    "es": "ANPD (Brasil)",
+    "en": "ANPD (Brazil)",
+    "pt": "ANPD"
+   },
+   "titulo": {
+    "es": "ByteDance · datos de niños y adolescentes sin base legal",
+    "en": "ByteDance · children's and teenagers' data with no legal basis",
+    "pt": "ByteDance · dados de crianças e adolescentes sem base legal"
+   },
+   "texto": {
+    "es": "La ANPD, la autoridad brasileña, multó a ByteDance por tratar datos personales de niños y adolescentes sin una base legal adecuada, en las dos formas de entrar a TikTok: con cuenta y sin ella. La decisión ordena además borrar lo recogido de forma irregular y poner por defecto la configuración más restrictiva a los menores de 16 años.",
+    "en": "Brazil's data protection authority fined ByteDance for processing children's and teenagers' personal data without an adequate legal basis, in both ways of entering TikTok: with an account and without one. The decision also orders the deletion of what was collected improperly and the most restrictive privacy settings by default for under-16s.",
+    "pt": "A ANPD multou a ByteDance por tratar dados pessoais de crianças e adolescentes sem hipótese legal adequada, nas duas formas de entrar no TikTok: com conta e sem conta. A decisão também determina a eliminação do que foi coletado de forma irregular e as configurações de privacidade mais restritivas por padrão para quem tem menos de 16 anos."
+   },
+   "fuente": "https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-multa-tiktok-em-r-153-7-milhoes-por-falhas-na-protecao-de-dados-de-criancas-e-adolescentes",
+   "copia": "https://web.archive.org/web/2026/https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-multa-tiktok-em-r-153-7-milhoes-por-falhas-na-protecao-de-dados-de-criancas-e-adolescentes"
+  },
+  {
+   "cat": "otras",
+   "cifra": "825 M€",
+   "empresa": "Uber",
+   "anio": "2026",
+   "dia": "2026-08-21",
+   "autoridad": {
+    "es": "AP (Países Bajos)",
+    "en": "AP (Netherlands)",
+    "pt": "AP (Países Baixos)"
+   },
+   "titulo": {
+    "es": "Cuentas de conductores desactivadas sin intervención humana",
+    "en": "Driver accounts deactivated with no human involvement",
+    "pt": "Contas de motoristas desativadas sem intervenção humana"
+   },
+   "texto": {
+    "es": "Según la AP, entre 2018 y 2022 el software de Uber desactivaba automáticamente las cuentas de los conductores, de forma temporal por sospecha de fraude o permanente por malas valoraciones, sin intervención humana. Esto vulnera la prohibición del RGPD de decisiones totalmente automatizadas, y además Uber no informó lo suficiente a los conductores; es la segunda multa RGPD más alta de la historia. Uber anunció que recurrirá.",
+    "en": "According to the AP, between 2018 and 2022 Uber's software automatically deactivated drivers' accounts, temporarily on suspicion of fraud or permanently for poor ratings, with no human involvement. This breaches the GDPR ban on fully automated decisions, and Uber also did not inform drivers sufficiently; it is the second-highest GDPR fine ever. Uber has said it will appeal.",
+    "pt": "Segundo a AP, entre 2018 e 2022 o software da Uber desativava automaticamente as contas dos motoristas, de forma temporária por suspeita de fraude ou permanente por avaliações ruins, sem intervenção humana. Isso viola a proibição do RGPD de decisões totalmente automatizadas, e além disso a Uber não informou suficientemente os motoristas; é a segunda maior multa do RGPD da história. A Uber anunciou que vai recorrer."
+   },
+   "fuente": "https://www.pearlcohen.com/dutch-data-protection-authority-fines-uber-e825-million-for-fully-automated-deactivation-of-drivers/",
+   "copia": "",
+   "estado": {
+    "es": "Recurrida",
+    "en": "Appealed",
+    "pt": "Recorrida"
+   }
+  },
+  {
+   "cat": "ia",
+   "cifra": "158.000 €",
+   "empresa": "Character.AI",
+   "anio": "2026",
+   "dia": "2026-07-09",
+   "autoridad": {
+    "es": "Garante (Italia)",
+    "en": "Garante (Italy)",
+    "pt": "Garante (Itália)"
+   },
+   "titulo": {
+    "es": "Personajes virtuales, menores dentro y la edad sin comprobar",
+    "en": "Virtual characters, minors inside, and no age check",
+    "pt": "Personagens virtuais, menores dentro e a idade sem conferir"
+   },
+   "texto": {
+    "es": "El Garante italiano sancionó a Character Technologies, la empresa detrás de Character.AI, un servicio donde cualquiera —también un menor— crea personajes virtuales y conversa con ellos. Encontró información insuficiente a los usuarios, la evaluación de impacto hecha tarde y el representante en la UE nombrado tarde, además de fallos en la protección de menores y en la verificación de la edad. La multa es pequeña; las órdenes no: tiene que hacer funcionar la comprobación de edad, impedir que un menor bloqueado se vuelva a registrar y poner los perfiles de menores en privado por defecto.",
+    "en": "Italy's Garante fined Character Technologies, the company behind Character.AI, a service where anyone — a child included — creates virtual characters and chats with them. It found insufficient information for users, an impact assessment done late and an EU representative appointed late, on top of failings in protecting minors and in age verification. The fine is small; the orders are not: it has to make age verification work, stop a blocked minor from signing up again, and set minors' profiles to private by default.",
+    "pt": "O Garante italiano sancionou a Character Technologies, empresa por trás do Character.AI, um serviço em que qualquer pessoa —inclusive um menor— cria personagens virtuais e conversa com eles. Encontrou informação insuficiente aos usuários, a avaliação de impacto feita tarde e o representante na UE nomeado tarde, além de falhas na proteção de menores e na verificação da idade. A multa é pequena; as ordens não: tem de fazer a verificação de idade funcionar, impedir que um menor bloqueado se registre de novo e pôr os perfis de menores como privados por padrão."
+   },
+   "fuente": "https://www.garanteprivacy.it/garante/doc.jsp?ID=10269594",
+   "copia": ""
+  },
+  {
+   "cat": "venta",
+   "cifra": "Prohibición",
+   "empresa": "Datos en venta",
+   "anio": "2026",
+   "dia": "2026-05-04",
+   "autoridad": {
+    "es": "FTC (EE. UU.)",
+    "en": "FTC (USA)",
+    "pt": "FTC (EUA)"
+   },
+   "titulo": {
+    "es": "Kochava · vendía la ubicación exacta de cientos de millones de móviles",
+    "en": "Kochava · sold the precise location of hundreds of millions of phones",
+    "pt": "Kochava · vendia a localização exata de centenas de milhões de celulares"
+   },
+   "texto": {
+    "es": "La FTC prohíbe a Kochava y a su filial Collective Data Solutions vender, ceder o compartir datos de ubicación sensibles sin permiso expreso. Según la demanda, la ubicación precisa que vendían permitía seguir los movimientos de una persona, incluidas visitas a centros de salud y a lugares de culto. No hay multa: hay prohibición y obligación de dejar que cualquiera pregunte a quién se vendió su ubicación.",
+    "en": "The FTC bans Kochava and its subsidiary Collective Data Solutions from selling, licensing or sharing sensitive location data without affirmative express consent. According to the complaint, the precise location they sold could be used to trace a person's movements, including visits to health facilities and places of worship. No fine: a ban, plus the duty to tell anyone who asks which businesses their location was sold to.",
+    "pt": "A FTC proíbe a Kochava e sua subsidiária Collective Data Solutions de vender, ceder ou compartilhar dados de localização sensíveis sem consentimento expresso. Segundo a ação, a localização precisa que vendiam permitia seguir os movimentos de uma pessoa, incluindo visitas a serviços de saúde e a locais de culto. Não há multa: há proibição e a obrigação de informar a quem perguntar para quais empresas sua localização foi vendida."
+   },
+   "fuente": "https://www.ftc.gov/news-events/news/press-releases/2026/05/ftc-ban-kochava-subsidiary-selling-sensitive-location-data-settle-charges-they-sold-location-data",
+   "copia": "https://web.archive.org/web/2026/https://www.ftc.gov/news-events/news/press-releases/2026/05/ftc-ban-kochava-subsidiary-selling-sensitive-location-data-settle-charges-they-sold-location-data",
+   "estado": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   }
+  },
+  {
+   "cat": "ia",
+   "cifra": "",
+   "empresa": "OpenAI",
+   "anio": "2026",
+   "dia": "2026-03-18",
+   "autoridad": {
+    "es": "Garante (Italia)",
+    "en": "Garante (Italy)",
+    "pt": "Garante (Itália)"
+   },
+   "titulo": {
+    "es": "ChatGPT · la multa italiana existió, y un tribunal la tumbó",
+    "en": "ChatGPT · the Italian fine happened, and a court struck it down",
+    "pt": "ChatGPT · a multa italiana existiu, e um tribunal a derrubou"
+   },
+   "texto": {
+    "es": "El Garante italiano multó a OpenAI en diciembre de 2024 por tratar datos sin una base legal clara, no avisar de la filtración de marzo de 2023 y no comprobar la edad de quien entra. El 18 de marzo de 2026 el Tribunal de Roma la anuló. Conviene leer por qué: no dijo que ChatGPT estuviera bien, dijo que el caso no le tocaba al Garante italiano sino a la autoridad irlandesa, porque OpenAI había puesto allí su sede europea. Cayó por quién juzgaba, no por lo que se juzgaba.",
+    "en": "Italy's Garante fined OpenAI in December 2024 for processing data without a clear legal basis, not reporting the March 2023 leak and not checking the age of whoever signs in. On 18 March 2026 the Court of Rome annulled it. It is worth reading why: the court did not say ChatGPT was fine, it said the case belonged to the Irish authority and not the Italian one, because OpenAI had placed its European seat there. It fell on who was judging, not on what was being judged.",
+    "pt": "O Garante italiano multou a OpenAI em dezembro de 2024 por tratar dados sem base legal clara, não avisar do vazamento de março de 2023 e não conferir a idade de quem entra. Em 18 de março de 2026 o Tribunal de Roma a anulou. Vale ler o porquê: não disse que o ChatGPT estava certo, disse que o caso não era do Garante italiano e sim da autoridade irlandesa, porque a OpenAI tinha posto ali a sua sede europeia. Caiu por quem julgava, não pelo que se julgava."
+   },
+   "fuente": "https://www.ansa.it/canale_tecnologia/notizie/tecnologia/2026/03/20/tribunale-roma-annulla-multa-da-15-milioni-di-euro-del-garante-privacy-a-openai_6560fadd-4099-451e-99a0-7fcbc9a285c1.html",
+   "copia": "https://web.archive.org/web/2026/https://www.ansa.it/canale_tecnologia/notizie/tecnologia/2026/03/20/tribunale-roma-annulla-multa-da-15-milioni-di-euro-del-garante-privacy-a-openai_6560fadd-4099-451e-99a0-7fcbc9a285c1.html",
+   "estado": {
+    "es": "Anulada",
+    "en": "Annulled",
+    "pt": "Anulada"
+   }
+  },
+  {
+   "cat": "operador",
+   "cifra": "42 M€",
+   "empresa": "Free",
+   "anio": "2026",
+   "dia": "2026-01-13",
+   "autoridad": {
+    "es": "CNIL (Francia)",
+    "en": "CNIL (France)",
+    "pt": "CNIL (França)"
+   },
+   "titulo": {
+    "es": "Free y Free Mobile · 24 millones de contratos a la vista, con IBAN",
+    "en": "Free and Free Mobile · 24 million contracts exposed, IBANs included",
+    "pt": "Free e Free Mobile · 24 milhões de contratos expostos, com IBAN"
+   },
+   "texto": {
+    "es": "27 millones a Free Mobile y 15 a Free. Un atacante entró en octubre de 2024 y accedió a datos de 24 millones de contratos de abonados; de quienes eran clientes de las dos empresas, también al IBAN. La CNIL señaló autenticación débil en el acceso remoto, detección insuficiente, conservación de datos de contratos ya terminados y un aviso a los afectados que no explicaba las consecuencias. Más de 2.500 denuncias.",
+    "en": "27 million against Free Mobile and 15 against Free. An attacker got in during October 2024 and reached data from 24 million subscriber contracts; for people who were customers of both companies, the IBAN as well. The CNIL pointed to weak authentication on remote access, insufficient detection, data kept from contracts long since terminated, and a notice to those affected that did not explain the consequences. More than 2,500 complaints.",
+    "pt": "27 milhões para a Free Mobile e 15 para a Free. Um invasor entrou em outubro de 2024 e acessou dados de 24 milhões de contratos de assinantes; de quem era cliente das duas empresas, também o IBAN. A CNIL apontou autenticação fraca no acesso remoto, detecção insuficiente, dados guardados de contratos já encerrados e um aviso aos atingidos que não explicava as consequências. Mais de 2.500 reclamações."
+   },
+   "fuente": "https://www.cnil.fr/fr/sanction-free-2026",
+   "copia": "https://web.archive.org/web/2026/https://www.cnil.fr/fr/sanction-free-2026"
+  },
+  {
+   "cat": "apple",
+   "cifra": "98,6 M€",
+   "empresa": "Apple",
+   "anio": "2025",
+   "dia": "2025-12-01",
+   "autoridad": {
+    "es": "AGCM (Italia)",
+    "en": "AGCM (Italy)",
+    "pt": "AGCM (Itália)"
+   },
+   "titulo": {
+    "es": "La pantalla de privacidad de Apple, multada también en Italia",
+    "en": "The same privacy prompt, fined in Italy too",
+    "pt": "A mesma tela de privacidade, multada também na Itália"
+   },
+   "texto": {
+    "es": "La autoridad italiana de competencia multó a Apple por abuso de posición dominante con la misma pantalla: quien desarrolla una aplicación tiene que pedir el permiso dos veces para lo mismo, una en el aviso de Apple y otra en el suyo. Apple, en sus propias aplicaciones, no pasa por ahí. La investigación se hizo coordinada con la Comisión Europea y con la autoridad italiana de protección de datos.",
+    "en": "Italy's competition authority fined Apple for abuse of a dominant position over the same prompt: whoever builds an app has to ask for permission twice for the same thing, once in Apple's window and once in their own. Apple, in its own apps, does not go through that. The investigation was run in coordination with the European Commission and the Italian data protection authority.",
+    "pt": "A autoridade italiana de concorrência multou a Apple por abuso de posição dominante pela mesma tela: quem desenvolve um aplicativo precisa pedir a permissão duas vezes para a mesma coisa, uma no aviso da Apple e outra no seu. A Apple, nos aplicativos dela, não passa por isso. A investigação foi feita em coordenação com a Comissão Europeia e com a autoridade italiana de proteção de dados."
+   },
+   "fuente": "https://en.agcm.it/en/media/press-releases/2025/12/A561",
+   "copia": "https://web.archive.org/web/2026/https://en.agcm.it/en/media/press-releases/2025/12/A561"
+  },
+  {
+   "cat": "google",
+   "cifra": "425,7 M$",
+   "empresa": "Google (Rodriguez et al. v. Google LLC)",
+   "anio": "2025",
+   "dia": "2025-09-03",
+   "autoridad": {
+    "es": "Jurado federal de California (EE. UU.)",
+    "en": "Federal jury",
+    "pt": "Júri federal da Califórnia (EUA)"
+   },
+   "titulo": {
+    "es": "Actividad en apps guardada pese a desactivar el seguimiento",
+    "en": "App activity kept after users turned tracking off",
+    "pt": "Atividade em apps guardada mesmo com rastreamento desativado"
+   },
+   "texto": {
+    "es": "El jurado concluyó que Google invadió la privacidad de los usuarios al guardar y usar datos de su actividad en apps de terceros después de que desactivaran el seguimiento ('Actividad en la Web y en Aplicaciones'). Rechazó la defensa de consentimiento de Google, pero no concedió daños punitivos. Es una demanda colectiva privada, no una multa de un regulador, y Google anunció que apelará.",
+    "en": "The jury found that Google invaded users' privacy by storing and using data on their activity in third-party apps after they had turned off tracking ('Web & App Activity'). It rejected Google's consent defence but did not award punitive damages. This is a private class action, not a regulator's fine, and Google has said it will appeal.",
+    "pt": "O júri concluiu que o Google invadiu a privacidade dos usuários ao guardar e usar dados da sua atividade em apps de terceiros depois que eles desativaram o rastreamento ('Atividade na Web e de apps'). Rejeitou a defesa de consentimento do Google, mas não concedeu danos punitivos. É uma ação coletiva privada, não uma multa de um regulador, e o Google anunciou que vai recorrer."
+   },
+   "fuente": "https://www.susmangodfrey.com/wins/susman-godfrey-secures-425-million-jury-verdict-for-plaintiffs-in-privacy-litigation-against-google/",
+   "copia": "https://web.archive.org/web/2026/https://www.susmangodfrey.com/wins/susman-godfrey-secures-425-million-jury-verdict-for-plaintiffs-in-privacy-litigation-against-google/"
+  },
+  {
+   "cat": "google",
+   "cifra": "325 M€",
+   "empresa": "Google",
+   "anio": "2025",
+   "dia": "2025-09-01",
+   "autoridad": {
+    "es": "CNIL (Francia)",
+    "en": "CNIL (France)",
+    "pt": "CNIL (França)"
+   },
+   "titulo": {
+    "es": "Cookies al crear la cuenta, y anuncios entre tus correos",
+    "en": "Cookies when you create the account, and ads between your emails",
+    "pt": "Cookies ao criar a conta, e anúncios entre os seus e-mails"
+   },
+   "texto": {
+    "es": "Dos cosas en una sola sanción. Al crear una cuenta de Google era más difícil rechazar las cookies de publicidad que aceptarlas, y no se decía con claridad que aceptarlas era condición para usar el servicio: 74 millones de cuentas. Y a quien tenía activadas las «funciones inteligentes» de Gmail se le colaban anuncios con forma de correo entre sus correos privados, sin pedirle permiso: 53 millones de personas.",
+    "en": "Two things in one penalty. When creating a Google account it was harder to refuse advertising cookies than to accept them, and it was not made clear that accepting was a condition of using the service: 74 million accounts. And anyone with Gmail's “smart features” turned on had advertising messages shaped like emails slipped in between their private ones, without being asked: 53 million people.",
+    "pt": "Duas coisas numa sanção só. Ao criar uma conta Google era mais difícil recusar os cookies de publicidade do que aceitá-los, e não ficava claro que aceitar era condição para usar o serviço: 74 milhões de contas. E quem tinha ligados os «recursos inteligentes» do Gmail recebia anúncios em forma de e-mail entre os seus e-mails privados, sem que ninguém perguntasse: 53 milhões de pessoas."
+   },
+   "fuente": "https://www.cnil.fr/en/cookies-and-advertisements-inserted-between-emails-google-fined-325-million-euros-cnil",
+   "copia": "https://web.archive.org/web/2026/https://www.cnil.fr/en/cookies-and-advertisements-inserted-between-emails-google-fined-325-million-euros-cnil"
+  },
+  {
+   "cat": "tiendas",
+   "cifra": "150 M€",
+   "empresa": "SHEIN",
+   "anio": "2025",
+   "dia": "2025-09-01",
+   "autoridad": {
+    "es": "CNIL (Francia)",
+    "en": "CNIL (France)",
+    "pt": "CNIL (França)"
+   },
+   "titulo": {
+    "es": "Rastreadores antes de tocar nada, y un «rechazar» que no rechazaba",
+    "en": "Trackers before you touch anything, and a “refuse” that did not refuse",
+    "pt": "Rastreadores antes de tocar em nada, e um «recusar» que não recusava"
+   },
+   "texto": {
+    "es": "La CNIL sancionó a la filial irlandesa de SHEIN porque la web dejaba rastreadores, varios de publicidad, nada más entrar: antes de que la persona tocara el aviso de cookies. Y cuando pulsaba «Rechazar todo» o retiraba el consentimiento, se depositaban rastreadores nuevos y los que ya estaban seguían leyéndose. Unos 12 millones de visitas al mes desde Francia.",
+    "en": "The CNIL fined SHEIN's Irish subsidiary because the site dropped trackers, several of them for advertising, the moment someone arrived: before they had touched the cookie banner at all. And when they pressed “Refuse all” or withdrew consent, new trackers were dropped anyway and the ones already there kept on being read. Around 12 million visits a month from France.",
+    "pt": "A CNIL sancionou a subsidiária irlandesa da SHEIN porque o site deixava rastreadores, vários de publicidade, assim que a pessoa chegava: antes mesmo de ela tocar no aviso de cookies. E quando clicava em «Recusar tudo» ou retirava o consentimento, novos rastreadores eram depositados e os que já estavam continuavam sendo lidos. Cerca de 12 milhões de visitas por mês vindas da França."
+   },
+   "fuente": "https://www.cnil.fr/fr/cookies-deposes-sans-consentement-la-cnil-sanctionne-shein-dune-amende-de-150-millions-deuros",
+   "copia": "https://web.archive.org/web/2026/https://www.cnil.fr/fr/cookies-deposes-sans-consentement-la-cnil-sanctionne-shein-dune-amende-de-150-millions-deuros"
+  },
+  {
+   "cat": "ia",
+   "cifra": "5 M€",
+   "empresa": "Replika",
+   "anio": "2025",
+   "dia": "2025-05-19",
+   "autoridad": {
+    "es": "Garante (Italia)",
+    "en": "Garante (Italy)",
+    "pt": "Garante (Itália)"
+   },
+   "titulo": {
+    "es": "Una IA de compañía, sin base legal y sin comprobar la edad",
+    "en": "A companion AI, with no legal basis and no age check",
+    "pt": "Uma IA de companhia, sem base legal e sem conferir a idade"
+   },
+   "texto": {
+    "es": "Replika es un chatbot que hace de amigo o de pareja. El Garante italiano multó a su empresa, Luka Inc., por tratar datos sin una base legal válida, no explicar lo que hacía con ellos y no tener forma de comprobar la edad: para entrar bastaba con un nombre, un correo y el sexo. La autoridad señaló el riesgo para menores.",
+    "en": "Replika is a chatbot that plays the friend or the partner. Italy's Garante fined its company, Luka Inc., for processing data without a valid legal basis, not explaining what it did with it, and having no way to check age: a name, an email and a gender were enough to get in. The authority pointed to the risk to minors.",
+    "pt": "O Replika é um chatbot que faz as vezes de amigo ou de namorado. O Garante italiano multou a empresa dele, a Luka Inc., por tratar dados sem base legal válida, não explicar o que fazia com eles e não ter como conferir a idade: para entrar bastavam um nome, um e-mail e o sexo. A autoridade apontou o risco para menores."
+   },
+   "fuente": "https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/10132048",
+   "copia": "https://web.archive.org/web/2026/https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/10132048"
+  },
+  {
+   "cat": "google",
+   "cifra": "1.375 M$",
+   "empresa": "Google",
+   "anio": "2025",
+   "dia": "2025-05-09",
+   "autoridad": {
+    "es": "Fiscalía de Texas (EE. UU.)",
+    "en": "Texas Attorney General (USA)",
+    "pt": "Procuradoria do Texas (EUA)"
+   },
+   "titulo": {
+    "es": "Ubicación rastreada aunque la hubieras desactivado",
+    "en": "Location tracked even when you turned it off",
+    "pt": "Localização rastreada mesmo com a função desativada"
+   },
+   "texto": {
+    "es": "Texas acusó a Google de rastrear en secreto la ubicación (incluso con la función desactivada), las búsquedas privadas, la voz y la geometría facial, y de engañar sobre el modo Incógnito, en dos demandas que cubrían tres productos. Google no admitió irregularidades y dijo que se trataba de políticas ya cambiadas.",
+    "en": "Texas accused Google of secretly tracking location (even with the feature turned off), private searches, voice and facial geometry, and of misleading users about Incognito mode, in two lawsuits covering three products. Google admitted no wrongdoing and said the policies involved had already been changed.",
+    "pt": "O Texas acusou o Google de rastrear em segredo a localização (mesmo com a função desativada), as buscas privadas, a voz e a geometria facial, e de enganar sobre o modo Anônimo, em duas ações que cobriam três produtos. O Google não admitiu irregularidades e disse que se tratava de políticas já alteradas."
+   },
+   "fuente": "https://www.texasattorneygeneral.gov/news/releases/attorney-general-ken-paxton-finalizes-historic-settlement-google-and-secures-1375-billion-big-tech",
+   "copia": "https://web.archive.org/web/2026/https://www.texasattorneygeneral.gov/news/releases/attorney-general-ken-paxton-finalizes-historic-settlement-google-and-secures-1375-billion-big-tech",
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   }
+  },
+  {
+   "cat": "tiktok",
+   "cifra": "530 M€",
+   "empresa": "TikTok Technology Limited",
+   "anio": "2025",
+   "dia": "2025-05-02",
+   "autoridad": {
+    "es": "DPC (Irlanda)",
+    "en": "DPC (Ireland)",
+    "pt": "DPC (Irlanda)"
+   },
+   "titulo": {
+    "es": "Datos europeos accesibles desde China sin protección equivalente",
+    "en": "European user data accessible from China without equivalent protection",
+    "pt": "Dados europeus acessíveis da China sem proteção equivalente"
+   },
+   "texto": {
+    "es": "La DPC concluyó que TikTok permitió el acceso remoto desde China a datos de usuarios europeos sin garantizar una protección equivalente, y que su política de privacidad de 2021 no mencionaba China ni ese acceso. También señaló que TikTok dio información inexacta durante la investigación sobre dónde se almacenaban los datos. Le ordenó suspender las transferencias a China si no se adecuaba en seis meses.",
+    "en": "The DPC found that TikTok allowed remote access from China to European users' data without ensuring equivalent protection, and that its 2021 privacy policy did not mention China or that access. It also noted that TikTok gave inaccurate information during the inquiry about where the data was stored. It ordered TikTok to suspend transfers to China if it did not comply within six months.",
+    "pt": "A DPC concluiu que o TikTok permitiu o acesso remoto a partir da China a dados de usuários europeus sem garantir proteção equivalente, e que sua política de privacidade de 2021 não mencionava a China nem esse acesso. Também apontou que o TikTok deu informações inexatas durante a investigação sobre onde os dados eram armazenados. Ordenou suspender as transferências para a China caso não se adequasse em seis meses."
+   },
+   "fuente": "https://www.simmons-simmons.com/en/publications/cmaet4gdu00q0uqvg957rtvfu/irish-data-protection-commission-fines-tiktok-530-million",
+   "copia": ""
+  },
+  {
+   "cat": "apple",
+   "cifra": "150 M€",
+   "empresa": "Apple",
+   "anio": "2025",
+   "dia": "2025-03-31",
+   "autoridad": {
+    "es": "Autorité DE LA Concurrence (Francia)",
+    "en": "Autorité DE LA Concurrence (France)",
+    "pt": "Autorité DE LA Concurrence (França)"
+   },
+   "titulo": {
+    "es": "Multada por su propio botón de privacidad, no por espiar",
+    "en": "Fined over its own privacy button, not for spying",
+    "pt": "Multada pelo próprio botão de privacidade, não por espionar"
+   },
+   "texto": {
+    "es": "Hay que leerlo con cuidado, porque es al revés de lo que parece: a Apple no la multaron por rastrear, sino por cómo impuso a los demás su ventana «Pedir a la app que no rastree». La autoridad francesa de competencia dijo que el objetivo no es el problema; el problema es que rechazar cuesta un clic y aceptar cuesta dos, que la regla no se aplicaba igual a todos y que Apple no se la aplicaba a sí misma. Multa por abuso de posición dominante entre abril de 2021 y julio de 2023.",
+    "en": "This one has to be read carefully, because it is the opposite of what it looks like: Apple was not fined for tracking, but for how it imposed its “Ask App Not to Track” window on everyone else. The French competition authority said the goal is not the problem; the problem is that refusing takes one click and accepting takes two, that the rule was not applied evenly, and that Apple did not apply it to itself. A fine for abuse of a dominant position between April 2021 and July 2023.",
+    "pt": "Este precisa ser lido com cuidado, porque é o contrário do que parece: a Apple não foi multada por rastrear, e sim por como impôs aos outros a janela «Pedir ao app para não rastrear». A autoridade francesa de concorrência disse que o objetivo não é o problema; o problema é que recusar custa um clique e aceitar custa dois, que a regra não se aplicava igual a todos e que a Apple não a aplicava a si mesma. Multa por abuso de posição dominante entre abril de 2021 e julho de 2023."
+   },
+   "fuente": "https://www.autoritedelaconcurrence.fr/en/press-release/targeted-advertising-autorite-de-la-concurrence-imposes-fine-eu150000000-apple",
+   "copia": "https://web.archive.org/web/2026/https://www.autoritedelaconcurrence.fr/en/press-release/targeted-advertising-autorite-de-la-concurrence-imposes-fine-eu150000000-apple"
+  },
+  {
+   "cat": "apple",
+   "cifra": "95 M$",
+   "empresa": "Apple",
+   "anio": "2025",
+   "dia": "2025-01-01",
+   "autoridad": {
+    "es": "Tribunal Federal N.D. CAL.",
+    "en": "US District Court N.D. CAL.",
+    "pt": "Tribunal Federal N.D. CAL."
+   },
+   "titulo": {
+    "es": "Siri · grabaciones sin «Oye Siri»",
+    "en": "Siri · recordings without “Hey Siri”",
+    "pt": "Siri · gravações sem «E aí, Siri»"
+   },
+   "texto": {
+    "es": "Acuerdo aprobado judicialmente en Lopez v. Apple: los demandantes alegaban que Siri grababa conversaciones sin activación intencionada y que contratistas humanos las revisaban. Apple pagó sin reconocer irregularidades.",
+    "en": "Court-approved settlement in Lopez v. Apple: the plaintiffs alleged that Siri recorded conversations without intentional activation and that human contractors reviewed them. Apple paid without admitting wrongdoing.",
+    "pt": "Acordo aprovado judicialmente em Lopez v. Apple: os autores alegavam que a Siri gravava conversas sem ativação intencional e que pessoas contratadas as revisavam. A Apple pagou sem reconhecer irregularidades."
+   },
+   "fuente": "https://www.courthousenews.com/judge-approves-95-million-apple-settlement-over-siri-privacy-case/",
+   "copia": "https://web.archive.org/web/2026/https://www.courthousenews.com/judge-approves-95-million-apple-settlement-over-siri-privacy-case/",
+   "soloAnio": true
+  },
+  {
+   "cat": "meta",
+   "cifra": "251 M€",
+   "empresa": "Meta",
+   "anio": "2024",
+   "dia": "2024-12-17",
+   "autoridad": {
+    "es": "DPC (Irlanda)",
+    "en": "DPC (Ireland)",
+    "pt": "DPC (Irlanda)"
+   },
+   "titulo": {
+    "es": "Las llaves de sesión de 2018: 29 millones de cuentas abiertas de par en par",
+    "en": "The 2018 session keys: 29 million accounts left wide open",
+    "pt": "As chaves de sessão de 2018: 29 milhões de contas escancaradas"
+   },
+   "texto": {
+    "es": "Multa por la brecha que Meta comunicó en septiembre de 2018: un fallo dejó al aire las llaves de sesión de unos 29 millones de cuentas en el mundo, con nombre, correo, teléfono, sexo, lugar de trabajo y las publicaciones y grupos de cada una. La autoridad irlandesa cerró dos investigaciones con 251 millones en total.",
+    "en": "A fine for the breach Meta reported in September 2018: a flaw exposed the session keys of about 29 million accounts worldwide, along with name, email, phone, sex, workplace and each account's posts and groups. The Irish authority closed two inquiries with 251 million in total.",
+    "pt": "Multa pela brecha que a Meta comunicou em setembro de 2018: uma falha deixou expostas as chaves de sessão de cerca de 29 milhões de contas no mundo, com nome, e-mail, telefone, sexo, local de trabalho e as publicações e grupos de cada uma. A autoridade irlandesa encerrou duas investigações com 251 milhões no total."
+   },
+   "fuente": "https://www.dataprotection.ie/en/news-media/press-releases/irish-data-protection-commission-fines-meta-eu251-million",
+   "copia": "https://web.archive.org/web/2026/https://www.dataprotection.ie/en/news-media/press-releases/irish-data-protection-commission-fines-meta-eu251-million"
+  },
+  {
+   "cat": "venta",
+   "cifra": "Prohibición",
+   "empresa": "Gravy Analytics y Venntel",
+   "anio": "2024",
+   "dia": "2024-12-03",
+   "autoridad": {
+    "es": "FTC (EE. UU.)",
+    "en": "FTC (USA)",
+    "pt": "FTC (EUA)"
+   },
+   "titulo": {
+    "es": "Ubicación comprada sin confirmar el consentimiento de los usuarios",
+    "en": "Ad auction data kept and location data sold",
+    "pt": "Dados de leilões de anúncios guardados e localização vendida"
+   },
+   "texto": {
+    "es": "La FTC alegó que Gravy compraba datos de ubicación a proveedores que no confirmaban el consentimiento de los usuarios, y que Venntel dependía totalmente de Gravy para esa verificación. Usaron los datos para clasificar a personas por rasgos sensibles como afiliación política, religión o condiciones médicas.",
+    "en": "According to the FTC, Mobilewalla kept data from real-time bidding (RTB) ad auctions it did not win, which ad exchanges prohibit, and sold non-anonymised location data that made it possible to follow people to medical centres or shelters. It also created geofences to track union members and people attending political rallies.",
+    "pt": "Segundo a FTC, a Mobilewalla guardava dados de leilões de anúncios em tempo real (RTB) que não vencia, algo proibido pelas plataformas de anúncios, e vendia localização não anonimizada que permitia seguir pessoas até centros médicos ou abrigos. Também criou cercas geográficas para rastrear sindicalistas e participantes de comícios políticos."
+   },
+   "fuente": "https://epic.org/ftc-takes-action-against-data-brokers-for-selling-sensitive-location-data/",
+   "copia": "https://web.archive.org/web/2026/https://epic.org/ftc-takes-action-against-data-brokers-for-selling-sensitive-location-data/",
+   "estado": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   }
+  },
+  {
+   "cat": "venta",
+   "cifra": "Prohibición",
+   "empresa": "Mobilewalla",
+   "anio": "2024",
+   "dia": "2024-12-03",
+   "autoridad": {
+    "es": "FTC (EE. UU.)",
+    "en": "FTC (USA)",
+    "pt": "FTC (EUA)"
+   },
+   "titulo": {
+    "es": "Datos de subastas publicitarias guardados y ubicación vendida",
+    "en": "Ad auction data kept and location data sold",
+    "pt": "Dados de leilões de anúncios guardados e localização vendida"
+   },
+   "texto": {
+    "es": "Según la FTC, Mobilewalla guardaba datos de pujas publicitarias en tiempo real (RTB) que no ganaba, algo prohibido por las plataformas de anuncios, y vendía ubicación sin anonimizar que permitía seguir a personas hasta centros médicos o refugios. También creó geovallas para rastrear a sindicalistas y asistentes a mítines políticos.",
+    "en": "According to the FTC, Mobilewalla kept data from real-time bidding (RTB) ad auctions it did not win, which ad exchanges prohibit, and sold non-anonymised location data that made it possible to follow people to medical centres or shelters. It also created geofences to track union members and people attending political rallies.",
+    "pt": "Segundo a FTC, a Mobilewalla guardava dados de leilões de anúncios em tempo real (RTB) que não vencia, algo proibido pelas plataformas de anúncios, e vendia localização não anonimizada que permitia seguir pessoas até centros médicos ou abrigos. Também criou cercas geográficas para rastrear sindicalistas e participantes de comícios políticos."
+   },
+   "fuente": "https://epic.org/ftc-takes-action-against-data-brokers-for-selling-sensitive-location-data/",
+   "copia": "https://web.archive.org/web/2026/https://epic.org/ftc-takes-action-against-data-brokers-for-selling-sensitive-location-data/",
+   "estado": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   }
+  },
+  {
+   "cat": "microsoft",
+   "cifra": "310 M€",
+   "empresa": "Microsoft",
+   "anio": "2024",
+   "dia": "2024-10-24",
+   "autoridad": {
+    "es": "DPC (Irlanda)",
+    "en": "DPC (Ireland)",
+    "pt": "DPC (Irlanda)"
+   },
+   "titulo": {
+    "es": "LinkedIn · anuncios a medida sin un permiso que valiera",
+    "en": "LinkedIn · targeted ads without a permission that held up",
+    "pt": "LinkedIn · anúncios sob medida sem uma permissão que valesse"
+   },
+   "texto": {
+    "es": "La autoridad irlandesa de protección de datos multó a LinkedIn, que es de Microsoft, por analizar el comportamiento de quien tiene un perfil y usarlo para publicidad dirigida sin una base legal válida. Además de la multa, le ordenó poner el tratamiento en regla.",
+    "en": "Ireland's data protection authority fined LinkedIn, which belongs to Microsoft, for analysing the behaviour of people with a profile and using it for targeted advertising without a valid legal basis. Besides the fine, it ordered LinkedIn to bring the processing into compliance.",
+    "pt": "A autoridade irlandesa de proteção de dados multou o LinkedIn, que é da Microsoft, por analisar o comportamento de quem tem um perfil e usar isso para publicidade dirigida sem base legal válida. Além da multa, determinou que regularizasse o tratamento."
+   },
+   "fuente": "https://www.dataprotection.ie/en/news-media/press-releases/irish-data-protection-commission-fines-linkedin-ireland-eu310-million",
+   "copia": "https://web.archive.org/web/2026/https://www.dataprotection.ie/en/news-media/press-releases/irish-data-protection-commission-fines-linkedin-ireland-eu310-million"
+  },
+  {
+   "cat": "ia",
+   "cifra": "30,5 M€",
+   "empresa": "Clearview AI",
+   "anio": "2024",
+   "dia": "2024-09-01",
+   "autoridad": {
+    "es": "Autoridad DE Datos (Países Bajos)",
+    "en": "Dutch DPA",
+    "pt": "Autoridade DE Dados (Países Baixos)"
+   },
+   "titulo": {
+    "es": "Treinta mil millones de caras sacadas de internet",
+    "en": "Thirty billion faces scraped off the internet",
+    "pt": "Trinta bilhões de rostos tirados da internet"
+   },
+   "texto": {
+    "es": "La autoridad holandesa multó a Clearview AI por construir una base de datos con más de 30.000 millones de fotos de caras extraídas de internet, convertidas en un código biométrico por persona, sin permiso de nadie y sin decírselo a nadie. Además de la multa, hasta cinco millones más de apremio. Y un aviso poco habitual: la autoridad advirtió que usar Clearview es ilegal y que las empresas que lo hagan pueden esperar multa.",
+    "en": "The Dutch authority fined Clearview AI for building a database of more than 30 billion photos of faces scraped from the internet and turned into one biometric code per person, without anyone's permission and without telling anyone. On top of the fine, up to five million more in penalty payments. And an unusual warning: the authority said using Clearview is illegal and that companies doing so can expect fines of their own.",
+    "pt": "A autoridade holandesa multou a Clearview AI por construir um banco de dados com mais de 30 bilhões de fotos de rostos raspadas da internet, convertidas num código biométrico por pessoa, sem permissão de ninguém e sem contar a ninguém. Além da multa, até cinco milhões a mais de multa cominatória. E um aviso pouco comum: a autoridade avisou que usar a Clearview é ilegal e que as empresas que o fizerem podem esperar multa."
+   },
+   "fuente": "https://www.autoriteitpersoonsgegevens.nl/en/current/dutch-dpa-imposes-a-fine-on-clearview-because-of-illegal-data-collection-for-facial-recognition",
+   "copia": "https://web.archive.org/web/2026/https://www.autoriteitpersoonsgegevens.nl/en/current/dutch-dpa-imposes-a-fine-on-clearview-because-of-illegal-data-collection-for-facial-recognition"
+  },
+  {
+   "cat": "meta",
+   "cifra": "1.400 M$",
+   "empresa": "Meta Platforms",
+   "anio": "2024",
+   "dia": "2024-07-30",
+   "autoridad": {
+    "es": "Fiscalía de Texas (EE. UU.)",
+    "en": "Texas Attorney General (USA)",
+    "pt": "Procuradoria do Texas (EUA)"
+   },
+   "titulo": {
+    "es": "Reconocimiento facial en fotos sin consentimiento",
+    "en": "Facial recognition on photos without consent",
+    "pt": "Reconhecimento facial em fotos sem consentimento"
+   },
+   "texto": {
+    "es": "Texas demandó a Meta en 2022 por aplicar reconocimiento facial a las fotos subidas a Facebook (función 'Tag Suggestions', activada por defecto) sin el consentimiento de los texanos, lo que viola la ley biométrica estatal de 2009. Meta pagará 500 millones el primer año y 225 millones al año de 2025 a 2028. Meta niega haber actuado mal.",
+    "en": "Texas sued Meta in 2022 for applying facial recognition to photos uploaded to Facebook (the 'Tag Suggestions' feature, on by default) without Texans' consent, in violation of the state's 2009 biometric law. Meta will pay $500 million in the first year and $225 million a year from 2025 to 2028. Meta denies any wrongdoing.",
+    "pt": "O Texas processou a Meta em 2022 por aplicar reconhecimento facial às fotos enviadas ao Facebook (função 'Tag Suggestions', ativada por padrão) sem o consentimento dos texanos, violando a lei biométrica estadual de 2009. A Meta pagará 500 milhões no primeiro ano e 225 milhões por ano de 2025 a 2028. A Meta nega ter agido de forma errada."
+   },
+   "fuente": "https://www.texastribune.org/2024/07/30/texas-meta-facebook-biometric-data-settlement",
+   "copia": "https://web.archive.org/web/2026/https://www.texastribune.org/2024/07/30/texas-meta-facebook-biometric-data-settlement",
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   }
+  },
+  {
+   "cat": "otras",
+   "cifra": "290 M€",
+   "empresa": "Uber Technologies / Uber B.V.",
+   "anio": "2024",
+   "dia": "2024-07-22",
+   "autoridad": {
+    "es": "AP (Países Bajos)",
+    "en": "AP (Netherlands)",
+    "pt": "AP (Países Baixos)"
+   },
+   "titulo": {
+    "es": "Datos de conductores enviados a EE. UU. sin garantías",
+    "en": "Driver data sent to the US without safeguards",
+    "pt": "Dados de motoristas enviados aos EUA sem garantias"
+   },
+   "texto": {
+    "es": "La AP concluyó que Uber envió datos sensibles de conductores europeos a EE. UU. entre agosto de 2021 y noviembre de 2023 sin garantías adecuadas, en violación del artículo 44 del RGPD. Uber trataba sus filiales de EE. UU. y Países Bajos como corresponsables, pero la AP rechazó ese argumento. Uber sigue impugnando la multa.",
+    "en": "The AP found that Uber sent sensitive data of European drivers to the US between August 2021 and November 2023 without adequate safeguards, in breach of GDPR Article 44. Uber treated its US and Dutch entities as joint controllers, but the AP rejected that argument. Uber is still contesting the fine.",
+    "pt": "A AP concluiu que a Uber enviou dados sensíveis de motoristas europeus aos EUA entre agosto de 2021 e novembro de 2023 sem garantias adequadas, violando o artigo 44 do RGPD. A Uber tratava suas filiais dos EUA e dos Países Baixos como controladoras conjuntas, mas a AP rejeitou esse argumento. A Uber continua contestando a multa."
+   },
+   "fuente": "https://www.loc.gov/item/global-legal-monitor/2024-09-12/netherlands-uber-heavily-fined-for-violating-eus-general-data-protection-regulation/",
+   "copia": "https://web.archive.org/web/2026/https://www.loc.gov/item/global-legal-monitor/2024-09-12/netherlands-uber-heavily-fined-for-violating-eus-general-data-protection-regulation/",
+   "estado": {
+    "es": "Recurrida",
+    "en": "Appealed",
+    "pt": ""
+   }
+  },
+  {
+   "cat": "antivirus",
+   "cifra": "Prohibición",
+   "empresa": "Kaspersky Lab, Inc.",
+   "anio": "2024",
+   "dia": "2024-06-20",
+   "autoridad": {
+    "es": "Dpto. de Comercio – BIS (EE. UU.)",
+    "en": "Commerce Dept. – BIS (USA)",
+    "pt": "Depto. de Comércio – BIS (EUA)"
+   },
+   "titulo": {
+    "es": "Vetado en EE. UU. por riesgo de seguridad nacional",
+    "en": "Banned in the US over national security risk",
+    "pt": "Proibido nos EUA por risco à segurança nacional"
+   },
+   "texto": {
+    "es": "No es una multa de privacidad, sino una prohibición por seguridad nacional: el BIS prohibió a Kaspersky vender y actualizar antivirus y software de ciberseguridad en EE. UU. (las actualizaciones se permitieron hasta el 29-09-2024). Según el BIS, la empresa está sujeta a la jurisdicción rusa, su acceso administrativo a datos de clientes podría permitir que lleguen a Rusia y podría instalar software malicioso o retener actualizaciones. Además, tres entidades de Kaspersky entraron en la Entity List por cooperar con la inteligencia militar rusa.",
+    "en": "This is not a privacy fine but a national-security ban: the BIS barred Kaspersky from selling and updating antivirus and cybersecurity software in the US (updates were allowed until 29-09-2024). According to the BIS, the company is subject to Russian jurisdiction, its administrative access to customer data could allow that data to reach Russia, and it could install malicious software or withhold updates. In addition, three Kaspersky entities were added to the Entity List for cooperating with Russian military intelligence.",
+    "pt": "Não é uma multa de privacidade, mas uma proibição por segurança nacional: o BIS proibiu a Kaspersky de vender e atualizar antivírus e software de cibersegurança nos EUA (as atualizações foram permitidas até 29-09-2024). Segundo o BIS, a empresa está sujeita à jurisdição russa, seu acesso administrativo a dados de clientes poderia permitir que eles chegassem à Rússia e ela poderia instalar software malicioso ou reter atualizações. Além disso, três entidades da Kaspersky entraram na Entity List por cooperar com a inteligência militar russa."
+   },
+   "fuente": "https://www.bis.gov/press-release/commerce-department-prohibits-russian-kaspersky-software-u.s.-customers",
+   "copia": "https://web.archive.org/web/2026/https://www.bis.gov/press-release/commerce-department-prohibits-russian-kaspersky-software-u.s.-customers",
+   "estado": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   }
+  },
+  {
+   "cat": "operador",
+   "cifra": "~200 M$",
+   "empresa": "AT&T, Verizon, T-Mobile y Sprint",
+   "anio": "2024",
+   "dia": "2024-04-29",
+   "autoridad": {
+    "es": "FCC (EE. UU.)",
+    "en": "FCC (USA)",
+    "pt": "FCC (EUA)"
+   },
+   "titulo": {
+    "es": "Ubicación de clientes vendida a revendedores de datos",
+    "en": "Customer location data sold to resellers",
+    "pt": "Localização de clientes vendida a revendedores de dados"
+   },
+   "texto": {
+    "es": "Las cuatro operadoras vendieron acceso a la ubicación de sus clientes a agregadores que la revendían, y dejaron en manos de terceros la obligación de obtener el consentimiento, que muchas veces no se obtuvo. Siguieron vendiéndola después de saber que sus salvaguardas fallaban; los datos llegaron, por ejemplo, a un sheriff de Misuri a través de Securus. El total se reparte entre AT&T (más de 57 M), Verizon (unos 47 M), T-Mobile (más de 80 M) y Sprint (más de 12 M).",
+    "en": "The four carriers sold access to their customers' location to aggregators that resold it, shifting to third parties the duty to obtain consent, which often was not obtained. They kept selling it after learning their safeguards were failing; the data reached, for example, a Missouri sheriff through Securus. The total is split between AT&T (over $57M), Verizon (about $47M), T-Mobile (over $80M) and Sprint (over $12M).",
+    "pt": "As quatro operadoras venderam acesso à localização de seus clientes a agregadores que a revendiam, transferindo a terceiros a obrigação de obter o consentimento, que muitas vezes não foi obtido. Continuaram vendendo depois de saber que suas salvaguardas falhavam; os dados chegaram, por exemplo, a um xerife do Missouri por meio da Securus. O total se divide entre AT&T (mais de 57 mi), Verizon (cerca de 47 mi), T-Mobile (mais de 80 mi) e Sprint (mais de 12 mi)."
+   },
+   "fuente": "https://docs.fcc.gov/public/attachments/DOC-402213A1.pdf",
+   "copia": "https://web.archive.org/web/2026/https://docs.fcc.gov/public/attachments/DOC-402213A1.pdf"
+  },
+  {
+   "cat": "antivirus",
+   "cifra": "",
+   "empresa": "Avast Software s.r.o.",
+   "anio": "2024",
+   "dia": "2024-04-16",
+   "autoridad": {
+    "es": "ÚOOÚ (Chequia)",
+    "en": "ÚOOÚ (Czechia)",
+    "pt": "ÚOOÚ (Tchéquia)"
+   },
+   "titulo": {
+    "es": "Historial de navegación del antivirus pasado a su filial",
+    "en": "Antivirus users' browsing history passed to a subsidiary",
+    "pt": "Histórico de navegação do antivírus repassado à subsidiária"
+   },
+   "texto": {
+    "es": "La ÚOOÚ concluyó que en 2019 Avast pasó sin base legal a su filial Jumpshot el historial de navegación seudonimizado de unos 100 millones de usuarios de su antivirus y extensiones, mientras les decía que solo compartía datos anónimos para analizar tendencias. El 30-09-2025 el Tribunal Municipal de Praga confirmó las infracciones, pero anuló el importe de la multa y la cifra de unos 100 millones de afectados. Devolvió el caso a la ÚOOÚ para que recalcule la multa.",
+    "en": "The ÚOOÚ found that in 2019 Avast passed the pseudonymised browsing history of about 100 million users of its antivirus and extensions to its subsidiary Jumpshot without a legal basis, while telling them it only shared anonymous data for trend analysis. On 30-09-2025 the Prague Municipal Court upheld the violations but annulled the fine amount and the figure of about 100 million affected users. It sent the case back to the ÚOOÚ to recalculate the fine.",
+    "pt": "A ÚOOÚ concluiu que em 2019 a Avast repassou sem base legal à sua subsidiária Jumpshot o histórico de navegação pseudonimizado de cerca de 100 milhões de usuários de seu antivírus e extensões, enquanto lhes dizia que só compartilhava dados anônimos para análise de tendências. Em 30-09-2025 o Tribunal Municipal de Praga confirmou as infrações, mas anulou o valor da multa e o número de cerca de 100 milhões de afetados. Devolveu o caso à ÚOOÚ para recalcular a multa."
+   },
+   "fuente": "https://msp.gov.cz/documents/d/mestsky-soud-v-praze/tiskova-zprava-k-rozsudku-ze-dne-30-9-2025-sp-zn-5-a-56-2024",
+   "copia": "",
+   "estado": {
+    "es": "Anulada",
+    "en": "Annulled",
+    "pt": "Anulada"
+   }
+  },
+  {
+   "cat": "antivirus",
+   "cifra": "16,5 M$",
+   "empresa": "Antivirus",
+   "anio": "2024",
+   "dia": "2024-02-22",
+   "autoridad": {
+    "es": "FTC",
+    "en": "FTC",
+    "pt": "FTC"
+   },
+   "titulo": {
+    "es": "Avast · vendía la navegación de quienes protegía",
+    "en": "Avast · sold the browsing of the people it protected",
+    "pt": "Avast · vendia a navegação de quem protegia"
+   },
+   "texto": {
+    "es": "La FTC concluyó que Avast, mientras prometía bloquear el rastreo, vendió a través de su filial Jumpshot datos de navegación detallados y reidentificables a más de 100 terceros entre 2014 y 2020. Tiene prohibido vender datos de navegación con fines publicitarios. Avast discrepa de la caracterización de los hechos.",
+    "en": "The FTC found that Avast, while promising to block tracking, sold detailed, re-identifiable browsing data to more than 100 third parties through its subsidiary Jumpshot between 2014 and 2020. It is banned from selling browsing data for advertising. Avast disagrees with the characterisation of the facts.",
+    "pt": "A FTC concluiu que a Avast, enquanto prometia bloquear o rastreamento, vendeu através da sua subsidiária Jumpshot dados de navegação detalhados e reidentificáveis para mais de 100 terceiros entre 2014 e 2020. Está proibida de vender dados de navegação para fins publicitários. A Avast discorda da caracterização dos fatos."
+   },
+   "fuente": "https://www.ftc.gov/news-events/news/press-releases/2024/02/ftc-order-will-ban-avast-selling-browsing-data-advertising-purposes-require-it-pay-165-million-over",
+   "copia": "https://web.archive.org/web/2026/https://www.ftc.gov/news-events/news/press-releases/2024/02/ftc-order-will-ban-avast-selling-browsing-data-advertising-purposes-require-it-pay-165-million-over"
+  },
+  {
+   "cat": "venta",
+   "cifra": "Prohibición",
+   "empresa": "InMarket Media",
+   "anio": "2024",
+   "dia": "2024-01-18",
+   "autoridad": {
+    "es": "FTC (EE. UU.)",
+    "en": "FTC (USA)",
+    "pt": "FTC (EUA)"
+   },
+   "titulo": {
+    "es": "Ubicación de apps usada para anuncios sin consentimiento",
+    "en": "App location data used for ads without consent",
+    "pt": "Localização de apps usada em anúncios sem consentimento"
+   },
+   "texto": {
+    "es": "Según la FTC, InMarket usó datos de ubicación de sus apps (CheckPoints, ListEase) y de apps de terceros con su SDK para publicidad, sin informar ni obtener consentimiento, y creó casi 2.000 segmentos de audiencia. Conservaba la geolocalización durante cinco años. La orden le prohíbe vender o licenciar datos de ubicación precisos.",
+    "en": "According to the FTC, InMarket used location data from its own apps (CheckPoints, ListEase) and from third-party apps with its SDK for advertising, without informing users or obtaining consent, and created nearly 2,000 audience segments. It kept geolocation data for five years. The order bans it from selling or licensing precise location data.",
+    "pt": "Segundo a FTC, a InMarket usou dados de localização de seus apps (CheckPoints, ListEase) e de apps de terceiros com seu SDK para publicidade, sem informar nem obter consentimento, e criou quase 2.000 segmentos de público. Guardava a geolocalização por cinco anos. A ordem a proíbe de vender ou licenciar dados de localização precisos."
+   },
+   "fuente": "https://data.aclum.org/wp-content/uploads/2025/01/FTC_www_ftc_gov_news-events_news_press-releases_2024_01_ftc-order-will-ban-inmarket-selling-precise-consumer-location-data.pdf",
+   "copia": "https://web.archive.org/web/2026/https://data.aclum.org/wp-content/uploads/2025/01/FTC_www_ftc_gov_news-events_news_press-releases_2024_01_ftc-order-will-ban-inmarket-selling-precise-consumer-location-data.pdf",
+   "estado": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   }
+  },
+  {
+   "cat": "venta",
+   "cifra": "Prohibición",
+   "empresa": "X-Mode Social / Outlogic",
+   "anio": "2024",
+   "dia": "2024-01-09",
+   "autoridad": {
+    "es": "FTC (EE. UU.)",
+    "en": "FTC (USA)",
+    "pt": "FTC (EUA)"
+   },
+   "titulo": {
+    "es": "Ubicación vendida que revelaba visitas a clínicas y templos",
+    "en": "Sold location data exposed clinic and worship visits",
+    "pt": "Localização vendida revelava visitas a clínicas e templos"
+   },
+   "texto": {
+    "es": "La FTC acusó a X-Mode de vender, sin consentimiento informado, datos de ubicación precisos vinculados a IDs publicitarios que permitían rastrear visitas a clínicas, centros de salud reproductiva, templos y refugios para víctimas de violencia. Es la primera orden de la FTC que prohíbe a un broker vender datos de ubicación sensibles y le obliga a borrar los ya recogidos.",
+    "en": "The FTC accused X-Mode of selling, without informed consent, precise location data linked to advertising IDs that made it possible to track visits to clinics, reproductive health centres, places of worship and shelters for victims of violence. It is the first FTC order banning a data broker from selling sensitive location data and requiring it to delete data already collected.",
+    "pt": "A FTC acusou a X-Mode de vender, sem consentimento informado, dados de localização precisos vinculados a IDs de publicidade que permitiam rastrear visitas a clínicas, centros de saúde reprodutiva, templos e abrigos para vítimas de violência. É a primeira ordem da FTC que proíbe um corretor de dados de vender dados de localização sensíveis e o obriga a apagar os já coletados."
+   },
+   "fuente": "https://ftc.gov/news-events/news/press-releases/2024/01/ftc-order-prohibits-data-broker-x-mode-social-outlogic-selling-sensitive-location-data",
+   "copia": "https://web.archive.org/web/2026/https://ftc.gov/news-events/news/press-releases/2024/01/ftc-order-prohibits-data-broker-x-mode-social-outlogic-selling-sensitive-location-data",
+   "estado": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   }
+  },
+  {
+   "cat": "tiktok",
+   "cifra": "345 M€",
+   "empresa": "TikTok Technology Limited",
+   "anio": "2023",
+   "dia": "2023-09-01",
+   "autoridad": {
+    "es": "DPC (Irlanda)",
+    "en": "DPC (Ireland)",
+    "pt": "DPC (Irlanda)"
+   },
+   "titulo": {
+    "es": "Cuentas de menores públicas por defecto",
+    "en": "Teen accounts set to public by default",
+    "pt": "Contas de menores públicas por padrão"
+   },
+   "texto": {
+    "es": "Entre julio y diciembre de 2020, las cuentas de usuarios de 13 a 17 años eran públicas por defecto, la función 'Family Pairing' no verificaba que el adulto vinculado fuera padre o tutor y la información de privacidad era vaga. La DPC también halló patrones oscuros que empujaban a los menores hacia ajustes más invasivos.",
+    "en": "Between July and December 2020, accounts of users aged 13 to 17 were public by default, the 'Family Pairing' feature did not verify that the linked adult was a parent or guardian, and privacy information was vague. The DPC also found dark patterns that nudged minors towards more invasive settings.",
+    "pt": "Entre julho e dezembro de 2020, as contas de usuários de 13 a 17 anos eram públicas por padrão, a função 'Family Pairing' não verificava se o adulto vinculado era pai, mãe ou responsável e as informações de privacidade eram vagas. A DPC também encontrou padrões obscuros que empurravam os menores para configurações mais invasivas."
+   },
+   "fuente": "https://www.matheson.com/insights/dpc-fines-tiktok-345m-for-gdpr-violations-concerning-childrens-data/",
+   "copia": "https://web.archive.org/web/2026/https://www.matheson.com/insights/dpc-fines-tiktok-345m-for-gdpr-violations-concerning-childrens-data/"
+  },
+  {
+   "cat": "microsoft",
+   "cifra": "20 M$",
+   "empresa": "Microsoft (Xbox)",
+   "anio": "2023",
+   "dia": "2023-06-12",
+   "autoridad": {
+    "es": "FTC y DOJ (EE. UU.)",
+    "en": "FTC & DOJ (USA)",
+    "pt": "FTC e DOJ (EUA)"
+   },
+   "titulo": {
+    "es": "Datos de niños recogidos antes del permiso de los padres",
+    "en": "Children's data collected before parental consent",
+    "pt": "Dados de crianças coletados antes do consentimento dos pais"
+   },
+   "texto": {
+    "es": "Según la demanda, Microsoft recogió datos personales, incluidos números de teléfono, de niños que se registraban en Xbox Live antes de avisar a los padres y obtener su consentimiento, y les dio avisos incompletos. También conservó datos de niños que no terminaron de crear la cuenta más tiempo del que permite la COPPA.",
+    "en": "According to the complaint, Microsoft collected personal data, including phone numbers, from children signing up for Xbox Live before notifying parents and obtaining their consent, and gave them incomplete notices. It also kept data from children who did not finish creating an account for longer than COPPA allows.",
+    "pt": "Segundo a ação, a Microsoft coletou dados pessoais, incluindo números de telefone, de crianças que se cadastravam no Xbox Live antes de avisar os pais e obter seu consentimento, e deu a eles avisos incompletos. Também guardou dados de crianças que não terminaram de criar a conta por mais tempo do que a COPPA permite."
+   },
+   "fuente": "https://www.justice.gov/opa/pr/microsoft-agrees-pay-20-million-civil-penalty-alleged-violations-children-s-privacy-laws",
+   "copia": "https://web.archive.org/web/2026/https://www.justice.gov/opa/pr/microsoft-agrees-pay-20-million-civil-penalty-alleged-violations-children-s-privacy-laws",
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   }
+  },
+  {
+   "cat": "amazon",
+   "cifra": "25 M$",
+   "empresa": "Amazon (Alexa)",
+   "anio": "2023",
+   "dia": "2023-05-31",
+   "autoridad": {
+    "es": "FTC y DOJ (EE. UU.)",
+    "en": "FTC (USA)",
+    "pt": "FTC (EUA)"
+   },
+   "titulo": {
+    "es": "Grabaciones de voz de niños conservadas durante años",
+    "en": "Staff could access customers' private videos",
+    "pt": "Funcionários com acesso a vídeos privados de clientes"
+   },
+   "texto": {
+    "es": "Según la FTC, Amazon violó la COPPA al conservar durante años las grabaciones de voz y los datos de ubicación de niños, y no los borró por completo cuando los padres lo pidieron. Usó esos datos para entrenar su reconocimiento de voz.",
+    "en": "The FTC accused Ring of letting employees and contractors access customers' private videos, and of having security so weak that hackers took control of some accounts and cameras. Many of the violations predate Amazon's purchase of Ring in 2018. The amount goes to customer refunds.",
+    "pt": "A FTC acusou a Ring de permitir que funcionários e terceirizados acessassem vídeos privados de clientes, e de ter uma segurança tão fraca que hackers assumiram o controle de algumas contas e câmeras. Muitas das infrações são anteriores à compra da Ring pela Amazon em 2018. O valor vai para reembolsos a clientes."
+   },
+   "fuente": "https://www.wect.com/2023/05/31/ftc-charges-amazon-with-privacy-violations-over-alexa-ring-cameras",
+   "copia": "https://web.archive.org/web/2026/https://www.wect.com/2023/05/31/ftc-charges-amazon-with-privacy-violations-over-alexa-ring-cameras",
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   }
+  },
+  {
+   "cat": "amazon",
+   "cifra": "5,8 M$",
+   "empresa": "Ring (Amazon)",
+   "anio": "2023",
+   "dia": "2023-05-31",
+   "autoridad": {
+    "es": "FTC (EE. UU.)",
+    "en": "FTC (USA)",
+    "pt": "FTC (EUA)"
+   },
+   "titulo": {
+    "es": "Empleados con acceso a vídeos privados de clientes",
+    "en": "Staff could access customers' private videos",
+    "pt": "Funcionários com acesso a vídeos privados de clientes"
+   },
+   "texto": {
+    "es": "La FTC acusó a Ring de permitir que empleados y contratistas accedieran a vídeos privados de clientes, y de tener una seguridad tan débil que unos hackers tomaron el control de algunas cuentas y cámaras. Muchas de las infracciones son anteriores a la compra de Ring por Amazon en 2018. El importe se destina a reembolsos a clientes.",
+    "en": "The FTC accused Ring of letting employees and contractors access customers' private videos, and of having security so weak that hackers took control of some accounts and cameras. Many of the violations predate Amazon's purchase of Ring in 2018. The amount goes to customer refunds.",
+    "pt": "A FTC acusou a Ring de permitir que funcionários e terceirizados acessassem vídeos privados de clientes, e de ter uma segurança tão fraca que hackers assumiram o controle de algumas contas e câmeras. Muitas das infrações são anteriores à compra da Ring pela Amazon em 2018. O valor vai para reembolsos a clientes."
+   },
+   "fuente": "https://www.wect.com/2023/05/31/ftc-charges-amazon-with-privacy-violations-over-alexa-ring-cameras",
+   "copia": "https://web.archive.org/web/2026/https://www.wect.com/2023/05/31/ftc-charges-amazon-with-privacy-violations-over-alexa-ring-cameras",
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   }
+  },
+  {
+   "cat": "meta",
+   "cifra": "1.200 M€",
+   "empresa": "Meta",
+   "anio": "2023",
+   "dia": "2023-05-22",
+   "autoridad": {
+    "es": "DPC (Irlanda)",
+    "en": "DPC (Ireland)",
+    "pt": "DPC (Irlanda)"
+   },
+   "titulo": {
+    "es": "La multa más grande que se ha puesto nunca por datos",
+    "en": "The largest data fine ever handed down",
+    "pt": "A maior multa de dados já aplicada"
+   },
+   "texto": {
+    "es": "Mil doscientos millones de euros a Meta, la dueña de Facebook, Instagram y WhatsApp, por seguir mandando a Estados Unidos los datos de los usuarios europeos sin una protección equivalente a la de aquí. Es la mayor sanción de la historia del reglamento europeo de protección de datos.",
+    "en": "One point two billion euros against Meta, the owner of Facebook, Instagram and WhatsApp, for continuing to send European users' data to the United States without protection equivalent to Europe's. It is the largest penalty in the history of the European data protection regulation.",
+    "pt": "Um bilhão e duzentos milhões de euros para a Meta, dona do Facebook, do Instagram e do WhatsApp, por continuar mandando para os Estados Unidos os dados dos usuários europeus sem uma proteção equivalente à da Europa. É a maior sanção da história do regulamento europeu de proteção de dados."
+   },
+   "fuente": "https://www.dataprotection.ie/en/news-media/press-releases/Data-Protection-Commission-announces-conclusion-of-inquiry-into-Meta-Ireland",
+   "copia": "https://web.archive.org/web/2026/https://www.dataprotection.ie/en/news-media/press-releases/Data-Protection-Commission-announces-conclusion-of-inquiry-into-Meta-Ireland"
+  },
+  {
+   "cat": "meta",
+   "cifra": "390 M€",
+   "empresa": "Meta Platforms Ireland (Facebook 210 M€ + Instagram 180 M€)",
+   "anio": "2023",
+   "dia": "2023-01-04",
+   "autoridad": {
+    "es": "DPC (Irlanda)",
+    "en": "DPC (Ireland)",
+    "pt": "DPC (Irlanda)"
+   },
+   "titulo": {
+    "es": "Publicidad personalizada sin base legal válida",
+    "en": "Personalised ads without a valid legal basis",
+    "pt": "Publicidade personalizada sem base legal válida"
+   },
+   "texto": {
+    "es": "La DPC y el EDPB concluyeron que Meta no podía usar el 'contrato' como base legal para la publicidad basada en el comportamiento en Facebook e Instagram. También incumplió la transparencia al no explicar claramente qué base legal usaba. Se le dieron tres meses para adecuar el tratamiento.",
+    "en": "The DPC and the EDPB concluded that Meta could not rely on 'contract' as the legal basis for behavioural advertising on Facebook and Instagram. It also breached transparency rules by not clearly explaining which legal basis it was using. It was given three months to bring its processing into compliance.",
+    "pt": "A DPC e o EDPB concluíram que a Meta não podia usar o 'contrato' como base legal para a publicidade comportamental no Facebook e no Instagram. Também descumpriu a transparência ao não explicar claramente qual base legal usava. Recebeu três meses para adequar o tratamento."
+   },
+   "fuente": "https://www.lawsociety.ie/gazette/top-stories/2023/january/meta-fined-390-million-over-gdpr-breaches/",
+   "copia": "https://web.archive.org/web/2026/https://www.lawsociety.ie/gazette/top-stories/2023/january/meta-fined-390-million-over-gdpr-breaches/",
+   "estado": {
+    "es": "Recurrida",
+    "en": "Appealed",
+    "pt": ""
+   }
+  },
+  {
+   "cat": "meta",
+   "cifra": "265 M€",
+   "empresa": "Meta Platforms Ireland (Facebook)",
+   "anio": "2022",
+   "dia": "2022-11-28",
+   "autoridad": {
+    "es": "DPC (Irlanda)",
+    "en": "DPC (Ireland)",
+    "pt": "DPC (Irlanda)"
+   },
+   "titulo": {
+    "es": "Fallos de diseño que permitieron extraer datos de usuarios",
+    "en": "Design failures that let user data be scraped",
+    "pt": "Falhas de concepção que permitiram extrair dados de usuários"
+   },
+   "texto": {
+    "es": "En la investigación sobre la extracción masiva de datos ('data scraping') de Facebook, la DPC halló infracciones de los artículos 25(1) y 25(2) del RGPD (protección de datos desde el diseño y por defecto). Impuso multas por 265 millones, una amonestación y una orden de adecuación.",
+    "en": "In its inquiry into Facebook 'data scraping', the DPC found breaches of GDPR Articles 25(1) and 25(2) (data protection by design and by default). It imposed fines totalling €265 million, a reprimand and an order to bring processing into compliance.",
+    "pt": "Na investigação sobre a extração em massa de dados ('data scraping') do Facebook, a DPC encontrou violações dos artigos 25(1) e 25(2) do RGPD (proteção de dados desde a concepção e por padrão). Impôs multas de 265 milhões, uma advertência e uma ordem de adequação."
+   },
+   "fuente": "https://www.dataprotection.ie/en/news-media/press-releases/data-protection-commission-announces-decision-in-facebook-data-scraping-inquiry",
+   "copia": "https://web.archive.org/web/2026/https://www.dataprotection.ie/en/news-media/press-releases/data-protection-commission-announces-decision-in-facebook-data-scraping-inquiry"
+  },
+  {
+   "cat": "google",
+   "cifra": "391,5 M$",
+   "empresa": "Google",
+   "anio": "2022",
+   "dia": "2022-11-14",
+   "autoridad": {
+    "es": "40 fiscales estatales (EE. UU.)",
+    "en": "40 state AGs (USA)",
+    "pt": "40 procuradores estaduais (EUA)"
+   },
+   "titulo": {
+    "es": "Ubicación guardada aunque desactivaras el historial",
+    "en": "Location collected after you turned off history",
+    "pt": "Localização coletada mesmo com o histórico desativado"
+   },
+   "texto": {
+    "es": "Los estados acusaron a Google de seguir recopilando datos de ubicación después de que los usuarios desactivaran el historial de ubicación de su cuenta, y de usarlos para publicidad. Además del pago, Google se comprometió a mejorar sus avisos sobre ubicación a partir de 2023.",
+    "en": "The states accused Google of continuing to collect location data after users turned off Location History in their account, and of using it for advertising. In addition to the payment, Google committed to improving its location disclosures starting in 2023.",
+    "pt": "Os estados acusaram o Google de continuar coletando dados de localização depois que os usuários desativaram o histórico de localização da conta, e de usá-los para publicidade. Além do pagamento, o Google se comprometeu a melhorar seus avisos sobre localização a partir de 2023."
+   },
+   "fuente": "https://www.cnbc.com/2022/11/14/google-settles-with-40-states-over-location-tracking-practices.html",
+   "copia": "https://web.archive.org/web/2026/https://www.cnbc.com/2022/11/14/google-settles-with-40-states-over-location-tracking-practices.html",
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   }
+  },
+  {
+   "cat": "ia",
+   "cifra": "20 M€",
+   "empresa": "Clearview AI",
+   "anio": "2022",
+   "dia": "2022-10-17",
+   "autoridad": {
+    "es": "CNIL (Francia)",
+    "en": "CNIL (France)",
+    "pt": "CNIL (França)"
+   },
+   "titulo": {
+    "es": "Rostros recogidos y usados sin base legal",
+    "en": "Faces collected and used without a legal basis",
+    "pt": "Rostos coletados e usados sem base legal"
+   },
+   "texto": {
+    "es": "La CNIL concluyó que Clearview recogía y usaba datos biométricos (rostros) de personas en Francia sin base legal, sin atender los derechos de acceso y supresión y sin responder a su requerimiento de noviembre de 2021. Le impuso la multa máxima, más 100.000 euros por día de retraso, y le ordenó dejar de recoger esos datos y borrar los existentes en dos meses.",
+    "en": "The CNIL found that Clearview collected and used biometric data (faces) of people in France without a legal basis, without honouring access and erasure rights, and without responding to its November 2021 formal notice. It imposed the maximum fine, plus €100,000 per day of delay, and ordered it to stop collecting that data and delete existing data within two months.",
+    "pt": "A CNIL concluiu que a Clearview coletava e usava dados biométricos (rostos) de pessoas na França sem base legal, sem atender os direitos de acesso e exclusão e sem responder à sua notificação de novembro de 2021. Impôs a multa máxima, mais 100.000 euros por dia de atraso, e ordenou que parasse de coletar esses dados e apagasse os existentes em dois meses."
+   },
+   "fuente": "https://www.hunton.com/privacy-and-cybersecurity-law-blog/cnil-fines-clearview-ai-20-million-euros-for-unlawful-use-of-facial-recognition-technology",
+   "copia": "https://web.archive.org/web/2026/https://www.hunton.com/privacy-and-cybersecurity-law-blog/cnil-fines-clearview-ai-20-million-euros-for-unlawful-use-of-facial-recognition-technology"
+  },
+  {
+   "cat": "meta",
+   "cifra": "405 M€",
+   "empresa": "Meta Platforms Ireland (Instagram)",
+   "anio": "2022",
+   "dia": "2022-09-15",
+   "autoridad": {
+    "es": "DPC (Irlanda)",
+    "en": "DPC (Ireland)",
+    "pt": "DPC (Irlanda)"
+   },
+   "titulo": {
+    "es": "Datos de menores tratados sin las protecciones debidas",
+    "en": "Children's data processed without required safeguards",
+    "pt": "Dados de menores tratados sem as proteções devidas"
+   },
+   "texto": {
+    "es": "La DPC concluyó que Instagram vulneró el RGPD al tratar datos de menores, con fallos de transparencia, minimización, privacidad desde el diseño y por defecto y evaluación de impacto (arts. 5, 6, 12, 24, 25 y 35). Además de la multa, emitió una amonestación y ordenó adecuar el tratamiento.",
+    "en": "The DPC found that Instagram breached the GDPR in processing children's data, with failures in transparency, data minimisation, privacy by design and by default, and impact assessment (Arts. 5, 6, 12, 24, 25 and 35). In addition to the fine, it issued a reprimand and ordered the processing to be brought into compliance.",
+    "pt": "A DPC concluiu que o Instagram violou o RGPD ao tratar dados de menores, com falhas de transparência, minimização, privacidade desde a concepção e por padrão e avaliação de impacto (arts. 5, 6, 12, 24, 25 e 35). Além da multa, emitiu uma advertência e ordenou a adequação do tratamento."
+   },
+   "fuente": "https://www.dataprotection.ie/en/news-media/press-releases/data-protection-commission-announces-decision-instagram-inquiry",
+   "copia": "https://web.archive.org/web/2026/https://www.dataprotection.ie/en/news-media/press-releases/data-protection-commission-announces-decision-instagram-inquiry"
+  },
+  {
+   "cat": "otras",
+   "cifra": "150 M$",
+   "empresa": "Twitter (hoy X)",
+   "anio": "2022",
+   "dia": "2022-05-01",
+   "autoridad": {
+    "es": "FTC y DOJ (EE. UU.)",
+    "en": "FTC & DOJ (USA)",
+    "pt": "FTC e DOJ (EUA)"
+   },
+   "titulo": {
+    "es": "Teléfonos y emails de seguridad usados para publicidad",
+    "en": "Security phone numbers and emails used for ads",
+    "pt": "Telefones e e-mails de segurança usados para publicidade"
+   },
+   "texto": {
+    "es": "Entre 2013 y 2019 Twitter usó para publicidad dirigida los emails y teléfonos que más de 140 millones de usuarios habían dado para la verificación en dos pasos y la recuperación de la cuenta. La FTC consideró que así violaba su orden de 2011 y los acuerdos Privacy Shield con la UE y Suiza.",
+    "en": "Between 2013 and 2019 Twitter used for targeted advertising the emails and phone numbers that more than 140 million users had provided for two-factor verification and account recovery. The FTC found that this violated its 2011 order and the Privacy Shield frameworks with the EU and Switzerland.",
+    "pt": "Entre 2013 e 2019 o Twitter usou para publicidade direcionada os e-mails e telefones que mais de 140 milhões de usuários haviam fornecido para a verificação em duas etapas e a recuperação da conta. A FTC considerou que isso violava sua ordem de 2011 e os acordos Privacy Shield com a UE e a Suíça."
+   },
+   "fuente": "https://www.malwarebytes.com/blog/news/2022/05/twitter-fined-150m-for-using-2fa-phone-numbers-for-marketing",
+   "copia": "https://web.archive.org/web/2026/https://www.malwarebytes.com/blog/news/2022/05/twitter-fined-150m-for-using-2fa-phone-numbers-for-marketing",
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   }
+  },
+  {
+   "cat": "ia",
+   "cifra": "20 M€",
+   "empresa": "Clearview AI",
+   "anio": "2022",
+   "dia": "2022-03-09",
+   "autoridad": {
+    "es": "Garante (Italia)",
+    "en": "Garante (Italy)",
+    "pt": "Garante (Itália)"
+   },
+   "titulo": {
+    "es": "Datos biométricos tratados sin base jurídica ni aviso",
+    "en": "Biometric data processed without legal basis or notice",
+    "pt": "Dados biométricos tratados sem base legal nem aviso"
+   },
+   "texto": {
+    "es": "El Garante concluyó que Clearview trataba datos biométricos y de geolocalización de personas en Italia sin base jurídica adecuada, sin informarles, sin límite de conservación y para fines distintos a los de su publicación. Le ordenó borrar esos datos, le prohibió seguir recogiéndolos y le exigió nombrar un representante en la UE.",
+    "en": "The Garante found that Clearview processed biometric and geolocation data of people in Italy without an adequate legal basis, without informing them, without a retention limit and for purposes other than those for which the data had been published. It ordered Clearview to delete that data, banned further collection and required it to appoint an EU representative.",
+    "pt": "O Garante concluiu que a Clearview tratava dados biométricos e de geolocalização de pessoas na Itália sem base jurídica adequada, sem informá-las, sem limite de conservação e para fins diferentes daqueles de sua publicação. Ordenou que apagasse esses dados, proibiu que continuasse a coletá-los e exigiu que nomeasse um representante na UE."
+   },
+   "fuente": "https://www.fiscal-focus.it/news-24/ore-11-35-riconoscimento-facciale-il-garante-privacy-sanziona-clearview-per-20-milioni-di-euro-vietato-l-uso-dei-dati-biometrici-e-il-monitoraggio-degli-italiani,3,140317",
+   "copia": ""
+  },
+  {
+   "cat": "google",
+   "cifra": "150 M€",
+   "empresa": "Google LLC y Google Ireland",
+   "anio": "2021",
+   "dia": "2021-12-31",
+   "autoridad": {
+    "es": "CNIL (Francia)",
+    "en": "CNIL (France)",
+    "pt": "CNIL (França)"
+   },
+   "titulo": {
+    "es": "Rechazar cookies era más difícil que aceptarlas",
+    "en": "Rejecting cookies was harder than accepting them",
+    "pt": "Recusar cookies era mais difícil do que aceitar"
+   },
+   "texto": {
+    "es": "En google.fr y youtube.com se podían aceptar todas las cookies con un clic, pero rechazarlas requería varios pasos, en contra de la ley francesa, que exige que rechazar sea tan fácil como aceptar. La CNIL consideró la infracción deliberada. Dio tres meses para corregirla, con una multa de 100.000 euros por cada día de retraso.",
+    "en": "On google.fr and youtube.com, all cookies could be accepted with one click, but rejecting them took several steps, contrary to French law, which requires refusing to be as easy as accepting. The CNIL considered the breach deliberate. It gave three months to fix it, with a penalty of €100,000 for each day of delay.",
+    "pt": "No google.fr e no youtube.com era possível aceitar todos os cookies com um clique, mas recusá-los exigia várias etapas, contrariando a lei francesa, que exige que recusar seja tão fácil quanto aceitar. A CNIL considerou a infração deliberada. Deu três meses para corrigi-la, sob multa de 100.000 euros por dia de atraso."
+   },
+   "fuente": "https://www.taylorwessing.com/fr/insights-and-events/insights/2022/01/flash-it---january-2022",
+   "copia": "https://web.archive.org/web/2026/https://www.taylorwessing.com/fr/insights-and-events/insights/2022/01/flash-it---january-2022"
+  },
+  {
+   "cat": "amazon",
+   "cifra": "746 M€",
+   "empresa": "Amazon Europe Core",
+   "anio": "2021",
+   "dia": "2021-07-01",
+   "autoridad": {
+    "es": "CNPD (Luxemburgo)",
+    "en": "CNPD (Luxembourg)",
+    "pt": "CNPD (Luxemburgo)"
+   },
+   "titulo": {
+    "es": "Publicidad por intereses sin base legal ni transparencia",
+    "en": "Interest-based ads without legal basis or transparency",
+    "pt": "Publicidade por interesses sem base legal nem transparência"
+   },
+   "texto": {
+    "es": "La CNPD concluyó que Amazon trató datos personales para publicidad basada en intereses sin base legal válida y sin transparencia, infringiendo los artículos 6, 12-17 y 21 del RGPD. En 2025 el Tribunal Administrativo de Luxemburgo desestimó el recurso de Amazon, confirmó esas conclusiones y reactivó la multa diaria de 746.000 euros, suspendida durante el recurso. Amazon estudiaba apelar.",
+    "en": "The CNPD found that Amazon processed personal data for interest-based advertising without a valid legal basis and without transparency, breaching GDPR Articles 6, 12-17 and 21. In 2025 the Luxembourg Administrative Court rejected Amazon's appeal, upheld those findings and reinstated the €746,000 daily penalty, which had been suspended during the appeal. Amazon was considering a further appeal.",
+    "pt": "A CNPD concluiu que a Amazon tratou dados pessoais para publicidade baseada em interesses sem base legal válida e sem transparência, violando os artigos 6, 12-17 e 21 do RGPD. Em 2025 o Tribunal Administrativo de Luxemburgo rejeitou o recurso da Amazon, confirmou essas conclusões e reativou a multa diária de 746.000 euros, suspensa durante o recurso. A Amazon estudava recorrer."
+   },
+   "fuente": "https://www.freevacy.com/news/luxembourg-administrative-court/luxembourg-court-rejects-amazons-appeal-against-eur746m-gdpr-fine/6222",
+   "copia": "https://web.archive.org/web/2026/https://www.freevacy.com/news/luxembourg-administrative-court/luxembourg-court-rejects-amazons-appeal-against-eur746m-gdpr-fine/6222",
+   "estado": {
+    "es": "Firme",
+    "en": "Appealed",
+    "pt": "Definitiva"
+   }
+  },
+  {
+   "cat": "otras",
+   "cifra": "18,4 M£",
+   "empresa": "Marriott International",
+   "anio": "2020",
+   "dia": "2020-10-30",
+   "autoridad": {
+    "es": "ICO (Reino Unido)",
+    "en": "ICO (UK)",
+    "pt": "ICO (Reino Unido)"
+   },
+   "titulo": {
+    "es": "Datos de huéspedes expuestos en un ciberataque no detectado",
+    "en": "Guest data exposed in an undetected cyberattack",
+    "pt": "Dados de hóspedes expostos em ataque não detectado"
+   },
+   "texto": {
+    "es": "La ICO multó a Marriott por no proteger los datos de millones de clientes en un ciberataque a Starwood que empezó en 2014 y pasó inadvertido hasta septiembre de 2018. Se expusieron unos 339 millones de registros de huéspedes, 7 millones de ellos de personas del Reino Unido. Marriott no recurrió, sin admitir responsabilidad.",
+    "en": "The ICO fined Marriott for failing to protect the data of millions of customers in a cyberattack on Starwood that began in 2014 and went undetected until September 2018. About 339 million guest records were exposed, 7 million of them belonging to people in the UK. Marriott did not appeal, without admitting liability.",
+    "pt": "A ICO multou a Marriott por não proteger os dados de milhões de clientes em um ataque cibernético à Starwood que começou em 2014 e passou despercebido até setembro de 2018. Foram expostos cerca de 339 milhões de registros de hóspedes, 7 milhões deles de pessoas do Reino Unido. A Marriott não recorreu, sem admitir responsabilidade."
+   },
+   "fuente": "https://mobilemarketingmagazine.com/marriott-handed-18-4m-fine-for-data-breach-by-ico/",
+   "copia": "https://web.archive.org/web/2026/https://mobilemarketingmagazine.com/marriott-handed-18-4m-fine-for-data-breach-by-ico/",
+   "estado": {
+    "es": "Firme",
+    "en": "Final",
+    "pt": "Definitiva"
+   }
+  },
+  {
+   "cat": "otras",
+   "cifra": "20 M£",
+   "empresa": "British Airways",
+   "anio": "2020",
+   "dia": "2020-10-16",
+   "autoridad": {
+    "es": "ICO (Reino Unido)",
+    "en": "ICO (UK)",
+    "pt": "ICO (Reino Unido)"
+   },
+   "titulo": {
+    "es": "Brecha de datos que afectó a más de 400.000 clientes",
+    "en": "Data breach affecting over 400,000 customers",
+    "pt": "Vazamento de dados afetou mais de 400 mil clientes"
+   },
+   "texto": {
+    "es": "La ICO multó a British Airways por una brecha de datos de junio de 2018 que afectó a más de 400.000 clientes. La multa propuesta al principio era de 183,39 millones de libras (alrededor del 1,5 % de su facturación global).",
+    "en": "The ICO fined British Airways over a June 2018 data breach that affected more than 400,000 customers. The fine initially proposed was £183.39 million (around 1.5% of its global turnover).",
+    "pt": "A ICO multou a British Airways por um vazamento de dados de junho de 2018 que afetou mais de 400.000 clientes. A multa proposta inicialmente era de 183,39 milhões de libras (cerca de 1,5% do seu faturamento global)."
+   },
+   "fuente": "https://www.simmons-simmons.com/en/publications/ckgcdbex6it6m0a98mek0bqss/british-airways-fined-20m-over-data-breach",
+   "copia": ""
+  },
+  {
+   "cat": "google",
+   "cifra": "170 M$",
+   "empresa": "Google y YouTube",
+   "anio": "2019",
+   "dia": "2019-09-04",
+   "autoridad": {
+    "es": "FTC y Fiscalía de Nueva York (EE. UU.)",
+    "en": "FTC & New York AG (USA)",
+    "pt": "FTC e Procuradoria de Nova York (EUA)"
+   },
+   "titulo": {
+    "es": "Datos de niños usados para anuncios sin permiso parental",
+    "en": "Children's data used for ads without parental consent",
+    "pt": "Dados de crianças usados em anúncios sem consentimento dos pais"
+   },
+   "texto": {
+    "es": "Según la FTC, YouTube recogió identificadores persistentes (cookies) de espectadores de canales infantiles sin avisar a los padres ni obtener su consentimiento (COPPA), y los usó para mostrarles anuncios dirigidos. La demanda sostiene que YouTube sabía que muchos canales eran para niños, pero dijo a un anunciante que no tenía usuarios menores de 13 años.",
+    "en": "According to the FTC, YouTube collected persistent identifiers (cookies) from viewers of children's channels without notifying parents or obtaining their consent (COPPA), and used them to serve targeted ads. The complaint alleges YouTube knew many channels were aimed at children, yet told an advertiser it had no users under 13.",
+    "pt": "Segundo a FTC, o YouTube coletou identificadores persistentes (cookies) de espectadores de canais infantis sem avisar os pais nem obter seu consentimento (COPPA), e os usou para exibir anúncios direcionados. A ação afirma que o YouTube sabia que muitos canais eram para crianças, mas disse a um anunciante que não tinha usuários menores de 13 anos."
+   },
+   "fuente": "https://www.ftc.gov/news-events/news/press-releases/2019/09/google-youtube-will-pay-record-170-million-alleged-violations-childrens-privacy-law",
+   "copia": "https://web.archive.org/web/2026/https://www.ftc.gov/news-events/news/press-releases/2019/09/google-youtube-will-pay-record-170-million-alleged-violations-childrens-privacy-law",
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   }
+  },
+  {
+   "cat": "meta",
+   "cifra": "5.000 M$",
+   "empresa": "Facebook (Meta)",
+   "anio": "2019",
+   "dia": "2019-07-24",
+   "autoridad": {
+    "es": "FTC (EE. UU.)",
+    "en": "FTC (USA)",
+    "pt": "FTC (EUA)"
+   },
+   "titulo": {
+    "es": "Datos de amigos compartidos con apps pese a tus ajustes",
+    "en": "Friends' data shared with apps despite privacy settings",
+    "pt": "Dados de amigos compartilhados com apps apesar das configurações"
+   },
+   "texto": {
+    "es": "Según la FTC, Facebook violó su orden de 2012 al engañar a los usuarios sobre el control de su privacidad: compartió datos de amigos con desarrolladores de apps pese a sus ajustes y usó para publicidad los teléfonos dados para la verificación en dos pasos. Es la mayor sanción de privacidad de la historia de la FTC. Además, impuso nuevas restricciones de gobernanza.",
+    "en": "According to the FTC, Facebook violated its 2012 order by deceiving users about their control over their privacy: it shared friends' data with app developers despite their settings and used phone numbers provided for two-factor verification for advertising. It is the largest privacy penalty in FTC history. It also imposed new governance restrictions.",
+    "pt": "Segundo a FTC, o Facebook violou sua ordem de 2012 ao enganar os usuários sobre o controle da própria privacidade: compartilhou dados de amigos com desenvolvedores de apps apesar das configurações e usou para publicidade os telefones fornecidos para a verificação em duas etapas. É a maior sanção de privacidade da história da FTC. Além disso, impôs novas restrições de governança."
+   },
+   "fuente": "https://ftc.gov/news-events/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions",
+   "copia": "https://web.archive.org/web/2026/https://ftc.gov/news-events/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions",
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   }
+  },
+  {
+   "cat": "venta",
+   "cifra": "575–700 M$",
+   "empresa": "Equifax",
+   "anio": "2019",
+   "dia": "2019-07-22",
+   "autoridad": {
+    "es": "FTC",
+    "en": "FTC",
+    "pt": "FTC"
+   },
+   "titulo": {
+    "es": "Fallo sin parchear expuso datos de 147 millones de personas",
+    "en": "Unpatched flaw exposed data of 147 million people",
+    "pt": "Falha não corrigida expôs dados de 147 milhões de pessoas"
+   },
+   "texto": {
+    "es": "Equifax no parcheó una vulnerabilidad crítica de la que fue avisada en marzo de 2017, y los atacantes encontraron credenciales de administrador guardadas en texto plano, lo que expuso datos de unos 147 millones de personas. El acuerdo incluye un fondo de 300 millones para consumidores (ampliable en 125 M), 175 millones para los estados y 100 millones de multa del CFPB.",
+    "en": "Equifax did not patch a critical vulnerability it was warned about in March 2017, and attackers found administrator credentials stored in plain text, exposing data of about 147 million people. The settlement includes a $300 million fund for consumers (expandable by $125M), $175 million for the states and a $100 million CFPB penalty.",
+    "pt": "A Equifax não corrigiu uma vulnerabilidade crítica sobre a qual foi avisada em março de 2017, e os atacantes encontraram credenciais de administrador guardadas em texto simples, o que expôs dados de cerca de 147 milhões de pessoas. O acordo inclui um fundo de 300 milhões para consumidores (ampliável em 125 mi), 175 milhões para os estados e 100 milhões de multa do CFPB."
+   },
+   "fuente": "https://www.ftc.gov/news-events/news/press-releases/2019/07/equifax-pay-575-million-part-settlement-ftc-cfpb-states-related-2017-data-breach",
+   "copia": "https://web.archive.org/web/2026/https://www.ftc.gov/news-events/news/press-releases/2019/07/equifax-pay-575-million-part-settlement-ftc-cfpb-states-related-2017-data-breach",
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   }
+  },
+  {
+   "cat": "google",
+   "cifra": "50 M€",
+   "empresa": "Google LLC",
+   "anio": "2019",
+   "dia": "2019-01-21",
+   "autoridad": {
+    "es": "CNIL (Francia)",
+    "en": "CNIL (France)",
+    "pt": "CNIL (França)"
+   },
+   "titulo": {
+    "es": "Información de privacidad dispersa y casillas de consentimiento premarcadas",
+    "en": "Scattered privacy information and pre-ticked consent boxes",
+    "pt": "Informações de privacidade dispersas e caixas de consentimento pré-marcadas"
+   },
+   "texto": {
+    "es": "La CNIL halló falta de transparencia: la información esencial (finalidades, plazos de conservación, categorías de datos) estaba dispersa en varios documentos y era demasiado vaga. Además, el consentimiento para la publicidad personalizada no era informado ni específico, y usaba casillas premarcadas.",
+    "en": "The CNIL found a lack of transparency: essential information (purposes, retention periods, data categories) was scattered across several documents and was too vague. In addition, consent for personalised advertising was neither informed nor specific, and relied on pre-ticked boxes.",
+    "pt": "A CNIL constatou falta de transparência: as informações essenciais (finalidades, prazos de conservação, categorias de dados) estavam dispersas em vários documentos e eram vagas demais. Além disso, o consentimento para a publicidade personalizada não era informado nem específico, e usava caixas pré-marcadas."
+   },
+   "fuente": "https://www.seban-associes.avocat.fr/la-cnil-prononce-une-sanction-record-pour-google-llc/?id=94519",
+   "copia": ""
+  }
+ ]
+}

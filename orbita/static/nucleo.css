@@ -151,3 +151,47 @@ a.nuc-chip{display:inline-flex;align-items:center;text-decoration:none}
 /* Anchos con su relleno dentro: en el teléfono, la cabecera, la columna y la caja de escribir ya no se salen de la pantalla
    (se salían 24–32 px), y en el ordenador la caja de escribir mide lo mismo que los seis botones de encima */
 .ns-cab,.ns-col,.ns-form,.ns-panel,.nuc-form,.nuc-charla{box-sizing:border-box}
+
+/* «Multas» (dueño, 13:30): arriba a la derecha de la portada de NÚCLEO, en rojo; abre la lista de multas */
+.nuc-multas-b{position:absolute;top:18px;inset-inline-end:22px;z-index:2;display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px 0 14px;border-radius:999px;border:1px solid rgba(224,122,108,.55);background:rgba(224,122,108,.12);color:#F09A8E;font:600 14px/1 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:.02em;cursor:pointer;transition:background .15s,border-color .15s,color .15s,box-shadow .2s}
+.nuc-multas-b::before{content:'';width:7px;height:7px;border-radius:50%;background:#E07A6C;box-shadow:0 0 10px rgba(224,122,108,.9)}
+.nuc-multas-b:hover{background:rgba(224,122,108,.22);border-color:#E07A6C;color:#FFD0C9;box-shadow:0 10px 40px -18px rgba(224,122,108,.8)}
+.nuc-multas-b:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+@media (max-width:560px){.nuc-multas-b{top:14px;inset-inline-end:14px;height:36px;padding:0 12px 0 11px;font-size:13px}}
+
+/* La lista de multas: la misma base de NÚCLEO, a pantalla completa */
+.nuc-multas{position:fixed;inset:0;z-index:10003;overflow-y:auto;background:#06080C;color:#F4F6F8;font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;opacity:0;transition:opacity .35s ease}
+.nuc-multas.ve{opacity:1}
+.nuc-multas::before{content:'';position:fixed;inset:0;pointer-events:none;background:radial-gradient(60% 45% at 50% 0%,rgba(224,122,108,.09),transparent 70%)}
+.nm-cab{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;background:linear-gradient(#06080C 70%,rgba(6,8,12,0))}
+.nm-cab .nuc-volver{position:static}
+.nm-k{font:600 11px/1.4 'IBM Plex Mono',ui-monospace,Consolas,monospace;letter-spacing:.32em;color:#E07A6C}
+.nm-col{box-sizing:border-box;position:relative;width:min(1040px,100%);margin:0 auto;padding:8px 22px 64px}
+.nm-col h2{margin:6px 0 0;font:300 clamp(30px,4vw,46px)/1.12 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:-.01em;text-wrap:balance}
+.nm-intro{margin:14px 0 0;max-width:62ch;color:#c9d6e2;font-size:16px;line-height:1.6}
+.nm-n{margin:24px 0 0;font:500 12px/1.4 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.14em;color:#a9bccd;text-transform:uppercase}
+.nm-fil{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.nm-chip{appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;border:1px solid rgba(156,195,228,.28);background:rgba(12,18,26,.85);color:#dbe9f4;font:500 13px/1.2 'IBM Plex Sans',system-ui,sans-serif;transition:background .15s,border-color .15s,color .15s}
+.nm-chip b{font-weight:600;color:#7f93a6}
+.nm-chip:hover{background:rgba(156,195,228,.14);border-color:rgba(156,195,228,.55);color:#F4F6F8}
+.nm-chip[aria-pressed="true"]{background:rgba(224,122,108,.16);border-color:rgba(224,122,108,.6);color:#F4F6F8}
+.nm-chip[aria-pressed="true"] b{color:#F09A8E}
+.nm-chip:focus-visible,.nm-mas:focus-visible,.nm-enl a:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.nm-lista{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px}
+.nm-caso{position:relative;display:flex;flex-direction:column;padding:20px 22px 18px;border-radius:16px;border:1px solid rgba(156,195,228,.18);background:rgba(12,18,26,.82);transition:border-color .2s,background .2s,transform .2s}
+.nm-caso:hover{border-color:rgba(224,122,108,.45);background:rgba(20,26,36,.9);transform:translateY(-2px)}
+.nm-cifra{margin:0;font:300 34px/1.05 'IBM Plex Sans',system-ui,sans-serif;color:#E07A6C;letter-spacing:-.01em}
+.nm-quien{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:10px 0 0;font-size:13px;color:#a9bccd}
+.nm-quien b{color:#F4F6F8;font-weight:600;font-size:14px}
+.nm-est{font:600 10px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#F0C77F;border:1px solid rgba(240,199,127,.4);border-radius:999px;padding:4px 8px}
+.nm-caso h3{margin:12px 0 0;font:500 17px/1.35 'IBM Plex Sans',system-ui,sans-serif;color:#F4F6F8}
+.nm-texto{margin:8px 0 0;color:#c9d6e2;font-size:14px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.nm-caso.abierto .nm-texto{display:block;-webkit-line-clamp:unset}
+.nm-mas{align-self:flex-start;margin-top:6px;padding:0;border:0;background:none;color:#9CC3E4;font:500 13px/1.4 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer}
+.nm-mas:hover{text-decoration:underline}
+.nm-enl{display:flex;flex-wrap:wrap;gap:8px 16px;margin:auto 0 0;padding-top:14px}
+.nm-enl a{color:#9CC3E4;font-size:13px;text-decoration:none;border-bottom:1px solid rgba(156,195,228,.3)}
+.nm-enl a:hover{color:#F4F6F8;border-color:rgba(156,195,228,.7)}
+@media (max-width:860px){.nm-lista{grid-template-columns:1fr}}
+@media (max-width:560px){.nm-cab{padding:14px}.nm-col{padding:4px 14px 48px}.nm-cifra{font-size:30px}}
+@media (prefers-reduced-motion:reduce){.nuc-multas,.nm-caso{transition:none}.nm-caso:hover{transform:none}}

@@ -1999,6 +1999,7 @@
     "Abro el navegador ZERO.": ["Opening the ZERO browser.", "Abro o navegador ZERO."],
     "Para el PDF de una web, ábrela primero en el navegador ZERO. Si quieres el de tus datos, pídeme el resumen.": ["For a website’s PDF, open it first in the ZERO browser. If you want the one for your data, ask me for the summary.", "Para o PDF de um site, abra-o primeiro no navegador ZERO. Se quiser o dos seus dados, peça o resumo."],
     // 27 Oct 2026, 13:00 · NÚCLEO: el resumen de tus datos por periodo, en PDF o en vídeo (dueño, 10:56)
+    "Multas": ["Fines", "Multas"],
     "Resumen de mis datos en vídeo": ["Summary of my data as video", "Resumo dos meus dados em vídeo"],
     "Resumen en PDF o vídeo": ["PDF or video summary", "Resumo em PDF ou vídeo"],
     "¿De qué periodo quieres el resumen?": ["Which period do you want the summary for?", "De qual período você quer o resumo?"],

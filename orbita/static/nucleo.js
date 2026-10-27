@@ -319,14 +319,28 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       + '</div>'
       // dueño, 12:23: la página del planeta es la portada de la web y su «Empezar» trae aquí; fuera «¿Qué es GUARDIANA?».
       // Arriba a la izquierda, «Volver» a esa portada (dueño, 10:53: «tienes que poder ir y volver»).
-      + '<a class="nuc-volver nuc-paso" id="nuc-volver" href="/"><span aria-hidden="true">←</span> Volver</a>';
+      + '<a class="nuc-volver nuc-paso" id="nuc-volver" href="/"><span aria-hidden="true">←</span> Volver</a>'
+      // dueño, 13:30: arriba a la derecha, «Multas» en rojo: las multas a las grandes empresas por usar nuestros datos
+      + '<button type="button" class="nuc-multas-b nuc-paso" id="nuc-multas-b">Multas</button>';
     document.body.append(d);
     d.querySelectorAll('.nuc-op').forEach((b) => b.addEventListener('click', () => entra(b.dataset.n)));
+    d.querySelector('#nuc-multas-b').addEventListener('click', (e) => abreMultas(e.currentTarget));
     // si se vino de la portada, se vuelve atrás en el historial: la página del planeta queda donde estaba
     const vv = d.querySelector('#nuc-volver');
     vv.addEventListener('click', (e) => { try { const r = document.referrer ? new URL(document.referrer) : null; if (r && r.origin === location.origin && (r.pathname === '/' || r.pathname === '/index.html') && history.length > 1) { e.preventDefault(); history.back(); } } catch (_) {} });
     d.addEventListener('keydown', (e) => { if (e.key === 'Escape') alPlaneta(); });
     return d;
+  }
+  // la lista de multas (multas.js y /orbita/datos/multas.json) solo se carga al pulsar el botón
+  let cargaMul = null;
+  function abreMultas(b) {
+    if (!cargaMul) cargaMul = new Promise((ok, mal) => {
+      if (window.GuardianaMultas) { ok(); return; }
+      const s = document.createElement('script'); s.src = '/orbita/static/multas.js?v=20261027a'; s.async = true;
+      s.onload = ok; s.onerror = () => { cargaMul = null; s.remove(); mal(new Error('multas')); };
+      document.head.append(s);
+    });
+    cargaMul.then(() => window.GuardianaMultas && window.GuardianaMultas.abre(b)).catch(() => {});
   }
   function entra(id) { if (id !== 'nucleo') ponVuelta('portada'); if (id === 'zero') abreZero(); else if (id === 'planeta') alPlaneta(); else if (id === 'com') irComunicaciones(); else if (id === 'nucleo') abreSala(); }
   function revela(d, todo) {
@@ -340,10 +354,10 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     ini.hidden = false; ini.classList.remove('sale'); tapa();
     if (laRed) laRed.para(); laRed = red(ini.querySelector('.nuc-lienzo'), { nace: !rapido });
     revela(ini, !!rapido);
-    barra.hidden = true;
+    botonInicio(false);
   }
   function ocultaInicio() {
-    if (!sala || sala.hidden) barra.hidden = false;
+    if (!sala || sala.hidden) botonInicio(true);
     if (!ini || ini.hidden) return;
     ini.classList.add('sale'); tapa(sala && !sala.hidden);
     setTimeout(() => { if (!ini.classList.contains('sale')) return; ini.hidden = true; if (laRed) { laRed.para(); laRed = null; } }, 750);
@@ -391,7 +405,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   function abreSala() {
     if (!sala) sala = construyeSala();
     if (ini && !ini.hidden) ocultaInicio();
-    sala.hidden = false; barra.hidden = true; tapa();
+    sala.hidden = false; botonInicio(false); tapa();
     if (salaRed) salaRed.para(); salaRed = red(sala.querySelector('.ns-red'), { nace: false });
     setTimeout(() => { const i = sala.querySelector('#ns-q'); if (i) i.focus({ preventScroll: true }); }, 60);
   }
@@ -399,7 +413,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     if (!sala || sala.hidden) return;
     sala.hidden = true; panel(false); modo = null; tapa(!!(ini && !ini.hidden && !ini.classList.contains('sale')));
     if (salaRed) { salaRed.para(); salaRed = null; }
-    if (!ini || ini.hidden) barra.hidden = false;
+    if (!ini || ini.hidden) botonInicio(true);
   }
   function burbuja(quien, texto, op) {
     op = op || {};
@@ -470,12 +484,15 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   function paisEn(t) { for (const [n, k] of paises()) { if (n.length < 3) continue; const i = t.indexOf(n); if (i >= 0 && !/[a-z]/.test(t[i - 1] || ' ') && !/[a-z]/.test(t[i + n.length] || ' ')) return k; } return null; }
   try { if (window.NucleoMotor && window.NUCLEO_FRASES) NucleoMotor.prepara(window.NUCLEO_FRASES, window.NUCLEO_CLAVES); } catch (_) {}
 
-  // ---------- el botón «NÚCLEO», abajo a la izquierda en el planeta y en las secciones: abre su sección ----------
-  const barra = document.createElement('div');
-  barra.className = 'nuc-barra mini'; barra.id = 'nuc-barra'; barra.hidden = true;
-  barra.innerHTML = '<button type="button" class="nuc-orbe" id="nuc-orbe" aria-label="Pídeselo a NÚCLEO" title="NÚCLEO"></button><span class="nuc-et" translate="no">NÚCLEO</span>';
-  barra.addEventListener('click', () => abreSala());
-  document.body.append(barra);
+  // ---------- dueño, 13:28: fuera el botón «NÚCLEO» de abajo a la izquierda del planeta. Para volver queda, arriba a la
+  // izquierda, el mismo botón de las secciones («Inicio» o «Regresar a NÚCLEO»); en el planeta lleva a NÚCLEO. ----------
+  function botonInicio(ver) { const v = document.getElementById('volver'); if (v && !document.body.classList.contains('dentro')) v.hidden = !ver; }
+  document.addEventListener('click', (e) => {
+    const v = e.target && e.target.closest ? e.target.closest('#volver') : null;
+    if (!v || document.body.classList.contains('dentro')) return; // dentro de una sección, vuelve al planeta como siempre
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (vuelta() === 'nucleo') abreSala(); else muestraInicio(true);
+  }, true);
 
   // ---------- dueño, 10:02 («que se vea todo limpio»): al cerrar una sección se vuelve a la portada, salvo con «Verme en
   // Órbita» (lleva al planeta con tu ficha) o cuando es NÚCLEO quien lleva al planeta. El botón de volver dice «Inicio». ----------
@@ -483,21 +500,20 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   addEventListener('message', (e) => { if (e.origin === location.origin && e.data && e.data.tipo === 'orbita-verme') verme = Date.now(); });
   new MutationObserver(() => {
     const d = document.body.classList.contains('dentro');
-    if (estabaDentro && !d) setTimeout(() => { if (Date.now() - verme > 1500 && Date.now() - volviendo > 1500 && !document.body.classList.contains('dentro')) { if (vuelta() === 'nucleo') abreSala(); else muestraInicio(true); } }, 60);
+    if (estabaDentro && !d) setTimeout(() => { if (document.body.classList.contains('dentro')) return; if (Date.now() - verme > 1500 && Date.now() - volviendo > 1500) { if (vuelta() === 'nucleo') abreSala(); else muestraInicio(true); } else botonInicio(true); }, 60);
     estabaDentro = d;
   }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
   function pintaVuelta() {
     const nuc = vuelta() === 'nucleo', txt = nuc ? 'Regresar a NÚCLEO' : 'Inicio';
     const vb = document.getElementById('volver'); if (vb) for (const n of vb.childNodes) if (n.nodeType === 3 && n.data.trim()) n.data = txt;
     try { const w = marcoZero(); const s = w && w.document.querySelector('#volverZ span'); if (s && s.textContent !== txt) s.textContent = txt; } catch (_) {}
-    const et = barra.querySelector('.nuc-et'); if (et) { et.textContent = nuc ? 'Regresar a NÚCLEO' : 'NÚCLEO'; if (nuc) et.removeAttribute('translate'); else et.setAttribute('translate', 'no'); }
   }
   pintaVuelta();
 
   // ---------- arranque: la primera vez en esta visita, con su nacimiento; al volver en la misma visita, al momento ----------
   let visto = false; try { visto = sessionStorage.getItem('guardiana-nucleo') === '1'; sessionStorage.setItem('guardiana-nucleo', '1'); } catch (_) {}
   if (q.get('nucleo') === 'pide') abreSala();
-  else if (q.get('nucleo') === '0' || PUERTA_EN_URL) barra.hidden = false;
+  else if (q.get('nucleo') === '0' || PUERTA_EN_URL) botonInicio(true);
   else muestraInicio(visto);
   window.GuardianaNucleo = { inicio: () => muestraInicio(true), sala: abreSala, pide: escribe };
 })();
