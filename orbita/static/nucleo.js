@@ -1,33 +1,32 @@
 // GUARDIANA · NÚCLEO (27 Oct 2026). La puerta de entrada de GUARDIANA y su guía en toda la web.
-// Dueño, 08:42: «pantalla negra y en el medio nace el navegador con el cerebro neuronal… ella te pregunta: buenos días,
-// bienvenido a esta experiencia de tus datos… ¿qué desea hacer?… y te va derivando». Ronda 52 de la agencia (ChatGPT,
-// Gemini y Astra): entrada en negro, nace la red neuronal, saludo por la hora local, tres accesos y un campo para pedir;
-// en las secciones sigue presente. Esta primera versión no usa IA generativa: entiende frases con reglas y abre cada
-// parte de verdad. Solo habla de GUARDIANA, la web y los datos. No guarda nada ni lo envía a nadie.
+// Dueño, 08:42: «pantalla negra y en el medio nace el navegador con el cerebro neuronal… buenos días, bienvenido a esta
+// experiencia de tus datos… ¿qué desea hacer?… y te va derivando»; 09:03: «si Núcleo está muy bien estructurado y va
+// guiando al cliente por la web, y puede ir y retroceder, a lo mejor no hace falta la IA». Ronda 52 de la agencia.
+// NÚCLEO guiado: una conversación con opciones (como un chatbot de botones), ir y volver, y frases escritas que entiende
+// con reglas. Hace las cosas de verdad: abre ZERO con una web, lleva al planeta y a un país, enciende capas, cuenta tus
+// datos de hoy (los que ZERO guarda en este navegador), hace el PDF y abre Comunicaciones. Solo habla de GUARDIANA, de
+// la web y de tus datos. Corre en el navegador de cada persona: no guarda ni envía lo que se le pide.
 'use strict';
 (() => {
   const T = (s) => { try { return window.GuardianaIdioma ? GuardianaIdioma.t(s) : s; } catch (_) { return s; } };
   const loc = () => { try { return (window.GuardianaIdioma && GuardianaIdioma.locale) || 'es'; } catch (_) { return 'es'; } };
+  const fmt = (n) => { try { return Number(n).toLocaleString(loc()); } catch (_) { return String(n); } };
   const sinTildes = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim();
+  const pon = (tpl, ...xs) => xs.reduce((s, x, i) => s.split('{' + (i + 1) + '}').join(x), T(tpl));
   const q = new URLSearchParams(location.search);
   const PUERTA_EN_URL = /^#(zero|radiografias|comunicaciones|mi-conexion)$/.test(location.hash);
   const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // ---------- el saludo según la hora del equipo (no pide ubicación) ----------
   const saludo = () => { const h = new Date().getHours(); return h >= 5 && h < 12 ? 'Buenos días' : h >= 12 && h < 20 ? 'Buenas tardes' : 'Buenas noches'; };
 
   // ---------- la red neuronal que nace en el centro ----------
   function red(lienzo) {
     const cx = lienzo.getContext('2d'); if (!cx) return { habla() {}, para() {} };
     const N = 300, P = [];
-    for (let i = 0; i < N; i++) { // puntos repartidos en una esfera (espiral de Fibonacci) con un poco de relieve
-      const y = 1 - (i + .5) * 2 / N, r = Math.sqrt(1 - y * y), a = i * 2.39996323, k = .86 + Math.random() * .2;
-      P.push([Math.cos(a) * r * k, y * k, Math.sin(a) * r * k, Math.random() * Math.PI * 2]);
-    }
+    for (let i = 0; i < N; i++) { const y = 1 - (i + .5) * 2 / N, r = Math.sqrt(1 - y * y), a = i * 2.39996323, k = .86 + Math.random() * .2; P.push([Math.cos(a) * r * k, y * k, Math.sin(a) * r * k, Math.random() * Math.PI * 2]); }
     const V = P.map((p, i) => P.map((o, j) => [j, (p[0] - o[0]) ** 2 + (p[1] - o[1]) ** 2 + (p[2] - o[2]) ** 2]).filter((x) => x[0] !== i).sort((a, b) => a[1] - b[1]).slice(0, 3).map((x) => x[0]));
     let t0 = performance.now(), habla = 0, vivo = true, W = 0, H = 0, dpr = 1;
     const mide = () => { const r = lienzo.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1); W = Math.max(1, r.width); H = Math.max(1, r.height); lienzo.width = W * dpr; lienzo.height = H * dpr; };
-    mide(); addEventListener('resize', mide, { passive: true });
+    mide(); const ro = new ResizeObserver(mide); ro.observe(lienzo);
     const ease = (x) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
     function cuadro(ahora) {
       if (!vivo) return;
@@ -35,7 +34,6 @@
       habla *= .95;
       cx.setTransform(dpr, 0, 0, dpr, 0, 0); cx.clearRect(0, 0, W, H);
       const R = Math.min(W, H) * .4 * (.04 + .96 * nace) * (1 + habla * .05), c = Math.cos(rot), s = Math.sin(rot), ct = Math.cos(.35), st = Math.sin(.35);
-      // la chispa del principio
       if (nace < 1) { const g = cx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, 40 + 60 * nace); g.addColorStop(0, `rgba(244,246,248,${.9 * (1 - nace * .7)})`); g.addColorStop(.3, `rgba(156,195,228,${.55 * (1 - nace * .5)})`); g.addColorStop(1, 'rgba(156,195,228,0)'); cx.fillStyle = g; cx.fillRect(0, 0, W, H); }
       const Q = P.map((p) => { const x = p[0] * c + p[2] * s, z0 = -p[0] * s + p[2] * c, y = p[1] * ct - z0 * st, z = p[1] * st + z0 * ct, pul = 1 + .04 * Math.sin(t * 1.7 + p[3]) + habla * .06 * Math.sin(t * 9 + p[3]); return [W / 2 + x * R * pul, H / 2 + y * R * pul, z]; });
       cx.lineWidth = 1;
@@ -46,63 +44,7 @@
       requestAnimationFrame(cuadro);
     }
     requestAnimationFrame(cuadro);
-    return { habla() { habla = 1; }, para() { vivo = false; } };
-  }
-
-  // ---------- lo que sabe NÚCLEO (solo GUARDIANA, la web y los datos) ----------
-  const AYUDA = {
-    nucleo: 'Soy NÚCLEO, el asistente de GUARDIANA. Te llevo a cada parte y te explico lo que pasa con tus datos. Solo hablo de GUARDIANA, de la web y de tus datos.',
-    zero: 'ZERO es el navegador de GUARDIANA: la web se abre en una burbuja aislada en un servidor de GUARDIANA y a tu equipo solo llegan imágenes. A la derecha, la Radiografía te enseña quién intenta conectarse, las subastas de tus datos y lo que puedes cortar.',
-    orbita: 'Órbita es el planeta de GUARDIANA: cables submarinos, cables por tierra, centros de datos y satélites, y cada corte en directo.',
-    com: 'Comunicaciones es el chat y el envío de archivos de GUARDIANA, cifrados de extremo a extremo entre dos equipos, con un código de 9 cifras. Yo no puedo leer tus mensajes ni tus archivos.',
-    guardiana: 'GUARDIANA te enseña y te deja cortar lo que la web hace con tus datos: navegar en una burbuja con ZERO, ver la red del planeta en Órbita y hablar cifrado con Comunicaciones.',
-  };
-  const NO_SE = 'Solo puedo ayudarte con GUARDIANA: navegar con ZERO, el planeta con sus cables y satélites, Comunicaciones y tus datos. Prueba con «Muéstrame los cables de Colombia» o «Abre eltiempo.com».';
-  const CAPAS = [['sub', /submarin|cables? (del|de el)? ?mar|undersea|submarine/], ['fibra', /por tierra|terrestre|fibra|land cable|fiber|fibre/], ['puntos', /centros? de datos|data ?cent(er|re)s?|datacenter/], ['sat', /satelit|satellite/]];
-  const NOMBRE_CAPA = { sub: 'los cables submarinos', fibra: 'los cables por tierra', puntos: 'los centros de datos', sat: 'los satélites' };
-  let PAISES = null;
-  function paises() { // nombres de país en español, inglés y el idioma de la página → código
-    if (PAISES) return PAISES;
-    PAISES = [];
-    const C = (window.OrbitaPlaneta && OrbitaPlaneta.centros) || {};
-    const dns = ['es', 'en', loc()].map((l) => { try { return new Intl.DisplayNames([l], { type: 'region' }); } catch (_) { return null; } }).filter(Boolean);
-    for (const k of Object.keys(C)) { if (!/^[A-Z]{2}$/.test(k)) continue; const vistos = new Set(); for (const d of dns) { let n = ''; try { n = d.of(k); } catch (_) {} n = sinTildes(n); if (n && n.length > 2 && !vistos.has(n)) { vistos.add(n); PAISES.push([n, k]); } } }
-    PAISES.push(['eeuu', 'US'], ['ee uu', 'US'], ['usa', 'US'], ['reino unido', 'GB'], ['inglaterra', 'GB']);
-    PAISES.sort((a, b) => b[0].length - a[0].length);
-    return PAISES;
-  }
-  const paisEn = (t) => { for (const [n, k] of paises()) { const re = new RegExp('(^|[^a-z])' + n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '([^a-z]|$)'); if (re.test(t)) return k; } return null; };
-  const nombrePais = (k) => { try { return new Intl.DisplayNames([loc()], { type: 'region' }).of(k); } catch (_) { return k; } };
-
-  // Una frase → una acción. Devuelve { texto, accion }.
-  function entiende(frase) {
-    const t = sinTildes(frase);
-    if (!t) return null;
-    const dom = /(^|\s)((?:https?:\/\/)?(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/\S*)?)/i.exec(String(frase).trim());
-    if (/^(hola|buenas|buenos dias|buen dia|hey|hi|hello|good (morning|afternoon|evening))\b/.test(t) && t.split(' ').length <= 3) return { texto: T(saludo()) + '. ' + T('¿Qué deseas hacer?') };
-    if (/^(inicio|ir al inicio|volver al inicio|llevame al inicio|home)$/.test(t)) return { texto: T('Vuelvo al inicio.'), accion: () => muestraInicio(true) };
-    if (/^(volver|atras|back)$/.test(t)) return { texto: T('Vuelvo atrás.'), accion: () => { const v = document.getElementById('volver'); if (v && !v.hidden) v.click(); else history.back(); } };
-    if (/(pdf|informe|reporte|report)/.test(t)) return { texto: T('El informe en PDF lo hago con lo que ZERO ve en una web. Abro ZERO: abre una web y pídemelo, o pulsa «PDF» en la Radiografía.'), accion: () => { const w = marcoZero(); if (w && typeof w.zeroInforme === 'function') { w.zeroInforme(); } else abreZero(); } };
-    if (dom && !/^(guardiana|guardianagroup)\./.test(dom[2])) { const d = dom[2].replace(/^https?:\/\//i, ''); return { texto: T('Abro {1} en ZERO, dentro de la burbuja.').replace('{1}', d), accion: () => abreZero(d) }; }
-    if (/(que es|que hace|como funciona|para que sirve|quien eres|que eres|que puedes|ayuda|what is|how does|help)/.test(t)) {
-      if (/nucleo|quien eres|que eres|que puedes|help|ayuda/.test(t) && !/zero|orbita|planeta|comunicacion|guardiana/.test(t)) return { texto: T(AYUDA.nucleo) };
-      if (/zero|navegador|burbuja|radiograf/.test(t)) return { texto: T(AYUDA.zero) };
-      if (/orbita|planeta|mapa|cable|satelit/.test(t)) return { texto: T(AYUDA.orbita) };
-      if (/comunicacion|chat|cifrad/.test(t)) return { texto: T(AYUDA.com) };
-      return { texto: T(AYUDA.guardiana) };
-    }
-    if (/(comunicacion|chat|mensaje|enviar (un )?archivo|mandar (un )?archivo|archivo cifrado|hablar con|codigo de 9|message|send a file)/.test(t)) return { texto: T('Abro Comunicaciones.'), accion: () => { location.href = 'comunicaciones/'; } };
-    if (/(naveg|navegador|zero|burbuja|abrir? (una )?web|entrar en (una )?web|buscar en internet|rastre|quien me sigue|subasta|radiograf|cookies|browse|browser)/.test(t)) return { texto: T('Abro ZERO, el navegador de GUARDIANA.'), accion: () => abreZero() };
-    const capa = (CAPAS.find(([, re]) => re.test(t)) || [])[0], pais = paisEn(t);
-    if (capa || pais || /(planeta|mapa|orbita|cables?|cortes? en directo|en directo|el mundo|tierra|planet|map)/.test(t)) {
-      let texto;
-      if (capa && pais) texto = T('Te llevo al planeta: {1} en {2}.').replace('{1}', T(NOMBRE_CAPA[capa])).replace('{2}', nombrePais(pais));
-      else if (capa) texto = T('Te llevo al planeta y enciendo {1}.').replace('{1}', T(NOMBRE_CAPA[capa]));
-      else if (pais) texto = T('Te llevo al planeta, a {1}.').replace('{1}', nombrePais(pais));
-      else texto = T('Te llevo al planeta.');
-      return { texto, accion: () => alPlaneta(capa, pais) };
-    }
-    return { texto: T(NO_SE) };
+    return { habla() { habla = 1; }, para() { vivo = false; ro.disconnect(); } };
   }
 
   // ---------- acciones reales ----------
@@ -111,7 +53,7 @@
     ocultaInicio();
     if (!marcoZero() && window.OrbitaPuertas) OrbitaPuertas.abre('zero');
     if (!web) return;
-    let n = 0; const intenta = () => { // cuando ZERO esté listo, escribe la dirección en su barra y la abre
+    let n = 0; const intenta = () => {
       const w = marcoZero(); const f = w && w.document.getElementById('lens'); const i = f && f.querySelector('input');
       if (i) { i.value = web; i.dispatchEvent(new w.Event('input', { bubbles: true })); try { f.requestSubmit(); } catch (_) { f.dispatchEvent(new w.Event('submit', { cancelable: true, bubbles: true })); } return; }
       if (++n < 40) setTimeout(intenta, 250);
@@ -126,73 +68,210 @@
       try { const C = window.OrbitaPlaneta && OrbitaPlaneta.centros; if (pais && C && C[pais]) OrbitaPlaneta.ir(C[pais].lon, C[pais].lat, 2.2); } catch (_) {}
     }, 500);
   }
+  const irComunicaciones = () => { location.href = 'comunicaciones/'; };
+  // El PDF lo hace ZERO con lo que ha visto en una web abierta.
+  function pdf() {
+    const w = marcoZero();
+    if (w && typeof w.zeroInforme === 'function') { ocultaInicio(); w.zeroInforme(); return true; }
+    return false;
+  }
 
-  // ---------- la portada ----------
-  let ini = null, laRed = null;
+  // ---------- tus datos de hoy (lo que ZERO guarda en este navegador; nada sale de aquí) ----------
+  const lee = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (_) { return d; } };
+  function misDatos() {
+    const REG = lee('zeroRegistroCortes', []), tot = lee('zeroTotal', null);
+    const d0 = new Date(); d0.setHours(0, 0, 0, 0);
+    const hoy = Array.isArray(REG) ? REG.filter((r) => r && r.t >= +d0) : [];
+    const emp = new Set(hoy.map((r) => r.e).filter(Boolean)), pai = new Set(hoy.map((r) => r.p).filter((x) => x && x !== 'País no identificado'));
+    const total = tot && typeof tot.c === 'number' ? tot.c : (Array.isArray(REG) ? REG.length : 0);
+    if (!hoy.length && !total) return T('Todavía no hay datos: en cuanto abras una web con ZERO y cortes algo, aquí te cuento qué empresas eran y de qué países. Se guarda solo en este navegador.');
+    let s = hoy.length ? pon('Hoy, en este equipo: cortes {1} · empresas {2} · países {3}.', fmt(hoy.length), fmt(emp.size), fmt(pai.size)) : T('Hoy todavía no se ha cortado nada en este equipo.');
+    if (total) s += ' ' + pon('Desde que usas ZERO, cortes en total: {1}.', fmt(total));
+    if (hoy.length) { const cuenta = new Map(); hoy.forEach((r) => cuenta.set(r.e, (cuenta.get(r.e) || 0) + 1)); const top = [...cuenta.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([e]) => e).filter(Boolean); if (top.length) s += ' ' + pon('Las que más lo han intentado: {1}.', top.join(', ')); }
+    return s + ' ' + T('Se guarda solo en este navegador.');
+  }
+
+  // ---------- la conversación guiada ----------
+  const AYUDA = {
+    zero: 'ZERO es el navegador de GUARDIANA: la web se abre en una burbuja aislada en un servidor de GUARDIANA y a tu equipo solo llegan imágenes. A la derecha, la Radiografía te enseña quién intenta conectarse, las subastas de tus datos y lo que puedes cortar.',
+    orbita: 'Órbita es el planeta de GUARDIANA: cables submarinos, cables por tierra, centros de datos y satélites, y cada corte en directo.',
+    com: 'Comunicaciones es el chat y el envío de archivos de GUARDIANA, cifrados de extremo a extremo entre dos equipos, con un código de 9 cifras. Yo no puedo leer tus mensajes ni tus archivos.',
+    guardiana: 'GUARDIANA te enseña y te deja cortar lo que la web hace con tus datos: navegar en una burbuja con ZERO, ver la red del planeta en Órbita y hablar cifrado con Comunicaciones.',
+    nucleo: 'Soy NÚCLEO, el asistente de GUARDIANA. Te llevo a cada parte y te explico lo que pasa con tus datos. Solo hablo de GUARDIANA, de la web y de tus datos.',
+  };
+  const ETIQUETA = {
+    zero: 'Navegar con ZERO', planeta: 'Explorar el planeta', com: 'Comunicaciones', datos: 'Mis datos de hoy', guardiana: '¿Qué es GUARDIANA?',
+    'z-web': 'Abrir una web', 'z-buscar': 'Buscar en internet', 'z-radio': 'Ver quién me sigue', 'z-pdf': 'Hacer el PDF', 'z-que': '¿Cómo funciona ZERO?',
+    'p-sub': 'Cables submarinos', 'p-fibra': 'Cables por tierra', 'p-puntos': 'Centros de datos', 'p-sat': 'Satélites', 'p-pais': 'Ir a un país', 'p-directo': 'Cortes en directo', 'p-que': '¿Qué es Órbita?',
+    'c-crear': 'Crear una invitación', 'c-codigo': 'Tengo un código', 'c-que': '¿Cómo funciona?',
+    'd-zero': 'Ver el detalle en ZERO', 'd-corte': '¿Qué es un corte?',
+  };
+  const NODOS = {
+    inicio: { d: () => T(saludo()) + '. ' + T('Bienvenido a esta experiencia de tus datos.') + ' ' + T('¿Qué deseas hacer?'), o: ['zero', 'planeta', 'com', 'datos', 'guardiana'] },
+    zero: { d: () => T('ZERO abre cada web en una burbuja aislada: a tu equipo solo llegan imágenes y a la derecha ves quién intenta llevarse tus datos. ¿Qué hacemos?'), o: ['z-web', 'z-buscar', 'z-radio', 'z-pdf', 'z-que'] },
+    'z-web': { d: () => T('Escribe la dirección de la web, por ejemplo eltiempo.com, y la abro en ZERO.'), pide: 'web' },
+    'z-buscar': { d: () => T('Abro ZERO: escribe tu búsqueda en su barra.'), a: () => abreZero() },
+    'z-radio': { d: () => T('La Radiografía está a la derecha de ZERO: abre una web y verás quién intenta conectarse, las subastas de tus datos y lo que puedes cortar. Abro ZERO.'), a: () => abreZero() },
+    'z-pdf': { d: () => (marcoZero() && typeof marcoZero().zeroInforme === 'function') ? T('Preparo el PDF con lo que ZERO ha visto en esta web.') : T('Para el PDF necesito una web abierta en ZERO. Abro ZERO: abre una web y vuelve a pedírmelo.'), a: () => { if (!pdf()) abreZero(); } },
+    'z-que': { d: () => T(AYUDA.zero), o: ['z-web', 'z-radio', 'z-pdf'] },
+    planeta: { d: () => T('¿Qué quieres ver en el planeta?'), o: ['p-sub', 'p-fibra', 'p-puntos', 'p-sat', 'p-pais', 'p-directo', 'p-que'] },
+    'p-sub': { d: () => pon('Te llevo al planeta y enciendo {1}.', T('los cables submarinos')), a: () => alPlaneta('sub') },
+    'p-fibra': { d: () => pon('Te llevo al planeta y enciendo {1}.', T('los cables por tierra')), a: () => alPlaneta('fibra') },
+    'p-puntos': { d: () => pon('Te llevo al planeta y enciendo {1}.', T('los centros de datos')), a: () => alPlaneta('puntos') },
+    'p-sat': { d: () => pon('Te llevo al planeta y enciendo {1}.', T('los satélites')), a: () => alPlaneta('sat') },
+    'p-pais': { d: () => T('¿Qué país? Escríbelo y te llevo.'), pide: 'pais' },
+    'p-directo': { d: () => T('Te llevo al planeta: a la derecha, en EN DIRECTO, aparece cada corte.'), a: () => alPlaneta() },
+    'p-que': { d: () => T(AYUDA.orbita), o: ['p-sub', 'p-sat', 'p-pais'] },
+    com: { d: () => T('Comunicaciones: chat y archivos cifrados de extremo a extremo entre dos equipos, con un código de 9 cifras. ¿Qué quieres hacer?'), o: ['c-crear', 'c-codigo', 'c-que'] },
+    'c-crear': { d: () => T('Abro Comunicaciones: pulsa «Crear invitación» y dale el código a la otra persona.'), a: irComunicaciones },
+    'c-codigo': { d: () => T('Abro Comunicaciones: pulsa «Tengo un código» y escribe las 9 cifras.'), a: irComunicaciones },
+    'c-que': { d: () => T(AYUDA.com), o: ['c-crear', 'c-codigo'] },
+    datos: { d: misDatos, o: ['d-zero', 'z-pdf', 'd-corte'] },
+    'd-zero': { d: () => T('Abro ZERO: la Radiografía te enseña el detalle de cada web.'), a: () => abreZero() },
+    'd-corte': { d: () => T('Un corte es una conexión de otra empresa que ZERO no deja pasar. En ZERO, por defecto, todo pasa y tú decides qué cortar; con Tor, ZERO corta más.'), o: ['zero', 'datos'] },
+    guardiana: { d: () => T(AYUDA.guardiana), o: ['zero', 'planeta', 'com'] },
+    nucleo: { d: () => T(AYUDA.nucleo), o: ['zero', 'planeta', 'com', 'datos'] },
+    nose: { d: () => T('Solo puedo ayudarte con GUARDIANA: navegar con ZERO, el planeta con sus cables y satélites, Comunicaciones y tus datos. Elige una opción o prueba con «Muéstrame los cables de Colombia» o «Abre eltiempo.com».'), o: ['zero', 'planeta', 'com', 'datos'] },
+  };
+
+  // ---------- frases escritas → una opción (reglas en español, inglés y portugués; países y direcciones en cualquier idioma) ----------
+  const extra = (k) => { const v = T(k); return v && v !== k ? v.split('|').map(sinTildes).filter(Boolean) : []; }; // claves que cada idioma puede añadir
+  const tiene = (t, re, k) => re.test(t) || extra(k).some((w) => t.includes(w));
+  const CAPAS = [['p-sub', /submarin|undersea|submarine/], ['p-fibra', /por tierra|terrestre|fibra|land cable|fiber|fibre/], ['p-puntos', /centros? de datos|data ?cent(er|re)s?|datacenter/], ['p-sat', /satelit|satellite/]];
+  let PAISES = null;
+  function paises() {
+    if (PAISES) return PAISES;
+    const C = (window.OrbitaPlaneta && OrbitaPlaneta.centros) || {};
+    if (!Object.keys(C).length) return [];
+    PAISES = [];
+    const dns = ['es', 'en', 'pt', loc()].map((l) => { try { return new Intl.DisplayNames([l], { type: 'region' }); } catch (_) { return null; } }).filter(Boolean);
+    for (const k of Object.keys(C)) { if (!/^[A-Z]{2}$/.test(k)) continue; const vistos = new Set(); for (const d of dns) { let n = ''; try { n = d.of(k); } catch (_) {} n = sinTildes(n); if (n && n.length > 2 && !vistos.has(n)) { vistos.add(n); PAISES.push([n, k]); } } }
+    PAISES.push(['eeuu', 'US'], ['ee uu', 'US'], ['usa', 'US'], ['reino unido', 'GB'], ['inglaterra', 'GB']);
+    PAISES.sort((a, b) => b[0].length - a[0].length);
+    return PAISES;
+  }
+  const paisEn = (t) => { for (const [n, k] of paises()) { if (n.length < 3) continue; const i = t.indexOf(n); if (i >= 0 && !/[a-z]/.test(t[i - 1] || ' ') && !/[a-z]/.test(t[i + n.length] || ' ')) return k; } return null; };
+  const nombrePais = (k) => { try { return new Intl.DisplayNames([loc()], { type: 'region' }).of(k); } catch (_) { return k; } };
+  function entiende(frase, modo) {
+    const t = sinTildes(frase); if (!t) return null;
+    const dom = /(^|\s)((?:https?:\/\/)?(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/\S*)?)/i.exec(String(frase).trim());
+    if (modo === 'web' && (dom || !/\s/.test(t))) { const d = (dom ? dom[2] : t).replace(/^https?:\/\//i, ''); return { texto: pon('Abro {1} en ZERO, dentro de la burbuja.', d), a: () => abreZero(d) }; }
+    if (modo === 'pais') { const k = paisEn(t); if (k) return { texto: pon('Te llevo al planeta, a {1}.', nombrePais(k)), a: () => alPlaneta(null, k) }; }
+    if (/^(atras|volver|back|voltar)$/.test(t)) return { atras: true };
+    if (/^(inicio|ir al inicio|volver al inicio|menu|home|start)$/.test(t)) return { nodo: 'inicio' };
+    if (tiene(t, /^(hola|buenas|buenos dias|buen dia|hey|hi|hello|ola|oi|bom dia|boa tarde|boa noite|good (morning|afternoon|evening))\b/, 'NUCLEO_CLAVES_HOLA') && t.split(' ').length <= 4) return { nodo: 'inicio' };
+    if (tiene(t, /(pdf|informe|reporte|report|relatorio)/, 'NUCLEO_CLAVES_PDF')) return { nodo: 'z-pdf' };
+    if (dom && !/^(guardiana|guardianagroup)\./i.test(dom[2])) { const d = dom[2].replace(/^https?:\/\//i, ''); return { texto: pon('Abro {1} en ZERO, dentro de la burbuja.', d), a: () => abreZero(d) }; }
+    if (tiene(t, /(mis datos|mis cortes|que me han cortado|que has cortado|resumen|hoy|my data|today|meus dados|hoje)/, 'NUCLEO_CLAVES_DATOS')) return { nodo: 'datos' };
+    if (tiene(t, /(que es un corte|what is a cut|o que e um corte)/, 'NUCLEO_CLAVES_CORTE')) return { nodo: 'd-corte' };
+    const ayuda = tiene(t, /(que es|que hace|como funciona|para que sirve|quien eres|que eres|que puedes|ayuda|what is|how does|who are you|help|o que e|como funciona|ajuda)/, 'NUCLEO_CLAVES_AYUDA');
+    const sZero = tiene(t, /(naveg|zero|burbuja|abrir? (una )?web|buscar en internet|rastre|quien me sigue|subasta|radiograf|cookie|browse|browser|bubble|tracker|leil)/, 'NUCLEO_CLAVES_ZERO');
+    const sCom = tiene(t, /(comunica|chat|mensaje|archivo|cifrad|hablar con|codigo|invitacion|message|file|encrypt|arquivo|mensagem|convite)/, 'NUCLEO_CLAVES_COM');
+    const capa = (CAPAS.find(([, re]) => re.test(t)) || [])[0], pais = paisEn(t);
+    const sPlan = capa || pais || tiene(t, /(planeta|mapa|orbita|cables?|cabos?|cortes? en directo|en directo|el mundo|planet|map|orbit|live)/, 'NUCLEO_CLAVES_PLANETA');
+    if (ayuda) { if (/nucleo|quien eres|que eres|que puedes|who are you/.test(t)) return { nodo: 'nucleo' }; if (sZero) return { nodo: 'z-que' }; if (sCom) return { nodo: 'c-que' }; if (sPlan) return { nodo: 'p-que' }; return { nodo: 'guardiana' }; }
+    if (sCom) return { nodo: 'com' };
+    if (sZero) return { nodo: /quien me sigue|rastre|radiograf|tracker/.test(t) ? 'z-radio' : 'zero' };
+    if (sPlan) {
+      if (capa && pais) return { texto: pon('Te llevo al planeta: {1} en {2}.', T({ 'p-sub': 'los cables submarinos', 'p-fibra': 'los cables por tierra', 'p-puntos': 'los centros de datos', 'p-sat': 'los satélites' }[capa]), nombrePais(pais)), a: () => alPlaneta(capa.slice(2), pais) };
+      if (capa) return { nodo: capa };
+      if (pais) return { texto: pon('Te llevo al planeta, a {1}.', nombrePais(pais)), a: () => alPlaneta(null, pais) };
+      return { nodo: 'planeta' };
+    }
+    return { nodo: 'nose' };
+  }
+
+  // ---------- la portada y la charla ----------
+  let ini = null, laRed = null, pila = ['inicio'], modo = null;
   function construyeInicio() {
     const d = document.createElement('section');
     d.className = 'nuc-ini'; d.id = 'nuc-ini'; d.setAttribute('aria-label', 'NÚCLEO, la entrada de GUARDIANA');
     d.innerHTML = '<canvas class="nuc-lienzo" aria-hidden="true"></canvas>'
       + '<p class="nuc-k nuc-paso">NÚCLEO · GUARDIANA</p>'
       + '<h1 class="nuc-paso" id="nuc-saludo"></h1>'
-      + '<p class="nuc-sub nuc-paso">Bienvenido a esta experiencia de tus datos.<b>¿Qué deseas hacer?</b></p>'
-      + '<form class="nuc-form nuc-paso" id="nuc-form" autocomplete="off"><input id="nuc-q" type="text" maxlength="200" placeholder="Escribe qué deseas hacer…" aria-label="Pídeselo a NÚCLEO"><button type="submit">Ir</button></form>'
-      + '<p class="nuc-resp" id="nuc-resp" aria-live="polite"></p>'
-      + '<div class="nuc-ops nuc-paso" role="group" aria-label="Qué deseas hacer">'
-      + '<button type="button" class="nuc-op" data-q="Quiero navegar"><i>ZERO</i><b>Navegar con ZERO</b><small>La web se abre en una burbuja aislada y ves quién intenta llevarse tus datos.</small></button>'
-      + '<button type="button" class="nuc-op" data-q="Quiero ver el planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos y por tierra, centros de datos, satélites y cortes en directo.</small></button>'
-      + '<button type="button" class="nuc-op" data-q="Quiero ir a Comunicaciones"><i>COMUNICACIONES</i><b>Hablar cifrado</b><small>Chat y archivos cifrados de extremo a extremo entre dos equipos.</small></button>'
+      + '<p class="nuc-sub nuc-paso" id="nuc-sub">Bienvenido a esta experiencia de tus datos.<b>¿Qué deseas hacer?</b></p>'
+      + '<div class="nuc-charla" id="nuc-charla" aria-live="polite"></div>'
+      + '<div class="nuc-ops nuc-paso" id="nuc-ops" role="group" aria-label="Qué deseas hacer">'
+      + '<button type="button" class="nuc-op" data-n="zero"><i>ZERO</i><b>Navegar con ZERO</b><small>La web se abre en una burbuja aislada y ves quién intenta llevarse tus datos.</small></button>'
+      + '<button type="button" class="nuc-op" data-n="planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos y por tierra, centros de datos, satélites y cortes en directo.</small></button>'
+      + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Hablar cifrado</b><small>Chat y archivos cifrados de extremo a extremo entre dos equipos.</small></button>'
       + '</div>'
-      + '<div class="nuc-pie nuc-paso"><span>NÚCLEO solo habla de GUARDIANA, de la web y de tus datos. No guarda lo que le pides.</span><button type="button" class="nuc-salta" id="nuc-salta">Ir directo al planeta</button></div>';
+      + '<div class="nuc-chips nuc-paso" id="nuc-chips" role="group" aria-label="Más opciones"></div>'
+      + '<form class="nuc-form nuc-paso" id="nuc-form" autocomplete="off"><input id="nuc-q" type="text" maxlength="200" placeholder="Escribe qué deseas hacer…" aria-label="Pídeselo a NÚCLEO"><button type="submit">Ir</button></form>'
+      + '<div class="nuc-nav nuc-paso"><button type="button" class="nuc-salta" id="nuc-atras">← Atrás</button><button type="button" class="nuc-salta" id="nuc-inicio">Inicio</button><button type="button" class="nuc-salta" id="nuc-salta">Ir directo al planeta</button></div>'
+      + '<p class="nuc-pie nuc-paso">NÚCLEO solo habla de GUARDIANA, de la web y de tus datos. No guarda lo que le pides.</p>';
     document.body.append(d);
     d.querySelector('#nuc-saludo').textContent = saludo();
-    d.querySelector('#nuc-form').addEventListener('submit', (e) => { e.preventDefault(); const i = d.querySelector('#nuc-q'); pide(i.value, d.querySelector('#nuc-resp')); i.value = ''; });
-    d.querySelectorAll('.nuc-op').forEach((b) => b.addEventListener('click', () => pide(b.dataset.q, d.querySelector('#nuc-resp'))));
+    d.querySelector('#nuc-form').addEventListener('submit', (e) => { e.preventDefault(); const i = d.querySelector('#nuc-q'); escribe(i.value); i.value = ''; });
+    d.querySelectorAll('.nuc-op').forEach((b) => b.addEventListener('click', () => elige(b.dataset.n)));
+    d.querySelector('#nuc-atras').addEventListener('click', atras);
+    d.querySelector('#nuc-inicio').addEventListener('click', () => { pila = ['inicio']; modo = null; d.classList.remove('charla'); d.querySelector('#nuc-charla').textContent = ''; pintaOpciones('inicio'); ponMarcador(); });
     d.querySelector('#nuc-salta').addEventListener('click', () => alPlaneta());
     d.addEventListener('keydown', (e) => { if (e.key === 'Escape') alPlaneta(); });
     return d;
   }
+  function ponMarcador() { const i = ini && ini.querySelector('#nuc-q'); if (i) i.placeholder = T(modo === 'web' ? 'Escribe la dirección, por ejemplo eltiempo.com' : modo === 'pais' ? 'Escribe el país' : 'Escribe qué deseas hacer…'); }
+  function pintaOpciones(id) {
+    if (!ini) return;
+    const n = NODOS[id] || NODOS.inicio, chips = ini.querySelector('#nuc-chips'), grandes = ini.querySelector('#nuc-ops');
+    grandes.hidden = id !== 'inicio';
+    chips.textContent = '';
+    for (const o of (n.o || [])) { if (id === 'inicio' && ['zero', 'planeta', 'com'].includes(o)) continue; const b = document.createElement('button'); b.type = 'button'; b.className = 'nuc-chip'; b.textContent = T(ETIQUETA[o] || o); b.addEventListener('click', () => elige(o)); chips.append(b); }
+    ini.querySelector('#nuc-atras').hidden = pila.length <= 1;
+    ini.querySelector('#nuc-inicio').hidden = id === 'inicio' && !ini.classList.contains('charla');
+  }
+  function burbuja(quien, texto) {
+    const c = ini.querySelector('#nuc-charla'); const p = document.createElement('p'); p.className = 'nuc-b ' + quien;
+    if (quien === 'el') { const k = document.createElement('span'); k.className = 'nq'; k.textContent = 'NÚCLEO'; p.append(k); }
+    p.append(document.createTextNode(texto)); c.append(p); while (c.children.length > 8) c.firstChild.remove(); c.scrollTop = c.scrollHeight;
+  }
+  function enCharla() { if (!ini) return; if (!ini.classList.contains('charla')) { ini.classList.add('charla'); ini.querySelectorAll('.nuc-paso').forEach((p) => p.classList.add('ve')); } }
+  function responde(r, eleccion) {
+    if (!r) return;
+    if (!ini || ini.hidden) muestraInicio(true);
+    enCharla(); if (laRed) laRed.habla();
+    if (eleccion) burbuja('tu', eleccion);
+    if (r.atras) { atras(); return; }
+    if (r.nodo) { const n = NODOS[r.nodo]; if (r.nodo === 'inicio') { pila = ['inicio']; } else if (pila[pila.length - 1] !== r.nodo) pila.push(r.nodo); modo = n.pide || null; ponMarcador(); burbuja('el', n.d()); pintaOpciones(n.o ? r.nodo : (pila[pila.length - 2] || 'inicio')); if (n.a) setTimeout(n.a, 1100); return; }
+    modo = null; ponMarcador(); burbuja('el', r.texto); if (r.a) setTimeout(r.a, 1100);
+  }
+  function elige(id) { responde({ nodo: id }, T(ETIQUETA[id] || id)); }
+  function escribe(frase) { const f = String(frase || '').trim(); if (!f) return; responde(entiende(f, modo), f); }
+  function atras() { if (pila.length > 1) pila.pop(); modo = null; ponMarcador(); const id = pila[pila.length - 1]; if (id === 'inicio') { ini.classList.remove('charla'); ini.querySelector('#nuc-charla').textContent = ''; } else burbuja('el', NODOS[id].d()); pintaOpciones(id); }
   function revela(d, todo) {
     const pasos = [...d.querySelectorAll('.nuc-paso')];
     if (todo || reducir) { pasos.forEach((p) => p.classList.add('ve')); return; }
-    const tiempos = [900, 2100, 2700, 3200, 3700, 4300];
+    const tiempos = [900, 2100, 2700, 3300, 3700, 4000, 4300, 4600];
     pasos.forEach((p, i) => setTimeout(() => p.classList.add('ve'), tiempos[Math.min(i, tiempos.length - 1)]));
   }
   function muestraInicio(rapido) {
-    if (!ini) ini = construyeInicio();
+    if (!ini) { ini = construyeInicio(); pintaOpciones('inicio'); }
     ini.hidden = false; ini.classList.remove('sale');
     if (laRed) laRed.para(); laRed = red(ini.querySelector('.nuc-lienzo'));
     revela(ini, !!rapido);
     barra.hidden = true;
-    setTimeout(() => { const i = ini.querySelector('#nuc-q'); if (i) i.focus({ preventScroll: true }); }, rapido ? 50 : 3300);
+    setTimeout(() => { const i = ini.querySelector('#nuc-q'); if (i) i.focus({ preventScroll: true }); }, rapido ? 50 : 3400);
   }
   function ocultaInicio() {
-    if (!ini || ini.hidden) { barra.hidden = false; return; }
-    ini.classList.add('sale'); barra.hidden = false;
-    setTimeout(() => { ini.hidden = true; if (laRed) { laRed.para(); laRed = null; } }, 750);
+    barra.hidden = false;
+    if (!ini || ini.hidden) return;
+    ini.classList.add('sale');
+    setTimeout(() => { if (!ini.classList.contains('sale')) return; ini.hidden = true; if (laRed) { laRed.para(); laRed = null; } }, 750);
   }
-  function pide(frase, salida) {
-    const r = entiende(frase); if (!r) return;
-    if (laRed) laRed.habla();
-    pinta(salida, r.texto);
-    if (r.accion) setTimeout(r.accion, 900);
-  }
-  function pinta(el, texto) { if (!el) return; el.textContent = ''; const k = document.createElement('span'); k.className = 'nq'; k.textContent = 'NÚCLEO'; el.append(k, document.createTextNode(texto)); if (el.hidden) el.hidden = false; }
 
-  // ---------- la barra de NÚCLEO bajo el planeta, presente en toda Órbita ----------
+  // ---------- la barra de NÚCLEO bajo el planeta; dentro de una sección, un botón pequeño ----------
   const barra = document.createElement('form');
   barra.className = 'nuc-barra'; barra.id = 'nuc-barra'; barra.autocomplete = 'off'; barra.hidden = true;
-  barra.innerHTML = '<p class="nuc-dice" id="nuc-dice" aria-live="polite" hidden></p><button type="button" class="nuc-orbe" id="nuc-orbe" aria-label="NÚCLEO: volver al inicio" title="NÚCLEO"></button><input id="nuc-bq" type="text" maxlength="200" placeholder="Pregúntale a NÚCLEO o dile adónde ir…" aria-label="Pídeselo a NÚCLEO"><button type="submit" class="nuc-ir">Ir</button>';
+  barra.innerHTML = '<button type="button" class="nuc-orbe" id="nuc-orbe" aria-label="Abrir NÚCLEO" title="NÚCLEO"></button><input id="nuc-bq" type="text" maxlength="200" placeholder="Pregúntale a NÚCLEO o dile adónde ir…" aria-label="Pídeselo a NÚCLEO"><button type="submit" class="nuc-ir">Ir</button>';
   document.body.append(barra);
-  barra.addEventListener('submit', (e) => { e.preventDefault(); const i = barra.querySelector('#nuc-bq'); if (barra.classList.contains('mini')) { barra.classList.remove('mini'); i.focus(); return; } pide(i.value, barra.querySelector('#nuc-dice')); i.value = ''; });
-  barra.querySelector('#nuc-orbe').addEventListener('click', () => { if (barra.classList.contains('mini')) { barra.classList.remove('mini'); barra.querySelector('#nuc-bq').focus(); } else muestraInicio(true); });
-  // con una sección abierta (ZERO a pantalla completa), la barra se recoge en un botón pequeño abajo a la izquierda
-  const mira = () => { const d = document.body.classList.contains('dentro'); barra.classList.toggle('mini', d); if (d) barra.querySelector('#nuc-dice').hidden = true; };
+  barra.addEventListener('submit', (e) => { e.preventDefault(); const i = barra.querySelector('#nuc-bq'); if (barra.classList.contains('mini')) { muestraInicio(true); return; } const f = i.value; i.value = ''; if (f.trim()) escribe(f); else muestraInicio(true); });
+  barra.querySelector('#nuc-orbe').addEventListener('click', () => muestraInicio(true));
+  const mira = () => barra.classList.toggle('mini', document.body.classList.contains('dentro'));
   new MutationObserver(mira).observe(document.body, { attributes: true, attributeFilter: ['class'] }); mira();
 
-  // ---------- arranque ----------
-  // la primera vez en esta visita, con su nacimiento; al volver a Órbita en la misma visita, al momento
+  // ---------- arranque: la primera vez en esta visita, con su nacimiento; al volver en la misma visita, al momento ----------
   let visto = false; try { visto = sessionStorage.getItem('guardiana-nucleo') === '1'; sessionStorage.setItem('guardiana-nucleo', '1'); } catch (_) {}
   if (q.get('nucleo') === '0' || PUERTA_EN_URL) barra.hidden = false; else muestraInicio(visto);
-  window.GuardianaNucleo = { inicio: () => muestraInicio(true), pide: (f) => pide(f, (ini && !ini.hidden) ? ini.querySelector('#nuc-resp') : barra.querySelector('#nuc-dice')) };
+  addEventListener('guardiana-idioma', () => { if (ini) { ini.querySelector('#nuc-saludo').textContent = saludo(); pintaOpciones(pila[pila.length - 1]); ponMarcador(); } });
+  window.GuardianaNucleo = { inicio: () => muestraInicio(true), pide: escribe, elige };
 })();
