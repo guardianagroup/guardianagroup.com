@@ -75,61 +75,129 @@
     // ZERO lleva su registro también en memoria: si está abierto, se recarga para que no lo vuelva a escribir
     try { const m = document.getElementById('marco'); if (m && m.contentWindow && /\/zero\//.test(m.contentWindow.location.pathname)) m.contentWindow.location.reload(); } catch (_) {}
   }
-  // «Resumen de mis datos» en PDF (ronda 54: título y alcance, total, por tipo, empresas, países, webs, el registro y la nota
-  // de alcance). Se hace aquí, con lo que hay en este navegador, y se abre la ventana de imprimir para guardarlo como PDF.
-  // dueño, 10:53: «el resumen no te aparece en PDF, te lleva a imprimir»: ahora se descarga un archivo .pdf de verdad con el
-  // mismo escritor de PDF de ZERO (orbita/zero/pdf.js); solo si el idioma no cabe en ese PDF se usa la ventana de imprimir.
-  function resumenArchivo() {
-    const REG = registros(), total = totalCortes(), tot = lee('zeroTotal', null);
-    if (!window.ZeroPdf || (!REG.length && !total)) return false;
-    const fecha = (t) => { try { return new Date(t).toLocaleString(loc(), { dateStyle: 'medium', timeStyle: 'short' }); } catch (_) { return new Date(t).toISOString(); } };
-    const cuenta = (f) => { const m = new Map(); for (const r of REG) { const k = f(r); if (!k) continue; m.set(k, (m.get(k) || 0) + 1); } return [...m.entries()].sort((a, b) => b[1] - a[1]); };
-    const empresas = cuenta((r) => r.e), paises = cuenta((r) => (r.p && r.p !== 'País no identificado' ? T(r.p) : null));
-    const dos = (titulo, col, filas) => ({ titulo: T(titulo), cols: [{ t: col, w: 80 }, { t: 'Cortes', w: 20, der: 1 }], filas: filas.slice(0, 40).map(([k, n]) => [k, fmt(n)]) });
-    const datos = {
-      marca: '/ NÚCLEO', titulo: T('Resumen de mis datos'),
-      subtitulo: T('Cortes de ZERO guardados en este navegador') + ' · ' + pon('Generado: {1}', fecha(Date.now())) + (tot && tot.d ? ' · ' + pon('Desde el {1}', fecha(tot.d)) : ''),
-      resumen: [[fmt(total), T('Cortes desde el primer día'), 1], [fmt(empresas.length), T('Empresas')], [fmt(paises.length), T('Países')]],
-      secciones: [dos('Por tipo', 'Tipo', cuenta((r) => (r.m ? T(r.m) : null))), dos('Empresas', 'Empresa', empresas), dos('Países', 'País', paises), dos('Webs donde pasó', 'Web', cuenta((r) => r.w)),
-        { titulo: T('Cortes registrados'), cols: [{ t: 'Fecha y hora', w: 22 }, { t: 'Web', w: 22 }, { t: 'Empresa', w: 22 }, { t: 'País', w: 16 }, { t: 'Tipo', w: 18 }], filas: [...REG].sort((a, b) => b.t - a.t).slice(0, 1500).map((r) => [fecha(r.t), r.w || '', r.e || '', r.p ? T(r.p) : '', r.m ? T(r.m) : '']) }],
-      final: T('Este resumen muestra los cortes registrados por ZERO en este navegador. No es un inventario de todos tus datos personales ni de toda tu actividad en internet.') + ' ' + T('Estos registros se guardan solo en este navegador y puedes borrarlos desde NÚCLEO.'),
-      pie: 'GUARDIANA · NÚCLEO · ' + T('Resumen de mis datos'), archivo: 'GUARDIANA-resumen-de-mis-datos.pdf',
-    };
-    const todo = [datos.titulo, datos.subtitulo, datos.final, ...datos.secciones.flatMap((x) => [x.titulo, ...x.cols.map((c) => T(c.t)), ...x.filas.flat()])].join(' ');
-    if (!window.ZeroPdf.cabe(todo)) return false;
-    try { window.ZeroPdf.descarga(datos, T); return true; } catch (e) { console.warn('PDF', e); return false; }
+  // «Resumen de mis datos» (ronda 54: título y alcance, totales, empresas, países, por tipo, webs, el registro y la nota de alcance).
+  // Dueño, 10:56: «el resumen de los datos puede ser en PDF, pero también en vídeo… de la última web, de la última hora o del
+  // último día… lo que más se simplifica». Se elige el periodo y el formato; los dos salen de lo mismo: GuardianaResumen.datos
+  // (resumen-video.js, que solo se carga cuando se pide un resumen). El PDF lo escribe el escritor de ZERO (orbita/zero/pdf.js);
+  // si el idioma no cabe en ese PDF, se abre la ventana de imprimir con el mismo contenido. Nada sale de este navegador.
+  const hayRadiografia = () => { const rx = lee('zeroRadiografia', null); return !!(rx && ['c', 's', 'h', 'k'].some((k) => Array.isArray(rx[k]) && rx[k].length)); };
+  const hayAlgo = () => hayDatos() || hayRadiografia();
+  const PERIODOS = [['web', 'La última web'], ['hora', 'La última hora'], ['24h', 'Las últimas 24 horas']];
+  const ESTADO = { c: 'Cortada', p: 'Permitida', v: 'Sin cortar' };
+  let cargaRes = null;
+  function moduloResumen() {
+    if (window.GuardianaResumen) return Promise.resolve(window.GuardianaResumen);
+    if (!cargaRes) cargaRes = new Promise((ok, mal) => {
+      const s = document.createElement('script'); s.src = '/orbita/static/resumen-video.js?v=20261027a'; s.async = true;
+      s.onload = () => (window.GuardianaResumen ? ok(window.GuardianaResumen) : mal(new Error('resumen')));
+      s.onerror = () => { cargaRes = null; s.remove(); mal(new Error('resumen')); };
+      document.head.append(s);
+    });
+    return cargaRes;
   }
-  function resumenPdf() {
-    const REG = registros(), total = totalCortes(), tot = lee('zeroTotal', null);
-    if (!REG.length && !total) return false;
-    const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  function docResumen(d, G) {
     const fecha = (t) => { try { return new Date(t).toLocaleString(loc(), { dateStyle: 'medium', timeStyle: 'short' }); } catch (_) { return new Date(t).toISOString(); } };
-    const cuenta = (f) => { const m = new Map(); for (const r of REG) { const k = f(r); if (!k) continue; m.set(k, (m.get(k) || 0) + 1); } return [...m.entries()].sort((a, b) => b[1] - a[1]); };
-    const tabla = (titulo, col, filas) => (filas.length ? `<h2>${esc(T(titulo))}</h2><table><thead><tr><th>${esc(T(col))}</th><th class="n">${esc(T('Cortes'))}</th></tr></thead><tbody>${filas.slice(0, 25).map(([k, n]) => `<tr><td>${esc(k)}</td><td class="n">${fmt(n)}</td></tr>`).join('')}</tbody></table>` : '');
-    const det = [...REG].sort((a, b) => b.t - a.t).slice(0, 1500);
-    const empresas = cuenta((r) => r.e), paises = cuenta((r) => (r.p && r.p !== 'País no identificado' ? T(r.p) : null));
-    const html = `<!doctype html><html lang="${esc((window.GuardianaIdioma && GuardianaIdioma.lang) || 'es')}"><head><meta charset="utf-8"><title>GUARDIANA · ${esc(T('Resumen de mis datos'))}</title><style>
+    const A = d.todas || {}, cifras = [], S = d.subastas || {};
+    const tres = (q) => [q.nombre, fmt(q.conexiones), fmt(q.cortes)];
+    if (S.total) cifras.push([T('Subastas'), fmt(S.total), pon(S.pujadores === 1 ? '{1} empresa pujó' : '{1} empresas pujaron', fmt(S.pujadores || 0)) + (S.cpmMax ? ' · ' + T('Puja más alta (CPM)') + ': ' + S.cpmMax.texto : '')]);
+    if (d.lecturas && d.lecturas.total) cifras.push([T('Lecturas del equipo'), fmt(d.lecturas.total), T('intentos de reconocer el equipo sin cookies')]);
+    if (d.cookies && d.cookies.total) cifras.push([T('Cookies'), fmt(d.cookies.total), T('de otras empresas')]);
+    const pais = (p) => (p ? (G && G.pais ? G.pais(p, T, loc()) : T(p)) : '');
+    const secciones = [
+      { titulo: T('Empresas'), cols: [{ t: 'Empresa', w: 40 }, { t: 'País', w: 24 }, { t: 'Conexiones', w: 18, der: 1 }, { t: 'Cortes', w: 18, der: 1, rojo: 1 }], filas: (A.empresas || []).slice(0, 80).map((e) => [e.nombre, e.paisNombre, fmt(e.conexiones), fmt(e.cortes)]) },
+      { titulo: T('Países'), cols: [{ t: 'País', w: 60 }, { t: 'Conexiones', w: 20, der: 1 }, { t: 'Cortes', w: 20, der: 1, rojo: 1 }], filas: (A.paises || []).slice(0, 60).map(tres) },
+      { titulo: T('Por tipo'), cols: [{ t: 'Tipo', w: 60 }, { t: 'Conexiones', w: 20, der: 1 }, { t: 'Cortes', w: 20, der: 1, rojo: 1 }], filas: (d.tipos || []).map(tres) },
+    ];
+    if (d.periodo !== 'web') secciones.push({ titulo: T('Webs donde pasó'), cols: [{ t: 'Web', w: 80 }, { t: 'Conexiones', w: 20, der: 1 }], filas: (A.webs || []).slice(0, 60).map((x) => [x.web, fmt(x.conexiones)]) });
+    if (cifras.length) secciones.push({ titulo: T('En cifras'), nota: S.cpmMax ? T('CPM: lo que una empresa ofrecía por mostrar su anuncio mil veces, según la propia página. No es el precio de tus datos.') : '', cols: [{ t: '', w: 26 }, { t: '', w: 12, der: 1 }, { t: '', w: 62, wrap: 1 }], filas: cifras });
+    secciones.push({ titulo: T('Conexiones registradas'), cols: [{ t: 'Fecha y hora', w: 19 }, { t: 'Web', w: 20 }, { t: 'Empresa', w: 21 }, { t: 'País', w: 15 }, { t: 'Tipo', w: 14 }, { t: 'Estado', w: 11 }],
+      filas: (d.registros || []).slice(0, 1500).map((r) => [fecha(r.t), r.w || '', r.e || T('No identificada'), pais(r.p), r.m ? T(r.m) : '', T(ESTADO[r.s] || 'Sin cortar')]) });
+    return {
+      marca: '/ NÚCLEO', titulo: T('Resumen de mis datos'),
+      subtitulo: d.titulo + ' · ' + d.rango + ' · ' + pon('Generado: {1}', fecha(d.generado || Date.now())),
+      resumen: [[fmt(d.conexiones), T('Conexiones')], [fmt(d.cortes), T('Cortes'), 1], [fmt(d.empresas.total), T('Empresas')], [fmt(d.paises.total), T('Países')]],
+      secciones,
+      final: T('Este resumen muestra lo que el navegador ZERO ha registrado en este navegador durante ese periodo. No es un inventario de todos tus datos personales ni de toda tu actividad en internet.') + ' ' + T('Estos registros se guardan solo en este navegador y puedes borrarlos desde NÚCLEO.'),
+      pie: 'GUARDIANA · NÚCLEO · ' + T('Resumen de mis datos'), archivo: 'GUARDIANA-resumen-' + d.periodo + '.pdf',
+    };
+  }
+  // el PDF de verdad; si el idioma no cabe en ese PDF, la ventana de imprimir con el mismo documento
+  function sacaResumen(doc) {
+    const todo = [doc.titulo, doc.subtitulo, doc.final, ...doc.resumen.map((x) => x[1]), ...doc.secciones.flatMap((x) => [x.titulo, x.nota || '', ...x.cols.map((c) => T(c.t)), ...x.filas.flat()])].join(' ');
+    if (window.ZeroPdf && window.ZeroPdf.cabe(todo)) { try { window.ZeroPdf.descarga(doc, T); return 'pdf'; } catch (e) { console.warn('PDF', e); } }
+    return imprimeResumen(doc) ? 'imprimir' : null;
+  }
+  function imprimeResumen(doc) {
+    const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const tabla = (x) => {
+      if (!x.filas.length) return '';
+      const cab = x.cols.some((c) => c.t) ? `<thead><tr>${x.cols.map((c) => `<th${c.der ? ' class="n"' : ''}>${esc(T(c.t))}</th>`).join('')}</tr></thead>` : '';
+      return `<h2>${esc(x.titulo)}</h2>${x.nota ? `<p class="sub">${esc(x.nota)}</p>` : ''}<table>${cab}<tbody>${x.filas.map((f) => `<tr>${f.map((v, i) => `<td${x.cols[i].der ? ' class="n"' : ''}>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+    };
+    const lang = (window.GuardianaIdioma && GuardianaIdioma.lang) || 'es', dir = /^(ar|fa|he|ur)$/.test(lang) ? 'rtl' : 'ltr';
+    const html = `<!doctype html><html lang="${esc(lang)}" dir="${dir}"><head><meta charset="utf-8"><title>GUARDIANA · ${esc(doc.titulo)}</title><style>
 @page{size:A4;margin:16mm 14mm}*{box-sizing:border-box}body{font:10.5pt/1.45 'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#0B0F14;margin:0}
 .k{font:600 8.5pt/1 'IBM Plex Mono',Consolas,monospace;letter-spacing:.28em;color:#3a6b93;text-transform:uppercase;margin:0}
-h1{font-weight:400;font-size:22pt;margin:6pt 0 2pt}.sub{color:#45505c;margin:0 0 10pt}
-.cifras{display:flex;gap:22pt;margin:8pt 0 4pt;padding:10pt 12pt;border:1px solid #d6dde4;border-radius:8pt}.cifras b{display:block;font-size:20pt;font-weight:500}.cifras span{font-size:8pt;color:#45505c;text-transform:uppercase;letter-spacing:.08em}
+h1{font-weight:400;font-size:22pt;margin:14pt 0 8pt}.sub{color:#45505c;margin:0 0 18pt}
+.cifras{display:flex;gap:22pt;margin:0 0 8pt;padding:12pt 14pt;border:1px solid #d6dde4;border-radius:8pt}.cifras b{display:block;font-size:20pt;font-weight:500}.cifras b.r{color:#c0503f}.cifras span{font-size:8pt;color:#45505c;text-transform:uppercase;letter-spacing:.08em}
 h2{font-size:12pt;margin:16pt 0 6pt;padding-bottom:3pt;border-bottom:1px solid #d6dde4}
 table{width:100%;border-collapse:collapse;font-size:9pt}th,td{text-align:start;padding:3pt 4pt;border-bottom:1px solid #eef1f4;vertical-align:top}th{font-weight:600;color:#45505c}.n{text-align:end;white-space:nowrap}tr{break-inside:avoid}
 .nota{margin-top:16pt;padding:8pt 10pt;background:#f3f6f9;border-radius:6pt;font-size:8.5pt;color:#45505c}
 </style></head><body>
-<p class="k">GUARDIANA · NÚCLEO</p><h1>${esc(T('Resumen de mis datos'))}</h1>
-<p class="sub">${esc(T('Cortes de ZERO guardados en este navegador'))} · ${esc(pon('Generado: {1}', fecha(Date.now())))}${tot && tot.d ? ' · ' + esc(pon('Desde el {1}', fecha(tot.d))) : ''}</p>
-<div class="cifras"><div><b>${fmt(total)}</b><span>${esc(T('Cortes desde el primer día'))}</span></div><div><b>${fmt(empresas.length)}</b><span>${esc(T('Empresas'))}</span></div><div><b>${fmt(paises.length)}</b><span>${esc(T('Países'))}</span></div></div>
-${tabla('Por tipo', 'Tipo', cuenta((r) => (r.m ? T(r.m) : null)))}${tabla('Empresas', 'Empresa', empresas)}${tabla('Países', 'País', paises)}${tabla('Webs donde pasó', 'Web', cuenta((r) => r.w))}
-${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${esc(T('Fecha y hora'))}</th><th>${esc(T('Web'))}</th><th>${esc(T('Empresa'))}</th><th>${esc(T('País'))}</th><th>${esc(T('Tipo'))}</th></tr></thead><tbody>${det.map((r) => `<tr><td>${esc(fecha(r.t))}</td><td>${esc(r.w)}</td><td>${esc(r.e)}</td><td>${esc(r.p ? T(r.p) : '')}</td><td>${esc(r.m ? T(r.m) : '')}</td></tr>`).join('')}</tbody></table>` : ''}
-<p class="nota">${esc(T('Este resumen muestra los cortes registrados por ZERO en este navegador. No es un inventario de todos tus datos personales ni de toda tu actividad en internet.'))} ${esc(T('Estos registros se guardan solo en este navegador y puedes borrarlos desde NÚCLEO.'))}</p>
-</body></html>`;
+<p class="k">GUARDIANA · NÚCLEO</p><h1>${esc(doc.titulo)}</h1><p class="sub">${esc(doc.subtitulo)}</p>
+<div class="cifras">${doc.resumen.map(([n, et, r]) => `<div><b${r ? ' class="r"' : ''}>${esc(n)}</b><span>${esc(et)}</span></div>`).join('')}</div>
+${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body></html>`;
     const f = document.createElement('iframe'); f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1;
     f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
     document.body.append(f);
-    const d = f.contentDocument; d.open(); d.write(html); d.close();
+    const dd = f.contentDocument; dd.open(); dd.write(html); dd.close();
     setTimeout(() => { try { f.contentWindow.focus(); f.contentWindow.print(); } catch (_) {} setTimeout(() => f.remove(), 120000); }, 250);
     return true;
+  }
+  const sinPeriodo = (periodo, formato) => ({ t: 'No hay nada registrado en ese periodo. Prueba con otro.', c: PERIODOS.filter(([p]) => p !== periodo).map(([p, l]) => ({ l, id: 'res-' + p, extra: { formato } })) });
+  async function resumenPdf(periodo) {
+    let G; try { G = await moduloResumen(); } catch (_) { return { t: 'No he podido preparar el resumen. Inténtalo de nuevo.' }; }
+    const d = G.datos(periodo, T, loc());
+    if (!d) return sinPeriodo(periodo, 'pdf');
+    const r = sacaResumen(docResumen(d, G));
+    return r === 'pdf' ? { t: 'Te he descargado el resumen en PDF.' } : r ? { t: 'Preparo el resumen de tus datos en PDF: se abre la ventana de imprimir y eliges «Guardar como PDF».' } : { t: 'No he podido preparar el resumen. Inténtalo de nuevo.' };
+  }
+  // el vídeo: se ve hacerse en la propia burbuja de NÚCLEO (unos 20 s) y queda para verlo y descargarlo
+  let grabando = null;
+  async function resumenVideo(periodo) {
+    let G; try { G = await moduloResumen(); } catch (_) { return { t: 'No he podido preparar el resumen. Inténtalo de nuevo.' }; }
+    if (grabando) return { t: 'Ya se está haciendo un vídeo.' };
+    const d = G.datos(periodo, T, loc());
+    if (!d) return sinPeriodo(periodo, 'video');
+    if (!G.formato()) return { t: 'Este navegador no puede grabar vídeo.', c: [{ l: 'Resumen en PDF', id: 'res-' + periodo, extra: { formato: 'pdf' } }] };
+    const c = sala.querySelector('#ns-charla'), b = document.createElement('div');
+    b.className = 'nuc-b el nuc-video';
+    b.innerHTML = '<span class="nq" translate="no">NÚCLEO</span><p class="nuc-bt"></p><div class="nv-marco"><canvas class="nv-lienzo" width="1280" height="720" aria-hidden="true"></canvas>'
+      + '<div class="nv-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div></div><div class="ns-opciones"><button type="button" class="nuc-chip nv-cancela">Cancelar</button></div>';
+    const txt = b.querySelector('.nuc-bt'), marco = b.querySelector('.nv-marco'), barra = b.querySelector('.nv-barra'), ops = b.querySelector('.ns-opciones');
+    txt.textContent = T('Preparo el vídeo. Tarda unos 20 segundos.');
+    c.append(b); sala.classList.remove('vacia');
+    const cu = sala.querySelector('#ns-cuerpo'); requestAnimationFrame(() => { cu.scrollTop = cu.scrollHeight; });
+    const ab = new AbortController(); grabando = ab;
+    ops.querySelector('.nv-cancela').addEventListener('click', () => ab.abort());
+    try {
+      const r = await G.video(d, { T, loc: loc(), lienzo: b.querySelector('canvas'), signal: ab.signal, onProgreso: (x) => { const n = Math.round(x * 100); barra.firstChild.style.width = n + '%'; barra.setAttribute('aria-valuenow', String(n)); } });
+      const url = URL.createObjectURL(r.blob);
+      const v = document.createElement('video'); v.className = 'nv-video'; v.controls = true; v.playsInline = true; v.preload = 'metadata'; v.src = url;
+      // la portada del vídeo: el cuadro del título, no el primer cuadro (casi negro)
+      try { const pc = document.createElement('canvas'); await G.cartel(d, 2.6, { T, loc: loc(), lienzo: pc }); v.poster = pc.toDataURL('image/jpeg', 0.86); } catch (_) {}
+      marco.replaceChildren(v);
+      txt.textContent = T('Listo: aquí tienes el vídeo. También puedes descargarlo.');
+      const a = document.createElement('a'); a.className = 'nuc-chip nv-baja'; a.href = url; a.download = r.nombre; a.textContent = T('Descargar el vídeo');
+      ops.replaceChildren(a);
+      requestAnimationFrame(() => { cu.scrollTop = cu.scrollHeight; });
+      return null;
+    } catch (e) {
+      b.remove();
+      if (e && e.codigo === 'cancelado') return { t: 'Se ha cancelado el vídeo.' };
+      if (e && (e.codigo === 'sin-grabadora' || e.codigo === 'sin-formato')) return { t: 'Este navegador no puede grabar vídeo.', c: [{ l: 'Resumen en PDF', id: 'res-' + periodo, extra: { formato: 'pdf' } }] };
+      return { t: 'No se ha podido grabar el vídeo.', c: [{ l: 'Resumen en PDF', id: 'res-' + periodo, extra: { formato: 'pdf' } }] };
+    } finally { grabando = null; }
   }
 
   // ---------- textos ----------
@@ -140,15 +208,15 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
   };
   const ETQ = {
     zero: 'Ir al navegador ZERO', planeta: 'Explorar el planeta', com: 'Chat encriptado', datos: 'Mis datos', 'que-es-guardiana': '¿Qué es GUARDIANA?',
-    'z-web': 'Ir a una web con el navegador ZERO', 'z-buscar': 'Buscar en internet', 'z-radio': 'Ver la Radiografía', 'z-pdf': 'PDF de la web abierta', resumen: 'Resumen de mis datos en PDF', 'z-que': '¿Cómo funciona el navegador ZERO?', 'z-tor': 'Navegar con Tor',
+    'z-web': 'Ir a una web con el navegador ZERO', 'z-buscar': 'Buscar en internet', 'z-radio': 'Ver la Radiografía', 'z-pdf': 'PDF de la web abierta', resumen: 'Resumen de mis datos', 'res-pdf': 'Resumen de mis datos en PDF', 'res-video': 'Resumen de mis datos en vídeo', 'z-que': '¿Cómo funciona el navegador ZERO?', 'z-tor': 'Navegar con Tor',
     'p-sub': 'Cables submarinos', 'p-fibra': 'Cables terrestres', 'p-puntos': 'Centros de datos', 'p-sat': 'Satélites', 'p-pais': 'Ir a un país', 'p-directo': 'Cortes en directo', 'p-que': '¿Qué es Órbita?',
     'c-crear': 'Crear una invitación', 'c-codigo': 'Tengo un código', 'c-que': 'Cómo funciona Comunicaciones',
     'd-corte': '¿Qué es un corte?', borrar: 'Borrar mis datos de este navegador', privacidad: 'Privacidad', seguridad: '¿Es seguro?', vpn: '¿Es una VPN?', precio: 'Precio', cuenta: '¿Necesito una cuenta?', idioma: 'Idioma', contacto: 'Hablar con una persona',
   };
-  const RAPIDAS = [['zero', 'Ir al navegador ZERO'], ['z-radio', 'Ver la Radiografía'], ['datos', 'Mis datos'], ['resumen', 'Resumen en PDF'], ['planeta', 'Explorar el planeta'], ['com', 'Chat encriptado']];
+  const RAPIDAS = [['zero', 'Ir al navegador ZERO'], ['z-radio', 'Ver la Radiografía'], ['datos', 'Mis datos'], ['resumen', 'Resumen en PDF o vídeo'], ['planeta', 'Explorar el planeta'], ['com', 'Chat encriptado']];
   const GRUPOS = [
     ['Navegar y buscar', ['z-web', 'z-buscar', 'z-tor', 'z-que']],
-    ['Radiografía e informes', ['z-radio', 'z-pdf', 'resumen']],
+    ['Radiografía e informes', ['z-radio', 'z-pdf', 'res-pdf', 'res-video']],
     ['Mis datos', ['datos', 'd-corte', 'borrar']],
     ['Órbita', ['p-sub', 'p-fibra', 'p-puntos', 'p-sat', 'p-pais', 'p-directo']],
     ['Comunicaciones', ['c-crear', 'c-codigo', 'c-que']],
@@ -176,7 +244,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       // buscador (Google, Brave, Tor). Lo justo y sencillo.» Abrir una web, buscar y la Radiografía llevan al navegador ZERO.
       case 'z-web': case 'z-buscar': case 'z-radio': return { t: 'Abro el navegador ZERO.', a: () => abreZero(), va: true };
       case 'z-pdf': return hayWeb() ? { t: 'Preparo el PDF con lo que el navegador ZERO ha visto en esta web.', a: pdfWeb, va: true } : { t: 'Para el PDF de una web, ábrela primero en el navegador ZERO. Si quieres el de tus datos, pídeme el resumen.', c: ['zero', 'resumen'] };
-      case 'resumen': return hayDatos() ? (resumenArchivo() ? { t: 'Te he descargado el resumen de tus datos en PDF.' } : { t: 'Preparo el resumen de tus datos en PDF: se abre la ventana de imprimir y eliges «Guardar como PDF».', a: resumenPdf }) : { t: 'Todavía no hay cortes registrados en este navegador. Abre una web con el navegador ZERO y vuelve a pedirme el resumen.', c: ['z-web'] };
+      case 'resumen': case 'res-pdf': case 'res-video': case 'res-web': case 'res-hora': case 'res-24h': return pideResumen(r);
       case 'z-que': return { t: AYUDA.zero, c: ['z-web', 'z-radio'] };
       case 'z-tor': return { t: 'Abro el navegador ZERO: en el selector del buscador, elige Tor. Con Tor se corta más.', a: () => abreZero(), va: true };
       case 'planeta': return { t: 'Te llevo al planeta: cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.', a: () => alPlaneta(), va: true };
@@ -188,9 +256,9 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       case 'c-crear': return { t: 'Abro Comunicaciones: pulsa «Crear invitación» y dale el código a la otra persona.', a: irComunicaciones, va: true };
       case 'c-codigo': return { t: 'Abro Comunicaciones: pulsa «Tengo un código» y escribe las 9 cifras.', a: irComunicaciones, va: true };
       case 'c-que': return { t: AYUDA.com, c: ['c-crear', 'c-codigo'] };
-      case 'datos': return { x: [['Qué es', 'Lo que el navegador ZERO ha cortado mientras navegabas: qué empresas y de qué países.'], ['Dónde está', 'Solo en este navegador.']], t: misDatos(), c: hayDatos() ? ['resumen', 'borrar'] : ['z-web'] };
+      case 'datos': return { x: [['Qué es', 'Lo que el navegador ZERO ha cortado mientras navegabas: qué empresas y de qué países.'], ['Dónde está', 'Solo en este navegador.']], t: misDatos(), c: hayAlgo() ? ['resumen', 'borrar'] : ['z-web'] };
       case 'd-corte': return { t: 'Un corte es una conexión de otra empresa que el navegador ZERO no deja pasar. Por defecto, todo pasa y tú decides qué cortar; con Tor, se corta más.', c: ['datos'] };
-      case 'borrar': return hayDatos() ? { t: '¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.', c: [{ l: 'Sí, borrar', id: 'borrar-si' }, { l: 'No', id: 'borrar-no' }], modo: 'confirma-borrar' } : { t: 'No hay nada que borrar: el navegador ZERO todavía no ha guardado cortes aquí.' };
+      case 'borrar': return hayAlgo() ? { t: '¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.', c: [{ l: 'Sí, borrar', id: 'borrar-si' }, { l: 'No', id: 'borrar-no' }], modo: 'confirma-borrar' } : { t: 'No hay nada que borrar: el navegador ZERO todavía no ha guardado cortes aquí.' };
       case 'borrar-si': borraDatos(); return { t: 'Hecho: he borrado «Mis datos» de este navegador.' };
       case 'borrar-no': return { t: 'De acuerdo, no borro nada.' };
       case 'privacidad': return { t: 'NÚCLEO no guarda lo que le pides. Lo que corta el navegador ZERO («Mis datos») se guarda solo en este navegador, y puedes borrarlo cuando quieras.', c: ['datos', 'borrar'] };
@@ -215,6 +283,23 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
     }
   }
   function idioma(l) { try { if (window.GuardianaIdioma) GuardianaIdioma.pon(l); } catch (_) {} }
+  // el resumen: primero el periodo, luego PDF o vídeo (lo que ya venga en la frase no se vuelve a preguntar)
+  let pedido = { periodo: null, formato: null };
+  function pideResumen(r) {
+    const id = r.id;
+    if (id === 'resumen') pedido = { periodo: r.periodo || null, formato: r.formato || null };
+    else if (id === 'res-pdf' || id === 'res-video') { pedido.formato = id === 'res-pdf' ? 'pdf' : 'video'; if (r.periodo) pedido.periodo = r.periodo; }
+    else { pedido.periodo = id.slice(4); if (r.formato) pedido.formato = r.formato; }
+    if (!hayAlgo()) { pedido = { periodo: null, formato: null }; return { t: 'Todavía no hay nada registrado en este navegador. Abre una web con el navegador ZERO y vuelve a pedirme el resumen.', c: ['z-web'] }; }
+    if (!pedido.periodo) return { t: '¿De qué periodo quieres el resumen?', c: PERIODOS.map(([p, l]) => ({ l, id: 'res-' + p })), modo: 'res-periodo' };
+    if (!pedido.formato) return { t: '¿En PDF o en vídeo?', c: [{ l: 'PDF', id: 'res-pdf', nt: true }, { l: 'Vídeo', id: 'res-video' }], modo: 'res-formato' };
+    const { periodo, formato } = pedido; pedido = { periodo: null, formato: null };
+    return { luego: () => (formato === 'video' ? resumenVideo(periodo) : resumenPdf(periodo)) };
+  }
+
+  // NÚCLEO tapa la pantalla entera (fondo opaco): mientras tanto el planeta de Órbita no se dibuja (menos batería y el vídeo
+  // del resumen se graba fluido); orbita.js mira window.OrbitaTapada en cada cuadro.
+  function tapa(si) { window.OrbitaTapada = si === undefined ? true : !!si; }
 
   // ---------- la portada ----------
   let ini = null, laRed = null;
@@ -230,7 +315,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       + '<button type="button" class="nuc-op" data-n="planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.</small></button>'
       + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Chatea y envía archivos encriptados de PC a PC.</small></button>'
       // dueño, 10:00: «añade uno más: pedir las cosas»; ronda 54 (ChatGPT y Astra): «Pídeselo a NÚCLEO»
-      + '<button type="button" class="nuc-op nuc-op-n" data-n="nucleo"><i translate="no">NÚCLEO</i><b>Pídeselo a NÚCLEO</b><small>Pídele que te lleve al navegador ZERO, que consulte tus datos o que prepare informes en PDF.</small></button>'
+      + '<button type="button" class="nuc-op nuc-op-n" data-n="nucleo"><i translate="no">NÚCLEO</i><b>Pídeselo a NÚCLEO</b><small>Pídele que te lleve al navegador ZERO, que consulte tus datos o que prepare resúmenes en PDF o en vídeo.</small></button>'
       + '</div>'
       // dueño, 12:23: la página del planeta es la portada de la web y su «Empezar» trae aquí; fuera «¿Qué es GUARDIANA?».
       // Arriba a la izquierda, «Volver» a esa portada (dueño, 10:53: «tienes que poder ir y volver»).
@@ -252,7 +337,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
   }
   function muestraInicio(rapido) {
     if (!ini) ini = construyeInicio();
-    ini.hidden = false; ini.classList.remove('sale');
+    ini.hidden = false; ini.classList.remove('sale'); tapa();
     if (laRed) laRed.para(); laRed = red(ini.querySelector('.nuc-lienzo'), { nace: !rapido });
     revela(ini, !!rapido);
     barra.hidden = true;
@@ -260,7 +345,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
   function ocultaInicio() {
     if (!sala || sala.hidden) barra.hidden = false;
     if (!ini || ini.hidden) return;
-    ini.classList.add('sale');
+    ini.classList.add('sale'); tapa(sala && !sala.hidden);
     setTimeout(() => { if (!ini.classList.contains('sale')) return; ini.hidden = true; if (laRed) { laRed.para(); laRed = null; } }, 750);
   }
 
@@ -275,7 +360,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       + '<div class="ns-panel" id="ns-panel" role="region" aria-label="Qué puedo pedir" hidden></div>'
       + '<div class="ns-cuerpo" id="ns-cuerpo"><div class="ns-col">'
       + '<div class="ns-hola"><canvas class="ns-red" aria-hidden="true"></canvas>'
-      + '<p>Hola, soy NÚCLEO. Puedo llevarte al navegador ZERO, a Órbita o a Comunicaciones, enseñarte qué se ha cortado y preparar informes en PDF. ¿Qué deseas hacer?</p></div>'
+      + '<p>Hola, soy NÚCLEO. Puedo llevarte al navegador ZERO, a Órbita o a Comunicaciones, enseñarte qué se ha cortado y preparar resúmenes en PDF o en vídeo. ¿Qué deseas hacer?</p></div>'
       + '<div class="ns-charla" id="ns-charla" aria-live="polite"></div></div></div>'
       + '<div class="ns-pie"><div class="ns-rapidas" id="ns-rapidas" role="group" aria-label="Acciones rápidas"></div>'
       + '<form class="ns-form" id="ns-form" autocomplete="off"><input id="ns-q" type="text" maxlength="200" placeholder="Escribe qué quieres hacer…" aria-label="Pídeselo a NÚCLEO" enterkeyhint="send"><button type="submit">Enviar</button></form>'
@@ -306,13 +391,13 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
   function abreSala() {
     if (!sala) sala = construyeSala();
     if (ini && !ini.hidden) ocultaInicio();
-    sala.hidden = false; barra.hidden = true;
+    sala.hidden = false; barra.hidden = true; tapa();
     if (salaRed) salaRed.para(); salaRed = red(sala.querySelector('.ns-red'), { nace: false });
     setTimeout(() => { const i = sala.querySelector('#ns-q'); if (i) i.focus({ preventScroll: true }); }, 60);
   }
   function cierraSala() {
     if (!sala || sala.hidden) return;
-    sala.hidden = true; panel(false); modo = null;
+    sala.hidden = true; panel(false); modo = null; tapa(!!(ini && !ini.hidden && !ini.classList.contains('sale')));
     if (salaRed) { salaRed.para(); salaRed = null; }
     if (!ini || ini.hidden) barra.hidden = false;
   }
@@ -328,7 +413,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       for (const o of op.c) {
         const b = document.createElement('button'); b.type = 'button'; b.className = 'nuc-chip';
         if (typeof o === 'string') { b.textContent = ETQ[o] || o; b.addEventListener('click', () => elige(o, b.textContent)); }
-        else { b.textContent = o.l; if (o.nt) b.setAttribute('translate', 'no'); b.addEventListener('click', () => (o.id ? elige(o.id, b.textContent) : (burbuja('tu', b.textContent), o.f()))); }
+        else { b.textContent = o.l; if (o.nt) b.setAttribute('translate', 'no'); b.addEventListener('click', () => (o.id ? elige(o.id, b.textContent, o.extra) : (burbuja('tu', b.textContent), o.f()))); }
         f.append(b);
       }
       p.append(f);
@@ -349,14 +434,18 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
     // dueño, 10:53: «cuando la persona clica, no hace falta que digas ya te llevo y luego salte»: si la respuesta lleva a otro
     // sitio, se va directamente; al volver, el botón dice «Regresar a NÚCLEO».
     if (o && o.va && o.a) { ponVuelta('nucleo'); o.a(); return; }
+    if (o && o.luego) { o.luego().then((x) => { if (x) muestra(x); }, () => muestra({ t: 'No he podido preparar el resumen. Inténtalo de nuevo.' })); return; }
     if (!o) o = { t: 'No he reconocido esa petición.', c: [{ l: '¿Qué puedo pedir?', f: () => panel(true) }] };
+    muestra(o);
+  }
+  function muestra(o) {
     burbuja('el', T(o.t), o);
     modo = o.modo || null;
     const i = sala.querySelector('#ns-q');
     if (i) i.placeholder = T(modo === 'web' ? 'Escribe la dirección, por ejemplo eltiempo.com' : modo === 'pais' ? 'Escribe el país' : modo === 'buscar' ? 'Escribe lo que quieres buscar' : 'Escribe qué quieres hacer…');
     if (o.a) { if (o.va) setTimeout(o.a, 1100); else o.a(); }
   }
-  function elige(id, etiqueta) { burbuja('tu', etiqueta || T(ETQ[id] || id)); responde({ id }); }
+  function elige(id, etiqueta, extra) { burbuja('tu', etiqueta || T(ETQ[id] || id)); responde(Object.assign({ id }, extra || {})); }
   function escribe(frase) {
     const f = String(frase || '').trim(); if (!f) return;
     if (!sala || sala.hidden) abreSala();
