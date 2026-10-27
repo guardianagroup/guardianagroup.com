@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261026e">
+<link rel="stylesheet" href="app.css?v=20261026g">
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -20,7 +20,7 @@
      cifrados que no puede leer. -->
 <header class="barra" id="barra">
   <a class="marca" href="/orbita/" id="volver" aria-label="Volver a Órbita"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>GUARDIANA</span><b>Comunicaciones</b></a>
-  <span class="rele" id="rele"><i></i><span id="reletxt">Conectando…</span></span>
+  <span class="rele" id="rele"><i></i><span id="reletxt">Desconectado</span></span>
   <div class="idiomas" role="group" aria-label="Idioma" translate="no"></div>
 </header>
 
@@ -38,9 +38,10 @@
     <div class="paso" id="paso-codigo" hidden>
       <h2>Tu código de invitación</h2>
       <div class="codigo" id="codigo" translate="no" aria-live="polite">··· ··· ···</div>
-      <p class="t">Díselo a la otra persona (por teléfono, WhatsApp o como quieras). Ella pulsa «Tengo un código», lo escribe y empezáis. Vale 10 minutos y una sola vez; es aleatorio y distinto cada vez.</p>
-      <p class="t" id="invita-estado">Esperando a que la otra persona escriba el código…</p>
-      <div class="fila centro"><button type="button" class="boton" id="invita-nuevo" hidden>Nuevo código</button><button type="button" class="boton" id="invita-cerrar">Cancelar</button></div>
+      <p class="t">Comunica este código a la otra persona por llamada o por cualquier aplicación de mensajería. Ella pulsa «Tengo un código», lo escribe y empezáis.</p>
+      <p class="t validez" id="validez">Tiene una validez de 10 minutos y un solo uso: pasado ese tiempo queda inhabilitado y deja de funcionar.</p>
+      <p class="t" id="invita-estado" hidden></p>
+      <div class="fila centro"><button type="button" class="boton" id="invita-nuevo" hidden>Nuevo código</button></div>
     </div>
 
     <div class="paso" id="paso-entrar" hidden>
@@ -51,12 +52,6 @@
       <div class="fila centro"><button type="button" class="boton" id="unir-cerrar">Cancelar</button><button type="button" class="boton principal" id="unir-ok">Entrar</button></div>
     </div>
 
-    <details class="limites"><summary>Qué protege y qué no</summary><ul>
-      <li>No es anonimato: el servidor de GUARDIANA ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.</li>
-      <li>Las dos personas tienen que estar con la página abierta: no hay buzón en ningún servidor. Lo pendiente espera en tu equipo y sale cuando la otra persona entra.</li>
-      <li>Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Terminar» no alcanza lo ya guardado en un disco.</li>
-      <li>Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.</li>
-    </ul></details>
   </section>
 
   <section class="conv" id="conv" hidden>
@@ -66,6 +61,8 @@
       <button type="button" class="gc-cab-boton gc-escudo-boton" id="escudo" aria-label="Seguridad de esta conversación" title="Seguridad"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></button>
       <button type="button" class="boton terminar" id="terminar">Terminar</button>
     </header>
+    <div class="cuerpo">
+    <div class="charla">
     <div class="radio" id="radio" hidden><i></i><span id="radiotxt"></span></div>
     <ul class="gc-mensajes" id="mensajes"></ul>
     <div class="gc-enviando" id="enviando" hidden></div>
@@ -75,6 +72,14 @@
       <div class="grabando" id="grabando" hidden><i></i><span id="grabando-t">0:00</span><span class="t">Grabando nota de voz…</span><button type="button" class="boton" id="grabar-cancelar">Cancelar</button></div>
       <button type="button" class="gc-redondo" id="grabar" aria-label="Grabar nota de voz" title="Nota de voz"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
       <button type="button" class="gc-redondo gc-principal" id="enviar" aria-label="Enviar"><svg viewBox="0 0 24 24"><path d="M4 12l16-7-7 16-2-7z"/></svg></button>
+    </div>
+    </div>
+    <aside class="vigila" id="vigila" aria-label="Vigilancia de seguridad">
+      <div class="vh"><span class="vivo"><i></i>VIGILANCIA</span><small id="vigila-ultima"></small></div>
+      <ul class="gc-escudo" id="vigila-filas"></ul>
+      <small class="sub">EN VIVO</small>
+      <ul class="vivos" id="vigila-vivo"></ul>
+    </aside>
     </div>
   </section>
 </main>
@@ -97,9 +102,9 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261026z"></script>
+<script src="/orbita/static/idioma.js?v=20261027b"></script>
 <script src="cripto.js?v=20261026c"></script>
 <script src="rele.js?v=20261026c"></script>
-<script src="app.js?v=20261026c"></script>
+<script src="app.js?v=20261026e"></script>
 </body>
 </html>
