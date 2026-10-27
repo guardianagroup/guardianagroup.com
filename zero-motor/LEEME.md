@@ -36,3 +36,16 @@ salte el filtro. Sin ULTRA, el filtro resuelve el nombre y no conecta nunca con 
 `.onion` que no estén en `ONION_PERMITIDAS` (hoy, solo Brave). Lo rechazado sale en el panel como suceso `local` u `onion`.
 - `ZERO_FILTRO_RED=0` quita el filtro de las celdas normales (ULTRA lo lleva siempre).
 - Sin `ZERO_PUBLICO` (pruebas en el propio equipo) o con `ZERO_PERMITE_LOCAL=1`, deja llegar a 127.0.0.1.
+
+## Cortes por defecto, grupos y Chrome (27 Oct 2026)
+
+- **Qué se corta:** con Google y Brave no se corta nada por defecto (`dejaPorDefecto()`): la persona ve todo —publicidad,
+  rastreo, avisos de cookies, subastas— y corta por grupos o por empresa. Con Tor se corta de entrada y, además de las
+  listas, se cortan las empresas de publicidad, rastreo, medición y avisos de cookies de la base de GUARDIANA (`TOR_CORTA`)
+  y los avisos (ping) a otras webs. Las webs peligrosas se detienen siempre.
+- **Permisos:** `permitidas` y `vetadas` guardan dominios, `e:<empresa>` y `p:<grupo>`. Manda lo que la persona decide
+  para una empresa o dominio; luego, su grupo; luego, lo de por defecto. Mensaje `permitir` con `limpia` para los grupos.
+- **Sin cortes por defecto** no hay escalada automática por señuelos ni por puntos (como en Observar); las webs peligrosas
+  y los certificados falsos sí sellan.
+- **Navegador:** `lanzaNavegador()` usa Google Chrome (`channel: 'chrome'`, con códecs H.264/AAC para los vídeos) si está
+  instalado; si no, Chromium. `ZERO_CANAL=chromium` obliga a Chromium. `instalar.sh` instala Chrome con Playwright.
