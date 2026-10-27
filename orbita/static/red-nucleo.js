@@ -41,10 +41,13 @@
       const m00 = 1 - 2 * (qc * qc + qd * qd), m01 = 2 * (qb * qc - qa * qd), m02 = 2 * (qb * qd + qa * qc), m10 = 2 * (qb * qc + qa * qd), m11 = 1 - 2 * (qb * qb + qd * qd), m12 = 2 * (qc * qd - qa * qb), m20 = 2 * (qb * qd - qa * qc), m21 = 2 * (qc * qd + qa * qb), m22 = 1 - 2 * (qb * qb + qc * qc);
       if (nace < 1) { const g = cx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, 40 + 60 * nace); g.addColorStop(0, `rgba(244,246,248,${.9 * (1 - nace * .7)})`); g.addColorStop(.3, `rgba(156,195,228,${.55 * (1 - nace * .5)})`); g.addColorStop(1, 'rgba(156,195,228,0)'); cx.fillStyle = g; cx.fillRect(0, 0, W, H); }
       const Q = P.map((p) => { const x = m00 * p[0] + m01 * p[1] + m02 * p[2], y = m10 * p[0] + m11 * p[1] + m12 * p[2], z = m20 * p[0] + m21 * p[1] + m22 * p[2], pul = 1 + .04 * Math.sin(t * 1.7 + p[3]) + habla * .06 * Math.sin(t * 9 + p[3]); return [W / 2 + x * R * pul, H / 2 + y * R * pul, z]; });
-      cx.lineWidth = 1;
-      const lin = Math.max(0, Math.min(1, (nace - .25) / .6)), chico = Math.min(W, H) < 140;
+      // dueño, 10:49: «la red de dentro de NÚCLEO debería ser la misma que la de la portada»: puntos y líneas a escala del
+      // tamaño (la de la portada mide 360 px), para que la pequeña sea la misma red en miniatura y no una más apretada
+      const esc = Math.max(.5, Math.min(1.15, Math.min(W, H) / 360));
+      cx.lineWidth = Math.max(.6, esc);
+      const lin = Math.max(0, Math.min(1, (nace - .25) / .6));
       if (lin > 0) for (let i = 0; i < N; i++) for (const j of V[i]) { if (j < i) continue; const a = Q[i], b = Q[j], zz = (a[2] + b[2]) / 2; cx.strokeStyle = `rgba(156,195,228,${(.08 + .26 * (zz + 1) / 2 + habla * .15) * lin})`; cx.beginPath(); cx.moveTo(a[0], a[1]); cx.lineTo(b[0], b[1]); cx.stroke(); }
-      for (let i = 0; i < N; i++) { const a = Q[i], f = (a[2] + 1) / 2; cx.fillStyle = `rgba(${210 + 34 * f},${228 + 18 * f},248,${(.25 + .7 * f) * Math.min(1, nace * 1.4)})`; cx.beginPath(); cx.arc(a[0], a[1], (chico ? .5 : .7) + (chico ? 1.1 : 1.5) * f, 0, Math.PI * 2); cx.fill(); }
+      for (let i = 0; i < N; i++) { const a = Q[i], f = (a[2] + 1) / 2; cx.fillStyle = `rgba(${210 + 34 * f},${228 + 18 * f},248,${(.25 + .7 * f) * Math.min(1, nace * 1.4)})`; cx.beginPath(); cx.arc(a[0], a[1], (.7 + 1.5 * f) * esc, 0, Math.PI * 2); cx.fill(); }
       const g2 = cx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, R * 1.25); g2.addColorStop(0, `rgba(156,195,228,${.10 + habla * .12})`); g2.addColorStop(1, 'rgba(156,195,228,0)'); cx.fillStyle = g2; cx.fillRect(0, 0, W, H);
       requestAnimationFrame(cuadro);
     }
