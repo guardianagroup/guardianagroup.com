@@ -646,6 +646,16 @@
 .llev{margin-top:9px}.llev small{display:block;font:10px Consolas,monospace;letter-spacing:.1em;color:#8fa9bd;text-transform:uppercase;margin-bottom:5px}
 .llev div{display:flex;flex-wrap:wrap;gap:4px}.llev .ch{font-size:10.5px;padding:3px 8px;border-radius:999px;border:1px solid rgba(156,195,228,.25);color:#cfe1ee;background:rgba(156,195,228,.05)}
 .llev .ch.per{border-color:rgba(240,199,127,.55);color:#F0C77F;background:rgba(240,199,127,.08)}
+
+.fila.nd .b i{background:repeating-linear-gradient(90deg,rgba(156,195,228,.35) 0 6px,transparent 6px 10px)}.fila.nd.g .b i{background:repeating-linear-gradient(90deg,#F0C77F 0 6px,transparent 6px 10px)}
+
+.fila{grid-template-columns:76px 1fr 64px 14px!important}.fila .fxt{grid-column:1/-1;margin:-2px 0 3px;font-size:10px;color:#8da4b6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rdet .mini{margin:6px 0 0;font-size:10.5px;color:#8da4b6;line-height:1.4}
+.saben{margin:0 0 10px;padding:10px 12px;border-radius:12px;border:1px solid rgba(240,199,127,.35);background:rgba(240,199,127,.05)}
+.saben b{display:block;font:600 12px 'Segoe UI',Inter,Arial,sans-serif;color:#F0C77F;margin-bottom:6px}
+.saben dl,.mas dl{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:5px 10px;margin:0;font-size:11px;line-height:1.35}.saben dt,.mas dt{color:#8da4b6}.saben dd,.mas dd{margin:0;color:#F4F6F8;text-align:right;word-break:break-word}
+.saben .rbur{margin:8px 0 0;font-size:11px;color:#5CC98A;font-weight:600}
+.mas{margin-top:8px}.mas summary{cursor:pointer;font-size:11px;color:#9CC3E4;list-style:none}.mas summary::-webkit-details-marker{display:none}.mas summary:before{content:'+ '}.mas[open] summary:before{content:'− '}.mas dl{margin-top:6px}
 </style>
 </head>
 <body><div id="viewport"><main id="stage" aria-label="GUARDIANA ZERO"><script>/* 26 Oct 2026 (owner): «al entrar sale a la izquierda y luego se pone en el centro». Se coloca y escala antes del primer pintado, con el mismo cálculo que layout(). */(function(){var st=document.getElementById('stage'),W=1440,H=900,s=Math.min(innerWidth/W,innerHeight/H);st.style.transform='scale('+s+')';st.style.left=(innerWidth-W*s)/2+'px';st.style.top=(innerHeight-H*s)/2+'px';st.style.setProperty('--ox',Math.max(0,(innerWidth/s-W)/2).toFixed(2)+'px');st.style.setProperty('--oy',Math.max(0,(innerHeight/s-H)/2).toFixed(2)+'px')})()</script>
@@ -667,7 +677,7 @@
 <div id="pill" role="group" aria-label="Web en grande"><button type="button" class="pc" id="vercortes" title="Ver los cortes en el panel"><span class="pn"><span id="pillnum">0</span>&nbsp;cortes en esta web</span><span class="pv">Ver panel<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg></span></button><button type="button" class="pb" id="reducir" title="Reducir y ver el panel (Esc)"><svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 6.5h-4v-4M2.5 9.5h4v4M9.5 6.5 14 2M6.5 9.5 2 14"/></svg>Reducir</button></div><div class="topReveal" id="topbar"><button type="button" id="restore">↙ RESTAURAR</button><span>PÁGINA DE DEMOSTRACIÓN · ZERO</span><button type="button" id="topcut">Cortes</button></div>
 <div class="marca" aria-hidden="true">ZERO</div><button type="button" id="volverZ" class="volverz" title="Volver" aria-label="Volver"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg><span>Órbita</span></button><button type="button" id="vermeZ" class="volverz vermez" title="Verme en Órbita" aria-label="Verme en Órbita"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12.5" r="1.2"/><path d="M5.2 9.7a4 4 0 0 1 5.6 0M2.6 7a7.6 7.6 0 0 1 10.8 0"/></svg><span>Verme en Órbita</span></button><div class="lb t"></div><div class="lb b"></div><div class="skip">CLIC O CUALQUIER TECLA PARA SALTAR</div>
 </main></div><article id="informe" aria-hidden="true"></article>
-<script src="../static/idioma.js?v=20261027r"></script>
+<script src="../static/idioma.js?v=20261027s"></script>
 <nav class="director" id="director" aria-label="Entradas de cine"><span>ENTRADA</span></nav>
 <script>
 (()=>{'use strict';
@@ -1008,9 +1018,10 @@ function zeroSuceso(s){if(s.clase==='muro'){try{avisoMuro(s.detalle&&s.detalle.u
   el.addEventListener('click',()=>el.classList.toggle('abierto'));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}});
   if(pausaVivo)L.append(el);else L.prepend(el);$('#qvivo').textContent=VIVOS.length;
   if(s.clase==='corte')record({empresa:s.empresa||s.dominio,esEmpresa:!!s.empresa,estado:s.estado||'cortado',pais:s.paisNombre||'País no identificado',motivo:s.proposito||'Rastreador',certeza:s.certeza,real:true,quien:QUIEN[s.proposito]||'Conexión cortada por una regla de las listas públicas.',datos:['Certeza: '+(s.certeza||'comprobado')].concat(d.regla?['Regla '+d.regla]:[],d.lista?['Lista '+d.lista]:[],[s.empresa?'Empresa: '+(d.fuenteEmpresa||'base de GUARDIANA'):'Empresa no identificada']),dirs:[s.dominio]});
-  else if(s.clase==='subasta'&&s.detalle&&s.detalle.fase!=='google'&&s.detalle.pujas)zeroSubasta(s);
+  else if(s.clase==='subasta'&&s.detalle&&s.detalle.fase!=='google'&&s.detalle.fase!=='amazon'&&s.detalle.pujas)zeroSubasta(s);
   else if(s.clase==='subasta'&&s.texto&&/Ganó/.test(s.texto)){const sb=SUBS.find(x=>x.id==='sub:'+(s.detalle||{}).id+':'+(s.detalle||{}).unidad);if(sb&&s.detalle){sb.anun=s.detalle.anunciante||sb.anun;if(s.detalle.objetivo)sb.objetivo=s.detalle.objetivo;if(vista===sb.id)pintaFicha(sb.id,true)}}
-  else if(s.clase==='subasta'&&s.detalle&&s.detalle.fase==='google'){const g=s.detalle,sb=SUBS.find(x=>x.unidad&&g.unidad&&(x.unidad===g.unidad||String(g.unidad).endsWith('/'+x.unidad)))||SUBS.find(x=>!x.google);if(sb){sb.google=g;if(g.objetivo&&!sb.objetivo)sb.objetivo=g.objetivo;if(vista===sb.id)pintaFicha(sb.id,true)}}
+  else if(s.clase==='subasta'&&s.detalle&&s.detalle.fase==='google'){const g=s.detalle,sb=SUBS.find(x=>x.unidad&&g.unidad&&(x.unidad===g.unidad||String(g.unidad).endsWith('/'+x.unidad)))||SUBS.find(x=>!x.google&&!x.sencilla);if(sb){sb.google=g;if(g.objetivo&&!sb.objetivo)sb.objetivo=g.objetivo;if(vista===sb.id)pintaFicha(sb.id,true)}else subSencilla({unidad:g.unidad,tam:g.tam,google:g,pujas:[],gana:g.vacio?null:{n:'Google',p:'Estados Unidos',e:'ganó',cpm:null},nota:g.vacio?'Google no puso ningún anuncio en este hueco.':'Google decidió qué anuncio enseñarte aquí (precio no declarado).'})}
+  else if(s.clase==='subasta'&&s.detalle&&s.detalle.fase==='amazon'){for(const pz of (s.detalle.pujas||[]))subSencilla({unidad:pz.unidad,tam:pz.tam,pujas:[{n:'Amazon',p:'Estados Unidos',e:'pujó',cpm:null,cifrado:true}],gana:null,nota:'Amazon pujó por este hueco con los datos de tu visita; su precio va cifrado.'})}
   if(VIVO_CORTE.has(s.clase)&&s.clase!=='corte'){const a=$('#avisocorte');$('#acEmp').textContent=TITULO_VIVO[s.clase];$('#acDet').textContent=[s.dominio,s.certeza].filter(Boolean).join(' · ');a.classList.add('on');clearTimeout(avisoT);avisoT=setTimeout(()=>a.classList.remove('on'),3400);const f=$('#filo');f.classList.remove('late');void f.offsetWidth;f.classList.add('late');redPulse=1.9}}
 const esc=x=>String(x==null?'':x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function zeroSubasta(s){const d=s.detalle,porUnidad=new Map();(d.pujas||[]).forEach(p=>{const u=p.unidad||'hueco';if(!porUnidad.has(u))porUnidad.set(u,[]);porUnidad.get(u).push(p)});
@@ -1453,19 +1464,47 @@ const HUECO_NOMBRE={arriba:'Cabecera',abajo:'Abajo',video:'Vídeo',lado:'Lateral
 function precioTxt(b,corto){if(!(b&&b.cpm>0))return '';const loc=(window.GuardianaIdioma&&GuardianaIdioma.locale)||'es',m=(b.det&&b.det.moneda)||'';return (b.cpm/10).toLocaleString(loc,{minimumFractionDigits:2,maximumFractionDigits:3})+' cts'+(!corto&&m&&m!=='EUR'?' ('+m+')':'')}
 // 27 Oct 2026 (dueño): «detectar el máximo de datos que nos intentan coger»: lo que llevaba cada petición de puja, en fichas
 function datosLlevaba(L){if(!L)return [];const d=[],P=(t,per)=>d.push({t,per});
-  if(L.ids&&L.ids.length)P('Identificadores para reconocerte ('+L.ids.length+')',1);if(L.segmentos&&L.segmentos.length||L.palabrasUsuario)P('Tus intereses (perfil)',1);
+  if(L.ids&&L.ids.length)P('Identificadores para reconocerte ('+new Set(L.ids.map(nombreId)).size+')',1);if(L.segmentos&&L.segmentos.length||L.palabrasUsuario)P('Tus intereses (perfil)',1);
   if(L.coordenadas)P('Coordenadas',1);else if(L.geo)P('Tu zona aproximada',1);if(L.nacimiento)P('Año de nacimiento',1);if(L.genero)P('Género',1);
   if(L.pagina)P('La página que lees',0);if(L.referente)P('De dónde vienes',0);if(L.navegador)P('Tu navegador y dispositivo',0);if(L.idioma)P('Tu idioma',0);
   if(L.palabrasSitio||L.categoriasSitio&&L.categoriasSitio.length)P('Temas de la página',0);if(L.consent||L.gdpr!=null||L.gpp||L.usp)P('Tu respuesta al aviso de cookies',0);return d}
+// 27 Oct 2026 (dueño: «qué información saben de nosotros», «todos los datos posibles»)
+const ID_NOMBRE={id5id:'ID5','id5-sync.com':'ID5',pubcid:'SharedID','pubcid.org':'SharedID',sharedid:'SharedID',sharedId:'SharedID',uid2:'UID 2.0','uidapi.com':'UID 2.0',idl_env:'LiveRamp','liveramp.com':'LiveRamp',criteoId:'Criteo ID','criteo.com':'Criteo ID',tdid:'The Trade Desk','adserver.org':'The Trade Desk',lotamePanoramaId:'Lotame','crwdcntrl.net':'Lotame',pairId:'Google PAIR',quantcastId:'Quantcast','quantcast.com':'Quantcast',netId:'netID','netid.de':'netID',utiq:'Utiq','utiq.com':'Utiq',lipb:'LiveIntent','liveintent.com':'LiveIntent',teadsId:'Teads','teads.com':'Teads','33acrossId':'33Across','33across.com':'33Across',amxId:'AMX','amxdt.net':'AMX',hadronId:'Hadron','audigent.com':'Hadron',connectId:'Yahoo ConnectID','yahoo.com':'Yahoo ConnectID',novatiq:'Novatiq',euid:'EUID','euid.eu':'EUID'};
+const nombreId=x=>{const k=String((x&&x.id)||x||'');return ID_NOMBRE[k]||k};
+function resumenSaben(sw){const ids=new Set(),seg=new Set();let nSeg=0,zona=false,pag=false,disp=false,perm=null,fines=null;
+  for(const sb of sw){const L=sb.llevaba||{};(L.ids||[]).forEach(x=>ids.add(nombreId(x)));(L.segmentos||[]).forEach(x=>seg.add(x));nSeg=Math.max(nSeg,L.nSegmentos||0);zona=zona||!!(L.geo||L.coordenadas);pag=pag||!!L.pagina;disp=disp||!!L.navegador;
+    if(sb.tcf&&sb.tcf.proveedores!=null){perm=Math.max(perm||0,sb.tcf.proveedores);fines=sb.tcf.fines}
+    (((sb.cfg||{}).modulosId)||[]).forEach(x=>ids.add(nombreId(x)))}
+  const filas=[];if(ids.size)filas.push(['Identificadores para reconocer la visita',[...ids].slice(0,10).join(', ')]);if(nSeg||seg.size)filas.push(['Intereses (segmentos)',nSeg?String(nSeg):[...seg].slice(0,6).join(', ')]);
+  if(zona)filas.push(['Zona aproximada','sí']);if(pag)filas.push(['La página que lees','sí']);if(disp)filas.push(['Navegador y dispositivo','sí']);
+  if(perm!=null)filas.push(['Empresas con permiso por tu «Aceptar»',String(perm)+(fines&&fines.length?' · fines '+fines.join(', '):'')]);
+  if(!filas.length)return '';return '<div class="saben"><b>Lo que esta web cuenta de tu visita</b><dl>'+filas.map(([k,v])=>'<dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd>').join('')+'</dl><p class="rbur">En ZERO todo eso es de la burbuja: identificadores nuevos que se borran al salir.</p></div>'}
+function masDatos(sb){const c=sb.cfg||{},t=sb.tcf,g=sb.google,f=[],fl=x=>Number(x).toLocaleString((window.GuardianaIdioma&&GuardianaIdioma.locale)||'es');
+  if(c.version)f.push(['Programa de la subasta','Prebid '+c.version]);if(c.limite||sb.limite)f.push(['Tiempo máximo',fl(c.limite||sb.limite)+' ms']);if(c.moneda)f.push(['Moneda',c.moneda]);
+  if(c.granularidad)f.push(['Tramos de precio',c.granularidad]);if(c.todasLasPujas)f.push(['Envía todas las pujas al servidor de anuncios','sí']);
+  if(c.servidor&&c.servidor.length)f.push(['Pujan desde su servidor',c.servidor.join(', ')]);if(c.sync&&(c.sync.pixel||c.sync.iframe))f.push(['Sincronizan cookies',[c.sync.pixel?'píxel':'',c.sync.iframe?'iframe':''].filter(Boolean).join(' · ')]);
+  if(c.cadena&&c.cadena.length)f.push(['Intermediarios declarados',String(c.cadena.length)]);if(c.cmp)f.push(['Gestor del aviso de cookies',String(c.cmp)]);
+  if(t){f.push(['El RGPD se aplica',t.aplica?'sí':'no']);if(t.proveedores!=null)f.push(['Empresas con permiso',String(t.proveedores)]);if(t.fines&&t.fines.length)f.push(['Fines aceptados',t.fines.join(', ')])}
+  if(g){if(g.anunciante)f.push(['Anunciante (Google)','nº '+g.anunciante]);if(g.campana)f.push(['Campaña','nº '+g.campana]);if(g.linea)f.push(['Línea de pedido','nº '+g.linea]);if(g.creatividad)f.push(['Creatividad','nº '+g.creatividad]);if(g.relleno)f.push(['Relleno','sí'])}
+  if(!f.length)return '';return '<details class="mas"><summary>Más datos de esta subasta</summary><dl>'+f.map(([k,v])=>'<dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd>').join('')+'</dl></details>'}
 function chipsLlevaba(L){const d=datosLlevaba(L);if(!d.length)return '';return '<div class="llev"><small>Datos que se llevaron</small><div>'+d.map(x=>'<span class="ch'+(x.per?' per':'')+'">'+esc(x.t)+'</span>').join('')+'</div></div>'}
+function subSencilla(o){const t=String(o.tam||'').replace(/\s+/g,''),pos=/728x90|970x|980x|1x1/.test(t)?'arriba':/320x50|320x100/.test(t)?'abajo':/video|640x360/.test(t)?'video':/300x250|300x600|160x600/.test(t)?'lado':'medio';
+  const sb={id:'sub:s:'+Date.now()+':'+Math.random().toString(36).slice(2,7),sencilla:true,unidad:o.unidad||'',pos,t:Date.now(),pujas:o.pujas||[],gana:o.gana||null,nota:o.nota||'',google:o.google||null,llevaba:null,el:null};
+  SUBS.unshift(sb);if(SUBS.length>40)SUBS.length=40;$('#qsub').textContent=SUBS.length;radioPronto()}
 function pintaSubastas(){const R=$('#rsubs');if(!R)return;const sw=subsWeb().slice(0,8);
   let h='<div class="rexp"><p>Cuando abres una web, antes de ver el anuncio, la web envía datos de tu visita (qué lees, tu tipo de dispositivo, tu zona aproximada y el identificador de sus cookies) a varias empresas de publicidad.</p><p>Cada empresa mira lo que ya sabe de ti por otras webs y puja más si cree que su anuncio te interesa. La que gana pone su anuncio en ese hueco, en milésimas de segundo.</p><p class="rbur">Dentro de ZERO, la burbuja está limpia: sin tu historial ni tus cookies, no pueden unir la visita con lo que saben de ti.</p></div>'+PASOS;
   if(!sw.length)h+='<p class="empty">'+esc(grupoDeja('Publicidad')?'Esta web aún no ha subastado ningún espacio de anuncios.':'Tienes la publicidad cortada: esta web no puede subastar los datos de tu visita.')+'</p>';
-  for(const sb of sw){const val=sb.pujas.filter(b=>(b.e==='ganó'||b.e==='pujó')&&b.cpm>0).slice(0,6),max=Math.max(0,...val.map(b=>b.cpm));
-    h+='<div class="sb"><div class="cab"><b>'+esc(HUECO_NOMBRE[sb.pos]||'Anuncio')+'</b><span>'+esc(sb.pujas.length+(sb.pujas.length===1?' empresa':' empresas'))+'</span></div>';
-    if(val.length){h+='<div class="carr">'+val.map(b=>'<div class="fila'+(b.e==='ganó'?' g':'')+'"><span class="q">'+esc(b.n)+'</span><span class="b"><i style="width:'+Math.max(4,Math.round(100*b.cpm/max))+'%"></i></span><span class="v">'+esc(precioTxt(b,1))+'</span><span class="mz">'+(b.e==='ganó'?'<svg viewBox="0 0 24 24"><path d="M14 4l6 6-3 3-6-6zM11 7l6 6M4 20l7-7"/></svg>':'')+'</span></div>').join('')+'</div>'}
-    h+=chipsLlevaba(sb.llevaba);
-    const g=sb.gana;h+='<p class="frase">'+esc(g&&g.cpm>0?'Con los datos de tu visita, '+g.n+' ofreció '+precioTxt(g)+' por enseñarte su anuncio.':g?g.n+' ganó la puja (precio no declarado).':'Sin ganador declarado.')+'</p></div>'}
+  if(sw.length)h+=resumenSaben(sw);
+  for(const sb of sw){const val=sb.pujas.filter(b=>(b.e==='ganó'||b.e==='pujó')&&(b.cpm>0||b.cifrado||sb.sencilla)).slice(0,8),max=Math.max(0,...val.map(b=>b.cpm||0));if(sb.sencilla&&sb.gana&&!val.length)val.push(sb.gana);
+    const tamH=((sb.pujas.find(b=>b.det&&b.det.tam)||{}).det||{}).tam||(sb.google&&Array.isArray(sb.google.tam)?sb.google.tam.join('x'):'')||'',fl=loc=>Number(loc).toLocaleString((window.GuardianaIdioma&&GuardianaIdioma.locale)||'es');
+    const cab=[tamH?String(tamH).replace('x',' × '):'',sb.pujas.length?sb.pujas.length+(sb.pujas.length===1?' empresa':' empresas'):'',sb.dur?fl(sb.dur)+' ms':''].filter(Boolean).join(' · ');
+    h+='<div class="sb"><div class="cab"><b>'+esc(HUECO_NOMBRE[sb.pos]||'Anuncio')+'</b><span>'+esc(cab)+'</span></div>';
+    if(val.length){h+='<div class="carr">'+val.map(b=>{const d=b.det||{},extra=[b.ms?fl(b.ms)+' ms':'',d.anunciante?'anunciante: '+d.anunciante:'',d.marca?'marca: '+d.marca:'',d.acuerdo?'acuerdo privado':'',d.via==='servidor'?'puja por servidor':''].filter(Boolean).join(' · ');
+      return '<div class="fila'+(b.e==='ganó'?' g':'')+(b.cpm>0?'':' nd')+'"><span class="q">'+esc(b.n)+'</span><span class="b"><i style="width:'+(b.cpm>0&&max?Math.max(4,Math.round(100*b.cpm/max)):100)+'%"></i></span><span class="v">'+esc(b.cpm>0?precioTxt(b,1):b.cifrado?'cifrado':'—')+'</span><span class="mz">'+(b.e==='ganó'?'<svg viewBox="0 0 24 24"><path d="M14 4l6 6-3 3-6-6zM11 7l6 6M4 20l7-7"/></svg>':'')+'</span>'+(extra?'<span class="fxt">'+esc(extra)+'</span>':'')+'</div>'}).join('')+'</div>'}
+    const g=sb.gana;h+='<p class="frase">'+esc(sb.nota?sb.nota:g&&g.cpm>0?'Con los datos de tu visita, '+g.n+' ofreció '+precioTxt(g)+' por enseñarte su anuncio.':g?g.n+' ganó la puja (precio no declarado).':'Sin ganador declarado.')+'</p>';
+    const sinP=(sb.pujas||[]).filter(b=>b.e==='sin puja').map(b=>b.n),tarde=(sb.pujas||[]).filter(b=>b.e==='tarde').map(b=>b.n);
+    if(sinP.length||tarde.length)h+='<p class="mini">'+esc([sinP.length?'No pujaron: '+sinP.slice(0,8).join(', '):'',tarde.length?'Llegaron tarde: '+tarde.slice(0,8).join(', '):''].filter(Boolean).join(' · '))+'</p>';
+    h+=chipsLlevaba(sb.llevaba);h+=masDatos(sb);h+='</div>'}
   h+='<div class="cortar"><span class="rsw2" data-g="Publicidad"></span><span>Córtalo y los datos de tu visita no saldrán a subasta.</span></div>';
   R.innerHTML=h;const x=R.querySelector('.rsw2');if(x&&window.ZeroMotor&&ZeroMotor.activo){const b=botonGrupo('Publicidad');x.append(b);b.__pinta()}}
 // detalle: lo que la web intentó leer de tu equipo
