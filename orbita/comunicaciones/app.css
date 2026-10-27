@@ -266,3 +266,4 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .como:hover{background:rgba(156,195,228,.12);border-color:rgba(156,195,228,.55);color:#F4F6F8}
 .como:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
 .pro[hidden],#paso-inicio[hidden]~.como{display:none!important}
+.inicio .red-nucleo{display:block;width:120px;height:120px;margin:0 auto 2px;flex:none}

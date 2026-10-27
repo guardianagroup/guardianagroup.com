@@ -68,7 +68,7 @@
   function convNueva(sala, semilla, rol) {
     return { id: sala, semilla, rol, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0 };
   }
-  const guardable = (c) => ({ id: c.id, tumba: c.tumba, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos });
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, pqVisto: !!c.pqVisto });
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
     const d = await C.deSemilla(c.semilla);
@@ -157,22 +157,32 @@
   // presentarse va por la misma cola que las tramas de la conversación: nunca dos efímeras a medio camino
   const enCola = (c, f) => { c.proc = (c.proc || Promise.resolve()).then(f).catch((e) => console.warn(e)); return c.proc; };
   const reintenta = (c, ms) => { clearTimeout(c.reintento); c.reintento = setTimeout(() => { if (!c.sesion && c.suId && c.miembros.has(c.suId) && R.abierto) enCola(c, () => presenta(c, null, true)); }, ms); };
+  // Devuelve, cuando responde con ML-KEM, el secreto híbrido { ss, ek, ct } para derivar la sesión v3; si no, null.
   async function presenta(c, resp, forzar) {
-    if (c.estado === 'destruida' || !R.abierto) return;
+    if (c.estado === 'destruida' || !R.abierto) return null;
     // una presentación espontánea en reacción a otra espontánea no se repite en ráfaga: si hace falta, el reintento la manda
-    if (!resp && !forzar && c.presentadoEn && Date.now() - c.presentadoEn < 1200) { reintenta(c, 1400); return; }
+    if (!resp && !forzar && c.presentadoEn && Date.now() - c.presentadoEn < 1200) { reintenta(c, 1400); return null; }
     c.ef = await C.efimera(); c.epoca = C.azar(16);
+    // híbrido poscuántico (v3): quien inicia lleva una clave ML-KEM-768 nueva en cada presentación; quien responde
+    // encapsula a la clave de la presentación que contesta. Sin la librería, o con una versión anterior, queda en v2.
+    if (!resp && soyInicio(c) && C.hayPQ()) { try { c.ef.kem = C.kemPar(); } catch (e) { console.warn('ML-KEM', e); c.ef.kem = null; } }
+    let pq = null;
+    if (resp && resp.ek && C.hayPQ()) { try { const k = C.kemEncapsula(resp.ek); pq = { ss: k.ss, ek: resp.ek, ct: k.ct }; } catch (e) { console.warn('ML-KEM', e); pq = null; } }
     // las últimas efímeras propias, por época: una respuesta a cualquiera de ellas vale para derivar sesión
-    c.efs = c.efs || new Map(); c.efs.set(C.hex(c.epoca), c.ef); for (const k of [...c.efs.keys()].slice(0, -4)) c.efs.delete(k);
+    c.efs = c.efs || new Map(); c.efs.set(C.hex(c.epoca), c.ef); for (const k of [...c.efs.keys()].slice(0, -4)) { const v = c.efs.get(k); if (v && v.kem) { v.kem.dk.fill(0); v.kem = null; } c.efs.delete(k); }
     // ronda 48: la firma ata la transcripción. Quien responde firma también la huella y la efímera de quien inicia.
-    const datos = resp ? C.cat(C.te.encode('GUARDIANA v2 RESPONDE\n' + c.id + '\n'), YO.firmaPub, YO.acuerdoPub, c.ef.pub, c.epoca, resp.epoca, c.huella, resp.ef) : C.cat(C.te.encode('GUARDIANA v2 INICIA\n' + c.id + '\n'), YO.firmaPub, YO.acuerdoPub, c.ef.pub, c.epoca);
+    const datos = resp ? await C.datosResponde(c.id, YO.firmaPub, YO.acuerdoPub, c.ef.pub, c.epoca, resp.epoca, c.huella, resp.ef) : C.datosInicia(c.id, YO.firmaPub, YO.acuerdoPub, c.ef.pub, c.epoca);
     const sig = await C.firma(YO, datos);
     const j = { v: 2, firmaPub: C.b64u(YO.firmaPub), acuerdoPub: C.b64u(YO.acuerdoPub), ef: C.b64u(c.ef.pub), epoca: C.b64u(c.epoca), resp: resp ? C.b64u(resp.epoca) : '', nombre: YO.nombre, sig: C.b64u(sig) };
+    // la segunda firma (v3) cubre además los campos ML-KEM; las versiones anteriores la ignoran y usan «sig»
+    if (c.ef.kem) { j.kem = C.b64u(c.ef.kem.ek); j.sig3 = C.b64u(await C.firma(YO, C.datosInicia(c.id, YO.firmaPub, YO.acuerdoPub, c.ef.pub, c.epoca, c.ef.kem.ek))); }
+    if (pq) { j.kemct = C.b64u(pq.ct); j.sig3 = C.b64u(await C.firma(YO, await C.datosResponde(c.id, YO.firmaPub, YO.acuerdoPub, c.ef.pub, c.epoca, resp.epoca, c.huella, resp.ef, pq))); }
     const iv = C.azar(12);
     const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv, additionalData: new Uint8Array([1]) }, c.presentacion, C.te.encode(JSON.stringify(j))));
     R.manda(c.id, c.suId || null, C.cat(new Uint8Array([1]), iv, ct));
     c.presentadoEn = Date.now();
     if (!resp) reintenta(c, 4000 + Math.random() * 1500);
+    return pq;
   }
   async function recibePresentacion(c, de, b) {
     if (b.length < 30) return;
@@ -182,36 +192,58 @@
       if (j.v !== 2) return;
       const firmaPub = C.deB64u(j.firmaPub), acuerdoPub = C.deB64u(j.acuerdoPub), ef = C.deB64u(j.ef), epoca = C.deB64u(j.epoca), sig = C.deB64u(j.sig), resp = j.resp ? C.deB64u(j.resp) : null;
       if (firmaPub.length !== 65 || acuerdoPub.length !== 65 || ef.length !== 65 || epoca.length !== 16 || (resp && resp.length !== 16)) return;
+      // campos del híbrido (v3): la clave ML-KEM solo en una presentación que inicia, el texto cifrado solo en una
+      // respuesta, y cualquiera de los dos solo con su segunda firma
+      const kemEk = j.kem ? C.deB64u(j.kem) : null, kemCt = j.kemct ? C.deB64u(j.kemct) : null, sig3 = j.sig3 ? C.deB64u(j.sig3) : null;
+      if ((kemEk && (resp || kemEk.length !== C.KEM_EK)) || (kemCt && (!resp || kemCt.length !== C.KEM_CT)) || ((kemEk || kemCt) && !sig3)) return;
       const huella = await C.huella(firmaPub, acuerdoPub);
       if (C.hex(huella) === C.hex(YO.huella)) return; // yo mismo desde otra pestaña
       if (c.huella && C.hex(c.huella) !== C.hex(huella)) { R.manda(c.id, de, new Uint8Array([5])); c.intrusos = (c.intrusos || 0) + 1; vigila(c, T('Intento de entrada con otra identidad: rechazado; la conversación sigue intacta.'), 'mal'); if (!c.intrusoAvisado) { c.intrusoAvisado = true; await anotaSistema(c, 'Alguien con otra identidad intentó entrar en esta conversación: rechazado.'); } pintaRadio(c); return; } // la invitación ya es de otra persona
       // una época nunca se acepta dos veces (repetición)
       c.epocasVistas = c.epocasVistas || new Set(); const eh = C.hex(epoca); if (c.epocasVistas.has(eh)) return; c.epocasVistas.add(eh); if (c.epocasVistas.size > 64) c.epocasVistas.delete(c.epocasVistas.values().next().value);
       const efMia = resp && c.efs ? c.efs.get(C.hex(resp)) : null;
-      const datos = resp ? (efMia ? C.cat(C.te.encode('GUARDIANA v2 RESPONDE\n' + c.id + '\n'), firmaPub, acuerdoPub, ef, epoca, resp, YO.huella, efMia.pub) : null) : C.cat(C.te.encode('GUARDIANA v2 INICIA\n' + c.id + '\n'), firmaPub, acuerdoPub, ef, epoca);
+      const datos = resp ? (efMia ? await C.datosResponde(c.id, firmaPub, acuerdoPub, ef, epoca, resp, YO.huella, efMia.pub) : null) : C.datosInicia(c.id, firmaPub, acuerdoPub, ef, epoca);
       if (!datos) return; // respuesta a una época que no es de las últimas mías: fuera
       if (!(await C.verifica(firmaPub, sig, datos))) return;
+      // la segunda firma ata los campos ML-KEM a esta presentación; si no cuadra, la presentación entera se descarta
+      if (kemEk && !(await C.verifica(firmaPub, sig3, C.datosInicia(c.id, firmaPub, acuerdoPub, ef, epoca, kemEk)))) return;
+      if (kemCt) {
+        if (!efMia.kem) return; // un texto cifrado para una clave ML-KEM que no mandé (o que ya se usó)
+        if (!(await C.verifica(firmaPub, sig3, await C.datosResponde(c.id, firmaPub, acuerdoPub, ef, epoca, resp, YO.huella, efMia.pub, { ek: efMia.kem.ek, ct: kemCt })))) return;
+      }
       const nueva = !c.huella;
       if (nueva) { c.firmaPub = firmaPub; c.acuerdoPub = acuerdoPub; c.huella = huella; c.estado = 'activa'; if (!c.nombre) c.nombre = String(j.nombre || '').slice(0, 40); }
       else if (!c.nombre && j.nombre) c.nombre = String(j.nombre).slice(0, 40);
       c.suId = de; c.miembros.add(de);
       if (nueva || j.nombre !== c.nombreVisto) { c.nombreVisto = j.nombre; await guardaConv(c); }
       const esResp = !!efMia;
-      if (!soyInicio(c)) { await presenta(c, { epoca, ef }); await derivaSesion(c, ef, c.ef); }
-      else if (esResp) await derivaSesion(c, ef, efMia);
+      if (!soyInicio(c)) { const pq = await presenta(c, { epoca, ef, ek: kemEk }); await derivaSesion(c, ef, c.ef, pq); }
+      else if (esResp) {
+        // con texto cifrado ML-KEM, sesión híbrida; sin él (versión anterior al otro lado), la v2 de siempre (pq: false)
+        const pq = kemCt ? { ss: C.kemAbre(kemCt, efMia.kem.dk), ek: efMia.kem.ek, ct: kemCt } : null;
+        if (efMia.kem) { efMia.kem.dk.fill(0); efMia.kem = null; } // la clave privada ML-KEM de esa presentación ya no sirve
+        await derivaSesion(c, ef, efMia, pq);
+      }
       else if (!resp) await presenta(c, null);
       if (nueva) { if (c.codigo) R.retira(c.codigo); c.codigo = null; clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Conversación establecida: cifrada de extremo a extremo. Comprobad el número de seguridad cuando podáis.'); if (ACTUAL === c.id) abreConv(c.id); }
       if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
     } catch (e) { console.warn('presentación', e); }
   }
-  async function derivaSesion(c, suEf, efMia) {
-    if (!efMia || !suEf || !c.acuerdoPub) return;
+  async function derivaSesion(c, suEf, efMia, pq) {
+    if (!efMia || !suEf || !c.acuerdoPub) { if (pq && pq.ss) pq.ss.fill(0); return; }
     const inicio = soyInicio(c);
-    const s = await C.sesion(YO, efMia, { ef: suEf, acuerdoPub: c.acuerdoPub }, c.id, inicio, c.psk, YO.huella, c.huella);
+    const s = await C.sesion(YO, efMia, { ef: suEf, acuerdoPub: c.acuerdoPub }, c.id, inicio, c.psk, YO.huella, c.huella, pq || null);
+    if (pq && pq.ss) pq.ss.fill(0);
     const sid = C.hex(s.hash.subarray(0, 8));
-    const ses = { sid, hash: s.hash, envio: C.cadena(s.envio), recibo: C.cadena(s.recibo), desde: Date.now(), confirmada: false };
-    c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento); c.encuentros = (c.encuentros || 0) + 1; vigila(c, T('Claves nuevas acordadas con la otra persona (cifrado renovado).'), 'info');
+    // pq: true solo si esta sesión mezcla ML-KEM-768 con el ECDH (los dos lados con la versión nueva)
+    const ses = { sid, hash: s.hash, envio: C.cadena(s.envio), recibo: C.cadena(s.recibo), desde: Date.now(), confirmada: false, pq: !!s.pq };
+    c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento); c.encuentros = (c.encuentros || 0) + 1;
+    // 27 Oct 2026: el registro dice si la sesión lleva la capa poscuántica; si una conversación que ya la tuvo vuelve a una
+    // sesión sin ella (la otra persona con una versión anterior, o alguien con la invitación quitándola), se avisa en rojo.
+    if (ses.pq) { vigila(c, T('Claves nuevas acordadas con la otra persona (cifrado renovado, con protección postcuántica ML-KEM-768).'), 'info'); if (!c.pqVisto) { c.pqVisto = true; guardaConv(c); } }
+    else if (c.pqVisto) vigila(c, T('Sesión sin la capa postcuántica: el otro equipo no la ha usado esta vez. La conversación sigue encriptada de extremo a extremo.'), 'mal');
+    else vigila(c, T('Claves nuevas acordadas con la otra persona (cifrado renovado).'), 'info');
     for (const k of [...c.sesiones.keys()].slice(0, -3)) c.sesiones.delete(k);
     pintaCabecera(c); pintaLista();
     enviaControl(c, { tipo: 'ok' });
@@ -681,6 +713,8 @@
     // «Crear invitación» al final del bloque para profesionales: sube al principio y hace lo mismo que el botón grande.
     const proEmpezar = $('#pro-empezar');
     if (proEmpezar) proEmpezar.addEventListener('click', () => { const ini = $('#inicio'); if (ini) ini.scrollTo({ top: 0, behavior: 'smooth' }); $('#nueva').click(); });
+    // dueño, 10:20: arriba, la red neuronal de NÚCLEO (la misma firma que la portada)
+    try { const l = $('.inicio .red-nucleo'); if (l && window.RedNucleo) window.RedNucleo(l, { nace: false, puntos: 220 }); } catch (_) {}
     // dueño, 10:10: la explicación, en un desplegable bajo los dos botones
     const como = $('#como-btn');
     if (como) como.addEventListener('click', () => { const pro = $('#pro'); if (!pro) return; const abre = pro.hidden; pro.hidden = !abre; como.setAttribute('aria-expanded', String(abre)); if (abre) setTimeout(() => pro.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30); });
