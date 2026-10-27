@@ -92,8 +92,8 @@
     const semilla = C.nuevaSemilla();
     const d = await C.deSemilla(semilla);
     const c = convNueva(d.sala, semilla, 'invita');
-    await guardaConv(c); await preparaConv(c);
-    pintaLista(); abreConv(c.id);
+    await preparaConv(c); // no se guarda hasta que la otra persona entra: recargar la página la deja atrás
+    abreConv(c.id);
     muestraInvitacion(c); await publicaCodigo(c);
   }
   async function publicaCodigo(c) {
@@ -174,7 +174,7 @@
       if (firmaPub.length !== 65 || acuerdoPub.length !== 65 || ef.length !== 65 || epoca.length !== 16 || (resp && resp.length !== 16)) return;
       const huella = await C.huella(firmaPub, acuerdoPub);
       if (C.hex(huella) === C.hex(YO.huella)) return; // yo mismo desde otra pestaña
-      if (c.huella && C.hex(c.huella) !== C.hex(huella)) { R.manda(c.id, de, new Uint8Array([5])); if (!c.intrusoAvisado) { c.intrusoAvisado = true; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Alguien con otra identidad intentó entrar en esta conversación: rechazado.'); pintaRadio(c); } return; } // la invitación ya es de otra persona
+      if (c.huella && C.hex(c.huella) !== C.hex(huella)) { R.manda(c.id, de, new Uint8Array([5])); c.intrusos = (c.intrusos || 0) + 1; vigila(c, T('Intento de entrada con otra identidad: rechazado y cortado.'), 'mal'); if (!c.intrusoAvisado) { c.intrusoAvisado = true; await anotaSistema(c, 'Alguien con otra identidad intentó entrar en esta conversación: rechazado.'); } pintaRadio(c); return; } // la invitación ya es de otra persona
       // una época nunca se acepta dos veces (repetición)
       c.epocasVistas = c.epocasVistas || new Set(); const eh = C.hex(epoca); if (c.epocasVistas.has(eh)) return; c.epocasVistas.add(eh); if (c.epocasVistas.size > 64) c.epocasVistas.delete(c.epocasVistas.values().next().value);
       const efMia = resp && c.efs ? c.efs.get(C.hex(resp)) : null;
@@ -201,7 +201,7 @@
     const s = await C.sesion(YO, efMia, { ef: suEf, acuerdoPub: c.acuerdoPub }, c.id, inicio, c.psk, YO.huella, c.huella);
     const sid = C.hex(s.hash.subarray(0, 8));
     const ses = { sid, hash: s.hash, envio: C.cadena(s.envio), recibo: C.cadena(s.recibo), desde: Date.now(), confirmada: false };
-    c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento);
+    c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento); vigila(c, T('Claves nuevas acordadas con la otra persona (cifrado renovado).'), 'info');
     for (const k of [...c.sesiones.keys()].slice(0, -3)) c.sesiones.delete(k);
     pintaCabecera(c); pintaLista();
     enviaControl(c, { tipo: 'ok' });
@@ -246,14 +246,14 @@
     const ses = c.sesiones.get(sid);
     if (!ses) { R.manda(c.id, de, new Uint8Array([4])); return; } // no conozco esa sesión: que se presente otra vez
     let j;
-    try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), C.cat(b.subarray(0, 13), ses.hash)))); } catch (e) { if (!/repetido|saltados/.test(e.message)) { c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); pintaRadio(c); } return; }
+    try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), C.cat(b.subarray(0, 13), ses.hash)))); } catch (e) { if (!/repetido|saltados/.test(e.message)) { c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Mensaje con datos alterados: descartado.'), 'mal'); pintaRadio(c); } return; }
     if (c.suId !== de) return;
-    if (!ses.confirmada) { ses.confirmada = true; if (c.sesion === ses) pintaCabecera(c); } // la otra persona tiene la misma clave: sesión confirmada
+    if (!ses.confirmada) { ses.confirmada = true; if (c.sesion === ses) pintaCabecera(c); vigila(c, T('Cifrado de extremo a extremo confirmado: la otra persona tiene la misma clave.'), 'bien'); } // la otra persona tiene la misma clave: sesión confirmada
     switch (j.tipo) {
       case 'texto': {
         if (c.mensajes.some((x) => x.id === j.id)) { enviaControl(c, { tipo: 'ack', ids: [j.id] }); return; }
         const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'texto', texto: String(j.texto || '').slice(0, 20000) };
-        await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true); pintaRadio(c);
+        await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true); vigila(c, T('Mensaje recibido: cifrado comprobado, íntegro.'), 'ok'); pintaRadio(c);
         enviaControl(c, { tipo: 'ack', ids: [m.id] });
         if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c); else avisaSonido();
         return;
@@ -261,14 +261,14 @@
       case 'ok': return;
       case 'ack': case 'leido': {
         const est = j.tipo === 'ack' ? 'entregado' : 'leido';
-        for (const id of j.ids || []) { const m = c.mensajes.find((x) => x.id === id && x.dir === 'mia'); if (m && (est === 'leido' || m.estado === 'enviado' || m.estado === 'pendiente')) { if (!(m.estado === 'leido')) { m.estado = est; await guardaMensaje(c, m); pintaEstado(m); } } }
+        for (const id of j.ids || []) { const m = c.mensajes.find((x) => x.id === id && x.dir === 'mia'); if (m && (est === 'leido' || m.estado === 'enviado' || m.estado === 'pendiente')) { if (!(m.estado === 'leido')) { m.estado = est; await guardaMensaje(c, m); pintaEstado(m); if (est === 'entregado' && m.tipo === 'texto') vigila(c, T('Mensaje entregado al otro equipo, íntegro.'), 'ok'); } } }
         return;
       }
       case 'nombre': { const n = String(j.nombre || '').trim().slice(0, 40); if (!c.nombreFijado && n && n !== c.nombre) { c.nombre = n; await guardaConv(c); pintaLista(); pintaCabecera(c); } return; }
       case 'archivo': return recibeAnuncioArchivo(c, j);
       case 'archivo-ack': { const a = c.archivos.get(j.id); if (a && a.envio) { a.ack = Math.max(a.ack, +j.hasta || 0); a.sigue && a.sigue(); } return; }
       case 'archivo-listo': { const a = c.archivos.get(j.id); if (a && a.envio) { a.listo = true; a.sigue && a.sigue(); } return; }
-      case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); } if (a) c.archivos.delete(j.id); return; }
+      case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, (j.ok ? T('Archivo entregado') : T('Archivo no completado')) + ': ' + m.archivo.nombre + (j.ok ? ' · ' + T('comprobado en el otro equipo, íntegro.') : ''), j.ok ? 'bien' : 'mal'); pintaRadio(c); } if (a) c.archivos.delete(j.id); return; }
       case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); } return; }
       case 'llamada': return; // esta versión no tiene llamadas (dueño, 26 Oct 20:01)
       case 'destruir': return destruyeLocal(c, true);
@@ -386,6 +386,7 @@
       if (a.partes) { const blob = new Blob(a.partes, { type: m.archivo.mime }); ok = blob.size === m.archivo.tam; if (ok) await BD.pon('arch', { id: m.id, conv: c.id, blob, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: blob.size }); }
       else { try { await a.escritor.close(); } catch (_) { ok = false; } }
       m.estado = ok ? 'recibido' : 'fallo'; m.archivo.progreso = 1;
+      vigila(c, ok ? T('Archivo recibido') + ': ' + m.archivo.nombre + ' · ' + a.trozos + ' ' + T('trozos comprobados, íntegro.') : T('Archivo incompleto: ') + m.archivo.nombre, ok ? 'bien' : 'mal');
       await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c);
       enviaControl(c, { tipo: 'archivo-fin', id: m.id, ok });
       if (ok && !(ACTUAL === c.id && document.visibilityState === 'visible')) avisaSonido();
@@ -397,7 +398,7 @@
     if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(m.id); }
     enviaControl(c, { tipo: 'archivo-cancel', id: m.id, por: 'integridad' });
     m.estado = 'fallo'; m.archivo.motivo = T('cortado: datos alterados'); await guardaMensaje(c, m); pintaMensaje(c, m, true);
-    await anotaSistema(c, texto); aviso(T(texto)); pintaRadio(c);
+    await anotaSistema(c, texto); aviso(T(texto)); vigila(c, T(texto), 'mal'); pintaRadio(c);
   }
   async function abreArchivo(m, guardar) {
     const r = await BD.saca('arch', m.id); if (!r) return aviso(m.archivo.enDisco ? T('Ese archivo se guardó directamente en tu disco, en la carpeta que elegiste.') : T('Este archivo ya no está en este navegador.'));
@@ -432,13 +433,15 @@
   function arrancaRele() {
     R = GuardianaRele.crea();
     const estadoRele = (txt, cls) => { const e = $('#rele'); e.className = 'rele ' + (cls || ''); $('#reletxt').textContent = txt; };
-    R.on('abierto', () => { estadoRele(T('Conectado'), 'si'); });
-    R.on('hola', () => { estadoRele(T('Conectado'), 'si'); for (const c of CONVS.values()) pintaCabecera(c); });
-    R.on('cerrado', () => { estadoRele(T('Sin conexión: reintentando…'), 'no'); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; pintaCabecera(c); } pintaLista(); });
+    window.pintaBarra = () => { const c = CONVS.get(ACTUAL); const on = !!(c && c.huella && enLinea(c) && c.sesion && c.sesion.confirmada); estadoRele(on ? T('Conectado') : T('Desconectado'), on ? 'si' : ''); };
+    // arriba: «Desconectado» hasta que la conversación con la otra persona está establecida; entonces «Conectado» (dueño, 20:21)
+    R.on('abierto', () => { pintaBarra(); });
+    R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); });
+    R.on('cerrado', () => { pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; pintaCabecera(c); } pintaLista(); });
     setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
     R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presenta(c, null, true)); pintaCabecera(c); pintaLista(); });
     R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) { c.sesion = null; enCola(c, () => presenta(c, null, true)); } pintaCabecera(c); pintaLista(); });
-    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; } pintaCabecera(c); pintaLista(); });
+    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; vigila(c, T('La otra persona se ha desconectado.'), 'info'); } pintaCabecera(c); pintaLista(); });
     R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Esta conversación se ha abierto en otra pestaña: sigue allí.')); });
     // Las tramas de una conversación se procesan en orden (una detrás de otra): así un trozo de archivo nunca
     // adelanta al anuncio del archivo, ni un mensaje a la presentación que abre su sesión.
@@ -481,8 +484,9 @@
     marcaLeidos(c);
     if (matchMedia('(min-width: 761px)').matches) $('#texto').focus();
   }
-  function cierraConv() { ACTUAL = null; $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; }
+  function cierraConv() { ACTUAL = null; if (window.pintaBarra) pintaBarra(); $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; }
   function pintaCabecera(c) {
+    if (window.pintaBarra) pintaBarra();
     if (ACTUAL !== c.id) return;
     $('#cnombre').textContent = T('Conversación cifrada');
     const conf = $('#cconfianza'); conf.classList.remove('gc-sin-verificar');
@@ -496,8 +500,32 @@
     if (c.huella && !c.verificada) conf.classList.add('gc-sin-verificar');
     conf.textContent = txt;
   }
+  // Vigilancia a la derecha (dueño, 26 Oct 20:22): anota cada comprobación real según ocurre y mantiene la última a la vista.
+  const hms = (t) => new Date(t || Date.now()).toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  function vigila(c, texto, nivel) {
+    c.vigilancia = c.vigilancia || []; c.vigilancia.push({ t: Date.now(), texto, nivel: nivel || 'ok' }); if (c.vigilancia.length > 80) c.vigilancia.shift();
+    if (ACTUAL === c.id) pintaVigila(c);
+  }
+  function pintaVigila(c) {
+    if (ACTUAL !== c.id) return;
+    const inc = c.incidencias || 0, intrusos = c.intrusos || 0;
+    $('#vigila').classList.toggle('alerta', inc + intrusos > 0);
+    const ul = $('#vigila-filas'); ul.textContent = '';
+    const fila = (cls, b, sp) => { const li = document.createElement('li'); li.className = cls; const i = document.createElement('i'); const bb = document.createElement('b'); bb.textContent = b; const ss = document.createElement('span'); ss.textContent = sp; li.append(i, bb, ss); ul.append(li); };
+    const ses = c.sesion && c.sesion.confirmada;
+    fila(ses ? 'gc-ok' : 'gc-aviso', T('Cifrado'), ses ? T('De extremo a extremo, activo; claves nuevas en cada encuentro.') : T('Estableciendo…'));
+    fila(c.verificada ? 'gc-ok' : 'gc-aviso', T('Identidad'), c.verificada ? T('Verificada por las dos personas.') : T('Sin verificar: comparad el número de seguridad (escudo).'));
+    const msgs = c.mensajes.filter((m) => m.tipo === 'texto').length, arch = c.mensajes.filter((m) => m.tipo === 'archivo' && (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido')).length;
+    fila(inc ? 'gc-alerta' : 'gc-ok', T('Integridad'), inc ? inc + ' ' + (inc === 1 ? T('incidencia') : T('incidencias')) + ' · ' + T('envío cortado y anotado') : msgs + ' ' + (msgs === 1 ? T('mensaje') : T('mensajes')) + ' · ' + arch + ' ' + (arch === 1 ? T('archivo') : T('archivos')) + ' · ' + T('todo íntegro, nadie lo ha tocado'));
+    fila(intrusos ? 'gc-alerta' : 'gc-ok', T('Intrusos'), intrusos ? intrusos + ' ' + T('intento(s) de entrada ajenos: rechazados y cortados') : T('Ningún intento de entrada ajeno.'));
+    fila('gc-info', T('Servidor'), T('solo pasa tramas cifradas que no puede leer; no guarda nada'));
+    const vv = $('#vigila-vivo'); vv.textContent = '';
+    for (const e of [...(c.vigilancia || [])].reverse().slice(0, 40)) { const li = document.createElement('li'); li.className = e.nivel; const tm = document.createElement('time'); tm.textContent = hms(e.t); const sp = document.createElement('span'); sp.textContent = e.texto; li.append(tm, sp); vv.append(li); }
+  }
+  setInterval(() => { const c = CONVS.get(ACTUAL); if (!c || $('#conv').hidden) return; $('#vigila-ultima').textContent = T('comprobado') + ' ' + hms(); }, 1000);
   // «Radiografía» permanente (dueño, 26 Oct 20:03): solo lo verificable, en todo momento
   function pintaRadio(c) {
+    pintaVigila(c);
     if (ACTUAL !== c.id) return;
     const r = $('#radio'); if (!c.huella) { r.hidden = true; return; }
     const msgs = c.mensajes.filter((m) => m.tipo === 'texto').length, arch = c.mensajes.filter((m) => m.tipo === 'archivo' && (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido')).length, inc = c.incidencias || 0;
@@ -581,12 +609,15 @@
   function pintaCodigo(c) {
     const e = $('#codigo'); e.textContent = codigoBonito(c.codigo); e.className = 'codigo' + (c.codigoUsado ? ' usado' : (c.codigo && Date.now() > c.codigoCaduca ? ' caducado' : ''));
     const caducado = c.codigo && Date.now() > c.codigoCaduca;
-    $('#invita-estado').textContent = c.ocupada ? T('Esta invitación ya la usó otra persona.') : c.codigoUsado ? T('La otra persona ha escrito el código: conectando…') : caducado ? T('Este código ha caducado (10 minutos). Pide uno nuevo.') : c.codigo ? T('Esperando a que la otra persona escriba el código…') : T('Creando el código…');
+    const est = c.ocupada ? T('Esta invitación ya la usó otra persona.') : c.codigoUsado ? T('La otra persona ha escrito el código: conectando…') : caducado ? T('Este código ha caducado (10 minutos). Pide uno nuevo.') : '';
+    $('#invita-estado').textContent = est; $('#invita-estado').hidden = !est;
+    const v = $('#validez'); v.hidden = !c.codigo || caducado || c.codigoUsado;
+    if (c.codigo && !caducado) { const q = Math.max(0, Math.round((c.codigoCaduca - Date.now()) / 1000)); v.textContent = ''; v.append(document.createTextNode(T('Tiene una validez de 10 minutos y un solo uso: pasado ese tiempo queda inhabilitado y deja de funcionar.') + ' ' + T('Le quedan') + ' ')); const b = document.createElement('b'); b.textContent = Math.floor(q / 60) + ':' + String(q % 60).padStart(2, '0'); v.append(b); v.append(document.createTextNode('.')); }
     $('#invita-nuevo').hidden = !(caducado && !c.huella);
   }
   function muestraInvitacion(c) {
     pintaCodigo(c);
-    clearInterval(muestraInvitacion.reloj); muestraInvitacion.reloj = setInterval(() => { if ($('#paso-codigo').hidden) return clearInterval(muestraInvitacion.reloj); pintaCodigo(c); }, 5000);
+    clearInterval(muestraInvitacion.reloj); muestraInvitacion.reloj = setInterval(() => { if ($('#paso-codigo').hidden) return clearInterval(muestraInvitacion.reloj); pintaCodigo(c); }, 1000);
   }
   async function muestraEscudo(c) {
     const ul = $('#escudo-lista'); ul.textContent = '';
@@ -627,7 +658,6 @@
       $('#unir-mal').hidden = false; $('#unir-codigo').focus(); $('#unir-codigo').select();
     });
     $('#unir-codigo').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#unir-ok').click(); });
-    $('#invita-cerrar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c && !c.huella) await destruye(c); else cierraConv(); });
     $('#terminar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c) return; if (!confirm(T('¿Terminar la conversación? Se borra aquí y en el otro equipo.'))) return; await destruye(c); });
     $('#invita-nuevo').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) { c.codigoUsado = false; await publicaCodigo(c); } });
     R.on('codigo-usado', (codigo) => { for (const c of CONVS.values()) if (c.codigo === codigo) { c.codigoUsado = true; pintaCodigo(c); } });
