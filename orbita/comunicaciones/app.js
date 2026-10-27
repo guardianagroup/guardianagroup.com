@@ -117,7 +117,7 @@
     }
     c.codigo = null; pintaCodigo(c); aviso(T('No se pudo crear el código: inténtalo otra vez.')); return false;
   }
-  const codigoBonito = (k) => k ? k.replace(/(\d{3})(?=\d)/g, '$1 ') : '··· ··· ···';
+  const codigoBonito = (k) => k ? k.replace(/(\d{3})(?=\d)/g, '$1-') : '···-···-···';
   async function aceptaCodigo(texto) {
     const codigo = String(texto || '').replace(/\D/g, '');
     if (codigo.length !== 9) return 'formato';
@@ -680,7 +680,7 @@
     $('#nueva').addEventListener('click', creaInvitacion);
     $('#unir').addEventListener('click', () => { $('#unir-mal').hidden = true; $('#unir-espera').hidden = true; $('#unir-codigo').value = ''; $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = false; setTimeout(() => $('#unir-codigo').focus(), 50); });
     $('#unir-cerrar').addEventListener('click', () => { $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; });
-    $('#unir-codigo').addEventListener('input', (e) => { const d = e.target.value.replace(/\D/g, '').slice(0, 9); e.target.value = d.replace(/(\d{3})(?=\d)/g, '$1 '); $('#unir-mal').hidden = true; if (d.length === 9) $('#unir-ok').click(); });
+    $('#unir-codigo').addEventListener('input', (e) => { const d = e.target.value.replace(/\D/g, '').slice(0, 9); e.target.value = d.replace(/(\d{3})(?=\d)/g, '$1-'); $('#unir-mal').hidden = true; if (d.length === 9) $('#unir-ok').click(); });
     $('#unir-ok').addEventListener('click', async () => {
       const b = $('#unir-ok'); if (b.disabled) return; b.disabled = true; $('#unir-mal').hidden = true; $('#unir-espera').hidden = false;
       const r = await aceptaCodigo($('#unir-codigo').value);
