@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "শুধু সিলমোহর করা বাইট পাস করে এবং কিছুই সংরক্ষণ করে না",
   "verificada": "যাচাইকৃত",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "চ্যাট, ভয়েস ও ভিডিও কল এবং ফাইল, দুটি ব্রাউজারের মধ্যে এন্ড-টু-এন্ড এনক্রিপ্টেড। সার্ভারে কিছুই সংরক্ষিত হয় না।",
-  "Relé: {1}": "রিলে: {1}"
+  "Relé: {1}": "রিলে: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "ব্রাউজারগুলোর মধ্যে এন্ড-টু-এন্ড এনক্রিপশন। আমাদের সার্ভার কোনো বার্তা বা ফাইল সংরক্ষণ করে না।",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "চ্যাট, ভয়েস ও ভিডিও কল এবং ফাইল, দুটি ব্রাউজারের মধ্যে এন্ড-টু-এন্ড এনক্রিপ্টেড। GUARDIANA-র রিলে কেবল এমন এনক্রিপ্টেড ফ্রেম ফরোয়ার্ড করে যা এটি ডিক্রিপ্ট করতে পারে না: এটি সংযোগের তথ্য দেখে, বিষয়বস্তু নয়, এবং কোনো ইতিহাস রাখে না। “ধ্বংস করুন” এখানে কথোপকথন মুছে দেয় এবং অন্য ব্রাউজারে মুছে ফেলার অনুরোধ করে।",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "এই লিঙ্কটি (বা কোডটি দেখান) একটি বিশ্বস্ত মাধ্যমে পাঠান: যার কাছে লিঙ্ক আছে সে-ই যোগ দিতে পারে। গোপন তথ্য “#”-এর পরে ভ্রমণ করে, যা ব্রাউজার আমাদের সার্ভারে পাঠায় না।",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "আপনারা দুজন যদি একই নম্বর অন্য কোনো উপায়ে (ফোনে, সামনাসামনি) যাচাই করেন, তবে আপনারা কোনো মধ্যস্থতাকারী ছাড়াই কথা বলছেন। তখন “যাচাইকৃত” চিহ্নিত করুন।",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "এমন এনক্রিপ্টেড ফ্রেম ফরোয়ার্ড করে যা এটি ডিক্রিপ্ট করতে পারে না; সংযোগ ও পরিমাণ দেখে, বিষয়বস্তু নয়; কোনো ইতিহাস রাখে না",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "দুটি ব্রাউজারের মধ্যে এনক্রিপ্টেড এবং রিলের মাধ্যমে পরিবাহিত: কোনো অংশগ্রহণকারী অন্যজনের IP ঠিকানা দেখে না (রিলে উভয়ই দেখে)।",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "এটি এখানে মুছে ফেলা হয় এবং অন্য ব্যক্তির ব্রাউজারে মুছে ফেলার অনুরোধ করা হয় (যদি সংযুক্ত থাকে; না হলে যোগ দেওয়ার সঙ্গে সঙ্গে)। সে ইতিমধ্যে তার ডিস্কে যা সংরক্ষণ করেছে, তা পর্যন্ত এটি পৌঁছায় না। এটি ফেরানো যায় না।",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "কথোপকথন এখানে ধ্বংস করা হয়েছে; অন্য ব্যক্তি মুছে ফেলার নির্দেশ পেয়েছেন।",
+  "Qué protege y qué no": "এটি কী রক্ষা করে এবং কী করে না",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "এটি নামহীনতা নয়: রিলে আপনার IP ঠিকানা, কক্ষ এবং ট্রাফিকের পরিমাণ দেখে, বিষয়বস্তু নয়।",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "আপনার পরিচয় এই ব্রাউজারেই থাকে: সাইটের ডেটা মুছে ফেললে বা ডিভাইস পরিবর্তন করলে এটি হারিয়ে যায়।",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "প্রাপ্ত ফাইলগুলো আমাদের এনক্রিপশন ছাড়াই এই ব্রাউজারে থেকে যায়; “ধ্বংস করুন” ইতিমধ্যে ডিস্কে সংরক্ষিত জিনিস পর্যন্ত পৌঁছায় না।",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "কোনো এনক্রিপশনই আপোসকৃত ডিভাইস বা ব্রাউজার রক্ষা করতে পারে না। এই সংস্করণটি পোস্ট-কোয়ান্টাম নয় এবং তৃতীয় পক্ষ দ্বারা নিরীক্ষিতও নয়।",
+  "Límites": "সীমাবদ্ধতা",
+  "Ver límites": "সীমাবদ্ধতা দেখুন"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "সাইট {1}-এ প্রবেশাধিকার চেয়েছে। ব্রাউজারের বার্তায় আপনি সিদ্ধান্ত নিন।",
   "mHuellaLocal": "{1}-এর একটি প্রোগ্রাম {2} দেখেছে, যা আপনার ডিভাইস চেনার কাজে লাগে।",
   "mCookieVista": "{1} অন্য কোম্পানির কুকি রাখার চেষ্টা করেছে যাতে আরও সাইটে আপনাকে চেনা যায়।",
-  "nCortadas": "{1} কাটা হয়েছে"
+  "nCortadas": "{1} কাটা হয়েছে",
+  "mRele": "রিলে: {1}"
  }
 }

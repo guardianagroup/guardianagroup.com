@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "csak lepecsételt bájtokat továbbít, és semmit sem tárol",
   "verificada": "ellenőrzött",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Csevegés, hang- és videohívások, fájlok, végpontok között titkosítva két böngésző között. Semmi sem tárolódik szervereken.",
-  "Relé: {1}": "Relé: {1}"
+  "Relé: {1}": "Relé: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Végpontok közötti titkosítás böngészők között. Szervereink nem tárolnak üzeneteket vagy fájlokat.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Csevegés, hang- és videohívások és fájlok, végpontok között titkosítva két böngésző között. A GUARDIANA reléje csak olyan titkosított kereteket továbbít, amelyeket nem tud visszafejteni: a kapcsolati adatokat látja, a tartalmat nem, és nem tárol előzményeket. A „Megsemmisítés“ itt törli a beszélgetést, és kéri a másik böngészőt, hogy törölje.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Küldd el ezt a linket (vagy mutasd meg a kódot) megbízható csatornán: aki megkapja a linket, csatlakozhat. A titok a „#“ után utazik, amelyet a böngésző nem küld el a szerverünkre.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Ha mindketten ugyanazt a számot egy másik úton (telefon, személyesen) ellenőrzitek, akkor közvetítő nélkül beszéltek. Ekkor jelöld be: „Ellenőrzött“.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "továbbítja a titkosított kereteket, amelyeket nem tud visszafejteni; látja a kapcsolatot és a mennyiséget, a tartalmat nem; nem tárol előzményeket",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "A két böngésző között titkosítva és a relé által szállítva: egyik résztvevő sem látja a másik IP-címét (a relé mindkettőt látja).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Itt törlődik, és a másik személy böngészőjét megkéri a törlésre (ha csatlakozva van; ha nem, amint csatlakozik). Nem éri el azt, amit az illető már a lemezére mentett. Nem vonható vissza.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "A beszélgetés itt megsemmisült; a másik személy megkapta a törlési parancsot.",
+  "Qué protege y qué no": "Mit véd és mit nem",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Ez nem névtelenség: a relé látja az IP-címedet, a szobát és a forgalom mennyiségét, a tartalmat nem.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "A személyazonosságod ebben a böngészőben él: elveszik, ha törlöd a webhely adatait vagy eszközt váltasz.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "A kapott fájlok a titkosításunk nélkül ebben a böngészőben maradnak; a „Megsemmisítés“ nem éri el azt, amit már lemezre mentettek.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Semmilyen titkosítás nem véd meg egy feltört eszközt vagy böngészőt. Ez a verzió nem posztkvantum, és nem auditálta harmadik fél.",
+  "Límites": "Korlátok",
+  "Ver límites": "Korlátok megtekintése"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Az oldal hozzáférést kért ehhez: {1}. Te döntesz a böngésző kérdésénél.",
   "mHuellaLocal": "Egy {1} program lekérdezte ezt: {2}, ami az eszközöd felismerésére szolgál.",
   "mCookieVista": "{1} másik cég sütijét próbálta elhelyezni, hogy más oldalakon is felismerjen.",
-  "nCortadas": "{1} elvágva"
+  "nCortadas": "{1} elvágva",
+  "mRele": "Relé: {1}"
  }
 }

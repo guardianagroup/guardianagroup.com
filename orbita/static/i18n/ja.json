@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "封印されたバイトを渡すだけで、何も保存しません",
   "verificada": "確認済み",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "チャット、音声・ビデオ通話、ファイルを、2 つのブラウザ間でエンドツーエンド暗号化。サーバーには何も保存されません。",
-  "Relé: {1}": "リレー：{1}"
+  "Relé: {1}": "リレー：{1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "ブラウザ間のエンドツーエンド暗号化。当社のサーバーはメッセージもファイルも保存しません。",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "チャット、音声・ビデオ通話、ファイルを、2つのブラウザ間でエンドツーエンド暗号化します。GUARDIANA のリレーは、復号できない暗号化フレームを転送するだけです。接続データは見えますが内容は見えず、履歴も保存しません。「破棄」はここで会話を削除し、もう一方のブラウザにも削除を要求します。",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "このリンクを(またはコードを提示して)信頼できる経路で送ってください。リンクを持つ人なら誰でも参加できます。秘密は「#」の後ろを通り、ブラウザはそれを当社のサーバーには送りません。",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "二人が別の手段(電話、対面)で同じ番号を確認すれば、仲介者なしで話していることになります。そのときは「確認済み」にチェックを入れてください。",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "復号できない暗号化フレームを転送する。接続と通信量は見えるが内容は見えない。履歴は保存しない",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "2つのブラウザ間で暗号化され、リレーによって運ばれます。どの参加者も相手の IP アドレスは見えません(リレーは両方を見ます)。",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "ここで削除され、相手のブラウザにも削除が要求されます(接続中なら即座に、そうでなければ参加した時点で)。相手がすでに自分のディスクに保存したものには及びません。元に戻すことはできません。",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "会話はここで破棄されました。相手は削除命令を受け取りました。",
+  "Qué protege y qué no": "何を守り、何を守らないか",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "匿名性ではありません。リレーはあなたの IP アドレス、ルーム、通信量を見ますが、内容は見ません。",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "あなたの身元はこのブラウザ内に存在します。サイトのデータを消去したり端末を変更したりすると失われます。",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "受信したファイルは当社の暗号化なしでこのブラウザに残ります。「破棄」はすでにディスクに保存されたものには及びません。",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "いかなる暗号化も、侵害された端末やブラウザは守れません。このバージョンはポスト量子ではなく、第三者による監査も受けていません。",
+  "Límites": "制限",
+  "Ver límites": "制限を見る"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "サイトが{1}へのアクセスを求めました。ブラウザの確認で決めてください。",
   "mHuellaLocal": "{1}のプログラムが{2}を照会しました。端末を識別するためのデータです。",
   "mCookieVista": "{1}が他社のCookieを置いて、他のサイトでもあなたを識別しようとしました。",
-  "nCortadas": "{1}件遮断"
+  "nCortadas": "{1}件遮断",
+  "mRele": "リレー：{1}"
  }
 }

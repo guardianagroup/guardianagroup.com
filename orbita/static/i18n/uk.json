@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "лише передає запечатані байти й нічого не зберігає",
   "verificada": "перевірено",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Чат, голосові та відеодзвінки й файли з наскрізним шифруванням між двома браузерами. На серверах нічого не зберігається.",
-  "Relé: {1}": "Реле: {1}"
+  "Relé: {1}": "Реле: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Наскрізне шифрування між браузерами. Наші сервери не зберігають ні повідомлень, ні файлів.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Чат, голосові та відеодзвінки й файли, зашифровані наскрізно між двома браузерами. Ретранслятор GUARDIANA лише пересилає зашифровані кадри, які не може розшифрувати: він бачить дані з'єднання, а не вміст, і не зберігає історії. «Знищити» видаляє розмову тут і просить видалити її в іншому браузері.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Надішліть це посилання (або покажіть код) надійним каналом: приєднатися може будь-хто, у кого є посилання. Секрет мандрує після «#», який браузер не надсилає на наш сервер.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Якщо ви обоє перевірите те саме число іншим шляхом (телефоном, особисто), ви говорите без посередників. Тоді позначте «Підтверджено».",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "пересилає зашифровані кадри, які не може розшифрувати; бачить з'єднання й обсяг, а не вміст; не зберігає історії",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Зашифровані між двома браузерами й передані ретранслятором: жоден учасник не бачить IP-адресу іншого (ретранслятор бачить обидві).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Вона видаляється тут, а браузер іншої людини отримує запит на видалення (якщо вона онлайн; якщо ні — щойно приєднається). Це не сягає того, що вона вже зберегла на своєму диску. Скасувати неможливо.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Розмову знищено тут; інша людина отримала команду на видалення.",
+  "Qué protege y qué no": "Що він захищає, а що ні",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Це не анонімність: ретранслятор бачить вашу IP-адресу, кімнату й обсяг трафіку, а не вміст.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Ваша особистість живе в цьому браузері: вона втрачається, якщо ви очистите дані сайту або зміните пристрій.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Отримані файли залишаються в цьому браузері без нашого шифрування; «Знищити» не сягає того, що вже збережено на диску.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Жодне шифрування не захистить скомпрометований пристрій чи браузер. Ця версія не є постквантовою й не проходила аудит третіх сторін.",
+  "Límites": "Обмеження",
+  "Ver límites": "Переглянути обмеження"
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "Сайт попросив доступ до {1}. Вирішуйте в запиті браузера.",
   "mHuellaLocal": "Програма з {1} запитала {2} — дані, за якими впізнають ваш пристрій.",
   "mCookieVista": "{1} спробував залишити cookie іншої компанії, щоб упізнавати вас на інших сайтах.",
-  "nCortadas": "{1} відрізано"
+  "nCortadas": "{1} відрізано",
+  "mRele": "Реле: {1}"
  }
 }

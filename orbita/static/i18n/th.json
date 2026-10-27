@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "เพียงส่งผ่านไบต์ที่ผนึกไว้และไม่เก็บอะไรไว้เลย",
   "verificada": "ยืนยันแล้ว",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "แชท การโทรด้วยเสียงและวิดีโอ และไฟล์ เข้ารหัสแบบต้นทางถึงปลายทางระหว่างเบราว์เซอร์สองเครื่อง ไม่มีอะไรถูกเก็บไว้บนเซิร์ฟเวอร์",
-  "Relé: {1}": "รีเลย์: {1}"
+  "Relé: {1}": "รีเลย์: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "การเข้ารหัสแบบต้นทางถึงปลายทางระหว่างเบราว์เซอร์ เซิร์ฟเวอร์ของเราไม่เก็บข้อความหรือไฟล์ใด ๆ",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "แชต การโทรด้วยเสียงและวิดีโอ และไฟล์ เข้ารหัสแบบต้นทางถึงปลายทางระหว่างเบราว์เซอร์สองตัว รีเลย์ของ GUARDIANA เพียงส่งต่อเฟรมที่เข้ารหัสซึ่งมันถอดรหัสไม่ได้ มันเห็นข้อมูลการเชื่อมต่อ ไม่ใช่เนื้อหา และไม่เก็บประวัติ “ทำลาย” จะลบการสนทนาที่นี่และขอให้เบราว์เซอร์อีกฝั่งลบด้วย",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "ส่งลิงก์นี้ (หรือแสดงรหัส) ผ่านช่องทางที่ไว้ใจได้ ใครก็ตามที่มีลิงก์สามารถเข้าร่วมได้ ความลับเดินทางหลัง “#” ซึ่งเบราว์เซอร์จะไม่ส่งไปยังเซิร์ฟเวอร์ของเรา",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "หากคุณทั้งสองตรวจสอบหมายเลขเดียวกันผ่านอีกช่องทางหนึ่ง (โทรศัพท์ พบกันต่อหน้า) แสดงว่าคุณกำลังคุยกันโดยไม่มีคนกลาง จากนั้นให้ทำเครื่องหมาย “ยืนยันแล้ว”",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "ส่งต่อเฟรมที่เข้ารหัสซึ่งมันถอดรหัสไม่ได้ เห็นการเชื่อมต่อและปริมาณ ไม่ใช่เนื้อหา ไม่เก็บประวัติ",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "เข้ารหัสระหว่างเบราว์เซอร์ทั้งสองและส่งผ่านรีเลย์ ไม่มีผู้เข้าร่วมคนใดเห็นที่อยู่ IP ของอีกฝ่าย (รีเลย์เห็นทั้งสอง)",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "การสนทนาถูกลบที่นี่และมีการขอให้เบราว์เซอร์ของอีกฝ่ายลบด้วย (หากเชื่อมต่ออยู่ หากไม่ ก็ทันทีที่เข้าร่วม) ไม่ครอบคลุมสิ่งที่เขาบันทึกไว้ในดิสก์แล้ว ไม่สามารถเลิกทำได้",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "การสนทนาถูกทำลายที่นี่ อีกฝ่ายได้รับคำสั่งให้ลบแล้ว",
+  "Qué protege y qué no": "สิ่งที่มันปกป้องและสิ่งที่ไม่ปกป้อง",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "นี่ไม่ใช่การไม่เปิดเผยตัวตน รีเลย์เห็นที่อยู่ IP ห้อง และปริมาณการรับส่งข้อมูลของคุณ ไม่ใช่เนื้อหา",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "ตัวตนของคุณอยู่ในเบราว์เซอร์นี้ จะสูญหายหากคุณล้างข้อมูลเว็บไซต์หรือเปลี่ยนอุปกรณ์",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "ไฟล์ที่ได้รับจะอยู่ในเบราว์เซอร์นี้โดยไม่มีการเข้ารหัสของเรา “ทำลาย” ไม่ครอบคลุมสิ่งที่บันทึกลงดิสก์ไปแล้ว",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "ไม่มีการเข้ารหัสใดปกป้องอุปกรณ์หรือเบราว์เซอร์ที่ถูกเจาะได้ เวอร์ชันนี้ไม่ใช่แบบหลังควอนตัมและไม่ได้รับการตรวจสอบโดยบุคคลที่สาม",
+  "Límites": "ข้อจำกัด",
+  "Ver límites": "ดูข้อจำกัด"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "เว็บไซต์ขอเข้าถึง{1} คุณตัดสินใจในข้อความแจ้งของเบราว์เซอร์",
   "mHuellaLocal": "โปรแกรมจาก {1} สอบถาม{2} ซึ่งเป็นข้อมูลที่ใช้จดจำอุปกรณ์ของคุณ",
   "mCookieVista": "{1} พยายามวางคุกกี้ของบริษัทอื่นเพื่อจดจำคุณในเว็บไซต์อื่น",
-  "nCortadas": "ตัดแล้ว {1}"
+  "nCortadas": "ตัดแล้ว {1}",
+  "mRele": "รีเลย์: {1}"
  }
 }

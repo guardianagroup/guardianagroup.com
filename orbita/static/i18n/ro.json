@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "doar transmite octeți sigilați și nu păstrează nimic",
   "verificada": "verificată",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, apeluri vocale și video și fișiere, criptate end-to-end între două browsere. Nimic nu se stochează pe servere.",
-  "Relé: {1}": "Releu: {1}"
+  "Relé: {1}": "Releu: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Criptare end-to-end între browsere. Serverele noastre nu păstrează niciun mesaj și niciun fișier.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Chat, apeluri vocale și video și fișiere, criptate end-to-end între două browsere. Releul GUARDIANA doar transmite cadre criptate pe care nu le poate decripta: vede datele de conexiune, nu conținutul, și nu păstrează istoric. „Distruge“ șterge conversația aici și cere celuilalt browser să o șteargă.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Trimite acest link (sau arată codul) printr-un canal de încredere: oricine are linkul se poate alătura. Secretul călătorește după „#“, pe care browserul nu îl trimite serverului nostru.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Dacă amândoi verificați același număr pe altă cale (telefon, în persoană), vorbiți fără intermediari. Atunci bifează „Verificată“.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "transmite cadre criptate pe care nu le poate decripta; vede conexiunea și volumul, nu conținutul; nu păstrează istoric",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Criptate între cele două browsere și transportate de releu: niciun participant nu vede adresa IP a celuilalt (releul le vede pe amândouă).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Se șterge aici și browserul celeilalte persoane este rugat să o șteargă (dacă este conectat; dacă nu, de îndată ce se alătură). Nu ajunge la ceea ce a salvat deja pe discul său. Nu se poate anula.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Conversație distrusă aici; cealaltă persoană a primit ordinul de ștergere.",
+  "Qué protege y qué no": "Ce protejează și ce nu",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Nu este anonimat: releul vede adresa ta IP, camera și volumul de trafic, nu conținutul.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Identitatea ta trăiește în acest browser: se pierde dacă ștergi datele site-ului sau schimbi dispozitivul.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Fișierele primite rămân în acest browser fără criptarea noastră; „Distruge“ nu ajunge la ceea ce a fost deja salvat pe un disc.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Nicio criptare nu protejează un dispozitiv sau un browser compromis. Această versiune nu este post-cuantică și nu a fost auditată de terți.",
+  "Límites": "Limite",
+  "Ver límites": "Vezi limitele"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Site-ul a cerut acces la {1}. Decizi tu în mesajul browserului.",
   "mHuellaLocal": "Un program de la {1} a consultat {2}, o dată folosită pentru a-ți recunoaște dispozitivul.",
   "mCookieVista": "{1} a încercat să lase un cookie al altei companii pentru a te recunoaște pe mai multe site-uri.",
-  "nCortadas": "{1} tăiate"
+  "nCortadas": "{1} tăiate",
+  "mRele": "Releu: {1}"
  }
 }

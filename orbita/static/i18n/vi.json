@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "chỉ chuyển những byte đã niêm phong và không lưu gì cả",
   "verificada": "đã xác minh",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, gọi thoại, gọi video và gửi tệp, mã hóa đầu cuối giữa hai trình duyệt. Không có gì được lưu trên máy chủ.",
-  "Relé: {1}": "Relay: {1}"
+  "Relé: {1}": "Relay: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Mã hóa đầu cuối giữa các trình duyệt. Máy chủ của chúng tôi không lưu tin nhắn hay tệp.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Trò chuyện, cuộc gọi thoại và video cùng tệp, được mã hóa đầu cuối giữa hai trình duyệt. Relay của GUARDIANA chỉ chuyển tiếp các khung đã mã hóa mà nó không thể giải mã: nó thấy dữ liệu kết nối, không thấy nội dung, và không lưu lịch sử. “Hủy” xóa cuộc trò chuyện tại đây và yêu cầu trình duyệt kia xóa nó.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Gửi liên kết này (hoặc cho xem mã) qua một kênh tin cậy: bất kỳ ai có liên kết đều có thể tham gia. Bí mật di chuyển sau “#”, phần mà trình duyệt không gửi đến máy chủ của chúng tôi.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Nếu cả hai bạn kiểm tra cùng một con số bằng cách khác (điện thoại, trực tiếp), thì các bạn đang nói chuyện không qua trung gian. Khi đó hãy đánh dấu “Đã xác minh”.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "chuyển tiếp các khung đã mã hóa mà nó không thể giải mã; thấy kết nối và lưu lượng, không thấy nội dung; không lưu lịch sử",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Được mã hóa giữa hai trình duyệt và truyền qua relay: không người tham gia nào thấy địa chỉ IP của người kia (relay thì thấy cả hai).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Nó bị xóa ở đây và trình duyệt của người kia được yêu cầu xóa nó (nếu đang kết nối; nếu không thì ngay khi họ tham gia). Nó không chạm tới những gì họ đã lưu vào đĩa của mình. Không thể hoàn tác.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Cuộc trò chuyện đã bị hủy ở đây; người kia đã nhận được lệnh xóa.",
+  "Qué protege y qué no": "Nó bảo vệ điều gì và không bảo vệ điều gì",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Đây không phải ẩn danh: relay thấy địa chỉ IP, phòng và lưu lượng truy cập của bạn, không thấy nội dung.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Danh tính của bạn sống trong trình duyệt này: nó sẽ mất nếu bạn xóa dữ liệu trang web hoặc đổi thiết bị.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Các tệp đã nhận vẫn nằm trong trình duyệt này mà không có mã hóa của chúng tôi; “Hủy” không chạm tới thứ đã được lưu vào đĩa.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Không có mã hóa nào bảo vệ được thiết bị hoặc trình duyệt đã bị xâm phạm. Phiên bản này không phải hậu lượng tử và chưa được bên thứ ba kiểm toán.",
+  "Límites": "Giới hạn",
+  "Ver límites": "Xem giới hạn"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "Trang xin quyền truy cập {1}. Bạn quyết định trong lời nhắc của trình duyệt.",
   "mHuellaLocal": "Một chương trình của {1} đã tra {2}, dữ liệu dùng để nhận ra thiết bị của bạn.",
   "mCookieVista": "{1} đã cố đặt cookie của công ty khác để nhận ra bạn trên nhiều trang hơn.",
-  "nCortadas": "{1} đã cắt"
+  "nCortadas": "{1} đã cắt",
+  "mRele": "Relay: {1}"
  }
 }

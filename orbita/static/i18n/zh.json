@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "只传递密封的字节，不保存任何内容",
   "verificada": "已验证",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "聊天、语音和视频通话以及文件，在两个浏览器之间端到端加密。服务器不保存任何内容。",
-  "Relé: {1}": "中继：{1}"
+  "Relé: {1}": "中继：{1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "浏览器之间的端到端加密。我们的服务器不保存任何消息或文件。",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "聊天、语音和视频通话以及文件，在两个浏览器之间端到端加密。GUARDIANA 的中继只转发它无法解密的加密帧：它看到的是连接数据，而非内容，并且不保存历史记录。“销毁”会在此处删除对话，并请求另一个浏览器一并删除。",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "通过可信渠道发送此链接（或展示代码）：任何拥有该链接的人都可以加入。秘密在“#”之后传输，浏览器不会将其发送到我们的服务器。",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "如果你们两人通过另一种方式（电话、当面）核对了同一个号码，就说明你们在没有中间人的情况下通话。此时请勾选“已验证”。",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "转发它无法解密的加密帧；看到连接和流量，而非内容；不保存历史记录",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "在两个浏览器之间加密并由中继传输：任何参与者都看不到对方的 IP 地址（中继则能看到双方）。",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "对话在此处删除，并请求对方的浏览器将其删除（如果对方在线；否则在其加入后立即删除）。它无法触及对方已经保存到磁盘上的内容。此操作无法撤销。",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "对话已在此处销毁；对方已收到删除指令。",
+  "Qué protege y qué no": "它保护什么，不保护什么",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "这不是匿名：中继会看到你的 IP 地址、房间和流量，而非内容。",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "你的身份存在于此浏览器中：如果你清除网站数据或更换设备，身份将丢失。",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "收到的文件会保留在此浏览器中，不受我们的加密保护；“销毁”无法触及已经保存到磁盘上的内容。",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "任何加密都无法保护已被入侵的设备或浏览器。此版本并非抗量子，也未经第三方审计。",
+  "Límites": "限制",
+  "Ver límites": "查看限制"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "网站请求访问{1}。请在浏览器提示中决定。",
   "mHuellaLocal": "来自 {1} 的程序查询了{2}，这是用于识别你设备的数据。",
   "mCookieVista": "{1} 试图放置其他公司的 Cookie，以便在更多网站上识别你。",
-  "nCortadas": "已切断 {1} 个"
+  "nCortadas": "已切断 {1} 个",
+  "mRele": "中继：{1}"
  }
 }

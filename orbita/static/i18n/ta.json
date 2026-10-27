@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "முத்திரையிடப்பட்ட பைட்டுகளை மட்டுமே கடத்துகிறது, எதையும் சேமிப்பதில்லை",
   "verificada": "சரிபார்க்கப்பட்டது",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "அரட்டை, குரல் மற்றும் வீடியோ அழைப்புகள் மற்றும் கோப்புகள், இரண்டு உலாவிகளுக்கு இடையே முழுமையாக மறைகுறியாக்கப்பட்டவை. சேவையகங்களில் எதுவும் சேமிக்கப்படுவதில்லை.",
-  "Relé: {1}": "ரிலே: {1}"
+  "Relé: {1}": "ரிலே: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "உலாவிகளுக்கு இடையே முனைமுதல் முனைவரை குறியாக்கம். எங்கள் சேவையகங்கள் செய்திகளையோ கோப்புகளையோ சேமிக்காது.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "அரட்டை, குரல் மற்றும் வீடியோ அழைப்புகள் மற்றும் கோப்புகள், இரண்டு உலாவிகளுக்கு இடையே முனைமுதல் முனைவரை குறியாக்கம் செய்யப்படுகின்றன. GUARDIANA இன் ரிலே, தன்னால் மறைகுறியாக்க முடியாத குறியாக்கப்பட்ட சட்டகங்களை மட்டுமே அனுப்புகிறது: அது இணைப்புத் தரவைப் பார்க்கிறது, உள்ளடக்கத்தை அல்ல, மேலும் வரலாற்றை சேமிக்காது. “அழி” இங்கே உரையாடலை நீக்குகிறது, மற்ற உலாவியிலும் நீக்கக் கோருகிறது.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "இந்த இணைப்பை (அல்லது குறியீட்டைக் காட்டி) நம்பகமான வழியில் அனுப்புங்கள்: இணைப்பு வைத்திருப்பவர் யாரும் சேரலாம். ரகசியம் “#” க்குப் பிறகு பயணிக்கிறது, அதை உலாவி எங்கள் சேவையகத்திற்கு அனுப்புவதில்லை.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "நீங்கள் இருவரும் அதே எண்ணை வேறு வழியில் (தொலைபேசி, நேரில்) சரிபார்த்தால், இடைத்தரகர் இல்லாமல் பேசுகிறீர்கள். அப்போது “சரிபார்க்கப்பட்டது” என்பதைக் குறிக்கவும்.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "தன்னால் மறைகுறியாக்க முடியாத குறியாக்கப்பட்ட சட்டகங்களை அனுப்புகிறது; இணைப்பையும் அளவையும் பார்க்கிறது, உள்ளடக்கத்தை அல்ல; வரலாற்றை சேமிக்காது",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "இரண்டு உலாவிகளுக்கு இடையே குறியாக்கம் செய்யப்பட்டு ரிலே மூலம் கொண்டு செல்லப்படுகின்றன: எந்தப் பங்கேற்பாளரும் மற்றவரின் IP முகவரியைப் பார்ப்பதில்லை (ரிலே இரண்டையும் பார்க்கிறது).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "இது இங்கே நீக்கப்படுகிறது, மற்ற நபரின் உலாவியிடம் நீக்கக் கோரப்படுகிறது (அவர் இணைக்கப்பட்டிருந்தால்; இல்லையேல் அவர் சேர்ந்தவுடன்). அவர் ஏற்கெனவே தம் வட்டில் சேமித்ததை இது அடைவதில்லை. இதை மீட்டெடுக்க முடியாது.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "உரையாடல் இங்கே அழிக்கப்பட்டது; மற்ற நபர் நீக்குக் கட்டளையைப் பெற்றுள்ளார்.",
+  "Qué protege y qué no": "இது எதைப் பாதுகாக்கிறது, எதைப் பாதுகாக்காது",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "இது அநாமதேயம் அல்ல: ரிலே உங்கள் IP முகவரி, அறை மற்றும் போக்குவரத்தின் அளவைப் பார்க்கிறது, உள்ளடக்கத்தை அல்ல.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "உங்கள் அடையாளம் இந்த உலாவியில் வாழ்கிறது: தளத்தின் தரவை நீக்கினால் அல்லது சாதனத்தை மாற்றினால் அது இழக்கப்படும்.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "பெறப்பட்ட கோப்புகள் எங்கள் குறியாக்கம் இல்லாமல் இந்த உலாவியில் இருக்கும்; ஏற்கெனவே வட்டில் சேமிக்கப்பட்டதை “அழி” அடைவதில்லை.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "எந்தக் குறியாக்கமும் சமரசம் செய்யப்பட்ட சாதனத்தையோ உலாவியையோ பாதுகாக்காது. இந்தப் பதிப்பு பிந்தைய குவாண்டம் அல்ல, மூன்றாம் தரப்பினரால் தணிக்கையும் செய்யப்படவில்லை.",
+  "Límites": "வரம்புகள்",
+  "Ver límites": "வரம்புகளைக் காண்க"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "தளம் {1} அணுகலைக் கேட்டது. உலாவியின் கோரிக்கையில் நீங்கள் முடிவு செய்யுங்கள்.",
   "mHuellaLocal": "{1} இன் ஒரு நிரல் {2} ஐச் சரிபார்த்தது; இது உங்கள் சாதனத்தை அடையாளம் காணப் பயன்படும் தரவு.",
   "mCookieVista": "{1} மற்ற தளங்களில் உங்களை அடையாளம் காண வேறு நிறுவனத்தின் குக்கீயை வைக்க முயன்றது.",
-  "nCortadas": "{1} துண்டிக்கப்பட்டன"
+  "nCortadas": "{1} துண்டிக்கப்பட்டன",
+  "mRele": "ரிலே: {1}"
  }
 }

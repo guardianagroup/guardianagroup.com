@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "len odovzdáva zapečatené bajty a nič neukladá",
   "verificada": "overená",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, hlasové a videohovory a súbory, šifrované end-to-end medzi dvoma prehliadačmi. Na serveroch sa nič neukladá.",
-  "Relé: {1}": "Relé: {1}"
+  "Relé: {1}": "Relé: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Koncové šifrovanie medzi prehliadačmi. Naše servery neukladajú žiadne správy ani súbory.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Chat, hlasové a videohovory a súbory, koncovo šifrované medzi dvoma prehliadačmi. Relay GUARDIANA iba preposiela šifrované rámce, ktoré nedokáže dešifrovať: vidí údaje o pripojení, nie obsah, a neukladá žiadnu históriu. „Zničiť“ zmaže konverzáciu tu a požiada druhý prehliadač o jej zmazanie.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Pošlite tento odkaz (alebo ukážte kód) cez dôveryhodný kanál: pripojiť sa môže každý, kto má odkaz. Tajomstvo cestuje za znakom „#“, ktorý prehliadač neodosiela na náš server.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Ak obaja overíte rovnaké číslo inou cestou (telefonicky, osobne), hovoríte bez sprostredkovateľa. Potom označte „Overené“.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "preposiela šifrované rámce, ktoré nedokáže dešifrovať; vidí pripojenie a objem, nie obsah; neukladá žiadnu históriu",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Šifrované medzi dvoma prehliadačmi a prenášané relayom: žiadny účastník nevidí IP adresu toho druhého (relay vidí obe).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Zmaže sa tu a prehliadač druhej osoby je požiadaný o zmazanie (ak je pripojený; inak hneď, ako sa pripojí). Nedosiahne na to, čo si už uložila na svoj disk. Nedá sa vrátiť späť.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Konverzácia tu zničená; druhá osoba dostala príkaz na zmazanie.",
+  "Qué protege y qué no": "Čo chráni a čo nie",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Nie je to anonymita: relay vidí vašu IP adresu, miestnosť a objem prevádzky, nie obsah.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Vaša identita žije v tomto prehliadači: stratí sa, ak vymažete údaje stránky alebo zmeníte zariadenie.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Prijaté súbory zostávajú v tomto prehliadači bez nášho šifrovania; „Zničiť“ nedosiahne na to, čo už bolo uložené na disk.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Žiadne šifrovanie neochráni napadnuté zariadenie alebo prehliadač. Táto verzia nie je postkvantová ani nebola auditovaná tretími stranami.",
+  "Límites": "Obmedzenia",
+  "Ver límites": "Zobraziť obmedzenia"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Web požiadal o prístup k {1}. Rozhodnite v otázke prehliadača.",
   "mHuellaLocal": "Program z {1} sa opýtal na {2}, údaj slúžiaci na rozpoznanie vášho zariadenia.",
   "mCookieVista": "{1} sa pokúsil uložiť cookie inej firmy, aby vás spoznal na ďalších weboch.",
-  "nCortadas": "{1} odrezané"
+  "nCortadas": "{1} odrezané",
+  "mRele": "Relé: {1}"
  }
 }

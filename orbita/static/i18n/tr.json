@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "yalnızca mühürlü baytları iletir ve hiçbir şey saklamaz",
   "verificada": "doğrulandı",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "İki tarayıcı arasında uçtan uca şifreli sohbet, sesli ve görüntülü aramalar ve dosyalar. Sunucularda hiçbir şey saklanmaz.",
-  "Relé: {1}": "Aktarıcı: {1}"
+  "Relé: {1}": "Aktarıcı: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Tarayıcılar arasında uçtan uca şifreleme. Sunucularımız ne mesaj ne de dosya saklar.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Sohbet, sesli ve görüntülü aramalar ve dosyalar, iki tarayıcı arasında uçtan uca şifrelenir. GUARDIANA'nın rölesi yalnızca çözemediği şifreli çerçeveleri iletir: bağlantı verilerini görür, içeriği değil, ve geçmiş tutmaz. “Yok et” konuşmayı burada siler ve diğer tarayıcıdan silmesini ister.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Bu bağlantıyı (veya kodu göster) güvendiğin bir kanaldan gönder: bağlantıya sahip olan herkes katılabilir. Sır “#” işaretinden sonra yolculuk eder; tarayıcı bunu sunucumuza göndermez.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "İkiniz de aynı numarayı başka bir yoldan (telefon, yüz yüze) doğrularsanız, aracısız konuşuyorsunuz demektir. O zaman “Doğrulandı” olarak işaretle.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "çözemediği şifreli çerçeveleri iletir; bağlantıyı ve hacmi görür, içeriği değil; geçmiş tutmaz",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "İki tarayıcı arasında şifrelenir ve röle tarafından taşınır: hiçbir katılımcı diğerinin IP adresini görmez (röle ikisini de görür).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Burada silinir ve diğer kişinin tarayıcısından silmesi istenir (bağlıysa; değilse katılır katılmaz). Onun diskine zaten kaydettiğine ulaşmaz. Geri alınamaz.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Konuşma burada yok edildi; diğer kişi silme emrini aldı.",
+  "Qué protege y qué no": "Neyi koruduğu ve neyi korumadığı",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Bu anonimlik değildir: röle IP adresini, odayı ve trafik hacmini görür, içeriği değil.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Kimliğin bu tarayıcıda yaşar: site verilerini silersen veya cihaz değiştirirsen kaybolur.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Alınan dosyalar şifrelememiz olmadan bu tarayıcıda kalır; “Yok et” bir diske zaten kaydedilmiş olana ulaşmaz.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Hiçbir şifreleme ele geçirilmiş bir cihazı veya tarayıcıyı korumaz. Bu sürüm kuantum sonrası değildir ve üçüncü taraflarca denetlenmemiştir.",
+  "Límites": "Sınırlar",
+  "Ver límites": "Sınırları gör"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "Site {1} erişimi istedi. Tarayıcı uyarısında sen karar ver.",
   "mHuellaLocal": "{1} kaynaklı bir program, cihazını tanımaya yarayan {2} verisini sorguladı.",
   "mCookieVista": "{1}, seni başka sitelerde tanımak için başka bir şirketin çerezini bırakmaya çalıştı.",
-  "nCortadas": "{1} kesildi"
+  "nCortadas": "{1} kesildi",
+  "mRele": "Aktarıcı: {1}"
  }
 }

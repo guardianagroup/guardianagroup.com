@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "sender kun forseglede bytes videre og gemmer ingenting",
   "verificada": "verificeret",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, tale- og videoopkald og filer, end-to-end-krypteret mellem to browsere. Intet gemmes på servere.",
-  "Relé: {1}": "Relæ: {1}"
+  "Relé: {1}": "Relæ: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "End-to-end-kryptering mellem browsere. Vores servere gemmer hverken beskeder eller filer.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Chat, tale- og videoopkald og filer, end-to-end-krypteret mellem to browsere. GUARDIANAs relæ videresender kun krypterede frames, som det ikke kan dekryptere: det ser forbindelsesdata, ikke indhold, og gemmer ingen historik. ”Destruér” sletter samtalen her og beder den anden browser om at slette den.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Send dette link (eller vis koden) via en betroet kanal: enhver med linket kan deltage. Hemmeligheden rejser efter ”#”, som browseren ikke sender til vores server.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Hvis I begge tjekker det samme nummer ad en anden vej (telefon, personligt), taler I uden mellemled. Markér så ”Verificeret”.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "videresender krypterede frames, som det ikke kan dekryptere; ser forbindelse og volumen, ikke indhold; gemmer ingen historik",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Krypteret mellem de to browsere og transporteret af relæet: ingen deltager ser den andens IP-adresse (relæet ser begge).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Den slettes her, og den anden persons browser bliver bedt om at slette den (hvis den er forbundet; ellers så snart den tilslutter sig). Det når ikke det, som allerede er gemt på vedkommendes disk. Det kan ikke fortrydes.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Samtale destrueret her; den anden person har modtaget sletteordren.",
+  "Qué protege y qué no": "Hvad det beskytter, og hvad det ikke gør",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Det er ikke anonymitet: relæet ser din IP-adresse, rummet og trafikmængden, ikke indholdet.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Din identitet lever i denne browser: den går tabt, hvis du sletter webstedets data eller skifter enhed.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Modtagne filer bliver i denne browser uden vores kryptering; ”Destruér” når ikke det, som allerede er gemt på en disk.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Ingen kryptering beskytter en kompromitteret enhed eller browser. Denne version er ikke post-kvante og er ikke revideret af tredjepart.",
+  "Límites": "Grænser",
+  "Ver límites": "Se grænser"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Webstedet bad om adgang til {1}. Du afgør det i browserens prompt.",
   "mHuellaLocal": "Et program fra {1} forespurgte {2}, en oplysning der bruges til at genkende din enhed.",
   "mCookieVista": "{1} forsøgte at sætte en cookie fra et andet firma for at genkende dig på flere websteder.",
-  "nCortadas": "{1} klippet"
+  "nCortadas": "{1} klippet",
+  "mRele": "Relæ: {1}"
  }
 }

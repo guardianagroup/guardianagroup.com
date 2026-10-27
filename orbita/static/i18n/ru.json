@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "лишь передаёт запечатанные байты и ничего не хранит",
   "verificada": "подтверждена",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Чат, голосовые и видеозвонки и файлы со сквозным шифрованием между двумя браузерами. На серверах ничего не хранится.",
-  "Relé: {1}": "Реле: {1}"
+  "Relé: {1}": "Реле: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Сквозное шифрование между браузерами. Наши серверы не хранят ни сообщений, ни файлов.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Чат, голосовые и видеозвонки и файлы, зашифрованные сквозным шифрованием между двумя браузерами. Ретранслятор GUARDIANA лишь пересылает зашифрованные кадры, которые не может расшифровать: он видит данные соединения, а не содержимое, и не хранит историю. «Уничтожить» удаляет разговор здесь и запрашивает удаление в другом браузере.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Отправьте эту ссылку (или покажите код) по доверенному каналу: присоединиться может любой, у кого есть ссылка. Секрет передаётся после «#», который браузер не отправляет на наш сервер.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Если вы оба проверите одно и то же число другим способом (по телефону, лично), вы говорите без посредников. Тогда отметьте «Проверено».",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "пересылает зашифрованные кадры, которые не может расшифровать; видит соединение и объём, а не содержимое; не хранит историю",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Зашифрованы между двумя браузерами и переданы через ретранслятор: ни один участник не видит IP-адрес другого (ретранслятор видит оба).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Он удаляется здесь, а браузер другого человека получает запрос на удаление (если он подключён; если нет — как только подключится). Это не затрагивает то, что он уже сохранил на своём диске. Отменить нельзя.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Разговор уничтожен здесь; другой человек получил команду на удаление.",
+  "Qué protege y qué no": "Что он защищает, а что нет",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Это не анонимность: ретранслятор видит ваш IP-адрес, комнату и объём трафика, а не содержимое.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Ваша личность живёт в этом браузере: она теряется, если вы очистите данные сайта или смените устройство.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Полученные файлы остаются в этом браузере без нашего шифрования; «Уничтожить» не затрагивает то, что уже сохранено на диске.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Никакое шифрование не защитит скомпрометированное устройство или браузер. Эта версия не является постквантовой и не проходила аудит третьих сторон.",
+  "Límites": "Ограничения",
+  "Ver límites": "Показать ограничения"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "Сайт запросил доступ к {1}. Решайте в запросе браузера.",
   "mHuellaLocal": "Программа с {1} запросила {2} — данные, по которым узнают ваше устройство.",
   "mCookieVista": "{1} попытался оставить cookie другой компании, чтобы узнавать вас на других сайтах.",
-  "nCortadas": "{1} обрезано"
+  "nCortadas": "{1} обрезано",
+  "mRele": "Реле: {1}"
  }
 }

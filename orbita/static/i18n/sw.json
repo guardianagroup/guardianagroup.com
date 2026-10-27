@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "hupitisha tu baiti zilizofungwa na haihifadhi chochote",
   "verificada": "imethibitishwa",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Gumzo, simu za sauti na video na faili, zikiwa zimesimbwa kutoka mwisho hadi mwisho kati ya vivinjari viwili. Hakuna kinachohifadhiwa kwenye seva.",
-  "Relé: {1}": "Relay: {1}"
+  "Relé: {1}": "Relay: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Usimbaji fiche wa ncha hadi ncha kati ya vivinjari. Seva zetu hazihifadhi ujumbe wala faili.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Gumzo, simu za sauti na video na faili, zimesimbwa kwa njia fiche ncha hadi ncha kati ya vivinjari viwili. Relei ya GUARDIANA husambaza tu fremu zilizosimbwa ambazo haiwezi kuzisimbua: huona data ya muunganisho, si maudhui, na haihifadhi historia. “Haribu” hufuta mazungumzo hapa na kuomba kivinjari kingine kiyafute.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Tuma kiungo hiki (au onyesha msimbo) kupitia njia unayoiamini: yeyote mwenye kiungo anaweza kujiunga. Siri husafiri baada ya “#”, ambayo kivinjari hakiituma kwa seva yetu.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Mkiangalia nambari ileile kwa njia nyingine (simu, ana kwa ana), mnazungumza bila mpatanishi. Kisha weka alama “Imethibitishwa”.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "husambaza fremu zilizosimbwa ambazo haiwezi kuzisimbua; huona muunganisho na kiasi, si maudhui; haihifadhi historia",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Zimesimbwa kati ya vivinjari viwili na kusafirishwa na relei: hakuna mshiriki anayeona anwani ya IP ya mwingine (relei huona zote mbili).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Yanafutwa hapa na kivinjari cha mtu mwingine huombwa kiyafute (ikiwa kimeunganishwa; kama sivyo, mara tu atakapojiunga). Hayafikii yale ambayo tayari ameyahifadhi kwenye diski yake. Haiwezi kutenduliwa.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Mazungumzo yameharibiwa hapa; mtu mwingine amepokea amri ya kufuta.",
+  "Qué protege y qué no": "Kinacholinda na kisicholinda",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Si kutokujulikana: relei huona anwani yako ya IP, chumba na kiasi cha trafiki, si maudhui.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Utambulisho wako unaishi katika kivinjari hiki: hupotea ukifuta data ya tovuti au ukibadilisha kifaa.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Faili zilizopokewa hubaki katika kivinjari hiki bila usimbaji fiche wetu; “Haribu” haifikii yale ambayo tayari yamehifadhiwa kwenye diski.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Hakuna usimbaji fiche unaolinda kifaa au kivinjari kilichoathiriwa. Toleo hili si la baada ya kwantum wala halijakaguliwa na wahusika wengine.",
+  "Límites": "Mipaka",
+  "Ver límites": "Ona mipaka"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Tovuti imeomba ufikiaji wa {1}. Amua wewe kwenye arifa ya kivinjari.",
   "mHuellaLocal": "Programu kutoka {1} imeuliza {2}, data inayotumika kutambua kifaa chako.",
   "mCookieVista": "{1} ilijaribu kuweka kidakuzi cha kampuni nyingine ili kukutambua kwenye tovuti zaidi.",
-  "nCortadas": "{1} zimekatwa"
+  "nCortadas": "{1} zimekatwa",
+  "mRele": "Relay: {1}"
  }
 }

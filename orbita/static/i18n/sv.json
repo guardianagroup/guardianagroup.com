@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "skickar bara vidare förseglade bytes och sparar ingenting",
   "verificada": "verifierad",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chatt, röst- och videosamtal och filer, totalsträckskrypterade mellan två webbläsare. Inget sparas på servrar.",
-  "Relé: {1}": "Relä: {1}"
+  "Relé: {1}": "Relä: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "End-to-end-kryptering mellan webbläsare. Våra servrar lagrar inga meddelanden eller filer.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Chatt, röst- och videosamtal och filer, end-to-end-krypterade mellan två webbläsare. GUARDIANA:s relä vidarebefordrar bara krypterade ramar som det inte kan dekryptera: det ser anslutningsdata, inte innehåll, och sparar ingen historik. ”Förstör” raderar konversationen här och ber den andra webbläsaren radera den.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Skicka den här länken (eller visa koden) via en betrodd kanal: den som har länken kan gå med. Hemligheten färdas efter ”#”, som webbläsaren inte skickar till vår server.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Om ni båda kontrollerar samma nummer via en annan väg (telefon, personligen) pratar ni utan mellanhänder. Markera då ”Verifierad”.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "vidarebefordrar krypterade ramar som det inte kan dekryptera; ser anslutning och volym, inte innehåll; sparar ingen historik",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Krypterade mellan de två webbläsarna och transporterade av reläet: ingen deltagare ser den andras IP-adress (reläet ser båda).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Den raderas här och den andra personens webbläsare ombeds radera den (om den är ansluten; annars så snart den ansluter). Det når inte det som redan sparats på hens disk. Det går inte att ångra.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Konversationen förstörd här; den andra personen har fått raderingsordern.",
+  "Qué protege y qué no": "Vad det skyddar och inte skyddar",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Det är inte anonymitet: reläet ser din IP-adress, rummet och trafikvolymen, inte innehållet.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Din identitet finns i den här webbläsaren: den går förlorad om du rensar webbplatsens data eller byter enhet.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Mottagna filer stannar i den här webbläsaren utan vår kryptering; ”Förstör” når inte det som redan sparats på en disk.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Ingen kryptering skyddar en komprometterad enhet eller webbläsare. Den här versionen är inte postkvant och har inte granskats av tredje part.",
+  "Límites": "Gränser",
+  "Ver límites": "Visa gränser"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "Webbplatsen bad om åtkomst till {1}. Du avgör i webbläsarens fråga.",
   "mHuellaLocal": "Ett program från {1} frågade efter {2}, en uppgift som används för att känna igen din enhet.",
   "mCookieVista": "{1} försökte sätta en cookie från ett annat företag för att känna igen dig på fler webbplatser.",
-  "nCortadas": "{1} klippta"
+  "nCortadas": "{1} klippta",
+  "mRele": "Relä: {1}"
  }
 }

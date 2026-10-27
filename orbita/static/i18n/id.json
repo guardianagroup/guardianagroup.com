@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "hanya meneruskan byte tersegel dan tidak menyimpan apa pun",
   "verificada": "terverifikasi",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, panggilan suara dan video, serta berkas, terenkripsi end-to-end antara dua browser. Tidak ada yang disimpan di server.",
-  "Relé: {1}": "Relay: {1}"
+  "Relé: {1}": "Relay: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Enkripsi ujung ke ujung antar-browser. Server kami tidak menyimpan pesan maupun berkas.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Obrolan, panggilan suara dan video, serta berkas, dienkripsi ujung ke ujung antara dua browser. Relai GUARDIANA hanya meneruskan bingkai terenkripsi yang tidak bisa didekripsinya: ia melihat data koneksi, bukan konten, dan tidak menyimpan riwayat. “Hancurkan” menghapus percakapan di sini dan meminta browser lain menghapusnya.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Kirim tautan ini (atau tunjukkan kodenya) lewat kanal tepercaya: siapa pun yang punya tautan bisa bergabung. Rahasia itu berjalan setelah “#”, yang tidak dikirim browser ke server kami.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Jika kalian berdua memeriksa nomor yang sama lewat jalur lain (telepon, tatap muka), kalian berbicara tanpa perantara. Lalu tandai “Terverifikasi”.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "meneruskan bingkai terenkripsi yang tidak bisa didekripsinya; melihat koneksi dan volume, bukan konten; tidak menyimpan riwayat",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Dienkripsi antara kedua browser dan diangkut oleh relai: tidak ada peserta yang melihat alamat IP lawannya (relai melihat keduanya).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Percakapan dihapus di sini dan browser orang lain diminta menghapusnya (jika terhubung; jika tidak, begitu ia bergabung). Ini tidak menjangkau apa yang sudah ia simpan di diskanya. Tidak bisa dibatalkan.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Percakapan dihancurkan di sini; orang lain telah menerima perintah hapus.",
+  "Qué protege y qué no": "Apa yang dilindunginya dan apa yang tidak",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Ini bukan anonimitas: relai melihat alamat IP Anda, ruang, dan volume lalu lintas, bukan kontennya.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Identitas Anda hidup di browser ini: identitas hilang jika Anda menghapus data situs atau berganti perangkat.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Berkas yang diterima tetap ada di browser ini tanpa enkripsi kami; “Hancurkan” tidak menjangkau apa yang sudah tersimpan di disk.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Tidak ada enkripsi yang melindungi perangkat atau browser yang telah disusupi. Versi ini bukan pascakuantum dan belum diaudit oleh pihak ketiga.",
+  "Límites": "Batasan",
+  "Ver límites": "Lihat batasan"
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Situs meminta akses ke {1}. Anda yang memutuskan di permintaan peramban.",
   "mHuellaLocal": "Sebuah program dari {1} memeriksa {2}, data yang dipakai untuk mengenali perangkat Anda.",
   "mCookieVista": "{1} mencoba meletakkan cookie perusahaan lain untuk mengenali Anda di situs lain.",
-  "nCortadas": "{1} dipotong"
+  "nCortadas": "{1} dipotong",
+  "mRele": "Relay: {1}"
  }
 }

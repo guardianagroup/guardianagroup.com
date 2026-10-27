@@ -1540,7 +1540,22 @@
   "solo pasa bytes sellados y no guarda nada": "samo prosljeđuje zapečaćene bajtove i ništa ne sprema",
   "verificada": "potvrđen",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, glasovni i videopozivi te datoteke, end-to-end šifrirani između dvaju preglednika. Ništa se ne sprema na poslužiteljima.",
-  "Relé: {1}": "Relej: {1}"
+  "Relé: {1}": "Relej: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Šifriranje s kraja na kraj između preglednika. Naši poslužitelji ne pohranjuju poruke ni datoteke.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Chat, glasovni i videopozivi te datoteke, šifrirani s kraja na kraj između dvaju preglednika. Relej GUARDIANA samo prosljeđuje šifrirane okvire koje ne može dešifrirati: vidi podatke o vezi, ne sadržaj, i ne čuva povijest. „Uništi“ briše razgovor ovdje i traži brisanje u drugom pregledniku.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Pošaljite ovu poveznicu (ili pokažite kôd) pouzdanim kanalom: svatko tko ima poveznicu može se pridružiti. Tajna putuje iza „#“, koju preglednik ne šalje našem poslužitelju.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Ako oboje provjerite isti broj drugim putem (telefonom, uživo), razgovarate bez posrednika. Tada označite „Potvrđeno“.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "prosljeđuje šifrirane okvire koje ne može dešifrirati; vidi vezu i količinu, ne sadržaj; ne čuva povijest",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Šifrirani između dvaju preglednika i preneseni relejem: nijedan sudionik ne vidi IP adresu drugoga (relej vidi obje).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Briše se ovdje i od preglednika druge osobe traži se brisanje (ako je povezana; ako nije, čim se pridruži). Ne doseže ono što je već spremila na svoj disk. Ne može se poništiti.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Razgovor ovdje uništen; druga osoba primila je naredbu za brisanje.",
+  "Qué protege y qué no": "Što štiti, a što ne",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Ovo nije anonimnost: relej vidi vašu IP adresu, sobu i količinu prometa, ne sadržaj.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Vaš identitet živi u ovom pregledniku: gubi se ako izbrišete podatke stranice ili promijenite uređaj.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Primljene datoteke ostaju u ovom pregledniku bez našeg šifriranja; „Uništi“ ne doseže ono što je već spremljeno na disk.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Nijedno šifriranje ne štiti kompromitirani uređaj ili preglednik. Ova verzija nije postkvantna niti su je revidirale treće strane.",
+  "Límites": "Ograničenja",
+  "Ver límites": "Prikaži ograničenja"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",
@@ -1641,6 +1656,7 @@
   "mPermisoNav": "Stranica je zatražila pristup: {1}. Ti odlučuješ u upitu preglednika.",
   "mHuellaLocal": "Program s {1} provjerio je {2}, podatak koji služi za prepoznavanje tvog uređaja.",
   "mCookieVista": "{1} je pokušao ostaviti kolačić druge tvrtke da te prepozna na više stranica.",
-  "nCortadas": "{1} odrezano"
+  "nCortadas": "{1} odrezano",
+  "mRele": "Relej: {1}"
  }
 }

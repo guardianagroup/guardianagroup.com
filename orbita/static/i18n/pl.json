@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "tylko przekazuje zapieczętowane bajty i niczego nie przechowuje",
   "verificada": "zweryfikowana",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Czat, połączenia głosowe i wideo oraz pliki, szyfrowane end-to-end między dwiema przeglądarkami. Nic nie jest zapisywane na serwerach.",
-  "Relé: {1}": "Przekaźnik: {1}"
+  "Relé: {1}": "Przekaźnik: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Szyfrowanie end-to-end między przeglądarkami. Nasze serwery nie przechowują wiadomości ani plików.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Czat, połączenia głosowe i wideo oraz pliki, szyfrowane end-to-end między dwiema przeglądarkami. Przekaźnik GUARDIANA tylko przekazuje zaszyfrowane ramki, których nie potrafi odszyfrować: widzi dane połączenia, nie treść, i nie przechowuje historii. „Zniszcz” usuwa rozmowę tutaj i prosi o usunięcie w drugiej przeglądarce.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Wyślij ten link (lub pokaż kod) zaufanym kanałem: każdy, kto ma link, może dołączyć. Sekret podróżuje po „#”, którego przeglądarka nie wysyła na nasz serwer.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Jeśli oboje sprawdzicie ten sam numer inną drogą (telefonicznie, osobiście), rozmawiacie bez pośredników. Zaznacz wtedy „Zweryfikowana”.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "przekazuje zaszyfrowane ramki, których nie potrafi odszyfrować; widzi połączenie i wolumen, nie treść; nie przechowuje historii",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Zaszyfrowane między dwiema przeglądarkami i przenoszone przez przekaźnik: żaden uczestnik nie widzi adresu IP drugiego (przekaźnik widzi oba).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Jest usuwana tutaj, a przeglądarka drugiej osoby jest proszona o usunięcie (jeśli jest połączona; jeśli nie, to gdy tylko dołączy). Nie sięga tego, co zostało już zapisane na jej dysku. Nie można tego cofnąć.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Rozmowa zniszczona tutaj; druga osoba otrzymała polecenie usunięcia.",
+  "Qué protege y qué no": "Co chroni, a czego nie",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "To nie jest anonimowość: przekaźnik widzi twój adres IP, pokój i wolumen ruchu, nie treść.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Twoja tożsamość żyje w tej przeglądarce: zostaje utracona, jeśli wyczyścisz dane witryny lub zmienisz urządzenie.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Odebrane pliki pozostają w tej przeglądarce bez naszego szyfrowania; „Zniszcz” nie sięga tego, co zostało już zapisane na dysku.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Żadne szyfrowanie nie chroni skompromitowanego urządzenia ani przeglądarki. Ta wersja nie jest postkwantowa ani nie została poddana audytowi przez podmioty trzecie.",
+  "Límites": "Ograniczenia",
+  "Ver límites": "Zobacz ograniczenia"
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "Strona poprosiła o dostęp do {1}. Ty decydujesz w komunikacie przeglądarki.",
   "mHuellaLocal": "Program z {1} sprawdził {2}, daną służącą do rozpoznania twojego urządzenia.",
   "mCookieVista": "{1} próbowało zostawić ciasteczko innej firmy, by rozpoznać cię na innych stronach.",
-  "nCortadas": "{1} odcięte"
+  "nCortadas": "{1} odcięte",
+  "mRele": "Przekaźnik: {1}"
  }
 }

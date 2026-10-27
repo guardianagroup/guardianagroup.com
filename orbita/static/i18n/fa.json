@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "فقط بایت‌های مهروموم‌شده را رد می‌کند و هیچ چیزی را ذخیره نمی‌کند",
   "verificada": "تأیید شده",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "چت، تماس صوتی و تصویری و فایل‌ها، با رمزگذاری سرتاسری بین دو مرورگر. هیچ چیزی روی سرورها ذخیره نمی‌شود.",
-  "Relé: {1}": "رله: {1}"
+  "Relé: {1}": "رله: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "رمزنگاری سرتاسری میان مرورگرها. سرورهای ما هیچ پیام یا فایلی را ذخیره نمی‌کنند.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "گفتگو، تماس‌های صوتی و تصویری و فایل‌ها، به‌صورت سرتاسری میان دو مرورگر رمزنگاری می‌شوند. رله‌ی GUARDIANA فقط قاب‌های رمزنگاری‌شده‌ای را که نمی‌تواند رمزگشایی کند بازارسال می‌کند: داده‌های اتصال را می‌بیند، نه محتوا را، و هیچ تاریخچه‌ای نگه نمی‌دارد. «نابودسازی» گفتگو را اینجا حذف می‌کند و از مرورگر دیگر می‌خواهد آن را حذف کند.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "این پیوند را (یا کد را نشان دهید) از راه یک کانال مورد اعتماد بفرستید: هر کس پیوند را داشته باشد می‌تواند بپیوندد. راز پس از «#» حرکت می‌کند، که مرورگر آن را به سرور ما نمی‌فرستد.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "اگر هر دوی شما همان شماره را از راهی دیگر (تلفن، حضوری) بررسی کنید، بدون واسطه صحبت می‌کنید. آنگاه «تأییدشده» را علامت بزنید.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "قاب‌های رمزنگاری‌شده‌ای را که نمی‌تواند رمزگشایی کند بازارسال می‌کند؛ اتصال و حجم را می‌بیند، نه محتوا را؛ هیچ تاریخچه‌ای نگه نمی‌دارد",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "میان دو مرورگر رمزنگاری و توسط رله منتقل می‌شوند: هیچ شرکت‌کننده‌ای نشانی IP دیگری را نمی‌بیند (رله هر دو را می‌بیند).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "اینجا حذف می‌شود و از مرورگر شخص دیگر خواسته می‌شود آن را حذف کند (اگر متصل باشد؛ وگرنه به‌محض پیوستن). به آنچه او پیش‌تر روی دیسک خود ذخیره کرده دسترسی ندارد. قابل بازگشت نیست.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "گفتگو اینجا نابود شد؛ شخص دیگر فرمان حذف را دریافت کرد.",
+  "Qué protege y qué no": "چه چیزی را محافظت می‌کند و چه چیزی را نه",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "این گمنامی نیست: رله نشانی IP شما، اتاق و حجم ترافیک را می‌بیند، نه محتوا را.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "هویت شما در این مرورگر زندگی می‌کند: اگر داده‌های سایت را پاک کنید یا دستگاه را عوض کنید از بین می‌رود.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "فایل‌های دریافت‌شده بدون رمزنگاری ما در این مرورگر می‌مانند؛ «نابودسازی» به آنچه پیش‌تر روی دیسک ذخیره شده دسترسی ندارد.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "هیچ رمزنگاری‌ای از دستگاه یا مرورگر در معرض خطر محافظت نمی‌کند. این نسخه پساکوانتومی نیست و توسط اشخاص ثالث حسابرسی نشده است.",
+  "Límites": "محدودیت‌ها",
+  "Ver límites": "دیدن محدودیت‌ها"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "سایت دسترسی به {1} را خواست. شما در پیام مرورگر تصمیم بگیرید.",
   "mHuellaLocal": "برنامه‌ای از {1} {2} را بررسی کرد؛ داده‌ای که برای شناسایی دستگاه شما به کار می‌رود.",
   "mCookieVista": "{1} سعی کرد کوکی شرکت دیگری بگذارد تا شما را در سایت‌های دیگر بشناسد.",
-  "nCortadas": "{1} قطع شد"
+  "nCortadas": "{1} قطع شد",
+  "mRele": "رله: {1}"
  }
 }

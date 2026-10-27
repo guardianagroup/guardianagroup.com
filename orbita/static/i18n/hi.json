@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "सिर्फ़ सीलबंद बाइट्स आगे बढ़ाता है और कुछ भी सहेजता नहीं",
   "verificada": "सत्यापित",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "चैट, वॉयस और वीडियो कॉल और फ़ाइलें, दो ब्राउज़रों के बीच एंड-टू-एंड एन्क्रिप्टेड। सर्वर पर कुछ भी सहेजा नहीं जाता।",
-  "Relé: {1}": "रिले: {1}"
+  "Relé: {1}": "रिले: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "ब्राउज़रों के बीच एंड-टू-एंड एन्क्रिप्शन। हमारे सर्वर कोई संदेश या फ़ाइल संग्रहीत नहीं करते।",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "चैट, वॉइस और वीडियो कॉल और फ़ाइलें, दो ब्राउज़रों के बीच एंड-टू-एंड एन्क्रिप्टेड। GUARDIANA का रिले केवल ऐसे एन्क्रिप्टेड फ़्रेम अग्रेषित करता है जिन्हें वह डिक्रिप्ट नहीं कर सकता: वह कनेक्शन डेटा देखता है, सामग्री नहीं, और कोई इतिहास नहीं रखता। “नष्ट करें” यहाँ बातचीत हटा देता है और दूसरे ब्राउज़र से हटाने का अनुरोध करता है।",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "यह लिंक (या कोड दिखाएँ) किसी विश्वसनीय माध्यम से भेजें: जिसके पास लिंक है वह शामिल हो सकता है। रहस्य “#” के बाद यात्रा करता है, जिसे ब्राउज़र हमारे सर्वर को नहीं भेजता।",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "यदि आप दोनों एक ही नंबर को किसी अन्य माध्यम से (फ़ोन, आमने-सामने) जाँच लें, तो आप बिना किसी बिचौलिए के बात कर रहे हैं। तब “सत्यापित” पर निशान लगाएँ।",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "ऐसे एन्क्रिप्टेड फ़्रेम अग्रेषित करता है जिन्हें वह डिक्रिप्ट नहीं कर सकता; कनेक्शन और मात्रा देखता है, सामग्री नहीं; कोई इतिहास नहीं रखता",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "दोनों ब्राउज़रों के बीच एन्क्रिप्टेड और रिले द्वारा पहुँचाई गई: कोई भी प्रतिभागी दूसरे का IP पता नहीं देखता (रिले दोनों को देखता है)।",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "यह यहाँ हटा दी जाती है और दूसरे व्यक्ति के ब्राउज़र से हटाने का अनुरोध किया जाता है (यदि वह जुड़ा हो; नहीं तो जैसे ही वह शामिल हो)। जो उसने पहले ही अपनी डिस्क पर सहेज लिया है, वहाँ तक यह नहीं पहुँचती। इसे पूर्ववत नहीं किया जा सकता।",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "बातचीत यहाँ नष्ट कर दी गई; दूसरे व्यक्ति को हटाने का आदेश मिल गया है।",
+  "Qué protege y qué no": "यह क्या सुरक्षित रखता है और क्या नहीं",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "यह गुमनामी नहीं है: रिले आपका IP पता, कक्ष और ट्रैफ़िक की मात्रा देखता है, सामग्री नहीं।",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "आपकी पहचान इसी ब्राउज़र में रहती है: यदि आप साइट का डेटा मिटा दें या डिवाइस बदल लें तो यह खो जाती है।",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "प्राप्त फ़ाइलें हमारे एन्क्रिप्शन के बिना इसी ब्राउज़र में रहती हैं; “नष्ट करें” उस तक नहीं पहुँचता जो पहले ही डिस्क पर सहेजा जा चुका है।",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "कोई भी एन्क्रिप्शन किसी समझौता किए गए डिवाइस या ब्राउज़र की रक्षा नहीं करता। यह संस्करण पोस्ट-क्वांटम नहीं है और न ही इसका तृतीय पक्षों द्वारा ऑडिट किया गया है।",
+  "Límites": "सीमाएँ",
+  "Ver límites": "सीमाएँ देखें"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "साइट ने {1} तक पहुँच माँगी। ब्राउज़र के संकेत में आप तय करें।",
   "mHuellaLocal": "{1} के एक प्रोग्राम ने {2} देखा, जो आपके डिवाइस को पहचानने के काम आता है।",
   "mCookieVista": "{1} ने दूसरी कंपनी की कुकी छोड़ने की कोशिश की ताकि आपको और साइटों पर पहचाने।",
-  "nCortadas": "{1} काटे गए"
+  "nCortadas": "{1} काटे गए",
+  "mRele": "रिले: {1}"
  }
 }

@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "nagpapasa lang ng mga selyadong byte at walang iniimbak",
   "verificada": "na-verify",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, voice at video call, at mga file, end-to-end encrypted sa pagitan ng dalawang browser. Walang iniimbak sa mga server.",
-  "Relé: {1}": "Relay: {1}"
+  "Relé: {1}": "Relay: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "End-to-end encryption sa pagitan ng mga browser. Ang aming mga server ay hindi nag-iimbak ng mga mensahe o file.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Chat, voice at video call at mga file, naka-end-to-end encryption sa pagitan ng dalawang browser. Ang relay ng GUARDIANA ay nagpapasa lang ng mga naka-encrypt na frame na hindi nito ma-decrypt: nakikita nito ang connection data, hindi ang nilalaman, at wala itong itinatagong history. Binubura ng “Sirain” ang usapan dito at hinihiling sa kabilang browser na burahin din ito.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Ipadala ang link na ito (o ipakita ang code) sa pamamagitan ng mapagkakatiwalaang channel: ang sinumang may link ay maaaring sumali. Ang sikreto ay naglalakbay pagkatapos ng “#”, na hindi ipinapadala ng browser sa aming server.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Kung pareho ninyong susuriin ang parehong numero sa ibang paraan (telepono, harapan), nag-uusap kayo nang walang namamagitan. Pagkatapos ay lagyan ng marka ang “Na-verify”.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "nagpapasa ng mga naka-encrypt na frame na hindi nito ma-decrypt; nakikita ang koneksiyon at dami, hindi ang nilalaman; walang itinatagong history",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Naka-encrypt sa pagitan ng dalawang browser at dinadala ng relay: walang kalahok na nakakakita ng IP address ng isa (nakikita ng relay ang pareho).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Binubura ito dito at hinihiling sa browser ng ibang tao na burahin ito (kung nakakonekta; kung hindi, sa sandaling sumali siya). Hindi nito naaabot ang naisave na niya sa kanyang disk. Hindi ito mababawi.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Nasira ang usapan dito; natanggap ng ibang tao ang utos na pagbura.",
+  "Qué protege y qué no": "Ano ang pinoprotektahan nito at ano ang hindi",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Hindi ito anonymity: nakikita ng relay ang iyong IP address, ang room at ang dami ng trapiko, hindi ang nilalaman.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Ang iyong pagkakakilanlan ay nabubuhay sa browser na ito: mawawala ito kung buburahin mo ang data ng site o magpapalit ng device.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Ang mga natanggap na file ay nananatili sa browser na ito nang walang aming encryption; hindi naaabot ng “Sirain” ang naisave na sa isang disk.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Walang encryption na magpoprotekta sa isang nakompromisong device o browser. Ang bersiyong ito ay hindi post-quantum at hindi pa na-audit ng mga third party.",
+  "Límites": "Mga Limitasyon",
+  "Ver límites": "Tingnan ang mga limitasyon"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Humingi ang site ng access sa {1}. Ikaw ang magpasya sa prompt ng browser.",
   "mHuellaLocal": "May program mula sa {1} na kumonsulta sa {2}, datos na ginagamit para makilala ang iyong device.",
   "mCookieVista": "Sinubukan ng {1} na maglagay ng cookie ng ibang kumpanya para makilala ka sa iba pang site.",
-  "nCortadas": "{1} pinutol"
+  "nCortadas": "{1} pinutol",
+  "mRele": "Relay: {1}"
  }
 }
