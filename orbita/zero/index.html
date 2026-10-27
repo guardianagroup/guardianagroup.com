@@ -6,7 +6,7 @@
 <meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GUARDIANA · ZERO</title>
 <!-- 27 Oct 2026, 11:07 (dueño): la base de NÚCLEO en el navegador: sus letras (IBM Plex Sans) y piezas comunes -->
-<link rel="stylesheet" href="/guardiana.css?v=20261027a">
+<link rel="stylesheet" href="/guardiana.css?v=20261027b">
 <style>
 :root{--bg:#06080C;--steel:#9CC3E4;--white:#F4F6F8;--red:#E07A6C}
 *{box-sizing:border-box}html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--white);font-family:'IBM Plex Sans',"Segoe UI",system-ui,sans-serif}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid var(--steel);outline-offset:3px}button{color:inherit}
@@ -1653,4 +1653,4 @@ function pintaBurbuja(){const R=$('#rburbuja');if(!R)return;R.innerHTML='<div cl
 vistaRadio('radio');pintaRadio();
 requestAnimationFrame(tick);
 })();
-</script><script src="pdf.js?v=20261027d"></script><script src="motor.js?v=20261027b"></script><script src="/orbita/static/red-nucleo.js?v=20261027b"></script><script>(function(){const c=document.getElementById('redZ'),st=document.getElementById('stage');if(!c||!st||!window.RedNucleo)return;let red=null;const pon=()=>{const ver=!st.classList.contains('open')&&!document.hidden;if(ver&&!red)red=RedNucleo(c,{nace:true});else if(!ver&&red){red.para();red=null}};new MutationObserver(pon).observe(st,{attributes:true,attributeFilter:['class']});document.addEventListener('visibilitychange',pon);pon()})();</script></body></html>
+</script><script src="pdf.js?v=20261027d"></script><script src="motor.js?v=20261027b"></script><script src="/orbita/static/red-nucleo.js?v=20261027b"></script><script>(function(){const c=document.getElementById('redZ'),st=document.getElementById('stage');if(!c||!st||!window.RedNucleo)return;let red=null;/* dueño, 27 Oct 2026, 14:36: «el cerebro, el mismo tamaño en toda la web»: en pantalla mide min(26vh, 240px), como en NÚCLEO y Comunicaciones; el escenario de ZERO se escala, así que se divide por su escala; centrado donde estaba (720, 208), sin pasar de 420 px de diseño y, si es grande, un poco más arriba, para que la esfera no toque la barra */const talla=()=>{const s=Math.min(innerWidth/1440,innerHeight/900)||1,obj=Math.min(innerHeight*.26,240),t=Math.round(Math.min(420,obj/s));c.style.width=c.style.height=t+'px';c.style.left=(720-t/2)+'px';c.style.top=(Math.min(208,395-t/2)-t/2)+'px'};talla();addEventListener('resize',talla,{passive:true});const pon=()=>{const ver=!st.classList.contains('open')&&!document.hidden;if(ver&&!red)red=RedNucleo(c,{nace:true});else if(!ver&&red){red.para();red=null}};new MutationObserver(pon).observe(st,{attributes:true,attributeFilter:['class']});document.addEventListener('visibilitychange',pon);pon()})();</script></body></html>
