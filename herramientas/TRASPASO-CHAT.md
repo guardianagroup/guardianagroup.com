@@ -1,6 +1,54 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-## Estado al 27 Oct 2026, 01:50 (Bogotá) — EMPIEZA POR AQUÍ
+## Estado al 27 Oct 2026, 12:00 (Bogotá) — EMPIEZA POR AQUÍ
+
+Resumen en el proyecto de claude.ai «guardiana group», documento `claude/ZERO_ESTADO_27OCT2026.md` (puesto al día a esta hora).
+
+- **Toda la web «en construcción»** (dueño, 09:29):
+  - `/obras.js` es el primer script de cada página (283 por rama; `herramientas/obras.py pon|quita`), con `<noscript>` hacia `/obras.html` (42 idiomas, con la red de NÚCLEO).
+  - Solo pasa quien tiene `localStorage['guardiana-acceso']==='dueno'`. Es una marca no secreta: el código es público y los servidores siguen encendidos.
+  - Quedan fuera de la puerta: obras.html, google*.html, extension/ y zero-motor/.
+- **NÚCLEO es la entrada** (`/orbita/`; `orbita/static/nucleo.js` y `nucleo.css`).
+  - **Portada:**
+    - h1 «Toma el control de tus datos» y «¿Qué deseas hacer?»;
+    - cuatro tarjetas: «Navegar con NÚCLEO» (navegador ZERO), Órbita, Comunicaciones («Chat y archivos encriptados») y «Pídeselo a NÚCLEO»;
+    - arriba a la derecha, «¿Qué es GUARDIANA?», que lleva a `/conocer.html`.
+  - **Sección NÚCLEO** (`#nuc-sala`):
+    - entiende frases con un motor propio, sin IA generativa (`nucleo-frases.js`, ~520 frases; `nucleo-motor.js`);
+    - el resumen en PDF es un PDF de verdad (`orbita/zero/pdf.js`);
+    - no narra: lleva directo;
+    - no abre webs: lleva al navegador ZERO (dueño, 10:55).
+  - **Red compartida** `orbita/static/red-nucleo.js` (`RedNucleo`): gira libre y es la misma en la portada, la sección, Comunicaciones y conocer.html.
+  - **Volver al sitio de donde vienes:** sessionStorage `guardiana-vuelta` (`portada` o `nucleo`) da «Regresar a NÚCLEO» o «Inicio» en Órbita, ZERO, la píldora y Comunicaciones. `/orbita/?nucleo=pide` abre la sección y `?nucleo=0` va al planeta.
+- **Órbita:** la capa se llama «Cables terrestres» y ya no pregunta la ubicación al entrar.
+- **Comunicaciones:**
+  - arriba solo «Crear invitación / Tengo un código»; lo demás va plegado en «Cómo funciona Comunicaciones»;
+  - encriptación postcuántica híbrida: ML-KEM-768 + ECDH P-256, con `pq-mlkem.js` = @noble/post-quantum 0.7.1, verificado contra npm;
+  - **sin la capa postcuántica, la sesión se para hasta que la persona lo acepta**, también en el primer contacto (desde las 11:50). El permiso vale para esa conversación; si ya fue postcuántica, se vuelve a preguntar.
+  - Pruebas: `scratchpad/pq/prueba_e2e3.js`, con el relé `node zero-motor/pruebas/rele.js 8794` y la web en :8799.
+- **«¿Qué es GUARDIANA?» (`conocer.html`) al día** (ronda 56, notas en `agencia-rondas/ronda56/notas.md`).
+  - **Fuera:** IA vigilada, Windows, antivirus, «guardiana verify», Defensa, Modo Hogar, planes con precio, llamadas y «código abierto».
+  - **Portada:** «Mira las conexiones. Decide qué cortar.»
+  - **Historia:** la Radiografía del navegador ZERO. El último capítulo es «Tú decides qué se corta»: el planeta mira al Atlántico y corta la conexión coral (`iCorta`, `tramo()`).
+  - **Servicios:** cuatro, con maquetas.
+  - **Resto de la página:** Comunicaciones con sus límites, «Condiciones», «Abrir Órbita» y el cierre «Toma el control de tus datos».
+  - **Imagen para compartir:** `og-conocer.jpg`.
+- **Agencia:** rondas 52–56 en `herramientas/agencia-rondas/`. Pestañas: ChatGPT tab-11, Gemini tab-1, Astra tab-2 (Playground) y la GUARDIANA del dueño tab-28.
+- **Idiomas:**
+  - NÚCLEO (tr_r55) publicado en 39 idiomas.
+  - Traducción en curso de conocer.html y de 3 textos de Comunicaciones, en `scratchpad/tr_r56c/out` y `out_com`. Van a `i18n/portada/<código>.json` (clave `hid(texto)`, FNV-1a) y a `orbita/static/i18n/`.
+- **Pendiente:**
+  1. Fusionar esas traducciones y publicar.
+  2. Decisiones del dueño:
+     - las Radiografías, ¿dentro de ZERO o por NÚCLEO?;
+     - el servidor de IA (GEX45 + Mistral Small 3) y la voz;
+     - cerrar los servidores durante la obra;
+     - «Encriptación postcuántica híbrida» en la tarjeta de la portada;
+     - la tarjeta «¿Sabías que…?» del planeta.
+  3. `terminos.html` §4–5 todavía hablan de compras, Plus y reembolsos, y no cuadra con «hoy no se cobra nada».
+  4. Los pendientes de antes (abajo).
+
+## Estado al 27 Oct 2026, 01:50 (Bogotá)
 
 Resumen completo en el proyecto de claude.ai «guardiana group», documento `claude/ZERO_ESTADO_27OCT2026.md`. Lo esencial:
 
