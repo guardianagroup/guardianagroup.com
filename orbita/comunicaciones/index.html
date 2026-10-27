@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261026m">
+<link rel="stylesheet" href="app.css?v=20261027a">
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -28,7 +28,7 @@
   <section class="inicio" id="inicio">
     <div class="anillo" aria-hidden="true"></div>
     <h1>Habla sin testigos</h1>
-    <p class="t">Chat y archivos de cualquier tamaño, cifrados de extremo a extremo entre dos equipos. Al terminar, se borra todo.</p>
+    <p class="t">Chat y archivos enormes, cifrados de extremo a extremo entre dos equipos. Al terminar, la conversación se borra en los dos.</p>
 
     <div class="grandes" id="paso-inicio">
       <button type="button" class="grande principal" id="nueva"><b>Crear invitación</b><small>Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
@@ -51,6 +51,86 @@
       <p class="t" id="unir-espera" hidden>Comprobando…</p>
       <div class="fila centro"><button type="button" class="boton" id="unir-cerrar">Cancelar</button><button type="button" class="boton principal" id="unir-ok">Entrar</button></div>
     </div>
+
+    <!-- Para profesionales (27 Oct 2026, ronda 51 de la agencia: solo lo que confirman ChatGPT y Gemini y lo que hace el
+         código hoy; sin llamadas, sin enlaces, sin «cualquier tamaño», sin promesas de cumplimiento legal). Solo se ve en
+         la pantalla de inicio: al crear o escribir un código se oculta. -->
+    <section class="pro" id="pro" aria-labelledby="pro-t">
+      <p class="pro-antetitulo">Para despachos, clínicas y empresas</p>
+      <h2 id="pro-t">Comunicaciones confidenciales, sin complicaciones</h2>
+      <p class="pro-entrada">Envía documentación confidencial a tus clientes y habla con ellos desde el navegador, con cifrado de extremo a extremo. Sin instalar nada, sin cuentas y sin números de teléfono.</p>
+
+      <div class="pro-rejilla">
+        <article class="pro-tarjeta destacada">
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 10.5v7M9.2 14.8 12 17.6l2.8-2.8"/></svg></span>
+          <div>
+            <h3>Archivos enormes, por partes</h3>
+            <p>Expedientes completos, pruebas de imagen o vídeos: viajan en trozos cifrados, sin cargarse enteros en memoria ni guardarse en ningún servidor.</p>
+            <p class="pro-nota">Con Chrome o Edge, quien recibe elige dónde guardarlo y se escribe en su disco según llega. En otros navegadores, hasta 300 MB.</p>
+          </div>
+        </article>
+        <article class="pro-tarjeta">
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><path d="M9 14.5l2 2 4-4"/></svg></span>
+          <h3>Sin cuentas ni instalaciones</h3>
+          <p>Tu cliente no descarga nada, no se registra ni da su teléfono: escribe el código que le das y entra desde su navegador.</p>
+        </article>
+        <article class="pro-tarjeta">
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M12 15v2"/></svg></span>
+          <h3>Cifrado antes de salir</h3>
+          <p>Mensajes y archivos se cifran en tu equipo. Nuestro servidor solo pasa paquetes que no puede leer y no guarda mensajes, nombres ni claves.</p>
+        </article>
+        <article class="pro-tarjeta">
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.6 2.6"/><path d="M9.5 2.5h5"/></svg></span>
+          <h3>Invitaciones de un solo uso</h3>
+          <p>El código de 9 cifras sirve una sola vez y caduca a los 10 minutos; el servidor limita los intentos de adivinarlo.</p>
+        </article>
+        <article class="pro-tarjeta">
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.6-3 8.4-7 10-4-1.6-7-5.4-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <h3>Comprueba con quién hablas</h3>
+          <p>Comparad por teléfono o en persona el número de seguridad de 60 cifras: si coincide, no hay intermediarios entre vuestros equipos.</p>
+        </article>
+        <article class="pro-tarjeta">
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M6.5 7l1 13h9l1-13"/><path d="M9.5 7V4h5v3"/><path d="M10.5 11v5M13.5 11v5"/></svg></span>
+          <h3>Terminar y borrar</h3>
+          <p>Borra la conversación en tu equipo y pide el borrado en el de la otra persona. Lo que haya guardado aparte queda fuera de nuestro alcance.</p>
+        </article>
+      </div>
+
+      <div class="pro-dos">
+        <div class="pro-bloque">
+          <h3>Cómo te protege</h3>
+          <ol class="pro-pasos">
+            <li>Las claves se crean en tu equipo y la parte privada no puede salir de él.</li>
+            <li>Cada sesión estrena claves nuevas.</li>
+            <li>Cada mensaje se cierra con una clave distinta, y la anterior se olvida.</li>
+            <li>El servidor solo ve paquetes cerrados: sabe qué equipos comparten una sala y cuántos datos mueven, no lo que contienen. La sala desaparece al salir la última persona.</li>
+            <li>Con el número de seguridad compruebas que no hay intermediarios.</li>
+          </ol>
+          <details class="pro-ficha">
+            <summary>Ficha técnica para responsables de seguridad</summary>
+            <ul>
+              <li><b>Criptografía</b><span>Web Crypto nativa del navegador, sin librerías de terceros. Identidad con ECDSA P-256 (firma) y ECDH P-256 (acuerdo); claves privadas no exportables.</span></li>
+              <li><b>Establecimiento de sesión</b><span>Presentaciones firmadas y triple acuerdo ECDH (efímera–efímera, identidad–efímera, efímera–identidad) combinado con HKDF-SHA256; material nuevo en cada sesión.</span></li>
+              <li><b>Contenido</b><span>AES-256-GCM, con una clave por mensaje derivada con cadenas HMAC-SHA256; la anterior se descarta.</span></li>
+              <li><b>Archivos</b><span>Trozos de 192 KB cifrados uno a uno; quien envía nunca carga el archivo entero y, con Chrome o Edge, quien recibe lo escribe en disco según llega.</span></li>
+              <li><b>Invitación</b><span>Código de 9 cifras, un solo uso, 10 minutos e intentos limitados. El relé solo guarda un sobre cerrado con una clave derivada del código en el navegador (PBKDF2, 300.000 iteraciones).</span></li>
+              <li><b>Relé y verificación</b><span>El relé no guarda mensajes, nombres ni claves; solo sabe qué conexiones comparten una sala y cuántos bytes mueven. Número de seguridad de 60 cifras para comprobar fuera de banda.</span></li>
+            </ul>
+          </details>
+        </div>
+        <div class="pro-bloque">
+          <h3>Pensado para</h3>
+          <ul class="pro-usos">
+            <li><b>Abogados y notarías</b><span>Contratos, borradores y expedientes con tus clientes, sin pasar por el correo ni obligarles a registrarse en un portal.</span></li>
+            <li><b>Clínicas y consultas</b><span>Informes y pruebas de imagen para tus pacientes por un canal cifrado, tras comprobar el número de seguridad por teléfono.</span></li>
+            <li><b>Gestorías, RR. HH. y empresas</b><span>Nóminas, contratos laborales, auditorías y documentación interna, en conversaciones que borras al terminar.</span></li>
+          </ul>
+          <button type="button" class="boton principal pro-empezar" id="pro-empezar">Crear invitación</button>
+        </div>
+      </div>
+
+      <p class="pro-limite"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>El cifrado protege lo que viaja entre los dos equipos, pero no impide que quien recibe guarde copias o haga capturas, ni protege un equipo ya comprometido. Nuestro servidor ve datos de conexión (dirección IP, hora y volumen), no el contenido.</span></p>
+    </section>
 
   </section>
 
@@ -106,9 +186,9 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261027u"></script>
+<script src="/orbita/static/idioma.js?v=20261027v"></script>
 <script src="cripto.js?v=20261026c"></script>
 <script src="rele.js?v=20261026d"></script>
-<script src="app.js?v=20261026n"></script>
+<script src="app.js?v=20261027a"></script>
 </body>
 </html>
