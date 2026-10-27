@@ -1,6 +1,20 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-## Estado al 27 Oct 2026, 14:00 (Bogotá) — EMPIEZA POR AQUÍ
+## Estado al 27 Oct 2026, 14:30 (Bogotá) — EMPIEZA POR AQUÍ
+
+Lo de las 14:00 y las 12:00 (abajo) sigue valiendo salvo lo que cambia aquí.
+
+- **Multas en su propia página** (dueño, 14:02: «que se abra una página nueva solamente dedicada para las multas»): `/orbita/multas/` (`orbita/multas/index.html` + `pagina.js`, que llama a `GuardianaMultas.pagina()`). La abren el botón rojo «Multas» de arriba a la derecha en NÚCLEO (`?desde=nucleo`) y en la cabecera de Comunicaciones (`?desde=comunicaciones`); «Volver» va atrás en el historial. 67 casos: la ronda 58 ya está dentro (18 nuevos), con la cifra en el formato de cada idioma.
+- **Fuera el «¿Sabías que…?» de Comunicaciones** (dueño, 14:02: «no quiero que pongas ahí el sabías qué»). `sabias.js` y `sabias-comunicaciones.json` siguen en el repositorio, pero la página ya no los carga.
+- **La cuarta tarjeta de NÚCLEO se llama «Habla con NÚCLEO»** (dueño, 14:08). También la maqueta de la portada (clave 570 de `i18n/portada/_claves.json`, en `_usadas.json` en lugar de la 472) y las 39 lenguas de Órbita y de la portada.
+- **«¿Qué puedo pedir?» ordenado** (dueño, 14:12: «muy desordenado… más profesional»): ya no flota sobre todo; ocupa el sitio de la conversación, entre la cabecera y la caja, y esconde las acciones rápidas, que ya están dentro. Seis tarjetas iguales en dos columnas, emparejadas por tamaño (4 y 4, 3 y 3, 7 y 7; una columna por debajo de 700 px), con un icono de línea cada una y una fila por opción con su flecha (girada en árabe, persa, hebreo y urdu). Abierto, el botón de arriba dice «Cerrar»; al enviar algo o elegir una opción se cierra. «Hablar con una persona» pasa al pie, con el correo, y Órbita gana «¿Qué es Órbita?». Prueba: `scratchpad/home/panel-pedir.js`.
+- Versiones: `nucleo.js?v=20261027y`, `nucleo.css?v=20261027s`, `idioma.js?v=20261027p11` (en Órbita, ZERO, Comunicaciones y Multas).
+- **Pendiente:**
+  1. Traducir `orbita/datos/multas.json` a las 39 lenguas (hoy es/en/pt; el resto ve inglés).
+  2. Preguntar al dueño: ZERO solo en el teléfono se ve como un escritorio en pequeño; `terminos.html` §4–5 todavía habla de compras, Plus y reembolsos; `casos.html` sigue con la navegación antigua.
+  3. Lo pendiente de las 12:00 (abajo).
+
+## Estado al 27 Oct 2026, 14:00 (Bogotá)
 
 Lo de las 12:00 (abajo) sigue valiendo salvo lo que cambia aquí.
 
