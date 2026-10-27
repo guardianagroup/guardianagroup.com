@@ -104,6 +104,8 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .gc-archivo .fila .boton{min-height:32px;padding:4px 12px;font-size:12.5px}
 .gc-nota-sistema{margin:10px auto}
 .gc-mensajes li.gc-centro{align-self:center;margin-top:10px}
+.recibo{max-width:min(92%,560px);display:grid;gap:3px;padding:10px 14px;border-radius:12px;border:1px solid rgba(108,203,165,.35);background:rgba(108,203,165,.07);font:400 12.5px/1.4 var(--texto);color:var(--muted)}
+.recibo b{color:var(--ok);font-weight:600;font-size:13px}.recibo span{display:block}
 
 /* ---- hojas ---- */
 .gc-hoja{align-items:center;justify-content:center}

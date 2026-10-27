@@ -268,7 +268,7 @@
       case 'archivo': return recibeAnuncioArchivo(c, j);
       case 'archivo-ack': { const a = c.archivos.get(j.id); if (a && a.envio) { a.ack = Math.max(a.ack, +j.hasta || 0); a.sigue && a.sigue(); } return; }
       case 'archivo-listo': { const a = c.archivos.get(j.id); if (a && a.envio) { a.listo = true; a.sigue && a.sigue(); } return; }
-      case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, (j.ok ? T('Archivo entregado') : T('Archivo no completado')) + ': ' + m.archivo.nombre + (j.ok ? ' · ' + T('comprobado en el otro equipo, íntegro.') : ''), j.ok ? 'bien' : 'mal'); pintaRadio(c); } if (a) c.archivos.delete(j.id); return; }
+      case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, (j.ok ? T('Archivo entregado') : T('Archivo no completado')) + ': ' + m.archivo.nombre + (j.ok ? ' · ' + T('comprobado en el otro equipo, íntegro.') : ''), j.ok ? 'bien' : 'mal'); pintaRadio(c); if (j.ok) await recibo(c, m, +j.seg || 0, +j.trozos || m.archivo.trozos, true); } if (a) c.archivos.delete(j.id); return; }
       case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); } return; }
       case 'llamada': return; // esta versión no tiene llamadas (dueño, 26 Oct 20:01)
       case 'destruir': return destruyeLocal(c, true);
@@ -329,7 +329,7 @@
     // espera «archivo-listo» (la otra persona ha elegido dónde guardarlo o lo recibe en memoria)
     const t0 = Date.now();
     while (!a.listo) { if (a.cancelado || c.estado === 'destruida') return; if (!enLinea(c) || Date.now() - t0 > 10 * 60 * 1000) return falla(c, m); await new Promise((r) => { a.sigue = r; setTimeout(r, 500); }); }
-    const fid = fidDe(m.id);
+    const fid = fidDe(m.id); a.t0 = Date.now();
     for (let i = 0; i < a.trozos; i++) {
       if (a.cancelado || c.estado === 'destruida') return;
       while (i - a.ack >= VENTANA || R.atraso > 3 * 1024 * 1024) { if (!enLinea(c)) return falla(c, m); await new Promise((r) => { a.sigue = r; setTimeout(r, 300); }); if (a.cancelado) return; }
@@ -371,6 +371,7 @@
     let claro; try { claro = await C.abre(a.clave, i, b.subarray(21), b.subarray(0, 21)); } catch (_) { return incidencia(c, m, a, 'Un trozo del archivo no superó la comprobación de integridad: envío cortado.'); }
     const esperado = i < a.trozos - 1 ? TROZO : m.archivo.tam - (a.trozos - 1) * TROZO;
     if (claro.length !== esperado) return incidencia(c, m, a, 'Un trozo del archivo no coincide con lo anunciado: envío cortado.');
+    if (!a.t0) a.t0 = Date.now();
     if (a.partes) { if (a.partes[i]) return; a.partes[i] = claro; a.tengo++; }
     else {
       // al disco, en orden: lo que llega adelantado espera en memoria (como mucho la ventana)
@@ -386,9 +387,11 @@
       if (a.partes) { const blob = new Blob(a.partes, { type: m.archivo.mime }); ok = blob.size === m.archivo.tam; if (ok) await BD.pon('arch', { id: m.id, conv: c.id, blob, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: blob.size }); }
       else { try { await a.escritor.close(); } catch (_) { ok = false; } }
       m.estado = ok ? 'recibido' : 'fallo'; m.archivo.progreso = 1;
+      const seg = Math.max(0.1, (Date.now() - (a.t0 || Date.now())) / 1000);
       vigila(c, ok ? T('Archivo recibido') + ': ' + m.archivo.nombre + ' · ' + a.trozos + ' ' + T('trozos comprobados, íntegro.') : T('Archivo incompleto: ') + m.archivo.nombre, ok ? 'bien' : 'mal');
       await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c);
-      enviaControl(c, { tipo: 'archivo-fin', id: m.id, ok });
+      enviaControl(c, { tipo: 'archivo-fin', id: m.id, ok, seg: Math.round(seg * 10) / 10, trozos: a.trozos });
+      if (ok) await recibo(c, m, seg, a.trozos, false);
       if (ok && !(ACTUAL === c.id && document.visibilityState === 'visible')) avisaSonido();
     }
   }
@@ -399,6 +402,13 @@
     enviaControl(c, { tipo: 'archivo-cancel', id: m.id, por: 'integridad' });
     m.estado = 'fallo'; m.archivo.motivo = T('cortado: datos alterados'); await guardaMensaje(c, m); pintaMensaje(c, m, true);
     await anotaSistema(c, texto); aviso(T(texto)); vigila(c, T(texto), 'mal'); pintaRadio(c);
+  }
+  // Recibo de entrega (dueño, 26 Oct 20:25): aparece solo en el chat cuando el archivo ha llegado entero al otro equipo.
+  const segundos = (x) => (x < 60 ? x.toLocaleString(LOC(), { maximumFractionDigits: 1 }) + ' s' : Math.floor(x / 60) + ' min ' + Math.round(x % 60) + ' s');
+  async function recibo(c, m, seg, trozos, entregado) {
+    const texto = (entregado ? T('Recibo de entrega') : T('Recibo de recepción')) + ' · ' + m.archivo.nombre + ' · ' + tamano(m.archivo.tam) + ' · ' + T('en') + ' ' + segundos(seg) + ' · ' + trozos + ' ' + T('trozos comprobados') + ' · ' + T('cifrado de extremo a extremo: nadie pudo leerlo ni alterarlo por el camino') + ' · ' + T('contenido no analizado: viaja cifrado');
+    const r = { id: uuid(), conv: c.id, t: Date.now(), dir: 'sistema', estado: 'ok', tipo: 'recibo', texto };
+    await guardaMensaje(c, r); c.mensajes.push(r); pintaMensaje(c, r);
   }
   async function abreArchivo(m, guardar) {
     const r = await BD.saca('arch', m.id); if (!r) return aviso(m.archivo.enDisco ? T('Ese archivo se guardó directamente en tu disco, en la carpeta que elegiste.') : T('Este archivo ya no está en este navegador.'));
@@ -552,6 +562,7 @@
     }
     li.dataset.dir = m.dir; li.dataset.t = m.t; li.textContent = '';
     if (m.tipo === 'llamada') { li.className = 'gc-centro'; const l = document.createElement('span'); l.className = 'gc-linea-llamada'; l.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>'; l.append(document.createTextNode(m.texto)); li.append(l); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
+    if (m.tipo === 'recibo') { li.className = 'gc-centro'; const d = document.createElement('div'); d.className = 'recibo'; const partes = String(m.texto).split(' · '); const h = document.createElement('b'); h.textContent = '✓ ' + partes[0]; d.append(h); for (const x of partes.slice(1)) { const sp = document.createElement('span'); sp.textContent = x; d.append(sp); } li.append(d); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
     if (m.dir === 'sistema') { li.className = 'gc-nota-sistema'; li.textContent = T(m.texto); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
     const bur = document.createElement('div'); bur.className = 'gc-burbuja ' + (m.dir === 'mia' ? 'gc-mia' : 'gc-suya') + (li.classList.contains('gc-sigue') ? ' gc-sigue' : '');
     if (m.tipo === 'texto') { const s = document.createElement('span'); s.className = 'gc-texto'; s.append(...enlaza(m.texto)); bur.append(s); }
