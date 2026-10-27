@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261026h">
+<link rel="stylesheet" href="app.css?v=20261026i">
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -59,12 +59,15 @@
       <span class="gc-avatar candado" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
       <div class="gc-quien"><span class="gc-nombre" id="cnombre">Conversación cifrada</span><span class="gc-confianza" id="cconfianza">Esperando a la otra persona…</span></div>
       <button type="button" class="gc-cab-boton gc-escudo-boton" id="escudo" aria-label="Seguridad de esta conversación" title="Seguridad"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></button>
-      <button type="button" class="boton terminar" id="terminar">Terminar</button>
+      <button type="button" class="boton terminar" id="terminar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Terminar</button>
     </header>
     <div class="cuerpo">
     <div class="charla">
     <div class="radio" id="radio" hidden><i></i><span id="radiotxt"></span></div>
-    <ul class="gc-mensajes" id="mensajes"></ul>
+    <div class="lienzo velado" id="lienzo">
+      <ul class="gc-mensajes" id="mensajes"></ul>
+      <button type="button" class="velo-pista" id="velo-pista" aria-label="Mantén pulsado para ver los mensajes"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Mantén pulsado para ver</span></button>
+    </div>
     <div class="gc-enviando" id="enviando" hidden></div>
     <div class="gc-compositor">
       <button type="button" class="gc-redondo" id="adjuntar" aria-label="Enviar un archivo" title="Enviar un archivo (del tamaño que sea)"><svg viewBox="0 0 24 24"><path d="M21 12.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13.5 4.4a3.5 3.5 0 0 1 5 5L10 18a1.5 1.5 0 0 1-2.1-2.1L15.5 8.3"/></svg></button>
@@ -102,9 +105,9 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261027c"></script>
+<script src="/orbita/static/idioma.js?v=20261027d"></script>
 <script src="cripto.js?v=20261026c"></script>
 <script src="rele.js?v=20261026c"></script>
-<script src="app.js?v=20261026f"></script>
+<script src="app.js?v=20261026g"></script>
 </body>
 </html>

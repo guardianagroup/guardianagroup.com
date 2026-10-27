@@ -1487,6 +1487,8 @@
     "trozos comprobados": ["chunks checked", "pedaços verificados"],
     "cifrado de extremo a extremo: nadie pudo leerlo ni alterarlo por el camino": ["end-to-end encrypted: nobody could read or alter it on the way", "cifrado de ponta a ponta: ninguém pôde ler nem alterar no caminho"],
     "contenido no analizado: viaja cifrado": ["content not scanned: it travels encrypted", "conteúdo não analisado: viaja cifrado"],
+    "Mantén pulsado para ver": ["Hold to view", "Mantenha pressionado para ver"],
+    "Mantén pulsado para ver los mensajes": ["Hold to view the messages", "Mantenha pressionado para ver as mensagens"],
     'celda en': ['cell in', 'célula em'],
     'Observar': ['Observe', 'Observar'],
     'observar': ['observe', 'observar'],
