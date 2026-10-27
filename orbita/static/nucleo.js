@@ -284,6 +284,17 @@
   // dueño, 09:53: el chat con NÚCLEO irá más adelante en otro sitio; de momento, la barra es solo el botón que vuelve a la portada
   barra.classList.add('mini');
 
+  // ---------- dueño, 10:02 («que se vea todo limpio»): la portada reparte; al cerrar una sección se vuelve a la portada, salvo
+  // con «Verme en Órbita», que lleva al planeta con tu ficha. El botón de volver dice «Inicio». ----------
+  let verme = 0, estabaDentro = document.body.classList.contains('dentro');
+  addEventListener('message', (e) => { if (e.origin === location.origin && e.data && e.data.tipo === 'orbita-verme') verme = Date.now(); });
+  new MutationObserver(() => {
+    const d = document.body.classList.contains('dentro');
+    if (estabaDentro && !d) setTimeout(() => { if (Date.now() - verme > 1500 && !document.body.classList.contains('dentro')) muestraInicio(true); }, 60);
+    estabaDentro = d;
+  }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  { const vb = document.getElementById('volver'); if (vb) for (const n of vb.childNodes) if (n.nodeType === 3 && n.data.trim() === 'Órbita') n.data = 'Inicio'; }
+
   // ---------- arranque: la primera vez en esta visita, con su nacimiento; al volver en la misma visita, al momento ----------
   let visto = false; try { visto = sessionStorage.getItem('guardiana-nucleo') === '1'; sessionStorage.setItem('guardiana-nucleo', '1'); } catch (_) {}
   if (q.get('nucleo') === '0' || PUERTA_EN_URL) barra.hidden = false; else muestraInicio(visto);
