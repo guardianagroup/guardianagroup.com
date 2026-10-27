@@ -1911,7 +1911,8 @@
   "Ahora": "Сейчас",
   "Esperando a que abras una web": "Ждём, когда вы откроете сайт",
   "Mirando todo lo que pasa en esta web": "Следит за всем, что происходит на этом сайте",
-  "Pregúntale por tus datos en esta web": "Спросите о своих данных на этом сайте"
+  "Pregúntale por tus datos en esta web": "Спросите о своих данных на этом сайте",
+  "Cables terrestres": "Наземные кабели"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

@@ -1910,7 +1910,8 @@
   "Ahora": "Acum",
   "Esperando a que abras una web": "Se așteaptă să deschizi un site",
   "Mirando todo lo que pasa en esta web": "Urmărește tot ce se întâmplă pe acest site",
-  "Pregúntale por tus datos en esta web": "Întreabă-l despre datele tale de pe acest site"
+  "Pregúntale por tus datos en esta web": "Întreabă-l despre datele tale de pe acest site",
+  "Cables terrestres": "Cabluri terestre"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

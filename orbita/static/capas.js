@@ -2361,7 +2361,7 @@
     // 22 Oct 2026, 22:02 (owner): «palabras para que sean entendibles, todo»
     // 23 Oct 2026, 09:17 (owner: «busca las palabras más apropiadas, entendibles y profesionales»): agency round with ChatGPT and Grok
     sub: { titulo: 'Cables submarinos', clases: { gigante: ['Autopistas entre continentes', 'Los cables más potentes: más de 100 Tbit/s.'], grande: ['Grandes rutas', 'Entre 20 y 100 Tbit/s: unen países y regiones.'], regional: ['Cables regionales', 'Menos de 20 Tbit/s: unen islas y países vecinos.'], sinDato: ['Capacidad no publicada', 'Cables en funcionamiento cuya capacidad no han publicado sus propietarios.'], aprox: ['Trazado aproximado', 'Sabemos dónde llega, pero no su recorrido exacto. Línea discontinua.'], previstos: ['Cables en proyecto', 'Anunciados o en construcción; aún no transportan datos. Línea discontinua.'] } },
-    fibra: { titulo: 'Cables por tierra', /* owner, 23 Oct 2026, 22:55: «Cables por tierra, mejor» */ clases: { principal: ['Grandes troncales', 'Rutas de 800 km o más, o compartidas por varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'] , radio: ['Radioenlaces', 'Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.']} },
+    fibra: { titulo: 'Cables terrestres', /* owner, 23 Oct 2026, 22:55: «Cables por tierra, mejor»; 27 Oct, 09:49: «Cables terrestres» */ clases: { principal: ['Grandes troncales', 'Rutas de 800 km o más, o compartidas por varias compañías.'], largo: ['Rutas largas', 'De 400 a 800 km, entre regiones.'], nacional: ['Rutas entre ciudades', 'De 150 a 400 km; aparecen al acercarte.'], regional: ['Enlaces cortos', 'Menos de 150 km, dentro de una zona; aparecen muy de cerca.'] , radio: ['Radioenlaces', 'Cadenas de microondas de torre en torre: donde no hay fibra entre pueblos, y las rutas rápidas de la bolsa.']} },
     puntos: { titulo: 'Puntos de red', clases: { datos: ['Grandes operadores', 'De compañías con 5 centros de datos o más en el mapa.'], pequenos: ['Otros centros de datos', 'De compañías con 1 a 4 centros de datos en el mapa, o sin operador conocido.'], intercambio: ['Puntos de intercambio', 'Donde las redes de distintas compañías se conectan entre sí.'], estaciones: ['Bases y antenas', 'Bases del Ártico y la Antártida, estaciones terrestres de satélites y plataformas petrolíferas donde termina un cable.'] } },
   };
 
@@ -2457,7 +2457,7 @@
     puntos: 'Los centros de datos donde se guarda y se sirve internet',
     sat: 'Los satélites que llevan datos, en tiempo real',
   };
-  const NOMBRE_CAPA = { sub: 'Cables submarinos', fibra: 'Cables por tierra', puntos: 'Centros de datos', sat: 'Satélites' };
+  const NOMBRE_CAPA = { sub: 'Cables submarinos', fibra: 'Cables terrestres', puntos: 'Centros de datos', sat: 'Satélites' };
   let fichaCapa = null, fichaCapaDe = null, fichaCapaT = 0;
   function datosFichaCapa(k) {
     const f = { titulo: T(NOMBRE_CAPA[k]), frase: T(FRASE_CAPA[k]) + '.', cifra: '', unidad: '', filas: [], pie: T('Datos verificados'), encendida: !!estado[k] };

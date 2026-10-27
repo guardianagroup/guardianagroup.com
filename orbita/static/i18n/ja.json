@@ -1911,7 +1911,8 @@
   "Ahora": "現在",
   "Esperando a que abras una web": "サイトを開くのを待っています",
   "Mirando todo lo que pasa en esta web": "このサイトで起きていることをすべて見ています",
-  "Pregúntale por tus datos en esta web": "このサイトでのあなたのデータについて質問してください"
+  "Pregúntale por tus datos en esta web": "このサイトでのあなたのデータについて質問してください",
+  "Cables terrestres": "陸上ケーブル"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

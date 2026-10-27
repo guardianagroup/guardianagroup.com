@@ -1910,7 +1910,8 @@
   "Ahora": "Ngayon",
   "Esperando a que abras una web": "Hinihintay na magbukas ka ng site",
   "Mirando todo lo que pasa en esta web": "Binabantayan ang lahat ng nangyayari sa site na ito",
-  "Pregúntale por tus datos en esta web": "Tanungin ito tungkol sa data mo sa site na ito"
+  "Pregúntale por tus datos en esta web": "Tanungin ito tungkol sa data mo sa site na ito",
+  "Cables terrestres": "Mga kable sa lupa"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

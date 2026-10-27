@@ -1911,7 +1911,8 @@
   "Ahora": "Зараз",
   "Esperando a que abras una web": "Чекаємо, поки ви відкриєте сайт",
   "Mirando todo lo que pasa en esta web": "Стежить за всім, що відбувається на цьому сайті",
-  "Pregúntale por tus datos en esta web": "Запитайте про свої дані на цьому сайті"
+  "Pregúntale por tus datos en esta web": "Запитайте про свої дані на цьому сайті",
+  "Cables terrestres": "Наземні кабелі"
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

@@ -1910,7 +1910,8 @@
   "Ahora": "Nu",
   "Esperando a que abras una web": "Venter på, at du åbner en side",
   "Mirando todo lo que pasa en esta web": "Holder øje med alt, hvad der sker på denne side",
-  "Pregúntale por tus datos en esta web": "Spørg om dine data på denne side"
+  "Pregúntale por tus datos en esta web": "Spørg om dine data på denne side",
+  "Cables terrestres": "Kabler på land"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

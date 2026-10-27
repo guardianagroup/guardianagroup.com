@@ -1911,7 +1911,8 @@
   "Ahora": "الآن",
   "Esperando a que abras una web": "في انتظار أن تفتح موقعًا",
   "Mirando todo lo que pasa en esta web": "مراقبة كل ما يحدث في هذا الموقع",
-  "Pregúntale por tus datos en esta web": "اسأله عن بياناتك في هذا الموقع"
+  "Pregúntale por tus datos en esta web": "اسأله عن بياناتك في هذا الموقع",
+  "Cables terrestres": "الكابلات البرية"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

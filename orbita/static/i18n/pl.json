@@ -1911,7 +1911,8 @@
   "Ahora": "Teraz",
   "Esperando a que abras una web": "Oczekiwanie, aż otworzysz stronę",
   "Mirando todo lo que pasa en esta web": "Obserwuje wszystko, co dzieje się na tej stronie",
-  "Pregúntale por tus datos en esta web": "Zapytaj go o swoje dane na tej stronie"
+  "Pregúntale por tus datos en esta web": "Zapytaj go o swoje dane na tej stronie",
+  "Cables terrestres": "Kable lądowe"
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

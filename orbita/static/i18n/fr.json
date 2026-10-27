@@ -1911,7 +1911,8 @@
   "Ahora": "Maintenant",
   "Esperando a que abras una web": "En attendant que tu ouvres un site",
   "Mirando todo lo que pasa en esta web": "Observe tout ce qui se passe sur ce site",
-  "Pregúntale por tus datos en esta web": "Interroge-le sur tes données sur ce site"
+  "Pregúntale por tus datos en esta web": "Interroge-le sur tes données sur ce site",
+  "Cables terrestres": "Câbles terrestres"
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

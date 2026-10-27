@@ -1910,7 +1910,8 @@
   "Ahora": "Sekarang",
   "Esperando a que abras una web": "Menunggu anda membuka laman",
   "Mirando todo lo que pasa en esta web": "Memerhati semua yang berlaku di laman ini",
-  "Pregúntale por tus datos en esta web": "Tanya tentang data anda di laman ini"
+  "Pregúntale por tus datos en esta web": "Tanya tentang data anda di laman ini",
+  "Cables terrestres": "Kabel darat"
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

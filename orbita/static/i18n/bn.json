@@ -1910,7 +1910,8 @@
   "Ahora": "এখন",
   "Esperando a que abras una web": "আপনার কোনো সাইট খোলার অপেক্ষায়",
   "Mirando todo lo que pasa en esta web": "এই সাইটে যা কিছু ঘটছে সব নজরে রাখছে",
-  "Pregúntale por tus datos en esta web": "এই সাইটে আপনার ডেটা সম্পর্কে জিজ্ঞাসা করুন"
+  "Pregúntale por tus datos en esta web": "এই সাইটে আপনার ডেটা সম্পর্কে জিজ্ঞাসা করুন",
+  "Cables terrestres": "স্থলপথের কেবল"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",
