@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "רק מעביר בייטים חתומים ולא שומר דבר",
   "verificada": "מאומתת",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "צ'אט, שיחות קול ווידאו וקבצים, מוצפנים מקצה לקצה בין שני דפדפנים. שום דבר לא נשמר בשרתים.",
-  "Relé: {1}": "ממסר: {1}"
+  "Relé: {1}": "ממסר: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "הצפנה מקצה לקצה בין דפדפנים. השרתים שלנו אינם שומרים הודעות או קבצים.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "צ'אט, שיחות קוליות ושיחות וידאו וקבצים, מוצפנים מקצה לקצה בין שני דפדפנים. הממסר של GUARDIANA רק מעביר מסגרות מוצפנות שאינו יכול לפענח: הוא רואה נתוני חיבור, לא תוכן, ואינו שומר היסטוריה. “השמדה” מוחקת את השיחה כאן ומבקשת מהדפדפן השני למחוק אותה.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "שלח את הקישור הזה (או הצג את הקוד) בערוץ מהימן: כל מי שיש לו את הקישור יכול להצטרף. הסוד נע אחרי “#”, שהדפדפן אינו שולח לשרת שלנו.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "אם שניכם תבדקו את אותו מספר בדרך אחרת (טלפון, פנים אל פנים), אתם מדברים בלי מתווך. אז סמנו “מאומתת”.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "מעביר מסגרות מוצפנות שאינו יכול לפענח; רואה חיבור ונפח, לא תוכן; אינו שומר היסטוריה",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "מוצפנות בין שני הדפדפנים ומועברות דרך הממסר: אף משתתף אינו רואה את כתובת ה-IP של האחר (הממסר רואה את שתיהן).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "היא נמחקת כאן, ומהדפדפן של האדם האחר מתבקשת מחיקה (אם הוא מחובר; אחרת ברגע שיצטרף). זה לא מגיע למה שהוא כבר שמר בדיסק שלו. לא ניתן לבטל.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "השיחה הושמדה כאן; האדם האחר קיבל את פקודת המחיקה.",
+  "Qué protege y qué no": "מה הוא מגן עליו ומה לא",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "זו אינה אנונימיות: הממסר רואה את כתובת ה-IP שלך, את החדר ואת נפח התעבורה, לא את התוכן.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "הזהות שלך חיה בדפדפן הזה: היא אובדת אם תמחק את נתוני האתר או תחליף מכשיר.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "קבצים שהתקבלו נשארים בדפדפן הזה ללא ההצפנה שלנו; “השמדה” לא מגיעה למה שכבר נשמר בדיסק.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "שום הצפנה אינה מגנה על מכשיר או דפדפן שנפרצו. גרסה זו אינה פוסט-קוונטית ולא עברה ביקורת של צד שלישי.",
+  "Límites": "מגבלות",
+  "Ver límites": "הצג מגבלות"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "האתר ביקש גישה ל-{1}. אתם מחליטים בחלון הדפדפן.",
   "mHuellaLocal": "תוכנית מ-{1} שאלה על {2}, נתון המשמש לזיהוי המכשיר שלכם.",
   "mCookieVista": "{1} ניסה להשאיר עוגייה של חברה אחרת כדי לזהות אתכם באתרים נוספים.",
-  "nCortadas": "{1} נחתכו"
+  "nCortadas": "{1} נחתכו",
+  "mRele": "ממסר: {1}"
  }
 }

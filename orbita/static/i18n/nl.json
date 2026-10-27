@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "geeft alleen verzegelde bytes door en bewaart niets",
   "verificada": "geverifieerd",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, spraak- en videogesprekken en bestanden, end-to-end versleuteld tussen twee browsers. Er wordt niets op servers opgeslagen.",
-  "Relé: {1}": "Relay: {1}"
+  "Relé: {1}": "Relay: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "End-to-end-versleuteling tussen browsers. Onze servers bewaren geen berichten of bestanden.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Chat, spraak- en video-oproepen en bestanden, end-to-end versleuteld tussen twee browsers. De relay van GUARDIANA stuurt alleen versleutelde frames door die hij niet kan ontsleutelen: hij ziet verbindingsgegevens, niet de inhoud, en bewaart geen geschiedenis. “Vernietigen” verwijdert het gesprek hier en vraagt de andere browser het ook te verwijderen.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Stuur deze link (of toon de code) via een vertrouwd kanaal: iedereen met de link kan deelnemen. Het geheim reist achter “#”, die de browser niet naar onze server stuurt.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Als jullie allebei hetzelfde nummer via een ander kanaal controleren (telefoon, persoonlijk), praten jullie zonder tussenpersoon. Vink dan “Geverifieerd” aan.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "stuurt versleutelde frames door die hij niet kan ontsleutelen; ziet verbinding en volume, niet de inhoud; bewaart geen geschiedenis",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Versleuteld tussen de twee browsers en vervoerd door de relay: geen enkele deelnemer ziet het IP-adres van de ander (de relay ziet ze allebei).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Het wordt hier verwijderd en de browser van de andere persoon wordt gevraagd het te verwijderen (als die verbonden is; anders zodra die deelneemt). Het bereikt niet wat die al op de schijf heeft opgeslagen. Dit kan niet ongedaan worden gemaakt.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Gesprek hier vernietigd; de andere persoon heeft de verwijderopdracht ontvangen.",
+  "Qué protege y qué no": "Wat het wel en niet beschermt",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Het is geen anonimiteit: de relay ziet je IP-adres, de ruimte en het verkeersvolume, niet de inhoud.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Je identiteit leeft in deze browser: ze gaat verloren als je de sitegegevens wist of van apparaat wisselt.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Ontvangen bestanden blijven in deze browser zonder onze versleuteling; “Vernietigen” bereikt niet wat al op een schijf is opgeslagen.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Geen enkele versleuteling beschermt een gecompromitteerd apparaat of browser. Deze versie is niet post-quantum en is niet door derden geaudit.",
+  "Límites": "Beperkingen",
+  "Ver límites": "Beperkingen bekijken"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "De site vroeg toegang tot {1}. Jij beslist in de browsermelding.",
   "mHuellaLocal": "Een programma van {1} raadpleegde {2}, een gegeven om je apparaat te herkennen.",
   "mCookieVista": "{1} probeerde een cookie van een ander bedrijf te plaatsen om je op meer sites te herkennen.",
-  "nCortadas": "{1} afgesneden"
+  "nCortadas": "{1} afgesneden",
+  "mRele": "Relay: {1}"
  }
 }

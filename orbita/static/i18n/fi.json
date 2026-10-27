@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "vain välittää sinetöityjä tavuja eikä tallenna mitään",
   "verificada": "vahvistettu",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, ääni- ja videopuhelut sekä tiedostot, päästä päähän salattuina kahden selaimen välillä. Mitään ei tallenneta palvelimille.",
-  "Relé: {1}": "Välityspalvelin: {1}"
+  "Relé: {1}": "Välityspalvelin: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Päästä päähän -salaus selainten välillä. Palvelimemme eivät tallenna viestejä eivätkä tiedostoja.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Chat, ääni- ja videopuhelut ja tiedostot, päästä päähän -salattuina kahden selaimen välillä. GUARDIANAn välityspalvelin vain välittää salattuja kehyksiä, joita se ei voi purkaa: se näkee yhteystiedot, ei sisältöä, eikä tallenna historiaa. ”Tuhoa” poistaa keskustelun täältä ja pyytää toista selainta poistamaan sen.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Lähetä tämä linkki (tai näytä koodi) luotettavan kanavan kautta: kuka tahansa linkin saanut voi liittyä. Salaisuus kulkee merkin ”#” jälkeen, eikä selain lähetä sitä palvelimellemme.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Jos tarkistatte molemmat saman numeron toista kautta (puhelimitse, kasvokkain), puhutte ilman välikäsiä. Merkitse silloin ”Vahvistettu”.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "välittää salattuja kehyksiä, joita se ei voi purkaa; näkee yhteyden ja määrän, ei sisältöä; ei tallenna historiaa",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Salattuina kahden selaimen välillä ja välityspalvelimen kuljettamina: kukaan osallistuja ei näe toisen IP-osoitetta (välityspalvelin näkee molemmat).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Se poistetaan täältä ja toisen henkilön selainta pyydetään poistamaan se (jos se on yhteydessä; muuten heti kun se liittyy). Se ei ulotu siihen, mitä hän on jo tallentanut levylleen. Tätä ei voi peruuttaa.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Keskustelu tuhottu täällä; toinen henkilö on saanut poistokäskyn.",
+  "Qué protege y qué no": "Mitä se suojaa ja mitä ei",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Se ei ole anonymiteettiä: välityspalvelin näkee IP-osoitteesi, huoneen ja liikenteen määrän, ei sisältöä.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Henkilöllisyytesi elää tässä selaimessa: se katoaa, jos poistat sivuston tiedot tai vaihdat laitetta.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Vastaanotetut tiedostot jäävät tähän selaimeen ilman salaustamme; ”Tuhoa” ei ulotu siihen, mitä on jo tallennettu levylle.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Mikään salaus ei suojaa vaarantunutta laitetta tai selainta. Tämä versio ei ole postkvanttinen eikä sitä ole auditoinut kolmas osapuoli.",
+  "Límites": "Rajat",
+  "Ver límites": "Näytä rajat"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Sivusto pyysi pääsyä kohteeseen {1}. Päätä selaimen kysymyksessä.",
   "mHuellaLocal": "Ohjelma lähteestä {1} kysyi tietoa {2}, jota käytetään laitteesi tunnistamiseen.",
   "mCookieVista": "{1} yritti asettaa toisen yrityksen evästeen tunnistaakseen sinut muillakin sivustoilla.",
-  "nCortadas": "{1} katkaistu"
+  "nCortadas": "{1} katkaistu",
+  "mRele": "Välityspalvelin: {1}"
  }
 }

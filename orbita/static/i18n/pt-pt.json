@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "só passa bytes selados e não guarda nada",
   "verificada": "verificada",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, chamadas de voz e vídeo e ficheiros, cifrados de ponta a ponta entre dois navegadores. Nada fica guardado em servidores.",
-  "Relé: {1}": "Relé: {1}"
+  "Relé: {1}": "Relé: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Cifragem de ponta a ponta entre navegadores. Os nossos servidores não guardam mensagens nem ficheiros.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Chat, chamadas de voz e vídeo e ficheiros, cifrados de ponta a ponta entre dois navegadores. O relé da GUARDIANA apenas encaminha tramas cifradas que não consegue decifrar: vê dados de ligação, não conteúdo, e não guarda histórico. «Destruir» apaga a conversa aqui e pede o apagamento no outro navegador.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Envia esta ligação (ou mostra o código) por um canal de confiança: quem tiver a ligação pode entrar. O segredo viaja depois de «#», que o navegador não envia ao nosso servidor.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Se ambos verificarem o mesmo número por outra via (telefone, pessoalmente), estão a falar sem intermediários. Então marca «Verificada».",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "encaminha tramas cifradas que não consegue decifrar; vê ligação e volume, não conteúdo; não guarda histórico",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Cifradas entre os dois navegadores e transportadas pelo relé: nenhum participante vê o endereço IP do outro (o relé vê os dois).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Apaga-se aqui e pede-se o apagamento no navegador da outra pessoa (se estiver ligada; se não, assim que entrar). Não alcança o que ela já guardou no seu disco. Não é possível desfazer.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Conversa destruída aqui; a outra pessoa recebeu a ordem de apagamento.",
+  "Qué protege y qué no": "O que protege e o que não",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Não é anonimato: o relé vê o teu endereço IP, a sala e o volume de tráfego, não o conteúdo.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "A tua identidade vive neste navegador: perde-se se apagares os dados do site ou mudares de equipamento.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Os ficheiros recebidos ficam neste navegador sem a nossa cifragem; «Destruir» não alcança o que já foi guardado num disco.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Nenhuma cifragem protege um equipamento ou navegador comprometido. Esta versão não é pós-quântica nem foi auditada por terceiros.",
+  "Límites": "Limites",
+  "Ver límites": "Ver limites"
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "O site pediu acesso a {1}. Decides tu no aviso do navegador.",
   "mHuellaLocal": "Um programa de {1} consultou {2}, um dado que serve para reconhecer o teu equipamento.",
   "mCookieVista": "{1} tentou deixar um cookie de outra empresa para te reconhecer em mais sites.",
-  "nCortadas": "{1} cortadas"
+  "nCortadas": "{1} cortadas",
+  "mRele": "Relé: {1}"
  }
 }

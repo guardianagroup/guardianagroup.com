@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "hanya menyalurkan bait termeterai dan tidak menyimpan apa-apa",
   "verificada": "disahkan",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Sembang, panggilan suara dan video serta fail, disulitkan hujung ke hujung antara dua pelayar. Tiada apa-apa disimpan di pelayan.",
-  "Relé: {1}": "Relay: {1}"
+  "Relé: {1}": "Relay: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Penyulitan hujung ke hujung antara pelayar. Pelayan kami tidak menyimpan mesej atau fail.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Sembang, panggilan suara dan video serta fail, disulitkan hujung ke hujung antara dua pelayar. Geganti GUARDIANA hanya memajukan bingkai tersulit yang tidak dapat dinyahsulitnya: ia melihat data sambungan, bukan kandungan, dan tidak menyimpan sejarah. “Musnahkan” memadam perbualan di sini dan meminta pelayar satu lagi memadamnya.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Hantar pautan ini (atau tunjukkan kod) melalui saluran yang dipercayai: sesiapa yang ada pautan boleh menyertai. Rahsia itu bergerak selepas “#”, yang tidak dihantar oleh pelayar ke pelayan kami.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Jika kamu berdua menyemak nombor yang sama melalui cara lain (telefon, bersemuka), kamu sedang bercakap tanpa orang tengah. Kemudian tandakan “Disahkan”.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "memajukan bingkai tersulit yang tidak dapat dinyahsulitnya; melihat sambungan dan jumlah, bukan kandungan; tidak menyimpan sejarah",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Disulitkan antara dua pelayar dan diangkut oleh geganti: tiada peserta yang melihat alamat IP peserta lain (geganti melihat kedua-duanya).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Ia dipadam di sini dan pelayar orang lain diminta memadamnya (jika disambungkan; jika tidak, sebaik sahaja dia menyertai). Ia tidak mencapai apa yang sudah disimpannya pada cakeranya. Tidak boleh dibuat asal.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Perbualan dimusnahkan di sini; orang lain telah menerima perintah pemadaman.",
+  "Qué protege y qué no": "Apa yang dilindunginya dan apa yang tidak",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Ini bukan kerahsiaan identiti: geganti melihat alamat IP anda, bilik dan jumlah trafik, bukan kandungan.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Identiti anda hidup dalam pelayar ini: ia hilang jika anda memadam data tapak atau menukar peranti.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Fail yang diterima kekal dalam pelayar ini tanpa penyulitan kami; “Musnahkan” tidak mencapai apa yang sudah disimpan pada cakera.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Tiada penyulitan yang melindungi peranti atau pelayar yang telah dikompromi. Versi ini bukan pascakuantum dan belum diaudit oleh pihak ketiga.",
+  "Límites": "Had",
+  "Ver límites": "Lihat had"
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Laman meminta akses kepada {1}. Anda putuskan dalam gesaan pelayar.",
   "mHuellaLocal": "Satu program daripada {1} menyemak {2}, data yang digunakan untuk mengenali peranti anda.",
   "mCookieVista": "{1} cuba meletakkan kuki syarikat lain untuk mengenali anda di laman lain.",
-  "nCortadas": "{1} dipotong"
+  "nCortadas": "{1} dipotong",
+  "mRele": "Relay: {1}"
  }
 }

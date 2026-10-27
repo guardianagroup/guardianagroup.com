@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "απλώς περνά σφραγισμένα bytes και δεν αποθηκεύει τίποτα",
   "verificada": "επαληθευμένη",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, φωνητικές κλήσεις, βιντεοκλήσεις και αρχεία, με κρυπτογράφηση από άκρο σε άκρο ανάμεσα σε δύο προγράμματα περιήγησης. Τίποτα δεν αποθηκεύεται σε διακομιστές.",
-  "Relé: {1}": "Αναμεταδότης: {1}"
+  "Relé: {1}": "Αναμεταδότης: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Κρυπτογράφηση από άκρο σε άκρο μεταξύ προγραμμάτων περιήγησης. Οι διακομιστές μας δεν αποθηκεύουν μηνύματα ούτε αρχεία.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Συνομιλία, φωνητικές και βιντεοκλήσεις και αρχεία, κρυπτογραφημένα από άκρο σε άκρο μεταξύ δύο προγραμμάτων περιήγησης. Ο αναμεταδότης της GUARDIANA απλώς προωθεί κρυπτογραφημένα πλαίσια που δεν μπορεί να αποκρυπτογραφήσει: βλέπει δεδομένα σύνδεσης, όχι περιεχόμενο, και δεν κρατά ιστορικό. Το «Καταστροφή» διαγράφει τη συνομιλία εδώ και ζητά τη διαγραφή στο άλλο πρόγραμμα περιήγησης.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Στείλτε αυτόν τον σύνδεσμο (ή δείξτε τον κωδικό) μέσω ενός έμπιστου καναλιού: όποιος έχει τον σύνδεσμο μπορεί να συνδεθεί. Το μυστικό ταξιδεύει μετά το «#», το οποίο το πρόγραμμα περιήγησης δεν στέλνει στον διακομιστή μας.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Αν και οι δύο ελέγξετε τον ίδιο αριθμό με άλλο τρόπο (τηλέφωνο, αυτοπροσώπως), μιλάτε χωρίς μεσάζοντες. Τότε σημειώστε «Επαληθευμένη».",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "προωθεί κρυπτογραφημένα πλαίσια που δεν μπορεί να αποκρυπτογραφήσει· βλέπει σύνδεση και όγκο, όχι περιεχόμενο· δεν κρατά ιστορικό",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Κρυπτογραφημένα μεταξύ των δύο προγραμμάτων περιήγησης και μεταφερόμενα από τον αναμεταδότη: κανένας συμμετέχων δεν βλέπει τη διεύθυνση IP του άλλου (ο αναμεταδότης βλέπει και τις δύο).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Διαγράφεται εδώ και ζητείται η διαγραφή στο πρόγραμμα περιήγησης του άλλου ατόμου (αν είναι συνδεδεμένο· αλλιώς μόλις συνδεθεί). Δεν φτάνει σε ό,τι έχει ήδη αποθηκεύσει στον δίσκο του. Δεν μπορεί να αναιρεθεί.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Η συνομιλία καταστράφηκε εδώ· το άλλο άτομο έλαβε την εντολή διαγραφής.",
+  "Qué protege y qué no": "Τι προστατεύει και τι όχι",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Δεν είναι ανωνυμία: ο αναμεταδότης βλέπει τη διεύθυνση IP σας, το δωμάτιο και τον όγκο της κίνησης, όχι το περιεχόμενο.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Η ταυτότητά σας ζει σε αυτό το πρόγραμμα περιήγησης: χάνεται αν διαγράψετε τα δεδομένα του ιστότοπου ή αλλάξετε συσκευή.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Τα αρχεία που λαμβάνονται παραμένουν σε αυτό το πρόγραμμα περιήγησης χωρίς τη δική μας κρυπτογράφηση· το «Καταστροφή» δεν φτάνει σε ό,τι έχει ήδη αποθηκευτεί σε δίσκο.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Καμία κρυπτογράφηση δεν προστατεύει μια παραβιασμένη συσκευή ή πρόγραμμα περιήγησης. Αυτή η έκδοση δεν είναι μετα-κβαντική ούτε έχει ελεγχθεί από τρίτους.",
+  "Límites": "Όρια",
+  "Ver límites": "Δείτε τα όρια"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Ο ιστότοπος ζήτησε πρόσβαση σε {1}. Αποφασίζεις εσύ στο μήνυμα του προγράμματος περιήγησης.",
   "mHuellaLocal": "Ένα πρόγραμμα από {1} ρώτησε για {2}, ένα δεδομένο που χρησιμεύει για την αναγνώριση της συσκευής σου.",
   "mCookieVista": "Το {1} προσπάθησε να αφήσει cookie άλλης εταιρείας για να σε αναγνωρίζει σε περισσότερους ιστότοπους.",
-  "nCortadas": "{1} κομμένες"
+  "nCortadas": "{1} κομμένες",
+  "mRele": "Αναμεταδότης: {1}"
  }
 }

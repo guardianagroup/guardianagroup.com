@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "సీల్ చేసిన బైట్‌లను మాత్రమే పంపుతుంది, ఏమీ నిల్వ చేయదు",
   "verificada": "ధృవీకరించబడింది",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "చాట్, వాయిస్ మరియు వీడియో కాల్‌లు మరియు ఫైళ్లు, రెండు బ్రౌజర్‌ల మధ్య ఎండ్-టు-ఎండ్ ఎన్‌క్రిప్ట్ చేయబడినవి. సర్వర్లలో ఏమీ నిల్వ చేయబడదు.",
-  "Relé: {1}": "రిలే: {1}"
+  "Relé: {1}": "రిలే: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "బ్రౌజర్‌ల మధ్య ఎండ్-టు-ఎండ్ ఎన్‌క్రిప్షన్. మా సర్వర్‌లు సందేశాలను గానీ ఫైల్‌లను గానీ నిల్వ చేయవు.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "చాట్, వాయిస్ మరియు వీడియో కాల్‌లు మరియు ఫైల్‌లు, రెండు బ్రౌజర్‌ల మధ్య ఎండ్-టు-ఎండ్ ఎన్‌క్రిప్ట్ చేయబడతాయి. GUARDIANA రిలే తాను డీక్రిప్ట్ చేయలేని ఎన్‌క్రిప్టెడ్ ఫ్రేమ్‌లను మాత్రమే ఫార్వర్డ్ చేస్తుంది: ఇది కనెక్షన్ డేటాను చూస్తుంది, కంటెంట్‌ను కాదు, మరియు చరిత్రను నిల్వ చేయదు. “నాశనం చేయి” ఇక్కడ సంభాషణను తొలగిస్తుంది మరియు మరో బ్రౌజర్‌లో తొలగించమని అడుగుతుంది.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "ఈ లింక్‌ను (లేదా కోడ్‌ను చూపించి) నమ్మదగిన మార్గం ద్వారా పంపండి: లింక్ ఉన్న ఎవరైనా చేరవచ్చు. రహస్యం “#” తర్వాత ప్రయాణిస్తుంది, దాన్ని బ్రౌజర్ మా సర్వర్‌కు పంపదు.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "మీరిద్దరూ ఒకే సంఖ్యను మరో మార్గంలో (ఫోన్, ముఖాముఖి) సరిచూసుకుంటే, మీరు మధ్యవర్తి లేకుండా మాట్లాడుతున్నారు. అప్పుడు “ధృవీకరించబడింది” అని గుర్తు పెట్టండి.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "తాను డీక్రిప్ట్ చేయలేని ఎన్‌క్రిప్టెడ్ ఫ్రేమ్‌లను ఫార్వర్డ్ చేస్తుంది; కనెక్షన్ మరియు పరిమాణాన్ని చూస్తుంది, కంటెంట్‌ను కాదు; చరిత్రను నిల్వ చేయదు",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "రెండు బ్రౌజర్‌ల మధ్య ఎన్‌క్రిప్ట్ చేయబడి రిలే ద్వారా రవాణా చేయబడతాయి: ఏ పాల్గొనేవారూ మరొకరి IP చిరునామాను చూడరు (రిలే రెండింటినీ చూస్తుంది).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "ఇది ఇక్కడ తొలగించబడుతుంది మరియు మరో వ్యక్తి బ్రౌజర్‌ను తొలగించమని అడుగుతుంది (కనెక్ట్ అయి ఉంటే; లేకపోతే వారు చేరగానే). వారు ఇప్పటికే తమ డిస్క్‌లో సేవ్ చేసిన దాన్ని ఇది చేరదు. దీన్ని రద్దు చేయలేం.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "సంభాషణ ఇక్కడ నాశనం చేయబడింది; మరో వ్యక్తి తొలగింపు ఆదేశాన్ని అందుకున్నారు.",
+  "Qué protege y qué no": "ఇది దేన్ని రక్షిస్తుంది, దేన్ని రక్షించదు",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "ఇది అజ్ఞాతత్వం కాదు: రిలే మీ IP చిరునామా, గది మరియు ట్రాఫిక్ పరిమాణాన్ని చూస్తుంది, కంటెంట్‌ను కాదు.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "మీ గుర్తింపు ఈ బ్రౌజర్‌లో నివసిస్తుంది: మీరు సైట్ డేటాను తొలగిస్తే లేదా పరికరాన్ని మారిస్తే అది కోల్పోతారు.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "అందుకున్న ఫైల్‌లు మా ఎన్‌క్రిప్షన్ లేకుండా ఈ బ్రౌజర్‌లో ఉంటాయి; ఇప్పటికే డిస్క్‌లో సేవ్ చేసిన దాన్ని “నాశనం చేయి” చేరదు.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "ఏ ఎన్‌క్రిప్షన్ కూడా రాజీపడిన పరికరాన్ని లేదా బ్రౌజర్‌ను రక్షించదు. ఈ వెర్షన్ పోస్ట్-క్వాంటం కాదు, మూడవ పక్షాలచే ఆడిట్ చేయబడలేదు.",
+  "Límites": "పరిమితులు",
+  "Ver límites": "పరిమితులను చూడండి"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "సైట్ {1}కు యాక్సెస్ అడిగింది. బ్రౌజర్ ప్రాంప్ట్‌లో మీరు నిర్ణయించండి.",
   "mHuellaLocal": "{1} నుండి ఒక ప్రోగ్రామ్ {2}ను పరిశీలించింది; ఇది మీ పరికరాన్ని గుర్తించడానికి ఉపయోగపడే డేటా.",
   "mCookieVista": "{1} మరిన్ని సైట్లలో మిమ్మల్ని గుర్తించడానికి వేరే కంపెనీ కుకీని ఉంచడానికి ప్రయత్నించింది.",
-  "nCortadas": "{1} కత్తిరించబడ్డాయి"
+  "nCortadas": "{1} కత్తిరించబడ్డాయి",
+  "mRele": "రిలే: {1}"
  }
 }

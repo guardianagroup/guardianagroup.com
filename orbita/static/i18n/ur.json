@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "صرف مہربند بائٹس آگے بڑھاتا ہے اور کچھ بھی محفوظ نہیں کرتا",
   "verificada": "تصدیق شدہ",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "چیٹ، صوتی اور ویڈیو کالز اور فائلیں، دو براؤزرز کے درمیان اینڈ ٹو اینڈ انکرپٹڈ۔ سرورز پر کچھ بھی محفوظ نہیں ہوتا۔",
-  "Relé: {1}": "ریلے: {1}"
+  "Relé: {1}": "ریلے: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "براؤزرز کے درمیان اینڈ ٹو اینڈ خفیہ کاری۔ ہمارے سرور کوئی پیغام یا فائل محفوظ نہیں کرتے۔",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "چیٹ، صوتی اور ویڈیو کالیں اور فائلیں، دو براؤزرز کے درمیان اینڈ ٹو اینڈ خفیہ۔ GUARDIANA کا ریلے صرف ایسے خفیہ فریم آگے بھیجتا ہے جنہیں وہ ڈکرپٹ نہیں کر سکتا: وہ کنکشن کا ڈیٹا دیکھتا ہے، مواد نہیں، اور کوئی تاریخ محفوظ نہیں رکھتا۔ “تباہ کریں” یہاں گفتگو حذف کر دیتا ہے اور دوسرے براؤزر سے حذف کرنے کی درخواست کرتا ہے۔",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "یہ لنک (یا کوڈ دکھائیں) کسی قابلِ اعتماد ذریعے سے بھیجیں: جس کے پاس لنک ہو وہ شامل ہو سکتا ہے۔ راز “#” کے بعد سفر کرتا ہے، جسے براؤزر ہمارے سرور کو نہیں بھیجتا۔",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "اگر آپ دونوں ایک ہی نمبر کسی اور ذریعے سے (فون، آمنے سامنے) جانچ لیں، تو آپ بغیر کسی بیچ والے کے بات کر رہے ہیں۔ پھر “تصدیق شدہ” پر نشان لگائیں۔",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "ایسے خفیہ فریم آگے بھیجتا ہے جنہیں وہ ڈکرپٹ نہیں کر سکتا؛ کنکشن اور حجم دیکھتا ہے، مواد نہیں؛ کوئی تاریخ محفوظ نہیں رکھتا",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "دونوں براؤزرز کے درمیان خفیہ اور ریلے کے ذریعے منتقل: کوئی شریک دوسرے کا IP پتہ نہیں دیکھتا (ریلے دونوں کو دیکھتا ہے)۔",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "یہ یہاں حذف ہو جاتی ہے اور دوسرے شخص کے براؤزر سے حذف کرنے کی درخواست کی جاتی ہے (اگر وہ منسلک ہو؛ ورنہ جیسے ہی وہ شامل ہو)۔ جو کچھ وہ پہلے ہی اپنی ڈسک پر محفوظ کر چکا ہے، یہ وہاں تک نہیں پہنچتی۔ اسے واپس نہیں کیا جا سکتا۔",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "گفتگو یہاں تباہ کر دی گئی؛ دوسرے شخص کو حذف کرنے کا حکم موصول ہو گیا ہے۔",
+  "Qué protege y qué no": "یہ کیا تحفظ دیتا ہے اور کیا نہیں",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "یہ گمنامی نہیں ہے: ریلے آپ کا IP پتہ، کمرہ اور ٹریفک کا حجم دیکھتا ہے، مواد نہیں۔",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "آپ کی شناخت اسی براؤزر میں رہتی ہے: اگر آپ سائٹ کا ڈیٹا صاف کر دیں یا آلہ بدل لیں تو یہ ختم ہو جاتی ہے۔",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "موصولہ فائلیں ہماری خفیہ کاری کے بغیر اسی براؤزر میں رہتی ہیں؛ “تباہ کریں” اس تک نہیں پہنچتا جو پہلے ہی ڈسک پر محفوظ ہو چکا ہو۔",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "کوئی بھی خفیہ کاری کسی سمجھوتہ شدہ آلے یا براؤزر کی حفاظت نہیں کرتی۔ یہ نسخہ پوسٹ کوانٹم نہیں ہے اور نہ ہی اس کا کسی تیسرے فریق نے آڈٹ کیا ہے۔",
+  "Límites": "حدود",
+  "Ver límites": "حدود دیکھیں"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "سائٹ نے {1} تک رسائی مانگی۔ براؤزر کے پیغام میں آپ فیصلہ کریں۔",
   "mHuellaLocal": "{1} کے ایک پروگرام نے {2} دیکھا، جو آپ کے آلے کو پہچاننے کے کام آتا ہے۔",
   "mCookieVista": "{1} نے دوسری کمپنی کی کوکی چھوڑنے کی کوشش کی تاکہ آپ کو مزید سائٹس پر پہچانے۔",
-  "nCortadas": "{1} کاٹے گئے"
+  "nCortadas": "{1} کاٹے گئے",
+  "mRele": "ریلے: {1}"
  }
 }

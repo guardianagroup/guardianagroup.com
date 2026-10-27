@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "само предава запечатани байтове и не пази нищо",
   "verificada": "проверена",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Чат, гласови и видеоразговори и файлове, криптирани от край до край между два браузъра. Нищо не се съхранява на сървъри.",
-  "Relé: {1}": "Реле: {1}"
+  "Relé: {1}": "Реле: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Шифроване от край до край между браузъри. Нашите сървъри не съхраняват съобщения или файлове.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Чат, гласови и видео разговори и файлове, шифровани от край до край между два браузъра. Релето на GUARDIANA само препредава шифровани кадри, които не може да дешифрира: вижда данни за връзката, не съдържанието, и не пази история. „Унищожаване“ изтрива разговора тук и иска изтриване в другия браузър.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Изпратете тази връзка (или покажете кода) по доверен канал: всеки, който има връзката, може да се присъедини. Тайната пътува след „#“, която браузърът не изпраща към нашия сървър.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Ако и двамата проверите едно и също число по друг начин (по телефона, лично), разговаряте без посредник. Тогава отбележете „Потвърдена“.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "препредава шифровани кадри, които не може да дешифрира; вижда връзката и обема, не съдържанието; не пази история",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Шифровани между двата браузъра и пренасяни от релето: нито един участник не вижда IP адреса на другия (релето вижда и двата).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Изтрива се тук и браузърът на другия човек получава искане за изтриване (ако е свързан; ако не — веднага щом се присъедини). Не достига до това, което той вече е запазил на диска си. Не може да се отмени.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Разговорът е унищожен тук; другият човек получи заповедта за изтриване.",
+  "Qué protege y qué no": "Какво защитава и какво не",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Това не е анонимност: релето вижда вашия IP адрес, стаята и обема на трафика, не съдържанието.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Вашата самоличност живее в този браузър: губи се, ако изтриете данните на сайта или смените устройството.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Получените файлове остават в този браузър без нашето шифроване; „Унищожаване“ не достига до това, което вече е запазено на диск.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Никакво шифроване не защитава компрометирано устройство или браузър. Тази версия не е постквантова и не е одитирана от трети страни.",
+  "Límites": "Ограничения",
+  "Ver límites": "Виж ограниченията"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Сайтът поиска достъп до {1}. Ти решаваш в подканата на браузъра.",
   "mHuellaLocal": "Програма от {1} провери {2} — данни, използвани за разпознаване на устройството ти.",
   "mCookieVista": "{1} опита да остави бисквитка на друга компания, за да те разпознава в повече сайтове.",
-  "nCortadas": "{1} прекъснати"
+  "nCortadas": "{1} прекъснати",
+  "mRele": "Реле: {1}"
  }
 }

@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "봉인된 바이트만 전달하고 아무것도 저장하지 않아요",
   "verificada": "확인됨",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "채팅, 음성·영상 통화, 파일을 두 브라우저 사이에서 종단간 암호화해요. 서버에는 아무것도 저장되지 않아요.",
-  "Relé: {1}": "릴레이: {1}"
+  "Relé: {1}": "릴레이: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "브라우저 간 종단 간 암호화. 저희 서버는 메시지나 파일을 저장하지 않습니다.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "채팅, 음성 및 영상 통화, 파일을 두 브라우저 간에 종단 간 암호화합니다. GUARDIANA의 릴레이는 복호화할 수 없는 암호화된 프레임만 전달합니다. 연결 데이터는 보지만 내용은 보지 못하며, 기록을 저장하지 않습니다. “파기”는 여기서 대화를 삭제하고 다른 브라우저에도 삭제를 요청합니다.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "이 링크를 (또는 코드를 보여 주어) 신뢰할 수 있는 경로로 보내세요. 링크를 가진 사람은 누구나 참여할 수 있습니다. 비밀은 “#” 뒤에 실려 이동하며, 브라우저는 이를 저희 서버로 보내지 않습니다.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "두 사람이 같은 번호를 다른 경로(전화, 직접 만나서)로 확인하면 중간자 없이 대화하는 것입니다. 그러면 “확인됨”에 표시하세요.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "복호화할 수 없는 암호화된 프레임을 전달하고, 연결과 트래픽 양은 보지만 내용은 보지 못하며, 기록을 저장하지 않습니다",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "두 브라우저 간에 암호화되어 릴레이를 통해 전송됩니다. 어떤 참가자도 상대방의 IP 주소를 보지 못합니다(릴레이는 둘 다 봅니다).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "여기서 삭제되고 상대방의 브라우저에 삭제가 요청됩니다(연결되어 있으면 즉시, 아니면 참여하는 즉시). 상대방이 이미 디스크에 저장한 것에는 미치지 못합니다. 되돌릴 수 없습니다.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "여기서 대화가 파기되었습니다. 상대방이 삭제 명령을 받았습니다.",
+  "Qué protege y qué no": "무엇을 보호하고 무엇을 보호하지 않는가",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "익명성이 아닙니다. 릴레이는 내용은 아니지만 당신의 IP 주소, 방, 트래픽 양을 봅니다.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "당신의 신원은 이 브라우저에 존재합니다. 사이트 데이터를 지우거나 기기를 바꾸면 사라집니다.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "수신한 파일은 저희 암호화 없이 이 브라우저에 남습니다. “파기”는 이미 디스크에 저장된 것에는 미치지 못합니다.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "어떤 암호화도 침해된 기기나 브라우저는 보호하지 못합니다. 이 버전은 포스트 양자가 아니며 제3자의 감사를 받지 않았습니다.",
+  "Límites": "한계",
+  "Ver límites": "한계 보기"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "사이트가 {1} 접근을 요청했습니다. 브라우저 알림에서 결정하세요.",
   "mHuellaLocal": "{1}의 프로그램이 기기 식별에 쓰이는 {2}을(를) 조회했습니다.",
   "mCookieVista": "{1}이(가) 다른 사이트에서도 당신을 알아보려고 타사 쿠키를 남기려 했습니다.",
-  "nCortadas": "{1}개 차단됨"
+  "nCortadas": "{1}개 차단됨",
+  "mRele": "릴레이: {1}"
  }
 }

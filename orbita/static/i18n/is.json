@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "sendir aðeins áfram innsigluð bæti og geymir ekkert",
   "verificada": "staðfest",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Spjall, radd- og myndsímtöl og skrár, dulkóðað enda á milli frá einum vafra til annars. Ekkert er geymt á netþjónum.",
-  "Relé: {1}": "Endurvarpi: {1}"
+  "Relé: {1}": "Endurvarpi: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Enda-í-enda dulkóðun milli vafra. Þjónar okkar geyma hvorki skilaboð né skrár.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Spjall, radd- og myndsímtöl og skrár, dulkóðuð enda-í-enda milli tveggja vafra. Endurvarpi GUARDIANA áframsendir aðeins dulkóðaða ramma sem hann getur ekki afkóðað: hann sér tengigögn, ekki innihald, og geymir enga sögu. „Eyða“ eyðir samtalinu hér og biður hinn vafrann um að eyða því.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Sendu þennan hlekk (eða sýndu kóðann) um treysta rás: hver sem hefur hlekkinn getur tekið þátt. Leyndarmálið ferðast á eftir „#“, sem vafrinn sendir ekki til þjóns okkar.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Ef þið staðfestið bæði sömu töluna eftir annarri leið (síma, í eigin persónu), þá talið þið án milliliða. Merktu þá við „Staðfest“.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "áframsendir dulkóðaða ramma sem hann getur ekki afkóðað; sér tengingu og umferð, ekki innihald; geymir enga sögu",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Dulkóðuð milli vafranna tveggja og flutt af endurvarpanum: enginn þátttakandi sér IP-tölu hins (endurvarpinn sér báðar).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Því er eytt hér og vafri hins aðilans er beðinn um að eyða því (ef hann er tengdur; annars um leið og hann tengist). Það nær ekki til þess sem þegar hefur verið vistað á diski hans. Þessu er ekki hægt að afturkalla.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Samtali eytt hér; hinn aðilinn hefur fengið eyðingarskipunina.",
+  "Qué protege y qué no": "Hvað það verndar og hvað ekki",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Þetta er ekki nafnleynd: endurvarpinn sér IP-tölu þína, herbergið og umferðarmagnið, ekki innihaldið.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Auðkenni þitt lifir í þessum vafra: það tapast ef þú hreinsar gögn vefsvæðisins eða skiptir um tæki.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Móttekin skjöl verða eftir í þessum vafra án dulkóðunar okkar; „Eyða“ nær ekki til þess sem þegar hefur verið vistað á diski.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Engin dulkóðun verndar tæki eða vafra sem hefur verið brotist inn í. Þessi útgáfa er ekki eftir-skammta og hefur ekki verið endurskoðuð af þriðja aðila.",
+  "Límites": "Takmörk",
+  "Ver límites": "Sjá takmörk"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Vefurinn bað um aðgang að {1}. Þú ákveður í vafraglugganum.",
   "mHuellaLocal": "Forrit frá {1} spurðist fyrir um {2}, gögn sem notuð eru til að þekkja tækið þitt.",
   "mCookieVista": "{1} reyndi að setja vafraköku frá öðru fyrirtæki til að þekkja þig á fleiri vefjum.",
-  "nCortadas": "{1} klippt"
+  "nCortadas": "{1} klippt",
+  "mRele": "Endurvarpi: {1}"
  }
 }

@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "ne fait que transmettre des octets scellés et ne conserve rien",
   "verificada": "vérifiée",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, appels vocaux et vidéo et fichiers, chiffrés de bout en bout entre deux navigateurs. Rien n’est stocké sur des serveurs.",
-  "Relé: {1}": "Relais : {1}"
+  "Relé: {1}": "Relais : {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Chiffrement de bout en bout entre navigateurs. Nos serveurs ne conservent ni messages ni fichiers.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Chat, appels audio et vidéo et fichiers, chiffrés de bout en bout entre deux navigateurs. Le relais de GUARDIANA ne fait que transmettre des trames chiffrées qu'il ne peut pas déchiffrer : il voit les données de connexion, pas le contenu, et ne conserve aucun historique. « Détruire » supprime la conversation ici et demande sa suppression dans l'autre navigateur.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Envoyez ce lien (ou montrez le code) par un canal de confiance : quiconque possède le lien peut rejoindre. Le secret voyage après « # », que le navigateur n'envoie pas à notre serveur.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Si vous vérifiez tous les deux le même numéro par un autre moyen (téléphone, en personne), vous parlez sans intermédiaire. Cochez alors « Vérifiée ».",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "transmet des trames chiffrées qu'il ne peut pas déchiffrer ; voit la connexion et le volume, pas le contenu ; ne conserve aucun historique",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Chiffrés entre les deux navigateurs et transportés par le relais : aucun participant ne voit l'adresse IP de l'autre (le relais, lui, voit les deux).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Elle est supprimée ici et la suppression est demandée au navigateur de l'autre personne (si elle est connectée ; sinon, dès qu'elle se connecte). Cela n'atteint pas ce qu'elle a déjà enregistré sur son disque. C'est irréversible.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Conversation détruite ici ; l'autre personne a reçu l'ordre de suppression.",
+  "Qué protege y qué no": "Ce qu'il protège et ce qu'il ne protège pas",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Ce n'est pas l'anonymat : le relais voit votre adresse IP, le salon et le volume de trafic, pas le contenu.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Votre identité vit dans ce navigateur : elle est perdue si vous effacez les données du site ou changez d'appareil.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Les fichiers reçus restent dans ce navigateur sans notre chiffrement ; « Détruire » n'atteint pas ce qui a déjà été enregistré sur un disque.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Aucun chiffrement ne protège un appareil ou un navigateur compromis. Cette version n'est pas post-quantique et n'a pas été auditée par des tiers.",
+  "Límites": "Limites",
+  "Ver límites": "Voir les limites"
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "Le site a demandé l’accès à {1}. À vous de décider dans l’invite du navigateur.",
   "mHuellaLocal": "Un programme de {1} a consulté {2}, une donnée qui sert à reconnaître votre appareil.",
   "mCookieVista": "{1} a tenté de déposer un cookie d’une autre entreprise pour vous reconnaître sur d’autres sites.",
-  "nCortadas": "{1} coupées"
+  "nCortadas": "{1} coupées",
+  "mRele": "Relais : {1}"
  }
 }

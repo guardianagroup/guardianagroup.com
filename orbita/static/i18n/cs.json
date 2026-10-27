@@ -1541,7 +1541,22 @@
   "solo pasa bytes sellados y no guarda nada": "jen předává zapečetěné bajty a nic neukládá",
   "verificada": "ověřena",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "Chat, hlasové a videohovory a soubory, koncově šifrované mezi dvěma prohlížeči. Na serverech se nic neukládá.",
-  "Relé: {1}": "Relé: {1}"
+  "Relé: {1}": "Relé: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "Koncové šifrování mezi prohlížeči. Naše servery neukládají žádné zprávy ani soubory.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "Chat, hlasové a videohovory a soubory, koncově šifrované mezi dvěma prohlížeči. Relay GUARDIANA pouze přeposílá šifrované rámce, které nedokáže dešifrovat: vidí údaje o připojení, nikoli obsah, a neukládá žádnou historii. „Zničit“ smaže konverzaci zde a požádá druhý prohlížeč o její smazání.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "Pošlete tento odkaz (nebo ukažte kód) důvěryhodným kanálem: připojit se může každý, kdo má odkaz. Tajemství putuje za znakem „#“, který prohlížeč neodesílá na náš server.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "Pokud oba ověříte stejné číslo jinou cestou (telefonicky, osobně), mluvíte bez prostředníka. Pak zaškrtněte „Ověřeno“.",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "přeposílá šifrované rámce, které nedokáže dešifrovat; vidí připojení a objem, nikoli obsah; neukládá žádnou historii",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "Šifrované mezi dvěma prohlížeči a přenášené relayem: žádný účastník nevidí IP adresu toho druhého (relay vidí obě).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "Smaže se zde a prohlížeč druhé osoby je požádán o smazání (pokud je připojen; jinak jakmile se připojí). Nedosáhne na to, co si už uložila na svůj disk. Nelze vzít zpět.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "Konverzace zde zničena; druhá osoba obdržela příkaz ke smazání.",
+  "Qué protege y qué no": "Co chrání a co nechrání",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "Není to anonymita: relay vidí vaši IP adresu, místnost a objem provozu, nikoli obsah.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "Vaše identita žije v tomto prohlížeči: ztratí se, pokud vymažete data webu nebo změníte zařízení.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "Přijaté soubory zůstávají v tomto prohlížeči bez našeho šifrování; „Zničit“ nedosáhne na to, co už bylo uloženo na disk.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "Žádné šifrování neochrání napadené zařízení nebo prohlížeč. Tato verze není postkvantová ani nebyla auditována třetími stranami.",
+  "Límites": "Omezení",
+  "Ver límites": "Zobrazit omezení"
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",
@@ -1642,6 +1657,7 @@
   "mPermisoNav": "Web požádal o přístup k {1}. Rozhodněte v dotazu prohlížeče.",
   "mHuellaLocal": "Program z {1} se dotázal na {2}, údaj sloužící k rozpoznání vašeho zařízení.",
   "mCookieVista": "{1} se pokusil uložit cookie jiné firmy, aby vás poznal na dalších webech.",
-  "nCortadas": "{1} odříznuto"
+  "nCortadas": "{1} odříznuto",
+  "mRele": "Relé: {1}"
  }
 }

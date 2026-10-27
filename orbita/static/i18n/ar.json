@@ -1542,7 +1542,22 @@
   "solo pasa bytes sellados y no guarda nada": "لا يمرر سوى بايتات مختومة ولا يحتفظ بشيء",
   "verificada": "متحقق منها",
   "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. Nada se guarda en servidores.": "دردشة ومكالمات صوتية ومرئية وملفات، مشفّرة من طرف إلى طرف بين متصفحين. لا يُحفظ أي شيء على الخوادم.",
-  "Relé: {1}": "المُرحِّل: {1}"
+  "Relé: {1}": "المُرحِّل: {1}",
+  "Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.": "تشفير من طرف إلى طرف بين المتصفحات. خوادمنا لا تحفظ أي رسائل أو ملفات.",
+  "Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.": "الدردشة والمكالمات الصوتية والمرئية والملفات، مشفَّرة من طرف إلى طرف بين متصفحَين. لا يقوم مُرحِّل GUARDIANA إلا بتمرير الإطارات المشفَّرة التي لا يستطيع فك تشفيرها: فهو يرى بيانات الاتصال لا المحتوى، ولا يحفظ أي سجل. «تدمير» يحذف المحادثة هنا ويطلب حذفها في المتصفح الآخر.",
+  "Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.": "أرسل هذا الرابط (أو اعرض الرمز) عبر قناة موثوقة: يمكن لأي شخص لديه الرابط الانضمام. ينتقل السر بعد «#»، الذي لا يرسله المتصفح إلى خادمنا.",
+  "Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».": "إذا تحققتما كلاكما من الرقم نفسه عبر وسيلة أخرى (الهاتف، وجهًا لوجه)، فأنتما تتحدثان دون وسيط. عندئذٍ ضع علامة «مُحقَّقة».",
+  "encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial": "يُمرِّر الإطارات المشفَّرة التي لا يستطيع فك تشفيرها؛ يرى الاتصال والحجم لا المحتوى؛ لا يحفظ أي سجل",
+  "Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).": "مشفَّرة بين المتصفحَين ومنقولة عبر المُرحِّل: لا يرى أي مشارك عنوان IP الخاص بالآخر (أما المُرحِّل فيرى كليهما).",
+  "Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.": "تُحذف هنا ويُطلب الحذف في متصفح الشخص الآخر (إن كان متصلًا؛ وإلا فبمجرد انضمامه). لا يطال ما سبق أن حفظه على قرصه. لا يمكن التراجع عن ذلك.",
+  "Conversación destruida aquí; la otra persona ha recibido la orden de borrado.": "دُمِّرت المحادثة هنا؛ وقد تلقى الشخص الآخر أمر الحذف.",
+  "Qué protege y qué no": "ما الذي يحميه وما الذي لا يحميه",
+  "No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.": "ليس هذا إخفاءً للهوية: يرى المُرحِّل عنوان IP الخاص بك والغرفة وحجم البيانات، لا المحتوى.",
+  "Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.": "هويتك تعيش في هذا المتصفح: تُفقد إذا مسحت بيانات الموقع أو غيّرت الجهاز.",
+  "Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.": "تبقى الملفات المستلمة في هذا المتصفح دون تشفيرنا؛ «تدمير» لا يطال ما سبق حفظه على القرص.",
+  "Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.": "لا يحمي أي تشفير جهازًا أو متصفحًا مخترَقًا. هذه النسخة ليست ما بعد كمومية ولم تُدقَّق من جهات خارجية.",
+  "Límites": "الحدود",
+  "Ver límites": "عرض الحدود"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",
@@ -1643,6 +1658,7 @@
   "mPermisoNav": "طلب الموقع الوصول إلى {1}. أنت تقرر في تنبيه المتصفح.",
   "mHuellaLocal": "استعلم برنامج من {1} عن {2}، وهو بيان يُستخدم للتعرف على جهازك.",
   "mCookieVista": "حاول {1} وضع ملف تعريف ارتباط لشركة أخرى للتعرف عليك في مواقع أخرى.",
-  "nCortadas": "{1} مقطوعة"
+  "nCortadas": "{1} مقطوعة",
+  "mRele": "المُرحِّل: {1}"
  }
 }
