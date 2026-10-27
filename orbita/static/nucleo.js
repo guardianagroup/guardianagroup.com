@@ -440,7 +440,10 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       + '<div class="ns-guia" id="ns-guia" hidden><button type="button" class="ns-atras" id="ns-atras"><span aria-hidden="true">←</span> Atrás</button>'
       + '<button type="button" class="ns-menu-b" id="ns-menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.4 12 5l8 6.4"/><path d="M6.5 9.6V19h11V9.6"/></svg>Menú principal</button></div>'
       + '</div></div>'
-      + '<div class="ns-pie"><p class="ns-nota">NÚCLEO no guarda lo que eliges.</p></div>';
+      // dueño, 16:47: «dejamos hablar a quien ya sabe lo que quiere» (las dos voces de la ronda 63 lo pedían): la caja de
+      // escribir vuelve, abajo; la guía sigue siendo lo primero
+      + '<div class="ns-pie"><form class="ns-form" id="ns-form" autocomplete="off"><input id="ns-q" type="text" maxlength="200" placeholder="Escribe qué quieres hacer…" aria-label="Habla con NÚCLEO" enterkeyhint="send"><button type="submit">Enviar</button></form>'
+      + '<p class="ns-nota">NÚCLEO entiende peticiones concretas y no guarda lo que le pides.</p></div>';
     document.body.append(s);
     const p = s.querySelector('#ns-panel'), rejilla = p.querySelector('.np-grid');
     for (const [k, g, , ico, ids0] of GRUPOS) {
@@ -462,7 +465,13 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     s.querySelector('#ns-idioma').addEventListener('click', cambiaIdioma);
     s.querySelector('#ns-ayuda').addEventListener('click', () => panel(p.hidden));
     p.addEventListener('scroll', () => bordes(p), { passive: true });
-    s.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!p.hidden) panel(false); else if (pasos.length > 1) atras(); else alInicio(); } });
+    // escrito y no entendido, el texto se queda (seleccionado) para cambiarlo; entendido, se borra
+    s.querySelector('#ns-form').addEventListener('submit', (e) => { e.preventDefault(); const i = s.querySelector('#ns-q'); panel(false); if (escribe(i.value)) i.value = ''; else if (i.value.trim()) { i.focus(); i.select(); } });
+    s.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (e.target && e.target.id === 'ns-q' && e.target.value) { e.target.value = ''; return; } // Escape en la caja: primero la vacía
+      if (!p.hidden) panel(false); else if (pasos.length > 1) atras(); else alInicio();
+    });
     return s;
   }
   // elegir en «¿Qué puedo pedir?» deja el mismo camino que la guía: Menú principal › el grupo › la opción
@@ -558,6 +567,8 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     if (b.parentNode !== c) c.append(b);
     sala.classList.toggle('vacia', pasos.length <= 1);
     migas(); guia();
+    // la caja de escribir dice qué se espera en este paso (el país, si lo pregunta)
+    const q = sala.querySelector('#ns-q'); if (q) q.placeholder = T(modo === 'pais' ? 'Escribe el país' : 'Escribe qué quieres hacer…');
     sala.querySelector('#ns-cuerpo').scrollTop = 0;
     if (!sala.hidden) foco();
   }
@@ -731,16 +742,39 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     if (id === 'borrar-si') { atras(); const p = actual(); if (p && p.id === 'datos') cambia(p, calcula({ id: 'datos' })); aviso(o.t); return; }
     ejecuta(o, { id, l: etiqueta || T(ETQ[id] || id), extra: extra || null });
   }
-  // sin caja de escribir (dueño, 15:38); se queda para quien llame a NÚCLEO desde otra parte (GuardianaNucleo.pide)
+  // escribir (dueño, 16:47: «dejamos hablar a quien ya sabe lo que quiere»; ronda 63, las dos voces): la misma guía, por otro
+  // camino. Lo que contesta a la pregunta abierta es como tocar su botón; lo demás va a su sitio del árbol, como desde «¿Qué
+  // puedo pedir?» (Menú principal › el grupo › lo pedido); si duda, «¿Quisiste decir…?»; si no lo entiende, no se pierde nada:
+  // una línea lo dice y la pregunta sigue ahí. Devuelve si lo ha entendido (la caja se vacía o no).
+  const GRUPO_DE = { resumen: 'dat', 'res-web': 'dat', 'res-hora': 'dat', 'res-24h': 'dat', privacidad: 'gua', cuenta: 'gua', vpn: 'gua', zero: 'nav', planeta: 'orb', com: 'com', 'p-que': 'orb', 'p-sub': 'orb', 'p-fibra': 'orb', 'p-puntos': 'orb', 'p-sat': 'orb', 'p-caidas': 'orb' };
+  const grupoDe = (id) => GRUPOS.find((x) => x[4].includes(id)) || GRUPOS.find((x) => x[0] === GRUPO_DE[id]) || null;
   function escribe(frase) {
-    const f = String(frase || '').trim(); if (!f) return;
+    const f = String(frase || '').trim(); if (!f) return false;
     if (!sala || sala.hidden) abreSala();
     quitaAviso();
     let r = null; try { r = window.NucleoMotor ? NucleoMotor.entiende(f, ctx()) : null; } catch (_) {}
-    const o = calcula(r || { nada: true }, f);
-    if (o.va && o.a) { vaAOtroSitio(o); return; }
-    if (o.menu) { menu(); return; }
-    ejecuta(o, { id: r && r.id, l: corta(f), extra: null });
+    if (!r || r.nada || (!r.id && !r.quiza)) { aviso('No te he entendido. Prueba a escribirlo de otra manera o toca una opción.'); return false; }
+    // en el camino de arriba, lo escrito (nunca si parece un dato: correo, tarjeta, número largo)
+    const dicho = '«' + (/@|\d{4,}/.test(f) ? '…' : corta(f)) + '»';
+    if (r.quiza) { turno++; muestra({ t: '¿Quisiste decir…?', c: r.quiza.slice(0, 4) }, { id: null, l: dicho, extra: null }); return true; }
+    if (r.id === 'atras') { atras(); return true; }
+    if (r.id === 'menu') { menu(); return true; }
+    if (r.id === 'ayuda') { panel(true); return true; }
+    if (r.id === 'gracias' || r.id === 'despedida') { aviso(respuesta(r).t); return true; }
+    const ex = Object.assign({}, r); delete ex.id; delete ex.s;
+    const extra = Object.keys(ex).length ? ex : null, etq = ETQ[r.id] ? T(ETQ[r.id]) : dicho;
+    // contesta a la pregunta abierta (el periodo, el país, «sí» al borrar…): como tocar su botón
+    const p = actual(), boton = p && p.b ? p.b.querySelector(`[data-op="${r.id}"]`) : null;
+    if (boton) {
+      // queda marcado como si se hubiera tocado (para cuando se vuelva atrás) y el camino dice lo mismo que el botón
+      p.b.querySelectorAll('.ns-elegida').forEach((x) => x.classList.remove('ns-elegida')); if (!r.pais) boton.classList.add('ns-elegida');
+      elige(r.id, r.pais ? nombrePais(r.pais) : boton.textContent, extra); return true;
+    }
+    // si no, a su sitio del árbol
+    const g = grupoDe(r.id);
+    menu(); if (g) elige('m-' + g[0], T(g[1]));
+    elige(r.id, etq, extra);
+    return true;
   }
   // todo como al entrar (el vídeo en marcha se cancela y los archivos hechos se sueltan)
   function limpia() {

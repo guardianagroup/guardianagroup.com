@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Διάλεξε μία από αυτές τις επιλογές.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Πάτα μια επιλογή και το NÚCLEO σε καθοδηγεί βήμα βήμα.",
   "NÚCLEO no guarda lo que eliges.": "Το NÚCLEO δεν κρατά ό,τι διαλέγεις.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Μπορείς να γράψεις στο hola@guardianagroup.com: το διαβάζει ένας άνθρωπος."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Μπορείς να γράψεις στο hola@guardianagroup.com: το διαβάζει ένας άνθρωπος.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "Δεν σε κατάλαβα. Δοκίμασε να το γράψεις αλλιώς ή πάτα μια επιλογή."
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

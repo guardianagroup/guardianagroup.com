@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Valitse yksi näistä vaihtoehdoista.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Napauta vaihtoehtoa, niin NÚCLEO opastaa sinua askel askeleelta.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO ei tallenna valintojasi.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Voit kirjoittaa osoitteeseen hola@guardianagroup.com: ihminen lukee sen."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Voit kirjoittaa osoitteeseen hola@guardianagroup.com: ihminen lukee sen.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "En ymmärtänyt. Kirjoita se toisin tai napauta vaihtoehtoa."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

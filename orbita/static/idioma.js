@@ -2338,6 +2338,7 @@
     "Toca una opción y NÚCLEO te guía paso a paso.": ["Tap an option and NÚCLEO guides you step by step.", "Toque em uma opção e o NÚCLEO te guia passo a passo."],
     "NÚCLEO no guarda lo que eliges.": ["NÚCLEO doesn't keep what you choose.", "O NÚCLEO não guarda o que você escolhe."],
     "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": ["You can write to hola@guardianagroup.com: a person reads it.", "Você pode escrever para hola@guardianagroup.com: uma pessoa lê."],
+    "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": ["I didn't understand that. Try writing it another way or tap an option.", "Não entendi. Tente escrever de outro jeito ou toque em uma opção."],
   };
   const PAISES_EXTRA = { 'Yahoo Japón': ['Yahoo Japan', 'Yahoo Japão'] };
   Object.assign(D, PAISES_EXTRA);

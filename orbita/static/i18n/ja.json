@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "これらの選択肢から1つ選んでください。",
   "Toca una opción y NÚCLEO te guía paso a paso.": "選択肢をタップすると、NÚCLEOが一歩ずつご案内します。",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEOはあなたの選択を保存しません。",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "hola@guardianagroup.com までご連絡いただけます。担当者が読みます。"
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "hola@guardianagroup.com までご連絡いただけます。担当者が読みます。",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "すみません、わかりませんでした。別の言い方で書くか、選択肢をタップしてください。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "इनमें से कोई एक विकल्प चुनें।",
   "Toca una opción y NÚCLEO te guía paso a paso.": "कोई विकल्प टैप करें और NÚCLEO आपको कदम-दर-कदम ले चलेगा।",
   "NÚCLEO no guarda lo que eliges.": "आप जो चुनते हैं, NÚCLEO उसे सहेजता नहीं।",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "आप hola@guardianagroup.com पर लिख सकते हैं: इसे एक इंसान पढ़ता है।"
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "आप hola@guardianagroup.com पर लिख सकते हैं: इसे एक इंसान पढ़ता है।",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "मैं समझ नहीं पाया। इसे किसी और तरह से लिखकर देखें या कोई विकल्प टैप करें।"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

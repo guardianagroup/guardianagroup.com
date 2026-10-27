@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Veldu einn af þessum valkostum.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Ýttu á valkost og NÚCLEO leiðir þig skref fyrir skref.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO geymir ekki það sem þú velur.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Þú getur skrifað á hola@guardianagroup.com: manneskja les það."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Þú getur skrifað á hola@guardianagroup.com: manneskja les það.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "Ég skildi þetta ekki. Prófaðu að skrifa það öðruvísi eða ýttu á valkost."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

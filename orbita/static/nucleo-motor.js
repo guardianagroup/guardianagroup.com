@@ -82,7 +82,7 @@
   // Reglas fijas antes de comparar (ronda 53: «dar prioridad a las instrucciones concretas»): las preguntas de qué es o cómo
   // funciona una sección, y las palabras que solo pueden querer decir una cosa.
   const PREGUNTA = /(^| )(que es|que son|que significa|como funciona|como funcionas|para que sirve|para que sirven|explicame|explica|que hace|what is|how does|how do)( |$)/;
-  const SECCIONES = [['z-que', /\b(zero|burbuja|navegador|navegar|remoto)\b/], ['c-que', /\b(comunicaciones|chat|mensajes?|archivos?|cifrad\w*|encript\w*|nueve cifras|9 cifras)\b/], ['p-que', /\b(orbita|orbit|planeta|globo|mapa)\b/], ['quien-eres', /\b(nucleo|tu|eres)\b/], ['que-es-guardiana', /\b(guardiana|esto|esta pagina|este proyecto|la web)\b/]];
+  const SECCIONES = [['r-que', /\b(radiografia\w*|rayos x|x ?ray)\b/], ['z-que', /\b(zero|burbuja|navegador|navegar|remoto)\b/], ['c-que', /\b(comunicaciones|chat|mensajes?|archivos?|cifrad\w*|encript\w*|nueve cifras|9 cifras)\b/], ['p-que', /\b(orbita|orbit|planeta|globo|mapa)\b/], ['quien-eres', /\b(nucleo|tu|eres)\b/], ['que-es-guardiana', /\b(guardiana|esto|esta pagina|este proyecto|la web)\b/]];
   const FUERTES = [
     ['p-caidas', /(\bcaid[oa]s?\b|se cayo|se ha caido|\bapagon|\boutages?\b)/],
     ['c-codigo', /\b(unirme|unirse|me uno|join)\b|entrar con (el|un|mi) codigo|tengo (el|un) codigo/],

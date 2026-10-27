@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Válassz egyet ezek közül.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Koppints egy lehetőségre, és a NÚCLEO lépésről lépésre vezet.",
   "NÚCLEO no guarda lo que eliges.": "A NÚCLEO nem tárolja, amit választasz.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Írhatsz a hola@guardianagroup.com címre: egy ember olvassa el."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Írhatsz a hola@guardianagroup.com címre: egy ember olvassa el.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "Ezt nem értettem. Próbáld meg másképp leírni, vagy koppints egy lehetőségre."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

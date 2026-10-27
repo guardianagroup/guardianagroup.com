@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "اختر أحد هذه الخيارات.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "اضغط على خيار وسيرشدك NÚCLEO خطوة بخطوة.",
   "NÚCLEO no guarda lo que eliges.": "لا يحفظ NÚCLEO ما تختاره.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "يمكنك الكتابة إلى hola@guardianagroup.com: يقرؤها شخص حقيقي."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "يمكنك الكتابة إلى hola@guardianagroup.com: يقرؤها شخص حقيقي.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "لم أفهمك. جرّب أن تكتبها بطريقة أخرى أو اضغط على خيار."
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

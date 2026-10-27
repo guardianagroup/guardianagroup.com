@@ -316,15 +316,21 @@ a.nuc-multas-b{text-decoration:none}
 .nuc-res .ns-opciones.ns-en-tarjeta{margin-top:14px;padding-top:12px;border-top:1px solid rgba(156,195,228,.12)}
 .ns-pie{padding:10px 16px calc(12px + env(safe-area-inset-bottom,0px))}
 .ns-pie .ns-nota{margin:0}
-/* en el móvil, las seis del menú en dos columnas (icono y título, como en un teléfono), para que quepan sin desplazar;
-   su línea de explicación sale en el paso siguiente */
+/* la caja de escribir (dueño, 16:47: «dejamos hablar a quien ya sabe lo que quiere»), abajo, debajo de la guía */
+.ns-pie .ns-form{margin:0 auto;padding-block:6px;padding-inline:18px 6px}
+.ns-pie .ns-form+.ns-nota{margin-top:8px}
+/* en el móvil, las seis del menú en dos columnas (icono y título), para que quepan sin desplazar junto a la caja de
+   escribir; su línea de explicación sale en el paso siguiente. Muy estrecho (≤ 350 px), una columna. */
 @media (max-width:640px){
   .ns-opciones.ns-menu-ops{gap:10px}
-  .ns-gran{flex-direction:column;align-items:flex-start;gap:10px;min-height:0;padding:14px}
-  .ng-ico{width:40px;height:40px}
+  .ns-gran{flex-direction:row;align-items:center;gap:10px;min-height:64px;padding:12px}
+  .ng-ico{width:34px;height:34px;border-radius:10px}
+  .ng-ico svg{width:19px;height:19px}
+  .ng-txt b{font-size:14.5px}
   .ng-txt small{display:none}
   .ns-charla .nuc-b.el.ns-paso:not(.ns-menu),.ns-charla .nuc-b.nuc-res{width:100%;padding:16px 16px 18px}
   .ns-paso:not(.ns-menu) .ns-preg{font-size:18px}
   .ns-atras,.ns-menu-b{padding:0 16px}
 }
 @media (prefers-reduced-motion:reduce){.ns-espera .nuc-bt::after{animation:none}.ns-aviso{animation:none}}
+@media (max-width:350px){.ns-opciones.ns-menu-ops{grid-template-columns:1fr}}

@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "בחר אחת מהאפשרויות האלה.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "הקש על אפשרות ו־NÚCLEO ידריך אותך צעד אחר צעד.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO לא שומר את מה שאתה בוחר.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "אפשר לכתוב ל־hola@guardianagroup.com: אדם קורא את זה."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "אפשר לכתוב ל־hola@guardianagroup.com: אדם קורא את זה.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "לא הבנתי. נסה לכתוב את זה אחרת או הקש על אפשרות."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

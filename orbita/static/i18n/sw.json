@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Chagua mojawapo ya chaguo hizi.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Gusa chaguo na NÚCLEO atakuongoza hatua kwa hatua.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO haihifadhi unachochagua.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Unaweza kuandika kwa hola@guardianagroup.com: mtu halisi huisoma."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Unaweza kuandika kwa hola@guardianagroup.com: mtu halisi huisoma.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "Sijakuelewa. Jaribu kuandika kwa njia nyingine au gusa chaguo."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

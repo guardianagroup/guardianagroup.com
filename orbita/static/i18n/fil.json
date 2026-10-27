@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Pumili ng isa sa mga opsyong ito.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Pumindot ng isang opsyon at gagabayan ka ng NÚCLEO nang hakbang-hakbang.",
   "NÚCLEO no guarda lo que eliges.": "Hindi itinatago ng NÚCLEO ang pinipili mo.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Maaari kang sumulat sa hola@guardianagroup.com: isang tao ang nagbabasa nito."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Maaari kang sumulat sa hola@guardianagroup.com: isang tao ang nagbabasa nito.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "Hindi kita naintindihan. Subukang isulat ito sa ibang paraan o pumindot ng isang opsyon."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

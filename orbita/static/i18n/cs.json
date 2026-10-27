@@ -2375,7 +2375,8 @@
   "Elige una de estas opciones.": "Vyber jednu z těchto možností.",
   "Toca una opción y NÚCLEO te guía paso a paso.": "Klepni na možnost a NÚCLEO tě provede krok za krokem.",
   "NÚCLEO no guarda lo que eliges.": "NÚCLEO neukládá, co si vybereš.",
-  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Můžeš napsat na hola@guardianagroup.com: čte to člověk."
+  "Puedes escribir a hola@guardianagroup.com: lo lee una persona.": "Můžeš napsat na hola@guardianagroup.com: čte to člověk.",
+  "No te he entendido. Prueba a escribirlo de otra manera o toca una opción.": "Tomu nerozumím. Zkus to napsat jinak nebo klepni na možnost."
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",
