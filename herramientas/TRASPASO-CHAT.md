@@ -1,6 +1,18 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-## Estado al 27 Oct 2026, 14:30 (Bogotá) — EMPIEZA POR AQUÍ
+## Estado al 27 Oct 2026, 15:35 (Bogotá) — EMPIEZA POR AQUÍ
+
+Lo de las 14:30 (abajo) sigue valiendo salvo lo que cambia aquí.
+
+- **Decisiones del dueño sobre el cobro** (15:00–15:12): **código de activación por correo** (la clave de licencia de Dodo; se apaga sola si deja de pagar); **de pago: navegador ZERO y Comunicaciones** (en Comunicaciones **paga solo quien invita**; quien recibe el código entra gratis); gratis: NÚCLEO, Órbita y Multas; **barato** («para que todo el mundo tenga acceso»; hoy 4,99 $/mes, 2,49 $ en Colombia: no ha dicho si se baja); **3 días gratis**. Ronda 59 (`agencia-rondas/ronda59/`) con el detalle (sitios concretos, estados, VPN, leyes). Falta confirmar en modo de prueba de Dodo que la prueba sin tarjeta emite la clave.
+- **NIT de GUARDIANA GROUP S.A.S.: 902.119.954-6** (RUT definitivo, 26 Oct 2026; dígito de verificación comprobado). Publicado en términos, privacidad, contacto (es/en/pt) y el pie de la portada (clave 571 en lugar de la 319, 42 idiomas). **La cuenta bancaria, mañana** (dueño, 15:12). Pendiente del dueño: pasar la verificación de Dodo de «particular» a la empresa. Del RUT no se publica nada más (ni nombres ni teléfono).
+- **La red de NÚCLEO mide lo mismo en toda la web** (dueño, 14:36): `--g-red: min(26vh, 240px)` en `guardiana.css`; NÚCLEO, su sección, Comunicaciones y `obras.html` la usan; ZERO la calcula con la escala de su escenario (`#redZ`, tope 420 px de diseño). La maqueta de la portada sigue pequeña (es una miniatura).
+- **NÚCLEO ordenado** (dueño, 14:42 y 14:55: «milimétrico», «ultra fácil», «muy bien estructurado»): solo la última pregunta tiene botones; pedir lo mismo no lo repite (se ilumina); el PDF y el vídeo salen en la misma tarjeta (`.nuc-res`: nombre, periodo, páginas o segundos, «Abrir»/«Descargar» y dónde se guarda; nada se descarga solo; `ZeroPdf.crea()` en `orbita/zero/pdf.js`); un vídeo a la vez; ir a ZERO, al planeta o al chat con un clic no deja mensajes; escrito, deja una línea; «Nueva conversación» arriba; la sección tiene su paso en el historial (`?nucleo=pide`): la flecha de atrás vuelve a la portada de NÚCLEO. Prueba: `scratchpad/home/orden.js` (es/en, 800 y 390).
+- **Agencia:** ronda 60, **control de IA** (`ronda60/notas.md`: quinta tarjeta en NÚCLEO sobre PUERTA IA, tapado en el navegador con vista previa, API de pago sin entrenamiento, cuotas; el dueño elige nombre «Control IA» o «IA Protegida» y primer proveedor); ronda 61, **buscador propio** («un Google de GUARDIANA», empezando por las 100 webs más visitadas de cada país; en curso: Gemini propone híbrido con índice propio + Brave Search API; **ojo: los datos de Cloudflare Radar son CC BY-NC 4.0, no comerciales**); ronda 62, «si fuerais los dueños, ¿qué servicio haría pagar y suscribirse de forma viral?» (en curso). Sistema operativo propio: **no** (dueño, 15:24).
+- Versiones: `nucleo.js?v=20261027z`, `nucleo.css?v=20261027u`, `idioma.js?v=20261027p12`, `guardiana.css?v=20261027b`, `pdf.js?v=20261027e`, `app.css?v=20261027j`.
+- **Pendiente:** cerrar las rondas 61 y 62 y llevarle al dueño las decisiones; montar el cobro en modo de prueba (código por correo, 3 días, ZERO y Comunicaciones); traducir las multas a 39 lenguas; lo de las 14:30.
+
+## Estado al 27 Oct 2026, 14:30 (Bogotá)
 
 Lo de las 14:00 y las 12:00 (abajo) sigue valiendo salvo lo que cambia aquí.
 
