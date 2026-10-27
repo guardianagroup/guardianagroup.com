@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Videota tehdään jo.",
   "No se ha podido grabar el vídeo.": "Videota ei voitu nauhoittaa.",
   "Se ha cancelado el vídeo.": "Video peruttiin.",
-  "Multas": "Sakot"
+  "Multas": "Sakot",
+  "Abrir": "Avaa",
+  "Listo: aquí tienes el resumen en PDF.": "Valmis: tässä yhteenveto PDF-muodossa.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Kun lataat sen, se tallentuu laitteesi Lataukset-kansioon.",
+  "Imprimir o guardar como PDF": "Tulosta tai tallenna PDF:nä",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "Valitse tulostusikkunassa «Tallenna PDF-muodossa».",
+  "{1} páginas": "{1} sivua",
+  "{1} página": "{1} sivu"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

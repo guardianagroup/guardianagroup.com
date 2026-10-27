@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Már készül egy videó.",
   "No se ha podido grabar el vídeo.": "Nem sikerült rögzíteni a videót.",
   "Se ha cancelado el vídeo.": "A videó készítése leállítva.",
-  "Multas": "Bírságok"
+  "Multas": "Bírságok",
+  "Abrir": "Megnyitás",
+  "Listo: aquí tienes el resumen en PDF.": "Kész: itt az összefoglaló PDF-ben.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Ha letöltöd, az eszközöd Letöltések mappájába kerül.",
+  "Imprimir o guardar como PDF": "Nyomtatás vagy mentés PDF-ként",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "A nyomtatási ablakban válaszd a «Mentés PDF-ként» lehetőséget.",
+  "{1} páginas": "{1} oldal",
+  "{1} página": "{1} oldal"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

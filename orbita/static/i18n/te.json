@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "ఇప్పటికే ఒక వీడియో తయారవుతోంది.",
   "No se ha podido grabar el vídeo.": "వీడియోను రికార్డ్ చేయడం సాధ్యం కాలేదు.",
   "Se ha cancelado el vídeo.": "వీడియో రద్దు చేయబడింది.",
-  "Multas": "జరిమానాలు"
+  "Multas": "జరిమానాలు",
+  "Abrir": "తెరవండి",
+  "Listo: aquí tienes el resumen en PDF.": "సిద్ధం: ఇదిగో PDF లో సారాంశం.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "డౌన్‌లోడ్ చేస్తే, అది మీ పరికరంలోని డౌన్‌లోడ్‌ల ఫోల్డర్‌లో సేవ్ అవుతుంది.",
+  "Imprimir o guardar como PDF": "ప్రింట్ చేయండి లేదా PDFగా సేవ్ చేయండి",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "ప్రింట్ విండోలో «PDFగా సేవ్ చేయి» ఎంచుకోండి.",
+  "{1} páginas": "{1} పేజీలు",
+  "{1} página": "{1} పేజీ"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

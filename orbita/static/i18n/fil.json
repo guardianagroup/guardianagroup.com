@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "May ginagawa nang video.",
   "No se ha podido grabar el vídeo.": "Hindi na-record ang video.",
   "Se ha cancelado el vídeo.": "Kinansela ang video.",
-  "Multas": "Mga multa"
+  "Multas": "Mga multa",
+  "Abrir": "Buksan",
+  "Listo: aquí tienes el resumen en PDF.": "Handa na: narito ang buod bilang PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Kapag na-download mo ito, mase-save ito sa folder ng mga download sa iyong device.",
+  "Imprimir o guardar como PDF": "I-print o i-save bilang PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "Sa window ng pag-print, piliin ang «I-save bilang PDF».",
+  "{1} páginas": "{1} pahina",
+  "{1} página": "{1} pahina"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

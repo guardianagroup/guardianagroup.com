@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Se face deja un videoclip.",
   "No se ha podido grabar el vídeo.": "Videoclipul nu a putut fi înregistrat.",
   "Se ha cancelado el vídeo.": "Videoclipul a fost anulat.",
-  "Multas": "Amenzi"
+  "Multas": "Amenzi",
+  "Abrir": "Deschide",
+  "Listo: aquí tienes el resumen en PDF.": "Gata: iată rezumatul în PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Când îl descarci, se salvează în dosarul Descărcări de pe dispozitivul tău.",
+  "Imprimir o guardar como PDF": "Tipărește sau salvează ca PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "În fereastra de tipărire, alege «Salvează ca PDF».",
+  "{1} páginas": "{1} pagini",
+  "{1} página": "{1} pagină"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

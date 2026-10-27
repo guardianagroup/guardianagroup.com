@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "يجري إعداد فيديو بالفعل.",
   "No se ha podido grabar el vídeo.": "تعذّر تسجيل الفيديو.",
   "Se ha cancelado el vídeo.": "تم إلغاء الفيديو.",
-  "Multas": "الغرامات"
+  "Multas": "الغرامات",
+  "Abrir": "فتح",
+  "Listo: aquí tienes el resumen en PDF.": "جاهز: إليك الملخص بصيغة PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "عند تنزيله، يُحفظ في مجلد التنزيلات على جهازك.",
+  "Imprimir o guardar como PDF": "طباعة أو حفظ بصيغة PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "في نافذة الطباعة، اختر «حفظ بصيغة PDF».",
+  "{1} páginas": "{1} صفحة",
+  "{1} página": "{1} صفحة"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

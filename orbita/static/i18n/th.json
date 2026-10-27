@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "กำลังสร้างวิดีโออยู่แล้ว",
   "No se ha podido grabar el vídeo.": "บันทึกวิดีโอไม่สำเร็จ",
   "Se ha cancelado el vídeo.": "ยกเลิกวิดีโอแล้ว",
-  "Multas": "ค่าปรับ"
+  "Multas": "ค่าปรับ",
+  "Abrir": "เปิด",
+  "Listo: aquí tienes el resumen en PDF.": "เสร็จแล้ว: นี่คือสรุปในรูปแบบ PDF",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "เมื่อดาวน์โหลด ไฟล์จะถูกบันทึกในโฟลเดอร์ดาวน์โหลดของอุปกรณ์คุณ",
+  "Imprimir o guardar como PDF": "พิมพ์หรือบันทึกเป็น PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "ในหน้าต่างพิมพ์ ให้เลือก «บันทึกเป็น PDF»",
+  "{1} páginas": "{1} หน้า",
+  "{1} página": "{1} หน้า"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

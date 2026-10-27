@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "एक वीडियो पहले से बन रहा है।",
   "No se ha podido grabar el vídeo.": "वीडियो रिकॉर्ड नहीं हो सका।",
   "Se ha cancelado el vídeo.": "वीडियो रद्द कर दिया गया।",
-  "Multas": "जुर्माने"
+  "Multas": "जुर्माने",
+  "Abrir": "खोलें",
+  "Listo: aquí tienes el resumen en PDF.": "तैयार: यह रहा PDF में सारांश।",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "डाउनलोड करने पर यह आपके डिवाइस के डाउनलोड फ़ोल्डर में सहेजा जाता है।",
+  "Imprimir o guardar como PDF": "प्रिंट करें या PDF के रूप में सहेजें",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "प्रिंट विंडो में «PDF के रूप में सहेजें» चुनें।",
+  "{1} páginas": "{1} पेज",
+  "{1} página": "{1} पेज"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

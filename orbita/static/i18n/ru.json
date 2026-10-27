@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Видео уже создаётся.",
   "No se ha podido grabar el vídeo.": "Не удалось записать видео.",
   "Se ha cancelado el vídeo.": "Видео отменено.",
-  "Multas": "Штрафы"
+  "Multas": "Штрафы",
+  "Abrir": "Открыть",
+  "Listo: aquí tienes el resumen en PDF.": "Готово: вот сводка в PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "После скачивания файл сохраняется в папке «Загрузки» на вашем устройстве.",
+  "Imprimir o guardar como PDF": "Печать или сохранение в PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "В окне печати выберите «Сохранить как PDF».",
+  "{1} páginas": "{1} стр.",
+  "{1} página": "{1} стр."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

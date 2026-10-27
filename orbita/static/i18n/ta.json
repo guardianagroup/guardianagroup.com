@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "ஏற்கெனவே ஒரு வீடியோ தயாராகிக்கொண்டிருக்கிறது.",
   "No se ha podido grabar el vídeo.": "வீடியோவைப் பதிவுசெய்ய முடியவில்லை.",
   "Se ha cancelado el vídeo.": "வீடியோ ரத்து செய்யப்பட்டது.",
-  "Multas": "அபராதங்கள்"
+  "Multas": "அபராதங்கள்",
+  "Abrir": "திறக்கவும்",
+  "Listo: aquí tienes el resumen en PDF.": "தயார்: இதோ PDF-இல் சுருக்கம்.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "பதிவிறக்கினால், அது உங்கள் சாதனத்தின் பதிவிறக்கங்கள் கோப்புறையில் சேமிக்கப்படும்.",
+  "Imprimir o guardar como PDF": "அச்சிடவும் அல்லது PDF ஆகச் சேமிக்கவும்",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "அச்சு சாளரத்தில் «PDF ஆகச் சேமி» என்பதைத் தேர்ந்தெடுங்கள்.",
+  "{1} páginas": "{1} பக்கங்கள்",
+  "{1} página": "{1} பக்கம்"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

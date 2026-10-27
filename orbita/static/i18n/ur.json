@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "ایک ویڈیو پہلے ہی بن رہی ہے۔",
   "No se ha podido grabar el vídeo.": "ویڈیو ریکارڈ نہیں ہو سکی۔",
   "Se ha cancelado el vídeo.": "ویڈیو منسوخ کر دی گئی۔",
-  "Multas": "جرمانے"
+  "Multas": "جرمانے",
+  "Abrir": "کھولیں",
+  "Listo: aquí tienes el resumen en PDF.": "تیار: یہ رہا PDF میں خلاصہ۔",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "ڈاؤن لوڈ کرنے پر یہ آپ کے آلے کے ڈاؤن لوڈز فولڈر میں محفوظ ہو جاتا ہے۔",
+  "Imprimir o guardar como PDF": "پرنٹ کریں یا PDF کے طور پر محفوظ کریں",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "پرنٹ ونڈو میں «PDF کے طور پر محفوظ کریں» منتخب کریں۔",
+  "{1} páginas": "{1} صفحات",
+  "{1} página": "{1} صفحہ"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "هم‌اکنون یک ویدئو در حال ساخت است.",
   "No se ha podido grabar el vídeo.": "ضبط ویدئو ممکن نشد.",
   "Se ha cancelado el vídeo.": "ویدئو لغو شد.",
-  "Multas": "جریمه‌ها"
+  "Multas": "جریمه‌ها",
+  "Abrir": "باز کردن",
+  "Listo: aquí tienes el resumen en PDF.": "آماده است: این هم خلاصه به صورت PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "وقتی آن را دانلود کنید، در پوشهٔ دانلودهای دستگاه شما ذخیره می‌شود.",
+  "Imprimir o guardar como PDF": "چاپ یا ذخیره به صورت PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "در پنجرهٔ چاپ، «ذخیره به صورت PDF» را انتخاب کنید.",
+  "{1} páginas": "{1} صفحه",
+  "{1} página": "{1} صفحه"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

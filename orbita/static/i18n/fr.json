@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "Une vidéo est déjà en cours de création.",
   "No se ha podido grabar el vídeo.": "La vidéo n’a pas pu être enregistrée.",
   "Se ha cancelado el vídeo.": "La vidéo a été annulée.",
-  "Multas": "Amendes"
+  "Multas": "Amendes",
+  "Abrir": "Ouvrir",
+  "Listo: aquí tienes el resumen en PDF.": "C’est prêt : voici le résumé en PDF.",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "Quand tu le télécharges, il est enregistré dans le dossier Téléchargements de ton appareil.",
+  "Imprimir o guardar como PDF": "Imprimer ou enregistrer en PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "Dans la fenêtre d’impression, choisis «Enregistrer au format PDF».",
+  "{1} páginas": "{1} pages",
+  "{1} página": "{1} page"
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

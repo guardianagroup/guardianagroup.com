@@ -2339,7 +2339,14 @@
   "Ya se está haciendo un vídeo.": "已经在生成一个视频。",
   "No se ha podido grabar el vídeo.": "无法录制视频。",
   "Se ha cancelado el vídeo.": "视频已取消。",
-  "Multas": "罚款"
+  "Multas": "罚款",
+  "Abrir": "打开",
+  "Listo: aquí tienes el resumen en PDF.": "好了：这是 PDF 格式的摘要。",
+  "Al descargarlo, se guarda en la carpeta de descargas de tu equipo.": "下载后，文件会保存在你设备的“下载”文件夹中。",
+  "Imprimir o guardar como PDF": "打印或另存为 PDF",
+  "En la ventana de imprimir, elige «Guardar como PDF».": "在打印窗口中，选择“另存为 PDF”。",
+  "{1} páginas": "{1} 页",
+  "{1} página": "{1} 页"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",
