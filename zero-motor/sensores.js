@@ -203,6 +203,16 @@ module.exports = String.raw`(() => {
     } catch (_) {}
   };
   vigila('pbjs', enganchaPrebid);
+  // 27 Oct 2026 (dueño: «detectar el máximo»): muchas webs compilan Prebid con otro nombre global (p. ej. «ue_pbjs»).
+  // Prebid apunta cada nombre en window._pbjsGlobals: se vigila esa lista y se engancha cada uno.
+  const nombresPrebid = new Set(['pbjs']);
+  const apuntaNombre = (n) => { n = String(n || ''); if (!n || nombresPrebid.has(n) || !/^[A-Za-z_$][\w$]{0,40}$/.test(n)) return; nombresPrebid.add(n); vigila(n, enganchaPrebid); };
+  const vigilaLista = (arr) => {
+    if (!Array.isArray(arr) || arr.__zero) return; arr.__zero = true;
+    arr.forEach(apuntaNombre);
+    const push = arr.push; try { arr.push = function () { const r = push.apply(this, arguments); for (const n of arguments) apuntaNombre(n); return r; }; } catch (_) {}
+  };
+  vigila('_pbjsGlobals', vigilaLista);
   vigila('googletag', enganchaGoogle);
 
   // 26 Oct 2026 (dueño: «no aparecía la mano»): el cursor que pediría la web (mano en enlaces, barra en texto) se cuenta al
