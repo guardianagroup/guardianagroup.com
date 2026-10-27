@@ -29,11 +29,13 @@
   function marcoZero() { try { const m = document.getElementById('marco'); if (m && !m.hidden && m.contentWindow && /\/zero\//.test(m.contentWindow.location.pathname)) return m.contentWindow; } catch (_) {} return null; }
   const hayWeb = () => { try { const w = marcoZero(); return !!(w && w.document.querySelector('#stage.open')); } catch (_) { return false; } };
   function cierraTodo() { cierraSala(); ocultaInicio(); }
-  function abreZero(web) {
+  function abreZero(web, op) {
     cierraTodo();
     if (!marcoZero() && window.OrbitaPuertas) OrbitaPuertas.abre('zero');
     let k = 0; const etiqueta = () => { pintaVuelta(); const w = marcoZero(); if ((!w || !w.document.querySelector('#volverZ span')) && ++k < 40) setTimeout(etiqueta, 250); };
     etiqueta();
+    // «Navegar con Tor» (ronda 63: que nadie tenga que buscarlo): ZERO se abre con Tor ya puesto, con su explicación
+    if (op && op.tor) { let n = 0; const tor = () => { const w = marcoZero(), u = w && w.document.getElementById('ultra'); if (u) { if (u.getAttribute('aria-pressed') !== 'true') u.click(); return; } if (++n < 40) setTimeout(tor, 250); }; setTimeout(tor, 600); }
     if (!web) return;
     let n = 0; const intenta = () => {
       const w = marcoZero(); const f = w && w.document.getElementById('lens'); const i = f && f.querySelector('input');
@@ -50,7 +52,8 @@
       try { const C = window.OrbitaPlaneta && OrbitaPlaneta.centros; if (pais && C && C[pais]) OrbitaPlaneta.ir(C[pais].lon, C[pais].lat, 2.2); } catch (_) {}
     }, 500);
   }
-  const irComunicaciones = () => { location.href = 'comunicaciones/'; };
+  // ronda 63: «Crear una invitación» y «Tengo un código» llegan directos a ese paso de Comunicaciones (?paso=…)
+  const irComunicaciones = (paso) => { location.href = 'comunicaciones/' + (paso === 'crear' || paso === 'codigo' ? '?paso=' + paso : ''); };
   // El PDF de una web lo hace ZERO con lo que ha visto en la web abierta.
   function pdfWeb() { const w = marcoZero(); if (w && hayWeb() && typeof w.zeroInforme === 'function') { cierraTodo(); w.zeroInforme(); return true; } return false; }
 
@@ -164,50 +167,55 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     if (op.href) { b.href = op.href; if (op.archivo) b.download = op.archivo; if (op.nueva) { b.target = '_blank'; b.rel = 'noopener'; } } else b.type = 'button';
     return b;
   }
-  function tarjeta(tipo, periodo) {
-    const c = sala.querySelector('#ns-charla'), b = document.createElement('div');
-    b.className = 'nuc-b el nuc-res'; b.dataset.tipo = tipo;
-    b.innerHTML = '<span class="nq" translate="no">NÚCLEO</span><p class="nuc-bt"></p>'
+  // ronda 63: la tarjeta ocupa el sitio del paso que la pidió (el «Un momento…» de la espera) y es un paso más de la guía
+  function tarjeta(tipo, periodo, paso) {
+    const b = document.createElement('div');
+    b.className = 'nuc-b el ns-paso nuc-res'; b.dataset.tipo = tipo;
+    b.innerHTML = '<span class="nq" translate="no">NÚCLEO</span><p class="nuc-bt ns-foco" tabindex="-1"></p>'
       + '<div class="nr-ficha"><span class="nr-ico"><svg viewBox="0 0 24 24" aria-hidden="true">' + ICO_RES[tipo] + '</svg></span><span class="nr-txt"><b></b><small></small></span></div>'
       + '<div class="nr-cuerpo"></div><div class="nr-acc"></div><p class="nr-nota" hidden></p>';
     b.querySelector('.nr-txt b').textContent = T('Resumen de mis datos');
     b.querySelector('.nr-txt small').textContent = metaDe(periodo, tipo === 'pdf' ? 'PDF' : T('Vídeo'));
-    c.append(b); recorta(); sala.classList.remove('vacia'); baja(b);
+    cambiaNodo(paso, b);
     return { b, txt: b.querySelector('.nuc-bt'), meta: b.querySelector('.nr-txt small'), cuerpo: b.querySelector('.nr-cuerpo'), acc: b.querySelector('.nr-acc'), nota: b.querySelector('.nr-nota') };
   }
   const notaDescarga = (k) => { k.nota.textContent = T('Al descargarlo, se guarda en la carpeta de descargas de tu equipo.'); k.nota.hidden = false; };
-  async function resumenPdf(periodo) {
-    let G; try { G = await moduloResumen(); } catch (_) { return { t: 'No he podido preparar el resumen. Inténtalo de nuevo.' }; }
+  const NO_RESUMEN = { t: 'No he podido preparar el resumen. Inténtalo de nuevo.', c: [{ l: 'Hacer otro resumen', id: 'resumen' }] };
+  async function resumenPdf(periodo, t, paso) {
+    let G; try { G = await moduloResumen(); } catch (_) { return NO_RESUMEN; }
+    if (t !== turno) return null; // la persona ya está en otro paso
     const d = G.datos(periodo, T, loc());
     if (!d) return sinPeriodo(periodo, 'pdf');
     const doc = docResumen(d, G);
     if (window.ZeroPdf && ZeroPdf.crea && ZeroPdf.cabe(textoDe(doc))) {
       try {
         const { blob, paginas } = ZeroPdf.crea(doc, T), url = URL.createObjectURL(blob); URLS.add(url);
-        const k = tarjeta('pdf', periodo); k.b.dataset.url = url;
+        const k = tarjeta('pdf', periodo, paso); k.b.dataset.url = url;
         k.txt.textContent = T('Listo: aquí tienes el resumen en PDF.');
         k.meta.textContent = metaDe(periodo, 'PDF', pon(paginas === 1 ? '{1} página' : '{1} páginas', fmt(paginas)));
         k.acc.append(boton('Abrir', { href: url, nueva: true, prim: true }), boton('Descargar', { href: url, archivo: doc.archivo }));
-        notaDescarga(k); baja(k.b);
+        notaDescarga(k); pasoResultado(k.b);
         return null;
       } catch (e) { console.warn('PDF', e); }
     }
     // el idioma no cabe en el PDF de verdad: el mismo documento, por la ventana de imprimir
-    const k = tarjeta('pdf', periodo);
+    const k = tarjeta('pdf', periodo, paso);
     k.txt.textContent = T('Listo: aquí tienes el resumen en PDF.');
     const b = boton('Imprimir o guardar como PDF', { prim: true }); b.addEventListener('click', () => imprimeResumen(doc)); k.acc.append(b);
-    k.nota.textContent = T('En la ventana de imprimir, elige «Guardar como PDF».'); k.nota.hidden = false; baja(k.b);
+    k.nota.textContent = T('En la ventana de imprimir, elige «Guardar como PDF».'); k.nota.hidden = false; pasoResultado(k.b);
     return null;
   }
-  // el vídeo: se ve hacerse en su tarjeta (unos 20 s) y queda en ella para verlo y descargarlo; uno a la vez
+  // el vídeo: se ve hacerse en su tarjeta (unos 20 s) y queda en ella para verlo y descargarlo; uno a la vez (irse de su
+  // paso lo cancela)
   let grabando = null;
-  async function resumenVideo(periodo) {
-    let G; try { G = await moduloResumen(); } catch (_) { return { t: 'No he podido preparar el resumen. Inténtalo de nuevo.' }; }
-    if (grabando) { destaca(grabando.b); return null; }
+  async function resumenVideo(periodo, t, paso) {
+    let G; try { G = await moduloResumen(); } catch (_) { return NO_RESUMEN; }
+    if (t !== turno) return null;
+    if (grabando) { try { grabando.ab.abort(); } catch (_) {} grabando = null; }
     const d = G.datos(periodo, T, loc());
     if (!d) return sinPeriodo(periodo, 'video');
-    if (!G.formato()) return { t: 'Este navegador no puede grabar vídeo.', c: [{ l: 'Resumen en PDF', id: 'res-' + periodo, extra: { formato: 'pdf' } }] };
-    const k = tarjeta('video', periodo);
+    if (!G.formato()) return { t: 'Este navegador no puede grabar vídeo.', c: [{ l: 'Resumen de mis datos en PDF', id: 'res-' + periodo, extra: { formato: 'pdf' } }] };
+    const k = tarjeta('video', periodo, paso);
     k.txt.textContent = T('Preparo el vídeo. Tarda unos 20 segundos.');
     k.cuerpo.innerHTML = '<div class="nv-marco"><canvas class="nv-lienzo" width="1280" height="720" aria-hidden="true"></canvas>'
       + '<div class="nv-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div></div>';
@@ -226,14 +234,14 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       const seg = Math.round(r.duracion || G.duracion || 0);
       k.meta.textContent = metaDe(periodo, T('Vídeo'), seg ? pon('{1} s', fmt(seg)) : '');
       k.acc.replaceChildren(boton('Descargar', { href: url, archivo: r.nombre, prim: true }));
-      notaDescarga(k); baja(k.b);
+      notaDescarga(k); pasoResultado(k.b);
       return null;
     } catch (e) {
-      k.b.remove(); if (!sala.querySelector('#ns-charla').children.length) sala.classList.add('vacia');
-      if (e && e.codigo === 'cancelado') return limpiando ? null : { t: 'Se ha cancelado el vídeo.' };
-      if (e && (e.codigo === 'sin-grabadora' || e.codigo === 'sin-formato')) return { t: 'Este navegador no puede grabar vídeo.', c: [{ l: 'Resumen en PDF', id: 'res-' + periodo, extra: { formato: 'pdf' } }] };
-      return { t: 'No se ha podido grabar el vídeo.', c: [{ l: 'Resumen en PDF', id: 'res-' + periodo, extra: { formato: 'pdf' } }] };
-    } finally { grabando = null; }
+      // si se canceló por irse de este paso, la guía ya está en otro y esto no se enseña (el turno ha cambiado)
+      if (e && e.codigo === 'cancelado') return { t: 'Se ha cancelado el vídeo.', c: [{ l: 'Hacer otro resumen', id: 'resumen' }] };
+      if (e && (e.codigo === 'sin-grabadora' || e.codigo === 'sin-formato')) return { t: 'Este navegador no puede grabar vídeo.', c: [{ l: 'Resumen de mis datos en PDF', id: 'res-' + periodo, extra: { formato: 'pdf' } }] };
+      return { t: 'No se ha podido grabar el vídeo.', c: [{ l: 'Resumen de mis datos en PDF', id: 'res-' + periodo, extra: { formato: 'pdf' } }] };
+    } finally { if (grabando && grabando.ab === ab) grabando = null; }
   }
 
   // ---------- textos ----------
@@ -243,24 +251,26 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     com: 'Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.',
   };
   const ETQ = {
-    zero: 'Ir al navegador ZERO', planeta: 'Explorar el planeta', com: 'Chat encriptado', datos: 'Mis datos', 'que-es-guardiana': '¿Qué es GUARDIANA?',
-    'z-web': 'Ir a una web con el navegador ZERO', 'z-buscar': 'Buscar en internet', 'z-radio': 'Ver la Radiografía', 'z-pdf': 'PDF de la web abierta', resumen: 'Resumen de mis datos', 'res-pdf': 'Resumen de mis datos en PDF', 'res-video': 'Resumen de mis datos en vídeo', 'z-que': '¿Cómo funciona el navegador ZERO?', 'z-tor': 'Navegar con Tor',
-    'p-sub': 'Cables submarinos', 'p-fibra': 'Cables terrestres', 'p-puntos': 'Centros de datos', 'p-sat': 'Satélites', 'p-pais': 'Ir a un país', 'p-directo': 'Cortes en directo', 'p-que': '¿Qué es Órbita?',
+    zero: 'Ir al navegador ZERO', planeta: 'Explorar el planeta', com: 'Chat encriptado', datos: 'Ver lo que se ha cortado', 'que-es-guardiana': '¿Qué es GUARDIANA?',
+    'z-web': 'Ir a una web con el navegador ZERO', 'z-buscar': 'Buscar en internet', 'z-radio': 'Ver la Radiografía de una web', 'z-pdf': 'PDF de la web abierta', 'r-que': '¿Qué es la Radiografía?', resumen: 'Resumen de mis datos', 'res-pdf': 'Resumen de mis datos en PDF', 'res-video': 'Resumen de mis datos en vídeo', 'z-que': '¿Cómo funciona el navegador ZERO?', 'z-tor': 'Navegar con Tor',
+    'p-sub': 'Cables submarinos', 'p-fibra': 'Cables terrestres', 'p-puntos': 'Centros de datos', 'p-sat': 'Satélites', 'p-capas': 'Cables, centros de datos o satélites', 'p-pais': 'Ir a un país', 'p-directo': 'Cortes en directo', 'p-que': '¿Qué es Órbita?',
     'c-crear': 'Crear una invitación', 'c-codigo': 'Tengo un código', 'c-que': 'Cómo funciona Comunicaciones',
     'd-corte': '¿Qué es un corte?', borrar: 'Borrar mis datos de este navegador', privacidad: 'Privacidad', seguridad: '¿Es seguro?', vpn: '¿Es una VPN?', precio: 'Precio', cuenta: '¿Necesito una cuenta?', idioma: 'Idioma', contacto: 'Hablar con una persona',
   };
-  const RAPIDAS = [['zero', 'Ir al navegador ZERO'], ['z-radio', 'Ver la Radiografía'], ['datos', 'Mis datos'], ['resumen', 'Resumen en PDF o vídeo'], ['planeta', 'Explorar el planeta'], ['com', 'Chat encriptado']];
-  // «¿Qué puedo pedir?» (dueño, 14:12: «más profesional»): por parejas del mismo tamaño, para que cada fila de tarjetas sea
-  // simétrica; «Hablar con una persona» queda al pie, con el correo, y Órbita gana «¿Qué es Órbita?», como las demás
+  // El menú principal de la guía (dueño, 15:35–15:38: «guiado al 100 %, sin opción de escribir») y «¿Qué puedo pedir?» salen
+  // de aquí: el mismo árbol (ronda 63: nunca dos menús que se contradigan). Seis opciones con palabras de la calle, primero
+  // lo que se viene a hacer y al final descubrir y la ayuda; después, como mucho cuatro opciones por pregunta.
   const GRUPOS = [
-    ['Navegar y buscar', 'buscar', ['z-web', 'z-buscar', 'z-tor', 'z-que']],
-    ['Radiografía e informes', 'informe', ['z-radio', 'z-pdf', 'res-pdf', 'res-video']],
-    ['Mis datos', 'datos', ['datos', 'd-corte', 'borrar']],
-    ['Comunicaciones', 'chat', ['c-crear', 'c-codigo', 'c-que']],
-    ['Órbita', 'planeta', ['p-sub', 'p-fibra', 'p-puntos', 'p-sat', 'p-pais', 'p-directo', 'p-que']],
-    ['GUARDIANA', 'escudo', ['que-es-guardiana', 'privacidad', 'seguridad', 'vpn', 'precio', 'cuenta', 'idioma']],
+    ['nav', 'Navegar por internet', 'Abre webs y busca sin que te rastreen, con el navegador ZERO.', 'buscar', ['z-web', 'z-buscar', 'z-tor', 'z-que']],
+    ['rad', 'Ver quién me rastrea', 'En cada web, qué empresas intentan llevarse tus datos y de qué países.', 'ojo', ['z-radio', 'z-pdf', 'r-que', 'd-corte']],
+    ['dat', 'Ver mis datos', 'Lo que el navegador ZERO ha cortado. Se guarda solo en este navegador.', 'datos', ['datos', 'res-pdf', 'res-video', 'borrar']],
+    ['com', 'Hablar y enviar archivos', 'Chatea y manda archivos encriptados a otra persona.', 'chat', ['c-crear', 'c-codigo', 'c-que']],
+    ['orb', 'Explorar el planeta', 'Mira por dónde viaja internet: cables, centros de datos y satélites.', 'planeta', ['p-pais', 'p-capas', 'p-directo']],
+    ['gua', 'Ayuda y dudas', 'Qué es GUARDIANA, si es seguro, el precio o hablar con una persona.', 'ayuda', ['que-es-guardiana', 'seguridad', 'precio', 'contacto']],
   ];
   const ICONOS = {
+    ojo: '<path d="M2.8 12s3.4-6 9.2-6 9.2 6 9.2 6-3.4 6-9.2 6-9.2-6-9.2-6z"/><circle cx="12" cy="12" r="2.8"/>',
+    ayuda: '<circle cx="12" cy="12" r="8.5"/><path d="M9.7 9.6a2.4 2.4 0 1 1 3.3 2.2c-.6.3-1 .8-1 1.5v.6"/><path d="M12 16.6v.2"/>',
     buscar: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4L20 20"/>',
     informe: '<path d="M6.5 3h8l4 4v14h-12z"/><path d="M14.5 3v4h4M9.5 12h6M9.5 16h6"/>',
     datos: '<circle cx="12" cy="8.5" r="3.8"/><path d="M4.8 20c1.3-3.6 4-5.3 7.2-5.3s5.9 1.7 7.2 5.3"/>',
@@ -277,6 +287,8 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   function respuesta(r, frase) {
     const id = r.id, capa = CAPA_TXT[id];
     if (capa) return r.pais ? { t: pon('Te llevo al planeta: {1} en {2}.', T(capa), nombrePais(r.pais)), a: () => alPlaneta(id.slice(2), r.pais), va: true } : { t: pon('Te llevo al planeta y enciendo {1}.', T(capa)), a: () => alPlaneta(id.slice(2)), va: true };
+    // cada grupo del menú: su línea de explicación y sus opciones
+    if (/^m-/.test(id)) { const g = GRUPOS.find((x) => x[0] === id.slice(2)); if (g) return { intro: g[2], t: '¿Qué quieres hacer?', c: g[4] }; }
     switch (id) {
       case 'saludo': return { t: 'Hola, soy NÚCLEO. ¿Quieres navegar, explorar el planeta o chatear encriptado?', c: ['zero', 'planeta', 'com'] };
       case 'despedida': return { t: 'Hasta luego. Puedes volver cuando quieras.' };
@@ -292,26 +304,31 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       case 'z-pdf': return hayWeb() ? { t: 'Preparo el PDF con lo que el navegador ZERO ha visto en esta web.', a: pdfWeb, va: true } : { t: 'Para el PDF de una web, ábrela primero en el navegador ZERO. Si quieres el de tus datos, pídeme el resumen.', c: ['zero', 'resumen'] };
       case 'resumen': case 'res-pdf': case 'res-video': case 'res-web': case 'res-hora': case 'res-24h': return pideResumen(r);
       case 'z-que': return { t: AYUDA.zero, c: ['z-web', 'z-radio'] };
-      case 'z-tor': return { t: 'Abro el navegador ZERO: en el selector del buscador, elige Tor. Con Tor se corta más.', a: () => abreZero(), va: true };
+      case 'z-tor': return { t: 'Abro el navegador ZERO: en el selector del buscador, elige Tor. Con Tor se corta más.', a: () => abreZero(null, { tor: true }), va: true };
+      case 'r-que': return { t: 'La Radiografía está a la derecha del navegador ZERO: te enseña quién intenta conectarse, las subastas de tus datos y lo que puedes cortar.', c: ['z-radio', 'd-corte'] };
       case 'planeta': return { t: 'Te llevo al planeta: cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.', a: () => alPlaneta(), va: true };
-      case 'p-pais': return r.pais ? { t: pon('Te llevo al planeta, a {1}.', nombrePais(r.pais)), a: () => alPlaneta(null, r.pais), va: true } : { t: '¿Qué país? Escríbelo y te llevo.', modo: 'pais' };
+      case 'p-pais': return r.pais ? { t: pon('Te llevo al planeta, a {1}.', nombrePais(r.pais)), a: () => alPlaneta(null, r.pais), va: true } : { t: '¿A qué país te llevo?', c: paisesGuia().map((k) => ({ l: nombrePais(k), id: 'p-pais', extra: { pais: k }, nt: true })), paises: true, modo: 'pais' };
+      case 'p-capas': return { t: '¿Qué quieres ver?', c: ['p-sub', 'p-fibra', 'p-puntos', 'p-sat'] };
       case 'p-directo': return { t: 'Te llevo al planeta: a la derecha, en EN DIRECTO, aparece cada corte.', a: () => alPlaneta(), va: true };
       case 'p-caidas': return { t: 'No sigo caídas de internet. En Órbita, los cortes en directo son las conexiones que GUARDIANA corta mientras navegas. ¿Te los enseño?', c: ['p-directo'] };
       case 'p-que': return { t: AYUDA.orbita, c: ['p-sub', 'p-sat', 'p-pais'] };
       case 'com': return { t: 'Abro Comunicaciones: chat y archivos encriptados de PC a PC.', a: irComunicaciones, va: true };
-      case 'c-crear': return { t: 'Abro Comunicaciones: pulsa «Crear invitación» y dale el código a la otra persona.', a: irComunicaciones, va: true };
-      case 'c-codigo': return { t: 'Abro Comunicaciones: pulsa «Tengo un código» y escribe las 9 cifras.', a: irComunicaciones, va: true };
+      case 'c-crear': return { t: 'Abro Comunicaciones: pulsa «Crear invitación» y dale el código a la otra persona.', a: () => irComunicaciones('crear'), va: true };
+      case 'c-codigo': return { t: 'Abro Comunicaciones: pulsa «Tengo un código» y escribe las 9 cifras.', a: () => irComunicaciones('codigo'), va: true };
       case 'c-que': return { t: AYUDA.com, c: ['c-crear', 'c-codigo'] };
       case 'datos': return { x: [['Qué es', 'Lo que el navegador ZERO ha cortado mientras navegabas: qué empresas y de qué países.'], ['Dónde está', 'Solo en este navegador.']], t: misDatos(), c: hayAlgo() ? ['resumen', 'borrar'] : ['z-web'] };
       case 'd-corte': return { t: 'Un corte es una conexión de otra empresa que el navegador ZERO no deja pasar. Por defecto, todo pasa y tú decides qué cortar; con Tor, se corta más.', c: ['datos'] };
       case 'borrar': return hayAlgo() ? { t: '¿Borro lo que el navegador ZERO ha guardado aquí: cortes, empresas, países y Radiografías? No borra nada de otras webs ni de otros equipos.', c: [{ l: 'Sí, borrar', id: 'borrar-si' }, { l: 'No', id: 'borrar-no' }], modo: 'confirma-borrar' } : { t: 'No hay nada que borrar: el navegador ZERO todavía no ha guardado cortes aquí.' };
-      case 'borrar-si': borraDatos(); return { t: 'Hecho: he borrado «Mis datos» de este navegador.' };
-      case 'borrar-no': return { t: 'De acuerdo, no borro nada.' };
+      case 'borrar-si': borraDatos(); return { t: 'Hecho: he borrado «Mis datos» de este navegador.', fin: true };
+      case 'borrar-no': return { t: 'De acuerdo, no borro nada.', fin: true };
       case 'privacidad': return { t: 'NÚCLEO no guarda lo que le pides. Lo que corta el navegador ZERO («Mis datos») se guarda solo en este navegador, y puedes borrarlo cuando quieras.', c: ['datos', 'borrar'] };
-      case 'seguridad': return { t: 'El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.', c: ['z-que'] };
+      // ronda 63: como mucho cuatro opciones en «Ayuda y dudas»: la seguridad y la privacidad van juntas; el precio y la cuenta, también
+      case 'seguridad': return { x: [['¿Es seguro?', 'El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.'], ['Privacidad', 'NÚCLEO no guarda lo que le pides. Lo que corta el navegador ZERO («Mis datos») se guarda solo en este navegador, y puedes borrarlo cuando quieras.']], t: '¿Qué quieres hacer?', c: ['vpn', 'z-que'] };
       case 'vpn': return { t: 'ZERO no es una VPN: es un navegador aislado. La web se abre en un servidor de GUARDIANA y a tu equipo solo llegan imágenes.', c: ['zero'] };
-      case 'precio': return { t: 'Hoy GUARDIANA no cobra nada.' };
-      case 'idioma': return { t: 'Ahora GUARDIANA está en español e inglés; hay 40 idiomas más en preparación. ¿Cuál prefieres?', c: [{ l: 'Español', f: () => idioma('es'), nt: true }, { l: 'English', f: () => idioma('en'), nt: true }] };
+      case 'precio': return { x: [['Precio', 'Hoy GUARDIANA no cobra nada.']], t: 'No necesitas crear una cuenta para usar el navegador ZERO, Órbita ni Comunicaciones. ¿A cuál quieres entrar?', c: ['zero', 'planeta', 'com'] };
+      case 'idioma': return { t: 'Ahora GUARDIANA está en español e inglés; hay 40 idiomas más en preparación. ¿Cuál prefieres?', c: [{ l: 'Español', id: 'idioma-es', nt: true }, { l: 'English', id: 'idioma-en', nt: true }] };
+      // tras cambiar de idioma, la guía sigue en el idioma nuevo, desde el menú principal
+      case 'idioma-es': case 'idioma-en': idioma(id.slice(-2)); return { t: '¿Qué quieres hacer?', menu: true };
       case 'cuenta': return { t: 'No necesitas crear una cuenta para usar el navegador ZERO, Órbita ni Comunicaciones. ¿A cuál quieres entrar?', c: ['zero', 'planeta', 'com'] };
       case 'contacto': return { t: 'Puedes escribir a hola@guardianagroup.com: lo lee una persona.', enlace: ['mailto:hola@guardianagroup.com', 'hola@guardianagroup.com'] };
       // lo delicado (rondas 53 y 54)
@@ -340,7 +357,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     if (!pedido.periodo) return { t: '¿De qué periodo quieres el resumen?', c: PERIODOS.map(([p, l]) => ({ l, id: 'res-' + p })), modo: 'res-periodo' };
     if (!pedido.formato) return { t: '¿En PDF o en vídeo?', c: [{ l: 'PDF', id: 'res-pdf', nt: true }, { l: 'Vídeo', id: 'res-video' }], modo: 'res-formato' };
     const { periodo, formato } = pedido; pedido = { periodo: null, formato: null };
-    return { luego: () => (formato === 'video' ? resumenVideo(periodo) : resumenPdf(periodo)), formato, periodo };
+    return { luego: (t, paso) => (formato === 'video' ? resumenVideo(periodo, t, paso) : resumenPdf(periodo, t, paso)), formato, periodo };
   }
 
   // NÚCLEO tapa la pantalla entera (fondo opaco): mientras tanto el planeta de Órbita no se dibuja (menos batería y el vídeo
@@ -405,50 +422,67 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     // dueño, 11:00–11:01: fuera «Pídeselo a NÚCLEO» y el «NÚCLEO» de arriba; NÚCLEO no abre webs, te lleva al navegador ZERO
     s.innerHTML = '<header class="ns-cab"><button type="button" class="ns-boton" id="ns-inicio"><span aria-hidden="true">←</span> Inicio</button>'
       // dueño, 14:12: «¿Qué puedo pedir?» «muy desordenado; más profesional»: ocupa el sitio de la conversación, con seis
-      // tarjetas iguales en dos columnas (emparejadas por tamaño: 4 y 4, 3 y 3, 7 y 7) y una fila por opción; abierto, el botón dice «Cerrar»
-      + '<div class="ns-der"><button type="button" class="ns-boton ns-nueva" id="ns-nueva" aria-label="Nueva conversación"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v3.8h3.8"/></svg><span class="nn-t">Nueva conversación</span></button>'
+      // tarjetas iguales en dos columnas y una fila por opción; abierto, el botón dice «Cerrar». Ronda 63: el idioma, arriba
+      // (donde se busca siempre), en vez de una opción de la guía; fuera «Nueva conversación» (lo hace «Menú principal»).
+      + '<div class="ns-der"><button type="button" class="ns-boton ns-idioma" id="ns-idioma" translate="no"></button>'
       + '<button type="button" class="ns-boton ns-ayuda" id="ns-ayuda" aria-expanded="false" aria-controls="ns-panel"><span class="na-abre">¿Qué puedo pedir?</span>'
       + '<span class="na-cierra"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Cerrar</span></button></div></header>'
       + '<div class="ns-panel" id="ns-panel" role="region" aria-labelledby="np-t" hidden><div class="np-in"><div class="np-cab"><h2 id="np-t">¿Qué puedo pedir?</h2>'
-      + '<p>Elige una opción o escríbelo abajo, con tus palabras.</p></div><div class="np-grid"></div>'
+      + '<p>Toca una opción y NÚCLEO te guía paso a paso.</p></div><div class="np-grid"></div>'
       + '<p class="ns-contacto"><a href="mailto:hola@guardianagroup.com" translate="no">hola@guardianagroup.com</a> · <span>Responde una persona.</span></p></div></div>'
+      // ronda 63: una sola pregunta a la vez; encima, el camino («Estás aquí»); debajo, «← Atrás» y «Menú principal»
       + '<div class="ns-cuerpo" id="ns-cuerpo"><div class="ns-col">'
       + '<div class="ns-hola"><canvas class="ns-red" aria-hidden="true"></canvas>'
-      + '<p>Hola, soy NÚCLEO. Puedo llevarte al navegador ZERO, a Órbita o a Comunicaciones, enseñarte qué se ha cortado y preparar resúmenes en PDF o en vídeo. ¿Qué deseas hacer?</p></div>'
-      + '<div class="ns-charla" id="ns-charla" aria-live="polite"></div></div></div>'
-      + '<div class="ns-pie"><div class="ns-rapidas" id="ns-rapidas" role="group" aria-label="Acciones rápidas"></div>'
-      + '<form class="ns-form" id="ns-form" autocomplete="off"><input id="ns-q" type="text" maxlength="200" placeholder="Escribe qué quieres hacer…" aria-label="Habla con NÚCLEO" enterkeyhint="send"><button type="submit">Enviar</button></form>'
-      + '<p class="ns-nota">NÚCLEO entiende peticiones concretas y no guarda lo que le pides.</p></div>';
+      + '<p>Hola, soy NÚCLEO. Te guío paso a paso: toca una opción y siempre podrás volver atrás.</p></div>'
+      + '<nav class="ns-migas" id="ns-migas" aria-label="Estás aquí" hidden></nav>'
+      + '<p class="ns-aviso" id="ns-aviso" role="status" hidden></p>'
+      + '<div class="ns-charla" id="ns-charla"></div>'
+      + '<div class="ns-guia" id="ns-guia" hidden><button type="button" class="ns-atras" id="ns-atras"><span aria-hidden="true">←</span> Atrás</button>'
+      + '<button type="button" class="ns-menu-b" id="ns-menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.4 12 5l8 6.4"/><path d="M6.5 9.6V19h11V9.6"/></svg>Menú principal</button></div>'
+      + '</div></div>'
+      + '<div class="ns-pie"><p class="ns-nota">NÚCLEO no guarda lo que eliges.</p></div>';
     document.body.append(s);
-    const rap = s.querySelector('#ns-rapidas');
-    for (const [id, l] of RAPIDAS) { const b = document.createElement('button'); b.type = 'button'; b.className = 'nuc-chip'; b.textContent = l; b.addEventListener('click', () => elige(id, b.textContent)); rap.append(b); }
     const p = s.querySelector('#ns-panel'), rejilla = p.querySelector('.np-grid');
-    for (const [g, ico, ids] of GRUPOS) {
+    for (const [k, g, , ico, ids0] of GRUPOS) {
+      const ids = ids0.filter((x) => x !== 'contacto'); // el contacto va al pie del panel
       const sec = document.createElement('section'); sec.className = 'np-grupo';
       const h = document.createElement('h3'); h.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + ICONOS[ico] + '</svg>';
       const ht = document.createElement('span'); ht.textContent = g; h.append(ht); sec.append(h);
       const ul = document.createElement('ul'); ul.className = 'np-lista';
       for (const id of ids) {
         const li = document.createElement('li'), b = document.createElement('button'), t = document.createElement('span');
-        b.type = 'button'; b.className = 'np-op'; t.textContent = ETQ[id] || id; b.append(t);
-        b.addEventListener('click', () => { panel(false); elige(id, t.textContent); }); li.append(b); ul.append(li);
+        b.type = 'button'; b.className = 'np-op'; b.dataset.op = id; t.textContent = ETQ[id] || id; b.append(t);
+        b.addEventListener('click', () => { panel(false); desdePanel(k, id); }); li.append(b); ul.append(li);
       }
       sec.append(ul); rejilla.append(sec);
     }
     s.querySelector('#ns-inicio').addEventListener('click', alInicio);
-    s.querySelector('#ns-nueva').addEventListener('click', limpia);
+    s.querySelector('#ns-atras').addEventListener('click', atras);
+    s.querySelector('#ns-menu').addEventListener('click', () => menu());
+    s.querySelector('#ns-idioma').addEventListener('click', cambiaIdioma);
     s.querySelector('#ns-ayuda').addEventListener('click', () => panel(p.hidden));
     p.addEventListener('scroll', () => bordes(p), { passive: true });
-    s.querySelector('#ns-form').addEventListener('submit', (e) => { e.preventDefault(); const i = s.querySelector('#ns-q'); const f = i.value; i.value = ''; panel(false); escribe(f); });
-    s.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!p.hidden) panel(false); else alInicio(); } });
+    s.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!p.hidden) panel(false); else if (pasos.length > 1) atras(); else alInicio(); } });
     return s;
   }
+  // elegir en «¿Qué puedo pedir?» deja el mismo camino que la guía: Menú principal › el grupo › la opción
+  function desdePanel(k, id) {
+    const g = GRUPOS.find((x) => x[0] === k); if (!g) return;
+    menu(); elige('m-' + k, T(g[1])); elige(id, T(ETQ[id] || id));
+  }
+  // el idioma (ronda 63: arriba): español ↔ inglés, y la guía vuelve a empezar en el idioma nuevo
+  const idiomaAhora = () => { try { return (window.GuardianaIdioma && GuardianaIdioma.lang) || 'es'; } catch (_) { return 'es'; } };
+  function pintaIdioma() { const b = sala && sala.querySelector('#ns-idioma'); if (!b) return; const en = idiomaAhora() === 'en'; b.textContent = en ? 'Español' : 'English'; b.lang = en ? 'es' : 'en'; }
+  function cambiaIdioma() { idioma(idiomaAhora() === 'en' ? 'es' : 'en'); pintaIdioma(); limpia(); }
+  // el idioma de la página puede ponerse después de abrir NÚCLEO (al cargar): el botón y el camino, al día
+  addEventListener('guardiana-idioma', () => { pintaIdioma(); if (sala && pasos.length > 1) migas(); });
   // al desplazar el panel, sus bordes se funden: arriba si hay algo encima; abajo si queda más por ver
   function bordes(p) { p.classList.toggle('np-sube', p.scrollTop > 2); p.classList.toggle('np-baja', p.scrollTop + p.clientHeight < p.scrollHeight - 2); }
   function panel(abre) {
     if (!sala) return; const p = sala.querySelector('#ns-panel'), b = sala.querySelector('#ns-ayuda');
     p.hidden = !abre; b.setAttribute('aria-expanded', String(!!abre)); sala.classList.toggle('con-panel', !!abre);
     if (abre) { p.scrollTop = 0; bordes(p); const x = p.querySelector('.np-op'); if (x) x.focus({ preventScroll: true }); }
+    else if (pasos.length) foco();
   }
   // dueño, 14:42: «quieres volver atrás…»: la sección de NÚCLEO tiene su paso en el historial (?nucleo=pide), así que la
   // flecha de atrás del navegador vuelve a la portada de NÚCLEO en vez de salir de GUARDIANA; «Inicio» hace lo mismo
@@ -470,14 +504,21 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     if (enHistoria()) { if ((!sala || sala.hidden) && ini && !ini.hidden) abreSala(false); }
     else if (sala && !sala.hidden) { apilada = false; cierraSala(); muestraInicio(true); }
   });
-  function abreSala(apila) {
+  // camino: el de la guía antes de irse a otra página (Comunicaciones), para volver al mismo paso
+  function abreSala(apila, camino) {
     if (!sala) sala = construyeSala();
     if (!sala.hidden) return;
     if (apila !== false && !PUERTA_EN_URL) ponEnHistoria();
     if (ini && !ini.hidden) ocultaInicio();
     sala.hidden = false; botonInicio(false); tapa();
     if (salaRed) salaRed.para(); salaRed = red(sala.querySelector('.ns-red'), { nace: false });
-    setTimeout(() => { const i = sala.querySelector('#ns-q'); if (i) i.focus({ preventScroll: true }); }, 60);
+    pintaIdioma();
+    try { sessionStorage.removeItem(CAMINO); } catch (_) {}
+    if (!pasos.length) { menu(true); if (camino) reconstruye(camino); }
+    // ronda 63: al volver, el mismo paso y una línea que lo dice
+    if (pasos.length > 1) aviso('Has vuelto a NÚCLEO. Sigue donde lo dejaste.');
+    fuera = false;
+    setTimeout(foco, 60);
   }
   function cierraSala() {
     if (!sala || sala.hidden) return;
@@ -485,96 +526,232 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     if (salaRed) { salaRed.para(); salaRed = null; }
     if (!ini || ini.hidden) botonInicio(true);
   }
-  // ---------- la conversación, ordenada (dueño, 14:42: «el chat sigue multiplicando chat… desorden: ordénalo milimétrico»;
-  // 14:55: «ultra fácil de utilizar y entender», «todo muy bien estructurado») ----------
-  // 1. Solo la última pregunta tiene botones: en cuanto la persona hace algo, los de antes se van (su respuesta queda escrita).
-  // 2. Pedir otra vez lo que ya está preguntado no lo repite: se ilumina la pregunta abierta. Igual con un vídeo en marcha.
-  // 3. Ir a otro sitio con un clic (navegador ZERO, planeta, chat) no deja mensajes: se va directo; al volver, todo sigue igual.
-  // 4. El PDF y el vídeo salen en su tarjeta (arriba). 5. «Nueva conversación» lo deja como al entrar.
+  // ---------- la guía (dueño, 14:42: «el chat sigue multiplicando chat… ordénalo milimétrico»; 14:55: «ultra fácil»; 15:35–15:38:
+  // «guiado al 100 %, para que la persona no se pierda en ningún momento; una guía perfecta», «sin opción de escribir»).
+  // Ronda 63 (las dos voces): no es un chat que se alarga, sino una sola pregunta a la vez que cambia en el mismo sitio, como la
+  // pantalla de un cajero:
+  // 1. Encima, el camino («Menú principal › Ver mis datos › Resumen en PDF»); cada paso anterior se puede tocar para volver.
+  // 2. Debajo, siempre a mano, «← Atrás» (deshace el último paso y recuerda lo elegido) y «Menú principal».
+  // 3. Como mucho cuatro opciones por pregunta después del menú; una pregunta por paso (el periodo y el formato, por separado).
+  // 4. Lo que lleva a otro sitio (navegador ZERO, el planeta, Comunicaciones) va directo; al volver, el mismo paso y «Has
+  //    vuelto a NÚCLEO». 5. El PDF y el vídeo salen en su tarjeta, que es un paso más. 6. Lo que no se puede deshacer
+  //    (borrar) se confirma, y «Sí» o «No» devuelven a la lista de la que se vino, diciendo lo que ha pasado.
+  let pasos = [];    // la pila de la guía: [{ id, l: lo que dice el camino, extra, o: lo que enseña, b: su tarjeta, pedido }]
+  let turno = 0;     // cambia con cada paso: lo que llega tarde (un PDF, un vídeo) no pisa la pregunta nueva
+  let fuera = false; // la persona se fue a otro sitio desde la guía
+  const CAMINO = 'nucleo-camino';
   const charla = () => sala.querySelector('#ns-charla');
-  function baja(el) { const cu = sala.querySelector('#ns-cuerpo'); requestAnimationFrame(() => { if (!el || el === charla().lastElementChild) cu.scrollTop = cu.scrollHeight; else el.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }); }
-  function recorta() { const c = charla(); while (c.children.length > 40) { const x = c.firstElementChild; if (x.dataset.url) { URL.revokeObjectURL(x.dataset.url); URLS.delete(x.dataset.url); } x.remove(); } }
-  function cierraOpciones() { charla().querySelectorAll(':scope > .nuc-b.el > .ns-opciones').forEach((f) => f.remove()); }
-  function abierta() { const x = charla().lastElementChild; return x && x.classList.contains('el') && x.querySelector(':scope > .ns-opciones') ? x : null; }
-  function destaca(b) { if (!b) return; b.classList.remove('destaca'); void b.offsetWidth; b.classList.add('destaca'); baja(b); }
-  function burbuja(quien, texto, op) {
-    op = op || {};
-    const c = charla(); const p = document.createElement('div'); p.className = 'nuc-b ' + quien;
-    if (quien === 'el') { const k = document.createElement('span'); k.className = 'nq'; k.setAttribute('translate', 'no'); k.textContent = 'NÚCLEO'; p.append(k); }
-    if (op.x && op.x.length) { const dl = document.createElement('dl'); dl.className = 'nuc-x'; for (const [k, v] of op.x) { const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k; dd.textContent = v; dl.append(dt, dd); } p.append(dl); }
-    const tx = document.createElement('p'); tx.className = 'nuc-bt'; tx.textContent = texto; if (quien === 'tu') tx.setAttribute('translate', 'no'); p.append(tx);
-    if (op.enlace) { const a = document.createElement('a'); a.href = op.enlace[0]; a.textContent = op.enlace[1]; a.className = 'ns-enlace'; a.setAttribute('translate', 'no'); p.append(a); }
-    if (op.c && op.c.length) {
-      p.dataset.pregunta = texto;
-      const f = document.createElement('div'); f.className = 'ns-opciones';
-      for (const o of op.c) {
-        const b = document.createElement('button'); b.type = 'button'; b.className = 'nuc-chip';
-        if (typeof o === 'string') { b.textContent = ETQ[o] || o; b.addEventListener('click', () => elige(o, b.textContent)); }
-        else { b.textContent = o.l; if (o.nt) b.setAttribute('translate', 'no'); b.addEventListener('click', () => (o.id ? elige(o.id, b.textContent, o.extra) : (cierraOpciones(), burbuja('tu', b.textContent), o.f()))); }
+  const actual = () => pasos[pasos.length - 1] || null;
+  const suelta = (x) => {
+    if (!x || !x.dataset) return;
+    if (x.dataset.url) { URL.revokeObjectURL(x.dataset.url); URLS.delete(x.dataset.url); delete x.dataset.url; }
+    if (grabando && grabando.b === x) { try { grabando.ab.abort(); } catch (_) {} grabando = null; }
+  };
+  function aviso(txt) { const a = sala.querySelector('#ns-aviso'); a.textContent = T(txt); a.hidden = false; }
+  function quitaAviso() { const a = sala && sala.querySelector('#ns-aviso'); if (a && !a.hidden) { a.hidden = true; a.textContent = ''; } }
+  // el foco va a la pregunta nueva: quien usa lector de pantalla la oye; con teclado, el siguiente Tab es la primera opción
+  function foco() { const p = actual(), h = p && p.b && p.b.querySelector('.ns-foco'); if (h && sala && !sala.hidden && !sala.classList.contains('con-panel') && h.isConnected) h.focus({ preventScroll: true }); }
+  // ensena: enseña una tarjeta en el sitio de la pregunta (las demás quedan guardadas en la pila, fuera de la página)
+  function ensena(b) {
+    const c = charla();
+    for (const x of [...c.children]) if (x !== b) x.remove();
+    if (b.parentNode !== c) c.append(b);
+    sala.classList.toggle('vacia', pasos.length <= 1);
+    migas(); guia();
+    sala.querySelector('#ns-cuerpo').scrollTop = 0;
+    if (!sala.hidden) foco();
+  }
+  // «Estás aquí»: con más de cuatro pasos, el principio, «…» y los dos últimos
+  function migas() {
+    const n = sala.querySelector('#ns-migas');
+    n.replaceChildren(); n.hidden = pasos.length <= 1;
+    if (n.hidden) return;
+    const ol = document.createElement('ol'), todos = pasos.map((p, i) => ({ i, l: i === 0 ? T('Menú principal') : p.l }));
+    const ver = todos.length > 4 ? [todos[0], null, ...todos.slice(-2)] : todos;
+    for (const it of ver) {
+      const li = document.createElement('li');
+      if (!it) { li.textContent = '…'; li.setAttribute('aria-hidden', 'true'); }
+      else if (it.i === pasos.length - 1) { const s = document.createElement('span'); s.textContent = it.l; s.setAttribute('aria-current', 'step'); li.append(s); }
+      else { const b = document.createElement('button'); b.type = 'button'; b.textContent = it.l; b.addEventListener('click', () => vuelveA(it.i)); li.append(b); }
+      ol.append(li);
+    }
+    n.append(ol);
+  }
+  // «← Atrás» y «Menú principal»: en cada paso menos en el menú; «Atrás» no sale tras lo que no se puede deshacer
+  function guia() {
+    const raiz = pasos.length <= 1, p = actual();
+    sala.querySelector('#ns-guia').hidden = raiz;
+    sala.querySelector('#ns-atras').hidden = raiz || !!(p && p.o && p.o.fin);
+  }
+  const PAISES_GUIA = { es: ['CO', 'MX', 'ES', 'AR', 'PE', 'US'], en: ['US', 'GB', 'CA', 'AU', 'IN', 'IE'], pt: ['BR', 'PT', 'US', 'ES', 'AR', 'MX'] };
+  function paisesGuia() {
+    const C = (window.OrbitaPlaneta && OrbitaPlaneta.centros) || {}, l = idiomaAhora().slice(0, 2);
+    let L = (PAISES_GUIA[l] || ['US', 'GB', 'DE', 'FR', 'ES', 'BR']).slice();
+    try { const r = (navigator.language || '').split('-')[1]; if (r && /^[A-Z]{2}$/.test(r)) L = [r, ...L.filter((x) => x !== r)]; } catch (_) {}
+    return L.filter((k) => !Object.keys(C).length || C[k]).slice(0, 6);
+  }
+  // las opciones de un paso: filas grandes, una debajo de otra; lo elegido queda marcado para cuando se vuelva atrás
+  function ponOpciones(p, o) {
+    const f = document.createElement('div'); f.className = 'ns-opciones';
+    const marca = (b) => { f.querySelectorAll('.ns-elegida').forEach((x) => x.classList.remove('ns-elegida')); b.classList.add('ns-elegida'); };
+    if (o.menu) {
+      // el menú principal: seis tarjetas (icono, título y una línea), en dos columnas
+      f.classList.add('ns-menu-ops');
+      for (const [k, g, linea, ico] of GRUPOS) {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'ns-gran'; b.dataset.op = 'm-' + k;
+        b.innerHTML = '<span class="ng-ico"><svg viewBox="0 0 24 24" aria-hidden="true">' + ICONOS[ico] + '</svg></span><span class="ng-txt"><b></b><small></small></span>';
+        b.querySelector('b').textContent = T(g); b.querySelector('small').textContent = T(linea);
+        b.addEventListener('click', () => { marca(b); elige('m-' + k, T(g)); });
         f.append(b);
       }
-      p.append(f);
+      p.append(f); return;
     }
-    c.append(p); recorta(); sala.classList.remove('vacia');
-    baja();
+    const filas = document.createElement('div'); filas.className = 'ns-filas';
+    for (const x of o.c || []) {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'ns-fila-op';
+      const t = document.createElement('span'), cadena = typeof x === 'string';
+      const id = cadena ? x : x.id, l = cadena ? T(ETQ[x] || x) : (x.nt ? x.l : T(x.l));
+      t.textContent = l; if (!cadena && x.nt) t.setAttribute('translate', 'no');
+      if (id) b.dataset.op = id;
+      b.addEventListener('click', () => { marca(b); if (id) elige(id, l, cadena ? null : x.extra); else if (x.f) x.f(); });
+      b.append(t); filas.append(b);
+    }
+    if (o.paises) {
+      // «Ir a un país»: seis países habituales y, para los demás, una lista (sin escribir)
+      const sel = document.createElement('select'); sel.className = 'ns-sel'; sel.setAttribute('aria-label', T('Otro país'));
+      const op0 = document.createElement('option'); op0.value = ''; op0.textContent = T('Otro país…'); sel.append(op0);
+      const C = (window.OrbitaPlaneta && OrbitaPlaneta.centros) || {};
+      Object.keys(C).filter((k) => /^[A-Z]{2}$/.test(k)).map((k) => [k, nombrePais(k)]).sort((a, b) => a[1].localeCompare(b[1], loc()))
+        .forEach(([k, n]) => { const o2 = document.createElement('option'); o2.value = k; o2.textContent = n; sel.append(o2); });
+      sel.setAttribute('translate', 'no');
+      sel.addEventListener('change', () => { if (sel.value) elige('p-pais', sel.options[sel.selectedIndex].textContent, { pais: sel.value }); });
+      filas.append(sel);
+    }
+    if (filas.children.length) f.append(filas);
+    p.append(f);
+  }
+  // la tarjeta de un paso: lo que explica NÚCLEO y su pregunta (si solo explica y hay opciones, «¿Qué quieres hacer?»)
+  function pinta(o) {
+    const p = document.createElement('div'); p.className = 'nuc-b el ns-paso' + (o.menu ? ' ns-menu' : '') + (o.espera ? ' ns-espera' : '');
+    if (o.menu) {
+      const h = document.createElement('h2'); h.className = 'nuc-bt ns-preg ns-foco'; h.tabIndex = -1; h.textContent = T(o.t); p.append(h);
+      ponOpciones(p, o); return p;
+    }
+    const k = document.createElement('span'); k.className = 'nq'; k.setAttribute('translate', 'no'); k.textContent = 'NÚCLEO'; p.append(k);
+    if (o.intro) { const i = document.createElement('p'); i.className = 'ns-intro'; i.textContent = T(o.intro); p.append(i); }
+    if (o.x && o.x.length) { const dl = document.createElement('dl'); dl.className = 'nuc-x'; for (const [a, v] of o.x) { const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = T(a); dd.textContent = T(v); dl.append(dt, dd); } p.append(dl); }
+    const pregunta = /[¿?]/.test(o.t || ''), hay = !!((o.c && o.c.length) || o.paises);
+    const tx = document.createElement(pregunta ? 'h2' : 'p'); tx.className = 'nuc-bt ns-foco' + (pregunta ? ' ns-preg' : ''); tx.tabIndex = -1; tx.textContent = T(o.t || ''); p.append(tx);
+    if (o.enlace) { const a = document.createElement('a'); a.href = o.enlace[0]; a.textContent = o.enlace[1]; a.className = 'ns-enlace'; a.setAttribute('translate', 'no'); p.append(a); }
+    if (!pregunta && hay) { const h = document.createElement('h2'); h.className = 'nuc-bt ns-preg'; h.textContent = T('¿Qué quieres hacer?'); p.append(h); }
+    if (hay) ponOpciones(p, o);
     return p;
   }
   const ctx = () => ({ modo, pais: paisEn, hayWeb: hayWeb() });
-  // qué haría NÚCLEO con lo pedido (sin enseñarlo todavía)
   function calcula(r, frase) {
     if (r.quiza) return { t: '¿Quisiste decir…?', c: r.quiza };
-    if (r.nada) return { t: 'No he reconocido esa petición. Mira qué puedes pedirme o ve al navegador ZERO.', c: ['zero', { l: '¿Qué puedo pedir?', f: () => panel(true) }] };
-    return respuesta(r, frase) || { t: 'No he reconocido esa petición.', c: [{ l: '¿Qué puedo pedir?', f: () => panel(true) }] };
+    if (r.nada) return { t: 'Elige una de estas opciones.', menu: true };
+    return respuesta(r, frase) || { t: 'Elige una de estas opciones.', menu: true };
   }
-  function ejecuta(o) {
-    if (salaRed) salaRed.habla();
-    if (o.luego) { modo = null; o.luego().then((x) => { if (x) muestra(x); }, () => muestra({ t: 'No he podido preparar el resumen. Inténtalo de nuevo.' })); return; }
-    muestra(o);
-  }
-  function muestra(o) {
-    burbuja('el', T(o.t), o);
+  // un paso nuevo: su tarjeta, apuntada en la pila de la guía
+  function muestra(o, entrada) {
+    if (o.menu) { pasos.forEach((q) => suelta(q.b)); pasos = []; }
+    const b = pinta(o);
+    pasos.push(Object.assign({}, entrada || {}, { o, b, pedido: Object.assign({}, pedido) }));
     modo = o.modo || null;
-    const i = sala.querySelector('#ns-q');
-    if (i) i.placeholder = T(modo === 'web' ? 'Escribe la dirección, por ejemplo eltiempo.com' : modo === 'pais' ? 'Escribe el país' : modo === 'buscar' ? 'Escribe lo que quieres buscar' : 'Escribe qué quieres hacer…');
+    ensena(b);
     if (o.a) o.a();
+    return b;
   }
-  const vaAOtroSitio = (o) => { cierraOpciones(); modo = null; ponVuelta('nucleo'); o.a(); };
-  // un botón (de una pregunta, de las acciones rápidas o de «¿Qué puedo pedir?»)
+  // lo de un paso cambia (el resumen ya está, o no se pudo): la misma posición en la pila, otra tarjeta
+  function cambiaNodo(paso, b) { const viejo = paso.b; paso.b = b; if (viejo !== b) { const enPantalla = !!(viejo && viejo.isConnected); suelta(viejo); if (enPantalla) ensena(b); } }
+  function cambia(paso, x) { paso.o = x; modo = x.modo || null; cambiaNodo(paso, pinta(x)); }
+  function ejecuta(o, entrada) {
+    if (salaRed) salaRed.habla();
+    if (o.luego) {
+      // el resumen: mientras se prepara, «Un momento…» en su sitio; luego, su tarjeta
+      const t = ++turno; modo = null;
+      const paso = Object.assign({}, entrada || {}, { o: { resultado: true }, b: pinta({ t: 'Un momento: preparo el resumen.', espera: true }), pedido: { periodo: null, formato: null } });
+      pasos.push(paso); ensena(paso.b);
+      o.luego(t, paso).then((x) => { if (t === turno && x) cambia(paso, x); }, () => { if (t === turno) cambia(paso, NO_RESUMEN); });
+      return;
+    }
+    turno++; muestra(o, entrada);
+  }
+  // tras un resultado (PDF o vídeo), su siguiente paso dentro de la misma tarjeta
+  function pasoResultado(b) {
+    const o = { c: [{ l: 'Hacer otro resumen', id: 'resumen' }] };
+    ponOpciones(b, o); const x = b.querySelector('.ns-opciones'); if (x) x.classList.add('ns-en-tarjeta');
+    const p = pasos.find((q) => q.b === b); if (p) p.o = Object.assign({}, p.o, o);
+  }
+  // «Menú principal»: las seis opciones (la misma tarjeta, con lo último elegido marcado); al entrar, se crea
+  function menu(primero) {
+    quitaAviso(); turno++;
+    if (!primero && salaRed) salaRed.habla();
+    pedido = { periodo: null, formato: null }; modo = null;
+    if (!primero && pasos.length && pasos[0].o.menu) { while (pasos.length > 1) suelta(pasos.pop().b); ensena(pasos[0].b); return; }
+    muestra({ t: '¿Qué quieres hacer?', menu: true });
+  }
+  // volver a un paso anterior (el camino de arriba o «← Atrás»): se descarta lo que vino después y se recupera lo elegido
+  function vuelveA(i) {
+    if (i <= 0) { menu(); return; }
+    quitaAviso(); turno++;
+    while (pasos.length > i + 1) suelta(pasos.pop().b);
+    const p = actual(); pedido = Object.assign({}, p.pedido); modo = p.o.modo || null;
+    ensena(p.b);
+  }
+  function atras() { vuelveA(pasos.length - 2); }
+  // ir a otro sitio: directo, sin mensajes; se guarda el camino por si es otra página (Comunicaciones), para volver al mismo paso
+  function vaAOtroSitio(o) {
+    modo = null; ponVuelta('nucleo'); fuera = true;
+    try { sessionStorage.setItem(CAMINO, JSON.stringify({ t: Date.now(), c: pasos.slice(1).filter((p) => p.id && !(p.o && p.o.resultado)).map((p) => ({ id: p.id, l: p.l, extra: p.extra || null })) })); } catch (_) {}
+    o.a();
+  }
+  // al volver de otra página: se rehace el camino, paso a paso, sin repetir nada que haga algo (ni resúmenes ni borrar)
+  function reconstruye(cam) {
+    if (!cam || !Array.isArray(cam.c) || !(Date.now() - (cam.t || 0) < 3600e3)) return;
+    const NO = new Set(['borrar-si', 'borrar-no', 'idioma-es', 'idioma-en']);
+    for (const e of cam.c) {
+      if (!e || typeof e.id !== 'string' || NO.has(e.id)) break;
+      const ex = e.extra && typeof e.extra === 'object' ? e.extra : null;
+      const o = calcula(Object.assign({ id: e.id }, ex || {}));
+      if (!o || o.va || o.luego || o.menu || o.a) break;
+      muestra(o, { id: e.id, l: String(e.l || ''), extra: ex });
+    }
+  }
+  // un botón (de la guía o de «¿Qué puedo pedir?»)
   function elige(id, etiqueta, extra) {
     if (!sala || sala.hidden) abreSala();
+    quitaAviso();
+    // «No» al borrar: nada cambia y se vuelve a donde se estaba, diciéndolo
+    if (id === 'borrar-no') { atras(); aviso('De acuerdo, no borro nada.'); return; }
     const o = calcula(Object.assign({ id }, extra || {}));
     if (o.va && o.a) { vaAOtroSitio(o); return; }
-    if (o.luego && o.formato === 'video' && grabando) {
-      cierraOpciones();
-      if (o.periodo !== grabando.periodo) { burbuja('tu', etiqueta || T(ETQ[id] || id)); burbuja('el', T('Ya se está haciendo un vídeo.')); }
-      destaca(grabando.b); return;
-    }
-    const ab = abierta();
-    if (ab && !o.luego && o.c && ab.dataset.pregunta === T(o.t)) { destaca(ab); return; }
-    cierraOpciones(); burbuja('tu', etiqueta || T(ETQ[id] || id)); ejecuta(o);
+    // «Sí, borrar»: hecho (no se puede deshacer), y de vuelta a la lista de la que se vino, con lo que ha pasado
+    if (id === 'borrar-si') { atras(); const p = actual(); if (p && p.id === 'datos') cambia(p, calcula({ id: 'datos' })); aviso(o.t); return; }
+    ejecuta(o, { id, l: etiqueta || T(ETQ[id] || id), extra: extra || null });
   }
-  // lo que se escribe en la caja
+  // sin caja de escribir (dueño, 15:38); se queda para quien llame a NÚCLEO desde otra parte (GuardianaNucleo.pide)
   function escribe(frase) {
     const f = String(frase || '').trim(); if (!f) return;
     if (!sala || sala.hidden) abreSala();
-    cierraOpciones(); burbuja('tu', f);
+    quitaAviso();
     let r = null; try { r = window.NucleoMotor ? NucleoMotor.entiende(f, ctx()) : null; } catch (_) {}
     const o = calcula(r || { nada: true }, f);
-    // escrito, queda constancia en una línea («Abro el navegador ZERO.») y se va al momento
-    if (o.va && o.a) { burbuja('el', T(o.t)); vaAOtroSitio(o); return; }
-    if (o.luego && o.formato === 'video' && grabando) { burbuja('el', T('Ya se está haciendo un vídeo.')); destaca(grabando.b); return; }
-    ejecuta(o);
+    if (o.va && o.a) { vaAOtroSitio(o); return; }
+    if (o.menu) { menu(); return; }
+    ejecuta(o, { id: r && r.id, l: corta(f), extra: null });
   }
-  // «Nueva conversación»: todo como al entrar (el vídeo en marcha se cancela y los archivos hechos se sueltan)
-  let limpiando = false;
+  // todo como al entrar (el vídeo en marcha se cancela y los archivos hechos se sueltan)
   function limpia() {
-    limpiando = true; if (grabando) { try { grabando.ab.abort(); } catch (_) {} }
+    turno++; if (grabando) { try { grabando.ab.abort(); } catch (_) {} grabando = null; }
+    pasos.forEach((q) => suelta(q.b)); pasos = [];
     for (const u of URLS) URL.revokeObjectURL(u); URLS.clear();
     charla().replaceChildren(); pedido = { periodo: null, formato: null }; modo = null;
-    sala.classList.add('vacia'); panel(false);
-    const i = sala.querySelector('#ns-q'); if (i) { i.value = ''; i.placeholder = T('Escribe qué quieres hacer…'); i.focus({ preventScroll: true }); }
-    setTimeout(() => { limpiando = false; }, 0);
+    panel(false); quitaAviso(); menu(true);
   }
+  // de vuelta con la flecha del navegador desde otra página (la página se recupera tal cual): la línea de «Has vuelto»
+  addEventListener('pageshow', (e) => { if (e.persisted && fuera && sala && !sala.hidden && pasos.length > 1) { fuera = false; aviso('Has vuelto a NÚCLEO. Sigue donde lo dejaste.'); try { sessionStorage.removeItem(CAMINO); } catch (_) {} } });
 
   // ---------- los países que conoce el planeta, en español, inglés, portugués y el idioma de la página ----------
   let PAISES = null;
@@ -620,8 +797,10 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
 
   // ---------- arranque: la primera vez en esta visita, con su nacimiento; al volver en la misma visita, al momento ----------
   let visto = false; try { visto = sessionStorage.getItem('guardiana-nucleo') === '1'; sessionStorage.setItem('guardiana-nucleo', '1'); } catch (_) {}
-  if (q.get('nucleo') === 'pide') { try { history.replaceState(Object.assign({}, history.state || {}, { nucleo: 'sala' }), ''); } catch (_) {} abreSala(false); }
+  // el camino de la guía, si se volvió de otra página (Comunicaciones): se lee una vez y se borra
+  let camino = null; try { camino = JSON.parse(sessionStorage.getItem(CAMINO) || 'null'); sessionStorage.removeItem(CAMINO); } catch (_) {}
+  if (q.get('nucleo') === 'pide') { try { history.replaceState(Object.assign({}, history.state || {}, { nucleo: 'sala' }), ''); } catch (_) {} abreSala(false, vuelta() === 'nucleo' ? camino : null); }
   else if (q.get('nucleo') === '0' || PUERTA_EN_URL) botonInicio(true);
   else muestraInicio(visto);
-  window.GuardianaNucleo = { inicio: () => muestraInicio(true), sala: abreSala, pide: escribe };
+  window.GuardianaNucleo = { inicio: () => muestraInicio(true), sala: () => abreSala(), pide: escribe };
 })();
