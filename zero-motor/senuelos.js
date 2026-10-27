@@ -2,7 +2,7 @@
 //
 // Marcas únicas por sesión que ZERO planta en la celda donde nadie tiene motivo para mirar: un texto escondido en la
 // página, una cookie propia de la web visitada, un dato en el almacén local, un enlace oculto a un colector propio y
-// (para PUERTA IA) un archivo con nombre tentador. Si una de esas marcas reaparece en algo que sale de la celda
+// un archivo con nombre tentador. Si una de esas marcas reaparece en algo que sale de la celda
 // (dirección, cuerpo, cabecera, trama de WebSocket) o alguien visita el enlace, ZERO lo afirma con evidencia:
 // «este dato marcado salió hacia X por Y». Nunca se afirma más que eso (ronda 40: ni «ha entrenado con tus datos»
 // ni acusaciones). Falsos positivos conocidos: previsualizadores de enlaces e indexadores que siguen el enlace; la
