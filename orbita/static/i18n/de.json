@@ -1901,7 +1901,9 @@
   "complementos": "Erweiterungen",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "In ZERO öffnet sich jede Website in einer Blase auf einem Server von GUARDIANA: Was diese Unternehmen erhalten haben, gehört zur Blase — neue Kennungen, die Adresse des Servers —, nicht zu deinem Gerät, und es wird beim Schließen gelöscht.",
   "Radiografía": "Röntgenbild",
-  "Burbuja en": "Blase in"
+  "Burbuja en": "Blase in",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE-ERGEBNISSE · WICHTIGSTE WEBSITES",
+  "País de las webs": "Land der Websites"
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

@@ -1900,7 +1900,9 @@
   "complementos": "افزونه‌ها",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "درون ZERO، هر وب‌سایت در حبابی روی سروری از GUARDIANA باز می‌شود: آنچه این شرکت‌ها دریافت کردند مال حباب است —شناسه‌های تازه، نشانی سرور—، نه دستگاه شما، و با بسته شدن حباب پاک می‌شود.",
   "Radiografía": "پرتونگاری",
-  "Burbuja en": "حباب در"
+  "Burbuja en": "حباب در",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "نتایج Google · سایت‌های اصلی",
+  "País de las webs": "کشور سایت‌ها"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

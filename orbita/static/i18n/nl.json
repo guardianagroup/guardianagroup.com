@@ -1901,7 +1901,9 @@
   "complementos": "plug-ins",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "In ZERO opent elke site in een bubbel op een server van GUARDIANA: wat deze bedrijven ontvingen, hoort bij de bubbel —nieuwe kenmerken, het adres van de server—, niet bij je apparaat, en het wordt gewist zodra de bubbel sluit.",
   "Radiografía": "Röntgenfoto",
-  "Burbuja en": "Bubbel in"
+  "Burbuja en": "Bubbel in",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE-RESULTATEN · BELANGRIJKSTE SITES",
+  "País de las webs": "Land van de sites"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

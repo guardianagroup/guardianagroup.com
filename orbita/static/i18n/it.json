@@ -1901,7 +1901,9 @@
   "complementos": "componenti aggiuntivi",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "Dentro ZERO, ogni sito si apre in una bolla su un server di GUARDIANA: ciò che queste aziende hanno ricevuto appartiene alla bolla —identificativi nuovi, l’indirizzo del server—, non al tuo dispositivo, e alla chiusura della bolla viene eliminato.",
   "Radiografía": "Radiografia",
-  "Burbuja en": "Bolla in"
+  "Burbuja en": "Bolla in",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "RISULTATI DI GOOGLE · PRINCIPALI SITI",
+  "País de las webs": "Paese dei siti"
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

@@ -1901,7 +1901,9 @@
   "complementos": "tillägg",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "Inne i ZERO öppnas varje webbplats i en bubbla på en server hos GUARDIANA: det som de här företagen fick tillhör bubblan – nya identifierare, serverns adress – och inte din enhet, och när bubblan stängs raderas det.",
   "Radiografía": "Röntgen",
-  "Burbuja en": "Bubbla i"
+  "Burbuja en": "Bubbla i",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE-RESULTAT · VIKTIGASTE WEBBPLATSER",
+  "País de las webs": "Webbplatsernas land"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

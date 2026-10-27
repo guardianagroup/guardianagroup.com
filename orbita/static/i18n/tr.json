@@ -1901,7 +1901,9 @@
   "complementos": "eklentiler",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "ZERO'nun içinde her site GUARDIANA'nın bir sunucusundaki balonda açılır: bu şirketlerin aldıkları balona aittir —yeni tanımlayıcılar, sunucunun adresi—, senin cihazına değil; balon kapanınca da silinir.",
   "Radiografía": "Röntgen",
-  "Burbuja en": "Balon:"
+  "Burbuja en": "Balon:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE SONUÇLARI · BAŞLICA SİTELER",
+  "País de las webs": "Sitelerin ülkesi"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

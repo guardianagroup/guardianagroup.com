@@ -1,0 +1,12 @@
+await new Promise(r=>setTimeout(r,2500));
+const set=(el,v)=>{const d=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');d.set.call(el,v);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))};
+const nom=[...document.querySelectorAll('input')].find(e=>e.labels&&e.labels[0]&&/Nombre del buscador/.test(e.labels[0].innerText));
+const sit=[...document.querySelectorAll('input')].find(e=>e.labels&&e.labels[0]&&/Introduce un sitio/.test(e.labels[0].innerText));
+const add=document.querySelector('button[aria-label="Add url patterns"]');
+nom.focus(); set(nom,"GUARDIANA Argentina");
+const L=["*.clarin.com/*", "*.lanacion.com.ar/*", "*.infobae.com/*", "*.pagina12.com.ar/*", "*.perfil.com/*", "*.ambito.com/*", "*.cronista.com/*", "*.tn.com.ar/*", "*.minutouno.com/*", "*.eldestapeweb.com/*", "*.lavoz.com.ar/*", "*.losandes.com.ar/*", "*.lacapital.com.ar/*", "*.lagaceta.com.ar/*", "*.c5n.com/*", "*.iprofesional.com/*", "*.eldiarioar.com/*", "*.cronica.com.ar/*", "*.ole.com.ar/*", "*.tycsports.com/*", "*.espn.com.ar/*", "*.smn.gob.ar/*", "*.meteored.com.ar/*", "*.argentina.gob.ar/*", "*.arca.gob.ar/*", "*.afip.gob.ar/*", "*.anses.gob.ar/*", "*.buenosaires.gob.ar/*", "*.migraciones.gob.ar/*", "*.mercadolibre.com.ar/*", "*.fravega.com/*", "*.garbarino.com/*", "*.musimundo.com/*", "*.carrefour.com.ar/*", "*.zonaprop.com.ar/*", "*.argenprop.com/*", "*.properati.com.ar/*", "*.bumeran.com.ar/*", "*.zonajobs.com.ar/*", "*.computrabajo.com/*", "*.aerolineas.com.ar/*", "*.despegar.com.ar/*", "*.flybondi.com/*", "*.wikipedia.org/*", "*.rae.es/*", "*.youtube.com/*", "*.facebook.com/*", "*.instagram.com/*", "*.tiktok.com/*", "*.x.com/*"];
+const tengo=()=>[...document.body.innerText.matchAll(/^([^\n]*\/\*)\nEliminar/gm)].map(m=>m[1]);
+for (let vuelta=0; vuelta<3; vuelta++) { const ya=tengo(); for (const s of L.filter(x=>!ya.includes(x))) { sit.focus(); set(sit,s); await new Promise(r=>setTimeout(r,200)); add.click(); await new Promise(r=>setTimeout(r,450)); } }
+const ss=document.querySelector('button[aria-label="Enable SafeSearch"]'); if (ss && ss.getAttribute('aria-checked')!=='true') ss.click();
+await new Promise(r=>setTimeout(r,600));
+JSON.stringify({nombre:nom.value, sitios:tengo().length, faltan:L.filter(x=>!tengo().includes(x)), safe:ss&&ss.getAttribute('aria-checked')})

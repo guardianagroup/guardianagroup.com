@@ -1900,7 +1900,9 @@
   "complementos": "добавки",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "В ZERO всеки сайт се отваря в балон на сървър на GUARDIANA: това, което тези компании получиха, е на балона —нови идентификатори, адресът на сървъра—, а не на устройството ти, и при затварянето му се изтрива.",
   "Radiografía": "Рентгенова снимка",
-  "Burbuja en": "Балон в"
+  "Burbuja en": "Балон в",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "РЕЗУЛТАТИ ОТ GOOGLE · ОСНОВНИ САЙТОВЕ",
+  "País de las webs": "Държава на сайтовете"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

@@ -1900,7 +1900,9 @@
   "complementos": "lisäosat",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "ZEROssa jokainen sivusto avautuu kuplassa GUARDIANAn palvelimella: se, mitä nämä yritykset saivat, kuuluu kuplalle —uudet tunnisteet, palvelimen osoite—, ei laitteellesi, ja se poistetaan, kun kupla suljetaan.",
   "Radiografía": "Röntgenkuva",
-  "Burbuja en": "Kupla:"
+  "Burbuja en": "Kupla:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE-TULOKSET · TÄRKEIMMÄT SIVUSTOT",
+  "País de las webs": "Sivustojen maa"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

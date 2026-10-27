@@ -1900,7 +1900,9 @@
   "complementos": "پلگ انز",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "ZERO کے اندر ہر سائٹ GUARDIANA کے ایک سرور پر ایک بلبلے میں کھلتی ہے: ان کمپنیوں کو جو ملا وہ بلبلے کا ہے —نئے شناخت کنندے، سرور کا پتا—، آپ کی ڈیوائس کا نہیں، اور بلبلہ بند کرنے پر یہ مٹ جاتا ہے۔",
   "Radiografía": "ایکس رے",
-  "Burbuja en": "بلبلے کا مقام:"
+  "Burbuja en": "بلبلے کا مقام:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Google کے نتائج · اہم سائٹس",
+  "País de las webs": "سائٹس کا ملک"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

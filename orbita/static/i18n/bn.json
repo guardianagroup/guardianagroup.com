@@ -1900,7 +1900,9 @@
   "complementos": "প্লাগইন",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "ZERO-র ভেতরে প্রতিটি সাইট GUARDIANA-র একটি সার্ভারে একটি বাবলে খোলে: এই কোম্পানিগুলো যা পেয়েছে তা বাবলের —নতুন শনাক্তকারী, সার্ভারের ঠিকানা—, আপনার ডিভাইসের নয়, এবং বাবল বন্ধ হলে তা মুছে যায়।",
   "Radiografía": "এক্স-রে",
-  "Burbuja en": "বাবলের অবস্থান:"
+  "Burbuja en": "বাবলের অবস্থান:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Google-এর ফলাফল · প্রধান সাইটগুলো",
+  "País de las webs": "সাইটগুলোর দেশ"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

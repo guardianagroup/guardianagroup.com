@@ -1901,7 +1901,9 @@
   "complementos": "الإضافات",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "داخل ZERO، يُفتح كل موقع في فقاعة على خادم تابع لـ GUARDIANA: ما تلقته هذه الشركات يخص الفقاعة —معرّفات جديدة، وعنوان الخادم—، لا جهازك، ويُحذف عند إغلاقها.",
   "Radiografía": "الأشعة",
-  "Burbuja en": "الفقاعة في"
+  "Burbuja en": "الفقاعة في",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "نتائج Google · أبرز المواقع",
+  "País de las webs": "دولة المواقع"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

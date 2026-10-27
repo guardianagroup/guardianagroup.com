@@ -1900,7 +1900,9 @@
   "complementos": "תוספים",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "בתוך ZERO, כל אתר נפתח בבועה בשרת של GUARDIANA: מה שהחברות האלה קיבלו שייך לבועה —מזהים חדשים, כתובת השרת—, לא למכשיר שלך, וזה נמחק כשהיא נסגרת.",
   "Radiografía": "צילום רנטגן",
-  "Burbuja en": "מיקום הבועה:"
+  "Burbuja en": "מיקום הבועה:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "תוצאות Google · האתרים המובילים",
+  "País de las webs": "מדינת האתרים"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

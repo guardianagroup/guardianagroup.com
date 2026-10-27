@@ -1,0 +1,12 @@
+await new Promise(r=>setTimeout(r,2500));
+const set=(el,v)=>{const d=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');d.set.call(el,v);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))};
+const nom=[...document.querySelectorAll('input')].find(e=>e.labels&&e.labels[0]&&/Nombre del buscador/.test(e.labels[0].innerText));
+const sit=[...document.querySelectorAll('input')].find(e=>e.labels&&e.labels[0]&&/Introduce un sitio/.test(e.labels[0].innerText));
+const add=document.querySelector('button[aria-label="Add url patterns"]');
+nom.focus(); set(nom,"GUARDIANA Perú");
+const L=["*.elcomercio.pe/*", "*.larepublica.pe/*", "*.peru21.pe/*", "*.rpp.pe/*", "*.gestion.pe/*", "*.diariocorreo.pe/*", "*.exitosanoticias.pe/*", "*.canaln.pe/*", "*.americatv.com.pe/*", "*.latina.pe/*", "*.panamericana.pe/*", "*.ojo.pe/*", "*.infobae.com/*", "*.depor.com/*", "*.libero.pe/*", "*.futbolperuano.com/*", "*.senamhi.gob.pe/*", "*.sunat.gob.pe/*", "*.reniec.gob.pe/*", "*.migraciones.gob.pe/*", "*.essalud.gob.pe/*", "*.minsa.gob.pe/*", "*.sunarp.gob.pe/*", "*.sat.gob.pe/*", "*.mtc.gob.pe/*", "*.mercadolibre.com.pe/*", "*.falabella.com.pe/*", "*.plazavea.com.pe/*", "*.ripley.com.pe/*", "*.oechsle.pe/*", "*.promart.pe/*", "*.tottus.com.pe/*", "*.wong.pe/*", "*.metro.pe/*", "*.sodimac.com.pe/*", "*.urbania.pe/*", "*.adondevivir.com/*", "*.bumeran.com.pe/*", "*.computrabajo.com/*", "*.latamairlines.com/*", "*.skyairline.com/*", "*.cruzdelsur.com.pe/*", "*.despegar.com.pe/*", "*.wikipedia.org/*", "*.rae.es/*", "*.youtube.com/*", "*.facebook.com/*", "*.instagram.com/*", "*.tiktok.com/*", "*.x.com/*"];
+const tengo=()=>[...document.body.innerText.matchAll(/^([^\n]*\/\*)\nEliminar/gm)].map(m=>m[1]);
+for (let vuelta=0; vuelta<3; vuelta++) { const ya=tengo(); for (const s of L.filter(x=>!ya.includes(x))) { sit.focus(); set(sit,s); await new Promise(r=>setTimeout(r,200)); add.click(); await new Promise(r=>setTimeout(r,450)); } }
+const ss=document.querySelector('button[aria-label="Enable SafeSearch"]'); if (ss && ss.getAttribute('aria-checked')!=='true') ss.click();
+await new Promise(r=>setTimeout(r,600));
+JSON.stringify({nombre:nom.value, sitios:tengo().length, faltan:L.filter(x=>!tengo().includes(x)), safe:ss&&ss.getAttribute('aria-checked')})

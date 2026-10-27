@@ -1900,7 +1900,9 @@
   "complementos": "doplnky",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "V ZERO sa každý web otvára v bubline na serveri GUARDIANA: to, čo tieto firmy dostali, patrí bubline – nové identifikátory, adresa servera –, nie tvojmu zariadeniu, a po zatvorení bubliny sa to vymaže.",
   "Radiografía": "Röntgen",
-  "Burbuja en": "Umiestnenie bubliny:"
+  "Burbuja en": "Umiestnenie bubliny:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "VÝSLEDKY GOOGLE · HLAVNÉ WEBY",
+  "País de las webs": "Krajina webov"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

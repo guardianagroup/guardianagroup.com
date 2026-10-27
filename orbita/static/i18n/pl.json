@@ -1901,7 +1901,9 @@
   "complementos": "wtyczki",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "W ZERO każda strona otwiera się w bańce na serwerze GUARDIANA: to, co otrzymały te firmy, należy do bańki —nowe identyfikatory, adres serwera—, a nie do twojego urządzenia, i jest usuwane po jej zamknięciu.",
   "Radiografía": "Prześwietlenie",
-  "Burbuja en": "Bańka:"
+  "Burbuja en": "Bańka:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "WYNIKI GOOGLE · NAJWAŻNIEJSZE WITRYNY",
+  "País de las webs": "Kraj witryn"
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

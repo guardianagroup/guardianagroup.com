@@ -1,0 +1,12 @@
+await new Promise(r=>setTimeout(r,2500));
+const set=(el,v)=>{const d=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');d.set.call(el,v);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}))};
+const nom=[...document.querySelectorAll('input')].find(e=>e.labels&&e.labels[0]&&/Nombre del buscador/.test(e.labels[0].innerText));
+const sit=[...document.querySelectorAll('input')].find(e=>e.labels&&e.labels[0]&&/Introduce un sitio/.test(e.labels[0].innerText));
+const add=document.querySelector('button[aria-label="Add url patterns"]');
+nom.focus(); set(nom,"GUARDIANA Colombia");
+const L=["*.eltiempo.com/*", "*.elespectador.com/*", "*.semana.com/*", "*.elcolombiano.com/*", "*.elheraldo.co/*", "*.elpais.com.co/*", "*.larepublica.co/*", "*.portafolio.co/*", "*.pulzo.com/*", "*.lasillavacia.com/*", "*.caracol.com.co/*", "*.caracoltv.com/*", "*.noticiasrcn.com/*", "*.bluradio.com/*", "*.wradio.com.co/*", "*.vanguardia.com/*", "*.eluniversal.com.co/*", "*.futbolred.com/*", "*.winsports.co/*", "*.golcaracol.com/*", "*.ideam.gov.co/*", "*.dian.gov.co/*", "*.registraduria.gov.co/*", "*.cancilleria.gov.co/*", "*.migracioncolombia.gov.co/*", "*.minsalud.gov.co/*", "*.sena.edu.co/*", "*.icfes.gov.co/*", "*.policia.gov.co/*", "*.fcm.org.co/*", "*.mercadolibre.com.co/*", "*.falabella.com.co/*", "*.exito.com/*", "*.alkosto.com/*", "*.homecenter.com.co/*", "*.rappi.com.co/*", "*.olimpica.com/*", "*.fincaraiz.com.co/*", "*.metrocuadrado.com/*", "*.computrabajo.com/*", "*.elempleo.com/*", "*.avianca.com/*", "*.despegar.com.co/*", "*.wikipedia.org/*", "*.rae.es/*", "*.youtube.com/*", "*.facebook.com/*", "*.instagram.com/*", "*.tiktok.com/*", "*.x.com/*"];
+const tengo=()=>[...document.body.innerText.matchAll(/^([^\n]*\/\*)\nEliminar/gm)].map(m=>m[1]);
+for (let vuelta=0; vuelta<3; vuelta++) { const ya=tengo(); for (const s of L.filter(x=>!ya.includes(x))) { sit.focus(); set(sit,s); await new Promise(r=>setTimeout(r,200)); add.click(); await new Promise(r=>setTimeout(r,450)); } }
+const ss=document.querySelector('button[aria-label="Enable SafeSearch"]'); if (ss && ss.getAttribute('aria-checked')!=='true') ss.click();
+await new Promise(r=>setTimeout(r,600));
+JSON.stringify({nombre:nom.value, sitios:tengo().length, faltan:L.filter(x=>!tengo().includes(x)), safe:ss&&ss.getAttribute('aria-checked')})

@@ -1899,7 +1899,9 @@
   "complementos": "dodaci",
   "Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.": "Unutar ZERO-a svaka se stranica otvara u mjehuriću na poslužitelju GUARDIANA: ono što su te tvrtke primile pripada mjehuriću —novi identifikatori, adresa poslužitelja—, a ne tvom uređaju, i briše se kad se mjehurić zatvori.",
   "Radiografía": "Rendgen",
-  "Burbuja en": "Mjehurić:"
+  "Burbuja en": "Mjehurić:",
+  "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE REZULTATI · GLAVNE STRANICE",
+  "País de las webs": "Država stranica"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",
