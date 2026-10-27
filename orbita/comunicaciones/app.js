@@ -678,6 +678,9 @@
   // ---------- eventos ----------
   function eventos() {
     $('#nueva').addEventListener('click', creaInvitacion);
+    // «Crear invitación» al final del bloque para profesionales: sube al principio y hace lo mismo que el botón grande.
+    const proEmpezar = $('#pro-empezar');
+    if (proEmpezar) proEmpezar.addEventListener('click', () => { const ini = $('#inicio'); if (ini) ini.scrollTo({ top: 0, behavior: 'smooth' }); $('#nueva').click(); });
     $('#unir').addEventListener('click', () => { $('#unir-mal').hidden = true; $('#unir-espera').hidden = true; $('#unir-codigo').value = ''; $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = false; setTimeout(() => $('#unir-codigo').focus(), 50); });
     $('#unir-cerrar').addEventListener('click', () => { $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; });
     // Campo del código: solo cifras, nueve como mucho (lo que pase de nueve no entra), guiones automáticos y sin selección azul
