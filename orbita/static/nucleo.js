@@ -131,7 +131,7 @@
     'z-radio': { d: () => T('La Radiografía está a la derecha de ZERO: abre una web y verás quién intenta conectarse, las subastas de tus datos y lo que puedes cortar. Abro ZERO.'), a: () => abreZero() },
     'z-pdf': { d: () => (marcoZero() && typeof marcoZero().zeroInforme === 'function') ? T('Preparo el PDF con lo que ZERO ha visto en esta web.') : T('Para el PDF necesito una web abierta en ZERO. Abro ZERO: abre una web y vuelve a pedírmelo.'), a: () => { if (!pdf()) abreZero(); } },
     'z-que': { d: () => T(AYUDA.zero), o: ['z-web', 'z-radio', 'z-pdf'] },
-    planeta: { x: [['Qué es', 'Un mapa de la Tierra con los caminos por los que viajan tus datos.'], ['Qué ves', 'Cables submarinos, por tierra, centros de datos y satélites.'], ['En directo', 'Cada vez que GUARDIANA corta algo, lo ves aparecer en el planeta.']], d: () => T('¿Qué quieres ver?'), o: ['p-sub', 'p-fibra', 'p-puntos', 'p-sat', 'p-pais', 'p-directo'] },
+    planeta: { x: [['Qué es', 'Un mapa de la Tierra con los caminos por los que viajan tus datos.'], ['Qué ves', 'Cables submarinos, cables terrestres, centros de datos y satélites.'], ['En directo', 'Cada vez que GUARDIANA corta algo, lo ves aparecer en el planeta.']], d: () => T('¿Qué quieres ver?'), o: ['p-sub', 'p-fibra', 'p-puntos', 'p-sat', 'p-pais', 'p-directo'] },
     'p-sub': { d: () => pon('Te llevo al planeta y enciendo {1}.', T('los cables submarinos')), a: () => alPlaneta('sub') },
     'p-fibra': { d: () => pon('Te llevo al planeta y enciendo {1}.', T('los cables por tierra')), a: () => alPlaneta('fibra') },
     'p-puntos': { d: () => pon('Te llevo al planeta y enciendo {1}.', T('los centros de datos')), a: () => alPlaneta('puntos') },
@@ -210,7 +210,7 @@
       + '<div class="nuc-charla" id="nuc-charla" aria-live="polite"></div>'
       + '<div class="nuc-ops nuc-paso" id="nuc-ops" role="group" aria-label="Qué deseas hacer">'
       + '<button type="button" class="nuc-op" data-n="zero"><i>ZERO</i><b>Navegar con NÚCLEO</b><small>Entra en cualquier web y mira quién intenta llevarse tus datos.</small></button>'
-      + '<button type="button" class="nuc-op" data-n="planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos, por tierra, centros de datos, satélites y cortes en directo.</small></button>'
+      + '<button type="button" class="nuc-op" data-n="planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.</small></button>'
       + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Hablar cifrado</b><small>Habla y envía archivos con otra persona, cifrados de un equipo al otro.</small></button>'
       + '</div>'
       + '<div class="nuc-chips nuc-paso" id="nuc-chips" role="group" aria-label="Más opciones"></div>'
