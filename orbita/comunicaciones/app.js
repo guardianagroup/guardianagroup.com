@@ -680,14 +680,23 @@
     $('#nueva').addEventListener('click', creaInvitacion);
     $('#unir').addEventListener('click', () => { $('#unir-mal').hidden = true; $('#unir-espera').hidden = true; $('#unir-codigo').value = ''; $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = false; setTimeout(() => $('#unir-codigo').focus(), 50); });
     $('#unir-cerrar').addEventListener('click', () => { $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; });
-    $('#unir-codigo').addEventListener('input', (e) => { const d = e.target.value.replace(/\D/g, '').slice(0, 9); e.target.value = d.replace(/(\d{3})(?=\d)/g, '$1-'); $('#unir-mal').hidden = true; if (d.length === 9) $('#unir-ok').click(); });
+    // Campo del código: solo cifras, nueve como mucho (lo que pase de nueve no entra), guiones automáticos y sin selección azul
+    const campoCod = $('#unir-codigo');
+    campoCod.addEventListener('beforeinput', (e) => {
+      if (!e.inputType || !e.inputType.startsWith('insert')) return;
+      const nuevas = String(e.data || '').replace(/\D/g, '');
+      const sel = campoCod.selectionEnd - campoCod.selectionStart;
+      const ya = campoCod.value.replace(/\D/g, '').length - (sel > 0 ? campoCod.value.slice(campoCod.selectionStart, campoCod.selectionEnd).replace(/\D/g, '').length : 0);
+      if (campoCod.readOnly || (e.inputType !== 'insertFromPaste' && (!nuevas || ya >= 9))) e.preventDefault();
+    });
+    campoCod.addEventListener('input', (e) => { const d = e.target.value.replace(/\D/g, '').slice(0, 9); e.target.value = d.replace(/(\d{3})(?=\d)/g, '$1-'); try { e.target.setSelectionRange(e.target.value.length, e.target.value.length); } catch (_) {} $('#unir-mal').hidden = true; if (d.length === 9) $('#unir-ok').click(); });
     $('#unir-ok').addEventListener('click', async () => {
-      const b = $('#unir-ok'); if (b.disabled) return; b.disabled = true; $('#unir-mal').hidden = true; $('#unir-espera').hidden = false;
+      const b = $('#unir-ok'); if (b.disabled) return; b.disabled = true; campoCod.readOnly = true; $('#unir-mal').hidden = true; $('#unir-espera').hidden = false;
       const r = await aceptaCodigo($('#unir-codigo').value);
-      b.disabled = false; $('#unir-espera').hidden = true;
+      b.disabled = false; campoCod.readOnly = false; $('#unir-espera').hidden = true;
       if (r === 'ok') { $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; return; }
       $('#unir-mal').textContent = r === 'demasiados intentos' ? T('Demasiados intentos: espera un minuto.') : r === 'sin relé' || r === 'sin respuesta' ? T('Sin conexión con el relé: espera un momento.') : T('Ese código no vale o ha caducado. Pídele uno nuevo a la otra persona.');
-      $('#unir-mal').hidden = false; $('#unir-codigo').focus(); $('#unir-codigo').select();
+      $('#unir-mal').hidden = false; campoCod.focus(); try { campoCod.setSelectionRange(campoCod.value.length, campoCod.value.length); } catch (_) {}
     });
     $('#unir-codigo').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#unir-ok').click(); });
     $('#terminar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c) return; if (!confirm(T('¿Terminar la conversación? Se borra aquí y en el otro equipo.'))) return; await destruye(c); });
