@@ -376,7 +376,6 @@
   "También en": "พบใน",
   "Datos de ejemplo de la demostración.": "ข้อมูลตัวอย่างจากการสาธิต",
   "Datos de ejemplo.": "ข้อมูลตัวอย่าง",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "ค้นหาด้วย DuckDuckGo ภายใน Tor (.onion)",
   "Exportar ficha": "ส่งออกการ์ด",
   "Solo en esta web, por ahora.": "เฉพาะในเว็บนี้ ณ ตอนนี้",
   "Aún no hay cortes en esta web.": "ยังไม่มีการตัดในเว็บนี้",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "โหมดปกปิด",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "โหมดปกปิด: แชทจะเบลอจนกว่าคุณจะกดค้างไว้ และสิ่งที่คุณพิมพ์จะแสดงเป็นตัวเลข กดปุ่มนี้เพื่อให้ทุกอย่างแสดงตามปกติ",
   "Modo discreto: lo que escribas se verá como números": "โหมดปกปิด: สิ่งที่คุณพิมพ์จะแสดงเป็นตัวเลข",
-  "Código erróneo o caducado.": "รหัสไม่ถูกต้องหรือหมดอายุแล้ว"
+  "Código erróneo o caducado.": "รหัสไม่ถูกต้องหรือหมดอายุแล้ว",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "ค้นหาด้วย Brave Search ภายใน Tor (.onion)"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

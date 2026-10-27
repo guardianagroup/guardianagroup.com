@@ -376,7 +376,6 @@
   "También en": "Även på",
   "Datos de ejemplo de la demostración.": "Exempeldata från demon.",
   "Datos de ejemplo.": "Exempeldata.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Sökningar med DuckDuckGo inuti Tor (.onion).",
   "Exportar ficha": "Exportera kort",
   "Solo en esta web, por ahora.": "Bara på den här sidan, hittills.",
   "Aún no hay cortes en esta web.": "Inga stopp på den här sidan ännu.",
@@ -1668,7 +1667,8 @@
   "Modo discreto": "Diskret läge",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Diskret läge: chatten är suddig tills du håller den intryckt, och det du skriver visas som siffror. Tryck på den för att se allt som vanligt.",
   "Modo discreto: lo que escribas se verá como números": "Diskret läge: det du skriver visas som siffror",
-  "Código erróneo o caducado.": "Fel eller utgången kod."
+  "Código erróneo o caducado.": "Fel eller utgången kod.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Sökningar med Brave Search inuti Tor (.onion)."
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

@@ -376,7 +376,6 @@
   "También en": "Също и в",
   "Datos de ejemplo de la demostración.": "Примерни данни от демонстрацията.",
   "Datos de ejemplo.": "Примерни данни.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Търсене с DuckDuckGo вътре в Tor (.onion).",
   "Exportar ficha": "Експортиране на картата",
   "Solo en esta web, por ahora.": "Засега само на този сайт.",
   "Aún no hay cortes en esta web.": "Още няма прекъсвания на този сайт.",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "Дискретен режим",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Дискретен режим: чатът е размазан, докато не го задържите, а това, което пишете, се показва като цифри. Натиснете този бутон, за да виждате всичко нормално.",
   "Modo discreto: lo que escribas se verá como números": "Дискретен режим: това, което пишете, ще се показва като цифри",
-  "Código erróneo o caducado.": "Грешен или изтекъл код."
+  "Código erróneo o caducado.": "Грешен или изтекъл код.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Търсене с Brave Search вътре в Tor (.onion)."
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

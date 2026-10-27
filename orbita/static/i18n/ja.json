@@ -376,7 +376,6 @@
   "También en": "他のサイトでも",
   "Datos de ejemplo de la demostración.": "デモ用のサンプルデータです。",
   "Datos de ejemplo.": "サンプルデータ。",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Tor 内の DuckDuckGo（.onion）で検索。",
   "Exportar ficha": "カードを書き出す",
   "Solo en esta web, por ahora.": "今のところ、このサイトのみ。",
   "Aún no hay cortes en esta web.": "このサイトでの遮断はまだありません。",
@@ -1668,7 +1667,8 @@
   "Modo discreto": "のぞき見防止モード",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "のぞき見防止モード：長押しするまでチャットがぼかされ、入力した文字は数字で表示されます。押すと、すべて通常どおり表示されます。",
   "Modo discreto: lo que escribas se verá como números": "のぞき見防止モード：入力した文字は数字で表示されます",
-  "Código erróneo o caducado.": "コードが間違っているか、有効期限が切れています。"
+  "Código erróneo o caducado.": "コードが間違っているか、有効期限が切れています。",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Tor 内の Brave Search（.onion）で検索。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

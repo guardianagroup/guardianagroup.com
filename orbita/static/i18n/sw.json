@@ -376,7 +376,6 @@
   "También en": "Pia imeonekana kwenye",
   "Datos de ejemplo de la demostración.": "Data ya mfano kutoka onyesho.",
   "Datos de ejemplo.": "Data ya mfano.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Utafutaji kwa DuckDuckGo ndani ya Tor (.onion).",
   "Exportar ficha": "Hamisha kadi",
   "Solo en esta web, por ahora.": "Kwenye tovuti hii tu, kwa sasa.",
   "Aún no hay cortes en esta web.": "Bado hakuna kukatwa kwenye tovuti hii.",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "Hali ya faragha",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Hali ya faragha: gumzo linaonekana kwa ukungu hadi ulishikilie, na unachoandika kinaonekana kama nambari. Bonyeza kitufe hiki ili kuona kila kitu kama kawaida.",
   "Modo discreto: lo que escribas se verá como números": "Hali ya faragha: utakachoandika kitaonekana kama nambari",
-  "Código erróneo o caducado.": "Msimbo si sahihi au muda wake umeisha."
+  "Código erróneo o caducado.": "Msimbo si sahihi au muda wake umeisha.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Utafutaji kwa Brave Search ndani ya Tor (.onion)."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

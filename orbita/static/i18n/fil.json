@@ -376,7 +376,6 @@
   "También en": "Nakita rin sa",
   "Datos de ejemplo de la demostración.": "Halimbawang data mula sa demo.",
   "Datos de ejemplo.": "Halimbawang data.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Paghahanap gamit ang DuckDuckGo sa loob ng Tor (.onion).",
   "Exportar ficha": "I-export ang card",
   "Solo en esta web, por ahora.": "Sa site na ito lang, sa ngayon.",
   "Aún no hay cortes en esta web.": "Wala pang pagputol sa site na ito.",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "Pribadong mode",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Pribadong mode: malabo ang chat hangga't hindi mo ito pinipindot nang matagal, at lumalabas bilang mga numero ang tina-type mo. Pindutin ang button na ito para makita nang normal ang lahat.",
   "Modo discreto: lo que escribas se verá como números": "Pribadong mode: lalabas bilang mga numero ang ita-type mo",
-  "Código erróneo o caducado.": "Mali o paso na ang code."
+  "Código erróneo o caducado.": "Mali o paso na ang code.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Paghahanap gamit ang Brave Search sa loob ng Tor (.onion)."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

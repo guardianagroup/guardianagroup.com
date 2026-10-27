@@ -376,7 +376,6 @@
   "También en": "Einnig á",
   "Datos de ejemplo de la demostración.": "Sýnigögn úr sýnidæminu.",
   "Datos de ejemplo.": "Sýnigögn.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Leitir með DuckDuckGo innan Tor (.onion).",
   "Exportar ficha": "Flytja út spjald",
   "Solo en esta web, por ahora.": "Aðeins á þessari síðu, enn sem komið er.",
   "Aún no hay cortes en esta web.": "Engar lokanir á þessari síðu enn.",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "Næðishamur",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Næðishamur: spjallið er óskýrt þar til þú heldur því inni og það sem þú skrifar birtist sem tölur. Ýttu á hnappinn til að sjá allt eðlilega.",
   "Modo discreto: lo que escribas se verá como números": "Næðishamur: það sem þú skrifar birtist sem tölur",
-  "Código erróneo o caducado.": "Rangur eða útrunninn kóði."
+  "Código erróneo o caducado.": "Rangur eða útrunninn kóði.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Leitir með Brave Search innan Tor (.onion)."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

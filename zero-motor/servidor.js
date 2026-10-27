@@ -20,6 +20,7 @@ const { Empresas, baseDominio } = require('./empresas');
 const SENSORES = require('./sensores');
 const { Senuelos } = require('./senuelos');
 const { Rele } = require('./comunicaciones');
+const { FiltroRed, onionVetada, esOnion, ipProhibida, nombreLocal } = require('./filtro-red');
 
 const RAIZ = path.join(__dirname, '..');
 const PUERTO = +process.argv[2] || 8792;
@@ -33,6 +34,16 @@ const CLAVE_SESION = crypto.randomBytes(32); // efímera: con ella se sella el c
 const ORIGENES = (process.env.ZERO_ORIGENES || 'https://guardianagroup.com,https://www.guardianagroup.com,http://127.0.0.1,http://localhost').split(',').map((x) => x.trim().replace(/\/$/, '')).filter(Boolean);
 const MAX_SESIONES = +process.env.ZERO_MAX_SESIONES || 8;
 const TOR_PROXY = process.env.ZERO_TOR_PROXY || ''; // p. ej. socks5://127.0.0.1:9050 en el servidor con Tor; sin él, ULTRA no se ofrece
+// Celda sellada hacia dentro y ULTRA capado (26 Oct 2026, dueño; ronda 50b): cada celda sale por su propio filtro SOCKS
+// (filtro-red.js). Ninguna web abierta en ZERO puede conectar con este servidor, con redes privadas ni con los metadatos del
+// proveedor; y con ULTRA, Tor solo sirve para la web normal: toda .onion fuera, salvo servicios oficiales verificados.
+// ZERO_FILTRO_RED=0 quita el filtro de las celdas normales (ULTRA lo lleva siempre). En pruebas locales (sin ZERO_PUBLICO,
+// o con ZERO_PERMITE_LOCAL=1) se deja llegar a 127.0.0.1 para los sitios de prueba.
+const FILTRO_RED = process.env.ZERO_FILTRO_RED !== '0';
+const PERMITE_LOCAL = process.env.ZERO_PERMITE_LOCAL === '1' || !process.env.ZERO_PUBLICO;
+const TXT_LOCAL = 'Conexión con una dirección interna bloqueada. Las webs abiertas en ZERO no pueden llegar a este servidor, a redes privadas ni a los datos internos del proveedor.';
+const TXT_ONION = 'Dirección .onion bloqueada. ULTRA navega solo por la web normal: ZERO no abre la parte oculta de Tor, salvo servicios oficiales verificados (como el buscador de Brave).';
+const TXT_ONION_SIN_ULTRA = 'Las direcciones .onion solo se abren con ULTRA activado, y solo las de servicios oficiales verificados (como el buscador de Brave).';
 const MAX_MENSAJE = 64 * 1024;
 const MIN_SIN_MIRAR = +process.env.ZERO_MIN_SIN_MIRAR || 30; // minutos con la pantalla dormida antes de destruir la celda
 const MAX_HORAS = +process.env.ZERO_MAX_HORAS || 12; // vida máxima de una celda
@@ -130,12 +141,15 @@ class Sesion {
     // 26 Oct 2026: la celda habla el idioma de la persona (Accept-Language y navigator.language); antes siempre es-ES.
     const loc = /^[a-z]{2,3}(-[A-Za-z]{2,4})?$/.test(String(idioma || '')) ? String(idioma) : 'es-ES';
     this.idioma = loc;
+    if (this.filtro) { this.filtro.cierra(); this.filtro = null; }
+    const tor = this.ultra && TOR_PROXY ? TOR_PROXY : '';
+    if (tor || FILTRO_RED) { this.filtro = new FiltroRed({ tor, permiteLocal: PERMITE_LOCAL, alVetar: (h, motivo) => this.vetada(h, motivo) }); await this.filtro.abre(); }
     this.ctx = await navegador.newContext({
       viewport: { width: this.w, height: this.h }, deviceScaleFactor: 1, locale: loc, timezoneId: 'UTC', permissions: [],
       acceptDownloads: true, serviceWorkers: 'block', extraHTTPHeaders: { 'Sec-GPC': '1', DNT: '1' }, colorScheme: 'light',
-      ...(this.ultra && TOR_PROXY ? { proxy: { server: TOR_PROXY } } : {}),
+      ...(this.filtro ? { proxy: { server: this.filtro.url, bypass: '<-loopback>' } } : {}),
     });
-    this.op(this.ultra && TOR_PROXY ? 'celda creada con salida por Tor (ULTRA)' : 'celda creada');
+    this.op((tor ? 'celda creada con salida por Tor (ULTRA), solo web normal: .onion bloqueadas salvo servicios oficiales verificados' : 'celda creada') + (this.filtro && !PERMITE_LOCAL ? '; sin acceso a este servidor ni a redes privadas' : ''));
     await this.ctx.exposeBinding('__zeroSuceso', (src, json) => this.sucesoPagina(src, json));
     await this.ctx.addInitScript(SENSORES);
     await this.ctx.addInitScript(this.senuelos.initScript());
@@ -185,7 +199,7 @@ class Sesion {
     page.on('response', (r) => { this.respuestaNav(r, p); this.respuesta(r, p).catch(() => {}); });
     page.on('request', (r) => this.peticion(r));
     // si la propia página (o un salto de ella) no llega a cargar, se dice el motivo real de Chromium en vez de dejar una pantalla de error muda
-    page.on('requestfailed', (r) => { try { if (!r.isNavigationRequest() || r.frame() !== page.mainFrame()) return; const e = (r.failure() || {}).errorText || 'error'; if (!/^https?:\/\//.test(r.url())) return; this.suceso({ clase: 'fallo', certeza: 'comprobado', dominio: hostDe(r.url()), texto: 'La web ' + hostDe(r.url()) + ' no llegó a cargar: ' + e + '.', detalle: { url: r.url().slice(0, 200), error: e, redirigida: !!r.redirectedFrom() } }); } catch (_) {} });
+    page.on('requestfailed', (r) => { try { if (!r.isNavigationRequest() || r.frame() !== page.mainFrame()) return; const e = (r.failure() || {}).errorText || 'error'; if (!/^https?:\/\//.test(r.url())) return; { const hh = hostDe(r.url()); if (onionVetada(hh)) { page.setContent(paginaBloqueo('Dirección .onion bloqueada', TXT_ONION, hh)).catch(() => {}); return; } if (this.filtro && !PERMITE_LOCAL && (ipProhibida(hh) || nombreLocal(hh) || (this.filtro.vetadas.has(hh.toLowerCase()) && !esOnion(hh)))) { page.setContent(paginaBloqueo('Dirección interna bloqueada', TXT_LOCAL, hh)).catch(() => {}); return; } } this.suceso({ clase: 'fallo', certeza: 'comprobado', dominio: hostDe(r.url()), texto: 'La web ' + hostDe(r.url()) + ' no llegó a cargar: ' + e + '.', detalle: { url: r.url().slice(0, 200), error: e, redirigida: !!r.redirectedFrom() } }); } catch (_) {} });
     page.on('websocket', (w) => { const host = hostDe(w.url()); w.on('framesent', (f) => { try { const h = this.senuelos.busca(typeof f.payload === 'string' ? f.payload : f.payload.toString('latin1')); h.forEach((tipo) => this.senuelo({ tipo, donde: 'trama de WebSocket' }, host, w.url(), baseDominio(host) !== baseDominio(p.stats.webActual), false)); } catch (_) {} }); });
     page.on('download', (d) => this.descarga(d));
     page.on('dialog', (d) => { this.suceso({ clase: 'dialogo', certeza: 'comprobado', texto: 'La web intentó mostrar un aviso emergente. ZERO lo cerró.', dominio: hostDe(page.url()) }); d.dismiss().catch(() => {}); });
@@ -565,6 +579,22 @@ class Sesion {
     url = String(url || '').trim().slice(0, 4096);
     if (!/^[a-z]+:\/\//i.test(url)) url = 'https://' + url;
     if (!/^https?:\/\//i.test(url)) { this.op('dirección rechazada: solo http y https'); return; } // nada de file://, chrome://, javascript:…
+    { // ULTRA capado: .onion fuera de la lista, nunca; y sin ULTRA, ninguna (no hay salida por Tor)
+      const h = hostDe(url).toLowerCase();
+      if (esOnion(h) && (onionVetada(h) || !(this.ultra && TOR_PROXY))) {
+        const vetada = onionVetada(h);
+        this.op('dirección .onion rechazada: ' + h);
+        this.suceso({ clase: 'onion', certeza: 'comprobado', dominio: h, texto: vetada ? TXT_ONION : TXT_ONION_SIN_ULTRA });
+        await this.page.setContent(paginaBloqueo(vetada ? 'Dirección .onion bloqueada' : 'Esta dirección solo se abre con ULTRA', vetada ? TXT_ONION : TXT_ONION_SIN_ULTRA, h)).catch(() => {});
+        return;
+      }
+      if (this.filtro && !PERMITE_LOCAL && (ipProhibida(h) || nombreLocal(h))) {
+        this.op('dirección interna rechazada: ' + h);
+        this.suceso({ clase: 'local', certeza: 'comprobado', dominio: h, texto: TXT_LOCAL });
+        await this.page.setContent(paginaBloqueo('Dirección interna bloqueada', TXT_LOCAL, h)).catch(() => {});
+        return;
+      }
+    }
     if (this.sellada) return; // sellada: primero reanudar o destruir
     this.puntos = 0; this.motivos = []; this.ultimos = []; if (this.alerta > 0 && this.alerta < 3) await this.ponAlerta(0, 'nueva web');
     // nueva web: nuevo contador «en esta web» (los totales de la sesión se conservan)
@@ -576,7 +606,7 @@ class Sesion {
       const m = String(e.message || e);
       if (process.env.ZERO_DEBUG) console.log('goto falló:', url.slice(0, 80), m.split('\n')[0]);
       const cert = /ERR_CERT|SSL|certificate/i.test(m);
-      const motivo = /ERR_CERT_DATE_INVALID/.test(m) ? 'certificado caducado o con fecha no válida' : /ERR_CERT_COMMON_NAME_INVALID/.test(m) ? 'el certificado no coincide con el nombre de la web' : /ERR_CERT_AUTHORITY_INVALID/.test(m) ? 'el certificado no está firmado por una autoridad reconocida' : cert ? 'no se pudo verificar el certificado' : /ERR_NAME_NOT_RESOLVED/.test(m) ? 'la dirección no existe' : /ERR_CONNECTION|ERR_TIMED_OUT|ERR_INTERNET|ERR_TUNNEL|ERR_PROXY/.test(m) ? 'no se pudo conectar' : 'no se pudo abrir';
+      const motivo = /ERR_CERT_DATE_INVALID/.test(m) ? 'certificado caducado o con fecha no válida' : /ERR_CERT_COMMON_NAME_INVALID/.test(m) ? 'el certificado no coincide con el nombre de la web' : /ERR_CERT_AUTHORITY_INVALID/.test(m) ? 'el certificado no está firmado por una autoridad reconocida' : cert ? 'no se pudo verificar el certificado' : /ERR_NAME_NOT_RESOLVED|ERR_SOCKS_CONNECTION_HOST_UNREACHABLE/.test(m) ? 'la dirección no existe' : /ERR_CONNECTION|ERR_TIMED_OUT|ERR_INTERNET|ERR_TUNNEL|ERR_PROXY|ERR_SOCKS/.test(m) ? 'no se pudo conectar' : 'no se pudo abrir';
       if (cert) this.suceso({ clase: 'certificado', certeza: 'comprobado', dominio: hostDe(url), texto: 'No se ha podido comprobar la identidad cifrada de ' + hostDe(url) + ' (' + motivo + '). ZERO no ha abierto la conexión.', detalle: { error: m.split('\n')[0] } });
       await this.page.setContent(paginaBloqueo(cert ? 'La identidad de esta web no se pudo comprobar' : 'No se pudo abrir esta web', cert ? 'Su certificado de seguridad no supera la comprobación: ' + motivo + '. Puede ser un fallo técnico de la web o una suplantación; ZERO no ha enviado ni recibido nada.' : 'Motivo: ' + motivo + '. ZERO no ha enviado nada.', hostDe(url) + ' · ' + m.split('\n')[0].slice(0, 120))).catch(() => {});
     }
@@ -667,6 +697,12 @@ class Sesion {
     this.suceso({ clase: 'señuelo', certeza: 'comprobado', dominio: host, empresa: e.empresa || null, paisNombre: e.paisNombre || null, texto, detalle: { tipo: f.tipo, que, donde: f.donde, tercero, cortada, url: String(url).slice(0, 200) } });
   }
 
+  vetada(host, motivo) {
+    if (this.destruida) return;
+    this.op((motivo === 'onion' ? 'conexión .onion rechazada (' : 'conexión con dirección interna rechazada (') + host + ')');
+    this.suceso({ clase: motivo === 'onion' ? 'onion' : 'local', certeza: 'comprobado', dominio: host, texto: motivo === 'onion' ? TXT_ONION : TXT_LOCAL });
+  }
+
   async destruye(motivo) {
     this.op('cuadros enviados ' + this.nCuadros.enviados + ', descartados por atraso ' + this.nCuadros.descartados);
     if (this.destruida) return;
@@ -676,6 +712,7 @@ class Sesion {
     this.op('cierre pedido: ' + motivo);
     try { if (this.cdp) await this.cdp.send('Page.stopScreencast').catch(() => {}); } catch (_) {}
     try { if (this.ctx) await this.ctx.close(); this.op('celda cerrada: cookies, caché, almacenamiento y pestañas de la sesión eliminados con el contexto'); } catch (_) { this.op('celda cerrada con error'); }
+    if (this.filtro) { this.filtro.cierra(); this.filtro = null; }
     const acta = { sesion: this.id, version: VERSION, inicio: new Date(this.creada).toISOString(), fin: ahora(), motivo, duracion_s: Math.round((Date.now() - this.creada) / 1000), cierre_ms: Date.now() - t0,
       operaciones: this.operaciones, sucesos: this.sucesos.length, cortes: this.sucesos.filter((s) => s.clase === 'corte').length, senuelos: this.senuelos.alertas.length, alerta_final: this.alerta, descargas_retenidas: this.descargas.size,
       nota: 'Prototipo: el contexto de Chromium se destruye y con él todo su estado; en producción se destruye la microVM entera y se invalidan sus claves. Este comprobante lo sella el propio servidor: acredita lo que ZERO hizo, no sustituye una auditoría externa.' };

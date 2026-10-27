@@ -376,7 +376,6 @@
   "También en": "Також на",
   "Datos de ejemplo de la demostración.": "Приклади даних із демонстрації.",
   "Datos de ejemplo.": "Приклади даних.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Пошук через DuckDuckGo усередині Tor (.onion).",
   "Exportar ficha": "Експортувати картку",
   "Solo en esta web, por ahora.": "Поки що лише на цьому сайті.",
   "Aún no hay cortes en esta web.": "На цьому сайті ще немає відсікань.",
@@ -1668,7 +1667,8 @@
   "Modo discreto": "Непомітний режим",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Непомітний режим: чат розмитий, доки ви його не утримуєте, а те, що ви пишете, відображається цифрами. Натисніть цю кнопку, щоб бачити все як зазвичай.",
   "Modo discreto: lo que escribas se verá como números": "Непомітний режим: те, що ви напишете, відображатиметься цифрами",
-  "Código erróneo o caducado.": "Неправильний або прострочений код."
+  "Código erróneo o caducado.": "Неправильний або прострочений код.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Пошук через Brave Search усередині Tor (.onion)."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

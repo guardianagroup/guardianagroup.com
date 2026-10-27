@@ -376,7 +376,6 @@
   "También en": "এখানেও দেখা গেছে",
   "Datos de ejemplo de la demostración.": "ডেমোর উদাহরণ ডেটা।",
   "Datos de ejemplo.": "উদাহরণ ডেটা।",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Tor-এর ভিতরে DuckDuckGo দিয়ে খোঁজ (.onion)।",
   "Exportar ficha": "কার্ড এক্সপোর্ট করুন",
   "Solo en esta web, por ahora.": "এখন পর্যন্ত শুধু এই সাইটে।",
   "Aún no hay cortes en esta web.": "এই সাইটে এখনও কোনো ব্লক নেই।",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "গোপনীয় মোড",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "গোপনীয় মোড: চেপে ধরে না রাখা পর্যন্ত চ্যাট ঝাপসা দেখায় এবং আপনি যা লেখেন তা সংখ্যা হিসেবে দেখায়। সবকিছু স্বাভাবিকভাবে দেখতে এটি চাপুন।",
   "Modo discreto: lo que escribas se verá como números": "গোপনীয় মোড: আপনি যা লিখবেন তা সংখ্যা হিসেবে দেখাবে",
-  "Código erróneo o caducado.": "কোডটি ভুল বা মেয়াদোত্তীর্ণ।"
+  "Código erróneo o caducado.": "কোডটি ভুল বা মেয়াদোত্তীর্ণ।",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Tor-এর ভিতরে Brave Search দিয়ে খোঁজ (.onion)।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

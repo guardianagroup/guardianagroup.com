@@ -376,7 +376,6 @@
   "También en": "Også på",
   "Datos de ejemplo de la demostración.": "Eksempeldata fra demoen.",
   "Datos de ejemplo.": "Eksempeldata.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Søgninger med DuckDuckGo inde i Tor (.onion).",
   "Exportar ficha": "Eksportér kort",
   "Solo en esta web, por ahora.": "Kun på denne side, indtil videre.",
   "Aún no hay cortes en esta web.": "Ingen blokeringer på denne side endnu.",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "Diskret tilstand",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Diskret tilstand: chatten er sløret, indtil du holder den nede, og det, du skriver, vises som tal. Tryk på den for at se alt normalt.",
   "Modo discreto: lo que escribas se verá como números": "Diskret tilstand: det, du skriver, vises som tal",
-  "Código erróneo o caducado.": "Forkert eller udløbet kode."
+  "Código erróneo o caducado.": "Forkert eller udløbet kode.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Søgninger med Brave Search inde i Tor (.onion)."
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",
