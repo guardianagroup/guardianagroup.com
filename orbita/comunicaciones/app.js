@@ -684,6 +684,16 @@
     ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); envia(); } });
     $('#enviar').addEventListener('click', envia);
     $('#adjuntar').addEventListener('click', () => $('#archivo').click());
+    // Velo: se descubre solo mientras se mantiene pulsado (ratón o dedo) sobre los mensajes o sobre la pista
+    const lienzo = $('#lienzo');
+    const descubre = (e) => { if (e.type === 'pointerdown' && e.button != null && e.button !== 0) return; lienzo.classList.remove('velado'); };
+    // al soltar, un segundo de margen para poder pulsar un botón dentro del chat (Guardar, reproducir)
+    let veloT = null; const cubre = () => { clearTimeout(veloT); veloT = setTimeout(() => lienzo.classList.add('velado'), 1200); };
+    const descubreYa = (e) => { clearTimeout(veloT); descubre(e); };
+    for (const el of [lienzo, $('#velo-pista')]) { el.addEventListener('pointerdown', descubreYa); el.addEventListener('contextmenu', (e) => e.preventDefault()); }
+    addEventListener('pointerup', cubre); addEventListener('pointercancel', cubre); addEventListener('blur', cubre); document.addEventListener('visibilitychange', () => { if (document.visibilityState !== 'visible') cubre(); });
+    $('#velo-pista').addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); descubre(e); } });
+    $('#velo-pista').addEventListener('keyup', cubre);
     // Notas de voz (dueño, 26 Oct 20:05): se graban aquí, se cifran y viajan como un archivo más; con la voz tal cual.
     let grab = null;
     const compositor = document.querySelector('.gc-compositor');
