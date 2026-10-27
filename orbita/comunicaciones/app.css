@@ -188,6 +188,15 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   .barra .marca b{display:none}
   .rele span{max-width:34vw}
   .inicio{justify-content:flex-start;padding-top:36px}
+  .conv .gc-cabecera{gap:6px;padding-left:8px;padding-right:8px}
+  .conv .gc-quien{min-width:0;flex:1}
+  .conv .gc-nombre{font-size:14.5px}
+  .conv .gc-confianza{font-size:11px}
+  .sello-insignia{margin-left:4px;padding:1px 6px;font-size:9px}
+  .discreto{padding:5px 8px;gap:6px}.discreto span{display:none}
+  .conv .gc-escudo-boton{width:30px}
+  .boton.terminar{padding:6px 12px;margin-left:2px}.boton.terminar svg{display:none}
+  .radio{padding:6px 12px;font-size:11.5px}
   .codigo{font-size:32px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
