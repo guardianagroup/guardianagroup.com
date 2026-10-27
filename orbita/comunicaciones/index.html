@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261027b">
+<link rel="stylesheet" href="app.css?v=20261027c">
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -27,13 +27,15 @@
 <main class="app" id="app">
   <section class="inicio" id="inicio">
     <div class="anillo" aria-hidden="true"></div>
-    <h1>Habla sin testigos</h1>
-    <p class="t">Chat y archivos enormes, cifrados de extremo a extremo entre dos equipos. Al terminar, la conversación se borra en los dos.</p>
+    <h1>Chat y archivos encriptados</h1>
+    <p class="t">Chatea y envía archivos encriptados de PC a PC. Al terminar, la conversación se borra en los dos.</p>
 
     <div class="grandes" id="paso-inicio">
       <button type="button" class="grande principal" id="nueva"><b>Crear invitación</b><small>Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
       <button type="button" class="grande" id="unir"><b>Tengo un código</b><small>Escribe las 9 cifras que te han enviado</small></button>
     </div>
+    <!-- dueño, 27 Oct 2026, 10:10: «al empezar, lo básico, limpio y entendible»; la explicación, aparte, en un desplegable -->
+    <button type="button" class="como" id="como-btn" aria-expanded="false" aria-controls="pro">Cómo funciona Comunicaciones</button>
 
     <div class="paso" id="paso-codigo" hidden>
       <h2>Tu código de invitación</h2>
@@ -55,7 +57,7 @@
     <!-- Para profesionales (27 Oct 2026, ronda 51 de la agencia: solo lo que confirman ChatGPT y Gemini y lo que hace el
          código hoy; sin llamadas, sin enlaces, sin «cualquier tamaño», sin promesas de cumplimiento legal). Solo se ve en
          la pantalla de inicio: al crear o escribir un código se oculta. -->
-    <section class="pro" id="pro" aria-labelledby="pro-t">
+    <section class="pro" id="pro" aria-labelledby="pro-t" hidden>
       <p class="pro-antetitulo">Para despachos, clínicas y empresas</p>
       <h2 id="pro-t">Comunicaciones confidenciales, sin complicaciones</h2>
       <p class="pro-entrada">Envía documentación confidencial a tus clientes y habla con ellos desde el navegador, con cifrado de extremo a extremo. Sin instalar nada, sin cuentas y sin números de teléfono.</p>
@@ -186,9 +188,9 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261027n9"></script>
+<script src="/orbita/static/idioma.js?v=20261027p2"></script>
 <script src="cripto.js?v=20261026c"></script>
 <script src="rele.js?v=20261026d"></script>
-<script src="app.js?v=20261027a"></script>
+<script src="app.js?v=20261027b"></script>
 </body>
 </html>

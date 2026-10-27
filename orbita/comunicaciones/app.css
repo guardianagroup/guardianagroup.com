@@ -259,3 +259,10 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   .codigo{font-size:32px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* dueño, 27 Oct 2026, 10:10: al empezar solo «Crear invitación» y «Tengo un código»; «Cómo funciona Comunicaciones» abre la explicación */
+.como{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:10px;margin:18px auto 0;padding:9px 16px;border-radius:999px;border:1px solid rgba(156,195,228,.28);color:#9CC3E4;font:500 14px/1.2 'IBM Plex Sans',system-ui,sans-serif;transition:background .15s,border-color .15s}
+.como::after{content:'';width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s}
+.como[aria-expanded="true"]::after{transform:translateY(2px) rotate(-135deg)}
+.como:hover{background:rgba(156,195,228,.12);border-color:rgba(156,195,228,.55);color:#F4F6F8}
+.como:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.pro[hidden],#paso-inicio[hidden]~.como{display:none!important}

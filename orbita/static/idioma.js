@@ -1866,6 +1866,8 @@
     "Órbita es el planeta de GUARDIANA: cables submarinos, cables terrestres, centros de datos y satélites, y cada corte en directo.": ["Orbit is GUARDIANA’s planet: undersea cables, land cables, data centres and satellites, and every cut live.", "Órbita é o planeta da GUARDIANA: cabos submarinos, cabos terrestres, centros de dados e satélites, e cada corte ao vivo."],
     "Chat y archivos encriptados": ["Encrypted chat and files", "Chat e arquivos criptografados"],
     "Chatea y envía archivos encriptados de PC a PC.": ["Chat and send encrypted files from PC to PC.", "Converse e envie arquivos criptografados de PC para PC."],
+    "Chatea y envía archivos encriptados de PC a PC. Al terminar, la conversación se borra en los dos.": ["Chat and send encrypted files from PC to PC. When you finish, the conversation is deleted on both.", "Converse e envie arquivos criptografados de PC para PC. Ao terminar, a conversa é apagada nos dois."],
+    "Cómo funciona Comunicaciones": ["How Communications works", "Como funciona o Comunicações"],
     'RESULTADOS DE GOOGLE · WEBS PRINCIPALES': ['GOOGLE RESULTS · MAIN WEBSITES', 'RESULTADOS DO GOOGLE · PRINCIPAIS SITES'],
     'País de las webs': ['Country of the websites', 'País dos sites'],
     'RESULTADOS DE GOOGLE · WEBS PRINCIPALES DE ESPAÑA': ['GOOGLE RESULTS · MAIN WEBSITES IN SPAIN', 'RESULTADOS DO GOOGLE · PRINCIPAIS SITES DE ESPANHA'],

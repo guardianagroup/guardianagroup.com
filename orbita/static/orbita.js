@@ -79,7 +79,7 @@
     // anyone can look at, free of any installation — then ZERO and Comunicaciones. It opens its own panel over the
     // planet (static/radiografias.js), not a page.
     { id: 'radiografias', n: 'Radiografías', s: 'Lo que ven de ti', d: 'Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.', propia: true },
-    { id: 'zero', n: 'ZERO', s: 'Navegador · demostración', d: 'El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.', pagina: 'zero/?orbita=1&entrada=0' },
+    { id: 'zero', n: 'ZERO', s: 'Navegador · demostración', d: 'El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.', pagina: 'zero/?orbita=1&entrada=0&v=20261027a' },
     // 26 Oct 2026 (owner: «haz comunicaciones enteras»): the door opens the web app itself, full page (calls need the
     // microphone and the camera, and large files are written straight to disk: none of that belongs in a frame).
     { id: 'comunicaciones', n: 'Comunicaciones', s: 'Habla sin testigos', d: 'Chat, notas de voz y archivos de cualquier tamaño, cifrados de extremo a extremo entre dos equipos, con un código de 9 cifras. Al terminar, se borra todo.', enlace: 'comunicaciones/' },
@@ -1381,6 +1381,7 @@ void main(){
     let luego = false;
     try { luego = sessionStorage.getItem('guardiana_orbita_lugar_luego') === '1'; } catch (_) {}
     if (luego) return;
+    return; // 27 Oct 2026 (dueño, 10:02: «que se vea todo limpio»): en ningún equipo se pregunta al llegar; se pregunta desde «Precisar ubicación» o «Mi conexión»
     if (m2()) return; // M1 phone and T1 tablet: asked inside «Mi conexión», never on arrival
     // What «En vivo» measured or was told in this browser, offered for confirmation first.
     let previo = null;

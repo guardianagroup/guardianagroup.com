@@ -70,3 +70,8 @@
 .nuc-barra.mini::after{content:'NÚCLEO';font:600 11px 'IBM Plex Mono',Consolas,monospace;letter-spacing:.2em;color:#cfe0ee;padding:0 10px 0 2px}
 @media (max-width:760px){.nuc-ops{grid-template-columns:1fr}.nuc-ini .nuc-lienzo{width:min(30vh,240px);height:min(30vh,240px)}.nuc-barra{bottom:12px}}
 @media (prefers-reduced-motion:reduce){.nuc-paso{transition:none;opacity:1;transform:none}.nuc-ini{transition:none}}
+/* dueño, 27 Oct 2026, 10:02: «actualiza la sección de órbita… para que se vea todo limpio y bien». La portada de NÚCLEO es la
+   que reparte: en el planeta sobran la lista de secciones y «Conocer GUARDIANA» (la web anterior); la ubicación ya no se pinta
+   en ámbar, que es para dinero y avisos. */
+#puertas,#conocer{display:none!important}
+.lugar-btn.falta{color:var(--muted);border-color:var(--line)}
