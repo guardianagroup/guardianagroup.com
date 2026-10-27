@@ -1,0 +1,47 @@
+/* GUARDIANA · NÚCLEO, la puerta de entrada (dueño, 27 Oct 2026, 08:42: «pantalla negra y en el medio nace el navegador con el
+   cerebro neuronal… buenos días, bienvenido a esta experiencia de tus datos… ¿qué desea hacer?… ella te deriva»). Ronda 52 de la
+   agencia: lo que coinciden ChatGPT, Gemini y Astra. Primera versión sin IA generativa: entiende frases y abre cada sección. */
+.nuc-ini{position:fixed;inset:0;z-index:10000;background:#06080C;color:#F4F6F8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:24px 16px;overflow-y:auto;opacity:1;transition:opacity .7s ease,visibility .7s;font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+.nuc-ini[hidden]{display:none}
+.nuc-ini.sale{opacity:0;visibility:hidden;pointer-events:none}
+.nuc-ini::before{content:'';position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 38%,rgba(156,195,228,.10),transparent 70%);pointer-events:none}
+.nuc-ini .nuc-lienzo{width:min(40vh,360px);height:min(40vh,360px);flex:none;display:block;position:relative}
+.nuc-ini .nuc-k{margin:6px 0 0;font:600 11px/1.4 'IBM Plex Mono',Consolas,monospace;letter-spacing:.32em;color:#9CC3E4;text-transform:uppercase}
+.nuc-ini h1{margin:14px 0 0;font:300 clamp(30px,4.4vw,48px)/1.1 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:-.01em;text-align:center}
+.nuc-ini .nuc-sub{margin:10px 0 0;max-width:560px;text-align:center;font-size:clamp(15px,1.5vw,18px);line-height:1.5;color:#c9d6e2}
+.nuc-ini .nuc-sub b{display:block;margin-top:4px;font-weight:600;color:#F4F6F8}
+.nuc-paso{opacity:0;transform:translateY(10px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
+.nuc-paso.ve{opacity:1;transform:none}
+.nuc-form{position:relative;display:flex;align-items:center;gap:8px;width:min(620px,100%);margin-top:24px;padding:7px 7px 7px 18px;border-radius:999px;border:1px solid rgba(156,195,228,.38);background:linear-gradient(180deg,rgba(17,26,37,.92),rgba(9,14,21,.96));box-shadow:0 0 0 1px rgba(156,195,228,.06),0 18px 60px -26px rgba(156,195,228,.55),inset 0 1px 0 rgba(244,246,248,.06)}
+.nuc-form:focus-within{border-color:#9CC3E4;box-shadow:0 0 0 3px rgba(156,195,228,.16),0 18px 60px -26px rgba(156,195,228,.7)}
+.nuc-form input{flex:1;min-width:0;height:44px;border:0;outline:none;background:transparent;color:#F4F6F8;font:400 16px/1.2 'IBM Plex Sans',system-ui,sans-serif}
+.nuc-form input::placeholder{color:#7f93a6}
+.nuc-form button{flex:none;height:44px;padding:0 22px;border:0;border-radius:999px;background:#9CC3E4;color:#06080C;font:600 15px/1 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.nuc-form button:hover{filter:brightness(1.07)}
+.nuc-form button:focus-visible,.nuc-op:focus-visible,.nuc-salta:focus-visible,.nuc-barra button:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.nuc-resp{min-height:24px;margin:14px 0 0;max-width:620px;text-align:center;font-size:15px;line-height:1.5;color:#dbe7f1}
+.nuc-resp .nq{display:block;font:600 10px/1.4 'IBM Plex Mono',Consolas,monospace;letter-spacing:.2em;color:#9CC3E4;margin-bottom:4px}
+.nuc-ops{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:min(820px,100%);margin-top:22px}
+.nuc-op{appearance:none;display:grid;gap:6px;align-content:start;text-align:left;padding:16px 18px;border-radius:16px;border:1px solid rgba(156,195,228,.22);background:rgba(12,18,26,.82);color:#F4F6F8;cursor:pointer;font-family:inherit;transition:border-color .2s,background .2s,transform .2s}
+.nuc-op:hover{border-color:rgba(156,195,228,.6);background:rgba(20,32,46,.9);transform:translateY(-2px)}
+.nuc-op b{font:600 16px/1.25 'IBM Plex Sans',system-ui,sans-serif}
+.nuc-op small{font-size:13px;line-height:1.45;color:#a9bccd}
+.nuc-op i{font-style:normal;font:600 10px/1 'IBM Plex Mono',Consolas,monospace;letter-spacing:.18em;color:#9CC3E4}
+.nuc-pie{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:22px;font-size:12.5px;color:#7f93a6;text-align:center;max-width:720px}
+.nuc-salta{appearance:none;border:0;background:none;color:#9CC3E4;font:inherit;font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:2px}
+/* la barra de NÚCLEO debajo del planeta, y su botón cuando hay una sección abierta */
+.nuc-barra{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:8px;width:min(560px,calc(100vw - 32px));padding:6px 6px 6px 8px;border-radius:999px;border:1px solid rgba(156,195,228,.36);background:rgba(8,12,18,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 16px 50px -20px rgba(0,0,0,.9),0 0 30px -12px rgba(156,195,228,.45);font-family:'IBM Plex Sans',system-ui,sans-serif;transition:opacity .4s,transform .4s}
+.nuc-barra[hidden]{display:none}
+.nuc-barra .nuc-orbe{flex:none;width:34px;height:34px;border-radius:50%;border:0;padding:0;cursor:pointer;background:radial-gradient(circle at 35% 35%,#F4F6F8,#9CC3E4 40%,#2f5b80 72%,#0e1c2b);box-shadow:0 0 16px rgba(156,195,228,.6)}
+.nuc-barra input{flex:1;min-width:0;height:38px;border:0;outline:none;background:transparent;color:#F4F6F8;font:400 15px/1.2 'IBM Plex Sans',system-ui,sans-serif}
+.nuc-barra input::placeholder{color:#8aa0b4}
+.nuc-barra .nuc-ir{flex:none;height:38px;padding:0 16px;border:0;border-radius:999px;background:rgba(156,195,228,.18);color:#F4F6F8;font:600 13px/1 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(156,195,228,.4)}
+.nuc-barra .nuc-ir:hover{background:rgba(156,195,228,.3)}
+.nuc-barra .nuc-dice{position:absolute;left:12px;right:12px;bottom:calc(100% + 10px);padding:10px 14px;border-radius:14px;border:1px solid rgba(156,195,228,.3);background:rgba(8,12,18,.94);color:#e6eef5;font-size:14px;line-height:1.5}
+.nuc-barra .nuc-dice[hidden]{display:none}
+.nuc-barra .nuc-dice .nq{display:block;font:600 10px/1.4 'IBM Plex Mono',Consolas,monospace;letter-spacing:.2em;color:#9CC3E4;margin-bottom:2px}
+.nuc-barra.mini{width:auto;left:20px;transform:none;padding:6px}
+.nuc-barra.mini input,.nuc-barra.mini .nuc-ir{display:none}
+.nuc-barra.mini::after{content:'NÚCLEO';font:600 11px 'IBM Plex Mono',Consolas,monospace;letter-spacing:.2em;color:#cfe0ee;padding:0 10px 0 2px}
+@media (max-width:760px){.nuc-ops{grid-template-columns:1fr}.nuc-ini .nuc-lienzo{width:min(30vh,240px);height:min(30vh,240px)}.nuc-barra{bottom:12px}}
+@media (prefers-reduced-motion:reduce){.nuc-paso{transition:none;opacity:1;transform:none}.nuc-ini{transition:none}}
