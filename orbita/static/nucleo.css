@@ -196,3 +196,4 @@ a.nuc-chip{display:inline-flex;align-items:center;text-decoration:none}
 @media (max-width:560px){.nm-cab{padding:14px}.nm-col{padding:4px 14px 48px}.nm-cifra{font-size:30px}}
 @media (prefers-reduced-motion:reduce){.nuc-multas,.nm-caso{transition:none}.nm-caso:hover{transform:none}}
 .nm-cifra.nm-sin{font-size:22px;line-height:1.3;color:#F0C77F}
+a.nuc-multas-b{text-decoration:none}

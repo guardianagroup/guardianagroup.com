@@ -2,10 +2,12 @@
 // sabemos de las grandes empresas, para que a la gente se le refresque la memoria y no olvide por qué las han multado con
 // nuestros datos». Los casos están en /orbita/datos/multas.json (los 49 de casos.html, cada uno con su autoridad, su
 // fecha, la resolución o noticia y una copia en archive.org) y se cargan solo al abrir. Nada sale de este navegador.
-// window.GuardianaMultas.abre(botón que lo abrió) · .cierra()
+// Dueño, 14:02: «que se abra una página nueva solamente dedicada para las multas»: /orbita/multas/ (GuardianaMultas.pagina()),
+// a la que llevan el botón rojo de NÚCLEO y el de Comunicaciones. window.GuardianaMultas.pagina() · .abre(botón) · .cierra()
 'use strict';
 (function (raiz) {
-  let datos = null, capa = null, origen = null, filtro = 'todas';
+  let datos = null, capa = null, origen = null, filtro = 'todas', enPagina = false;
+  const Q = new URLSearchParams(location.search), DESDE = Q.get('desde') === 'comunicaciones' ? '/orbita/comunicaciones/' : '/orbita/';
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const lengua = () => { const l = (raiz.GuardianaIdioma && raiz.GuardianaIdioma.lang) || document.documentElement.lang || 'es'; return /^es/.test(l) ? 'es' : /^pt/.test(l) ? 'pt' : 'en'; };
   const loc = () => { try { return (raiz.GuardianaIdioma && raiz.GuardianaIdioma.locale) || document.documentElement.lang || 'es'; } catch (_) { return 'es'; } };
@@ -16,7 +18,7 @@
   };
   function carga() {
     if (datos) return Promise.resolve(datos);
-    return fetch('/orbita/datos/multas.json?v=20261027c').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((j) => (datos = j));
+    return fetch('/orbita/datos/multas.json?v=20261027d').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((j) => (datos = j));
   }
   function pinta() {
     const l = lengua(), U = datos.ui[l] || datos.ui.en, C = datos.casos;
@@ -33,11 +35,14 @@
         + `<button type="button" class="nm-mas" aria-expanded="false">${esc(U.mas)}</button>`
         + `<p class="nm-enl"><a href="${esc(c.fuente)}" target="_blank" rel="noopener">${esc(U.fuente)}</a>${c.copia ? `<a href="${esc(c.copia)}" target="_blank" rel="noopener">${esc(U.copia)}</a>` : ''}</p></article>`;
     }).join('');
-    capa.innerHTML = `<header class="nm-cab"><button type="button" class="nuc-volver nm-volver"><span aria-hidden="true">←</span> ${esc(U.volver)}</button><span class="nm-k">${esc(U.k)}</span></header>`
+    const volver = enPagina ? `<a class="nuc-volver nm-volver" href="${DESDE}"><span aria-hidden="true">←</span> ${esc(U.volver)}</a>` : `<button type="button" class="nuc-volver nm-volver"><span aria-hidden="true">←</span> ${esc(U.volver)}</button>`;
+    capa.innerHTML = `<header class="nm-cab">${volver}<span class="nm-k">${esc(U.k)}</span></header>`
       + `<div class="nm-cuerpo"><div class="nm-col"><h2 id="nm-t">${esc(U.titulo)}</h2><p class="nm-intro">${esc(U.intro)}</p>`
       + `<p class="nm-n">${esc(U.casos.replace('{1}', String(n(filtro))))}</p><div class="nm-fil" role="group" aria-label="${esc(U.k)}">${chips}</div>`
       + `<div class="nm-lista">${lista}</div></div></div>`;
-    capa.querySelector('.nm-volver').addEventListener('click', cierra);
+    // en la página, «Volver» lleva atrás en el historial (a NÚCLEO o a Comunicaciones, como estaban); si no hay historial, a su enlace
+    capa.querySelector('.nm-volver').addEventListener('click', (e) => { if (!enPagina) { cierra(); return; } if (Q.get('desde') && history.length > 1) { e.preventDefault(); history.back(); } });
+    if (enPagina) document.title = 'GUARDIANA · ' + U.boton;
     capa.querySelectorAll('.nm-chip').forEach((b) => b.addEventListener('click', () => { filtro = b.dataset.f; pinta(); const x = capa.querySelector(`.nm-chip[data-f="${filtro}"]`); if (x) x.focus({ preventScroll: true }); }));
     capa.querySelectorAll('.nm-caso').forEach((a) => {
       const t = a.querySelector('.nm-texto'), m = a.querySelector('.nm-mas');
@@ -65,5 +70,14 @@
     capa.classList.remove('ve'); capa.hidden = true;
     if (origen && origen.focus) origen.focus({ preventScroll: true });
   }
-  raiz.GuardianaMultas = { abre, cierra };
+  // la página dedicada (/orbita/multas/): la misma lista, a página completa
+  function pagina() {
+    enPagina = true;
+    capa = document.createElement('main');
+    capa.className = 'nuc-multas nm-pagina ve'; capa.setAttribute('translate', 'no'); capa.setAttribute('aria-labelledby', 'nm-t');
+    document.body.append(capa);
+    addEventListener('guardiana-idioma', () => { if (datos) pinta(); });
+    return carga().then(() => pinta(), () => { capa.innerHTML = '<p class="nm-intro" style="padding:48px 22px">GUARDIANA · Multas</p>'; });
+  }
+  raiz.GuardianaMultas = { abre, cierra, pagina };
 })(window);

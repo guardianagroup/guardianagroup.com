@@ -321,26 +321,14 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       // Arriba a la izquierda, «Volver» a esa portada (dueño, 10:53: «tienes que poder ir y volver»).
       + '<a class="nuc-volver nuc-paso" id="nuc-volver" href="/"><span aria-hidden="true">←</span> Volver</a>'
       // dueño, 13:30: arriba a la derecha, «Multas» en rojo: las multas a las grandes empresas por usar nuestros datos
-      + '<button type="button" class="nuc-multas-b nuc-paso" id="nuc-multas-b">Multas</button>';
+      + '<a class="nuc-multas-b nuc-paso" id="nuc-multas-b" href="/orbita/multas/?desde=nucleo">Multas</a>'; // 14:02: su propia página
     document.body.append(d);
     d.querySelectorAll('.nuc-op').forEach((b) => b.addEventListener('click', () => entra(b.dataset.n)));
-    d.querySelector('#nuc-multas-b').addEventListener('click', (e) => abreMultas(e.currentTarget));
     // si se vino de la portada, se vuelve atrás en el historial: la página del planeta queda donde estaba
     const vv = d.querySelector('#nuc-volver');
     vv.addEventListener('click', (e) => { try { const r = document.referrer ? new URL(document.referrer) : null; if (r && r.origin === location.origin && (r.pathname === '/' || r.pathname === '/index.html') && history.length > 1) { e.preventDefault(); history.back(); } } catch (_) {} });
     d.addEventListener('keydown', (e) => { if (e.key === 'Escape') alPlaneta(); });
     return d;
-  }
-  // la lista de multas (multas.js y /orbita/datos/multas.json) solo se carga al pulsar el botón
-  let cargaMul = null;
-  function abreMultas(b) {
-    if (!cargaMul) cargaMul = new Promise((ok, mal) => {
-      if (window.GuardianaMultas) { ok(); return; }
-      const s = document.createElement('script'); s.src = '/orbita/static/multas.js?v=20261027c'; s.async = true;
-      s.onload = ok; s.onerror = () => { cargaMul = null; s.remove(); mal(new Error('multas')); };
-      document.head.append(s);
-    });
-    cargaMul.then(() => window.GuardianaMultas && window.GuardianaMultas.abre(b)).catch(() => {});
   }
   function entra(id) { if (id !== 'nucleo') ponVuelta('portada'); if (id === 'zero') abreZero(); else if (id === 'planeta') alPlaneta(); else if (id === 'com') irComunicaciones(); else if (id === 'nucleo') abreSala(); }
   function revela(d, todo) {
