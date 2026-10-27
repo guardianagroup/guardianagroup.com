@@ -1,0 +1,9 @@
+# Ronda 49 · panel de vigilancia · lo que confirman dos voces (Gemini 4 Argon, Astra 6) · 26 Oct 2026, 20:30 Bogotá
+Respuestas literales en `gemini.md` y `astra.md` (resumen aquí; se aplican las coincidencias).
+- Quitar adjetivos tranquilizadores: «nadie lo ha tocado» no es verificable → «superaron la verificación criptográfica». «Intrusos» → «Entradas rechazadas» (no demuestra espía ni intención). «Datos alterados» → «no superaron la autenticación: descartados».
+- El reloj «comprobado hh:mm:ss» cada segundo es teatro de seguridad: sustituir por «Última verificación de contenido: hh:mm:ss» (solo cuando ocurre) y, aparte, el pulso real del canal («Servidor: responde · 48 ms · hace 3 s», ping/pong) y la presencia («La otra pestaña: conectada / desconectada»); «hace N s» sí puede moverse cada segundo.
+- Añadir filas verificables: presencia del otro extremo; conexión con el servidor (latencia y última respuesta; región elegida, no geolocalización demostrada); claves del encuentro (hora y número de encuentro, tras confirmación); archivos (trozos recibidos y autenticados, incompletos aparte); código de invitación (válido · caduca en mm:ss / caducado, en neutro); HTTPS (coral si no).
+- «Entregado» solo con acuse real; «leído» aparte. «Cifrado confirmado» → «Confirmación de clave recibida».
+- Servidor: separar lo transportado («transporta contenido cifrado») de la política («sin almacenamiento de mensajes»); no presentarlo como comprobación por segundo.
+- Acción automática: entrada ajena → rechazar y mantener la sesión legítima (cerrarla permitiría tumbar conversaciones desde fuera); autenticación fallida → descartar y detener ese flujo; si se repite, renegociar claves; identidad del otro cambiada → bloquear envíos y exigir comprobar el nuevo número (nunca reconectar en silencio); no hace falta destruir.
+- Nunca: «equipo limpio», «sin virus», «nadie está mirando», anonimato.

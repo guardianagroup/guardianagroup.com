@@ -14,7 +14,7 @@
     const emite = (t, ...a) => { for (const f of esc[t] || []) { try { f(...a); } catch (e) { console.error(e); } } };
     let ws = null, url = null, abierto = false, intentos = 0, ping = null, cerrando = false;
     const salas = new Map(); // sala → yo
-    let ice = [], caduca = 0, region = '', llamadas = false;
+    let ice = [], caduca = 0, region = '', llamadas = false, ultimoPong = 0, pingEn = 0, latencia = null;
     const esperas = {}; // respuestas pendientes (invita, busca)
 
     async function sonda(base) {
@@ -44,7 +44,7 @@
         abierto = true; intentos = 0;
         ws.send(JSON.stringify({ t: 'hola' }));
         for (const [sala, yo] of salas) ws.send(JSON.stringify({ t: 'entra', sala, yo }));
-        clearInterval(ping); ping = setInterval(() => { try { ws.send(JSON.stringify({ t: 'ping' })); } catch (_) {} }, 25000);
+        clearInterval(ping); const haz = () => { try { pingEn = Date.now(); ws.send(JSON.stringify({ t: 'ping' })); } catch (_) {} }; ping = setInterval(haz, 10000); setTimeout(haz, 300);
         emite('abierto', { url });
       };
       ws.onmessage = (e) => {
@@ -57,6 +57,7 @@
             case 'llega': emite('llega', m.sala, m.quien); break;
             case 'sale': emite('sale', m.sala, m.quien); break;
             case 'fuera': break;
+            case 'pong': ultimoPong = Date.now(); if (pingEn) latencia = Date.now() - pingEn; pingEn = 0; emite('pong', latencia); break;
             case 'sustituido': salas.delete(m.sala); emite('sustituido', m.sala); break;
             case 'ausente': case 'atasco': case 'lento': emite('aviso', m); break;
             case 'error': emite('error', m); break;
@@ -101,7 +102,7 @@
     function cierra() { cerrando = true; clearInterval(ping); try { ws && ws.close(); } catch (_) {} }
 
     conecta();
-    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; } };
+    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get ultimoPong() { return ultimoPong; } };
   }
   raiz.GuardianaRele = { crea, MOTORES };
 })(typeof window !== 'undefined' ? window : globalThis);
