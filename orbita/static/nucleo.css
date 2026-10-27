@@ -29,6 +29,28 @@
 .nuc-op i{font-style:normal;font:600 10px/1 'IBM Plex Mono',Consolas,monospace;letter-spacing:.18em;color:#9CC3E4}
 .nuc-pie{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:22px;font-size:12.5px;color:#7f93a6;text-align:center;max-width:720px}
 .nuc-salta{appearance:none;border:0;background:none;color:#9CC3E4;font:inherit;font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:2px}
+/* la charla guiada: al elegir algo, el cerebro se recoge arriba y aparecen las burbujas, las opciones e ir/volver */
+.nuc-ini .nuc-lienzo{transition:width .6s cubic-bezier(.22,1,.36,1),height .6s cubic-bezier(.22,1,.36,1)}
+.nuc-ini.charla{justify-content:flex-start;padding-top:28px}
+.nuc-ini.charla .nuc-lienzo{width:min(18vh,150px);height:min(18vh,150px)}
+.nuc-ini.charla h1{font-size:clamp(22px,2.6vw,30px);margin-top:4px}
+.nuc-ini.charla #nuc-sub{display:none}
+.nuc-charla{display:flex;flex-direction:column;gap:10px;width:min(720px,100%);max-height:min(42vh,420px);overflow-y:auto;margin-top:18px;padding:2px 4px;scrollbar-width:thin;scrollbar-color:#3e5263 transparent}
+.nuc-charla:empty{display:none}
+.nuc-b{margin:0;max-width:86%;padding:12px 16px;border-radius:16px;font-size:15px;line-height:1.55;animation:nucb .35s ease both}
+.nuc-b.el{align-self:flex-start;background:rgba(17,27,39,.92);border:1px solid rgba(156,195,228,.26);color:#e6eef5;border-top-left-radius:6px}
+.nuc-b.tu{align-self:flex-end;background:rgba(156,195,228,.16);border:1px solid rgba(156,195,228,.34);color:#F4F6F8;border-top-right-radius:6px}
+.nuc-b .nq{display:block;font:600 10px/1.4 'IBM Plex Mono',Consolas,monospace;letter-spacing:.2em;color:#9CC3E4;margin-bottom:4px}
+@keyframes nucb{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.nuc-ops[hidden]{display:none}
+.nuc-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;width:min(760px,100%);margin-top:16px}
+.nuc-chips:empty{display:none}
+.nuc-chip{appearance:none;cursor:pointer;padding:9px 16px;border-radius:999px;border:1px solid rgba(156,195,228,.34);background:rgba(12,18,26,.85);color:#dbe9f4;font:500 14px/1.2 'IBM Plex Sans',system-ui,sans-serif;transition:background .15s,border-color .15s}
+.nuc-chip:hover{background:rgba(156,195,228,.16);border-color:rgba(156,195,228,.6);color:#F4F6F8}
+.nuc-chip:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.nuc-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:14px}
+.nuc-nav [hidden]{display:none}
+.nuc-ini .nuc-pie{margin-top:12px}
 /* la barra de NÚCLEO debajo del planeta, y su botón cuando hay una sección abierta */
 .nuc-barra{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:8px;width:min(560px,calc(100vw - 32px));padding:6px 6px 6px 8px;border-radius:999px;border:1px solid rgba(156,195,228,.36);background:rgba(8,12,18,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 16px 50px -20px rgba(0,0,0,.9),0 0 30px -12px rgba(156,195,228,.45);font-family:'IBM Plex Sans',system-ui,sans-serif;transition:opacity .4s,transform .4s}
 .nuc-barra[hidden]{display:none}
@@ -37,9 +59,6 @@
 .nuc-barra input::placeholder{color:#8aa0b4}
 .nuc-barra .nuc-ir{flex:none;height:38px;padding:0 16px;border:0;border-radius:999px;background:rgba(156,195,228,.18);color:#F4F6F8;font:600 13px/1 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(156,195,228,.4)}
 .nuc-barra .nuc-ir:hover{background:rgba(156,195,228,.3)}
-.nuc-barra .nuc-dice{position:absolute;left:12px;right:12px;bottom:calc(100% + 10px);padding:10px 14px;border-radius:14px;border:1px solid rgba(156,195,228,.3);background:rgba(8,12,18,.94);color:#e6eef5;font-size:14px;line-height:1.5}
-.nuc-barra .nuc-dice[hidden]{display:none}
-.nuc-barra .nuc-dice .nq{display:block;font:600 10px/1.4 'IBM Plex Mono',Consolas,monospace;letter-spacing:.2em;color:#9CC3E4;margin-bottom:2px}
 .nuc-barra.mini{width:auto;left:20px;transform:none;padding:6px}
 .nuc-barra.mini input,.nuc-barra.mini .nuc-ir{display:none}
 .nuc-barra.mini::after{content:'NÚCLEO';font:600 11px 'IBM Plex Mono',Consolas,monospace;letter-spacing:.2em;color:#cfe0ee;padding:0 10px 0 2px}
