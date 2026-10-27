@@ -94,6 +94,7 @@
     if (m.t === 'pestanas') { M.pestanas = m; if (window.zeroPestanas) window.zeroPestanas(m); return; }
     if (m.t === 'cortes') { if (window.zeroCortes) window.zeroCortes(m.lista || []); return; }
     if (m.t === 'alerta') { M.alertaNivel = m.nivel; M.sellada = !!m.sellada; if (window.zeroAlerta) window.zeroAlerta(m); return; }
+    if (m.t === 'vigilancia') { M.vigilancia = m; if (window.zeroVigilancia) window.zeroVigilancia(m); return; }
     if (m.t === 'acta') { M.acta = m.acta; abierto = false; ponEstado(''); if (window.zeroActa) window.zeroActa(m.acta); return; }
   }
 

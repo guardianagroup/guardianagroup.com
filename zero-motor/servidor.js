@@ -106,6 +106,10 @@ class Sesion {
     this.senuelos = new Senuelos(PUBLICO); SESIONES.set(this.senuelos.token, this);
     this.alerta = 0; this.puntos = 0; this.motivos = []; this.sellada = false; this.ultimos = [];
     this.descargas = new Map(); this.nDesc = 0;
+    // Vigilancia de la celda (26 Oct 2026, dueño: «que el cliente sienta con hechos que no hay malware ni intrusión; si la hay, se bloquea
+    // y se borra todo»; ronda 50, punto G): solo cuentas reales de lo que ZERO ha visto y hecho en esta sesión.
+    this.vig = { local: 0, onion: 0, peligrosas: 0, muros: 0, senFuera: 0, senCortados: 0, senPropios: 0, descargas: 0 };
+    this.autoDestruye = null;
     this.permitidas = new Set(); // dominios base o 'e:<empresa>' que la persona ha permitido en esta sesión
     this.nCuadros = { enviados: 0, descartados: 0 }; this.cuadroPendiente = null;
     ws.on('drain', () => { if (this.cuadroPendiente && this.ws.abierto && this.ws.atraso <= ATRASO_MAX) { const d = this.cuadroPendiente; this.cuadroPendiente = null; this.ws.send(Buffer.from(d, 'base64')); this.nCuadros.enviados++; } });
@@ -162,6 +166,7 @@ class Sesion {
     this.ctx.on('page', (p) => { if (this.esperadas > 0) { this.esperadas--; return; } this.suceso({ clase: 'popup', certeza: 'comprobado', texto: 'La web intentó abrir una ventana nueva. ZERO la cerró.', dominio: hostDe(p.url()) }); p.close().catch(() => {}); });
     await this.nuevaPestana();
     this.env({ t: 'lista', sesion: this.id, version: VERSION, listas: cortes.listas, cookiesBloqueadas: this.cookiesBloqueadas, w: this.w, h: this.h, ultraDisponible: !!TOR_PROXY, ultra: !!(this.ultra && TOR_PROXY), nivel: this.nivel, region: process.env.ZERO_REGION || '' });
+    this.envVigilancia();
   }
 
   async nuevaPestana(url) {
@@ -385,6 +390,7 @@ class Sesion {
   corte(host, tipo, origen, tercero, d, st, estado) {
     st = st || this.act.stats;
     estado = estado || 'cortado';
+    if (d && d.proposito === 'malware' && estado === 'cortado') { this.vig.peligrosas++; this.envVigilancia(); this.autoSella('la web intentó cargar algo de una web peligrosa (' + host + ')'); }
     if (estado === 'cortado') st.n.cortes++; else st.n.vistos = (st.n.vistos || 0) + 1;
     const e = empresas.atribuye(host);
     const prop = PROPOSITO[d.proposito] || 'Rastreador';
@@ -510,8 +516,44 @@ class Sesion {
     const x = { t: 'suceso', id: this.sucesos.length + 1, hora: ahora(), ...s };
     this.sucesos.push(x);
     this.env(x);
+    this.cuentaVigilancia(x);
     this.env({ t: 'resumen', cortes: this.n.cortes, empresas: this.empresas.size, paises: this.paises.size, porque: this.porque, n: this.n, web: this.webActual, alerta: this.alerta });
     if (x.clase !== 'alerta') this.vigila(x);
+  }
+
+  cuentaVigilancia(x) {
+    const v = this.vig, d = x.detalle || {};
+    if (x.clase === 'local') v.local++;
+    else if (x.clase === 'onion') v.onion++;
+    else if (x.clase === 'bloqueo') v.peligrosas++;
+    else if (x.clase === 'muro') v.muros++;
+    else if (x.clase === 'descarga' && !d.sha256) { v.descargas++; if (d.malo) { v.peligrosas++; this.autoSella('descarga de una web peligrosa'); } }
+    else if (x.clase === 'señuelo') {
+      if (d.tipo === 'visita' || (d.tercero && !d.cortada)) { v.senFuera++; this.fuga(x); }
+      else if (d.tercero && d.cortada) v.senCortados++;
+      else v.senPropios++;
+    } else return;
+    this.envVigilancia();
+  }
+
+  envVigilancia() {
+    this.env({ t: 'vigilancia', ...this.vig, senPlantados: 4, salida: this.ultra && TOR_PROXY ? 'tor' : 'directa', region: process.env.ZERO_REGION || '',
+      filtro: !!this.filtro, alerta: this.alerta, sellada: !!this.sellada, nivel: this.nivel || 'normal',
+      destruyeEn: this.autoDestruye ? Math.max(0, Math.round((this.autoDestruye.hasta - Date.now()) / 1000)) : 0 });
+  }
+
+  // Señales fuertes (ronda 50 G, ChatGPT y Astra; Gemini): una web peligrosa conocida dentro de la página o en una descarga → sellar.
+  autoSella(motivo) { if (!this.destruida && this.alerta < 3) this.ponAlerta(3, 'automático: ' + motivo).catch(() => {}); }
+
+  // Un señuelo que sale de la celda hacia otra empresa (o alguien que sigue el enlace oculto) es una fuga: se sella al momento y, si la
+  // persona no reanuda en 20 s, la celda se destruye y se borra todo. En Observar (la persona eligió no cortar nada) solo se avisa.
+  fuga(x) {
+    if (this.destruida || (this.nivel || 'normal') === 'observar') return;
+    this.autoSella('un dato de la celda salió hacia ' + (x.empresa || x.dominio || 'otra empresa'));
+    if (this.autoDestruye) return;
+    const hasta = Date.now() + 20000;
+    this.autoDestruye = { hasta, t: setTimeout(() => { const a = this.autoDestruye; this.autoDestruye = null; if (a && this.sellada && !this.destruida) this.destruye('fuga detectada: destrucción automática a los 20 s').catch(() => {}); }, 20000) };
+    this.op('fuga detectada: la celda se destruirá sola en 20 s salvo que la persona la reanude');
   }
 
   // Respuesta gradual (ronda 40, punto 11, las tres voces): cada suceso suma puntos en esta web; al pasar un umbral la celda
@@ -563,6 +605,7 @@ class Sesion {
     };
     this.suceso({ clase: 'alerta', certeza: 'comprobado', dominio: this.webActual, texto: TEXTO[nivel] || '', detalle: { nivel, nombre: NOMBRE[nivel], antes, motivo, puntos: this.puntos, motivos: this.motivos.slice(-12) } });
     this.env({ t: 'alerta', nivel, nombre: NOMBRE[nivel], motivo, puntos: this.puntos, sellada: this.sellada });
+    this.envVigilancia();
   }
 
   nav(cargada) {
@@ -668,7 +711,7 @@ class Sesion {
         if (o.accion === 'cerrar') return await this.cierraPestana(+o.id);
         return;
       }
-      if (o.t === 'alerta') { if (o.accion === 'sellar') return await this.ponAlerta(3, 'a petición de la persona'); if (o.accion === 'reanudar') { this.puntos = 0; this.motivos = []; return await this.ponAlerta(0, 'reanudada por la persona'); } return; }
+      if (o.t === 'alerta') { if (o.accion === 'sellar') return await this.ponAlerta(3, 'a petición de la persona'); if (o.accion === 'reanudar') { if (this.autoDestruye) { clearTimeout(this.autoDestruye.t); this.autoDestruye = null; this.op('destrucción automática cancelada: la persona reanudó la celda'); } this.puntos = 0; this.motivos = []; return await this.ponAlerta(0, 'reanudada por la persona'); } return; }
     } catch (e) { if (process.env.ZERO_DEBUG) console.log('mensaje', o && o.t, 'error:', e && e.message); /* una orden que falla no tumba la sesión */ }
   }
 
@@ -727,6 +770,7 @@ class Sesion {
     if (this.destruida) return;
     this.destruida = true;
     SESIONES.delete(this.senuelos.token); VIVAS.delete(this); clearInterval(this.vigilante);
+    if (this.autoDestruye) { clearTimeout(this.autoDestruye.t); this.autoDestruye = null; }
     const t0 = Date.now();
     this.op('cierre pedido: ' + motivo);
     try { if (this.cdp) await this.cdp.send('Page.stopScreencast').catch(() => {}); } catch (_) {}
