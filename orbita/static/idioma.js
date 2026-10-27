@@ -1539,6 +1539,7 @@
     'Comprobado en vivo.': ['Verified live.', 'Comprovado ao vivo.'],
     'Conexión cortada': ['Connection cut', 'Conexão cortada'],
     'Dirección .onion bloqueada': ['.onion address blocked', 'Endereço .onion bloqueado'],
+    'Esta web no deja entrar a la celda': ['This website does not let the cell in', 'Este site não deixa a célula entrar'],
     'RESULTADOS DE GOOGLE · WEBS PRINCIPALES DE ESPAÑA': ['GOOGLE RESULTS · MAIN WEBSITES IN SPAIN', 'RESULTADOS DO GOOGLE · PRINCIPAIS SITES DE ESPANHA'],
     'La búsqueda la hace Google desde tu navegador. Al abrir un resultado, la web se abre dentro de ZERO.': ['Google runs the search from your browser. When you open a result, the website opens inside ZERO.', 'A pesquisa é feita pelo Google a partir do seu navegador. Ao abrir um resultado, o site abre dentro do ZERO.'],
     'Buscar en todo Google': ['Search all of Google', 'Pesquisar em todo o Google'],

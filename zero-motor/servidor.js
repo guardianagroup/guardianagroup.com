@@ -204,7 +204,7 @@ class Sesion {
     page.on('download', (d) => this.descarga(d));
     page.on('dialog', (d) => { this.suceso({ clase: 'dialogo', certeza: 'comprobado', texto: 'La web intentó mostrar un aviso emergente. ZERO lo cerró.', dominio: hostDe(page.url()) }); d.dismiss().catch(() => {}); });
     page.on('framenavigated', (f) => { if (f === page.mainFrame()) { p.url = page.url(); if (this.act === p) this.nav(); else this.env(this.listaPestanas()); } });
-    page.on('load', () => { page.title().then((tt) => { p.titulo = tt; if (this.act === p) this.nav(true); this.env(this.listaPestanas()); }).catch(() => {}); });
+    page.on('load', () => { page.title().then((tt) => { p.titulo = tt; if (this.act === p) this.nav(true); this.env(this.listaPestanas()); }).catch(() => {}); this.miraMuro(page).catch(() => {}); });
     page.on('close', () => { const i = this.pestanas.indexOf(p); if (i >= 0) this.pestanas.splice(i, 1); if (this.act === p && !this.destruida) { this.act = null; const q = this.pestanas[Math.max(0, i - 1)]; if (q) this.activaPestana(q).catch(() => {}); else this.nuevaPestana().catch(() => {}); } else this.env(this.listaPestanas()); });
   }
 
@@ -695,6 +695,25 @@ class Sesion {
       : 'La propia web se ha enviado un dato que solo existe en tu celda (' + que + ', puesto por ZERO como señuelo) en ' + f.donde + ': copia el contenido de la página o sus cookies hacia sus servidores.';
     this.n.senuelos = (this.n.senuelos || 0) + 1;
     this.suceso({ clase: 'señuelo', certeza: 'comprobado', dominio: host, empresa: e.empresa || null, paisNombre: e.paisNombre || null, texto, detalle: { tipo: f.tipo, que, donde: f.donde, tercero, cortada, url: String(url).slice(0, 200) } });
+  }
+
+  // Muros antirrobot por red (26 Oct 2026; p. ej. as.com: «El acceso está restringido temporalmente… un robot se encuentra en
+  // la misma red»). El título no lo dice, así que se mira el texto de la página y de sus marcos, solo si es corta (las páginas de
+  // bloqueo lo son). Si lo es, se avisa a la persona: desde la celda no se puede entrar; en su navegador de siempre, sí.
+  async miraMuro(page) {
+    if (this.destruida || !page || page.isClosed()) return;
+    const RE = /acceso est[áa] restringido|access (is )?(temporarily )?restricted|robot se encuentra en la misma red|a robot is on the same network|you have been blocked|has sido bloquead|ha sido bloquead|request (was )?blocked|access denied|acceso denegado|unusual traffic|tr[áa]fico inusual|verify (that )?you are (a )?human|comprueba que eres humano|are you a robot|eres un robot/i;
+    for (const f of page.frames()) {
+      let t = '';
+      try { t = await f.evaluate(() => { const b = document.body; const s = b ? b.innerText || '' : ''; return s.length > 6000 ? '' : s.slice(0, 3000); }); } catch (_) { continue; }
+      if (t && RE.test(t)) {
+        const host = hostDe(page.url());
+        if (this.murosVistos && this.murosVistos.has(host)) return;
+        (this.murosVistos = this.murosVistos || new Set()).add(host);
+        this.suceso({ clase: 'muro', certeza: 'comprobado', dominio: host, texto: 'Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la celda no se puede abrir; en tu navegador de siempre sí.', detalle: { url: page.url().slice(0, 300) } });
+        return;
+      }
+    }
   }
 
   vetada(host, motivo) {
