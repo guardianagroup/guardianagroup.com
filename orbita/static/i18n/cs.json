@@ -1666,7 +1666,8 @@
   "Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.": "Každá zpráva a každá část souboru se při doručení autentizuje; zatím všechny prošly ověřením.",
   "Modo discreto": "Diskrétní režim",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Diskrétní režim: chat je rozmazaný, dokud ho nepodržíte, a to, co píšete, se zobrazuje jako číslice. Klepnutím na toto tlačítko zobrazíte vše normálně.",
-  "Modo discreto: lo que escribas se verá como números": "Diskrétní režim: to, co napíšete, se zobrazí jako číslice"
+  "Modo discreto: lo que escribas se verá como números": "Diskrétní režim: to, co napíšete, se zobrazí jako číslice",
+  "Código erróneo o caducado.": "Kód je chybný nebo vypršel."
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

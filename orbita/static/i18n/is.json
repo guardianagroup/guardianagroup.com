@@ -1666,7 +1666,8 @@
   "Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.": "Öll skilaboð og hver hluti skráa eru auðkennd við komu; hingað til hafa öll staðist staðfestingu.",
   "Modo discreto": "Næðishamur",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Næðishamur: spjallið er óskýrt þar til þú heldur því inni og það sem þú skrifar birtist sem tölur. Ýttu á hnappinn til að sjá allt eðlilega.",
-  "Modo discreto: lo que escribas se verá como números": "Næðishamur: það sem þú skrifar birtist sem tölur"
+  "Modo discreto: lo que escribas se verá como números": "Næðishamur: það sem þú skrifar birtist sem tölur",
+  "Código erróneo o caducado.": "Rangur eða útrunninn kóði."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

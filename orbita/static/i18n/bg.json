@@ -1666,7 +1666,8 @@
   "Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.": "Всяко съобщение и всяка част от файл се удостоверяват при пристигане; досега всички преминаха проверката.",
   "Modo discreto": "Дискретен режим",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Дискретен режим: чатът е размазан, докато не го задържите, а това, което пишете, се показва като цифри. Натиснете този бутон, за да виждате всичко нормално.",
-  "Modo discreto: lo que escribas se verá como números": "Дискретен режим: това, което пишете, ще се показва като цифри"
+  "Modo discreto: lo que escribas se verá como números": "Дискретен режим: това, което пишете, ще се показва като цифри",
+  "Código erróneo o caducado.": "Грешен или изтекъл код."
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

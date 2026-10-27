@@ -1667,7 +1667,8 @@
   "Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.": "Chaque message et chaque fragment de fichier est authentifié à son arrivée ; jusqu’à présent, tous ont réussi la vérification.",
   "Modo discreto": "Mode discret",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Mode discret : le chat est flou jusqu’à ce que vous le mainteniez appuyé, et ce que vous écrivez s’affiche en chiffres. Appuyez dessus pour tout voir normalement.",
-  "Modo discreto: lo que escribas se verá como números": "Mode discret : ce que vous écrirez s’affichera en chiffres"
+  "Modo discreto: lo que escribas se verá como números": "Mode discret : ce que vous écrirez s’affichera en chiffres",
+  "Código erróneo o caducado.": "Code erroné ou expiré."
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

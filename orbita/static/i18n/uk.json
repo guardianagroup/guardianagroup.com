@@ -1667,7 +1667,8 @@
   "Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.": "Кожне повідомлення й кожен фрагмент файлу автентифікуються під час надходження; досі всі пройшли перевірку.",
   "Modo discreto": "Непомітний режим",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Непомітний режим: чат розмитий, доки ви його не утримуєте, а те, що ви пишете, відображається цифрами. Натисніть цю кнопку, щоб бачити все як зазвичай.",
-  "Modo discreto: lo que escribas se verá como números": "Непомітний режим: те, що ви напишете, відображатиметься цифрами"
+  "Modo discreto: lo que escribas se verá como números": "Непомітний режим: те, що ви напишете, відображатиметься цифрами",
+  "Código erróneo o caducado.": "Неправильний або прострочений код."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

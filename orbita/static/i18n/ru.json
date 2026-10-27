@@ -1667,7 +1667,8 @@
   "Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.": "Каждое сообщение и каждый фрагмент файла проходят аутентификацию при получении; пока все прошли проверку.",
   "Modo discreto": "Незаметный режим",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Незаметный режим: чат размыт, пока вы не удерживаете его, а вводимый текст отображается цифрами. Нажмите эту кнопку, чтобы видеть всё как обычно.",
-  "Modo discreto: lo que escribas se verá como números": "Незаметный режим: вводимый текст будет отображаться цифрами"
+  "Modo discreto: lo que escribas se verá como números": "Незаметный режим: вводимый текст будет отображаться цифрами",
+  "Código erróneo o caducado.": "Неверный или просроченный код."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

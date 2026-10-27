@@ -1667,7 +1667,8 @@
   "Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.": "Hver melding og hver fildel autentiseres ved ankomst; så langt har alle bestått verifiseringen.",
   "Modo discreto": "Diskret modus",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Diskret modus: chatten er uskarp til du holder den inne, og det du skriver, vises som tall. Trykk på den for å se alt som normalt.",
-  "Modo discreto: lo que escribas se verá como números": "Diskret modus: det du skriver, vises som tall"
+  "Modo discreto: lo que escribas se verá como números": "Diskret modus: det du skriver, vises som tall",
+  "Código erróneo o caducado.": "Feil eller utløpt kode."
  },
  "p": {
   "intento": "Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",
