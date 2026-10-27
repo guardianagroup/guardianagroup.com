@@ -73,7 +73,7 @@
 /* dueño, 27 Oct 2026, 10:02: «actualiza la sección de órbita… para que se vea todo limpio y bien». La portada de NÚCLEO es la
    que reparte: en el planeta sobran la lista de secciones y «Conocer GUARDIANA» (la web anterior); la ubicación ya no se pinta
    en ámbar, que es para dinero y avisos. */
-#puertas,#conocer{display:none!important}
+#puertas,#conocer,#empezar{display:none!important} /* «Empezar» abría otra bienvenida: ahora la bienvenida es NÚCLEO */
 .lugar-btn.falta{color:var(--muted);border-color:var(--line)}
 /* dueño, 27 Oct 2026, 10:00: la cuarta tarjeta, «Pídeselo a NÚCLEO» (ronda 54), y su sección a pantalla completa */
 .nuc-op-n{border-color:rgba(156,195,228,.42);background:linear-gradient(180deg,rgba(23,38,54,.92),rgba(12,18,26,.88))}
@@ -120,3 +120,8 @@
   .ns-rapidas{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}.ns-rapidas::-webkit-scrollbar{display:none}.ns-rapidas .nuc-chip{flex:none}
   .ns-charla .nuc-b{max-width:96%}.ns-hola p{font-size:15px}
 }
+/* dueño, 10:47: «¿Qué es GUARDIANA?» arriba a la derecha, como enlace a la página de la historia */
+.nuc-que{position:absolute;top:18px;inset-inline-end:22px;z-index:2;display:inline-flex;align-items:center;padding:8px 15px;border-radius:999px;border:1px solid rgba(156,195,228,.3);background:rgba(12,18,26,.72);color:#dbe9f4;font:500 13.5px/1.2 'IBM Plex Sans',system-ui,sans-serif;text-decoration:none;transition:background .15s,border-color .15s,opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
+.nuc-que:hover{background:rgba(156,195,228,.16);border-color:rgba(156,195,228,.6);color:#F4F6F8}
+.nuc-que:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+@media (max-width:560px){.nuc-ini{padding-top:64px}.nuc-que{top:14px;inset-inline-end:14px;font-size:13px}}

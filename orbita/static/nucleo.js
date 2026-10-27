@@ -202,7 +202,9 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Chatea y envía archivos encriptados de PC a PC.</small></button>'
       // dueño, 10:00: «añade uno más: pedir las cosas»; ronda 54 (ChatGPT y Astra): «Pídeselo a NÚCLEO»
       + '<button type="button" class="nuc-op nuc-op-n" data-n="nucleo"><i translate="no">NÚCLEO</i><b>Pídeselo a NÚCLEO</b><small>Pídele que abra webs, consulte tus datos o prepare informes en PDF.</small></button>'
-      + '</div>';
+      + '</div>'
+      // dueño, 10:47: «arriba a la derecha, un enlace que diga qué es GUARDIANA» → la página de la historia con el planeta
+      + '<a class="nuc-que nuc-paso" id="nuc-que" href="/conocer.html">¿Qué es GUARDIANA?</a>';
     document.body.append(d);
     d.querySelectorAll('.nuc-op').forEach((b) => b.addEventListener('click', () => entra(b.dataset.n)));
     d.addEventListener('keydown', (e) => { if (e.key === 'Escape') alPlaneta(); });
