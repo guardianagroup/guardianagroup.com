@@ -68,7 +68,7 @@
   function convNueva(sala, semilla, rol) {
     return { id: sala, semilla, rol, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0 };
   }
-  const guardable = (c) => ({ id: c.id, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos });
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos });
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
     const d = await C.deSemilla(c.semilla);
@@ -84,9 +84,11 @@
     const xs = (await BD.todos('conv')).sort((a, b) => (b.creado || 0) - (a.creado || 0));
     const viva = xs.find((x) => x.huella && x.estado !== 'destruida_pendiente');
     for (const x of xs) {
+      // las marcas de borrado pendiente (sin contenido) caducan a las 24 horas
+      if (x.estado === 'destruida_pendiente' && Date.now() - (x.tumba || x.creado || 0) > 24 * 3600 * 1000) { await BD.borra('conv', x.id); continue; }
       if (x === viva || x.estado === 'destruida_pendiente') { await preparaConv(x); continue; }
       if (!x.huella) { await BD.borraConv('msg', x.id); await BD.borraConv('arch', x.id); await BD.borra('conv', x.id); continue; }
-      x.estado = 'destruida_pendiente'; x.ultimoTexto = null; x.noLeidos = 0;
+      x.estado = 'destruida_pendiente'; x.tumba = Date.now(); x.ultimoTexto = null; x.noLeidos = 0;
       await BD.borraConv('msg', x.id); await BD.borraConv('arch', x.id); await BD.pon('conv', x); await preparaConv(x);
     }
     pintaLista();
@@ -442,7 +444,7 @@
     if (c.codigo) R.retira(c.codigo);
     if (enLinea(c)) { enviaControl(c, { tipo: 'destruir' }); await new Promise((r) => setTimeout(r, 250)); await destruyeLocal(c, false, silencio); return; }
     if (!c.huella) { await destruyeLocal(c, false, true); return; }
-    c.estado = 'destruida_pendiente'; c.mensajes = []; c.cola = []; c.ultimoTexto = null; c.noLeidos = 0;
+    c.estado = 'destruida_pendiente'; c.tumba = Date.now(); c.mensajes = []; c.cola = []; c.ultimoTexto = null; c.noLeidos = 0;
     await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await guardaConv(c);
     if (ACTUAL === c.id) cierraConv();
     pintaLista(); aviso(T('Conversación terminada y borrada aquí; en el otro equipo, en cuanto esa persona entre.'));
