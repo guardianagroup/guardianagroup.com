@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261027e">
+<link rel="stylesheet" href="app.css?v=20261027f">
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -27,6 +27,7 @@
 <main class="app" id="app">
   <section class="inicio" id="inicio">
     <canvas class="red-nucleo" aria-hidden="true"></canvas><!-- dueño, 10:20: la red de NÚCLEO en vez del círculo -->
+    <p class="pq-k">Encriptación postcuántica híbrida</p><!-- ronda 55 -->
     <h1>Chat y archivos encriptados</h1>
     <p class="t">Chatea y envía archivos encriptados de PC a PC. Al terminar, la conversación se borra en los dos.</p>
 
@@ -58,6 +59,32 @@
          código hoy; sin llamadas, sin enlaces, sin «cualquier tamaño», sin promesas de cumplimiento legal). Solo se ve en
          la pantalla de inicio: al crear o escribir un código se oculta. -->
     <section class="pro" id="pro" aria-labelledby="pro-t" hidden>
+      <!-- ronda 55 (ChatGPT y Astra): lo que se puede decir de la encriptación postcuántica, de cada archivo y del recibo, con sus límites.
+           Antes de anunciarlo: la sesión que pierde la capa postcuántica se para hasta que la persona lo acepte, la cabecera dice siempre
+           si es postcuántica, y las fuentes de la librería coinciden byte a byte con el paquete de npm (11 archivos, 27 Oct 2026). -->
+      <p class="pro-antetitulo">Encriptación postcuántica híbrida</p>
+      <h2 id="pro-t0">Cómo funciona Comunicaciones</h2>
+      <div class="pro-rejilla pro-tres">
+        <article class="pro-tarjeta destacada">
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M9.5 16h5"/></svg></span>
+          <div>
+            <h3>Encriptación postcuántica</h3>
+            <p>Cuando los dos equipos usan la versión actual, Comunicaciones combina ML-KEM-768, un algoritmo postcuántico estandarizado (FIPS 203), con ECDH P-256 para acordar las claves de cada conversación. Cada mensaje y cada archivo se encriptan con AES-256-GCM y una clave distinta.</p>
+            <p class="pro-nota">Las firmas de identidad siguen siendo clásicas. Si la otra persona usa una versión anterior, te lo decimos y no seguimos sin tu permiso. La librería postcuántica no tiene auditoría independiente ni promete ejecución en tiempo constante.</p>
+          </div>
+        </article>
+        <article class="pro-tarjeta">
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14.5l2 2 4-4"/></svg></span>
+          <h3>Cada archivo, vigilado</h3>
+          <p>Los archivos viajan en trozos encriptados y autenticados uno a uno. Si un trozo ha sido alterado, no supera la verificación y se descarta; el archivo solo se marca como completo cuando han llegado todos sus trozos autenticados. Esta comprobación no dice si el contenido del archivo es seguro.</p>
+        </article>
+        <article class="pro-tarjeta">
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></span>
+          <h3>Recibo de entrega</h3>
+          <p>Cuando el archivo llega completo al otro equipo, el registro indica cuántos trozos autenticados se recibieron y en el chat aparece un recibo de entrega. Confirma la recepción, no que la otra persona lo haya abierto o leído.</p>
+        </article>
+      </div>
+
       <p class="pro-antetitulo">Para despachos, clínicas y empresas</p>
       <h2 id="pro-t">Comunicaciones confidenciales, sin complicaciones</h2>
       <p class="pro-entrada">Envía documentación confidencial a tus clientes y habla con ellos desde el navegador, con cifrado de extremo a extremo. Sin instalar nada, sin cuentas y sin números de teléfono.</p>
@@ -190,11 +217,11 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261027p5"></script>
+<script src="/orbita/static/idioma.js?v=20261027p7"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="cripto.js?v=20261027a"></script>
 <script src="/orbita/static/red-nucleo.js?v=20261027b"></script>
 <script src="rele.js?v=20261026d"></script>
-<script src="app.js?v=20261027d"></script>
+<script src="app.js?v=20261027e"></script>
 </body>
 </html>

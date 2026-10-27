@@ -270,3 +270,9 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .gc-pq{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0;padding:10px 16px;border-bottom:1px solid rgba(240,199,127,.35);background:rgba(240,199,127,.08);color:#F0C77F;font-size:14px;line-height:1.45}
 .gc-pq[hidden]{display:none}
 .gc-pq .boton{flex:none}
+.inicio .pq-k{margin:6px 0 2px;font:600 11px/1.4 'IBM Plex Mono',Consolas,monospace;letter-spacing:.24em;color:#9CC3E4;text-transform:uppercase;text-align:center}
+.pro-rejilla.pro-tres{margin-bottom:40px}
+#pro-t0{margin-top:6px}
+.pro-rejilla.pro-tres>.pro-tarjeta:not(.destacada){grid-column:span 3} /* las dos de abajo, mitad y mitad */
+@media (max-width:900px){.pro-rejilla.pro-tres>.pro-tarjeta:not(.destacada){grid-column:span 1}}
+@media (max-width:560px){.pro-rejilla.pro-tres>.pro-tarjeta:not(.destacada){grid-column:1/-1}}

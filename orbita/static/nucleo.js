@@ -19,6 +19,11 @@
   const q = new URLSearchParams(location.search);
   const PUERTA_EN_URL = /^#(zero|radiografias|comunicaciones|mi-conexion)$/.test(location.hash);
   const red = (lienzo, op) => (window.RedNucleo ? window.RedNucleo(lienzo, op) : { habla() {}, para() {} });
+  // dueño, 10:53: «todas las páginas que se abren tienen que tener un botón de volver a donde estás»: se recuerda de dónde se
+  // salió (la portada o la sección de NÚCLEO) y los botones de volver lo dicen («Inicio» o «Regresar a NÚCLEO»).
+  const VUELTA = 'guardiana-vuelta';
+  const vuelta = () => { try { return sessionStorage.getItem(VUELTA) || 'portada'; } catch (_) { return 'portada'; } };
+  const ponVuelta = (v) => { try { sessionStorage.setItem(VUELTA, v); } catch (_) {} pintaVuelta(); };
 
   // ---------- acciones reales ----------
   function marcoZero() { try { const m = document.getElementById('marco'); if (m && !m.hidden && m.contentWindow && /\/zero\//.test(m.contentWindow.location.pathname)) return m.contentWindow; } catch (_) {} return null; }
@@ -27,6 +32,8 @@
   function abreZero(web) {
     cierraTodo();
     if (!marcoZero() && window.OrbitaPuertas) OrbitaPuertas.abre('zero');
+    let k = 0; const etiqueta = () => { pintaVuelta(); const w = marcoZero(); if ((!w || !w.document.querySelector('#volverZ span')) && ++k < 40) setTimeout(etiqueta, 250); };
+    etiqueta();
     if (!web) return;
     let n = 0; const intenta = () => {
       const w = marcoZero(); const f = w && w.document.getElementById('lens'); const i = f && f.querySelector('input');
@@ -70,6 +77,28 @@
   }
   // «Resumen de mis datos» en PDF (ronda 54: título y alcance, total, por tipo, empresas, países, webs, el registro y la nota
   // de alcance). Se hace aquí, con lo que hay en este navegador, y se abre la ventana de imprimir para guardarlo como PDF.
+  // dueño, 10:53: «el resumen no te aparece en PDF, te lleva a imprimir»: ahora se descarga un archivo .pdf de verdad con el
+  // mismo escritor de PDF de ZERO (orbita/zero/pdf.js); solo si el idioma no cabe en ese PDF se usa la ventana de imprimir.
+  function resumenArchivo() {
+    const REG = registros(), total = totalCortes(), tot = lee('zeroTotal', null);
+    if (!window.ZeroPdf || (!REG.length && !total)) return false;
+    const fecha = (t) => { try { return new Date(t).toLocaleString(loc(), { dateStyle: 'medium', timeStyle: 'short' }); } catch (_) { return new Date(t).toISOString(); } };
+    const cuenta = (f) => { const m = new Map(); for (const r of REG) { const k = f(r); if (!k) continue; m.set(k, (m.get(k) || 0) + 1); } return [...m.entries()].sort((a, b) => b[1] - a[1]); };
+    const empresas = cuenta((r) => r.e), paises = cuenta((r) => (r.p && r.p !== 'País no identificado' ? T(r.p) : null));
+    const dos = (titulo, col, filas) => ({ titulo: T(titulo), cols: [{ t: col, w: 80 }, { t: 'Cortes', w: 20, der: 1 }], filas: filas.slice(0, 40).map(([k, n]) => [k, fmt(n)]) });
+    const datos = {
+      marca: '/ NÚCLEO', titulo: T('Resumen de mis datos'),
+      subtitulo: T('Cortes de ZERO guardados en este navegador') + ' · ' + pon('Generado: {1}', fecha(Date.now())) + (tot && tot.d ? ' · ' + pon('Desde el {1}', fecha(tot.d)) : ''),
+      resumen: [[fmt(total), T('Cortes desde el primer día'), 1], [fmt(empresas.length), T('Empresas')], [fmt(paises.length), T('Países')]],
+      secciones: [dos('Por tipo', 'Tipo', cuenta((r) => (r.m ? T(r.m) : null))), dos('Empresas', 'Empresa', empresas), dos('Países', 'País', paises), dos('Webs donde pasó', 'Web', cuenta((r) => r.w)),
+        { titulo: T('Cortes registrados'), cols: [{ t: 'Fecha y hora', w: 22 }, { t: 'Web', w: 22 }, { t: 'Empresa', w: 22 }, { t: 'País', w: 16 }, { t: 'Tipo', w: 18 }], filas: [...REG].sort((a, b) => b.t - a.t).slice(0, 1500).map((r) => [fecha(r.t), r.w || '', r.e || '', r.p ? T(r.p) : '', r.m ? T(r.m) : '']) }],
+      final: T('Este resumen muestra los cortes registrados por ZERO en este navegador. No es un inventario de todos tus datos personales ni de toda tu actividad en internet.') + ' ' + T('Estos registros se guardan solo en este navegador y puedes borrarlos desde NÚCLEO.'),
+      pie: 'GUARDIANA · NÚCLEO · ' + T('Resumen de mis datos'), archivo: 'GUARDIANA-resumen-de-mis-datos.pdf',
+    };
+    const todo = [datos.titulo, datos.subtitulo, datos.final, ...datos.secciones.flatMap((x) => [x.titulo, ...x.cols.map((c) => T(c.t)), ...x.filas.flat()])].join(' ');
+    if (!window.ZeroPdf.cabe(todo)) return false;
+    try { window.ZeroPdf.descarga(datos, T); return true; } catch (e) { console.warn('PDF', e); return false; }
+  }
   function resumenPdf() {
     const REG = registros(), total = totalCortes(), tot = lee('zeroTotal', null);
     if (!REG.length && !total) return false;
@@ -110,13 +139,13 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
     com: 'Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.',
   };
   const ETQ = {
-    zero: 'Navegar con NÚCLEO', planeta: 'Explorar el planeta', com: 'Chat encriptado', datos: 'Mis datos', 'que-es-guardiana': '¿Qué es GUARDIANA?',
+    zero: 'Ir al navegador ZERO', planeta: 'Explorar el planeta', com: 'Chat encriptado', datos: 'Mis datos', 'que-es-guardiana': '¿Qué es GUARDIANA?',
     'z-web': 'Abrir una web', 'z-buscar': 'Buscar en internet', 'z-radio': 'Ver la Radiografía', 'z-pdf': 'PDF de la web abierta', resumen: 'Resumen de mis datos en PDF', 'z-que': '¿Cómo funciona el navegador ZERO?', 'z-tor': 'Navegar con Tor',
     'p-sub': 'Cables submarinos', 'p-fibra': 'Cables terrestres', 'p-puntos': 'Centros de datos', 'p-sat': 'Satélites', 'p-pais': 'Ir a un país', 'p-directo': 'Cortes en directo', 'p-que': '¿Qué es Órbita?',
     'c-crear': 'Crear una invitación', 'c-codigo': 'Tengo un código', 'c-que': 'Cómo funciona Comunicaciones',
     'd-corte': '¿Qué es un corte?', borrar: 'Borrar mis datos de este navegador', privacidad: 'Privacidad', seguridad: '¿Es seguro?', vpn: '¿Es una VPN?', precio: 'Precio', cuenta: '¿Necesito una cuenta?', idioma: 'Idioma', contacto: 'Hablar con una persona',
   };
-  const RAPIDAS = [['z-web', 'Abrir una web'], ['z-radio', 'Ver la Radiografía'], ['datos', 'Mis datos'], ['resumen', 'Resumen en PDF'], ['planeta', 'Explorar el planeta'], ['com', 'Chat encriptado']];
+  const RAPIDAS = [['zero', 'Ir al navegador ZERO'], ['z-radio', 'Ver la Radiografía'], ['datos', 'Mis datos'], ['resumen', 'Resumen en PDF'], ['planeta', 'Explorar el planeta'], ['com', 'Chat encriptado']];
   const GRUPOS = [
     ['Navegar y buscar', ['z-web', 'z-buscar', 'z-tor', 'z-que']],
     ['Radiografía e informes', ['z-radio', 'z-pdf', 'resumen']],
@@ -143,11 +172,11 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       case 'quien-eres': return { t: 'Soy NÚCLEO, la guía de GUARDIANA: entiendo peticiones concretas y te llevo a cada parte. No soy una IA generativa y no guardo lo que me pides.' };
       case 'que-es-guardiana': return { x: [['Navegador ZERO', 'Navegar viendo quién intenta llevarse tus datos.'], ['Órbita', 'Ver por dónde viajan tus datos en el planeta.'], ['Comunicaciones', 'Hablar y enviar archivos encriptados con otra persona.']], t: '¿Por dónde empezamos?', c: ['zero', 'planeta', 'com'] };
       case 'zero': return { t: 'Abro el navegador ZERO: escribe una dirección o lo que quieras buscar.', a: () => abreZero(), va: true };
-      case 'z-web': return r.web ? { t: pon('Abro {1} en el navegador ZERO, dentro de la burbuja.', r.web), a: () => abreZero(r.web), va: true } : { t: 'Escribe la dirección de la web, por ejemplo eltiempo.com, y la abro en el navegador ZERO.', modo: 'web' };
-      case 'z-buscar': return r.q ? { t: pon('Busco «{1}» con el navegador ZERO.', r.q), a: () => abreZero(r.q), va: true } : { t: '¿Qué quieres buscar?', modo: 'buscar' };
-      case 'z-radio': return hayWeb() ? { t: 'La Radiografía está a la derecha del navegador ZERO: quién intenta conectarse, qué se ha cortado y quién puja por tus datos.', a: () => abreZero(), va: true } : { t: 'Para ver la Radiografía necesito una web abierta en el navegador ZERO. ¿Cuál abro?', modo: 'web' };
-      case 'z-pdf': return hayWeb() ? { t: 'Preparo el PDF con lo que el navegador ZERO ha visto en esta web.', a: pdfWeb, va: true } : { t: 'Para el PDF de una web necesito una web abierta en el navegador ZERO. ¿Cuál abro?', modo: 'web', c: ['resumen'] };
-      case 'resumen': return hayDatos() ? { t: 'Preparo el resumen de tus datos en PDF: se abre la ventana de imprimir y eliges «Guardar como PDF».', a: resumenPdf } : { t: 'Todavía no hay cortes registrados en este navegador. Abre una web con el navegador ZERO y vuelve a pedirme el resumen.', c: ['z-web'] };
+      // dueño, 10:55: «cuando pregunta para abrir una web, mejor que no la abras tú: llévalo al navegador y él decide con qué
+      // buscador (Google, Brave, Tor). Lo justo y sencillo.» Abrir una web, buscar y la Radiografía llevan al navegador ZERO.
+      case 'z-web': case 'z-buscar': case 'z-radio': return { t: 'Abro el navegador ZERO.', a: () => abreZero(), va: true };
+      case 'z-pdf': return hayWeb() ? { t: 'Preparo el PDF con lo que el navegador ZERO ha visto en esta web.', a: pdfWeb, va: true } : { t: 'Para el PDF de una web, ábrela primero en el navegador ZERO. Si quieres el de tus datos, pídeme el resumen.', c: ['zero', 'resumen'] };
+      case 'resumen': return hayDatos() ? (resumenArchivo() ? { t: 'Te he descargado el resumen de tus datos en PDF.' } : { t: 'Preparo el resumen de tus datos en PDF: se abre la ventana de imprimir y eliges «Guardar como PDF».', a: resumenPdf }) : { t: 'Todavía no hay cortes registrados en este navegador. Abre una web con el navegador ZERO y vuelve a pedirme el resumen.', c: ['z-web'] };
       case 'z-que': return { t: AYUDA.zero, c: ['z-web', 'z-radio'] };
       case 'z-tor': return { t: 'Abro el navegador ZERO: en el selector del buscador, elige Tor. Con Tor se corta más.', a: () => abreZero(), va: true };
       case 'planeta': return { t: 'Te llevo al planeta: cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.', a: () => alPlaneta(), va: true };
@@ -175,13 +204,13 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       case 'clave': return { t: 'No escribas contraseñas aquí: NÚCLEO no las necesita y no guarda lo que escribes.' };
       case 'banco': return { t: 'No compartas datos del banco ni de tarjetas aquí. Hoy GUARDIANA no cobra nada.' };
       case 'hackear': return { t: 'No ayudo a entrar en cuentas, redes o equipos ajenos. Puedo ayudarte a navegar aislado con el navegador ZERO o a chatear encriptado.', c: ['zero', 'com'] };
-      case 'robada': return { t: 'Usa la recuperación oficial de ese servicio y cambia tus contraseñas desde su web. Si quieres, abro su web en el navegador ZERO.', c: ['z-web'] };
+      case 'robada': return { t: 'Usa la recuperación oficial de ese servicio y cambia tus contraseñas desde su web. Si quieres, te llevo al navegador ZERO.', c: ['zero'] };
       case 'peligro': return { t: 'Si estás en peligro, llama ya a emergencias o a la policía de tu país. NÚCLEO no puede hacer esa llamada.' };
       case 'autolesion': return { t: 'Siento que estés pasando por esto. Si piensas en hacerte daño, llama ahora a emergencias o a una línea de ayuda de tu país; hablar con alguien ayuda.' };
       case 'espian': return { t: 'No puedo revisar tu equipo. Con el navegador ZERO, las webs se abren fuera de tu equipo y en la Radiografía ves quién intenta seguirte.', c: ['z-que', 'z-web'] };
       case 'insulto': return { t: 'Perdona si no te he entendido. Dime si quieres navegar, ver el planeta o chatear encriptado.', c: ['zero', 'planeta', 'com'] };
       case 'estafa': return { t: 'Entiendo tu desconfianza. Hoy GUARDIANA no cobra nada, no necesitas cuenta y NÚCLEO no guarda lo que le escribes.', c: ['privacidad', 'contacto'] };
-      case 'salud': return { t: 'No doy consejos de salud: un profesional sanitario puede orientarte. Si quieres, lo busco con el navegador ZERO.', c: frase ? [{ l: 'Buscar con el navegador ZERO', f: () => abreZero(frase) }] : [] };
+      case 'salud': return { t: 'No doy consejos de salud: un profesional sanitario puede orientarte.' };
       default: return null;
     }
   }
@@ -210,7 +239,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
     d.addEventListener('keydown', (e) => { if (e.key === 'Escape') alPlaneta(); });
     return d;
   }
-  function entra(id) { if (id === 'zero') abreZero(); else if (id === 'planeta') alPlaneta(); else if (id === 'com') irComunicaciones(); else if (id === 'nucleo') abreSala(); }
+  function entra(id) { if (id !== 'nucleo') ponVuelta('portada'); if (id === 'zero') abreZero(); else if (id === 'planeta') alPlaneta(); else if (id === 'com') irComunicaciones(); else if (id === 'nucleo') abreSala(); }
   function revela(d, todo) {
     const pasos = [...d.querySelectorAll('.nuc-paso')];
     if (todo || matchMedia('(prefers-reduced-motion: reduce)').matches) { pasos.forEach((p) => p.classList.add('ve')); return; }
@@ -235,7 +264,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
   let sala = null, salaRed = null, modo = null;
   function construyeSala() {
     const s = document.createElement('section');
-    s.className = 'nuc-sala'; s.id = 'nuc-sala'; s.hidden = true; s.setAttribute('aria-label', 'NÚCLEO');
+    s.className = 'nuc-sala vacia'; s.id = 'nuc-sala'; s.hidden = true; s.setAttribute('aria-label', 'NÚCLEO');
     s.innerHTML = '<header class="ns-cab"><button type="button" class="ns-boton" id="ns-inicio"><span aria-hidden="true">←</span> Inicio</button>'
       + '<span class="ns-marca" translate="no">NÚCLEO</span>'
       + '<button type="button" class="ns-boton ns-ayuda" id="ns-ayuda" aria-expanded="false" aria-controls="ns-panel">¿Qué puedo pedir?</button></header>'
@@ -300,7 +329,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       }
       p.append(f);
     }
-    c.append(p); while (c.children.length > 40) c.firstChild.remove();
+    c.append(p); while (c.children.length > 40) c.firstChild.remove(); sala.classList.remove('vacia');
     const cu = sala.querySelector('#ns-cuerpo'); requestAnimationFrame(() => { cu.scrollTop = cu.scrollHeight; });
   }
   const ctx = () => ({ modo, pais: paisEn, hayWeb: hayWeb() });
@@ -311,8 +340,11 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
     modo = null;
     let o;
     if (r.quiza) o = { t: '¿Quisiste decir…?', c: r.quiza };
-    else if (r.nada) o = { t: 'No he reconocido esa petición. Si quieres, lo busco con el navegador ZERO, o mira qué puedes pedirme.', c: [...(r.sensible || !frase ? [] : [{ l: pon('Buscar «{1}» con el navegador ZERO', corta(frase)), f: () => abreZero(frase) }]), { l: '¿Qué puedo pedir?', f: () => panel(true) }] };
+    else if (r.nada) o = { t: 'No he reconocido esa petición. Mira qué puedes pedirme o ve al navegador ZERO.', c: ['zero', { l: '¿Qué puedo pedir?', f: () => panel(true) }] };
     else o = respuesta(r, frase);
+    // dueño, 10:53: «cuando la persona clica, no hace falta que digas ya te llevo y luego salte»: si la respuesta lleva a otro
+    // sitio, se va directamente; al volver, el botón dice «Regresar a NÚCLEO».
+    if (o && o.va && o.a) { ponVuelta('nucleo'); o.a(); return; }
     if (!o) o = { t: 'No he reconocido esa petición.', c: [{ l: '¿Qué puedo pedir?', f: () => panel(true) }] };
     burbuja('el', T(o.t), o);
     modo = o.modo || null;
@@ -348,7 +380,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
   // ---------- el botón «NÚCLEO», abajo a la izquierda en el planeta y en las secciones: abre su sección ----------
   const barra = document.createElement('div');
   barra.className = 'nuc-barra mini'; barra.id = 'nuc-barra'; barra.hidden = true;
-  barra.innerHTML = '<button type="button" class="nuc-orbe" id="nuc-orbe" aria-label="Pídeselo a NÚCLEO" title="NÚCLEO"></button>';
+  barra.innerHTML = '<button type="button" class="nuc-orbe" id="nuc-orbe" aria-label="Pídeselo a NÚCLEO" title="NÚCLEO"></button><span class="nuc-et" translate="no">NÚCLEO</span>';
   barra.addEventListener('click', () => abreSala());
   document.body.append(barra);
 
@@ -358,10 +390,16 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
   addEventListener('message', (e) => { if (e.origin === location.origin && e.data && e.data.tipo === 'orbita-verme') verme = Date.now(); });
   new MutationObserver(() => {
     const d = document.body.classList.contains('dentro');
-    if (estabaDentro && !d) setTimeout(() => { if (Date.now() - verme > 1500 && Date.now() - volviendo > 1500 && !document.body.classList.contains('dentro')) muestraInicio(true); }, 60);
+    if (estabaDentro && !d) setTimeout(() => { if (Date.now() - verme > 1500 && Date.now() - volviendo > 1500 && !document.body.classList.contains('dentro')) { if (vuelta() === 'nucleo') abreSala(); else muestraInicio(true); } }, 60);
     estabaDentro = d;
   }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
-  { const vb = document.getElementById('volver'); if (vb) for (const n of vb.childNodes) if (n.nodeType === 3 && n.data.trim() === 'Órbita') n.data = 'Inicio'; }
+  function pintaVuelta() {
+    const nuc = vuelta() === 'nucleo', txt = nuc ? 'Regresar a NÚCLEO' : 'Inicio';
+    const vb = document.getElementById('volver'); if (vb) for (const n of vb.childNodes) if (n.nodeType === 3 && n.data.trim()) n.data = txt;
+    try { const w = marcoZero(); const s = w && w.document.querySelector('#volverZ span'); if (s && s.textContent !== txt) s.textContent = txt; } catch (_) {}
+    const et = barra.querySelector('.nuc-et'); if (et) { et.textContent = nuc ? 'Regresar a NÚCLEO' : 'NÚCLEO'; if (nuc) et.removeAttribute('translate'); else et.setAttribute('translate', 'no'); }
+  }
+  pintaVuelta();
 
   // ---------- arranque: la primera vez en esta visita, con su nacimiento; al volver en la misma visita, al momento ----------
   let visto = false; try { visto = sessionStorage.getItem('guardiana-nucleo') === '1'; sessionStorage.setItem('guardiana-nucleo', '1'); } catch (_) {}
