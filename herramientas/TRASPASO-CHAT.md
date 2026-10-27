@@ -1,5 +1,28 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
+## Estado al 27 Oct 2026, 01:10 (Bogotá) — EMPIEZA POR AQUÍ
+
+Resumen completo en el proyecto de claude.ai «guardiana group», documento `claude/ZERO_ESTADO_27OCT2026.md`. Lo esencial:
+
+- **ZERO** (`orbita/zero/`):
+  - Google, Brave y Tor, con medidor ▮ / ▮▮ / ▮▮▮.
+  - Por defecto no se corta nada; Tor corta por defecto y además publicidad, rastreo, medición y avisos de cookies.
+  - Cortes agrupados por categorías, con interruptores.
+  - «Burbuja» en vez de «celda».
+  - Panel «RADIOGRAFÍA» con subastas: Prebid, Google y Amazon; pujadores, precios e identificadores.
+  - Totales acumulados.
+  - PDF descargado directo, con el máximo de datos (`orbita/zero/pdf.js`, escritor propio).
+  - Chrome real en el motor.
+- **Comunicaciones** (`orbita/comunicaciones/`): bloque «Para despachos, clínicas y empresas», de la ronda 51 (`agencia-rondas/ronda51/notas.md`).
+- **En marcha:** traducción de 168 textos y 17 plantillas a los 39 idiomas (`scratchpad/tr_r51/out/` → `orbita/static/i18n/*.json`).
+- **Siguiente, por orden del dueño:**
+  1. Pruebas por toda GUARDIANA, con calidad «modo agencia».
+  2. Ronda de la agencia en «modo cliente que ha pagado».
+  3. Vídeo de la sesión y su reflejo en Órbita, con descargas de PDF y vídeo.
+  4. «Rayos X» sobre la página.
+  5. Audio.
+
+
 Actualizado el sábado 24 de octubre de 2026 a las 21:25, hora de Bogotá, al cerrar la tercera cuenta del día. Copia de seguridad: todo está en GitHub con su historial completo. Al cerrar, `main` iba en `80affc7` (más el commit que hará el workflow de empresas al terminar) y `web-idiomas` en el commit de este documento. Desde esta sesión no se pueden subir etiquetas de git: el proxy lo rechaza. Lo escribe la sesión anterior (Claude Opus 5.5) para que la siguiente siga el trabajo sin perder nada. **Pega este documento entero en el chat nuevo.**
 
 ## Estado al cerrar esta cuenta (24 Oct 2026, 21:25, Bogotá) — EMPIEZA POR AQUÍ
