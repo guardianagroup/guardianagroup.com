@@ -76,7 +76,7 @@
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
     const d = await C.deSemilla(c.semilla);
-    c.presentacion = d.presentacion; c.yo = await yoId(c.id);
+    c.presentacion = d.presentacion; c.psk = d.psk; c.yo = await yoId(c.id);
     c.miembros = new Set(); c.sesion = null; c.sesiones = new Map(); c.ef = null; c.epoca = null; c.mensajes = []; c.cola = []; c.enviando = false; c.archivos = new Map();
     c.suId = c.huella ? C.hex(await C.sha256(C.te.encode('GUARDIANA miembro\n' + c.id + '\n' + C.hex(c.huella)))).slice(0, 16) : null;
     CONVS.set(c.id, c);
@@ -119,13 +119,13 @@
     if (c.estado === 'destruida' || !R.abierto) return;
     // una presentación espontánea en reacción a otra espontánea no se repite en ráfaga: si hace falta, el reintento la manda
     if (!resp && !forzar && c.presentadoEn && Date.now() - c.presentadoEn < 1200) { reintenta(c, 1400); return; }
-    c.ef = await C.efimera(); c.epoca = C.azar(8);
+    c.ef = await C.efimera(); c.epoca = C.azar(16);
     // las últimas efímeras propias, por época: una respuesta a cualquiera de ellas vale para derivar sesión
     c.efs = c.efs || new Map(); c.efs.set(C.hex(c.epoca), c.ef); for (const k of [...c.efs.keys()].slice(0, -4)) c.efs.delete(k);
-    const r = resp || new Uint8Array(8);
-    const datos = C.cat(C.te.encode(c.id), YO.firmaPub, YO.acuerdoPub, c.ef.pub, c.epoca, r);
+    // ronda 48: la firma ata la transcripción. Quien responde firma también la huella y la efímera de quien inicia.
+    const datos = resp ? C.cat(C.te.encode('GUARDIANA v2 RESPONDE\n' + c.id + '\n'), YO.firmaPub, YO.acuerdoPub, c.ef.pub, c.epoca, resp.epoca, c.huella, resp.ef) : C.cat(C.te.encode('GUARDIANA v2 INICIA\n' + c.id + '\n'), YO.firmaPub, YO.acuerdoPub, c.ef.pub, c.epoca);
     const sig = await C.firma(YO, datos);
-    const j = { v: 1, firmaPub: C.b64u(YO.firmaPub), acuerdoPub: C.b64u(YO.acuerdoPub), ef: C.b64u(c.ef.pub), epoca: C.b64u(c.epoca), resp: resp ? C.b64u(resp) : '', nombre: YO.nombre, sig: C.b64u(sig) };
+    const j = { v: 2, firmaPub: C.b64u(YO.firmaPub), acuerdoPub: C.b64u(YO.acuerdoPub), ef: C.b64u(c.ef.pub), epoca: C.b64u(c.epoca), resp: resp ? C.b64u(resp.epoca) : '', nombre: YO.nombre, sig: C.b64u(sig) };
     const iv = C.azar(12);
     const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv, additionalData: new Uint8Array([1]) }, c.presentacion, C.te.encode(JSON.stringify(j))));
     R.manda(c.id, c.suId || null, C.cat(new Uint8Array([1]), iv, ct));
@@ -137,23 +137,27 @@
     let j;
     try { j = JSON.parse(C.td.decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b.subarray(1, 13), additionalData: new Uint8Array([1]) }, c.presentacion, b.subarray(13)))); } catch (_) { return; }
     try {
-      const firmaPub = C.deB64u(j.firmaPub), acuerdoPub = C.deB64u(j.acuerdoPub), ef = C.deB64u(j.ef), epoca = C.deB64u(j.epoca), sig = C.deB64u(j.sig), resp = j.resp ? C.deB64u(j.resp) : new Uint8Array(8);
-      if (firmaPub.length !== 65 || acuerdoPub.length !== 65 || ef.length !== 65 || epoca.length !== 8 || resp.length !== 8) return;
-      if (!(await C.verifica(firmaPub, sig, C.cat(C.te.encode(c.id), firmaPub, acuerdoPub, ef, epoca, resp)))) return;
+      if (j.v !== 2) return;
+      const firmaPub = C.deB64u(j.firmaPub), acuerdoPub = C.deB64u(j.acuerdoPub), ef = C.deB64u(j.ef), epoca = C.deB64u(j.epoca), sig = C.deB64u(j.sig), resp = j.resp ? C.deB64u(j.resp) : null;
+      if (firmaPub.length !== 65 || acuerdoPub.length !== 65 || ef.length !== 65 || epoca.length !== 16 || (resp && resp.length !== 16)) return;
       const huella = await C.huella(firmaPub, acuerdoPub);
       if (C.hex(huella) === C.hex(YO.huella)) return; // yo mismo desde otra pestaña
       if (c.huella && C.hex(c.huella) !== C.hex(huella)) { R.manda(c.id, de, new Uint8Array([5])); return; } // la invitación ya es de otra persona
+      // una época nunca se acepta dos veces (repetición)
+      c.epocasVistas = c.epocasVistas || new Set(); const eh = C.hex(epoca); if (c.epocasVistas.has(eh)) return; c.epocasVistas.add(eh); if (c.epocasVistas.size > 64) c.epocasVistas.delete(c.epocasVistas.values().next().value);
+      const efMia = resp && c.efs ? c.efs.get(C.hex(resp)) : null;
+      const datos = resp ? (efMia ? C.cat(C.te.encode('GUARDIANA v2 RESPONDE\n' + c.id + '\n'), firmaPub, acuerdoPub, ef, epoca, resp, YO.huella, efMia.pub) : null) : C.cat(C.te.encode('GUARDIANA v2 INICIA\n' + c.id + '\n'), firmaPub, acuerdoPub, ef, epoca);
+      if (!datos) return; // respuesta a una época que no es de las últimas mías: fuera
+      if (!(await C.verifica(firmaPub, sig, datos))) return;
       const nueva = !c.huella;
       if (nueva) { c.firmaPub = firmaPub; c.acuerdoPub = acuerdoPub; c.huella = huella; c.estado = 'activa'; if (!c.nombre) c.nombre = String(j.nombre || '').slice(0, 40); }
       else if (!c.nombre && j.nombre) c.nombre = String(j.nombre).slice(0, 40);
       c.suId = de; c.miembros.add(de);
       if (nueva || j.nombre !== c.nombreVisto) { c.nombreVisto = j.nombre; await guardaConv(c); }
-      const efMia = j.resp && c.efs ? c.efs.get(C.hex(resp)) : null;
       const esResp = !!efMia;
-     
-      if (!soyInicio(c)) { await presenta(c, epoca); await derivaSesion(c, ef, c.ef); }
+      if (!soyInicio(c)) { await presenta(c, { epoca, ef }); await derivaSesion(c, ef, c.ef); }
       else if (esResp) await derivaSesion(c, ef, efMia);
-      else if (!j.resp) await presenta(c, null);
+      else if (!resp) await presenta(c, null);
       if (nueva) { await anotaSistema(c, 'Conversación establecida: cifrada de extremo a extremo. Comprobad el número de seguridad cuando podáis.'); cierraHoja('h-invita'); }
       if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
@@ -162,13 +166,13 @@
   async function derivaSesion(c, suEf, efMia) {
     if (!efMia || !suEf || !c.acuerdoPub) return;
     const inicio = soyInicio(c);
-    const s = await C.sesion(YO, efMia, { ef: suEf, acuerdoPub: c.acuerdoPub }, c.id, inicio);
-    const a = C.hex(efMia.pub), b = C.hex(suEf);
-    const sid = C.hex((await C.sha256(C.deHex(a < b ? a + b : b + a))).subarray(0, 8));
-    const ses = { sid, envio: C.cadena(s.envio), recibo: C.cadena(s.recibo), desde: Date.now() };
+    const s = await C.sesion(YO, efMia, { ef: suEf, acuerdoPub: c.acuerdoPub }, c.id, inicio, c.psk, YO.huella, c.huella);
+    const sid = C.hex(s.hash.subarray(0, 8));
+    const ses = { sid, hash: s.hash, envio: C.cadena(s.envio), recibo: C.cadena(s.recibo), desde: Date.now(), confirmada: false };
     c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento);
     for (const k of [...c.sesiones.keys()].slice(0, -3)) c.sesiones.delete(k);
     pintaCabecera(c); pintaLista();
+    enviaControl(c, { tipo: 'ok' });
     if (YO.nombre) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
     enviaCola(c);
     if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c);
@@ -179,7 +183,7 @@
     const ses = c.sesion; if (!ses) return null;
     const { n, clave } = await ses.envio.siguiente();
     const cab = new Uint8Array(13); cab[0] = 2; cab.set(C.deHex(ses.sid), 1); new DataView(cab.buffer).setUint32(9, n);
-    const ct = await C.sella(clave, n, C.te.encode(JSON.stringify(obj)), cab);
+    const ct = await C.sella(clave, n, C.te.encode(JSON.stringify(obj)), C.cat(cab, ses.hash)); // AAD: cabecera + hash de sesión entero
     return C.cat(cab, ct);
   }
   function enviaControl(c, obj) { if (!c.sesion || !R.abierto || !c.miembros.has(c.suId)) return false; sella(c, obj).then((b) => b && R.manda(c.id, c.suId, b)); return true; }
@@ -210,8 +214,9 @@
     const ses = c.sesiones.get(sid);
     if (!ses) { R.manda(c.id, de, new Uint8Array([4])); return; } // no conozco esa sesión: que se presente otra vez
     let j;
-    try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), b.subarray(0, 13)))); } catch (e) { console.warn('mensaje ilegible', e.message); return; }
+    try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), C.cat(b.subarray(0, 13), ses.hash)))); } catch (e) { console.warn('mensaje ilegible', e.message); return; }
     if (c.suId !== de) return;
+    if (!ses.confirmada) { ses.confirmada = true; if (c.sesion === ses) pintaCabecera(c); } // la otra persona tiene la misma clave: sesión confirmada
     switch (j.tipo) {
       case 'texto': {
         if (c.mensajes.some((x) => x.id === j.id)) { enviaControl(c, { tipo: 'ack', ids: [j.id] }); return; }
@@ -221,6 +226,7 @@
         if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c); else avisaSonido();
         return;
       }
+      case 'ok': return;
       case 'ack': case 'leido': {
         const est = j.tipo === 'ack' ? 'entregado' : 'leido';
         for (const id of j.ids || []) { const m = c.mensajes.find((x) => x.id === id && x.dir === 'mia'); if (m && (est === 'leido' || m.estado === 'enviado' || m.estado === 'pendiente')) { if (!(m.estado === 'leido')) { m.estado = est; await guardaMensaje(c, m); pintaEstado(m); } } }
@@ -331,6 +337,8 @@
     const m = c.mensajes.find((x) => x.tipo === 'archivo' && x.dir === 'suya' && C.hex(fidDe(x.id)) === fid);
     const a = m && c.archivos.get(m.id); if (!a || a.envio || !a.listo || i >= a.trozos) return;
     let claro; try { claro = await C.abre(a.clave, i, b.subarray(21), b.subarray(0, 21)); } catch (_) { return; }
+    const esperado = i < a.trozos - 1 ? TROZO : m.archivo.tam - (a.trozos - 1) * TROZO;
+    if (claro.length !== esperado) return; // longitud que no cuadra con el anuncio: fuera
     if (a.partes) { if (a.partes[i]) return; a.partes[i] = claro; a.tengo++; }
     else {
       // al disco, en orden: lo que llega adelantado espera en memoria (como mucho la ventana)
@@ -366,7 +374,7 @@
     await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await BD.borra('conv', c.id);
     if (ACTUAL === c.id) { cierraConv(); }
     pintaLista();
-    if (!silencio) aviso(porElla ? T('La otra persona ha destruido la conversación: se ha borrado también aquí.') : T('Conversación destruida en los dos lados.'));
+    if (!silencio) aviso(porElla ? T('La otra persona ha destruido la conversación: se ha borrado también aquí.') : T('Conversación destruida aquí; la otra persona ha recibido la orden de borrado.'));
   }
   // Destruir con la otra persona ausente: se borra todo aquí y queda una lápida (sin mensajes) que, en cuanto la otra
   // persona entre, le manda «destruir» y desaparece.
@@ -452,7 +460,7 @@
     else if (!c.huella) txt = c.miembros.size ? T('Estableciendo el cifrado…') : T('Esperando a que la otra persona abra el enlace…');
     else if (!R.abierto) txt = T('Sin conexión con el relé');
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
-    else if (!c.sesion) txt = T('Estableciendo el cifrado…');
+    else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo el cifrado…');
     else txt = T('Cifrada de extremo a extremo') + ' · ' + (c.verificada ? T('verificada') : T('sin verificar'));
     if (c.huella && !c.verificada) conf.classList.add('gc-sin-verificar');
     conf.textContent = txt;
@@ -537,9 +545,10 @@
     const ul = $('#escudo-lista'); ul.textContent = '';
     const fila = (cls, b, s) => { const li = document.createElement('li'); li.className = cls; const i = document.createElement('i'); const bb = document.createElement('b'); bb.textContent = b; const ss = document.createElement('span'); ss.textContent = s; li.append(i, bb, ss); ul.append(li); };
     fila(c.sesion ? 'gc-ok' : 'gc-info', T('Cifrado de extremo a extremo'), T('AES-256-GCM con una clave distinta por mensaje; la sesión se renueva cada vez que os encontráis (ECDH P-256 con firma ECDSA).'));
-    fila('gc-info', T('Relé'), (R.region ? R.region + ' · ' : '') + T('solo pasa bytes sellados y no guarda nada'));
+    fila('gc-info', T('Relé'), (R.region ? R.region + ' · ' : '') + T('encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial'));
     fila(c.verificada ? 'gc-ok' : 'gc-aviso', c.verificada ? T('Identidad verificada') : T('Identidad sin verificar'), c.verificada ? T('Comprobasteis el número de seguridad.') : T('Hasta que comprobéis el número, confías en que el enlace llegó a la persona correcta.'));
-    fila('gc-info', T('Llamadas'), R.llamadas ? T('Por el relé, cifradas entre los dos navegadores; ninguno ve la dirección del otro.') : T('No disponibles en este relé ahora.'));
+    fila('gc-info', T('Llamadas'), R.llamadas ? T('Cifradas entre los dos navegadores y transportadas por el relé: ningún participante ve la dirección IP del otro (el relé sí ve las dos).') : T('No disponibles en este relé ahora.'));
+    fila('gc-aviso', T('Límites'), T('No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.') + ' ' + T('Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.') + ' ' + T('Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.') + ' ' + T('Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.'));
     $('#numero').textContent = c.huella ? await C.numeroSeguridad(YO.huella, c.huella) : T('Aparecerá cuando la otra persona entre.');
     $('#verificada').checked = !!c.verificada; $('#verificada').disabled = !c.huella;
     $('#cnombre-edit').value = c.nombre || '';

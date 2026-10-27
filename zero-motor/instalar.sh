@@ -209,7 +209,9 @@ else
   printf '\n# Comunicaciones · llamadas por el relé (coturn): secreto compartido con /etc/turnserver.conf. No se enseña.\nTURN_SECRETO=%s\nTURN_HOST=%s\nTURN_PUERTO=3478\n' "$TURN_SECRETO" "$DOMINIO" >> "$ENVF"
 fi
 grep -q '^TURN_HOST=' "$ENVF" || echo "TURN_HOST=$DOMINIO" >> "$ENVF"
-if apt-get install -y -q coturn >/dev/null 2>&1; then
+apt-get install -y -q coturn > /var/log/guardiana-coturn-instalacion.log 2>&1 || { apt-get update -q >/dev/null 2>&1 || true; apt-get install -y -q coturn >> /var/log/guardiana-coturn-instalacion.log 2>&1 || true; }
+chmod 644 /var/log/guardiana-coturn-instalacion.log 2>/dev/null || true
+if command -v turnserver >/dev/null 2>&1; then
   cat > /etc/turnserver.conf <<EOF
 # GUARDIANA · Comunicaciones · relé de llamadas. Generado por zero-motor/instalar.sh (se reescribe al reinstalar).
 listening-port=3478
@@ -253,6 +255,7 @@ EOF
   if [ -f /etc/default/coturn ]; then sed -i 's/^#\?TURNSERVER_ENABLED=.*/TURNSERVER_ENABLED=1/' /etc/default/coturn; grep -q '^TURNSERVER_ENABLED=1' /etc/default/coturn || echo 'TURNSERVER_ENABLED=1' >> /etc/default/coturn; fi
   systemctl enable -q coturn 2>/dev/null || true
   systemctl restart coturn || rojo "  coturn no arranca: journalctl -u coturn -n 30 (el relé sigue, sin llamadas)"
+  sleep 2; { systemctl is-active coturn; systemctl status coturn --no-pager -n 15 2>&1 | sed -E 's/[0-9]{1,3}(\.[0-9]{1,3}){3}/IP/g'; } > /var/log/guardiana-coturn-estado.log 2>&1 || true; chmod 644 /var/log/guardiana-coturn-estado.log 2>/dev/null || true
   if command -v ufw >/dev/null && ufw status | grep -q '^Status: active'; then
     ufw allow 3478/tcp >/dev/null; ufw allow 3478/udp >/dev/null; ufw allow 49160:49999/udp >/dev/null
   fi

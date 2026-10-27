@@ -36,13 +36,30 @@ class Rele {
     this.region = o.region || '';
     this.salas = new Map();       // id hex → Map(yo hex → cliente)
     this.conexiones = new Set();
+    this.coturn = { activo: false, escucha: false, visto: null };
+    if (this.turnHost && this.turnSecreto) { this.compruebaCoturn(); const t = setInterval(() => this.compruebaCoturn(), 60 * 1000); if (t.unref) t.unref(); }
     this.vigila = setInterval(() => this.barre(), 30 * 1000);
     if (this.vigila.unref) this.vigila.unref();
   }
 
-  get llamadas() { return !!(this.turnHost && this.turnSecreto); }
+  // Hay llamadas solo si hay secreto y coturn está de verdad activo en este servidor (se comprueba cada minuto)
+  get llamadas() { return !!(this.turnHost && this.turnSecreto && this.coturn.activo); }
 
-  estado() { return { salas: this.salas.size, conexiones: this.conexiones.size, llamadas: this.llamadas }; }
+  estado() { return { salas: this.salas.size, conexiones: this.conexiones.size, llamadas: this.llamadas, coturn: this.coturn }; }
+
+  compruebaCoturn() {
+    const { execFile } = require('child_process');
+    const r = { activo: false, escucha: false, visto: new Date().toISOString() };
+    execFile('systemctl', ['is-active', 'coturn'], { timeout: 4000 }, (e, out) => {
+      r.activo = String(out || '').trim() === 'active';
+      execFile('ss', ['-Hlnu', 'sport = :' + this.turnPuerto], { timeout: 4000 }, (e2, out2) => {
+        r.escucha = /:(\d+)/.test(String(out2 || ''));
+        // si no está activo, la última línea útil del registro de instalación o de estado (sin direcciones)
+        if (!r.activo) { try { const fs = require('fs'); for (const f of ['/var/log/guardiana-coturn-estado.log', '/var/log/guardiana-coturn-instalacion.log']) { if (fs.existsSync(f)) { const l = fs.readFileSync(f, 'utf8').trim().split('\n').filter(Boolean); r.nota = (r.nota ? r.nota + ' | ' : '') + f.replace(/.*guardiana-coturn-/, '') + ': ' + l.slice(-2).join(' / ').slice(0, 300); } } } catch (_) {} }
+        this.coturn = r;
+      });
+    });
+  }
 
   // Credenciales TURN de vida corta (RFC 8489 + «TURN REST API»: usuario «caducidad:etiqueta», clave HMAC-SHA1 del secreto)
   ice() {

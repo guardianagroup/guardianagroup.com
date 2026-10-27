@@ -66,7 +66,9 @@
   async function deSemilla(semilla) {
     const sala = hex(await sha256(cat(te.encode('GUARDIANA sala\n'), u8(semilla))));
     const presentacion = await hkdf(semilla, null, 'GUARDIANA presentación', 32);
-    return { sala, presentacion: await aes(presentacion) };
+    // ronda 48: el secreto de la invitación también entra en cada sesión (PSK): sin el enlace nadie se pone en medio
+    const psk = await hkdf(semilla, null, 'GUARDIANA psk de sesión', 32);
+    return { sala, presentacion: await aes(presentacion), psk };
   }
   const nuevaSemilla = () => azar(32);
 
@@ -79,14 +81,21 @@
     const pub = await sub.importKey('raw', u8(pubRaw), { name: 'ECDH', namedCurve: 'P-256' }, false, []);
     return new Uint8Array(await sub.deriveBits({ name: 'ECDH', public: pub }, priv, 256));
   }
-  // Secreto de sesión: DH(ef mía, ef suya) ‖ DH(identidad mía, ef suya) ‖ DH(ef mía, identidad suya), ordenados igual en
-  // los dos lados (quien «inicia» es quien tiene la huella menor), y la sala como sal.
-  async function sesion(id, ef, suyo, sala, inicio) {
-    const a = await dh(ef.k.privateKey, suyo.ef), b = await dh(id.acuerdo.privateKey, suyo.ef), c = await dh(ef.k.privateKey, suyo.acuerdoPub);
-    const ikm = inicio ? cat(a, b, c) : cat(a, c, b);
-    const raiz32 = await hkdf(ikm, deHex(sala), 'GUARDIANA sesión', 64);
-    const envio = raiz32.subarray(inicio ? 0 : 32, inicio ? 32 : 64), recibo = raiz32.subarray(inicio ? 32 : 0, inicio ? 64 : 32);
-    return { envio: new Uint8Array(envio), recibo: new Uint8Array(recibo) };
+  // Secreto de sesión (ronda 48, v2). A = quien inicia (huella menor), B = quien responde. Los dos calculan en el mismo
+  // orden DH(ef_A, ef_B) ‖ DH(id_A, ef_B) ‖ DH(ef_A, id_B) ‖ psk (secreto de la invitación), sal = sala, e info = la
+  // transcripción (versión, huellas y efímeras de A y de B). Salen 96 bytes: cadena A→B, cadena B→A y el hash de sesión
+  // (32 bytes, va entero en los datos asociados de cada mensaje; 8 en la cabecera de red).
+  async function sesion(id, ef, suyo, sala, inicio, psk, miHuella, suHuella) {
+    const efef = await dh(ef.k.privateKey, suyo.ef);
+    const idA_efB = inicio ? await dh(id.acuerdo.privateKey, suyo.ef) : await dh(ef.k.privateKey, suyo.acuerdoPub);
+    const efA_idB = inicio ? await dh(ef.k.privateKey, suyo.acuerdoPub) : await dh(id.acuerdo.privateKey, suyo.ef);
+    const ikm = cat(efef, idA_efB, efA_idB, u8(psk || new Uint8Array(32)));
+    const hA = inicio ? u8(miHuella) : u8(suHuella), hB = inicio ? u8(suHuella) : u8(miHuella);
+    const efA = inicio ? ef.pub : u8(suyo.ef), efB = inicio ? u8(suyo.ef) : ef.pub;
+    const info = 'GUARDIANA sesión v2\n' + hex(hA) + '\n' + hex(efA) + '\n' + hex(hB) + '\n' + hex(efB);
+    const r = await hkdf(ikm, deHex(sala), info, 96);
+    const ab = new Uint8Array(r.subarray(0, 32)), ba = new Uint8Array(r.subarray(32, 64)), hash = new Uint8Array(r.subarray(64, 96));
+    return { envio: inicio ? ab : ba, recibo: inicio ? ba : ab, hash };
   }
   // Una cadena: avanza con cada mensaje; guarda hasta 256 claves saltadas (mensajes que llegan desordenados).
   // Los pasos van uno detrás de otro (cola de promesas): dos mensajes sellados a la vez nunca comparten clave.
