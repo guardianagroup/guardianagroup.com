@@ -820,7 +820,9 @@ body::before{background:#06080C}
 #final h2{font-weight:300;font-size:clamp(44px,6.4vw,100px);line-height:1.04;letter-spacing:-.02em}
 .rec .big,.drop .tb,.rx-n{font-weight:300}
 .ms{font-weight:400}
-:is(.hero-em,.ch-card h2 em,.h2 em,h2 em.tono){font-style:normal}
+/* sin cursiva, como en NÚCLEO; la cursiva, además, se cortaba en la última letra de una palabra mientras la luz pasa
+   (dueño, 13:21: «ZERO» salía cortado con la pantalla estrecha) */
+:is(.hero-em,.ch-card h2 em,.h2 em,h2 em.tono),.ch-card h2 em.tono,.h2 em.tono{font-style:normal}
 .kick{font:600 11px/1.4 var(--mono);letter-spacing:.32em}
 /* botones: los de NÚCLEO */
 .btn{min-height:46px;padding:0 24px;font:600 15px/1 var(--body);color:#06080C;background:#9CC3E4;box-shadow:0 18px 60px -26px rgba(156,195,228,.55);transition:filter .15s,box-shadow .2s,background .15s,color .15s}
@@ -2451,10 +2453,15 @@ function phrase(l){
   const w=e?e.phrase:I.phrase[l], hi=e?e.hi:I.hi[l], sep=e&&e.sep!=null?e.sep:' '; p.textContent='';
   w.forEach((x,i)=>{ const s=document.createElement('span'); const last=i===w.length-1; s.className='w'+(i===hi?' g-light':''); s.style.animationDelay=(.15+.14*i+(last?.08:0)).toFixed(2)+'s'; s.textContent=x; p.appendChild(s); if(!last&&sep) p.appendChild(document.createTextNode(sep)); });
 }
+// dueño, 27 Oct 2026, 13:18: «El» se quedaba solo al final de la línea, lejos de «navegador». Las palabras de una a tres letras
+// (el, la, de, y, en, tu…, y sus parecidas en cada idioma) van unidas a la siguiente con un espacio que no parte la línea.
+const pega=t=>{ if(t.indexOf(' ')<0) return t; const p=t.split(' '); let s=p[0];
+  for(let i=1;i<p.length;i++) s+=(p[i]&&/^[(«"“¿¡]?\p{L}{1,3}$/u.test(p[i-1])?'\u00a0':' ')+p[i];
+  return s; };
 function aplica(l, first){
   const d=DATO[l], e=EXT[l]; cur=l; window.__lang=l; window.__tag=d.tag; window.__loc=d.loc;
   const H=document.documentElement; H.lang=d.tag; H.dir=(e&&e.dir)||'ltr';
-  for(const o of nodes) o.n.nodeValue=tr(o.es,l);
+  for(const o of nodes) o.n.nodeValue=pega(tr(o.es,l));
   for(const o of attrs) o.el.setAttribute(o.a,tr(o.es,l));
   if(meta) meta.setAttribute('content',window.__x('meta'));
   document.title=e?e.title:I.title[l];
