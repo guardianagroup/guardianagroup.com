@@ -1,5 +1,5 @@
 {
- "nota": "Multas, acuerdos y prohibiciones por usar datos personales (27 Oct 2026): los 49 casos de casos.html, con su autoridad, su fecha, la resolución o noticia y una copia en archive.org. NÚCLEO los enseña con el botón rojo «Multas» de su portada (dueño, 13:30). Ordenados del más reciente al más antiguo.",
+ "nota": "Multas, acuerdos y prohibiciones por usar datos personales (27 Oct 2026): los 49 casos de casos.html y 18 más de la ronda 58 de la agencia (ChatGPT y Gemini; cada uno comprobado con su fuente). Con su autoridad, su fecha, la resolución o noticia y una copia en archive.org. NÚCLEO los enseña con el botón rojo «Multas» de su portada (dueño, 13:30). Del más reciente al más antiguo.",
  "ui": {
   "es": {
    "k": "MULTAS",
@@ -117,8 +117,70 @@
  ],
  "casos": [
   {
+   "cat": "meta",
+   "cifra": {
+    "es": "25.000 M$",
+    "en": "$25B",
+    "pt": "25 bi US$"
+   },
+   "empresa": "Meta (Facebook)",
+   "anio": "2026",
+   "dia": "2026-10-21",
+   "autoridad": {
+    "es": "Tribunal de Nuevo México (EE. UU.)",
+    "en": "New Mexico court (US)",
+    "pt": "Tribunal do Novo México (EUA)"
+   },
+   "titulo": {
+    "es": "25.000 millones por engañar sobre la privacidad de Facebook",
+    "en": "$25 billion for misleading people about Facebook privacy",
+    "pt": "25 bilhões por enganar sobre a privacidade do Facebook"
+   },
+   "texto": {
+    "es": "Un jurado concluyó que Facebook engañó a los usuarios sobre quién podía ver sus datos y cómo se compartían. El caso nació del escándalo de Cambridge Analytica e incluía también declaraciones sobre moderación de contenidos. El juez fijó la sanción en 25.000 millones de dólares y Meta anunció que recurrirá.",
+    "en": "A jury found that Facebook misled users about who could see their data and how it was shared. The case grew out of the Cambridge Analytica scandal and also covered statements about content moderation. The judge set the penalty at $25 billion and Meta said it will appeal.",
+    "pt": "Um júri concluiu que o Facebook enganou os usuários sobre quem podia ver os seus dados e como eram partilhados. O caso nasceu do escândalo da Cambridge Analytica e incluía também declarações sobre moderação de conteúdos. O juiz fixou a sanção em 25 bilhões de dólares e a Meta anunciou que vai recorrer."
+   },
+   "fuente": "https://www.aljazeera.com/news/2026/10/21/judge-orders-meta-to-pay-25bn-in-fines-for-facebook-privacy-violations",
+   "copia": "https://web.archive.org/web/2026/https://www.aljazeera.com/news/2026/10/21/judge-orders-meta-to-pay-25bn-in-fines-for-facebook-privacy-violations",
+   "nuevo": "ronda58"
+  },
+  {
+   "cat": "microsoft",
+   "cifra": {
+    "es": "92 M NOK",
+    "en": "NOK 92M",
+    "pt": "92 mi NOK"
+   },
+   "empresa": "Xandr (Microsoft)",
+   "anio": "2026",
+   "dia": "2026-10-12",
+   "autoridad": {
+    "es": "Datatilsynet (Noruega)",
+    "en": "Datatilsynet (Norway)",
+    "pt": "Datatilsynet (Noruega)"
+   },
+   "titulo": {
+    "es": "Datos de usuarios de Grindr en subastas de anuncios",
+    "en": "Grindr users' data in ad auctions",
+    "pt": "Dados de usuários do Grindr em leilões de anúncios"
+   },
+   "texto": {
+    "es": "Entre 2018 y 2020, Xandr —hoy de Microsoft— hizo subastas de anuncios dentro de Grindr que podían revelar la orientación sexual de sus usuarios a miles de empresas, sin comprobar que hubiera un consentimiento válido.",
+    "en": "Between 2018 and 2020, Xandr — now owned by Microsoft — ran ad auctions inside Grindr that could reveal users' sexual orientation to thousands of companies, without checking for valid consent.",
+    "pt": "Entre 2018 e 2020, a Xandr — hoje da Microsoft — fez leilões de anúncios dentro do Grindr que podiam revelar a orientação sexual dos usuários a milhares de empresas, sem verificar se havia um consentimento válido."
+   },
+   "fuente": "https://www.bleepingcomputer.com/news/security/norway-fines-microsoft-ad-firm-96-million-over-grindr-data-sharing/",
+   "copia": "https://web.archive.org/web/2026/https://www.bleepingcomputer.com/news/security/norway-fines-microsoft-ad-firm-96-million-over-grindr-data-sharing/",
+   "nuevo": "ronda58"
+  },
+  {
    "cat": "google",
-   "cifra": "403 M€",
+   "cifra": {
+    "es": "403 M€",
+    "en": "€403M",
+    "pt": "403 mi €"
+   },
    "empresa": "Google Ireland",
    "anio": "2026",
    "dia": "2026-09-21",
@@ -142,7 +204,11 @@
   },
   {
    "cat": "tiktok",
-   "cifra": "153,7 M R$",
+   "cifra": {
+    "es": "153,7 M R$",
+    "en": "R$153.7M",
+    "pt": "R$ 153,7 mi"
+   },
    "empresa": "TikTok",
    "anio": "2026",
    "dia": "2026-08-25",
@@ -166,7 +232,11 @@
   },
   {
    "cat": "otras",
-   "cifra": "825 M€",
+   "cifra": {
+    "es": "825 M€",
+    "en": "€825M",
+    "pt": "825 mi €"
+   },
    "empresa": "Uber",
    "anio": "2026",
    "dia": "2026-08-21",
@@ -195,7 +265,11 @@
   },
   {
    "cat": "ia",
-   "cifra": "158.000 €",
+   "cifra": {
+    "es": "158.000 €",
+    "en": "€158,000",
+    "pt": "158.000 €"
+   },
    "empresa": "Character.AI",
    "anio": "2026",
    "dia": "2026-07-09",
@@ -218,8 +292,41 @@
    "copia": ""
   },
   {
+   "cat": "tiendas",
+   "cifra": {
+    "es": "624.680 M ₩",
+    "en": "₩624.68B",
+    "pt": "624,68 bi ₩"
+   },
+   "empresa": "Coupang",
+   "anio": "2026",
+   "dia": "2026-06-10",
+   "autoridad": {
+    "es": "PIPC (Corea del Sur)",
+    "en": "PIPC (South Korea)",
+    "pt": "PIPC (Coreia do Sul)"
+   },
+   "titulo": {
+    "es": "La mayor multa de Corea: datos de 33 millones de clientes",
+    "en": "Korea's largest fine: data of 33 million customers",
+    "pt": "A maior multa da Coreia: dados de 33 milhões de clientes"
+   },
+   "texto": {
+    "es": "Un antiguo empleado usó una clave que se llevó al irse para sacar durante meses nombres, teléfonos, direcciones y pedidos de unos 33 millones de clientes y de más de 4 millones de personas que solo figuraban como destinatarios. La autoridad lo atribuyó a fallos básicos de seguridad: unos 409 millones de dólares, récord en el país.",
+    "en": "A former employee used a key he took when he left to extract, over months, the names, phone numbers, addresses and orders of about 33 million customers and more than 4 million people who only appeared as delivery recipients. The authority blamed basic security failures: about $409 million, a national record.",
+    "pt": "Um ex-funcionário usou uma chave que levou ao sair para extrair, durante meses, nomes, telefones, endereços e pedidos de cerca de 33 milhões de clientes e de mais de 4 milhões de pessoas que só constavam como destinatários. A autoridade atribuiu-o a falhas básicas de segurança: cerca de 409 milhões de dólares, recorde no país."
+   },
+   "fuente": "https://therecord.media/south-korea-data-breach-record-fine-coupang",
+   "copia": "https://web.archive.org/web/2026/https://therecord.media/south-korea-data-breach-record-fine-coupang",
+   "nuevo": "ronda58"
+  },
+  {
    "cat": "venta",
-   "cifra": "Prohibición",
+   "cifra": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   },
    "empresa": "Datos en venta",
    "anio": "2026",
    "dia": "2026-05-04",
@@ -245,6 +352,35 @@
     "en": "Ban",
     "pt": "Proibição"
    }
+  },
+  {
+   "cat": "otras",
+   "cifra": {
+    "es": "100 M€",
+    "en": "€100M",
+    "pt": "100 mi €"
+   },
+   "empresa": "Yango (MLU B.V.)",
+   "anio": "2026",
+   "dia": "2026-04-01",
+   "autoridad": {
+    "es": "AP (Países Bajos)",
+    "en": "AP (Netherlands)",
+    "pt": "AP (Países Baixos)"
+   },
+   "titulo": {
+    "es": "Datos de pasajeros y conductores enviados a Rusia",
+    "en": "Passenger and driver data sent to Russia",
+    "pt": "Dados de passageiros e motoristas enviados para a Rússia"
+   },
+   "texto": {
+    "es": "La app de taxis mandaba a Rusia datos de pasajeros y conductores europeos —ubicación, chats, llamadas, documentos y datos bancarios—, donde la ley permite a las autoridades acceder a ellos. Además de la multa, se le prohibió seguir enviándolos. La empresa anunció que la recurrirá.",
+    "en": "The taxi app sent European passengers' and drivers' data — location, chats, calls, documents and bank details — to Russia, where the law lets the authorities access it. Besides the fine, it was ordered to stop the transfers. The company said it will challenge the decision.",
+    "pt": "O app de táxis enviava para a Rússia dados de passageiros e motoristas europeus — localização, chats, chamadas, documentos e dados bancários —, onde a lei permite que as autoridades os acessem. Além da multa, foi proibido de continuar a enviá-los. A empresa anunciou que vai contestar."
+   },
+   "fuente": "https://ppc.land/yangos-eur100m-gdpr-fine-dutch-watchdog-cracks-down-on-data-flows-to-russia/",
+   "copia": "https://web.archive.org/web/2026/https://ppc.land/yangos-eur100m-gdpr-fine-dutch-watchdog-cracks-down-on-data-flows-to-russia/",
+   "nuevo": "ronda58"
   },
   {
    "cat": "ia",
@@ -277,7 +413,11 @@
   },
   {
    "cat": "operador",
-   "cifra": "42 M€",
+   "cifra": {
+    "es": "42 M€",
+    "en": "€42M",
+    "pt": "42 M€"
+   },
    "empresa": "Free",
    "anio": "2026",
    "dia": "2026-01-13",
@@ -300,8 +440,80 @@
    "copia": "https://web.archive.org/web/2026/https://www.cnil.fr/fr/sanction-free-2026"
   },
   {
+   "cat": "otras",
+   "cifra": {
+    "es": "10 M$",
+    "en": "$10M",
+    "pt": "10 mi US$"
+   },
+   "empresa": "Disney",
+   "anio": "2025",
+   "dia": "2025-12-30",
+   "autoridad": {
+    "es": "FTC y Dpto. de Justicia (EE. UU.)",
+    "en": "FTC and DOJ (US)",
+    "pt": "FTC e Departamento de Justiça (EUA)"
+   },
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   },
+   "titulo": {
+    "es": "Vídeos infantiles de YouTube marcados como si no lo fueran",
+    "en": "Children's YouTube videos labelled as if they weren't",
+    "pt": "Vídeos infantis do YouTube marcados como se não fossem"
+   },
+   "texto": {
+    "es": "Según la FTC, Disney no marcó como «para niños» parte de sus vídeos infantiles en YouTube, lo que permitió recoger datos de menores de 13 años y usarlos para publicidad sin permiso de sus padres. Pagará 10 millones y tendrá que revisar cómo los marca.",
+    "en": "According to the FTC, Disney failed to label some of its children's videos on YouTube as 'made for kids', which allowed data from under-13s to be collected and used for advertising without parental consent. It will pay $10 million and must review how it labels them.",
+    "pt": "Segundo a FTC, a Disney não marcou como «para crianças» parte dos seus vídeos infantis no YouTube, o que permitiu recolher dados de menores de 13 anos e usá-los em publicidade sem permissão dos pais. Pagará 10 milhões e terá de rever como os marca."
+   },
+   "fuente": "https://www.ftc.gov/node/327535",
+   "copia": "https://web.archive.org/web/2026/https://www.ftc.gov/node/327535",
+   "nuevo": "ronda58"
+  },
+  {
+   "cat": "amazon",
+   "cifra": {
+    "es": "15 M€",
+    "en": "€15M",
+    "pt": "15 mi €"
+   },
+   "empresa": "Amazon France Logistique",
+   "anio": "2025",
+   "dia": "2025-12-23",
+   "autoridad": {
+    "es": "CNIL y Consejo de Estado (Francia)",
+    "en": "CNIL and Council of State (France)",
+    "pt": "CNIL e Conselho de Estado (França)"
+   },
+   "estado": {
+    "es": "Rebajada",
+    "en": "Reduced",
+    "pt": "Reduzida"
+   },
+   "titulo": {
+    "es": "Trabajadores de almacén vigilados segundo a segundo",
+    "en": "Warehouse workers monitored second by second",
+    "pt": "Trabalhadores de armazém vigiados segundo a segundo"
+   },
+   "texto": {
+    "es": "Los escáneres de los almacenes de Amazon en Francia medían cada pausa y la velocidad de cada empleado, y esos datos se guardaban semanas. La CNIL impuso 32 millones en 2023 y en 2025 el Consejo de Estado rebajó la multa a 15 millones.",
+    "en": "The scanners in Amazon's French warehouses measured every pause and the speed of each employee, and the data was kept for weeks. The CNIL imposed €32 million in 2023, and in 2025 the Council of State cut it to €15 million.",
+    "pt": "Os scanners dos armazéns da Amazon em França mediam cada pausa e a velocidade de cada funcionário, e esses dados eram guardados durante semanas. A CNIL aplicou 32 milhões em 2023 e, em 2025, o Conselho de Estado reduziu a multa para 15 milhões."
+   },
+   "fuente": "https://www.conseil-etat.fr/fr/arianeweb/CE/decision/2025-12-23/492830",
+   "copia": "https://web.archive.org/web/2026/https://www.conseil-etat.fr/fr/arianeweb/CE/decision/2025-12-23/492830",
+   "nuevo": "ronda58"
+  },
+  {
    "cat": "apple",
-   "cifra": "98,6 M€",
+   "cifra": {
+    "es": "98,6 M€",
+    "en": "€98.6M",
+    "pt": "98,6 M€"
+   },
    "empresa": "Apple",
    "anio": "2025",
    "dia": "2025-12-01",
@@ -325,7 +537,11 @@
   },
   {
    "cat": "google",
-   "cifra": "425,7 M$",
+   "cifra": {
+    "es": "425,7 M$",
+    "en": "$425.7M",
+    "pt": "425,7 mi US$"
+   },
    "empresa": "Google (Rodriguez et al. v. Google LLC)",
    "anio": "2025",
    "dia": "2025-09-03",
@@ -349,7 +565,11 @@
   },
   {
    "cat": "google",
-   "cifra": "325 M€",
+   "cifra": {
+    "es": "325 M€",
+    "en": "€325M",
+    "pt": "325 M€"
+   },
    "empresa": "Google",
    "anio": "2025",
    "dia": "2025-09-01",
@@ -373,7 +593,11 @@
   },
   {
    "cat": "tiendas",
-   "cifra": "150 M€",
+   "cifra": {
+    "es": "150 M€",
+    "en": "€150M",
+    "pt": "150 M€"
+   },
    "empresa": "SHEIN",
    "anio": "2025",
    "dia": "2025-09-01",
@@ -396,8 +620,70 @@
    "copia": "https://web.archive.org/web/2026/https://www.cnil.fr/fr/cookies-deposes-sans-consentement-la-cnil-sanctionne-shein-dune-amende-de-150-millions-deuros"
   },
   {
+   "cat": "operador",
+   "cifra": {
+    "es": "134.800 M ₩",
+    "en": "₩134.8B",
+    "pt": "134,8 bi ₩"
+   },
+   "empresa": "SK Telecom",
+   "anio": "2025",
+   "dia": "2025-08-27",
+   "autoridad": {
+    "es": "PIPC (Corea del Sur)",
+    "en": "PIPC (South Korea)",
+    "pt": "PIPC (Coreia do Sul)"
+   },
+   "titulo": {
+    "es": "Datos de las tarjetas SIM de millones de clientes",
+    "en": "SIM card data of millions of customers",
+    "pt": "Dados dos cartões SIM de milhões de clientes"
+   },
+   "texto": {
+    "es": "Unos atacantes entraron en sus sistemas y se llevaron los datos de las tarjetas SIM de millones de clientes, que sirven para clonarlas. La autoridad le impuso 134.800 millones de wones, unos 97 millones de dólares, entonces récord en el país.",
+    "en": "Attackers broke into its systems and took the SIM card data of millions of customers, which can be used to clone the cards. The authority fined it 134.8 billion won, about $97 million, then a national record.",
+    "pt": "Atacantes entraram nos seus sistemas e levaram os dados dos cartões SIM de milhões de clientes, que servem para cloná-los. A autoridade aplicou-lhe 134,8 bilhões de wons, cerca de 97 milhões de dólares, então recorde no país."
+   },
+   "fuente": "https://www.lightreading.com/regulatory-politics/privacy-watchdog-hits-skt-with-record-97m-fine-over-data-breach",
+   "copia": "https://web.archive.org/web/2026/https://www.lightreading.com/regulatory-politics/privacy-watchdog-hits-skt-with-record-97m-fine-over-data-breach",
+   "nuevo": "ronda58"
+  },
+  {
+   "cat": "otras",
+   "cifra": {
+    "es": "2,31 M£",
+    "en": "£2.31M",
+    "pt": "2,31 mi £"
+   },
+   "empresa": "23andMe",
+   "anio": "2025",
+   "dia": "2025-06-17",
+   "autoridad": {
+    "es": "ICO (Reino Unido)",
+    "en": "ICO (UK)",
+    "pt": "ICO (Reino Unido)"
+   },
+   "titulo": {
+    "es": "Datos genéticos y familiares expuestos por fallos de seguridad",
+    "en": "Genetic and family data exposed by security failings",
+    "pt": "Dados genéticos e familiares expostos por falhas de segurança"
+   },
+   "texto": {
+    "es": "En 2023, unos atacantes entraron en cuentas de 23andMe probando contraseñas robadas en otras webs y llegaron a datos de salud, ascendencia y parentesco de millones de personas, también en el Reino Unido. La autoridad británica concluyó que la empresa no tenía medidas de seguridad suficientes.",
+    "en": "In 2023, attackers broke into 23andMe accounts by trying passwords stolen from other sites and reached the health, ancestry and family data of millions of people, including in the UK. The UK authority found the company lacked adequate security measures.",
+    "pt": "Em 2023, atacantes entraram em contas da 23andMe testando senhas roubadas de outros sites e chegaram a dados de saúde, ancestralidade e parentesco de milhões de pessoas, também no Reino Unido. A autoridade britânica concluiu que a empresa não tinha medidas de segurança suficientes."
+   },
+   "fuente": "https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/2025/06/23andme-fined-for-failing-to-protect-uk-users-genetic-data",
+   "copia": "https://web.archive.org/web/2026/https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/2025/06/23andme-fined-for-failing-to-protect-uk-users-genetic-data",
+   "nuevo": "ronda58"
+  },
+  {
    "cat": "ia",
-   "cifra": "5 M€",
+   "cifra": {
+    "es": "5 M€",
+    "en": "€5M",
+    "pt": "5 M€"
+   },
    "empresa": "Replika",
    "anio": "2025",
    "dia": "2025-05-19",
@@ -421,7 +707,11 @@
   },
   {
    "cat": "google",
-   "cifra": "1.375 M$",
+   "cifra": {
+    "es": "1.375 M$",
+    "en": "$1.375bn",
+    "pt": "1,375 bi US$"
+   },
    "empresa": "Google",
    "anio": "2025",
    "dia": "2025-05-09",
@@ -450,7 +740,11 @@
   },
   {
    "cat": "tiktok",
-   "cifra": "530 M€",
+   "cifra": {
+    "es": "530 M€",
+    "en": "€530M",
+    "pt": "530 mi €"
+   },
    "empresa": "TikTok Technology Limited",
    "anio": "2025",
    "dia": "2025-05-02",
@@ -474,7 +768,11 @@
   },
   {
    "cat": "apple",
-   "cifra": "150 M€",
+   "cifra": {
+    "es": "150 M€",
+    "en": "€150M",
+    "pt": "150 M€"
+   },
    "empresa": "Apple",
    "anio": "2025",
    "dia": "2025-03-31",
@@ -498,7 +796,11 @@
   },
   {
    "cat": "apple",
-   "cifra": "95 M$",
+   "cifra": {
+    "es": "95 M$",
+    "en": "$95M",
+    "pt": "95 M US$"
+   },
    "empresa": "Apple",
    "anio": "2025",
    "dia": "2025-01-01",
@@ -523,7 +825,11 @@
   },
   {
    "cat": "meta",
-   "cifra": "251 M€",
+   "cifra": {
+    "es": "251 M€",
+    "en": "€251M",
+    "pt": "251 M€"
+   },
    "empresa": "Meta",
    "anio": "2024",
    "dia": "2024-12-17",
@@ -547,7 +853,11 @@
   },
   {
    "cat": "venta",
-   "cifra": "Prohibición",
+   "cifra": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   },
    "empresa": "Gravy Analytics y Venntel",
    "anio": "2024",
    "dia": "2024-12-03",
@@ -576,7 +886,11 @@
   },
   {
    "cat": "venta",
-   "cifra": "Prohibición",
+   "cifra": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   },
    "empresa": "Mobilewalla",
    "anio": "2024",
    "dia": "2024-12-03",
@@ -604,8 +918,41 @@
    }
   },
   {
+   "cat": "operador",
+   "cifra": {
+    "es": "50 M€",
+    "en": "€50M",
+    "pt": "50 mi €"
+   },
+   "empresa": "Orange",
+   "anio": "2024",
+   "dia": "2024-11-14",
+   "autoridad": {
+    "es": "CNIL (Francia)",
+    "en": "CNIL (France)",
+    "pt": "CNIL (França)"
+   },
+   "titulo": {
+    "es": "Anuncios metidos entre los correos, como si fueran mensajes",
+    "en": "Ads slipped between emails, disguised as messages",
+    "pt": "Anúncios metidos entre os e-mails, como se fossem mensagens"
+   },
+   "texto": {
+    "es": "Orange mostraba publicidad entre los correos de sus clientes, con el aspecto de un mensaje más y sin su consentimiento, y seguía leyendo cookies después de que la persona las rechazara.",
+    "en": "Orange showed adverts among its customers' emails, looking like ordinary messages and without their consent, and kept reading cookies after people had refused them.",
+    "pt": "A Orange mostrava publicidade entre os e-mails dos clientes, com o aspeto de uma mensagem normal e sem consentimento, e continuava a ler cookies depois de a pessoa os recusar."
+   },
+   "fuente": "https://www.cnil.fr/fr/publicites-inserees-entre-les-courriels-sanction-de-50-millions-deuros-orange",
+   "copia": "https://web.archive.org/web/2026/https://www.cnil.fr/fr/publicites-inserees-entre-les-courriels-sanction-de-50-millions-deuros-orange",
+   "nuevo": "ronda58"
+  },
+  {
    "cat": "microsoft",
-   "cifra": "310 M€",
+   "cifra": {
+    "es": "310 M€",
+    "en": "€310M",
+    "pt": "310 M€"
+   },
    "empresa": "Microsoft",
    "anio": "2024",
    "dia": "2024-10-24",
@@ -628,8 +975,41 @@
    "copia": "https://web.archive.org/web/2026/https://www.dataprotection.ie/en/news-media/press-releases/irish-data-protection-commission-fines-linkedin-ireland-eu310-million"
   },
   {
+   "cat": "meta",
+   "cifra": {
+    "es": "91 M€",
+    "en": "€91M",
+    "pt": "91 mi €"
+   },
+   "empresa": "Meta",
+   "anio": "2024",
+   "dia": "2024-09-27",
+   "autoridad": {
+    "es": "DPC (Irlanda)",
+    "en": "DPC (Ireland)",
+    "pt": "DPC (Irlanda)"
+   },
+   "titulo": {
+    "es": "Contraseñas guardadas sin encriptar",
+    "en": "Passwords stored unencrypted",
+    "pt": "Senhas guardadas sem criptografia"
+   },
+   "texto": {
+    "es": "Meta guardó en sus sistemas internos contraseñas de cientos de millones de usuarios de Facebook e Instagram en texto legible, sin ninguna protección. La autoridad irlandesa lo investigó tras un aviso de la propia empresa en 2019.",
+    "en": "Meta stored the passwords of hundreds of millions of Facebook and Instagram users in readable text on its internal systems, with no protection. The Irish authority investigated after the company itself reported it in 2019.",
+    "pt": "A Meta guardou nos seus sistemas internos senhas de centenas de milhões de usuários do Facebook e do Instagram em texto legível, sem qualquer proteção. A autoridade irlandesa investigou após um aviso da própria empresa em 2019."
+   },
+   "fuente": "https://www.dataprotection.ie/en/news-media/press-releases/DPC-announces-91-million-fine-of-Meta",
+   "copia": "https://web.archive.org/web/2026/https://www.dataprotection.ie/en/news-media/press-releases/DPC-announces-91-million-fine-of-Meta",
+   "nuevo": "ronda58"
+  },
+  {
    "cat": "ia",
-   "cifra": "30,5 M€",
+   "cifra": {
+    "es": "30,5 M€",
+    "en": "€30.5M",
+    "pt": "30,5 M€"
+   },
    "empresa": "Clearview AI",
    "anio": "2024",
    "dia": "2024-09-01",
@@ -653,7 +1033,11 @@
   },
   {
    "cat": "meta",
-   "cifra": "1.400 M$",
+   "cifra": {
+    "es": "1.400 M$",
+    "en": "$1.4bn",
+    "pt": "1,4 bi US$"
+   },
    "empresa": "Meta Platforms",
    "anio": "2024",
    "dia": "2024-07-30",
@@ -682,7 +1066,11 @@
   },
   {
    "cat": "otras",
-   "cifra": "290 M€",
+   "cifra": {
+    "es": "290 M€",
+    "en": "€290M",
+    "pt": "290 mi €"
+   },
    "empresa": "Uber Technologies / Uber B.V.",
    "anio": "2024",
    "dia": "2024-07-22",
@@ -711,7 +1099,11 @@
   },
   {
    "cat": "antivirus",
-   "cifra": "Prohibición",
+   "cifra": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   },
    "empresa": "Kaspersky Lab, Inc.",
    "anio": "2024",
    "dia": "2024-06-20",
@@ -740,7 +1132,11 @@
   },
   {
    "cat": "operador",
-   "cifra": "~200 M$",
+   "cifra": {
+    "es": "~200 M$",
+    "en": "~$200M",
+    "pt": "~200 mi US$"
+   },
    "empresa": "AT&T, Verizon, T-Mobile y Sprint",
    "anio": "2024",
    "dia": "2024-04-29",
@@ -793,7 +1189,11 @@
   },
   {
    "cat": "antivirus",
-   "cifra": "16,5 M$",
+   "cifra": {
+    "es": "16,5 M$",
+    "en": "$16.5M",
+    "pt": "16,5 M US$"
+   },
    "empresa": "Antivirus",
    "anio": "2024",
    "dia": "2024-02-22",
@@ -817,7 +1217,11 @@
   },
   {
    "cat": "venta",
-   "cifra": "Prohibición",
+   "cifra": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   },
    "empresa": "InMarket Media",
    "anio": "2024",
    "dia": "2024-01-18",
@@ -846,7 +1250,11 @@
   },
   {
    "cat": "venta",
-   "cifra": "Prohibición",
+   "cifra": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   },
    "empresa": "X-Mode Social / Outlogic",
    "anio": "2024",
    "dia": "2024-01-09",
@@ -874,8 +1282,114 @@
    }
   },
   {
+   "cat": "otras",
+   "cifra": {
+    "es": "10 M€",
+    "en": "€10M",
+    "pt": "10 mi €"
+   },
+   "empresa": "Yahoo",
+   "anio": "2023",
+   "dia": "2023-12-29",
+   "autoridad": {
+    "es": "CNIL (Francia)",
+    "en": "CNIL (France)",
+    "pt": "CNIL (França)"
+   },
+   "estado": {
+    "es": "Firme",
+    "en": "Final",
+    "pt": "Definitiva"
+   },
+   "titulo": {
+    "es": "Cookies sin permiso y el correo como rehén",
+    "en": "Cookies without consent and email held hostage",
+    "pt": "Cookies sem consentimento e o e-mail como refém"
+   },
+   "texto": {
+    "es": "Yahoo instalaba una veintena de cookies de publicidad sin consentimiento al entrar en su web, y a quien retiraba el permiso le avisaba de que ya no podría usar su correo. El Consejo de Estado confirmó la multa en 2025.",
+    "en": "Yahoo set around twenty advertising cookies without consent when people visited its site, and told those who withdrew consent that they could no longer use their email. The Council of State upheld the fine in 2025.",
+    "pt": "O Yahoo instalava cerca de vinte cookies de publicidade sem consentimento ao entrar no seu site e, a quem retirava o consentimento, avisava que deixaria de poder usar o e-mail. O Conselho de Estado confirmou a multa em 2025."
+   },
+   "fuente": "https://cnil.fr/en/node/164807",
+   "copia": "https://web.archive.org/web/2026/https://cnil.fr/en/node/164807",
+   "nuevo": "ronda58"
+  },
+  {
+   "cat": "ia",
+   "cifra": {
+    "es": "Prohibición",
+    "en": "Ban",
+    "pt": "Proibição"
+   },
+   "empresa": "Rite Aid",
+   "anio": "2023",
+   "dia": "2023-12-19",
+   "autoridad": {
+    "es": "FTC (EE. UU.)",
+    "en": "FTC (US)",
+    "pt": "FTC (EUA)"
+   },
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   },
+   "titulo": {
+    "es": "Reconocimiento facial que señalaba a inocentes",
+    "en": "Facial recognition that flagged innocent people",
+    "pt": "Reconhecimento facial que apontava inocentes"
+   },
+   "texto": {
+    "es": "Rite Aid usó en sus farmacias cámaras con reconocimiento facial que generaron miles de falsas alertas de «ladrones», sobre todo contra mujeres y personas negras, latinas y asiáticas. La FTC le prohibió usar esa tecnología durante cinco años.",
+    "en": "Rite Aid used facial-recognition cameras in its pharmacies that produced thousands of false 'shoplifter' alerts, especially against women and Black, Latino and Asian people. The FTC banned it from using the technology for five years.",
+    "pt": "A Rite Aid usou nas suas farmácias câmeras com reconhecimento facial que geraram milhares de falsos alertas de «ladrões», sobretudo contra mulheres e pessoas negras, latinas e asiáticas. A FTC proibiu-a de usar essa tecnologia durante cinco anos."
+   },
+   "fuente": "https://www.ftc.gov/news-events/news/press-releases/2023/12/rite-aid-banned-using-ai-facial-recognition-after-ftc-says-retailer-deployed-technology-without",
+   "copia": "https://web.archive.org/web/2026/https://www.ftc.gov/news-events/news/press-releases/2023/12/rite-aid-banned-using-ai-facial-recognition-after-ftc-says-retailer-deployed-technology-without",
+   "nuevo": "ronda58"
+  },
+  {
+   "cat": "google",
+   "cifra": {
+    "es": "93 M$",
+    "en": "$93M",
+    "pt": "93 mi US$"
+   },
+   "empresa": "Google",
+   "anio": "2023",
+   "dia": "2023-09-14",
+   "autoridad": {
+    "es": "Fiscalía de California (EE. UU.)",
+    "en": "California Attorney General (US)",
+    "pt": "Procuradoria da Califórnia (EUA)"
+   },
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   },
+   "titulo": {
+    "es": "La ubicación seguía guardándose con el historial apagado",
+    "en": "Location kept being saved with the history switched off",
+    "pt": "A localização continuava a ser guardada com o histórico desligado"
+   },
+   "texto": {
+    "es": "Según la fiscalía de California, Google hizo creer que al apagar el «Historial de ubicaciones» dejaba de guardar dónde estaba la persona, mientras seguía recogiendo su ubicación por otros ajustes y usándola para anuncios.",
+    "en": "According to California's attorney general, Google led people to believe that switching off 'Location History' stopped it from storing where they were, while it kept collecting their location through other settings and using it for ads.",
+    "pt": "Segundo a procuradoria da Califórnia, o Google fez crer que, ao desligar o «Histórico de localização», deixava de guardar onde a pessoa estava, enquanto continuava a recolher a localização por outras configurações e a usá-la para anúncios."
+   },
+   "fuente": "https://oag.ca.gov/news/press-releases/attorney-general-bonta-announces-93-million-settlement-regarding-google%E2%80%99s",
+   "copia": "https://web.archive.org/web/2026/https://oag.ca.gov/news/press-releases/attorney-general-bonta-announces-93-million-settlement-regarding-google%E2%80%99s",
+   "nuevo": "ronda58"
+  },
+  {
    "cat": "tiktok",
-   "cifra": "345 M€",
+   "cifra": {
+    "es": "345 M€",
+    "en": "€345M",
+    "pt": "345 mi €"
+   },
    "empresa": "TikTok Technology Limited",
    "anio": "2023",
    "dia": "2023-09-01",
@@ -898,8 +1412,41 @@
    "copia": "https://web.archive.org/web/2026/https://www.matheson.com/insights/dpc-fines-tiktok-345m-for-gdpr-violations-concerning-childrens-data/"
   },
   {
+   "cat": "otras",
+   "cifra": {
+    "es": "40 M€",
+    "en": "€40M",
+    "pt": "40 mi €"
+   },
+   "empresa": "Criteo",
+   "anio": "2023",
+   "dia": "2023-06-15",
+   "autoridad": {
+    "es": "CNIL (Francia)",
+    "en": "CNIL (France)",
+    "pt": "CNIL (França)"
+   },
+   "titulo": {
+    "es": "Seguimiento publicitario sin comprobar el permiso",
+    "en": "Ad tracking without checking consent",
+    "pt": "Rastreamento publicitário sem verificar o consentimento"
+   },
+   "texto": {
+    "es": "Criteo pone identificadores a los internautas para seguirlos de web en web y mostrarles anuncios. La autoridad francesa concluyó que no comprobaba que las webs con las que trabaja hubieran pedido permiso a las personas, ni las informaba bien.",
+    "en": "Criteo assigns identifiers to internet users to follow them from site to site and show them ads. The French authority found it did not check that the websites it works with had asked people for consent, nor inform them properly.",
+    "pt": "A Criteo atribui identificadores aos internautas para os seguir de site em site e lhes mostrar anúncios. A autoridade francesa concluiu que não verificava se os sites com que trabalha tinham pedido o consentimento das pessoas, nem as informava bem."
+   },
+   "fuente": "https://www.edpb.europa.eu/news/national-news/2023/personalised-advertising-french-sa-fined-criteo-eur-40000000_en",
+   "copia": "https://web.archive.org/web/2026/https://www.edpb.europa.eu/news/national-news/2023/personalised-advertising-french-sa-fined-criteo-eur-40000000_en",
+   "nuevo": "ronda58"
+  },
+  {
    "cat": "microsoft",
-   "cifra": "20 M$",
+   "cifra": {
+    "es": "20 M$",
+    "en": "$20M",
+    "pt": "20 mi US$"
+   },
    "empresa": "Microsoft (Xbox)",
    "anio": "2023",
    "dia": "2023-06-12",
@@ -927,8 +1474,41 @@
    }
   },
   {
+   "cat": "otras",
+   "cifra": {
+    "es": "58 M SEK",
+    "en": "SEK 58M",
+    "pt": "58 mi SEK"
+   },
+   "empresa": "Spotify",
+   "anio": "2023",
+   "dia": "2023-06-12",
+   "autoridad": {
+    "es": "IMY (Suecia)",
+    "en": "IMY (Sweden)",
+    "pt": "IMY (Suécia)"
+   },
+   "titulo": {
+    "es": "No explicaba bien qué hacía con los datos de quien los pedía",
+    "en": "It didn't properly explain what it did with people's data",
+    "pt": "Não explicava bem o que fazia com os dados de quem os pedia"
+   },
+   "texto": {
+    "es": "Cuando sus usuarios pedían una copia de sus datos, Spotify se la daba, pero sin explicar con claridad cómo los usaba ni a quién los pasaba. La autoridad sueca le impuso 58 millones de coronas.",
+    "en": "When users asked for a copy of their data, Spotify provided it but did not clearly explain how it used it or who it shared it with. The Swedish authority fined it SEK 58 million.",
+    "pt": "Quando os usuários pediam uma cópia dos seus dados, o Spotify entregava-a, mas sem explicar com clareza como os usava nem a quem os passava. A autoridade sueca aplicou-lhe 58 milhões de coroas."
+   },
+   "fuente": "https://www.edpb.europa.eu/news/national-news/2023/imy-issues-administrative-fine-against-spotify-shortcomings-regarding_en",
+   "copia": "https://web.archive.org/web/2026/https://www.edpb.europa.eu/news/national-news/2023/imy-issues-administrative-fine-against-spotify-shortcomings-regarding_en",
+   "nuevo": "ronda58"
+  },
+  {
    "cat": "amazon",
-   "cifra": "25 M$",
+   "cifra": {
+    "es": "25 M$",
+    "en": "$5.8M",
+    "pt": "5,8 mi US$"
+   },
    "empresa": "Amazon (Alexa)",
    "anio": "2023",
    "dia": "2023-05-31",
@@ -957,7 +1537,11 @@
   },
   {
    "cat": "amazon",
-   "cifra": "5,8 M$",
+   "cifra": {
+    "es": "5,8 M$",
+    "en": "$5.8M",
+    "pt": "5,8 mi US$"
+   },
    "empresa": "Ring (Amazon)",
    "anio": "2023",
    "dia": "2023-05-31",
@@ -986,7 +1570,11 @@
   },
   {
    "cat": "meta",
-   "cifra": "1.200 M€",
+   "cifra": {
+    "es": "1.200 M€",
+    "en": "€1.2bn",
+    "pt": "1.200 M€"
+   },
    "empresa": "Meta",
    "anio": "2023",
    "dia": "2023-05-22",
@@ -1009,8 +1597,109 @@
    "copia": "https://web.archive.org/web/2026/https://www.dataprotection.ie/en/news-media/press-releases/Data-Protection-Commission-announces-conclusion-of-inquiry-into-Meta-Ireland"
   },
   {
+   "cat": "tiktok",
+   "cifra": {
+    "es": "12,7 M£",
+    "en": "£12.7M",
+    "pt": "12,7 mi £"
+   },
+   "empresa": "TikTok",
+   "anio": "2023",
+   "dia": "2023-04-04",
+   "autoridad": {
+    "es": "ICO (Reino Unido)",
+    "en": "ICO (UK)",
+    "pt": "ICO (Reino Unido)"
+   },
+   "estado": {
+    "es": "Firme",
+    "en": "Final",
+    "pt": "Definitiva"
+   },
+   "titulo": {
+    "es": "Hasta 1,4 millones de niños menores de 13 años en TikTok",
+    "en": "Up to 1.4 million under-13s on TikTok",
+    "pt": "Até 1,4 milhão de crianças com menos de 13 anos no TikTok"
+   },
+   "texto": {
+    "es": "La autoridad británica calculó que hasta 1,4 millones de menores de 13 años usaban TikTok en el Reino Unido en 2020, y que la empresa trató sus datos sin el permiso de sus padres. TikTok retiró su recurso en 2026 y la multa quedó firme.",
+    "en": "The UK authority estimated that up to 1.4 million under-13s used TikTok in the UK in 2020, and that the company processed their data without parental consent. TikTok dropped its appeal in 2026 and the fine became final.",
+    "pt": "A autoridade britânica calculou que até 1,4 milhão de menores de 13 anos usavam o TikTok no Reino Unido em 2020 e que a empresa tratou os seus dados sem autorização dos pais. O TikTok retirou o recurso em 2026 e a multa tornou-se definitiva."
+   },
+   "fuente": "https://ico-newsroom.prgloo.com/news/ico-fines-tiktok-gbp-12-7-million-for-misusing-childrens-data",
+   "copia": "https://web.archive.org/web/2026/https://ico-newsroom.prgloo.com/news/ico-fines-tiktok-gbp-12-7-million-for-misusing-childrens-data",
+   "nuevo": "ronda58"
+  },
+  {
+   "cat": "otras",
+   "cifra": {
+    "es": "7,8 M$",
+    "en": "$7.8M",
+    "pt": "7,8 mi US$"
+   },
+   "empresa": "BetterHelp",
+   "anio": "2023",
+   "dia": "2023-03-02",
+   "autoridad": {
+    "es": "FTC (EE. UU.)",
+    "en": "FTC (US)",
+    "pt": "FTC (EUA)"
+   },
+   "estado": {
+    "es": "Acuerdo",
+    "en": "Settlement",
+    "pt": "Acordo"
+   },
+   "titulo": {
+    "es": "Datos de terapia psicológica usados para anuncios",
+    "en": "Therapy data used for ads",
+    "pt": "Dados de terapia psicológica usados para anúncios"
+   },
+   "texto": {
+    "es": "La app de terapia en línea prometía que los datos de salud mental de sus usuarios eran privados, pero según la FTC los compartió con Facebook, Snapchat y otras plataformas para hacer publicidad. Devolvió 7,8 millones de dólares a sus clientes.",
+    "en": "The online therapy app promised users' mental-health data would stay private, but according to the FTC it shared it with Facebook, Snapchat and other platforms for advertising. It returned $7.8 million to its customers.",
+    "pt": "O app de terapia online prometia que os dados de saúde mental dos usuários eram privados, mas, segundo a FTC, partilhou-os com o Facebook, o Snapchat e outras plataformas para fazer publicidade. Devolveu 7,8 milhões de dólares aos clientes."
+   },
+   "fuente": "https://fortune.com/2023/03/03/betterhelp-return-million-customers-ftc-settlement-shared-private-health-data-facebook-snapchat/",
+   "copia": "https://web.archive.org/web/2026/https://fortune.com/2023/03/03/betterhelp-return-million-customers-ftc-settlement-shared-private-health-data-facebook-snapchat/",
+   "nuevo": "ronda58"
+  },
+  {
    "cat": "meta",
-   "cifra": "390 M€",
+   "cifra": {
+    "es": "5,5 M€",
+    "en": "€5.5M",
+    "pt": "5,5 mi €"
+   },
+   "empresa": "WhatsApp",
+   "anio": "2023",
+   "dia": "2023-01-19",
+   "autoridad": {
+    "es": "DPC (Irlanda)",
+    "en": "DPC (Ireland)",
+    "pt": "DPC (Irlanda)"
+   },
+   "titulo": {
+    "es": "Aceptar las condiciones o no usar WhatsApp",
+    "en": "Accept the terms or don't use WhatsApp",
+    "pt": "Aceitar as condições ou não usar o WhatsApp"
+   },
+   "texto": {
+    "es": "La autoridad irlandesa concluyó que WhatsApp no podía apoyarse en sus condiciones de uso —aceptarlas o dejar la app— para tratar datos personales con fines de mejora del servicio y de seguridad.",
+    "en": "The Irish authority found that WhatsApp could not rely on its terms of service — accept them or leave the app — to process personal data for service improvement and security.",
+    "pt": "A autoridade irlandesa concluiu que o WhatsApp não podia apoiar-se nas suas condições de uso — aceitá-las ou deixar o app — para tratar dados pessoais com fins de melhoria do serviço e de segurança."
+   },
+   "fuente": "https://www.dataprotection.ie/en/news-media/press-releases/data-protection-commission-announces-conclusion-inquiry-whatsapp",
+   "copia": "https://web.archive.org/web/2026/https://www.dataprotection.ie/en/news-media/press-releases/data-protection-commission-announces-conclusion-inquiry-whatsapp",
+   "nuevo": "ronda58"
+  },
+  {
+   "cat": "meta",
+   "cifra": {
+    "es": "390 M€",
+    "en": "€390M",
+    "pt": "390 mi €"
+   },
    "empresa": "Meta Platforms Ireland (Facebook 210 M€ + Instagram 180 M€)",
    "anio": "2023",
    "dia": "2023-01-04",
@@ -1039,7 +1728,11 @@
   },
   {
    "cat": "meta",
-   "cifra": "265 M€",
+   "cifra": {
+    "es": "265 M€",
+    "en": "€265M",
+    "pt": "265 mi €"
+   },
    "empresa": "Meta Platforms Ireland (Facebook)",
    "anio": "2022",
    "dia": "2022-11-28",
@@ -1063,7 +1756,11 @@
   },
   {
    "cat": "google",
-   "cifra": "391,5 M$",
+   "cifra": {
+    "es": "391,5 M$",
+    "en": "$391.5M",
+    "pt": "391,5 mi US$"
+   },
    "empresa": "Google",
    "anio": "2022",
    "dia": "2022-11-14",
@@ -1092,7 +1789,11 @@
   },
   {
    "cat": "ia",
-   "cifra": "20 M€",
+   "cifra": {
+    "es": "20 M€",
+    "en": "€20M",
+    "pt": "20 mi €"
+   },
    "empresa": "Clearview AI",
    "anio": "2022",
    "dia": "2022-10-17",
@@ -1116,7 +1817,11 @@
   },
   {
    "cat": "meta",
-   "cifra": "405 M€",
+   "cifra": {
+    "es": "405 M€",
+    "en": "€405M",
+    "pt": "405 mi €"
+   },
    "empresa": "Meta Platforms Ireland (Instagram)",
    "anio": "2022",
    "dia": "2022-09-15",
@@ -1140,7 +1845,11 @@
   },
   {
    "cat": "otras",
-   "cifra": "150 M$",
+   "cifra": {
+    "es": "150 M$",
+    "en": "$150M",
+    "pt": "150 mi US$"
+   },
    "empresa": "Twitter (hoy X)",
    "anio": "2022",
    "dia": "2022-05-01",
@@ -1169,7 +1878,11 @@
   },
   {
    "cat": "ia",
-   "cifra": "20 M€",
+   "cifra": {
+    "es": "20 M€",
+    "en": "€20M",
+    "pt": "20 mi €"
+   },
    "empresa": "Clearview AI",
    "anio": "2022",
    "dia": "2022-03-09",
@@ -1193,7 +1906,11 @@
   },
   {
    "cat": "google",
-   "cifra": "150 M€",
+   "cifra": {
+    "es": "150 M€",
+    "en": "€150M",
+    "pt": "150 mi €"
+   },
    "empresa": "Google LLC y Google Ireland",
    "anio": "2021",
    "dia": "2021-12-31",
@@ -1217,7 +1934,11 @@
   },
   {
    "cat": "amazon",
-   "cifra": "746 M€",
+   "cifra": {
+    "es": "746 M€",
+    "en": "€746M",
+    "pt": "746 mi €"
+   },
    "empresa": "Amazon Europe Core",
    "anio": "2021",
    "dia": "2021-07-01",
@@ -1246,7 +1967,11 @@
   },
   {
    "cat": "otras",
-   "cifra": "18,4 M£",
+   "cifra": {
+    "es": "18,4 M£",
+    "en": "£18.4M",
+    "pt": "18,4 mi £"
+   },
    "empresa": "Marriott International",
    "anio": "2020",
    "dia": "2020-10-30",
@@ -1275,7 +2000,11 @@
   },
   {
    "cat": "otras",
-   "cifra": "20 M£",
+   "cifra": {
+    "es": "20 M£",
+    "en": "£20M",
+    "pt": "20 mi £"
+   },
    "empresa": "British Airways",
    "anio": "2020",
    "dia": "2020-10-16",
@@ -1299,7 +2028,11 @@
   },
   {
    "cat": "google",
-   "cifra": "170 M$",
+   "cifra": {
+    "es": "170 M$",
+    "en": "$170M",
+    "pt": "170 mi US$"
+   },
    "empresa": "Google y YouTube",
    "anio": "2019",
    "dia": "2019-09-04",
@@ -1328,7 +2061,11 @@
   },
   {
    "cat": "meta",
-   "cifra": "5.000 M$",
+   "cifra": {
+    "es": "5.000 M$",
+    "en": "$5bn",
+    "pt": "5 bi US$"
+   },
    "empresa": "Facebook (Meta)",
    "anio": "2019",
    "dia": "2019-07-24",
@@ -1357,7 +2094,11 @@
   },
   {
    "cat": "venta",
-   "cifra": "575–700 M$",
+   "cifra": {
+    "es": "575–700 M$",
+    "en": "$575–700M",
+    "pt": "575–700 mi US$"
+   },
    "empresa": "Equifax",
    "anio": "2019",
    "dia": "2019-07-22",
@@ -1386,7 +2127,11 @@
   },
   {
    "cat": "google",
-   "cifra": "50 M€",
+   "cifra": {
+    "es": "50 M€",
+    "en": "€50M",
+    "pt": "50 mi €"
+   },
    "empresa": "Google LLC",
    "anio": "2019",
    "dia": "2019-01-21",
