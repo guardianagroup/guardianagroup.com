@@ -78,9 +78,17 @@
     CONVS.set(c.id, c);
     R.entra(c.id, c.yo);
   }
+  // Una sola conversación (dueño, 26 Oct 20:04): al abrir, queda la activa más reciente; las invitaciones sin usar y las
+  // conversaciones de versiones anteriores se borran (si la otra persona vuelve, recibe la orden de borrado).
   async function cargaConvs() {
-    const xs = await BD.todos('conv');
-    for (const x of xs) await preparaConv(x);
+    const xs = (await BD.todos('conv')).sort((a, b) => (b.creado || 0) - (a.creado || 0));
+    const viva = xs.find((x) => x.huella && x.estado !== 'destruida_pendiente');
+    for (const x of xs) {
+      if (x === viva || x.estado === 'destruida_pendiente') { await preparaConv(x); continue; }
+      if (!x.huella) { await BD.borraConv('msg', x.id); await BD.borraConv('arch', x.id); await BD.borra('conv', x.id); continue; }
+      x.estado = 'destruida_pendiente'; x.ultimoTexto = null; x.noLeidos = 0;
+      await BD.borraConv('msg', x.id); await BD.borraConv('arch', x.id); await BD.pon('conv', x); await preparaConv(x);
+    }
     pintaLista();
   }
   // Invitación por código (dueño, 26 Oct 20:00: «un número en pantalla, la otra persona lo pone; sencillísimo»). El secreto
