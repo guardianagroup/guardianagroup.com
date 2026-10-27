@@ -1542,6 +1542,8 @@
     'RESULTADOS DE GOOGLE · WEBS PRINCIPALES DE ESPAÑA': ['GOOGLE RESULTS · MAIN WEBSITES IN SPAIN', 'RESULTADOS DO GOOGLE · PRINCIPAIS SITES DE ESPANHA'],
     'La búsqueda la hace Google desde tu navegador. Al abrir un resultado, la web se abre dentro de ZERO.': ['Google runs the search from your browser. When you open a result, the website opens inside ZERO.', 'A pesquisa é feita pelo Google a partir do seu navegador. Ao abrir um resultado, o site abre dentro do ZERO.'],
     'Buscar en todo Google': ['Search all of Google', 'Pesquisar em todo o Google'],
+    'Abrir fuera de ZERO': ['Open outside ZERO', 'Abrir fora do ZERO'],
+    'Fuera de ZERO no hay protección: la web verá tu conexión y correrá en tu equipo. Pulsa otra vez para abrirla.': ['Outside ZERO there is no protection: the website will see your connection and run on your device. Press again to open it.', 'Fora do ZERO não há proteção: o site verá a sua conexão e vai rodar no seu equipamento. Toque de novo para abrir.'],
     'se abre en la celda · puede pedir «No soy un robot»': ['opens in the cell · may ask “I’m not a robot”', 'abre na célula · pode pedir «Não sou um robô»'],
     'Búsqueda de Google': ['Google search', 'Pesquisa do Google'],
     'Dirección interna bloqueada': ['Internal address blocked', 'Endereço interno bloqueado'],
