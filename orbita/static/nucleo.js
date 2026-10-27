@@ -211,17 +211,13 @@
       + '<div class="nuc-ops nuc-paso" id="nuc-ops" role="group" aria-label="Qué deseas hacer">'
       + '<button type="button" class="nuc-op" data-n="zero"><i>ZERO</i><b>Navegar con NÚCLEO</b><small>Entra en cualquier web y mira quién intenta llevarse tus datos.</small></button>'
       + '<button type="button" class="nuc-op" data-n="planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.</small></button>'
-      + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos cifrados</b><small>Chatea y envía archivos cifrados de PC a PC.</small></button>'
+      + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Chatea y envía archivos encriptados de PC a PC.</small></button>'
       + '</div>'
       + '<div class="nuc-chips nuc-paso" id="nuc-chips" role="group" aria-label="Más opciones"></div>'
-      + '<form class="nuc-form nuc-paso" id="nuc-form" autocomplete="off"><input id="nuc-q" type="text" maxlength="200" placeholder="Escribe qué deseas hacer…" aria-label="Pídeselo a NÚCLEO"><button type="submit">Ir</button></form>'
-      + '<div class="nuc-nav nuc-paso"><button type="button" class="nuc-salta" id="nuc-atras">← Atrás</button><button type="button" class="nuc-salta" id="nuc-inicio">Inicio</button></div>'
-      + '<p class="nuc-pie nuc-paso">NÚCLEO solo habla de GUARDIANA, de la web y de tus datos. No guarda lo que le pides.</p>'; // dueño, 09:41: sin el botón «¿Qué es GUARDIANA?»
+      ; // dueño, 09:41: sin el botón «¿Qué es GUARDIANA?»; 09:53: «borra de ahí el navegador ese de qué quieres hacer… ya veremos dónde lo metemos»: sin caja de escribir ni charla en la portada
     document.body.append(d);
-    d.querySelector('#nuc-form').addEventListener('submit', (e) => { e.preventDefault(); const i = d.querySelector('#nuc-q'); escribe(i.value); i.value = ''; });
-    d.querySelectorAll('.nuc-op').forEach((b) => b.addEventListener('click', () => elige(b.dataset.n)));
-    d.querySelector('#nuc-atras').addEventListener('click', atras);
-    d.querySelector('#nuc-inicio').addEventListener('click', () => { pila = ['inicio']; modo = null; d.classList.remove('charla'); d.querySelector('#nuc-charla').textContent = ''; pintaOpciones('inicio'); ponMarcador(); });
+    // cada tarjeta lleva directa a su sección (dueño, 09:53: dentro de la portada, la charla lo hacía todo más pequeño)
+    d.querySelectorAll('.nuc-op').forEach((b) => b.addEventListener('click', () => entra(b.dataset.n)));
     d.addEventListener('keydown', (e) => { if (e.key === 'Escape') alPlaneta(); });
     return d;
   }
@@ -232,8 +228,9 @@
     grandes.hidden = id !== 'inicio';
     chips.textContent = '';
     for (const o of (n.o || [])) { if (id === 'inicio' && ['zero', 'planeta', 'com'].includes(o)) continue; const b = document.createElement('button'); b.type = 'button'; b.className = 'nuc-chip'; b.textContent = T(ETIQUETA[o] || o); b.addEventListener('click', () => elige(o)); chips.append(b); }
-    ini.querySelector('#nuc-atras').hidden = pila.length <= 1;
-    ini.querySelector('#nuc-inicio').hidden = id === 'inicio' && !ini.classList.contains('charla');
+    const at = ini.querySelector('#nuc-atras'), ir = ini.querySelector('#nuc-inicio');
+    if (at) at.hidden = pila.length <= 1;
+    if (ir) ir.hidden = id === 'inicio' && !ini.classList.contains('charla');
   }
   function burbuja(quien, texto, filas) {
     const c = ini.querySelector('#nuc-charla'); const p = document.createElement('div'); p.className = 'nuc-b ' + quien;
@@ -253,6 +250,7 @@
     modo = null; ponMarcador(); burbuja('el', r.texto); if (r.a) setTimeout(r.a, 1100);
   }
   function elige(id) { responde({ nodo: id }, T(ETIQUETA[id] || id)); }
+  function entra(id) { if (id === 'zero') abreZero(); else if (id === 'planeta') alPlaneta(); else if (id === 'com') irComunicaciones(); }
   function escribe(frase) { const f = String(frase || '').trim(); if (!f) return; responde(entiende(f, modo), f); }
   function atras() { if (pila.length > 1) pila.pop(); modo = null; ponMarcador(); const id = pila[pila.length - 1]; if (id === 'inicio') { ini.classList.remove('charla'); ini.querySelector('#nuc-charla').textContent = ''; } else burbuja('el', NODOS[id].d(), NODOS[id].x); pintaOpciones(id); }
   function revela(d, todo) {
@@ -283,8 +281,8 @@
   document.body.append(barra);
   barra.addEventListener('submit', (e) => { e.preventDefault(); const i = barra.querySelector('#nuc-bq'); if (barra.classList.contains('mini')) { muestraInicio(true); return; } const f = i.value; i.value = ''; if (f.trim()) escribe(f); else muestraInicio(true); });
   barra.querySelector('#nuc-orbe').addEventListener('click', () => muestraInicio(true));
-  const mira = () => barra.classList.toggle('mini', document.body.classList.contains('dentro'));
-  new MutationObserver(mira).observe(document.body, { attributes: true, attributeFilter: ['class'] }); mira();
+  // dueño, 09:53: el chat con NÚCLEO irá más adelante en otro sitio; de momento, la barra es solo el botón que vuelve a la portada
+  barra.classList.add('mini');
 
   // ---------- arranque: la primera vez en esta visita, con su nacimiento; al volver en la misma visita, al momento ----------
   let visto = false; try { visto = sessionStorage.getItem('guardiana-nucleo') === '1'; sessionStorage.setItem('guardiana-nucleo', '1'); } catch (_) {}
