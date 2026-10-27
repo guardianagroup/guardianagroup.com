@@ -124,7 +124,7 @@
     'd-zero': 'Ver el detalle en ZERO', 'd-corte': '¿Qué es un corte?',
   };
   const NODOS = {
-    inicio: { d: () => T('Bienvenido a esta experiencia de tus datos.') + ' ' + T('¿Qué deseas hacer?'), o: ['zero', 'planeta', 'com'] },
+    inicio: { d: () => T('¿Qué deseas hacer?'), o: ['zero', 'planeta', 'com'] },
     zero: { x: [['Qué es', 'Un navegador para entrar en cualquier web: la web se abre en un ordenador de GUARDIANA y a tu equipo solo llega la imagen.'], ['Qué ves', 'A la derecha, quién intenta seguirte, quién puja por tus datos y quién intenta leer tu equipo.'], ['Tú decides', 'Cortas lo que quieras con un interruptor. Si eliges Tor, se corta más.']], d: () => T('¿Qué quieres hacer?'), o: ['z-web', 'z-buscar', 'z-radio', 'z-pdf'] },
     'z-web': { d: () => T('Escribe la dirección de la web, por ejemplo eltiempo.com, y la abro en ZERO.'), pide: 'web' },
     'z-buscar': { d: () => T('Abro ZERO: escribe tu búsqueda en su barra.'), a: () => abreZero() },
@@ -205,7 +205,7 @@
     d.className = 'nuc-ini'; d.id = 'nuc-ini'; d.setAttribute('aria-label', 'NÚCLEO, la entrada de GUARDIANA');
     d.innerHTML = '<canvas class="nuc-lienzo" aria-hidden="true"></canvas>'
       + '<p class="nuc-k nuc-paso" translate="no">NÚCLEO</p>'
-      + '<h1 class="nuc-paso" id="nuc-saludo">Bienvenido a esta experiencia de tus datos</h1>' // dueño, 09:23: sin «buenos días»
+      + '<h1 class="nuc-paso" id="nuc-saludo">Control total de tus datos</h1>' // dueño, 09:42: «es mejor decir control total de tus datos»
       + '<p class="nuc-sub nuc-paso" id="nuc-sub"><b>¿Qué deseas hacer?</b></p>'
       + '<div class="nuc-charla" id="nuc-charla" aria-live="polite"></div>'
       + '<div class="nuc-ops nuc-paso" id="nuc-ops" role="group" aria-label="Qué deseas hacer">'
