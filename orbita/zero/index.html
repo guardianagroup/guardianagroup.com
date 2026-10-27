@@ -1375,7 +1375,8 @@ function zeroChequeo(m){
       mk('Entrar bajo mi responsabilidad','',()=>{cheqQuita();const Z=window.ZeroMotor;if(!Z)return;if(mal&&detenida)Z.chequeoEntrar();else if(mal&&sellada)Z.reanudar();Z.enfoca()})}
     res.append(bot);res.hidden=false;clearTimeout(c.vigia);setTimeout(()=>{const b=bot.querySelector('button');if(b&&CHEQ===c)b.focus()},60);return}
   // limpia o fallo: se entra en cuanto llega la imagen de la web ya comprobada (o enseguida, si la web no cambia)
-  c.salir=()=>{if(CHEQ!==c)return;cheqQuita();if(m.resultado==='limpia')cheqChip(m.ms,h.desafio?'La web pide confirmar que eres humano; ZERO vigila mientras pasas':null)};c.espera=setTimeout(()=>c.salir&&c.salir(),450)}
+  // ronda 67 (Astra): si venció el tope sin cargar, no se dice «sin peligros conocidos»: lo principal está comprobado y ZERO sigue vigilando
+  c.salir=()=>{if(CHEQ!==c)return;cheqQuita();if(m.resultado==='limpia')cheqChip(m.ms,h.desafio?'La web pide confirmar que eres humano; ZERO vigila mientras pasas':h.lenta?'Sigue cargando; lo principal ya está comprobado':null)};c.espera=setTimeout(()=>c.salir&&c.salir(),450)}
 function zeroChequeoCuadro(){const c=CHEQ;if(c&&c.salir){clearTimeout(c.espera);c.espera=setTimeout(()=>c.salir&&c.salir(),60)}}
 Object.assign(window,{zeroSuceso,zeroResumen,zeroNav,zeroTitulo,zeroActa,zeroAlerta,zeroPestanas,zeroCortes,zeroDescarga,zeroArchivo,zeroUltra,zeroChequeo,zeroChequeoCuadro}); // motor.js (fuera de este ámbito) los llama
 
