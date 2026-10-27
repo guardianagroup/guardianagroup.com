@@ -1448,7 +1448,7 @@ void main(){
   addEventListener('guardiana-idioma', () => setTimeout(mide, 0));
   // «Conocer GUARDIANA» opens the presentation in the language Órbita is showing
   const conocer = document.getElementById('conocer');
-  const idiomaConocer = () => { const l = window.GuardianaIdioma && window.GuardianaIdioma.lang; if (conocer && l) conocer.href = '/conocer.html?lang=' + l; };
+  const idiomaConocer = () => { const l = window.GuardianaIdioma && window.GuardianaIdioma.lang; if (conocer && l) conocer.href = '/?lang=' + l; };
   addEventListener('guardiana-idioma', idiomaConocer); idiomaConocer();
   if (window.ResizeObserver) new ResizeObserver(() => mide()).observe(der);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(mide);

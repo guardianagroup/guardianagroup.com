@@ -232,10 +232,14 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       // dueño, 10:00: «añade uno más: pedir las cosas»; ronda 54 (ChatGPT y Astra): «Pídeselo a NÚCLEO»
       + '<button type="button" class="nuc-op nuc-op-n" data-n="nucleo"><i translate="no">NÚCLEO</i><b>Pídeselo a NÚCLEO</b><small>Pídele que te lleve al navegador ZERO, que consulte tus datos o que prepare informes en PDF.</small></button>'
       + '</div>'
-      // dueño, 10:47: «arriba a la derecha, un enlace que diga qué es GUARDIANA» → la página de la historia con el planeta
-      + '<a class="nuc-que nuc-paso" id="nuc-que" href="/conocer.html">¿Qué es GUARDIANA?</a>';
+      // dueño, 12:23: la página del planeta es la portada de la web y su «Empezar» trae aquí; fuera «¿Qué es GUARDIANA?».
+      // Arriba a la izquierda, «Volver» a esa portada (dueño, 10:53: «tienes que poder ir y volver»).
+      + '<a class="nuc-volver nuc-paso" id="nuc-volver" href="/"><span aria-hidden="true">←</span> Volver</a>';
     document.body.append(d);
     d.querySelectorAll('.nuc-op').forEach((b) => b.addEventListener('click', () => entra(b.dataset.n)));
+    // si se vino de la portada, se vuelve atrás en el historial: la página del planeta queda donde estaba
+    const vv = d.querySelector('#nuc-volver');
+    vv.addEventListener('click', (e) => { try { const r = document.referrer ? new URL(document.referrer) : null; if (r && r.origin === location.origin && (r.pathname === '/' || r.pathname === '/index.html') && history.length > 1) { e.preventDefault(); history.back(); } } catch (_) {} });
     d.addEventListener('keydown', (e) => { if (e.key === 'Escape') alPlaneta(); });
     return d;
   }
