@@ -211,7 +211,7 @@
       + '<div class="nuc-ops nuc-paso" id="nuc-ops" role="group" aria-label="Qué deseas hacer">'
       + '<button type="button" class="nuc-op" data-n="zero"><i>ZERO</i><b>Navegar con NÚCLEO</b><small>Entra en cualquier web y mira quién intenta llevarse tus datos.</small></button>'
       + '<button type="button" class="nuc-op" data-n="planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.</small></button>'
-      + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Hablar cifrado</b><small>Habla y envía archivos con otra persona, cifrados de un equipo al otro.</small></button>'
+      + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Hablar cifrado</b><small>Chat y archivos cifrados.</small></button>'
       + '</div>'
       + '<div class="nuc-chips nuc-paso" id="nuc-chips" role="group" aria-label="Más opciones"></div>'
       + '<form class="nuc-form nuc-paso" id="nuc-form" autocomplete="off"><input id="nuc-q" type="text" maxlength="200" placeholder="Escribe qué deseas hacer…" aria-label="Pídeselo a NÚCLEO"><button type="submit">Ir</button></form>'
