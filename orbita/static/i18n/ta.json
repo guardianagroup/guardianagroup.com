@@ -376,7 +376,6 @@
   "También en": "இங்கும் காணப்பட்டது",
   "Datos de ejemplo de la demostración.": "டெமோவின் எடுத்துக்காட்டுத் தரவு.",
   "Datos de ejemplo.": "எடுத்துக்காட்டுத் தரவு.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Tor-க்குள் DuckDuckGo மூலம் தேடல்கள் (.onion).",
   "Exportar ficha": "அட்டையை ஏற்றுமதி செய்",
   "Solo en esta web, por ahora.": "இதுவரை இந்தத் தளத்தில் மட்டும்.",
   "Aún no hay cortes en esta web.": "இந்தத் தளத்தில் இன்னும் தடுப்புகள் இல்லை.",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "தனியுரிமைப் பயன்முறை",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "தனியுரிமைப் பயன்முறை: நீங்கள் அழுத்திப் பிடிக்கும் வரை அரட்டை மங்கலாகத் தெரியும், நீங்கள் தட்டச்சு செய்வது எண்களாகத் தெரியும். அனைத்தையும் வழக்கம்போல் பார்க்க இந்தப் பொத்தானை அழுத்தவும்.",
   "Modo discreto: lo que escribas se verá como números": "தனியுரிமைப் பயன்முறை: நீங்கள் தட்டச்சு செய்வது எண்களாகத் தெரியும்",
-  "Código erróneo o caducado.": "குறியீடு தவறானது அல்லது காலாவதியானது."
+  "Código erróneo o caducado.": "குறியீடு தவறானது அல்லது காலாவதியானது.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Tor-க்குள் Brave Search மூலம் தேடல்கள் (.onion)."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

@@ -376,7 +376,6 @@
   "También en": "Itt is:",
   "Datos de ejemplo de la demostración.": "A bemutató példaadatai.",
   "Datos de ejemplo.": "Példaadatok.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Keresés a DuckDuckGóval a Toron belül (.onion).",
   "Exportar ficha": "Adatlap exportálása",
   "Solo en esta web, por ahora.": "Egyelőre csak ezen az oldalon.",
   "Aún no hay cortes en esta web.": "Ezen az oldalon még nincs megszakítás.",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "Diszkrét mód",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Diszkrét mód: a csevegés elmosódott, amíg lenyomva nem tartod, és amit írsz, számjegyekként jelenik meg. Nyomd meg ezt a gombot, hogy mindent normálisan láss.",
   "Modo discreto: lo que escribas se verá como números": "Diszkrét mód: amit írsz, számjegyekként jelenik meg",
-  "Código erróneo o caducado.": "Hibás vagy lejárt kód."
+  "Código erróneo o caducado.": "Hibás vagy lejárt kód.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Keresés a DuckDuckGóval a Toron belül (.onion)."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

@@ -376,7 +376,6 @@
   "También en": "Juga di",
   "Datos de ejemplo de la demostración.": "Data contoh daripada demo.",
   "Datos de ejemplo.": "Data contoh.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Carian dengan DuckDuckGo di dalam Tor (.onion).",
   "Exportar ficha": "Eksport kad",
   "Solo en esta web, por ahora.": "Hanya di laman ini, setakat ini.",
   "Aún no hay cortes en esta web.": "Belum ada pemotongan di laman ini.",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "Mod privasi",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Mod privasi: sembang kelihatan kabur sehingga anda menekan dan menahannya, dan apa yang anda taip kelihatan sebagai nombor. Tekan butang ini untuk melihat semuanya seperti biasa.",
   "Modo discreto: lo que escribas se verá como números": "Mod privasi: apa yang anda taip akan kelihatan sebagai nombor",
-  "Código erróneo o caducado.": "Kod salah atau telah tamat tempoh."
+  "Código erróneo o caducado.": "Kod salah atau telah tamat tempoh.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Carian dengan Brave Search di dalam Tor (.onion)."
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

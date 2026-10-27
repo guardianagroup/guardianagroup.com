@@ -376,7 +376,6 @@
   "También en": "Také na",
   "Datos de ejemplo de la demostración.": "Příklady dat z ukázky.",
   "Datos de ejemplo.": "Příklady dat.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Vyhledávání přes DuckDuckGo uvnitř Toru (.onion).",
   "Exportar ficha": "Exportovat kartu",
   "Solo en esta web, por ahora.": "Zatím jen na tomto webu.",
   "Aún no hay cortes en esta web.": "Na tomto webu zatím žádná odstřižení.",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "Diskrétní režim",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Diskrétní režim: chat je rozmazaný, dokud ho nepodržíte, a to, co píšete, se zobrazuje jako číslice. Klepnutím na toto tlačítko zobrazíte vše normálně.",
   "Modo discreto: lo que escribas se verá como números": "Diskrétní režim: to, co napíšete, se zobrazí jako číslice",
-  "Código erróneo o caducado.": "Kód je chybný nebo vypršel."
+  "Código erróneo o caducado.": "Kód je chybný nebo vypršel.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Vyhledávání přes Brave Search uvnitř Toru (.onion)."
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

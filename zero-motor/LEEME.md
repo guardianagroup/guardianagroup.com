@@ -28,3 +28,11 @@ deja el motor como servicio `zero-motor` en `127.0.0.1:8792` y Caddy publicándo
 
 ## Pruebas locales (sin servidor)
 `ZERO_DEBUG=1 ZERO_MOCK=1 node zero-motor/servidor.js 8792` y la página con `?motor=ws://127.0.0.1:8792`.
+
+## Red de la celda (`filtro-red.js`, 26 Oct 2026)
+Cada celda sale a internet por su propio SOCKS5 en `127.0.0.1` (puerto efímero), con `<-loopback>` para que ni localhost se
+salte el filtro. Sin ULTRA, el filtro resuelve el nombre y no conecta nunca con este equipo, redes privadas, enlace local
+(metadatos del proveedor), multidifusión ni direcciones reservadas, ni con `.onion`. Con ULTRA pasa a Tor tal cual, salvo las
+`.onion` que no estén en `ONION_PERMITIDAS` (hoy, solo Brave). Lo rechazado sale en el panel como suceso `local` u `onion`.
+- `ZERO_FILTRO_RED=0` quita el filtro de las celdas normales (ULTRA lo lleva siempre).
+- Sin `ZERO_PUBLICO` (pruebas en el propio equipo) o con `ZERO_PERMITE_LOCAL=1`, deja llegar a 127.0.0.1.

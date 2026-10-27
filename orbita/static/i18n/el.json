@@ -376,7 +376,6 @@
   "También en": "Επίσης σε",
   "Datos de ejemplo de la demostración.": "Δεδομένα παραδείγματος της επίδειξης.",
   "Datos de ejemplo.": "Δεδομένα παραδείγματος.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Αναζητήσεις με DuckDuckGo μέσα στο Tor (.onion).",
   "Exportar ficha": "Εξαγωγή καρτέλας",
   "Solo en esta web, por ahora.": "Μόνο σε αυτόν τον ιστότοπο, προς το παρόν.",
   "Aún no hay cortes en esta web.": "Δεν υπάρχουν ακόμη αποκοπές σε αυτόν τον ιστότοπο.",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "Διακριτική λειτουργία",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Διακριτική λειτουργία: η συνομιλία φαίνεται θολή μέχρι να την κρατήσετε πατημένη και ό,τι γράφετε εμφανίζεται ως αριθμοί. Πατήστε αυτό το κουμπί για να βλέπετε τα πάντα κανονικά.",
   "Modo discreto: lo que escribas se verá como números": "Διακριτική λειτουργία: ό,τι γράφετε θα εμφανίζεται ως αριθμοί",
-  "Código erróneo o caducado.": "Λάθος ή ληγμένος κωδικός."
+  "Código erróneo o caducado.": "Λάθος ή ληγμένος κωδικός.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Αναζητήσεις με Brave Search μέσα στο Tor (.onion)."
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

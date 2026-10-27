@@ -376,7 +376,6 @@
   "También en": "Также на",
   "Datos de ejemplo de la demostración.": "Примеры данных из демонстрации.",
   "Datos de ejemplo.": "Примеры данных.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Поиск через DuckDuckGo внутри Tor (.onion).",
   "Exportar ficha": "Экспортировать карточку",
   "Solo en esta web, por ahora.": "Пока только на этом сайте.",
   "Aún no hay cortes en esta web.": "На этом сайте пока нет отсечений.",
@@ -1668,7 +1667,8 @@
   "Modo discreto": "Незаметный режим",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Незаметный режим: чат размыт, пока вы не удерживаете его, а вводимый текст отображается цифрами. Нажмите эту кнопку, чтобы видеть всё как обычно.",
   "Modo discreto: lo que escribas se verá como números": "Незаметный режим: вводимый текст будет отображаться цифрами",
-  "Código erróneo o caducado.": "Неверный или просроченный код."
+  "Código erróneo o caducado.": "Неверный или просроченный код.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Поиск через Brave Search внутри Tor (.onion)."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

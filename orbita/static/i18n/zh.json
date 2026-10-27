@@ -376,7 +376,6 @@
   "También en": "也出现于",
   "Datos de ejemplo de la demostración.": "演示用的示例数据。",
   "Datos de ejemplo.": "示例数据。",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "通过 Tor（.onion）使用 DuckDuckGo 搜索。",
   "Exportar ficha": "导出档案",
   "Solo en esta web, por ahora.": "目前仅在此网站。",
   "Aún no hay cortes en esta web.": "此网站尚无拦截。",
@@ -1668,7 +1667,8 @@
   "Modo discreto": "防窥模式",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "防窥模式：聊天内容会模糊显示，长按才能看清；你输入的内容会显示为数字。点按此按钮即可恢复正常显示。",
   "Modo discreto: lo que escribas se verá como números": "防窥模式：你输入的内容将显示为数字",
-  "Código erróneo o caducado.": "代码错误或已过期。"
+  "Código erróneo o caducado.": "代码错误或已过期。",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "通过 Tor（.onion）使用 Brave Search 搜索。"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

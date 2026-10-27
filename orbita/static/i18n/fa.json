@@ -376,7 +376,6 @@
   "También en": "همچنین در",
   "Datos de ejemplo de la demostración.": "داده‌های نمونهٔ نمایش.",
   "Datos de ejemplo.": "داده‌های نمونه.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "جست‌وجو با DuckDuckGo درون Tor ‏(.onion).",
   "Exportar ficha": "برون‌بری کارت",
   "Solo en esta web, por ahora.": "فعلاً فقط در این سایت.",
   "Aún no hay cortes en esta web.": "هنوز قطعی در این سایت نیست.",
@@ -1667,7 +1666,8 @@
   "Modo discreto": "حالت محرمانه",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "حالت محرمانه: چت تا وقتی آن را نگه ندارید تار دیده می‌شود و آنچه می‌نویسید به‌صورت عدد نمایش داده می‌شود. برای دیدن همه‌چیز به‌صورت عادی، آن را بزنید.",
   "Modo discreto: lo que escribas se verá como números": "حالت محرمانه: آنچه بنویسید به‌صورت عدد نمایش داده می‌شود",
-  "Código erróneo o caducado.": "کد اشتباه است یا منقضی شده."
+  "Código erróneo o caducado.": "کد اشتباه است یا منقضی شده.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "جست‌وجو با Brave Search درون Tor ‏(.onion)."
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

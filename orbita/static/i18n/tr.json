@@ -376,7 +376,6 @@
   "También en": "Ayrıca şurada:",
   "Datos de ejemplo de la demostración.": "Tanıtımın örnek verileri.",
   "Datos de ejemplo.": "Örnek veriler.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Tor içinde DuckDuckGo ile arama (.onion).",
   "Exportar ficha": "Kartı dışa aktar",
   "Solo en esta web, por ahora.": "Şimdilik yalnızca bu sitede.",
   "Aún no hay cortes en esta web.": "Bu sitede henüz kesinti yok.",
@@ -1668,7 +1667,8 @@
   "Modo discreto": "Gizli mod",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Gizli mod: sohbet, basılı tutana kadar bulanık görünür ve yazdıklarınız rakam olarak görünür. Her şeyi normal görmek için bu düğmeye basın.",
   "Modo discreto: lo que escribas se verá como números": "Gizli mod: yazdıklarınız rakam olarak görünecek",
-  "Código erróneo o caducado.": "Kod hatalı veya süresi dolmuş."
+  "Código erróneo o caducado.": "Kod hatalı veya süresi dolmuş.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Tor içinde Brave Search ile arama (.onion)."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

@@ -376,7 +376,6 @@
   "También en": "Ook gezien op",
   "Datos de ejemplo de la demostración.": "Voorbeeldgegevens uit de demo.",
   "Datos de ejemplo.": "Voorbeeldgegevens.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Zoeken met DuckDuckGo binnen Tor (.onion).",
   "Exportar ficha": "Kaart exporteren",
   "Solo en esta web, por ahora.": "Alleen op deze site, tot nu toe.",
   "Aún no hay cortes en esta web.": "Nog geen blokkades op deze site.",
@@ -1668,7 +1667,8 @@
   "Modo discreto": "Discrete modus",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Discrete modus: de chat is wazig totdat je hem ingedrukt houdt, en wat je typt wordt als cijfers weergegeven. Tik erop om alles normaal te zien.",
   "Modo discreto: lo que escribas se verá como números": "Discrete modus: wat je typt wordt als cijfers weergegeven",
-  "Código erróneo o caducado.": "Onjuiste of verlopen code."
+  "Código erróneo o caducado.": "Onjuiste of verlopen code.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Zoeken met Brave Search binnen Tor (.onion)."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

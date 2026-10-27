@@ -376,7 +376,6 @@
   "También en": "Auch gesehen auf",
   "Datos de ejemplo de la demostración.": "Beispieldaten der Demo.",
   "Datos de ejemplo.": "Beispieldaten.",
-  "Búsquedas con DuckDuckGo dentro de Tor (.onion).": "Suchen mit DuckDuckGo innerhalb von Tor (.onion).",
   "Exportar ficha": "Profil exportieren",
   "Solo en esta web, por ahora.": "Bisher nur auf dieser Website.",
   "Aún no hay cortes en esta web.": "Noch keine Blockierungen auf dieser Website.",
@@ -1668,7 +1667,8 @@
   "Modo discreto": "Diskreter Modus",
   "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": "Diskreter Modus: Der Chat ist unscharf, bis du ihn gedrückt hältst, und was du schreibst, wird als Zahlen angezeigt. Tippe darauf, um alles normal zu sehen.",
   "Modo discreto: lo que escribas se verá como números": "Diskreter Modus: Was du schreibst, wird als Zahlen angezeigt",
-  "Código erróneo o caducado.": "Falscher oder abgelaufener Code."
+  "Código erróneo o caducado.": "Falscher oder abgelaufener Code.",
+  "Búsquedas con Brave Search dentro de Tor (.onion).": "Suchen mit Brave Search innerhalb von Tor (.onion)."
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",
