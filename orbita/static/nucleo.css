@@ -57,10 +57,6 @@
 .nuc-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:14px}
 .nuc-nav [hidden]{display:none}
 .nuc-ini .nuc-pie{margin-top:12px}
-.nuc-que{position:absolute;top:18px;inset-inline-end:22px;z-index:2;appearance:none;cursor:pointer;padding:8px 15px;border-radius:999px;border:1px solid rgba(156,195,228,.3);background:rgba(12,18,26,.72);color:#dbe9f4;font:500 13.5px/1.2 'IBM Plex Sans',system-ui,sans-serif;transition:background .15s,border-color .15s,opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
-.nuc-que:hover{background:rgba(156,195,228,.16);border-color:rgba(156,195,228,.6);color:#F4F6F8}
-.nuc-que:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
-@media (max-width:560px){.nuc-ini,.nuc-ini.charla{padding-top:64px}.nuc-que{top:14px;inset-inline-end:14px;font-size:13px}}
 /* la barra de NÚCLEO debajo del planeta, y su botón cuando hay una sección abierta */
 .nuc-barra{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:8px;width:min(560px,calc(100vw - 32px));padding:6px 6px 6px 8px;border-radius:999px;border:1px solid rgba(156,195,228,.36);background:rgba(8,12,18,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 16px 50px -20px rgba(0,0,0,.9),0 0 30px -12px rgba(156,195,228,.45);font-family:'IBM Plex Sans',system-ui,sans-serif;transition:opacity .4s,transform .4s}
 .nuc-barra[hidden]{display:none}

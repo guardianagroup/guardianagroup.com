@@ -216,10 +216,8 @@
       + '<div class="nuc-chips nuc-paso" id="nuc-chips" role="group" aria-label="Más opciones"></div>'
       + '<form class="nuc-form nuc-paso" id="nuc-form" autocomplete="off"><input id="nuc-q" type="text" maxlength="200" placeholder="Escribe qué deseas hacer…" aria-label="Pídeselo a NÚCLEO"><button type="submit">Ir</button></form>'
       + '<div class="nuc-nav nuc-paso"><button type="button" class="nuc-salta" id="nuc-atras">← Atrás</button><button type="button" class="nuc-salta" id="nuc-inicio">Inicio</button></div>'
-      + '<p class="nuc-pie nuc-paso">NÚCLEO solo habla de GUARDIANA, de la web y de tus datos. No guarda lo que le pides.</p>'
-      + '<button type="button" class="nuc-que nuc-paso" id="nuc-que">¿Qué es GUARDIANA?</button>'; // dueño, 09:26: arriba a la derecha
+      + '<p class="nuc-pie nuc-paso">NÚCLEO solo habla de GUARDIANA, de la web y de tus datos. No guarda lo que le pides.</p>'; // dueño, 09:41: sin el botón «¿Qué es GUARDIANA?»
     document.body.append(d);
-    d.querySelector('#nuc-que').addEventListener('click', () => elige('guardiana'));
     d.querySelector('#nuc-form').addEventListener('submit', (e) => { e.preventDefault(); const i = d.querySelector('#nuc-q'); escribe(i.value); i.value = ''; });
     d.querySelectorAll('.nuc-op').forEach((b) => b.addEventListener('click', () => elige(b.dataset.n)));
     d.querySelector('#nuc-atras').addEventListener('click', atras);
