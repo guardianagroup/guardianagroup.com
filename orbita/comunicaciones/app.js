@@ -68,7 +68,7 @@
   function convNueva(sala, semilla, rol) {
     return { id: sala, semilla, rol, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0 };
   }
-  const guardable = (c) => ({ id: c.id, tumba: c.tumba, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, pqVisto: !!c.pqVisto });
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada });
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
     const d = await C.deSemilla(c.semilla);
@@ -234,9 +234,12 @@
     if (!efMia || !suEf || !c.acuerdoPub) { if (pq && pq.ss) pq.ss.fill(0); return; }
     // 27 Oct 2026, ronda 55 (ChatGPT y Astra): una conversación que ya tuvo sesión postcuántica no vuelve a solo ECDH sin que
     // la persona lo acepte expresamente; mientras, no hay sesión (no sale nada) y se explica arriba.
-    if (!pq && c.pqVisto && !acepta) {
+    // Ronda 56: lo publicado dice «no seguimos sin tu permiso», así que también la primera vez: si la otra persona tiene una
+    // versión sin la capa postcuántica, la sesión se para hasta que se acepte. En una conversación que nunca la tuvo, el
+    // permiso vale para esa conversación; en una que ya la tuvo, cada vuelta atrás se pregunta de nuevo.
+    if (!pq && !acepta && (c.pqVisto || !c.clasicaAceptada)) {
       const yaParada = !!c.clasicaPendiente; c.clasicaPendiente = { suEf, efMia }; c.sesion = null;
-      if (!yaParada) vigila(c, T('Sesión sin protección postcuántica parada: esta conversación ya la tenía. Solo sigue si tú lo aceptas.'), 'mal');
+      if (!yaParada) vigila(c, c.pqVisto ? T('Sesión sin protección postcuántica parada: esta conversación ya la tenía. Solo sigue si tú lo aceptas.') : T('Sesión sin protección postcuántica parada: la otra persona usa una versión anterior. Solo sigue si tú lo aceptas.'), 'mal');
       pintaCabecera(c); return;
     }
     c.clasicaPendiente = null;
@@ -558,7 +561,12 @@
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
     else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo el cifrado…');
     else txt = T('Cifrada de extremo a extremo') + ' · ' + (c.sesion.pq ? T('postcuántica') + ' · ' : T('sin protección postcuántica') + ' · ') + (c.verificada ? T('verificada') : T('sin verificar'));
-    const pqa = $('#cpq'); if (pqa) pqa.hidden = !c.clasicaPendiente;
+    const pqa = $('#cpq');
+    if (pqa) {
+      pqa.hidden = !c.clasicaPendiente;
+      const sp = pqa.querySelector('span');
+      if (sp && c.clasicaPendiente) sp.textContent = c.pqVisto ? T('La otra persona no ha usado la protección postcuántica. Esta conversación ya la tenía, así que la he parado.') : T('La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.');
+    }
     if (c.huella && !c.verificada) conf.classList.add('gc-sin-verificar');
     conf.textContent = txt;
   }
@@ -724,7 +732,13 @@
     if (proEmpezar) proEmpezar.addEventListener('click', () => { const ini = $('#inicio'); if (ini) ini.scrollTo({ top: 0, behavior: 'smooth' }); $('#nueva').click(); });
     // ronda 55: la persona acepta, a sabiendas, una sesión sin protección postcuántica (la otra persona tiene una versión anterior)
     const pqSi = $('#cpq-si');
-    if (pqSi) pqSi.addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (!c || !c.clasicaPendiente) return; const p = c.clasicaPendiente; vigila(c, T('Has aceptado seguir sin protección postcuántica en esta sesión.'), 'info'); enCola(c, () => derivaSesion(c, p.suEf, p.efMia, null, true)); });
+    if (pqSi) pqSi.addEventListener('click', () => {
+      const c = CONVS.get(ACTUAL); if (!c || !c.clasicaPendiente) return; const p = c.clasicaPendiente;
+      // en una conversación que nunca tuvo la capa postcuántica, el permiso queda para esa conversación
+      if (!c.pqVisto) { c.clasicaAceptada = true; guardaConv(c); vigila(c, T('Has aceptado seguir sin protección postcuántica en esta conversación.'), 'info'); }
+      else vigila(c, T('Has aceptado seguir sin protección postcuántica en esta sesión.'), 'info');
+      enCola(c, () => derivaSesion(c, p.suEf, p.efMia, null, true));
+    });
     // dueño, 10:53: «todas las páginas tienen que tener un botón de volver a donde estás»: a NÚCLEO si se vino desde NÚCLEO,
     // si no, al inicio (la portada)
     try { const v = sessionStorage.getItem('guardiana-vuelta') === 'nucleo', a = $('#volver'); if (a) { a.href = v ? '/orbita/?nucleo=pide' : '/orbita/'; const sp = a.querySelector('span'); if (sp) sp.textContent = v ? 'Regresar a NÚCLEO' : 'Inicio'; a.setAttribute('aria-label', v ? 'Regresar a NÚCLEO' : 'Volver al inicio'); } } catch (_) {}
