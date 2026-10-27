@@ -6,7 +6,7 @@
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src blob:; connect-src 'self' https://motor.guardianagroup.com wss://motor.guardianagroup.com https://motor-am.guardianagroup.com wss://motor-am.guardianagroup.com http://127.0.0.1:* ws://127.0.0.1:* http://localhost:* ws://localhost:*; worker-src 'none'; frame-ancestors 'self'; form-action 'none'; base-uri 'none'">
 <meta name="theme-color" content="#06080C">
-<meta name="description" content="GUARDIANA Comunicaciones: chat, llamadas de voz y vídeo y archivos cifrados de extremo a extremo, desde el navegador. Nada se guarda en servidores.">
+<meta name="description" content="GUARDIANA Comunicaciones: chat, llamadas de voz y vídeo y archivos cifrados de extremo a extremo entre dos navegadores. Los servidores no guardan mensajes ni archivos.">
 <title>GUARDIANA · Comunicaciones</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -36,7 +36,7 @@
     <ul class="convs" id="convs" aria-label="Conversaciones"></ul>
     <p class="vacio" id="sinconvs">Aún no hay conversaciones. Crea una invitación y mándasela a la otra persona por donde quieras: al abrirla, ya estaréis conectados.</p>
     <footer class="pie">
-      <span>Cifrado de extremo a extremo en tu navegador. Nada se guarda en servidores.</span>
+      <span>Cifrado de extremo a extremo entre navegadores. Nuestros servidores no guardan mensajes ni archivos.</span>
       <a href="/terminos.html#comunicaciones" target="_blank" rel="noopener">Cómo funciona</a>
     </footer>
   </aside>
@@ -45,13 +45,19 @@
     <div class="portada" id="portada">
       <div class="anillo" aria-hidden="true"></div>
       <h1>Habla sin testigos</h1>
-      <p>Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo pasa bytes que no puede leer y no guarda nada. Al destruir una conversación, desaparece en los dos lados.</p>
+      <p>Chat, llamadas de voz y vídeo y archivos, cifrados de extremo a extremo entre dos navegadores. El relé de GUARDIANA solo encamina tramas cifradas que no puede descifrar: ve datos de conexión, no contenido, y no guarda historial. «Destruir» borra la conversación aquí y pide el borrado en el otro navegador.</p>
       <div class="pasos">
         <div><b>1</b><span>Crea una invitación: un enlace o un código QR.</span></div>
         <div><b>2</b><span>La otra persona lo abre en su navegador.</span></div>
         <div><b>3</b><span>Comprobad juntos el número de seguridad y hablad.</span></div>
       </div>
       <p class="nota">Las dos personas tienen que estar con la página abierta para que los mensajes lleguen: no hay buzón en ningún servidor. Lo pendiente espera en tu equipo y sale cuando la otra persona entra.</p>
+      <details class="limites"><summary>Qué protege y qué no</summary><ul>
+        <li>No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.</li>
+        <li>Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.</li>
+        <li>Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.</li>
+        <li>Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.</li>
+      </ul></details>
     </div>
 
     <div class="conv" id="conv" hidden>
@@ -79,7 +85,7 @@
   <div class="gc-hoja-caja caja">
     <div class="gc-asa"></div>
     <h2 class="gc-hoja-titulo" id="h-invita-t">Invitación<small>Vale para una persona</small></h2>
-    <p class="t">Manda este enlace por donde quieras (o enseña el código): al abrirlo en su navegador, la otra persona entra en esta conversación. Todo lo que hace falta viaja tras «#», que los navegadores no envían a ningún servidor.</p>
+    <p class="t">Manda este enlace (o enseña el código) por un canal de confianza: quien tenga el enlace puede entrar. El secreto viaja tras «#», que el navegador no manda a nuestro servidor.</p>
     <div class="qr" id="qr" aria-label="Código QR de la invitación"></div>
     <div class="enlace"><input class="campo" id="enlace" readonly aria-label="Enlace de invitación" translate="no"><button type="button" class="boton principal" id="copiar">Copiar</button></div>
     <p class="t" id="invita-estado">Esperando a que la otra persona abra el enlace…</p>
@@ -106,13 +112,13 @@
     <h2 class="gc-hoja-titulo" id="h-escudo-t">Seguridad<small id="escudo-con"></small></h2>
     <ul class="gc-escudo" id="escudo-lista"></ul>
     <h3 class="sub">Número de seguridad</h3>
-    <p class="t">Si los dos veis el mismo número (por teléfono o en persona), nadie se ha puesto en medio. Entonces marca «Verificada».</p>
+    <p class="t">Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».</p>
     <pre class="numero" id="numero" translate="no">—</pre>
     <label class="interruptor"><input type="checkbox" id="verificada"><span>Verificada: he comprobado el número con la otra persona</span></label>
     <h3 class="sub">Nombre que ves</h3>
     <input class="campo" id="cnombre-edit" maxlength="40" aria-label="Nombre de la otra persona" placeholder="Nombre">
     <div class="fila"><button type="button" class="boton" id="escudo-cerrar">Cerrar</button><button type="button" class="boton peligro" id="destruir">Destruir conversación</button></div>
-    <p class="t" id="destruir-nota" hidden>Se borra aquí y en el navegador de la otra persona (si está conectada ahora; si no, en cuanto entre). No se puede deshacer.</p>
+    <p class="t" id="destruir-nota" hidden>Se borra aquí y se pide el borrado en el navegador de la otra persona (si está conectada; si no, en cuanto entre). No alcanza lo que ya haya guardado en su disco. No se puede deshacer.</p>
   </div>
 </div>
 
