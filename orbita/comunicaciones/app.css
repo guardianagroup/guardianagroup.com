@@ -295,3 +295,24 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .grande:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
 @media (prefers-reduced-motion:reduce){.grande:hover{transform:none}}
 @media (max-width:560px){.barra .barra-t{display:none}}
+
+/* «¿Sabías que…?» de Comunicaciones (dueño, 27 Oct 2026, 13:24): abajo a la derecha en pantallas anchas; en las
+   estrechas, debajo de los botones. Cifras de dinero en ámbar; espionaje, filtraciones y redes, en coral. */
+.sabias-com{box-sizing:border-box;width:min(440px,100%);margin-top:26px;padding:16px 18px 12px;border-radius:16px;border:1px solid rgba(156,195,228,.22);background:rgba(12,18,26,.86);text-align:left;box-shadow:0 24px 70px -30px rgba(0,0,0,.9);transition:border-color .2s}
+.sabias-com:hover{border-color:rgba(156,195,228,.45)}
+.sabias-com.sc-cambia .sc-cifra,.sabias-com.sc-cambia .sc-t{opacity:0}
+.sc-k{display:flex;align-items:center;gap:8px;margin:0;font:600 10.5px/1.4 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.28em;color:#9CC3E4}
+.sc-punto{flex:none;width:6px;height:6px;border-radius:50%;background:#E07A6C;box-shadow:0 0 10px rgba(224,122,108,.85)}
+.sc-cifra{margin:10px 0 0;font:300 32px/1.05 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:-.01em;color:#F4F6F8;transition:opacity .22s ease}
+.sc-cifra[data-tema="dinero"],.sc-cifra[data-tema="suplantacion"]{color:#F0C77F}
+.sc-cifra[data-tema="espionaje"],.sc-cifra[data-tema="filtraciones"],.sc-cifra[data-tema="redes"]{color:#E07A6C}
+.sc-t{margin:8px 0 0;font-size:14px;line-height:1.55;color:#dce5ed;min-height:4.65em;transition:opacity .22s ease}
+.sc-pie{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(156,195,228,.12)}
+.sc-v{font:500 10px/1.4 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#7f93a6}
+.sc-nav{display:inline-flex;align-items:center;gap:6px}
+.sc-n{min-width:4.2em;text-align:center;font:500 11px/1 'IBM Plex Mono',ui-monospace,monospace;color:#a9bccd}
+.sc-b{appearance:none;cursor:pointer;display:inline-grid;place-items:center;width:30px;height:30px;padding:0;border-radius:50%;border:1px solid rgba(156,195,228,.28);background:rgba(10,14,20,.72);color:#dbe9f4;font:500 16px/1 'IBM Plex Sans',system-ui,sans-serif;transition:background .15s,border-color .15s}
+.sc-b:hover{background:rgba(156,195,228,.14);border-color:rgba(156,195,228,.55)}
+.sc-b:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+@media (min-width:1280px) and (min-height:700px){.sabias-com{position:fixed;right:24px;bottom:24px;z-index:5;width:360px;margin:0}}
+@media (prefers-reduced-motion:reduce){.sc-cifra,.sc-t{transition:none}}
