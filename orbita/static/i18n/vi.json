@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "ZERO đã kiểm tra: không có mối nguy đã biết",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Trang web yêu cầu xác nhận bạn là người; trong lúc đó ZERO canh chừng",
   "Lo que ZERO ha visto:": "Những gì ZERO thấy:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Bạn đã vào và tự chịu trách nhiệm. ZERO vẫn tiếp tục canh chừng."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Bạn đã vào và tự chịu trách nhiệm. ZERO vẫn tiếp tục canh chừng.",
+  "Continuar en ZERO": "Tiếp tục trong ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Việc duyệt web vẫn được cách ly khỏi thiết bị của bạn, nhưng những gì bạn nhập sẽ đến được trang web này.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Khi rủi ro nghiêm trọng, ZERO không cho vào. Đó là vì an toàn của bạn."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

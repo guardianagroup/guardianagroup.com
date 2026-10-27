@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "Zkontrolováno ZERO: žádná známá nebezpečí",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Web chce potvrdit, že jsi člověk; ZERO mezitím hlídá",
   "Lo que ZERO ha visto:": "Co ZERO vidělo:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Vstup na vlastní odpovědnost. ZERO dál hlídá."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Vstup na vlastní odpovědnost. ZERO dál hlídá.",
+  "Continuar en ZERO": "Pokračovat v ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Prohlížení zůstává izolované od tvého zařízení, ale co napíšeš, dostane tento web.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Při vážném riziku tě ZERO dovnitř nepustí. Je to pro tvou bezpečnost."
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

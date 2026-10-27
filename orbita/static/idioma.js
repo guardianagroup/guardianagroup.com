@@ -2395,6 +2395,10 @@
     "La web pide confirmar que eres humano; ZERO vigila mientras pasas": ["The site asks you to confirm you are human; ZERO keeps watch while you do", "O site pede para confirmar que você é humano; o ZERO vigia enquanto você passa"],
     "Lo que ZERO ha visto:": ["What ZERO saw:", "O que o ZERO viu:"],
     "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": ["You went in at your own risk. ZERO keeps watching.", "Você entrou por sua conta e risco. O ZERO continua vigiando."],
+    // Ante un riesgo grave, ZERO no deja entrar (dueño 18:40, 27 Oct 2026; ronda 67)
+    "Continuar en ZERO": ["Continue in ZERO", "Continuar no ZERO"],
+    "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": ["Browsing stays isolated from your device, but anything you type will reach this website.", "A navegação continua isolada do seu dispositivo, mas o que você digitar chegará a este site."],
+    "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": ["When the risk is serious, ZERO won’t let you in. It’s for your safety.", "Diante de um risco grave, o ZERO não deixa entrar. É para a sua segurança."],
   };
   const PAISES_EXTRA = { 'Yahoo Japón': ['Yahoo Japan', 'Yahoo Japão'] };
   Object.assign(D, PAISES_EXTRA);

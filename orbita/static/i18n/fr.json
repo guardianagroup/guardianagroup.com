@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "Vérifié par ZERO : aucun danger connu",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Le site demande de confirmer que tu es humain ; ZERO veille pendant ce temps",
   "Lo que ZERO ha visto:": "Ce que ZERO a vu :",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Tu as choisi d’entrer à tes risques. ZERO continue de veiller."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Tu as choisi d’entrer à tes risques. ZERO continue de veiller.",
+  "Continuar en ZERO": "Continuer dans ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "La navigation reste isolée de ton appareil, mais ce que tu saisis parviendra à ce site.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Face à un risque grave, ZERO ne te laisse pas entrer. C’est pour ta sécurité."
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

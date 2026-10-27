@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "Athugað af ZERO: engar þekktar hættur",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Vefurinn biður þig að staðfesta að þú sért manneskja; ZERO stendur vörð á meðan",
   "Lo que ZERO ha visto:": "Það sem ZERO sá:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Þú fórst inn á eigin ábyrgð. ZERO heldur áfram að vaka."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Þú fórst inn á eigin ábyrgð. ZERO heldur áfram að vaka.",
+  "Continuar en ZERO": "Halda áfram í ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Vafrið er áfram einangrað frá tækinu þínu, en það sem þú skrifar berst þessum vef.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Þegar hættan er alvarleg hleypir ZERO þér ekki inn. Það er fyrir öryggi þitt."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

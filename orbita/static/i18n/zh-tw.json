@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "ZERO 已檢查：未發現已知危險",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "網站要求你確認自己是真人；在此期間 ZERO 會守護",
   "Lo que ZERO ha visto:": "ZERO 看到的情況：",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "你已自行承擔風險進入。ZERO 繼續守護。"
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "你已自行承擔風險進入。ZERO 繼續守護。",
+  "Continuar en ZERO": "在 ZERO 中繼續",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "瀏覽仍與你的裝置隔離，但你輸入的內容會傳到這個網站。",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "遇到嚴重風險時，ZERO 不會讓你進入。這是為了你的安全。"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "بررسی‌شده توسط ZERO: بدون خطر شناخته‌شده",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "سایت می‌خواهد تأیید کنید که انسان هستید؛ ZERO در این مدت نگهبانی می‌دهد",
   "Lo que ZERO ha visto:": "آنچه ZERO دید:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "با مسئولیت خودتان وارد شدید. ZERO همچنان مراقب است."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "با مسئولیت خودتان وارد شدید. ZERO همچنان مراقب است.",
+  "Continuar en ZERO": "ادامه در ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "مرور همچنان از دستگاه شما جداست، اما هرچه بنویسید به این وب‌سایت می‌رسد.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "در صورت خطر جدی، ZERO اجازهٔ ورود نمی‌دهد. این برای امنیت شماست."
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

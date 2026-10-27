@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "Kontrollerad av ZERO: inga kända faror",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "Webbplatsen ber dig bekräfta att du är en människa; ZERO håller vakt under tiden",
   "Lo que ZERO ha visto:": "Det ZERO såg:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Du gick in på egen risk. ZERO fortsätter att hålla vakt."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "Du gick in på egen risk. ZERO fortsätter att hålla vakt.",
+  "Continuar en ZERO": "Fortsätt i ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "Surfandet förblir isolerat från din enhet, men det du skriver når den här webbplatsen.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "Vid en allvarlig risk släpper ZERO inte in dig. Det är för din säkerhet."
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

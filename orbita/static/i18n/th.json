@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "ZERO ตรวจแล้ว: ไม่พบอันตรายที่รู้จัก",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "เว็บไซต์ขอให้ยืนยันว่าคุณเป็นมนุษย์ ระหว่างนี้ ZERO เฝ้าระวังอยู่",
   "Lo que ZERO ha visto:": "สิ่งที่ ZERO เห็น:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "คุณเข้าไปโดยรับผิดชอบเอง ZERO ยังคงเฝ้าระวัง"
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "คุณเข้าไปโดยรับผิดชอบเอง ZERO ยังคงเฝ้าระวัง",
+  "Continuar en ZERO": "ดำเนินการต่อใน ZERO",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "การท่องเว็บยังคงแยกจากอุปกรณ์ของคุณ แต่สิ่งที่คุณพิมพ์จะไปถึงเว็บไซต์นี้",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "เมื่อมีความเสี่ยงร้ายแรง ZERO จะไม่ให้เข้า เพื่อความปลอดภัยของคุณ"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

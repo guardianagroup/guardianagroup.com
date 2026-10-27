@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "ZERO যাচাই করেছে: কোনো পরিচিত বিপদ নেই",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "সাইটটি নিশ্চিত হতে চায় যে আপনি মানুষ; এর মধ্যে ZERO নজর রাখে",
   "Lo que ZERO ha visto:": "ZERO যা দেখেছে:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "আপনি নিজের দায়িত্বে ঢুকেছেন। ZERO নজর রাখা চালিয়ে যাচ্ছে।"
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "আপনি নিজের দায়িত্বে ঢুকেছেন। ZERO নজর রাখা চালিয়ে যাচ্ছে।",
+  "Continuar en ZERO": "ZERO-তে চালিয়ে যান",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "ব্রাউজিং আপনার ডিভাইস থেকে আলাদা থাকে, কিন্তু আপনি যা লিখবেন তা এই ওয়েবসাইটে পৌঁছাবে।",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "গুরুতর ঝুঁকিতে ZERO ঢুকতে দেয় না। এটা আপনার নিরাপত্তার জন্য।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

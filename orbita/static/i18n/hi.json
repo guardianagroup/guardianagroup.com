@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "ZERO द्वारा जाँची गई: कोई ज्ञात ख़तरा नहीं",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "साइट पुष्टि चाहती है कि आप इंसान हैं; इस बीच ZERO निगरानी करता है",
   "Lo que ZERO ha visto:": "ZERO ने क्या देखा:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "आप अपनी ज़िम्मेदारी पर अंदर गए। ZERO निगरानी जारी रखता है।"
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "आप अपनी ज़िम्मेदारी पर अंदर गए। ZERO निगरानी जारी रखता है।",
+  "Continuar en ZERO": "ZERO में जारी रखें",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "ब्राउज़िंग आपके डिवाइस से अलग रहती है, लेकिन आप जो लिखेंगे वह इस वेबसाइट तक पहुँचेगा।",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "गंभीर ख़तरे में ZERO अंदर जाने नहीं देता। यह आपकी सुरक्षा के लिए है।"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

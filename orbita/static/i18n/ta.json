@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "ZERO சரிபார்த்தது: அறியப்பட்ட ஆபத்து இல்லை",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "நீங்கள் மனிதர் என்பதை உறுதிப்படுத்தத் தளம் கேட்கிறது; அதுவரை ZERO கண்காணிக்கிறது",
   "Lo que ZERO ha visto:": "ZERO பார்த்தவை:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "நீங்கள் உங்கள் பொறுப்பில் உள்ளே சென்றீர்கள். ZERO தொடர்ந்து கண்காணிக்கிறது."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "நீங்கள் உங்கள் பொறுப்பில் உள்ளே சென்றீர்கள். ZERO தொடர்ந்து கண்காணிக்கிறது.",
+  "Continuar en ZERO": "ZERO-வில் தொடரவும்",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "உலாவல் உங்கள் சாதனத்திலிருந்து தனிமைப்படுத்தப்பட்டே இருக்கும், ஆனால் நீங்கள் தட்டச்சு செய்வது இந்த இணையதளத்தைச் சென்றடையும்.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "கடுமையான ஆபத்து இருந்தால் ZERO உள்ளே நுழைய விடாது. இது உங்கள் பாதுகாப்புக்காக."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

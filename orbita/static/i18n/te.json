@@ -2429,7 +2429,10 @@
   "Comprobada por ZERO: sin peligros conocidos": "ZERO తనిఖీ చేసింది: తెలిసిన ప్రమాదాలు లేవు",
   "La web pide confirmar que eres humano; ZERO vigila mientras pasas": "మీరు మనిషి అని నిర్ధారించమని సైట్ అడుగుతోంది; ఈలోగా ZERO కాపలా కాస్తుంది",
   "Lo que ZERO ha visto:": "ZERO చూసినవి:",
-  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "మీరు మీ బాధ్యతపై లోపలికి వెళ్లారు. ZERO కాపలా కొనసాగిస్తోంది."
+  "Has entrado bajo tu responsabilidad. ZERO sigue vigilando.": "మీరు మీ బాధ్యతపై లోపలికి వెళ్లారు. ZERO కాపలా కొనసాగిస్తోంది.",
+  "Continuar en ZERO": "ZEROలో కొనసాగించండి",
+  "La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.": "బ్రౌజింగ్ మీ పరికరం నుండి వేరుగానే ఉంటుంది, కానీ మీరు టైప్ చేసేది ఈ వెబ్‌సైట్‌కు చేరుతుంది.",
+  "Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.": "తీవ్రమైన ప్రమాదం ఉంటే ZERO లోపలికి వెళ్లనివ్వదు. ఇది మీ భద్రత కోసమే."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",
