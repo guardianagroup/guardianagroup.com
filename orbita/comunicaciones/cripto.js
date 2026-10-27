@@ -1,4 +1,5 @@
-// GUARDIANA · Comunicaciones · criptografía de la página (26 Oct 2026). Solo Web Crypto del navegador; sin librerías.
+// GUARDIANA · Comunicaciones · criptografía de la página (26 Oct 2026). Web Crypto del navegador para todo lo clásico;
+// ML-KEM-768 (FIPS 203) con @noble/post-quantum 0.7.1, vendida en pq-mlkem.js y servida desde este mismo sitio.
 //
 // - Identidad: un par ECDSA P-256 (firma) y un par ECDH P-256 (acuerdo), creados aquí y guardados en IndexedDB
 //   como claves no exportables. Su huella (SHA-256 de las dos públicas) es el «número de seguridad».
@@ -8,6 +9,11 @@
 //   clave de presentación; el secreto de sesión mezcla tres acuerdos ECDH (efímera–efímera, identidad–efímera y
 //   efímera–identidad) con HKDF-SHA256. De ahí salen dos cadenas (una por sentido) que avanzan con cada mensaje
 //   (HMAC-SHA256): una clave distinta por mensaje, y la anterior se olvida. Cada sesión nueva renueva todo.
+// - Híbrido poscuántico (v3, 27 Oct 2026): quien inicia añade a su presentación una clave ML-KEM-768 nueva; quien
+//   responde encapsula a esa clave y devuelve el texto cifrado en su respuesta. Las dos presentaciones llevan además
+//   una segunda firma ECDSA que cubre esos campos. El secreto ML-KEM entra en el HKDF junto a los tres ECDH (etiqueta
+//   «sesión v3»): para leer una sesión hay que romper a la vez el ECDH P-256 y ML-KEM-768. Con una versión anterior
+//   (sin esos campos) la sesión es la v2 de siempre y queda marcada como no poscuántica (pq: false).
 // - Mensajes y trozos de archivo: AES-256-GCM, nonce de 12 bytes (número de mensaje), datos asociados = cabecera.
 'use strict';
 (function (raiz) {
@@ -93,17 +99,49 @@
   // orden DH(ef_A, ef_B) ‖ DH(id_A, ef_B) ‖ DH(ef_A, id_B) ‖ psk (secreto de la invitación), sal = sala, e info = la
   // transcripción (versión, huellas y efímeras de A y de B). Salen 96 bytes: cadena A→B, cadena B→A y el hash de sesión
   // (32 bytes, va entero en los datos asociados de cada mensaje; 8 en la cabecera de red).
-  async function sesion(id, ef, suyo, sala, inicio, psk, miHuella, suHuella) {
+  // v3 (híbrida, con pq = { ss, ek, ct }): la misma mezcla con el secreto ML-KEM-768 entre los ECDH y el psk, y la info
+  // con su etiqueta y las huellas SHA-256 de la clave ML-KEM de A y del texto cifrado de B.
+  async function sesion(id, ef, suyo, sala, inicio, psk, miHuella, suHuella, pq) {
     const efef = await dh(ef.k.privateKey, suyo.ef);
     const idA_efB = inicio ? await dh(id.acuerdo.privateKey, suyo.ef) : await dh(ef.k.privateKey, suyo.acuerdoPub);
     const efA_idB = inicio ? await dh(ef.k.privateKey, suyo.acuerdoPub) : await dh(id.acuerdo.privateKey, suyo.ef);
-    const ikm = cat(efef, idA_efB, efA_idB, u8(psk || new Uint8Array(32)));
+    const ikm = pq ? cat(efef, idA_efB, efA_idB, u8(pq.ss), u8(psk || new Uint8Array(32))) : cat(efef, idA_efB, efA_idB, u8(psk || new Uint8Array(32)));
     const hA = inicio ? u8(miHuella) : u8(suHuella), hB = inicio ? u8(suHuella) : u8(miHuella);
     const efA = inicio ? ef.pub : u8(suyo.ef), efB = inicio ? u8(suyo.ef) : ef.pub;
-    const info = 'GUARDIANA sesión v2\n' + hex(hA) + '\n' + hex(efA) + '\n' + hex(hB) + '\n' + hex(efB);
+    const info = pq
+      ? 'GUARDIANA sesión v3 ECDH-P256+ML-KEM-768\n' + hex(hA) + '\n' + hex(efA) + '\n' + hex(hB) + '\n' + hex(efB) + '\n' + hex(await sha256(pq.ek)) + '\n' + hex(await sha256(pq.ct))
+      : 'GUARDIANA sesión v2\n' + hex(hA) + '\n' + hex(efA) + '\n' + hex(hB) + '\n' + hex(efB);
     const r = await hkdf(ikm, deHex(sala), info, 96);
+    ikm.fill(0); efef.fill(0); idA_efB.fill(0); efA_idB.fill(0);
     const ab = new Uint8Array(r.subarray(0, 32)), ba = new Uint8Array(r.subarray(32, 64)), hash = new Uint8Array(r.subarray(64, 96));
-    return { envio: inicio ? ab : ba, recibo: inicio ? ba : ab, hash };
+    r.fill(0);
+    return { envio: inicio ? ab : ba, recibo: inicio ? ba : ab, hash, pq: !!pq };
+  }
+
+  // ---- ML-KEM-768 (FIPS 203), en híbrido con el ECDH ----
+  // pq-mlkem.js deja window.GuardianaMLKEM768; si no ha cargado, todo sigue como v2 (solo ECDH) y la sesión no es pq.
+  const KEM_EK = 1184, KEM_DK = 2400, KEM_CT = 1088;
+  const kem = () => { const k = raiz.GuardianaMLKEM768; return k && typeof k.keygen === 'function' && typeof k.encapsulate === 'function' && typeof k.decapsulate === 'function' ? k : null; };
+  const hayPQ = () => !!kem();
+  // un par nuevo por presentación de quien inicia: { ek (pública, 1184 bytes), dk (privada, 2400 bytes) }
+  function kemPar() { const k = kem(); if (!k) return null; const { publicKey, secretKey } = k.keygen(); return { ek: new Uint8Array(publicKey), dk: new Uint8Array(secretKey) }; }
+  // quien responde: encapsula a la clave de quien inicia (la librería comprueba longitud y módulo, FIPS 203 §7.2)
+  function kemEncapsula(ek) { const k = kem(); if (!k || u8(ek).length !== KEM_EK) throw new Error('ML-KEM no disponible'); const { cipherText, sharedSecret } = k.encapsulate(u8(ek)); return { ct: new Uint8Array(cipherText), ss: new Uint8Array(sharedSecret) }; }
+  // quien inicia: abre el texto cifrado con su clave privada de esa presentación (rechazo implícito si no es válido)
+  function kemAbre(ct, dk) { const k = kem(); if (!k || u8(ct).length !== KEM_CT || u8(dk).length !== KEM_DK) throw new Error('ML-KEM no disponible'); return new Uint8Array(k.decapsulate(u8(ct), u8(dk))); }
+
+  // ---- lo que firma cada presentación ----
+  // v2: exactamente los bytes de siempre (los que comprueban las versiones anteriores). v3: otra etiqueta y, además, la
+  // clave ML-KEM de quien inicia o, en la respuesta, la huella de la clave a la que contesta y su texto cifrado.
+  // Una presentación nueva lleva las dos firmas: la v2 («sig») para quien aún no sabe de ML-KEM y la v3 («sig3»).
+  function datosInicia(sala, firmaPub, acuerdoPub, ef, epoca, ek) {
+    return ek ? cat(te.encode('GUARDIANA v3 INICIA\n' + sala + '\n'), u8(firmaPub), u8(acuerdoPub), u8(ef), u8(epoca), u8(ek))
+      : cat(te.encode('GUARDIANA v2 INICIA\n' + sala + '\n'), u8(firmaPub), u8(acuerdoPub), u8(ef), u8(epoca));
+  }
+  async function datosResponde(sala, firmaPub, acuerdoPub, ef, epoca, respEpoca, suHuella, suEf, pq) {
+    const base = [u8(firmaPub), u8(acuerdoPub), u8(ef), u8(epoca), u8(respEpoca), u8(suHuella), u8(suEf)];
+    return pq ? cat(te.encode('GUARDIANA v3 RESPONDE\n' + sala + '\n'), ...base, await sha256(pq.ek), u8(pq.ct))
+      : cat(te.encode('GUARDIANA v2 RESPONDE\n' + sala + '\n'), ...base);
   }
   // Una cadena: avanza con cada mensaje; guarda hasta 256 claves saltadas (mensajes que llegan desordenados).
   // Los pasos van uno detrás de otro (cola de promesas): dos mensajes sellados a la vez nunca comparten clave.
@@ -126,5 +164,5 @@
     };
   }
 
-  raiz.GuardianaCripto = { te, td, u8, cat, b64u, deB64u, hex, deHex, azar, sha256, hkdf, hmac, aes, sella, abre, nonce, creaIdentidad, huella, numeroSeguridad, firma, verifica, deSemilla, nuevaSemilla, efimera, sesion, cadena, claveDeCodigo, nuevoCodigo };
+  raiz.GuardianaCripto = { te, td, u8, cat, b64u, deB64u, hex, deHex, azar, sha256, hkdf, hmac, aes, sella, abre, nonce, creaIdentidad, huella, numeroSeguridad, firma, verifica, deSemilla, nuevaSemilla, efimera, sesion, cadena, claveDeCodigo, nuevoCodigo, hayPQ, kemPar, kemEncapsula, kemAbre, datosInicia, datosResponde, KEM_EK, KEM_DK, KEM_CT };
 })(typeof window !== 'undefined' ? window : globalThis);

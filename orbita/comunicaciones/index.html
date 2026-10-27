@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261027c">
+<link rel="stylesheet" href="app.css?v=20261027d">
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -26,7 +26,7 @@
 
 <main class="app" id="app">
   <section class="inicio" id="inicio">
-    <div class="anillo" aria-hidden="true"></div>
+    <canvas class="red-nucleo" aria-hidden="true"></canvas><!-- dueño, 10:20: la red de NÚCLEO en vez del círculo -->
     <h1>Chat y archivos encriptados</h1>
     <p class="t">Chatea y envía archivos encriptados de PC a PC. Al terminar, la conversación se borra en los dos.</p>
 
@@ -111,7 +111,7 @@
           <details class="pro-ficha">
             <summary>Ficha técnica para responsables de seguridad</summary>
             <ul>
-              <li><b>Criptografía</b><span>Web Crypto nativa del navegador, sin librerías de terceros. Identidad con ECDSA P-256 (firma) y ECDH P-256 (acuerdo); claves privadas no exportables.</span></li>
+              <li><b>Criptografía</b><span>Web Crypto nativa del navegador para firma, acuerdo ECDH y cifrado; acuerdo de claves híbrido ECDH P-256 + ML-KEM-768 (FIPS 203, librería abierta @noble/post-quantum servida desde este sitio). Identidad con ECDSA P-256 (firma) y ECDH P-256 (acuerdo); claves privadas no exportables.</span></li>
               <li><b>Establecimiento de sesión</b><span>Presentaciones firmadas y triple acuerdo ECDH (efímera–efímera, identidad–efímera, efímera–identidad) combinado con HKDF-SHA256; material nuevo en cada sesión.</span></li>
               <li><b>Contenido</b><span>AES-256-GCM, con una clave por mensaje derivada con cadenas HMAC-SHA256; la anterior se descarta.</span></li>
               <li><b>Archivos</b><span>Trozos de 192 KB cifrados uno a uno; quien envía nunca carga el archivo entero y, con Chrome o Edge, quien recibe lo escribe en disco según llega.</span></li>
@@ -188,9 +188,11 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261027p2"></script>
-<script src="cripto.js?v=20261026c"></script>
+<script src="/orbita/static/idioma.js?v=20261027p3"></script>
+<script src="pq-mlkem.js?v=20261027a"></script>
+<script src="cripto.js?v=20261027a"></script>
+<script src="/orbita/static/red-nucleo.js?v=20261027a"></script>
 <script src="rele.js?v=20261026d"></script>
-<script src="app.js?v=20261027b"></script>
+<script src="app.js?v=20261027c"></script>
 </body>
 </html>
