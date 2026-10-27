@@ -336,7 +336,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   function abreMultas(b) {
     if (!cargaMul) cargaMul = new Promise((ok, mal) => {
       if (window.GuardianaMultas) { ok(); return; }
-      const s = document.createElement('script'); s.src = '/orbita/static/multas.js?v=20261027a'; s.async = true;
+      const s = document.createElement('script'); s.src = '/orbita/static/multas.js?v=20261027b'; s.async = true;
       s.onload = ok; s.onerror = () => { cargaMul = null; s.remove(); mal(new Error('multas')); };
       document.head.append(s);
     });

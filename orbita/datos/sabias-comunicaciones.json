@@ -1,0 +1,259 @@
+{
+ "nota": "«¿Sabías que…?» de Comunicaciones (dueño, 27 Oct 2026, 13:24: espionaje de chats, suplantación, dinero robado, robo de conversaciones). Ronda 57 de la agencia: ChatGPT y Gemini propusieron; cada dato lo confirman al menos dos voces (Claude comprobó cada uno con dos fuentes públicas). Las fuentes quedan aquí; en pantalla, «Datos verificados».",
+ "ui": {
+  "es": {
+   "k": "¿SABÍAS QUE…?",
+   "v": "Datos verificados",
+   "ant": "Anterior",
+   "sig": "Siguiente"
+  },
+  "en": {
+   "k": "DID YOU KNOW…?",
+   "v": "Verified facts",
+   "ant": "Previous",
+   "sig": "Next"
+  },
+  "pt": {
+   "k": "SABIA QUE…?",
+   "v": "Dados verificados",
+   "ant": "Anterior",
+   "sig": "Seguinte"
+  }
+ },
+ "sabias": [
+  {
+   "tema": "dinero",
+   "anio": 2025,
+   "cifra": {
+    "es": "20.870 M$",
+    "en": "$20.87B",
+    "pt": "US$ 20,87 bi"
+   },
+   "valor": 20870000000,
+   "moneda": "USD",
+   "es": "en 2025 se denunciaron al FBI pérdidas récord por delitos en internet: 20.870 millones de dólares?",
+   "en": "in 2025, a record $20.87 billion in internet crime losses was reported to the FBI?",
+   "pt": "em 2025 foram denunciadas ao FBI perdas recordes por crimes na internet: 20,87 bilhões de dólares?",
+   "fuentes": [
+    "https://www.theregister.com/2026/04/07/cybercrime_losses_reach_alltime_high/",
+    "https://helpnetsecurity.com/2026/04/07/online-crime-financial-losses-fbi-report"
+   ],
+   "voces": [
+    "gemini",
+    "claude"
+   ]
+  },
+  {
+   "tema": "suplantacion",
+   "anio": 2025,
+   "cifra": {
+    "es": "3.500 M$",
+    "en": "$3.5B",
+    "pt": "US$ 3,5 bi"
+   },
+   "valor": 3500000000,
+   "moneda": "USD",
+   "es": "en 2025, en EE. UU. se denunciaron pérdidas de 3.500 millones de dólares por estafas de suplantación: falsos bancos, empresas y organismos?",
+   "en": "in 2025, people in the US reported losing $3.5 billion to impostor scams: fake banks, companies and government agencies?",
+   "pt": "em 2025, nos EUA, foram denunciadas perdas de 3,5 bilhões de dólares em golpes de falsa identidade: falsos bancos, empresas e órgãos públicos?",
+   "fuentes": [
+    "https://ftc.gov/news-events/news/press-releases/2026/06/ftc-data-show-people-reported-losing-3-point-5-billion-imposter-scams-2025",
+    "https://www.bitdefender.com/en-au/blog/hotforsecurity/americans-lost-3-5-billion-imposter-scams-ftc"
+   ],
+   "voces": [
+    "chatgpt",
+    "gemini",
+    "claude"
+   ]
+  },
+  {
+   "tema": "dinero",
+   "anio": 2024,
+   "cifra": {
+    "es": "470 M$",
+    "en": "$470M",
+    "pt": "US$ 470 mi"
+   },
+   "valor": 470000000,
+   "moneda": "USD",
+   "es": "en 2024, en EE. UU. se denunciaron pérdidas de 470 millones de dólares por estafas que empezaron con un SMS, más de cinco veces las de 2020?",
+   "en": "in 2024, people in the US reported losing $470 million to scams that started with a text message, more than five times the 2020 figure?",
+   "pt": "em 2024, nos EUA, foram denunciadas perdas de 470 milhões de dólares em golpes que começaram com um SMS, mais de cinco vezes as de 2020?",
+   "fuentes": [
+    "https://www.ftc.gov/news-events/data-visualizations/data-spotlight/2025/04/top-text-scams-2024",
+    "https://www.ftc.gov/news-events/news/press-releases/2025/04/new-ftc-data-show-top-text-message-scams-2024-overall-losses-text-scams-hit-470-million"
+   ],
+   "voces": [
+    "chatgpt",
+    "gemini"
+   ]
+  },
+  {
+   "tema": "suplantacion",
+   "anio": 2024,
+   "cifra": {
+    "es": "25 M$",
+    "en": "$25M",
+    "pt": "US$ 25 mi"
+   },
+   "valor": 25000000,
+   "moneda": "USD",
+   "es": "en 2024, un empleado de Arup en Hong Kong transfirió 25 millones de dólares tras una videollamada en la que su jefe y sus colegas eran falsos, hechos con IA?",
+   "en": "in 2024, an Arup employee in Hong Kong transferred $25 million after a video call in which his boss and colleagues were AI-made fakes?",
+   "pt": "em 2024, um funcionário da Arup em Hong Kong transferiu 25 milhões de dólares após uma videochamada em que o chefe e os colegas eram falsos, feitos com IA?",
+   "fuentes": [
+    "https://scmp.com/news/hong-kong/law-and-crime/article/3263151/uk-multinational-arup-confirmed-victim-hk200-million-deepfake-scam-used-digital-version-cfo-dupe",
+    "https://abc17news.com/money/cnn-business-consumer/2024/05/16/british-engineering-giant-arup-revealed-as-25-million-deepfake-scam-victim/"
+   ],
+   "voces": [
+    "chatgpt",
+    "gemini"
+   ]
+  },
+  {
+   "tema": "espionaje",
+   "anio": 2025,
+   "cifra": {
+    "es": "≈90",
+    "en": "≈90",
+    "pt": "≈90"
+   },
+   "valor": 90,
+   "es": "en 2025, WhatsApp avisó a unas 90 personas, entre ellas periodistas, de que un programa espía de la empresa Paragon las había atacado?",
+   "en": "in 2025, WhatsApp warned around 90 people, including journalists, that spyware from the company Paragon had targeted them?",
+   "pt": "em 2025, o WhatsApp avisou cerca de 90 pessoas, entre elas jornalistas, de que um programa espião da empresa Paragon as tinha atacado?",
+   "fuentes": [
+    "https://techcrunch.com/2025/01/31/whatsapp-says-it-disrupted-a-hacking-campaign-targeting-journalists-with-spyware",
+    "https://www.aljazeera.com/news/2025/1/31/whatsapp-says-its-users-targeted-by-israeli-spyware-company-paragon"
+   ],
+   "voces": [
+    "chatgpt",
+    "gemini"
+   ]
+  },
+  {
+   "tema": "redes",
+   "anio": 2024,
+   "cifra": {
+    "es": "",
+    "en": "",
+    "pt": ""
+   },
+   "es": "en diciembre de 2024, el FBI y la CISA recomendaron usar mensajería encriptada tras la intrusión de hackers chinos en operadoras de EE. UU.?",
+   "en": "in December 2024, the FBI and CISA recommended encrypted messaging after Chinese hackers broke into US phone carriers?",
+   "pt": "em dezembro de 2024, o FBI e a CISA recomendaram usar mensagens criptografadas após a invasão de hackers chineses em operadoras dos EUA?",
+   "fuentes": [
+    "https://techcrunch.com/2024/12/04/fbi-recommends-encrypted-messaging-apps-combat-chinese-hackers/",
+    "https://www.androidauthority.com/fbi-encrypted-chat-apps-salt-typhoon-3505548"
+   ],
+   "voces": [
+    "chatgpt",
+    "gemini"
+   ]
+  },
+  {
+   "tema": "espionaje",
+   "anio": 2025,
+   "cifra": {
+    "es": "≈1.400",
+    "en": "≈1,400",
+    "pt": "≈1.400"
+   },
+   "valor": 1400,
+   "es": "en 2025, un tribunal de EE. UU. prohibió a NSO Group, la creadora de Pegasus, atacar WhatsApp, tras atacar unas 1.400 cuentas en 2019?",
+   "en": "in 2025, a US court barred NSO Group, the maker of Pegasus, from targeting WhatsApp, after it attacked about 1,400 accounts in 2019?",
+   "pt": "em 2025, um tribunal dos EUA proibiu a NSO Group, criadora do Pegasus, de atacar o WhatsApp, depois de atacar cerca de 1.400 contas em 2019?",
+   "fuentes": [
+    "https://techcrunch.com/2025/10/18/spyware-maker-nso-group-blocked-from-whatsapp",
+    "https://www.securityweek.com/nso-ordered-to-stop-hacking-whatsapp-but-damages-cut-to-4-million/"
+   ],
+   "voces": [
+    "gemini",
+    "claude"
+   ]
+  },
+  {
+   "tema": "filtraciones",
+   "anio": 2024,
+   "cifra": {
+    "es": "≈110 M",
+    "en": "≈110M",
+    "pt": "≈110 mi"
+   },
+   "valor": 110000000,
+   "es": "en 2024, AT&T confirmó el robo de los registros de llamadas y SMS (con quién y cuándo) de casi todos sus clientes de móvil: unos 110 millones?",
+   "en": "in 2024, AT&T confirmed the theft of call and text records (who and when) for nearly all its mobile customers: about 110 million?",
+   "pt": "em 2024, a AT&T confirmou o roubo dos registros de chamadas e SMS (com quem e quando) de quase todos os seus clientes de celular: cerca de 110 milhões?",
+   "fuentes": [
+    "https://krebsonsecurity.com/2024/07/hackers-steal-phone-sms-records-for-nearly-all-att-customers/",
+    "https://siliconrepublic.com/enterprise/att-data-breach-nearly-all-cell-customers-snowflake"
+   ],
+   "voces": [
+    "gemini",
+    "claude"
+   ]
+  },
+  {
+   "tema": "dinero",
+   "anio": 2025,
+   "cifra": {
+    "es": "6,8 M",
+    "en": "6.8M",
+    "pt": "6,8 mi"
+   },
+   "valor": 6800000,
+   "es": "en el primer semestre de 2025, WhatsApp cerró más de 6,8 millones de cuentas ligadas a centros de estafas?",
+   "en": "in the first half of 2025, WhatsApp shut down more than 6.8 million accounts linked to scam centres?",
+   "pt": "no primeiro semestre de 2025, o WhatsApp fechou mais de 6,8 milhões de contas ligadas a centrais de golpes?",
+   "fuentes": [
+    "https://www.techrepublic.com/article/news-whatsapp-scams-meta/",
+    "https://www.capitalfm.co.ke/business/2025/08/whatsapp-deletes-over-6-8m-accounts-linked-to-scams-meta-says/"
+   ],
+   "voces": [
+    "chatgpt",
+    "claude"
+   ]
+  },
+  {
+   "tema": "filtraciones",
+   "anio": 2026,
+   "cifra": {
+    "es": "",
+    "en": "",
+    "pt": ""
+   },
+   "es": "en 2026, la inteligencia de Países Bajos alertó de que hackers rusos se hicieron con cuentas de Signal y WhatsApp de funcionarios con falsos avisos de soporte?",
+   "en": "in 2026, Dutch intelligence warned that Russian hackers took over officials' Signal and WhatsApp accounts with fake support messages?",
+   "pt": "em 2026, a inteligência da Holanda alertou que hackers russos tomaram contas de Signal e WhatsApp de funcionários com falsas mensagens de suporte?",
+   "fuentes": [
+    "https://english.aivd.nl/latest/news/2026/03/09/russia-targets-signal-and-whatsapp-accounts-in-cyber-campaign",
+    "https://www.helpnetsecurity.com/2026/03/09/signal-whatsapp-accounts-russian-hackers/"
+   ],
+   "voces": [
+    "chatgpt",
+    "claude"
+   ]
+  },
+  {
+   "tema": "espionaje",
+   "anio": 2026,
+   "cifra": {
+    "es": "≈200",
+    "en": "≈200",
+    "pt": "≈200"
+   },
+   "valor": 200,
+   "es": "en 2026, WhatsApp avisó a unas 200 personas, sobre todo en Italia, de que habían instalado una versión falsa de la aplicación con un programa espía?",
+   "en": "in 2026, WhatsApp warned about 200 people, mostly in Italy, that they had installed a fake version of the app containing spyware?",
+   "pt": "em 2026, o WhatsApp avisou cerca de 200 pessoas, sobretudo na Itália, de que tinham instalado uma versão falsa do aplicativo com um programa espião?",
+   "fuentes": [
+    "https://techcrunch.com/2026/04/01/whatsapp-notifies-hundreds-of-users-who-installed-a-fake-app-that-was-actually-government-spyware/",
+    "https://thehackernews.com/2026/04/whatsapp-alerts-200-users-after-fake.html"
+   ],
+   "voces": [
+    "chatgpt",
+    "claude"
+   ]
+  }
+ ]
+}
