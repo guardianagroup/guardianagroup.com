@@ -140,7 +140,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
   };
   const ETQ = {
     zero: 'Ir al navegador ZERO', planeta: 'Explorar el planeta', com: 'Chat encriptado', datos: 'Mis datos', 'que-es-guardiana': '¿Qué es GUARDIANA?',
-    'z-web': 'Abrir una web', 'z-buscar': 'Buscar en internet', 'z-radio': 'Ver la Radiografía', 'z-pdf': 'PDF de la web abierta', resumen: 'Resumen de mis datos en PDF', 'z-que': '¿Cómo funciona el navegador ZERO?', 'z-tor': 'Navegar con Tor',
+    'z-web': 'Ir a una web con el navegador ZERO', 'z-buscar': 'Buscar en internet', 'z-radio': 'Ver la Radiografía', 'z-pdf': 'PDF de la web abierta', resumen: 'Resumen de mis datos en PDF', 'z-que': '¿Cómo funciona el navegador ZERO?', 'z-tor': 'Navegar con Tor',
     'p-sub': 'Cables submarinos', 'p-fibra': 'Cables terrestres', 'p-puntos': 'Centros de datos', 'p-sat': 'Satélites', 'p-pais': 'Ir a un país', 'p-directo': 'Cortes en directo', 'p-que': '¿Qué es Órbita?',
     'c-crear': 'Crear una invitación', 'c-codigo': 'Tengo un código', 'c-que': 'Cómo funciona Comunicaciones',
     'd-corte': '¿Qué es un corte?', borrar: 'Borrar mis datos de este navegador', privacidad: 'Privacidad', seguridad: '¿Es seguro?', vpn: '¿Es una VPN?', precio: 'Precio', cuenta: '¿Necesito una cuenta?', idioma: 'Idioma', contacto: 'Hablar con una persona',
@@ -230,7 +230,7 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
       + '<button type="button" class="nuc-op" data-n="planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.</small></button>'
       + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Chatea y envía archivos encriptados de PC a PC.</small></button>'
       // dueño, 10:00: «añade uno más: pedir las cosas»; ronda 54 (ChatGPT y Astra): «Pídeselo a NÚCLEO»
-      + '<button type="button" class="nuc-op nuc-op-n" data-n="nucleo"><i translate="no">NÚCLEO</i><b>Pídeselo a NÚCLEO</b><small>Pídele que abra webs, consulte tus datos o prepare informes en PDF.</small></button>'
+      + '<button type="button" class="nuc-op nuc-op-n" data-n="nucleo"><i translate="no">NÚCLEO</i><b>Pídeselo a NÚCLEO</b><small>Pídele que te lleve al navegador ZERO, que consulte tus datos o que prepare informes en PDF.</small></button>'
       + '</div>'
       // dueño, 10:47: «arriba a la derecha, un enlace que diga qué es GUARDIANA» → la página de la historia con el planeta
       + '<a class="nuc-que nuc-paso" id="nuc-que" href="/conocer.html">¿Qué es GUARDIANA?</a>';
@@ -265,13 +265,13 @@ ${det.length ? `<h2>${esc(T('Cortes registrados'))}</h2><table><thead><tr><th>${
   function construyeSala() {
     const s = document.createElement('section');
     s.className = 'nuc-sala vacia'; s.id = 'nuc-sala'; s.hidden = true; s.setAttribute('aria-label', 'NÚCLEO');
+    // dueño, 11:00–11:01: fuera «Pídeselo a NÚCLEO» y el «NÚCLEO» de arriba; NÚCLEO no abre webs, te lleva al navegador ZERO
     s.innerHTML = '<header class="ns-cab"><button type="button" class="ns-boton" id="ns-inicio"><span aria-hidden="true">←</span> Inicio</button>'
-      + '<span class="ns-marca" translate="no">NÚCLEO</span>'
       + '<button type="button" class="ns-boton ns-ayuda" id="ns-ayuda" aria-expanded="false" aria-controls="ns-panel">¿Qué puedo pedir?</button></header>'
       + '<div class="ns-panel" id="ns-panel" role="region" aria-label="Qué puedo pedir" hidden></div>'
       + '<div class="ns-cuerpo" id="ns-cuerpo"><div class="ns-col">'
-      + '<div class="ns-hola"><canvas class="ns-red" aria-hidden="true"></canvas><h2>Pídeselo a NÚCLEO</h2>'
-      + '<p>Hola, soy NÚCLEO. Puedo abrir webs, enseñarte qué se ha cortado, llevarte al planeta y preparar informes en PDF. ¿Qué deseas hacer?</p></div>'
+      + '<div class="ns-hola"><canvas class="ns-red" aria-hidden="true"></canvas>'
+      + '<p>Hola, soy NÚCLEO. Puedo llevarte al navegador ZERO, a Órbita o a Comunicaciones, enseñarte qué se ha cortado y preparar informes en PDF. ¿Qué deseas hacer?</p></div>'
       + '<div class="ns-charla" id="ns-charla" aria-live="polite"></div></div></div>'
       + '<div class="ns-pie"><div class="ns-rapidas" id="ns-rapidas" role="group" aria-label="Acciones rápidas"></div>'
       + '<form class="ns-form" id="ns-form" autocomplete="off"><input id="ns-q" type="text" maxlength="200" placeholder="Escribe qué quieres hacer…" aria-label="Pídeselo a NÚCLEO" enterkeyhint="send"><button type="submit">Enviar</button></form>'
