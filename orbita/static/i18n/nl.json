@@ -1903,7 +1903,15 @@
   "Radiografía": "Röntgenfoto",
   "Burbuja en": "Bubbel in",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE-RESULTATEN · BELANGRIJKSTE SITES",
-  "País de las webs": "Land van de sites"
+  "País de las webs": "Land van de sites",
+  "Expandir": "Vergroten",
+  "Expandir el panel hasta media pantalla": "Paneel vergroten tot half scherm",
+  "Volver al panel estrecho": "Terug naar het smalle paneel",
+  "El asistente de GUARDIANA · siempre atento a esta web": "De assistent van GUARDIANA · houdt deze site altijd in de gaten",
+  "Ahora": "Nu",
+  "Esperando a que abras una web": "Wachten tot je een site opent",
+  "Mirando todo lo que pasa en esta web": "Volgt alles wat er op deze site gebeurt",
+  "Pregúntale por tus datos en esta web": "Vraag naar je gegevens op deze site"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

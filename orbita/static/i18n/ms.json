@@ -1902,7 +1902,15 @@
   "Radiografía": "X-Ray",
   "Burbuja en": "Gelembung di",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "HASIL GOOGLE · LAMAN UTAMA",
-  "País de las webs": "Negara laman"
+  "País de las webs": "Negara laman",
+  "Expandir": "Besarkan",
+  "Expandir el panel hasta media pantalla": "Besarkan panel hingga separuh skrin",
+  "Volver al panel estrecho": "Kembali ke panel sempit",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Pembantu GUARDIANA · sentiasa memerhati laman ini",
+  "Ahora": "Sekarang",
+  "Esperando a que abras una web": "Menunggu anda membuka laman",
+  "Mirando todo lo que pasa en esta web": "Memerhati semua yang berlaku di laman ini",
+  "Pregúntale por tus datos en esta web": "Tanya tentang data anda di laman ini"
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

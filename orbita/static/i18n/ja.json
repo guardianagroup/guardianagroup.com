@@ -1903,7 +1903,15 @@
   "Radiografía": "レントゲン",
   "Burbuja en": "バブル:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Googleの検索結果 · 主要サイト",
-  "País de las webs": "サイトの国"
+  "País de las webs": "サイトの国",
+  "Expandir": "拡大",
+  "Expandir el panel hasta media pantalla": "パネルを画面の半分まで拡大",
+  "Volver al panel estrecho": "細いパネルに戻す",
+  "El asistente de GUARDIANA · siempre atento a esta web": "GUARDIANAのアシスタント · このサイトを常に見守っています",
+  "Ahora": "現在",
+  "Esperando a que abras una web": "サイトを開くのを待っています",
+  "Mirando todo lo que pasa en esta web": "このサイトで起きていることをすべて見ています",
+  "Pregúntale por tus datos en esta web": "このサイトでのあなたのデータについて質問してください"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

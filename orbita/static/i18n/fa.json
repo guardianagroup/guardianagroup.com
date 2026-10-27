@@ -1902,7 +1902,15 @@
   "Radiografía": "پرتونگاری",
   "Burbuja en": "حباب در",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "نتایج Google · سایت‌های اصلی",
-  "País de las webs": "کشور سایت‌ها"
+  "País de las webs": "کشور سایت‌ها",
+  "Expandir": "بزرگ کردن",
+  "Expandir el panel hasta media pantalla": "بزرگ کردن پنل تا نیمی از صفحه",
+  "Volver al panel estrecho": "بازگشت به پنل باریک",
+  "El asistente de GUARDIANA · siempre atento a esta web": "دستیار GUARDIANA · همیشه مراقب این سایت",
+  "Ahora": "اکنون",
+  "Esperando a que abras una web": "در انتظار اینکه سایتی باز کنید",
+  "Mirando todo lo que pasa en esta web": "همهٔ آنچه در این سایت رخ می‌دهد را زیر نظر دارد",
+  "Pregúntale por tus datos en esta web": "دربارهٔ داده‌هایتان در این سایت از او بپرسید"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

@@ -1902,7 +1902,15 @@
   "Radiografía": "Röntgenkép",
   "Burbuja en": "Buborék:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "GOOGLE-TALÁLATOK · VEZETŐ OLDALAK",
-  "País de las webs": "Az oldalak országa"
+  "País de las webs": "Az oldalak országa",
+  "Expandir": "Nagyítás",
+  "Expandir el panel hasta media pantalla": "Panel nagyítása a képernyő feléig",
+  "Volver al panel estrecho": "Vissza a keskeny panelhez",
+  "El asistente de GUARDIANA · siempre atento a esta web": "A GUARDIANA asszisztense · mindig figyeli ezt az oldalt",
+  "Ahora": "Most",
+  "Esperando a que abras una web": "Várakozás, hogy megnyiss egy oldalt",
+  "Mirando todo lo que pasa en esta web": "Figyel mindent, ami ezen az oldalon történik",
+  "Pregúntale por tus datos en esta web": "Kérdezd az adataidról ezen az oldalon"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

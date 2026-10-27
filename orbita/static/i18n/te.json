@@ -1902,7 +1902,15 @@
   "Radiografía": "ఎక్స్-రే",
   "Burbuja en": "బబుల్ స్థానం:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Google ఫలితాలు · ప్రధాన సైట్లు",
-  "País de las webs": "సైట్ల దేశం"
+  "País de las webs": "సైట్ల దేశం",
+  "Expandir": "పెద్దది చేయి",
+  "Expandir el panel hasta media pantalla": "ప్యానెల్‌ను సగం స్క్రీన్ వరకు పెద్దది చేయి",
+  "Volver al panel estrecho": "ఇరుకైన ప్యానెల్‌కు తిరిగి వెళ్ళు",
+  "El asistente de GUARDIANA · siempre atento a esta web": "GUARDIANA అసిస్టెంట్ · ఈ సైట్‌ను ఎల్లప్పుడూ గమనిస్తుంది",
+  "Ahora": "ఇప్పుడు",
+  "Esperando a que abras una web": "మీరు ఒక సైట్ తెరిచే వరకు వేచి ఉంది",
+  "Mirando todo lo que pasa en esta web": "ఈ సైట్‌లో జరిగే ప్రతిదాన్నీ గమనిస్తోంది",
+  "Pregúntale por tus datos en esta web": "ఈ సైట్‌లో మీ డేటా గురించి అడగండి"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

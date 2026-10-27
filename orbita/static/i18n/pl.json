@@ -1903,7 +1903,15 @@
   "Radiografía": "Prześwietlenie",
   "Burbuja en": "Bańka:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "WYNIKI GOOGLE · NAJWAŻNIEJSZE WITRYNY",
-  "País de las webs": "Kraj witryn"
+  "País de las webs": "Kraj witryn",
+  "Expandir": "Powiększ",
+  "Expandir el panel hasta media pantalla": "Powiększ panel do połowy ekranu",
+  "Volver al panel estrecho": "Wróć do wąskiego panelu",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Asystent GUARDIANA · zawsze czuwa nad tą stroną",
+  "Ahora": "Teraz",
+  "Esperando a que abras una web": "Oczekiwanie, aż otworzysz stronę",
+  "Mirando todo lo que pasa en esta web": "Obserwuje wszystko, co dzieje się na tej stronie",
+  "Pregúntale por tus datos en esta web": "Zapytaj go o swoje dane na tej stronie"
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

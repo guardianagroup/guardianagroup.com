@@ -1902,7 +1902,15 @@
   "Radiografía": "Radiografie",
   "Burbuja en": "Bulă în",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "REZULTATE GOOGLE · PRINCIPALELE SITE-URI",
-  "País de las webs": "Țara site-urilor"
+  "País de las webs": "Țara site-urilor",
+  "Expandir": "Extinde",
+  "Expandir el panel hasta media pantalla": "Extinde panoul până la jumătate de ecran",
+  "Volver al panel estrecho": "Înapoi la panoul îngust",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Asistentul GUARDIANA · mereu atent la acest site",
+  "Ahora": "Acum",
+  "Esperando a que abras una web": "Se așteaptă să deschizi un site",
+  "Mirando todo lo que pasa en esta web": "Urmărește tot ce se întâmplă pe acest site",
+  "Pregúntale por tus datos en esta web": "Întreabă-l despre datele tale de pe acest site"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

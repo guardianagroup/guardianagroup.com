@@ -1902,7 +1902,15 @@
   "Radiografía": "X-Ray",
   "Burbuja en": "Bubble sa",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "MGA RESULTA NG GOOGLE · MGA PANGUNAHING SITE",
-  "País de las webs": "Bansa ng mga site"
+  "País de las webs": "Bansa ng mga site",
+  "Expandir": "Palakihin",
+  "Expandir el panel hasta media pantalla": "Palakihin ang panel hanggang kalahati ng screen",
+  "Volver al panel estrecho": "Bumalik sa makitid na panel",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Ang assistant ng GUARDIANA · laging nakabantay sa site na ito",
+  "Ahora": "Ngayon",
+  "Esperando a que abras una web": "Hinihintay na magbukas ka ng site",
+  "Mirando todo lo que pasa en esta web": "Binabantayan ang lahat ng nangyayari sa site na ito",
+  "Pregúntale por tus datos en esta web": "Tanungin ito tungkol sa data mo sa site na ito"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

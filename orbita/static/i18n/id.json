@@ -1902,7 +1902,15 @@
   "Radiografía": "Rontgen",
   "Burbuja en": "Gelembung di",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "HASIL GOOGLE · SITUS UTAMA",
-  "País de las webs": "Negara situs"
+  "País de las webs": "Negara situs",
+  "Expandir": "Perbesar",
+  "Expandir el panel hasta media pantalla": "Perbesar panel hingga setengah layar",
+  "Volver al panel estrecho": "Kembali ke panel sempit",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Asisten GUARDIANA · selalu mengawasi situs ini",
+  "Ahora": "Sekarang",
+  "Esperando a que abras una web": "Menunggu Anda membuka situs",
+  "Mirando todo lo que pasa en esta web": "Mengamati semua yang terjadi di situs ini",
+  "Pregúntale por tus datos en esta web": "Tanyakan tentang data Anda di situs ini"
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

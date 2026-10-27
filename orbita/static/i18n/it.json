@@ -1903,7 +1903,15 @@
   "Radiografía": "Radiografia",
   "Burbuja en": "Bolla in",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "RISULTATI DI GOOGLE · PRINCIPALI SITI",
-  "País de las webs": "Paese dei siti"
+  "País de las webs": "Paese dei siti",
+  "Expandir": "Espandi",
+  "Expandir el panel hasta media pantalla": "Espandi il pannello fino a metà schermo",
+  "Volver al panel estrecho": "Torna al pannello stretto",
+  "El asistente de GUARDIANA · siempre atento a esta web": "L'assistente di GUARDIANA · sempre attento a questo sito",
+  "Ahora": "Ora",
+  "Esperando a que abras una web": "In attesa che tu apra un sito",
+  "Mirando todo lo que pasa en esta web": "Osserva tutto ciò che accade su questo sito",
+  "Pregúntale por tus datos en esta web": "Chiedigli dei tuoi dati su questo sito"
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

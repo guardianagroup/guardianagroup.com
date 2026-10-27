@@ -1902,7 +1902,15 @@
   "Radiografía": "எக்ஸ்-ரே",
   "Burbuja en": "குமிழி இருப்பிடம்:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Google முடிவுகள் · முக்கியத் தளங்கள்",
-  "País de las webs": "தளங்களின் நாடு"
+  "País de las webs": "தளங்களின் நாடு",
+  "Expandir": "பெரிதாக்கு",
+  "Expandir el panel hasta media pantalla": "பேனலைத் திரையின் பாதி வரை பெரிதாக்கு",
+  "Volver al panel estrecho": "குறுகிய பேனலுக்குத் திரும்பு",
+  "El asistente de GUARDIANA · siempre atento a esta web": "GUARDIANA-வின் உதவியாளர் · இந்தத் தளத்தை எப்போதும் கவனிக்கிறது",
+  "Ahora": "இப்போது",
+  "Esperando a que abras una web": "நீங்கள் ஒரு தளத்தைத் திறக்கக் காத்திருக்கிறது",
+  "Mirando todo lo que pasa en esta web": "இந்தத் தளத்தில் நடப்பது அனைத்தையும் கவனிக்கிறது",
+  "Pregúntale por tus datos en esta web": "இந்தத் தளத்தில் உங்கள் தரவு பற்றிக் கேளுங்கள்"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

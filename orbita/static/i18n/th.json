@@ -1902,7 +1902,15 @@
   "Radiografía": "เอกซเรย์",
   "Burbuja en": "บับเบิลที่",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "ผลการค้นหา Google · เว็บไซต์หลัก",
-  "País de las webs": "ประเทศของเว็บไซต์"
+  "País de las webs": "ประเทศของเว็บไซต์",
+  "Expandir": "ขยาย",
+  "Expandir el panel hasta media pantalla": "ขยายแผงเป็นครึ่งจอ",
+  "Volver al panel estrecho": "กลับไปที่แผงแคบ",
+  "El asistente de GUARDIANA · siempre atento a esta web": "ผู้ช่วยของ GUARDIANA · คอยเฝ้าดูเว็บนี้เสมอ",
+  "Ahora": "ขณะนี้",
+  "Esperando a que abras una web": "รอให้คุณเปิดเว็บ",
+  "Mirando todo lo que pasa en esta web": "กำลังเฝ้าดูทุกสิ่งที่เกิดขึ้นในเว็บนี้",
+  "Pregúntale por tus datos en esta web": "ถามเกี่ยวกับข้อมูลของคุณในเว็บนี้"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

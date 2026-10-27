@@ -1902,7 +1902,15 @@
   "Radiografía": "এক্স-রে",
   "Burbuja en": "বাবলের অবস্থান:",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "Google-এর ফলাফল · প্রধান সাইটগুলো",
-  "País de las webs": "সাইটগুলোর দেশ"
+  "País de las webs": "সাইটগুলোর দেশ",
+  "Expandir": "বড় করুন",
+  "Expandir el panel hasta media pantalla": "প্যানেলটি অর্ধেক স্ক্রিন পর্যন্ত বড় করুন",
+  "Volver al panel estrecho": "সরু প্যানেলে ফিরে যান",
+  "El asistente de GUARDIANA · siempre atento a esta web": "GUARDIANA-র সহকারী · সবসময় এই সাইটে নজর রাখে",
+  "Ahora": "এখন",
+  "Esperando a que abras una web": "আপনার কোনো সাইট খোলার অপেক্ষায়",
+  "Mirando todo lo que pasa en esta web": "এই সাইটে যা কিছু ঘটছে সব নজরে রাখছে",
+  "Pregúntale por tus datos en esta web": "এই সাইটে আপনার ডেটা সম্পর্কে জিজ্ঞাসা করুন"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

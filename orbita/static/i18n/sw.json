@@ -1902,7 +1902,15 @@
   "Radiografía": "Eksirei",
   "Burbuja en": "Kiputo kiko",
   "RESULTADOS DE GOOGLE · WEBS PRINCIPALES": "MATOKEO YA GOOGLE · TOVUTI KUU",
-  "País de las webs": "Nchi ya tovuti"
+  "País de las webs": "Nchi ya tovuti",
+  "Expandir": "Panua",
+  "Expandir el panel hasta media pantalla": "Panua paneli hadi nusu ya skrini",
+  "Volver al panel estrecho": "Rudi kwenye paneli nyembamba",
+  "El asistente de GUARDIANA · siempre atento a esta web": "Msaidizi wa GUARDIANA · daima anaifuatilia tovuti hii",
+  "Ahora": "Sasa",
+  "Esperando a que abras una web": "Inasubiri ufungue tovuti",
+  "Mirando todo lo que pasa en esta web": "Inafuatilia kila kinachotokea kwenye tovuti hii",
+  "Pregúntale por tus datos en esta web": "Muulize kuhusu data zako kwenye tovuti hii"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",
