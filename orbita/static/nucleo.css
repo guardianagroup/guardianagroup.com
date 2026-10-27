@@ -109,16 +109,16 @@
 .ns-charla .nuc-b{max-width:88%}
 .ns-opciones{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .ns-enlace{display:inline-block;margin-top:8px;font-weight:600}
-.ns-pie{position:relative;z-index:2;flex:none;padding:10px 16px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(156,195,228,.1);background:rgba(6,8,12,.94)}
+.ns-pie{position:relative;z-index:2;flex:none;padding:16px 16px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(156,195,228,.1);background:rgba(6,8,12,.94)}
 .ns-rapidas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:min(760px,100%);margin:0 auto}
 .ns-rapidas .nuc-chip{text-align:center} /* 3 × 2: simétrico (dueño, 10:53) */
-.ns-form{display:flex;align-items:center;gap:8px;width:min(760px,100%);margin:10px auto 0;padding:6px 6px 6px 18px;border-radius:999px;border:1px solid rgba(156,195,228,.38);background:linear-gradient(180deg,rgba(17,26,37,.92),rgba(9,14,21,.96));box-shadow:0 0 0 1px rgba(156,195,228,.06),0 18px 60px -30px rgba(156,195,228,.55)}
+.ns-form{display:flex;align-items:center;gap:8px;width:min(760px,100%);margin:20px auto 0;padding:6px 6px 6px 18px;border-radius:999px;border:1px solid rgba(156,195,228,.38);background:linear-gradient(180deg,rgba(17,26,37,.92),rgba(9,14,21,.96));box-shadow:0 0 0 1px rgba(156,195,228,.06),0 18px 60px -30px rgba(156,195,228,.55)}
 .ns-form:focus-within{border-color:#9CC3E4;box-shadow:0 0 0 3px rgba(156,195,228,.16)}
 .ns-form input{flex:1;min-width:0;height:44px;border:0;outline:none;background:transparent;color:#F4F6F8;font:400 16px/1.2 'IBM Plex Sans',system-ui,sans-serif}
 .ns-form input::placeholder{color:#7f93a6}
 .ns-form button{flex:none;height:44px;padding:0 22px;border:0;border-radius:999px;background:#9CC3E4;color:#06080C;font:600 15px/1 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer}
 .ns-form button:hover{filter:brightness(1.07)}
-.ns-nota{margin:8px 0 0;text-align:center;font-size:12px;color:#7f93a6}
+.ns-nota{margin:10px 0 0;text-align:center;font-size:12px;color:#7f93a6}
 @media (max-width:640px){
   .ns-cab{padding:12px 12px}.ns-boton{height:36px;padding:0 12px;font-size:13px}.ns-marca{display:none}
   .ns-panel{top:58px;inset-inline:12px;width:auto}
@@ -130,3 +130,6 @@
 .nuc-que:hover{background:rgba(156,195,228,.16);border-color:rgba(156,195,228,.6);color:#F4F6F8}
 .nuc-que:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
 @media (max-width:560px){.nuc-ini{padding-top:64px}.nuc-que{top:14px;inset-inline-end:14px;font-size:13px}}
+
+/* dueño, 12:18: «el buscador está muy pegado a los 6 recuadritos de arriba; hay que separarlo, darle orden visual» */
+@media (max-width:640px){.ns-form{margin-top:14px}}
