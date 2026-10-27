@@ -677,7 +677,7 @@
 <div id="pill" role="group" aria-label="Web en grande"><button type="button" class="pc" id="vercortes" title="Ver los cortes en el panel"><span class="pn"><span id="pillnum">0</span>&nbsp;cortes en esta web</span><span class="pv">Ver panel<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg></span></button><button type="button" class="pb" id="reducir" title="Reducir y ver el panel (Esc)"><svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 6.5h-4v-4M2.5 9.5h4v4M9.5 6.5 14 2M6.5 9.5 2 14"/></svg>Reducir</button></div><div class="topReveal" id="topbar"><button type="button" id="restore">↙ RESTAURAR</button><span>PÁGINA DE DEMOSTRACIÓN · ZERO</span><button type="button" id="topcut">Cortes</button></div>
 <div class="marca" aria-hidden="true">ZERO</div><button type="button" id="volverZ" class="volverz" title="Volver" aria-label="Volver"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg><span>Órbita</span></button><button type="button" id="vermeZ" class="volverz vermez" title="Verme en Órbita" aria-label="Verme en Órbita"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12.5" r="1.2"/><path d="M5.2 9.7a4 4 0 0 1 5.6 0M2.6 7a7.6 7.6 0 0 1 10.8 0"/></svg><span>Verme en Órbita</span></button><div class="lb t"></div><div class="lb b"></div><div class="skip">CLIC O CUALQUIER TECLA PARA SALTAR</div>
 </main></div><article id="informe" aria-hidden="true"></article>
-<script src="../static/idioma.js?v=20261027s"></script>
+<script src="../static/idioma.js?v=20261027t"></script>
 <nav class="director" id="director" aria-label="Entradas de cine"><span>ENTRADA</span></nav>
 <script>
 (()=>{'use strict';
@@ -846,9 +846,16 @@ function apunta(emp,pais,mot){REG.push({t:Date.now(),w:webActual,e:emp,p:pais,m:
 /* 26 Oct 2026 (dueño): además de «hoy», el total desde que la persona empezó a usar ZERO. Se guarda solo en este navegador. */
 const TOT_K='zeroTotal';
 function totales(){let v=lee(TOT_K,null);if(!v||typeof v!=='object'||!Array.isArray(v.e)||!Array.isArray(v.p)){v={d:REG.length?REG[0].t:Date.now(),c:REG.length,e:[...new Set(REG.map(r=>r.e))],p:[...new Set(REG.map(r=>r.p).filter(x=>x&&x!=='País no identificado'))],s:0};guarda(TOT_K,v)}return v}
-const RANGOS=[['web','Esta web',()=>{const t0=REG.length?abiertaEn:0;return r=>r.t>=t0&&r.w===webActual}],['hora','Última hora',()=>{const t=Date.now()-3600e3;return r=>r.t>=t}],['hoy','Hoy',()=>{const d=new Date();d.setHours(0,0,0,0);return r=>r.t>=+d}],['todo','Todo',()=>()=>true]];
+// 27 Oct 2026 (dueño: «la Radiografía tiene que detectar el máximo para entregarlo en PDF: país, empresa, qué datos se ha
+// llevado…»): registro de todo lo detectado en las burbujas reales —conexiones, subastas, lecturas del equipo y cookies—, solo
+// en este navegador y nunca enviado. Lo usa el informe en PDF.
+const RX_K='zeroRadiografia';let RX=lee(RX_K,null);if(!RX||typeof RX!=='object')RX={};['c','s','h','k'].forEach(k=>{if(!Array.isArray(RX[k]))RX[k]=[]});
+const DOM_EMP=new Map();let tRX=0;
+function guardaRX(){if(tRX)return;tRX=setTimeout(()=>{tRX=0;const tope={c:6000,s:300,h:800,k:800};for(const k in tope)if(RX[k].length>tope[k])RX[k]=RX[k].slice(-tope[k]);guarda(RX_K,RX)},1500)}
+function apuntaRX(tipo,o){RX[tipo].push(Object.assign({t:Date.now(),w:webActual},o));guardaRX()}
+const RANGOS=[['web','Esta web',()=>{const t0=abiertaEn;return r=>r.t>=t0&&r.w===webActual}],['hora','Última hora',()=>{const t=Date.now()-3600e3;return r=>r.t>=t}],['hoy','Hoy',()=>{const d=new Date();d.setHours(0,0,0,0);return r=>r.t>=+d}],['todo','Todo',()=>()=>true]];
 let abiertaEn=Date.now();
-function pintaPdf(){const o=$('#pdfops');o.textContent='';for(const [k,n,f] of RANGOS){const c=REG.filter(f()).length;const b=document.createElement('button');b.type='button';b.className='pop';b.disabled=!c;b.innerHTML='<span></span><b></b>';b.firstChild.textContent=n;b.lastChild.textContent=c+(c===1?' corte':' cortes');b.onclick=()=>{menuPdf(false);informe(k,n,REG.filter(f()))};o.append(b)}}
+function pintaPdf(){const o=$('#pdfops');o.textContent='';for(const [k,n,f] of RANGOS){const c=RX.c.filter(f()).length;const b=document.createElement('button');b.type='button';b.className='pop';b.disabled=!c;b.innerHTML='<span></span><b></b>';b.firstChild.textContent=n;b.lastChild.textContent=c+(c===1?' conexión':' conexiones');b.onclick=()=>{menuPdf(false);radiografiaPdf(k,n,f())};o.append(b)}}
 function menuPdf(on){$('#pdfmenu').classList.toggle('show',on);$('#pdf').setAttribute('aria-expanded',String(on));if(on){pintaPdf();const b=$('#pdfops button:not(:disabled)');if(b)b.focus()}}
 $('#pdf').onclick=()=>menuPdf(!$('#pdfmenu').classList.contains('show'));
 document.addEventListener('pointerdown',e=>{if($('#pdfmenu').classList.contains('show')&&!$('#pdfmenu').contains(e.target)&&!$('#pdf').contains(e.target))menuPdf(false)});
@@ -873,7 +880,51 @@ function informe(clave,nombre,filas){const R=$('#informe'),esc=x=>String(x).repl
       pie:T('Generado el '+f(Date.now())+' en este equipo. ZERO no envía este informe a nadie.'),
       archivo:'ZERO-informe-cortes-'+hoyF.getFullYear()+'-'+dd(hoyF.getMonth()+1)+'-'+dd(hoyF.getDate())+'.pdf'},T);return}catch(e){console.warn('PDF:',e)}}
   const t=document.title;document.title='ZERO · Informe de cortes · '+nombre;setTimeout(()=>{window.print();document.title=t},60)}
-window.zeroInforme=k=>{const r=RANGOS.find(x=>x[0]===k)||RANGOS[3];informe(r[0],r[1],REG.filter(r[2]()))};
+
+const baseDom=h=>{h=String(h||'').toLowerCase().replace(/^www\./,'');const p=h.split('.');if(p.length<=2)return h;const dos=p.slice(-2).join('.');return /^(co|com|org|net|gov|ac|edu)\.[a-z]{2}$/.test(dos)?p.slice(-3).join('.'):dos};
+function apuntaSubRX(sb){try{const L=sb.llevaba||{};apuntaRX('s',{h:(HUECO_NOMBRE[sb.pos]||'Anuncio'),u:String(sb.unidad||'').slice(0,60),pj:(sb.pujas||[]).slice(0,12).map(b=>({n:b.n,p:b.p||'',c:b.cpm>0?b.cpm:null,mo:(b.det&&b.det.moneda)||'',e:b.e,ci:!!b.cifrado})),g:sb.gana?sb.gana.n:'',gc:sb.gana&&sb.gana.cpm>0?sb.gana.cpm:null,gm:sb.gana&&sb.gana.det?sb.gana.det.moneda||'':'',dt:datosLlevaba(L).map(x=>x.t),ids:[...new Set((L.ids||[]).map(nombreId))],tcf:sb.tcf?{p:sb.tcf.proveedores,f:sb.tcf.fines}:null,no:sb.nota||''})}catch(e){}}
+// Qué se llevó cada empresa: lo que recibió por estar en la página, lo que recibió en las subastas, cookies y lecturas del equipo
+function perfilEmpresas(F){const emp=new Map(),T=x=>(window.GuardianaIdioma&&GuardianaIdioma.t?GuardianaIdioma.t(x):x);
+  const ver=(e,p)=>{let x=emp.get(e);if(!x){x={e,p:'',m:new Set(),n:0,cort:0,visita:false,sub:new Set(),ids:new Set(),hu:new Set(),coo:false};emp.set(e,x)}if(p&&p!=='País no identificado'&&!x.p)x.p=p;return x};
+  for(const r of F.c){const x=ver(r.e,r.p);x.m.add(r.m);x.n++;if(r.s==='c')x.cort++;else x.visita=true}
+  for(const s of F.s)for(const b of s.pj||[]){const x=ver(b.n,b.p);x.m.add('Publicidad');(s.dt||[]).forEach(d=>{if(!/^Identificadores para reconocerte/.test(d))x.sub.add(d)});(s.ids||[]).forEach(i=>x.ids.add(i))}
+  for(const h of F.h){const e=DOM_EMP.get(baseDom(h.d));if(e)ver(e).hu.add(h.via||'huella')}
+  for(const k of F.k){const e=DOM_EMP.get(baseDom(k.d));if(e)ver(e).coo=true}
+  const VIA={canvas:'gráficos (canvas)',webgl:'tarjeta gráfica',audio:'audio',fuentes:'tipos de letra',plugins:'complementos'};
+  for(const x of emp.values()){const t=[];if(x.visita)t.push(T('Tu visita: la web que lees, tu navegador y la dirección de la burbuja'));
+    if(x.sub.size)t.push(T('En subasta')+': '+[...x.sub].map(d=>T(d).toLowerCase()).join(', '));if(x.ids.size)t.push(T('Identificadores')+': '+[...x.ids].join(', '));
+    if(x.hu.size)t.push(T('Intentó leer tu equipo')+': '+[...x.hu].map(v=>T(VIA[v]||v)).join(', '));if(x.coo)t.push(T('Dejó cookies para reconocerte'));
+    x.texto=t.join(' · ')||'—'}
+  return [...emp.values()].sort((a,b)=>b.n-a.n||a.e.localeCompare(b.e))}
+function radiografiaPdf(clave,nombre,filtro){const F={c:RX.c.filter(filtro),s:RX.s.filter(filtro),h:RX.h.filter(filtro),k:RX.k.filter(filtro)};
+  const LOC=(window.GuardianaIdioma&&GuardianaIdioma.locale)||'es',T=x=>(window.GuardianaIdioma&&GuardianaIdioma.t?GuardianaIdioma.t(x):x);
+  const f=d=>new Date(d).toLocaleString(LOC,{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),h=d=>new Date(d).toLocaleTimeString(LOC,{hour:'2-digit',minute:'2-digit',second:'2-digit'}),dh=d=>new Date(d).toLocaleDateString(LOC,{day:'2-digit',month:'2-digit'})+' '+h(d);
+  const todos=[...F.c,...F.s,...F.h,...F.k].map(x=>x.t);if(!todos.length)return;const desde=f(Math.min(...todos)),hasta=f(Math.max(...todos));
+  const empresas=perfilEmpresas(F),paises=new Set(F.c.map(r=>r.p).filter(p=>p&&p!=='País no identificado')),webs=new Set(F.c.map(r=>r.w)),cortes=F.c.filter(r=>r.s==='c').length;
+  const precio=(c,m)=>c>0?(c/10).toLocaleString(LOC,{minimumFractionDigits:2,maximumFractionDigits:3})+' cts'+(m&&m!=='EUR'?' ('+m+')':''):'';
+  const LAT=['es','en','pt','pt-pt','fr','de','it','nl','da','sv','nb','fi','is','id','ms','fil','sw'],lang=(window.GuardianaIdioma&&GuardianaIdioma.lang)||'es';
+  const datos={titulo:T('Radiografía de tu navegación'),subtitulo:T(nombre)+(clave==='web'?' · '+webActual:'')+' · '+T('del '+desde+' al '+hasta),
+    resumen:[[F.c.length,T('Conexiones')],[cortes,T('Cortes'),1],[empresas.length,T('Empresas')],[paises.size,T('Países')],[F.s.length,T('Subastas')]],
+    secciones:[
+     {titulo:T('Empresas y qué se llevaron'),nota:T('Cada empresa que contactó la web, de qué país es, para qué, cuántas veces y qué datos recibió o intentó recibir. Dentro de ZERO, esos datos son los de la burbuja, no los de tu equipo.'),
+      cols:[{t:'Empresa',w:17},{t:'País',w:12},{t:'Para qué',w:12,wrap:1},{t:'Veces',w:7,der:1},{t:'Cortes',w:7,der:1,rojo:1},{t:'Qué datos recibió o intentó llevarse',w:45,wrap:1,ambar:1}],
+      filas:empresas.map(x=>[x.e,T(x.p||'País no identificado'),[...x.m].map(T).join(', ')||'—',x.n,x.cort,x.texto])},
+     {titulo:T('Subastas de tus datos'),nota:T('Cada vez que la web vendió un espacio de anuncio con los datos de tu visita: quién pujó, quién ganó y qué datos se enviaron. Los precios son los que declara la propia página.'),
+      cols:[{t:'Hora',w:13},{t:'Web',w:15},{t:'Hueco',w:10},{t:'Pujaron',w:20,wrap:1},{t:'Ganó',w:14,wrap:1},{t:'Datos enviados',w:28,wrap:1,ambar:1}],
+      filas:F.s.map(s=>[dh(s.t),s.w,T(s.h),(s.pj||[]).filter(b=>b.e==='ganó'||b.e==='pujó').map(b=>b.n+(b.c?' '+precio(b.c,b.mo):b.ci?' ('+T('cifrado')+')':'')).join(', ')||'—',(s.g?s.g+(s.gc?' · '+precio(s.gc,s.gm):''):T(s.no||'Sin ganador declarado.')),[...(s.dt||[]).map(T),...(s.ids||[])].join(' · ')||'—'])},
+     {titulo:T('Lo que intentaron leer de tu equipo'),nota:T('Intentos de reconocer el equipo sin cookies (la «huella»). En ZERO lo que miden es la burbuja.'),
+      cols:[{t:'Hora',w:14},{t:'Web',w:18},{t:'Quién',w:20},{t:'Qué',w:48,wrap:1}],filas:F.h.map(x=>[dh(x.t),x.w,DOM_EMP.get(baseDom(x.d))||x.d,T(x.x)])},
+     {titulo:T('Cookies de otras empresas'),nota:T('Notas que otras empresas dejaron para reconocerte en otras webs. En ZERO se borran al cerrar la burbuja.'),
+      cols:[{t:'Hora',w:14},{t:'Web',w:18},{t:'Empresa o dominio',w:24},{t:'Detalle',w:44,wrap:1}],filas:F.k.map(x=>[dh(x.t),x.w,DOM_EMP.get(baseDom(x.d))||x.d,T(x.x)])},
+     {titulo:T('Uno a uno'),cols:[{t:'Hora',w:15},{t:'Web',w:20},{t:'Empresa',w:22},{t:'País',w:15},{t:'Para qué',w:15},{t:'Estado',w:13}],
+      filas:F.c.map(r=>[dh(r.t),r.w,r.e,T(r.p),T(r.m),T(r.s==='c'?'Cortado':r.s==='p'?'Permitido':'Visto')])}],
+    pie:T('Generado el '+f(Date.now())+' en este equipo. ZERO no envía este informe a nadie.'),
+    final:T('Dentro de ZERO, cada web se abre en una burbuja en un servidor de GUARDIANA: lo que estas empresas recibieron es de la burbuja —identificadores nuevos, la dirección del servidor—, no de tu equipo, y al cerrarla se borra.'),
+    archivo:'ZERO-radiografia-'+new Date().toISOString().slice(0,10)+'.pdf'};
+  if(window.ZeroPdf&&LAT.includes(lang)){try{ZeroPdf.descarga(datos,T);return}catch(e){console.warn('PDF:',e)}}
+  // otros alfabetos: el informe sencillo de siempre, para imprimir o guardar como PDF desde el navegador
+  informe(clave,nombre,F.c.map(r=>({t:r.t,w:r.w,e:r.e,p:r.p,m:r.m})))}
+window.zeroInforme=k=>{const r=RANGOS.find(x=>x[0]===k)||RANGOS[3];radiografiaPdf(r[0],r[1],r[2]())};
 // 20 Oct 2026 (owner): «Corte máximo», the strongest cut. Normal: known trackers and ads. Maximum: everything
 // that does not belong to the site itself (third-party scripts, fonts, frames and cookies). Some sites may break,
 // and it says so. Remembered on this computer. In this design review it only changes the demo, which is labelled.
@@ -1017,6 +1068,7 @@ function zeroSuceso(s){if(s.clase==='muro'){try{avisoMuro(s.detalle&&s.detalle.u
   el.querySelector('.vdet').innerHTML=li.join('<br>');
   el.addEventListener('click',()=>el.classList.toggle('abierto'));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}});
   if(pausaVivo)L.append(el);else L.prepend(el);$('#qvivo').textContent=VIVOS.length;
+  if(s.clase==='corte'){if(s.empresa&&s.dominio)DOM_EMP.set(baseDom(s.dominio),s.empresa);apuntaRX('c',{e:String(s.empresa||s.dominio||'No identificada').slice(0,80),p:s.paisNombre||'País no identificado',m:s.proposito||'Rastreador',s:(s.estado||'cortado')==='cortado'?'c':s.estado==='permitido'?'p':'v',d:s.dominio||''})}
   if(s.clase==='corte')record({empresa:s.empresa||s.dominio,esEmpresa:!!s.empresa,estado:s.estado||'cortado',pais:s.paisNombre||'País no identificado',motivo:s.proposito||'Rastreador',certeza:s.certeza,real:true,quien:QUIEN[s.proposito]||'Conexión cortada por una regla de las listas públicas.',datos:['Certeza: '+(s.certeza||'comprobado')].concat(d.regla?['Regla '+d.regla]:[],d.lista?['Lista '+d.lista]:[],[s.empresa?'Empresa: '+(d.fuenteEmpresa||'base de GUARDIANA'):'Empresa no identificada']),dirs:[s.dominio]});
   else if(s.clase==='subasta'&&s.detalle&&s.detalle.fase!=='google'&&s.detalle.fase!=='amazon'&&s.detalle.pujas)zeroSubasta(s);
   else if(s.clase==='subasta'&&s.texto&&/Ganó/.test(s.texto)){const sb=SUBS.find(x=>x.id==='sub:'+(s.detalle||{}).id+':'+(s.detalle||{}).unidad);if(sb&&s.detalle){sb.anun=s.detalle.anunciante||sb.anun;if(s.detalle.objetivo)sb.objetivo=s.detalle.objetivo;if(vista===sb.id)pintaFicha(sb.id,true)}}
@@ -1033,7 +1085,7 @@ function zeroSubasta(s){const d=s.detalle,porUnidad=new Map();(d.pujas||[]).forE
     const tam=(ps[0]||{}).tam||'',pos=/728x90|970x/.test(tam)?'arriba':/320x50|320x100/.test(tam)?'abajo':/640x360|video/.test(tam)?'video':'lado';
     const llevaba=resumePeticiones(d.peticiones,ps.map(p=>p.pujador).concat(d.sinPuja||[]));
     const sb={id:'sub:'+d.id+':'+u,llevaba,unidad:u,cfg:d.config||null,tcf:d.tcf||null,tarde:d.tarde||[],limite:d.limite||null,pedidos:d.pedidos||[],sinPuja:d.sinPuja||[],objetivo:null,google:null,hueco:'el hueco «'+u+'»'+(tam?' ('+tam.replace('x',' × ')+' píxeles)':''),desc:'Espacio de anuncio de esta página'+(tam?', de '+tam.replace('x',' × ')+' píxeles':'')+'. Datos leídos en la propia página: los importes son los que declaró cada pujador.',pos,t:Date.now(),dur:d.ms||Math.max(0,...pujas.map(b=>b.ms||0)),pujas,gana:val[0]||null,anun:(val[0]&&val[0].anun)||null,el:null};
-    SUBS.unshift(sb);if(SUBS.length>40)SUBS.length=40;filaSub(sb)}
+    SUBS.unshift(sb);if(SUBS.length>40)SUBS.length=40;filaSub(sb);apuntaSubRX(sb)}
   $('#qsub').textContent=SUBS.length}
 // Qué llevaba la petición de puja, resumido por hueco: banderas de todos los pujadores y, si alguno recibió identificadores, cuáles y a quién.
 function resumePeticiones(pet,pujadores){if(!pet||typeof pet!=='object')return null;const r={pagina:false,referente:false,tam:false,tamanos:[],tipos:[],consent:false,gdpr:null,usp:null,gpp:false,geo:false,coordenadas:false,navegador:false,idioma:null,palabrasSitio:false,categoriasSitio:[],palabrasUsuario:false,segmentos:[],nSegmentos:0,nacimiento:false,genero:false,ids:[],cuenta:[],servidor:[]};const vistos=new Map(),cuentas=new Map();let alguno=false;const U=(a,xs)=>{(xs||[]).forEach(x=>{if(x!=null&&!a.includes(x))a.push(x)})};
@@ -1490,7 +1542,7 @@ function masDatos(sb){const c=sb.cfg||{},t=sb.tcf,g=sb.google,f=[],fl=x=>Number(
 function chipsLlevaba(L){const d=datosLlevaba(L);if(!d.length)return '';return '<div class="llev"><small>Datos que se llevaron</small><div>'+d.map(x=>'<span class="ch'+(x.per?' per':'')+'">'+esc(x.t)+'</span>').join('')+'</div></div>'}
 function subSencilla(o){const t=String(o.tam||'').replace(/\s+/g,''),pos=/728x90|970x|980x|1x1/.test(t)?'arriba':/320x50|320x100/.test(t)?'abajo':/video|640x360/.test(t)?'video':/300x250|300x600|160x600/.test(t)?'lado':'medio';
   const sb={id:'sub:s:'+Date.now()+':'+Math.random().toString(36).slice(2,7),sencilla:true,unidad:o.unidad||'',pos,t:Date.now(),pujas:o.pujas||[],gana:o.gana||null,nota:o.nota||'',google:o.google||null,llevaba:null,el:null};
-  SUBS.unshift(sb);if(SUBS.length>40)SUBS.length=40;$('#qsub').textContent=SUBS.length;radioPronto()}
+  SUBS.unshift(sb);if(SUBS.length>40)SUBS.length=40;$('#qsub').textContent=SUBS.length;apuntaSubRX(sb);radioPronto()}
 function pintaSubastas(){const R=$('#rsubs');if(!R)return;const sw=subsWeb().slice(0,8);
   let h='<div class="rexp"><p>Cuando abres una web, antes de ver el anuncio, la web envía datos de tu visita (qué lees, tu tipo de dispositivo, tu zona aproximada y el identificador de sus cookies) a varias empresas de publicidad.</p><p>Cada empresa mira lo que ya sabe de ti por otras webs y puja más si cree que su anuncio te interesa. La que gana pone su anuncio en ese hueco, en milésimas de segundo.</p><p class="rbur">Dentro de ZERO, la burbuja está limpia: sin tu historial ni tus cookies, no pueden unir la visita con lo que saben de ti.</p></div>'+PASOS;
   if(!sw.length)h+='<p class="empty">'+esc(grupoDeja('Publicidad')?'Esta web aún no ha subastado ningún espacio de anuncios.':'Tienes la publicidad cortada: esta web no puede subastar los datos de tu visita.')+'</p>';
@@ -1519,10 +1571,10 @@ function pintaCookies(){const R=$('#rcookies');if(!R)return;const vis=new Map();
   R.innerHTML=h;const x=R.querySelector('.rsw2');if(x&&window.ZeroMotor&&ZeroMotor.activo){const b=botonGrupo('Aviso de cookies');x.append(b);b.__pinta()}}
 function pintaBurbuja(){const R=$('#rburbuja');if(!R)return;R.innerHTML='<div class="rexp"><p>La web no se abre en tu PC: se abre en una burbuja, en un servidor de GUARDIANA, y a tu pantalla solo llegan imágenes. Si aparece algo peligroso, ZERO sella la burbuja.</p><p class="rbur">Al cerrar, todo lo de dentro se borra.</p></div>'}
 // sucesos que alimentan las tarjetas
-{const _zs=window.zeroSuceso;window.zeroSuceso=function(x){try{if(x&&x.clase==='huella')HUELLAS.push(x);else if(x&&x.clase==='cookie')COOKIES.push(x);if(HUELLAS.length>300)HUELLAS.splice(0,100);if(COOKIES.length>300)COOKIES.splice(0,100)}catch(e){}const r=_zs?_zs.apply(this,arguments):undefined;radioPronto();return r}}
+{const _zs=window.zeroSuceso;window.zeroSuceso=function(x){try{if(x&&x.clase==='huella'){HUELLAS.push(x);apuntaRX('h',{d:x.dominio||'',via:(x.detalle||{}).via||'',x:x.texto||''})}else if(x&&x.clase==='cookie'){COOKIES.push(x);apuntaRX('k',{d:x.dominio||'',x:x.texto||''})}if(HUELLAS.length>300)HUELLAS.splice(0,100);if(COOKIES.length>300)COOKIES.splice(0,100)}catch(e){}const r=_zs?_zs.apply(this,arguments):undefined;radioPronto();return r}}
 {const _zv=window.zeroVigilancia;window.zeroVigilancia=function(){const r=_zv?_zv.apply(this,arguments):undefined;radioPronto();return r}}
 {const _zl=window.zeroLista;window.zeroLista=function(){const r=_zl?_zl.apply(this,arguments):undefined;radioPronto();return r}}
 vistaRadio('radio');pintaRadio();
 requestAnimationFrame(tick);
 })();
-</script><script src="pdf.js?v=20261027a"></script><script src="motor.js?v=20261027b"></script></body></html>
+</script><script src="pdf.js?v=20261027b"></script><script src="motor.js?v=20261027b"></script></body></html>
