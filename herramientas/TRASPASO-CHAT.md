@@ -1,6 +1,27 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-## Estado al 27 Oct 2026, 15:35 (Bogotá) — EMPIEZA POR AQUÍ
+## Estado al 27 Oct 2026, 16:45 (Bogotá) — EMPIEZA POR AQUÍ
+
+Lo de las 15:35 (abajo) sigue valiendo salvo lo que cambia aquí.
+
+- **NÚCLEO guiado al 100 %** (dueño, 15:35–15:38: «guiado… una guía perfecta», «sin opción de escribir mejor»; ronda 63, las dos voces de acuerdo). Publicado en las dos ramas.
+  - **Una sola pregunta a la vez**, que cambia en el mismo sitio (como un cajero), sin caja de escribir. Encima, el camino («Menú principal › Ver mis datos › Resumen en PDF»; cada paso anterior se toca para volver). Debajo, «← Atrás» y «Menú principal» (pegados abajo si hay que desplazar). «Atrás» recuerda lo elegido (`.ns-elegida`).
+  - **Menú:** Navegar por internet · Ver quién me rastrea · Ver mis datos · Hablar y enviar archivos · Explorar el planeta · Ayuda y dudas (`GRUPOS`, con su línea; en el móvil, 2 columnas con icono y título). Después, **como mucho 4 opciones** por pregunta: «Cables, centros de datos o satélites» abre su paso (`p-capas`); seguridad y privacidad van juntas (`seguridad`); precio y cuenta, juntos (`precio`); «¿Qué es la Radiografía?» (`r-que`).
+  - **Borrar:** «Sí, borrar» y «No» vuelven a la lista de la que se vino con una línea (`#ns-aviso`). **Al volver** de ZERO o de Comunicaciones: el mismo paso y «Has vuelto a NÚCLEO» (el camino se guarda en `sessionStorage` `nucleo-camino` y se rehace al cargar).
+  - **Atajos:** «Navegar con Tor» abre ZERO con Tor puesto (pulsa `#ultra` dentro de ZERO); «Tengo un código» y «Crear una invitación» abren Comunicaciones en ese paso (`comunicaciones/?paso=codigo|crear`, en `app.js` → `arranca()`; «crear» espera la conexión y no toca una conversación abierta).
+  - **El idioma, arriba** (`#ns-idioma`, español ↔ inglés); fuera «Nueva conversación».
+  - Código: la pila `pasos`, `ensena()`, `pinta()`, `migas()`, `guia()`, `vuelveA()`, `turno` (lo que llega tarde no pisa la pregunta nueva). La tarjeta del PDF o del vídeo ocupa el sitio del paso («Un momento: preparo el resumen.» mientras tanto).
+  - 29 frases nuevas en los 42 idiomas (`scratchpad/trad63.py`).
+  - Pruebas: `scratchpad/home/guia2.js` (es 800 y 390, en 1440; recorre todos los botones: ningún paso sin salida y nada a más de 3 toques) y `guia-idiomas.js` (8 idiomas, nada en español). `orden.js` y `panel-pedir.js` eran del modelo de chat: ya no valen.
+- **Agencia:**
+  - **Ronda 61** (buscador propio) cerrada (`ronda61/notas.md`). Las dos voces: un buscador híbrido (índice propio pequeño + API) dentro de ZERO; los resultados se abren en ZERO con su Radiografía; Meilisearch para empezar; «0 virus» no se puede decir. Comprobado: Bing API retirada (11 Ago 2025); Cloudflare Radar es CC BY-NC; Mojeek cobra 2–3 £ por 1.000 consultas y Brave 3–5 US$. Decide el dueño: nombre (GUARDIANA Busca), países (5 o 20), proveedor (Mojeek o Brave) y presupuesto.
+  - **Ronda 62** («si fuerais los dueños») cerrada (`ronda62/notas.md`): COMPRUEBA (comprobador de estafas) como imán, ENTREGA (documentos; quien recibe, gratis), una suscripción barata, plan familiar.
+  - **Ronda 63** (NÚCLEO guiado): hecha (arriba).
+  - Las rondas 61 y 62 se le contaron al dueño a las 16:45.
+- Versiones: `nucleo.js?v=20261027za`, `nucleo.css?v=20261027v`, `idioma.js?v=20261027p13`, `comunicaciones/app.js?v=20261027g`.
+- **Pendiente:** las decisiones del dueño (rondas 60–62 y escribir sí o no en NÚCLEO); montar el cobro en modo de prueba; traducir las multas a 39 lenguas; lo de las 15:35.
+
+## Estado al 27 Oct 2026, 15:35 (Bogotá)
 
 Lo de las 14:30 (abajo) sigue valiendo salvo lo que cambia aquí.
 
