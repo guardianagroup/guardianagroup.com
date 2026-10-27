@@ -570,7 +570,6 @@ alicetown	BS	25.728	-79.29721	949	Alice Town
 clarencetown	BS	23.1	-74.98333	1752	Clarence Town
 cockburntown	BS	24.05179	-74.53138	831	Cockburn Town
 duncantown	BS	22.19083	-75.72583	70	Duncan Town
-eightmilerock	BS	26.51667	-78.78333	9640	Eight Mile Rock
 freeport	BS	26.53333	-78.7	26910	Freeport
 freshcreek	BS	24.70502	-77.76912	2455	Andros Town
 georgetown	BS	23.51616	-75.78665	7314	George Town
@@ -581,7 +580,7 @@ matthewtown	BS	20.94982	-73.67346	452	Matthew Town
 nassau	BS	25.05823	-77.34306	227940	Nassau
 portnelson	BS	23.64967	-74.84157	91	Port Nelson
 rocksound	BS	24.86618	-76.15996	961	Rock Sound
-sandypoint	BS	26.02052	-77.39	547	Sandy Point
+sandypoint	BS	26.02052	-77.39	0	Sandy Point
 westend	BS	26.68711	-78.97702	12724	West End
 chhukha	BT	27.0989	89.53604	2855	Tsimasham
 chukha	BT	27.0989	89.53604	2855	Tsimasham
