@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261026i">
+<link rel="stylesheet" href="app.css?v=20261026k">
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -32,7 +32,7 @@
 
     <div class="grandes" id="paso-inicio">
       <button type="button" class="grande principal" id="nueva"><b>Crear invitación</b><small>Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
-      <button type="button" class="grande" id="unir"><b>Tengo un código</b><small>Escribe las 9 cifras que te han dado</small></button>
+      <button type="button" class="grande" id="unir"><b>Tengo un código</b><small>Escribe las 9 cifras que te han enviado</small></button>
     </div>
 
     <div class="paso" id="paso-codigo" hidden>
@@ -45,7 +45,7 @@
     </div>
 
     <div class="paso" id="paso-entrar" hidden>
-      <h2>Escribe el código</h2>
+      <h2>Escribe las 9 cifras que te han enviado</h2>
       <input class="campo codigo-campo" id="unir-codigo" inputmode="numeric" autocomplete="one-time-code" maxlength="11" placeholder="··· ··· ···" aria-label="Código de invitación" translate="no" spellcheck="false">
       <p class="t alerta" id="unir-mal" hidden>Ese código no vale o ha caducado. Pídele uno nuevo a la otra persona.</p>
       <p class="t" id="unir-espera" hidden>Comprobando…</p>
@@ -57,7 +57,8 @@
   <section class="conv" id="conv" hidden>
     <header class="gc-cabecera">
       <span class="gc-avatar candado" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
-      <div class="gc-quien"><span class="gc-nombre" id="cnombre">Conversación cifrada</span><span class="gc-confianza" id="cconfianza">Esperando a la otra persona…</span></div>
+      <div class="gc-quien"><span class="gc-nombre"><span id="cnombre">Conversación cifrada</span> <em class="sello-insignia" id="sello-insignia" hidden>SELLADA</em></span><span class="gc-confianza" id="cconfianza">Esperando a la otra persona…</span></div>
+      <button type="button" class="discreto" id="discreto" aria-pressed="true" title="Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal."><svg class="ojo-no" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 6.1A9.8 9.8 0 0 1 12 6c6.5 0 10 6 10 6a17 17 0 0 1-3.2 3.9M6.2 7.8C3.6 9.6 2 12 2 12s3.5 6 10 6c1.7 0 3.2-.4 4.5-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg><svg class="ojo" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Modo discreto</span><i class="interruptor-mini" aria-hidden="true"></i></button>
       <button type="button" class="gc-cab-boton gc-escudo-boton" id="escudo" aria-label="Seguridad de esta conversación" title="Seguridad"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></button>
       <button type="button" class="boton terminar" id="terminar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Terminar</button>
     </header>
@@ -71,14 +72,14 @@
     <div class="gc-enviando" id="enviando" hidden></div>
     <div class="gc-compositor">
       <button type="button" class="gc-redondo" id="adjuntar" aria-label="Enviar un archivo" title="Enviar un archivo (del tamaño que sea)"><svg viewBox="0 0 24 24"><path d="M21 12.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13.5 4.4a3.5 3.5 0 0 1 5 5L10 18a1.5 1.5 0 0 1-2.1-2.1L15.5 8.3"/></svg></button>
-      <textarea class="gc-campo" id="texto" rows="1" placeholder="Escribe un mensaje" aria-label="Mensaje" autocomplete="off"></textarea>
+      <div class="campo-envoltura" id="campo-envoltura"><div class="mascara" id="texto-mascara" aria-hidden="true"></div><textarea class="gc-campo" id="texto" rows="1" placeholder="Escribe un mensaje" aria-label="Mensaje" autocomplete="off" spellcheck="false"></textarea></div>
       <div class="grabando" id="grabando" hidden><i></i><span id="grabando-t">0:00</span><span class="t">Grabando nota de voz…</span><button type="button" class="boton" id="grabar-cancelar">Cancelar</button></div>
       <button type="button" class="gc-redondo" id="grabar" aria-label="Grabar nota de voz" title="Nota de voz"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
       <button type="button" class="gc-redondo gc-principal" id="enviar" aria-label="Enviar"><svg viewBox="0 0 24 24"><path d="M4 12l16-7-7 16-2-7z"/></svg></button>
     </div>
     </div>
     <aside class="vigila" id="vigila" aria-label="Vigilancia de seguridad">
-      <div class="vh"><span class="vivo"><i></i>VIGILANCIA</span><small id="vigila-ultima"></small></div>
+      <div class="vh"><span class="vivo"><i></i>VIGILANCIA</span><small id="vigila-ultima" title="Última verificación de contenido"></small></div>
       <ul class="gc-escudo" id="vigila-filas"></ul>
       <small class="sub">EN VIVO</small>
       <ul class="vivos" id="vigila-vivo"></ul>
@@ -105,9 +106,9 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261027d"></script>
+<script src="/orbita/static/idioma.js?v=20261027f"></script>
 <script src="cripto.js?v=20261026c"></script>
-<script src="rele.js?v=20261026c"></script>
-<script src="app.js?v=20261026g"></script>
+<script src="rele.js?v=20261026d"></script>
+<script src="app.js?v=20261026i"></script>
 </body>
 </html>

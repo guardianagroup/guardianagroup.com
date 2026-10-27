@@ -85,6 +85,11 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .vigila .vivos li.ok{color:var(--muted)}.vigila .vivos li.bien{color:var(--ok)}.vigila .vivos li.mal{color:var(--alerta);font-weight:500}.vigila .vivos li.info{color:var(--accent)}
 .vigila.alerta .vivo{color:var(--alerta)}.vigila.alerta .vivo i{background:var(--alerta)}
 .conv .gc-cabecera{gap:10px;padding-right:12px}
+/* Sellada (dueño, 20:31): cuando el cifrado está confirmado y la otra persona presente, un aura clara rodea la conversación */
+.sello-insignia{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid rgba(244,246,248,.55);color:var(--fg);font:600 10px/1.4 var(--texto);letter-spacing:.14em;vertical-align:middle;box-shadow:0 0 12px rgba(244,246,248,.35)}
+.conv.sellada .lienzo{box-shadow:inset 0 0 0 1px rgba(244,246,248,.45),inset 0 0 28px rgba(244,246,248,.10),inset 0 0 90px rgba(156,195,228,.10);animation:sellando 1.2s ease-out}
+@keyframes sellando{0%{box-shadow:inset 0 0 0 1px rgba(244,246,248,0),inset 0 0 0 rgba(244,246,248,0)}60%{box-shadow:inset 0 0 0 2px rgba(244,246,248,.9),inset 0 0 60px rgba(244,246,248,.25)}100%{box-shadow:inset 0 0 0 1px rgba(244,246,248,.45),inset 0 0 28px rgba(244,246,248,.10),inset 0 0 90px rgba(156,195,228,.10)}}
+.conv.sellada .candado{box-shadow:0 0 0 1px rgba(244,246,248,.6),0 0 16px rgba(244,246,248,.35)}
 .conv .candado{background:var(--accent-suave);color:var(--accent)}.conv .candado svg{width:18px;height:18px}
 .boton.terminar{min-height:38px;padding:6px 18px;font:600 13.5px/1.2 var(--texto);color:#06080C;background:var(--alerta);border:1px solid var(--alerta);border-radius:999px;margin-left:6px;display:inline-flex;align-items:center;gap:7px}
 .boton.terminar svg{width:15px;height:15px;stroke-width:2.2}
@@ -100,6 +105,23 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .gc-mensajes>li.gc-centro{align-items:center}
 .gc-mensajes .gc-burbuja{max-width:min(72%,620px)}
 .gc-compositor{padding:8px 10px}
+/* Modo discreto (dueño, 26 Oct 20:32–20:34): un solo interruptor; con él, chat borroso hasta mantener pulsado y lo que se escribe se ve como números */
+.discreto{appearance:none;display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:5px 10px 5px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);font:500 13px/1 var(--texto);cursor:pointer;white-space:nowrap}
+.discreto svg{width:17px;height:17px}.discreto .ojo{display:none}
+.discreto[aria-pressed="false"] .ojo-no{display:none}.discreto[aria-pressed="false"] .ojo{display:block}
+.discreto .interruptor-mini{width:26px;height:15px;border-radius:999px;background:var(--line);position:relative;flex:none;transition:background .2s}
+.discreto .interruptor-mini::after{content:'';position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:var(--muted);transition:transform .2s,background .2s}
+.discreto[aria-pressed="true"]{color:var(--fg);border-color:rgba(156,195,228,.55);background:rgba(156,195,228,.10)}
+.discreto[aria-pressed="true"] svg{color:var(--accent)}
+.discreto[aria-pressed="true"] .interruptor-mini{background:var(--accent)}
+.discreto[aria-pressed="true"] .interruptor-mini::after{transform:translateX(11px);background:#06080C}
+.campo-envoltura{flex:1;min-width:0;position:relative;display:flex}
+.campo-envoltura .gc-campo{flex:1}
+.mascara{position:absolute;inset:0;box-sizing:border-box;padding:11px 16px;border:1px solid transparent;border-radius:22px;font:400 16px/1.35 var(--mono);color:var(--fg);white-space:pre-wrap;word-break:break-all;overflow:hidden;pointer-events:none;display:none;letter-spacing:0}
+.conv.discreta .mascara{display:block}
+.conv.discreta #texto{color:transparent;caret-color:var(--accent);font-family:var(--mono);word-break:break-all;letter-spacing:0}
+.conv.discreta #texto::placeholder{color:var(--muted-2);font-family:var(--texto)}
+.conv:not(.discreta) .velo-pista{display:none}
 .grabando{flex:1;min-height:44px;display:flex;align-items:center;gap:10px;padding:6px 6px 6px 14px;border-radius:22px;border:1px solid rgba(224,122,108,.5);background:var(--campo);font:400 14px/1.3 var(--texto)}
 .grabando i{width:10px;height:10px;border-radius:50%;background:var(--alerta);animation:late 1s infinite}
 @keyframes late{50%{opacity:.3}}
