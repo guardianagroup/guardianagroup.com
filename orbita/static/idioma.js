@@ -1534,6 +1534,7 @@
     "Modo discreto": ["Discreet mode", "Modo discreto"],
     "Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.": ["Discreet mode: the chat looks blurred until you hold it and what you type shows as numbers. Press it to see everything normally.", "Modo discreto: o chat fica borrado até você mantê-lo pressionado e o que você digita aparece como números. Toque para ver tudo normal."],
     "Modo discreto: lo que escribas se verá como números": ["Discreet mode: what you type will show as numbers", "Modo discreto: o que você digitar aparecerá como números"],
+    "Código erróneo o caducado.": ["Wrong or expired code.", "Código errado ou expirado."],
     'celda en': ['cell in', 'célula em'],
     'Observar': ['Observe', 'Observar'],
     'observar': ['observe', 'observar'],
