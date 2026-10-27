@@ -230,8 +230,16 @@
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
     } catch (e) { console.warn('presentación', e); }
   }
-  async function derivaSesion(c, suEf, efMia, pq) {
+  async function derivaSesion(c, suEf, efMia, pq, acepta) {
     if (!efMia || !suEf || !c.acuerdoPub) { if (pq && pq.ss) pq.ss.fill(0); return; }
+    // 27 Oct 2026, ronda 55 (ChatGPT y Astra): una conversación que ya tuvo sesión postcuántica no vuelve a solo ECDH sin que
+    // la persona lo acepte expresamente; mientras, no hay sesión (no sale nada) y se explica arriba.
+    if (!pq && c.pqVisto && !acepta) {
+      const yaParada = !!c.clasicaPendiente; c.clasicaPendiente = { suEf, efMia }; c.sesion = null;
+      if (!yaParada) vigila(c, T('Sesión sin protección postcuántica parada: esta conversación ya la tenía. Solo sigue si tú lo aceptas.'), 'mal');
+      pintaCabecera(c); return;
+    }
+    c.clasicaPendiente = null;
     const inicio = soyInicio(c);
     const s = await C.sesion(YO, efMia, { ef: suEf, acuerdoPub: c.acuerdoPub }, c.id, inicio, c.psk, YO.huella, c.huella, pq || null);
     if (pq && pq.ss) pq.ss.fill(0);
@@ -286,7 +294,7 @@
     if (b.length < 13 + 16) return;
     const sid = C.hex(b.subarray(1, 9)), n = new DataView(b.buffer, b.byteOffset).getUint32(9);
     const ses = c.sesiones.get(sid);
-    if (!ses) { R.manda(c.id, de, new Uint8Array([4])); return; } // no conozco esa sesión: que se presente otra vez
+    if (!ses) { if (!c.clasicaPendiente) R.manda(c.id, de, new Uint8Array([4])); return; } // no conozco esa sesión: que se presente otra vez (salvo con la sesión sin capa postcuántica parada: no se vuelve a negociar en bucle)
     let j;
     try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), C.cat(b.subarray(0, 13), ses.hash)))); } catch (e) { if (!/repetido|saltados/.test(e.message)) { c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); pintaRadio(c); } return; }
     if (c.suId !== de) return;
@@ -549,7 +557,8 @@
     else if (!R.abierto) txt = T('Sin conexión con el relé');
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
     else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo el cifrado…');
-    else txt = T('Cifrada de extremo a extremo') + ' · ' + (c.verificada ? T('verificada') : T('sin verificar'));
+    else txt = T('Cifrada de extremo a extremo') + ' · ' + (c.sesion.pq ? T('postcuántica') + ' · ' : T('sin protección postcuántica') + ' · ') + (c.verificada ? T('verificada') : T('sin verificar'));
+    const pqa = $('#cpq'); if (pqa) pqa.hidden = !c.clasicaPendiente;
     if (c.huella && !c.verificada) conf.classList.add('gc-sin-verificar');
     conf.textContent = txt;
   }
@@ -713,8 +722,11 @@
     // «Crear invitación» al final del bloque para profesionales: sube al principio y hace lo mismo que el botón grande.
     const proEmpezar = $('#pro-empezar');
     if (proEmpezar) proEmpezar.addEventListener('click', () => { const ini = $('#inicio'); if (ini) ini.scrollTo({ top: 0, behavior: 'smooth' }); $('#nueva').click(); });
+    // ronda 55: la persona acepta, a sabiendas, una sesión sin protección postcuántica (la otra persona tiene una versión anterior)
+    const pqSi = $('#cpq-si');
+    if (pqSi) pqSi.addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (!c || !c.clasicaPendiente) return; const p = c.clasicaPendiente; vigila(c, T('Has aceptado seguir sin protección postcuántica en esta sesión.'), 'info'); enCola(c, () => derivaSesion(c, p.suEf, p.efMia, null, true)); });
     // dueño, 10:20: arriba, la red neuronal de NÚCLEO (la misma firma que la portada)
-    try { const l = $('.inicio .red-nucleo'); if (l && window.RedNucleo) window.RedNucleo(l, { nace: false, puntos: 220 }); } catch (_) {}
+    try { const l = $('.inicio .red-nucleo'); if (l && window.RedNucleo) window.RedNucleo(l, { nace: false }); } catch (_) {}
     // dueño, 10:10: la explicación, en un desplegable bajo los dos botones
     const como = $('#como-btn');
     if (como) como.addEventListener('click', () => { const pro = $('#pro'); if (!pro) return; const abre = pro.hidden; pro.hidden = !abre; como.setAttribute('aria-expanded', String(abre)); if (abre) setTimeout(() => pro.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30); });

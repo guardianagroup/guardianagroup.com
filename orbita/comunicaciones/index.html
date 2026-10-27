@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261027d">
+<link rel="stylesheet" href="app.css?v=20261027e">
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -144,6 +144,8 @@
       <button type="button" class="gc-cab-boton gc-escudo-boton" id="escudo" aria-label="Seguridad de esta conversación" title="Seguridad"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></button>
       <button type="button" class="boton terminar" id="terminar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Terminar</button>
     </header>
+    <!-- ronda 55 (ChatGPT y Astra): si una conversación que ya fue postcuántica vuelve a solo ECDH, se para hasta que la persona lo acepte -->
+    <div class="gc-pq" id="cpq" role="alert" hidden><span>La otra persona no ha usado la protección postcuántica. Esta conversación ya la tenía, así que la he parado.</span><button type="button" class="boton" id="cpq-si">Continuar sin protección postcuántica</button></div>
     <div class="cuerpo">
     <div class="charla">
     <div class="radio" id="radio" hidden><i></i><span id="radiotxt"></span></div>
@@ -188,11 +190,11 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261027p4"></script>
+<script src="/orbita/static/idioma.js?v=20261027p5"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="cripto.js?v=20261027a"></script>
-<script src="/orbita/static/red-nucleo.js?v=20261027a"></script>
+<script src="/orbita/static/red-nucleo.js?v=20261027b"></script>
 <script src="rele.js?v=20261026d"></script>
-<script src="app.js?v=20261027c"></script>
+<script src="app.js?v=20261027d"></script>
 </body>
 </html>

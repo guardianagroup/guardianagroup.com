@@ -98,7 +98,7 @@
 .ns-cuerpo{position:relative;z-index:1;flex:1;min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#3e5263 transparent}
 .ns-col{width:min(760px,100%);margin:0 auto;padding:4px 16px 18px}
 .ns-hola{text-align:center;padding:8px 0 18px}
-.ns-red{display:block;width:min(20vh,150px);height:min(20vh,150px);margin:0 auto}
+.ns-red{display:block;width:min(24vh,200px);height:min(24vh,200px);margin:0 auto}
 .ns-hola h2{margin:8px 0 0;font:300 clamp(26px,3.2vw,36px)/1.15 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:-.01em}
 .ns-hola p{margin:10px auto 0;max-width:560px;font-size:16px;line-height:1.55;color:#c9d6e2;text-wrap:balance}
 .ns-charla{display:flex;flex-direction:column;gap:10px}
