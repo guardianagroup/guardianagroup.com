@@ -70,7 +70,9 @@
       if (estado !== 'hablando' || ajustes) { caja.classList.remove('reposo'); clearTimeout(reposo); }
       $('#ll-entrante').hidden = estado !== 'entrante';
       $('#ll-botones').hidden = estado === 'entrante';
-      $('#ll-nombre').textContent = o.nombre();
+      // dueño, 28 Oct 2026, 12:49 («que sea profesional… como hacen las otras aplicaciones»): el nombre que la otra persona se puso
+      // y, si no se puso ninguno, «Llamada encriptada» o «Videollamada encriptada» (antes, «La otra persona»)
+      $('#ll-nombre').textContent = o.nombre() || (video ? t('Videollamada encriptada') : t('Llamada encriptada'));
       $('#ll-avatar').textContent = o.inicial();
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
