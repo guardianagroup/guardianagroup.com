@@ -77,19 +77,19 @@ Estado al traspaso:
 - **Textos de la interfaz.**
   - Están en el mapa D de `orbita/static/idioma.js` y solo hay inglés y portugués.
   - Las entradas nuevas se ponen justo después de la línea ancla `    "Enviar": ["Send", "Enviar"],`.
-  - Al cambiarlo, sube `idioma.js?v=` en 5 páginas: orbita/comunicaciones/index.html, orbita/comunicaciones/verificar/index.html, orbita/zero/index.html, orbita/index.html y orbita/multas/index.html. Ahora va por **20261029p53**.
+  - Al cambiarlo, sube `idioma.js?v=` en 5 páginas: orbita/comunicaciones/index.html, orbita/comunicaciones/verificar/index.html, orbita/zero/index.html, orbita/index.html y orbita/multas/index.html. Ahora va por **20261029p54**.
 - **Huellas.** Ejecuta `python3 herramientas/huellas.py` después de tocar Comunicaciones; escribe `orbita/comunicaciones/huellas.txt`.
 - **Versiones en `orbita/comunicaciones/index.html`:**
 
   | Archivo | Versión |
   |---|---|
-  | app.js | 20261029j |
-  | app.css | 20261029h (verificar/index.html carga `../app.css` con la misma versión) |
+  | app.js | 20261029k |
+  | app.css | 20261029k (verificar/index.html carga `../app.css` con la misma versión) |
   | llamada.js | 20261029t |
   | rele.js | 20261028o |
   | componentes.css | 20261028m |
 
-  Súbelas al tocar cada archivo.
+  Súbelas al tocar cada archivo. Después de publicar, `python3 herramientas/versiones.py` tiene que decir «total desfasados: 0» (a las 16:34, 16:46 y 16:59 app.css y app.js cambiaron sin subir la versión; se arregló a las 17:25).
 - **Portada (`index.html` de la raíz).** Usa `/guardiana.css?v=20261028a` y lleva su propio diccionario `I` (es/en/pt) dentro del archivo.
 
 ---
@@ -204,7 +204,12 @@ Raíz y www: 185.199.108–111.153 (GitHub Pages).
 - Manifiesto propio `comunicaciones.webmanifest`: pantalla completa, vertical, alcance /orbita/comunicaciones/.
 - **Android:** pide pantalla completa sola al crear, aceptar, llamar o contestar.
 - **iPhone:** no deja hacerlo desde una web. Lo explica «⋯» → «Pantalla completa».
-- **«Añadir a la pantalla de inicio»:** en Android y en el ordenador, la ventana del sistema; en el iPhone, los pasos.
+- **«Añadir a la pantalla de inicio»** (sale en el iPhone y en todos los Android; en el ordenador, solo si el navegador da la ventana de instalar). En Android, un toque abre la ventana del sistema. Si no, abre **la guía** (dueño, 17:02: «lo más profesional posible… los mismos botones que se va a encontrar la persona»):
+  - Es la hoja `h-completa`: pasos numerados y, debajo de cada uno, el botón dibujado como es en el teléfono (clases `ui-*`); a la derecha del primero, un teléfono pequeño con un punto donde está el botón.
+  - Cada parte lleva `data-p` con sus plataformas (`plataformaGuia` en app.js): `ios26` (Safari con `Version/26` o más), `ios`, `ipad`, `crios26`/`crios` (Chrome en el iPhone), `otro26`/`otro`, `app` y `appand` (dentro de Instagram, Facebook…), `android` (con la ventana del sistema), `androidmenu` (Chrome sin ella), `androidotro`, `pc` y `pcno`. Fuera de Safari, iOS 26 se reconoce por `CSS.supports('anchor-name', …)`.
+  - iOS 26 (como en la pantalla del dueño, 17:01): «⋯» › «Compartir», «Ver más», «Agregar a Inicio», «Agregar» y «Abrir como app web». En España (`navigator.language` es-ES) dice «Añadir…» (`data-es-es`).
+  - «Entendido» o «Instalar» quedan siempre a la vista (fila pegada abajo).
+- **Nombre como app: GUARDIANA** (dueño, 17:06): `name` y `short_name` del manifiesto, `apple-mobile-web-app-title` y el título de la página. En el iPhone, un icono añadido antes conserva el nombre viejo: hay que borrarlo y añadirlo otra vez.
 - **Enlace para mandar:** guardianagroup.com/orbita/comunicaciones/?instalar
 - En el iPhone, lo de Chrome y lo del icono se guardan por separado.
 
@@ -252,7 +257,7 @@ Raíz y www: 185.199.108–111.153 (GitHub Pages).
 - Pasos:
   - `#paso-inicio`, `#paso-codigo` (con `#codigo-enlace`), `#paso-enlace` (`#enlace-vista` / `#enlace-espera`), `#paso-aceptar`, `#paso-entrar`.
   - `#espera-otro` y `#fin-invitado`.
-- Hojas: `h-nueva`, `h-vaciar`, `h-completa`, `h-instalar`, `h-ubicacion`, `h-envio`, `h-nombre`.
+- Hojas: `h-nueva`, `h-vaciar`, `h-completa` (la guía de la pantalla de inicio; ya no hay `h-instalar`), `h-ubicacion`, `h-envio`, `h-nombre`.
 - Otros: `#adjuntos`, `#tapar` y el menú `#cmenu` (`cm-nombre`, `cm-seguridad`, `cm-discreto`, `cm-avisos`, `cm-completa`, `cm-terminar`).
 
 ---
@@ -288,6 +293,7 @@ Resultados de la última vez, todo verde:
 | tapar | 5 |
 | completa | 4 |
 | instalar | 3 |
+| guia (cada teléfono y navegador) | 74 |
 | pip | 4 |
 | sincopia | 10 |
 | entrar | 4 |
