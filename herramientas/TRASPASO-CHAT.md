@@ -1,6 +1,78 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-## Estado al 27 Oct 2026, 20:25 (Bogotá) — EMPIEZA POR AQUÍ
+## Estado al 28 Oct 2026, madrugada (Bogotá) — EMPIEZA POR AQUÍ
+
+Lo de las 20:25 (abajo) sigue valiendo salvo lo que cambia aquí. El dueño se acostó a las 22:43 con el encargo de hacerlo todo, publicarlo en los 42 idiomas y suspender el PC. Publicado en las dos ramas (web-idiomas `becbf465`, `f04b6b5e`, `a1c555db`, `4bb9e7af`; main `a78c399b`, `37167305`, `5525dc01`, `4b9292f9`).
+
+### Publicado
+
+**Sesión blindada de Comunicaciones** (dueño, 22:01–23:12, «de la máxima»; la nombramos «con los algoritmos de la suite CNSA 2.0», nunca «certificada» ni «conforme»):
+
+- **Identidad:** una nueva en cada sesión (`c.idB`): ECDSA y ECDH P-384 no exportables y ML-DSA-87, con la clave secreta encriptada con la clave «reposo».
+- **Invitación:** solo `#b=<semilla>` (enlace o QR, 256 bits; el fragmento se quita con `replaceState`). La sala es SHA-256 de la semilla. La presentación y la PSK salen de HKDF-SHA-384.
+- **Presentaciones `{v:4,b:1}`:**
+  - Firmas: `sig` ECDSA P-384 y `sigpq` ML-DSA-87 sobre los mismos bytes (`datosIniciaB`/`datosRespondeB`); sin las dos, se descartan.
+  - Relleno a 1 KB.
+  - ML-KEM-1024 obligatorio.
+- **Sesión:**
+  - IKM = 3×DH P-384 ‖ ss ML-KEM-1024 ‖ PSK.
+  - HKDF-SHA-384 da 128 bytes.
+  - Cadenas HMAC-SHA-384 con `borra()`.
+- **Puerta:** `puedeEnviar` bloquea texto, archivos y llamada hasta `verificada && suVerificada`. El control `verificada` lleva el hash del número.
+- **Renovación:** cada 5 min la inicia quien inicia (`?renueva=N` en local). Quedan las 3 últimas sesiones.
+- **Relleno:** mensajes a múltiplos de 1 KB; el último trozo de archivo, completo, y se recorta al recibirlo.
+- **Comprobante:**
+  - formato `GUARDIANA comprobante de entrega e integridad v2 blindada`;
+  - firmas ECDSA P-384 y `firmas_pq` ML-DSA-87;
+  - número «GB-».
+- **Cierre:** informe de cierre y `borraClavesB`.
+- **Relé** (`zero-motor/comunicaciones.js`, se despliega solo desde main): `entra` con `b:1`, 64 MB/s, ráfaga de 128 MB, máximo 64 blindadas y `blindadas` en `/salud`.
+
+**Llamadas de voz** (`llamada.js`, `voz.js`), en la sesión normal y en la blindada:
+
+- WebRTC. Fuera de local, siempre `iceTransportPolicy: 'relay'`: sin TURN no conecta y nunca va directa.
+- La señalización viaja dentro del canal E2E. Audio con DTLS-SRTP (no es postcuántico, y la web lo dice).
+- Cambio de voz con AudioWorklet: natural, grave, aguda, distorsionada o robot, guardado en `gcom-voz`.
+
+**Verificación del comprobante blindado:** `verificar/` carga `pq-cnsa.js` y acepta `V.FORMATO_B`. Prueba: `verifica-blindada.js`.
+
+**Textos (ronda 71, tres voces):**
+
+- Bloque «Sesión blindada y llamadas de voz» en «Cómo funciona», con dos líneas en la ficha técnica.
+- Portada: dos tarjetas nuevas («Sesión blindada.», «Llamadas de voz.»); «Límites claros.» al día; «chat, archivos y llamadas».
+- `terminos.html`: describe la blindada y las llamadas.
+- Prohibido en la web: «auditada», «certificada», «conformidad CNSA 2.0», «recuperación tras compromiso», «anónima» y decir que el audio es postcuántico.
+
+**Idiomas:**
+
+- Lote 1 fusionado: `tr/` y `tr4/`, el viaje y el comprobante, con «custodia» retirada.
+- Lote 2 en los 41 idiomas: `tr5/` (95 frases), `trp/` (portada, 10) y `enpt5.py`.
+- Script: `fusiona5.py`. Prueba: `prueba-idiomas5.js` (ninguna frase nueva en español en ningún idioma).
+- `idioma.js?v=20261028p22`, `app.js?v=20261028a`, `llamada.js?v=20261028a`.
+- Todo en el scratchpad `home/viaje`.
+
+**Agencia, ronda 71** (modo ataque; `herramientas/agencia-rondas/ronda71/`): respuestas, `competencia.md` (47 fuentes) y `notas.md`.
+
+### No hecho
+
+- **Red de nodos de dos saltos:** el dueño la pidió (23:04 y 23:53), pero no se pudo construir en esta sesión y queda pendiente.
+  - El diseño de las voces está en `ronda71/gemini.md` (B5) y `ronda71/astra.md` (parte 2).
+  - **Servidor de Helsinki:** `motor-hel.guardianagroup.com` (62.238.17.121, Hetzner CPX02, 6,49 €/mes) está creado, con `instalar.sh` y su registro A, pero sin uso.
+- **OnPrem («Comunicaciones en tus propios servidores»):** pendiente. Ya hay relé AGPL con una orden y `PROPIO` en `rele.js`.
+- **Servidor de Miami:** sin motor; el antiguo `motor-am` (Vultr) no sirve. No se compró nada.
+
+### Siguiente (dos voces o más)
+
+- Anclar el código servido.
+- Sello de tiempo de un tercero en el comprobante.
+- ML-DSA en un Worker con `.fill(0)`.
+- WebAuthn PRF.
+- PAKE para el código de 9 cifras.
+- Máquina de estados de la renovación, con confirmación y un contador firmado.
+- Pruebas negativas: repetición, retroceso de época, trozo cambiado y comprobante reutilizado.
+- Clave clara para «velocidad media» (en CJK, «media» se lee como «mediano»).
+
+## Estado al 27 Oct 2026, 20:25 (Bogotá)
 
 Lo de las 19:45 (abajo) sigue valiendo. Novedad: **la agencia de las rondas 65–69 está recogida y cruzada**, publicada en las dos ramas.
 
