@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "прекъснато от другия човек",
   "cortado por ti": "прекъснато от теб",
   "país según la zona horaria del equipo": "държава според часовата зона на устройството",
-  "según la zona horaria": "според часовата зона"
+  "según la zona horaria": "според часовата зона",
+  "Ampliar": "Уголеми",
+  "Apagar la cámara": "Изключване на камерата",
+  "Difuminada": "Размазан",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Промяната се прави на твоето устройство, преди шифроването: оригиналният ти образ не излиза оттук. Не се различават чертите на лицето ти, нито очите ти; различават се обаче силуетът ти, жестовете ти и това, което е зад теб.",
+  "Encender la cámara": "Включване на камерата",
+  "Mosaico": "Мозайка",
+  "Pidiendo la cámara y el micrófono…": "Заявка за камерата и микрофона…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Няма разрешение за камерата: обаждането продължава само с глас.",
+  "Tu imagen": "Твоят образ",
+  "Ver el chat": "Виж чата",
+  "Volver a la llamada": "Обратно към обаждането",
+  "imagen": "образ",
+  "Sin filtro": "Без филтър"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

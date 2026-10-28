@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "rofin af hinum aðilanum",
   "cortado por ti": "rofin af þér",
   "país según la zona horaria del equipo": "land samkvæmt tímabelti tækisins",
-  "según la zona horaria": "samkvæmt tímabelti"
+  "según la zona horaria": "samkvæmt tímabelti",
+  "Ampliar": "Stækka",
+  "Apagar la cámara": "Slökkva á myndavél",
+  "Difuminada": "Óskýr",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Breytingin fer fram í tækinu þínu, áður en dulkóðað er: upprunalega myndin þín fer ekki héðan. Ekki er hægt að greina andlitsdrætti þína né augun þín; hins vegar sjást útlínur þínar, látbragð þitt og það sem er fyrir aftan þig.",
+  "Encender la cámara": "Kveikja á myndavél",
+  "Mosaico": "Mósaík",
+  "Pidiendo la cámara y el micrófono…": "Bið um myndavélina og hljóðnemann…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Engin heimild fyrir myndavél: símtalið heldur áfram aðeins með rödd.",
+  "Tu imagen": "Myndin þín",
+  "Ver el chat": "Skoða spjallið",
+  "Volver a la llamada": "Aftur í símtalið",
+  "imagen": "mynd",
+  "Sin filtro": "Engin sía"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "prekinula druga osoba",
   "cortado por ti": "prekinuto s tvoje strane",
   "país según la zona horaria del equipo": "zemlja prema vremenskoj zoni uređaja",
-  "según la zona horaria": "prema vremenskoj zoni"
+  "según la zona horaria": "prema vremenskoj zoni",
+  "Ampliar": "Povećaj",
+  "Apagar la cámara": "Isključi kameru",
+  "Difuminada": "Zamućena",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Promjena se odvija na tvom uređaju, prije šifriranja: tvoja izvorna slika ne izlazi odavde. Ne razaznaju se crte tvog lica ni tvoje oči; razaznaju se, međutim, tvoja silueta, tvoje geste i ono što je iza tebe.",
+  "Encender la cámara": "Uključi kameru",
+  "Mosaico": "Mozaik",
+  "Pidiendo la cámara y el micrófono…": "Traženje pristupa kameri i mikrofonu…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Nema dopuštenja za kameru: poziv se nastavlja samo glasom.",
+  "Tu imagen": "Tvoja slika",
+  "Ver el chat": "Prikaži chat",
+  "Volver a la llamada": "Natrag na poziv",
+  "imagen": "slika",
+  "Sin filtro": "Bez filtra"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

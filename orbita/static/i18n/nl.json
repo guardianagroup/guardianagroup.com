@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "afgebroken door de andere persoon",
   "cortado por ti": "afgebroken door jou",
   "país según la zona horaria del equipo": "land volgens de tijdzone van het apparaat",
-  "según la zona horaria": "volgens de tijdzone"
+  "según la zona horaria": "volgens de tijdzone",
+  "Ampliar": "Vergroten",
+  "Apagar la cámara": "Camera uitzetten",
+  "Difuminada": "Vervaagd",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "De verandering gebeurt op je apparaat, vóór de versleuteling: je originele beeld verlaat dit apparaat niet. Je gelaatstrekken en je ogen zijn niet te onderscheiden; je silhouet, je gebaren en wat zich achter je bevindt wel.",
+  "Encender la cámara": "Camera aanzetten",
+  "Mosaico": "Mozaïek",
+  "Pidiendo la cámara y el micrófono…": "Camera en microfoon aanvragen…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Geen toestemming voor de camera: de oproep gaat alleen met spraak verder.",
+  "Tu imagen": "Je beeld",
+  "Ver el chat": "Chat bekijken",
+  "Volver a la llamada": "Terug naar de oproep",
+  "imagen": "beeld",
+  "Sin filtro": "Zonder filter"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

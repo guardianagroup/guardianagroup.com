@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "दूसरे व्यक्ति ने बीच में रोका",
   "cortado por ti": "आपने बीच में रोका",
   "país según la zona horaria del equipo": "डिवाइस के समय क्षेत्र के अनुसार देश",
-  "según la zona horaria": "समय क्षेत्र के अनुसार"
+  "según la zona horaria": "समय क्षेत्र के अनुसार",
+  "Ampliar": "बड़ा करें",
+  "Apagar la cámara": "कैमरा बंद करें",
+  "Difuminada": "धुंधली",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "बदलाव आपके डिवाइस पर, एन्क्रिप्ट करने से पहले होता है: आपकी असली छवि यहाँ से बाहर नहीं जाती। आपके चेहरे के नैन-नक्श और आपकी आँखें साफ़ नहीं दिखतीं; लेकिन आपकी आकृति, आपके हाव-भाव और आपके पीछे जो कुछ है, वह दिखता है।",
+  "Encender la cámara": "कैमरा चालू करें",
+  "Mosaico": "मोज़ेक",
+  "Pidiendo la cámara y el micrófono…": "कैमरे और माइक्रोफ़ोन की अनुमति माँगी जा रही है…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "कैमरे की अनुमति नहीं है: कॉल केवल आवाज़ के साथ जारी रहती है।",
+  "Tu imagen": "आपकी छवि",
+  "Ver el chat": "चैट देखें",
+  "Volver a la llamada": "कॉल पर वापस जाएँ",
+  "imagen": "वीडियो",
+  "Sin filtro": "बिना फ़िल्टर"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

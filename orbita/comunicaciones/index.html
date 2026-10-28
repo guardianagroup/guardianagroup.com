@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261028e">
+<link rel="stylesheet" href="app.css?v=20261028f">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -282,7 +282,7 @@
 <div class="gc-llamada" id="llamada" role="dialog" aria-modal="true" aria-label="Llamada de voz">
   <div class="gc-llamada-arriba"><span class="gc-llamada-cifrado"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Encriptada de extremo a extremo · por el relé de GUARDIANA</span></span><span class="gc-llamada-estado" id="ll-calidad"></span><button type="button" class="ll-mini-b" id="ll-mini" aria-label="Ver el chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4z"/></svg><span>Ver el chat</span></button></div>
   <!-- Videollamada (dueño, 28 Oct 2026: «máxima calidad de imagen»): la imagen de la otra persona de fondo y la tuya en una esquina -->
-  <div class="videos" id="ll-videos" hidden><video id="v-remoto" autoplay playsinline></video><video id="v-local" autoplay playsinline muted></video></div>
+  <div class="videos" id="ll-videos" hidden><video id="v-remoto" autoplay playsinline muted></video><video id="v-local" autoplay playsinline muted></video></div>
   <div class="gc-llamada-centro" id="ll-centro">
     <span class="gc-avatar-grande" id="ll-avatar" aria-hidden="true">·</span>
     <span class="gc-llamada-nombre" id="ll-nombre" translate="no">—</span>
@@ -307,7 +307,7 @@
   <div class="ll-voces ll-imagenes" id="ll-imagenes" role="group" aria-labelledby="ll-imagenes-t" hidden>
     <span class="ll-voces-t" id="ll-imagenes-t">Tu imagen</span>
     <div class="ll-voces-botones">
-      <button type="button" data-imagen="natural" aria-pressed="true">Natural</button>
+      <button type="button" data-imagen="natural" aria-pressed="true">Sin filtro</button>
       <button type="button" data-imagen="difuminada" aria-pressed="false">Difuminada</button>
       <button type="button" data-imagen="mosaico" aria-pressed="false">Mosaico</button>
     </div>
@@ -386,7 +386,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261028p26"></script>
+<script src="/orbita/static/idioma.js?v=20261028p27"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -396,7 +396,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028a"></script>
-<script src="llamada.js?v=20261028d"></script>
-<script src="app.js?v=20261028f"></script>
+<script src="llamada.js?v=20261028e"></script>
+<script src="app.js?v=20261028g"></script>
 </body>
 </html>

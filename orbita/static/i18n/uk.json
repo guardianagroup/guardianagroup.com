@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "перервано співрозмовником",
   "cortado por ti": "перервано вами",
   "país según la zona horaria del equipo": "країна за часовим поясом пристрою",
-  "según la zona horaria": "за часовим поясом"
+  "según la zona horaria": "за часовим поясом",
+  "Ampliar": "Розгорнути",
+  "Apagar la cámara": "Вимкнути камеру",
+  "Difuminada": "Розмите",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Зміна відбувається на вашому пристрої до шифрування: ваше оригінальне зображення не залишає його. Риси вашого обличчя й ваші очі розрізнити неможливо; а от ваш силует, ваші жести й те, що позаду вас, — можна.",
+  "Encender la cámara": "Увімкнути камеру",
+  "Mosaico": "Мозаїка",
+  "Pidiendo la cámara y el micrófono…": "Запитуємо доступ до камери й мікрофона…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Немає дозволу на камеру: дзвінок триває лише в голосовому режимі.",
+  "Tu imagen": "Ваше зображення",
+  "Ver el chat": "Показати чат",
+  "Volver a la llamada": "Назад до дзвінка",
+  "imagen": "зображення",
+  "Sin filtro": "Без фільтра"
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

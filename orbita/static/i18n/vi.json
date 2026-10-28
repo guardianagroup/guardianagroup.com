@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "bị người kia cắt",
   "cortado por ti": "bị bạn cắt",
   "país según la zona horaria del equipo": "quốc gia theo múi giờ của thiết bị",
-  "según la zona horaria": "theo múi giờ"
+  "según la zona horaria": "theo múi giờ",
+  "Ampliar": "Mở rộng",
+  "Apagar la cámara": "Tắt camera",
+  "Difuminada": "Làm mờ",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Việc thay đổi diễn ra trên thiết bị của bạn, trước khi mã hóa: hình ảnh gốc của bạn không rời khỏi đây. Không thể nhìn rõ các đường nét khuôn mặt hay đôi mắt của bạn; nhưng vẫn nhìn thấy dáng người, cử chỉ của bạn và những gì ở phía sau bạn.",
+  "Encender la cámara": "Bật camera",
+  "Mosaico": "Khảm",
+  "Pidiendo la cámara y el micrófono…": "Đang xin quyền dùng camera và micrô…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Không có quyền dùng camera: cuộc gọi tiếp tục chỉ với giọng nói.",
+  "Tu imagen": "Hình ảnh của bạn",
+  "Ver el chat": "Xem cuộc trò chuyện",
+  "Volver a la llamada": "Quay lại cuộc gọi",
+  "imagen": "hình ảnh",
+  "Sin filtro": "Không bộ lọc"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

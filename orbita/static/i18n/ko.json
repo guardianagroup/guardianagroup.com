@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "상대방이 중단함",
   "cortado por ti": "내가 중단함",
   "país según la zona horaria del equipo": "기기 시간대 기준 국가",
-  "según la zona horaria": "시간대 기준"
+  "según la zona horaria": "시간대 기준",
+  "Ampliar": "크게 보기",
+  "Apagar la cámara": "카메라 끄기",
+  "Difuminada": "흐리게",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "변환은 암호화하기 전에 내 기기에서 이루어져요. 원래 영상은 여기서 나가지 않아요. 얼굴의 생김새와 눈은 알아볼 수 없지만, 실루엣과 몸짓, 뒤에 있는 것은 알아볼 수 있어요.",
+  "Encender la cámara": "카메라 켜기",
+  "Mosaico": "모자이크",
+  "Pidiendo la cámara y el micrófono…": "카메라 및 마이크 권한 요청 중…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "카메라 권한이 없어요. 통화는 음성으로만 계속돼요.",
+  "Tu imagen": "내 영상",
+  "Ver el chat": "채팅 보기",
+  "Volver a la llamada": "통화로 돌아가기",
+  "imagen": "영상",
+  "Sin filtro": "필터 없음"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

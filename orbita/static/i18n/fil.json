@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "pinutol ng kausap mo",
   "cortado por ti": "pinutol mo",
   "país según la zona horaria del equipo": "bansa ayon sa time zone ng device",
-  "según la zona horaria": "ayon sa time zone"
+  "según la zona horaria": "ayon sa time zone",
+  "Ampliar": "Palakihin",
+  "Apagar la cámara": "I-off ang camera",
+  "Difuminada": "Malabo",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Ginagawa ang pagbabago sa device mo, bago i-encrypt: hindi lumalabas dito ang orihinal mong larawan. Hindi maaaninag ang mga detalye ng mukha mo at ang mga mata mo; maaaninag naman ang silweta mo, ang mga kilos mo at ang nasa likod mo.",
+  "Encender la cámara": "I-on ang camera",
+  "Mosaico": "Mosaic",
+  "Pidiendo la cámara y el micrófono…": "Hinihingi ang camera at mikropono…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Walang pahintulot para sa camera: magpapatuloy ang tawag nang boses lang.",
+  "Tu imagen": "Ang larawan mo",
+  "Ver el chat": "Tingnan ang chat",
+  "Volver a la llamada": "Bumalik sa tawag",
+  "imagen": "larawan",
+  "Sin filtro": "Walang filter"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

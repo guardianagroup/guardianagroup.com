@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "toisen henkilön katkaisema",
   "cortado por ti": "sinun katkaisemasi",
   "país según la zona horaria del equipo": "maa laitteen aikavyöhykkeen mukaan",
-  "según la zona horaria": "aikavyöhykkeen mukaan"
+  "según la zona horaria": "aikavyöhykkeen mukaan",
+  "Ampliar": "Suurenna",
+  "Apagar la cámara": "Poista kamera käytöstä",
+  "Difuminada": "Sumennettu",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Muutos tehdään laitteellasi ennen salausta: alkuperäinen kuvasi ei lähde täältä. Kasvonpiirteitäsi ja silmiäsi ei voi erottaa; siluettisi, eleesi ja se, mitä takanasi on, erottuvat.",
+  "Encender la cámara": "Ota kamera käyttöön",
+  "Mosaico": "Mosaiikki",
+  "Pidiendo la cámara y el micrófono…": "Pyydetään kameraa ja mikrofonia…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Ei lupaa kameraan: puhelu jatkuu pelkällä äänellä.",
+  "Tu imagen": "Kuvasi",
+  "Ver el chat": "Näytä chatti",
+  "Volver a la llamada": "Takaisin puheluun",
+  "imagen": "kuva",
+  "Sin filtro": "Ei suodatinta"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

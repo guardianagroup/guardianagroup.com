@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "diputuskan oleh pihak satu lagi",
   "cortado por ti": "diputuskan oleh anda",
   "país según la zona horaria del equipo": "negara mengikut zon waktu peranti",
-  "según la zona horaria": "mengikut zon waktu"
+  "según la zona horaria": "mengikut zon waktu",
+  "Ampliar": "Besarkan",
+  "Apagar la cámara": "Matikan kamera",
+  "Difuminada": "Kabur",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Perubahan dibuat pada peranti anda, sebelum penyulitan: imej asal anda tidak keluar dari sini. Raut wajah dan mata anda tidak dapat dibezakan; namun siluet, gerak isyarat dan apa yang ada di belakang anda dapat dibezakan.",
+  "Encender la cámara": "Hidupkan kamera",
+  "Mosaico": "Mozek",
+  "Pidiendo la cámara y el micrófono…": "Meminta akses kamera dan mikrofon…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Tiada kebenaran untuk kamera: panggilan diteruskan dengan suara sahaja.",
+  "Tu imagen": "Imej anda",
+  "Ver el chat": "Lihat sembang",
+  "Volver a la llamada": "Kembali ke panggilan",
+  "imagen": "imej",
+  "Sin filtro": "Tanpa penapis"
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

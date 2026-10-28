@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "相手が中断",
   "cortado por ti": "あなたが中断",
   "país según la zona horaria del equipo": "端末のタイムゾーンによる国",
-  "según la zona horaria": "タイムゾーンによる"
+  "según la zona horaria": "タイムゾーンによる",
+  "Ampliar": "拡大",
+  "Apagar la cámara": "カメラをオフ",
+  "Difuminada": "ぼかし",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "映像の加工は暗号化の前に、あなたの端末で行われます：元の映像がここから外に出ることはありません。顔の特徴や目は判別できませんが、シルエットや身ぶり、背後にあるものは判別できます。",
+  "Encender la cámara": "カメラをオン",
+  "Mosaico": "モザイク",
+  "Pidiendo la cámara y el micrófono…": "カメラとマイクの許可を求めています…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "カメラの許可がありません。通話は音声のみで続きます。",
+  "Tu imagen": "あなたの映像",
+  "Ver el chat": "チャットを表示",
+  "Volver a la llamada": "通話に戻る",
+  "imagen": "映像",
+  "Sin filtro": "フィルターなし"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",
