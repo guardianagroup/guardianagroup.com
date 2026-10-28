@@ -1268,9 +1268,11 @@
     ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); envia(); } });
     $('#enviar').addEventListener('click', envia);
     $('#adjuntar').addEventListener('click', () => $('#archivo').click());
-    // Modo discreto: un interruptor (recordado en este equipo) que activa el velo del chat y los números al escribir
+    // Modo discreto: un interruptor (recordado en este equipo) que activa el velo del chat y los números al escribir.
+    // 28 Oct 2026 (dueño): de entrada, el modo normal; el discreto solo si la persona lo elige. Clave nueva, para que nadie
+    // se quede en discreto por el valor que la versión anterior guardaba sola al abrir la página.
     const conv = $('#conv'), mascara = $('#texto-mascara');
-    let discreto = true; try { discreto = localStorage.getItem('gcom-discreto') !== '0'; } catch (_) {}
+    let discreto = false; try { discreto = localStorage.getItem('gcom-discreto2') === '1'; localStorage.removeItem('gcom-discreto'); } catch (_) {}
     let cifras = [];
     const pintaMascara = () => {
       if (!discreto) { mascara.textContent = ''; return; }
@@ -1280,13 +1282,13 @@
       let i = 0; mascara.textContent = [...v].map((ch) => { const d = cifras[i++]; return ch === '\n' || ch === ' ' ? ch : d; }).join('') + (v.endsWith('\n') ? ' ' : '');
       mascara.scrollTop = ta.scrollTop;
     };
-    const ponDiscreto = (on) => {
-      discreto = !!on; try { localStorage.setItem('gcom-discreto', discreto ? '1' : '0'); } catch (_) {}
+    const ponDiscreto = (on, elegido) => {
+      discreto = !!on; if (elegido) { try { localStorage.setItem('gcom-discreto2', discreto ? '1' : '0'); } catch (_) {} }
       conv.classList.toggle('discreta', discreto); $('#discreto').setAttribute('aria-pressed', String(discreto));
       ta.placeholder = discreto ? T('Modo discreto: lo que escribas se verá como números') : T('Escribe un mensaje');
       lienzo.classList.toggle('velado', discreto); pintaMascara();
     };
-    $('#discreto').addEventListener('click', () => ponDiscreto(!discreto));
+    $('#discreto').addEventListener('click', () => ponDiscreto(!discreto, true));
     ta.addEventListener('input', pintaMascara); ta.addEventListener('scroll', () => { mascara.scrollTop = ta.scrollTop; });
     // Velo: se descubre solo mientras se mantiene pulsado (ratón o dedo) sobre los mensajes o sobre la pista
     const lienzo = $('#lienzo');
