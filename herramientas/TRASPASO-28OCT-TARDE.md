@@ -24,8 +24,10 @@ Versiones ahora: app.js y app.css **20261029e**, llamada.js **20261029s**, rele.
 
 Pruebas nuevas en `herramientas/pruebas-com/`: invitab (17), unasola (6), vaciar (9), partida (6), ajustes (5), clip (5), completa (4), instalar (3), pip (4), sincopia (10). El móvil ya no escribe códigos: las pruebas entran por enlace (#codigo-enlace) y pulsan #aceptar-si. Los servidores de prueba (relé 8794 y web 8802) se paran a las 2 h: arráncalos otra vez si fallan todas.
 
+Después de las 16:25, también publicado: «Añadir a la pantalla de inicio» también en el ordenador (Chrome/Edge) y el enlace **?instalar** (abre la hoja «Añadir»); fotos HEIC del iPhone sin datos ocultos; sin «Desconectado» arriba cuando no hay conversación; **«Tapar»** en «Revisa antes de enviar» (mosaico con el dedo o el ratón, `abreTapar`, pruebas `prueba_tapar.js`). Versiones: app.js 20261029h, app.css 20261029g, idioma.js 20261029p51 (main 15ed79a).
+
 Pendiente, por orden:
-1. «Ver una vez» y «Tapar antes de enviar» (difuminar caras/datos) en el menú del clip.
+1. «Ver una vez» (foto o archivo que se borra en los dos equipos al cerrarlo; hay que tocar el protocolo de archivos: bandera `unaVez`, visor a pantalla completa, control `visto-una-vez`).
 2. La llamada que «se borra al descolgar» (Barranquilla–Cartagena): sin datos del dueño todavía.
 3. Llamada en grupo (hasta 4, por código numérico) después del lanzamiento.
 4. Textos legales en inglés y portugués (borradores en herramientas/legal-borradores/) con lo de Miami, la blindada sin comprobación obligatoria y la ubicación.
