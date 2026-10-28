@@ -1481,7 +1481,8 @@
   function pintaAvisos(c) {
     const b = $('#cavisos'); if (!b) return;
     let no = false; try { no = localStorage.getItem('gcom-avisos') === 'no'; } catch (_) {}
-    b.hidden = !(permisoAvisos() === 'default' && !no && c && ACTUAL === c.id && enLinea(c) && c.sesion.confirmada);
+    b.hidden = true; // dueño, 28 Oct 2026, 15:10: fuera la tira de la campanita; los avisos se activan desde «⋯» → «Activar avisos»
+    void no; void c;
   }
 
   // ---------- «escribiendo…» propio: el aviso va solo a la conversación donde se escribe ----------
