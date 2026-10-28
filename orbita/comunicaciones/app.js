@@ -514,7 +514,7 @@
         enviaControl(c, { tipo: 'ack', ids: [m.id] });
         const aLaVista = ACTUAL === c.id && document.visibilityState === 'visible';
         if (aLaVista) marcaLeidos(c);
-        if (!avisaFuera(c, 'mensaje') && !aLaVista) avisaSonido(); // con el aviso del sistema, ya suena el suyo
+        avisaFuera(c, 'mensaje'); if (!aLaVista) avisaSonido(); // el pip siempre; el aviso del sistema va en silencio para no sonar dos veces
         return;
       }
       case 'ok': return;
@@ -1408,9 +1408,24 @@
   // lo que pasa en otra conversación: un aviso de unos segundos, sin el contenido; al tocarlo se abre esa conversación
   function avisoConv(c, plantilla) { if (!c || ACTUAL === c.id) return; aviso(plantilla.replace('{n}', nombreConv(c, true))); avisoConvId = c.id; $('#aviso').classList.add('con-conv'); }
   let ctxAudio = null;
+  // El «pip» de mensaje nuevo (dueño, 28 Oct 2026, 15:03: «un pequeño pip si le escribo un mensaje»): dos notas cortas y suaves.
+  // El contexto de sonido se desbloquea con el primer toque o tecla en la página, para que el pip suene también con
+  // GUARDIANA minimizada o en otra pestaña (los navegadores no dejan sonar nada antes de un gesto de la persona).
   function avisaSonido() {
-    try { ctxAudio = ctxAudio || new (window.AudioContext || window.webkitAudioContext)(); const o = ctxAudio.createOscillator(), g = ctxAudio.createGain(); o.type = 'sine'; o.frequency.value = 880; g.gain.value = 0.0001; o.connect(g).connect(ctxAudio.destination); const t = ctxAudio.currentTime; g.gain.exponentialRampToValueAtTime(0.08, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.35); o.start(t); o.stop(t + 0.4); } catch (_) {}
+    try {
+      ctxAudio = ctxAudio || new (window.AudioContext || window.webkitAudioContext)();
+      if (ctxAudio.state === 'suspended') ctxAudio.resume().catch(() => {});
+      const t = ctxAudio.currentTime + 0.01;
+      for (const [f, d] of [[988, 0], [1319, 0.09]]) {
+        const o = ctxAudio.createOscillator(), g = ctxAudio.createGain(); o.type = 'sine'; o.frequency.value = f;
+        g.gain.setValueAtTime(0.0001, t + d); g.gain.exponentialRampToValueAtTime(0.11, t + d + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t + d + 0.16);
+        o.connect(g).connect(ctxAudio.destination); o.start(t + d); o.stop(t + d + 0.18);
+      }
+    } catch (_) {}
   }
+  const desbloqueaSonido = () => { try { ctxAudio = ctxAudio || new (window.AudioContext || window.webkitAudioContext)(); if (ctxAudio.state === 'suspended') ctxAudio.resume().catch(() => {}); } catch (_) {} };
+  for (const ev of ['pointerdown', 'keydown', 'touchstart']) addEventListener(ev, desbloqueaSonido, { once: true, capture: true, passive: true });
+
 
   // ---------- con GUARDIANA minimizada (dueño, 28 Oct 2026, 13:34: «que en la pantalla minimizada aparezca algún salto…
   // una especie de notificación») ----------
@@ -1451,7 +1466,7 @@
     try {
       if (avisoSis) avisoSis.close();
       const cuerpo = que === 'perdida' ? (video ? T('Videollamada perdida.') : T('Llamada perdida.')) : nuevos === 1 ? T('Tienes un mensaje nuevo.') : T('Tienes {n} mensajes nuevos.').replace('{n}', nuevos);
-      const n = new Notification('GUARDIANA', { body: cuerpo, tag: 'gcom-nuevo', icon: '/icon-192.png', renotify: true });
+      const n = new Notification('GUARDIANA', { body: cuerpo, tag: 'gcom-nuevo', icon: '/icon-192.png', silent: true }); // silent y renotify no pueden ir juntos: el anterior ya se cerró arriba
       n.onclick = () => { try { window.focus(); } catch (_) {} n.close(); };
       avisoSis = n; return true;
     } catch (_) { return false; }
@@ -1468,7 +1483,7 @@
       if (!fuera()) return;
       const tit = video ? T('Videollamada entrante') : T('Llamada entrante');
       tituloLlamada = true; pintaTitulo(tit);
-      if (!avisoLlam && permisoAvisos() === 'granted') { try { const n = new Notification(tit, { body: T('GUARDIANA · Toca para contestar.'), tag: 'gcom-llamada', icon: '/icon-192.png', requireInteraction: true }); n.onclick = () => { try { window.focus(); } catch (_) {} n.close(); }; avisoLlam = n; } catch (_) {} }
+      if (!avisoLlam && permisoAvisos() === 'granted') { try { const n = new Notification(tit, { body: T('GUARDIANA · Toca para contestar.'), tag: 'gcom-llamada', icon: '/icon-192.png', requireInteraction: true, silent: true /* suena nuestro timbre */ }); n.onclick = () => { try { window.focus(); } catch (_) {} n.close(); }; avisoLlam = n; } catch (_) {} }
       return;
     }
     if (avisoLlam) { try { avisoLlam.close(); } catch (_) {} avisoLlam = null; }
