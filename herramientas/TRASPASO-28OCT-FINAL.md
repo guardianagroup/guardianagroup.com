@@ -77,7 +77,7 @@ Estado al traspaso:
 - **Textos de la interfaz.**
   - Están en el mapa D de `orbita/static/idioma.js` y solo hay inglés y portugués.
   - Las entradas nuevas se ponen justo después de la línea ancla `    "Enviar": ["Send", "Enviar"],`.
-  - Al cambiarlo, sube `idioma.js?v=` en 5 páginas: orbita/comunicaciones/index.html, orbita/comunicaciones/verificar/index.html, orbita/zero/index.html, orbita/index.html y orbita/multas/index.html. Ahora va por **20261029p52**.
+  - Al cambiarlo, sube `idioma.js?v=` en 5 páginas: orbita/comunicaciones/index.html, orbita/comunicaciones/verificar/index.html, orbita/zero/index.html, orbita/index.html y orbita/multas/index.html. Ahora va por **20261029p53**.
 - **Huellas.** Ejecuta `python3 herramientas/huellas.py` después de tocar Comunicaciones; escribe `orbita/comunicaciones/huellas.txt`.
 - **Versiones en `orbita/comunicaciones/index.html`:**
 
