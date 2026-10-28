@@ -1141,7 +1141,7 @@
   function arrancaRele() {
     R = GuardianaRele.crea();
     const estadoRele = (txt, cls) => { const e = $('#rele'); e.className = 'rele ' + (cls || ''); $('#reletxt').textContent = txt; };
-    window.pintaBarra = () => { const c = CONVS.get(ACTUAL); const on = !!(c && c.huella && enLinea(c) && c.sesion && c.sesion.confirmada); estadoRele(on ? T('Conectado') : T('Desconectado'), on ? 'si' : ''); };
+    window.pintaBarra = () => { const c = CONVS.get(ACTUAL); const on = !!(c && c.huella && enLinea(c) && c.sesion && c.sesion.confirmada); estadoRele(on ? T('Conectado') : T('Desconectado'), on ? 'si' : ''); { const r = $('#rele'); if (r) r.hidden = !c; } /* sin conversación, nada que decir (agencia, ronda 75: «Desconectado» en el inicio asustaba) */ };
     // arriba: «Desconectado» hasta que la conversación con la otra persona está establecida; entonces «Conectado» (dueño, 20:21)
     R.on('abierto', () => { pintaBarra(); });
     R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); });
