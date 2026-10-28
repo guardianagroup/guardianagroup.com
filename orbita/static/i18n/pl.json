@@ -2836,7 +2836,10 @@
   "Sin filtro": "Bez filtra",
   "Voz e imagen": "Głos i obraz",
   "Mejorar la luz": "Popraw oświetlenie",
-  "La imagen de la otra persona no llega.": "Obraz od drugiej osoby nie dociera."
+  "La imagen de la otra persona no llega.": "Obraz od drugiej osoby nie dociera.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "To jest PDF poświadczenia: służy do jego odczytania, zapisania lub wydrukowania, ale nie zawiera pełnych podpisów. Aby je zweryfikować, użyj pliku .json tego samego poświadczenia: w czacie otwórz „Zobacz poświadczenie” i naciśnij „Pobierz .json”.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Plik .json pobiera się w czacie: otwórz „Zobacz poświadczenie” i naciśnij „Pobierz .json”. PDF służy do odczytu; nie da się go zweryfikować.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Ważny: sprawdzony kluczem postkwantowym poświadczenia."
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

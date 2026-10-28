@@ -2836,7 +2836,10 @@
   "Sin filtro": "Zonder filter",
   "Voz e imagen": "Stem en beeld",
   "Mejorar la luz": "Licht verbeteren",
-  "La imagen de la otra persona no llega.": "Het beeld van de ander komt niet aan."
+  "La imagen de la otra persona no llega.": "Het beeld van de ander komt niet aan.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Dat is de PDF van het bewijs: je kunt hem lezen, opslaan of afdrukken, maar hij bevat niet de volledige handtekeningen. Om het te verifiëren, gebruik je het .json-bestand van hetzelfde bewijs: open in de chat “Bewijs bekijken” en tik op “.json downloaden”.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Het .json-bestand download je in de chat: open “Bewijs bekijken” en tik op “.json downloaden”. De PDF is om te lezen; die kan niet worden geverifieerd.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Geldig: gecontroleerd met de post-quantumsleutel van het bewijs."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

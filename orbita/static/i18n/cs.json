@@ -2838,7 +2838,10 @@
   "Sin filtro": "Bez filtru",
   "Voz e imagen": "Hlas a obraz",
   "Mejorar la luz": "Vylepšit světlo",
-  "La imagen de la otra persona no llega.": "Obraz druhé osoby nepřichází."
+  "La imagen de la otra persona no llega.": "Obraz druhé osoby nepřichází.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "To je PDF dokladu: slouží ke čtení, uložení nebo vytištění, ale neobsahuje úplné podpisy. K ověření použijte soubor .json stejného dokladu: v chatu otevřete „Zobrazit doklad“ a klepněte na „Stáhnout .json“.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Soubor .json se stahuje v chatu: otevřete „Zobrazit doklad“ a klepněte na „Stáhnout .json“. PDF slouží ke čtení; ověřit ho nelze.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Platný: ověřený postkvantovým klíčem dokladu."
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

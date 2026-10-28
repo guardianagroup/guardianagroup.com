@@ -2836,7 +2836,10 @@
   "Sin filtro": "필터 없음",
   "Voz e imagen": "음성 및 영상",
   "Mejorar la luz": "조명 보정",
-  "La imagen de la otra persona no llega.": "상대방의 영상이 도착하지 않습니다."
+  "La imagen de la otra persona no llega.": "상대방의 영상이 도착하지 않습니다.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "이것은 증명서의 PDF입니다. 읽거나 저장하거나 인쇄하는 데 쓰지만, 완전한 서명은 들어 있지 않습니다. 검증하려면 같은 증명서의 .json 파일을 사용하세요: 채팅에서 ‘증명서 보기’를 열고 ‘.json 다운로드’를 누르세요.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json 파일은 채팅에서 다운로드합니다: ‘증명서 보기’를 열고 ‘.json 다운로드’를 누르세요. PDF는 읽기용이며, 검증할 수 없습니다.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "유효: 증명서의 포스트 양자 키로 확인했습니다."
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

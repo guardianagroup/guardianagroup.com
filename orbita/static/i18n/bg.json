@@ -2838,7 +2838,10 @@
   "Sin filtro": "Без филтър",
   "Voz e imagen": "Глас и образ",
   "Mejorar la luz": "Подобряване на светлината",
-  "La imagen de la otra persona no llega.": "Образът на другия човек не пристига."
+  "La imagen de la otra persona no llega.": "Образът на другия човек не пристига.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Това е PDF файлът на разписката: служи за четене, запазване или отпечатване, но не съдържа пълните подписи. За да я провериш, използвай файла .json на същата разписка: в чата отвори „Виж разписката“ и натисни „Изтегли .json“.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Файлът .json се изтегля от чата: отвори „Виж разписката“ и натисни „Изтегли .json“. PDF файлът е за четене; не може да бъде проверен.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Валиден: проверен с постквантовия ключ на разписката."
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

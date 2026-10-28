@@ -2836,7 +2836,10 @@
   "Sin filtro": "Tanpa penapis",
   "Voz e imagen": "Suara dan imej",
   "Mejorar la luz": "Tingkatkan cahaya",
-  "La imagen de la otra persona no llega.": "Imej orang lain tidak sampai."
+  "La imagen de la otra persona no llega.": "Imej orang lain tidak sampai.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Itu ialah PDF bukti: ia untuk dibaca, disimpan atau dicetak, tetapi tidak mengandungi tandatangan yang lengkap. Untuk mengesahkannya, gunakan fail .json bagi bukti yang sama: dalam sembang, buka “Lihat bukti” dan tekan “Muat turun .json”.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Fail .json dimuat turun dalam sembang: buka “Lihat bukti” dan tekan “Muat turun .json”. PDF adalah untuk dibaca; ia tidak boleh disahkan.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Sah: disemak dengan kunci pasca-kuantum dalam bukti."
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

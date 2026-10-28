@@ -2836,7 +2836,10 @@
   "Sin filtro": "Walang filter",
   "Voz e imagen": "Boses at larawan",
   "Mejorar la luz": "Pagandahin ang ilaw",
-  "La imagen de la otra persona no llega.": "Hindi dumarating ang larawan ng kausap mo."
+  "La imagen de la otra persona no llega.": "Hindi dumarating ang larawan ng kausap mo.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Iyan ang PDF ng resibo: para ito sa pagbasa, pag-save o pag-print, pero wala rito ang kumpletong mga pirma. Para i-verify ito, gamitin ang .json file ng parehong resibo: sa chat, buksan ang “Tingnan ang resibo” at pindutin ang “I-download ang .json”.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Sa chat dina-download ang .json: buksan ang “Tingnan ang resibo” at pindutin ang “I-download ang .json”. Para sa pagbasa ang PDF; hindi ito mave-verify.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Wasto: sinuri gamit ang post-quantum na key ng resibo."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

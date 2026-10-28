@@ -2838,7 +2838,10 @@
   "Sin filtro": "Bez filtra",
   "Voz e imagen": "Glas i slika",
   "Mejorar la luz": "Poboljšaj svjetlo",
-  "La imagen de la otra persona no llega.": "Slika druge osobe ne stiže."
+  "La imagen de la otra persona no llega.": "Slika druge osobe ne stiže.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "To je PDF potvrde: služi za čitanje, spremanje ili ispis, ali ne sadrži potpune potpise. Za provjeru upotrijebi .json datoteku iste potvrde: u chatu otvori „Prikaži potvrdu“ i pritisni „Preuzmi .json“.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json datoteka preuzima se u chatu: otvori „Prikaži potvrdu“ i pritisni „Preuzmi .json“. PDF služi za čitanje; ne može se provjeriti.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Valjan: provjeren postkvantnim ključem potvrde."
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

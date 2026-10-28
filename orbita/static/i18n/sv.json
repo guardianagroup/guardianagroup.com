@@ -2836,7 +2836,10 @@
   "Sin filtro": "Utan filter",
   "Voz e imagen": "Röst och bild",
   "Mejorar la luz": "Förbättra ljuset",
-  "La imagen de la otra persona no llega.": "Bilden från den andra personen kommer inte fram."
+  "La imagen de la otra persona no llega.": "Bilden från den andra personen kommer inte fram.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Det där är kvittots PDF: den går att läsa, spara eller skriva ut, men den innehåller inte de fullständiga signaturerna. För att verifiera kvittot använder du .json-filen för samma kvitto: öppna ”Visa kvitto” i chatten och tryck på ”Ladda ned .json”.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json-filen laddas ned i chatten: öppna ”Visa kvitto” och tryck på ”Ladda ned .json”. PDF:en är till för att läsa; den kan inte verifieras.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Giltig: kontrollerad med kvittots postkvantnyckel."
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

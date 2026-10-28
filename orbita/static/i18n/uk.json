@@ -2838,7 +2838,10 @@
   "Sin filtro": "Без фільтра",
   "Voz e imagen": "Голос і зображення",
   "Mejorar la luz": "Покращити освітлення",
-  "La imagen de la otra persona no llega.": "Зображення співрозмовника не надходить."
+  "La imagen de la otra persona no llega.": "Зображення співрозмовника не надходить.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Це PDF квитанції: його можна читати, зберігати чи друкувати, але він не містить повних підписів. Щоб верифікувати квитанцію, використайте файл .json тієї самої квитанції: у чаті відкрийте «Переглянути квитанцію» й натисніть «Завантажити .json».",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Файл .json завантажується в чаті: відкрийте «Переглянути квитанцію» й натисніть «Завантажити .json». PDF — для читання; його не можна верифікувати.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Дійсний: перевірено постквантовим ключем квитанції."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",
