@@ -10,7 +10,7 @@ const espera = (ms) => new Promise((r) => setTimeout(r, ms));
   const A = await mk(), B = await mk(devices['iPhone 13']);
   await A.click('#nueva'); await espera(1500);
   const codigo = (await A.textContent('#codigo')).replace(/\D/g, '');
-  await B.tap('#unir'); await espera(300); await B.fill('#unir-codigo', codigo); await espera(300);
+  void codigo; await A.click('#codigo-enlace'); { const u = await A.evaluate(() => document.querySelector('#codigo-enlace').dataset.enlace); await B.goto(u); for (let i = 0; i < 30; i++) { const v = await B.evaluate(() => { const e = document.querySelector('#aceptar-si'); return !!(e && e.offsetParent); }); if (v) break; await B.waitForTimeout(300); } await B.click('#aceptar-si'); }
   if (await vis(B, '#unir-ok')) await B.tap('#unir-ok').catch(() => {});
   for (let i = 0; i < 40 && !(await vis(A, '#conv')); i++) await espera(500);
   await espera(2500);

@@ -20,7 +20,7 @@ const ok = (n, c, x) => res.push((c ? 'OK   ' : 'FALLA') + ' ' + n + (x ? ' · '
   const vis = (p, s) => p.evaluate((s) => { const e = document.querySelector(s); return !!(e && !e.hidden && e.offsetParent !== null); }, s);
   await A.click('#nueva'); await A.waitForTimeout(1500);
   const codigo = (await A.textContent('#codigo')).replace(/\D/g, '');
-  await B.click('#unir'); await B.fill('#unir-codigo', codigo); await B.waitForTimeout(200);
+  void codigo; await A.click('#codigo-enlace'); { const u = await A.evaluate(() => document.querySelector('#codigo-enlace').dataset.enlace); await B.goto(u); for (let i = 0; i < 30; i++) { const v = await B.evaluate(() => { const e = document.querySelector('#aceptar-si'); return !!(e && e.offsetParent); }); if (v) break; await B.waitForTimeout(300); } await B.click('#aceptar-si'); }
   if (await vis(B, '#unir-ok')) await B.click('#unir-ok', { timeout: 3000 }).catch(() => {});
   for (let i = 0; i < 40 && !((await vis(A, '#conv')) && (await vis(B, '#conv'))); i++) await espera(500);
   await espera(2500);
