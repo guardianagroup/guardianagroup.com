@@ -1,4 +1,4 @@
-// GUARDIANA · Comunicaciones · verificar un comprobante de custodia digital (27 Oct 2026). Lee el comprobante elegido,
+// GUARDIANA · Comunicaciones · verificar un comprobante de entrega e integridad (27 Oct 2026). Lee el comprobante elegido,
 // comprueba las dos firmas y las huellas de identidad (viaje.js) y, si se elige el archivo, calcula su SHA-256 por partes
 // (sha256.js) y lo compara. Nada sale del navegador.
 'use strict';
@@ -11,7 +11,7 @@
     if (!f) return;
     let j = null;
     try { if (f.size <= 256 * 1024) j = JSON.parse(await f.text()); } catch (_) { j = null; }
-    if (!j || j.formato !== V.FORMATO || !j.registro) { $('#resultado').hidden = true; return error(T('Ese archivo no es un comprobante de custodia de GUARDIANA.')); }
+    if (!j || j.formato !== V.FORMATO || !j.registro) { $('#resultado').hidden = true; return error(T('Ese archivo no es un comprobante de entrega e integridad de GUARDIANA.')); }
     comp = j;
     const res = await V.verifica(j);
     await V.pintaComprobante($('#cuerpo'), j, res);

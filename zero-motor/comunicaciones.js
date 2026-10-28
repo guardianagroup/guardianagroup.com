@@ -21,6 +21,11 @@ const MAX_SALAS = 20000;         // salas vivas en el relé
 const MAX_CONEXIONES = 4000;
 const RITMO_BPS = 8 * 1024 * 1024;        // bytes por segundo sostenidos por conexión
 const RAFAGA = 32 * 1024 * 1024;          // y de golpe
+// Sesión blindada (27 Oct 2026): sin el límite de 8 MB/s. Manda la línea de cada persona; el relé solo pone un techo
+// alto para que una conexión no se quede con todo el servidor, y un máximo de conexiones blindadas a la vez.
+const RITMO_B = 64 * 1024 * 1024;
+const RAFAGA_B = 128 * 1024 * 1024;
+const MAX_BLINDADAS = 64;
 const ATASCO = 16 * 1024 * 1024;          // bytes aún por entregar a un destinatario a partir de los cuales se le descarta la trama
 const SIN_VIDA_MS = 95 * 1000;            // la página hace ping cada 25 s
 const TURN_HORAS = 12;
@@ -52,7 +57,7 @@ class Rele {
   // Hay llamadas solo si hay secreto y coturn está de verdad activo en este servidor (se comprueba cada minuto)
   get llamadas() { return !!(this.turnHost && this.turnSecreto && this.coturn.activo); }
 
-  estado() { return { salas: this.salas.size, conexiones: this.conexiones.size, codigos: this.codigos.size, llamadas: this.llamadas, coturn: this.coturn }; }
+  estado() { let b = 0; for (const x of this.conexiones) if (x.blindada) b++; return { salas: this.salas.size, conexiones: this.conexiones.size, blindadas: b, codigos: this.codigos.size, llamadas: this.llamadas, coturn: this.coturn }; }
 
   compruebaCoturn() {
     const { execFile } = require('child_process');
@@ -97,7 +102,7 @@ class Rele {
         return;
       }
       case 'ice': { const t = this.ice(); c.ws.json({ t: 'ice', ice: t.ice, caduca: t.caduca }); return; }
-      case 'entra': return this.entra(c, m.sala, m.yo);
+      case 'entra': return this.entra(c, m.sala, m.yo, m.b === 1);
       case 'sale': return this.sale(c, m.sala, true);
       case 'ping': c.ws.json({ t: 'pong' }); return;
       case 'invita': return this.invita(c, m);
@@ -107,8 +112,9 @@ class Rele {
     }
   }
 
-  entra(c, sala, yo) {
+  entra(c, sala, yo, blindada) {
     if (!esHex(sala, 64) || !esHex(yo, 16)) return c.ws.json({ t: 'error', sala, por: 'formato' });
+    if (blindada && !c.blindada) { let n = 0; for (const x of this.conexiones) if (x.blindada) n++; if (n < MAX_BLINDADAS) { c.blindada = true; c.cupo = RAFAGA_B; } }
     if (c.salas.has(sala)) return c.ws.json({ t: 'sala', sala, miembros: this.otros(sala, yo) });
     if (c.salas.size >= MAX_SALAS_CONEXION) return c.ws.json({ t: 'error', sala, por: 'demasiadas salas' });
     let s = this.salas.get(sala);
@@ -172,7 +178,8 @@ class Rele {
   // Cupo de bytes por conexión (cubo de fichas): quien pasa del ritmo ve descartadas sus tramas y recibe «lento»
   cabe(c, n) {
     const ahora = Date.now();
-    c.cupo = Math.min(RAFAGA, c.cupo + (ahora - c.ultimo) * RITMO_BPS / 1000); c.ultimo = ahora;
+    const ritmo = c.blindada ? RITMO_B : RITMO_BPS, rafaga = c.blindada ? RAFAGA_B : RAFAGA;
+    c.cupo = Math.min(rafaga, c.cupo + (ahora - c.ultimo) * ritmo / 1000); c.ultimo = ahora;
     if (c.cupo < n) return false;
     c.cupo -= n; return true;
   }

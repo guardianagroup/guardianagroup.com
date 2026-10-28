@@ -7,13 +7,16 @@
   const MOTORES = ['wss://motor.guardianagroup.com', 'wss://motor-am.guardianagroup.com'];
   const q = new URLSearchParams(location.search);
   const LOCAL = /^(127\.0\.0\.1|localhost)$/.test(location.hostname);
+  // Instalación propia (dueño, 27 Oct 2026, 23:21: «mejora este modelo», Threema OnPrem): si la página no la sirve
+  // guardianagroup.com, el relé es el mismo servidor que la sirve. Nada pasa por GUARDIANA.
+  const PROPIO = !LOCAL && !/(^|\.)guardianagroup\.com$/.test(location.hostname);
 
   function crea(o) {
     o = o || {};
     const esc = {}; const on = (t, f) => { (esc[t] = esc[t] || []).push(f); };
     const emite = (t, ...a) => { for (const f of esc[t] || []) { try { f(...a); } catch (e) { console.error(e); } } };
     let ws = null, url = null, abierto = false, intentos = 0, ping = null, cerrando = false;
-    const salas = new Map(); // sala → yo
+    const salas = new Map(); // sala → { yo, b } (b: sala de una sesión blindada)
     let ice = [], caduca = 0, region = '', llamadas = false, ultimoPong = 0, pingEn = 0, latencia = null;
     const esperas = {}; // respuestas pendientes (invita, busca)
 
@@ -24,6 +27,7 @@
     async function elige() {
       if (q.get('rele')) return q.get('rele');
       if (LOCAL) return 'ws://127.0.0.1:8794';
+      if (PROPIO) return (location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host;
       return MOTORES[0];
     }
 
@@ -35,7 +39,7 @@
       ws.onopen = () => {
         abierto = true; intentos = 0;
         ws.send(JSON.stringify({ t: 'hola' }));
-        for (const [sala, yo] of salas) ws.send(JSON.stringify({ t: 'entra', sala, yo }));
+        for (const [sala, x] of salas) ws.send(JSON.stringify({ t: 'entra', sala, yo: x.yo, b: x.b || undefined }));
         clearInterval(ping); pingEn = 0; ping = setInterval(mide, 10000); setTimeout(mide, 300);
         emite('abierto', { url });
       };
@@ -83,7 +87,7 @@
       if (!abierto || !ws || (pingEn && Date.now() - pingEn < 4000)) return false;
       try { pingEn = Date.now(); ws.send(JSON.stringify({ t: 'ping' })); return true; } catch (_) { return false; }
     }
-    function entra(sala, yo) { salas.set(sala, yo); if (abierto) ws.send(JSON.stringify({ t: 'entra', sala, yo })); }
+    function entra(sala, yo, opc) { const b = opc && opc.b ? 1 : 0; salas.set(sala, { yo, b }); if (abierto) ws.send(JSON.stringify({ t: 'entra', sala, yo, b: b || undefined })); }
     function sale(sala) { salas.delete(sala); if (abierto) ws.send(JSON.stringify({ t: 'sale', sala })); }
     function manda(sala, para, carga) {
       if (!abierto) return false;
@@ -102,5 +106,5 @@
     conecta();
     return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get ultimoPong() { return ultimoPong; } };
   }
-  raiz.GuardianaRele = { crea, MOTORES };
+  raiz.GuardianaRele = { crea, MOTORES, PROPIO };
 })(typeof window !== 'undefined' ? window : globalThis);
