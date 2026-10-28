@@ -14,6 +14,7 @@ const espera = (ms) => new Promise((r) => setTimeout(r, ms));
   await A.click('#nueva-blindada'); await espera(2500);
   const enlace = await A.inputValue('#enlace-b');
   const B = await mk('B', 390, enlace);
+  for (let i = 0; i < 20; i++) { const v = await B.evaluate(() => { const e = document.querySelector('#aceptar-si'); return !!(e && e.offsetParent); }); if (v) { await B.click('#aceptar-si'); break; } await new Promise((r) => setTimeout(r, 300)); }
   for (let i = 0; i < 40 && !((await vis(A, '#conv')) && (await vis(B, '#conv'))); i++) await espera(500);
   await espera(3000);
   for (const p of [A, B]) { if (await vis(p, '#bl-coincide')) await p.click('#bl-coincide'); }

@@ -18,6 +18,7 @@ const res = []; const ok = (n, c, x) => res.push((c ? 'OK   ' : 'FALLA') + ' ' +
   const enlace = await A.inputValue('#enlace-b');
   ok('enlace blindado', /#b=/.test(enlace));
   const B = await mk('B', 390, enlace.replace('/comunicaciones/#', '/comunicaciones/?luz#'));
+  for (let i = 0; i < 20; i++) { const v = await B.evaluate(() => { const e = document.querySelector('#aceptar-si'); return !!(e && e.offsetParent); }); if (v) { await B.click('#aceptar-si'); break; } await new Promise((r) => setTimeout(r, 300)); }
   for (let i = 0; i < 40 && !((await vis(A, '#conv')) && (await vis(B, '#conv'))); i++) await espera(500);
   await espera(3000);
   for (const p of [A, B]) { if (await vis(p, '#bl-coincide')) await p.click('#bl-coincide'); }

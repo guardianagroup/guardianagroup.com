@@ -25,9 +25,9 @@ const ok = (nombre, cond, extra) => { res.push((cond ? 'OK   ' : 'FALLA') + ' ' 
     const visible = (p, s) => p.evaluate((s) => { const e = document.querySelector(s); return !!(e && !e.hidden && e.offsetParent !== null && getComputedStyle(e).display !== 'none'); }, s);
     await A.click('#nueva'); await A.waitForTimeout(1500);
     const codigo = (await A.textContent('#codigo')).replace(/\D/g, '');
-    await C.tap('#unir'); await C.waitForTimeout(300);
-    await C.fill('#unir-codigo', codigo); await C.waitForTimeout(200);
-    if (await visible(C, '#unir-ok')) await C.tap('#unir-ok');
+    void codigo; await A.click('#codigo-enlace'); const enlaceI = await A.evaluate(() => document.querySelector('#codigo-enlace').dataset.enlace);
+    await C.goto(enlaceI); for (let i = 0; i < 20 && !(await visible(C, '#aceptar-si')); i++) await espera(300);
+    await C.tap('#aceptar-si');
     for (let i = 0; i < 40 && !((await visible(A, '#conv')) && (await visible(C, '#conv'))); i++) await espera(500);
     for (const p of [A, C]) if (await visible(p, '#pro')) { await p.click('#pro-empezar').catch(() => {}); }
     await espera(2500);

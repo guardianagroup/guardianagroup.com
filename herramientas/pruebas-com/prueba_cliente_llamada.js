@@ -31,7 +31,7 @@ const res = []; const ok = (n, c, x) => res.push((c ? 'OK   ' : 'FALLA') + ' ' +
     await toca(A, '#ll-ajustes-b');
     const e2 = await mira(A); await A.screenshot({ path: S + w + '-3-ajustes.png' });
     ok(w + ': «Voz e imagen» abre la tarjeta y tu imagen NO se mueve', !!e2.tarjeta && JSON.stringify(e2.local) === JSON.stringify(e1.local), JSON.stringify({ antes: e1.local, ahora: e2.local }));
-    if (w > 760) { const t = e2.tarjeta, l = e2.local; const choca = l && t && !(t[0] + t[2] <= l[0] || l[0] + l[2] <= t[0] || t[1] + t[3] <= l[1] || l[1] + l[3] <= t[1]); ok(w + ': en el ordenador la tarjeta no tapa tu imagen y está centrada', !choca && Math.abs(t[0] - (e2.vw - t[0] - t[2])) <= 2, JSON.stringify({ tarjeta: t, local: l })); }
+    if (w > 760) { const t = e2.tarjeta, l = e2.local; const choca = l && t && !(t[0] + t[2] <= l[0] || l[0] + l[2] <= t[0] || t[1] + t[3] <= l[1] || l[1] + l[3] <= t[1]); const partida = l && l[2] >= e2.vw / 2 - 4; const centrada = partida ? Math.abs((t[0] + t[2] / 2) - (l[0] >= e2.vw / 2 - 4 ? e2.vw / 4 : 3 * e2.vw / 4)) <= 4 : Math.abs(t[0] - (e2.vw - t[0] - t[2])) <= 2; ok(w + ': en el ordenador la tarjeta no tapa tu imagen (centrada, o en la otra mitad si está partida)', !choca && centrada, JSON.stringify({ tarjeta: t, local: l })); }
     await toca(A, '#ll-ajustes-b');
     const e3 = await mira(A);
     ok(w + ': al cerrarla, todo vuelve a su sitio', !e3.tarjeta && JSON.stringify(e3.local) === JSON.stringify(e1.local) && centrado(e3));

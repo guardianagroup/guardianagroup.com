@@ -27,9 +27,9 @@ const ok = (nombre, cond, extra) => { res.push((cond ? 'OK   ' : 'FALLA') + ' ' 
   const actual = (p) => p.evaluate(() => { const x = document.querySelector('#lista-filas .fila-conv.actual'); return x ? x.dataset.id : null; });
   const une = async (Q, P, tactil) => {
     const codigo = (await Q.textContent('#codigo')).replace(/\D/g, '');
-    if (tactil) await P.tap('#unir'); else await P.click('#unir');
-    await P.waitForTimeout(300); await P.fill('#unir-codigo', codigo); await P.waitForTimeout(300);
-    if (await visible(P, '#unir-ok')) await P.click('#unir-ok', { timeout: 3000 }).catch(() => {});
+    if (tactil) { await Q.click('#codigo-enlace'); const enlaceI = await Q.evaluate(() => document.querySelector('#codigo-enlace').dataset.enlace); await P.goto(enlaceI); for (let i = 0; i < 20 && !(await visible(P, '#aceptar-si')); i++) await espera(300); await P.tap('#aceptar-si'); }
+    else { await P.click('#unir'); await P.waitForTimeout(300); await P.fill('#unir-codigo', codigo); await P.waitForTimeout(300);
+    if (await visible(P, '#unir-ok')) await P.click('#unir-ok', { timeout: 3000 }).catch(() => {}); }
     for (let i = 0; i < 40 && !(await visible(P, '#conv')); i++) await espera(500);
     await espera(2500);
   };
