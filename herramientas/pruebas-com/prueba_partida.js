@@ -21,7 +21,7 @@ const espera = (ms) => new Promise((r) => setTimeout(r, ms));
   const est = (p) => p.evaluate(() => { const c = document.querySelector('#ll-videos').closest('.gc-llamada') || document.querySelector('#llamada'); const bt = document.querySelector('#ll-tam'); return { div: !!(c && c.classList.contains('dividida')), lado: c ? [...c.classList].filter((x) => x.startsWith('lado-')).join(',') : '', boton: !!(bt && !bt.hidden && bt.offsetParent), et: bt ? bt.getAttribute('aria-label') : '' }; });
   const a1 = await est(A), b1 = await est(B);
   ok('ordenador: la videollamada empieza partida (tú a la derecha)', a1.div && /lado-der/.test(a1.lado), JSON.stringify(a1));
-  ok('teléfono: empieza partida (tú abajo)', b1.div && /lado-abajo/.test(b1.lado), JSON.stringify(b1));
+  ok('teléfono: empieza como FaceTime (la otra persona en grande, tú en pequeño)', !b1.div && b1.boton && b1.et === 'Pantalla dividida', JSON.stringify(b1));
   ok('botón «Hacer pequeña tu imagen» a la vista', a1.boton && a1.et === 'Hacer pequeña tu imagen');
   await A.screenshot({ path: S + 'partida-1.png' }); await B.screenshot({ path: S + 'partida-movil.png' });
   await A.click('#ll-tam'); await espera(600);
