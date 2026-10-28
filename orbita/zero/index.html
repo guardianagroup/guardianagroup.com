@@ -273,9 +273,9 @@
 .maxcorte.obs{border-top:1px solid rgba(156,195,228,.14)}.maxcorte[hidden]{display:none}.acthead.pest{flex-shrink:0;min-height:36px}.panel:not(.nuc) .ficha{flex-shrink:1;min-height:210px}.panel>#rows,.panel>#subs,.panel>#vivo{min-height:140px!important}.maxcorte.obs{padding:9px 18px}.maxcorte.obs .mt small{font-size:11px;line-height:1.3}.maxcorte.obs[hidden]{display:none}
 #stage.real #cut{display:none}
 /* ---------- ZERO entra antes que tú (27 Oct 2026, dueño 17:25–17:39; ronda 67): mientras ZERO comprueba la web en la burbuja ---------- */
-.cheq{position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(110% 80% at 50% 38%,#0D1520 0%,#06080C 72%);color:#F4F6F8;font:14px/1.5 'IBM Plex Sans',"Segoe UI",system-ui,sans-serif;transition:opacity .2s ease;overflow:auto}
+.cheq{position:absolute;inset:0;z-index:6;display:flex;align-items:flex-start;justify-content:center;padding:20px;background:radial-gradient(110% 80% at 50% 38%,#0D1520 0%,#06080C 72%);color:#F4F6F8;font:14px/1.5 'IBM Plex Sans',"Segoe UI",system-ui,sans-serif;transition:opacity .2s ease;overflow:auto}
 .cheq.va{opacity:0;pointer-events:none}
-.cheq .ck{width:min(430px,100%)}
+.cheq .ck{width:min(430px,100%);margin:auto 0}
 .cheq .k{font:11px Consolas,monospace;letter-spacing:.22em;color:#9CC3E4}
 .cheq h2{margin:10px 0 2px;font-size:22px;font-weight:600;line-height:1.25}
 .cheq[data-r=limpia] h2{color:#5CC98A}.cheq[data-r=aviso] h2{color:#F0C77F}.cheq[data-r=peligro] h2{color:#E07A6C}
@@ -299,6 +299,19 @@
 .cheqchip{position:absolute;left:50%;top:14px;z-index:5;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:rgba(6,8,12,.9);border:1px solid rgba(92,201,138,.35);color:#E8F3EC;font:12px 'IBM Plex Sans',"Segoe UI",system-ui,sans-serif;white-space:nowrap;max-width:92%;overflow:hidden;text-overflow:ellipsis;pointer-events:none;animation:rowin .3s both;transition:opacity .4s}
 .cheqchip:before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:#5CC98A;box-shadow:0 0 8px rgba(92,201,138,.7)}.cheqchip.va{opacity:0}
 .cheq .cres p.cnota{margin:12px 0 0;font-size:12.5px;line-height:1.45;color:#a9bccb}.cheq[data-r=peligro] .cres p.cnota{color:#F2B8AE}
+/* lo que ZERO sabe (dueño 18:56): bajo cada motivo, sus datos; y «Todo lo que ZERO sabe» plegado */
+.cheq .cdet{display:grid;gap:4px;margin:-2px 0 10px;padding:8px 10px;border-inline-start:2px solid rgba(156,195,228,.28);border-radius:0 8px 8px 0;background:rgba(156,195,228,.045)}[dir=rtl] .cheq .cdet{border-radius:8px 0 0 8px}
+.cheq[data-r=aviso] .cdet{border-inline-start-color:rgba(240,199,127,.5)}.cheq[data-r=peligro] .cdet{border-inline-start-color:rgba(224,122,108,.5)}
+.cheq .cf{display:flex;gap:8px;align-items:baseline;font-size:12.5px;line-height:1.45;color:#cfe1ee}.cheq .cf.mal{color:#F2B8AE}
+.cheq .cf .ce,.cheq .csabe .ce{flex:none;font:10.5px Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8da4b6}
+.cheq .cf .cv{min-width:0;font:12px Consolas,monospace;color:#F4F6F8;overflow-wrap:anywhere}.cheq .cf.llano{display:block;font-size:13px;line-height:1.45;color:#F4F6F8}.cheq .cf.llano.mal{color:#F2B8AE}.cheq .ctec{display:grid;gap:2px;margin-top:5px;padding-top:6px;border-top:1px dashed rgba(156,195,228,.16)}.cheq .ctec .ctl{font:9.5px Consolas,monospace;letter-spacing:.16em;text-transform:uppercase;color:#6f8597}.cheq .ctec .cf{font-size:11.5px;color:#a9bccb}.cheq .ctec .cf .ce{font-size:9.5px;color:#7f97aa}.cheq .ctec .cf .cv{font-size:11px;color:#cfe1ee}.cheq .csabe .cx{margin:2px 0 0;font-size:11.5px;line-height:1.4;color:#8da4b6}.cheq .cf.cita .cv{font:italic 13px/1.45 'IBM Plex Sans',"Segoe UI",system-ui,sans-serif}.cheq .cf.hash .cv{color:#9CC3E4;font-size:11px}
+.cheq .cfile{display:grid;gap:3px}.cheq .cfile+.cfile{margin-top:4px;padding-top:7px;border-top:1px dashed rgba(156,195,228,.2)}
+.cheq .cft{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}.cheq .cft b{font:600 13px Consolas,monospace;color:#F0C77F;overflow-wrap:anywhere}
+.cheq .cft .dr{font:10px Consolas,monospace;letter-spacing:.06em;color:#F0C77F;white-space:nowrap}.cheq .cft .dr.mal{color:#E07A6C}.cheq .cft .dr.ok{color:#9CC3E4}
+.cheq .csabe{margin:2px 0 8px}.cheq .csabe summary{cursor:pointer;width:max-content;max-width:100%;padding:4px 0;font:11px Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;color:#9CC3E4}
+.cheq .csabe summary:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}.cheq .csabe .cg{margin-top:8px}.cheq .csabe .ce b{color:#F4F6F8;font-weight:600}
+.cheq .csabe .cl{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}.cheq .csabe .ci{max-width:100%;padding:2px 9px;border-radius:999px;border:1px solid rgba(156,195,228,.2);font-size:11.5px;line-height:1.5;color:#cfe1ee;overflow-wrap:anywhere}
+.cheq .csabe .ci.fr::first-letter{text-transform:uppercase}#web:has(.cheq[data-r=peligro]) .sellada{display:none}.cheq .csabe .ci.mono{border-radius:6px;font:11.5px Consolas,monospace}.cheq .csabe .ci b{font-weight:600;color:#F4F6F8}.cheq .csabe .ci small{color:#8da4b6;font-size:10.5px}.cheq .csabe .ci.mas{color:#8da4b6}
 .cheq .cres .cvisto{margin:0 0 6px;font:11px Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;color:#9CC3E4}.cheqchip b{font:600 11px Consolas,monospace;color:#9CC3E4}
 @keyframes cheqgira{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.cheq li>i{animation:none}.cheq{transition:none}}
@@ -760,7 +773,7 @@
 <div id="pill" role="group" aria-label="Web en grande"><button type="button" class="pc" id="vercortes" title="Ver los cortes en el panel"><span class="pn"><span id="pillnum">0</span>&nbsp;cortes en esta web</span><span class="pv">Ver panel<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg></span></button><button type="button" class="pb" id="reducir" title="Reducir y ver el panel (Esc)"><svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 6.5h-4v-4M2.5 9.5h4v4M9.5 6.5 14 2M6.5 9.5 2 14"/></svg>Reducir</button></div><div class="topReveal" id="topbar"><button type="button" id="restore">↙ RESTAURAR</button><span>PÁGINA DE DEMOSTRACIÓN · ZERO</span><button type="button" id="topcut">Cortes</button></div>
 <div class="marca" aria-hidden="true">ZERO</div><button type="button" id="volverZ" class="volverz" title="Volver" aria-label="Volver"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg><span>Inicio</span></button><button type="button" id="vermeZ" class="volverz vermez" title="Verme en Órbita" aria-label="Verme en Órbita"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12.5" r="1.2"/><path d="M5.2 9.7a4 4 0 0 1 5.6 0M2.6 7a7.6 7.6 0 0 1 10.8 0"/></svg><span>Verme en Órbita</span></button><div class="lb t"></div><div class="lb b"></div><div class="skip">CLIC O CUALQUIER TECLA PARA SALTAR</div>
 </main></div><article id="informe" aria-hidden="true"></article>
-<script src="../static/idioma.js?v=20261027p16"></script>
+<script src="../static/idioma.js?v=20261027p17"></script>
 <nav class="director" id="director" aria-label="Entradas de cine"><span>ENTRADA</span></nav>
 <script>
 (()=>{'use strict';
@@ -1161,7 +1174,7 @@ function zeroResetReal(){VIVOS=[];SUBS=[];$('#vivo').innerHTML='<p class="empty"
   const old=$('#web .acta');if(old)old.remove();pestana('vivo')}
 const horaDe=iso=>{try{return new Date(iso).toLocaleTimeString((window.GuardianaIdioma&&GuardianaIdioma.locale)||'es',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}catch(e){return ''}};
 const VIA_NOMBRE={canvas:'Lienzo gráfico (canvas)',webgl:'Tarjeta gráfica (WebGL)',audio:'Sistema de audio',fuentes:'Tipos de letra instalados',plugins:'Complementos del navegador'};
-const TITULO_VIVO={muro:'Esta web bloquea el acceso desde ZERO',onion:'Dirección .onion bloqueada',local:'Dirección interna bloqueada',corte:'Conexión cortada','corte-visto':'Conexión vista (dejada pasar)','corte-permitido':'Conexión permitida por ti','permiso-empresa':'Permiso de empresa','fallo':'La web no cargó',bloqueo:'Web peligrosa detenida',certificado:'Identidad no comprobada',descarga:'Descarga retenida',formulario:'Formulario sin cifrar',popup:'Ventana emergente cerrada',dialogo:'Aviso emergente cerrado',huella:'Consulta de huella digital',permiso:'Permiso denegado',webrtc:'Conexión directa impedida',cookie:'Cookie de otra empresa',limpieza:'Enlace limpiado',redireccion:'Saltos antes de llegar',subasta:'Subasta de anuncios',observatorio:'Modo observatorio',nivel:'Nivel de protección',acta:'Burbuja destruida','señuelo':'Señuelo: un dato marcado ha salido',alerta:'Nivel de alerta de la burbuja',tormenta:'Avalancha de avisos',ultra:'Ruta Tor'};
+const TITULO_VIVO={muro:'Esta web bloquea el acceso desde ZERO',onion:'Dirección .onion bloqueada',local:'Dirección interna bloqueada',corte:'Conexión cortada','corte-visto':'Conexión vista (dejada pasar)','corte-permitido':'Conexión permitida por ti','permiso-empresa':'Permiso de empresa','fallo':'La web no cargó',bloqueo:'Web peligrosa detenida',certificado:'Identidad no comprobada',descarga:'Descarga retenida',formulario:'Formulario sin cifrar',popup:'Ventana emergente cerrada',dialogo:'Aviso emergente cerrado',huella:'Consulta de huella digital',permiso:'Permiso denegado',webrtc:'Conexión directa impedida',cookie:'Cookie de otra empresa',limpieza:'Enlace limpiado',redireccion:'Redirecciones previas',subasta:'Subasta de anuncios',observatorio:'Modo observatorio',nivel:'Nivel de protección',acta:'Burbuja destruida','señuelo':'Señuelo: un dato marcado ha salido',alerta:'Nivel de alerta de la burbuja',tormenta:'Avalancha de avisos',ultra:'Ruta Tor'};
 function zeroSuceso(s){if(s.clase==='muro'){try{avisoMuro(s.detalle&&s.detalle.url)}catch(e){}}VIVOS.push(s);if(s.clase==='alerta'&&s.detalle&&s.detalle.motivos)ALERTA.motivos=s.detalle.motivos;const L=$('#vivo');if(VIVOS.length===1)L.textContent='';
   const el=document.createElement('article');el.className='viv '+(VIVO_CORTE.has(s.clase)?'c':'a')+(s.certeza==='probable'?' probable':'')+(s.clase==='señuelo'?' senuelo':'')+(s.clase==='alerta'?' alerta'+((s.detalle||{}).nivel||0):'');el.tabIndex=0;el.setAttribute('role','button');
   el.innerHTML='<i></i><div class="l1"><strong></strong><time></time></div><p></p><div class="vdet"></div>';
@@ -1291,8 +1304,8 @@ const DESCARGAS=new Map();const RIESGO_TXT={programa:'Programa ejecutable: el ti
 const tamTxt=n=>n>=1048576?(n/1048576).toFixed(1)+' MB':n>=1024?Math.round(n/1024)+' KB':n+' B';
 function zeroDescarga(m){if(m.estado==='descartada'){DESCARGAS.delete(m.id)}else DESCARGAS.set(m.id,m);const D=$('#descargas'),L=$('#dlista');L.textContent='';D.hidden=!DESCARGAS.size;
   DESCARGAS.forEach(d=>{const li=document.createElement('li');const b=document.createElement('b');b.textContent=d.nombre;b.setAttribute('translate','no');const r=document.createElement('span');r.className='dr'+(d.malo?' mal':d.riesgo==='programa'?'':' ok');r.textContent=d.malo?'WEB PELIGROSA':d.riesgo==='programa'?'PROGRAMA':d.riesgo==='comprimido'?'COMPRIMIDO':d.riesgo==='documento'?'DOCUMENTO':d.riesgo==='multimedia'?'MULTIMEDIA':'ARCHIVO';
-    const s=document.createElement('small');s.textContent=(d.host||'')+' · '+(d.bytes?tamTxt(d.bytes):'…')+' · '+(d.estado||'')+(d.sha256?' · SHA-256 '+d.sha256.slice(0,16)+'…':'');const p=document.createElement('small');if(d.malo)p.append('La dirección está en una lista pública de webs peligrosas: ZERO no la entrega.',' ');p.append(RIESGO_TXT[d.riesgo]||'Archivo.',' ','ZERO no la abre ni la ejecuta.');
-    const db=document.createElement('div');db.className='db';const t=document.createElement('button');t.className='traer';t.textContent='Traer a mi equipo';t.disabled=d.malo||d.estado!=='retenida';t.onclick=()=>{if(d.riesgo==='programa'&&!t.dataset.ok){t.dataset.ok='1';t.textContent='Es un programa: ¿seguro? Pulsa otra vez';return}t.disabled=true;t.textContent='Trayendo…';ZeroMotor.descarga('traer',d.id)};const x=document.createElement('button');x.textContent='Descartar';x.onclick=()=>ZeroMotor.descarga('descartar',d.id);db.append(t,x);li.append(b,r,s,p,db);L.append(li)})}
+    const s=document.createElement('small');s.textContent=(d.host||'')+' · '+(d.bytes?tamTxt(d.bytes):'…')+' · '+(d.estado||'')+(d.sha256?' · SHA-256 '+d.sha256.slice(0,16)+'…':'');const p=document.createElement('small');if(d.malo)p.append('La dirección está en una lista pública de webs peligrosas: ZERO no la entrega.',' ');{const v=cheqVeredicto(d);p.append(v.txt,' ');(d.engano||[]).forEach(k=>{if(CHEQ_ENGANO[k])p.append(CHEQ_ENGANO[k],' ')});p.append('ZERO no la abre ni la ejecuta.')}
+    const db=document.createElement('div');db.className='db';const t=document.createElement('button');t.className='traer';t.textContent='Traer a mi equipo';t.disabled=d.malo||d.estado!=='retenida';t.onclick=()=>{if(d.riesgo==='programa'&&!t.dataset.ok){t.dataset.ok='1';t.textContent='Es un programa: ¿seguro? Pulsa otra vez';return}t.disabled=true;t.textContent='Trayendo…';ZeroMotor.descarga('traer',d.id)};const x=document.createElement('button');x.textContent='Descartar';x.onclick=()=>ZeroMotor.descarga('descartar',d.id);db.append(t,x);li.append(b,r,s,p,db);L.append(li)});cheqArchivoVivo(m)}
 function zeroArchivo(m){if(m.error){const d=DESCARGAS.get(m.id);if(d){d.estado=m.error;zeroDescarga(d)}return}try{const bin=atob(m.b64);const u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);const url=URL.createObjectURL(new Blob([u8]));const a=document.createElement('a');a.href=url;a.download=m.nombre||'archivo';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);const d=DESCARGAS.get(m.id);if(d){d.estado='traída a tu equipo';zeroDescarga(d)}}catch(e){}}
 $('#natras').onclick=()=>window.ZeroMotor&&ZeroMotor.atras();$('#nadelante').onclick=()=>window.ZeroMotor&&ZeroMotor.adelante();$('#nrecarga').onclick=()=>window.ZeroMotor&&ZeroMotor.recargar();
 const ALERTA_NOMBRE={0:'en calma',1:'vigilando',2:'alerta',3:'sellada',4:'destruida'},ALERTA_TXT={0:'ZERO vigila cada web y responde por niveles: vigilar, cortar a las otras empresas, sellar sin red, destruir.',1:'Varios intentos juntos en esta web (huella, permisos, ventanas). ZERO los anota y sigue mirando.',2:'Toda conexión con otras empresas queda cortada mientras dure esta visita. La web sigue abierta.',3:'Sin red y sin programas: nada entra ni sale. Reanuda o destruye la burbuja.'};
@@ -1313,19 +1326,78 @@ function zeroActa(acta){$('#sellada').hidden=true;DESCARGAS.clear();$('#descarga
    en cuanto llega la imagen (con una nota breve arriba); aviso → decide la persona; peligro → se explica y se ve la página de ZERO que
    la detuvo, sin forma de entrar (dueño 18:40, con la agencia: ante un riesgo grave ZERO no deja entrar); fallo → la página de ZERO
    dice el motivo. Solo se dice lo que el motor ha comprobado. ---- */
-const CHEQ_PASOS=[['listas','Listas de webs peligrosas'],['conexion','Conexión encriptada y certificado'],['carga','Carga dentro de la burbuja'],['observa','Lo que intenta hacer la web']];
-const CHEQ_MOT={lista:'Figura en una lista pública de webs peligrosas. ZERO no la ha abierto.',certificado:'Su certificado de seguridad no supera la comprobación: puede ser una suplantación. ZERO no ha abierto la conexión.',interna:'Es una dirección interna o de la red Tor que ZERO no abre.','peligrosa-dentro':'La web intentó cargar algo de una web peligrosa. ZERO lo ha cortado y ha sellado la burbuja: nada entra ni sale.',sellada:'La burbuja está sellada: nada entra ni sale.',idn:'La dirección usa letras de otro alfabeto que se parecen a las nuestras: así se imitan webs conocidas.',descarga:'La web intentó descargar un archivo sin que lo pidieras. ZERO lo ha retenido en la burbuja: no ha llegado a tu equipo.',fuga:'Un dato señuelo de la burbuja ha salido hacia otra empresa: algo en esta web lee la página y la envía fuera.',formulario:'Un formulario de esta web enviaría tus datos sin encriptar.','sin-cifrar':'La conexión no va encriptada: lo que escribas viajaría a la vista.'};
+const CHEQ_PASOS=[['listas','Listas de webs peligrosas'],['conexion','Conexión encriptada y certificado'],['carga','Carga dentro de la burbuja'],['observa','Comportamiento de la web']];
+const CHEQ_MOT={lista:'Figura en una lista pública de webs peligrosas. ZERO no la ha abierto.',certificado:'Su certificado de seguridad no supera la comprobación: puede ser una suplantación. ZERO no ha abierto la conexión.',interna:'Es una dirección interna o de la red Tor que ZERO no abre.','peligrosa-dentro':'La web intentó cargar contenido de una dirección peligrosa. ZERO lo ha bloqueado y ha sellado la burbuja: toda comunicación queda cortada.',sellada:'La burbuja está sellada: toda comunicación queda cortada.',idn:'La dirección utiliza caracteres de otro alfabeto que imitan a los latinos: es una técnica para suplantar webs conocidas.',descarga:'La web intentó descargar un archivo sin que lo pidieras. ZERO lo ha retenido en la burbuja: no ha llegado a tu equipo.',fuga:'Un dato de control de la burbuja se ha enviado a otra empresa: esta web extrae información de la página y la transmite a terceros.',formulario:'Un formulario de esta web enviaría tus datos sin encriptar.','sin-cifrar':'La conexión no está encriptada: lo que escribas podría ser interceptado.',dialogo:'Al abrirse, la web intentó mostrar un mensaje emergente. ZERO lo bloqueó. Su contenido era:'};
 let CHEQ=null;
 const cheqTxt=t=>{const s=document.createElement('span');s.textContent=t;return s};
+/* Lo que ZERO sabe (dueño 18:56: «decirle al cliente qué archivo ha sido… el máximo de información que podamos saber»; 19:15:
+   «los datos técnicos son importantes, pero tiene que entenderlo: simplificárselo»). Bajo cada motivo, primero una frase llana (qué
+   es, qué significa, qué hacer) y debajo, en pequeño, los datos técnicos (tamaño, de dónde viene, huella, lista y regla, código).
+   «Todo lo que ZERO sabe» reúne empresas, saltos, ventanas, avisos, permisos, huella y parámetros, cada grupo con una línea que lo
+   explica. Los datos de la web (nombres, direcciones, huellas) se enseñan tal cual y no se traducen. */
+const CHEQ_PORDENTRO={windows:'Programa de Windows',linux:'Programa de Linux',mac:'Programa de Mac',comprimido:'Archivo comprimido',pdf:'Documento PDF',office:'Documento de Office (formato antiguo)',imagen:'Imagen'};
+const CHEQ_VEREDICTO={programa:'Es un programa ejecutable: si lo abres, se ejecutará en tu equipo.',comprimido:'Es un archivo comprimido: puede contener programas.',pdf:'Es un documento PDF.',office:'Es un documento de Office en formato antiguo: puede contener macros (pequeños programas integrados).',imagen:'Es una imagen.'};
+const CHEQ_DISFRAZ='Es un programa con un nombre engañoso: aparenta ser otro tipo de archivo. Es una técnica habitual para distribuir virus.';
+const CHEQ_ENGANO={distinto:'El nombre no corresponde al contenido real del archivo.',doble:'El nombre tiene dos extensiones (por ejemplo, «.pdf.exe»): el sistema solo tiene en cuenta la última.',invisible:'El nombre contiene un carácter oculto que invierte el orden del texto para inducir a error.'};
+const CHEQ_CERT={ERR_CERT_AUTHORITY_INVALID:'Ninguna entidad de confianza avala la identidad de esta web.',ERR_CERT_DATE_INVALID:'Su certificado de seguridad ha caducado: no es posible verificar su identidad.',ERR_CERT_COMMON_NAME_INVALID:'Su certificado de seguridad pertenece a otra web: podría tratarse de una suplantación.'};
+const CHEQ_TIPO={programa:'PROGRAMA',comprimido:'COMPRIMIDO',documento:'DOCUMENTO',multimedia:'MULTIMEDIA',archivo:'ARCHIVO'};
+const CHEQ_PERM={webrtc:'Conexión directa (WebRTC)',cámara:'Cámara',pantalla:'Pantalla'};
+const CHEQ_HUELLA={canvas:'Lienzo gráfico (canvas)',webgl:'Tarjeta gráfica (WebGL)',audio:'Sistema de audio',fuentes:'Tipos de letra instalados',plugins:'Complementos del navegador'};
+const CHEQ_SABE=[['empresas','Empresas de publicidad y rastreo detectadas','Empresas que intentaron conectarse mientras se abría la web.'],['saltos','Redirecciones previas','Direcciones intermedias por las que pasó el enlace. Suelen utilizarse para registrar el clic.'],['ventanas','Ventanas emergentes cerradas','Ventanas que la web intentó abrir sin tu autorización.'],['avisos','Avisos emergentes cerrados','Mensajes emergentes que la web intentó mostrar.'],['permisos','Permisos denegados','Accesos que la web solicitó. ZERO los denegó: la burbuja no contiene datos tuyos.'],['huella','Intentos de huella digital','Técnicas para identificar un equipo sin cookies. Solo obtienen datos de la burbuja, no de tu equipo.'],['limpiezas','Parámetros de seguimiento eliminados','Parámetros de seguimiento que incluía la dirección. ZERO los eliminó.']];
+function cheqFila(box,etq,val,cls){const r=document.createElement('div');r.className='cf'+(cls?' '+cls:'');if(etq){const l=document.createElement('span');l.className='ce';l.append(cheqTxt(etq));r.append(l)}
+  if(val!=null){const v=document.createElement('span');if(typeof val==='string'){v.className='cv';v.textContent=val;v.setAttribute('translate','no')}else v.append(...[].concat(val));r.append(v)}box.append(r);return r}
+function cheqFrase(box,txt,cls){return cheqFila(box,null,[cheqTxt(txt)],'llano'+(cls?' '+cls:''))}
+function cheqTec(box){const t=document.createElement('div');t.className='ctec';const l=document.createElement('div');l.className='ctl';l.append(cheqTxt('Datos técnicos'));t.append(l);box.append(t);return t}
+// qué es el archivo, dicho en llano: por su contenido (los primeros bytes) y, si no se sabe, por su nombre
+function cheqVeredicto(a){const prog=['windows','linux','mac'].includes(a.porDentro)||(!a.porDentro&&a.riesgo==='programa'),disfraz=prog&&(a.engano||[]).length>0,clase=prog?'programa':a.porDentro||(a.riesgo==='comprimido'?'comprimido':null);
+  return {prog,disfraz,clase,txt:disfraz?CHEQ_DISFRAZ:CHEQ_VEREDICTO[clase]||RIESGO_TXT[a.riesgo]||'Archivo.'}}
+function cheqArchivo(a){const d=document.createElement('div');d.className='cfile';d.dataset.id=String(a.id);const v=cheqVeredicto(a);
+  const t=document.createElement('div');t.className='cft';const b=document.createElement('b');b.textContent='«'+(a.nombre||'')+'»';b.setAttribute('translate','no');const g=document.createElement('span');g.className='dr'+(a.malo?' mal':a.riesgo==='programa'?'':' ok');g.append(cheqTxt(a.malo?'WEB PELIGROSA':CHEQ_TIPO[a.riesgo]||'ARCHIVO'));t.append(b,g);d.append(t);
+  cheqFrase(d,v.txt,v.disfraz||a.malo?'mal':'');
+  (a.engano||[]).forEach(k=>{if(CHEQ_ENGANO[k])cheqFrase(d,CHEQ_ENGANO[k],'mal')});
+  if(a.malo)cheqFrase(d,'La dirección de origen figura en una lista de webs peligrosas: ZERO no entregará este archivo.','mal');
+  else if(v.prog||v.clase==='comprimido'||v.clase==='office')cheqFrase(d,'Transfiérelo a tu equipo solo si lo esperabas y confías en el remitente.');
+  if(a.estado==='descargando')cheqFrase(d,'Descargando dentro de la burbuja…');else if(a.grande)cheqFrase(d,'Supera los 25 MB: ZERO lo conserva en la burbuja y no lo transfiere.');else if(a.estado==='fallida')cheqFrase(d,'La descarga no se completó.');
+  const tk=cheqTec(d);
+  if(a.porDentro&&CHEQ_PORDENTRO[a.porDentro])cheqFila(tk,'Tipo real',[cheqTxt(CHEQ_PORDENTRO[a.porDentro])]);
+  if(a.bytes)cheqFila(tk,'Tamaño',tamTxt(a.bytes));
+  if(a.url||a.host)cheqFila(tk,'Origen',a.url||a.host);
+  if(a.sha256)cheqFila(tk,'Identificador único (SHA-256)',a.sha256,'hash');
+  if(!a.malo)cheqFila(tk,'Listas de webs peligrosas',[cheqTxt('No figura en ninguna')]);
+  return d}
+function cheqArchivoVivo(m){const c=CHEQ;if(!c||!c.el||!m||m.id==null)return;const d=DESCARGAS.get(m.id);if(!d)return;c.el.querySelectorAll('.cfile[data-id="'+String(m.id).replace(/[^0-9]/g,'')+'"]').forEach(o=>o.replaceWith(cheqArchivo(d)))}
+function cheqDetalle(k,h){const D=h.detalle||{},box=document.createElement('div');box.className='cdet';
+  if(k==='lista'&&D.lista){cheqFrase(box,'Si recibiste este enlace por mensaje, no lo abras en otro navegador: está identificado como peligroso.');if(D.lista.nombre)cheqFila(box,'Identificada por',D.lista.nombre);if(D.lista.regla)cheqFila(cheqTec(box),'Regla',D.lista.regla)}
+  else if(k==='certificado'&&D.certificado){cheqFrase(box,CHEQ_CERT[D.certificado.codigo]||'No es posible verificar la identidad de esta web.');const tk=cheqTec(box);if(D.certificado.motivo)cheqFila(tk,'Motivo',[cheqTxt(D.certificado.motivo)]);if(D.certificado.codigo)cheqFila(tk,'Código',D.certificado.codigo)}
+  else if(k==='peligrosa-dentro'){if(D.dentro)cheqFila(box,'Origen',D.dentro.v.join(' · ')+(D.dentro.n>D.dentro.v.length?' +'+(D.dentro.n-D.dentro.v.length):''));(D.archivos||[]).filter(a=>a.malo).forEach(a=>box.append(cheqArchivo(a)))}
+  else if(k==='descarga')(D.archivos||[]).forEach(a=>box.append(cheqArchivo(a)));
+  else if(k==='fuga'&&D.fugas)cheqFila(box,'Enviado a',D.fugas.v.join(' · '));
+  else if(k==='formulario'&&D.formularios)cheqFila(box,'Destino de los datos',D.formularios.v.join(' · '));
+  else if(k==='dialogo'&&D.avisos){D.avisos.v.forEach(v=>cheqFila(box,null,'«'+v+'»','cita'));cheqFrase(box,'Si solicita una llamada, un pago o la instalación de un programa, no lo atiendas: es un patrón habitual de fraude.')}
+  return box.childNodes.length?box:null}
+function cheqSabe(h,mot){const D=h.detalle||{},sec=CHEQ_SABE.filter(([k])=>D[k]&&D[k].n&&!(k==='avisos'&&(mot||[]).includes('dialogo')));if(!sec.length)return null;
+  const det=document.createElement('details');det.className='csabe';const su=document.createElement('summary');su.append(cheqTxt('Todo lo que ZERO ha detectado'));det.append(su);
+  sec.forEach(([k,t,x0])=>{const x=D[k],g=document.createElement('div');g.className='cg';const hd=document.createElement('div');hd.className='ce';const nb=document.createElement('b');nb.textContent=String(x.n);hd.append(cheqTxt(t),' ',nb);g.append(hd);
+    const ex=document.createElement('p');ex.className='cx';ex.append(cheqTxt(x0));g.append(ex);const ul=document.createElement('div');ul.className='cl';
+    const dato=(v,cls)=>{const s=document.createElement('span');s.className='ci'+(cls?' '+cls:'');s.textContent=v;s.setAttribute('translate','no');ul.append(s)},frase=v=>{const s=document.createElement('span');s.className='ci fr';s.append(cheqTxt(v));ul.append(s)};
+    if(k==='empresas')x.v.forEach(r=>{const s=document.createElement('span');s.className='ci';const b=document.createElement('b');b.textContent=r.e;b.setAttribute('translate','no');s.append(b);if(r.p){const q=document.createElement('small');q.append(cheqTxt(r.p));s.append(' ',q)}ul.append(s)});
+    else if(k==='saltos')dato(x.v.join(' → '),'mono');
+    else if(k==='permisos')x.v.forEach(v=>frase(CHEQ_PERM[v]||v));
+    else if(k==='huella')x.v.forEach(v=>frase(CHEQ_HUELLA[v]||v));
+    else if(k==='avisos')x.v.forEach(v=>dato('«'+v+'»'));
+    else x.v.forEach(v=>dato(v,'mono'));
+    if(x.n>x.v.length){const s=document.createElement('span');s.className='ci mas';s.textContent='+'+(x.n-x.v.length);ul.append(s)}
+    g.append(ul);det.append(g)});
+  return det}
 function cheqQuita(inst){const c=CHEQ;if(!c)return;CHEQ=null;clearTimeout(c.vigia);clearTimeout(c.espera);c.salir=null;if(window.ZeroMotor)ZeroMotor.chequeando=false;const el=c.el;if(!el)return;if(inst){el.remove();return}el.classList.add('va');setTimeout(()=>el.remove(),260)}
 function cheqApunta(host,limpia){try{const M=window.ZeroMotor;if(!M||!host)return;M.limpias=M.limpias||new Map();if(limpia)M.limpias.set(host,Date.now());else M.limpias.delete(host)}catch(e){}}
 function cheqVigia(c,ms){clearTimeout(c.vigia);c.vigia=setTimeout(()=>{if(CHEQ===c)cheqQuita(true)},ms)}
 function cheqCapa(host){const old=$('#web .cheq');if(old)old.remove();const el=document.createElement('div');el.className='cheq';el.setAttribute('role','status');el.setAttribute('aria-live','polite');
-  el.innerHTML='<div class="ck"><div class="k">ZERO ENTRA ANTES QUE TÚ</div><h2>Chequeando la web…</h2><div class="host"></div><p class="csub">ZERO ha entrado primero, en una burbuja aislada lejos de tu equipo. Tú entras en cuanto termine.</p><ol>'+CHEQ_PASOS.map(([k,t])=>'<li data-p="'+k+'"><i></i><span>'+t+'</span><small></small></li>').join('')+'</ol><div class="hechos"></div><div class="bar"><b></b></div><div class="cres" hidden></div></div>';
+  el.innerHTML='<div class="ck"><div class="k">ZERO ENTRA ANTES QUE TÚ</div><h2>Chequeando la web…</h2><div class="host"></div><p class="csub">ZERO ha entrado primero, en una burbuja aislada de tu equipo. Accederás en cuanto termine la comprobación.</p><ol>'+CHEQ_PASOS.map(([k,t])=>'<li data-p="'+k+'"><i></i><span>'+t+'</span><small></small></li>').join('')+'</ol><div class="hechos"></div><div class="bar"><b></b></div><div class="cres" hidden></div></div>';
   el.querySelector('.host').textContent=host||'';$('#web').append(el);return el}
 function cheqPaso(c,k,cl,txt){const li=c.el.querySelector('li[data-p="'+k+'"]');if(!li)return;li.className=cl||'ok';const s=li.querySelector('small');s.textContent='';if(txt!=null){if(typeof txt==='string')s.append(cheqTxt(txt));else s.append(...txt)}const n=c.el.querySelectorAll('li.ok,li.av,li.ma').length,b=c.el.querySelector('.bar b');if(b)b.style.width=Math.max(8,n/CHEQ_PASOS.length*100)+'%'}
 function cheqHecho(box,n,txt){if(!n)return;const s=document.createElement('span');s.className='hc';const b=document.createElement('b');b.textContent=String(n);s.append(cheqTxt(txt),' ',b);box.append(s)}
-function cheqChip(ms,txt,cls){const old=$('#web .cheqchip');if(old)old.remove();const d=document.createElement('div');d.className='cheqchip'+(cls?' '+cls:'');d.setAttribute('role','status');d.append(cheqTxt(txt||'ZERO entró antes que tú: sin peligros conocidos'));if(ms){const b=document.createElement('b');b.textContent=Math.max(.1,ms/1000).toLocaleString(document.documentElement.lang||'es',{minimumFractionDigits:1,maximumFractionDigits:1})+' s';d.append(b)}$('#web').append(d);setTimeout(()=>d.classList.add('va'),3200);setTimeout(()=>d.remove(),3700)}
+function cheqChip(ms,txt,cls){const old=$('#web .cheqchip');if(old)old.remove();const d=document.createElement('div');d.className='cheqchip'+(cls?' '+cls:'');d.setAttribute('role','status');d.append(cheqTxt(txt||'ZERO entró antes que tú: sin amenazas conocidas'));if(ms){const b=document.createElement('b');b.textContent=Math.max(.1,ms/1000).toLocaleString(document.documentElement.lang||'es',{minimumFractionDigits:1,maximumFractionDigits:1})+' s';d.append(b)}$('#web').append(d);setTimeout(()=>d.classList.add('va'),3200);setTimeout(()=>d.remove(),3700)}
 function zeroChequeo(m){
   if(!m)return;
   if(m.fase==='cancelado'){if(CHEQ&&(m.id==null||CHEQ.id===m.id))cheqQuita(true);return}
@@ -1342,44 +1414,45 @@ function zeroChequeo(m){
   cheqVigia(c,9000);
   if(!c.el){ // comprobación rápida: solo cuenta el final; si hay algo, entonces sí sale la capa
     if(m.fase!=='listo')return;
-    if(m.resultado==='limpia'){cheqApunta(m.host,true);cheqQuita(true);cheqChip(0,'Comprobada por ZERO: sin peligros conocidos');return}
+    if(m.resultado==='limpia'){cheqApunta(m.host,true);cheqQuita(true);cheqChip(0,'Verificada por ZERO: sin amenazas conocidas');return}
     if(m.resultado==='fallo'){cheqQuita(true);return}
     c.el=cheqCapa(m.host)}
   if(m.fase==='salto'){c.el.querySelector('.host').textContent=m.host||'';return}
   if(m.fase==='paso'){
     if(m.paso==='listas')cheqPaso(c,'listas',m.peligrosa?'ma':'ok',m.peligrosa?'Figura en una lista: no se ha abierto':'No figura en ninguna');
-    else if(m.paso==='conexion')cheqPaso(c,'conexion',m.cifrada?'ok':'av',m.cifrada?[cheqTxt('Encriptada'),m.protocolo?' · '+m.protocolo:'']:'Sin encriptar: lo que escribas viajaría a la vista');
+    else if(m.paso==='conexion')cheqPaso(c,'conexion',m.cifrada?'ok':'av',m.cifrada?[cheqTxt('Encriptada'),m.protocolo?' · '+m.protocolo:'']:'Sin encriptar: lo que escribas podría ser interceptado');
     else if(m.paso==='documento'||m.paso==='carga')cheqPaso(c,'carga','ok',m.paso==='carga'?'Ha cargado':null);
     return}
   if(m.fase!=='listo')return;
   c.r=m.resultado;const h=m.hechos||{},el=c.el,mal=m.resultado==='peligro',av=m.resultado==='aviso';el.dataset.r=m.resultado;cheqApunta(m.host,m.resultado==='limpia');
   if(!el.querySelector('li[data-p=listas]').className)cheqPaso(c,'listas',h.enLista?'ma':'ok',h.enLista?'Figura en una lista: no se ha abierto':'No figura en ninguna');
   const parada=h.enLista||h.interna||h.certificado; // ZERO la detuvo antes de abrirla: no hubo conexión ni carga de la web
-  if(h.enLista||h.interna)cheqPaso(c,'conexion','ma','ZERO no ha llegado a conectar');
-  else if(!el.querySelector('li[data-p=conexion]').className||h.certificado)cheqPaso(c,'conexion',h.certificado?'ma':h.respondio&&h.cifrada?'ok':'av',h.certificado?'El certificado no supera la comprobación':h.respondio?(h.cifrada?'Encriptada':'Sin encriptar: lo que escribas viajaría a la vista'):'La web no respondió');
-  cheqPaso(c,'carga',parada?'ma':h.lenta||!(h.respondio||h.cargada)?'av':'ok',parada?'No se ha abierto':h.lenta?'Sigue cargando; lo principal ya está comprobado':h.respondio||h.cargada?'Ha cargado':'No ha cargado');
-  cheqPaso(c,'observa',mal?'ma':av?'av':'ok',mal?'Peligro detectado':av?'Hay algo que debes saber':'Nada peligroso a la vista');
+  if(h.enLista||h.interna)cheqPaso(c,'conexion','ma','ZERO no ha establecido la conexión');
+  else if(!el.querySelector('li[data-p=conexion]').className||h.certificado)cheqPaso(c,'conexion',h.certificado?'ma':h.respondio&&h.cifrada?'ok':'av',h.certificado?'El certificado no supera la comprobación':h.respondio?(h.cifrada?'Encriptada':'Sin encriptar: lo que escribas podría ser interceptado'):'La web no respondió');
+  cheqPaso(c,'carga',parada?'ma':h.lenta||!(h.respondio||h.cargada)?'av':'ok',parada?'No se ha abierto':h.lenta?'La carga continúa; las comprobaciones principales ya están hechas':h.respondio||h.cargada?'Ha cargado':'No ha cargado');
+  cheqPaso(c,'observa',mal?'ma':av?'av':'ok',mal?'Peligro detectado':av?'Requiere tu atención':'Sin amenazas detectadas');
   const hx=el.querySelector('.hechos');hx.textContent='';
-  cheqHecho(hx,h.empresas,'Empresas de publicidad y rastreo a la vista');cheqHecho(hx,h.saltos,'Saltos antes de llegar');cheqHecho(hx,h.ventanas,'Ventanas emergentes cerradas');cheqHecho(hx,h.avisos,'Avisos emergentes cerrados');
-  cheqHecho(hx,h.permisos,'Permisos denegados');cheqHecho(hx,h.huella,'Intentos de huella digital');cheqHecho(hx,h.descargas,'Descargas retenidas');cheqHecho(hx,h.limpiezas,'Enlaces limpiados de seguimiento');
-  el.querySelector('h2').textContent=mal?'ZERO ha detenido esta web':av?'Ojo antes de entrar':m.resultado==='fallo'?'No se pudo abrir esta web':'Web comprobada';
-  el.querySelector(".csub").textContent=mal?'Lo ha visto ZERO dentro de la burbuja: a tu equipo no ha llegado nada.':av?'ZERO ha entrado primero y ha visto esto. Tú decides.':m.resultado==='fallo'?'ZERO te dice el motivo en la página.':'ZERO entró antes que tú y no ha visto peligros conocidos.';
+  cheqHecho(hx,h.empresas,'Empresas de publicidad y rastreo detectadas');cheqHecho(hx,h.saltos,'Redirecciones previas');cheqHecho(hx,h.ventanas,'Ventanas emergentes cerradas');cheqHecho(hx,h.avisos,'Avisos emergentes cerrados');
+  cheqHecho(hx,h.permisos,'Permisos denegados');cheqHecho(hx,h.huella,'Intentos de huella digital');cheqHecho(hx,h.descargas,'Descargas retenidas');cheqHecho(hx,h.limpiezas,'Parámetros de seguimiento eliminados');
+  el.querySelector('h2').textContent=mal?'ZERO ha detenido esta web':av?'Atención antes de entrar':m.resultado==='fallo'?'No se pudo abrir esta web':'Web comprobada';
+  el.querySelector(".csub").textContent=mal?'ZERO lo ha detectado dentro de la burbuja: tu equipo no ha recibido nada.':av?'ZERO ha entrado primero y ha detectado lo siguiente. La decisión es tuya.':m.resultado==='fallo'?'ZERO indica el motivo en la página.':'ZERO entró antes que tú y no ha detectado amenazas conocidas.';
   const res=el.querySelector('.cres');res.textContent='';
-  if((m.motivos||[]).some(k=>CHEQ_MOT[k])){const v=document.createElement('p');v.className='cvisto';v.append(cheqTxt('Lo que ZERO ha visto:'));res.append(v)}
-  (m.motivos||[]).forEach(k=>{if(!CHEQ_MOT[k])return;const p=document.createElement('p');p.append(cheqTxt(CHEQ_MOT[k]));if(k==='idn'&&h.idn){const b=document.createElement('b');b.textContent=h.idn;p.append(' ',b)}res.append(p)});
+  if((m.motivos||[]).some(k=>CHEQ_MOT[k])){const v=document.createElement('p');v.className='cvisto';v.append(cheqTxt('Lo que ZERO ha detectado:'));res.append(v)}
+  (m.motivos||[]).forEach(k=>{if(!CHEQ_MOT[k])return;const p=document.createElement('p');p.append(cheqTxt(CHEQ_MOT[k]));if(k==='idn'&&h.idn){const b=document.createElement('b');b.textContent=h.idn;p.append(' ',b)}res.append(p);const dt=cheqDetalle(k,h);if(dt)res.append(dt)});
+  {const sb=cheqSabe(h,m.motivos);if(sb)res.append(sb)}
   if(mal||av){const bot=document.createElement('div');bot.className='cbot';const mk=(t,cls,fn)=>{const b=document.createElement('button');b.type='button';b.className=cls;b.textContent=t;b.onclick=fn;bot.append(b)};
     // dueño (18:07 y 18:40), con la agencia (ronda 67: ChatGPT y Astra). Riesgo grave (lista de webs peligrosas, certificado que no
     // pasa, algo peligroso dentro, dirección interna): ZERO no deja entrar, solo «Volver». Señal (dominio que imita, descarga,
     // formulario o conexión sin encriptar): ZERO cuenta lo que ha visto y decide la persona.
     const mot=m.motivos||[],nota=document.createElement('p'),volver=()=>{cheqQuita();if(window.ZeroMotor)ZeroMotor.chequeoSalir()};nota.className='cnota';
-    if(mal){nota.append(cheqTxt('Ante un riesgo grave, ZERO no deja entrar. Es por tu seguridad.'));
+    if(mal){nota.append(cheqTxt('Ante un riesgo grave, ZERO bloquea el acceso por tu seguridad.'));
       if(mot.includes('interna'))mk('Entendido','pri',()=>cheqQuita());else mk('Volver','pri',volver)}
     else{nota.append(cheqTxt('La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.'));
       mk('Volver','pri',volver);mk('Continuar en ZERO','',()=>{cheqQuita();if(window.ZeroMotor)ZeroMotor.enfoca()})}
     res.append(nota,bot);res.hidden=false;clearTimeout(c.vigia);setTimeout(()=>{const b=bot.querySelector('button');if(b&&CHEQ===c)b.focus()},60);return}
   // limpia o fallo: se entra en cuanto llega la imagen de la web ya comprobada (o enseguida, si la web no cambia)
   // ronda 67 (Astra): si venció el tope sin cargar, no se dice «sin peligros conocidos»: lo principal está comprobado y ZERO sigue vigilando
-  c.salir=()=>{if(CHEQ!==c)return;cheqQuita();if(m.resultado==='limpia')cheqChip(m.ms,h.desafio?'La web pide confirmar que eres humano; ZERO vigila mientras pasas':h.lenta?'Sigue cargando; lo principal ya está comprobado':null)};c.espera=setTimeout(()=>c.salir&&c.salir(),450)}
+  c.salir=()=>{if(CHEQ!==c)return;cheqQuita();if(m.resultado==='limpia')cheqChip(m.ms,h.desafio?'La web solicita verificar que eres una persona; ZERO supervisa el proceso':h.lenta?'La carga continúa; las comprobaciones principales ya están hechas':null)};c.espera=setTimeout(()=>c.salir&&c.salir(),450)}
 function zeroChequeoCuadro(){const c=CHEQ;if(c&&c.salir){clearTimeout(c.espera);c.espera=setTimeout(()=>c.salir&&c.salir(),60)}}
 Object.assign(window,{zeroSuceso,zeroResumen,zeroNav,zeroTitulo,zeroActa,zeroAlerta,zeroPestanas,zeroCortes,zeroDescarga,zeroArchivo,zeroUltra,zeroChequeo,zeroChequeoCuadro}); // motor.js (fuera de este ámbito) los llama
 

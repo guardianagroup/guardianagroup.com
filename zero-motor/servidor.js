@@ -26,7 +26,7 @@ const RAIZ = path.join(__dirname, '..');
 const PUERTO = +process.argv[2] || 8792;
 const MOCK = !!process.env.ZERO_MOCK;
 const SESIONES = new Map(); // token de señuelo → sesión (para el colector /s/<token>)
-const VERSION = 'prototipo 0.2 · 27 Oct 2026 (ZERO entra antes que tú; con riesgo grave no se entra)';
+const VERSION = 'prototipo 0.2 · 27 Oct 2026 (ZERO entra antes que tú; con riesgo grave no se entra; qué archivo y todo lo que sabe)';
 const CLAVE_SESION = crypto.randomBytes(32); // efímera: con ella se sella el comprobante de cada sesión
 // Blindaje del motor (26 Oct 2026, ronda 40 punto 11): solo las páginas de GUARDIANA pueden abrir sesiones; hay un tope
 // de burbujas vivas; una burbuja que nadie mira se cierra sola; ningún mensaje puede ser enorme; en la burbuja solo se abren
@@ -97,6 +97,25 @@ function imitaLetras(host) {
   const et = uni.split('.'); const tld = et[et.length - 1] || '';
   const otro = /[Ͱ-ϿЀ-ԯ԰-֏Ꭰ-᏿]/;
   for (const e of et.slice(0, -1)) if (otro.test(e) && (/[a-z]/.test(e) || /^[a-z]+$/.test(tld))) return uni;
+  return null;
+}
+
+// Archivos que baja una web (dueño 18:56: «decirle qué archivo ha sido… el máximo de información»). El nombre se enseña tal cual,
+// salvo los caracteres invisibles que dan la vuelta al texto («factura‮fdp.exe» se lee «factura exe.pdf»), que se muestran a la
+// vista. Qué es por dentro se sabe por sus primeros bytes, no por el nombre; si el nombre dice otra cosa que un programa y por
+// dentro es un programa, se avisa. Solo lo que se comprueba en el archivo: no se ejecuta ni se abre.
+const RE_INVISIBLE = /[‎‏‪-‮⁦-⁩]/g;
+const nombreVisible = (n) => String(n || '').replace(RE_INVISIBLE, (ch) => '[U+' + ch.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0') + ']');
+function tipoPorDentro(b) {
+  if (!b || b.length < 4) return null;
+  const hx = b.subarray(0, 8).toString('hex');
+  if (hx.startsWith('4d5a')) return 'windows';
+  if (hx.startsWith('7f454c46')) return 'linux';
+  if (/^(feedface|feedfacf|cefaedfe|cffaedfe)/.test(hx)) return 'mac';
+  if (/^(504b0304|52617221|377abcaf271c|1f8b)/.test(hx)) return 'comprimido';
+  if (hx.startsWith('25504446')) return 'pdf';
+  if (hx.startsWith('d0cf11e0a1b11ae1')) return 'office';
+  if (/^(89504e47|ffd8ff|47494638)/.test(hx) || (hx.startsWith('52494646') && b.subarray(8, 12).toString('latin1') === 'WEBP')) return 'imagen';
   return null;
 }
 
@@ -246,7 +265,7 @@ class Sesion {
     page.on('requestfailed', (r) => { try { if (!r.isNavigationRequest() || r.frame() !== page.mainFrame()) return; const e = (r.failure() || {}).errorText || 'error'; if (!/^https?:\/\//.test(r.url())) return; { const hh = hostDe(r.url()); if (onionVetada(hh)) { page.setContent(paginaBloqueo('Dirección .onion bloqueada', TXT_ONION, hh)).catch(() => {}); return; } if (this.filtro && !PERMITE_LOCAL && (ipProhibida(hh) || nombreLocal(hh) || (this.filtro.vetadas.has(hh.toLowerCase()) && !esOnion(hh)))) { page.setContent(paginaBloqueo('Dirección interna bloqueada', TXT_LOCAL, hh)).catch(() => {}); return; } } this.suceso({ clase: 'fallo', certeza: 'comprobado', dominio: hostDe(r.url()), texto: 'La web ' + hostDe(r.url()) + ' no llegó a cargar: ' + e + '.', detalle: { url: r.url().slice(0, 200), error: e, redirigida: !!r.redirectedFrom() } }); } catch (_) {} });
     page.on('websocket', (w) => { const host = hostDe(w.url()); w.on('framesent', (f) => { try { const h = this.senuelos.busca(typeof f.payload === 'string' ? f.payload : f.payload.toString('latin1')); h.forEach((tipo) => this.senuelo({ tipo, donde: 'trama de WebSocket' }, host, w.url(), baseDominio(host) !== baseDominio(p.stats.webActual), false)); } catch (_) {} }); });
     page.on('download', (d) => this.descarga(d));
-    page.on('dialog', (d) => { this.suceso({ clase: 'dialogo', certeza: 'comprobado', texto: 'La web intentó mostrar un aviso emergente. ZERO lo cerró.', dominio: hostDe(page.url()) }); d.dismiss().catch(() => {}); });
+    page.on('dialog', (d) => { let tx = ''; try { tx = String(d.message() || '').replace(RE_INVISIBLE, '').replace(/\s+/g, ' ').trim().slice(0, 160); } catch (_) {} this.suceso({ clase: 'dialogo', certeza: 'comprobado', texto: 'La web intentó mostrar un aviso emergente. ZERO lo cerró.', dominio: hostDe(page.url()), detalle: { tipo: d.type(), texto: tx } }); d.dismiss().catch(() => {}); });
     page.on('framenavigated', (f) => { if (f === page.mainFrame()) { p.url = page.url(); if (this.act === p) this.nav(); else this.env(this.listaPestanas()); } });
     page.on('domcontentloaded', () => this.hitoChequeo(p, 'documento'));
     page.on('load', () => { this.hitoChequeo(p, 'carga'); page.title().then((tt) => { p.titulo = tt; if (this.act === p) this.nav(true); this.env(this.listaPestanas()); }).catch(() => {}); this.miraMuro(page).catch(() => {}); });
@@ -544,7 +563,7 @@ class Sesion {
       while (q) { cadena.unshift(hostDe(q.url())); q = q.redirectedFrom(); }
       { // ZERO entra antes que tú: la web respondió; conexión cifrada o no, protocolo y quién firmó el certificado (lo que dice Chromium)
         const pp = p || this.act; const c = this.chequeo;
-        if (c && c.p === pp && !c.listo) r.securityDetails().catch(() => null).then((sd) => this.hitoChequeo(pp, 'conexion', { cifrada: r.url().startsWith('https:'), estado: st, saltos: cadena.length, protocolo: (sd && sd.protocol) || null, emisor: (sd && sd.issuer) || null }));
+        if (c && c.p === pp && !c.listo) r.securityDetails().catch(() => null).then((sd) => this.hitoChequeo(pp, 'conexion', { cifrada: r.url().startsWith('https:'), estado: st, saltos: cadena.length, cadena: cadena.slice(-8), protocolo: (sd && sd.protocol) || null, emisor: (sd && sd.issuer) || null }));
       }
       if (cadena.length >= 2) {
         const inter = [...new Set(cadena)];
@@ -557,21 +576,28 @@ class Sesion {
   // tipo por extensión, huella SHA-256, si la dirección está en las listas de webs peligrosas) y solo llega al equipo de
   // la persona si ella lo pide después de ver la inspección. Nada se abre ni se ejecuta en la burbuja.
   async descarga(d) {
-    const nombre = String(d.suggestedFilename() || 'archivo').slice(0, 200), url = d.url(), host = hostDe(url);
+    const crudo = String(d.suggestedFilename() || 'archivo').slice(0, 200), url = d.url(), host = hostDe(url);
+    const nombre = nombreVisible(crudo), limpio = crudo.replace(RE_INVISIBLE, '');
     const id = ++this.nDesc;
-    const ext = (nombre.includes('.') ? nombre.split('.').pop() : '').toLowerCase();
+    const ext = (limpio.includes('.') ? limpio.split('.').pop() : '').toLowerCase();
+    const engano = [];
+    if (/[\u200E\u200F\u202A-\u202E\u2066-\u2069]/.test(crudo)) engano.push('invisible');
+    if (/\.(pdf|docx?|xlsx?|pptx?|odt|rtf|txt|csv|jpe?g|png|gif|webp|mp3|mp4|zip|rar)\.(exe|scr|com|pif|bat|cmd|js|jse|vbs|vbe|wsf|hta|msi|lnk|jar|ps1|reg|iso)$/i.test(limpio)) engano.push('doble');
     const EJEC = new Set(['exe', 'msi', 'bat', 'cmd', 'ps1', 'scr', 'com', 'pif', 'js', 'jse', 'vbs', 'vbe', 'wsf', 'hta', 'jar', 'dmg', 'pkg', 'app', 'sh', 'apk', 'lnk', 'reg', 'iso', 'msix', 'appx']);
     const riesgo = EJEC.has(ext) ? 'programa' : /^(zip|rar|7z|gz|tgz|tar|bz2|xz)$/.test(ext) ? 'comprimido' : /^(pdf|docx?|xlsx?|pptx?|odt|ods|odp|rtf)$/.test(ext) ? 'documento' : /^(jpe?g|png|gif|webp|svg|heic|mp4|mp3|wav|webm)$/.test(ext) ? 'multimedia' : 'archivo';
     const lista = cortes.decide({ url, tipo: 'other', origen: this.webActual || host, host, tercero: baseDominio(host) !== baseDominio(this.webActual || host) });
     const malo = !!(lista.bloquear && lista.proposito === 'malware');
-    const reg = { id, nombre, url: url.slice(0, 300), host, bytes: 0, sha256: null, riesgo, malo, estado: 'descargando', hora: ahora(), ruta: null };
+    const reg = { id, nombre, url: url.slice(0, 300), host, bytes: 0, sha256: null, riesgo, malo, estado: 'descargando', hora: ahora(), ruta: null, porDentro: null, engano };
     this.descargas.set(id, reg);
-    this.suceso({ clase: 'descarga', certeza: 'comprobado', dominio: host, texto: 'La web ha iniciado la descarga de «' + nombre + '». ZERO la ha retenido en la burbuja para inspeccionarla: no ha tocado tu ordenador.', detalle: { nombre, riesgo, malo } });
+    this.suceso({ clase: 'descarga', certeza: 'comprobado', dominio: host, texto: 'La web ha iniciado la descarga de «' + nombre + '». ZERO la ha retenido en la burbuja para inspeccionarla: no ha tocado tu ordenador.', detalle: { id, nombre, riesgo, malo } });
     try {
       const ruta = await d.path();
       const st = fs.statSync(ruta); reg.bytes = st.size; reg.ruta = ruta;
+      try { const fd = fs.openSync(ruta, 'r'); const b = Buffer.alloc(16); const n = fs.readSync(fd, b, 0, 16, 0); fs.closeSync(fd); reg.porDentro = tipoPorDentro(b.subarray(0, n)); } catch (_) {}
+      // por dentro es un programa y el nombre dice otra cosa (un .pdf, una foto…): engaño clásico
+      if (['windows', 'linux', 'mac'].includes(reg.porDentro) && riesgo !== 'programa' && !engano.includes('distinto')) engano.push('distinto');
       if (st.size <= 25 * 1024 * 1024) { const h = crypto.createHash('sha256'); h.update(fs.readFileSync(ruta)); reg.sha256 = h.digest('hex'); reg.estado = 'retenida'; }
-      else { reg.estado = 'retenida (demasiado grande para traerla: más de 25 MB)'; }
+      else { reg.estado = 'retenida (demasiado grande para traerla: más de 25 MB)'; reg.grande = true; }
     } catch (e) { reg.estado = 'fallida'; }
     this.op('descarga retenida: ' + nombre + ' (' + reg.bytes + ' bytes, ' + riesgo + (malo ? ', en lista de webs peligrosas' : '') + ')');
     this.env({ t: 'descarga', ...reg, ruta: undefined });
@@ -813,6 +839,29 @@ class Sesion {
       fallo: c.fallo || (cuenta((x) => x.clase === 'fallo') > 0 && !con ? 'no cargó' : null),
       cargada: !!c.hitos.carga, lenta: porque === 'tope' && !c.hitos.carga, desafio: !!c.desafio,
     };
+    // Lo que ZERO sabe de esta apertura, con nombres y datos concretos (dueño 18:56: «tenemos que darle el máximo de información
+    // que podamos saber»): qué archivo, qué lista y qué regla, qué falla en el certificado, a qué empresa salió el señuelo, a dónde
+    // enviaría el formulario, qué empresas, saltos, ventanas, avisos, permisos, huella y parámetros. Listas cortas; nada inventado.
+    const solo = (arr, max) => { const u = [...new Set(arr.filter((x) => x != null && x !== '').map(String))]; return u.length ? { n: u.length, v: u.slice(0, max || 8) } : null; };
+    const ficha = (r) => r && { id: r.id, nombre: r.nombre, riesgo: r.riesgo, malo: !!r.malo, host: r.host, url: r.url, bytes: r.bytes || 0, sha256: r.sha256 || null, estado: r.estado, grande: !!r.grande, porDentro: r.porDentro || null, engano: r.engano || [] };
+    const blq = nuevos.find((x) => x.clase === 'bloqueo'), cer = nuevos.find((x) => x.clase === 'certificado');
+    const emp = [...st.empresas.values()].sort((a, b) => b.n - a.n);
+    const cadena = con && con.cadena && con.cadena.length ? con.cadena.concat(c.host) : c.saltos.length ? [hostDe(c.url)].concat(c.saltos) : [];
+    h.detalle = {
+      archivos: nuevos.filter((x) => x.clase === 'descarga' && !det(x).sha256 && det(x).id).slice(0, 5).map((x) => ficha(this.descargas.get(det(x).id)) || { id: det(x).id, nombre: det(x).nombre, riesgo: det(x).riesgo, malo: !!det(x).malo, host: x.dominio, estado: 'descartada', engano: [] }),
+      lista: blq ? { nombre: (cortes.listas[det(blq).lista] || {}).nombre || det(blq).lista || null, regla: det(blq).regla || null } : null,
+      certificado: cer ? { motivo: det(cer).motivo || null, codigo: (String(det(cer).error || '').match(/ERR_[A-Z_]+/) || [])[0] || null } : null,
+      dentro: solo(nuevos.filter((x) => x.clase === 'corte' && x.estado === 'cortado' && x.proposito === PROPOSITO.malware).map((x) => x.dominio)),
+      fugas: solo(nuevos.filter((x) => x.clase === 'señuelo' && (det(x).tipo === 'visita' || (det(x).tercero && !det(x).cortada))).map((x) => [x.empresa, x.dominio].filter(Boolean).join(' · '))),
+      formularios: solo(nuevos.filter((x) => x.clase === 'formulario').map((x) => String(det(x).accion || '').slice(0, 200))),
+      empresas: emp.length ? { n: emp.length, v: emp.slice(0, 12).map((r) => ({ e: r.empresa || r.dominio, p: r.proposito })) } : null,
+      saltos: cadena.length > 1 ? { n: cadena.length - 1, v: cadena.slice(0, 10) } : null,
+      ventanas: solo(nuevos.filter((x) => x.clase === 'popup').map((x) => x.dominio)),
+      avisos: solo(nuevos.filter((x) => x.clase === 'dialogo').map((x) => det(x).texto), 5),
+      permisos: solo(nuevos.filter((x) => x.clase === 'permiso').map((x) => det(x).que).concat(nuevos.some((x) => x.clase === 'webrtc') ? ['webrtc'] : [])),
+      huella: solo(nuevos.filter((x) => x.clase === 'huella').map((x) => det(x).via)),
+      limpiezas: solo([].concat(...nuevos.filter((x) => x.clase === 'limpieza').map((x) => det(x).quitados || [])), 12),
+    };
     const motivos = [];
     if (h.enLista) motivos.push('lista');
     if (h.certificado) motivos.push('certificado');
@@ -825,6 +874,8 @@ class Sesion {
       if (h.descargas) motivos.push('descarga');
       if (h.fugas) motivos.push('fuga');
       if (h.formulario) motivos.push('formulario');
+      // un aviso emergente nada más abrir (así empiezan las estafas de falso soporte técnico): se dice lo que ponía
+      if (nuevos.some((x) => x.clase === 'dialogo' && x.dominio === c.host && det(x).tipo !== 'beforeunload' && det(x).texto)) motivos.push('dialogo');
       if (h.respondio && !h.cifrada && !esLocal(c.host)) motivos.push('sin-cifrar'); // en el propio equipo (pruebas) no viaja por ninguna red
       resultado = motivos.length ? 'aviso' : h.fallo ? 'fallo' : 'limpia';
     }
@@ -869,7 +920,7 @@ class Sesion {
       if (process.env.ZERO_DEBUG) console.log('goto falló:', url.slice(0, 80), m.split('\n')[0]);
       const cert = /ERR_CERT|SSL|certificate/i.test(m);
       const motivo = /ERR_CERT_DATE_INVALID/.test(m) ? 'certificado caducado o con fecha no válida' : /ERR_CERT_COMMON_NAME_INVALID/.test(m) ? 'el certificado no coincide con el nombre de la web' : /ERR_CERT_AUTHORITY_INVALID/.test(m) ? 'el certificado no está firmado por una autoridad reconocida' : cert ? 'no se pudo verificar el certificado' : /ERR_NAME_NOT_RESOLVED|ERR_SOCKS_CONNECTION_HOST_UNREACHABLE/.test(m) ? 'la dirección no existe' : /ERR_CONNECTION|ERR_TIMED_OUT|ERR_INTERNET|ERR_TUNNEL|ERR_PROXY|ERR_SOCKS/.test(m) ? 'no se pudo conectar' : 'no se pudo abrir';
-      if (cert) this.suceso({ clase: 'certificado', certeza: 'comprobado', dominio: hostDe(url), texto: 'No se ha podido comprobar la identidad cifrada de ' + hostDe(url) + ' (' + motivo + '). ZERO no ha abierto la conexión.', detalle: { error: m.split('\n')[0] } });
+      if (cert) this.suceso({ clase: 'certificado', certeza: 'comprobado', dominio: hostDe(url), texto: 'No se ha podido comprobar la identidad cifrada de ' + hostDe(url) + ' (' + motivo + '). ZERO no ha abierto la conexión.', detalle: { error: m.split('\n')[0], motivo } });
       else if (cq && !cq.listo) cq.fallo = motivo;
       if (cq && this.chequeo && this.chequeo !== cq) return; // la persona ya pidió otra web: no se pisa con el aviso de esta
       await this.page.setContent(paginaBloqueo(cert ? 'La identidad de esta web no se pudo comprobar' : 'No se pudo abrir esta web', cert ? 'Su certificado de seguridad no supera la comprobación: ' + motivo + '. Puede ser un fallo técnico de la web o una suplantación; ZERO no ha enviado ni recibido nada.' : 'Motivo: ' + motivo + '. ZERO no ha enviado nada.', hostDe(url) + ' · ' + m.split('\n')[0].slice(0, 120))).catch(() => {});
@@ -895,9 +946,16 @@ class Sesion {
         if (o.accion === 'salir') { // «Volver»: a la web anterior o, si no la hay, fuera (portada de ZERO)
           const antes = this.page.url();
           this.op('la persona eligió volver desde ' + hostDe(antes));
-          if (this.sellada) { // la web selló la burbuja: se sale de ella sin red (la burbuja sigue sellada hasta que la persona la reanude o la destruya)
+          if (this.sellada) { // la web selló la burbuja: primero se sale de ella, sin red
+            let previa = null;
+            try { const hh = await this.act.cdp.send('Page.getNavigationHistory'); const e = hh.entries[hh.currentIndex - 1]; if (e && /^https?:/i.test(e.url)) previa = e.url; } catch (_) {}
             if (this.act) this.act.grave = null;
             await this.page.goto('about:blank').catch(() => {});
+            // una fuga (un dato de la burbuja salió fuera) sigue su curso: sellada y destrucción a los 20 s salvo que la persona reanude
+            if (this.autoDestruye) { this.env({ t: 'chequeo', fase: 'fuera' }); return; }
+            // lo peligroso se quedó en aquella web: fuera de ella, la burbuja vuelve a la calma y se vuelve a la web anterior (otra vez comprobada)
+            this.puntos = 0; this.motivos = []; await this.ponAlerta(0, 'la persona volvió desde una web con riesgo grave');
+            if (previa) return await this.ve(previa);
             this.env({ t: 'chequeo', fase: 'fuera' });
             return;
           }
