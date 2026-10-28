@@ -26,6 +26,8 @@ Pruebas nuevas en `herramientas/pruebas-com/`: invitab (17), unasola (6), vaciar
 
 Después de las 16:25, también publicado: «Añadir a la pantalla de inicio» también en el ordenador (Chrome/Edge) y el enlace **?instalar** (abre la hoja «Añadir»); fotos HEIC del iPhone sin datos ocultos; sin «Desconectado» arriba cuando no hay conversación; **«Tapar»** en «Revisa antes de enviar» (mosaico con el dedo o el ratón, `abreTapar`, pruebas `prueba_tapar.js`). Versiones: app.js 20261029h, app.css 20261029g, idioma.js 20261029p51 (main 15ed79a).
 
+Hasta las 16:45, también: en el móvil **«Crear y compartir invitación»** abre el menú de compartir en el mismo toque (semilla preparada: `semillaLista`, `creaInvitacionB(semilla)`); llamada entrante en el móvil plegada también en la blindada; al aceptar, sin barra (`body.aceptando`) y «Aceptar» arriba; portada: «Entrar» con estado pulsado y «Entrando…», y Speculation Rules para prerenderizar /orbita/. Versiones: app.js 20261029j, app.css 20261029h, llamada.js 20261029t, idioma.js 20261029p52 (main 530a028). Recorrido completo en el móvil: `herramientas/pruebas-com/recorrido_movil.js` (fotos de cada paso).
+
 Pendiente, por orden:
 1. «Ver una vez» (foto o archivo que se borra en los dos equipos al cerrarlo; hay que tocar el protocolo de archivos: bandera `unaVez`, visor a pantalla completa, control `visto-una-vez`).
 2. La llamada que «se borra al descolgar» (Barranquilla–Cartagena): sin datos del dueño todavía.
