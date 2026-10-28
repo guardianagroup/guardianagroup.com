@@ -766,3 +766,5 @@ body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
 #inicio.con-invitacion>.red-nucleo{display:none}
 /* Como app desde la pantalla de inicio (sin barras del navegador), lo de arriba no va debajo de la hora ni de la isla */
 @media (display-mode: standalone), (display-mode: fullscreen){.barra{padding-top:calc(env(safe-area-inset-top) + 6px)}.gc-llamada-arriba{padding-top:calc(env(safe-area-inset-top) + 8px)}}
+.anadir-app{display:none}
+@media (max-width:760px){.anadir-app:not([hidden]){display:inline-flex;align-items:center;gap:8px;margin:16px auto 0;padding:10px 16px;border-radius:999px;border:1px solid rgba(218,236,250,.2);background:transparent;color:#cfe1ee;font:500 14px/1.2 'IBM Plex Sans',system-ui,sans-serif}.anadir-app svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}#inicio.con-invitacion .anadir-app{display:none}}
