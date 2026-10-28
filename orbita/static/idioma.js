@@ -1433,6 +1433,8 @@
     "Entregado": ["Delivered", "Entregue"],
     "Enviado": ["Sent", "Enviado"],
     "Enviar": ["Send", "Enviar"],
+    "Hacer pequeña tu imagen": ["Make your image small", "Diminuir a sua imagem"],
+    "Pantalla dividida": ["Split screen", "Tela dividida"],
     "Miami (Estados Unidos)": ["Miami (United States)", "Miami (Estados Unidos)"],
     "Núremberg (Alemania)": ["Nuremberg (Germany)", "Nuremberg (Alemanha)"],
     "Tu llamada pasa por el servidor de llamadas de {s}.": ["Your call goes through the call server in {s}.", "Sua chamada passa pelo servidor de chamadas de {s}."],
