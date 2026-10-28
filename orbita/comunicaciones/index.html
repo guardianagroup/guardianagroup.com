@@ -10,7 +10,11 @@
 <link rel="manifest" href="/orbita/comunicaciones/comunicaciones.webmanifest">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Barra de la hora opaca (28 Oct 2026, 17:10): con «black-translucent», iOS 26 deja la app instalada más corta que la pantalla
+     (una franja vacía abajo del alto de la barra de la hora, WebKit 301108) y, con el teclado, los mensajes pasaban por debajo de
+     la hora. Con la barra opaca la app empieza debajo de la hora y llega hasta abajo. iOS lo lee al añadirla a la pantalla de
+     inicio: quien ya la tenía la quita y la vuelve a añadir una vez. -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="GUARDIANA">
 <link rel="apple-touch-icon" href="/icon-192.png">
 <meta name="description" content="GUARDIANA Comunicaciones, para particulares y profesionales con clientes: chat, llamadas y envío de datos y documentación sensible, encriptados de extremo a extremo entre dos navegadores, con un código de 9 cifras o, en la sesión blindada, con un enlace. Los servidores no guardan mensajes ni archivos.">
@@ -18,7 +22,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261029k">
+<link rel="stylesheet" href="app.css?v=20261029n">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -535,6 +539,8 @@
   </div>
   <audio id="a-remoto" autoplay></audio>
   <div class="gc-llamada-botones" id="ll-botones">
+    <!-- Altavoz o auricular (dueño, 28 Oct 2026, 17:26): solo en el teléfono, donde el navegador deja elegir la salida -->
+    <div class="gc-llamada-boton" id="ll-altavoz-caja" hidden><button type="button" id="ll-altavoz" aria-pressed="false" aria-label="Poner el altavoz"><svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.2 6.6a7.6 7.6 0 0 1 0 10.8"/></svg></button><span>Altavoz</span></div>
     <div class="gc-llamada-boton"><button type="button" id="ll-silenciar" aria-pressed="false" aria-label="Silenciar"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><span>Silenciar</span></div>
     <div class="gc-llamada-boton" id="ll-camara-caja" hidden><button type="button" id="ll-camara" aria-pressed="false" aria-label="Apagar la cámara"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></svg></button><span>Cámara</span></div>
     <div class="gc-llamada-boton" id="ll-ajustes-caja" hidden><button type="button" id="ll-ajustes-b" aria-pressed="false" aria-controls="ll-ajustes" aria-label="Voz e imagen"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button><span>Voz e imagen</span></div>
@@ -611,7 +617,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261029p54"></script>
+<script src="/orbita/static/idioma.js?v=20261029p55"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -621,7 +627,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028b"></script>
-<script src="llamada.js?v=20261029t"></script>
-<script src="app.js?v=20261029k"></script>
+<script src="llamada.js?v=20261029u"></script>
+<script src="app.js?v=20261029n"></script>
 </body>
 </html>

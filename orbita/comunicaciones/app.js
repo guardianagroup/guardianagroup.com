@@ -155,6 +155,10 @@
   // Pantalla completa en el móvil (dueño, 16:03: «una interfaz que ocupe toda la pantalla… que no se vea nada del móvil»). Android
   // la da desde la web; el iPhone no (solo como app desde la pantalla de inicio)
   const comoApp = () => { try { return matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches || navigator.standalone === true; } catch (_) { return false; } };
+  // instalada en la pantalla de inicio: sin «‹ Inicio» (app.css), también donde el navegador no entiende display-mode; arriba,
+  // el mismo nombre que lleva el icono (dueño, 17:06: «en vez de poner comunicaciones… guardiana»)
+  document.documentElement.classList.toggle('como-app', comoApp());
+  if (comoApp()) { const bt = document.querySelector('.barra .barra-t'); if (bt) { bt.textContent = 'GUARDIANA'; bt.setAttribute('translate', 'no'); } }
   const puedeCompleta = () => !!(document.fullscreenEnabled && document.documentElement.requestFullscreen) && !/iPhone|iPad|iPod/i.test(navigator.userAgent);
   function pantallaCompleta() { try { if (!document.fullscreenElement && !comoApp()) document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => {}); } catch (_) {} }
   async function borraAnteriores(salvo) { for (const x of [...CONVS.values()]) if (x.id !== salvo) { try { await destruye(x, true); } catch (_) {} } }
@@ -1535,18 +1539,42 @@
   // mensajes; y si el navegador la saca de esa copia, se vuelve a cargar desde cero (lo terminado ya no existe).
   addEventListener('pagehide', () => { try { const m = document.querySelector('#mensajes'); if (m) m.textContent = ''; } catch (_) {} });
   addEventListener('pageshow', (e) => { if (e.persisted) location.reload(); });
+  // (28 Oct 2026, 17:10–17:17: «cuando se implementa el teclado, sube, baja… que se quede fijado en pantalla») El teclado se
+  // detectaba comparando lo que se ve con innerHeight; pero en el iPhone, con la app en la pantalla de inicio (iOS 26), innerHeight
+  // también baja con el teclado, así que no se notaba nada y el iPhone subía la página entera: la cabecera se iba arriba y quedaba
+  // el chat a media pantalla. Ahora se compara con lo más alto que se ha visto con este ancho y la página, en el teléfono, va fija
+  // (app.css): no hay nada que el iPhone pueda subir. Si aun así algo la desplaza, vuelve arriba.
   (function tecladoMovil() {
     const vv = window.visualViewport; if (!vv) return;
-    const raizDoc = document.documentElement; let rafVv = 0, conTeclado = false;
-    const ajusta = () => {
-      rafVv = 0; const alto = Math.round(vv.height), abierto = innerHeight - alto > 120;
-      raizDoc.style.setProperty('--alto-vv', alto + 'px'); raizDoc.style.setProperty('--arriba-vv', Math.round(vv.offsetTop) + 'px');
-      raizDoc.classList.toggle('con-teclado', abierto);
-      if (abierto && !conTeclado) { const m = document.querySelector('#mensajes'); if (m) requestAnimationFrame(() => { m.scrollTop = m.scrollHeight; }); }
-      conTeclado = abierto;
+    const tactil = matchMedia('(pointer: coarse)');
+    const raizDoc = document.documentElement;
+    let raf = 0, abierto = false, ancho = 0, maximo = 0;
+    const escribe = () => {
+      const a = document.activeElement; if (!a || a === document.body) return false;
+      if (a.isContentEditable || a.tagName === 'TEXTAREA') return true;
+      return a.tagName === 'INPUT' && !/^(button|checkbox|radio|range|file|submit|reset|color|image|hidden)$/i.test(a.type || '');
     };
-    const pide = () => { if (!rafVv) rafVv = requestAnimationFrame(ajusta); };
-    vv.addEventListener('resize', pide); vv.addEventListener('scroll', pide); ajusta();
+    const ajusta = () => {
+      raf = 0;
+      if (!tactil.matches || vv.scale > 1.01) return; // con el zoom de dos dedos, como está
+      const w = Math.round(vv.width), h = Math.round(vv.height);
+      if (Math.abs(w - ancho) > 2) { ancho = w; maximo = 0; } // al girar, se vuelve a medir
+      maximo = Math.max(maximo, h);
+      // abierto: lo que se ve es mucho menos que lo más alto visto; para abrirse hace falta un campo de escribir con el foco
+      const ahora = maximo - h > 140 && (abierto || escribe());
+      if (ahora) { raizDoc.style.setProperty('--alto-vv', h + 'px'); raizDoc.style.setProperty('--arriba-vv', Math.max(0, Math.round(vv.offsetTop)) + 'px'); }
+      if (ahora !== abierto) {
+        abierto = ahora; raizDoc.classList.toggle('con-teclado', ahora);
+        if (!ahora) { raizDoc.style.removeProperty('--alto-vv'); raizDoc.style.removeProperty('--arriba-vv'); }
+        else { const m = document.querySelector('#mensajes'); if (m) requestAnimationFrame(() => { m.scrollTop = m.scrollHeight; }); }
+      }
+      if (window.scrollY || window.scrollX) window.scrollTo(0, 0);
+    };
+    const pide = () => { if (!raf) raf = requestAnimationFrame(ajusta); };
+    vv.addEventListener('resize', pide); vv.addEventListener('scroll', pide);
+    addEventListener('scroll', pide, { passive: true });
+    document.addEventListener('focusin', pide); document.addEventListener('focusout', () => setTimeout(pide, 80));
+    ajusta();
   })();
 
 
