@@ -1251,7 +1251,8 @@
   const hayContactos = () => esMovil() && contactos().length > 0;
   function pintaContactos() {
     const sec = $('#contactos'), ul = $('#contactos-filas'); if (!sec || !ul) return;
-    const xs = esMovil() ? contactos() : [];
+    // con contactos, también la conversación empezada que aún no se guardó (si no, al volver a la lista no habría cómo llegar a ella)
+    const xs = esMovil() && contactos().length ? contactos().concat(vivas().filter((x) => x.huella && !x.contacto)) : [];
     sec.hidden = !xs.length;
     $('#inicio').classList.toggle('con-contactos', xs.length > 0);
     document.body.classList.toggle('con-contactos', xs.length > 0);
@@ -1263,7 +1264,7 @@
       const av = document.createElement('span'); av.className = 'contacto-av' + (vivo ? ' en-linea' : ''); av.textContent = inicial(nombre); av.setAttribute('aria-hidden', 'true');
       const tx = document.createElement('span'); tx.className = 'contacto-txt';
       const nb = document.createElement('b'); nb.textContent = nombre; nb.translate = false;
-      const es = document.createElement('small'); es.textContent = c.noLeidos ? T('{n} mensajes nuevos').replace('{n}', c.noLeidos) : vivo ? T('En línea') : T('No conectado');
+      const es = document.createElement('small'); es.textContent = c.noLeidos ? T('{n} mensajes nuevos').replace('{n}', c.noLeidos) : (c.contacto ? '' : T('Sin guardar') + ' · ') + (vivo ? T('En línea') : T('No conectado'));
       tx.append(nb, es); ab.append(av, tx);
       if (c.noLeidos) { const n = document.createElement('i'); n.className = 'contacto-n'; n.textContent = c.noLeidos > 99 ? '99+' : String(c.noLeidos); ab.append(n); }
       li.append(ab);

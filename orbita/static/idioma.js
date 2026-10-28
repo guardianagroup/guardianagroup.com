@@ -1567,6 +1567,7 @@
     "Contacto guardado: lo tienes en el inicio para llamar o escribir sin enlace.": ["Contact saved: it's on the home screen to call or write without a link.", "Contato salvo: está no início para ligar ou escrever sem link."],
     "Contacto guardado.": ["Contact saved.", "Contato salvo."],
     "En línea": ["Online", "Online"],
+    "Sin guardar": ["Not saved", "Não salvo"],
     "No conectado": ["Not connected", "Não conectado"],
     "Llamar a {n}": ["Call {n}", "Ligar para {n}"],
     "Videollamada con {n}": ["Video call with {n}", "Videochamada com {n}"],
