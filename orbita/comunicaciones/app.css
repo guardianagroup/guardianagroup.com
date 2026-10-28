@@ -677,3 +677,16 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 /* Fuera el escudo de la cabecera (dueño, 28 Oct 2026, 15:15: «sobra… me aparece seguridad y todas las cosas que están a la
    derecha»): lo mismo está en VIGILANCIA, en «⋯» → «Seguridad y verificación» y al tocar el nombre */
 #escudo{display:none!important}
+
+/* Sin selección ni copia en toda la web, chats incluidos (dueño, 28 Oct 2026, 15:17: «no quiero que nadie pueda clicar… ni que
+   aparezca el palito… que no se pueda copiar nada, ni que aparezca nada en copiado, en azul»): el texto no se selecciona ni se
+   arrastra, no sale la barra de escribir ni el menú de copiar al mantener pulsado; solo los campos donde se escribe siguen igual.
+   Una captura de pantalla no se puede impedir desde una web. */
+html{-webkit-tap-highlight-color:transparent}
+body{caret-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;cursor:default}
+img,svg,video,canvas{-webkit-user-drag:none}
+input,textarea,select,[contenteditable="true"]{caret-color:auto;-webkit-user-select:text;user-select:text;-webkit-touch-callout:default;cursor:text}
+input[type=checkbox],input[type=radio],input[type=range],input[type=file],select{cursor:pointer}
+a,button,summary,label,[role="button"]{cursor:pointer}
+.codigo,.numero,.bl-numero,.gc-mensajes,.gc-mensajes *{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none}
+.codigo,.numero,.bl-numero{cursor:default}

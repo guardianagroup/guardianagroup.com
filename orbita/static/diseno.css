@@ -124,7 +124,7 @@
 html{-webkit-tap-highlight-color:transparent}
 body{caret-color:transparent;-webkit-user-select:none;user-select:none;cursor:default}
 input,textarea,select,[contenteditable="true"]{caret-color:auto;-webkit-user-select:text;user-select:text;cursor:text}
-code,pre,kbd,samp,.huella,.copiable,[data-copiable]{-webkit-user-select:text;user-select:text;cursor:text}
+body,body *:not(input):not(textarea):not(select):not([contenteditable="true"]){-webkit-touch-callout:none}
 a,button,summary,label,[role="button"],[tabindex]:not([tabindex="-1"]){cursor:pointer}
 :focus:not(:focus-visible){outline:none}
 
