@@ -2846,7 +2846,19 @@
   "Volver a intentar": "ניסיון חוזר",
   "Esta web no se ha abierto": "האתר הזה לא נפתח",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "יש אתרים שמעכבים דפדפנים שיוצאים משרת, כמו הבועה. לחצו על “טעינה מחדש” כדי לנסות שוב.",
-  "Actualizar": "טעינה מחדש"
+  "Actualizar": "טעינה מחדש",
+  "Comprobante válido": "אסמכתא תקפה",
+  "Verificar otro comprobante": "אימות אסמכתא נוספת",
+  "¿Tienes el archivo que se envió?": "האם יש לכם את הקובץ שנשלח?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "בחרו אותו, והדפדפן שלכם יבדוק שזה בדיוק הקובץ הזה, בלי לשלוח אותו לשום מקום.",
+  "Elegir el archivo": "בחירת הקובץ",
+  "Es exactamente el archivo que se envió": "זה בדיוק הקובץ שנשלח",
+  "No es el mismo archivo": "זה לא אותו קובץ",
+  "Ese es el comprobante, no el archivo que se envió": "זו האסמכתא, לא הקובץ שנשלח",
+  "Elige el archivo que se envió:": "בחרו את הקובץ שנשלח:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "הגודל שלו שונה: זה לא הקובץ שנשלח.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "הגודל שלו זהה, אבל התוכן שלו שונה: הוא עבר שינוי.",
+  "Esperado": "צפוי"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

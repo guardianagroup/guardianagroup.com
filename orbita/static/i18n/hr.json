@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Pokušaj ponovno",
   "Esta web no se ha abierto": "Ova se stranica nije otvorila",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Neke stranice koče preglednike koji izlaze s poslužitelja, poput mjehurića. Pritisni „Ponovno učitaj“ da pokušaš ponovno.",
-  "Actualizar": "Ponovno učitaj"
+  "Actualizar": "Ponovno učitaj",
+  "Comprobante válido": "Valjana potvrda",
+  "Verificar otro comprobante": "Provjeri drugu potvrdu",
+  "¿Tienes el archivo que se envió?": "Imaš li datoteku koja je poslana?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Odaberi je i tvoj će preglednik provjeriti je li to točno ta datoteka, bez slanja bilo kamo.",
+  "Elegir el archivo": "Odaberi datoteku",
+  "Es exactamente el archivo que se envió": "To je točno datoteka koja je poslana",
+  "No es el mismo archivo": "To nije ista datoteka",
+  "Ese es el comprobante, no el archivo que se envió": "To je potvrda, a ne datoteka koja je poslana",
+  "Elige el archivo que se envió:": "Odaberi datoteku koja je poslana:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Ima drugu veličinu: to nije datoteka koja je poslana.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Ima istu veličinu, ali drukčiji sadržaj: izmijenjena je.",
+  "Esperado": "Očekivana"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

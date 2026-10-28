@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Erneut versuchen",
   "Esta web no se ha abierto": "Diese Website hat sich nicht geöffnet",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Manche Websites bremsen Browser aus, die von einem Server kommen, wie die Blase. Drück auf „Neu laden“, um es noch einmal zu versuchen.",
-  "Actualizar": "Neu laden"
+  "Actualizar": "Neu laden",
+  "Comprobante válido": "Nachweis gültig",
+  "Verificar otro comprobante": "Weiteren Nachweis verifizieren",
+  "¿Tienes el archivo que se envió?": "Hast du die gesendete Datei?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Wähle sie aus, und dein Browser prüft, ob es genau diese Datei ist, ohne sie irgendwohin zu senden.",
+  "Elegir el archivo": "Datei auswählen",
+  "Es exactamente el archivo que se envió": "Es ist genau die gesendete Datei",
+  "No es el mismo archivo": "Es ist nicht dieselbe Datei",
+  "Ese es el comprobante, no el archivo que se envió": "Das ist der Nachweis, nicht die gesendete Datei",
+  "Elige el archivo que se envió:": "Wähle die gesendete Datei aus:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Sie hat eine andere Größe: Es ist nicht die gesendete Datei.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Sie hat dieselbe Größe, aber einen anderen Inhalt: Sie wurde verändert.",
+  "Esperado": "Erwartet"
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

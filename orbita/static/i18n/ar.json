@@ -2844,7 +2844,19 @@
   "Volver a intentar": "إعادة المحاولة",
   "Esta web no se ha abierto": "لم يُفتح هذا الموقع",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "تعرقل بعض المواقع المتصفحات القادمة من خادم، مثل الفقاعة. اضغط على «إعادة تحميل» لتحاول مرة أخرى.",
-  "Actualizar": "إعادة تحميل"
+  "Actualizar": "إعادة تحميل",
+  "Comprobante válido": "إيصال صالح",
+  "Verificar otro comprobante": "التحقق من إيصال آخر",
+  "¿Tienes el archivo que se envió?": "هل لديك الملف الذي أُرسل؟",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "اختره وسيتحقق متصفحك من أنه الملف نفسه بالضبط، دون أن يرسله إلى أي مكان.",
+  "Elegir el archivo": "اختيار الملف",
+  "Es exactamente el archivo que se envió": "إنه بالضبط الملف الذي أُرسل",
+  "No es el mismo archivo": "ليس الملف نفسه",
+  "Ese es el comprobante, no el archivo que se envió": "هذا هو الإيصال، لا الملف الذي أُرسل",
+  "Elige el archivo que se envió:": "اختر الملف الذي أُرسل:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "حجمه مختلف: ليس الملف الذي أُرسل.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "له الحجم نفسه، لكن محتواه مختلف: لقد عُدِّل.",
+  "Esperado": "المتوقَّع"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

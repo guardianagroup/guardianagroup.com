@@ -2844,7 +2844,19 @@
   "Volver a intentar": "Cuba lagi",
   "Esta web no se ha abierto": "Laman ini tidak terbuka",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Sesetengah laman menghalang pelayar yang keluar dari pelayan, seperti gelembung. Tekan “Muat semula” untuk mencuba lagi.",
-  "Actualizar": "Muat semula"
+  "Actualizar": "Muat semula",
+  "Comprobante válido": "Bukti sah",
+  "Verificar otro comprobante": "Sahkan bukti lain",
+  "¿Tienes el archivo que se envió?": "Adakah anda mempunyai fail yang telah dihantar?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Pilih fail itu dan pelayar anda akan menyemak bahawa ia betul-betul fail tersebut, tanpa menghantarnya ke mana-mana.",
+  "Elegir el archivo": "Pilih fail",
+  "Es exactamente el archivo que se envió": "Ini betul-betul fail yang telah dihantar",
+  "No es el mismo archivo": "Ini bukan fail yang sama",
+  "Ese es el comprobante, no el archivo que se envió": "Ini ialah bukti, bukan fail yang telah dihantar",
+  "Elige el archivo que se envió:": "Pilih fail yang telah dihantar:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Saiznya berbeza: ini bukan fail yang telah dihantar.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Saiznya sama, tetapi kandungannya berbeza: fail telah diubah.",
+  "Esperado": "Dijangka"
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

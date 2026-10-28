@@ -2846,7 +2846,19 @@
   "Volver a intentar": "重试",
   "Esta web no se ha abierto": "此网站未能打开",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "有些网站会阻拦来自服务器的浏览器，比如气泡。请按“重新加载”再试一次。",
-  "Actualizar": "重新加载"
+  "Actualizar": "重新加载",
+  "Comprobante válido": "凭证有效",
+  "Verificar otro comprobante": "验证其他凭证",
+  "¿Tienes el archivo que se envió?": "你有当初发送的文件吗？",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "选择该文件，你的浏览器就会核对它是否正是那个文件，且不会将其发送到任何地方。",
+  "Elegir el archivo": "选择文件",
+  "Es exactamente el archivo que se envió": "正是当初发送的那个文件",
+  "No es el mismo archivo": "不是同一个文件",
+  "Ese es el comprobante, no el archivo que se envió": "这是凭证，不是当初发送的文件",
+  "Elige el archivo que se envió:": "请选择当初发送的文件：",
+  "Tiene otro tamaño: no es el archivo que se envió.": "大小不同：不是当初发送的文件。",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "大小相同，但内容不同：已被修改。",
+  "Esperado": "预期"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

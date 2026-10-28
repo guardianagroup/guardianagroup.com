@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Yeniden dene",
   "Esta web no se ha abierto": "Bu site açılmadı",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Bazı siteler, balon gibi sunucudan çıkan tarayıcıları frenler. Yeniden denemek için “Yenile” düğmesine bas.",
-  "Actualizar": "Yenile"
+  "Actualizar": "Yenile",
+  "Comprobante válido": "Geçerli makbuz",
+  "Verificar otro comprobante": "Başka bir makbuzu doğrula",
+  "¿Tienes el archivo que se envió?": "Gönderilen dosya sizde mi?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Dosyayı seçin; tarayıcınız onu hiçbir yere göndermeden tam olarak o dosya olup olmadığını kontrol edecek.",
+  "Elegir el archivo": "Dosyayı seç",
+  "Es exactamente el archivo que se envió": "Bu, tam olarak gönderilen dosya",
+  "No es el mismo archivo": "Aynı dosya değil",
+  "Ese es el comprobante, no el archivo que se envió": "Bu makbuz, gönderilen dosya değil",
+  "Elige el archivo que se envió:": "Gönderilen dosyayı seçin:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Boyutu farklı: gönderilen dosya değil.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Boyutu aynı, ancak içeriği farklı: değiştirilmiş.",
+  "Esperado": "Beklenen"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

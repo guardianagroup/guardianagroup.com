@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Coba lagi",
   "Esta web no se ha abierto": "Situs ini tidak terbuka",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Beberapa situs menghambat peramban yang keluar dari server, seperti gelembung. Tekan “Muat ulang” untuk mencoba lagi.",
-  "Actualizar": "Muat ulang"
+  "Actualizar": "Muat ulang",
+  "Comprobante válido": "Bukti valid",
+  "Verificar otro comprobante": "Verifikasi bukti lain",
+  "¿Tienes el archivo que se envió?": "Apakah kamu punya file yang dikirim?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Pilih file itu dan browser kamu akan memeriksa bahwa itu persis file tersebut, tanpa mengirimnya ke mana pun.",
+  "Elegir el archivo": "Pilih file",
+  "Es exactamente el archivo que se envió": "Ini persis file yang dikirim",
+  "No es el mismo archivo": "Ini bukan file yang sama",
+  "Ese es el comprobante, no el archivo que se envió": "Ini bukti, bukan file yang dikirim",
+  "Elige el archivo que se envió:": "Pilih file yang dikirim:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Ukurannya berbeda: ini bukan file yang dikirim.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Ukurannya sama, tetapi isinya berbeda: file telah diubah.",
+  "Esperado": "Diharapkan"
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

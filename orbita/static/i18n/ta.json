@@ -2844,7 +2844,19 @@
   "Volver a intentar": "மீண்டும் முயற்சிக்கவும்",
   "Esta web no se ha abierto": "இந்தத் தளம் திறக்கவில்லை",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "சில தளங்கள் சேவையகத்திலிருந்து வரும் உலாவிகளை, குமிழி போன்றவற்றை, தடுக்கின்றன. மீண்டும் முயற்சிக்க “மீண்டும் ஏற்றவும்” என்பதை அழுத்தவும்.",
-  "Actualizar": "மீண்டும் ஏற்றவும்"
+  "Actualizar": "மீண்டும் ஏற்றவும்",
+  "Comprobante válido": "செல்லுபடியான ரசீது",
+  "Verificar otro comprobante": "வேறொரு ரசீதைச் சரிபார்",
+  "¿Tienes el archivo que se envió?": "அனுப்பப்பட்ட கோப்பு உங்களிடம் உள்ளதா?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "அதைத் தேர்ந்தெடுங்கள்; உங்கள் உலாவி அதை எங்கும் அனுப்பாமல், அது அதே கோப்புதானா என்று சரிபார்க்கும்.",
+  "Elegir el archivo": "கோப்பைத் தேர்வு செய்",
+  "Es exactamente el archivo que se envió": "அனுப்பப்பட்ட அதே கோப்புதான் இது",
+  "No es el mismo archivo": "இது அதே கோப்பு அல்ல",
+  "Ese es el comprobante, no el archivo que se envió": "இது ரசீது, அனுப்பப்பட்ட கோப்பு அல்ல",
+  "Elige el archivo que se envió:": "அனுப்பப்பட்ட கோப்பைத் தேர்ந்தெடுங்கள்:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "இதன் அளவு வேறு: இது அனுப்பப்பட்ட கோப்பு அல்ல.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "இதன் அளவு அதே, ஆனால் உள்ளடக்கம் வேறு: இது மாற்றப்பட்டுள்ளது.",
+  "Esperado": "எதிர்பார்க்கப்பட்டது"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

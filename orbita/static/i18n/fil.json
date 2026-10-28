@@ -2844,7 +2844,19 @@
   "Volver a intentar": "Subukan ulit",
   "Esta web no se ha abierto": "Hindi nabuksan ang site na ito",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "May mga site na pumipigil sa mga browser na galing sa server, gaya ng bubble. Pindutin ang “I-reload” para subukan ulit.",
-  "Actualizar": "I-reload"
+  "Actualizar": "I-reload",
+  "Comprobante válido": "Wastong resibo",
+  "Verificar otro comprobante": "I-verify ang ibang resibo",
+  "¿Tienes el archivo que se envió?": "Nasa iyo ba ang file na ipinadala?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Piliin ito at susuriin ng browser mo kung ito mismo ang file na iyon, nang hindi ito ipinapadala kahit saan.",
+  "Elegir el archivo": "Piliin ang file",
+  "Es exactamente el archivo que se envió": "Ito mismo ang ipinadalang file",
+  "No es el mismo archivo": "Hindi ito ang parehong file",
+  "Ese es el comprobante, no el archivo que se envió": "Ito ang resibo, hindi ang ipinadalang file",
+  "Elige el archivo que se envió:": "Piliin ang ipinadalang file:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Iba ang laki nito: hindi ito ang ipinadalang file.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Pareho ang laki nito, pero iba ang nilalaman: binago ito.",
+  "Esperado": "Inaasahan"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

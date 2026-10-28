@@ -2844,7 +2844,19 @@
   "Volver a intentar": "دوبارہ کوشش کریں",
   "Esta web no se ha abierto": "یہ ویب سائٹ نہیں کھلی",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "کچھ ویب سائٹس ایسے براؤزرز کو روک دیتی ہیں جو کسی سرور سے نکلتے ہیں، جیسے بلبلہ۔ دوبارہ کوشش کرنے کے لیے “ری لوڈ کریں” دبائیں۔",
-  "Actualizar": "ری لوڈ کریں"
+  "Actualizar": "ری لوڈ کریں",
+  "Comprobante válido": "معتبر رسید",
+  "Verificar otro comprobante": "دوسری رسید کی تصدیق کریں",
+  "¿Tienes el archivo que se envió?": "کیا آپ کے پاس وہ فائل ہے جو بھیجی گئی تھی؟",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "اسے منتخب کریں اور آپ کا براؤزر اسے کہیں بھیجے بغیر جانچے گا کہ یہ بالکل وہی فائل ہے۔",
+  "Elegir el archivo": "فائل منتخب کریں",
+  "Es exactamente el archivo que se envió": "یہ بالکل وہی فائل ہے جو بھیجی گئی تھی",
+  "No es el mismo archivo": "یہ وہی فائل نہیں ہے",
+  "Ese es el comprobante, no el archivo que se envió": "یہ رسید ہے، بھیجی گئی فائل نہیں",
+  "Elige el archivo que se envió:": "وہ فائل منتخب کریں جو بھیجی گئی تھی:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "اس کا سائز مختلف ہے: یہ وہ فائل نہیں جو بھیجی گئی تھی۔",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "اس کا سائز وہی ہے، لیکن مواد مختلف ہے: اس میں تبدیلی کی گئی ہے۔",
+  "Esperado": "متوقع"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

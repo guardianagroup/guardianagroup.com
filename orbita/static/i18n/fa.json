@@ -2844,7 +2844,19 @@
   "Volver a intentar": "تلاش دوباره",
   "Esta web no se ha abierto": "این وب‌سایت باز نشد",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "برخی سایت‌ها جلوی مرورگرهایی را که از یک سرور می‌آیند، مانند حباب، می‌گیرند. برای امتحان دوباره، «بارگذاری مجدد» را بزنید.",
-  "Actualizar": "بارگذاری مجدد"
+  "Actualizar": "بارگذاری مجدد",
+  "Comprobante válido": "رسید معتبر",
+  "Verificar otro comprobante": "تأیید رسیدی دیگر",
+  "¿Tienes el archivo que se envió?": "آیا فایلی را که ارسال شد دارید؟",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "آن را انتخاب کنید تا مرورگر شما، بدون ارسال آن به هیچ جا، بررسی کند که دقیقاً همان فایل است.",
+  "Elegir el archivo": "انتخاب فایل",
+  "Es exactamente el archivo que se envió": "دقیقاً همان فایلی است که ارسال شد",
+  "No es el mismo archivo": "همان فایل نیست",
+  "Ese es el comprobante, no el archivo que se envió": "این رسید است، نه فایلی که ارسال شد",
+  "Elige el archivo que se envió:": "فایلی را که ارسال شد انتخاب کنید:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "اندازهٔ آن متفاوت است: این فایلی نیست که ارسال شد.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "اندازهٔ آن یکسان است، اما محتوایش متفاوت است: تغییر کرده است.",
+  "Esperado": "مورد انتظار"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

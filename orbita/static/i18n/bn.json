@@ -2844,7 +2844,19 @@
   "Volver a intentar": "আবার চেষ্টা করুন",
   "Esta web no se ha abierto": "এই সাইটটি খোলেনি",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "কিছু সাইট সার্ভার থেকে আসা ব্রাউজারকে, যেমন বাবলকে, আটকে দেয়। আবার চেষ্টা করতে “রিলোড করুন” চাপুন।",
-  "Actualizar": "রিলোড করুন"
+  "Actualizar": "রিলোড করুন",
+  "Comprobante válido": "বৈধ রসিদ",
+  "Verificar otro comprobante": "আরেকটি রসিদ যাচাই করুন",
+  "¿Tienes el archivo que se envió?": "যে ফাইলটি পাঠানো হয়েছিল, সেটি কি আপনার কাছে আছে?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "সেটি বেছে নিন, আর আপনার ব্রাউজার কোথাও না পাঠিয়েই যাচাই করবে যে এটি হুবহু সেই ফাইল।",
+  "Elegir el archivo": "ফাইল বেছে নিন",
+  "Es exactamente el archivo que se envió": "এটি হুবহু সেই ফাইল যা পাঠানো হয়েছিল",
+  "No es el mismo archivo": "এটি একই ফাইল নয়",
+  "Ese es el comprobante, no el archivo que se envió": "এটি রসিদ, পাঠানো ফাইলটি নয়",
+  "Elige el archivo que se envió:": "যে ফাইলটি পাঠানো হয়েছিল সেটি বেছে নিন:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "এর আকার আলাদা: এটি পাঠানো ফাইলটি নয়।",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "এর আকার একই, কিন্তু বিষয়বস্তু আলাদা: এটি পরিবর্তন করা হয়েছে।",
+  "Esperado": "প্রত্যাশিত"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

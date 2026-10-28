@@ -2844,7 +2844,19 @@
   "Volver a intentar": "Opnieuw proberen",
   "Esta web no se ha abierto": "Deze site is niet geopend",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Sommige sites houden browsers tegen die vanaf een server komen, zoals de bubbel. Druk op “Herladen” om het opnieuw te proberen.",
-  "Actualizar": "Herladen"
+  "Actualizar": "Herladen",
+  "Comprobante válido": "Geldig bewijs",
+  "Verificar otro comprobante": "Een ander bewijs verifiëren",
+  "¿Tienes el archivo que se envió?": "Heb je het bestand dat is verzonden?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Kies het en je browser controleert of het precies dat bestand is, zonder het ergens naartoe te sturen.",
+  "Elegir el archivo": "Bestand kiezen",
+  "Es exactamente el archivo que se envió": "Het is precies het bestand dat is verzonden",
+  "No es el mismo archivo": "Het is niet hetzelfde bestand",
+  "Ese es el comprobante, no el archivo que se envió": "Dat is het bewijs, niet het bestand dat is verzonden",
+  "Elige el archivo que se envió:": "Kies het bestand dat is verzonden:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Het heeft een andere grootte: het is niet het bestand dat is verzonden.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Het heeft dezelfde grootte, maar de inhoud is anders: het is gewijzigd.",
+  "Esperado": "Verwacht"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

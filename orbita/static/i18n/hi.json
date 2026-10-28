@@ -2846,7 +2846,19 @@
   "Volver a intentar": "फिर से कोशिश करें",
   "Esta web no se ha abierto": "यह वेबसाइट नहीं खुली",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "कुछ वेबसाइटें सर्वर से निकलने वाले ब्राउज़रों को, जैसे बबल को, रोकती हैं। फिर से कोशिश करने के लिए “रीलोड करें” दबाएँ।",
-  "Actualizar": "रीलोड करें"
+  "Actualizar": "रीलोड करें",
+  "Comprobante válido": "मान्य रसीद",
+  "Verificar otro comprobante": "दूसरी रसीद सत्यापित करें",
+  "¿Tienes el archivo que se envió?": "क्या आपके पास वह फ़ाइल है जो भेजी गई थी?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "उसे चुनें और आपका ब्राउज़र जाँचेगा कि यह ठीक वही फ़ाइल है, उसे कहीं भेजे बिना।",
+  "Elegir el archivo": "फ़ाइल चुनें",
+  "Es exactamente el archivo que se envió": "यह ठीक वही फ़ाइल है जो भेजी गई थी",
+  "No es el mismo archivo": "यह वही फ़ाइल नहीं है",
+  "Ese es el comprobante, no el archivo que se envió": "यह रसीद है, भेजी गई फ़ाइल नहीं",
+  "Elige el archivo que se envió:": "वह फ़ाइल चुनें जो भेजी गई थी:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "इसका आकार अलग है: यह वह फ़ाइल नहीं है जो भेजी गई थी।",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "इसका आकार वही है, लेकिन सामग्री अलग है: इसमें बदलाव किया गया है।",
+  "Esperado": "अपेक्षित"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

@@ -2844,7 +2844,19 @@
   "Volver a intentar": "다시 시도하기",
   "Esta web no se ha abierto": "이 사이트가 열리지 않았습니다",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "일부 사이트는 버블처럼 서버에서 나오는 브라우저를 막습니다. 다시 시도하려면 ‘새로고침’을 누르세요.",
-  "Actualizar": "새로고침"
+  "Actualizar": "새로고침",
+  "Comprobante válido": "유효한 증명서",
+  "Verificar otro comprobante": "다른 증명서 검증",
+  "¿Tienes el archivo que se envió?": "발송된 파일이 있나요?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "파일을 선택하면 브라우저가 어디로도 전송하지 않고 바로 그 파일인지 확인합니다.",
+  "Elegir el archivo": "파일 선택",
+  "Es exactamente el archivo que se envió": "발송된 바로 그 파일입니다",
+  "No es el mismo archivo": "같은 파일이 아닙니다",
+  "Ese es el comprobante, no el archivo que se envió": "발송된 파일이 아니라 증명서입니다",
+  "Elige el archivo que se envió:": "발송된 파일을 선택하세요:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "크기가 다릅니다: 발송된 파일이 아닙니다.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "크기는 같지만 내용이 다릅니다: 변경되었습니다.",
+  "Esperado": "원래 파일"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

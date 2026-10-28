@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Újrapróbálkozás",
   "Esta web no se ha abierto": "Ez az oldal nem nyílt meg",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Egyes oldalak visszafogják a szerverről érkező böngészőket, például a buborékot. Nyomd meg az „Újratöltés” gombot az újrapróbálkozáshoz.",
-  "Actualizar": "Újratöltés"
+  "Actualizar": "Újratöltés",
+  "Comprobante válido": "Érvényes igazolás",
+  "Verificar otro comprobante": "Másik igazolás ellenőrzése",
+  "¿Tienes el archivo que se envió?": "Megvan az elküldött fájl?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Válaszd ki, és a böngésződ ellenőrzi, hogy pontosan az a fájl-e, anélkül hogy bárhová elküldené.",
+  "Elegir el archivo": "Fájl kiválasztása",
+  "Es exactamente el archivo que se envió": "Pontosan az a fájl, amelyet elküldtek",
+  "No es el mismo archivo": "Nem ugyanaz a fájl",
+  "Ese es el comprobante, no el archivo que se envió": "Ez az igazolás, nem az elküldött fájl",
+  "Elige el archivo que se envió:": "Válaszd ki az elküldött fájlt:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Más a mérete: nem az elküldött fájl.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Ugyanakkora, de a tartalma eltér: módosították.",
+  "Esperado": "Várt"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

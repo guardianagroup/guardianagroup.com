@@ -2844,7 +2844,19 @@
   "Volver a intentar": "Försök igen",
   "Esta web no se ha abierto": "Den här webbplatsen öppnades inte",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Vissa webbplatser bromsar webbläsare som kommer från en server, som bubblan. Tryck på ”Ladda om” för att försöka igen.",
-  "Actualizar": "Ladda om"
+  "Actualizar": "Ladda om",
+  "Comprobante válido": "Giltigt kvitto",
+  "Verificar otro comprobante": "Verifiera ett annat kvitto",
+  "¿Tienes el archivo que se envió?": "Har du filen som skickades?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Välj den så kontrollerar din webbläsare att det är exakt den filen, utan att skicka den någonstans.",
+  "Elegir el archivo": "Välj filen",
+  "Es exactamente el archivo que se envió": "Det är exakt den fil som skickades",
+  "No es el mismo archivo": "Det är inte samma fil",
+  "Ese es el comprobante, no el archivo que se envió": "Det där är kvittot, inte filen som skickades",
+  "Elige el archivo que se envió:": "Välj filen som skickades:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Den har en annan storlek: det är inte filen som skickades.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Den har samma storlek, men innehållet är annorlunda: den har ändrats.",
+  "Esperado": "Förväntad"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

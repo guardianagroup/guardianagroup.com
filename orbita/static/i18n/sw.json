@@ -2844,7 +2844,19 @@
   "Volver a intentar": "Jaribu tena",
   "Esta web no se ha abierto": "Tovuti hii haikufunguka",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Baadhi ya tovuti huzuia vivinjari vinavyotoka kwenye seva, kama kiputo. Bonyeza “Pakia upya” ili kujaribu tena.",
-  "Actualizar": "Pakia upya"
+  "Actualizar": "Pakia upya",
+  "Comprobante válido": "Risiti halali",
+  "Verificar otro comprobante": "Hakiki risiti nyingine",
+  "¿Tienes el archivo que se envió?": "Je, una faili iliyotumwa?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Ichague na kivinjari chako kitahakiki kwamba ni faili hiyo hasa, bila kuituma popote.",
+  "Elegir el archivo": "Chagua faili",
+  "Es exactamente el archivo que se envió": "Ndiyo hasa faili iliyotumwa",
+  "No es el mismo archivo": "Si faili ileile",
+  "Ese es el comprobante, no el archivo que se envió": "Hiyo ni risiti, si faili iliyotumwa",
+  "Elige el archivo que se envió:": "Chagua faili iliyotumwa:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Ina ukubwa tofauti: si faili iliyotumwa.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Ina ukubwa uleule, lakini maudhui ni tofauti: imebadilishwa.",
+  "Esperado": "Inayotarajiwa"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

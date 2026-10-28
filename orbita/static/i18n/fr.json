@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Réessayer",
   "Esta web no se ha abierto": "Ce site ne s’est pas ouvert",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Certains sites freinent les navigateurs qui sortent d’un serveur, comme la bulle. Appuyez sur « Recharger » pour réessayer.",
-  "Actualizar": "Recharger"
+  "Actualizar": "Recharger",
+  "Comprobante válido": "Attestation valide",
+  "Verificar otro comprobante": "Vérifier une autre attestation",
+  "¿Tienes el archivo que se envió?": "Avez-vous le fichier qui a été envoyé ?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Choisissez-le et votre navigateur vérifiera qu’il s’agit exactement de ce fichier, sans l’envoyer nulle part.",
+  "Elegir el archivo": "Choisir le fichier",
+  "Es exactamente el archivo que se envió": "C’est exactement le fichier qui a été envoyé",
+  "No es el mismo archivo": "Ce n’est pas le même fichier",
+  "Ese es el comprobante, no el archivo que se envió": "C’est l’attestation, pas le fichier qui a été envoyé",
+  "Elige el archivo que se envió:": "Choisissez le fichier qui a été envoyé :",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Sa taille est différente : ce n’est pas le fichier qui a été envoyé.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Sa taille est la même, mais son contenu est différent : il a été modifié.",
+  "Esperado": "Attendu"
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

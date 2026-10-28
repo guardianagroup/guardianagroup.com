@@ -2844,7 +2844,19 @@
   "Volver a intentar": "Tentar novamente",
   "Esta web no se ha abierto": "Este site não abriu",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Alguns sites travam os navegadores que saem de um servidor, como a bolha. Carrega em «Recarregar» para tentar novamente.",
-  "Actualizar": "Recarregar"
+  "Actualizar": "Recarregar",
+  "Comprobante válido": "Comprovativo válido",
+  "Verificar otro comprobante": "Verificar outro comprovativo",
+  "¿Tienes el archivo que se envió?": "Tens o ficheiro que foi enviado?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Escolhe-o e o teu navegador vai verificar se é exatamente esse ficheiro, sem o enviar para lado nenhum.",
+  "Elegir el archivo": "Escolher o ficheiro",
+  "Es exactamente el archivo que se envió": "É exatamente o ficheiro que foi enviado",
+  "No es el mismo archivo": "Não é o mesmo ficheiro",
+  "Ese es el comprobante, no el archivo que se envió": "Esse é o comprovativo, não o ficheiro que foi enviado",
+  "Elige el archivo que se envió:": "Escolhe o ficheiro que foi enviado:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Tem outro tamanho: não é o ficheiro que foi enviado.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Tem o mesmo tamanho, mas o conteúdo é diferente: foi modificado.",
+  "Esperado": "Esperado"
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",
