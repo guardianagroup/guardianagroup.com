@@ -25,6 +25,11 @@
   // depende de detectar la cara (una máscara que siga la cara puede fallar un instante y dejarla a la vista).
   const IMAGENES = { natural: null, difuminada: { w: 32, suave: true }, mosaico: { w: 24, suave: false } };
   const SALIDA_W = 640; // la imagen protegida no necesita más: menos caudal, más fluida
+  // «Mejorar la luz» (dueño, 28 Oct 2026, 10:24: «los tonos, por ejemplo, de brillo»): la cámara en automático (exposición,
+  // balance de blancos y enfoque, si los admite) y, con poca luz, se aclara la imagen en el equipo antes de encriptarla.
+  // Con buena luz la cámara va tal cual, sin procesar.
+  const LUZ_OSCURA = 0.40, LUZ_META = 0.47, LUZ_MAX = 1.6;
+  const LUZ_PRUEBA = LOCAL && new URLSearchParams(location.search).has('luz'); // en pruebas locales, como si hubiera poca luz
 
   function crea(o) {
     // o: { ice(), manda(m), puede(), nombre(), inicial(), fin(info), t(s), aviso(s) }
@@ -33,9 +38,14 @@
     let pc = null, mic = null, envio = null, ctx = null, nodo = null, estado = 'libre', iniciada = 0, reloj = null, pendientes = [], ofertaEntrante = null, idLlamada = null, colgoYo = false, sondeo = null;
     let cam = null, video = false, suCamara = true, remotoV = null; // videollamada: mi cámara, si la llamada es con imagen, si la otra persona tiene la cámara encendida y su imagen
     let imagen = 'natural'; try { imagen = localStorage.getItem('gcom-imagen') || 'natural'; } catch (_) {} if (!(imagen in IMAGENES)) imagen = 'natural';
-    let proc = null; // la imagen protegida (lienzo) cuando «Tu imagen» no es natural
+    let proc = null; // la imagen procesada (lienzo): protegida, o aclarada si hay poca luz
+    let luz = true; try { luz = localStorage.getItem('gcom-luz') !== '0'; } catch (_) {}
+    let ganancia = 1, medidor = null, vCam = null, ajustes = false;
     let voz = 'natural'; try { voz = localStorage.getItem('gcom-voz') || 'natural'; } catch (_) {} if (!VOCES[voz]) voz = 'natural';
     const ocupado = () => estado !== 'libre';
+    // dueño, 28 Oct 2026, 10:28: las opciones de imagen (Difuminada, Mosaico y «Mejorar la luz») solo en la sesión
+    // blindada; en la normal, la básica, la imagen va tal cual
+    const blindada = () => !!(o.blindada && o.blindada());
 
     function pinta() {
       caja.classList.toggle('gc-abierta', estado !== 'libre');
@@ -47,7 +57,12 @@
       $('#ll-avatar').textContent = o.inicial();
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
-      $('#ll-imagenes').hidden = !video;
+      $('#ll-imagenes').hidden = !(video && blindada());
+      $('#ll-ajustes-caja').hidden = !video;
+      const etq = blindada() ? t('Voz e imagen') : t('Tu voz');
+      $('#ll-ajustes-b').setAttribute('aria-label', etq); const se = $('#ll-ajustes-caja span'); if (se) se.textContent = etq;
+      caja.classList.toggle('ajustes', ajustes);
+      $('#ll-ajustes-b').setAttribute('aria-pressed', String(ajustes));
       document.body.classList.toggle('en-llamada', estado !== 'libre');
       pintaVoces(); pintaImagenes(); pintaVideo();
     }
@@ -70,6 +85,7 @@
     function pintaImagenes() {
       for (const b of document.querySelectorAll('#ll-imagenes [data-imagen]')) b.setAttribute('aria-pressed', String(b.dataset.imagen === imagen));
       const n = $('#ll-imagen-nota'); if (n) n.hidden = imagen === 'natural';
+      const l = $('#ll-luz'); if (l) l.setAttribute('aria-pressed', String(luz));
     }
     function pintaVoces() {
       for (const b of document.querySelectorAll('#ll-voces [data-voz]')) b.setAttribute('aria-pressed', String(b.dataset.voz === voz));
@@ -111,35 +127,71 @@
     // que importa el detalle de la imagen.
     async function camara() {
       cam = await navigator.mediaDevices.getUserMedia({ video: VIDEO });
-      for (const x of cam.getVideoTracks()) { try { x.contentHint = 'motion'; } catch (_) {} }
+      for (const x of cam.getVideoTracks()) {
+        try { x.contentHint = 'motion'; } catch (_) {}
+        // exposición, balance de blancos y enfoque automáticos, si la cámara los admite
+        try {
+          const cap = x.getCapabilities ? x.getCapabilities() : {}, adv = [];
+          for (const k of ['exposureMode', 'whiteBalanceMode', 'focusMode']) if ((cap[k] || []).includes('continuous')) adv.push({ [k]: 'continuous' });
+          if (adv.length) x.applyConstraints({ advanced: adv }).catch(() => {});
+        } catch (_) {}
+      }
+      vCam = document.createElement('video'); vCam.muted = true; vCam.playsInline = true; vCam.srcObject = new MediaStream(cam.getVideoTracks()); vCam.play().catch(() => {});
+      arrancaMedidor();
       return cam;
     }
-    // La imagen protegida: la cámara pasa por un lienzo diminuto (32 × 18 o 24 × 14 puntos) y se amplía a 640 de ancho.
-    function protegida() {
+    // Cada 0,8 s, la luz media de la cámara (en una copia de 32 × 18 puntos, aquí): si falta, se sube el brillo poco a
+    // poco hasta que la imagen se ve bien, con un máximo; si sobra, se vuelve a la cámara tal cual.
+    function arrancaMedidor() {
+      clearInterval(medidor);
+      const c = document.createElement('canvas'); c.width = 32; c.height = 18; const g = c.getContext('2d', { willReadFrequently: true });
+      medidor = setInterval(() => {
+        if (!vCam || vCam.readyState < 2) return;
+        let y = 0.5;
+        try { g.drawImage(vCam, 0, 0, 32, 18); const d = g.getImageData(0, 0, 32, 18).data; let s = 0; for (let i = 0; i < d.length; i += 4) s += 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]; y = s / (d.length / 4) / 255; } catch (_) { return; }
+        if (LUZ_PRUEBA) y = 0.25;
+        const oscura = y < LUZ_OSCURA || (ganancia > 1.01 && y < LUZ_META);
+        const quiere = luz && oscura && blindada() ? Math.min(LUZ_MAX, Math.max(1, LUZ_META / Math.max(y, 0.05))) : 1;
+        const antes = ganancia > 1.001;
+        ganancia += (quiere - ganancia) * 0.4; if (Math.abs(ganancia - 1) < 0.02) ganancia = 1;
+        if (antes !== (ganancia > 1.001)) aplicaImagen();
+      }, 800);
+    }
+    const filtroLuz = () => (ganancia > 1.001 ? 'brightness(' + ganancia.toFixed(3) + ') contrast(1.05) saturate(1.06)' : 'none');
+    // La imagen procesada en un lienzo. «protegida»: la cámara pasa por un lienzo diminuto (32 × 18 o 24 × 14 puntos) y
+    // se amplía a 640 de ancho. «aclarada»: la cámara tal cual (hasta 1280 de ancho) con más brillo. Las dos, con el
+    // brillo de «Mejorar la luz» si hace falta.
+    function lienzo(modo) {
       const crudo = cam.getVideoTracks()[0], s = crudo.getSettings ? crudo.getSettings() : {};
-      const W = SALIDA_W, H = Math.round(SALIDA_W * ((s.height || 720) / (s.width || 1280)));
-      const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.srcObject = new MediaStream([crudo]); v.play().catch(() => {});
+      const sw = s.width || 1280, sh = s.height || 720;
+      const W = modo === 'protegida' ? SALIDA_W : Math.min(1280, sw), H = Math.round(W * sh / sw);
       const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d', { alpha: false });
       const p = document.createElement('canvas'), gp = p.getContext('2d', { alpha: false });
       let vivo = true;
       const dibuja = () => {
-        if (!vivo || v.readyState < 2) return;
-        const m = IMAGENES[imagen] || IMAGENES.mosaico, pw = m.w, ph = Math.max(1, Math.round(m.w * H / W));
-        if (p.width !== pw || p.height !== ph) { p.width = pw; p.height = ph; }
-        gp.imageSmoothingEnabled = true; gp.imageSmoothingQuality = 'high'; gp.drawImage(v, 0, 0, pw, ph); // aquí se pierde el detalle
-        g.imageSmoothingEnabled = m.suave; g.imageSmoothingQuality = 'high'; g.drawImage(p, 0, 0, W, H);
+        if (!vivo || !vCam || vCam.readyState < 2) return;
+        if (modo === 'protegida') {
+          const m = IMAGENES[imagen] || IMAGENES.mosaico, pw = m.w, ph = Math.max(1, Math.round(m.w * H / W));
+          if (p.width !== pw || p.height !== ph) { p.width = pw; p.height = ph; }
+          gp.filter = filtroLuz(); gp.imageSmoothingEnabled = true; gp.imageSmoothingQuality = 'high'; gp.drawImage(vCam, 0, 0, pw, ph); // aquí se pierde el detalle
+          g.imageSmoothingEnabled = m.suave; g.imageSmoothingQuality = 'high'; g.drawImage(p, 0, 0, W, H);
+        } else {
+          g.filter = filtroLuz(); g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high'; g.drawImage(vCam, 0, 0, W, H);
+        }
       };
       g.fillStyle = '#06080C'; g.fillRect(0, 0, W, H); // hasta la primera imagen, negro: nunca la cámara tal cual
       const reloj = setInterval(dibuja, 1000 / 30);
       const salida = c.captureStream(30).getVideoTracks()[0];
       try { salida.contentHint = 'motion'; } catch (_) {}
-      return { track: salida, parar() { vivo = false; clearInterval(reloj); try { salida.stop(); } catch (_) {} v.srcObject = null; } };
+      return { modo, track: salida, parar() { vivo = false; clearInterval(reloj); try { salida.stop(); } catch (_) {} } };
     }
-    // la pista de imagen que sale: la de la cámara o la protegida, según «Tu imagen»
+    // la pista de imagen que sale: protegida («Tu imagen»), aclarada (poca luz) o la cámara tal cual
+    const modoImagen = () => (!blindada() ? 'cruda' : imagen !== 'natural' ? 'protegida' : ganancia > 1.001 ? 'aclarada' : 'cruda');
     function pistaImagen() {
       if (!cam) return null;
-      if (imagen === 'natural') return cam.getVideoTracks()[0] || null;
-      if (!proc) proc = protegida();
+      const m = modoImagen();
+      if (m === 'cruda') return cam.getVideoTracks()[0] || null;
+      if (!proc || proc.modo !== m) { const viejo = proc; proc = lienzo(m); if (viejo) setTimeout(() => viejo.parar(), 400); }
       return proc.track;
     }
     async function aplicaImagen() {
@@ -147,8 +199,13 @@
       const salida = pistaImagen(); if (!salida) return;
       const s = pc && pc.getSenders().find((x) => x.track && x.track.kind === 'video');
       if (s && s.track !== salida) { try { await s.replaceTrack(salida); } catch (_) {} }
-      if (imagen === 'natural' && proc) { proc.parar(); proc = null; }
+      if (modoImagen() === 'cruda' && proc) { const viejo = proc; proc = null; setTimeout(() => viejo.parar(), 400); }
       $('#v-local').srcObject = new MediaStream([salida]); // te ves como te ve la otra persona
+    }
+    function eligeLuz() {
+      luz = !luz; try { localStorage.setItem('gcom-luz', luz ? '1' : '0'); } catch (_) {}
+      if (!luz) { ganancia = 1; aplicaImagen(); }
+      pintaImagenes();
     }
     function eligeImagen(m) {
       if (!(m in IMAGENES)) return; imagen = m; try { localStorage.setItem('gcom-imagen', m); } catch (_) {}
@@ -207,7 +264,15 @@
         if (!pc || estado !== 'hablando') return;
         try {
           let rtt = null, perd = 0, rec = 0, vw = 0, vh = 0, fps = 0;
-          (await pc.getStats()).forEach((r) => { if (r.type === 'candidate-pair' && r.state === 'succeeded' && r.currentRoundTripTime != null) rtt = Math.round(r.currentRoundTripTime * 1000); if (r.type === 'inbound-rtp' && r.kind === 'audio') { perd += r.packetsLost || 0; rec += r.packetsReceived || 0; } if (r.type === 'inbound-rtp' && r.kind === 'video') { vw = r.frameWidth || vw; vh = r.frameHeight || vh; fps = r.framesPerSecond || fps; } });
+          const st = await pc.getStats(), diag = {};
+          st.forEach((r) => {
+            if (r.type === 'candidate-pair' && r.nominated && r.state === 'succeeded') { diag.salidaBps = r.availableOutgoingBitrate; const lc = st.get(r.localCandidateId); if (lc) diag.ruta = (lc.candidateType || '') + '/' + (lc.relayProtocol || lc.protocol || ''); }
+            if (r.type === 'outbound-rtp' && r.kind === 'video') { diag.envia = (r.frameWidth || 0) + 'x' + (r.frameHeight || 0) + '@' + Math.round(r.framesPerSecond || 0); diag.limite = r.qualityLimitationReason; diag.codec = (st.get(r.codecId) || {}).mimeType; }
+            if (r.type === 'inbound-rtp' && r.kind === 'video') diag.recibe = (r.frameWidth || 0) + 'x' + (r.frameHeight || 0) + '@' + Math.round(r.framesPerSecond || 0);
+          });
+          diag.luz = Math.round(ganancia * 100) / 100; diag.modo = modoImagen();
+          calidad.dataset.diag = JSON.stringify(diag);
+          st.forEach((r) => { if (r.type === 'candidate-pair' && r.state === 'succeeded' && r.currentRoundTripTime != null) rtt = Math.round(r.currentRoundTripTime * 1000); if (r.type === 'inbound-rtp' && r.kind === 'audio') { perd += r.packetsLost || 0; rec += r.packetsReceived || 0; } if (r.type === 'inbound-rtp' && r.kind === 'video') { vw = r.frameWidth || vw; vh = r.frameHeight || vh; fps = r.framesPerSecond || fps; } });
           const p = rec + perd ? perd / (rec + perd) : 0, nivel = p < 0.01 && (rtt == null || rtt < 250) ? t('excelente') : p < 0.05 ? t('buena') : t('débil');
           // con imagen, la resolución y las imágenes por segundo que llegan de verdad
           calidad.textContent = t('Calidad estimada') + ': ' + nivel + (rtt != null ? ' · ' + rtt + ' ms' : '') + (video && vw && suCamara ? ' · ' + t('imagen') + ' ' + vw + '×' + vh + (fps ? ' · ' + Math.round(fps) + ' fps' : '') : '');
@@ -273,6 +338,7 @@
       if (pc) { try { pc.close(); } catch (_) {} pc = null; }
       for (const s of [mic, envio, cam]) if (s) s.getTracks().forEach((x) => x.stop());
       if (proc) { proc.parar(); proc = null; }
+      clearInterval(medidor); medidor = null; if (vCam) { vCam.srcObject = null; vCam = null; } ganancia = 1; ajustes = false;
       mic = null; envio = null; cam = null; nodo = null; if (ctx) { try { ctx.close(); } catch (_) {} ctx = null; }
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
@@ -291,6 +357,8 @@
     $('#ll-silenciar').addEventListener('click', (e) => { const b = e.currentTarget; const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on)); for (const s of [envio, mic]) if (s) s.getAudioTracks().forEach((x) => { x.enabled = !on; }); });
     for (const b of document.querySelectorAll('#ll-voces [data-voz]')) b.addEventListener('click', () => eligeVoz(b.dataset.voz));
     for (const b of document.querySelectorAll('#ll-imagenes [data-imagen]')) b.addEventListener('click', () => eligeImagen(b.dataset.imagen));
+    $('#ll-luz').addEventListener('click', eligeLuz);
+    $('#ll-ajustes-b').addEventListener('click', () => { ajustes = !ajustes; pinta(); });
     // cámara encendida o apagada durante la videollamada; la otra persona lo sabe por el canal encriptado
     $('#ll-camara').addEventListener('click', () => { if (!cam) return; const on = !camaraOn(); cam.getVideoTracks().forEach((x) => { x.enabled = on; }); o.manda({ acto: 'camara', id: idLlamada, on }); pintaVideo(); });
     $('#ll-mini').addEventListener('click', () => pequena(true));
