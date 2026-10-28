@@ -43,3 +43,6 @@ Revisar, con herramientas (Playwright sirviendo el sitio con `python3 -m http.se
 - Comunicaciones: sesión blindada, llamadas con cambio de voz y página de verificación, en los 42 idiomas.
 - OWASP ASVS: inventario criptográfico y plan de migración (`herramientas/CRIPTOGRAFIA.md`) y las huellas SHA-256 del código servido (`orbita/comunicaciones/huellas.txt`, con `herramientas/huellas.py`).
 - `herramientas/publica.sh` guardado en el repositorio.
+
+## Apuntado para después del lanzamiento (28 Oct 2026, aprobado por el dueño)
+- **«Blindar esta conversación».** Desde una conversación normal en la que los dos ya han comprobado el número de seguridad, un botón crea la sesión blindada y manda su enlace dentro de ese mismo chat encriptado, sin pasar por WhatsApp, correo ni otra app. Motivo: en la prueba de PC a PC del 28 Oct, mandar el enlace por fuera resultó incómodo. Toca la parte criptográfica, así que se diseña y se prueba con calma: hoy crear una invitación cierra la conversación abierta (una sola a la vez), y durante el paso tendrían que convivir las dos; la seguridad del enlace dependería de la conversación normal (P-256 y ML-KEM-768), y eso hay que decirlo en pantalla.
