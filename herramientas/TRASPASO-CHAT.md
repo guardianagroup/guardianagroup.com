@@ -570,7 +570,7 @@ Actualizado el sábado 24 de octubre de 2026 a las 21:25, hora de Bogotá, al ce
 ## 0. Antes de empezar (para el Claude que lee esto)
 
 **El dueño**
-- Es Fran, de GUARDIANA GROUP S.A.S. (Cartagena, Colombia).
+- Es el dueño de GUARDIANA GROUP S.A.S. (Cartagena, Colombia). Su nombre no se escribe en ningún archivo público.
 - Escríbele **siempre en español**, en pocas líneas y sin pegar código en el chat.
 - Enséñale una captura de cada cambio y avísale cuando esté publicado.
 
