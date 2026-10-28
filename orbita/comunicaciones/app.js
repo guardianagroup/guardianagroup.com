@@ -1088,6 +1088,19 @@
     if (enLinea(c)) { enviaControl(c, { tipo: 'vaciar' }); await vaciaLocal(c, false); aviso(T('Chat borrado aquí y en el equipo de la otra persona.')); return; }
     c.vaciarPendiente = true; await vaciaLocal(c, false); aviso(T('Chat borrado aquí; en el otro equipo, en cuanto esa persona se conecte.'));
   }
+  // Invitado: quien entró por un enlace en esta pestaña. Sin la barra de la web y, al terminar, solo «Conversación terminada»;
+  // si en este navegador no queda ninguna otra conversación, también fuera su identidad y sus ajustes (dueño, 15:50)
+  const esInvitado = () => { try { return sessionStorage.getItem('gcom-invitado') === '1'; } catch (_) { return false; } };
+  function marcaInvitado() { try { sessionStorage.setItem('gcom-invitado', '1'); } catch (_) {} document.body.classList.add('modo-invitado'); }
+  function muestraFin() { document.body.classList.add('modo-invitado', 'invitado-fin'); const f = $('#fin-invitado'); if (f) f.hidden = false; }
+  async function finInvitado() {
+    try { sessionStorage.setItem('gcom-fin', '1'); } catch (_) {}
+    if (!CONVS.size) {
+      try { for (const y of await BD.todos('yo')) await BD.borra('yo', y.id); } catch (_) {}
+      try { for (const k of Object.keys(localStorage)) if (/^gcom-/.test(k)) localStorage.removeItem(k); } catch (_) {}
+    }
+    muestraFin();
+  }
   async function destruyeLocal(c, porElla, silencio) {
     if (c.estado === 'destruida') return;
     c.estado = 'destruida';
@@ -1098,6 +1111,7 @@
     if (ACTUAL === c.id) { cierraConv(); }
     pintaLista();
     if (!silencio) aviso(porElla ? T('La otra persona ha terminado la conversación: se ha borrado también aquí.') : T('Conversación terminada y borrada; el otro equipo ha recibido la orden de borrado.'));
+    if (esInvitado() && c.rol === 'acepta') await finInvitado();
   }
   // Destruir con la otra persona ausente: se borra todo aquí y queda una lápida (sin mensajes) que, en cuanto la otra
   // persona entre, le manda «destruir» y desaparece.
@@ -1848,7 +1862,7 @@
     $('#vaciar-no').addEventListener('click', () => cierraHoja('h-vaciar'));
     $('#vaciar-si').addEventListener('click', async () => { cierraHoja('h-vaciar'); await vacia(CONVS.get(ACTUAL)); });
     $('#codigo-enlace').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !c.semilla) return; const u = ORIGEN + '#i=' + C.b64u(c.semilla); $('#codigo-enlace').dataset.enlace = u; try { await navigator.clipboard.writeText(u); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { aviso(u); } });
-    $('#aceptar-si').addEventListener('click', async () => { const e = invitacionPendiente; invitacionPendiente = null; muestraAceptar(false); if (!e) return; const ok = await aceptaInvitacion(e); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); });
+    $('#aceptar-si').addEventListener('click', async () => { const e = invitacionPendiente; invitacionPendiente = null; muestraAceptar(false); if (!e) return; marcaInvitado(); const ok = await aceptaInvitacion(e); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); });
     $('#aceptar-no').addEventListener('click', () => { invitacionPendiente = null; muestraAceptar(false); aviso(T('Invitación rechazada.')); });
     $('#enlace-otra-vez').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c) { c.compartido = false; muestraEnlace(c); } });
     $('#enlace-cancelar-2').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await destruye(c, true); });
@@ -1896,6 +1910,8 @@
     avisoInterno();
     setTimeout(eligeServidorLlamadas, 4000); setInterval(eligeServidorLlamadas, 3600 * 1000);
     await cargaConvs();
+    try { if (sessionStorage.getItem('gcom-fin') === '1') { muestraFin(); return; } } catch (_) {}
+    if (esInvitado()) document.body.classList.add('modo-invitado');
     if (/#[ib]=/.test(location.hash)) { const ok = await preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     // NÚCLEO guiado (ronda 63): «Tengo un código» llega con el campo del código abierto; «Crear una invitación», con la invitación
     // hecha en cuanto hay conexión (si ya hay una conversación en marcha, no se toca: solo se señala el botón). Una sola vez.

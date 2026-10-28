@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261028x">
+<link rel="stylesheet" href="app.css?v=20261028y">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -19,6 +19,9 @@
      empezamos; sin historial; al acabar se borra»). Una sola conversación: inicio con dos botones, el código en medio,
      el chat, y «Terminar» lo borra en los dos lados. Esta página habla solo con el servidor de GUARDIANA, que pasa bytes
      cifrados que no puede leer. -->
+<!-- Final del invitado (dueño, 28 Oct 2026, 15:50: «no quiero que se pueda volver a la web… que se destruya y no quede ningún tipo
+     de rastro… eso el invitado; el que ha creado el chat, sí») -->
+<div class="fin-invitado" id="fin-invitado" hidden role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><h2>Conversación terminada</h2><p>Se ha borrado todo lo de esta conversación en este equipo.</p><p class="suave">Ya puedes cerrar esta pestaña.</p></div>
 <header class="barra" id="barra">
   <a class="marca" href="/orbita/" id="volver" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Inicio</span></a><b class="barra-t">Comunicaciones</b>
   <span class="rele" id="rele"><i></i><span id="reletxt">Desconectado</span></span>
@@ -447,7 +450,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261028p42"></script>
+<script src="/orbita/static/idioma.js?v=20261028p43"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -458,6 +461,6 @@
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028b"></script>
 <script src="llamada.js?v=20261028q"></script>
-<script src="app.js?v=20261028v"></script>
+<script src="app.js?v=20261028w"></script>
 </body>
 </html>

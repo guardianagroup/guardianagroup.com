@@ -746,3 +746,10 @@ a,button,summary,label,[role="button"]{cursor:pointer}
 .paso.aceptar .fila{gap:12px;margin-top:8px}.paso.aceptar .boton{min-width:132px;min-height:48px}
 .espera-anillos.quieto span{animation-duration:3.6s}
 #inicio.con-invitacion #como-btn{display:none}
+/* Invitado: sin la barra de la web ni la lista; al terminar, solo el final (dueño, 28 Oct 2026, 15:50) */
+body.modo-invitado .barra,body.modo-invitado #lista,body.modo-invitado #volver-lista,body.modo-invitado #cvolver,body.modo-invitado #como-btn{display:none!important}
+.fin-invitado{position:fixed;inset:0;z-index:9999;background:#06080C;color:#F4F6F8;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:24px calc(24px + env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) calc(24px + env(safe-area-inset-left))}
+.fin-invitado[hidden]{display:none}
+.fin-invitado svg{width:46px;height:46px;fill:none;stroke:#9CC3E4;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:6px}
+.fin-invitado h2{font:600 24px/1.25 'IBM Plex Sans',system-ui,sans-serif;margin:0}.fin-invitado p{margin:0;max-width:360px;line-height:1.45}.fin-invitado .suave{color:#9fb3c4}
+body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
