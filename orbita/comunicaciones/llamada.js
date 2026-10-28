@@ -451,7 +451,8 @@
           if (video && suCamara && iniciada && Date.now() - iniciada > 8000 && !(vr && vr.videoWidth)) di(NO_LLEGA, true); else if (paso.textContent === NO_LLEGA) di('');
           // agencia, ronda 74: en la pantalla, solo «Conexión: excelente» con un punto de color; los milisegundos, la resolución y
           // las imágenes por segundo, al tocarlo (o al pasar el ratón), para quien quiera verlos
-          const largo = t('Calidad estimada') + ': ' + nivel + (rtt != null ? ' · ' + rtt + ' ms' : '') + (video && vw && suCamara ? ' · ' + t('imagen') + ' ' + vw + '×' + vh + (fps ? ' · ' + Math.round(fps) + ' fps' : '') : '');
+          const serv = o.servidor ? o.servidor() : '';
+          const largo = t('Calidad estimada') + ': ' + nivel + (rtt != null ? ' · ' + rtt + ' ms' : '') + (video && vw && suCamara ? ' · ' + t('imagen') + ' ' + vw + '×' + vh + (fps ? ' · ' + Math.round(fps) + ' fps' : '') : '') + (serv ? ' · ' + t('servidor de llamadas') + ': ' + serv : '');
           calidad.dataset.nivel = p < 0.01 && (rtt == null || rtt < 250) ? 'alta' : p < 0.05 ? 'media' : 'baja';
           const corto = t('Conexión') + ': ' + nivel;
           calidad.dataset.largo = largo; calidad.dataset.corto = corto; calidad.title = largo;

@@ -96,7 +96,7 @@
   function convNueva(sala, semilla, rol, modo) {
     return { id: sala, semilla, rol, modo: modo === 'blindada' ? 'blindada' : 'normal', suVerificada: false, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0 };
   }
-  const guardable = (c) => ({ id: c.id, tumba: c.tumba, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null });
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0 });
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
     if (esB(c)) await preparaIdentidadB(c);
@@ -107,30 +107,33 @@
     CONVS.set(c.id, c);
     R.entra(c.id, c.yo, esB(c) ? { b: 1 } : undefined);
   }
-  // Una sola conversación (dueño, 26 Oct 20:04): al abrir, queda la activa más reciente; las invitaciones sin usar y las
-  // conversaciones de versiones anteriores se borran (si la otra persona vuelve, recibe la orden de borrado).
+  // Al abrir la página se recuperan todas las conversaciones empezadas (varias a la vez desde el 28 Oct 2026; antes solo la
+  // más reciente). Las invitaciones normales sin usar no se guardan; las marcas de borrado pendiente caducan a las 24 horas.
   async function cargaConvs() {
-    const xs = (await BD.todos('conv')).sort((a, b) => (b.creado || 0) - (a.creado || 0));
-    const viva = xs.find((x) => (x.huella || (x.modo === 'blindada' && x.rol === 'invita')) && x.estado !== 'destruida_pendiente');
+    const xs = (await BD.todos('conv')).sort((a, b) => (a.creado || 0) - (b.creado || 0));
+    let n = Math.max(0, ...xs.map((x) => x.num || 0));
     for (const x of xs) {
-      // las marcas de borrado pendiente (sin contenido) caducan a las 24 horas
       if (x.estado === 'destruida_pendiente' && Date.now() - (x.tumba || x.creado || 0) > 24 * 3600 * 1000) { await BD.borra('conv', x.id); continue; }
-      if (x === viva || x.estado === 'destruida_pendiente') { await preparaConv(x); continue; }
-      if (!x.huella) { await BD.borraConv('msg', x.id); await BD.borraConv('arch', x.id); await BD.borra('conv', x.id); continue; }
-      x.estado = 'destruida_pendiente'; x.tumba = Date.now(); x.ultimoTexto = null; x.noLeidos = 0;
-      await BD.borraConv('msg', x.id); await BD.borraConv('arch', x.id); await BD.pon('conv', x); await preparaConv(x);
+      if (x.estado !== 'destruida_pendiente' && !x.huella && !(x.modo === 'blindada' && x.rol === 'invita')) { await BD.borraConv('msg', x.id); await BD.borraConv('arch', x.id); await BD.borra('conv', x.id); continue; }
+      if (!x.num && x.estado !== 'destruida_pendiente') { x.num = ++n; await BD.pon('conv', x); }
+      await preparaConv(x);
+      if (x.estado !== 'destruida_pendiente') await cargaMensajes(x);
     }
     pintaLista();
   }
   // Invitación por código (dueño, 26 Oct 20:00: «un número en pantalla, la otra persona lo pone; sencillísimo»). El secreto
   // de la conversación (32 bytes) se cierra con una clave derivada del código (PBKDF2) y ese «sobre» se deja en el relé
   // durante 10 minutos, una sola vez; el relé no puede abrirlo sin el código y limita los intentos de búsqueda.
+  // una invitación sin usar se sustituye por la nueva; las conversaciones ya empezadas no se tocan (varias a la vez)
+  async function limpiaInvitaciones() { for (const x of [...CONVS.values()]) if (x.estado === 'invitacion' && x.rol === 'invita' && !x.huella && !esB(x)) await destruye(x, true); }
+  const caben = () => { if (vivas().filter((x) => !(x.estado === 'invitacion' && x.rol === 'invita' && !x.huella && !esB(x))).length < MAX_CONVS) return true; aviso(T('Ya tienes {n} conversaciones abiertas: termina alguna para empezar otra.').replace('{n}', MAX_CONVS)); return false; };
   async function creaInvitacion() {
     if (!R.abierto) { aviso(T('Sin conexión: espera un momento.')); return; }
-    for (const c of [...CONVS.values()]) await destruye(c, true);
+    if (!caben()) return;
+    await limpiaInvitaciones();
     const semilla = C.nuevaSemilla();
     const d = await C.deSemilla(semilla);
-    const c = convNueva(d.sala, semilla, 'invita');
+    const c = convNueva(d.sala, semilla, 'invita'); c.num = siguienteNum();
     await preparaConv(c); // no se guarda hasta que la otra persona entra: recargar la página la deja atrás
     abreConv(c.id);
     muestraInvitacion(c); await publicaCodigo(c);
@@ -151,10 +154,11 @@
   async function creaInvitacionB() {
     if (!R.abierto) { aviso(T('Sin conexión: espera un momento.')); return; }
     if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; }
-    for (const c of [...CONVS.values()]) await destruye(c, true);
+    if (!caben()) return;
+    await limpiaInvitaciones();
     const semilla = C.nuevaSemilla();
     const d = await C.B.deSemilla(semilla);
-    const c = convNueva(d.sala, semilla, 'invita', 'blindada');
+    const c = convNueva(d.sala, semilla, 'invita', 'blindada'); c.num = siguienteNum();
     await preparaConv(c); await guardaConv(c);
     abreConv(c.id);
   }
@@ -184,8 +188,8 @@
     if (B && !C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return false; }
     const d = B ? await C.B.deSemilla(semilla) : await C.deSemilla(semilla);
     if (CONVS.has(d.sala)) { abreConv(d.sala); return true; }
-    for (const c of [...CONVS.values()]) await destruye(c, true);
-    const c = convNueva(d.sala, semilla, 'acepta', modo);
+    if (!caben()) return false;
+    const c = convNueva(d.sala, semilla, 'acepta', modo); c.num = siguienteNum();
     await preparaConv(c); await guardaConv(c);
     pintaLista(); abreConv(c.id);
     return true;
@@ -275,7 +279,7 @@
         await derivaSesion(c, ef, efMia, pq);
       }
       else if (!resp) await presenta(c, null);
-      if (nueva) { if (c.codigo) R.retira(c.codigo); c.codigo = null; clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Conversación establecida: encriptada de extremo a extremo. Comprueba el número de seguridad con la otra persona cuando puedas.'); if (ACTUAL === c.id) abreConv(c.id); }
+      if (nueva) { if (c.codigo) R.retira(c.codigo); c.codigo = null; clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Conversación establecida: encriptada de extremo a extremo. Comprueba el número de seguridad con la otra persona cuando puedas.'); if (ACTUAL === c.id) abreConv(c.id); else avisoConv(c, T('«{n}» ya está lista: la otra persona ha entrado.')); }
       if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
     } catch (e) { console.warn('presentación', e); }
@@ -532,7 +536,18 @@
       case 'custodia-no': return rechazoCustodia(c, j);
       case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); const v = VIAJES.get(j.id); if (a) c.archivos.delete(j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, (j.ok ? T('Archivo entregado') : T('Archivo no completado')) + ': ' + m.archivo.nombre + (j.ok ? ' · ' + T('acuse del otro equipo: completo y autenticado.') : ''), j.ok ? 'bien' : 'mal'); pintaRadio(c); if (j.ok && v && v.custodia === 'si' && j.v === 1 && a && a.sha256) await entregaViaje(c, m, a, v, j); else { if (v) finViaje(v, j.ok, j); if (j.ok) await recibo(c, m, +j.seg || 0, +j.trozos || m.archivo.trozos, true); } } return; }
       case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); const vc = VIAJES.get(j.id); if (vc && vc.estado !== 'entregado') { vc.estado = 'fallo'; vc.tFin = Date.now(); evento(vc, j.por === 'integridad' ? T('El otro equipo ha detenido el envío: un fragmento no superó la autenticación.') : j.por === 'persona' ? T('La otra persona ha cortado el envío.') : T('El otro equipo ha cancelado el envío.'), 'mal'); } if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'persona') m.archivo.motivo = T('cortado por la otra persona'); if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); } return; }
-      case 'llamada': if (LL && c.id === ACTUAL) await LL.recibe(j); return; // llamadas de voz (dueño, 27 Oct 2026, 23:05)
+      // llamadas (dueño, 27 Oct 2026, 23:05). Con varias conversaciones: una llamada de otra conversación también suena; si ya
+      // hay una llamada en curso con otra, se le dice «ocupado» sin decir nada más (agencia, ronda 74, bloque J)
+      case 'llamada': {
+        if (!LL) return;
+        if (j.acto === 'oferta') {
+          if (LL.ocupado && LLAMADA_CONV && LLAMADA_CONV !== c.id) { enviaControl(c, { tipo: 'llamada', acto: 'ocupado', id: j.id }); return; }
+          if (!LL.ocupado) LLAMADA_CONV = c.id;
+          await LL.recibe(j); pintaLista(); return;
+        }
+        if (LLAMADA_CONV ? LLAMADA_CONV === c.id : c.id === ACTUAL) await LL.recibe(j);
+        return;
+      }
       case 'destruir': return destruyeLocal(c, true);
       default: return;
     }
@@ -556,6 +571,7 @@
   async function actualizaUltimo(c, m, suyo) {
     c.ultimo = m.t; c.ultimoTexto = await guardaSellado({ texto: m.tipo === 'texto' ? m.texto : m.tipo === 'archivo' ? '📎 ' + m.archivo.nombre : m.texto || '' });
     if (suyo && !(ACTUAL === c.id && document.visibilityState === 'visible')) c.noLeidos = (c.noLeidos || 0) + 1;
+    if (suyo && ACTUAL !== c.id && document.visibilityState === 'visible') avisoConv(c, m.tipo === 'archivo' ? T('Archivo nuevo en «{n}»') : T('Mensaje nuevo en «{n}»'));
     await guardaConv(c); pintaLista();
   }
   // «Leído» solo cuando de verdad se ve (agencia, ronda 74, ChatGPT y Gemini): la pestaña a la vista y con el foco, sin la
@@ -943,12 +959,17 @@
   // dueño, 28 Oct 2026, 13:29 («lo que he hecho yo a un lado, lo que ha hecho él… como WhatsApp, Signal, Telegram»): cada
   // llamada queda en el chat al lado de quien llamó (la mía a la derecha, la suya a la izquierda), con el resultado, la
   // duración y un botón para volver a llamar. Cada equipo apunta la suya; no viaja nada más por la red.
+  // con varias conversaciones, la llamada va atada a la suya (puede no ser la que está en pantalla)
+  let LLAMADA_CONV = null;
+  const convLl = () => CONVS.get(LLAMADA_CONV || ACTUAL);
   async function anotaLlamada(info) {
-    const c = CONVS.get(ACTUAL); if (!c || !info) return;
+    const c = convLl(); LLAMADA_CONV = null; if (!c || !info) return;
     const l = { por: info.por, duracion: info.duracion || 0, video: !!info.video, voz: !!info.voz, yoColgue: !!info.yoColgue };
     const m = { id: uuid(), conv: c.id, t: Date.now(), dir: info.mia ? 'mia' : 'suya', estado: 'ok', tipo: 'llamada', texto: resumenLlamada({ dir: info.mia ? 'mia' : 'suya', llamada: l }).titulo, llamada: l };
     await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m);
-    if (m.dir === 'suya' && l.por !== 'fin' && !l.yoColgue) avisaFuera(c, 'perdida', l.video);
+    c.ultimo = m.t; await guardaConv(c);
+    if (m.dir === 'suya' && l.por !== 'fin' && !l.yoColgue) { if (ACTUAL !== c.id) { c.perdida = true; avisoConv(c, l.video ? T('Videollamada perdida en «{n}»') : T('Llamada perdida en «{n}»')); } avisaFuera(c, 'perdida', l.video); }
+    pintaLista();
   }
   // 72 s → «01:12»; más de una hora → «1:02:05»
   const duracionLlamada = (ms) => { const x = Math.round((ms || 0) / 1000); if (x < 3600) return mmss(x * 1000); return Math.floor(x / 3600) + ':' + mmss((x % 3600) * 1000); };
@@ -997,32 +1018,38 @@
       iceAm = r && r.ms > 0 ? r : null;
     } catch (_) { iceAm = null; }
   }
+  // el servidor que lleva la llamada se dice en VIGILANCIA y al tocar «Conexión» (dueño, 14:17: miraba si iba por Alemania)
+  let iceUsado = '';
   const iceCercano = () => {
     const prin = R ? R.latencia : null;
-    if (iceAm && iceAm.caduca * 1000 > Date.now() + 120000 && prin != null && iceAm.ms + 25 < prin) return iceAm.ice;
+    if (iceAm && iceAm.caduca * 1000 > Date.now() + 120000 && prin != null && iceAm.ms + 25 < prin) { iceUsado = 'am'; return iceAm.ice; }
+    iceUsado = LOCAL || (window.GuardianaRele && GuardianaRele.PROPIO) ? '' : 'eu';
     return R ? R.ice : [];
   };
+  const servidorLlamada = () => (iceUsado === 'am' ? T('Miami (Estados Unidos)') : iceUsado === 'eu' ? T('Núremberg (Alemania)') : '');
   const puedeLlamar = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
   function arrancaLlamadas() {
     if (!window.GuardianaLlamada || !window.RTCPeerConnection) { for (const id of ['#llamar', '#videollamar']) { const b = $(id); if (b) b.hidden = true; } return; }
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
     LL = GuardianaLlamada.crea({
-      ice: iceCercano, puede: puedeLlamar, t: T, aviso, suena: avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
-      blindada: () => { const c = CONVS.get(ACTUAL); return !!(c && esB(c)); }, // las opciones de imagen, solo en la sesión blindada
-      manda: (m) => { const c = CONVS.get(ACTUAL); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
-      nombre: () => { const c = CONVS.get(ACTUAL); return (c && c.nombre) || ''; }, // sin nombre, la llamada pone «Llamada encriptada» o «Videollamada encriptada»
-      inicial: () => { const c = CONVS.get(ACTUAL); return inicial(c && c.nombre); },
+      ice: iceCercano, servidor: servidorLlamada, puede: puedeLlamar, t: T, aviso, suena: avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
+      blindada: () => { const c = convLl(); return !!(c && esB(c)); }, // las opciones de imagen, solo en la sesión blindada
+      manda: (m) => { const c = convLl(); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
+      // el nombre que la otra persona se puso o el que le pusiste tú; sin ninguno, «Llamada encriptada» o «Videollamada encriptada»
+      nombre: () => { const c = convLl(); return (c && (c.alias || c.nombre)) || (c && vivas().length > 1 ? nombreConv(c, true) : ''); },
+      inicial: () => { const c = convLl(); return inicial(c && (c.alias || c.nombre)); },
     });
-    $('#llamar').addEventListener('click', () => LL.llamar());
+    const llama = (video) => { if (LL.ocupado) { aviso(T('Ya tienes una llamada en curso.')); return; } LLAMADA_CONV = ACTUAL; LL.llamar(video); };
+    $('#llamar').addEventListener('click', () => llama(false));
     // videollamada (dueño, 28 Oct 2026): la misma llamada, con imagen
-    $('#videollamar').addEventListener('click', () => LL.llamar(true));
+    $('#videollamar').addEventListener('click', () => llama(true));
   }
 
   // ---------- destruir ----------
   async function destruyeLocal(c, porElla, silencio) {
     if (c.estado === 'destruida') return;
     c.estado = 'destruida';
-    if (LL && LL.ocupado && ACTUAL === c.id) LL.colgar();
+    if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.colgar();
     if (esB(c)) borraClavesB(c);
     R.sale(c.id); CONVS.delete(c.id);
     await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await BD.borra('conv', c.id);
@@ -1083,18 +1110,81 @@
   const hora = (t) => new Date(t).toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit' });
   const fecha = (t) => { const d = new Date(t), h = new Date(); return d.toDateString() === h.toDateString() ? T('Hoy') : d.toLocaleDateString(LOC(), { weekday: 'long', day: 'numeric', month: 'long' }); };
   const diaDe = (t) => new Date(t).toDateString();
-  // Sin lista ni historial (dueño, 26 Oct 20:04): una conversación a la vez. Si hay una, se muestra; si no, el inicio.
+  // ---------- varias conversaciones (dueño, 28 Oct 2026, 13:56: «que se puedan tener varias en el mismo navegador… y varias
+  // conversaciones también, sin tener que salir… que quede todo en la interfaz»; agencia, ronda 74, bloque J) ----------
+  // Antes (dueño, 26 Oct 20:04) había una sola: crear o aceptar otra borraba la anterior. Ahora cada conversación vive por su
+  // cuenta (su sala, sus claves, su historial) y una nueva no toca las demás. En el ordenador, la lista va a la izquierda; en
+  // el móvil es una pantalla propia y «‹» vuelve a ella. Sin vista previa del texto: el nombre, la hora y lo que hay de nuevo.
+  const MAX_CONVS = 8;
+  let quiereNueva = false; // la persona pulsó «Nueva»: se queda en el inicio aunque haya conversaciones
+  const vivas = () => [...CONVS.values()].filter((c) => c.estado !== 'destruida_pendiente' && c.estado !== 'destruida');
+  const siguienteNum = () => 1 + Math.max(0, ...[...CONVS.values()].map((c) => c.num || 0));
+  function nombreConv(c, corto) {
+    if (!c) return '';
+    if (c.alias) return c.alias;
+    if (c.nombre) return c.nombre;
+    const base = esB(c) ? T('Sesión blindada') : corto ? T('Conversación') : T('Conversación encriptada');
+    return (c.num || 1) > 1 ? (esB(c) ? base : T('Conversación')) + ' ' + c.num : base;
+  }
+  const horaLista = (t) => { const d = new Date(t || Date.now()), h = new Date(); return d.toDateString() === h.toDateString() ? hora(t) : d.toLocaleDateString(LOC(), { day: 'numeric', month: 'short' }); };
+  function estadoLista(c) {
+    if (c.estado === 'invitacion' && !c.huella) return esB(c) ? T('Invitación blindada · esperando') : T('Invitación · esperando a la otra persona');
+    if (LL && LL.ocupado && LLAMADA_CONV === c.id) return T('En llamada');
+    if (c.noLeidos) return c.noLeidos === 1 ? T('Mensaje nuevo') : T('{n} mensajes nuevos').replace('{n}', c.noLeidos);
+    if (c.perdida) return T('Llamada perdida');
+    if (!enLinea(c)) return T('No está conectada');
+    return esB(c) ? T('Sesión blindada') : T('Encriptada de extremo a extremo');
+  }
   async function pintaLista() {
-    const xs = [...CONVS.values()].filter((c) => c.estado !== 'destruida_pendiente' && c.estado !== 'destruida');
-    if (!xs.length) { if (ACTUAL) cierraConv(); return; }
-    if (!ACTUAL || !CONVS.has(ACTUAL)) abreConv(xs.sort((a, b) => (b.creado || 0) - (a.creado || 0))[0].id);
+    const xs = vivas().sort((a, b) => (b.ultimo || b.creado || 0) - (a.ultimo || a.creado || 0));
+    const app = $('#app'), lista = $('#lista'), ul = $('#lista-filas');
+    app.classList.toggle('con-lista', xs.length > 0); if (lista) lista.hidden = !xs.length;
+    const vl = $('#volver-lista'); if (vl) vl.hidden = !xs.length;
+    if (!xs.length) { document.body.classList.remove('ver-lista'); if (ACTUAL) cierraConv(); return; }
+    if (ul) {
+      ul.textContent = '';
+      for (const c of xs) {
+        const li = document.createElement('li');
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'fila-conv' + (c.id === ACTUAL ? ' actual' : '') + (esB(c) ? ' blindada' : '') + (c.noLeidos ? ' nueva' : '') + (c.perdida && !c.noLeidos ? ' perdida' : '');
+        b.dataset.id = c.id; if (c.id === ACTUAL) b.setAttribute('aria-current', 'true');
+        const av = document.createElement('span'); av.className = 'fila-av' + (enLinea(c) ? ' en-linea' : ''); av.setAttribute('aria-hidden', 'true');
+        if (esB(c)) av.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg>'; else av.textContent = inicial(nombreConv(c, true));
+        const tx = document.createElement('span'); tx.className = 'fila-txt';
+        const nb = document.createElement('b'); nb.textContent = nombreConv(c, true); nb.translate = false;
+        const es = document.createElement('small'); es.textContent = estadoLista(c);
+        tx.append(nb, es);
+        const de = document.createElement('span'); de.className = 'fila-der';
+        const tm = document.createElement('time'); tm.textContent = horaLista(c.ultimo || c.creado); de.append(tm);
+        if (c.noLeidos) { const n = document.createElement('i'); n.className = 'fila-n'; n.textContent = c.noLeidos > 99 ? '99+' : String(c.noLeidos); n.setAttribute('aria-label', T('{n} mensajes nuevos').replace('{n}', c.noLeidos)); de.append(n); }
+        b.append(av, tx, de); li.append(b); ul.append(li);
+      }
+    }
+    if ((!ACTUAL || !CONVS.has(ACTUAL)) && !quiereNueva) abreConv(xs[0].id);
+  }
+  // el borrador de cada conversación se queda en la suya al cambiar de una a otra
+  function guardaBorrador() { const c = CONVS.get(ACTUAL), ta = $('#texto'); if (c && ta) c.borrador = ta.value; }
+  function ponBorrador(c) {
+    const ta = $('#texto'); if (!ta) return;
+    ta.value = (c && c.borrador) || '';
+    ta.style.height = 'auto'; ta.style.height = Math.min(120, ta.scrollHeight) + 'px';
+    const comp = document.querySelector('.gc-compositor'); if (comp) comp.classList.toggle('con-texto', !!ta.value.trim());
+    ta.dispatchEvent(new CustomEvent('guardiana-borrador'));
+  }
+  function nuevaConversacion() {
+    paraEscribe(); guardaBorrador();
+    quiereNueva = true; cierraConv(); document.body.classList.remove('ver-lista'); pintaLista();
   }
 
 
   // ---------- pantalla: conversación ----------
   async function abreConv(id) {
     const c = CONVS.get(id); if (!c) return;
+    if (ACTUAL && ACTUAL !== id) { paraEscribe(); guardaBorrador(); }
+    const cambia = ACTUAL !== id;
+    quiereNueva = false; document.body.classList.remove('ver-lista');
     ACTUAL = id; await cargaMensajes(c);
+    if (cambia) ponBorrador(c);
+    if (c.perdida) { c.perdida = false; }
     const inv = c.estado === 'invitacion' && c.rol === 'invita' && !c.huella;
     $('#inicio').hidden = !inv; $('#conv').hidden = inv; $('#app').classList.toggle('en-conv', !inv); document.body.classList.toggle('en-conv', !inv);
     if (inv) { $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = true; $('#paso-codigo').hidden = esB(c); $('#paso-enlace').hidden = !esB(c); }
@@ -1110,7 +1200,7 @@
     if (ACTUAL !== c.id) return;
     // en el móvil, el nombre y la línea de confianza, cortos y en una fila (agencia, ronda 74: antes «Convers…» y tres líneas)
     const movil = matchMedia('(max-width: 760px)').matches;
-    $('#cnombre').textContent = esB(c) ? T('Sesión blindada') : movil ? T('Conversación') : T('Conversación encriptada');
+    $('#cnombre').textContent = nombreConv(c, movil);
     const conf = $('#cconfianza'); conf.classList.remove('gc-sin-verificar');
     let txt;
     if (c.ocupada && !c.huella) txt = T('Esta invitación ya la usó otra persona.');
@@ -1311,7 +1401,10 @@
 
   // ---------- avisos ----------
   let avisoT = null;
-  function aviso(txt) { const e = $('#aviso'); e.textContent = txt; e.hidden = false; clearTimeout(avisoT); avisoT = setTimeout(() => { e.hidden = true; }, 4200); }
+  let avisoConvId = null;
+  function aviso(txt) { const e = $('#aviso'); e.textContent = txt; e.hidden = false; e.classList.remove('con-conv'); avisoConvId = null; clearTimeout(avisoT); avisoT = setTimeout(() => { e.hidden = true; }, 4200); }
+  // lo que pasa en otra conversación: un aviso de unos segundos, sin el contenido; al tocarlo se abre esa conversación
+  function avisoConv(c, plantilla) { if (!c || ACTUAL === c.id) return; aviso(plantilla.replace('{n}', nombreConv(c, true))); avisoConvId = c.id; $('#aviso').classList.add('con-conv'); }
   let ctxAudio = null;
   function avisaSonido() {
     try { ctxAudio = ctxAudio || new (window.AudioContext || window.webkitAudioContext)(); const o = ctxAudio.createOscillator(), g = ctxAudio.createGain(); o.type = 'sine'; o.frequency.value = 880; g.gain.value = 0.0001; o.connect(g).connect(ctxAudio.destination); const t = ctxAudio.currentTime; g.gain.exponentialRampToValueAtTime(0.08, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.35); o.start(t); o.stop(t + 0.4); } catch (_) {}
@@ -1363,7 +1456,12 @@
   }
   // la llamada que entra con la página minimizada: aviso que se queda hasta contestar o colgar, y el título lo dice
   let tituloLlamada = false;
+  let servidorDicho = false;
   function avisaLlamada(est, video) {
+    if ((est === 'conectando' || est === 'hablando') && LLAMADA_CONV && ACTUAL !== LLAMADA_CONV && CONVS.has(LLAMADA_CONV)) abreConv(LLAMADA_CONV);
+    if (est === 'libre') servidorDicho = false;
+    if (est === 'hablando' && !servidorDicho && servidorLlamada()) { servidorDicho = true; const c = convLl(); if (c) vigila(c, T('Tu llamada pasa por el servidor de llamadas de {s}.').replace('{s}', servidorLlamada()), 'ok'); }
+    if (est === 'libre' || est === 'entrante') setTimeout(pintaLista, 0);
     if (est === 'entrante') {
       if (!fuera()) return;
       const tit = video ? T('Videollamada entrante') : T('Llamada entrante');
@@ -1383,6 +1481,23 @@
     let no = false; try { no = localStorage.getItem('gcom-avisos') === 'no'; } catch (_) {}
     b.hidden = !(permisoAvisos() === 'default' && !no && c && ACTUAL === c.id && enLinea(c) && c.sesion.confirmada);
   }
+
+  // ---------- «escribiendo…» propio: el aviso va solo a la conversación donde se escribe ----------
+  let escribeUlt = 0, escribeQue = '', escribeConv = null;
+  function avisaEscribe(que) {
+    const ahora = Date.now();
+    if (que === 'no') {
+      const cc = escribeConv && CONVS.get(escribeConv);
+      if (cc && escribeQue && ahora - escribeUlt < 8000 && enLinea(cc)) enviaControl(cc, { tipo: 'escribe', que: 'no' });
+      escribeQue = ''; escribeUlt = 0; escribeConv = null; return;
+    }
+    const c = CONVS.get(ACTUAL); if (!c || !enLinea(c) || !c.sesion.confirmada || !puedeEnviar(c)) return;
+    if (!pref('escribe')) { escribeQue = ''; return; }
+    if (escribeConv && escribeConv !== c.id) avisaEscribe('no');
+    if (que === escribeQue && escribeConv === c.id && ahora - escribeUlt < 3000) return;
+    escribeQue = que; escribeUlt = ahora; escribeConv = c.id; enviaControl(c, { tipo: 'escribe', que });
+  }
+  const paraEscribe = () => { if (escribeQue) avisaEscribe('no'); };
 
   // ---------- «escribiendo…» de la otra persona (dueño, 28 Oct 2026, 13:29) ----------
   // Una burbuja suya con tres puntos al final del chat (o «Grabando audio…»); se va al llegar su mensaje, con su aviso de
@@ -1409,6 +1524,20 @@
 
   // ---------- eventos ----------
   function eventos() {
+    // la lista de conversaciones y la navegación entre ellas (agencia, ronda 74, bloque J)
+    $('#lista-filas').addEventListener('click', (e) => { const b = e.target.closest('.fila-conv'); if (b && b.dataset.id) abreConv(b.dataset.id); });
+    $('#lista-nueva').addEventListener('click', nuevaConversacion);
+    const verLista = () => { paraEscribe(); guardaBorrador(); document.body.classList.add('ver-lista'); pintaLista(); };
+    $('#cvolver').addEventListener('click', verLista);
+    $('#volver-lista').addEventListener('click', () => { if (vivas().length) { quiereNueva = false; if (matchMedia('(max-width: 760px)').matches) verLista(); else pintaLista(); } });
+    $('#aviso').addEventListener('click', () => { if (avisoConvId && CONVS.has(avisoConvId)) { const id = avisoConvId; $('#aviso').hidden = true; abreConv(id); } });
+    // el nombre de la conversación: un alias que solo se ve aquí
+    const hojaNombre = () => { const c = CONVS.get(ACTUAL); if (!c) return; const x = $('#nombre-conv'); x.value = c.alias || ''; x.placeholder = nombreConv(c, true); abreHoja('h-nombre'); setTimeout(() => { try { x.focus(); x.select(); } catch (_) {} }, 60); };
+    const guardaAlias = async () => { const c = CONVS.get(ACTUAL); if (!c) return; c.alias = String($('#nombre-conv').value || '').trim().slice(0, 40); await guardaConv(c); cierraHoja('h-nombre'); pintaCabecera(c); pintaLista(); };
+    $('#cm-nombre').addEventListener('click', () => { $('#cmenu').hidden = true; $('#cmas').setAttribute('aria-expanded', 'false'); hojaNombre(); });
+    $('#nombre-guardar').addEventListener('click', guardaAlias);
+    $('#nombre-cancelar').addEventListener('click', () => cierraHoja('h-nombre'));
+    $('#nombre-conv').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); guardaAlias(); } if (e.key === 'Escape') cierraHoja('h-nombre'); });
     // menú «⋯» de la cabecera en el móvil (agencia, ronda 74): seguridad, modo discreto, avisos y terminar
     const menu = $('#cmenu'), mas = $('#cmas');
     const cierraMenu = () => { if (menu.hidden) return; menu.hidden = true; mas.setAttribute('aria-expanded', 'false'); };
@@ -1501,15 +1630,6 @@
     // «escribiendo…» (dueño, 28 Oct 2026, 13:29: «que salgan los puntitos esos como que se está escribiendo»): mientras se escribe
     // o se graba una nota de voz, un aviso como mucho cada 3 s, dentro del canal encriptado; al borrar el texto o al enviar, se
     // retira. En la sesión blindada, solo con la verificación mutua hecha, como el resto del contenido.
-    let escribeUlt = 0, escribeQue = '';
-    const avisaEscribe = (que) => {
-      const c = CONVS.get(ACTUAL); if (!c || !enLinea(c) || !c.sesion.confirmada || !puedeEnviar(c)) return;
-      if (!pref('escribe')) { escribeQue = ''; return; }
-      const ahora = Date.now();
-      if (que === 'no') { if (escribeQue && ahora - escribeUlt < 8000) enviaControl(c, { tipo: 'escribe', que: 'no' }); escribeQue = ''; escribeUlt = 0; return; }
-      if (que === escribeQue && ahora - escribeUlt < 3000) return;
-      escribeQue = que; escribeUlt = ahora; enviaControl(c, { tipo: 'escribe', que });
-    };
     let escribeParaT = null;
     ta.addEventListener('input', () => { if (grab) return; clearTimeout(escribeParaT); const hay = !!ta.value.trim(); avisaEscribe(hay ? 'texto' : 'no'); if (hay) escribeParaT = setTimeout(() => { if (!grab) avisaEscribe('no'); }, 3500); });
     // mientras se graba una nota de voz, «Enviar» la termina y la envía, igual que el botón del micrófono (dueño, 28 Oct 2026:
