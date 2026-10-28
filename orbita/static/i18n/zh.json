@@ -2838,7 +2838,10 @@
   "Sin filtro": "无滤镜",
   "Voz e imagen": "声音和画面",
   "Mejorar la luz": "改善光线",
-  "La imagen de la otra persona no llega.": "对方的画面没有传过来。"
+  "La imagen de la otra persona no llega.": "对方的画面没有传过来。",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "这是凭证的 PDF：可用于阅读、保存或打印，但不包含完整的签名。如需验证，请使用同一凭证的 .json 文件：在聊天中打开“查看凭证”，然后点按“下载 .json”。",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json 文件在聊天中下载：打开“查看凭证”，然后点按“下载 .json”。PDF 用于阅读；无法验证。",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "有效：已用凭证中的后量子密钥核验。"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

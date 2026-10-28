@@ -2836,7 +2836,10 @@
   "Sin filtro": "Без фильтра",
   "Voz e imagen": "Голос и изображение",
   "Mejorar la luz": "Улучшить освещение",
-  "La imagen de la otra persona no llega.": "Изображение собеседника не поступает."
+  "La imagen de la otra persona no llega.": "Изображение собеседника не поступает.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Это PDF квитанции: его можно читать, сохранять или печатать, но в нём нет полных подписей. Чтобы проверить квитанцию, используйте файл .json той же квитанции: в чате откройте «Посмотреть квитанцию» и нажмите «Скачать .json».",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Файл .json скачивается в чате: откройте «Посмотреть квитанцию» и нажмите «Скачать .json». PDF — для чтения; его нельзя проверить.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Действительна: проверена постквантовым ключом квитанции."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

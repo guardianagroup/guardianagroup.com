@@ -2836,7 +2836,10 @@
   "Sin filtro": "フィルターなし",
   "Voz e imagen": "声と映像",
   "Mejorar la luz": "明るさを補正",
-  "La imagen de la otra persona no llega.": "相手の映像が届いていません。"
+  "La imagen de la otra persona no llega.": "相手の映像が届いていません。",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "これは証明書の PDF です。閲覧・保存・印刷には使えますが、完全な署名は含まれていません。検証するには、同じ証明書の .json ファイルを使ってください：チャットで「証明書を表示」を開き、「.json をダウンロード」を押してください。",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json はチャットでダウンロードします：「証明書を表示」を開き、「.json をダウンロード」を押してください。PDF は閲覧用で、検証はできません。",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "有効：証明書のポスト量子鍵で確認済みです。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

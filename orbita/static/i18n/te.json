@@ -2836,7 +2836,10 @@
   "Sin filtro": "ఫిల్టర్ లేదు",
   "Voz e imagen": "స్వరం మరియు చిత్రం",
   "Mejorar la luz": "వెలుతురు మెరుగుపరచు",
-  "La imagen de la otra persona no llega.": "అవతలి వ్యక్తి చిత్రం రావడం లేదు."
+  "La imagen de la otra persona no llega.": "అవతలి వ్యక్తి చిత్రం రావడం లేదు.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "ఇది రసీదు PDF: ఇది చదవడానికి, సేవ్ చేయడానికి లేదా ప్రింట్ చేయడానికి ఉపయోగపడుతుంది, కానీ ఇందులో పూర్తి సంతకాలు ఉండవు. ధృవీకరించడానికి, అదే రసీదు .json ఫైల్‌ను ఉపయోగించండి: చాట్‌లో “రసీదు చూడండి” తెరిచి, “.json డౌన్‌లోడ్ చేయి” నొక్కండి.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json ఫైల్ చాట్‌లో డౌన్‌లోడ్ అవుతుంది: “రసీదు చూడండి” తెరిచి, “.json డౌన్‌లోడ్ చేయి” నొక్కండి. PDF చదువుకోవడానికి ఉద్దేశించినది; దాన్ని ధృవీకరించలేం.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "చెల్లుబాటు అవుతుంది: రసీదులోని పోస్ట్-క్వాంటమ్ కీతో తనిఖీ చేయబడింది."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

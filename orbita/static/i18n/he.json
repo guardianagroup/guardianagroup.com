@@ -2838,7 +2838,10 @@
   "Sin filtro": "ללא מסנן",
   "Voz e imagen": "קול ותמונה",
   "Mejorar la luz": "שיפור התאורה",
-  "La imagen de la otra persona no llega.": "התמונה של האדם השני לא מגיעה."
+  "La imagen de la otra persona no llega.": "התמונה של האדם השני לא מגיעה.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "זהו קובץ ה־PDF של האסמכתא: הוא מיועד לקריאה, לשמירה או להדפסה, אבל אינו כולל את החתימות המלאות. כדי לאמת אותה, השתמשו בקובץ ‎.json של אותה אסמכתא: בצ׳אט, פתחו את “צפייה באסמכתא” ולחצו על “הורדת ‎.json”.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "את קובץ ‎.json מורידים בצ׳אט: פתחו את “צפייה באסמכתא” ולחצו על “הורדת ‎.json”. קובץ ה־PDF מיועד לקריאה; אי אפשר לאמת אותו.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "תקפה: נבדקה באמצעות המפתח הפוסט־קוונטי של האסמכתא."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

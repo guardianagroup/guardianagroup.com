@@ -2838,7 +2838,10 @@
   "Sin filtro": "Không bộ lọc",
   "Voz e imagen": "Giọng nói và hình ảnh",
   "Mejorar la luz": "Cải thiện ánh sáng",
-  "La imagen de la otra persona no llega.": "Hình ảnh của người kia không đến."
+  "La imagen de la otra persona no llega.": "Hình ảnh của người kia không đến.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Đó là bản PDF của biên nhận: dùng để đọc, lưu hoặc in, nhưng không chứa đầy đủ các chữ ký. Để xác minh, hãy dùng tệp .json của cùng biên nhận đó: trong cuộc trò chuyện, mở “Xem biên nhận” rồi nhấn “Tải xuống .json”.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Tệp .json được tải xuống trong cuộc trò chuyện: mở “Xem biên nhận” rồi nhấn “Tải xuống .json”. Bản PDF dùng để đọc; không thể xác minh.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Hợp lệ: đã kiểm tra bằng khóa hậu lượng tử của biên nhận."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

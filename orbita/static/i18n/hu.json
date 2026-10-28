@@ -2838,7 +2838,10 @@
   "Sin filtro": "Szűrő nélkül",
   "Voz e imagen": "Hang és kép",
   "Mejorar la luz": "Fény javítása",
-  "La imagen de la otra persona no llega.": "A másik fél képe nem érkezik meg."
+  "La imagen de la otra persona no llega.": "A másik fél képe nem érkezik meg.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Ez az igazolás PDF-je: olvasásra, mentésre vagy nyomtatásra szolgál, de nem tartalmazza a teljes aláírásokat. Az ellenőrzéshez használd ugyanannak az igazolásnak a .json fájlját: a csevegésben nyisd meg az „Igazolás megtekintése” elemet, és nyomd meg a „.json letöltése” gombot.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "A .json fájl a csevegésben tölthető le: nyisd meg az „Igazolás megtekintése” elemet, és nyomd meg a „.json letöltése” gombot. A PDF olvasásra való; nem lehet ellenőrizni.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Érvényes: az igazolás posztkvantum-kulcsával ellenőrizve."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

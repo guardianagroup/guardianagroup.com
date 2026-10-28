@@ -2838,7 +2838,10 @@
   "Sin filtro": "Filtresiz",
   "Voz e imagen": "Ses ve görüntü",
   "Mejorar la luz": "Işığı iyileştir",
-  "La imagen de la otra persona no llega.": "Diğer kişinin görüntüsü gelmiyor."
+  "La imagen de la otra persona no llega.": "Diğer kişinin görüntüsü gelmiyor.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Bu, makbuzun PDF’si: okumak, kaydetmek veya yazdırmak içindir, ancak imzaların tamamını içermez. Doğrulamak için aynı makbuzun .json dosyasını kullanın: sohbette “Makbuzu görüntüle” seçeneğini açın ve “.json indir” düğmesine basın.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json dosyası sohbetten indirilir: “Makbuzu görüntüle” seçeneğini açın ve “.json indir” düğmesine basın. PDF okumak içindir; doğrulanamaz.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Geçerli: makbuzdaki kuantum sonrası anahtarla doğrulandı."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

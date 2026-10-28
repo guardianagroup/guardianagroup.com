@@ -2836,7 +2836,10 @@
   "Sin filtro": "ফিল্টার ছাড়া",
   "Voz e imagen": "কণ্ঠ ও ছবি",
   "Mejorar la luz": "আলো উন্নত করুন",
-  "La imagen de la otra persona no llega.": "অন্য ব্যক্তির ছবি পৌঁছাচ্ছে না।"
+  "La imagen de la otra persona no llega.": "অন্য ব্যক্তির ছবি পৌঁছাচ্ছে না।",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "এটি রসিদের PDF: এটি পড়া, সংরক্ষণ বা প্রিন্ট করার জন্য, কিন্তু এতে সম্পূর্ণ স্বাক্ষর থাকে না। যাচাই করতে একই রসিদের .json ফাইল ব্যবহার করুন: চ্যাটে “রসিদ দেখুন” খুলুন এবং “.json ডাউনলোড করুন” চাপুন।",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json ফাইলটি চ্যাট থেকে ডাউনলোড হয়: “রসিদ দেখুন” খুলুন এবং “.json ডাউনলোড করুন” চাপুন। PDF পড়ার জন্য; এটি যাচাই করা যায় না।",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "বৈধ: রসিদের পোস্ট-কোয়ান্টাম কী দিয়ে যাচাই করা হয়েছে।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

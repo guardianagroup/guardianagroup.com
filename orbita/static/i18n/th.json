@@ -2836,7 +2836,10 @@
   "Sin filtro": "ไม่มีฟิลเตอร์",
   "Voz e imagen": "เสียงและภาพ",
   "Mejorar la luz": "ปรับแสงให้ดีขึ้น",
-  "La imagen de la otra persona no llega.": "ภาพของอีกฝ่ายไม่มาถึง"
+  "La imagen de la otra persona no llega.": "ภาพของอีกฝ่ายไม่มาถึง",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "นั่นคือ PDF ของใบรับรอง: ใช้สำหรับอ่าน บันทึก หรือพิมพ์ แต่ไม่มีลายเซ็นฉบับสมบูรณ์ หากต้องการยืนยัน ให้ใช้ไฟล์ .json ของใบรับรองเดียวกัน: ในแชท ให้เปิด “ดูใบรับรอง” แล้วกด “ดาวน์โหลด .json”",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "ไฟล์ .json ดาวน์โหลดได้ในแชท: เปิด “ดูใบรับรอง” แล้วกด “ดาวน์โหลด .json” ส่วน PDF มีไว้สำหรับอ่าน ไม่สามารถยืนยันได้",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "ถูกต้อง: ตรวจสอบแล้วด้วยคีย์หลังควอนตัมของใบรับรอง"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

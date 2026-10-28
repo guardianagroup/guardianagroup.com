@@ -2836,7 +2836,10 @@
   "Sin filtro": "வடிகட்டி இல்லை",
   "Voz e imagen": "குரல் மற்றும் படம்",
   "Mejorar la luz": "ஒளியை மேம்படுத்து",
-  "La imagen de la otra persona no llega.": "மற்றவரின் படம் வரவில்லை."
+  "La imagen de la otra persona no llega.": "மற்றவரின் படம் வரவில்லை.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "இது ரசீதின் PDF: இது படிக்க, சேமிக்க அல்லது அச்சிட உதவும், ஆனால் இதில் முழுமையான கையொப்பங்கள் இல்லை. சரிபார்க்க, அதே ரசீதின் .json கோப்பைப் பயன்படுத்துங்கள்: அரட்டையில் “ரசீதைக் காண்க” என்பதைத் திறந்து “.json-ஐப் பதிவிறக்கு” என்பதை அழுத்துங்கள்.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json கோப்பை அரட்டையில் பதிவிறக்கலாம்: “ரசீதைக் காண்க” என்பதைத் திறந்து “.json-ஐப் பதிவிறக்கு” என்பதை அழுத்துங்கள். PDF படிப்பதற்கானது; அதைச் சரிபார்க்க முடியாது.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "செல்லுபடியானது: ரசீதின் போஸ்ட்-குவாண்டம் சாவியால் சரிபார்க்கப்பட்டது."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

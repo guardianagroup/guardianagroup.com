@@ -2838,7 +2838,10 @@
   "Sin filtro": "Uden filter",
   "Voz e imagen": "Stemme og billede",
   "Mejorar la luz": "Forbedr lyset",
-  "La imagen de la otra persona no llega.": "Den anden persons billede kommer ikke frem."
+  "La imagen de la otra persona no llega.": "Den anden persons billede kommer ikke frem.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Det er kvitteringens PDF: den kan bruges til at læse, gemme eller udskrive kvitteringen, men den indeholder ikke de fuldstændige signaturer. For at verificere den skal du bruge .json-filen fra den samme kvittering: åbn »Se kvittering« i chatten, og tryk på »Download .json«.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json-filen downloades i chatten: åbn »Se kvittering«, og tryk på »Download .json«. PDF'en er til at læse; den kan ikke verificeres.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Gyldig: kontrolleret med kvitteringens post-kvantenøgle."
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

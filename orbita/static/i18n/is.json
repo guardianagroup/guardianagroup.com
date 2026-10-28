@@ -2836,7 +2836,10 @@
   "Sin filtro": "Engin sía",
   "Voz e imagen": "Rödd og mynd",
   "Mejorar la luz": "Bæta lýsingu",
-  "La imagen de la otra persona no llega.": "Mynd hins aðilans berst ekki."
+  "La imagen de la otra persona no llega.": "Mynd hins aðilans berst ekki.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Þetta er PDF-útgáfa kvittunarinnar: hún nýtist til að lesa, vista eða prenta kvittunina, en hún inniheldur ekki fullar undirskriftir. Til að sannreyna hana skaltu nota .json-skrá sömu kvittunar: í spjallinu skaltu opna „Skoða kvittun“ og ýta á „Sækja .json“.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json-skráin er sótt í spjallinu: opnaðu „Skoða kvittun“ og ýttu á „Sækja .json“. PDF-skráin er til lestrar; ekki er hægt að sannreyna hana.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Gild: athuguð með eftirskammtalykli kvittunarinnar."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

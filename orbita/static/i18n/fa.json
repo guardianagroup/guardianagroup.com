@@ -2836,7 +2836,10 @@
   "Sin filtro": "بدون فیلتر",
   "Voz e imagen": "صدا و تصویر",
   "Mejorar la luz": "بهبود نور",
-  "La imagen de la otra persona no llega.": "تصویر طرف مقابل نمی‌رسد."
+  "La imagen de la otra persona no llega.": "تصویر طرف مقابل نمی‌رسد.",
+  "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "این PDF رسید است: برای خواندن، ذخیره یا چاپ آن به کار می‌رود، اما امضاهای کامل را ندارد. برای تأیید آن، از فایل ‎.json همان رسید استفاده کنید: در چت، «مشاهدهٔ رسید» را باز کنید و «بارگیری ‎.json» را بزنید.",
+  "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "فایل ‎.json در چت بارگیری می‌شود: «مشاهدهٔ رسید» را باز کنید و «بارگیری ‎.json» را بزنید. PDF برای خواندن است؛ نمی‌توان آن را تأیید کرد.",
+  "Válida: comprobada con la clave postcuántica del comprobante.": "معتبر: با کلید پساکوانتومی رسید بررسی شد."
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",
