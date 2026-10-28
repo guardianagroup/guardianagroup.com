@@ -23,7 +23,7 @@ La publicidad empieza el 29 Oct 2026.
 3. **Contesta al dueño** en español, en pocas líneas y sin código.
 
 Estado al traspaso:
-- Todo está publicado: main **530a028**, web-idiomas **28d62fc**.
+- Todo está publicado: main **6c9914f** (17:25: la guía de la pantalla de inicio y el nombre GUARDIANA). Lo último de web-idiomas son estos traspasos y pruebas, que no se publican.
 - El árbol está limpio.
 - No hay nada a medias. «Ver una vez» estaba por empezar: no se tocó código.
 
