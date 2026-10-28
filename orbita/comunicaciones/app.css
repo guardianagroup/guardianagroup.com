@@ -733,3 +733,16 @@ a,button,summary,label,[role="button"]{cursor:pointer}
 /* Móvil: la primera página, lo mínimo (dueño, 28 Oct 2026, 15:39: «hay que reducirla mucho, es muy pesada… sigue diciendo algo
    de un QR… súper simplificado»): sin la presentación larga ni para quién es, botones grandes sin explicación debajo y sin QR */
 @media (max-width:760px){#inicio>.pq-k,#inicio>p.t,#inicio>ul.para{display:none}#inicio>h1{font-size:24px;line-height:1.2;margin:6px 0 16px}#paso-inicio .grande small{display:none}#paso-inicio .grande{min-height:62px;padding:14px 18px;justify-content:center}#paso-inicio{gap:12px}.enlace-b .qr-plegado{display:none}#como-btn{font-size:13px;opacity:.75;margin-top:18px}}
+/* Con la pantalla partida en el ordenador, la tarjeta de «Voz e imagen» va en la mitad de la otra persona: tu imagen se sigue
+   viendo entera mientras eliges (28 Oct 2026) */
+@media (hover:hover) and (pointer:fine){.gc-llamada.con-video.dividida.lado-der .ll-ajustes{left:25%;width:min(600px,calc(50% - 32px))}.gc-llamada.con-video.dividida.lado-izq .ll-ajustes{left:75%;width:min(600px,calc(50% - 32px))}}
+/* Móvil: un solo botón, «Crear invitación» (la invitación por enlace); sin «Tengo un código» (dueño, 28 Oct 2026, 15:42) */
+.solo-movil{display:none}
+@media (max-width:760px){.solo-movil{display:inline}.solo-pc{display:none}#paso-inicio #nueva,#paso-inicio #unir{display:none}#paso-inicio #nueva-blindada{background:#9CC3E4;color:#06080C;border-color:#9CC3E4;min-height:66px}#paso-inicio #nueva-blindada svg{stroke:#06080C}}
+/* «¿Aceptas?» al abrir un enlace */
+.paso.aceptar{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:28px 12px}
+.paso.aceptar[hidden]{display:none}
+.paso.aceptar h2{font-size:clamp(21px,5.4vw,26px);line-height:1.25;max-width:440px;margin:14px 0 0}
+.paso.aceptar .fila{gap:12px;margin-top:8px}.paso.aceptar .boton{min-width:132px;min-height:48px}
+.espera-anillos.quieto span{animation-duration:3.6s}
+#inicio.con-invitacion #como-btn{display:none}
