@@ -382,7 +382,22 @@
     }
     // Opus a 48 kHz, mono, hasta 96 kb/s (antes, unos 32), con corrección de errores (FEC) para los paquetes que se pierden y
     // sin cortes en los silencios (DTX). Cada lado lo pide en su descripción, así vale para los dos sentidos.
-    function altaFidelidad(sdp) {
+    // Imagen nítida desde el primer segundo (dueño, 28 Oct 2026, 15:52: «la máxima calidad… que no se note diferencia con WhatsApp o
+    // FaceTime»): Chrome y Android empiezan la imagen a unos 300 kb/s y suben poco a poco; aquí arrancan a 1,5 Mb/s y el control de
+    // congestión baja si la red no da. Safari ignora esta indicación.
+    function arranqueVideo(sdp) {
+      try {
+        const pts = [...String(sdp).matchAll(/a=rtpmap:(\d+) (H264|VP8|VP9|AV1)\/90000/gi)].map((m) => m[1]);
+        for (const pt of pts) {
+          const re = new RegExp('a=fmtp:' + pt + ' ([^\\r\\n]*)');
+          if (re.test(sdp)) sdp = sdp.replace(re, (l, ps) => (/x-google-start-bitrate/.test(ps) ? l : l + ';x-google-start-bitrate=1500'));
+          else sdp = sdp.replace(new RegExp('(a=rtpmap:' + pt + ' [^\\r\\n]*)'), '$1\r\na=fmtp:' + pt + ' x-google-start-bitrate=1500');
+        }
+      } catch (_) {}
+      return sdp;
+    }
+    function altaFidelidad(sdp) { return arranqueVideo(altaFidelidadAudio(sdp)); }
+    function altaFidelidadAudio(sdp) {
       const r = /a=rtpmap:(\d+) opus\/48000\/2/i.exec(sdp || ''); if (!r) return sdp;
       const pt = r[1], quiero = { maxaveragebitrate: String(MAX_BPS_AUDIO), useinbandfec: '1', usedtx: '0', stereo: '0', 'sprop-stereo': '0', maxplaybackrate: '48000', 'sprop-maxcapturerate': '48000' };
       const linea = (o) => 'a=fmtp:' + pt + ' ' + Object.entries(o).map(([k, v]) => k + '=' + v).join(';');
