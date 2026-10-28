@@ -795,3 +795,5 @@ body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
 body.aceptando .barra{display:none!important}
 .paso.aceptar .fila{flex-direction:row-reverse}
 @media (max-width:760px){.paso.aceptar .fila{flex-direction:column!important}}
+.pasos-ios{margin:6px 0 10px;padding-left:22px;display:grid;gap:8px;line-height:1.45}
+.pasos-ios svg{width:17px;height:17px;vertical-align:-3px;fill:none;stroke:#9CC3E4;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
