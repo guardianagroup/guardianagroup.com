@@ -1,0 +1,7 @@
+# Ronda 74 · GPT-6 Astra (Cheaper Inference, playground, 4.096 tokens) · 28 Oct 2026, 13:38–13:45
+
+Se le pidieron A, H e I (los otros bloques los cubrían ChatGPT y Gemini). Respuesta completa (unos 14.000 caracteres). Coste estimado de la petición: 0,145 $. Resumen fiel.
+
+- A: una fila (‹, nombre, Llamar, Videollamar, «⋯»); el nombre abre «Información y seguridad»; quitar «SELLADA» de la cabecera («puede sugerir más seguridad de la comprobada»); Modo discreto y Terminar en «⋯», Terminar el último, en coral y con confirmación; fuera la franja; «Multas» fuera de la conversación.
+- H: tabla de resúmenes (sin respuesta, perdida, rechazada, cancelada; «Si el protocolo no distingue… mostrar “Llamada no completada”»); sin «00:00» si no hubo conexión; leído en verde #5CC98A; leído con visibilidad, foco y 500 ms en pantalla; «Escribiendo…» bajo el nombre, renovación cada 3 s, fin a los 2 s, caduca a los 6 s; agrupar por minuto; botón «2 mensajes nuevos ↓» si se está leyendo arriba; ajustes «Enviar confirmaciones de lectura» y «Mostrar cuando escribo o grabo audio».
+- I: título «(2) GUARDIANA», punto en el icono, aviso del sistema con permiso, sonido; «no existe una API web general para obligar a que una ventana minimizada salte»; en Android, service worker y `showNotification`; en iPhone, solo como app de inicio (16.4+), «No lo sé» para cada versión; pedir el permiso con una tarjeta no modal al establecer la conversación.
