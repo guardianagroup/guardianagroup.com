@@ -39,6 +39,18 @@
   let ACTUAL = null;        // sala abierta
   let R = null;
   const uuid = () => (crypto.randomUUID ? crypto.randomUUID() : C.hex(C.azar(16)));
+  // El viaje del archivo y el comprobante de custodia (dueño, 27 Oct 2026, 20:39): el estado de cada envío vive aquí,
+  // solo en memoria; el comprobante firmado por los dos equipos se guarda como un mensaje más («custodia»).
+  const VIAJES = new Map();
+  const VJ = () => window.GuardianaViaje;
+  const VERSION_APP = 'GUARDIANA Comunicaciones 2026-10-27'; // entra en el comprobante: qué versión midió y firmó
+  const iso = (t) => (Number.isFinite(t) ? new Date(t).toISOString() : null);
+  // latencias recibidas del otro equipo: { min, mediana, max, n } en enteros, o null
+  const estadValida = (o) => (o && typeof o === 'object' && ['min', 'mediana', 'max', 'n'].every((k) => Number.isInteger(o[k]) && o[k] >= 0 && o[k] < 600000) ? { min: o.min, mediana: o.mediana, max: o.max, n: o.n } : null);
+  const MI_PAIS = (() => { try { return (window.GuardianaViajeDatos && GuardianaViajeDatos.miPais()) || ''; } catch (_) { return ''; } })();
+  const regionValida = (x) => (typeof x === 'string' && /^[A-Z]{2}$/.test(x) ? x : '');
+  const latValida = (x) => (typeof x === 'number' && isFinite(x) && x >= 0 && x < 60000 ? Math.round(x) : null);
+  const limpiaNombre = (n) => String(n || 'archivo').slice(0, 180).replace(/[\\/:*?"<>|]/g, '_');
   const inicial = (n) => ((n || '').trim()[0] || '·').toUpperCase();
 
   // cifrado en reposo (clave local no exportable; nonce aleatorio por registro)
@@ -260,6 +272,7 @@
     enviaControl(c, { tipo: 'ok' });
     if (YO.nombre) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
     enviaCola(c);
+    reenviaCustodias(c);
     if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c);
   }
 
@@ -285,9 +298,12 @@
     try {
       while (c.cola.length && enLinea(c)) {
         const m = c.cola[0];
-        const carga = m.tipo === 'texto' ? { tipo: 'texto', id: m.id, t: m.t, texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos } : null;
+        const carga = m.tipo === 'texto' ? { tipo: 'texto', id: m.id, t: m.t, texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos, v: 1, region: MI_PAIS || undefined, voz: m.archivo.voz ? 1 : undefined } : null;
         if (!carga) { c.cola.shift(); continue; }
+        const vj = m.tipo === 'archivo' && VIAJES.get(m.id), sesU = c.sesion; // la clave del archivo viaja en esta sesión
         const b = await sella(c, carga); if (!b || !R.manda(c.id, c.suId, b)) break;
+        if (vj && sesU) { vj.pq = !!sesU.pq; vj.sid = sesU.sid; vj.sesionDesde = sesU.desde; vj.tAnuncio = Date.now(); }
+        if (vj) evento(vj, T('Anuncio enviado al destinatario, encriptado de extremo a extremo; se espera su confirmación.')); // antes de cualquier espera: va antes que la respuesta
         c.cola.shift(); m.estado = 'enviado'; await guardaMensaje(c, m); pintaEstado(m);
         if (m.tipo === 'archivo') mandaArchivo(c, m);
       }
@@ -319,18 +335,22 @@
         return;
       }
       case 'nombre': { const n = String(j.nombre || '').trim().slice(0, 40); if (!c.nombreFijado && n && n !== c.nombre) { c.nombre = n; await guardaConv(c); pintaLista(); pintaCabecera(c); } return; }
-      case 'archivo': return recibeAnuncioArchivo(c, j);
-      case 'archivo-ack': { const a = c.archivos.get(j.id); if (a && a.envio) { a.ack = Math.max(a.ack, +j.hasta || 0); a.sigue && a.sigue(); } return; }
-      case 'archivo-listo': { const a = c.archivos.get(j.id); if (a && a.envio) { a.listo = true; a.sigue && a.sigue(); } return; }
-      case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, (j.ok ? T('Archivo entregado') : T('Archivo no completado')) + ': ' + m.archivo.nombre + (j.ok ? ' · ' + T('acuse del otro equipo: completo y autenticado.') : ''), j.ok ? 'bien' : 'mal'); pintaRadio(c); if (j.ok) await recibo(c, m, +j.seg || 0, +j.trozos || m.archivo.trozos, true); } if (a) c.archivos.delete(j.id); return; }
-      case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); } return; }
+      case 'archivo': return recibeAnuncioArchivo(c, j, ses);
+      case 'archivo-ack': { const a = c.archivos.get(j.id); if (a && a.envio) { a.ack = Math.max(a.ack, +j.hasta || 0); a.sigue && a.sigue(); acuseViaje(j, a); } return; }
+      case 'archivo-listo': { const a = c.archivos.get(j.id); if (a && a.envio) { a.listo = true; a.sigue && a.sigue(); listoViaje(c, j); } return; }
+      case 'viaje': { const v = VIAJES.get(j.id); if (v) { const l = latValida(j.lat); if (l != null) v.latSuya.push(l); if (v.rol === 'recibe' && typeof j.bytes === 'number' && isFinite(j.bytes)) v.enCamino = Math.max(0, Math.min(v.tam, j.bytes) - (v.confirmados || 0)); } return; }
+      case 'custodia': return recibeCustodia(c, j);
+      case 'custodia-firma': return firmaCustodia(c, j);
+      case 'custodia-no': return rechazoCustodia(c, j);
+      case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); const v = VIAJES.get(j.id); if (a) c.archivos.delete(j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, (j.ok ? T('Archivo entregado') : T('Archivo no completado')) + ': ' + m.archivo.nombre + (j.ok ? ' · ' + T('acuse del otro equipo: completo y autenticado.') : ''), j.ok ? 'bien' : 'mal'); pintaRadio(c); if (j.ok && v && v.custodia === 'si' && j.v === 1 && a && a.sha256) await entregaViaje(c, m, a, v, j); else { if (v) finViaje(v, j.ok, j); if (j.ok) await recibo(c, m, +j.seg || 0, +j.trozos || m.archivo.trozos, true); } } return; }
+      case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); const vc = VIAJES.get(j.id); if (vc && vc.estado !== 'entregado') { vc.estado = 'fallo'; vc.tFin = Date.now(); evento(vc, j.por === 'integridad' ? T('El otro equipo ha detenido el envío: un fragmento no superó la autenticación.') : T('El otro equipo ha cancelado el envío.'), 'mal'); } if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); } return; }
       case 'llamada': return; // esta versión no tiene llamadas (dueño, 26 Oct 20:01)
       case 'destruir': return destruyeLocal(c, true);
       default: return;
     }
   }
   async function guardaMensaje(c, m) {
-    const cuerpo = m.tipo === 'texto' ? { tipo: 'texto', texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', archivo: m.archivo } : { tipo: m.tipo, texto: m.texto, llamada: m.llamada };
+    const cuerpo = m.tipo === 'texto' ? { tipo: 'texto', texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', archivo: m.archivo } : m.tipo === 'custodia' ? { tipo: 'custodia', custodia: m.custodia, texto: m.texto } : { tipo: m.tipo, texto: m.texto, llamada: m.llamada };
     const s = await guardaSellado(cuerpo);
     await BD.pon('msg', { id: m.id, conv: c.id, t: m.t, dir: m.dir, estado: m.estado, iv: s.iv, datos: s.datos });
   }
@@ -338,7 +358,7 @@
     if (c.cargados) return;
     const xs = (await BD.porConv('msg', c.id)).sort((a, b) => a.t - b.t);
     c.mensajes = [];
-    for (const x of xs) { const cu = await leeSellado(x); if (!cu) continue; const m = { id: x.id, conv: c.id, t: x.t, dir: x.dir, estado: x.estado, tipo: cu.tipo, texto: cu.texto, archivo: cu.archivo, llamada: cu.llamada }; if (m.dir === 'mia' && m.estado === 'pendiente') c.cola.push(m); if (m.tipo === 'archivo' && m.dir === 'mia' && m.estado !== 'entregado' && m.estado !== 'leido' && m.archivo && (m.archivo.progreso || 0) < 1) { m.estado = 'fallo'; c.cola = c.cola.filter((q) => q !== m); } if (m.tipo === 'archivo' && m.dir === 'suya' && m.estado === 'recibiendo') m.estado = 'fallo'; c.mensajes.push(m); }
+    for (const x of xs) { const cu = await leeSellado(x); if (!cu) continue; const m = { id: x.id, conv: c.id, t: x.t, dir: x.dir, estado: x.estado, tipo: cu.tipo, texto: cu.texto, archivo: cu.archivo, llamada: cu.llamada, custodia: cu.custodia }; if (m.dir === 'mia' && m.estado === 'pendiente') c.cola.push(m); if (m.tipo === 'archivo' && m.dir === 'mia' && m.estado !== 'entregado' && m.estado !== 'leido' && m.archivo && (m.archivo.progreso || 0) < 1) { m.estado = 'fallo'; c.cola = c.cola.filter((q) => q !== m); } if (m.tipo === 'archivo' && m.dir === 'suya' && m.estado === 'recibiendo') m.estado = 'fallo'; c.mensajes.push(m); }
     c.cargados = true;
   }
   async function anotaSistema(c, texto) {
@@ -365,18 +385,25 @@
   const MAX_MEMORIA = 300 * 1024 * 1024;
   const conDisco = () => typeof window.showSaveFilePicker === 'function';
   const fidDe = (id) => C.deHex(id.replace(/-/g, '').slice(0, 32).padEnd(32, '0'));
-  async function enviaArchivos(c, archivos) {
+  async function enviaArchivos(c, archivos, opc) {
+    const voz = !!(opc && opc.voz);
     for (const f of archivos) {
       if (!f || !f.size) continue;
       const clave = C.azar(32), trozos = Math.ceil(f.size / TROZO) || 1;
-      const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'archivo', archivo: { nombre: (f.name || 'archivo').slice(0, 180), tam: f.size, mime: f.type || 'application/octet-stream', clave: C.b64u(clave), trozos, progreso: 0 } };
-      c.archivos.set(m.id, { envio: true, f, clave: await C.aes(clave), ack: 0, trozos, listo: false });
+      const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'archivo', archivo: { nombre: (f.name || 'archivo').slice(0, 180), tam: f.size, mime: f.type || 'application/octet-stream', clave: C.b64u(clave), trozos, progreso: 0, voz: voz || undefined } };
+      c.archivos.set(m.id, { envio: true, f, clave: await C.aes(clave), ack: 0, trozos, listo: false, enviados: 0 });
       if (f.size <= MAX_MEMORIA && /^(image|audio)\//.test(m.archivo.mime)) await BD.pon('arch', { id: m.id, conv: c.id, blob: f, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: f.size });
+      const v = viajeNuevo(c, m, 'envia'); v.voz = voz;
+      evento(v, T('Archivo preparado') + ': ' + trozos.toLocaleString(LOC()) + ' ' + T('fragmentos de 192 KB, cada uno encriptado y autenticado por separado (AES-256-GCM).'));
       await guardaMensaje(c, m); c.mensajes.push(m); c.cola.push(m); pintaMensaje(c, m); actualizaUltimo(c, m);
+      abreSiToca(v);
     }
     enviaCola(c);
   }
-  async function falla(c, m, texto) { m.estado = 'fallo'; await guardaMensaje(c, m); pintaMensaje(c, m, true); if (texto) aviso(texto); }
+  async function falla(c, m, texto) {
+    m.estado = 'fallo'; await guardaMensaje(c, m); pintaMensaje(c, m, true); if (texto) aviso(texto);
+    const v = VIAJES.get(m.id); if (v && v.estado !== 'entregado' && v.estado !== 'fallo') { v.estado = 'fallo'; v.tFin = Date.now(); evento(v, T('Envío interrumpido.') + (texto ? ' ' + texto : ''), 'mal'); }
+  }
   async function mandaArchivo(c, m) {
     const a = c.archivos.get(m.id);
     if (!a || !a.f) return falla(c, m, T('Ese archivo ya no está disponible para enviarlo: elígelo otra vez.'));
@@ -384,36 +411,49 @@
     const t0 = Date.now();
     while (!a.listo) { if (a.cancelado || c.estado === 'destruida') return; if (!enLinea(c) || Date.now() - t0 > 10 * 60 * 1000) return falla(c, m); await new Promise((r) => { a.sigue = r; setTimeout(r, 500); }); }
     const fid = fidDe(m.id); a.t0 = Date.now();
+    const v = VIAJES.get(m.id), huella = window.GuardianaSHA256 ? GuardianaSHA256.crea() : null;
+    if (v) { v.estado = 'viaje'; v.t0 = a.t0; VJ() && VJ().muestra(v, 0); vigilaViajes(); abreSiToca(v, true); }
     for (let i = 0; i < a.trozos; i++) {
       if (a.cancelado || c.estado === 'destruida') return;
-      while (i - a.ack >= VENTANA || R.atraso > 3 * 1024 * 1024) { if (!enLinea(c)) return falla(c, m); await new Promise((r) => { a.sigue = r; setTimeout(r, 300); }); if (a.cancelado) return; }
+      while (i - a.ack >= VENTANA || R.atraso > 3 * 1024 * 1024) { if (!enLinea(c)) return falla(c, m, T('Se perdió la conexión.')); await new Promise((r) => { a.sigue = r; setTimeout(r, 300); }); if (a.cancelado) return; }
       let claro; try { claro = new Uint8Array(await a.f.slice(i * TROZO, (i + 1) * TROZO).arrayBuffer()); } catch (_) { return falla(c, m, T('No se pudo leer el archivo: ¿sigue en el mismo sitio?')); }
+      if (huella) huella.pon(claro); // la huella del archivo entero, en orden: la misma que calcula el equipo del destinatario
       const cab = new Uint8Array(21); cab[0] = 3; cab.set(fid, 1); new DataView(cab.buffer).setUint32(17, i);
       const ct = await C.sella(a.clave, i, claro, cab);
-      if (!R.manda(c.id, c.suId, C.cat(cab, ct))) return falla(c, m);
+      if (!R.manda(c.id, c.suId, C.cat(cab, ct))) return falla(c, m, T('Se perdió la conexión.'));
+      a.enviados += claro.length;
+      if (v && i === 0) { v.salida = new Date().toISOString(); v.tipoReal = VJ().tipoPorContenido(claro); evento(v, T('Primer fragmento enviado al relé de GUARDIANA') + (v.rele && v.rele.ciudad && !v.rele.prueba ? ' · ' + v.rele.ciudad + ', ' + VJ().pais(v.rele.cc) : '') + '.'); }
       m.archivo.progreso = (i + 1) / a.trozos; pintaProgreso(m);
     }
+    if (huella) a.sha256 = C.hex(huella.cierra());
+    if (v) v.tUltimo = Date.now();
+    if (v) evento(v, T('Último fragmento enviado: se espera la confirmación del destinatario.'));
   }
-  async function recibeAnuncioArchivo(c, j) {
+  async function recibeAnuncioArchivo(c, j, ses) {
     if (c.mensajes.some((x) => x.id === j.id)) return;
     const tam = +j.tam || 0, trozos = +j.trozos || 0;
     if (!tam || trozos !== (Math.ceil(tam / TROZO) || 1) || !j.clave) { enviaControl(c, { tipo: 'archivo-cancel', id: j.id }); return; }
-    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibiendo', tipo: 'archivo', archivo: { nombre: String(j.nombre || 'archivo').slice(0, 180).replace(/[\\/:*?"<>|]/g, '_'), tam, mime: String(j.mime || 'application/octet-stream').slice(0, 100), trozos, progreso: 0, aDisco: tam > MAX_MEMORIA || (conDisco() && tam > 32 * 1024 * 1024) } };
-    const a = { envio: false, clave: await C.aes(C.deB64u(j.clave)), partes: null, escritor: null, siguiente: 0, tengo: 0, trozos, m, pendientes: new Map() };
+    const voz = j.voz === 1, custodia = j.v === 1 && !voz;
+    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibiendo', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam, mime: String(j.mime || 'application/octet-stream').slice(0, 100), trozos, progreso: 0, aDisco: tam > MAX_MEMORIA || (conDisco() && tam > 32 * 1024 * 1024), custodia: custodia ? 1 : undefined } };
+    const a = { envio: false, clave: await C.aes(C.deB64u(j.clave)), partes: null, escritor: null, siguiente: 0, tengo: 0, trozos, m, pendientes: new Map(), huella: window.GuardianaSHA256 ? GuardianaSHA256.crea() : null, hPtr: 0 };
     c.archivos.set(m.id, a);
+    const v = viajeNuevo(c, m, 'recibe'); v.voz = voz; v.custodia = voz ? 'voz' : custodia ? 'si' : 'no'; v.paisSuyo = regionValida(j.region); v.pq = !!(ses && ses.pq); v.sid = ses ? ses.sid : ''; v.sesionDesde = ses ? ses.desde : null;
+    evento(v, T('Anuncio del archivo recibido, encriptado de extremo a extremo') + ': ' + trozos.toLocaleString(LOC()) + ' ' + T('fragmentos') + '.');
     if (!m.archivo.aDisco) { a.partes = new Array(trozos); a.listo = true; }
-    else if (!conDisco()) { enviaControl(c, { tipo: 'archivo-cancel', id: m.id }); c.archivos.delete(m.id); m.estado = 'fallo'; m.archivo.motivo = T('Pasa de 300 MB y este navegador no puede escribirlo al disco según llega (Chrome o Edge sí).'); }
+    else if (!conDisco()) { enviaControl(c, { tipo: 'archivo-cancel', id: m.id }); c.archivos.delete(m.id); m.estado = 'fallo'; m.archivo.motivo = T('Pasa de 300 MB y este navegador no puede escribirlo al disco según llega (Chrome o Edge sí).'); v.estado = 'fallo'; evento(v, m.archivo.motivo, 'mal'); }
     await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true);
-    if (a.listo) enviaControl(c, { tipo: 'archivo-listo', id: m.id });
-    else if (m.estado !== 'fallo') { avisaSonido(); if (ACTUAL !== c.id) aviso(T('Te están mandando un archivo grande: elige dónde guardarlo.')); }
+    if (a.listo) { enviaControl(c, listoCarga(m.id, v)); evento(v, T('Listo para recibir: aviso enviado al remitente.')); }
+    else if (m.estado !== 'fallo') { evento(v, T('Elige dónde guardarlo para empezar la recepción.')); avisaSonido(); if (ACTUAL !== c.id) aviso(T('Te están mandando un archivo grande: elige dónde guardarlo.')); }
   }
+  const listoCarga = (id, v) => ({ tipo: 'archivo-listo', id, v: 1, region: MI_PAIS || undefined, lat: v ? VJ() && VJ().minima(v.latMia) : undefined });
   // «Guardar en…» (archivos grandes): la persona elige el destino y, desde ahí, cada trozo se escribe según llega.
   async function eligeDestino(c, m) {
     const a = c.archivos.get(m.id); if (!a || a.listo) return;
     try {
       const h = await window.showSaveFilePicker({ suggestedName: m.archivo.nombre });
       a.escritor = await h.createWritable(); a.listo = true; a.nombreDisco = h.name;
-      enviaControl(c, { tipo: 'archivo-listo', id: m.id });
+      const v = VIAJES.get(m.id);
+      enviaControl(c, listoCarga(m.id, v)); if (v) evento(v, T('Destino elegido en tu disco: aviso enviado al remitente.'));
       m.archivo.enDisco = true; pintaMensaje(c, m, true);
     } catch (_) { /* canceló el diálogo: el botón sigue ahí */ }
   }
@@ -425,16 +465,24 @@
     let claro; try { claro = await C.abre(a.clave, i, b.subarray(21), b.subarray(0, 21)); } catch (_) { return incidencia(c, m, a, 'Un trozo del archivo no superó la comprobación de integridad: envío cortado.'); }
     const esperado = i < a.trozos - 1 ? TROZO : m.archivo.tam - (a.trozos - 1) * TROZO;
     if (claro.length !== esperado) return incidencia(c, m, a, 'Un trozo del archivo no coincide con lo anunciado: envío cortado.');
-    if (!a.t0) a.t0 = Date.now(); c.ultimaVerificacion = Date.now();
-    if (a.partes) { if (a.partes[i]) return; a.partes[i] = claro; a.tengo++; }
+    const v = VIAJES.get(m.id);
+    if (v && i === 0 && !v.tipoReal) v.tipoReal = VJ().tipoPorContenido(claro);
+    if (!a.t0) { a.t0 = Date.now(); if (v) { v.estado = 'viaje'; v.t0 = a.t0; VJ() && VJ().muestra(v, 0); evento(v, T('Primer fragmento recibido y autenticado en tu equipo.')); vigilaViajes(); abreSiToca(v, true); } }
+    c.ultimaVerificacion = Date.now();
+    if (a.partes) {
+      if (a.partes[i]) return; a.partes[i] = claro; a.tengo++;
+      // la huella, en orden: los fragmentos llegan en orden y, si no, esperan a los anteriores
+      if (a.huella) while (a.hPtr < a.trozos && a.partes[a.hPtr]) { a.huella.pon(a.partes[a.hPtr]); a.hPtr++; }
+    }
     else {
       // al disco, en orden: lo que llega adelantado espera en memoria (como mucho la ventana)
       if (i < a.siguiente || a.pendientes.has(i)) return;
       a.pendientes.set(i, claro);
-      while (a.pendientes.has(a.siguiente)) { const x = a.pendientes.get(a.siguiente); a.pendientes.delete(a.siguiente); try { await a.escritor.write(x); } catch (_) { c.archivos.delete(m.id); enviaControl(c, { tipo: 'archivo-cancel', id: m.id }); return falla(c, m, T('No se pudo escribir el archivo en el disco.')); } a.siguiente++; a.tengo++; }
+      while (a.pendientes.has(a.siguiente)) { const x = a.pendientes.get(a.siguiente); a.pendientes.delete(a.siguiente); if (a.huella) a.huella.pon(x); try { await a.escritor.write(x); } catch (_) { c.archivos.delete(m.id); enviaControl(c, { tipo: 'archivo-cancel', id: m.id }); return falla(c, m, T('No se pudo escribir el archivo en el disco.')); } a.siguiente++; a.tengo++; a.hPtr++; }
     }
     m.archivo.progreso = a.tengo / a.trozos; pintaProgreso(m);
-    if (a.tengo % 4 === 0 || a.tengo === a.trozos) enviaControl(c, { tipo: 'archivo-ack', id: m.id, hasta: a.tengo });
+    if (v) { v.verificados = a.tengo; v.confirmados = a.tengo === a.trozos ? v.tam : Math.min(v.tam, a.tengo * TROZO); VJ() && VJ().muestra(v, v.confirmados); hito(v, T('Recibido y autenticado en tu equipo')); }
+    if (a.tengo % 4 === 0 || a.tengo === a.trozos) enviaControl(c, { tipo: 'archivo-ack', id: m.id, hasta: a.tengo, lat: v && VJ() ? VJ().minima(v.latMia) : undefined });
     if (a.tengo === a.trozos) {
       c.archivos.delete(m.id);
       let ok = true;
@@ -443,9 +491,18 @@
       m.estado = ok ? 'recibido' : 'fallo'; m.archivo.progreso = 1;
       const seg = Math.max(0.1, (Date.now() - (a.t0 || Date.now())) / 1000);
       vigila(c, ok ? T('Archivo recibido') + ': ' + m.archivo.nombre + ' · ' + a.trozos + ' ' + T('trozos autenticados, completo.') : T('Archivo incompleto: ') + m.archivo.nombre, ok ? 'bien' : 'mal');
+      // lo que este equipo ha medido: entra en el comprobante y se comprueba antes de firmarlo (se guarda con el mensaje)
+      const sha = ok && a.huella && a.hPtr === a.trozos ? C.hex(a.huella.cierra()) : null;
+      const obs = sha ? { sha256: sha, llegada: new Date().toISOString(), primero: iso(a.t0), anuncio: v ? iso(v.tCreado) : null, lat: v && VJ() ? VJ().estad(v.latMia) : null, verificada: !!c.verificada, nombre: YO.nombre || '', region: MI_PAIS || '', version: VERSION_APP, tipo: (v && v.tipoReal) || null, pq: !!(v && v.pq), sid: (v && v.sid) || '', rele: v && v.rele ? v.rele.host || '' : '', rele_region: R.region || '' } : null;
+      if (obs && m.archivo.custodia) m.archivo.obs = obs;
       await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c);
-      enviaControl(c, { tipo: 'archivo-fin', id: m.id, ok, seg: Math.round(seg * 10) / 10, trozos: a.trozos });
-      if (ok) await recibo(c, m, seg, a.trozos, false);
+      const fin = { tipo: 'archivo-fin', id: m.id, ok, seg: Math.round(seg * 10) / 10, trozos: a.trozos };
+      if (obs) Object.assign(fin, { v: 1, sha256: obs.sha256, llegada: obs.llegada, primero: obs.primero, anuncio: obs.anuncio, lat: obs.lat, verificada: obs.verificada, nombre: obs.nombre, region: obs.region || undefined, version: obs.version, tipoReal: obs.tipo }); // «tipo» es el del mensaje: el del archivo va en «tipoReal»
+      enviaControl(c, fin);
+      if (v) { finViaje(v, ok); if (ok) { v.coincide = undefined; evento(v, T('Último fragmento autenticado: archivo completo.'), 'bien'); if (sha) evento(v, T('Huella SHA-256 calculada en tu equipo') + ': ' + VJ().agrupa(sha, 16) + '…'); } }
+      // con comprobante, la tarjeta firmada sustituye al recibo; si no llega en 30 s, queda el recibo de siempre
+      if (ok && !(m.archivo.custodia && obs)) await recibo(c, m, seg, a.trozos, false);
+      else if (ok) setTimeout(() => { if (!c.mensajes.some((x) => x.id === 'cu-' + m.id) && c.estado !== 'destruida') recibo(c, m, seg, a.trozos, false); }, 30000);
       if (ok && !(ACTUAL === c.id && document.visibilityState === 'visible')) avisaSonido();
     }
   }
@@ -455,6 +512,7 @@
     if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(m.id); }
     enviaControl(c, { tipo: 'archivo-cancel', id: m.id, por: 'integridad' });
     m.estado = 'fallo'; m.archivo.motivo = T('detenido: no superó la autenticación'); await guardaMensaje(c, m); pintaMensaje(c, m, true);
+    const v = VIAJES.get(m.id); if (v) { v.estado = 'fallo'; v.tFin = Date.now(); evento(v, T(texto), 'mal'); }
     await anotaSistema(c, texto); aviso(T(texto)); vigila(c, T(texto), 'mal'); pintaRadio(c);
   }
   // Recibo de entrega (dueño, 26 Oct 20:25): aparece solo en el chat cuando el archivo ha llegado entero al otro equipo.
@@ -464,6 +522,194 @@
     const r = { id: uuid(), conv: c.id, t: Date.now(), dir: 'sistema', estado: 'ok', tipo: 'recibo', texto };
     await guardaMensaje(c, r); c.mensajes.push(r); pintaMensaje(c, r);
   }
+  // ---------- el viaje del archivo y el comprobante de custodia digital ----------
+  const MIN_VIAJE = 1024 * 1024; // el viaje se abre solo a partir de 1 MB (nunca con notas de voz)
+  function viajeNuevo(c, m, rol) {
+    const r = window.GuardianaViajeDatos ? GuardianaViajeDatos.rele(R.url || '') : {};
+    const v = { id: m.id, conv: c.id, rol, tCreado: Date.now(), mime: m.archivo.mime, nombre: m.archivo.nombre, tam: m.archivo.tam, trozos: m.archivo.trozos, estado: 'espera', confirmados: 0, enCamino: 0, verificados: 0, muestras: [], latMia: R.latencia != null ? [R.latencia] : [], latSuya: [], paisMio: MI_PAIS, paisSuyo: '', rele: r, pq: !!(c.sesion && c.sesion.pq), verificada: !!c.verificada, otro: c.nombre || '', eventos: [], incidencias: [] };
+    VIAJES.set(m.id, v);
+    return v;
+  }
+  function evento(v, texto, nivel) { if (VJ()) VJ().evento(v, texto, nivel); else { v.eventos.push({ t: Date.now(), texto, nivel: nivel || '' }); } }
+  // hitos del 25, 50 y 75 % (solo en archivos de 4 MB o más: en los pequeños serían ruido)
+  function hito(v, texto) {
+    if (v.tam < 4 * 1024 * 1024) return;
+    const n = Math.min(3, Math.floor((v.confirmados / v.tam) * 4));
+    while ((v.hito || 0) < n) { v.hito = (v.hito || 0) + 1; evento(v, texto + ': ' + v.hito * 25 + ' %'); }
+  }
+  let viajeCerradoEn = 0, relojViajes = 0;
+  // Se abre solo: al elegir el archivo (quien envía) o al llegar el primer fragmento (quien recibe). Nunca encima de otro
+  // envío en curso, ni si la persona acaba de cerrarlo; si está abierto en uno ya terminado, pasa al nuevo.
+  function abreSiToca(v, empieza) {
+    if (!VJ() || v.voz || v.tam < MIN_VIAJE || ACTUAL !== v.conv) return;
+    const act = VJ().actual;
+    if (act === v) return;
+    if (act) { if (empieza && (act.estado === 'entregado' || act.estado === 'fallo')) VJ().abre(v); return; }
+    if (v.visto || Date.now() - viajeCerradoEn < 30000) return;
+    VJ().abre(v);
+  }
+  // cada 2 s, mientras haya un envío en curso: latencia con el relé (ping) y, a la otra parte, la latencia propia y lo enviado
+  function vigilaViajes() {
+    if (relojViajes) return;
+    relojViajes = setInterval(() => {
+      const activos = [...VIAJES.values()].filter((v) => v.estado === 'viaje');
+      if (!activos.length) { clearInterval(relojViajes); relojViajes = 0; return; }
+      R.mide();
+      const enviando = activos.filter((v) => v.rol === 'envia');
+      for (const v of activos) {
+        const c = CONVS.get(v.conv); if (!c) continue;
+        if (v.rol === 'envia') { const a = c.archivos.get(v.id); if (a) { v.salidos = Math.max(v.confirmados || 0, a.enviados - (enviando.length === 1 ? R.atraso : 0)); v.enCamino = enviando.length === 1 ? Math.max(0, v.salidos - (v.confirmados || 0)) : 0; } }
+        if (v.custodia === 'si') enviaControl(c, { tipo: 'viaje', id: v.id, lat: VJ() ? VJ().minima(v.latMia) : null, bytes: v.rol === 'envia' ? v.salidos || 0 : v.confirmados || 0 });
+      }
+    }, 2000);
+  }
+  function listoViaje(c, j) {
+    const v = VIAJES.get(j.id); if (!v) return;
+    v.custodia = v.voz ? 'voz' : j.v === 1 ? 'si' : 'no'; v.tListo = Date.now();
+    v.paisSuyo = regionValida(j.region) || v.paisSuyo; const l = latValida(j.lat); if (l != null) v.latSuya.push(l);
+    evento(v, T('El equipo del destinatario está listo: empieza el envío.'));
+    if (v.custodia === 'no') evento(v, T('El otro equipo usa una versión anterior de Comunicaciones: el envío sigue, sin comprobante de custodia.'), 'info');
+  }
+  function acuseViaje(j, a) {
+    const v = VIAJES.get(j.id); if (!v) return;
+    const hasta = Math.min(a.trozos, Math.max(0, +j.hasta || 0));
+    v.verificados = Math.max(v.verificados || 0, hasta); v.confirmados = hasta === a.trozos ? v.tam : Math.min(v.tam, v.verificados * TROZO);
+    if (VJ()) VJ().muestra(v, v.confirmados);
+    const l = latValida(j.lat); if (l != null) v.latSuya.push(l);
+    hito(v, T('Confirmado por el equipo del destinatario'));
+  }
+  function finViaje(v, ok) {
+    if (!v || v.estado === 'entregado' || v.estado === 'fallo') return;
+    v.tFin = Date.now(); v.enCamino = 0;
+    if (ok) { v.estado = 'entregado'; v.confirmados = v.tam; v.verificados = v.trozos; if (v.rol === 'envia') evento(v, T('El equipo del destinatario confirma la llegada completa') + ': ' + v.trozos.toLocaleString(LOC()) + ' ' + T('fragmentos autenticados') + '.', 'bien'); }
+    else { v.estado = 'fallo'; evento(v, T('El otro equipo no ha podido completar el archivo.'), 'mal'); }
+  }
+  // Quien envía, al recibir «archivo-fin»: compara la huella, escribe el registro, lo firma y lo manda a firmar.
+  async function entregaViaje(c, m, a, v, j) {
+    v.tFin = Date.now(); v.enCamino = 0; v.confirmados = v.tam; v.verificados = m.archivo.trozos;
+    const l = latValida(j.lat); if (l != null) v.latSuya.push(l);
+    const suSha = String(j.sha256 || ''); v.coincide = suSha === a.sha256; v.estado = 'entregado';
+    evento(v, T('El equipo del destinatario confirma la llegada completa') + ': ' + (+j.trozos || m.archivo.trozos).toLocaleString(LOC()) + ' ' + T('fragmentos autenticados') + '.', 'bien');
+    if (!v.coincide) { evento(v, T('La huella SHA-256 no coincide: no se emite comprobante.'), 'mal'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La huella SHA-256 del archivo no coincide en los dos equipos: no se emite comprobante.'); pintaRadio(c); return; }
+    evento(v, T('Huella SHA-256 idéntica en los dos equipos') + ': ' + VJ().agrupa(a.sha256, 16) + '…', 'bien');
+    const dura = Math.max(0.001, (v.tFin - v.t0) / 1000), rel = v.rele || {}, emitido = new Date().toISOString();
+    const suTipo = typeof j.tipoReal === 'string' && /^[A-Z0-9]{2,5}$/.test(j.tipoReal) ? j.tipoReal : null;
+    const cro = [
+      ['emisor', 'preparado', iso(v.tCreado)], ['emisor', 'anuncio', iso(v.tAnuncio)], ['emisor', 'aceptado', iso(v.tListo)],
+      ['emisor', 'salida', v.salida || iso(v.t0)], ['emisor', 'ultimo', iso(v.tUltimo)], ['emisor', 'confirmado', iso(v.tFin)], ['emisor', 'firma', emitido],
+      ['receptor', 'anuncio_recibido', typeof j.anuncio === 'string' ? j.anuncio.slice(0, 40) : null], ['receptor', 'primero', typeof j.primero === 'string' ? j.primero.slice(0, 40) : null], ['receptor', 'llegada', typeof j.llegada === 'string' ? j.llegada.slice(0, 40) : null],
+    ].filter((x) => x[2]).map(([lado, que, t]) => ({ t, lado, que })).sort((p, q) => (p.t < q.t ? -1 : p.t > q.t ? 1 : 0));
+    const reg = {
+      v: 1, tipo: 'custodia-digital', id: m.id, emitido,
+      archivo: { nombre: m.archivo.nombre, bytes: m.archivo.tam, sha256: a.sha256, tipo_declarado: m.archivo.mime || null, tipo_real: v.tipoReal || null, fragmentos: m.archivo.trozos, tam_fragmento: TROZO },
+      emisor: { clave: C.b64u(YO.firmaPub), acuerdo: C.b64u(YO.acuerdoPub), huella: C.hex(YO.huella), nombre: YO.nombre || '', region: MI_PAIS || '', verifico_al_otro: !!c.verificada, version: VERSION_APP },
+      receptor: { clave: C.b64u(c.firmaPub), acuerdo: C.b64u(c.acuerdoPub), huella: C.hex(c.huella), nombre: String(j.nombre || '').slice(0, 40), region: regionValida(j.region), verifico_al_otro: j.verificada === true, version: typeof j.version === 'string' ? j.version.slice(0, 60) : null },
+      sesion: { id: v.sid || null, pq: !!v.pq, establecida: iso(v.sesionDesde) },
+      transporte: {
+        rele: rel.host || '', rele_ciudad: rel.prueba ? '' : rel.ciudad || '', rele_pais: rel.prueba ? '' : rel.cc || '', rele_region: R.region || '', conexion: /^wss:/.test(R.url || '') ? 'wss' : 'ws',
+        salida: v.salida || iso(v.t0), llegada: typeof j.llegada === 'string' ? j.llegada.slice(0, 40) : null,
+        duracion_s: Math.round(dura * 1000) / 1000, espera_s: v.tListo && v.tAnuncio ? Math.round(v.tListo - v.tAnuncio) / 1000 : null,
+        velocidad_media_bps: Math.round(m.archivo.tam / dura), velocidad_maxima_bps: v.velMax ? Math.round(Math.max(v.velMax, m.archivo.tam / dura)) : Math.round(m.archivo.tam / dura),
+        latencia_ms: { emisor: VJ().estad(v.latMia), receptor: estadValida(j.lat) },
+        fragmentos_verificados: +j.trozos || m.archivo.trozos, fragmentos_rechazados: 0,
+      },
+      integridad: { sha256_emisor: a.sha256, sha256_receptor: suSha, coincide: true, tipo_receptor: suTipo },
+      cronologia: cro,
+      incidencias: v.incidencias.slice(0, 20),
+    };
+    const texto = VJ().canon(reg), firma = C.b64u(await C.firma(YO, VJ().aFirmar(texto)));
+    const comp = { formato: VJ().FORMATO, registro: JSON.parse(texto), firmas: { emisor: firma } }; // en orden canónico: el mismo archivo en los dos equipos
+    v.comprobante = comp; v.comprobanteValido = false;
+    await guardaCustodia(c, m.id, comp, 'pendiente');
+    enviaControl(c, { tipo: 'custodia', id: m.id, reg: texto, firma });
+    evento(v, T('Comprobante firmado por tu equipo: enviado al destinatario para su firma.'), 'info');
+  }
+  async function guardaCustodia(c, fid, comp, estado, motivo) {
+    const id = 'cu-' + fid;
+    let m = c.mensajes.find((x) => x.id === id);
+    if (!m) { m = { id, conv: c.id, t: Date.now(), dir: 'sistema', estado, tipo: 'custodia', custodia: comp, texto: motivo || '' }; c.mensajes.push(m); }
+    else { m.estado = estado; m.custodia = comp; if (motivo != null) m.texto = motivo; }
+    await guardaMensaje(c, m); pintaMensaje(c, m, true);
+    return m;
+  }
+  // Quien recibe: comprueba que el registro dice exactamente lo que ha medido su equipo y, solo entonces, lo firma.
+  async function recibeCustodia(c, j) {
+    if (!VJ()) return;
+    if (!c.cargados) await cargaMensajes(c);
+    const v = VIAJES.get(j.id), no = (por) => { enviaControl(c, { tipo: 'custodia-no', id: String(j.id || '').slice(0, 64), por }); if (v) evento(v, T('El comprobante del remitente no coincide con lo medido en tu equipo: no se firma.'), 'mal'); };
+    const m = c.mensajes.find((x) => x.id === j.id && x.tipo === 'archivo' && x.dir === 'suya');
+    if (!m || !m.archivo || !m.archivo.obs || typeof j.reg !== 'string' || j.reg.length > 16000 || typeof j.firma !== 'string') return no('datos');
+    const ya = c.mensajes.find((x) => x.id === 'cu-' + m.id);
+    if (ya && ya.estado === 'firmado' && ya.custodia && ya.custodia.firmas && ya.custodia.firmas.receptor) { enviaControl(c, { tipo: 'custodia-firma', id: m.id, firma: ya.custodia.firmas.receptor }); return; } // ya firmado: la firma otra vez, por si no llegó
+    let reg; try { reg = JSON.parse(j.reg); } catch (_) { return no('formato'); }
+    if (!reg || VJ().canon(reg) !== j.reg) return no('formato');
+    if (!(await C.verifica(c.firmaPub, C.deB64u(j.firma), VJ().aFirmar(j.reg)))) return no('firma');
+    const o = m.archivo.obs, ar = reg.archivo || {}, e = reg.emisor || {}, r = reg.receptor || {}, se = reg.sesion || {}, t = reg.transporte || {}, ig = reg.integridad || {};
+    const mios = (Array.isArray(reg.cronologia) ? reg.cronologia : []).filter((x) => x && x.lado === 'receptor');
+    const esperados = [['anuncio_recibido', o.anuncio], ['primero', o.primero], ['llegada', o.llegada]].filter((x) => x[1]);
+    const ok = reg.v === 1 && reg.tipo === 'custodia-digital' && reg.id === m.id
+      && limpiaNombre(ar.nombre) === m.archivo.nombre && ar.bytes === m.archivo.tam && ar.fragmentos === m.archivo.trozos && ar.tam_fragmento === TROZO && ar.sha256 === o.sha256 && (ar.tipo_declarado || '') === (m.archivo.mime || '')
+      && ig.sha256_emisor === o.sha256 && ig.sha256_receptor === o.sha256 && ig.coincide === true && (ig.tipo_receptor || null) === (o.tipo || null)
+      && r.clave === C.b64u(YO.firmaPub) && r.acuerdo === C.b64u(YO.acuerdoPub) && r.huella === C.hex(YO.huella) && r.region === o.region && r.verifico_al_otro === o.verificada && r.nombre === o.nombre && r.version === o.version
+      && e.clave === C.b64u(c.firmaPub) && e.acuerdo === C.b64u(c.acuerdoPub) && e.huella === C.hex(c.huella)
+      && se.pq === o.pq && (se.id || '') === (o.sid || '')
+      && t.llegada === o.llegada && t.rele === o.rele && t.rele_region === o.rele_region && t.fragmentos_verificados === m.archivo.trozos && t.fragmentos_rechazados === 0
+      && VJ().canon((t.latencia_ms || {}).receptor || null) === VJ().canon(o.lat || null)
+      && mios.length === esperados.length && esperados.every(([que, hora]) => mios.some((x) => x.que === que && x.t === hora))
+      && typeof t.salida === 'string' && Number.isFinite(t.duracion_s) && t.duracion_s > 0;
+    if (!ok) return no('no coincide');
+    if (v) evento(v, T('Comprobante recibido del remitente: coincide con lo medido en tu equipo.'));
+    const firma = C.b64u(await C.firma(YO, VJ().aFirmar(j.reg)));
+    const comp = { formato: VJ().FORMATO, registro: reg, firmas: { emisor: j.firma, receptor: firma } };
+    enviaControl(c, { tipo: 'custodia-firma', id: m.id, firma });
+    await guardaCustodia(c, m.id, comp, 'firmado');
+    if (v) { v.comprobante = comp; v.comprobanteValido = true; v.coincide = true; evento(v, T('Comprobante firmado por tu equipo: firmado por los dos equipos.'), 'bien'); }
+    vigila(c, T('Comprobante de custodia firmado por los dos equipos') + ': ' + m.archivo.nombre, 'bien');
+  }
+  // Quien envía: la firma del destinatario, comprobada con su clave de identidad
+  async function firmaCustodia(c, j) {
+    if (!VJ()) return;
+    if (!c.cargados) await cargaMensajes(c);
+    const cm = c.mensajes.find((x) => x.id === 'cu-' + j.id && x.tipo === 'custodia'); if (!cm || !cm.custodia || typeof j.firma !== 'string') return;
+    const comp = cm.custodia, v = VIAJES.get(j.id);
+    if (comp.firmas && comp.firmas.receptor === j.firma) return;
+    if (!(await C.verifica(c.firmaPub, C.deB64u(j.firma), VJ().aFirmar(VJ().canon(comp.registro))))) { if (v) evento(v, T('La firma del destinatario no es válida: el comprobante sigue pendiente.'), 'mal'); return; }
+    comp.firmas = Object.assign({}, comp.firmas, { receptor: j.firma });
+    await guardaCustodia(c, j.id, comp, 'firmado', '');
+    if (v) { v.comprobante = comp; v.comprobanteValido = true; evento(v, T('El destinatario ha firmado el comprobante: firmado por los dos equipos.'), 'bien'); }
+    vigila(c, T('Comprobante de custodia firmado por los dos equipos') + ': ' + ((comp.registro && comp.registro.archivo && comp.registro.archivo.nombre) || ''), 'bien');
+  }
+  async function rechazoCustodia(c, j) {
+    if (!c.cargados) await cargaMensajes(c);
+    const cm = c.mensajes.find((x) => x.id === 'cu-' + j.id && x.tipo === 'custodia'); if (!cm || cm.estado === 'firmado') return;
+    await guardaCustodia(c, j.id, cm.custodia, 'rechazado', 'Su equipo no ha podido comprobar el registro.');
+    const v = VIAJES.get(j.id); if (v) evento(v, T('El destinatario no ha firmado el comprobante: su equipo no ha podido comprobar el registro.'), 'mal');
+    const m = c.mensajes.find((x) => x.id === j.id && x.tipo === 'archivo'); if (m) await recibo(c, m, v && v.tFin && v.t0 ? (v.tFin - v.t0) / 1000 : 0, m.archivo.trozos, true);
+  }
+  // en cada sesión nueva, los comprobantes aún sin la firma del destinatario se le vuelven a mandar
+  async function reenviaCustodias(c) {
+    if (!VJ()) return;
+    if (!c.cargados) await cargaMensajes(c);
+    for (const x of c.mensajes) if (x.tipo === 'custodia' && x.estado === 'pendiente' && x.custodia && x.custodia.registro && x.custodia.firmas) enviaControl(c, { tipo: 'custodia', id: x.custodia.registro.id, reg: VJ().canon(x.custodia.registro), firma: x.custodia.firmas.emisor });
+  }
+  function tarjetaCustodia(m) {
+    const comp = m.custodia || {}, reg = comp.registro || {}, ar = reg.archivo || {}, est = m.estado;
+    const d = document.createElement('div'); d.className = 'custodia' + (est === 'pendiente' ? ' pendiente' : est === 'rechazado' ? ' mal' : '');
+    const ico = document.createElement('span'); ico.className = 'cu-ico'; ico.innerHTML = VJ() ? (est === 'firmado' ? VJ().ESCUDO : VJ().AVISO) : '';
+    const k = document.createElement('span'); k.className = 'cu-k'; k.textContent = est === 'firmado' ? T('Comprobante de custodia digital') : est === 'pendiente' ? T('Comprobante pendiente de firma') : T('Comprobante no emitido');
+    const t = document.createElement('span'); t.className = 'cu-t'; t.setAttribute('translate', 'no'); t.textContent = (ar.nombre || '') + ' · ' + tamano(ar.bytes || 0);
+    const s = document.createElement('span'); s.className = 'cu-s';
+    s.textContent = est === 'firmado' ? T('Firmado por los dos equipos') + ' · SHA-256 ' + (VJ() ? VJ().agrupa(ar.sha256, 16) : '') + '…' : est === 'pendiente' ? T('Firmado por tu equipo; falta la firma del destinatario.') : T('El destinatario no lo ha firmado: su equipo no ha podido comprobar el registro.');
+    d.append(ico, k, t, s);
+    if (reg.archivo && VJ()) {
+      const fila = document.createElement('div'); fila.className = 'fila';
+      const ver = document.createElement('button'); ver.type = 'button'; ver.className = 'boton'; ver.textContent = T('Ver comprobante'); ver.addEventListener('click', () => VJ().muestraComprobante(comp));
+      const baja = document.createElement('button'); baja.type = 'button'; baja.className = 'boton'; baja.textContent = T('Descargar PDF'); baja.addEventListener('click', () => VJ().imprime(comp));
+      fila.append(ver); if (est === 'firmado') fila.append(baja); d.append(fila);
+    }
+    return d;
+  }
+  const RUTA = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="6" r="2.2"/><path d="M7 17c5-1 3-8 8-9.5" stroke-dasharray="2.4 2.6"/></svg>';
   async function abreArchivo(m, guardar) {
     const r = await BD.saca('arch', m.id); if (!r) return aviso(m.archivo.enDisco ? T('Ese archivo se guardó directamente en tu disco, en la carpeta que elegiste.') : T('Este archivo ya no está en este navegador.'));
     const u = URL.createObjectURL(r.blob);
@@ -521,7 +767,13 @@
         } catch (e) { console.warn('trama', e); }
       });
     });
-    R.on('aviso', (m) => { if (m.t === 'lento') aviso(T('El relé está limitando la velocidad: el envío sigue más despacio.')); });
+    R.on('aviso', (m) => { /* incidencias: códigos (el comprobante los dice en el idioma de quien lo lee) */
+      if (m.t === 'lento') aviso(T('El relé está limitando la velocidad: el envío sigue más despacio.'));
+      if (m.t === 'lento' || m.t === 'atasco') for (const v of VIAJES.values()) if (v.estado === 'viaje' && !v['inc_' + m.t]) { v['inc_' + m.t] = true; const que = m.t === 'lento' ? 'El relé limitó la velocidad del envío.' : 'El relé retuvo fragmentos por saturación del destinatario.'; v.incidencias.push({ t: new Date().toISOString(), que: m.t === 'lento' ? 'rele_lento' : 'rele_atasco', lado: v.rol === 'envia' ? 'emisor' : 'receptor' }); evento(v, T(que), 'info'); }
+    });
+    R.on('pong', (ms) => { if (!Number.isFinite(ms)) return; for (const v of VIAJES.values()) if (v.estado === 'viaje' || v.estado === 'espera') { v.latMia.push(ms); if (v.latMia.length > 1000) v.latMia.shift(); } });
+    // sin relé, un envío en curso no sigue (no hay reanudación): queda como no completado en los dos lados
+    R.on('cerrado', () => { for (const v of VIAJES.values()) if (v.estado === 'viaje') { v.estado = 'fallo'; v.tFin = Date.now(); v.enCamino = 0; evento(v, T('Se perdió la conexión con el relé: el envío no se ha completado.'), 'mal'); } });
   }
 
   // ---------- pantalla: lista ----------
@@ -633,6 +885,7 @@
     li.dataset.dir = m.dir; li.dataset.t = m.t; li.textContent = '';
     if (m.tipo === 'llamada') { li.className = 'gc-centro'; const l = document.createElement('span'); l.className = 'gc-linea-llamada'; l.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>'; l.append(document.createTextNode(m.texto)); li.append(l); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
     if (m.tipo === 'recibo') { li.className = 'gc-centro'; const d = document.createElement('div'); d.className = 'recibo'; const partes = String(m.texto).split(' · '); const h = document.createElement('b'); h.textContent = '✓ ' + partes[0]; d.append(h); for (const x of partes.slice(1)) { const sp = document.createElement('span'); sp.textContent = x; d.append(sp); } li.append(d); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
+    if (m.tipo === 'custodia') { li.className = 'gc-centro'; li.append(tarjetaCustodia(m)); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
     if (m.dir === 'sistema') { li.className = 'gc-nota-sistema'; li.textContent = T(m.texto); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
     const bur = document.createElement('div'); bur.className = 'gc-burbuja ' + (m.dir === 'mia' ? 'gc-mia' : 'gc-suya') + (li.classList.contains('gc-sigue') ? ' gc-sigue' : '');
     if (m.tipo === 'texto') { const s = document.createElement('span'); s.className = 'gc-texto'; s.append(...enlaza(m.texto)); bur.append(s); }
@@ -674,6 +927,7 @@
       if (/^image\//.test(m.archivo.mime) && m.archivo.tam < 24 * 1024 * 1024) { BD.saca('arch', m.id).then((r) => { if (!r) return; const img = document.createElement('img'); img.className = 'imagen'; img.alt = m.archivo.nombre; img.src = URL.createObjectURL(r.blob); img.style.gridColumn = '1 / -1'; img.addEventListener('click', () => abreArchivo(m, false)); d.prepend(img); }); }
       if (m.dir === 'suya') { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton'; g.textContent = T('Guardar'); g.addEventListener('click', () => abreArchivo(m, true)); fila.append(g); }
     }
+    if (VIAJES.has(m.id) && VJ()) { const b = document.createElement('button'); b.type = 'button'; b.className = 'boton vj-ver'; b.innerHTML = RUTA; b.append(document.createTextNode(T('Ver el viaje'))); b.addEventListener('click', () => { const v = VIAJES.get(m.id); if (v) VJ().abre(v); }); fila.append(b); }
     if (fila.childNodes.length) d.append(fila);
     return d;
   }
@@ -707,7 +961,7 @@
     fila('gc-info', T('Servidor de GUARDIANA'), T('encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial'));
     fila(c.incidencias ? 'gc-alerta' : 'gc-ok', T('Verificación'), c.incidencias ? (c.incidencias + ' ' + (c.incidencias === 1 ? T('incidencia') : T('incidencias')) + ': ' + T('datos que no superaron la autenticación, descartados y anotados en la conversación.')) : T('Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.'));
     fila(c.verificada ? 'gc-ok' : 'gc-aviso', c.verificada ? T('Identidad verificada') : T('Identidad sin verificar'), c.verificada ? T('Comprobasteis el número de seguridad.') : T('Hasta que comprobéis el número, confías en que el enlace llegó a la persona correcta.'));
-    fila('gc-aviso', T('Límites'), T('No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.') + ' ' + T('Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.') + ' ' + T('Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.') + ' ' + T('Ningún cifrado protege un equipo o navegador comprometido. Esta versión no es poscuántica ni está auditada por terceros.'));
+    fila('gc-aviso', T('Límites'), T('No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.') + ' ' + T('Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.') + ' ' + T('Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.') + ' ' + T('Ningún cifrado protege un equipo o navegador comprometido. Esta versión aún no está auditada por terceros.') + ' ' + T('El viaje de cada archivo y su comprobante muestran a la otra persona el país de tu equipo, estimado por la zona horaria del navegador; nunca la zona horaria ni la dirección IP.'));
     $('#numero').textContent = c.huella ? await C.numeroSeguridad(YO.huella, c.huella) : T('Aparecerá cuando la otra persona entre.');
     $('#verificada').checked = !!c.verificada; $('#verificada').disabled = !c.huella;
     $('#destruir-nota').hidden = true;
@@ -768,7 +1022,7 @@
       $('#unir-mal').hidden = false; campoCod.focus(); try { campoCod.setSelectionRange(campoCod.value.length, campoCod.value.length); } catch (_) {}
     });
     $('#unir-codigo').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#unir-ok').click(); });
-    $('#terminar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c) return; if (!confirm(T('¿Terminar la conversación? Se borra aquí y en el otro equipo.'))) return; await destruye(c); });
+    $('#terminar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c) return; const hay = c.mensajes.some((x) => x.tipo === 'custodia'); if (!confirm(hay ? T('¿Terminar la conversación? Se borra aquí y en el otro equipo, también los comprobantes de custodia: descarga antes los que quieras conservar.') : T('¿Terminar la conversación? Se borra aquí y en el otro equipo.'))) return; await destruye(c); });
     $('#invita-nuevo').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) { c.codigoUsado = false; await publicaCodigo(c); } });
     R.on('codigo-usado', (codigo) => { for (const c of CONVS.values()) if (c.codigo === codigo) { c.codigoUsado = true; pintaCodigo(c); } });
     R.on('abierto', () => { for (const c of CONVS.values()) if (c.estado === 'invitacion' && c.rol === 'invita' && !c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); });
@@ -831,7 +1085,7 @@
       const rec = new MediaRecorder(stream, mime ? { mimeType: mime, audioBitsPerSecond: 64000 } : undefined);
       const trozos = []; const t0 = Date.now();
       rec.ondataavailable = (e) => { if (e.data && e.data.size) trozos.push(e.data); };
-      rec.onstop = () => { const g = este; if (!g.enviar || !trozos.length) return; const tipo = rec.mimeType || mime || 'audio/webm'; const ext = /mp4/.test(tipo) ? 'm4a' : /ogg/.test(tipo) ? 'ogg' : 'webm'; const dur = Math.round((Date.now() - t0) / 1000); const f = new File(trozos, T('Nota de voz') + ' ' + new Date().toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit' }).replace(':', '.') + ' (' + Math.floor(dur / 60) + ':' + String(dur % 60).padStart(2, '0') + ').' + ext, { type: tipo }); const cc = CONVS.get(ACTUAL) || c; if (cc) enviaArchivos(cc, [f]); };
+      rec.onstop = () => { const g = este; if (!g.enviar || !trozos.length) return; const tipo = rec.mimeType || mime || 'audio/webm'; const ext = /mp4/.test(tipo) ? 'm4a' : /ogg/.test(tipo) ? 'ogg' : 'webm'; const dur = Math.round((Date.now() - t0) / 1000); const f = new File(trozos, T('Nota de voz') + ' ' + new Date().toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit' }).replace(':', '.') + ' (' + Math.floor(dur / 60) + ':' + String(dur % 60).padStart(2, '0') + ').' + ext, { type: tipo }); const cc = CONVS.get(ACTUAL) || c; if (cc) enviaArchivos(cc, [f], { voz: true }); };
       const este = { rec, stream, enviar: false, reloj: null };
       grab = este; rec.start(250);
       compositor.classList.add('grabando-ya'); $('#grabando').hidden = false; $('#grabar').setAttribute('aria-pressed', 'true');
@@ -870,6 +1124,7 @@
       }
     } catch (_) {}
   }
+  if (window.GuardianaViaje) GuardianaViaje.alCerrar = () => { viajeCerradoEn = Date.now(); };
   arranca().catch((e) => { console.error(e); aviso(T('Algo falló al arrancar: recarga la página.')); });
-  window.GuardianaCom = { get convs() { return CONVS; }, get yo() { return YO; }, get rele() { return R; }, abreConv, creaInvitacion, aceptaInvitacion };
+  window.GuardianaCom = { get convs() { return CONVS; }, get yo() { return YO; }, get rele() { return R; }, get viajes() { return VIAJES; }, abreConv, creaInvitacion, aceptaInvitacion };
 })();
