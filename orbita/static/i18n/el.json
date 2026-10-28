@@ -2841,7 +2841,9 @@
   "La imagen de la otra persona no llega.": "Η εικόνα του άλλου ατόμου δεν φτάνει.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Αυτό είναι το PDF του αποδεικτικού: χρησιμεύει για να το διαβάσεις, να το αποθηκεύσεις ή να το εκτυπώσεις, αλλά δεν περιέχει τις πλήρεις υπογραφές. Για να το επαληθεύσεις, χρησιμοποίησε το αρχείο .json του ίδιου αποδεικτικού: στη συνομιλία, άνοιξε την «Προβολή αποδεικτικού» και πάτησε «Λήψη .json».",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Η λήψη του .json γίνεται από τη συνομιλία: άνοιξε την «Προβολή αποδεικτικού» και πάτησε «Λήψη .json». Το PDF είναι για ανάγνωση· δεν μπορεί να επαληθευτεί.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "Έγκυρη: ελέγχθηκε με το μετακβαντικό κλειδί του αποδεικτικού."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Έγκυρη: ελέγχθηκε με το μετακβαντικό κλειδί του αποδεικτικού.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Αυτός ο ιστότοπος μερικές φορές δεν δέχεται προγράμματα περιήγησης που βγαίνουν από διακομιστή, όπως η φούσκα (προστασία κατά των ρομπότ). Μπορείς να δοκιμάσεις ξανά ή να τον ανοίξεις στον συνηθισμένο σου browser.",
+  "Volver a intentar": "Δοκιμή ξανά"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

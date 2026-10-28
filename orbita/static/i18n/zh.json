@@ -2841,7 +2841,9 @@
   "La imagen de la otra persona no llega.": "对方的画面没有传过来。",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "这是凭证的 PDF：可用于阅读、保存或打印，但不包含完整的签名。如需验证，请使用同一凭证的 .json 文件：在聊天中打开“查看凭证”，然后点按“下载 .json”。",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json 文件在聊天中下载：打开“查看凭证”，然后点按“下载 .json”。PDF 用于阅读；无法验证。",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "有效：已用凭证中的后量子密钥核验。"
+  "Válida: comprobada con la clave postcuántica del comprobante.": "有效：已用凭证中的后量子密钥核验。",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "该网站有时不允许来自服务器的浏览器进入，比如气泡（反机器人保护）。你可以重试，或在你平时的浏览器里打开。",
+  "Volver a intentar": "重试"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

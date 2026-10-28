@@ -2841,7 +2841,9 @@
   "La imagen de la otra persona no llega.": "L’image de l’autre personne n’arrive pas.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "C’est le PDF de l’attestation : il permet de la lire, de l’enregistrer ou de l’imprimer, mais il ne contient pas les signatures complètes. Pour la vérifier, utilisez le fichier .json de la même attestation : dans le chat, ouvrez « Voir l’attestation » et appuyez sur « Télécharger le .json ».",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Le .json se télécharge dans le chat : ouvrez « Voir l’attestation » et appuyez sur « Télécharger le .json ». Le PDF sert à la lecture ; il ne peut pas être vérifié.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "Valide : vérifiée avec la clé post-quantique de l’attestation."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Valide : vérifiée avec la clé post-quantique de l’attestation.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Il arrive que ce site n’accepte pas les navigateurs qui sortent d’un serveur, comme la bulle (protection anti-robot). Vous pouvez réessayer ou l’ouvrir dans votre navigateur habituel.",
+  "Volver a intentar": "Réessayer"
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

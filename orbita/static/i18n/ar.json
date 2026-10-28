@@ -2839,7 +2839,9 @@
   "La imagen de la otra persona no llega.": "صورة الشخص الآخر لا تصل.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "هذا هو ملف PDF للإيصال: يصلح لقراءته أو حفظه أو طباعته، لكنه لا يحمل التوقيعات كاملة. للتحقق منه، استخدم ملف ‎.json الخاص بالإيصال نفسه: في الدردشة، افتح «عرض الإيصال» واضغط «تنزيل ‎.json».",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "يُنزَّل ملف ‎.json من الدردشة: افتح «عرض الإيصال» واضغط «تنزيل ‎.json». ملف PDF للقراءة؛ ولا يمكن التحقق منه.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "صالح: جرى التحقق منه بمفتاح ما بعد الكم الموجود في الإيصال."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "صالح: جرى التحقق منه بمفتاح ما بعد الكم الموجود في الإيصال.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "هذا الموقع لا يسمح أحيانًا بدخول المتصفحات القادمة من خادم، مثل الفقاعة (حماية من الروبوتات). يمكنك المحاولة مرة أخرى أو فتحه في متصفحك المعتاد.",
+  "Volver a intentar": "إعادة المحاولة"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

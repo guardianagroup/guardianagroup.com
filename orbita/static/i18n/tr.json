@@ -2841,7 +2841,9 @@
   "La imagen de la otra persona no llega.": "Diğer kişinin görüntüsü gelmiyor.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Bu, makbuzun PDF’si: okumak, kaydetmek veya yazdırmak içindir, ancak imzaların tamamını içermez. Doğrulamak için aynı makbuzun .json dosyasını kullanın: sohbette “Makbuzu görüntüle” seçeneğini açın ve “.json indir” düğmesine basın.",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json dosyası sohbetten indirilir: “Makbuzu görüntüle” seçeneğini açın ve “.json indir” düğmesine basın. PDF okumak içindir; doğrulanamaz.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "Geçerli: makbuzdaki kuantum sonrası anahtarla doğrulandı."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Geçerli: makbuzdaki kuantum sonrası anahtarla doğrulandı.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Bu site, balon gibi sunucudan çıkan tarayıcıları bazen içeri almıyor (bot koruması). Yeniden deneyebilir ya da siteyi her zamanki tarayıcında açabilirsin.",
+  "Volver a intentar": "Yeniden dene"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

@@ -2839,7 +2839,9 @@
   "La imagen de la otra persona no llega.": "Bildet fra den andre personen kommer ikke frem.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Det er PDF-en av kvitteringen: den kan brukes til å lese, lagre eller skrive ut kvitteringen, men den inneholder ikke de fullstendige signaturene. For å verifisere den bruker du .json-filen til den samme kvitteringen: åpne «Vis kvittering» i chatten og trykk på «Last ned .json».",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json-filen lastes ned i chatten: åpne «Vis kvittering» og trykk på «Last ned .json». PDF-en er for lesing; den kan ikke verifiseres.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "Gyldig: kontrollert med kvitteringens postkvantenøkkel."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Gyldig: kontrollert med kvitteringens postkvantenøkkel.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Dette nettstedet slipper noen ganger ikke inn nettlesere som kommer fra en server, slik som boblen (botbeskyttelse). Du kan prøve igjen eller åpne det i din vanlige nettleser.",
+  "Volver a intentar": "Prøv igjen"
  },
  "p": {
   "intento": "Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

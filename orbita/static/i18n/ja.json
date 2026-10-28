@@ -2839,7 +2839,9 @@
   "La imagen de la otra persona no llega.": "相手の映像が届いていません。",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "これは証明書の PDF です。閲覧・保存・印刷には使えますが、完全な署名は含まれていません。検証するには、同じ証明書の .json ファイルを使ってください：チャットで「証明書を表示」を開き、「.json をダウンロード」を押してください。",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json はチャットでダウンロードします：「証明書を表示」を開き、「.json をダウンロード」を押してください。PDF は閲覧用で、検証はできません。",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "有効：証明書のポスト量子鍵で確認済みです。"
+  "Válida: comprobada con la clave postcuántica del comprobante.": "有効：証明書のポスト量子鍵で確認済みです。",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "このサイトは、バブルのようにサーバーから来るブラウザを受け付けないことがあります（ボット対策）。もう一度試すか、いつものブラウザで開くことができます。",
+  "Volver a intentar": "もう一度試す"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

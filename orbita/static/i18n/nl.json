@@ -2839,7 +2839,9 @@
   "La imagen de la otra persona no llega.": "Het beeld van de ander komt niet aan.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Dat is de PDF van het bewijs: je kunt hem lezen, opslaan of afdrukken, maar hij bevat niet de volledige handtekeningen. Om het te verifiëren, gebruik je het .json-bestand van hetzelfde bewijs: open in de chat “Bewijs bekijken” en tik op “.json downloaden”.",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Het .json-bestand download je in de chat: open “Bewijs bekijken” en tik op “.json downloaden”. De PDF is om te lezen; die kan niet worden geverifieerd.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "Geldig: gecontroleerd met de post-quantumsleutel van het bewijs."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Geldig: gecontroleerd met de post-quantumsleutel van het bewijs.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Deze site laat soms geen browsers binnen die vanaf een server komen, zoals de bubbel (botbescherming). Je kunt het opnieuw proberen of hem in je gewone browser openen.",
+  "Volver a intentar": "Opnieuw proberen"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

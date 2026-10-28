@@ -2841,7 +2841,9 @@
   "La imagen de la otra persona no llega.": "Toisen henkilön kuva ei tule perille.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Tämä on kuitin PDF: sitä voi lukea, tallentaa tai tulostaa, mutta siinä ei ole täydellisiä allekirjoituksia. Käytä varmentamiseen saman kuitin .json-tiedostoa: avaa chatissa ”Näytä kuitti” ja paina ”Lataa .json”.",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json-tiedosto ladataan chatissa: avaa ”Näytä kuitti” ja paina ”Lataa .json”. PDF on lukemista varten; sitä ei voi varmentaa.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "Kelvollinen: tarkistettu kuitin post-kvanttiavaimella."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Kelvollinen: tarkistettu kuitin post-kvanttiavaimella.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Tämä sivusto ei toisinaan päästä sisään palvelimelta tulevia selaimia, kuten kuplaa (bottisuojaus). Voit yrittää uudelleen tai avata sen tavallisessa selaimessasi.",
+  "Volver a intentar": "Yritä uudelleen"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

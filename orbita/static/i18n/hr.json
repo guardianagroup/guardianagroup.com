@@ -2841,7 +2841,9 @@
   "La imagen de la otra persona no llega.": "Slika druge osobe ne stiže.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "To je PDF potvrde: služi za čitanje, spremanje ili ispis, ali ne sadrži potpune potpise. Za provjeru upotrijebi .json datoteku iste potvrde: u chatu otvori „Prikaži potvrdu“ i pritisni „Preuzmi .json“.",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json datoteka preuzima se u chatu: otvori „Prikaži potvrdu“ i pritisni „Preuzmi .json“. PDF služi za čitanje; ne može se provjeriti.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "Valjan: provjeren postkvantnim ključem potvrde."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Valjan: provjeren postkvantnim ključem potvrde.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Ova stranica ponekad ne pušta preglednike koji izlaze s poslužitelja, poput mjehurića (zaštita od robota). Možeš pokušati ponovno ili je otvoriti u svom uobičajenom pregledniku.",
+  "Volver a intentar": "Pokušaj ponovno"
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",
