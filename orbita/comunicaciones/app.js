@@ -1699,20 +1699,56 @@
     $('#cm-avisos').addEventListener('click', () => { cierraMenu(); pideAvisos(); });
     $('#cm-terminar').addEventListener('click', () => { cierraMenu(); $('#terminar').click(); });
     $('#cm-completa').hidden = !esMovil() || comoApp();
-    $('#cm-completa').addEventListener('click', () => { cierraMenu(); if (puedeCompleta()) pantallaCompleta(); else abreHoja('h-completa'); });
+    $('#cm-completa').addEventListener('click', () => { cierraMenu(); if (puedeCompleta()) pantallaCompleta(); else abreGuia(); });
     $('#completa-ok').addEventListener('click', () => cierraHoja('h-completa'));
     // «Añadir a la pantalla de inicio»: en Android, la ventana del propio sistema; en el iPhone, los pasos (no deja hacerlo desde la web)
     let avisoInstalar = null;
+    // La guía con los mismos botones que verá cada persona (dueño, 28 Oct 2026, 17:02): qué teléfono, qué navegador y qué
+    // versión. En Safari manda su «Version/»; en Chrome y los demás del iPhone, iOS 26 se reconoce por lo que estrenó su
+    // motor (el anclaje de CSS), porque el número del sistema puede venir congelado.
+    const UA = navigator.userAgent;
+    const esIPad = /iPad/.test(UA) || (/Macintosh/.test(UA) && navigator.maxTouchPoints > 1);
+    const esIOS = /iPhone|iPod/.test(UA) || esIPad;
+    const esAndroid = /Android/i.test(UA);
+    const ios26 = () => { const v = UA.match(/Version\/(\d+)/), o = UA.match(/OS (\d+)_\d/); if (v) return +v[1] >= 26; if (o && +o[1] >= 26) return true; try { return CSS.supports('anchor-name', '--g'); } catch (_) { return false; } };
+    const dentroDeApp = () => /FBAN|FBAV|FB_IAB|Instagram|LinkedInApp|TikTok|musical_ly|BytedanceWebview|Snapchat|Pinterest|Twitter|Line\//i.test(UA) || (esAndroid && /; wv\)/.test(UA));
+    const plataformaGuia = () => {
+      if (esIOS) {
+        if (dentroDeApp()) return 'app';
+        const n = ios26();
+        if (/CriOS/.test(UA)) return n ? 'crios26' : 'crios';
+        if (/FxiOS|EdgiOS|OPiOS|OPT\/|DuckDuckGo|Brave|GSA\/|YaBrowser/.test(UA)) return n ? 'otro26' : 'otro';
+        return n ? 'ios26' : esIPad ? 'ipad' : 'ios';
+      }
+      if (esAndroid) { if (avisoInstalar) return 'android'; if (dentroDeApp()) return 'appand'; return /SamsungBrowser|Firefox|EdgA|OPR|YaBrowser|UCBrowser|MiuiBrowser|HuaweiBrowser|DuckDuckGo/.test(UA) ? 'androidotro' : 'androidmenu'; }
+      return avisoInstalar ? 'pc' : 'pcno';
+    };
+    function pintaGuia() {
+      const h = $('#h-completa'); if (!h) return;
+      const p = plataformaGuia(); h.dataset.plat = p; h.classList.toggle('es-ipad', esIPad);
+      h.querySelectorAll('[data-p]').forEach((el) => el.toggleAttribute('hidden', !el.dataset.p.split(' ').includes(p)));
+      const vis = [...h.querySelectorAll('.guia-pasos > li')].filter((li) => !li.hidden);
+      vis.forEach((li, i) => li.classList.toggle('fin', i === vis.length - 1));
+      // en España los teléfonos dicen «Añadir»; en Latinoamérica, «Agregar» (en inglés y portugués lo pone idioma.js)
+      const espana = (!window.GuardianaIdioma || window.GuardianaIdioma.lang === 'es') && /^es-es\b/i.test(navigator.language || '');
+      if (espana) h.querySelectorAll('[data-es-es]').forEach((el) => { if (el.textContent !== el.dataset.esEs) el.textContent = el.dataset.esEs; });
+      $('#completa-ok').classList.toggle('principal', p !== 'android' && p !== 'pc');
+    }
+    function abreGuia() { pintaGuia(); abreHoja('h-completa'); }
+    const instala = async () => { const e = avisoInstalar; if (!e) { abreGuia(); return; } avisoInstalar = null; try { e.prompt(); await e.userChoice; } catch (_) {} cierraHoja('h-completa'); pintaAnadir(); };
     // también en el ordenador: Chrome y Edge la ponen en el escritorio y en las aplicaciones (dueño, 16:20)
-    const pintaAnadir = () => { const b = $('#anadir-app'); if (b) b.hidden = comoApp() || !(avisoInstalar || /iPhone|iPad|iPod/i.test(navigator.userAgent)); };
-    addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); avisoInstalar = e; pintaAnadir(); });
-    addEventListener('appinstalled', () => { avisoInstalar = null; pintaAnadir(); });
-    $('#anadir-app').addEventListener('click', async () => { if (avisoInstalar) { const e = avisoInstalar; avisoInstalar = null; try { e.prompt(); await e.userChoice; } catch (_) {} pintaAnadir(); } else abreHoja('h-completa'); });
+    const pintaAnadir = () => { const b = $('#anadir-app'); if (b) b.hidden = comoApp() || !(avisoInstalar || esIOS || esAndroid); };
+    const guiaAbierta = () => { const h = $('#h-completa'); return !!h && h.classList.contains('gc-abierta'); };
+    addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); avisoInstalar = e; pintaAnadir(); if (guiaAbierta()) pintaGuia(); });
+    addEventListener('appinstalled', () => { avisoInstalar = null; pintaAnadir(); if (guiaAbierta()) cierraHoja('h-completa'); });
+    // en Android, un toque: la ventana del sistema; si todavía no la da (o en el iPhone), la guía
+    $('#anadir-app').addEventListener('click', () => { if (avisoInstalar) instala(); else abreGuia(); });
+    $('#guia-instalar').addEventListener('click', instala);
+    // tocar el dibujo del aviso también lo abre (quien lo toca quiere instalar)
+    { const d = document.querySelector('#h-completa .ui-dlg'); if (d) d.addEventListener('click', () => { if (avisoInstalar) instala(); }); }
     pintaAnadir();
-    // enlace para mandar: guardianagroup.com/orbita/comunicaciones/?instalar abre directamente «Añadir a la pantalla de inicio»
-    if (new URLSearchParams(location.search).has('instalar') && !comoApp()) { setTimeout(() => { if (avisoInstalar || !/iPhone|iPad|iPod/i.test(navigator.userAgent)) abreHoja('h-instalar'); else abreHoja('h-completa'); }, 600); }
-    $('#instalar-si').addEventListener('click', async () => { cierraHoja('h-instalar'); if (avisoInstalar) { const e = avisoInstalar; avisoInstalar = null; try { e.prompt(); await e.userChoice; } catch (_) {} pintaAnadir(); } else abreHoja('h-completa'); });
-    $('#instalar-no').addEventListener('click', () => cierraHoja('h-instalar'));
+    // enlace para mandar: guardianagroup.com/orbita/comunicaciones/?instalar abre directamente la guía
+    if (new URLSearchParams(location.search).has('instalar') && !comoApp()) setTimeout(abreGuia, 600);
     // en Android, la pantalla completa entra sola con el primer toque importante: crear, aceptar, llamar o contestar
     for (const id of ['#nueva-blindada', '#aceptar-si', '#llamar', '#videollamar', '#ll-contestar']) { const b = $(id); if (b) b.addEventListener('click', () => { if (esMovil() && puedeCompleta()) pantallaCompleta(); }, { capture: true }); }
     // tocar el nombre o el candado abre la seguridad de la conversación, como en las aplicaciones de mensajería

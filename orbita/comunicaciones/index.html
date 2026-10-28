@@ -11,14 +11,14 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Comunicaciones">
+<meta name="apple-mobile-web-app-title" content="GUARDIANA">
 <link rel="apple-touch-icon" href="/icon-192.png">
 <meta name="description" content="GUARDIANA Comunicaciones, para particulares y profesionales con clientes: chat, llamadas y envío de datos y documentación sensible, encriptados de extremo a extremo entre dos navegadores, con un código de 9 cifras o, en la sesión blindada, con un enlace. Los servidores no guardan mensajes ni archivos.">
-<title>GUARDIANA · Comunicaciones</title>
+<title>GUARDIANA</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261029e">
+<link rel="stylesheet" href="app.css?v=20261029k">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -358,29 +358,121 @@
     <div class="fila"><button type="button" class="boton" id="nueva-no">Cancelar</button><button type="button" class="boton principal" id="nueva-si">Empezar</button></div>
   </div>
 </div>
-<!-- iPhone: el navegador no deja esconder sus barras desde una web; como app (pantalla de inicio), sin barras -->
+<!-- La guía para añadir GUARDIANA a la pantalla de inicio, con los mismos botones que verá cada persona (dueño, 28 Oct 2026,
+     17:02: «una guía… lo más profesional posible… los mismos botones que se va a encontrar la persona en el iPhone o en el
+     Android»; 17:06: «en vez de poner comunicaciones… guardiana»). Una sola hoja: la abren «Añadir a la pantalla de inicio»,
+     el enlace ?instalar y «Pantalla completa» en el iPhone. Cada parte lleva data-p con las plataformas en las que sale
+     (app.js, plataformaGuia); data-es-es, el texto de los teléfonos en España («Añadir» en vez de «Agregar»). Los nombres de
+     los botones del iPhone, de su pantalla en español de Latinoamérica (iOS 26, 17:01). -->
 <div class="gc-hoja" id="h-completa" role="dialog" aria-modal="true" aria-labelledby="h-completa-t">
-  <div class="gc-hoja-caja caja">
+  <div class="gc-hoja-caja caja guia">
     <div class="gc-asa"></div>
-    <h2 class="gc-hoja-titulo" id="h-completa-t">Añadir a la pantalla de inicio</h2>
-    <p class="t">En el iPhone lo haces tú en cuatro toques (Apple no deja que una web lo haga sola). Se hace una vez y se abre como una app, a pantalla completa:</p>
-    <ol class="pasos-ios">
-      <li>Toca <b>Compartir del navegador</b> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg>: en Safari, abajo en el centro; en Chrome, arriba a la derecha de la dirección.</li>
-      <li>Desliza el menú hacia abajo.</li>
-      <li>Toca <b>«Añadir a pantalla de inicio»</b>.</li>
-      <li>Arriba a la derecha, toca <b>«Añadir»</b>.</li>
+    <div class="guia-cab">
+      <div class="guia-app" aria-hidden="true"><img src="/apple-touch-icon.png" alt="" width="58" height="58"><span translate="no">GUARDIANA</span></div>
+      <div class="guia-tit">
+        <h2 class="gc-hoja-titulo" id="h-completa-t"><span data-p="ios26 ios ipad crios26 crios otro26 otro app appand android androidmenu androidotro">Añade GUARDIANA a tu pantalla de inicio</span><span data-p="pc pcno">Instala GUARDIANA en este ordenador</span></h2>
+        <p class="t"><span data-p="ios26 ios ipad crios26 crios otro26 otro app appand android androidmenu androidotro">Se abre como una app, a pantalla completa. Se hace una sola vez.</span><span data-p="pc pcno">Se abre en su propia ventana, como una app.</span></p>
+      </div>
+    </div>
+    <ol class="guia-pasos">
+      <!-- iPhone · Safari en iOS 26: «⋯» a la derecha de la dirección y «Compartir» -->
+      <li data-p="ios26">
+        <div class="g-txt">Toca ⋯, a la derecha de la dirección, y luego «Compartir».<small class="g-alt">¿Ves «Compartir» en la barra? Tócalo.</small></div>
+        <div class="g-ui"><span class="ui ui-circ toca"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg></span><span class="ui-sig" aria-hidden="true">›</span><span class="ui ui-fila toca"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg><span>Compartir</span></span></div>
+        <svg class="g-movil" viewBox="0 0 40 72" aria-hidden="true"><rect class="c" x="1" y="1" width="38" height="70" rx="7"/><rect class="b" x="5" y="59" width="22" height="7" rx="3.5"/><circle class="o" cx="33" cy="62.5" r="3.4"/><circle class="p" cx="33" cy="62.5" r="2.6"/></svg>
+      </li>
+      <!-- iPhone · Safari en iOS 18 o anterior: «Compartir» abajo en el centro (en el iPad, arriba a la derecha) -->
+      <li data-p="ios ipad">
+        <div class="g-txt"><span data-p="ios">Toca «Compartir», abajo en el centro.</span><span data-p="ipad">Toca «Compartir», arriba a la derecha.</span></div>
+        <div class="g-ui"><span class="ui ui-circ toca"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span></div>
+        <svg class="g-movil" data-p="ios" viewBox="0 0 40 72" aria-hidden="true"><rect class="c" x="1" y="1" width="38" height="70" rx="7"/><rect class="b" x="5" y="52" width="30" height="6" rx="3"/><circle class="o" cx="20" cy="64" r="3.4"/><circle class="p" cx="20" cy="64" r="2.6"/></svg>
+      </li>
+      <!-- iPhone · Chrome: «Compartir» en la barra de la dirección -->
+      <li data-p="crios26 crios">
+        <div class="g-txt">Toca «Compartir», a la derecha de la dirección.</div>
+        <div class="g-ui"><span class="ui ui-dir"><span translate="no">guardianagroup.com</span><span class="ui-dir-b toca"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span></span></div>
+        <svg class="g-movil" viewBox="0 0 40 72" aria-hidden="true"><rect class="c" x="1" y="1" width="38" height="70" rx="7"/><rect class="b" x="5" y="6" width="22" height="7" rx="3.5"/><circle class="o" cx="32" cy="9.5" r="3.4"/><circle class="p" cx="32" cy="9.5" r="2.6"/></svg>
+      </li>
+      <!-- iPhone · otros navegadores (Firefox, Edge, Opera, DuckDuckGo…) -->
+      <li data-p="otro26 otro">
+        <div class="g-txt">Abre el menú del navegador y toca «Compartir».</div>
+        <div class="g-ui"><span class="ui ui-circ toca"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span></div>
+      </li>
+      <!-- iOS 26: en la hoja de compartir, «Ver más» (un botón redondo con el nombre debajo) -->
+      <li class="junto" data-p="ios26 crios26 otro26">
+        <div class="g-txt">Toca «Ver más».</div>
+        <div class="g-ui"><span class="ui ui-vermas"><i class="toca"><svg viewBox="0 0 24 24"><path d="M6.5 9.5 12 15l5.5-5.5"/></svg></i><span>Ver más</span></span></div>
+      </li>
+      <li data-p="ios ipad crios otro">
+        <div class="g-txt">Desliza el menú hacia arriba.</div>
+      </li>
+      <!-- «Agregar a Inicio»: en iOS 26, el símbolo a la izquierda (como en su pantalla, 17:01); antes, a la derecha -->
+      <li data-p="ios26 crios26 otro26">
+        <div class="g-txt"><span data-es-es="Toca «Añadir a pantalla de inicio».">Toca «Agregar a Inicio».</span></div>
+        <div class="g-ui"><span class="ui ui-fila ancha toca"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg><span data-es-es="Añadir a pantalla de inicio">Agregar a Inicio</span></span></div>
+      </li>
+      <li data-p="ios ipad crios otro">
+        <div class="g-txt"><span data-es-es="Toca «Añadir a pantalla de inicio».">Toca «Agregar a pantalla de inicio».</span></div>
+        <div class="g-ui"><span class="ui ui-fila ancha der toca"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg><span data-es-es="Añadir a pantalla de inicio">Agregar a pantalla de inicio</span></span></div>
+      </li>
+      <li data-p="ios26 crios26 otro26">
+        <div class="g-txt"><span data-es-es="Arriba a la derecha, toca «Añadir».">Arriba a la derecha, toca «Agregar».</span><small class="g-alt">Si ves «Abrir como app web», déjalo activado.</small></div>
+        <div class="g-ui"><span class="ui ui-azul toca"><span data-es-es="Añadir">Agregar</span></span></div>
+      </li>
+      <li class="lado" data-p="ios ipad crios otro">
+        <div class="g-txt"><span data-es-es="Arriba a la derecha, toca «Añadir».">Arriba a la derecha, toca «Agregar».</span></div>
+        <div class="g-ui"><span class="ui ui-azul solo toca"><span data-es-es="Añadir">Agregar</span></span></div>
+      </li>
+      <!-- Dentro de Instagram, Facebook, TikTok…: esas apps no dejan añadirla; primero, al navegador -->
+      <li data-p="app">
+        <div class="g-txt">Toca ⋯ y elige «Abrir en Safari» o «Abrir en el navegador».</div>
+        <div class="g-ui"><span class="ui ui-circ toca"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg></span></div>
+      </li>
+      <li data-p="app">
+        <div class="g-txt">En Safari, vuelve a tocar «Añadir a la pantalla de inicio».</div>
+      </li>
+      <li data-p="appand">
+        <div class="g-txt">Toca los tres puntos y elige «Abrir en Chrome» o «Abrir en el navegador».</div>
+        <div class="g-ui"><span class="ui ui-circ and toca"><svg viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="18.5" r="1.7"/></svg></span></div>
+      </li>
+      <li data-p="appand">
+        <div class="g-txt">En Chrome, vuelve a tocar «Añadir a la pantalla de inicio».</div>
+      </li>
+      <!-- Android (y el ordenador) con la ventana del propio sistema: un toque aquí y «Instalar» en su aviso -->
+      <li data-p="android pc">
+        <div class="g-txt"><span data-p="android">Toca «Instalar», aquí abajo.</span><span data-p="pc">Haz clic en «Instalar», aquí abajo.</span></div>
+      </li>
+      <li data-p="android pc">
+        <div class="g-txt"><span data-p="android">En el aviso del teléfono, toca «Instalar».</span><span data-p="pc">En el aviso del navegador, haz clic en «Instalar».</span></div>
+        <div class="g-ui"><span class="ui ui-dlg"><span class="ui-dlg-app"><img src="/icon-192.png" alt="" width="36" height="36"><span><b translate="no">GUARDIANA</b><small translate="no">guardianagroup.com</small></span></span><span class="ui-dlg-bot"><span class="ui-dlg-no">Cancelar</span><span class="ui-pill toca">Instalar</span></span></span></div>
+      </li>
+      <!-- Android sin la ventana del sistema (todavía): el menú ⋮ de Chrome -->
+      <li data-p="androidmenu">
+        <div class="g-txt">Toca los tres puntos, arriba a la derecha.</div>
+        <div class="g-ui"><span class="ui ui-circ and toca"><svg viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="18.5" r="1.7"/></svg></span></div>
+        <svg class="g-movil" viewBox="0 0 40 72" aria-hidden="true"><rect class="c" x="1" y="1" width="38" height="70" rx="7"/><rect class="b" x="5" y="6" width="24" height="7" rx="3.5"/><circle class="o" cx="34" cy="9.5" r="3.4"/><circle class="p" cx="34" cy="9.5" r="2.6"/></svg>
+      </li>
+      <li data-p="androidmenu">
+        <div class="g-txt"><span data-es-es="Toca «Instalar aplicación» o «Añadir a pantalla de inicio».">Toca «Instalar app» o «Agregar a la pantalla principal».</span></div>
+        <div class="g-ui"><span class="ui ui-menu toca"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 7.5v6.5M9.3 11.4 12 14l2.7-2.6"/></svg><span data-es-es="Instalar aplicación">Instalar app</span></span></div>
+      </li>
+      <li class="junto" data-p="androidmenu">
+        <div class="g-txt">Confirma con «Instalar».</div>
+        <div class="g-ui"><span class="ui ui-pill toca">Instalar</span></div>
+      </li>
+      <li data-p="androidotro">
+        <div class="g-txt">Abre el menú del navegador (los tres puntos o las tres rayas).</div>
+      </li>
+      <li data-p="androidotro">
+        <div class="g-txt"><span data-es-es="Toca «Instalar» o «Añadir a pantalla de inicio» y confirma.">Toca «Instalar» o «Agregar a la pantalla de inicio» y confirma.</span></div>
+      </li>
     </ol>
-    <p class="t nota">No es el botón «Crear y compartir invitación»: ese manda la invitación a otra persona.</p>
-    <div class="fila"><button type="button" class="boton principal" id="completa-ok">Entendido</button></div>
-  </div>
-</div>
-<!-- El enlace ?instalar: «Añade Comunicaciones a tu pantalla de inicio» (dueño, 16:20: «¿yo le puedo enviar un enlace y desde ahí lo hace?») -->
-<div class="gc-hoja" id="h-instalar" role="dialog" aria-modal="true" aria-labelledby="h-instalar-t">
-  <div class="gc-hoja-caja caja">
-    <div class="gc-asa"></div>
-    <h2 class="gc-hoja-titulo" id="h-instalar-t">Añade Comunicaciones a tu pantalla de inicio</h2>
-    <p class="t">Se abre como una app, a pantalla completa, sin tienda y sin descargar nada. Se hace una sola vez.</p>
-    <div class="fila"><button type="button" class="boton" id="instalar-no">Ahora no</button><button type="button" class="boton principal" id="instalar-si">Añadir</button></div>
+    <div class="guia-pc" data-p="pcno">
+      <p class="t">En Chrome o Edge: el icono de instalar, a la derecha de la dirección.</p>
+      <p class="t"><span data-es-es="En Safari, en el Mac: Archivo › «Añadir al Dock».">En Safari, en el Mac: Archivo › «Agregar al Dock».</span></p>
+    </div>
+    <p class="t nota guia-nota" data-p="ios26 ios ipad crios26 crios otro26 otro"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg><span>Si el nombre cambia un poco, busca este símbolo.</span></p>
+    <div class="fila"><button type="button" class="boton principal" id="completa-ok"><span data-p="ios26 ios ipad crios26 crios otro26 otro app appand androidmenu androidotro pcno">Entendido</span><span data-p="android pc">Ahora no</span></button><button type="button" class="boton principal" id="guia-instalar" data-p="android pc">Instalar</button></div>
   </div>
 </div>
 <div class="gc-hoja" id="h-vaciar" role="dialog" aria-modal="true" aria-labelledby="h-vaciar-t">
@@ -519,7 +611,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261029p53"></script>
+<script src="/orbita/static/idioma.js?v=20261029p54"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -530,6 +622,6 @@
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028b"></script>
 <script src="llamada.js?v=20261029t"></script>
-<script src="app.js?v=20261029f"></script>
+<script src="app.js?v=20261029k"></script>
 </body>
 </html>
