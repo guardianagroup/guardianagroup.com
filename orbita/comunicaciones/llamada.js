@@ -14,10 +14,17 @@
   const VOCES = { natural: { k: 1, robot: 0 }, grave: { k: Math.pow(2, -5 / 12), robot: 0 }, aguda: { k: Math.pow(2, 5 / 12), robot: 0 }, anonima: { k: Math.pow(2, -3 / 12), robot: 0.28 }, robot: { k: 1, robot: 1 } };
   const VOZ_JS = 'voz.js?v=20261027a';
   // Videollamada (dueño, 28 Oct 2026: «máxima calidad de imagen»): hasta 1080p a 30 imágenes por segundo, con un tope
-  // de 6 Mb/s para la imagen (el servicio de llamadas admite unos 12 Mb/s por sentido) y, si falta red, se conserva la
-  // resolución antes que la fluidez. La imagen va como el audio: DTLS-SRTP y siempre por el relé.
+  // de 6 Mb/s para la imagen (el servicio de llamadas admite unos 12 Mb/s por sentido). Si falta red, se conserva la
+  // fluidez y baja la resolución, que vuelve a subir en cuanto hay red (10:15: con la resolución fija, entre Colombia y
+  // Chequia la imagen llegaba a menos de una imagen por segundo). La imagen va como el audio: DTLS-SRTP y por el relé.
   const VIDEO = { width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 30, max: 30 }, facingMode: 'user' };
   const MAX_BPS_VIDEO = 6000000;
+  // «Tu imagen» (dueño, 28 Oct 2026: que no puedan tener «nuestro rostro, ni el iris, ni el reconocimiento facial»).
+  // Como el cambio de voz, se hace aquí, antes de encriptar: cada imagen de la cámara se reduce a una cuadrícula de pocos
+  // puntos (32 o 24 de ancho) y solo eso se amplía y se envía. El detalle de la cara no sale nunca del equipo, y no
+  // depende de detectar la cara (una máscara que siga la cara puede fallar un instante y dejarla a la vista).
+  const IMAGENES = { natural: null, difuminada: { w: 32, suave: true }, mosaico: { w: 24, suave: false } };
+  const SALIDA_W = 640; // la imagen protegida no necesita más: menos caudal, más fluida
 
   function crea(o) {
     // o: { ice(), manda(m), puede(), nombre(), inicial(), fin(info), t(s), aviso(s) }
@@ -25,6 +32,8 @@
     const caja = $('#llamada'), paso = $('#ll-paso'), tiempo = $('#ll-tiempo'), calidad = $('#ll-calidad');
     let pc = null, mic = null, envio = null, ctx = null, nodo = null, estado = 'libre', iniciada = 0, reloj = null, pendientes = [], ofertaEntrante = null, idLlamada = null, colgoYo = false, sondeo = null;
     let cam = null, video = false, suCamara = true, remotoV = null; // videollamada: mi cámara, si la llamada es con imagen, si la otra persona tiene la cámara encendida y su imagen
+    let imagen = 'natural'; try { imagen = localStorage.getItem('gcom-imagen') || 'natural'; } catch (_) {} if (!(imagen in IMAGENES)) imagen = 'natural';
+    let proc = null; // la imagen protegida (lienzo) cuando «Tu imagen» no es natural
     let voz = 'natural'; try { voz = localStorage.getItem('gcom-voz') || 'natural'; } catch (_) {} if (!VOCES[voz]) voz = 'natural';
     const ocupado = () => estado !== 'libre';
 
@@ -38,8 +47,9 @@
       $('#ll-avatar').textContent = o.inicial();
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
+      $('#ll-imagenes').hidden = !video;
       document.body.classList.toggle('en-llamada', estado !== 'libre');
-      pintaVoces(); pintaVideo();
+      pintaVoces(); pintaImagenes(); pintaVideo();
     }
     // La llamada en pequeño (dueño, 28 Oct 2026: «seguir en llamada y que aparezca el chat»): una tarjeta en una esquina
     // con la imagen, el tiempo y los botones, y el chat libre debajo para escribir y mandar archivos.
@@ -56,6 +66,10 @@
       caja.classList.toggle('con-video', veoSuyo);
       caja.classList.toggle('solo-mia', !veoSuyo && veoMio);
       const b = $('#ll-camara'); if (b) { const on = camaraOn(); b.setAttribute('aria-pressed', String(!on)); b.setAttribute('aria-label', on ? t('Apagar la cámara') : t('Encender la cámara')); }
+    }
+    function pintaImagenes() {
+      for (const b of document.querySelectorAll('#ll-imagenes [data-imagen]')) b.setAttribute('aria-pressed', String(b.dataset.imagen === imagen));
+      const n = $('#ll-imagen-nota'); if (n) n.hidden = imagen === 'natural';
     }
     function pintaVoces() {
       for (const b of document.querySelectorAll('#ll-voces [data-voz]')) b.setAttribute('aria-pressed', String(b.dataset.voz === voz));
@@ -97,13 +111,53 @@
     // que importa el detalle de la imagen.
     async function camara() {
       cam = await navigator.mediaDevices.getUserMedia({ video: VIDEO });
-      for (const x of cam.getVideoTracks()) { try { x.contentHint = 'detail'; } catch (_) {} }
-      $('#v-local').srcObject = cam;
+      for (const x of cam.getVideoTracks()) { try { x.contentHint = 'motion'; } catch (_) {} }
       return cam;
+    }
+    // La imagen protegida: la cámara pasa por un lienzo diminuto (32 × 18 o 24 × 14 puntos) y se amplía a 640 de ancho.
+    function protegida() {
+      const crudo = cam.getVideoTracks()[0], s = crudo.getSettings ? crudo.getSettings() : {};
+      const W = SALIDA_W, H = Math.round(SALIDA_W * ((s.height || 720) / (s.width || 1280)));
+      const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.srcObject = new MediaStream([crudo]); v.play().catch(() => {});
+      const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d', { alpha: false });
+      const p = document.createElement('canvas'), gp = p.getContext('2d', { alpha: false });
+      let vivo = true;
+      const dibuja = () => {
+        if (!vivo || v.readyState < 2) return;
+        const m = IMAGENES[imagen] || IMAGENES.mosaico, pw = m.w, ph = Math.max(1, Math.round(m.w * H / W));
+        if (p.width !== pw || p.height !== ph) { p.width = pw; p.height = ph; }
+        gp.imageSmoothingEnabled = true; gp.imageSmoothingQuality = 'high'; gp.drawImage(v, 0, 0, pw, ph); // aquí se pierde el detalle
+        g.imageSmoothingEnabled = m.suave; g.imageSmoothingQuality = 'high'; g.drawImage(p, 0, 0, W, H);
+      };
+      g.fillStyle = '#06080C'; g.fillRect(0, 0, W, H); // hasta la primera imagen, negro: nunca la cámara tal cual
+      const reloj = setInterval(dibuja, 1000 / 30);
+      const salida = c.captureStream(30).getVideoTracks()[0];
+      try { salida.contentHint = 'motion'; } catch (_) {}
+      return { track: salida, parar() { vivo = false; clearInterval(reloj); try { salida.stop(); } catch (_) {} v.srcObject = null; } };
+    }
+    // la pista de imagen que sale: la de la cámara o la protegida, según «Tu imagen»
+    function pistaImagen() {
+      if (!cam) return null;
+      if (imagen === 'natural') return cam.getVideoTracks()[0] || null;
+      if (!proc) proc = protegida();
+      return proc.track;
+    }
+    async function aplicaImagen() {
+      if (!cam) return;
+      const salida = pistaImagen(); if (!salida) return;
+      const s = pc && pc.getSenders().find((x) => x.track && x.track.kind === 'video');
+      if (s && s.track !== salida) { try { await s.replaceTrack(salida); } catch (_) {} }
+      if (imagen === 'natural' && proc) { proc.parar(); proc = null; }
+      $('#v-local').srcObject = new MediaStream([salida]); // te ves como te ve la otra persona
+    }
+    function eligeImagen(m) {
+      if (!(m in IMAGENES)) return; imagen = m; try { localStorage.setItem('gcom-imagen', m); } catch (_) {}
+      aplicaImagen(); pintaImagenes();
     }
     // el audio (con el cambio de voz) y la imagen, en el mismo flujo para que vayan sincronizados
     function agregaPistas() {
-      const flujo = new MediaStream(envio.getAudioTracks().concat(cam ? cam.getVideoTracks() : []));
+      const pi = pistaImagen(); if (pi) $('#v-local').srcObject = new MediaStream([pi]);
+      const flujo = new MediaStream(envio.getAudioTracks().concat(pi ? [pi] : []));
       flujo.getTracks().forEach((x) => pc.addTrack(x, flujo));
       if (video && !cam) { try { pc.addTransceiver('video', { direction: 'recvonly' }); } catch (_) {} } // sin cámara propia, pero sí la imagen de la otra persona
     }
@@ -123,7 +177,7 @@
         try {
           const p = s.getParameters(); if (!p.encodings || !p.encodings.length) p.encodings = [{}];
           p.encodings[0].maxBitrate = MAX_BPS_VIDEO; p.encodings[0].maxFramerate = 30; p.encodings[0].scaleResolutionDownBy = 1;
-          p.degradationPreference = 'maintain-resolution';
+          p.degradationPreference = 'maintain-framerate';
           await s.setParameters(p);
         } catch (_) {}
       }
@@ -200,7 +254,8 @@
       try { await microfono(); } catch (_) { di(t('Sin permiso para el micrófono.'), true); o.manda({ acto: 'colgar', id: idLlamada }); return termina('sin-medios', 1800); }
       if (video) { try { await camara(); } catch (_) { cam = null; o.aviso && o.aviso(t('Sin permiso para la cámara: la llamada sigue solo con voz.')); } }
       nuevaPc();
-      const flujo = new MediaStream(envio.getAudioTracks().concat(cam ? cam.getVideoTracks() : []));
+      const pi = pistaImagen(); if (pi) $('#v-local').srcObject = new MediaStream([pi]);
+      const flujo = new MediaStream(envio.getAudioTracks().concat(pi ? [pi] : []));
       flujo.getTracks().forEach((x) => pc.addTrack(x, flujo));
       await pc.setRemoteDescription({ type: 'offer', sdp: m.sdp });
       if (video) prefiereCodecs();
@@ -217,6 +272,7 @@
       clearInterval(reloj); reloj = null; clearInterval(sondeo); sondeo = null;
       if (pc) { try { pc.close(); } catch (_) {} pc = null; }
       for (const s of [mic, envio, cam]) if (s) s.getTracks().forEach((x) => x.stop());
+      if (proc) { proc.parar(); proc = null; }
       mic = null; envio = null; cam = null; nodo = null; if (ctx) { try { ctx.close(); } catch (_) {} ctx = null; }
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
@@ -234,14 +290,15 @@
     $('#ll-contestar').addEventListener('click', () => { contestar().catch(() => termina('fallo')); });
     $('#ll-silenciar').addEventListener('click', (e) => { const b = e.currentTarget; const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on)); for (const s of [envio, mic]) if (s) s.getAudioTracks().forEach((x) => { x.enabled = !on; }); });
     for (const b of document.querySelectorAll('#ll-voces [data-voz]')) b.addEventListener('click', () => eligeVoz(b.dataset.voz));
+    for (const b of document.querySelectorAll('#ll-imagenes [data-imagen]')) b.addEventListener('click', () => eligeImagen(b.dataset.imagen));
     // cámara encendida o apagada durante la videollamada; la otra persona lo sabe por el canal encriptado
     $('#ll-camara').addEventListener('click', () => { if (!cam) return; const on = !camaraOn(); cam.getVideoTracks().forEach((x) => { x.enabled = on; }); o.manda({ acto: 'camara', id: idLlamada, on }); pintaVideo(); });
     $('#ll-mini').addEventListener('click', () => pequena(true));
     $('#ll-volver').addEventListener('click', () => pequena(false));
     $('#ll-videos').addEventListener('click', () => { if (caja.classList.contains('mini')) pequena(false); });
     addEventListener('beforeunload', () => { if (estado !== 'libre') { try { o.manda({ acto: 'colgar', id: idLlamada }); } catch (_) {} } });
-    pintaVoces();
-    return { llamar, recibe, colgar, eligeVoz, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; } };
+    pintaVoces(); pintaImagenes();
+    return { llamar, recibe, colgar, eligeVoz, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
   }
   raiz.GuardianaLlamada = { crea, VOCES };
 })(typeof window !== 'undefined' ? window : globalThis);

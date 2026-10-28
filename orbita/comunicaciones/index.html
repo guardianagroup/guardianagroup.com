@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261028b">
+<link rel="stylesheet" href="app.css?v=20261028c">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -300,6 +300,16 @@
     </div>
     <small class="ll-voz-nota" id="ll-voz-nota" hidden>El cambio se hace en tu equipo, antes de encriptar: tu voz original no sale de aquí. Puede dificultar que alguien reconozca tu voz de oído, pero no oculta tu acento ni tu forma de hablar, ni está pensado para burlar sistemas de reconocimiento automático.</small>
   </div>
+  <!-- «Tu imagen» (dueño, 28 Oct 2026): la cara se protege en el equipo, antes de encriptar -->
+  <div class="ll-voces ll-imagenes" id="ll-imagenes" role="group" aria-labelledby="ll-imagenes-t" hidden>
+    <span class="ll-voces-t" id="ll-imagenes-t">Tu imagen</span>
+    <div class="ll-voces-botones">
+      <button type="button" data-imagen="natural" aria-pressed="true">Natural</button>
+      <button type="button" data-imagen="difuminada" aria-pressed="false">Difuminada</button>
+      <button type="button" data-imagen="mosaico" aria-pressed="false">Mosaico</button>
+    </div>
+    <small class="ll-voz-nota" id="ll-imagen-nota" hidden>El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.</small>
+  </div>
   <audio id="a-remoto" autoplay></audio>
   <div class="gc-llamada-botones" id="ll-botones">
     <div class="gc-llamada-boton"><button type="button" id="ll-silenciar" aria-pressed="false" aria-label="Silenciar"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><span>Silenciar</span></div>
@@ -350,7 +360,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261028p23"></script>
+<script src="/orbita/static/idioma.js?v=20261028p24"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -360,7 +370,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028a"></script>
-<script src="llamada.js?v=20261028b"></script>
+<script src="llamada.js?v=20261028c"></script>
 <script src="app.js?v=20261028d"></script>
 </body>
 </html>
