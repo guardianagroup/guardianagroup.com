@@ -331,3 +331,14 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .inicio .para li{display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 11px;border-radius:999px;border:1px solid rgba(156,195,228,.24);background:rgba(10,14,20,.72);color:#dbe9f4;font:500 12.5px/1.2 var(--texto)}
 .inicio .para svg{width:15px;height:15px;flex:none;color:var(--accent);stroke-width:1.7}
 #paso-inicio[hidden]~.para,.inicio:has(#paso-inicio[hidden]) .para{display:none}
+
+/* 27 Oct 2026, 21:40: los botones de NÚCLEO también en Comunicaciones (antes salían con el estilo del navegador).
+   Con :where() pesan lo mínimo: «Terminar» y los botones pequeños del chat conservan su forma. */
+:where(.boton){display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 18px;border-radius:999px;border:1px solid rgba(156,195,228,.28);background:rgba(10,14,20,.72);color:#dbe9f4;font:600 14px/1.2 var(--texto);white-space:nowrap;text-decoration:none;cursor:pointer;touch-action:manipulation;transition:background-color .15s,border-color .15s,color .15s,box-shadow .15s,filter .15s}
+:where(.boton):hover{background:rgba(156,195,228,.14);border-color:rgba(156,195,228,.55);color:#F4F6F8}
+:where(.boton):focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+:where(.boton):disabled{opacity:.5;cursor:default}
+:where(.boton.principal){background:var(--accent);border-color:var(--accent);color:var(--accent-fg);box-shadow:0 18px 60px -26px rgba(156,195,228,.55)}
+:where(.boton.principal):hover{background:var(--accent);border-color:var(--accent);color:var(--accent-fg);filter:brightness(1.07);box-shadow:0 18px 60px -22px rgba(156,195,228,.75)}
+:where(.boton.peligro){background:var(--campo);border-color:#2A3442;color:var(--alerta)}
+:where(.boton.peligro):hover{background:color-mix(in srgb,var(--alerta) 8%,var(--campo));border-color:var(--alerta);color:var(--fg)}

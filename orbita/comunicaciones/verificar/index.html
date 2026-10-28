@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><script src="/obras.js"></script><noscript><meta http-equiv="refresh" content="0;url=/obras.html"></noscript>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="theme-color" content="#06080C">
+<meta name="description" content="Comprueba un comprobante de custodia digital de GUARDIANA Comunicaciones: las dos firmas, las huellas de identidad y, si quieres, la huella SHA-256 de tu archivo. Todo se comprueba en tu navegador; nada sale de tu equipo.">
+<title>GUARDIANA · Verificar un comprobante</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="../app.css?v=20261027l">
+<link rel="stylesheet" href="../viaje.css?v=20261027a">
+<style>
+body.verificar{height:auto;min-height:100dvh;overflow:visible;display:block}
+.vf{box-sizing:border-box;width:min(760px,100%);margin:0 auto;padding:36px 16px 64px;display:grid;gap:22px}
+.vf-cab h1{margin:8px 0 0;font:300 clamp(28px,4vw,40px)/1.15 var(--texto);letter-spacing:-.015em;color:#F4F6F8}
+.vf-cab .t{margin:12px 0 0;max-width:660px;color:var(--muted);font-size:15px;line-height:1.6}
+.vf-zona{display:grid;justify-items:center;gap:8px;padding:30px 20px;border-radius:18px;border:1.5px dashed rgba(156,195,228,.35);background:rgba(12,18,26,.6);text-align:center;transition:border-color .15s,background .15s}
+.vf-zona.encima{border-color:var(--accent);background:rgba(156,195,228,.08)}
+.vf-zona svg{width:34px;height:34px;color:var(--accent);stroke-width:1.6}
+.vf-zona b{font:500 15px/1.4 var(--texto);color:#F4F6F8}
+.vf-zona span{font-size:12.5px;color:var(--muted-2)}
+.vf-error{margin:0;padding:12px 14px;border-radius:12px;border:1px solid rgba(224,122,108,.5);background:rgba(224,122,108,.08);color:#F6C6BE;font-size:13.5px}
+.vf-resultado{display:grid;gap:18px}
+.vf-acciones{display:flex;justify-content:flex-end;gap:8px}
+.vf-archivo,.vf-como{padding:18px 20px;border-radius:16px;border:1px solid rgba(156,195,228,.14);background:rgba(12,18,26,.6)}
+.vf-archivo h2,.vf-como h2{margin:0 0 6px;font:600 16px/1.35 var(--texto);color:#F4F6F8}
+.vf-archivo .t{margin:0 0 14px;color:var(--muted);font-size:13.5px;line-height:1.55}
+.vf-barra{height:6px;margin-top:14px;border-radius:3px;background:#18202A;overflow:hidden}
+.vf-barra i{display:block;height:100%;width:0;border-radius:3px;background:var(--accent)}
+.vf-arch-res{margin:14px 0 0;padding:12px 14px;border-radius:12px;display:grid;gap:4px;font-size:13px}
+.vf-arch-res.bien{border:1px solid rgba(108,203,165,.45);background:rgba(108,203,165,.07)}
+.vf-arch-res.mal{border:1px solid rgba(224,122,108,.5);background:rgba(224,122,108,.08)}
+.vf-arch-res b{font-weight:600}.vf-arch-res.bien b{color:var(--ok)}.vf-arch-res.mal b{color:var(--alerta)}
+.vf-arch-res span{font:400 12px/1.55 var(--mono);color:var(--muted);word-break:break-all}
+.vf-como ul{margin:6px 0 0;padding-left:18px;display:grid;gap:8px;color:var(--muted);font-size:13.5px;line-height:1.6}
+.vf-como b{color:#DCE5ED;font-weight:600}
+.vf-como pre{margin:14px 0 0;padding:12px 14px;border-radius:10px;background:#0A0F15;border:1px solid var(--line);font:400 12px/1.75 var(--mono);color:#DCE5ED;overflow-x:auto}
+@media (max-width:560px){.vf{padding-top:24px}.barra .barra-t{display:none}}
+</style>
+</head>
+<body class="verificar">
+<!-- GUARDIANA · Comunicaciones · verificar un comprobante de custodia digital (27 Oct 2026). Todo ocurre en el navegador:
+     el comprobante y el archivo no se envían a ningún servidor (esta página no tiene a dónde mandarlos: connect-src 'self'). -->
+<header class="barra">
+  <a class="marca" href="/orbita/comunicaciones/" aria-label="Volver a Comunicaciones"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Comunicaciones</span></a><b class="barra-t">Custodia digital</b>
+  <span style="margin-left:auto"></span>
+  <div class="idiomas" role="group" aria-label="Idioma" translate="no"></div>
+</header>
+<main class="vf">
+  <section class="vf-cab">
+    <p class="vj-k">Comprobante de custodia digital</p>
+    <h1>Verificar un comprobante</h1>
+    <p class="t">Comprueba las dos firmas de un comprobante de GUARDIANA Comunicaciones y, si quieres, que tu archivo es exactamente el que se envió. Todo se hace en tu navegador: ni el comprobante ni el archivo salen de tu equipo.</p>
+  </section>
+  <section class="vf-zona" id="zona-comp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+    <b>Arrastra aquí el comprobante (.json)</b>
+    <span>o bien</span>
+    <button type="button" class="boton principal" id="elige-comp">Elegir comprobante</button>
+    <input type="file" id="f-comp" accept=".json,application/json" hidden>
+  </section>
+  <p class="vf-error" id="error" role="alert" hidden></p>
+  <section class="vf-resultado" id="resultado" hidden>
+    <div class="cu-cuerpo" id="cuerpo"></div>
+    <div class="vf-acciones" id="acciones" hidden><button type="button" class="boton principal" id="pdf">Descargar PDF</button></div>
+    <div class="vf-archivo" id="zona-arch">
+      <h2>¿Es el mismo archivo?</h2>
+      <p class="t">Elige el archivo: tu navegador calcula su huella SHA-256 y la compara con la del comprobante. El archivo no se envía a ningún sitio.</p>
+      <button type="button" class="boton" id="elige-arch">Comprobar el archivo</button>
+      <input type="file" id="f-arch" hidden>
+      <div class="vf-barra" id="arch-barra" hidden><i></i></div>
+      <div class="vf-arch-res" id="arch-res" hidden></div>
+    </div>
+  </section>
+  <section class="vf-como">
+    <h2>Cómo se comprueba</h2>
+    <ul>
+      <li><b>Las dos firmas.</b> Cada equipo firma el registro con su clave de identidad (ECDSA P-256 sobre SHA-256). Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.</li>
+      <li><b>Las identidades.</b> La huella de identidad de cada equipo es el SHA-256 de sus claves públicas, y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.</li>
+      <li><b>El archivo.</b> La huella SHA-256 identifica su contenido exacto. También puedes calcularla con las herramientas de tu sistema:</li>
+    </ul>
+    <pre translate="no">Windows (PowerShell)   Get-FileHash archivo -Algorithm SHA256
+macOS                  shasum -a 256 archivo
+Linux                  sha256sum archivo</pre>
+  </section>
+</main>
+<script src="/orbita/static/idioma.js?v=20261027p20"></script>
+<script src="../sha256.js?v=20261027a"></script>
+<script src="../viaje.js?v=20261027a"></script>
+<script src="verificar.js?v=20261027a"></script>
+</body>
+</html>
