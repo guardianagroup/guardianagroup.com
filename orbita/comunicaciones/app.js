@@ -1009,19 +1009,21 @@
   // llamadas que tiene más cerca: Miami para América, Núremberg para Europa (la otra persona elige el suyo desde su lado; los
   // dos servidores se pasan la llamada entre ellos). Se mide al abrir la página y cada hora; si Miami no responde, no tiene
   // llamadas o no está claramente más cerca, todo sigue por Núremberg, como hasta ahora.
-  let iceAm = null;
+  let iceAm = null, reintentoAm = null;
   async function eligeServidorLlamadas() {
     try {
       if (LOCAL || !window.GuardianaRele || !GuardianaRele.iceDe || GuardianaRele.PROPIO) return;
       const am = (GuardianaRele.MOTORES || [])[1]; if (!am) return;
-      const r = await GuardianaRele.iceDe(am, 6000);
+      const r = await GuardianaRele.iceDe(am, 8000);
       iceAm = r && r.ms > 0 ? r : null;
     } catch (_) { iceAm = null; }
+    // si no respondió (red ocupada al abrir, el móvil cambiando de red…), otra vez a los 3 minutos, no a la hora
+    if (!iceAm && !reintentoAm) reintentoAm = setTimeout(() => { reintentoAm = null; eligeServidorLlamadas(); }, 180000);
   }
   // el servidor que lleva la llamada se dice en VIGILANCIA y al tocar «Conexión» (dueño, 14:17: miraba si iba por Alemania)
   let iceUsado = '';
   const iceCercano = () => {
-    const prin = R ? R.latencia : null;
+    const prin = R ? (R.latenciaMin != null ? R.latenciaMin : R.latencia) : null;
     if (iceAm && iceAm.caduca * 1000 > Date.now() + 120000 && prin != null && iceAm.ms + 25 < prin) { iceUsado = 'am'; return iceAm.ice; }
     iceUsado = LOCAL || (window.GuardianaRele && GuardianaRele.PROPIO) ? '' : 'eu';
     return R ? R.ice : [];
