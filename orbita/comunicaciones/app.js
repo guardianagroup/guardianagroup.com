@@ -151,8 +151,11 @@
   }
   // Invitación blindada: solo por enlace o QR, con la semilla entera (256 bits) en el fragmento «#b=»: el navegador no la
   // manda a ningún servidor y el relé no guarda ningún sobre. Se guarda aquí hasta que la otra persona entre o se termine.
+  const esMovil = () => matchMedia('(max-width: 760px)').matches;
+  async function borraAnteriores(salvo) { for (const x of [...CONVS.values()]) if (x.id !== salvo) { try { await destruye(x, true); } catch (_) {} } }
   async function creaInvitacionB() {
     if (!R.abierto) { aviso(T('Sin conexión: espera un momento.')); return; }
+    if (esMovil()) await borraAnteriores();
     if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; }
     if (!caben()) return;
     await limpiaInvitaciones();
@@ -195,6 +198,7 @@
     if (B && !C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return false; }
     const d = B ? await C.B.deSemilla(semilla) : await C.deSemilla(semilla);
     if (CONVS.has(d.sala)) { abreConv(d.sala); return true; }
+    if (esMovil()) await borraAnteriores(d.sala);
     if (!caben()) return false;
     const c = convNueva(d.sala, semilla, 'acepta', modo); c.num = siguienteNum();
     await preparaConv(c); await guardaConv(c);
@@ -301,7 +305,7 @@
       else if (!resp) await presenta(c, null);
       if (nueva) { if (c.codigo) R.retira(c.codigo); c.codigo = null; clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Conversación establecida: encriptada de extremo a extremo. Comprueba el número de seguridad con la otra persona cuando puedas.'); if (ACTUAL === c.id) abreConv(c.id); else avisoConv(c, T('«{n}» ya está lista: la otra persona ha entrado.')); }
       if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
-      if (c.vaciarPendiente) { c.vaciarPendiente = false; enviaControl(c, { tipo: 'vaciar' }); guardaConv(c); }
+      mandaVaciar(c);
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
     } catch (e) { console.warn('presentación', e); }
   }
@@ -397,7 +401,7 @@
       else await presentaB(c, null);
       if (nueva) { clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Sesión blindada establecida. Si queréis, comparad el número de seguridad en «⋯» → «Seguridad y verificación».'); if (ACTUAL === c.id) abreConv(c.id); }
       if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
-      if (c.vaciarPendiente) { c.vaciarPendiente = false; enviaControl(c, { tipo: 'vaciar' }); guardaConv(c); }
+      mandaVaciar(c);
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
     } catch (e) { console.warn('presentación blindada', e); }
   }
@@ -504,7 +508,10 @@
     pintaMensaje(c, m); actualizaUltimo(c, m);
     enviaCola(c);
   }
+  // «Borrar el chat» pendiente: sale en cuanto la sesión con la otra persona está lista (si no se pudo mandar, se queda pendiente)
+  function mandaVaciar(c) { if (c && c.vaciarPendiente && enLinea(c) && enviaControl(c, { tipo: 'vaciar' })) { c.vaciarPendiente = false; guardaConv(c); } }
   async function enviaCola(c) {
+    mandaVaciar(c);
     if (c.enviando) return; c.enviando = true;
     try {
       while (c.cola.length && enLinea(c) && puedeEnviar(c)) {
@@ -1853,11 +1860,17 @@
     addEventListener('guardiana-idioma', () => { pintaLista(); const c = CONVS.get(ACTUAL); if (c) pintaCabecera(c); });
     // sesión blindada
     // el enlace se copia solo al crear la invitación: se pide el portapapeles dentro del mismo toque, con el enlace por llegar
-    $('#nueva-blindada').addEventListener('click', () => {
+    // En el móvil, una sola conversación: crear otra borra la anterior (en los dos equipos), con una pregunta antes si ya había
+    // una conversación de verdad (dueño, 28 Oct 2026, 15:58: «en el móvil estas sesiones antiguas no tienen que aparecer para
+    // nada… siempre lo nuevo; lo anterior se borra todo»)
+    $('#nueva-blindada').addEventListener('click', () => { if (esMovil() && vivas().some((x) => x.huella)) { abreHoja('h-nueva'); return; } nuevaBlindadaConCopia(); });
+    $('#nueva-no').addEventListener('click', () => cierraHoja('h-nueva'));
+    $('#nueva-si').addEventListener('click', () => { cierraHoja('h-nueva'); nuevaBlindadaConCopia(); });
+    function nuevaBlindadaConCopia() {
       let dale = null; const listo = new Promise((r) => { dale = r; });
       try { if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) navigator.clipboard.write([new ClipboardItem({ 'text/plain': listo.then((c) => { if (!c) throw new Error('sin enlace'); return new Blob([enlaceB(c)], { type: 'text/plain' }); }) })]).then(() => listo.then((c) => { if (c) { c.copiado = true; if (ACTUAL === c.id) muestraEnlace(c); } })).catch(() => {}); } catch (_) {}
       creaInvitacionB().then((c) => dale(c || null)).catch(() => dale(null));
-    });
+    }
     $('#vaciar').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (!c) return; $('#vaciar-nota').hidden = false; abreHoja('h-vaciar'); });
     $('#vaciar-no').addEventListener('click', () => cierraHoja('h-vaciar'));
     $('#vaciar-si').addEventListener('click', async () => { cierraHoja('h-vaciar'); await vacia(CONVS.get(ACTUAL)); });
@@ -1910,6 +1923,8 @@
     avisoInterno();
     setTimeout(eligeServidorLlamadas, 4000); setInterval(eligeServidorLlamadas, 3600 * 1000);
     await cargaConvs();
+    // en el móvil, de antes solo queda la más reciente (15:58)
+    if (esMovil() && vivas().length > 1) { const xs = vivas().sort((a, b) => (b.ultimo || b.creado || 0) - (a.ultimo || a.creado || 0)); for (const x of xs.slice(1)) { try { await destruye(x, true); } catch (_) {} } pintaLista(); }
     try { if (sessionStorage.getItem('gcom-fin') === '1') { muestraFin(); return; } } catch (_) {}
     if (esInvitado()) document.body.classList.add('modo-invitado');
     if (/#[ib]=/.test(location.hash)) { const ok = await preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }

@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261028y">
+<link rel="stylesheet" href="app.css?v=20261029a">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -21,7 +21,7 @@
      cifrados que no puede leer. -->
 <!-- Final del invitado (dueño, 28 Oct 2026, 15:50: «no quiero que se pueda volver a la web… que se destruya y no quede ningún tipo
      de rastro… eso el invitado; el que ha creado el chat, sí») -->
-<div class="fin-invitado" id="fin-invitado" hidden role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><h2>Conversación terminada</h2><p>Se ha borrado todo lo de esta conversación en este equipo.</p><p class="suave">Ya puedes cerrar esta pestaña.</p></div>
+<div class="fin-invitado" id="fin-invitado" hidden role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><h2>Conversación terminada</h2><p>Se han borrado los datos de esta conversación en este equipo.</p><p class="suave">Lo que se haya descargado fuera de GUARDIANA puede seguir en el dispositivo. Ya puedes cerrar esta pestaña.</p></div>
 <header class="barra" id="barra">
   <a class="marca" href="/orbita/" id="volver" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Inicio</span></a><b class="barra-t">Comunicaciones</b>
   <span class="rele" id="rele"><i></i><span id="reletxt">Desconectado</span></span>
@@ -90,7 +90,7 @@
       <div class="enlace-fila"><input class="campo" id="enlace-b" readonly translate="no" spellcheck="false" aria-label="Enlace de la invitación"><button type="button" class="boton principal" id="enlace-copiar">Copiar enlace</button><button type="button" class="boton" id="enlace-compartir" hidden>Compartir enlace</button></div>
       <details class="qr-plegado"><summary>Mostrar el código QR (para abrirlo con un móvil)</summary><div class="qr" id="enlace-qr" role="img" aria-label="Código QR de la invitación"></div></details>
       <p class="t estado" id="enlace-estado" role="status">Esperando a que la otra persona abra el enlace…</p>
-      <p class="t nota">Cuando entre, podréis hablar enseguida. Si queréis, comparad después el número de seguridad en «⋯» → «Seguridad y verificación».</p>
+      <p class="t nota">Opcional: podéis comparar el número de seguridad dentro del chat.</p>
       <div class="fila centro"><button type="button" class="boton" id="enlace-cancelar">Cancelar la invitación</button></div>
       </div>
       <div class="enlace-espera" id="enlace-espera" hidden>
@@ -339,6 +339,15 @@
 
 <!-- El nombre de cada conversación (agencia, ronda 74, bloque J): un alias que solo ve quien lo pone, en este navegador -->
 <!-- «Borrar chat» (dueño, 28 Oct 2026, 15:13: «se borraría todo el chat sin poderlo recuperar de ninguna forma… Esa opción es muy importante») -->
+<!-- En el móvil, una sola conversación: crear otra borra la actual (15:58) -->
+<div class="gc-hoja" id="h-nueva" role="dialog" aria-modal="true" aria-labelledby="h-nueva-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-nueva-t">¿Empezar una conversación nueva?</h2>
+    <p class="t">La conversación actual se borra en los dos equipos.</p>
+    <div class="fila"><button type="button" class="boton" id="nueva-no">Cancelar</button><button type="button" class="boton principal" id="nueva-si">Empezar</button></div>
+  </div>
+</div>
 <div class="gc-hoja" id="h-vaciar" role="dialog" aria-modal="true" aria-labelledby="h-vaciar-t">
   <div class="gc-hoja-caja caja">
     <div class="gc-asa"></div>
@@ -450,7 +459,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261028p43"></script>
+<script src="/orbita/static/idioma.js?v=20261028p45"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -461,6 +470,6 @@
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028b"></script>
 <script src="llamada.js?v=20261028q"></script>
-<script src="app.js?v=20261028w"></script>
+<script src="app.js?v=20261029a"></script>
 </body>
 </html>

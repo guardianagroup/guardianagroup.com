@@ -753,3 +753,14 @@ body.modo-invitado .barra,body.modo-invitado #lista,body.modo-invitado #volver-l
 .fin-invitado svg{width:46px;height:46px;fill:none;stroke:#9CC3E4;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:6px}
 .fin-invitado h2{font:600 24px/1.25 'IBM Plex Sans',system-ui,sans-serif;margin:0}.fin-invitado p{margin:0;max-width:360px;line-height:1.45}.fin-invitado .suave{color:#9fb3c4}
 body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
+/* Agencia, ronda 75 (ChatGPT y GPT-6 Astra), en el móvil: abajo, tres controles a la vez (clip, campo y micrófono, que pasa a
+   «Enviar» al escribir; la papelera junto al micrófono solo con el campo vacío); sin «Multas» en la barra de Comunicaciones; el
+   globo más pequeño; «Aceptar» arriba y «No, gracias» debajo, a lo ancho */
+.gc-compositor:not(.con-texto):not(.grabando-ya) #enviar{display:none}
+.gc-compositor.con-texto #vaciar,.gc-compositor.grabando-ya #vaciar{display:none}
+@media (max-width:760px){.barra .multas-b{display:none}#inicio{--g-red:120px}.paso.aceptar .fila{flex-direction:column-reverse;align-items:stretch;width:100%;max-width:340px}.paso.aceptar .boton{width:100%;min-height:52px}.enlace-espera .fila{flex-direction:column;align-items:stretch;width:100%;max-width:340px;gap:10px}.enlace-espera .boton{width:100%;min-height:52px}}
+/* En el móvil, una sola conversación y sin volver a ninguna anterior (dueño, 28 Oct 2026, 16:01: «ahí hay un botón que me dice
+   volver a tus conversaciones… no se puede volver a ver ninguna conversación»): sin «Tus conversaciones», sin la lista y sin «‹»
+   en la conversación; para salir, «⋯» → «Terminar». La espera de la invitación, sin el globo */
+@media (max-width:760px){#volver-lista,#lista,#cvolver{display:none!important}}
+#inicio.con-invitacion>.red-nucleo{display:none}
