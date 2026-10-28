@@ -1433,6 +1433,8 @@
     "Entregado": ["Delivered", "Entregue"],
     "Enviado": ["Sent", "Enviado"],
     "Enviar": ["Send", "Enviar"],
+    "Llamada encriptada": ["Encrypted call", "Chamada criptografada"],
+    "Videollamada encriptada": ["Encrypted video call", "Videochamada criptografada"],
     "Comprobante válido": ["Valid receipt", "Comprovante válido"],
     "Verificar otro comprobante": ["Verify another receipt", "Verificar outro comprovante"],
     "¿Tienes el archivo que se envió?": ["Do you have the file that was sent?", "Você tem o arquivo que foi enviado?"],
