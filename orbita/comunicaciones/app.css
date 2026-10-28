@@ -505,3 +505,107 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .gc-llamada.con-video:not(.mini) .gc-llamada-tiempo::before{content:'·';margin:0 8px;color:var(--muted)}
 .gc-llamada.con-video:not(.mini) .gc-llamada-paso{flex-basis:100%;min-height:0;font-size:12.5px;text-align:center}
 .gc-llamada.con-video:not(.mini) .gc-llamada-paso:empty{display:none}
+/* 28 Oct 2026, 13:29 (dueño: «lo que he hecho yo a un lado, lo que ha hecho él… como WhatsApp, Signal, Telegram»): cada llamada,
+   en una burbuja al lado de quien llamó: icono con flecha (saliente ↗, entrante ↙), resultado, duración y volver a llamar */
+.gc-mensajes>li.gc-llam-li{display:flex;flex-direction:column}
+.gc-burbuja.gc-llam{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;column-gap:11px;row-gap:0;padding:9px 9px 6px 10px;min-width:min(250px,82%);max-width:min(82%,360px)}
+.gc-burbuja.gc-llam::after{display:none}
+.gc-llam-ico{position:relative;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(156,195,228,.13);color:var(--accent)}
+.gc-llam-ico svg{width:18px;height:18px}
+.gc-llam-ico svg.flecha{position:absolute;right:-3px;bottom:-3px;width:16px;height:16px;padding:2.5px;border-radius:50%;background:#0C1118;border:1px solid var(--line);color:#5CC98A;stroke-width:2.2}
+.gc-llam:not(.hecha) .gc-llam-ico svg.flecha{color:var(--muted)}
+.gc-llam.perdida .gc-llam-ico,.gc-llam.mal .gc-llam-ico{background:rgba(224,122,108,.14);color:#E07A6C}
+.gc-llam.perdida .gc-llam-ico svg.flecha{color:#E07A6C}
+.gc-llam-txt{display:grid;gap:2px;min-width:0}
+.gc-llam-txt b{font:600 14px/1.3 var(--texto);color:var(--fg)}
+.gc-llam.perdida .gc-llam-txt b{color:#E9998D}
+.gc-llam-txt small{font:400 12.5px/1.3 var(--texto);color:var(--muted);font-variant-numeric:tabular-nums}
+.gc-llam-otra{all:unset;box-sizing:border-box;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--accent);background:rgba(156,195,228,.10);transition:background .15s}
+.gc-llam-otra:hover{background:rgba(156,195,228,.22)}
+.gc-llam-otra:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.gc-llam-otra svg{width:17px;height:17px}
+.gc-llam .gc-meta{grid-column:1/-1;justify-self:end;float:none;margin:3px 0 -1px}
+/* «escribiendo…» (dueño, 28 Oct 2026, 13:29: «que salgan los puntitos esos como que se está escribiendo»): una burbuja suya con tres
+   puntos al final del chat; «grabando audio» con el micrófono. Viaja dentro del canal encriptado. */
+.gc-mensajes>li.gc-escribiendo{display:flex;flex-direction:column;margin-top:8px}
+.gc-escribiendo .gc-burbuja{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;min-height:38px;animation:gcAparece .18s ease-out}
+.gc-escribiendo .gc-burbuja::after{display:none}
+.gc-puntos{display:inline-flex;gap:5px;align-items:center;height:10px}
+.gc-puntos i{width:7px;height:7px;border-radius:50%;background:#A9B3BE;opacity:.35;animation:gcPunto 1.2s infinite ease-in-out}
+.gc-puntos i:nth-child(2){animation-delay:.16s}.gc-puntos i:nth-child(3){animation-delay:.32s}
+@keyframes gcPunto{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+@keyframes gcAparece{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.gc-escribiendo small{font:400 12.5px/1.2 var(--texto);color:var(--muted)}
+.gc-escribiendo .gc-burbuja>svg{width:15px;height:15px;color:#E07A6C}
+/* 28 Oct 2026, 13:37 (dueño: «el chat se sale de la ventana y queda como cortado en la parte de arriba… hay que dejar unos márgenes,
+   tanto por arriba como por abajo, para que haya claridad visual»): los mensajes se desvanecen antes de llegar al borde, con aire
+   arriba y abajo, y en pantallas anchas la columna de lectura se centra (como mucho 900 px) */
+.conv .gc-mensajes{padding:24px max(18px,calc((100% - 900px)/2)) 20px;scroll-padding:24px 0 20px;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 16px),transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 20px,#000 calc(100% - 16px),transparent 100%)}
+/* agencia, ronda 74 (ChatGPT y Gemini): al recibir, las voces plegadas en una píldora «Tu voz: Natural ▾»; el tiempo, solo con la
+   llamada contestada; la calidad, corta y con un punto de color (verde, ámbar o coral); los datos técnicos, al tocarla */
+.gc-llamada-tiempo[hidden]{display:none!important}
+.gc-llamada.entrando:not(.voz-abierta) .ll-ajustes{display:none!important}
+.ll-voz-pill{all:unset;box-sizing:border-box;align-self:center;display:inline-flex;align-items:center;gap:8px;margin:14px auto 6px;padding:9px 16px;min-height:40px;border-radius:999px;border:1px solid rgba(156,195,228,.28);background:rgba(12,17,24,.72);color:#DCE5ED;font:500 14px/1.2 var(--texto);cursor:pointer;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.ll-voz-pill[hidden]{display:none}
+.ll-voz-pill svg{width:16px;height:16px;color:var(--accent)}
+.ll-voz-pill i{width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .2s;margin-left:2px}
+.gc-llamada.voz-abierta .ll-voz-pill i{transform:translateY(2px) rotate(-135deg)}
+.ll-voz-pill:hover{border-color:rgba(156,195,228,.55)}
+.ll-voz-pill:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.gc-llamada-estado{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gc-llamada-estado[data-nivel]::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:1px;background:#5CC98A}
+.gc-llamada-estado[data-nivel="media"]::before{background:#F0C77F}
+.gc-llamada-estado[data-nivel="baja"]::before{background:#E07A6C}
+/* agencia, ronda 74: tocar el nombre o el candado abre la seguridad; el menú «⋯» solo en el móvil */
+.conv .gc-quien,.conv .gc-cabecera .gc-avatar{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.conv{position:relative}
+.gc-mas-boton{display:none}
+.gc-mas-boton svg circle{fill:currentColor;stroke:none}
+.gc-menu{position:absolute;top:calc(env(safe-area-inset-top) + 56px);right:8px;z-index:40;display:grid;gap:2px;min-width:250px;padding:6px;border-radius:16px;background:#0C1118;border:1px solid var(--line);box-shadow:0 22px 60px -14px rgba(0,0,0,.85);animation:gcAparece .14s ease-out}
+.gc-menu[hidden]{display:none}
+.gc-menu button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;min-height:48px;padding:10px 12px;border-radius:11px;font:500 15px/1.3 var(--texto);color:var(--fg);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gc-menu button[hidden]{display:none}
+.gc-menu button:hover,.gc-menu button:focus-visible{background:rgba(156,195,228,.10)}
+.gc-menu button svg{width:19px;height:19px;color:var(--muted);flex:none}
+.gc-menu button.peligro,.gc-menu button.peligro svg{color:#E07A6C}
+.gc-menu .interruptor-mini{margin-left:auto;width:30px;height:17px;border-radius:999px;background:var(--line);position:relative;flex:none;transition:background .2s}
+.gc-menu .interruptor-mini::after{content:'';position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:var(--muted);transition:transform .2s,background .2s}
+.gc-menu [aria-checked="true"] .interruptor-mini{background:var(--accent)}
+.gc-menu [aria-checked="true"] .interruptor-mini::after{transform:translateX(13px);background:#06080C}
+/* la tira para activar los avisos (solo ordenador, una vez) */
+.gc-avisos{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:9px 16px;border-bottom:1px solid var(--line);background:rgba(156,195,228,.06);color:#DCE5ED;font:400 13.5px/1.45 var(--texto)}
+.gc-avisos[hidden]{display:none}
+.gc-avisos>svg{width:18px;height:18px;color:var(--accent);flex:none}
+.gc-avisos>span{flex:1 1 320px;min-width:0}
+.gc-avisos .boton{min-height:34px;padding:6px 14px;font-size:13.5px}
+.gc-avisos-no{all:unset;cursor:pointer;padding:6px 10px;border-radius:999px;color:var(--muted);font:500 13.5px/1.2 var(--texto)}
+.gc-avisos-no:hover,.gc-avisos-no:focus-visible{color:var(--fg);background:rgba(156,195,228,.10)}
+/* el móvil: una sola fila (candado, nombre y estado, llamar, videollamada y «⋯»); sin la franja repetida; sin «Multas» ni el idioma
+   dentro de la conversación (siguen en el inicio) */
+@media (max-width:760px){
+  .conv .gc-cabecera .discreto,.conv .gc-cabecera #escudo,.conv .gc-cabecera #terminar{display:none}
+  .conv .gc-cabecera .gc-mas-boton{display:grid;width:40px}
+  .conv .gc-cabecera .gc-llamar-boton{width:40px}
+  .conv .gc-cabecera{gap:4px}
+  .conv .radio{display:none!important}
+  body.en-conv .barra .multas-b,body.en-conv .barra .idiomas{display:none}
+  .gc-avisos{padding:8px 12px}
+}
+/* el iPhone acerca la página si el campo tiene menos de 16 px al tocarlo: todos los campos, a 16 px en pantallas táctiles */
+@media (pointer:coarse){.gc-campo,.campo:not(.codigo-campo){font-size:16px}}
+/* colores de los resúmenes (agencia, ronda 74): perdida y rechazada en coral; cancelada y sin respuesta en gris; comunicando,
+   interrumpida y sin permiso en ámbar; contestada con la flecha en verde */
+.gc-llam.gris .gc-llam-ico{background:rgba(169,179,190,.12);color:#A9B3BE}
+.gc-llam.aviso .gc-llam-ico{background:rgba(240,199,127,.13);color:#F0C77F}
+.gc-llam.rechazada .gc-llam-ico{background:rgba(224,122,108,.14);color:#E07A6C}
+.gc-llam.mal .gc-llam-ico{background:rgba(240,199,127,.13);color:#F0C77F}
+/* aviso dentro de Instagram, Facebook o TikTok (agencia, ronda 74) */
+.interno{display:grid;gap:6px;padding:12px 16px;border-bottom:1px solid rgba(240,199,127,.35);background:rgba(240,199,127,.08);color:#E8ECF1;font:400 14px/1.45 var(--texto)}
+.interno[hidden]{display:none}
+.interno b{color:#F0C77F;font-weight:600}
+.interno-botones{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.interno-botones .boton{min-height:40px}
+.interno-no{all:unset;cursor:pointer;padding:8px 12px;border-radius:999px;color:var(--muted);font:500 14px/1.2 var(--texto)}
+.interno-no:hover,.interno-no:focus-visible{color:var(--fg);background:rgba(156,195,228,.10)}
+/* la tableta: VIGILANCIA cerrada (agencia, ronda 74: «estorba si aparece fija»); la misma información sigue en el escudo */
+@media (pointer:coarse) and (max-width:1400px){.conv .cuerpo{grid-template-columns:minmax(0,1fr)}.conv .vigila{display:none}}
