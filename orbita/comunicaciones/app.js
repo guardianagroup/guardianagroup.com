@@ -1895,6 +1895,7 @@
           for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) img.addEventListener(ev, () => img.classList.remove('ver'));
           img.addEventListener('contextmenu', (e) => e.preventDefault());
           li.classList.add('foto'); li.append(img);
+          { const i = fs.indexOf(f), bt = document.createElement('button'); bt.type = 'button'; bt.className = 'tapar-b'; bt.textContent = T('Tapar'); bt.title = T('Tapar partes de la foto'); bt.addEventListener('click', (e) => { e.stopPropagation(); abreTapar(i, img); }); li.append(bt); }
         } else {
           const ico = document.createElement('span'); ico.className = 'ico'; ico.setAttribute('aria-hidden', 'true');
           const ext = /\.([A-Za-z0-9]{1,5})$/.exec(f.name || ''); ico.textContent = ext ? ext[1].toUpperCase() : '•';
@@ -1916,6 +1917,36 @@
       const c = CONVS.get(p.conv); if (c && c.id === ACTUAL) enviaArchivos(c, fs);
     });
     $('#envio-no').addEventListener('click', () => { cierraHoja('h-envio'); sueltaEnvio(); });
+    // «Tapar»: un mosaico de bloques grandes donde pasa el dedo (no se puede deshacer en la foto que se envía)
+    let taparIdx = -1, taparImg = null, taparOrig = null, taparMos = null, dibuja = null;
+    async function abreTapar(i, img) {
+      const f = porEnviar && porEnviar.fs[i]; if (!f) return;
+      let bmp; try { bmp = await createImageBitmap(f, { imageOrientation: 'from-image' }); } catch (_) { aviso(T('Esta foto no se puede editar aquí.')); return; }
+      const k = Math.min(1, 2560 / Math.max(bmp.width, bmp.height)), w = Math.round(bmp.width * k), h = Math.round(bmp.height * k);
+      const cv = $('#tapar-cv'); cv.width = w; cv.height = h; cv.getContext('2d').drawImage(bmp, 0, 0, w, h);
+      taparOrig = document.createElement('canvas'); taparOrig.width = w; taparOrig.height = h; taparOrig.getContext('2d').drawImage(bmp, 0, 0, w, h);
+      const b = Math.max(14, Math.round(Math.max(w, h) / 36)), peq = document.createElement('canvas'); peq.width = Math.max(1, Math.round(w / b)); peq.height = Math.max(1, Math.round(h / b)); peq.getContext('2d').drawImage(bmp, 0, 0, peq.width, peq.height);
+      taparMos = document.createElement('canvas'); taparMos.width = w; taparMos.height = h; const m = taparMos.getContext('2d'); m.imageSmoothingEnabled = false; m.drawImage(peq, 0, 0, w, h);
+      if (bmp.close) bmp.close();
+      taparIdx = i; taparImg = img; $('#tapar').hidden = false;
+    }
+    const cierraTapar = () => { $('#tapar').hidden = true; taparIdx = -1; taparOrig = null; taparMos = null; dibuja = null; };
+    const puntoTapar = (e) => { const cv = $('#tapar-cv'), r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) * cv.width / r.width, y: (e.clientY - r.top) * cv.height / r.height }; };
+    const tapaEn = (p) => { const cv = $('#tapar-cv'), R = Math.max(22, Math.round(Math.max(cv.width, cv.height) / 16)), ctx = cv.getContext('2d'); ctx.save(); ctx.beginPath(); ctx.arc(p.x, p.y, R, 0, Math.PI * 2); ctx.clip(); ctx.drawImage(taparMos, 0, 0); ctx.restore(); return R; };
+    $('#tapar-cv').addEventListener('pointerdown', (e) => { if (!taparMos) return; e.preventDefault(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {} const p = puntoTapar(e); tapaEn(p); dibuja = p; });
+    $('#tapar-cv').addEventListener('pointermove', (e) => { if (!dibuja || !taparMos) return; const p = puntoTapar(e), d = Math.hypot(p.x - dibuja.x, p.y - dibuja.y), R = tapaEn(p), n = Math.ceil(d / (R / 2)); for (let j = 1; j < n; j++) tapaEn({ x: dibuja.x + (p.x - dibuja.x) * j / n, y: dibuja.y + (p.y - dibuja.y) * j / n }); dibuja = p; });
+    for (const ev of ['pointerup', 'pointercancel', 'pointerleave']) $('#tapar-cv').addEventListener(ev, () => { dibuja = null; });
+    $('#tapar-otra').addEventListener('click', () => { if (taparOrig) $('#tapar-cv').getContext('2d').drawImage(taparOrig, 0, 0); });
+    $('#tapar-no').addEventListener('click', cierraTapar);
+    $('#tapar-si').addEventListener('click', async () => {
+      const i = taparIdx, img = taparImg; if (i < 0 || !porEnviar) { cierraTapar(); return; }
+      const blob = await new Promise((r) => $('#tapar-cv').toBlob(r, 'image/jpeg', 0.92)); if (!blob) { cierraTapar(); return; }
+      const viejo = porEnviar.fs[i], base = String((viejo && viejo.name) || 'foto').replace(/\.[a-z0-9]{2,5}$/i, '') || 'foto';
+      porEnviar.fs[i] = new File([blob], base + '.jpg', { type: 'image/jpeg', lastModified: Date.now() });
+      if (img) { const u = URL.createObjectURL(porEnviar.fs[i]); porEnviar.urls.push(u); img.src = u; const s = img.parentElement && img.parentElement.querySelector('small'); if (s) s.textContent = tamano(blob.size) + ' · ' + T('tapada'); }
+      cierraTapar();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#tapar').hidden) { e.stopImmediatePropagation(); cierraTapar(); } }, true);
     $('#h-envio').addEventListener('click', (e) => { if (e.target === e.currentTarget) sueltaEnvio(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && porEnviar) { cierraHoja('h-envio'); sueltaEnvio(); } });
     ta.addEventListener('paste', (e) => { const fs = [...((e.clipboardData && e.clipboardData.files) || [])]; const c = CONVS.get(ACTUAL); if (c && fs.length) { e.preventDefault(); revisaEnvio(c, fs.map((f, i) => (f.name && f.name !== 'image.png') ? f : new File([f], 'imagen-' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + (i ? '-' + i : '') + '.' + ((f.type || '').split('/')[1] || 'png'), { type: f.type }))); } });

@@ -503,10 +503,16 @@
     <div class="fila centro"><button type="button" class="boton" id="ubi-no">Cancelar</button></div>
   </div>
 </div>
+<!-- «Tapar» antes de enviar una foto: pixelar con el dedo caras, matrículas o datos (dueño, 15:14; agencia) -->
+<div class="tapar" id="tapar" hidden role="dialog" aria-modal="true" aria-labelledby="tapar-t">
+  <div class="tapar-cab"><button type="button" class="boton" id="tapar-no">Cancelar</button><b id="tapar-t">Tapar partes de la foto</b><button type="button" class="boton principal" id="tapar-si">Listo</button></div>
+  <div class="tapar-lienzo"><canvas id="tapar-cv" aria-label="Foto: pasa el dedo o el ratón por lo que quieras tapar"></canvas></div>
+  <div class="tapar-pie"><small>Pasa el dedo o el ratón por lo que quieras tapar: caras, matrículas, datos. Se envía ya tapado.</small><button type="button" class="boton" id="tapar-otra">Empezar de nuevo</button></div>
+</div>
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261029p50"></script>
+<script src="/orbita/static/idioma.js?v=20261029p51"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
