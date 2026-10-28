@@ -50,7 +50,8 @@
     let cam = null, video = false, suCamara = true, remotoV = null; // videollamada: mi cámara, si la llamada es con imagen, si la otra persona tiene la cámara encendida y su imagen
     let imagen = 'natural'; try { imagen = localStorage.getItem('gcom-imagen') || 'natural'; } catch (_) {} if (!(imagen in IMAGENES)) imagen = 'natural';
     let proc = null; // la imagen procesada (lienzo): protegida, o aclarada si hay poca luz
-    let luz = true; try { luz = localStorage.getItem('gcom-luz') !== '0'; } catch (_) {}
+    // «Mejorar la luz»: de entrada, en el ordenador sí y en el teléfono no (su cámara ya ajusta la luz y así gasta menos batería)
+    let luz = !COMPATIBLE; try { const v = localStorage.getItem('gcom-luz'); if (v !== null) luz = v !== '0'; } catch (_) {}
     let ganancia = 1, medidor = null, vCam = null, ajustes = false;
     let voz = 'natural'; try { voz = localStorage.getItem('gcom-voz') || 'natural'; } catch (_) {} if (!VOCES[voz]) voz = 'natural';
     const ocupado = () => estado !== 'libre';
@@ -293,6 +294,11 @@
     function prefiereCodecs(perfil) {
       try {
         const caps = raiz.RTCRtpReceiver && RTCRtpReceiver.getCapabilities && RTCRtpReceiver.getCapabilities('video'); if (!caps || !caps.codecs) return;
+        // solo códecs que este equipo sabe también enviar (algunos Android reciben H.264 pero no lo codifican)
+        const env = raiz.RTCRtpSender && RTCRtpSender.getCapabilities && RTCRtpSender.getCapabilities('video');
+        const tipo = (c) => String(c.mimeType).toLowerCase(), auxiliar = /\/(rtx|red|ulpfec|flexfec)$/i;
+        const envia = env && env.codecs ? new Set(env.codecs.map(tipo)) : null;
+        if (envia) { const f = caps.codecs.filter((c) => auxiliar.test(c.mimeType) || envia.has(tipo(c))); if (f.some((c) => !auxiliar.test(c.mimeType))) caps.codecs = f; }
         const pesos = perfil === 'escritorio' ? { 'video/vp9': 0, 'video/h264': 1, 'video/vp8': 2, 'video/av1': 3 } : { 'video/h264': 0, 'video/vp8': 1, 'video/vp9': 2, 'video/av1': 3 };
         const peso = (c) => pesos[String(c.mimeType).toLowerCase()] ?? 4;
         const orden = caps.codecs.slice().sort((a, b) => peso(a) - peso(b));
