@@ -46,10 +46,10 @@ const ok = (nombre, cond, extra) => { res.push((cond ? 'OK   ' : 'FALLA') + ' ' 
   ok('conversación abierta', (await visible(A, '#conv')) && (await visible(B, '#conv')));
 
   // la tira de avisos: en B (permiso sin decidir) sí; en A (sin Notification simulada, permiso del navegador) según el navegador
-  ok('B ve la tira «Activar avisos»', await visible(B, '#cavisos'));
+  ok('B no ve la tira de la campanita (dueño, 15:10: fuera)', !(await visible(B, '#cavisos')));
   await B.screenshot({ path: S + '1-B-tira-avisos.png' });
-  await B.click('#cavisos-si'); await espera(400);
-  ok('tras activarlos, la tira se va', !(await visible(B, '#cavisos')));
+  await B.click('#cmas'); await espera(200); await B.click('#cm-avisos'); await espera(400);
+  ok('los avisos se activan desde «⋯»', await B.evaluate(() => Notification.permission === 'granted'));
 
   // «escribiendo…»
   await A.click('#texto'); await A.keyboard.type('Hola, ¿qu', { delay: 40 });
