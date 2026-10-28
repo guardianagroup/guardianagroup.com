@@ -17,7 +17,7 @@
     const emite = (t, ...a) => { for (const f of esc[t] || []) { try { f(...a); } catch (e) { console.error(e); } } };
     let ws = null, url = null, abierto = false, intentos = 0, ping = null, cerrando = false;
     const salas = new Map(); // sala → { yo, b } (b: sala de una sesión blindada)
-    let ice = [], caduca = 0, region = '', llamadas = false, ultimoPong = 0, pingEn = 0, latencia = null;
+    let ice = [], caduca = 0, region = '', llamadas = false, ultimoPong = 0, pingEn = 0, latencia = null; const hist = [];
     const esperas = {}; // respuestas pendientes (invita, busca)
 
     // 27 Oct 2026, 21:25: las dos personas de una conversación tienen que estar en el mismo relé (los relés no se enlazan
@@ -53,7 +53,7 @@
             case 'llega': emite('llega', m.sala, m.quien); break;
             case 'sale': emite('sale', m.sala, m.quien); break;
             case 'fuera': break;
-            case 'pong': ultimoPong = Date.now(); if (pingEn) latencia = Date.now() - pingEn; pingEn = 0; emite('pong', latencia); break;
+            case 'pong': ultimoPong = Date.now(); if (pingEn) { latencia = Date.now() - pingEn; hist.push(latencia); if (hist.length > 6) hist.shift(); } pingEn = 0; emite('pong', latencia); break;
             case 'sustituido': salas.delete(m.sala); emite('sustituido', m.sala); break;
             case 'ausente': case 'atasco': case 'lento': emite('aviso', m); break;
             case 'error': emite('error', m); break;
@@ -104,25 +104,30 @@
     function cierra() { cerrando = true; clearInterval(ping); try { ws && ws.close(); } catch (_) {} }
 
     conecta();
-    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get ultimoPong() { return ultimoPong; } };
+    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
   }
   // Otro servidor de llamadas (dueño, 28 Oct 2026, 14:17: «que las llamadas sean todas buenas, independientemente de si la
   // persona está en Sudamérica, en Europa…»): una conexión corta para medir su tiempo de ida y vuelta y pedirle sus
   // credenciales de llamada (TURN, de vida corta). No entra en ninguna sala ni manda nada más; se cierra en cuanto responde.
   function iceDe(base, espera) {
     return new Promise((res) => {
-      let ws = null, fin = false, t0 = 0, ice = null, caduca = 0, region = '';
+      let ws = null, fin = false, t0 = 0, ice = null, caduca = 0, region = ''; const ms = [];
       const acaba = (r) => { if (fin) return; fin = true; clearTimeout(tm); try { if (ws) ws.close(); } catch (_) {} res(r); };
-      const tm = setTimeout(() => acaba(null), espera || 5000);
+      const tm = setTimeout(() => acaba(ice && ms.length ? { ice, caduca, region, ms: Math.round(Math.min(...ms)) } : null), espera || 5000);
       try { ws = new WebSocket(String(base).replace(/\/$/, '') + '/com'); } catch (_) { acaba(null); return; }
       ws.onopen = () => { try { ws.send(JSON.stringify({ t: 'hola' })); } catch (_) { acaba(null); } };
       ws.onmessage = (e) => {
         if (typeof e.data !== 'string') return;
         let m; try { m = JSON.parse(e.data); } catch (_) { return; }
         if (m.t === 'hola') { if (!m.llamadas || !Array.isArray(m.ice) || !m.ice.length) { acaba(null); return; } ice = m.ice; caduca = +m.caduca || 0; region = m.region || ''; t0 = performance.now(); try { ws.send(JSON.stringify({ t: 'ping' })); } catch (_) { acaba(null); } }
-        else if (m.t === 'pong' && ice) acaba({ ice, caduca, region, ms: Math.round(performance.now() - t0) });
+        else if (m.t === 'pong' && ice) {
+          // cuatro medidas seguidas y la mejor: una sola puede dar un pico (desde Barranquilla, Miami dio 156 ms una vez y 47 ms después)
+          ms.push(performance.now() - t0);
+          if (ms.length >= 4) acaba({ ice, caduca, region, ms: Math.round(Math.min(...ms)) });
+          else { t0 = performance.now(); try { ws.send(JSON.stringify({ t: 'ping' })); } catch (_) { acaba({ ice, caduca, region, ms: Math.round(Math.min(...ms)) }); } }
+        }
       };
-      ws.onerror = () => acaba(null); ws.onclose = () => acaba(null);
+      ws.onerror = () => acaba(null); ws.onclose = () => acaba(ice && ms.length ? { ice, caduca, region, ms: Math.round(Math.min(...ms)) } : null);
     });
   }
   raiz.GuardianaRele = { crea, MOTORES, PROPIO, iceDe };
