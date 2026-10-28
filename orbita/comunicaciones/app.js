@@ -1866,6 +1866,8 @@
     $('#adjuntar').addEventListener('click', (e) => {
       e.stopPropagation(); if (!menuAdj.hidden) { cierraAdj(); return; }
       $('#adj-camara').hidden = !esMovil();
+      // en el teléfono, como WhatsApp: se cierra el teclado y el menú sale abajo, como una hoja (app.css)
+      if (esMovil() && document.activeElement && document.activeElement.id === 'texto') { try { document.activeElement.blur(); } catch (_) {} }
       menuAdj.hidden = false; $('#adjuntar').setAttribute('aria-expanded', 'true');
       const r = $('#adjuntar').getBoundingClientRect(); menuAdj.style.left = Math.max(8, Math.min(r.left, innerWidth - menuAdj.offsetWidth - 8)) + 'px'; menuAdj.style.bottom = Math.max(8, innerHeight - r.top + 8) + 'px';
     });

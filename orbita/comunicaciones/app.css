@@ -786,6 +786,21 @@ body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
 .adjuntos button:hover,.adjuntos button:focus-visible{background:rgba(156,195,228,.10)}
 .adjuntos svg{flex:none;width:22px;height:22px;fill:none;stroke:#9CC3E4;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .adjuntos span{display:grid;gap:1px}.adjuntos b{font-weight:600;font-size:15px}.adjuntos small{color:#9fb3c4;font-size:12.5px;line-height:1.3}
+/* El clip en el teléfono, como WhatsApp (dueño, 28 Oct 2026, 17:51: «fotos y documentos grandes… ubicación, fotos, todo, como si
+   fuera una aplicación nativa»): una hoja abajo, a lo ancho, con el fondo oscurecido y cada opción con su icono de color. Todo
+   va encriptado de extremo a extremo, igual que de PC a PC, y del tamaño que sea. */
+@media (max-width:760px){
+  .adjuntos{left:8px!important;right:8px;bottom:calc(8px + env(safe-area-inset-bottom))!important;min-width:0;max-width:none;padding:8px;border-radius:22px;gap:2px;box-shadow:0 0 0 100vmax rgba(6,8,12,.55),0 -10px 40px -10px rgba(0,0,0,.7);animation:adjSube .2s cubic-bezier(.2,.8,.2,1)}
+  .adjuntos button{min-height:62px;padding:8px 12px;gap:14px;border-radius:14px}
+  .adjuntos svg{width:22px;height:22px;padding:10px;box-sizing:content-box;border-radius:13px;stroke:#fff;background:#3A4656}
+  .adjuntos #adj-foto svg{background:#2D6BD6}
+  .adjuntos #adj-camara svg{background:#556273}
+  .adjuntos #adj-doc svg{background:#6E52D9}
+  .adjuntos #adj-ubicacion svg{background:#1E9467}
+  .adjuntos b{font-size:16px}
+  .adjuntos small{font-size:12.5px}
+}
+@keyframes adjSube{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
 .gc-ubicacion{display:grid;gap:4px}.gc-ubicacion small{color:var(--gc-suave,#9fb3c4)}
 .gc-ubi-abrir{justify-self:start;margin-top:4px;padding:6px 12px;border-radius:999px;border:1px solid rgba(156,195,228,.35);color:#9CC3E4;text-decoration:none;font-weight:600;font-size:13.5px}
 .rele[hidden]{display:none!important}
