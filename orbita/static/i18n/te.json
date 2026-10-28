@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "హెచ్చరిక: మీరు రాసేదాన్ని ఈ ఫారం ఎన్‌క్రిప్షన్ లేకుండా పంపుతుంది.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "సర్వర్ నుంచి కనెక్ట్ అయ్యే బ్రౌజర్‌లను ఈ సైట్ అంగీకరించదు (బాట్‌ల నుంచి రక్షణ). బబుల్ నుంచి దీన్ని తెరవలేరు, కానీ మీ సాధారణ బ్రౌజర్ నుంచి తెరవవచ్చు.",
   "Formulario sin encriptar": "ఎన్‌క్రిప్షన్ లేని ఫారం",
-  "Conexión detectada (permitida)": "గుర్తించిన కనెక్షన్ (అనుమతించబడింది)"
+  "Conexión detectada (permitida)": "గుర్తించిన కనెక్షన్ (అనుమతించబడింది)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "వ్యక్తులకు, నిపుణులకు: PC నుండి PCకి ఎన్‌క్రిప్షన్‌తో చాట్ చేయండి, సున్నితమైన డేటా, పత్రాలను పంపండి. ముగించాక, సంభాషణ రెండు పరికరాల నుండీ తొలగించబడుతుంది.",
+  "Particulares": "వ్యక్తులు",
+  "Profesionales con clientes": "క్లయింట్లు ఉన్న నిపుణులు",
+  "Documentación sensible": "సున్నితమైన పత్రాలు",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "వ్యక్తులకు, నిపుణులకు: సున్నితమైన డేటా, పత్రాలు, PC నుండి PCకి ఎన్‌క్రిప్ట్ చేసి.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "కమ్యూనికేషన్స్ అనేది GUARDIANA చాట్, ఫైళ్ల పంపకం; 9 అంకెల కోడ్‌తో ఒక పరికరం నుండి మరో పరికరానికి ఎన్‌క్రిప్ట్ చేయబడతాయి. ఇది వ్యక్తుల కోసం, తమ క్లయింట్లకు సున్నితమైన డేటా, పత్రాలు పంపే నిపుణుల కోసం రూపొందించబడింది. సర్వర్ మీ సందేశాలను, ఫైళ్లను చదవలేదు, నేను కూడా చదవలేను."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

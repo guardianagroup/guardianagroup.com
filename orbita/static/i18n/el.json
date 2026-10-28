@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Προσοχή: αυτή η φόρμα θα έστελνε ό,τι γράψεις χωρίς κρυπτογράφηση.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Αυτός ο ιστότοπος δεν δέχεται προγράμματα περιήγησης που συνδέονται από διακομιστή (προστασία από bots). Δεν μπορεί να ανοίξει από τη φούσκα, αλλά μπορεί από το συνηθισμένο σου πρόγραμμα περιήγησης.",
   "Formulario sin encriptar": "Μη κρυπτογραφημένη φόρμα",
-  "Conexión detectada (permitida)": "Εντοπισμένη σύνδεση (επιτρεπόμενη)"
+  "Conexión detectada (permitida)": "Εντοπισμένη σύνδεση (επιτρεπόμενη)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Για ιδιώτες και επαγγελματίες: συνομίλησε και στείλε ευαίσθητα δεδομένα και έγγραφα, κρυπτογραφημένα από PC σε PC. Όταν τελειώσετε, η συνομιλία διαγράφεται και από τις δύο συσκευές.",
+  "Particulares": "Ιδιώτες",
+  "Profesionales con clientes": "Επαγγελματίες με πελάτες",
+  "Documentación sensible": "Ευαίσθητα έγγραφα",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Για ιδιώτες και επαγγελματίες: ευαίσθητα δεδομένα και έγγραφα, κρυπτογραφημένα από PC σε PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Οι Επικοινωνίες είναι η συνομιλία και η αποστολή αρχείων της GUARDIANA, κρυπτογραφημένες από τη μία συσκευή στην άλλη με έναν 9ψήφιο κωδικό. Έχουν σχεδιαστεί για ιδιώτες και για επαγγελματίες που στέλνουν στους πελάτες τους ευαίσθητα δεδομένα και έγγραφα. Ο διακομιστής δεν μπορεί να διαβάσει τα μηνύματα ή τα αρχεία σου, ούτε κι εγώ."
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

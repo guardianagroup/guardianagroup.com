@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Upozorenje: ovaj bi obrazac poslao ono što napišeš bez šifriranja.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Ova stranica ne prihvaća preglednike koji se spajaju s poslužitelja (zaštita od botova). Ne može se otvoriti iz mjehurića, ali može iz tvog uobičajenog preglednika.",
   "Formulario sin encriptar": "Nešifrirani obrazac",
-  "Conexión detectada (permitida)": "Otkrivena veza (dopuštena)"
+  "Conexión detectada (permitida)": "Otkrivena veza (dopuštena)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Za privatne osobe i stručnjake: chataj i šalji osjetljive podatke i dokumente, šifrirane s PC-a na PC. Kad završite, razgovor se briše na oba uređaja.",
+  "Particulares": "Privatne osobe",
+  "Profesionales con clientes": "Stručnjaci i njihovi klijenti",
+  "Documentación sensible": "Osjetljivi dokumenti",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Za privatne osobe i stručnjake: osjetljivi podaci i dokumenti, šifrirani s PC-a na PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Komunikacije su chat i slanje datoteka GUARDIANA-e, šifrirani od jednog uređaja do drugog s 9-znamenkastim kodom. Namijenjene su privatnim osobama i stručnjacima koji svojim klijentima šalju osjetljive podatke i dokumente. Poslužitelj ne može čitati tvoje poruke ni tvoje datoteke, a ne mogu ni ja."
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Achtung: Dieses Formular würde deine Eingaben unverschlüsselt senden.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Diese Website akzeptiert keine Browser, die sich von einem Server aus verbinden (Schutz vor Bots). Aus der Blase lässt sie sich nicht öffnen, wohl aber mit deinem gewohnten Browser.",
   "Formulario sin encriptar": "Unverschlüsseltes Formular",
-  "Conexión detectada (permitida)": "Erkannte Verbindung (zugelassen)"
+  "Conexión detectada (permitida)": "Erkannte Verbindung (zugelassen)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Für Privatpersonen und Fachleute: Chatte und sende sensible Daten und Dokumente, verschlüsselt von PC zu PC. Am Ende wird die Unterhaltung auf beiden Geräten gelöscht.",
+  "Particulares": "Privatpersonen",
+  "Profesionales con clientes": "Fachleute mit Kunden",
+  "Documentación sensible": "Sensible Dokumente",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Für Privatpersonen und Fachleute: sensible Daten und Dokumente, verschlüsselt von PC zu PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Kommunikation ist der Chat und Dateiversand von GUARDIANA, verschlüsselt von einem Gerät zum anderen, mit einem 9-stelligen Code. Er ist für Privatpersonen gedacht und für Fachleute, die ihren Kunden sensible Daten und Dokumente senden. Der Server kann deine Nachrichten und Dateien nicht lesen, und ich auch nicht."
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

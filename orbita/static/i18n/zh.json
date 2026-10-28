@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "注意：此表单会以未加密方式发送你输入的内容。",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "此网站不接受从服务器连接的浏览器（防机器人保护）。无法从气泡打开，但可以从你平时使用的浏览器打开。",
   "Formulario sin encriptar": "未加密表单",
-  "Conexión detectada (permitida)": "检测到的连接（已允许）"
+  "Conexión detectada (permitida)": "检测到的连接（已允许）",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "适合个人与专业人士：在 PC 与 PC 之间加密聊天，并发送敏感数据和文件。结束后，对话会从双方设备上删除。",
+  "Particulares": "个人",
+  "Profesionales con clientes": "有客户往来的专业人士",
+  "Documentación sensible": "敏感文件",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "适合个人与专业人士：敏感数据和文件，在 PC 与 PC 之间加密传输。",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "通讯是 GUARDIANA 的聊天和文件发送功能，借助 9 位数字代码，从一台设备到另一台设备全程加密。它专为个人，以及需要向客户发送敏感数据和文件的专业人士而设计。服务器无法读取你的消息和文件，我也不能。"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

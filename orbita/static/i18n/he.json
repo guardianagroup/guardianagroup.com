@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "שים לב: הטופס הזה היה שולח את מה שאתה כותב ללא הצפנה.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "האתר הזה אינו מקבל דפדפנים שמתחברים משרת (הגנה מפני בוטים). אי אפשר לפתוח אותו מהבועה, אבל אפשר מהדפדפן הרגיל שלך.",
   "Formulario sin encriptar": "טופס לא מוצפן",
-  "Conexión detectada (permitida)": "חיבור שזוהה (מותר)"
+  "Conexión detectada (permitida)": "חיבור שזוהה (מותר)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "לאנשים פרטיים ולאנשי מקצוע: שוחח בצ׳אט ושלח מידע ומסמכים רגישים, מוצפנים מ־PC ל־PC. בסיום, השיחה נמחקת בשני המכשירים.",
+  "Particulares": "אנשים פרטיים",
+  "Profesionales con clientes": "אנשי מקצוע ולקוחותיהם",
+  "Documentación sensible": "מסמכים רגישים",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "לאנשים פרטיים ולאנשי מקצוע: מידע ומסמכים רגישים, מוצפנים מ־PC ל־PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "תקשורת היא הצ׳אט ושליחת הקבצים של GUARDIANA, מוצפנים ממכשיר אחד לשני עם קוד בן 9 ספרות. היא מיועדת לאנשים פרטיים ולאנשי מקצוע ששולחים ללקוחותיהם מידע ומסמכים רגישים. השרת לא יכול לקרוא את ההודעות או את הקבצים שלך, וגם אני לא."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

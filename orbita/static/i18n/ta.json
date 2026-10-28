@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "எச்சரிக்கை: நீங்கள் எழுதுவதை இந்தப் படிவம் மறையாக்கமின்றி அனுப்பும்.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "சேவையகத்திலிருந்து இணையும் உலாவிகளை இந்தத் தளம் ஏற்காது (பாட் தடுப்புப் பாதுகாப்பு). குமிழியிலிருந்து இதைத் திறக்க முடியாது, ஆனால் உங்கள் வழக்கமான உலாவியிலிருந்து திறக்கலாம்.",
   "Formulario sin encriptar": "மறையாக்கமற்ற படிவம்",
-  "Conexión detectada (permitida)": "கண்டறியப்பட்ட இணைப்பு (அனுமதிக்கப்பட்டது)"
+  "Conexión detectada (permitida)": "கண்டறியப்பட்ட இணைப்பு (அனுமதிக்கப்பட்டது)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "தனிநபர்களுக்கும் தொழில்முறையாளர்களுக்கும்: PC-யிலிருந்து PC-க்கு மறையாக்கத்துடன் அரட்டை அடியுங்கள், உணர்திறன் மிக்க தரவுகளையும் ஆவணங்களையும் அனுப்புங்கள். முடித்ததும், உரையாடல் இரு சாதனங்களிலும் நீக்கப்படும்.",
+  "Particulares": "தனிநபர்கள்",
+  "Profesionales con clientes": "வாடிக்கையாளர்களைக் கொண்ட தொழில்முறையாளர்கள்",
+  "Documentación sensible": "உணர்திறன் மிக்க ஆவணங்கள்",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "தனிநபர்களுக்கும் தொழில்முறையாளர்களுக்கும்: உணர்திறன் மிக்க தரவுகளும் ஆவணங்களும், PC-யிலிருந்து PC-க்கு மறையாக்கத்துடன்.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "தகவல்தொடர்புகள் என்பது GUARDIANA-வின் அரட்டையும் கோப்பு அனுப்புதலும்; 9 இலக்கக் குறியீட்டுடன் ஒரு சாதனத்திலிருந்து மற்றொன்றுக்கு மறையாக்கம் செய்யப்படுகின்றன. இது தனிநபர்களுக்காகவும், தங்கள் வாடிக்கையாளர்களுக்கு உணர்திறன் மிக்க தரவுகளையும் ஆவணங்களையும் அனுப்பும் தொழில்முறையாளர்களுக்காகவும் வடிவமைக்கப்பட்டது. உங்கள் செய்திகளையோ கோப்புகளையோ சேவையகத்தால் படிக்க முடியாது, என்னாலும் முடியாது."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

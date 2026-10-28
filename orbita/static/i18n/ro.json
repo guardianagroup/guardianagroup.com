@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Atenție: acest formular ar trimite necriptat ceea ce scrii.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Acest site nu acceptă browsere care se conectează de pe un server (protecție împotriva roboților). Nu poate fi deschis din bulă, dar poate fi deschis din browserul tău obișnuit.",
   "Formulario sin encriptar": "Formular necriptat",
-  "Conexión detectada (permitida)": "Conexiune detectată (permisă)"
+  "Conexión detectada (permitida)": "Conexiune detectată (permisă)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Pentru persoane fizice și profesioniști: discută pe chat și trimite date și documente sensibile, criptate de pe PC pe PC. La final, conversația se șterge de pe ambele dispozitive.",
+  "Particulares": "Persoane fizice",
+  "Profesionales con clientes": "Profesioniști și clienții lor",
+  "Documentación sensible": "Documente sensibile",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Pentru persoane fizice și profesioniști: date și documente sensibile, criptate de pe PC pe PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Comunicații este chatul și trimiterea de fișiere ale GUARDIANA, criptate de la un dispozitiv la altul cu un cod de 9 cifre. Este gândit pentru persoane fizice și pentru profesioniștii care trimit clienților lor date și documente sensibile. Serverul nu poate citi mesajele și fișierele tale, și nici eu."
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

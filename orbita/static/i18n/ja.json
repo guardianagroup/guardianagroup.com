@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "注意：このフォームでは、入力した内容が暗号化されずに送信されます。",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "このサイトはサーバーから接続するブラウザーを受け付けません（ボット対策）。バブルからは開けませんが、普段お使いのブラウザーからは開けます。",
   "Formulario sin encriptar": "暗号化されていないフォーム",
-  "Conexión detectada (permitida)": "検出された接続（許可済み）"
+  "Conexión detectada (permitida)": "検出された接続（許可済み）",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "個人にも専門家にも：PCからPCへ暗号化して、チャットや機密性の高いデータ・書類の送信ができます。終了すると、会話は両方の端末から削除されます。",
+  "Particulares": "個人",
+  "Profesionales con clientes": "顧客を持つ専門家",
+  "Documentación sensible": "機密性の高い書類",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "個人にも専門家にも：機密性の高いデータと書類を、PCからPCへ暗号化して。",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "コミュニケーションはGUARDIANAのチャットとファイル送信機能で、9桁のコードを使い、端末から端末まで暗号化されます。個人の方と、顧客に機密性の高いデータや書類を送る専門家のために設計されています。サーバーはあなたのメッセージやファイルを読めませんし、わたしにも読めません。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

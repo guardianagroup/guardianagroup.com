@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Внимание: този формуляр би изпратил написаното от теб некриптирано.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Този сайт не приема браузъри, които се свързват от сървър (защита срещу ботове). Не може да се отвори от балона, но може от обичайния ти браузър.",
   "Formulario sin encriptar": "Некриптиран формуляр",
-  "Conexión detectada (permitida)": "Открита връзка (разрешена)"
+  "Conexión detectada (permitida)": "Открита връзка (разрешена)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "За частни лица и професионалисти: чати и изпращай чувствителни данни и документи, шифровани от PC към PC. Накрая разговорът се изтрива и на двете устройства.",
+  "Particulares": "Частни лица",
+  "Profesionales con clientes": "Професионалисти с клиенти",
+  "Documentación sensible": "Чувствителни документи",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "За частни лица и професионалисти: чувствителни данни и документи, шифровани от PC към PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Комуникации е чатът и изпращането на файлове на GUARDIANA, шифровани от едното устройство до другото с 9-цифрен код. Създаден е за частни лица и за професионалисти, които изпращат на клиентите си чувствителни данни и документи. Сървърът не може да чете съобщенията и файловете ти, а и аз не мога."
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

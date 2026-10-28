@@ -248,7 +248,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   const AYUDA = {
     zero: 'ZERO es el navegador de GUARDIANA: la web se abre en una burbuja aislada en un servidor de GUARDIANA y a tu equipo solo llegan imágenes. A la derecha, la Radiografía te enseña quién intenta conectarse, las subastas de tus datos y lo que puedes cortar.',
     orbita: 'Órbita es el planeta de GUARDIANA: cables submarinos, cables terrestres, centros de datos y satélites, y cada corte en directo.',
-    com: 'Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.',
+    com: 'Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.',
   };
   const ETQ = {
     zero: 'Ir al navegador ZERO', planeta: 'Explorar el planeta', com: 'Chat encriptado', datos: 'Ver lo que se ha cortado', 'que-es-guardiana': '¿Qué es GUARDIANA?',
@@ -376,7 +376,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       + '<div class="nuc-ops nuc-paso" id="nuc-ops" role="group" aria-label="Qué deseas hacer">'
       + '<button type="button" class="nuc-op" data-n="zero"><i>ZERO</i><b>Navegar con NÚCLEO</b><small>Entra en cualquier web y mira quién intenta llevarse tus datos.</small></button>'
       + '<button type="button" class="nuc-op" data-n="planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.</small></button>'
-      + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Chatea y envía archivos encriptados de PC a PC.</small></button>'
+      + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.</small></button>'
       // dueño, 10:00: «añade uno más: pedir las cosas»; ronda 54: «Pídeselo a NÚCLEO»; dueño, 14:08: «Habla con NÚCLEO»
       + '<button type="button" class="nuc-op nuc-op-n" data-n="nucleo"><i translate="no">NÚCLEO</i><b>Habla con NÚCLEO</b><small>Pídele que te lleve al navegador ZERO, que consulte tus datos o que prepare resúmenes en PDF o en vídeo.</small></button>'
       + '</div>'

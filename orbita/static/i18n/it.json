@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Attenzione: questo modulo invierebbe ciò che scrivi senza cifratura.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Questo sito non accetta browser che si collegano da un server (protezione anti-bot). Non si può aprire dalla bolla, ma si può dal tuo browser abituale.",
   "Formulario sin encriptar": "Modulo non cifrato",
-  "Conexión detectada (permitida)": "Connessione rilevata (consentita)"
+  "Conexión detectada (permitida)": "Connessione rilevata (consentita)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Per privati e professionisti: chatta e invia dati e documenti sensibili, crittografati da PC a PC. Alla fine, la conversazione viene eliminata su entrambi i dispositivi.",
+  "Particulares": "Privati",
+  "Profesionales con clientes": "Professionisti e i loro clienti",
+  "Documentación sensible": "Documenti sensibili",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Per privati e professionisti: dati e documenti sensibili, crittografati da PC a PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Comunicazioni è la chat e l’invio di file di GUARDIANA, crittografati da un dispositivo all’altro con un codice di 9 cifre. È pensata per i privati e per i professionisti che inviano ai propri clienti dati e documenti sensibili. Il server non può leggere i tuoi messaggi né i tuoi file, e nemmeno io."
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

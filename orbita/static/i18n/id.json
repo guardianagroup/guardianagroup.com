@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Perhatian: formulir ini akan mengirim apa yang kamu tulis tanpa enkripsi.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Situs ini tidak menerima browser yang terhubung dari server (perlindungan antibot). Situs ini tidak dapat dibuka dari gelembung, tetapi dapat dibuka dari browser yang biasa kamu gunakan.",
   "Formulario sin encriptar": "Formulir tanpa enkripsi",
-  "Conexión detectada (permitida)": "Koneksi terdeteksi (diizinkan)"
+  "Conexión detectada (permitida)": "Koneksi terdeteksi (diizinkan)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Untuk perorangan dan profesional: chat dan kirim data serta dokumen sensitif, terenkripsi dari PC ke PC. Setelah selesai, percakapan dihapus di kedua perangkat.",
+  "Particulares": "Perorangan",
+  "Profesionales con clientes": "Profesional dan kliennya",
+  "Documentación sensible": "Dokumen sensitif",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Untuk perorangan dan profesional: data dan dokumen sensitif, terenkripsi dari PC ke PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Komunikasi adalah fitur chat dan pengiriman file GUARDIANA, terenkripsi dari satu perangkat ke perangkat lain dengan kode 9 digit. Fitur ini dirancang untuk perorangan dan untuk profesional yang mengirim data serta dokumen sensitif kepada klien mereka. Server tidak bisa membaca pesan maupun file Anda, saya pun tidak."
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

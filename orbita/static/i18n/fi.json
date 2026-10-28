@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Huomio: tämä lomake lähettäisi kirjoittamasi salaamattomana.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Tämä sivusto ei hyväksy selaimia, jotka muodostavat yhteyden palvelimelta (bottisuojaus). Sitä ei voi avata kuplasta, mutta tavallisella selaimellasi voi.",
   "Formulario sin encriptar": "Salaamaton lomake",
-  "Conexión detectada (permitida)": "Havaittu yhteys (sallittu)"
+  "Conexión detectada (permitida)": "Havaittu yhteys (sallittu)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Yksityishenkilöille ja ammattilaisille: chattaile ja lähetä arkaluonteisia tietoja ja asiakirjoja salattuina PC:ltä PC:lle. Kun lopetatte, keskustelu poistetaan molemmilta laitteilta.",
+  "Particulares": "Yksityishenkilöt",
+  "Profesionales con clientes": "Ammattilaiset ja heidän asiakkaansa",
+  "Documentación sensible": "Arkaluonteiset asiakirjat",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Yksityishenkilöille ja ammattilaisille: arkaluonteiset tiedot ja asiakirjat salattuina PC:ltä PC:lle.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Viestintä on GUARDIANAn chatti ja tiedostojen lähetys, salattuina laitteelta toiselle 9-numeroisella koodilla. Se on tarkoitettu yksityishenkilöille ja ammattilaisille, jotka lähettävät asiakkailleen arkaluonteisia tietoja ja asiakirjoja. Palvelin ei voi lukea viestejäsi eikä tiedostojasi, enkä minäkään."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

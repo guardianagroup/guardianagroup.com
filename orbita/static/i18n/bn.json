@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "সতর্কতা: এই ফর্মটি আপনি যা লিখবেন তা এনক্রিপশন ছাড়াই পাঠাবে।",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "এই সাইটটি সার্ভার থেকে সংযুক্ত ব্রাউজার গ্রহণ করে না (বট-প্রতিরোধী সুরক্ষা)। বাবল থেকে এটি খোলা যায় না, তবে আপনার নিয়মিত ব্রাউজার থেকে খোলা যায়।",
   "Formulario sin encriptar": "এনক্রিপশন ছাড়া ফর্ম",
-  "Conexión detectada (permitida)": "সংযোগ শনাক্ত হয়েছে (অনুমোদিত)"
+  "Conexión detectada (permitida)": "সংযোগ শনাক্ত হয়েছে (অনুমোদিত)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "ব্যক্তি ও পেশাজীবীদের জন্য: PC থেকে PC-তে এনক্রিপ্ট করে চ্যাট করুন এবং সংবেদনশীল তথ্য ও নথি পাঠান। শেষ হলে কথোপকথনটি দুই ডিভাইস থেকেই মুছে যায়।",
+  "Particulares": "ব্যক্তিগত ব্যবহারকারী",
+  "Profesionales con clientes": "ক্লায়েন্টসহ পেশাজীবী",
+  "Documentación sensible": "সংবেদনশীল নথি",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "ব্যক্তি ও পেশাজীবীদের জন্য: সংবেদনশীল তথ্য ও নথি, PC থেকে PC-তে এনক্রিপ্ট করা।",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "যোগাযোগ হলো GUARDIANA-র চ্যাট ও ফাইল পাঠানোর ব্যবস্থা, যা একটি 9 অঙ্কের কোড দিয়ে এক ডিভাইস থেকে আরেক ডিভাইসে এনক্রিপ্ট করা থাকে। এটি ব্যক্তিদের জন্য এবং যেসব পেশাজীবী তাঁদের ক্লায়েন্টদের সংবেদনশীল তথ্য ও নথি পাঠান, তাঁদের জন্য তৈরি। সার্ভার আপনার বার্তা বা ফাইল পড়তে পারে না, আমিও পারি না।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

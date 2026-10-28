@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Babala: ipapadala ng form na ito ang isusulat mo nang walang encryption.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Hindi tumatanggap ang site na ito ng mga browser na kumokonekta mula sa isang server (proteksyon laban sa bot). Hindi ito mabubuksan mula sa bubble, pero mabubuksan mula sa karaniwan mong browser.",
   "Formulario sin encriptar": "Form na walang encryption",
-  "Conexión detectada (permitida)": "Natukoy na koneksyon (pinahintulutan)"
+  "Conexión detectada (permitida)": "Natukoy na koneksyon (pinahintulutan)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Para sa mga indibidwal at propesyonal: mag-chat at magpadala ng sensitibong datos at dokumento, naka-encrypt mula PC papuntang PC. Pagkatapos, mabubura ang usapan sa dalawang device.",
+  "Particulares": "Mga indibidwal",
+  "Profesionales con clientes": "Mga propesyonal at kanilang kliyente",
+  "Documentación sensible": "Sensitibong dokumento",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Para sa mga indibidwal at propesyonal: sensitibong datos at dokumento, naka-encrypt mula PC papuntang PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Ang Komunikasyon ay ang chat at pagpapadala ng file ng GUARDIANA, naka-encrypt mula sa isang device papunta sa isa pa gamit ang 9-digit na code. Ginawa ito para sa mga indibidwal at sa mga propesyonal na nagpapadala ng sensitibong datos at dokumento sa kanilang mga kliyente. Hindi mababasa ng server ang iyong mga mensahe o file, at hindi ko rin mababasa."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

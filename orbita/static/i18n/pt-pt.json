@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Atenção: este formulário enviaria o que escreveres sem encriptação.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Este site não aceita navegadores que se ligam a partir de um servidor (proteção contra robôs). Não é possível abri-lo a partir da bolha, mas é possível no teu navegador habitual.",
   "Formulario sin encriptar": "Formulário não encriptado",
-  "Conexión detectada (permitida)": "Ligação detetada (permitida)"
+  "Conexión detectada (permitida)": "Ligação detetada (permitida)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Para particulares e profissionais: conversa por chat e envia dados e documentação sensível, encriptados de PC para PC. No fim, a conversa é apagada nos dois equipamentos.",
+  "Particulares": "Particulares",
+  "Profesionales con clientes": "Profissionais com clientes",
+  "Documentación sensible": "Documentação sensível",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Para particulares e profissionais: dados e documentação sensível, encriptados de PC para PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Comunicações é o chat e o envio de ficheiros da GUARDIANA, encriptados de um dispositivo para o outro com um código de 9 algarismos. Foi pensado para particulares e para profissionais que enviam aos seus clientes dados e documentação sensível. O servidor não consegue ler as tuas mensagens nem os teus ficheiros, e eu também não."
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Внимание: эта форма отправила бы введённые вами данные без шифрования.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Этот сайт не принимает браузеры, подключающиеся с сервера (защита от ботов). Открыть его из пузыря нельзя, но можно из вашего обычного браузера.",
   "Formulario sin encriptar": "Незашифрованная форма",
-  "Conexión detectada (permitida)": "Обнаруженное соединение (разрешено)"
+  "Conexión detectada (permitida)": "Обнаруженное соединение (разрешено)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Для частных лиц и профессионалов: общайтесь в чате и отправляйте конфиденциальные данные и документы в зашифрованном виде с PC на PC. После завершения переписка удаляется на обоих устройствах.",
+  "Particulares": "Частные лица",
+  "Profesionales con clientes": "Профессионалы и их клиенты",
+  "Documentación sensible": "Конфиденциальные документы",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Для частных лиц и профессионалов: конфиденциальные данные и документы, зашифрованные с PC на PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Коммуникации — это чат и отправка файлов GUARDIANA, зашифрованные от одного устройства к другому, с 9-значным кодом. Сервис создан для частных лиц и для профессионалов, которые отправляют своим клиентам конфиденциальные данные и документы. Сервер не может читать ваши сообщения и файлы, и я тоже."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",
