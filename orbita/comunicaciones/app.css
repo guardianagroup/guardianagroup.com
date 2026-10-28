@@ -969,3 +969,15 @@ html.como-app .barra .barra-t{display:block;font-size:12px;letter-spacing:.3em}
 .enlace-cancelar-txt{all:unset;cursor:pointer;margin-top:18px;padding:10px 18px;border-radius:999px;color:var(--muted);font:500 15px/1 var(--texto)}
 .enlace-cancelar-txt:active{background:rgba(156,195,228,.1)}
 .enlace-cancelar-txt:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+/* Tirar hacia abajo para actualizar (dueño, 28 Oct 2026, 18:30): el círculo que baja con el dedo, gira y, al volver, «Actualizado» */
+.tirar{position:fixed;left:50%;top:0;z-index:45;height:40px;min-width:40px;margin-left:-20px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:7px;box-sizing:border-box;background:#101824;border:1px solid rgba(156,195,228,.3);box-shadow:0 10px 26px -10px rgba(0,0,0,.85);color:#9CC3E4;opacity:0;pointer-events:none;transform:translateY(var(--tirar-y,-60px));transition:opacity .15s ease}
+.tirar.ver{opacity:1}
+.tirar svg{width:20px;height:20px;flex:none;transform:rotate(var(--tirar-giro,0deg))}
+.tirar .tirar-ok,.tirar span{display:none}
+.tirar.listo{color:#F4F6F8;border-color:rgba(156,195,228,.65)}
+.tirar.girando svg{animation:tirarGira .75s linear infinite}
+.tirar.suelta{transition:transform .25s ease,opacity .25s ease}
+.tirar.hecho{margin-left:0;padding:0 15px 0 11px;transform:translate(-50%,var(--tirar-y,-60px));color:#F4F6F8}
+.tirar.hecho svg{display:none}.tirar.hecho .tirar-ok{display:block;transform:none;color:#6CCBA5}.tirar.hecho span{display:inline;font:500 14px/1 var(--texto)}
+@keyframes tirarGira{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.tirar.girando svg{animation-duration:1.6s}}

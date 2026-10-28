@@ -1591,6 +1591,59 @@
   // mensajes; y si el navegador la saca de esa copia, se vuelve a cargar desde cero (lo terminado ya no existe).
   addEventListener('pagehide', () => { try { const m = document.querySelector('#mensajes'); if (m) m.textContent = ''; } catch (_) {} });
   addEventListener('pageshow', (e) => { if (e.persisted) location.reload(); });
+  // Tirar hacia abajo para actualizar, como en las apps (dueño, 28 Oct 2026, 18:30: «cuando la persona toca la pantalla de arriba
+  // para abajo, tiene que moverse y hacer como que está actualizando, que se ha actualizado»). En el teléfono, en el inicio y en
+  // los mensajes, estando arriba del todo: lo de dentro baja con el dedo (con resistencia) y aparece un círculo que gira con él;
+  // pasado el punto, al soltar, gira solo, la app se vuelve a cargar (así coge también la última versión publicada) y al volver
+  // dice «Actualizado». Nunca durante una llamada, con el teclado abierto, una hoja abierta o la invitación en pantalla.
+  (function tiraParaActualizar() {
+    if (!matchMedia('(pointer: coarse)').matches) return;
+    const UMBRAL = 70, MAX = 110, MARCA = 'gcom-actualizado';
+    const ind = document.createElement('div'); ind.className = 'tirar'; ind.setAttribute('aria-hidden', 'true');
+    ind.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.5 4.2v4.6h-4.6"/></svg><svg class="tirar-ok" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span></span>';
+    document.body.append(ind);
+    let y0 = null, x0 = 0, tira = 0, activo = null, ocupado = false, arriba = 0;
+    const puede = () => !ocupado && !document.body.classList.contains('en-llamada') && !document.documentElement.classList.contains('con-teclado')
+      && !document.querySelector('.gc-hoja.gc-abierta') && !($('#inicio') && $('#inicio').classList.contains('con-invitacion')) && !($('#adjuntos') && !$('#adjuntos').hidden);
+    const pinta = (d) => {
+      ind.style.setProperty('--tirar-y', (arriba + d - 46) + 'px'); ind.style.setProperty('--tirar-giro', (d / UMBRAL * 300) + 'deg');
+      ind.classList.toggle('ver', d > 4); ind.classList.toggle('listo', d >= UMBRAL);
+      if (activo) activo.style.transform = d ? 'translateY(' + d + 'px)' : '';
+    };
+    const vuelve = () => {
+      ind.classList.add('suelta'); if (activo) { activo.style.transition = 'transform .25s ease'; }
+      pinta(0); const a = activo; setTimeout(() => { ind.classList.remove('suelta'); if (a) { a.style.transition = ''; a.style.transform = ''; } }, 260);
+      activo = null; tira = 0;
+    };
+    const actualiza = () => {
+      ocupado = true; ind.classList.add('suelta', 'girando'); if (activo) activo.style.transition = 'transform .25s ease';
+      pinta(UMBRAL * 0.8);
+      try { sessionStorage.setItem(MARCA, '1'); } catch (_) {}
+      setTimeout(() => location.reload(), 650);
+    };
+    document.addEventListener('touchstart', (e) => {
+      y0 = null; if (e.touches.length !== 1 || !puede()) return;
+      const c = e.target.closest && e.target.closest('#inicio, #mensajes'); if (!c || c.scrollTop > 0 || c.closest('[hidden]')) return;
+      activo = c; y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; tira = 0; arriba = Math.max(0, c.getBoundingClientRect().top);
+    }, { passive: true });
+    document.addEventListener('touchmove', (e) => {
+      if (y0 === null || !activo) return;
+      const dy = e.touches[0].clientY - y0, dx = Math.abs(e.touches[0].clientX - x0);
+      if (tira === 0 && (dy <= 0 || dx > dy || activo.scrollTop > 0)) { y0 = null; activo = null; return; }
+      e.preventDefault();
+      tira = Math.max(0, Math.min(MAX, dy * 0.55)); pinta(tira);
+    }, { passive: false });
+    const fin = () => { if (y0 === null) return; y0 = null; if (tira >= UMBRAL) actualiza(); else vuelve(); };
+    document.addEventListener('touchend', fin); document.addEventListener('touchcancel', () => { if (y0 !== null) { y0 = null; vuelve(); } });
+    // al volver de actualizar: «Actualizado», un momento, debajo de lo de arriba
+    let vino = false; try { vino = sessionStorage.getItem(MARCA) === '1'; sessionStorage.removeItem(MARCA); } catch (_) {}
+    if (vino) {
+      const sp = ind.querySelector('span'); if (sp) sp.textContent = T('Actualizado');
+      const cab = document.querySelector('#barra:not([hidden])'); arriba = cab && cab.offsetHeight ? cab.getBoundingClientRect().bottom : 0;
+      ind.classList.add('hecho'); pinta(58); ind.classList.add('ver');
+      setTimeout(() => { ind.classList.add('suelta'); ind.classList.remove('ver'); setTimeout(() => { ind.classList.remove('hecho', 'suelta'); pinta(0); }, 300); }, 1300);
+    }
+  })();
   // (28 Oct 2026, 17:10–17:17: «cuando se implementa el teclado, sube, baja… que se quede fijado en pantalla») El teclado se
   // detectaba comparando lo que se ve con innerHeight; pero en el iPhone, con la app en la pantalla de inicio (iOS 26), innerHeight
   // también baja con el teclado, así que no se notaba nada y el iPhone subía la página entera: la cabecera se iba arriba y quedaba
