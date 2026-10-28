@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261028c">
+<link rel="stylesheet" href="app.css?v=20261028d">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -289,6 +289,9 @@
     <span class="gc-llamada-tiempo" id="ll-tiempo">00:00</span>
     <span class="gc-llamada-paso" id="ll-paso" role="status"></span>
   </div>
+  <!-- Voz e imagen (dueño, 28 Oct 2026, 10:25: «más profesional y con orden visual»): una tarjeta con dos grupos; en la
+       videollamada se abre y se cierra con «Voz e imagen» para no tapar la imagen -->
+  <div class="ll-ajustes" id="ll-ajustes">
   <div class="ll-voces" id="ll-voces" role="group" aria-labelledby="ll-voces-t">
     <span class="ll-voces-t" id="ll-voces-t">Tu voz</span>
     <div class="ll-voces-botones">
@@ -308,12 +311,15 @@
       <button type="button" data-imagen="difuminada" aria-pressed="false">Difuminada</button>
       <button type="button" data-imagen="mosaico" aria-pressed="false">Mosaico</button>
     </div>
+    <button type="button" class="ll-luz" id="ll-luz" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg><span>Mejorar la luz</span><i class="ll-luz-int" aria-hidden="true"></i></button>
     <small class="ll-voz-nota" id="ll-imagen-nota" hidden>El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.</small>
+  </div>
   </div>
   <audio id="a-remoto" autoplay></audio>
   <div class="gc-llamada-botones" id="ll-botones">
     <div class="gc-llamada-boton"><button type="button" id="ll-silenciar" aria-pressed="false" aria-label="Silenciar"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><span>Silenciar</span></div>
     <div class="gc-llamada-boton" id="ll-camara-caja" hidden><button type="button" id="ll-camara" aria-pressed="false" aria-label="Apagar la cámara"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></svg></button><span>Cámara</span></div>
+    <div class="gc-llamada-boton" id="ll-ajustes-caja" hidden><button type="button" id="ll-ajustes-b" aria-pressed="false" aria-controls="ll-ajustes" aria-label="Voz e imagen"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button><span>Voz e imagen</span></div>
     <div class="gc-llamada-boton gc-colgar"><button type="button" id="ll-colgar" aria-label="Colgar"><svg viewBox="0 0 24 24"><path d="M3 12c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a9 9 0 0 0-7 0V13l-3 1.5z"/></svg></button><span>Colgar</span></div>
     <div class="gc-llamada-boton ll-volver"><button type="button" id="ll-volver" aria-label="Volver a la llamada"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 15v5h-5M4 4l6 6M20 20l-6-6"/></svg></button><span>Ampliar</span></div>
   </div>
@@ -360,7 +366,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261028p24"></script>
+<script src="/orbita/static/idioma.js?v=20261028p25"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -370,7 +376,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028a"></script>
-<script src="llamada.js?v=20261028c"></script>
-<script src="app.js?v=20261028d"></script>
+<script src="llamada.js?v=20261028d"></script>
+<script src="app.js?v=20261028e"></script>
 </body>
 </html>

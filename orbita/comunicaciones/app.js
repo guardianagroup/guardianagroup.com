@@ -935,6 +935,7 @@
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
     LL = GuardianaLlamada.crea({
       ice: () => R.ice, puede: puedeLlamar, t: T, aviso, suena: avisaSonido, fin: anotaLlamada,
+      blindada: () => { const c = CONVS.get(ACTUAL); return !!(c && esB(c)); }, // las opciones de imagen, solo en la sesión blindada
       manda: (m) => { const c = CONVS.get(ACTUAL); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
       nombre: () => { const c = CONVS.get(ACTUAL); return (c && c.nombre) || T('La otra persona'); },
       inicial: () => { const c = CONVS.get(ACTUAL); return inicial(c && c.nombre); },

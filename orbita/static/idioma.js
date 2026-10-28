@@ -1433,6 +1433,8 @@
     "Entregado": ["Delivered", "Entregue"],
     "Enviado": ["Sent", "Enviado"],
     "Enviar": ["Send", "Enviar"],
+    "Voz e imagen": ["Voice and image", "Voz e imagem"],
+    "Mejorar la luz": ["Improve the light", "Melhorar a luz"],
     "Tu imagen": ["Your image", "Sua imagem"],
     "Difuminada": ["Blurred", "Desfocada"],
     "Mosaico": ["Mosaic", "Mosaico"],
