@@ -3039,7 +3039,8 @@
     if (r == null) r = porPatron(k);
     if (r == null && /( · | → |\s\/\s)/.test(k)) {
       let algo = false;
-      r = k.split(/( · | → | \/ )/).map((p, i) => { if (i % 2) return p; const x = una(p); if (x != null) { algo = true; return x; } const y = porPatron(p); if (y != null) { algo = true; return y; } return p; }).join('');
+      // 28 Oct 2026: también cuando el texto empieza por «· » (la línea de Tor en ZERO se quedaba en español)
+      r = k.split(/(^· | · | → | \/ )/).map((p, i) => { if (i % 2) return p; const x = una(p); if (x != null) { algo = true; return x; } const y = porPatron(p); if (y != null) { algo = true; return y; } return p; }).join('');
       if (!algo) r = null;
     }
     if (r == null) { const m = k.match(/^([●◎↙⛶✳↻♪⌁]\s*)(.+)$/); if (m) { const x = t(m[2]); if (x !== m[2]) r = m[1] + x; } }
