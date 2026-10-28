@@ -23,7 +23,7 @@
 <title>GUARDIANA</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261029o">
+<link rel="stylesheet" href="app.css?v=20261029p">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -68,11 +68,22 @@
       <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><rect x="9" y="13" width="6" height="5" rx="1"/><path d="M10.5 13v-1.2a1.5 1.5 0 0 1 3 0V13"/></svg><span>Documentación sensible</span></li>
     </ul>
 
+    <!-- Contactos (dueño, 28 Oct 2026, 17:29–17:33: «los que ya tenemos guardiana… una llamada directa sin tener que quedar la
+         invitación… que uno guarde el contacto como quiera… el nombre que quiera… simplificado y lo más fácil posible»): en el
+         teléfono, las conversaciones guardadas como contacto, con el nombre que les pone cada uno; un toque para escribir, llamar
+         o videollamar, sin enlace (los dos con GUARDIANA abierta) -->
+    <section class="contactos" id="contactos" aria-labelledby="contactos-t" hidden>
+      <h2 class="contactos-t" id="contactos-t">Contactos</h2>
+      <ul class="contactos-filas" id="contactos-filas"></ul>
+    </section>
     <div class="grandes" id="paso-inicio">
       <button type="button" class="grande principal" id="nueva"><b>Crear invitación</b><small>Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
       <button type="button" class="grande" id="unir"><b>Tengo un código</b><small>Escribe las 9 cifras que te han enviado</small></button>
       <!-- dueño, 27 Oct 2026, 22:01–23:12: la blindada, «de la máxima»; algoritmos de la suite CNSA 2.0 -->
       <button type="button" class="grande blindada" id="nueva-blindada"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b><span class="solo-pc">Sesión blindada</span><span class="solo-movil">Crear y compartir invitación</span></b><small>Algoritmos de la suite CNSA 2.0 y claves que se renuevan cada 5 minutos. Se invita con un enlace.</small></button>
+      <!-- Pegar una invitación en la app (dueño, 28 Oct 2026, 18:05: «se la envío a mi esposa, pero no le llegan»): en el iPhone,
+           el enlace de WhatsApp se abre en Safari, que no comparte nada con la app de la pantalla de inicio; desde la app se pega aquí -->
+      <button type="button" class="pegar-inv" id="pegar-inv" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5.5" y="4.5" width="13" height="16.5" rx="2.5"/><path d="M9 4.5V3.2h6v1.3"/><path d="M9 11h6M9 14.5h4"/></svg><span>Pegar invitación</span></button>
     </div>
     <!-- en el móvil, una vez: Comunicaciones en la pantalla de inicio, como una app (dueño, 28 Oct 2026, 16:12) -->
     <button type="button" class="anadir-app" id="anadir-app" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 8v7M8.5 11.5h7"/></svg><span>Añadir a la pantalla de inicio</span></button>
@@ -101,7 +112,7 @@
       <!-- 28 Oct 2026 (dueño): de PC a PC, el QR estorba; primero el enlace y el QR plegado, por si alguien entra con el móvil -->
       <p class="t">Comparte el enlace con la otra persona. No lo abras tú: es su llave para entrar.</p>
       <p class="t enlace-copiado" id="enlace-copiado" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>Enlace copiado</span></p>
-      <div class="enlace-fila"><input class="campo" id="enlace-b" readonly translate="no" spellcheck="false" aria-label="Enlace de la invitación"><button type="button" class="boton principal" id="enlace-copiar">Copiar enlace</button><button type="button" class="boton" id="enlace-compartir" hidden>Compartir enlace</button></div>
+      <div class="enlace-fila"><input class="campo" id="enlace-b" readonly translate="no" spellcheck="false" aria-label="Enlace de la invitación"><button type="button" class="boton principal" id="enlace-copiar">Copiar enlace</button><button type="button" class="boton" id="enlace-compartir" hidden>Compartir enlace</button><button type="button" class="boton whatsapp" id="enlace-whatsapp" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5l1.2-3.8A8 8 0 1 1 8.6 18.6z"/><path d="M9.2 8.6c.2-.5.6-.5.9-.5.2 0 .4.1.5.4l.6 1.4c.1.3 0 .5-.2.7l-.4.4c.5 1 1.4 1.9 2.5 2.5l.4-.4c.2-.2.5-.3.7-.2l1.4.6c.3.1.4.3.4.5 0 .4-.1.8-.5 1.1-.5.4-1.4.6-2.6.1a8.8 8.8 0 0 1-4.1-4.1c-.4-1-.2-1.8.4-2.5z"/></svg>Enviar por WhatsApp</button></div>
       <details class="qr-plegado"><summary>Mostrar el código QR (para abrirlo con un móvil)</summary><div class="qr" id="enlace-qr" role="img" aria-label="Código QR de la invitación"></div></details>
       <p class="t estado" id="enlace-estado" role="status">Esperando a que la otra persona abra el enlace…</p>
       <p class="t nota">Opcional: podéis comparar el número de seguridad dentro del chat.</p>
@@ -111,7 +122,10 @@
         <div class="espera-anillos" aria-hidden="true"><span></span><span></span><span></span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
         <h2 role="status">Esperando a que la otra persona abra el enlace…</h2>
         <p class="t">La conversación se abre sola en cuanto entre.</p>
-        <div class="fila centro"><button type="button" class="boton principal" id="enlace-otra-vez">Volver a compartir</button><button type="button" class="boton" id="enlace-cancelar-2">Cancelar</button></div>
+        <div class="fila centro"><button type="button" class="boton principal" id="enlace-otra-vez">Volver a compartir</button><button type="button" class="boton whatsapp" id="enlace-whatsapp-2" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5l1.2-3.8A8 8 0 1 1 8.6 18.6z"/><path d="M9.2 8.6c.2-.5.6-.5.9-.5.2 0 .4.1.5.4l.6 1.4c.1.3 0 .5-.2.7l-.4.4c.5 1 1.4 1.9 2.5 2.5l.4-.4c.2-.2.5-.3.7-.2l1.4.6c.3.1.4.3.4.5 0 .4-.1.8-.5 1.1-.5.4-1.4.6-2.6.1a8.8 8.8 0 0 1-4.1-4.1c-.4-1-.2-1.8.4-2.5z"/></svg>WhatsApp</button><button type="button" class="boton" id="enlace-copiar-2">Copiar enlace</button><button type="button" class="boton" id="enlace-cancelar-2">Cancelar</button></div>
+        <!-- (28 Oct 2026, 18:07: «le quiero compartir a mi esposa la invitación, pero no le llega al WhatsApp») con el bloqueo de
+             WhatsApp con Face ID, compartir desde otra app se queda sin enviar; pegar el enlace dentro del chat siempre funciona -->
+        <p class="t nota">¿No le llega? Copia el enlace y pégalo tú en su chat de WhatsApp.</p>
       </div>
     </div>
 
@@ -122,6 +136,8 @@
       <h2>Te han invitado a una conversación encriptada</h2>
       <p class="t">Mensajes, llamadas y videollamadas encriptados de extremo a extremo. ¿Aceptas?</p>
       <div class="fila centro"><button type="button" class="boton principal" id="aceptar-si">Aceptar</button><button type="button" class="boton" id="aceptar-no">No, gracias</button></div>
+      <!-- en el iPhone, fuera de la app: para tenerla en la app de la pantalla de inicio, se copia y se pega allí -->
+      <p class="aceptar-app" id="aceptar-app" hidden>¿Tienes GUARDIANA en la pantalla de inicio? <button type="button" class="enlace-mini" id="aceptar-copiar">Copia este enlace</button>, abre la app y toca «Pegar invitación».</p>
     </div>
 
     <div class="paso" id="paso-entrar" hidden>
@@ -286,6 +302,7 @@
       <button type="button" class="gc-cab-boton gc-mas-boton" id="cmas" aria-label="Más opciones" title="Más opciones" aria-haspopup="menu" aria-expanded="false" aria-controls="cmenu"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5.5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="18.5" r="1.4"/></svg></button>
     </header>
     <div class="gc-menu" id="cmenu" role="menu" aria-label="Más opciones" hidden>
+      <button type="button" role="menuitem" id="cm-contacto" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="3.6"/><path d="M3.5 20c.8-3.6 3.4-5.6 6.5-5.6 1.4 0 2.7.4 3.8 1.1"/><path d="M18 13.5v7M14.5 17h7"/></svg><span>Guardar contacto</span></button>
       <button type="button" role="menuitem" id="cm-nombre"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4l10-10-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg><span>Cambiar el nombre</span></button>
       <button type="button" role="menuitem" id="cm-seguridad"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span>Seguridad y verificación</span></button>
       <button type="button" role="menuitemcheckbox" aria-checked="false" id="cm-discreto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Modo discreto</span><i class="interruptor-mini" aria-hidden="true"></i></button>
@@ -295,6 +312,8 @@
     </div>
     <!-- dueño, 28 Oct 2026, 13:34 («que en la pantalla minimizada aparezca… una especie de notificación»): en el ordenador, una vez -->
     <div class="gc-avisos" id="cavisos" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span>¿Te avisamos cuando llegue un mensaje o una llamada con GUARDIANA minimizada? El aviso no muestra el contenido.</span><button type="button" class="boton" id="cavisos-si">Activar avisos</button><button type="button" class="gc-avisos-no" id="cavisos-no">Ahora no</button></div>
+    <!-- Guardar como contacto (dueño, 28 Oct 2026, 17:33: «tenemos que dar la opción para guardar el contacto»): una vez, al empezar -->
+    <div class="gc-contacto" id="ccontacto" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="8" r="3.6"/><path d="M3.5 20c.8-3.6 3.4-5.6 6.5-5.6 1.4 0 2.7.4 3.8 1.1"/><path d="M18 13.5v7M14.5 17h7"/></svg><span>Guárdalo como contacto y la próxima vez os llamáis o escribís sin enlace.</span><button type="button" class="boton" id="ccontacto-si">Guardar contacto</button><button type="button" class="gc-contacto-no" id="ccontacto-no" aria-label="Ahora no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     <!-- ronda 55 (ChatGPT y Astra): si una conversación que ya fue postcuántica vuelve a solo ECDH, se para hasta que la persona lo acepte -->
     <div class="gc-pq" id="cpq" role="alert" hidden><span>La otra persona no ha usado la protección postcuántica. Como esta conversación ya la tenía, se ha detenido.</span><button type="button" class="boton" id="cpq-si">Continuar sin protección postcuántica</button></div>
     <div class="cuerpo">
@@ -489,6 +508,17 @@
     <div class="fila"><button type="button" class="boton" id="vaciar-no">Cancelar</button><button type="button" class="boton peligro" id="vaciar-si">Borrar el chat</button></div>
   </div>
 </div>
+<!-- Pegar invitación, si el teléfono no deja leer lo copiado: se pega a mano -->
+<div class="gc-hoja" id="h-pegar" role="dialog" aria-modal="true" aria-labelledby="h-pegar-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-pegar-t">Pegar invitación</h2>
+    <p class="t">Copia el enlace que te han enviado (WhatsApp, Telegram, correo…) y pégalo aquí.</p>
+    <input class="campo" id="pegar-campo" type="url" autocomplete="off" spellcheck="false" autocapitalize="off" placeholder="https://guardianagroup.com/…">
+    <div class="fila"><button type="button" class="boton" id="pegar-no">Cancelar</button><button type="button" class="boton principal" id="pegar-si">Entrar</button></div>
+  </div>
+</div>
+
 <div class="gc-hoja" id="h-nombre" role="dialog" aria-modal="true" aria-labelledby="h-nombre-t">
   <div class="gc-hoja-caja caja">
     <div class="gc-asa"></div>
@@ -618,7 +648,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261029p55"></script>
+<script src="/orbita/static/idioma.js?v=20261029p56"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -629,6 +659,6 @@
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028b"></script>
 <script src="llamada.js?v=20261029u"></script>
-<script src="app.js?v=20261029o"></script>
+<script src="app.js?v=20261029p"></script>
 </body>
 </html>

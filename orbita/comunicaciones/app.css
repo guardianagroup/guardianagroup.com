@@ -928,3 +928,52 @@ html.como-app .barra .barra-t{display:block;font-size:12px;letter-spacing:.3em}
   .gc-llamada:not(.mini) .videos #v-remoto.vertical{object-fit:cover}
   .gc-llamada.dividida:not(.mini) .videos #v-remoto.vertical,.gc-llamada.dividida:not(.mini) .videos #v-local.vertical{object-fit:cover}
 }
+
+/* ==== Contactos (dueño, 28 Oct 2026, 17:29–17:33: «una llamada directa sin tener que quedar la invitación… que uno guarde el
+   contacto como quiera… simplificado y lo más fácil posible»): en el teléfono, el inicio con los contactos guardados, cada uno
+   con su nombre, si está en línea y dos botones, llamar y videollamar. Con contactos, el inicio empieza arriba y sin el globo. ==== */
+.contactos{width:100%;max-width:440px;margin:0 auto 10px;text-align:left}
+.contactos[hidden]{display:none}
+.contactos-t{margin:0 6px 8px;font:600 11.5px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:#9CC3E4}
+.contactos-filas{list-style:none;margin:0;padding:6px;display:grid;gap:2px;border-radius:18px;border:1px solid rgba(156,195,228,.16);background:rgba(12,17,24,.82)}
+.contacto{display:flex;align-items:center;gap:8px;min-height:64px;padding-right:4px}
+.contacto-abre{all:unset;box-sizing:border-box;flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:8px 6px 8px 8px;border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.contacto-abre:active{background:rgba(156,195,228,.08)}
+.contacto-abre:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.contacto-av{position:relative;width:46px;height:46px;flex:none;border-radius:50%;display:grid;place-items:center;background:#142231;color:#9CC3E4;font:600 18px/1 var(--texto)}
+.contacto-av.en-linea::after{content:'';position:absolute;right:0;bottom:1px;width:11px;height:11px;border-radius:50%;background:#6CCBA5;box-shadow:0 0 0 2.5px #0C1118}
+.contacto-txt{display:grid;gap:2px;min-width:0}
+.contacto-txt b{font:600 16.5px/1.25 var(--texto);color:#F4F6F8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.contacto-txt small{font:400 13px/1.3 var(--texto);color:var(--muted)}
+.contacto.nueva .contacto-txt small{color:#9CC3E4;font-weight:500}
+.contacto-n{margin-left:auto;min-width:22px;height:22px;padding:0 7px;box-sizing:border-box;border-radius:999px;background:#9CC3E4;color:#06080C;font:600 12px/22px var(--texto);text-align:center;font-style:normal}
+.contacto-b{appearance:none;width:44px;height:44px;flex:none;border-radius:50%;border:0;padding:0;background:rgba(156,195,228,.12);color:#9CC3E4;display:grid;place-items:center;cursor:pointer;touch-action:manipulation}
+.contacto-b svg{width:21px;height:21px}
+.contacto-b:active{background:rgba(156,195,228,.26)}
+.contacto-b:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+#inicio.con-contactos>.red-nucleo,#inicio.con-contactos>h1{display:none}
+#inicio.con-invitacion>.contactos{display:none}
+@media (max-width:760px){#inicio.con-contactos::before{display:none}#inicio.con-contactos{padding-top:16px}}
+/* en el chat de un contacto, «‹» vuelve a los contactos */
+@media (max-width:760px){body.con-contactos .conv .gc-cabecera #cvolver{display:grid!important;width:36px;margin-left:-4px}}
+/* «Pegar invitación», debajo del botón principal, en la app instalada */
+.pegar-inv{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:50px;padding:0 18px;border-radius:14px;border:1px solid rgba(156,195,228,.3);background:rgba(10,14,20,.6);color:#DCE5ED;font:500 15.5px/1 var(--texto);cursor:pointer;touch-action:manipulation}
+.pegar-inv[hidden]{display:none}
+.pegar-inv svg{width:20px;height:20px;stroke:#9CC3E4}
+.pegar-inv:active{background:rgba(156,195,228,.12)}
+/* la tira «Guárdalo como contacto», una vez al empezar */
+.gc-contacto{display:flex;align-items:center;gap:10px;padding:9px 10px 9px 14px;border-bottom:1px solid rgba(156,195,228,.16);background:rgba(156,195,228,.07);font-size:13.5px;line-height:1.35;color:#DCE5ED}
+.gc-contacto[hidden]{display:none}
+.gc-contacto>svg{width:20px;height:20px;flex:none;stroke:#9CC3E4}
+.gc-contacto span{flex:1;min-width:0}
+.gc-contacto .boton{flex:none;min-height:34px;padding:4px 12px;font-size:13px;white-space:nowrap}
+.gc-contacto-no{appearance:none;flex:none;border:0;background:transparent;color:var(--muted);width:32px;height:32px;display:grid;place-items:center;padding:0;cursor:pointer}
+.gc-contacto-no svg{width:16px;height:16px}
+/* al aceptar en Safari del iPhone: cómo tenerla en la app */
+.aceptar-app{margin:16px 0 0;max-width:340px;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.aceptar-app[hidden]{display:none}
+.enlace-mini{all:unset;cursor:pointer;color:#9CC3E4;text-decoration:underline;text-underline-offset:2px}
+/* «Enviar por WhatsApp», abre WhatsApp con la invitación escrita */
+.boton.whatsapp{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.boton.whatsapp svg{width:18px;height:18px}
+.boton.whatsapp[hidden]{display:none}
