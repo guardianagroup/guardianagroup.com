@@ -183,8 +183,7 @@
     const est = $('#enlace-estado'); est.textContent = c.ocupada ? T('Esta invitación ya la usó otra persona.') : T('Esperando a que la otra persona abra el enlace…'); est.classList.toggle('mal', !!c.ocupada);
     // en el móvil, solo «Compartir enlace» (el enlace ya está copiado); al compartir, la pantalla de espera
     const movil = matchMedia('(pointer: coarse)').matches, comparte = !!navigator.share;
-    // «Copiar enlace» siempre a la vista (18:07): si compartir a WhatsApp no sale, se pega a mano en su chat
-    $('#enlace-copiar').hidden = false; $('#enlace-copiar').classList.toggle('principal', !(movil && comparte)); $('#enlace-compartir').hidden = !comparte; $('#enlace-compartir').classList.toggle('principal', movil && comparte);
+    $('#enlace-copiar').hidden = movil && comparte; $('#enlace-compartir').hidden = !comparte; $('#enlace-compartir').classList.toggle('principal', movil && comparte);
     $('#enlace-copiado').hidden = !c.copiado;
     $('#enlace-vista').hidden = !!c.compartido; $('#enlace-espera').hidden = !c.compartido;
     document.body.classList.toggle('esperando-enlace', !!c.compartido && ACTUAL === c.id);
@@ -226,7 +225,6 @@
   }
   function muestraAceptar(ver) {
     $('#paso-aceptar').hidden = !ver; $('#inicio').classList.toggle('con-invitacion', ver); document.body.classList.toggle('aceptando', ver);
-    { const ap = $('#aceptar-app'); if (ap) ap.hidden = !(ver && /iPhone|iPad|iPod/.test(navigator.userAgent) && !comoApp()); }
     if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
     else $('#paso-inicio').hidden = false;
   }
@@ -1758,22 +1756,6 @@
       const c = CONVS.get(b.dataset.id); if (!c) return;
       if (b.dataset.acto) llamaContacto(c, b.dataset.acto === 'video'); else abreConv(c.id);
     });
-    // Pegar invitación (18:05): en la app instalada, el enlace que llegó por WhatsApp (Safari no comparte nada con la app)
-    {
-      const pegar = $('#pegar-inv'), patron = /#[ib]=[A-Za-z0-9_-]{43}/;
-      if (pegar) pegar.hidden = !comoApp();
-      const entraCon = async (txt) => { const m = String(txt || '').match(/https?:\/\/\S+/); const enlace = m ? m[0] : String(txt || '').trim(); if (!patron.test(enlace)) return false; const ok = await aceptaInvitacion(enlace); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); return true; };
-      if (pegar) pegar.addEventListener('click', async () => {
-        let txt = ''; try { if (navigator.clipboard && navigator.clipboard.readText) txt = await navigator.clipboard.readText(); } catch (_) {}
-        if (await entraCon(txt)) return;
-        const x = $('#pegar-campo'); x.value = ''; abreHoja('h-pegar'); setTimeout(() => { try { x.focus(); } catch (_) {} }, 60);
-      });
-      const pegado = async () => { const v = $('#pegar-campo').value; if (!patron.test(v)) { aviso(T('Ese enlace no es una invitación de GUARDIANA.')); return; } cierraHoja('h-pegar'); await entraCon(v); };
-      $('#pegar-si').addEventListener('click', pegado);
-      $('#pegar-no').addEventListener('click', () => cierraHoja('h-pegar'));
-      $('#pegar-campo').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); pegado(); } });
-      $('#aceptar-copiar').addEventListener('click', async () => { const e = invitacionPendiente; if (!e) return; try { await navigator.clipboard.writeText(e); aviso(T('Enlace copiado: abre GUARDIANA y toca «Pegar invitación».')); } catch (_) { aviso(T('No se pudo copiar el enlace.')); } });
-    }
     $('#volver-lista').addEventListener('click', () => { if (vivas().length) { quiereNueva = false; if (matchMedia('(max-width: 760px)').matches) verLista(); else pintaLista(); } });
     $('#aviso').addEventListener('click', () => { if (avisoConvId && CONVS.has(avisoConvId)) { const id = avisoConvId; $('#aviso').hidden = true; abreConv(id); } });
     // el nombre de la conversación: un alias que solo se ve aquí
@@ -2151,14 +2133,8 @@
     $('#codigo-enlace').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !c.semilla) return; const u = ORIGEN + '#i=' + C.b64u(c.semilla); $('#codigo-enlace').dataset.enlace = u; try { await navigator.clipboard.writeText(u); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { aviso(u); } });
     $('#aceptar-si').addEventListener('click', async () => { const e = invitacionPendiente; invitacionPendiente = null; muestraAceptar(false); if (!e) return; marcaInvitado(); const ok = await aceptaInvitacion(e); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); });
     $('#aceptar-no').addEventListener('click', () => { invitacionPendiente = null; muestraAceptar(false); aviso(T('Invitación rechazada.')); });
-    $('#enlace-otra-vez').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c) { c.compartido = false; muestraEnlace(c); } });
     $('#enlace-cancelar-2').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await destruye(c, true); });
     $('#enlace-copiar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.clipboard.writeText(enlaceB(c)); c.copiado = true; c.compartido = true; muestraEnlace(c); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { $('#enlace-b').select(); } });
-    // «Enviar por WhatsApp» (18:10: «que yo comparta el enlace… desde la app que está en mi pantalla»): abre WhatsApp con la
-    // invitación ya escrita, sin pasar por el menú de compartir del iPhone (con el bloqueo de WhatsApp, ese menú no envía)
-    const porWhatsApp = () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; c.compartido = true; location.href = 'whatsapp://send?text=' + encodeURIComponent(T('Te invito a una conversación encriptada en GUARDIANA:') + ' ' + enlaceB(c)); setTimeout(() => { if (ACTUAL === c.id) muestraEnlace(c); }, 600); };
-    for (const id of ['#enlace-whatsapp', '#enlace-whatsapp-2']) { const b = $(id); if (b) { b.hidden = !esMovil(); b.addEventListener('click', porWhatsApp); } }
-    $('#enlace-copiar-2').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.clipboard.writeText(enlaceB(c)); aviso(T('Enlace copiado: pégalo en su chat de WhatsApp.')); } catch (_) { aviso(T('No se pudo copiar el enlace.')); } });
     const comparte = $('#enlace-compartir'); comparte.hidden = !navigator.share;
     comparte.addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.share({ title: 'GUARDIANA', text: T('Invitación a una sesión blindada de GUARDIANA Comunicaciones'), url: enlaceB(c) }); c.compartido = true; if (ACTUAL === c.id) muestraEnlace(c); } catch (_) {} });
     $('#enlace-cancelar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await destruye(c, true); });

@@ -957,11 +957,6 @@ html.como-app .barra .barra-t{display:block;font-size:12px;letter-spacing:.3em}
 @media (max-width:760px){#inicio.con-contactos::before{display:none}#inicio.con-contactos{padding-top:16px}}
 /* en el chat de un contacto, «‹» vuelve a los contactos */
 @media (max-width:760px){body.con-contactos .conv .gc-cabecera #cvolver{display:grid!important;width:36px;margin-left:-4px}}
-/* «Pegar invitación», debajo del botón principal, en la app instalada */
-.pegar-inv{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:50px;padding:0 18px;border-radius:14px;border:1px solid rgba(156,195,228,.3);background:rgba(10,14,20,.6);color:#DCE5ED;font:500 15.5px/1 var(--texto);cursor:pointer;touch-action:manipulation}
-.pegar-inv[hidden]{display:none}
-.pegar-inv svg{width:20px;height:20px;stroke:#9CC3E4}
-.pegar-inv:active{background:rgba(156,195,228,.12)}
 /* la tira «Guárdalo como contacto», una vez al empezar */
 .gc-contacto{display:flex;align-items:center;gap:10px;padding:9px 10px 9px 14px;border-bottom:1px solid rgba(156,195,228,.16);background:rgba(156,195,228,.07);font-size:13.5px;line-height:1.35;color:#DCE5ED}
 .gc-contacto[hidden]{display:none}
@@ -970,11 +965,7 @@ html.como-app .barra .barra-t{display:block;font-size:12px;letter-spacing:.3em}
 .gc-contacto .boton{flex:none;min-height:34px;padding:4px 12px;font-size:13px;white-space:nowrap}
 .gc-contacto-no{appearance:none;flex:none;border:0;background:transparent;color:var(--muted);width:32px;height:32px;display:grid;place-items:center;padding:0;cursor:pointer}
 .gc-contacto-no svg{width:16px;height:16px}
-/* al aceptar en Safari del iPhone: cómo tenerla en la app */
-.aceptar-app{margin:16px 0 0;max-width:340px;font-size:13.5px;line-height:1.5;color:var(--muted)}
-.aceptar-app[hidden]{display:none}
-.enlace-mini{all:unset;cursor:pointer;color:#9CC3E4;text-decoration:underline;text-underline-offset:2px}
-/* «Enviar por WhatsApp», abre WhatsApp con la invitación escrita */
-.boton.whatsapp{display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.boton.whatsapp svg{width:18px;height:18px}
-.boton.whatsapp[hidden]{display:none}
+/* la espera de la invitación, limpia: «Cancelar» como texto (dueño, 28 Oct 2026, 18:26) */
+.enlace-cancelar-txt{all:unset;cursor:pointer;margin-top:18px;padding:10px 18px;border-radius:999px;color:var(--muted);font:500 15px/1 var(--texto)}
+.enlace-cancelar-txt:active{background:rgba(156,195,228,.1)}
+.enlace-cancelar-txt:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
