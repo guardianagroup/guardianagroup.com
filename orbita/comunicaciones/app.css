@@ -764,3 +764,5 @@ body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
    en la conversación; para salir, «⋯» → «Terminar». La espera de la invitación, sin el globo */
 @media (max-width:760px){#volver-lista,#lista,#cvolver{display:none!important}}
 #inicio.con-invitacion>.red-nucleo{display:none}
+/* Como app desde la pantalla de inicio (sin barras del navegador), lo de arriba no va debajo de la hora ni de la isla */
+@media (display-mode: standalone), (display-mode: fullscreen){.barra{padding-top:calc(env(safe-area-inset-top) + 6px)}.gc-llamada-arriba{padding-top:calc(env(safe-area-inset-top) + 8px)}}

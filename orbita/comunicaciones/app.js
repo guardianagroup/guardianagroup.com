@@ -152,6 +152,11 @@
   // Invitación blindada: solo por enlace o QR, con la semilla entera (256 bits) en el fragmento «#b=»: el navegador no la
   // manda a ningún servidor y el relé no guarda ningún sobre. Se guarda aquí hasta que la otra persona entre o se termine.
   const esMovil = () => matchMedia('(max-width: 760px)').matches;
+  // Pantalla completa en el móvil (dueño, 16:03: «una interfaz que ocupe toda la pantalla… que no se vea nada del móvil»). Android
+  // la da desde la web; el iPhone no (solo como app desde la pantalla de inicio)
+  const comoApp = () => { try { return matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches || navigator.standalone === true; } catch (_) { return false; } };
+  const puedeCompleta = () => !!(document.fullscreenEnabled && document.documentElement.requestFullscreen) && !/iPhone|iPad|iPod/i.test(navigator.userAgent);
+  function pantallaCompleta() { try { if (!document.fullscreenElement && !comoApp()) document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => {}); } catch (_) {} }
   async function borraAnteriores(salvo) { for (const x of [...CONVS.values()]) if (x.id !== salvo) { try { await destruye(x, true); } catch (_) {} } }
   async function creaInvitacionB() {
     if (!R.abierto) { aviso(T('Sin conexión: espera un momento.')); return; }
@@ -1664,6 +1669,11 @@
     $('#cm-discreto').addEventListener('click', () => { dentroMenu = true; try { $('#discreto').click(); } finally { dentroMenu = false; } $('#cm-discreto').setAttribute('aria-checked', String($('#discreto').getAttribute('aria-pressed') === 'true')); });
     $('#cm-avisos').addEventListener('click', () => { cierraMenu(); pideAvisos(); });
     $('#cm-terminar').addEventListener('click', () => { cierraMenu(); $('#terminar').click(); });
+    $('#cm-completa').hidden = !esMovil() || comoApp();
+    $('#cm-completa').addEventListener('click', () => { cierraMenu(); if (puedeCompleta()) pantallaCompleta(); else abreHoja('h-completa'); });
+    $('#completa-ok').addEventListener('click', () => cierraHoja('h-completa'));
+    // en Android, la pantalla completa entra sola con el primer toque importante: crear, aceptar, llamar o contestar
+    for (const id of ['#nueva-blindada', '#aceptar-si', '#llamar', '#videollamar', '#ll-contestar']) { const b = $(id); if (b) b.addEventListener('click', () => { if (esMovil() && puedeCompleta()) pantallaCompleta(); }, { capture: true }); }
     // tocar el nombre o el candado abre la seguridad de la conversación, como en las aplicaciones de mensajería
     for (const el of [document.querySelector('.conv .gc-quien'), document.querySelector('.conv .gc-avatar')]) if (el) el.addEventListener('click', () => $('#escudo').click());
     $('#cavisos-si').addEventListener('click', pideAvisos);
