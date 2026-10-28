@@ -1,6 +1,6 @@
 // GUARDIANA · Comunicaciones · cliente del relé (26 Oct 2026).
-// Elige el relé más cercano de los de GUARDIANA (el que antes responde a /salud), mantiene la conexión viva (ping cada
-// 25 s, reconexión con espera creciente), vuelve a entrar en las salas tras una caída y pasa tramas binarias ya selladas.
+// Se conecta al relé de GUARDIANA (el principal: ver «elige»), mantiene la conexión viva (ping cada 10 s, reconexión
+// con espera creciente), vuelve a entrar en las salas tras una caída y pasa tramas binarias ya selladas.
 // El relé solo ve la sala y los bytes; nunca una clave ni un nombre.
 'use strict';
 (function (raiz) {
@@ -17,22 +17,14 @@
     let ice = [], caduca = 0, region = '', llamadas = false, ultimoPong = 0, pingEn = 0, latencia = null;
     const esperas = {}; // respuestas pendientes (invita, busca)
 
-    async function sonda(base) {
-      const http = base.replace(/^ws/, 'http');
-      const c = new AbortController(); const t = setTimeout(() => c.abort(), 3500);
-      try {
-        const t0 = performance.now();
-        const r = await fetch(http + '/salud', { signal: c.signal, cache: 'no-store', mode: 'cors' });
-        const j = await r.json();
-        if (!j || !j.ok) throw new Error('sin ok');
-        return { base, ms: performance.now() - t0, region: j.region || '' };
-      } catch (_) { return null; } finally { clearTimeout(t); }
-    }
+    // 27 Oct 2026, 21:25: las dos personas de una conversación tienen que estar en el mismo relé (los relés no se enlazan
+    // entre sí: la sala y el código de invitación viven en uno solo). Con el relé de Miami ya en marcha, elegir «el más
+    // cercano» separaría a una persona de América de otra de Europa. Mientras los relés no se enlacen, Comunicaciones usa
+    // siempre el principal (Núremberg); el de Miami sirve a ZERO.
     async function elige() {
       if (q.get('rele')) return q.get('rele');
       if (LOCAL) return 'ws://127.0.0.1:8794';
-      const rs = (await Promise.all(MOTORES.map(sonda))).filter(Boolean).sort((a, b) => a.ms - b.ms);
-      return rs.length ? rs[0].base : MOTORES[0];
+      return MOTORES[0];
     }
 
     async function conecta() {
@@ -44,7 +36,7 @@
         abierto = true; intentos = 0;
         ws.send(JSON.stringify({ t: 'hola' }));
         for (const [sala, yo] of salas) ws.send(JSON.stringify({ t: 'entra', sala, yo }));
-        clearInterval(ping); const haz = () => { try { pingEn = Date.now(); ws.send(JSON.stringify({ t: 'ping' })); } catch (_) {} }; ping = setInterval(haz, 10000); setTimeout(haz, 300);
+        clearInterval(ping); pingEn = 0; ping = setInterval(mide, 10000); setTimeout(mide, 300);
         emite('abierto', { url });
       };
       ws.onmessage = (e) => {
@@ -85,6 +77,12 @@
     const hex = (b) => [...b].map((x) => x.toString(16).padStart(2, '0')).join('');
     const deHex = (s) => Uint8Array.from(String(s).match(/../g) || [], (h) => parseInt(h, 16));
 
+    // Un ping al relé (cada 10 s, y cada 2 s mientras hay un envío: el viaje del archivo enseña la latencia medida).
+    // Nunca dos a la vez: el «pong» no lleva número, así que uno nuevo espera a la respuesta del anterior (o a 4 s).
+    function mide() {
+      if (!abierto || !ws || (pingEn && Date.now() - pingEn < 4000)) return false;
+      try { pingEn = Date.now(); ws.send(JSON.stringify({ t: 'ping' })); return true; } catch (_) { return false; }
+    }
     function entra(sala, yo) { salas.set(sala, yo); if (abierto) ws.send(JSON.stringify({ t: 'entra', sala, yo })); }
     function sale(sala) { salas.delete(sala); if (abierto) ws.send(JSON.stringify({ t: 'sale', sala })); }
     function manda(sala, para, carga) {
@@ -102,7 +100,7 @@
     function cierra() { cerrando = true; clearInterval(ping); try { ws && ws.close(); } catch (_) {} }
 
     conecta();
-    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get ultimoPong() { return ultimoPong; } };
+    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get ultimoPong() { return ultimoPong; } };
   }
   raiz.GuardianaRele = { crea, MOTORES };
 })(typeof window !== 'undefined' ? window : globalThis);
