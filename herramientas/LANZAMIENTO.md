@@ -53,6 +53,14 @@ Revisar, con herramientas (Playwright sirviendo el sitio con `python3 -m http.se
 - **ZERO:** pide las webs en el idioma del navegador de la persona; el muro antirrobot sale en el centro con «Actualizar» (una recarga cuando la persona la pulsa).
 - **Barrido:** 287 páginas sin enlaces internos rotos; 166 × 2 tamaños sin errores ni desbordes; español a la vista en inglés, limpio.
 
+## 28 Oct 2026 (tarde): hecho y publicado
+- **Web abierta** (13:54): fuera el modo «en construcción»; portada y /nueva/ en español e inglés.
+- **Comunicaciones como una app de mensajería** (ronda 74): tics de leído en verde, «escribiendo…», cada llamada en el chat al lado de quien llamó, avisos con la página minimizada, móvil con cabecera en una fila y «⋯», «Atrás», aviso dentro de Instagram/Facebook/TikTok.
+- **Varias conversaciones** a la vez (hasta 8) con lista, nombres propios, borradores y una llamada a la vez.
+- **Sesión blindada** con marco de cristal y luz que recorre el borde (14:35).
+- **Llamadas por el servidor más cercano** (Miami o Núremberg) y textos legales al día (privacidad 4, 5 y 9; términos 6; cómo funciona).
+- Pendiente: los borradores en inglés y portugués de los textos legales deben decir también lo de Miami; las cadenas nuevas, a los otros 39 idiomas; la llamada que «se borra al descolgar» (Barranquilla–Cartagena), a falta de datos del dueño.
+
 ## Apuntado para después del lanzamiento (28 Oct 2026, agencia)
 - **Antes y después de las subastas** (ronda 72): página «Comprueba tu exposición» (tu conexión frente a la de la burbuja, sin instalar nada), marcador opcional para ver las pujas de tu navegador en el ordenador, y un «Informe de exposición y protección» firmado y sin datos personales. La subasta propia de GUARDIANA, descartada.
 - **Llamada urgente** (ronda 73): Web Push encriptado con permiso por contacto, horas de silencio y límites; móvil «timbre» vinculado con QR; no prometer que despierta a nadie; nombre «Aviso prioritario», nunca «emergencias».
@@ -61,5 +69,5 @@ Revisar, con herramientas (Playwright sirviendo el sitio con `python3 -m http.se
 
 ## Infraestructura (solo informe; no se toca desde la web)
 - Cada publicación en `main` reinicia el motor y el relé en ≤15 min (`zero-actualiza.timer` reinicia `zero-motor` con cualquier cambio): corta ZERO y el chat un momento; las llamadas por coturn siguen. Conviene que solo reinicie si cambian archivos del motor.
-- ZERO y Comunicaciones solo en Núremberg: las webs ven Alemania (idioma por IP); el servidor de Miami no tiene el motor.
+- **Desde el 28 Oct (14:38), servidor nuevo en Miami** (Vultr, 2 vCPU y 4 GB, sin copias automáticas; `motor-am` → 144.202.36.32; instalado con `zero-motor/cloud-init-am.yaml`): motor de ZERO (la página elige el que responde antes: desde América, Miami, y las webs ven una IP de Estados Unidos) y coturn (las llamadas de cada persona entran por el servidor más cercano y los dos servidores se pasan la llamada; el chat sigue siempre en Núremberg). El servidor viejo de Miami (207.246.115.38) sigue con `rele-am` (páginas m/ y e/), sin tocar.
 - `herramientas/` es pública en el repositorio y lleva IP de servidores.
