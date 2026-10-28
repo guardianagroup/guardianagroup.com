@@ -2841,7 +2841,9 @@
   "La imagen de la otra persona no llega.": "दूसरे व्यक्ति की छवि नहीं पहुँच रही है।",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "यह रसीद का PDF है: यह उसे पढ़ने, सहेजने या प्रिंट करने के लिए है, लेकिन इसमें पूरे हस्ताक्षर नहीं होते। इसे सत्यापित करने के लिए उसी रसीद की .json फ़ाइल का उपयोग करें: चैट में “रसीद देखें” खोलें और “.json डाउनलोड करें” दबाएँ।",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json फ़ाइल चैट में डाउनलोड होती है: “रसीद देखें” खोलें और “.json डाउनलोड करें” दबाएँ। PDF पढ़ने के लिए है; इसे सत्यापित नहीं किया जा सकता।",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "मान्य: रसीद की पोस्ट-क्वांटम कुंजी से जाँचा गया।"
+  "Válida: comprobada con la clave postcuántica del comprobante.": "मान्य: रसीद की पोस्ट-क्वांटम कुंजी से जाँचा गया।",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "यह वेबसाइट कभी-कभी सर्वर से निकलने वाले ब्राउज़रों को, जैसे बबल को, अंदर नहीं आने देती (एंटी-बॉट सुरक्षा)। आप फिर से कोशिश कर सकते हैं या इसे अपने सामान्य ब्राउज़र में खोल सकते हैं।",
+  "Volver a intentar": "फिर से कोशिश करें"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

@@ -2839,7 +2839,9 @@
   "La imagen de la otra persona no llega.": "Imaginea celeilalte persoane nu ajunge.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Acesta este PDF-ul dovezii: servește pentru a o citi, a o salva sau a o tipări, dar nu conține semnăturile complete. Pentru a o verifica, folosește fișierul .json al aceleiași dovezi: în chat, deschide „Vezi dovada” și apasă „Descarcă .json”.",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Fișierul .json se descarcă din chat: deschide „Vezi dovada” și apasă „Descarcă .json”. PDF-ul este pentru citire; nu poate fi verificat.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "Validă: verificată cu cheia post-cuantică a dovezii."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Validă: verificată cu cheia post-cuantică a dovezii.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Acest site uneori nu lasă să intre browserele care ies dintr-un server, cum este bula (protecție anti-robot). Poți încerca din nou sau îl poți deschide în browserul tău obișnuit.",
+  "Volver a intentar": "Încearcă din nou"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

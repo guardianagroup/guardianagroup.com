@@ -2839,7 +2839,9 @@
   "La imagen de la otra persona no llega.": "Изображение собеседника не поступает.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Это PDF квитанции: его можно читать, сохранять или печатать, но в нём нет полных подписей. Чтобы проверить квитанцию, используйте файл .json той же квитанции: в чате откройте «Посмотреть квитанцию» и нажмите «Скачать .json».",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Файл .json скачивается в чате: откройте «Посмотреть квитанцию» и нажмите «Скачать .json». PDF — для чтения; его нельзя проверить.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "Действительна: проверена постквантовым ключом квитанции."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Действительна: проверена постквантовым ключом квитанции.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Этот сайт иногда не пускает браузеры, выходящие с сервера, такие как пузырь (защита от ботов). Вы можете попробовать ещё раз или открыть его в своём обычном браузере.",
+  "Volver a intentar": "Попробовать ещё раз"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

@@ -2839,7 +2839,9 @@
   "La imagen de la otra persona no llega.": "Picha ya mtu mwingine haifiki.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "Hiyo ni PDF ya risiti: inafaa kwa kusoma, kuhifadhi au kuchapisha, lakini haina sahihi kamili. Ili kuithibitisha, tumia faili ya .json ya risiti hiyo hiyo: kwenye gumzo, fungua “Ona risiti” kisha ubonyeze “Pakua .json”.",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Faili ya .json hupakuliwa kwenye gumzo: fungua “Ona risiti” kisha ubonyeze “Pakua .json”. PDF ni ya kusoma; haiwezi kuthibitishwa.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "Halali: imehakikiwa kwa ufunguo wa baada ya kwanta wa risiti."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "Halali: imehakikiwa kwa ufunguo wa baada ya kwanta wa risiti.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Tovuti hii wakati mwingine hairuhusu vivinjari vinavyotoka kwenye seva, kama kiputo (ulinzi dhidi ya roboti). Unaweza kujaribu tena au kuifungua kwenye kivinjari chako cha kawaida.",
+  "Volver a intentar": "Jaribu tena"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

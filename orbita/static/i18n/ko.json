@@ -2839,7 +2839,9 @@
   "La imagen de la otra persona no llega.": "상대방의 영상이 도착하지 않습니다.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "이것은 증명서의 PDF입니다. 읽거나 저장하거나 인쇄하는 데 쓰지만, 완전한 서명은 들어 있지 않습니다. 검증하려면 같은 증명서의 .json 파일을 사용하세요: 채팅에서 ‘증명서 보기’를 열고 ‘.json 다운로드’를 누르세요.",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json 파일은 채팅에서 다운로드합니다: ‘증명서 보기’를 열고 ‘.json 다운로드’를 누르세요. PDF는 읽기용이며, 검증할 수 없습니다.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "유효: 증명서의 포스트 양자 키로 확인했습니다."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "유효: 증명서의 포스트 양자 키로 확인했습니다.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "이 사이트는 버블처럼 서버에서 나오는 브라우저를 들이지 않을 때가 있습니다(봇 차단). 다시 시도하거나 평소 쓰는 브라우저에서 열 수 있습니다.",
+  "Volver a intentar": "다시 시도하기"
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

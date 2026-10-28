@@ -2839,7 +2839,9 @@
   "La imagen de la otra persona no llega.": "అవతలి వ్యక్తి చిత్రం రావడం లేదు.",
   "Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».": "ఇది రసీదు PDF: ఇది చదవడానికి, సేవ్ చేయడానికి లేదా ప్రింట్ చేయడానికి ఉపయోగపడుతుంది, కానీ ఇందులో పూర్తి సంతకాలు ఉండవు. ధృవీకరించడానికి, అదే రసీదు .json ఫైల్‌ను ఉపయోగించండి: చాట్‌లో “రసీదు చూడండి” తెరిచి, “.json డౌన్‌లోడ్ చేయి” నొక్కండి.",
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json ఫైల్ చాట్‌లో డౌన్‌లోడ్ అవుతుంది: “రసీదు చూడండి” తెరిచి, “.json డౌన్‌లోడ్ చేయి” నొక్కండి. PDF చదువుకోవడానికి ఉద్దేశించినది; దాన్ని ధృవీకరించలేం.",
-  "Válida: comprobada con la clave postcuántica del comprobante.": "చెల్లుబాటు అవుతుంది: రసీదులోని పోస్ట్-క్వాంటమ్ కీతో తనిఖీ చేయబడింది."
+  "Válida: comprobada con la clave postcuántica del comprobante.": "చెల్లుబాటు అవుతుంది: రసీదులోని పోస్ట్-క్వాంటమ్ కీతో తనిఖీ చేయబడింది.",
+  "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "ఈ సైట్ కొన్నిసార్లు సర్వర్ నుండి వచ్చే బ్రౌజర్లను, బబుల్ లాంటివాటిని, లోపలికి అనుమతించదు (యాంటీ-బాట్ రక్షణ). మీరు మళ్లీ ప్రయత్నించవచ్చు లేదా మీ మామూలు బ్రౌజర్‌లో తెరవవచ్చు.",
+  "Volver a intentar": "మళ్లీ ప్రయత్నించండి"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",
