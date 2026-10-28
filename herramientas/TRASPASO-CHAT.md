@@ -1,8 +1,26 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-## Estado al 27 Oct 2026, 18:40 (Bogotá) — EMPIEZA POR AQUÍ
+## Estado al 27 Oct 2026, 19:45 (Bogotá) — EMPIEZA POR AQUÍ
 
-Lo de las 17:05 (abajo) sigue valiendo salvo lo que cambia aquí.
+Lo de las 18:40 (abajo) sigue valiendo salvo lo que cambia aquí. Publicado en las dos ramas (main `b4ad518f`).
+
+**Regla nueva del dueño (19:15 y 19:21), para todo lo que vea el cliente:** vocabulario **profesional y entendible**. Primero una frase clara (qué es, qué significa, qué hacer) y después, en pequeño, los datos técnicos. Nada coloquial («ojo», «se cuelan», «trampa», «de golpe», «tráelo», «la que manda»…). Sigue el tuteo de toda la web.
+
+- **Ante un riesgo grave, ZERO no deja entrar** (dueño 18:40: «lo que dice la agencia»; ronda 67, ChatGPT y Astra).
+  - **Grave:** web en lista de malware o fraude, certificado que no pasa, algo peligroso dentro (sella la burbuja) o dirección interna. Solo «Volver» (las internas, «Entendido») y la nota «Ante un riesgo grave, ZERO bloquea el acceso por tu seguridad.».
+  - **Señal** (descarga, formulario o conexión sin encriptar, letras que imitan, mensaje emergente nada más abrir): «Volver» y «Continuar en ZERO», con la nota «La navegación sigue aislada de tu equipo, pero lo que escribas llegará a esta web.».
+  - **Motor:** fuera «entrar igualmente» (`entraIgual`, `ultimoBloqueo`, `Security.setIgnoreCertificateErrors`, resultado `riesgo`); un `{t:'chequeo',accion:'entrar'}` antiguo se rechaza. «Volver» con la burbuja sellada sale de la web sin red y, salvo fuga (sigue sellada y se destruye a los 20 s), vuelve a la calma y abre la web anterior. «Reanudar» con la web grave delante sale antes de ella (`p.grave`).
+- **Lo que ZERO ha detectado** (dueño 18:56: «decirle qué archivo ha sido… el máximo de información»).
+  - **Motor:** `h.detalle` en el resultado: archivos (nombre visible, tipo real por los primeros bytes con `tipoPorDentro`, engaños `distinto`/`doble`/`invisible`, tamaño, origen, SHA-256, listas, estado), lista y regla, certificado (motivo y código), origen de lo cortado, destino de la fuga y del formulario, empresas, redirecciones, ventanas, textos de los mensajes emergentes, permisos, huella y parámetros. Señal nueva `dialogo`: mensaje emergente del propio sitio nada más abrir, con su texto.
+  - **Página:** bajo cada motivo, frase clara + «Datos técnicos»; «Todo lo que ZERO ha detectado» plegado, con una línea que explica cada grupo; el bloque del archivo se actualiza cuando termina la descarga; el panel de descargas usa la misma frase. Bordes en espejo para árabe, hebreo, persa y urdu.
+- **Textos de la capa en registro profesional:** «Atención antes de entrar», «Requiere tu atención», «Sin amenazas detectadas», «Lo que ZERO ha detectado:», «Verificada por ZERO: sin amenazas conocidas», etc.
+- **Idiomas:** 3 + 24 + 32 + 1 + 24 frases nuevas en los 41 idiomas (`tradgrave.py`, `tradsabe2.py`, `tradpro.py`, `tradpro2.py` en el scratchpad; las versiones coloquiales sin publicar se borraron). `idioma.js?v=20261027p17`, `motor.js?v=20261027d`. Motor: «prototipo 0.2 · 27 Oct 2026 (ZERO entra antes que tú; con riesgo grave no se entra; qué archivo y todo lo que sabe)».
+- **Pruebas** (scratchpad `home/cheq`): `ui4.js` (riesgo grave y sellada), `ui5.js` (detalle, en es/en/ar), `prueba2.js` (el motor rechaza «entrar»); `sitio2.js` con `/auto2` (factura.pdf.exe), `/auto3` (foto.jpg que es un programa), `/rtlo`, `/alerta`, `/permisos`, `/form`, `/dentro`.
+- **Pendiente:** pasar a registro profesional también la página de bloqueo del motor y los textos del «en directo» (siguen en castellano y algo coloquiales); recoger la agencia (Astra 68 y 69, ChatGPT 69, Gemini 69, ChatGPT 66) y escribir las notas; ZERO v2.
+
+## Estado al 27 Oct 2026, 18:40 (Bogotá)
+
+Lo de las 17:05 (abajo) sigue valiendo salvo lo que cambia aquí. **Ojo: «Entrar bajo mi responsabilidad» ya no existe (ver 19:45).**
 
 **ZERO entra antes que tú** (dueño, 17:25–18:07). Va incorporado: siempre activo, para todos, sin interruptor y lo más rápido posible.
 
