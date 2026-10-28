@@ -1,7 +1,7 @@
 # Traspaso de Órbita · 22 de octubre de 2026, 16:40 (hora de Bogotá)
 
 Documento para que otra sesión de Claude siga el trabajo exactamente donde quedó. Léelo entero antes de tocar nada.
-El dueño es Fran (GUARDIANA GROUP S.A.S., Cartagena). **Siempre en español.** Lo último que dijo: «Sí a todo; no hace falta
+El dueño es el de GUARDIANA GROUP S.A.S. (Cartagena); su nombre no se escribe en ningún archivo del repositorio. **Siempre en español.** Lo último que dijo: «Sí a todo; no hace falta
 que me preguntes más si te doy permiso». Avísale cuando algo quede listo, en pocas líneas, sin pegar código en el chat.
 Publica cada cambio en cuanto esté («ves actualizando todo… para que yo y mi amigo lo podamos ir viendo»).
 
