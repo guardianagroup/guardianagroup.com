@@ -76,8 +76,11 @@ Estado por prioridad; «hecho» = ya en el código publicado.
 3. **Código de 9 cifras** — baja entropía; cae fuera de línea si se captura el sobre del relé. Migración: un intercambio con contraseña resistente a diccionario (PAKE revisado: SPAKE2+ RFC 9383 o CPace), no diseñado desde cero. Mientras: priorizar la invitación larga (la blindada ya solo usa semilla de 256 bits).
 4. **Credencial TURN con HMAC-SHA-1** — riesgo bajo (MAC con clave, vida corta), pero conviene pasar al mecanismo con SHA-256 cuando el coturn lo admita.
 5. **Librería @noble/post-quantum 0.7.1** — fijar la versión exacta y comprobar sus fuentes byte a byte con el paquete de npm (ya se hace en los 11 archivos vendidos); añadir vectores de prueba oficiales y casos inválidos. No afirma tiempo constante en JavaScript: por eso no se puede acreditar ASVS 11.2.4.
-6. **Protección del código servido** — objeción nº 1 de toda la criptografía en el navegador (el servidor entrega el JavaScript en cada visita). Fuera del alcance de este inventario; está en las notas de la ronda 71 como siguiente paso (anclaje del código).
+6. **Protección del código servido** — objeción nº 1 de toda la criptografía en el navegador (el servidor entrega el JavaScript en cada visita). Primer paso *hecho*: `orbita/comunicaciones/huellas.txt`, la huella SHA-256 de cada archivo servido (formato de `sha256sum -c`; se regenera con `herramientas/huellas.py` en cada versión), comparable con el historial público del repositorio. Siguiente: el anclaje del código (notas de la ronda 71).
 
 ## 8. Procedencia de las librerías
 - **Web Crypto** del navegador: ECDSA, ECDH, HKDF, HMAC, AES-GCM, PBKDF2, SHA-256/384, `getRandomValues`.
 - **@noble/post-quantum 0.7.1** (licencia MIT, de Paul Miller): ML-KEM-768, ML-KEM-1024 y ML-DSA-87, servida desde el propio sitio (`pq-mlkem.js`, `pq-cnsa.js`), construida con `SC/pq/build/`. Sus archivos se comprueban byte a byte con el paquete de npm.
+
+## 9. Aviso de fallos de seguridad
+`/.well-known/security.txt` (RFC 9116): contacto hola@guardianagroup.com, acuse en 72 horas, respuesta en 7 días, sin acciones legales contra la investigación de buena fe que no toque datos de terceros. Caduca el 16 Sep 2027: renovarlo antes.
