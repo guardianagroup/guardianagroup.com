@@ -1433,6 +1433,7 @@
     "Entregado": ["Delivered", "Entregue"],
     "Enviado": ["Sent", "Enviado"],
     "Enviar": ["Send", "Enviar"],
+    "Crear y compartir invitación": ["Create and share invitation", "Criar e compartilhar convite"],
     "Tapar": ["Cover", "Tapar"],
     "Tapar partes de la foto": ["Cover parts of the photo", "Tapar partes da foto"],
     "Listo": ["Done", "Pronto"],

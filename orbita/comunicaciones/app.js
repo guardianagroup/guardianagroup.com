@@ -158,13 +158,13 @@
   const puedeCompleta = () => !!(document.fullscreenEnabled && document.documentElement.requestFullscreen) && !/iPhone|iPad|iPod/i.test(navigator.userAgent);
   function pantallaCompleta() { try { if (!document.fullscreenElement && !comoApp()) document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => {}); } catch (_) {} }
   async function borraAnteriores(salvo) { for (const x of [...CONVS.values()]) if (x.id !== salvo) { try { await destruye(x, true); } catch (_) {} } }
-  async function creaInvitacionB() {
+  async function creaInvitacionB(semillaDada) {
     if (!R.abierto) { aviso(T('Sin conexión: espera un momento.')); return; }
     if (esMovil()) await borraAnteriores();
     if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; }
     if (!caben()) return;
     await limpiaInvitaciones();
-    const semilla = C.nuevaSemilla();
+    const semilla = semillaDada || C.nuevaSemilla();
     const d = await C.B.deSemilla(semilla);
     const c = convNueva(d.sala, semilla, 'invita', 'blindada'); c.num = siguienteNum();
     await preparaConv(c); await guardaConv(c);
@@ -219,7 +219,7 @@
     invitacionPendiente = enlace; muestraAceptar(true); return true;
   }
   function muestraAceptar(ver) {
-    $('#paso-aceptar').hidden = !ver; $('#inicio').classList.toggle('con-invitacion', ver);
+    $('#paso-aceptar').hidden = !ver; $('#inicio').classList.toggle('con-invitacion', ver); document.body.classList.toggle('aceptando', ver);
     if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
     else $('#paso-inicio').hidden = false;
   }
@@ -1141,7 +1141,7 @@
   function arrancaRele() {
     R = GuardianaRele.crea();
     const estadoRele = (txt, cls) => { const e = $('#rele'); e.className = 'rele ' + (cls || ''); $('#reletxt').textContent = txt; };
-    window.pintaBarra = () => { const c = CONVS.get(ACTUAL); const on = !!(c && c.huella && enLinea(c) && c.sesion && c.sesion.confirmada); estadoRele(on ? T('Conectado') : T('Desconectado'), on ? 'si' : ''); { const r = $('#rele'); if (r) r.hidden = !c; } /* sin conversación, nada que decir (agencia, ronda 75: «Desconectado» en el inicio asustaba) */ };
+    window.pintaBarra = () => { const c = CONVS.get(ACTUAL); const on = !!(c && c.huella && enLinea(c) && c.sesion && c.sesion.confirmada); estadoRele(on ? T('Conectado') : T('Desconectado'), on ? 'si' : ''); { const r = $('#rele'); if (r) r.hidden = !(c && c.huella); } /* sin conversación, nada que decir (agencia, ronda 75: «Desconectado» en el inicio asustaba) */ };
     // arriba: «Desconectado» hasta que la conversación con la otra persona está establecida; entonces «Conectado» (dueño, 20:21)
     R.on('abierto', () => { pintaBarra(); });
     R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); });
@@ -1966,7 +1966,22 @@
     $('#nueva-blindada').addEventListener('click', () => { if (esMovil() && vivas().some((x) => x.huella)) { abreHoja('h-nueva'); return; } nuevaBlindadaConCopia(); });
     $('#nueva-no').addEventListener('click', () => cierraHoja('h-nueva'));
     $('#nueva-si').addEventListener('click', () => { cierraHoja('h-nueva'); nuevaBlindadaConCopia(); });
+    // En el móvil, un solo toque: «Crear y compartir invitación» abre ya el menú de compartir del teléfono (dueño, 28 Oct 2026, 16:40:
+    // «me lleva otra vez a darle otra vez a compartir enlace… mejor un solo botón… de un solo viaje»). El enlace sale de una semilla
+    // preparada de antemano, así el menú se abre dentro del mismo toque (los teléfonos no lo dejan abrir después); la invitación se
+    // crea a la vez. Si se cierra el menú sin compartir, queda la página con «Compartir enlace».
+    let semillaLista = null;
+    const preparaSemilla = () => { try { if (!semillaLista) semillaLista = C.nuevaSemilla(); } catch (_) {} };
+    preparaSemilla();
     function nuevaBlindadaConCopia() {
+      if (esMovil() && navigator.share && R.abierto && C.B.hayBlindada()) {
+        const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0);
+        const url = ORIGEN + '#b=' + C.b64u(semilla);
+        const hecha = creaInvitacionB(semilla);
+        let compartido = null; try { compartido = navigator.share({ title: 'GUARDIANA', text: T('Invitación a una sesión blindada de GUARDIANA Comunicaciones'), url }); } catch (_) { compartido = Promise.reject(); }
+        Promise.resolve(compartido).then(async () => { const c = await hecha; if (c) { c.compartido = true; if (ACTUAL === c.id) muestraEnlace(c); } }).catch(() => {});
+        return;
+      }
       let dale = null; const listo = new Promise((r) => { dale = r; });
       try { if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) navigator.clipboard.write([new ClipboardItem({ 'text/plain': listo.then((c) => { if (!c) throw new Error('sin enlace'); return new Blob([enlaceB(c)], { type: 'text/plain' }); }) })]).then(() => listo.then((c) => { if (c) { c.copiado = true; if (ACTUAL === c.id) muestraEnlace(c); } })).catch(() => {}); } catch (_) {}
       creaInvitacionB().then((c) => dale(c || null)).catch(() => dale(null));

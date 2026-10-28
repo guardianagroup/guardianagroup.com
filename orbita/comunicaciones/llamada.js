@@ -91,7 +91,9 @@
       // al recibir, solo quién llama y «Rechazar» / «Contestar»: «Tu voz» queda en una píldora que se abre si se toca
       tiempo.hidden = estado !== 'hablando';
       // en la sesión blindada, la voz y la imagen siguen a la vista al recibir: ahí se elige proteger la cara antes de contestar
-      const plegar = estado === 'entrante' && !blindada();
+      // en el teléfono, al recibir, también en la blindada: solo quién llama y los dos botones, como FaceTime (recorrido del
+      // 28 Oct, 16:40); la voz y la imagen, en la píldora
+      const plegar = estado === 'entrante' && (!blindada() || !!(raiz.matchMedia && raiz.matchMedia('(max-width: 760px)').matches));
       caja.classList.toggle('entrando', plegar);
       if (!plegar) caja.classList.remove('voz-abierta');
       const pi = $('#ll-voz-pill');
