@@ -44,6 +44,7 @@
   const CONVS = new Map();  // sala → conv
   let ACTUAL = null;        // sala abierta
   let R = null;
+  let LL = null; // llamadas de voz (llamada.js)
   const uuid = () => (crypto.randomUUID ? crypto.randomUUID() : C.hex(C.azar(16)));
   // El viaje del archivo y el comprobante de custodia (dueño, 27 Oct 2026, 20:39): el estado de cada envío vive aquí,
   // solo en memoria; el comprobante firmado por los dos equipos se guarda como un mensaje más («custodia»).
@@ -523,7 +524,7 @@
       case 'custodia-no': return rechazoCustodia(c, j);
       case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); const v = VIAJES.get(j.id); if (a) c.archivos.delete(j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, (j.ok ? T('Archivo entregado') : T('Archivo no completado')) + ': ' + m.archivo.nombre + (j.ok ? ' · ' + T('acuse del otro equipo: completo y autenticado.') : ''), j.ok ? 'bien' : 'mal'); pintaRadio(c); if (j.ok && v && v.custodia === 'si' && j.v === 1 && a && a.sha256) await entregaViaje(c, m, a, v, j); else { if (v) finViaje(v, j.ok, j); if (j.ok) await recibo(c, m, +j.seg || 0, +j.trozos || m.archivo.trozos, true); } } return; }
       case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); const vc = VIAJES.get(j.id); if (vc && vc.estado !== 'entregado') { vc.estado = 'fallo'; vc.tFin = Date.now(); evento(vc, j.por === 'integridad' ? T('El otro equipo ha detenido el envío: un fragmento no superó la autenticación.') : T('El otro equipo ha cancelado el envío.'), 'mal'); } if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); } return; }
-      case 'llamada': return; // esta versión no tiene llamadas (dueño, 26 Oct 20:01)
+      case 'llamada': if (LL && c.id === ACTUAL) await LL.recibe(j); return; // llamadas de voz (dueño, 27 Oct 2026, 23:05)
       case 'destruir': return destruyeLocal(c, true);
       default: return;
     }
@@ -916,10 +917,31 @@
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 60000);
   }
 
+  // ---------- llamadas ----------
+  const mmss = (ms) => { const x = Math.round(ms / 1000); return String(Math.floor(x / 60)).padStart(2, '0') + ':' + String(x % 60).padStart(2, '0'); };
+  async function anotaLlamada(info) {
+    const c = CONVS.get(ACTUAL); if (!c || !info) return;
+    const texto = info.por === 'fin' ? T('Llamada de voz') + ' · ' + mmss(info.duracion) + (info.voz ? ' · ' + T('con cambio de voz') : '') : info.por === 'ocupado' ? T('Comunicando') : info.por === 'fallo' ? T('Llamada interrumpida') : info.por === 'sin-medios' ? T('Llamada sin micrófono') : T('Llamada no contestada');
+    const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'sistema', estado: 'ok', tipo: 'llamada', texto, llamada: { por: info.por, duracion: info.duracion || 0 } };
+    await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m);
+  }
+  const puedeLlamar = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
+  function arrancaLlamadas() {
+    if (!window.GuardianaLlamada || !window.RTCPeerConnection) { const b = $('#llamar'); if (b) b.hidden = true; return; }
+    LL = GuardianaLlamada.crea({
+      ice: () => R.ice, puede: puedeLlamar, t: T, aviso, suena: avisaSonido, fin: anotaLlamada,
+      manda: (m) => { const c = CONVS.get(ACTUAL); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
+      nombre: () => { const c = CONVS.get(ACTUAL); return (c && c.nombre) || T('La otra persona'); },
+      inicial: () => { const c = CONVS.get(ACTUAL); return inicial(c && c.nombre); },
+    });
+    $('#llamar').addEventListener('click', () => LL.llamar());
+  }
+
   // ---------- destruir ----------
   async function destruyeLocal(c, porElla, silencio) {
     if (c.estado === 'destruida') return;
     c.estado = 'destruida';
+    if (LL && LL.ocupado && ACTUAL === c.id) LL.colgar();
     if (esB(c)) borraClavesB(c);
     R.sale(c.id); CONVS.delete(c.id);
     await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await BD.borra('conv', c.id);
@@ -951,7 +973,7 @@
     setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
     R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); pintaCabecera(c); pintaLista(); });
     R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) { c.sesion = null; enCola(c, () => presentaX(c, null, true)); } pintaCabecera(c); pintaLista(); });
-    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; vigila(c, T('La otra persona se ha desconectado.'), 'info'); } pintaCabecera(c); pintaLista(); });
+    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && ACTUAL === c.id) LL.recibe({ acto: 'colgar' }); } pintaCabecera(c); pintaLista(); });
     R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Esta conversación se ha abierto en otra pestaña: sigue allí.')); });
     // Las tramas de una conversación se procesan en orden (una detrás de otra): así un trozo de archivo nunca
     // adelanta al anuncio del archivo, ni un mensaje a la presentación que abre su sesión.
@@ -1024,6 +1046,7 @@
     if (c.huella && !(c.verificada && (!esB(c) || c.suVerificada))) conf.classList.add('gc-sin-verificar');
     conf.textContent = txt;
     pintaPuerta(c);
+    const ll = $('#llamar'); if (ll) { const si = puedeLlamar() && (R.llamadas || LOCAL); ll.classList.toggle('apagado', !si); ll.title = si ? T('Llamada de voz') : esB(c) && !(c.verificada && c.suVerificada) ? T('Las llamadas se abren cuando los dos hayáis comprobado el número de seguridad.') : !R.llamadas && !LOCAL ? T('El servicio de llamadas no está disponible ahora mismo.') : T('La otra persona tiene que estar conectada.'); }
   }
   // Vigilancia a la derecha (dueño, 26 Oct 20:22): anota cada comprobación real según ocurre y mantiene la última a la vista.
   const hms = (t) => new Date(t || Date.now()).toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -1331,6 +1354,7 @@
     await cargaIdentidad();
     arrancaRele();
     eventos();
+    arrancaLlamadas();
     await cargaConvs();
     if (/#[ib]=/.test(location.hash)) { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     // NÚCLEO guiado (ronda 63): «Tengo un código» llega con el campo del código abierto; «Crear una invitación», con la invitación
@@ -1347,5 +1371,5 @@
   }
   if (window.GuardianaViaje) GuardianaViaje.alCerrar = () => { viajeCerradoEn = Date.now(); };
   arranca().catch((e) => { console.error(e); aviso(T('Algo falló al arrancar: recarga la página.')); });
-  window.GuardianaCom = { get convs() { return CONVS; }, get yo() { return YO; }, get rele() { return R; }, get viajes() { return VIAJES; }, abreConv, creaInvitacion, aceptaInvitacion };
+  window.GuardianaCom = { get convs() { return CONVS; }, get yo() { return YO; }, get rele() { return R; }, get viajes() { return VIAJES; }, get llamada() { return LL; }, abreConv, creaInvitacion, aceptaInvitacion };
 })();
