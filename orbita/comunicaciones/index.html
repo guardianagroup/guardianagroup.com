@@ -191,6 +191,8 @@
       <span class="gc-avatar candado" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
       <div class="gc-quien"><span class="gc-nombre"><span id="cnombre">Conversación cifrada</span> <em class="sello-insignia" id="sello-insignia" hidden>SELLADA</em></span><span class="gc-confianza" id="cconfianza">Esperando a la otra persona…</span></div>
       <button type="button" class="discreto" id="discreto" aria-pressed="true" title="Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal."><svg class="ojo-no" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 6.1A9.8 9.8 0 0 1 12 6c6.5 0 10 6 10 6a17 17 0 0 1-3.2 3.9M6.2 7.8C3.6 9.6 2 12 2 12s3.5 6 10 6c1.7 0 3.2-.4 4.5-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg><svg class="ojo" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Modo discreto</span><i class="interruptor-mini" aria-hidden="true"></i></button>
+      <!-- dueño, 27 Oct 2026, 23:05–23:07: llamadas de voz, con cambio de voz, en la sesión normal y en la blindada -->
+      <button type="button" class="gc-cab-boton gc-llamar-boton" id="llamar" aria-label="Llamada de voz" title="Llamada de voz"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></button>
       <button type="button" class="gc-cab-boton gc-escudo-boton" id="escudo" aria-label="Seguridad de esta conversación" title="Seguridad"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></button>
       <button type="button" class="boton terminar" id="terminar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Terminar</button>
     </header>
@@ -245,6 +247,37 @@
   </div>
 </div>
 
+<!-- Llamada de voz: encriptada de extremo a extremo (DTLS-SRTP), por el relé; el cambio de voz se hace en este equipo -->
+<div class="gc-llamada" id="llamada" role="dialog" aria-modal="true" aria-label="Llamada de voz">
+  <div class="gc-llamada-arriba"><span class="gc-llamada-cifrado"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Encriptada de extremo a extremo · por el relé de GUARDIANA</span></span><span class="gc-llamada-estado" id="ll-calidad"></span></div>
+  <div class="gc-llamada-centro" id="ll-centro">
+    <span class="gc-avatar-grande" id="ll-avatar" aria-hidden="true">·</span>
+    <span class="gc-llamada-nombre" id="ll-nombre" translate="no">—</span>
+    <span class="gc-llamada-tiempo" id="ll-tiempo">00:00</span>
+    <span class="gc-llamada-paso" id="ll-paso" role="status"></span>
+  </div>
+  <div class="ll-voces" id="ll-voces" role="group" aria-labelledby="ll-voces-t">
+    <span class="ll-voces-t" id="ll-voces-t">Tu voz</span>
+    <div class="ll-voces-botones">
+      <button type="button" data-voz="natural" aria-pressed="true">Natural</button>
+      <button type="button" data-voz="grave" aria-pressed="false">Más grave</button>
+      <button type="button" data-voz="aguda" aria-pressed="false">Más aguda</button>
+      <button type="button" data-voz="anonima" aria-pressed="false">Distorsionada</button>
+      <button type="button" data-voz="robot" aria-pressed="false">Robótica</button>
+    </div>
+    <small class="ll-voz-nota" id="ll-voz-nota" hidden>El cambio se hace en tu equipo, antes de encriptar: tu voz original no sale de aquí. Dificulta que te reconozcan por la voz, pero no oculta tu acento ni tu forma de hablar.</small>
+  </div>
+  <audio id="a-remoto" autoplay></audio>
+  <div class="gc-llamada-botones" id="ll-botones">
+    <div class="gc-llamada-boton"><button type="button" id="ll-silenciar" aria-pressed="false" aria-label="Silenciar"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><span>Silenciar</span></div>
+    <div class="gc-llamada-boton gc-colgar"><button type="button" id="ll-colgar" aria-label="Colgar"><svg viewBox="0 0 24 24"><path d="M3 12c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a9 9 0 0 0-7 0V13l-3 1.5z"/></svg></button><span>Colgar</span></div>
+  </div>
+  <div class="gc-llamada-botones gc-entrante" id="ll-entrante" hidden>
+    <div class="gc-llamada-boton gc-colgar"><button type="button" id="ll-rechazar" aria-label="Rechazar"><svg viewBox="0 0 24 24"><path d="M3 12c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a9 9 0 0 0-7 0V13l-3 1.5z"/></svg></button><span>Rechazar</span></div>
+    <div class="gc-llamada-boton gc-contestar"><button type="button" id="ll-contestar" aria-label="Contestar"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></button><span>Contestar</span></div>
+  </div>
+</div>
+
 <!-- Hoja: informe de cierre de la sesión blindada (dueño, 27 Oct 2026; ronda 70: borrado criptográfico sin prometer lo que no se puede) -->
 <div class="gc-hoja" id="h-cierre" role="dialog" aria-modal="true" aria-labelledby="h-cierre-t">
   <div class="gc-hoja-caja caja">
@@ -281,6 +314,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261027c"></script>
+<script src="llamada.js?v=20261027a"></script>
 <script src="app.js?v=20261027j"></script>
 </body>
 </html>
