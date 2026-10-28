@@ -2833,7 +2833,10 @@
   "Ver el chat": "Chat bekijken",
   "Volver a la llamada": "Terug naar de oproep",
   "imagen": "beeld",
-  "Sin filtro": "Zonder filter"
+  "Sin filtro": "Zonder filter",
+  "Voz e imagen": "Stem en beeld",
+  "Mejorar la luz": "Licht verbeteren",
+  "La imagen de la otra persona no llega.": "Het beeld van de ander komt niet aan."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

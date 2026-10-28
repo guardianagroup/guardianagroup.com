@@ -2835,7 +2835,10 @@
   "Ver el chat": "צפייה בצ׳אט",
   "Volver a la llamada": "חזרה לשיחה",
   "imagen": "תמונה",
-  "Sin filtro": "ללא מסנן"
+  "Sin filtro": "ללא מסנן",
+  "Voz e imagen": "קול ותמונה",
+  "Mejorar la luz": "שיפור התאורה",
+  "La imagen de la otra persona no llega.": "התמונה של האדם השני לא מגיעה."
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

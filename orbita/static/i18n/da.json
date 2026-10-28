@@ -2835,7 +2835,10 @@
   "Ver el chat": "Se chatten",
   "Volver a la llamada": "Tilbage til opkaldet",
   "imagen": "billede",
-  "Sin filtro": "Uden filter"
+  "Sin filtro": "Uden filter",
+  "Voz e imagen": "Stemme og billede",
+  "Mejorar la luz": "Forbedr lyset",
+  "La imagen de la otra persona no llega.": "Den anden persons billede kommer ikke frem."
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

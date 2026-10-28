@@ -2833,7 +2833,10 @@
   "Ver el chat": "చాట్ చూడండి",
   "Volver a la llamada": "కాల్‌కు తిరిగి వెళ్లు",
   "imagen": "వీడియో",
-  "Sin filtro": "ఫిల్టర్ లేదు"
+  "Sin filtro": "ఫిల్టర్ లేదు",
+  "Voz e imagen": "స్వరం మరియు చిత్రం",
+  "Mejorar la luz": "వెలుతురు మెరుగుపరచు",
+  "La imagen de la otra persona no llega.": "అవతలి వ్యక్తి చిత్రం రావడం లేదు."
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

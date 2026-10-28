@@ -2833,7 +2833,10 @@
   "Ver el chat": "Tingnan ang chat",
   "Volver a la llamada": "Bumalik sa tawag",
   "imagen": "larawan",
-  "Sin filtro": "Walang filter"
+  "Sin filtro": "Walang filter",
+  "Voz e imagen": "Boses at larawan",
+  "Mejorar la luz": "Pagandahin ang ilaw",
+  "La imagen de la otra persona no llega.": "Hindi dumarating ang larawan ng kausap mo."
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

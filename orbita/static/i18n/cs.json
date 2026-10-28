@@ -2835,7 +2835,10 @@
   "Ver el chat": "Zobrazit chat",
   "Volver a la llamada": "Zpět k hovoru",
   "imagen": "obraz",
-  "Sin filtro": "Bez filtru"
+  "Sin filtro": "Bez filtru",
+  "Voz e imagen": "Hlas a obraz",
+  "Mejorar la luz": "Vylepšit světlo",
+  "La imagen de la otra persona no llega.": "Obraz druhé osoby nepřichází."
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

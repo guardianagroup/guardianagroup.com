@@ -2835,7 +2835,10 @@
   "Ver el chat": "查看聊天",
   "Volver a la llamada": "返回通話",
   "imagen": "畫面",
-  "Sin filtro": "無濾鏡"
+  "Sin filtro": "無濾鏡",
+  "Voz e imagen": "聲音和畫面",
+  "Mejorar la luz": "改善光線",
+  "La imagen de la otra persona no llega.": "對方的畫面沒有傳過來。"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

@@ -2833,7 +2833,10 @@
   "Ver el chat": "Zobraziť chat",
   "Volver a la llamada": "Späť k hovoru",
   "imagen": "obraz",
-  "Sin filtro": "Bez filtra"
+  "Sin filtro": "Bez filtra",
+  "Voz e imagen": "Hlas a obraz",
+  "Mejorar la luz": "Vylepšiť svetlo",
+  "La imagen de la otra persona no llega.": "Obraz druhej osoby neprichádza."
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

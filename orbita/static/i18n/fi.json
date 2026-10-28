@@ -2835,7 +2835,10 @@
   "Ver el chat": "Näytä chatti",
   "Volver a la llamada": "Takaisin puheluun",
   "imagen": "kuva",
-  "Sin filtro": "Ei suodatinta"
+  "Sin filtro": "Ei suodatinta",
+  "Voz e imagen": "Ääni ja kuva",
+  "Mejorar la luz": "Paranna valoa",
+  "La imagen de la otra persona no llega.": "Toisen henkilön kuva ei tule perille."
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

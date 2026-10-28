@@ -2835,7 +2835,10 @@
   "Ver el chat": "Sohbeti görüntüle",
   "Volver a la llamada": "Aramaya dön",
   "imagen": "görüntü",
-  "Sin filtro": "Filtresiz"
+  "Sin filtro": "Filtresiz",
+  "Voz e imagen": "Ses ve görüntü",
+  "Mejorar la luz": "Işığı iyileştir",
+  "La imagen de la otra persona no llega.": "Diğer kişinin görüntüsü gelmiyor."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

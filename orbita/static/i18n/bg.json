@@ -2835,7 +2835,10 @@
   "Ver el chat": "Виж чата",
   "Volver a la llamada": "Обратно към обаждането",
   "imagen": "образ",
-  "Sin filtro": "Без филтър"
+  "Sin filtro": "Без филтър",
+  "Voz e imagen": "Глас и образ",
+  "Mejorar la luz": "Подобряване на светлината",
+  "La imagen de la otra persona no llega.": "Образът на другия човек не пристига."
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

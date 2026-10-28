@@ -2835,7 +2835,10 @@
   "Ver el chat": "Chat anzeigen",
   "Volver a la llamada": "Zurück zum Anruf",
   "imagen": "Bild",
-  "Sin filtro": "Ohne Filter"
+  "Sin filtro": "Ohne Filter",
+  "Voz e imagen": "Stimme und Bild",
+  "Mejorar la luz": "Licht verbessern",
+  "La imagen de la otra persona no llega.": "Das Bild der anderen Person kommt nicht an."
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

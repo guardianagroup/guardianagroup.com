@@ -2833,7 +2833,10 @@
   "Ver el chat": "Показать чат",
   "Volver a la llamada": "Назад к звонку",
   "imagen": "изображение",
-  "Sin filtro": "Без фильтра"
+  "Sin filtro": "Без фильтра",
+  "Voz e imagen": "Голос и изображение",
+  "Mejorar la luz": "Улучшить освещение",
+  "La imagen de la otra persona no llega.": "Изображение собеседника не поступает."
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

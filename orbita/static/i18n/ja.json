@@ -2833,7 +2833,10 @@
   "Ver el chat": "チャットを表示",
   "Volver a la llamada": "通話に戻る",
   "imagen": "映像",
-  "Sin filtro": "フィルターなし"
+  "Sin filtro": "フィルターなし",
+  "Voz e imagen": "声と映像",
+  "Mejorar la luz": "明るさを補正",
+  "La imagen de la otra persona no llega.": "相手の映像が届いていません。"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

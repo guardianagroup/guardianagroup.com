@@ -2833,7 +2833,10 @@
   "Ver el chat": "Zobacz czat",
   "Volver a la llamada": "Wróć do połączenia",
   "imagen": "obraz",
-  "Sin filtro": "Bez filtra"
+  "Sin filtro": "Bez filtra",
+  "Voz e imagen": "Głos i obraz",
+  "Mejorar la luz": "Popraw oświetlenie",
+  "La imagen de la otra persona no llega.": "Obraz od drugiej osoby nie dociera."
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",
