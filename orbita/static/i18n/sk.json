@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Súbor .json sa sťahuje v chate: otvorte „Zobraziť doklad“ a ťuknite na „Stiahnuť .json“. PDF slúži na čítanie; nedá sa overiť.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "Platný: overený postkvantovým kľúčom dokladu.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Tento web niekedy nepúšťa prehliadače, ktoré vychádzajú zo servera, ako je bublina (ochrana proti robotom). Môžete to skúsiť znova alebo ho otvoriť vo svojom bežnom prehliadači.",
-  "Volver a intentar": "Skúsiť znova"
+  "Volver a intentar": "Skúsiť znova",
+  "Esta web no se ha abierto": "Tento web sa neotvoril",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Niektoré weby brzdia prehliadače, ktoré vychádzajú zo servera, ako je bublina. Ak to chcete skúsiť znova, stlačte „Obnoviť“.",
+  "Actualizar": "Obnoviť"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

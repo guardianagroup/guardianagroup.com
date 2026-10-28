@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "ไฟล์ .json ดาวน์โหลดได้ในแชท: เปิด “ดูใบรับรอง” แล้วกด “ดาวน์โหลด .json” ส่วน PDF มีไว้สำหรับอ่าน ไม่สามารถยืนยันได้",
   "Válida: comprobada con la clave postcuántica del comprobante.": "ถูกต้อง: ตรวจสอบแล้วด้วยคีย์หลังควอนตัมของใบรับรอง",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "บางครั้งเว็บไซต์นี้ไม่ให้เบราว์เซอร์ที่ออกจากเซิร์ฟเวอร์เข้า เช่น บับเบิล (การป้องกันบอต) คุณลองอีกครั้งหรือเปิดในเบราว์เซอร์ปกติของคุณได้",
-  "Volver a intentar": "ลองอีกครั้ง"
+  "Volver a intentar": "ลองอีกครั้ง",
+  "Esta web no se ha abierto": "เปิดเว็บไซต์นี้ไม่ได้",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "บางเว็บไซต์กีดกันเบราว์เซอร์ที่ออกจากเซิร์ฟเวอร์ เช่น บับเบิล กด “โหลดใหม่” เพื่อลองอีกครั้ง",
+  "Actualizar": "โหลดใหม่"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

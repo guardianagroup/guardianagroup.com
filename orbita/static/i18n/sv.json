@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json-filen laddas ned i chatten: öppna ”Visa kvitto” och tryck på ”Ladda ned .json”. PDF:en är till för att läsa; den kan inte verifieras.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "Giltig: kontrollerad med kvittots postkvantnyckel.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Den här webbplatsen släpper ibland inte in webbläsare som kommer från en server, som bubblan (botskydd). Du kan försöka igen eller öppna den i din vanliga webbläsare.",
-  "Volver a intentar": "Försök igen"
+  "Volver a intentar": "Försök igen",
+  "Esta web no se ha abierto": "Den här webbplatsen öppnades inte",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Vissa webbplatser bromsar webbläsare som kommer från en server, som bubblan. Tryck på ”Ladda om” för att försöka igen.",
+  "Actualizar": "Ladda om"
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

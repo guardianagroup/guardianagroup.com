@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "يُنزَّل ملف ‎.json من الدردشة: افتح «عرض الإيصال» واضغط «تنزيل ‎.json». ملف PDF للقراءة؛ ولا يمكن التحقق منه.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "صالح: جرى التحقق منه بمفتاح ما بعد الكم الموجود في الإيصال.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "هذا الموقع لا يسمح أحيانًا بدخول المتصفحات القادمة من خادم، مثل الفقاعة (حماية من الروبوتات). يمكنك المحاولة مرة أخرى أو فتحه في متصفحك المعتاد.",
-  "Volver a intentar": "إعادة المحاولة"
+  "Volver a intentar": "إعادة المحاولة",
+  "Esta web no se ha abierto": "لم يُفتح هذا الموقع",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "تعرقل بعض المواقع المتصفحات القادمة من خادم، مثل الفقاعة. اضغط على «إعادة تحميل» لتحاول مرة أخرى.",
+  "Actualizar": "إعادة تحميل"
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

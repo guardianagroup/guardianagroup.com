@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Het .json-bestand download je in de chat: open “Bewijs bekijken” en tik op “.json downloaden”. De PDF is om te lezen; die kan niet worden geverifieerd.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "Geldig: gecontroleerd met de post-quantumsleutel van het bewijs.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Deze site laat soms geen browsers binnen die vanaf een server komen, zoals de bubbel (botbescherming). Je kunt het opnieuw proberen of hem in je gewone browser openen.",
-  "Volver a intentar": "Opnieuw proberen"
+  "Volver a intentar": "Opnieuw proberen",
+  "Esta web no se ha abierto": "Deze site is niet geopend",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Sommige sites houden browsers tegen die vanaf een server komen, zoals de bubbel. Druk op “Herladen” om het opnieuw te proberen.",
+  "Actualizar": "Herladen"
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

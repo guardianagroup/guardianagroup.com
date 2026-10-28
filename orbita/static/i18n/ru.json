@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Файл .json скачивается в чате: откройте «Посмотреть квитанцию» и нажмите «Скачать .json». PDF — для чтения; его нельзя проверить.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "Действительна: проверена постквантовым ключом квитанции.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Этот сайт иногда не пускает браузеры, выходящие с сервера, такие как пузырь (защита от ботов). Вы можете попробовать ещё раз или открыть его в своём обычном браузере.",
-  "Volver a intentar": "Попробовать ещё раз"
+  "Volver a intentar": "Попробовать ещё раз",
+  "Esta web no se ha abierto": "Этот сайт не открылся",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Некоторые сайты сдерживают браузеры, выходящие с сервера, такие как пузырь. Нажмите «Обновить», чтобы попробовать ещё раз.",
+  "Actualizar": "Обновить"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

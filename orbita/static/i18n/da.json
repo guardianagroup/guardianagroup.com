@@ -2843,7 +2843,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json-filen downloades i chatten: åbn »Se kvittering«, og tryk på »Download .json«. PDF'en er til at læse; den kan ikke verificeres.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "Gyldig: kontrolleret med kvitteringens post-kvantenøgle.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Dette websted lukker nogle gange ikke browsere ind, der kommer fra en server, som boblen (botbeskyttelse). Du kan prøve igen eller åbne det i din sædvanlige browser.",
-  "Volver a intentar": "Prøv igen"
+  "Volver a intentar": "Prøv igen",
+  "Esta web no se ha abierto": "Dette websted blev ikke åbnet",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Nogle websteder bremser browsere, der kommer fra en server, som boblen. Tryk på »Genindlæs« for at prøve igen.",
+  "Actualizar": "Genindlæs"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

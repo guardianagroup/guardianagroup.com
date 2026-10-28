@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Fișierul .json se descarcă din chat: deschide „Vezi dovada” și apasă „Descarcă .json”. PDF-ul este pentru citire; nu poate fi verificat.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "Validă: verificată cu cheia post-cuantică a dovezii.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Acest site uneori nu lasă să intre browserele care ies dintr-un server, cum este bula (protecție anti-robot). Poți încerca din nou sau îl poți deschide în browserul tău obișnuit.",
-  "Volver a intentar": "Încearcă din nou"
+  "Volver a intentar": "Încearcă din nou",
+  "Esta web no se ha abierto": "Acest site nu s-a deschis",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Unele site-uri frânează browserele care ies dintr-un server, cum este bula. Apasă „Reîncarcă” pentru a încerca din nou.",
+  "Actualizar": "Reîncarcă"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",
