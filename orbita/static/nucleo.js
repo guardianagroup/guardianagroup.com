@@ -74,7 +74,8 @@
     return s + ' ' + T('Se guarda solo en este navegador.');
   }
   function borraDatos() {
-    for (const k of ['zeroRegistroCortes', 'zeroTotal', 'zeroRadiografia']) { try { localStorage.removeItem(k); } catch (_) {} }
+    // 28 Oct 2026: también las subastas de hoy, que guardan qué webs se visitaron
+    for (const k of ['zeroRegistroCortes', 'zeroTotal', 'zeroRadiografia', 'zeroSubastasHoy']) { try { localStorage.removeItem(k); } catch (_) {} }
     // ZERO lleva su registro también en memoria: si está abierto, se recarga para que no lo vuelva a escribir
     try { const m = document.getElementById('marco'); if (m && m.contentWindow && /\/zero\//.test(m.contentWindow.location.pathname)) m.contentWindow.location.reload(); } catch (_) {}
   }

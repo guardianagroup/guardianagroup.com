@@ -18,10 +18,13 @@
   };
   function carga() {
     if (datos) return Promise.resolve(datos);
-    return fetch('/orbita/datos/multas.json?v=20261027d').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((j) => (datos = j));
+    return fetch('/orbita/datos/multas.json?v=20261028a').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((j) => (datos = j));
   }
   function pinta() {
     const l = lengua(), U = datos.ui[l] || datos.ui.en, C = datos.casos;
+    // los casos están en español, inglés o portugués: de izquierda a derecha aunque la página vaya en árabe, persa,
+    // hebreo o urdu (si no, la puntuación y las cifras salían al revés: «.Empresas multadas…», «$M 25.000»)
+    if (capa) { capa.setAttribute('dir', 'ltr'); capa.setAttribute('lang', l); }
     const n = (id) => (id === 'todas' ? C.length : C.filter((c) => c.cat === id).length);
     const chips = [{ id: 'todas', t: U.todas }].concat(datos.cats.map((c) => ({ id: c.id, t: de(c, l) }))).filter((c) => n(c.id))
       .map((c) => `<button type="button" class="nm-chip" data-f="${c.id}" aria-pressed="${c.id === filtro}">${esc(c.t)} <b>${n(c.id)}</b></button>`).join('');

@@ -51,6 +51,8 @@
 .vj-avance p{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
 .vj-pct{font:300 28px/1 var(--texto);letter-spacing:-.01em;color:#F4F6F8;font-variant-numeric:tabular-nums}
 .vj-conf{font:400 12.5px/1.45 var(--texto);color:var(--muted)}
+.vj-avance p.vj-espera{display:block;padding:9px 12px;border:1px solid rgba(240,199,127,.45);border-radius:10px;background:rgba(240,199,127,.08);font:500 13px/1.45 var(--texto);color:#F0C77F}
+.vj-avance p.vj-espera[hidden]{display:none}
 
 /* las cuatro medidas */
 .vj-datos{display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:1fr;gap:10px}

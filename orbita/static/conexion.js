@@ -124,7 +124,7 @@
         r && fila(T('Calidad estimada'), r.calidad && (r.calidad + (r.bajada ? ' · ~' + num(r.bajada, 1) + ' Mb/s' : '')), 'estimado'),
         r && fila(T('Ida y vuelta estimada'), r.rtt && r.rtt + ' ms', 'estimado'),
         fila(T('Ida y vuelta real hasta GUARDIANA'), ping != null ? ping + ' ms' : T('midiendo…')),
-        fila(T('Esta página'), location.protocol === 'https:' ? T('cifrada (HTTPS)') : T('sin cifrar')),
+        fila(T('Esta página'), location.protocol === 'https:' ? T('encriptada (HTTPS)') : T('sin encriptar')),
         r && r.ahorro ? fila(T('Ahorro de datos'), T('activado')) : null,
       ].filter(Boolean),
       vista: [
@@ -192,8 +192,9 @@
     if (dl.children.length) s.append(dl);
     const p = document.createElement('p'); p.className = 'nota';
     p.textContent = rutas && rutas.nubes && rutas.nubes.length
-      ? T('Ida y vuelta medida ahora desde este navegador hasta la puerta pública de cada centro de datos. «Mínimo» es lo que tardaría la luz por la fibra en línea recta: lo que sobra es el camino real de tus datos (cables que no van rectos, saltos entre redes). En el planeta, los tres más rápidos brillan más; el pulso recorre cada trayecto a cámara lenta, 20 veces más despacio que tus datos.') + ' ' + (window.OrbitaRed && window.OrbitaRed.lista ? T('Cada trayecto va por los cables submarinos y la fibra terrestre del mapa, por el camino más corto entre ellos: así viajan tus datos. El cable exacto que usó tu conexión no se conoce desde fuera de la red; donde el mapa no tiene camino, se dibuja el arco directo.') : T('Cargando la red del mapa para dibujar los trayectos por los cables…')) + (porSatelite() ? ' ' + T('Tu operador es de satélite: el primer tramo sube al satélite y baja a la red en tierra.') : '')
-      : T('Se mide desde este navegador: una petición mínima a la puerta pública de 33 centros de datos de nube (Amazon Web Services) y al borde de red más cercano (Cloudflare), solo cuando tú pulsas. No se envía nada tuyo. La ruta salto a salto solo puede medirla el programa GUARDIANA, y Órbita la dibuja igual.');
+      ? T('Ida y vuelta medida ahora desde este navegador hasta la puerta pública de cada centro de datos. «Mínimo» es lo que tardaría la luz por la fibra en línea recta: lo que sobra es el camino real de tus datos (cables que no van rectos, saltos entre redes). En el planeta, los tres más rápidos brillan más; el pulso recorre cada trayecto a cámara lenta, 20 veces más despacio que tus datos.') + ' ' + (window.OrbitaRed && window.OrbitaRed.lista ? T('Cada trayecto se dibuja por los cables submarinos y la fibra terrestre del mapa, por el camino más corto entre ellos: es ilustrativo. El cable exacto que usó tu conexión no se conoce desde fuera de la red; donde el mapa no tiene camino, se dibuja el arco directo.') : T('Cargando la red del mapa para dibujar los trayectos por los cables…')) + (porSatelite() ? ' ' + T('Tu operador es de satélite: el primer tramo sube al satélite y baja a la red en tierra.') : '')
+      // 28 Oct 2026: sin «no se envía nada tuyo» (esas empresas ven la IP) ni el programa de escritorio, que ya no se ofrece
+      : T('Se mide desde este navegador, solo cuando tú pulsas: una petición mínima a la puerta pública de 33 centros de datos de nube (Amazon Web Services) y al borde de red más cercano (Cloudflare). Esas empresas ven tu dirección IP, como en cualquier visita. Los trayectos que dibuja Órbita son ilustrativos: no son la ruta exacta de tus datos.');
     s.append(p);
     const b = document.createElement('button'); b.type = 'button'; b.className = 'medir'; b.disabled = midiendo; b.textContent = midiendo ? T('Midiendo…') : rutas && rutas.nubes && rutas.nubes.length ? T('Volver a medir') : T('Medir rutas'); b.addEventListener('click', mideRutas); s.append(b);
     return s;
@@ -255,8 +256,9 @@
     cuerpo.append(seccionRutas());
     cuerpo.append(seccion(T('Lo que cualquier web ve de ti'), f.vista, T('Sin pedir permiso. Por eso existe GUARDIANA.')));
     const s4 = document.createElement('section'); s4.className = 'bloque programa';
-    const h4 = document.createElement('h3'); h4.textContent = T('Lo que solo ve el programa'); s4.append(h4);
-    const p4 = document.createElement('p'); p4.className = 'nota'; p4.textContent = T('Qué programas hablan con internet, con quién y cuánto, y la ruta real de tus datos: eso se mide dentro del equipo, con ZERO. Aquí no se inventa.'); s4.append(p4);
+    // 28 Oct 2026: la web no mide nada dentro del equipo (ZERO de escritorio ya no se ofrece): se dice tal cual
+    const h4 = document.createElement('h3'); h4.textContent = T('Lo que una web no puede medir'); s4.append(h4);
+    const p4 = document.createElement('p'); p4.className = 'nota'; p4.textContent = T('Qué programas de tu equipo se conectan a internet, con quién, y la ruta exacta de tus datos no se pueden medir desde una web. Por eso Órbita no lo muestra.'); s4.append(p4);
     cuerpo.append(s4);
     // 25 Oct 2026 (agency round 39, the three voices: «un puente de la exploración a la acción»): from here to Radiografías
     // and to the ZERO demonstration, the two doors of the planet
