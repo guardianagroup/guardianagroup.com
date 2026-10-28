@@ -559,7 +559,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 /* agencia, ronda 74: tocar el nombre o el candado abre la seguridad; el menú «⋯» solo en el móvil */
 .conv .gc-quien,.conv .gc-cabecera .gc-avatar{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .conv{position:relative}
-.gc-mas-boton{display:none}
+.gc-mas-boton{display:grid}
 .gc-mas-boton svg circle{fill:currentColor;stroke:none}
 .gc-menu{position:absolute;top:calc(env(safe-area-inset-top) + 56px);right:8px;z-index:40;display:grid;gap:2px;min-width:250px;padding:6px;border-radius:16px;background:#0C1118;border:1px solid var(--line);box-shadow:0 22px 60px -14px rgba(0,0,0,.85);animation:gcAparece .14s ease-out}
 .gc-menu[hidden]{display:none}
@@ -609,3 +609,65 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .interno-no:hover,.interno-no:focus-visible{color:var(--fg);background:rgba(156,195,228,.10)}
 /* la tableta: VIGILANCIA cerrada (agencia, ronda 74: «estorba si aparece fija»); la misma información sigue en el escudo */
 @media (pointer:coarse) and (max-width:1400px){.conv .cuerpo{grid-template-columns:minmax(0,1fr)}.conv .vigila{display:none}}
+/* varias conversaciones (dueño, 28 Oct 2026, 13:56; agencia, ronda 74, bloque J): la lista a la izquierda en el ordenador */
+.app.con-lista{display:grid;grid-template-columns:300px minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+.app.con-lista>.inicio,.app.con-lista>.conv{min-width:0;min-height:0}
+.lista{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line);background:#080B10}
+.lista[hidden]{display:none}
+.lista-cab{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 12px 10px 18px}
+.lista-cab h2{margin:0;font:600 15px/1.2 var(--texto);color:var(--fg)}
+.lista-nueva{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:var(--accent);color:#06080C;font:600 13.5px/1 var(--texto)}
+.lista-nueva svg{width:16px;height:16px;stroke-width:2.2}
+.lista-nueva:hover{filter:brightness(1.08)}.lista-nueva:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.lista-filas{list-style:none;margin:0;padding:4px 8px 12px;overflow-y:auto;flex:1;min-height:0}
+.fila-conv{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:12px;min-height:66px;padding:10px;border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.fila-conv:hover{background:rgba(156,195,228,.06)}
+.fila-conv.actual{background:rgba(156,195,228,.12)}
+.fila-conv:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.fila-av{position:relative;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#142231;color:var(--accent);font:600 16px/1 var(--texto)}
+.fila-conv.blindada .fila-av{background:rgba(156,195,228,.16)}
+.fila-av svg{width:18px;height:18px}
+.fila-av.en-linea::after{content:'';position:absolute;right:0;bottom:1px;width:10px;height:10px;border-radius:50%;background:#5CC98A;box-shadow:0 0 0 2px #080B10}
+.fila-txt{display:grid;gap:3px;min-width:0}
+.fila-txt b{font:600 14.5px/1.25 var(--texto);color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fila-txt small{font:400 12.5px/1.3 var(--texto);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fila-conv.nueva .fila-txt small{color:var(--fg);font-weight:500}
+.fila-conv.perdida .fila-txt small{color:#E9998D}
+.fila-der{display:grid;justify-items:end;gap:6px;align-self:start;padding-top:3px}
+.fila-der time{font:400 11.5px/1 var(--texto);color:var(--muted)}
+.fila-conv.nueva .fila-der time{color:#5CC98A}
+.fila-n{font-style:normal;min-width:20px;height:20px;padding:0 6px;box-sizing:border-box;border-radius:999px;background:#5CC98A;color:#06080C;font:600 11.5px/20px var(--texto);text-align:center}
+.volver-lista{display:none}
+.conv .gc-cabecera #cvolver{display:none}
+.aviso.con-conv{cursor:pointer}
+/* con la lista, la VIGILANCIA solo en pantallas anchas */
+@media (max-width:1279px){.app.con-lista .conv .cuerpo{grid-template-columns:minmax(0,1fr)}.app.con-lista .conv .vigila{display:none}}
+@media (max-width:900px) and (min-width:761px){.app.con-lista{grid-template-columns:260px minmax(0,1fr)}}
+/* el móvil: la lista es una pantalla; «‹» en la cabecera vuelve a ella; dentro de la conversación, sin la barra de arriba */
+@media (max-width:760px){
+  .app.con-lista{display:flex;flex-direction:column}
+  .app.con-lista>.lista{display:none;flex:1;border-right:0;background:transparent}
+  body.ver-lista .app.con-lista>.lista:not([hidden]){display:flex}
+  body.ver-lista .app.con-lista>.inicio,body.ver-lista .app.con-lista>.conv{display:none!important}
+  .app.con-lista .conv .gc-cabecera #cvolver{display:grid;width:36px;margin-left:-6px}
+  .app.con-lista .inicio .volver-lista:not([hidden]){all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin:-20px 0 4px;padding:8px 14px 8px 10px;border-radius:999px;border:1px solid var(--line);color:var(--fg);font:500 14px/1.2 var(--texto)}
+  .app.con-lista .inicio .volver-lista svg{width:18px;height:18px}
+  body.en-conv:not(.ver-lista) .barra{display:none}
+  .fila-conv{min-height:70px}
+}
+/* La sesión blindada, como una cámara sellada (dueño, 28 Oct 2026, 14:35: «una especie de cámara sellada de aureola como la que
+   tiene el navegador, que brilla… un brillo blanco que está con el movimiento… un efecto diferenciador del chat normal»): un marco
+   de cristal con una luz blanca que recorre el borde y, cada pocos segundos, un reflejo que cruza, como la lente de ZERO */
+@property --gc-ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+.conv.blindada .lienzo{overflow:hidden;isolation:isolate;box-shadow:inset 0 0 0 1px rgba(218,236,250,.34),inset 0 1px 0 rgba(255,255,255,.42),inset 0 0 46px rgba(156,195,228,.12),inset 0 0 160px rgba(156,195,228,.08)}
+/* La luz que recorre el borde: una línea nítida y un resplandor hacia dentro que se apaga a los 26 px. La máscara solo deja ver
+   los bordes (el resplandor no tapa los mensajes) y la luz avanza a saltos de 30 por segundo (menos trabajo para el teléfono) */
+.conv.blindada .lienzo::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:3;will-change:transform;background:conic-gradient(from var(--gc-ang),rgba(204,237,255,0) 0deg,rgba(204,237,255,0) 40deg,rgba(156,195,228,.28) 80deg,rgba(204,237,255,.42) 112deg,rgba(156,195,228,.2) 135deg,rgba(204,237,255,0) 165deg,rgba(204,237,255,0) 215deg,rgba(156,195,228,.5) 258deg,#fff 298deg,rgba(204,237,255,.75) 316deg,rgba(204,237,255,0) 352deg);-webkit-mask:linear-gradient(to bottom,#000 0 1.5px,rgba(0,0,0,.55) 2.5px,rgba(0,0,0,.2) 9px,transparent 26px) top/100% 26px no-repeat,linear-gradient(to top,#000 0 1.5px,rgba(0,0,0,.55) 2.5px,rgba(0,0,0,.2) 9px,transparent 26px) bottom/100% 26px no-repeat,linear-gradient(to right,#000 0 1.5px,rgba(0,0,0,.55) 2.5px,rgba(0,0,0,.2) 9px,transparent 26px) left/26px 100% no-repeat,linear-gradient(to left,#000 0 1.5px,rgba(0,0,0,.55) 2.5px,rgba(0,0,0,.2) 9px,transparent 26px) right/26px 100% no-repeat;mask:linear-gradient(to bottom,#000 0 1.5px,rgba(0,0,0,.55) 2.5px,rgba(0,0,0,.2) 9px,transparent 26px) top/100% 26px no-repeat,linear-gradient(to top,#000 0 1.5px,rgba(0,0,0,.55) 2.5px,rgba(0,0,0,.2) 9px,transparent 26px) bottom/100% 26px no-repeat,linear-gradient(to right,#000 0 1.5px,rgba(0,0,0,.55) 2.5px,rgba(0,0,0,.2) 9px,transparent 26px) left/26px 100% no-repeat,linear-gradient(to left,#000 0 1.5px,rgba(0,0,0,.55) 2.5px,rgba(0,0,0,.2) 9px,transparent 26px) right/26px 100% no-repeat;animation:gcHalo 7s steps(210) infinite}
+/* Y cada pocos segundos un reflejo que cruza el cristal, como en la lente de ZERO (solo se mueve, no se repinta) */
+.conv.blindada .lienzo::after{content:'';position:absolute;top:-25%;bottom:-25%;left:0;width:100%;pointer-events:none;z-index:3;opacity:0;will-change:transform,opacity;background:linear-gradient(90deg,transparent 0,rgba(204,237,255,.035) 4%,rgba(242,248,255,.13) 8%,rgba(242,248,255,.16) 9%,rgba(156,195,228,.05) 13%,transparent 17%);transform:translateX(-30%) skewX(-24deg);animation:gcReflejo 9s ease-in-out infinite}
+@keyframes gcHalo{to{--gc-ang:360deg}}
+@keyframes gcReflejo{0%,74%{transform:translateX(-30%) skewX(-24deg);opacity:0}78%{opacity:1}95%{transform:translateX(100%) skewX(-24deg);opacity:.8}100%{transform:translateX(112%) skewX(-24deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.conv.blindada .lienzo::before{animation:none;--gc-ang:20deg}.conv.blindada .lienzo::after{display:none}}
+.conv.blindada .gc-cabecera{background:linear-gradient(180deg,rgba(156,195,228,.07),rgba(6,8,12,0) 85%),var(--gc-fondo,#06080C);box-shadow:inset 0 -1px 0 rgba(218,236,250,.16)}
+.conv.blindada .candado{box-shadow:0 0 0 1px rgba(244,246,248,.5),0 0 14px rgba(204,237,255,.35)}
+.fila-conv.blindada .fila-av{box-shadow:0 0 0 1px rgba(218,236,250,.35),0 0 12px rgba(204,237,255,.25)}
