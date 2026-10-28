@@ -18,7 +18,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261029b">
+<link rel="stylesheet" href="app.css?v=20261029c">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -69,6 +69,8 @@
       <!-- dueño, 27 Oct 2026, 22:01–23:12: la blindada, «de la máxima»; algoritmos de la suite CNSA 2.0 -->
       <button type="button" class="grande blindada" id="nueva-blindada"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b><span class="solo-pc">Sesión blindada</span><span class="solo-movil">Crear invitación</span></b><small>Algoritmos de la suite CNSA 2.0 y claves que se renuevan cada 5 minutos. Se invita con un enlace.</small></button>
     </div>
+    <!-- en el móvil, una vez: Comunicaciones en la pantalla de inicio, como una app (dueño, 28 Oct 2026, 16:12) -->
+    <button type="button" class="anadir-app" id="anadir-app" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 8v7M8.5 11.5h7"/></svg><span>Añadir a la pantalla de inicio</span></button>
     <!-- dueño, 27 Oct 2026, 10:10: «al empezar, lo básico, limpio y entendible»; la explicación, aparte, en un desplegable -->
     <button type="button" class="como" id="como-btn" aria-expanded="false" aria-controls="pro">Cómo funciona Comunicaciones</button>
 
@@ -361,7 +363,7 @@
   <div class="gc-hoja-caja caja">
     <div class="gc-asa"></div>
     <h2 class="gc-hoja-titulo" id="h-completa-t">Pantalla completa</h2>
-    <p class="t">En el iPhone, el navegador no deja que una web esconda sus barras. Para verlo todo a pantalla completa: toca «Compartir» y luego «Añadir a pantalla de inicio». Se abre como una app, sin barras y sin instalar nada de una tienda.</p>
+    <p class="t">En el iPhone, el navegador no deja que una web esconda sus barras. Para verlo todo a pantalla completa: toca «Compartir» y luego «Añadir a pantalla de inicio». Se abre como una app, sin barras y sin instalar nada de una tienda. Se hace una sola vez: el icono se queda en tu pantalla de inicio.</p>
     <div class="fila"><button type="button" class="boton principal" id="completa-ok">Entendido</button></div>
   </div>
 </div>
@@ -476,7 +478,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261029p46"></script>
+<script src="/orbita/static/idioma.js?v=20261029p47"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -486,7 +488,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028b"></script>
-<script src="llamada.js?v=20261029r"></script>
-<script src="app.js?v=20261029b"></script>
+<script src="llamada.js?v=20261029s"></script>
+<script src="app.js?v=20261029c"></script>
 </body>
 </html>

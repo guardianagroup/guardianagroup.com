@@ -73,6 +73,7 @@
       $('#ll-entrante').hidden = estado !== 'entrante';
       $('#ll-botones').hidden = estado === 'entrante';
       if (video && (estado === 'hablando' || estado === 'conectando' || estado === 'llamando')) raiz.requestAnimationFrame(() => miImagen());
+      giro(estado !== 'libre' && estado !== 'cerrando');
       // dueño, 28 Oct 2026, 12:49 («que sea profesional… como hacen las otras aplicaciones»): el nombre que la otra persona se puso
       // y, si no se puso ninguno, «Llamada encriptada» o «Videollamada encriptada» (antes, «La otra persona»)
       $('#ll-nombre').textContent = o.nombre() || (video ? t('Videollamada encriptada') : t('Llamada encriptada'));
@@ -597,6 +598,18 @@
     // el asa de la esquina que mira al centro, se agranda o se achica. Al llegar a media pantalla queda la pantalla dividida
     // (tú en una mitad y la otra persona en la otra); doble clic o doble toque la abre y la cierra. Todo se recuerda en este
     // navegador, en proporción a la pantalla. En la llamada en pequeño va en su esquina.
+    // En el teléfono, la llamada se queda en vertical (dueño, 28 Oct 2026, 16:12: «no quiero que la llamada se pueda girar»). Android
+    // lo permite a pantalla completa o como app; el iPhone no deja bloquear el giro desde una web (sí desde su Centro de control).
+    var giroFijo = false; // var: pinta() puede llamar a giro() antes de llegar aquí
+    function giro(fijar) {
+      try {
+        const tel = raiz.matchMedia && raiz.matchMedia('(max-width: 760px), (pointer: coarse) and (max-height: 500px)').matches;
+        const so = raiz.screen && raiz.screen.orientation;
+        if (!so || !so.lock) return;
+        if (fijar && tel && !giroFijo) { so.lock('portrait').then(() => { giroFijo = true; }).catch(() => {}); }
+        else if (!fijar && giroFijo) { giroFijo = false; try { so.unlock(); } catch (_) {} }
+      } catch (_) {}
+    }
     const MI_IMG = 'gcom-mi-imagen', MARGEN = 10, DIVIDE = 0.45;
     let arrastre = null, ultimoToque = 0;
     // Cada videollamada empieza con la pantalla partida, mitad y mitad (dueño, 28 Oct 2026, 15:12: «que saliera así por defecto,

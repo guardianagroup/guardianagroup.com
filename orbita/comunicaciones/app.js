@@ -1672,6 +1672,13 @@
     $('#cm-completa').hidden = !esMovil() || comoApp();
     $('#cm-completa').addEventListener('click', () => { cierraMenu(); if (puedeCompleta()) pantallaCompleta(); else abreHoja('h-completa'); });
     $('#completa-ok').addEventListener('click', () => cierraHoja('h-completa'));
+    // «Añadir a la pantalla de inicio»: en Android, la ventana del propio sistema; en el iPhone, los pasos (no deja hacerlo desde la web)
+    let avisoInstalar = null;
+    const pintaAnadir = () => { const b = $('#anadir-app'); if (b) b.hidden = !(esMovil() && !comoApp() && (avisoInstalar || /iPhone|iPad|iPod/i.test(navigator.userAgent))); };
+    addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); avisoInstalar = e; pintaAnadir(); });
+    addEventListener('appinstalled', () => { avisoInstalar = null; pintaAnadir(); });
+    $('#anadir-app').addEventListener('click', async () => { if (avisoInstalar) { const e = avisoInstalar; avisoInstalar = null; try { e.prompt(); await e.userChoice; } catch (_) {} pintaAnadir(); } else abreHoja('h-completa'); });
+    pintaAnadir();
     // en Android, la pantalla completa entra sola con el primer toque importante: crear, aceptar, llamar o contestar
     for (const id of ['#nueva-blindada', '#aceptar-si', '#llamar', '#videollamar', '#ll-contestar']) { const b = $(id); if (b) b.addEventListener('click', () => { if (esMovil() && puedeCompleta()) pantallaCompleta(); }, { capture: true }); }
     // tocar el nombre o el candado abre la seguridad de la conversación, como en las aplicaciones de mensajería
