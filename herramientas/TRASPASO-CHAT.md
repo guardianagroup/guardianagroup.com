@@ -1,5 +1,7 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
+> **28 Oct 2026, 15:05: el estado más reciente está en `herramientas/TRASPASO-28OCT-TARDE.md`. Empieza por ese.**
+
 ## Estado al 28 Oct 2026, madrugada (Bogotá) — EMPIEZA POR AQUÍ
 
 Lo de las 20:25 (abajo) sigue valiendo salvo lo que cambia aquí. El dueño se acostó a las 22:43 con el encargo de hacerlo todo, publicarlo en los 42 idiomas y suspender el PC. Publicado en las dos ramas (web-idiomas `becbf465`, `f04b6b5e`, `a1c555db`, `4bb9e7af`; main `a78c399b`, `37167305`, `5525dc01`, `4b9292f9`).
