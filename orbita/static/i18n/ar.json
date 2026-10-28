@@ -2833,7 +2833,10 @@
   "Ver el chat": "عرض الدردشة",
   "Volver a la llamada": "العودة إلى المكالمة",
   "imagen": "الصورة",
-  "Sin filtro": "بدون فلتر"
+  "Sin filtro": "بدون فلتر",
+  "Voz e imagen": "الصوت والصورة",
+  "Mejorar la luz": "تحسين الإضاءة",
+  "La imagen de la otra persona no llega.": "صورة الشخص الآخر لا تصل."
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

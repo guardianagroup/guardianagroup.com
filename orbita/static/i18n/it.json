@@ -2833,7 +2833,10 @@
   "Ver el chat": "Vedi la chat",
   "Volver a la llamada": "Torna alla chiamata",
   "imagen": "immagine",
-  "Sin filtro": "Senza filtro"
+  "Sin filtro": "Senza filtro",
+  "Voz e imagen": "Voce e immagine",
+  "Mejorar la luz": "Migliora la luce",
+  "La imagen de la otra persona no llega.": "L’immagine dell’altra persona non arriva."
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

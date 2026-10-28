@@ -2833,7 +2833,10 @@
   "Ver el chat": "அரட்டையைக் காண்க",
   "Volver a la llamada": "அழைப்புக்குத் திரும்பு",
   "imagen": "வீடியோ",
-  "Sin filtro": "வடிகட்டி இல்லை"
+  "Sin filtro": "வடிகட்டி இல்லை",
+  "Voz e imagen": "குரல் மற்றும் படம்",
+  "Mejorar la luz": "ஒளியை மேம்படுத்து",
+  "La imagen de la otra persona no llega.": "மற்றவரின் படம் வரவில்லை."
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

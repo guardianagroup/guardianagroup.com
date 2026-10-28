@@ -2835,7 +2835,10 @@
   "Ver el chat": "Xem cuộc trò chuyện",
   "Volver a la llamada": "Quay lại cuộc gọi",
   "imagen": "hình ảnh",
-  "Sin filtro": "Không bộ lọc"
+  "Sin filtro": "Không bộ lọc",
+  "Voz e imagen": "Giọng nói và hình ảnh",
+  "Mejorar la luz": "Cải thiện ánh sáng",
+  "La imagen de la otra persona no llega.": "Hình ảnh của người kia không đến."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

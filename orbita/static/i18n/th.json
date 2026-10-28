@@ -2833,7 +2833,10 @@
   "Ver el chat": "ดูแชท",
   "Volver a la llamada": "กลับไปที่การโทร",
   "imagen": "ภาพ",
-  "Sin filtro": "ไม่มีฟิลเตอร์"
+  "Sin filtro": "ไม่มีฟิลเตอร์",
+  "Voz e imagen": "เสียงและภาพ",
+  "Mejorar la luz": "ปรับแสงให้ดีขึ้น",
+  "La imagen de la otra persona no llega.": "ภาพของอีกฝ่ายไม่มาถึง"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

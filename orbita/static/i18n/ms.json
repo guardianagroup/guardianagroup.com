@@ -2833,7 +2833,10 @@
   "Ver el chat": "Lihat sembang",
   "Volver a la llamada": "Kembali ke panggilan",
   "imagen": "imej",
-  "Sin filtro": "Tanpa penapis"
+  "Sin filtro": "Tanpa penapis",
+  "Voz e imagen": "Suara dan imej",
+  "Mejorar la luz": "Tingkatkan cahaya",
+  "La imagen de la otra persona no llega.": "Imej orang lain tidak sampai."
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

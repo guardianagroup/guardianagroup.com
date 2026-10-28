@@ -2835,7 +2835,10 @@
   "Ver el chat": "Csevegés megtekintése",
   "Volver a la llamada": "Vissza a híváshoz",
   "imagen": "kép",
-  "Sin filtro": "Szűrő nélkül"
+  "Sin filtro": "Szűrő nélkül",
+  "Voz e imagen": "Hang és kép",
+  "Mejorar la luz": "Fény javítása",
+  "La imagen de la otra persona no llega.": "A másik fél képe nem érkezik meg."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

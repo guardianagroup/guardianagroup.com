@@ -2833,7 +2833,10 @@
   "Ver el chat": "Ona gumzo",
   "Volver a la llamada": "Rudi kwenye simu",
   "imagen": "picha",
-  "Sin filtro": "Bila kichujio"
+  "Sin filtro": "Bila kichujio",
+  "Voz e imagen": "Sauti na picha",
+  "Mejorar la luz": "Boresha mwanga",
+  "La imagen de la otra persona no llega.": "Picha ya mtu mwingine haifiki."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

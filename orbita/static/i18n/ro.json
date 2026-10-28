@@ -2833,7 +2833,10 @@
   "Ver el chat": "Vezi chatul",
   "Volver a la llamada": "Înapoi la apel",
   "imagen": "imagine",
-  "Sin filtro": "Fără filtru"
+  "Sin filtro": "Fără filtru",
+  "Voz e imagen": "Voce și imagine",
+  "Mejorar la luz": "Îmbunătățește lumina",
+  "La imagen de la otra persona no llega.": "Imaginea celeilalte persoane nu ajunge."
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

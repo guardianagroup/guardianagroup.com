@@ -2835,7 +2835,10 @@
   "Ver el chat": "Προβολή συνομιλίας",
   "Volver a la llamada": "Πίσω στην κλήση",
   "imagen": "εικόνα",
-  "Sin filtro": "Χωρίς φίλτρο"
+  "Sin filtro": "Χωρίς φίλτρο",
+  "Voz e imagen": "Φωνή και εικόνα",
+  "Mejorar la luz": "Βελτίωση φωτισμού",
+  "La imagen de la otra persona no llega.": "Η εικόνα του άλλου ατόμου δεν φτάνει."
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

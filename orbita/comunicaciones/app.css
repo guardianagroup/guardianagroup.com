@@ -451,13 +451,6 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .gc-llamada.con-video.reposo{background:transparent;cursor:none}
 /* con la tarjeta abierta, tu imagen pequeña sube para no quedar debajo */
 .gc-llamada.ajustes .videos #v-local{bottom:auto;top:64px}
-/* Pasar al teléfono (28 Oct 2026): por encima de la llamada; en un teléfono no tiene sentido */
-#h-movil{z-index:75}
-#h-movil .qr{justify-self:center}
-.movil-pasos{margin:0;padding-left:20px;display:grid;gap:5px;font:400 13.5px/1.45 var(--texto);color:var(--fg)}
-.movil-quien{color:var(--accent)}
-.movil-aviso{color:var(--aviso)}
-@media (max-width:760px),(pointer:coarse){#al-movil,#ll-movil-caja{display:none}}
 @media (max-width:760px){
   .ll-ajustes{padding:14px 4px}
   .ll-voces{flex-basis:100%;padding:0 10px}

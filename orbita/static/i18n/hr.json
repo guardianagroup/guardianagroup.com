@@ -2835,7 +2835,10 @@
   "Ver el chat": "Prikaži chat",
   "Volver a la llamada": "Natrag na poziv",
   "imagen": "slika",
-  "Sin filtro": "Bez filtra"
+  "Sin filtro": "Bez filtra",
+  "Voz e imagen": "Glas i slika",
+  "Mejorar la luz": "Poboljšaj svjetlo",
+  "La imagen de la otra persona no llega.": "Slika druge osobe ne stiže."
  },
  "p": {
   "intento": "Najupornija danas: {1}, {2} {2?put|puta}.",

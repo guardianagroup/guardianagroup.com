@@ -2833,7 +2833,10 @@
   "Ver el chat": "Visa chatten",
   "Volver a la llamada": "Tillbaka till samtalet",
   "imagen": "bild",
-  "Sin filtro": "Utan filter"
+  "Sin filtro": "Utan filter",
+  "Voz e imagen": "Röst och bild",
+  "Mejorar la luz": "Förbättra ljuset",
+  "La imagen de la otra persona no llega.": "Bilden från den andra personen kommer inte fram."
  },
  "p": {
   "intento": "Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

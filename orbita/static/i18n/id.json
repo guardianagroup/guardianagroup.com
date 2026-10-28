@@ -2835,7 +2835,10 @@
   "Ver el chat": "Lihat chat",
   "Volver a la llamada": "Kembali ke panggilan",
   "imagen": "gambar",
-  "Sin filtro": "Tanpa filter"
+  "Sin filtro": "Tanpa filter",
+  "Voz e imagen": "Suara dan gambar",
+  "Mejorar la luz": "Perbaiki cahaya",
+  "La imagen de la otra persona no llega.": "Gambar dari orang lain tidak sampai."
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

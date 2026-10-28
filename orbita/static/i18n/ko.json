@@ -2833,7 +2833,10 @@
   "Ver el chat": "채팅 보기",
   "Volver a la llamada": "통화로 돌아가기",
   "imagen": "영상",
-  "Sin filtro": "필터 없음"
+  "Sin filtro": "필터 없음",
+  "Voz e imagen": "음성 및 영상",
+  "Mejorar la luz": "조명 보정",
+  "La imagen de la otra persona no llega.": "상대방의 영상이 도착하지 않습니다."
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

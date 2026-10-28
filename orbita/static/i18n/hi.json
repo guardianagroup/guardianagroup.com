@@ -2835,7 +2835,10 @@
   "Ver el chat": "चैट देखें",
   "Volver a la llamada": "कॉल पर वापस जाएँ",
   "imagen": "वीडियो",
-  "Sin filtro": "बिना फ़िल्टर"
+  "Sin filtro": "बिना फ़िल्टर",
+  "Voz e imagen": "आवाज़ और छवि",
+  "Mejorar la luz": "रोशनी सुधारें",
+  "La imagen de la otra persona no llega.": "दूसरे व्यक्ति की छवि नहीं पहुँच रही है।"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

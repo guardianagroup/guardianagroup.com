@@ -2833,7 +2833,10 @@
   "Ver el chat": "চ্যাট দেখুন",
   "Volver a la llamada": "কলে ফিরে যান",
   "imagen": "ভিডিও",
-  "Sin filtro": "ফিল্টার ছাড়া"
+  "Sin filtro": "ফিল্টার ছাড়া",
+  "Voz e imagen": "কণ্ঠ ও ছবি",
+  "Mejorar la luz": "আলো উন্নত করুন",
+  "La imagen de la otra persona no llega.": "অন্য ব্যক্তির ছবি পৌঁছাচ্ছে না।"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

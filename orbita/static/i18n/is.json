@@ -2833,7 +2833,10 @@
   "Ver el chat": "Skoða spjallið",
   "Volver a la llamada": "Aftur í símtalið",
   "imagen": "mynd",
-  "Sin filtro": "Engin sía"
+  "Sin filtro": "Engin sía",
+  "Voz e imagen": "Rödd og mynd",
+  "Mejorar la luz": "Bæta lýsingu",
+  "La imagen de la otra persona no llega.": "Mynd hins aðilans berst ekki."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

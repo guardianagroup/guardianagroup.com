@@ -2835,7 +2835,10 @@
   "Ver el chat": "Voir le chat",
   "Volver a la llamada": "Retour à l’appel",
   "imagen": "image",
-  "Sin filtro": "Sans filtre"
+  "Sin filtro": "Sans filtre",
+  "Voz e imagen": "Voix et image",
+  "Mejorar la luz": "Améliorer la lumière",
+  "La imagen de la otra persona no llega.": "L’image de l’autre personne n’arrive pas."
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",
