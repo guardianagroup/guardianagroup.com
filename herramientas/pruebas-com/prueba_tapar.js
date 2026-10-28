@@ -1,0 +1,32 @@
+// «Tapar» partes de una foto antes de enviarla
+const { chromium } = require('playwright');
+const espera = (ms) => new Promise((r) => setTimeout(r, ms));
+(async () => {
+  const b = await chromium.launch(); const res = [];
+  const ok = (n, c, x) => res.push((c ? 'OK   ' : 'FALLA') + ' ' + n + (x ? ' · ' + x : ''));
+  const vis = (p, s) => p.evaluate((s) => { const e = document.querySelector(s); return !!(e && !e.hidden && getComputedStyle(e).display !== 'none'); }, s);
+  const mk = async () => { const c = await b.newContext({ viewport: { width: 1280, height: 800 }, locale: 'es-ES' }); await c.addInitScript(() => { try { localStorage.setItem('guardiana-acceso', 'dueno'); } catch (e) {} }); const p = await c.newPage(); await p.goto('http://127.0.0.1:8802/orbita/comunicaciones/'); await p.waitForTimeout(1500); return p; };
+  const A = await mk(), B = await mk();
+  await A.click('#nueva'); await espera(1500);
+  const codigo = (await A.textContent('#codigo')).replace(/\D/g, '');
+  await B.click('#unir'); await B.fill('#unir-codigo', codigo); await espera(300); if (await vis(B, '#unir-ok')) await B.click('#unir-ok').catch(() => {});
+  for (let i = 0; i < 40 && !((await vis(A, '#conv')) && (await vis(B, '#conv'))); i++) await espera(500);
+  await espera(2500);
+  await A.setInputFiles('#archivo-foto', '/home/claude/guardianagroup.com/herramientas/pruebas-com/datos/foto-degradado.jpg'); await espera(1200);
+  ok('la foto tiene el botón «Tapar»', await vis(A, '#envio-lista .tapar-b'));
+  const antes = await A.evaluate(() => document.querySelector('#envio-lista li small').textContent);
+  await A.click('#envio-lista .tapar-b'); await espera(800);
+  ok('se abre el editor', await vis(A, '#tapar'));
+  const r = await A.evaluate(() => { const c = document.querySelector('#tapar-cv').getBoundingClientRect(); return { x: c.left, y: c.top, w: c.width, h: c.height }; });
+  await A.mouse.move(r.x + r.w * 0.3, r.y + r.h * 0.4); await A.mouse.down(); await A.mouse.move(r.x + r.w * 0.7, r.y + r.h * 0.6, { steps: 12 }); await A.mouse.up();
+  const colores = await A.evaluate(() => { const cv = document.querySelector('#tapar-cv'), d = cv.getContext('2d').getImageData(Math.round(cv.width * 0.5) - 10, Math.round(cv.height * 0.5) - 10, 20, 20).data, s = new Set(); for (let i = 0; i < d.length; i += 4) s.add(d[i] + ',' + d[i + 1] + ',' + d[i + 2]); return s.size; });
+  ok('donde pasa el ratón queda un mosaico (pocos colores en 20×20 px)', colores <= 6, 'colores ' + colores);
+  await A.screenshot({ path: '/tmp/claude-0/-home-claude/d4be7cd4-a664-5b0e-9e6c-cc1d5a1846c1/scratchpad/prueba-74/tapar.png' });
+  await A.click('#tapar-si'); await espera(800);
+  const despues = await A.evaluate(() => document.querySelector('#envio-lista li small').textContent);
+  ok('al pulsar «Listo», la foto de la lista es la tapada', /tapada/.test(despues) && despues !== antes, antes + ' → ' + despues);
+  await A.click('#envio-si'); await espera(4000);
+  const llega = await B.evaluate(() => [...document.querySelectorAll('#mensajes .gc-burbuja')].some((x) => /foto-degradado\.jpg/.test(x.textContent)));
+  ok('B recibe la foto', llega);
+  console.log(res.join('\n')); await b.close();
+})().catch((e) => { console.error('FALLO', e.message); process.exit(1); });
