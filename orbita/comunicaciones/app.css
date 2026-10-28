@@ -779,3 +779,12 @@ body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
 .gc-ubicacion{display:grid;gap:4px}.gc-ubicacion small{color:var(--gc-suave,#9fb3c4)}
 .gc-ubi-abrir{justify-self:start;margin-top:4px;padding:6px 12px;border-radius:999px;border:1px solid rgba(156,195,228,.35);color:#9CC3E4;text-decoration:none;font-weight:600;font-size:13.5px}
 .rele[hidden]{display:none!important}
+/* «Tapar» en la foto antes de enviarla */
+.tapar-b{position:absolute;right:6px;bottom:6px;padding:5px 10px;border-radius:999px;border:1px solid rgba(218,236,250,.3);background:rgba(6,8,12,.72);color:#F4F6F8;font:600 12.5px/1 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer}
+#envio-lista li.foto{position:relative}
+.tapar{position:fixed;inset:0;z-index:200;background:#06080C;display:grid;grid-template-rows:auto 1fr auto;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.tapar[hidden]{display:none}
+.tapar-cab{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px}.tapar-cab b{font-size:15.5px;text-align:center}
+.tapar-lienzo{min-height:0;display:grid;place-items:center;padding:8px}
+#tapar-cv{max-width:100%;max-height:100%;touch-action:none;cursor:crosshair;border-radius:8px}
+.tapar-pie{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px 14px}.tapar-pie small{color:#9fb3c4;line-height:1.35}
