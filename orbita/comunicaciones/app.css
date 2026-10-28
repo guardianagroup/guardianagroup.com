@@ -795,5 +795,65 @@ body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
 body.aceptando .barra{display:none!important}
 .paso.aceptar .fila{flex-direction:row-reverse}
 @media (max-width:760px){.paso.aceptar .fila{flex-direction:column!important}}
-.pasos-ios{margin:6px 0 10px;padding-left:22px;display:grid;gap:8px;line-height:1.45}
-.pasos-ios svg{width:17px;height:17px;vertical-align:-3px;fill:none;stroke:#9CC3E4;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* La guía «Añade GUARDIANA a tu pantalla de inicio» (dueño, 28 Oct 2026, 17:02: «lo más profesional posible… los mismos
+   botones que se va a encontrar la persona»): pasos numerados en una línea y, debajo de cada uno, el botón como lo verá en
+   su teléfono (iPhone con iOS 26 o anterior, Chrome, Android); a la derecha del primero, dónde está en la pantalla. */
+.gc-hoja-caja.caja.guia{gap:14px;max-height:94dvh}
+.guia-cab{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.guia-app{display:grid;justify-items:center;gap:6px;width:64px}
+.guia-app img{display:block;width:52px;height:52px;border-radius:12px;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 10px 24px -10px rgba(0,0,0,.9)}
+.guia-app span{font:500 11px/1 -apple-system,system-ui,'IBM Plex Sans',sans-serif;color:#F4F6F8;letter-spacing:.01em}
+.guia-tit .gc-hoja-titulo{display:block;margin:0 0 4px;font:600 17px/1.25 var(--texto);color:#F4F6F8}
+.guia-tit .t{margin:0;color:var(--muted);font-size:13.5px;line-height:1.4}
+.guia-pasos{list-style:none;margin:0;padding:0;display:grid;counter-reset:g}
+.guia-pasos>li{counter-increment:g;position:relative;display:grid;grid-template-columns:28px minmax(0,1fr) auto;column-gap:12px;padding:0 0 14px}
+.guia-pasos>li::before{content:counter(g);grid-column:1;grid-row:1/span 2;align-self:start;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#9CC3E4;color:#06080C;font:600 13.5px/1 var(--texto);position:relative;z-index:1}
+.guia-pasos>li::after{content:'';position:absolute;left:13.5px;top:32px;bottom:4px;width:1px;background:rgba(156,195,228,.26)}
+.guia-pasos>li.fin{padding-bottom:0}.guia-pasos>li.fin::after{display:none}
+.g-txt{grid-column:2;min-height:28px;padding-top:3px;font-size:15px;line-height:1.4;color:#F4F6F8}
+.g-alt{display:block;margin-top:3px;font-size:12.5px;line-height:1.35;color:var(--muted)}
+.g-ui{grid-column:2;margin-top:8px;display:flex;align-items:center;flex-wrap:wrap;gap:8px;min-width:0}
+.g-movil{grid-column:3;grid-row:1/span 2;align-self:start;width:32px;height:58px}
+.g-movil .c{fill:rgba(255,255,255,.02);stroke:rgba(218,236,250,.34);stroke-width:1.4}
+.g-movil .b{fill:rgba(218,236,250,.16)}
+.g-movil .p{fill:#9CC3E4;stroke:none}
+.g-movil .o{fill:none;stroke:#9CC3E4;stroke-width:1.2;transform-box:fill-box;transform-origin:center;animation:g-onda 1.8s ease-out infinite}
+@keyframes g-onda{0%{transform:scale(.7);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+@media (prefers-reduced-motion:reduce){.g-movil .o{animation:none;opacity:.45}}
+#h-completa.es-ipad .g-movil{display:none!important}
+/* los botones del teléfono, como son (modo oscuro): el iPhone con su letra y sus grises; Android, con los suyos */
+.ui{display:inline-flex;align-items:center;gap:10px;max-width:100%;color:#fff;font:500 15px/1.15 -apple-system,BlinkMacSystemFont,system-ui,'IBM Plex Sans',sans-serif;letter-spacing:-.01em}
+.ui svg{flex:none;width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ui svg circle{fill:currentColor;stroke:none}
+.ui-circ{justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(120,120,128,.36);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 1px 2px rgba(0,0,0,.4)}
+.ui-circ.and{background:rgba(255,255,255,.06);box-shadow:none}
+.ui-sig{color:var(--muted-2);font-size:20px;line-height:1}
+.ui-fila{min-height:44px;padding:0 16px 0 14px;border-radius:14px;background:#2C2C2E;box-shadow:inset 0 1px 0 rgba(255,255,255,.06);font-weight:400;font-size:16px}
+.ui-fila.ancha{min-width:min(250px,100%)}
+.ui-fila.der{flex-direction:row-reverse;justify-content:space-between}
+.ui-vermas{flex-direction:column;gap:6px;font-size:12px;font-weight:400;color:#D1D1D6}
+.ui-vermas i{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:rgba(120,120,128,.36);box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
+.ui-azul{height:34px;padding:0 18px;border-radius:999px;background:#0A84FF;font-weight:600;font-size:16px}
+.ui-dir{justify-content:space-between;gap:10px;height:40px;padding:0 5px 0 16px;border-radius:21px;background:rgba(120,120,128,.24);color:#EBEBF5;font-size:14px;font-weight:400;min-width:min(250px,100%)}
+.ui-dir-b{display:grid;place-items:center;width:32px;height:32px;border-radius:50%}
+.ui-menu{min-height:48px;padding:0 18px 0 14px;border-radius:12px;background:#2B2930;gap:14px;font:400 15px/1.2 Roboto,system-ui,sans-serif;color:#E6E0E9;min-width:min(240px,100%)}
+.ui-pill{display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 22px;border-radius:999px;background:#A8C7FA;color:#062E6F;font:500 14px/1 Roboto,system-ui,sans-serif}
+.ui-dlg{flex-direction:column;align-items:stretch;gap:14px;padding:16px;border-radius:24px;background:#2B2930;min-width:min(260px,100%);font-family:Roboto,system-ui,sans-serif}
+.ui-dlg-app{display:flex;align-items:center;gap:12px}
+.ui-dlg-app img{width:36px;height:36px;border-radius:9px}
+.ui-dlg-app>span{display:grid;gap:2px}.ui-dlg-app b{font:500 15px/1.2 Roboto,system-ui,sans-serif;color:#E6E0E9}.ui-dlg-app small{font-size:12.5px;color:#CAC4D0}
+.ui-dlg-bot{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+.ui-dlg-no{color:#A8C7FA;font:500 14px/1 Roboto,system-ui,sans-serif}
+/* lo que hay que tocar, con un aro del color de GUARDIANA */
+.ui.toca,.ui .toca{outline:2px solid rgba(156,195,228,.95);outline-offset:3px}
+.guia-nota{display:flex;align-items:center;gap:10px;margin:0;font-size:12.5px;line-height:1.4;color:var(--muted)}
+.guia-nota svg{flex:none;width:22px;height:22px;fill:none;stroke:#F4F6F8;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.guia-pc{display:grid;gap:6px}.guia-pc .t{margin:0}
+/* iOS 18 y anteriores: «Agregar», solo el texto azul; los pasos cortos, con el botón al lado */
+.ui-azul.solo{background:none;padding:0 6px;color:#0A84FF;font-size:17px;border-radius:8px}
+.guia-pasos>li.lado .g-ui{grid-column:3;grid-row:1/span 2;margin-top:0;align-self:start}
+.guia-pasos>li.junto{grid-template-columns:28px auto minmax(0,1fr)}
+.guia-pasos>li.junto .g-ui{grid-column:3;grid-row:1/span 2;margin:4px 0 0 14px;align-self:start}
+/* lo de abajo («Entendido» o «Instalar»), siempre a la vista aunque la guía no quepa entera */
+.guia>.fila{position:sticky;bottom:-20px;z-index:2;margin:0 -20px -20px;padding:10px 20px calc(20px + env(safe-area-inset-bottom));background:linear-gradient(to bottom,rgba(12,17,24,0),var(--gc-tarjeta,#0C1118) 12px)}
+.ui-dlg{cursor:pointer}

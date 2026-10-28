@@ -1,6 +1,6 @@
 {
-  "name": "GUARDIANA Comunicaciones",
-  "short_name": "Comunicaciones",
+  "name": "GUARDIANA",
+  "short_name": "GUARDIANA",
   "description": "Chat, llamadas y videollamadas encriptados de extremo a extremo.",
   "id": "/orbita/comunicaciones/",
   "start_url": "/orbita/comunicaciones/?app=1",
