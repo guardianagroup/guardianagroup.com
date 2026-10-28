@@ -529,6 +529,8 @@
       case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); const v = VIAJES.get(j.id); if (a) c.archivos.delete(j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, (j.ok ? T('Archivo entregado') : T('Archivo no completado')) + ': ' + m.archivo.nombre + (j.ok ? ' · ' + T('acuse del otro equipo: completo y autenticado.') : ''), j.ok ? 'bien' : 'mal'); pintaRadio(c); if (j.ok && v && v.custodia === 'si' && j.v === 1 && a && a.sha256) await entregaViaje(c, m, a, v, j); else { if (v) finViaje(v, j.ok, j); if (j.ok) await recibo(c, m, +j.seg || 0, +j.trozos || m.archivo.trozos, true); } } return; }
       case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); const vc = VIAJES.get(j.id); if (vc && vc.estado !== 'entregado') { vc.estado = 'fallo'; vc.tFin = Date.now(); evento(vc, j.por === 'integridad' ? T('El otro equipo ha detenido el envío: un fragmento no superó la autenticación.') : j.por === 'persona' ? T('La otra persona ha cortado el envío.') : T('El otro equipo ha cancelado el envío.'), 'mal'); } if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'persona') m.archivo.motivo = T('cortado por la otra persona'); if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); } return; }
       case 'llamada': if (LL && c.id === ACTUAL) await LL.recibe(j); return; // llamadas de voz (dueño, 27 Oct 2026, 23:05)
+      // pasar al teléfono: solo un enlace de sesión blindada de esta misma página (nunca otra web)
+      case 'movil': { const e = String(j.enlace || ''); if (c.id === ACTUAL && e.length < 300 && e.startsWith(ORIGEN + '?pase=invitado#b=') && /#b=[A-Za-z0-9_-]{43}$/.test(e)) muestraMovil(e, true); return; }
       case 'destruir': return destruyeLocal(c, true);
       default: return;
     }
@@ -943,6 +945,28 @@
     $('#llamar').addEventListener('click', () => LL.llamar());
     // videollamada (dueño, 28 Oct 2026): la misma llamada, con imagen
     $('#videollamar').addEventListener('click', () => LL.llamar(true));
+    $('#ll-movil').addEventListener('click', alMovil);
+  }
+
+  // ---------- pasar al teléfono (dueño, 28 Oct 2026, 10:30) ----------
+  // Una sesión blindada nueva para los dos teléfonos: su enlace (el secreto de 256 bits tras «#b=») viaja por esta
+  // conversación, ya encriptada de extremo a extremo, y cada ordenador lo enseña como QR. Los ordenadores no entran en
+  // esa sala: entran los teléfonos, que se presentan entre ellos y comprueban el número de seguridad como siempre.
+  // «?pase=invitado» deja entrar al teléfono mientras la web está en construcción.
+  const puedeMovil = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
+  function muestraMovil(enlace, deOtro) {
+    const q = $('#movil-qr'); if (q && window.qrSvg) { q.innerHTML = window.qrSvg(enlace); q.dataset.u = enlace; }
+    $('#movil-quien').textContent = deOtro ? T('La otra persona propone seguir la conversación en el teléfono.') : T('Has propuesto seguir la conversación en el teléfono: la otra persona ve este mismo código.');
+    abreHoja('h-movil');
+    if (deOtro) avisaSonido();
+  }
+  function alMovil() {
+    const c = CONVS.get(ACTUAL); if (!c) return;
+    if (!puedeMovil()) { aviso(T('Para pasar al teléfono, la otra persona tiene que estar conectada.')); return; }
+    if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; }
+    const enlace = ORIGEN + '?pase=invitado#b=' + C.b64u(C.nuevaSemilla());
+    if (!enviaControl(c, { tipo: 'movil', enlace })) { aviso(T('Para pasar al teléfono, la otra persona tiene que estar conectada.')); return; }
+    muestraMovil(enlace, false);
   }
 
   // ---------- destruir ----------
@@ -1055,6 +1079,7 @@
     conf.textContent = txt;
     pintaPuerta(c);
     const ll = $('#llamar'); if (ll) { const si = puedeLlamar() && (R.llamadas || LOCAL); ll.classList.toggle('apagado', !si); ll.title = si ? T('Llamada de voz') : esB(c) && !(c.verificada && c.suVerificada) ? T('Las llamadas se activan cuando los dos hayan comprobado el número de seguridad.') : !R.llamadas && !LOCAL ? T('El servicio de llamadas no está disponible ahora mismo.') : T('La otra persona tiene que estar conectada.'); }
+    const am = $('#al-movil'); if (am) { const si = puedeMovil(); am.classList.toggle('apagado', !si); am.title = si ? T('Pasar al teléfono') : T('Para pasar al teléfono, la otra persona tiene que estar conectada.'); }
     const vl = $('#videollamar'); if (vl && ll) { vl.classList.toggle('apagado', ll.classList.contains('apagado')); vl.title = ll.classList.contains('apagado') ? ll.title : T('Videollamada'); }
   }
   // Vigilancia a la derecha (dueño, 26 Oct 20:22): anota cada comprobación real según ocurre y mantiene la última a la vista.
@@ -1418,6 +1443,8 @@
     $('#bl-coincide').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await marcaVerificada(c, !c.verificada); });
     $('#cierre-si').addEventListener('click', async () => { cierraHoja('h-cierre'); const c = CONVS.get(ACTUAL); if (c) await destruye(c); });
     $('#cierre-no').addEventListener('click', () => cierraHoja('h-cierre'));
+    $('#al-movil').addEventListener('click', alMovil);
+    $('#movil-cerrar').addEventListener('click', () => cierraHoja('h-movil'));
     // un enlace blindado pegado en el campo del código también vale
     campoCod.addEventListener('paste', async (e) => { const t = (e.clipboardData && e.clipboardData.getData('text')) || ''; if (!/#[ib]=[A-Za-z0-9_-]{43}/.test(t)) return; e.preventDefault(); const ok = await aceptaInvitacion(t); if (ok) $('#paso-entrar').hidden = true; else { $('#unir-mal').textContent = T('Ese enlace no es una invitación de GUARDIANA.'); $('#unir-mal').hidden = false; } });
     // renovación de claves de la blindada: cada 5 minutos, quien inicia se presenta otra vez (efímeras y ML-KEM nuevos)
