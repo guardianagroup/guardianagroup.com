@@ -275,7 +275,7 @@
         await derivaSesion(c, ef, efMia, pq);
       }
       else if (!resp) await presenta(c, null);
-      if (nueva) { if (c.codigo) R.retira(c.codigo); c.codigo = null; clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Conversación establecida: cifrada de extremo a extremo. Comprobad el número de seguridad cuando podáis.'); if (ACTUAL === c.id) abreConv(c.id); }
+      if (nueva) { if (c.codigo) R.retira(c.codigo); c.codigo = null; clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Conversación establecida: encriptada de extremo a extremo. Comprueba el número de seguridad con la otra persona cuando puedas.'); if (ACTUAL === c.id) abreConv(c.id); }
       if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
     } catch (e) { console.warn('presentación', e); }
@@ -302,9 +302,9 @@
     c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento); c.encuentros = (c.encuentros || 0) + 1;
     // 27 Oct 2026: el registro dice si la sesión lleva la capa poscuántica; si una conversación que ya la tuvo vuelve a una
     // sesión sin ella (la otra persona con una versión anterior, o alguien con la invitación quitándola), se avisa en rojo.
-    if (ses.pq) { vigila(c, T('Claves nuevas acordadas con la otra persona (cifrado renovado, con protección postcuántica ML-KEM-768).'), 'info'); if (!c.pqVisto) { c.pqVisto = true; guardaConv(c); } }
+    if (ses.pq) { vigila(c, T('Claves nuevas acordadas con la otra persona (encriptación renovada, con protección postcuántica ML-KEM-768).'), 'info'); if (!c.pqVisto) { c.pqVisto = true; guardaConv(c); } }
     else if (c.pqVisto) vigila(c, T('Sesión sin la capa postcuántica: el otro equipo no la ha usado esta vez. La conversación sigue encriptada de extremo a extremo.'), 'mal');
-    else vigila(c, T('Claves nuevas acordadas con la otra persona (cifrado renovado).'), 'info');
+    else vigila(c, T('Claves nuevas acordadas con la otra persona (encriptación renovada).'), 'info');
     for (const k of [...c.sesiones.keys()].slice(0, -3)) c.sesiones.delete(k);
     pintaCabecera(c); pintaLista();
     enviaControl(c, { tipo: 'ok' });
@@ -370,7 +370,7 @@
       if (!soyInicio(c)) { if (kemEk && !resp) { const pq = await presentaB(c, { epoca, ef, ek: kemEk }); await derivaSesionB(c, ef, c.ef, pq); } }
       else if (resp) { const pq = { ss: C.B.kemAbre(kemCt, efMia.kem.dk), ek: efMia.kem.ek, ct: kemCt }; efMia.kem.dk.fill(0); efMia.kem = null; await derivaSesionB(c, ef, efMia, pq); }
       else await presentaB(c, null);
-      if (nueva) { clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Sesión blindada establecida. Antes de enviar nada, comprobad los dos el número de seguridad por otro canal.'); if (ACTUAL === c.id) abreConv(c.id); }
+      if (nueva) { clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Sesión blindada establecida. Antes de enviar nada, los dos deben comprobar el número de seguridad por otro canal.'); if (ACTUAL === c.id) abreConv(c.id); }
       if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
     } catch (e) { console.warn('presentación blindada', e); }
@@ -384,7 +384,7 @@
     const ses = { sid, hash: s.hash, envio: C.B.cadena(s.envio), recibo: C.B.cadena(s.recibo), desde: Date.now(), confirmada: false, pq: true, blindada: true };
     c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento); c.encuentros = (c.encuentros || 0) + 1;
     if (!c.pqVisto) { c.pqVisto = true; guardaConv(c); }
-    vigila(c, renovada ? T('Claves renovadas (algoritmos CNSA 2.0): lo anterior ya no se puede leer con las claves nuevas.') : T('Claves acordadas con la otra persona: algoritmos CNSA 2.0 (ML-KEM-1024 y ECDH P-384).'), 'info');
+    vigila(c, renovada ? T('Claves renovadas (algoritmos de la suite CNSA 2.0): lo anterior ya no se puede leer con las claves nuevas.') : T('Claves acordadas con la otra persona: algoritmos de la suite CNSA 2.0 (ML-KEM-1024 y ECDH P-384).'), 'info');
     // de las sesiones anteriores quedan las dos últimas (por los mensajes en vuelo); las demás se borran de la memoria
     for (const k of [...c.sesiones.keys()].slice(0, -3)) { const x = c.sesiones.get(k); try { x.envio.borra(); x.recibo.borra(); } catch (_) {} c.sesiones.delete(k); }
     pintaCabecera(c); pintaLista();
@@ -416,8 +416,8 @@
     } else if (j.si === 1) {
       // el otro equipo ve otro número: no son las mismas identidades en los dos lados (o alguien en medio)
       c.suVerificada = false;
-      await anotaSistema(c, 'El número de seguridad no coincide en los dos equipos: no enviéis nada y comprobadlo de nuevo por otro canal.');
-      vigila(c, T('El número de seguridad no coincide en los dos equipos: no enviéis nada y comprobadlo de nuevo por otro canal.'), 'mal');
+      await anotaSistema(c, 'El número de seguridad no coincide en los dos equipos: no envíes nada y compruébalo de nuevo con la otra persona por otro canal.');
+      vigila(c, T('El número de seguridad no coincide en los dos equipos: no envíes nada y compruébalo de nuevo con la otra persona por otro canal.'), 'mal');
       c.incidencias = (c.incidencias || 0) + 1;
     } else {
       c.suVerificada = false;
@@ -442,6 +442,10 @@
     const n = c.mensajes.filter((m) => m.tipo === 'texto').length, a = c.mensajes.filter((m) => m.tipo === 'archivo').length, k = c.mensajes.filter((m) => m.tipo === 'custodia').length;
     $('#cierre-cuenta').textContent = n + ' ' + (n === 1 ? T('mensaje') : T('mensajes')) + ' · ' + a + ' ' + (a === 1 ? T('archivo') : T('archivos')) + ' · ' + k + ' ' + (k === 1 ? T('comprobante') : T('comprobantes'));
     $('#cierre-aviso-comp').hidden = !k;
+    // en la sesión normal la identidad no es de la conversación: se queda en el navegador (28 Oct 2026, sin prometer de más)
+    $('#cierre-este').textContent = esB(c)
+      ? T('En este equipo: el secreto de la invitación, la identidad de esta sesión, todas sus claves, los mensajes, los archivos guardados en este navegador y los comprobantes.')
+      : T('En este equipo: el secreto de la invitación, las claves de esta conversación, los mensajes, los archivos guardados en este navegador y los comprobantes. Tu identidad y tu nombre se quedan para la próxima conversación.');
     abreHoja('h-cierre');
   }
   // borrado criptográfico de lo que vive en memoria: claves de cadena, secreto de la invitación, psk e identidad de la sesión
@@ -523,7 +527,7 @@
       case 'custodia-firma': return firmaCustodia(c, j);
       case 'custodia-no': return rechazoCustodia(c, j);
       case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); const v = VIAJES.get(j.id); if (a) c.archivos.delete(j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, (j.ok ? T('Archivo entregado') : T('Archivo no completado')) + ': ' + m.archivo.nombre + (j.ok ? ' · ' + T('acuse del otro equipo: completo y autenticado.') : ''), j.ok ? 'bien' : 'mal'); pintaRadio(c); if (j.ok && v && v.custodia === 'si' && j.v === 1 && a && a.sha256) await entregaViaje(c, m, a, v, j); else { if (v) finViaje(v, j.ok, j); if (j.ok) await recibo(c, m, +j.seg || 0, +j.trozos || m.archivo.trozos, true); } } return; }
-      case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); const vc = VIAJES.get(j.id); if (vc && vc.estado !== 'entregado') { vc.estado = 'fallo'; vc.tFin = Date.now(); evento(vc, j.por === 'integridad' ? T('El otro equipo ha detenido el envío: un fragmento no superó la autenticación.') : T('El otro equipo ha cancelado el envío.'), 'mal'); } if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); } return; }
+      case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); const vc = VIAJES.get(j.id); if (vc && vc.estado !== 'entregado') { vc.estado = 'fallo'; vc.tFin = Date.now(); evento(vc, j.por === 'integridad' ? T('El otro equipo ha detenido el envío: un fragmento no superó la autenticación.') : j.por === 'persona' ? T('La otra persona ha cortado el envío.') : T('El otro equipo ha cancelado el envío.'), 'mal'); } if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'persona') m.archivo.motivo = T('cortado por la otra persona'); if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); } return; }
       case 'llamada': if (LL && c.id === ACTUAL) await LL.recibe(j); return; // llamadas de voz (dueño, 27 Oct 2026, 23:05)
       case 'destruir': return destruyeLocal(c, true);
       default: return;
@@ -625,7 +629,7 @@
     else if (!conDisco()) { enviaControl(c, { tipo: 'archivo-cancel', id: m.id }); c.archivos.delete(m.id); m.estado = 'fallo'; m.archivo.motivo = T('Pasa de 300 MB y este navegador no puede escribirlo al disco según llega (Chrome o Edge sí).'); v.estado = 'fallo'; evento(v, m.archivo.motivo, 'mal'); }
     await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true);
     if (a.listo) { enviaControl(c, listoCarga(m.id, v)); evento(v, T('Listo para recibir: aviso enviado al remitente.')); }
-    else if (m.estado !== 'fallo') { evento(v, T('Elige dónde guardarlo para empezar la recepción.')); avisaSonido(); if (ACTUAL !== c.id) aviso(T('Te están mandando un archivo grande: elige dónde guardarlo.')); }
+    else if (m.estado !== 'fallo') { v.eligeDestino = true; evento(v, T('Elige dónde guardarlo para empezar la recepción.')); avisaSonido(); if (ACTUAL !== c.id) aviso(T('Te están mandando un archivo grande: elige dónde guardarlo.')); }
   }
   const listoCarga = (id, v) => ({ tipo: 'archivo-listo', id, v: 1, region: MI_PAIS || undefined, lat: v ? VJ() && VJ().minima(v.latMia) : undefined });
   // «Guardar en…» (archivos grandes): la persona elige el destino y, desde ahí, cada trozo se escribe según llega.
@@ -634,7 +638,7 @@
     try {
       const h = await window.showSaveFilePicker({ suggestedName: m.archivo.nombre });
       a.escritor = await h.createWritable(); a.listo = true; a.nombreDisco = h.name;
-      const v = VIAJES.get(m.id);
+      const v = VIAJES.get(m.id); if (v) v.eligeDestino = false;
       enviaControl(c, listoCarga(m.id, v)); if (v) evento(v, T('Destino elegido en tu disco: aviso enviado al remitente.'));
       m.archivo.enDisco = true; pintaMensaje(c, m, true);
     } catch (_) { /* canceló el diálogo: el botón sigue ahí */ }
@@ -701,7 +705,7 @@
   // Recibo de entrega (dueño, 26 Oct 20:25): aparece solo en el chat cuando el archivo ha llegado entero al otro equipo.
   const segundos = (x) => (x < 60 ? x.toLocaleString(LOC(), { maximumFractionDigits: 1 }) + ' s' : Math.floor(x / 60) + ' min ' + Math.round(x % 60) + ' s');
   async function recibo(c, m, seg, trozos, entregado) {
-    const texto = (entregado ? T('Recibo de entrega') : T('Recibo de recepción')) + ' · ' + m.archivo.nombre + ' · ' + tamano(m.archivo.tam) + ' · ' + T('en') + ' ' + segundos(seg) + ' · ' + trozos + ' ' + T('trozos comprobados') + ' · ' + T('cifrado de extremo a extremo; cada trozo superó la autenticación') + ' · ' + T('contenido no analizado: viaja cifrado');
+    const texto = (entregado ? T('Recibo de entrega') : T('Recibo de recepción')) + ' · ' + m.archivo.nombre + ' · ' + tamano(m.archivo.tam) + ' · ' + T('en') + ' ' + segundos(seg) + ' · ' + trozos + ' ' + T('trozos comprobados') + ' · ' + T('encriptado de extremo a extremo; cada trozo superó la autenticación') + ' · ' + T('contenido no analizado: viaja encriptado');
     const r = { id: uuid(), conv: c.id, t: Date.now(), dir: 'sistema', estado: 'ok', tipo: 'recibo', texto };
     await guardaMensaje(c, r); c.mensajes.push(r); pintaMensaje(c, r);
   }
@@ -921,13 +925,14 @@
   const mmss = (ms) => { const x = Math.round(ms / 1000); return String(Math.floor(x / 60)).padStart(2, '0') + ':' + String(x % 60).padStart(2, '0'); };
   async function anotaLlamada(info) {
     const c = CONVS.get(ACTUAL); if (!c || !info) return;
-    const texto = info.por === 'fin' ? T('Llamada de voz') + ' · ' + mmss(info.duracion) + (info.voz ? ' · ' + T('con cambio de voz') : '') : info.por === 'ocupado' ? T('Comunicando') : info.por === 'fallo' ? T('Llamada interrumpida') : info.por === 'sin-medios' ? T('Llamada sin micrófono') : T('Llamada no contestada');
+    const texto = info.por === 'fin' ? (info.video ? T('Videollamada') : T('Llamada de voz')) + ' · ' + mmss(info.duracion) + (info.voz ? ' · ' + T('con cambio de voz') : '') : info.por === 'ocupado' ? T('Comunicando') : info.por === 'fallo' ? T('Llamada interrumpida') : info.por === 'sin-medios' ? T('Llamada sin micrófono') : T('Llamada no contestada');
     const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'sistema', estado: 'ok', tipo: 'llamada', texto, llamada: { por: info.por, duracion: info.duracion || 0 } };
     await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m);
   }
   const puedeLlamar = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
   function arrancaLlamadas() {
-    if (!window.GuardianaLlamada || !window.RTCPeerConnection) { const b = $('#llamar'); if (b) b.hidden = true; return; }
+    if (!window.GuardianaLlamada || !window.RTCPeerConnection) { for (const id of ['#llamar', '#videollamar']) { const b = $(id); if (b) b.hidden = true; } return; }
+    if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
     LL = GuardianaLlamada.crea({
       ice: () => R.ice, puede: puedeLlamar, t: T, aviso, suena: avisaSonido, fin: anotaLlamada,
       manda: (m) => { const c = CONVS.get(ACTUAL); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
@@ -935,6 +940,8 @@
       inicial: () => { const c = CONVS.get(ACTUAL); return inicial(c && c.nombre); },
     });
     $('#llamar').addEventListener('click', () => LL.llamar());
+    // videollamada (dueño, 28 Oct 2026): la misma llamada, con imagen
+    $('#videollamar').addEventListener('click', () => LL.llamar(true));
   }
 
   // ---------- destruir ----------
@@ -1027,26 +1034,27 @@
   function pintaCabecera(c) {
     if (window.pintaBarra) pintaBarra();
     if (ACTUAL !== c.id) return;
-    $('#cnombre').textContent = esB(c) ? T('Sesión blindada') : T('Conversación cifrada');
+    $('#cnombre').textContent = esB(c) ? T('Sesión blindada') : T('Conversación encriptada');
     const conf = $('#cconfianza'); conf.classList.remove('gc-sin-verificar');
     let txt;
     if (c.ocupada && !c.huella) txt = T('Esta invitación ya la usó otra persona.');
-    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo el cifrado…') : T('Esperando a que la otra persona escriba el código…');
+    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo la encriptación…') : T('Esperando a que la otra persona escriba el código…');
     else if (!R.abierto) txt = T('Sin conexión con el relé');
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
-    else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo el cifrado…');
-    else if (esB(c)) txt = T('Algoritmos CNSA 2.0') + ' · ' + T('postcuántica') + ' · ' + (c.verificada && c.suVerificada ? T('verificada por los dos') : T('pendiente de la verificación mutua'));
-    else txt = T('Cifrada de extremo a extremo') + ' · ' + (c.sesion.pq ? T('postcuántica') + ' · ' : T('sin protección postcuántica') + ' · ') + (c.verificada ? T('verificada') : T('sin verificar'));
+    else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo la encriptación…');
+    else if (esB(c)) txt = T('Algoritmos de la suite CNSA 2.0') + ' · ' + T('postcuántica') + ' · ' + (c.verificada && c.suVerificada ? T('verificada por los dos') : T('pendiente de la verificación mutua'));
+    else txt = T('Encriptada de extremo a extremo') + ' · ' + (c.sesion.pq ? T('postcuántica') + ' · ' : T('sin protección postcuántica') + ' · ') + (c.verificada ? T('verificada') : T('sin verificar'));
     const pqa = $('#cpq');
     if (pqa) {
       pqa.hidden = !c.clasicaPendiente;
       const sp = pqa.querySelector('span');
-      if (sp && c.clasicaPendiente) sp.textContent = c.pqVisto ? T('La otra persona no ha usado la protección postcuántica. Esta conversación ya la tenía, así que la he parado.') : T('La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.');
+      if (sp && c.clasicaPendiente) sp.textContent = c.pqVisto ? T('La otra persona no ha usado la protección postcuántica. Como esta conversación ya la tenía, se ha detenido.') : T('La otra persona usa una versión sin protección postcuántica. La conversación no continuará sin tu permiso.');
     }
     if (c.huella && !(c.verificada && (!esB(c) || c.suVerificada))) conf.classList.add('gc-sin-verificar');
     conf.textContent = txt;
     pintaPuerta(c);
-    const ll = $('#llamar'); if (ll) { const si = puedeLlamar() && (R.llamadas || LOCAL); ll.classList.toggle('apagado', !si); ll.title = si ? T('Llamada de voz') : esB(c) && !(c.verificada && c.suVerificada) ? T('Las llamadas se abren cuando los dos hayáis comprobado el número de seguridad.') : !R.llamadas && !LOCAL ? T('El servicio de llamadas no está disponible ahora mismo.') : T('La otra persona tiene que estar conectada.'); }
+    const ll = $('#llamar'); if (ll) { const si = puedeLlamar() && (R.llamadas || LOCAL); ll.classList.toggle('apagado', !si); ll.title = si ? T('Llamada de voz') : esB(c) && !(c.verificada && c.suVerificada) ? T('Las llamadas se activan cuando los dos hayan comprobado el número de seguridad.') : !R.llamadas && !LOCAL ? T('El servicio de llamadas no está disponible ahora mismo.') : T('La otra persona tiene que estar conectada.'); }
+    const vl = $('#videollamar'); if (vl && ll) { vl.classList.toggle('apagado', ll.classList.contains('apagado')); vl.title = ll.classList.contains('apagado') ? ll.title : T('Videollamada'); }
   }
   // Vigilancia a la derecha (dueño, 26 Oct 20:22): anota cada comprobación real según ocurre y mantiene la última a la vista.
   const hms = (t) => new Date(t || Date.now()).toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -1062,13 +1070,13 @@
     const fila = (cls, b, sp) => { const li = document.createElement('li'); li.className = cls; const i = document.createElement('i'); const bb = document.createElement('b'); bb.textContent = b; const ss = document.createElement('span'); ss.textContent = sp; li.append(i, bb, ss); ul.append(li); };
     const ses = c.sesion && c.sesion.confirmada;
     const hm = (t) => new Date(t).toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit' });
-    fila(ses ? 'gc-ok' : 'gc-aviso', T('Cifrado'), ses ? T('De extremo a extremo; confirmación de clave recibida.') + ' ' + T('Claves de este encuentro') + ': ' + hm(c.sesion.desde) + ' · ' + T('encuentro') + ' ' + (c.encuentros || 1) : T('Acordando claves…'));
+    fila(ses ? 'gc-ok' : 'gc-aviso', T('Encriptado'), ses ? T('De extremo a extremo; confirmación de clave recibida.') + ' ' + T('Claves de este encuentro') + ': ' + hm(c.sesion.desde) + ' · ' + T('encuentro') + ' ' + (c.encuentros || 1) : T('Acordando claves…'));
     const verOk = esB(c) ? !!(c.verificada && c.suVerificada) : !!c.verificada;
-    fila(verOk ? 'gc-ok' : 'gc-aviso', T('Identidad'), verOk ? T('Verificada por las dos personas.') : esB(c) ? T('Pendiente de la verificación mutua: no sale nada hasta que los dos comprobéis el número.') : T('Sin verificar: comparad el número de seguridad (escudo).'));
+    fila(verOk ? 'gc-ok' : 'gc-aviso', T('Identidad'), verOk ? T('Verificada por las dos personas.') : esB(c) ? T('Pendiente de la verificación mutua: no sale nada hasta que los dos comprueben el número.') : T('Sin verificar: compara el número de seguridad con la otra persona (escudo).'));
     const presente = !!(c.suId && c.miembros.has(c.suId));
     fila(presente ? 'gc-ok' : 'gc-aviso', T('Otro extremo'), presente ? T('La otra pestaña está conectada a la sala.') : T('La otra pestaña está desconectada; lo pendiente espera en tu equipo.'));
     const lat = R.latencia, hace = R.ultimoPong ? Math.round((Date.now() - R.ultimoPong) / 1000) : null;
-    fila(R.abierto && hace != null && hace < 40 ? 'gc-ok' : 'gc-aviso', T('Servidor'), (R.abierto ? T('responde') + (lat != null ? ' · ' + lat + ' ms' : '') + (hace != null ? ' · ' + T('hace') + ' ' + hace + ' s' : '') : T('sin respuesta · reconectando')) + ' · ' + T('transporta contenido cifrado; sin almacenamiento de mensajes'));
+    fila(R.abierto && hace != null && hace < 40 ? 'gc-ok' : 'gc-aviso', T('Servidor'), (R.abierto ? T('responde') + (lat != null ? ' · ' + lat + ' ms' : '') + (hace != null ? ' · ' + T('hace') + ' ' + hace + ' s' : '') : T('sin respuesta · reconectando')) + ' · ' + T('transporta contenido encriptado; sin almacenamiento de mensajes'));
     const msgs = c.mensajes.filter((m) => m.tipo === 'texto' && m.dir === 'suya').length, arch = c.mensajes.filter((m) => m.tipo === 'archivo' && (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido')).length, incompletos = c.mensajes.filter((m) => m.tipo === 'archivo' && m.estado === 'fallo').length;
     fila(inc ? 'gc-alerta' : 'gc-ok', T('Verificación'), (inc ? inc + ' ' + (inc === 1 ? T('dato que no superó la autenticación: descartado') : T('datos que no superaron la autenticación: descartados')) + ' · ' : '') + msgs + ' ' + (msgs === 1 ? T('mensaje recibido autenticado') : T('mensajes recibidos autenticados')) + ' · ' + arch + ' ' + (arch === 1 ? T('archivo completo') : T('archivos completos')) + (incompletos ? ' · ' + incompletos + ' ' + T('incompletos') : ''));
     fila(rech ? 'gc-aviso' : 'gc-ok', T('Entradas rechazadas'), rech ? rech + ' · ' + T('intento de entrada con otra identidad: rechazado; la conversación sigue intacta') : T('Ninguna.'));
@@ -1091,7 +1099,7 @@
     r.hidden = false; r.className = 'radio' + (inc ? ' mal' : '');
     $('#radiotxt').textContent = inc
       ? inc + ' ' + (inc === 1 ? T('incidencia') : T('incidencias')) + ' · ' + T('envío detenido y anotado')
-      : T('Cifrado de extremo a extremo') + ' · ' + msgs + ' ' + (msgs === 1 ? T('mensaje') : T('mensajes')) + ' · ' + arch + ' ' + (arch === 1 ? T('archivo') : T('archivos')) + ' · ' + T('verificación criptográfica superada') + (c.verificada ? ' · ' + T('identidad verificada') : '');
+      : T('Encriptación de extremo a extremo') + ' · ' + msgs + ' ' + (msgs === 1 ? T('mensaje') : T('mensajes')) + ' · ' + arch + ' ' + (arch === 1 ? T('archivo') : T('archivos')) + ' · ' + T('verificación criptográfica superada') + (c.verificada ? ' · ' + T('identidad verificada') : '');
   }
   function pintaTodos(c) {
     const ul = $('#mensajes'); ul.textContent = ''; ul.dataset.dia = '';
@@ -1145,7 +1153,7 @@
     d.append(ic, b, s);
     const enCurso = m.estado !== 'fallo' && pr < 1 && m.estado !== 'pendiente';
     if (enCurso) { const p = document.createElement('span'); p.className = 'gc-progreso'; const i = document.createElement('i'); i.style.width = Math.round(pr * 100) + '%'; p.append(i); d.append(p); }
-    if (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido') { const se = document.createElement('span'); se.className = 'sello'; se.textContent = '✓ ' + T('Completo y autenticado: cifrado de extremo a extremo'); d.append(se); }
+    if (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido') { const se = document.createElement('span'); se.className = 'sello'; se.textContent = '✓ ' + T('Completo y autenticado: encriptado de extremo a extremo'); d.append(se); }
     else if (m.estado === 'fallo' && /alterados/.test(m.archivo.motivo || '')) { const se = document.createElement('span'); se.className = 'sello mal'; se.textContent = '✕ ' + T('Detenido: no superó la autenticación'); d.append(se); }
     const fila = document.createElement('div'); fila.className = 'fila';
     if (m.dir === 'suya' && m.estado === 'recibiendo' && m.archivo.aDisco && !m.archivo.enDisco) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton principal'; g.textContent = T('Guardar en…'); g.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) eligeDestino(c, m); }); fila.append(g); }
@@ -1155,8 +1163,25 @@
       if (m.dir === 'suya') { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton'; g.textContent = T('Guardar'); g.addEventListener('click', () => abreArchivo(m, true)); fila.append(g); }
     }
     if (VIAJES.has(m.id) && VJ()) { const b = document.createElement('button'); b.type = 'button'; b.className = 'boton vj-ver'; b.innerHTML = RUTA; b.append(document.createTextNode(T('Ver el viaje'))); b.addEventListener('click', () => { const v = VIAJES.get(m.id); if (v) VJ().abre(v); }); fila.append(b); }
+    if (sePuedeCortar(m)) { const x = document.createElement('button'); x.type = 'button'; x.className = 'boton peligro'; x.textContent = T('Cortar el envío'); x.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) cortaArchivo(c, m); }); fila.append(x); }
     if (fila.childNodes.length) d.append(fila);
     return d;
+  }
+  // Cortar un archivo a medias (dueño, 28 Oct 2026: «por si alguien quiere cortar, que lo pueda cortar»): desde los dos
+  // lados, mientras se envía, se recibe o espera. El otro equipo recibe la orden al momento y deja de llegar nada.
+  function sePuedeCortar(m) {
+    if (m.tipo !== 'archivo' || m.archivo.voz) return false;
+    const c = CONVS.get(m.conv); if (!c || !c.archivos.has(m.id)) return false;
+    return m.dir === 'mia' ? (m.estado === 'pendiente' || (m.estado === 'enviado' && (m.archivo.progreso || 0) < 1)) : m.estado === 'recibiendo';
+  }
+  async function cortaArchivo(c, m) {
+    if (!sePuedeCortar(m)) return;
+    const a = c.archivos.get(m.id);
+    if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } if (typeof a.sigue === 'function') { try { a.sigue(); } catch (_) {} } c.archivos.delete(m.id); }
+    if (Array.isArray(c.cola)) c.cola = c.cola.filter((x) => x.id !== m.id);
+    enviaControl(c, { tipo: 'archivo-cancel', id: m.id, por: 'persona' });
+    m.estado = 'fallo'; m.archivo.motivo = T('cortado por ti'); await guardaMensaje(c, m); pintaMensaje(c, m, true);
+    const v = VIAJES.get(m.id); if (v && v.estado !== 'entregado' && v.estado !== 'fallo') { v.estado = 'fallo'; v.tFin = Date.now(); evento(v, T('Has cortado el envío.'), 'mal'); }
   }
   function enlaza(texto) {
     const out = []; const re = /https?:\/\/[^\s<>"']+/g; let i = 0, m;
@@ -1174,7 +1199,7 @@
     const est = c.ocupada ? T('Esta invitación ya la usó otra persona.') : c.codigoUsado ? T('La otra persona ha escrito el código: conectando…') : caducado ? T('Este código ha caducado (10 minutos). Pide uno nuevo.') : '';
     $('#invita-estado').textContent = est; $('#invita-estado').hidden = !est;
     const v = $('#validez'); v.hidden = !c.codigo || caducado || c.codigoUsado;
-    if (c.codigo && !caducado) { const q = Math.max(0, Math.round((c.codigoCaduca - Date.now()) / 1000)); v.textContent = ''; v.append(document.createTextNode(T('Tiene una validez de 10 minutos y un solo uso: pasado ese tiempo queda inhabilitado y deja de funcionar.') + ' ' + T('Le quedan') + ' ')); const b = document.createElement('b'); b.textContent = Math.floor(q / 60) + ':' + String(q % 60).padStart(2, '0'); v.append(b); v.append(document.createTextNode('.')); }
+    if (c.codigo && !caducado) { const q = Math.max(0, Math.round((c.codigoCaduca - Date.now()) / 1000)); v.textContent = ''; v.append(document.createTextNode(T('Es válido durante 10 minutos y para un solo uso; después deja de funcionar.') + ' ' + T('Le quedan') + ' ')); const b = document.createElement('b'); b.textContent = Math.floor(q / 60) + ':' + String(q % 60).padStart(2, '0'); v.append(b); v.append(document.createTextNode('.')); }
     $('#invita-nuevo').hidden = !(caducado && !c.huella);
   }
   function muestraInvitacion(c) {
@@ -1187,12 +1212,12 @@
     if (esB(c)) {
       fila(c.sesion ? 'gc-ok' : 'gc-info', T('Sesión blindada'), T('Algoritmos de la suite CNSA 2.0: ML-KEM-1024 y ECDH P-384 para las claves, ML-DSA-87 y ECDSA P-384 para las firmas, AES-256-GCM y SHA-384.'));
       fila('gc-ok', T('Renovación de claves'), T('Claves nuevas cada 5 minutos y en cada reconexión: lo anterior deja de poder leerse con lo nuevo.'));
-      fila(c.verificada && c.suVerificada ? 'gc-ok' : 'gc-aviso', T('Verificación mutua'), c.verificada && c.suVerificada ? T('Los dos habéis comprobado el número de seguridad.') : T('Hasta que los dos comprobéis el número de seguridad, no se envía nada.'));
-    } else fila(c.sesion ? 'gc-ok' : 'gc-info', T('Cifrado de extremo a extremo'), T('AES-256-GCM con una clave distinta por mensaje; la sesión se renueva cada vez que os encontráis (ECDH P-256 con firma ECDSA).'));
-    fila('gc-info', T('Servidor de GUARDIANA'), T('encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial'));
+      fila(c.verificada && c.suVerificada ? 'gc-ok' : 'gc-aviso', T('Verificación mutua'), c.verificada && c.suVerificada ? T('Los dos han comprobado el número de seguridad.') : T('Hasta que los dos comprueben el número de seguridad, no se envía nada.'));
+    } else fila(c.sesion ? 'gc-ok' : 'gc-info', T('Encriptación de extremo a extremo'), T('AES-256-GCM con una clave distinta por mensaje; la sesión se renueva en cada conexión (ECDH P-256 con firma ECDSA).'));
+    fila('gc-info', T('Servidor de GUARDIANA'), T('encamina tramas encriptadas que no puede leer; ve conexión y volumen, no contenido; no guarda historial'));
     fila(c.incidencias ? 'gc-alerta' : 'gc-ok', T('Verificación'), c.incidencias ? (c.incidencias + ' ' + (c.incidencias === 1 ? T('incidencia') : T('incidencias')) + ': ' + T('datos que no superaron la autenticación, descartados y anotados en la conversación.')) : T('Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.'));
-    fila(c.verificada ? 'gc-ok' : 'gc-aviso', c.verificada ? T('Identidad verificada') : T('Identidad sin verificar'), c.verificada ? T('Comprobasteis el número de seguridad.') : T('Hasta que comprobéis el número, confías en que el enlace llegó a la persona correcta.'));
-    fila('gc-aviso', T('Límites'), T('No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.') + ' ' + T('Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.') + ' ' + T('Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.') + ' ' + T('Ningún cifrado protege un equipo o navegador comprometido.') + ' ' + T('El viaje de cada archivo y su comprobante muestran a la otra persona el país de tu equipo, estimado por la zona horaria del navegador; nunca la zona horaria ni la dirección IP.'));
+    fila(c.verificada ? 'gc-ok' : 'gc-aviso', c.verificada ? T('Identidad verificada') : T('Identidad sin verificar'), c.verificada ? T('Los dos comprobaron el número de seguridad.') : T('Hasta que los dos comprueben el número, confías en que el enlace llegó a la persona correcta.'));
+    fila('gc-aviso', T('Límites'), T('No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.') + ' ' + T('Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.') + ' ' + T('Los archivos recibidos quedan en este navegador sin nuestra encriptación; «Destruir» no alcanza lo ya guardado en un disco.') + ' ' + T('Ninguna encriptación protege un equipo o navegador comprometido.') + ' ' + T('El viaje de cada archivo y su comprobante muestran a la otra persona el país de tu equipo, estimado por la zona horaria del navegador; nunca la zona horaria ni la dirección IP.'));
     $('#numero').textContent = c.huella ? await numeroDe(c) : T('Aparecerá cuando la otra persona entre.');
     $('#verificada').checked = !!c.verificada; $('#verificada').disabled = !c.huella;
     $('#destruir-nota').hidden = true;
@@ -1266,7 +1291,9 @@
     const ta = $('#texto');
     const ajusta = () => { ta.style.height = 'auto'; ta.style.height = Math.min(120, ta.scrollHeight) + 'px'; document.querySelector('.gc-compositor').classList.toggle('con-texto', !!ta.value.trim()); };
     ta.addEventListener('input', ajusta);
-    const envia = async () => { const c = CONVS.get(ACTUAL); const t = ta.value.replace(/\s+$/, ''); if (!c || !t) return; ta.value = ''; ajusta(); ta.dispatchEvent(new Event('input')); await enviaTexto(c, t); ta.focus(); };
+    // mientras se graba una nota de voz, «Enviar» la termina y la envía, igual que el botón del micrófono (dueño, 28 Oct 2026:
+    // «después de grabar, el botón de enviar no me dejaba»)
+    const envia = async () => { if (grab) { paraGrabacion(true); return; } const c = CONVS.get(ACTUAL); const t = ta.value.replace(/\s+$/, ''); if (!c || !t) return; ta.value = ''; ajusta(); ta.dispatchEvent(new Event('input')); await enviaTexto(c, t); ta.focus(); };
     ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); envia(); } });
     $('#enviar').addEventListener('click', envia);
     $('#adjuntar').addEventListener('click', () => $('#archivo').click());
@@ -1287,6 +1314,7 @@
     const ponDiscreto = (on, elegido) => {
       discreto = !!on; if (elegido) { try { localStorage.setItem('gcom-discreto2', discreto ? '1' : '0'); } catch (_) {} }
       conv.classList.toggle('discreta', discreto); $('#discreto').setAttribute('aria-pressed', String(discreto));
+      $('#discreto').title = discreto ? T('Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.') : T('Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para activarlo.');
       ta.placeholder = discreto ? T('Modo discreto: lo que escribas se verá como números') : T('Escribe un mensaje');
       lienzo.classList.toggle('velado', discreto); pintaMascara();
     };
@@ -1327,11 +1355,55 @@
       este.reloj = setInterval(() => { const s = Math.floor((Date.now() - t0) / 1000); $('#grabando-t').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); if (s >= 600) paraGrabacion(true); }, 250);
     });
     $('#grabar-cancelar').addEventListener('click', () => paraGrabacion(false));
-    ta.addEventListener('paste', (e) => { const fs = [...((e.clipboardData && e.clipboardData.files) || [])]; const c = CONVS.get(ACTUAL); if (c && fs.length) { e.preventDefault(); enviaArchivos(c, fs.map((f, i) => (f.name && f.name !== 'image.png') ? f : new File([f], 'imagen-' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + (i ? '-' + i : '') + '.' + ((f.type || '').split('/')[1] || 'png'), { type: f.type }))); } });
-    $('#archivo').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); const fs = [...e.target.files]; e.target.value = ''; if (c && fs.length) enviaArchivos(c, fs); });
+    // Revisar antes de enviar (dueño, 28 Oct 2026: «la quiero ver en pantalla y darle yo al OK»): lo que se elige, se pega o
+    // se suelta ya no sale solo. Primero se ve aquí (la imagen, o el nombre y el tamaño) y se envía al pulsar «Enviar».
+    // Las notas de voz no pasan por aquí: ya se envían con su propio botón.
+    let porEnviar = null; // { conv, fs, urls }
+    const sueltaEnvio = () => { if (porEnviar) porEnviar.urls.forEach((u) => URL.revokeObjectURL(u)); porEnviar = null; $('#envio-lista').textContent = ''; };
+    const revisaEnvio = (c, fs) => {
+      fs = fs.filter((f) => f && f.size);
+      if (!c || !fs.length) return;
+      sueltaEnvio();
+      const urls = [], lista = $('#envio-lista');
+      for (const f of fs) {
+        const li = document.createElement('li');
+        if (/^image\//.test(f.type) && f.size <= 50 * 1024 * 1024) {
+          const u = URL.createObjectURL(f); urls.push(u);
+          const img = document.createElement('img'); img.alt = ''; img.decoding = 'async'; img.src = u;
+          img.addEventListener('error', () => { img.remove(); li.classList.remove('foto'); });
+          // en modo discreto, la imagen sale borrosa y se ve mientras se mantiene pulsada
+          img.addEventListener('pointerdown', () => img.classList.add('ver'));
+          for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) img.addEventListener(ev, () => img.classList.remove('ver'));
+          img.addEventListener('contextmenu', (e) => e.preventDefault());
+          li.classList.add('foto'); li.append(img);
+        } else {
+          const ico = document.createElement('span'); ico.className = 'ico'; ico.setAttribute('aria-hidden', 'true');
+          const ext = /\.([A-Za-z0-9]{1,5})$/.exec(f.name || ''); ico.textContent = ext ? ext[1].toUpperCase() : '•';
+          li.append(ico);
+        }
+        const txt = document.createElement('div'), b = document.createElement('b'), s = document.createElement('small');
+        b.textContent = f.name || T('archivo'); s.textContent = tamano(f.size); txt.append(b, s); li.append(txt);
+        lista.append(li);
+      }
+      porEnviar = { conv: c.id, fs, urls };
+      if (VJ() && VJ().abierto()) VJ().cierra(); // la hoja del viaje quedaría encima y taparía «Enviar»
+      $('#h-envio').classList.toggle('discreta', discreto);
+      abreHoja('h-envio');
+      setTimeout(() => { try { $('#envio-si').focus(); } catch (_) {} }, 60);
+    };
+    $('#envio-si').addEventListener('click', () => {
+      const p = porEnviar; cierraHoja('h-envio'); if (!p) return;
+      const fs = p.fs; sueltaEnvio();
+      const c = CONVS.get(p.conv); if (c && c.id === ACTUAL) enviaArchivos(c, fs);
+    });
+    $('#envio-no').addEventListener('click', () => { cierraHoja('h-envio'); sueltaEnvio(); });
+    $('#h-envio').addEventListener('click', (e) => { if (e.target === e.currentTarget) sueltaEnvio(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && porEnviar) { cierraHoja('h-envio'); sueltaEnvio(); } });
+    ta.addEventListener('paste', (e) => { const fs = [...((e.clipboardData && e.clipboardData.files) || [])]; const c = CONVS.get(ACTUAL); if (c && fs.length) { e.preventDefault(); revisaEnvio(c, fs.map((f, i) => (f.name && f.name !== 'image.png') ? f : new File([f], 'imagen-' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + (i ? '-' + i : '') + '.' + ((f.type || '').split('/')[1] || 'png'), { type: f.type }))); } });
+    $('#archivo').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); const fs = [...e.target.files]; e.target.value = ''; if (c && fs.length) revisaEnvio(c, fs); });
     const zona = $('#conv');
     zona.addEventListener('dragover', (e) => { e.preventDefault(); });
-    zona.addEventListener('drop', (e) => { e.preventDefault(); const c = CONVS.get(ACTUAL); const fs = [...(e.dataTransfer && e.dataTransfer.files) || []]; if (c && fs.length) enviaArchivos(c, fs); });
+    zona.addEventListener('drop', (e) => { e.preventDefault(); const c = CONVS.get(ACTUAL); const fs = [...(e.dataTransfer && e.dataTransfer.files) || []]; if (c && fs.length) revisaEnvio(c, fs); });
     document.querySelectorAll('.gc-hoja').forEach((h) => h.addEventListener('click', (e) => { if (e.target === h) h.classList.remove('gc-abierta'); }));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.gc-hoja.gc-abierta').forEach((h) => h.classList.remove('gc-abierta')); });
     addEventListener('hashchange', () => { if (/#[ib]=/.test(location.hash)) { aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); } });
@@ -1374,6 +1446,14 @@
     } catch (_) {}
   }
   if (window.GuardianaViaje) GuardianaViaje.alCerrar = () => { viajeCerradoEn = Date.now(); };
+  // «Guardar en…» desde la pantalla del viaje (28 Oct 2026): lo mismo que el botón del mensaje
+  if (window.GuardianaViaje) GuardianaViaje.alGuardar = (v) => { const c = CONVS.get(v.conv); const m = c && c.mensajes.find((x) => x.id === v.id); if (c && m) eligeDestino(c, m); };
+  // «Cortar el envío» desde la pantalla del viaje: lo mismo que el botón del mensaje
+  if (window.GuardianaViaje) {
+    const msgDe = (v) => { const c = CONVS.get(v.conv); return [c, c && c.mensajes.find((x) => x.id === v.id)]; };
+    GuardianaViaje.alCortar = (v) => { const [c, m] = msgDe(v); if (c && m) cortaArchivo(c, m); };
+    GuardianaViaje.puedeCortar = (v) => { const [, m] = msgDe(v); return !!(m && sePuedeCortar(m)); };
+  }
   arranca().catch((e) => { console.error(e); aviso(T('Algo falló al arrancar: recarga la página.')); });
   window.GuardianaCom = { get convs() { return CONVS; }, get yo() { return YO; }, get rele() { return R; }, get viajes() { return VIAJES; }, get llamada() { return LL; }, abreConv, creaInvitacion, aceptaInvitacion };
 })();

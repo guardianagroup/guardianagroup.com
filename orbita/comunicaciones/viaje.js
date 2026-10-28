@@ -249,7 +249,7 @@
     const parte = (p) => {
       const d = el('div', 'cu-parte');
       d.append(el('b', null, p.nombre || T('Sin nombre declarado')), el('small', null, BL ? T('Huella de identidad (SHA-384)') : T('Huella de identidad (SHA-256)')), mono(p.huella, 4));
-      d.append(el('span', null, [p.region ? pais(p.region) + ' (' + T('país estimado') + ')' : '', p.verifico_al_otro ? T('número de seguridad comprobado') : T('número de seguridad sin comprobar'), p.version || ''].filter(Boolean).join(' · ')));
+      d.append(el('span', null, [p.region ? pais(p.region) + ' (' + T('país según la zona horaria del equipo') + ')' : '', p.verifico_al_otro ? T('número de seguridad comprobado') : T('número de seguridad sin comprobar'), p.version || ''].filter(Boolean).join(' · ')));
       return d;
     };
     fila(T('Remitente'), parte(e)); fila(T('Destinatario'), parte(r));
@@ -531,11 +531,11 @@
       + '<div class="vj-dato"><span class="vj-et">Fragmentos autenticados</span><small class="vj-tag med">Medido</small><b class="vj-frag">—</b></div>'
       + '</div></div>'
       + '<ul class="vj-leyenda"><li class="m"><i></i><span>Conocido o medido</span></li><li class="e"><i></i><span>Estimado</span></li><li class="il"><i></i><span>Trazado ilustrativo</span></li></ul>'
-      + '<div class="vj-avance"><div class="vj-barra"><i></i></div><p><b class="vj-pct">0 %</b><span class="vj-conf"></span></p></div>'
+      + '<div class="vj-avance"><div class="vj-barra"><i></i></div><p><b class="vj-pct">0 %</b><span class="vj-conf"></span></p><p class="vj-espera" hidden></p></div>'
       + '<div class="vj-dos"><section class="vj-eventos"><h3><i></i><span>En directo</span></h3><ol></ol></section>'
       + '<section class="vj-prot"><h3><span>Protección</span></h3><ul class="gc-escudo"></ul></section></div>'
       + '<footer class="vj-pie"><p class="vj-nota">El trazado es ilustrativo: internet no permite ver el cable exacto ni los países por los que pasa. Medido: tiempos, velocidad, latencias, relé y la autenticación de cada fragmento.</p>'
-      + '<div class="vj-botones"><button type="button" class="boton" id="vj-fondo">Seguir en segundo plano</button><button type="button" class="boton principal" id="vj-comp" hidden>Ver comprobante</button></div></footer>'
+      + '<div class="vj-botones"><button type="button" class="boton peligro" id="vj-cortar" hidden>Cortar el envío</button><button type="button" class="boton" id="vj-fondo">Seguir en segundo plano</button><button type="button" class="boton principal" id="vj-guardar" hidden>Guardar en…</button><button type="button" class="boton principal" id="vj-comp" hidden>Ver comprobante</button></div></footer>'
       + '</div>';
     document.body.append(hoja);
     mapa = Mapa(hoja.querySelector('canvas'), hoja.querySelector('.vj-etq'));
@@ -545,6 +545,10 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && actual) cierra(); });
     addEventListener('resize', () => { if (actual) pinta(actual); });
     hoja.querySelector('#vj-comp').addEventListener('click', () => { if (actual && actual.comprobante) muestraComprobante(actual.comprobante); });
+    // archivos grandes en Chrome y Edge: quien recibe elige el destino también desde aquí (28 Oct 2026)
+    hoja.querySelector('#vj-guardar').addEventListener('click', () => { if (actual && raiz.GuardianaViaje.alGuardar) raiz.GuardianaViaje.alGuardar(actual); });
+    // cortar el envío a medias, desde cualquiera de los dos lados (28 Oct 2026)
+    hoja.querySelector('#vj-cortar').addEventListener('click', () => { if (actual && raiz.GuardianaViaje.alCortar) raiz.GuardianaViaje.alCortar(actual); });
     return hoja;
   }
   function abre(v) {
@@ -581,7 +585,9 @@
     hoja.classList.toggle('vj-quieta', v.estado !== 'viaje');
     // el mapa: los dos equipos (estimados) y el relé (conocido)
     const datos = D(), r = v.rele || {}, yo = datos.punto(v.paisMio), suyo = datos.punto(v.paisSuyo);
-    const nodo = (p, rot, cc) => p && { lat: p.lat, lon: p.lon, tipo: 'equipo', rotulo: rot, sub: [pais(cc), T('estimado')].filter(Boolean).join(' · ') };
+    // el país sale de la zona horaria del equipo, no de su ubicación (28 Oct 2026: un equipo en Praga con la hora de París
+    // salía en Francia), y así se dice al lado
+    const nodo = (p, rot, cc) => p && { lat: p.lat, lon: p.lon, tipo: 'equipo', rotulo: rot, sub: [pais(cc), T('según la zona horaria')].filter(Boolean).join(' · ') };
     const mio = nodo(yo, T('Tu equipo'), v.paisMio), del = nodo(suyo, otro, v.paisSuyo);
     const rele = Number.isFinite(r.lat) ? { lat: r.lat, lon: r.lon, tipo: 'rele', lado: 'rele', rotulo: T('Relé de GUARDIANA'), sub: [[r.ciudad, pais(r.cc)].filter(Boolean).join(', '), r.prueba ? T('prueba local') : ''].filter(Boolean).join(' · ') } : null;
     const origen = v.rol === 'envia' ? mio : del, destino = v.rol === 'envia' ? del : mio;
@@ -595,11 +601,17 @@
     const camino = !fin && v.enCamino > 0 ? ' · ' + bytes(v.enCamino) + ' ' + T('de camino') : '';
     q('.vj-conf').textContent = bytes(conf) + ' / ' + bytes(tam) + ' · ' + (v.rol === 'envia' ? T('confirmado por el equipo del destinatario') : T('recibido y autenticado en tu equipo')) + camino;
     // las cuatro medidas
-    q('.vj-vel').textContent = bps ? vel(bps) : v.estado === 'viaje' ? T('Calculando…') : '—';
+    // en espera (aún no ha salido ni llegado ningún fragmento): se dice qué falta, en vez de dejar rayas
+    const espera = v.estado === 'espera', pideDestino = espera && v.rol === 'recibe' && !!v.eligeDestino;
+    const ve = q('.vj-espera'); ve.hidden = !espera;
+    if (espera) ve.textContent = pideDestino ? T('Esperando a que elijas dónde guardarlo. Pulsa «Guardar en…» para empezar a recibirlo.') : v.rol === 'envia' ? T('Esperando al destinatario: el envío empieza cuando su equipo está listo para recibirlo.') : T('Esperando el primer fragmento.');
+    q('#vj-guardar').hidden = !pideDestino;
+    q('#vj-cortar').hidden = !(raiz.GuardianaViaje.puedeCortar && raiz.GuardianaViaje.puedeCortar(v));
+    q('.vj-vel').textContent = bps ? vel(bps) : v.estado === 'viaje' ? T('Calculando…') : espera ? T('En espera') : '—';
     q('.vj-et-t').textContent = fin ? T('Duración') : T('Tiempo restante');
     const tg = q('.vj-tag-t'); tg.textContent = fin ? T('Medido') : T('Estimado'); tg.className = 'vj-tag vj-tag-t ' + (fin ? 'med' : 'est');
     const rs = restante(v);
-    q('.vj-rest').textContent = fin ? (v.tFin && v.t0 ? dur((v.tFin - v.t0) / 1000) : '—') : rs != null ? dur(rs) : v.estado === 'viaje' ? T('Calculando…') : '—';
+    q('.vj-rest').textContent = fin ? (v.tFin && v.t0 ? dur((v.tFin - v.t0) / 1000) : '—') : rs != null ? dur(rs) : v.estado === 'viaje' ? T('Calculando…') : espera ? T('En espera') : '—';
     const lm = minima(v.latMia), ls = minima(v.latSuya), lat = q('.vj-lat'); lat.textContent = '';
     const linea = (k, x) => { const s = el('span'); s.append(el('small', null, k), document.createTextNode(x != null ? x + ' ms' : '—')); return s; };
     lat.append(linea(T('Tu equipo'), lm), linea(otro, ls));
@@ -608,7 +620,7 @@
     const ul = q('.vj-prot ul'); ul.textContent = '';
     const fila = (c, b, s) => { const li = el('li', c); li.append(el('i'), el('b', null, b), el('span', null, s)); ul.append(li); };
     fila('gc-ok', T('Encriptación'), cifrado(v.pq));
-    fila(v.verificada ? 'gc-ok' : 'gc-aviso', T('Identidad'), v.verificada ? T('Verificada con el número de seguridad.') : T('Sin verificar: comparad el número de seguridad (escudo).'));
+    fila(v.verificada ? 'gc-ok' : 'gc-aviso', T('Identidad'), v.verificada ? T('Verificada con el número de seguridad.') : T('Sin verificar: compara el número de seguridad con la otra persona (escudo).'));
     fila('gc-info', T('Relé de GUARDIANA'), (rele && rele.sub ? rele.sub + ' · ' : '') + T('transporta fragmentos encriptados que no puede leer'));
     if (v.estado === 'entregado' && v.coincide != null) fila(v.coincide ? 'gc-ok' : 'gc-alerta', T('Integridad'), v.coincide ? T('La huella SHA-256 coincide en los dos equipos') : T('La huella SHA-256 no coincide'));
     else fila(v.estado === 'fallo' ? 'gc-alerta' : 'gc-ok', T('Integridad'), T('Cada fragmento se autentica al llegar; uno alterado detiene el envío.'));

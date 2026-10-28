@@ -2457,8 +2457,10 @@ function phrase(l){
 }
 // dueño, 27 Oct 2026, 13:18: «El» se quedaba solo al final de la línea, lejos de «navegador». Las palabras de una a tres letras
 // (el, la, de, y, en, tu…, y sus parecidas en cada idioma) van unidas a la siguiente con un espacio que no parte la línea.
-const pega=t=>{ if(t.indexOf(' ')<0) return t; const p=t.split(' '); let s=p[0];
-  for(let i=1;i<p.length;i++) s+=(p[i]&&/^[(«"“¿¡]?\p{L}{1,3}$/u.test(p[i-1])?'\u00a0':' ')+p[i];
+// 28 Oct 2026: como mucho tres palabras unidas; en alemán «sie bis zu den Rechenzentren.» se unía entero y, en el móvil,
+// se partía a media palabra
+const pega=t=>{ if(t.indexOf(' ')<0) return t; const p=t.split(' '); let s=p[0], n=1;
+  for(let i=1;i<p.length;i++){ const u=n<3&&p[i]&&/^[(«"“¿¡]?\p{L}{1,3}$/u.test(p[i-1]); s+=(u?'\u00a0':' ')+p[i]; n=u?n+1:1; }
   return s; };
 function aplica(l, first){
   const d=DATO[l], e=EXT[l]; cur=l; window.__lang=l; window.__tag=d.tag; window.__loc=d.loc;

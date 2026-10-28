@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /marca/
+Disallow: /herramientas/
 Sitemap: https://guardianagroup.com/sitemap.xml

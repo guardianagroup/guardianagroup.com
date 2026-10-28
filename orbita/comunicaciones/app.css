@@ -235,6 +235,33 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .gc-llamada.con-video{background:linear-gradient(180deg,rgba(6,8,12,.55) 0,transparent 140px,transparent calc(100% - 170px),rgba(6,8,12,.6) 100%)}
 .gc-llamada.con-video .gc-llamada-nombre,.gc-llamada.con-video .gc-llamada-tiempo{text-shadow:0 1px 8px rgba(0,0,0,.8)}
 .gc-llamada .gc-llamada-estado{color:var(--muted)}
+/* Videollamada (28 Oct 2026): sin imagen de la otra persona, la tuya sola en la esquina, sin fondo negro */
+.gc-llamada.solo-mia .videos{background:transparent;pointer-events:none}
+.gc-llamada.con-video .ll-voces{display:none}
+.gc-llamada .videos #v-local{transform:scaleX(-1)}
+.gc-llamada-arriba{gap:10px}
+.ll-mini-b{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 12px;border-radius:999px;border:1px solid rgba(156,195,228,.35);background:rgba(10,14,20,.6);color:#dbe9f4;font:500 13px/1 var(--texto);cursor:pointer;white-space:nowrap}
+.ll-mini-b:hover{border-color:rgba(156,195,228,.6);color:#F4F6F8}
+.ll-mini-b svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+.gc-llamada:not(.mini) .ll-volver{display:none}
+/* La llamada en pequeño, con el chat libre (dueño, 28 Oct 2026): una tarjeta abajo a la derecha */
+.gc-llamada.mini{inset:auto 16px calc(92px + env(safe-area-inset-bottom)) auto;width:min(340px,calc(100vw - 32px));max-height:calc(100vh - 32px);padding:10px 12px 12px;border-radius:18px;border:1px solid var(--line);background:#0C1118;box-shadow:0 24px 60px -18px rgba(0,0,0,.8);gap:8px;text-align:left;overflow:hidden}
+.gc-llamada.mini.con-video{background:#0C1118}
+.gc-llamada.mini .gc-llamada-arriba,.gc-llamada.mini .ll-voces,.gc-llamada.mini .gc-llamada-paso,.gc-llamada.mini.solo-mia .videos{display:none}
+.gc-llamada.mini .videos{position:relative;inset:auto;z-index:auto;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;cursor:zoom-in;flex:0 0 auto}
+.gc-llamada.mini .videos #v-local{right:8px;bottom:8px;width:72px;max-width:30%}
+.gc-llamada.mini .gc-llamada-centro{flex:0 0 auto;flex-direction:row;justify-content:flex-start;align-items:center;gap:10px;align-self:stretch;padding:0}
+.gc-llamada.mini .gc-avatar-grande{width:34px;height:34px;font-size:15px;margin:0}
+.gc-llamada.mini.con-video .gc-avatar-grande{display:none}
+.gc-llamada.mini .gc-llamada-nombre{font-size:15px;text-shadow:none}
+.gc-llamada.mini .gc-llamada-tiempo{font-size:13px;margin-left:auto;text-shadow:none}
+.gc-llamada.mini .gc-llamada-botones{margin:2px 0 0;gap:12px}
+.gc-llamada.mini .gc-llamada-boton span{display:none}
+.gc-llamada.mini .gc-llamada-boton button{width:42px;height:42px}
+.gc-llamada.mini .gc-llamada-boton.gc-colgar button{width:46px;height:46px}
+.gc-llamada.mini .gc-llamada-boton button svg{width:19px;height:19px}
+@media (min-width:761px){.gc-llamada .videos #v-local{width:240px;max-width:24vw;aspect-ratio:16/9;bottom:150px}}
+@media (max-width:760px){.gc-llamada.mini{inset:auto 8px calc(76px + env(safe-area-inset-bottom)) 8px;width:auto}.gc-llamada.mini .videos{max-height:26vh}.ll-mini-b span{display:none}}
 
 /* ---- aviso ---- */
 .aviso{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:80;max-width:min(520px,calc(100vw - 32px));padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:13.5px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
@@ -254,6 +281,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   .sello-insignia{margin-left:4px;padding:1px 6px;font-size:9px}
   .discreto{padding:5px 8px;gap:6px}.discreto span{display:none}
   .conv .gc-escudo-boton{width:30px}
+  .conv .gc-llamar-boton{width:34px}
   .boton.terminar{padding:6px 12px;margin-left:2px}.boton.terminar svg{display:none}
   .radio{padding:6px 12px;font-size:11.5px}
   .codigo{font-size:32px}
@@ -350,6 +378,13 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .paso.enlace-b .pq-k{margin:0}
 .paso.enlace-b .qr{justify-self:center;width:208px;height:208px;padding:10px;border-radius:14px;background:#fff;box-shadow:0 18px 50px -24px rgba(156,195,228,.5)}
 .paso.enlace-b .qr svg{display:block;width:100%;height:100%}
+.qr-plegado{justify-self:center;text-align:center}
+.qr-plegado summary{display:inline-flex;align-items:center;gap:6px;cursor:pointer;list-style:none;font:500 13px/1.4 var(--texto);color:var(--muted);padding:6px 10px;border-radius:999px}
+.qr-plegado summary::-webkit-details-marker{display:none}
+.qr-plegado summary::before{content:'▸';font-size:11px;transition:transform .15s}
+.qr-plegado[open] summary::before{transform:rotate(90deg)}
+.qr-plegado summary:hover,.qr-plegado summary:focus-visible{color:var(--fg)}
+.paso.enlace-b .qr-plegado .qr{margin:10px auto 0}
 .enlace-fila{display:flex;gap:8px;align-items:center}
 .enlace-fila .campo{flex:1;min-width:0;font:400 12.5px/1.3 var(--mono);color:var(--muted)}
 .paso.enlace-b .estado{color:var(--accent)}
@@ -373,6 +408,16 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .cierre-lista.si li::before{content:'✓';color:var(--ok)}
 .cierre-lista.no li::before{content:'—';color:var(--aviso)}
 .cierre-aviso{color:var(--aviso)}
+/* Revisar antes de enviar (dueño, 28 Oct 2026) */
+.envio-lista{margin:0;padding:0;list-style:none;display:grid;gap:12px;max-height:min(56vh,460px);overflow:auto;overscroll-behavior:contain}
+.envio-lista li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px 12px;align-items:center}
+.envio-lista li.foto{grid-template-columns:minmax(0,1fr)}
+.envio-lista img{display:block;justify-self:center;max-width:100%;max-height:min(42vh,340px);border-radius:12px;border:1px solid var(--line);background:var(--campo);object-fit:contain;transition:filter .15s}
+.envio-lista .ico{width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--campo);display:grid;place-items:center;font:500 10.5px/1 var(--mono);color:var(--muted);overflow:hidden}
+.envio-lista b{display:block;font:500 14px/1.35 var(--texto);color:var(--fg);overflow-wrap:anywhere}
+.envio-lista small{display:block;margin-top:2px;font:400 12.5px/1.4 var(--mono);color:var(--muted)}
+.gc-hoja.discreta .envio-lista img{filter:blur(18px)}
+.gc-hoja.discreta .envio-lista img.ver{filter:none}
 @media (max-width:760px){.enlace-fila{flex-wrap:wrap}.enlace-fila .campo{flex-basis:100%}.paso.enlace-b .qr{width:180px;height:180px}.bl-puerta{margin:8px 10px 0}}
 /* Llamadas de voz con cambio de voz (dueño, 27 Oct 2026, 23:05–23:07) */
 .gc-llamar-boton.apagado{opacity:.45}

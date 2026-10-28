@@ -82,7 +82,7 @@
     { id: 'zero', n: 'ZERO', s: 'Navegador · demostración', d: 'El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.', pagina: 'zero/?orbita=1&entrada=0&v=20261027c' },
     // 26 Oct 2026 (owner: «haz comunicaciones enteras»): the door opens the web app itself, full page (calls need the
     // microphone and the camera, and large files are written straight to disk: none of that belongs in a frame).
-    { id: 'comunicaciones', n: 'Comunicaciones', s: 'Habla sin testigos', d: 'Chat, notas de voz y archivos de cualquier tamaño, cifrados de extremo a extremo entre dos equipos, con un código de 9 cifras. Al terminar, se borra todo.', enlace: 'comunicaciones/' },
+    { id: 'comunicaciones', n: 'Comunicaciones', s: 'Habla sin testigos', d: 'Chat, notas de voz y archivos de cualquier tamaño, encriptados de extremo a extremo entre dos equipos, con un código de 9 cifras. Al terminar, se borra todo.', enlace: 'comunicaciones/' },
     // 23 Oct 2026, 15:49 (owner: «dónde va el sistema operativo… y con qué palabra: donde tú lo veas»): GUARDIANA OS, a
     // download rather than a door into the web, sits apart under the three doors and says «En preparación» until a
     // first version runs (then «Próximamente»); it promises only what that version can do, and says what it will not.
@@ -1293,7 +1293,8 @@ void main(){
       primero = accion('Cerrar', 'boton principal', () => cierraLugar(false));
       if (navigator.geolocation) accion('Medir de nuevo', 'boton', mideLugar);
       accion('Elegir otra', 'boton', () => abreLugar('buscar'));
-      accion('Olvidar', 'boton texto', async () => { try { LUGAR = await apiLugar('DELETE'); } catch (_) {} LUGAR = null; pintaLugar(); cierraLugar(false); });
+      // «Olvidar» borra también la copia para el viaje de los datos (28 Oct 2026: la política dice que «Olvidar» las borra)
+      accion('Olvidar', 'boton texto', async () => { try { LUGAR = await apiLugar('DELETE'); } catch (_) {} try { localStorage.removeItem('guardiana_pd_lugar'); } catch (_) {} LUGAR = null; pintaLugar(); cierraLugar(false); });
     }
     setTimeout(() => { if (!caja.hidden && primero) primero.focus(); }, 30);
   }

@@ -11,8 +11,8 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261028a">
-<link rel="stylesheet" href="viaje.css?v=20261027a">
+<link rel="stylesheet" href="app.css?v=20261028b">
+<link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -51,8 +51,8 @@
     <div class="paso" id="paso-codigo" hidden>
       <h2>Tu código de invitación</h2>
       <div class="codigo" id="codigo" translate="no" aria-live="polite">···-···-···</div>
-      <p class="t">Comunica este código a la otra persona por llamada o por cualquier aplicación de mensajería. Ella pulsa «Tengo un código», lo escribe y empezáis.</p>
-      <p class="t validez" id="validez">Tiene una validez de 10 minutos y un solo uso: pasado ese tiempo queda inhabilitado y deja de funcionar.</p>
+      <p class="t">Comunica este código a la otra persona por llamada o por cualquier aplicación de mensajería. Ella pulsa «Tengo un código», lo escribe y empieza la conversación.</p>
+      <p class="t validez" id="validez">Es válido durante 10 minutos y para un solo uso; después deja de funcionar.</p>
       <p class="t" id="invita-estado" hidden></p>
       <div class="fila centro"><button type="button" class="boton" id="invita-nuevo" hidden>Nuevo código</button></div>
     </div>
@@ -61,11 +61,12 @@
     <div class="paso enlace-b" id="paso-enlace" hidden>
       <p class="pq-k">Sesión blindada</p>
       <h2>Invitación blindada</h2>
-      <p class="t">Envía este enlace a la otra persona por un canal de confianza, o muéstrale el código QR. Es la llave de la sesión: no lo publiques.</p>
-      <div class="qr" id="enlace-qr" role="img" aria-label="Código QR de la invitación"></div>
+      <!-- 28 Oct 2026 (dueño): de PC a PC, el QR estorba; primero el enlace y el QR plegado, por si alguien entra con el móvil -->
+      <p class="t">Copia el enlace y envíaselo a la otra persona por un canal de confianza. Al abrirlo en su navegador, entra directamente. Es la llave de la sesión: no lo publiques.</p>
       <div class="enlace-fila"><input class="campo" id="enlace-b" readonly translate="no" spellcheck="false" aria-label="Enlace de la invitación"><button type="button" class="boton principal" id="enlace-copiar">Copiar enlace</button><button type="button" class="boton" id="enlace-compartir" hidden>Compartir</button></div>
+      <details class="qr-plegado"><summary>Mostrar el código QR (para abrirlo con un móvil)</summary><div class="qr" id="enlace-qr" role="img" aria-label="Código QR de la invitación"></div></details>
       <p class="t estado" id="enlace-estado" role="status">Esperando a que la otra persona abra el enlace…</p>
-      <p class="t nota">Cuando entre, los dos tendréis que comprobar el número de seguridad por otro canal (una llamada o en persona). Hasta entonces no se envía nada.</p>
+      <p class="t nota">Cuando entre, los dos tendrán que comprobar el número de seguridad por otro canal (una llamada o en persona). Hasta entonces no se envía nada.</p>
       <div class="fila centro"><button type="button" class="boton" id="enlace-cancelar">Cancelar la invitación</button></div>
     </div>
 
@@ -132,20 +133,20 @@
           <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
           <h3>Llamadas de voz</h3>
           <p>Desde la conversación, en la sesión normal y en la blindada. El audio va encriptado de extremo a extremo y siempre por el relé de GUARDIANA: ninguno de los dos ve la dirección IP del otro.</p>
-          <p class="pro-nota">El cambio de voz se aplica en tu equipo antes de enviar: cambia el tono, no oculta el acento ni lo que dices. El audio usa el cifrado estándar de las llamadas del navegador, no la capa postcuántica.</p>
+          <p class="pro-nota">El cambio de voz se aplica en tu equipo antes de enviar: cambia el tono, no oculta el acento ni lo que dices. El audio usa la encriptación estándar de las llamadas del navegador, no la capa postcuántica.</p>
         </article>
       </div>
 
       <p class="pro-antetitulo">Para despachos, clínicas y empresas</p>
       <h2 id="pro-t">Comunicaciones confidenciales, sin complicaciones</h2>
-      <p class="pro-entrada">Envía documentación confidencial a tus clientes y habla con ellos desde el navegador, con cifrado de extremo a extremo. Sin instalar nada, sin cuentas y sin números de teléfono.</p>
+      <p class="pro-entrada">Envía documentación confidencial a tus clientes y habla con ellos desde el navegador, con encriptación de extremo a extremo. Sin instalar nada, sin cuentas y sin números de teléfono.</p>
 
       <div class="pro-rejilla">
         <article class="pro-tarjeta destacada">
           <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 10.5v7M9.2 14.8 12 17.6l2.8-2.8"/></svg></span>
           <div>
             <h3>Archivos enormes, por partes</h3>
-            <p>Expedientes completos, pruebas de imagen o vídeos: viajan en trozos cifrados, sin cargarse enteros en memoria ni guardarse en ningún servidor.</p>
+            <p>Expedientes completos, pruebas de imagen o vídeos: viajan en trozos encriptados, sin cargarse enteros en memoria ni guardarse en ningún servidor.</p>
             <p class="pro-nota">Con Chrome o Edge, quien recibe elige dónde guardarlo y se escribe en su disco según llega. En otros navegadores, hasta 300 MB.</p>
           </div>
         </article>
@@ -156,8 +157,8 @@
         </article>
         <article class="pro-tarjeta">
           <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M12 15v2"/></svg></span>
-          <h3>Cifrado antes de salir</h3>
-          <p>Mensajes y archivos se cifran en tu equipo. Nuestro servidor solo pasa paquetes que no puede leer y no guarda mensajes, nombres ni claves.</p>
+          <h3>Encriptado antes de salir</h3>
+          <p>Mensajes y archivos se encriptan en tu equipo. Nuestro servidor solo pasa paquetes que no puede leer y no guarda mensajes, nombres ni claves.</p>
         </article>
         <article class="pro-tarjeta">
           <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.6 2.6"/><path d="M9.5 2.5h5"/></svg></span>
@@ -167,7 +168,7 @@
         <article class="pro-tarjeta">
           <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.6-3 8.4-7 10-4-1.6-7-5.4-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
           <h3>Comprueba con quién hablas</h3>
-          <p>Comparad por teléfono o en persona el número de seguridad de 60 cifras: si coincide, no hay intermediarios entre vuestros equipos.</p>
+          <p>Compara con la otra persona, por teléfono o en persona, el número de seguridad de 60 cifras: si coincide, no hay intermediarios entre los dos equipos.</p>
         </article>
         <article class="pro-tarjeta">
           <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M6.5 7l1 13h9l1-13"/><path d="M9.5 7V4h5v3"/><path d="M10.5 11v5M13.5 11v5"/></svg></span>
@@ -189,10 +190,10 @@
           <details class="pro-ficha">
             <summary>Ficha técnica para responsables de seguridad</summary>
             <ul>
-              <li><b>Criptografía</b><span>Web Crypto nativa del navegador para firma, acuerdo ECDH y cifrado; acuerdo de claves híbrido ECDH P-256 + ML-KEM-768 (FIPS 203, librería abierta @noble/post-quantum servida desde este sitio). Identidad con ECDSA P-256 (firma) y ECDH P-256 (acuerdo); claves privadas no exportables.</span></li>
+              <li><b>Criptografía</b><span>Web Crypto nativa del navegador para firma, acuerdo ECDH y encriptación; acuerdo de claves híbrido ECDH P-256 + ML-KEM-768 (FIPS 203, librería abierta @noble/post-quantum servida desde este sitio). Identidad con ECDSA P-256 (firma) y ECDH P-256 (acuerdo); claves privadas no exportables.</span></li>
               <li><b>Establecimiento de sesión</b><span>Presentaciones firmadas y triple acuerdo ECDH (efímera–efímera, identidad–efímera, efímera–identidad) combinado con HKDF-SHA256; material nuevo en cada sesión.</span></li>
               <li><b>Contenido</b><span>AES-256-GCM, con una clave por mensaje derivada con cadenas HMAC-SHA256; la anterior se descarta.</span></li>
-              <li><b>Archivos</b><span>Trozos de 192 KB cifrados uno a uno; quien envía nunca carga el archivo entero y, con Chrome o Edge, quien recibe lo escribe en disco según llega.</span></li>
+              <li><b>Archivos</b><span>Trozos de 192 KB encriptados uno a uno; quien envía nunca carga el archivo entero y, con Chrome o Edge, quien recibe lo escribe en disco según llega.</span></li>
               <li><b>Invitación</b><span>Código de 9 cifras, un solo uso, 10 minutos e intentos limitados. El relé solo guarda un sobre cerrado con una clave derivada del código en el navegador (PBKDF2, 300.000 iteraciones).</span></li>
               <li><b>Relé y verificación</b><span>El relé no guarda mensajes, nombres ni claves; solo sabe qué conexiones comparten una sala y cuántos bytes mueven. Número de seguridad de 60 cifras para comprobar fuera de banda.</span></li>
               <li><b>Sesión blindada</b><span>Acuerdo híbrido ECDH P-384 + ML-KEM-1024 (FIPS 203) con HKDF-SHA-384; firmas ECDSA P-384 sobre SHA-384 y ML-DSA-87 (FIPS 204) sobre toda la negociación; identidad nueva en cada sesión; invitación de 256 bits solo por enlace o QR; verificación mutua obligatoria; claves renovadas cada 5 minutos; mensajes rellenos a múltiplos de 1 KB y último trozo de cada archivo completo.</span></li>
@@ -204,14 +205,14 @@
           <h3>Pensado para</h3>
           <ul class="pro-usos">
             <li><b>Abogados y notarías</b><span>Contratos, borradores y expedientes con tus clientes, sin pasar por el correo ni obligarles a registrarse en un portal.</span></li>
-            <li><b>Clínicas y consultas</b><span>Informes y pruebas de imagen para tus pacientes por un canal cifrado, tras comprobar el número de seguridad por teléfono.</span></li>
-            <li><b>Gestorías, RR. HH. y empresas</b><span>Nóminas, contratos laborales, auditorías y documentación interna, en conversaciones que borras al terminar.</span></li>
+            <li><b>Clínicas y consultas</b><span>Informes y pruebas de imagen para tus pacientes por un canal encriptado, tras comprobar el número de seguridad por teléfono.</span></li>
+            <li><b>Asesorías, RR. HH. y empresas</b><span>Nóminas, contratos laborales, auditorías y documentación interna, en conversaciones que borras al terminar.</span></li>
           </ul>
           <button type="button" class="boton principal pro-empezar" id="pro-empezar">Crear invitación</button>
         </div>
       </div>
 
-      <p class="pro-limite"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>El cifrado protege lo que viaja entre los dos equipos, pero no impide que quien recibe guarde copias o haga capturas, ni protege un equipo ya comprometido. Nuestro servidor ve datos de conexión (dirección IP, hora y volumen), no el contenido.</span></p>
+      <p class="pro-limite"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>La encriptación protege lo que viaja entre los dos equipos, pero no impide que quien recibe guarde copias o haga capturas, ni protege un equipo ya comprometido. Nuestro servidor ve datos de conexión (dirección IP, hora y volumen), no el contenido.</span></p>
     </section>
 
   </section>
@@ -219,15 +220,15 @@
   <section class="conv" id="conv" hidden>
     <header class="gc-cabecera">
       <span class="gc-avatar candado" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
-      <div class="gc-quien"><span class="gc-nombre"><span id="cnombre">Conversación cifrada</span> <em class="sello-insignia" id="sello-insignia" hidden>SELLADA</em></span><span class="gc-confianza" id="cconfianza">Esperando a la otra persona…</span></div>
+      <div class="gc-quien"><span class="gc-nombre"><span id="cnombre">Conversación encriptada</span> <em class="sello-insignia" id="sello-insignia" hidden>SELLADA</em></span><span class="gc-confianza" id="cconfianza">Esperando a la otra persona…</span></div>
       <button type="button" class="discreto" id="discreto" aria-pressed="false" title="Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal."><svg class="ojo-no" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 6.1A9.8 9.8 0 0 1 12 6c6.5 0 10 6 10 6a17 17 0 0 1-3.2 3.9M6.2 7.8C3.6 9.6 2 12 2 12s3.5 6 10 6c1.7 0 3.2-.4 4.5-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg><svg class="ojo" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Modo discreto</span><i class="interruptor-mini" aria-hidden="true"></i></button>
       <!-- dueño, 27 Oct 2026, 23:05–23:07: llamadas de voz, con cambio de voz, en la sesión normal y en la blindada -->
-      <button type="button" class="gc-cab-boton gc-llamar-boton" id="llamar" aria-label="Llamada de voz" title="Llamada de voz"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></button>
+      <button type="button" class="gc-cab-boton gc-llamar-boton" id="llamar" aria-label="Llamada de voz" title="Llamada de voz"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></button><button type="button" class="gc-cab-boton gc-llamar-boton" id="videollamar" aria-label="Videollamada" title="Videollamada"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></svg></button>
       <button type="button" class="gc-cab-boton gc-escudo-boton" id="escudo" aria-label="Seguridad de esta conversación" title="Seguridad"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></button>
       <button type="button" class="boton terminar" id="terminar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Terminar</button>
     </header>
     <!-- ronda 55 (ChatGPT y Astra): si una conversación que ya fue postcuántica vuelve a solo ECDH, se para hasta que la persona lo acepte -->
-    <div class="gc-pq" id="cpq" role="alert" hidden><span>La otra persona no ha usado la protección postcuántica. Esta conversación ya la tenía, así que la he parado.</span><button type="button" class="boton" id="cpq-si">Continuar sin protección postcuántica</button></div>
+    <div class="gc-pq" id="cpq" role="alert" hidden><span>La otra persona no ha usado la protección postcuántica. Como esta conversación ya la tenía, se ha detenido.</span><button type="button" class="boton" id="cpq-si">Continuar sin protección postcuántica</button></div>
     <div class="cuerpo">
     <div class="charla">
     <div class="radio" id="radio" hidden><i></i><span id="radiotxt"></span></div>
@@ -238,8 +239,8 @@
     <div class="gc-enviando" id="enviando" hidden></div>
     <!-- blindada: nada sale hasta que los dos comprueban el número de seguridad -->
     <div class="bl-puerta" id="bl-puerta" role="region" aria-labelledby="bl-puerta-t" hidden>
-      <b id="bl-puerta-t">Comprobad el número de seguridad</b>
-      <p>Sesión blindada: no se envía nada hasta que los dos comprobéis que este número es el mismo en los dos equipos. Leedlo en voz alta por teléfono o comparadlo en persona.</p>
+      <b id="bl-puerta-t">Comprueba el número de seguridad</b>
+      <p>Sesión blindada: no se envía nada hasta que los dos comprueben que este número es el mismo en los dos equipos. Léelo en voz alta por teléfono o compáralo en persona.</p>
       <pre class="bl-numero" id="bl-numero" translate="no">—</pre>
       <div class="bl-estado"><span id="bl-yo">Tú: pendiente</span><span id="bl-otro">La otra persona: pendiente</span></div>
       <button type="button" class="boton principal" id="bl-coincide">He comprobado que coincide</button>
@@ -269,7 +270,7 @@
     <h2 class="gc-hoja-titulo" id="h-escudo-t">Seguridad</h2>
     <ul class="gc-escudo" id="escudo-lista"></ul>
     <h3 class="sub">Número de seguridad</h3>
-    <p class="t">Si los dos comprobáis el mismo número por otra vía (teléfono, en persona), estáis hablando sin intermediarios. Entonces marca «Verificada».</p>
+    <p class="t">Si los dos comprueban el mismo número por otra vía (teléfono, en persona), están hablando sin intermediarios. Entonces marca «Verificada».</p>
     <pre class="numero" id="numero" translate="no">—</pre>
     <label class="interruptor"><input type="checkbox" id="verificada"><span>Verificada: he comprobado el número con la otra persona</span></label>
     <div class="fila"><button type="button" class="boton" id="escudo-cerrar">Cerrar</button><button type="button" class="boton peligro" id="destruir">Terminar y borrar</button></div>
@@ -279,7 +280,9 @@
 
 <!-- Llamada de voz: encriptada de extremo a extremo (DTLS-SRTP), por el relé; el cambio de voz se hace en este equipo -->
 <div class="gc-llamada" id="llamada" role="dialog" aria-modal="true" aria-label="Llamada de voz">
-  <div class="gc-llamada-arriba"><span class="gc-llamada-cifrado"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Encriptada de extremo a extremo · por el relé de GUARDIANA</span></span><span class="gc-llamada-estado" id="ll-calidad"></span></div>
+  <div class="gc-llamada-arriba"><span class="gc-llamada-cifrado"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Encriptada de extremo a extremo · por el relé de GUARDIANA</span></span><span class="gc-llamada-estado" id="ll-calidad"></span><button type="button" class="ll-mini-b" id="ll-mini" aria-label="Ver el chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4z"/></svg><span>Ver el chat</span></button></div>
+  <!-- Videollamada (dueño, 28 Oct 2026: «máxima calidad de imagen»): la imagen de la otra persona de fondo y la tuya en una esquina -->
+  <div class="videos" id="ll-videos" hidden><video id="v-remoto" autoplay playsinline></video><video id="v-local" autoplay playsinline muted></video></div>
   <div class="gc-llamada-centro" id="ll-centro">
     <span class="gc-avatar-grande" id="ll-avatar" aria-hidden="true">·</span>
     <span class="gc-llamada-nombre" id="ll-nombre" translate="no">—</span>
@@ -300,7 +303,9 @@
   <audio id="a-remoto" autoplay></audio>
   <div class="gc-llamada-botones" id="ll-botones">
     <div class="gc-llamada-boton"><button type="button" id="ll-silenciar" aria-pressed="false" aria-label="Silenciar"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><span>Silenciar</span></div>
+    <div class="gc-llamada-boton" id="ll-camara-caja" hidden><button type="button" id="ll-camara" aria-pressed="false" aria-label="Apagar la cámara"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></svg></button><span>Cámara</span></div>
     <div class="gc-llamada-boton gc-colgar"><button type="button" id="ll-colgar" aria-label="Colgar"><svg viewBox="0 0 24 24"><path d="M3 12c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a9 9 0 0 0-7 0V13l-3 1.5z"/></svg></button><span>Colgar</span></div>
+    <div class="gc-llamada-boton ll-volver"><button type="button" id="ll-volver" aria-label="Volver a la llamada"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 15v5h-5M4 4l6 6M20 20l-6-6"/></svg></button><span>Ampliar</span></div>
   </div>
   <div class="gc-llamada-botones gc-entrante" id="ll-entrante" hidden>
     <div class="gc-llamada-boton gc-colgar"><button type="button" id="ll-rechazar" aria-label="Rechazar"><svg viewBox="0 0 24 24"><path d="M3 12c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a9 9 0 0 0-7 0V13l-3 1.5z"/></svg></button><span>Rechazar</span></div>
@@ -316,13 +321,13 @@
     <p class="t cierre-cuenta" id="cierre-cuenta"></p>
     <h3 class="sub">Se borra al terminar</h3>
     <ul class="cierre-lista si">
-      <li>En este equipo: el secreto de la invitación, la identidad de esta sesión, todas sus claves, los mensajes, los archivos guardados en este navegador y los comprobantes.</li>
+      <li id="cierre-este">En este equipo: el secreto de la invitación, la identidad de esta sesión, todas sus claves, los mensajes, los archivos guardados en este navegador y los comprobantes.</li>
       <li>En el otro equipo: lo mismo, con la orden de borrado que recibe ahora o en cuanto vuelva a conectarse.</li>
       <li>En el relé de GUARDIANA no queda nada que borrar: solo pasaron por él fragmentos encriptados, sin guardarse.</li>
     </ul>
     <h3 class="sub">No se puede garantizar</h3>
     <ul class="cierre-lista no">
-      <li>Los archivos que cualquiera de los dos haya guardado en su disco, ni las capturas de pantalla.</li>
+      <li>Los archivos que cualquiera de los dos haya guardado en su disco y las capturas de pantalla.</li>
       <li>Un equipo o un navegador comprometido.</li>
       <li>Los datos de conexión que puedan registrar los proveedores de servidores o de internet: dirección IP, hora y volumen.</li>
     </ul>
@@ -331,10 +336,21 @@
   </div>
 </div>
 
+<!-- Hoja: revisar antes de enviar (dueño, 28 Oct 2026: «la quiero ver en pantalla y darle yo al OK»). Lo elegido, pegado o
+     soltado se ve aquí y solo sale al pulsar «Enviar». -->
+<div class="gc-hoja" id="h-envio" role="dialog" aria-modal="true" aria-labelledby="h-envio-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-envio-t">Revisa antes de enviar</h2>
+    <ul class="envio-lista" id="envio-lista"></ul>
+    <div class="fila"><button type="button" class="boton" id="envio-no">Cancelar</button><button type="button" class="boton principal" id="envio-si">Enviar</button></div>
+  </div>
+</div>
+
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261028p22"></script>
+<script src="/orbita/static/idioma.js?v=20261028p23"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -343,8 +359,8 @@
 <script src="rele.js?v=20261027c"></script>
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
-<script src="viaje.js?v=20261027c"></script>
-<script src="llamada.js?v=20261028a"></script>
-<script src="app.js?v=20261028c"></script>
+<script src="viaje.js?v=20261028a"></script>
+<script src="llamada.js?v=20261028b"></script>
+<script src="app.js?v=20261028d"></script>
 </body>
 </html>
