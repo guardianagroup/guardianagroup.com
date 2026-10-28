@@ -703,3 +703,33 @@ a,button,summary,label,[role="button"]{cursor:pointer}
 .ll-ajustes-atras svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 /* Con el teclado del iPhone abierto, la página mide lo que se ve y se coloca ahí (dueño, 28 Oct 2026, 15:26) */
 @media (pointer:coarse){html.con-teclado,html.con-teclado body{overflow:hidden;overscroll-behavior:none}html.con-teclado body{height:var(--alto-vv,100dvh);transform:translateY(var(--arriba-vv,0px))}}
+/* Invitación blindada: enlace copiado, solo «Compartir» en el móvil y la pantalla de espera (dueño, 28 Oct 2026, 15:31–15:32) */
+.enlace-copiado{display:inline-flex;align-items:center;gap:6px;color:#5CC98A;font-weight:600;margin:4px 0 2px}
+.enlace-copiado svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+@media (pointer:coarse){.enlace-b .enlace-fila{display:grid;gap:10px}.enlace-b .enlace-fila .campo{display:none}.enlace-b #enlace-compartir{min-height:54px;font-size:17px;border-radius:16px}}
+.enlace-espera{min-height:min(70vh,560px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:24px 12px}
+.enlace-espera[hidden]{display:none}
+.enlace-espera h2{font-size:clamp(21px,5.4vw,27px);line-height:1.25;max-width:420px;margin:18px 0 0}
+.enlace-espera .t{color:var(--suave,#9fb3c4);margin:0 0 14px}
+.espera-anillos{position:relative;width:120px;height:120px;display:grid;place-items:center}
+.espera-anillos span{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(156,195,228,.55);animation:esperaAnillo 2.7s ease-out infinite;opacity:0}
+.espera-anillos span:nth-child(2){animation-delay:.9s}.espera-anillos span:nth-child(3){animation-delay:1.8s}
+.espera-anillos svg{width:44px;height:44px;fill:none;stroke:#F4F6F8;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 10px rgba(204,237,255,.5))}
+@keyframes esperaAnillo{0%{transform:scale(.35);opacity:.95}100%{transform:scale(1.15);opacity:0}}
+@media (prefers-reduced-motion:reduce){.espera-anillos span{animation:none;opacity:.4}}
+/* quien entra por un enlace, hasta la primera conexión: sin campo de escribir (15:33) */
+.espera-otro{display:none}
+.conv.sin-sesion .gc-compositor{display:none}
+.conv.sin-sesion .espera-otro{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 16px calc(18px + env(safe-area-inset-bottom));text-align:center;border-top:1px solid rgba(218,236,250,.12)}
+.espera-otro b{font-size:16px}.espera-otro small{color:var(--suave,#9fb3c4)}
+.espera-pulso{width:12px;height:12px;border-radius:50%;background:#9CC3E4;animation:esperaPulso 1.4s ease-in-out infinite}
+@keyframes esperaPulso{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
+#inicio.con-invitacion>.pq-k,#inicio.con-invitacion>h1,#inicio.con-invitacion>p.t,#inicio.con-invitacion>ul.para{display:none}
+@media (pointer:coarse){body.esperando-enlace .barra{display:none}}
+/* «Borrar el chat», junto al micrófono (dueño, 15:13): discreto hasta que se toca */
+.gc-papelera{background:transparent!important;color:var(--gc-suave,#9fb3c4)}
+.gc-papelera:hover,.gc-papelera:focus-visible{color:#E07A6C}
+@media (pointer:coarse){.gc-compositor .gc-papelera{width:38px;min-width:38px;height:38px}}
+/* Móvil: la primera página, lo mínimo (dueño, 28 Oct 2026, 15:39: «hay que reducirla mucho, es muy pesada… sigue diciendo algo
+   de un QR… súper simplificado»): sin la presentación larga ni para quién es, botones grandes sin explicación debajo y sin QR */
+@media (max-width:760px){#inicio>.pq-k,#inicio>p.t,#inicio>ul.para{display:none}#inicio>h1{font-size:24px;line-height:1.2;margin:6px 0 16px}#paso-inicio .grande small{display:none}#paso-inicio .grande{min-height:62px;padding:14px 18px;justify-content:center}#paso-inicio{gap:12px}.enlace-b .qr-plegado{display:none}#como-btn{font-size:13px;opacity:.75;margin-top:18px}}

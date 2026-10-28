@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261028t">
+<link rel="stylesheet" href="app.css?v=20261028v">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -57,7 +57,7 @@
       <button type="button" class="grande principal" id="nueva"><b>Crear invitación</b><small>Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
       <button type="button" class="grande" id="unir"><b>Tengo un código</b><small>Escribe las 9 cifras que te han enviado</small></button>
       <!-- dueño, 27 Oct 2026, 22:01–23:12: la blindada, «de la máxima»; algoritmos de la suite CNSA 2.0 -->
-      <button type="button" class="grande blindada" id="nueva-blindada"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b>Sesión blindada</b><small>Algoritmos de la suite CNSA 2.0, verificación obligatoria y claves que se renuevan cada 5 minutos</small></button>
+      <button type="button" class="grande blindada" id="nueva-blindada"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b>Sesión blindada</b><small>Algoritmos de la suite CNSA 2.0 y claves que se renuevan cada 5 minutos. Se invita con un enlace.</small></button>
     </div>
     <!-- dueño, 27 Oct 2026, 10:10: «al empezar, lo básico, limpio y entendible»; la explicación, aparte, en un desplegable -->
     <button type="button" class="como" id="como-btn" aria-expanded="false" aria-controls="pro">Cómo funciona Comunicaciones</button>
@@ -73,15 +73,26 @@
 
     <!-- Invitación blindada: solo por enlace o QR (la semilla entera, 256 bits, tras «#b=»: no llega a ningún servidor) -->
     <div class="paso enlace-b" id="paso-enlace" hidden>
+      <!-- dueño, 28 Oct 2026, 15:31–15:32: el enlace ya copiado al abrir esta página; en el móvil, solo «Compartir»; y al compartir,
+           la pantalla entera dice que se espera a la otra persona, con «Volver a compartir» -->
+      <div class="enlace-vista" id="enlace-vista">
       <p class="pq-k">Sesión blindada</p>
       <h2>Invitación blindada</h2>
       <!-- 28 Oct 2026 (dueño): de PC a PC, el QR estorba; primero el enlace y el QR plegado, por si alguien entra con el móvil -->
-      <p class="t">Copia el enlace y envíaselo a la otra persona por un canal de confianza. Al abrirlo en su navegador, entra directamente. Es la llave de la sesión: no lo publiques.</p>
-      <div class="enlace-fila"><input class="campo" id="enlace-b" readonly translate="no" spellcheck="false" aria-label="Enlace de la invitación"><button type="button" class="boton principal" id="enlace-copiar">Copiar enlace</button><button type="button" class="boton" id="enlace-compartir" hidden>Compartir</button></div>
+      <p class="t">Comparte el enlace con la otra persona. No lo abras tú: es su llave para entrar.</p>
+      <p class="t enlace-copiado" id="enlace-copiado" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>Enlace copiado</span></p>
+      <div class="enlace-fila"><input class="campo" id="enlace-b" readonly translate="no" spellcheck="false" aria-label="Enlace de la invitación"><button type="button" class="boton principal" id="enlace-copiar">Copiar enlace</button><button type="button" class="boton" id="enlace-compartir" hidden>Compartir enlace</button></div>
       <details class="qr-plegado"><summary>Mostrar el código QR (para abrirlo con un móvil)</summary><div class="qr" id="enlace-qr" role="img" aria-label="Código QR de la invitación"></div></details>
       <p class="t estado" id="enlace-estado" role="status">Esperando a que la otra persona abra el enlace…</p>
-      <p class="t nota">Cuando entre, los dos tendrán que comprobar el número de seguridad por otro canal (una llamada o en persona). Hasta entonces no se envía nada.</p>
+      <p class="t nota">Cuando entre, podréis hablar enseguida. Si queréis, comparad después el número de seguridad en «⋯» → «Seguridad y verificación».</p>
       <div class="fila centro"><button type="button" class="boton" id="enlace-cancelar">Cancelar la invitación</button></div>
+      </div>
+      <div class="enlace-espera" id="enlace-espera" hidden>
+        <div class="espera-anillos" aria-hidden="true"><span></span><span></span><span></span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+        <h2 role="status">Esperando a que la otra persona abra el enlace…</h2>
+        <p class="t">La conversación se abre sola en cuanto entre.</p>
+        <div class="fila centro"><button type="button" class="boton principal" id="enlace-otra-vez">Volver a compartir</button><button type="button" class="boton" id="enlace-cancelar-2">Cancelar</button></div>
+      </div>
     </div>
 
     <div class="paso" id="paso-entrar" hidden>
@@ -134,7 +145,7 @@
           <div>
             <h3>Sesión blindada</h3>
             <p>Usa los algoritmos de la suite CNSA 2.0: el acuerdo de claves combina ML-KEM-1024 con ECDH P-384, y cada equipo firma toda la negociación con ECDSA P-384 y con ML-DSA-87. La invitación es un enlace o un código QR con un secreto de 256 bits que no pasa por nuestro servidor.</p>
-            <p class="pro-nota">No se envía nada hasta que las dos personas comprueban el número de seguridad por otro canal. Las claves se renuevan cada 5 minutos y, al terminar, un informe dice qué se ha borrado y qué no se puede garantizar.</p>
+            <p class="pro-nota">El número de seguridad se puede comparar cuando queráis en «Seguridad y verificación». Las claves se renuevan cada 5 minutos y, al terminar, un informe dice qué se ha borrado y qué no se puede garantizar.</p>
           </div>
         </article>
         <article class="pro-tarjeta">
@@ -272,11 +283,13 @@
       <div class="bl-estado"><span id="bl-yo">Tú: pendiente</span><span id="bl-otro">La otra persona: pendiente</span></div>
       <button type="button" class="boton principal" id="bl-coincide">He comprobado que coincide</button>
     </div>
+    <!-- quien entra por un enlace, hasta que la otra persona esté conectada por primera vez: sin campo de escribir (15:33) -->
+    <div class="espera-otro" id="espera-otro"><span class="espera-pulso" aria-hidden="true"></span><b>Conectando con la otra persona…</b><small>La conversación se abre sola en cuanto esté conectada.</small></div>
     <div class="gc-compositor">
       <button type="button" class="gc-redondo" id="adjuntar" aria-label="Enviar un archivo" title="Enviar un archivo (del tamaño que sea)"><svg viewBox="0 0 24 24"><path d="M21 12.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13.5 4.4a3.5 3.5 0 0 1 5 5L10 18a1.5 1.5 0 0 1-2.1-2.1L15.5 8.3"/></svg></button>
       <div class="campo-envoltura" id="campo-envoltura"><div class="mascara" id="texto-mascara" aria-hidden="true"></div><textarea class="gc-campo" id="texto" rows="1" placeholder="Escribe un mensaje" aria-label="Mensaje" autocomplete="off" spellcheck="false"></textarea></div>
       <div class="grabando" id="grabando" hidden><i></i><span id="grabando-t">0:00</span><span class="t">Grabando nota de voz…</span><button type="button" class="boton" id="grabar-cancelar">Cancelar</button></div>
-      <button type="button" class="gc-redondo" id="grabar" aria-label="Grabar nota de voz" title="Nota de voz"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+      <button type="button" class="gc-redondo gc-papelera" id="vaciar" aria-label="Borrar el chat" title="Borrar el chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9.5 7V4.8h5V7M6.5 7l.9 12.2a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5L17.5 7M10 11v6M14 11v6"/></svg></button><button type="button" class="gc-redondo" id="grabar" aria-label="Grabar nota de voz" title="Nota de voz"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
       <button type="button" class="gc-redondo gc-principal" id="enviar" aria-label="Enviar"><svg viewBox="0 0 24 24"><path d="M4 12l16-7-7 16-2-7z"/></svg></button>
     </div>
     </div>
@@ -310,6 +323,16 @@
 </div>
 
 <!-- El nombre de cada conversación (agencia, ronda 74, bloque J): un alias que solo ve quien lo pone, en este navegador -->
+<!-- «Borrar chat» (dueño, 28 Oct 2026, 15:13: «se borraría todo el chat sin poderlo recuperar de ninguna forma… Esa opción es muy importante») -->
+<div class="gc-hoja" id="h-vaciar" role="dialog" aria-modal="true" aria-labelledby="h-vaciar-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-vaciar-t">¿Borrar el chat?</h2>
+    <p class="t">Se borran todos los mensajes, archivos y notas de voz de esta conversación, aquí y en el equipo de la otra persona. No se puede deshacer.</p>
+    <p class="t nota" id="vaciar-nota">Lo que alguien haya guardado fuera de GUARDIANA (una captura, un archivo descargado) no se puede borrar desde aquí.</p>
+    <div class="fila"><button type="button" class="boton" id="vaciar-no">Cancelar</button><button type="button" class="boton peligro" id="vaciar-si">Borrar el chat</button></div>
+  </div>
+</div>
 <div class="gc-hoja" id="h-nombre" role="dialog" aria-modal="true" aria-labelledby="h-nombre-t">
   <div class="gc-hoja-caja caja">
     <div class="gc-asa"></div>
@@ -412,17 +435,17 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261028p38"></script>
+<script src="/orbita/static/idioma.js?v=20261028p40"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
 <script src="cripto.js?v=20261027b"></script>
 <script src="/orbita/static/red-nucleo.js?v=20261027b"></script>
-<script src="rele.js?v=20261028n"></script>
+<script src="rele.js?v=20261028o"></script>
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028b"></script>
-<script src="llamada.js?v=20261028p"></script>
-<script src="app.js?v=20261028r"></script>
+<script src="llamada.js?v=20261028q"></script>
+<script src="app.js?v=20261028t"></script>
 </body>
 </html>

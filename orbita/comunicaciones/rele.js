@@ -78,6 +78,18 @@
       const espera = Math.min(20000, 800 * Math.pow(1.7, Math.min(intentos, 8))) + Math.random() * 400;
       setTimeout(() => { if (!ws) { if (intentos % 4 === 0) url = null; conecta(); } }, espera);
     }
+    // Al volver a la página (el iPhone duerme la pestaña al compartir por WhatsApp), conexión enseguida y no a la espera
+    // creciente; si parece abierta pero no contesta a un ping en 3 s, se cierra y se abre otra (dueño, 28 Oct 2026, 15:33: «me
+    // tiene que entrar automático en cuanto mi amigo acepta»).
+    function despierta() {
+      if (cerrando) return;
+      if (!ws) { intentos = 0; conecta(); return; }
+      if (!abierto) return;
+      const antes = ultimoPong; try { pingEn = Date.now(); ws.send(JSON.stringify({ t: 'ping' })); } catch (_) {}
+      setTimeout(() => { if (ws && abierto && ultimoPong === antes) { intentos = 0; try { ws.close(); } catch (_) {} } }, 3000);
+    }
+    if (typeof document !== 'undefined') document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') despierta(); });
+    if (typeof addEventListener === 'function') { addEventListener('pageshow', despierta); addEventListener('online', despierta); addEventListener('focus', despierta); }
     const hex = (b) => [...b].map((x) => x.toString(16).padStart(2, '0')).join('');
     const deHex = (s) => Uint8Array.from(String(s).match(/../g) || [], (h) => parseInt(h, 16));
 

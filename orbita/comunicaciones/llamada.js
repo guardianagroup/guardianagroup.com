@@ -620,7 +620,9 @@
     function miImagen() {
       const vl = vidLocal(), cont = lienzoVid(); if (!vl || !cont) return;
       const mi = leeMi(), CW = cont.clientWidth, CH = cont.clientHeight;
-      if (partidaPorDefecto && video && cam && CW) ponDividida(CW >= CH ? 'der' : 'abajo');
+      // partida por defecto solo en el ordenador; en el teléfono, como FaceTime o WhatsApp: la otra persona a pantalla completa y
+      // tú en pequeño (dueño, 28 Oct 2026, 15:36)
+      if (partidaPorDefecto && video && cam && CW && FINO.matches) ponDividida(CW >= CH ? 'der' : 'abajo');
       else if (mi.div && CW) { const hz = CW >= CH, mapa = hz ? { arriba: 'izq', abajo: 'der' } : { izq: 'arriba', der: 'abajo' }; ponDividida(mapa[mi.div] || mi.div); }
       else ponDividida(null);
       // tamaño elegido (proporción del ancho), con su mínimo y su máximo

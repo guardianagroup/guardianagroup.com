@@ -96,7 +96,7 @@
   function convNueva(sala, semilla, rol, modo) {
     return { id: sala, semilla, rol, modo: modo === 'blindada' ? 'blindada' : 'normal', suVerificada: false, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0 };
   }
-  const guardable = (c) => ({ id: c.id, tumba: c.tumba, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0 });
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0 });
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
     if (esB(c)) await preparaIdentidadB(c);
@@ -161,12 +161,19 @@
     const c = convNueva(d.sala, semilla, 'invita', 'blindada'); c.num = siguienteNum();
     await preparaConv(c); await guardaConv(c);
     abreConv(c.id);
+    return c;
   }
   const enlaceB = (c) => ORIGEN + '#b=' + C.b64u(c.semilla);
   function muestraEnlace(c) {
     const u = enlaceB(c); $('#enlace-b').value = u;
     const q = $('#enlace-qr'); if (q && window.qrSvg && q.dataset.u !== u) { q.innerHTML = window.qrSvg(u); q.dataset.u = u; }
     const est = $('#enlace-estado'); est.textContent = c.ocupada ? T('Esta invitación ya la usó otra persona.') : T('Esperando a que la otra persona abra el enlace…'); est.classList.toggle('mal', !!c.ocupada);
+    // en el móvil, solo «Compartir enlace» (el enlace ya está copiado); al compartir, la pantalla de espera
+    const movil = matchMedia('(pointer: coarse)').matches, comparte = !!navigator.share;
+    $('#enlace-copiar').hidden = movil && comparte; $('#enlace-compartir').hidden = !comparte; $('#enlace-compartir').classList.toggle('principal', movil && comparte);
+    $('#enlace-copiado').hidden = !c.copiado;
+    $('#enlace-vista').hidden = !!c.compartido; $('#enlace-espera').hidden = !c.compartido;
+    document.body.classList.toggle('esperando-enlace', !!c.compartido && ACTUAL === c.id);
   }
   const codigoBonito = (k) => k ? k.replace(/(\d{3})(?=\d)/g, '$1-') : '···-···-···';
   async function aceptaCodigo(texto) {
@@ -281,6 +288,7 @@
       else if (!resp) await presenta(c, null);
       if (nueva) { if (c.codigo) R.retira(c.codigo); c.codigo = null; clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Conversación establecida: encriptada de extremo a extremo. Comprueba el número de seguridad con la otra persona cuando puedas.'); if (ACTUAL === c.id) abreConv(c.id); else avisoConv(c, T('«{n}» ya está lista: la otra persona ha entrado.')); }
       if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
+      if (c.vaciarPendiente) { c.vaciarPendiente = false; enviaControl(c, { tipo: 'vaciar' }); guardaConv(c); }
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
     } catch (e) { console.warn('presentación', e); }
   }
@@ -374,8 +382,9 @@
       if (!soyInicio(c)) { if (kemEk && !resp) { const pq = await presentaB(c, { epoca, ef, ek: kemEk }); await derivaSesionB(c, ef, c.ef, pq); } }
       else if (resp) { const pq = { ss: C.B.kemAbre(kemCt, efMia.kem.dk), ek: efMia.kem.ek, ct: kemCt }; efMia.kem.dk.fill(0); efMia.kem = null; await derivaSesionB(c, ef, efMia, pq); }
       else await presentaB(c, null);
-      if (nueva) { clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Sesión blindada establecida. Antes de enviar nada, los dos deben comprobar el número de seguridad por otro canal.'); if (ACTUAL === c.id) abreConv(c.id); }
+      if (nueva) { clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Sesión blindada establecida. Si queréis, comparad el número de seguridad en «⋯» → «Seguridad y verificación».'); if (ACTUAL === c.id) abreConv(c.id); }
       if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
+      if (c.vaciarPendiente) { c.vaciarPendiente = false; enviaControl(c, { tipo: 'vaciar' }); guardaConv(c); }
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
     } catch (e) { console.warn('presentación blindada', e); }
   }
@@ -432,7 +441,7 @@
   // La puerta de la blindada: encima del campo de escribir, con el número a la vista, hasta que los dos lo comprueban
   async function pintaPuerta(c) {
     const p = $('#bl-puerta'); if (!p) return;
-    const ver = !!(esB(c) && c.huella && ACTUAL === c.id && !(c.verificada && c.suVerificada));
+    const ver = false; void c; // la puerta ya no se enseña (15:30): el número sigue en «Seguridad y verificación»
     p.hidden = !ver; $('#conv').classList.toggle('bl-cerrada', ver);
     if (!ver) return;
     const n = await numeroDe(c); if ($('#bl-numero').textContent !== n) $('#bl-numero').textContent = n;
@@ -472,7 +481,9 @@
   function enviaControl(c, obj) { if (!c.sesion || !R.abierto || !c.miembros.has(c.suId)) return false; sella(c, obj).then((b) => b && R.manda(c.id, c.suId, b)); return true; }
   const enLinea = (c) => !!(c.suId && c.miembros.has(c.suId) && c.sesion && R.abierto);
   // blindada: nada de contenido (mensajes, archivos, llamadas) hasta que los dos han comprobado el número de seguridad
-  const puedeEnviar = (c) => !esB(c) || !!(c.verificada && c.suVerificada);
+  // dueño, 28 Oct 2026, 15:30: «ya no quiero que aparezcan los números… con el grado que tenemos de seguridad, creo que ya es
+  // suficiente… tiene que ser una experiencia muy fácil»: la blindada ya no espera a la comprobación; compararlo es opcional
+  const puedeEnviar = (c) => !!c;
 
   async function enviaTexto(c, texto) {
     const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'texto', texto };
@@ -548,6 +559,7 @@
         if (LLAMADA_CONV ? LLAMADA_CONV === c.id : c.id === ACTUAL) await LL.recibe(j);
         return;
       }
+      case 'vaciar': return vaciaLocal(c, true);
       case 'destruir': return destruyeLocal(c, true);
       default: return;
     }
@@ -1048,6 +1060,21 @@
   }
 
   // ---------- destruir ----------
+  // «Borrar el chat» (dueño, 15:13): todo lo de la conversación, aquí y en el otro equipo; la conversación sigue abierta. Con la
+  // otra persona sin conectar, se borra aquí y la orden sale en cuanto se conecte (como «Terminar»).
+  async function vaciaLocal(c, porElla) {
+    for (const m of c.mensajes || []) { try { VIAJES.delete(m.id); } catch (_) {} }
+    c.mensajes = []; c.cola = []; c.ultimoTexto = null; c.noLeidos = 0; c.perdida = false;
+    await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await guardaConv(c);
+    if (ACTUAL === c.id) { pintaTodos(c); pintaCabecera(c); pintaRadio(c); }
+    pintaLista();
+    if (porElla) aviso(T('La otra persona ha borrado el chat: se ha borrado también aquí.'));
+  }
+  async function vacia(c) {
+    if (!c) return;
+    if (enLinea(c)) { enviaControl(c, { tipo: 'vaciar' }); await vaciaLocal(c, false); aviso(T('Chat borrado aquí y en el equipo de la otra persona.')); return; }
+    c.vaciarPendiente = true; await vaciaLocal(c, false); aviso(T('Chat borrado aquí; en el otro equipo, en cuanto esa persona se conecte.'));
+  }
   async function destruyeLocal(c, porElla, silencio) {
     if (c.estado === 'destruida') return;
     c.estado = 'destruida';
@@ -1179,6 +1206,9 @@
 
 
   // ---------- pantalla: conversación ----------
+  // hasta que la otra persona ha estado conectada al menos una vez (se conoce su huella), quien entró por un enlace no ve el
+  // campo de escribir: «Conectando con la otra persona…» (dueño, 15:33: «ya me deja escribir aunque él no esté… es un fallo»)
+  function pintaEspera(c) { if (!c || ACTUAL !== c.id) return; $('#conv').classList.toggle('sin-sesion', c.rol === 'acepta' && !c.huella); }
   async function abreConv(id) {
     const c = CONVS.get(id); if (!c) return;
     if (ACTUAL && ACTUAL !== id) { paraEscribe(); guardaBorrador(); }
@@ -1189,15 +1219,18 @@
     if (c.perdida) { c.perdida = false; }
     const inv = c.estado === 'invitacion' && c.rol === 'invita' && !c.huella;
     $('#inicio').hidden = !inv; $('#conv').hidden = inv; $('#app').classList.toggle('en-conv', !inv); document.body.classList.toggle('en-conv', !inv);
+    $('#inicio').classList.toggle('con-invitacion', inv); // sin la presentación de la página: solo la invitación (15:32)
     if (inv) { $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = true; $('#paso-codigo').hidden = esB(c); $('#paso-enlace').hidden = !esB(c); }
     pintaCabecera(c); pintaTodos(c); pintaRadio(c); pintaLista();
     if (c.estado === 'invitacion' && c.rol === 'invita') { if (esB(c)) muestraEnlace(c); else { muestraInvitacion(c); if (!c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); } }
     $('#conv').classList.toggle('blindada', esB(c));
+    pintaEspera(c);
     marcaLeidos(c);
     if (matchMedia('(min-width: 761px)').matches) $('#texto').focus();
   }
-  function cierraConv() { ACTUAL = null; if (window.pintaBarra) pintaBarra(); $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); document.body.classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; $('#paso-enlace').hidden = true; }
+  function cierraConv() { $('#inicio').classList.remove('con-invitacion'); document.body.classList.remove('esperando-enlace'); ACTUAL = null; if (window.pintaBarra) pintaBarra(); $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); document.body.classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; $('#paso-enlace').hidden = true; }
   function pintaCabecera(c) {
+    pintaEspera(c);
     if (window.pintaBarra) pintaBarra();
     if (ACTUAL !== c.id) return;
     // en el móvil, el nombre y la línea de confianza, cortos y en una fila (agencia, ronda 74: antes «Convers…» y tres líneas)
@@ -1206,7 +1239,7 @@
     const conf = $('#cconfianza'); conf.classList.remove('gc-sin-verificar');
     let txt;
     if (c.ocupada && !c.huella) txt = T('Esta invitación ya la usó otra persona.');
-    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo la encriptación…') : T('Esperando a que la otra persona escriba el código…');
+    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo la encriptación…') : c.rol === 'acepta' ? T('Conectando con la otra persona…') : esB(c) ? T('Esperando a que la otra persona abra el enlace…') : T('Esperando a que la otra persona escriba el código…');
     else if (!R.abierto) txt = T('Sin conexión con el relé');
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
     else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo la encriptación…');
@@ -1429,6 +1462,11 @@
   // como la mitad de la pantalla»). Safari no encoge la página con el teclado: la sube entera y la cabecera se va. Aquí la página
   // mide lo que de verdad se ve (visualViewport) y se coloca donde se ve: cabecera arriba, campo justo encima del teclado y la
   // conversación en medio, con lo último a la vista. En Android ya lo hace el navegador (interactive-widget=resizes-content).
+  // Nada de conversaciones viejas en pantalla (dueño, 28 Oct 2026, 15:41: «cuando se termina un chat… que se borre todo, que no
+  // aparezca»): al salir de la página se vacía lo que se ve, para que la copia que guarda el navegador para «Atrás» no lleve
+  // mensajes; y si el navegador la saca de esa copia, se vuelve a cargar desde cero (lo terminado ya no existe).
+  addEventListener('pagehide', () => { try { const m = document.querySelector('#mensajes'); if (m) m.textContent = ''; } catch (_) {} });
+  addEventListener('pageshow', (e) => { if (e.persisted) location.reload(); });
   (function tecladoMovil() {
     const vv = window.visualViewport; if (!vv) return;
     const raizDoc = document.documentElement; let rafVv = 0, conTeclado = false;
@@ -1787,10 +1825,20 @@
     addEventListener('hashchange', () => { if (/#[ib]=/.test(location.hash)) { aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); } });
     addEventListener('guardiana-idioma', () => { pintaLista(); const c = CONVS.get(ACTUAL); if (c) pintaCabecera(c); });
     // sesión blindada
-    $('#nueva-blindada').addEventListener('click', creaInvitacionB);
-    $('#enlace-copiar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.clipboard.writeText(enlaceB(c)); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { $('#enlace-b').select(); } });
+    // el enlace se copia solo al crear la invitación: se pide el portapapeles dentro del mismo toque, con el enlace por llegar
+    $('#nueva-blindada').addEventListener('click', () => {
+      let dale = null; const listo = new Promise((r) => { dale = r; });
+      try { if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) navigator.clipboard.write([new ClipboardItem({ 'text/plain': listo.then((c) => { if (!c) throw new Error('sin enlace'); return new Blob([enlaceB(c)], { type: 'text/plain' }); }) })]).then(() => listo.then((c) => { if (c) { c.copiado = true; if (ACTUAL === c.id) muestraEnlace(c); } })).catch(() => {}); } catch (_) {}
+      creaInvitacionB().then((c) => dale(c || null)).catch(() => dale(null));
+    });
+    $('#vaciar').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (!c) return; $('#vaciar-nota').hidden = false; abreHoja('h-vaciar'); });
+    $('#vaciar-no').addEventListener('click', () => cierraHoja('h-vaciar'));
+    $('#vaciar-si').addEventListener('click', async () => { cierraHoja('h-vaciar'); await vacia(CONVS.get(ACTUAL)); });
+    $('#enlace-otra-vez').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c) { c.compartido = false; muestraEnlace(c); } });
+    $('#enlace-cancelar-2').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await destruye(c, true); });
+    $('#enlace-copiar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.clipboard.writeText(enlaceB(c)); c.copiado = true; c.compartido = true; muestraEnlace(c); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { $('#enlace-b').select(); } });
     const comparte = $('#enlace-compartir'); comparte.hidden = !navigator.share;
-    comparte.addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.share({ title: 'GUARDIANA', text: T('Invitación a una sesión blindada de GUARDIANA Comunicaciones'), url: enlaceB(c) }); } catch (_) {} });
+    comparte.addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.share({ title: 'GUARDIANA', text: T('Invitación a una sesión blindada de GUARDIANA Comunicaciones'), url: enlaceB(c) }); c.compartido = true; if (ACTUAL === c.id) muestraEnlace(c); } catch (_) {} });
     $('#enlace-cancelar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await destruye(c, true); });
     $('#bl-coincide').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await marcaVerificada(c, !c.verificada); });
     $('#cierre-si').addEventListener('click', async () => { cierraHoja('h-cierre'); const c = CONVS.get(ACTUAL); if (c) await destruye(c); });
