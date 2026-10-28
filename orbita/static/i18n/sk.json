@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "prerušené druhou osobou",
   "cortado por ti": "prerušené vami",
   "país según la zona horaria del equipo": "krajina podľa časového pásma zariadenia",
-  "según la zona horaria": "podľa časového pásma"
+  "según la zona horaria": "podľa časového pásma",
+  "Ampliar": "Zväčšiť",
+  "Apagar la cámara": "Vypnúť kameru",
+  "Difuminada": "Rozmazaný",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Zmena prebieha vo vašom zariadení, pred zašifrovaním: váš pôvodný obraz odtiaľto neodchádza. Nedajú sa rozoznať črty vašej tváre ani vaše oči; vašu siluetu, vaše gestá a to, čo je za vami, áno.",
+  "Encender la cámara": "Zapnúť kameru",
+  "Mosaico": "Mozaika",
+  "Pidiendo la cámara y el micrófono…": "Žiadosť o kameru a mikrofón…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Chýba povolenie pre kameru: hovor pokračuje len ako hlasový.",
+  "Tu imagen": "Váš obraz",
+  "Ver el chat": "Zobraziť chat",
+  "Volver a la llamada": "Späť k hovoru",
+  "imagen": "obraz",
+  "Sin filtro": "Bez filtra"
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

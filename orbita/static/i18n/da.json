@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "afbrudt af den anden person",
   "cortado por ti": "afbrudt af dig",
   "país según la zona horaria del equipo": "land ifølge enhedens tidszone",
-  "según la zona horaria": "ifølge tidszonen"
+  "según la zona horaria": "ifølge tidszonen",
+  "Ampliar": "Forstør",
+  "Apagar la cámara": "Slå kameraet fra",
+  "Difuminada": "Sløret",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Ændringen sker på din enhed, før krypteringen: dit oprindelige billede forlader ikke denne enhed. Dine ansigtstræk og dine øjne kan ikke skelnes; din silhuet, dine fagter og det, der er bag dig, kan derimod.",
+  "Encender la cámara": "Slå kameraet til",
+  "Mosaico": "Mosaik",
+  "Pidiendo la cámara y el micrófono…": "Beder om kameraet og mikrofonen…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Ingen tilladelse til kameraet: opkaldet fortsætter kun med tale.",
+  "Tu imagen": "Dit billede",
+  "Ver el chat": "Se chatten",
+  "Volver a la llamada": "Tilbage til opkaldet",
+  "imagen": "billede",
+  "Sin filtro": "Uden filter"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "অন্য ব্যক্তি মাঝপথে বন্ধ করেছেন",
   "cortado por ti": "আপনি মাঝপথে বন্ধ করেছেন",
   "país según la zona horaria del equipo": "ডিভাইসের সময় অঞ্চল অনুযায়ী দেশ",
-  "según la zona horaria": "সময় অঞ্চল অনুযায়ী"
+  "según la zona horaria": "সময় অঞ্চল অনুযায়ী",
+  "Ampliar": "বড় করুন",
+  "Apagar la cámara": "ক্যামেরা বন্ধ করুন",
+  "Difuminada": "ঝাপসা",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "পরিবর্তনটি আপনার ডিভাইসেই হয়, এনক্রিপ্ট করার আগে: আপনার আসল ছবি এখান থেকে বের হয় না। আপনার মুখের বৈশিষ্ট্য বা চোখ আলাদা করে বোঝা যায় না; তবে আপনার অবয়ব, অঙ্গভঙ্গি এবং আপনার পেছনে যা আছে, তা বোঝা যায়।",
+  "Encender la cámara": "ক্যামেরা চালু করুন",
+  "Mosaico": "মোজাইক",
+  "Pidiendo la cámara y el micrófono…": "ক্যামেরা ও মাইক্রোফোনের অনুমতি চাওয়া হচ্ছে…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "ক্যামেরার অনুমতি নেই: কলটি শুধু কণ্ঠে চলবে।",
+  "Tu imagen": "আপনার ছবি",
+  "Ver el chat": "চ্যাট দেখুন",
+  "Volver a la llamada": "কলে ফিরে যান",
+  "imagen": "ভিডিও",
+  "Sin filtro": "ফিল্টার ছাড়া"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

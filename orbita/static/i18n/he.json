@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "נקטע על ידי הצד השני",
   "cortado por ti": "נקטע על ידיכם",
   "país según la zona horaria del equipo": "מדינה לפי אזור הזמן של המכשיר",
-  "según la zona horaria": "לפי אזור הזמן"
+  "según la zona horaria": "לפי אזור הזמן",
+  "Ampliar": "הגדלה",
+  "Apagar la cámara": "כיבוי מצלמה",
+  "Difuminada": "מטושטשת",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "השינוי מתבצע במכשיר שלכם, לפני ההצפנה: התמונה המקורית שלכם לא יוצאת מכאן. לא ניתן להבחין בתווי הפנים שלכם ובעיניים שלכם; אפשר להבחין בצללית שלכם, במחוות שלכם ובמה שנמצא מאחוריכם.",
+  "Encender la cámara": "הפעלת מצלמה",
+  "Mosaico": "פסיפס",
+  "Pidiendo la cámara y el micrófono…": "מבקש גישה למצלמה ולמיקרופון…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "אין הרשאה למצלמה: השיחה ממשיכה בקול בלבד.",
+  "Tu imagen": "התמונה שלכם",
+  "Ver el chat": "צפייה בצ׳אט",
+  "Volver a la llamada": "חזרה לשיחה",
+  "imagen": "תמונה",
+  "Sin filtro": "ללא מסנן"
  },
  "p": {
   "intento": "ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

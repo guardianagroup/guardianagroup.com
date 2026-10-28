@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "von der anderen Person abgebrochen",
   "cortado por ti": "von dir abgebrochen",
   "país según la zona horaria del equipo": "Land laut Zeitzone des Geräts",
-  "según la zona horaria": "laut Zeitzone"
+  "según la zona horaria": "laut Zeitzone",
+  "Ampliar": "Vergrößern",
+  "Apagar la cámara": "Kamera ausschalten",
+  "Difuminada": "Unscharf",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Die Veränderung erfolgt auf deinem Gerät, vor der Verschlüsselung: Dein Originalbild verlässt es nicht. Deine Gesichtszüge und deine Augen sind nicht zu erkennen; deine Silhouette, deine Gesten und das, was hinter dir ist, schon.",
+  "Encender la cámara": "Kamera einschalten",
+  "Mosaico": "Mosaik",
+  "Pidiendo la cámara y el micrófono…": "Kamera und Mikrofon werden angefordert…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Keine Berechtigung für die Kamera: Der Anruf läuft nur als Sprachanruf weiter.",
+  "Tu imagen": "Dein Bild",
+  "Ver el chat": "Chat anzeigen",
+  "Volver a la llamada": "Zurück zum Anruf",
+  "imagen": "Bild",
+  "Sin filtro": "Ohne Filter"
  },
  "p": {
   "intento": "Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "interrotto dall’altra persona",
   "cortado por ti": "interrotto da te",
   "país según la zona horaria del equipo": "paese secondo il fuso orario del dispositivo",
-  "según la zona horaria": "secondo il fuso orario"
+  "según la zona horaria": "secondo il fuso orario",
+  "Ampliar": "Ingrandisci",
+  "Apagar la cámara": "Disattiva la fotocamera",
+  "Difuminada": "Sfocata",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Il cambio avviene sul tuo dispositivo, prima della crittografia: la tua immagine originale non esce da qui. Non si distinguono i tratti del tuo viso né i tuoi occhi; si distinguono invece la tua sagoma, i tuoi gesti e ciò che c’è dietro di te.",
+  "Encender la cámara": "Attiva la fotocamera",
+  "Mosaico": "Mosaico",
+  "Pidiendo la cámara y el micrófono…": "Richiesta della fotocamera e del microfono…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Nessun permesso per la fotocamera: la chiamata continua solo con la voce.",
+  "Tu imagen": "La tua immagine",
+  "Ver el chat": "Vedi la chat",
+  "Volver a la llamada": "Torna alla chiamata",
+  "imagen": "immagine",
+  "Sin filtro": "Senza filtro"
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

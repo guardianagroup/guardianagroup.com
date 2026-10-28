@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "διακόπηκε από το άλλο άτομο",
   "cortado por ti": "διακόπηκε από εσένα",
   "país según la zona horaria del equipo": "χώρα σύμφωνα με τη ζώνη ώρας της συσκευής",
-  "según la zona horaria": "σύμφωνα με τη ζώνη ώρας"
+  "según la zona horaria": "σύμφωνα με τη ζώνη ώρας",
+  "Ampliar": "Μεγέθυνση",
+  "Apagar la cámara": "Απενεργοποίηση κάμερας",
+  "Difuminada": "Θολωμένη",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Η αλλαγή γίνεται στη συσκευή σου, πριν από την κρυπτογράφηση: η αρχική σου εικόνα δεν φεύγει από εδώ. Δεν διακρίνονται τα χαρακτηριστικά του προσώπου σου ούτε τα μάτια σου· διακρίνονται όμως η σιλουέτα σου, οι χειρονομίες σου και ό,τι υπάρχει πίσω σου.",
+  "Encender la cámara": "Ενεργοποίηση κάμερας",
+  "Mosaico": "Μωσαϊκό",
+  "Pidiendo la cámara y el micrófono…": "Αίτημα για την κάμερα και το μικρόφωνο…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Δεν υπάρχει άδεια για την κάμερα: η κλήση συνεχίζεται μόνο με φωνή.",
+  "Tu imagen": "Η εικόνα σου",
+  "Ver el chat": "Προβολή συνομιλίας",
+  "Volver a la llamada": "Πίσω στην κλήση",
+  "imagen": "εικόνα",
+  "Sin filtro": "Χωρίς φίλτρο"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

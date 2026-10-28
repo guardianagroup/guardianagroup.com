@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "மற்றவர் துண்டித்தது",
   "cortado por ti": "நீங்கள் துண்டித்தது",
   "país según la zona horaria del equipo": "சாதனத்தின் நேர மண்டலப்படி நாடு",
-  "según la zona horaria": "நேர மண்டலப்படி"
+  "según la zona horaria": "நேர மண்டலப்படி",
+  "Ampliar": "பெரிதாக்கு",
+  "Apagar la cámara": "கேமராவை முடக்கு",
+  "Difuminada": "மங்கலான படம்",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "மாற்றம் உங்கள் சாதனத்திலேயே, மறையாக்கத்துக்கு முன்பே செய்யப்படுகிறது: உங்கள் அசல் படம் இங்கிருந்து வெளியே செல்வதில்லை. உங்கள் முக அம்சங்களும் கண்களும் தெளிவாகத் தெரியாது; ஆனால் உங்கள் உருவம், சைகைகள், உங்களுக்குப் பின்னால் இருப்பவை தெரியும்.",
+  "Encender la cámara": "கேமராவை இயக்கு",
+  "Mosaico": "மொசைக் படம்",
+  "Pidiendo la cámara y el micrófono…": "கேமரா, மைக்ரோஃபோன் அனுமதி கேட்கிறது…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "கேமராவுக்கு அனுமதி இல்லை: அழைப்பு குரலுடன் மட்டும் தொடரும்.",
+  "Tu imagen": "உங்கள் படம்",
+  "Ver el chat": "அரட்டையைக் காண்க",
+  "Volver a la llamada": "அழைப்புக்குத் திரும்பு",
+  "imagen": "வீடியோ",
+  "Sin filtro": "வடிகட்டி இல்லை"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

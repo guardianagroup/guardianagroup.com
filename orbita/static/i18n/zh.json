@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "被对方中断",
   "cortado por ti": "被你中断",
   "país según la zona horaria del equipo": "根据设备时区估计的国家",
-  "según la zona horaria": "根据时区估计"
+  "según la zona horaria": "根据时区估计",
+  "Ampliar": "放大",
+  "Apagar la cámara": "关闭摄像头",
+  "Difuminada": "模糊",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "画面处理在加密之前于你的设备上进行：你的原始画面不会离开这里。无法分辨你的面部特征和眼睛；但可以分辨你的轮廓、手势以及你身后的东西。",
+  "Encender la cámara": "开启摄像头",
+  "Mosaico": "马赛克",
+  "Pidiendo la cámara y el micrófono…": "正在请求摄像头和麦克风…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "没有摄像头权限：通话将仅以语音继续。",
+  "Tu imagen": "你的画面",
+  "Ver el chat": "查看聊天",
+  "Volver a la llamada": "返回通话",
+  "imagen": "画面",
+  "Sin filtro": "无滤镜"
  },
  "p": {
   "intento": "今天尝试最多的：{1}，{2} {2?次|次}。",

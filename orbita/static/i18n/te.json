@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "అవతలి వ్యక్తి తెంచారు",
   "cortado por ti": "మీరు తెంచారు",
   "país según la zona horaria del equipo": "పరికరం సమయ మండలం ప్రకారం దేశం",
-  "según la zona horaria": "సమయ మండలం ప్రకారం"
+  "según la zona horaria": "సమయ మండలం ప్రకారం",
+  "Ampliar": "పెద్దది చేయి",
+  "Apagar la cámara": "కెమెరా ఆఫ్ చేయి",
+  "Difuminada": "మసకబారిన చిత్రం",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "మార్పు మీ పరికరంలోనే, ఎన్‌క్రిప్ట్ చేయడానికి ముందే జరుగుతుంది: మీ అసలు చిత్రం ఇక్కడి నుండి బయటకు వెళ్లదు. మీ ముఖ లక్షణాలు, మీ కళ్లు స్పష్టంగా కనిపించవు; కానీ మీ ఆకారం, మీ హావభావాలు, మీ వెనుక ఉన్నవి కనిపిస్తాయి.",
+  "Encender la cámara": "కెమెరా ఆన్ చేయి",
+  "Mosaico": "మొజాయిక్ చిత్రం",
+  "Pidiendo la cámara y el micrófono…": "కెమెరా, మైక్రోఫోన్ అనుమతి అడుగుతోంది…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "కెమెరాకు అనుమతి లేదు: కాల్ స్వరంతో మాత్రమే కొనసాగుతుంది.",
+  "Tu imagen": "మీ చిత్రం",
+  "Ver el chat": "చాట్ చూడండి",
+  "Volver a la llamada": "కాల్‌కు తిరిగి వెళ్లు",
+  "imagen": "వీడియో",
+  "Sin filtro": "ఫిల్టర్ లేదు"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

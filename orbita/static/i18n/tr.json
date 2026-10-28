@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "karşı tarafça kesildi",
   "cortado por ti": "sizin tarafınızdan kesildi",
   "país según la zona horaria del equipo": "cihazın saat dilimine göre ülke",
-  "según la zona horaria": "saat dilimine göre"
+  "según la zona horaria": "saat dilimine göre",
+  "Ampliar": "Büyüt",
+  "Apagar la cámara": "Kamerayı kapat",
+  "Difuminada": "Bulanık",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Değişiklik cihazınızda, şifrelemeden önce yapılır: orijinal görüntünüz buradan çıkmaz. Yüz hatlarınız ve gözleriniz ayırt edilemez; siluetiniz, jestleriniz ve arkanızda olanlar ise ayırt edilebilir.",
+  "Encender la cámara": "Kamerayı aç",
+  "Mosaico": "Mozaik",
+  "Pidiendo la cámara y el micrófono…": "Kamera ve mikrofon isteniyor…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Kamera izni yok: arama yalnızca sesle devam ediyor.",
+  "Tu imagen": "Görüntünüz",
+  "Ver el chat": "Sohbeti görüntüle",
+  "Volver a la llamada": "Aramaya dön",
+  "imagen": "görüntü",
+  "Sin filtro": "Filtresiz"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

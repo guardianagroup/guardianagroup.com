@@ -2822,7 +2822,20 @@
   "cortado por la otra persona": "a másik fél megszakította",
   "cortado por ti": "te szakítottad meg",
   "país según la zona horaria del equipo": "ország az eszköz időzónája szerint",
-  "según la zona horaria": "az időzóna szerint"
+  "según la zona horaria": "az időzóna szerint",
+  "Ampliar": "Nagyítás",
+  "Apagar la cámara": "Kamera kikapcsolása",
+  "Difuminada": "Elmosott",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "A módosítás a te eszközödön történik, titkosítás előtt: az eredeti képed nem kerül ki innen. Az arcvonásaid és a szemed nem vehetők ki; a sziluetted, a gesztusaid és az, ami mögötted van, viszont igen.",
+  "Encender la cámara": "Kamera bekapcsolása",
+  "Mosaico": "Mozaik",
+  "Pidiendo la cámara y el micrófono…": "Kamera és mikrofon kérése…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Nincs engedély a kamerához: a hívás csak hanggal folytatódik.",
+  "Tu imagen": "A képed",
+  "Ver el chat": "Csevegés megtekintése",
+  "Volver a la llamada": "Vissza a híváshoz",
+  "imagen": "kép",
+  "Sin filtro": "Szűrő nélkül"
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

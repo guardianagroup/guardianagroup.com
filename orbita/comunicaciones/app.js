@@ -530,7 +530,7 @@
       case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); const vc = VIAJES.get(j.id); if (vc && vc.estado !== 'entregado') { vc.estado = 'fallo'; vc.tFin = Date.now(); evento(vc, j.por === 'integridad' ? T('El otro equipo ha detenido el envío: un fragmento no superó la autenticación.') : j.por === 'persona' ? T('La otra persona ha cortado el envío.') : T('El otro equipo ha cancelado el envío.'), 'mal'); } if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'persona') m.archivo.motivo = T('cortado por la otra persona'); if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); } return; }
       case 'llamada': if (LL && c.id === ACTUAL) await LL.recibe(j); return; // llamadas de voz (dueño, 27 Oct 2026, 23:05)
       // pasar al teléfono: solo un enlace de sesión blindada de esta misma página (nunca otra web)
-      case 'movil': { const e = String(j.enlace || ''); if (c.id === ACTUAL && e.length < 300 && e.startsWith(ORIGEN + '?pase=invitado#b=') && /#b=[A-Za-z0-9_-]{43}$/.test(e)) muestraMovil(e, true); return; }
+      case 'movil': { const e = String(j.enlace || ''); if (c.id === ACTUAL && e.length < 300 && e.startsWith(ORIGEN + '?pase=invitado#b=') && /#b=[A-Za-z0-9_-]{43}$/.test(e)) { const enLlamada = !!(LL && LL.ocupado); if (enLlamada) LL.colgar(); muestraMovil(e, true, enLlamada); } return; }
       case 'destruir': return destruyeLocal(c, true);
       default: return;
     }
@@ -954,9 +954,9 @@
   // esa sala: entran los teléfonos, que se presentan entre ellos y comprueban el número de seguridad como siempre.
   // «?pase=invitado» deja entrar al teléfono mientras la web está en construcción.
   const puedeMovil = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
-  function muestraMovil(enlace, deOtro) {
+  function muestraMovil(enlace, deOtro, colgada) {
     const q = $('#movil-qr'); if (q && window.qrSvg) { q.innerHTML = window.qrSvg(enlace); q.dataset.u = enlace; }
-    $('#movil-quien').textContent = deOtro ? T('La otra persona propone seguir la conversación en el teléfono.') : T('Has propuesto seguir la conversación en el teléfono: la otra persona ve este mismo código.');
+    $('#movil-quien').textContent = (deOtro ? T('La otra persona propone seguir la conversación en el teléfono.') : T('Has propuesto seguir la conversación en el teléfono: la otra persona ve este mismo código.')) + (colgada ? ' ' + T('La llamada del ordenador se ha colgado para seguirla en el teléfono.') : '');
     abreHoja('h-movil');
     if (deOtro) avisaSonido();
   }
@@ -966,7 +966,9 @@
     if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; }
     const enlace = ORIGEN + '?pase=invitado#b=' + C.b64u(C.nuevaSemilla());
     if (!enviaControl(c, { tipo: 'movil', enlace })) { aviso(T('Para pasar al teléfono, la otra persona tiene que estar conectada.')); return; }
-    muestraMovil(enlace, false);
+    // la llamada sigue en el teléfono: la del ordenador se cuelga sola, en los dos lados (dueño, 28 Oct 2026, 10:42)
+    const enLlamada = !!(LL && LL.ocupado); if (enLlamada) LL.colgar();
+    muestraMovil(enlace, false, enLlamada);
   }
 
   // ---------- destruir ----------

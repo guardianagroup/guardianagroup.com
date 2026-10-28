@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "imekatizwa na mtu mwingine",
   "cortado por ti": "imekatizwa na wewe",
   "país según la zona horaria del equipo": "nchi kwa mujibu wa saa za eneo za kifaa",
-  "según la zona horaria": "kwa mujibu wa saa za eneo"
+  "según la zona horaria": "kwa mujibu wa saa za eneo",
+  "Ampliar": "Panua",
+  "Apagar la cámara": "Zima kamera",
+  "Difuminada": "Iliyofifishwa",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "Mabadiliko hufanyika kwenye kifaa chako, kabla ya usimbaji fiche: picha yako halisi haitoki hapa. Vipengele vya uso wako na macho yako havionekani wazi; ila umbo lako, ishara zako na kilicho nyuma yako vinaonekana.",
+  "Encender la cámara": "Washa kamera",
+  "Mosaico": "Mosaiki",
+  "Pidiendo la cámara y el micrófono…": "Inaomba kamera na kipaza sauti…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "Hakuna ruhusa ya kamera: simu inaendelea kwa sauti pekee.",
+  "Tu imagen": "Picha yako",
+  "Ver el chat": "Ona gumzo",
+  "Volver a la llamada": "Rudi kwenye simu",
+  "imagen": "picha",
+  "Sin filtro": "Bila kichujio"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

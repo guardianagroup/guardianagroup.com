@@ -2820,7 +2820,20 @@
   "cortado por la otra persona": "قطع‌شده توسط طرف مقابل",
   "cortado por ti": "قطع‌شده توسط شما",
   "país según la zona horaria del equipo": "کشور بر اساس منطقهٔ زمانی دستگاه",
-  "según la zona horaria": "بر اساس منطقهٔ زمانی"
+  "según la zona horaria": "بر اساس منطقهٔ زمانی",
+  "Ampliar": "بزرگ کردن",
+  "Apagar la cámara": "خاموش کردن دوربین",
+  "Difuminada": "تار",
+  "El cambio se hace en tu equipo, antes de encriptar: tu imagen original no sale de aquí. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti.": "تغییر روی دستگاه شما و پیش از رمزگذاری انجام می‌شود: تصویر اصلی شما از اینجا خارج نمی‌شود. جزئیات چهره و چشم‌های شما تشخیص داده نمی‌شود؛ اما طرح کلی بدن، حرکات شما و آنچه پشت سرتان است تشخیص داده می‌شود.",
+  "Encender la cámara": "روشن کردن دوربین",
+  "Mosaico": "موزاییک",
+  "Pidiendo la cámara y el micrófono…": "در حال درخواست دوربین و میکروفون…",
+  "Sin permiso para la cámara: la llamada sigue solo con voz.": "اجازه دسترسی به دوربین داده نشده است: تماس فقط با صدا ادامه می‌یابد.",
+  "Tu imagen": "تصویر شما",
+  "Ver el chat": "مشاهدهٔ چت",
+  "Volver a la llamada": "بازگشت به تماس",
+  "imagen": "تصویر",
+  "Sin filtro": "بدون فیلتر"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",
