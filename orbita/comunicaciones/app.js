@@ -384,7 +384,7 @@
     const ses = { sid, hash: s.hash, envio: C.B.cadena(s.envio), recibo: C.B.cadena(s.recibo), desde: Date.now(), confirmada: false, pq: true, blindada: true };
     c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento); c.encuentros = (c.encuentros || 0) + 1;
     if (!c.pqVisto) { c.pqVisto = true; guardaConv(c); }
-    vigila(c, renovada ? T('Claves renovadas (suite CNSA 2.0): lo anterior ya no se puede leer con las claves nuevas.') : T('Claves acordadas con la otra persona: suite CNSA 2.0 (ML-KEM-1024 y ECDH P-384).'), 'info');
+    vigila(c, renovada ? T('Claves renovadas (algoritmos CNSA 2.0): lo anterior ya no se puede leer con las claves nuevas.') : T('Claves acordadas con la otra persona: algoritmos CNSA 2.0 (ML-KEM-1024 y ECDH P-384).'), 'info');
     // de las sesiones anteriores quedan las dos últimas (por los mensajes en vuelo); las demás se borran de la memoria
     for (const k of [...c.sesiones.keys()].slice(0, -3)) { const x = c.sesiones.get(k); try { x.envio.borra(); x.recibo.borra(); } catch (_) {} c.sesiones.delete(k); }
     pintaCabecera(c); pintaLista();
@@ -1035,7 +1035,7 @@
     else if (!R.abierto) txt = T('Sin conexión con el relé');
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
     else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo el cifrado…');
-    else if (esB(c)) txt = T('Suite CNSA 2.0') + ' · ' + T('postcuántica') + ' · ' + (c.verificada && c.suVerificada ? T('verificada por los dos') : T('pendiente de la verificación mutua'));
+    else if (esB(c)) txt = T('Algoritmos CNSA 2.0') + ' · ' + T('postcuántica') + ' · ' + (c.verificada && c.suVerificada ? T('verificada por los dos') : T('pendiente de la verificación mutua'));
     else txt = T('Cifrada de extremo a extremo') + ' · ' + (c.sesion.pq ? T('postcuántica') + ' · ' : T('sin protección postcuántica') + ' · ') + (c.verificada ? T('verificada') : T('sin verificar'));
     const pqa = $('#cpq');
     if (pqa) {

@@ -542,6 +542,16 @@
   "568": "Anunț blocat · retargo.example",
   "569": "Anunț blocat · subastia.example",
   "570": "Vorbește cu NÚCLEO",
-  "571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, etajul 18 · Bocagrande, Cartagena, Columbia · hola@guardianagroup.com · Această pagină nu folosește cookie-uri și nici instrumente de analiză."
+  "571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, etajul 18 · Bocagrande, Cartagena, Columbia · hola@guardianagroup.com · Această pagină nu folosește cookie-uri și nici instrumente de analiză.",
+  "572": "Chat, fișiere și apeluri criptate de pe PC pe PC.",
+  "573": "Scrie, trimite fișiere și sună pe cine inviți, fără cont și fără număr de telefon. La final, conversația se șterge la amândoi.",
+  "574": "Sesiune blindată și apeluri vocale.",
+  "575": "Comunicații · chat, fișiere și apeluri criptate",
+  "576": "Chat, fișiere și apeluri criptate de pe PC pe PC, cu criptare post-cuantică hibridă.",
+  "577": "Sesiune blindată.",
+  "578": "Pentru ce este cel mai sensibil: algoritmii suitei CNSA 2.0 (ML-KEM-1024 și ML-DSA-87, cu P-384), un link de 256 de biți și verificarea obligatorie înainte de a trimite ceva.",
+  "579": "Apeluri vocale.",
+  "580": "Criptate end-to-end și mereu prin releu: niciunul nu vede IP-ul celuilalt. Cu schimbarea opțională a vocii, care schimbă tonalitatea, nu accentul.",
+  "581": "Releul vede IP-ul, camera și volumul, nu conținutul. În sesiunea normală, semnăturile de identitate sunt clasice, iar sunetul apelurilor nu folosește stratul post-cuantic."
  }
 }

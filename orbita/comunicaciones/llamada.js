@@ -70,7 +70,8 @@
     function nuevaPc() {
       const ice = o.ice() || [];
       const tieneTurn = ice.some((s) => [].concat(s.urls).some((u) => /^turns?:/.test(u)));
-      pc = new RTCPeerConnection({ iceServers: ice, iceTransportPolicy: tieneTurn ? 'relay' : 'all', bundlePolicy: 'max-bundle', rtcpMuxPolicy: 'require' });
+      // fuera de las pruebas locales, solo por el relé: sin TURN la llamada no conecta, nunca va directa (las IP quedarían a la vista)
+      pc = new RTCPeerConnection({ iceServers: ice, iceTransportPolicy: (tieneTurn || !LOCAL) ? 'relay' : 'all', bundlePolicy: 'max-bundle', rtcpMuxPolicy: 'require' });
       const remoto = new MediaStream();
       pc.ontrack = (e) => { remoto.addTrack(e.track); $('#a-remoto').srcObject = remoto; };
       pc.onicecandidate = (e) => { if (e.candidate) o.manda({ acto: 'ice', id: idLlamada, cand: e.candidate.toJSON() }); };

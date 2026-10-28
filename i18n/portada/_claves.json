@@ -570,5 +570,15 @@
 "Anuncio cortado · retargo.example",
 "Anuncio cortado · subastia.example",
 "Habla con NÚCLEO",
-"© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, piso 18 · Bocagrande, Cartagena de Indias, Colombia · hola@guardianagroup.com · Esta página no usa cookies ni analíticas."
+"© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, piso 18 · Bocagrande, Cartagena de Indias, Colombia · hola@guardianagroup.com · Esta página no usa cookies ni analíticas.",
+"Chat, archivos y llamadas encriptados de PC a PC.",
+"Escribe, envía archivos y llama a quien invites, sin cuenta ni número de teléfono. Al terminar, la conversación se borra en los dos.",
+"Sesión blindada y llamadas de voz.",
+"Comunicaciones · chat, archivos y llamadas encriptados",
+"Chat, archivos y llamadas encriptados de PC a PC, con encriptación postcuántica híbrida.",
+"Sesión blindada.",
+"Para lo más sensible: los algoritmos de la suite CNSA 2.0 (ML-KEM-1024 y ML-DSA-87, con P-384), un enlace de 256 bits y la verificación obligatoria antes de enviar nada.",
+"Llamadas de voz.",
+"Encriptadas de extremo a extremo y siempre por el relé: ninguno ve la IP del otro. Con cambio de voz opcional, que cambia el tono, no el acento.",
+"El relé ve la IP, la sala y el volumen, no el contenido. En la sesión normal, las firmas de identidad son clásicas, y el audio de las llamadas no usa la capa postcuántica."
 ]

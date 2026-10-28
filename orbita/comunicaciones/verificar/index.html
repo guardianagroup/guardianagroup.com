@@ -78,8 +78,8 @@ body.verificar{height:auto;min-height:100dvh;overflow:visible;display:block}
   <section class="vf-como">
     <h2>Cómo se comprueba</h2>
     <ul>
-      <li><b>Las dos firmas.</b> Cada equipo firma el registro con su clave de identidad (ECDSA P-256 sobre SHA-256). Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.</li>
-      <li><b>Las identidades.</b> La huella de identidad de cada equipo es el SHA-256 de sus claves públicas, y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.</li>
+      <li><b>Las firmas.</b> Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la sesión normal; en la sesión blindada, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.</li>
+      <li><b>Las identidades.</b> La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la sesión normal; SHA-384 en la blindada), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.</li>
       <li><b>El archivo.</b> La huella SHA-256 identifica su contenido exacto. También puedes calcularla con las herramientas de tu sistema:</li>
     </ul>
     <pre translate="no">Windows (PowerShell)   Get-FileHash archivo -Algorithm SHA256
@@ -87,9 +87,10 @@ macOS                  shasum -a 256 archivo
 Linux                  sha256sum archivo</pre>
   </section>
 </main>
-<script src="/orbita/static/idioma.js?v=20261027p21"></script>
+<script src="/orbita/static/idioma.js?v=20261028p22"></script>
 <script src="../sha256.js?v=20261027a"></script>
-<script src="../viaje.js?v=20261027b"></script>
-<script src="verificar.js?v=20261027b"></script>
+<script src="../pq-cnsa.js?v=20261027a"></script>
+<script src="../viaje.js?v=20261027c"></script>
+<script src="verificar.js?v=20261027c"></script>
 </body>
 </html>

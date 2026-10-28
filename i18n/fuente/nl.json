@@ -557,6 +557,16 @@
 "568": "Advertentie geblokkeerd · retargo.example",
 "569": "Advertentie geblokkeerd · subastia.example",
 "570": "Praat met NÚCLEO",
-"571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, 18e verdieping · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Deze pagina gebruikt geen cookies en geen analytics."
+"571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, 18e verdieping · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Deze pagina gebruikt geen cookies en geen analytics.",
+"572": "Versleutelde chat, bestanden en oproepen van PC naar PC.",
+"573": "Schrijf, stuur bestanden en bel met wie je uitnodigt, zonder account of telefoonnummer. Als je klaar bent, wordt het gesprek bij allebei gewist.",
+"574": "Afgeschermde sessie en spraakoproepen.",
+"575": "Communicatie · versleutelde chat, bestanden en oproepen",
+"576": "Versleutelde chat, bestanden en oproepen van PC naar PC, met hybride post-quantumversleuteling.",
+"577": "Afgeschermde sessie.",
+"578": "Voor wat het gevoeligst is: de algoritmen van de suite CNSA 2.0 (ML-KEM-1024 en ML-DSA-87, met P-384), een link van 256 bits en verplichte verificatie voordat er iets wordt verzonden.",
+"579": "Spraakoproepen.",
+"580": "End-to-end versleuteld en altijd via de relay: geen van beiden ziet het IP-adres van de ander. Met optionele stemverandering, die de toonhoogte verandert, niet het accent.",
+"581": "De relay ziet het IP-adres, de ruimte en het volume, niet de inhoud. In de normale sessie zijn de identiteitshandtekeningen klassiek, en de audio van de oproepen gebruikt de post-quantumlaag niet."
 }
 }

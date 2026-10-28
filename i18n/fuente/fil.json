@@ -542,6 +542,16 @@
   "568": "Pinutol na ad · retargo.example",
   "569": "Pinutol na ad · subastia.example",
   "570": "Kausapin ang NÚCLEO",
-  "571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, ika-18 palapag · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Hindi gumagamit ng cookies o analytics ang page na ito."
+  "571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, ika-18 palapag · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Hindi gumagamit ng cookies o analytics ang page na ito.",
+  "572": "Naka-encrypt na chat, mga file at tawag mula PC papuntang PC.",
+  "573": "Sumulat, magpadala ng mga file at tumawag sa iniimbitahan mo, nang walang account o numero ng telepono. Pagkatapos, mabubura ang usapan sa inyong dalawa.",
+  "574": "Nakabaluting session at mga voice call.",
+  "575": "Komunikasyon · naka-encrypt na chat, mga file at tawag",
+  "576": "Naka-encrypt na chat, mga file at tawag mula PC papuntang PC, na may hybrid na post-quantum encryption.",
+  "577": "Nakabaluting session.",
+  "578": "Para sa pinakasensitibo: ang mga algorithm ng CNSA 2.0 suite (ML-KEM-1024 at ML-DSA-87, kasama ang P-384), isang 256-bit na link at sapilitang pag-verify bago magpadala ng anuman.",
+  "579": "Mga voice call.",
+  "580": "Naka-encrypt nang end-to-end at palaging dumadaan sa relay: walang nakakakita ng IP ng isa. May opsyonal na pagbabago ng boses, na nagbabago ng tono, hindi ng punto.",
+  "581": "Nakikita ng relay ang IP, ang room at ang dami ng trapiko, hindi ang nilalaman. Sa normal na session, klasiko ang mga lagda ng pagkakakilanlan, at hindi ginagamit ng audio ng mga tawag ang post-quantum na layer."
  }
 }

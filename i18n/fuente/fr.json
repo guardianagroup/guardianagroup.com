@@ -555,6 +555,16 @@
 "568": "Publicité coupée · retargo.example",
 "569": "Publicité coupée · subastia.example",
 "570": "Parle avec NÚCLEO",
-"571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, 18e étage · Bocagrande, Carthagène des Indes, Colombie · hola@guardianagroup.com · Cette page n’utilise ni cookies ni outils d’analyse."
+"571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, 18e étage · Bocagrande, Carthagène des Indes, Colombie · hola@guardianagroup.com · Cette page n’utilise ni cookies ni outils d’analyse.",
+"572": "Chat, fichiers et appels chiffrés de PC à PC.",
+"573": "Écris, envoie des fichiers et appelle les personnes que tu invites, sans compte ni numéro de téléphone. À la fin, la conversation est effacée des deux côtés.",
+"574": "Session blindée et appels vocaux.",
+"575": "Communications · chat, fichiers et appels chiffrés",
+"576": "Chat, fichiers et appels chiffrés de PC à PC, avec un chiffrement post-quantique hybride.",
+"577": "Session blindée.",
+"578": "Pour ce qu’il y a de plus sensible : les algorithmes de la suite CNSA 2.0 (ML-KEM-1024 et ML-DSA-87, avec P-384), un lien de 256 bits et la vérification obligatoire avant d’envoyer quoi que ce soit.",
+"579": "Appels vocaux.",
+"580": "Chiffrés de bout en bout et toujours via le relais : aucun des deux ne voit l’IP de l’autre. Avec un changement de voix optionnel, qui modifie la hauteur de la voix, pas l’accent.",
+"581": "Le relais voit l’IP, le salon et le volume, pas le contenu. Dans la session normale, les signatures d’identité sont classiques, et l’audio des appels n’utilise pas la couche post-quantique."
 }
 }

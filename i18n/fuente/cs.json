@@ -542,6 +542,16 @@
   "568": "Reklama odstřižena · retargo.example",
   "569": "Reklama odstřižena · subastia.example",
   "570": "Mluv s NÚCLEO",
-  "571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, 18. patro · Bocagrande, Cartagena, Kolumbie · hola@guardianagroup.com · Tato stránka nepoužívá cookies ani analytiku."
+  "571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, 18. patro · Bocagrande, Cartagena, Kolumbie · hola@guardianagroup.com · Tato stránka nepoužívá cookies ani analytiku.",
+  "572": "Šifrovaný chat, soubory a hovory z PC do PC.",
+  "573": "Piš, posílej soubory a volej tomu, koho pozveš, bez účtu a bez telefonního čísla. Po skončení se konverzace smaže u obou.",
+  "574": "Obrněná relace a hlasové hovory.",
+  "575": "Komunikace · šifrovaný chat, soubory a hovory",
+  "576": "Šifrovaný chat, soubory a hovory z PC do PC, s hybridním postkvantovým šifrováním.",
+  "577": "Obrněná relace.",
+  "578": "Pro to nejcitlivější: algoritmy sady CNSA 2.0 (ML-KEM-1024 a ML-DSA-87, s P-384), 256bitový odkaz a povinné ověření předtím, než se cokoli odešle.",
+  "579": "Hlasové hovory.",
+  "580": "Koncově šifrované a vždy přes relé: ani jeden nevidí IP adresu toho druhého. S volitelnou změnou hlasu, která mění výšku hlasu, ne přízvuk.",
+  "581": "Relé vidí IP adresu, místnost a objem, ne obsah. V běžné relaci jsou podpisy identity klasické a zvuk hovorů nepoužívá postkvantovou vrstvu."
  }
 }
