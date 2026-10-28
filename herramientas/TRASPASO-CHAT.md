@@ -1,6 +1,28 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-## Estado al 27 Oct 2026, 19:45 (Bogotá) — EMPIEZA POR AQUÍ
+## Estado al 27 Oct 2026, 20:25 (Bogotá) — EMPIEZA POR AQUÍ
+
+Lo de las 19:45 (abajo) sigue valiendo. Novedad: **la agencia de las rondas 65–69 está recogida y cruzada**, publicada en las dos ramas.
+
+- **Respuestas nuevas:** `ronda66/chatgpt.md` (CANAL VERIFICADO), `ronda68/astra.md`, `ronda69/chatgpt.md`, `ronda69/gemini.md` y `ronda69/astra.md`.
+- **Notas de cruce** (`notas.md` en las rondas 65, 66, 67, 68 y 69): lo que coincide, lo que discrepa y la propuesta de Claude.
+  - **65:** primero, auditoría externa de lo que ya existe, recuperación, protección del código servido y firmas ML-DSA con biblioteca auditada; el aviso de filtraciones (HIBP, solo correos) cuando el dueño contrate.
+  - **66:** CANAL VERIFICADO dentro de Comunicaciones; cambio de cuenta con dos aprobaciones, espera y avisos; rótulo honrado «Titularidad bancaria no verificada independientemente»; botón «Creo que me han estafado».
+  - **67:** hecho lo esencial; queda ZERO v2.
+  - **68:** identidad y entrega comprobable primero, después el viaje en directo con etiquetas, la elección de relés y, al final, la multirruta; «comprobante de custodia digital».
+  - **69:** capa «AMENAZAS» en Órbita solo con fuentes de licencia comprobada (Phishing.Database, Spamhaus DROP, gráficos de Cloudflare Radar, contexto de HIBP) y la capa agregada de ZERO; DShield, PhishTank, abuse.ch y los datos de Radar, con permiso por escrito.
+- **Decisiones del dueño pendientes:**
+  - nombre y precio del plan profesional;
+  - si CANAL VERIFICADO va en el Plan Profesional o en un plan Empresa aparte;
+  - nombre de «ZERO entra antes que tú»;
+  - aprobar la capa «AMENAZAS»;
+  - las de las rondas 60–62.
+- **Pendiente técnico:**
+  - registro profesional en la página de bloqueo del motor y en los textos del «en directo»;
+  - ZERO v2: redirecciones, formularios con contraseña o tarjeta, ClickFix, grabadores de sesión y listas con licencia;
+  - el motor de América no responde.
+
+## Estado al 27 Oct 2026, 19:45 (Bogotá)
 
 Lo de las 18:40 (abajo) sigue valiendo salvo lo que cambia aquí. Publicado en las dos ramas (main `b4ad518f`).
 
@@ -20,7 +42,7 @@ Lo de las 18:40 (abajo) sigue valiendo salvo lo que cambia aquí. Publicado en l
 
 ## Estado al 27 Oct 2026, 18:40 (Bogotá)
 
-Lo de las 17:05 (abajo) sigue valiendo salvo lo que cambia aquí. **Ojo: «Entrar bajo mi responsabilidad» ya no existe (ver 19:45).**
+Lo de las 17:05 (abajo) sigue valiendo salvo lo que cambia aquí. **Atención: «Entrar bajo mi responsabilidad» ya no existe (ver 19:45).**
 
 **ZERO entra antes que tú** (dueño, 17:25–18:07). Va incorporado: siempre activo, para todos, sin interruptor y lo más rápido posible.
 
