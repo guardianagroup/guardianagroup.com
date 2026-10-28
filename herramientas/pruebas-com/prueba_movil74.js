@@ -47,7 +47,7 @@ const ok = (nombre, cond, extra) => { res.push((cond ? 'OK   ' : 'FALLA') + ' ' 
     // menú
     await C.tap('#cmas'); await espera(300);
     const menu = await C.evaluate(() => [...document.querySelectorAll('#cmenu button')].filter((x) => !x.hidden).map((x) => x.textContent.trim()));
-    ok(etq + ': menú con nombre, seguridad, modo discreto y terminar', JSON.stringify(menu) === JSON.stringify(['Cambiar el nombre', 'Seguridad y verificación', 'Modo discreto', 'Terminar conversación']), JSON.stringify(menu));
+    ok(etq + ': menú con nombre, seguridad, modo discreto y terminar', JSON.stringify(menu) === JSON.stringify(['Cambiar el nombre', 'Seguridad y verificación', 'Modo discreto', 'Pantalla completa', 'Terminar conversación']), JSON.stringify(menu));
     await C.screenshot({ path: S + etq + '-2-menu.png' });
     await C.tap('#cm-discreto'); await espera(300);
     ok(etq + ': modo discreto desde el menú', await C.evaluate(() => document.querySelector('#discreto').getAttribute('aria-pressed') === 'true' && document.querySelector('#cm-discreto').getAttribute('aria-checked') === 'true'));
