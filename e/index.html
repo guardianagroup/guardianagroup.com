@@ -101,6 +101,7 @@ ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
   const t = (k, v) => { let s = TX[idioma][k] || TX.es[k] || k; if (v) for (const [a, b] of Object.entries(v)) s = s.split('{' + a + '}').join(String(b)); return s; };
   for (const [id, k] of [['titulo', 'titulo'], ['frase', 'frase'], ['conectando', 'conectando'], ['pide-codigo', 'pide_codigo'], ['codigo-ok', 'ok'], ['descargar', 'descargar'], ['v-a', 'v_a'], ['v-r', 'v_r'], ['v-b', 'v_b'], ['recibo-titulo', 'recibo_t'], ['recibo-texto', 'recibo_x'], ['recibo-bajar', 'recibo_b'], ['limite', 'limite']]) $(id).textContent = t(k);
   const muestra = (id) => { for (const p of ['p-conectando', 'p-codigo', 'p-archivos', 'p-fin']) $(p).hidden = p !== id; };
+  let ws = null, terminado = false; // declared before fin(), which can run before the channel exists (a link without its key)
   const fin = (motivo) => { muestra('p-fin'); $('fin').textContent = t('fin_' + motivo) === 'fin_' + motivo ? t('fin_otro') : t('fin_' + motivo); terminado = true; try { ws && ws.close(); } catch (_) {} };
 
   // The shield, from what this page saw happen.
@@ -125,7 +126,7 @@ ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
     const una = (info) => crypto.subtle.deriveKey({ name: 'HKDF', hash: 'SHA-256', salt: une(delEquipo, delMovil), info: enc(info) }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
     return [await una('guardiana-movil-1 m>e'), await una('guardiana-movil-1 e>m')];
   };
-  let ws = null, kme = null, kem = null, nSale = 1, nEntra = 0, terminado = false, colaEntra = Promise.resolve(), colaSale = Promise.resolve();
+  let kme = null, kem = null, nSale = 1, nEntra = 0, colaEntra = Promise.resolve(), colaSale = Promise.resolve();
   const manda = (v) => { colaSale = colaSale.then(async () => { if (!ws || ws.readyState !== 1) return; const s = await sella(kme, nSale++, new Uint8Array(0), une(Uint8Array.of(0), enc(JSON.stringify(v)))); ws.send(s); }).catch(() => {}); };
 
   // Files: what the sender's computer said, after the code.
