@@ -1433,6 +1433,8 @@
     "Entregado": ["Delivered", "Entregue"],
     "Enviado": ["Sent", "Enviado"],
     "Enviar": ["Send", "Enviar"],
+    "Pantalla completa": ["Full screen", "Tela cheia"],
+    "En el iPhone, el navegador no deja que una web esconda sus barras. Para verlo todo a pantalla completa: toca «Compartir» y luego «Añadir a pantalla de inicio». Se abre como una app, sin barras y sin instalar nada de una tienda.": ["On iPhone, the browser doesn't let a website hide its bars. To see everything full screen: tap «Share» and then «Add to Home Screen». It opens like an app, without bars and without installing anything from a store.", "No iPhone, o navegador não deixa um site esconder as barras. Para ver tudo em tela cheia: toque em «Compartilhar» e depois em «Adicionar à Tela de Início». Abre como um app, sem barras e sem instalar nada de uma loja."],
     "¿Empezar una conversación nueva?": ["Start a new conversation?", "Começar uma conversa nova?"],
     "La conversación actual se borra en los dos equipos.": ["The current conversation is deleted on both devices.", "A conversa atual é apagada nos dois aparelhos."],
     "Empezar": ["Start", "Começar"],
