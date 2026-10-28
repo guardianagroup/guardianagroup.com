@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Cảnh báo: biểu mẫu này sẽ gửi những gì bạn nhập mà không mã hóa.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Trang web này không chấp nhận trình duyệt kết nối từ máy chủ (bảo vệ chống bot). Không thể mở trang từ bong bóng, nhưng có thể mở từ trình duyệt bạn thường dùng.",
   "Formulario sin encriptar": "Biểu mẫu không mã hóa",
-  "Conexión detectada (permitida)": "Kết nối được phát hiện (đã cho phép)"
+  "Conexión detectada (permitida)": "Kết nối được phát hiện (đã cho phép)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Dành cho cá nhân và người hành nghề chuyên môn: trò chuyện và gửi dữ liệu, tài liệu nhạy cảm được mã hóa từ PC đến PC. Khi kết thúc, cuộc trò chuyện sẽ bị xóa trên cả hai thiết bị.",
+  "Particulares": "Cá nhân",
+  "Profesionales con clientes": "Chuyên gia và khách hàng của họ",
+  "Documentación sensible": "Tài liệu nhạy cảm",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Dành cho cá nhân và người hành nghề chuyên môn: dữ liệu và tài liệu nhạy cảm, mã hóa từ PC đến PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Liên lạc là tính năng trò chuyện và gửi tệp của GUARDIANA, được mã hóa từ thiết bị này sang thiết bị kia bằng một mã 9 chữ số. Tính năng được thiết kế cho cá nhân và cho người hành nghề chuyên môn gửi dữ liệu, tài liệu nhạy cảm cho khách hàng. Máy chủ không thể đọc tin nhắn hay tệp của bạn, và tôi cũng vậy."
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

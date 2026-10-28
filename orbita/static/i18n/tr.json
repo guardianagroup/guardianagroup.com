@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Dikkat: bu form yazdıklarını şifrelemeden gönderir.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Bu site bir sunucudan bağlanan tarayıcıları kabul etmiyor (bot koruması). Balondan açılamaz, ancak her zamanki tarayıcından açılabilir.",
   "Formulario sin encriptar": "Şifrelenmemiş form",
-  "Conexión detectada (permitida)": "Algılanan bağlantı (izin verildi)"
+  "Conexión detectada (permitida)": "Algılanan bağlantı (izin verildi)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Bireyler ve profesyoneller için: sohbet et, hassas verileri ve belgeleri PC'den PC'ye şifreli gönder. Bitirdiğinizde konuşma iki cihazda da silinir.",
+  "Particulares": "Bireyler",
+  "Profesionales con clientes": "Müşterileri olan profesyoneller",
+  "Documentación sensible": "Hassas belgeler",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Bireyler ve profesyoneller için: hassas veriler ve belgeler, PC'den PC'ye şifreli.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "İletişim, GUARDIANA'nın sohbet ve dosya gönderme hizmetidir; 9 haneli bir kodla bir cihazdan diğerine şifrelidir. Bireyler ve müşterilerine hassas veri ve belge gönderen profesyoneller için tasarlanmıştır. Sunucu mesajlarını ve dosyalarını okuyamaz, ben de okuyamam."
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

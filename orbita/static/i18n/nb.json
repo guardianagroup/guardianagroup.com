@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Advarsel: dette skjemaet ville sendt det du skriver, ukryptert.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Dette nettstedet godtar ikke nettlesere som kobler til fra en server (beskyttelse mot roboter). Det kan ikke åpnes fra boblen, men det kan fra den vanlige nettleseren din.",
   "Formulario sin encriptar": "Ukryptert skjema",
-  "Conexión detectada (permitida)": "Oppdaget forbindelse (tillatt)"
+  "Conexión detectada (permitida)": "Oppdaget forbindelse (tillatt)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "For privatpersoner og fagfolk: chat og send sensitive data og dokumenter, kryptert fra PC til PC. Når dere er ferdige, slettes samtalen på begge enhetene.",
+  "Particulares": "Privatpersoner",
+  "Profesionales con clientes": "Fagfolk med kunder",
+  "Documentación sensible": "Sensitive dokumenter",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "For privatpersoner og fagfolk: sensitive data og dokumenter, kryptert fra PC til PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Kommunikasjon er GUARDIANAs chat og filoverføring, kryptert fra den ene enheten til den andre med en 9-sifret kode. Den er laget for privatpersoner og for fagfolk som sender sensitive data og dokumenter til kundene sine. Serveren kan ikke lese meldingene eller filene dine, og ikke jeg heller."
  },
  "p": {
   "intento": "Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

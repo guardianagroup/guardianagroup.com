@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "주의: 이 양식은 입력한 내용을 암호화하지 않고 보냅니다.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "이 사이트는 서버에서 연결하는 브라우저를 허용하지 않습니다(봇 차단 보호). 버블에서는 열 수 없지만 평소 사용하는 브라우저에서는 열 수 있습니다.",
   "Formulario sin encriptar": "암호화되지 않은 양식",
-  "Conexión detectada (permitida)": "감지된 연결(허용됨)"
+  "Conexión detectada (permitida)": "감지된 연결(허용됨)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "개인과 전문가를 위해: PC에서 PC로 암호화된 채팅을 하고 민감한 데이터와 문서를 보내세요. 대화를 마치면 두 기기 모두에서 삭제돼요.",
+  "Particulares": "개인",
+  "Profesionales con clientes": "고객이 있는 전문가",
+  "Documentación sensible": "민감한 문서",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "개인과 전문가를 위해: 민감한 데이터와 문서를 PC에서 PC로 암호화해서.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "커뮤니케이션은 GUARDIANA의 채팅 및 파일 전송 기능으로, 9자리 코드로 기기에서 기기까지 암호화돼요. 개인과, 고객에게 민감한 데이터와 문서를 보내는 전문가를 위해 만들어졌어요. 서버는 메시지나 파일을 읽을 수 없고, 저도 읽을 수 없어요."
  },
  "p": {
   "intento": "오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

@@ -6,12 +6,12 @@
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src blob:; connect-src 'self' https://motor.guardianagroup.com wss://motor.guardianagroup.com https://motor-am.guardianagroup.com wss://motor-am.guardianagroup.com http://127.0.0.1:* ws://127.0.0.1:* http://localhost:* ws://localhost:*; worker-src 'none'; form-action 'none'; base-uri 'none'">
 <meta name="theme-color" content="#06080C">
-<meta name="description" content="GUARDIANA Comunicaciones: chat y archivos cifrados de extremo a extremo entre dos navegadores, con un código de 9 cifras. Los servidores no guardan mensajes ni archivos.">
+<meta name="description" content="GUARDIANA Comunicaciones, para particulares y profesionales con clientes: chat y envío de datos y documentación sensible, encriptados de extremo a extremo entre dos navegadores con un código de 9 cifras. Los servidores no guardan mensajes ni archivos.">
 <title>GUARDIANA · Comunicaciones</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261026a">
-<link rel="stylesheet" href="app.css?v=20261027j">
+<link rel="stylesheet" href="app.css?v=20261027k">
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -30,7 +30,13 @@
     <canvas class="red-nucleo" aria-hidden="true"></canvas><!-- dueño, 10:20: la red de NÚCLEO en vez del círculo -->
     <p class="pq-k">Encriptación postcuántica híbrida</p><!-- ronda 55 -->
     <h1>Chat y archivos encriptados</h1>
-    <p class="t">Chatea y envía archivos encriptados de PC a PC. Al terminar, la conversación se borra en los dos.</p>
+    <p class="t">Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.</p>
+    <!-- dueño, 27 Oct 2026, 21:01: dejar claro, a la vista, para quién es: particulares, profesionales con clientes y documentación sensible -->
+    <ul class="para">
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6"/></svg><span>Particulares</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="7.5" width="17" height="12" rx="2.2"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5"/><path d="M3.5 12.5h17"/></svg><span>Profesionales con clientes</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><rect x="9" y="13" width="6" height="5" rx="1"/><path d="M10.5 13v-1.2a1.5 1.5 0 0 1 3 0V13"/></svg><span>Documentación sensible</span></li>
+    </ul>
 
     <div class="grandes" id="paso-inicio">
       <button type="button" class="grande principal" id="nueva"><b>Crear invitación</b><small>Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
@@ -218,7 +224,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261027p18"></script>
+<script src="/orbita/static/idioma.js?v=20261027p19"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="cripto.js?v=20261027a"></script>
 <script src="/orbita/static/red-nucleo.js?v=20261027b"></script>

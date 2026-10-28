@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Perhatian: borang ini akan menghantar apa yang anda taip tanpa penyulitan.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Laman ini tidak menerima pelayar yang bersambung dari pelayan (perlindungan antibot). Ia tidak boleh dibuka dari gelembung, tetapi boleh dari pelayar biasa anda.",
   "Formulario sin encriptar": "Borang tanpa penyulitan",
-  "Conexión detectada (permitida)": "Sambungan dikesan (dibenarkan)"
+  "Conexión detectada (permitida)": "Sambungan dikesan (dibenarkan)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Untuk individu dan profesional: bersembang dan hantar data serta dokumen sensitif, disulitkan dari PC ke PC. Apabila selesai, perbualan dipadam pada kedua-dua peranti.",
+  "Particulares": "Individu",
+  "Profesionales con clientes": "Profesional dan pelanggan mereka",
+  "Documentación sensible": "Dokumen sensitif",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Untuk individu dan profesional: data dan dokumen sensitif, disulitkan dari PC ke PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Komunikasi ialah sembang dan penghantaran fail GUARDIANA, disulitkan dari satu peranti ke peranti yang lain dengan kod 9 digit. Ia direka untuk individu dan untuk profesional yang menghantar data serta dokumen sensitif kepada pelanggan mereka. Pelayan tidak dapat membaca mesej atau fail anda, saya pun tidak."
  },
  "p": {
   "intento": "Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

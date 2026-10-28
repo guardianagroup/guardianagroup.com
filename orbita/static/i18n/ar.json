@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "تنبيه: سيرسل هذا النموذج ما تكتبه دون تشفير.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "لا يقبل هذا الموقع المتصفحات التي تتصل من خادم (حماية من الروبوتات). لا يمكن فتحه من الفقاعة، لكن يمكن فتحه من متصفحك المعتاد.",
   "Formulario sin encriptar": "نموذج غير مشفّر",
-  "Conexión detectada (permitida)": "اتصال مُكتشَف (مسموح به)"
+  "Conexión detectada (permitida)": "اتصال مُكتشَف (مسموح به)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "للأفراد والمهنيين: دردش وأرسل بيانات ووثائق حساسة، مشفّرة من PC إلى PC. عند الانتهاء، تُحذف المحادثة من الجهازين.",
+  "Particulares": "الأفراد",
+  "Profesionales con clientes": "المهنيون وعملاؤهم",
+  "Documentación sensible": "وثائق حساسة",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "للأفراد والمهنيين: بيانات ووثائق حساسة، مشفّرة من PC إلى PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "الاتصالات هي دردشة GUARDIANA وإرسال الملفات فيها، مشفّرة من جهاز إلى آخر برمز من 9 أرقام. صُممت للأفراد وللمهنيين الذين يرسلون إلى عملائهم بيانات ووثائق حساسة. لا يستطيع الخادم قراءة رسائلك ولا ملفاتك، ولا أنا."
  },
  "p": {
   "intento": "الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

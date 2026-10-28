@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Attention : ce formulaire enverrait ce que tu écris sans chiffrement.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Ce site n'accepte pas les navigateurs qui se connectent depuis un serveur (protection anti-robots). Il ne peut pas être ouvert depuis la bulle, mais il peut l'être depuis ton navigateur habituel.",
   "Formulario sin encriptar": "Formulaire non chiffré",
-  "Conexión detectada (permitida)": "Connexion détectée (autorisée)"
+  "Conexión detectada (permitida)": "Connexion détectée (autorisée)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Pour les particuliers et les professionnels : discute et envoie des données et des documents sensibles, chiffrés de PC à PC. À la fin, la conversation est effacée sur les deux appareils.",
+  "Particulares": "Particuliers",
+  "Profesionales con clientes": "Professionnels et leurs clients",
+  "Documentación sensible": "Documents sensibles",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Pour les particuliers et les professionnels : données et documents sensibles, chiffrés de PC à PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Communications est le chat et l’envoi de fichiers de GUARDIANA, chiffrés d’un appareil à l’autre avec un code à 9 chiffres. Il est conçu pour les particuliers et pour les professionnels qui envoient à leurs clients des données et des documents sensibles. Le serveur ne peut lire ni tes messages ni tes fichiers, et moi non plus."
  },
  "p": {
   "intento": "Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

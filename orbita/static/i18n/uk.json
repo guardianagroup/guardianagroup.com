@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Увага: ця форма надіслала б введені вами дані без шифрування.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Цей сайт не приймає браузери, що підключаються із сервера (захист від ботів). Відкрити його з бульбашки не можна, але можна з вашого звичайного браузера.",
   "Formulario sin encriptar": "Незашифрована форма",
-  "Conexión detectada (permitida)": "Виявлене з'єднання (дозволене)"
+  "Conexión detectada (permitida)": "Виявлене з'єднання (дозволене)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Для приватних осіб і професіоналів: спілкуйтеся в чаті й надсилайте конфіденційні дані та документи в зашифрованому вигляді з PC на PC. Після завершення розмова видаляється на обох пристроях.",
+  "Particulares": "Приватні особи",
+  "Profesionales con clientes": "Професіонали та їхні клієнти",
+  "Documentación sensible": "Конфіденційні документи",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Для приватних осіб і професіоналів: конфіденційні дані та документи, зашифровані з PC на PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Комунікації — це чат і надсилання файлів GUARDIANA, зашифровані від одного пристрою до іншого, з 9-значним кодом. Сервіс створено для приватних осіб і для професіоналів, які надсилають своїм клієнтам конфіденційні дані та документи. Сервер не може читати ваші повідомлення й файли, і я теж."
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

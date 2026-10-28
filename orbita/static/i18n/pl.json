@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Uwaga: ten formularz wysłałby to, co wpiszesz, bez szyfrowania.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Ta witryna nie akceptuje przeglądarek, które łączą się z serwera (ochrona przed botami). Nie można jej otworzyć z bańki, ale można ze zwykłej przeglądarki.",
   "Formulario sin encriptar": "Formularz nieszyfrowany",
-  "Conexión detectada (permitida)": "Wykryte połączenie (dozwolone)"
+  "Conexión detectada (permitida)": "Wykryte połączenie (dozwolone)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Dla osób prywatnych i profesjonalistów: czatuj i wysyłaj poufne dane i dokumenty, szyfrowane z PC na PC. Po zakończeniu rozmowa zostaje usunięta na obu urządzeniach.",
+  "Particulares": "Osoby prywatne",
+  "Profesionales con clientes": "Profesjonaliści i ich klienci",
+  "Documentación sensible": "Poufne dokumenty",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Dla osób prywatnych i profesjonalistów: poufne dane i dokumenty, szyfrowane z PC na PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Komunikacja to czat i wysyłanie plików GUARDIANA, szyfrowane od jednego urządzenia do drugiego, z 9-cyfrowym kodem. Jest przeznaczona dla osób prywatnych i dla profesjonalistów, którzy wysyłają swoim klientom poufne dane i dokumenty. Serwer nie może czytać twoich wiadomości ani plików, ja też nie."
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

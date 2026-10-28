@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Upozornenie: tento formulár by odoslal to, čo napíšeš, nešifrovane.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Tento web neprijíma prehliadače, ktoré sa pripájajú zo servera (ochrana proti robotom). Z bubliny ho otvoriť nemožno, z tvojho bežného prehliadača áno.",
   "Formulario sin encriptar": "Nešifrovaný formulár",
-  "Conexión detectada (permitida)": "Zistené pripojenie (povolené)"
+  "Conexión detectada (permitida)": "Zistené pripojenie (povolené)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Pre jednotlivcov aj profesionálov: chatuj a posielaj citlivé údaje a dokumenty, šifrované z PC do PC. Po skončení sa konverzácia vymaže na oboch zariadeniach.",
+  "Particulares": "Jednotlivci",
+  "Profesionales con clientes": "Profesionáli a ich klienti",
+  "Documentación sensible": "Citlivé dokumenty",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Pre jednotlivcov aj profesionálov: citlivé údaje a dokumenty, šifrované z PC do PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Komunikácia je chat a posielanie súborov GUARDIANA, šifrované z jedného zariadenia do druhého s 9-miestnym kódom. Je určená jednotlivcom aj profesionálom, ktorí svojim klientom posielajú citlivé údaje a dokumenty. Server nemôže čítať tvoje správy ani tvoje súbory, a ja tiež nie."
  },
  "p": {
   "intento": "Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Tahadhari: fomu hii ingetuma unachoandika bila usimbaji fiche.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Tovuti hii haikubali vivinjari vinavyounganishwa kutoka kwenye seva (ulinzi dhidi ya roboti). Haiwezi kufunguliwa kutoka kwenye kiputo, lakini inaweza kutoka kwenye kivinjari chako cha kawaida.",
   "Formulario sin encriptar": "Fomu bila usimbaji",
-  "Conexión detectada (permitida)": "Muunganisho uliogunduliwa (umeruhusiwa)"
+  "Conexión detectada (permitida)": "Muunganisho uliogunduliwa (umeruhusiwa)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Kwa watu binafsi na wataalamu: piga gumzo na utume data na nyaraka nyeti, zilizosimbwa kwa njia fiche kutoka PC hadi PC. Mkimaliza, mazungumzo yanafutwa kwenye vifaa vyote viwili.",
+  "Particulares": "Watu binafsi",
+  "Profesionales con clientes": "Wataalamu na wateja wao",
+  "Documentación sensible": "Nyaraka nyeti",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Kwa watu binafsi na wataalamu: data na nyaraka nyeti, zilizosimbwa kwa njia fiche kutoka PC hadi PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Mawasiliano ni gumzo na utumaji wa faili wa GUARDIANA, uliosimbwa kwa njia fiche kutoka kifaa kimoja hadi kingine kwa msimbo wa tarakimu 9. Yameundwa kwa ajili ya watu binafsi na wataalamu wanaotuma data na nyaraka nyeti kwa wateja wao. Seva haiwezi kusoma ujumbe wala faili zako, wala mimi."
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Athugið: þetta eyðublað myndi senda það sem þú skrifar ódulkóðað.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Þessi vefsíða tekur ekki við vöfrum sem tengjast frá netþjóni (vörn gegn vélmennum). Ekki er hægt að opna hana úr kúlunni, en það er hægt úr venjulega vafranum þínum.",
   "Formulario sin encriptar": "Ódulkóðað eyðublað",
-  "Conexión detectada (permitida)": "Greind tenging (leyfð)"
+  "Conexión detectada (permitida)": "Greind tenging (leyfð)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Fyrir einstaklinga og fagfólk: spjallaðu og sendu viðkvæm gögn og skjöl, dulkóðuð frá PC til PC. Þegar þið ljúkið er samtalinu eytt á báðum tækjum.",
+  "Particulares": "Einstaklingar",
+  "Profesionales con clientes": "Fagfólk og viðskiptavinir þess",
+  "Documentación sensible": "Viðkvæm skjöl",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Fyrir einstaklinga og fagfólk: viðkvæm gögn og skjöl, dulkóðuð frá PC til PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Samskipti eru spjall og skráasending GUARDIANA, dulkóðuð frá einu tæki til annars með 9 stafa kóða. Þau eru ætluð einstaklingum og fagfólki sem sendir viðskiptavinum sínum viðkvæm gögn og skjöl. Þjónninn getur ekki lesið skilaboðin þín né skrárnar þínar, og ekki ég heldur."
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

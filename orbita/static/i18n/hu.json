@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Figyelem: ez az űrlap titkosítás nélkül küldené el, amit beírsz.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Ez a webhely nem fogad el szerverről csatlakozó böngészőket (botok elleni védelem). A buborékból nem nyitható meg, a megszokott böngésződből viszont igen.",
   "Formulario sin encriptar": "Titkosítatlan űrlap",
-  "Conexión detectada (permitida)": "Észlelt kapcsolat (engedélyezett)"
+  "Conexión detectada (permitida)": "Észlelt kapcsolat (engedélyezett)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Magánszemélyeknek és szakembereknek: csevegj, és küldj érzékeny adatokat és dokumentumokat titkosítva PC-ről PC-re. A végén a beszélgetés mindkét eszközön törlődik.",
+  "Particulares": "Magánszemélyek",
+  "Profesionales con clientes": "Szakemberek és ügyfeleik",
+  "Documentación sensible": "Érzékeny dokumentumok",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Magánszemélyeknek és szakembereknek: érzékeny adatok és dokumentumok, titkosítva PC-ről PC-re.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "A Kommunikáció a GUARDIANA csevegője és fájlküldője, egyik eszköztől a másikig titkosítva, egy 9 számjegyű kóddal. Magánszemélyeknek és olyan szakembereknek készült, akik érzékeny adatokat és dokumentumokat küldenek ügyfeleiknek. A szerver nem tudja elolvasni az üzeneteidet és a fájljaidat, és én sem."
  },
  "p": {
   "intento": "Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

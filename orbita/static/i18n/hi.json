@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "चेतावनी: यह फ़ॉर्म आप जो लिखेंगे उसे बिना एन्क्रिप्शन के भेजेगा।",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "यह साइट सर्वर से कनेक्ट होने वाले ब्राउज़र स्वीकार नहीं करती (बॉट से सुरक्षा)। इसे बबल से नहीं खोला जा सकता, लेकिन आपके सामान्य ब्राउज़र से खोला जा सकता है।",
   "Formulario sin encriptar": "अनएन्क्रिप्टेड फ़ॉर्म",
-  "Conexión detectada (permitida)": "पहचाना गया कनेक्शन (अनुमत)"
+  "Conexión detectada (permitida)": "पहचाना गया कनेक्शन (अनुमत)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "व्यक्तियों और पेशेवरों के लिए: PC से PC तक एन्क्रिप्टेड चैट करें और संवेदनशील डेटा व दस्तावेज़ भेजें। खत्म करने पर बातचीत दोनों डिवाइस से मिट जाती है।",
+  "Particulares": "व्यक्तिगत उपयोगकर्ता",
+  "Profesionales con clientes": "क्लाइंट वाले पेशेवर",
+  "Documentación sensible": "संवेदनशील दस्तावेज़",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "व्यक्तियों और पेशेवरों के लिए: संवेदनशील डेटा और दस्तावेज़, PC से PC तक एन्क्रिप्टेड।",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "संचार, GUARDIANA की चैट और फ़ाइल भेजने की सुविधा है, जो 9 अंकों के कोड के साथ एक डिवाइस से दूसरे डिवाइस तक एन्क्रिप्टेड रहती है। यह व्यक्तियों के लिए और उन पेशेवरों के लिए बनाई गई है जो अपने क्लाइंट को संवेदनशील डेटा और दस्तावेज़ भेजते हैं। सर्वर आपके संदेश या फ़ाइलें नहीं पढ़ सकता, और मैं भी नहीं।"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

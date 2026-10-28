@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "คำเตือน: ฟอร์มนี้จะส่งสิ่งที่คุณพิมพ์โดยไม่เข้ารหัส",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "เว็บไซต์นี้ไม่ยอมรับเบราว์เซอร์ที่เชื่อมต่อจากเซิร์ฟเวอร์ (การป้องกันบอต) จึงเปิดจากบับเบิลไม่ได้ แต่เปิดจากเบราว์เซอร์ที่คุณใช้ตามปกติได้",
   "Formulario sin encriptar": "ฟอร์มไม่เข้ารหัส",
-  "Conexión detectada (permitida)": "การเชื่อมต่อที่ตรวจพบ (อนุญาต)"
+  "Conexión detectada (permitida)": "การเชื่อมต่อที่ตรวจพบ (อนุญาต)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "สำหรับบุคคลทั่วไปและผู้ประกอบวิชาชีพ: แชทและส่งข้อมูลและเอกสารที่ละเอียดอ่อนแบบเข้ารหัสจาก PC ถึง PC เมื่อจบแล้ว การสนทนาจะถูกลบจากอุปกรณ์ทั้งสองเครื่อง",
+  "Particulares": "บุคคลทั่วไป",
+  "Profesionales con clientes": "ผู้ประกอบวิชาชีพที่มีลูกค้า",
+  "Documentación sensible": "เอกสารที่ละเอียดอ่อน",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "สำหรับบุคคลทั่วไปและผู้ประกอบวิชาชีพ: ข้อมูลและเอกสารที่ละเอียดอ่อน เข้ารหัสจาก PC ถึง PC",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "การสื่อสารคือแชทและการส่งไฟล์ของ GUARDIANA ที่เข้ารหัสจากอุปกรณ์หนึ่งไปยังอีกอุปกรณ์หนึ่งด้วยรหัส 9 หลัก ออกแบบมาสำหรับบุคคลทั่วไปและผู้ประกอบวิชาชีพที่ส่งข้อมูลและเอกสารที่ละเอียดอ่อนให้ลูกค้า เซิร์ฟเวอร์อ่านข้อความและไฟล์ของคุณไม่ได้ และฉันก็อ่านไม่ได้"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

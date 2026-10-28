@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Let op: dit formulier zou wat je typt onversleuteld verzenden.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Deze site accepteert geen browsers die verbinding maken vanaf een server (bescherming tegen bots). Hij kan niet vanuit de bubbel worden geopend, maar wel vanuit je gebruikelijke browser.",
   "Formulario sin encriptar": "Onversleuteld formulier",
-  "Conexión detectada (permitida)": "Gedetecteerde verbinding (toegestaan)"
+  "Conexión detectada (permitida)": "Gedetecteerde verbinding (toegestaan)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Voor particulieren en professionals: chat en stuur gevoelige gegevens en documenten, versleuteld van PC naar PC. Als je klaar bent, wordt het gesprek op beide apparaten gewist.",
+  "Particulares": "Particulieren",
+  "Profesionales con clientes": "Professionals met cliënten",
+  "Documentación sensible": "Gevoelige documenten",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Voor particulieren en professionals: gevoelige gegevens en documenten, versleuteld van PC naar PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Communicatie is de chat en het verzenden van bestanden van GUARDIANA, versleuteld van het ene apparaat naar het andere met een code van 9 cijfers. Het is bedoeld voor particulieren en voor professionals die hun cliënten gevoelige gegevens en documenten sturen. De server kan je berichten en bestanden niet lezen, en ik ook niet."
  },
  "p": {
   "intento": "Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

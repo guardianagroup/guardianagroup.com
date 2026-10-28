@@ -2507,7 +2507,13 @@
   "Atención: este formulario enviaría lo que escribas sin encriptar.": "Advarsel: denne formular ville sende det, du skriver, ukrypteret.",
   "Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.": "Dette websted accepterer ikke browsere, der forbinder fra en server (beskyttelse mod robotter). Det kan ikke åbnes fra boblen, men det kan fra din sædvanlige browser.",
   "Formulario sin encriptar": "Ukrypteret formular",
-  "Conexión detectada (permitida)": "Registreret forbindelse (tilladt)"
+  "Conexión detectada (permitida)": "Registreret forbindelse (tilladt)",
+  "Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.": "Til privatpersoner og fagfolk: chat og send følsomme data og dokumenter, krypteret fra PC til PC. Når I er færdige, slettes samtalen på begge enheder.",
+  "Particulares": "Privatpersoner",
+  "Profesionales con clientes": "Fagfolk med kunder",
+  "Documentación sensible": "Følsomme dokumenter",
+  "Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.": "Til privatpersoner og fagfolk: følsomme data og dokumenter, krypteret fra PC til PC.",
+  "Comunicaciones es el chat y el envío de archivos de GUARDIANA, encriptados de un equipo al otro con un código de 9 cifras. Está pensado para particulares y para profesionales que envían a sus clientes datos y documentación sensible. El servidor no puede leer tus mensajes ni tus archivos, y yo tampoco.": "Kommunikation er GUARDIANAs chat og filoverførsel, krypteret fra den ene enhed til den anden med en 9-cifret kode. Den er beregnet til privatpersoner og til fagfolk, der sender følsomme data og dokumenter til deres kunder. Serveren kan ikke læse dine beskeder eller dine filer, og det kan jeg heller ikke."
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",
