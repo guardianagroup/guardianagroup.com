@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Sa chat dina-download ang .json: buksan ang “Tingnan ang resibo” at pindutin ang “I-download ang .json”. Para sa pagbasa ang PDF; hindi ito mave-verify.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "Wasto: sinuri gamit ang post-quantum na key ng resibo.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Minsan hindi pinapapasok ng site na ito ang mga browser na galing sa server, gaya ng bubble (anti-bot na proteksyon). Puwede mong subukan ulit o buksan ito sa karaniwang browser mo.",
-  "Volver a intentar": "Subukan ulit"
+  "Volver a intentar": "Subukan ulit",
+  "Esta web no se ha abierto": "Hindi nabuksan ang site na ito",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "May mga site na pumipigil sa mga browser na galing sa server, gaya ng bubble. Pindutin ang “I-reload” para subukan ulit.",
+  "Actualizar": "I-reload"
  },
  "p": {
   "intento": "Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

@@ -2843,7 +2843,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "File .json diunduh di chat: buka “Lihat bukti” lalu tekan “Unduh .json”. PDF untuk dibaca; tidak bisa diverifikasi.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "Valid: diperiksa dengan kunci pascakuantum dalam bukti.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Situs ini terkadang tidak mengizinkan peramban yang keluar dari server, seperti gelembung (perlindungan anti-bot). Anda bisa mencoba lagi atau membukanya di peramban biasa Anda.",
-  "Volver a intentar": "Coba lagi"
+  "Volver a intentar": "Coba lagi",
+  "Esta web no se ha abierto": "Situs ini tidak terbuka",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Beberapa situs menghambat peramban yang keluar dari server, seperti gelembung. Tekan “Muat ulang” untuk mencoba lagi.",
+  "Actualizar": "Muat ulang"
  },
  "p": {
   "intento": "Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

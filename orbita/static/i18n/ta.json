@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json கோப்பை அரட்டையில் பதிவிறக்கலாம்: “ரசீதைக் காண்க” என்பதைத் திறந்து “.json-ஐப் பதிவிறக்கு” என்பதை அழுத்துங்கள். PDF படிப்பதற்கானது; அதைச் சரிபார்க்க முடியாது.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "செல்லுபடியானது: ரசீதின் போஸ்ட்-குவாண்டம் சாவியால் சரிபார்க்கப்பட்டது.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "இந்தத் தளம் சில நேரங்களில் சேவையகத்திலிருந்து வரும் உலாவிகளை, குமிழி போன்றவற்றை, அனுமதிப்பதில்லை (ரோபோ எதிர்ப்பு). மீண்டும் முயற்சிக்கலாம் அல்லது உங்கள் வழக்கமான உலாவியில் திறக்கலாம்.",
-  "Volver a intentar": "மீண்டும் முயற்சிக்கவும்"
+  "Volver a intentar": "மீண்டும் முயற்சிக்கவும்",
+  "Esta web no se ha abierto": "இந்தத் தளம் திறக்கவில்லை",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "சில தளங்கள் சேவையகத்திலிருந்து வரும் உலாவிகளை, குமிழி போன்றவற்றை, தடுக்கின்றன. மீண்டும் முயற்சிக்க “மீண்டும் ஏற்றவும்” என்பதை அழுத்தவும்.",
+  "Actualizar": "மீண்டும் ஏற்றவும்"
  },
  "p": {
   "intento": "இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

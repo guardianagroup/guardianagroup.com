@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Faili ya .json hupakuliwa kwenye gumzo: fungua “Ona risiti” kisha ubonyeze “Pakua .json”. PDF ni ya kusoma; haiwezi kuthibitishwa.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "Halali: imehakikiwa kwa ufunguo wa baada ya kwanta wa risiti.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Tovuti hii wakati mwingine hairuhusu vivinjari vinavyotoka kwenye seva, kama kiputo (ulinzi dhidi ya roboti). Unaweza kujaribu tena au kuifungua kwenye kivinjari chako cha kawaida.",
-  "Volver a intentar": "Jaribu tena"
+  "Volver a intentar": "Jaribu tena",
+  "Esta web no se ha abierto": "Tovuti hii haikufunguka",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Baadhi ya tovuti huzuia vivinjari vinavyotoka kwenye seva, kama kiputo. Bonyeza “Pakia upya” ili kujaribu tena.",
+  "Actualizar": "Pakia upya"
  },
  "p": {
   "intento": "Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

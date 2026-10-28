@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "فایل ‎.json در چت بارگیری می‌شود: «مشاهدهٔ رسید» را باز کنید و «بارگیری ‎.json» را بزنید. PDF برای خواندن است؛ نمی‌توان آن را تأیید کرد.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "معتبر: با کلید پساکوانتومی رسید بررسی شد.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "این سایت گاهی مرورگرهایی را که از یک سرور می‌آیند، مانند حباب، راه نمی‌دهد (حفاظت ضدربات). می‌توانید دوباره امتحان کنید یا آن را در مرورگر همیشگی‌تان باز کنید.",
-  "Volver a intentar": "تلاش دوباره"
+  "Volver a intentar": "تلاش دوباره",
+  "Esta web no se ha abierto": "این وب‌سایت باز نشد",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "برخی سایت‌ها جلوی مرورگرهایی را که از یک سرور می‌آیند، مانند حباب، می‌گیرند. برای امتحان دوباره، «بارگذاری مجدد» را بزنید.",
+  "Actualizar": "بارگذاری مجدد"
  },
  "p": {
   "intento": "بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

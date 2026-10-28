@@ -2843,7 +2843,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json फ़ाइल चैट में डाउनलोड होती है: “रसीद देखें” खोलें और “.json डाउनलोड करें” दबाएँ। PDF पढ़ने के लिए है; इसे सत्यापित नहीं किया जा सकता।",
   "Válida: comprobada con la clave postcuántica del comprobante.": "मान्य: रसीद की पोस्ट-क्वांटम कुंजी से जाँचा गया।",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "यह वेबसाइट कभी-कभी सर्वर से निकलने वाले ब्राउज़रों को, जैसे बबल को, अंदर नहीं आने देती (एंटी-बॉट सुरक्षा)। आप फिर से कोशिश कर सकते हैं या इसे अपने सामान्य ब्राउज़र में खोल सकते हैं।",
-  "Volver a intentar": "फिर से कोशिश करें"
+  "Volver a intentar": "फिर से कोशिश करें",
+  "Esta web no se ha abierto": "यह वेबसाइट नहीं खुली",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "कुछ वेबसाइटें सर्वर से निकलने वाले ब्राउज़रों को, जैसे बबल को, रोकती हैं। फिर से कोशिश करने के लिए “रीलोड करें” दबाएँ।",
+  "Actualizar": "रीलोड करें"
  },
  "p": {
   "intento": "आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

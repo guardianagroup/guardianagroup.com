@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "Plik .json pobiera się w czacie: otwórz „Zobacz poświadczenie” i naciśnij „Pobierz .json”. PDF służy do odczytu; nie da się go zweryfikować.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "Ważny: sprawdzony kluczem postkwantowym poświadczenia.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Ta strona czasem nie wpuszcza przeglądarek wychodzących z serwera, takich jak bańka (ochrona antybotowa). Możesz spróbować ponownie albo otworzyć ją w swojej zwykłej przeglądarce.",
-  "Volver a intentar": "Spróbuj ponownie"
+  "Volver a intentar": "Spróbuj ponownie",
+  "Esta web no se ha abierto": "Ta strona się nie otworzyła",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Niektóre strony hamują przeglądarki wychodzące z serwera, takie jak bańka. Naciśnij „Odśwież”, aby spróbować ponownie.",
+  "Actualizar": "Odśwież"
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

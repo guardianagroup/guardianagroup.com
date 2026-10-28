@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "‎.json فائل چیٹ میں ڈاؤن لوڈ ہوتی ہے: “رسید دیکھیں” کھولیں اور “‎.json ڈاؤن لوڈ کریں” دبائیں۔ PDF پڑھنے کے لیے ہے؛ اس کی تصدیق نہیں ہو سکتی۔",
   "Válida: comprobada con la clave postcuántica del comprobante.": "معتبر: رسید کی پوسٹ کوانٹم کلید سے جانچا گیا۔",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "یہ ویب سائٹ کبھی کبھی ایسے براؤزرز کو اندر نہیں آنے دیتی جو کسی سرور سے نکلتے ہیں، جیسے بلبلہ (اینٹی روبوٹ تحفظ)۔ آپ دوبارہ کوشش کر سکتے ہیں یا اسے اپنے عام براؤزر میں کھول سکتے ہیں۔",
-  "Volver a intentar": "دوبارہ کوشش کریں"
+  "Volver a intentar": "دوبارہ کوشش کریں",
+  "Esta web no se ha abierto": "یہ ویب سائٹ نہیں کھلی",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "کچھ ویب سائٹس ایسے براؤزرز کو روک دیتی ہیں جو کسی سرور سے نکلتے ہیں، جیسے بلبلہ۔ دوبارہ کوشش کرنے کے لیے “ری لوڈ کریں” دبائیں۔",
+  "Actualizar": "ری لوڈ کریں"
  },
  "p": {
   "intento": "آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

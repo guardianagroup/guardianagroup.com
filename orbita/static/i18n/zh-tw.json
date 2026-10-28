@@ -2843,7 +2843,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json 檔案在聊天中下載：開啟「查看憑證」，然後點按「下載 .json」。PDF 用於閱讀；無法驗證。",
   "Válida: comprobada con la clave postcuántica del comprobante.": "有效：已用憑證中的後量子金鑰核驗。",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "該網站有時不允許來自伺服器的瀏覽器進入，例如氣泡（反機器人保護）。你可以重試，或在你平常的瀏覽器裡開啟。",
-  "Volver a intentar": "重試"
+  "Volver a intentar": "重試",
+  "Esta web no se ha abierto": "此網站未能開啟",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "有些網站會阻擋來自伺服器的瀏覽器，例如氣泡。請按「重新載入」再試一次。",
+  "Actualizar": "重新載入"
  },
  "p": {
   "intento": "今天嘗試最多的：{1}，{2} {2?次|次}。",

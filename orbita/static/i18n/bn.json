@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json ফাইলটি চ্যাট থেকে ডাউনলোড হয়: “রসিদ দেখুন” খুলুন এবং “.json ডাউনলোড করুন” চাপুন। PDF পড়ার জন্য; এটি যাচাই করা যায় না।",
   "Válida: comprobada con la clave postcuántica del comprobante.": "বৈধ: রসিদের পোস্ট-কোয়ান্টাম কী দিয়ে যাচাই করা হয়েছে।",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "এই সাইট মাঝে মাঝে সার্ভার থেকে আসা ব্রাউজারকে, যেমন বাবলকে, ঢুকতে দেয় না (অ্যান্টি-বট সুরক্ষা)। আপনি আবার চেষ্টা করতে পারেন বা এটি আপনার সাধারণ ব্রাউজারে খুলতে পারেন।",
-  "Volver a intentar": "আবার চেষ্টা করুন"
+  "Volver a intentar": "আবার চেষ্টা করুন",
+  "Esta web no se ha abierto": "এই সাইটটি খোলেনি",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "কিছু সাইট সার্ভার থেকে আসা ব্রাউজারকে, যেমন বাবলকে, আটকে দেয়। আবার চেষ্টা করতে “রিলোড করুন” চাপুন।",
+  "Actualizar": "রিলোড করুন"
  },
  "p": {
   "intento": "আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

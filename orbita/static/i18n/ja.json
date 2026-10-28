@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json はチャットでダウンロードします：「証明書を表示」を開き、「.json をダウンロード」を押してください。PDF は閲覧用で、検証はできません。",
   "Válida: comprobada con la clave postcuántica del comprobante.": "有効：証明書のポスト量子鍵で確認済みです。",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "このサイトは、バブルのようにサーバーから来るブラウザを受け付けないことがあります（ボット対策）。もう一度試すか、いつものブラウザで開くことができます。",
-  "Volver a intentar": "もう一度試す"
+  "Volver a intentar": "もう一度試す",
+  "Esta web no se ha abierto": "このサイトを開けませんでした",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "一部のサイトは、バブルのようにサーバーから来るブラウザを制限しています。もう一度試すには「再読み込み」を押してください。",
+  "Actualizar": "再読み込み"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

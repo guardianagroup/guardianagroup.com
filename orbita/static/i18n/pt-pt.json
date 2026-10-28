@@ -2841,7 +2841,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": "O .json descarrega-se no chat: abre «Ver o comprovativo» e prime «Descarregar .json». O PDF é para ler; não pode ser verificado.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "Válida: confirmada com a chave pós-quântica do comprovativo.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Este site às vezes não deixa entrar navegadores que saem de um servidor, como a bolha (proteção antirrobô). Podes tentar novamente ou abri-lo no teu navegador de sempre.",
-  "Volver a intentar": "Tentar novamente"
+  "Volver a intentar": "Tentar novamente",
+  "Esta web no se ha abierto": "Este site não abriu",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Alguns sites travam os navegadores que saem de um servidor, como a bolha. Carrega em «Recarregar» para tentar novamente.",
+  "Actualizar": "Recarregar"
  },
  "p": {
   "intento": "A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

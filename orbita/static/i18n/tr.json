@@ -2843,7 +2843,10 @@
   "El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.": ".json dosyası sohbetten indirilir: “Makbuzu görüntüle” seçeneğini açın ve “.json indir” düğmesine basın. PDF okumak içindir; doğrulanamaz.",
   "Válida: comprobada con la clave postcuántica del comprobante.": "Geçerli: makbuzdaki kuantum sonrası anahtarla doğrulandı.",
   "Esta web a veces no deja entrar a los navegadores que salen desde un servidor, como la burbuja (protección antirrobot). Puedes volver a intentarlo o abrirla en tu navegador de siempre.": "Bu site, balon gibi sunucudan çıkan tarayıcıları bazen içeri almıyor (bot koruması). Yeniden deneyebilir ya da siteyi her zamanki tarayıcında açabilirsin.",
-  "Volver a intentar": "Yeniden dene"
+  "Volver a intentar": "Yeniden dene",
+  "Esta web no se ha abierto": "Bu site açılmadı",
+  "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Bazı siteler, balon gibi sunucudan çıkan tarayıcıları frenler. Yeniden denemek için “Yenile” düğmesine bas.",
+  "Actualizar": "Yenile"
  },
  "p": {
   "intento": "Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",
