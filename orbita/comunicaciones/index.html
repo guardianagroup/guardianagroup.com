@@ -11,7 +11,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261028v">
+<link rel="stylesheet" href="app.css?v=20261028x">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -57,7 +57,7 @@
       <button type="button" class="grande principal" id="nueva"><b>Crear invitación</b><small>Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
       <button type="button" class="grande" id="unir"><b>Tengo un código</b><small>Escribe las 9 cifras que te han enviado</small></button>
       <!-- dueño, 27 Oct 2026, 22:01–23:12: la blindada, «de la máxima»; algoritmos de la suite CNSA 2.0 -->
-      <button type="button" class="grande blindada" id="nueva-blindada"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b>Sesión blindada</b><small>Algoritmos de la suite CNSA 2.0 y claves que se renuevan cada 5 minutos. Se invita con un enlace.</small></button>
+      <button type="button" class="grande blindada" id="nueva-blindada"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b><span class="solo-pc">Sesión blindada</span><span class="solo-movil">Crear invitación</span></b><small>Algoritmos de la suite CNSA 2.0 y claves que se renuevan cada 5 minutos. Se invita con un enlace.</small></button>
     </div>
     <!-- dueño, 27 Oct 2026, 10:10: «al empezar, lo básico, limpio y entendible»; la explicación, aparte, en un desplegable -->
     <button type="button" class="como" id="como-btn" aria-expanded="false" aria-controls="pro">Cómo funciona Comunicaciones</button>
@@ -69,6 +69,9 @@
       <p class="t validez" id="validez">Es válido durante 10 minutos y para un solo uso; después deja de funcionar.</p>
       <p class="t" id="invita-estado" hidden></p>
       <div class="fila centro"><button type="button" class="boton" id="invita-nuevo" hidden>Nuevo código</button></div>
+      <!-- también como enlace, para quien está en el móvil (allí ya no se escriben códigos; dueño, 28 Oct 2026, 15:42) -->
+      <div class="fila centro"><button type="button" class="boton principal" id="codigo-enlace">Copiar el enlace</button></div>
+      <p class="t nota">Si la otra persona está en el móvil, mándale el enlace: lo abre y acepta.</p>
     </div>
 
     <!-- Invitación blindada: solo por enlace o QR (la semilla entera, 256 bits, tras «#b=»: no llega a ningún servidor) -->
@@ -93,6 +96,15 @@
         <p class="t">La conversación se abre sola en cuanto entre.</p>
         <div class="fila centro"><button type="button" class="boton principal" id="enlace-otra-vez">Volver a compartir</button><button type="button" class="boton" id="enlace-cancelar-2">Cancelar</button></div>
       </div>
+    </div>
+
+    <!-- Quien abre un enlace de invitación: primero «¿Aceptas?» (dueño, 28 Oct 2026, 15:42: «te están invitando… ¿aceptas? sí, no…
+         empieza directa, sin comprobación, sin nada») -->
+    <div class="paso aceptar" id="paso-aceptar" hidden>
+      <div class="espera-anillos quieto" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+      <h2>Te han invitado a una conversación encriptada</h2>
+      <p class="t">Mensajes, llamadas y videollamadas encriptados de extremo a extremo. ¿Aceptas?</p>
+      <div class="fila centro"><button type="button" class="boton" id="aceptar-no">No, gracias</button><button type="button" class="boton principal" id="aceptar-si">Aceptar</button></div>
     </div>
 
     <div class="paso" id="paso-entrar" hidden>
@@ -435,7 +447,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261028p40"></script>
+<script src="/orbita/static/idioma.js?v=20261028p42"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -446,6 +458,6 @@
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028b"></script>
 <script src="llamada.js?v=20261028q"></script>
-<script src="app.js?v=20261028t"></script>
+<script src="app.js?v=20261028v"></script>
 </body>
 </html>

@@ -201,6 +201,19 @@
     pintaLista(); abreConv(c.id);
     return true;
   }
+  // Antes de entrar, «¿Aceptas?» (dueño, 15:42). Si el enlace es una invitación de este mismo navegador, se abre sin preguntar.
+  let invitacionPendiente = null;
+  async function preguntaInvitacion(enlace) {
+    const m = String(enlace).match(/#([ib])=([A-Za-z0-9_-]{43})/); if (!m) return false;
+    let semilla = null; try { semilla = C.deB64u(m[2]); } catch (_) { return false; } if (!semilla || semilla.length !== 32) return false;
+    try { const d = m[1] === 'b' ? await C.B.deSemilla(semilla) : await C.deSemilla(semilla); if (CONVS.has(d.sala)) { abreConv(d.sala); return true; } } catch (_) {}
+    invitacionPendiente = enlace; muestraAceptar(true); return true;
+  }
+  function muestraAceptar(ver) {
+    $('#paso-aceptar').hidden = !ver; $('#inicio').classList.toggle('con-invitacion', ver);
+    if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
+    else $('#paso-inicio').hidden = false;
+  }
   // enlaces: «#b=» abre una sesión blindada; «#i=» (antiguos, ya no se muestran) sigue abriendo su conversación normal
   async function aceptaInvitacion(enlace) {
     let semilla = null, modo = 'normal';
@@ -1822,7 +1835,7 @@
     zona.addEventListener('drop', (e) => { e.preventDefault(); const c = CONVS.get(ACTUAL); const fs = [...(e.dataTransfer && e.dataTransfer.files) || []]; if (c && fs.length) revisaEnvio(c, fs); });
     document.querySelectorAll('.gc-hoja').forEach((h) => h.addEventListener('click', (e) => { if (e.target === h) h.classList.remove('gc-abierta'); }));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.gc-hoja.gc-abierta').forEach((h) => h.classList.remove('gc-abierta')); });
-    addEventListener('hashchange', () => { if (/#[ib]=/.test(location.hash)) { aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); } });
+    addEventListener('hashchange', () => { if (/#[ib]=/.test(location.hash)) { preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); } });
     addEventListener('guardiana-idioma', () => { pintaLista(); const c = CONVS.get(ACTUAL); if (c) pintaCabecera(c); });
     // sesión blindada
     // el enlace se copia solo al crear la invitación: se pide el portapapeles dentro del mismo toque, con el enlace por llegar
@@ -1834,6 +1847,9 @@
     $('#vaciar').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (!c) return; $('#vaciar-nota').hidden = false; abreHoja('h-vaciar'); });
     $('#vaciar-no').addEventListener('click', () => cierraHoja('h-vaciar'));
     $('#vaciar-si').addEventListener('click', async () => { cierraHoja('h-vaciar'); await vacia(CONVS.get(ACTUAL)); });
+    $('#codigo-enlace').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !c.semilla) return; const u = ORIGEN + '#i=' + C.b64u(c.semilla); $('#codigo-enlace').dataset.enlace = u; try { await navigator.clipboard.writeText(u); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { aviso(u); } });
+    $('#aceptar-si').addEventListener('click', async () => { const e = invitacionPendiente; invitacionPendiente = null; muestraAceptar(false); if (!e) return; const ok = await aceptaInvitacion(e); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); });
+    $('#aceptar-no').addEventListener('click', () => { invitacionPendiente = null; muestraAceptar(false); aviso(T('Invitación rechazada.')); });
     $('#enlace-otra-vez').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c) { c.compartido = false; muestraEnlace(c); } });
     $('#enlace-cancelar-2').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await destruye(c, true); });
     $('#enlace-copiar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.clipboard.writeText(enlaceB(c)); c.copiado = true; c.compartido = true; muestraEnlace(c); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { $('#enlace-b').select(); } });
@@ -1880,7 +1896,7 @@
     avisoInterno();
     setTimeout(eligeServidorLlamadas, 4000); setInterval(eligeServidorLlamadas, 3600 * 1000);
     await cargaConvs();
-    if (/#[ib]=/.test(location.hash)) { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
+    if (/#[ib]=/.test(location.hash)) { const ok = await preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     // NÚCLEO guiado (ronda 63): «Tengo un código» llega con el campo del código abierto; «Crear una invitación», con la invitación
     // hecha en cuanto hay conexión (si ya hay una conversación en marcha, no se toca: solo se señala el botón). Una sola vez.
     try {
