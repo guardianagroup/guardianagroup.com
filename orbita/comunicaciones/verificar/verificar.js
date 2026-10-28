@@ -6,11 +6,17 @@
   const V = window.GuardianaViaje, T = (s) => (window.GuardianaIdioma ? GuardianaIdioma.t(s) : s), $ = (s) => document.querySelector(s);
   let comp = null;
   const error = (txt) => { const e = $('#error'); e.textContent = txt || ''; e.hidden = !txt; };
+  // el PDF es la versión para leer e imprimir: no lleva las firmas completas, así que se explica qué archivo hace falta
+  const esPdf = async (f) => { if (/\.pdf$/i.test(f.name || '') || f.type === 'application/pdf') return true; try { return new TextDecoder().decode(new Uint8Array(await f.slice(0, 5).arrayBuffer())) === '%PDF-'; } catch (_) { return false; } };
   async function cargaComprobante(f) {
     error('');
     if (!f) return;
+    if (await esPdf(f)) { $('#resultado').hidden = true; return error(T('Ese es el PDF del comprobante: sirve para leerlo, guardarlo o imprimirlo, pero no lleva las firmas completas. Para verificarlo, usa el archivo .json del mismo comprobante: en el chat, abre «Ver comprobante» y pulsa «Descargar .json».')); }
     let j = null;
     try { if (f.size <= 256 * 1024) j = JSON.parse(await f.text()); } catch (_) { j = null; }
+    return muestra(j);
+  }
+  async function muestra(j) {
     // el comprobante normal y el de la sesión blindada (doble firma ECDSA P-384 + ML-DSA-87)
     if (!j || (j.formato !== V.FORMATO && j.formato !== V.FORMATO_B) || !j.registro) { $('#resultado').hidden = true; return error(T('Ese archivo no es un comprobante de entrega e integridad de GUARDIANA.')); }
     comp = j;
@@ -52,4 +58,12 @@
   zona.addEventListener('drop', (e) => { e.preventDefault(); const f = e.dataTransfer && e.dataTransfer.files[0]; cargaComprobante(f); });
   // soltar un archivo fuera de la zona no debe abrirlo en la pestaña
   addEventListener('dragover', (e) => e.preventDefault()); addEventListener('drop', (e) => e.preventDefault());
+  // desde el chat, «Verificar en guardianagroup.com» trae el comprobante en el fragmento (#c=…): se comprueba al abrir y
+  // el fragmento se quita de la dirección
+  if (/^#c=[A-Za-z0-9_-]+$/.test(location.hash)) {
+    let j = null; try { j = JSON.parse(new TextDecoder().decode(V.deB64u(location.hash.slice(3)))); } catch (_) { j = null; }
+    history.replaceState(null, '', location.pathname + location.search);
+    const empieza = () => muestra(j);
+    if (document.readyState === 'complete') empieza(); else addEventListener('load', empieza);
+  }
 })();
