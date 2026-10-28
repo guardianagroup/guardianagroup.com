@@ -788,3 +788,10 @@ body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
 .tapar-lienzo{min-height:0;display:grid;place-items:center;padding:8px}
 #tapar-cv{max-width:100%;max-height:100%;touch-action:none;cursor:crosshair;border-radius:8px}
 .tapar-pie{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px 14px}.tapar-pie small{color:#9fb3c4;line-height:1.35}
+/* Recorrido en modo espectador (28 Oct 2026, 16:40): texto oscuro sobre el botón claro; al aceptar, sin la barra de la web;
+   «Aceptar» a la derecha en el ordenador y arriba en el móvil */
+#paso-inicio #nueva-blindada b,#paso-inicio #nueva-blindada .solo-movil{color:inherit}
+@media (max-width:760px){#paso-inicio #nueva-blindada,#paso-inicio #nueva-blindada b{color:#06080C!important}}
+body.aceptando .barra{display:none!important}
+.paso.aceptar .fila{flex-direction:row-reverse}
+@media (max-width:760px){.paso.aceptar .fila{flex-direction:column!important}}

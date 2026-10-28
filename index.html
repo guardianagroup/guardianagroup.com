@@ -116,6 +116,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .nav-links a.t:hover{color:var(--ink)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 26px;border-radius:999px;font-weight:600;font-size:15px;color:#05080C;background:var(--grad-btn);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 8px 30px -10px rgba(156,195,228,.55);transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 12px 40px -10px rgba(156,195,228,.7)}
+/* «Entrar» se nota al pulsarlo (dueño, 28 Oct 2026, 16:39: «que cuando uno lo clique se note… la tecnología buena y la profesional»):
+   se hunde al tocarlo, pasa a «Entrando…» con un giro mientras carga y, en Chrome y Edge, NÚCLEO ya está preparado al pasar por encima */
+a.btn[href="/orbita/"]{position:relative;transition:transform .12s ease,filter .15s ease,box-shadow .2s ease}
+a.btn[href="/orbita/"]:active,a.btn[href="/orbita/"].pulsado{transform:scale(.96);filter:brightness(.9)}
+a.btn[href="/orbita/"]:focus-visible{outline:2px solid #F4F6F8;outline-offset:3px}
+a.btn.entrando{pointer-events:none;transform:scale(.98);filter:brightness(.95)}
+a.btn.entrando::before{content:'';flex:none;width:15px;height:15px;border-radius:50%;border:2px solid rgba(6,8,12,.25);border-top-color:#06080C;animation:entraGira .7s linear infinite}
+@keyframes entraGira{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){a.btn.entrando::before{animation-duration:2s}}
 .btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--hair-2)}
 .btn-ghost:hover{box-shadow:inset 0 0 0 1px var(--steel)}
 .btn-sm{min-height:40px;padding:0 18px;font-size:13px}
@@ -2536,6 +2545,18 @@ addEventListener('DOMContentLoaded', () => {
   if ('IntersectionObserver' in window) new IntersectionObserver((es) => es.forEach((e) => pon(e.isIntersecting)), { rootMargin: '200px 0px' }).observe(sec);
   else pon(true);
 });
+</script>
+<script type="speculationrules">{"prerender":[{"source":"list","urls":["/orbita/"],"eagerness":"moderate"}]}</script>
+<script>
+(function(){var T={es:'Entrando…',en:'Entering…',pt:'Entrando…'};
+function texto(){var l=(document.documentElement.lang||'es').slice(0,2);return T[l]||T.es;}
+document.querySelectorAll('a.btn[href="/orbita/"]').forEach(function(a){
+ a.addEventListener('pointerdown',function(){a.classList.add('pulsado');},{passive:true});
+ ['pointerup','pointerleave','pointercancel'].forEach(function(ev){a.addEventListener(ev,function(){a.classList.remove('pulsado');},{passive:true});});
+ a.addEventListener('click',function(e){if(e.metaKey||e.ctrlKey||e.shiftKey||e.button>0)return;a.dataset.t=a.textContent;a.classList.add('entrando');a.textContent=texto();try{if(navigator.vibrate)navigator.vibrate(12);}catch(_){}});
+});
+addEventListener('pageshow',function(){document.querySelectorAll('a.btn.entrando').forEach(function(a){a.classList.remove('entrando');if(a.dataset.t)a.textContent=a.dataset.t;});});
+})();
 </script>
 </body>
 </html>
