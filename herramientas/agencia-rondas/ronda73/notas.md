@@ -1,6 +1,6 @@
 # Ronda 73 · Llamada urgente y añadir a alguien a la llamada · cruce
 
-28 Oct 2026, 11:55–12:40 (Bogotá). Voces: ChatGPT (GPT-6, «Alta»; `chatgpt.md`, completa), DeepSeek V4 Pro (sustituye a Astra por saldo; `deepseek.md`, cortada en el bloque B por el límite de 4.096 tokens) y Gemini (Argon; `gemini.md`: el bloque A llegó; B, C y D pedidos aparte). Pregunta: `pregunta.md`.
+28 Oct 2026, 11:55–12:40 (Bogotá). Voces: ChatGPT (GPT-6, «Alta»; `chatgpt.md`, completa), DeepSeek V4 Pro (sustituye a Astra por saldo; `deepseek.md`, cortada en el bloque B por el límite de 4.096 tokens) y Gemini (Argon; `gemini.md`, completa en dos mensajes). Pregunta: `pregunta.md`.
 
 Origen (dueño, durante una videollamada de prueba Bogotá–Praga): «a las 3 de la mañana… él ha cerrado la página o se le ha ido la luz… ¿cómo podría contactar con él?»; y su amigo: «añadir a alguien a la llamada… con un enlace… muy fácil».
 
@@ -15,6 +15,14 @@ Origen (dueño, durante una videollamada de prueba Bogotá–Praga): «a las 3 d
 6. **Antiabuso y descanso:** permiso explícito por contacto para avisos urgentes; horas de silencio (ChatGPT 23:00–08:00, DeepSeek 22:00–07:00) con las urgencias nocturnas desactivadas de entrada; límites (ChatGPT: 2 en 30 min, 5 en 24 h); sin repeticiones automáticas; «Urgency: high» no salta el «No molestar» del sistema. Gemini: una notificación web suena 1–2 s; **no es un timbre continuo de 30 s** como una llamada del sistema (sin CallKit en una web).
 7. **Grupo de 3–4: malla por TURN** con sesiones por pares (A–C y B–C nuevas; C no recibe nada de A–B). SFU con SFrame y MLS, solo si hay que escalar.
 8. **Entrar por enlace:** el enlace es una solicitud, no un pase: secreto en el fragmento `#`, caducidad corta, un solo uso; todos aprueban; verificación del código de identidad; solo medios desde que entra; nada de lo anterior.
+
+## Lo que añade Gemini (y se adopta)
+- **Bajar la calidad al entrar más gente** (3 → 480p, 4 → 360–480p) para que la subida de cada uno no pase de ~1,5 Mb/s; audio con prioridad y botón «Modo solo voz».
+- **Las vistas previas de los chats no gastan el enlace:** solo se activa al pulsar «Entrar a la llamada».
+- **Código corto de seguridad** (dos cifras derivadas de las claves) para confirmarlo de viva voz al entrar.
+- **La señalización por el canal encriptado impide que el servidor cambie el certificado DTLS** (ya es así en las llamadas de dos).
+- **Nombre y texto legal:** «Aviso prioritario entre contactos» o «Timbre urgente», nunca «emergencias» (eso obligaría a conectar con el 123 / 112).
+- Sin comprobar (no se usan): «coturn con 2 vCPU reenvía 250–400 Mbps (40–60 llamadas de 4)» y «1,00 € por TB extra en Hetzner».
 
 ## Correcciones que aplica GUARDIANA
 - DeepSeek dice que las sesiones de la llamada usarían «ECDH P-256 + ML-KEM, como ahora»: no. El audio y el vídeo van con DTLS-SRTP de WebRTC; lo dice ChatGPT y ya lo dice la web («el audio no es postcuántico»).
