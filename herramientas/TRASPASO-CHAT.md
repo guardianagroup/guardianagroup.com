@@ -1,6 +1,6 @@
 # GUARDIANA · Traspaso para un chat nuevo de Claude
 
-> **28 Oct 2026, 15:05: el estado más reciente está en `herramientas/TRASPASO-28OCT-TARDE.md`. Empieza por ese.**
+> **28 Oct 2026, 16:50: el estado más reciente está en `herramientas/TRASPASO-28OCT-FINAL.md`. Empieza por ese.**
 
 ## Estado al 28 Oct 2026, madrugada (Bogotá) — EMPIEZA POR AQUÍ
 

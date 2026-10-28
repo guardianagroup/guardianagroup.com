@@ -1,5 +1,7 @@
 # GUARDIANA · Traspaso al chat nuevo · 28 Oct 2026, 15:05 (Bogotá) — EMPIEZA POR AQUÍ
 
+> **16:50: lo completo y más reciente está en `herramientas/TRASPASO-28OCT-FINAL.md`. Este queda como detalle de la tarde.**
+
 Este archivo manda sobre los anteriores. La historia completa está en `herramientas/TRASPASO-CHAT.md`, `herramientas/TRASPASO.md` y `herramientas/LANZAMIENTO.md`; léelos solo si hace falta un detalle.
 
 ## ACTUALIZACIÓN 16:25 (manda sobre lo de abajo)
