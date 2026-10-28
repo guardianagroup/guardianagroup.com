@@ -98,11 +98,7 @@ const ok = (nombre, cond, extra) => { res.push((cond ? 'OK   ' : 'FALLA') + ' ' 
   await A.screenshot({ path: S + 'varias-2-A-nombre.png' });
   // C en el teléfono: «‹» a la lista y vuelta
   ok('C (teléfono): sin la barra de arriba dentro de la conversación', !(await visible(C, '#barra')));
-  await C.tap('#cvolver'); await espera(400);
-  ok('C: «‹» lleva a la lista', (await visible(C, '#lista')) && !(await visible(C, '#conv')));
-  await C.screenshot({ path: S + 'varias-3-C-lista.png' });
-  await C.tap('#lista-filas .fila-conv'); await espera(500);
-  ok('C: tocar la fila vuelve a la conversación', (await visible(C, '#conv')) && !(await visible(C, '#lista')));
+  ok('C (teléfono): sin «‹» ni lista: una sola conversación (dueño, 16:01)', !(await visible(C, '#cvolver')) && !(await visible(C, '#lista')));
   // terminar solo la de C
   await A.click('#lista-filas .fila-conv[data-id="' + idAC + '"]'); await espera(700);
   await A.click('#terminar'); await espera(400); await A.click('#cierre-si'); await espera(2500);

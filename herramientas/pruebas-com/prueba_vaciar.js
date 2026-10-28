@@ -11,8 +11,8 @@ const espera = (ms) => new Promise((r) => setTimeout(r, ms));
   const A = await mk(), B = await mk(devices['iPhone 13']);
   await A.click('#nueva'); await espera(1500);
   const codigo = (await A.textContent('#codigo')).replace(/\D/g, '');
-  await B.tap('#unir'); await espera(300); await B.fill('#unir-codigo', codigo); await espera(300);
-  if (await vis(B, '#unir-ok')) await B.tap('#unir-ok').catch(() => {});
+  void codigo; await A.click('#codigo-enlace'); const enlaceI = await A.evaluate(() => document.querySelector('#codigo-enlace').dataset.enlace);
+  await B.goto(enlaceI); for (let i = 0; i < 20 && !(await vis(B, '#aceptar-si')); i++) await espera(300); await B.tap('#aceptar-si');
   for (let i = 0; i < 40 && !((await vis(A, '#conv')) && (await vis(B, '#conv'))); i++) await espera(500);
   await espera(2500);
   for (const [p, t] of [[A, 'uno'], [B, 'dos'], [A, 'tres']]) { if (p === B) { await p.tap('#texto'); } else { await p.click('#texto'); } await p.keyboard.type(t); await p.keyboard.press('Enter'); await espera(800); }
