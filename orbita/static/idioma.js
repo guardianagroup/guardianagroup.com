@@ -1433,6 +1433,7 @@
     "Entregado": ["Delivered", "Entregue"],
     "Enviado": ["Sent", "Enviado"],
     "Enviar": ["Send", "Enviar"],
+    "Volver a la imagen": ["Back to the video", "Voltar à imagem"],
     "Hacer pequeña tu imagen": ["Make your image small", "Diminuir a sua imagem"],
     "Pantalla dividida": ["Split screen", "Tela dividida"],
     "Miami (Estados Unidos)": ["Miami (United States)", "Miami (Estados Unidos)"],
