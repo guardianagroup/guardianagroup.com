@@ -1433,6 +1433,7 @@
     "Entregado": ["Delivered", "Entregue"],
     "Enviado": ["Sent", "Enviado"],
     "Enviar": ["Send", "Enviar"],
+    "Las fotos salen sin datos ocultos (ubicación, modelo del teléfono)": ["Photos go out without hidden data (location, phone model)", "As fotos saem sem dados ocultos (localização, modelo do telefone)"],
     "Añade Comunicaciones a tu pantalla de inicio": ["Add Comunicaciones to your home screen", "Adicione o Comunicaciones à sua tela de início"],
     "Se abre como una app, a pantalla completa, sin tienda y sin descargar nada. Se hace una sola vez.": ["It opens like an app, full screen, with no store and nothing to download. You only do it once.", "Abre como um app, em tela cheia, sem loja e sem baixar nada. Faz-se uma só vez."],
     "Añadir": ["Add", "Adicionar"],
