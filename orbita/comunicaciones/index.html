@@ -18,7 +18,7 @@
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261029c">
+<link rel="stylesheet" href="app.css?v=20261029d">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -475,10 +475,29 @@
   </div>
 </div>
 
+<!-- El clip, con un menú (dueño, 28 Oct 2026, 15:14: «que se pueda dar privacidad… fotografías del PC… la ubicación… útiles para
+     particulares y profesionales»): las fotos salen sin datos ocultos; la cámara, en el móvil; la ubicación, solo al pulsar -->
+<div class="adjuntos" id="adjuntos" role="menu" aria-label="Enviar" hidden>
+  <button type="button" role="menuitem" id="adj-foto"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="M20.5 15.5l-5-4.5-8 8"/></svg><span><b>Foto o vídeo</b><small>Sin datos ocultos: sin ubicación ni modelo del teléfono</small></span></button>
+  <button type="button" role="menuitem" id="adj-camara"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2h6.8L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.6"/></svg><span><b>Cámara</b><small>Haz la foto ahora</small></span></button>
+  <button type="button" role="menuitem" id="adj-doc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg><span><b>Documento</b><small>Cualquier archivo, del tamaño que sea</small></span></button>
+  <button type="button" role="menuitem" id="adj-ubicacion"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg><span><b>Ubicación</b><small>Exacta o aproximada, solo si la envías</small></span></button>
+</div>
+<input type="file" id="archivo-foto" accept="image/*,video/*" multiple hidden>
+<input type="file" id="archivo-camara" accept="image/*" capture="environment" hidden>
+<div class="gc-hoja" id="h-ubicacion" role="dialog" aria-modal="true" aria-labelledby="h-ubicacion-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-ubicacion-t">Enviar tu ubicación</h2>
+    <p class="t">Se envía una sola vez, encriptada, a esta conversación. La aproximada no dice la calle: solo la zona (unos 1 km).</p>
+    <div class="fila"><button type="button" class="boton" id="ubi-aprox">Aproximada</button><button type="button" class="boton principal" id="ubi-exacta">Exacta</button></div>
+    <div class="fila centro"><button type="button" class="boton" id="ubi-no">Cancelar</button></div>
+  </div>
+</div>
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261029p47"></script>
+<script src="/orbita/static/idioma.js?v=20261029p48"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -489,6 +508,6 @@
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028b"></script>
 <script src="llamada.js?v=20261029s"></script>
-<script src="app.js?v=20261029c"></script>
+<script src="app.js?v=20261029d"></script>
 </body>
 </html>

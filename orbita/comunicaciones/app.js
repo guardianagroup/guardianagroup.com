@@ -1367,7 +1367,10 @@
     if (m.tipo === 'custodia') { li.className = 'gc-centro'; li.append(tarjetaCustodia(m)); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
     if (m.dir === 'sistema') { li.className = 'gc-nota-sistema'; li.textContent = T(m.texto); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
     const bur = document.createElement('div'); bur.className = 'gc-burbuja ' + (m.dir === 'mia' ? 'gc-mia' : 'gc-suya') + (li.classList.contains('gc-sigue') ? ' gc-sigue' : '');
-    if (m.tipo === 'texto') { const s = document.createElement('span'); s.className = 'gc-texto'; s.append(...enlaza(m.texto)); bur.append(s); }
+    if (m.tipo === 'texto') { const s = document.createElement('span'); s.className = 'gc-texto'; s.append(...enlaza(m.texto)); bur.append(s);
+      // la ubicación, con su botón «Abrir en el mapa»
+      const u = /^📍 [^:]+: (-?\d{1,2}\.\d{2,6}), (-?\d{1,3}\.\d{2,6}) \(([^)]*)\)\n(https:\/\/www\.openstreetmap\.org\/\S+)$/.exec(m.texto || '');
+      if (u) { s.textContent = ''; s.classList.add('gc-ubicacion'); const t = document.createElement('b'); t.textContent = '📍 ' + T('Ubicación'); const k = document.createElement('small'); k.textContent = u[1] + ', ' + u[2] + ' · ' + u[3]; const a = document.createElement('a'); a.href = u[4]; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.className = 'gc-ubi-abrir'; a.textContent = T('Abrir en el mapa'); s.append(t, k, a); } }
     else if (m.tipo === 'archivo') bur.append(tarjetaArchivo(m));
     const meta = document.createElement('span'); meta.className = 'gc-meta'; const tm = document.createElement('time'); tm.textContent = hora(m.t); meta.append(tm);
     if (m.dir === 'mia') { const tk = document.createElement('span'); tk.className = 'gc-ticks'; meta.append(tk); }
@@ -1432,6 +1435,32 @@
     m.estado = 'fallo'; m.archivo.motivo = T('cortado por ti'); await guardaMensaje(c, m); pintaMensaje(c, m, true);
     const v = VIAJES.get(m.id); if (v && v.estado !== 'entregado' && v.estado !== 'fallo') { v.estado = 'fallo'; v.tFin = Date.now(); evento(v, T('Has cortado el envío.'), 'mal'); }
   }
+  // Fotos sin datos ocultos: se vuelven a dibujar antes de encriptar, así no salen la ubicación GPS, el modelo del teléfono ni la
+  // fecha que lleva el archivo. Los vídeos van como están (sus datos no se pueden limpiar aquí).
+  async function sinDatosOcultos(f) {
+    if (!/^image\/(jpeg|png|webp)$/i.test(f.type || '')) return f;
+    try {
+      const bmp = await createImageBitmap(f, { imageOrientation: 'from-image' });
+      const k = Math.min(1, 4096 / Math.max(bmp.width, bmp.height)), w = Math.round(bmp.width * k), h = Math.round(bmp.height * k);
+      const cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.getContext('2d').drawImage(bmp, 0, 0, w, h); if (bmp.close) bmp.close();
+      const tipo = /png/i.test(f.type) ? 'image/png' : 'image/jpeg';
+      const blob = await new Promise((r) => cv.toBlob(r, tipo, 0.92)); if (!blob) return f;
+      const base = String(f.name || 'foto').replace(/\.[a-z0-9]{2,5}$/i, '') || 'foto';
+      return new File([blob], base + (tipo === 'image/png' ? '.png' : '.jpg'), { type: tipo, lastModified: Date.now() });
+    } catch (_) { return f; }
+  }
+  // La ubicación, solo al pulsar: exacta (5 decimales) o aproximada (2 decimales, unos 1 km). Va como un mensaje encriptado más,
+  // con el enlace al mapa; el mapa solo se abre si la otra persona lo toca.
+  function mandaUbicacion(aprox) {
+    if (!navigator.geolocation) { aviso(T('Este navegador no puede dar la ubicación.')); return; }
+    navigator.geolocation.getCurrentPosition((p) => {
+      const d = aprox ? 2 : 5, la = p.coords.latitude.toFixed(d), lo = p.coords.longitude.toFixed(d), z = aprox ? 14 : 17;
+      const precision = aprox ? T('aproximada, unos 1 km') : '±' + Math.max(1, Math.round(p.coords.accuracy || 0)) + ' m';
+      const texto = '📍 ' + T('Ubicación') + ': ' + la + ', ' + lo + ' (' + precision + ')\nhttps://www.openstreetmap.org/?mlat=' + la + '&mlon=' + lo + '#map=' + z + '/' + la + '/' + lo;
+      const ta = $('#texto'); ta.value = texto; ta.dispatchEvent(new Event('input')); $('#enviar').click();
+    }, () => aviso(T('No se ha podido obtener la ubicación: revisa el permiso del navegador.')), { enableHighAccuracy: !aprox, timeout: 15000, maximumAge: 30000 });
+  }
+  if (LOCAL) window.__gcomPruebas = { sinDatosOcultos };
   function enlaza(texto) {
     const out = []; const re = /https?:\/\/[^\s<>"']+/g; let i = 0, m;
     while ((m = re.exec(texto))) { if (m.index > i) out.push(document.createTextNode(texto.slice(i, m.index))); const a = document.createElement('a'); a.href = m[0]; a.textContent = m[0]; a.target = '_blank'; a.rel = 'noopener noreferrer'; out.push(a); i = m.index + m[0].length; }
@@ -1761,7 +1790,25 @@
     const envia = async () => { if (grab) { paraGrabacion(true); return; } const c = CONVS.get(ACTUAL); const t = ta.value.replace(/\s+$/, ''); if (!c || !t) return; ta.value = ''; ajusta(); ta.dispatchEvent(new Event('input')); await enviaTexto(c, t); ta.focus(); };
     ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); envia(); } });
     $('#enviar').addEventListener('click', envia);
-    $('#adjuntar').addEventListener('click', () => $('#archivo').click());
+    // el clip abre el menú; cada opción, su selector
+    const menuAdj = $('#adjuntos');
+    const cierraAdj = () => { menuAdj.hidden = true; $('#adjuntar').setAttribute('aria-expanded', 'false'); };
+    $('#adjuntar').setAttribute('aria-haspopup', 'menu');
+    $('#adjuntar').addEventListener('click', (e) => {
+      e.stopPropagation(); if (!menuAdj.hidden) { cierraAdj(); return; }
+      $('#adj-camara').hidden = !esMovil();
+      menuAdj.hidden = false; $('#adjuntar').setAttribute('aria-expanded', 'true');
+      const r = $('#adjuntar').getBoundingClientRect(); menuAdj.style.left = Math.max(8, Math.min(r.left, innerWidth - menuAdj.offsetWidth - 8)) + 'px'; menuAdj.style.bottom = Math.max(8, innerHeight - r.top + 8) + 'px';
+    });
+    document.addEventListener('click', (e) => { if (!menuAdj.hidden && !e.target.closest('#adjuntos')) cierraAdj(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menuAdj.hidden) cierraAdj(); });
+    $('#adj-doc').addEventListener('click', () => { cierraAdj(); $('#archivo').click(); });
+    $('#adj-foto').addEventListener('click', () => { cierraAdj(); $('#archivo-foto').click(); });
+    $('#adj-camara').addEventListener('click', () => { cierraAdj(); $('#archivo-camara').click(); });
+    for (const id of ['#archivo-foto', '#archivo-camara']) $(id).addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); const fs = [...e.target.files]; e.target.value = ''; if (!c || !fs.length) return; const limpios = []; for (const f of fs) limpios.push(await sinDatosOcultos(f)); revisaEnvio(c, limpios); });
+    $('#adj-ubicacion').addEventListener('click', () => { cierraAdj(); abreHoja('h-ubicacion'); });
+    $('#ubi-no').addEventListener('click', () => cierraHoja('h-ubicacion'));
+    for (const [id, aprox] of [['#ubi-exacta', false], ['#ubi-aprox', true]]) $(id).addEventListener('click', () => { cierraHoja('h-ubicacion'); mandaUbicacion(aprox); });
     // Modo discreto: un interruptor (recordado en este equipo) que activa el velo del chat y los números al escribir.
     // 28 Oct 2026 (dueño): de entrada, el modo normal; el discreto solo si la persona lo elige. Clave nueva, para que nadie
     // se quede en discreto por el valor que la versión anterior guardaba sola al abrir la página.
