@@ -41,6 +41,14 @@ const espera = (ms) => new Promise((r) => setTimeout(r, ms));
   await B.tap('#texto'); await B.keyboard.type('Hola desde el enlace'); await B.keyboard.press('Enter'); await espera(1500);
   ok('A recibe el mensaje', (await A.evaluate(() => [...document.querySelectorAll('#mensajes .gc-texto')].map((x) => x.textContent))).includes('Hola desde el enlace'));
   await A.screenshot({ path: S + 'invita-3-conv.png' });
+  ok('invitado: sin la barra de la web ni la vuelta a la lista', !(await vis(B, '#barra')) && !(await vis(B, '#cvolver')));
+  await A.tap('#cmas'); await espera(250); await A.tap('#cm-terminar'); await espera(400); await A.tap('#cierre-si').catch(() => {}); await espera(2500);
+  ok('al terminar, el invitado solo ve «Conversación terminada»', (await B.evaluate(() => { const f = document.querySelector('#fin-invitado'); return !!(f && !f.hidden && getComputedStyle(f).display !== 'none'); })) && !(await vis(B, '#app')));
+  await B.screenshot({ path: S + 'invita-5-fin.png' });
+  ok('y sin rastro: sin identidad guardada', await B.evaluate(() => new Promise((r) => { const q = indexedDB.open('guardiana-com', 1); q.onsuccess = () => { const t = q.result.transaction('yo', 'readonly').objectStore('yo').getAll(); t.onsuccess = () => r(t.result.length === 0); t.onerror = () => r(false); }; q.onerror = () => r(false); })));
+  await B.reload(); await espera(2500);
+  ok('al recargar, sigue el final (no se vuelve a la web)', (await B.evaluate(() => { const f = document.querySelector('#fin-invitado'); return !!(f && !f.hidden && getComputedStyle(f).display !== 'none'); })) && !(await vis(B, '#barra')));
+  ok('el que invitó sí vuelve al inicio', await vis(A, '#inicio'));
   // C abre un enlace nuevo cuyo autor no está: «Conectando…», sin campo
   await A.evaluate(() => { document.querySelector('#lista-nueva') && document.querySelector('#lista-nueva').click(); });
   const cC = await b.newContext(Object.assign({}, devices['Pixel 7'], { locale: 'es-ES' }));
