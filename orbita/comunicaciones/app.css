@@ -778,3 +778,4 @@ body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
 .adjuntos span{display:grid;gap:1px}.adjuntos b{font-weight:600;font-size:15px}.adjuntos small{color:#9fb3c4;font-size:12.5px;line-height:1.3}
 .gc-ubicacion{display:grid;gap:4px}.gc-ubicacion small{color:var(--gc-suave,#9fb3c4)}
 .gc-ubi-abrir{justify-self:start;margin-top:4px;padding:6px 12px;border-radius:999px;border:1px solid rgba(156,195,228,.35);color:#9CC3E4;text-decoration:none;font-weight:600;font-size:13.5px}
+.rele[hidden]{display:none!important}
