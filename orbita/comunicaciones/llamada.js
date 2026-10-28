@@ -89,25 +89,55 @@
     const camaraOn = () => !!(cam && cam.getVideoTracks().some((x) => x.enabled && x.readyState === 'live'));
     // Tonos (dueño, 28 Oct 2026, 10:37): quien llama oye el tono de llamada y a quien llaman le suena un timbre, hasta que
     // contesta, rechaza o cuelga. Se hacen aquí con el audio del navegador, sin archivos. Sin respuesta en 45 s, se cancela.
+    // 11:31 (dueño: «que se escuche»): un solo contexto de audio para los tonos, que se desbloquea con el primer toque o tecla
+    // en la página (el iPhone solo deja arrancar el audio desde un gesto; así el timbre suena aunque la llamada llegue sin
+    // tocar nada), más volumen, 425 Hz para el tono de llamada (el de España y buena parte de América) y vibración en Android.
     const SIN_RESPUESTA_MS = 45000;
-    let tonoCtx = null, tonoReloj = null, sinRespuesta = null;
-    function paraTono() { clearInterval(tonoReloj); tonoReloj = null; if (tonoCtx) { try { tonoCtx.close(); } catch (_) {} tonoCtx = null; } }
+    let tonoCtx = null, tonoSalida = null, tonoReloj = null, sinRespuesta = null, tonoSuena = false;
+    const tonoNodos = new Set();
+    function ctxTonos() {
+      if (!tonoCtx) {
+        try { tonoCtx = new (raiz.AudioContext || raiz.webkitAudioContext)(); } catch (_) { return null; }
+        try { tonoSalida = tonoCtx.createDynamicsCompressor(); tonoSalida.connect(tonoCtx.destination); } catch (_) { tonoSalida = tonoCtx.destination; }
+      }
+      if (tonoCtx.state === 'suspended') tonoCtx.resume().catch(() => {});
+      return tonoCtx;
+    }
+    // primer gesto en la página: se crea y se arranca el contexto (queda permitido) y, si no suena nada, se duerme
+    const GESTOS = ['pointerdown', 'keydown', 'touchend'];
+    function desbloqueaTonos() {
+      const c = ctxTonos(); if (!c) return;
+      for (const g of GESTOS) raiz.document.removeEventListener(g, desbloqueaTonos, true);
+      setTimeout(() => { if (!tonoSuena && tonoCtx && tonoCtx.state === 'running') tonoCtx.suspend().catch(() => {}); }, 1500);
+    }
+    for (const g of GESTOS) raiz.document.addEventListener(g, desbloqueaTonos, { capture: true, passive: true });
+    function paraTono() {
+      clearInterval(tonoReloj); tonoReloj = null; tonoSuena = false;
+      for (const n of tonoNodos) { try { n.stop(); } catch (_) {} }
+      tonoNodos.clear();
+      try { if (raiz.navigator.vibrate) raiz.navigator.vibrate(0); } catch (_) {}
+      if (tonoCtx && tonoCtx.state === 'running') tonoCtx.suspend().catch(() => {});
+    }
     function tono(tipo) {
       paraTono();
-      try { tonoCtx = new (raiz.AudioContext || raiz.webkitAudioContext)(); } catch (_) { return; }
-      const ctx = tonoCtx;
+      const ctx = ctxTonos(); if (!ctx) return;
+      tonoSuena = true;
       const pita = (frecs, ini, dur, vol) => {
-        for (const f of frecs) {
+        for (const [f, v] of frecs) {
           const os = ctx.createOscillator(), g = ctx.createGain(), t0 = ctx.currentTime + ini;
           os.type = 'sine'; os.frequency.value = f;
-          g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(vol, t0 + 0.02); g.gain.setValueAtTime(vol, t0 + dur - 0.03); g.gain.linearRampToValueAtTime(0, t0 + dur);
-          os.connect(g).connect(ctx.destination); os.start(t0); os.stop(t0 + dur + 0.05);
+          g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(vol * v, t0 + 0.015); g.gain.setValueAtTime(vol * v, t0 + dur - 0.04); g.gain.linearRampToValueAtTime(0, t0 + dur);
+          os.connect(g).connect(tonoSalida); os.start(t0); os.stop(t0 + dur + 0.05);
+          tonoNodos.add(os); os.onended = () => tonoNodos.delete(os);
         }
       };
-      // tono de llamada: 440 + 480 Hz durante 1,2 s cada 4 s; timbre: dos notas dos veces, cada 2,6 s
-      const ciclo = tipo === 'saliente' ? () => pita([440, 480], 0, 1.2, 0.05) : () => { pita([880], 0, 0.18, 0.12); pita([660], 0.22, 0.18, 0.12); pita([880], 0.6, 0.18, 0.12); pita([660], 0.82, 0.18, 0.12); };
-      if (ctx.state === 'suspended') ctx.resume().catch(() => {});
-      ciclo(); tonoReloj = setInterval(ciclo, tipo === 'saliente' ? 4000 : 2600);
+      const vibra = (patron) => { try { if (raiz.navigator.vibrate) raiz.navigator.vibrate(patron); } catch (_) {} };
+      // tono de llamada: 425 Hz durante 1,2 s cada 4 s; timbre: dos notas con un armónico suave, dos veces, cada 2,6 s
+      const nota = (f) => [[f, 1], [f * 2, 0.25]];
+      const ciclo = tipo === 'saliente' ? () => pita([[425, 1]], 0, 1.2, 0.16)
+        : () => { pita(nota(880), 0, 0.2, 0.22); pita(nota(660), 0.24, 0.2, 0.22); pita(nota(880), 0.62, 0.2, 0.22); pita(nota(660), 0.86, 0.2, 0.22); vibra([350, 150, 350]); };
+      // si el contexto aún no puede sonar (sin ningún gesto en la página), el ciclo sigue y suena en cuanto la persona toque algo
+      ciclo(); tonoReloj = setInterval(() => { if (tonoCtx && tonoCtx.state === 'suspended') tonoCtx.resume().catch(() => {}); ciclo(); }, tipo === 'saliente' ? 4000 : 2600);
     }
     function esperaRespuesta(saliente) {
       clearTimeout(sinRespuesta);
