@@ -11,9 +11,13 @@ Lo de las 19:45 (abajo) sigue valiendo. Novedad: **la agencia de las rondas 65�
   - **67:** hecho lo esencial; queda ZERO v2.
   - **68:** identidad y entrega comprobable primero, después el viaje en directo con etiquetas, la elección de relés y, al final, la multirruta; «comprobante de custodia digital».
   - **69:** capa «AMENAZAS» en Órbita solo con fuentes de licencia comprobada (Phishing.Database, Spamhaus DROP, gráficos de Cloudflare Radar, contexto de HIBP) y la capa agregada de ZERO; DShield, PhishTank, abuse.ch y los datos de Radar, con permiso por escrito.
+- **CANAL VERIFICADO, aplazado** (dueño, 20:35: «Lo dejamos para próximamente»). Antes lo pidió pensado a nivel mundial, con EE. UU. y Europa como ejemplo. Lo explicado y los datos comprobados (normas de Nacha de 2026, Payee Name Verification de la Reserva Federal, Verificación del Beneficiario en la zona euro, «no tocamos dinero») están en `ronda66/notas.md`.
+- **Custodia digital (pregunta del dueño, 20:35): no está terminada.**
+  - **Funciona:** el envío en directo de archivos en Comunicaciones (fragmentos encriptados y numerados; «entregado» al confirmar el receptor).
+  - **Falta:** el comprobante de custodia firmado (ronda 68), ENTREGA TEMPORAL, el buzón profesional con el libro de envíos y la auditoría.
+  - **Propuesta:** empezar por el comprobante; falta el sí del dueño.
 - **Decisiones del dueño pendientes:**
   - nombre y precio del plan profesional;
-  - si CANAL VERIFICADO va en el Plan Profesional o en un plan Empresa aparte;
   - nombre de «ZERO entra antes que tú»;
   - aprobar la capa «AMENAZAS»;
   - las de las rondas 60–62.

@@ -41,3 +41,25 @@
 - **Botón «Creo que me han estafado»** (ChatGPT): NÚCLEO guía para avisar al banco, conservar las evidencias y denunciar. Sencillo y útil desde el primer día.
 - **Antes de venderlo:** revisión jurídica de la responsabilidad y un piloto con identidades y cuentas ficticias.
 - **Decide el dueño:** si el semáforo de cuenta va dentro de ENTREGA en el Plan Profesional (Gemini) o en un plan Empresa aparte (ChatGPT).
+
+## Conversación con el dueño (20:24–20:35) y decisión
+
+- **Lo que GUARDIANA sabría y lo que no** (explicado al dueño):
+  - **Sabría:** la identidad verificada de cada empresa, quién está autorizado a firmar, qué empresas están conectadas y cuándo se comunican, y el registro de operaciones.
+  - **No leería:** el contenido de mensajes y facturas (encriptado de extremo a extremo) ni la cuenta bancaria completa (propuesta: solo los últimos dígitos y una huella).
+- **No tocamos dinero:** GUARDIANA no recibe, no guarda, no mueve dinero ni ordena transferencias; el cliente paga desde su banco. Pendiente de confirmar con un abogado en cada país.
+- **Fácil para el cliente:**
+  - un botón «Comprobar antes de pagar» y tres resultados: verde («Autorizado por tu proveedor · cuenta de siempre»), ámbar («Cambio de cuenta pendiente: faltan autorizaciones») y coral («Factura modificada» o «Firma no válida»);
+  - el proveedor confirma con su huella o su cara, y otra persona de su empresa lo aprueba.
+- **El dueño pide pensarlo a nivel mundial (42 idiomas), con EE. UU. y Europa como ejemplo.** Datos comprobados por Claude en fuentes oficiales (20:30):
+  - **EE. UU.:**
+    - las normas de Nacha obligan a quien origina pagos ACH a tener procesos «reasonably intended to identify Entries… authorized under False Pretenses», y la definición cubre «Business Email Compromise (BEC), vendor impersonation, payroll impersonation»;
+    - fase 1 el 20-mar-2026 (todas las ODFI y los originadores con 6 millones de operaciones o más en 2023); fase 2 el 19-jun-2026 (todos los demás originadores no consumidores);
+    - la Reserva Federal ofrece a los bancos «Payee Name Verification» (FedDetect), sin que la página indique que sea obligatorio.
+
+    Fuentes: nacha.org/rules/risk-management-topics-fraud-monitoring-phase-1 · frbservices.org/financial-services/multiservice-solutions/payee-name-verification
+  - **Zona euro:** Verificación del Beneficiario gratuita desde el 9-oct-2025 (Banco de España, clientebancario.bde.es). No cubre pagos fuera de la zona ni dice quién autorizó el cambio.
+  - **Conclusión:** el banco comprueba el nombre; GUARDIANA comprobaría la autorización. En EE. UU., además, ayudaría a las empresas a cumplir las normas de Nacha (sin prometer que las cumple por sí solo).
+- **Decisión del dueño (20:35): «Lo dejamos para próximamente».** Cuando se retome:
+  - una ronda de la agencia sobre la versión para EE. UU. y Europa (verificación de empresas por país, el identificador mundial LEI, idiomas y precio internacional);
+  - una maqueta de la pantalla «Comprobar antes de pagar».
