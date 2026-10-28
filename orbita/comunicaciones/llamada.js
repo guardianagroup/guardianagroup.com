@@ -545,6 +545,10 @@
     for (const b of document.querySelectorAll('#ll-imagenes [data-imagen]')) b.addEventListener('click', () => eligeImagen(b.dataset.imagen));
     $('#ll-luz').addEventListener('click', eligeLuz);
     $('#ll-ajustes-b').addEventListener('click', () => { ajustes = !ajustes; pinta(); });
+    // cerrar «Voz e imagen»: con «Atrás», con el mismo botón o tocando la imagen fuera del panel
+    const cierraAjustes = () => { ajustes = false; caja.classList.remove('voz-abierta'); pinta(); };
+    { const at = $('#ll-ajustes-atras'); if (at) at.addEventListener('click', (e) => { e.stopPropagation(); cierraAjustes(); }); }
+    caja.addEventListener('click', (e) => { if (!(ajustes || caja.classList.contains('voz-abierta')) || estado === 'entrante') return; if (e.target.closest('#ll-ajustes, #ll-botones, #ll-voz-pill, .gc-llamada-arriba, #ll-tam, button, a, input, label')) return; cierraAjustes(); });
     // al recibir: «Tu voz: Natural ▾» abre y cierra las voces; al elegir una, la píldora lo dice
     const pill = $('#ll-voz-pill');
     if (pill) pill.addEventListener('click', () => { caja.classList.toggle('voz-abierta'); pinta(); });
