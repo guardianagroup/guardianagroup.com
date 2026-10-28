@@ -23,7 +23,7 @@
 <title>GUARDIANA</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261029s">
+<link rel="stylesheet" href="app.css?v=20261029t">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -391,104 +391,18 @@
         <p class="t"><span data-p="ios26 ios ipad crios26 crios otro26 otro app appand android androidmenu androidotro">Se abre como una app, a pantalla completa. Se hace una sola vez.</span><span data-p="pc pcno">Se abre en su propia ventana, como una app.</span></p>
       </div>
     </div>
-    <ol class="guia-pasos">
-      <!-- iPhone · Safari en iOS 26: «⋯» a la derecha de la dirección y «Compartir» -->
-      <li data-p="ios26">
-        <div class="g-txt">Toca ⋯, a la derecha de la dirección, y luego «Compartir».<small class="g-alt">¿Ves «Compartir» en la barra? Tócalo.</small></div>
-        <div class="g-ui"><span class="ui ui-circ toca"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg></span><span class="ui-sig" aria-hidden="true">›</span><span class="ui ui-fila toca"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg><span>Compartir</span></span></div>
-        <svg class="g-movil" viewBox="0 0 40 72" aria-hidden="true"><rect class="c" x="1" y="1" width="38" height="70" rx="7"/><rect class="b" x="5" y="59" width="22" height="7" rx="3.5"/><circle class="o" cx="33" cy="62.5" r="3.4"/><circle class="p" cx="33" cy="62.5" r="2.6"/></svg>
-      </li>
-      <!-- iPhone · Safari en iOS 18 o anterior: «Compartir» abajo en el centro (en el iPad, arriba a la derecha) -->
-      <li data-p="ios ipad">
-        <div class="g-txt"><span data-p="ios">Toca «Compartir», abajo en el centro.</span><span data-p="ipad">Toca «Compartir», arriba a la derecha.</span></div>
-        <div class="g-ui"><span class="ui ui-circ toca"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span></div>
-        <svg class="g-movil" data-p="ios" viewBox="0 0 40 72" aria-hidden="true"><rect class="c" x="1" y="1" width="38" height="70" rx="7"/><rect class="b" x="5" y="52" width="30" height="6" rx="3"/><circle class="o" cx="20" cy="64" r="3.4"/><circle class="p" cx="20" cy="64" r="2.6"/></svg>
-      </li>
-      <!-- iPhone · Chrome: «Compartir» en la barra de la dirección -->
-      <li data-p="crios26 crios">
-        <div class="g-txt">Toca «Compartir», a la derecha de la dirección.</div>
-        <div class="g-ui"><span class="ui ui-dir"><span translate="no">guardianagroup.com</span><span class="ui-dir-b toca"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span></span></div>
-        <svg class="g-movil" viewBox="0 0 40 72" aria-hidden="true"><rect class="c" x="1" y="1" width="38" height="70" rx="7"/><rect class="b" x="5" y="6" width="22" height="7" rx="3.5"/><circle class="o" cx="32" cy="9.5" r="3.4"/><circle class="p" cx="32" cy="9.5" r="2.6"/></svg>
-      </li>
-      <!-- iPhone · otros navegadores (Firefox, Edge, Opera, DuckDuckGo…) -->
-      <li data-p="otro26 otro">
-        <div class="g-txt">Abre el menú del navegador y toca «Compartir».</div>
-        <div class="g-ui"><span class="ui ui-circ toca"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span></div>
-      </li>
-      <!-- iOS 26: en la hoja de compartir, «Ver más» (un botón redondo con el nombre debajo) -->
-      <li class="junto" data-p="ios26 crios26 otro26">
-        <div class="g-txt">Toca «Ver más».</div>
-        <div class="g-ui"><span class="ui ui-vermas"><i class="toca"><svg viewBox="0 0 24 24"><path d="M6.5 9.5 12 15l5.5-5.5"/></svg></i><span>Ver más</span></span></div>
-      </li>
-      <li data-p="ios ipad crios otro">
-        <div class="g-txt">Desliza el menú hacia arriba.</div>
-      </li>
-      <!-- «Agregar a Inicio»: en iOS 26, el símbolo a la izquierda (como en su pantalla, 17:01); antes, a la derecha -->
-      <li data-p="ios26 crios26 otro26">
-        <div class="g-txt"><span data-es-es="Toca «Añadir a pantalla de inicio».">Toca «Agregar a Inicio».</span></div>
-        <div class="g-ui"><span class="ui ui-fila ancha toca"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg><span data-es-es="Añadir a pantalla de inicio">Agregar a Inicio</span></span></div>
-      </li>
-      <li data-p="ios ipad crios otro">
-        <div class="g-txt"><span data-es-es="Toca «Añadir a pantalla de inicio».">Toca «Agregar a pantalla de inicio».</span></div>
-        <div class="g-ui"><span class="ui ui-fila ancha der toca"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg><span data-es-es="Añadir a pantalla de inicio">Agregar a pantalla de inicio</span></span></div>
-      </li>
-      <li data-p="ios26 crios26 otro26">
-        <div class="g-txt"><span data-es-es="Arriba a la derecha, toca «Añadir».">Arriba a la derecha, toca «Agregar».</span><small class="g-alt">Si ves «Abrir como app web», déjalo activado.</small></div>
-        <div class="g-ui"><span class="ui ui-azul toca"><span data-es-es="Añadir">Agregar</span></span></div>
-      </li>
-      <li class="lado" data-p="ios ipad crios otro">
-        <div class="g-txt"><span data-es-es="Arriba a la derecha, toca «Añadir».">Arriba a la derecha, toca «Agregar».</span></div>
-        <div class="g-ui"><span class="ui ui-azul solo toca"><span data-es-es="Añadir">Agregar</span></span></div>
-      </li>
-      <!-- Dentro de Instagram, Facebook, TikTok…: esas apps no dejan añadirla; primero, al navegador -->
-      <li data-p="app">
-        <div class="g-txt">Toca ⋯ y elige «Abrir en Safari» o «Abrir en el navegador».</div>
-        <div class="g-ui"><span class="ui ui-circ toca"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg></span></div>
-      </li>
-      <li data-p="app">
-        <div class="g-txt">En Safari, vuelve a tocar «Añadir a la pantalla de inicio».</div>
-      </li>
-      <li data-p="appand">
-        <div class="g-txt">Toca los tres puntos y elige «Abrir en Chrome» o «Abrir en el navegador».</div>
-        <div class="g-ui"><span class="ui ui-circ and toca"><svg viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="18.5" r="1.7"/></svg></span></div>
-      </li>
-      <li data-p="appand">
-        <div class="g-txt">En Chrome, vuelve a tocar «Añadir a la pantalla de inicio».</div>
-      </li>
-      <!-- Android (y el ordenador) con la ventana del propio sistema: un toque aquí y «Instalar» en su aviso -->
-      <li data-p="android pc">
-        <div class="g-txt"><span data-p="android">Toca «Instalar», aquí abajo.</span><span data-p="pc">Haz clic en «Instalar», aquí abajo.</span></div>
-      </li>
-      <li data-p="android pc">
-        <div class="g-txt"><span data-p="android">En el aviso del teléfono, toca «Instalar».</span><span data-p="pc">En el aviso del navegador, haz clic en «Instalar».</span></div>
-        <div class="g-ui"><span class="ui ui-dlg"><span class="ui-dlg-app"><img src="/icon-192.png" alt="" width="36" height="36"><span><b translate="no">GUARDIANA</b><small translate="no">guardianagroup.com</small></span></span><span class="ui-dlg-bot"><span class="ui-dlg-no">Cancelar</span><span class="ui-pill toca">Instalar</span></span></span></div>
-      </li>
-      <!-- Android sin la ventana del sistema (todavía): el menú ⋮ de Chrome -->
-      <li data-p="androidmenu">
-        <div class="g-txt">Toca los tres puntos, arriba a la derecha.</div>
-        <div class="g-ui"><span class="ui ui-circ and toca"><svg viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="18.5" r="1.7"/></svg></span></div>
-        <svg class="g-movil" viewBox="0 0 40 72" aria-hidden="true"><rect class="c" x="1" y="1" width="38" height="70" rx="7"/><rect class="b" x="5" y="6" width="24" height="7" rx="3.5"/><circle class="o" cx="34" cy="9.5" r="3.4"/><circle class="p" cx="34" cy="9.5" r="2.6"/></svg>
-      </li>
-      <li data-p="androidmenu">
-        <div class="g-txt"><span data-es-es="Toca «Instalar aplicación» o «Añadir a pantalla de inicio».">Toca «Instalar app» o «Agregar a la pantalla principal».</span></div>
-        <div class="g-ui"><span class="ui ui-menu toca"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 7.5v6.5M9.3 11.4 12 14l2.7-2.6"/></svg><span data-es-es="Instalar aplicación">Instalar app</span></span></div>
-      </li>
-      <li class="junto" data-p="androidmenu">
-        <div class="g-txt">Confirma con «Instalar».</div>
-        <div class="g-ui"><span class="ui ui-pill toca">Instalar</span></div>
-      </li>
-      <li data-p="androidotro">
-        <div class="g-txt">Abre el menú del navegador (los tres puntos o las tres rayas).</div>
-      </li>
-      <li data-p="androidotro">
-        <div class="g-txt"><span data-es-es="Toca «Instalar» o «Añadir a pantalla de inicio» y confirma.">Toca «Instalar» o «Agregar a la pantalla de inicio» y confirma.</span></div>
-      </li>
+    <!-- Dos pasos, con los dos símbolos del iPhone en grande (dueño, 28 Oct 2026, 18:39: «eso es demasiado lioso… punto 1, sale el
+         símbolo ese de compartir; punto 2, el mismo símbolo del iPhone de añadir a pantalla de inicio… ya está… una persona de 60
+         años tiene que poder hacerlo»). Cada paso, con data-p: los teléfonos y navegadores en los que sale (app.js, plataformaGuia). -->
+    <ol class="guia-pasos guia-facil">
+      <li data-p="ios26 ios ipad crios26 crios otro26 otro"><span class="g-icono"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><div class="g-txt">Toca <b>Compartir</b><small class="g-alt">Si no lo ves, está en los tres puntos ⋯</small></div></li>
+      <li data-p="ios26 ios ipad crios26 crios otro26 otro"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><div class="g-txt"><span data-es-es="Toca «Añadir a pantalla de inicio»">Toca «Agregar a Inicio»</span><small class="g-alt"><span data-es-es="Y después, «Añadir»">Y después, «Agregar»</span></small></div></li>
+      <li data-p="app appand"><span class="g-icono"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg></span><div class="g-txt">Toca ⋯ y elige «Abrir en el navegador»<small class="g-alt">Allí, vuelve a abrir este enlace</small></div></li>
+      <li data-p="android pc"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 7.5v6.5M9.3 11.4 12 14l2.7-2.6"/></svg></span><div class="g-txt"><span data-p="android">Toca «Instalar», aquí abajo</span><span data-p="pc">Haz clic en «Instalar», aquí abajo</span><small class="g-alt">Y confírmalo en el aviso</small></div></li>
+      <li data-p="androidmenu androidotro"><span class="g-icono"><svg viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="18.5" r="1.7"/></svg></span><div class="g-txt">Toca los tres puntos ⋮</div></li>
+      <li data-p="androidmenu androidotro"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 7.5v6.5M9.3 11.4 12 14l2.7-2.6"/></svg></span><div class="g-txt"><span data-es-es="Toca «Instalar aplicación»">Toca «Instalar app»</span><small class="g-alt">Y confírmalo con «Instalar»</small></div></li>
+      <li data-p="pcno"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 7.5v6.5M9.3 11.4 12 14l2.7-2.6"/></svg></span><div class="g-txt">En Chrome o Edge, haz clic en el icono de instalar, a la derecha de la dirección</div></li>
     </ol>
-    <div class="guia-pc" data-p="pcno">
-      <p class="t">En Chrome o Edge: el icono de instalar, a la derecha de la dirección.</p>
-      <p class="t"><span data-es-es="En Safari, en el Mac: Archivo › «Añadir al Dock».">En Safari, en el Mac: Archivo › «Agregar al Dock».</span></p>
-    </div>
-    <p class="t nota guia-nota" data-p="ios26 ios ipad crios26 crios otro26 otro"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg><span>Si el nombre cambia un poco, busca este símbolo.</span></p>
     <div class="fila"><button type="button" class="boton principal" id="completa-ok"><span data-p="ios26 ios ipad crios26 crios otro26 otro app appand androidmenu androidotro pcno">Entendido</span><span data-p="android pc">Ahora no</span></button><button type="button" class="boton principal" id="guia-instalar" data-p="android pc">Instalar</button></div>
   </div>
 </div>
@@ -630,7 +544,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261029p59"></script>
+<script src="/orbita/static/idioma.js?v=20261029p60"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
