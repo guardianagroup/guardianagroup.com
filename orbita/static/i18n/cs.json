@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Zkusit znovu",
   "Esta web no se ha abierto": "Tento web se neotevřel",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Některé weby brzdí prohlížeče, které vycházejí ze serveru, jako je bublina. Pro nový pokus stiskněte „Obnovit“.",
-  "Actualizar": "Obnovit"
+  "Actualizar": "Obnovit",
+  "Comprobante válido": "Platný doklad",
+  "Verificar otro comprobante": "Ověřit jiný doklad",
+  "¿Tienes el archivo que se envió?": "Máte soubor, který byl odeslán?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Vyberte ho a váš prohlížeč ověří, že je to přesně ten soubor, aniž by ho kamkoli odeslal.",
+  "Elegir el archivo": "Vybrat soubor",
+  "Es exactamente el archivo que se envió": "Je to přesně ten soubor, který byl odeslán",
+  "No es el mismo archivo": "Není to stejný soubor",
+  "Ese es el comprobante, no el archivo que se envió": "To je doklad, ne soubor, který byl odeslán",
+  "Elige el archivo que se envió:": "Vyberte soubor, který byl odeslán:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Má jinou velikost: není to soubor, který byl odeslán.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Má stejnou velikost, ale jiný obsah: byl změněn.",
+  "Esperado": "Očekávaný"
  },
  "p": {
   "intento": "Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

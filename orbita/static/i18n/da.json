@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Prøv igen",
   "Esta web no se ha abierto": "Dette websted blev ikke åbnet",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Nogle websteder bremser browsere, der kommer fra en server, som boblen. Tryk på »Genindlæs« for at prøve igen.",
-  "Actualizar": "Genindlæs"
+  "Actualizar": "Genindlæs",
+  "Comprobante válido": "Gyldig kvittering",
+  "Verificar otro comprobante": "Verificér en anden kvittering",
+  "¿Tienes el archivo que se envió?": "Har du den fil, der blev sendt?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Vælg den, så kontrollerer din browser, at det er præcis den fil, uden at sende den nogen steder hen.",
+  "Elegir el archivo": "Vælg filen",
+  "Es exactamente el archivo que se envió": "Det er præcis den fil, der blev sendt",
+  "No es el mismo archivo": "Det er ikke den samme fil",
+  "Ese es el comprobante, no el archivo que se envió": "Det er kvitteringen, ikke den fil, der blev sendt",
+  "Elige el archivo que se envió:": "Vælg den fil, der blev sendt:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Den har en anden størrelse: det er ikke den fil, der blev sendt.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Den har samme størrelse, men indholdet er anderledes: den er blevet ændret.",
+  "Esperado": "Forventet"
  },
  "p": {
   "intento": "Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

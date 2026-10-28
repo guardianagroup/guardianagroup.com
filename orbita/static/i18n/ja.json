@@ -2844,7 +2844,19 @@
   "Volver a intentar": "もう一度試す",
   "Esta web no se ha abierto": "このサイトを開けませんでした",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "一部のサイトは、バブルのようにサーバーから来るブラウザを制限しています。もう一度試すには「再読み込み」を押してください。",
-  "Actualizar": "再読み込み"
+  "Actualizar": "再読み込み",
+  "Comprobante válido": "有効な証明書",
+  "Verificar otro comprobante": "別の証明書を検証",
+  "¿Tienes el archivo que se envió?": "送信されたファイルはお手元にありますか？",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "ファイルを選ぶと、ブラウザがどこにも送信せずに、それが送信されたファイルそのものかどうかを確認します。",
+  "Elegir el archivo": "ファイルを選択",
+  "Es exactamente el archivo que se envió": "送信されたファイルそのものです",
+  "No es el mismo archivo": "同じファイルではありません",
+  "Ese es el comprobante, no el archivo que se envió": "これは証明書で、送信されたファイルではありません",
+  "Elige el archivo que se envió:": "送信されたファイルを選んでください：",
+  "Tiene otro tamaño: no es el archivo que se envió.": "サイズが異なります：送信されたファイルではありません。",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "サイズは同じですが、内容が異なります：変更されています。",
+  "Esperado": "本来のファイル"
  },
  "p": {
   "intento": "今日最も多く試みたのは {1}、{2} {2?回|回}。",

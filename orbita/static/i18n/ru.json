@@ -2844,7 +2844,19 @@
   "Volver a intentar": "Попробовать ещё раз",
   "Esta web no se ha abierto": "Этот сайт не открылся",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Некоторые сайты сдерживают браузеры, выходящие с сервера, такие как пузырь. Нажмите «Обновить», чтобы попробовать ещё раз.",
-  "Actualizar": "Обновить"
+  "Actualizar": "Обновить",
+  "Comprobante válido": "Действительная квитанция",
+  "Verificar otro comprobante": "Проверить другую квитанцию",
+  "¿Tienes el archivo que se envió?": "У вас есть файл, который был отправлен?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Выберите его, и ваш браузер проверит, что это именно тот файл, никуда его не отправляя.",
+  "Elegir el archivo": "Выбрать файл",
+  "Es exactamente el archivo que se envió": "Это именно тот файл, который был отправлен",
+  "No es el mismo archivo": "Это не тот же файл",
+  "Ese es el comprobante, no el archivo que se envió": "Это квитанция, а не файл, который был отправлен",
+  "Elige el archivo que se envió:": "Выберите файл, который был отправлен:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "У него другой размер: это не тот файл, который был отправлен.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "У него тот же размер, но другое содержимое: он был изменён.",
+  "Esperado": "Ожидаемый"
  },
  "p": {
   "intento": "Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

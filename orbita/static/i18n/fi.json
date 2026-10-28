@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Yritä uudelleen",
   "Esta web no se ha abierto": "Tämä sivusto ei avautunut",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Jotkin sivustot jarruttavat palvelimelta tulevia selaimia, kuten kuplaa. Yritä uudelleen painamalla ”Lataa uudelleen”.",
-  "Actualizar": "Lataa uudelleen"
+  "Actualizar": "Lataa uudelleen",
+  "Comprobante válido": "Kuitti kelpaa",
+  "Verificar otro comprobante": "Varmenna toinen kuitti",
+  "¿Tienes el archivo que se envió?": "Onko sinulla lähetetty tiedosto?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Valitse se, niin selaimesi tarkistaa, että se on täsmälleen sama tiedosto, lähettämättä sitä minnekään.",
+  "Elegir el archivo": "Valitse tiedosto",
+  "Es exactamente el archivo que se envió": "Se on täsmälleen lähetetty tiedosto",
+  "No es el mismo archivo": "Se ei ole sama tiedosto",
+  "Ese es el comprobante, no el archivo que se envió": "Tämä on kuitti, ei lähetetty tiedosto",
+  "Elige el archivo que se envió:": "Valitse lähetetty tiedosto:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Sen koko on eri: se ei ole lähetetty tiedosto.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Sen koko on sama, mutta sisältö on eri: sitä on muutettu.",
+  "Esperado": "Odotettu"
  },
  "p": {
   "intento": "Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

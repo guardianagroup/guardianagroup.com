@@ -2844,7 +2844,19 @@
   "Volver a intentar": "Spróbuj ponownie",
   "Esta web no se ha abierto": "Ta strona się nie otworzyła",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Niektóre strony hamują przeglądarki wychodzące z serwera, takie jak bańka. Naciśnij „Odśwież”, aby spróbować ponownie.",
-  "Actualizar": "Odśwież"
+  "Actualizar": "Odśwież",
+  "Comprobante válido": "Prawidłowe poświadczenie",
+  "Verificar otro comprobante": "Zweryfikuj inne poświadczenie",
+  "¿Tienes el archivo que se envió?": "Masz plik, który został wysłany?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Wybierz go, a twoja przeglądarka sprawdzi, czy to dokładnie ten plik, bez wysyłania go dokądkolwiek.",
+  "Elegir el archivo": "Wybierz plik",
+  "Es exactamente el archivo que se envió": "To dokładnie ten plik, który został wysłany",
+  "No es el mismo archivo": "To nie jest ten sam plik",
+  "Ese es el comprobante, no el archivo que se envió": "To jest poświadczenie, a nie plik, który został wysłany",
+  "Elige el archivo que se envió:": "Wybierz plik, który został wysłany:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Ma inny rozmiar: to nie jest plik, który został wysłany.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Ma ten sam rozmiar, ale inną zawartość: został zmieniony.",
+  "Esperado": "Oczekiwany"
  },
  "p": {
   "intento": "Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

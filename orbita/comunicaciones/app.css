@@ -228,7 +228,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 /* ---- llamada ---- */
 .gc-llamada .videos{position:absolute;inset:0;z-index:-1;background:#000}
 .gc-llamada .videos #v-remoto{width:100%;height:100%;object-fit:contain}
-.gc-llamada .videos #v-local{position:absolute;right:16px;bottom:140px;width:160px;max-width:28vw;aspect-ratio:3/4;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#111}
+.gc-llamada .videos #v-local{position:absolute;right:16px;bottom:140px;width:160px;max-width:28%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#111}
 .gc-llamada{z-index:70}
 .gc-llamada.con-video .gc-llamada-centro{justify-content:flex-start;padding-top:12px}
 .gc-llamada.con-video .gc-avatar-grande{display:none}
@@ -259,8 +259,8 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .gc-llamada.mini .gc-llamada-boton button{width:42px;height:42px}
 .gc-llamada.mini .gc-llamada-boton.gc-colgar button{width:46px;height:46px}
 .gc-llamada.mini .gc-llamada-boton button svg{width:19px;height:19px}
-@media (min-width:761px){.gc-llamada .videos #v-local{width:240px;max-width:24vw;aspect-ratio:16/9;bottom:150px}}
-@media (max-width:760px){.gc-llamada.mini{inset:auto 8px calc(76px + env(safe-area-inset-bottom)) 8px;width:auto}.gc-llamada.mini .videos{max-height:26vh}.ll-mini-b span{display:none}}
+@media (hover:hover) and (pointer:fine),(min-width:761px){.gc-llamada .videos #v-local{width:240px;max-width:24%;aspect-ratio:16/9;bottom:150px}}
+@media (max-width:760px) and (pointer:coarse){.gc-llamada.mini{inset:auto 8px calc(76px + env(safe-area-inset-bottom)) 8px;width:auto}.gc-llamada.mini .videos{max-height:26vh}.ll-mini-b span{display:none}}
 
 /* ---- aviso ---- */
 .aviso{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:80;max-width:min(520px,calc(100vw - 32px));padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:13.5px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
@@ -449,12 +449,35 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .gc-llamada .gc-llamada-arriba,.gc-llamada .gc-llamada-centro,.gc-llamada .gc-llamada-botones{transition:opacity .35s ease}
 .gc-llamada.con-video.reposo .gc-llamada-arriba,.gc-llamada.con-video.reposo .gc-llamada-centro,.gc-llamada.con-video.reposo .gc-llamada-botones{opacity:0;pointer-events:none}
 .gc-llamada.con-video.reposo{background:transparent;cursor:none}
-/* con la tarjeta abierta, tu imagen pequeña sube para no quedar debajo */
-.gc-llamada.ajustes .videos #v-local{bottom:auto;top:64px}
-@media (max-width:760px){
+/* 28 Oct 2026, 12:06 (dueño): tu imagen pequeña no se mueve al abrir «Voz e imagen»; en el ordenador la tarjeta deja libre
+   su columna a cada lado (simétrica), y en el teléfono la tapa mientras está abierta */
+@media (hover:hover) and (pointer:fine),(min-width:761px){.gc-llamada.con-video .ll-ajustes,.gc-llamada.solo-mia .ll-ajustes{width:min(820px,max(calc(100% - 2 * (min(240px, 24%) + 40px)),min(520px,calc(100% - 32px))))}}
+/* la llamada se maneja como una aplicación: sin selección de texto ni cursor de escribir */
+.gc-llamada{-webkit-user-select:none;user-select:none;cursor:default}.gc-llamada button,.gc-llamada label{cursor:pointer}
+@media (max-width:760px) and (pointer:coarse){
   .ll-ajustes{padding:14px 4px}
   .ll-voces{flex-basis:100%;padding:0 10px}
   .ll-ajustes .ll-imagenes:not([hidden]){border-left:0;border-top:1px solid rgba(156,195,228,.14);padding-top:14px}
   .ll-voces-botones button{min-height:32px;padding:0 11px;font-size:12.5px}
   .gc-llamada.con-video .ll-ajustes,.gc-llamada.solo-mia .ll-ajustes{bottom:calc(118px + env(safe-area-inset-bottom));width:calc(100% - 16px);max-height:calc(100% - 200px);overflow:auto}
 }
+/* 28 Oct 2026, 12:06 (dueño, «simetría»): en el teléfono, arriba quedan el candado y «Ver el chat»; la calidad va centrada debajo */
+@media (max-width:560px) and (pointer:coarse){
+  .gc-llamada-arriba{flex-wrap:wrap;row-gap:4px}
+  .gc-llamada-arriba #ll-calidad{order:3;flex:1 0 100%;text-align:center;font-size:11.5px}
+  .gc-llamada-arriba .gc-llamada-cifrado{flex:1 1 0%;min-width:0;text-align:left}
+}
+/* 28 Oct 2026, 12:22–12:24 (dueño): la videollamada no cambia con el zoom ni con el tamaño de la ventana.
+   · Los botones llevan fondo propio: el mismo color sobre cualquier imagen (antes eran casi transparentes y cambiaban con lo de detrás).
+   · En el ordenador la llamada nunca se dibuja en menos de 640 × 480: si hay menos sitio (un zoom del 300 %, una ventana pequeña),
+     se reduce entera, como una imagen, y nada cambia de sitio (llamada.js, «escala»). En el teléfono sigue su diseño de teléfono.
+   · Tu imagen pequeña se arrastra con el ratón o el dedo y se queda donde la dejes (llamada.js, «miImagen»). */
+.gc-llamada.con-video .gc-llamada-boton:not(.gc-colgar) button:not([aria-pressed="true"]):not(:disabled){background:rgba(16,22,30,.86);border-color:rgba(156,195,228,.28);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.gc-llamada.con-video .gc-llamada-boton.gc-colgar button{background:var(--gc-alerta);border-color:var(--gc-alerta)}
+.gc-llamada.con-video .gc-llamada-boton>span{color:#DCE5ED;text-shadow:0 1px 6px rgba(0,0,0,.9)}
+.gc-llamada.escalada:not(.mini){inset:0 auto auto 0;width:var(--ancho);height:var(--alto);transform:scale(var(--escala));transform-origin:0 0}
+.gc-llamada.escalada.mini{transform:scale(var(--escala));transform-origin:100% 100%}
+.gc-llamada.movida:not(.mini) .videos #v-local{left:var(--mi-x);top:var(--mi-y);right:auto;bottom:auto}
+.gc-llamada.mi-agarre:not(.mini){cursor:grab}.gc-llamada.arrastrando:not(.mini){cursor:grabbing}
+.gc-llamada.arrastrando .videos #v-local{box-shadow:0 0 0 2px var(--accent),0 18px 40px -12px #000}
+.gc-llamada:not(.mini) .gc-llamada-centro,.gc-llamada:not(.mini) .videos{touch-action:none}

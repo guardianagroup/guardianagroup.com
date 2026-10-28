@@ -2844,7 +2844,19 @@
   "Volver a intentar": "మళ్లీ ప్రయత్నించండి",
   "Esta web no se ha abierto": "ఈ సైట్ తెరుచుకోలేదు",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "కొన్ని సైట్‌లు సర్వర్ నుండి వచ్చే బ్రౌజర్లను, బబుల్ లాంటివాటిని, అడ్డుకుంటాయి. మళ్లీ ప్రయత్నించడానికి “రీలోడ్ చేయండి” నొక్కండి.",
-  "Actualizar": "రీలోడ్ చేయండి"
+  "Actualizar": "రీలోడ్ చేయండి",
+  "Comprobante válido": "చెల్లుబాటు అయ్యే రసీదు",
+  "Verificar otro comprobante": "మరో రసీదును ధృవీకరించండి",
+  "¿Tienes el archivo que se envió?": "పంపిన ఫైల్ మీ దగ్గర ఉందా?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "దాన్ని ఎంచుకోండి, మీ బ్రౌజర్ దాన్ని ఎక్కడికీ పంపకుండానే అది సరిగ్గా ఆ ఫైలేనా అని తనిఖీ చేస్తుంది.",
+  "Elegir el archivo": "ఫైల్‌ను ఎంచుకోండి",
+  "Es exactamente el archivo que se envió": "ఇది సరిగ్గా పంపిన ఫైలే",
+  "No es el mismo archivo": "ఇది అదే ఫైల్ కాదు",
+  "Ese es el comprobante, no el archivo que se envió": "ఇది రసీదు, పంపిన ఫైల్ కాదు",
+  "Elige el archivo que se envió:": "పంపిన ఫైల్‌ను ఎంచుకోండి:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "దీని పరిమాణం వేరు: ఇది పంపిన ఫైల్ కాదు.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "దీని పరిమాణం అదే, కానీ కంటెంట్ వేరు: ఇది మార్చబడింది.",
+  "Esperado": "ఆశించినది"
  },
  "p": {
   "intento": "ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

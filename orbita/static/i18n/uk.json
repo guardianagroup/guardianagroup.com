@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Спробувати ще раз",
   "Esta web no se ha abierto": "Цей сайт не відкрився",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Деякі сайти стримують браузери, що виходять із сервера, як-от бульбашка. Натисніть «Оновити», щоб спробувати ще раз.",
-  "Actualizar": "Оновити"
+  "Actualizar": "Оновити",
+  "Comprobante válido": "Дійсна квитанція",
+  "Verificar otro comprobante": "Перевірити іншу квитанцію",
+  "¿Tienes el archivo que se envió?": "У вас є файл, який було надіслано?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Виберіть його, і ваш браузер перевірить, що це саме той файл, нікуди його не надсилаючи.",
+  "Elegir el archivo": "Вибрати файл",
+  "Es exactamente el archivo que se envió": "Це саме той файл, який було надіслано",
+  "No es el mismo archivo": "Це не той самий файл",
+  "Ese es el comprobante, no el archivo que se envió": "Це квитанція, а не файл, який було надіслано",
+  "Elige el archivo que se envió:": "Виберіть файл, який було надіслано:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Він має інший розмір: це не той файл, який було надіслано.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Він має той самий розмір, але інший вміст: його змінено.",
+  "Esperado": "Очікуваний"
  },
  "p": {
   "intento": "Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

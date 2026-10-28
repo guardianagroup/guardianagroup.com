@@ -2844,7 +2844,19 @@
   "Volver a intentar": "Încearcă din nou",
   "Esta web no se ha abierto": "Acest site nu s-a deschis",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Unele site-uri frânează browserele care ies dintr-un server, cum este bula. Apasă „Reîncarcă” pentru a încerca din nou.",
-  "Actualizar": "Reîncarcă"
+  "Actualizar": "Reîncarcă",
+  "Comprobante válido": "Dovadă validă",
+  "Verificar otro comprobante": "Verifică altă dovadă",
+  "¿Tienes el archivo que se envió?": "Ai fișierul care a fost trimis?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Alege-l și browserul tău va verifica dacă este exact acel fișier, fără să-l trimită nicăieri.",
+  "Elegir el archivo": "Alege fișierul",
+  "Es exactamente el archivo que se envió": "Este exact fișierul care a fost trimis",
+  "No es el mismo archivo": "Nu este același fișier",
+  "Ese es el comprobante, no el archivo que se envió": "Aceasta este dovada, nu fișierul care a fost trimis",
+  "Elige el archivo que se envió:": "Alege fișierul care a fost trimis:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Are altă dimensiune: nu este fișierul care a fost trimis.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Are aceeași dimensiune, dar conținutul este diferit: a fost modificat.",
+  "Esperado": "Așteptat"
  },
  "p": {
   "intento": "Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

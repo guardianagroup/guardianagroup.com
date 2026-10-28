@@ -10,7 +10,7 @@
 <title>GUARDIANA · Verificar un comprobante</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="../app.css?v=20261028g">
+<link rel="stylesheet" href="../app.css?v=20261028i">
 <link rel="stylesheet" href="../viaje.css?v=20261028a">
 <style>
 body.verificar{height:auto;min-height:100dvh;overflow:visible;display:block}
@@ -40,7 +40,26 @@ body.verificar{height:auto;min-height:100dvh;overflow:visible;display:block}
 .vf-como ul{margin:6px 0 0;padding-left:18px;display:grid;gap:8px;color:var(--muted);font-size:13.5px;line-height:1.6}
 .vf-como b{color:#DCE5ED;font-weight:600}
 .vf-como pre{margin:14px 0 0;padding:12px 14px;border-radius:10px;background:#0A0F15;border:1px solid var(--line);font:400 12px/1.75 var(--mono);color:#DCE5ED;overflow-x:auto}
-@media (max-width:560px){.vf{padding-top:24px}.barra .barra-t{display:none}}
+/* 28 Oct 2026 (dueño, 12:00): «debe aparecer en pantalla algo más seguro… un símbolo, algo para que la persona entienda»: el veredicto
+   va arriba y grande, con su sello (verde, ámbar o coral); el estado pequeño de la tarjeta se oculta aquí para no repetirlo */
+.vf-veredicto{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding:22px 24px;border-radius:18px;border:1px solid rgba(156,195,228,.2);background:rgba(12,18,26,.7)}
+.vf-veredicto.bien{border-color:rgba(92,201,138,.6);background:rgba(92,201,138,.09)}
+.vf-veredicto.aviso{border-color:rgba(240,199,127,.6);background:rgba(240,199,127,.08)}
+.vf-veredicto.mal{border-color:rgba(224,122,108,.65);background:rgba(224,122,108,.09)}
+.vf-sello{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;color:#06080C;background:#9CC3E4;flex:none}
+.bien>.vf-sello{background:#5CC98A}.aviso>.vf-sello{background:#F0C77F}.mal>.vf-sello{background:#E07A6C}
+.vf-sello svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.vf-ver-t{display:grid;gap:5px;min-width:0}
+.vf-ver-t b{font:600 22px/1.2 var(--texto);color:#F4F6F8}
+.vf-ver-t span{color:#DCE5ED;font-size:14.5px;line-height:1.5}
+.vf-ver-t small{color:var(--muted);font-size:12.5px;line-height:1.45;overflow-wrap:anywhere}
+.verificar #cuerpo .cu-estado{display:none}
+.vf-esperado{margin:-4px 0 14px;font:500 13.5px/1.45 var(--texto);color:#F4F6F8;overflow-wrap:anywhere}
+.vf-arch-res{grid-template-columns:auto 1fr;align-items:center;column-gap:14px;padding:14px 16px}
+.vf-arch-res>.vf-sello{width:40px;height:40px;grid-row:1 / span 3}.vf-arch-res>.vf-sello svg{width:20px;height:20px}
+.vf-arch-res b{font-size:15px}.vf-arch-res .vf-det{color:#DCE5ED;font:400 13px/1.5 var(--texto);word-break:normal}
+.vf-arch-res.aviso{border:1px solid rgba(240,199,127,.55);background:rgba(240,199,127,.08)}.vf-arch-res.aviso b{color:#F0C77F}
+@media (max-width:560px){.vf{padding-top:24px}.barra .barra-t{display:none}.vf-veredicto{grid-template-columns:auto 1fr;padding:18px}.vf-veredicto #otro{grid-column:1 / -1;justify-self:start}.vf-ver-t b{font-size:19px}.vf-sello{width:50px;height:50px}}
 </style>
 </head>
 <body class="verificar">
@@ -67,16 +86,22 @@ body.verificar{height:auto;min-height:100dvh;overflow:visible;display:block}
   </section>
   <p class="vf-error" id="error" role="alert" hidden></p>
   <section class="vf-resultado" id="resultado" hidden>
-    <div class="cu-cuerpo" id="cuerpo"></div>
-    <div class="vf-acciones" id="acciones" hidden><button type="button" class="boton principal" id="pdf">Descargar PDF</button></div>
+    <div class="vf-veredicto" id="veredicto" role="status" aria-live="polite">
+      <span class="vf-sello" aria-hidden="true"></span>
+      <div class="vf-ver-t"><b id="ver-titulo"></b><span id="ver-texto"></span><small id="ver-archivo" translate="no"></small></div>
+      <button type="button" class="boton" id="otro">Verificar otro comprobante</button>
+    </div>
     <div class="vf-archivo" id="zona-arch">
-      <h2>¿Es el mismo archivo?</h2>
-      <p class="t">Elige el archivo: tu navegador calcula su huella SHA-256 y la compara con la del comprobante. El archivo no se envía a ningún sitio.</p>
-      <button type="button" class="boton" id="elige-arch">Comprobar el archivo</button>
+      <h2>¿Tienes el archivo que se envió?</h2>
+      <p class="t">Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.</p>
+      <p class="vf-esperado" id="esperado" translate="no"></p>
+      <button type="button" class="boton principal" id="elige-arch">Elegir el archivo</button>
       <input type="file" id="f-arch" hidden>
       <div class="vf-barra" id="arch-barra" hidden><i></i></div>
       <div class="vf-arch-res" id="arch-res" hidden></div>
     </div>
+    <div class="vf-acciones" id="acciones" hidden><button type="button" class="boton principal" id="pdf">Descargar PDF</button></div>
+    <div class="cu-cuerpo" id="cuerpo"></div>
   </section>
   <section class="vf-como">
     <h2>Cómo se comprueba</h2>
@@ -90,10 +115,10 @@ macOS                  shasum -a 256 archivo
 Linux                  sha256sum archivo</pre>
   </section>
 </main>
-<script src="/orbita/static/idioma.js?v=20261028p30"></script>
+<script src="/orbita/static/idioma.js?v=20261028p31"></script>
 <script src="../sha256.js?v=20261027a"></script>
 <script src="../pq-cnsa.js?v=20261027a"></script>
 <script src="../viaje.js?v=20261028b"></script>
-<script src="verificar.js?v=20261028a"></script>
+<script src="verificar.js?v=20261028b"></script>
 </body>
 </html>

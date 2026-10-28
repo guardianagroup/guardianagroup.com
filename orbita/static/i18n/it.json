@@ -2844,7 +2844,19 @@
   "Volver a intentar": "Riprova",
   "Esta web no se ha abierto": "Questo sito non si è aperto",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Alcuni siti frenano i browser che escono da un server, come la bolla. Premi «Ricarica» per riprovare.",
-  "Actualizar": "Ricarica"
+  "Actualizar": "Ricarica",
+  "Comprobante válido": "Attestazione valida",
+  "Verificar otro comprobante": "Verifica un’altra attestazione",
+  "¿Tienes el archivo que se envió?": "Hai il file che è stato inviato?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Sceglilo e il tuo browser verificherà che sia esattamente quel file, senza inviarlo da nessuna parte.",
+  "Elegir el archivo": "Scegli il file",
+  "Es exactamente el archivo que se envió": "È esattamente il file che è stato inviato",
+  "No es el mismo archivo": "Non è lo stesso file",
+  "Ese es el comprobante, no el archivo que se envió": "Questa è l’attestazione, non il file che è stato inviato",
+  "Elige el archivo que se envió:": "Scegli il file che è stato inviato:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Ha una dimensione diversa: non è il file che è stato inviato.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Ha la stessa dimensione, ma il contenuto è diverso: è stato modificato.",
+  "Esperado": "Atteso"
  },
  "p": {
   "intento": "Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

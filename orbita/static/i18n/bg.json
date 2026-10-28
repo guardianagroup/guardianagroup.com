@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Нов опит",
   "Esta web no se ha abierto": "Този сайт не се отвори",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Някои сайтове задържат браузъри, излизащи от сървър, като балона. Натисни „Презареждане“, за да опиташ отново.",
-  "Actualizar": "Презареждане"
+  "Actualizar": "Презареждане",
+  "Comprobante válido": "Валидна разписка",
+  "Verificar otro comprobante": "Провери друга разписка",
+  "¿Tienes el archivo que se envió?": "Имаш ли файла, който е бил изпратен?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Избери го и браузърът ти ще провери дали е точно този файл, без да го изпраща никъде.",
+  "Elegir el archivo": "Избери файла",
+  "Es exactamente el archivo que se envió": "Това е точно изпратеният файл",
+  "No es el mismo archivo": "Не е същият файл",
+  "Ese es el comprobante, no el archivo que se envió": "Това е разписката, а не изпратеният файл",
+  "Elige el archivo que se envió:": "Избери изпратения файл:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Има различен размер: не е изпратеният файл.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Има същия размер, но съдържанието е различно: бил е променен.",
+  "Esperado": "Очакван"
  },
  "p": {
   "intento": "Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

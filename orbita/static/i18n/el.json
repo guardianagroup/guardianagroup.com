@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Δοκιμή ξανά",
   "Esta web no se ha abierto": "Αυτός ο ιστότοπος δεν άνοιξε",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Ορισμένοι ιστότοποι φρενάρουν τα προγράμματα περιήγησης που βγαίνουν από διακομιστή, όπως η φούσκα. Πάτησε «Ανανέωση» για να δοκιμάσεις ξανά.",
-  "Actualizar": "Ανανέωση"
+  "Actualizar": "Ανανέωση",
+  "Comprobante válido": "Έγκυρο αποδεικτικό",
+  "Verificar otro comprobante": "Επαλήθευση άλλου αποδεικτικού",
+  "¿Tienes el archivo que se envió?": "Έχεις το αρχείο που στάλθηκε;",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Επίλεξέ το και το πρόγραμμα περιήγησής σου θα ελέγξει ότι είναι ακριβώς αυτό το αρχείο, χωρίς να το στείλει πουθενά.",
+  "Elegir el archivo": "Επιλογή αρχείου",
+  "Es exactamente el archivo que se envió": "Είναι ακριβώς το αρχείο που στάλθηκε",
+  "No es el mismo archivo": "Δεν είναι το ίδιο αρχείο",
+  "Ese es el comprobante, no el archivo que se envió": "Αυτό είναι το αποδεικτικό, όχι το αρχείο που στάλθηκε",
+  "Elige el archivo que se envió:": "Επίλεξε το αρχείο που στάλθηκε:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Έχει διαφορετικό μέγεθος: δεν είναι το αρχείο που στάλθηκε.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Έχει το ίδιο μέγεθος, αλλά διαφορετικό περιεχόμενο: έχει τροποποιηθεί.",
+  "Esperado": "Αναμενόμενο"
  },
  "p": {
   "intento": "Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

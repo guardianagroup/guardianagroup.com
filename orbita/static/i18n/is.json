@@ -2844,7 +2844,19 @@
   "Volver a intentar": "Reyna aftur",
   "Esta web no se ha abierto": "Þessi vefur opnaðist ekki",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Sumir vefir hefta vafra sem koma frá netþjóni, eins og kúluna. Ýttu á „Endurhlaða“ til að reyna aftur.",
-  "Actualizar": "Endurhlaða"
+  "Actualizar": "Endurhlaða",
+  "Comprobante válido": "Gild kvittun",
+  "Verificar otro comprobante": "Staðfesta aðra kvittun",
+  "¿Tienes el archivo que se envió?": "Ertu með skrána sem var send?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Veldu hana og vafrinn þinn athugar hvort þetta sé nákvæmlega sú skrá, án þess að senda hana neitt.",
+  "Elegir el archivo": "Velja skrána",
+  "Es exactamente el archivo que se envió": "Þetta er nákvæmlega sú skrá sem var send",
+  "No es el mismo archivo": "Þetta er ekki sama skráin",
+  "Ese es el comprobante, no el archivo que se envió": "Þetta er kvittunin, ekki skráin sem var send",
+  "Elige el archivo que se envió:": "Veldu skrána sem var send:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Hún er af annarri stærð: þetta er ekki skráin sem var send.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Hún er jafnstór, en innihaldið er annað: henni hefur verið breytt.",
+  "Esperado": "Átti að vera"
  },
  "p": {
   "intento": "Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

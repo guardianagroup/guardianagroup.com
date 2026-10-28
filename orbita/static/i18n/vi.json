@@ -2846,7 +2846,19 @@
   "Volver a intentar": "Thử lại",
   "Esta web no se ha abierto": "Trang này không mở được",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "Một số trang cản các trình duyệt xuất phát từ máy chủ, như bong bóng. Nhấn “Tải lại” để thử lại.",
-  "Actualizar": "Tải lại"
+  "Actualizar": "Tải lại",
+  "Comprobante válido": "Biên nhận hợp lệ",
+  "Verificar otro comprobante": "Xác minh biên nhận khác",
+  "¿Tienes el archivo que se envió?": "Bạn có tệp đã được gửi không?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "Hãy chọn tệp đó và trình duyệt của bạn sẽ kiểm tra xem đó có đúng là tệp ấy không, mà không gửi tệp đi đâu cả.",
+  "Elegir el archivo": "Chọn tệp",
+  "Es exactamente el archivo que se envió": "Đây đúng là tệp đã được gửi",
+  "No es el mismo archivo": "Không phải cùng một tệp",
+  "Ese es el comprobante, no el archivo que se envió": "Đây là biên nhận, không phải tệp đã được gửi",
+  "Elige el archivo que se envió:": "Chọn tệp đã được gửi:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "Kích thước khác: đây không phải tệp đã được gửi.",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "Kích thước giống nhau, nhưng nội dung khác: tệp đã bị sửa đổi.",
+  "Esperado": "Dự kiến"
  },
  "p": {
   "intento": "Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

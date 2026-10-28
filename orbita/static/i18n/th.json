@@ -2844,7 +2844,19 @@
   "Volver a intentar": "ลองอีกครั้ง",
   "Esta web no se ha abierto": "เปิดเว็บไซต์นี้ไม่ได้",
   "Algunas webs frenan a los navegadores que salen de un servidor, como la burbuja. Pulsa «Actualizar» para volver a intentarlo.": "บางเว็บไซต์กีดกันเบราว์เซอร์ที่ออกจากเซิร์ฟเวอร์ เช่น บับเบิล กด “โหลดใหม่” เพื่อลองอีกครั้ง",
-  "Actualizar": "โหลดใหม่"
+  "Actualizar": "โหลดใหม่",
+  "Comprobante válido": "ใบรับรองถูกต้อง",
+  "Verificar otro comprobante": "ตรวจสอบใบรับรองอื่น",
+  "¿Tienes el archivo que se envió?": "คุณมีไฟล์ที่ส่งไปหรือไม่?",
+  "Elígelo y tu navegador comprobará que es exactamente ese archivo, sin enviarlo a ningún sitio.": "เลือกไฟล์นั้น แล้วเบราว์เซอร์ของคุณจะตรวจสอบว่าเป็นไฟล์นั้นทุกประการหรือไม่ โดยไม่ส่งไฟล์ไปที่ใดเลย",
+  "Elegir el archivo": "เลือกไฟล์",
+  "Es exactamente el archivo que se envió": "เป็นไฟล์เดียวกับที่ส่งทุกประการ",
+  "No es el mismo archivo": "ไม่ใช่ไฟล์เดียวกัน",
+  "Ese es el comprobante, no el archivo que se envió": "นี่คือใบรับรอง ไม่ใช่ไฟล์ที่ส่ง",
+  "Elige el archivo que se envió:": "เลือกไฟล์ที่ส่ง:",
+  "Tiene otro tamaño: no es el archivo que se envió.": "ขนาดไม่ตรงกัน: ไม่ใช่ไฟล์ที่ส่ง",
+  "Tiene el mismo tamaño, pero el contenido es distinto: se ha modificado.": "ขนาดเท่ากัน แต่เนื้อหาต่างกัน: ไฟล์ถูกแก้ไขแล้ว",
+  "Esperado": "ที่คาดไว้"
  },
  "p": {
   "intento": "พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

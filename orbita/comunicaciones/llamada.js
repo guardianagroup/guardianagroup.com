@@ -40,7 +40,11 @@
   const UA = navigator.userAgent || '';
   const COMPATIBLE = /Android|iPhone|iPad|iPod/i.test(UA) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform || '')) || (/Safari\//.test(UA) && !/Chrome|Chromium|CriOS|Edg|OPR|Firefox|FxiOS/.test(UA));
   const EQUIPO = COMPATIBLE ? 'compatible' : 'escritorio';
-  const AUDIO = { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 };
+  // Sonido (dueño, 28 Oct 2026, 12:12: «al máximo nivel… reducción de ruido o alta fidelidad»): micrófono a 48 kHz con la
+  // cancelación de eco, la reducción de ruido y el control de volumen del navegador, y su aislamiento de voz donde lo tenga
+  // (si no lo tiene, se ignora). En la llamada, Opus de banda completa hasta 96 kb/s con corrección de errores: ver altaFidelidad.
+  const AUDIO = { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1, sampleRate: { ideal: 48000 }, sampleSize: { ideal: 16 }, voiceIsolation: { ideal: true } };
+  const MAX_BPS_AUDIO = 96000;
 
   function crea(o) {
     // o: { ice(), manda(m), puede(), nombre(), inicial(), fin(info), t(s), aviso(s) }
@@ -77,13 +81,23 @@
       caja.classList.toggle('ajustes', ajustes);
       $('#ll-ajustes-b').setAttribute('aria-pressed', String(ajustes));
       document.body.classList.toggle('en-llamada', estado !== 'libre');
-      pintaVoces(); pintaImagenes(); pintaVideo();
+      pintaVoces(); pintaImagenes(); pintaVideo(); fondo(); if (estado !== 'libre') requestAnimationFrame(escala);
+    }
+    // Con la llamada en grande, el chat de detrás no se puede tocar ni recibe el foco (dueño, 28 Oct 2026, 12:06: «me aparece
+    // la L esa para empezar a escribir»: el cursor del campo de texto parpadeaba detrás de la llamada). En pequeño, vuelve.
+    function fondo() {
+      const app = document.querySelector('#app'); if (!app) return;
+      if (estado !== 'libre' && !caja.classList.contains('mini')) {
+        const f = document.activeElement; if (f && app.contains(f)) { try { f.blur(); } catch (_) {} }
+        app.setAttribute('inert', '');
+      } else app.removeAttribute('inert');
     }
     // La llamada en pequeño (dueño, 28 Oct 2026: «seguir en llamada y que aparezca el chat»): una tarjeta en una esquina
     // con la imagen, el tiempo y los botones, y el chat libre debajo para escribir y mandar archivos.
     function pequena(si) {
       caja.classList.toggle('mini', !!si);
       caja.setAttribute('aria-modal', si ? 'false' : 'true');
+      fondo();
       if (si) { const x = document.querySelector('#texto'); if (x && !x.closest('[hidden]')) { try { x.focus({ preventScroll: true }); } catch (_) {} } }
     }
     const camaraOn = () => !!(cam && cam.getVideoTracks().some((x) => x.enabled && x.readyState === 'live'));
@@ -207,7 +221,9 @@
     async function microfono() {
       if (!mic) mic = await navigator.mediaDevices.getUserMedia({ audio: AUDIO });
       try {
-        ctx = new (raiz.AudioContext || raiz.webkitAudioContext)({ latencyHint: 'interactive' });
+        // a 48 kHz, como Opus: sin pasos de remuestreo de más (si el navegador no lo admite, a su frecuencia)
+        const AC = raiz.AudioContext || raiz.webkitAudioContext;
+        try { ctx = new AC({ latencyHint: 'interactive', sampleRate: 48000 }); } catch (_) { ctx = new AC({ latencyHint: 'interactive' }); }
         await ctx.audioWorklet.addModule(VOZ_JS);
         const src = ctx.createMediaStreamSource(mic);
         nodo = new AudioWorkletNode(ctx, 'guardiana-voz', { numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [1] });
@@ -335,6 +351,24 @@
         for (const tr of pc.getTransceivers()) { const k = (tr.sender.track && tr.sender.track.kind) || (tr.receiver.track && tr.receiver.track.kind); if (k === 'video' && tr.setCodecPreferences) tr.setCodecPreferences(orden); }
       } catch (_) {}
     }
+    // Opus a 48 kHz, mono, hasta 96 kb/s (antes, unos 32), con corrección de errores (FEC) para los paquetes que se pierden y
+    // sin cortes en los silencios (DTX). Cada lado lo pide en su descripción, así vale para los dos sentidos.
+    function altaFidelidad(sdp) {
+      const r = /a=rtpmap:(\d+) opus\/48000\/2/i.exec(sdp || ''); if (!r) return sdp;
+      const pt = r[1], quiero = { maxaveragebitrate: String(MAX_BPS_AUDIO), useinbandfec: '1', usedtx: '0', stereo: '0', 'sprop-stereo': '0', maxplaybackrate: '48000', 'sprop-maxcapturerate': '48000' };
+      const linea = (o) => 'a=fmtp:' + pt + ' ' + Object.entries(o).map(([k, v]) => k + '=' + v).join(';');
+      const re = new RegExp('a=fmtp:' + pt + ' ([^\\r\\n]*)');
+      if (re.test(sdp)) return sdp.replace(re, (_, ps) => { const o = {}; for (const kv of ps.split(';')) { const i = kv.indexOf('='); const k = (i < 0 ? kv : kv.slice(0, i)).trim(); if (k) o[k] = i < 0 ? '' : kv.slice(i + 1).trim(); } return linea(Object.assign(o, quiero)); });
+      return sdp.replace(r[0], r[0] + '\r\n' + linea(quiero));
+    }
+    // y el audio va por delante de la imagen cuando la red se aprieta
+    async function topeAudio() {
+      if (!pc) return;
+      for (const s of pc.getSenders()) {
+        if (!s.track || s.track.kind !== 'audio') continue;
+        try { const p = s.getParameters(); if (!p.encodings || !p.encodings.length) p.encodings = [{}]; p.encodings[0].maxBitrate = MAX_BPS_AUDIO; p.encodings[0].priority = 'high'; p.encodings[0].networkPriority = 'high'; await s.setParameters(p); } catch (_) {}
+      }
+    }
     async function topeVideo() {
       if (!pc) return;
       for (const s of pc.getSenders()) {
@@ -361,7 +395,7 @@
       pc.onicecandidate = (e) => { if (e.candidate) o.manda({ acto: 'ice', id: idLlamada, cand: e.candidate.toJSON() }); };
       pc.onconnectionstatechange = () => {
         if (!pc) return;
-        if (pc.connectionState === 'connected') { paraTono(); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); if (video) topeVideo(); pinta(); } }
+        if (pc.connectionState === 'connected') { paraTono(); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); } }
         else if (pc.connectionState === 'failed') termina('fallo');
         else if (pc.connectionState === 'disconnected') di(t('Conexión interrumpida, intentando recuperarla…'), true);
       };
@@ -405,7 +439,7 @@
       nuevaPc();
       agregaPistas(); if (video) prefiereCodecs(EQUIPO);
       di(t('Llamando…'));
-      const of = await pc.createOffer(); await pc.setLocalDescription(of);
+      const of = await pc.createOffer(); await pc.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
       o.manda({ acto: 'oferta', id: idLlamada, sdp: pc.localDescription.sdp, video: video ? 1 : undefined, equipo: EQUIPO });
       if (estado === 'saliente') { tono('saliente'); esperaRespuesta(true); }
       pinta();
@@ -440,7 +474,7 @@
       // la respuesta decide el códec de los dos sentidos: si cualquiera de los dos es teléfono o Safari, los compatibles
       if (video) prefiereCodecs(EQUIPO === 'compatible' || m.equipo === 'compatible' ? 'compatible' : 'escritorio');
       for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = [];
-      const an = await pc.createAnswer(); await pc.setLocalDescription(an);
+      const an = await pc.createAnswer(); await pc.setLocalDescription({ type: an.type, sdp: altaFidelidad(an.sdp) });
       o.manda({ acto: 'respuesta', id: idLlamada, sdp: pc.localDescription.sdp });
       if (video) { topeVideo(); if (!cam) o.manda({ acto: 'camara', id: idLlamada, on: false }); }
       pinta();
@@ -482,6 +516,69 @@
     $('#ll-videos').addEventListener('click', () => { if (caja.classList.contains('mini')) pequena(false); });
     addEventListener('beforeunload', () => { if (estado !== 'libre') { try { o.manda({ acto: 'colgar', id: idLlamada }); } catch (_) {} } });
     pintaVoces(); pintaImagenes();
+    // Zoom y ventanas pequeñas (dueño, 28 Oct 2026, 12:22–12:24: «que no se vuelva todo loco… que no cambien las cosas de
+    // sitio»). En el ordenador la llamada nunca se dibuja en menos de 640 × 480: con menos sitio (un zoom del 300 %, una
+    // ventana pequeña) se reduce entera, como una imagen. En el teléfono, su diseño de teléfono.
+    const FINO = raiz.matchMedia ? raiz.matchMedia('(hover: hover) and (pointer: fine)') : { matches: false };
+    const MIN_W = 640, MIN_H = 480;
+    let escalaYa = 1;
+    function escala() {
+      const s = FINO.matches ? Math.min(1, innerWidth / MIN_W, innerHeight / MIN_H) : 1;
+      escalaYa = s > 0 ? s : 1;
+      caja.classList.toggle('escalada', escalaYa < 1);
+      caja.style.setProperty('--escala', String(escalaYa));
+      caja.style.setProperty('--ancho', (innerWidth / escalaYa) + 'px');
+      caja.style.setProperty('--alto', (innerHeight / escalaYa) + 'px');
+      miImagen();
+    }
+    // Tu imagen pequeña se mueve (dueño, 12:22: «quiero clicarla y arrastrarla y ponerla donde yo quiera»): se pulsa, se
+    // arrastra y se queda donde la dejes; el sitio se recuerda en este navegador, en proporción a la pantalla, así que sigue
+    // en su sitio aunque cambie el tamaño. En la llamada en pequeño va en su esquina.
+    const MI_IMG = 'gcom-mi-imagen', MARGEN = 10;
+    let arrastre = null;
+    const vidLocal = () => $('#v-local');
+    const lienzoVid = () => $('#ll-videos');
+    function miImagen() {
+      const vl = vidLocal(), cont = lienzoVid(); if (!vl || !cont) return;
+      let pos = null; try { pos = JSON.parse(localStorage.getItem(MI_IMG) || 'null'); } catch (_) { pos = null; }
+      if (!pos || !Number.isFinite(pos.x) || !Number.isFinite(pos.y)) { caja.classList.remove('movida'); return; }
+      const W = vl.offsetWidth, H = vl.offsetHeight, CW = cont.clientWidth, CH = cont.clientHeight; if (!W || !CW) return;
+      const x = MARGEN + Math.max(0, Math.min(1, pos.x)) * Math.max(0, CW - W - 2 * MARGEN), y = MARGEN + Math.max(0, Math.min(1, pos.y)) * Math.max(0, CH - H - 2 * MARGEN);
+      caja.style.setProperty('--mi-x', Math.round(x) + 'px'); caja.style.setProperty('--mi-y', Math.round(y) + 'px'); caja.classList.add('movida');
+    }
+    // dónde cae el puntero, en las medidas de la llamada (con la llamada reducida, se deshace la escala)
+    const enLienzo = (e) => ({ x: e.clientX / escalaYa, y: e.clientY / escalaYa });
+    const sobreMiImagen = (p) => { const vl = vidLocal(); if (!vl || !video || caja.classList.contains('mini') || !vl.offsetWidth || !cam || $('#ll-videos').hidden) return false; return p.x >= vl.offsetLeft && p.x <= vl.offsetLeft + vl.offsetWidth && p.y >= vl.offsetTop && p.y <= vl.offsetTop + vl.offsetHeight; };
+    caja.addEventListener('pointerdown', (e) => {
+      if (e.button > 0 || e.target.closest('button, a, input, label, .ll-ajustes')) return;
+      const p = enLienzo(e); if (!sobreMiImagen(p)) return;
+      const vl = vidLocal();
+      arrastre = { id: e.pointerId, dx: p.x - vl.offsetLeft, dy: p.y - vl.offsetTop, x0: p.x, y0: p.y, movido: false };
+      try { caja.setPointerCapture(e.pointerId); } catch (_) {}
+      e.preventDefault();
+    });
+    caja.addEventListener('pointermove', (e) => {
+      const p = enLienzo(e);
+      if (!arrastre || e.pointerId !== arrastre.id) { if (e.pointerType === 'mouse') caja.classList.toggle('mi-agarre', sobreMiImagen(p)); return; }
+      if (!arrastre.movido && Math.hypot(p.x - arrastre.x0, p.y - arrastre.y0) < 4) return;
+      arrastre.movido = true; caja.classList.add('arrastrando', 'movida');
+      const vl = vidLocal(), cont = lienzoVid(), W = vl.offsetWidth, H = vl.offsetHeight, CW = cont.clientWidth, CH = cont.clientHeight;
+      const x = Math.max(MARGEN, Math.min(CW - W - MARGEN, p.x - arrastre.dx)), y = Math.max(MARGEN, Math.min(CH - H - MARGEN, p.y - arrastre.dy));
+      caja.style.setProperty('--mi-x', Math.round(x) + 'px'); caja.style.setProperty('--mi-y', Math.round(y) + 'px');
+      arrastre.x = x; arrastre.y = y; arrastre.W = W; arrastre.H = H; arrastre.CW = CW; arrastre.CH = CH;
+    });
+    const suelta = (e) => {
+      if (!arrastre || e.pointerId !== arrastre.id) return;
+      const a = arrastre; arrastre = null; caja.classList.remove('arrastrando');
+      try { caja.releasePointerCapture(e.pointerId); } catch (_) {}
+      if (!a.movido) return;
+      const fx = (a.x - MARGEN) / Math.max(1, a.CW - a.W - 2 * MARGEN), fy = (a.y - MARGEN) / Math.max(1, a.CH - a.H - 2 * MARGEN);
+      try { localStorage.setItem(MI_IMG, JSON.stringify({ x: Math.round(fx * 1000) / 1000, y: Math.round(fy * 1000) / 1000 })); } catch (_) {}
+    };
+    caja.addEventListener('pointerup', suelta); caja.addEventListener('pointercancel', suelta);
+    addEventListener('resize', escala, { passive: true });
+    if (FINO.addEventListener) FINO.addEventListener('change', escala);
+    escala();
     return { llamar, recibe, colgar, eligeVoz, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
   }
   raiz.GuardianaLlamada = { crea, VOCES };
