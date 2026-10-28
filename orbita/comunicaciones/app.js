@@ -1703,11 +1703,16 @@
     $('#completa-ok').addEventListener('click', () => cierraHoja('h-completa'));
     // «Añadir a la pantalla de inicio»: en Android, la ventana del propio sistema; en el iPhone, los pasos (no deja hacerlo desde la web)
     let avisoInstalar = null;
-    const pintaAnadir = () => { const b = $('#anadir-app'); if (b) b.hidden = !(esMovil() && !comoApp() && (avisoInstalar || /iPhone|iPad|iPod/i.test(navigator.userAgent))); };
+    // también en el ordenador: Chrome y Edge la ponen en el escritorio y en las aplicaciones (dueño, 16:20)
+    const pintaAnadir = () => { const b = $('#anadir-app'); if (b) b.hidden = comoApp() || !(avisoInstalar || /iPhone|iPad|iPod/i.test(navigator.userAgent)); };
     addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); avisoInstalar = e; pintaAnadir(); });
     addEventListener('appinstalled', () => { avisoInstalar = null; pintaAnadir(); });
     $('#anadir-app').addEventListener('click', async () => { if (avisoInstalar) { const e = avisoInstalar; avisoInstalar = null; try { e.prompt(); await e.userChoice; } catch (_) {} pintaAnadir(); } else abreHoja('h-completa'); });
     pintaAnadir();
+    // enlace para mandar: guardianagroup.com/orbita/comunicaciones/?instalar abre directamente «Añadir a la pantalla de inicio»
+    if (new URLSearchParams(location.search).has('instalar') && !comoApp()) { setTimeout(() => { if (avisoInstalar || !/iPhone|iPad|iPod/i.test(navigator.userAgent)) abreHoja('h-instalar'); else abreHoja('h-completa'); }, 600); }
+    $('#instalar-si').addEventListener('click', async () => { cierraHoja('h-instalar'); if (avisoInstalar) { const e = avisoInstalar; avisoInstalar = null; try { e.prompt(); await e.userChoice; } catch (_) {} pintaAnadir(); } else abreHoja('h-completa'); });
+    $('#instalar-no').addEventListener('click', () => cierraHoja('h-instalar'));
     // en Android, la pantalla completa entra sola con el primer toque importante: crear, aceptar, llamar o contestar
     for (const id of ['#nueva-blindada', '#aceptar-si', '#llamar', '#videollamar', '#ll-contestar']) { const b = $(id); if (b) b.addEventListener('click', () => { if (esMovil() && puedeCompleta()) pantallaCompleta(); }, { capture: true }); }
     // tocar el nombre o el candado abre la seguridad de la conversación, como en las aplicaciones de mensajería

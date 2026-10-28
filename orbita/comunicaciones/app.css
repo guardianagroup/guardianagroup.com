@@ -767,7 +767,7 @@ body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
 /* Como app desde la pantalla de inicio (sin barras del navegador), lo de arriba no va debajo de la hora ni de la isla */
 @media (display-mode: standalone), (display-mode: fullscreen){.barra{padding-top:calc(env(safe-area-inset-top) + 6px)}.gc-llamada-arriba{padding-top:calc(env(safe-area-inset-top) + 8px)}}
 .anadir-app{display:none}
-@media (max-width:760px){.anadir-app:not([hidden]){display:inline-flex;align-items:center;gap:8px;margin:16px auto 0;padding:10px 16px;border-radius:999px;border:1px solid rgba(218,236,250,.2);background:transparent;color:#cfe1ee;font:500 14px/1.2 'IBM Plex Sans',system-ui,sans-serif}.anadir-app svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}#inicio.con-invitacion .anadir-app{display:none}}
+@media all{.anadir-app:not([hidden]){display:inline-flex;align-items:center;gap:8px;margin:16px auto 0;padding:10px 16px;border-radius:999px;border:1px solid rgba(218,236,250,.2);background:transparent;color:#cfe1ee;font:500 14px/1.2 'IBM Plex Sans',system-ui,sans-serif}.anadir-app svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}#inicio.con-invitacion .anadir-app{display:none}}
 /* El menú del clip (dueño, 15:14) */
 .adjuntos{position:fixed;z-index:60;min-width:260px;max-width:min(340px,calc(100vw - 16px));padding:6px;border-radius:16px;border:1px solid rgba(218,236,250,.16);background:rgba(12,17,24,.97);box-shadow:0 18px 50px -12px rgba(0,0,0,.8);display:grid;gap:2px}
 .adjuntos[hidden]{display:none}
