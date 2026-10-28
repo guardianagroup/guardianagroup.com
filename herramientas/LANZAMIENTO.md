@@ -46,3 +46,20 @@ Revisar, con herramientas (Playwright sirviendo el sitio con `python3 -m http.se
 
 ## Apuntado para después del lanzamiento (28 Oct 2026, aprobado por el dueño)
 - **«Blindar esta conversación».** Desde una conversación normal en la que los dos ya han comprobado el número de seguridad, un botón crea la sesión blindada y manda su enlace dentro de ese mismo chat encriptado, sin pasar por WhatsApp, correo ni otra app. Motivo: en la prueba de PC a PC del 28 Oct, mandar el enlace por fuera resultó incómodo. Toca la parte criptográfica, así que se diseña y se prueba con calma: hoy crear una invitación cierra la conversación abierta (una sola a la vez), y durante el paso tendrían que convivir las dos; la seguridad del enlace dependería de la conversación normal (P-256 y ML-KEM-768), y eso hay que decirlo en pantalla.
+
+## 28 Oct 2026 (mañana y mediodía, pruebas en vivo Bogotá–Praga): hecho y publicado
+- **Comprobante:** «Verificar en guardianagroup.com» abre con el comprobante ya comprobado (#c=, se borra de la dirección); veredicto grande arriba («Comprobante válido», sello verde/ámbar/coral) y «¿Tienes el archivo que se envió?» debajo, con nombre y tamaño; avisa si se elige el propio .json o el PDF, o un archivo de otro tamaño.
+- **Videollamada:** tonos (425 Hz al llamar, timbre al recibir; contexto de audio desbloqueado con el primer gesto); tu imagen no se mueve al abrir «Voz e imagen», se arrastra, cambia de tamaño desde un asa y llega a pantalla dividida (doble clic); el chat de detrás queda bloqueado con la llamada en grande; botones con su color sobre cualquier imagen; en el ordenador no se dibuja en menos de 640 × 480 (con zoom alto se reduce entera); sonido a 48 kHz y Opus hasta 96 kb/s con FEC y prioridad sobre la imagen.
+- **ZERO:** pide las webs en el idioma del navegador de la persona; el muro antirrobot sale en el centro con «Actualizar» (una recarga cuando la persona la pulsa).
+- **Barrido:** 287 páginas sin enlaces internos rotos; 166 × 2 tamaños sin errores ni desbordes; español a la vista en inglés, limpio.
+
+## Apuntado para después del lanzamiento (28 Oct 2026, agencia)
+- **Antes y después de las subastas** (ronda 72): página «Comprueba tu exposición» (tu conexión frente a la de la burbuja, sin instalar nada), marcador opcional para ver las pujas de tu navegador en el ordenador, y un «Informe de exposición y protección» firmado y sin datos personales. La subasta propia de GUARDIANA, descartada.
+- **Llamada urgente** (ronda 73): Web Push encriptado con permiso por contacto, horas de silencio y límites; móvil «timbre» vinculado con QR; no prometer que despierta a nadie; nombre «Aviso prioritario», nunca «emergencias».
+- **Añadir a alguien a la llamada** (ronda 73): hasta 4 en malla por nuestro TURN, bajando la imagen al entrar más gente; enlace de un uso y 5 minutos, «Solicitar entrada», aceptar o rechazar con un código corto.
+- **Extensión ZERO:** construida en local (v0.1.0) para probar pujas reales en el navegador de la persona; no publicada.
+
+## Infraestructura (solo informe; no se toca desde la web)
+- Cada publicación en `main` reinicia el motor y el relé en ≤15 min (`zero-actualiza.timer` reinicia `zero-motor` con cualquier cambio): corta ZERO y el chat un momento; las llamadas por coturn siguen. Conviene que solo reinicie si cambian archivos del motor.
+- ZERO y Comunicaciones solo en Núremberg: las webs ven Alemania (idioma por IP); el servidor de Miami no tiene el motor.
+- `herramientas/` es pública en el repositorio y lleva IP de servidores.
