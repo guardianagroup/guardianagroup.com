@@ -26,7 +26,7 @@ const RAIZ = path.join(__dirname, '..');
 const PUERTO = +process.argv[2] || 8792;
 const MOCK = !!process.env.ZERO_MOCK;
 const SESIONES = new Map(); // token de señuelo → sesión (para el colector /s/<token>)
-const VERSION = 'prototipo 0.2 · 27 Oct 2026 (ZERO entra antes que tú; con riesgo grave no se entra; qué archivo y todo lo que sabe)';
+const VERSION = 'prototipo 0.2 · 27 Oct 2026 (ZERO entra antes que tú; con riesgo grave no se entra; qué archivo y todo lo que sabe; textos profesionales)';
 const CLAVE_SESION = crypto.randomBytes(32); // efímera: con ella se sella el comprobante de cada sesión
 // Blindaje del motor (26 Oct 2026, ronda 40 punto 11): solo las páginas de GUARDIANA pueden abrir sesiones; hay un tope
 // de burbujas vivas; una burbuja que nadie mira se cierra sola; ningún mensaje puede ser enorme; en la burbuja solo se abren
@@ -126,7 +126,7 @@ function paginaBloqueo(titulo, texto, detalle) {
   html,body{margin:0;height:100%;background:#06080C;color:#F4F6F8;font:16px/1.5 "Segoe UI",Inter,Arial,sans-serif}
   main{max-width:560px;margin:0 auto;padding:12vh 24px}.k{font:12px/1 Consolas,monospace;letter-spacing:.22em;color:#9CC3E4}
   h1{font-size:26px;font-weight:600;margin:14px 0 10px}p{color:#cfe1ee;margin:0 0 12px}small{display:block;color:#7f97aa;font-size:12.5px;margin-top:18px;word-break:break-all}
-  .l{height:2px;width:56px;background:#E07A6C;margin:18px 0}</style><main><div class="k">ZERO · DETENIDO AQUÍ</div><h1>${esc(titulo)}</h1><div class="l"></div><p>${esc(texto)}</p><small>${esc(detalle)}</small></main></html>`;
+  .l{height:2px;width:56px;background:#E07A6C;margin:18px 0}</style><main><div class="k">ZERO · ACCESO DETENIDO</div><h1>${esc(titulo)}</h1><div class="l"></div><p>${esc(texto)}</p><small>${esc(detalle)}</small></main></html>`;
 }
 
 // Poda lo que cuenta el sensor de la subasta antes de enseñarlo: solo banderas, números y nombres cortos (nunca valores
@@ -409,7 +409,7 @@ class Sesion {
         st.n.bloqueos++;
         this.suceso({ clase: 'bloqueo', certeza: 'comprobado', dominio: host, texto: 'Esta dirección figura en una lista pública de webs peligrosas. ZERO no la ha abierto.', detalle: { regla: d.regla, lista: d.lista } });
         this.hitoChequeo(pest, 'listas', { peligrosa: true, lista: (cortes.listas[d.lista] || {}).nombre || null });
-        return route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: paginaBloqueo('Esta web está en una lista de webs peligrosas', 'ZERO ha detenido la apertura antes de cargar nada. La dirección coincide con una regla de una lista pública de malware o fraude; la lista puede equivocarse, pero no merece la pena arriesgarse.', host + ' · regla ' + d.regla + ' · ' + (cortes.listas[d.lista] || {}).nombre) }).catch(() => {});
+        return route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: paginaBloqueo('Esta web figura en una lista de webs peligrosas', 'ZERO ha detenido el acceso antes de cargar ningún contenido. La dirección coincide con una regla de una lista pública de malware o fraude. Aunque una lista puede contener errores, por tu seguridad ZERO no abre esta web.', host + ' · regla ' + d.regla + ' · ' + (cortes.listas[d.lista] || {}).nombre) }).catch(() => {});
       }
       this.hitoChequeo(pest, 'listas', { peligrosa: false });
       // 2) limpiar la dirección de identificadores de seguimiento
@@ -498,7 +498,7 @@ class Sesion {
     const quien = e.empresa ? e.empresa + (e.paisNombre ? ' (' + e.paisNombre + ')' : '') : host;
     const que = { Publicidad: 'una conexión publicitaria', Rastreador: 'una conexión con un rastreador conocido', 'Web peligrosa': 'una conexión con una web peligrosa conocida', 'Aviso de cookies': 'el aviso de cookies', 'Red local': 'una conexión hacia la red local', 'Otra empresa': 'una conexión con otra empresa' }[prop] || 'una conexión';
     this.suceso({ clase: 'corte', certeza: 'comprobado', dominio: host, empresa: e.empresa, pais: e.pais, paisNombre: e.paisNombre, proposito: prop, tipo, tercero, estado,
-      texto: (estado === 'cortado' ? 'ZERO ha cortado ' : estado === 'visto' ? 'ZERO ha visto ' : 'ZERO ha dejado pasar (lo permitiste) ') + que + (e.empresa ? ', de ' + quien : ' hacia ' + host) + '.',
+      texto: (estado === 'cortado' ? 'ZERO ha cortado ' : estado === 'visto' ? 'ZERO ha visto ' : 'ZERO ha permitido, por decisión tuya, ') + que + (e.empresa ? ', de ' + quien : ' hacia ' + host) + '.',
       detalle: { regla: d.regla, lista: d.lista ? (cortes.listas[d.lista] || {}).nombre : null, listaClave: d.lista, fuenteEmpresa: e.fuente, categoria: e.categoria } });
   }
 
@@ -511,24 +511,24 @@ class Sesion {
       st.n.huella++;
       const via = { canvas: 'el lienzo gráfico (canvas)', webgl: 'la tarjeta gráfica (WebGL)', audio: 'el sistema de audio', fuentes: 'los tipos de letra instalados', plugins: 'los complementos del navegador' }[s.via] || s.via;
       st.porque['Huella digital'] = (st.porque['Huella digital'] || 0) + 1;
-      return this.suceso({ clase: 'huella', certeza: 'probable', dominio, texto: 'Un programa de ' + dominio + ' ha consultado ' + via + ', un dato que sirve para reconocer un equipo. En ZERO ve la burbuja remota, no tu ordenador.', detalle: { via: s.via } });
+      return this.suceso({ clase: 'huella', certeza: 'probable', dominio, texto: 'Un programa de ' + dominio + ' ha consultado ' + via + ', un dato que permite reconocer un equipo. En ZERO, ese dato corresponde a la burbuja remota, no a tu equipo.', detalle: { via: s.via } });
     }
-    if (s.clase === 'permiso') { st.n.permisos++; return this.suceso({ clase: 'permiso', certeza: 'comprobado', dominio, texto: 'La web ha pedido acceso a ' + s.que + '. ZERO lo ha denegado: en la burbuja remota no hay nada tuyo.', detalle: { que: s.que } }); }
+    if (s.clase === 'permiso') { st.n.permisos++; return this.suceso({ clase: 'permiso', certeza: 'comprobado', dominio, texto: 'La web ha solicitado acceso a ' + s.que + '. ZERO lo ha denegado: la burbuja remota no contiene ningún dato tuyo.', detalle: { que: s.que } }); }
     if (s.clase === 'webrtc') { st.n.permisos++; return this.suceso({ clase: 'webrtc', certeza: 'comprobado', dominio, texto: 'La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real. ZERO la mantiene desactivada.' }); }
-    if (s.clase === 'formulario') return this.suceso({ clase: 'formulario', certeza: 'comprobado', dominio, texto: s.detenido ? 'Este formulario enviaría tus datos sin cifrar. ZERO ha detenido el envío.' : 'Atención: este formulario enviaría lo que escribas sin cifrar.', detalle: { accion: s.accion, detenido: s.detenido } });
+    if (s.clase === 'formulario') return this.suceso({ clase: 'formulario', certeza: 'comprobado', dominio, texto: s.detenido ? 'Este formulario enviaría tus datos sin encriptar. ZERO ha detenido el envío.' : 'Atención: este formulario enviaría lo que escribas sin encriptar.', detalle: { accion: s.accion, detenido: s.detenido } });
     if (s.clase === 'subasta') {
       st.n.subastas++;
       if (s.fase === 'fin') {
         const pujas = (s.pujas || []).map((p) => ({ ...poda(p), ...empresaDe(p.pujador) }));
         const n = new Set([...(s.pedidos || []), ...pujas.map((p) => p.pujador)]).size;
-        return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Esta página ha subastado tu atención: ' + n + (n === 1 ? ' empresa pujó' : ' empresas pujaron') + ' por ' + (s.unidades || 1) + ((s.unidades || 1) === 1 ? ' hueco' : ' huecos') + ' de anuncio en ' + (s.ms != null ? s.ms + ' ms' : 'milisegundos') + '. Los precios son los que declara cada pujador.', detalle: { id: s.id, ms: s.ms, limite: s.limite || null, unidades: s.unidades, pedidos: poda(s.pedidos), pujas, sinPuja: poda(s.sinPuja), tarde: poda(s.tarde), peticiones: poda(s.peticiones), config: poda(s.config), tcf: poda(s.tcf) } });
+        return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Esta página ha subastado sus espacios publicitarios: ' + n + (n === 1 ? ' empresa pujó' : ' empresas pujaron') + ' por ' + (s.unidades || 1) + ((s.unidades || 1) === 1 ? ' espacio' : ' espacios') + ' en ' + (s.ms != null ? s.ms + ' ms' : 'milisegundos') + '. Los precios son los declarados por cada pujador.', detalle: { id: s.id, ms: s.ms, limite: s.limite || null, unidades: s.unidades, pedidos: poda(s.pedidos), pujas, sinPuja: poda(s.sinPuja), tarde: poda(s.tarde), peticiones: poda(s.peticiones), config: poda(s.config), tcf: poda(s.tcf) } });
       }
       if (s.fase === 'amazon') {
         const n = (s.pujas || []).length;
-        return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: n ? 'Amazon ha pujado por ' + n + (n === 1 ? ' hueco' : ' huecos') + ' de anuncio de esta página. Su precio va cifrado: solo lo lee el servidor de anuncios.' : 'Amazon ha recibido los datos de tu visita para pujar, pero no ha pujado.', detalle: { fase: 'amazon', huecos: s.huecos || 0, pujas: (s.pujas || []).map(poda) } });
+        return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: n ? 'Amazon ha pujado por ' + n + (n === 1 ? ' espacio publicitario' : ' espacios publicitarios') + ' de esta página. Su precio va encriptado: solo lo lee el servidor de anuncios.' : 'Amazon ha recibido los datos de tu visita para pujar, pero no ha pujado.', detalle: { fase: 'amazon', huecos: s.huecos || 0, pujas: (s.pujas || []).map(poda) } });
       }
       if (s.fase === 'ganada') return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Ganó la puja ' + s.pujador + (s.cpm != null ? ' declarando ' + s.cpm + ' ' + (s.moneda || '') + ' por mil impresiones' : '') + (s.anunciante ? ' para el anunciante ' + s.anunciante : '') + '.', detalle: { ...poda(s), ...empresaDe(s.pujador) } });
-      return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Hueco de anuncio servido por Google' + (s.vacio ? ' (vacío)' : '') + (s.anunciante ? ' · anunciante nº ' + s.anunciante : '') + '.', detalle: poda(s) });
+      return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Espacio publicitario servido por Google' + (s.vacio ? ' (vacío)' : '') + (s.anunciante ? ' · anunciante n.º ' + s.anunciante : '') + '.', detalle: poda(s) });
     }
   }
 
@@ -567,7 +567,7 @@ class Sesion {
       }
       if (cadena.length >= 2) {
         const inter = [...new Set(cadena)];
-        this.suceso({ clase: 'redireccion', certeza: 'comprobado', dominio: hostDe(req.url()), texto: 'Antes de llegar a ' + hostDe(req.url()) + ', el enlace dio ' + cadena.length + ' saltos (' + inter.join(' → ') + '). Algunos saltos así sirven para anotar tu clic.', detalle: { cadena } });
+        this.suceso({ clase: 'redireccion', certeza: 'comprobado', dominio: hostDe(req.url()), texto: 'Antes de llegar a ' + hostDe(req.url()) + ', el enlace pasó por ' + cadena.length + ' redirecciones (' + inter.join(' → ') + '). Este tipo de redirecciones suele utilizarse para registrar tu clic.', detalle: { cadena } });
       }
     } catch (_) {}
   }
@@ -589,7 +589,7 @@ class Sesion {
     const malo = !!(lista.bloquear && lista.proposito === 'malware');
     const reg = { id, nombre, url: url.slice(0, 300), host, bytes: 0, sha256: null, riesgo, malo, estado: 'descargando', hora: ahora(), ruta: null, porDentro: null, engano };
     this.descargas.set(id, reg);
-    this.suceso({ clase: 'descarga', certeza: 'comprobado', dominio: host, texto: 'La web ha iniciado la descarga de «' + nombre + '». ZERO la ha retenido en la burbuja para inspeccionarla: no ha tocado tu ordenador.', detalle: { id, nombre, riesgo, malo } });
+    this.suceso({ clase: 'descarga', certeza: 'comprobado', dominio: host, texto: 'La web ha iniciado la descarga de «' + nombre + '». ZERO la ha retenido en la burbuja para analizarla: tu equipo no ha recibido nada.', detalle: { id, nombre, riesgo, malo } });
     try {
       const ruta = await d.path();
       const st = fs.statSync(ruta); reg.bytes = st.size; reg.ruta = ruta;
@@ -610,7 +610,7 @@ class Sesion {
     try {
       const datos = fs.readFileSync(reg.ruta);
       this.op('descarga entregada a petición de la persona: ' + reg.nombre);
-      this.suceso({ clase: 'descarga', certeza: 'comprobado', dominio: reg.host, texto: 'A petición tuya, ZERO te ha traído «' + reg.nombre + '» (' + reg.bytes + ' bytes, SHA-256 ' + (reg.sha256 || '').slice(0, 12) + '…). Ábrela solo si confías en quien la mandó.', detalle: { nombre: reg.nombre, sha256: reg.sha256, riesgo: reg.riesgo } });
+      this.suceso({ clase: 'descarga', certeza: 'comprobado', dominio: reg.host, texto: 'A petición tuya, ZERO ha transferido «' + reg.nombre + '» a tu equipo (' + reg.bytes + ' bytes, SHA-256 ' + (reg.sha256 || '').slice(0, 12) + '…). Ábrelo solo si confías en el remitente.', detalle: { nombre: reg.nombre, sha256: reg.sha256, riesgo: reg.riesgo } });
       this.env({ t: 'archivo', id, nombre: reg.nombre, bytes: reg.bytes, sha256: reg.sha256, b64: datos.toString('base64') });
     } catch (e) { this.env({ t: 'archivo', id, error: 'no se pudo leer' }); }
   }
@@ -920,10 +920,10 @@ class Sesion {
       if (process.env.ZERO_DEBUG) console.log('goto falló:', url.slice(0, 80), m.split('\n')[0]);
       const cert = /ERR_CERT|SSL|certificate/i.test(m);
       const motivo = /ERR_CERT_DATE_INVALID/.test(m) ? 'certificado caducado o con fecha no válida' : /ERR_CERT_COMMON_NAME_INVALID/.test(m) ? 'el certificado no coincide con el nombre de la web' : /ERR_CERT_AUTHORITY_INVALID/.test(m) ? 'el certificado no está firmado por una autoridad reconocida' : cert ? 'no se pudo verificar el certificado' : /ERR_NAME_NOT_RESOLVED|ERR_SOCKS_CONNECTION_HOST_UNREACHABLE/.test(m) ? 'la dirección no existe' : /ERR_CONNECTION|ERR_TIMED_OUT|ERR_INTERNET|ERR_TUNNEL|ERR_PROXY|ERR_SOCKS/.test(m) ? 'no se pudo conectar' : 'no se pudo abrir';
-      if (cert) this.suceso({ clase: 'certificado', certeza: 'comprobado', dominio: hostDe(url), texto: 'No se ha podido comprobar la identidad cifrada de ' + hostDe(url) + ' (' + motivo + '). ZERO no ha abierto la conexión.', detalle: { error: m.split('\n')[0], motivo } });
+      if (cert) this.suceso({ clase: 'certificado', certeza: 'comprobado', dominio: hostDe(url), texto: 'No ha sido posible verificar la identidad de ' + hostDe(url) + ' (' + motivo + '). ZERO no ha establecido la conexión.', detalle: { error: m.split('\n')[0], motivo } });
       else if (cq && !cq.listo) cq.fallo = motivo;
       if (cq && this.chequeo && this.chequeo !== cq) return; // la persona ya pidió otra web: no se pisa con el aviso de esta
-      await this.page.setContent(paginaBloqueo(cert ? 'La identidad de esta web no se pudo comprobar' : 'No se pudo abrir esta web', cert ? 'Su certificado de seguridad no supera la comprobación: ' + motivo + '. Puede ser un fallo técnico de la web o una suplantación; ZERO no ha enviado ni recibido nada.' : 'Motivo: ' + motivo + '. ZERO no ha enviado nada.', hostDe(url) + ' · ' + m.split('\n')[0].slice(0, 120))).catch(() => {});
+      await this.page.setContent(paginaBloqueo(cert ? 'No es posible verificar la identidad de esta web' : 'No ha sido posible abrir esta web', cert ? 'Su certificado de seguridad no supera la verificación: ' + motivo + '. Puede deberse a un error técnico de la web o a un intento de suplantación. ZERO no ha intercambiado ningún dato con ella.' : 'Motivo: ' + motivo + '. ZERO no ha enviado ningún dato.', hostDe(url) + ' · ' + m.split('\n')[0].slice(0, 120))).catch(() => {});
       cierraLuego();
     }
   }
@@ -1055,10 +1055,10 @@ class Sesion {
     const e = empresas.atribuye(host);
     const que = Senuelos.nombre(f.tipo);
     const texto = f.tipo === 'visita'
-      ? 'Alguien ha visitado el enlace oculto que ZERO puso como señuelo en la página (desde ' + host + '; ' + f.donde + '). Solo un programa que lea la página entera y siga sus enlaces llega a él: un indexador, un previsualizador o un rastreador.'
+      ? 'Se ha visitado el enlace oculto que ZERO colocó como señuelo en la página (desde ' + host + '; ' + f.donde + '). Solo un programa que lee la página completa y sigue sus enlaces llega a él: un indexador, un generador de vistas previas o un rastreador.'
       : tercero
-      ? 'Un dato que solo existe en tu burbuja (' + que + ', puesto por ZERO como señuelo) ' + (cortada ? 'iba a salir' : 'ha salido') + ' hacia ' + (e.empresa ? e.empresa + ' (' + host + ')' : host) + ' en ' + f.donde + '. Algo en esta web lo leyó y lo envió' + (cortada ? '; ZERO cortó esa conexión.' : '.')
-      : 'La propia web se ha enviado un dato que solo existe en tu burbuja (' + que + ', puesto por ZERO como señuelo) en ' + f.donde + ': copia el contenido de la página o sus cookies hacia sus servidores.';
+      ? 'Un dato que solo existe en tu burbuja (' + que + ', colocado por ZERO como señuelo) ' + (cortada ? 'iba a salir' : 'ha salido') + ' hacia ' + (e.empresa ? e.empresa + ' (' + host + ')' : host) + ' en ' + f.donde + '. Un programa de esta web lo leyó y lo envió' + (cortada ? '; ZERO cortó esa conexión.' : '.')
+      : 'La propia web ha enviado a sus servidores un dato que solo existe en tu burbuja (' + que + ', colocado por ZERO como señuelo) en ' + f.donde + ': copia el contenido de la página o sus cookies.';
     this.n.senuelos = (this.n.senuelos || 0) + 1;
     this.suceso({ clase: 'señuelo', certeza: 'comprobado', dominio: host, empresa: e.empresa || null, paisNombre: e.paisNombre || null, texto, detalle: { tipo: f.tipo, que, donde: f.donde, tercero, cortada, url: String(url).slice(0, 200) } });
   }
@@ -1076,7 +1076,7 @@ class Sesion {
         const host = hostDe(page.url());
         if (this.murosVistos && this.murosVistos.has(host)) return;
         (this.murosVistos = this.murosVistos || new Set()).add(host);
-        this.suceso({ clase: 'muro', certeza: 'comprobado', dominio: host, texto: 'Esta web no deja entrar a navegadores que salen desde un servidor (protección antirrobot por red). Desde la burbuja no se puede abrir; en tu navegador de siempre sí.', detalle: { url: page.url().slice(0, 300) } });
+        this.suceso({ clase: 'muro', certeza: 'comprobado', dominio: host, texto: 'Esta web no admite navegadores que se conectan desde un servidor (protección antirrobot). No es posible abrirla desde la burbuja, pero sí desde tu navegador habitual.', detalle: { url: page.url().slice(0, 300) } });
         return;
       }
     }
