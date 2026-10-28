@@ -43,7 +43,7 @@ Este archivo manda sobre los anteriores. La historia completa está en `herramie
   - Se añaden justo después de la línea ancla `    "Enviar": ["Send", "Enviar"],`.
   - Al cambiarlo, sube `idioma.js?v=` en 5 páginas: comunicaciones, comunicaciones/verificar, zero, orbita/index y multas. Ahora va por **p36**.
 - **Huellas:** `python3 herramientas/huellas.py` después de tocar Comunicaciones (escribe `orbita/comunicaciones/huellas.txt`).
-- **Versiones en `orbita/comunicaciones/index.html`:** app.css n, app.js **o**, llamada.js n, rele.js n, componentes.css m. Súbelas al tocar cada archivo.
+- **Versiones en `orbita/comunicaciones/index.html`:** app.css **o**, app.js **p**, llamada.js n, rele.js n, componentes.css m. Súbelas al tocar cada archivo.
 
 ### Publicado hoy (main)
 
@@ -169,6 +169,10 @@ Trucos de las pruebas:
 - localStorage `guardiana-acceso = dueno`.
 
 ## 6. Pendiente, por orden
+
+0. **Hecho a las 15:10–15:14 y publicado** (main 2fc91d0, web-idiomas 41a9861): fuera la tira de la campanita (#cavisos siempre oculta, `pintaAvisos`; los avisos se activan desde «⋯» → `#cm-avisos`); cabecera de la conversación más grande en el ordenador (al final de app.css, `@media (min-width:761px)`). Versiones: app.css **o**, app.js **p**. Prueba chat74 actualizada (29 OK).
+0b. **NUEVO (15:12) — videollamada partida por defecto.** El dueño probó el doble clic y le gusta la pantalla dividida mitad y mitad: «que saliera así por defecto, mitad-mitad. Y ya si uno la quiere minimizar, que haya como un botoncito muy profesional para hacerla más pequeña». En `llamada.js` (~líneas 576–680: clase `dividida`, `lado-izq/der/arriba/abajo`, doble clic en la línea ~669, tamaño recordado en el equipo): al empezar una videollamada, entrar en dividida; añadir un botón discreto (icono de reducir, con texto accesible «Hacer pequeña») que vuelva a la imagen flotante, y otro para volver a dividirla. Revisa también el móvil (arriba y abajo) y las pruebas video y tonos.
+0c. **NUEVO (15:13) — botón «Borrar chat».** «Un botoncito que diga borrar el chat… a la derecha, al lado del micrófono… se borraría todo el chat sin poderlo recuperar de ninguna forma… Esa opción es muy importante». Propuesta: icono de papelera junto al micrófono (`#texto`/grabar), con confirmación («Se borran todos los mensajes y archivos de esta conversación, en los dos equipos. No se puede deshacer.»). Borra mensajes, archivos y recorridos guardados (IndexedDB encriptado) y manda un control nuevo (p. ej. `{tipo:'vaciar'}`) para que el otro equipo borre lo mismo; la conversación sigue abierta (a diferencia de «Terminar», que la cierra). En la blindada, igual. Prueba nueva y textos en inglés y portugués. Con el móvil, que quepa en la barra de abajo sin apretar.
 
 1. **Pip y tono con la página minimizada** (dueño, 15:03): «que salga la notificación si le he escrito… un pequeño pip si le escribo un mensaje… y si le estoy llamando, que haga tono de llamada».
    - Hoy, en `app.js` (~línea 517): `if (!avisaFuera(c, 'mensaje') && !aLaVista) avisaSonido();`. Si sale el aviso del sistema, no suena el nuestro.
