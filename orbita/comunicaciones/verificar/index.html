@@ -22,6 +22,8 @@ body.verificar{height:auto;min-height:100dvh;overflow:visible;display:block}
 .vf-zona svg{width:34px;height:34px;color:var(--accent);stroke-width:1.6}
 .vf-zona b{font:500 15px/1.4 var(--texto);color:#F4F6F8}
 .vf-zona span{font-size:12.5px;color:var(--muted-2)}
+.vf-zona .vf-ayuda{max-width:440px;margin-top:4px;font:400 12.5px/1.5 var(--texto);color:var(--muted)}
+.vf-error{line-height:1.5}
 .vf-error{margin:0;padding:12px 14px;border-radius:12px;border:1px solid rgba(224,122,108,.5);background:rgba(224,122,108,.08);color:#F6C6BE;font-size:13.5px}
 .vf-resultado{display:grid;gap:18px}
 .vf-acciones{display:flex;justify-content:flex-end;gap:8px}
@@ -61,6 +63,7 @@ body.verificar{height:auto;min-height:100dvh;overflow:visible;display:block}
     <span>o bien</span>
     <button type="button" class="boton principal" id="elige-comp">Elegir comprobante</button>
     <input type="file" id="f-comp" accept=".json,application/json" hidden>
+    <small class="vf-ayuda">El .json se descarga en el chat: abre «Ver comprobante» y pulsa «Descargar .json». El PDF es para leerlo; no se puede verificar.</small>
   </section>
   <p class="vf-error" id="error" role="alert" hidden></p>
   <section class="vf-resultado" id="resultado" hidden>
@@ -87,10 +90,10 @@ macOS                  shasum -a 256 archivo
 Linux                  sha256sum archivo</pre>
   </section>
 </main>
-<script src="/orbita/static/idioma.js?v=20261028p28"></script>
+<script src="/orbita/static/idioma.js?v=20261028p29"></script>
 <script src="../sha256.js?v=20261027a"></script>
 <script src="../pq-cnsa.js?v=20261027a"></script>
-<script src="../viaje.js?v=20261028a"></script>
-<script src="verificar.js?v=20261027c"></script>
+<script src="../viaje.js?v=20261028b"></script>
+<script src="verificar.js?v=20261028a"></script>
 </body>
 </html>

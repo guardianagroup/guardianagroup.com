@@ -288,7 +288,7 @@
       const d = el('div', 'cu-firma');
       d.append(el('small', null, BL ? T('Clave pública (ECDSA P-384)') : T('Clave pública (ECDSA P-256)')), mono(p.clave), el('small', null, T('Firma')), sig ? mono(sig) : el('span', 'cu-mal', T('Falta la firma.')));
       // ML-DSA-87: la clave (2.592 bytes) y la firma (4.627) van enteras en el .json; aquí, su huella SHA-256 y su estado
-      if (BL) d.append(el('small', null, T('Firma postcuántica (ML-DSA-87)')), el('span', sigpq ? null : 'cu-mal', sigpq ? T('presente en el archivo .json; se comprueba al verificar') : T('Falta la firma.')));
+      if (BL) d.append(el('small', null, T('Firma postcuántica (ML-DSA-87)')), el('span', !sigpq ? 'cu-mal' : res.valido ? 'cu-bien' : null, !sigpq ? T('Falta la firma.') : res.valido ? T('Válida: comprobada con la clave postcuántica del comprobante.') : T('presente en el archivo .json; se comprueba al verificar')));
       return d;
     };
     fila(T('Remitente'), firma(e, f.emisor, fq.emisor)); fila(T('Destinatario'), firma(r, f.receptor, fq.receptor));
@@ -660,6 +660,9 @@
       hojaComp.querySelector('#cu-pdf').addEventListener('click', () => { if (hojaComp.comp) imprime(hojaComp.comp); });
     }
     hojaComp.comp = comp;
+    // «Verificar en guardianagroup.com» abre la página de verificación con este comprobante ya cargado: viaja en el
+    // fragmento (#c=…), que el navegador no manda a ningún servidor (dueño, 28 Oct 2026, 11:04: «ponte en modo cliente»)
+    try { hojaComp.querySelector('#cu-verificar').href = '/orbita/comunicaciones/verificar/#c=' + b64u(new TextEncoder().encode(JSON.stringify(comp))); } catch (_) {}
     const firmado = !!(comp.firmas && comp.firmas.emisor && comp.firmas.receptor);
     hojaComp.querySelector('#cu-json').hidden = !firmado; hojaComp.querySelector('#cu-pdf').hidden = !firmado;
     const caja = hojaComp.querySelector('.cu-cuerpo'); caja.textContent = T('Comprobando las firmas…');

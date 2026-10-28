@@ -44,8 +44,14 @@
   // codifican píxeles que nadie ve (26 Oct 2026, ronda 46). Mínimo 360 de ancho para que las webs no se rompan.
   const tam = () => { const r = (cv.getBoundingClientRect && cv.getBoundingClientRect()) || {}; const dpr = Math.min(1.25, window.devicePixelRatio || 1); const w = Math.round((r.width || cv.offsetWidth || web.offsetWidth) * (r.width ? dpr : 1)) || 1064; const h = Math.round((r.height || cv.offsetHeight || web.offsetHeight) * (r.height ? dpr : 1)) || 800; return { w: Math.max(360, Math.min(1920, w)), h: Math.max(240, Math.min(1200, h)) }; };
 
-  // Idioma de la burbuja: el de la página (documentElement.lang) con la región del navegador de la persona si coincide (es + es-CO → es-CO).
+  // Idioma de la burbuja: el primero del navegador de la persona (cs-CZ, es-CO…), como pediría su propio navegador; si no se
+  // sabe, el de la página. 28 Oct 2026 (dueño): antes iba el idioma de la página de GUARDIANA, y a una persona en Chequia
+  // con la página en inglés las webs le llegaban en inglés o, si deciden por el país de la conexión, en alemán (el servidor
+  // de ZERO está en Núremberg). Lo segundo solo cambia con servidores en más países.
   function idiomaCelda() {
+    const pref = String((navigator.languages && navigator.languages[0]) || navigator.language || '');
+    if (/^[a-z]{2,3}(-[A-Za-z]{2,4})?$/.test(pref)) return pref;
+    if (/^[a-z]{2,3}-/.test(pref)) return pref.split('-')[0]; // es-419, zh-Hant-TW…: el servidor solo acepta idioma y región, así que va el idioma
     const hl = String(document.documentElement.lang || 'es').toLowerCase().slice(0, 2);
     const nl = String(navigator.language || '');
     if (nl.toLowerCase().slice(0, 2) === hl && /^[a-z]{2}-[A-Za-z]{2}$/.test(nl)) return nl;
