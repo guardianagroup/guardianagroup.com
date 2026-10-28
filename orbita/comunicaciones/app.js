@@ -1438,7 +1438,7 @@
   // Fotos sin datos ocultos: se vuelven a dibujar antes de encriptar, así no salen la ubicación GPS, el modelo del teléfono ni la
   // fecha que lleva el archivo. Los vídeos van como están (sus datos no se pueden limpiar aquí).
   async function sinDatosOcultos(f) {
-    if (!/^image\/(jpeg|png|webp)$/i.test(f.type || '')) return f;
+    if (!/^image\/(jpeg|png|webp|heic|heif)$/i.test(f.type || '')) return f;
     try {
       const bmp = await createImageBitmap(f, { imageOrientation: 'from-image' });
       const k = Math.min(1, 4096 / Math.max(bmp.width, bmp.height)), w = Math.round(bmp.width * k), h = Math.round(bmp.height * k);
