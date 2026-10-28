@@ -671,3 +671,6 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .conv.blindada .gc-cabecera{background:linear-gradient(180deg,rgba(156,195,228,.07),rgba(6,8,12,0) 85%),var(--gc-fondo,#06080C);box-shadow:inset 0 -1px 0 rgba(218,236,250,.16)}
 .conv.blindada .candado{box-shadow:0 0 0 1px rgba(244,246,248,.5),0 0 14px rgba(204,237,255,.35)}
 .fila-conv.blindada .fila-av{box-shadow:0 0 0 1px rgba(218,236,250,.35),0 0 12px rgba(204,237,255,.25)}
+/* Cabecera de la conversación con más aire en el ordenador (dueño, 28 Oct 2026, 15:10: «lo veo como muy pequeño el espacio, un
+   poquito más grande… para que guarde buena imagen»); en el móvil sigue compacta */
+@media (min-width:761px){.conv .gc-cabecera{min-height:70px;padding-top:calc(env(safe-area-inset-top) + 4px);padding-bottom:4px}.conv .gc-nombre{font-size:17.5px;line-height:1.3}.conv .gc-confianza{font-size:13.2px;line-height:1.35;margin-top:2px;text-wrap:balance}.conv .gc-cabecera .gc-avatar{width:44px;height:44px}.conv .sello-insignia{font-size:10.5px;padding:3px 9px}}
