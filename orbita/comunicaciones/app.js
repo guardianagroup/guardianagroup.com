@@ -1253,7 +1253,9 @@
       $('#unir-mal').hidden = false; campoCod.focus(); try { campoCod.setSelectionRange(campoCod.value.length, campoCod.value.length); } catch (_) {}
     });
     $('#unir-codigo').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#unir-ok').click(); });
-    $('#terminar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c) return; if (esB(c)) return muestraCierre(c); const hay = c.mensajes.some((x) => x.tipo === 'custodia'); if (!confirm(hay ? T('¿Terminar la conversación? Se borra aquí y en el otro equipo, también los comprobantes de entrega e integridad: descarga antes los que quieras conservar.') : T('¿Terminar la conversación? Se borra aquí y en el otro equipo.'))) return; await destruye(c); });
+    // 28 Oct 2026: «Terminar» abre siempre la hoja de la página (la de la sesión blindada). La ventana confirm() del
+    // navegador no sale en algunos navegadores integrados (el de la app de Claude, vistas web de otras apps) y el botón no hacía nada.
+    $('#terminar').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c) muestraCierre(c); });
     $('#invita-nuevo').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) { c.codigoUsado = false; await publicaCodigo(c); } });
     R.on('codigo-usado', (codigo) => { for (const c of CONVS.values()) if (c.codigo === codigo) { c.codigoUsado = true; pintaCodigo(c); } });
     R.on('abierto', () => { for (const c of CONVS.values()) if (c.estado === 'invitacion' && c.rol === 'invita' && !c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); });
