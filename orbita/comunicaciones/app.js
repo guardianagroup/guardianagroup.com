@@ -1425,6 +1425,23 @@
   }
   const desbloqueaSonido = () => { try { ctxAudio = ctxAudio || new (window.AudioContext || window.webkitAudioContext)(); if (ctxAudio.state === 'suspended') ctxAudio.resume().catch(() => {}); } catch (_) {} };
   for (const ev of ['pointerdown', 'keydown', 'touchstart']) addEventListener(ev, desbloqueaSonido, { once: true, capture: true, passive: true });
+  // El teclado del iPhone (dueño, 28 Oct 2026, 15:26: «cuando se me abre el teclado, se me sube para arriba todo el chat… se ve
+  // como la mitad de la pantalla»). Safari no encoge la página con el teclado: la sube entera y la cabecera se va. Aquí la página
+  // mide lo que de verdad se ve (visualViewport) y se coloca donde se ve: cabecera arriba, campo justo encima del teclado y la
+  // conversación en medio, con lo último a la vista. En Android ya lo hace el navegador (interactive-widget=resizes-content).
+  (function tecladoMovil() {
+    const vv = window.visualViewport; if (!vv) return;
+    const raizDoc = document.documentElement; let rafVv = 0, conTeclado = false;
+    const ajusta = () => {
+      rafVv = 0; const alto = Math.round(vv.height), abierto = innerHeight - alto > 120;
+      raizDoc.style.setProperty('--alto-vv', alto + 'px'); raizDoc.style.setProperty('--arriba-vv', Math.round(vv.offsetTop) + 'px');
+      raizDoc.classList.toggle('con-teclado', abierto);
+      if (abierto && !conTeclado) { const m = document.querySelector('#mensajes'); if (m) requestAnimationFrame(() => { m.scrollTop = m.scrollHeight; }); }
+      conTeclado = abierto;
+    };
+    const pide = () => { if (!rafVv) rafVv = requestAnimationFrame(ajusta); };
+    vv.addEventListener('resize', pide); vv.addEventListener('scroll', pide); ajusta();
+  })();
 
 
   // ---------- con GUARDIANA minimizada (dueño, 28 Oct 2026, 13:34: «que en la pantalla minimizada aparezca algún salto…
