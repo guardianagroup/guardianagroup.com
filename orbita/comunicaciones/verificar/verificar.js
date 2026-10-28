@@ -11,7 +11,8 @@
     if (!f) return;
     let j = null;
     try { if (f.size <= 256 * 1024) j = JSON.parse(await f.text()); } catch (_) { j = null; }
-    if (!j || j.formato !== V.FORMATO || !j.registro) { $('#resultado').hidden = true; return error(T('Ese archivo no es un comprobante de entrega e integridad de GUARDIANA.')); }
+    // el comprobante normal y el de la sesión blindada (doble firma ECDSA P-384 + ML-DSA-87)
+    if (!j || (j.formato !== V.FORMATO && j.formato !== V.FORMATO_B) || !j.registro) { $('#resultado').hidden = true; return error(T('Ese archivo no es un comprobante de entrega e integridad de GUARDIANA.')); }
     comp = j;
     const res = await V.verifica(j);
     await V.pintaComprobante($('#cuerpo'), j, res);

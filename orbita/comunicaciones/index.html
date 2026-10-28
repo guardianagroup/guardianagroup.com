@@ -6,7 +6,7 @@
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src blob:; connect-src 'self' https://motor.guardianagroup.com wss://motor.guardianagroup.com https://motor-am.guardianagroup.com wss://motor-am.guardianagroup.com http://127.0.0.1:* ws://127.0.0.1:* http://localhost:* ws://localhost:*; worker-src 'none'; form-action 'none'; base-uri 'none'">
 <meta name="theme-color" content="#06080C">
-<meta name="description" content="GUARDIANA Comunicaciones, para particulares y profesionales con clientes: chat y envío de datos y documentación sensible, encriptados de extremo a extremo entre dos navegadores con un código de 9 cifras. Los servidores no guardan mensajes ni archivos.">
+<meta name="description" content="GUARDIANA Comunicaciones, para particulares y profesionales con clientes: chat, llamadas y envío de datos y documentación sensible, encriptados de extremo a extremo entre dos navegadores, con un código de 9 cifras o, en la sesión blindada, con un enlace. Los servidores no guardan mensajes ni archivos.">
 <title>GUARDIANA · Comunicaciones</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -43,7 +43,7 @@
       <button type="button" class="grande principal" id="nueva"><b>Crear invitación</b><small>Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
       <button type="button" class="grande" id="unir"><b>Tengo un código</b><small>Escribe las 9 cifras que te han enviado</small></button>
       <!-- dueño, 27 Oct 2026, 22:01–23:12: la blindada, «de la máxima»; algoritmos de la suite CNSA 2.0 -->
-      <button type="button" class="grande blindada" id="nueva-blindada"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b>Sesión blindada</b><small>Suite CNSA 2.0, verificación obligatoria y claves que se renuevan cada 5 minutos</small></button>
+      <button type="button" class="grande blindada" id="nueva-blindada"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b>Sesión blindada</b><small>Algoritmos de la suite CNSA 2.0, verificación obligatoria y claves que se renuevan cada 5 minutos</small></button>
     </div>
     <!-- dueño, 27 Oct 2026, 10:10: «al empezar, lo básico, limpio y entendible»; la explicación, aparte, en un desplegable -->
     <button type="button" class="como" id="como-btn" aria-expanded="false" aria-controls="pro">Cómo funciona Comunicaciones</button>
@@ -93,7 +93,7 @@
           <div>
             <h3>Encriptación postcuántica</h3>
             <p>Cuando los dos equipos usan la versión actual, Comunicaciones combina ML-KEM-768, un algoritmo postcuántico estandarizado (FIPS 203), con ECDH P-256 para acordar las claves de cada conversación. Cada mensaje y cada archivo se encriptan con AES-256-GCM y una clave distinta.</p>
-            <p class="pro-nota">Las firmas de identidad siguen siendo clásicas. Si la otra persona usa una versión anterior, te lo decimos y no seguimos sin tu permiso.</p>
+            <p class="pro-nota">En la sesión normal, las firmas de identidad son clásicas; la sesión blindada añade una firma postcuántica. Si la otra persona usa una versión anterior, te lo decimos y no seguimos sin tu permiso.</p>
           </div>
         </article>
         <article class="pro-tarjeta">
@@ -105,6 +105,34 @@
           <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></span>
           <h3>Recibo de entrega</h3>
           <p>Cuando el archivo llega completo al otro equipo, el registro indica cuántos trozos autenticados se recibieron y en el chat aparece un recibo de entrega. Confirma la recepción, no que la otra persona lo haya abierto o leído.</p>
+        </article>
+      </div>
+
+      <!-- 28 Oct 2026, ronda 71 (ChatGPT, Gemini y Astra): la blindada y las llamadas, con lo que hacen y lo que no. Sin
+           «conformidad CNSA 2.0» (P-384 viene de la suite anterior), sin «recuperación tras compromiso» y sin decir que el
+           audio sea postcuántico: va con DTLS-SRTP, el cifrado estándar de las llamadas del navegador. -->
+      <p class="pro-antetitulo">Para lo más sensible</p>
+      <h2 id="pro-t1">Sesión blindada y llamadas de voz</h2>
+      <div class="pro-rejilla pro-tres">
+        <article class="pro-tarjeta destacada">
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <div>
+            <h3>Sesión blindada</h3>
+            <p>Usa los algoritmos de la suite CNSA 2.0: el acuerdo de claves combina ML-KEM-1024 con ECDH P-384, y cada equipo firma toda la negociación con ECDSA P-384 y con ML-DSA-87. La invitación es un enlace o un código QR con un secreto de 256 bits que no pasa por nuestro servidor.</p>
+            <p class="pro-nota">No se envía nada hasta que las dos personas comprueban el número de seguridad por otro canal. Las claves se renuevan cada 5 minutos y, al terminar, un informe dice qué se ha borrado y qué no se puede garantizar.</p>
+          </div>
+        </article>
+        <article class="pro-tarjeta">
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M9.2 13.8 7.5 21l4.5-2.4 4.5 2.4-1.7-7.2"/><path d="M9.8 9l1.5 1.5 3-3"/></svg></span>
+          <h3>Comprobante con doble firma</h3>
+          <p>En la sesión blindada, cada equipo firma el comprobante de entrega e integridad dos veces: con ECDSA P-384 y con ML-DSA-87, una firma postcuántica. Las dos se comprueban en esta web, sin enviar nada.</p>
+          <p class="pro-nota">Acredita que esos dos equipos firmaron el registro del envío; no acredita la identidad legal de las personas ni el contenido del archivo.</p>
+        </article>
+        <article class="pro-tarjeta">
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
+          <h3>Llamadas de voz</h3>
+          <p>Desde la conversación, en la sesión normal y en la blindada. El audio va encriptado de extremo a extremo y siempre por el relé de GUARDIANA: ninguno de los dos ve la dirección IP del otro.</p>
+          <p class="pro-nota">El cambio de voz se aplica en tu equipo antes de enviar: cambia el tono, no oculta el acento ni lo que dices. El audio usa el cifrado estándar de las llamadas del navegador, no la capa postcuántica.</p>
         </article>
       </div>
 
@@ -167,6 +195,8 @@
               <li><b>Archivos</b><span>Trozos de 192 KB cifrados uno a uno; quien envía nunca carga el archivo entero y, con Chrome o Edge, quien recibe lo escribe en disco según llega.</span></li>
               <li><b>Invitación</b><span>Código de 9 cifras, un solo uso, 10 minutos e intentos limitados. El relé solo guarda un sobre cerrado con una clave derivada del código en el navegador (PBKDF2, 300.000 iteraciones).</span></li>
               <li><b>Relé y verificación</b><span>El relé no guarda mensajes, nombres ni claves; solo sabe qué conexiones comparten una sala y cuántos bytes mueven. Número de seguridad de 60 cifras para comprobar fuera de banda.</span></li>
+              <li><b>Sesión blindada</b><span>Acuerdo híbrido ECDH P-384 + ML-KEM-1024 (FIPS 203) con HKDF-SHA-384; firmas ECDSA P-384 sobre SHA-384 y ML-DSA-87 (FIPS 204) sobre toda la negociación; identidad nueva en cada sesión; invitación de 256 bits solo por enlace o QR; verificación mutua obligatoria; claves renovadas cada 5 minutos; mensajes rellenos a múltiplos de 1 KB y último trozo de cada archivo completo.</span></li>
+              <li><b>Llamadas</b><span>WebRTC solo a través del servidor TURN de GUARDIANA; la oferta, la respuesta y la huella DTLS viajan dentro del canal encriptado de extremo a extremo; audio con DTLS-SRTP; cambio de voz procesado en el navegador (AudioWorklet).</span></li>
             </ul>
           </details>
         </div>
@@ -265,7 +295,7 @@
       <button type="button" data-voz="anonima" aria-pressed="false">Distorsionada</button>
       <button type="button" data-voz="robot" aria-pressed="false">Robótica</button>
     </div>
-    <small class="ll-voz-nota" id="ll-voz-nota" hidden>El cambio se hace en tu equipo, antes de encriptar: tu voz original no sale de aquí. Dificulta que te reconozcan por la voz, pero no oculta tu acento ni tu forma de hablar.</small>
+    <small class="ll-voz-nota" id="ll-voz-nota" hidden>El cambio se hace en tu equipo, antes de encriptar: tu voz original no sale de aquí. Puede dificultar que alguien reconozca tu voz de oído, pero no oculta tu acento ni tu forma de hablar, ni está pensado para burlar sistemas de reconocimiento automático.</small>
   </div>
   <audio id="a-remoto" autoplay></audio>
   <div class="gc-llamada-botones" id="ll-botones">
@@ -304,7 +334,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261027p21"></script>
+<script src="/orbita/static/idioma.js?v=20261028p22"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -314,7 +344,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261027c"></script>
-<script src="llamada.js?v=20261027a"></script>
-<script src="app.js?v=20261027j"></script>
+<script src="llamada.js?v=20261028a"></script>
+<script src="app.js?v=20261028a"></script>
 </body>
 </html>

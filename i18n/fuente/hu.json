@@ -555,6 +555,16 @@
   "568": "Hirdetés megszakítva · retargo.example",
   "569": "Hirdetés megszakítva · subastia.example",
   "570": "Beszélgess a NÚCLEO-val",
-  "571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, 18. emelet · Bocagrande, Cartagena, Kolumbia · hola@guardianagroup.com · Ez az oldal nem használ sütiket és analitikát."
+  "571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, 18. emelet · Bocagrande, Cartagena, Kolumbia · hola@guardianagroup.com · Ez az oldal nem használ sütiket és analitikát.",
+  "572": "Titkosított csevegés, fájlok és hívások PC-ről PC-re.",
+  "573": "Írj, küldj fájlokat, és hívd fel azt, akit meghívsz, fiók és telefonszám nélkül. A végén a beszélgetés mindkét félnél törlődik.",
+  "574": "Páncélozott munkamenet és hanghívások.",
+  "575": "Kommunikáció · titkosított csevegés, fájlok és hívások",
+  "576": "Titkosított csevegés, fájlok és hívások PC-ről PC-re, hibrid posztkvantum-titkosítással.",
+  "577": "Páncélozott munkamenet.",
+  "578": "A legérzékenyebb ügyekhez: a CNSA 2.0-csomag algoritmusai (ML-KEM-1024 és ML-DSA-87, P-384-gyel), egy 256 bites link és kötelező ellenőrzés, mielőtt bármi elmenne.",
+  "579": "Hanghívások.",
+  "580": "Végpontok között titkosítva, és mindig a relén keresztül: egyik fél sem látja a másik IP-címét. Opcionális hangmódosítással, amely a hangmagasságot változtatja meg, nem az akcentust.",
+  "581": "A relé látja az IP-címet, a szobát és a forgalom mennyiségét, a tartalmat nem. A normál munkamenetben az identitásaláírások klasszikusak, és a hívások hangja nem használja a posztkvantum-réteget."
  }
 }

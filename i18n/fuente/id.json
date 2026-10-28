@@ -557,6 +557,16 @@
 "568": "Iklan diputus · retargo.example",
 "569": "Iklan diputus · subastia.example",
 "570": "Bicara dengan NÚCLEO",
-"571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, lantai 18 · Bocagrande, Cartagena, Kolombia · hola@guardianagroup.com · Halaman ini tidak memakai cookie maupun analitik."
+"571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, lantai 18 · Bocagrande, Cartagena, Kolombia · hola@guardianagroup.com · Halaman ini tidak memakai cookie maupun analitik.",
+"572": "Chat, file, dan panggilan terenkripsi dari PC ke PC.",
+"573": "Kirim pesan dan file, serta telepon orang yang Anda undang, tanpa akun atau nomor telepon. Setelah selesai, percakapan dihapus di kedua sisi.",
+"574": "Sesi lapis baja dan panggilan suara.",
+"575": "Komunikasi · chat, file, dan panggilan terenkripsi",
+"576": "Chat, file, dan panggilan terenkripsi dari PC ke PC, dengan enkripsi pascakuantum hibrida.",
+"577": "Sesi lapis baja.",
+"578": "Untuk hal paling sensitif: algoritma dari rangkaian CNSA 2.0 (ML-KEM-1024 dan ML-DSA-87, dengan P-384), tautan 256 bit, dan verifikasi wajib sebelum mengirim apa pun.",
+"579": "Panggilan suara.",
+"580": "Terenkripsi end-to-end dan selalu melalui relai: tidak ada yang melihat IP pihak lain. Dengan pengubahan suara opsional yang mengubah nada, bukan aksen.",
+"581": "Relai melihat IP, ruang, dan volume, bukan kontennya. Di sesi biasa, tanda tangan identitas bersifat klasik, dan audio panggilan tidak memakai lapisan pascakuantum."
 }
 }

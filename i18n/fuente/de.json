@@ -556,6 +556,16 @@
 "568": "Anzeige blockiert · retargo.example",
 "569": "Anzeige blockiert · subastia.example",
 "570": "Sprich mit NÚCLEO",
-"571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, 18. Stock · Bocagrande, Cartagena, Kolumbien · hola@guardianagroup.com · Diese Seite verwendet weder Cookies noch Analysetools."
+"571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, 18. Stock · Bocagrande, Cartagena, Kolumbien · hola@guardianagroup.com · Diese Seite verwendet weder Cookies noch Analysetools.",
+"572": "Verschlüsselte Chats, Dateien und Anrufe von PC zu PC.",
+"573": "Schreib den Personen, die du einlädst, sende ihnen Dateien und ruf sie an, ohne Konto und ohne Telefonnummer. Am Ende wird die Unterhaltung auf beiden Seiten gelöscht.",
+"574": "Abgeschirmte Sitzung und Sprachanrufe.",
+"575": "Kommunikation · verschlüsselte Chats, Dateien und Anrufe",
+"576": "Verschlüsselte Chats, Dateien und Anrufe von PC zu PC, mit hybrider Post-Quanten-Verschlüsselung.",
+"577": "Abgeschirmte Sitzung.",
+"578": "Für besonders Sensibles: die Algorithmen der Suite CNSA 2.0 (ML-KEM-1024 und ML-DSA-87, mit P-384), ein 256-Bit-Link und die verpflichtende Verifizierung, bevor etwas gesendet wird.",
+"579": "Sprachanrufe.",
+"580": "Ende-zu-Ende-verschlüsselt und immer über das Relay: Keiner sieht die IP des anderen. Mit optionaler Stimmveränderung, die die Tonhöhe ändert, nicht den Akzent.",
+"581": "Das Relay sieht die IP, den Raum und das Datenvolumen, nicht den Inhalt. In der normalen Sitzung sind die Identitätssignaturen klassisch, und das Audio der Anrufe nutzt nicht die Post-Quanten-Schicht."
 }
 }

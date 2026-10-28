@@ -556,6 +556,16 @@
 "568": "Annuncio bloccato · retargo.example",
 "569": "Annuncio bloccato · subastia.example",
 "570": "Parla con NÚCLEO",
-"571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, piano 18 · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Questa pagina non usa cookie né strumenti di analisi."
+"571": "© 2026 GUARDIANA GROUP S.A.S. · NIT 902.119.954-6 · Torre Empresarial PRODEGI, piano 18 · Bocagrande, Cartagena, Colombia · hola@guardianagroup.com · Questa pagina non usa cookie né strumenti di analisi.",
+"572": "Chat, file e chiamate crittografati da PC a PC.",
+"573": "Scrivi, invia file e chiama chi inviti, senza account né numero di telefono. Alla fine, la conversazione viene eliminata su entrambi.",
+"574": "Sessione blindata e chiamate vocali.",
+"575": "Comunicazioni · chat, file e chiamate crittografati",
+"576": "Chat, file e chiamate crittografati da PC a PC, con crittografia post-quantistica ibrida.",
+"577": "Sessione blindata.",
+"578": "Per ciò che è più sensibile: gli algoritmi della suite CNSA 2.0 (ML-KEM-1024 e ML-DSA-87, con P-384), un link da 256 bit e la verifica obbligatoria prima di inviare qualsiasi cosa.",
+"579": "Chiamate vocali.",
+"580": "Crittografate end-to-end e sempre tramite il relay: nessuno dei due vede l’IP dell’altro. Con cambio di voce opzionale, che cambia il tono, non l’accento.",
+"581": "Il relay vede l’IP, la stanza e il volume, non il contenuto. Nella sessione normale, le firme d’identità sono classiche, e l’audio delle chiamate non usa il livello post-quantistico."
 }
 }
