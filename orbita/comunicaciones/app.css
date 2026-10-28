@@ -690,3 +690,10 @@ input[type=checkbox],input[type=radio],input[type=range],input[type=file],select
 a,button,summary,label,[role="button"]{cursor:pointer}
 .codigo,.numero,.bl-numero,.gc-mensajes,.gc-mensajes *{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none}
 .codigo,.numero,.bl-numero{cursor:default}
+/* El botón para hacer pequeña tu imagen o volver a partir la pantalla (dueño, 28 Oct 2026, 15:12) */
+.mi-tam-boton{position:absolute;left:var(--tam-x,auto);top:var(--tam-y,auto);z-index:6;width:38px;height:38px;padding:0;border-radius:50%;border:1px solid rgba(218,236,250,.30);background:rgba(6,8,12,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#F4F6F8;display:grid;place-items:center;cursor:pointer;opacity:.85;box-shadow:0 4px 14px rgba(0,0,0,.35);transition:opacity .2s,background .2s,transform .2s}
+.mi-tam-boton:hover{opacity:1;background:rgba(6,8,12,.78);transform:scale(1.05)}
+.mi-tam-boton:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
+.mi-tam-boton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.mi-tam-boton[hidden]{display:none}
+.arrastrando .mi-tam-boton{opacity:0;pointer-events:none}

@@ -72,6 +72,7 @@
       if (estado !== 'hablando' || ajustes) { caja.classList.remove('reposo'); clearTimeout(reposo); }
       $('#ll-entrante').hidden = estado !== 'entrante';
       $('#ll-botones').hidden = estado === 'entrante';
+      if (video && (estado === 'hablando' || estado === 'conectando' || estado === 'llamando')) raiz.requestAnimationFrame(() => miImagen());
       // dueño, 28 Oct 2026, 12:49 («que sea profesional… como hacen las otras aplicaciones»): el nombre que la otra persona se puso
       // y, si no se puso ninguno, «Llamada encriptada» o «Videollamada encriptada» (antes, «La otra persona»)
       $('#ll-nombre').textContent = o.nombre() || (video ? t('Videollamada encriptada') : t('Llamada encriptada'));
@@ -527,7 +528,7 @@
       mic = null; envio = null; cam = null; nodo = null; if (ctx) { try { ctx.close(); } catch (_) {} ctx = null; }
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
-      pendientes = []; ofertaEntrante = null; iniciada = 0;
+      pendientes = []; ofertaEntrante = null; iniciada = 0; partidaPorDefecto = true;
       const silencio = $('#ll-silenciar'); if (silencio) silencio.setAttribute('aria-pressed', 'false');
       if (por === 'fin') di(t('Llamada terminada'));
       else if (por === 'fallo') di(t('No se pudo mantener la conexión.'), true);
@@ -579,6 +580,28 @@
     // navegador, en proporción a la pantalla. En la llamada en pequeño va en su esquina.
     const MI_IMG = 'gcom-mi-imagen', MARGEN = 10, DIVIDE = 0.45;
     let arrastre = null, ultimoToque = 0;
+    // Cada videollamada empieza con la pantalla partida, mitad y mitad (dueño, 28 Oct 2026, 15:12: «que saliera así por defecto,
+    // mitad-mitad. Y ya si uno la quiere minimizar, que haya como un botoncito muy profesional para hacerla más pequeña»).
+    // En cuanto la persona la cambia (botón, doble clic o arrastre), manda lo suyo hasta que cuelga.
+    let partidaPorDefecto = true;
+    const SVG_REDUCIR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 10l6-6M14 10V5.5M14 10h4.5M10 14l-6 6M10 14v4.5M10 14H5.5"/></svg>';
+    const SVG_PARTIR = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M12 5v14"/></svg>';
+    const botonTam = () => { let b = $('#ll-tam'); if (!b) { const c = lienzoVid(); if (!c) return null; b = document.createElement('button'); b.type = 'button'; b.id = 'll-tam'; b.className = 'mi-tam-boton'; b.hidden = true; b.addEventListener('click', (e) => { e.stopPropagation(); partidaPorDefecto = false; alternaDividida(); }); c.append(b); } return b; };
+    function pintaBotonTam() {
+      const b = botonTam(); if (!b) return; const vl = vidLocal();
+      b.hidden = !visible() || !vl;
+      if (b.hidden) return;
+      const div = caja.classList.contains('dividida'), txt = div ? t('Hacer pequeña tu imagen') : t('Pantalla dividida');
+      if (b.dataset.modo !== (div ? 'div' : 'peq')) { b.dataset.modo = div ? 'div' : 'peq'; b.innerHTML = div ? SVG_REDUCIR : SVG_PARTIR; }
+      b.setAttribute('aria-label', txt); b.title = txt;
+      // dónde: lejos de la barra de arriba («Ver el chat», el nombre) y de los botones de abajo. Partida: en el borde de fuera de
+      // tu mitad, a media altura. Pequeña: en la esquina que mira al centro en vertical, al otro lado del asa.
+      const cont = lienzoVid(), CW = cont ? cont.clientWidth : 0, CH = cont ? cont.clientHeight : 0; let x, y;
+      if (div) { const l = ['izq', 'der', 'arriba', 'abajo'].find((z) => caja.classList.contains('lado-' + z)); x = l === 'izq' ? 14 : CW - 52; y = l === 'arriba' ? CH * 0.25 - 19 : l === 'abajo' ? CH * 0.75 - 19 : CH / 2 - 19; }
+      else { const e = esquinaAsa(vl, CW, CH); x = e.izq ? vl.offsetLeft + vl.offsetWidth - 44 : vl.offsetLeft + 6; y = e.arriba ? vl.offsetTop + 6 : vl.offsetTop + vl.offsetHeight - 44; }
+      caja.style.setProperty('--tam-x', Math.round(x) + 'px'); caja.style.setProperty('--tam-y', Math.round(y) + 'px');
+    }
+
     const vidLocal = () => $('#v-local');
     const lienzoVid = () => $('#ll-videos');
     const leeMi = () => { try { const x = JSON.parse(localStorage.getItem(MI_IMG) || 'null'); return x && typeof x === 'object' ? x : {}; } catch (_) { return {}; } };
@@ -593,7 +616,8 @@
     function miImagen() {
       const vl = vidLocal(), cont = lienzoVid(); if (!vl || !cont) return;
       const mi = leeMi(), CW = cont.clientWidth, CH = cont.clientHeight;
-      if (mi.div && CW) { const hz = CW >= CH, mapa = hz ? { arriba: 'izq', abajo: 'der' } : { izq: 'arriba', der: 'abajo' }; ponDividida(mapa[mi.div] || mi.div); }
+      if (partidaPorDefecto && video && cam && CW) ponDividida(CW >= CH ? 'der' : 'abajo');
+      else if (mi.div && CW) { const hz = CW >= CH, mapa = hz ? { arriba: 'izq', abajo: 'der' } : { izq: 'arriba', der: 'abajo' }; ponDividida(mapa[mi.div] || mi.div); }
       else ponDividida(null);
       // tamaño elegido (proporción del ancho), con su mínimo y su máximo
       if (Number.isFinite(mi.w) && CW) { caja.style.setProperty('--mi-w', Math.round(limitaAncho(mi.w * CW, CW, CH, vl)) + 'px'); caja.classList.add('con-tam'); }
@@ -617,6 +641,7 @@
       return { izq: cx > CW / 2, arriba: cy > CH / 2 };
     }
     function colocaAsa() {
+      pintaBotonTam();
       const a = asa(), vl = vidLocal(), cont = lienzoVid(); if (!a || !vl || !cont) return;
       if (caja.classList.contains('dividida')) {
         // en la pantalla dividida, el asa va en el borde que separa las dos mitades
@@ -635,6 +660,7 @@
     const sobreAsa = (p) => { if (!visible()) return false; const cs = getComputedStyle(caja); const x = parseFloat(cs.getPropertyValue('--asa-x')) + 11, y = parseFloat(cs.getPropertyValue('--asa-y')) + 11; return Number.isFinite(x) && Math.hypot(p.x - x, p.y - y) <= 18; };
     // de la pantalla dividida a la imagen flotante del mismo tamaño (para seguir agrandando o achicando desde ahí)
     function sueltaDividida() {
+      partidaPorDefecto = false;
       const vl = vidLocal(), cont = lienzoVid(), CW = cont.clientWidth, CH = cont.clientHeight, l = ['izq', 'der', 'arriba', 'abajo'].find((x) => caja.classList.contains('lado-' + x));
       ponDividida(null);
       const w = limitaAncho(CW / 2, CW, CH, vl); caja.style.setProperty('--mi-w', Math.round(w) + 'px'); caja.classList.add('con-tam');
@@ -652,6 +678,7 @@
       guardaMi({ div: null, w: caja.classList.contains('con-tam') ? r5(W / CW) : null, x: r5((vl.offsetLeft - MARGEN) / Math.max(1, CW - W - 2 * MARGEN)), y: r5((vl.offsetTop - MARGEN) / Math.max(1, CH - H - 2 * MARGEN)) });
     }
     function alternaDividida() {
+      partidaPorDefecto = false;
       const vl = vidLocal(), cont = lienzoVid(); if (!vl || !cont) return;
       if (caja.classList.contains('dividida')) {
         // vuelve a la imagen pequeña de antes (o a la de siempre)
@@ -713,6 +740,7 @@
     addEventListener('resize', escala, { passive: true });
     if (FINO.addEventListener) FINO.addEventListener('change', escala);
     escala();
+    { const vlx = vidLocal(); if (vlx) { vlx.addEventListener('loadedmetadata', () => miImagen()); vlx.addEventListener('resize', () => colocaAsa()); } }
     return { llamar, recibe, colgar, eligeVoz, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
   }
   raiz.GuardianaLlamada = { crea, VOCES };
