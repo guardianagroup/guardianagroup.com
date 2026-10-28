@@ -701,3 +701,5 @@ a,button,summary,label,[role="button"]{cursor:pointer}
 .ll-ajustes-atras{display:inline-flex;align-items:center;gap:4px;margin:0 0 8px;padding:7px 14px 7px 8px;border-radius:999px;border:1px solid rgba(218,236,250,.24);background:rgba(6,8,12,.55);color:#F4F6F8;font:500 14px/1 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .ll-ajustes-atras:hover{background:rgba(6,8,12,.8)}
 .ll-ajustes-atras svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* Con el teclado del iPhone abierto, la página mide lo que se ve y se coloca ahí (dueño, 28 Oct 2026, 15:26) */
+@media (pointer:coarse){html.con-teclado,html.con-teclado body{overflow:hidden;overscroll-behavior:none}html.con-teclado body{height:var(--alto-vv,100dvh);transform:translateY(var(--arriba-vv,0px))}}
