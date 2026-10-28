@@ -5,7 +5,13 @@
 (() => {
   const C = window.GuardianaCripto, $ = (s) => document.querySelector(s), T = (s) => (window.GuardianaIdioma ? GuardianaIdioma.t(s) : s);
   const LOC = () => (window.GuardianaIdioma && GuardianaIdioma.locale) || 'es';
-  const TROZO = 192 * 1024, VENTANA = 12;
+  const TROZO = 192 * 1024, VENTANA = 12, VENTANA_B = 32;
+  // Sesión blindada (dueño, 27 Oct 2026, 22:01–23:12): suite CNSA 2.0, invitación por enlace de 256 bits, verificación mutua
+  // obligatoria, identidad nueva en cada sesión, renovación de claves cada 5 minutos, relleno e informe de cierre.
+  const esB = (c) => !!(c && c.modo === 'blindada');
+  const RENUEVA_B_MS = 5 * 60 * 1000;
+  // en pruebas locales, «?renueva=N» acorta la renovación a N segundos
+  const renuevaMs = () => (LOCAL && +new URLSearchParams(location.search).get('renueva') * 1000) || RENUEVA_B_MS;
   const ORIGEN = location.origin + location.pathname.replace(/[^/]*$/, '');
   const LOCAL = /^(127\.0\.0\.1|localhost)$/.test(location.hostname);
 
@@ -76,25 +82,35 @@
   }
 
   // ---------- conversaciones ----------
-  async function yoId(sala) { return C.hex(await C.sha256(C.te.encode('GUARDIANA miembro\n' + sala + '\n' + C.hex(YO.huella)))).slice(0, 16); }
-  function convNueva(sala, semilla, rol) {
-    return { id: sala, semilla, rol, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0 };
+  // En la blindada, cada sesión tiene su propia identidad (ECDSA y ECDH P-384 + ML-DSA-87): nada enlaza una sesión con
+  // la siguiente, y al terminar se borra con todo lo demás. La clave ML-DSA-87 se guarda encriptada con la clave local.
+  const miHuella = (c) => (esB(c) ? c.miHuellaB : YO.huella);
+  async function preparaIdentidadB(c) {
+    if (!C.B.hayBlindada()) throw new Error('sin blindada');
+    if (!c.idB) { const n = await C.B.creaIdentidad(YO.reposo); c.idB = n.guardar; c.idBDsaSec = n.dsaSec; }
+    else if (!c.idBDsaSec) c.idBDsaSec = await C.B.abreDsa(c.idB, YO.reposo);
+    c.miHuellaB = await C.B.huella(c.idB.firmaPub, c.idB.acuerdoPub, c.idB.dsaPub);
   }
-  const guardable = (c) => ({ id: c.id, tumba: c.tumba, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada });
+  async function yoId(sala, c) { return C.hex(await C.sha256(C.te.encode('GUARDIANA miembro\n' + sala + '\n' + C.hex(c ? miHuella(c) : YO.huella)))).slice(0, 16); }
+  function convNueva(sala, semilla, rol, modo) {
+    return { id: sala, semilla, rol, modo: modo === 'blindada' ? 'blindada' : 'normal', suVerificada: false, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0 };
+  }
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null });
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
-    const d = await C.deSemilla(c.semilla);
-    c.presentacion = d.presentacion; c.psk = d.psk; c.yo = await yoId(c.id);
+    if (esB(c)) await preparaIdentidadB(c);
+    const d = esB(c) ? await C.B.deSemilla(c.semilla) : await C.deSemilla(c.semilla);
+    c.presentacion = d.presentacion; c.psk = d.psk; c.yo = await yoId(c.id, c);
     c.miembros = new Set(); c.sesion = null; c.sesiones = new Map(); c.ef = null; c.epoca = null; c.mensajes = []; c.cola = []; c.enviando = false; c.archivos = new Map();
     c.suId = c.huella ? C.hex(await C.sha256(C.te.encode('GUARDIANA miembro\n' + c.id + '\n' + C.hex(c.huella)))).slice(0, 16) : null;
     CONVS.set(c.id, c);
-    R.entra(c.id, c.yo);
+    R.entra(c.id, c.yo, esB(c) ? { b: 1 } : undefined);
   }
   // Una sola conversación (dueño, 26 Oct 20:04): al abrir, queda la activa más reciente; las invitaciones sin usar y las
   // conversaciones de versiones anteriores se borran (si la otra persona vuelve, recibe la orden de borrado).
   async function cargaConvs() {
     const xs = (await BD.todos('conv')).sort((a, b) => (b.creado || 0) - (a.creado || 0));
-    const viva = xs.find((x) => x.huella && x.estado !== 'destruida_pendiente');
+    const viva = xs.find((x) => (x.huella || (x.modo === 'blindada' && x.rol === 'invita')) && x.estado !== 'destruida_pendiente');
     for (const x of xs) {
       // las marcas de borrado pendiente (sin contenido) caducan a las 24 horas
       if (x.estado === 'destruida_pendiente' && Date.now() - (x.tumba || x.creado || 0) > 24 * 3600 * 1000) { await BD.borra('conv', x.id); continue; }
@@ -129,6 +145,24 @@
     }
     c.codigo = null; pintaCodigo(c); aviso(T('No se pudo crear el código: inténtalo otra vez.')); return false;
   }
+  // Invitación blindada: solo por enlace o QR, con la semilla entera (256 bits) en el fragmento «#b=»: el navegador no la
+  // manda a ningún servidor y el relé no guarda ningún sobre. Se guarda aquí hasta que la otra persona entre o se termine.
+  async function creaInvitacionB() {
+    if (!R.abierto) { aviso(T('Sin conexión: espera un momento.')); return; }
+    if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; }
+    for (const c of [...CONVS.values()]) await destruye(c, true);
+    const semilla = C.nuevaSemilla();
+    const d = await C.B.deSemilla(semilla);
+    const c = convNueva(d.sala, semilla, 'invita', 'blindada');
+    await preparaConv(c); await guardaConv(c);
+    abreConv(c.id);
+  }
+  const enlaceB = (c) => ORIGEN + '#b=' + C.b64u(c.semilla);
+  function muestraEnlace(c) {
+    const u = enlaceB(c); $('#enlace-b').value = u;
+    const q = $('#enlace-qr'); if (q && window.qrSvg && q.dataset.u !== u) { q.innerHTML = window.qrSvg(u); q.dataset.u = u; }
+    const est = $('#enlace-estado'); est.textContent = c.ocupada ? T('Esta invitación ya la usó otra persona.') : T('Esperando a que la otra persona abra el enlace…'); est.classList.toggle('mal', !!c.ocupada);
+  }
   const codigoBonito = (k) => k ? k.replace(/(\d{3})(?=\d)/g, '$1-') : '···-···-···';
   async function aceptaCodigo(texto) {
     const codigo = String(texto || '').replace(/\D/g, '');
@@ -144,31 +178,34 @@
     if (semilla.length !== 32) return 'no vale';
     return (await aceptaSemilla(semilla)) ? 'ok' : 'no vale';
   }
-  async function aceptaSemilla(semilla) {
-    const d = await C.deSemilla(semilla);
+  async function aceptaSemilla(semilla, modo) {
+    const B = modo === 'blindada';
+    if (B && !C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return false; }
+    const d = B ? await C.B.deSemilla(semilla) : await C.deSemilla(semilla);
     if (CONVS.has(d.sala)) { abreConv(d.sala); return true; }
     for (const c of [...CONVS.values()]) await destruye(c, true);
-    const c = convNueva(d.sala, semilla, 'acepta');
-    await guardaConv(c); await preparaConv(c);
+    const c = convNueva(d.sala, semilla, 'acepta', modo);
+    await preparaConv(c); await guardaConv(c);
     pintaLista(); abreConv(c.id);
     return true;
   }
-  // enlaces #i= antiguos (ya no se muestran, pero uno guardado sigue abriendo su conversación)
+  // enlaces: «#b=» abre una sesión blindada; «#i=» (antiguos, ya no se muestran) sigue abriendo su conversación normal
   async function aceptaInvitacion(enlace) {
-    let semilla = null;
-    try { const m = String(enlace).match(/#i=([A-Za-z0-9_-]{43})/); if (m) semilla = C.deB64u(m[1]); } catch (_) {}
+    let semilla = null, modo = 'normal';
+    try { const m = String(enlace).match(/#([ib])=([A-Za-z0-9_-]{43})/); if (m) { semilla = C.deB64u(m[2]); modo = m[1] === 'b' ? 'blindada' : 'normal'; } } catch (_) {}
     if (!semilla || semilla.length !== 32) return false;
-    return aceptaSemilla(semilla);
+    return aceptaSemilla(semilla, modo);
   }
 
   // ---------- presentación y sesión ----------
   // Quién inicia: de las dos huellas, la menor. Quien inicia se presenta cuando llega o ve llegar; quien responde solo
   // contesta a una presentación (con «resp» = la época a la que contesta) y deriva la sesión en ese momento; quien
   // inicia deriva al recibir la respuesta a su época vigente. Así los dos usan el mismo par de efímeras.
-  const soyInicio = (c) => !c.huella || C.hex(YO.huella) < C.hex(c.huella);
+  const soyInicio = (c) => !c.huella || C.hex(miHuella(c)) < C.hex(c.huella);
+  const presentaX = (c, resp, forzar) => (esB(c) ? presentaB(c, resp, forzar) : presenta(c, resp, forzar));
   // presentarse va por la misma cola que las tramas de la conversación: nunca dos efímeras a medio camino
   const enCola = (c, f) => { c.proc = (c.proc || Promise.resolve()).then(f).catch((e) => console.warn(e)); return c.proc; };
-  const reintenta = (c, ms) => { clearTimeout(c.reintento); c.reintento = setTimeout(() => { if (!c.sesion && c.suId && c.miembros.has(c.suId) && R.abierto) enCola(c, () => presenta(c, null, true)); }, ms); };
+  const reintenta = (c, ms) => { clearTimeout(c.reintento); c.reintento = setTimeout(() => { if (!c.sesion && c.suId && c.miembros.has(c.suId) && R.abierto) enCola(c, () => presentaX(c, null, true)); }, ms); };
   // Devuelve, cuando responde con ML-KEM, el secreto híbrido { ss, ek, ct } para derivar la sesión v3; si no, null.
   async function presenta(c, resp, forzar) {
     if (c.estado === 'destruida' || !R.abierto) return null;
@@ -276,16 +313,157 @@
     if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c);
   }
 
+  // ---------- sesión blindada (suite CNSA 2.0) ----------
+  // La misma coreografía que la normal (quien tiene la huella menor inicia; quien responde contesta a una época concreta),
+  // con P-384, ML-KEM-1024 obligatorio y dos firmas (ECDSA P-384 y ML-DSA-87) sobre exactamente los mismos bytes. Una
+  // presentación a la que le falte cualquiera de las dos firmas, o el ML-KEM, se descarta sin más.
+  async function presentaB(c, resp, forzar) {
+    if (c.estado === 'destruida' || !R.abierto || !c.idB) return null;
+    if (!resp && !forzar && c.presentadoEn && Date.now() - c.presentadoEn < 1200) { reintenta(c, 1400); return null; }
+    if (resp && !resp.ek) return null; // sin la clave ML-KEM de quien inicia no hay respuesta posible
+    c.ef = await C.B.efimera(); c.epoca = C.azar(16);
+    if (!resp && soyInicio(c)) c.ef.kem = C.B.kemPar();
+    let pq = null;
+    if (resp) { const k = C.B.kemEncapsula(resp.ek); pq = { ss: k.ss, ek: resp.ek, ct: k.ct }; }
+    c.efs = c.efs || new Map(); c.efs.set(C.hex(c.epoca), c.ef); for (const k of [...c.efs.keys()].slice(0, -4)) { const v = c.efs.get(k); if (v && v.kem) { v.kem.dk.fill(0); v.kem = null; } c.efs.delete(k); }
+    const id = c.idB;
+    const datos = resp
+      ? await C.B.datosResponde(c.id, id.firmaPub, id.acuerdoPub, id.dsaPub, c.ef.pub, c.epoca, resp.epoca, c.huella, resp.ef, pq.ek, pq.ct)
+      : await C.B.datosInicia(c.id, id.firmaPub, id.acuerdoPub, id.dsaPub, c.ef.pub, c.epoca, c.ef.kem ? c.ef.kem.ek : new Uint8Array(0));
+    const sig = await C.B.firma(id, datos), sigpq = C.B.firmaPQ(c.idBDsaSec, datos);
+    const j = { v: 4, b: 1, firmaPub: C.b64u(id.firmaPub), acuerdoPub: C.b64u(id.acuerdoPub), dsaPub: C.b64u(id.dsaPub), ef: C.b64u(c.ef.pub), epoca: C.b64u(c.epoca), resp: resp ? C.b64u(resp.epoca) : '', nombre: YO.nombre, sig: C.b64u(sig), sigpq: C.b64u(sigpq) };
+    if (c.ef.kem) j.kem = C.b64u(c.ef.kem.ek);
+    if (pq) j.kemct = C.b64u(pq.ct);
+    const iv = C.azar(12);
+    const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv, additionalData: new Uint8Array([1]) }, c.presentacion, C.B.rellena(C.te.encode(JSON.stringify(j)))));
+    R.manda(c.id, c.suId || null, C.cat(new Uint8Array([1]), iv, ct));
+    c.presentadoEn = Date.now();
+    if (!resp) reintenta(c, 4000 + Math.random() * 1500);
+    return pq;
+  }
+  async function recibePresentacionB(c, de, b) {
+    if (b.length < 30 || !c.idB) return;
+    let j;
+    try { j = JSON.parse(C.td.decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b.subarray(1, 13), additionalData: new Uint8Array([1]) }, c.presentacion, b.subarray(13)))); } catch (_) { return; }
+    try {
+      if (!j || j.v !== 4 || j.b !== 1) return;
+      const firmaPub = C.deB64u(j.firmaPub), acuerdoPub = C.deB64u(j.acuerdoPub), dsaPub = C.deB64u(j.dsaPub), ef = C.deB64u(j.ef), epoca = C.deB64u(j.epoca), sig = C.deB64u(j.sig), sigpq = C.deB64u(j.sigpq), resp = j.resp ? C.deB64u(j.resp) : null;
+      const kemEk = j.kem ? C.deB64u(j.kem) : null, kemCt = j.kemct ? C.deB64u(j.kemct) : null;
+      if (firmaPub.length !== C.B.EC || acuerdoPub.length !== C.B.EC || ef.length !== C.B.EC || dsaPub.length !== C.B.DSA_PUB || epoca.length !== 16 || (resp && resp.length !== 16) || sigpq.length !== C.B.DSA_FIRMA) return;
+      if ((kemEk && (resp || kemEk.length !== C.B.EK)) || (kemCt && kemCt.length !== C.B.CT) || (!!resp !== !!kemCt)) return;
+      const huella = await C.B.huella(firmaPub, acuerdoPub, dsaPub);
+      if (C.hex(huella) === C.hex(c.miHuellaB)) return; // yo mismo desde otra pestaña
+      if (c.huella && C.hex(c.huella) !== C.hex(huella)) { R.manda(c.id, de, new Uint8Array([5])); c.intrusos = (c.intrusos || 0) + 1; vigila(c, T('Intento de entrada con otra identidad: rechazado; la conversación sigue intacta.'), 'mal'); if (!c.intrusoAvisado) { c.intrusoAvisado = true; await anotaSistema(c, 'Alguien con otra identidad intentó entrar en esta conversación: rechazado.'); } pintaRadio(c); return; }
+      c.epocasVistas = c.epocasVistas || new Set(); const eh = C.hex(epoca); if (c.epocasVistas.has(eh)) return; c.epocasVistas.add(eh); if (c.epocasVistas.size > 64) c.epocasVistas.delete(c.epocasVistas.values().next().value);
+      const efMia = resp && c.efs ? c.efs.get(C.hex(resp)) : null;
+      if (resp && (!efMia || !efMia.kem)) return; // respuesta a una época que no es de las últimas mías (o ya usada): fuera
+      const datos = resp
+        ? await C.B.datosResponde(c.id, firmaPub, acuerdoPub, dsaPub, ef, epoca, resp, c.miHuellaB, efMia.pub, efMia.kem.ek, kemCt)
+        : await C.B.datosInicia(c.id, firmaPub, acuerdoPub, dsaPub, ef, epoca, kemEk || new Uint8Array(0));
+      if (!(await C.B.verifica(firmaPub, sig, datos)) || !C.B.verificaPQ(dsaPub, sigpq, datos)) return; // las dos firmas, o nada
+      const nueva = !c.huella;
+      if (nueva) { c.firmaPub = firmaPub; c.acuerdoPub = acuerdoPub; c.dsaPub = dsaPub; c.huella = huella; c.estado = 'activa'; if (!c.nombre) c.nombre = String(j.nombre || '').slice(0, 40); }
+      else if (!c.nombre && j.nombre) c.nombre = String(j.nombre).slice(0, 40);
+      c.suId = de; c.miembros.add(de);
+      if (nueva || j.nombre !== c.nombreVisto) { c.nombreVisto = j.nombre; await guardaConv(c); }
+      if (!soyInicio(c)) { if (kemEk && !resp) { const pq = await presentaB(c, { epoca, ef, ek: kemEk }); await derivaSesionB(c, ef, c.ef, pq); } }
+      else if (resp) { const pq = { ss: C.B.kemAbre(kemCt, efMia.kem.dk), ek: efMia.kem.ek, ct: kemCt }; efMia.kem.dk.fill(0); efMia.kem = null; await derivaSesionB(c, ef, efMia, pq); }
+      else await presentaB(c, null);
+      if (nueva) { clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Sesión blindada establecida. Antes de enviar nada, comprobad los dos el número de seguridad por otro canal.'); if (ACTUAL === c.id) abreConv(c.id); }
+      if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
+      pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
+    } catch (e) { console.warn('presentación blindada', e); }
+  }
+  async function derivaSesionB(c, suEf, efMia, pq) {
+    if (!efMia || !suEf || !c.acuerdoPub || !pq || !pq.ss) { if (pq && pq.ss) pq.ss.fill(0); return; }
+    const inicio = soyInicio(c);
+    const s = await C.B.sesion(c.idB, efMia, { ef: suEf, acuerdoPub: c.acuerdoPub }, c.id, inicio, c.psk, c.miHuellaB, c.huella, pq);
+    pq.ss.fill(0);
+    const sid = C.hex(s.hash.subarray(0, 8)), renovada = !!c.sesion;
+    const ses = { sid, hash: s.hash, envio: C.B.cadena(s.envio), recibo: C.B.cadena(s.recibo), desde: Date.now(), confirmada: false, pq: true, blindada: true };
+    c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento); c.encuentros = (c.encuentros || 0) + 1;
+    if (!c.pqVisto) { c.pqVisto = true; guardaConv(c); }
+    vigila(c, renovada ? T('Claves renovadas (suite CNSA 2.0): lo anterior ya no se puede leer con las claves nuevas.') : T('Claves acordadas con la otra persona: suite CNSA 2.0 (ML-KEM-1024 y ECDH P-384).'), 'info');
+    // de las sesiones anteriores quedan las dos últimas (por los mensajes en vuelo); las demás se borran de la memoria
+    for (const k of [...c.sesiones.keys()].slice(0, -3)) { const x = c.sesiones.get(k); try { x.envio.borra(); x.recibo.borra(); } catch (_) {} c.sesiones.delete(k); }
+    pintaCabecera(c); pintaLista();
+    enviaControl(c, { tipo: 'ok' });
+    if (YO.nombre) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
+    if (c.verificada) enviaControl(c, { tipo: 'verificada', si: 1, n: await hNumero(c) });
+    enviaCola(c);
+    reenviaCustodias(c);
+    if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c);
+  }
+  // ---------- número de seguridad y verificación mutua ----------
+  const numeroDe = (c) => (esB(c) ? C.B.numeroSeguridad(c.miHuellaB, c.huella) : C.numeroSeguridad(YO.huella, c.huella));
+  const hNumero = async (c) => C.hex(await C.sha256(C.te.encode('GUARDIANA número comprobado\n' + (await numeroDe(c)))));
+  async function marcaVerificada(c, si) {
+    c.verificada = !!si; await guardaConv(c);
+    if (esB(c) && c.huella) {
+      enviaControl(c, { tipo: 'verificada', si: c.verificada ? 1 : 0, n: await hNumero(c) });
+      await anotaSistema(c, c.verificada ? 'Has comprobado el número de seguridad.' : 'Has retirado tu comprobación del número de seguridad.');
+      vigila(c, c.verificada ? T('Has comprobado el número de seguridad.') : T('Has retirado tu comprobación del número de seguridad.'), c.verificada ? 'bien' : 'info');
+    }
+    pintaCabecera(c); pintaRadio(c); enviaCola(c);
+  }
+  async function recibeVerificada(c, j) {
+    if (!esB(c) || !c.huella) return;
+    const antes = !!c.suVerificada;
+    if (j.si === 1 && j.n === (await hNumero(c))) {
+      c.suVerificada = true;
+      if (!antes) { await anotaSistema(c, 'La otra persona ha comprobado el número de seguridad.'); vigila(c, T('La otra persona ha comprobado el número de seguridad.'), 'bien'); }
+    } else if (j.si === 1) {
+      // el otro equipo ve otro número: no son las mismas identidades en los dos lados (o alguien en medio)
+      c.suVerificada = false;
+      await anotaSistema(c, 'El número de seguridad no coincide en los dos equipos: no enviéis nada y comprobadlo de nuevo por otro canal.');
+      vigila(c, T('El número de seguridad no coincide en los dos equipos: no enviéis nada y comprobadlo de nuevo por otro canal.'), 'mal');
+      c.incidencias = (c.incidencias || 0) + 1;
+    } else {
+      c.suVerificada = false;
+      if (antes) { await anotaSistema(c, 'La otra persona ha retirado su comprobación del número de seguridad.'); vigila(c, T('La otra persona ha retirado su comprobación del número de seguridad.'), 'info'); }
+    }
+    await guardaConv(c); pintaCabecera(c); pintaRadio(c); enviaCola(c);
+  }
+  // La puerta de la blindada: encima del campo de escribir, con el número a la vista, hasta que los dos lo comprueban
+  async function pintaPuerta(c) {
+    const p = $('#bl-puerta'); if (!p) return;
+    const ver = !!(esB(c) && c.huella && ACTUAL === c.id && !(c.verificada && c.suVerificada));
+    p.hidden = !ver; $('#conv').classList.toggle('bl-cerrada', ver);
+    if (!ver) return;
+    const n = await numeroDe(c); if ($('#bl-numero').textContent !== n) $('#bl-numero').textContent = n;
+    const yo = $('#bl-yo'), otro = $('#bl-otro');
+    yo.textContent = c.verificada ? T('Tú: comprobado') : T('Tú: pendiente'); yo.className = c.verificada ? 'si' : '';
+    otro.textContent = c.suVerificada ? T('La otra persona: comprobado') : T('La otra persona: pendiente'); otro.className = c.suVerificada ? 'si' : '';
+    const bt = $('#bl-coincide'); bt.textContent = c.verificada ? T('Retirar mi comprobación') : T('He comprobado que coincide'); bt.classList.toggle('principal', !c.verificada);
+  }
+  // ---------- informe de cierre (blindada) ----------
+  function muestraCierre(c) {
+    const n = c.mensajes.filter((m) => m.tipo === 'texto').length, a = c.mensajes.filter((m) => m.tipo === 'archivo').length, k = c.mensajes.filter((m) => m.tipo === 'custodia').length;
+    $('#cierre-cuenta').textContent = n + ' ' + (n === 1 ? T('mensaje') : T('mensajes')) + ' · ' + a + ' ' + (a === 1 ? T('archivo') : T('archivos')) + ' · ' + k + ' ' + (k === 1 ? T('comprobante') : T('comprobantes'));
+    $('#cierre-aviso-comp').hidden = !k;
+    abreHoja('h-cierre');
+  }
+  // borrado criptográfico de lo que vive en memoria: claves de cadena, secreto de la invitación, psk e identidad de la sesión
+  function borraClavesB(c) {
+    try { for (const x of c.sesiones.values()) { if (x.envio.borra) x.envio.borra(); if (x.recibo.borra) x.recibo.borra(); } } catch (_) {}
+    try { if (c.psk) c.psk.fill(0); if (c.semilla) c.semilla.fill(0); if (c.idBDsaSec) c.idBDsaSec.fill(0); if (c.efs) for (const v of c.efs.values()) if (v && v.kem) v.kem.dk.fill(0); } catch (_) {}
+    c.sesion = null; c.sesiones = new Map(); c.idB = null; c.idBDsaSec = null; c.efs = null;
+  }
+
   // ---------- mensajes ----------
   async function sella(c, obj) {
     const ses = c.sesion; if (!ses) return null;
     const { n, clave } = await ses.envio.siguiente();
     const cab = new Uint8Array(13); cab[0] = 2; cab.set(C.deHex(ses.sid), 1); new DataView(cab.buffer).setUint32(9, n);
-    const ct = await C.sella(clave, n, C.te.encode(JSON.stringify(obj)), C.cat(cab, ses.hash)); // AAD: cabecera + hash de sesión entero
+    const claro = C.te.encode(JSON.stringify(obj));
+    const ct = await C.sella(clave, n, esB(c) ? C.B.rellena(claro) : claro, C.cat(cab, ses.hash)); // AAD: cabecera + hash de sesión entero
+    if (esB(c)) clave.fill(0); // la clave de este mensaje ya no sirve: fuera de la memoria
     return C.cat(cab, ct);
   }
   function enviaControl(c, obj) { if (!c.sesion || !R.abierto || !c.miembros.has(c.suId)) return false; sella(c, obj).then((b) => b && R.manda(c.id, c.suId, b)); return true; }
   const enLinea = (c) => !!(c.suId && c.miembros.has(c.suId) && c.sesion && R.abierto);
+  // blindada: nada de contenido (mensajes, archivos, llamadas) hasta que los dos han comprobado el número de seguridad
+  const puedeEnviar = (c) => !esB(c) || !!(c.verificada && c.suVerificada);
 
   async function enviaTexto(c, texto) {
     const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'texto', texto };
@@ -296,7 +474,7 @@
   async function enviaCola(c) {
     if (c.enviando) return; c.enviando = true;
     try {
-      while (c.cola.length && enLinea(c)) {
+      while (c.cola.length && enLinea(c) && puedeEnviar(c)) {
         const m = c.cola[0];
         const carga = m.tipo === 'texto' ? { tipo: 'texto', id: m.id, t: m.t, texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos, v: 1, region: MI_PAIS || undefined, voz: m.archivo.voz ? 1 : undefined } : null;
         if (!carga) { c.cola.shift(); continue; }
@@ -334,6 +512,7 @@
         for (const id of j.ids || []) { const m = c.mensajes.find((x) => x.id === id && x.dir === 'mia'); if (m && (est === 'leido' || m.estado === 'enviado' || m.estado === 'pendiente')) { if (!(m.estado === 'leido')) { m.estado = est; await guardaMensaje(c, m); pintaEstado(m); if (est === 'entregado' && m.tipo === 'texto') vigila(c, T('Mensaje entregado: acuse del otro equipo.'), 'ok'); } } }
         return;
       }
+      case 'verificada': return recibeVerificada(c, j);
       case 'nombre': { const n = String(j.nombre || '').trim().slice(0, 40); if (!c.nombreFijado && n && n !== c.nombre) { c.nombre = n; await guardaConv(c); pintaLista(); pintaCabecera(c); } return; }
       case 'archivo': return recibeAnuncioArchivo(c, j, ses);
       case 'archivo-ack': { const a = c.archivos.get(j.id); if (a && a.envio) { a.ack = Math.max(a.ack, +j.hasta || 0); a.sigue && a.sigue(); acuseViaje(j, a); } return; }
@@ -415,11 +594,13 @@
     if (v) { v.estado = 'viaje'; v.t0 = a.t0; VJ() && VJ().muestra(v, 0); vigilaViajes(); abreSiToca(v, true); }
     for (let i = 0; i < a.trozos; i++) {
       if (a.cancelado || c.estado === 'destruida') return;
-      while (i - a.ack >= VENTANA || R.atraso > 3 * 1024 * 1024) { if (!enLinea(c)) return falla(c, m, T('Se perdió la conexión.')); await new Promise((r) => { a.sigue = r; setTimeout(r, 300); }); if (a.cancelado) return; }
+      while (i - a.ack >= (esB(c) ? VENTANA_B : VENTANA) || R.atraso > (esB(c) ? 8 : 3) * 1024 * 1024) { if (!enLinea(c)) return falla(c, m, T('Se perdió la conexión.')); await new Promise((r) => { a.sigue = r; setTimeout(r, 300); }); if (a.cancelado) return; }
       let claro; try { claro = new Uint8Array(await a.f.slice(i * TROZO, (i + 1) * TROZO).arrayBuffer()); } catch (_) { return falla(c, m, T('No se pudo leer el archivo: ¿sigue en el mismo sitio?')); }
       if (huella) huella.pon(claro); // la huella del archivo entero, en orden: la misma que calcula el equipo del destinatario
       const cab = new Uint8Array(21); cab[0] = 3; cab.set(fid, 1); new DataView(cab.buffer).setUint32(17, i);
-      const ct = await C.sella(a.clave, i, claro, cab);
+      // blindada: el último trozo sale completo (192 KB), así el relé no ve el tamaño exacto del archivo
+      const carga = esB(c) && claro.length < TROZO ? (() => { const x = new Uint8Array(TROZO); x.set(claro); return x; })() : claro;
+      const ct = await C.sella(a.clave, i, carga, cab);
       if (!R.manda(c.id, c.suId, C.cat(cab, ct))) return falla(c, m, T('Se perdió la conexión.'));
       a.enviados += claro.length;
       if (v && i === 0) { v.salida = new Date().toISOString(); v.tipoReal = VJ().tipoPorContenido(claro); evento(v, T('Primer fragmento enviado al relé de GUARDIANA') + (v.rele && v.rele.ciudad && !v.rele.prueba ? ' · ' + v.rele.ciudad + ', ' + VJ().pais(v.rele.cc) : '') + '.'); }
@@ -464,6 +645,7 @@
     const a = m && c.archivos.get(m.id); if (!a || a.envio || !a.listo || i >= a.trozos) return;
     let claro; try { claro = await C.abre(a.clave, i, b.subarray(21), b.subarray(0, 21)); } catch (_) { return incidencia(c, m, a, 'Un trozo del archivo no superó la comprobación de integridad: envío cortado.'); }
     const esperado = i < a.trozos - 1 ? TROZO : m.archivo.tam - (a.trozos - 1) * TROZO;
+    if (esB(c) && claro.length === TROZO && esperado < TROZO) claro = claro.subarray(0, esperado); // el relleno del último trozo
     if (claro.length !== esperado) return incidencia(c, m, a, 'Un trozo del archivo no coincide con lo anunciado: envío cortado.');
     const v = VIAJES.get(m.id);
     if (v && i === 0 && !v.tipoReal) v.tipoReal = VJ().tipoPorContenido(claro);
@@ -493,11 +675,11 @@
       vigila(c, ok ? T('Archivo recibido') + ': ' + m.archivo.nombre + ' · ' + a.trozos + ' ' + T('trozos autenticados, completo.') : T('Archivo incompleto: ') + m.archivo.nombre, ok ? 'bien' : 'mal');
       // lo que este equipo ha medido: entra en el comprobante y se comprueba antes de firmarlo (se guarda con el mensaje)
       const sha = ok && a.huella && a.hPtr === a.trozos ? C.hex(a.huella.cierra()) : null;
-      const obs = sha ? { sha256: sha, llegada: new Date().toISOString(), primero: iso(a.t0), anuncio: v ? iso(v.tCreado) : null, lat: v && VJ() ? VJ().estad(v.latMia) : null, verificada: !!c.verificada, nombre: YO.nombre || '', region: MI_PAIS || '', version: VERSION_APP, tipo: (v && v.tipoReal) || null, pq: !!(v && v.pq), sid: (v && v.sid) || '', rele: v && v.rele ? v.rele.host || '' : '', rele_region: R.region || '' } : null;
+      const obs = sha ? { sha256: sha, llegada: new Date().toISOString(), primero: iso(a.t0), anuncio: v ? iso(v.tCreado) : null, lat: v && VJ() ? VJ().estad(v.latMia) : null, verificada: !!c.verificada, nombre: YO.nombre || '', region: MI_PAIS || '', version: VERSION_APP, tipo: (v && v.tipoReal) || null, mutua: esB(c) ? !!(c.verificada && c.suVerificada) : undefined, pq: !!(v && v.pq), sid: (v && v.sid) || '', rele: v && v.rele ? v.rele.host || '' : '', rele_region: R.region || '' } : null;
       if (obs && m.archivo.custodia) m.archivo.obs = obs;
       await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c);
       const fin = { tipo: 'archivo-fin', id: m.id, ok, seg: Math.round(seg * 10) / 10, trozos: a.trozos };
-      if (obs) Object.assign(fin, { v: 1, sha256: obs.sha256, llegada: obs.llegada, primero: obs.primero, anuncio: obs.anuncio, lat: obs.lat, verificada: obs.verificada, nombre: obs.nombre, region: obs.region || undefined, version: obs.version, tipoReal: obs.tipo }); // «tipo» es el del mensaje: el del archivo va en «tipoReal»
+      if (obs) Object.assign(fin, { v: 1, sha256: obs.sha256, llegada: obs.llegada, primero: obs.primero, anuncio: obs.anuncio, lat: obs.lat, verificada: obs.verificada, nombre: obs.nombre, region: obs.region || undefined, version: obs.version, tipoReal: obs.tipo, mutua: obs.mutua }); // «tipo» es el del mensaje: el del archivo va en «tipoReal»
       enviaControl(c, fin);
       if (v) { finViaje(v, ok); if (ok) { v.coincide = undefined; evento(v, T('Último fragmento autenticado: archivo completo.'), 'bien'); if (sha) evento(v, T('Huella SHA-256 calculada en tu equipo') + ': ' + VJ().agrupa(sha, 16) + '…'); } }
       // con comprobante, la tarjeta firmada sustituye al recibo; si no llega en 30 s, queda el recibo de siempre
@@ -568,7 +750,7 @@
     v.custodia = v.voz ? 'voz' : j.v === 1 ? 'si' : 'no'; v.tListo = Date.now();
     v.paisSuyo = regionValida(j.region) || v.paisSuyo; const l = latValida(j.lat); if (l != null) v.latSuya.push(l);
     evento(v, T('El equipo del destinatario está listo: empieza el envío.'));
-    if (v.custodia === 'no') evento(v, T('El otro equipo usa una versión anterior de Comunicaciones: el envío sigue, sin comprobante de custodia.'), 'info');
+    if (v.custodia === 'no') evento(v, T('El otro equipo usa una versión anterior de Comunicaciones: el envío sigue, sin comprobante de entrega e integridad.'), 'info');
   }
   function acuseViaje(j, a) {
     const v = VIAJES.get(j.id); if (!v) return;
@@ -599,12 +781,17 @@
       ['emisor', 'salida', v.salida || iso(v.t0)], ['emisor', 'ultimo', iso(v.tUltimo)], ['emisor', 'confirmado', iso(v.tFin)], ['emisor', 'firma', emitido],
       ['receptor', 'anuncio_recibido', typeof j.anuncio === 'string' ? j.anuncio.slice(0, 40) : null], ['receptor', 'primero', typeof j.primero === 'string' ? j.primero.slice(0, 40) : null], ['receptor', 'llegada', typeof j.llegada === 'string' ? j.llegada.slice(0, 40) : null],
     ].filter((x) => x[2]).map(([lado, que, t]) => ({ t, lado, que })).sort((p, q) => (p.t < q.t ? -1 : p.t > q.t ? 1 : 0));
+    const B = esB(c);
+    const mio = B ? { clave: C.b64u(c.idB.firmaPub), acuerdo: C.b64u(c.idB.acuerdoPub), clave_pq: C.b64u(c.idB.dsaPub), huella: C.hex(c.miHuellaB) } : { clave: C.b64u(YO.firmaPub), acuerdo: C.b64u(YO.acuerdoPub), huella: C.hex(YO.huella) };
+    const suyo = B ? { clave: C.b64u(c.firmaPub), acuerdo: C.b64u(c.acuerdoPub), clave_pq: C.b64u(c.dsaPub), huella: C.hex(c.huella) } : { clave: C.b64u(c.firmaPub), acuerdo: C.b64u(c.acuerdoPub), huella: C.hex(c.huella) };
     const reg = {
-      v: 1, tipo: 'custodia-digital', id: m.id, emitido,
+      v: B ? 2 : 1, tipo: B ? 'entrega-integridad-blindada' : 'custodia-digital', id: m.id, emitido,
+      modo: B ? 'blindada' : undefined, suite: B ? 'CNSA 2.0: ECDSA y ECDH P-384, ML-KEM-1024, ML-DSA-87, AES-256-GCM, SHA-384' : undefined,
+      verificacion_mutua: B ? !!(c.verificada && c.suVerificada && j.mutua === true) : undefined,
       archivo: { nombre: m.archivo.nombre, bytes: m.archivo.tam, sha256: a.sha256, tipo_declarado: m.archivo.mime || null, tipo_real: v.tipoReal || null, fragmentos: m.archivo.trozos, tam_fragmento: TROZO },
-      emisor: { clave: C.b64u(YO.firmaPub), acuerdo: C.b64u(YO.acuerdoPub), huella: C.hex(YO.huella), nombre: YO.nombre || '', region: MI_PAIS || '', verifico_al_otro: !!c.verificada, version: VERSION_APP },
-      receptor: { clave: C.b64u(c.firmaPub), acuerdo: C.b64u(c.acuerdoPub), huella: C.hex(c.huella), nombre: String(j.nombre || '').slice(0, 40), region: regionValida(j.region), verifico_al_otro: j.verificada === true, version: typeof j.version === 'string' ? j.version.slice(0, 60) : null },
-      sesion: { id: v.sid || null, pq: !!v.pq, establecida: iso(v.sesionDesde) },
+      emisor: { ...mio, nombre: YO.nombre || '', region: MI_PAIS || '', verifico_al_otro: !!c.verificada, version: VERSION_APP },
+      receptor: { ...suyo, nombre: String(j.nombre || '').slice(0, 40), region: regionValida(j.region), verifico_al_otro: j.verificada === true, version: typeof j.version === 'string' ? j.version.slice(0, 60) : null },
+      sesion: { id: v.sid || null, pq: !!v.pq, establecida: iso(v.sesionDesde), blindada: B || undefined },
       transporte: {
         rele: rel.host || '', rele_ciudad: rel.prueba ? '' : rel.ciudad || '', rele_pais: rel.prueba ? '' : rel.cc || '', rele_region: R.region || '', conexion: /^wss:/.test(R.url || '') ? 'wss' : 'ws',
         salida: v.salida || iso(v.t0), llegada: typeof j.llegada === 'string' ? j.llegada.slice(0, 40) : null,
@@ -617,11 +804,14 @@
       cronologia: cro,
       incidencias: v.incidencias.slice(0, 20),
     };
-    const texto = VJ().canon(reg), firma = C.b64u(await C.firma(YO, VJ().aFirmar(texto)));
-    const comp = { formato: VJ().FORMATO, registro: JSON.parse(texto), firmas: { emisor: firma } }; // en orden canónico: el mismo archivo en los dos equipos
+    const texto = VJ().canon(reg);
+    const firma = B ? C.b64u(await C.B.firma(c.idB, VJ().aFirmarB(texto))) : C.b64u(await C.firma(YO, VJ().aFirmar(texto)));
+    const firmapq = B ? C.b64u(C.B.firmaPQ(c.idBDsaSec, VJ().aFirmarB(texto), VJ().CTX_B)) : undefined;
+    const comp = { formato: B ? VJ().FORMATO_B : VJ().FORMATO, registro: JSON.parse(texto), firmas: { emisor: firma } }; // en orden canónico: el mismo archivo en los dos equipos
+    if (B) comp.firmas_pq = { emisor: firmapq };
     v.comprobante = comp; v.comprobanteValido = false;
     await guardaCustodia(c, m.id, comp, 'pendiente');
-    enviaControl(c, { tipo: 'custodia', id: m.id, reg: texto, firma });
+    enviaControl(c, { tipo: 'custodia', id: m.id, reg: texto, firma, firmapq });
     evento(v, T('Comprobante firmado por tu equipo: enviado al destinatario para su firma.'), 'info');
   }
   async function guardaCustodia(c, fid, comp, estado, motivo) {
@@ -638,19 +828,23 @@
     if (!c.cargados) await cargaMensajes(c);
     const v = VIAJES.get(j.id), no = (por) => { enviaControl(c, { tipo: 'custodia-no', id: String(j.id || '').slice(0, 64), por }); if (v) evento(v, T('El comprobante del remitente no coincide con lo medido en tu equipo: no se firma.'), 'mal'); };
     const m = c.mensajes.find((x) => x.id === j.id && x.tipo === 'archivo' && x.dir === 'suya');
-    if (!m || !m.archivo || !m.archivo.obs || typeof j.reg !== 'string' || j.reg.length > 16000 || typeof j.firma !== 'string') return no('datos');
+    if (!m || !m.archivo || !m.archivo.obs || typeof j.reg !== 'string' || j.reg.length > (esB(c) ? 24000 : 16000) || typeof j.firma !== 'string') return no('datos');
     const ya = c.mensajes.find((x) => x.id === 'cu-' + m.id);
-    if (ya && ya.estado === 'firmado' && ya.custodia && ya.custodia.firmas && ya.custodia.firmas.receptor) { enviaControl(c, { tipo: 'custodia-firma', id: m.id, firma: ya.custodia.firmas.receptor }); return; } // ya firmado: la firma otra vez, por si no llegó
+    if (ya && ya.estado === 'firmado' && ya.custodia && ya.custodia.firmas && ya.custodia.firmas.receptor) { enviaControl(c, { tipo: 'custodia-firma', id: m.id, firma: ya.custodia.firmas.receptor, firmapq: ya.custodia.firmas_pq ? ya.custodia.firmas_pq.receptor : undefined }); return; } // ya firmado: la firma otra vez, por si no llegó
+    const B = esB(c);
+    if (B && (typeof j.firmapq !== 'string' || j.reg.length > 20000)) return no('firma');
     let reg; try { reg = JSON.parse(j.reg); } catch (_) { return no('formato'); }
     if (!reg || VJ().canon(reg) !== j.reg) return no('formato');
-    if (!(await C.verifica(c.firmaPub, C.deB64u(j.firma), VJ().aFirmar(j.reg)))) return no('firma');
+    if (B ? !((await C.B.verifica(c.firmaPub, C.deB64u(j.firma), VJ().aFirmarB(j.reg))) && C.B.verificaPQ(c.dsaPub, C.deB64u(j.firmapq), VJ().aFirmarB(j.reg), VJ().CTX_B)) : !(await C.verifica(c.firmaPub, C.deB64u(j.firma), VJ().aFirmar(j.reg)))) return no('firma');
     const o = m.archivo.obs, ar = reg.archivo || {}, e = reg.emisor || {}, r = reg.receptor || {}, se = reg.sesion || {}, t = reg.transporte || {}, ig = reg.integridad || {};
     const mios = (Array.isArray(reg.cronologia) ? reg.cronologia : []).filter((x) => x && x.lado === 'receptor');
     const esperados = [['anuncio_recibido', o.anuncio], ['primero', o.primero], ['llegada', o.llegada]].filter((x) => x[1]);
-    const ok = reg.v === 1 && reg.tipo === 'custodia-digital' && reg.id === m.id
+    const mioB = B ? { clave: C.b64u(c.idB.firmaPub), acuerdo: C.b64u(c.idB.acuerdoPub), huella: C.hex(c.miHuellaB), pq: C.b64u(c.idB.dsaPub) } : { clave: C.b64u(YO.firmaPub), acuerdo: C.b64u(YO.acuerdoPub), huella: C.hex(YO.huella) };
+    const okModo = B ? reg.v === 2 && reg.tipo === 'entrega-integridad-blindada' && reg.modo === 'blindada' && r.clave_pq === mioB.pq && e.clave_pq === C.b64u(c.dsaPub) && reg.verificacion_mutua === (o.mutua === true) : reg.v === 1 && reg.tipo === 'custodia-digital';
+    const ok = okModo && reg.id === m.id
       && limpiaNombre(ar.nombre) === m.archivo.nombre && ar.bytes === m.archivo.tam && ar.fragmentos === m.archivo.trozos && ar.tam_fragmento === TROZO && ar.sha256 === o.sha256 && (ar.tipo_declarado || '') === (m.archivo.mime || '')
       && ig.sha256_emisor === o.sha256 && ig.sha256_receptor === o.sha256 && ig.coincide === true && (ig.tipo_receptor || null) === (o.tipo || null)
-      && r.clave === C.b64u(YO.firmaPub) && r.acuerdo === C.b64u(YO.acuerdoPub) && r.huella === C.hex(YO.huella) && r.region === o.region && r.verifico_al_otro === o.verificada && r.nombre === o.nombre && r.version === o.version
+      && r.clave === mioB.clave && r.acuerdo === mioB.acuerdo && r.huella === mioB.huella && r.region === o.region && r.verifico_al_otro === o.verificada && r.nombre === o.nombre && r.version === o.version
       && e.clave === C.b64u(c.firmaPub) && e.acuerdo === C.b64u(c.acuerdoPub) && e.huella === C.hex(c.huella)
       && se.pq === o.pq && (se.id || '') === (o.sid || '')
       && t.llegada === o.llegada && t.rele === o.rele && t.rele_region === o.rele_region && t.fragmentos_verificados === m.archivo.trozos && t.fragmentos_rechazados === 0
@@ -659,12 +853,14 @@
       && typeof t.salida === 'string' && Number.isFinite(t.duracion_s) && t.duracion_s > 0;
     if (!ok) return no('no coincide');
     if (v) evento(v, T('Comprobante recibido del remitente: coincide con lo medido en tu equipo.'));
-    const firma = C.b64u(await C.firma(YO, VJ().aFirmar(j.reg)));
-    const comp = { formato: VJ().FORMATO, registro: reg, firmas: { emisor: j.firma, receptor: firma } };
-    enviaControl(c, { tipo: 'custodia-firma', id: m.id, firma });
+    const firma = B ? C.b64u(await C.B.firma(c.idB, VJ().aFirmarB(j.reg))) : C.b64u(await C.firma(YO, VJ().aFirmar(j.reg)));
+    const firmapq = B ? C.b64u(C.B.firmaPQ(c.idBDsaSec, VJ().aFirmarB(j.reg), VJ().CTX_B)) : undefined;
+    const comp = { formato: B ? VJ().FORMATO_B : VJ().FORMATO, registro: reg, firmas: { emisor: j.firma, receptor: firma } };
+    if (B) comp.firmas_pq = { emisor: j.firmapq, receptor: firmapq };
+    enviaControl(c, { tipo: 'custodia-firma', id: m.id, firma, firmapq });
     await guardaCustodia(c, m.id, comp, 'firmado');
     if (v) { v.comprobante = comp; v.comprobanteValido = true; v.coincide = true; evento(v, T('Comprobante firmado por tu equipo: firmado por los dos equipos.'), 'bien'); }
-    vigila(c, T('Comprobante de custodia firmado por los dos equipos') + ': ' + m.archivo.nombre, 'bien');
+    vigila(c, T('Comprobante de entrega e integridad firmado por los dos equipos') + ': ' + m.archivo.nombre, 'bien');
   }
   // Quien envía: la firma del destinatario, comprobada con su clave de identidad
   async function firmaCustodia(c, j) {
@@ -673,11 +869,14 @@
     const cm = c.mensajes.find((x) => x.id === 'cu-' + j.id && x.tipo === 'custodia'); if (!cm || !cm.custodia || typeof j.firma !== 'string') return;
     const comp = cm.custodia, v = VIAJES.get(j.id);
     if (comp.firmas && comp.firmas.receptor === j.firma) return;
-    if (!(await C.verifica(c.firmaPub, C.deB64u(j.firma), VJ().aFirmar(VJ().canon(comp.registro))))) { if (v) evento(v, T('La firma del destinatario no es válida: el comprobante sigue pendiente.'), 'mal'); return; }
+    const B = comp.formato === VJ().FORMATO_B, tx = VJ().canon(comp.registro);
+    const valida = B ? (typeof j.firmapq === 'string' && (await C.B.verifica(c.firmaPub, C.deB64u(j.firma), VJ().aFirmarB(tx))) && C.B.verificaPQ(c.dsaPub, C.deB64u(j.firmapq), VJ().aFirmarB(tx), VJ().CTX_B)) : await C.verifica(c.firmaPub, C.deB64u(j.firma), VJ().aFirmar(tx));
+    if (!valida) { if (v) evento(v, T('La firma del destinatario no es válida: el comprobante sigue pendiente.'), 'mal'); return; }
     comp.firmas = Object.assign({}, comp.firmas, { receptor: j.firma });
+    if (B) comp.firmas_pq = Object.assign({}, comp.firmas_pq, { receptor: j.firmapq });
     await guardaCustodia(c, j.id, comp, 'firmado', '');
     if (v) { v.comprobante = comp; v.comprobanteValido = true; evento(v, T('El destinatario ha firmado el comprobante: firmado por los dos equipos.'), 'bien'); }
-    vigila(c, T('Comprobante de custodia firmado por los dos equipos') + ': ' + ((comp.registro && comp.registro.archivo && comp.registro.archivo.nombre) || ''), 'bien');
+    vigila(c, T('Comprobante de entrega e integridad firmado por los dos equipos') + ': ' + ((comp.registro && comp.registro.archivo && comp.registro.archivo.nombre) || ''), 'bien');
   }
   async function rechazoCustodia(c, j) {
     if (!c.cargados) await cargaMensajes(c);
@@ -690,13 +889,13 @@
   async function reenviaCustodias(c) {
     if (!VJ()) return;
     if (!c.cargados) await cargaMensajes(c);
-    for (const x of c.mensajes) if (x.tipo === 'custodia' && x.estado === 'pendiente' && x.custodia && x.custodia.registro && x.custodia.firmas) enviaControl(c, { tipo: 'custodia', id: x.custodia.registro.id, reg: VJ().canon(x.custodia.registro), firma: x.custodia.firmas.emisor });
+    for (const x of c.mensajes) if (x.tipo === 'custodia' && x.estado === 'pendiente' && x.custodia && x.custodia.registro && x.custodia.firmas) enviaControl(c, { tipo: 'custodia', id: x.custodia.registro.id, reg: VJ().canon(x.custodia.registro), firma: x.custodia.firmas.emisor, firmapq: x.custodia.firmas_pq ? x.custodia.firmas_pq.emisor : undefined });
   }
   function tarjetaCustodia(m) {
     const comp = m.custodia || {}, reg = comp.registro || {}, ar = reg.archivo || {}, est = m.estado;
     const d = document.createElement('div'); d.className = 'custodia' + (est === 'pendiente' ? ' pendiente' : est === 'rechazado' ? ' mal' : '');
     const ico = document.createElement('span'); ico.className = 'cu-ico'; ico.innerHTML = VJ() ? (est === 'firmado' ? VJ().ESCUDO : VJ().AVISO) : '';
-    const k = document.createElement('span'); k.className = 'cu-k'; k.textContent = est === 'firmado' ? T('Comprobante de custodia digital') : est === 'pendiente' ? T('Comprobante pendiente de firma') : T('Comprobante no emitido');
+    const k = document.createElement('span'); k.className = 'cu-k'; k.textContent = est === 'firmado' ? T('Comprobante de entrega e integridad') : est === 'pendiente' ? T('Comprobante pendiente de firma') : T('Comprobante no emitido');
     const t = document.createElement('span'); t.className = 'cu-t'; t.setAttribute('translate', 'no'); t.textContent = (ar.nombre || '') + ' · ' + tamano(ar.bytes || 0);
     const s = document.createElement('span'); s.className = 'cu-s';
     s.textContent = est === 'firmado' ? T('Firmado por los dos equipos') + ' · SHA-256 ' + (VJ() ? VJ().agrupa(ar.sha256, 16) : '') + '…' : est === 'pendiente' ? T('Firmado por tu equipo; falta la firma del destinatario.') : T('El destinatario no lo ha firmado: su equipo no ha podido comprobar el registro.');
@@ -721,6 +920,7 @@
   async function destruyeLocal(c, porElla, silencio) {
     if (c.estado === 'destruida') return;
     c.estado = 'destruida';
+    if (esB(c)) borraClavesB(c);
     R.sale(c.id); CONVS.delete(c.id);
     await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await BD.borra('conv', c.id);
     if (ACTUAL === c.id) { cierraConv(); }
@@ -749,8 +949,8 @@
     R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); });
     R.on('cerrado', () => { pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; pintaCabecera(c); } pintaLista(); });
     setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
-    R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presenta(c, null, true)); pintaCabecera(c); pintaLista(); });
-    R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) { c.sesion = null; enCola(c, () => presenta(c, null, true)); } pintaCabecera(c); pintaLista(); });
+    R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); pintaCabecera(c); pintaLista(); });
+    R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) { c.sesion = null; enCola(c, () => presentaX(c, null, true)); } pintaCabecera(c); pintaLista(); });
     R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; vigila(c, T('La otra persona se ha desconectado.'), 'info'); } pintaCabecera(c); pintaLista(); });
     R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Esta conversación se ha abierto en otra pestaña: sigue allí.')); });
     // Las tramas de una conversación se procesan en orden (una detrás de otra): así un trozo de archivo nunca
@@ -759,10 +959,10 @@
       const c = CONVS.get(sala); if (!c || !b.length) return;
       c.proc = (c.proc || Promise.resolve()).then(async () => {
         try {
-          if (b[0] === 1) await recibePresentacion(c, de, b);
+          if (b[0] === 1) await (esB(c) ? recibePresentacionB(c, de, b) : recibePresentacion(c, de, b));
           else if (b[0] === 2) await recibeMensaje(c, de, b);
           else if (b[0] === 3) await recibeTrozo(c, de, b);
-          else if (b[0] === 4) { if (c.suId === de) await presenta(c, null); }
+          else if (b[0] === 4) { if (c.suId === de) await presentaX(c, null); }
           else if (b[0] === 5) { if (!c.huella) { c.ocupada = true; pintaCabecera(c); $('#invita-estado').textContent = T('Esta invitación ya la usó otra persona.'); } }
         } catch (e) { console.warn('trama', e); }
       });
@@ -794,17 +994,18 @@
     ACTUAL = id; await cargaMensajes(c);
     const inv = c.estado === 'invitacion' && c.rol === 'invita' && !c.huella;
     $('#inicio').hidden = !inv; $('#conv').hidden = inv; $('#app').classList.toggle('en-conv', !inv);
-    if (inv) { $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = true; $('#paso-codigo').hidden = false; }
+    if (inv) { $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = true; $('#paso-codigo').hidden = esB(c); $('#paso-enlace').hidden = !esB(c); }
     pintaCabecera(c); pintaTodos(c); pintaRadio(c); pintaLista();
-    if (c.estado === 'invitacion' && c.rol === 'invita') { muestraInvitacion(c); if (!c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); }
+    if (c.estado === 'invitacion' && c.rol === 'invita') { if (esB(c)) muestraEnlace(c); else { muestraInvitacion(c); if (!c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); } }
+    $('#conv').classList.toggle('blindada', esB(c));
     marcaLeidos(c);
     if (matchMedia('(min-width: 761px)').matches) $('#texto').focus();
   }
-  function cierraConv() { ACTUAL = null; if (window.pintaBarra) pintaBarra(); $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; }
+  function cierraConv() { ACTUAL = null; if (window.pintaBarra) pintaBarra(); $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; $('#paso-enlace').hidden = true; }
   function pintaCabecera(c) {
     if (window.pintaBarra) pintaBarra();
     if (ACTUAL !== c.id) return;
-    $('#cnombre').textContent = T('Conversación cifrada');
+    $('#cnombre').textContent = esB(c) ? T('Sesión blindada') : T('Conversación cifrada');
     const conf = $('#cconfianza'); conf.classList.remove('gc-sin-verificar');
     let txt;
     if (c.ocupada && !c.huella) txt = T('Esta invitación ya la usó otra persona.');
@@ -812,6 +1013,7 @@
     else if (!R.abierto) txt = T('Sin conexión con el relé');
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
     else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo el cifrado…');
+    else if (esB(c)) txt = T('Suite CNSA 2.0') + ' · ' + T('postcuántica') + ' · ' + (c.verificada && c.suVerificada ? T('verificada por los dos') : T('pendiente de la verificación mutua'));
     else txt = T('Cifrada de extremo a extremo') + ' · ' + (c.sesion.pq ? T('postcuántica') + ' · ' : T('sin protección postcuántica') + ' · ') + (c.verificada ? T('verificada') : T('sin verificar'));
     const pqa = $('#cpq');
     if (pqa) {
@@ -819,8 +1021,9 @@
       const sp = pqa.querySelector('span');
       if (sp && c.clasicaPendiente) sp.textContent = c.pqVisto ? T('La otra persona no ha usado la protección postcuántica. Esta conversación ya la tenía, así que la he parado.') : T('La otra persona usa una versión sin protección postcuántica. No sigo sin tu permiso.');
     }
-    if (c.huella && !c.verificada) conf.classList.add('gc-sin-verificar');
+    if (c.huella && !(c.verificada && (!esB(c) || c.suVerificada))) conf.classList.add('gc-sin-verificar');
     conf.textContent = txt;
+    pintaPuerta(c);
   }
   // Vigilancia a la derecha (dueño, 26 Oct 20:22): anota cada comprobación real según ocurre y mantiene la última a la vista.
   const hms = (t) => new Date(t || Date.now()).toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -837,7 +1040,8 @@
     const ses = c.sesion && c.sesion.confirmada;
     const hm = (t) => new Date(t).toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit' });
     fila(ses ? 'gc-ok' : 'gc-aviso', T('Cifrado'), ses ? T('De extremo a extremo; confirmación de clave recibida.') + ' ' + T('Claves de este encuentro') + ': ' + hm(c.sesion.desde) + ' · ' + T('encuentro') + ' ' + (c.encuentros || 1) : T('Acordando claves…'));
-    fila(c.verificada ? 'gc-ok' : 'gc-aviso', T('Identidad'), c.verificada ? T('Verificada por las dos personas.') : T('Sin verificar: comparad el número de seguridad (escudo).'));
+    const verOk = esB(c) ? !!(c.verificada && c.suVerificada) : !!c.verificada;
+    fila(verOk ? 'gc-ok' : 'gc-aviso', T('Identidad'), verOk ? T('Verificada por las dos personas.') : esB(c) ? T('Pendiente de la verificación mutua: no sale nada hasta que los dos comprobéis el número.') : T('Sin verificar: comparad el número de seguridad (escudo).'));
     const presente = !!(c.suId && c.miembros.has(c.suId));
     fila(presente ? 'gc-ok' : 'gc-aviso', T('Otro extremo'), presente ? T('La otra pestaña está conectada a la sala.') : T('La otra pestaña está desconectada; lo pendiente espera en tu equipo.'));
     const lat = R.latencia, hace = R.ultimoPong ? Math.round((Date.now() - R.ultimoPong) / 1000) : null;
@@ -957,12 +1161,16 @@
   async function muestraEscudo(c) {
     const ul = $('#escudo-lista'); ul.textContent = '';
     const fila = (cls, b, s) => { const li = document.createElement('li'); li.className = cls; const i = document.createElement('i'); const bb = document.createElement('b'); bb.textContent = b; const ss = document.createElement('span'); ss.textContent = s; li.append(i, bb, ss); ul.append(li); };
-    fila(c.sesion ? 'gc-ok' : 'gc-info', T('Cifrado de extremo a extremo'), T('AES-256-GCM con una clave distinta por mensaje; la sesión se renueva cada vez que os encontráis (ECDH P-256 con firma ECDSA).'));
+    if (esB(c)) {
+      fila(c.sesion ? 'gc-ok' : 'gc-info', T('Sesión blindada'), T('Algoritmos de la suite CNSA 2.0: ML-KEM-1024 y ECDH P-384 para las claves, ML-DSA-87 y ECDSA P-384 para las firmas, AES-256-GCM y SHA-384.'));
+      fila('gc-ok', T('Renovación de claves'), T('Claves nuevas cada 5 minutos y en cada reconexión: lo anterior deja de poder leerse con lo nuevo.'));
+      fila(c.verificada && c.suVerificada ? 'gc-ok' : 'gc-aviso', T('Verificación mutua'), c.verificada && c.suVerificada ? T('Los dos habéis comprobado el número de seguridad.') : T('Hasta que los dos comprobéis el número de seguridad, no se envía nada.'));
+    } else fila(c.sesion ? 'gc-ok' : 'gc-info', T('Cifrado de extremo a extremo'), T('AES-256-GCM con una clave distinta por mensaje; la sesión se renueva cada vez que os encontráis (ECDH P-256 con firma ECDSA).'));
     fila('gc-info', T('Servidor de GUARDIANA'), T('encamina tramas cifradas que no puede descifrar; ve conexión y volumen, no contenido; no guarda historial'));
     fila(c.incidencias ? 'gc-alerta' : 'gc-ok', T('Verificación'), c.incidencias ? (c.incidencias + ' ' + (c.incidencias === 1 ? T('incidencia') : T('incidencias')) + ': ' + T('datos que no superaron la autenticación, descartados y anotados en la conversación.')) : T('Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.'));
     fila(c.verificada ? 'gc-ok' : 'gc-aviso', c.verificada ? T('Identidad verificada') : T('Identidad sin verificar'), c.verificada ? T('Comprobasteis el número de seguridad.') : T('Hasta que comprobéis el número, confías en que el enlace llegó a la persona correcta.'));
-    fila('gc-aviso', T('Límites'), T('No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.') + ' ' + T('Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.') + ' ' + T('Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.') + ' ' + T('Ningún cifrado protege un equipo o navegador comprometido. Esta versión aún no está auditada por terceros.') + ' ' + T('El viaje de cada archivo y su comprobante muestran a la otra persona el país de tu equipo, estimado por la zona horaria del navegador; nunca la zona horaria ni la dirección IP.'));
-    $('#numero').textContent = c.huella ? await C.numeroSeguridad(YO.huella, c.huella) : T('Aparecerá cuando la otra persona entre.');
+    fila('gc-aviso', T('Límites'), T('No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.') + ' ' + T('Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.') + ' ' + T('Los archivos recibidos quedan en este navegador sin nuestro cifrado; «Destruir» no alcanza lo ya guardado en un disco.') + ' ' + T('Ningún cifrado protege un equipo o navegador comprometido.') + ' ' + T('El viaje de cada archivo y su comprobante muestran a la otra persona el país de tu equipo, estimado por la zona horaria del navegador; nunca la zona horaria ni la dirección IP.'));
+    $('#numero').textContent = c.huella ? await numeroDe(c) : T('Aparecerá cuando la otra persona entre.');
     $('#verificada').checked = !!c.verificada; $('#verificada').disabled = !c.huella;
     $('#destruir-nota').hidden = true;
     abreHoja('h-escudo');
@@ -1022,13 +1230,13 @@
       $('#unir-mal').hidden = false; campoCod.focus(); try { campoCod.setSelectionRange(campoCod.value.length, campoCod.value.length); } catch (_) {}
     });
     $('#unir-codigo').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#unir-ok').click(); });
-    $('#terminar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c) return; const hay = c.mensajes.some((x) => x.tipo === 'custodia'); if (!confirm(hay ? T('¿Terminar la conversación? Se borra aquí y en el otro equipo, también los comprobantes de custodia: descarga antes los que quieras conservar.') : T('¿Terminar la conversación? Se borra aquí y en el otro equipo.'))) return; await destruye(c); });
+    $('#terminar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c) return; if (esB(c)) return muestraCierre(c); const hay = c.mensajes.some((x) => x.tipo === 'custodia'); if (!confirm(hay ? T('¿Terminar la conversación? Se borra aquí y en el otro equipo, también los comprobantes de entrega e integridad: descarga antes los que quieras conservar.') : T('¿Terminar la conversación? Se borra aquí y en el otro equipo.'))) return; await destruye(c); });
     $('#invita-nuevo').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) { c.codigoUsado = false; await publicaCodigo(c); } });
     R.on('codigo-usado', (codigo) => { for (const c of CONVS.values()) if (c.codigo === codigo) { c.codigoUsado = true; pintaCodigo(c); } });
     R.on('abierto', () => { for (const c of CONVS.values()) if (c.estado === 'invitacion' && c.rol === 'invita' && !c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); });
     $('#escudo').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c) muestraEscudo(c); });
     $('#escudo-cerrar').addEventListener('click', () => cierraHoja('h-escudo'));
-    $('#verificada').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); if (!c) return; c.verificada = e.target.checked; await guardaConv(c); pintaCabecera(c); pintaRadio(c); muestraEscudo(c); });
+    $('#verificada').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); if (!c) return; await marcaVerificada(c, e.target.checked); muestraEscudo(c); });
     $('#destruir').addEventListener('click', async (e) => { const c = CONVS.get(ACTUAL); if (!c) return; if ($('#destruir-nota').hidden) { $('#destruir-nota').hidden = false; e.currentTarget.textContent = T('Sí, destruir'); return; } cierraHoja('h-escudo'); e.currentTarget.textContent = T('Destruir conversación'); await destruye(c); });
     const ta = $('#texto');
     const ajusta = () => { ta.style.height = 'auto'; ta.style.height = Math.min(120, ta.scrollHeight) + 'px'; document.querySelector('.gc-compositor').classList.toggle('con-texto', !!ta.value.trim()); };
@@ -1099,8 +1307,21 @@
     zona.addEventListener('drop', (e) => { e.preventDefault(); const c = CONVS.get(ACTUAL); const fs = [...(e.dataTransfer && e.dataTransfer.files) || []]; if (c && fs.length) enviaArchivos(c, fs); });
     document.querySelectorAll('.gc-hoja').forEach((h) => h.addEventListener('click', (e) => { if (e.target === h) h.classList.remove('gc-abierta'); }));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.gc-hoja.gc-abierta').forEach((h) => h.classList.remove('gc-abierta')); });
-    addEventListener('hashchange', () => { if (/#i=/.test(location.hash)) { aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); } });
+    addEventListener('hashchange', () => { if (/#[ib]=/.test(location.hash)) { aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); } });
     addEventListener('guardiana-idioma', () => { pintaLista(); const c = CONVS.get(ACTUAL); if (c) pintaCabecera(c); });
+    // sesión blindada
+    $('#nueva-blindada').addEventListener('click', creaInvitacionB);
+    $('#enlace-copiar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.clipboard.writeText(enlaceB(c)); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { $('#enlace-b').select(); } });
+    const comparte = $('#enlace-compartir'); comparte.hidden = !navigator.share;
+    comparte.addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.share({ title: 'GUARDIANA', text: T('Invitación a una sesión blindada de GUARDIANA Comunicaciones'), url: enlaceB(c) }); } catch (_) {} });
+    $('#enlace-cancelar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await destruye(c, true); });
+    $('#bl-coincide').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await marcaVerificada(c, !c.verificada); });
+    $('#cierre-si').addEventListener('click', async () => { cierraHoja('h-cierre'); const c = CONVS.get(ACTUAL); if (c) await destruye(c); });
+    $('#cierre-no').addEventListener('click', () => cierraHoja('h-cierre'));
+    // un enlace blindado pegado en el campo del código también vale
+    campoCod.addEventListener('paste', async (e) => { const t = (e.clipboardData && e.clipboardData.getData('text')) || ''; if (!/#[ib]=[A-Za-z0-9_-]{43}/.test(t)) return; e.preventDefault(); const ok = await aceptaInvitacion(t); if (ok) $('#paso-entrar').hidden = true; else { $('#unir-mal').textContent = T('Ese enlace no es una invitación de GUARDIANA.'); $('#unir-mal').hidden = false; } });
+    // renovación de claves de la blindada: cada 5 minutos, quien inicia se presenta otra vez (efímeras y ML-KEM nuevos)
+    setInterval(() => { for (const c of CONVS.values()) { if (!esB(c) || c.renovando || !c.sesion || !c.sesion.confirmada || !enLinea(c) || !soyInicio(c) || Date.now() - c.sesion.desde < renuevaMs()) continue; c.renovando = true; enCola(c, () => presentaB(c, null, true)).finally(() => setTimeout(() => { c.renovando = false; }, 20000)); } }, 15000);
   }
 
   // ---------- arranque ----------
@@ -1111,7 +1332,7 @@
     arrancaRele();
     eventos();
     await cargaConvs();
-    if (/#i=/.test(location.hash)) { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
+    if (/#[ib]=/.test(location.hash)) { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     // NÚCLEO guiado (ronda 63): «Tengo un código» llega con el campo del código abierto; «Crear una invitación», con la invitación
     // hecha en cuanto hay conexión (si ya hay una conversación en marcha, no se toca: solo se señala el botón). Una sola vez.
     try {

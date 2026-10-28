@@ -164,5 +164,130 @@
     };
   }
 
-  raiz.GuardianaCripto = { te, td, u8, cat, b64u, deB64u, hex, deHex, azar, sha256, hkdf, hmac, aes, sella, abre, nonce, creaIdentidad, huella, numeroSeguridad, firma, verifica, deSemilla, nuevaSemilla, efimera, sesion, cadena, claveDeCodigo, nuevoCodigo, hayPQ, kemPar, kemEncapsula, kemAbre, datosInicia, datosResponde, KEM_EK, KEM_DK, KEM_CT };
+  // ======================================================================================================================
+  // SESIÓN BLINDADA (27 Oct 2026, dueño: «la blindada debe ser de la máxima»; «tecnología de grado militar»).
+  // Los algoritmos y tamaños de la suite CNSA 2.0 de la NSA, en híbrido con criptografía clásica:
+  //   identidad: ECDSA P-384 + ECDH P-384 (Web Crypto, no exportables) + ML-DSA-87 (FIPS 204; su clave privada se guarda
+  //   encriptada con la clave local no exportable); huella SHA-384 de las tres públicas.
+  //   sesión: tres ECDH P-384 + ML-KEM-1024 (FIPS 203) + el secreto de la invitación, con HKDF-SHA-384.
+  //   presentaciones: dos firmas obligatorias (ECDSA P-384 y ML-DSA-87); sin ML-KEM no hay sesión.
+  //   mensajes: AES-256-GCM con una clave por mensaje (cadenas HMAC-SHA-384).
+  // Nada de esto es una certificación: son los algoritmos que la suite especifica, en el navegador.
+  // ======================================================================================================================
+  const sha384 = async (b) => new Uint8Array(await sub.digest('SHA-384', u8(b)));
+  async function hkdf384(ikm, sal, info, n) {
+    const k = await sub.importKey('raw', u8(ikm), 'HKDF', false, ['deriveBits']);
+    return new Uint8Array(await sub.deriveBits({ name: 'HKDF', hash: 'SHA-384', salt: u8(sal || new Uint8Array(48)), info: te.encode(info) }, k, n * 8));
+  }
+  async function hmac384(clave, datos) {
+    const k = await sub.importKey('raw', u8(clave), { name: 'HMAC', hash: 'SHA-384' }, false, ['sign']);
+    return new Uint8Array(await sub.sign('HMAC', k, u8(datos)));
+  }
+  const kem1024 = () => { const k = raiz.GuardianaMLKEM1024; return k && typeof k.keygen === 'function' ? k : null; };
+  const dsa87 = () => { const k = raiz.GuardianaMLDSA87; return k && typeof k.sign === 'function' ? k : null; };
+  const B_EK = 1568, B_DK = 3168, B_CT = 1568, B_DSA_PUB = 2592, B_DSA_FIRMA = 4627, B_EC = 97;
+  const B_CTX = te.encode('GUARDIANA blindada v1'); // contexto de las firmas ML-DSA (FIPS 204 §5.2): separa sus usos
+  const hayBlindada = () => !!(kem1024() && dsa87() && raiz.isSecureContext !== false);
+
+  // Identidad blindada del equipo. La clave privada ML-DSA-87 sale de aquí solo encriptada con «reposo» (AES-256-GCM,
+  // no exportable); en memoria vive mientras la página está abierta.
+  async function creaIdentidadB(reposo) {
+    const firma = await sub.generateKey({ name: 'ECDSA', namedCurve: 'P-384' }, false, ['sign', 'verify']);
+    const acuerdo = await sub.generateKey({ name: 'ECDH', namedCurve: 'P-384' }, false, ['deriveBits']);
+    const d = dsa87(); if (!d) throw new Error('ML-DSA-87 no disponible');
+    const { publicKey, secretKey } = d.keygen();
+    const iv = azar(12), dsaSecSellada = new Uint8Array(await sub.encrypt({ name: 'AES-GCM', iv, additionalData: te.encode('GUARDIANA ML-DSA-87') }, reposo, secretKey));
+    const id = { firma, acuerdo, firmaPub: new Uint8Array(await sub.exportKey('raw', firma.publicKey)), acuerdoPub: new Uint8Array(await sub.exportKey('raw', acuerdo.publicKey)), dsaPub: new Uint8Array(publicKey), dsaIv: iv, dsaSecSellada, creado: Date.now() };
+    return { guardar: id, dsaSec: new Uint8Array(secretKey) };
+  }
+  async function abreDsaB(idB, reposo) {
+    return new Uint8Array(await sub.decrypt({ name: 'AES-GCM', iv: u8(idB.dsaIv), additionalData: te.encode('GUARDIANA ML-DSA-87') }, reposo, u8(idB.dsaSecSellada)));
+  }
+  const huellaB = async (firmaPub, acuerdoPub, dsaPub) => sha384(cat(te.encode('GUARDIANA huella blindada v1\n'), u8(firmaPub), u8(acuerdoPub), u8(dsaPub)));
+  async function numeroSeguridadB(huellaA, huellaB2) {
+    const a = hex(huellaA), b = hex(huellaB2);
+    const [x, y] = a < b ? [a, b] : [b, a];
+    const h = await sha384(te.encode('GUARDIANA número de seguridad blindada v1\n' + x + '\n' + y));
+    let s = '';
+    for (let i = 0; i < 12; i++) { const v = (h[i * 2] << 8 | h[i * 2 + 1]) % 100000; s += String(v).padStart(5, '0') + (i % 4 === 3 ? '\n' : ' '); }
+    return s.trim();
+  }
+  async function firmaB(idB, datos) { return new Uint8Array(await sub.sign({ name: 'ECDSA', hash: 'SHA-384' }, idB.firma.privateKey, u8(datos))); }
+  async function verificaB(pub, sig, datos) {
+    try { const k = await sub.importKey('raw', u8(pub), { name: 'ECDSA', namedCurve: 'P-384' }, false, ['verify']); return await sub.verify({ name: 'ECDSA', hash: 'SHA-384' }, k, u8(sig), u8(datos)); } catch (_) { return false; }
+  }
+  function firmaPQ(dsaSec, datos, ctx) { const d = dsa87(); if (!d) throw new Error('ML-DSA-87 no disponible'); return new Uint8Array(d.sign(u8(datos), u8(dsaSec), ctx || B_CTX)); }
+  function verificaPQ(dsaPub, sig, datos, ctx) { const d = dsa87(); if (!d || u8(dsaPub).length !== B_DSA_PUB || u8(sig).length !== B_DSA_FIRMA) return false; return !!d.verify(u8(sig), u8(datos), u8(dsaPub), ctx || B_CTX); }
+  async function deSemillaB(semilla) {
+    const sala = hex(await sha256(cat(te.encode('GUARDIANA sala blindada v1\n'), u8(semilla))));
+    const presentacion = await hkdf384(semilla, null, 'GUARDIANA presentación blindada v1', 32);
+    const psk = await hkdf384(semilla, null, 'GUARDIANA psk blindada v1', 48);
+    return { sala, presentacion: await aes(presentacion), psk };
+  }
+  async function efimeraB() {
+    const k = await sub.generateKey({ name: 'ECDH', namedCurve: 'P-384' }, false, ['deriveBits']);
+    return { k, pub: new Uint8Array(await sub.exportKey('raw', k.publicKey)) };
+  }
+  async function dhB(priv, pubRaw) {
+    const pub = await sub.importKey('raw', u8(pubRaw), { name: 'ECDH', namedCurve: 'P-384' }, false, []);
+    return new Uint8Array(await sub.deriveBits({ name: 'ECDH', public: pub }, priv, 384));
+  }
+  function kemParB() { const k = kem1024(); if (!k) throw new Error('ML-KEM-1024 no disponible'); const { publicKey, secretKey } = k.keygen(); return { ek: new Uint8Array(publicKey), dk: new Uint8Array(secretKey) }; }
+  function kemEncapsulaB(ek) { const k = kem1024(); if (!k || u8(ek).length !== B_EK) throw new Error('ML-KEM-1024 no disponible'); const { cipherText, sharedSecret } = k.encapsulate(u8(ek)); return { ct: new Uint8Array(cipherText), ss: new Uint8Array(sharedSecret) }; }
+  function kemAbreB(ct, dk) { const k = kem1024(); if (!k || u8(ct).length !== B_CT || u8(dk).length !== B_DK) throw new Error('ML-KEM-1024 no disponible'); return new Uint8Array(k.decapsulate(u8(ct), u8(dk))); }
+  // Lo que firman las presentaciones blindadas (las dos firmas sobre los mismos bytes): quien inicia, su identidad, su
+  // efímera, su época y la huella de su clave ML-KEM; quien responde, además, la época, la huella y la efímera de quien
+  // inicia y el texto cifrado ML-KEM entero.
+  async function datosIniciaB(sala, firmaPub, acuerdoPub, dsaPub, ef, epoca, ek) {
+    return cat(te.encode('GUARDIANA v4 BLINDADA INICIA\n' + sala + '\n'), u8(firmaPub), u8(acuerdoPub), await sha384(dsaPub), u8(ef), u8(epoca), await sha384(ek));
+  }
+  async function datosRespondeB(sala, firmaPub, acuerdoPub, dsaPub, ef, epoca, respEpoca, suHuella, suEf, ek, ct) {
+    return cat(te.encode('GUARDIANA v4 BLINDADA RESPONDE\n' + sala + '\n'), u8(firmaPub), u8(acuerdoPub), await sha384(dsaPub), u8(ef), u8(epoca), u8(respEpoca), u8(suHuella), u8(suEf), await sha384(ek), u8(ct));
+  }
+  // Secreto de la sesión blindada: DH(efA,efB) ‖ DH(idA,efB) ‖ DH(efA,idB) ‖ ss ML-KEM-1024 ‖ psk, sal = sala, info = la
+  // transcripción (huellas SHA-384, efímeras, huellas de ek y ct). Salen 128 bytes: cadena A→B (48), cadena B→A (48) y el
+  // hash de sesión (32, en los datos asociados de cada mensaje).
+  async function sesionB(idB, ef, suyo, sala, inicio, psk, miHuella, suHuella, pq) {
+    if (!pq || !pq.ss) throw new Error('sin ML-KEM-1024 no hay sesión blindada');
+    const efef = await dhB(ef.k.privateKey, suyo.ef);
+    const idA_efB = inicio ? await dhB(idB.acuerdo.privateKey, suyo.ef) : await dhB(ef.k.privateKey, suyo.acuerdoPub);
+    const efA_idB = inicio ? await dhB(ef.k.privateKey, suyo.acuerdoPub) : await dhB(idB.acuerdo.privateKey, suyo.ef);
+    const ikm = cat(efef, idA_efB, efA_idB, u8(pq.ss), u8(psk));
+    const hA = inicio ? u8(miHuella) : u8(suHuella), hB = inicio ? u8(suHuella) : u8(miHuella);
+    const efA = inicio ? ef.pub : u8(suyo.ef), efB = inicio ? u8(suyo.ef) : ef.pub;
+    const info = 'GUARDIANA sesión v4 blindada P-384+ML-KEM-1024 SHA-384\n' + hex(hA) + '\n' + hex(efA) + '\n' + hex(hB) + '\n' + hex(efB) + '\n' + hex(await sha384(pq.ek)) + '\n' + hex(await sha384(pq.ct));
+    const r = await hkdf384(ikm, deHex(sala), info, 128);
+    ikm.fill(0); efef.fill(0); idA_efB.fill(0); efA_idB.fill(0);
+    const ab = new Uint8Array(r.subarray(0, 48)), ba = new Uint8Array(r.subarray(48, 96)), hash = new Uint8Array(r.subarray(96, 128));
+    r.fill(0);
+    return { envio: inicio ? ab : ba, recibo: inicio ? ba : ab, hash, pq: true, blindada: true };
+  }
+  // Cadena blindada: como «cadena», con HMAC-SHA-384; la clave de mensaje son los 32 primeros bytes (AES-256).
+  function cadenaB(ck) {
+    let n = 0, clave = u8(ck), turno = Promise.resolve(); const saltadas = new Map();
+    const paso = async () => { const mk = await hmac384(clave, [1]); const sig = await hmac384(clave, [2]); clave.fill(0); clave = sig; const k = new Uint8Array(mk.subarray(0, 32)); mk.fill(0); return k; };
+    const enTurno = (f) => { const p = turno.then(f); turno = p.catch(() => {}); return p; };
+    return {
+      get n() { return n; },
+      siguiente() { return enTurno(async () => { const mk = await paso(); return { n: n++, clave: mk }; }); },
+      para(m) {
+        return enTurno(async () => {
+          if (saltadas.has(m)) { const k = saltadas.get(m); saltadas.delete(m); return k; }
+          if (m < n) throw new Error('mensaje repetido');
+          if (m - n > 256) throw new Error('demasiados mensajes saltados');
+          while (n < m) { saltadas.set(n++, await paso()); }
+          n++; return paso();
+        });
+      },
+      borra() { clave.fill(0); for (const k of saltadas.values()) k.fill(0); saltadas.clear(); },
+    };
+  }
+  // Relleno de la blindada: el texto de cada mensaje sale a un múltiplo de 1 KB (espacios al final; JSON los ignora),
+  // así el relé no distingue un «ok» de un párrafo.
+  const RELLENO = 1024;
+  function rellena(bytes) { const n = Math.ceil((bytes.length + 1) / RELLENO) * RELLENO; const o = new Uint8Array(n).fill(0x20); o.set(bytes, 0); return o; }
+
+  const B = { sha384, hkdf384, hmac384, hayBlindada, creaIdentidad: creaIdentidadB, abreDsa: abreDsaB, huella: huellaB, numeroSeguridad: numeroSeguridadB, firma: firmaB, verifica: verificaB, firmaPQ, verificaPQ, deSemilla: deSemillaB, efimera: efimeraB, kemPar: kemParB, kemEncapsula: kemEncapsulaB, kemAbre: kemAbreB, datosInicia: datosIniciaB, datosResponde: datosRespondeB, sesion: sesionB, cadena: cadenaB, rellena, RELLENO, EK: B_EK, DK: B_DK, CT: B_CT, DSA_PUB: B_DSA_PUB, DSA_FIRMA: B_DSA_FIRMA, EC: B_EC, CTX: B_CTX };
+
+  raiz.GuardianaCripto = { te, td, u8, cat, b64u, deB64u, hex, deHex, azar, sha256, hkdf, hmac, aes, sella, abre, nonce, creaIdentidad, huella, numeroSeguridad, firma, verifica, deSemilla, nuevaSemilla, efimera, sesion, cadena, claveDeCodigo, nuevoCodigo, hayPQ, kemPar, kemEncapsula, kemAbre, datosInicia, datosResponde, KEM_EK, KEM_DK, KEM_CT, B };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -1,4 +1,4 @@
-// GUARDIANA · Comunicaciones · el viaje del archivo y el comprobante de custodia digital (dueño, 27 Oct 2026, 20:39: «ver
+// GUARDIANA · Comunicaciones · el viaje del archivo y el comprobante de entrega e integridad, antes «de custodia digital» (dueño, 27 Oct 2026, 20:39: «ver
 // mientras se envía el camino real en pantalla, el seguimiento en modo vídeo para que el cliente vea la protección real
 // hasta la llegada a destino, y ambas partes reciben al terminar el resumen firmado»).
 //
@@ -97,7 +97,7 @@
   }
 
   // ---------- el comprobante: registro canónico y firmas ----------
-  const FORMATO = 'GUARDIANA comprobante de custodia v1';
+  const FORMATO = 'GUARDIANA comprobante de custodia v1'; // nombre interno del formato, sin cambios: así siguen siendo válidos los comprobantes ya emitidos y los de versiones anteriores
   const ETIQUETA = FORMATO + '\n';
   // JSON canónico: claves ordenadas, sin espacios; es exactamente lo que firman los dos equipos
   function canon(x) {
@@ -120,11 +120,52 @@
     let s = ''; for (let i = 0; i < 12; i++) { const n = ((h[i * 2] << 8) | h[i * 2 + 1]) % 100000; s += String(n).padStart(5, '0') + (i % 4 === 3 ? '\n' : ' '); }
     return s.trim();
   }
+  // ---- comprobante de la sesión blindada (suite CNSA 2.0): ECDSA P-384 sobre SHA-384 y ML-DSA-87, las dos obligatorias ----
+  const FORMATO_B = 'GUARDIANA comprobante de entrega e integridad v2 blindada';
+  const ETIQUETA_B = FORMATO_B + '\n';
+  const CTX_B = te.encode('GUARDIANA comprobante v2'); // contexto de la firma ML-DSA-87 (FIPS 204)
+  const aFirmarB = (textoCanon) => te.encode(ETIQUETA_B + textoCanon);
+  async function verificaFirmaB(claveB64, firmaB64, textoCanon) {
+    try {
+      const k = await crypto.subtle.importKey('raw', deB64u(claveB64), { name: 'ECDSA', namedCurve: 'P-384' }, false, ['verify']);
+      return await crypto.subtle.verify({ name: 'ECDSA', hash: 'SHA-384' }, k, deB64u(firmaB64), aFirmarB(textoCanon));
+    } catch (_) { return false; }
+  }
+  function verificaFirmaPQ(claveB64, firmaB64, textoCanon) {
+    try { const d = raiz.GuardianaMLDSA87; if (!d || typeof claveB64 !== 'string' || typeof firmaB64 !== 'string') return false; return !!d.verify(deB64u(firmaB64), aFirmarB(textoCanon), deB64u(claveB64), CTX_B); } catch (_) { return false; }
+  }
+  const sha384 = async (b) => new Uint8Array(await crypto.subtle.digest('SHA-384', b));
+  async function numeroSeguridadB(hA, hB) {
+    const [x, y] = hA < hB ? [hA, hB] : [hB, hA];
+    const h = await sha384(te.encode('GUARDIANA número de seguridad blindada v1\n' + x + '\n' + y));
+    let s = ''; for (let i = 0; i < 12; i++) { const n = ((h[i * 2] << 8) | h[i * 2 + 1]) % 100000; s += String(n).padStart(5, '0') + (i % 4 === 3 ? '\n' : ' '); }
+    return s.trim();
+  }
+  async function verificaB(comp) {
+    const r = { formato: true, blindada: true, emisor: false, receptor: false, emisorPQ: false, receptorPQ: false, huellas: false, coherente: false, numero: '' };
+    try {
+      const reg = comp.registro, texto = canon(reg), f = comp.firmas || {}, fq = comp.firmas_pq || {};
+      const e = reg.emisor || {}, rc = reg.receptor || {};
+      r.emisor = await verificaFirmaB(e.clave, f.emisor, texto) && verificaFirmaPQ(e.clave_pq, fq.emisor, texto);
+      r.emisorPQ = verificaFirmaPQ(e.clave_pq, fq.emisor, texto);
+      r.receptorPQ = fq.receptor ? verificaFirmaPQ(rc.clave_pq, fq.receptor, texto) : false;
+      r.receptor = f.receptor ? (await verificaFirmaB(rc.clave, f.receptor, texto)) && r.receptorPQ : false;
+      const hue = async (p) => hex(await sha384(new Uint8Array([...te.encode('GUARDIANA huella blindada v1\n'), ...deB64u(p.clave), ...deB64u(p.acuerdo), ...deB64u(p.clave_pq)])));
+      r.huellas = (await hue(e)) === e.huella && (await hue(rc)) === rc.huella;
+      const a = reg.archivo || {}, i = reg.integridad || {};
+      r.coherente = reg.modo === 'blindada' && /^[0-9a-f]{64}$/.test(a.sha256 || '') && i.sha256_emisor === a.sha256 && i.sha256_receptor === a.sha256 && i.coincide === true && Number.isFinite(a.bytes);
+      r.numero = await numeroSeguridadB(e.huella, rc.huella);
+    } catch (_) {}
+    r.valido = r.emisor && r.receptor && r.huellas && r.coherente;
+    r.pendiente = r.emisor && r.huellas && !(comp.firmas || {}).receptor;
+    return r;
+  }
   // Comprueba un comprobante entero: las dos firmas, que cada clave corresponde a la huella que dice el registro y que
   // la huella del archivo es la misma en los dos lados.
   async function verifica(comp) {
     const r = { formato: false, emisor: false, receptor: false, huellas: false, coherente: false, numero: '' };
     try {
+      if (comp && comp.formato === FORMATO_B && comp.registro && typeof comp.registro === 'object') return await verificaB(comp);
       if (!comp || comp.formato !== FORMATO || !comp.registro || typeof comp.registro !== 'object') return r;
       r.formato = true;
       const reg = comp.registro, texto = canon(reg), f = comp.firmas || {};
@@ -143,7 +184,8 @@
   function nombreDescarga(comp) {
     const reg = comp.registro || {}, a = reg.archivo || {}, d = new Date((reg.transporte && reg.transporte.llegada) || reg.emitido || Date.now());
     const dia = isNaN(d) ? '' : d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); // fecha local
-    return 'comprobante-custodia-' + dia + '-' + String(a.nombre || 'archivo').replace(/[^\p{L}\p{N}._-]+/gu, '_').slice(0, 60) + '.json';
+    // \p{M}: las marcas combinantes (devanagari, tamil, tailandés…) son parte de la palabra
+    return String(T('comprobante-entrega-integridad')).replace(/[^\p{L}\p{M}\p{N}._-]+/gu, '-') + '-' + dia + '-' + String(a.nombre || 'archivo').replace(/[^\p{L}\p{M}\p{N}._-]+/gu, '_').slice(0, 60) + '.json';
   }
   function descarga(comp) {
     const blob = new Blob([JSON.stringify(comp, null, 2) + '\n'], { type: 'application/json' });
@@ -168,18 +210,20 @@
   const TIPOS = { PDF: /pdf/, DOCX: /wordprocessingml|msword/, XLSX: /spreadsheetml|ms-excel/, PPTX: /presentationml|ms-powerpoint/, ODT: /opendocument\.text/, ODS: /opendocument\.spreadsheet/, ZIP: /zip|compressed/, JPEG: /jpe?g/, PNG: /png/, GIF: /gif/, WEBP: /webp/, WAV: /wav/, MOV: /quicktime/, M4A: /mp4|m4a|aac/, HEIC: /heic|heif/, MP4: /mp4/, WEBM: /webm/, OGG: /ogg/, MP3: /mpeg|mp3/, RAR: /rar/, '7Z': /7z/, GZIP: /gzip/, OLE: /msword|ms-excel|ms-powerpoint|x-ole|x-msi/, RTF: /rtf/, EXE: /x-msdownload|x-msdos|x-dosexec|x-ms-installer|x-executable/, ELF: /x-executable|x-elf|x-sharedlib/, PSD: /photoshop|psd/, TXT: /^text\/|json|xml|csv|javascript|x-sh|x-python|yaml/ };
   const encajaTipo = (mime, tipo) => (!tipo || !mime || /octet-stream/.test(mime) || !TIPOS[tipo] ? null : TIPOS[tipo].test(String(mime).toLowerCase()));
   // número del comprobante: los 16 primeros caracteres de la huella SHA-256 del registro firmado (el mismo en los dos equipos)
-  async function referencia(comp) { return 'GC-' + hex(await sha256(aFirmar(canon((comp && comp.registro) || {})))).slice(0, 16).toUpperCase().replace(/(.{4})(?=.)/g, '$1-'); }
+  // «GC-» en la sesión normal; «GB-» en la blindada (con su propia etiqueta de firma)
+  async function referencia(comp) { const b = comp && comp.formato === FORMATO_B; return (b ? 'GB-' : 'GC-') + hex(await sha256((b ? aFirmarB : aFirmar)(canon((comp && comp.registro) || {})))).slice(0, 16).toUpperCase().replace(/(.{4})(?=.)/g, '$1-'); }
   const grupos = (x, n) => String(x || '').replace(new RegExp('(.{' + n + '})(?=.)', 'g'), '$1 ');
   const fechaHoraCorta = (iso) => { const d = new Date(iso); if (!iso || isNaN(d)) return '—'; try { return d.toLocaleString(LOC(), { dateStyle: 'short', timeStyle: 'medium' }); } catch (_) { return d.toISOString(); } };
   const latTexto = (o) => (o && Number.isFinite(o.min) ? T('mínima') + ' ' + o.min + ' ms · ' + T('mediana') + ' ' + o.mediana + ' ms · ' + T('máxima') + ' ' + o.max + ' ms · ' + o.n + ' ' + T('medidas') : '—');
   function documento(comp, res, ref) {
-    const reg = comp.registro || {}, a = reg.archivo || {}, e = reg.emisor || {}, r = reg.receptor || {}, se = reg.sesion || {}, tr = reg.transporte || {}, ig = reg.integridad || {}, f = comp.firmas || {};
-    const doc = el('article', 'cu-doc');
+    const reg = comp.registro || {}, a = reg.archivo || {}, e = reg.emisor || {}, r = reg.receptor || {}, se = reg.sesion || {}, tr = reg.transporte || {}, ig = reg.integridad || {}, f = comp.firmas || {}, fq = comp.firmas_pq || {};
+    const BL = comp.formato === FORMATO_B;
+    const doc = el('article', 'cu-doc' + (BL ? ' cu-blindada' : ''));
     const mono = (x, n) => { const s = el('span', n ? 'cu-mono cu-agr' : 'cu-mono', n ? grupos(x, n) : String(x || '—')); s.setAttribute('translate', 'no'); return s; };
     // cabecera: marca, título, número y fecha de emisión
     const cab = el('header', 'cu-doc-cab'), marca = el('div', 'cu-marca'), mt = el('div');
-    marca.innerHTML = ESCUDO; const g = el('b', null, 'GUARDIANA'); g.setAttribute('translate', 'no'); mt.append(g, el('span', null, T('Custodia digital'))); marca.append(mt);
-    const ti = el('div', 'cu-doc-ti'); ti.append(el('h2', null, T('Comprobante de custodia digital')));
+    marca.innerHTML = ESCUDO; const g = el('b', null, 'GUARDIANA'); g.setAttribute('translate', 'no'); mt.append(g, el('span', null, BL ? T('Sesión blindada') + ' · ' + T('Entrega e integridad') : T('Entrega e integridad'))); marca.append(mt);
+    const ti = el('div', 'cu-doc-ti'); ti.append(el('h2', null, T('Comprobante de entrega e integridad')));
     const n1 = el('p', 'cu-ref'); n1.append(el('span', null, T('Nº de comprobante')), mono(ref || '—'));
     const n2 = el('p', 'cu-ref'); n2.append(el('span', null, T('Emitido')), el('b', null, fechaHora(reg.emitido)));
     ti.append(n1, n2); cab.append(marca, ti); doc.append(cab);
@@ -204,12 +248,13 @@
     fila = seccion(T('Partes'));
     const parte = (p) => {
       const d = el('div', 'cu-parte');
-      d.append(el('b', null, p.nombre || T('Sin nombre declarado')), el('small', null, T('Huella de identidad (SHA-256)')), mono(p.huella, 4));
+      d.append(el('b', null, p.nombre || T('Sin nombre declarado')), el('small', null, BL ? T('Huella de identidad (SHA-384)') : T('Huella de identidad (SHA-256)')), mono(p.huella, 4));
       d.append(el('span', null, [p.region ? pais(p.region) + ' (' + T('país estimado') + ')' : '', p.verifico_al_otro ? T('número de seguridad comprobado') : T('número de seguridad sin comprobar'), p.version || ''].filter(Boolean).join(' · ')));
       return d;
     };
     fila(T('Remitente'), parte(e)); fila(T('Destinatario'), parte(r));
     if (res.numero) fila(T('Número de seguridad'), res.numero, 'cu-numero', true);
+    if (BL) fila(T('Verificación mutua'), reg.verificacion_mutua ? T('Los dos equipos comprobaron el número de seguridad antes de enviar nada.') : T('No consta la comprobación mutua del número de seguridad.'), reg.verificacion_mutua ? 'cu-bien' : 'cu-mal');
     fila = seccion(T('Envío'));
     fila(T('Salida del remitente'), fechaHora(tr.salida) + ' · ' + T('según el reloj de su equipo'));
     fila(T('Llegada al destinatario'), fechaHora(tr.llegada) + ' · ' + T('según el reloj de su equipo'));
@@ -222,9 +267,10 @@
     fila(T('Relé de GUARDIANA'), [[tr.rele_ciudad, pais(tr.rele_pais)].filter(Boolean).join(', '), tr.rele, tr.rele_region].filter(Boolean).join(' · ') + ' · ' + (tr.conexion === 'wss' ? T('conexión TLS') : T('conexión sin TLS (prueba local)')) + ' · ' + T('transporta fragmentos encriptados que no puede leer'));
     fila = seccion(T('Protección'));
     fila(T('Encriptación del archivo'), T('AES-256-GCM en cada fragmento, con una clave propia del archivo y una etiqueta de autenticación de 128 bits.'));
-    fila(T('Acuerdo de claves'), se.pq ? T('Híbrido postcuántico: ML-KEM-768 y ECDH P-256, combinados con HKDF-SHA-256.') : T('ECDH P-256, combinado con HKDF-SHA-256 (sin la capa postcuántica).'));
+    if (BL) fila(T('Suite'), T('Sesión blindada con los algoritmos de la suite CNSA 2.0, en híbrido con criptografía clásica.'));
+    fila(T('Acuerdo de claves'), BL ? T('Híbrido postcuántico: ML-KEM-1024 y ECDH P-384, combinados con HKDF-SHA-384.') : se.pq ? T('Híbrido postcuántico: ML-KEM-768 y ECDH P-256, combinados con HKDF-SHA-256.') : T('ECDH P-256, combinado con HKDF-SHA-256 (sin la capa postcuántica).'));
     if (se.id) { const d = el('div', 'cu-lineas'); d.append(mono(se.id, 4)); if (se.establecida) d.append(el('span', null, T('establecida') + ' ' + fechaHora(se.establecida))); fila(T('Sesión'), d); }
-    fila(T('Firma del comprobante'), T('ECDSA P-256 sobre SHA-256, con la clave de identidad de cada equipo.'));
+    fila(T('Firma del comprobante'), BL ? T('Doble firma de cada equipo: ECDSA P-384 sobre SHA-384 y ML-DSA-87 (FIPS 204). Las dos tienen que ser válidas.') : T('ECDSA P-256 sobre SHA-256, con la clave de identidad de cada equipo.'));
     fila = seccion(T('Integridad'));
     fila(T('Resultado'), ig.coincide ? T('La huella SHA-256 coincide en los dos equipos') : T('La huella SHA-256 no coincide'), ig.coincide ? 'cu-bien' : 'cu-mal');
     fila(T('Fragmentos autenticados'), Number(tr.fragmentos_verificados || 0).toLocaleString(LOC()) + ' / ' + Number(a.fragmentos || 0).toLocaleString(LOC()) + ' · ' + T('rechazados') + ': ' + Number(tr.fragmentos_rechazados || 0).toLocaleString(LOC()));
@@ -238,9 +284,15 @@
     const inc = Array.isArray(reg.incidencias) ? reg.incidencias.slice(0, 20) : [];
     fila(T('Durante el envío'), inc.length ? inc.map((x) => hms(x.t) + ' · ' + T(INCIDENCIAS[x.que] || String(x.que || ''))).join(' · ') : T('Ninguna.'));
     fila = seccion(T('Firmas digitales'));
-    const firma = (p, sig) => { const d = el('div', 'cu-firma'); d.append(el('small', null, T('Clave pública (ECDSA P-256)')), mono(p.clave), el('small', null, T('Firma')), sig ? mono(sig) : el('span', 'cu-mal', T('Falta la firma.'))); return d; };
-    fila(T('Remitente'), firma(e, f.emisor)); fila(T('Destinatario'), firma(r, f.receptor));
-    fila(T('Cómo verificarlo'), T('Con el archivo .json de este comprobante en guardianagroup.com/orbita/comunicaciones/verificar/, o con cualquier herramienta de ECDSA P-256.'));
+    const firma = (p, sig, sigpq) => {
+      const d = el('div', 'cu-firma');
+      d.append(el('small', null, BL ? T('Clave pública (ECDSA P-384)') : T('Clave pública (ECDSA P-256)')), mono(p.clave), el('small', null, T('Firma')), sig ? mono(sig) : el('span', 'cu-mal', T('Falta la firma.')));
+      // ML-DSA-87: la clave (2.592 bytes) y la firma (4.627) van enteras en el .json; aquí, su huella SHA-256 y su estado
+      if (BL) d.append(el('small', null, T('Firma postcuántica (ML-DSA-87)')), el('span', sigpq ? null : 'cu-mal', sigpq ? T('presente en el archivo .json; se comprueba al verificar') : T('Falta la firma.')));
+      return d;
+    };
+    fila(T('Remitente'), firma(e, f.emisor, fq.emisor)); fila(T('Destinatario'), firma(r, f.receptor, fq.receptor));
+    fila(T('Cómo verificarlo'), BL ? T('Con el archivo .json de este comprobante en guardianagroup.com/orbita/comunicaciones/verificar/, que comprueba las dos firmas de cada equipo.') : T('Con el archivo .json de este comprobante en guardianagroup.com/orbita/comunicaciones/verificar/, o con cualquier herramienta de ECDSA P-256.'));
     doc.append(el('p', 'cu-nota', T('Este comprobante acredita que estos dos equipos firmaron este registro: el archivo con esta huella salió de uno y llegó íntegro al otro. No acredita la identidad legal de las personas ni el contenido del archivo.')));
     return doc;
   }
@@ -560,9 +612,9 @@
     fila('gc-info', T('Relé de GUARDIANA'), (rele && rele.sub ? rele.sub + ' · ' : '') + T('transporta fragmentos encriptados que no puede leer'));
     if (v.estado === 'entregado' && v.coincide != null) fila(v.coincide ? 'gc-ok' : 'gc-alerta', T('Integridad'), v.coincide ? T('La huella SHA-256 coincide en los dos equipos') : T('La huella SHA-256 no coincide'));
     else fila(v.estado === 'fallo' ? 'gc-alerta' : 'gc-ok', T('Integridad'), T('Cada fragmento se autentica al llegar; uno alterado detiene el envío.'));
-    if (v.custodia === 'no') fila('gc-info', T('Comprobante de custodia'), T('No disponible: el otro equipo usa una versión anterior de Comunicaciones.'));
-    else if (v.comprobante) fila(v.comprobanteValido ? 'gc-ok' : 'gc-aviso', T('Comprobante de custodia'), v.comprobanteValido ? T('Firmado por los dos equipos') : T('Pendiente de la firma del destinatario'));
-    else if (v.custodia === 'si') fila('gc-info', T('Comprobante de custodia'), T('Se emitirá al llegar el archivo, firmado por los dos equipos.'));
+    if (v.custodia === 'no') fila('gc-info', T('Comprobante de entrega'), T('No disponible: el otro equipo usa una versión anterior de Comunicaciones.'));
+    else if (v.comprobante) fila(v.comprobanteValido ? 'gc-ok' : 'gc-aviso', T('Comprobante de entrega'), v.comprobanteValido ? T('Firmado por los dos equipos') : T('Pendiente de la firma del destinatario'));
+    else if (v.custodia === 'si') fila('gc-info', T('Comprobante de entrega'), T('Se emitirá al llegar el archivo, firmado por los dos equipos.'));
     // en directo (solo hechos reales, el más reciente arriba)
     const ol = q('.vj-eventos ol'), n = String((v.eventos || []).length);
     if (ol.dataset.n !== n) {
@@ -583,7 +635,7 @@
     if (!hojaComp) {
       hojaComp = el('div', 'gc-hoja cu-hoja'); hojaComp.id = 'h-custodia';
       hojaComp.setAttribute('role', 'dialog'); hojaComp.setAttribute('aria-modal', 'true'); hojaComp.setAttribute('aria-labelledby', 'cu-t');
-      hojaComp.innerHTML = '<div class="cu-caja"><header class="cu-cab"><div><p class="vj-k"><span translate="no">GUARDIANA</span> · <span>Custodia digital</span></p><h2 id="cu-t">Comprobante de custodia digital</h2></div>'
+      hojaComp.innerHTML = '<div class="cu-caja"><header class="cu-cab"><div><p class="vj-k"><span translate="no">GUARDIANA</span> · <span>Entrega e integridad</span></p><h2 id="cu-t">Comprobante de entrega e integridad</h2></div>'
         + '<button type="button" class="vj-x" aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>'
         + '<div class="cu-cuerpo"></div>'
         + '<footer class="cu-pie"><a class="boton" id="cu-verificar" href="/orbita/comunicaciones/verificar/" target="_blank" rel="noopener">Verificar en guardianagroup.com</a>'
@@ -603,5 +655,5 @@
     verifica(comp).then((res) => { if (hojaComp.comp === comp) return pintaComprobante(caja, comp, res); });
   }
 
-  raiz.GuardianaViaje = { abre, cierra, abierto, pinta, evento, muestra, velocidad, minima, estad, tipoPorContenido, referencia, documento, imprime, preparaImpresion, canon, verifica, verificaFirma, aFirmar, descarga, nombreDescarga, muestraComprobante, pintaComprobante, numeroSeguridad, bytes, vel, dur, pais, b64u, deB64u, hex, agrupa, FORMATO, ESCUDO, AVISO, get actual() { return actual; } };
+  raiz.GuardianaViaje = { abre, cierra, abierto, pinta, evento, muestra, velocidad, minima, estad, tipoPorContenido, referencia, documento, imprime, preparaImpresion, canon, verifica, verificaFirma, aFirmar, aFirmarB, FORMATO_B, CTX_B, descarga, nombreDescarga, muestraComprobante, pintaComprobante, numeroSeguridad, bytes, vel, dur, pais, b64u, deB64u, hex, agrupa, FORMATO, ESCUDO, AVISO, get actual() { return actual; } };
 })(typeof window !== 'undefined' ? window : globalThis);
