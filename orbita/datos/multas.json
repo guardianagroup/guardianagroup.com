@@ -279,9 +279,9 @@
     "pt": "Garante (Itália)"
    },
    "titulo": {
-    "es": "Personajes virtuales, menores dentro y la edad sin comprobar",
-    "en": "Virtual characters, minors inside, and no age check",
-    "pt": "Personagens virtuais, menores dentro e a idade sem conferir"
+    "es": "Personajes virtuales, menores entre los usuarios y sin comprobar la edad",
+    "en": "Virtual characters, minors among the users and no age check",
+    "pt": "Personagens virtuais, menores entre os usuários e sem conferir a idade"
    },
    "texto": {
     "es": "El Garante italiano sancionó a Character Technologies, la empresa detrás de Character.AI, un servicio donde cualquiera —también un menor— crea personajes virtuales y conversa con ellos. Encontró información insuficiente a los usuarios, la evaluación de impacto hecha tarde y el representante en la UE nombrado tarde, además de fallos en la protección de menores y en la verificación de la edad. La multa es pequeña; las órdenes no: tiene que hacer funcionar la comprobación de edad, impedir que un menor bloqueado se vuelva a registrar y poner los perfiles de menores en privado por defecto.",
@@ -394,9 +394,9 @@
     "pt": "Garante (Itália)"
    },
    "titulo": {
-    "es": "ChatGPT · la multa italiana existió, y un tribunal la tumbó",
-    "en": "ChatGPT · the Italian fine happened, and a court struck it down",
-    "pt": "ChatGPT · a multa italiana existiu, e um tribunal a derrubou"
+    "es": "ChatGPT · la multa italiana, anulada por un tribunal",
+    "en": "ChatGPT · the Italian fine, annulled by a court",
+    "pt": "ChatGPT · a multa italiana, anulada por um tribunal"
    },
    "texto": {
     "es": "El Garante italiano multó a OpenAI en diciembre de 2024 por tratar datos sin una base legal clara, no avisar de la filtración de marzo de 2023 y no comprobar la edad de quien entra. El 18 de marzo de 2026 el Tribunal de Roma la anuló. Conviene leer por qué: no dijo que ChatGPT estuviera bien, dijo que el caso no le tocaba al Garante italiano sino a la autoridad irlandesa, porque OpenAI había puesto allí su sede europea. Cayó por quién juzgaba, no por lo que se juzgaba.",
@@ -427,7 +427,7 @@
     "pt": "CNIL (França)"
    },
    "titulo": {
-    "es": "Free y Free Mobile · 24 millones de contratos a la vista, con IBAN",
+    "es": "Free y Free Mobile · 24 millones de contratos expuestos, con IBAN",
     "en": "Free and Free Mobile · 24 million contracts exposed, IBANs included",
     "pt": "Free e Free Mobile · 24 milhões de contratos expostos, com IBAN"
    },
@@ -607,9 +607,9 @@
     "pt": "CNIL (França)"
    },
    "titulo": {
-    "es": "Rastreadores antes de tocar nada, y un «rechazar» que no rechazaba",
-    "en": "Trackers before you touch anything, and a “refuse” that did not refuse",
-    "pt": "Rastreadores antes de tocar em nada, e um «recusar» que não recusava"
+    "es": "Rastreadores antes de cualquier elección y un «rechazar» que no funcionaba",
+    "en": "Trackers before any choice, and a “refuse” button that did not work",
+    "pt": "Rastreadores antes de qualquer escolha e um «recusar» que não funcionava"
    },
    "texto": {
     "es": "La CNIL sancionó a la filial irlandesa de SHEIN porque la web dejaba rastreadores, varios de publicidad, nada más entrar: antes de que la persona tocara el aviso de cookies. Y cuando pulsaba «Rechazar todo» o retiraba el consentimiento, se depositaban rastreadores nuevos y los que ya estaban seguían leyéndose. Unos 12 millones de visitas al mes desde Francia.",
@@ -782,9 +782,9 @@
     "pt": "Autorité de la Concurrence (França)"
    },
    "titulo": {
-    "es": "Multada por su propio botón de privacidad, no por espiar",
-    "en": "Fined over its own privacy button, not for spying",
-    "pt": "Multada pelo próprio botão de privacidade, não por espionar"
+    "es": "Multada por la forma de aplicar su propio aviso de privacidad",
+    "en": "Fined over how it applied its own privacy prompt",
+    "pt": "Multada pela forma de aplicar o próprio aviso de privacidade"
    },
    "texto": {
     "es": "Hay que leerlo con cuidado, porque es al revés de lo que parece: a Apple no la multaron por rastrear, sino por cómo impuso a los demás su ventana «Pedir a la app que no rastree». La autoridad francesa de competencia dijo que el objetivo no es el problema; el problema es que rechazar cuesta un clic y aceptar cuesta dos, que la regla no se aplicaba igual a todos y que Apple no se la aplicaba a sí misma. Multa por abuso de posición dominante entre abril de 2021 y julio de 2023.",
@@ -839,9 +839,9 @@
     "pt": "DPC (Irlanda)"
    },
    "titulo": {
-    "es": "Las llaves de sesión de 2018: 29 millones de cuentas abiertas de par en par",
-    "en": "The 2018 session keys: 29 million accounts left wide open",
-    "pt": "As chaves de sessão de 2018: 29 milhões de contas escancaradas"
+    "es": "Las llaves de sesión de 2018: 29 millones de cuentas expuestas",
+    "en": "The 2018 session keys: 29 million accounts exposed",
+    "pt": "As chaves de sessão de 2018: 29 milhões de contas expostas"
    },
    "texto": {
     "es": "Multa por la brecha que Meta comunicó en septiembre de 2018: un fallo dejó al aire las llaves de sesión de unos 29 millones de cuentas en el mundo, con nombre, correo, teléfono, sexo, lugar de trabajo y las publicaciones y grupos de cada una. La autoridad irlandesa cerró dos investigaciones con 251 millones en total.",
@@ -933,9 +933,9 @@
     "pt": "CNIL (França)"
    },
    "titulo": {
-    "es": "Anuncios metidos entre los correos, como si fueran mensajes",
-    "en": "Ads slipped between emails, disguised as messages",
-    "pt": "Anúncios metidos entre os e-mails, como se fossem mensagens"
+    "es": "Anuncios insertados entre los correos, como si fueran mensajes",
+    "en": "Ads inserted between emails, disguised as messages",
+    "pt": "Anúncios inseridos entre os e-mails, como se fossem mensagens"
    },
    "texto": {
     "es": "Orange mostraba publicidad entre los correos de sus clientes, con el aspecto de un mensaje más y sin su consentimiento, y seguía leyendo cookies después de que la persona las rechazara.",
@@ -962,9 +962,9 @@
     "pt": "DPC (Irlanda)"
    },
    "titulo": {
-    "es": "LinkedIn · anuncios a medida sin un permiso que valiera",
-    "en": "LinkedIn · targeted ads without a permission that held up",
-    "pt": "LinkedIn · anúncios sob medida sem uma permissão que valesse"
+    "es": "LinkedIn · anuncios personalizados sin un consentimiento válido",
+    "en": "LinkedIn · targeted ads without valid consent",
+    "pt": "LinkedIn · anúncios personalizados sem um consentimento válido"
    },
    "texto": {
     "es": "La autoridad irlandesa de protección de datos multó a LinkedIn, que es de Microsoft, por analizar el comportamiento de quien tiene un perfil y usarlo para publicidad dirigida sin una base legal válida. Además de la multa, le ordenó poner el tratamiento en regla.",
@@ -1019,9 +1019,9 @@
     "pt": "Autoridade de Dados (Países Baixos)"
    },
    "titulo": {
-    "es": "Treinta mil millones de caras sacadas de internet",
-    "en": "Thirty billion faces scraped off the internet",
-    "pt": "Trinta bilhões de rostos tirados da internet"
+    "es": "Treinta mil millones de rostros recopilados de internet",
+    "en": "Thirty billion faces collected from the internet",
+    "pt": "Trinta bilhões de rostos coletados da internet"
    },
    "texto": {
     "es": "La autoridad holandesa multó a Clearview AI por construir una base de datos con más de 30.000 millones de fotos de caras extraídas de internet, convertidas en un código biométrico por persona, sin permiso de nadie y sin decírselo a nadie. Además de la multa, hasta cinco millones más de apremio. Y un aviso poco habitual: la autoridad advirtió que usar Clearview es ilegal y que las empresas que lo hagan pueden esperar multa.",
@@ -1203,9 +1203,9 @@
     "pt": "FTC"
    },
    "titulo": {
-    "es": "Avast · vendía la navegación de quienes protegía",
-    "en": "Avast · sold the browsing of the people it protected",
-    "pt": "Avast · vendia a navegação de quem protegia"
+    "es": "Avast · vendía el historial de navegación de sus usuarios",
+    "en": "Avast · sold its users’ browsing history",
+    "pt": "Avast · vendia o histórico de navegação dos usuários"
    },
    "texto": {
     "es": "La FTC concluyó que Avast, mientras prometía bloquear el rastreo, vendió a través de su filial Jumpshot datos de navegación detallados y reidentificables a más de 100 terceros entre 2014 y 2020. Tiene prohibido vender datos de navegación con fines publicitarios. Avast discrepa de la caracterización de los hechos.",
@@ -1302,9 +1302,9 @@
     "pt": "Definitiva"
    },
    "titulo": {
-    "es": "Cookies sin permiso y el correo como rehén",
-    "en": "Cookies without consent and email held hostage",
-    "pt": "Cookies sem consentimento e o e-mail como refém"
+    "es": "Cookies sin consentimiento y el acceso al correo condicionado a aceptarlas",
+    "en": "Cookies without consent and email access conditional on accepting them",
+    "pt": "Cookies sem consentimento e o acesso ao e-mail condicionado a aceitá-los"
    },
    "texto": {
     "es": "Yahoo instalaba una veintena de cookies de publicidad sin consentimiento al entrar en su web, y a quien retiraba el permiso le avisaba de que ya no podría usar su correo. El Consejo de Estado confirmó la multa en 2025.",
@@ -1489,9 +1489,9 @@
     "pt": "IMY (Suécia)"
    },
    "titulo": {
-    "es": "No explicaba bien qué hacía con los datos de quien los pedía",
-    "en": "It didn't properly explain what it did with people's data",
-    "pt": "Não explicava bem o que fazia com os dados de quem os pedia"
+    "es": "No informaba con claridad del uso de los datos a quien los solicitaba",
+    "en": "It did not clearly explain how it used people’s data",
+    "pt": "Não informava com clareza o uso dos dados a quem os solicitava"
    },
    "texto": {
     "es": "Cuando sus usuarios pedían una copia de sus datos, Spotify se la daba, pero sin explicar con claridad cómo los usaba ni a quién los pasaba. La autoridad sueca le impuso 58 millones de coronas.",
@@ -1584,9 +1584,9 @@
     "pt": "DPC (Irlanda)"
    },
    "titulo": {
-    "es": "La multa más grande que se ha puesto nunca por datos",
-    "en": "The largest data fine ever handed down",
-    "pt": "A maior multa de dados já aplicada"
+    "es": "La mayor multa impuesta bajo el RGPD",
+    "en": "The largest fine imposed under the GDPR",
+    "pt": "A maior multa aplicada com base no RGPD"
    },
    "texto": {
     "es": "Mil doscientos millones de euros a Meta, la dueña de Facebook, Instagram y WhatsApp, por seguir mandando a Estados Unidos los datos de los usuarios europeos sin una protección equivalente a la de aquí. Es la mayor sanción de la historia del reglamento europeo de protección de datos.",
