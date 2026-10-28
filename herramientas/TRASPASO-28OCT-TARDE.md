@@ -2,6 +2,36 @@
 
 Este archivo manda sobre los anteriores. La historia completa está en `herramientas/TRASPASO-CHAT.md`, `herramientas/TRASPASO.md` y `herramientas/LANZAMIENTO.md`; léelos solo si hace falta un detalle.
 
+## ACTUALIZACIÓN 16:25 (manda sobre lo de abajo)
+
+Hecho y publicado entre las 15:10 y las 16:25 (main de 2fc91d0 a 6d0b867; web-idiomas hasta c6d0477):
+- **Toda la web sin seleccionar ni copiar** (guardiana.css, oscuro.css, diseno.css, app.css y /nueva/; solo los campos de escribir se seleccionan).
+- Fuera la tira de la campanita y el escudo de la cabecera; cabecera más grande en el ordenador.
+- **Pip** de mensaje con la página minimizada (avisos del sistema en silencio); timbre de llamada el nuestro.
+- **Videollamada:** partida mitad y mitad por defecto **solo en el ordenador** (botón redondo para hacerla pequeña o partirla); en el móvil como FaceTime; «‹ Atrás», tocar la imagen o el mismo botón cierran «Voz e imagen»; con la pantalla partida, la tarjeta va en la otra mitad; arranque de imagen a 1,5 Mb/s (x-google-start-bitrate); en el teléfono la llamada se bloquea en vertical donde el sistema deja (Android a pantalla completa o como app).
+- **Sesión blindada sin números que comprobar** (opcional en «Seguridad y verificación»; términos punto 6 al día).
+- **Invitación por enlace, fácil:** el enlace se copia solo al crearla; en el móvil un único «Compartir enlace»; al compartir, pantalla de espera entera con «Volver a compartir»; quien abre el enlace ve «Te han invitado… ¿Aceptas?» (Aceptar / No, gracias); el relé se reconecta al volver de WhatsApp y la conversación se abre sola; quien entra no escribe hasta la primera conexión («Conectando con la otra persona…»). El código del ordenador lleva «Copiar el enlace».
+- **Móvil, una sola conversación:** un botón «Crear invitación» (sin «Tengo un código» ni «Sesión blindada»: en el móvil «Crear invitación» ES la blindada por enlace); crear o aceptar otra borra la anterior en los dos equipos; sin lista, sin «Tus conversaciones», sin «‹»; para salir, «⋯» → «Terminar».
+- **Invitado sin rastro:** sin barra de la web; al terminar, solo «Conversación terminada» (también al recargar: sessionStorage gcom-fin); si no le quedan conversaciones, se borran su identidad (store «yo») y sus ajustes gcom-*.
+- **«Borrar el chat»:** papelera junto al micrófono (solo con el campo vacío; al escribir, el micrófono pasa a «Enviar»); borra aquí y en el otro equipo (pendiente si no está: `vaciarPendiente`, sale con `mandaVaciar` cuando hay sesión).
+- **El clip con menú:** Foto o vídeo (fotos sin metadatos: `sinDatosOcultos`, canvas, máx. 4096 px), Cámara (móvil, capture), Documento, Ubicación (exacta o aproximada; tarjeta con «Abrir en el mapa», OpenStreetMap solo al tocar).
+- **Pantalla completa / app:** manifiesto propio `orbita/comunicaciones/comunicaciones.webmanifest` (fullscreen, vertical); Android pide pantalla completa sola al crear, aceptar, llamar o contestar; en el iPhone, «⋯» → «Pantalla completa» explica «Añadir a pantalla de inicio»; botón «Añadir a la pantalla de inicio» (Android y ordenador con beforeinstallprompt; iPhone con los pasos); **enlace para mandar: guardianagroup.com/orbita/comunicaciones/?instalar**.
+- Al salir de la página no queda la conversación en la copia del «Atrás» (pagehide vacía #mensajes; pageshow persisted recarga).
+- «Entrar» en vez de «Entrar en NÚCLEO» en la portada, guías y radiografías.
+- Agencia, ronda 75 (diseño del móvil): pregunta en `herramientas/agencia-rondas/ronda75/pregunta.md`; ChatGPT y GPT-6 Astra respondieron (tres controles abajo, botones grandes a lo ancho, sin Multas en la barra del móvil, globo pequeño, textos sin promesas absolutas). Aplicado. Falta guardar sus respuestas en ronda75/ (están en las pestañas del navegador integrado).
+
+Versiones ahora: app.js y app.css **20261029e**, llamada.js **20261029s**, rele.js **20261028o**, componentes.css 20261028m, idioma.js **20261029p49**.
+
+Pruebas nuevas en `herramientas/pruebas-com/`: invitab (17), unasola (6), vaciar (9), partida (6), ajustes (5), clip (5), completa (4), instalar (3), pip (4), sincopia (10). El móvil ya no escribe códigos: las pruebas entran por enlace (#codigo-enlace) y pulsan #aceptar-si. Los servidores de prueba (relé 8794 y web 8802) se paran a las 2 h: arráncalos otra vez si fallan todas.
+
+Pendiente, por orden:
+1. «Ver una vez» y «Tapar antes de enviar» (difuminar caras/datos) en el menú del clip.
+2. La llamada que «se borra al descolgar» (Barranquilla–Cartagena): sin datos del dueño todavía.
+3. Llamada en grupo (hasta 4, por código numérico) después del lanzamiento.
+4. Textos legales en inglés y portugués (borradores en herramientas/legal-borradores/) con lo de Miami, la blindada sin comprobación obligatoria y la ubicación.
+5. Cadenas nuevas en los otros 39 idiomas.
+6. Privacidad: decir que «Ubicación» y las fotos sin metadatos existen (punto 5).
+
 ## 0. Lo primero que tienes que hacer
 
 1. Clona y prepara (si no lo tienes ya):
