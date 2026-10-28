@@ -25,7 +25,8 @@ const res = []; const ok = (n, c, x) => res.push((c ? 'OK   ' : 'FALLA') + ' ' +
   await espera(2500);
   ok('sesión blindada verificada por los dos', !(await A.evaluate(() => document.querySelector('#videollamar').classList.contains('apagado'))), await A.getAttribute('#videollamar', 'title'));
   await A.click('#videollamar'); await espera(2500);
-  ok('en la blindada, «Tu imagen» se puede elegir antes de contestar', await vis(B, '#ll-imagenes'));
+  if (!(await vis(B, '#ll-imagenes')) && (await vis(B, '#ll-voz-pill'))) { await B.click('#ll-voz-pill'); await espera(400); }
+  ok('en la blindada, «Tu imagen» se puede elegir antes de contestar (en el teléfono, desde la píldora)', await vis(B, '#ll-imagenes'));
   await B.screenshot({ path: S + 'b1-B-entrante-movil.png' });
   await B.click('#ll-contestar'); await espera(6000);
   const diag = async (p) => p.evaluate(() => { try { return JSON.parse(document.querySelector('#ll-calidad').dataset.diag || '{}'); } catch (e) { return {}; } });

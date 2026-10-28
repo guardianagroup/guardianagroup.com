@@ -1,0 +1,30 @@
+// «Modo espectador»: el recorrido entero en dos teléfonos, con una foto por paso
+const { chromium, devices } = require('playwright');
+const S = '/tmp/pruebas-com/prueba-74/rec-';
+const espera = (ms) => new Promise((r) => setTimeout(r, ms));
+(async () => {
+  const b = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] });
+  const vis = (p, s) => p.evaluate((s) => { const e = document.querySelector(s); return !!(e && !e.hidden && e.offsetParent !== null); }, s);
+  const cA = await b.newContext(Object.assign({}, devices['iPhone 13'], { locale: 'es-ES', permissions: ['camera', 'microphone'] }));
+  await cA.addInitScript(() => { navigator.share = async () => {}; });
+  const A = await cA.newPage(); await A.goto('http://127.0.0.1:8802/orbita/comunicaciones/'); await espera(1800);
+  await A.screenshot({ path: S + '1-inicio.png' });
+  await A.tap('#nueva-blindada'); await espera(2500); await A.screenshot({ path: S + '2-compartir.png' });
+  const enlace = await A.inputValue('#enlace-b');
+  await A.tap('#enlace-compartir'); await espera(600); await A.screenshot({ path: S + '3-espera.png' });
+  const cB = await b.newContext(Object.assign({}, devices['Pixel 7'], { locale: 'es-ES', permissions: ['camera', 'microphone'] }));
+  const B = await cB.newPage(); await B.goto(enlace); for (let i = 0; i < 20 && !(await vis(B, '#aceptar-si')); i++) await espera(300);
+  await B.screenshot({ path: S + '4-aceptar.png' });
+  await B.tap('#aceptar-si'); for (let i = 0; i < 40 && !((await vis(A, '#conv')) && (await vis(B, '#conv'))); i++) await espera(500); await espera(2000);
+  await B.tap('#texto'); await B.keyboard.type('Hola, ya estoy'); await B.keyboard.press('Enter'); await espera(800);
+  await A.tap('#texto'); await A.keyboard.type('Perfecto. ¿Te llamo?'); await A.keyboard.press('Enter'); await espera(1200);
+  await A.screenshot({ path: S + '5-chat-A.png' }); await B.screenshot({ path: S + '5-chat-B.png' });
+  await A.tap('#videollamar'); await espera(2500); await B.screenshot({ path: S + '6-entrante.png' });
+  await B.tap('#ll-contestar').catch(async () => { await B.evaluate(() => document.querySelector('#ll-contestar').click()); });
+  await espera(5000); await A.screenshot({ path: S + '7-llamada-A.png' }); await B.screenshot({ path: S + '7-llamada-B.png' });
+  await A.tap('#ll-colgar').catch(async () => { await A.evaluate(() => document.querySelector('#ll-colgar').click()); }); await espera(2500);
+  await A.tap('#cmas'); await espera(300); await A.screenshot({ path: S + '8-menu.png' });
+  await A.tap('#cm-terminar'); await espera(500); await A.tap('#cierre-si').catch(() => {}); await espera(2500);
+  await B.screenshot({ path: S + '9-fin-B.png' }); await A.screenshot({ path: S + '9-fin-A.png' });
+  await b.close();
+})().catch((e) => { console.error('FALLO', e.message); process.exit(1); });

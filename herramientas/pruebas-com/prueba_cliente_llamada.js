@@ -12,9 +12,11 @@ const res = []; const ok = (n, c, x) => res.push((c ? 'OK   ' : 'FALLA') + ' ' +
     const mk = async (n) => { const c = await b.newContext({ viewport: { width: w, height: h }, isMobile: w < 500, hasTouch: w < 500, permissions: ['microphone', 'camera'], locale: 'es-ES' }); await c.addInitScript(() => { try { localStorage.setItem('guardiana-acceso', 'dueno'); } catch (e) {} }); const p = await c.newPage(); p.errores = []; p.on('pageerror', (e) => p.errores.push(n + ': ' + e.message)); await p.goto(URL); await p.waitForTimeout(1500); return p; };
     const A = await mk('A'), B = await mk('B');
     const vis = (p, s) => p.evaluate((s) => { const e = document.querySelector(s); return !!(e && !e.hidden && e.offsetParent !== null); }, s);
-    await A.click('#nueva'); await A.waitForTimeout(1500);
-    const codigo = (await A.textContent('#codigo')).replace(/\D/g, '');
-    await B.click('#unir'); await B.fill('#unir-codigo', codigo); await B.waitForTimeout(200); if (await vis(B, '#unir-ok')) await B.click('#unir-ok', { timeout: 3000 }).catch(() => {});
+    const movilA = !(await vis(A, '#nueva'));
+    if (movilA) { await A.click('#nueva-blindada'); await A.waitForTimeout(2500); } else { await A.click('#nueva'); await A.waitForTimeout(1500); }
+    const codigo = movilA ? '' : (await A.textContent('#codigo')).replace(/\D/g, '');
+    if (movilA) { const u = await A.inputValue('#enlace-b'); await B.goto(u); for (let k = 0; k < 30 && !(await vis(B, '#aceptar-si')); k++) await B.waitForTimeout(300); await B.click('#aceptar-si'); }
+    else if (await vis(B, '#unir')) { await B.click('#unir'); await B.fill('#unir-codigo', codigo); await B.waitForTimeout(200); if (await vis(B, '#unir-ok')) await B.click('#unir-ok', { timeout: 3000 }).catch(() => {}); } else { void codigo; await A.click('#codigo-enlace'); const u = await A.evaluate(() => document.querySelector('#codigo-enlace').dataset.enlace); await B.goto(u); for (let k = 0; k < 30 && !(await vis(B, '#aceptar-si')); k++) await B.waitForTimeout(300); await B.click('#aceptar-si'); }
     for (let i = 0; i < 40 && !((await vis(A, '#conv')) && (await vis(B, '#conv'))); i++) await espera(500);
     await espera(2500);
     // A estaba escribiendo: el campo tiene el foco cuando llega la llamada

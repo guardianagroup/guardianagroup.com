@@ -1,0 +1,13 @@
+const { chromium } = require('playwright');
+(async () => { const b = await chromium.launch(); const res = []; const ok = (n, c, x) => res.push((c ? 'OK   ' : 'FALLA') + ' ' + n + (x ? ' · ' + x : ''));
+  const p = await (await b.newContext({ viewport: { width: 1280, height: 800 }, locale: 'es-ES' })).newPage(); const errores = []; p.on('pageerror', (e) => errores.push(e.message));
+  await p.goto('http://127.0.0.1:8802/'); await p.waitForTimeout(1500);
+  const a = p.locator('a.btn[href="/orbita/"]').first(); await a.scrollIntoViewIfNeeded();
+  const box = await a.boundingBox(); await p.mouse.move(box.x + box.width / 2, box.y + box.height / 2); await p.mouse.down(); await p.waitForTimeout(150);
+  const t = await a.evaluate((x) => getComputedStyle(x).transform); ok('al pulsar, el botón se hunde', /matrix\(0\.9/.test(t), t);
+  await p.evaluate(() => { const x = document.querySelector('a.btn[href="/orbita/"]'); x.addEventListener('click', (e) => e.preventDefault(), { once: true }); });
+  await p.mouse.up(); await p.waitForTimeout(100);
+  const st = await a.evaluate((x) => ({ c: x.className, t: x.textContent })); ok('al soltar, «Entrando…» con el giro', /entrando/.test(st.c) && /Entrando/.test(st.t), JSON.stringify(st));
+  ok('reglas de precarga de NÚCLEO', await p.evaluate(() => !!document.querySelector('script[type="speculationrules"]')));
+  ok('sin errores', errores.length === 0, errores.join(' | '));
+  console.log(res.join('\n')); await b.close(); })();
