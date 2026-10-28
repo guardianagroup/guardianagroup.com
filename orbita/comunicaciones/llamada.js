@@ -531,49 +531,142 @@
       caja.style.setProperty('--alto', (innerHeight / escalaYa) + 'px');
       miImagen();
     }
-    // Tu imagen pequeña se mueve (dueño, 12:22: «quiero clicarla y arrastrarla y ponerla donde yo quiera»): se pulsa, se
-    // arrastra y se queda donde la dejes; el sitio se recuerda en este navegador, en proporción a la pantalla, así que sigue
-    // en su sitio aunque cambie el tamaño. En la llamada en pequeño va en su esquina.
-    const MI_IMG = 'gcom-mi-imagen', MARGEN = 10;
-    let arrastre = null;
+    // Tu imagen pequeña (dueño, 12:22: «quiero clicarla y arrastrarla y ponerla donde yo quiera»; 12:55: «también quiero que se
+    // pueda modificar el tamaño… hasta un máximo de pantalla dividida de mitad a mitad»): se arrastra para moverla y, desde
+    // el asa de la esquina que mira al centro, se agranda o se achica. Al llegar a media pantalla queda la pantalla dividida
+    // (tú en una mitad y la otra persona en la otra); doble clic o doble toque la abre y la cierra. Todo se recuerda en este
+    // navegador, en proporción a la pantalla. En la llamada en pequeño va en su esquina.
+    const MI_IMG = 'gcom-mi-imagen', MARGEN = 10, DIVIDE = 0.45;
+    let arrastre = null, ultimoToque = 0;
     const vidLocal = () => $('#v-local');
     const lienzoVid = () => $('#ll-videos');
+    const leeMi = () => { try { const x = JSON.parse(localStorage.getItem(MI_IMG) || 'null'); return x && typeof x === 'object' ? x : {}; } catch (_) { return {}; } };
+    const guardaMi = (o) => { try { localStorage.setItem(MI_IMG, JSON.stringify(Object.assign(leeMi(), o))); } catch (_) {} };
+    const asa = () => { let a = $('#ll-asa'); if (!a) { a = document.createElement('span'); a.id = 'll-asa'; a.className = 'mi-asa'; a.setAttribute('aria-hidden', 'true'); const c = lienzoVid(); if (c) c.append(a); } return a; };
+    // lado de la pantalla dividida: en horizontal, izquierda o derecha; en vertical (teléfono), arriba o abajo
+    function ladoDe(cx, cy, CW, CH) { return CW >= CH ? (cx > CW / 2 ? 'der' : 'izq') : (cy > CH / 2 ? 'abajo' : 'arriba'); }
+    function ponDividida(lado) {
+      for (const l of ['izq', 'der', 'arriba', 'abajo']) caja.classList.toggle('lado-' + l, lado === l);
+      caja.classList.toggle('dividida', !!lado);
+    }
     function miImagen() {
       const vl = vidLocal(), cont = lienzoVid(); if (!vl || !cont) return;
-      let pos = null; try { pos = JSON.parse(localStorage.getItem(MI_IMG) || 'null'); } catch (_) { pos = null; }
-      if (!pos || !Number.isFinite(pos.x) || !Number.isFinite(pos.y)) { caja.classList.remove('movida'); return; }
-      const W = vl.offsetWidth, H = vl.offsetHeight, CW = cont.clientWidth, CH = cont.clientHeight; if (!W || !CW) return;
-      const x = MARGEN + Math.max(0, Math.min(1, pos.x)) * Math.max(0, CW - W - 2 * MARGEN), y = MARGEN + Math.max(0, Math.min(1, pos.y)) * Math.max(0, CH - H - 2 * MARGEN);
-      caja.style.setProperty('--mi-x', Math.round(x) + 'px'); caja.style.setProperty('--mi-y', Math.round(y) + 'px'); caja.classList.add('movida');
+      const mi = leeMi(), CW = cont.clientWidth, CH = cont.clientHeight;
+      if (mi.div && CW) { const hz = CW >= CH, mapa = hz ? { arriba: 'izq', abajo: 'der' } : { izq: 'arriba', der: 'abajo' }; ponDividida(mapa[mi.div] || mi.div); }
+      else ponDividida(null);
+      // tamaño elegido (proporción del ancho), con su mínimo y su máximo
+      if (Number.isFinite(mi.w) && CW) { caja.style.setProperty('--mi-w', Math.round(limitaAncho(mi.w * CW, CW, CH, vl)) + 'px'); caja.classList.add('con-tam'); }
+      else caja.classList.remove('con-tam');
+      if (Number.isFinite(mi.x) && Number.isFinite(mi.y) && CW) {
+        const W = vl.offsetWidth, H = vl.offsetHeight;
+        const x = MARGEN + Math.max(0, Math.min(1, mi.x)) * Math.max(0, CW - W - 2 * MARGEN), y = MARGEN + Math.max(0, Math.min(1, mi.y)) * Math.max(0, CH - H - 2 * MARGEN);
+        caja.style.setProperty('--mi-x', Math.round(x) + 'px'); caja.style.setProperty('--mi-y', Math.round(y) + 'px'); caja.classList.add('movida');
+      } else caja.classList.remove('movida');
+      colocaAsa();
+    }
+    // ancho entre un mínimo y la mitad de la pantalla (sin salirse por arriba ni por abajo)
+    function limitaAncho(w, CW, CH, vl) {
+      const asp = (vl.offsetWidth && vl.offsetHeight) ? vl.offsetWidth / vl.offsetHeight : (FINO.matches ? 16 / 9 : 3 / 4);
+      const min = Math.min(FINO.matches ? 120 : 84, CW / 3), max = Math.max(min, Math.min(CW / 2, (CH - 2 * MARGEN) * asp));
+      return Math.max(min, Math.min(max, w));
+    }
+    // el asa, en la esquina de tu imagen que mira al centro de la pantalla
+    function esquinaAsa(vl, CW, CH) {
+      const cx = vl.offsetLeft + vl.offsetWidth / 2, cy = vl.offsetTop + vl.offsetHeight / 2;
+      return { izq: cx > CW / 2, arriba: cy > CH / 2 };
+    }
+    function colocaAsa() {
+      const a = asa(), vl = vidLocal(), cont = lienzoVid(); if (!a || !vl || !cont) return;
+      if (caja.classList.contains('dividida')) {
+        // en la pantalla dividida, el asa va en el borde que separa las dos mitades
+        const CW = cont.clientWidth, CH = cont.clientHeight, l = ['izq', 'der', 'arriba', 'abajo'].find((x) => caja.classList.contains('lado-' + x));
+        const x = CW / 2, y = CH / 2; void l;
+        caja.style.setProperty('--asa-x', Math.round(x - 11) + 'px'); caja.style.setProperty('--asa-y', Math.round(y - 11) + 'px'); return;
+      }
+      const e = esquinaAsa(vl, cont.clientWidth, cont.clientHeight);
+      const x = vl.offsetLeft + (e.izq ? 0 : vl.offsetWidth), y = vl.offsetTop + (e.arriba ? 0 : vl.offsetHeight);
+      caja.style.setProperty('--asa-x', Math.round(x - 11) + 'px'); caja.style.setProperty('--asa-y', Math.round(y - 11) + 'px');
     }
     // dónde cae el puntero, en las medidas de la llamada (con la llamada reducida, se deshace la escala)
     const enLienzo = (e) => ({ x: e.clientX / escalaYa, y: e.clientY / escalaYa });
-    const sobreMiImagen = (p) => { const vl = vidLocal(); if (!vl || !video || caja.classList.contains('mini') || !vl.offsetWidth || !cam || $('#ll-videos').hidden) return false; return p.x >= vl.offsetLeft && p.x <= vl.offsetLeft + vl.offsetWidth && p.y >= vl.offsetTop && p.y <= vl.offsetTop + vl.offsetHeight; };
+    const visible = () => { const vl = vidLocal(); return !!(vl && video && !caja.classList.contains('mini') && vl.offsetWidth && cam && !$('#ll-videos').hidden); };
+    const sobreMiImagen = (p) => { if (!visible()) return false; const vl = vidLocal(); return p.x >= vl.offsetLeft && p.x <= vl.offsetLeft + vl.offsetWidth && p.y >= vl.offsetTop && p.y <= vl.offsetTop + vl.offsetHeight; };
+    const sobreAsa = (p) => { if (!visible()) return false; const cs = getComputedStyle(caja); const x = parseFloat(cs.getPropertyValue('--asa-x')) + 11, y = parseFloat(cs.getPropertyValue('--asa-y')) + 11; return Number.isFinite(x) && Math.hypot(p.x - x, p.y - y) <= 18; };
+    // de la pantalla dividida a la imagen flotante del mismo tamaño (para seguir agrandando o achicando desde ahí)
+    function sueltaDividida() {
+      const vl = vidLocal(), cont = lienzoVid(), CW = cont.clientWidth, CH = cont.clientHeight, l = ['izq', 'der', 'arriba', 'abajo'].find((x) => caja.classList.contains('lado-' + x));
+      ponDividida(null);
+      const w = limitaAncho(CW / 2, CW, CH, vl); caja.style.setProperty('--mi-w', Math.round(w) + 'px'); caja.classList.add('con-tam');
+      const W = vl.offsetWidth, H = vl.offsetHeight;
+      const x = l === 'izq' ? MARGEN : l === 'der' ? CW - W - MARGEN : (CW - W) / 2, y = l === 'arriba' ? MARGEN : l === 'abajo' ? CH - H - MARGEN : (CH - H) / 2;
+      caja.style.setProperty('--mi-x', Math.round(x) + 'px'); caja.style.setProperty('--mi-y', Math.round(y) + 'px'); caja.classList.add('movida');
+    }
+    function guardaSitio() {
+      const vl = vidLocal(), cont = lienzoVid(); if (!vl || !cont) return;
+      const CW = cont.clientWidth, CH = cont.clientHeight, W = vl.offsetWidth, H = vl.offsetHeight;
+      const div = caja.classList.contains('dividida') ? ['izq', 'der', 'arriba', 'abajo'].find((x) => caja.classList.contains('lado-' + x)) : null;
+      if (div) return guardaMi({ div });
+      // el tamaño solo se guarda si la persona lo cambió; con cinco decimales, para que al volver no baile ni un píxel
+      const r5 = (v) => Math.round(v * 1e5) / 1e5;
+      guardaMi({ div: null, w: caja.classList.contains('con-tam') ? r5(W / CW) : null, x: r5((vl.offsetLeft - MARGEN) / Math.max(1, CW - W - 2 * MARGEN)), y: r5((vl.offsetTop - MARGEN) / Math.max(1, CH - H - 2 * MARGEN)) });
+    }
+    function alternaDividida() {
+      const vl = vidLocal(), cont = lienzoVid(); if (!vl || !cont) return;
+      if (caja.classList.contains('dividida')) {
+        // vuelve a la imagen pequeña de antes (o a la de siempre)
+        ponDividida(null); const mi = leeMi(); guardaMi({ div: null });
+        if (!(Number.isFinite(mi.w) && mi.w < DIVIDE)) { caja.classList.remove('con-tam', 'movida'); guardaMi({ w: null, x: null, y: null }); }
+        miImagen(); return;
+      }
+      const CW = cont.clientWidth, CH = cont.clientHeight, lado = ladoDe(vl.offsetLeft + vl.offsetWidth / 2, vl.offsetTop + vl.offsetHeight / 2, CW, CH);
+      guardaSitio(); ponDividida(lado); guardaMi({ div: lado }); colocaAsa();
+    }
     caja.addEventListener('pointerdown', (e) => {
       if (e.button > 0 || e.target.closest('button, a, input, label, .ll-ajustes')) return;
-      const p = enLienzo(e); if (!sobreMiImagen(p)) return;
-      const vl = vidLocal();
-      arrastre = { id: e.pointerId, dx: p.x - vl.offsetLeft, dy: p.y - vl.offsetTop, x0: p.x, y0: p.y, movido: false };
+      const p = enLienzo(e), enAsa = sobreAsa(p);
+      if (!enAsa && !sobreMiImagen(p)) return;
+      // doble clic o doble toque sobre tu imagen: pantalla dividida, o vuelta a la imagen pequeña
+      const ahora = Date.now(); if (!enAsa && ahora - ultimoToque < 320) { ultimoToque = 0; alternaDividida(); e.preventDefault(); return; } ultimoToque = ahora;
+      if (caja.classList.contains('dividida')) { if (!enAsa) return; sueltaDividida(); }
+      const vl = vidLocal(), cont = lienzoVid(), CW = cont.clientWidth, CH = cont.clientHeight;
+      const W = vl.offsetWidth, H = vl.offsetHeight, L = vl.offsetLeft, T = vl.offsetTop, es = esquinaAsa(vl, CW, CH);
+      arrastre = { id: e.pointerId, modo: enAsa ? 'tam' : 'mover', dx: p.x - L, dy: p.y - T, x0: p.x, y0: p.y, movido: false, asp: W / H,
+        // en el cambio de tamaño, la esquina contraria al asa no se mueve
+        ancX: es.izq ? L + W : L, ancY: es.arriba ? T + H : T, izq: es.izq, arriba: es.arriba };
       try { caja.setPointerCapture(e.pointerId); } catch (_) {}
       e.preventDefault();
     });
     caja.addEventListener('pointermove', (e) => {
       const p = enLienzo(e);
-      if (!arrastre || e.pointerId !== arrastre.id) { if (e.pointerType === 'mouse') caja.classList.toggle('mi-agarre', sobreMiImagen(p)); return; }
+      if (!arrastre || e.pointerId !== arrastre.id) { if (e.pointerType === 'mouse') { const a = sobreAsa(p); caja.classList.toggle('mi-tam', a); caja.classList.toggle('mi-agarre', !a && sobreMiImagen(p) && !caja.classList.contains('dividida')); } return; }
       if (!arrastre.movido && Math.hypot(p.x - arrastre.x0, p.y - arrastre.y0) < 4) return;
-      arrastre.movido = true; caja.classList.add('arrastrando', 'movida');
-      const vl = vidLocal(), cont = lienzoVid(), W = vl.offsetWidth, H = vl.offsetHeight, CW = cont.clientWidth, CH = cont.clientHeight;
-      const x = Math.max(MARGEN, Math.min(CW - W - MARGEN, p.x - arrastre.dx)), y = Math.max(MARGEN, Math.min(CH - H - MARGEN, p.y - arrastre.dy));
-      caja.style.setProperty('--mi-x', Math.round(x) + 'px'); caja.style.setProperty('--mi-y', Math.round(y) + 'px');
-      arrastre.x = x; arrastre.y = y; arrastre.W = W; arrastre.H = H; arrastre.CW = CW; arrastre.CH = CH;
+      arrastre.movido = true; ultimoToque = 0; caja.classList.add('arrastrando', 'movida');
+      const vl = vidLocal(), cont = lienzoVid(), CW = cont.clientWidth, CH = cont.clientHeight;
+      if (arrastre.modo === 'tam') {
+        const a = arrastre, porX = Math.abs(p.x - a.ancX), porY = Math.abs(p.y - a.ancY) * a.asp;
+        let W = limitaAncho(Math.max(porX, porY), CW, CH, vl), H = W / a.asp;
+        // que quepa entero desde la esquina fija
+        const cabeX = a.izq ? a.ancX - MARGEN : CW - MARGEN - a.ancX, cabeY = (a.arriba ? a.ancY - MARGEN : CH - MARGEN - a.ancY) * a.asp;
+        W = Math.max(Math.min(FINO.matches ? 120 : 84, CW / 3), Math.min(W, cabeX, cabeY)); H = W / a.asp;
+        caja.style.setProperty('--mi-w', Math.round(W) + 'px'); caja.classList.add('con-tam');
+        caja.style.setProperty('--mi-x', Math.round(a.izq ? a.ancX - W : a.ancX) + 'px'); caja.style.setProperty('--mi-y', Math.round(a.arriba ? a.ancY - H : a.ancY) + 'px');
+        a.W = W;
+      } else {
+        const W = vl.offsetWidth, H = vl.offsetHeight;
+        const x = Math.max(MARGEN, Math.min(CW - W - MARGEN, p.x - arrastre.dx)), y = Math.max(MARGEN, Math.min(CH - H - MARGEN, p.y - arrastre.dy));
+        caja.style.setProperty('--mi-x', Math.round(x) + 'px'); caja.style.setProperty('--mi-y', Math.round(y) + 'px');
+      }
+      colocaAsa();
     });
     const suelta = (e) => {
       if (!arrastre || e.pointerId !== arrastre.id) return;
       const a = arrastre; arrastre = null; caja.classList.remove('arrastrando');
       try { caja.releasePointerCapture(e.pointerId); } catch (_) {}
-      if (!a.movido) return;
-      const fx = (a.x - MARGEN) / Math.max(1, a.CW - a.W - 2 * MARGEN), fy = (a.y - MARGEN) / Math.max(1, a.CH - a.H - 2 * MARGEN);
-      try { localStorage.setItem(MI_IMG, JSON.stringify({ x: Math.round(fx * 1000) / 1000, y: Math.round(fy * 1000) / 1000 })); } catch (_) {}
+      if (!a.movido) { colocaAsa(); return; }
+      const vl = vidLocal(), cont = lienzoVid(), CW = cont.clientWidth, CH = cont.clientHeight;
+      // agrandada hasta casi media pantalla: queda la pantalla dividida
+      if (a.modo === 'tam' && vl.offsetWidth >= DIVIDE * CW) { const lado = ladoDe(vl.offsetLeft + vl.offsetWidth / 2, vl.offsetTop + vl.offsetHeight / 2, CW, CH); ponDividida(lado); guardaMi({ div: lado }); colocaAsa(); return; }
+      guardaSitio(); colocaAsa();
     };
     caja.addEventListener('pointerup', suelta); caja.addEventListener('pointercancel', suelta);
     addEventListener('resize', escala, { passive: true });
