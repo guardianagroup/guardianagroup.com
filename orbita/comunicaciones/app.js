@@ -508,12 +508,16 @@
         const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'texto', texto: String(j.texto || '').slice(0, 20000) };
         await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true); vigila(c, T('Mensaje recibido: superó la verificación criptográfica.'), 'ok'); pintaRadio(c);
         enviaControl(c, { tipo: 'ack', ids: [m.id] });
-        if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c); else avisaSonido();
+        const aLaVista = ACTUAL === c.id && document.visibilityState === 'visible';
+        if (aLaVista) marcaLeidos(c);
+        if (!avisaFuera(c, 'mensaje') && !aLaVista) avisaSonido(); // con el aviso del sistema, ya suena el suyo
         return;
       }
       case 'ok': return;
+      // «escribiendo…» o «grabando audio…» de la otra persona (dueño, 28 Oct 2026, 13:29)
+      case 'escribe': { if (ACTUAL === c.id && pref('escribe')) muestraEscribe(c, j.que === 'audio' ? 'audio' : j.que === 'texto' ? 'texto' : ''); return; }
       case 'ack': case 'leido': {
-        const est = j.tipo === 'ack' ? 'entregado' : 'leido';
+        const est = j.tipo === 'ack' || !pref('leido') ? 'entregado' : 'leido';
         for (const id of j.ids || []) { const m = c.mensajes.find((x) => x.id === id && x.dir === 'mia'); if (m && (est === 'leido' || m.estado === 'enviado' || m.estado === 'pendiente')) { if (!(m.estado === 'leido')) { m.estado = est; await guardaMensaje(c, m); pintaEstado(m); if (est === 'entregado' && m.tipo === 'texto') vigila(c, T('Mensaje entregado: acuse del otro equipo.'), 'ok'); } } }
         return;
       }
@@ -554,9 +558,21 @@
     if (suyo && !(ACTUAL === c.id && document.visibilityState === 'visible')) c.noLeidos = (c.noLeidos || 0) + 1;
     await guardaConv(c); pintaLista();
   }
+  // «Leído» solo cuando de verdad se ve (agencia, ronda 74, ChatGPT y Gemini): la pestaña a la vista y con el foco, sin la
+  // llamada en grande ni una hoja encima, y el mensaje dentro de la zona visible del chat. Una vez leído, no vuelve atrás.
+  const seVeElChat = () => { if (document.visibilityState !== 'visible' || !document.hasFocus() || document.querySelector('.gc-hoja.gc-abierta')) return false; const ll = $('#llamada'); return !(ll && ll.classList.contains('gc-abierta') && !ll.classList.contains('mini')); };
+  function enPantalla(id) {
+    const ul = $('#mensajes'), li = ul && ul.querySelector('[data-id="' + id + '"]'); if (!li) return false;
+    const a = ul.getBoundingClientRect(), b = li.getBoundingClientRect(), vis = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top);
+    return vis > 0 && vis >= Math.min(b.height * 0.5, 120);
+  }
+  // privacidad (agencia, ronda 74; recíproca, como Signal): sin «leído» o sin «escribiendo…», ni se envía ni se ve
+  const pref = (k) => { try { return localStorage.getItem('gcom-' + k) !== '0'; } catch (_) { return true; } };
   async function marcaLeidos(c) {
-    const ids = c.mensajes.filter((m) => m.dir === 'suya' && m.estado === 'recibido').map((m) => m.id);
-    if (ids.length && enviaControl(c, { tipo: 'leido', ids })) { for (const m of c.mensajes) if (ids.includes(m.id)) { m.estado = 'leido'; await guardaMensaje(c, m); } }
+    if (!c || ACTUAL !== c.id || !seVeElChat()) return;
+    const ids = c.mensajes.filter((m) => m.dir === 'suya' && m.estado === 'recibido' && enPantalla(m.id)).map((m) => m.id);
+    // sin «confirmaciones de lectura» se apunta aquí como leído, pero no se envía (y al reactivarlas no se mandan las antiguas)
+    if (ids.length && (!pref('leido') || enviaControl(c, { tipo: 'leido', ids }))) { for (const m of c.mensajes) if (ids.includes(m.id)) { m.estado = 'leido'; await guardaMensaje(c, m); } }
     if (c.noLeidos) { c.noLeidos = 0; await guardaConv(c); pintaLista(); }
   }
 
@@ -628,6 +644,7 @@
     if (!m.archivo.aDisco) { a.partes = new Array(trozos); a.listo = true; }
     else if (!conDisco()) { enviaControl(c, { tipo: 'archivo-cancel', id: m.id }); c.archivos.delete(m.id); m.estado = 'fallo'; m.archivo.motivo = T('Pasa de 300 MB y este navegador no puede escribirlo al disco según llega (Chrome o Edge sí).'); v.estado = 'fallo'; evento(v, m.archivo.motivo, 'mal'); }
     await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true);
+    avisaFuera(c, voz ? 'voz' : 'archivo');
     if (a.listo) { enviaControl(c, listoCarga(m.id, v)); evento(v, T('Listo para recibir: aviso enviado al remitente.')); }
     else if (m.estado !== 'fallo') { v.eligeDestino = true; evento(v, T('Elige dónde guardarlo para empezar la recepción.')); avisaSonido(); if (ACTUAL !== c.id) aviso(T('Te están mandando un archivo grande: elige dónde guardarlo.')); }
   }
@@ -923,18 +940,74 @@
 
   // ---------- llamadas ----------
   const mmss = (ms) => { const x = Math.round(ms / 1000); return String(Math.floor(x / 60)).padStart(2, '0') + ':' + String(x % 60).padStart(2, '0'); };
+  // dueño, 28 Oct 2026, 13:29 («lo que he hecho yo a un lado, lo que ha hecho él… como WhatsApp, Signal, Telegram»): cada
+  // llamada queda en el chat al lado de quien llamó (la mía a la derecha, la suya a la izquierda), con el resultado, la
+  // duración y un botón para volver a llamar. Cada equipo apunta la suya; no viaja nada más por la red.
   async function anotaLlamada(info) {
     const c = CONVS.get(ACTUAL); if (!c || !info) return;
-    const texto = info.por === 'fin' ? (info.video ? T('Videollamada') : T('Llamada de voz')) + ' · ' + mmss(info.duracion) + (info.voz ? ' · ' + T('con cambio de voz') : '') : info.por === 'ocupado' ? T('Comunicando') : info.por === 'fallo' ? T('Llamada interrumpida') : info.por === 'sin-medios' ? T('Llamada sin micrófono') : T('Llamada no contestada');
-    const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'sistema', estado: 'ok', tipo: 'llamada', texto, llamada: { por: info.por, duracion: info.duracion || 0 } };
+    const l = { por: info.por, duracion: info.duracion || 0, video: !!info.video, voz: !!info.voz, yoColgue: !!info.yoColgue };
+    const m = { id: uuid(), conv: c.id, t: Date.now(), dir: info.mia ? 'mia' : 'suya', estado: 'ok', tipo: 'llamada', texto: resumenLlamada({ dir: info.mia ? 'mia' : 'suya', llamada: l }).titulo, llamada: l };
     await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m);
+    if (m.dir === 'suya' && l.por !== 'fin' && !l.yoColgue) avisaFuera(c, 'perdida', l.video);
   }
+  // 72 s → «01:12»; más de una hora → «1:02:05»
+  const duracionLlamada = (ms) => { const x = Math.round((ms || 0) / 1000); if (x < 3600) return mmss(x * 1000); return Math.floor(x / 3600) + ':' + mmss((x % 3600) * 1000); };
+  function resumenLlamada(m) {
+    const l = m.llamada || {}, mia = m.dir === 'mia', v = !!l.video;
+    let titulo, sub = '', clase = '';
+    if (l.por === 'fin') { titulo = mia ? (v ? T('Videollamada saliente') : T('Llamada saliente')) : (v ? T('Videollamada entrante') : T('Llamada entrante')); sub = duracionLlamada(l.duracion) + (l.voz ? ' · ' + T('con cambio de voz') : ''); clase = 'hecha'; }
+    else if (l.por === 'ocupado') { titulo = T('Comunicando'); sub = T('Estaba en otra llamada'); clase = 'aviso'; }
+    else if (l.por === 'fallo') { titulo = v ? T('Videollamada interrumpida') : T('Llamada interrumpida'); sub = l.duracion ? duracionLlamada(l.duracion) : T('No se pudo conectar'); clase = 'aviso'; }
+    else if (l.por === 'sin-medios') { titulo = v ? T('Videollamada sin cámara') : T('Llamada sin micrófono'); sub = T('Falta el permiso del navegador'); clase = 'aviso'; }
+    else if (mia) { titulo = l.yoColgue ? (v ? T('Videollamada cancelada') : T('Llamada cancelada')) : (v ? T('Videollamada sin respuesta') : T('Llamada sin respuesta')); clase = 'gris'; }
+    else if (l.yoColgue) { titulo = v ? T('Videollamada rechazada') : T('Llamada rechazada'); clase = 'rechazada'; }
+    else { titulo = v ? T('Videollamada perdida') : T('Llamada perdida'); sub = T('Toca el botón para devolverla'); clase = 'perdida'; }
+    return { titulo, sub, clase };
+  }
+  const ICO_TEL = '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>';
+  const ICO_VID = '<rect x="2.5" y="6.5" width="13" height="11" rx="2.5"/><path d="M15.5 10.5l6-3.5v10l-6-3.5z"/>';
+  function burbujaLlamada(m) {
+    const l = m.llamada || {}, v = !!l.video, r = resumenLlamada(m);
+    const bur = document.createElement('div'); bur.className = 'gc-burbuja gc-llam ' + (m.dir === 'mia' ? 'gc-mia' : 'gc-suya') + (r.clase ? ' ' + r.clase : '');
+    const ic = document.createElement('span'); ic.className = 'gc-llam-ico'; ic.setAttribute('aria-hidden', 'true');
+    ic.innerHTML = '<svg viewBox="0 0 24 24">' + (v ? ICO_VID : ICO_TEL) + '</svg><svg class="flecha" viewBox="0 0 12 12">' + (m.dir === 'mia' ? '<path d="M3 9l6-6M4.5 3H9v4.5"/>' : '<path d="M9 3L3 9M7.5 9H3V4.5"/>') + '</svg>';
+    const tx = document.createElement('span'); tx.className = 'gc-llam-txt';
+    const b = document.createElement('b'); b.textContent = r.titulo; tx.append(b);
+    if (r.sub) { const s = document.createElement('small'); s.textContent = r.sub; tx.append(s); }
+    const otra = document.createElement('button'); otra.type = 'button'; otra.className = 'gc-llam-otra';
+    const et = v ? T('Volver a hacer una videollamada') : T('Volver a llamar'); otra.setAttribute('aria-label', et); otra.title = et;
+    otra.innerHTML = '<svg viewBox="0 0 24 24">' + (v ? ICO_VID : ICO_TEL) + '</svg>';
+    otra.addEventListener('click', () => { const bt = $(v ? '#videollamar' : '#llamar'); if (bt && !bt.hidden) bt.click(); });
+    const meta = document.createElement('span'); meta.className = 'gc-meta'; const tm = document.createElement('time'); tm.textContent = hora(m.t); meta.append(tm);
+    bur.append(ic, tx, otra, meta);
+    return bur;
+  }
+  // ---------- el servidor de llamadas más cercano (dueño, 28 Oct 2026, 14:17: «que las llamadas sean todas buenas,
+  // independientemente de si la persona está en Sudamérica, en Europa, en América») ----------
+  // Las conversaciones siguen en el relé principal (Núremberg). El audio y el vídeo de cada persona pasan por el servidor de
+  // llamadas que tiene más cerca: Miami para América, Núremberg para Europa (la otra persona elige el suyo desde su lado; los
+  // dos servidores se pasan la llamada entre ellos). Se mide al abrir la página y cada hora; si Miami no responde, no tiene
+  // llamadas o no está claramente más cerca, todo sigue por Núremberg, como hasta ahora.
+  let iceAm = null;
+  async function eligeServidorLlamadas() {
+    try {
+      if (LOCAL || !window.GuardianaRele || !GuardianaRele.iceDe || GuardianaRele.PROPIO) return;
+      const am = (GuardianaRele.MOTORES || [])[1]; if (!am) return;
+      const r = await GuardianaRele.iceDe(am, 6000);
+      iceAm = r && r.ms > 0 ? r : null;
+    } catch (_) { iceAm = null; }
+  }
+  const iceCercano = () => {
+    const prin = R ? R.latencia : null;
+    if (iceAm && iceAm.caduca * 1000 > Date.now() + 120000 && prin != null && iceAm.ms + 25 < prin) return iceAm.ice;
+    return R ? R.ice : [];
+  };
   const puedeLlamar = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
   function arrancaLlamadas() {
     if (!window.GuardianaLlamada || !window.RTCPeerConnection) { for (const id of ['#llamar', '#videollamar']) { const b = $(id); if (b) b.hidden = true; } return; }
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
     LL = GuardianaLlamada.crea({
-      ice: () => R.ice, puede: puedeLlamar, t: T, aviso, suena: avisaSonido, fin: anotaLlamada,
+      ice: iceCercano, puede: puedeLlamar, t: T, aviso, suena: avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
       blindada: () => { const c = CONVS.get(ACTUAL); return !!(c && esB(c)); }, // las opciones de imagen, solo en la sesión blindada
       manda: (m) => { const c = CONVS.get(ACTUAL); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
       nombre: () => { const c = CONVS.get(ACTUAL); return (c && c.nombre) || ''; }, // sin nombre, la llamada pone «Llamada encriptada» o «Videollamada encriptada»
@@ -1023,7 +1096,7 @@
     const c = CONVS.get(id); if (!c) return;
     ACTUAL = id; await cargaMensajes(c);
     const inv = c.estado === 'invitacion' && c.rol === 'invita' && !c.huella;
-    $('#inicio').hidden = !inv; $('#conv').hidden = inv; $('#app').classList.toggle('en-conv', !inv);
+    $('#inicio').hidden = !inv; $('#conv').hidden = inv; $('#app').classList.toggle('en-conv', !inv); document.body.classList.toggle('en-conv', !inv);
     if (inv) { $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = true; $('#paso-codigo').hidden = esB(c); $('#paso-enlace').hidden = !esB(c); }
     pintaCabecera(c); pintaTodos(c); pintaRadio(c); pintaLista();
     if (c.estado === 'invitacion' && c.rol === 'invita') { if (esB(c)) muestraEnlace(c); else { muestraInvitacion(c); if (!c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); } }
@@ -1031,11 +1104,13 @@
     marcaLeidos(c);
     if (matchMedia('(min-width: 761px)').matches) $('#texto').focus();
   }
-  function cierraConv() { ACTUAL = null; if (window.pintaBarra) pintaBarra(); $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; $('#paso-enlace').hidden = true; }
+  function cierraConv() { ACTUAL = null; if (window.pintaBarra) pintaBarra(); $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); document.body.classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; $('#paso-enlace').hidden = true; }
   function pintaCabecera(c) {
     if (window.pintaBarra) pintaBarra();
     if (ACTUAL !== c.id) return;
-    $('#cnombre').textContent = esB(c) ? T('Sesión blindada') : T('Conversación encriptada');
+    // en el móvil, el nombre y la línea de confianza, cortos y en una fila (agencia, ronda 74: antes «Convers…» y tres líneas)
+    const movil = matchMedia('(max-width: 760px)').matches;
+    $('#cnombre').textContent = esB(c) ? T('Sesión blindada') : movil ? T('Conversación') : T('Conversación encriptada');
     const conf = $('#cconfianza'); conf.classList.remove('gc-sin-verificar');
     let txt;
     if (c.ocupada && !c.huella) txt = T('Esta invitación ya la usó otra persona.');
@@ -1043,8 +1118,8 @@
     else if (!R.abierto) txt = T('Sin conexión con el relé');
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
     else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo la encriptación…');
-    else if (esB(c)) txt = T('Algoritmos de la suite CNSA 2.0') + ' · ' + T('postcuántica') + ' · ' + (c.verificada && c.suVerificada ? T('verificada por los dos') : T('pendiente de la verificación mutua'));
-    else txt = T('Encriptada de extremo a extremo') + ' · ' + (c.sesion.pq ? T('postcuántica') + ' · ' : T('sin protección postcuántica') + ' · ') + (c.verificada ? T('verificada') : T('sin verificar'));
+    else if (esB(c)) txt = (movil ? T('Postcuántica') : T('Algoritmos de la suite CNSA 2.0') + ' · ' + T('postcuántica')) + ' · ' + (c.verificada && c.suVerificada ? T('verificada por los dos') : movil ? T('pendiente de verificar') : T('pendiente de la verificación mutua'));
+    else txt = (movil ? T('Encriptada') : T('Encriptada de extremo a extremo')) + ' · ' + (c.sesion.pq ? T('postcuántica') + ' · ' : T('sin protección postcuántica') + ' · ') + (c.verificada ? T('verificada') : T('sin verificar'));
     const pqa = $('#cpq');
     if (pqa) {
       pqa.hidden = !c.clasicaPendiente;
@@ -1053,7 +1128,7 @@
     }
     if (c.huella && !(c.verificada && (!esB(c) || c.suVerificada))) conf.classList.add('gc-sin-verificar');
     conf.textContent = txt;
-    pintaPuerta(c);
+    pintaPuerta(c); pintaAvisos(c);
     const ll = $('#llamar'); if (ll) { const si = puedeLlamar() && (R.llamadas || LOCAL); ll.classList.toggle('apagado', !si); ll.title = si ? T('Llamada de voz') : esB(c) && !(c.verificada && c.suVerificada) ? T('Las llamadas se activan cuando los dos hayan comprobado el número de seguridad.') : !R.llamadas && !LOCAL ? T('El servicio de llamadas no está disponible ahora mismo.') : T('La otra persona tiene que estar conectada.'); }
     const vl = $('#videollamar'); if (vl && ll) { vl.classList.toggle('apagado', ll.classList.contains('apagado')); vl.title = ll.classList.contains('apagado') ? ll.title : T('Videollamada'); }
   }
@@ -1114,11 +1189,15 @@
     let li = ul.querySelector('[data-id="' + m.id + '"]');
     if (li && !reemplaza) return;
     if (!li) {
+      // el «escribiendo…» va siempre el último: se aparta mientras entra el mensaje y vuelve detrás; si el mensaje es suyo, se quita
+      const esc = ul.querySelector('li.gc-escribiendo'); if (esc) esc.remove();
       if (ul.dataset.dia !== diaDe(m.t)) { ul.dataset.dia = diaDe(m.t); const f = document.createElement('li'); f.className = 'gc-fecha'; f.textContent = fecha(m.t); ul.append(f); }
       li = document.createElement('li'); li.dataset.id = m.id; ul.append(li);
-      const prev = li.previousElementSibling; if (prev && prev.dataset.dir === m.dir && m.dir !== 'sistema' && m.t - (+prev.dataset.t || 0) < 120000) li.classList.add('gc-sigue');
+      if (esc) { if (m.dir === 'suya') clearTimeout(escribeT); else ul.append(esc); }
+      const prev = li.previousElementSibling; if (prev && prev.dataset.dir === m.dir && m.dir !== 'sistema' && m.tipo !== 'llamada' && !prev.classList.contains('gc-llam-li') && m.t - (+prev.dataset.t || 0) < 300000) li.classList.add('gc-sigue');
     }
     li.dataset.dir = m.dir; li.dataset.t = m.t; li.textContent = '';
+    if (m.tipo === 'llamada' && m.dir !== 'sistema') { li.className = 'gc-llam-li'; li.append(burbujaLlamada(m)); if (!sinScroll && (abajo || m.dir === 'mia')) ul.scrollTop = ul.scrollHeight; return; }
     if (m.tipo === 'llamada') { li.className = 'gc-centro'; const l = document.createElement('span'); l.className = 'gc-linea-llamada'; l.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>'; l.append(document.createTextNode(m.texto)); li.append(l); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
     if (m.tipo === 'recibo') { li.className = 'gc-centro'; const d = document.createElement('div'); d.className = 'recibo'; const partes = String(m.texto).split(' · '); const h = document.createElement('b'); h.textContent = '✓ ' + partes[0]; d.append(h); for (const x of partes.slice(1)) { const sp = document.createElement('span'); sp.textContent = x; d.append(sp); } li.append(d); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
     if (m.tipo === 'custodia') { li.className = 'gc-centro'; li.append(tarjetaCustodia(m)); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
@@ -1135,12 +1214,17 @@
   function pintaEstado(m) {
     const li = $('#mensajes [data-id="' + m.id + '"]'); if (!li) return;
     const tk = li.querySelector('.gc-ticks'); if (!tk) return;
+    // reloj = pendiente · ✓ gris = enviado · ✓✓ gris = entregado · ✓✓ verde = leído (dueño, 28 Oct 2026, 13:30: «cuando él lo
+    // abra quiero que los tics se pongan en azul o en verde, para que yo sepa que él lo ha leído»; antes, el azul acero de
+    // leído casi no se distinguía del gris sobre la burbuja azulada)
     tk.classList.toggle('gc-pendiente', m.estado === 'pendiente');
+    tk.classList.toggle('gc-leido', m.estado === 'leido');
+    tk.classList.toggle('gc-fallo', m.estado === 'fallo');
     tk.innerHTML = m.estado === 'pendiente' ? RELOJ : m.estado === 'enviado' ? TICK1 : m.estado === 'fallo' ? '' : TICK2;
-    tk.style.color = m.estado === 'leido' ? 'var(--gc-acero)' : 'var(--gc-suave)';
-    tk.style.opacity = '1';
+    tk.style.color = ''; tk.style.opacity = '';
     tk.title = m.estado === 'pendiente' ? T('Pendiente: saldrá cuando la otra persona entre') : m.estado === 'enviado' ? T('Enviado') : m.estado === 'entregado' ? T('Entregado') : m.estado === 'leido' ? T('Leído') : m.estado === 'fallo' ? T('No se pudo enviar') : '';
-    if (m.estado === 'fallo') { tk.textContent = '!'; tk.style.color = 'var(--alerta)'; }
+    tk.setAttribute('aria-label', tk.title);
+    if (m.estado === 'fallo') tk.textContent = '!';
   }
   function pintaProgreso(m) { const li = $('#mensajes [data-id="' + m.id + '"]'); if (!li) return; if (!li.querySelector('.gc-progreso')) { const c = CONVS.get(m.conv); if (c) pintaMensaje(c, m, true); return; } const i = li.querySelector('.gc-progreso i'); if (i) i.style.width = Math.round((m.archivo.progreso || 0) * 100) + '%'; const s = li.querySelector('.gc-archivo small'); if (s) s.textContent = tamano(m.archivo.tam) + (m.archivo.progreso < 1 ? ' · ' + Math.round(m.archivo.progreso * 100) + ' %' : ''); }
   const tamano = (n) => n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(0) + ' KB' : (n / 1048576).toFixed(1) + ' MB';
@@ -1193,7 +1277,7 @@
 
   // ---------- hojas ----------
   const abreHoja = (id) => { $('#' + id).classList.add('gc-abierta'); };
-  const cierraHoja = (id) => { $('#' + id).classList.remove('gc-abierta'); };
+  const cierraHoja = (id) => { $('#' + id).classList.remove('gc-abierta'); const c = CONVS.get(ACTUAL); if (c) setTimeout(() => marcaLeidos(c), 60); };
   function pintaCodigo(c) {
     const e = $('#codigo'); e.textContent = codigoBonito(c.codigo); e.className = 'codigo' + (c.codigoUsado ? ' usado' : (c.codigo && Date.now() > c.codigoCaduca ? ' caducado' : ''));
     const caducado = c.codigo && Date.now() > c.codigoCaduca;
@@ -1231,12 +1315,133 @@
   let ctxAudio = null;
   function avisaSonido() {
     try { ctxAudio = ctxAudio || new (window.AudioContext || window.webkitAudioContext)(); const o = ctxAudio.createOscillator(), g = ctxAudio.createGain(); o.type = 'sine'; o.frequency.value = 880; g.gain.value = 0.0001; o.connect(g).connect(ctxAudio.destination); const t = ctxAudio.currentTime; g.gain.exponentialRampToValueAtTime(0.08, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.35); o.start(t); o.stop(t + 0.4); } catch (_) {}
-    if (document.title[0] !== '●') document.title = '● ' + document.title;
   }
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { document.title = document.title.replace(/^● /, ''); const c = CONVS.get(ACTUAL); if (c) marcaLeidos(c); } });
+
+  // ---------- con GUARDIANA minimizada (dueño, 28 Oct 2026, 13:34: «que en la pantalla minimizada aparezca algún salto…
+  // una especie de notificación») ----------
+  // Sin servidor de avisos: lo hace esta misma página mientras está abierta. Lo nuevo se cuenta en el título de la pestaña
+  // («(2) Comunicaciones · GUARDIANA») con un punto en el icono; con el permiso del navegador, además, el aviso del sistema,
+  // que nunca lleva el texto del mensaje ni el nombre. Al volver a la página, todo se borra.
+  const TITULO = document.title;
+  let nuevos = 0, avisoSis = null, avisoLlam = null, iconoOriginal = null, iconoPunto = null;
+  const fuera = () => document.visibilityState !== 'visible' || !document.hasFocus();
+  const avisosSistema = () => { try { return 'Notification' in window && !/Android|iPhone|iPad|iPod/i.test(navigator.userAgent); } catch (_) { return false; } };
+  const permisoAvisos = () => { try { return avisosSistema() ? Notification.permission : 'no'; } catch (_) { return 'no'; } };
+  function iconoConPunto() {
+    if (iconoPunto) return Promise.resolve(iconoPunto);
+    return new Promise((res) => {
+      const im = new Image();
+      im.onload = () => { try { const cv = document.createElement('canvas'); cv.width = cv.height = 64; const x = cv.getContext('2d'); x.drawImage(im, 0, 0, 64, 64); x.beginPath(); x.arc(49, 15, 14, 0, 2 * Math.PI); x.fillStyle = '#06080C'; x.fill(); x.beginPath(); x.arc(49, 15, 11, 0, 2 * Math.PI); x.fillStyle = '#E07A6C'; x.fill(); iconoPunto = cv.toDataURL('image/png'); res(iconoPunto); } catch (_) { res(null); } };
+      im.onerror = () => res(null); im.src = '/icon-192.png';
+    });
+  }
+  let parpadeo = null, fase = false;
+  function pintaTitulo(llamada) {
+    clearInterval(parpadeo); parpadeo = null;
+    const base = llamada ? llamada + ' · ' + TITULO : (nuevos ? '(' + nuevos + ') ' : '') + TITULO;
+    document.title = base;
+    // el título alterna para que la pestaña y el botón de la barra de tareas «salten» (Gemini, ronda 74)
+    if ((nuevos || llamada) && fuera()) { const alt = llamada ? '📞 ' + llamada : '💬 ' + (nuevos === 1 ? T('Mensaje nuevo') : T('{n} mensajes nuevos').replace('{n}', nuevos)); parpadeo = setInterval(() => { fase = !fase; document.title = fase ? alt : base; }, llamada ? 700 : 1000); }
+    try { if (navigator.setAppBadge) { if (nuevos) navigator.setAppBadge(nuevos).catch(() => {}); else navigator.clearAppBadge().catch(() => {}); } } catch (_) {}
+    const l = document.querySelector('link[rel="icon"]'); if (!l) return;
+    if (iconoOriginal === null) iconoOriginal = l.getAttribute('href');
+    if (!nuevos && !llamada) { if (l.getAttribute('href') !== iconoOriginal) l.setAttribute('href', iconoOriginal); return; }
+    iconoConPunto().then((u) => { if (u && (nuevos || llamada)) l.setAttribute('href', u); });
+  }
+  // devuelve true si ha salido el aviso del sistema (entonces no hace falta el pitido de la página)
+  function avisaFuera(c, que, video) {
+    if (!fuera()) return false;
+    nuevos++; pintaTitulo();
+    if (permisoAvisos() !== 'granted') return false;
+    try {
+      if (avisoSis) avisoSis.close();
+      const cuerpo = que === 'perdida' ? (video ? T('Videollamada perdida.') : T('Llamada perdida.')) : nuevos === 1 ? T('Tienes un mensaje nuevo.') : T('Tienes {n} mensajes nuevos.').replace('{n}', nuevos);
+      const n = new Notification('GUARDIANA', { body: cuerpo, tag: 'gcom-nuevo', icon: '/icon-192.png', renotify: true });
+      n.onclick = () => { try { window.focus(); } catch (_) {} n.close(); };
+      avisoSis = n; return true;
+    } catch (_) { return false; }
+  }
+  // la llamada que entra con la página minimizada: aviso que se queda hasta contestar o colgar, y el título lo dice
+  let tituloLlamada = false;
+  function avisaLlamada(est, video) {
+    if (est === 'entrante') {
+      if (!fuera()) return;
+      const tit = video ? T('Videollamada entrante') : T('Llamada entrante');
+      tituloLlamada = true; pintaTitulo(tit);
+      if (!avisoLlam && permisoAvisos() === 'granted') { try { const n = new Notification(tit, { body: T('GUARDIANA · Toca para contestar.'), tag: 'gcom-llamada', icon: '/icon-192.png', requireInteraction: true }); n.onclick = () => { try { window.focus(); } catch (_) {} n.close(); }; avisoLlam = n; } catch (_) {} }
+      return;
+    }
+    if (avisoLlam) { try { avisoLlam.close(); } catch (_) {} avisoLlam = null; }
+    if (tituloLlamada) { tituloLlamada = false; pintaTitulo(); }
+  }
+  function vuelve() { if (fuera()) return; if (nuevos || parpadeo) { nuevos = 0; pintaTitulo(); } if (avisoSis) { try { avisoSis.close(); } catch (_) {} avisoSis = null; } const c = CONVS.get(ACTUAL); if (c) marcaLeidos(c); }
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { const c = CONVS.get(ACTUAL); if (c) marcaLeidos(c); } vuelve(); });
+  addEventListener('focus', vuelve);
+  // la tira para pedir el permiso: solo en el ordenador, con la conversación ya establecida, y una sola vez
+  function pintaAvisos(c) {
+    const b = $('#cavisos'); if (!b) return;
+    let no = false; try { no = localStorage.getItem('gcom-avisos') === 'no'; } catch (_) {}
+    b.hidden = !(permisoAvisos() === 'default' && !no && c && ACTUAL === c.id && enLinea(c) && c.sesion.confirmada);
+  }
+
+  // ---------- «escribiendo…» de la otra persona (dueño, 28 Oct 2026, 13:29) ----------
+  // Una burbuja suya con tres puntos al final del chat (o «Grabando audio…»); se va al llegar su mensaje, con su aviso de
+  // que ha borrado el texto o, si deja de llegar, a los 7 segundos.
+  let escribeT = null;
+  function muestraEscribe(c, que) {
+    const ul = $('#mensajes'); if (!ul) return;
+    let li = ul.querySelector('li.gc-escribiendo');
+    clearTimeout(escribeT);
+    if (!que || ACTUAL !== c.id) { if (li) li.remove(); return; }
+    const abajo = ul.scrollHeight - ul.scrollTop - ul.clientHeight < 80;
+    if (!li || li.dataset.que !== que) {
+      if (!li) { li = document.createElement('li'); li.className = 'gc-escribiendo'; }
+      li.dataset.que = que; li.textContent = '';
+      const bur = document.createElement('div'); bur.className = 'gc-burbuja gc-suya'; bur.setAttribute('role', 'status');
+      if (que === 'audio') { bur.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>'; const s = document.createElement('small'); s.textContent = T('Grabando audio…'); bur.append(s); }
+      else { const p = document.createElement('span'); p.className = 'gc-puntos'; p.setAttribute('aria-hidden', 'true'); p.innerHTML = '<i></i><i></i><i></i>'; bur.setAttribute('aria-label', T('Escribiendo…')); bur.append(p); }
+      li.append(bur);
+    }
+    if (li.parentNode !== ul || li !== ul.lastElementChild) ul.append(li);
+    if (abajo) ul.scrollTop = ul.scrollHeight;
+    escribeT = setTimeout(() => { const x = ul.querySelector('li.gc-escribiendo'); if (x) x.remove(); }, 6000);
+  }
 
   // ---------- eventos ----------
   function eventos() {
+    // menú «⋯» de la cabecera en el móvil (agencia, ronda 74): seguridad, modo discreto, avisos y terminar
+    const menu = $('#cmenu'), mas = $('#cmas');
+    const cierraMenu = () => { if (menu.hidden) return; menu.hidden = true; mas.setAttribute('aria-expanded', 'false'); };
+    const pideAvisos = async () => { try { const r = await Notification.requestPermission(); if (r === 'granted') aviso(T('Listo: te avisaremos aunque GUARDIANA esté minimizada.')); } catch (_) {} pintaAvisos(CONVS.get(ACTUAL)); };
+    mas.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!menu.hidden) return cierraMenu();
+      $('#cm-discreto').setAttribute('aria-checked', String($('#discreto').getAttribute('aria-pressed') === 'true'));
+      $('#cm-avisos').hidden = permisoAvisos() !== 'default';
+      menu.hidden = false; mas.setAttribute('aria-expanded', 'true');
+      const p = menu.querySelector('button:not([hidden])'); if (p) p.focus({ preventScroll: true });
+    });
+    let dentroMenu = false; // el clic que el menú reenvía a «Modo discreto» no lo cierra: se ve el interruptor cambiar
+    document.addEventListener('click', (e) => { if (!dentroMenu && !menu.hidden && !menu.contains(e.target) && !mas.contains(e.target)) cierraMenu(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { cierraMenu(); mas.focus(); } });
+    $('#cm-seguridad').addEventListener('click', () => { cierraMenu(); $('#escudo').click(); });
+    $('#cm-discreto').addEventListener('click', () => { dentroMenu = true; try { $('#discreto').click(); } finally { dentroMenu = false; } $('#cm-discreto').setAttribute('aria-checked', String($('#discreto').getAttribute('aria-pressed') === 'true')); });
+    $('#cm-avisos').addEventListener('click', () => { cierraMenu(); pideAvisos(); });
+    $('#cm-terminar').addEventListener('click', () => { cierraMenu(); $('#terminar').click(); });
+    // tocar el nombre o el candado abre la seguridad de la conversación, como en las aplicaciones de mensajería
+    for (const el of [document.querySelector('.conv .gc-quien'), document.querySelector('.conv .gc-avatar')]) if (el) el.addEventListener('click', () => $('#escudo').click());
+    $('#cavisos-si').addEventListener('click', pideAvisos);
+    for (const [id, k] of [['#pref-leido', 'leido'], ['#pref-escribe', 'escribe']]) {
+      const x = $(id); if (!x) continue;
+      x.checked = pref(k);
+      x.addEventListener('change', () => { try { localStorage.setItem('gcom-' + k, x.checked ? '1' : '0'); } catch (_) {} const c = CONVS.get(ACTUAL); if (k === 'escribe' && !x.checked && c) muestraEscribe(c, ''); });
+    }
+    $('#cavisos-no').addEventListener('click', () => { try { localStorage.setItem('gcom-avisos', 'no'); } catch (_) {} pintaAvisos(CONVS.get(ACTUAL)); });
+    // «leído» al desplazarse hasta el mensaje y al pasar la llamada a pequeño o terminarla
+    let leidoT = null; $('#mensajes').addEventListener('scroll', () => { clearTimeout(leidoT); leidoT = setTimeout(() => { const c = CONVS.get(ACTUAL); if (c) marcaLeidos(c); }, 250); }, { passive: true });
+    try { new MutationObserver(() => { const c = CONVS.get(ACTUAL); if (c) setTimeout(() => marcaLeidos(c), 80); }).observe($('#llamada'), { attributes: true, attributeFilter: ['class'] }); } catch (_) {}
+    // al girar el teléfono o cambiar el tamaño, la cabecera elige su versión corta o larga
+    try { matchMedia('(max-width: 760px)').addEventListener('change', () => { const c = CONVS.get(ACTUAL); if (c) pintaCabecera(c); }); } catch (_) {}
     $('#nueva').addEventListener('click', creaInvitacion);
     // «Crear invitación» al final del bloque para profesionales: sube al principio y hace lo mismo que el botón grande.
     const proEmpezar = $('#pro-empezar');
@@ -1251,8 +1456,9 @@
       enCola(c, () => derivaSesion(c, p.suEf, p.efMia, null, true));
     });
     // dueño, 10:53: «todas las páginas tienen que tener un botón de volver a donde estás»: a NÚCLEO si se vino desde NÚCLEO,
-    // si no, al inicio (la portada)
-    try { const v = sessionStorage.getItem('guardiana-vuelta') === 'nucleo', a = $('#volver'); if (a) { a.href = v ? '/orbita/?nucleo=pide' : '/orbita/'; const sp = a.querySelector('span'); if (sp) sp.textContent = v ? 'Regresar a NÚCLEO' : 'Inicio'; a.setAttribute('aria-label', v ? 'Regresar a NÚCLEO' : 'Volver al inicio'); } } catch (_) {}
+    // si no, al inicio (la portada). Dueño, 28 Oct 2026, 13:35: «Regresar a NÚCLEO» era demasiado grande: «Atrás», como en las
+    // demás webs (el lector de pantalla sigue diciendo adónde lleva)
+    try { const v = sessionStorage.getItem('guardiana-vuelta') === 'nucleo', a = $('#volver'); if (a) { a.href = v ? '/orbita/?nucleo=pide' : '/orbita/'; const sp = a.querySelector('span'); if (sp) sp.textContent = v ? T('Atrás') : T('Inicio'); a.setAttribute('aria-label', v ? T('Volver a NÚCLEO') : T('Volver al inicio')); } } catch (_) {}
     // dueño, 10:20: arriba, la red neuronal de NÚCLEO (la misma firma que la portada)
     try { const l = $('.inicio .red-nucleo'); if (l && window.RedNucleo) window.RedNucleo(l, { nace: false }); } catch (_) {}
     // dueño, 10:10: la explicación, en un desplegable bajo los dos botones
@@ -1292,6 +1498,20 @@
     const ta = $('#texto');
     const ajusta = () => { ta.style.height = 'auto'; ta.style.height = Math.min(120, ta.scrollHeight) + 'px'; document.querySelector('.gc-compositor').classList.toggle('con-texto', !!ta.value.trim()); };
     ta.addEventListener('input', ajusta);
+    // «escribiendo…» (dueño, 28 Oct 2026, 13:29: «que salgan los puntitos esos como que se está escribiendo»): mientras se escribe
+    // o se graba una nota de voz, un aviso como mucho cada 3 s, dentro del canal encriptado; al borrar el texto o al enviar, se
+    // retira. En la sesión blindada, solo con la verificación mutua hecha, como el resto del contenido.
+    let escribeUlt = 0, escribeQue = '';
+    const avisaEscribe = (que) => {
+      const c = CONVS.get(ACTUAL); if (!c || !enLinea(c) || !c.sesion.confirmada || !puedeEnviar(c)) return;
+      if (!pref('escribe')) { escribeQue = ''; return; }
+      const ahora = Date.now();
+      if (que === 'no') { if (escribeQue && ahora - escribeUlt < 8000) enviaControl(c, { tipo: 'escribe', que: 'no' }); escribeQue = ''; escribeUlt = 0; return; }
+      if (que === escribeQue && ahora - escribeUlt < 3000) return;
+      escribeQue = que; escribeUlt = ahora; enviaControl(c, { tipo: 'escribe', que });
+    };
+    let escribeParaT = null;
+    ta.addEventListener('input', () => { if (grab) return; clearTimeout(escribeParaT); const hay = !!ta.value.trim(); avisaEscribe(hay ? 'texto' : 'no'); if (hay) escribeParaT = setTimeout(() => { if (!grab) avisaEscribe('no'); }, 3500); });
     // mientras se graba una nota de voz, «Enviar» la termina y la envía, igual que el botón del micrófono (dueño, 28 Oct 2026:
     // «después de grabar, el botón de enviar no me dejaba»)
     const envia = async () => { if (grab) { paraGrabacion(true); return; } const c = CONVS.get(ACTUAL); const t = ta.value.replace(/\s+$/, ''); if (!c || !t) return; ta.value = ''; ajusta(); ta.dispatchEvent(new Event('input')); await enviaTexto(c, t); ta.focus(); };
@@ -1339,6 +1559,7 @@
       if (!grab) return; const g = grab; grab = null; clearInterval(g.reloj);
       g.enviar = enviar; try { g.rec.stop(); } catch (_) {} setTimeout(() => g.stream.getTracks().forEach((x) => x.stop()), 300);
       compositor.classList.remove('grabando-ya'); $('#grabando').hidden = true; $('#grabar').setAttribute('aria-pressed', 'false');
+      avisaEscribe(ta.value.trim() ? 'texto' : 'no');
     };
     $('#grabar').addEventListener('click', async () => {
       const c = CONVS.get(ACTUAL); if (!c) return;
@@ -1353,7 +1574,8 @@
       const este = { rec, stream, enviar: false, reloj: null };
       grab = este; rec.start(250);
       compositor.classList.add('grabando-ya'); $('#grabando').hidden = false; $('#grabar').setAttribute('aria-pressed', 'true');
-      este.reloj = setInterval(() => { const s = Math.floor((Date.now() - t0) / 1000); $('#grabando-t').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); if (s >= 600) paraGrabacion(true); }, 250);
+      este.reloj = setInterval(() => { const s = Math.floor((Date.now() - t0) / 1000); $('#grabando-t').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); avisaEscribe('audio'); if (s >= 600) paraGrabacion(true); }, 250);
+      avisaEscribe('audio');
     });
     $('#grabar-cancelar').addEventListener('click', () => paraGrabacion(false));
     // Revisar antes de enviar (dueño, 28 Oct 2026: «la quiero ver en pantalla y darle yo al OK»): lo que se elige, se pega o
@@ -1424,6 +1646,26 @@
     setInterval(() => { for (const c of CONVS.values()) { if (!esB(c) || c.renovando || !c.sesion || !c.sesion.confirmada || !enLinea(c) || !soyInicio(c) || Date.now() - c.sesion.desde < renuevaMs()) continue; c.renovando = true; enCola(c, () => presentaB(c, null, true)).finally(() => setTimeout(() => { c.renovando = false; }, 20000)); } }, 15000);
   }
 
+  // ---------- navegadores de dentro de otras apps (agencia, ronda 74) ----------
+  // Quien llega desde un anuncio de Instagram, Facebook o TikTok abre la web dentro de esa app, donde la cámara, el micrófono
+  // y las descargas pueden fallar. Se avisa una vez por visita, sin bloquear: copiar el enlace, cómo abrirlo fuera y seguir aquí.
+  function avisoInterno() {
+    const ua = navigator.userAgent || '', b = $('#interno');
+    if (!b || !/Instagram|FBAN|FBAV|FB_IAB|FBIOS|TikTok|BytedanceWebview|musical_ly|Snapchat|Pinterest|LinkedInApp|\bLine\//i.test(ua)) return;
+    try { if (sessionStorage.getItem('gcom-interno') === 'no') return; } catch (_) {}
+    const android = /Android/i.test(ua);
+    $('#interno-chrome').hidden = !android;
+    $('#interno-como').textContent = android ? T('O abre el menú ⋮ de la aplicación y elige «Abrir en el navegador».') : T('Toca ⋯ (arriba a la derecha) y elige «Abrir en el navegador» o «Abrir en Safari».');
+    b.hidden = false;
+    const enlace = location.origin + '/orbita/comunicaciones/';
+    $('#interno-copiar').addEventListener('click', async () => {
+      let ok = false; try { await navigator.clipboard.writeText(enlace); ok = true; } catch (_) {}
+      if (!ok) { try { const x = document.createElement('textarea'); x.value = enlace; x.setAttribute('readonly', ''); x.style.position = 'fixed'; x.style.opacity = '0'; document.body.append(x); x.select(); ok = document.execCommand('copy'); x.remove(); } catch (_) {} }
+      aviso(ok ? T('Enlace copiado: pégalo en Safari o en Chrome.') : enlace);
+    });
+    $('#interno-no').addEventListener('click', () => { b.hidden = true; try { sessionStorage.setItem('gcom-interno', 'no'); } catch (_) {} });
+  }
+
   // ---------- arranque ----------
   async function arranca() {
     if (!window.isSecureContext || !crypto.subtle || !window.indexedDB) { $('#inicio').innerHTML = '<p>' + T('Este navegador no puede abrir Comunicaciones: hace falta una conexión segura (https) y un navegador actual.') + '</p>'; return; }
@@ -1432,6 +1674,8 @@
     arrancaRele();
     eventos();
     arrancaLlamadas();
+    avisoInterno();
+    setTimeout(eligeServidorLlamadas, 4000); setInterval(eligeServidorLlamadas, 3600 * 1000);
     await cargaConvs();
     if (/#[ib]=/.test(location.hash)) { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     // NÚCLEO guiado (ronda 63): «Tengo un código» llega con el campo del código abierto; «Crear una invitación», con la invitación

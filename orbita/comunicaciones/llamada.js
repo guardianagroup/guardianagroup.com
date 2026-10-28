@@ -51,6 +51,8 @@
     const t = (s) => (o.t ? o.t(s) : s);
     const caja = $('#llamada'), paso = $('#ll-paso'), tiempo = $('#ll-tiempo'), calidad = $('#ll-calidad');
     let pc = null, mic = null, envio = null, ctx = null, nodo = null, estado = 'libre', iniciada = 0, reloj = null, pendientes = [], ofertaEntrante = null, idLlamada = null, colgoYo = false, sondeo = null;
+    let inicioYo = false; // quién llamó: el resumen del chat va a mi lado o al suyo (dueño, 28 Oct 2026, 13:29)
+    let pantallaEncendida = null; // Wake Lock: la pantalla no se apaga mientras dura la llamada (agencia, ronda 74)
     let cam = null, video = false, suCamara = true, remotoV = null; // videollamada: mi cámara, si la llamada es con imagen, si la otra persona tiene la cámara encendida y su imagen
     let imagen = 'natural'; try { imagen = localStorage.getItem('gcom-imagen') || 'natural'; } catch (_) {} if (!(imagen in IMAGENES)) imagen = 'natural';
     let proc = null; // la imagen procesada (lienzo): protegida, o aclarada si hay poca luz
@@ -83,8 +85,32 @@
       caja.classList.toggle('ajustes', ajustes);
       $('#ll-ajustes-b').setAttribute('aria-pressed', String(ajustes));
       document.body.classList.toggle('en-llamada', estado !== 'libre');
+      // agencia, ronda 74 (ChatGPT y Gemini): el tiempo, solo con la llamada contestada (antes se veía «00:00» mientras sonaba);
+      // al recibir, solo quién llama y «Rechazar» / «Contestar»: «Tu voz» queda en una píldora que se abre si se toca
+      tiempo.hidden = estado !== 'hablando';
+      // en la sesión blindada, la voz y la imagen siguen a la vista al recibir: ahí se elige proteger la cara antes de contestar
+      const plegar = estado === 'entrante' && !blindada();
+      caja.classList.toggle('entrando', plegar);
+      if (!plegar) caja.classList.remove('voz-abierta');
+      const pi = $('#ll-voz-pill');
+      if (pi) { pi.hidden = !plegar; pi.setAttribute('aria-expanded', String(caja.classList.contains('voz-abierta'))); const b = $('#ll-voces [data-voz="' + voz + '"]'), s = pi.querySelector('span'); if (s) s.textContent = t('Tu voz') + ': ' + (b ? b.textContent : t('Natural')); }
+      mantenPantalla(estado !== 'libre' && estado !== 'cerrando');
       pintaVoces(); pintaImagenes(); pintaVideo(); fondo(); if (estado !== 'libre') requestAnimationFrame(escala);
+      if (o.estado) { try { o.estado(estado, video); } catch (_) {} }
     }
+    // La pantalla no se apaga sola mientras dura la llamada (Wake Lock; agencia, ronda 74). Si el navegador no lo permite o lo
+    // retira, la llamada sigue igual; al volver a la pestaña se pide otra vez.
+    async function mantenPantalla(si) {
+      try {
+        if (si && !pantallaEncendida && navigator.wakeLock && document.visibilityState === 'visible') {
+          pantallaEncendida = 'pidiendo';
+          const w = await navigator.wakeLock.request('screen');
+          if (estado === 'libre' || estado === 'cerrando') { w.release().catch(() => {}); pantallaEncendida = null; return; }
+          pantallaEncendida = w; w.addEventListener('release', () => { if (pantallaEncendida === w) pantallaEncendida = null; });
+        } else if (!si && pantallaEncendida && pantallaEncendida !== 'pidiendo') { const w = pantallaEncendida; pantallaEncendida = null; await w.release(); }
+      } catch (_) { if (pantallaEncendida === 'pidiendo') pantallaEncendida = null; }
+    }
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && estado !== 'libre' && estado !== 'cerrando') mantenPantalla(true); });
     // Con la llamada en grande, el chat de detrás no se puede tocar ni recibe el foco (dueño, 28 Oct 2026, 12:06: «me aparece
     // la L esa para empezar a escribir»: el cursor del campo de texto parpadeaba detrás de la llamada). En pequeño, vuelve.
     function fondo() {
@@ -423,7 +449,13 @@
           // si la imagen de la otra persona no llega, se dice (antes, en el teléfono, solo se veía su inicial o negro)
           const vr = $('#v-remoto'), NO_LLEGA = t('La imagen de la otra persona no llega.');
           if (video && suCamara && iniciada && Date.now() - iniciada > 8000 && !(vr && vr.videoWidth)) di(NO_LLEGA, true); else if (paso.textContent === NO_LLEGA) di('');
-          calidad.textContent = t('Calidad estimada') + ': ' + nivel + (rtt != null ? ' · ' + rtt + ' ms' : '') + (video && vw && suCamara ? ' · ' + t('imagen') + ' ' + vw + '×' + vh + (fps ? ' · ' + Math.round(fps) + ' fps' : '') : '');
+          // agencia, ronda 74: en la pantalla, solo «Conexión: excelente» con un punto de color; los milisegundos, la resolución y
+          // las imágenes por segundo, al tocarlo (o al pasar el ratón), para quien quiera verlos
+          const largo = t('Calidad estimada') + ': ' + nivel + (rtt != null ? ' · ' + rtt + ' ms' : '') + (video && vw && suCamara ? ' · ' + t('imagen') + ' ' + vw + '×' + vh + (fps ? ' · ' + Math.round(fps) + ' fps' : '') : '');
+          calidad.dataset.nivel = p < 0.01 && (rtt == null || rtt < 250) ? 'alta' : p < 0.05 ? 'media' : 'baja';
+          const corto = t('Conexión') + ': ' + nivel;
+          calidad.dataset.largo = largo; calidad.dataset.corto = corto; calidad.title = largo;
+          calidad.textContent = calidad.classList.contains('ver') ? largo : corto;
         } catch (_) {}
       }, 2000);
     }
@@ -435,7 +467,7 @@
       if (!(o.ice() || []).length && !LOCAL) { o.aviso && o.aviso(t('El servicio de llamadas no está disponible ahora mismo.')); return; }
       video = !!conVideo && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia); suCamara = true; remotoV = null;
       desbloquea();
-      estado = 'saliente'; idLlamada = Math.random().toString(36).slice(2, 10); colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; pinta();
+      estado = 'saliente'; inicioYo = true; idLlamada = Math.random().toString(36).slice(2, 10); colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver'); pinta();
       di(video ? t('Pidiendo la cámara y el micrófono…') : t('Pidiendo el micrófono…'));
       try { await medios(video); } catch (_) { di(t('Sin permiso para el micrófono.'), true); return termina('sin-medios', 1800); }
       nuevaPc();
@@ -451,7 +483,7 @@
       if (m.acto === 'oferta') {
         if (typeof m.sdp !== 'string' || m.sdp.length > 20000) return;
         if (ocupado()) { if (m.id !== idLlamada) o.manda({ acto: 'ocupado', id: m.id }); return; }
-        ofertaEntrante = m; idLlamada = String(m.id || '').slice(0, 16); estado = 'entrante'; colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = '';
+        ofertaEntrante = m; idLlamada = String(m.id || '').slice(0, 16); estado = 'entrante'; inicioYo = false; colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver');
         video = m.video === 1 || /\nm=video /.test(m.sdp); suCamara = true; remotoV = null;
         di(video ? t('Videollamada entrante') : t('Llamada entrante')); pinta(); tono('entrante'); esperaRespuesta(false);
         return;
@@ -501,7 +533,7 @@
       else if (por === 'rechazada' && !colgoYo) di(t('La otra persona no ha contestado.'));
       estado = 'cerrando'; pinta();
       setTimeout(() => { estado = 'libre'; idLlamada = null; pinta(); }, espera || (por === 'fin' || por === 'cancelada' ? 600 : 1500));
-      if (o.fin && era !== 'libre') o.fin({ por, duracion: dur, saliente: era === 'saliente' || (era === 'hablando' && colgoYo), voz: voz !== 'natural', video: conImagen });
+      if (o.fin && era !== 'libre') o.fin({ por, duracion: dur, mia: inicioYo, yoColgue: colgoYo, saliente: era === 'saliente' || (era === 'hablando' && colgoYo), voz: voz !== 'natural', video: conImagen });
     }
     $('#ll-colgar').addEventListener('click', colgar);
     $('#ll-rechazar').addEventListener('click', colgar);
@@ -511,6 +543,12 @@
     for (const b of document.querySelectorAll('#ll-imagenes [data-imagen]')) b.addEventListener('click', () => eligeImagen(b.dataset.imagen));
     $('#ll-luz').addEventListener('click', eligeLuz);
     $('#ll-ajustes-b').addEventListener('click', () => { ajustes = !ajustes; pinta(); });
+    // al recibir: «Tu voz: Natural ▾» abre y cierra las voces; al elegir una, la píldora lo dice
+    const pill = $('#ll-voz-pill');
+    if (pill) pill.addEventListener('click', () => { caja.classList.toggle('voz-abierta'); pinta(); });
+    for (const b of document.querySelectorAll('#ll-voces [data-voz]')) b.addEventListener('click', () => { if (estado === 'entrante') pinta(); });
+    // la calidad: corta en pantalla («Conexión: excelente»); al tocarla, los datos técnicos
+    calidad.addEventListener('click', () => { calidad.classList.toggle('ver'); if (calidad.dataset.largo) calidad.textContent = calidad.classList.contains('ver') ? calidad.dataset.largo : (calidad.dataset.corto || ''); });
     // cámara encendida o apagada durante la videollamada; la otra persona lo sabe por el canal encriptado
     $('#ll-camara').addEventListener('click', () => { if (!cam) return; const on = !camaraOn(); cam.getVideoTracks().forEach((x) => { x.enabled = on; }); o.manda({ acto: 'camara', id: idLlamada, on }); pintaVideo(); });
     $('#ll-mini').addEventListener('click', () => pequena(true));

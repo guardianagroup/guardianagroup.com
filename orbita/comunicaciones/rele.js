@@ -106,5 +106,24 @@
     conecta();
     return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get ultimoPong() { return ultimoPong; } };
   }
-  raiz.GuardianaRele = { crea, MOTORES, PROPIO };
+  // Otro servidor de llamadas (dueño, 28 Oct 2026, 14:17: «que las llamadas sean todas buenas, independientemente de si la
+  // persona está en Sudamérica, en Europa…»): una conexión corta para medir su tiempo de ida y vuelta y pedirle sus
+  // credenciales de llamada (TURN, de vida corta). No entra en ninguna sala ni manda nada más; se cierra en cuanto responde.
+  function iceDe(base, espera) {
+    return new Promise((res) => {
+      let ws = null, fin = false, t0 = 0, ice = null, caduca = 0, region = '';
+      const acaba = (r) => { if (fin) return; fin = true; clearTimeout(tm); try { if (ws) ws.close(); } catch (_) {} res(r); };
+      const tm = setTimeout(() => acaba(null), espera || 5000);
+      try { ws = new WebSocket(String(base).replace(/\/$/, '') + '/com'); } catch (_) { acaba(null); return; }
+      ws.onopen = () => { try { ws.send(JSON.stringify({ t: 'hola' })); } catch (_) { acaba(null); } };
+      ws.onmessage = (e) => {
+        if (typeof e.data !== 'string') return;
+        let m; try { m = JSON.parse(e.data); } catch (_) { return; }
+        if (m.t === 'hola') { if (!m.llamadas || !Array.isArray(m.ice) || !m.ice.length) { acaba(null); return; } ice = m.ice; caduca = +m.caduca || 0; region = m.region || ''; t0 = performance.now(); try { ws.send(JSON.stringify({ t: 'ping' })); } catch (_) { acaba(null); } }
+        else if (m.t === 'pong' && ice) acaba({ ice, caduca, region, ms: Math.round(performance.now() - t0) });
+      };
+      ws.onerror = () => acaba(null); ws.onclose = () => acaba(null);
+    });
+  }
+  raiz.GuardianaRele = { crea, MOTORES, PROPIO, iceDe };
 })(typeof window !== 'undefined' ? window : globalThis);

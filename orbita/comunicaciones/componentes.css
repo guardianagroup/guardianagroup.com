@@ -89,10 +89,15 @@
   font: 400 11px/1 var(--gc-mono); color: var(--gc-suave); white-space: nowrap;
 }
 .gc-burbuja::after { content: ""; display: block; clear: both; }
-/* Ticks in steel, never blue: one sent, two delivered, two filled seen. */
-.gc-ticks { display: inline-block; width: 16px; height: 11px; color: var(--gc-acero); }
+/* Ticks: a clock while waiting, one grey sent, two grey delivered, two GREEN read (owner, 28 Oct 2026, 13:30:
+   «que los tics se pongan en azul o en verde, para que yo sepa que él lo ha leído»; steel on the steel bubble was
+   almost invisible). */
+.gc-ticks { display: inline-block; width: 16px; height: 11px; color: var(--gc-suave); transition: color .25s ease; }
 .gc-ticks.gc-pendiente { color: var(--gc-suave-2); }
+.gc-ticks.gc-leido { color: #5CC98A; }
+.gc-ticks.gc-fallo { color: var(--gc-alerta); font: 700 12px/11px var(--gc-texto); text-align: center; }
 .gc-ticks svg { width: 16px; height: 11px; stroke-width: 1.6; }
+.gc-ticks.gc-leido svg { stroke-width: 1.9; }
 .gc-burbuja .gc-de { display: block; font: 600 12px/1.3 var(--gc-texto); color: var(--gc-acero); margin-bottom: 2px; }
 .gc-cita {
   display: block; border-left: 2px solid var(--gc-acero); padding: 3px 8px; margin: 1px 0 5px; border-radius: 6px;

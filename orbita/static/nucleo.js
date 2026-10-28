@@ -824,7 +824,8 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     estabaDentro = d;
   }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
   function pintaVuelta() {
-    const nuc = vuelta() === 'nucleo', txt = nuc ? 'Regresar a NÚCLEO' : 'Inicio';
+    // dueño, 28 Oct 2026, 13:35: «Regresar a NÚCLEO… es demasiado grande. Solamente con que sea atrás es suficiente»
+    const nuc = vuelta() === 'nucleo', txt = nuc ? 'Atrás' : 'Inicio';
     const vb = document.getElementById('volver'); if (vb) for (const n of vb.childNodes) if (n.nodeType === 3 && n.data.trim()) n.data = txt;
     try { const w = marcoZero(); const s = w && w.document.querySelector('#volverZ span'); if (s && s.textContent !== txt) s.textContent = txt; } catch (_) {}
   }
