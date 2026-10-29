@@ -2464,12 +2464,13 @@
     // iPhone y iPad (dueño, 29 Oct 2026, 12:29: «en iPhone no se guardan [los contactos]»): Safari y la app de la pantalla de inicio
     // guardan cada uno sus cosas por separado. Si la invitación se acepta en Safari y después se instala la app, la app nace vacía.
     // Por eso, con una invitación en Safari, primero se añade a la pantalla de inicio: la invitación se abre allí (va en la
-    // dirección de inicio de la app) y todo queda guardado en la app desde el principio. «Seguir en Safari» sigue siendo posible.
+    // dirección de inicio de la app, como fragmento «#i=…», que el navegador nunca manda al servidor) y todo queda guardado en la
+    // app desde el principio. «Seguir en Safari» sigue siendo posible. (Antes iba como «?inv=»; el arranque lo sigue entendiendo.)
     window.gcomGuiaInvitacion = (hash, seguir) => {
       try {
         const l = document.querySelector('link[rel="manifest"]');
         if (l && !l.dataset.original) l.dataset.original = l.getAttribute('href');
-        const man = { name: 'GUARDIANA', short_name: 'GUARDIANA', id: '/orbita/comunicaciones/', start_url: '/orbita/comunicaciones/?app=1&inv=' + encodeURIComponent(hash.replace(/^#/, '')), scope: '/orbita/comunicaciones/', display: 'fullscreen', display_override: ['fullscreen', 'standalone'], orientation: 'portrait', background_color: '#06080C', theme_color: '#06080C', lang: 'es', dir: 'ltr', icons: [{ src: '/icon-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'any' }, { src: '/icon-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'any' }, { src: '/icon-maskable-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'maskable' }, { src: '/icon-maskable-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] };
+        const man = { name: 'GUARDIANA', short_name: 'GUARDIANA', id: '/orbita/comunicaciones/', start_url: '/orbita/comunicaciones/?app=1#' + hash.replace(/^#/, ''), scope: '/orbita/comunicaciones/', display: 'fullscreen', display_override: ['fullscreen', 'standalone'], orientation: 'portrait', background_color: '#06080C', theme_color: '#06080C', lang: 'es', dir: 'ltr', icons: [{ src: '/icon-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'any' }, { src: '/icon-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'any' }, { src: '/icon-maskable-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'maskable' }, { src: '/icon-maskable-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] };
         if (l) l.setAttribute('href', 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(man)));
       } catch (_) {}
       guiaSeguir = () => { guiaSeguir = null; const h = $('#h-completa'); cierraHoja('h-completa'); h.classList.remove('con-invitacion'); $('#completa-ok').hidden = false; seguir(); };
