@@ -5,6 +5,7 @@ Para pegar en una conversación nueva de Claude. Léelo entero antes de tocar na
 ## 0. Cómo trabajar con el dueño
 - **Háblale siempre en español.** Es el dueño de GUARDIANA (GUARDIANA GROUP S.A.S.). Su nombre, sus correos y sus claves no se escriben en ningún sitio.
 - Lo que quiere de Comunicaciones: «que parezca una app nativa: minimalista, profesional, con armonía visual y tan fácil que la use una persona de 60 años». «Implementa tú y publica directamente.»
+- **En una cuenta nueva, lo primero:** conecta GitHub (claude.ai → Ajustes → Conectores → GitHub) y añade el repositorio con permiso de escritura (`add_repo` con `access: push`). Sin eso no se puede publicar.
 - Propón antes de hacer un cambio grande. De cada cambio, enséñale una captura y avísale cuando esté publicado, en una o dos líneas y sin pegar código.
 - Reglas fijas, al pie de la letra:
   - «Tú nunca escribes claves. De la página de Astra copia solo el texto entre "ASSISTANT OUTPUT" y "Response headers"». Quita todo lo que empiece por `ci_live_`.
@@ -18,7 +19,9 @@ Para pegar en una conversación nueva de Claude. Léelo entero antes de tocar na
   - «Propón antes de hacer un cambio grande».
 
 ## 1. Dónde está todo
-- Repositorio público: github.com/guardianagroup/guardianagroup.com (AGPL-3.0; ver LICENCIAS.md). GitHub Pages publica la rama `main` en guardianagroup.com con cada push.
+- Repositorio público: github.com/guardianagroup/guardianagroup.com (AGPL-3.0; ver LICENCIAS.md). GitHub Pages publica la rama `main` en guardianagroup.com con cada push (se ve en las ejecuciones «pages build and deployment»).
+- **La rama `web-idiomas`** es la web en 42 idiomas y **no se publica**. Desde la tarde del 28 Oct, lo de Comunicaciones solo está en `main` (main tiene 334 commits que no están en web-idiomas). No mezcles las dos ramas sin leer antes TRASPASO-CHAT.md.
+- En `main` entran commits automáticos («Órbita: datos reales actualizados»): haz `git pull --rebase` antes de cada push y trae `main` a las ramas `wip/` antes de publicarlas.
 - Lee también estos documentos: `herramientas/TRASPASO-CHAT.md` (Comunicaciones hasta el 28 Oct), `herramientas/TRASPASO.md` (Órbita), `herramientas/CRIPTOGRAFIA.md` (inventario criptográfico) y `herramientas/pruebas-comunicaciones/README.md` (pruebas).
 - **Comunicaciones** (chat, videollamadas y archivos encriptados de extremo a extremo) vive en `orbita/comunicaciones/`. Los archivos principales son `index.html`, `app.js`, `app.css`, `llamada.js`, `rele.js`, `cripto.js`, `pq-mlkem.js`, `pq-cnsa.js`, `viaje.js`/`viaje.css` y `verificar/`. Las traducciones están en `orbita/static/idioma.js`, en el bloque de Comunicaciones, como líneas `"frase": ["en", "pt"],`.
 - **El relé** está en `zero-motor/` (`comunicaciones.js`, `ws.js`, `servidor.js`) y corre en motor.guardianagroup.com. Se actualiza solo desde `main` cada 15 minutos. Solo pasa bytes cifrados.
@@ -38,7 +41,7 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
 - Desde la raíz del repo, arranca:
   - el relé: `node zero-motor/pruebas/rele.js 8794`
   - la web: `python3 -m http.server 8080 --bind 127.0.0.1`
-- Luego ejecuta `node herramientas/pruebas-comunicaciones/<prueba>.js`. Todas pasaban en main: dos, contactos, revision2, llamando, viaje-movil, whatsapp, instalar, enviar, actualiza, tipos, tirar, ingles…
+- Luego ejecuta `node herramientas/pruebas-comunicaciones/<prueba>.js` (recarga.js admite `RETRASO=<ms>`, 450 por defecto). Todas pasaban en main: dos, contactos, revision2, llamando, viaje-movil, whatsapp, instalar, enviar, actualiza, tipos, tirar, ingles…
 - Las pruebas usan Playwright con Chromium imitando un iPhone (393×793) y simulan `navigator.standalone` y `navigator.share`. `hoja.py` junta capturas.
 
 ## 4. Hecho y publicado (main, último commit 081cdf8b)
@@ -119,9 +122,9 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
 8. **Notificaciones web push con el globo rojo** (iPhone 16.4+ con la app en la pantalla de inicio, Android y PC).
    - VAPID en el relé, `setAppBadge` y contenido cifrado de extremo a extremo.
    - Para las llamadas, avisos repetidos. Sonar como una llamada de verdad necesitaría una app nativa (CallKit).
-9. **Explicarle al dueño, en palabras sencillas, lo del servidor de Núremberg.** Quedó pendiente.
+9. **Explicarle al dueño, en dos o tres líneas, qué es el relé (el servidor de Núremberg):** qué hace (pasa los paquetes cifrados entre los dos equipos y, en las llamadas, oculta la IP de cada uno) y qué no puede hacer (leer ni guardar mensajes). Lo de los mensajes tardíos ya se respondió y arregló.
 10. **Llamadas de voz por el auricular o el altavoz en iPhone.** En pausa por decisión del dueño: «ya lo solucionaremos».
-11. **Lo antiguo de Órbita** (prioridad baja): ver TRASPASO.md.
+11. **Órbita, revisión punto por punto de todo el mapa** (a medias, prioridad baja): cables (extremos, tramos por tierra, duplicados), fibra por tierra, radioenlaces, centros de datos, satélites, estaciones, plataformas y nombres; arreglar lo que salga. El detalle está en TRASPASO.md.
 
 ## 7. Decisiones del dueño que hay que respetar
 - Vídeo a pantalla partida por defecto.
