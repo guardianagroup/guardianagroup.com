@@ -1924,7 +1924,9 @@
     $('#nueva').addEventListener('click', creaInvitacion);
     // «Crear invitación» al final del bloque para profesionales: sube al principio y hace lo mismo que el botón grande.
     const proEmpezar = $('#pro-empezar');
-    if (proEmpezar) proEmpezar.addEventListener('click', () => { const ini = $('#inicio'); if (ini) ini.scrollTo({ top: 0, behavior: 'smooth' }); $('#nueva').click(); });
+    // en el móvil, la misma invitación que el botón de arriba (con el enlace y el menú de compartir), nunca la del código de 9 cifras
+    // (dueño, 28 Oct 2026, 19:10: «abajo del todo sale compartir enlace y aparecen números… tienes que quitarlo»)
+    if (proEmpezar) proEmpezar.addEventListener('click', () => { const ini = $('#inicio'); if (ini) ini.scrollTo({ top: 0, behavior: 'smooth' }); (esMovil() ? $('#nueva-blindada') : $('#nueva')).click(); });
     // ronda 55: la persona acepta, a sabiendas, una sesión sin protección postcuántica (la otra persona tiene una versión anterior)
     const pqSi = $('#cpq-si');
     if (pqSi) pqSi.addEventListener('click', () => {
@@ -2243,7 +2245,9 @@
       const paso = new URLSearchParams(location.search).get('paso');
       if (paso === 'codigo' || paso === 'crear') {
         history.replaceState(history.state, '', location.pathname + location.hash);
-        if (paso === 'codigo') $('#unir').click();
+        // en el móvil no hay código de 9 cifras: se queda en el inicio, con «Crear y compartir invitación» (19:10)
+        if (esMovil()) { /* nada */ }
+        else if (paso === 'codigo') $('#unir').click();
         else if ([...CONVS.values()].some((c) => c.estado === 'activa')) $('#nueva').focus();
         else { let n = 0; const espera = () => { if (R.abierto) $('#nueva').click(); else if (++n < 40) setTimeout(espera, 250); else $('#nueva').focus(); }; espera(); }
       }
