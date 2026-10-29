@@ -170,9 +170,16 @@
   // el mismo nombre que lleva el icono (dueño, 17:06: «en vez de poner comunicaciones… guardiana»)
   document.documentElement.classList.toggle('como-app', comoApp());
   // con el logotipo delante (29 Oct 2026, 07:38: «arriba a la izquierda… pone guardiana solo. Deberías también de poner el
-  // logotipo»): el candado con la G de marca/guardiana-simbolo.svg, el mismo del icono de la app
-  const LOGO = '<svg class="barra-logo" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="barra-logo-g"><rect width="100" height="100" fill="#fff"/><path d="M63 58.29 V55.07 Q63 54 58.71 54 H44.15 Q37 54 37 61.15 V72.85 Q37 80 44.15 80 H58.71 Q63 80 63 75.71 V67 H51" fill="none" stroke="#000" stroke-width="7.5"/></mask></defs><path d="M31 44 V31 A19 19 0 0 1 69 31 V44" fill="none" stroke="#E8ECF1" stroke-width="9"/><rect x="17" y="42" width="66" height="50" rx="13" fill="#9CC3E4" mask="url(#barra-logo-g)"/></svg>';
-  if (comoApp()) { const bt = document.querySelector('.barra .barra-t'); if (bt) { bt.innerHTML = LOGO + '<span>GUARDIANA</span>'; bt.setAttribute('translate', 'no'); } }
+  // logotipo»): el candado con la G de marca/guardiana-simbolo.svg, el mismo del icono de la app. Ya viene en index.html
+  // (.barra-app) y se ve desde el primer fotograma: cambiarlo aquí hacía saltar la barra al recargar (29 Oct 2026, 08:38).
+  // La pantalla, a la vista en cuanto está decidida: arranque.js la tapa mientras tanto (solo en la app instalada y al volver a un
+  // chat tras recargar), para que no se vea el inicio un momento antes del chat ni nada moviéndose arriba.
+  let revelado = false, abriendo = null;
+  function revela() {
+    if (revelado) return; revelado = true;
+    const raiz = document.documentElement; if (!raiz.classList.contains('arrancando')) return;
+    requestAnimationFrame(() => { raiz.classList.remove('arrancando'); raiz.classList.add('aparece'); setTimeout(() => raiz.classList.remove('aparece'), 260); });
+  }
   const puedeCompleta = () => !!(document.fullscreenEnabled && document.documentElement.requestFullscreen) && !/iPhone|iPad|iPod/i.test(navigator.userAgent);
   function pantallaCompleta() { try { if (!document.fullscreenElement && !comoApp()) document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => {}); } catch (_) {} }
   // en el móvil, una conversación nueva borra las anteriores… salvo los contactos guardados (dueño, 28 Oct 2026, 17:33)
@@ -550,6 +557,36 @@
   }
   function enviaControl(c, obj) { if (!c.sesion || !R.abierto || !c.miembros.has(c.suId)) return false; sella(c, obj).then((b) => b && R.manda(c.id, c.suId, b)); return true; }
   const enLinea = (c) => !!(c.suId && c.miembros.has(c.suId) && c.sesion && R.abierto);
+  // Sin parpadeos de estado (dueño, 29 Oct 2026, 08:38: «cuando la actualizo… arriba me aparece durante un momento desconectado y
+  // como que se mueve la parte de arriba. Vigila eso para que no pase»). Tras recargar, al perderse un momento la conexión o cuando
+  // la otra persona recarga, «Sin conexión», «No conectado», «Conectando…» o «Desconectado» duraban menos de un segundo y solo
+  // hacían parpadear la cabecera. Mientras la conversación está «quieta» se sigue viendo lo de antes; «En línea» sale al momento y,
+  // si pasado ese rato sigue sin conexión, se dice. Si el relé ya ha dicho quién hay en la sala y la otra persona no está (y no se
+  // acaba de ir), «No conectado» sale sin esperar.
+  let quietoHasta = 0, lineasPrevias = {};
+  const quieto = (c) => !!c && ((Date.now() < quietoHasta && !c.salaSabida) || Date.now() < (c.quietoHasta || 0));
+  const pareceEnLinea = (c) => enLinea(c) || (quieto(c) && (c.vistoEnLinea !== undefined ? !!c.vistoEnLinea : !!(lineasPrevias[c.id] && lineasPrevias[c.id].en)));
+  let repintaQuieto = 0;
+  function alAcabarQuieto(ms) {
+    clearTimeout(repintaQuieto);
+    const fin = Math.max(quietoHasta, ...[...CONVS.values()].map((c) => c.quietoHasta || 0), Date.now() + ms) - Date.now();
+    repintaQuieto = setTimeout(() => { for (const c of CONVS.values()) pintaCabecera(c); if (window.pintaBarra) pintaBarra(); pintaLista(); pintaContactos(); }, fin + 60);
+  }
+  function quietoTodas(ms) { quietoHasta = Math.max(quietoHasta, Date.now() + ms); alAcabarQuieto(ms); }
+  function quietoConv(c, ms) { c.quietoHasta = Math.max(c.quietoHasta || 0, Date.now() + ms); alAcabarQuieto(ms); }
+  // al arrancar: quieta hasta que el relé diga quién hay (o 5 s), con lo que se veía antes de recargar si es de hace nada
+  function quietoArranque() {
+    quietoTodas(5000);
+    try { const x = JSON.parse(sessionStorage.getItem('gcom-lineas') || 'null'); sessionStorage.removeItem('gcom-lineas'); if (x && Date.now() - x.t < 60000) lineasPrevias = x.l || {}; } catch (_) {}
+  }
+  // antes de recargar: dónde se está (el chat abierto o los contactos) y lo que se ve en cada conversación, para volver igual
+  function guardaPantalla() {
+    try { guardaBorrador(); } catch (_) {}
+    try { const ini = $('#inicio'); const v = ACTUAL || (ini && ini.classList.contains('ver-contactos') ? 'contactos' : ''); if (v) sessionStorage.setItem('gcom-volver', v); else sessionStorage.removeItem('gcom-volver'); } catch (_) {}
+    guardaLineas();
+  }
+  // antes de recargar: lo que se ve en cada conversación
+  function guardaLineas() { try { const l = {}; for (const c of CONVS.values()) if (c.lineaVista !== undefined) l[c.id] = { txt: c.lineaVista, en: !!c.vistoEnLinea }; sessionStorage.setItem('gcom-lineas', JSON.stringify({ t: Date.now(), l })); } catch (_) {} }
   // blindada: nada de contenido (mensajes, archivos, llamadas) hasta que los dos han comprobado el número de seguridad
   // dueño, 28 Oct 2026, 15:30: «ya no quiero que aparezcan los números… con el grado que tenemos de seguridad, creo que ya es
   // suficiente… tiene que ser una experiencia muy fácil»: la blindada ya no espera a la comprobación; compararlo es opcional
@@ -1197,15 +1234,25 @@
   function arrancaRele() {
     R = GuardianaRele.crea();
     const estadoRele = (txt, cls) => { const e = $('#rele'); e.className = 'rele ' + (cls || ''); $('#reletxt').textContent = txt; };
-    window.pintaBarra = () => { const c = CONVS.get(ACTUAL); const on = !!(c && c.huella && enLinea(c) && c.sesion && c.sesion.confirmada); estadoRele(on ? T('Conectado') : T('Desconectado'), on ? 'si' : ''); { const r = $('#rele'); if (r) r.hidden = !(c && c.huella); } /* sin conversación, nada que decir (agencia, ronda 75: «Desconectado» en el inicio asustaba) */ };
+    // sin conversación, nada que decir (agencia, ronda 75: «Desconectado» en el inicio asustaba); y mientras está «quieta» (tras
+    // recargar o un corte de un momento), lo que ya se veía (29 Oct 2026, 08:38)
+    window.pintaBarra = () => {
+      const c = CONVS.get(ACTUAL), r = $('#rele'); if (!r) return;
+      if (!(c && c.huella)) { r.hidden = true; return; }
+      const on = !!(enLinea(c) && c.sesion && c.sesion.confirmada);
+      if (!on && quieto(c)) { if (r.dataset.conv !== c.id) r.hidden = true; return; }
+      estadoRele(on ? T('Conectado') : T('Desconectado'), on ? 'si' : ''); r.hidden = false; r.dataset.conv = c.id;
+    };
     // arriba: «Desconectado» hasta que la conversación con la otra persona está establecida; entonces «Conectado» (dueño, 20:21)
     R.on('abierto', () => { pintaBarra(); });
     R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); });
-    R.on('cerrado', () => { pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; pintaCabecera(c); } pintaLista(); });
+    R.on('cerrado', () => { quietoTodas(4000); pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; c.salaSabida = false; pintaCabecera(c); } pintaLista(); });
     setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
-    R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); pintaCabecera(c); pintaLista(); });
-    R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) { c.sesion = null; enCola(c, () => presentaX(c, null, true)); } pintaCabecera(c); pintaLista(); });
-    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && ACTUAL === c.id) LL.recibe({ acto: 'colgar' }); } pintaCabecera(c); pintaLista(); });
+    // con la otra persona en la sala, el tiempo de acordar las claves, quieta; sin ella (y si no se acaba de ir), «No conectado» ya
+    R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; c.salaSabida = true; if (c.suId && miembros.includes(c.suId)) quietoConv(c, 6000); if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); pintaCabecera(c); pintaLista(); pintaContactos(); });
+    R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) { c.sesion = null; if (c.huella) quietoConv(c, 6000); enCola(c, () => presentaX(c, null, true)); } pintaCabecera(c); pintaLista(); });
+    // si la otra persona se va, puede que solo esté recargando: unos segundos sin cambiar nada
+    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; quietoConv(c, 6000); vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && ACTUAL === c.id) LL.recibe({ acto: 'colgar' }); } pintaCabecera(c); pintaLista(); });
     R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Esta conversación se ha abierto en otra pestaña: sigue allí.')); });
     // Las tramas de una conversación se procesan en orden (una detrás de otra): así un trozo de archivo nunca
     // adelanta al anuncio del archivo, ni un mensaje a la presentación que abre su sesión.
@@ -1258,7 +1305,7 @@
     if (LL && LL.ocupado && LLAMADA_CONV === c.id) return T('En llamada');
     if (c.noLeidos) return c.noLeidos === 1 ? T('Mensaje nuevo') : T('{n} mensajes nuevos').replace('{n}', c.noLeidos);
     if (c.perdida) return T('Llamada perdida');
-    if (!enLinea(c)) return T('No está conectada');
+    if (!pareceEnLinea(c)) return T('No está conectada');
     return esB(c) ? T('Sesión blindada') : T('Encriptada de extremo a extremo');
   }
   async function pintaLista() {
@@ -1274,7 +1321,7 @@
         const li = document.createElement('li');
         const b = document.createElement('button'); b.type = 'button'; b.className = 'fila-conv' + (c.id === ACTUAL ? ' actual' : '') + (esB(c) ? ' blindada' : '') + (c.noLeidos ? ' nueva' : '') + (c.perdida && !c.noLeidos ? ' perdida' : '');
         b.dataset.id = c.id; if (c.id === ACTUAL) b.setAttribute('aria-current', 'true');
-        const av = document.createElement('span'); av.className = 'fila-av' + (enLinea(c) ? ' en-linea' : ''); av.setAttribute('aria-hidden', 'true');
+        const av = document.createElement('span'); av.className = 'fila-av' + (pareceEnLinea(c) ? ' en-linea' : ''); av.setAttribute('aria-hidden', 'true');
         if (esB(c)) av.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg>'; else av.textContent = inicial(nombreConv(c, true));
         const tx = document.createElement('span'); tx.className = 'fila-txt';
         const nb = document.createElement('b'); nb.textContent = nombreConv(c, true); nb.translate = false;
@@ -1290,7 +1337,7 @@
     // en el teléfono, una invitación que aún nadie ha abierto no se abre sola: se queda en el inicio (dueño, 28 Oct 2026, 19:17:
     // «abre otra segunda pantalla… es mejor solo una pantalla»); el chat se abre cuando la otra persona entra
     const abrible = xs.find((x) => !invitacionPendienteMovil(x));
-    if ((!ACTUAL || !CONVS.has(ACTUAL)) && !quiereNueva && !hayContactos() && abrible) abreConv(abrible.id);
+    if ((!ACTUAL || !CONVS.has(ACTUAL)) && !quiereNueva && !hayContactos() && abrible) abriendo = abreConv(abrible.id);
   }
   function invitacionPendienteMovil(x) { return esMovil() && x.estado === 'invitacion' && x.rol === 'invita' && !x.huella && porEnlace(x); }
 
@@ -1318,7 +1365,7 @@
     ul.hidden = !xs.length;
     ul.textContent = '';
     for (const c of xs) {
-      const nombre = nombreConv(c, true), vivo = enLinea(c);
+      const nombre = nombreConv(c, true), vivo = pareceEnLinea(c);
       const li = document.createElement('li'); li.className = 'contacto' + (c.noLeidos ? ' nueva' : '');
       const ab = document.createElement('button'); ab.type = 'button'; ab.className = 'contacto-abre'; ab.dataset.id = c.id;
       const av = document.createElement('span'); av.className = 'contacto-av' + (vivo ? ' en-linea' : ''); av.textContent = inicial(nombre); av.setAttribute('aria-hidden', 'true');
@@ -1394,6 +1441,10 @@
   function pintaCabecera(c) {
     pintaEspera(c);
     if (window.pintaBarra) pintaBarra();
+    // el estado de la otra persona tal como se enseña: el de verdad o, mientras la conversación está quieta, lo de antes (null)
+    const estado = !c.huella ? null : !R.abierto ? 'sin-conexion' : !c.miembros.has(c.suId) ? 'no-conectado' : !c.sesion || !c.sesion.confirmada ? 'conectando' : 'en-linea';
+    const quieta = !!c.huella && estado !== 'en-linea' && quieto(c);
+    if (c.huella && !quieta) c.vistoEnLinea = estado === 'en-linea';
     if (ACTUAL !== c.id) return;
     // en el móvil, el nombre y la línea de confianza, cortos y en una fila (agencia, ronda 74: antes «Convers…» y tres líneas)
     const movil = matchMedia('(max-width: 760px)').matches;
@@ -1417,12 +1468,16 @@
     // verificar», que parecía un error (revisión de diseño, 28 Oct 2026, 19:15). La seguridad y la verificación siguen en «⋯».
     if (movil && c.huella && !(c.ocupada && !c.huella)) {
       txt = !R.abierto ? T('Sin conexión') : !c.miembros.has(c.suId) ? T('No conectado') : !c.sesion || !c.sesion.confirmada ? T('Conectando…') : T('En línea');
-      conf.classList.toggle('en-linea', txt === T('En línea'));
-    } else conf.classList.remove('en-linea');
+    }
+    // quieta (tras recargar, un corte de un momento o la otra persona recargando): lo mismo que se veía; recién abierta, lo de antes
+    // de recargar; y si no hay nada, la línea vacía, que guarda su sitio (app.css) y no mueve el nombre
+    if (quieta) txt = c.lineaVista !== undefined ? c.lineaVista : lineasPrevias[c.id] ? lineasPrevias[c.id].txt : '';
+    else if (c.huella) c.lineaVista = txt;
+    conf.classList.toggle('en-linea', movil && !!c.huella && txt === T('En línea'));
     if (!movil && c.huella && !(c.verificada && (!esB(c) || c.suVerificada))) conf.classList.add('gc-sin-verificar');
     conf.textContent = txt;
     pintaPuerta(c); pintaAvisos(c);
-    const ll = $('#llamar'); if (ll) { const si = puedeLlamar() && (R.llamadas || LOCAL); ll.classList.toggle('apagado', !si); ll.title = si ? T('Llamada de voz') : esB(c) && !(c.verificada && c.suVerificada) ? T('Las llamadas se activan cuando los dos hayan comprobado el número de seguridad.') : !R.llamadas && !LOCAL ? T('El servicio de llamadas no está disponible ahora mismo.') : T('La otra persona tiene que estar conectada.'); }
+    const ll = $('#llamar'); if (ll) { const si = puedeLlamar() && (R.llamadas || LOCAL); if (!(quieta && !si)) ll.classList.toggle('apagado', !si); ll.title = si ? T('Llamada de voz') : esB(c) && !(c.verificada && c.suVerificada) ? T('Las llamadas se activan cuando los dos hayan comprobado el número de seguridad.') : !R.llamadas && !LOCAL ? T('El servicio de llamadas no está disponible ahora mismo.') : T('La otra persona tiene que estar conectada.'); }
     const vl = $('#videollamar'); if (vl && ll) { vl.classList.toggle('apagado', ll.classList.contains('apagado')); vl.title = ll.classList.contains('apagado') ? ll.title : T('Videollamada'); }
     // contactos (17:33): «Guardar contacto» en «⋯» y, en el teléfono, una tira una vez al empezar
     { const k = $('#cm-contacto'); if (k) k.hidden = !(c.huella && !c.contacto); const s = $('#ccontacto'); if (s) s.hidden = !(esMovil() && c.huella && !c.contacto && !c.sinContacto); $('#conv').classList.toggle('es-contacto', !!c.contacto); }
@@ -1696,6 +1751,7 @@
       ocupado = true; ind.classList.add('suelta', 'girando'); if (activo) activo.style.transition = 'transform .25s ease';
       pinta(UMBRAL * 0.8);
       try { sessionStorage.setItem(MARCA, '1'); } catch (_) {}
+      guardaPantalla(); // al volver, la misma pantalla (el chat o los contactos) y la misma línea arriba (29 Oct 2026, 08:38)
       setTimeout(() => location.reload(), 650);
     };
     document.addEventListener('touchstart', (e) => {
@@ -2459,7 +2515,8 @@
   function actualizaCuandoPueda() {
     clearTimeout(versionT);
     if (!buenMomento()) { versionT = setTimeout(actualizaCuandoPueda, 20000); return; }
-    try { if (ACTUAL) sessionStorage.setItem('gcom-volver', ACTUAL); sessionStorage.setItem('gcom-act', JSON.stringify({ f: versionNueva, t: Date.now() })); } catch (_) {}
+    guardaPantalla();
+    try { sessionStorage.setItem('gcom-act', JSON.stringify({ f: versionNueva, t: Date.now() })); } catch (_) {}
     location.reload();
   }
   function vigilaVersion() {
@@ -2472,7 +2529,9 @@
     });
   }
   async function arranca() {
-    if (!window.isSecureContext || !crypto.subtle || !window.indexedDB) { $('#inicio').innerHTML = '<p>' + T('Este navegador no puede abrir Comunicaciones: hace falta una conexión segura (https) y un navegador actual.') + '</p>'; return; }
+    setTimeout(revela, 2500); // por si algo tarda: nunca más de esto con la pantalla tapada
+    if (!window.isSecureContext || !crypto.subtle || !window.indexedDB) { revela(); $('#inicio').innerHTML = '<p>' + T('Este navegador no puede abrir Comunicaciones: hace falta una conexión segura (https) y un navegador actual.') + '</p>'; return; }
+    quietoArranque();
     await BD.abre();
     await cargaIdentidad();
     arrancaRele();
@@ -2484,10 +2543,18 @@
     // en el móvil, de antes solo queda la más reciente (15:58)
     // (los contactos guardados se quedan siempre, 17:33)
     if (esMovil() && vivas().filter((x) => !x.contacto).length > 1) { const xs = vivas().filter((x) => !x.contacto).sort((a, b) => (b.ultimo || b.creado || 0) - (a.ultimo || a.creado || 0)); for (const x of xs.slice(1)) { try { await destruye(x, true); } catch (_) {} } pintaLista(); }
-    try { if (sessionStorage.getItem('gcom-fin') === '1') { muestraFin(); return; } } catch (_) {}
+    try { if (sessionStorage.getItem('gcom-fin') === '1') { revela(); muestraFin(); return; } } catch (_) {}
     if (esInvitado()) document.body.classList.add('modo-invitado');
     if (/#[ib]=/.test(location.hash)) { const ok = await preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
-    else { try { const v = sessionStorage.getItem('gcom-volver'); sessionStorage.removeItem('gcom-volver'); if (v && CONVS.has(v)) abreConv(v); } catch (_) {} } // tras actualizarse sola, al mismo chat
+    else {
+      // tras recargar (tirar para actualizar o actualizarse sola), a la misma pantalla: el mismo chat o los contactos
+      let v = null; try { v = sessionStorage.getItem('gcom-volver'); sessionStorage.removeItem('gcom-volver'); } catch (_) {}
+      if (v && CONVS.has(v)) { if (ACTUAL !== v) abriendo = abreConv(v); }
+      else if (v === 'contactos' && esMovil() && !ACTUAL) { verContactos = true; pintaContactos(); }
+    }
+    // la pantalla, a la vista cuando ya está entera (el chat que se abre solo carga antes sus mensajes)
+    try { await abriendo; } catch (_) {}
+    revela();
     vigilaVersion();
     // NÚCLEO guiado (ronda 63): «Tengo un código» llega con el campo del código abierto; «Crear una invitación», con la invitación
     // hecha en cuanto hay conexión (si ya hay una conversación en marcha, no se toca: solo se señala el botón). Una sola vez.
@@ -2512,6 +2579,6 @@
     GuardianaViaje.alCortar = (v) => { const [c, m] = msgDe(v); if (c && m) cortaArchivo(c, m); };
     GuardianaViaje.puedeCortar = (v) => { const [, m] = msgDe(v); return !!(m && sePuedeCortar(m)); };
   }
-  arranca().catch((e) => { console.error(e); aviso(T('Algo falló al arrancar: recarga la página.')); });
+  arranca().catch((e) => { console.error(e); revela(); aviso(T('Algo falló al arrancar: recarga la página.')); });
   window.GuardianaCom = { get convs() { return CONVS; }, get yo() { return YO; }, get rele() { return R; }, get viajes() { return VIAJES; }, get llamada() { return LL; }, abreConv, creaInvitacion, aceptaInvitacion };
 })();

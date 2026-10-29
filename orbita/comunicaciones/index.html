@@ -23,8 +23,10 @@
 <title>GUARDIANA</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261030i">
+<link rel="stylesheet" href="app.css?v=20261030j">
 <link rel="stylesheet" href="viaje.css?v=20261029a">
+<!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
+<script src="arranque.js?v=20261030j"></script>
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -35,8 +37,12 @@
      de rastro… eso el invitado; el que ha creado el chat, sí») -->
 <div class="fin-invitado" id="fin-invitado" hidden role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><h2>Conversación terminada</h2><p>Se han borrado los datos de esta conversación en este equipo.</p><p class="suave">Lo que se haya descargado fuera de GUARDIANA puede seguir en el dispositivo. Ya puedes cerrar esta pestaña.</p></div>
 <header class="barra" id="barra">
-  <a class="marca" href="/orbita/" id="volver" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Inicio</span></a><b class="barra-t">Comunicaciones</b>
-  <span class="rele" id="rele"><i></i><span id="reletxt">Desconectado</span></span>
+  <a class="marca" href="/orbita/" id="volver" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Inicio</span></a>
+  <!-- en la web, «Comunicaciones»; instalada, el candado y «GUARDIANA» desde el primer fotograma (antes se cambiaba con JavaScript y
+       arriba se veía un salto; dueño, 29 Oct 2026, 08:38) -->
+  <b class="barra-t"><span class="barra-web">Comunicaciones</span><span class="barra-app" translate="no"><svg class="barra-logo" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="barra-logo-g"><rect width="100" height="100" fill="#fff"/><path d="M63 58.29 V55.07 Q63 54 58.71 54 H44.15 Q37 54 37 61.15 V72.85 Q37 80 44.15 80 H58.71 Q63 80 63 75.71 V67 H51" fill="none" stroke="#000" stroke-width="7.5"/></mask></defs><path d="M31 44 V31 A19 19 0 0 1 69 31 V44" fill="none" stroke="#E8ECF1" stroke-width="9"/><rect x="17" y="42" width="66" height="50" rx="13" fill="#9CC3E4" mask="url(#barra-logo-g)"/></svg><span>GUARDIANA</span></span></b>
+  <!-- oculto hasta que hay una conversación que vigilar: en la página recién cargada salía «Desconectado» un momento -->
+  <span class="rele" id="rele" hidden><i></i><span id="reletxt"></span></span>
   <a class="multas-b" href="/orbita/multas/?desde=comunicaciones">Multas</a><!-- dueño, 14:02: arriba a la derecha, su propia página -->
   <div class="idiomas" role="group" aria-label="Idioma" translate="no"></div>
 </header>
@@ -608,6 +614,6 @@
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261029a"></script>
 <script src="llamada.js?v=20261030i"></script>
-<script src="app.js?v=20261030i"></script>
+<script src="app.js?v=20261030j"></script>
 </body>
 </html>
