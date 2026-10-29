@@ -2368,6 +2368,50 @@
   }
 
   // ---------- arranque ----------
+  // Actualización sola (dueño, 29 Oct 2026, 08:09: «si hacemos actualizaciones, quiero que se actualice automáticamente… o cuando la
+  // abra. Pero si puede ser de forma automática, mejor»). Al abrir ya carga siempre lo último; con la app abierta, cada 10 minutos y
+  // al volver a ella se mira si la página trae otras versiones de los archivos (los «?v=»). Si las trae, se recarga sola en cuanto
+  // es buen momento (sin llamada, sin texto a medias, sin grabar, sin archivos en camino y sin ninguna ventana abierta) y vuelve al
+  // mismo chat. La comprobación es la propia página, sin nada más: no sale ningún dato.
+  const firmaVersiones = (xs) => xs.map((u) => (String(u).match(/([\w.-]+\.(?:js|css))\?v=([\w-]+)/) || []).slice(1).join('=')).filter(Boolean).sort().join(',');
+  const firmaCargada = () => firmaVersiones([...document.querySelectorAll('script[src*="?v="],link[href*="?v="]')].map((e) => e.getAttribute('src') || e.getAttribute('href')));
+  let firmaInicial = null, versionNueva = false, versionT = null, versionMirada = 0;
+  async function miraVersion() {
+    if (versionNueva || !navigator.onLine) return;
+    versionMirada = Date.now();
+    try {
+      const r = await fetch(location.pathname + '?version=' + Date.now(), { cache: 'no-store', credentials: 'same-origin' });
+      if (!r.ok) return;
+      const f = firmaVersiones([...(await r.text()).matchAll(/(?:src|href)="([^"]*\?v=[^"]*)"/g)].map((m) => m[1]));
+      if (!f || !firmaInicial || f === firmaInicial) return;
+      // nunca en bucle: si ya se recargó hace poco por esta misma versión y no llegó (una copia vieja por el camino), se espera
+      try { const x = JSON.parse(sessionStorage.getItem('gcom-act') || 'null'); if (x && x.f === f && Date.now() - x.t < 5 * 60 * 1000) return; } catch (_) {}
+      versionNueva = f; actualizaCuandoPueda();
+    } catch (_) {}
+  }
+  const buenMomento = () => {
+    if (document.visibilityState !== 'visible') return false;
+    if (LL && LL.ocupado) return false;
+    const ta = $('#texto'); if (ta && ta.value.trim()) return false;
+    if (document.querySelector('.gc-compositor.grabando-ya, .gc-hoja.gc-abierta, .adjuntos:not([hidden]), .gc-menu:not([hidden])')) return false;
+    for (const c of CONVS.values()) if (c.archivos && c.archivos.size) return false;
+    return true;
+  };
+  function actualizaCuandoPueda() {
+    clearTimeout(versionT);
+    if (!buenMomento()) { versionT = setTimeout(actualizaCuandoPueda, 20000); return; }
+    try { if (ACTUAL) sessionStorage.setItem('gcom-volver', ACTUAL); sessionStorage.setItem('gcom-act', JSON.stringify({ f: versionNueva, t: Date.now() })); } catch (_) {}
+    location.reload();
+  }
+  function vigilaVersion() {
+    firmaInicial = firmaCargada();
+    setInterval(() => { if (document.visibilityState === 'visible') miraVersion(); }, 10 * 60 * 1000);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState !== 'visible') return;
+      if (versionNueva) { setTimeout(actualizaCuandoPueda, 800); return; }
+      if (Date.now() - versionMirada > 60 * 1000) setTimeout(miraVersion, 1200);
+    });
+  }
   async function arranca() {
     if (!window.isSecureContext || !crypto.subtle || !window.indexedDB) { $('#inicio').innerHTML = '<p>' + T('Este navegador no puede abrir Comunicaciones: hace falta una conexión segura (https) y un navegador actual.') + '</p>'; return; }
     await BD.abre();
@@ -2384,6 +2428,8 @@
     try { if (sessionStorage.getItem('gcom-fin') === '1') { muestraFin(); return; } } catch (_) {}
     if (esInvitado()) document.body.classList.add('modo-invitado');
     if (/#[ib]=/.test(location.hash)) { const ok = await preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
+    else { try { const v = sessionStorage.getItem('gcom-volver'); sessionStorage.removeItem('gcom-volver'); if (v && CONVS.has(v)) abreConv(v); } catch (_) {} } // tras actualizarse sola, al mismo chat
+    vigilaVersion();
     // NÚCLEO guiado (ronda 63): «Tengo un código» llega con el campo del código abierto; «Crear una invitación», con la invitación
     // hecha en cuanto hay conexión (si ya hay una conversación en marcha, no se toca: solo se señala el botón). Una sola vez.
     try {

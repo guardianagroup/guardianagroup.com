@@ -14,6 +14,7 @@ Después, desde esta carpeta:
 - `node whatsapp.js` — «Invitar a chat» en el iPhone: la hoja «WhatsApp» / «Otra app», el enlace whatsapp:// con la invitación, la ida y vuelta a WhatsApp, el chat con ese enlace, qué pasa si WhatsApp no se abre, y Android sin hoja.
 - `node instalar.js` — «¿Añadir GUARDIANA a tu pantalla de inicio?» tras aceptar una invitación: Android (con y sin el aviso del navegador), «Ahora no», el ordenador y el iPhone (sin pregunta).
 - `node enviar.js` — el botón de enviar: en el sitio del micrófono, del mismo tamaño, de color, lejos del teclado y con respuesta al pulsarlo.
+- `node actualiza.js` — la actualización sola: con una versión nueva simulada, espera a que no haya nada a medias, se recarga, vuelve al mismo chat y no entra en bucle.
 - `node contactos.js` — guardar contactos, volver, llamar desde la lista, recargas.
 - `node tirar.js` — tirar para actualizar (solo el ✓, sin palabra).
 - `node web.js` — la página en el ordenador y en el navegador del teléfono.
