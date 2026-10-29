@@ -210,3 +210,17 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
   idiomas»). Versiones: app.css q, app.js q, llamada.js q, viaje b, idioma.js p76, sw 29c.
 - Pendiente con el dueño: foto del iPhone «como si quisiera grabar audio» en la llamada; comprobar avisos Android y audio
   iPhone→iPhone en real; recordarle que su iPhone 16 va en Safari (abrir desde el icono).
+
+## 13. Tramo 5 (13:45, main: 3aecc970) — invitación mínima, «Chat fuerte», altavoz, H.264 baseline
+- **Enlace corto**: `ORIGEN_INV = origin + '/chat/'` (app.js); `chat/index.html` (raíz del repo) pasa a `/orbita/comunicaciones/` con el
+  mismo fragmento `#i=`/`#b=` (location.replace) y lleva las etiquetas OG mínimas (sin imagen). Texto: «Invitación a GUARDIANA».
+- **«Chat fuerte»** (hoja de invitar) y «Fuerte» (cuadro de versiones): dueño 13:19 («normal» suena débil). Claves nuevas en es/en/pt/ru/cs.
+- **Altavoz** (llamada.js): `ELIGE_SALIDA = true` otra vez (botón `#ll-altavoz`; voz → auricular, vídeo → altavoz; solo si el iPhone
+  enseña las dos salidas por `enumerateDevices`). WebKit: `setSinkId` al receptor quita `DefaultToSpeaker` y pone modo VoiceChat
+  (AudioSessionIOS.mm). Si al dueño no le cambia la salida, volver a `false` (y queda el aviso «Suena por el altavoz…»).
+- **Vídeo iPhone → Android en negro** (13:09): `prefiereCodecs('compatible')` pone primero H.264 42e0… con packetization-mode=1, luego VP8,
+  y los perfiles High/Main detrás. Sin poder probarlo aquí: confirmar con el dueño.
+- Cabecera del chat en espera: línea vacía (sin «Invitación enviada»); nota `li.gc-espera` dentro del chat. La nota «Mensajes y
+  llamadas encriptados…» no se repite al fundir chats.
+- El aviso «Cámara grabando / ¿Dejar de grabar?» de su foto es el del propio iOS al tocar la pastilla roja de la cámara: no es nuestro.
+- Pruebas: whatsapp.js (enlace corto) y llamando.js (guía «Seguir en Safari») al día. Versiones: app.js s, llamada.js r, idioma.js p77.
