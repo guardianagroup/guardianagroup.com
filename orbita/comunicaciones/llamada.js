@@ -96,6 +96,13 @@
       $('#ll-mosaico-caja').hidden = !(efectos && video && !!cam);
       $('#ll-grave').setAttribute('aria-pressed', String(voz === 'grave'));
       $('#ll-mosaico').setAttribute('aria-pressed', String(imagen === 'mosaico'));
+      // cada botón dice en qué estado está y qué hace el toque (dueño, 29 Oct 2026, 09:23: «súper fácil de utilizar en pantalla»)
+      for (const [id, on] of [['grave', voz === 'grave'], ['mosaico', imagen === 'mosaico']]) {
+        const sp = $('#ll-' + id + '-caja > span'); if (!sp) continue;
+        const nombre = id === 'grave' ? t('Voz grave') : t('Mosaico'), est = on ? t('activado') : t('desactivado');
+        sp.innerHTML = ''; const b1 = document.createElement('b'); b1.textContent = nombre; const b2 = document.createElement('i'); b2.textContent = est; sp.append(b1, b2);
+        $('#ll-' + id).setAttribute('aria-label', nombre + ': ' + est + ' · ' + (on ? t('tocar para quitarlo') : t('tocar para ponerlo')));
+      }
       const etq = blindada() ? t('Voz e imagen') : t('Tu voz');
       $('#ll-ajustes-b').setAttribute('aria-label', etq); const se = $('#ll-ajustes-caja span'); if (se) se.textContent = etq;
       caja.classList.toggle('ajustes', ajustes);
@@ -593,6 +600,13 @@
       if (!luz) { ganancia = 1; aplicaImagen(); }
       pintaImagenes();
     }
+    // En la sesión blindada, cada llamada empieza con la voz grave y, con imagen, el mosaico (dueño, 29 Oct 2026, 09:23: «el modo
+    // blindado ya por defecto quiero que salga con la opción de mosaico y la voz cambiada, que luego la persona la pueda cambiar»):
+    // la cara y la voz se protegen desde el primer fotograma, antes de que salga nada del equipo. Se quitan con sus dos botones.
+    function efectosPorDefecto() {
+      if (!blindada()) { voz = 'natural'; imagen = 'natural'; return; }
+      voz = 'grave'; imagen = video ? 'mosaico' : 'natural';
+    }
     function eligeImagen(m) {
       if (!(m in IMAGENES)) return; imagen = m;
       aplicaImagen(); pintaImagenes();
@@ -681,11 +695,39 @@
       pc.onicecandidate = (e) => { if (e.candidate) o.manda({ acto: 'ice', id: idLlamada, cand: e.candidate.toJSON() }); };
       pc.onconnectionstatechange = () => {
         if (!pc) return;
-        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); avisaSalida(); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); } }
-        else if (pc.connectionState === 'failed') termina('fallo');
-        else if (pc.connectionState === 'disconnected') di(t('Conexión interrumpida, intentando recuperarla…'), true);
+        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); recuperada(); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); avisaSalida(); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); } }
+        else if (pc.connectionState === 'failed') { di(t('Conexión interrumpida, intentando recuperarla…'), true); reconecta('fallo'); }
+        else if (pc.connectionState === 'disconnected') { di(t('Conexión interrumpida, intentando recuperarla…'), true); reconecta('corte'); }
+      };
+      pc.oniceconnectionstatechange = () => { if (pc && pc.iceConnectionState === 'failed') reconecta('fallo'); };
+      // quien llamó manda la oferta nueva al reiniciar la conexión (la otra persona se lo pide con «reinicia»)
+      pc.onnegotiationneeded = async () => {
+        if (!pc || !inicioYo || estado !== 'hablando' || !reiniciando) return;
+        try { const of = await pc.createOffer({ iceRestart: true }); await pc.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) }); o.manda({ acto: 'reoferta', id: idLlamada, sdp: pc.localDescription.sdp }); } catch (_) {}
       };
     }
+    // La llamada no se cae al cambiar de wifi a datos ni en un corte corto (dueño, 29 Oct 2026, 09:18: «para que se estabilice, pero no
+    // cuelgue la llamada»): se reinicia la negociación de la ruta (ICE) sin tocar el audio ni el vídeo. Quien llamó hace la oferta
+    // nueva; quien contestó se la pide. Solo si en 20 segundos no vuelve, la llamada termina.
+    let reiniciando = false, reinicioT = null, reinicioFin = null, ultimoReinicio = 0;
+    function reconecta(por) {
+      if (!pc || estado !== 'hablando') return;
+      if (!reinicioFin) reinicioFin = setTimeout(() => { reinicioFin = null; if (pc && estado === 'hablando' && pc.connectionState !== 'connected') termina('fallo'); }, 20000);
+      // en un corte, un par de segundos por si la red vuelve sola; en un fallo, ya
+      clearTimeout(reinicioT);
+      reinicioT = setTimeout(() => reiniciaIce(), por === 'fallo' ? 0 : 2500);
+    }
+    function reiniciaIce() {
+      if (!pc || estado !== 'hablando' || pc.connectionState === 'connected') return; // ya volvió sola
+      if (Date.now() - ultimoReinicio < 3000) return; // no más de uno cada 3 s
+      ultimoReinicio = Date.now();
+      if (inicioYo) { reiniciando = true; try { pc.restartIce(); } catch (_) { reiniciando = false; } }
+      else o.manda({ acto: 'reinicia', id: idLlamada });
+    }
+    function recuperada() { reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null; if (paso.textContent === t('Conexión interrumpida, intentando recuperarla…')) di(''); }
+    // al volver la red o cambiar de wifi a datos, la ruta se renegocia enseguida
+    addEventListener('online', () => { if (estado === 'hablando') reconecta('fallo'); });
+    try { if (navigator.connection && navigator.connection.addEventListener) navigator.connection.addEventListener('change', () => { if (estado === 'hablando' && pc && pc.connectionState !== 'connected') reconecta('fallo'); }); } catch (_) {}
     // calidad estimada cada 2 s (ida y vuelta y pérdidas del audio que llega)
     function mideCalidad() {
       clearInterval(sondeo);
@@ -733,6 +775,7 @@
       if (!o.puede()) { o.aviso && o.aviso(t('Para llamar, la otra persona tiene que estar conectada y la sesión, verificada.')); return; }
       if (!(o.ice() || []).length && !LOCAL) { o.aviso && o.aviso(t('El servicio de llamadas no está disponible ahora mismo.')); return; }
       video = !!conVideo && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia); suCamara = true; remotoV = null;
+      efectosPorDefecto();
       desbloquea();
       estado = 'saliente'; inicioYo = true; idLlamada = Math.random().toString(36).slice(2, 10); colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver'); pinta();
       di(video ? t('Pidiendo la cámara y el micrófono…') : t('Pidiendo el micrófono…'));
@@ -759,13 +802,17 @@
       if (m.id && idLlamada && m.id !== idLlamada) return;
       if (m.acto === 'respuesta' && pc && typeof m.sdp === 'string') { paraTono(); clearTimeout(sinRespuesta); await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = []; di(t('Conectando…')); if (video) topeVideo(); return; }
       if (m.acto === 'camara') { suCamara = !!m.on; pintaVideo(); return; }
+      // reinicio de la ruta en mitad de la llamada (ver reconecta)
+      if (m.acto === 'reinicia') { if (pc && estado === 'hablando' && inicioYo) { reiniciando = true; try { pc.restartIce(); } catch (_) { reiniciando = false; } } return; }
+      if (m.acto === 'reoferta' && pc && typeof m.sdp === 'string' && m.sdp.length <= 20000 && !inicioYo) { try { await pc.setRemoteDescription({ type: 'offer', sdp: m.sdp }); const an = await pc.createAnswer(); await pc.setLocalDescription({ type: an.type, sdp: altaFidelidad(an.sdp) }); o.manda({ acto: 'rerespuesta', id: idLlamada, sdp: pc.localDescription.sdp }); if (video) topeVideo(); topeAudio(); } catch (_) {} return; }
+      if (m.acto === 'rerespuesta' && pc && typeof m.sdp === 'string' && m.sdp.length <= 20000 && inicioYo) { try { await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); if (video) topeVideo(); topeAudio(); } catch (_) {} return; }
       if (m.acto === 'ice' && m.cand && typeof m.cand === 'object') { if (pc && pc.remoteDescription) { try { await pc.addIceCandidate(m.cand); } catch (_) {} } else if (pendientes.length < 64) pendientes.push(m.cand); return; }
       if (m.acto === 'colgar') { if (estado !== 'libre') termina(estado === 'hablando' ? 'fin' : 'rechazada'); return; }
       if (m.acto === 'ocupado') { di(t('Ocupado: la otra persona está en otra llamada.'), true); termina('ocupado', 1800); }
     }
     async function contestar() {
       if (estado !== 'entrante' || !ofertaEntrante) return;
-      const m = ofertaEntrante; ofertaEntrante = null; estado = 'conectando'; paraTono(); clearTimeout(sinRespuesta); desbloquea(); pinta();
+      const m = ofertaEntrante; ofertaEntrante = null; estado = 'conectando'; paraTono(); clearTimeout(sinRespuesta); efectosPorDefecto(); desbloquea(); pinta();
       di(video ? t('Pidiendo la cámara y el micrófono…') : t('Pidiendo el micrófono…'));
       try { await medios(video); } catch (_) { di(t('Sin permiso para el micrófono.'), true); o.manda({ acto: 'colgar', id: idLlamada }); return termina('sin-medios', 1800); }
       altavoz = !!video; await buscaSalidas(); preparaRuta(); await aplicaSalida();
@@ -789,6 +836,7 @@
       const dur = iniciada ? Date.now() - iniciada : 0, era = estado, conImagen = video;
       paraTono(); clearTimeout(sinRespuesta);
       clearInterval(reloj); reloj = null; clearInterval(sondeo); sondeo = null;
+      reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null;
       if (pc) { try { pc.close(); } catch (_) {} pc = null; }
       for (const s of [mic, envio, envioVoz, cam]) if (s) s.getTracks().forEach((x) => x.stop());
       if (muda) { try { muda.stop(); } catch (_) {} muda = null; }

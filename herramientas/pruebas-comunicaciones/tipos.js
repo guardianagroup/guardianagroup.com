@@ -92,14 +92,16 @@ async function videollamada(A, B) {
   const vb = await videollamada(C, D);
   comprueba(!vb.sonando.grave && !vb.sonando.mosaico, 'blindado: mientras suena, sin los botones', vb.sonando);
   comprueba(vb.hablando.grave && vb.hablando.mosaico && !vb.hablando.ajustes && !vb.hablando.pildora, 'blindado: con la llamada en marcha, «Voz grave» y «Mosaico» (y nada más)', vb.hablando);
+  // desde el 29 Oct 2026 (dueño, 09:23) la llamada blindada empieza con los dos puestos; un toque los quita
+  comprueba(await C.evaluate(() => document.querySelector('#ll-grave').getAttribute('aria-pressed') === 'true' && document.querySelector('#ll-mosaico').getAttribute('aria-pressed') === 'true'), 'blindado: empieza con «Voz grave» y «Mosaico» puestos');
   await C.click('#ll-grave'); await C.click('#ll-mosaico'); await espera(1500);
-  comprueba(await C.evaluate(() => document.querySelector('#ll-grave').getAttribute('aria-pressed') === 'true' && document.querySelector('#ll-mosaico').getAttribute('aria-pressed') === 'true'), 'blindado: los dos se encienden');
+  comprueba(await C.evaluate(() => document.querySelector('#ll-grave').getAttribute('aria-pressed') === 'false' && document.querySelector('#ll-mosaico').getAttribute('aria-pressed') === 'false'), 'blindado: los dos se quitan con un toque');
   await C.touchscreen.tap(196, 200).catch(() => {}); await espera(300);
   await C.screenshot({ path: path.join(OUT, '6-video-blindado.png') });
   await C.evaluate(() => document.querySelector('#ll-colgar').click()); await espera(1500);
-  // la siguiente llamada empieza natural
+  // la siguiente llamada vuelve a empezar con los dos puestos
   const vb2 = await videollamada(C, D);
-  comprueba(await C.evaluate(() => document.querySelector('#ll-grave').getAttribute('aria-pressed') === 'false' && document.querySelector('#ll-mosaico').getAttribute('aria-pressed') === 'false') && vb2.hablando.grave, 'blindado: la siguiente llamada empieza con la voz y la imagen naturales');
+  comprueba(await C.evaluate(() => document.querySelector('#ll-grave').getAttribute('aria-pressed') === 'true' && document.querySelector('#ll-mosaico').getAttribute('aria-pressed') === 'true') && vb2.hablando.grave, 'blindado: la siguiente llamada también empieza con la voz grave y el mosaico');
   await C.evaluate(() => document.querySelector('#ll-colgar').click()); await espera(1200);
 
   // 4. ordenador: la tecla de captura tapa el chat blindado

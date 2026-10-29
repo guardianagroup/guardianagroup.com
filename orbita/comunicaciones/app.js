@@ -22,6 +22,9 @@
   // el principio, para que «Sí, añadir» abra siempre la ventana del sistema y no los pasos a mano (29 Oct 2026)
   let avisoInstalarTemprano = null;
   addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); avisoInstalarTemprano = e; });
+  // sin zoom con los dedos en Safari, que ignora user-scalable (dueño, 29 Oct 2026, 09:34)
+  for (const ev of ['gesturestart', 'gesturechange']) document.addEventListener(ev, (e) => { try { e.preventDefault(); } catch (_) {} }, { passive: false });
+  document.addEventListener('dblclick', (e) => { if (!e.target.closest('input, textarea, video, #ll-videos')) e.preventDefault(); });
   const LOCAL = /^(127\.0\.0\.1|localhost)$/.test(location.hostname);
 
   // ---------- almacén ----------
@@ -1953,6 +1956,28 @@
     $('#ver-contactos').addEventListener('click', () => { verContactos = true; pintaContactos(); const i = $('#inicio'); if (i) i.scrollTop = 0; });
     // «¿Cómo funciona?» (dueño, 29 Oct 2026, 08:24): su pantalla en el móvil, con «‹»
     $('#ver-como').addEventListener('click', () => { pintaComo(true); });
+    // el logotipo de arriba lleva al inicio desde Contactos, «¿Cómo funciona?» o «¿Por qué?» (dueño, 29 Oct 2026, 09:29); en el
+    // resto no hace nada (28 Oct). Sustituye a «la etiqueta GUARDIANA de arriba no hace nada».
+    { const bt = $('.barra-t');
+      const panelAbierto = () => { const i = $('#inicio'); const pq = $('#porque'); return !!((i && (i.classList.contains('ver-contactos') || i.classList.contains('ver-como'))) || (pq && !pq.hidden)); };
+      if (bt) { bt.setAttribute('role', 'button'); bt.setAttribute('tabindex', '0'); bt.setAttribute('aria-label', T('Ir al inicio'));
+        const alInicio = () => { if (!panelAbierto()) return; const pq = $('#porque'); if (pq && !pq.hidden) { pq.hidden = true; if (history.state && history.state.porque) { try { history.back(); } catch (_) {} } } if (verContactos) { verContactos = false; pintaContactos(); } pintaComo(false); };
+        bt.addEventListener('click', alInicio); bt.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); alInicio(); } });
+        const marca = () => bt.classList.toggle('lleva-inicio', panelAbierto());
+        new MutationObserver(marca).observe($('#inicio'), { attributes: true, attributeFilter: ['class'] });
+        const pq = $('#porque'); if (pq) new MutationObserver(marca).observe(pq, { attributes: true, attributeFilter: ['hidden'] });
+      }
+    }
+    // «Por qué» (dueño, 29 Oct 2026, 09:25): encima de todo, se cierra con «‹», con Esc o con el atrás del navegador
+    { const pq = $('#porque'), pb = $('#porque-btn');
+      const abrePorque = () => { if (!pq || !pq.hidden) return; pq.hidden = false; pq.scrollTop = 0; try { history.pushState(Object.assign({}, history.state || {}, { porque: 1 }), ''); } catch (_) {} setTimeout(() => { const x = $('#porque-atras'); if (x) x.focus({ preventScroll: true }); }, 30); };
+      const cierraPorque = (desdeHistoria) => { if (!pq || pq.hidden) return; pq.hidden = true; if (pb) pb.focus({ preventScroll: true }); if (!desdeHistoria && history.state && history.state.porque) { try { history.back(); } catch (_) {} } };
+      if (pb) pb.addEventListener('click', abrePorque);
+      const cp = $('#como-porque'); if (cp) cp.addEventListener('click', abrePorque);
+      const pa = $('#porque-atras'); if (pa) pa.addEventListener('click', () => cierraPorque(false));
+      addEventListener('popstate', () => { if (pq && !pq.hidden && !(history.state && history.state.porque)) cierraPorque(true); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pq && !pq.hidden) cierraPorque(false); });
+    }
     $('#como-atras').addEventListener('click', () => { pintaComo(false); });
     $('#contactos-atras').addEventListener('click', () => { verContactos = false; pintaContactos(); });
     // el inicio con los contactos: la fila abre el chat; los botones llaman o videollaman
@@ -2037,6 +2062,8 @@
         return n ? 'ios26' : esIPad ? 'ipad' : 'ios';
       }
       if (esAndroid) { if (avisoInstalar) return 'android'; if (dentroDeApp()) return 'appand'; return /SamsungBrowser|Firefox|EdgA|OPR|YaBrowser|UCBrowser|MiuiBrowser|HuaweiBrowser|DuckDuckGo/.test(UA) ? 'androidotro' : 'androidmenu'; }
+      // Safari en el Mac: «Archivo › Añadir al Dock» (29 Oct 2026, 09:28: «la aplicación de escritorio para ponerla en el Mac»)
+      if (/Macintosh/.test(UA) && /Safari\//.test(UA) && !/Chrome|Chromium|Edg|OPR|Firefox/.test(UA)) return avisoInstalar ? 'pc' : 'mac';
       return avisoInstalar ? 'pc' : 'pcno';
     };
     function pintaGuia() {

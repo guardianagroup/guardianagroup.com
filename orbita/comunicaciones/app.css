@@ -908,6 +908,8 @@ html.como-app .barra .barra-logo{width:26px;height:26px;flex:none;margin-left:-2
 .barra .barra-app{display:none}
 html.como-app .barra .barra-web{display:none}
 html.como-app .barra .barra-app{display:inline-flex;align-items:center;gap:10px}
+html.como-app .barra .barra-nombre{display:flex;flex-direction:column;align-items:flex-start;gap:3px;line-height:1}
+html.como-app .barra .barra-nombre small{font:400 10px/1 var(--texto);letter-spacing:.02em;text-transform:none;color:#9fb3c4}
 /* mientras arranca (arranque.js): ni la barra ni la pantalla a medias, solo el fondo; luego aparece de una vez, ya en su sitio
    (dueño, 29 Oct 2026, 08:38: «arriba me aparece durante un momento desconectado y como que se mueve la parte de arriba») */
 html.arrancando .barra,html.arrancando #app,html.arrancando .interno{visibility:hidden}
@@ -982,11 +984,13 @@ html.aparece .barra,html.aparece #app{animation:gcom-aparece .16s ease-out both}
 /* «¿Cómo funciona?» en el móvil: su pantalla, con «‹», como los contactos (dueño, 29 Oct 2026, 08:24) */
 #inicio.ver-como>:not(#como){display:none!important}
 #inicio:not(.ver-como)>#como{display:none}
-.como-texto{margin:4px 6px 0;color:#D5DCE4;font:400 16px/1.5 var(--texto)}
-.como-texto h3{margin:20px 0 6px;font:600 12px/1.2 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#9CC3E4}
+.como-texto{margin:4px 6px 0;color:#E1E7ED;font:400 18px/1.55 var(--texto)}
+.como-texto h3{margin:24px 0 8px;font:600 13.5px/1.25 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#9CC3E4}
 .como-texto h3:first-child{margin-top:4px}
-.como-texto p{margin:0 0 10px}
+.como-texto p{margin:0 0 12px}
+.como-texto .como-porque{display:block;width:100%;margin:22px 0 8px;font-size:17px}
 .como-texto b{color:#F4F6F8;font-weight:600}
+.como-texto .como-nota{font-size:15.5px;line-height:1.5;color:#a9bccb}
 #inicio.con-invitacion>.contactos{display:none}
 @media (max-width:760px){#inicio.ver-contactos::before,#inicio.ver-contactos::after{display:none}#inicio.ver-contactos{padding-top:12px;justify-content:flex-start}}
 @media (max-width:760px){#inicio.ver-como::before,#inicio.ver-como::after{display:none}#inicio.ver-como{padding-top:12px;justify-content:flex-start}#paso-inicio #ver-como{display:flex;align-items:center;justify-content:center;min-height:60px;margin-top:12px;padding:0 20px;text-align:center;border-radius:16px;border:1px solid rgba(156,195,228,.38);background:rgba(12,18,26,.82);color:#E8ECF1}#paso-inicio #ver-como b{font-size:17.5px;line-height:1.2;font-weight:600}#paso-inicio #ver-como:active{background:rgba(156,195,228,.12)}#como-btn{display:none}}
@@ -1204,7 +1208,10 @@ html.aparece .barra,html.aparece #app{animation:gcom-aparece .16s ease-out both}
 .ll-efecto button:active{transform:scale(.94)}
 .ll-efecto button[aria-pressed="true"]{background:#E2C992;color:#06080C;border-color:#E2C992;box-shadow:0 0 0 4px rgba(226,201,146,.18)}
 .ll-efecto button svg{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.ll-efecto span{color:#E8D6AE}
+.ll-efecto span{color:#E8D6AE;display:flex;flex-direction:column;align-items:center;gap:2px}
+.ll-efecto span b{font-weight:600}
+.ll-efecto span i{font-style:normal;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(232,214,174,.72)}
+.ll-efecto button[aria-pressed="true"]+span i{color:#E2C992}
 /* sin la tarjeta «Voz e imagen» ni sus voces: solo los dos botones de arriba, en el blindado (29 Oct 2026, 07:51) */
 .ll-ajustes,#ll-voz-pill{display:none!important}
 /* la pantalla tapada del blindado en el ordenador (29 Oct 2026, 08:02) */
@@ -1264,3 +1271,42 @@ html.aparece .barra,html.aparece #app{animation:gcom-aparece .16s ease-out both}
 /* «Ver el viaje» y el comprobante, como opción cuando el archivo ha llegado, nunca solos (dueño, 28 Oct 2026, 20:19): en el
    teléfono, botones que se tocan bien */
 @media (max-width:760px){#mensajes .gc-archivo .fila .boton.vj-ver,#mensajes .custodia .boton{min-height:44px;padding:0 16px;font-size:14.5px;border-radius:999px}#mensajes .boton.vj-ver svg{width:17px;height:17px}}
+
+/* «Por qué» (dueño, 29 Oct 2026, 09:25): el botón, a la izquierda del idioma; la página, encima de todo, con «‹» */
+.porque-b{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;border:1px solid rgba(156,195,228,.3);color:#9CC3E4;font:500 13px/1 var(--texto);white-space:nowrap}
+.porque-b svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.porque-b:hover,.porque-b:focus-visible{background:rgba(156,195,228,.12)}
+body.en-conv .barra .porque-b{display:none}
+@media (max-width:420px){.porque-b{padding:0 10px}.porque-b span{display:none}.porque-b svg{width:18px;height:18px}}
+.porque{position:fixed;inset:0;z-index:9000;background:#06080C;color:#F4F6F8;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:calc(10px + env(safe-area-inset-top)) 0 calc(24px + env(safe-area-inset-bottom))}
+.porque[hidden]{display:none}
+.porque-cab{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:4px;max-width:640px;margin:0 auto;padding:4px 16px 8px;background:linear-gradient(#06080C 70%,rgba(6,8,12,0))}
+.porque-cab .contactos-t{font:600 15px/1.2 var(--texto);letter-spacing:0;text-transform:none;color:#F4F6F8;margin:0}
+.porque-cuerpo{max-width:640px;margin:0 auto;padding:0 20px}
+.porque-entrada{margin:6px 0 22px;font:400 19px/1.5 var(--texto);color:#E1E7ED}
+.porque-bloque{margin:0 0 18px;padding:18px 18px 16px;border-radius:18px;border:1px solid rgba(156,195,228,.16);background:rgba(12,18,26,.82)}
+.porque-k{margin:0 0 8px;font:600 12.5px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:#9CC3E4}
+.porque-cifra{margin:0 0 8px;font:600 34px/1.05 var(--mono);letter-spacing:-.01em;color:#F0C77F}
+.porque-dato{margin:0 0 12px;font:400 18px/1.55 var(--texto);color:#E8ECF1}
+.porque-por{margin:0;padding-top:12px;border-top:1px solid rgba(156,195,228,.14);font:400 18px/1.55 var(--texto);color:#E1E7ED}
+.porque-por b{color:#9CC3E4;font-weight:600}
+.porque-cierre{margin:26px 0 12px;font:500 20px/1.45 var(--texto);color:#F4F6F8}
+.porque-limite{margin:0 0 18px;font:400 15.5px/1.5 var(--texto);color:#a9bccb}
+.porque-fuentes{margin:0;font:400 13px/1.4 var(--mono);color:#9fb3c4}
+.porque-fuentes a{color:#9CC3E4}
+.porque-verif{display:inline-flex;align-items:center;gap:6px;color:#9CC3E4}
+.porque-verif svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (min-width:761px){.porque-cifra{font-size:40px}.porque-bloque{padding:22px 24px 20px}}
+/* el logotipo de arriba, pulsable cuando lleva al inicio (29 Oct 2026, 09:29) */
+.barra .barra-t.lleva-inicio{cursor:pointer}
+/* en el teléfono no se selecciona nada, ni los códigos ni el número de seguridad (dueño, 29 Oct 2026, 09:30) */
+@media (max-width:760px){.codigo,.numero,.bl-numero{-webkit-user-select:none;user-select:none}}
+img,video,canvas,svg{-webkit-touch-callout:none;-webkit-user-drag:none}
+/* en horizontal, en el teléfono: solo el aviso de girar (29 Oct 2026, 09:34) */
+.gira{display:none}
+@media (pointer: coarse) and (orientation: landscape) and (max-height: 520px) and (max-width: 1024px){
+  .gira{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#06080C;color:#F4F6F8;text-align:center;padding:24px}
+  .gira svg{width:44px;height:44px;fill:none;stroke:#9CC3E4;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .gira b{font:600 20px/1.2 var(--texto)}.gira span{font:400 15px/1.4 var(--texto);color:#9fb3c4}
+}
+
