@@ -1479,3 +1479,18 @@ body.con-visor{overflow:hidden}
 .comp-v.comp-g small{color:#dbe9f4}
 .comp-nota{margin:10px 0 0;font:400 13px/1.45 var(--texto);color:#9fb3c4}
 @media (min-width:761px){.comp-fila{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(4,minmax(0,1fr));gap:8px;align-items:center;padding:10px 14px}.comp-c{margin:0;padding-right:8px}.comp-celdas{display:contents}.comp-cab{grid-template-columns:minmax(0,1.3fr) repeat(4,minmax(0,1fr));gap:8px;padding:0 14px}.comp-cab span:first-child{text-align:left}}
+/* las tres versiones (dueño, 29 Oct 2026, 11:59): tarjeta Ultra y cuadro de tres columnas dentro de «¿Cómo funciona?» */
+.como-modo b{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.como-precio{font:600 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#9fb3c4;white-space:nowrap}
+.como-modo-b .como-precio{color:#9CC3E4}
+.como-modo-u{border-color:rgba(240,199,127,.4);background:linear-gradient(180deg,rgba(240,199,127,.08),rgba(12,18,26,.8))}
+.como-modo-u b::before{content:'';display:inline-block;width:9px;height:9px;border-radius:50%;background:#F0C77F;margin:0 8px 1px 0;box-shadow:0 0 10px rgba(240,199,127,.7)}
+.como-modo-u .como-precio{color:#F0C77F}
+.comp-3{margin:14px 0 4px}
+.comp-3 .comp-cab{position:sticky;top:0;z-index:1;background:linear-gradient(#06080C 80%,rgba(6,8,12,0));padding-top:6px}
+.comp-3 .comp-cab,.comp-3 .comp-celdas{grid-template-columns:repeat(3,1fr)}
+.comp-3 .comp-cab span.comp-c0{display:none}
+.comp-3 .comp-v.comp-g{background:rgba(240,199,127,.10);border-color:rgba(240,199,127,.4)}
+.comp-3 .comp-cab span.comp-g{color:#F0C77F;border-bottom-color:rgba(240,199,127,.6)}
+.comp-3 .comp-v.no i{color:#6F7B88}
+@media (min-width:761px){.comp-3 .comp-fila{grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr))}.comp-3 .comp-cab{grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr))}.comp-3 .comp-cab span.comp-c0{display:block}.como-modos{grid-template-columns:1fr 1fr 1fr}}
