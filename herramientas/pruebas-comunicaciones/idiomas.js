@@ -14,7 +14,7 @@ const espera = (ms) => new Promise((r) => setTimeout(r, ms));
 const fallos = [];
 const comprueba = (cond, txt) => { console.log((cond ? 'OK   ' : 'FALLO') + ' ' + txt); if (!cond) fallos.push(txt); };
 // frases centinela en español: si alguna sigue en pantalla, ese idioma no está entero
-const CENTINELAS = ['¿Cómo funciona?', 'Invitar a chat', 'Tus datos, bajo tu control', 'Encriptación de categoría gubernamental', 'Criptografía postcuántica', 'Dos tipos de chat', 'Sin registro', 'Sin instalar nada', 'Lo que no hace', 'Por eso', '¿Sabías que', 'Ver los datos', 'Nada se muestra solo', 'nada se muestra solo', 'Si detecta un ataque', 'Archivos «todo o nada»', 'El número de la llamada'];
+const CENTINELAS = ['¿Cómo funciona?', 'Dos modos', 'Qué hace por ti', 'Cómo protege', 'Sin registro y sin instalar', 'Mensajes, llamadas, videollamadas y archivos', 'Invitar a chat', 'Tus datos, bajo tu control', 'Encriptación de categoría gubernamental', 'Criptografía postcuántica', 'Dos tipos de chat', 'Sin registro', 'Sin instalar nada', 'Lo que no hace', 'Por eso', '¿Sabías que', 'Ver los datos', 'Nada se muestra solo', 'nada se muestra solo', 'Si detecta un ataque', 'Archivos «todo o nada»', 'El número de la llamada'];
 const LOCALES = { ar: 'ar-SA', bg: 'bg-BG', bn: 'bn-BD', cs: 'cs-CZ', da: 'da-DK', de: 'de-DE', el: 'el-GR', en: 'en-US', es: 'es-ES', fa: 'fa-IR', fi: 'fi-FI', fil: 'fil-PH', fr: 'fr-FR', he: 'he-IL', hi: 'hi-IN', hr: 'hr-HR', hu: 'hu-HU', id: 'id-ID', is: 'is-IS', it: 'it-IT', ja: 'ja-JP', ko: 'ko-KR', ms: 'ms-MY', nb: 'nb-NO', nl: 'nl-NL', pl: 'pl-PL', pt: 'pt-BR', 'pt-pt': 'pt-PT', ro: 'ro-RO', ru: 'ru-RU', sk: 'sk-SK', sv: 'sv-SE', sw: 'sw-KE', ta: 'ta-IN', te: 'te-IN', th: 'th-TH', tr: 'tr-TR', uk: 'uk-UA', ur: 'ur-PK', vi: 'vi-VN', zh: 'zh-CN', 'zh-tw': 'zh-TW' };
 
 (async () => {
@@ -30,15 +30,17 @@ const LOCALES = { ar: 'ar-SA', bg: 'bg-BG', bn: 'bn-BD', cs: 'cs-CZ', da: 'da-DK
     p.on('pageerror', (e) => errores.push(String(e).slice(0, 120)));
     await p.goto('http://127.0.0.1:8080/orbita/comunicaciones/'); await espera(2200);
     const lang = await p.evaluate(() => document.documentElement.lang);
-    const textoInicio = await p.evaluate(() => document.querySelector('#inicio').innerText);
+    const textoInicio = await p.evaluate(() => document.querySelector('#inicio').textContent);
     await p.click('#ver-como'); await espera(500);
-    const textoComo = await p.evaluate(() => document.querySelector('#como').innerText);
+    const textoComo = await p.evaluate(() => document.querySelector('#como').textContent);
     await p.screenshot({ path: path.join(OUT, 'idioma-' + code + '-como.png'), clip: { x: 0, y: 0, width: 393, height: 793 } });
     await p.click('#como-porque'); await espera(600);
-    const textoPorque = await p.evaluate(() => document.querySelector('#porque').innerText);
+    const textoPorque = await p.evaluate(() => document.querySelector('#porque').textContent);
     await p.screenshot({ path: path.join(OUT, 'idioma-' + code + '-porque.png') });
     const todo = textoInicio + '\n' + textoComo + '\n' + textoPorque;
-    const quedan = CENTINELAS.filter((f) => todo.includes(f));
+    // lo que falta en un idioma cae al inglés: en los demás idiomas tampoco puede quedar inglés
+    const EN = ['Two modes', 'What it does for you', 'How it protects', 'No sign-up and nothing to install', 'What it does not do', 'Invite to chat', 'How does it work?', 'Your data, under your control'];
+    const quedan = CENTINELAS.filter((f) => todo.includes(f)).concat(code === 'en' ? [] : EN.filter((f) => todo.includes(f)));
     comprueba(lang.toLowerCase().startsWith(code.split('-')[0]) && !quedan.length && !errores.length, code + ': lang=' + lang + (quedan.length ? ' · en español: ' + quedan.join(' | ') : '') + (errores.length ? ' · errores: ' + errores[0] : ''));
     await ctx.close();
   }
