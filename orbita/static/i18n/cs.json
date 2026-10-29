@@ -3391,6 +3391,26 @@
 "Y después, «Pegar»":"A pak „Vložit“",
 "No hay ninguna invitación copiada. Copia el enlace que te han enviado y vuelve a tocar aquí.":"Není zkopírovaná žádná pozvánka. Zkopírujte odkaz, který vám poslali, a klepněte sem znovu.",
 "No se pudo copiar: mantén pulsado el enlace del mensaje y elige «Copiar».":"Nepodařilo se zkopírovat: podržte odkaz ve zprávě a zvolte „Kopírovat“."
+,
+"Te han invitado a GUARDIANA":"Byli jste pozváni do GUARDIANY",
+"Añade GUARDIANA a tu pantalla de inicio: el chat se abre dentro de la app, con sus avisos.":"Přidejte GUARDIANU na plochu: chat se otevře v aplikaci, i s upozorněními.",
+"Ver cómo se añade":"Jak ji přidat",
+"Usar en Safari, sin avisos":"Použít v Safari, bez upozornění",
+"El chat se abrirá dentro de la app, con sus avisos. Son dos toques.":"Chat se otevře v aplikaci, i s upozorněními. Dvě klepnutí."
+,
+"Pulsa":"Klepněte na",
+"Pulsa «Agregar a Inicio»":"Klepněte na „Přidat na plochu“",
+"Pulsa «Añadir a pantalla de inicio»":"Klepněte na „Přidat na plochu“",
+"Pulsa ⋯ y elige «Abrir en el navegador»":"Klepněte na ⋯ a zvolte „Otevřít v prohlížeči“",
+"Pulsa «Instalar», aquí abajo":"Klepněte na „Instalovat“ zde dole",
+"Pulsa los tres puntos ⋮":"Klepněte na tři tečky ⋮",
+"Pulsa «Instalar app»":"Klepněte na „Instalovat aplikaci“",
+"Pulsa «Instalar aplicación»":"Klepněte na „Instalovat aplikaci“",
+"El chat se abrirá dentro de la app, con sus avisos. Son dos pulsaciones.":"Chat se otevře v aplikaci, i s upozorněními. Dvě klepnutí."
+,
+"Modo día":"Denní režim",
+"Modo noche":"Noční režim",
+"Fondo claro y letras oscuras en toda la app.":"Světlé pozadí a tmavé písmo v celé aplikaci."
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

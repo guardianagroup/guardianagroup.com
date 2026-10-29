@@ -2,7 +2,7 @@
 // aplicación no le aparecen y le aparece una página abierta en Safari»; «le aparece duplicado, le aparece en Safari y en la
 // aplicación»). En el iPhone, Safari y la app de la pantalla de inicio guardan cada uno sus cosas por separado y Safari no puede
 // avisar con la app cerrada: por eso, en Safari, el enlace ya no abre el chat; se elige añadir la app (la invitación entra dentro)
-// o copiar la invitación y pegarla en la app. Se comprueba además el puntito verde/rojo y la pantalla de Ajustes.
+// (y la app nace con el chat). Se comprueba además el puntito verde/rojo y la pantalla de Ajustes.
 // Usage: node iphone.js <outdir>
 'use strict';
 const { chromium } = require('playwright');
@@ -47,29 +47,34 @@ async function telefono(browser, nombre, app) {
   await espera(1800);
   const enlace = (await A.evaluate(() => window.gcomPrueba.enlace())).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
 
-  // 1. En Safari, el enlace NO abre el chat: la pantalla explica que tiene que ir dentro de la app
-  await Saf.goto(enlace); await espera(2200);
-  comprueba(await visible(Saf, '#paso-ios'), 'Safari: la invitación no se acepta aquí, sale la pantalla del iPhone');
-  comprueba(!(await visible(Saf, '#paso-aceptar')) && await Saf.evaluate(() => window.gcomPrueba.cuantas() === 0), 'Safari: no se ha creado ningún chat');
-  comprueba(await visible(Saf, '#ios-anadir') && await visible(Saf, '#ios-tengo'), 'Safari: las dos salidas («Todavía no tengo la app» y «Ya tengo GUARDIANA»)');
-  await foto(Saf, '80-safari-invitacion');
+  // 1. En Safari, el enlace NO abre el chat: sale sola la guía de añadir a la pantalla de inicio, con la invitación dentro
+  //    (dueño, 17:04: «tiene que ser de una vez… que quede añadida la aplicación y que no se vea en Safari»)
+  await Saf.goto(enlace); await espera(2500);
+  comprueba(await visible(Saf, '#paso-ios') && !(await visible(Saf, '#paso-aceptar')), 'Safari: la invitación no se acepta aquí');
+  comprueba(await Saf.evaluate(() => window.gcomPrueba.cuantas() === 0), 'Safari: no se ha creado ningún chat');
+  comprueba(await Saf.evaluate(() => document.querySelector('#h-completa').classList.contains('gc-abierta')), 'Safari: la guía de la pantalla de inicio sale sola, sin elegir nada');
+  comprueba(!(await visible(Saf, '#guia-safari')) && !(await visible(Saf, '#completa-ok')), 'Safari: en la guía no hay «Seguir en Safari» ni «Entendido», solo los pasos');
+  const man = await Saf.evaluate(() => decodeURIComponent(document.querySelector('link[rel="manifest"]').getAttribute('href') || ''));
+  comprueba(/"start_url":"\/orbita\/comunicaciones\/\?app=1&inv=i=[A-Za-z0-9_-]{43}#i=[A-Za-z0-9_-]{43}"/.test(man), 'Safari: la app que se añade arranca con la invitación dentro (dirección de inicio)', man.slice(0, 160));
+  comprueba(/\?app=1&inv=i=[A-Za-z0-9_-]{43}#i=/.test(await Saf.evaluate(() => location.href)), 'Safari: y la dirección de la página también la lleva (por si el iPhone toma esa)');
+  await foto(Saf, '80-safari-guia');
+  // cerrando la guía queda la pantalla que la vuelve a abrir, y, discreto, «Usar en Safari»
+  await Saf.evaluate(() => { const h = document.querySelector('#h-completa'); h.dispatchEvent(new MouseEvent('click', { bubbles: true })); }); await espera(500);
+  comprueba(!(await Saf.evaluate(() => document.querySelector('#h-completa').classList.contains('gc-abierta'))) && await visible(Saf, '#ios-anadir'), 'Safari: tocando fuera se cierra la guía y queda «Ver cómo se añade»');
+  await Saf.click('#ios-anadir'); await espera(500);
+  comprueba(await Saf.evaluate(() => document.querySelector('#h-completa').classList.contains('gc-abierta')), 'Safari: «Ver cómo se añade» la vuelve a abrir');
+  await Saf.evaluate(() => { const h = document.querySelector('#h-completa'); h.dispatchEvent(new MouseEvent('click', { bubbles: true })); }); await espera(400);
 
-  // 2. «Ya tengo GUARDIANA»: copia la invitación y explica los tres pasos
-  await Saf.click('#ios-tengo'); await espera(700);
-  comprueba(await visible(Saf, '#ios-paso2') && !(await visible(Saf, '#ios-paso1')), 'Safari: «Ya tengo GUARDIANA» lleva a los pasos para pegarla');
-  const copiado = await Saf.evaluate(() => window.__porta);
-  comprueba(/#[ib]=[A-Za-z0-9_-]{43}/.test(copiado || ''), 'Safari: la invitación queda copiada', copiado);
-  await foto(Saf, '81-safari-copiada');
-
-  // 3. En la app, «Tengo una invitación» la pega y entra: el chat nace dentro de la app
-  await App.goto(URL0 + '?app=1'); await espera(1600);
-  comprueba(await visible(App, '#pegar-inv'), 'app: el botón «Tengo una invitación»');
-  await App.evaluate((t) => { window.__porta = t; }, copiado);
-  await App.click('#pegar-inv'); await espera(1200);
-  if (await App.$('#aceptar-si:visible')) { await App.click('#aceptar-si'); await espera(1200); }
-  comprueba(await App.evaluate(() => window.gcomPrueba.cuantas() === 1), 'app: la invitación pegada abre el chat');
+  // 2. La app añadida arranca con esa dirección: el chat nace dentro de la app
+  await App.goto(await Saf.evaluate(() => location.href)); await espera(2200);
+  comprueba(await visible(App, '#aceptar-si'), 'app: arranca con la invitación («¿Aceptas?»)');
+  await App.click('#aceptar-si'); await espera(1500);
+  comprueba(await App.evaluate(() => window.gcomPrueba.cuantas() === 1), 'app: el chat nace dentro de la app');
   comprueba(await hasta(A, () => { const c = window.gcomPrueba.conv(); return !!(c && c.huella && c.sesion); }, 14000), 'los dos conectados por el chat de la app');
   await foto(App, '82-app-chat');
+
+  // 3. (dueño, 17:28): nada de «Tengo una invitación» ni de modo día; el inicio, con sus tres botones y nada más
+  comprueba(!(await App.$('#pegar-inv')) && !(await App.$('#tema-btn')), 'app: sin «Tengo una invitación» ni botón del sol');
 
   // 4. El puntito: verde con la otra persona dentro, sin ninguna palabra
   await espera(900);

@@ -315,7 +315,7 @@
   let invitacionIOS = null;
   function muestraIOS(ver, enlace) {
     const p = $('#paso-ios'); if (!p) return;
-    if (ver) { invitacionIOS = enlace || invitacionIOS; verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; $('#ios-paso1').hidden = false; $('#ios-paso2').hidden = true; }
+    if (ver) { invitacionIOS = enlace || invitacionIOS; verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; }
     p.hidden = !ver; $('#inicio').classList.toggle('con-invitacion', ver); document.body.classList.toggle('aceptando', ver);
     if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar', 'paso-aceptar']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
     else $('#paso-inicio').hidden = false;
@@ -1382,14 +1382,23 @@
       if (ref.alias && !c.alias) c.alias = ref.alias;
       if (!c.nombre && ref.nombre) c.nombre = ref.nombre;
       if (ref.verificada) c.verificada = true; // el número de seguridad es el mismo (mismas identidades)
+      // primero se cierra la conversación vieja y luego se mudan sus mensajes: al revés, uno que llegara entre medias se guardaba
+      // en la vieja y quedaba perdido en la base de datos (revisión, 29 Oct 2026). Si se estaba dentro de ella (o había una llamada
+      // en marcha), se sigue aquí, en el chat de siempre, sin volver al inicio.
+      let abrirAqui = false;
       for (const o of viejas) {
-        for (const st of ['msg', 'arch']) { const xs = await BD.porConv(st, o.id); for (const x of xs) { x.conv = c.id; await BD.pon(st, x); } }
+        if (ACTUAL === o.id) abrirAqui = true;
+        if (LLAMADA_CONV === o.id) LLAMADA_CONV = c.id;
         for (const m of o.mensajes || []) { try { VIAJES.delete(m.id); } catch (_) {} }
         o.estado = 'destruida'; o.mensajes = []; o.cola = [];
         if (o.codigo) { try { R.retira(o.codigo); } catch (_) {} }
-        R.sale(o.id); CONVS.delete(o.id); await BD.borra('conv', o.id);
-        if (ACTUAL === o.id) cierraConv();
+        R.sale(o.id); CONVS.delete(o.id);
+        for (const st of ['msg', 'arch']) { const xs = await BD.porConv(st, o.id); for (const x of xs) { x.conv = c.id; await BD.pon(st, x); } }
+        // una segunda pasada, por si algo entró mientras se mudaba lo anterior
+        for (const st of ['msg', 'arch']) { const xs = await BD.porConv(st, o.id); for (const x of xs) { x.conv = c.id; await BD.pon(st, x); } }
+        await BD.borra('conv', o.id);
       }
+      if (abrirAqui && ACTUAL !== c.id) await abreConv(c.id);
       c.cargados = false; c.mensajes = []; c.cola = []; await cargaMensajes(c);
       const u = c.mensajes.filter((x) => x.dir !== 'sistema').pop(); if (u) { c.ultimo = Math.max(c.ultimo || 0, u.t || 0); c.ultimoTexto = await guardaSellado({ texto: u.tipo === 'texto' ? u.texto : u.tipo === 'archivo' ? '📎 ' + u.archivo.nombre : u.texto || '' }); }
       await guardaConv(c);
@@ -2323,7 +2332,8 @@
       swReg = await navigator.serviceWorker.register(SW_URL, { scope: '/orbita/comunicaciones/' });
       navigator.serviceWorker.addEventListener('message', (e) => {
         const d = e.data || {};
-        if (d.t === 'abre' && d.sala && CONVS.has(d.sala) && ACTUAL !== d.sala) abreConv(d.sala);
+        // solo un chat vivo: un aviso viejo de un chat ya eliminado no lo resucita vacío (revisión, 29 Oct 2026)
+        if (d.t === 'abre' && d.sala && vivas().some((x) => x.id === d.sala) && ACTUAL !== d.sala) abreConv(d.sala);
         // el aviso de un push que llega con ese chat a la vista: se retira enseguida (el mensaje se lee aquí)
         if (d.t === 'aviso' && d.sala && d.tipo === 'mensaje' && ACTUAL === d.sala && document.visibilityState === 'visible') setTimeout(() => retiraAvisos(d.sala), 1200);
       });
@@ -2623,7 +2633,9 @@
     let guiaSeguir = null; // con una invitación en Safari: lo que hace «Seguir en Safari» (se recuerda por si la guía se cierra y se vuelve a abrir)
     function abreGuia() {
       pintaGuia(); const h = $('#h-completa'), inv = !!guiaSeguir && /#[ib]=/.test(location.hash) && !comoApp();
-      h.classList.toggle('con-invitacion', inv); const b = $('#guia-safari'); if (b) b.hidden = !inv; $('#completa-ok').hidden = inv;
+      // con la invitación: solo los pasos, sin «Seguir en Safari» ni «Entendido» (dueño, 29 Oct 2026, 14:31 y 17:04: «tiene que ser de
+      // una vez… que no se vea en Safari»); se puede cerrar tocando fuera, y detrás queda la pantalla que la vuelve a abrir
+      h.classList.toggle('con-invitacion', inv); const b = $('#guia-safari'); if (b) b.hidden = true; $('#completa-ok').hidden = inv;
       abreHoja('h-completa');
     }
     // iPhone y iPad (dueño, 29 Oct 2026, 12:29: «en iPhone no se guardan [los contactos]»): Safari y la app de la pantalla de inicio
@@ -2654,25 +2666,11 @@
     $('#anadir-app').addEventListener('click', () => { if (avisoInstalar) instala(); else abreGuia(); });
     // ---- iPhone: la invitación, dentro de la app (dueño, 29 Oct 2026, 16:05–16:11) ----
     const trozoInv = (e) => { const m = String(e || '').match(/#[ib]=[A-Za-z0-9_-]{43}/); return m ? m[0] : ''; };
-    { const b = $('#ios-anadir'); if (b) b.addEventListener('click', () => { const h = trozoInv(invitacionIOS); if (!h || !window.gcomGuiaInvitacion) { aceptaEnlaceYa(invitacionIOS); muestraIOS(false); return; } window.gcomGuiaInvitacion(h, () => { muestraIOS(false); aceptaEnlaceYa(invitacionIOS); }); }); }
-    { const b = $('#ios-tengo'); if (b) b.addEventListener('click', async () => {
-      const u = invitacionIOS || '';
-      let ok = false;
-      try { await navigator.clipboard.writeText(u); ok = true; } catch (_) {}
-      if (!ok) { try { const i = document.createElement('input'); i.value = u; i.setAttribute('readonly', ''); i.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(i); i.select(); i.setSelectionRange(0, 99999); ok = document.execCommand('copy'); i.remove(); } catch (_) {} }
-      $('#ios-paso1').hidden = true; $('#ios-paso2').hidden = false;
-      if (!ok) aviso(T('No se pudo copiar: mantén pulsado el enlace del mensaje y elige «Copiar».'));
-    }); }
-    for (const id of ['#ios-safari', '#ios-safari-2']) { const b = $(id); if (b) b.addEventListener('click', () => { const u = invitacionIOS; muestraIOS(false); aceptaEnlaceYa(u); }); }
-    // la invitación copiada se pega aquí, dentro de la app (en el iPhone es la única forma de pasarla de Safari a la app)
-    { const b = $('#pegar-inv'); if (b) { b.hidden = !esIOS;
-      b.addEventListener('click', async () => {
-        let t = ''; try { t = await navigator.clipboard.readText(); } catch (_) { t = ''; }
-        if (!trozoInv(t)) { aviso(T('No hay ninguna invitación copiada. Copia el enlace que te han enviado y vuelve a tocar aquí.')); return; }
-        const ok = await aceptaInvitacion(t);
-        if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.'));
-      });
-    } }
+    // la guía de añadir a la pantalla de inicio, con la invitación dentro (va en la dirección de inicio de la app, y también en la
+    // de esta página, por si el iPhone toma esta en vez de la del manifiesto). Sale sola; este botón la vuelve a abrir si se cerró.
+    const guiaIOS = () => { const h = trozoInv(invitacionIOS); if (!h || !window.gcomGuiaInvitacion) return false; try { history.replaceState(null, '', location.pathname + '?app=1&inv=' + h.slice(1) + h); } catch (_) {} window.gcomGuiaInvitacion(h, () => { muestraIOS(false); aceptaEnlaceYa(invitacionIOS); }); return true; };
+    { const b = $('#ios-anadir'); if (b) b.addEventListener('click', () => { if (!guiaIOS()) { muestraIOS(false); aceptaEnlaceYa(invitacionIOS); } }); }
+    { const b = $('#ios-safari'); if (b) b.addEventListener('click', () => { const u = invitacionIOS; guiaSeguir = null; cierraHoja('h-completa'); $('#h-completa').classList.remove('con-invitacion'); $('#completa-ok').hidden = false; muestraIOS(false); aceptaEnlaceYa(u); }); }
     // en el ordenador, el botón del inicio dice lo que hace (29 Oct 2026, 07:44: «la versión de escritorio para el PC también»)
     if (!esIOS && !esAndroid) { const s = $('#anadir-app span'); if (s) s.textContent = T('Instalar en este ordenador'); }
     // Tras aceptar una invitación, una sola pregunta: «¿Añadir GUARDIANA a tu pantalla de inicio?» (29 Oct 2026, 07:44). En Android
@@ -2899,9 +2897,12 @@
     // Las notas de voz no pasan por aquí: ya se envían con su propio botón.
     let porEnviar = null; // { conv, fs, urls }
     const sueltaEnvio = () => { if (porEnviar) porEnviar.urls.forEach((u) => URL.revokeObjectURL(u)); porEnviar = null; $('#envio-lista').textContent = ''; };
-    const revisaEnvio = (c, fs) => {
+    const revisaEnvio = async (c, fs) => {
       fs = fs.filter((f) => f && f.size);
       if (!c || !fs.length) return;
+      // una foto lleva dentro dónde y con qué se hizo: se quita siempre, venga de donde venga (Documento, pegar o arrastrar; antes
+      // solo se limpiaba la de «Foto» y «Cámara»; revisión, 29 Oct 2026)
+      try { fs = await Promise.all(fs.map((f) => sinDatosOcultos(f))); } catch (_) {}
       // chat fuerte (el normal): la foto o el archivo se envía directo, sin hoja ni «Tapar» (dueño, 29 Oct 2026, 15:29: «cuando se envía
       // una foto, se envía directa… elimínalo… normal, clásico y sencillo»). La hoja con «Tapar» y el tiempo, solo en el blindado
       if (!extrasB(c)) { enviaArchivos(c, fs); return; }
@@ -3232,6 +3233,7 @@
     if (/#[ib]=/.test(location.hash) && iosSafari && !comoApp()) {
       revela();
       muestraIOS(true, location.href);
+      setTimeout(() => { try { $('#ios-anadir').click(); } catch (_) {} }, 350); // la guía, sola: dos toques y la app queda añadida
     }
     else if (/#[ib]=/.test(location.hash)) { const ok = await preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     else {
@@ -3250,7 +3252,7 @@
     registraSW().then(() => { if (permisoAvisos() === 'granted') sincronizaAvisos(); });
     try {
       const q = new URLSearchParams(location.search);
-      if (q.get('desde') === 'aviso') { const sala = q.get('sala'); history.replaceState(history.state, '', location.pathname + (q.get('app') === '1' ? '?app=1' : '') + location.hash); if (sala && CONVS.has(sala) && ACTUAL !== sala) abreConv(sala); }
+      if (q.get('desde') === 'aviso') { const sala = q.get('sala'); history.replaceState(history.state, '', location.pathname + (q.get('app') === '1' ? '?app=1' : '') + location.hash); if (sala && vivas().some((x) => x.id === sala) && ACTUAL !== sala) abreConv(sala); }
     } catch (_) {}
     setTimeout(preguntaAvisos, 4000);
     // NÚCLEO guiado (ronda 63): «Tengo un código» llega con el campo del código abierto; «Crear una invitación», con la invitación

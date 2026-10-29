@@ -17,7 +17,7 @@
     const emite = (t, ...a) => { for (const f of esc[t] || []) { try { f(...a); } catch (e) { console.error(e); } } };
     let ws = null, url = null, abierto = false, intentos = 0, ping = null, cerrando = false;
     const salas = new Map(); // sala → { yo, b } (b: sala de una sesión blindada)
-    let ice = [], caduca = 0, region = '', llamadas = false, ultimoPong = 0, pingEn = 0, latencia = null, avisos = ''; const hist = [];
+    let ice = [], caduca = 0, region = '', llamadas = false, ultimoPong = 0, pingEn = 0, latencia = null, avisos = '', marca = false; const hist = [];
     const esperas = {}; // respuestas pendientes (invita, busca)
     // la app en segundo plano (presencia): si la página nace oculta (el teléfono la abre en segundo plano), ya cuenta como fuera
     let fueraAhora = typeof document !== 'undefined' && document.visibilityState !== 'visible';
@@ -42,7 +42,8 @@
       ws.binaryType = 'arraybuffer';
       ws.onopen = () => {
         abierto = true; intentos = 0;
-        ws.send(JSON.stringify({ t: 'hola' }));
+        // «marca: 1»: esta página marca las tramas que merecen aviso, así que el relé no tiene que avisar por todas
+        ws.send(JSON.stringify({ t: 'hola', marca: 1 }));
         for (const [sala, x] of salas) ws.send(JSON.stringify({ t: 'entra', sala, yo: x.yo, b: x.b || undefined }));
         if (subUlt) { try { ws.send(JSON.stringify({ t: 'avisos', sub: subUlt, salas: salasUlt })); } catch (_) {} }
         if (fueraAhora) { try { ws.send(JSON.stringify({ t: 'presencia', fuera: 1 })); } catch (_) {} }
@@ -53,7 +54,7 @@
         if (typeof e.data === 'string') {
           let m; try { m = JSON.parse(e.data); } catch (_) { return; }
           switch (m.t) {
-            case 'hola': region = m.region || ''; llamadas = !!m.llamadas; ice = m.ice || []; caduca = m.caduca || 0; avisos = typeof m.avisos === 'string' ? m.avisos : ''; emite('hola', { region, llamadas, ice, avisos }); break;
+            case 'hola': region = m.region || ''; llamadas = !!m.llamadas; ice = m.ice || []; caduca = m.caduca || 0; avisos = typeof m.avisos === 'string' ? m.avisos : ''; marca = m.marca === 1; emite('hola', { region, llamadas, ice, avisos }); break;
             case 'ice': ice = m.ice || []; caduca = m.caduca || 0; emite('ice', ice); break;
             case 'sala': emite('sala', m.sala, m.miembros || []); break;
             case 'llega': emite('llega', m.sala, m.quien); break;
@@ -79,7 +80,7 @@
         const sala = hex(b.subarray(1, 33)), de = hex(b.subarray(33, 41));
         emite('trama', sala, de, b.subarray(41));
       };
-      ws.onclose = () => { const estaba = abierto; abierto = false; clearInterval(ping); ws = null; if (estaba) emite('cerrado'); reintenta(); };
+      ws.onclose = () => { const estaba = abierto; abierto = false; marca = false; clearInterval(ping); ws = null; if (estaba) emite('cerrado'); reintenta(); };
       ws.onerror = () => {};
     }
     function reintenta() {
@@ -117,7 +118,8 @@
       if (!abierto) return false;
       const c = carga instanceof Uint8Array ? carga : new Uint8Array(carga);
       const b = new Uint8Array(41 + c.length);
-      b[0] = avisa ? 0x11 : 1; b.set(deHex(sala), 1); if (para) b.set(deHex(para), 33); b.set(c, 41);
+      // solo con un relé que entienda la marca: uno anterior descartaría la trama y el mensaje se perdería
+      b[0] = avisa && marca ? 0x11 : 1; b.set(deHex(sala), 1); if (para) b.set(deHex(para), 33); b.set(c, 41);
       try { ws.send(b); return true; } catch (_) { return false; }
     }
     function pideIce() { if (abierto) ws.send(JSON.stringify({ t: 'ice' })); }

@@ -28,7 +28,7 @@ async function telefono(browser, alto) {
   // iPhone en Safari con una invitación (29 Oct 2026, 12:29): primero la guía de la pantalla de inicio; aquí se sigue en Safari
   if (await B.$('#h-completa.gc-abierta #guia-safari:visible')) { comprueba(true, 'B (Safari): la guía de añadir a la pantalla de inicio, con «Seguir en Safari»'); await B.click('#guia-safari'); await espera(800); }
   // iPhone en Safari (29 Oct 2026, 16:05): el enlace ya no abre el chat aquí; en la prueba se sigue en Safari
-  if (await B.$('#paso-ios:not([hidden]) #ios-safari')) { await B.click('#ios-safari'); await espera(900); }
+  if (await B.$('#paso-ios:not([hidden]) #ios-safari')) { await B.evaluate(() => document.querySelector('#ios-safari').click()); await espera(900); }
   await B.click('#aceptar-si'); await espera(5000);
   await A.click('#ccontacto-si'); await A.fill('#nombre-conv', 'Nathalie ❤️'); await A.click('#nombre-guardar'); await espera(500);
   await A.click('#videollamar'); await espera(2200);

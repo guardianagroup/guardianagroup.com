@@ -3391,6 +3391,26 @@
 "Y después, «Pegar»":"А затем «Вставить»",
 "No hay ninguna invitación copiada. Copia el enlace que te han enviado y vuelve a tocar aquí.":"Приглашение не скопировано. Скопируйте присланную ссылку и нажмите здесь снова.",
 "No se pudo copiar: mantén pulsado el enlace del mensaje y elige «Copiar».":"Не удалось скопировать: нажмите и удерживайте ссылку в сообщении и выберите «Копировать»."
+,
+"Te han invitado a GUARDIANA":"Вас пригласили в GUARDIANA",
+"Añade GUARDIANA a tu pantalla de inicio: el chat se abre dentro de la app, con sus avisos.":"Добавьте GUARDIANA на экран «Домой»: чат откроется внутри приложения, с уведомлениями.",
+"Ver cómo se añade":"Как добавить",
+"Usar en Safari, sin avisos":"Использовать в Safari, без уведомлений",
+"El chat se abrirá dentro de la app, con sus avisos. Son dos toques.":"Чат откроется внутри приложения, с уведомлениями. Два касания."
+,
+"Pulsa":"Нажмите",
+"Pulsa «Agregar a Inicio»":"Нажмите «На экран „Домой“»",
+"Pulsa «Añadir a pantalla de inicio»":"Нажмите «На экран „Домой“»",
+"Pulsa ⋯ y elige «Abrir en el navegador»":"Нажмите ⋯ и выберите «Открыть в браузере»",
+"Pulsa «Instalar», aquí abajo":"Нажмите «Установить» здесь, внизу",
+"Pulsa los tres puntos ⋮":"Нажмите три точки ⋮",
+"Pulsa «Instalar app»":"Нажмите «Установить приложение»",
+"Pulsa «Instalar aplicación»":"Нажмите «Установить приложение»",
+"El chat se abrirá dentro de la app, con sus avisos. Son dos pulsaciones.":"Чат откроется внутри приложения, с уведомлениями. Два касания."
+,
+"Modo día":"Дневной режим",
+"Modo noche":"Ночной режим",
+"Fondo claro y letras oscuras en toda la app.":"Светлый фон и тёмный текст во всём приложении."
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

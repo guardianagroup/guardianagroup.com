@@ -920,6 +920,8 @@
     let ultimaOferta = null, ausenteT = null;
     function seFue() {
       clearTimeout(ausenteT); ausenteT = null;
+      // llamando: ya no está sonando en su teléfono, así que vuelve a decir «Llamando…» hasta que regrese (revisión, 29 Oct 2026)
+      if (estado === 'saliente') di(t('Llamando…'));
       if (estado === 'entrante' || estado === 'conectando') ausenteT = setTimeout(() => { ausenteT = null; if (estado === 'entrante') termina('rechazada'); else if (estado === 'conectando') termina('fallo'); }, 12000);
     }
     function volvio() {
@@ -930,6 +932,11 @@
       if (!m || !m.acto) return;
       if (m.acto === 'oferta') {
         if (typeof m.sdp !== 'string' || m.sdp.length > 20000) return;
+        // la misma llamada que vuelve a mandar su oferta porque la otra persona perdió un momento el relé: se queda la nueva, que
+        // trae las rutas (ICE) que no llegaron; si no, la llamada sonaba pero no conectaba (revisión, 29 Oct 2026)
+        if (m.id && m.id === idLlamada && estado === 'entrante' && ofertaEntrante) { ofertaEntrante = m; return; }
+        // recién colgada: una llamada nueva entra (antes salía «Ocupado» si se devolvía la llamada en el acto)
+        if (estado === 'cerrando') { estado = 'libre'; idLlamada = null; caja.classList.remove('gc-saliendo'); }
         if (ocupado()) { if (m.id !== idLlamada) o.manda({ acto: 'ocupado', id: m.id }); return; }
         ofertaEntrante = m; idLlamada = String(m.id || '').slice(0, 16); estado = 'entrante'; inicioYo = false; colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver');
         sas = null; await sasNuevo(); if (sas) { try { sas.suCompromiso = typeof m.sas === 'string' && m.sas.length < 64 ? deB64u(m.sas) : null; } catch (_) { sas.suCompromiso = null; } if (!sas.suCompromiso || sas.suCompromiso.length !== 32) sas = null; }
@@ -979,8 +986,11 @@
       pinta();
       di(t('Conectando…'));
     }
-    function colgar() { if (estado === 'libre') return; colgoYo = true; o.manda({ acto: 'colgar', id: idLlamada }); termina(estado === 'hablando' ? 'fin' : estado === 'entrante' ? 'rechazada' : 'cancelada'); }
+    // ya colgada (o colgándose): un segundo toque, o que el otro cuelgue a la vez, no vuelve a terminarla (si no, dos tarjetas de
+    // llamada en el chat y «Llamada perdida» por duplicado; revisión, 29 Oct 2026)
+    function colgar() { if (estado === 'libre' || estado === 'cerrando') return; colgoYo = true; o.manda({ acto: 'colgar', id: idLlamada }); termina(estado === 'hablando' ? 'fin' : estado === 'entrante' ? 'rechazada' : 'cancelada'); }
     function termina(por, espera) {
+      if (estado === 'libre' || estado === 'cerrando') return;
       const dur = iniciada ? Date.now() - iniciada : 0, era = estado, conImagen = video;
       paraTono(); clearTimeout(sinRespuesta); clearTimeout(ausenteT); ausenteT = null; ultimaOferta = null; sueltaWake();
       clearInterval(reloj); reloj = null; clearInterval(sondeo); sondeo = null;
@@ -997,7 +1007,8 @@
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
       pendientes = []; ofertaEntrante = null; iniciada = 0; partidaPorDefecto = true;
       sas = null; caja.classList.remove('sas-plegado', 'sas-grande'); clearTimeout(sasPlegadoT); pintaSas();
-      voz = 'natural'; imagen = 'natural'; // la próxima llamada empieza con la voz y la imagen naturales mudasRemotas = [];
+      voz = 'natural'; imagen = 'natural'; // la próxima llamada empieza con la voz y la imagen naturales
+      mudasRemotas = [];
       const silencio = $('#ll-silenciar'); if (silencio) silencio.setAttribute('aria-pressed', 'false');
       if (por === 'fin') di(t('Llamada terminada'));
       else if (por === 'fallo') di(t('No se pudo mantener la conexión.'), true);
@@ -1007,7 +1018,7 @@
       // «al cortar la llamada… tienes que profesionalizar más esto»)
       const dura = espera || (por === 'fin' || por === 'cancelada' ? 700 : 1500);
       setTimeout(() => { if (estado === 'cerrando') caja.classList.add('gc-saliendo'); }, Math.max(0, dura - 280));
-      setTimeout(() => { estado = 'libre'; idLlamada = null; pinta(); }, dura);
+      setTimeout(() => { if (estado !== 'cerrando') return; estado = 'libre'; idLlamada = null; pinta(); }, dura);
       if (o.fin && era !== 'libre') o.fin({ por, duracion: dur, mia: inicioYo, yoColgue: colgoYo, saliente: era === 'saliente' || (era === 'hablando' && colgoYo), voz: voz !== 'natural', video: conImagen });
     }
     $('#ll-colgar').addEventListener('click', colgar);

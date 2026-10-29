@@ -101,7 +101,10 @@ class Rele {
     switch (m.t) {
       case 'hola': {
         const t = this.ice();
-        c.ws.json({ t: 'hola', v: 1, region: this.region, llamadas: this.llamadas, ice: t.ice, caduca: t.caduca, avisos: this.avisos ? this.avisos.clavePublica : '' });
+        c.marca = m.marca === 1; // esta página marca las tramas que merecen aviso; una anterior, no (y entonces se avisa como antes)
+        // «marca»: este relé entiende las tramas marcadas (0x11, las que merecen aviso). Sin esto, la página no las usa: un relé
+        // anterior las descartaría y el mensaje se perdería mientras los servidores se actualizan (29 Oct 2026)
+        c.ws.json({ t: 'hola', v: 1, marca: 1, region: this.region, llamadas: this.llamadas, ice: t.ice, caduca: t.caduca, avisos: this.avisos ? this.avisos.clavePublica : '' });
         return;
       }
       case 'ice': { const t = this.ice(); c.ws.json({ t: 'ice', ice: t.ice, caduca: t.caduca }); return; }
@@ -256,7 +259,7 @@ class Rele {
     // señal), además, el aviso al teléfono, y solo si la trama lo merece (0x11: un mensaje o un archivo; el relé no sabe cuál de los
     // dos: «mensaje nuevo»). Va a todas las suscripciones de la sala menos la de quien manda: así no depende de que esta conexión
     // haya vuelto a presentar la suya.
-    if (avisa && this.avisos && (a.fuera || Date.now() - a.vivo > 25 * 1000)) { try { this.avisos.avisa(sala, de.avisoId || null, 'mensaje'); } catch (_) {} }
+    if ((avisa || !de.marca) && this.avisos && (a.fuera || Date.now() - a.vivo > 25 * 1000)) { try { this.avisos.avisa(sala, de.avisoId || null, 'mensaje'); } catch (_) {} }
   }
   presencia(c, m) {
     const fuera = m.fuera === 1;

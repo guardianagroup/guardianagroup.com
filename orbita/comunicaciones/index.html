@@ -38,10 +38,10 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261031d">
+<link rel="stylesheet" href="app.css?v=20261031e">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
-<script src="arranque.js?v=20261030k"></script>
+<script src="arranque.js?v=20261030l"></script>
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -62,8 +62,8 @@
   <!-- «Por qué» (dueño, 29 Oct 2026, 09:25): a la izquierda del idioma, la explicación de por qué GUARDIANA es así, con los datos -->
   <!-- dueño, 10:04: en el teléfono se quedaba en un «?» que se leía como «ayuda»; ahora la palabra, siempre visible -->
   <button type="button" class="porque-b" id="porque-btn" aria-haspopup="dialog" aria-controls="porque"><span>¿Por qué?</span></button>
-  <!-- Ajustes (dueño, 29 Oct 2026, 16:02): el engranaje, siempre a mano, junto al idioma -->
-  <button type="button" class="ajustes-b" id="ajustes-btn" aria-haspopup="dialog" aria-controls="h-ajustes" aria-label="Ajustes" title="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M4.5 7.5l2 1.2M17.5 15.3l2 1.2M4.5 16.5l2-1.2M17.5 8.7l2-1.2"/></svg></button>
+  <!-- Ajustes (dueño, 29 Oct 2026, 16:02 y 17:11): la tuerca de toda la vida, «para que la gente lo entienda» -->
+  <button type="button" class="ajustes-b" id="ajustes-btn" aria-haspopup="dialog" aria-controls="h-ajustes" aria-label="Ajustes" title="Ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
   <div class="idiomas" role="group" aria-label="Idioma" translate="no"></div>
 </header>
 
@@ -243,8 +243,6 @@
       <!-- dueño, 29 Oct 2026, 08:24 y 08:41: «¿Cómo funciona?», un botón igual que «Contactos», debajo, con su propia pantalla -->
       <button type="button" class="grande" id="ver-como"><b>¿Cómo funciona?</b></button>
     </div>
-    <!-- iPhone (dueño, 29 Oct 2026, 16:05): la invitación llega por WhatsApp y Safari no puede pasarla a la app; se pega aquí -->
-    <button type="button" class="anadir-app" id="pegar-inv" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="3" width="12" height="15" rx="2.5"/><path d="M16 6H5.5A1.5 1.5 0 0 0 4 7.5V21"/></svg><span>Tengo una invitación</span></button>
     <!-- en el móvil, una vez: Comunicaciones en la pantalla de inicio, como una app (dueño, 28 Oct 2026, 16:12) -->
     <button type="button" class="anadir-app" id="anadir-app" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 8v7M8.5 11.5h7"/></svg><span>Añadir a la pantalla de inicio</span></button>
     <!-- dueño, 27 Oct 2026, 10:10: «al empezar, lo básico, limpio y entendible»; la explicación, aparte, en un desplegable -->
@@ -301,30 +299,16 @@
       <div class="fila centro"><button type="button" class="boton principal" id="aceptar-si">Aceptar</button><button type="button" class="boton" id="aceptar-no">No, gracias</button></div>
     </div>
 
-    <!-- iPhone (dueño, 29 Oct 2026, 16:05–16:11: «a mi mujer… en la aplicación no le aparecen y le aparece una página abierta en
-         Safari… le aparece duplicado»). En el iPhone, Safari y la app de la pantalla de inicio guardan cada uno sus cosas por
-         separado, y Safari no puede dar avisos fuera. Por eso la invitación no se acepta aquí: o entra dentro de la app al
-         añadirla, o se copia y se pega en la app que ya está instalada. -->
+    <!-- iPhone (dueño, 29 Oct 2026, 16:05–16:11 y 17:04: «tiene que ser de una vez… que quede añadida la aplicación y que no se vea
+         en Safari… en la invitación ya tiene que ir la app»). En el iPhone, Safari y la app de la pantalla de inicio guardan cada
+         uno sus cosas por separado y Safari no puede dar avisos: por eso la invitación no se abre aquí. Se añade la app (dos toques,
+         la guía sale sola) y la invitación va dentro: la app nace con el chat. Esta pantalla queda detrás de la guía, por si se cierra. -->
     <div class="paso aceptar" id="paso-ios" hidden>
       <div class="espera-anillos quieto" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
-      <div id="ios-paso1">
-        <h2>Te han invitado a un chat de GUARDIANA</h2>
-        <p class="t">En el iPhone, el chat tiene que abrirse dentro de la app: así te llegan los avisos y no se queda a medias en Safari.</p>
-        <div class="grandes ios-op">
-          <button type="button" class="grande principal" id="ios-anadir"><b>Todavía no tengo la app</b><small>Se añade a tu pantalla de inicio y la invitación se abre dentro</small></button>
-          <button type="button" class="grande" id="ios-tengo"><b>Ya tengo GUARDIANA</b><small>Se copia la invitación y la pegas en la app</small></button>
-        </div>
-        <button type="button" class="enlace-cancelar-txt" id="ios-safari">Seguir aquí en Safari</button>
-      </div>
-      <div id="ios-paso2" hidden>
-        <h2>Invitación copiada</h2>
-        <ol class="guia-pasos guia-facil ios-pasos">
-          <li><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M8 12h8"/></svg></span><div class="g-txt">Sal de Safari</div></li>
-          <li><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><div class="g-txt">Abre <b>GUARDIANA</b> en tu pantalla de inicio</div></li>
-          <li class="fin"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="8" y="3.5" width="12" height="15" rx="2.5"/><path d="M16 6.5H5.5A1.5 1.5 0 0 0 4 8v12.5"/></svg></span><div class="g-txt">Toca <b>«Tengo una invitación»</b><small class="g-alt">Y después, «Pegar»</small></div></li>
-        </ol>
-        <button type="button" class="enlace-cancelar-txt" id="ios-safari-2">Seguir aquí en Safari</button>
-      </div>
+      <h2>Te han invitado a GUARDIANA</h2>
+      <p class="t">Añade GUARDIANA a tu pantalla de inicio: el chat se abre dentro de la app, con sus avisos.</p>
+      <div class="fila centro"><button type="button" class="boton principal" id="ios-anadir">Ver cómo se añade</button></div>
+      <button type="button" class="enlace-cancelar-txt ios-safari-txt" id="ios-safari">Usar en Safari, sin avisos</button>
     </div>
 
     <div class="paso" id="paso-entrar" hidden>
@@ -496,7 +480,7 @@
       <button type="button" role="menuitem" id="cm-nombre"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4l10-10-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg><span>Cambiar el nombre</span></button>
       <button type="button" role="menuitem" id="cm-seguridad"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span>Seguridad y verificación</span></button>
       <button type="button" role="menuitemcheckbox" aria-checked="false" id="cm-discreto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Modo discreto</span><i class="interruptor-mini" aria-hidden="true"></i></button>
-      <button type="button" role="menuitem" id="cm-ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M4.5 7.5l2 1.2M17.5 15.3l2 1.2M4.5 16.5l2-1.2M17.5 8.7l2-1.2"/></svg><span>Ajustes</span></button>
+      <button type="button" role="menuitem" id="cm-ajustes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Ajustes</span></button>
       <button type="button" role="menuitem" id="cm-avisos" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span>Avisos en este equipo</span></button>
       <button type="button" role="menuitem" id="cm-completa" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Pantalla completa</span></button>
       <button type="button" role="menuitem" id="cm-vaciar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9.5 7V4.8h5V7M6.5 7l.9 12.2a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5L17.5 7M10 11v6M14 11v6"/></svg><span>Borrar el chat</span></button>
@@ -629,19 +613,19 @@
         <h2 class="gc-hoja-titulo" id="h-completa-t"><span data-p="ios26 ios ipad crios26 crios otro26 otro app appand android androidmenu androidotro">Añade GUARDIANA a tu pantalla de inicio</span><span data-p="pc pcno mac">Instala GUARDIANA en este ordenador</span></h2>
         <p class="t"><span data-p="ios26 ios ipad crios26 crios otro26 otro app appand android androidmenu androidotro">Se abre como una app, a pantalla completa. Se hace una sola vez.</span><span data-p="pc pcno mac">Se abre en su propia ventana, como una app.</span></p>
         <!-- con una invitación abierta en Safari (app.js, gcomGuiaInvitacion): primero la app, y la invitación se abre dentro -->
-        <p class="t guia-inv">Así la invitación se abre dentro de la app, y tus contactos y avisos quedan guardados ahí.</p>
+        <p class="t guia-inv">El chat se abrirá dentro de la app, con sus avisos. Son dos pulsaciones.</p>
       </div>
     </div>
     <!-- Dos pasos, con los dos símbolos del iPhone en grande (dueño, 28 Oct 2026, 18:39: «eso es demasiado lioso… punto 1, sale el
          símbolo ese de compartir; punto 2, el mismo símbolo del iPhone de añadir a pantalla de inicio… ya está… una persona de 60
          años tiene que poder hacerlo»). Cada paso, con data-p: los teléfonos y navegadores en los que sale (app.js, plataformaGuia). -->
     <ol class="guia-pasos guia-facil">
-      <li data-p="ios26 ios ipad crios26 crios otro26 otro"><span class="g-icono"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><div class="g-txt">Toca <b>Compartir</b><small class="g-alt">Si no lo ves, está en los tres puntos ⋯</small></div></li>
-      <li data-p="ios26 ios ipad crios26 crios otro26 otro"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><div class="g-txt"><span data-es-es="Toca «Añadir a pantalla de inicio»">Toca «Agregar a Inicio»</span><small class="g-alt"><span data-es-es="Y después, «Añadir»">Y después, «Agregar»</span></small></div></li>
-      <li data-p="app appand"><span class="g-icono"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg></span><div class="g-txt">Toca ⋯ y elige «Abrir en el navegador»<small class="g-alt">Allí, vuelve a abrir este enlace</small></div></li>
-      <li data-p="android pc"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 7.5v6.5M9.3 11.4 12 14l2.7-2.6"/></svg></span><div class="g-txt"><span data-p="android">Toca «Instalar», aquí abajo</span><span data-p="pc">Haz clic en «Instalar», aquí abajo</span><small class="g-alt">Y confírmalo en el aviso</small></div></li>
-      <li data-p="androidmenu androidotro"><span class="g-icono"><svg viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="18.5" r="1.7"/></svg></span><div class="g-txt">Toca los tres puntos ⋮</div></li>
-      <li data-p="androidmenu androidotro"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 7.5v6.5M9.3 11.4 12 14l2.7-2.6"/></svg></span><div class="g-txt"><span data-es-es="Toca «Instalar aplicación»">Toca «Instalar app»</span><small class="g-alt">Y confírmalo con «Instalar»</small></div></li>
+      <li data-p="ios26 ios ipad crios26 crios otro26 otro"><span class="g-icono"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><div class="g-txt">Pulsa <b>Compartir</b><small class="g-alt">Si no lo ves, está en los tres puntos ⋯</small></div></li>
+      <li data-p="ios26 ios ipad crios26 crios otro26 otro"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><div class="g-txt"><span data-es-es="Pulsa «Añadir a pantalla de inicio»">Pulsa «Agregar a Inicio»</span><small class="g-alt"><span data-es-es="Y después, «Añadir»">Y después, «Agregar»</span></small></div></li>
+      <li data-p="app appand"><span class="g-icono"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg></span><div class="g-txt">Pulsa ⋯ y elige «Abrir en el navegador»<small class="g-alt">Allí, vuelve a abrir este enlace</small></div></li>
+      <li data-p="android pc"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 7.5v6.5M9.3 11.4 12 14l2.7-2.6"/></svg></span><div class="g-txt"><span data-p="android">Pulsa «Instalar», aquí abajo</span><span data-p="pc">Haz clic en «Instalar», aquí abajo</span><small class="g-alt">Y confírmalo en el aviso</small></div></li>
+      <li data-p="androidmenu androidotro"><span class="g-icono"><svg viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="18.5" r="1.7"/></svg></span><div class="g-txt">Pulsa los tres puntos ⋮</div></li>
+      <li data-p="androidmenu androidotro"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 7.5v6.5M9.3 11.4 12 14l2.7-2.6"/></svg></span><div class="g-txt"><span data-es-es="Pulsa «Instalar aplicación»">Pulsa «Instalar app»</span><small class="g-alt">Y confírmalo con «Instalar»</small></div></li>
       <li data-p="mac"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2.5"/><path d="M8 20h8M12 16v4"/></svg></span><div class="g-txt">En Safari, arriba, abre el menú <b>Archivo</b> y elige <b>Añadir al Dock</b></div></li>
       <li data-p="pcno"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 7.5v6.5M9.3 11.4 12 14l2.7-2.6"/></svg></span><div class="g-txt">En Chrome o Edge, haz clic en el icono de instalar, a la derecha de la dirección</div></li>
     </ol>
@@ -878,17 +862,17 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>No se puede capturar</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261029p83"></script>
+<script src="/orbita/static/idioma.js?v=20261029p84"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
 <script src="cripto.js?v=20261027b"></script>
 <script src="/orbita/static/red-nucleo.js?v=20261027b"></script>
-<script src="rele.js?v=20261031a"></script>
+<script src="rele.js?v=20261031b"></script>
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261029b"></script>
-<script src="llamada.js?v=20261031c"></script>
-<script src="app.js?v=20261031c"></script>
+<script src="llamada.js?v=20261031d"></script>
+<script src="app.js?v=20261031d"></script>
 </body>
 </html>

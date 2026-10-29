@@ -1603,3 +1603,6 @@ body.con-visor{overflow:hidden}
 @media (min-width:761px){.gc-archivo-voz .gc-voz{width:300px}}
 /* «Mis chats» en azul, igual que «Invitar a chat» (dueño, 29 Oct 2026, 15:53) */
 @media (max-width:760px){#paso-inicio #ver-contactos{background:#9CC3E4;color:#06080C;border-color:#9CC3E4;min-height:66px}#paso-inicio #ver-contactos b{color:inherit}#paso-inicio #ver-contactos:active{background:#8AB4DA}}
+/* Los tres botones del inicio, idénticos: mismo alto, mismo relleno, misma letra y misma separación (dueño, 29 Oct 2026, 17:01:
+   «el botón de mis chats tiene un tamaño diferente al de invitar a chat. Los tres tienen que ser iguales») */
+@media (max-width:760px){#paso-inicio #nueva-blindada,#paso-inicio #ver-contactos,#paso-inicio #ver-como{display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;min-height:62px;height:62px;margin-top:0;padding:0 20px;border-radius:16px;border-width:1px}#paso-inicio #nueva-blindada b,#paso-inicio #ver-contactos b,#paso-inicio #ver-como b{font-size:17.5px;line-height:1.2;font-weight:600}}
