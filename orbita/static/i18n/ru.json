@@ -3344,7 +3344,8 @@
 "Para lo delicado. Todo lo del fuerte y, además: identidad nueva en cada conversación, claves que se renuevan cada 5 minutos, pantalla velada, mosaico y voz grave en las videollamadas, y autodestrucción ante un ataque.":"Для важного. Всё из надёжного чата и, кроме того: новая личность в каждом разговоре, ключи обновляются каждые 5 минут, скрытый экран, мозаика и низкий голос в видеозвонках, самоуничтожение при атаке.",
 "Hoy está disponible el chat Fuerte. Blindado y Ultra están en preparación: lo que figura aquí es lo previsto y se irá activando por tramos. Fuerte y Blindado son gratis.":"Сегодня доступен Надёжный чат. Защищённый и Ultra готовятся: здесь указано запланированное, оно будет включаться поэтапно. Надёжный и Защищённый — бесплатно.",
 "envío":"отправка",
-"recibo":"приём"
+"recibo":"приём",
+"Pon el teléfono en vertical":"Поверните телефон вертикально"
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

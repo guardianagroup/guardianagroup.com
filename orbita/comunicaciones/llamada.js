@@ -1021,8 +1021,8 @@
         const tel = raiz.matchMedia && raiz.matchMedia('(max-width: 760px), (pointer: coarse) and (max-height: 500px)').matches;
         const so = raiz.screen && raiz.screen.orientation;
         if (!so || !so.lock) return;
-        if (fijar && tel && !giroFijo) { so.lock('portrait').then(() => { giroFijo = true; }).catch(() => {}); }
-        else if (!fijar && giroFijo) { giroFijo = false; try { so.unlock(); } catch (_) {} }
+        // 29 Oct 2026, 14:25 (dueño): en el teléfono, vertical siempre, también fuera de la llamada: se fija y no se suelta al colgar
+        if (tel && !giroFijo) { so.lock('portrait').then(() => { giroFijo = true; }).catch(() => {}); }
       } catch (_) {}
     }
     const MI_IMG = 'gcom-mi-imagen', MARGEN = 10, DIVIDE = 0.45;

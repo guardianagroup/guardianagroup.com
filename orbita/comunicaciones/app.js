@@ -201,7 +201,18 @@
     requestAnimationFrame(() => { raiz.classList.remove('arrancando'); raiz.classList.add('aparece'); setTimeout(() => raiz.classList.remove('aparece'), 260); });
   }
   const puedeCompleta = () => !!(document.fullscreenEnabled && document.documentElement.requestFullscreen) && !/iPhone|iPad|iPod/i.test(navigator.userAgent);
-  function pantallaCompleta() { try { if (!document.fullscreenElement && !comoApp()) document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => {}); } catch (_) {} }
+  function pantallaCompleta() { try { if (!document.fullscreenElement && !comoApp()) document.documentElement.requestFullscreen({ navigationUI: 'hide' }).then(fijaVertical).catch(() => {}); } catch (_) {} }
+  // En el teléfono, siempre en vertical (dueño, 28 Oct 2026, 16:12 y 29 Oct, 14:25: «a ella se le da la vuelta al teléfono y se le pone
+  // en horizontal… tiene que mantenerse vertical»). Android lo deja fijar como app instalada o a pantalla completa, y se fija en
+  // cuanto se puede (no solo en la llamada); el iPhone no lo deja desde una web: allí, en horizontal, sale el aviso de girar (app.css).
+  function fijaVertical() {
+    try {
+      if (!esMovil() || !(screen.orientation && screen.orientation.lock)) return;
+      if (!(comoApp() || document.fullscreenElement)) return;
+      screen.orientation.lock('portrait').catch(() => {});
+    } catch (_) {}
+  }
+  document.addEventListener('fullscreenchange', () => { if (document.fullscreenElement) fijaVertical(); });
   // en el móvil, una conversación nueva borra las anteriores… salvo los contactos guardados (dueño, 28 Oct 2026, 17:33)
   async function borraAnteriores(salvo) { for (const x of [...CONVS.values()]) if (x.id !== salvo && !x.contacto) { try { await destruye(x, true); } catch (_) {} } }
   // opc.sinPantalla: la invitación que sale del inicio del teléfono en un solo toque (dueño, 28 Oct 2026, 19:17: «desde la
@@ -3012,6 +3023,7 @@
     // «destruir» al otro equipo y le borraba la conversación y el contacto guardado; dueño, 29 Oct 2026, 12:17: «cuando guardamos un
     // contacto tampoco se está guardando». Ya no se destruye nada al arrancar: las conversaciones se quedan hasta que alguien las termina.)
     try { if (sessionStorage.getItem('gcom-fin') === '1') { revela(); muestraFin(); return; } } catch (_) {}
+    fijaVertical(); // como app instalada, en vertical desde el arranque
     if (esInvitado()) document.body.classList.add('modo-invitado');
     // la app instalada en el iPhone arranca con la invitación en la dirección de inicio (?inv=…): pasa al fragmento de siempre
     try { const q0 = new URLSearchParams(location.search), inv = q0.get('inv'); if (inv && /^[ib]=[A-Za-z0-9_-]{20,120}$/.test(inv)) { q0.delete('inv'); const qs = q0.toString(); history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + '#' + inv); } } catch (_) {}

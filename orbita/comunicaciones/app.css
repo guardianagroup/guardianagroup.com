@@ -1530,3 +1530,11 @@ body.con-visor{overflow:hidden}
   .conv .lienzo::before{top:0;background:linear-gradient(to bottom,var(--gc-fondo,#06080C),rgba(6,8,12,0))}
   .conv .lienzo::after{bottom:0;background:linear-gradient(to top,var(--gc-fondo,#06080C),rgba(6,8,12,0))}
 }
+/* en horizontal, en un teléfono (pantalla baja y dedo): el aviso de girar, encima de todo (iPhone; Android se queda fijo en vertical) */
+.gira{display:none}
+@media (pointer:coarse) and (orientation:landscape) and (max-height:520px){
+  .gira{display:grid;position:fixed;inset:0;z-index:9999;place-items:center;align-content:center;gap:12px;background:#06080C;color:#E8EEF4;font:600 20px/1.3 var(--texto);text-align:center;padding:24px}
+  .gira svg{width:44px;height:44px;stroke:#9CC3E4;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;animation:gira-balancea 1.6s ease-in-out infinite}
+  .gira p{margin:0}
+}
+@keyframes gira-balancea{0%,100%{transform:rotate(-90deg)}50%{transform:rotate(0)}}
