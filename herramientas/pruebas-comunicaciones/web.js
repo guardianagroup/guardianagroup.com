@@ -26,7 +26,8 @@ const comprueba = (cond, txt) => { console.log((cond ? 'OK   ' : 'FALLO') + ' ' 
   const t = await tel.evaluate(() => ({ pos: getComputedStyle(document.body).position, volver: getComputedStyle(document.querySelector('#volver')).display, idx: document.querySelector('.idiomas').getBoundingClientRect().x }));
   comprueba(t.pos === 'fixed' && t.volver !== 'none' && t.idx > 250, 'teléfono en el navegador: página fija, con «‹ Inicio» y el idioma a la derecha');
   // «Cómo funciona» se abre y se puede desplazar dentro
-  await tel.click('#como-btn'); await new Promise((r) => setTimeout(r, 500));
+  // en el teléfono, «¿Cómo funciona?» es su propia pantalla, con «‹» (dueño, 29 Oct 2026, 08:24)
+  await tel.click('#ver-como'); await new Promise((r) => setTimeout(r, 500));
   const s = await tel.evaluate(() => { const i = document.querySelector('#inicio'); i.scrollTop = 600; return { st: i.scrollTop, sy: scrollY }; });
   comprueba(s.st > 0 && s.sy === 0, 'teléfono: «Cómo funciona» se desplaza por dentro, la página no');
   await tel.screenshot({ path: path.join(OUT, 'tel-web-como.png') });

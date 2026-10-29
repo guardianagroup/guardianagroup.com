@@ -13,6 +13,7 @@ Copyright © 2026 GUARDIANA GROUP S.A.S.
 - **Datos de terceros** que dibuja Órbita, cada uno con su licencia y su atribución (detalladas en [`terminos.html`](terminos.html)): OpenStreetMap (ODbL 1.0), GeoNames (CC BY 4.0), AfTerFibre (CC BY 4.0), The Internet Topology Zoo (CC BY 4.0), Wikidata (CC0), los elementos orbitales de CelesTrak y los datos de dominio público (ETOPO 2022 y otros). Las bases derivadas de OpenStreetMap siguen la ODbL.
 - **Tipos de letra**: SIL Open Font License 1.1 (archivos `OFL-*.txt` junto a cada fuente).
 - **Bibliotecas de terceros** (`orbita/static/vendor/`): la licencia de cada una va en su archivo `*-LICENSE.txt` (satellite.js y html2canvas, MIT).
+- **El logotipo de WhatsApp** (`orbita/comunicaciones/marcas/whatsapp/`) es una marca de WhatsApp LLC, descargada del Brand Resource Center de Meta y usada con sus condiciones, solo para señalar el botón que abre WhatsApp. No está bajo la AGPL ni se puede reutilizar como parte de este código.
 
 ## Pendiente de decidir
 

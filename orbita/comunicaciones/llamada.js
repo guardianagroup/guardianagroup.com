@@ -293,6 +293,14 @@
       const n = $('#ll-voz-nota'); if (n) n.hidden = voz === 'natural';
     }
     const di = (s, mal) => { paso.textContent = s; paso.classList.toggle('gc-fallo', !!mal); };
+    // En el iPhone y el iPad, la llamada de voz suena por el altavoz: Safari no deja a una web elegir el auricular (dueño, 29 Oct 2026,
+    // 09:13: «que avise en pantalla del iPhone una vez iniciada la conversación»). Con auriculares o AirPods, el teléfono los usa.
+    const IOS = /iPhone|iPad|iPod/i.test(UA) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform || ''));
+    function avisaSalida() {
+      if (!IOS || video || salidas) return;
+      di(t('Suena por el altavoz. Si conectas auriculares, suena por ellos.'));
+      setTimeout(() => { if (estado === 'hablando' && paso.textContent === t('Suena por el altavoz. Si conectas auriculares, suena por ellos.')) di(''); }, 9000);
+    }
     const mmss = (ms) => { const s = Math.floor(ms / 1000); return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
 
     function aplicaVoz() {
@@ -673,7 +681,7 @@
       pc.onicecandidate = (e) => { if (e.candidate) o.manda({ acto: 'ice', id: idLlamada, cand: e.candidate.toJSON() }); };
       pc.onconnectionstatechange = () => {
         if (!pc) return;
-        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); } }
+        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); avisaSalida(); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); } }
         else if (pc.connectionState === 'failed') termina('fallo');
         else if (pc.connectionState === 'disconnected') di(t('Conexión interrumpida, intentando recuperarla…'), true);
       };

@@ -977,10 +977,19 @@ html.aparece .barra,html.aparece #app{animation:gcom-aparece .16s ease-out both}
 .contacto-b:active{background:rgba(156,195,228,.26)}
 .contacto-b:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
 /* 29 Oct 2026, 07:37: el inicio, con «Invitar a chat» y «Contactos»; la lista, en su propia pantalla (sin el globo ni los botones) */
-#ver-contactos{display:none}
+#ver-contactos,#ver-como{display:none}
 #inicio.ver-contactos>:not(.contactos){display:none!important}
+/* «¿Cómo funciona?» en el móvil: su pantalla, con «‹», como los contactos (dueño, 29 Oct 2026, 08:24) */
+#inicio.ver-como>:not(#como){display:none!important}
+#inicio:not(.ver-como)>#como{display:none}
+.como-texto{margin:4px 6px 0;color:#D5DCE4;font:400 16px/1.5 var(--texto)}
+.como-texto h3{margin:20px 0 6px;font:600 12px/1.2 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#9CC3E4}
+.como-texto h3:first-child{margin-top:4px}
+.como-texto p{margin:0 0 10px}
+.como-texto b{color:#F4F6F8;font-weight:600}
 #inicio.con-invitacion>.contactos{display:none}
 @media (max-width:760px){#inicio.ver-contactos::before,#inicio.ver-contactos::after{display:none}#inicio.ver-contactos{padding-top:12px;justify-content:flex-start}}
+@media (max-width:760px){#inicio.ver-como::before,#inicio.ver-como::after{display:none}#inicio.ver-como{padding-top:12px;justify-content:flex-start}#paso-inicio #ver-como{display:flex;align-items:center;justify-content:center;min-height:60px;margin-top:12px;padding:0 20px;text-align:center;border-radius:16px;border:1px solid rgba(156,195,228,.38);background:rgba(12,18,26,.82);color:#E8ECF1}#paso-inicio #ver-como b{font-size:17.5px;line-height:1.2;font-weight:600}#paso-inicio #ver-como:active{background:rgba(156,195,228,.12)}#como-btn{display:none}}
 .contactos-cab{display:flex;align-items:center;gap:4px;margin:0 0 10px}
 .contactos-atras{appearance:none;width:44px;height:44px;flex:none;margin-left:-8px;border:0;border-radius:50%;padding:0;background:transparent;color:#9CC3E4;display:grid;place-items:center;cursor:pointer}
 .contactos-atras svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -1166,7 +1175,7 @@ html.aparece .barra,html.aparece #app{animation:gcom-aparece .16s ease-out both}
 .inv-op[aria-busy="true"]{opacity:.6}
 .inv-op b{font-weight:500}
 .inv-op svg{flex:none;width:22px;height:22px;padding:10px;box-sizing:content-box;border-radius:13px;fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;background:#556273}
-#invitar-wa svg{background:#25D366}
+.inv-op .inv-marca{flex:none;display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:13px}.inv-op .inv-wa{background:#25D366}.inv-op .inv-wa img{display:block;width:24px;height:24px}
 .inv-cancelar{display:flex;align-items:center;justify-content:center;margin-top:6px;min-height:56px;border:0;border-radius:16px;background:#1A2230;color:#9CC3E4;font:600 17px/1 var(--texto);cursor:pointer}
 .inv-cancelar:active{background:#222C3A}
 /* «Chat normal» o «Chat blindado» (dueño, 29 Oct 2026, 07:49: «el blindado salga en otro color… tipo espejo más bonito»): dos tarjetas;

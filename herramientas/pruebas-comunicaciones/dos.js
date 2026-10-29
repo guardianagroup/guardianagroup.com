@@ -42,7 +42,7 @@ const caja = (p, sel) => p.evaluate((s) => { const e = document.querySelector(s)
   // inicio de la app instalada
   comprueba(!(await caja(A, '#volver')).vis, 'app: sin «‹ Inicio»');
   comprueba((await caja(A, '.barra-t')).vis, 'app: el nombre arriba a la izquierda');
-  const lg = await caja(A, '.barra-logo'), nt = await caja(A, '.barra-t span');
+  const lg = await caja(A, '.barra-logo'), nt = await caja(A, '.barra-app > span'); // el nombre va en .barra-app desde que el título vive en el HTML (29 Oct, 08:55)
   comprueba(lg.vis && lg.w >= 20 && lg.x < nt.x && Math.abs((lg.y + lg.h / 2) - (nt.y + nt.h / 2)) < 2, 'app: el logotipo delante de GUARDIANA, centrado con el nombre (29 Oct, 07:38)');
   const id = await caja(A, '.idiomas'); comprueba(id.vis && id.x > 250, 'app: el idioma arriba a la derecha');
   const bar = await caja(A, '.barra'); comprueba(id.y >= bar.y && id.b <= bar.b + 0.5, 'app: el idioma cabe dentro de la barra');

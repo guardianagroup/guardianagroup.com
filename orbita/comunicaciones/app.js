@@ -13,10 +13,11 @@
   // en pruebas locales, «?renueva=N» acorta la renovación a N segundos
   const renuevaMs = () => (LOCAL && +new URLSearchParams(location.search).get('renueva') * 1000) || RENUEVA_B_MS;
   const ORIGEN = location.origin + location.pathname.replace(/[^/]*$/, '');
-  // Solo videollamada, de momento (dueño, 28 Oct 2026, 21:49–21:50: «No funciona, lo del audio no funciona… Quita la llamada de
-  // momento y ya lo solucionaremos. Déjalo solamente con videollamada»): en el iPhone la llamada de voz salía por el altavoz y no
-  // había forma de pasarla al auricular. Sin botones de llamada de voz; las que lleguen de una versión anterior se contestan igual.
-  const SOLO_VIDEO = true;
+  // Llamada de voz otra vez (dueño, 29 Oct 2026, 09:08–09:13: «si puedes añadir la llamada normal… que funcione de iPhone a iPhone,
+  // de iPhone a Android… que avise en pantalla del iPhone una vez iniciada la conversación»). El 28 Oct se quitó porque en el iPhone
+  // sonaba por el altavoz sin forma de pasarla al auricular: una web no puede elegir esa salida en Safari. Se queda así, con el
+  // aviso en pantalla (llamada.js, avisaSalida); con auriculares conectados suena por ellos. SOLO_VIDEO = true la vuelve a quitar.
+  const SOLO_VIDEO = false;
   // El aviso «se puede instalar» de Chrome y Edge puede llegar antes de que arranque la página (antes de eventos()): se guarda desde
   // el principio, para que «Sí, añadir» abra siempre la ventana del sistema y no los pasos a mano (29 Oct 2026)
   let avisoInstalarTemprano = null;
@@ -175,6 +176,10 @@
   // La pantalla, a la vista en cuanto está decidida: arranque.js la tapa mientras tanto (solo en la app instalada y al volver a un
   // chat tras recargar), para que no se vea el inicio un momento antes del chat ni nada moviéndose arriba.
   let revelado = false, abriendo = null;
+  // el seguro de arranque.js se cancela aquí, porque ya hay quien va a descubrir la pantalla; queda otro, por si arrancar se
+  // atascara del todo
+  try { if (typeof window.gcomArranque === 'function') { window.gcomArranque(); window.gcomArranque = null; } } catch (_) {}
+  setTimeout(() => { try { revela(); } catch (_) {} }, 6000);
   function revela() {
     if (revelado) return; revelado = true;
     const raiz = document.documentElement; if (!raiz.classList.contains('arrancando')) return;
@@ -582,7 +587,7 @@
   // antes de recargar: dónde se está (el chat abierto o los contactos) y lo que se ve en cada conversación, para volver igual
   function guardaPantalla() {
     try { guardaBorrador(); } catch (_) {}
-    try { const ini = $('#inicio'); const v = ACTUAL || (ini && ini.classList.contains('ver-contactos') ? 'contactos' : ''); if (v) sessionStorage.setItem('gcom-volver', v); else sessionStorage.removeItem('gcom-volver'); } catch (_) {}
+    try { const ini = $('#inicio'); const v = ACTUAL || (ini && ini.classList.contains('ver-contactos') ? 'contactos' : ini && ini.classList.contains('ver-como') ? 'como' : ''); if (v) sessionStorage.setItem('gcom-volver', v); else sessionStorage.removeItem('gcom-volver'); } catch (_) {}
     guardaLineas();
   }
   // antes de recargar: lo que se ve en cada conversación
@@ -1352,6 +1357,12 @@
   const hayContactos = () => esMovil() && contactos().length > 0;
   // 29 Oct 2026, 07:37 (dueño): en el inicio, dos botones, «Invitar a chat» y «Contactos»; la lista, en su propia pantalla
   let verContactos = false;
+  let verComo = false;
+  function pintaComo(ver) {
+    verComo = !!ver && esMovil();
+    const sec = $('#como'); if (sec) sec.hidden = !verComo;
+    const i = $('#inicio'); if (i) { i.classList.toggle('ver-como', verComo); i.scrollTop = 0; }
+  }
   function pintaContactos() {
     const sec = $('#contactos'), ul = $('#contactos-filas'); if (!sec || !ul) return;
     // los contactos y, debajo, la conversación empezada que aún no se guardó (si no, al volver no habría cómo llegar a ella)
@@ -1940,6 +1951,9 @@
     $('#cvolver').addEventListener('click', () => { if (esMovil()) { alInicio(); return; } verLista(); });
     // «Contactos» en el inicio y «‹» para volver (29 Oct 2026, 07:37)
     $('#ver-contactos').addEventListener('click', () => { verContactos = true; pintaContactos(); const i = $('#inicio'); if (i) i.scrollTop = 0; });
+    // «¿Cómo funciona?» (dueño, 29 Oct 2026, 08:24): su pantalla en el móvil, con «‹»
+    $('#ver-como').addEventListener('click', () => { pintaComo(true); });
+    $('#como-atras').addEventListener('click', () => { pintaComo(false); });
     $('#contactos-atras').addEventListener('click', () => { verContactos = false; pintaContactos(); });
     // el inicio con los contactos: la fila abre el chat; los botones llaman o videollaman
     $('#contactos-filas').addEventListener('click', (e) => {
@@ -2551,6 +2565,7 @@
       let v = null; try { v = sessionStorage.getItem('gcom-volver'); sessionStorage.removeItem('gcom-volver'); } catch (_) {}
       if (v && CONVS.has(v)) { if (ACTUAL !== v) abriendo = abreConv(v); }
       else if (v === 'contactos' && esMovil() && !ACTUAL) { verContactos = true; pintaContactos(); }
+      else if (v === 'como' && esMovil() && !ACTUAL) pintaComo(true);
     }
     // la pantalla, a la vista cuando ya está entera (el chat que se abre solo carga antes sus mensajes)
     try { await abriendo; } catch (_) {}
