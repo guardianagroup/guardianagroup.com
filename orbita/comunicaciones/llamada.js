@@ -17,8 +17,11 @@
   // de 6 Mb/s para la imagen (el servicio de llamadas admite unos 12 Mb/s por sentido). Si falta red, se conserva la
   // fluidez y baja la resolución, que vuelve a subir en cuanto hay red (10:15: con la resolución fija, entre Colombia y
   // Chequia la imagen llegaba a menos de una imagen por segundo). La imagen va como el audio: DTLS-SRTP y por el relé.
-  const VIDEO = { width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 30, max: 30 }, facingMode: 'user' };
-  const MAX_BPS_VIDEO = 6000000;
+  // Hasta 4K cuando la cámara y la red lo dan (dueño, 29 Oct 2026, 09:48: «cuando la conexión sea muy buena… incluso a 4K»): se
+  // pide la máxima resolución de la cámara y el navegador baja sola (resolución antes que fluidez) cuando la red o el procesador
+  // no llegan; el tope de caudal es el de una 4K a 30 imágenes. El relé de llamadas (coturn) deja 32 Mb/s por sentido.
+  const VIDEO = { width: { ideal: 3840 }, height: { ideal: 2160 }, frameRate: { ideal: 30, max: 30 }, facingMode: 'user' };
+  const MAX_BPS_VIDEO = 20000000;
   // «Tu imagen» (dueño, 28 Oct 2026: que no puedan tener «nuestro rostro, ni el iris, ni el reconocimiento facial»).
   // Como el cambio de voz, se hace aquí, antes de encriptar: cada imagen de la cámara se reduce a una cuadrícula de pocos
   // puntos (32 o 24 de ancho) y solo eso se amplía y se envía. El detalle de la cara no sale nunca del equipo, y no

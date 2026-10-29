@@ -225,7 +225,8 @@ no-stun-backward-compatibility
 response-origin-only-with-rfc5780
 user-quota=12
 total-quota=400
-max-bps=1500000
+# 29 Oct 2026: hasta 4K en las videollamadas (dueño: «incluso a 4K»): 4 MB/s = 32 Mb/s por sentido y sesión
+max-bps=4000000
 # ningún registro de direcciones: el relé no guarda quién habla con quién
 log-file=/dev/null
 no-stdout-log
