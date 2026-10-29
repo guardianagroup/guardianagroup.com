@@ -3000,11 +3000,15 @@
   }
   function vigilaVersion() {
     firmaInicial = firmaCargada();
-    setInterval(() => { if (document.visibilityState === 'visible') miraVersion(); }, 10 * 60 * 1000);
+    // 29 Oct 2026, 14:32 (dueño): «cuando hagas un cambio, lo actualizas automáticamente a la aplicación, que la persona no tenga que
+    // hacer nada»: se mira cada 3 minutos con la app a la vista y cada vez que se vuelve a ella; la versión nueva se carga sola en
+    // cuanto no estorba (sin llamada, sin texto a medias, sin archivos en vuelo) y se vuelve a la misma pantalla.
+    setInterval(() => { if (document.visibilityState === 'visible') miraVersion(); }, 3 * 60 * 1000);
+    setTimeout(miraVersion, 20 * 1000);
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState !== 'visible') return;
       if (versionNueva) { setTimeout(actualizaCuandoPueda, 800); return; }
-      if (Date.now() - versionMirada > 60 * 1000) setTimeout(miraVersion, 1200);
+      if (Date.now() - versionMirada > 15 * 1000) setTimeout(miraVersion, 1200);
     });
   }
   async function arranca() {

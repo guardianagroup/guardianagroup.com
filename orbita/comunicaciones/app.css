@@ -1344,9 +1344,13 @@ img,video,canvas,svg{-webkit-touch-callout:none;-webkit-user-drag:none}
    arriba y la cabecera de la conversación se queda en una línea. El teclado del teléfono es del sistema y no se puede encoger. */
 @media (max-width:760px){
   html.con-teclado .barra{display:none!important}
+  /* 29 Oct 2026, 14:37 (dueño): con el teclado abierto se veía distinto («solo aparece el nombre»): la misma cabecera, en una fila
+     más baja: candado pequeño, nombre y «En línea» al lado */
   html.con-teclado .gc-cabecera{min-height:44px;padding-top:4px;padding-bottom:4px}
-  html.con-teclado .gc-cabecera .gc-avatar{display:none}
-  html.con-teclado .gc-cabecera .gc-confianza{display:none}
+  html.con-teclado .gc-cabecera .gc-avatar{width:30px;height:30px;font-size:13px;flex:none}
+  html.con-teclado .gc-cabecera .gc-avatar svg{width:14px;height:14px}
+  html.con-teclado .gc-cabecera .gc-quien{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:8px;row-gap:0}
+  html.con-teclado .gc-cabecera .gc-confianza{display:block;min-height:0;font-size:12.5px}
   html.con-teclado .gc-cabecera .gc-nombre{font-size:15px}
   html.con-teclado .gc-compositor{padding-top:6px;padding-bottom:6px}
   html.con-teclado .gira{display:none}
