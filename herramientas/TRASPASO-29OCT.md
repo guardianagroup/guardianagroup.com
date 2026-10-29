@@ -224,3 +224,8 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
   llamadas encriptados…» no se repite al fundir chats.
 - El aviso «Cámara grabando / ¿Dejar de grabar?» de su foto es el del propio iOS al tocar la pastilla roja de la cámara: no es nuestro.
 - Pruebas: whatsapp.js (enlace corto) y llamando.js (guía «Seguir en Safari») al día. Versiones: app.js s, llamada.js r, idioma.js p77.
+- (14:07–14:20, main 2dcb6a04 y 42206a16) Tarjeta «Comunicando» «pegada» arriba en el iPhone: Safari deja la pintura vieja en una lista
+  con `mask-image`; en el teléfono la lista va sin máscara y con dos velos fijos (`.conv .lienzo::before/::after`, max-width 760).
+  El marco de espejo y el escudo de las filas, solo con `extrasB`. Al tocar «Conexión» en la llamada se ve «envío WxH@fps CÓDEC ·
+  recibo …» (codecCorto en llamada.js) para diagnosticar el negro iPhone → Android. Si con H.264 42e01f sigue en negro, el siguiente
+  paso es VP8 primero entre teléfonos (`pesos` en prefiereCodecs).
