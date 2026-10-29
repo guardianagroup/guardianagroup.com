@@ -128,7 +128,9 @@
     function cierra() { cerrando = true; clearInterval(ping); try { ws && ws.close(); } catch (_) {} }
 
     conecta();
-    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, suscribe, despiertaA, presencia, get avisos() { return avisos; }, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
+    // para las pruebas: un corte de la conexión como los del teléfono (se vuelve a conectar sola)
+    const corta = () => { try { if (ws) ws.close(); } catch (_) {} };
+    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, suscribe, despiertaA, presencia, corta, get avisos() { return avisos; }, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
   }
   // Otro servidor de llamadas (dueño, 28 Oct 2026, 14:17: «que las llamadas sean todas buenas, independientemente de si la
   // persona está en Sudamérica, en Europa…»): una conexión corta para medir su tiempo de ida y vuelta y pedirle sus

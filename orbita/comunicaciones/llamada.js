@@ -878,9 +878,23 @@
       di(t('Llamando…'));
       const of = await pc.createOffer(); await pc.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
       await sasNuevo();
+      ultimaOferta = { acto: 'oferta', id: idLlamada, video: video ? 1 : undefined, equipo: EQUIPO, sas: sas ? b64u(sas.compromiso) : undefined };
       o.manda({ acto: 'oferta', id: idLlamada, sdp: pc.localDescription.sdp, video: video ? 1 : undefined, equipo: EQUIPO, sas: sas ? b64u(sas.compromiso) : undefined });
       if (estado === 'saliente') { tono('saliente'); esperaRespuesta(true); }
       pinta();
+    }
+    // La otra persona sale de la sala del relé (su conexión se cortó un momento o el teléfono durmió la app): la llamada no se corta por
+    // eso (dueño, 29 Oct 2026, 14:49: «la llamada y la videollamada… que nada falle»). Hablando, la voz y la imagen van por su propio
+    // camino: siguen, y si de verdad se cortan, reconecta() lo intenta. Llamando, se sigue llamando y, en cuanto vuelve, se le manda la
+    // llamada otra vez (con todas las rutas ya reunidas). Sonando aquí o conectando, 12 s de margen; si no vuelve, se da por terminada.
+    let ultimaOferta = null, ausenteT = null;
+    function seFue() {
+      clearTimeout(ausenteT); ausenteT = null;
+      if (estado === 'entrante' || estado === 'conectando') ausenteT = setTimeout(() => { ausenteT = null; if (estado === 'entrante') termina('rechazada'); else if (estado === 'conectando') termina('fallo'); }, 12000);
+    }
+    function volvio() {
+      clearTimeout(ausenteT); ausenteT = null;
+      if (estado === 'saliente' && ultimaOferta && pc && pc.localDescription) o.manda(Object.assign({}, ultimaOferta, { sdp: pc.localDescription.sdp }));
     }
     async function recibe(m) {
       if (!m || !m.acto) return;
@@ -932,7 +946,7 @@
     function colgar() { if (estado === 'libre') return; colgoYo = true; o.manda({ acto: 'colgar', id: idLlamada }); termina(estado === 'hablando' ? 'fin' : estado === 'entrante' ? 'rechazada' : 'cancelada'); }
     function termina(por, espera) {
       const dur = iniciada ? Date.now() - iniciada : 0, era = estado, conImagen = video;
-      paraTono(); clearTimeout(sinRespuesta);
+      paraTono(); clearTimeout(sinRespuesta); clearTimeout(ausenteT); ausenteT = null; ultimaOferta = null;
       clearInterval(reloj); reloj = null; clearInterval(sondeo); sondeo = null;
       reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null;
       if (pc) { try { pc.close(); } catch (_) {} pc = null; }
@@ -1209,7 +1223,7 @@
     if (FINO.addEventListener) FINO.addEventListener('change', escala);
     escala();
     { const vlx = vidLocal(); if (vlx) { vlx.addEventListener('loadedmetadata', () => miImagen()); vlx.addEventListener('resize', () => colocaAsa()); } }
-    return { llamar, recibe, colgar, eligeVoz, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
+    return { llamar, recibe, colgar, eligeVoz, seFue, volvio, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
   }
   raiz.GuardianaLlamada = { crea, VOCES };
 })(typeof window !== 'undefined' ? window : globalThis);

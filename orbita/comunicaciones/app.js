@@ -429,6 +429,7 @@
     pintaCabecera(c); pintaLista();
     enviaControl(c, { tipo: 'ok' });
     if (YO.nombre) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
+    if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.volvio(); // la otra persona ha vuelto: si se la estaba llamando, otra vez
     enviaCola(c);
     reenviaCustodias(c);
     if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c);
@@ -1273,7 +1274,7 @@
   const servidorLlamada = () => (iceUsado === 'am' ? T('Miami (Estados Unidos)') : iceUsado === 'eu' ? T('Núremberg (Alemania)') : '');
   const puedeLlamar = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
   // solo en local (pruebas): simular un mensaje manipulado y ver la alarma sin tocar el relé
-  if (LOCAL) window.gcomPrueba = { avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL), enlace: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? enlaceB(c) : null; }, cuantas: () => [...CONVS.values()].filter((x) => x.estado !== 'destruida' && x.estado !== 'destruida_pendiente').length };
+  if (LOCAL) window.gcomPrueba = { avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL), corta: () => R.corta(), llamada: () => (LL ? LL.estado : ''), enlace: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? enlaceB(c) : null; }, cuantas: () => [...CONVS.values()].filter((x) => x.estado !== 'destruida' && x.estado !== 'destruida_pendiente').length };
   function arrancaLlamadas() {
     if (!window.GuardianaLlamada || !window.RTCPeerConnection) { for (const id of ['#llamar', '#videollamar']) { const b = $(id); if (b) b.hidden = true; } return; }
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
@@ -1415,7 +1416,7 @@
       // la invitación que salió por WhatsApp: el chat se abre cuando la otra persona entra, si no se está en otra conversación
       if (c.compartido && !c.huella && c.rol === 'invita' && (!ACTUAL || !CONVS.has(ACTUAL)) && !document.body.classList.contains('en-llamada')) abreConv(c.id); });
     // si la otra persona se va, puede que solo esté recargando: unos segundos sin cambiar nada
-    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; quietoConv(c, 6000); vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && ACTUAL === c.id) LL.recibe({ acto: 'colgar' }); } pintaCabecera(c); pintaLista(); });
+    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; quietoConv(c, 6000); vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.seFue(); } pintaCabecera(c); pintaLista(); }); // ya no cuelga: ver seFue (llamada.js)
     R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Este chat se ha abierto en otro sitio (otra pestaña o la app): sigue allí.')); });
     // Las tramas de una conversación se procesan en orden (una detrás de otra): así un trozo de archivo nunca
     // adelanta al anuncio del archivo, ni un mensaje a la presentación que abre su sesión.
