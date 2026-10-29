@@ -42,10 +42,14 @@ const caja = (p, sel) => p.evaluate((s) => { const e = document.querySelector(s)
   // inicio de la app instalada
   comprueba(!(await caja(A, '#volver')).vis, 'app: sin «‹ Inicio»');
   comprueba((await caja(A, '.barra-t')).vis, 'app: el nombre arriba a la izquierda');
+  const lg = await caja(A, '.barra-logo'), nt = await caja(A, '.barra-t span');
+  comprueba(lg.vis && lg.w >= 20 && lg.x < nt.x && Math.abs((lg.y + lg.h / 2) - (nt.y + nt.h / 2)) < 2, 'app: el logotipo delante de GUARDIANA, centrado con el nombre (29 Oct, 07:38)');
   const id = await caja(A, '.idiomas'); comprueba(id.vis && id.x > 250, 'app: el idioma arriba a la derecha');
   const bar = await caja(A, '.barra'); comprueba(id.y >= bar.y && id.b <= bar.b + 0.5, 'app: el idioma cabe dentro de la barra');
-  const bs = await caja(A, '#nueva-blindada svg'), bb = await caja(A, '#nueva-blindada b'), bt = await caja(A, '#nueva-blindada');
-  comprueba(Math.abs((bs.y + bs.h / 2) - (bb.y + bb.h / 2)) < 2 && Math.abs((bt.y + bt.h / 2) - (bb.y + bb.h / 2)) < 2, 'inicio: icono y texto del botón centrados (svg ' + (bs.y + bs.h / 2).toFixed(1) + ', texto ' + (bb.y + bb.h / 2).toFixed(1) + ', botón ' + (bt.y + bt.h / 2).toFixed(1) + ')');
+  // 29 Oct 2026, 07:36–07:37: «Invitar a chat» sin el escudo y, debajo, «Contactos»
+  const bs = await caja(A, '#nueva-blindada svg'), bb = await caja(A, '#nueva-blindada b'), bt = await caja(A, '#nueva-blindada'), bc = await caja(A, '#ver-contactos');
+  comprueba(!bs.vis && Math.abs((bt.y + bt.h / 2) - (bb.y + bb.h / 2)) < 2 && Math.abs((bt.x + bt.w / 2) - (bb.x + bb.w / 2)) < 2, 'inicio: «Invitar a chat» sin escudo, con el texto centrado');
+  comprueba(bc.vis && bc.y >= bt.b && bc.w === bt.w, 'inicio: «Contactos» debajo, del mismo ancho');
   // invitación blindada (en el móvil, un solo botón)
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(2500);
   await foto(A, '02-A-invitacion');

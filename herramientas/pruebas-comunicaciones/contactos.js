@@ -64,9 +64,15 @@ async function guarda(p, nombre) {
   comprueba(await A.evaluate(() => /\d\d:\d\d/.test(document.querySelector('#ll-tiempo').textContent) && !document.querySelector('#ll-tiempo').hidden), 'llamada en curso');
   await foto(A, '05-A-llamada');
   await A.evaluate(() => document.querySelector('#ll-colgar').click()); await espera(1500); // en la videollamada los botones se esconden solos
-  // recargar: los contactos se quedan y se arranca en la lista
+  // recargar: los contactos se quedan; se arranca en el inicio con los dos botones y «Contactos» lleva a la lista (29 Oct, 07:37)
   await A.reload(); await espera(3500);
-  comprueba(await visible(A, '#contactos') && !(await visible(A, '#conv')), 'al abrir la app: arranca en los contactos');
+  comprueba(await visible(A, '#nueva-blindada') && await visible(A, '#ver-contactos') && !(await visible(A, '#contactos')) && !(await visible(A, '#conv')), 'al abrir la app: el inicio con «Invitar a chat» y «Contactos»');
+  await A.click('#ver-contactos'); await espera(400);
+  const fila2 = await A.evaluate(() => [...document.querySelectorAll('#contactos-filas .contacto')].map((li) => li.textContent.trim()));
+  comprueba(await visible(A, '#contactos') && fila2.length === 1 && /Mi mujer/.test(fila2[0]) && !(await visible(A, '#nueva-blindada')), '«Contactos»: la lista, sin los botones del inicio');
+  await foto(A, '05b-A-contactos');
+  await A.click('#contactos-atras'); await espera(400);
+  comprueba(await visible(A, '#nueva-blindada') && !(await visible(A, '#contactos')), '«‹» vuelve al inicio');
   // una invitación nueva no borra el contacto (ni pregunta)
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(2000);
   comprueba(!(await visible(A, '#h-nueva .gc-hoja-caja')), 'invitación nueva sin la pregunta de borrar');

@@ -1573,6 +1573,10 @@
     // «Invitar a chat» en el iPhone: WhatsApp entero u otra app (dueño, 28 Oct 2026, 20:56)
     "Otra app": ["Other app", "Outro app"],
     "No se pudo abrir WhatsApp.": ["WhatsApp could not be opened.", "Não foi possível abrir o WhatsApp."],
+    // el inicio con dos botones y los contactos en su pantalla (dueño, 29 Oct 2026, 07:37)
+    "Aún no tienes contactos.": ["You have no contacts yet.", "Você ainda não tem contatos."],
+    "Cuando hables con alguien, guárdalo y saldrá aquí.": ["When you talk to someone, save them and they will appear here.", "Quando falar com alguém, salve a pessoa e ela aparecerá aqui."],
+    "Volver": ["Back", "Voltar"],
     "Mensajes y llamadas encriptados": ["Encrypted messages and calls", "Mensagens e chamadas criptografadas"],
     "Mensajes y llamadas encriptados de extremo a extremo.": ["Messages and calls are end-to-end encrypted.", "Mensagens e chamadas criptografadas de ponta a ponta."],
     "La otra persona ha abierto tu invitación.": ["The other person has opened your invitation.", "A outra pessoa abriu o seu convite."],

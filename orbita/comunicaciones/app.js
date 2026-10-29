@@ -162,7 +162,10 @@
   // instalada en la pantalla de inicio: sin «‹ Inicio» (app.css), también donde el navegador no entiende display-mode; arriba,
   // el mismo nombre que lleva el icono (dueño, 17:06: «en vez de poner comunicaciones… guardiana»)
   document.documentElement.classList.toggle('como-app', comoApp());
-  if (comoApp()) { const bt = document.querySelector('.barra .barra-t'); if (bt) { bt.textContent = 'GUARDIANA'; bt.setAttribute('translate', 'no'); } }
+  // con el logotipo delante (29 Oct 2026, 07:38: «arriba a la izquierda… pone guardiana solo. Deberías también de poner el
+  // logotipo»): el candado con la G de marca/guardiana-simbolo.svg, el mismo del icono de la app
+  const LOGO = '<svg class="barra-logo" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="barra-logo-g"><rect width="100" height="100" fill="#fff"/><path d="M63 58.29 V55.07 Q63 54 58.71 54 H44.15 Q37 54 37 61.15 V72.85 Q37 80 44.15 80 H58.71 Q63 80 63 75.71 V67 H51" fill="none" stroke="#000" stroke-width="7.5"/></mask></defs><path d="M31 44 V31 A19 19 0 0 1 69 31 V44" fill="none" stroke="#E8ECF1" stroke-width="9"/><rect x="17" y="42" width="66" height="50" rx="13" fill="#9CC3E4" mask="url(#barra-logo-g)"/></svg>';
+  if (comoApp()) { const bt = document.querySelector('.barra .barra-t'); if (bt) { bt.innerHTML = LOGO + '<span>GUARDIANA</span>'; bt.setAttribute('translate', 'no'); } }
   const puedeCompleta = () => !!(document.fullscreenEnabled && document.documentElement.requestFullscreen) && !/iPhone|iPad|iPod/i.test(navigator.userAgent);
   function pantallaCompleta() { try { if (!document.fullscreenElement && !comoApp()) document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => {}); } catch (_) {} }
   // en el móvil, una conversación nueva borra las anteriores… salvo los contactos guardados (dueño, 28 Oct 2026, 17:33)
@@ -232,6 +235,7 @@
     invitacionPendiente = enlace; muestraAceptar(true); return true;
   }
   function muestraAceptar(ver) {
+    if (ver) { verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; }
     $('#paso-aceptar').hidden = !ver; $('#inicio').classList.toggle('con-invitacion', ver); document.body.classList.toggle('aceptando', ver);
     if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
     else $('#paso-inicio').hidden = false;
@@ -1274,13 +1278,19 @@
   const SVG_VID = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></svg>';
   const contactos = () => vivas().filter((x) => x.contacto && x.huella).sort((a, b) => nombreConv(a, true).localeCompare(nombreConv(b, true), 'es'));
   const hayContactos = () => esMovil() && contactos().length > 0;
+  // 29 Oct 2026, 07:37 (dueño): en el inicio, dos botones, «Invitar a chat» y «Contactos»; la lista, en su propia pantalla
+  let verContactos = false;
   function pintaContactos() {
     const sec = $('#contactos'), ul = $('#contactos-filas'); if (!sec || !ul) return;
-    // con contactos, también la conversación empezada que aún no se guardó (si no, al volver a la lista no habría cómo llegar a ella)
-    const xs = esMovil() && contactos().length ? contactos().concat(vivas().filter((x) => x.huella && !x.contacto)) : [];
-    sec.hidden = !xs.length;
+    // los contactos y, debajo, la conversación empezada que aún no se guardó (si no, al volver no habría cómo llegar a ella)
+    const xs = esMovil() ? contactos().concat(vivas().filter((x) => x.huella && !x.contacto)) : [];
+    const ver = esMovil() && verContactos;
+    sec.hidden = !ver;
+    $('#inicio').classList.toggle('ver-contactos', ver);
     $('#inicio').classList.toggle('con-contactos', xs.length > 0);
     document.body.classList.toggle('con-contactos', xs.length > 0);
+    const vacio = $('#contactos-vacio'); if (vacio) vacio.hidden = xs.length > 0;
+    ul.hidden = !xs.length;
     ul.textContent = '';
     for (const c of xs) {
       const nombre = nombreConv(c, true), vivo = enLinea(c);
@@ -1309,7 +1319,8 @@
     LLAMADA_CONV = c.id; LL.llamar(video);
   }
   // del chat al inicio (con contactos, en el teléfono, «‹» vuelve a ellos sin terminar nada)
-  function alInicio() { paraEscribe(); guardaBorrador(); quiereNueva = true; cierraConv(); pintaContactos(); }
+  // del chat de alguien con quien ya se habló, «‹» vuelve a los contactos; de una invitación aún sin abrir, al inicio
+  function alInicio() { const c = CONVS.get(ACTUAL); paraEscribe(); guardaBorrador(); quiereNueva = true; verContactos = !!(c && c.huella); cierraConv(); pintaContactos(); }
   // el borrador de cada conversación se queda en la suya al cambiar de una a otra
   function guardaBorrador() { const c = CONVS.get(ACTUAL), ta = $('#texto'); if (c && ta) c.borrador = ta.value; }
   function ponBorrador(c) {
@@ -1343,6 +1354,7 @@
     const inv = c.estado === 'invitacion' && c.rol === 'invita' && !c.huella && !esperaEnChat(c);
     $('#inicio').hidden = !inv; $('#conv').hidden = inv; $('#app').classList.toggle('en-conv', !inv); document.body.classList.toggle('en-conv', !inv);
     $('#inicio').classList.toggle('con-invitacion', inv); // sin la presentación de la página: solo la invitación (15:32)
+    if (inv) { verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; }
     if (inv) { $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = true; $('#paso-codigo').hidden = esB(c); $('#paso-enlace').hidden = !esB(c); }
     pintaCabecera(c); pintaTodos(c); pintaRadio(c); pintaLista();
     if (esperaEnChat(c)) document.body.classList.remove('esperando-enlace');
@@ -1844,6 +1856,9 @@
     $('#lista-nueva').addEventListener('click', nuevaConversacion);
     const verLista = () => { paraEscribe(); guardaBorrador(); document.body.classList.add('ver-lista'); pintaLista(); };
     $('#cvolver').addEventListener('click', () => { if (esMovil()) { alInicio(); return; } verLista(); });
+    // «Contactos» en el inicio y «‹» para volver (29 Oct 2026, 07:37)
+    $('#ver-contactos').addEventListener('click', () => { verContactos = true; pintaContactos(); const i = $('#inicio'); if (i) i.scrollTop = 0; });
+    $('#contactos-atras').addEventListener('click', () => { verContactos = false; pintaContactos(); });
     // el inicio con los contactos: la fila abre el chat; los botones llaman o videollaman
     $('#contactos-filas').addEventListener('click', (e) => {
       const b = e.target.closest('button[data-id]'); if (!b) return;
