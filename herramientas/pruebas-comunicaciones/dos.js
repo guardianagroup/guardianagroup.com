@@ -106,7 +106,8 @@ const caja = (p, sel) => p.evaluate((s) => { const e = document.querySelector(s)
       // 29 Oct 2026, 07:51: sin «Tu voz» ni «Voz e imagen»; en el chat normal, ningún efecto (los del blindado, en tipos.js)
       const ef = { pildora: (await caja(p, '#ll-voz-pill')).vis, ajustes: (await caja(p, '#ll-ajustes')).vis, grave: (await caja(p, '#ll-grave')).vis };
       // (aquí el chat es blindado: sin navigator.share, «Invitar a chat» crea la blindada de siempre con el enlace en pantalla)
-      comprueba(!ef.pildora && !ef.ajustes && ef.grave, 'voz ' + n + ': pantalla limpia; en el blindado, solo «Voz grave» ' + JSON.stringify(ef));
+      // 29 Oct 2026, 12:55–12:59: el blindado va «próximamente» y sus efectos de voz e imagen no se ofrecen: pantalla limpia del todo
+      comprueba(!ef.pildora && !ef.ajustes && !ef.grave, 'voz ' + n + ': pantalla limpia, sin efectos (el blindado, próximamente) ' + JSON.stringify(ef));
     }
     console.log('     pistas A:', JSON.stringify(await A.evaluate(() => window.__pistas.slice())));
     if (PASOS.has('colgar')) {

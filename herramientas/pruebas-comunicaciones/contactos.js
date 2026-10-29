@@ -55,7 +55,8 @@ async function guarda(p, nombre) {
   comprueba(fila.length === 1 && /Mi mujer/.test(fila[0]) && /En línea/.test(fila[0]), 'la fila: «Mi mujer» · En línea (' + fila.join(' | ') + ')');
   await foto(A, '04-A-contactos');
   // llamar desde la lista
-  comprueba(!(await A.$('#contactos-filas .contacto-b[data-acto="voz"]')), 'solo videollamada: sin el botón de llamada de voz (21:50)');
+  // (28 Oct, 21:50, se quitó la llamada de voz; el 29 Oct vuelve: «la llamada normal sí que funciona» (12:54), con los dos botones)
+  comprueba(!!(await A.$('#contactos-filas .contacto-b[data-acto="voz"]')) && !!(await A.$('#contactos-filas .contacto-b[data-acto="video"]')), 'en Contactos, llamada de voz y videollamada');
   await A.click('#contactos-filas .contacto-b[data-acto="video"]'); await espera(2500);
   comprueba(await visible(B, '#ll-contestar'), 'llamando desde la lista: a la otra persona le suena');
   const quien = await B.evaluate(() => document.querySelector('#ll-nombre').textContent);

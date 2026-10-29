@@ -236,26 +236,33 @@
     tx.append(el('b', null, res.valido ? T('El archivo llegó a su destino intacto') : res.pendiente ? T('Falta la confirmación del destinatario') : T('Este comprobante no es válido')),
       el('span', null, res.valido ? T('Viajó custodiado y encriptado de principio a fin, y llegó completo y sin ningún cambio. Lo confirman y firman los dos.') : res.pendiente ? T('El archivo salió custodiado. Cuando el equipo de la otra persona confirme que llegó, este comprobante quedará firmado por los dos.') : T('Ha sido modificado o no procede de estos equipos.')));
     est.append(ico, tx); doc.append(est);
-    const seccion = (titulo) => {
-      const s = el('section', 'cu-sec'), dl = el('dl', 'cu-datos'); s.append(el('h3', null, titulo), dl); doc.append(s);
+    // dueño, 29 Oct 2026, 12:15 («aparecen un montón de dígitos y eso no se ha pedido»): las huellas, claves y firmas (largas tiras
+    // hexadecimales) van al final, en «Datos técnicos», plegadas; en pantalla se ve lo que una persona entiende
+    const tecnico = el('details', 'cu-tecnico'); const tecSum = el('summary', null, T('Datos técnicos (para verificar el comprobante)')); tecnico.append(tecSum);
+    const seccion = (titulo, enTecnico) => {
+      const s = el('section', 'cu-sec'), dl = el('dl', 'cu-datos'); s.append(el('h3', null, titulo), dl); (enTecnico ? tecnico : doc).append(s);
       return (k, v, cls, sinTraducir) => { const dd = el('dd', cls || null); if (v instanceof Node) dd.append(v); else dd.textContent = v; if (sinTraducir) dd.setAttribute('translate', 'no'); dl.append(el('dt', null, k), dd); return dd; };
     };
+    let filaTec = seccion(T('Archivo'), true);
     let fila = seccion(T('Archivo'));
     fila(T('Nombre'), a.nombre || '—', 'cu-nombre', true);
     fila(T('Tamaño'), bytes(a.bytes || 0) + ' · ' + Number(a.bytes || 0).toLocaleString(LOC()) + ' bytes');
     const enc = encajaTipo(a.tipo_declarado, a.tipo_real);
     fila(T('Tipo'), [a.tipo_declarado ? T('declarado') + ': ' + a.tipo_declarado : '', T('por su contenido') + ': ' + (a.tipo_real || T('no reconocido'))].filter(Boolean).join(' · ') + (enc === false ? ' · ' + T('el contenido no corresponde al tipo declarado') : ''), enc === false ? 'cu-mal' : null);
-    fila(T('Huella SHA-256'), a.sha256 || '—', 'cu-mono', true);
+    filaTec(T('Huella SHA-256'), a.sha256 || '—', 'cu-mono', true);
     fila(T('Fragmentos'), Number(a.fragmentos || 0).toLocaleString(LOC()) + ' × ' + bytes(a.tam_fragmento || 0));
     fila = seccion(T('Partes'));
     const parte = (p) => {
       const d = el('div', 'cu-parte');
-      d.append(el('b', null, p.nombre || T('Sin nombre declarado')), el('small', null, BL ? T('Huella de identidad (SHA-384)') : T('Huella de identidad (SHA-256)')), mono(p.huella, 4));
+      d.append(el('b', null, p.nombre || T('Sin nombre declarado')));
       d.append(el('span', null, [p.region ? pais(p.region) + ' (' + T('país según la zona horaria del equipo') + ')' : '', p.verifico_al_otro ? T('número de seguridad comprobado') : T('número de seguridad sin comprobar'), p.version || ''].filter(Boolean).join(' · ')));
       return d;
     };
     fila(T('Remitente'), parte(e)); fila(T('Destinatario'), parte(r));
-    if (res.numero) fila(T('Número de seguridad'), res.numero, 'cu-numero', true);
+    filaTec = seccion(T('Identidades'), true);
+    const huellaDe = (p) => { const d = el('div', 'cu-parte'); d.append(el('small', null, BL ? T('Huella de identidad (SHA-384)') : T('Huella de identidad (SHA-256)')), mono(p.huella, 4)); return d; };
+    filaTec(T('Remitente'), huellaDe(e)); filaTec(T('Destinatario'), huellaDe(r));
+    if (res.numero) filaTec(T('Número de seguridad'), res.numero, 'cu-numero', true);
     if (BL) fila(T('Verificación mutua'), reg.verificacion_mutua ? T('Los dos equipos comprobaron el número de seguridad antes de enviar nada.') : T('No consta la comprobación mutua del número de seguridad.'), reg.verificacion_mutua ? 'cu-bien' : 'cu-mal');
     fila = seccion(T('Envío'));
     fila(T('Salida del remitente'), fechaHora(tr.salida) + ' · ' + T('según el reloj de su equipo'));
@@ -271,7 +278,7 @@
     fila(T('Encriptación del archivo'), T('AES-256-GCM en cada fragmento, con una clave propia del archivo y una etiqueta de autenticación de 128 bits.'));
     if (BL) fila(T('Suite'), T('Sesión blindada con los algoritmos de la suite CNSA 2.0, en híbrido con criptografía clásica.'));
     fila(T('Acuerdo de claves'), BL ? T('Híbrido postcuántico: ML-KEM-1024 y ECDH P-384, combinados con HKDF-SHA-384.') : se.pq ? T('Híbrido postcuántico: ML-KEM-768 y ECDH P-256, combinados con HKDF-SHA-256.') : T('ECDH P-256, combinado con HKDF-SHA-256 (sin la capa postcuántica).'));
-    if (se.id) { const d = el('div', 'cu-lineas'); d.append(mono(se.id, 4)); if (se.establecida) d.append(el('span', null, T('establecida') + ' ' + fechaHora(se.establecida))); fila(T('Sesión'), d); }
+    if (se.id) { const d = el('div', 'cu-lineas'); d.append(mono(se.id, 4)); if (se.establecida) d.append(el('span', null, T('establecida') + ' ' + fechaHora(se.establecida))); filaTec(T('Sesión'), d); }
     fila(T('Firma del comprobante'), BL ? T('Doble firma de cada equipo: ECDSA P-384 sobre SHA-384 y ML-DSA-87 (FIPS 204). Las dos tienen que ser válidas.') : T('ECDSA P-256 sobre SHA-256, con la clave de identidad de cada equipo.'));
     fila = seccion(T('Integridad'));
     fila(T('Resultado'), ig.coincide ? T('La huella SHA-256 coincide en los dos equipos') : T('La huella SHA-256 no coincide'), ig.coincide ? 'cu-bien' : 'cu-mal');
@@ -285,7 +292,7 @@
     fila = seccion(T('Incidencias'));
     const inc = Array.isArray(reg.incidencias) ? reg.incidencias.slice(0, 20) : [];
     fila(T('Durante el envío'), inc.length ? inc.map((x) => hms(x.t) + ' · ' + T(INCIDENCIAS[x.que] || String(x.que || ''))).join(' · ') : T('Ninguna.'));
-    fila = seccion(T('Firmas digitales'));
+    fila = seccion(T('Firmas digitales'), true);
     const firma = (p, sig, sigpq) => {
       const d = el('div', 'cu-firma');
       d.append(el('small', null, BL ? T('Clave pública (ECDSA P-384)') : T('Clave pública (ECDSA P-256)')), mono(p.clave), el('small', null, T('Firma')), sig ? mono(sig) : el('span', 'cu-mal', T('Falta la firma.')));
@@ -296,6 +303,7 @@
     fila(T('Remitente'), firma(e, f.emisor, fq.emisor)); fila(T('Destinatario'), firma(r, f.receptor, fq.receptor));
     fila(T('Cómo verificarlo'), BL ? T('Con el archivo .json de este comprobante en guardianagroup.com/orbita/comunicaciones/verificar/, que comprueba las dos firmas de cada equipo.') : T('Con el archivo .json de este comprobante en guardianagroup.com/orbita/comunicaciones/verificar/, o con cualquier herramienta de ECDSA P-256.'));
     doc.append(el('p', 'cu-nota', T('Este comprobante acredita que estos dos equipos firmaron este registro: el archivo con esta huella salió de uno y llegó íntegro al otro. No acredita la identidad legal de las personas ni el contenido del archivo.')));
+    doc.append(tecnico);
     return doc;
   }
   async function pintaComprobante(caja, comp, res) {
@@ -308,6 +316,7 @@
     const res = await verifica(comp), ref = await referencia(comp);
     let zona = document.getElementById('cu-imprime'); if (zona) zona.remove();
     zona = el('div'); zona.id = 'cu-imprime'; zona.append(documento(comp, res, ref)); document.body.append(zona);
+    zona.querySelectorAll('details').forEach((d) => { d.open = true; }); // en el papel, los datos técnicos a la vista: son la prueba
     const titulo = document.title; document.title = nombreDescarga(comp).replace(/\.json$/, '');
     document.documentElement.classList.add('cu-imprimiendo');
     return () => { document.documentElement.classList.remove('cu-imprimiendo'); document.title = titulo; zona.remove(); };

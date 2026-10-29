@@ -29,16 +29,22 @@ const sale = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibili
 const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' }); document.dispatchEvent(new Event('visibilitychange')); });
 (async () => {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
-  const A = await telefono(browser, IPHONE);
-  await A.goto(URL0); await espera(1800);
+  // 0. iPhone (dueño, 29 Oct 2026, 12:10–12:11): «WhatsApp» usa la hoja de compartir del teléfono (no se sale de GUARDIANA)
+  const I = await telefono(browser, IPHONE);
+  await I.goto(URL0); await espera(1800);
+  await I.click('#nueva-blindada'); await espera(500);
+  comprueba(await visible(I, '#h-invitar'), 'iPhone: «Invitar a chat» abre la hoja');
+  comprueba(await I.evaluate(() => window.__compartidos.length === 0), 'el menú de compartir aún no se abre');
+  await I.screenshot({ path: path.join(OUT, '1-hoja.png') });
+  await I.click('#invitar-no'); await espera(400);
+  comprueba(!(await visible(I, '#h-invitar')), '«Cancelar» cierra la hoja');
+  await I.click('#nueva-blindada'); await espera(400); await I.click('#invitar-wa'); await espera(900);
+  comprueba(await I.evaluate(() => window.__compartidos.length === 1) && I.__wa.length === 0, 'iPhone: «WhatsApp» abre la hoja de compartir del teléfono (sin salir de GUARDIANA)');
+  comprueba(!(await visible(I, '#h-invitar')), 'iPhone: la hoja de invitar se cierra');
 
-  // 1. la hoja: WhatsApp, Otras apps y Cancelar
-  await A.click('#nueva-blindada'); await espera(500);
-  comprueba(await visible(A, '#h-invitar'), 'iPhone: «Invitar a chat» abre la hoja');
-  comprueba(await A.evaluate(() => window.__compartidos.length === 0), 'el menú de compartir aún no se abre');
-  await A.screenshot({ path: path.join(OUT, '1-hoja.png') });
-  await A.click('#invitar-no'); await espera(400);
-  comprueba(!(await visible(A, '#h-invitar')), '«Cancelar» cierra la hoja');
+  // 1–3. Android: «WhatsApp» abre la app entera con la invitación ya escrita; al volver, el inicio con la invitación esperando
+  const A = await telefono(browser, ANDROID);
+  await A.goto(URL0); await espera(1800);
 
   // 2. «WhatsApp»: se abre con la invitación ya escrita
   await A.click('#nueva-blindada'); await espera(400);
@@ -56,10 +62,11 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   await sale(A); await espera(300);
   comprueba(!(await visible(A, '#h-invitar')), 'al irse a WhatsApp, la hoja se cierra');
   await vuelve(A); await espera(400);
-  // 29 Oct 2026, 10:38 (dueño): al volver de WhatsApp NO se abre el chat (desde WhatsApp no se sabe si se envió o se canceló): el
-  // inicio tal cual, con la invitación en la lista como «Invitación enviada»; el chat se abre cuando la otra persona entra
-  const fila = await A.evaluate(() => { const f = document.querySelector('#lista-filas .fila-conv small'); return f ? f.textContent : ''; });
-  comprueba(!(await visible(A, '#texto')) && /Invitación enviada|esperando a la otra persona/.test(fila), 'al volver: el inicio, sin abrir el chat; la invitación en la lista, esperando (10:38)', fila);
+  // 29 Oct 2026, 12:50 (dueño): al volver de WhatsApp, quien invita ya está dentro del chat, esperando («automático y rápido»; sin
+  // saltos: el chat se abre mientras la app está fuera). Antes, 10:38, se volvía al inicio.
+  const cab = await A.evaluate(() => { const e = document.querySelector('#cconfianza'); return e ? e.textContent : ''; });
+  comprueba(await visible(A, '#texto') && /Invitación enviada|esperando/i.test(cab), 'al volver: ya dentro del chat, esperando a la otra persona (12:50)', cab);
+  comprueba(!/Invitación enviada\. En cuanto la otra persona la abra/.test(await aviso(A)), 'al volver: sin aviso de más (ya está en el chat)', await aviso(A));
   await A.screenshot({ path: path.join(OUT, '2-vuelta.png') });
 
   // 3. la otra persona abre el enlace que le llegó por WhatsApp: el chat se abre en los dos
@@ -71,7 +78,7 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   await A.screenshot({ path: path.join(OUT, '3-chat.png') });
 
   // 4. si WhatsApp no se abre (no está instalado, o se cancela): se dice, sin dejar nada a medias
-  const C = await telefono(browser, IPHONE);
+  const C = await telefono(browser, ANDROID);
   await C.goto(URL0); await espera(1500);
   await C.click('#nueva-blindada'); await espera(400); await C.click('#invitar-wa');
   await espera(6800);
@@ -86,9 +93,12 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   await D.goto(URL0); await espera(1500);
   await D.click('#nueva-blindada'); await espera(600);
   comprueba(await visible(D, '#h-invitar'), 'Android: la misma hoja, con el tipo de chat');
-  await D.click('#tipo-blindado'); await D.click('#invitar-wa'); await espera(900);
+  // 29 Oct 2026, 12:55–12:59 (dueño): el blindado, «próximamente»: no se puede elegir; por WhatsApp sale el chat normal
+  await D.evaluate(() => document.querySelector('#tipo-blindado').click()); await espera(300);
+  comprueba(await D.evaluate(() => /Próximamente/.test(document.querySelector('#tipo-blindado').textContent) && document.querySelector('#tipo-normal').getAttribute('aria-checked') === 'true'), 'Android: «Chat blindado · Próximamente», y el normal sigue marcado');
+  await D.click('#invitar-wa'); await espera(900);
   const waD = decodeURIComponent((/text=([^&]*)/.exec(D.__wa[D.__wa.length - 1] || '') || [])[1] || '');
-  comprueba(/^Invitación a un chat blindado de GUARDIANA\n.*#b=[A-Za-z0-9_-]{43}$/.test(waD), 'Android, blindado por WhatsApp: la frase y el enlace «#b=»', waD.split('\n')[0]);
+  comprueba(/^Invitación a un chat de GUARDIANA\n.*#i=[A-Za-z0-9_-]{43}$/.test(waD), 'Android, por WhatsApp: la frase y el enlace del chat normal «#i=»', waD.split('\n')[0]);
 
   await browser.close();
   console.log(fallos.length ? 'FALLOS: ' + fallos.length : 'TODO BIEN');

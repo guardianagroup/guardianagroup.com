@@ -1704,6 +1704,20 @@
     "Sin cuenta ni número de teléfono": ["No account and no phone number", "Sem conta nem número de telefone"],
     "prepago anónimo": ["anonymous prepaid", "pré-pago anônimo"],
     "Ultra está en preparación: lo que figura aquí es lo previsto y se irá activando por tramos. Normal y Blindado son gratis.": ["Ultra is in preparation: what appears here is what is planned and will be switched on in stages. Normal and Shielded are free.", "Ultra está em preparação: o que aparece aqui é o previsto e será ativado por etapas. Normal e Blindado são grátis."],
+    // arreglos del 29 Oct 2026, 12:15–12:20 (avisos en el menú, comprobante, reproductor de voz)
+    "Avisos con la app cerrada": ["Alerts with the app closed", "Avisos com o app fechado"],
+    "Avisos con la app cerrada: activados": ["Alerts with the app closed: on", "Avisos com o app fechado: ativados"],
+    "Avisos con la app cerrada: sin permiso": ["Alerts with the app closed: no permission", "Avisos com o app fechado: sem permissão"],
+    "Activar avisos con la app cerrada": ["Turn on alerts with the app closed", "Ativar avisos com o app fechado"],
+    "Avisos activados en este equipo: te llegarán mensajes y llamadas con la app cerrada.": ["Alerts are on on this device: messages and calls will reach you with the app closed.", "Avisos ativados neste aparelho: mensagens e chamadas vão chegar com o app fechado."],
+    "El permiso de avisos está bloqueado: actívalo en los ajustes del teléfono para GUARDIANA y vuelve aquí.": ["Alert permission is blocked: turn it on for GUARDIANA in the phone settings and come back here.", "A permissão de avisos está bloqueada: ative-a nas configurações do telefone para o GUARDIANA e volte aqui."],
+    "Invitación enviada. En cuanto la otra persona la abra, el chat aparecerá aquí.": ["Invitation sent. As soon as the other person opens it, the chat will appear here.", "Convite enviado. Assim que a outra pessoa abrir, o chat vai aparecer aqui."],
+    "Datos técnicos (para verificar el comprobante)": ["Technical data (to verify the receipt)", "Dados técnicos (para verificar o comprovante)"],
+    "Identidades": ["Identities", "Identidades"],
+    "Reproducir": ["Play", "Reproduzir"],
+    "Pausa": ["Pause", "Pausa"],
+    "Posición": ["Position", "Posição"],
+    "No se puede reproducir": ["Cannot play", "Não é possível reproduzir"],
     "«{n}» pasa del tope de {g} por archivo.": ["“{n}” is over the {g} limit per file.", "«{n}» passa do limite de {g} por arquivo."],
     "archivo": ["file", "arquivo"],
     // «Invitar a chat» en el iPhone: WhatsApp entero u otra app (dueño, 28 Oct 2026, 20:56)
@@ -3312,6 +3326,19 @@
     "Las firmas.": ["The signatures.", "As assinaturas."],
     "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la sesión normal; en la sesión blindada, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.": ["Each device signs the record with its identity key: ECDSA P-256 over SHA-256 in the normal session; in the shielded session, ECDSA P-384 over SHA-384 and, in addition, ML-DSA-87. If a single character of the record changes, the signatures are no longer valid.", "Cada dispositivo assina o registro com a sua chave de identidade: ECDSA P-256 sobre SHA-256 na sessão normal; na sessão blindada, ECDSA P-384 sobre SHA-384 e, além disso, ML-DSA-87. Se um único caractere do registro mudar, as assinaturas deixam de ser válidas."],
     "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la sesión normal; SHA-384 en la blindada), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.": ["Each device's identity fingerprint is a digest of its public keys (SHA-256 in the normal session; SHA-384 in the shielded one), and the safety number shown is the same one both people saw in the conversation.", "A impressão digital de identidade de cada dispositivo resume as suas chaves públicas (SHA-256 na sessão normal; SHA-384 na blindada), e o número de segurança que aparece é o mesmo que as duas pessoas viram na conversa."],
+
+    // 29 Oct 2026, 12:55–12:59: el blindado «próximamente», chat abierto en otro sitio, guía con invitación en Safari
+    "Este chat se ha abierto en otro sitio (otra pestaña o la app): sigue allí.": ["This chat has been opened somewhere else (another tab or the app): carry on there.", "Este chat foi aberto em outro lugar (outra aba ou o app): continue lá."],
+    "El chat blindado llegará próximamente. Mientras, «Crear invitación».": ["The armored chat is coming soon. Meanwhile, use “Create invitation”.", "O chat blindado chega em breve. Enquanto isso, «Criar convite»."],
+    "El chat blindado llegará próximamente. De momento, el chat normal.": ["The armored chat is coming soon. For now, the normal chat.", "O chat blindado chega em breve. Por enquanto, o chat normal."],
+    "Próximamente": ["Coming soon", "Em breve"],
+    "Sesión blindada · próximamente": ["Armored session · coming soon", "Sessão blindada · em breve"],
+    "Algoritmos de la suite CNSA 2.0 y claves que se renuevan cada 5 minutos. Mientras llega, usa «Crear invitación».": ["CNSA 2.0 suite algorithms and keys renewed every 5 minutes. Until it arrives, use “Create invitation”.", "Algoritmos da suíte CNSA 2.0 e chaves renovadas a cada 5 minutos. Enquanto não chega, use «Criar convite»."],
+    "Así la invitación se abre dentro de la app, y tus contactos y avisos quedan guardados ahí.": ["That way the invitation opens inside the app, and your contacts and alerts are kept there.", "Assim o convite abre dentro do app, e seus contatos e avisos ficam guardados lá."],
+    "Seguir en Safari": ["Continue in Safari", "Continuar no Safari"],
+    "Invitación enviada. En cuanto la otra persona la abra, el chat empieza aquí.": ["Invitation sent. As soon as the other person opens it, the chat starts here.", "Convite enviado. Assim que a outra pessoa abrir, o chat começa aqui."],
+    "Gratis · próximamente": ["Free · coming soon", "Grátis · em breve"],
+    "Hoy está disponible el chat Normal. Blindado y Ultra están en preparación: lo que figura aquí es lo previsto y se irá activando por tramos. Normal y Blindado son gratis.": ["The Normal chat is available today. Shielded and Ultra are in preparation: what appears here is what is planned and will be switched on in stages. Normal and Shielded are free.", "Hoje está disponível o chat Normal. Blindado e Ultra estão em preparação: o que aparece aqui é o previsto e será ativado por etapas. Normal e Blindado são grátis."],
   };
   const PAISES_EXTRA = { 'Yahoo Japón': ['Yahoo Japan', 'Yahoo Japão'] };
   Object.assign(D, PAISES_EXTRA);

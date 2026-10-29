@@ -229,3 +229,13 @@
   #cu-imprime .cu-cro .cu-t,#cu-imprime .cu-cro .cu-lado{color:#4A5A6B;font-size:7.5pt}
   #cu-imprime .cu-nota{margin-top:2pt;padding-top:6pt;border-top:.6pt solid #C9D3DD;color:#3A4654;font-size:7.5pt}
 }
+
+/* «Datos técnicos» del comprobante, plegados (dueño, 29 Oct 2026, 12:15): las huellas, claves y firmas, solo si se abren */
+.cu-tecnico{margin-top:4px;border:1px solid rgba(156,195,228,.16);border-radius:12px;padding:0 12px;background:rgba(12,18,26,.5)}
+.cu-tecnico summary{cursor:pointer;list-style:none;padding:12px 0;font:600 13px/1.3 var(--texto);color:var(--accent);display:flex;align-items:center;gap:8px}
+.cu-tecnico summary::-webkit-details-marker{display:none}
+.cu-tecnico summary::before{content:'';width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(-45deg);transition:transform .15s ease;margin-left:2px}
+.cu-tecnico[open] summary::before{transform:rotate(45deg)}
+.cu-tecnico .cu-sec{padding:0 0 12px}
+#cu-imprime .cu-tecnico{border:0;padding:0;background:none}
+#cu-imprime .cu-tecnico summary{display:none}

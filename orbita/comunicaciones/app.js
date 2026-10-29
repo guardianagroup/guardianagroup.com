@@ -11,6 +11,13 @@
   // Sesión blindada (dueño, 27 Oct 2026, 22:01–23:12): suite CNSA 2.0, invitación por enlace de 256 bits, verificación mutua
   // obligatoria, identidad nueva en cada sesión, renovación de claves cada 5 minutos, relleno e informe de cierre.
   const esB = (c) => !!(c && c.modo === 'blindada');
+  // 29 Oct 2026, 12:52–12:59 (dueño): «de momento, el modo blindado en la aplicación pon próximamente y que solamente se puede
+  // utilizar el modo normal, que es minimalista todo… el chat normal básico, como lo tiene WhatsApp»; «Recibo de entrega… quítalo
+  // de la normal y de blindado… solamente Ultra»; «Ver el viaje… en la versión de pago». Las sesiones blindadas que ya existan
+  // siguen funcionando con sus claves, pero sin extras en pantalla (velo, modo discreto, tiempo limitado, alarma, número en la
+  // llamada, voz e imagen protegidas). Recibos, viaje y comprobantes quedan para Ultra.
+  const BLINDADO_ACTIVO = false, ULTRA = false;
+  const extrasB = (c) => BLINDADO_ACTIVO && esB(c);
   const RENUEVA_B_MS = 5 * 60 * 1000;
   // en pruebas locales, «?renueva=N» acorta la renovación a N segundos
   const renuevaMs = () => (LOCAL && +new URLSearchParams(location.search).get('renueva') * 1000) || RENUEVA_B_MS;
@@ -356,6 +363,7 @@
       else if (!c.nombre && j.nombre) c.nombre = String(j.nombre).slice(0, 40);
       c.suId = de; c.miembros.add(de);
       if (nueva || j.nombre !== c.nombreVisto) { c.nombreVisto = j.nombre; await guardaConv(c); }
+      if (nueva) await fundeConContacto(c); // si es alguien ya guardado, este es «el mismo chat de siempre» (12:53–12:56)
       const esResp = !!efMia;
       if (!soyInicio(c)) { const pq = await presenta(c, { epoca, ef, ek: kemEk }); await derivaSesion(c, ef, c.ef, pq); }
       else if (esResp) {
@@ -365,7 +373,7 @@
         await derivaSesion(c, ef, efMia, pq);
       }
       else if (!resp) await presenta(c, null);
-      if (nueva) { if (c.codigo) R.retira(c.codigo); c.codigo = null; clearInterval(muestraInvitacion.reloj); await anotaSistema(c, esMovil() ? 'Mensajes y llamadas encriptados de extremo a extremo.' : 'Conversación establecida: encriptada de extremo a extremo. Comprueba el número de seguridad con la otra persona cuando puedas.'); if (ACTUAL === c.id) abreConv(c.id); else avisoConv(c, T('«{n}» ya está lista: la otra persona ha entrado.')); }
+      if (nueva) { if (c.codigo) R.retira(c.codigo); c.codigo = null; clearInterval(muestraInvitacion.reloj); const nota = esMovil() ? 'Mensajes y llamadas encriptados de extremo a extremo.' : 'Conversación establecida: encriptada de extremo a extremo. Comprueba el número de seguridad con la otra persona cuando puedas.'; if (!c.mensajes.some((m) => m.tipo === 'sistema' && m.texto === nota)) await anotaSistema(c, nota); if (ACTUAL === c.id) abreConv(c.id); else avisoConv(c, T('«{n}» ya está lista: la otra persona ha entrado.')); }
       if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
       mandaVaciar(c);
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
@@ -506,6 +514,7 @@
       vigila(c, c.verificada ? T('Has comprobado el número de seguridad.') : T('Has retirado tu comprobación del número de seguridad.'), c.verificada ? 'bien' : 'info');
     }
     pintaCabecera(c); pintaRadio(c); enviaCola(c);
+    if (ACTUAL === c.id) avisosCuandoToque();
   }
   async function recibeVerificada(c, j) {
     if (!esB(c) || !c.huella) return;
@@ -524,6 +533,7 @@
       if (antes) { await anotaSistema(c, 'La otra persona ha retirado su comprobación del número de seguridad.'); vigila(c, T('La otra persona ha retirado su comprobación del número de seguridad.'), 'info'); }
     }
     await guardaConv(c); pintaCabecera(c); pintaRadio(c); enviaCola(c);
+    if (ACTUAL === c.id) avisosCuandoToque();
   }
   // La puerta de la blindada: encima del campo de escribir, con el número a la vista, hasta que los dos lo comprueban
   async function pintaPuerta(c) {
@@ -620,7 +630,7 @@
     try {
       while (c.cola.length && enLinea(c) && puedeEnviar(c)) {
         const m = c.cola[0];
-        const carga = m.tipo === 'texto' ? { tipo: 'texto', id: m.id, t: m.t, texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos, v: 1, region: MI_PAIS || undefined, voz: m.archivo.voz ? 1 : undefined, vida: m.archivo.vida, paq: m.archivo.paq } : null;
+        const carga = m.tipo === 'texto' ? { tipo: 'texto', id: m.id, t: m.t, texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos, v: ULTRA ? 1 : 0, region: MI_PAIS || undefined, voz: m.archivo.voz ? 1 : undefined, vida: m.archivo.vida, dur: m.archivo.dur, paq: m.archivo.paq } : null;
         if (!carga) { c.cola.shift(); continue; }
         const vj = m.tipo === 'archivo' && VIAJES.get(m.id), sesU = c.sesion; // la clave del archivo viaja en esta sesión
         const b = await sella(c, carga); if (!b || !R.manda(c.id, c.suId, b)) break;
@@ -644,7 +654,7 @@
     switch (j.tipo) {
       case 'texto': {
         if (c.mensajes.some((x) => x.id === j.id)) { enviaControl(c, { tipo: 'ack', ids: [j.id] }); return; }
-        const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'texto', texto: String(j.texto || '').slice(0, 20000), velado: esB(c) || undefined };
+        const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'texto', texto: String(j.texto || '').slice(0, 20000), velado: extrasB(c) || undefined };
         await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true); vigila(c, T('Mensaje recibido: superó la verificación criptográfica.'), 'ok'); pintaRadio(c);
         enviaControl(c, { tipo: 'ack', ids: [m.id] });
         const aLaVista = ACTUAL === c.id && document.visibilityState === 'visible';
@@ -757,10 +767,10 @@
       if (opc && opc.vida && f.size > MAX_MEMORIA) { aviso(T('Con tiempo en pantalla, como mucho 300 MB por archivo: «{n}» se envía sin tiempo.').replace('{n}', (f.name || T('archivo')).slice(0, 40))); opc = Object.assign({}, opc, { vida: undefined }); }
       const clave = C.azar(32), trozos = Math.ceil(f.size / TROZO) || 1;
       // tiempo en pantalla (dueño, 29 Oct 2026, 10:08): «una» vez, o tantos segundos desde que se abre; después se borra en el otro equipo
-      const vida = opc && opc.vida && !voz ? opc.vida : undefined;
+      const vida = opc && opc.vida && !voz ? opc.vida : undefined, dur = opc && Number.isFinite(opc.dur) ? Math.max(1, Math.round(opc.dur)) : undefined;
       // blindado: paquete «todo o nada» (dueño, 10:11): sin todas las piezas no se descifra ni un byte (ver mandaArchivo)
-      const paq = esB(c) && f.size <= MAX_PAQUETE ? C.azar(32) : null;
-      const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'archivo', archivo: { nombre: (f.name || 'archivo').slice(0, 180), tam: f.size, mime: f.type || 'application/octet-stream', clave: C.b64u(clave), trozos, progreso: 0, voz: voz || undefined, vida, paq: paq ? 1 : undefined } };
+      const paq = extrasB(c) && f.size <= MAX_PAQUETE ? C.azar(32) : null;
+      const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'archivo', archivo: { nombre: (f.name || 'archivo').slice(0, 180), tam: f.size, mime: f.type || 'application/octet-stream', clave: C.b64u(clave), trozos, progreso: 0, voz: voz || undefined, vida, dur, paq: paq ? 1 : undefined } };
       c.archivos.set(m.id, { envio: true, f, clave: await C.aes(clave), ack: 0, trozos, listo: false, enviados: 0, paq, paqClave: paq ? await claveCtr(paq) : null });
       if (f.size <= MAX_MEMORIA && /^(image|audio)\//.test(m.archivo.mime)) await BD.pon('arch', { id: m.id, conv: c.id, blob: f, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: f.size });
       const v = viajeNuevo(c, m, 'envia'); v.voz = voz;
@@ -809,9 +819,9 @@
     if (c.mensajes.some((x) => x.id === j.id)) return;
     const tam = +j.tam || 0, trozos = +j.trozos || 0;
     if (!tam || trozos !== (Math.ceil(tam / TROZO) || 1) || !j.clave) { enviaControl(c, { tipo: 'archivo-cancel', id: j.id }); return; }
-    const voz = j.voz === 1, custodia = j.v === 1 && !voz;
+    const voz = j.voz === 1, custodia = ULTRA && j.v === 1 && !voz; // el comprobante de custodia, en Ultra (dueño, 29 Oct 2026, 12:52)
     const vida = j.vida === 'una' ? 'una' : [30, 60, 300].includes(+j.vida) ? +j.vida : undefined, paq = esB(c) && j.paq === 1;
-    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibiendo', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam, mime: String(j.mime || 'application/octet-stream').slice(0, 100), trozos, progreso: 0, aDisco: tam > MAX_MEMORIA || (conDisco() && tam > 32 * 1024 * 1024 && !vida), custodia: custodia ? 1 : undefined, vida, paq: paq ? 1 : undefined }, velado: esB(c) && !voz ? true : undefined };
+    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibiendo', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam, mime: String(j.mime || 'application/octet-stream').slice(0, 100), trozos, progreso: 0, aDisco: tam > MAX_MEMORIA || (conDisco() && tam > 32 * 1024 * 1024 && !vida), custodia: custodia ? 1 : undefined, vida, dur: Number.isFinite(+j.dur) && +j.dur > 0 ? Math.min(36000, Math.round(+j.dur)) : undefined, paq: paq ? 1 : undefined }, velado: extrasB(c) && !voz ? true : undefined };
     const a = { envio: false, clave: await C.aes(C.deB64u(j.clave)), partes: null, escritor: null, siguiente: 0, tengo: 0, trozos, m, pendientes: new Map(), huella: window.GuardianaSHA256 ? GuardianaSHA256.crea() : null, hPtr: 0, paq, hPaq: paq ? GuardianaSHA256.crea() : null, trailer: null };
     c.archivos.set(m.id, a);
     const v = viajeNuevo(c, m, 'recibe'); v.voz = voz; v.custodia = voz ? 'voz' : custodia ? 'si' : 'no'; v.paisSuyo = regionValida(j.region); v.pq = !!(ses && ses.pq); v.sid = ses ? ses.sid : ''; v.sesionDesde = ses ? ses.desde : null;
@@ -823,7 +833,7 @@
     if (a.listo) { enviaControl(c, listoCarga(m.id, v)); evento(v, T('Listo para recibir: aviso enviado al remitente.')); }
     else if (m.estado !== 'fallo') { v.eligeDestino = true; evento(v, T('Elige dónde guardarlo para empezar la recepción.')); avisaSonido(); if (ACTUAL !== c.id) aviso(T('Te están mandando un archivo grande: elige dónde guardarlo.')); }
   }
-  const listoCarga = (id, v) => ({ tipo: 'archivo-listo', id, v: 1, region: MI_PAIS || undefined, lat: v ? VJ() && VJ().minima(v.latMia) : undefined });
+  const listoCarga = (id, v) => ({ tipo: 'archivo-listo', id, v: ULTRA ? 1 : 0, region: MI_PAIS || undefined, lat: v ? VJ() && VJ().minima(v.latMia) : undefined });
   // «Guardar en…» (archivos grandes): la persona elige el destino y, desde ahí, cada trozo se escribe según llega.
   async function eligeDestino(c, m) {
     const a = c.archivos.get(m.id); if (!a || a.listo) return;
@@ -919,7 +929,7 @@
     const fin = { tipo: 'archivo-fin', id: m.id, ok, seg: Math.round(seg * 10) / 10, trozos: a.trozos };
     if (obs) Object.assign(fin, { v: 1, sha256: obs.sha256, llegada: obs.llegada, primero: obs.primero, anuncio: obs.anuncio, lat: obs.lat, verificada: obs.verificada, nombre: obs.nombre, region: obs.region || undefined, version: obs.version, tipoReal: obs.tipo, mutua: obs.mutua }); // «tipo» es el del mensaje: el del archivo va en «tipoReal»
     enviaControl(c, fin);
-    if (v) { finViaje(v, ok); if (ok) { v.coincide = undefined; evento(v, T('Último fragmento autenticado: archivo completo.'), 'bien'); if (sha) evento(v, T('Huella SHA-256 calculada en tu equipo') + ': ' + VJ().agrupa(sha, 16) + '…'); } }
+    if (v) { finViaje(v, ok); if (ok) { v.coincide = undefined; evento(v, T('Último fragmento autenticado: archivo completo.'), 'bien'); if (sha) evento(v, T('Huella SHA-256 calculada en tu equipo') + '.'); } }
     // con comprobante, la tarjeta firmada sustituye al recibo; si no llega en 30 s, queda el recibo de siempre
     if (ok && !(m.archivo.custodia && obs)) await recibo(c, m, seg, a.trozos, false);
     else if (ok) setTimeout(() => { if (!c.mensajes.some((x) => x.id === 'cu-' + m.id) && c.estado !== 'destruida') recibo(c, m, seg, a.trozos, false); }, 30000);
@@ -939,6 +949,7 @@
   // Recibo de entrega (dueño, 26 Oct 20:25): aparece solo en el chat cuando el archivo ha llegado entero al otro equipo.
   const segundos = (x) => (x < 60 ? x.toLocaleString(LOC(), { maximumFractionDigits: 1 }) + ' s' : Math.floor(x / 60) + ' min ' + Math.round(x % 60) + ' s');
   async function recibo(c, m, seg, trozos, entregado) {
+    if (!ULTRA) return; // 29 Oct 2026, 12:52 (dueño): «en la versión normal no hay recibo de entrega… solamente Ultra»
     const texto = (entregado ? T('Recibo de entrega') : T('Recibo de recepción')) + ' · ' + m.archivo.nombre + ' · ' + tamano(m.archivo.tam) + ' · ' + T('en') + ' ' + segundos(seg) + ' · ' + trozos + ' ' + T('trozos comprobados') + ' · ' + T('encriptado de extremo a extremo; cada trozo superó la autenticación') + ' · ' + T('contenido no analizado: viaja encriptado');
     const r = { id: uuid(), conv: c.id, t: Date.now(), dir: 'sistema', estado: 'ok', tipo: 'recibo', texto };
     await guardaMensaje(c, r); c.mensajes.push(r); pintaMensaje(c, r);
@@ -965,7 +976,7 @@
   // me aparecía en pantalla… el viaje… quiero que una vez que haya llegado, que salga como opción… pero no quiero que salga
   // automáticamente»): al llegar, el archivo lleva el botón «Ver el viaje» (y el comprobante, su tarjeta).
   function abreSiToca(v, empieza) {
-    if (esMovil()) return;
+    if (!ULTRA || esMovil()) return; // el viaje del archivo, en Ultra (dueño, 29 Oct 2026, 12:52)
     if (!VJ() || v.voz || v.tam < MIN_VIAJE || ACTUAL !== v.conv) return;
     const act = VJ().actual;
     if (act === v) return;
@@ -993,7 +1004,7 @@
     v.custodia = v.voz ? 'voz' : j.v === 1 ? 'si' : 'no'; v.tListo = Date.now();
     v.paisSuyo = regionValida(j.region) || v.paisSuyo; const l = latValida(j.lat); if (l != null) v.latSuya.push(l);
     evento(v, T('El equipo del destinatario está listo: empieza el envío.'));
-    if (v.custodia === 'no') evento(v, T('El otro equipo usa una versión anterior de Comunicaciones: el envío sigue, sin comprobante de entrega.'), 'info');
+    if (v.custodia === 'no' && ULTRA) evento(v, T('El otro equipo usa una versión anterior de Comunicaciones: el envío sigue, sin comprobante de entrega.'), 'info');
   }
   function acuseViaje(j, a) {
     const v = VIAJES.get(j.id); if (!v) return;
@@ -1237,13 +1248,14 @@
   const servidorLlamada = () => (iceUsado === 'am' ? T('Miami (Estados Unidos)') : iceUsado === 'eu' ? T('Núremberg (Alemania)') : '');
   const puedeLlamar = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
   // solo en local (pruebas): simular un mensaje manipulado y ver la alarma sin tocar el relé
-  if (LOCAL) window.gcomPrueba = { avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL) };
+  if (LOCAL) window.gcomPrueba = { avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL), enlace: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? enlaceB(c) : null; }, cuantas: () => [...CONVS.values()].filter((x) => x.estado !== 'destruida' && x.estado !== 'destruida_pendiente').length };
   function arrancaLlamadas() {
     if (!window.GuardianaLlamada || !window.RTCPeerConnection) { for (const id of ['#llamar', '#videollamar']) { const b = $(id); if (b) b.hidden = true; } return; }
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
     LL = GuardianaLlamada.crea({
       ice: iceCercano, servidor: servidorLlamada, puede: puedeLlamar, t: T, aviso, suena: avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
-      blindada: () => { const c = convLl(); return !!(c && esB(c)); }, // las opciones de imagen, solo en la sesión blindada
+      blindada: () => { const c = convLl(); return !!(c && extrasB(c)); },
+      sas: () => { const c = convLl(); return !!(c && extrasB(c)); }, // el número de seguridad en la llamada: blindado y Ultra (dueño, 29 Oct 2026, 12:55: «en el modo normal no») // las opciones de imagen, solo en la sesión blindada
       manda: (m) => { const c = convLl(); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
       // el número grande de la llamada (dueño, 29 Oct 2026, 10:16): si los dos ven el mismo, nadie está en medio; «Coinciden» deja
       // la conversación como verificada; «No coinciden» cuelga y, en el blindado, destruye la conversación en los dos equipos
@@ -1289,6 +1301,41 @@
       try { for (const k of Object.keys(localStorage)) if (/^gcom-/.test(k)) localStorage.removeItem(k); } catch (_) {}
     }
     muestraFin();
+  }
+  // 29 Oct 2026, 12:53–12:56 (dueño): «mi mujer y yo ya tenemos los contactos guardados. Sin embargo… me hace una invitación y me
+  // vuelve a salir arriba el guardar como contacto… Tenemos que identificar si una persona ya está guardada»; «los chats se
+  // acumulan… cuando es un chat de una persona que ya tenemos guardada… es el mismo chat de siempre». A cada persona se la reconoce
+  // por su identidad (la huella de sus claves, la misma en todas sus conversaciones normales): si una invitación nueva resulta ser
+  // de alguien ya conocido, este chat hereda su nombre, si era contacto y todo lo hablado, y las conversaciones viejas con esa
+  // misma persona desaparecen de la lista (sus mensajes y archivos pasan aquí). En el blindado no se puede: allí la identidad es
+  // nueva en cada sesión, a propósito.
+  async function fundeConContacto(c) {
+    try {
+      if (!c || !c.huella || esB(c)) return;
+      const h = C.hex(c.huella);
+      const viejas = [...CONVS.values()].filter((o) => o !== c && o.huella && !esB(o) && C.hex(o.huella) === h && o.estado !== 'destruida' && o.estado !== 'destruida_pendiente');
+      if (!viejas.length) return;
+      viejas.sort((a, b) => (a.ultimo || 0) - (b.ultimo || 0));
+      const ref = viejas.filter((o) => o.contacto).pop() || viejas[viejas.length - 1];
+      if (ref.contacto) { c.contacto = true; c.sinContacto = false; }
+      if (ref.sinContacto && !ref.contacto) c.sinContacto = true; // ya dijo «ahora no»: no se le vuelve a preguntar
+      if (ref.alias && !c.alias) c.alias = ref.alias;
+      if (!c.nombre && ref.nombre) c.nombre = ref.nombre;
+      if (ref.verificada) c.verificada = true; // el número de seguridad es el mismo (mismas identidades)
+      for (const o of viejas) {
+        for (const st of ['msg', 'arch']) { const xs = await BD.porConv(st, o.id); for (const x of xs) { x.conv = c.id; await BD.pon(st, x); } }
+        for (const m of o.mensajes || []) { try { VIAJES.delete(m.id); } catch (_) {} }
+        o.estado = 'destruida'; o.mensajes = []; o.cola = [];
+        if (o.codigo) { try { R.retira(o.codigo); } catch (_) {} }
+        R.sale(o.id); CONVS.delete(o.id); await BD.borra('conv', o.id);
+        if (ACTUAL === o.id) cierraConv();
+      }
+      c.cargados = false; c.mensajes = []; c.cola = []; await cargaMensajes(c);
+      const u = c.mensajes.filter((x) => x.dir !== 'sistema').pop(); if (u) { c.ultimo = Math.max(c.ultimo || 0, u.t || 0); c.ultimoTexto = await guardaSellado({ texto: u.tipo === 'texto' ? u.texto : u.tipo === 'archivo' ? '📎 ' + u.archivo.nombre : u.texto || '' }); }
+      await guardaConv(c);
+      if (ACTUAL === c.id) { pintaCabecera(c); pintaTodos(c); pintaRadio(c); }
+      pintaLista();
+    } catch (e) { console.warn('fundir con contacto', e); }
   }
   async function destruyeLocal(c, porElla, silencio) {
     if (c.estado === 'destruida') return;
@@ -1342,7 +1389,7 @@
       if (c.compartido && !c.huella && c.rol === 'invita' && (!ACTUAL || !CONVS.has(ACTUAL)) && !document.body.classList.contains('en-llamada')) abreConv(c.id); });
     // si la otra persona se va, puede que solo esté recargando: unos segundos sin cambiar nada
     R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; quietoConv(c, 6000); vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && ACTUAL === c.id) LL.recibe({ acto: 'colgar' }); } pintaCabecera(c); pintaLista(); });
-    R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Esta conversación se ha abierto en otra pestaña: sigue allí.')); });
+    R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Este chat se ha abierto en otro sitio (otra pestaña o la app): sigue allí.')); });
     // Las tramas de una conversación se procesan en orden (una detrás de otra): así un trozo de archivo nunca
     // adelanta al anuncio del archivo, ni un mensaje a la presentación que abre su sesión.
     R.on('trama', (sala, de, b) => {
@@ -1511,9 +1558,11 @@
   // Quien invita, en el teléfono, entra en el chat en cuanto envía la invitación y espera ahí a la otra persona (dueño, 28 Oct 2026,
   // 21:51: «ya tiene que entrar en la sala del chat… No puede esperar desde fuera»). Lo que escriba sale cuando ella entre.
   const esperaEnChat = (c) => !!(c && esMovil() && porEnlace(c) && c.rol === 'invita' && !c.huella && c.compartido);
+  // en cuanto hay una conversación establecida y se está en ella, la pregunta (una vez por sesión, y «Ahora no» se recuerda)
+  function avisosCuandoToque() { setTimeout(preguntaAvisos, 1500); }
   function retiraAvisos(sala) { try { if (swReg && navigator.serviceWorker.controller) navigator.serviceWorker.controller.postMessage({ t: 'cierra', sala }); } catch (_) {} try { if (navigator.clearAppBadge && !nuevos) navigator.clearAppBadge().catch(() => {}); } catch (_) {} }
   async function abreConv(id) {
-    retiraAvisos(id);
+    retiraAvisos(id); avisosCuandoToque();
     const c = CONVS.get(id); if (!c) return;
     if (ACTUAL && ACTUAL !== id) { paraEscribe(); guardaBorrador(); }
     const cambia = ACTUAL !== id;
@@ -1628,6 +1677,8 @@
   function pintaTodos(c) {
     const ul = $('#mensajes'); ul.textContent = ''; ul.dataset.dia = '';
     for (const m of c.mensajes) pintaMensaje(c, m, false, true);
+    // quien invita espera dentro del chat (12:50): mientras no hay nada, se dice qué va a pasar
+    if (!c.mensajes.length && esperaEnChat(c)) { const li = document.createElement('li'); li.className = 'gc-nota-sistema gc-espera'; li.textContent = T('Invitación enviada. En cuanto la otra persona la abra, el chat empieza aquí.'); ul.append(li); }
     ul.scrollTop = ul.scrollHeight;
   }
   function pintaMensaje(c, m, reemplaza, sinScroll) {
@@ -1639,6 +1690,7 @@
     if (!li) {
       // el «escribiendo…» va siempre el último: se aparta mientras entra el mensaje y vuelve detrás; si el mensaje es suyo, se quita
       const esc = ul.querySelector('li.gc-escribiendo'); if (esc) esc.remove();
+      const esp = ul.querySelector('li.gc-espera'); if (esp) esp.remove();
       if (ul.dataset.dia !== diaDe(m.t)) { ul.dataset.dia = diaDe(m.t); const f = document.createElement('li'); f.className = 'gc-fecha'; f.textContent = fecha(m.t); ul.append(f); }
       li = document.createElement('li'); li.dataset.id = m.id; ul.append(li);
       if (esc) { if (m.dir === 'suya') clearTimeout(escribeT); else ul.append(esc); }
@@ -1685,36 +1737,79 @@
   function pintaProgreso(m) { const li = $('#mensajes [data-id="' + m.id + '"]'); if (!li) return; if (!li.querySelector('.gc-progreso')) { const c = CONVS.get(m.conv); if (c) pintaMensaje(c, m, true); return; } const i = li.querySelector('.gc-progreso i'); if (i) i.style.width = Math.round((m.archivo.progreso || 0) * 100) + '%'; const s = li.querySelector('.gc-archivo small'); if (s) s.textContent = tamano(m.archivo.tam) + (m.archivo.progreso < 1 ? ' · ' + Math.round(m.archivo.progreso * 100) + ' %' : ''); }
   const tamano = (n) => n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(0) + ' KB' : (n / 1048576).toFixed(1) + ' MB';
   function tarjetaArchivo(m) {
-    const d = document.createElement('div'); d.className = 'gc-archivo';
+    const d = document.createElement('div'); d.className = 'gc-archivo' + (m.archivo.voz ? ' gc-archivo-voz' : '');
     const ic = document.createElement('span'); ic.className = 'gc-archivo-icono'; ic.innerHTML = '<svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>';
     const b = document.createElement('b'); b.textContent = m.archivo.nombre; b.setAttribute('translate', 'no');
     const s = document.createElement('small');
     const pr = m.archivo.progreso || 0;
     s.textContent = tamano(m.archivo.tam) + (m.estado === 'fallo' ? ' · ' + (m.archivo.motivo || T('no se completó')) : pr < 1 && (m.estado === 'recibiendo' || m.estado === 'enviado') ? ' · ' + Math.round(pr * 100) + ' %' : m.estado === 'pendiente' ? ' · ' + T('pendiente') : m.archivo.enDisco ? ' · ' + T('guardado en tu disco') : '');
+    // la nota de voz es solo su reproductor (dueño, 29 Oct 2026, 12:03): sin nombre de archivo, tamaño ni botones de archivo
+    if (m.archivo.voz && (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido' || m.estado === 'enviado' || m.estado === 'descartado')) { b.hidden = true; s.hidden = true; ic.hidden = true; }
     d.append(ic, b, s);
     const enCurso = m.estado !== 'fallo' && pr < 1 && m.estado !== 'pendiente';
     if (enCurso) { const p = document.createElement('span'); p.className = 'gc-progreso'; const i = document.createElement('i'); i.style.width = Math.round(pr * 100) + '%'; p.append(i); d.append(p); }
     const conVida = !!m.archivo.vida, temporalVivo = conVida && m.dir === 'suya' && m.estado === 'recibido' && !m.archivo.caducado;
     if (conVida) { const se = document.createElement('span'); se.className = 'sello vida'; se.textContent = (m.archivo.caducado ? '✓ ' + T('Visto y borrado') : m.archivo.vistoBorrado ? '✓ ' + T('Visto y borrado en el otro equipo') : m.archivo.vida === 'una' ? '⏱ ' + T('Se ve una vez y se borra') : '⏱ ' + T('Se ve {s} y se borra').replace('{s}', m.archivo.vida >= 60 ? (m.archivo.vida / 60) + ' min' : m.archivo.vida + ' s')); d.append(se); if (m.archivo.caducado || m.archivo.vistoBorrado) d.classList.add('caducado'); }
-    else if (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido') { const se = document.createElement('span'); se.className = 'sello'; se.textContent = '✓ ' + T('Completo y autenticado: encriptado de extremo a extremo') + (m.archivo.paq ? ' · ' + T('paquete «todo o nada»') : ''); d.append(se); }
+    else if ((ULTRA || extrasB(CONVS.get(m.conv))) && !m.archivo.voz && (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido')) { const se = document.createElement('span'); se.className = 'sello'; se.textContent = '✓ ' + T('Completo y autenticado: encriptado de extremo a extremo') + (m.archivo.paq ? ' · ' + T('paquete «todo o nada»') : ''); d.append(se); }
     else if (m.estado === 'fallo' && /alterados/.test(m.archivo.motivo || '')) { const se = document.createElement('span'); se.className = 'sello mal'; se.textContent = '✕ ' + T('Detenido: no superó la autenticación'); d.append(se); }
     const fila = document.createElement('div'); fila.className = 'fila';
     if (m.dir === 'suya' && m.estado === 'recibiendo' && m.archivo.aDisco && !m.archivo.enDisco) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton principal'; g.textContent = T('Guardar en…'); g.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) eligeDestino(c, m); }); fila.append(g); }
     if (temporalVivo) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton principal'; g.textContent = T('Ver'); g.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) veTemporal(c, m); }); fila.append(g); }
     else if (!conVida && ((m.dir === 'suya' && m.estado === 'recibido' && !m.archivo.enDisco) || (m.dir === 'mia' && /^(image|audio)\//.test(m.archivo.mime)))) {
-      if (/^audio\//.test(m.archivo.mime)) { BD.saca('arch', m.id).then((r) => { if (!r) return; const au = document.createElement('audio'); au.controls = true; au.preload = 'metadata'; au.src = URL.createObjectURL(r.blob); au.style.gridColumn = '1 / -1'; d.prepend(au); }); }
+      // el reproductor se conserva entre repintados (al pasar a «entregado» o «leído» la tarjeta se vuelve a pintar y, si no, la nota se cortaba a mitad)
+      if (/^audio\//.test(m.archivo.mime)) { const ya = VOZ_CACHE.get(m.id); if (ya) d.prepend(ya); else BD.saca('arch', m.id).then((r) => { if (!r) return; let el = VOZ_CACHE.get(m.id); if (!el) { el = reproductorVoz(m, r.blob); VOZ_CACHE.set(m.id, el); } if (!el.isConnected) d.prepend(el); }); }
       if (/^image\//.test(m.archivo.mime) && m.archivo.tam < 24 * 1024 * 1024) { BD.saca('arch', m.id).then((r) => { if (!r) return; const img = document.createElement('img'); img.className = 'imagen'; img.alt = m.archivo.nombre; img.src = URL.createObjectURL(r.blob); img.style.gridColumn = '1 / -1'; img.addEventListener('click', () => abreArchivo(m, false)); d.prepend(img); }); }
-      if (m.dir === 'suya') { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton'; g.textContent = T('Guardar'); g.addEventListener('click', () => abreArchivo(m, true)); fila.append(g); }
+      if (m.dir === 'suya' && !m.archivo.voz) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton'; g.textContent = T('Guardar'); g.addEventListener('click', () => abreArchivo(m, true)); fila.append(g); }
     }
     // en el teléfono, «Ver el viaje» cuando el archivo ya ha llegado (20:19); en el ordenador, también mientras viaja
     const llego = m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido';
-    if (VIAJES.has(m.id) && VJ() && (llego || !esMovil())) { const b = document.createElement('button'); b.type = 'button'; b.className = 'boton vj-ver'; b.innerHTML = RUTA; b.append(document.createTextNode(T('Ver el viaje'))); b.addEventListener('click', () => { const v = VIAJES.get(m.id); if (v) VJ().abre(v); }); fila.append(b); }
+    if (ULTRA && VIAJES.has(m.id) && VJ() && (llego || !esMovil()) && !m.archivo.voz) { const b = document.createElement('button'); b.type = 'button'; b.className = 'boton vj-ver'; b.innerHTML = RUTA; b.append(document.createTextNode(T('Ver el viaje'))); b.addEventListener('click', () => { const v = VIAJES.get(m.id); if (v) VJ().abre(v); }); fila.append(b); }
     if (sePuedeCortar(m)) { const x = document.createElement('button'); x.type = 'button'; x.className = 'boton peligro'; x.textContent = T('Cortar el envío'); x.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) cortaArchivo(c, m); }); fila.append(x); }
     // quien lo envió puede borrarlo en los dos equipos (dueño, 29 Oct 2026, 10:08: «que la persona también lo pueda borrar si quiere»)
-    if (m.dir === 'mia' && !m.archivo.voz && !sePuedeCortar(m) && !m.archivo.vistoBorrado && m.estado !== 'fallo' && m.estado !== 'descartado') { const x = document.createElement('button'); x.type = 'button'; x.className = 'boton borrar-dos'; x.textContent = T('Borrar en los dos'); x.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) borraEnLosDos(c, m); }); fila.append(x); }
+    if (extrasB(CONVS.get(m.conv)) && m.dir === 'mia' && !m.archivo.voz && !sePuedeCortar(m) && !m.archivo.vistoBorrado && m.estado !== 'fallo' && m.estado !== 'descartado') { const x = document.createElement('button'); x.type = 'button'; x.className = 'boton borrar-dos'; x.textContent = T('Borrar en los dos'); x.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) borraEnLosDos(c, m); }); fila.append(x); }
     if (fila.childNodes.length) d.append(fila);
     return d;
   }
+  // ---------- notas de voz: el reproductor propio (dueño, 29 Oct 2026, 12:03: «los segundos van como raros y la barra va a
+  // tirones… y no me escucho») ----------
+  // Los controles del navegador fallaban: la grabación de Chrome (WebM) no lleva su duración y el reloj se volvía loco, y la barra
+  // solo se movía 4 veces por segundo. Aquí la duración viene con la nota (dur), la barra se mueve a cada fotograma, un toque en
+  // la barra salta a ese punto y solo suena una nota a la vez. En el iPhone, además, la sesión de audio pasa a «playback» al
+  // terminar de grabar: si no, la nota salía por el auricular y casi no se oía.
+  let vozSonando = null; const VOZ_CACHE = new Map();
+  const mmssVoz = (x) => { x = Math.max(0, Math.round(x || 0)); return Math.floor(x / 60) + ':' + String(x % 60).padStart(2, '0'); };
+  function reproductorVoz(m, blob) {
+    const d = document.createElement('div'); d.className = 'gc-voz'; d.style.gridColumn = '1 / -1';
+    const au = document.createElement('audio'); au.preload = 'auto'; au.src = URL.createObjectURL(blob); au.setAttribute('aria-hidden', 'true'); try { au.load(); } catch (_) {} // cargada desde el principio: en el iPhone, el primer toque ya suena (dueño, 29 Oct 2026, 12:41 y 12:51)
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'gc-voz-play'; b.setAttribute('aria-label', T('Reproducir'));
+    const PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>', PAUSA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.5v13H7.5zM13 5.5h3.5v13H13z"/></svg>';
+    b.innerHTML = PLAY;
+    const barra = document.createElement('div'); barra.className = 'gc-voz-barra'; barra.setAttribute('role', 'slider'); barra.setAttribute('aria-label', T('Posición')); barra.tabIndex = 0;
+    const prog = document.createElement('i'); prog.className = 'gc-voz-prog'; const punto = document.createElement('b'); punto.className = 'gc-voz-punto'; barra.append(prog, punto);
+    const t = document.createElement('span'); t.className = 'gc-voz-t';
+    let dur = m.archivo && Number.isFinite(m.archivo.dur) ? m.archivo.dur : 0, raf = 0;
+    const total = () => (Number.isFinite(au.duration) && au.duration > 0 ? au.duration : dur);
+    const pinta = () => { const tot = total(), f = tot ? Math.min(1, au.currentTime / tot) : 0; prog.style.width = (f * 100) + '%'; punto.style.left = (f * 100) + '%'; t.textContent = mmssVoz(au.currentTime) + ' / ' + (tot ? mmssVoz(tot) : '–:––'); barra.setAttribute('aria-valuenow', String(Math.round(f * 100))); };
+    const bucle = () => { pinta(); if (!au.paused && !au.ended) raf = requestAnimationFrame(bucle); };
+    const para = () => { cancelAnimationFrame(raf); b.innerHTML = PLAY; b.setAttribute('aria-label', T('Reproducir')); d.classList.remove('sonando'); pinta(); if (vozSonando === au) { vozSonando = null; try { if (navigator.mediaSession) { navigator.mediaSession.playbackState = 'none'; navigator.mediaSession.metadata = null; } } catch (_) {} } };
+    // en el iPhone, lo que suena sale en la pantalla bloqueada: que diga «Nota de voz · GUARDIANA» y no el título de la pestaña
+    const sesionMedios = () => { try { if (navigator.mediaSession && window.MediaMetadata) { navigator.mediaSession.metadata = new MediaMetadata({ title: T('Nota de voz'), artist: 'GUARDIANA' }); navigator.mediaSession.playbackState = 'playing'; navigator.mediaSession.setActionHandler('play', () => { const p = au.play(); if (p && p.catch) p.catch(() => {}); }); navigator.mediaSession.setActionHandler('pause', () => au.pause()); for (const a of ['seekbackward', 'seekforward', 'seekto', 'previoustrack', 'nexttrack']) { try { navigator.mediaSession.setActionHandler(a, null); } catch (_) {} } } } catch (_) {} };
+    au.addEventListener('loadedmetadata', pinta); au.addEventListener('durationchange', pinta);
+    au.addEventListener('play', () => { if (vozSonando && vozSonando !== au) { try { vozSonando.pause(); } catch (_) {} } vozSonando = au; sesionMedios(); b.innerHTML = PAUSA; b.setAttribute('aria-label', T('Pausa')); d.classList.add('sonando'); cancelAnimationFrame(raf); raf = requestAnimationFrame(bucle); });
+    au.addEventListener('pause', para); au.addEventListener('ended', () => { try { au.currentTime = 0; } catch (_) {} para(); });
+    au.addEventListener('error', () => { t.textContent = T('No se puede reproducir'); b.disabled = true; });
+    b.addEventListener('click', () => { if (au.paused) { const p = au.play(); if (p && p.catch) p.catch(() => {}); } else au.pause(); }); // sin tocar la sesión de audio del iPhone al reproducir: cambiarla justo antes de play() dejaba el primer toque sin sonido
+    // tocar o arrastrar en la barra: saltar a ese punto
+    const salta = (e) => { const r = barra.getBoundingClientRect(); const f = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)); const tot = total(); if (tot) { try { au.currentTime = f * tot; } catch (_) {} } pinta(); };
+    let arrastra = false;
+    barra.addEventListener('pointerdown', (e) => { arrastra = true; try { barra.setPointerCapture(e.pointerId); } catch (_) {} salta(e); e.preventDefault(); });
+    barra.addEventListener('pointermove', (e) => { if (arrastra) salta(e); });
+    for (const ev of ['pointerup', 'pointercancel']) barra.addEventListener(ev, () => { arrastra = false; });
+    barra.addEventListener('keydown', (e) => { const tot = total(); if (!tot) return; if (e.key === 'ArrowRight') { au.currentTime = Math.min(tot, au.currentTime + 5); pinta(); } if (e.key === 'ArrowLeft') { au.currentTime = Math.max(0, au.currentTime - 5); pinta(); } });
+    pinta(); d.append(au, b, barra, t);
+    return d;
+  }
+
   // ---------- blindado: velado, tiempo en pantalla, borrar en los dos, alarma ----------
   const tipoArchivo = (m) => m.archivo.voz ? T('Nota de voz') : /^image\//.test(m.archivo.mime) ? T('Foto') : /^video\//.test(m.archivo.mime) ? T('Vídeo') : /^audio\//.test(m.archivo.mime) ? T('Audio') : T('Documento');
   function burbujaVelada(c, m) {
@@ -1746,6 +1841,7 @@
     try { VIAJES.delete(m.id); } catch (_) {}
     c.mensajes = c.mensajes.filter((x) => x !== m); c.cola = (c.cola || []).filter((x) => x !== m);
     try { await BD.borra('msg', m.id); await BD.borra('arch', m.id); } catch (_) {}
+    { const el = VOZ_CACHE.get(m.id); if (el) { const au = el.querySelector('audio'); try { au.pause(); URL.revokeObjectURL(au.src); } catch (_) {} VOZ_CACHE.delete(m.id); } }
     if (visorDe === m.id) cierraVisor(true);
     const li = ACTUAL === c.id && $('#mensajes [data-id="' + m.id + '"]'); if (li) li.remove();
     if (porElla) { await anotaSistema(c, m.tipo === 'archivo' ? 'La otra persona ha borrado un archivo en los dos equipos.' : 'La otra persona ha borrado un mensaje en los dos equipos.'); }
@@ -1799,9 +1895,9 @@
   // solo en el blindado. Salta con el segundo mensaje o trozo manipulado de la conversación, con «No coinciden» en el número de la
   // llamada, o cuando el otro equipo la da. Destruye claves, mensajes y archivos en los dos equipos y lo dice en pantalla.
   const ALARMA_INCIDENCIAS = 2;
-  async function alarmaSiToca(c) { if (esB(c) && (c.incidencias || 0) >= ALARMA_INCIDENCIAS) { await alarma(c, 'integridad'); return true; } return false; }
+  async function alarmaSiToca(c) { if (extrasB(c) && (c.incidencias || 0) >= ALARMA_INCIDENCIAS) { await alarma(c, 'integridad'); return true; } return false; }
   async function alarma(c, por) {
-    if (!esB(c) || c.estado === 'destruida' || c.alarmada) return; c.alarmada = true;
+    if (!extrasB(c) || c.estado === 'destruida' || c.alarmada) return; c.alarmada = true;
     if (c.codigo) R.retira(c.codigo);
     if (enviaControl(c, { tipo: 'alarma', por })) { await new Promise((r) => setTimeout(r, 300)); await destruyeLocal(c, false, true); }
     else await destruye(c, true); // con la otra persona ausente: se borra aquí y la orden de borrado le llega en cuanto entre
@@ -2153,7 +2249,12 @@
     aviso(ok ? T('Listo: te avisaremos de mensajes y llamadas aunque GUARDIANA esté cerrada.') : T('Avisos activados en este navegador; con la app cerrada aún no: vuelve a intentarlo con conexión.'));
     pintaAvisosMenu(); return ok;
   }
-  function pintaAvisosMenu() { const b = $('#cm-avisos'); if (!b) return; b.hidden = !(puedePush() && permisoAvisos() !== 'granted'); }
+  function pintaAvisosMenu() {
+    const b = $('#cm-avisos'); if (!b) return; const sp = b.querySelector('span');
+    const puede = puedePush(), perm = permisoAvisos();
+    b.hidden = !(puede || /iPhone|iPad|iPod/.test(navigator.userAgent || ''));
+    if (sp) sp.textContent = !puede ? T('Avisos con la app cerrada') : perm === 'granted' ? T('Avisos con la app cerrada: activados') : perm === 'denied' ? T('Avisos con la app cerrada: sin permiso') : T('Activar avisos con la app cerrada');
+  }
   // despertar a la otra persona cuando no está conectada: una vez por minuto y conversación como mucho (el relé también limita)
   function despierta(c, tipo) {
     if (!c || !c.huella || !R || !R.abierto || enLinea(c)) return false;
@@ -2305,7 +2406,7 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { cierraMenu(); mas.focus(); } });
     $('#cm-seguridad').addEventListener('click', () => { cierraMenu(); $('#escudo').click(); });
     $('#cm-discreto').addEventListener('click', () => { dentroMenu = true; try { $('#discreto').click(); } finally { dentroMenu = false; } $('#cm-discreto').setAttribute('aria-checked', String($('#discreto').getAttribute('aria-pressed') === 'true')); });
-    $('#cm-avisos').addEventListener('click', () => { cierraMenu(); activaAvisos(); });
+    $('#cm-avisos').addEventListener('click', async () => { cierraMenu(); if (puedePush() && permisoAvisos() === 'granted') { const ok = await suscribeAvisos(true); aviso(ok ? T('Avisos activados en este equipo: te llegarán mensajes y llamadas con la app cerrada.') : T('Avisos activados en este navegador; con la app cerrada aún no: vuelve a intentarlo con conexión.')); return; } if (permisoAvisos() === 'denied') { aviso(T('El permiso de avisos está bloqueado: actívalo en los ajustes del teléfono para GUARDIANA y vuelve aquí.')); return; } activaAvisos(); });
     $('#avisos-si').addEventListener('click', async () => { cierraHoja('h-avisos'); await activaAvisos(); });
     $('#avisos-no').addEventListener('click', () => { cierraHoja('h-avisos'); try { localStorage.setItem('gcom-avisos', 'no'); } catch (_) {} });
     $('#cm-terminar').addEventListener('click', () => { cierraMenu(); $('#terminar').click(); });
@@ -2354,7 +2455,27 @@
       if (espana) h.querySelectorAll('[data-es-es]').forEach((el) => { if (el.textContent !== el.dataset.esEs) el.textContent = el.dataset.esEs; });
       $('#completa-ok').classList.toggle('principal', p !== 'android' && p !== 'pc');
     }
-    function abreGuia() { pintaGuia(); abreHoja('h-completa'); }
+    let guiaSeguir = null; // con una invitación en Safari: lo que hace «Seguir en Safari» (se recuerda por si la guía se cierra y se vuelve a abrir)
+    function abreGuia() {
+      pintaGuia(); const h = $('#h-completa'), inv = !!guiaSeguir && /#[ib]=/.test(location.hash) && !comoApp();
+      h.classList.toggle('con-invitacion', inv); const b = $('#guia-safari'); if (b) b.hidden = !inv; $('#completa-ok').hidden = inv;
+      abreHoja('h-completa');
+    }
+    // iPhone y iPad (dueño, 29 Oct 2026, 12:29: «en iPhone no se guardan [los contactos]»): Safari y la app de la pantalla de inicio
+    // guardan cada uno sus cosas por separado. Si la invitación se acepta en Safari y después se instala la app, la app nace vacía.
+    // Por eso, con una invitación en Safari, primero se añade a la pantalla de inicio: la invitación se abre allí (va en la
+    // dirección de inicio de la app) y todo queda guardado en la app desde el principio. «Seguir en Safari» sigue siendo posible.
+    window.gcomGuiaInvitacion = (hash, seguir) => {
+      try {
+        const l = document.querySelector('link[rel="manifest"]');
+        if (l && !l.dataset.original) l.dataset.original = l.getAttribute('href');
+        const man = { name: 'GUARDIANA', short_name: 'GUARDIANA', id: '/orbita/comunicaciones/', start_url: '/orbita/comunicaciones/?app=1&inv=' + encodeURIComponent(hash.replace(/^#/, '')), scope: '/orbita/comunicaciones/', display: 'fullscreen', display_override: ['fullscreen', 'standalone'], orientation: 'portrait', background_color: '#06080C', theme_color: '#06080C', lang: 'es', dir: 'ltr', icons: [{ src: '/icon-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'any' }, { src: '/icon-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'any' }, { src: '/icon-maskable-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'maskable' }, { src: '/icon-maskable-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] };
+        if (l) l.setAttribute('href', 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(man)));
+      } catch (_) {}
+      guiaSeguir = () => { guiaSeguir = null; const h = $('#h-completa'); cierraHoja('h-completa'); h.classList.remove('con-invitacion'); $('#completa-ok').hidden = false; seguir(); };
+      const b = $('#guia-safari'); if (b) b.onclick = () => { if (guiaSeguir) guiaSeguir(); };
+      abreGuia();
+    };
     const instala = async () => { const e = avisoInstalar; if (!e) { abreGuia(); return; } avisoInstalar = null; try { e.prompt(); await e.userChoice; } catch (_) {} cierraHoja('h-completa'); pintaAnadir(); };
     // también en el ordenador: Chrome y Edge la ponen en el escritorio y en las aplicaciones (dueño, 16:20)
     const pintaAnadir = () => { const b = $('#anadir-app'); if (b) b.hidden = comoApp() || !(avisoInstalar || esIOS || esAndroid); };
@@ -2531,7 +2652,7 @@
       ta.placeholder = T('Escribe un mensaje');
       lienzo.classList.toggle('velado', discreto); pintaMascara();
     };
-    ponDiscretoConv = (c) => ponDiscreto(!!(c && esB(c)));
+    ponDiscretoConv = (c) => ponDiscreto(!!(c && extrasB(c)));
     ta.addEventListener('input', pintaMascara); ta.addEventListener('scroll', () => { mascara.scrollTop = ta.scrollTop; });
     // Velo: se descubre solo mientras se mantiene pulsado (ratón o dedo) sobre los mensajes o sobre la pista
     const lienzo = $('#lienzo');
@@ -2548,7 +2669,7 @@
     // portapapeles (donde Windows deja la imagen), y si la ventana pierde el foco (las herramientas de recorte lo hacen) se tapa
     // hasta volver. En el teléfono no hay aviso de captura: allí protege el velo.
     { const tapa = $('#captura-velo'); let capT = null;
-      const enBlindado = () => { const c = CONVS.get(ACTUAL); return !!(c && esB(c) && !$('#conv').hidden); };
+      const enBlindado = () => { const c = CONVS.get(ACTUAL); return !!(c && extrasB(c) && !$('#conv').hidden); };
       const ordenador = !!(matchMedia('(hover: hover) and (pointer: fine)').matches);
       if (tapa) {
         addEventListener('keyup', (e) => { if (e.key !== 'PrintScreen' || !enBlindado()) return; tapa.hidden = false; clearTimeout(capT); capT = setTimeout(() => { tapa.hidden = true; }, 3000); try { navigator.clipboard.writeText(T('Modo blindado: no se puede capturar')).catch(() => {}); } catch (_) {} });
@@ -2562,7 +2683,7 @@
     const compositor = document.querySelector('.gc-compositor');
     const paraGrabacion = (enviar) => {
       if (!grab) return; const g = grab; grab = null; clearInterval(g.reloj);
-      g.enviar = enviar; try { g.rec.stop(); } catch (_) {} setTimeout(() => g.stream.getTracks().forEach((x) => x.stop()), 300);
+      g.enviar = enviar; try { g.rec.stop(); } catch (_) {} setTimeout(() => { g.stream.getTracks().forEach((x) => x.stop()); try { if (navigator.audioSession && !(LL && LL.ocupado)) navigator.audioSession.type = 'playback'; } catch (_) {} }, 300);
       compositor.classList.remove('grabando-ya'); $('#grabando').hidden = true; $('#grabar').setAttribute('aria-pressed', 'false');
       avisaEscribe(ta.value.trim() ? 'texto' : 'no');
     };
@@ -2570,12 +2691,13 @@
       const c = CONVS.get(ACTUAL); if (!c) return;
       if (grab) return paraGrabacion(true);
       if (!navigator.mediaDevices || !window.MediaRecorder) return aviso(T('Este navegador no puede grabar audio.'));
-      let stream; try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }); } catch (_) { return aviso(T('Sin permiso para el micrófono.')); }
+      try { if (navigator.audioSession) navigator.audioSession.type = 'play-and-record'; } catch (_) {}
+      let stream; try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }); } catch (_) { try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (_) {} return aviso(T('Sin permiso para el micrófono.')); }
       const mime = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'].find((m) => MediaRecorder.isTypeSupported(m)) || '';
       const rec = new MediaRecorder(stream, mime ? { mimeType: mime, audioBitsPerSecond: 64000 } : undefined);
       const trozos = []; const t0 = Date.now();
       rec.ondataavailable = (e) => { if (e.data && e.data.size) trozos.push(e.data); };
-      rec.onstop = () => { const g = este; if (!g.enviar || !trozos.length) return; const tipo = rec.mimeType || mime || 'audio/webm'; const ext = /mp4/.test(tipo) ? 'm4a' : /ogg/.test(tipo) ? 'ogg' : 'webm'; const dur = Math.round((Date.now() - t0) / 1000); const f = new File(trozos, T('Nota de voz') + ' ' + new Date().toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit' }).replace(':', '.') + ' (' + Math.floor(dur / 60) + ':' + String(dur % 60).padStart(2, '0') + ').' + ext, { type: tipo }); const cc = CONVS.get(ACTUAL) || c; if (cc) enviaArchivos(cc, [f], { voz: true }); };
+      rec.onstop = () => { const g = este; if (!g.enviar || !trozos.length) return; const tipo = rec.mimeType || mime || 'audio/webm'; const ext = /mp4/.test(tipo) ? 'm4a' : /ogg/.test(tipo) ? 'ogg' : 'webm'; const dur = Math.round((Date.now() - t0) / 1000); const f = new File(trozos, T('Nota de voz') + ' ' + new Date().toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit' }).replace(':', '.') + ' (' + Math.floor(dur / 60) + ':' + String(dur % 60).padStart(2, '0') + ').' + ext, { type: tipo }); const cc = CONVS.get(ACTUAL) || c; if (cc) enviaArchivos(cc, [f], { voz: true, dur: (Date.now() - t0) / 1000 }); };
       const este = { rec, stream, enviar: false, reloj: null };
       grab = este; rec.start(250);
       compositor.classList.add('grabando-ya'); $('#grabando').hidden = false; $('#grabar').setAttribute('aria-pressed', 'true');
@@ -2616,7 +2738,7 @@
       }
       porEnviar = { conv: c.id, fs, urls };
       for (const x of document.querySelectorAll('#envio-tiempo button')) x.setAttribute('aria-pressed', String(!x.dataset.vida));
-      { const et = $('#envio-tiempo'); if (et) et.hidden = fs.every((f) => f.size > MAX_MEMORIA); }
+      { const et = $('#envio-tiempo'); if (et) et.hidden = !extrasB(c) || fs.every((f) => f.size > MAX_MEMORIA); } // el tiempo en pantalla, con el blindado
       if (VJ() && VJ().abierto()) VJ().cierra(); // la hoja del viaje quedaría encima y taparía «Enviar»
       $('#h-envio').classList.toggle('discreta', discreto);
       abreHoja('h-envio');
@@ -2726,10 +2848,13 @@
     const pintaTipo = () => { for (const [id, t] of [['#tipo-normal', 'normal'], ['#tipo-blindado', 'blindada']]) { const b = $(id); if (b) b.setAttribute('aria-checked', String(tipoInv === t)); } $('#h-invitar').classList.toggle('es-blindado', tipoInv === 'blindada'); };
     function invitar() {
       if (esMovil() && navigator.share) { tipoInv = 'normal'; pintaTipo(); abreHoja('h-invitar'); return; }
+      // el blindado, «próximamente» (dueño, 29 Oct 2026, 12:55–12:59): en el teléfono sin menú de compartir, la invitación normal con
+      // su enlace; en el ordenador, el aviso y «Crear invitación»
+      if (!BLINDADO_ACTIVO) { if (esMovil()) invitaConMenu('normal'); else { aviso(T('El chat blindado llegará próximamente. Mientras, «Crear invitación».')); $('#nueva').focus(); } return; }
       nuevaBlindadaConCopia();
     }
     $('#tipo-normal').addEventListener('click', () => { tipoInv = 'normal'; pintaTipo(); });
-    $('#tipo-blindado').addEventListener('click', () => { if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; } tipoInv = 'blindada'; pintaTipo(); });
+    $('#tipo-blindado').addEventListener('click', () => { if (!BLINDADO_ACTIVO) { aviso(T('El chat blindado llegará próximamente. De momento, el chat normal.')); return; } if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; } tipoInv = 'blindada'; pintaTipo(); });
     // «Otras apps»: el menú de compartir del teléfono, dentro del mismo toque (la invitación se crea a la vez)
     function invitaConMenu(modo) {
       const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0);
@@ -2750,6 +2875,10 @@
     $('#invitar-no').addEventListener('click', () => cierraHoja('h-invitar'));
     $('#invitar-wa').addEventListener('click', async () => {
       const b = $('#invitar-wa'); if (b.getAttribute('aria-busy') === 'true') return;
+      // iPhone y iPad (dueño, 29 Oct 2026, 12:10–12:11: «nos quedamos en WhatsApp… sería mejor que volviera automáticamente»): ninguna
+      // app puede traer de vuelta a la persona; lo único que no la saca de GUARDIANA es la hoja de compartir del propio teléfono,
+      // donde WhatsApp sale el primero y, al enviar, la hoja se cierra sola. En Android, WhatsApp directo y el botón «atrás».
+      if (esIOS && navigator.share) { cierraHoja('h-invitar'); invitaConMenu(tipoInv); return; }
       b.setAttribute('aria-busy', 'true');
       try {
         const modo = tipoInv;
@@ -2763,14 +2892,14 @@
         setTimeout(() => { if (esperaWa === e && !e.fuera && document.visibilityState === 'visible') { esperaWa = null; aviso(T('No se pudo abrir WhatsApp.')); } }, 6000);
       } finally { b.removeAttribute('aria-busy'); }
     });
-    // se fue a WhatsApp: fuera la hoja. Al volver, el inicio tal cual (dueño, 29 Oct 2026, 10:38: desde WhatsApp «si vuelvo atrás, ya se
-    // me abría el chat… no se tiene que poder abrir»; antes, 28 Oct 21:51, se abría el chat): la invitación queda en la lista como
-    // «Invitación enviada» y el chat se abre solo cuando la otra persona entra (ver R.on('llega'))
+    // se fue a WhatsApp: fuera la hoja y, ya mientras está fuera, el chat abierto esperando a la otra persona, para que al volver
+    // esté ahí sin ningún salto (dueño, 29 Oct 2026, 12:50: «la persona que invita… ya tiene que esperar directamente en el chat…
+    // automático y rápido»; antes, 10:38, se volvía al inicio y el chat se abría solo al entrar la otra persona)
     document.addEventListener('visibilitychange', () => {
       const e = esperaWa; if (!e) return;
       if (document.visibilityState === 'hidden') {
         e.fuera = true; cierraHoja('h-invitar');
-        const c = CONVS.get(e.id); if (c) { c.compartido = true; pintaLista(); }
+        const c = CONVS.get(e.id); if (c) { c.compartido = true; if (!c.huella && (!ACTUAL || ACTUAL === c.id) && !(LL && LL.ocupado)) abreConv(c.id); else pintaLista(); }
         return;
       }
       if (e.fuera) esperaWa = null;
@@ -2874,12 +3003,20 @@
     avisoInterno();
     setTimeout(eligeServidorLlamadas, 4000); setInterval(eligeServidorLlamadas, 3600 * 1000);
     await cargaConvs();
-    // en el móvil, de antes solo queda la más reciente (15:58)
-    // (los contactos guardados se quedan siempre, 17:33)
-    if (esMovil() && vivas().filter((x) => !x.contacto).length > 1) { const xs = vivas().filter((x) => !x.contacto).sort((a, b) => (b.ultimo || b.creado || 0) - (a.ultimo || a.creado || 0)); for (const x of xs.slice(1)) { try { await destruye(x, true); } catch (_) {} } pintaLista(); }
+    // (antes, 15:58, en el móvil solo quedaba la conversación más reciente y las demás se destruían al arrancar: eso mandaba
+    // «destruir» al otro equipo y le borraba la conversación y el contacto guardado; dueño, 29 Oct 2026, 12:17: «cuando guardamos un
+    // contacto tampoco se está guardando». Ya no se destruye nada al arrancar: las conversaciones se quedan hasta que alguien las termina.)
     try { if (sessionStorage.getItem('gcom-fin') === '1') { revela(); muestraFin(); return; } } catch (_) {}
     if (esInvitado()) document.body.classList.add('modo-invitado');
-    if (/#[ib]=/.test(location.hash)) { const ok = await preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
+    // la app instalada en el iPhone arranca con la invitación en la dirección de inicio (?inv=…): pasa al fragmento de siempre
+    try { const q0 = new URLSearchParams(location.search), inv = q0.get('inv'); if (inv && /^[ib]=[A-Za-z0-9_-]{20,120}$/.test(inv)) { q0.delete('inv'); const qs = q0.toString(); history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + '#' + inv); } } catch (_) {}
+    const iosSafari = /iPhone|iPad|iPod/.test(navigator.userAgent || '') || (/Macintosh/.test(navigator.userAgent || '') && navigator.maxTouchPoints > 1);
+    if (/#[ib]=/.test(location.hash) && iosSafari && !comoApp() && window.gcomGuiaInvitacion) {
+      const enlace = location.href, hash = location.hash;
+      revela();
+      window.gcomGuiaInvitacion(hash, async () => { const ok = await preguntaInvitacion(enlace); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); });
+    }
+    else if (/#[ib]=/.test(location.hash)) { const ok = await preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     else {
       // tras recargar (tirar para actualizar o actualizarse sola), a la misma pantalla: el mismo chat o los contactos
       let v = null; try { v = sessionStorage.getItem('gcom-volver'); sessionStorage.removeItem('gcom-volver'); } catch (_) {}

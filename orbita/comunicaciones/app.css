@@ -1494,3 +1494,30 @@ body.con-visor{overflow:hidden}
 .comp-3 .comp-cab span.comp-g{color:#F0C77F;border-bottom-color:rgba(240,199,127,.6)}
 .comp-3 .comp-v.no i{color:#6F7B88}
 @media (min-width:761px){.comp-3 .comp-fila{grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr))}.comp-3 .comp-cab{grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr))}.comp-3 .comp-cab span.comp-c0{display:block}.como-modos{grid-template-columns:1fr 1fr 1fr}}
+/* el reproductor de notas de voz (dueño, 29 Oct 2026, 12:03): botón redondo, barra suave con su punto y el tiempo; nada del navegador */
+.gc-voz{display:flex;align-items:center;gap:10px;width:min(100%,320px);min-width:240px;margin:2px 0 4px;padding:2px 0}
+.gc-voz audio{display:none}
+.gc-voz-play{all:unset;cursor:pointer;flex:none;width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:var(--accent-fg);transition:transform .1s ease,filter .15s ease}
+.gc-voz-play:hover{filter:brightness(1.07)}.gc-voz-play:active{transform:scale(.95)}
+.gc-voz-play:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.gc-voz-play[disabled]{opacity:.5;cursor:default}
+.gc-voz-play svg{width:20px;height:20px;fill:currentColor}
+.gc-voz-barra{position:relative;flex:1;height:28px;cursor:pointer;touch-action:none}
+.gc-voz-barra::before{content:'';position:absolute;left:0;right:0;top:12px;height:4px;border-radius:2px;background:rgba(156,195,228,.22)}
+.gc-voz-prog{position:absolute;left:0;top:12px;height:4px;border-radius:2px;background:var(--accent);width:0}
+.gc-voz-punto{position:absolute;top:8px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#F4F6F8;box-shadow:0 1px 4px rgba(0,0,0,.5);left:0}
+.gc-voz-barra:focus-visible{outline:2px solid rgba(156,195,228,.6);outline-offset:2px;border-radius:6px}
+.gc-voz-t{flex:none;font:500 12px/1 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;min-width:74px;text-align:right}
+.gc-mia .gc-voz-play{background:#F4F6F8;color:#0C1118}
+.gc-mia .gc-voz-prog{background:#F4F6F8}.gc-mia .gc-voz-barra::before{background:rgba(244,246,248,.25)}
+.gc-mia .gc-voz-t{color:#dbe9f4}
+@media (max-width:760px){.gc-voz{min-width:0;width:min(100%,300px)}.gc-voz-t{font-size:12.5px}}
+.gc-archivo-voz{grid-template-columns:1fr;min-width:0}
+.gc-archivo-voz .gc-voz{margin:0}
+.gc-archivo-voz .sello{margin-top:2px;font-size:11px}
+/* 29 Oct 2026, 12:55–12:59 (dueño): el chat blindado, «próximamente»; la tarjeta se ve, pero apagada y sin marca */
+.inv-tipo.pronto{opacity:.55;cursor:default}.inv-tipo.pronto:active{transform:none}.inv-tipo.pronto .inv-tipo-marca{display:none}
+.inv-tipo.pronto small{color:#CBB68C;font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:11.5px}
+/* la guía con una invitación abierta en Safari (29 Oct 2026, 12:29): el texto de más y «Seguir en Safari», solo entonces */
+#h-completa .guia-inv{display:none}#h-completa.con-invitacion .guia-inv{display:block;color:#9CC3E4}
+#h-completa.con-invitacion #guia-safari:not([hidden]){display:inline-flex}

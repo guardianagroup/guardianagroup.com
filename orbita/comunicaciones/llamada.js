@@ -242,6 +242,10 @@
     function paraTono() {
       clearInterval(tonoReloj); tonoReloj = null; tonoSuena = false;
       try { tonoEl.pause(); } catch (_) {}
+      // el iPhone enseñaba el tono como si fuera música, con barra y botones de ±10 s en la pantalla bloqueada (dueño, 29 Oct 2026,
+      // 12:22: «una cosa rara de avanzar como si fuera un vídeo»): al parar, el <audio> se vacía y la sesión de medios se cierra
+      try { tonoEl.removeAttribute('src'); tonoEl.load(); } catch (_) {}
+      try { if (navigator.mediaSession) { navigator.mediaSession.playbackState = 'none'; navigator.mediaSession.metadata = null; } } catch (_) {}
       for (const n of tonoNodos) { try { n.stop(); } catch (_) {} }
       tonoNodos.clear();
       vibra(0);
@@ -252,6 +256,7 @@
       tonoSuena = true;
       let p = null;
       try { tonoEl.src = urlTono(tipo); tonoEl.muted = false; tonoEl.loop = true; p = tonoEl.play(); } catch (_) { p = Promise.reject(); }
+      try { if (navigator.mediaSession && raiz.MediaMetadata) { navigator.mediaSession.metadata = new MediaMetadata({ title: tipo === 'saliente' ? t('Llamando…') : t('Llamada entrante'), artist: 'GUARDIANA' }); for (const a of ['play', 'pause', 'seekbackward', 'seekforward', 'seekto', 'previoustrack', 'nexttrack']) { try { navigator.mediaSession.setActionHandler(a, null); } catch (_) {} } } } catch (_) {}
       Promise.resolve(p).then(() => {
         // con el <audio> sonando, en Android además vibra al recibir
         if (tipo === 'entrante' && tonoSuena) { vibra([350, 150, 350]); tonoReloj = setInterval(() => vibra([350, 150, 350]), 2600); }
@@ -471,6 +476,8 @@
     // Cámara y micrófono en un solo permiso (en el iPhone, pedirlos por separado puede dejar mudo el primero); si la cámara
     // no se puede usar, la llamada sigue solo con voz.
     async function medios(conVideo) {
+      // iPhone: la sesión de audio en «play-and-record» durante la llamada (al colgar vuelve a «auto», ver termina)
+      try { if (navigator.audioSession) navigator.audioSession.type = 'play-and-record'; } catch (_) {}
       if (conVideo) {
         try { const s = await navigator.mediaDevices.getUserMedia({ audio: AUDIO, video: VIDEO }); mic = new MediaStream(s.getAudioTracks()); cam = new MediaStream(s.getVideoTracks()); }
         catch (_) { cam = null; }
@@ -824,7 +831,8 @@
     }
     function pintaSas() {
       const caja2 = $('#ll-sas'), mini = $('#ll-sas-mini'); if (!caja2 || !mini) return;
-      const hay = !!(sas && (sas.numero || sas.estado === 'roto') && estado === 'hablando');
+      // el número solo se enseña donde toca (app.js, o.sas: blindado y Ultra; dueño, 29 Oct 2026, 12:55: «en el modo normal no»)
+      const hay = !!(sas && (sas.numero || sas.estado === 'roto') && estado === 'hablando' && (!o.sas || o.sas()));
       const grande = hay && sas.estado === 'pendiente' && !caja.classList.contains('sas-plegado');
       caja2.hidden = !grande; mini.hidden = !(hay && !grande); caja.classList.toggle('sas-grande', grande);
       if (!hay) { caja.classList.remove('sas-plegado'); clearTimeout(sasPlegadoT); return; }
@@ -917,6 +925,7 @@
       for (const s of [mic, envio, envioVoz, cam]) if (s) s.getTracks().forEach((x) => x.stop());
       if (muda) { try { muda.stop(); } catch (_) {} muda = null; }
       envioVoz = null; restableceSalida();
+      try { if (navigator.audioSession) navigator.audioSession.type = 'auto'; } catch (_) {}
       if (proc) { proc.parar(); proc = null; }
       clearInterval(medidor); medidor = null; if (vCam) { vCam.srcObject = null; vCam.remove(); vCam = null; } ganancia = 1; ajustes = false;
       mic = null; envio = null; cam = null; nodo = null; if (ctx) { try { ctx.close(); } catch (_) {} ctx = null; }

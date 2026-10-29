@@ -39,6 +39,8 @@ const crypto = require('crypto'); const shaGrande = crypto.createHash('sha256').
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
   const A = await telefono(browser, 'A'), B = await telefono(browser, 'B');
   await A.goto(URL0); await espera(1500);
+  // 29 Oct 2026, 12:55–12:59 (dueño): el blindado va «próximamente» y sus extras están apagados; esta prueba queda para cuando vuelva
+  if (await A.evaluate(() => { const b = document.querySelector('#tipo-blindado'); return !!b && b.getAttribute('aria-disabled') === 'true'; })) { console.log('El chat blindado está en «próximamente»: prueba omitida (se retoma cuando se active).'); await browser.close(); process.exit(0); }
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(2500);
   const enlace = await A.evaluate(() => { const i = document.querySelector('#enlace-b'); return i && i.value; });
   if (!enlace) { console.log('sin enlace'); await browser.close(); process.exit(1); }

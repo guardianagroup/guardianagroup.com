@@ -5,7 +5,7 @@
    «mensaje» o «llamada» y en qué sala; el contenido llega por el canal encriptado cuando se abre la app. No guarda nada, no
    intercepta ninguna petición y no manda nada a ningún sitio. */
 'use strict';
-const VERSION = 'gcom-sw-2026-10-29b';
+const VERSION = 'gcom-sw-2026-10-29c';
 self.addEventListener('install', () => { self.skipWaiting(); });
 self.addEventListener('activate', (e) => { e.waitUntil(self.clients.claim()); });
 
@@ -59,9 +59,13 @@ self.addEventListener('push', (e) => {
       data: { sala, tipo },
     };
     await self.registration.showNotification(tipo === 'llamada' ? t.llamada : t.mensaje, op);
-    try { if (self.navigator && self.navigator.setAppBadge) await self.navigator.setAppBadge(); } catch (_) {}
+    await insignia();
   })());
 });
+// el número en el icono de la app (dueño, 29 Oct 2026, 12:21: «que también aparezcan ahí en el logo»): tantos como avisos sin abrir
+async function insignia() {
+  try { if (!(self.navigator && self.navigator.setAppBadge)) return; const ns = await self.registration.getNotifications(); if (ns.length) await self.navigator.setAppBadge(ns.length); else if (self.navigator.clearAppBadge) await self.navigator.clearAppBadge(); } catch (_) {}
+}
 
 // al tocar el aviso: la app, en esa conversación (si ya está abierta, se trae al frente)
 self.addEventListener('notificationclick', (e) => {
@@ -69,6 +73,7 @@ self.addEventListener('notificationclick', (e) => {
   const d = e.notification.data || {}, sala = salaOk(d.sala) ? d.sala : '', tipo = d.tipo === 'llamada' ? 'llamada' : 'mensaje';
   const url = '/orbita/comunicaciones/?desde=aviso' + (sala ? '&sala=' + sala : '') + '&tipo=' + tipo;
   e.waitUntil((async () => {
+    await insignia();
     const cs = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
     for (const c of cs) {
       if (!/\/orbita\/comunicaciones\//.test(c.url)) continue;
@@ -84,6 +89,6 @@ self.addEventListener('notificationclick', (e) => {
 self.addEventListener('message', (e) => {
   const d = e.data || {};
   if (d.t === 'cierra') {
-    e.waitUntil((async () => { const ns = await self.registration.getNotifications(); for (const n of ns) { const x = n.data || {}; if (!d.sala || x.sala === d.sala) n.close(); } })());
+    e.waitUntil((async () => { const ns = await self.registration.getNotifications(); for (const n of ns) { const x = n.data || {}; if (!d.sala || x.sala === d.sala) n.close(); } })()); // la insignia la ajusta la propia página (navigator.setAppBadge/clearAppBadge)
   }
 });
