@@ -1521,3 +1521,12 @@ body.con-visor{overflow:hidden}
 /* la guía con una invitación abierta en Safari (29 Oct 2026, 12:29): el texto de más y «Seguir en Safari», solo entonces */
 #h-completa .guia-inv{display:none}#h-completa.con-invitacion .guia-inv{display:block;color:#9CC3E4}
 #h-completa.con-invitacion #guia-safari:not([hidden]){display:inline-flex}
+/* 29 Oct 2026, 14:07 (dueño: la tarjeta «Comunicando» «se ha quedado como pegado ahí», arriba, tapando una foto, y su sitio de
+   abajo en blanco): Safari en el iPhone pinta mal lo que se añade a una lista con desplazamiento que lleva máscara (mask-image):
+   deja la pintura vieja en su sitio. En el teléfono, la lista va sin máscara y el desvanecido lo hacen dos velos fijos encima. */
+@media (max-width:760px){
+  .conv .gc-mensajes{-webkit-mask-image:none;mask-image:none}
+  .conv .lienzo::before,.conv .lienzo::after{content:"";position:absolute;left:0;right:0;height:18px;pointer-events:none;z-index:2}
+  .conv .lienzo::before{top:0;background:linear-gradient(to bottom,var(--gc-fondo,#06080C),rgba(6,8,12,0))}
+  .conv .lienzo::after{bottom:0;background:linear-gradient(to top,var(--gc-fondo,#06080C),rgba(6,8,12,0))}
+}

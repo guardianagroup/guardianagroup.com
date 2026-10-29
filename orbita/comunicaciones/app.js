@@ -1460,10 +1460,10 @@
       ul.textContent = '';
       for (const c of xs) {
         const li = document.createElement('li');
-        const b = document.createElement('button'); b.type = 'button'; b.className = 'fila-conv' + (c.id === ACTUAL ? ' actual' : '') + (esB(c) ? ' blindada' : '') + (c.noLeidos ? ' nueva' : '') + (c.perdida && !c.noLeidos ? ' perdida' : '');
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'fila-conv' + (c.id === ACTUAL ? ' actual' : '') + (extrasB(c) ? ' blindada' : '') + (c.noLeidos ? ' nueva' : '') + (c.perdida && !c.noLeidos ? ' perdida' : '');
         b.dataset.id = c.id; if (c.id === ACTUAL) b.setAttribute('aria-current', 'true');
         const av = document.createElement('span'); av.className = 'fila-av' + (pareceEnLinea(c) ? ' en-linea' : ''); av.setAttribute('aria-hidden', 'true');
-        if (esB(c)) av.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg>'; else av.textContent = inicial(nombreConv(c, true));
+        if (extrasB(c)) av.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg>'; else av.textContent = inicial(nombreConv(c, true));
         const tx = document.createElement('span'); tx.className = 'fila-txt';
         const nb = document.createElement('b'); nb.textContent = nombreConv(c, true); nb.translate = false;
         const es = document.createElement('small'); es.textContent = estadoLista(c);
@@ -1582,7 +1582,7 @@
     pintaCabecera(c); pintaTodos(c); pintaRadio(c); pintaLista();
     if (esperaEnChat(c)) document.body.classList.remove('esperando-enlace');
     else if (c.estado === 'invitacion' && c.rol === 'invita') { if (porEnlace(c)) muestraEnlace(c); else { muestraInvitacion(c); if (!c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); } }
-    $('#conv').classList.toggle('blindada', esB(c));
+    $('#conv').classList.toggle('blindada', extrasB(c)); // el aspecto blindado (marco de espejo), solo con el blindado activo
     ponDiscretoConv(c);
     pintaEspera(c);
     marcaLeidos(c);
