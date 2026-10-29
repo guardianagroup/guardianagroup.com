@@ -53,6 +53,7 @@
     let pc = null, mic = null, envio = null, ctx = null, nodo = null, estado = 'libre', iniciada = 0, reloj = null, pendientes = [], ofertaEntrante = null, idLlamada = null, colgoYo = false, sondeo = null;
     let envioVoz = null; // la voz cambiada (solo si se elige una voz que no es la natural)
     let altavoz = true, salidas = null; // por dónde suena la llamada en el teléfono: altavoz o auricular
+    let ruta = null, refuerzos = []; // el silencio que fija esa salida en el iPhone (ver preparaRuta)
     let muda = null; // la segunda pista de audio, en silencio (ver agregaMuda)
     let inicioYo = false; // quién llamó: el resumen del chat va a mi lado o al suyo (dueño, 28 Oct 2026, 13:29)
     let pantallaEncendida = null; // Wake Lock: la pantalla no se apaga mientras dura la llamada (agencia, ronda 74)
@@ -315,17 +316,90 @@
         if (alt.length === 1 && aur.length === 1) salidas = { altavoz: alt[0].deviceId, auricular: aur[0].deviceId };
       } catch (_) { salidas = null; }
     }
+    // El botón no cambiaba nada y la llamada de voz empezaba en altavoz (dueño, 28 Oct 2026, 20:21 y 20:31: «Tienes que arreglarla,
+    // si no… deberemos quitarla»). Leído en el código de Safari (WebKit): en el iPhone toda la página suena por una sola salida, la
+    // que pide el último sonido que empieza a sonar. En las versiones sin el arreglo 318149@main de WebKit (29 Jul 2026, fallo 320087),
+    // la mezcla de la llamada pide siempre «la de siempre», que es el altavoz, cada vez que arranca: al empezar la llamada y, con una
+    // sola pista de voz, en cada cambio. Arreglo: unos silencios que piden la salida elegida y vuelven a empezar justo después de que
+    // suene la otra persona y tras cada cambio, para ser siempre los últimos:
+    //  · la segunda pista, muda, que manda la otra persona (agregaMuda): suena en el mismo <audio> que su voz;
+    //  · un silencio propio (WebAudio, que no pasa por esa mezcla) en otro <audio> con la misma salida, por si la otra persona tiene
+    //    una versión anterior sin pista muda.
+    // Ninguno se oye. Cambiar la salida exige un toque: se hace dentro del toque de «Llamar», «Contestar» o «Altavoz» (o en los
+    // 5 segundos siguientes). La salida elegida se queda para la próxima llamada; si no se puede aplicar, el botón dice la verdad.
+    const elRuta = document.createElement('audio');
+    elRuta.autoplay = true; elRuta.setAttribute('playsinline', ''); elRuta.setAttribute('aria-hidden', 'true'); elRuta.hidden = true;
+    { const ar = $('#a-remoto'); if (ar && ar.parentNode) ar.parentNode.insertBefore(elRuta, ar.nextSibling); else document.body.appendChild(elRuta); }
+    let mudasRemotas = []; // las pistas mudas que llegan de la otra persona
+    // el silencio propio: solo con la llamada en marcha (con el micrófono abierto, el iPhone deja arrancar el audio sin un toque)
+    function preparaRuta() {
+      if (ruta || !salidas) return;
+      try {
+        const AC = raiz.AudioContext || raiz.webkitAudioContext; if (!AC) return;
+        const c = new AC(), dst = c.createMediaStreamDestination();
+        try { const f = c.createConstantSource(); f.offset.value = 0; f.connect(dst); f.start(); } catch (_) {}
+        c.onstatechange = () => { if (ruta && ruta.ctx === c && c.state !== 'running' && c.state !== 'closed' && estado !== 'libre' && estado !== 'cerrando') c.resume().catch(() => {}); };
+        if (c.state !== 'running') c.resume().catch(() => {});
+        ruta = { ctx: c, flujo: dst.stream, pista: dst.stream.getAudioTracks()[0] || null };
+      } catch (_) { quitaRuta(); }
+    }
+    // suena solo si va por la misma salida que la voz de la otra persona: si no, pediría otra y estorbaría
+    function sincronizaRuta() {
+      const ar = $('#a-remoto');
+      const igual = !!(ruta && ruta.pista && ar && typeof elRuta.setSinkId === 'function' && (elRuta.sinkId || '') === (ar.sinkId || ''));
+      if (!igual) { if (elRuta.srcObject) { elRuta.pause(); elRuta.srcObject = null; } return; }
+      if (elRuta.srcObject !== ruta.flujo) elRuta.srcObject = ruta.flujo;
+      if (elRuta.paused) reproduce(elRuta);
+    }
+    // «empiezan otra vez»: un momento apagados y vuelven, y así piden su salida los últimos
+    function registraRuta() {
+      if (!salidas || estado === 'libre' || estado === 'cerrando') return;
+      const pistas = mudasRemotas.filter((p) => p.readyState === 'live');
+      if (ruta && ruta.pista && elRuta.srcObject === ruta.flujo) {
+        try { if (ruta.ctx.state !== 'running') ruta.ctx.resume().catch(() => {}); } catch (_) {}
+        if (elRuta.paused) reproduce(elRuta);
+        pistas.push(ruta.pista);
+      }
+      for (const p of pistas) { if (!p.enabled) continue; p.enabled = false; setTimeout(() => { p.enabled = true; }, 60); }
+    }
+    function refuerzaRuta() {
+      for (const x of refuerzos) clearTimeout(x);
+      refuerzos = [];
+      if (!salidas) return;
+      for (const ms of [80, 450, 1300, 3000]) refuerzos.push(setTimeout(registraRuta, ms));
+    }
+    function quitaRuta() {
+      for (const x of refuerzos) clearTimeout(x);
+      refuerzos = [];
+      const r = ruta; ruta = null;
+      try { elRuta.pause(); elRuta.srcObject = null; } catch (_) {}
+      if (!r) return;
+      try { if (r.pista) r.pista.stop(); } catch (_) {}
+      try { r.ctx.close(); } catch (_) {}
+    }
+    // por dónde suena de verdad: sin salida elegida, por el altavoz
+    const suenaAltavoz = () => { const s = ($('#a-remoto') || {}).sinkId || ''; return !(salidas && s && s === salidas.auricular); };
     async function aplicaSalida() {
       const ar = $('#a-remoto');
       if (ar && salidas && typeof ar.setSinkId === 'function') {
         const id = altavoz ? salidas.altavoz : salidas.auricular;
-        if (ar.sinkId !== id) { try { await ar.setSinkId(id); } catch (_) { salidas = null; } }
+        // las dos a la vez, dentro del mismo toque (sin salida elegida ya suena por el altavoz: no hace falta pedirlo)
+        const falta = (el) => { const a = el.sinkId || ''; return a !== id && !(a === '' && id === salidas.altavoz); };
+        const cambios = [ar, elRuta].filter((el) => typeof el.setSinkId === 'function' && falta(el)).map((el) => el.setSinkId(id));
+        try { await Promise.all(cambios); }
+        catch (e) {
+          // sin un toque reciente (el permiso del micrófono tardó, por ejemplo): sigue por donde iba y el botón lo dice; un toque lo cambia
+          if (e && e.name === 'NotAllowedError') altavoz = suenaAltavoz();
+          else { salidas = null; quitaRuta(); }
+        }
+        sincronizaRuta(); refuerzaRuta();
       }
       pintaAltavoz();
     }
+    // al colgar o al conectar unos auriculares: fuera el botón y el silencio. La salida elegida se queda para la próxima llamada
+    // (la de voz, por el auricular, sin depender de un toque); las notas de voz y el timbre no la usan.
     function restableceSalida() {
-      salidas = null; pintaAltavoz();
-      const ar = $('#a-remoto'); if (ar && ar.sinkId && typeof ar.setSinkId === 'function') ar.setSinkId('').catch(() => {});
+      salidas = null; pintaAltavoz(); quitaRuta();
     }
     function pintaAltavoz() {
       const c = $('#ll-altavoz-caja'), b = $('#ll-altavoz'); if (!c || !b) return;
@@ -337,7 +411,7 @@
     if (navigator.mediaDevices && navigator.mediaDevices.addEventListener) navigator.mediaDevices.addEventListener('devicechange', async () => {
       if (estado === 'libre' || estado === 'cerrando' || !mic) return;
       const habia = !!salidas; await buscaSalidas();
-      if (salidas) aplicaSalida(); else if (habia) restableceSalida();
+      if (salidas) { preparaRuta(); aplicaSalida(); } else if (habia) restableceSalida();
     });
     // Micrófono → cambio de voz (AudioWorklet) → lo que se envía. Sin AudioWorklet, la voz va tal cual y se dice.
     // Cámara y micrófono en un solo permiso (en el iPhone, pedirlos por separado puede dejar mudo el primero); si la cámara
@@ -405,6 +479,8 @@
     // de audio; con dos, cambia de verdad. Así que cada lado manda, además de su voz, una segunda pista de audio muda: una copia
     // del micrófono, apagada (el navegador manda silencio, unos pocos kb/s). En su propio flujo, para no tocar la sincronía de la
     // voz con la imagen. Si la otra persona tiene una versión anterior, la llamada funciona igual.
+    // (20:21 y 20:31: no bastaba. Solo ayuda si los dos la mandan y no cambia el arranque de la llamada; lo que lo arregla es el
+    // silencio de preparaRuta. Se deja: no estorba y, con ella, el cambio es inmediato.)
     function agregaMuda() {
       muda = null;
       try { const a = mic && mic.getAudioTracks()[0]; if (!a || !pc) return; const m = a.clone(); m.enabled = false; pc.addTrack(m, new MediaStream([m])); muda = m; } catch (_) { muda = null; }
@@ -573,17 +649,18 @@
       const tieneTurn = ice.some((s) => [].concat(s.urls).some((u) => /^turns?:/.test(u)));
       // fuera de las pruebas locales, solo por el relé: sin TURN la llamada no conecta, nunca va directa (las IP quedarían a la vista)
       pc = new RTCPeerConnection({ iceServers: ice, iceTransportPolicy: (tieneTurn || !LOCAL) ? 'relay' : 'all', bundlePolicy: 'max-bundle', rtcpMuxPolicy: 'require' });
-      const remoto = new MediaStream();
+      const remoto = new MediaStream(); mudasRemotas = [];
       pc.ontrack = (e) => {
         if (e.track.kind === 'video') { remotoV = new MediaStream([e.track]); const vr = $('#v-remoto'); vr.srcObject = remotoV; reproduce(vr); e.track.onunmute = () => { reproduce(vr); pintaVideo(); }; pintaVideo(); return; }
+        if (remoto.getAudioTracks().length) mudasRemotas.push(e.track); // la primera es su voz; las demás, su pista muda
         remoto.addTrack(e.track); const ar = $('#a-remoto'); if (ar.srcObject !== remoto) ar.srcObject = remoto; suenaRemoto();
         if (salidas) aplicaSalida();
-        e.track.onunmute = () => suenaRemoto();
+        e.track.onunmute = () => { suenaRemoto(); refuerzaRuta(); };
       };
       pc.onicecandidate = (e) => { if (e.candidate) o.manda({ acto: 'ice', id: idLlamada, cand: e.candidate.toJSON() }); };
       pc.onconnectionstatechange = () => {
         if (!pc) return;
-        if (pc.connectionState === 'connected') { paraTono(); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); } }
+        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); } }
         else if (pc.connectionState === 'failed') termina('fallo');
         else if (pc.connectionState === 'disconnected') di(t('Conexión interrumpida, intentando recuperarla…'), true);
       };
@@ -621,7 +698,7 @@
       }, 2000);
     }
     // dentro del toque de la persona (llamar o contestar): el iPhone deja después arrancar el sonido y la imagen solos
-    function desbloquea() { for (const id of ['#a-remoto', '#v-remoto']) { const el = $(id); if (el) reproduce(el); } }
+    function desbloquea() { for (const id of ['#a-remoto', '#v-remoto']) { const el = $(id); if (el) reproduce(el); } reproduce(elRuta); }
     // El sonido de la otra persona: si el teléfono no lo deja arrancar solo, se dice y arranca con el siguiente toque
     // (antes el fallo era silencioso: la llamada seguía y no se oía nada).
     const TOCA = () => t('Toca la pantalla para oír a la otra persona.');
@@ -639,7 +716,7 @@
       estado = 'saliente'; inicioYo = true; idLlamada = Math.random().toString(36).slice(2, 10); colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver'); pinta();
       di(video ? t('Pidiendo la cámara y el micrófono…') : t('Pidiendo el micrófono…'));
       try { await medios(video); } catch (_) { di(t('Sin permiso para el micrófono.'), true); return termina('sin-medios', 1800); }
-      altavoz = !!video; await buscaSalidas(); await aplicaSalida();
+      altavoz = !!video; await buscaSalidas(); preparaRuta(); await aplicaSalida();
       nuevaPc();
       agregaPistas(); if (video) prefiereCodecs(EQUIPO);
       di(t('Llamando…'));
@@ -670,7 +747,7 @@
       const m = ofertaEntrante; ofertaEntrante = null; estado = 'conectando'; paraTono(); clearTimeout(sinRespuesta); desbloquea(); pinta();
       di(video ? t('Pidiendo la cámara y el micrófono…') : t('Pidiendo el micrófono…'));
       try { await medios(video); } catch (_) { di(t('Sin permiso para el micrófono.'), true); o.manda({ acto: 'colgar', id: idLlamada }); return termina('sin-medios', 1800); }
-      altavoz = !!video; await buscaSalidas(); await aplicaSalida();
+      altavoz = !!video; await buscaSalidas(); preparaRuta(); await aplicaSalida();
       nuevaPc();
       const pi = pistaImagen(); if (pi) { const vl = $('#v-local'); vl.srcObject = new MediaStream([pi]); reproduce(vl); }
       const flujo = new MediaStream(envio.getAudioTracks().concat(pi ? [pi] : []));
@@ -700,7 +777,7 @@
       mic = null; envio = null; cam = null; nodo = null; if (ctx) { try { ctx.close(); } catch (_) {} ctx = null; }
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
-      pendientes = []; ofertaEntrante = null; iniciada = 0; partidaPorDefecto = true;
+      pendientes = []; ofertaEntrante = null; iniciada = 0; partidaPorDefecto = true; mudasRemotas = [];
       const silencio = $('#ll-silenciar'); if (silencio) silencio.setAttribute('aria-pressed', 'false');
       if (por === 'fin') di(t('Llamada terminada'));
       else if (por === 'fallo') di(t('No se pudo mantener la conexión.'), true);
@@ -718,6 +795,10 @@
     $('#ll-contestar').addEventListener('click', () => { contestar().catch(() => termina('fallo')); });
     $('#ll-silenciar').addEventListener('click', (e) => { const b = e.currentTarget; const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on)); for (const s of [envio, mic]) if (s) s.getAudioTracks().forEach((x) => { x.enabled = !on; }); });
     { const b = $('#ll-altavoz'); if (b) b.addEventListener('click', () => { altavoz = !altavoz; aplicaSalida(); }); }
+    // cada vez que la voz de la otra persona vuelve a sonar (al empezar, tras una interrupción o al volver a la app), el silencio
+    // vuelve a pedir la salida elegida
+    { const ar = $('#a-remoto'); if (ar) ar.addEventListener('playing', () => { if (estado !== 'libre' && estado !== 'cerrando') refuerzaRuta(); }); }
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && estado !== 'libre' && estado !== 'cerrando') refuerzaRuta(); });
     for (const b of document.querySelectorAll('#ll-voces [data-voz]')) b.addEventListener('click', () => eligeVoz(b.dataset.voz));
     for (const b of document.querySelectorAll('#ll-imagenes [data-imagen]')) b.addEventListener('click', () => eligeImagen(b.dataset.imagen));
     $('#ll-luz').addEventListener('click', eligeLuz);
