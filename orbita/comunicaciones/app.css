@@ -1001,7 +1001,7 @@ html.como-app .barra .barra-t{display:block;font-size:12px;letter-spacing:.3em}
   #paso-enlace .enlace-vista[hidden]{display:none}
   #paso-enlace .enlace-icono{display:grid;width:112px;height:112px;margin:0 0 26px}
   #paso-enlace .enlace-vista>.pq-k,#paso-enlace .enlace-vista>.estado,#paso-enlace .enlace-vista>.nota,#paso-enlace .qr-plegado{display:none}
-  #paso-enlace .enlace-vista>h2{margin:0 0 10px;font:600 24px/1.25 var(--texto);color:#F4F6F8}
+  #paso-enlace .enlace-vista>h2{margin:0 0 30px;font:600 24px/1.25 var(--texto);color:#F4F6F8}
   #paso-enlace .enlace-vista>.t{margin:0 0 30px;max-width:320px;font-size:16.5px;line-height:1.5;color:var(--muted);text-wrap:balance}
   #paso-enlace .enlace-vista>.enlace-copiado{margin:-18px 0 18px}
   #paso-enlace .enlace-fila{display:flex;flex-direction:column;align-items:stretch;gap:10px;width:100%}

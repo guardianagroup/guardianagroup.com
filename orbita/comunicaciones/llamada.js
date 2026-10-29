@@ -165,17 +165,63 @@
       setTimeout(() => { if (!tonoSuena && tonoCtx && tonoCtx.state === 'running') tonoCtx.suspend().catch(() => {}); }, 1500);
     }
     for (const g of GESTOS) raiz.document.addEventListener(g, desbloqueaTonos, { capture: true, passive: true });
+    // Tono de llamada para los dos (dueño, 28 Oct 2026, 19:05: «tiene que haber tono de llamada, tanto para el que la recibe como
+    // el que la está escuchando»). En el iPhone, el audio del navegador (el contexto de audio de arriba) se calla con el
+    // interruptor de silencio y se puede quedar parado al empezar la llamada; por eso los tonos suenan con un <audio> (un sonido
+    // como el de un vídeo), que suena con el volumen del teléfono. Se prepara con el primer toque en la página (el iPhone lo
+    // exige) y, si aun así no deja, suena el de antes.
+    const TONO_URL = {};
+    function urlTono(tipo) {
+      if (TONO_URL[tipo]) return TONO_URL[tipo];
+      const sr = 16000, dur = tipo === 'saliente' ? 4 : 2.6, n = Math.round(sr * dur), pcm = new Float32Array(n);
+      const pon = (frecs, ini, d, vol) => {
+        const i0 = Math.round(ini * sr), i1 = Math.min(n, Math.round((ini + d) * sr));
+        for (let i = i0; i < i1; i++) { const t = (i - i0) / sr, env = Math.max(0, Math.min(1, t / 0.015, (d - t) / 0.04)); let v = 0; for (const [f, w] of frecs) v += w * Math.sin(2 * Math.PI * f * t); pcm[i] += v * vol * env; }
+      };
+      // tono de llamada: 425 Hz durante 1,2 s cada 4 s; timbre: dos notas con un armónico suave, dos veces, cada 2,6 s
+      const nota = (f) => [[f, 1], [f * 2, 0.25]];
+      if (tipo === 'saliente') pon([[425, 1]], 0, 1.2, 0.42);
+      else { pon(nota(880), 0, 0.2, 0.5); pon(nota(660), 0.24, 0.2, 0.5); pon(nota(880), 0.62, 0.2, 0.5); pon(nota(660), 0.86, 0.2, 0.5); }
+      const buf = new ArrayBuffer(44 + n * 2), dv = new DataView(buf), txt = (o, x) => { for (let i = 0; i < x.length; i++) dv.setUint8(o + i, x.charCodeAt(i)); };
+      txt(0, 'RIFF'); dv.setUint32(4, 36 + n * 2, true); txt(8, 'WAVE'); txt(12, 'fmt '); dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
+      dv.setUint32(24, sr, true); dv.setUint32(28, sr * 2, true); dv.setUint16(32, 2, true); dv.setUint16(34, 16, true); txt(36, 'data'); dv.setUint32(40, n * 2, true);
+      for (let i = 0; i < n; i++) dv.setInt16(44 + i * 2, Math.max(-32767, Math.min(32767, Math.round(pcm[i] * 32767))), true);
+      return (TONO_URL[tipo] = URL.createObjectURL(new Blob([buf], { type: 'audio/wav' })));
+    }
+    const tonoEl = document.createElement('audio'); tonoEl.loop = true; tonoEl.preload = 'auto'; tonoEl.setAttribute('playsinline', ''); tonoEl.setAttribute('aria-hidden', 'true');
+    let tonoElListo = false;
+    function desbloqueaTonoEl() {
+      if (tonoElListo) return; tonoElListo = true;
+      try {
+        tonoEl.src = urlTono('entrante'); tonoEl.muted = true;
+        const p = tonoEl.play();
+        const listo = () => { if (!tonoSuena) tonoEl.pause(); tonoEl.muted = false; for (const g of GESTOS) raiz.document.removeEventListener(g, desbloqueaTonoEl, true); };
+        if (p && p.then) p.then(listo).catch(() => { tonoEl.muted = false; tonoElListo = false; }); else listo();
+      } catch (_) { tonoElListo = false; }
+    }
+    for (const g of GESTOS) raiz.document.addEventListener(g, desbloqueaTonoEl, { capture: true, passive: true });
+    const vibra = (patron) => { try { if (raiz.navigator.vibrate) raiz.navigator.vibrate(patron); } catch (_) {} };
     function paraTono() {
       clearInterval(tonoReloj); tonoReloj = null; tonoSuena = false;
+      try { tonoEl.pause(); } catch (_) {}
       for (const n of tonoNodos) { try { n.stop(); } catch (_) {} }
       tonoNodos.clear();
-      try { if (raiz.navigator.vibrate) raiz.navigator.vibrate(0); } catch (_) {}
+      vibra(0);
       if (tonoCtx && tonoCtx.state === 'running') tonoCtx.suspend().catch(() => {});
     }
     function tono(tipo) {
       paraTono();
-      const ctx = ctxTonos(); if (!ctx) return;
       tonoSuena = true;
+      let p = null;
+      try { tonoEl.src = urlTono(tipo); tonoEl.muted = false; tonoEl.loop = true; p = tonoEl.play(); } catch (_) { p = Promise.reject(); }
+      Promise.resolve(p).then(() => {
+        // con el <audio> sonando, en Android además vibra al recibir
+        if (tipo === 'entrante' && tonoSuena) { vibra([350, 150, 350]); tonoReloj = setInterval(() => vibra([350, 150, 350]), 2600); }
+      }).catch(() => { if (tonoSuena) tonoWeb(tipo); });
+    }
+    // el de antes, con el audio del navegador, por si el teléfono no deja sonar el <audio>
+    function tonoWeb(tipo) {
+      const ctx = ctxTonos(); if (!ctx) return;
       const pita = (frecs, ini, dur, vol) => {
         for (const [f, v] of frecs) {
           const os = ctx.createOscillator(), g = ctx.createGain(), t0 = ctx.currentTime + ini;
@@ -185,13 +231,11 @@
           tonoNodos.add(os); os.onended = () => tonoNodos.delete(os);
         }
       };
-      const vibra = (patron) => { try { if (raiz.navigator.vibrate) raiz.navigator.vibrate(patron); } catch (_) {} };
-      // tono de llamada: 425 Hz durante 1,2 s cada 4 s; timbre: dos notas con un armónico suave, dos veces, cada 2,6 s
       const nota = (f) => [[f, 1], [f * 2, 0.25]];
       const ciclo = tipo === 'saliente' ? () => pita([[425, 1]], 0, 1.2, 0.16)
         : () => { pita(nota(880), 0, 0.2, 0.22); pita(nota(660), 0.24, 0.2, 0.22); pita(nota(880), 0.62, 0.2, 0.22); pita(nota(660), 0.86, 0.2, 0.22); vibra([350, 150, 350]); };
       // si el contexto aún no puede sonar (sin ningún gesto en la página), el ciclo sigue y suena en cuanto la persona toque algo
-      ciclo(); tonoReloj = setInterval(() => { if (tonoCtx && tonoCtx.state === 'suspended') tonoCtx.resume().catch(() => {}); ciclo(); }, tipo === 'saliente' ? 4000 : 2600);
+      ciclo(); clearInterval(tonoReloj); tonoReloj = setInterval(() => { if (tonoCtx && tonoCtx.state !== 'running') tonoCtx.resume().catch(() => {}); ciclo(); }, tipo === 'saliente' ? 4000 : 2600);
     }
     function esperaRespuesta(saliente) {
       clearTimeout(sinRespuesta);

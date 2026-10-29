@@ -1566,6 +1566,7 @@
     "Contacto guardado: lo tienes en el inicio para llamar o escribir sin enlace.": ["Contact saved: it's on the home screen to call or write without a link.", "Contato salvo: está no início para ligar ou escrever sem link."],
     "Contacto guardado.": ["Contact saved.", "Contato salvo."],
     "En línea": ["Online", "Online"],
+    "Invitación enviada": ["Invitation sent", "Convite enviado"],
     "Invita a una persona": ["Invite someone", "Convide uma pessoa"],
     "Envíale el enlace; no lo abras tú. La conversación se abre sola cuando entre.": ["Send them the link; don't open it yourself. The conversation opens by itself when they join.", "Envie o link; não abra você. A conversa abre sozinha quando a pessoa entrar."],
     "Si no lo ves, está en los tres puntos ⋯": ["If you don't see it, it's under the three dots ⋯", "Se não aparecer, está nos três pontos ⋯"],

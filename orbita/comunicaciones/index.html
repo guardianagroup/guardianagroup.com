@@ -23,7 +23,7 @@
 <title>GUARDIANA</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261029v">
+<link rel="stylesheet" href="app.css?v=20261029w">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -110,16 +110,17 @@
       <p class="pq-k">Sesión blindada</p>
       <h2><span class="solo-pc">Invitación blindada</span><span class="solo-movil">Invita a una persona</span></h2>
       <!-- 28 Oct 2026 (dueño): de PC a PC, el QR estorba; primero el enlace y el QR plegado, por si alguien entra con el móvil -->
-      <p class="t"><span class="solo-pc">Comparte el enlace con la otra persona. No lo abras tú: es su llave para entrar.</span><span class="solo-movil">Envíale el enlace; no lo abras tú. La conversación se abre sola cuando entre.</span></p>
+      <!-- sin frase debajo del título (dueño, 28 Oct 2026, 19:06: «la frase que hay debajo de invitación blindada, también quítala») -->
       <p class="t enlace-copiado" id="enlace-copiado" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>Enlace copiado</span></p>
       <div class="enlace-fila"><input class="campo" id="enlace-b" readonly translate="no" spellcheck="false" aria-label="Enlace de la invitación"><button type="button" class="boton principal" id="enlace-copiar">Copiar enlace</button><button type="button" class="boton" id="enlace-compartir" hidden>Compartir enlace</button></div>
       <details class="qr-plegado"><summary>Mostrar el código QR (para abrirlo con un móvil)</summary><div class="qr" id="enlace-qr" role="img" aria-label="Código QR de la invitación"></div></details>
-      <p class="t estado" id="enlace-estado" role="status">Esperando a que la otra persona abra el enlace…</p>
+      <!-- solo si hay un problema (la invitación ya la usó otra persona); sin «Esperando…» (dueño, 28 Oct 2026, 19:05) -->
+      <p class="t estado" id="enlace-estado" role="status" hidden></p>
       <div class="fila centro"><button type="button" class="boton" id="enlace-cancelar"><span class="solo-pc">Cancelar la invitación</span><span class="solo-movil">Cancelar</span></button></div>
       </div>
       <div class="enlace-espera" id="enlace-espera" hidden>
         <div class="espera-anillos" aria-hidden="true"><span></span><span></span><span></span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
-        <h2 role="status">Esperando a que la otra persona abra el enlace…</h2>
+        <h2 role="status">Invitación enviada</h2><!-- antes, «Esperando a que la otra persona abra el enlace…» (dueño, 19:05: «también quítala») -->
         <p class="t">La conversación se abre sola en cuanto entre.</p>
         <!-- solo la espera y, discreto, «Cancelar» (dueño, 28 Oct 2026, 18:26: «todo eso que aparece ahí… quítalo porque es muy lioso») -->
         <button type="button" class="enlace-cancelar-txt" id="enlace-cancelar-2">Cancelar</button>
@@ -546,7 +547,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261029p61"></script>
+<script src="/orbita/static/idioma.js?v=20261029p62"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -556,7 +557,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261028b"></script>
-<script src="llamada.js?v=20261029u"></script>
-<script src="app.js?v=20261029s"></script>
+<script src="llamada.js?v=20261029w"></script>
+<script src="app.js?v=20261029w"></script>
 </body>
 </html>

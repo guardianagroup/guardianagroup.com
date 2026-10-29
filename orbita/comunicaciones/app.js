@@ -180,7 +180,7 @@
   function muestraEnlace(c) {
     const u = enlaceB(c); $('#enlace-b').value = u;
     const q = $('#enlace-qr'); if (q && window.qrSvg && q.dataset.u !== u) { q.innerHTML = window.qrSvg(u); q.dataset.u = u; }
-    const est = $('#enlace-estado'); est.textContent = c.ocupada ? T('Esta invitación ya la usó otra persona.') : T('Esperando a que la otra persona abra el enlace…'); est.classList.toggle('mal', !!c.ocupada);
+    const est = $('#enlace-estado'); est.textContent = c.ocupada ? T('Esta invitación ya la usó otra persona.') : ''; est.hidden = !c.ocupada; est.classList.toggle('mal', !!c.ocupada);
     // en el móvil, solo «Compartir enlace» (el enlace ya está copiado); al compartir, la pantalla de espera
     const movil = matchMedia('(pointer: coarse)').matches, comparte = !!navigator.share;
     $('#enlace-copiar').hidden = movil && comparte; $('#enlace-compartir').hidden = !comparte; $('#enlace-compartir').classList.toggle('principal', movil && comparte);
