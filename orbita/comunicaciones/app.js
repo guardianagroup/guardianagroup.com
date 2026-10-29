@@ -13,6 +13,10 @@
   // en pruebas locales, «?renueva=N» acorta la renovación a N segundos
   const renuevaMs = () => (LOCAL && +new URLSearchParams(location.search).get('renueva') * 1000) || RENUEVA_B_MS;
   const ORIGEN = location.origin + location.pathname.replace(/[^/]*$/, '');
+  // Solo videollamada, de momento (dueño, 28 Oct 2026, 21:49–21:50: «No funciona, lo del audio no funciona… Quita la llamada de
+  // momento y ya lo solucionaremos. Déjalo solamente con videollamada»): en el iPhone la llamada de voz salía por el altavoz y no
+  // había forma de pasarla al auricular. Sin botones de llamada de voz; las que lleguen de una versión anterior se contestan igual.
+  const SOLO_VIDEO = true;
   const LOCAL = /^(127\.0\.0\.1|localhost)$/.test(location.hostname);
 
   // ---------- almacén ----------
@@ -1054,9 +1058,10 @@
     const b = document.createElement('b'); b.textContent = r.titulo; tx.append(b);
     if (r.sub) { const s = document.createElement('small'); s.textContent = r.sub; tx.append(s); }
     const otra = document.createElement('button'); otra.type = 'button'; otra.className = 'gc-llam-otra';
-    const et = v ? T('Volver a hacer una videollamada') : T('Volver a llamar'); otra.setAttribute('aria-label', et); otra.title = et;
-    otra.innerHTML = '<svg viewBox="0 0 24 24">' + (v ? ICO_VID : ICO_TEL) + '</svg>';
-    otra.addEventListener('click', () => { const bt = $(v ? '#videollamar' : '#llamar'); if (bt && !bt.hidden) bt.click(); });
+    const ov = v || SOLO_VIDEO; // volver a llamar: con imagen, mientras solo haya videollamada
+    const et = ov ? T('Volver a hacer una videollamada') : T('Volver a llamar'); otra.setAttribute('aria-label', et); otra.title = et;
+    otra.innerHTML = '<svg viewBox="0 0 24 24">' + (ov ? ICO_VID : ICO_TEL) + '</svg>';
+    otra.addEventListener('click', () => { const bt = $(ov ? '#videollamar' : '#llamar'); if (bt && !bt.hidden) bt.click(); });
     const meta = document.createElement('span'); meta.className = 'gc-meta'; const tm = document.createElement('time'); tm.textContent = hora(m.t); meta.append(tm);
     bur.append(ic, tx, otra, meta);
     return bur;
@@ -1101,6 +1106,7 @@
     });
     const llama = (video) => { if (LL.ocupado) { aviso(T('Ya tienes una llamada en curso.')); return; } LLAMADA_CONV = ACTUAL; LL.llamar(video); };
     $('#llamar').addEventListener('click', () => llama(false));
+    if (SOLO_VIDEO) $('#llamar').hidden = true;
     // videollamada (dueño, 28 Oct 2026): la misma llamada, con imagen
     $('#videollamar').addEventListener('click', () => llama(true));
   }
@@ -1287,7 +1293,7 @@
       tx.append(nb, es); ab.append(av, tx);
       if (c.noLeidos) { const n = document.createElement('i'); n.className = 'contacto-n'; n.textContent = c.noLeidos > 99 ? '99+' : String(c.noLeidos); ab.append(n); }
       li.append(ab);
-      for (const [acto, etq, svg] of [['voz', T('Llamar a {n}'), SVG_TEL], ['video', T('Videollamada con {n}'), SVG_VID]]) {
+      for (const [acto, etq, svg] of [['voz', T('Llamar a {n}'), SVG_TEL], ['video', T('Videollamada con {n}'), SVG_VID]].filter((x) => !SOLO_VIDEO || x[0] === 'video')) {
         const b = document.createElement('button'); b.type = 'button'; b.className = 'contacto-b'; b.dataset.id = c.id; b.dataset.acto = acto; b.innerHTML = svg;
         b.setAttribute('aria-label', etq.replace('{n}', nombre)); b.title = etq.replace('{n}', nombre); li.append(b);
       }
@@ -1323,6 +1329,9 @@
   // hasta que la otra persona ha estado conectada al menos una vez (se conoce su huella), quien entró por un enlace no ve el
   // campo de escribir: «Conectando con la otra persona…» (dueño, 15:33: «ya me deja escribir aunque él no esté… es un fallo»)
   function pintaEspera(c) { if (!c || ACTUAL !== c.id) return; $('#conv').classList.toggle('sin-sesion', c.rol === 'acepta' && !c.huella); }
+  // Quien invita, en el teléfono, entra en el chat en cuanto envía la invitación y espera ahí a la otra persona (dueño, 28 Oct 2026,
+  // 21:51: «ya tiene que entrar en la sala del chat… No puede esperar desde fuera»). Lo que escriba sale cuando ella entre.
+  const esperaEnChat = (c) => !!(c && esMovil() && esB(c) && c.rol === 'invita' && !c.huella && c.compartido);
   async function abreConv(id) {
     const c = CONVS.get(id); if (!c) return;
     if (ACTUAL && ACTUAL !== id) { paraEscribe(); guardaBorrador(); }
@@ -1331,12 +1340,13 @@
     ACTUAL = id; await cargaMensajes(c);
     if (cambia) ponBorrador(c);
     if (c.perdida) { c.perdida = false; }
-    const inv = c.estado === 'invitacion' && c.rol === 'invita' && !c.huella;
+    const inv = c.estado === 'invitacion' && c.rol === 'invita' && !c.huella && !esperaEnChat(c);
     $('#inicio').hidden = !inv; $('#conv').hidden = inv; $('#app').classList.toggle('en-conv', !inv); document.body.classList.toggle('en-conv', !inv);
     $('#inicio').classList.toggle('con-invitacion', inv); // sin la presentación de la página: solo la invitación (15:32)
     if (inv) { $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = true; $('#paso-codigo').hidden = esB(c); $('#paso-enlace').hidden = !esB(c); }
     pintaCabecera(c); pintaTodos(c); pintaRadio(c); pintaLista();
-    if (c.estado === 'invitacion' && c.rol === 'invita') { if (esB(c)) muestraEnlace(c); else { muestraInvitacion(c); if (!c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); } }
+    if (esperaEnChat(c)) document.body.classList.remove('esperando-enlace');
+    else if (c.estado === 'invitacion' && c.rol === 'invita') { if (esB(c)) muestraEnlace(c); else { muestraInvitacion(c); if (!c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); } }
     $('#conv').classList.toggle('blindada', esB(c));
     pintaEspera(c);
     marcaLeidos(c);
@@ -1353,7 +1363,7 @@
     const conf = $('#cconfianza'); conf.classList.remove('gc-sin-verificar');
     let txt;
     if (c.ocupada && !c.huella) txt = T('Esta invitación ya la usó otra persona.');
-    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo la encriptación…') : c.rol === 'acepta' ? T('Conectando con la otra persona…') : esB(c) ? T('Esperando a que la otra persona abra el enlace…') : T('Esperando a que la otra persona escriba el código…');
+    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo la encriptación…') : esperaEnChat(c) ? T('Invitación enviada') : c.rol === 'acepta' ? T('Conectando con la otra persona…') : esB(c) ? T('Esperando a que la otra persona abra el enlace…') : T('Esperando a que la otra persona escriba el código…');
     else if (!R.abierto) txt = T('Sin conexión con el relé');
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
     else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo la encriptación…');
@@ -2222,7 +2232,7 @@
         const hecha = creaInvitacionB(semilla, { sinPantalla: true });
         Promise.resolve(compartido).then(async () => {
           const c = await hecha; if (!c) return; c.compartido = true;
-          if (!c.huella && !ACTUAL) aviso(T('Invitación enviada'));
+          if (!c.huella && (!ACTUAL || ACTUAL === c.id)) abreConv(c.id); // al chat, a esperar a la otra persona (21:51)
         }).catch(async (e) => {
           const c = await hecha.catch(() => null); if (!c || c.huella) return;
           if (e && e.name === 'AbortError') { try { await destruye(c, true); } catch (_) {} pintaLista(); return; }
@@ -2261,13 +2271,15 @@
         setTimeout(() => { if (esperaWa === e && !e.fuera && document.visibilityState === 'visible') { esperaWa = null; aviso(T('No se pudo abrir WhatsApp.')); } }, 6000);
       } finally { b.removeAttribute('aria-busy'); }
     });
-    // se fue a WhatsApp: fuera la hoja; al volver, «Invitación enviada» en el inicio, y el chat se abre cuando la otra persona entra
+    // se fue a WhatsApp: fuera la hoja y, al volver, ya en el chat, esperando a la otra persona (21:51)
     document.addEventListener('visibilitychange', () => {
       const e = esperaWa; if (!e) return;
-      if (document.visibilityState === 'hidden') { e.fuera = true; cierraHoja('h-invitar'); const c = CONVS.get(e.id); if (c) c.compartido = true; return; }
-      if (!e.fuera) return;
-      esperaWa = null;
-      const c = CONVS.get(e.id); if (c && !c.huella && !ACTUAL) aviso(T('Invitación enviada'));
+      if (document.visibilityState === 'hidden') {
+        e.fuera = true; cierraHoja('h-invitar');
+        const c = CONVS.get(e.id); if (c) { c.compartido = true; if (!c.huella && (!ACTUAL || ACTUAL === c.id)) abreConv(c.id); }
+        return;
+      }
+      if (e.fuera) esperaWa = null;
     });
     $('#vaciar').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (!c) return; $('#vaciar-nota').hidden = false; abreHoja('h-vaciar'); });
     $('#vaciar-no').addEventListener('click', () => cierraHoja('h-vaciar'));
@@ -2279,7 +2291,7 @@
     $('#enlace-copiar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.clipboard.writeText(enlaceB(c)); c.copiado = true; c.compartido = true; muestraEnlace(c); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { $('#enlace-b').select(); } });
     const comparte = $('#enlace-compartir'); comparte.hidden = !navigator.share;
     // (en el teléfono, después de compartir se vuelve al inicio, sin pantalla de espera: 19:17)
-    comparte.addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.share({ title: 'GUARDIANA', text: T('Invitación a una sesión blindada de GUARDIANA Comunicaciones'), url: enlaceB(c) }); c.compartido = true; if (ACTUAL !== c.id) return; if (esMovil() && !c.huella) { alInicio(); aviso(T('Invitación enviada')); } else muestraEnlace(c); } catch (_) {} });
+    comparte.addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.share({ title: 'GUARDIANA', text: T('Invitación a una sesión blindada de GUARDIANA Comunicaciones'), url: enlaceB(c) }); c.compartido = true; if (ACTUAL !== c.id) return; if (esMovil() && !c.huella) abreConv(c.id); else muestraEnlace(c); } catch (_) {} });
     $('#enlace-cancelar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await destruye(c, true); });
     $('#bl-coincide').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await marcaVerificada(c, !c.verificada); });
     $('#cierre-si').addEventListener('click', async () => { cierraHoja('h-cierre'); const c = CONVS.get(ACTUAL); if (c) await destruye(c); });

@@ -55,14 +55,15 @@ async function guarda(p, nombre) {
   comprueba(fila.length === 1 && /Mi mujer/.test(fila[0]) && /En línea/.test(fila[0]), 'la fila: «Mi mujer» · En línea (' + fila.join(' | ') + ')');
   await foto(A, '04-A-contactos');
   // llamar desde la lista
-  await A.click('#contactos-filas .contacto-b[data-acto="voz"]'); await espera(2500);
+  comprueba(!(await A.$('#contactos-filas .contacto-b[data-acto="voz"]')), 'solo videollamada: sin el botón de llamada de voz (21:50)');
+  await A.click('#contactos-filas .contacto-b[data-acto="video"]'); await espera(2500);
   comprueba(await visible(B, '#ll-contestar'), 'llamando desde la lista: a la otra persona le suena');
   const quien = await B.evaluate(() => document.querySelector('#ll-nombre').textContent);
   comprueba(quien === 'Mi marido', 'le sale el nombre que ella le puso (' + quien + ')');
   await B.click('#ll-contestar'); await espera(3500);
   comprueba(await A.evaluate(() => /\d\d:\d\d/.test(document.querySelector('#ll-tiempo').textContent) && !document.querySelector('#ll-tiempo').hidden), 'llamada en curso');
   await foto(A, '05-A-llamada');
-  await A.click('#ll-colgar'); await espera(1500);
+  await A.evaluate(() => document.querySelector('#ll-colgar').click()); await espera(1500); // en la videollamada los botones se esconden solos
   // recargar: los contactos se quedan y se arranca en la lista
   await A.reload(); await espera(3500);
   comprueba(await visible(A, '#contactos') && !(await visible(A, '#conv')), 'al abrir la app: arranca en los contactos');

@@ -47,6 +47,8 @@ const estadoSalida = (P) => P.evaluate(() => {
   };
 });
 (async () => {
+  // en pausa: desde el 28 Oct 2026, 21:50 no hay llamada de voz ni botón «Altavoz» (llamada.js, ELIGE_SALIDA = false)
+  if (/const ELIGE_SALIDA = false/.test(require('fs').readFileSync(require('path').join(__dirname, '../../orbita/comunicaciones/llamada.js'), 'utf8'))) { console.log('EN PAUSA: sin llamada de voz ni botón «Altavoz» (ELIGE_SALIDA = false)'); process.exit(0); }
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
   const A = await telefono(browser), B = await telefono(browser);
   await A.goto(URL0); await B.goto(URL0); await espera(1800);

@@ -44,8 +44,9 @@ const visible = (p, sel) => p.evaluate((s) => { const e = document.querySelector
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(900);
   await foto(A, '02-tras-compartir');
   comprueba(!(await visible(A, '#paso-enlace')), 'tras compartir, sin pantalla de espera');
-  const avisoTxt = await A.evaluate(() => { const a = document.querySelector('#aviso'); return a && !a.hidden ? a.textContent : ''; });
-  comprueba(/Invitación enviada/.test(avisoTxt), 'aviso «Invitación enviada» (' + avisoTxt + ')');
+  // 21:51: quien invita entra en el chat a esperar a la otra persona
+  const cabA = await A.evaluate(() => document.querySelector('#cconfianza').textContent);
+  comprueba(await visible(A, '#texto') && /Invitación enviada/.test(cabA), 'tras compartir, ya en el chat: «Invitación enviada» (' + cabA + ')');
   const datos = await A.evaluate(() => window.__compartidos[window.__compartidos.length - 1]);
   const enlace = String(datos.url).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
   comprueba(/#b=/.test(enlace), 'se compartió el enlace');
@@ -70,24 +71,21 @@ const visible = (p, sel) => p.evaluate((s) => { const e = document.querySelector
   await foto(A, '08b-contacto-guardado');
   await B.click('#ccontacto-si'); await B.fill('#nombre-conv', 'Mi marido'); await B.click('#nombre-guardar'); await espera(400);
   await A.click('#cvolver'); await espera(900); await foto(A, '09-contactos');
-  // llamada de voz
-  await A.click('#contactos-filas .contacto-b[data-acto="voz"]'); await espera(2500);
+  // solo videollamada (21:50): en la fila del contacto, solo el botón de videollamada
+  comprueba(!(await A.$('#contactos-filas .contacto-b[data-acto="voz"]')) && !!(await A.$('#contactos-filas .contacto-b[data-acto="video"]')), 'contacto: solo videollamada, sin llamada de voz');
+  await A.click('#contactos-filas .contacto-b[data-acto="video"]'); await espera(2500);
   await foto(B, '10-llamada-entrante');
   comprueba(await B.evaluate(() => document.querySelector('#aviso').hidden), 'ningún aviso tapa la llamada que entra');
-  await B.click('#ll-contestar'); await espera(4000);
-  await foto(A, '11-llamada-voz');
+  await B.click('#ll-contestar'); await espera(5000);
+  comprueba(!(await visible(A, '#llamar')), 'en el chat, sin el botón de llamada de voz');
   const pistas = await A.evaluate(() => { const s = document.querySelector('#a-remoto').srcObject; return s ? s.getAudioTracks().length : 0; });
   const pistasB = await B.evaluate(() => { const s = document.querySelector('#a-remoto').srcObject; return s ? s.getAudioTracks().length : 0; });
   comprueba(pistas === 2 && pistasB === 2, 'el sonido que llega trae dos pistas de audio (voz y muda) en los dos lados: ' + pistas + ' y ' + pistasB);
-  await A.click('#ll-colgar'); await espera(1600);
-  // videollamada, con el botón «Altavoz» a la vista (como en el iPhone) para ver cinco botones
-  await A.click('#videollamar').catch(async () => { await A.click('#contactos-filas .contacto-b[data-acto="video"]'); }); await espera(2500);
-  if (await B.$('#ll-contestar:visible')) await B.click('#ll-contestar'); await espera(5000);
-  await A.evaluate(() => { document.querySelector('#ll-altavoz-caja').hidden = false; });
+  comprueba(await A.evaluate(() => document.querySelector('#ll-altavoz-caja').hidden), 'sin el botón «Altavoz»');
   await A.mouse.move(200, 300); await A.touchscreen.tap(30, 420).catch(() => {}); await espera(400);
   await foto(A, '12-video-partida');
   const dentro = await A.evaluate(() => [...document.querySelectorAll('#ll-botones .gc-llamada-boton')].filter((b) => b.offsetWidth).every((b) => { const r = b.querySelector('button').getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth; }));
-  comprueba(dentro, 'los cinco botones de la videollamada caben en la pantalla');
+  comprueba(dentro, 'los botones de la videollamada caben en la pantalla');
   await A.click('#ll-tam').catch(() => {}); await espera(900); await foto(A, '13-video-completa');
   await A.evaluate(() => document.querySelector('#ll-colgar').click()); await espera(1500);
   // la guía, en Safari (sin instalar)

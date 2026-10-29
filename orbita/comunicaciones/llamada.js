@@ -305,8 +305,12 @@
     const TACTIL = !!(raiz.matchMedia && raiz.matchMedia('(pointer: coarse)').matches);
     const EXTERNA = /airpods|bluetooth|beats|head ?phone|head ?set|auriculares|cascos|casque|kopfh|cuffie|fones|carplay|airplay|usb|hdmi|\btv\b/i;
     const ES_ALTAVOZ = /speaker|altavoz|alto-?falante|haut-?parleur|lautsprecher|altoparlante|luidspreker|h[øö]gtalare|h[øo]jttaler|h[øo]yttaler|kaiutin|g[łl]o[śs]nik|reproduktor|hangsz[óo]r[óo]|difuzor|hoparl[öo]r|динамик|гучномовець|ηχείο|רמקול|مكبر|スピーカー|扬声器|揚聲器|스피커|ลำโพง|loa ngoài|pembesar suara/i;
+    // Fuera el botón «Altavoz» (dueño, 28 Oct 2026, 21:49: «No funciona»; 21:50: «Déjalo solamente con videollamada»): la
+    // videollamada suena por donde decide el teléfono (el altavoz, como FaceTime). Lo de abajo se queda para retomarlo.
+    const ELIGE_SALIDA = false;
     async function buscaSalidas() {
       salidas = null;
+      if (!ELIGE_SALIDA) return;
       try {
         const ar = $('#a-remoto');
         if (!TACTIL || !ar || typeof ar.setSinkId !== 'function' || !navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return;

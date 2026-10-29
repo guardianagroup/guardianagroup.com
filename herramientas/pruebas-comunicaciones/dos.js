@@ -86,7 +86,8 @@ const caja = (p, sel) => p.evaluate((s) => { const e = document.querySelector(s)
     // y como en Safari: el visualViewport baja pero innerHeight no (ventana del mismo alto, se simula con un panel)
   }
   if (PASOS.has('voz')) {
-    await A.click('#llamar'); await espera(2500);
+    // la llamada de voz no tiene botón desde el 28 Oct 2026, 21:50 (solo videollamada); se prueba igual, por si llega de una versión anterior
+    await A.evaluate(() => document.querySelector('#llamar').click()); await espera(2500);
     await foto(A, '08-A-llamando'); await foto(B, '08-B-entrante');
     const ta = await A.evaluate(() => window.__tonos.slice()), tb = await B.evaluate(() => window.__tonos.slice());
     comprueba(ta.includes('suena') && tb.includes('suena'), 'tono: suena al que llama y al que recibe (' + ta.join(',') + ' | ' + tb.join(',') + ')');

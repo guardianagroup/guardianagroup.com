@@ -56,7 +56,8 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   await sale(A); await espera(300);
   comprueba(!(await visible(A, '#h-invitar')), 'al irse a WhatsApp, la hoja se cierra');
   await vuelve(A); await espera(400);
-  comprueba(/Invitación enviada/.test(await aviso(A)), 'al volver: «Invitación enviada»', await aviso(A));
+  const cab = await A.evaluate(() => document.querySelector('#cconfianza').textContent);
+  comprueba(await visible(A, '#texto') && /Invitación enviada/.test(cab), 'al volver: ya en el chat, «Invitación enviada» (21:51)', cab);
   await A.screenshot({ path: path.join(OUT, '2-vuelta.png') });
 
   // 3. la otra persona abre el enlace que le llegó por WhatsApp: el chat se abre en los dos
