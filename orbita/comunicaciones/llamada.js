@@ -207,11 +207,17 @@
         const i0 = Math.round(ini * sr), i1 = Math.min(n, Math.round((ini + d) * sr));
         for (let i = i0; i < i1; i++) { const t = (i - i0) / sr, env = Math.max(0, Math.min(1, t / 0.015, (d - t) / 0.04)); let v = 0; for (const [f, w] of frecs) v += w * Math.sin(2 * Math.PI * f * t); pcm[i] += v * vol * env; }
       };
-      // tono de llamada: 425 Hz durante 1,2 s cada 4 s; timbre: dos notas con un armónico suave, dos veces, cada 2,6 s
-      const nota = (f) => [[f, 1], [f * 2, 0.25]];
+      // Tonos de calidad (dueño, 29 Oct 2026, 10:02: «que no parezcan el típico sonido de niño… tiene que ser de calidad»).
+      // Tono de llamada: el 425 Hz de la red telefónica, 1,2 s cada 4 s, con un armónico suave y ataque sin clic. Timbre: dos
+      // notas de madera (como una marimba: fundamental con armónicos que se apagan antes y cola de 0,8 s), F#5 y D5, dos veces
+      // cada 2,6 s; grave, cálido y reconocible, sin pitidos.
+      const madera = (f, ini, d, vol) => {
+        const i0 = Math.round(ini * sr), i1 = Math.min(n, Math.round((ini + d) * sr));
+        for (let i = i0; i < i1; i++) { const t = (i - i0) / sr, env = Math.min(1, t / 0.008) * Math.exp(-t * 4.2) * Math.min(1, (d - t) / 0.05); const v = Math.sin(2 * Math.PI * f * t) + 0.35 * Math.exp(-t * 7) * Math.sin(2 * Math.PI * f * 2 * t + 0.3) + 0.12 * Math.exp(-t * 11) * Math.sin(2 * Math.PI * f * 3.01 * t); pcm[i] += v * vol * env; }
+      };
       if (tipo === 'silencio') { /* nada: un cuarto de segundo de silencio de verdad, para desbloquear el <audio> */ }
-      else if (tipo === 'saliente') pon([[425, 1]], 0, 1.2, 0.42);
-      else { pon(nota(880), 0, 0.2, 0.5); pon(nota(660), 0.24, 0.2, 0.5); pon(nota(880), 0.62, 0.2, 0.5); pon(nota(660), 0.86, 0.2, 0.5); }
+      else if (tipo === 'saliente') pon([[425, 1], [850, 0.12]], 0, 1.2, 0.4);
+      else { madera(740, 0, 0.8, 0.6); madera(587, 0.42, 0.8, 0.6); madera(740, 1.1, 0.8, 0.55); madera(587, 1.52, 0.95, 0.55); }
       const buf = new ArrayBuffer(44 + n * 2), dv = new DataView(buf), txt = (o, x) => { for (let i = 0; i < x.length; i++) dv.setUint8(o + i, x.charCodeAt(i)); };
       txt(0, 'RIFF'); dv.setUint32(4, 36 + n * 2, true); txt(8, 'WAVE'); txt(12, 'fmt '); dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
       dv.setUint32(24, sr, true); dv.setUint32(28, sr * 2, true); dv.setUint16(32, 2, true); dv.setUint16(34, 16, true); txt(36, 'data'); dv.setUint32(40, n * 2, true);
@@ -263,9 +269,18 @@
           tonoNodos.add(os); os.onended = () => tonoNodos.delete(os);
         }
       };
-      const nota = (f) => [[f, 1], [f * 2, 0.25]];
-      const ciclo = tipo === 'saliente' ? () => pita([[425, 1]], 0, 1.2, 0.16)
-        : () => { pita(nota(880), 0, 0.2, 0.22); pita(nota(660), 0.24, 0.2, 0.22); pita(nota(880), 0.62, 0.2, 0.22); pita(nota(660), 0.86, 0.2, 0.22); vibra([350, 150, 350]); };
+      // el mismo timbre de madera que el <audio>, con osciladores: nota con cola que se apaga sola
+      const madera = (f, ini, vol) => {
+        for (const [k, w, caida] of [[1, 1, 4.2], [2, 0.35, 7], [3.01, 0.12, 11]]) {
+          const os = ctx.createOscillator(), g = ctx.createGain(), t0 = ctx.currentTime + ini;
+          os.type = 'sine'; os.frequency.value = f * k;
+          g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(vol * w, t0 + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 4 / caida);
+          os.connect(g).connect(tonoSalida); os.start(t0); os.stop(t0 + 4 / caida + 0.05);
+          tonoNodos.add(os); os.onended = () => tonoNodos.delete(os);
+        }
+      };
+      const ciclo = tipo === 'saliente' ? () => pita([[425, 1], [850, 0.12]], 0, 1.2, 0.16)
+        : () => { madera(740, 0, 0.26); madera(587, 0.42, 0.26); madera(740, 1.1, 0.24); madera(587, 1.52, 0.24); vibra([350, 150, 350]); };
       // si el contexto aún no puede sonar (sin ningún gesto en la página), el ciclo sigue y suena en cuanto la persona toque algo
       ciclo(); clearInterval(tonoReloj); tonoReloj = setInterval(() => { if (tonoCtx && tonoCtx.state !== 'running') tonoCtx.resume().catch(() => {}); ciclo(); }, tipo === 'saliente' ? 4000 : 2600);
     }

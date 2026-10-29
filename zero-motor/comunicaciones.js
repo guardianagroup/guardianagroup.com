@@ -20,8 +20,8 @@ const MAX_MIEMBROS = 8;          // personas por sala (conversaciones pequeñas;
 const MAX_SALAS_CONEXION = 64;   // salas abiertas por una misma conexión
 const MAX_SALAS = 20000;         // salas vivas en el relé
 const MAX_CONEXIONES = 4000;
-const RITMO_BPS = 8 * 1024 * 1024;        // bytes por segundo sostenidos por conexión
-const RAFAGA = 32 * 1024 * 1024;          // y de golpe
+const RITMO_BPS = 16 * 1024 * 1024;       // bytes por segundo sostenidos por conexión (29 Oct 2026: el doble, «a la máxima velocidad posible»)
+const RAFAGA = 64 * 1024 * 1024;          // y de golpe
 // Sesión blindada (27 Oct 2026): sin el límite de 8 MB/s. Manda la línea de cada persona; el relé solo pone un techo
 // alto para que una conexión no se quede con todo el servidor, y un máximo de conexiones blindadas a la vez.
 const RITMO_B = 64 * 1024 * 1024;

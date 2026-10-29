@@ -5,7 +5,9 @@
 (() => {
   const C = window.GuardianaCripto, $ = (s) => document.querySelector(s), T = (s) => (window.GuardianaIdioma ? GuardianaIdioma.t(s) : s);
   const LOC = () => (window.GuardianaIdioma && GuardianaIdioma.locale) || 'es';
-  const TROZO = 192 * 1024, VENTANA = 12, VENTANA_B = 32;
+  // ventana de envío (dueño, 29 Oct 2026, 09:26: «el máximo de ancho aprovechable… a la máxima velocidad posible»): 24 trozos en
+  // vuelo en el chat normal (4,5 MB) y 48 en el blindado (9 MB); el relé y la línea de cada persona ponen el techo real
+  const TROZO = 192 * 1024, VENTANA = 24, VENTANA_B = 48;
   // Sesión blindada (dueño, 27 Oct 2026, 22:01–23:12): suite CNSA 2.0, invitación por enlace de 256 bits, verificación mutua
   // obligatoria, identidad nueva en cada sesión, renovación de claves cada 5 minutos, relleno e informe de cierre.
   const esB = (c) => !!(c && c.modo === 'blindada');
@@ -604,7 +606,7 @@
     const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'texto', texto };
     await guardaMensaje(c, m); c.mensajes.push(m); c.cola.push(m);
     pintaMensaje(c, m); actualizaUltimo(c, m);
-    enviaCola(c);
+    enviaCola(c); if (!enLinea(c)) despierta(c, 'mensaje');
   }
   // «Borrar el chat» pendiente: sale en cuanto la sesión con la otra persona está lista (si no se pudo mandar, se queda pendiente)
   function mandaVaciar(c) {
@@ -766,7 +768,7 @@
       await guardaMensaje(c, m); c.mensajes.push(m); c.cola.push(m); pintaMensaje(c, m); actualizaUltimo(c, m);
       abreSiToca(v);
     }
-    enviaCola(c);
+    enviaCola(c); if (!enLinea(c)) despierta(c, 'mensaje');
   }
   async function falla(c, m, texto) {
     m.estado = 'fallo'; await guardaMensaje(c, m); pintaMensaje(c, m, true); if (texto) aviso(texto);
@@ -783,7 +785,7 @@
     if (v) { v.estado = 'viaje'; v.t0 = a.t0; VJ() && VJ().muestra(v, 0); vigilaViajes(); abreSiToca(v, true); }
     for (let i = 0; i < a.trozos; i++) {
       if (a.cancelado || c.estado === 'destruida') return;
-      while (i - a.ack >= (esB(c) ? VENTANA_B : VENTANA) || R.atraso > (esB(c) ? 8 : 3) * 1024 * 1024) { if (!enLinea(c)) return falla(c, m, T('Se perdió la conexión.')); await new Promise((r) => { a.sigue = r; setTimeout(r, 300); }); if (a.cancelado) return; }
+      while (i - a.ack >= (esB(c) ? VENTANA_B : VENTANA) || R.atraso > (esB(c) ? 12 : 6) * 1024 * 1024) { if (!enLinea(c)) return falla(c, m, T('Se perdió la conexión.')); await new Promise((r) => { a.sigue = r; setTimeout(r, 300); }); if (a.cancelado) return; }
       let claro; try { claro = new Uint8Array(await a.f.slice(i * TROZO, (i + 1) * TROZO).arrayBuffer()); } catch (_) { return falla(c, m, T('No se pudo leer el archivo: ¿sigue en el mismo sitio?')); }
       if (huella) huella.pon(claro); // la huella del archivo entero, en orden: la misma que calcula el equipo del destinatario
       const cab = new Uint8Array(21); cab[0] = 3; cab.set(fid, 1); new DataView(cab.buffer).setUint32(17, i);
@@ -1235,7 +1237,7 @@
   const servidorLlamada = () => (iceUsado === 'am' ? T('Miami (Estados Unidos)') : iceUsado === 'eu' ? T('Núremberg (Alemania)') : '');
   const puedeLlamar = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
   // solo en local (pruebas): simular un mensaje manipulado y ver la alarma sin tocar el relé
-  if (LOCAL) window.gcomPrueba = { incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL) };
+  if (LOCAL) window.gcomPrueba = { avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL) };
   function arrancaLlamadas() {
     if (!window.GuardianaLlamada || !window.RTCPeerConnection) { for (const id of ['#llamar', '#videollamar']) { const b = $(id); if (b) b.hidden = true; } return; }
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
@@ -1251,7 +1253,7 @@
       nombre: () => { const c = convLl(); return (c && (c.alias || c.nombre)) || (c && vivas().length > 1 ? nombreConv(c, true) : ''); },
       inicial: () => { const c = convLl(); return inicial(c && (c.alias || c.nombre)); },
     });
-    const llama = (video) => { if (LL.ocupado) { aviso(T('Ya tienes una llamada en curso.')); return; } LLAMADA_CONV = ACTUAL; LL.llamar(video); };
+    const llama = (video) => { if (LL.ocupado) { aviso(T('Ya tienes una llamada en curso.')); return; } const c = CONVS.get(ACTUAL); if (c && c.huella && !enLinea(c) && R.abierto) { despiertaLlamada(c, video); return; } LLAMADA_CONV = ACTUAL; LL.llamar(video); };
     $('#llamar').addEventListener('click', () => llama(false));
     if (SOLO_VIDEO) $('#llamar').hidden = true;
     // videollamada (dueño, 28 Oct 2026): la misma llamada, con imagen
@@ -1328,7 +1330,9 @@
     };
     // arriba: «Desconectado» hasta que la conversación con la otra persona está establecida; entonces «Conectado» (dueño, 20:21)
     R.on('abierto', () => { pintaBarra(); });
-    R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); });
+    R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); sincronizaAvisos(); });
+    R.on('despierta', (m) => { ultimoDespierta = m; if (m && m.tipo === 'llamada' && (m.avisados | 0) === 0) aviso(T('La otra persona no tiene los avisos activados: solo le llegará con GUARDIANA abierta.')); });
+    R.on('avisos', (m) => { ultimoAvisos = m; });
     R.on('cerrado', () => { quietoTodas(4000); pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; c.salaSabida = false; pintaCabecera(c); } pintaLista(); });
     setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
     // con la otra persona en la sala, el tiempo de acordar las claves, quieta; sin ella (y si no se acaba de ir), «No conectado» ya
@@ -1394,6 +1398,7 @@
     return esB(c) ? T('Sesión blindada') : T('Encriptada de extremo a extremo');
   }
   async function pintaLista() {
+    sincronizaAvisos();
     const xs = vivas().sort((a, b) => (b.ultimo || b.creado || 0) - (a.ultimo || a.creado || 0));
     const app = $('#app'), lista = $('#lista'), ul = $('#lista-filas');
     app.classList.toggle('con-lista', xs.length > 0); if (lista) lista.hidden = !xs.length;
@@ -1506,7 +1511,9 @@
   // Quien invita, en el teléfono, entra en el chat en cuanto envía la invitación y espera ahí a la otra persona (dueño, 28 Oct 2026,
   // 21:51: «ya tiene que entrar en la sala del chat… No puede esperar desde fuera»). Lo que escriba sale cuando ella entre.
   const esperaEnChat = (c) => !!(c && esMovil() && porEnlace(c) && c.rol === 'invita' && !c.huella && c.compartido);
+  function retiraAvisos(sala) { try { if (swReg && navigator.serviceWorker.controller) navigator.serviceWorker.controller.postMessage({ t: 'cierra', sala }); } catch (_) {} try { if (navigator.clearAppBadge && !nuevos) navigator.clearAppBadge().catch(() => {}); } catch (_) {} }
   async function abreConv(id) {
+    retiraAvisos(id);
     const c = CONVS.get(id); if (!c) return;
     if (ACTUAL && ACTUAL !== id) { paraEscribe(); guardaBorrador(); }
     const cambia = ACTUAL !== id;
@@ -1903,11 +1910,15 @@
     try {
       ctxAudio = ctxAudio || new (window.AudioContext || window.webkitAudioContext)();
       if (ctxAudio.state === 'suspended') ctxAudio.resume().catch(() => {});
+      // el aviso de mensaje (dueño, 29 Oct 2026, 10:02: «de calidad», no «sonido de niño»): una sola nota de madera (C6 con sus
+      // armónicos, cola de medio segundo) y, 60 ms después, una quinta por debajo, más baja: un «toc» cálido, sin pitidos
       const t = ctxAudio.currentTime + 0.01;
-      for (const [f, d] of [[988, 0], [1319, 0.09]]) {
-        const o = ctxAudio.createOscillator(), g = ctxAudio.createGain(); o.type = 'sine'; o.frequency.value = f;
-        g.gain.setValueAtTime(0.0001, t + d); g.gain.exponentialRampToValueAtTime(0.11, t + d + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t + d + 0.16);
-        o.connect(g).connect(ctxAudio.destination); o.start(t + d); o.stop(t + d + 0.18);
+      for (const [f, d, vol] of [[1047, 0, 0.12], [784, 0.06, 0.07]]) {
+        for (const [k, w, caida] of [[1, 1, 5], [2, 0.3, 9], [3.01, 0.1, 13]]) {
+          const o = ctxAudio.createOscillator(), g = ctxAudio.createGain(); o.type = 'sine'; o.frequency.value = f * k;
+          g.gain.setValueAtTime(0.0001, t + d); g.gain.exponentialRampToValueAtTime(vol * w, t + d + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, t + d + 4 / caida);
+          o.connect(g).connect(ctxAudio.destination); o.start(t + d); o.stop(t + d + 4 / caida + 0.05);
+        }
       }
     } catch (_) {}
   }
@@ -2023,8 +2034,13 @@
   const TITULO = document.title;
   let nuevos = 0, avisoSis = null, avisoLlam = null, iconoOriginal = null, iconoPunto = null;
   const fuera = () => document.visibilityState !== 'visible' || !document.hasFocus();
-  const avisosSistema = () => { try { return 'Notification' in window && !/Android|iPhone|iPad|iPod/i.test(navigator.userAgent); } catch (_) { return false; } };
+  const avisosSistema = () => { try { return 'Notification' in window && (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || puedePush()); } catch (_) { return false; } };
   const permisoAvisos = () => { try { return avisosSistema() ? Notification.permission : 'no'; } catch (_) { return 'no'; } };
+  // el aviso del sistema: por el service worker donde lo hay (en el teléfono es la única forma); si no, el de la página
+  async function avisoSistema(titulo, op) {
+    try { if (swReg && swReg.showNotification) { await swReg.showNotification(titulo, op); return { close: () => { try { swReg.getNotifications({ tag: op.tag }).then((ns) => ns.forEach((n) => n.close())); } catch (_) {} } }; } } catch (_) {}
+    try { const n = new Notification(titulo, op); n.onclick = () => { try { window.focus(); } catch (_) {} n.close(); }; return n; } catch (_) { return null; }
+  }
   function iconoConPunto() {
     if (iconoPunto) return Promise.resolve(iconoPunto);
     return new Promise((res) => {
@@ -2054,9 +2070,8 @@
     try {
       if (avisoSis) avisoSis.close();
       const cuerpo = que === 'perdida' ? (video ? T('Videollamada perdida.') : T('Llamada perdida.')) : nuevos === 1 ? T('Tienes un mensaje nuevo.') : T('Tienes {n} mensajes nuevos.').replace('{n}', nuevos);
-      const n = new Notification('GUARDIANA', { body: cuerpo, tag: 'gcom-nuevo', icon: '/icon-192.png', silent: true }); // silent y renotify no pueden ir juntos: el anterior ya se cerró arriba
-      n.onclick = () => { try { window.focus(); } catch (_) {} n.close(); };
-      avisoSis = n; return true;
+      avisoSistema('GUARDIANA', { body: cuerpo, tag: 'gcom-nuevo', icon: '/icon-192.png?v=2', silent: true }).then((n) => { avisoSis = n; }); // silent y renotify no pueden ir juntos: el anterior ya se cerró arriba
+      return true;
     } catch (_) { return false; }
   }
   // la llamada que entra con la página minimizada: aviso que se queda hasta contestar o colgar, y el título lo dice
@@ -2073,10 +2088,10 @@
       if (!fuera()) return;
       const tit = video ? T('Videollamada entrante') : T('Llamada entrante');
       tituloLlamada = true; pintaTitulo(tit);
-      if (!avisoLlam && permisoAvisos() === 'granted') { try { const n = new Notification(tit, { body: T('GUARDIANA · Toca para contestar.'), tag: 'gcom-llamada', icon: '/icon-192.png', requireInteraction: true, silent: true /* suena nuestro timbre */ }); n.onclick = () => { try { window.focus(); } catch (_) {} n.close(); }; avisoLlam = n; } catch (_) {} }
+      if (!avisoLlam && permisoAvisos() === 'granted') { avisoLlam = true; avisoSistema(tit, { body: T('GUARDIANA · Toca para contestar.'), tag: 'gcom-llamada', icon: '/icon-192.png?v=2', requireInteraction: true, silent: true /* suena nuestro timbre */ }).then((n) => { if (avisoLlam) avisoLlam = n || true; else if (n) { try { n.close(); } catch (_) {} } }); }
       return;
     }
-    if (avisoLlam) { try { avisoLlam.close(); } catch (_) {} avisoLlam = null; }
+    if (avisoLlam) { try { if (avisoLlam.close) avisoLlam.close(); } catch (_) {} avisoLlam = null; }
     if (tituloLlamada) { tituloLlamada = false; pintaTitulo(); }
   }
   function vuelve() { if (fuera()) return; if (nuevos || parpadeo) { nuevos = 0; pintaTitulo(); } if (avisoSis) { try { avisoSis.close(); } catch (_) {} avisoSis = null; } const c = CONVS.get(ACTUAL); if (c) marcaLeidos(c); }
@@ -2088,6 +2103,81 @@
     let no = false; try { no = localStorage.getItem('gcom-avisos') === 'no'; } catch (_) {}
     b.hidden = true; // dueño, 28 Oct 2026, 15:10: fuera la tira de la campanita; los avisos se activan desde «⋯» → «Activar avisos»
     void no; void c;
+  }
+
+  // ---------- avisos con la app cerrada (Web Push; dueño, 29 Oct 2026, 09:14 y 10:02: «notificaciones fuera de la aplicación…
+  // máxima tecnología… máxima calidad») ----------
+  // El relé guarda solo la dirección opaca que da el navegador y las salas de este equipo (nunca nombres ni mensajes). Cuando
+  // alguien escribe o llama a una sala en la que este equipo no está, el relé le manda un aviso mínimo y cifrado («mensaje» o
+  // «llamada»); el service worker (sw.js) lo enseña. En el iPhone y el iPad solo funciona con GUARDIANA en la pantalla de inicio.
+  const SW_URL = '/orbita/comunicaciones/sw.js';
+  let swReg = null, avisosFirma = '', avisosSync = null, ultimoAvisos = null, ultimoDespierta = null;
+  const puedePush = () => { try { return 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window && window.isSecureContext && (!/iPhone|iPad|iPod/.test(navigator.userAgent || '') || comoApp()); } catch (_) { return false; } };
+  async function registraSW() {
+    if (!('serviceWorker' in navigator)) return null;
+    try {
+      swReg = await navigator.serviceWorker.register(SW_URL, { scope: '/orbita/comunicaciones/' });
+      navigator.serviceWorker.addEventListener('message', (e) => { const d = e.data || {}; if (d.t === 'abre' && d.sala && CONVS.has(d.sala) && ACTUAL !== d.sala) abreConv(d.sala); });
+      return swReg;
+    } catch (_) { return null; }
+  }
+  const claveServidor = () => { try { return R && R.avisos ? C.deB64u(R.avisos) : null; } catch (_) { return null; } };
+  const salasAvisos = () => vivas().filter((c) => c.huella && /^[0-9a-f]{64}$/.test(c.id)).map((c) => c.id).sort();
+  const igualesBytes = (a, b) => !!(a && b && a.length === b.length && a.every((x, i) => x === b[i]));
+  async function suscripcionActual() { try { const reg = swReg || (await navigator.serviceWorker.ready); return await reg.pushManager.getSubscription(); } catch (_) { return null; } }
+  // suscribe este equipo en el relé (o renueva sus salas); devuelve si pudo
+  async function suscribeAvisos(forzar) {
+    try {
+      if (!puedePush() || permisoAvisos() !== 'granted' || !R || !R.abierto) return false;
+      const clave = claveServidor(); if (!clave) return false;
+      const reg = swReg || (await registraSW()); if (!reg) return false; await navigator.serviceWorker.ready;
+      let sub = await reg.pushManager.getSubscription();
+      if (sub && sub.options && sub.options.applicationServerKey && !igualesBytes(new Uint8Array(sub.options.applicationServerKey), clave)) { try { await sub.unsubscribe(); } catch (_) {} sub = null; }
+      if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: clave });
+      const j = sub.toJSON(), salas = salasAvisos(), firma = j.endpoint + '|' + salas.join(',');
+      if (!forzar && firma === avisosFirma) return true;
+      avisosFirma = firma;
+      return R.suscribe({ endpoint: j.endpoint, keys: j.keys }, salas);
+    } catch (e) { console.warn('avisos', e && e.message); return false; }
+  }
+  // las salas cambian (conversación nueva, contacto borrado, otra persona que entra): el relé se entera, sin prisa
+  function sincronizaAvisos() { clearTimeout(avisosSync); avisosSync = setTimeout(() => { suscribeAvisos(false); }, 600); }
+  async function quitaAvisos() { try { const sub = await suscripcionActual(); if (sub) { const j = sub.toJSON(); if (R && R.abierto) R.suscribe({ endpoint: j.endpoint, keys: j.keys }, [], true); await sub.unsubscribe(); } } catch (_) {} avisosFirma = ''; }
+  // desde un toque de la persona: el permiso del navegador y la suscripción
+  async function activaAvisos() {
+    if (!puedePush()) { aviso(/iPhone|iPad|iPod/.test(navigator.userAgent || '') && !comoApp() ? T('En el iPhone y el iPad, los avisos con la app cerrada solo funcionan con GUARDIANA añadida a la pantalla de inicio.') : T('Este navegador no admite avisos con la app cerrada.')); return false; }
+    let perm = 'denied'; try { perm = await Notification.requestPermission(); } catch (_) {}
+    if (perm !== 'granted') { aviso(T('Sin permiso para avisos: se puede dar más tarde en los ajustes del navegador.')); pintaAvisosMenu(); return false; }
+    try { localStorage.setItem('gcom-avisos', 'si'); } catch (_) {}
+    const ok = await suscribeAvisos(true);
+    aviso(ok ? T('Listo: te avisaremos de mensajes y llamadas aunque GUARDIANA esté cerrada.') : T('Avisos activados en este navegador; con la app cerrada aún no: vuelve a intentarlo con conexión.'));
+    pintaAvisosMenu(); return ok;
+  }
+  function pintaAvisosMenu() { const b = $('#cm-avisos'); if (!b) return; b.hidden = !(puedePush() && permisoAvisos() !== 'granted'); }
+  // despertar a la otra persona cuando no está conectada: una vez por minuto y conversación como mucho (el relé también limita)
+  function despierta(c, tipo) {
+    if (!c || !c.huella || !R || !R.abierto || enLinea(c)) return false;
+    const ahora = Date.now(); if (tipo === 'mensaje' && c.despertadoEn && ahora - c.despertadoEn < 60000) return false;
+    c.despertadoEn = ahora; return R.despiertaA(c.id, tipo);
+  }
+  // llamar a quien no está conectado: se le avisa y la llamada empieza en cuanto abra GUARDIANA (hasta 45 s)
+  function despiertaLlamada(c, video) {
+    if (!despierta(c, 'llamada')) { aviso(T('Para llamar, la otra persona tiene que estar conectada y la sesión, verificada.')); return; }
+    aviso(T('Avisando a la otra persona: la llamada empieza en cuanto abra GUARDIANA.'));
+    const hasta = Date.now() + 45000; clearInterval(c.esperaLlamada);
+    c.esperaLlamada = setInterval(() => {
+      if (ACTUAL !== c.id || c.estado === 'destruida') { clearInterval(c.esperaLlamada); return; }
+      if (Date.now() > hasta) { clearInterval(c.esperaLlamada); aviso(T('La otra persona no ha abierto GUARDIANA: inténtalo más tarde.')); return; }
+      if (enLinea(c) && puedeLlamar() && !LL.ocupado) { clearInterval(c.esperaLlamada); LLAMADA_CONV = c.id; LL.llamar(video); }
+    }, 700);
+  }
+  // una vez, en el teléfono instalado o en el ordenador, con la primera conversación establecida: ¿avisos con la app cerrada?
+  let avisosPreguntado = false;
+  function preguntaAvisos() {
+    if (avisosPreguntado || !puedePush() || permisoAvisos() !== 'default') return; let no = ''; try { no = localStorage.getItem('gcom-avisos') || ''; } catch (_) {}
+    if (no === 'no' || !vivas().some((c) => c.huella)) return;
+    if (document.querySelector('.gc-hoja.gc-abierta') || document.body.classList.contains('en-llamada')) return;
+    avisosPreguntado = true; abreHoja('h-avisos');
   }
 
   // ---------- «escribiendo…» propio: el aviso va solo a la conversación donde se escribe ----------
@@ -2200,12 +2290,12 @@
     // menú «⋯» de la cabecera en el móvil (agencia, ronda 74): seguridad, modo discreto, avisos y terminar
     const menu = $('#cmenu'), mas = $('#cmas');
     const cierraMenu = () => { if (menu.hidden) return; menu.hidden = true; mas.setAttribute('aria-expanded', 'false'); };
-    const pideAvisos = async () => { try { const r = await Notification.requestPermission(); if (r === 'granted') aviso(T('Listo: te avisaremos aunque GUARDIANA esté minimizada.')); } catch (_) {} pintaAvisos(CONVS.get(ACTUAL)); };
+    const pideAvisos = () => activaAvisos();
     mas.addEventListener('click', (e) => {
       e.stopPropagation();
       if (!menu.hidden) return cierraMenu();
       $('#cm-discreto').setAttribute('aria-checked', String($('#discreto').getAttribute('aria-pressed') === 'true'));
-      $('#cm-avisos').hidden = permisoAvisos() !== 'default';
+      pintaAvisosMenu();
       { const k = CONVS.get(ACTUAL), es = !!(k && k.contacto); $('#cm-eliminar').hidden = !es; $('#cm-terminar').hidden = es; }
       menu.hidden = false; mas.setAttribute('aria-expanded', 'true');
       const p = menu.querySelector('button:not([hidden])'); if (p) p.focus({ preventScroll: true });
@@ -2215,7 +2305,9 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { cierraMenu(); mas.focus(); } });
     $('#cm-seguridad').addEventListener('click', () => { cierraMenu(); $('#escudo').click(); });
     $('#cm-discreto').addEventListener('click', () => { dentroMenu = true; try { $('#discreto').click(); } finally { dentroMenu = false; } $('#cm-discreto').setAttribute('aria-checked', String($('#discreto').getAttribute('aria-pressed') === 'true')); });
-    $('#cm-avisos').addEventListener('click', () => { cierraMenu(); pideAvisos(); });
+    $('#cm-avisos').addEventListener('click', () => { cierraMenu(); activaAvisos(); });
+    $('#avisos-si').addEventListener('click', async () => { cierraHoja('h-avisos'); await activaAvisos(); });
+    $('#avisos-no').addEventListener('click', () => { cierraHoja('h-avisos'); try { localStorage.setItem('gcom-avisos', 'no'); } catch (_) {} });
     $('#cm-terminar').addEventListener('click', () => { cierraMenu(); $('#terminar').click(); });
     // un contacto no se termina sin querer: «Eliminar contacto», con una pregunta clara antes (20:25)
     $('#cm-eliminar').addEventListener('click', () => { cierraMenu(); const c = CONVS.get(ACTUAL); if (!c) return; const t = $('#h-eliminar-t'); if (t) t.textContent = T('¿Eliminar a {n}?').replace('{n}', nombreConv(c, true)); abreHoja('h-eliminar'); });
@@ -2799,6 +2891,13 @@
     try { await abriendo; } catch (_) {}
     revela();
     vigilaVersion();
+    // avisos con la app cerrada: el service worker; si se llega desde un aviso, a esa conversación; si ya hay permiso, la suscripción
+    registraSW().then(() => { if (permisoAvisos() === 'granted') sincronizaAvisos(); });
+    try {
+      const q = new URLSearchParams(location.search);
+      if (q.get('desde') === 'aviso') { const sala = q.get('sala'); history.replaceState(history.state, '', location.pathname + (q.get('app') === '1' ? '?app=1' : '') + location.hash); if (sala && CONVS.has(sala) && ACTUAL !== sala) abreConv(sala); }
+    } catch (_) {}
+    setTimeout(preguntaAvisos, 4000);
     // NÚCLEO guiado (ronda 63): «Tengo un código» llega con el campo del código abierto; «Crear una invitación», con la invitación
     // hecha en cuanto hay conexión (si ya hay una conversación en marcha, no se toca: solo se señala el botón). Una sola vez.
     try {

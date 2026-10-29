@@ -1328,7 +1328,7 @@ img,video,canvas,svg{-webkit-touch-callout:none;-webkit-user-drag:none}
 .porque:focus{outline:none}
 /* el lema bajo el título (29 Oct 2026, 09:50) */
 #inicio>.lema{margin:-4px 0 10px;max-width:520px;font:400 16px/1.5 var(--texto);color:#B9C6D2}
-@media (max-width:760px){#inicio>.lema{display:block;margin:0 0 18px;font-size:15.5px;line-height:1.5;color:#A9BCCB}}
+@media (max-width:760px){#inicio>.lema{display:block;margin:0 0 18px;font-size:16px;line-height:1.55;color:#B4C4D1}}
 /* orden y aire en el inicio del teléfono (dueño, 29 Oct 2026, 09:52: «que no haya apiñamientos»): todo cabe sin desplazar;
    «¿Por qué?» va pegado al idioma, a la derecha */
 @media (max-width:760px){
@@ -1336,7 +1336,7 @@ img,video,canvas,svg{-webkit-touch-callout:none;-webkit-user-drag:none}
   .barra .rele[hidden]~.idiomas{margin-left:0}
   .inicio .red-nucleo{width:min(22vh,200px);height:min(22vh,200px);margin-bottom:0}
   #inicio>h1{font-size:23px;margin:4px 0 10px}
-  #inicio>.lema{margin:0 0 14px;font-size:15px}
+  #inicio>.lema{margin:0 0 14px;font-size:15.5px}
   #paso-inicio{gap:12px}
 }
 @media (max-width:760px) and (max-height:700px){.inicio .red-nucleo{width:min(18vh,150px);height:min(18vh,150px)}#inicio>h1{font-size:21px}}
@@ -1429,3 +1429,25 @@ body.con-visor{overflow:hidden}
 .gc-llamada.con-video .ll-sas-texto{font-size:13px}
 .gc-llamada.con-video .ll-sas-botones .boton{min-height:40px;font-size:14px}
 @media (max-width:760px){.ll-sas{width:min(90vw,340px);padding:18px 16px 16px}.ll-sas-num{font-size:58px}}
+
+/* la hoja de avisos con la app cerrada */
+#h-avisos .avisos-icono{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:16px;background:rgba(156,195,228,.12);border:1px solid rgba(156,195,228,.28);color:#9CC3E4;margin:2px 0 10px}
+#h-avisos .avisos-icono svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+#h-avisos .gc-hoja-texto{margin:0 0 16px;font:400 15.5px/1.5 var(--texto);color:#dbe9f4}
+
+/* ---------- comodidad visual en el teléfono (dueño, 29 Oct 2026, 11:12: «que la persona esté a gusto dentro») ----------
+   Reglas: lo que se lee seguido, a 16 px o más con interlineado 1,45–1,55; lo secundario nunca por debajo de 13 px; contraste
+   alto sin blancos puros; aire entre bloques; una sola cosa que llame la atención por pantalla. */
+@media (max-width:760px){
+  .gc-burbuja{font-size:16px;line-height:1.45;padding:8px 12px 7px 13px;max-width:84%}
+  .gc-burbuja .gc-meta{font-size:11.5px}
+  .gc-nota-sistema{font-size:13.5px;line-height:1.45}
+  .gc-confianza{font-size:13px}
+  .gc-nombre{font-size:17px}
+  .fila-txt b{font-size:16px}
+  .fila-txt small{font-size:13.5px}
+  .gc-hoja-titulo{font-size:17px}
+  .gc-velo-texto b{font-size:15.5px}.gc-velo-texto small{font-size:13.5px}
+  .gc-archivo b{font-size:15px}.gc-archivo small{font-size:13px}.gc-archivo .sello{font-size:12.5px}
+  .ll-sas-texto{font-size:14.5px}
+}
