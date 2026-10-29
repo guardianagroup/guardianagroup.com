@@ -140,3 +140,47 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
 - En el móvil no se pueden bloquear las capturas de pantalla.
 - Con la app cerrada, una web no puede sonar como una llamada.
 - La encriptación no impide que quien recibe guarde copias ni protege un equipo ya comprometido.
+
+---
+
+# Añadido a las 11:45 (29 Oct 2026), sesión de la tarde
+
+## 9. Hecho y publicado hoy (main, commits a1f43758 → d34dab2e → b74a60a9)
+- **Pantalla de inicio**: botón «¿Por qué?» como pastilla con la palabra (sin icono «?»), titular «Encriptación de categoría
+  gubernamental para mensajes, llamadas y archivos», lema con «nadie más, ni nosotros», «Tus datos, bajo tu control» traducido,
+  ✓ azul al tirar para actualizar, tarjeta al compartir (og-comunicaciones.jpg), `?app=1` abre sola la guía de instalar.
+- **Teclado**: con `html.con-teclado` la barra de arriba se oculta y la cabecera del chat se compacta (CSS, app.css).
+- **Blindado** (app.js, llamada.js, index.html, app.css): lo que llega va **velado** (`m.velado`, burbuja `.gc-velada` con
+  Mostrar/Descartar; control `descartado`); **tiempo en pantalla** (`m.archivo.vida` = 'una' | 30 | 60 | 300; visor `#visor`;
+  controles `visto` y `borra`; `borrarPendientes` si la otra persona no está); **alarma** (`alarma(c, por)`, `ALARMA_INCIDENCIAS = 2`,
+  control `alarma`, pantalla `#alarma`); **paquete «todo o nada»** (AES-CTR con clave de un uso, `paq`, control `paquete` con la
+  pieza final = clave ⊕ SHA-256 de las piezas; `abrePaquete` en memoria o segunda pasada en disco; `completaRecepcion`);
+  **número de seguridad en la llamada** (ZRTP: P-256 con compromiso en la oferta, revelación `sas`, ligado a las huellas DTLS;
+  `#ll-sas` grande 40 s y píldora `#ll-sas-mini`; `o.sasOk` → `marcaVerificada`, `o.sasMal` → alarma en blindado / cuelga en normal).
+- **WhatsApp**: al volver no se abre el chat; se abre cuando la otra persona entra (`R.on('llega')`).
+- **Avisos con la app cerrada**: `zero-motor/avisos.js` (Web Push sin dependencias, VAPID en `datos-com/avisos/vapid.json`),
+  mensajes `avisos`/`despierta` en el relé (ya en producción: `/salud` → `com.avisos`), `orbita/comunicaciones/sw.js` (scope
+  `/orbita/comunicaciones/`, CSP `worker-src 'self'`), app.js: `puedePush`, `registraSW`, `suscribeAvisos`, `sincronizaAvisos`
+  (en 'hola' y en `pintaLista`), `despierta(c, tipo)` al escribir/llamar a quien no está, `despiertaLlamada` (la llamada
+  empieza sola al entrar, 45 s), hoja `#h-avisos` una vez, `?desde=aviso&sala=…` abre esa conversación. Comunicaciones usa
+  siempre el relé de Núremberg (una sola clave VAPID).
+- **Tonos**: timbre de madera F#5–D5, tono de red 425 Hz con armónico, aviso de mensaje de una nota (`urlTono`, `tonoWeb`, `avisaSonido`).
+- **Velocidad**: VENTANA 24 / VENTANA_B 48; relé RITMO_BPS 16 MB/s, RAFAGA 64 MB (normal).
+- **Letra**: IBM Plex Sans variable, un archivo por alfabeto + `fonts/IBMPlexSans-cyrillic.woff2` (ruso y checo ya con Plex).
+  El dueño decidió (11:11) quedarse con Plex. Espécimen y estudio de alternativas en el scratchpad de la sesión (no en el repo).
+- **Comodidad visual** en el teléfono: burbujas 16 px/1,45, filas 16 px, nada por debajo de 13 px (final de app.css).
+- Versiones: app.css o, app.js o, llamada.js o, idioma.js p74. Pruebas nuevas: `blindado.js`, `avisos.js`.
+
+## 10. En marcha al escribir esto
+- **42 idiomas en Comunicaciones**: faltaban ≈403 claves en 37 idiomas (`i18n/<code>.json`, el checo y el ruso están al día).
+  Se tradujeron por tandas (archivos `<code>.add.json` en el scratchpad) y se funden con un script; después `data-idiomas="todos"`
+  en comunicaciones/index.html y subir `?v` de idioma.js. Comprobación: ningún texto en español en una captura en cada idioma.
+- **Cuadro comparativo** en «¿Por qué?» (WhatsApp, Signal, Telegram, iMessage): hechos con fuentes en `comparativa/hechos.json`;
+  solo lo confirmado con fuente (regla de las dos voces); fuentes en terminos.html §6.
+- **Ultra** (de pago; normal y blindado gratis, dueño 11:15): propuesta enviada (doble camino por capas con los dos relés, puzle
+  repartido, cadencia constante, salas rotativas, 1 TB, prepago sin cuenta). Esperando el sí.
+- Después: participante en llamada/videollamada y chats de grupo (dueño 10:18–10:19), iPad con diseño de PC (10:53, «después»).
+
+## 11. Decisiones nuevas del dueño (29 Oct, tarde)
+- Normal y blindado gratis; Ultra de pago (11:15). Nada de mandar números por otro canal: la comprobación es el número de la
+  llamada (10:14–10:16). No añadir en Comunicaciones lo que no se pueda explicar con datos comprobables.
