@@ -248,3 +248,22 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
   proponer: «traspaso» del chat de Safari a la app (semilla nueva S2 por el canal cifrado + start_url / código de 9 cifras).
 - Actualización sola: `miraVersion` cada 3 min con la app a la vista, a los 20 s de abrir y al volver (si pasaron 15 s).
 - Pruebas: `eliminar.js` (nueva). Versiones: app.js y, app.css u, arranque.js k, rele.js n, idioma.js p80.
+
+## 15. Tramo 7 (15:10–15:50, main 5479e71d → f06fdd5d → 601df8c1) — llamadas y avisos coordinados
+- **Llamadas** (llamada.js): `seFue()/volvio()` (la llamada no se cuelga si la conexión del otro con el relé parpadea; sonando, 12 s de
+  margen; la oferta se reenvía con `ultimaOferta` al volver la sesión); `plat` en la oferta y VP8 entre iPhone y Android, H.264 entre
+  iPhones (`prefiereCodecs(perfil, vp8)`); 1080p en el teléfono (`VIDEO` por `TEL_UA`); `salidaDeSiempre()` (videollamada siempre por el
+  altavoz, `setSinkId('')` al empezar con imagen y al colgar); `auricularPrevio()` (`gcom-auricular` en localStorage, se aplica ANTES de
+  `medios()`); `giraCamara()` (botón `#ll-girar`, clase `.trasera` sin espejo); «Sonando…» (acto `sonando`); SIN_RESPUESTA 60 s;
+  reconexión 30 s; Wake Lock con imagen; tocar «Encriptada de extremo a extremo» enseña el detalle (`.ver-calidad`, códec que va y viene).
+- **Avisos**: relé `entrega()` → `avisos.avisa(sala, de.avisoId, 'mensaje')` si el receptor está `fuera` o lleva >25 s sin señal;
+  `presencia` también al entrar en la sala (los dos sentidos); página: `avisosFirma=''` en cada `hola` (reenvía la suscripción);
+  sw.js d: siempre `showNotification` (si no, iOS pone «Notificación»); página retira el aviso si ese chat está a la vista;
+  `avisaSonido()` solo con la app a la vista y suelta el AudioContext (evita el reproductor «(1) GUARDIANA» en la pantalla bloqueada).
+- **Estado**: `pareceEnLinea` y la cabecera tratan `suFuera` como «No conectado»; `presencia` repinta al momento.
+- **Chat fuerte**: `revisaEnvio` envía directo si `!extrasB(c)` (sin hoja «Tapar»); nota de voz: `voz:1` al recibir, sin «Guardar»,
+  `recibido` incluye `leido` en tarjetaArchivo, `.gc-archivo-voz .gc-voz` con ancho propio, truco `currentTime=1e101` para WebM sin
+  duración. «Mis chats» (`#ver-contactos`, `#contactos-t`). Tarjeta de llamada con clase `llam-aviso` (no `aviso`).
+- Estudio WhatsApp/Telegram: /tmp/…/scratchpad/llamadas-estudio.md (prioridades 1–10; hechas 1 parcial, 2, 3, 5 parcial, 7 parcial).
+  Pendiente: mala red → solo voz (4), botones Contestar/Rechazar en el aviso de llamada de Android (1), colgar con pulsación larga (7),
+  «Devolver llamada» desde el aviso (8).
