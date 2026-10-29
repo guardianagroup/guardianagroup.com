@@ -2078,6 +2078,11 @@
     const envia = async () => { if (grab) { paraGrabacion(true); return; } const c = CONVS.get(ACTUAL); const t = ta.value.replace(/\s+$/, ''); if (!c || !t) return; ta.value = ''; ajusta(); ta.dispatchEvent(new Event('input')); await enviaTexto(c, t); ta.focus(); };
     ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); envia(); } });
     $('#enviar').addEventListener('click', envia);
+    // al tocar «Enviar» se nota (29 Oct 2026, 07:53: «al tocarlo sepa uno que lo ha tocado»): se hunde y se oscurece mientras se
+    // pulsa y, en Android, un toque de vibración. Con clase y no con :active, que el iPhone no siempre pinta.
+    { const b = $('#enviar'); let t = null;
+      b.addEventListener('pointerdown', () => { clearTimeout(t); b.classList.add('pulsado'); try { if (navigator.vibrate) navigator.vibrate(8); } catch (_) {} });
+      for (const ev of ['pointerup', 'pointercancel', 'pointerleave']) b.addEventListener(ev, () => { clearTimeout(t); t = setTimeout(() => b.classList.remove('pulsado'), 140); }); }
     // el clip abre el menú; cada opción, su selector
     const menuAdj = $('#adjuntos');
     const cierraAdj = () => { menuAdj.hidden = true; $('#adjuntar').setAttribute('aria-expanded', 'false'); };

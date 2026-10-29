@@ -1138,6 +1138,15 @@ html.como-app .barra .barra-logo{width:26px;height:26px;flex:none;margin-left:-2
   .gc-hoja-titulo{font-size:19px}
   .gc-hoja-caja .boton{min-height:52px;font-size:16.5px;border-radius:14px}
 }
+/* El botón de enviar (dueño, 29 Oct 2026, 07:53: «Fíjate en la interfaz de otro… que se mueva lo mínimo posible y al tocarlo sepa
+   uno que lo ha tocado… que no se mezcle con el teclado»): como en WhatsApp, un círculo de color en el mismo sitio y del mismo tamaño
+   que el micrófono, con el avión de papel relleno; al pulsarlo se hunde y se oscurece. Con el teclado abierto, más aire por debajo,
+   lejos de la barra del iPhone (la del «✓», que cierra el teclado y no se puede quitar desde una web). */
+.gc-compositor #enviar,.gc-compositor #grabar{width:46px;height:46px}
+.gc-compositor #enviar{transition:transform .12s ease,background-color .12s ease,box-shadow .12s ease;box-shadow:0 4px 14px -6px rgba(156,195,228,.7)}
+.gc-compositor #enviar svg{width:23px;height:23px;fill:currentColor;stroke:none;transform:translateX(-1px)}
+.gc-compositor #enviar.pulsado{transform:scale(.86);background:#6F9FC8;box-shadow:none}
+@media (max-width:760px){html.con-teclado .gc-compositor{padding-bottom:12px}}
 /* «Invitar a chat» en el iPhone: «WhatsApp» u «Otra app», con el mismo aspecto que el menú del clip (dueño, 28 Oct 2026, 20:56:
    las invitaciones por WhatsApp llegaban 5 minutos tarde) */
 .hoja-invitar .gc-hoja-caja.caja{width:calc(100% - 16px);box-sizing:border-box;margin:0 8px calc(8px + env(safe-area-inset-bottom));padding:8px;gap:2px;border-radius:22px;border:1px solid rgba(156,195,228,.16);background:#111821}
