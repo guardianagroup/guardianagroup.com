@@ -38,7 +38,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261030u">
+<link rel="stylesheet" href="app.css?v=20261031b">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
 <script src="arranque.js?v=20261030k"></script>
@@ -161,9 +161,9 @@
     <!-- 29 Oct 2026, 07:37 (dueño): «En la pantalla inicial… dos botones, el de invitar a chat y debajo… contactos. Y en esos contactos
          los que yo tenga guardados para que les pueda hablar y llamar»: la lista ya no va en el inicio, sino aquí, con «‹» para volver -->
     <section class="contactos" id="contactos" aria-labelledby="contactos-t" hidden>
-      <div class="contactos-cab"><button type="button" class="contactos-atras" id="contactos-atras" aria-label="Volver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><h2 class="contactos-t" id="contactos-t">Contactos</h2><button type="button" class="contactos-editar" id="contactos-editar" aria-pressed="false" hidden>Editar</button></div>
+      <div class="contactos-cab"><button type="button" class="contactos-atras" id="contactos-atras" aria-label="Volver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><h2 class="contactos-t" id="contactos-t">Mis chats</h2><button type="button" class="contactos-editar" id="contactos-editar" aria-pressed="false" hidden>Editar</button></div>
       <ul class="contactos-filas" id="contactos-filas"></ul>
-      <p class="contactos-vacio" id="contactos-vacio" hidden><b>Aún no tienes contactos.</b><span>Cuando hables con alguien, guárdalo y saldrá aquí.</span></p>
+      <p class="contactos-vacio" id="contactos-vacio" hidden><b>Aún no tienes chats.</b><span>Cuando invites a alguien y te conteste, su chat saldrá aquí.</span></p>
     </section>
     <!-- «¿Cómo funciona?» en el móvil (dueño, 29 Oct 2026, 08:24 y 08:41): para quien lo lee por primera vez y se queda tranquilo.
          Solo lo que hace el código hoy; sin prometer protección absoluta -->
@@ -236,7 +236,8 @@
       <!-- dueño, 27 Oct 2026, 22:01–23:12: la blindada, «de la máxima»; algoritmos de la suite CNSA 2.0 -->
       <!-- 29 Oct 2026, 12:55–12:59 (dueño): el blindado, «próximamente»; en el ordenador, el botón queda como aviso -->
       <button type="button" class="grande blindada" id="nueva-blindada"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b><span class="solo-pc">Sesión blindada · próximamente</span><span class="solo-movil">Invitar a chat</span></b><small><span class="solo-pc">Algoritmos de la suite CNSA 2.0 y claves que se renuevan cada 5 minutos. Mientras llega, usa «Crear invitación».</span><span class="solo-movil">Mensajes y llamadas encriptados de extremo a extremo.</span></small></button>
-      <button type="button" class="grande" id="ver-contactos"><b>Contactos</b></button>
+      <!-- dueño, 29 Oct 2026, 15:36: «es mejor que diga chats, porque son los chats que tenemos ahí archivados» -->
+      <button type="button" class="grande" id="ver-contactos"><b>Mis chats</b></button>
       <!-- dueño, 29 Oct 2026, 08:24 y 08:41: «¿Cómo funciona?», un botón igual que «Contactos», debajo, con su propia pantalla -->
       <button type="button" class="grande" id="ver-como"><b>¿Cómo funciona?</b></button>
     </div>
@@ -694,9 +695,11 @@
   <audio id="a-remoto" autoplay></audio>
   <div class="gc-llamada-botones" id="ll-botones">
     <!-- Altavoz o auricular (dueño, 28 Oct 2026, 17:26): solo en el teléfono, donde el navegador deja elegir la salida -->
-    <div class="gc-llamada-boton" id="ll-altavoz-caja" hidden><button type="button" id="ll-altavoz" aria-pressed="false" aria-label="Poner el altavoz"><svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.2 6.6a7.6 7.6 0 0 1 0 10.8"/></svg></button><span>Altavoz</span></div>
-    <div class="gc-llamada-boton"><button type="button" id="ll-silenciar" aria-pressed="false" aria-label="Silenciar"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><span>Silenciar</span></div>
+    <div class="gc-llamada-boton" id="ll-altavoz-caja" hidden><button type="button" id="ll-altavoz" aria-pressed="false" aria-label="Poner el altavoz"><svg viewBox="0 0 24 24"><path class="relleno" d="M4.2 9h3.1l4.3-3.7c.5-.4 1.2 0 1.2.6v12.2c0 .6-.7 1-1.2.6L7.3 15H4.2a1.2 1.2 0 0 1-1.2-1.2v-3.6A1.2 1.2 0 0 1 4.2 9z"/><path d="M16 9.3a4 4 0 0 1 0 5.4M18.6 6.7a7.7 7.7 0 0 1 0 10.6"/></svg></button><span>Altavoz</span></div>
+    <div class="gc-llamada-boton"><button type="button" id="ll-silenciar" aria-pressed="false" aria-label="Silenciar"><svg viewBox="0 0 24 24"><rect class="relleno" x="9" y="2.8" width="6" height="11.2" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M9 21h6"/><path class="ic-raya" d="M4 4l16 16"/></svg></button><span>Silenciar</span></div>
     <div class="gc-llamada-boton" id="ll-camara-caja" hidden><button type="button" id="ll-camara" aria-pressed="false" aria-label="Apagar la cámara"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></svg></button><span>Cámara</span></div>
+    <!-- girar la cámara, delantera ↔ trasera, como en WhatsApp (dueño, 29 Oct 2026, 14:49): solo en el teléfono y con imagen -->
+    <div class="gc-llamada-boton" id="ll-girar-caja" hidden><button type="button" id="ll-girar" aria-label="Girar la cámara"><svg viewBox="0 0 24 24"><path d="M4 8.5h3l1.6-2.4h6.8L17 8.5h3a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a1 1 0 0 1 1-1z"/><path d="M9.2 13.4a2.9 2.9 0 0 1 5-1.9M14.8 13.6a2.9 2.9 0 0 1-5 1.9"/><path d="M14.4 9.9v1.8h-1.8M9.6 17.1v-1.8h1.8"/></svg></button><span>Girar</span></div>
     <div class="gc-llamada-boton" id="ll-ajustes-caja" hidden><button type="button" id="ll-ajustes-b" aria-pressed="false" aria-controls="ll-ajustes" aria-label="Voz e imagen"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button><span>Voz e imagen</span></div>
     <!-- en el blindado, con la llamada en marcha (29 Oct 2026, 07:51): la voz más grave y la imagen en mosaico, hechas en este equipo -->
     <div class="gc-llamada-boton ll-efecto" id="ll-grave-caja" hidden><button type="button" id="ll-grave" aria-pressed="false" aria-label="Voz grave"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h1.5M6.5 8.5v7M10 6v12M13.5 9v6M17 10.5v3"/><path d="M19.5 15.5l1.5 1.5 1.5-1.5M21 9.5V17"/></svg></button><span>Voz grave</span></div>
@@ -813,7 +816,7 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>No se puede capturar</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261029p80"></script>
+<script src="/orbita/static/idioma.js?v=20261029p82"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -823,7 +826,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261029b"></script>
-<script src="llamada.js?v=20261031a"></script>
-<script src="app.js?v=20261030z"></script>
+<script src="llamada.js?v=20261031c"></script>
+<script src="app.js?v=20261031b"></script>
 </body>
 </html>

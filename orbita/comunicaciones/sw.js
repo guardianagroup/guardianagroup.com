@@ -5,7 +5,7 @@
    «mensaje» o «llamada» y en qué sala; el contenido llega por el canal encriptado cuando se abre la app. No guarda nada, no
    intercepta ninguna petición y no manda nada a ningún sitio. */
 'use strict';
-const VERSION = 'gcom-sw-2026-10-29c';
+const VERSION = 'gcom-sw-2026-10-29d';
 self.addEventListener('install', () => { self.skipWaiting(); });
 self.addEventListener('activate', (e) => { e.waitUntil(self.clients.claim()); });
 
@@ -47,11 +47,10 @@ self.addEventListener('push', (e) => {
   const tipo = d.tipo === 'llamada' ? 'llamada' : 'mensaje', sala = salaOk(d.sala) ? d.sala : '';
   const t = textos();
   e.waitUntil((async () => {
-    // con la app abierta y a la vista, la propia página avisa (y el relé no manda el aviso si este equipo está en la sala)
+    // Siempre se enseña un aviso (iPhone: si el push no acaba en un aviso, el sistema pone uno genérico «Notificación»; 29 Oct 2026,
+    // 15:32). Con la app a la vista, la página lo retira en cuanto lee el mensaje (mensaje «cierra»).
     const cs = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
-    let aLaVista = false;
-    for (const c of cs) { try { c.postMessage({ t: 'aviso', tipo, sala }); if (c.visibilityState === 'visible' && c.focused) aLaVista = true; } catch (_) {} }
-    if (aLaVista && tipo === 'mensaje') return;
+    for (const c of cs) { try { c.postMessage({ t: 'aviso', tipo, sala }); } catch (_) {} }
     const op = {
       body: tipo === 'llamada' ? t.llamadaCuerpo : t.mensajeCuerpo, icon: '/icon-192.png?v=2', badge: '/icon-192.png?v=2',
       tag: 'gcom-' + tipo + '-' + sala.slice(0, 16), renotify: tipo === 'llamada', requireInteraction: tipo === 'llamada',

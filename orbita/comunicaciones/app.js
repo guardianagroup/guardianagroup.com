@@ -607,7 +607,8 @@
   // acaba de ir), «No conectado» sale sin esperar.
   let quietoHasta = 0, lineasPrevias = {};
   const quieto = (c) => !!c && ((Date.now() < quietoHasta && !c.salaSabida) || Date.now() < (c.quietoHasta || 0));
-  const pareceEnLinea = (c) => enLinea(c) || (quieto(c) && (c.vistoEnLinea !== undefined ? !!c.vistoEnLinea : !!(lineasPrevias[c.id] && lineasPrevias[c.id].en)));
+  // «En línea» es con la app a la vista: si la otra persona la deja en segundo plano (presencia «fuera»), ya no (15:19)
+  const pareceEnLinea = (c) => (enLinea(c) && !c.suFuera) || (!c.suFuera && quieto(c) && (c.vistoEnLinea !== undefined ? !!c.vistoEnLinea : !!(lineasPrevias[c.id] && lineasPrevias[c.id].en)));
   let repintaQuieto = 0;
   function alAcabarQuieto(ms) {
     clearTimeout(repintaQuieto);
@@ -624,7 +625,7 @@
   // antes de recargar: dónde se está (el chat abierto o los contactos) y lo que se ve en cada conversación, para volver igual
   // con la app fuera, la pantalla en la que estaba: si el teléfono la cierra, al abrirla en los 15 minutos siguientes se vuelve allí
   function guardaUltima() { try { const ini = $('#inicio'); const v = ACTUAL || (ini && ini.classList.contains('ver-contactos') ? 'contactos' : ''); if (v) localStorage.setItem('gcom-ultima', JSON.stringify({ v, t: Date.now() })); else localStorage.removeItem('gcom-ultima'); } catch (_) {} }
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') guardaUltima(); });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') { guardaUltima(); try { if (ctxAudio && ctxAudio.state === 'running' && !(LL && LL.ocupado)) ctxAudio.suspend().catch(() => {}); } catch (_) {} } });
   addEventListener('pagehide', guardaUltima);
   function guardaPantalla() {
     try { guardaBorrador(); } catch (_) {}
@@ -847,7 +848,7 @@
     if (!tam || trozos !== (Math.ceil(tam / TROZO) || 1) || !j.clave) { enviaControl(c, { tipo: 'archivo-cancel', id: j.id }); return; }
     const voz = j.voz === 1, custodia = ULTRA && j.v === 1 && !voz; // el comprobante de custodia, en Ultra (dueño, 29 Oct 2026, 12:52)
     const vida = j.vida === 'una' ? 'una' : [30, 60, 300].includes(+j.vida) ? +j.vida : undefined, paq = esB(c) && j.paq === 1;
-    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibiendo', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam, mime: String(j.mime || 'application/octet-stream').slice(0, 100), trozos, progreso: 0, aDisco: tam > MAX_MEMORIA || (conDisco() && tam > 32 * 1024 * 1024 && !vida), custodia: custodia ? 1 : undefined, vida, dur: Number.isFinite(+j.dur) && +j.dur > 0 ? Math.min(36000, Math.round(+j.dur)) : undefined, paq: paq ? 1 : undefined }, velado: extrasB(c) && !voz ? true : undefined };
+    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibiendo', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam, mime: String(j.mime || 'application/octet-stream').slice(0, 100), trozos, progreso: 0, aDisco: tam > MAX_MEMORIA || (conDisco() && tam > 32 * 1024 * 1024 && !vida), custodia: custodia ? 1 : undefined, voz: voz ? 1 : undefined, vida, dur: Number.isFinite(+j.dur) && +j.dur > 0 ? Math.min(36000, Math.round(+j.dur)) : undefined, paq: paq ? 1 : undefined }, velado: extrasB(c) && !voz ? true : undefined };
     const a = { envio: false, clave: await C.aes(C.deB64u(j.clave)), partes: null, escritor: null, siguiente: 0, tengo: 0, trozos, m, pendientes: new Map(), huella: window.GuardianaSHA256 ? GuardianaSHA256.crea() : null, hPtr: 0, paq, hPaq: paq ? GuardianaSHA256.crea() : null, trailer: null };
     c.archivos.set(m.id, a);
     const v = viajeNuevo(c, m, 'recibe'); v.voz = voz; v.custodia = voz ? 'voz' : custodia ? 'si' : 'no'; v.paisSuyo = regionValida(j.region); v.pq = !!(ses && ses.pq); v.sid = ses ? ses.sid : ''; v.sesionDesde = ses ? ses.desde : null;
@@ -1219,9 +1220,9 @@
     const l = m.llamada || {}, mia = m.dir === 'mia', v = !!l.video;
     let titulo, sub = '', clase = '';
     if (l.por === 'fin') { titulo = mia ? (v ? T('Videollamada saliente') : T('Llamada saliente')) : (v ? T('Videollamada entrante') : T('Llamada entrante')); sub = duracionLlamada(l.duracion) + (l.voz ? ' · ' + T('con cambio de voz') : ''); clase = 'hecha'; }
-    else if (l.por === 'ocupado') { titulo = T('Comunicando'); sub = T('Estaba en otra llamada'); clase = 'aviso'; }
-    else if (l.por === 'fallo') { titulo = v ? T('Videollamada interrumpida') : T('Llamada interrumpida'); sub = l.duracion ? duracionLlamada(l.duracion) : T('No se pudo conectar'); clase = 'aviso'; }
-    else if (l.por === 'sin-medios') { titulo = v ? T('Videollamada sin cámara') : T('Llamada sin micrófono'); sub = T('Falta el permiso del navegador'); clase = 'aviso'; }
+    else if (l.por === 'ocupado') { titulo = T('Comunicando'); sub = T('Estaba en otra llamada'); clase = 'llam-aviso'; }
+    else if (l.por === 'fallo') { titulo = v ? T('Videollamada interrumpida') : T('Llamada interrumpida'); sub = l.duracion ? duracionLlamada(l.duracion) : T('No se pudo conectar'); clase = 'llam-aviso'; }
+    else if (l.por === 'sin-medios') { titulo = v ? T('Videollamada sin cámara') : T('Llamada sin micrófono'); sub = T('Falta el permiso del navegador'); clase = 'llam-aviso'; }
     else if (mia) { titulo = l.yoColgue ? (v ? T('Videollamada cancelada') : T('Llamada cancelada')) : (v ? T('Videollamada sin respuesta') : T('Llamada sin respuesta')); clase = 'gris'; }
     else if (l.yoColgue) { titulo = v ? T('Videollamada rechazada') : T('Llamada rechazada'); clase = 'rechazada'; }
     else { titulo = v ? T('Videollamada perdida') : T('Llamada perdida'); sub = T('Toca el botón para devolverla'); clase = 'perdida'; }
@@ -1403,20 +1404,22 @@
     };
     // arriba: «Desconectado» hasta que la conversación con la otra persona está establecida; entonces «Conectado» (dueño, 20:21)
     R.on('abierto', () => { pintaBarra(); });
-    R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); sincronizaAvisos(); });
+    // en cada conexión nueva con el relé, la suscripción de avisos se presenta otra vez (el relé la guarda por conexión; 15:40: «emisor y
+    // receptor tienen que estar coordinados»)
+    R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); avisosFirma = ''; sincronizaAvisos(); });
     // la otra persona se va a segundo plano o vuelve (el relé lo cuenta): con «fuera», la llamada también la avisa el teléfono
-    R.on('presencia', (m) => { const c = m && CONVS.get(m.sala); if (!c) return; c.suFuera = m.fuera === 1; });
+    R.on('presencia', (m) => { const c = m && CONVS.get(m.sala); if (!c || (c.suId && m.quien !== c.suId)) return; c.suFuera = m.fuera === 1; c.quietoHasta = 0; pintaCabecera(c); pintaLista(); pintaContactos(); });
     R.on('despierta', (m) => { ultimoDespierta = m; if (m && m.tipo === 'llamada' && (m.avisados | 0) === 0) aviso(T('La otra persona no tiene los avisos activados: solo le llegará con GUARDIANA abierta.')); });
     R.on('avisos', (m) => { ultimoAvisos = m; });
     R.on('cerrado', () => { quietoTodas(4000); pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; c.salaSabida = false; pintaCabecera(c); } pintaLista(); });
     setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
     // con la otra persona en la sala, el tiempo de acordar las claves, quieta; sin ella (y si no se acaba de ir), «No conectado» ya
     R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; c.salaSabida = true; if (c.suId && miembros.includes(c.suId)) quietoConv(c, 6000); if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); pintaCabecera(c); pintaLista(); pintaContactos(); });
-    R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) { c.sesion = null; if (c.huella) quietoConv(c, 6000); enCola(c, () => presentaX(c, null, true)); } pintaCabecera(c); pintaLista();
+    R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) c.suFuera = false; if (!c.suId || c.suId === quien) { c.sesion = null; if (c.huella) quietoConv(c, 6000); enCola(c, () => presentaX(c, null, true)); } pintaCabecera(c); pintaLista();
       // la invitación que salió por WhatsApp: el chat se abre cuando la otra persona entra, si no se está en otra conversación
       if (c.compartido && !c.huella && c.rol === 'invita' && (!ACTUAL || !CONVS.has(ACTUAL)) && !document.body.classList.contains('en-llamada')) abreConv(c.id); });
     // si la otra persona se va, puede que solo esté recargando: unos segundos sin cambiar nada
-    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; quietoConv(c, 6000); vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.seFue(); } pintaCabecera(c); pintaLista(); }); // ya no cuelga: ver seFue (llamada.js)
+    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) c.suFuera = false; if (c.suId === quien) { c.sesion = null; quietoConv(c, 6000); vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.seFue(); } pintaCabecera(c); pintaLista(); }); // ya no cuelga: ver seFue (llamada.js)
     R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Este chat se ha abierto en otro sitio (otra pestaña o la app): sigue allí.')); });
     // Las tramas de una conversación se procesan en orden (una detrás de otra): así un trozo de archivo nunca
     // adelanta al anuncio del archivo, ni un mensaje a la presentación que abre su sesión.
@@ -1624,7 +1627,7 @@
     pintaEspera(c);
     if (window.pintaBarra) pintaBarra();
     // el estado de la otra persona tal como se enseña: el de verdad o, mientras la conversación está quieta, lo de antes (null)
-    const estado = !c.huella ? null : !R.abierto ? 'sin-conexion' : !c.miembros.has(c.suId) ? 'no-conectado' : !c.sesion || !c.sesion.confirmada ? 'conectando' : 'en-linea';
+    const estado = !c.huella ? null : !R.abierto ? 'sin-conexion' : !c.miembros.has(c.suId) || c.suFuera ? 'no-conectado' : !c.sesion || !c.sesion.confirmada ? 'conectando' : 'en-linea';
     const quieta = !!c.huella && estado !== 'en-linea' && quieto(c);
     if (c.huella && !quieta) c.vistoEnLinea = estado === 'en-linea';
     if (ACTUAL !== c.id) return;
@@ -1649,7 +1652,7 @@
     // en el teléfono, debajo del nombre, como WhatsApp: «En línea» o «No conectado», sin jerga ni el ámbar de «pendiente de
     // verificar», que parecía un error (revisión de diseño, 28 Oct 2026, 19:15). La seguridad y la verificación siguen en «⋯».
     if (movil && c.huella && !(c.ocupada && !c.huella)) {
-      txt = !R.abierto ? T('Sin conexión') : !c.miembros.has(c.suId) ? T('No conectado') : !c.sesion || !c.sesion.confirmada ? T('Conectando…') : T('En línea');
+      txt = !R.abierto ? T('Sin conexión') : !c.miembros.has(c.suId) || c.suFuera ? T('No conectado') : !c.sesion || !c.sesion.confirmada ? T('Conectando…') : T('En línea');
     }
     // quieta (tras recargar, un corte de un momento o la otra persona recargando): lo mismo que se veía; recién abierta, lo de antes
     // de recargar; y si no hay nada, la línea vacía, que guarda su sitio (app.css) y no mueve el nombre
@@ -1783,22 +1786,24 @@
     const pr = m.archivo.progreso || 0;
     s.textContent = tamano(m.archivo.tam) + (m.estado === 'fallo' ? ' · ' + (m.archivo.motivo || T('no se completó')) : pr < 1 && (m.estado === 'recibiendo' || m.estado === 'enviado') ? ' · ' + Math.round(pr * 100) + ' %' : m.estado === 'pendiente' ? ' · ' + T('pendiente') : m.archivo.enDisco ? ' · ' + T('guardado en tu disco') : '');
     // la nota de voz es solo su reproductor (dueño, 29 Oct 2026, 12:03): sin nombre de archivo, tamaño ni botones de archivo
+    if (!m.archivo.voz && /^audio\//.test(m.archivo.mime || '') && /^(Nota de voz|nota-de-voz|Voice note|Голосов|Hlasov)/i.test(m.archivo.nombre || '')) m.archivo.voz = 1;
     if (m.archivo.voz && (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido' || m.estado === 'enviado' || m.estado === 'descartado')) { b.hidden = true; s.hidden = true; ic.hidden = true; }
     d.append(ic, b, s);
     const enCurso = m.estado !== 'fallo' && pr < 1 && m.estado !== 'pendiente';
     if (enCurso) { const p = document.createElement('span'); p.className = 'gc-progreso'; const i = document.createElement('i'); i.style.width = Math.round(pr * 100) + '%'; p.append(i); d.append(p); }
-    const conVida = !!m.archivo.vida, temporalVivo = conVida && m.dir === 'suya' && m.estado === 'recibido' && !m.archivo.caducado;
+    const recibido = m.dir === 'suya' && (m.estado === 'recibido' || m.estado === 'leido'); // (29 Oct 2026, 15:24: al leerla, la nota de voz recibida salía como archivo)
+    const conVida = !!m.archivo.vida, temporalVivo = conVida && recibido && !m.archivo.caducado;
     if (conVida) { const se = document.createElement('span'); se.className = 'sello vida'; se.textContent = (m.archivo.caducado ? '✓ ' + T('Visto y borrado') : m.archivo.vistoBorrado ? '✓ ' + T('Visto y borrado en el otro equipo') : m.archivo.vida === 'una' ? '⏱ ' + T('Se ve una vez y se borra') : '⏱ ' + T('Se ve {s} y se borra').replace('{s}', m.archivo.vida >= 60 ? (m.archivo.vida / 60) + ' min' : m.archivo.vida + ' s')); d.append(se); if (m.archivo.caducado || m.archivo.vistoBorrado) d.classList.add('caducado'); }
     else if ((ULTRA || extrasB(CONVS.get(m.conv))) && !m.archivo.voz && (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido')) { const se = document.createElement('span'); se.className = 'sello'; se.textContent = '✓ ' + T('Completo y autenticado: encriptado de extremo a extremo') + (m.archivo.paq ? ' · ' + T('paquete «todo o nada»') : ''); d.append(se); }
     else if (m.estado === 'fallo' && /alterados/.test(m.archivo.motivo || '')) { const se = document.createElement('span'); se.className = 'sello mal'; se.textContent = '✕ ' + T('Detenido: no superó la autenticación'); d.append(se); }
     const fila = document.createElement('div'); fila.className = 'fila';
     if (m.dir === 'suya' && m.estado === 'recibiendo' && m.archivo.aDisco && !m.archivo.enDisco) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton principal'; g.textContent = T('Guardar en…'); g.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) eligeDestino(c, m); }); fila.append(g); }
     if (temporalVivo) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton principal'; g.textContent = T('Ver'); g.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) veTemporal(c, m); }); fila.append(g); }
-    else if (!conVida && ((m.dir === 'suya' && m.estado === 'recibido' && !m.archivo.enDisco) || (m.dir === 'mia' && /^(image|audio)\//.test(m.archivo.mime)))) {
+    else if (!conVida && ((recibido && !m.archivo.enDisco) || (m.dir === 'mia' && /^(image|audio)\//.test(m.archivo.mime)))) {
       // el reproductor se conserva entre repintados (al pasar a «entregado» o «leído» la tarjeta se vuelve a pintar y, si no, la nota se cortaba a mitad)
       if (/^audio\//.test(m.archivo.mime)) { const ya = VOZ_CACHE.get(m.id); if (ya) d.prepend(ya); else BD.saca('arch', m.id).then((r) => { if (!r) return; let el = VOZ_CACHE.get(m.id); if (!el) { el = reproductorVoz(m, r.blob); VOZ_CACHE.set(m.id, el); } if (!el.isConnected) d.prepend(el); }); }
       if (/^image\//.test(m.archivo.mime) && m.archivo.tam < 24 * 1024 * 1024) { BD.saca('arch', m.id).then((r) => { if (!r) return; const img = document.createElement('img'); img.className = 'imagen'; img.alt = m.archivo.nombre; img.src = URL.createObjectURL(r.blob); img.style.gridColumn = '1 / -1'; img.addEventListener('click', () => abreArchivo(m, false)); d.prepend(img); }); }
-      if (m.dir === 'suya' && !m.archivo.voz) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton'; g.textContent = T('Guardar'); g.addEventListener('click', () => abreArchivo(m, true)); fila.append(g); }
+      if (m.dir === 'suya' && !m.archivo.voz && !/^audio\//.test(m.archivo.mime)) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton'; g.textContent = T('Guardar'); g.addEventListener('click', () => abreArchivo(m, true)); fila.append(g); }
     }
     // en el teléfono, «Ver el viaje» cuando el archivo ya ha llegado (20:19); en el ordenador, también mientras viaja
     const llego = m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido';
@@ -1833,7 +1838,11 @@
     const para = () => { cancelAnimationFrame(raf); b.innerHTML = PLAY; b.setAttribute('aria-label', T('Reproducir')); d.classList.remove('sonando'); pinta(); if (vozSonando === au) { vozSonando = null; try { if (navigator.mediaSession) { navigator.mediaSession.playbackState = 'none'; navigator.mediaSession.metadata = null; } } catch (_) {} } };
     // en el iPhone, lo que suena sale en la pantalla bloqueada: que diga «Nota de voz · GUARDIANA» y no el título de la pestaña
     const sesionMedios = () => { try { if (navigator.mediaSession && window.MediaMetadata) { navigator.mediaSession.metadata = new MediaMetadata({ title: T('Nota de voz'), artist: 'GUARDIANA' }); navigator.mediaSession.playbackState = 'playing'; navigator.mediaSession.setActionHandler('play', () => { const p = au.play(); if (p && p.catch) p.catch(() => {}); }); navigator.mediaSession.setActionHandler('pause', () => au.pause()); for (const a of ['seekbackward', 'seekforward', 'seekto', 'previoustrack', 'nexttrack']) { try { navigator.mediaSession.setActionHandler(a, null); } catch (_) {} } } } catch (_) {} };
-    au.addEventListener('loadedmetadata', pinta); au.addEventListener('durationchange', pinta);
+    // las notas grabadas en Android (WebM de MediaRecorder) llegan sin duración y sin índice: el navegador no deja saltar a un punto.
+    // El truco de siempre: pedir el final (calcula la duración) y volver al principio, antes de que suene nada
+    let ajustando = false;
+    au.addEventListener('loadedmetadata', () => { if (au.duration === Infinity && au.paused) { ajustando = true; try { au.currentTime = 1e101; } catch (_) { ajustando = false; } } pinta(); });
+    au.addEventListener('durationchange', () => { if (ajustando && Number.isFinite(au.duration)) { ajustando = false; try { au.currentTime = 0; } catch (_) {} } pinta(); });
     au.addEventListener('play', () => { if (vozSonando && vozSonando !== au) { try { vozSonando.pause(); } catch (_) {} } vozSonando = au; sesionMedios(); b.innerHTML = PAUSA; b.setAttribute('aria-label', T('Pausa')); d.classList.add('sonando'); cancelAnimationFrame(raf); raf = requestAnimationFrame(bucle); });
     au.addEventListener('pause', para); au.addEventListener('ended', () => { try { au.currentTime = 0; } catch (_) {} para(); });
     au.addEventListener('error', () => { t.textContent = T('No se puede reproducir'); b.disabled = true; });
@@ -2041,10 +2050,17 @@
   // El «pip» de mensaje nuevo (dueño, 28 Oct 2026, 15:03: «un pequeño pip si le escribo un mensaje»): dos notas cortas y suaves.
   // El contexto de sonido se desbloquea con el primer toque o tecla en la página, para que el pip suene también con
   // GUARDIANA minimizada o en otra pestaña (los navegadores no dejan sonar nada antes de un gesto de la persona).
+  // Con la app fuera de la vista, ningún sonido de la página (dueño, 29 Oct 2026, 15:34: en el iPhone de su mujer salía en la pantalla
+  // bloqueada un reproductor «(1) GUARDIANA» con ▶ y ±10 s en vez del aviso): en el iPhone, cualquier sonido de una página en segundo
+  // plano se convierte en «Ahora suena». Fuera de la vista avisa el teléfono (el aviso del sistema, con su sonido). Y tras cada «toc»,
+  // el audio de la página se suelta para que no quede nada en la pantalla bloqueada.
+  let sueltaAudioT = null;
   function avisaSonido() {
+    if (document.visibilityState !== 'visible') return;
     try {
       ctxAudio = ctxAudio || new (window.AudioContext || window.webkitAudioContext)();
       if (ctxAudio.state === 'suspended') ctxAudio.resume().catch(() => {});
+      clearTimeout(sueltaAudioT); sueltaAudioT = setTimeout(() => { try { if (ctxAudio && ctxAudio.state === 'running' && !(LL && LL.ocupado)) ctxAudio.suspend().catch(() => {}); if (navigator.mediaSession && !vozSonando) { navigator.mediaSession.metadata = null; navigator.mediaSession.playbackState = 'none'; } } catch (_) {} }, 1500);
       // el aviso de mensaje (dueño, 29 Oct 2026, 10:02: «de calidad», no «sonido de niño»): una sola nota de madera (C6 con sus
       // armónicos, cola de medio segundo) y, 60 ms después, una quinta por debajo, más baja: un «toc» cálido, sin pitidos
       const t = ctxAudio.currentTime + 0.01;
@@ -2252,7 +2268,12 @@
     if (!('serviceWorker' in navigator)) return null;
     try {
       swReg = await navigator.serviceWorker.register(SW_URL, { scope: '/orbita/comunicaciones/' });
-      navigator.serviceWorker.addEventListener('message', (e) => { const d = e.data || {}; if (d.t === 'abre' && d.sala && CONVS.has(d.sala) && ACTUAL !== d.sala) abreConv(d.sala); });
+      navigator.serviceWorker.addEventListener('message', (e) => {
+        const d = e.data || {};
+        if (d.t === 'abre' && d.sala && CONVS.has(d.sala) && ACTUAL !== d.sala) abreConv(d.sala);
+        // el aviso de un push que llega con ese chat a la vista: se retira enseguida (el mensaje se lee aquí)
+        if (d.t === 'aviso' && d.sala && d.tipo === 'mensaje' && ACTUAL === d.sala && document.visibilityState === 'visible') setTimeout(() => retiraAvisos(d.sala), 1200);
+      });
       return swReg;
     } catch (_) { return null; }
   }
@@ -2770,6 +2791,9 @@
     const revisaEnvio = (c, fs) => {
       fs = fs.filter((f) => f && f.size);
       if (!c || !fs.length) return;
+      // chat fuerte (el normal): la foto o el archivo se envía directo, sin hoja ni «Tapar» (dueño, 29 Oct 2026, 15:29: «cuando se envía
+      // una foto, se envía directa… elimínalo… normal, clásico y sencillo»). La hoja con «Tapar» y el tiempo, solo en el blindado
+      if (!extrasB(c)) { enviaArchivos(c, fs); return; }
       sueltaEnvio();
       const urls = [], lista = $('#envio-lista');
       for (const f of fs) {

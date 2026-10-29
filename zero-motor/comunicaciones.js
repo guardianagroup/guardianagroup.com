@@ -139,6 +139,11 @@ class Rele {
     s.set(yo, c); c.salas.add(sala); c.yo.set(sala, yo);
     c.ws.json({ t: 'sala', sala, miembros: this.otros(sala, yo) });
     for (const [id, otro] of s) if (id !== yo && otro !== c) { try { otro.ws.json({ t: 'llega', sala, quien: yo }); } catch (_) {} }
+    // la presencia «fuera» (app en segundo plano), en los dos sentidos: quien entra la sabe de los demás y los demás, la suya
+    for (const [id, otro] of s) if (id !== yo && otro !== c) {
+      if (otro.fuera) { try { c.ws.json({ t: 'presencia', sala, quien: id, fuera: 1 }); } catch (_) {} }
+      if (c.fuera) { try { otro.ws.json({ t: 'presencia', sala, quien: yo, fuera: 1 }); } catch (_) {} }
+    }
   }
 
   invita(c, m) {
@@ -243,8 +248,10 @@ class Rele {
     if (!a.ws.abierto) return;
     if (a.ws.atraso > ATASCO) { try { de.ws.json({ t: 'atasco', sala, quien: id }); } catch (_) {} return; }
     try { a.ws.send(salida); } catch (_) {}
-    // con la app en segundo plano, además, el aviso al teléfono (el relé no sabe qué es: «mensaje nuevo»; las llamadas las avisa quien llama)
-    if (a.fuera && this.avisos && a.avisoId) { try { this.avisos.avisaA(sala, a.avisoId, 'mensaje'); } catch (_) {} }
+    // Con la app en segundo plano (presencia «fuera») o dormida (el teléfono congela la página y deja de hacer ping: más de 25 s sin
+    // señal), además, el aviso al teléfono (el relé no sabe qué es: «mensaje nuevo»; las llamadas las avisa quien llama). Va a todas las
+    // suscripciones de la sala menos la de quien manda: así no depende de que esta conexión haya vuelto a presentar la suya.
+    if (this.avisos && (a.fuera || Date.now() - a.vivo > 25 * 1000)) { try { this.avisos.avisa(sala, de.avisoId || null, 'mensaje'); } catch (_) {} }
   }
   presencia(c, m) {
     const fuera = m.fuera === 1;

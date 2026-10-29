@@ -3354,7 +3354,14 @@
 "Se borra el chat aquí y en el teléfono de la otra persona. Para volver a hablar, tendréis que invitaros otra vez.":"Чат удаляется здесь и на телефоне собеседника. Чтобы снова общаться, нужно будет пригласить друг друга заново.",
 "Chat eliminado.":"Чат удалён.",
 "Volver a enviar":"Отправить снова",
-"Invitación enviada · esperando":"Приглашение отправлено · ожидание"
+"Invitación enviada · esperando":"Приглашение отправлено · ожидание",
+"Girar la cámara":"Сменить камеру",
+"Girar":"Сменить",
+"Sonando…":"Идёт вызов…",
+"Chats":"Чаты",
+"Aún no tienes chats.":"У вас пока нет чатов.",
+"Cuando invites a alguien y te conteste, su chat saldrá aquí.":"Когда вы пригласите кого-то и он ответит, его чат появится здесь.",
+"Mis chats":"Мои чаты"
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

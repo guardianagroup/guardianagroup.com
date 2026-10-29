@@ -3354,7 +3354,14 @@
 "Se borra el chat aquí y en el teléfono de la otra persona. Para volver a hablar, tendréis que invitaros otra vez.":"Chat se smaže tady i v telefonu druhé osoby. Abyste spolu znovu mluvili, budete se muset znovu pozvat.",
 "Chat eliminado.":"Chat smazán.",
 "Volver a enviar":"Poslat znovu",
-"Invitación enviada · esperando":"Pozvánka odeslána · čeká se"
+"Invitación enviada · esperando":"Pozvánka odeslána · čeká se",
+"Girar la cámara":"Otočit kameru",
+"Girar":"Otočit",
+"Sonando…":"Vyzvání…",
+"Chats":"Chaty",
+"Aún no tienes chats.":"Zatím nemáte žádné chaty.",
+"Cuando invites a alguien y te conteste, su chat saldrá aquí.":"Až někoho pozvete a odpoví vám, jeho chat se objeví tady.",
+"Mis chats":"Moje chaty"
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

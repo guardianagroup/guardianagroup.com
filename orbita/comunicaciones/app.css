@@ -608,7 +608,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 /* colores de los resúmenes (agencia, ronda 74): perdida y rechazada en coral; cancelada y sin respuesta en gris; comunicando,
    interrumpida y sin permiso en ámbar; contestada con la flecha en verde */
 .gc-llam.gris .gc-llam-ico{background:rgba(169,179,190,.12);color:#A9B3BE}
-.gc-llam.aviso .gc-llam-ico{background:rgba(240,199,127,.13);color:#F0C77F}
+.gc-llam.llam-aviso .gc-llam-ico{background:rgba(240,199,127,.13);color:#F0C77F}
 .gc-llam.rechazada .gc-llam-ico{background:rgba(224,122,108,.14);color:#E07A6C}
 .gc-llam.mal .gc-llam-ico{background:rgba(240,199,127,.13);color:#F0C77F}
 /* aviso dentro de Instagram, Facebook o TikTok (agencia, ronda 74) */
@@ -1551,3 +1551,23 @@ body.con-visor{overflow:hidden}
 /* la nota de quien espera en el chat, con «Volver a enviar» debajo */
 .gc-espera{display:grid;justify-items:center;gap:8px}
 .gc-espera-otra{appearance:none;border:1px solid rgba(156,195,228,.3);border-radius:999px;background:transparent;color:#9CC3E4;font:600 14px/1 var(--texto);padding:9px 16px;min-height:40px;cursor:pointer}
+/* con la cámara trasera, tu imagen sin espejo (como WhatsApp) */
+.gc-llamada .videos #v-local.trasera{transform:none}
+/* tocando «Encriptada de extremo a extremo» en la llamada: el detalle de la conexión, también en el teléfono */
+@media (max-width:760px){.gc-llamada.ver-calidad .gc-llamada-arriba{flex-wrap:wrap}.gc-llamada.ver-calidad .gc-llamada-arriba #ll-calidad{display:block!important;order:3;flex:1 0 100%;text-align:center;font-size:12px;padding:6px 10px;border-radius:12px;background:rgba(10,14,20,.7);color:#E8EEF4}}
+/* Botones de la llamada como en WhatsApp y Telegram (dueño, 29 Oct 2026, 15:18: «el botón, una vez que le damos al altavoz… que lo
+   profesionalices»): iconos rellenos, círculo translúcido; activo (altavoz puesto, micrófono silenciado, cámara apagada), círculo
+   blanco con el icono oscuro y el rótulo en blanco; al tocar, se hunde un poco; el cambio, suave */
+.gc-llamada-boton button{transition:background-color .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .1s ease;-webkit-tap-highlight-color:transparent}
+.gc-llamada-boton button:active{transform:scale(.93)}
+.gc-llamada-boton button svg .relleno{fill:currentColor;stroke:none}
+.gc-llamada-boton button svg{stroke-width:2}
+.gc-llamada:not(.con-video) .gc-llamada-boton:not(.gc-colgar):not(.gc-contestar) button:not([aria-pressed="true"]){background:rgba(232,236,241,.12);border-color:transparent}
+.gc-llamada-boton button[aria-pressed="true"],.gc-llamada.con-video .gc-llamada-boton button[aria-pressed="true"]{background:#F4F6F8;color:#0A0E14;border-color:#F4F6F8;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.gc-llamada-boton button[aria-pressed="true"]+span{color:#F4F6F8;font-weight:600}
+#ll-silenciar .ic-raya{display:none}
+#ll-silenciar[aria-pressed="true"] .ic-raya{display:inline;stroke-width:2.2}
+/* la nota de voz con su barra de verdad (dueño, 29 Oct 2026, 15:24: en el teléfono la barra se quedaba en 0 de ancho y solo se veían el
+   botón, el punto y el tiempo): el reproductor tiene un ancho propio, como la burbuja de audio de WhatsApp */
+.gc-archivo-voz .gc-voz{width:min(68vw,280px);min-width:200px}
+@media (min-width:761px){.gc-archivo-voz .gc-voz{width:300px}}

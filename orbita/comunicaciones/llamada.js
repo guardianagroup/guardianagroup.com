@@ -102,6 +102,7 @@
       $('#ll-avatar').textContent = o.inicial();
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
+      { const g = $('#ll-girar-caja'); if (g) g.hidden = !(video && cam && TEL_UA && camaraOn()); }
       $('#ll-imagenes').hidden = !(video && blindada());
       // 29 Oct 2026, 07:51 (dueño): «La opción… mosaico y… la voz, en el chat normal no quiero que esté. Solamente… en el blindado dos
       // opciones… la voz en modo grave y el mosaico… dos botones… muy profesionales cuando se abra… Antes no quiero que se vean»:
@@ -180,7 +181,7 @@
     // 11:31 (dueño: «que se escuche»): un solo contexto de audio para los tonos, que se desbloquea con el primer toque o tecla
     // en la página (el iPhone solo deja arrancar el audio desde un gesto; así el timbre suena aunque la llamada llegue sin
     // tocar nada), más volumen, 425 Hz para el tono de llamada (el de España y buena parte de América) y vibración en Android.
-    const SIN_RESPUESTA_MS = 45000;
+    const SIN_RESPUESTA_MS = 60000; // 60 s sonando (WhatsApp y Telegram dejan sonar más de 45 s; estudio del 29 Oct 2026)
     let tonoCtx = null, tonoSalida = null, tonoReloj = null, sinRespuesta = null, tonoSuena = false;
     const tonoNodos = new Set();
     function ctxTonos() {
@@ -370,16 +371,34 @@
     // auricular como salida (setSinkId) quita la opción «altavoz por defecto» de la sesión de audio y pone el modo de voz; el botón
     // solo sale si el iPhone enseña las dos salidas (iOS 26). Si en su teléfono no cambia, se vuelve a apagar aquí.
     const ELIGE_SALIDA = true;
+    // La videollamada, siempre por el altavoz y sin botón (dueño, 29 Oct 2026, 15:21: «en la videollamada tienes que quitar la opción
+    // del altavoz y ya tiene que venir automáticamente en altavoz… la escucho muy flojito»). El auricular elegido en una llamada de voz
+    // se quedaba como salida (WebKit lo recuerda) y la videollamada siguiente sonaba por el auricular, muy bajo: al empezar cada
+    // videollamada y al colgar cualquier llamada, la salida vuelve a la de siempre (sinkId vacío: el altavoz del iPhone).
+    // La llamada de voz, por el auricular desde el principio (dueño, 29 Oct 2026, 15:23: «sale en altavoz directamente… aunque lo cambie a
+    // normal sigue en altavoz»). En el iPhone (WebKit), la salida elegida solo cuenta cuando arranca el audio de la llamada: se elige el
+    // auricular de la llamada anterior ANTES de abrir el micrófono. La primera vez no se conoce: se aprende y vale desde la siguiente.
+    async function auricularPrevio() {
+      let id = null; try { id = localStorage.getItem('gcom-auricular'); } catch (_) {}
+      if (!id || !TACTIL || !ELIGE_SALIDA) return;
+      for (const el of [$('#a-remoto'), elRuta]) {
+        try { if (el && typeof el.setSinkId === 'function' && el.sinkId !== id) await el.setSinkId(id); }
+        catch (e) { if (e && e.name === 'NotFoundError') { try { localStorage.removeItem('gcom-auricular'); } catch (_) {} } return; }
+      }
+    }
+    async function salidaDeSiempre() {
+      for (const el of [$('#a-remoto'), elRuta]) { try { if (el && typeof el.setSinkId === 'function' && el.sinkId) await el.setSinkId(''); } catch (_) {} }
+    }
     async function buscaSalidas() {
       salidas = null;
-      if (!ELIGE_SALIDA) return;
+      if (!ELIGE_SALIDA || video) { if (video) await salidaDeSiempre(); return; }
       try {
         const ar = $('#a-remoto');
         if (!TACTIL || !ar || typeof ar.setSinkId !== 'function' || !navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return;
         const ds = (await navigator.mediaDevices.enumerateDevices()).filter((d) => d.kind === 'audiooutput' && d.deviceId && d.deviceId !== 'default' && d.deviceId !== 'communications' && d.label);
         if (ds.some((d) => EXTERNA.test(d.label))) return;
         const alt = ds.filter((d) => ES_ALTAVOZ.test(d.label)), aur = ds.filter((d) => !ES_ALTAVOZ.test(d.label));
-        if (alt.length === 1 && aur.length === 1) salidas = { altavoz: alt[0].deviceId, auricular: aur[0].deviceId };
+        if (alt.length === 1 && aur.length === 1) { salidas = { altavoz: alt[0].deviceId, auricular: aur[0].deviceId }; try { localStorage.setItem('gcom-auricular', salidas.auricular); } catch (_) {} }
       } catch (_) { salidas = null; }
     }
     // El botón no cambiaba nada y la llamada de voz empezaba en altavoz (dueño, 28 Oct 2026, 20:21 y 20:31: «Tienes que arreglarla,
@@ -465,7 +484,7 @@
     // al colgar o al conectar unos auriculares: fuera el botón y el silencio. La salida elegida se queda para la próxima llamada
     // (la de voz, por el auricular, sin depender de un toque); las notas de voz y el timbre no la usan.
     function restableceSalida() {
-      salidas = null; pintaAltavoz(); quitaRuta();
+      salidas = null; pintaAltavoz(); quitaRuta(); salidaDeSiempre();
     }
     function pintaAltavoz() {
       const c = $('#ll-altavoz-caja'), b = $('#ll-altavoz'); if (!c || !b) return;
@@ -744,7 +763,7 @@
       pc.onicecandidate = (e) => { if (e.candidate) o.manda({ acto: 'ice', id: idLlamada, cand: e.candidate.toJSON() }); };
       pc.onconnectionstatechange = () => {
         if (!pc) return;
-        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); recuperada(); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); avisaSalida(); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); sasCalcula(); pintaSas(); } }
+        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); recuperada(); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); avisaSalida(); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); sasCalcula(); pintaSas(); pideWake(); } }
         else if (pc.connectionState === 'failed') { di(t('Conexión interrumpida, intentando recuperarla…'), true); reconecta('fallo'); }
         else if (pc.connectionState === 'disconnected') { di(t('Conexión interrumpida, intentando recuperarla…'), true); reconecta('corte'); }
       };
@@ -761,7 +780,7 @@
     let reiniciando = false, reinicioT = null, reinicioFin = null, ultimoReinicio = 0;
     function reconecta(por) {
       if (!pc || estado !== 'hablando') return;
-      if (!reinicioFin) reinicioFin = setTimeout(() => { reinicioFin = null; if (pc && estado === 'hablando' && pc.connectionState !== 'connected') termina('fallo'); }, 20000);
+      if (!reinicioFin) reinicioFin = setTimeout(() => { reinicioFin = null; if (pc && estado === 'hablando' && pc.connectionState !== 'connected') termina('fallo'); }, 30000); // 30 s intentándolo
       // en un corte, un par de segundos por si la red vuelve sola; en un fallo, ya
       clearTimeout(reinicioT);
       reinicioT = setTimeout(() => reiniciaIce(), por === 'fallo' ? 0 : 2500);
@@ -773,6 +792,11 @@
       if (inicioYo) { reiniciando = true; try { pc.restartIce(); } catch (_) { reiniciando = false; } }
       else o.manda({ acto: 'reinicia', id: idLlamada });
     }
+    // Con imagen, la pantalla no se apaga sola mientras dura la videollamada (Screen Wake Lock); al volver a la app se pide otra vez
+    let wake = null;
+    async function pideWake() { try { if (!video || estado !== 'hablando' || wake || !navigator.wakeLock) return; wake = await navigator.wakeLock.request('screen'); wake.addEventListener('release', () => { wake = null; }); } catch (_) { wake = null; } }
+    function sueltaWake() { try { if (wake) wake.release(); } catch (_) {} wake = null; }
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') pideWake(); });
     function recuperada() { reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null; if (paso.textContent === t('Conexión interrumpida, intentando recuperarla…')) di(''); }
     // al volver la red o cambiar de wifi a datos, la ruta se renegocia enseguida
     addEventListener('online', () => { if (estado === 'hablando') reconecta('fallo'); });
@@ -876,6 +900,7 @@
       desbloquea();
       estado = 'saliente'; inicioYo = true; idLlamada = Math.random().toString(36).slice(2, 10); colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver'); pinta();
       di(video ? t('Pidiendo la cámara y el micrófono…') : t('Pidiendo el micrófono…'));
+      if (video) await salidaDeSiempre(); else await auricularPrevio(); // la salida, antes de que arranque el audio de la llamada
       try { await medios(video); } catch (_) { di(t('Sin permiso para el micrófono.'), true); return termina('sin-medios', 1800); }
       altavoz = !!video; await buscaSalidas(); preparaRuta(); await aplicaSalida();
       nuevaPc();
@@ -910,9 +935,11 @@
         sas = null; await sasNuevo(); if (sas) { try { sas.suCompromiso = typeof m.sas === 'string' && m.sas.length < 64 ? deB64u(m.sas) : null; } catch (_) { sas.suCompromiso = null; } if (!sas.suCompromiso || sas.suCompromiso.length !== 32) sas = null; }
         video = m.video === 1 || /\nm=video /.test(m.sdp); suCamara = true; remotoV = null;
         di(video ? t('Videollamada entrante') : t('Llamada entrante')); pinta(); tono('entrante'); esperaRespuesta(false);
+        o.manda({ acto: 'sonando', id: idLlamada }); // a quien llama: «Sonando…» (ya ha llegado a este teléfono), como Telegram y WhatsApp
         return;
       }
       if (m.id && idLlamada && m.id !== idLlamada) return;
+      if (m.acto === 'sonando') { if (estado === 'saliente') di(t('Sonando…')); return; }
       if (m.acto === 'respuesta' && pc && typeof m.sdp === 'string') { paraTono(); clearTimeout(sinRespuesta); await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = []; di(t('Conectando…')); if (video) topeVideo();
         if (sas && inicioYo) { try { sas.suPub = typeof m.sas === 'string' && m.sas.length < 120 ? deB64u(m.sas) : null; } catch (_) { sas.suPub = null; } if (sas.suPub && sas.suPub.length === 65) { o.manda({ acto: 'sas', id: idLlamada, p: b64u(sas.pub) }); sasCalcula(); } else { sas.estado = 'roto'; pintaSas(); } }
         return; }
@@ -931,6 +958,7 @@
       if (estado !== 'entrante' || !ofertaEntrante) return;
       const m = ofertaEntrante; ofertaEntrante = null; estado = 'conectando'; paraTono(); clearTimeout(sinRespuesta); efectosPorDefecto(); desbloquea(); pinta();
       di(video ? t('Pidiendo la cámara y el micrófono…') : t('Pidiendo el micrófono…'));
+      if (video) await salidaDeSiempre(); else await auricularPrevio();
       try { await medios(video); } catch (_) { di(t('Sin permiso para el micrófono.'), true); o.manda({ acto: 'colgar', id: idLlamada }); return termina('sin-medios', 1800); }
       altavoz = !!video; await buscaSalidas(); preparaRuta(); await aplicaSalida();
       nuevaPc();
@@ -954,7 +982,7 @@
     function colgar() { if (estado === 'libre') return; colgoYo = true; o.manda({ acto: 'colgar', id: idLlamada }); termina(estado === 'hablando' ? 'fin' : estado === 'entrante' ? 'rechazada' : 'cancelada'); }
     function termina(por, espera) {
       const dur = iniciada ? Date.now() - iniciada : 0, era = estado, conImagen = video;
-      paraTono(); clearTimeout(sinRespuesta); clearTimeout(ausenteT); ausenteT = null; ultimaOferta = null;
+      paraTono(); clearTimeout(sinRespuesta); clearTimeout(ausenteT); ausenteT = null; ultimaOferta = null; sueltaWake();
       clearInterval(reloj); reloj = null; clearInterval(sondeo); sondeo = null;
       reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null;
       if (pc) { try { pc.close(); } catch (_) {} pc = null; }
@@ -965,7 +993,7 @@
       if (proc) { proc.parar(); proc = null; }
       clearInterval(medidor); medidor = null; if (vCam) { vCam.srcObject = null; vCam.remove(); vCam = null; } ganancia = 1; ajustes = false;
       mic = null; envio = null; cam = null; nodo = null; if (ctx) { try { ctx.close(); } catch (_) {} ctx = null; }
-      $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; remotoV = null; suCamara = true; video = false;
+      $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; $('#v-local').classList.remove('trasera'); try { mirando = 'user'; } catch (_) {} remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
       pendientes = []; ofertaEntrante = null; iniciada = 0; partidaPorDefecto = true;
       sas = null; caja.classList.remove('sas-plegado', 'sas-grande'); clearTimeout(sasPlegadoT); pintaSas();
@@ -1008,7 +1036,33 @@
     for (const b of document.querySelectorAll('#ll-voces [data-voz]')) b.addEventListener('click', () => { if (estado === 'entrante') pinta(); });
     // la calidad: corta en pantalla («Conexión: excelente»); al tocarla, los datos técnicos
     calidad.addEventListener('click', () => { calidad.classList.toggle('ver'); if (calidad.dataset.largo) calidad.textContent = calidad.classList.contains('ver') ? calidad.dataset.largo : (calidad.dataset.corto || ''); });
+    // en el teléfono la calidad solo sale si la conexión es débil; tocando «Encriptada de extremo a extremo» se ve el detalle (la
+    // resolución y el formato de la imagen que va y viene), para mandar una captura si algo falla (29 Oct 2026, 15:20)
+    { const ci = document.querySelector('#gc-llamada .gc-llamada-cifrado') || document.querySelector('.gc-llamada-cifrado'); if (ci) { ci.style.cursor = 'pointer'; ci.addEventListener('click', () => { const on = !caja.classList.contains('ver-calidad'); caja.classList.toggle('ver-calidad', on); calidad.classList.toggle('ver', on); if (calidad.dataset.largo) calidad.textContent = on ? calidad.dataset.largo : (calidad.dataset.corto || ''); }); } }
     // cámara encendida o apagada durante la videollamada; la otra persona lo sabe por el canal encriptado
+    // Girar la cámara (dueño, 29 Oct 2026, 14:49: «como WhatsApp»): la delantera o la trasera, sin cortar la llamada. Primero se suelta
+    // la que hay (muchos teléfonos no abren dos a la vez) y se pide la otra; si no se puede, se vuelve a la de antes.
+    let mirando = 'user', girando = false;
+    async function giraCamara() {
+      if (!cam || !video || girando || estado === 'libre') return;
+      girando = true;
+      const quiero = mirando === 'user' ? 'environment' : 'user';
+      const pide = async (cara) => { try { return await navigator.mediaDevices.getUserMedia({ video: Object.assign({}, VIDEO, { facingMode: { exact: cara } }) }); } catch (_) { return navigator.mediaDevices.getUserMedia({ video: Object.assign({}, VIDEO, { facingMode: cara }) }); } };
+      const viejo = cam.getVideoTracks()[0], encendida = !viejo || viejo.enabled;
+      try { if (viejo) viejo.stop(); } catch (_) {}
+      let s = null, cara = quiero;
+      try { s = await pide(quiero); } catch (_) { try { s = await pide(mirando); cara = mirando; } catch (e) { s = null; } }
+      const nueva = s && s.getVideoTracks()[0];
+      if (nueva && estado !== 'libre') {
+        nueva.enabled = encendida; try { nueva.contentHint = 'motion'; } catch (_) {}
+        cam = new MediaStream([nueva]); mirando = cara;
+        if (vCam) { vCam.srcObject = new MediaStream([nueva]); reproduce(vCam); }
+        await aplicaImagen();
+        const vl = $('#v-local'); if (vl) vl.classList.toggle('trasera', mirando === 'environment');
+      } else if (s) s.getTracks().forEach((x) => x.stop());
+      girando = false; pinta();
+    }
+    { const b = $('#ll-girar'); if (b) b.addEventListener('click', () => { giraCamara(); }); }
     $('#ll-camara').addEventListener('click', () => { if (!cam) return; const on = !camaraOn(); cam.getVideoTracks().forEach((x) => { x.enabled = on; }); o.manda({ acto: 'camara', id: idLlamada, on }); pintaVideo(); });
     $('#ll-mini').addEventListener('click', () => pequena(true));
     $('#ll-volver').addEventListener('click', () => pequena(false));

@@ -64,6 +64,11 @@ const estadoVoz = (p, sel) => p.evaluate((s) => { const d = document.querySelect
   const a1 = await estadoVoz(A, '.gc-mia .gc-voz');
   comprueba(a1 && a1.sonando && !a1.paused && a1.cur > 0.3, 'A: quien la envió también la oye (' + (a1 && a1.t) + ')');
   await fotoDestapada(A, '41-A-voz-propia');
+  // 15:24: al volver a abrir el chat (la nota ya leída), seguía saliendo como archivo («Nota de voz 15.16 (0_05).webm · 53 KB»)
+  await B.reload(); await espera(3000);
+  if (await B.$('#conv[hidden]')) { if (await B.$('#ver-contactos:visible')) { await B.click('#ver-contactos'); await espera(400); } const f = await B.$('#contactos-filas button[data-id]:not([data-acto])'); if (f) { await f.click(); await espera(1500); } }
+  comprueba(await hasta(B, () => !!document.querySelector('.gc-suya .gc-voz') && !document.querySelector('.gc-suya .gc-archivo-voz > b:not([hidden])'), 8000), 'B: al volver a abrir el chat, la nota leída sigue con su reproductor (sin nombre ni tamaño)');
+  comprueba(await B.evaluate(() => ![...document.querySelectorAll('.gc-suya .gc-archivo button')].some((x) => /Guardar/.test(x.textContent))), 'B: sin «Guardar» en la nota de voz (15:17)');
   await browser.close();
   console.log(fallos.length ? 'FALLOS: ' + fallos.length : 'TODO BIEN'); process.exit(fallos.length ? 1 : 0);
 })();
