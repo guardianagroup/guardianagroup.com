@@ -20,7 +20,9 @@
   // Hasta 4K cuando la cámara y la red lo dan (dueño, 29 Oct 2026, 09:48: «cuando la conexión sea muy buena… incluso a 4K»): se
   // pide la máxima resolución de la cámara y el navegador baja sola (resolución antes que fluidez) cuando la red o el procesador
   // no llegan; el tope de caudal es el de una 4K a 30 imágenes. El relé de llamadas (coturn) deja 32 Mb/s por sentido.
-  const VIDEO = { width: { ideal: 3840 }, height: { ideal: 2160 }, frameRate: { ideal: 30, max: 30 }, facingMode: 'user' };
+  // (en el teléfono, hasta 1080p: la 4K no la decodifican muchos Android y calienta el teléfono; ver TEL más abajo)
+  const TEL_UA = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || '') || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform || ''));
+  const VIDEO = TEL_UA ? { width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 30, max: 30 }, facingMode: 'user' } : { width: { ideal: 3840 }, height: { ideal: 2160 }, frameRate: { ideal: 30, max: 30 }, facingMode: 'user' };
   const MAX_BPS_VIDEO = 20000000;
   // «Tu imagen» (dueño, 28 Oct 2026: que no puedan tener «nuestro rostro, ni el iris, ni el reconocimiento facial»).
   // Como el cambio de voz, se hace aquí, antes de encriptar: cada imagen de la cámara se reduce a una cuadrícula de pocos
@@ -43,6 +45,9 @@
   const UA = navigator.userAgent || '';
   const COMPATIBLE = /Android|iPhone|iPad|iPod/i.test(UA) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform || '')) || (/Safari\//.test(UA) && !/Chrome|Chromium|CriOS|Edg|OPR|Firefox|FxiOS/.test(UA));
   const EQUIPO = COMPATIBLE ? 'compatible' : 'escritorio';
+  // el sistema de cada lado viaja en la oferta: entre iPhone y Android, VP8 (dueño, 29 Oct 2026, 13:09 y 14:13: del iPhone al Android
+  // la imagen llegaba en negro con H.264; el H.264 de Safari y el decodificador de algunos Android no se entienden). Entre iPhones, H.264.
+  const PLAT = /iPhone|iPad|iPod/i.test(UA) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform || '')) ? 'ios' : /Android/i.test(UA) ? 'android' : 'otro';
   // Sonido (dueño, 28 Oct 2026, 12:12: «al máximo nivel… reducción de ruido o alta fidelidad»): micrófono a 48 kHz con la
   // cancelación de eco, la reducción de ruido y el control de volumen del navegador, y su aislamiento de voz donde lo tenga
   // (si no lo tiene, se ignora). En la llamada, Opus de banda completa hasta 96 kb/s con corrección de errores: ver altaFidelidad.
@@ -655,7 +660,7 @@
       agregaMuda();
     }
     // Códecs de imagen por orden de calidad para el mismo caudal: VP9, H.264, VP8 y AV1 (este, el último: exige mucho al procesador)
-    function prefiereCodecs(perfil) {
+    function prefiereCodecs(perfil, vp8) { // vp8: VP8 el primero (entre sistemas distintos o con Android)
       try {
         const caps = raiz.RTCRtpReceiver && RTCRtpReceiver.getCapabilities && RTCRtpReceiver.getCapabilities('video'); if (!caps || !caps.codecs) return;
         // solo códecs que este equipo sabe también enviar (algunos Android reciben H.264 pero no lo codifican)
@@ -663,14 +668,14 @@
         const tipo = (c) => String(c.mimeType).toLowerCase(), auxiliar = /\/(rtx|red|ulpfec|flexfec)$/i;
         const envia = env && env.codecs ? new Set(env.codecs.map(tipo)) : null;
         if (envia) { const f = caps.codecs.filter((c) => auxiliar.test(c.mimeType) || envia.has(tipo(c))); if (f.some((c) => !auxiliar.test(c.mimeType))) caps.codecs = f; }
-        const pesos = perfil === 'escritorio' ? { 'video/vp9': 0, 'video/h264': 1, 'video/vp8': 2, 'video/av1': 3 } : { 'video/h264': 0, 'video/vp8': 1, 'video/vp9': 2, 'video/av1': 3 };
+        const pesos = perfil === 'escritorio' ? { 'video/vp9': 0, 'video/h264': 1, 'video/vp8': 2, 'video/av1': 3 } : vp8 ? { 'video/vp8': 0, 'video/h264': 1, 'video/vp9': 2, 'video/av1': 3 } : { 'video/h264': 0, 'video/vp8': 1, 'video/vp9': 2, 'video/av1': 3 };
         // Entre teléfonos, primero el H.264 «constrained baseline» (42e0…, packetization-mode=1), el que todo WebRTC sabe codificar y
         // decodificar; después VP8; los demás perfiles de H.264 (High, Main), después. Dueño, 29 Oct 2026, 13:09: del iPhone al
         // Android la imagen llegaba en negro (el iPhone ofrecía primero H.264 High, que ese Android no decodifica); al revés sí.
         const perfilH264 = (c) => { const m = /profile-level-id=([0-9a-f]{6})/i.exec(c.sdpFmtpLine || ''); return m ? m[1].toLowerCase() : ''; };
         const peso = (c) => {
           const t = tipo(c), base = pesos[t] ?? 4;
-          if (perfil === 'escritorio' || t !== 'video/h264') return base * 10;
+          if (perfil === 'escritorio' || t !== 'video/h264' || vp8) return base * 10;
           const pl = perfilH264(c), pm1 = /packetization-mode=1/i.test(c.sdpFmtpLine || '');
           return /^42e0/.test(pl) && pm1 ? 0 : /^42/.test(pl) ? 1 : 10 * pesos['video/vp8'] + 5; // los otros perfiles, detrás de VP8
         };
@@ -878,8 +883,8 @@
       di(t('Llamando…'));
       const of = await pc.createOffer(); await pc.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
       await sasNuevo();
-      ultimaOferta = { acto: 'oferta', id: idLlamada, video: video ? 1 : undefined, equipo: EQUIPO, sas: sas ? b64u(sas.compromiso) : undefined };
-      o.manda({ acto: 'oferta', id: idLlamada, sdp: pc.localDescription.sdp, video: video ? 1 : undefined, equipo: EQUIPO, sas: sas ? b64u(sas.compromiso) : undefined });
+      ultimaOferta = { acto: 'oferta', id: idLlamada, video: video ? 1 : undefined, equipo: EQUIPO, plat: PLAT, sas: sas ? b64u(sas.compromiso) : undefined };
+      o.manda({ acto: 'oferta', id: idLlamada, sdp: pc.localDescription.sdp, video: video ? 1 : undefined, equipo: EQUIPO, plat: PLAT, sas: sas ? b64u(sas.compromiso) : undefined });
       if (estado === 'saliente') { tono('saliente'); esperaRespuesta(true); }
       pinta();
     }
@@ -935,7 +940,10 @@
       agregaMuda();
       await pc.setRemoteDescription({ type: 'offer', sdp: m.sdp });
       // la respuesta decide el códec de los dos sentidos: si cualquiera de los dos es teléfono o Safari, los compatibles
-      if (video) prefiereCodecs(EQUIPO === 'compatible' || m.equipo === 'compatible' ? 'compatible' : 'escritorio');
+      // quien contesta decide el códec de los dos sentidos: con un Android en la llamada (o de quien llama no se sabe el sistema y aquí
+      // es Android), VP8; entre iPhones, H.264
+      const suPlat = typeof m.plat === 'string' ? m.plat : '', vp8 = PLAT === 'android' || suPlat === 'android' || (!!suPlat && suPlat !== PLAT);
+      if (video) prefiereCodecs(EQUIPO === 'compatible' || m.equipo === 'compatible' ? 'compatible' : 'escritorio', vp8);
       for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = [];
       const an = await pc.createAnswer(); await pc.setLocalDescription({ type: an.type, sdp: altaFidelidad(an.sdp) });
       o.manda({ acto: 'respuesta', id: idLlamada, sdp: pc.localDescription.sdp, sas: sas ? b64u(sas.pub) : undefined });
