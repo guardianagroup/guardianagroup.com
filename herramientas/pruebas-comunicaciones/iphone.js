@@ -64,9 +64,8 @@ async function telefono(browser, nombre, app) {
 
   // 2. La app añadida arranca con esa dirección: el chat nace dentro de la app
   await App.goto(await Saf.evaluate(() => location.href)); await espera(2200);
-  comprueba(await visible(App, '#aceptar-si'), 'app: arranca con la invitación («¿Aceptas?»)');
-  await App.click('#aceptar-si'); await espera(1500);
-  comprueba(await App.evaluate(() => window.gcomPrueba.cuantas() === 1), 'app: el chat nace dentro de la app');
+  comprueba(!(await visible(App, '#aceptar-si')), 'app: al estrenarla no pregunta «¿Aceptas?» (dueño, 18:54: el mínimo de pasos)');
+  comprueba(await App.evaluate(() => window.gcomPrueba.cuantas() === 1) && await visible(App, '#conv'), 'app: el chat nace dentro de la app y se abre solo');
   comprueba(await hasta(A, () => { const c = window.gcomPrueba.conv(); return !!(c && c.huella && c.sesion); }, 14000), 'los dos conectados por el chat de la app');
   await foto(App, '82-app-chat');
 

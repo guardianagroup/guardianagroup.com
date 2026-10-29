@@ -3258,6 +3258,9 @@
       revela();
       muestraIOS(true, location.href);
     }
+    // la app recién añadida a la pantalla de inicio desde una invitación (arranca con «?app=1#i=…»): el chat se abre solo, sin «¿Aceptas?»
+    // (dueño, 29 Oct 2026, 18:01–18:54: «el mínimo de pasos»; ya aceptó al añadirla)
+    else if (/#[ib]=/.test(location.hash) && comoApp() && new URLSearchParams(location.search).get('app') === '1') { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     else if (/#[ib]=/.test(location.hash)) { const ok = await preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     else {
       // tras recargar (tirar para actualizar o actualizarse sola), a la misma pantalla: el mismo chat o los contactos
