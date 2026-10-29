@@ -53,7 +53,8 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   const texto = decodeURIComponent((/text=([^&]*)/.exec(wa) || [])[1] || '');
   console.log('     whatsapp:', texto.replace(/#b=.*/, '#b=…'));
   comprueba(/^whatsapp:\/\/send\?text=/.test(wa), 'abre whatsapp://send con el texto');
-  comprueba(/^Invitación a un chat de GUARDIANA\n(https:\/\/guardianagroup\.com|http:\/\/127\.0\.0\.1:8080)\/orbita\/comunicaciones\/#i=[A-Za-z0-9_-]{43}$/.test(texto), 'el texto: la frase y el enlace del chat normal (el de entrada)');
+  // 29 Oct 2026, 13:14 (dueño): «la invitación a chat es grandísima, tiene que ser súper minimalista»: la frase mínima y el enlace corto
+  comprueba(/^Invitación a GUARDIANA\n(https:\/\/guardianagroup\.com|http:\/\/127\.0\.0\.1:8080)\/chat\/#i=[A-Za-z0-9_-]{43}$/.test(texto), 'el texto: «Invitación a GUARDIANA» y el enlace corto /chat/#i=', texto.split('\n')[0]);
   comprueba(await visible(A, '#h-invitar'), 'mientras WhatsApp no se abre, la hoja sigue');
   // otro toque en «WhatsApp»: la misma invitación (no se crea otra que dejaría el primer enlace sin valor)
   await A.click('#invitar-wa'); await espera(900);
@@ -64,8 +65,9 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   await vuelve(A); await espera(400);
   // 29 Oct 2026, 12:50 (dueño): al volver de WhatsApp, quien invita ya está dentro del chat, esperando («automático y rápido»; sin
   // saltos: el chat se abre mientras la app está fuera). Antes, 10:38, se volvía al inicio.
-  const cab = await A.evaluate(() => { const e = document.querySelector('#cconfianza'); return e ? e.textContent : ''; });
-  comprueba(await visible(A, '#texto') && /Invitación enviada|esperando/i.test(cab), 'al volver: ya dentro del chat, esperando a la otra persona (12:50)', cab);
+  // (13:20: en la cabecera, solo «Chat», sin «Invitación enviada»; lo que pasa se dice en una nota dentro del chat)
+  const cab = await A.evaluate(() => ({ linea: (document.querySelector('#cconfianza') || {}).textContent || '', nota: (document.querySelector('#mensajes .gc-espera') || {}).textContent || '' }));
+  comprueba(await visible(A, '#texto') && cab.linea === '' && /Invitación enviada/.test(cab.nota), 'al volver: ya dentro del chat, con la nota de espera y la cabecera limpia (12:50, 13:20)', cab);
   comprueba(!/Invitación enviada\. En cuanto la otra persona la abra/.test(await aviso(A)), 'al volver: sin aviso de más (ya está en el chat)', await aviso(A));
   await A.screenshot({ path: path.join(OUT, '2-vuelta.png') });
 
@@ -98,7 +100,7 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   comprueba(await D.evaluate(() => /Próximamente/.test(document.querySelector('#tipo-blindado').textContent) && document.querySelector('#tipo-normal').getAttribute('aria-checked') === 'true'), 'Android: «Chat blindado · Próximamente», y el normal sigue marcado');
   await D.click('#invitar-wa'); await espera(900);
   const waD = decodeURIComponent((/text=([^&]*)/.exec(D.__wa[D.__wa.length - 1] || '') || [])[1] || '');
-  comprueba(/^Invitación a un chat de GUARDIANA\n.*#i=[A-Za-z0-9_-]{43}$/.test(waD), 'Android, por WhatsApp: la frase y el enlace del chat normal «#i=»', waD.split('\n')[0]);
+  comprueba(/^Invitación a GUARDIANA\n.*\/chat\/#i=[A-Za-z0-9_-]{43}$/.test(waD), 'Android, por WhatsApp: la frase corta y el enlace «/chat/#i=»', waD.split('\n')[0]);
 
   await browser.close();
   console.log(fallos.length ? 'FALLOS: ' + fallos.length : 'TODO BIEN');

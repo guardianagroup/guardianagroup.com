@@ -3338,6 +3338,11 @@
     "Seguir en Safari": ["Continue in Safari", "Continuar no Safari"],
     "Invitación enviada. En cuanto la otra persona la abra, el chat empieza aquí.": ["Invitation sent. As soon as the other person opens it, the chat starts here.", "Convite enviado. Assim que a outra pessoa abrir, o chat começa aqui."],
     "Gratis · próximamente": ["Free · coming soon", "Grátis · em breve"],
+    "Chat fuerte": ["Strong chat", "Chat forte"],
+    "Fuerte": ["Strong", "Forte"],
+    "Invitación a GUARDIANA": ["Invitation to GUARDIANA", "Convite para o GUARDIANA"],
+    "Para lo delicado. Todo lo del fuerte y, además: identidad nueva en cada conversación, claves que se renuevan cada 5 minutos, pantalla velada, mosaico y voz grave en las videollamadas, y autodestrucción ante un ataque.": ["For sensitive matters. Everything in the strong chat plus: a new identity in every conversation, keys renewed every 5 minutes, a veiled screen, mosaic and deep voice in video calls, and self-destruction under attack.", "Para o delicado. Tudo do forte e, além disso: identidade nova em cada conversa, chaves renovadas a cada 5 minutos, tela velada, mosaico e voz grave nas videochamadas, e autodestruição diante de um ataque."],
+    "Hoy está disponible el chat Fuerte. Blindado y Ultra están en preparación: lo que figura aquí es lo previsto y se irá activando por tramos. Fuerte y Blindado son gratis.": ["The Strong chat is available today. Shielded and Ultra are in preparation: what appears here is what is planned and will be switched on in stages. Strong and Shielded are free.", "Hoje está disponível o chat Forte. Blindado e Ultra estão em preparação: o que aparece aqui é o previsto e será ativado por etapas. Forte e Blindado são grátis."],
     "Hoy está disponible el chat Normal. Blindado y Ultra están en preparación: lo que figura aquí es lo previsto y se irá activando por tramos. Normal y Blindado son gratis.": ["The Normal chat is available today. Shielded and Ultra are in preparation: what appears here is what is planned and will be switched on in stages. Normal and Shielded are free.", "Hoje está disponível o chat Normal. Blindado e Ultra estão em preparação: o que aparece aqui é o previsto e será ativado por etapas. Normal e Blindado são grátis."],
   };
   const PAISES_EXTRA = { 'Yahoo Japón': ['Yahoo Japan', 'Yahoo Japão'] };

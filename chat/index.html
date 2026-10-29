@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>GUARDIANA</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#06080C">
+<!-- La dirección corta de las invitaciones a un chat (dueño, 29 Oct 2026, 13:14: «la invitación a chat es grandísima, tiene que ser
+     súper minimalista»). La invitación va en el fragmento (#i=…), que el navegador nunca manda al servidor: esta página solo pasa a
+     Comunicaciones con ese mismo fragmento. La tarjeta que enseñan WhatsApp y otras apps al compartir el enlace sale de estas
+     etiquetas, sin imagen, para que ocupe lo mínimo. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GUARDIANA">
+<meta property="og:title" content="GUARDIANA">
+<meta property="og:description" content="Chat y llamadas encriptados de extremo a extremo.">
+<meta property="og:url" content="https://guardianagroup.com/chat/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GUARDIANA">
+<meta name="twitter:description" content="Chat y llamadas encriptados de extremo a extremo.">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+html{background:#06080C;color:#E8EEF4}
+body{margin:0;min-height:100vh;display:grid;place-items:center;font:400 17px/1.5 -apple-system,"Segoe UI",Roboto,sans-serif;text-align:center;padding:24px}
+a{color:#9CC3E4}
+p{margin:6px 0}
+</style>
+</head>
+<body>
+<p>Abriendo GUARDIANA…</p>
+<p><a id="seguir" href="/orbita/comunicaciones/">Si no se abre sola, toca aquí.</a></p>
+<script>
+(function () {
+  var destino = '/orbita/comunicaciones/' + (location.hash || '');
+  var a = document.getElementById('seguir'); if (a) a.href = destino;
+  try { location.replace(destino); } catch (e) { location.href = destino; }
+})();
+</script>
+</body>
+</html>

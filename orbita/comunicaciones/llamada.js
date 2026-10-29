@@ -360,9 +360,11 @@
     const TACTIL = !!(raiz.matchMedia && raiz.matchMedia('(pointer: coarse)').matches);
     const EXTERNA = /airpods|bluetooth|beats|head ?phone|head ?set|auriculares|cascos|casque|kopfh|cuffie|fones|carplay|airplay|usb|hdmi|\btv\b/i;
     const ES_ALTAVOZ = /speaker|altavoz|alto-?falante|haut-?parleur|lautsprecher|altoparlante|luidspreker|h[øö]gtalare|h[øo]jttaler|h[øo]yttaler|kaiutin|g[łl]o[śs]nik|reproduktor|hangsz[óo]r[óo]|difuzor|hoparl[öo]r|динамик|гучномовець|ηχείο|רמקול|مكبر|スピーカー|扬声器|揚聲器|스피커|ลำโพง|loa ngoài|pembesar suara/i;
-    // Fuera el botón «Altavoz» (dueño, 28 Oct 2026, 21:49: «No funciona»; 21:50: «Déjalo solamente con videollamada»): la
-    // videollamada suena por donde decide el teléfono (el altavoz, como FaceTime). Lo de abajo se queda para retomarlo.
-    const ELIGE_SALIDA = false;
+    // El botón «Altavoz» se quitó el 28 Oct 2026 (21:49: «No funciona»; 21:50: «Déjalo solamente con videollamada»). Vuelve el 29 Oct
+    // (13:06: «se me pone en altavoz directo, pero no hay tecla para cambiar de altavoz a normal»). En Safari (WebKit), elegir el
+    // auricular como salida (setSinkId) quita la opción «altavoz por defecto» de la sesión de audio y pone el modo de voz; el botón
+    // solo sale si el iPhone enseña las dos salidas (iOS 26). Si en su teléfono no cambia, se vuelve a apagar aquí.
+    const ELIGE_SALIDA = true;
     async function buscaSalidas() {
       salidas = null;
       if (!ELIGE_SALIDA) return;
@@ -662,7 +664,16 @@
         const envia = env && env.codecs ? new Set(env.codecs.map(tipo)) : null;
         if (envia) { const f = caps.codecs.filter((c) => auxiliar.test(c.mimeType) || envia.has(tipo(c))); if (f.some((c) => !auxiliar.test(c.mimeType))) caps.codecs = f; }
         const pesos = perfil === 'escritorio' ? { 'video/vp9': 0, 'video/h264': 1, 'video/vp8': 2, 'video/av1': 3 } : { 'video/h264': 0, 'video/vp8': 1, 'video/vp9': 2, 'video/av1': 3 };
-        const peso = (c) => pesos[String(c.mimeType).toLowerCase()] ?? 4;
+        // Entre teléfonos, primero el H.264 «constrained baseline» (42e0…, packetization-mode=1), el que todo WebRTC sabe codificar y
+        // decodificar; después VP8; los demás perfiles de H.264 (High, Main), después. Dueño, 29 Oct 2026, 13:09: del iPhone al
+        // Android la imagen llegaba en negro (el iPhone ofrecía primero H.264 High, que ese Android no decodifica); al revés sí.
+        const perfilH264 = (c) => { const m = /profile-level-id=([0-9a-f]{6})/i.exec(c.sdpFmtpLine || ''); return m ? m[1].toLowerCase() : ''; };
+        const peso = (c) => {
+          const t = tipo(c), base = pesos[t] ?? 4;
+          if (perfil === 'escritorio' || t !== 'video/h264') return base * 10;
+          const pl = perfilH264(c), pm1 = /packetization-mode=1/i.test(c.sdpFmtpLine || '');
+          return /^42e0/.test(pl) && pm1 ? 0 : /^42/.test(pl) ? 1 : 10 * pesos['video/vp8'] + 5; // los otros perfiles, detrás de VP8
+        };
         const orden = caps.codecs.slice().sort((a, b) => peso(a) - peso(b));
         for (const tr of pc.getTransceivers()) { const k = (tr.sender.track && tr.sender.track.kind) || (tr.receiver.track && tr.receiver.track.kind); if (k === 'video' && tr.setCodecPreferences) tr.setCodecPreferences(orden); }
       } catch (_) {}

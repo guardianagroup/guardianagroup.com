@@ -24,7 +24,10 @@ async function telefono(browser, alto) {
   await A.goto(URL0); await B.goto(URL0); await espera(1800);
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(900);
   const url = String((await A.evaluate(() => window.__compartidos[0])).url).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
-  await B.goto(url); await espera(1500); await B.click('#aceptar-si'); await espera(5000);
+  await B.goto(url); await espera(1500);
+  // iPhone en Safari con una invitación (29 Oct 2026, 12:29): primero la guía de la pantalla de inicio; aquí se sigue en Safari
+  if (await B.$('#h-completa.gc-abierta #guia-safari:visible')) { comprueba(true, 'B (Safari): la guía de añadir a la pantalla de inicio, con «Seguir en Safari»'); await B.click('#guia-safari'); await espera(800); }
+  await B.click('#aceptar-si'); await espera(5000);
   await A.click('#ccontacto-si'); await A.fill('#nombre-conv', 'Nathalie ❤️'); await A.click('#nombre-guardar'); await espera(500);
   await A.click('#videollamar'); await espera(2200);
   await A.screenshot({ path: path.join(OUT, '1-llamando.png') });

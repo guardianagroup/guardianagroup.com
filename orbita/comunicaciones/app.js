@@ -22,6 +22,9 @@
   // en pruebas locales, «?renueva=N» acorta la renovación a N segundos
   const renuevaMs = () => (LOCAL && +new URLSearchParams(location.search).get('renueva') * 1000) || RENUEVA_B_MS;
   const ORIGEN = location.origin + location.pathname.replace(/[^/]*$/, '');
+  // la dirección corta de las invitaciones (dueño, 29 Oct 2026, 13:14: «la invitación a chat es grandísima, tiene que ser súper
+  // minimalista»): guardianagroup.com/chat/#i=… pasa a Comunicaciones con el mismo fragmento (chat/index.html). En local, igual.
+  const ORIGEN_INV = location.origin + '/chat/';
   // Llamada de voz otra vez (dueño, 29 Oct 2026, 09:08–09:13: «si puedes añadir la llamada normal… que funcione de iPhone a iPhone,
   // de iPhone a Android… que avise en pantalla del iPhone una vez iniciada la conversación»). El 28 Oct se quitó porque en el iPhone
   // sonaba por el altavoz sin forma de pasarla al auricular: una web no puede elegir esa salida en Safari. Se queda así, con el
@@ -219,7 +222,7 @@
     return c;
   }
   // el enlace de la invitación: «#b=» la blindada y «#i=» la normal (29 Oct 2026, 07:49: «chat normal o blindado»)
-  const enlaceB = (c) => ORIGEN + (esB(c) ? '#b=' : '#i=') + C.b64u(c.semilla);
+  const enlaceB = (c) => ORIGEN_INV + (esB(c) ? '#b=' : '#i=') + C.b64u(c.semilla);
   const porEnlace = (c) => !!(c && (esB(c) || c.enlace));
   // Chat normal por enlace, para el teléfono (29 Oct 2026, 07:49): como la blindada de creaInvitacionB, pero con la identidad de
   // siempre de este equipo (ECDH P-256 con ML-KEM-768). Se guarda, para que siga ahí si el teléfono duerme la app mientras se envía.
@@ -234,7 +237,8 @@
     return c;
   }
   const creaInvitacionEnlace = (semilla, modo) => (modo === 'blindada' ? creaInvitacionB(semilla, { sinPantalla: true }) : creaInvitacionN(semilla));
-  const textoInvitacion = (modo) => (modo === 'blindada' ? T('Invitación a un chat blindado de GUARDIANA') : T('Invitación a un chat de GUARDIANA'));
+  // corto (13:14): la frase mínima y el enlace
+  const textoInvitacion = (modo) => (modo === 'blindada' ? T('Invitación a un chat blindado de GUARDIANA') : T('Invitación a GUARDIANA'));
   function muestraEnlace(c) {
     const u = enlaceB(c); $('#enlace-b').value = u;
     const q = $('#enlace-qr'); if (q && window.qrSvg && q.dataset.u !== u) { q.innerHTML = window.qrSvg(u); q.dataset.u = u; }
@@ -1599,7 +1603,7 @@
     const conf = $('#cconfianza'); conf.classList.remove('gc-sin-verificar');
     let txt;
     if (c.ocupada && !c.huella) txt = T('Esta invitación ya la usó otra persona.');
-    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo la encriptación…') : esperaEnChat(c) ? T('Invitación enviada') : c.rol === 'acepta' ? T('Conectando con la otra persona…') : esB(c) ? T('Esperando a que la otra persona abra el enlace…') : T('Esperando a que la otra persona escriba el código…');
+    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo la encriptación…') : esperaEnChat(c) ? '' : c.rol === 'acepta' ? T('Conectando con la otra persona…') : esB(c) ? T('Esperando a que la otra persona abra el enlace…') : T('Esperando a que la otra persona escriba el código…');
     else if (!R.abierto) txt = T('Sin conexión con el relé');
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
     else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo la encriptación…');
@@ -2820,7 +2824,7 @@
     function nuevaBlindadaConCopia() {
       if (esMovil() && navigator.share && C.B.hayBlindada()) {
         const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0);
-        const url = ORIGEN + '#b=' + C.b64u(semilla);
+        const url = ORIGEN_INV + '#b=' + C.b64u(semilla);
         let compartido = null; try { compartido = navigator.share({ title: 'GUARDIANA', text: T('Invitación a una sesión blindada de GUARDIANA Comunicaciones'), url }); } catch (e) { compartido = Promise.reject(e); }
         const hecha = creaInvitacionB(semilla, { sinPantalla: true });
         Promise.resolve(compartido).then(async () => {
@@ -2859,7 +2863,7 @@
     // «Otras apps»: el menú de compartir del teléfono, dentro del mismo toque (la invitación se crea a la vez)
     function invitaConMenu(modo) {
       const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0);
-      const url = ORIGEN + (modo === 'blindada' ? '#b=' : '#i=') + C.b64u(semilla);
+      const url = ORIGEN_INV + (modo === 'blindada' ? '#b=' : '#i=') + C.b64u(semilla);
       let compartido = null; try { compartido = navigator.share({ title: 'GUARDIANA', text: textoInvitacion(modo), url }); } catch (e) { compartido = Promise.reject(e); }
       const hecha = creaInvitacionEnlace(semilla, modo);
       Promise.resolve(compartido).then(async () => {
@@ -2908,7 +2912,7 @@
     $('#vaciar').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (!c) return; $('#vaciar-nota').hidden = false; abreHoja('h-vaciar'); });
     $('#vaciar-no').addEventListener('click', () => cierraHoja('h-vaciar'));
     $('#vaciar-si').addEventListener('click', async () => { cierraHoja('h-vaciar'); await vacia(CONVS.get(ACTUAL)); });
-    $('#codigo-enlace').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !c.semilla) return; const u = ORIGEN + '#i=' + C.b64u(c.semilla); $('#codigo-enlace').dataset.enlace = u; try { await navigator.clipboard.writeText(u); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { aviso(u); } });
+    $('#codigo-enlace').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !c.semilla) return; const u = ORIGEN_INV + '#i=' + C.b64u(c.semilla); $('#codigo-enlace').dataset.enlace = u; try { await navigator.clipboard.writeText(u); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { aviso(u); } });
     $('#aceptar-si').addEventListener('click', async () => { const e = invitacionPendiente; invitacionPendiente = null; muestraAceptar(false); if (!e) return; marcaInvitado(); const ok = await aceptaInvitacion(e); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); else setTimeout(preguntaInstalar, 2500); });
     $('#aceptar-no').addEventListener('click', () => { invitacionPendiente = null; muestraAceptar(false); aviso(T('Invitación rechazada.')); });
     $('#enlace-cancelar-2').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await destruye(c, true); });
