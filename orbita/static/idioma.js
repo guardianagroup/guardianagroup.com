@@ -1571,11 +1571,16 @@
     // revisión de diseño e «Invitar a chat» en un toque (dueño, 28 Oct 2026, 19:15–19:30)
     "Invitar a chat": ["Invite to chat", "Convidar para o chat"],
     // «Invitar a chat» en el iPhone: WhatsApp entero u otra app (dueño, 28 Oct 2026, 20:56)
-    "Otra app": ["Other app", "Outro app"],
+    "Otras apps": ["Other apps", "Outros apps"],
     "No se pudo abrir WhatsApp.": ["WhatsApp could not be opened.", "Não foi possível abrir o WhatsApp."],
     // el inicio con dos botones y los contactos en su pantalla (dueño, 29 Oct 2026, 07:37)
     "Aún no tienes contactos.": ["You have no contacts yet.", "Você ainda não tem contatos."],
     "Cuando hables con alguien, guárdalo y saldrá aquí.": ["When you talk to someone, save them and they will appear here.", "Quando falar com alguém, salve a pessoa e ela aparecerá aqui."],
+    // la pregunta de añadir GUARDIANA tras aceptar una invitación (29 Oct 2026, 07:44)
+    "¿Añadir GUARDIANA a tu pantalla de inicio?": ["Add GUARDIANA to your home screen?", "Adicionar o GUARDIANA à sua tela de início?"],
+    "¿Instalar GUARDIANA en este ordenador?": ["Install GUARDIANA on this computer?", "Instalar o GUARDIANA neste computador?"],
+    "Sí, añadir": ["Yes, add it", "Sim, adicionar"],
+    "Instalar en este ordenador": ["Install on this computer", "Instalar neste computador"],
     "Volver": ["Back", "Voltar"],
     "Mensajes y llamadas encriptados": ["Encrypted messages and calls", "Mensagens e chamadas criptografadas"],
     "Mensajes y llamadas encriptados de extremo a extremo.": ["Messages and calls are end-to-end encrypted.", "Mensagens e chamadas criptografadas de ponta a ponta."],

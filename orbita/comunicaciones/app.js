@@ -17,6 +17,10 @@
   // momento y ya lo solucionaremos. Déjalo solamente con videollamada»): en el iPhone la llamada de voz salía por el altavoz y no
   // había forma de pasarla al auricular. Sin botones de llamada de voz; las que lleguen de una versión anterior se contestan igual.
   const SOLO_VIDEO = true;
+  // El aviso «se puede instalar» de Chrome y Edge puede llegar antes de que arranque la página (antes de eventos()): se guarda desde
+  // el principio, para que «Sí, añadir» abra siempre la ventana del sistema y no los pasos a mano (29 Oct 2026)
+  let avisoInstalarTemprano = null;
+  addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); avisoInstalarTemprano = e; });
   const LOCAL = /^(127\.0\.0\.1|localhost)$/.test(location.hostname);
 
   // ---------- almacén ----------
@@ -158,7 +162,9 @@
   const esMovil = () => matchMedia('(max-width: 760px)').matches;
   // Pantalla completa en el móvil (dueño, 16:03: «una interfaz que ocupe toda la pantalla… que no se vea nada del móvil»). Android
   // la da desde la web; el iPhone no (solo como app desde la pantalla de inicio)
-  const comoApp = () => { try { return matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches || navigator.standalone === true; } catch (_) { return false; } };
+  // (29 Oct 2026: la pantalla completa que la página pide en Android al tocar «Aceptar» también da «display-mode: fullscreen»; eso
+  // no es la app instalada, y por eso no salía la pregunta de añadirla)
+  const comoApp = () => { try { return matchMedia('(display-mode: standalone)').matches || (matchMedia('(display-mode: fullscreen)').matches && !document.fullscreenElement) || navigator.standalone === true; } catch (_) { return false; } };
   // instalada en la pantalla de inicio: sin «‹ Inicio» (app.css), también donde el navegador no entiende display-mode; arriba,
   // el mismo nombre que lleva el icono (dueño, 17:06: «en vez de poner comunicaciones… guardiana»)
   document.documentElement.classList.toggle('como-app', comoApp());
@@ -1922,7 +1928,7 @@
     $('#cm-completa').addEventListener('click', () => { cierraMenu(); if (puedeCompleta()) pantallaCompleta(); else abreGuia(); });
     $('#completa-ok').addEventListener('click', () => cierraHoja('h-completa'));
     // «Añadir a la pantalla de inicio»: en Android, la ventana del propio sistema; en el iPhone, los pasos (no deja hacerlo desde la web)
-    let avisoInstalar = null;
+    let avisoInstalar = avisoInstalarTemprano;
     // La guía con los mismos botones que verá cada persona (dueño, 28 Oct 2026, 17:02): qué teléfono, qué navegador y qué
     // versión. En Safari manda su «Version/»; en Chrome y los demás del iPhone, iOS 26 se reconoce por lo que estrenó su
     // motor (el anclaje de CSS), porque el número del sistema puede venir congelado.
@@ -1960,9 +1966,28 @@
     const pintaAnadir = () => { const b = $('#anadir-app'); if (b) b.hidden = comoApp() || !(avisoInstalar || esIOS || esAndroid); };
     const guiaAbierta = () => { const h = $('#h-completa'); return !!h && h.classList.contains('gc-abierta'); };
     addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); avisoInstalar = e; pintaAnadir(); if (guiaAbierta()) pintaGuia(); });
-    addEventListener('appinstalled', () => { avisoInstalar = null; pintaAnadir(); if (guiaAbierta()) cierraHoja('h-completa'); });
+    addEventListener('appinstalled', () => { avisoInstalar = null; pintaAnadir(); if (guiaAbierta()) cierraHoja('h-completa'); cierraHoja('h-instalar'); });
     // en Android, un toque: la ventana del sistema; si todavía no la da (o en el iPhone), la guía
     $('#anadir-app').addEventListener('click', () => { if (avisoInstalar) instala(); else abreGuia(); });
+    // en el ordenador, el botón del inicio dice lo que hace (29 Oct 2026, 07:44: «la versión de escritorio para el PC también»)
+    if (!esIOS && !esAndroid) { const s = $('#anadir-app span'); if (s) s.textContent = T('Instalar en este ordenador'); }
+    // Tras aceptar una invitación, una sola pregunta: «¿Añadir GUARDIANA a tu pantalla de inicio?» (29 Oct 2026, 07:44). En Android
+    // y en el ordenador (Chrome, Edge), «Sí, añadir» abre la ventana del sistema; si el navegador aún no la ofrece, los pasos. La
+    // conversación sigue allí: en Android y en el ordenador, la app y el navegador comparten lo guardado. En el iPhone aún no: allí
+    // la app guarda aparte y la conversación no pasaría (cuando lleguen los contactos con Face ID). Si dice «Ahora no», no se repite.
+    const yaPreguntado = () => { try { return localStorage.getItem('gcom-instalar') === 'no'; } catch (_) { return false; } };
+    function preguntaInstalar(intento) {
+      if (comoApp() || esIOS || yaPreguntado()) return;
+      if (!avisoInstalar) {
+        // el navegador puede tardar unos segundos en ofrecer la instalación; en el ordenador, sin ella no se pregunta
+        if ((intento || 0) < 4) { setTimeout(() => preguntaInstalar((intento || 0) + 1), 2000); return; }
+        if (!esAndroid) return;
+      }
+      if (document.querySelector('.gc-hoja.gc-abierta') || (LL && LL.ocupado)) { if ((intento || 0) < 30) setTimeout(() => preguntaInstalar((intento || 0) + 1), 2000); return; }
+      abreHoja('h-instalar');
+    }
+    $('#instalar-si').addEventListener('click', () => { cierraHoja('h-instalar'); if (avisoInstalar) instala(); else abreGuia(); });
+    $('#instalar-no').addEventListener('click', () => { cierraHoja('h-instalar'); try { localStorage.setItem('gcom-instalar', 'no'); } catch (_) {} });
     $('#guia-instalar').addEventListener('click', instala);
     // tocar el dibujo del aviso también lo abre (quien lo toca quiere instalar)
     { const d = document.querySelector('#h-completa .ui-dlg'); if (d) d.addEventListener('click', () => { if (avisoInstalar) instala(); }); }
@@ -2300,7 +2325,7 @@
     $('#vaciar-no').addEventListener('click', () => cierraHoja('h-vaciar'));
     $('#vaciar-si').addEventListener('click', async () => { cierraHoja('h-vaciar'); await vacia(CONVS.get(ACTUAL)); });
     $('#codigo-enlace').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !c.semilla) return; const u = ORIGEN + '#i=' + C.b64u(c.semilla); $('#codigo-enlace').dataset.enlace = u; try { await navigator.clipboard.writeText(u); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { aviso(u); } });
-    $('#aceptar-si').addEventListener('click', async () => { const e = invitacionPendiente; invitacionPendiente = null; muestraAceptar(false); if (!e) return; marcaInvitado(); const ok = await aceptaInvitacion(e); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); });
+    $('#aceptar-si').addEventListener('click', async () => { const e = invitacionPendiente; invitacionPendiente = null; muestraAceptar(false); if (!e) return; marcaInvitado(); const ok = await aceptaInvitacion(e); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); else setTimeout(preguntaInstalar, 2500); });
     $('#aceptar-no').addEventListener('click', () => { invitacionPendiente = null; muestraAceptar(false); aviso(T('Invitación rechazada.')); });
     $('#enlace-cancelar-2').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await destruye(c, true); });
     $('#enlace-copiar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.clipboard.writeText(enlaceB(c)); c.copiado = true; c.compartido = true; muestraEnlace(c); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { $('#enlace-b').select(); } });

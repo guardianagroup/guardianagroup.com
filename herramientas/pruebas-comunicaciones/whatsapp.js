@@ -32,7 +32,7 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   const A = await telefono(browser, IPHONE);
   await A.goto(URL0); await espera(1800);
 
-  // 1. la hoja: WhatsApp, Otra app y Cancelar
+  // 1. la hoja: WhatsApp, Otras apps y Cancelar
   await A.click('#nueva-blindada'); await espera(500);
   comprueba(await visible(A, '#h-invitar'), 'iPhone: «Invitar a chat» abre la hoja');
   comprueba(await A.evaluate(() => window.__compartidos.length === 0), 'el menú de compartir aún no se abre');
@@ -74,9 +74,9 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   await C.click('#nueva-blindada'); await espera(400); await C.click('#invitar-wa');
   await espera(6800);
   comprueba(/No se pudo abrir WhatsApp/.test(await aviso(C)), 'sin WhatsApp: «No se pudo abrir WhatsApp.»', await aviso(C));
-  comprueba(await visible(C, '#h-invitar'), 'y la hoja sigue para elegir «Otra app»');
+  comprueba(await visible(C, '#h-invitar'), 'y la hoja sigue para elegir «Otras apps»');
   await C.click('#invitar-otra'); await espera(900);
-  comprueba(await C.evaluate(() => window.__compartidos.length === 1), '«Otra app»: el menú de compartir de siempre');
+  comprueba(await C.evaluate(() => window.__compartidos.length === 1), '«Otras apps»: el menú de compartir del teléfono');
   comprueba(!(await visible(C, '#h-invitar')), 'y la hoja se cierra');
 
   // 5. Android: como siempre, el menú de compartir directo
