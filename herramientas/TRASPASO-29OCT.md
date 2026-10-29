@@ -267,3 +267,34 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
 - Estudio WhatsApp/Telegram: /tmp/…/scratchpad/llamadas-estudio.md (prioridades 1–10; hechas 1 parcial, 2, 3, 5 parcial, 7 parcial).
   Pendiente: mala red → solo voz (4), botones Contestar/Rechazar en el aviso de llamada de Android (1), colgar con pulsación larga (7),
   «Devolver llamada» desde el aviso (8).
+
+## 16. Tramo 8 (15:52–17:40, main a38b6365 → e0f339c9 → f0fc47ae) — iPhone de una sola vez, avisos en orden, Ajustes
+- **Diagnóstico clave (16:05–16:11)**: en el iPhone, Safari y la app de la pantalla de inicio guardan cada uno sus cosas, y Safari no
+  puede avisar con la app cerrada. La mujer del dueño abría el enlace en Safari → chat en Safari, app vacía, sin avisos.
+- **Flujo iPhone (17:04, «de una sola vez»)**: en Safari con `#i=`/`#b=` y `!comoApp()` → `muestraIOS(true)` + la guía `#h-completa`
+  (`gcomGuiaInvitacion`) sale sola a los 350 ms, en modo `con-invitacion`: sin «Seguir en Safari» ni «Entendido»; el manifiesto se
+  sustituye por un data: con `start_url: /orbita/comunicaciones/?app=1&inv=i=…#i=…` (el arranque entiende `?inv=` y el fragmento) y la
+  URL de la página se reescribe igual (`history.replaceState`) por si el iPhone toma esa. Detrás, `#paso-ios` con «Ver cómo se añade» y,
+  discreto, `#ios-safari` («Usar en Safari, sin avisos» → `aceptaEnlaceYa`). Guía: «pulsa» (17:16). Prueba: `iphone.js`.
+  Quitados (17:28): modo día, botón del sol, `#pegar-inv` («Tengo una invitación»).
+- **Avisos**: tramas `0x11` = merecen aviso (solo `enviaCola`: texto y anuncio de archivo); `rele.js` manda `{t:'hola', marca:1}` y solo usa
+  `0x11` si el relé contestó `marca:1`; el relé avisa en `entrega()` con `avisa || !de.marca` (compatibilidad en los dos sentidos
+  mientras se actualizan). `rele.js` reenvía la última suscripción (`subUlt`) nada más abrir, antes de cualquier trama (si no,
+  `de.avisoId` era null y el aviso podía volver al remitente). `avisa()` devuelve `{avisados, silenciados}`; «no tiene los avisos
+  activados» solo con los dos a 0. `topic` por sala y tipo. `suFuera=false` en `cerrado`/`sala`. `avisaFuera` usa la misma etiqueta que
+  sw.js (`gcom-mensaje-<sala16>`): un solo aviso por mensaje. `retiraAvisos` vale sin `controller` (`swReg.active`). Presencia inicial
+  = `document.visibilityState` (página que nace oculta). `preguntaAvisos` respeta `gcom-avisos='off'` (Ajustes).
+- **Insignia (16:07)**: `pintaInsignia()` = suma de `noLeidos` de `vivas()`; se llama en `pintaLista`, `marcaLeidos`, `retiraAvisos`,
+  `vuelve`, `pintaTitulo`. sw.js e: `insignia()` solo sin cliente visible (y en `notificationclick` solo si no hay ventana).
+- **Puntito (16:01)**: `#cpunto` junto al nombre (`.gc-punto.en` verde / rojo); en el móvil `#cconfianza` queda vacía y `:empty{display:none}`;
+  filas: `.fila-av.no-linea` / `.contacto-av.no-linea` rojo; sin «En línea»/«No conectado» escritos.
+- **Ajustes (16:02 idea de Nathalie; 17:11 tuerca)**: `#ajustes-btn` (barra) y `#cm-ajustes` (⋯) → hoja `#h-ajustes`: `#aj-avisos`
+  (interruptor: on → `activaAvisos`/`suscribeAvisos(true)`; off → `quitaAvisos` + `gcom-avisos='off'`; estado: bloqueados en el
+  teléfono / solo app instalada), `#aj-sonido` (`gcom-sonido`, `pref('sonido')` en `avisaSonido`), `#aj-anadir`, `#aj-version`
+  (`miraVersion(true)` → `actualizaYa()`).
+- **Inicio (17:01)**: los tres botones iguales (regla final de app.css: 62 px, 17.5 px, margin-top 0).
+- **Revisión independiente** (/tmp/…/scratchpad/revision-29oct.md, 25 hallazgos): hechos 1–6, 8–11, 14–18, 21, 22, 25; quedan 7, 12,
+  13, 19, 20, 23, 24 (tarea #75).
+- Pruebas nuevas/al día: iphone.js; contactos, recarga (puntito), llamando, altavoz, instalar, viaje-movil (omitida sin Ultra) usan
+  `#ios-safari` por `evaluate`. altavoz.js ya fallaba antes (setSinkId no real en Chromium sin cabeza).
+- Versiones: app.js 31d, app.css 31e, rele.js 31b, llamada.js 31d, arranque.js 30l, sw.js e, idioma.js p84; relé: `marca` en el saludo.
