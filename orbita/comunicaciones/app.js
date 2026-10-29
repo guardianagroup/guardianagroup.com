@@ -2680,17 +2680,12 @@
     $('#anadir-app').addEventListener('click', () => { if (avisoInstalar) instala(); else abreGuia(); });
     // ---- iPhone: la invitación, dentro de la app (dueño, 29 Oct 2026, 16:05–16:11) ----
     const trozoInv = (e) => { const m = String(e || '').match(/#[ib]=[A-Za-z0-9_-]{43}/); return m ? m[0] : ''; };
-    // «Instalar y chatear» (dueño, 17:55–18:01: «simplifícalo todo»): el menú de compartir del iPhone, con la dirección que lleva la
-    // invitación; allí, «Agregar a Inicio». Debajo, una sola frase de ayuda.
-    { const b = $('#ios-instalar'); if (b) b.addEventListener('click', async () => {
-      try { if (navigator.share) await navigator.share({ title: 'GUARDIANA', url: location.href }); } catch (_) {}
-    }); }
     // «Ya tengo GUARDIANA»: la invitación al portapapeles; en la app, «Abrir invitación» la pega y abre el chat allí
     { const b = $('#ios-tengo'); if (b) b.addEventListener('click', async () => {
       const u = invitacionIOS || location.href; let ok = false;
       try { await navigator.clipboard.writeText(u); ok = true; } catch (_) {}
       if (!ok) { try { const i = document.createElement('input'); i.value = u; i.setAttribute('readonly', ''); i.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(i); i.select(); i.setSelectionRange(0, 99999); ok = document.execCommand('copy'); i.remove(); } catch (_) {} }
-      $('#ios-ayuda').hidden = true; $('#ios-copiada').hidden = false;
+      b.hidden = true; $('#ios-copiada').hidden = false;
       if (!ok) aviso(T('No se pudo copiar: mantén pulsado el enlace del mensaje y elige «Copiar».'));
     }); }
     for (const b of document.querySelectorAll('.pegar-inv')) { b.hidden = !(esIOS && comoApp());

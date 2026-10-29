@@ -3400,6 +3400,8 @@
     "Te han invitado a un chat de GUARDIANA": ["You have been invited to a GUARDIANA chat", "Você foi convidado para um chat do GUARDIANA"],
     "Te han invitado a GUARDIANA": ["You have been invited to GUARDIANA", "Você foi convidado para o GUARDIANA"],
     "Instalar y chatear": ["Install and chat", "Instalar e conversar"],
+    "Abre": ["Open", "Abra o"],
+    "El chat ya está dentro.": ["The chat is already inside.", "O chat já está lá dentro."],
     "Ya tengo GUARDIANA": ["I already have GUARDIANA", "Já tenho o GUARDIANA"],
     "Primera vez: pulsa «Instalar y chatear», luego «Agregar a Inicio», y abre GUARDIANA desde tu pantalla de inicio.": ["First time: tap “Install and chat”, then “Add to Home Screen”, and open GUARDIANA from your Home Screen.", "Primeira vez: toque em “Instalar e conversar”, depois em “Adicionar à Tela de Início”, e abra o GUARDIANA pela tela de início."],
     "Invitación copiada. Abre GUARDIANA y pulsa «Abrir invitación».": ["Invitation copied. Open GUARDIANA and tap “Open invitation”.", "Convite copiado. Abra o GUARDIANA e toque em “Abrir convite”."],

@@ -53,18 +53,14 @@ async function telefono(browser, nombre, app) {
   await Saf.goto(enlace); await espera(2500);
   comprueba(await visible(Saf, '#paso-ios') && !(await visible(Saf, '#paso-aceptar')), 'Safari: la invitación no se acepta aquí');
   comprueba(await Saf.evaluate(() => window.gcomPrueba.cuantas() === 0), 'Safari: no se ha creado ningún chat');
-  comprueba(await visible(Saf, '#ios-instalar') && await visible(Saf, '#ios-tengo') && !(await Saf.$('#ios-anadir')) && !(await Saf.$('#ios-safari')), 'Safari: dos botones, «Instalar y chatear» y «Ya tengo GUARDIANA»');
-  comprueba(await Saf.evaluate(() => document.querySelector('#ios-instalar').getBoundingClientRect().top < document.querySelector('#ios-tengo').getBoundingClientRect().top), 'Safari: «Instalar y chatear» arriba');
+  comprueba(await Saf.evaluate(() => document.querySelectorAll('#paso-ios .ios-pasos > li').length === 3) && await visible(Saf, '#ios-tengo') && !(await Saf.$('#ios-instalar')) && !(await Saf.$('#ios-safari')), 'Safari: los tres pasos a la vista y, debajo, «Ya tengo GUARDIANA»');
   comprueba(!(await Saf.evaluate(() => document.querySelector('#h-completa').classList.contains('gc-abierta'))), 'Safari: sin hojas encima');
   const man = await Saf.evaluate(() => ({ href: document.querySelector('link[rel="manifest"]').getAttribute('href'), m: window.gcomManifiestoInv || null, n: document.querySelectorAll('link[rel="manifest"]').length }));
-  comprueba(man.n === 1 && /^blob:/.test(man.href) && man.m && /^http:\/\/127\.0\.0\.1:8080\/orbita\/comunicaciones\/\?app=1&inv=i=[A-Za-z0-9_-]{43}#i=[A-Za-z0-9_-]{43}$/.test(man.m.start_url), 'Safari: un solo manifiesto, el propio, con la invitación en la dirección de inicio', man);
+  comprueba(man.n === 1 && /^blob:/.test(man.href) && man.m && /^http:\/\/127\.0\.0\.1:8080\/orbita\/comunicaciones\/\?app=1#i=[A-Za-z0-9_-]{43}$/.test(man.m.start_url) && /^http:\/\/127\.0\.0\.1:8080\/orbita\/comunicaciones\/$/.test(man.m.id), 'Safari: un solo manifiesto, el propio, con la invitación solo en el fragmento y el id fijo', man);
   const csp = await Saf.evaluate(() => (document.querySelector('meta[http-equiv="Content-Security-Policy"]') || {}).content || '');
   comprueba(/manifest-src 'self' blob: data:/.test(csp), 'Safari: la política de seguridad deja usar ese manifiesto');
-  comprueba(/\?app=1&inv=i=[A-Za-z0-9_-]{43}#i=/.test(await Saf.evaluate(() => location.href)), 'Safari: la dirección de la página también la lleva');
+  comprueba(/\?app=1#i=[A-Za-z0-9_-]{43}$/.test(await Saf.evaluate(() => location.href)) && !/inv=/.test(await Saf.evaluate(() => location.href)), 'Safari: la dirección de la página también la lleva, solo en el fragmento');
   await foto(Saf, '80-safari-invitacion');
-  await Saf.click('#ios-instalar'); await espera(600);
-  const comp = await Saf.evaluate(() => window.__compartidos[window.__compartidos.length - 1]);
-  comprueba(!!comp && /\?app=1&inv=i=/.test(String(comp.url || '')), 'Safari: «Instalar y chatear» abre el menú del iPhone con la dirección que lleva la invitación', comp);
 
   // 2. La app añadida arranca con esa dirección: el chat nace dentro de la app
   await App.goto(await Saf.evaluate(() => location.href)); await espera(2200);

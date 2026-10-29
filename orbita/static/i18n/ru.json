@@ -3422,6 +3422,9 @@
 "Invitación copiada. Abre GUARDIANA y pulsa «Abrir invitación».":"Приглашение скопировано. Откройте GUARDIANA и нажмите «Открыть приглашение».",
 "Abrir invitación":"Открыть приглашение",
 "No hay ninguna invitación copiada. En Safari, pulsa «Ya tengo GUARDIANA» y vuelve aquí.":"Приглашение не скопировано. В Safari нажмите «У меня уже есть GUARDIANA» и вернитесь сюда."
+,
+"Abre":"Откройте",
+"El chat ya está dentro.":"Чат уже внутри."
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

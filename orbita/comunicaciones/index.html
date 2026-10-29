@@ -308,12 +308,16 @@
          uno sus cosas por separado y Safari no puede dar avisos: por eso la invitación no se abre aquí. Se añade la app (dos toques,
          la guía sale sola) y la invitación va dentro: la app nace con el chat. Esta pantalla queda detrás de la guía, por si se cierra. -->
     <div class="paso aceptar" id="paso-ios" hidden>
-      <div class="espera-anillos quieto" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+      <!-- Ronda 72 de la agencia (29 Oct 2026, 18:15–18:40; dueño, 18:01: «simplifícalo todo… el mínimo de pasos»): una sola pantalla
+           con los tres pasos a la vista, sin botones que elegir; la invitación viaja dentro del icono (manifiesto de arranque.js). Debajo,
+           para quien ya tiene la app, «Ya tengo GUARDIANA» (copia la invitación; en la app, «Abrir invitación»). -->
       <h2>Te han invitado a GUARDIANA</h2>
-      <!-- dueño, 18:03: quien ya tiene la app no puede volver a instalarla cada vez: «Ya tengo GUARDIANA» copia la invitación y en la app
-           «Abrir invitación» la abre (Apple no deja pasar nada de Safari a la app de otra forma) -->
-      <div class="ios-botones"><button type="button" class="boton principal" id="ios-instalar">Instalar y chatear</button><button type="button" class="boton" id="ios-tengo">Ya tengo GUARDIANA</button></div>
-      <p class="t ios-ayuda" id="ios-ayuda">Primera vez: pulsa «Instalar y chatear», luego «Agregar a Inicio», y abre GUARDIANA desde tu pantalla de inicio.</p>
+      <ol class="guia-pasos guia-facil ios-pasos">
+        <li><span class="g-icono"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><div class="g-txt">Pulsa <b>Compartir</b><small class="g-alt">Si no lo ves, está en los tres puntos ⋯</small></div></li>
+        <li><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><div class="g-txt"><span data-es-es="Pulsa «Añadir a pantalla de inicio»">Pulsa «Agregar a Inicio»</span><small class="g-alt"><span data-es-es="Y después, «Añadir»">Y después, «Agregar»</span></small></div></li>
+        <li class="fin"><span class="g-icono g-icono-app"><img src="/apple-touch-icon.png?v=2" alt="" width="66" height="66"></span><div class="g-txt">Abre <b>GUARDIANA</b><small class="g-alt">El chat ya está dentro.</small></div></li>
+      </ol>
+      <div class="ios-otra"><button type="button" class="boton" id="ios-tengo">Ya tengo GUARDIANA</button></div>
       <p class="t ios-ayuda ios-ok" id="ios-copiada" hidden>Invitación copiada. Abre GUARDIANA y pulsa «Abrir invitación».</p>
     </div>
 

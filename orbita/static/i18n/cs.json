@@ -3422,6 +3422,9 @@
 "Invitación copiada. Abre GUARDIANA y pulsa «Abrir invitación».":"Pozvánka zkopírována. Otevřete GUARDIANU a klepněte na „Otevřít pozvánku“.",
 "Abrir invitación":"Otevřít pozvánku",
 "No hay ninguna invitación copiada. En Safari, pulsa «Ya tengo GUARDIANA» y vuelve aquí.":"Není zkopírovaná žádná pozvánka. V Safari klepněte na „GUARDIANU už mám“ a vraťte se sem."
+,
+"Abre":"Otevřete",
+"El chat ya está dentro.":"Chat už je uvnitř."
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",
