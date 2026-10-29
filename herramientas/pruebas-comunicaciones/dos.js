@@ -103,12 +103,11 @@ const caja = (p, sel) => p.evaluate((s) => { const e = document.querySelector(s)
       comprueba(pistas.some((x) => /^audio:.*(fake|default|audio)/i.test(x) && !/destination/i.test(x)), 'voz ' + n + ': con la voz natural sale el micrófono tal cual (' + pistas.join(' | ') + ')');
       const au = await p.evaluate(() => { const a = document.querySelector('#a-remoto'); return { paused: a.paused, pistas: a.srcObject ? a.srcObject.getAudioTracks().length : 0 }; });
       comprueba(!au.paused && au.pistas === 2, 'voz ' + n + ': suena la otra persona (voz y pista muda: ' + au.pistas + ' pistas)');
-      comprueba((await caja(p, '#ll-voz-pill')).vis && !(await caja(p, '#ll-ajustes')).vis, 'voz ' + n + ': pantalla limpia, «Tu voz» en la píldora');
+      // 29 Oct 2026, 07:51: sin «Tu voz» ni «Voz e imagen»; en el chat normal, ningún efecto (los del blindado, en tipos.js)
+      const ef = { pildora: (await caja(p, '#ll-voz-pill')).vis, ajustes: (await caja(p, '#ll-ajustes')).vis, grave: (await caja(p, '#ll-grave')).vis };
+      // (aquí el chat es blindado: sin navigator.share, «Invitar a chat» crea la blindada de siempre con el enlace en pantalla)
+      comprueba(!ef.pildora && !ef.ajustes && ef.grave, 'voz ' + n + ': pantalla limpia; en el blindado, solo «Voz grave» ' + JSON.stringify(ef));
     }
-    // cambiar la voz en plena llamada y volver a la natural
-    await A.click('#ll-voz-pill'); await espera(300); await foto(A, '09b-A-voces');
-    await A.click('#ll-voces [data-voz="grave"]'); await espera(1500);
-    await A.click('#ll-voces [data-voz="natural"]'); await espera(800);
     console.log('     pistas A:', JSON.stringify(await A.evaluate(() => window.__pistas.slice())));
     if (PASOS.has('colgar')) {
       await A.click('#ll-colgar'); await espera(560);

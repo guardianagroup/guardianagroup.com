@@ -1159,6 +1159,52 @@ html.como-app .barra .barra-logo{width:26px;height:26px;flex:none;margin-left:-2
 #invitar-wa svg{background:#25D366}
 .inv-cancelar{display:flex;align-items:center;justify-content:center;margin-top:6px;min-height:56px;border:0;border-radius:16px;background:#1A2230;color:#9CC3E4;font:600 17px/1 var(--texto);cursor:pointer}
 .inv-cancelar:active{background:#222C3A}
+/* «Chat normal» o «Chat blindado» (dueño, 29 Oct 2026, 07:49: «el blindado salga en otro color… tipo espejo más bonito»): dos tarjetas;
+   el normal, sobrio, en el azul de siempre; el blindado, en champán, con un reflejo de espejo que cruza la tarjeta */
+.inv-tipos{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:6px 4px 8px}
+.inv-tipo{position:relative;overflow:hidden;isolation:isolate;display:grid;gap:4px;align-content:center;min-height:88px;padding:16px 14px 14px;border-radius:16px;border:1.5px solid rgba(156,195,228,.2);background:rgba(156,195,228,.05);color:#F4F6F8;text-align:left;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent;transition:border-color .15s,background .15s,box-shadow .15s,transform .12s}
+.inv-tipo:active{transform:scale(.98)}
+.inv-tipo b{font:600 16.5px/1.2 var(--texto);padding-right:22px}
+.inv-tipo small{font:400 13.5px/1.3 var(--texto);color:#9FB0C0}
+.inv-tipo-marca{position:absolute;top:11px;right:11px;width:20px;height:20px;box-sizing:border-box;border-radius:50%;border:1.5px solid rgba(156,195,228,.45)}
+.inv-tipo[aria-checked="true"]{border-color:#9CC3E4;background:rgba(156,195,228,.13)}
+.inv-tipo[aria-checked="true"] .inv-tipo-marca{border-color:#9CC3E4;background:#9CC3E4 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M5.5 12.5l4.2 4.2L18.5 7.8' fill='none' stroke='%2306080C' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/13px no-repeat}
+.inv-tipo.blindado{border-color:rgba(226,201,146,.38);background:linear-gradient(135deg,rgba(226,201,146,.12),rgba(255,244,220,.03) 46%,rgba(226,201,146,.09))}
+.inv-tipo.blindado b{color:#F2DDAA}
+.inv-tipo.blindado small{color:#CBB68C}
+.inv-tipo.blindado .inv-tipo-marca{border-color:rgba(226,201,146,.55)}
+.inv-tipo.blindado[aria-checked="true"]{border-color:#E2C992;background:linear-gradient(135deg,rgba(226,201,146,.24),rgba(255,244,220,.07) 46%,rgba(226,201,146,.18));box-shadow:0 0 0 1px rgba(226,201,146,.3),0 10px 30px -12px rgba(226,201,146,.55)}
+.inv-tipo.blindado[aria-checked="true"] .inv-tipo-marca{border-color:#E2C992;background-color:#E2C992}
+.inv-tipo.blindado::after{content:'';position:absolute;top:-30%;bottom:-30%;left:0;width:100%;z-index:-1;pointer-events:none;background:linear-gradient(90deg,transparent 0,rgba(255,246,224,.05) 8%,rgba(255,250,236,.22) 14%,rgba(255,246,224,.05) 20%,transparent 26%);transform:translateX(-40%) skewX(-22deg);animation:invEspejo 5.5s ease-in-out infinite}
+@keyframes invEspejo{0%,62%{transform:translateX(-40%) skewX(-22deg);opacity:0}66%{opacity:1}92%{transform:translateX(110%) skewX(-22deg);opacity:.9}100%{transform:translateX(120%) skewX(-22deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.inv-tipo.blindado::after{animation:none;opacity:0}}
+.inv-sep{height:1px;margin:2px 10px 6px;background:rgba(156,195,228,.12)}
+/* «Voz grave» y «Mosaico» en la llamada del blindado (29 Oct 2026, 07:51: «dos botones… muy profesionales»): en champán, como el
+   blindado; encendidos, rellenos */
+.ll-efecto button{border-color:rgba(226,201,146,.5);color:#F2DDAA;background:rgba(226,201,146,.08);transition:background .15s,color .15s,border-color .15s,transform .12s}
+.ll-efecto button:active{transform:scale(.94)}
+.ll-efecto button[aria-pressed="true"]{background:#E2C992;color:#06080C;border-color:#E2C992;box-shadow:0 0 0 4px rgba(226,201,146,.18)}
+.ll-efecto button svg{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ll-efecto span{color:#E8D6AE}
+/* sin la tarjeta «Voz e imagen» ni sus voces: solo los dos botones de arriba, en el blindado (29 Oct 2026, 07:51) */
+.ll-ajustes,#ll-voz-pill{display:none!important}
+/* la pantalla tapada del blindado en el ordenador (29 Oct 2026, 08:02) */
+.captura-velo{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#F7F4EC;color:#1B1A17}
+.captura-velo[hidden]{display:none}
+.captura-velo>div{display:grid;justify-items:center;gap:8px;text-align:center}
+.captura-velo svg{width:44px;height:44px;fill:none;stroke:#9C7C3A;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.captura-velo b{font:600 22px/1.2 var(--texto)}
+.captura-velo span{font:400 16px/1.3 var(--texto);color:#5C574B}
+/* El chat blindado, en champán (29 Oct 2026, 07:49: «el blindado salga en otro color… tipo espejo más bonito»): el candado de la
+   cabecera y el marco de espejo en champán y blanco; el normal se queda en el azul de siempre, sin marco */
+.conv.blindada .gc-avatar.candado{color:#E2C992;box-shadow:0 0 0 1px rgba(226,201,146,.55),0 0 18px rgba(226,201,146,.28)}
+.conv.blindada .candado{box-shadow:0 0 0 1px rgba(255,244,220,.55),0 0 14px rgba(226,201,146,.38)}
+.conv.blindada .gc-cabecera{background:linear-gradient(180deg,rgba(226,201,146,.08),rgba(6,8,12,0) 85%),var(--gc-fondo,#06080C);box-shadow:inset 0 -1px 0 rgba(255,236,196,.16)}
+.conv.blindada .lienzo{box-shadow:inset 0 0 0 1px rgba(255,236,196,.34),inset 0 1px 0 rgba(255,255,255,.42),inset 0 0 46px rgba(226,201,146,.11),inset 0 0 160px rgba(226,201,146,.07)}
+.conv.blindada .lienzo::before{background:conic-gradient(from var(--gc-ang),rgba(255,240,206,0) 0deg,rgba(255,240,206,0) 40deg,rgba(226,201,146,.3) 80deg,rgba(255,240,206,.44) 112deg,rgba(226,201,146,.22) 135deg,rgba(255,240,206,0) 165deg,rgba(255,240,206,0) 215deg,rgba(226,201,146,.55) 258deg,#fff 298deg,rgba(255,240,206,.8) 316deg,rgba(255,240,206,0) 352deg)}
+.conv.blindada .lienzo::after{background:linear-gradient(90deg,transparent 0,rgba(255,240,206,.035) 4%,rgba(255,250,238,.14) 8%,rgba(255,250,238,.17) 9%,rgba(226,201,146,.05) 13%,transparent 17%)}
+.conv.blindada .velo-pista svg{color:#E2C992}
+.velo-pista{white-space:nowrap}
 /* «¿Añadir GUARDIANA a tu pantalla de inicio?», tras aceptar una invitación (29 Oct 2026, 07:44): el icono, la pregunta y dos botones */
 .hoja-instalar .gc-hoja-caja.caja{justify-items:center;text-align:center;gap:14px;padding:24px 20px calc(20px + env(safe-area-inset-bottom))}
 .instalar-ico{width:72px;height:72px;border-radius:17px;box-shadow:0 10px 30px -10px rgba(0,0,0,.7)}

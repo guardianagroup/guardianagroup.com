@@ -49,7 +49,7 @@ const visible = (p, sel) => p.evaluate((s) => { const e = document.querySelector
   comprueba(await visible(A, '#texto') && /Invitación enviada/.test(cabA), 'tras compartir, ya en el chat: «Invitación enviada» (' + cabA + ')');
   const datos = await A.evaluate(() => window.__compartidos[window.__compartidos.length - 1]);
   const enlace = String(datos.url).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
-  comprueba(/#b=/.test(enlace), 'se compartió el enlace');
+  comprueba(/#[ib]=/.test(enlace), 'se compartió el enlace');
   await B.goto(enlace); await espera(1500); await foto(B, '04-aceptar');
   await B.click('#aceptar-si'); await espera(5000);
   comprueba(await A.evaluate(() => !document.querySelector('#conv').hidden), 'el chat se abrió solo al entrar la otra persona');

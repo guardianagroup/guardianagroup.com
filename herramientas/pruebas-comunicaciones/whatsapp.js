@@ -47,7 +47,7 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   const texto = decodeURIComponent((/text=([^&]*)/.exec(wa) || [])[1] || '');
   console.log('     whatsapp:', texto.replace(/#b=.*/, '#b=…'));
   comprueba(/^whatsapp:\/\/send\?text=/.test(wa), 'abre whatsapp://send con el texto');
-  comprueba(/Invitación a una sesión blindada de GUARDIANA Comunicaciones\n(https:\/\/guardianagroup\.com|http:\/\/127\.0\.0\.1:8080)\/orbita\/comunicaciones\/#b=[A-Za-z0-9_-]{43}$/.test(texto), 'el texto: la frase de siempre y el enlace');
+  comprueba(/^Invitación a un chat de GUARDIANA\n(https:\/\/guardianagroup\.com|http:\/\/127\.0\.0\.1:8080)\/orbita\/comunicaciones\/#i=[A-Za-z0-9_-]{43}$/.test(texto), 'el texto: la frase y el enlace del chat normal (el de entrada)');
   comprueba(await visible(A, '#h-invitar'), 'mientras WhatsApp no se abre, la hoja sigue');
   // otro toque en «WhatsApp»: la misma invitación (no se crea otra que dejaría el primer enlace sin valor)
   await A.click('#invitar-wa'); await espera(900);
@@ -79,11 +79,14 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   comprueba(await C.evaluate(() => window.__compartidos.length === 1), '«Otras apps»: el menú de compartir del teléfono');
   comprueba(!(await visible(C, '#h-invitar')), 'y la hoja se cierra');
 
-  // 5. Android: como siempre, el menú de compartir directo
+  // 5. Android: la misma hoja (29 Oct 2026, 07:49: normal o blindado, y WhatsApp u «Otras apps»)
   const D = await telefono(browser, ANDROID);
   await D.goto(URL0); await espera(1500);
-  await D.click('#nueva-blindada'); await espera(900);
-  comprueba(!(await visible(D, '#h-invitar')) && await D.evaluate(() => window.__compartidos.length === 1), 'Android: el menú de compartir directo, sin hoja');
+  await D.click('#nueva-blindada'); await espera(600);
+  comprueba(await visible(D, '#h-invitar'), 'Android: la misma hoja, con el tipo de chat');
+  await D.click('#tipo-blindado'); await D.click('#invitar-wa'); await espera(900);
+  const waD = decodeURIComponent((/text=([^&]*)/.exec(D.__wa[D.__wa.length - 1] || '') || [])[1] || '');
+  comprueba(/^Invitación a un chat blindado de GUARDIANA\n.*#b=[A-Za-z0-9_-]{43}$/.test(waD), 'Android, blindado por WhatsApp: la frase y el enlace «#b=»', waD.split('\n')[0]);
 
   await browser.close();
   console.log(fallos.length ? 'FALLOS: ' + fallos.length : 'TODO BIEN');

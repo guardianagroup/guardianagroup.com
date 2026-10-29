@@ -53,6 +53,7 @@
   let ACTUAL = null;        // sala abierta
   let R = null;
   let LL = null; // llamadas de voz (llamada.js)
+  let ponDiscretoConv = () => {}; // el modo discreto según el chat: siempre en el blindado, nunca en el normal (eventos())
   const uuid = () => (crypto.randomUUID ? crypto.randomUUID() : C.hex(C.azar(16)));
   // El viaje del archivo y el comprobante de custodia (dueño, 27 Oct 2026, 20:39): el estado de cada envío vive aquí,
   // solo en memoria; el comprobante firmado por los dos equipos se guarda como un mensaje más («custodia»).
@@ -104,7 +105,7 @@
   function convNueva(sala, semilla, rol, modo) {
     return { id: sala, semilla, rol, modo: modo === 'blindada' ? 'blindada' : 'normal', suVerificada: false, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0 };
   }
-  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto });
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto });
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
     if (esB(c)) await preparaIdentidadB(c);
@@ -122,7 +123,7 @@
     let n = Math.max(0, ...xs.map((x) => x.num || 0));
     for (const x of xs) {
       if (x.estado === 'destruida_pendiente' && Date.now() - (x.tumba || x.creado || 0) > 24 * 3600 * 1000) { await BD.borra('conv', x.id); continue; }
-      if (x.estado !== 'destruida_pendiente' && !x.huella && !(x.modo === 'blindada' && x.rol === 'invita')) { await BD.borraConv('msg', x.id); await BD.borraConv('arch', x.id); await BD.borra('conv', x.id); continue; }
+      if (x.estado !== 'destruida_pendiente' && !x.huella && !(x.rol === 'invita' && (x.modo === 'blindada' || x.enlace))) { await BD.borraConv('msg', x.id); await BD.borraConv('arch', x.id); await BD.borra('conv', x.id); continue; }
       if (!x.num && x.estado !== 'destruida_pendiente') { x.num = ++n; await BD.pon('conv', x); }
       await preparaConv(x);
       if (x.estado !== 'destruida_pendiente') await cargaMensajes(x);
@@ -193,7 +194,23 @@
     if (sinPantalla) { if (ACTUAL && !CONVS.has(ACTUAL)) cierraConv(); pintaLista(); } else abreConv(c.id);
     return c;
   }
-  const enlaceB = (c) => ORIGEN + '#b=' + C.b64u(c.semilla);
+  // el enlace de la invitación: «#b=» la blindada y «#i=» la normal (29 Oct 2026, 07:49: «chat normal o blindado»)
+  const enlaceB = (c) => ORIGEN + (esB(c) ? '#b=' : '#i=') + C.b64u(c.semilla);
+  const porEnlace = (c) => !!(c && (esB(c) || c.enlace));
+  // Chat normal por enlace, para el teléfono (29 Oct 2026, 07:49): como la blindada de creaInvitacionB, pero con la identidad de
+  // siempre de este equipo (ECDH P-256 con ML-KEM-768). Se guarda, para que siga ahí si el teléfono duerme la app mientras se envía.
+  async function creaInvitacionN(semilla) {
+    if (esMovil()) await borraAnteriores();
+    if (!caben()) return;
+    await limpiaInvitaciones();
+    const d = await C.deSemilla(semilla);
+    const c = convNueva(d.sala, semilla, 'invita'); c.num = siguienteNum(); c.enlace = true;
+    await preparaConv(c); await guardaConv(c);
+    if (ACTUAL && !CONVS.has(ACTUAL)) cierraConv(); pintaLista();
+    return c;
+  }
+  const creaInvitacionEnlace = (semilla, modo) => (modo === 'blindada' ? creaInvitacionB(semilla, { sinPantalla: true }) : creaInvitacionN(semilla));
+  const textoInvitacion = (modo) => (modo === 'blindada' ? T('Invitación a un chat blindado de GUARDIANA') : T('Invitación a un chat de GUARDIANA'));
   function muestraEnlace(c) {
     const u = enlaceB(c); $('#enlace-b').value = u;
     const q = $('#enlace-qr'); if (q && window.qrSvg && q.dataset.u !== u) { q.innerHTML = window.qrSvg(u); q.dataset.u = u; }
@@ -331,7 +348,7 @@
         await derivaSesion(c, ef, efMia, pq);
       }
       else if (!resp) await presenta(c, null);
-      if (nueva) { if (c.codigo) R.retira(c.codigo); c.codigo = null; clearInterval(muestraInvitacion.reloj); await anotaSistema(c, 'Conversación establecida: encriptada de extremo a extremo. Comprueba el número de seguridad con la otra persona cuando puedas.'); if (ACTUAL === c.id) abreConv(c.id); else avisoConv(c, T('«{n}» ya está lista: la otra persona ha entrado.')); }
+      if (nueva) { if (c.codigo) R.retira(c.codigo); c.codigo = null; clearInterval(muestraInvitacion.reloj); await anotaSistema(c, esMovil() ? 'Mensajes y llamadas encriptados de extremo a extremo.' : 'Conversación establecida: encriptada de extremo a extremo. Comprueba el número de seguridad con la otra persona cuando puedas.'); if (ACTUAL === c.id) abreConv(c.id); else avisoConv(c, T('«{n}» ya está lista: la otra persona ha entrado.')); }
       if (c.estado === 'destruida_pendiente') { enviaControl(c, { tipo: 'destruir' }); setTimeout(() => destruyeLocal(c, false, true), 300); return; }
       mandaVaciar(c);
       pintaLista(); if (ACTUAL === c.id) pintaCabecera(c);
@@ -1230,6 +1247,8 @@
     if (!c) return '';
     if (c.alias) return c.alias;
     if (c.nombre) return c.nombre;
+    // en el teléfono, «Chat blindado» o «Chat» (29 Oct 2026, 07:49: «chat normal o blindado»), sin número: allí hay uno a la vez
+    if (esMovil()) return esB(c) ? T('Chat blindado') : T('Chat');
     const base = esB(c) ? T('Sesión blindada') : corto ? T('Conversación') : T('Conversación encriptada');
     return (c.num || 1) > 1 ? (esB(c) ? base : T('Conversación')) + ' ' + c.num : base;
   }
@@ -1273,7 +1292,7 @@
     const abrible = xs.find((x) => !invitacionPendienteMovil(x));
     if ((!ACTUAL || !CONVS.has(ACTUAL)) && !quiereNueva && !hayContactos() && abrible) abreConv(abrible.id);
   }
-  function invitacionPendienteMovil(x) { return esMovil() && x.estado === 'invitacion' && x.rol === 'invita' && !x.huella && esB(x); }
+  function invitacionPendienteMovil(x) { return esMovil() && x.estado === 'invitacion' && x.rol === 'invita' && !x.huella && porEnlace(x); }
 
   // ---------- contactos (dueño, 28 Oct 2026, 17:29–17:33: «una llamada directa sin tener que quedar la invitación… que uno
   // guarde el contacto como quiera… el nombre que quiera… simplificado y lo más fácil posible») ----------
@@ -1348,7 +1367,7 @@
   function pintaEspera(c) { if (!c || ACTUAL !== c.id) return; $('#conv').classList.toggle('sin-sesion', c.rol === 'acepta' && !c.huella); }
   // Quien invita, en el teléfono, entra en el chat en cuanto envía la invitación y espera ahí a la otra persona (dueño, 28 Oct 2026,
   // 21:51: «ya tiene que entrar en la sala del chat… No puede esperar desde fuera»). Lo que escriba sale cuando ella entre.
-  const esperaEnChat = (c) => !!(c && esMovil() && esB(c) && c.rol === 'invita' && !c.huella && c.compartido);
+  const esperaEnChat = (c) => !!(c && esMovil() && porEnlace(c) && c.rol === 'invita' && !c.huella && c.compartido);
   async function abreConv(id) {
     const c = CONVS.get(id); if (!c) return;
     if (ACTUAL && ACTUAL !== id) { paraEscribe(); guardaBorrador(); }
@@ -1361,11 +1380,12 @@
     $('#inicio').hidden = !inv; $('#conv').hidden = inv; $('#app').classList.toggle('en-conv', !inv); document.body.classList.toggle('en-conv', !inv);
     $('#inicio').classList.toggle('con-invitacion', inv); // sin la presentación de la página: solo la invitación (15:32)
     if (inv) { verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; }
-    if (inv) { $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = true; $('#paso-codigo').hidden = esB(c); $('#paso-enlace').hidden = !esB(c); }
+    if (inv) { $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = true; $('#paso-codigo').hidden = porEnlace(c); $('#paso-enlace').hidden = !porEnlace(c); }
     pintaCabecera(c); pintaTodos(c); pintaRadio(c); pintaLista();
     if (esperaEnChat(c)) document.body.classList.remove('esperando-enlace');
-    else if (c.estado === 'invitacion' && c.rol === 'invita') { if (esB(c)) muestraEnlace(c); else { muestraInvitacion(c); if (!c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); } }
+    else if (c.estado === 'invitacion' && c.rol === 'invita') { if (porEnlace(c)) muestraEnlace(c); else { muestraInvitacion(c); if (!c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); } }
     $('#conv').classList.toggle('blindada', esB(c));
+    ponDiscretoConv(c);
     pintaEspera(c);
     marcaLeidos(c);
     if (matchMedia('(min-width: 761px)').matches) $('#texto').focus();
@@ -2109,7 +2129,11 @@
     // 28 Oct 2026 (dueño): de entrada, el modo normal; el discreto solo si la persona lo elige. Clave nueva, para que nadie
     // se quede en discreto por el valor que la versión anterior guardaba sola al abrir la página.
     const conv = $('#conv'), mascara = $('#texto-mascara');
-    let discreto = false; try { discreto = localStorage.getItem('gcom-discreto2') === '1'; localStorage.removeItem('gcom-discreto'); } catch (_) {}
+    // 29 Oct 2026, 07:54 (dueño): «en el modo blindado, la foto llega… pero no se ve. Hay que tocarla para que se pueda ver… y cuando
+    // dejamos de verla… otra vez a no poder ver… en el modo blindado también ese modelo… que no se ve el chat… Y cuando escribimos, se
+    // escriben números». Desde entonces el discreto va con el tipo de chat: siempre en el blindado y nunca en el normal, sin interruptor.
+    let discreto = false; try { localStorage.removeItem('gcom-discreto2'); localStorage.removeItem('gcom-discreto'); } catch (_) {}
+    for (const id of ['#discreto', '#cm-discreto']) { const b = $(id); if (b) b.hidden = true; }
     let cifras = [];
     const pintaMascara = () => {
       if (!discreto) { mascara.textContent = ''; return; }
@@ -2119,14 +2143,14 @@
       let i = 0; mascara.textContent = [...v].map((ch) => { const d = cifras[i++]; return ch === '\n' || ch === ' ' ? ch : d; }).join('') + (v.endsWith('\n') ? ' ' : '');
       mascara.scrollTop = ta.scrollTop;
     };
-    const ponDiscreto = (on, elegido) => {
-      discreto = !!on; if (elegido) { try { localStorage.setItem('gcom-discreto2', discreto ? '1' : '0'); } catch (_) {} }
+    const ponDiscreto = (on) => {
+      discreto = !!on;
       conv.classList.toggle('discreta', discreto); $('#discreto').setAttribute('aria-pressed', String(discreto));
       $('#discreto').title = discreto ? T('Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para verlo todo normal.') : T('Modo discreto: el chat se ve borroso hasta que lo mantienes pulsado y lo que escribes se ve como números. Púlsalo para activarlo.');
-      ta.placeholder = discreto ? T('Modo discreto: lo que escribas se verá como números') : T('Escribe un mensaje');
+      ta.placeholder = T('Escribe un mensaje');
       lienzo.classList.toggle('velado', discreto); pintaMascara();
     };
-    $('#discreto').addEventListener('click', () => ponDiscreto(!discreto, true));
+    ponDiscretoConv = (c) => ponDiscreto(!!(c && esB(c)));
     ta.addEventListener('input', pintaMascara); ta.addEventListener('scroll', () => { mascara.scrollTop = ta.scrollTop; });
     // Velo: se descubre solo mientras se mantiene pulsado (ratón o dedo) sobre los mensajes o sobre la pista
     const lienzo = $('#lienzo');
@@ -2135,7 +2159,20 @@
     let veloT = null; const cubre = () => { clearTimeout(veloT); if (!discreto) return; veloT = setTimeout(() => { if (discreto) lienzo.classList.add('velado'); }, 1200); };
     const descubreYa = (e) => { clearTimeout(veloT); descubre(e); };
     for (const el of [lienzo, $('#velo-pista')]) { el.addEventListener('pointerdown', descubreYa); el.addEventListener('contextmenu', (e) => e.preventDefault()); }
-    addEventListener('pointerup', cubre); addEventListener('pointercancel', cubre); addEventListener('blur', cubre); document.addEventListener('visibilitychange', () => { if (document.visibilityState !== 'visible') cubre(); });
+    addEventListener('pointerup', cubre); addEventListener('pointercancel', cubre); addEventListener('blur', cubre);
+    // al salir de la app (otra app, la multitarea), el velo al momento: la miniatura del teléfono sale tapada (29 Oct 2026, 08:02)
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState !== 'visible' && discreto) { clearTimeout(veloT); lienzo.classList.add('velado'); } });
+    // En el ordenador, en el blindado (29 Oct 2026, 08:02: «que no se puedan hacer capturas… que aparezca un mensaje… modo blindado, no
+    // se puede capturar»): una web no puede impedir una captura, pero con la tecla de captura la pantalla se tapa y se vacía el
+    // portapapeles (donde Windows deja la imagen), y si la ventana pierde el foco (las herramientas de recorte lo hacen) se tapa
+    // hasta volver. En el teléfono no hay aviso de captura: allí protege el velo.
+    { const tapa = $('#captura-velo'); let capT = null;
+      const enBlindado = () => { const c = CONVS.get(ACTUAL); return !!(c && esB(c) && !$('#conv').hidden); };
+      const ordenador = !!(matchMedia('(hover: hover) and (pointer: fine)').matches);
+      if (tapa) {
+        addEventListener('keyup', (e) => { if (e.key !== 'PrintScreen' || !enBlindado()) return; tapa.hidden = false; clearTimeout(capT); capT = setTimeout(() => { tapa.hidden = true; }, 3000); try { navigator.clipboard.writeText(T('Modo blindado: no se puede capturar')).catch(() => {}); } catch (_) {} });
+        if (ordenador) { addEventListener('blur', () => { if (enBlindado()) { clearTimeout(capT); tapa.hidden = false; } }); addEventListener('focus', () => { tapa.hidden = true; }); }
+      } }
     $('#velo-pista').addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); descubre(e); } });
     $('#velo-pista').addEventListener('keyup', cubre);
     ponDiscreto(discreto);
@@ -2294,24 +2331,46 @@
     // solo abre su ventanita, que deja el mensaje en cola hasta que la app despierta. Así que primero: «WhatsApp», que abre la app
     // entera con la invitación ya escrita (se elige a la persona, se envía y sale al momento), u «Otra app», el menú de siempre.
     // Los mismos toques que antes. En Android y en el ordenador, como siempre (allí compartir ya abre WhatsApp entero).
-    const IPHONE = /iPhone|iPod/.test(navigator.userAgent);
+    // 29 Oct 2026, 07:49 (dueño): «cuando la persona le da a invitar a chat… una opción que le diga chat normal o blindado. Y el
+    // blindado salga en otro color y ahí ya metemos… la máxima que tenemos». La misma hoja en el iPhone y en Android: el tipo de
+    // chat (de entrada, el normal) y debajo WhatsApp u «Otras apps».
+    let tipoInv = 'normal';
+    const pintaTipo = () => { for (const [id, t] of [['#tipo-normal', 'normal'], ['#tipo-blindado', 'blindada']]) { const b = $(id); if (b) b.setAttribute('aria-checked', String(tipoInv === t)); } $('#h-invitar').classList.toggle('es-blindado', tipoInv === 'blindada'); };
     function invitar() {
-      if (IPHONE && esMovil() && navigator.share && C.B.hayBlindada()) { abreHoja('h-invitar'); return; }
+      if (esMovil() && navigator.share) { tipoInv = 'normal'; pintaTipo(); abreHoja('h-invitar'); return; }
       nuevaBlindadaConCopia();
     }
+    $('#tipo-normal').addEventListener('click', () => { tipoInv = 'normal'; pintaTipo(); });
+    $('#tipo-blindado').addEventListener('click', () => { if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; } tipoInv = 'blindada'; pintaTipo(); });
+    // «Otras apps»: el menú de compartir del teléfono, dentro del mismo toque (la invitación se crea a la vez)
+    function invitaConMenu(modo) {
+      const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0);
+      const url = ORIGEN + (modo === 'blindada' ? '#b=' : '#i=') + C.b64u(semilla);
+      let compartido = null; try { compartido = navigator.share({ title: 'GUARDIANA', text: textoInvitacion(modo), url }); } catch (e) { compartido = Promise.reject(e); }
+      const hecha = creaInvitacionEnlace(semilla, modo);
+      Promise.resolve(compartido).then(async () => {
+        const c = await hecha; if (!c) return; c.compartido = true;
+        if (!c.huella && (!ACTUAL || ACTUAL === c.id)) abreConv(c.id); // al chat, a esperar a la otra persona (28 Oct, 21:51)
+      }).catch(async (e) => {
+        const c = await hecha.catch(() => null); if (!c || c.huella) return;
+        if (e && e.name === 'AbortError') { try { await destruye(c, true); } catch (_) {} pintaLista(); return; }
+        abreConv(c.id); // el menú de compartir no se pudo abrir: la pantalla con «Compartir enlace»
+      });
+    }
     let invWa = null, esperaWa = null; // la invitación que ya salió hacia WhatsApp (si se toca otra vez, la misma) y si se fue a WhatsApp
-    $('#invitar-otra').addEventListener('click', () => { cierraHoja('h-invitar'); nuevaBlindadaConCopia(); });
+    $('#invitar-otra').addEventListener('click', () => { cierraHoja('h-invitar'); invitaConMenu(tipoInv); });
     $('#invitar-no').addEventListener('click', () => cierraHoja('h-invitar'));
     $('#invitar-wa').addEventListener('click', async () => {
       const b = $('#invitar-wa'); if (b.getAttribute('aria-busy') === 'true') return;
       b.setAttribute('aria-busy', 'true');
       try {
-        let c = invWa ? CONVS.get(invWa) : null; if (c && (c.huella || !esB(c))) c = null;
+        const modo = tipoInv;
+        let c = invWa ? CONVS.get(invWa) : null; if (c && (c.huella || !porEnlace(c) || (modo === 'blindada') !== esB(c))) c = null;
         // primero la invitación (unas décimas): al abrirse WhatsApp el iPhone duerme esta app, y la otra persona la puede abrir al momento
-        if (!c) { const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0); c = await creaInvitacionB(semilla, { sinPantalla: true }); }
+        if (!c) { const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0); c = await creaInvitacionEnlace(semilla, modo); }
         if (!c) return;
         invWa = c.id; esperaWa = { id: c.id, fuera: false };
-        location.href = 'whatsapp://send?text=' + encodeURIComponent(T('Invitación a una sesión blindada de GUARDIANA Comunicaciones') + '\n' + enlaceB(c));
+        location.href = 'whatsapp://send?text=' + encodeURIComponent(textoInvitacion(modo) + '\n' + enlaceB(c));
         const e = esperaWa;
         setTimeout(() => { if (esperaWa === e && !e.fuera && document.visibilityState === 'visible') { esperaWa = null; aviso(T('No se pudo abrir WhatsApp.')); } }, 6000);
       } finally { b.removeAttribute('aria-busy'); }
@@ -2336,7 +2395,7 @@
     $('#enlace-copiar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.clipboard.writeText(enlaceB(c)); c.copiado = true; c.compartido = true; muestraEnlace(c); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { $('#enlace-b').select(); } });
     const comparte = $('#enlace-compartir'); comparte.hidden = !navigator.share;
     // (en el teléfono, después de compartir se vuelve al inicio, sin pantalla de espera: 19:17)
-    comparte.addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.share({ title: 'GUARDIANA', text: T('Invitación a una sesión blindada de GUARDIANA Comunicaciones'), url: enlaceB(c) }); c.compartido = true; if (ACTUAL !== c.id) return; if (esMovil() && !c.huella) abreConv(c.id); else muestraEnlace(c); } catch (_) {} });
+    comparte.addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !porEnlace(c)) return; try { await navigator.share({ title: 'GUARDIANA', text: textoInvitacion(c.modo), url: enlaceB(c) }); c.compartido = true; if (ACTUAL !== c.id) return; if (esMovil() && !c.huella) abreConv(c.id); else muestraEnlace(c); } catch (_) {} });
     $('#enlace-cancelar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await destruye(c, true); });
     $('#bl-coincide').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await marcaVerificada(c, !c.verificada); });
     $('#cierre-si').addEventListener('click', async () => { cierraHoja('h-cierre'); const c = CONVS.get(ACTUAL); if (c) await destruye(c); });

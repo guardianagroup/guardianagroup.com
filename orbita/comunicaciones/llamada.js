@@ -58,12 +58,13 @@
     let inicioYo = false; // quién llamó: el resumen del chat va a mi lado o al suyo (dueño, 28 Oct 2026, 13:29)
     let pantallaEncendida = null; // Wake Lock: la pantalla no se apaga mientras dura la llamada (agencia, ronda 74)
     let cam = null, video = false, suCamara = true, remotoV = null; // videollamada: mi cámara, si la llamada es con imagen, si la otra persona tiene la cámara encendida y su imagen
-    let imagen = 'natural'; try { imagen = localStorage.getItem('gcom-imagen') || 'natural'; } catch (_) {} if (!(imagen in IMAGENES)) imagen = 'natural';
+    // la voz y la imagen empiezan siempre naturales: se cambian en la llamada con «Voz grave» y «Mosaico» (29 Oct 2026, 07:51)
+    let imagen = 'natural'; try { localStorage.removeItem('gcom-imagen'); } catch (_) {}
     let proc = null; // la imagen procesada (lienzo): protegida, o aclarada si hay poca luz
     // «Mejorar la luz»: de entrada, en el ordenador sí y en el teléfono no (su cámara ya ajusta la luz y así gasta menos batería)
     let luz = !COMPATIBLE; try { const v = localStorage.getItem('gcom-luz'); if (v !== null) luz = v !== '0'; } catch (_) {}
     let ganancia = 1, medidor = null, vCam = null, ajustes = false;
-    let voz = 'natural'; try { voz = localStorage.getItem('gcom-voz') || 'natural'; } catch (_) {} if (!VOCES[voz]) voz = 'natural';
+    let voz = 'natural'; try { localStorage.removeItem('gcom-voz'); } catch (_) {}
     const ocupado = () => estado !== 'libre';
     // dueño, 28 Oct 2026, 10:28: las opciones de imagen (Difuminada, Mosaico y «Mejorar la luz») solo en la sesión
     // blindada; en la normal, la básica, la imagen va tal cual
@@ -86,7 +87,15 @@
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
       $('#ll-imagenes').hidden = !(video && blindada());
-      $('#ll-ajustes-caja').hidden = !video;
+      // 29 Oct 2026, 07:51 (dueño): «La opción… mosaico y… la voz, en el chat normal no quiero que esté. Solamente… en el blindado dos
+      // opciones… la voz en modo grave y el mosaico… dos botones… muy profesionales cuando se abra… Antes no quiero que se vean»:
+      // sin «Voz e imagen» ni la píldora «Tu voz»; en el blindado, «Voz grave» y, con imagen, «Mosaico», solo con la llamada en marcha
+      $('#ll-ajustes-caja').hidden = true; ajustes = false;
+      const efectos = blindada() && estado === 'hablando';
+      $('#ll-grave-caja').hidden = !efectos;
+      $('#ll-mosaico-caja').hidden = !(efectos && video && !!cam);
+      $('#ll-grave').setAttribute('aria-pressed', String(voz === 'grave'));
+      $('#ll-mosaico').setAttribute('aria-pressed', String(imagen === 'mosaico'));
       const etq = blindada() ? t('Voz e imagen') : t('Tu voz');
       $('#ll-ajustes-b').setAttribute('aria-label', etq); const se = $('#ll-ajustes-caja span'); if (se) se.textContent = etq;
       caja.classList.toggle('ajustes', ajustes);
@@ -105,7 +114,7 @@
       caja.classList.toggle('entrando', plegar);
       if (!plegar) caja.classList.remove('voz-abierta');
       const pi = $('#ll-voz-pill');
-      if (pi) { pi.hidden = !plegar; pi.setAttribute('aria-expanded', String(caja.classList.contains('voz-abierta'))); const b = $('#ll-voces [data-voz="' + voz + '"]'), s = pi.querySelector('span'); if (s) s.textContent = t('Tu voz') + ': ' + (b ? b.textContent : t('Natural')); }
+      if (pi) { pi.hidden = true; pi.setAttribute('aria-expanded', String(caja.classList.contains('voz-abierta'))); const b = $('#ll-voces [data-voz="' + voz + '"]'), s = pi.querySelector('span'); if (s) s.textContent = t('Tu voz') + ': ' + (b ? b.textContent : t('Natural')); }
       mantenPantalla(estado !== 'libre' && estado !== 'cerrando');
       pintaVoces(); pintaImagenes(); pintaVideo(); pintaAltavoz(); fondo(); if (estado !== 'libre') requestAnimationFrame(escala);
       if (o.estado) { try { o.estado(estado, video); } catch (_) {} }
@@ -293,7 +302,7 @@
       nodo.parameters.get('robot').setValueAtTime(v.robot, ctx.currentTime);
     }
     function eligeVoz(v) {
-      if (!VOCES[v]) return; voz = v; try { localStorage.setItem('gcom-voz', v); } catch (_) {}
+      if (!VOCES[v]) return; voz = v;
       aplicaVoz(); pintaVoces();
       if (pc && mic && estado !== 'libre' && estado !== 'cerrando') cambiaEnvio();
     }
@@ -577,7 +586,7 @@
       pintaImagenes();
     }
     function eligeImagen(m) {
-      if (!(m in IMAGENES)) return; imagen = m; try { localStorage.setItem('gcom-imagen', m); } catch (_) {}
+      if (!(m in IMAGENES)) return; imagen = m;
       aplicaImagen(); pintaImagenes();
     }
     // el audio (con el cambio de voz) y la imagen, en el mismo flujo para que vayan sincronizados
@@ -781,7 +790,8 @@
       mic = null; envio = null; cam = null; nodo = null; if (ctx) { try { ctx.close(); } catch (_) {} ctx = null; }
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
-      pendientes = []; ofertaEntrante = null; iniciada = 0; partidaPorDefecto = true; mudasRemotas = [];
+      pendientes = []; ofertaEntrante = null; iniciada = 0; partidaPorDefecto = true;
+      voz = 'natural'; imagen = 'natural'; // la próxima llamada empieza con la voz y la imagen naturales mudasRemotas = [];
       const silencio = $('#ll-silenciar'); if (silencio) silencio.setAttribute('aria-pressed', 'false');
       if (por === 'fin') di(t('Llamada terminada'));
       else if (por === 'fallo') di(t('No se pudo mantener la conexión.'), true);
@@ -806,6 +816,8 @@
     for (const b of document.querySelectorAll('#ll-voces [data-voz]')) b.addEventListener('click', () => eligeVoz(b.dataset.voz));
     for (const b of document.querySelectorAll('#ll-imagenes [data-imagen]')) b.addEventListener('click', () => eligeImagen(b.dataset.imagen));
     $('#ll-luz').addEventListener('click', eligeLuz);
+    $('#ll-grave').addEventListener('click', () => { eligeVoz(voz === 'grave' ? 'natural' : 'grave'); pinta(); });
+    $('#ll-mosaico').addEventListener('click', () => { eligeImagen(imagen === 'mosaico' ? 'natural' : 'mosaico'); pinta(); });
     $('#ll-ajustes-b').addEventListener('click', () => { ajustes = !ajustes; pinta(); });
     // cerrar «Voz e imagen»: con «Atrás», con el mismo botón o tocando la imagen fuera del panel
     const cierraAjustes = () => { ajustes = false; caja.classList.remove('voz-abierta'); pinta(); };

@@ -1576,6 +1576,19 @@
     // el inicio con dos botones y los contactos en su pantalla (dueño, 29 Oct 2026, 07:37)
     "Aún no tienes contactos.": ["You have no contacts yet.", "Você ainda não tem contatos."],
     "Cuando hables con alguien, guárdalo y saldrá aquí.": ["When you talk to someone, save them and they will appear here.", "Quando falar com alguém, salve a pessoa e ela aparecerá aqui."],
+    // chat normal o blindado (dueño, 29 Oct 2026, 07:49–08:02)
+    "Chat normal": ["Normal chat", "Chat normal"],
+    "Para el día a día": ["For everyday use", "Para o dia a dia"],
+    "Chat blindado": ["Shielded chat", "Chat blindado"],
+    "Máxima seguridad": ["Maximum security", "Segurança máxima"],
+    "Tipo de chat": ["Chat type", "Tipo de chat"],
+    "Invitación a un chat blindado de GUARDIANA": ["Invitation to a shielded GUARDIANA chat", "Convite para um chat blindado do GUARDIANA"],
+    "Invitación a un chat de GUARDIANA": ["Invitation to a GUARDIANA chat", "Convite para um chat do GUARDIANA"],
+    "Chat": ["Chat", "Chat"],
+    "Voz grave": ["Deep voice", "Voz grave"],
+    "Modo blindado": ["Shielded mode", "Modo blindado"],
+    "No se puede capturar": ["Screenshots are not allowed", "Não é possível capturar"],
+    "Modo blindado: no se puede capturar": ["Shielded mode: screenshots are not allowed", "Modo blindado: não é possível capturar"],
     // la pregunta de añadir GUARDIANA tras aceptar una invitación (29 Oct 2026, 07:44)
     "¿Añadir GUARDIANA a tu pantalla de inicio?": ["Add GUARDIANA to your home screen?", "Adicionar o GUARDIANA à sua tela de início?"],
     "¿Instalar GUARDIANA en este ordenador?": ["Install GUARDIANA on this computer?", "Instalar o GUARDIANA neste computador?"],
