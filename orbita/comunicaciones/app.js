@@ -621,6 +621,10 @@
     try { const x = JSON.parse(sessionStorage.getItem('gcom-lineas') || 'null'); sessionStorage.removeItem('gcom-lineas'); if (x && Date.now() - x.t < 60000) lineasPrevias = x.l || {}; } catch (_) {}
   }
   // antes de recargar: dónde se está (el chat abierto o los contactos) y lo que se ve en cada conversación, para volver igual
+  // con la app fuera, la pantalla en la que estaba: si el teléfono la cierra, al abrirla en los 15 minutos siguientes se vuelve allí
+  function guardaUltima() { try { const ini = $('#inicio'); const v = ACTUAL || (ini && ini.classList.contains('ver-contactos') ? 'contactos' : ''); if (v) localStorage.setItem('gcom-ultima', JSON.stringify({ v, t: Date.now() })); else localStorage.removeItem('gcom-ultima'); } catch (_) {} }
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') guardaUltima(); });
+  addEventListener('pagehide', guardaUltima);
   function guardaPantalla() {
     try { guardaBorrador(); } catch (_) {}
     try { const ini = $('#inicio'); const v = ACTUAL || (ini && ini.classList.contains('ver-contactos') ? 'contactos' : ini && ini.classList.contains('ver-como') ? 'como' : ''); if (v) sessionStorage.setItem('gcom-volver', v); else sessionStorage.removeItem('gcom-volver'); } catch (_) {}
@@ -1511,7 +1515,8 @@
   const contactos = () => vivas().filter((x) => x.contacto && x.huella).sort((a, b) => nombreConv(a, true).localeCompare(nombreConv(b, true), 'es'));
   const hayContactos = () => esMovil() && contactos().length > 0;
   // 29 Oct 2026, 07:37 (dueño): en el inicio, dos botones, «Invitar a chat» y «Contactos»; la lista, en su propia pantalla
-  let verContactos = false;
+  let verContactos = false, editaContactos = false; // «Editar» en Contactos: cada fila con «Eliminar» (14:47)
+  let reenvia = () => {}, pideEliminar = () => {}; // (eventos())
   let verComo = false;
   function pintaComo(ver) {
     verComo = !!ver && esMovil();
@@ -1521,13 +1526,16 @@
   function pintaContactos() {
     const sec = $('#contactos'), ul = $('#contactos-filas'); if (!sec || !ul) return;
     // los contactos y, debajo, la conversación empezada que aún no se guardó (si no, al volver no habría cómo llegar a ella)
-    const xs = esMovil() ? contactos().concat(vivas().filter((x) => x.huella && !x.contacto)) : [];
+    // y las invitaciones enviadas desde aquí que aún esperan (14:33: tras cerrar la app no había cómo volver a ellas)
+    const xs = esMovil() ? contactos().concat(vivas().filter((x) => x.huella && !x.contacto), vivas().filter((x) => !x.huella && x.rol === 'invita' && porEnlace(x))) : [];
     const ver = esMovil() && verContactos;
     sec.hidden = !ver;
     $('#inicio').classList.toggle('ver-contactos', ver);
     $('#inicio').classList.toggle('con-contactos', xs.length > 0);
     document.body.classList.toggle('con-contactos', xs.length > 0);
     const vacio = $('#contactos-vacio'); if (vacio) vacio.hidden = xs.length > 0;
+    if (!xs.length) editaContactos = false;
+    const ed = $('#contactos-editar'); if (ed) { ed.hidden = !xs.length; ed.textContent = editaContactos ? T('Listo') : T('Editar'); ed.setAttribute('aria-pressed', String(editaContactos)); }
     ul.hidden = !xs.length;
     ul.textContent = '';
     for (const c of xs) {
@@ -1537,10 +1545,12 @@
       const av = document.createElement('span'); av.className = 'contacto-av' + (vivo ? ' en-linea' : ''); av.textContent = inicial(nombre); av.setAttribute('aria-hidden', 'true');
       const tx = document.createElement('span'); tx.className = 'contacto-txt';
       const nb = document.createElement('b'); nb.textContent = nombre; nb.translate = false;
-      const es = document.createElement('small'); es.textContent = c.noLeidos ? T('{n} mensajes nuevos').replace('{n}', c.noLeidos) : (c.contacto ? '' : T('Sin guardar') + ' · ') + (vivo ? T('En línea') : T('No conectado'));
+      const es = document.createElement('small'); es.textContent = !c.huella ? T('Invitación enviada · esperando') : c.noLeidos ? T('{n} mensajes nuevos').replace('{n}', c.noLeidos) : (c.contacto ? '' : T('Sin guardar') + ' · ') + (vivo ? T('En línea') : T('No conectado'));
       tx.append(nb, es); ab.append(av, tx);
       if (c.noLeidos) { const n = document.createElement('i'); n.className = 'contacto-n'; n.textContent = c.noLeidos > 99 ? '99+' : String(c.noLeidos); ab.append(n); }
       li.append(ab);
+      if (!c.huella && !editaContactos) { ul.append(li); continue; } // sin llamar a quien aún no ha entrado
+      if (editaContactos) { const q = document.createElement('button'); q.type = 'button'; q.className = 'contacto-quita'; q.dataset.id = c.id; q.dataset.acto = 'quita'; q.textContent = T('Eliminar'); q.setAttribute('aria-label', T('Eliminar el chat con {n}').replace('{n}', nombre)); li.append(q); ul.append(li); continue; }
       for (const [acto, etq, svg] of [['voz', T('Llamar a {n}'), SVG_TEL], ['video', T('Videollamada con {n}'), SVG_VID]].filter((x) => !SOLO_VIDEO || x[0] === 'video')) {
         const b = document.createElement('button'); b.type = 'button'; b.className = 'contacto-b'; b.dataset.id = c.id; b.dataset.acto = acto; b.innerHTML = svg;
         b.setAttribute('aria-label', etq.replace('{n}', nombre)); b.title = etq.replace('{n}', nombre); li.append(b);
@@ -1580,7 +1590,8 @@
   function pintaEspera(c) { if (!c || ACTUAL !== c.id) return; $('#conv').classList.toggle('sin-sesion', c.rol === 'acepta' && !c.huella); }
   // Quien invita, en el teléfono, entra en el chat en cuanto envía la invitación y espera ahí a la otra persona (dueño, 28 Oct 2026,
   // 21:51: «ya tiene que entrar en la sala del chat… No puede esperar desde fuera»). Lo que escriba sale cuando ella entre.
-  const esperaEnChat = (c) => !!(c && esMovil() && porEnlace(c) && c.rol === 'invita' && !c.huella && c.compartido);
+  // (29 Oct 2026, 14:33: también tras recargar o si el menú de compartir falló: nunca la pantalla «Invitar · Compartir enlace»)
+  const esperaEnChat = (c) => !!(c && esMovil() && porEnlace(c) && c.rol === 'invita' && !c.huella);
   // en cuanto hay una conversación establecida y se está en ella, la pregunta (una vez por sesión, y «Ahora no» se recuerda)
   function avisosCuandoToque() { setTimeout(preguntaAvisos, 1500); }
   function retiraAvisos(sala) { try { if (swReg && navigator.serviceWorker.controller) navigator.serviceWorker.controller.postMessage({ t: 'cierra', sala }); } catch (_) {} try { if (navigator.clearAppBadge && !nuevos) navigator.clearAppBadge().catch(() => {}); } catch (_) {} }
@@ -1699,9 +1710,14 @@
   }
   function pintaTodos(c) {
     const ul = $('#mensajes'); ul.textContent = ''; ul.dataset.dia = '';
+    // quien invita espera dentro del chat (12:50): arriba, qué va a pasar y, por si no llegó a enviarse, «Volver a enviar» (14:33)
+    if (esperaEnChat(c)) {
+      const li = document.createElement('li'); li.className = 'gc-nota-sistema gc-espera';
+      const tx = document.createElement('span'); tx.textContent = T('Invitación enviada. En cuanto la otra persona la abra, el chat empieza aquí.');
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'gc-espera-otra'; b.textContent = T('Volver a enviar'); b.addEventListener('click', () => reenvia(c));
+      li.append(tx, b); ul.append(li);
+    }
     for (const m of c.mensajes) pintaMensaje(c, m, false, true);
-    // quien invita espera dentro del chat (12:50): mientras no hay nada, se dice qué va a pasar
-    if (!c.mensajes.length && esperaEnChat(c)) { const li = document.createElement('li'); li.className = 'gc-nota-sistema gc-espera'; li.textContent = T('Invitación enviada. En cuanto la otra persona la abra, el chat empieza aquí.'); ul.append(li); }
     ul.scrollTop = ul.scrollHeight;
   }
   function pintaMensaje(c, m, reemplaza, sinScroll) {
@@ -1713,7 +1729,6 @@
     if (!li) {
       // el «escribiendo…» va siempre el último: se aparta mientras entra el mensaje y vuelve detrás; si el mensaje es suyo, se quita
       const esc = ul.querySelector('li.gc-escribiendo'); if (esc) esc.remove();
-      const esp = ul.querySelector('li.gc-espera'); if (esp) esp.remove();
       if (ul.dataset.dia !== diaDe(m.t)) { ul.dataset.dia = diaDe(m.t); const f = document.createElement('li'); f.className = 'gc-fecha'; f.textContent = fecha(m.t); ul.append(f); }
       li = document.createElement('li'); li.dataset.id = m.id; ul.append(li);
       if (esc) { if (m.dir === 'suya') clearTimeout(escribeT); else ul.append(esc); }
@@ -2380,11 +2395,12 @@
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pq && !pq.hidden) cierraPorque(false); });
     }
     $('#como-atras').addEventListener('click', () => { pintaComo(false); });
-    $('#contactos-atras').addEventListener('click', () => { verContactos = false; pintaContactos(); });
+    $('#contactos-atras').addEventListener('click', () => { verContactos = false; editaContactos = false; pintaContactos(); });
     // el inicio con los contactos: la fila abre el chat; los botones llaman o videollaman
     $('#contactos-filas').addEventListener('click', (e) => {
       const b = e.target.closest('button[data-id]'); if (!b) return;
       const c = CONVS.get(b.dataset.id); if (!c) return;
+      if (b.dataset.acto === 'quita') { pideEliminar(c); return; }
       if (b.dataset.acto) llamaContacto(c, b.dataset.acto === 'video'); else abreConv(c.id);
     });
     $('#volver-lista').addEventListener('click', () => { if (vivas().length) { quiereNueva = false; if (matchMedia('(max-width: 760px)').matches) verLista(); else pintaLista(); } });
@@ -2422,7 +2438,7 @@
       if (!menu.hidden) return cierraMenu();
       $('#cm-discreto').setAttribute('aria-checked', String($('#discreto').getAttribute('aria-pressed') === 'true'));
       pintaAvisosMenu();
-      { const k = CONVS.get(ACTUAL), es = !!(k && k.contacto); $('#cm-eliminar').hidden = !es; $('#cm-terminar').hidden = es; }
+      $('#cm-eliminar').hidden = false; $('#cm-terminar').hidden = true; // un solo «Eliminar chat», como WhatsApp (14:47)
       menu.hidden = false; mas.setAttribute('aria-expanded', 'true');
       const p = menu.querySelector('button:not([hidden])'); if (p) p.focus({ preventScroll: true });
     });
@@ -2436,9 +2452,23 @@
     $('#avisos-no').addEventListener('click', () => { cierraHoja('h-avisos'); try { localStorage.setItem('gcom-avisos', 'no:' + Date.now()); } catch (_) {} });
     $('#cm-terminar').addEventListener('click', () => { cierraMenu(); $('#terminar').click(); });
     // un contacto no se termina sin querer: «Eliminar contacto», con una pregunta clara antes (20:25)
-    $('#cm-eliminar').addEventListener('click', () => { cierraMenu(); const c = CONVS.get(ACTUAL); if (!c) return; const t = $('#h-eliminar-t'); if (t) t.textContent = T('¿Eliminar a {n}?').replace('{n}', nombreConv(c, true)); abreHoja('h-eliminar'); });
-    $('#eliminar-no').addEventListener('click', () => cierraHoja('h-eliminar'));
-    $('#eliminar-si').addEventListener('click', async () => { cierraHoja('h-eliminar'); const c = CONVS.get(ACTUAL); if (c) await destruye(c); });
+    // Eliminar un chat (dueño, 29 Oct 2026, 14:47: «Tengo que poder eliminar chats»): desde «⋯» en el chat, con «Editar» en Contactos o
+    // manteniendo pulsado el contacto, como en WhatsApp. Se borra aquí y en el teléfono de la otra persona.
+    let eliminarId = null;
+    pideEliminar = (c) => { if (!c) return; eliminarId = c.id; const t = $('#h-eliminar-t'); if (t) t.textContent = T('¿Eliminar el chat con {n}?').replace('{n}', nombreConv(c, true)); abreHoja('h-eliminar'); };
+    $('#cm-eliminar').addEventListener('click', () => { cierraMenu(); pideEliminar(CONVS.get(ACTUAL)); });
+    $('#eliminar-no').addEventListener('click', () => { eliminarId = null; cierraHoja('h-eliminar'); });
+    $('#eliminar-si').addEventListener('click', async () => { cierraHoja('h-eliminar'); const c = CONVS.get(eliminarId || ACTUAL); eliminarId = null; if (c) await destruye(c, true); aviso(T('Chat eliminado.')); pintaContactos(); });
+    { const ed = $('#contactos-editar'); if (ed) ed.addEventListener('click', () => { editaContactos = !editaContactos; pintaContactos(); }); }
+    // mantener pulsado un contacto: «¿Eliminar el chat?»
+    { const ul = $('#contactos-filas'); let t = null, x0 = 0, y0 = 0, hecho = false;
+      const corta = () => { clearTimeout(t); t = null; };
+      ul.addEventListener('pointerdown', (e) => { const ab = e.target.closest('.contacto-abre'); if (!ab) return; hecho = false; x0 = e.clientX; y0 = e.clientY; corta(); t = setTimeout(() => { t = null; hecho = true; try { if (navigator.vibrate) navigator.vibrate(15); } catch (_) {} pideEliminar(CONVS.get(ab.dataset.id)); }, 550); });
+      ul.addEventListener('pointermove', (e) => { if (t && Math.hypot(e.clientX - x0, e.clientY - y0) > 10) corta(); });
+      for (const ev of ['pointerup', 'pointercancel', 'pointerleave']) ul.addEventListener(ev, corta);
+      ul.addEventListener('click', (e) => { if (hecho) { hecho = false; e.stopImmediatePropagation(); e.preventDefault(); } }, true);
+      ul.addEventListener('contextmenu', (e) => { const ab = e.target.closest('.contacto-abre'); if (!ab) return; e.preventDefault(); if (!hecho) { hecho = true; corta(); pideEliminar(CONVS.get(ab.dataset.id)); } });
+    }
     // «Borrar el chat», en el menú del teléfono: fuera de la barra de escribir, donde estaba a un dedo del micrófono (revisión de
     // diseño, 28 Oct 2026, 19:15); sigue pidiendo confirmación
     { const v = $('#cm-vaciar'); if (v) v.addEventListener('click', () => { cierraMenu(); $('#vaciar').click(); }); }
@@ -2872,7 +2902,10 @@
     // chat (de entrada, el normal) y debajo WhatsApp u «Otras apps».
     let tipoInv = 'normal';
     const pintaTipo = () => { for (const [id, t] of [['#tipo-normal', 'normal'], ['#tipo-blindado', 'blindada']]) { const b = $(id); if (b) b.setAttribute('aria-checked', String(tipoInv === t)); } $('#h-invitar').classList.toggle('es-blindado', tipoInv === 'blindada'); };
+    let reenvioId = null; // «Volver a enviar» desde el chat que espera: la misma invitación, no una nueva
+    reenvia = (c) => { if (!c || c.huella) return; reenvioId = c.id; tipoInv = esB(c) ? 'blindada' : 'normal'; pintaTipo(); abreHoja('h-invitar'); };
     function invitar() {
+      reenvioId = null;
       if (esMovil() && navigator.share) { tipoInv = 'normal'; pintaTipo(); abreHoja('h-invitar'); return; }
       // el blindado, «próximamente» (dueño, 29 Oct 2026, 12:55–12:59): en el teléfono sin menú de compartir, la invitación normal con
       // su enlace; en el ordenador, el aviso y «Crear invitación»
@@ -2897,8 +2930,12 @@
       });
     }
     let invWa = null, esperaWa = null; // la invitación que ya salió hacia WhatsApp (si se toca otra vez, la misma) y si se fue a WhatsApp
-    $('#invitar-otra').addEventListener('click', () => { cierraHoja('h-invitar'); invitaConMenu(tipoInv); });
-    $('#invitar-no').addEventListener('click', () => cierraHoja('h-invitar'));
+    $('#invitar-otra').addEventListener('click', () => {
+      cierraHoja('h-invitar');
+      if (reenvioId) { const c = CONVS.get(reenvioId); reenvioId = null; if (c && !c.huella) { try { navigator.share({ title: 'GUARDIANA', text: textoInvitacion(esB(c) ? 'blindada' : 'normal'), url: enlaceB(c) }).catch(() => {}); } catch (_) {} } return; }
+      invitaConMenu(tipoInv);
+    });
+    $('#invitar-no').addEventListener('click', () => { reenvioId = null; cierraHoja('h-invitar'); });
     $('#invitar-wa').addEventListener('click', async () => {
       const b = $('#invitar-wa'); if (b.getAttribute('aria-busy') === 'true') return;
       // iPhone: WhatsApp entero (whatsapp://send), también aquí. A las 12:10 se probó la hoja de compartir del teléfono para no salir
@@ -2908,7 +2945,7 @@
       b.setAttribute('aria-busy', 'true');
       try {
         const modo = tipoInv;
-        let c = invWa ? CONVS.get(invWa) : null; if (c && (c.huella || !porEnlace(c) || (modo === 'blindada') !== esB(c))) c = null;
+        let c = reenvioId ? CONVS.get(reenvioId) : invWa ? CONVS.get(invWa) : null; reenvioId = null; if (c && (c.huella || !porEnlace(c) || (modo === 'blindada') !== esB(c))) c = null;
         // primero la invitación (unas décimas): al abrirse WhatsApp el iPhone duerme esta app, y la otra persona la puede abrir al momento
         if (!c) { const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0); c = await creaInvitacionEnlace(semilla, modo); }
         if (!c) return;
@@ -3042,7 +3079,9 @@
     // la app instalada en el iPhone arranca con la invitación en la dirección de inicio (?inv=…): pasa al fragmento de siempre
     try { const q0 = new URLSearchParams(location.search), inv = q0.get('inv'); if (inv && /^[ib]=[A-Za-z0-9_-]{20,120}$/.test(inv)) { q0.delete('inv'); const qs = q0.toString(); history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + '#' + inv); } } catch (_) {}
     const iosSafari = /iPhone|iPad|iPod/.test(navigator.userAgent || '') || (/Macintosh/.test(navigator.userAgent || '') && navigator.maxTouchPoints > 1);
-    if (/#[ib]=/.test(location.hash) && iosSafari && !comoApp() && window.gcomGuiaInvitacion) {
+    // (dueño, 29 Oct 2026, 14:31: «¿Qué significa [Seguir en Safari]?… hazlo automático, que no pregunte a nadie»): la invitación se
+    // abre directamente, sin la guía delante; la guía de la pantalla de inicio sigue en su botón de siempre
+    if (false && /#[ib]=/.test(location.hash) && iosSafari && !comoApp() && window.gcomGuiaInvitacion) {
       const enlace = location.href, hash = location.hash;
       revela();
       window.gcomGuiaInvitacion(hash, async () => { const ok = await preguntaInvitacion(enlace); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); });
@@ -3051,6 +3090,7 @@
     else {
       // tras recargar (tirar para actualizar o actualizarse sola), a la misma pantalla: el mismo chat o los contactos
       let v = null; try { v = sessionStorage.getItem('gcom-volver'); sessionStorage.removeItem('gcom-volver'); } catch (_) {}
+      if (!v) { try { const u = JSON.parse(localStorage.getItem('gcom-ultima') || 'null'); if (u && Date.now() - u.t < 15 * 60 * 1000 && !new URLSearchParams(location.search).get('desde')) v = u.v; } catch (_) {} }
       if (v && CONVS.has(v)) { if (ACTUAL !== v) abriendo = abreConv(v); }
       else if (v === 'contactos' && esMovil() && !ACTUAL) { verContactos = true; pintaContactos(); }
       else if (v === 'como' && esMovil() && !ACTUAL) pintaComo(true);

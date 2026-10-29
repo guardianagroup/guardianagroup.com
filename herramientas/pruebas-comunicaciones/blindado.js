@@ -42,7 +42,7 @@ const crypto = require('crypto'); const shaGrande = crypto.createHash('sha256').
   // 29 Oct 2026, 12:55–12:59 (dueño): el blindado va «próximamente» y sus extras están apagados; esta prueba queda para cuando vuelva
   if (await A.evaluate(() => { const b = document.querySelector('#tipo-blindado'); return !!b && b.getAttribute('aria-disabled') === 'true'; })) { console.log('El chat blindado está en «próximamente»: prueba omitida (se retoma cuando se active).'); await browser.close(); process.exit(0); }
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(2500);
-  const enlace = await A.evaluate(() => { const i = document.querySelector('#enlace-b'); return i && i.value; });
+  const enlace = await A.evaluate(() => { return window.gcomPrueba.enlace(); });
   if (!enlace) { console.log('sin enlace'); await browser.close(); process.exit(1); }
   await B.goto(enlace.replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(2000);
   if (await B.$('#aceptar-si:visible')) { await B.click('#aceptar-si'); }

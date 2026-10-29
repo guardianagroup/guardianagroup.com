@@ -23,7 +23,7 @@ const foto = (p, n) => p.screenshot({ path: path.join(OUT, n + '.png') });
 const visible = (p, s) => p.evaluate((s) => { const e = document.querySelector(s); if (!e) return false; const r = e.getBoundingClientRect(); return getComputedStyle(e).display !== 'none' && r.width > 0 && r.height > 0; }, s);
 async function conecta(A, B) {
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(2500);
-  const enlace = await A.evaluate(() => document.querySelector('#enlace-b').value);
+  const enlace = await A.evaluate(() => window.gcomPrueba.enlace());
   return enlace.replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
 }
 async function guarda(p, nombre) {
@@ -65,9 +65,13 @@ async function guarda(p, nombre) {
   comprueba(await A.evaluate(() => /\d\d:\d\d/.test(document.querySelector('#ll-tiempo').textContent) && !document.querySelector('#ll-tiempo').hidden), 'llamada en curso');
   await foto(A, '05-A-llamada');
   await A.evaluate(() => document.querySelector('#ll-colgar').click()); await espera(1500); // en la videollamada los botones se esconden solos
-  // recargar: los contactos se quedan; se arranca en el inicio con los dos botones y «Contactos» lleva a la lista (29 Oct, 07:37)
+  // recargar (o el teléfono cierra la app y se abre al momento): el mismo chat (29 Oct, 12:43 y 14:33); con «‹», los contactos, y con
+  // otro «‹», el inicio con los dos botones (07:37)
   await A.reload(); await espera(3500);
-  comprueba(await visible(A, '#nueva-blindada') && await visible(A, '#ver-contactos') && !(await visible(A, '#contactos')) && !(await visible(A, '#conv')), 'al abrir la app: el inicio con «Invitar a chat» y «Contactos»');
+  comprueba(await visible(A, '#conv') && !(await visible(A, '#nueva-blindada')), 'tras cerrarse y abrirse al momento: el mismo chat');
+  await A.click('#cvolver'); await espera(500);
+  if (await visible(A, '#contactos')) { await A.click('#contactos-atras'); await espera(400); }
+  comprueba(await visible(A, '#nueva-blindada') && await visible(A, '#ver-contactos') && !(await visible(A, '#contactos')) && !(await visible(A, '#conv')), 'el inicio con «Invitar a chat» y «Contactos»');
   await A.click('#ver-contactos'); await espera(400);
   const fila2 = await A.evaluate(() => [...document.querySelectorAll('#contactos-filas .contacto')].map((li) => li.textContent.trim()));
   comprueba(await visible(A, '#contactos') && fila2.length === 1 && /Mi mujer/.test(fila2[0]) && !(await visible(A, '#nueva-blindada')), '«Contactos»: la lista, sin los botones del inicio');

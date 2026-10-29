@@ -44,7 +44,7 @@ const foto = async (p, n) => { await p.screenshot({ path: path.join(OUT, n + '.p
   comprueba(est.puede && est.permiso === 'granted', 'A: push posible y permiso concedido ' + JSON.stringify({ puede: est.puede, permiso: est.permiso }));
   // invitación y entrada de B
   await A.p.click('#nueva-blindada'); if (await A.p.$('#h-invitar.gc-abierta')) await A.p.click('#invitar-otra'); await espera(2500);
-  const enlace = await A.p.evaluate(() => { const i = document.querySelector('#enlace-b'); return i && i.value; });
+  const enlace = await A.p.evaluate(() => { return window.gcomPrueba.enlace(); });
   if (!enlace) { console.log('sin enlace'); await browser.close(); process.exit(1); }
   await B.p.goto(enlace.replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(2000);
   if (await B.p.$('#aceptar-si:visible')) await B.p.click('#aceptar-si');

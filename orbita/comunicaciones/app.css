@@ -1542,3 +1542,12 @@ body.con-visor{overflow:hidden}
   .gira p{margin:0}
 }
 @keyframes gira-balancea{0%,100%{transform:rotate(-90deg)}50%{transform:rotate(0)}}
+/* Eliminar chats (dueño, 29 Oct 2026, 14:47): «Editar» arriba a la derecha en Contactos y, en cada fila, «Eliminar» en rojo; mantener
+   pulsado un contacto pregunta lo mismo (sin el menú de copiar del teléfono) */
+.contactos-editar{appearance:none;margin-left:auto;border:0;background:transparent;color:#9CC3E4;font:600 16px/1 var(--texto);padding:10px 6px;min-height:44px;cursor:pointer}
+.contactos-editar[hidden]{display:none}
+.contacto-quita{appearance:none;flex:none;border:0;border-radius:999px;padding:0 16px;min-height:42px;background:rgba(224,122,108,.16);color:#F0A497;font:600 15px/1 var(--texto);cursor:pointer}
+.contacto-abre{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+/* la nota de quien espera en el chat, con «Volver a enviar» debajo */
+.gc-espera{display:grid;justify-items:center;gap:8px}
+.gc-espera-otra{appearance:none;border:1px solid rgba(156,195,228,.3);border-radius:999px;background:transparent;color:#9CC3E4;font:600 14px/1 var(--texto);padding:9px 16px;min-height:40px;cursor:pointer}

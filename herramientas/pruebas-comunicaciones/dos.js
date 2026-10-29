@@ -53,7 +53,7 @@ const caja = (p, sel) => p.evaluate((s) => { const e = document.querySelector(s)
   // invitación blindada (en el móvil, un solo botón)
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(2500);
   await foto(A, '02-A-invitacion');
-  const enlace = await A.evaluate(() => { const i = document.querySelector('#enlace-b'); return i && i.value; });
+  const enlace = await A.evaluate(() => { return window.gcomPrueba.enlace(); });
   if (!enlace) { console.log('sin enlace'); await browser.close(); return; }
   await B.goto(enlace.replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(2000);
   await foto(B, '03-B-aceptar');

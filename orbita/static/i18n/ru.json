@@ -3345,7 +3345,16 @@
 "Hoy está disponible el chat Fuerte. Blindado y Ultra están en preparación: lo que figura aquí es lo previsto y se irá activando por tramos. Fuerte y Blindado son gratis.":"Сегодня доступен Надёжный чат. Защищённый и Ultra готовятся: здесь указано запланированное, оно будет включаться поэтапно. Надёжный и Защищённый — бесплатно.",
 "envío":"отправка",
 "recibo":"приём",
-"Pon el teléfono en vertical":"Поверните телефон вертикально"
+"Pon el teléfono en vertical":"Поверните телефон вертикально",
+"Editar":"Изменить",
+"Eliminar chat":"Удалить чат",
+"¿Eliminar el chat con {n}?":"Удалить чат с {n}?",
+"Eliminar el chat con {n}":"Удалить чат с {n}",
+"¿Eliminar este chat?":"Удалить этот чат?",
+"Se borra el chat aquí y en el teléfono de la otra persona. Para volver a hablar, tendréis que invitaros otra vez.":"Чат удаляется здесь и на телефоне собеседника. Чтобы снова общаться, нужно будет пригласить друг друга заново.",
+"Chat eliminado.":"Чат удалён.",
+"Volver a enviar":"Отправить снова",
+"Invitación enviada · esperando":"Приглашение отправлено · ожидание"
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

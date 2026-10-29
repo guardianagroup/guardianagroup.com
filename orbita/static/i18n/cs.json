@@ -3345,7 +3345,16 @@
 "Hoy está disponible el chat Fuerte. Blindado y Ultra están en preparación: lo que figura aquí es lo previsto y se irá activando por tramos. Fuerte y Blindado son gratis.":"Dnes je k dispozici Silný chat. Pancéřovaný a Ultra se připravují: zde uvedené je plán a bude se zapínat po etapách. Silný a Pancéřovaný jsou zdarma.",
 "envío":"odesílám",
 "recibo":"přijímám",
-"Pon el teléfono en vertical":"Otočte telefon na výšku"
+"Pon el teléfono en vertical":"Otočte telefon na výšku",
+"Editar":"Upravit",
+"Eliminar chat":"Smazat chat",
+"¿Eliminar el chat con {n}?":"Smazat chat s {n}?",
+"Eliminar el chat con {n}":"Smazat chat s {n}",
+"¿Eliminar este chat?":"Smazat tento chat?",
+"Se borra el chat aquí y en el teléfono de la otra persona. Para volver a hablar, tendréis que invitaros otra vez.":"Chat se smaže tady i v telefonu druhé osoby. Abyste spolu znovu mluvili, budete se muset znovu pozvat.",
+"Chat eliminado.":"Chat smazán.",
+"Volver a enviar":"Poslat znovu",
+"Invitación enviada · esperando":"Pozvánka odeslána · čeká se"
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

@@ -33,7 +33,7 @@ const estadoVoz = (p, sel) => p.evaluate((s) => { const d = document.querySelect
   const A = await telefono(browser, 'A'), B = await telefono(browser, 'B');
   await A.goto(URL0); await espera(1500);
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(2500);
-  const enlace = await A.evaluate(() => { const i = document.querySelector('#enlace-b'); return i && i.value; });
+  const enlace = await A.evaluate(() => { return window.gcomPrueba.enlace(); });
   if (!enlace) { console.log('sin enlace'); await browser.close(); process.exit(1); }
   await B.goto(enlace.replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(2000);
   if (await B.$('#aceptar-si:visible')) await B.click('#aceptar-si');

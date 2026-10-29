@@ -10,6 +10,8 @@
   var raiz = document.documentElement, app = false, vuelve = false, seguro = null, cancelado = false;
   try { app = matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || navigator.standalone === true; } catch (e) {}
   try { vuelve = !!sessionStorage.getItem('gcom-volver'); } catch (e) {}
+  // y si el teléfono cerró la app hace poco, también se vuelve a la última pantalla (app.js, guardaUltima)
+  try { var u = JSON.parse(localStorage.getItem('gcom-ultima') || 'null'); if (u && Date.now() - u.t < 15 * 60 * 1000) vuelve = true; } catch (e) {}
   if (app) raiz.classList.add('como-app');
   if (app || vuelve) {
     raiz.classList.add('arrancando');
