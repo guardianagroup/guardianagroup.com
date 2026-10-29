@@ -1571,3 +1571,5 @@ body.con-visor{overflow:hidden}
    botón, el punto y el tiempo): el reproductor tiene un ancho propio, como la burbuja de audio de WhatsApp */
 .gc-archivo-voz .gc-voz{width:min(68vw,280px);min-width:200px}
 @media (min-width:761px){.gc-archivo-voz .gc-voz{width:300px}}
+/* «Mis chats» en azul, igual que «Invitar a chat» (dueño, 29 Oct 2026, 15:53) */
+@media (max-width:760px){#paso-inicio #ver-contactos{background:#9CC3E4;color:#06080C;border-color:#9CC3E4;min-height:66px}#paso-inicio #ver-contactos b{color:inherit}#paso-inicio #ver-contactos:active{background:#8AB4DA}}
