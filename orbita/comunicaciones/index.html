@@ -38,7 +38,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261030o">
+<link rel="stylesheet" href="app.css?v=20261030p">
 <link rel="stylesheet" href="viaje.css?v=20261029a">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
 <script src="arranque.js?v=20261030j"></script>
@@ -169,40 +169,44 @@
          Solo lo que hace el código hoy; sin prometer protección absoluta -->
     <section class="contactos como-pantalla" id="como" aria-labelledby="como-t" hidden>
       <div class="contactos-cab"><button type="button" class="contactos-atras" id="como-atras" aria-label="Volver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><h2 class="contactos-t" id="como-t">¿Cómo funciona?</h2></div>
+      <!-- dueño, 29 Oct 2026, 11:22: «reorganices y los textos, todo, que sea mucho más profesional»: en bloques cortos, con el mismo
+           orden en que una persona lo vive (qué es, los dos modos, qué hace por ti, cómo protege, qué no hace) -->
       <div class="como-texto">
-        <h3>Dos tipos de chat</h3>
-        <p><b>Chat normal.</b> Para el día a día. Lo que escribes se encripta en tu teléfono antes de salir, y solo lo puede leer la otra persona.</p>
-        <p><b>Chat blindado.</b> Para lo más delicado. Usa la encriptación de máxima categoría, cambia las llaves cada 5 minutos y estrena una identidad nueva en cada conversación. En pantalla va tapado: se lee mientras lo mantienes pulsado. Y en las llamadas, tu cara sale en mosaico y tu voz más grave desde el primer momento.</p>
-        <h3>Por qué el mosaico y la voz cambiada</h3>
-        <p>Hoy, con tu cara, tus ojos o tu voz se pueden abrir cuentas, pasar controles de identidad y suplantarte. Un programa espía en el otro teléfono, una grabación de pantalla o un vídeo filtrado bastan para robarlos.</p>
-        <p>En el chat blindado, lo que sale de tu teléfono ya va sin tus rasgos y sin tu voz de siempre: aunque alguien lo capture, no tiene con qué suplantarte. No es para esconder nada; es para que nadie te pueda robar lo que te identifica. Y tú decides: con un toque enseñas tu cara o tu voz cuando quieras.</p>
-        <p class="como-nota">El mosaico oculta los rasgos de la cara y los ojos, no la silueta ni los gestos. La voz grave dificulta reconocerte de oído, pero no oculta tu acento ni tu forma de hablar.</p>
-        <h3>En el blindado, nada se muestra solo</h3>
-        <p>Lo que te llega aparece velado, con lo que es (un mensaje, una foto, un documento) y su tamaño. Tú decides: «Mostrar» o «Descartar». Si lo descartas, se borra sin abrirse y la otra persona lo sabe. En el chat normal, los mensajes aparecen directamente.</p>
-        <h3>Fotos y documentos con tiempo</h3>
-        <p>Al enviar una foto, un vídeo, un audio o un documento puedes ponerle tiempo: se ve una vez, 30 segundos, un minuto o cinco. Se abre dentro de GUARDIANA, no se puede guardar y, al cerrarse o al acabar el tiempo, se borra del otro equipo. Quien lo envió puede borrarlo en los dos equipos cuando quiera.</p>
-        <p class="como-nota">No impide una captura de pantalla ni una foto a la pantalla: ninguna aplicación puede impedirlo de verdad.</p>
-        <h3>El número de la llamada</h3>
-        <p>Al conectar una llamada o videollamada aparece un número grande en las dos pantallas. Decidlo en voz alta: si los dos veis el mismo, nadie está en medio. Es el método que creó el autor de PGP para las llamadas (ZRTP, estándar RFC 6189): cada llamada estrena su propio acuerdo de claves y quien esté en medio no puede fabricar el mismo número en las dos pantallas. No hay que mandar nada por ningún otro sitio.</p>
-        <h3>Si detecta un ataque, se destruye</h3>
-        <p>En el chat blindado, si llegan mensajes o piezas manipulados, si el número de la llamada no coincide o si el otro equipo da la alarma, la conversación destruye sus claves, sus mensajes y sus archivos en los dos equipos, automáticamente, y te lo dice en pantalla. Nada queda para que lo roben.</p>
-        <h3>Archivos «todo o nada»</h3>
-        <p>En el blindado, cada archivo viaja partido en piezas y cerrado como un paquete «todo o nada» (una idea de Ronald Rivest, del MIT, de 1997): sin todas las piezas no se descifra ni un byte, ni siquiera con la clave. Si falta una pieza, no se muestra nada y lo recibido se borra solo. Una pieza suelta robada por el camino no sirve de nada.</p>
-        <h3>La tecnología, en palabras sencillas</h3>
-        <p>Cada mensaje, foto, archivo y llamada se cierra con una llave que solo tienen tu equipo y el de la otra persona. Por el camino nadie puede abrirlo: ni nosotros ni ninguna empresa.</p>
-        <p>Las llaves se crean en tu teléfono y no salen de él. Los algoritmos son los nuevos estándares pensados para resistir a los ordenadores cuánticos del futuro.</p>
-        <h3>Sin registro</h3>
-        <p>Ni teléfono, ni correo, ni cuenta, ni contraseña. Entras con una invitación y ya está.</p>
-        <p>Es lo principal para tu privacidad: lo que no te pedimos no se puede robar, filtrar ni vender. Tu número no circula, nadie te encuentra por él y en ningún sitio queda escrito quién eres ni con quién hablas.</p>
-        <h3>Sin instalar nada</h3>
-        <p>Vive en tu navegador. No puede leer tus contactos, tus fotos ni otras apps, y no deja nada funcionando a escondidas. Si la añades a la pantalla de inicio, es solo un acceso directo.</p>
-        <p>Una aplicación instalada pide permisos y puede hacer cosas que no debería; ya ha pasado con versiones falsas de aplicaciones conocidas que llevaban dentro un programa espía. Una web no puede: solo ve lo que tú le das mientras está abierta, y al cerrarla no queda nada funcionando.</p>
-        <h3>Nuestro servidor no lee ni guarda</h3>
-        <p>Solo pasa paquetes cerrados de un equipo al otro. No guarda mensajes, nombres ni llaves, y cuando los dos salís, la sala desaparece.</p>
-        <h3>Código abierto y comprobable</h3>
-        <p>Todo el código es público y cualquiera puede revisarlo. La página «Seguridad y verificación» comprueba que lo que ha llegado a tu navegador es exactamente lo publicado.</p>
+        <p class="como-entrada">Mensajes, llamadas, videollamadas y archivos entre dos personas, encriptados de extremo a extremo. Sin cuenta, sin número de teléfono y sin instalar nada: se abre con una invitación y funciona en el navegador de tu teléfono o de tu ordenador.</p>
+
+        <h3>Dos modos</h3>
+        <div class="como-modos">
+          <div class="como-modo">
+            <b>Chat normal</b>
+            <p>Para el día a día. Encriptación de extremo a extremo con protección postcuántica, llamadas y videollamadas, archivos de hasta 4 GB.</p>
+          </div>
+          <div class="como-modo como-modo-b">
+            <b>Chat blindado</b>
+            <p>Para lo delicado. Todo lo del normal y, además: identidad nueva en cada conversación, claves que se renuevan cada 5 minutos, pantalla velada, mosaico y voz grave en las videollamadas, y autodestrucción ante un ataque.</p>
+          </div>
+        </div>
+
+        <h3>Qué hace por ti</h3>
+        <p><b>Número de seguridad en la llamada.</b> Al conectar, los dos veis el mismo número grande. Si coincide, nadie está en medio. Es el método que creó el autor de PGP (ZRTP, RFC 6189) y no exige enviar nada por otro sitio.</p>
+        <p><b>Fotos y documentos con tiempo.</b> Una vez, 30 segundos, un minuto o cinco: se ven dentro de GUARDIANA, no se pueden guardar y se borran del otro equipo. Quien envía puede borrar en los dos equipos cuando quiera.</p>
+        <p><b>En el blindado, nada se muestra solo.</b> Lo que llega aparece velado, con lo que es y su tamaño. Tú decides «Mostrar» o «Descartar»; lo descartado se borra sin abrirse y la otra persona lo sabe.</p>
+        <p><b>Archivos «todo o nada».</b> En el blindado, cada archivo viaja en piezas cerradas como un paquete único (Rivest, MIT, 1997): sin todas las piezas no se descifra ni un byte, ni con la clave. Si falta una, no se muestra nada y lo recibido se borra.</p>
+        <p><b>Si detecta un ataque, se destruye.</b> En el blindado, ante mensajes o piezas manipulados, un número de llamada que no coincide o la alarma del otro equipo, la conversación borra claves, mensajes y archivos en los dos equipos y te lo dice en pantalla.</p>
+        <p><b>Mosaico y voz grave.</b> En las videollamadas blindadas, tu cara sale en mosaico y tu voz más grave desde el primer momento, antes de encriptar: aunque alguien capture la pantalla, no tiene con qué suplantarte. Con un toque enseñas tu cara o tu voz cuando quieras.</p>
+        <p><b>Avisos con la app cerrada.</b> Si lo activas, te avisa de un mensaje o una llamada aunque GUARDIANA no esté abierta. El aviso solo dice «mensaje» o «llamada»: el contenido sigue encriptado hasta que la abres.</p>
+
+        <h3>Cómo protege</h3>
+        <p><b>Las claves nacen en tu equipo y no salen de él.</b> Cada mensaje, foto, archivo y llamada se cierra con una clave que solo tienen tu equipo y el de la otra persona. Por el camino nadie puede abrirlo: ni nosotros ni ninguna empresa.</p>
+        <p><b>Algoritmos de la nueva generación.</b> Los estándares pensados para resistir a los ordenadores cuánticos del futuro (en el blindado, los de la suite CNSA 2.0).</p>
+        <p><b>Un servidor que solo pasa paquetes cerrados.</b> No guarda mensajes, nombres ni claves; cuando los dos salís, la sala desaparece.</p>
+        <p><b>Código abierto y comprobable.</b> Todo el código es público. La página «Seguridad y verificación» comprueba que lo que ha llegado a tu navegador es exactamente lo publicado.</p>
+
+        <h3>Sin registro y sin instalar</h3>
+        <p><b>Ni teléfono, ni correo, ni cuenta, ni contraseña.</b> Lo que no te pedimos no se puede robar, filtrar ni vender. Tu número no circula, nadie te encuentra por él y en ningún sitio queda escrito quién eres ni con quién hablas.</p>
+        <p><b>Vive en tu navegador.</b> No puede leer tus contactos, tus fotos ni otras aplicaciones, y no deja nada funcionando a escondidas. Añadirla a la pantalla de inicio es solo un acceso directo. Una aplicación instalada pide permisos y puede hacer lo que no debería: ya ha ocurrido con versiones falsas de aplicaciones conocidas que llevaban dentro un programa espía.</p>
+
         <h3>Lo que no hace</h3>
-        <p>No impide que la otra persona guarde lo que le envías sin tiempo, ni que haga capturas. No puede saber si alguien copió un paquete por el camino (una copia no deja huella); por eso todo viaja encriptado, y la copia no sirve. No añade ningún riesgo a tu teléfono ni deja nada legible en él, pero tampoco protege un teléfono que ya esté infectado por otra vía.</p>
+        <p>No impide que la otra persona guarde lo que envías sin tiempo, ni que haga una captura o una foto de la pantalla. No puede saber si alguien copió un paquete por el camino: una copia no deja huella; por eso todo viaja encriptado y la copia no sirve. No protege un teléfono que ya esté infectado por otra vía. El mosaico oculta los rasgos de la cara y los ojos, no la silueta ni los gestos; la voz grave dificulta reconocerte de oído, pero no oculta tu acento ni tu forma de hablar.</p>
         <button type="button" class="boton principal como-porque" id="como-porque">Ver los datos: ¿por qué es así?</button>
       </div>
     </section>
@@ -782,7 +786,7 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>No se puede capturar</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261029p74"></script>
+<script src="/orbita/static/idioma.js?v=20261029p75"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>

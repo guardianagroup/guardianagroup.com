@@ -1451,3 +1451,13 @@ body.con-visor{overflow:hidden}
   .gc-archivo b{font-size:15px}.gc-archivo small{font-size:13px}.gc-archivo .sello{font-size:12.5px}
   .ll-sas-texto{font-size:14.5px}
 }
+/* «¿Cómo funciona?» reorganizado (dueño, 29 Oct 2026, 11:22): entrada, dos modos en tarjetas y bloques cortos con su título en negrita */
+.como-texto .como-entrada{margin:2px 0 6px;font-size:18.5px;line-height:1.55;color:#F0F3F6}
+.como-texto p b{color:#F4F6F8;font-weight:600}
+.como-modos{display:grid;grid-template-columns:1fr;gap:10px;margin:2px 0 6px}
+.como-modo{padding:14px 16px 12px;border-radius:16px;border:1px solid rgba(156,195,228,.18);background:rgba(12,18,26,.75)}
+.como-modo b{display:block;margin:0 0 6px;font:600 16.5px/1.25 var(--texto);color:#F4F6F8}
+.como-modo p{margin:0;font-size:16px;line-height:1.5;color:#dbe4ec}
+.como-modo-b{border-color:rgba(156,195,228,.34);background:linear-gradient(180deg,rgba(156,195,228,.10),rgba(12,18,26,.8))}
+.como-modo-b b::before{content:'';display:inline-block;width:9px;height:9px;border-radius:50%;background:#9CC3E4;margin:0 8px 1px 0;box-shadow:0 0 10px rgba(156,195,228,.7)}
+@media (min-width:761px){.como-modos{grid-template-columns:1fr 1fr;gap:12px}}
