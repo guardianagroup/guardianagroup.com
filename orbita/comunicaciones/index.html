@@ -5,10 +5,11 @@
 <!-- sin zoom (dueño, 29 Oct 2026, 09:34: «que se quede fija y no se pueda ampliar»); en Safari lo completa app.js (gesturestart) -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; manifest-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src blob:; connect-src 'self' https://motor.guardianagroup.com wss://motor.guardianagroup.com https://motor-am.guardianagroup.com wss://motor-am.guardianagroup.com http://127.0.0.1:* ws://127.0.0.1:* http://localhost:* ws://localhost:*; worker-src 'self'; form-action 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; manifest-src 'self' blob: data:; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src blob:; connect-src 'self' https://motor.guardianagroup.com wss://motor.guardianagroup.com https://motor-am.guardianagroup.com wss://motor-am.guardianagroup.com http://127.0.0.1:* ws://127.0.0.1:* http://localhost:* ws://localhost:*; worker-src 'self'; form-action 'none'; base-uri 'none'">
 <meta name="theme-color" content="#06080C">
 <!-- a pantalla completa, como una app, si se añade a la pantalla de inicio (dueño, 28 Oct 2026, 16:03: «que solo se vea lo nuestro») -->
-<link rel="manifest" href="/orbita/comunicaciones/comunicaciones.webmanifest">
+<script src="arranque.js?v=20261031a"></script>
+<!-- el manifiesto lo pone arranque.js: con una invitación en el iPhone, uno propio con la invitación dentro (dueño, 29 Oct 2026, 18:01) -->
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <!-- Barra de la hora opaca (28 Oct 2026, 17:10): con «black-translucent», iOS 26 deja la app instalada más corta que la pantalla
@@ -41,7 +42,6 @@
 <link rel="stylesheet" href="app.css?v=20261031f">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
-<script src="arranque.js?v=20261030l"></script>
 </head>
 <body>
 <!-- GUARDIANA · Comunicaciones (26 Oct 2026, 20:04; dueño: «ultra sencillo: un PC aquí, otro allí, le mando el código y
@@ -166,6 +166,8 @@
       <div class="contactos-cab"><button type="button" class="contactos-atras" id="contactos-atras" aria-label="Volver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><h2 class="contactos-t" id="contactos-t">Mis chats</h2><button type="button" class="contactos-editar" id="contactos-editar" aria-pressed="false" hidden>Editar</button></div>
       <ul class="contactos-filas" id="contactos-filas"></ul>
       <p class="contactos-vacio" id="contactos-vacio" hidden><b>Aún no tienes chats.</b><span>Cuando invites a alguien y te conteste, su chat saldrá aquí.</span></p>
+      <!-- iPhone (dueño, 18:03): también aquí, porque al abrir la app se vuelve a «Mis chats» o al último chat -->
+      <button type="button" class="anadir-app pegar-inv" id="pegar-inv-2" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Abrir invitación</span></button>
     </section>
     <!-- «¿Cómo funciona?» en el móvil (dueño, 29 Oct 2026, 08:24 y 08:41): para quien lo lee por primera vez y se queda tranquilo.
          Solo lo que hace el código hoy; sin prometer protección absoluta -->
@@ -243,6 +245,8 @@
       <!-- dueño, 29 Oct 2026, 08:24 y 08:41: «¿Cómo funciona?», un botón igual que «Contactos», debajo, con su propia pantalla -->
       <button type="button" class="grande" id="ver-como"><b>¿Cómo funciona?</b></button>
     </div>
+    <!-- iPhone, ya con la app (dueño, 18:03): la invitación copiada en Safari se abre aquí -->
+    <button type="button" class="anadir-app pegar-inv" id="pegar-inv" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Abrir invitación</span></button>
     <!-- en el móvil, una vez: Comunicaciones en la pantalla de inicio, como una app (dueño, 28 Oct 2026, 16:12) -->
     <button type="button" class="anadir-app" id="anadir-app" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 8v7M8.5 11.5h7"/></svg><span>Añadir a la pantalla de inicio</span></button>
     <!-- dueño, 27 Oct 2026, 10:10: «al empezar, lo básico, limpio y entendible»; la explicación, aparte, en un desplegable -->
@@ -306,9 +310,11 @@
     <div class="paso aceptar" id="paso-ios" hidden>
       <div class="espera-anillos quieto" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
       <h2>Te han invitado a GUARDIANA</h2>
-      <p class="t">Añade GUARDIANA a tu pantalla de inicio: el chat se abre dentro de la app, con sus avisos.</p>
-      <div class="fila centro"><button type="button" class="boton principal" id="ios-anadir">Ver cómo se añade</button></div>
-      <button type="button" class="enlace-cancelar-txt ios-safari-txt" id="ios-safari">Usar en Safari, sin avisos</button>
+      <!-- dueño, 18:03: quien ya tiene la app no puede volver a instalarla cada vez: «Ya tengo GUARDIANA» copia la invitación y en la app
+           «Abrir invitación» la abre (Apple no deja pasar nada de Safari a la app de otra forma) -->
+      <div class="ios-botones"><button type="button" class="boton principal" id="ios-instalar">Instalar y chatear</button><button type="button" class="boton" id="ios-tengo">Ya tengo GUARDIANA</button></div>
+      <p class="t ios-ayuda" id="ios-ayuda">Primera vez: pulsa «Instalar y chatear», luego «Agregar a Inicio», y abre GUARDIANA desde tu pantalla de inicio.</p>
+      <p class="t ios-ayuda ios-ok" id="ios-copiada" hidden>Invitación copiada. Abre GUARDIANA y pulsa «Abrir invitación».</p>
     </div>
 
     <div class="paso" id="paso-entrar" hidden>

@@ -13,6 +13,23 @@
   // y si el teléfono cerró la app hace poco, también se vuelve a la última pantalla (app.js, guardaUltima)
   try { var u = JSON.parse(localStorage.getItem('gcom-ultima') || 'null'); if (u && Date.now() - u.t < 15 * 60 * 1000) vuelve = true; } catch (e) {}
   if (app) raiz.classList.add('como-app');
+  // El manifiesto (29 Oct 2026, 17:58–18:01: en el iPhone, la app añadida desde una invitación nacía vacía). Se crea aquí, antes de
+  // que Safari lea ninguno: normalmente el de siempre; en el iPhone, en Safari y con una invitación, uno propio cuya dirección de
+  // inicio (absoluta) lleva la invitación dentro, y la dirección de la página también, por si el iPhone toma esa.
+  try {
+    var inv = (location.hash.match(/^#([ib]=[A-Za-z0-9_-]{43})$/) || [])[1];
+    var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+    var l = document.createElement('link'); l.rel = 'manifest'; l.href = '/orbita/comunicaciones/comunicaciones.webmanifest';
+    if (inv && ios && !app) {
+      var O = location.origin, base = O + '/orbita/comunicaciones/';
+      var man = { name: 'GUARDIANA', short_name: 'GUARDIANA', id: base, start_url: base + '?app=1&inv=' + inv + '#' + inv, scope: base, display: 'fullscreen', display_override: ['fullscreen', 'standalone'], orientation: 'portrait', background_color: '#06080C', theme_color: '#06080C', lang: 'es', dir: 'ltr', icons: [{ src: O + '/icon-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'any' }, { src: O + '/icon-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'any' }, { src: O + '/icon-maskable-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'maskable' }, { src: O + '/icon-maskable-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] };
+      var u = ''; try { u = URL.createObjectURL(new Blob([JSON.stringify(man)], { type: 'application/manifest+json' })); } catch (e) {}
+      l.href = u || 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(man));
+      history.replaceState(null, '', '/orbita/comunicaciones/?app=1&inv=' + inv + '#' + inv);
+      window.gcomManifiestoInv = man;
+    }
+    document.head.appendChild(l);
+  } catch (e) {}
   if (app || vuelve) {
     raiz.classList.add('arrancando');
     var arma = function (ms) { if (cancelado) return; clearTimeout(seguro); seguro = setTimeout(function () { raiz.classList.remove('arrancando'); }, ms); };

@@ -3416,6 +3416,12 @@
 ,
 "Encriptación de grado gubernamental para mensajes, llamadas y archivos":"Šifrování státní kategorie pro zprávy, hovory a soubory",
 "El chat blindado llegará próximamente. De momento, el chat fuerte.":"Pancéřovaný chat přijde brzy. Zatím silný chat."
+,
+"Instalar y chatear":"Nainstalovat a chatovat",
+"Primera vez: pulsa «Instalar y chatear», luego «Agregar a Inicio», y abre GUARDIANA desde tu pantalla de inicio.":"Poprvé: klepněte na „Nainstalovat a chatovat“, pak „Přidat na plochu“ a otevřete GUARDIANU z plochy.",
+"Invitación copiada. Abre GUARDIANA y pulsa «Abrir invitación».":"Pozvánka zkopírována. Otevřete GUARDIANU a klepněte na „Otevřít pozvánku“.",
+"Abrir invitación":"Otevřít pozvánku",
+"No hay ninguna invitación copiada. En Safari, pulsa «Ya tengo GUARDIANA» y vuelve aquí.":"Není zkopírovaná žádná pozvánka. V Safari klepněte na „GUARDIANU už mám“ a vraťte se sem."
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

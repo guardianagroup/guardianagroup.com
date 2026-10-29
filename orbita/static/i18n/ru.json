@@ -3416,6 +3416,12 @@
 ,
 "Encriptación de grado gubernamental para mensajes, llamadas y archivos":"Шифрование государственного уровня для сообщений, звонков и файлов",
 "El chat blindado llegará próximamente. De momento, el chat fuerte.":"Защищённый чат скоро появится. Пока — сильный чат."
+,
+"Instalar y chatear":"Установить и общаться",
+"Primera vez: pulsa «Instalar y chatear», luego «Agregar a Inicio», y abre GUARDIANA desde tu pantalla de inicio.":"Впервые: нажмите «Установить и общаться», затем «На экран „Домой“» и откройте GUARDIANA с экрана «Домой».",
+"Invitación copiada. Abre GUARDIANA y pulsa «Abrir invitación».":"Приглашение скопировано. Откройте GUARDIANA и нажмите «Открыть приглашение».",
+"Abrir invitación":"Открыть приглашение",
+"No hay ninguna invitación copiada. En Safari, pulsa «Ya tengo GUARDIANA» y vuelve aquí.":"Приглашение не скопировано. В Safari нажмите «У меня уже есть GUARDIANA» и вернитесь сюда."
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

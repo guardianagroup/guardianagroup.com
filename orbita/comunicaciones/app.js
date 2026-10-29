@@ -2662,8 +2662,9 @@
         if (l && !l.dataset.original) l.dataset.original = l.getAttribute('href');
         // la invitación va en la dirección de inicio de la app, en la consulta («?inv=i=…», que el arranque pasa al fragmento) y
         // también en el fragmento: unos iPhone guardan una y otros el otro, y así la app nace con la conversación dentro
-        const man = { name: 'GUARDIANA', short_name: 'GUARDIANA', id: '/orbita/comunicaciones/', start_url: '/orbita/comunicaciones/?app=1&inv=' + hash.replace(/^#/, '') + '#' + hash.replace(/^#/, ''), scope: '/orbita/comunicaciones/', display: 'fullscreen', display_override: ['fullscreen', 'standalone'], orientation: 'portrait', background_color: '#06080C', theme_color: '#06080C', lang: 'es', dir: 'ltr', icons: [{ src: '/icon-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'any' }, { src: '/icon-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'any' }, { src: '/icon-maskable-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'maskable' }, { src: '/icon-maskable-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] };
-        if (l) l.setAttribute('href', 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(man)));
+        const O = location.origin;
+        const man = window.gcomManifiestoInv || { name: 'GUARDIANA', short_name: 'GUARDIANA', id: '/orbita/comunicaciones/', start_url: O + '/orbita/comunicaciones/?app=1&inv=' + hash.replace(/^#/, '') + '#' + hash.replace(/^#/, ''), scope: '/orbita/comunicaciones/', display: 'fullscreen', display_override: ['fullscreen', 'standalone'], orientation: 'portrait', background_color: '#06080C', theme_color: '#06080C', lang: 'es', dir: 'ltr', icons: [{ src: '/icon-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'any' }, { src: '/icon-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'any' }, { src: '/icon-maskable-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'maskable' }, { src: '/icon-maskable-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] };
+        if (l && !/^blob:/.test(l.getAttribute('href') || '')) { let u = ''; try { u = URL.createObjectURL(new Blob([JSON.stringify(man)], { type: 'application/manifest+json' })); } catch (_) {} l.setAttribute('href', u || 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(man))); }
       } catch (_) {}
       guiaSeguir = () => { guiaSeguir = null; const h = $('#h-completa'); cierraHoja('h-completa'); h.classList.remove('con-invitacion'); $('#completa-ok').hidden = false; seguir(); };
       const b = $('#guia-safari'); if (b) b.onclick = () => { if (guiaSeguir) guiaSeguir(); };
@@ -2679,11 +2680,27 @@
     $('#anadir-app').addEventListener('click', () => { if (avisoInstalar) instala(); else abreGuia(); });
     // ---- iPhone: la invitación, dentro de la app (dueño, 29 Oct 2026, 16:05–16:11) ----
     const trozoInv = (e) => { const m = String(e || '').match(/#[ib]=[A-Za-z0-9_-]{43}/); return m ? m[0] : ''; };
-    // la guía de añadir a la pantalla de inicio, con la invitación dentro (va en la dirección de inicio de la app, y también en la
-    // de esta página, por si el iPhone toma esta en vez de la del manifiesto). Sale sola; este botón la vuelve a abrir si se cerró.
-    const guiaIOS = () => { const h = trozoInv(invitacionIOS); if (!h || !window.gcomGuiaInvitacion) return false; try { history.replaceState(null, '', location.pathname + '?app=1&inv=' + h.slice(1) + h); } catch (_) {} window.gcomGuiaInvitacion(h, () => { muestraIOS(false); aceptaEnlaceYa(invitacionIOS); }); return true; };
-    { const b = $('#ios-anadir'); if (b) b.addEventListener('click', () => { if (!guiaIOS()) { muestraIOS(false); aceptaEnlaceYa(invitacionIOS); } }); }
-    { const b = $('#ios-safari'); if (b) b.addEventListener('click', () => { const u = invitacionIOS; guiaSeguir = null; cierraHoja('h-completa'); $('#h-completa').classList.remove('con-invitacion'); $('#completa-ok').hidden = false; muestraIOS(false); aceptaEnlaceYa(u); }); }
+    // «Instalar y chatear» (dueño, 17:55–18:01: «simplifícalo todo»): el menú de compartir del iPhone, con la dirección que lleva la
+    // invitación; allí, «Agregar a Inicio». Debajo, una sola frase de ayuda.
+    { const b = $('#ios-instalar'); if (b) b.addEventListener('click', async () => {
+      try { if (navigator.share) await navigator.share({ title: 'GUARDIANA', url: location.href }); } catch (_) {}
+    }); }
+    // «Ya tengo GUARDIANA»: la invitación al portapapeles; en la app, «Abrir invitación» la pega y abre el chat allí
+    { const b = $('#ios-tengo'); if (b) b.addEventListener('click', async () => {
+      const u = invitacionIOS || location.href; let ok = false;
+      try { await navigator.clipboard.writeText(u); ok = true; } catch (_) {}
+      if (!ok) { try { const i = document.createElement('input'); i.value = u; i.setAttribute('readonly', ''); i.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(i); i.select(); i.setSelectionRange(0, 99999); ok = document.execCommand('copy'); i.remove(); } catch (_) {} }
+      $('#ios-ayuda').hidden = true; $('#ios-copiada').hidden = false;
+      if (!ok) aviso(T('No se pudo copiar: mantén pulsado el enlace del mensaje y elige «Copiar».'));
+    }); }
+    for (const b of document.querySelectorAll('.pegar-inv')) { b.hidden = !(esIOS && comoApp());
+      b.addEventListener('click', async () => {
+        let t = ''; try { t = await navigator.clipboard.readText(); } catch (_) { t = ''; }
+        if (!/#[ib]=[A-Za-z0-9_-]{43}/.test(t)) { aviso(T('No hay ninguna invitación copiada. En Safari, pulsa «Ya tengo GUARDIANA» y vuelve aquí.')); return; }
+        const ok = await preguntaInvitacion(t);
+        if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.'));
+      });
+    }
     // en el ordenador, el botón del inicio dice lo que hace (29 Oct 2026, 07:44: «la versión de escritorio para el PC también»)
     if (!esIOS && !esAndroid) { const s = $('#anadir-app span'); if (s) s.textContent = T('Instalar en este ordenador'); }
     // Tras aceptar una invitación, una sola pregunta: «¿Añadir GUARDIANA a tu pantalla de inicio?» (29 Oct 2026, 07:44). En Android
@@ -2711,7 +2728,7 @@
     if (new URLSearchParams(location.search).has('instalar') && !comoApp()) setTimeout(abreGuia, 600);
     // el marcador de la app compartido desde el iPhone o Android («Compartir marcador»: llega con ?app=1) abierto en un navegador:
     // lo primero, añadirla a la pantalla de inicio, sin buscar nada (dueño, 29 Oct 2026, 10:00: «automatiza todo»)
-    if (new URLSearchParams(location.search).get('app') === '1' && !comoApp() && (esIOS || esAndroid)) setTimeout(() => { if (esIOS) abreGuia(); else preguntaInstalar(0, true); }, 900);
+    if (new URLSearchParams(location.search).get('app') === '1' && !comoApp() && (esIOS || esAndroid) && !/#[ib]=/.test(location.hash)) setTimeout(() => { if (esIOS) abreGuia(); else preguntaInstalar(0, true); }, 900);
     // en Android, la pantalla completa entra sola con el primer toque importante: crear, aceptar, llamar o contestar
     for (const id of ['#nueva-blindada', '#aceptar-si', '#llamar', '#videollamar', '#ll-contestar']) { const b = $(id); if (b) b.addEventListener('click', () => { if (esMovil() && puedeCompleta()) pantallaCompleta(); }, { capture: true }); }
     // tocar el nombre o el candado abre la seguridad de la conversación, como en las aplicaciones de mensajería
@@ -3235,7 +3252,7 @@
     fijaVertical(); // como app instalada, en vertical desde el arranque
     if (esInvitado()) document.body.classList.add('modo-invitado');
     // la app instalada en el iPhone arranca con la invitación en la dirección de inicio (?inv=…): pasa al fragmento de siempre
-    try { const q0 = new URLSearchParams(location.search), inv = q0.get('inv'); if (inv && /^[ib]=[A-Za-z0-9_-]{20,120}$/.test(inv)) { q0.delete('inv'); const qs = q0.toString(); history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + '#' + inv); } } catch (_) {}
+    try { const q0 = new URLSearchParams(location.search), inv = q0.get('inv'); if (inv && !window.gcomManifiestoInv && /^[ib]=[A-Za-z0-9_-]{20,120}$/.test(inv)) { q0.delete('inv'); const qs = q0.toString(); history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + '#' + inv); } } catch (_) {}
     const iosSafari = /iPhone|iPad|iPod/.test(navigator.userAgent || '') || (/Macintosh/.test(navigator.userAgent || '') && navigator.maxTouchPoints > 1);
     // (dueño, 29 Oct 2026, 14:31: «¿Qué significa [Seguir en Safari]?… hazlo automático, que no pregunte a nadie»): la invitación se
     // abre directamente, sin la guía delante; la guía de la pantalla de inicio sigue en su botón de siempre
@@ -3245,7 +3262,6 @@
     if (/#[ib]=/.test(location.hash) && iosSafari && !comoApp()) {
       revela();
       muestraIOS(true, location.href);
-      setTimeout(() => { try { $('#ios-anadir').click(); } catch (_) {} }, 350); // la guía, sola: dos toques y la app queda añadida
     }
     else if (/#[ib]=/.test(location.hash)) { const ok = await preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     else {
