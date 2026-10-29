@@ -1568,6 +1568,13 @@
     "En línea": ["Online", "Online"],
     "Invitación enviada": ["Invitation sent", "Convite enviado"],
     "Invita a una persona": ["Invite someone", "Convide uma pessoa"],
+    // revisión de diseño e «Invitar a chat» en un toque (dueño, 28 Oct 2026, 19:15–19:30)
+    "Invitar a chat": ["Invite to chat", "Convidar para o chat"],
+    "Mensajes y llamadas encriptados": ["Encrypted messages and calls", "Mensagens e chamadas criptografadas"],
+    "Mensajes y llamadas encriptados de extremo a extremo.": ["Messages and calls are end-to-end encrypted.", "Mensagens e chamadas criptografadas de ponta a ponta."],
+    "La otra persona ha abierto tu invitación.": ["The other person has opened your invitation.", "A outra pessoa abriu o seu convite."],
+    "· por el relé de GUARDIANA": ["· through the GUARDIANA relay", "· pelo relé do GUARDIANA"],
+    "Sin conexión": ["Offline", "Sem conexão"],
     "Envíale el enlace; no lo abras tú. La conversación se abre sola cuando entre.": ["Send them the link; don't open it yourself. The conversation opens by itself when they join.", "Envie o link; não abra você. A conversa abre sozinha quando a pessoa entrar."],
     "Si no lo ves, está en los tres puntos ⋯": ["If you don't see it, it's under the three dots ⋯", "Se não aparecer, está nos três pontos ⋯"],
     "Toca «Agregar a Inicio»": ["Tap «Add to Home Screen»", "Toque em «Adicionar à Tela de Início»"],

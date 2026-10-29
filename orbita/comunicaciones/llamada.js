@@ -53,6 +53,7 @@
     let pc = null, mic = null, envio = null, ctx = null, nodo = null, estado = 'libre', iniciada = 0, reloj = null, pendientes = [], ofertaEntrante = null, idLlamada = null, colgoYo = false, sondeo = null;
     let envioVoz = null; // la voz cambiada (solo si se elige una voz que no es la natural)
     let altavoz = true, salidas = null; // por dónde suena la llamada en el teléfono: altavoz o auricular
+    let muda = null; // la segunda pista de audio, en silencio (ver agregaMuda)
     let inicioYo = false; // quién llamó: el resumen del chat va a mi lado o al suyo (dueño, 28 Oct 2026, 13:29)
     let pantallaEncendida = null; // Wake Lock: la pantalla no se apaga mientras dura la llamada (agencia, ronda 74)
     let cam = null, video = false, suCamara = true, remotoV = null; // videollamada: mi cámara, si la llamada es con imagen, si la otra persona tiene la cámara encendida y su imagen
@@ -391,8 +392,18 @@
       const pista = nueva.getAudioTracks()[0]; if (!pista) return;
       const callado = $('#ll-silenciar').getAttribute('aria-pressed') === 'true';
       pista.enabled = !callado;
-      const s = pc.getSenders().find((x) => x.track && x.track.kind === 'audio');
+      const s = pc.getSenders().find((x) => x.track && x.track.kind === 'audio' && x.track !== muda);
       if (s && s.track !== pista) { try { await s.replaceTrack(pista); } catch (_) {} }
+    }
+    // El botón «Altavoz» no cambiaba nada en el iPhone (dueño, 28 Oct 2026, 19:21: «me salía otra vez en altavoz. Y cuando le doy
+    // altavoz, sigue en altavoz»). Es un fallo de Safari en iOS 26 (WebKit 320087, que Apple arregla en versiones posteriores):
+    // elegir el auricular o el altavoz (setSinkId) dice que sí, pero el sonido sigue por donde iba si la llamada trae una sola pista
+    // de audio; con dos, cambia de verdad. Así que cada lado manda, además de su voz, una segunda pista de audio muda: una copia
+    // del micrófono, apagada (el navegador manda silencio, unos pocos kb/s). En su propio flujo, para no tocar la sincronía de la
+    // voz con la imagen. Si la otra persona tiene una versión anterior, la llamada funciona igual.
+    function agregaMuda() {
+      muda = null;
+      try { const a = mic && mic.getAudioTracks()[0]; if (!a || !pc) return; const m = a.clone(); m.enabled = false; pc.addTrack(m, new MediaStream([m])); muda = m; } catch (_) { muda = null; }
     }
     // Cámara: la de mayor resolución que dé el equipo, hasta 1080p a 30 imágenes por segundo, y el codificador avisado de
     // que importa el detalle de la imagen.
@@ -491,6 +502,7 @@
       const flujo = new MediaStream(envio.getAudioTracks().concat(pi ? [pi] : []));
       flujo.getTracks().forEach((x) => pc.addTrack(x, flujo));
       if (video && !cam) { try { pc.addTransceiver('video', { direction: 'recvonly' }); } catch (_) {} } // sin cámara propia, pero sí la imagen de la otra persona
+      agregaMuda();
     }
     // Códecs de imagen por orden de calidad para el mismo caudal: VP9, H.264, VP8 y AV1 (este, el último: exige mucho al procesador)
     function prefiereCodecs(perfil) {
@@ -659,6 +671,7 @@
       const pi = pistaImagen(); if (pi) { const vl = $('#v-local'); vl.srcObject = new MediaStream([pi]); reproduce(vl); }
       const flujo = new MediaStream(envio.getAudioTracks().concat(pi ? [pi] : []));
       flujo.getTracks().forEach((x) => pc.addTrack(x, flujo));
+      agregaMuda();
       await pc.setRemoteDescription({ type: 'offer', sdp: m.sdp });
       // la respuesta decide el códec de los dos sentidos: si cualquiera de los dos es teléfono o Safari, los compatibles
       if (video) prefiereCodecs(EQUIPO === 'compatible' || m.equipo === 'compatible' ? 'compatible' : 'escritorio');
@@ -676,6 +689,7 @@
       clearInterval(reloj); reloj = null; clearInterval(sondeo); sondeo = null;
       if (pc) { try { pc.close(); } catch (_) {} pc = null; }
       for (const s of [mic, envio, envioVoz, cam]) if (s) s.getTracks().forEach((x) => x.stop());
+      if (muda) { try { muda.stop(); } catch (_) {} muda = null; }
       envioVoz = null; restableceSalida();
       if (proc) { proc.parar(); proc = null; }
       clearInterval(medidor); medidor = null; if (vCam) { vCam.srcObject = null; vCam.remove(); vCam = null; } ganancia = 1; ajustes = false;
